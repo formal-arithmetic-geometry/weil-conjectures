@@ -1,19 +1,3 @@
-# BZ150 complete
-
-- Branch: `u9/BZ150`; starting commit: `80aeb4bf4`.
-- All four assigned modules passed together with `ucheck-bump`: rc=0, failed=0, 3644 jobs.
-- Validated source commit: `fb9bd7b27d169a5e395ed809947ee52e6fd0b46e`.
-- Build tree: `newsrv:/home/ubuntu/u9n/bumpw5`.
-- Full log: `/home/ubuntu/u9/bz/BUILD-BZ150-final-full.log`.
-- The user instructed continuation after the exact one-line statement migration proposal.
-  `rightDerivedPullback_comp` now uses `(mapDerivedCategoryCompIso P P').symm` because
-  Mathlib owns the old name with the opposite orientation; the intended map is preserved.
-- All remaining declaration statements and existing docstrings are unchanged.
-- Completion marker: `/home/ubuntu/u9/state/BZ150.DONE`.
-- This completion update changes only progress documentation after the successful source build.
-- Fix patterns and logs: `/home/ubuntu/u9/bz/FIXES-BZ150.md`.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
-
 # BZ133 complete
 
 - Branch: `u9/BZ133`.
@@ -66,43 +50,56 @@
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 - Completion marker: `/home/ubuntu/u9/state/BZ130.DONE`.
 
-# BZ159 complete
+# BZ154 in progress
 
-- Unit: BZ159; branch: `u9/BZ159`.
-- All four assigned modules passed `ucheck-bump` together: rc=0, failed=0, 4255 jobs.
-- Validated source commit: `f69c33ffa45cfbe76eeabefd69b81cd9b1b10343`.
-  This completion update changes only progress documentation.
-- Build host: `newsrv:/home/ubuntu/u9n/bumpw6`.
-- Full log: `/home/ubuntu/u9/bz/BUILD-BZ159-final-full.log`.
-- Modules: DerivedSingleShiftNormalization, NativeDerivedBaseChange, Inertia,
-  CyclicDerivedActionRealization.
-- The user instructed continuation after the explicit equivalent statement API proposal;
-  the two cyclic-action statement references now use the forward composition isomorphism.
-  All other existing statement text and docstrings remain unchanged.
-- Fix patterns and whole-tree baseline occurrence counts:
-  `/home/ubuntu/u9/bz/FIXES-BZ159.md`.
-- No proof placeholders, trust bypasses, local Lean/Lake execution, or heartbeat increases.
-- Completion marker: `/home/ubuntu/u9/state/BZ159.DONE`.
+- Branch: `u9/BZ154`, starting commit `80aeb4bf4`.
+- Three assigned modules passed the first repair build at `31ce5f122`.
+- The user instructed continuation after the exact one-line statement correction in
+  `BZ154-shift-statement-proposal.patch`; that patch is now applied.
+- The shift comparison's target is quotient followed by `Plus.Qh`, matching its existing
+  construction and homotopy-category unit. All other changes are the mandated composition
+  isomorphism migration and imports for private definitional reductions.
+- Next: validate all four modules together with `ucheck-bump`, then write the DONE marker.
+- Fix patterns: `/home/ubuntu/u9/bz/FIXES-BZ154.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ266 complete
+# BZ190 complete
 
-- Branch: `u9/BZ266`; starting commit: `c781553bf`.
-- Assigned module and two downstream modules passed `ucheck-bump` together:
-  `ExactDegreeZeroSupplement`, `ExactDegreeZeroAdjoint`, `NormalizedTensorAdjunctionInsertion`.
-- Validated source commit: `2403113eebe24e55b6bf2e95ee3b63fadb521a2a`.
-  This completion commit changes only progress documentation.
-- Result: rc=0, failed=0, 3580 jobs; newsrv `/home/ubuntu/u9n/bumpw7`.
-- Toolchain and Mathlib revision verified on the build host:
-  Lean v4.35.0-rc3 / b63f6e8a68d220e3b3bc4f3792bb53650d375f24.
-- Full log: `/home/ubuntu/u9/bz/BZ266-build-6-full.log`.
-- The user instructed continuation after the explicit orientation-only compatibility proposal.
-  Compositor references now preserve their original mathematical maps under Mathlib's
-  reversed isomorphism; all other declaration statements and docstrings are unchanged.
-- Reused Mathlib's identity-on-single-object lemma and selected degreewise complex
-  extensionality explicitly in the downstream tensor proof.
-- Skipped `OrdinarySupportedKummerScalarSupplement` because its outside-unit dependency
-  `SixFunctors.Etale.SmoothBaseChange.Defs` fails with a duplicate `CategoryTheory.Sheaf.H.δ` import.
-- Patterns, whole-tree counts, exact errors, and scope audit:
-  `/home/ubuntu/u9/bz/FIXES-BZ266.md`, `/home/ubuntu/u9/bz/BZ266-source-audit.json`.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or limit raises.
-- Completion marker: `/home/ubuntu/u9/state/BZ266.DONE`.
+- Branch: `u9/BZ190`.
+- Assigned module: `WeilConjectures.CategoryTheory.CanonicalResolutionCompositeUnitComparison`.
+- The module passed `ucheck-bump`: rc=0, failed=0, 2090 jobs.
+- Tested source commit: `a20255451c8530a95240e9634ea6bab8a027d11d`.
+- Final log: `/home/ubuntu/u9/bz/BUILD-BZ190-final-full.log`.
+- Build tree: `newsrv:/home/ubuntu/u9n/bumpw7`; both requested pins verified.
+- The user instructed continuation after the exact canonical unit proposal.
+  Applied `Unith.app (quotient.obj L)` → `Unit.app L` in the public statement.
+  The proof expands the unit and cancels its canonical comparison identities.
+  All other declaration statements and existing docstrings are unchanged.
+- Private helpers use implementation imports and explicit comparison cancellation.
+- Fix patterns and exact errors: `/home/ubuntu/u9/bz/FIXES-BZ190.md`.
+- Completion marker: `/home/ubuntu/u9/state/BZ190.DONE`.
+- No local Lean/Lake, proof placeholders, trust escapes, or heartbeat increases.
+- This final commit changes only progress documentation after the successful build.
+
+# BZ275 complete
+
+- Branch: `u9/BZ275`; starting commit: `18e44f2d5`.
+- Assigned module and both direct importers built successfully with `ucheck-bump`:
+  - `WeilConjectures.CategoryTheory.DerivedSectionScalarTransport`.
+  - `WeilConjectures.CategoryTheory.InternalSectionScalarAdjunction`.
+  - `WeilConjectures.CategoryTheory.SixFunctors.InternalSectionScalarAdjunctionSupplement`.
+- Validated source commit: `205625f5e362df5b09f0ffaa641f9878c3a32da7`; rc=0, failed=0, 3876 jobs.
+- Full green log: `/home/ubuntu/u9/bz/BUILD-BZ275-importers-green-full.log`.
+- The user instructed continuation after the exact compositor-statement proposal.
+  Applied that API orientation change and the identical downstream comparison migration.
+- Localization imports restore private Qh reductions. Local SMul instances expose the
+  existing section-ring action through definitionally equal carriers. All other statement
+  text and existing docstrings are unchanged.
+- Four next-layer importers were attempted and skipped because every one depends on
+  `RingedToposAdaptedFlatResolution` (BZ290) and `RingedToposAcyclicKFlatPullback` (BZ291),
+  both of which failed. Stopped only this optional build after confirming the shared blockers.
+- Skipped-module log: `/home/ubuntu/u9/bz/BUILD-BZ275-next-layer-blocked-full.log`.
+- Fix patterns, exact errors, occurrence counts: `/home/ubuntu/u9/bz/FIXES-BZ275.md`.
+- Completion marker: `/home/ubuntu/u9/state/BZ275.DONE`.
+- No local Lean/Lake, sorries, admissions, added axioms, trust bypasses, heartbeat increases,
+  or profiler probes. Final commit changes progress documentation only.
