@@ -1,23 +1,16 @@
-# BZ151 complete
+# BZ152 complete
 
-- Unit: BZ151, branch `u9/BZ151`.
-- All four assigned modules pass `ucheck-bump` together: rc=0, failed=0, 4013 jobs.
-- Validated source commit: `2c0c45e4a0cac7aea18dc549888feca5e6f8fb1e`. This completion commit changes only documentation.
-- Modules: CompConjugate, AbelianHigherDirectImagePresheaf,
-  RawModuleScalarSourceSquareCore, DerivedSourceComparisonInjective.
-- Final build: `newsrv:/home/ubuntu/u9n/bumpw3`;
-  remote log `/home/ubuntu/u9/logs/BZ151-20261106T004440.log`.
-- Full local log: `/home/ubuntu/u9/bz/BUILD-BZ151-final-full.log`.
-- The user instructed continuation after the exact four declaration-type API substitutions
-  in `/home/ubuntu/u9/bz/BZ151-statement-api.patch`; those substitutions are applied.
-  They use the inverse Mathlib composition comparison and direct Q instead of the obsolete
-  quotient-to-Qh transport. All other declaration-type expressions and docstrings are unchanged.
-- Public Grp.Zero import, redundant-rfl removal, and invalid-omit correction also pass.
-- Existing axiom checks in DerivedSourceComparisonInjective report only propext,
-  Classical.choice, and Quot.sound. No prohibited proof escapes or heartbeat increases.
-- No local Lean/Lake execution. Only the four assigned Lean modules and this file changed.
-- Fix patterns and occurrence counts: `/home/ubuntu/u9/bz/FIXES-BZ151.md`.
-- Completion marker: `/home/ubuntu/u9/state/BZ151.DONE`.
+- Branch: `u9/BZ152`.
+- The user instructed continuation after the exact statement-compatibility proposal;
+  the proposed compositor orientation and explicit homotopy-localization edits are applied.
+- All four assigned modules passed `ucheck-bump` together: rc=0, failed=0, 3357 jobs.
+- Validated source commit: `a0e75fbc428ca3fe9724a0cd92c7a8cc14ea3060`.
+- Each target rebuilt successfully on `newsrv:/home/ubuntu/u9n/bumpw2`.
+- Full log: `/home/ubuntu/u9/bz/BZ152-build-final-full.log`.
+- Completion marker: `/home/ubuntu/u9/state/BZ152.DONE`.
+- This final commit changes progress documentation only.
+- Patterns, proposal, and build logs: `/home/ubuntu/u9/bz/FIXES-BZ152.md`.
+- No local Lean/Lake execution, forbidden proof escapes, or heartbeat increases.
 
 # BZ133 complete
 
