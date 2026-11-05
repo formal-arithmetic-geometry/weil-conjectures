@@ -6,6 +6,7 @@ module
 
 public import WeilConjectures.WeilSheaf.SmoothPurityFieldPastedUnit
 public import WeilConjectures.WeilSheaf.SmoothPurityUnitBaseChangePoint
+public import WeilConjectures.WeilSheaf.SmoothPurityUnitBaseChangeCongr
 
 /-! # Invertibility for the actual compactification exchange -/
 
@@ -57,8 +58,12 @@ lemma purityFieldProperRestrictedExchange_unitBaseChange :
         (purityFieldProperRestrictedExchange l f f' c c' hg).hom e =
       (upperShriekBaseChangeOfMap l (f := c.overG) (f' := c'.overG) hg).app (𝟙_ _) ≫
         (boundedConstructibleUpperShriek l c'.overG).map e := by
-  rw [purityFieldProperRestrictedExchange_hom]
-  rfl
+  have := isIso_boundedConstructibleBaseChangeOfMap l
+    (f := c.overG) (f' := c'.overG) hg
+  exact Adjunction.unitBaseChange_congr
+    (purityCompactificationProperAdjunction l f c)
+    (purityCompactificationProperAdjunction l f' c')
+    (purityFieldProperRestrictedExchange_hom l f f' c c' hg) e
 
 /-- For the actual compactification exchange, invertibility reduces to the proper
 factor at the unit; the open factor is automatic. -/
