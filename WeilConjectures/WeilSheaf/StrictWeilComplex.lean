@@ -178,7 +178,7 @@ lemma mapDerivedCategoryCompIso_inv_app_singleFunctor (U : C ⥤ D) (G : D ⥤ E
     [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     [V.Additive] [PreservesFiniteLimits V] [PreservesFiniteColimits V]
     (α : U ⋙ G ≅ V) (X : C) :
-    (mapDerivedCategoryCompIso U G).inv.app ((DerivedCategory.singleFunctor C 0).obj X) ≫
+    (mapDerivedCategoryCompIso U G).hom.app ((DerivedCategory.singleFunctor C 0).obj X) ≫
         (mapDerivedCategoryNatIso α).hom.app ((DerivedCategory.singleFunctor C 0).obj X) ≫
         (V.mapDerivedCategorySingleFunctor 0).hom.app X =
       G.mapDerivedCategory.map ((U.mapDerivedCategorySingleFunctor 0).hom.app X) ≫
@@ -190,7 +190,7 @@ lemma mapDerivedCategoryCompIso_inv_app_singleFunctor (U : C ⥤ D) (G : D ⥤ E
     Category.assoc]
   erw [mapDerivedCategoryNatIso_fac_assoc α ((CochainComplex.singleFunctor C 0).obj X),
     ← mapDerivedCategoryCompIso_fac_assoc U G ((CochainComplex.singleFunctor C 0).obj X)]
-  erw [Iso.inv_hom_id_app_assoc]
+  erw [Iso.hom_inv_id_app_assoc]
   congr 1
   have hn := G.mapDerivedCategoryFactors.hom.naturality
     ((U.mapCochainComplexSingleFunctor 0).hom.app X)
