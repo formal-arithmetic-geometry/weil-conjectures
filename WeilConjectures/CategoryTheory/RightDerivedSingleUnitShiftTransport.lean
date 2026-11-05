@@ -7,8 +7,10 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.CategoryTheory.RightDerivedSingleUnitHomologyComparison
+public import Mathlib.Algebra.Homology.Localization
 import WeilConjectures.CategoryTheory.SingleQuotientInverseShift
 import WeilConjectures.CategoryTheory.MappedSingleInverseShift
+import all Mathlib.Algebra.Homology.Localization
 
 /-!
 # Canonical single-complex shift comparisons
