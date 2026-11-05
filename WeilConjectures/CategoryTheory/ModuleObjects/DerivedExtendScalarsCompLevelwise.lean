@@ -143,10 +143,10 @@ lemma mapDerivedCategoryComapCompIso_hom_app_Qh_obj_comp_factorsh (h : φ ≫ ψ
             (Iso.refl (comap ψ ⋙ comap φ)) (ComplexShape.up ℤ)).hom.app Y ≫
           (NatTrans.mapHomotopyCategory ((comapComp φ ψ).symm ≪≫ comapCongr h).hom
             (ComplexShape.up ℤ)).app Y) := by
-  rw [mapDerivedCategoryComapCompIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+  rw [mapDerivedCategoryComapCompIso, Iso.trans_hom, NatTrans.comp_app,
     Category.assoc, Functor.mapDerivedCategoryNatIso_fach,
-    ← cancel_epi (((comap ψ).mapDerivedCategoryCompIso (comap φ)).hom.app _),
-    Iso.hom_inv_id_app_assoc,
+    ← cancel_epi (((comap ψ).mapDerivedCategoryCompIso (comap φ)).inv.app _),
+    Iso.inv_hom_id_app_assoc,
     ← Functor.mapDerivedCategoryCompIso_fach_assoc, Functor.map_comp]
 
 /-- The form of `Mod.derivedExtendMapDerivedCategoryAdjunction_unit_app_comp_map_inv_app` on the
