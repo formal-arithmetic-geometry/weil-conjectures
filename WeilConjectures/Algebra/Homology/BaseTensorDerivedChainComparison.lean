@@ -8,7 +8,9 @@ module
 
 public import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModel
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import Mathlib.Algebra.Homology.Localization
 
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.Algebra.Homology.BaseTensorCoefficientNaturalMap
 import WeilConjectures.Algebra.Homology.ScalarExtensionDerivedRestriction
 

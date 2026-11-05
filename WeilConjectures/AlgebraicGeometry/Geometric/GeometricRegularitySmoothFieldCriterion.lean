@@ -64,7 +64,7 @@ private theorem smoothAt_of_regular_tensor
       intro b hb
       exact isUnit_iff_ne_zero.mpr hb)
   have : Algebra.IsSeparable K q.asIdeal.ResidueField :=
-    ⟨fun x => (Algebra.IsSeparable.isSeparable K (τ x)).of_algHom τ⟩
+    ⟨fun x ↦ IsSeparable.of_algHom K τ (Algebra.IsSeparable.isSeparable K (τ x))⟩
   have hsm : Algebra.IsSmoothAtPrime K q :=
     (Algebra.regularLocal_iff_smoothAtPrime K (TensorProduct k K A) q.asIdeal
       (separableExtension_of_separable K q.asIdeal.ResidueField)).mpr (hreg K hfg q)
