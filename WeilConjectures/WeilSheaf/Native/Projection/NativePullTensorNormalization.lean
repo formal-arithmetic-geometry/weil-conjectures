@@ -12,8 +12,6 @@ import WeilConjectures.Tactic.ExactModProofs
 @[expose] public noncomputable section
 
 set_option Elab.async false
-set_option trace.profiler true
-set_option trace.profiler.threshold 20000
 
 -- Match the coefficient-category instance used to construct nativePullTensor.
 attribute [local instance 0] ModuleCat.isGrothendieckAbelian_of_commRing

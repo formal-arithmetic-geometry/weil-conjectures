@@ -90,14 +90,15 @@ def TotalPullTensorSquare
     ((condensedRealization k₀ l Z).mapHomologicalComplex (.up ℤ))
     ((condensedRealization k₀ l Y).mapHomologicalComplex (.up ℤ))
     ((CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
-      (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))).mapHomologicalComplex
-        (.up ℤ))
+      (Scheme.Hom.geometricFiberMap g
+        (comp_over g (Spec (CommRingCat.of k₀))))).mapHomologicalComplex (.up ℤ))
     (Functor.uncurry.obj (nativeTensorTotal k₀ l Y))
     (Functor.uncurry.obj (nativeTensorTotal k₀ l Z))
     (nativePullTotalTensor k₀ l g) (condensedRealizationTotalTensorIso k₀ l Y)
     (condensedRealizationTotalTensorIso k₀ l Z) (condensedRealizationPullComplexIso k₀ l g).symm
     (fun A B ↦ ((CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
-      (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))).mapCochainComplexμIso
+      (Scheme.Hom.geometricFiberMap g
+        (comp_over g (Spec (CommRingCat.of k₀))))).mapCochainComplexμIso
         A B).inv) P T
 
 end AlgebraicGeometry.ProEtaleWeilSheaf

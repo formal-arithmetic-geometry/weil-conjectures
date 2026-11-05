@@ -12,10 +12,6 @@ import WeilConjectures.Tactic.ExactModProofs
 @[expose] public section
 
 set_option Elab.async false
-set_option trace.profiler true
-set_option trace.profiler.threshold 500
-set_option diagnostics true
-set_option diagnostics.threshold 1000
 
 universe u
 

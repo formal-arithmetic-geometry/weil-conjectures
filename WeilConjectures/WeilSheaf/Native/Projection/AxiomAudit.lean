@@ -21,6 +21,7 @@ import all WeilConjectures.WeilSheaf.Native.Projection.DerivedSquareFromModels
 import all WeilConjectures.WeilSheaf.Native.Projection.NativeModelNormalization
 import all WeilConjectures.WeilSheaf.Native.Projection.NativePullTensorNormalization
 import all WeilConjectures.WeilSheaf.Native.Projection.ModelSquareCancellation
+import all WeilConjectures.WeilSheaf.Native.Projection.TotalSquareToModel
 import Lean.Util.CollectAxioms
 
 /-! # Dependency audit for the native proper projection formula
@@ -40,7 +41,8 @@ open Lean in
 run_cmd do
   let env ← getEnv
   let mut seen : NameSet := {}
-  let mut pending := #[`AlgebraicGeometry.WeilComplex.nonempty_rightDerivedLowerStar_nativeDerivedTensor_iso]
+  let target := `AlgebraicGeometry.WeilComplex.nonempty_rightDerivedLowerStar_nativeDerivedTensor_iso
+  let mut pending := #[target]
   let mut leaves : Array Name := #[]
   let mut unavailable : Array Name := #[]
   while !pending.isEmpty do
@@ -65,4 +67,5 @@ run_cmd do
     logInfo m!"K5 existing proof leaf: {name}"
   for name in unavailable.qsort Name.lt do
     logInfo m!"K5 imported dependency with unavailable proof body: {name}"
-  logInfo m!"K5 visible direct sorry dependencies: {leaves.size}; unavailable bodies: {unavailable.size}"
+  logInfo m!"K5 visible direct sorry dependencies: {leaves.size}; " ++
+    m!"unavailable bodies: {unavailable.size}"

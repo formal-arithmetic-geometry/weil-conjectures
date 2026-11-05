@@ -16,8 +16,6 @@ public import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 @[expose] public noncomputable section
 
 set_option Elab.async false
-set_option trace.profiler true
-set_option trace.profiler.threshold 500
 
 -- Use the coefficient-category instance fixed by the native tensor construction.
 attribute [local instance 0] ModuleCat.isGrothendieckAbelian_of_commRing
