@@ -87,7 +87,9 @@ private noncomputable def presheafBasisChart
       apply ModuleCat.hom_ext
       apply LinearMap.ext
       intro r
-      simpa only [hn] using (M.map_smul f (show P.obj W from r) (e W)).symm)
+      change P.obj W at r
+      change (P.map f r) • e V = M.map f (r • e W)
+      rw [M.map_smul, hn])
 
 set_option linter.unusedSectionVars false
 section CoefficientUniverses
@@ -674,16 +676,9 @@ noncomputable def signedLinePower {R : Sheaf J CommRingCat.{max uC vC u}}
   | .negSucc n => homObj (scalarTensorPower R L (n + 1))
       (unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
 
-private local instance
-    {R : Sheaf J CommRingCat.{max uC vC u}}
-    (M : ringedSiteModules.{max uC vC u}
-      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
-    {U V : Cᵒᵖ} (f : U ⟶ V) :
-    Module (R.obj.obj V)
-      ((ModuleCat.restrictScalars
-        (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj.map f).hom).obj
-          (M.val.obj V)) :=
-  inferInstanceAs (Module (R.obj.obj V) (M.val.obj V))
+private noncomputable local instance {A B : Type*} [Ring A] [Ring B] (f : A →+* B)
+    (M : ModuleCat.{max uC vC u} B) : Module B ((ModuleCat.restrictScalars f).obj M) :=
+  inferInstanceAs (Module B M)
 
 /-- Local signed basis normalization: a genuine basis after every restriction, positive
 powers by tensors, and negative powers dual to the positive ones on every slice object.
