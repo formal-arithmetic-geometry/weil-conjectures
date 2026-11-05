@@ -153,7 +153,7 @@
 - Notes and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ557.md`.
 - No local Lean/Lake, statement changes, proof escapes, or heartbeat increases.
 
-# BZ603 in progress
+# BZ603 complete
 
 - Branch: `u9/BZ603`; starting commit: `cfcb63ad7`.
 - Baseline remote build: eight errors caused by hidden `HomologicalComplexUpToQuasiIso.Qh`.
@@ -162,6 +162,18 @@
 - The user instructed continuation after the canonical Q/Qh endpoint-transport proposal.
   Applied the comparison hom/inv maps only to that equality, preserving its mathematical
   maps, binders, assumptions, and other statements. The proof normalizes identity transports.
-- Next: `ucheck-bump` on the assigned module, then `CompletedScalarAssociator` downstream.
+- Assigned module passed `ucheck-bump`: rc=0, failed=0, 2801 jobs.
+- Validated source commit: `974d379baf767ed838321842cac084b329d839b1`.
+- Green log: `/home/ubuntu/u9/bz/BUILD-BZ603-owned-final-full.log`.
+- Direct importer `WeilConjectures.SmoothPurity.CompletedScalarAssociator.CompletedScalarAssociator`
+  was attempted and skipped because unowned dependencies failed:
+  `AlgebraicGeometry.RingedTopoiDerivedPullback:423` and
+  `CategoryTheory.Abelian.Ext.MapExactFunctor:230`. Its remote job was stopped after
+  confirming the blockers, releasing the tree (rc=255, failed=2; not a green result).
+- Downstream log: `/home/ubuntu/u9/bz/BUILD-BZ603-downstream-full.log`.
+- No second layer: the only direct importer is blocked by those dependencies.
 - Fix patterns and exact diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ603.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ603-contract-audit.txt`.
+- Completion marker: `/home/ubuntu/u9/state/BZ603.DONE`.
+- This final update changes only progress documentation; Lean source matches the green build.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
