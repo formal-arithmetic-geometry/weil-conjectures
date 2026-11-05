@@ -171,7 +171,7 @@ private lemma wordFactors_comp {i j k : I} (P : Word C i j) (R : Word C j k)
       R.derived.map ((wordFactors C P).hom.app K) ≫
         (wordFactors C R).hom.app
           ((P.ordinary.obj.mapHomologicalComplex (.up ℤ)).obj K) := by
-  dsimp only [wordFactors, Word.comparison, Word.ordinary, Word.derived,
+  dsimp only [wordFactors, Word.comparison, Word.derived,
     Iso.trans_hom, Iso.symm_hom, Iso.trans_inv, Functor.isoWhiskerLeft_inv,
     Functor.isoWhiskerRight_inv, Functor.isoWhiskerLeft_hom, NatTrans.comp_app,
     Functor.whiskerLeft_app, Functor.whiskerRight_app]
