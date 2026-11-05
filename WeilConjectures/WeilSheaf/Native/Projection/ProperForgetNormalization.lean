@@ -8,6 +8,8 @@ public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationUpperSt
 public import WeilConjectures.WeilSheaf.Native.Projection.DerivedMateComposite
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CommIsoComp
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraDerivedRightAdjointFree
+public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraAdjunctionMate
+public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapMate
 
 /-! # The proper realization square through the adic model -/
 
