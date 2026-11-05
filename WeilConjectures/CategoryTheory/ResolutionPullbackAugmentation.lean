@@ -6,12 +6,9 @@ Authors: Bin Wu
 
 module
 
-public import Mathlib.Algebra.Homology.Localization
 public import Mathlib.CategoryTheory.Abelian.Injective.Extend
 public import Mathlib.CategoryTheory.Abelian.Injective.Resolution
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-
-import all Mathlib.Algebra.Homology.Localization
 
 /-! # Exact pullback and resolution augmentations
 
