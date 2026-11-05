@@ -120,14 +120,17 @@ theorem localizedComparison_isIso_of_torIndependent_kFlat
   have hc : IsIso (M.counit.app ((HomotopyCategory.quotient _ _).obj X)) := by
     have hsource : IsIso ((DerivedCategory.Qh ⋙ M.derived).map
         ((HomotopyCategory.quotient _ _).map s)) := by
-      change IsIso (M.derived.map (DerivedCategory.Q.map s))
+      have : IsIso (DerivedCategory.Qh.map ((HomotopyCategory.quotient _ _).map s)) :=
+        (NatIso.isIso_map_iff (DerivedCategory.quotientCompQhIso _) s).2 inferInstance
+      dsimp only [Functor.comp_map]
       infer_instance
     have htarget : IsIso
         (((extendScalars (algebraMap R B)).mapHomotopyCategory (.up ℤ) ⋙
           DerivedCategory.Qh).map ((HomotopyCategory.quotient _ _).map s)) := by
-      change IsIso (DerivedCategory.Q.map
-        (((extendScalars (algebraMap R B)).mapHomologicalComplex (.up ℤ)).map s))
-      infer_instance
+      dsimp only [Functor.comp_map, Functor.mapHomotopyCategory_map]
+      exact (NatIso.isIso_map_iff (DerivedCategory.quotientCompQhIso _)
+        (((extendScalars (algebraMap R B)).mapHomologicalComplex (.up ℤ)).map s)).2
+        inferInstance
     have hn := M.counit.naturality ((HomotopyCategory.quotient _ _).map s)
     dsimp only [Functor.id_obj] at hn
     have hi : IsIso ((DerivedCategory.Qh ⋙ M.derived).map
