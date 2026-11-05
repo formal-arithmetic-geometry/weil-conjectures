@@ -119,19 +119,25 @@
 # BZ469 in progress
 
 - Branch: `u9/BZ469`; starting commit: `99a06bbbb`.
-- Assigned module passed `ucheck-bump` at `5c3da91d0` (4234 jobs, rc=0).
-- The user instructed continuation after the explicit compositor API proposal.
-  The assigned theorem and its Etale wrapper now use `.symm` at the four affected sites.
-- `StrictLocalInjectiveSourceComparison` passes after giving its proof-local `q'` the
-  explicit quotient-then-Plus.Qh endpoint required by the homotopy-category derived unit.
-  Applied the same local fix to the Strict/Local counterpart for final validation.
-- Direct importers Etale.EtaleInjectiveSectionsComparison and
-  StrictLocalInjectiveSourceComparison/Transition passed at `9eddb01a93`.
-- SourceStageSectionsNaturality, SourceDerivedSectionsNaturalityCore, and
-  SourceDerivedSectionsNaturality passed as second-layer dependencies.
-- StrictLocalInjectiveSourceSections is skipped: its unowned dependencies
-  InjectiveExchangeSourceTransport, InjectiveExchangeTargetTransport, and
-  SourceLocalizedCocycleHomology fail. No edits to these blockers.
-- Next: final green batch including the Strict/Local comparison counterpart, then DONE.
-- Fix patterns, whole-tree counts, and logs: `/home/ubuntu/u9/bz/FIXES-BZ469.md`.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
+- The user instructed continuation after the exact two-site API proposal.
+  Applied `.symm` to both composition comparisons in
+  `injectiveSections_strictLocal_comparison`, preserving the original map directions
+  under Mathlib's reversed compositor.
+- Pinned API inspected at b63f6e8a; known quotient patterns do not match this module.
+- Next: remote validation, then up to four direct importers and a second downstream layer.
+- Fix patterns: `/home/ubuntu/u9/bz/FIXES-BZ469.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
+
+# BZ511 in progress
+
+- Branch: `u9/BZ511`; starting commit: `fa248eeed`.
+- The user instructed continuation after the exact two-private-helper API proposal.
+  The compositor inverse in `derivedCompSingle` and the direct compositor in
+  `derivedTripleNatSingle` are applied. The public theorem statement is unchanged.
+- Proofs now use Mathlib's single-object compositor lemma, hom naturality, and
+  hom/inv cancellation; the redundant `rfl` after `simp only` is removed.
+- Pinned Mathlib source was inspected at b63f6e8a. Patterns, occurrence counts,
+  and integration errors: `/home/ubuntu/u9/bz/FIXES-BZ511.md`.
+- Existing `ucheck-bump` invocation is queued; it reads the pushed branch after
+  acquiring a tree. Next: validate the owned module and continue downstream.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
