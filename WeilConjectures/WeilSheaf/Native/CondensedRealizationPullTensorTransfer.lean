@@ -134,8 +134,31 @@ noncomputable def upperStarComplexIso :
   Functor.mapHomologicalComplexCompIso (Iso.refl _) _ ≪≫
     NatIso.mapHomologicalComplex u _ ≪≫ (Functor.mapHomologicalComplexCompIso (Iso.refl _) _).symm
 
+variable
+    (hC : Functor.whiskerLeft (Functor.uncurry.obj TY) (upperStarComplexIso k₀ l g G N_Y N_Z u).hom ≫
+        (Functor.associator _ _ _).inv ≫
+        Functor.whiskerRight t.hom (N_Z.mapHomologicalComplex (.up ℤ)) ≫
+        (Functor.associator _ _ _).hom ≫
+        Functor.whiskerLeft ((G.mapHomologicalComplex (.up ℤ)).prod
+            (G.mapHomologicalComplex (.up ℤ))) totalZ.hom =
+      (Functor.associator _ _ _).inv ≫
+        Functor.whiskerRight totalY.hom (((CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
+      (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))).mapHomologicalComplex (.up ℤ)) ≫
+        (Functor.associator _ _ _).hom ≫
+        Functor.whiskerLeft ((N_Y.mapHomologicalComplex (.up ℤ)).prod
+            (N_Y.mapHomologicalComplex (.up ℤ)))
+          (HomologicalComplex.mapBifunctorComparisonUncurried
+            (Functor.OplaxMonoidal.δNatTrans ((CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
+      (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))))) (.up ℤ)) ≫
+        (Functor.associator _ _ _).inv ≫
+        Functor.whiskerRight ((Functor.prodCompIso _ _).hom ≫
+            NatTrans.prod (upperStarComplexIso k₀ l g G N_Y N_Z u).hom
+              (upperStarComplexIso k₀ l g G N_Y N_Z u).hom ≫
+            (Functor.prodCompIso _ _).inv)
+          (Functor.uncurry.obj (curriedTensor _).map₂CochainComplex) ≫
+        (Functor.associator _ _ _).hom)
+
 set_option maxHeartbeats 8000000 in
-set_option profiler true in
 -- the derived categories of condensed module objects make the unification slow
 open DerivedCategory Functor.LaxMonoidal in
 include hφ hmZ in
@@ -195,7 +218,58 @@ lemma comparisonCompatible_aux_left (P T : CochainComplex (ProEtaleWeilSheaf k�
   erw [reassoc_of% h₃']
   rw [reassoc_of% h₄', (DerivedCategory.Q).map_comp]
 
-include hφ hNY hNZ hmY hmZ in
+set_option maxHeartbeats 8000000 in
+-- the derived categories of condensed module objects make the unification slow
+open DerivedCategory Functor.LaxMonoidal in
+include hmY hC in
+/-- The right side of the compatibility, after the factorizations through `Q` and the lax monoidal
+structure of `Q`: on the images of native K-flat complexes `P`, `T`, the condensed comparison
+`Lḡ^*(K ⊗ᴸ L) ⟶ Lḡ^* K ⊗ᴸ Lḡ^* L` (`AlgebraicGeometry.ProEtale.CondensedRing.leftDerivedUpperStarTensor`)
+applied to the realizations, followed by the derived square `α` in both variables, is `α` followed
+by the localization of the total comparisons `t` and `totalZ`.
+
+Mathematically: `α` is the counit of `Lḡ^*` followed by `u` on complexes
+(`CategoryTheory.Functor.leftDerivedFunctorSquareIso_hom_app_Q_obj`); the comparison of `Lḡ^*` is
+the counit followed by the comonoidal structure of `ḡ^*` on complexes
+(`AlgebraicGeometry.ProEtale.CondensedRing.leftDerivedUpperStarTensor_app_app_fac`); the realization
+`m_Y` is the localization of `totalY` (`hmY`); and `u` carries `totalY` to `t` and `totalZ`
+(`hC`). This is a computation in the derived category of condensed module objects; it is not yet
+formalized, because the identification of the tensor product of complexes with the tensor product
+in the homotopy category, needed to read
+`AlgebraicGeometry.ProEtale.CondensedRing.leftDerivedUpperStarTensor_app_app_fac` through
+`DerivedCategory.Q`, goes through definitions that are not exposed to this file. -/
+lemma comparisonCompatible_aux_right (P T : CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ)
+    (hP : flatY P) (hT : flatY T) :
+    (CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
+        (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))).leftDerivedFunctor.map
+        (mY.hom.app (Q.obj P, Q.obj T)) ≫
+      ((CondensedRing.leftDerivedUpperStarTensor (Profinite.padicAlgClRingObj l)
+        (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))).app
+          (N_Y.mapDerivedCategory.obj (Q.obj P))).app (N_Y.mapDerivedCategory.obj (Q.obj T)) ≫
+      (Functor.uncurry.obj (curriedTensor _)).map (Prod.mkHom
+        ((Functor.leftDerivedFunctorSquareIso u).hom.app (Q.obj P) ≫
+          N_Z.mapDerivedCategory.map (G.mapDerivedCategoryFactors.hom.app P) ≫
+          N_Z.mapDerivedCategoryFactors.hom.app ((G.mapHomologicalComplex (.up ℤ)).obj P))
+        ((Functor.leftDerivedFunctorSquareIso u).hom.app (Q.obj T) ≫
+          N_Z.mapDerivedCategory.map (G.mapDerivedCategoryFactors.hom.app T) ≫
+          N_Z.mapDerivedCategoryFactors.hom.app ((G.mapHomologicalComplex (.up ℤ)).obj T))) ≫
+      μ Q ((N_Z.mapHomologicalComplex (.up ℤ)).obj ((G.mapHomologicalComplex (.up ℤ)).obj P))
+        ((N_Z.mapHomologicalComplex (.up ℤ)).obj ((G.mapHomologicalComplex (.up ℤ)).obj T)) =
+    (Functor.leftDerivedFunctorSquareIso u).hom.app (DY.obj (Q.obj P, Q.obj T)) ≫
+      N_Z.mapDerivedCategory.map (G.mapDerivedCategory.map (modelY P T hP hT).hom) ≫
+      N_Z.mapDerivedCategory.map (G.mapDerivedCategoryFactors.hom.app ((TY.obj P).obj T)) ≫
+      N_Z.mapDerivedCategoryFactors.hom.app
+        ((G.mapHomologicalComplex (.up ℤ)).obj ((TY.obj P).obj T)) ≫
+      Q.map ((N_Z.mapHomologicalComplex (.up ℤ)).map (t.hom.app (P, T)) ≫
+        (totalZ.app ((G.mapHomologicalComplex (.up ℤ)).obj P,
+          (G.mapHomologicalComplex (.up ℤ)).obj T)).hom) :=
+  sorry
+
+
+set_option maxHeartbeats 8000000 in
+-- the derived categories of condensed module objects make the unification slow
+open DerivedCategory Functor.LaxMonoidal in
+include hφ hNY hNZ hmY hmZ hC in
 /-- **Transfer of the pullback–tensor comparison to condensed modules.** If the isomorphism
 `u : N_Y ⋙ h^* ≅ G ⋙ N_Z` carries the total comparison `t` to the comonoidal structure of `h^*`
 on complexes (`hC`), then the derived square `D(N_Y) ⋙ Lh^* ≅ D(G) ⋙ D(N_Z)` carries the derived
@@ -204,28 +278,7 @@ realizations `m_Y`, `m_Z` of the derived tensor products. -/
 theorem comparisonCompatible_of_normalized
     [((ObjectProperty.ι flatY) ⋙ DerivedCategory.Q).IsLocalization
       ((HomologicalComplex.quasiIso (ProEtaleWeilSheaf k₀ l Y) (.up ℤ)).inverseImage (ObjectProperty.ι flatY))]
-    (hC : Functor.whiskerLeft (Functor.uncurry.obj TY) (upperStarComplexIso k₀ l g G N_Y N_Z u).hom ≫
-        (Functor.associator _ _ _).inv ≫
-        Functor.whiskerRight t.hom (N_Z.mapHomologicalComplex (.up ℤ)) ≫
-        (Functor.associator _ _ _).hom ≫
-        Functor.whiskerLeft ((G.mapHomologicalComplex (.up ℤ)).prod
-            (G.mapHomologicalComplex (.up ℤ))) totalZ.hom =
-      (Functor.associator _ _ _).inv ≫
-        Functor.whiskerRight totalY.hom (((CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
-      (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))).mapHomologicalComplex (.up ℤ)) ≫
-        (Functor.associator _ _ _).hom ≫
-        Functor.whiskerLeft ((N_Y.mapHomologicalComplex (.up ℤ)).prod
-            (N_Y.mapHomologicalComplex (.up ℤ)))
-          (HomologicalComplex.mapBifunctorComparisonUncurried
-            (Functor.OplaxMonoidal.δNatTrans ((CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
-      (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))))) (.up ℤ)) ≫
-        (Functor.associator _ _ _).inv ≫
-        Functor.whiskerRight ((Functor.prodCompIso _ _).hom ≫
-            NatTrans.prod (upperStarComplexIso k₀ l g G N_Y N_Z u).hom
-              (upperStarComplexIso k₀ l g G N_Y N_Z u).hom ≫
-            (Functor.prodCompIso _ _).inv)
-          (Functor.uncurry.obj (curriedTensor _).map₂CochainComplex) ≫
-        (Functor.associator _ _ _).hom) :
+ :
     Adjunction.ComparisonCompatible (Functor.leftDerivedFunctorSquareIso u)
       (Functor.curryCompIsoOfIso φ).hom (CondensedRing.leftDerivedUpperStarTensor (Profinite.padicAlgClRingObj l)
         (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))
@@ -237,6 +290,53 @@ theorem comparisonCompatible_of_normalized
       ((HomologicalComplex.quasiIso (ProEtaleWeilSheaf k₀ l Y) (.up ℤ)).inverseImage (ObjectProperty.ι flatY))
     exact ⟨_, ⟨(L.objPreimage a).1, (L.objPreimage a).2, rfl⟩, ⟨(L.objObjPreimageIso a).symm⟩⟩
   rintro _ _ ⟨P, hP, rfl⟩ ⟨T, hT, rfl⟩
-  sorry
+  have hL := comparisonCompatible_aux_left (hφ := hφ) (hmZ := hmZ) (P := P) (T := T) (hP := hP)
+    (hT := hT)
+  have hR := comparisonCompatible_aux_right (hmY := hmY) (hC := hC) (P := P) (T := T) (hP := hP)
+    (hT := hT)
+  have hμ := DerivedCategory.isIso_μ_Q_of_kFlat
+    ((N_Z.mapHomologicalComplex (.up ℤ)).obj ((G.mapHomologicalComplex (.up ℤ)).obj P))
+    ((N_Z.mapHomologicalComplex (.up ℤ)).obj ((G.mapHomologicalComplex (.up ℤ)).obj T))
+    (hNZ _ (hG P hP))
+  have hU : IsIso ((Functor.uncurry.obj (curriedTensor _)).map (Prod.mkHom
+      (N_Z.mapDerivedCategory.map (G.mapDerivedCategoryFactors.hom.app P) ≫
+        N_Z.mapDerivedCategoryFactors.hom.app ((G.mapHomologicalComplex (.up ℤ)).obj P))
+      (N_Z.mapDerivedCategory.map (G.mapDerivedCategoryFactors.hom.app T) ≫
+        N_Z.mapDerivedCategoryFactors.hom.app ((G.mapHomologicalComplex (.up ℤ)).obj T)))) := by
+    change IsIso (_ ▷ _ ≫ _ ◁ _)
+    infer_instance
+  rw [← cancel_mono ((Functor.uncurry.obj (curriedTensor _)).map (Prod.mkHom
+      (N_Z.mapDerivedCategory.map (G.mapDerivedCategoryFactors.hom.app P) ≫
+        N_Z.mapDerivedCategoryFactors.hom.app ((G.mapHomologicalComplex (.up ℤ)).obj P))
+      (N_Z.mapDerivedCategory.map (G.mapDerivedCategoryFactors.hom.app T) ≫
+        N_Z.mapDerivedCategoryFactors.hom.app ((G.mapHomologicalComplex (.up ℤ)).obj T))) ≫
+    μ Q ((N_Z.mapHomologicalComplex (.up ℤ)).obj ((G.mapHomologicalComplex (.up ℤ)).obj P))
+      ((N_Z.mapHomologicalComplex (.up ℤ)).obj ((G.mapHomologicalComplex (.up ℤ)).obj T)))]
+  refine ((Category.assoc _ _ _).trans hL).trans ?_
+  have hm : ∀ {A B C A' B' C' : DerivedCategory (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology
+      (Scheme.Hom.geometricFiber (Z ↘ Spec (CommRingCat.of k₀)))) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj l)
+        (Scheme.Hom.geometricFiber (Z ↘ Spec (CommRingCat.of k₀)))))}
+      (a : A ⟶ B) (b : B ⟶ C) (c : A' ⟶ B') (d : B' ⟶ C'),
+      (Prod.mkHom (a ≫ b) (c ≫ d) : (A, A') ⟶ (C, C')) = Prod.mkHom a c ≫ Prod.mkHom b d :=
+    fun _ _ _ _ ↦ rfl
+  have hcomb : (Functor.uncurry.obj (curriedTensor _)).map (Prod.mkHom
+      ((Functor.leftDerivedFunctorSquareIso u).hom.app (Q.obj P) ≫
+        N_Z.mapDerivedCategory.map (G.mapDerivedCategoryFactors.hom.app P) ≫
+        N_Z.mapDerivedCategoryFactors.hom.app ((G.mapHomologicalComplex (.up ℤ)).obj P))
+      ((Functor.leftDerivedFunctorSquareIso u).hom.app (Q.obj T) ≫
+        N_Z.mapDerivedCategory.map (G.mapDerivedCategoryFactors.hom.app T) ≫
+        N_Z.mapDerivedCategoryFactors.hom.app ((G.mapHomologicalComplex (.up ℤ)).obj T))) =
+      ((curriedTensor _).map ((Functor.leftDerivedFunctorSquareIso u).hom.app (Q.obj P))).app _ ≫
+      ((curriedTensor _).obj _).map ((Functor.leftDerivedFunctorSquareIso u).hom.app (Q.obj T)) ≫
+      (Functor.uncurry.obj (curriedTensor _)).map (Prod.mkHom
+        (N_Z.mapDerivedCategory.map (G.mapDerivedCategoryFactors.hom.app P) ≫
+          N_Z.mapDerivedCategoryFactors.hom.app ((G.mapHomologicalComplex (.up ℤ)).obj P))
+        (N_Z.mapDerivedCategory.map (G.mapDerivedCategoryFactors.hom.app T) ≫
+          N_Z.mapDerivedCategoryFactors.hom.app ((G.mapHomologicalComplex (.up ℤ)).obj T))) := by
+    rw [hm, Functor.map_comp]
+    exact Category.assoc _ _ _
+  simp only [Functor.curryCompIsoOfIso'_hom_app_app, Category.assoc]
+  erw [← reassoc_of% hcomb, hR, Iso.inv_hom_id_app_assoc]
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
