@@ -69,7 +69,7 @@ private theorem finiteType_of_top (X : Scheme.{u}) (M : X.Modules)
           (by change (⨆ _ : Unit, (⊤ : X.Opens)) = ⊤; exact iSup_const)).over
             (fun _ ↦ D.coversTop)
       generators i := (hgen i.2).choose }
-  exact ⟨q, ⟨fun i ↦ (hgen i.2).choose_spec⟩⟩
+  exact { exists_localGeneratorsData := ⟨q, ⟨fun i ↦ (hgen i.2).choose_spec⟩⟩ }
 
 /-- A global quasi-coherent module which is finite type on a quasi-compact open
 contains a finite-type quasi-coherent submodule equal to it on that open.
