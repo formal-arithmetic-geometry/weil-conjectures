@@ -223,18 +223,23 @@
 - Checking downstream `DerivedPullbackTensorUnitKFlat` and `DerivedPullbackTensorUnit`.
 
 
-# BZ800 in progress
+# BZ800 complete
 
 - Branch: `u9/BZ800`; starting commit: `fcbed6be3`.
-- Reread the brief and progress notes on continuation; no new LEAD lines.
-- Import-only remote build at `47f88332d4` resolved the private helper error,
-  leaving the public hypothesis's Qh/Q mismatch.
-- The user instructed continuation after the exact two-cast proposal and downstream request.
-  Applied `BZ800-statement-cast-proposal.patch` and the same identity casts to
-  direct importer `DerivedPullbackMonoidalDescent`, preserving the existing morphisms.
-- Leaf rebuilt successfully at `46f8f154b4`; the direct importer was blocked by
+- Assigned module `WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorAssociativity`
+  passed final `ucheck-bump`: rc=0, failed=0, on `poolb:43.166.83.208`.
+- Validated source commit: `e43c749e0c30ed6bc759ed611d193410c704fc58`.
+- Added the Localization public/implementation imports and the two reflexive casts
+  authorized by user continuation after `BZ800-statement-cast-proposal.patch`.
+  All original morphisms, binders, assumptions, proof bodies, docstrings, and limits remain unchanged.
+- Direct importer `DerivedPullbackMonoidalDescent` was attempted but blocked by
   unowned `DerivedPullbackTensorUnitKFlat.lean:359:12: Type mismatch`.
-- Following the brief's skip rule, saved the unvalidated importer patch outside the repo
-  and restored its source. Next: leaf-only rc=0 validation, final audit, and DONE.
-- Fix patterns and diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ800.md`.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
+  Per the brief's skip rule, its unvalidated patch was saved outside the repo and its source restored.
+  No further downstream layer is reachable through this sole direct importer.
+- Final full log: `/home/ubuntu/u9/bz/BZ800-final-green-full.log`.
+- Downstream log: `/home/ubuntu/u9/bz/BZ800-leaf-and-downstream-full.log`.
+- Fix records: `/home/ubuntu/u9/bz/FIXES-BZ800.md`; contract audit:
+  `/home/ubuntu/u9/bz/BZ800-contract-audit.txt` (three idempotent rules reproduce the full source diff).
+- No local Lean/Lake, sorries, axioms, proof escapes, profiler probes, or heartbeat changes.
+- Completion marker: `/home/ubuntu/u9/state/BZ800.DONE`.
+- This completion commit changes only progress documentation; Lean source matches the green build.
