@@ -183,16 +183,22 @@
 - Handoff records: `/home/ubuntu/u9/bz/FIXES-BZ646.md` and `/home/ubuntu/u9/state/BZ646.DONE`.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
 
-# BZ697 in progress
+# BZ697 complete
 
 - Branch: `u9/BZ697`; starting source commit: `6a2f94596`.
-- The user instructed continuation after the exact four-direction compositor patch proposal.
-  Applied that patch to `pullEvaluation_model` and `coefficientPullback_transpose`,
-  preserving the intended equations under Mathlib's reversed compositor API.
-- Pinned Mathlib source inspected at `b63f6e8a`; whole-tree inventory has 30 matching
-  anonymous-compositor chains across 24 files.
-- Baseline remote build: `/home/ubuntu/u9/logs/BZ697-20261106T054144.log`.
-- Next: validate the repaired module through `ucheck-bump`, then its direct importers.
-- Fix records and patch: `/home/ubuntu/u9/bz/FIXES-BZ697.md` and
-  `/home/ubuntu/u9/bz/BZ697-compositor-proposal.patch`.
+- User continuation authorized the exact two-field compositor API patch proposed earlier.
+  `pullEvaluation_model` and `coefficientPullback_transpose` now use the pinned Mathlib
+  compositor direction; all other declaration text and existing docstrings are unchanged.
+- Leaf validation: `2250be4ddc3d32a1a720e9a716432dca4cbcd57e`, rc=0, failed=0, 4895 jobs.
+- Final downstream validation: `0c023010b6`, rc=0, failed=0, 5132 jobs.
+- Three modules rebuilt green: `SemilinearGeometryDerived`,
+  `RingedCoefficientProjectionData`, and `RingedCoefficientPullbackComparison`, all under
+  `WeilConjectures.AlgebraicGeometry`.
+- Skipped `Geometry.SemilinearGeometryOps` and `Geometric.GeometricOrdinaryRealization`
+  because their unowned PZ007 dependency `CoefficientRingedSequenceSiteSupplement` has
+  four confirmed errors in identical source. The unvalidated downstream edit was reverted.
+- Full logs, source-hash blocker evidence, contract audit and machine rule are recorded in
+  `/home/ubuntu/u9/bz/FIXES-BZ697.md`. Completion marker: `/home/ubuntu/u9/state/BZ697.DONE`.
+- Actual build pins checked: Lean v4.35.0-rc3, Mathlib b63f6e8a68d220e3b3bc4f3792bb53650d375f24.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
+- This final commit changes only progress documentation; Lean sources match the green build.
