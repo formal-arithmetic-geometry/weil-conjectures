@@ -205,7 +205,7 @@ noncomputable def comparisonVectorPresheaf {l : ℕ} [Fact l.Prime] {X : Scheme.
               (ULift.{u + 1} (PadicAlgCl.locallyFiniteFunctions l V.unop.left)) k • m) =
                 algebraMap _
                   (ULift.{u + 1} (PadicAlgCl.locallyFiniteFunctions l W.unop.left)) k •
-                    P.val.map f m
+                    (P.val.map f m : P.val.obj W)
             rw [P.val.map_smul]
             rfl }
       map_id := fun V ↦ by ext m; simp
@@ -373,6 +373,7 @@ noncomputable def comparisonPresheafFullyFaithful (l : ℕ) [Fact l.Prime] (X : 
   map_preimage f := by apply Mod.hom_ext; rfl
   preimage_map f := by apply Mod.hom_ext; rfl
 
+attribute [local reducible] comparisonRing in
 /-- The action of a constant coefficient on native sections is their original vector-space action.
 Source: Stacks 03CV and 0GMW; the explicit native action and sheafification.
 (blueprint: lem-sf-adic-section-module-equivalence). -/
