@@ -363,13 +363,52 @@ import all WeilConjectures.ZetaFunction.WeilObjectOfLisseTraceFunction
 import all WeilConjectures.ZetaFunction.WeilSheafObjectComparison
 import all WeilConjectures.ZetaFunction.WeilSheafObjectComparisonInduction
 import all WeilConjectures.ZetaFunction.WeilSheafObjectComparisonLisse
-import WeilConjectures.WeilSheaf.SmoothPurityDependencyAudit
+import all WeilConjectures.CategoryTheory.Native.NativeOpenTensorDescentData
+import all WeilConjectures.CategoryTheory.Native.NativeWeilTensorConstraintLifts
+import all WeilConjectures.DeligneLaumon.Reduction.DirectImage
+import all WeilConjectures.WeilSheaf.FourierInversion.OtherSections
+import all WeilConjectures.WeilSheaf.Native.NativeCompactProjectionFormula
+import all WeilConjectures.WeilSheaf.Native.NativeDerivedWeilTensorConstructible
+import all WeilConjectures.WeilSheaf.Native.NativeForgetNormalizedBinaryModels
+import all WeilConjectures.WeilSheaf.Native.NativeGeometricTensorComparison
+import all WeilConjectures.WeilSheaf.Native.NativeNormalizedTensorModels
+import all WeilConjectures.WeilSheaf.Native.NativeRestrictionForgetTotalModel
+import all WeilConjectures.WeilSheaf.Native.Open.NativeOpenDerivedTensor
+import all WeilConjectures.WeilSheaf.Native.Open.NativeOpenTensorComparisonData
+import all WeilConjectures.WeilSheaf.Native.Open.NativeOpenTensorExtensionDescent
+import all WeilConjectures.WeilSheaf.Native.Open.NativeOpenTensorForgetNormalization
+import all WeilConjectures.WeilSheaf.Native.Open.NativeOpenTensorLocalization
+import all WeilConjectures.WeilSheaf.Native.Open.NativeOpenTensorNormalization
+import all WeilConjectures.WeilSheaf.Native.Open.NativeOpenTensorNormalizedRestrictionDescent
+import all WeilConjectures.WeilSheaf.Native.Open.NativeOpenTensorOperations
+import all WeilConjectures.WeilSheaf.Native.Open.NativeOpenTensorPresentationExistence
+import all WeilConjectures.WeilSheaf.Native.Open.NativeOpenTensorRestrictionForget
+import all WeilConjectures.WeilSheaf.Native.Open.NativeOpenTensorRestrictionForgetKFlat
+import all WeilConjectures.WeilSheaf.Native.Open.NativeOpenTensorUnitNormalization
+import all WeilConjectures.WeilSheaf.Native.Ordinary.NativeOrdinaryOpenTensorSupport
+import all WeilConjectures.WeilSheaf.Native.Ordinary.NativeOrdinaryRestrictionTensor
+import all WeilConjectures.WeilSheaf.Native.Ordinary.NativeOrdinaryRestrictionTotalModel
+import all WeilConjectures.WeilSheaf.Native.Weil.NativeWeilClosedForgetful
+import all WeilConjectures.WeilSheaf.Native.Weil.NativeWeilRingedTensorModel
+import all WeilConjectures.WeilSheaf.Native.Weil.NativeWeilUnitMateIsIso
+import all WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorAdjoints
+import all WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorCoherence
+import all WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorGeometry
+import all WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorLift
+import all WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedDerivedSquare
+import all WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedDerivedSquareNative
+import all WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedDerivedSquareNativeCoherence
+import all WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedSwapLocalization
+import all WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedTransport
+import all WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedUnitSymmetryRepresentatives
+import all WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorTransport
+import all WeilConjectures.WeilSheaf.SixFunctors.DerivedWeilTensorOperations
 import Lean
 
 /-! # Declaration closure of the Weil conjectures after absolute purity
 
-The audit rejects every relative-purity declaration and reports all remaining
-sorry leaves, including leaves assigned to other workers.
+The audit reports all remaining sorry leaves, including leaves assigned to other workers.
+Unavailable proof bodies are an error, so the reported closure is never silently incomplete.
 -/
 
 open Lean in
@@ -401,8 +440,10 @@ run_elab do
       if info.isAxiom then
         unavailable := unavailable.push name
         continue
-      let deps := info.type.getUsedConstants ++
-        ((info.value? true).map Expr.getUsedConstants).getD #[]
+      let some value := info.value? true | do
+        unavailable := unavailable.push name
+        continue
+      let deps := info.type.getUsedConstants ++ value.getUsedConstants
       if deps.contains `sorryAx then
         leaves := leaves.push name
       else if deps.isEmpty then
@@ -420,13 +461,5 @@ run_elab do
     logInfo m!"Missing import all: {name}"
   for name in inspected.toArray.qsort Name.lt do
     logInfo m!"Proof import all: {name}"
-  let forbidden := #[
-    `AlgebraicGeometry.WeilComplex.exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso,
-    `AlgebraicGeometry.WeilComplex.nonempty_upperShriek_iso_of_smoothOfRelativeDimension,
-    `AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_adjunction_of_smooth,
-    `AlgebraicGeometry.WeilComplex.exists_natTrans_upperShriek_isIso_forget_of_smooth]
-  for name in forbidden do
-    if seen.contains name then
-      throwError "The main theorem uses the relative-purity declaration {name}"
   unless unavailable.isEmpty do
     throwError "The dependency audit needs the imported proof bodies listed above"

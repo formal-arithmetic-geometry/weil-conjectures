@@ -99,8 +99,10 @@ run_elab do
       if info.isAxiom then
         unavailable := unavailable.push name
         continue
-      let deps := info.type.getUsedConstants ++
-        ((info.value? true).map Expr.getUsedConstants).getD #[]
+      let some value := info.value? true | do
+        unavailable := unavailable.push name
+        continue
+      let deps := info.type.getUsedConstants ++ value.getUsedConstants
       if deps.contains `sorryAx then
         leaves := leaves.push name
       else if deps.isEmpty then
