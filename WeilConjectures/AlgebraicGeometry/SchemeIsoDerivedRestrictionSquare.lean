@@ -89,6 +89,8 @@ theorem exists_scheme_iso_derived_restriction_square {X Y : Scheme.{u}} (s : X â
   let eO := (EV.trans eI).trans EU.symm
   have : eâ‚€.functor.Additive := Functor.additive_of_preserves_binary_products _
   have : eI.functor.Additive := Functor.additive_of_preserves_binary_products _
+  have : eO.functor.PreservesZeroMorphisms :=
+    Functor.preservesZeroMorphisms_of_full eO.functor
   have : eO.functor.Additive := Functor.additive_of_preserves_binary_products _
   have : eO.inverse.Additive := Functor.additive_of_preserves_binary_products _
   let LX := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) V
