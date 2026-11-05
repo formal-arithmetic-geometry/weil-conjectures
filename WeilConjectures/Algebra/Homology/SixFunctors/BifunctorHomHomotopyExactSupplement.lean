@@ -576,9 +576,12 @@ theorem bifunctorHomHomotopyFunctor_leftOp_exact_coordinates
           ((bifunctorHomComplexFunctor H I).commShiftIso (-1 : ℤ)).hom.app K) ≫ _).unop = _
         erw [← CategoryTheory.Functor.map_comp, Iso.hom_inv_id_app,
           CategoryTheory.Functor.map_id, Category.id_comp]
-        change ((((ordinaryFunctor H I ⋙ (HomotopyCategory.quotient C (.up ℤ) ⋙ DerivedCategory.Qh).op).commShiftIso (-1 : ℤ)).hom.app K)
+        change ((((ordinaryFunctor H I ⋙
+          (HomotopyCategory.quotient C (.up ℤ) ⋙ DerivedCategory.Qh).op).commShiftIso
+            (-1 : ℤ)).hom.app K)
           ≫ (shiftFunctorOpIso (DerivedCategory C) (-1) 1 (by omega)).hom.app
-            (op ((HomotopyCategory.quotient C (.up ℤ) ⋙ DerivedCategory.Qh).obj (bifunctorHomObj H K I)))).unop = _
+            (op ((HomotopyCategory.quotient C (.up ℤ) ⋙ DerivedCategory.Qh).obj
+              (bifunctorHomObj H K I)))).unop = _
         rw [Functor.commShiftIso_comp_hom_app,
           Functor.op_commShiftIso_hom_app _ _ (-1) 1 (by omega)]
         simp only [Category.assoc]
@@ -591,10 +594,13 @@ theorem bifunctorHomHomotopyFunctor_leftOp_exact_coordinates
         simp only [shiftFunctorOpIso, eqToIso_refl, Iso.refl_hom, Iso.refl_inv,
           NatTrans.id_app, unop_id, Category.id_comp,
           CategoryTheory.Functor.map_id, Category.comp_id]
-        rfl
+        change ((HomotopyCategory.quotient C (.up ℤ) ⋙ DerivedCategory.Qh).commShiftIso
+          (1 : ℤ)).inv.app (bifunctorHomObj H K I) ≫ _ = _
+        rw [Functor.commShiftIso_comp_inv_app]
+        simp only [unop_id, Category.id_comp]
       · rw [NatTrans.shift_app (DerivedCategory.quotientCompQhIso C).hom]
         simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
-        rw [← (DerivedCategory.quotientCompQhIso C).hom.naturality σ]
+        erw [← (DerivedCategory.quotientCompQhIso C).hom.naturality_assoc σ]
         simp only [Functor.comp_obj, Category.assoc, Iso.hom_inv_id_app,
           Category.comp_id]
 
