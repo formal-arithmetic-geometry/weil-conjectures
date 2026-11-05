@@ -29,6 +29,7 @@ theorem isMateSquare_ofNatIsoRight_of_conjugate
     Iso.trans_hom, Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
     Iso.symm_hom, Category.assoc, ← T.map_comp_assoc, Iso.inv_hom_id_app,
     T.map_id, Category.id_comp, Iso.inv_hom_id_app, Category.comp_id, TwoSquare.natTrans]
+  exact Category.comp_id _
 
 end CategoryTheory.Adjunction
 
@@ -47,5 +48,6 @@ theorem of_inv_app (cF : F ⋙ U ≅ T ⋙ F') (cG : G ⋙ U ≅ T ⋙ G')
   rw [← Category.assoc, h K]
   simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id,
     Iso.inv_hom_id_app_assoc]
+  exact Category.comp_id _
 
 end CategoryTheory.NatTrans.SquareCompatible
