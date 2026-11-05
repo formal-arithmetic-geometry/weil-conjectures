@@ -87,7 +87,7 @@ theorem etale_trait_stalk (R : CommRingCat.{u})
       simpa only [hm, Ideal.span_singleton_eq_bot] using hbot
     exact hπ (hinj (hz.trans (map_zero (u ≫ β).hom).symm))
   have hdvr : IsDiscreteValuationRing A :=
-    ((IsDiscreteValuationRing.TFAE A hnfield).out 0 4).mpr
+    ((IsDiscreteValuationRing.TFAE A hnfield).out 1 5).mpr
       (by rw [hm]; infer_instance)
   exact ⟨inferInstance, hdvr, hinj, hm⟩
 

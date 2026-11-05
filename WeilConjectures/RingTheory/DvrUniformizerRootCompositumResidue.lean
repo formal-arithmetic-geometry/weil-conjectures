@@ -133,7 +133,7 @@ theorem dvr_uniformizer_root_compositum_residue_isSeparable
       rw [hq.maximalIdeal_eq]
       exact Ideal.mem_span_singleton_self q)
   have hrho : IsLocalHom rho := by
-    apply ((IsLocalRing.local_hom_TFAE rho).out 3 0).mp
+    apply ((IsLocalRing.local_hom_TFAE rho).out 4 1).mp
     rw [hmaxR]
     exact Ideal.span_le.mpr (Set.singleton_subset_iff.mpr htmem)
   let := hrho
