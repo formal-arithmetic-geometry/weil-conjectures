@@ -169,14 +169,16 @@
 - Completion marker: `/home/ubuntu/u9/state/BZ585.DONE`.
 - Final documentation commit leaves Lean source identical to the green revision.
 
-# BZ613 in progress
 
-- Branch: `u9/BZ613`; baseline: `b7a97a5ed`.
-- The user instructed continuation after the exact six-private-helper API patch.
-  Applied that patch, preserving comparison directions under Mathlib's reversed compositor.
-- All three public declaration headers are unchanged. Proof-local comparisons and
-  the coefficient comparison construction use the same orientation migration.
-- Next: validate the assigned module with `ucheck-bump`, repair residual proof errors,
-  then validate direct importers and one further layer before writing DONE.
-- Fix patterns and prior diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ613.md`.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
+# BZ616 in progress
+
+- Branch: `u9/BZ616`; starting commit: `b7a97a5ed`.
+- Reread the brief and existing progress notes on user continuation; no new LEAD lines.
+- The user instructed continuation after the exact one-token statement correction proposal.
+  Applied `.hom` -> `.inv` in private `derivedComposition_fac`, preserving its original
+  map under Mathlib's reversed composition comparison. Other statement types and docstrings
+  are unchanged. Comparison construction and cancellation proof use the new orientation.
+- Existing `ucheck-bump` invocation is queued; it reads the pushed branch after acquiring a tree.
+- Next: validate the assigned module, then check up to four direct importers and another layer.
+- Fix patterns, whole-tree counts, and archived diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ616.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
