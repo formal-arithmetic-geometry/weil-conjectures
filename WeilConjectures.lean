@@ -25579,6 +25579,9 @@ public import WeilConjectures.WeilSheaf.SixFunctors.UnderlyingStandardHomReprese
 public import WeilConjectures.WeilSheaf.SixFunctors.WeilGeometricHomConstructibility
 public import WeilConjectures.WeilSheaf.SmoothLisseOpen
 public import WeilConjectures.WeilSheaf.SmoothPurity
+public import WeilConjectures.WeilSheaf.SmoothPurityDescendedVerdierUnit
+public import WeilConjectures.WeilSheaf.SmoothPurityOrientationOfTateEncoding
+public import WeilConjectures.WeilSheaf.SmoothPurityVerdierUnitIso
 public import WeilConjectures.WeilSheaf.SmoothUnitBaseChangeEtale
 public import WeilConjectures.WeilSheaf.SmoothUnitBaseChangeOpenImmersion
 public import WeilConjectures.WeilSheaf.SplitTorsor
