@@ -704,8 +704,8 @@ private theorem finiteEtale_torsor_conditions_reflect
       (by simp [haπ])) (by apply Sigma.hom_ext; intro m; simp [T, D, haπ])
   have hc : IsColimit (Cofan.mk D u) := finiteEtale_cofan_isColimit π M
   have ht : IsLimit (BinaryFan.mk p₁ p₂) := finiteEtale_binaryFan_isLimit π
-  have : PreservesColimitsOfSize.{u + 1, u + 1} F :=
-    Adjunction.isEquivalence_preservesColimits F
+  have : PreservesColimit (Discrete.functor fun _ : M ↦ X) F :=
+    (Adjunction.isEquivalence_preservesColimits F).preservesColimitsOfShape.preservesColimit
   have hcF : IsColimit (Cofan.mk (F.obj D) fun m ↦ F.map (u m)) :=
     isColimitCofanMkObjOfIsColimit F (fun _ : M ↦ X) u hc
   have htF : IsLimit (BinaryFan.mk (F.map p₁) (F.map p₂)) :=
