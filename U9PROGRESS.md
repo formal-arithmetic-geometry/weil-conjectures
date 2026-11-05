@@ -153,14 +153,15 @@
 - Notes and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ557.md`.
 - No local Lean/Lake, statement changes, proof escapes, or heartbeat increases.
 
-# BZ591 in progress
+# BZ603 in progress
 
-- Branch: `u9/BZ591`; starting commit: `cfcb63ad77e4fcb54dba96c8cadcf5a61bf62295`.
-- Assigned module: `WeilConjectures.AlgebraicGeometry.InjectiveExchangeTargetTransport`.
-- The import-only remote build fixed six errors; two public-statement Q/Qh endpoint errors remained.
-- The user instructed continuation after the exact public-statement proposal.
-  Applied `BZ591-public-statement-proposal.patch`: correct the preimageIso target to Plus.Qh,
-  insert the canonical mapped Q-to-Qh comparison, and normalize it in the proof.
-- Next: ucheck-bump, then direct importer InjectiveExchangeRepresentative and one more layer.
-- Fix patterns and build logs: `/home/ubuntu/u9/bz/FIXES-BZ591.md`.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+- Branch: `u9/BZ603`; starting commit: `cfcb63ad7`.
+- Baseline remote build: eight errors caused by hidden `HomologicalComplexUpToQuasiIso.Qh`.
+- Public and implementation Localization imports removed seven diagnostics; the private
+  helper statements and proofs compile. The one public representative statement still failed.
+- The user instructed continuation after the canonical Q/Qh endpoint-transport proposal.
+  Applied the comparison hom/inv maps only to that equality, preserving its mathematical
+  maps, binders, assumptions, and other statements. The proof normalizes identity transports.
+- Next: `ucheck-bump` on the assigned module, then `CompletedScalarAssociator` downstream.
+- Fix patterns and exact diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ603.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.

@@ -351,17 +351,30 @@ theorem presentation_associator_exists
         (sectionTensor (p b) ((p a).ordinary.obj M) U t (sectionTensor (p a) M U s x)) =
         sectionTensor (p c) M U (t * b.hom.app U s) x) ∧
       (∀ P : CochainComplex (Modules R) ℤ,
-        (p b).derived.map ((p a).counit.app ((HomotopyCategory.quotient _ _).obj P)) ≫
+        ((p a).derived ⋙ (p b).derived).map
+            ((DerivedCategory.quotientCompQhIso (Modules R)).inv.app P) ≫
+          (p b).derived.map ((p a).counit.app ((HomotopyCategory.quotient _ _).obj P)) ≫
           (p b).counit.app ((HomotopyCategory.quotient _ _).obj
             (((p a).ordinary.mapHomologicalComplex (.up ℤ)).obj P)) ≫
+          (DerivedCategory.quotientCompQhIso (Modules T)).hom.app
+            (((p b).ordinary.mapHomologicalComplex (.up ℤ)).obj
+              (((p a).ordinary.mapHomologicalComplex (.up ℤ)).obj P)) ≫
           DerivedCategory.Q.map ((Functor.mapHomologicalComplexCompIso o (.up ℤ)).hom.app P) =
         d.hom.app (DerivedCategory.Q.obj P) ≫
-          (p c).counit.app ((HomotopyCategory.quotient _ _).obj P)) ∧
+          (p c).derived.map ((DerivedCategory.quotientCompQhIso (Modules R)).inv.app P) ≫
+          (p c).counit.app ((HomotopyCategory.quotient _ _).obj P) ≫
+          (DerivedCategory.quotientCompQhIso (Modules T)).hom.app
+            (((p c).ordinary.mapHomologicalComplex (.up ℤ)).obj P)) ∧
       (∀ (o' : (p a).ordinary ⋙ (p b).ordinary ≅ (p c).ordinary),
         (∀ M U s t x, (o'.hom.app M).val.app U
           (sectionTensor (p b) ((p a).ordinary.obj M) U t (sectionTensor (p a) M U s x)) =
           sectionTensor (p c) M U (t * b.hom.app U s) x) → o' = o) := by
   obtain ⟨v⟩ := scalarCompositionData p a b c hc
-  exact ⟨v.ordinary, v.derived, v.tensor, v.representative, v.unique⟩
+  refine ⟨v.ordinary, v.derived, v.tensor, ?_, v.unique⟩
+  intro P
+  change ((p a).derived ⋙ (p b).derived).map (𝟙 _) ≫ _ ≫ _ ≫ 𝟙 _ ≫ _ =
+    _ ≫ (p c).derived.map (𝟙 _) ≫ _ ≫ 𝟙 _
+  simpa only [Functor.comp_map, Functor.map_id, Category.id_comp, Category.comp_id] using
+    v.representative P
 
 end WeilConjectures.CompletedScalarAssociator
