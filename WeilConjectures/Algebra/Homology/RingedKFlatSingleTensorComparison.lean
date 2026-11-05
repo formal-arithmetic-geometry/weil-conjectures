@@ -48,6 +48,11 @@ attribute [local instance] hasSheafify_coefficientUniverse
   wEqualsLocallyBijective_coefficientUniverse isMonoidal_W_independentCoefficients
   monoidalCategory symmetricCategory cochainModulesPreadditive
 
+private local instance (I : Type r) : HasColimitsOfShape (Discrete I)
+    (PresheafOfModules.{r}
+      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R).obj) :=
+  PresheafOfModules.hasColimitsOfShape _ _
+
 omit [HasDerivedCategory.{w} (Modules R)] in
 private theorem functorial_resolution :
     ∃ (F : CochainComplex (Modules R) ℤ ⥤ CochainComplex (Modules R) ℤ)
