@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Etale.EtaleExceptionalConstantTe
 import WeilConjectures.AlgebraicGeometry.Etale.EtaleOrdinaryConstantRestriction
 import WeilConjectures.AlgebraicGeometry.Etale.Constant.EtaleConstantPullbackSingle
 import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Unit
+import WeilConjectures.Tactic.TransportExact
 
 /-! # Pullback of the constant scalar coefficient -/
 
@@ -153,17 +154,8 @@ theorem etaleScalarConstantPullback
     (upperStar (ModuleCat.{u + 1} C) f).leftDerivedFunctor.map (b Y).hom ≫
         (exceptionalConstantPullbackIso C f).hom.app V =
       (scalarCoefficientPullbackIso a f).hom ≫ (b X).hom := by
-  let M := (ModuleCat.restrictScalars.{u + 1} a).obj (ModuleCat.of D D)
-  change (upperStar (ModuleCat.{u + 1} C) f).leftDerivedFunctor.map
-      ((DerivedCategory.singleFunctor _ 0).map (coefficientConstantMap a Y) ≫
-        ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} C)
-          ).mapDerivedCategorySingleFunctor 0).inv.app M) ≫
-      (exceptionalConstantPullbackIso C f).hom.app
-        ((DerivedCategory.singleFunctor _ 0).obj M) =
-    (scalarCoefficientPullbackIso a f).hom ≫
-      (DerivedCategory.singleFunctor _ 0).map (coefficientConstantMap a X) ≫
-        ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} C)
-          ).mapDerivedCategorySingleFunctor 0).inv.app M
+  intro V b
+  dsimp only [V, b, Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom, Iso.symm_hom]
   simp only [Functor.map_comp, Category.assoc]
   have hn := (singleFunctorCompLeftDerivedUpperStarIso
     (ModuleCat.{u + 1} C) f).hom.naturality (coefficientConstantMap a Y)
@@ -175,9 +167,14 @@ theorem etaleScalarConstantPullback
   simp only [Functor.map_comp] at hu
   have hd := scalarCoefficientPullback_hom a f
   simp only [Functor.map_comp] at hd
-  exact scalar_single_pasting
-    (((constantSheaf X.smallEtaleTopology
-      (ModuleCat.{u + 1} C)).mapDerivedCategorySingleFunctor 0).inv.app M)
-    (Iso.hom_inv_id_app _ M) (etaleConstantPullback_single C f M) hn hu hd
+  refine scalar_single_pasting
+    (((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} C)
+      ).mapDerivedCategorySingleFunctor 0).inv.app
+        ((ModuleCat.restrictScalars.{u + 1} a).obj (ModuleCat.of D D)))
+    (Iso.hom_inv_id_app _ ((ModuleCat.restrictScalars.{u + 1} a).obj (ModuleCat.of D D)))
+    ?_ hn hu hd
+  -- `exact` here makes the kernel unfold the derived single comparisons (about 4 GB).
+  transport_exact etaleConstantPullback_single C f
+    ((ModuleCat.restrictScalars.{u + 1} a).obj (ModuleCat.of D D))
 
 end AlgebraicGeometry.Etale

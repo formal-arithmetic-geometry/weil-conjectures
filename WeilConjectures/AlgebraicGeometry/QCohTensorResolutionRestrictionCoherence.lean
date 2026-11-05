@@ -30,7 +30,6 @@ local instance TensorResolutionRestrictionCoherence_localInst4 (X : Scheme.{u}) 
     ((curriedTensor X.Modules).obj M).PreservesZeroMorphisms :=
   SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X.sheaf M
 
-set_option maxHeartbeats 800000 in
 -- Tensor-resolution comparisons require substantial definitional reduction.
 /-- Restricting a module morphism uses its section map on the image open. -/
 theorem tensorResolution_restrict_map_apply {X Y : Scheme.{u}}
@@ -38,7 +37,6 @@ theorem tensorResolution_restrict_map_apply {X Y : Scheme.{u}}
     (W : X.Opens) (s : Γ(F.restrict j, W)) :
     ((restrictFunctor j).map f).app W s = f.app (j ''ᵁ W) s := rfl
 
-set_option maxHeartbeats 800000 in
 -- Tensor-resolution comparisons require substantial definitional reduction.
 /-- Pure tensor sections commute with any presheaf restriction map. -/
 theorem tensorResolution_presheaf_map_tmul {X : Scheme.{u}} (F G : X.Modules)
@@ -50,7 +48,7 @@ theorem tensorResolution_presheaf_map_tmul {X : Scheme.{u}} (F G : X.Modules)
     tmulSection (F.presheaf.map i s) (G.presheaf.map i t) at ht
   exact ht
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- Tensor-resolution comparisons require substantial definitional reduction.
 /-- The normalized tensor restriction comparisons respect successive affine restrictions. -/
 theorem tensorResolutionChartRestriction_tensor_inv (Y : Scheme.{u})

@@ -28,7 +28,6 @@ local instance trChartTransportObjZero (X : Scheme.{u}) (L : X.Modules) :
     ((curriedTensor X.Modules).obj L).PreservesZeroMorphisms :=
   SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X.sheaf L
 
-set_option maxHeartbeats 800000 in
 -- Tensor-resolution comparisons require substantial definitional reduction.
 /-- Transport of the two factors of a chart tensor summand. -/
 theorem tensorResolutionChartTensor_transport {Y : Scheme.{u}}

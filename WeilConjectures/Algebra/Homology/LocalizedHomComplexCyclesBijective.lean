@@ -30,7 +30,6 @@ open CategoryTheory Opposite
 namespace CategoryTheory
 
 set_option backward.isDefEq.respectTransparency true in
-set_option maxHeartbeats 800000 in
 -- Evaluated product projections unfold composed functors and restriction wrappers.
 /-- A function with the localized cycle projection formula is bijective.
 Source: Stacks Project, Tag 0A8X, construction preceding Equation 0A8Y.

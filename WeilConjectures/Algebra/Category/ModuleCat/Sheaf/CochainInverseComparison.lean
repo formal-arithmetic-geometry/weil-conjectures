@@ -1181,7 +1181,6 @@ attribute [local irreducible] CochainScalarConstruction.pure
 
 -- The tensor construction is already locally irreducible.
 
-set_option maxHeartbeats 800000 in
 -- The proof checks transported module structures in four bilinear identities and two inverses.
 /-- The map representing the transported pure pairing is invertible.
 Source: Stacks Project, Modules on Sites, Tag 03EL, the third equality of the Hom chain.

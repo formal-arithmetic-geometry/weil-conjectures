@@ -28,7 +28,6 @@ The termwise tensor is the existing tensor functor applied to a cochain complex.
 
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
-set_option maxRecDepth 2048
 set_option backward.isDefEq.respectTransparency false
 
 universe u v r w
@@ -93,7 +92,6 @@ private theorem functorial_resolution :
     exact (exactFunctor _ _).prop_of_iso
       (siteSheafTensorRightIso R _).symm hf.2
 
-set_option maxHeartbeats 800000 in
 -- The fixed-tensor comparisons contain the published site localization data.
 private theorem representative_naturality
     (A A' B B' : CochainComplex (Modules R) ℤ)
@@ -252,7 +250,6 @@ private theorem single_naturality (P Q : CochainComplex (Modules R) ℤ) (f : P 
   rw [HomologicalComplex.ι_mapBifunctorMap_assoc, HomologicalComplex.ι_mapBifunctorMap]
   simp [HomologicalComplex.single_map_f_self, ← tensorHom_id, ← id_tensorHom]
 
-set_option maxHeartbeats 1000000 in
 -- The comparison squares combine totalization and localization functor maps.
 /-- The canonical comparison with termwise tensor, natural in both inputs and uniquely
 normalized by every pair of flat-term K-flat resolutions. In the termwise functor the
