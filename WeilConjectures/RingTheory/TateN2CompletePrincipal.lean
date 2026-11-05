@@ -61,8 +61,7 @@ private theorem closure_hausdorff (R : Type u) (K L : Type v)
   let q := p ^ e
   have hq : 0 < q := pow_pos (Fact.out : p.Prime).pos e
   have hik : IsIntegral R k :=
-    (isIntegral_algebraMap_iff (R := R) (A := K) (B := L)
-      (algebraMap K L).injective).mp (hk ▸ s.property.pow q)
+    (isIntegral_algebraMap_iff (R := R) (A := K) (B := L)).mp (hk ▸ s.property.pow q)
   obtain ⟨r, hr⟩ := IsIntegrallyClosed.algebraMap_eq_of_integral hik
   have hrL : algebraMap R L r = (s : L) ^ q := by
     rw [IsScalarTower.algebraMap_apply R K L, hr, hk]
@@ -79,8 +78,7 @@ private theorem closure_hausdorff (R : Type u) (K L : Type v)
       rw [hk, ← htL, mul_pow, pow_mul]
       exact mul_comm _ _
     have hia : IsIntegral R a :=
-      (isIntegral_algebraMap_iff (R := R) (A := K) (B := L)
-        (algebraMap K L).injective).mp (ha ▸ t.property.pow q)
+      (isIntegral_algebraMap_iff (R := R) (A := K) (B := L)).mp (ha ▸ t.property.pow q)
     obtain ⟨b, hb⟩ := IsIntegrallyClosed.algebraMap_eq_of_integral hia
     have hbeq : x ^ (n * q) * b = r := by
       apply hRL
