@@ -40,7 +40,11 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
 
 variable (g : Z ⟶ Y) [g.IsOver (Spec (CommRingCat.of k₀))]
 
-omit [Fact (ringChar k₀ ≠ l)] in
+omit [Fact (ringChar k₀ ≠ l)]
+  [LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (Z ↘ Spec (CommRingCat.of k₀))]
+  [IsSeparated (Z ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
+  [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))] in
 /-- Compare the whole complex square before taking its components. -/
 lemma projection_model_complex_square_eq_native :
     projection_model_complex_square (upperStar k₀ l g)
