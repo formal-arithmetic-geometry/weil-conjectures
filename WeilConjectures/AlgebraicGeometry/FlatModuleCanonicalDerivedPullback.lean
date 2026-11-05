@@ -8,19 +8,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedModuleBaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
-import WeilConjectures.AlgebraicGeometry.FlatModuleCanonicalDerivedPullbackAux
-import WeilConjectures.AlgebraicGeometry.IntrinsicFlatModuleTensorFlat
 
 /-! # The canonical derived pullback comparison at a flat module
 
 Source: Stacks Project, Tags 06YD and 06YJ.
 -/
-
-@[expose] public section
-
-set_option autoImplicit false
-universe u w
-open CategoryTheory Limits
-namespace AlgebraicGeometry
-
-end AlgebraicGeometry
