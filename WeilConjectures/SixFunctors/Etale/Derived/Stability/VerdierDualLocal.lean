@@ -406,16 +406,75 @@ theorem exists_boundedConstructible_and_torAmplitudeIn_verdierDual {k : Type u} 
       ((RHom(V)[ModuleCat.{u + 1} Λ]).obj (op ((L((p)^*[ModuleCat.{u + 1} Λ])).obj N))).obj
         ((R(p)^![Λ]).obj (dualizingComplex _ (O'.ι ≫ aO))) :=
     ((rightDerivedUpperShriekIsoOfIsFiniteOfEtale _ p).app _).symm ≪≫ eH
+  have hPd : ∀ q, IsDualizable (P'.X q) := by
+    intro q
+    by_cases hqa : a ≤ q
+    · by_cases hqb : q ≤ b
+      · obtain ⟨M, hproj, hfinite, ⟨e⟩⟩ := hconst q hqa hqb
+        exact IsDualizable.of_iso e (isDualizable_constantSheaf Λ M)
+      · exact CategoryTheory.IsZero.isDualizable
+          (((g)^*[ModuleCat.{u + 1} Λ]).map_isZero (hP.1 q (.inr (by omega))))
+    · exact CategoryTheory.IsZero.isDualizable
+        (((g)^*[ModuleCat.{u + 1} Λ]).map_isZero (hP.1 q (.inl (by omega))))
   -- the Tor amplitude
   have hDt : torAmplitudeIn (ModuleCat.{u + 1} Λ) O' (-b - 2 * n) (-a - 2 * n) D := by
-    have hNd : IsDualizable ((L((p)^*[ModuleCat.{u + 1} Λ])).obj N) := by
-      sorry
+    have hNd : IsDualizable ((L((p)^*[ModuleCat.{u + 1} Λ])).obj N) :=
+      IsDualizable.of_iso eN.symm (_root_.DerivedCategory.isDualizable_Q_obj P' a b hPd)
     have h := torAmplitudeIn_derivedHom_of_isDualizable_aux _ hNt hNd hωt
     refine torAmplitudeIn_of_leftDerivedUpperStar_of_surjective Λ p hsurj.surj ?_
     refine (torAmplitudeIn _ V _ _).prop_of_iso
       (eD.symm ≪≫ ((leftDerivedUpperStarIsoMapDerivedCategory _ p).app _).symm) ?_
     exact h.mono (by omega) (by omega)
-  sorry
+  -- On the cover the dualizing line is the unit, so the dual is the shifted termwise dual.
+  let : ∀ q, HasRightDual (P'.X q) := fun q ↦ (hPd q).some
+  obtain ⟨pair⟩ := _root_.DerivedCategory.nonempty_exactPairing_Q_obj P' a b
+  let := pair
+  obtain ⟨_⟩ := nonempty_exactPairing_swap ((_root_.DerivedCategory.Q).obj P')
+    ((_root_.DerivedCategory.Q).obj (CochainComplex.rightDual P'))
+  obtain ⟨v⟩ := ‹Nonempty V›
+  let t := V.algClosurePoint v
+  have hLV' : ((g)^*[ModuleCat.{u + 1} Λ].obj L).IsConstant V.smallEtaleTopology := hLV
+  obtain ⟨eL⟩ := nonempty_iso_unit_of_isConstant ((g)^*[ModuleCat.{u + 1} Λ].obj L) t
+    ((upperStarCompSheafFiberIso (ModuleCat.{u + 1} Λ) g t).app L ≪≫ (hLs _ (t ≫ g)).some)
+  let H := (RHom(V)[ModuleCat.{u + 1} Λ]).obj (op ((_root_.DerivedCategory.Q).obj P'))
+  let eModel : D((p)^*[ModuleCat.{u + 1} Λ]).obj D ≅
+      ((_root_.DerivedCategory.Q).obj (CochainComplex.rightDual P'))⟦(2 * n : ℤ)⟧ :=
+    eD ≪≫ ((RHom(V)[ModuleCat.{u + 1} Λ]).mapIso eN.op.symm).app _ ≪≫
+      H.mapIso (eω' ≪≫ (shiftFunctor _ (2 * n : ℤ)).mapIso
+        ((_root_.DerivedCategory.singleFunctor _ 0).mapIso eL ≪≫
+          singleFunctorObjUnitIso (ModuleCat.{u + 1} Λ) V)) ≪≫
+      (H.commShiftIso (2 * n : ℤ)).app _ ≪≫
+      (shiftFunctor _ (2 * n : ℤ)).mapIso
+        (MonoidalClosed.ihomObjUnitIso
+          ((_root_.DerivedCategory.Q).obj (CochainComplex.rightDual P'))
+          ((_root_.DerivedCategory.Q).obj P'))
+  have hDual : ∀ q, IsFiniteLocallyConstantSheaf ((CochainComplex.rightDual P').X q) := by
+    intro q
+    change IsFiniteLocallyConstantSheaf (P'.X (-q))ᘁ
+    by_cases hqa : a ≤ -q
+    · by_cases hqb : -q ≤ b
+      · obtain ⟨M, hproj, hfinite, ⟨e⟩⟩ := hconst (-q) hqa hqb
+        exact isFiniteLocallyConstantSheaf_rightDual_of_iso_constantSheaf Λ e
+      · exact isFiniteLocallyConstantSheaf_rightDual_of_isZero Λ
+          (((g)^*[ModuleCat.{u + 1} Λ]).map_isZero (hP.1 (-q) (.inr (by omega))))
+    · exact isFiniteLocallyConstantSheaf_rightDual_of_isZero Λ
+        (((g)^*[ModuleCat.{u + 1} Λ]).map_isZero (hP.1 (-q) (.inl (by omega))))
+  have hhom := homologyProperty_Q_obj_of_isFiniteLocallyConstantSheaf Λ
+    (CochainComplex.rightDual P') hDual
+  have hshift := (_root_.DerivedCategory.homologyProperty
+    (finiteLocallyConstantSheaf Λ V)).le_shift (2 * n : ℤ) _ hhom
+  have hcover := (_root_.DerivedCategory.homologyProperty
+    (finiteLocallyConstantSheaf Λ V)).prop_of_iso eModel.symm hshift
+  refine ⟨⟨?_, fun q ↦ ?_⟩, hDt⟩
+  · exact (_root_.DerivedCategory.exists_homologyConcentratedIn_iff_bounded D).1
+      ⟨_, _, _root_.DerivedCategory.homologyConcentratedIn_of_torAmplitudeIn hDt⟩
+  · have : IsFiniteLocallyConstantSheaf
+        ((p)^*[ModuleCat.{u + 1} Λ].obj ((_root_.DerivedCategory.homologyFunctor _ q).obj D)) :=
+      (finiteLocallyConstantSheaf Λ V).prop_of_iso
+        ((((p)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryHomologyFunctorIso q).app D).symm
+        (hcover q)
+    exact IsFiniteLocallyConstantSheaf.isConstructibleSheaf
+      (IsFiniteLocallyConstantSheaf.of_upperStar_of_etale p _)
 
 end Etale
 

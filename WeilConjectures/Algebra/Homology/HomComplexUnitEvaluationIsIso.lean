@@ -30,7 +30,6 @@ private lemma isIso_dependent {D : Type v} [Category.{v'} D] {A : D} {B : â„¤ â†
   exact hi
 
 set_option backward.isDefEq.respectTransparency true in
-set_option maxHeartbeats 800000 in
 -- Dependent projection and sheaf types require extra elaboration steps.
 /-- The degreewise evaluation map is invertible.
 Source: Stacks Project, sites-cohomology.tex, Section 0A8X.

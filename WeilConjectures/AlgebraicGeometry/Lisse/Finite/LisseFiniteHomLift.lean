@@ -211,6 +211,7 @@ import Mathlib.CategoryTheory.Filtered.Final
 import Mathlib.Algebra.Homology.Single
 import Mathlib.Algebra.Homology.HomologicalComplexLimits
 public import WeilConjectures.CategoryTheory.ModuleObjects.ProperBaseChange.GrothendieckAbelian
+public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.LocallyFree
 
 /-! # Finite-stage lifting of lisse coefficient morphisms
 
@@ -229,15 +230,17 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
-private lemma lisse_raw_cover
+/-- A lisse coefficient module is locally free over its coefficient ring: the free
+trivializations of the module pullbacks are transported along the inverse of the invertible
+coefficient comparison `condensedPullbackHom`.
+(auxiliary; not a blueprint node) -/
+lemma IsLisseCoefficientModule.isLocallyFree
     {X : Scheme.{u}}
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [IsCommMonObj Λ]
-    (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
+    {P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)}
     (hP : IsLisseCoefficientModule Λ P) :
-    ∃ U : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ i,
-      Mod.IsFree ((upperStar Ab.{u + 1} (U.f i)).obj (condensedRingObj Λ X))
-        (((upperStar Ab.{u + 1} (U.f i)).mapMod (condensedRingObj Λ X)).obj P) := by
+    IsLocallyFree (condensedRingObj Λ X) P := by
   obtain ⟨U, hU⟩ := hP
   refine ⟨U, fun i ↦ ?_⟩
   let φ := condensedPullbackHom Λ (U.f i)
@@ -246,13 +249,15 @@ private lemma lisse_raw_cover
     exact free_of_iso (hU i) ((Mod.extendScalarsIsoComapInv φ).app _)
   exact free_of_comap (inv φ) h
 
-private lemma lisse_hom_stage
+/-- On a quasi-compact quasi-separated scheme, a morphism from a locally free module object
+to the colimit of a filtered diagram factors through some stage of the diagram: internal Hom
+out of a locally free module object preserves colimits, and the unit object is compact.
+(auxiliary; not a blueprint node) -/
+lemma IsLocallyFree.exists_comp_eq_of_isColimit
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
-    (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R)
-    (hP : ∃ U : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ i,
-      Mod.IsFree ((upperStar Ab.{u + 1} (U.f i)).obj R)
-        (((upperStar Ab.{u + 1} (U.f i)).mapMod R).obj P))
+    {R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}} [MonObj R] [IsCommMonObj R]
+    {P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R}
+    (hP : IsLocallyFree R P)
     {I : Type (u + 1)} [SmallCategory I] [IsFiltered I]
     {D : I ⥤ Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R}
     (c : Cocone D) (hc : IsColimit c) (a : P ⟶ c.pt) :
@@ -438,8 +443,7 @@ theorem exists_lisse_finite_hom_lift [CompactSpace X] [QuasiSeparatedSpace X]
       (E := E) (F := E) C H he he))
   let a := (Mod.extendRestrictAdjunction
     (padicSubfieldRingObjToPadicAlgCl X ℓ E)).homEquiv _ _ ψ
-  obtain ⟨i, b, hb⟩ := lisse_hom_stage (padicSubfieldRingObj X ℓ E) M
-    (lisse_raw_cover (Profinite.continuousMapRingObj E) M hM) c hc a
+  obtain ⟨i, b, hb⟩ := hM.isLocallyFree.exists_comp_eq_of_isColimit c hc a
   refine ⟨H.obj i, he i,
     ((Mod.extendRestrictAdjunction (padicSubfieldRingObjMap X ℓ (he i))).homEquiv _ _).symm b,
     ?_⟩

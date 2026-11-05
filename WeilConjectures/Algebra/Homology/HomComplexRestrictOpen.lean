@@ -66,7 +66,6 @@ private theorem fan_iso {C : Type*} [Category C] {ι : Type*}
     rw [Category.assoc, ha, ← Category.assoc, hb, Category.assoc,
       Iso.inv_hom_id, Category.comp_id, Category.id_comp]
 
-set_option maxHeartbeats 800000 in
 -- Applying the differential comparison unfolds the chosen product projection types.
 set_option backward.isDefEq.respectTransparency false in
 /-- The ordinary sheaf Hom complex commutes with restriction to an open.

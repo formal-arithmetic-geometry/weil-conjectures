@@ -17,7 +17,7 @@ universe u
 noncomputable section
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- Comparing stalk module structures through restriction unfolds nested colimit instances.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

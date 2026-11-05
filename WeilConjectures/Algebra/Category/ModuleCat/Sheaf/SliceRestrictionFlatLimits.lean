@@ -31,7 +31,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 
 namespace SheafOfModules
 
-set_option maxHeartbeats 600000 in
+set_option maxHeartbeats 400000 in
 -- Comparing the two restriction presentations in the naturality square needs extra reduction.
 set_option backward.isDefEq.respectTransparency false in
 /-- If `F` is flat on a ringed site, tensoring by its restriction to a slice preserves
