@@ -9,7 +9,6 @@ public import WeilConjectures.WeilSheaf.Native.Projection.BoundedProjectionIso
 public import WeilConjectures.WeilSheaf.Native.Projection.BoundedForgetNormalization
 public import WeilConjectures.WeilSheaf.Native.Projection.ProperProjectionForgetSquare
 public import WeilConjectures.WeilSheaf.Native.Projection.ProjectionPushNormalization
-public import WeilConjectures.WeilSheaf.Native.Projection.ProjectionPushMateNormalization
 public import WeilConjectures.WeilSheaf.Native.Projection.MonoidalProjectionForgetSquare
 public import WeilConjectures.PoincareDuality.ProjectionFormulaOpenImmersion
 
@@ -45,28 +44,50 @@ local instance : IsProper (gb).left :=
   Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange (P := @IsProper) g
     (comp_over g (Spec (CommRingCat.of k₀))) ‹_›
 
+/-- The ambient proper comparison factors through the adic realization. -/
+lemma projectionProperForgetIso_factorization
+    (M : DerivedCategory (ProEtaleWeilSheaf k₀ l X)) :
+    (ProEtaleWeilSheaf.nativeProperForgetIso k₀ l g).hom.app M =
+      (projectionRealizationCompIso k₀ l Y).hom.app
+        ((ProEtaleWeilSheaf.lowerStar k₀ l g).rightDerivedFunctor.obj M) ≫
+      (adicSheafDerivedEquivCondensedMod l _).functor.map
+        ((IsoAlgebra.derivedForgetCommIso (adicLowerStarGeometricFiberMapCompFrobeniusIso l g
+          (comp_over g (Spec (CommRingCat.of k₀))))).hom.app M) ≫
+      (projectionAdicCondensedDerivedPushIso l
+        (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))).hom.app
+          ((IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).mapDerivedCategory.obj M) ≫
+      (CondensedRing.lowerStar Λ
+        (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))).rightDerivedFunctor.map
+          ((projectionRealizationCompIso k₀ l X).inv.app M) := by
+  exact ProEtaleWeilSheaf.nativeProjectionPushMate_normalization k₀ l g M
+
 set_option backward.isDefEq.respectTransparency false in
 /-- The bounded proper forget square has the same components as the canonical realization
-mate transported along the exact-functor compositor: the generic normalization
-`projectionPushForgetIso_mateEquiv_hom_app` reads the middle factors off
-`nativeProjectionPushMate_normalization`, and the bounded components are definitionally
-those factors. -/
+mate transported along the exact-functor compositor. -/
 lemma projectionProperForgetIso_hom_app (M : WeilComplex k₀ l X) :
     ((projectionProperForgetIso k₀ l g).hom.app M).hom =
       (projectionPushForgetIso (ProEtaleWeilSheaf.nativeProperForgetIso k₀ l g)
         (projectionRealizationCompIso k₀ l X)
         (projectionRealizationCompIso k₀ l Y)).hom.app M.obj := by
-  have h := projectionPushForgetIso_mateEquiv_hom_app _ _ _ _ _ _ _ _
-    (ProEtaleWeilSheaf.nativeProjectionPushMate_normalization k₀ l g M.obj)
-  refine Eq.trans ?_ h.symm
+  have h := projectionPushForgetIso_hom_app_of_factorization
+    (ProEtaleWeilSheaf.nativeProperForgetIso k₀ l g)
+    (projectionRealizationCompIso k₀ l X) (projectionRealizationCompIso k₀ l Y) M.obj
+    ((adicSheafDerivedEquivCondensedMod l _).functor.map
+      ((IsoAlgebra.derivedForgetCommIso (adicLowerStarGeometricFiberMapCompFrobeniusIso l g
+        (comp_over g (Spec (CommRingCat.of k₀))))).hom.app M.obj) ≫
+      (projectionAdicCondensedDerivedPushIso l
+        (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))).hom.app
+        ((IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).mapDerivedCategory.obj M.obj))
+    (by
+      simpa only [Category.assoc] using projectionProperForgetIso_factorization k₀ l g M.obj)
+  rw [h]
   simp only [projectionProperForgetIso, Functor.isoHComp, Iso.symm_hom, Iso.trans_inv,
     Iso.symm_inv, Functor.isoWhiskerRight_inv, Functor.isoWhiskerLeft_inv,
     Functor.whiskerRight_app, Functor.whiskerLeft_app, NatTrans.comp_app,
     Functor.associator_inv_app, Functor.associator_hom_app,
     ObjectProperty.FullSubcategory.comp_hom]
-  try dsimp only [Functor.comp_obj]
   simp only [ObjectProperty.FullSubcategory.id_hom, Category.id_comp, Category.comp_id]
-  try erw [Category.id_comp]
+  erw [Category.id_comp]
   rfl
 
 set_option backward.defeqAttrib.useBackward true in

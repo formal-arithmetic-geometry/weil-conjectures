@@ -45,6 +45,23 @@ lemma projectionOpenForgetIso_hom_app (M : WeilComplex k₀ l U) :
     ((projectionOpenForgetIso k₀ l j).hom.app M).hom =
       (projectionOpenCompositeForgetIso k₀ l j).hom.app M.obj := rfl
 
+/-- The inverse bounded open projection comparison has the ambient inverse as its component. -/
+lemma projectionOpenProjectionComparison_inv_hom (M : WeilComplex k₀ l U)
+    (N : WeilComplex k₀ l Z) :
+    (inv ((CondensedRing.boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ l jb).projectionComparison
+      ((compactProjectionForget k₀ l U).obj M)
+        ((compactProjectionForget k₀ l Z).obj N))).hom =
+      inv ((CondensedRing.derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ
+        (jb).left).projectionComparison ((compactProjectionForget k₀ l U).obj M).obj
+          ((compactProjectionForget k₀ l Z).obj N).obj) := by
+  have h := CondensedRing.boundedConstructibleOpenImmersionProjectionComparison_hom l jb
+    ((compactProjectionForget k₀ l U).obj M) ((compactProjectionForget k₀ l Z).obj N)
+  change ((CondensedRing.boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ l jb).projectionComparison
+    ((compactProjectionForget k₀ l U).obj M)
+      ((compactProjectionForget k₀ l Z).obj N)).hom = _ at h
+  rw [ObjectProperty.hom_inv]
+  exact IsIso.inv_eq_inv.mpr h
+
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Forgetting the open projection isomorphism gives the geometric open projection map. -/
@@ -53,8 +70,8 @@ theorem projectionForgetSquare_open :
       (compactProjectionForgetUpperStarIso k₀ l j)
       (compactProjectionForgetTensorIso k₀ l U) (compactProjectionForgetTensorIso k₀ l Z)
       (nativeBoundedOpenProjectionIso (k₀ := k₀) (l := l) j).hom
-      ((CondensedRing.boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ l jb).
-        invProjectionComparisonNatTrans (fun _ _ ↦ inferInstance)) := by
+      ((CondensedRing.boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ l jb).invProjectionComparisonNatTrans
+        (fun _ _ ↦ inferInstance)) := by
   let B := CondensedRing.derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ (jb).left
   have h₀ : ProjectionForgetSquare (ProEtaleWeilSheaf.nativeOpenForgetIso k₀ l j)
       (ProEtaleWeilSheaf.derivedCondensedRealizationUpperStarIso k₀ l j).symm
@@ -72,12 +89,7 @@ theorem projectionForgetSquare_open :
   apply ObjectProperty.hom_ext
   have hm := (projectionForgetSquare_uncurried_iff _ _ _ _ _ _).1 h M.obj N.obj
   let b := CondensedRing.boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ l jb
-  have hg : (inv (b.projectionComparison ((compactProjectionForget k₀ l U).obj M)
-      ((compactProjectionForget k₀ l Z).obj N))).hom =
-    inv (B.projectionComparison ((compactProjectionForget k₀ l U).obj M).obj
-      ((compactProjectionForget k₀ l Z).obj N).obj) := by
-    change (boundedConstructible _).ι.map (inv (b.projectionComparison _ _)) = _
-    rw [Functor.map_inv, CondensedRing.boundedConstructibleOpenImmersionProjectionComparison_hom]
+  have hg := projectionOpenProjectionComparison_inv_hom k₀ l j M N
   change _ ≫ _ ≫ _ = _ ≫ _ ≫
     (inv (b.projectionComparison ((compactProjectionForget k₀ l U).obj M)
       ((compactProjectionForget k₀ l Z).obj N))).hom
