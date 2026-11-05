@@ -25,6 +25,7 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 import Mathlib.CategoryTheory.Generator.Basic
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
+import WeilConjectures.Tactic.TransportExact
 
 /-! # Signed Roos triangles for the canonical coefficient limit
 
@@ -187,10 +188,11 @@ private lemma coefficientLimitModel_shift
       (purCoefficientLimitModel l E W N I j).hom⟦r⟧' =
     (purCoefficientLimitModel l E W (N⟦r⟧) (I⟦r⟧)
       (purCoefficientShiftedResolution l E W N I j r)).hom ≫ limitModelShift I r := by
-  exact (SequenceKInjectiveComparison.comparisonIso_shifts
+  have h := (SequenceKInjectiveComparison.comparisonIso_shifts
     (coefficientSequenceRestriction l E W)
     (lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤ scalarReductionSource l E W)
     N I j r).symm
+  transport_exact h
 
 private def coefficientModelIso
     (N : CochainComplex (coefficientSequenceModules l E W) ℤ)

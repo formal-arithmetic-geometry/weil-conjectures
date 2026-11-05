@@ -220,6 +220,10 @@ def diagonalRlimVaryingSquare (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
   letI := rX.colimits
   exact diagonalRlimExactSquare rS.F (diagonalRlimTowerPull l f) g.pull rX.F v
 
+-- The statement writes `ℕᵒᵖ ⥤ DiagonalMod l _` rather than the abbreviation `DiagonalSystems l _`,
+-- matching the types of the `DiagonalRlim` fields, and writes the cone conjunct with the
+-- `whiskeringRight` functor of `LocalChernConeMate`. Mixed spellings under projections such as
+-- `Functor.obj` make the kernel unfold derived-category functors on every comparison.
 /-- The normalized mate on the actual quotient and root towers, its full ordinary cones,
 shifted coefficient and root-line arrows, scalar restrictions, and derived morphisms.
 Source: blueprint coefficient proof (3).
@@ -255,57 +259,64 @@ theorem diagonalRlim_pullback_endpoints (l : ℕ) [Fact l.Prime] {X S : Scheme.{
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : S, Invertible (l : S.residueField y)]
     (LX : DiagonalRlim (DiagonalMod l X)) (LS : DiagonalRlim (DiagonalMod l S))
-    (adjX : (Functor.const ℕᵒᵖ : DiagonalMod l X ⥤ DiagonalSystems l X).mapDerivedCategory ⊣ LX.R)
-    (adjS : (Functor.const ℕᵒᵖ : DiagonalMod l S ⥤ DiagonalSystems l S).mapDerivedCategory ⊣ LS.R)
-    (hCounitX : ∀ (I : CochainComplex (DiagonalSystems l X) ℤ), I.IsKInjective →
-      (Functor.const ℕᵒᵖ : DiagonalMod l X ⥤ DiagonalSystems l X).mapDerivedCategory.map
+    (adjX : (Functor.const ℕᵒᵖ : DiagonalMod l X ⥤ ℕᵒᵖ ⥤ DiagonalMod l X).mapDerivedCategory ⊣
+      LX.R)
+    (adjS : (Functor.const ℕᵒᵖ : DiagonalMod l S ⥤ ℕᵒᵖ ⥤ DiagonalMod l S).mapDerivedCategory ⊣
+      LS.R)
+    (hCounitX : ∀ (I : CochainComplex (ℕᵒᵖ ⥤ DiagonalMod l X) ℤ), I.IsKInjective →
+      (Functor.const ℕᵒᵖ : DiagonalMod l X ⥤ ℕᵒᵖ ⥤ DiagonalMod l X).mapDerivedCategory.map
           (LX.η.app I) ≫ adjX.counit.app (DerivedCategory.Q.obj I) =
         (Functor.const ℕᵒᵖ : DiagonalMod l X ⥤
-          DiagonalSystems l X).mapDerivedCategoryFactors.hom.app
-          (((lim : DiagonalSystems l X ⥤ DiagonalMod l X).mapHomologicalComplex (.up ℤ)).obj I) ≫
+          ℕᵒᵖ ⥤ DiagonalMod l X).mapDerivedCategoryFactors.hom.app
+          (((lim : (ℕᵒᵖ ⥤ DiagonalMod l X) ⥤ DiagonalMod l X).mapHomologicalComplex (.up ℤ)).obj
+            I) ≫
         DerivedCategory.Q.map
           ((Adjunction.mapHomologicalComplex (.up ℤ)
-            (constLimAdj : (Functor.const ℕᵒᵖ : DiagonalMod l X ⥤ DiagonalSystems l X) ⊣
+            (constLimAdj : (Functor.const ℕᵒᵖ : DiagonalMod l X ⥤ ℕᵒᵖ ⥤ DiagonalMod l X) ⊣
               lim)).counit.app I))
-    (hProjectionX : ∀ (n : ℕ) (K : DerivedCategory (DiagonalSystems l X)),
+    (hProjectionX : ∀ (n : ℕ) (K : DerivedCategory (ℕᵒᵖ ⥤ DiagonalMod l X)),
       ((evaluation ℕᵒᵖ (DiagonalMod l X)).obj (op n)).mapDerivedCategory.map (adjX.counit.app K) =
         (ringedConstantTowerEvaluation (DiagonalMod l X) (op n)).hom.app (LX.R.obj K) ≫
           (LX.projection n).app K)
-    (hCounitS : ∀ (I : CochainComplex (DiagonalSystems l S) ℤ), I.IsKInjective →
-      (Functor.const ℕᵒᵖ : DiagonalMod l S ⥤ DiagonalSystems l S).mapDerivedCategory.map
+    (hCounitS : ∀ (I : CochainComplex (ℕᵒᵖ ⥤ DiagonalMod l S) ℤ), I.IsKInjective →
+      (Functor.const ℕᵒᵖ : DiagonalMod l S ⥤ ℕᵒᵖ ⥤ DiagonalMod l S).mapDerivedCategory.map
           (LS.η.app I) ≫ adjS.counit.app (DerivedCategory.Q.obj I) =
         (Functor.const ℕᵒᵖ : DiagonalMod l S ⥤
-          DiagonalSystems l S).mapDerivedCategoryFactors.hom.app
-          (((lim : DiagonalSystems l S ⥤ DiagonalMod l S).mapHomologicalComplex (.up ℤ)).obj I) ≫
+          ℕᵒᵖ ⥤ DiagonalMod l S).mapDerivedCategoryFactors.hom.app
+          (((lim : (ℕᵒᵖ ⥤ DiagonalMod l S) ⥤ DiagonalMod l S).mapHomologicalComplex (.up ℤ)).obj
+            I) ≫
         DerivedCategory.Q.map
           ((Adjunction.mapHomologicalComplex (.up ℤ)
-            (constLimAdj : (Functor.const ℕᵒᵖ : DiagonalMod l S ⥤ DiagonalSystems l S) ⊣
+            (constLimAdj : (Functor.const ℕᵒᵖ : DiagonalMod l S ⥤ ℕᵒᵖ ⥤ DiagonalMod l S) ⊣
               lim)).counit.app I))
-    (hProjectionS : ∀ (n : ℕ) (K : DerivedCategory (DiagonalSystems l S)),
+    (hProjectionS : ∀ (n : ℕ) (K : DerivedCategory (ℕᵒᵖ ⥤ DiagonalMod l S)),
       ((evaluation ℕᵒᵖ (DiagonalMod l S)).obj (op n)).mapDerivedCategory.map (adjS.counit.app K) =
         (ringedConstantTowerEvaluation (DiagonalMod l S) (op n)).hom.app (LS.R.obj K) ≫
           (LS.projection n).app K)
     (cS : Chern l (ULift.{u} (Padic l)) S)
     (rS : Restriction l (ULift.{u} (Padic l)) S)
     (aS : Coefficients l (ULift.{u} (Padic l)) S cS rS) :
-    (∀ (K : DerivedCategory (DiagonalSystems l S)) (n : ℕ),
+    (∀ (K : DerivedCategory (ℕᵒᵖ ⥤ DiagonalMod l S)) (n : ℕ),
       (diagonalRlimPullbackMate l f LX LS adjX adjS).app K ≫
           (LX.projection n).app ((diagonalRlimTowerPull l f).mapDerivedCategory.obj K) ≫
           (diagonalRlimPullbackEvaluation l f n).hom.app K =
         (diagonalRlimPull l f).mapDerivedCategory.map ((LS.projection n).app K)) ∧
     IsIso ((diagonalRlimPullbackMate l f LX LS adjX adjS).app
-      ((DerivedCategory.singleFunctor (DiagonalSystems l S) 0).obj
+      ((DerivedCategory.singleFunctor (ℕᵒᵖ ⥤ DiagonalMod l S) 0).obj
         (rS.F.obj (coefficient S (Arings l (ULift.{u} (Padic l)) S))))) ∧
     IsIso ((diagonalRlimPullbackMate l f LX LS adjX adjS).app
-      ((DerivedCategory.singleFunctor (DiagonalSystems l S) 0).obj
+      ((DerivedCategory.singleFunctor (ℕᵒᵖ ⥤ DiagonalMod l S) 0).obj
         (rS.F.obj (lineModule l (ULift.{u} (Padic l)) cS)))) ∧
-    (∀ (H : DiagonalSystems l S) (c : Cone H),
+    (∀ (H : ℕᵒᵖ ⥤ DiagonalMod l S) (c : Cone H),
       (diagonalRlimPull l f).mapDerivedCategory.map (diagonalTraceConeMap LS H c) ≫
           (diagonalRlimPullbackMate l f LX LS adjX adjS).app
-            ((DerivedCategory.singleFunctor (DiagonalSystems l S) 0).obj H) ≫
-          LX.R.map (((diagonalRlimTowerPull l f).mapDerivedCategorySingleFunctor 0).hom.app H) =
+            ((DerivedCategory.singleFunctor (ℕᵒᵖ ⥤ DiagonalMod l S) 0).obj H) ≫
+          LX.R.map ((((Functor.whiskeringRight ℕᵒᵖ (DiagonalMod l S) (DiagonalMod l X)).obj
+            (diagonalRlimPull l f)).mapDerivedCategorySingleFunctor 0).hom.app H) =
         ((diagonalRlimPull l f).mapDerivedCategorySingleFunctor 0).hom.app c.pt ≫
-          diagonalTraceConeMap LX ((diagonalRlimTowerPull l f).obj H)
+          diagonalTraceConeMap LX
+            (((Functor.whiskeringRight ℕᵒᵖ (DiagonalMod l S) (DiagonalMod l X)).obj
+              (diagonalRlimPull l f)).obj H)
             ((diagonalRlimPull l f).mapCone c)) ∧
     (∀ m : ℤ,
       shiftedComparison
@@ -371,7 +382,7 @@ theorem diagonalRlim_pullback_endpoints (l : ℕ) [Fact l.Prime] {X S : Scheme.{
         (diagonalRlimPull l f) (DiagonalCoefficients.diagonalRealizationPull l f)
         (diagonalCompletedRestriction l X) v).hom ℤ) ∧
     NatTrans.CommShift (diagonalRlimPullbackMate l f LX LS adjX adjS) ℤ ∧
-    (∀ {K K' : DerivedCategory (DiagonalSystems l S)} (z : K ⟶ K'),
+    (∀ {K K' : DerivedCategory (ℕᵒᵖ ⥤ DiagonalMod l S)} (z : K ⟶ K'),
       (LS.R ⋙ (diagonalRlimPull l f).mapDerivedCategory).map z ≫
           (diagonalRlimPullbackMate l f LX LS adjX adjS).app K' =
         (diagonalRlimPullbackMate l f LX LS adjX adjS).app K ≫
