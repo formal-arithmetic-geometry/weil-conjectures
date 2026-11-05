@@ -8,7 +8,6 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
-public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 import WeilConjectures.AlgebraicGeometry.FormalSystemsPushPullCore
 
