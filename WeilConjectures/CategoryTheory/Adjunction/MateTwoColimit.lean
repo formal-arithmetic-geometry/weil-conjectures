@@ -180,7 +180,7 @@ lemma exists_comp_mateEquiv_app_eq_of_stage
     Category.assoc, Adjunction.homEquiv_naturality_left_symm]
   erw [homEquiv_symm_map_comp_mateEquiv_mk_natTrans_app]
   rw [Equiv.symm_apply_apply,
-    ← Iso.hom_inv_id_app_assoc (α j) x ((adjΩ.homEquiv _ _).symm f), hu,
+    ← Iso.inv_hom_id_app_assoc (α j) x ((adjΩ.homEquiv _ _).symm f), hu,
     ← cancel_epi (GΩ.map ((c₁.iso h).hom.app x)),
     map_iso_hom_app_comp_inv_app_assoc α αT hcocycle]
   simp only [Category.assoc, Iso.hom_inv_id_app_assoc, Functor.map_comp]
