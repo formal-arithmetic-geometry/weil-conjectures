@@ -37,7 +37,7 @@ set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 2048
 set_option backward.defeqAttrib.useBackward true
 
-universe c v w
+universe c v w u
 
 open CategoryTheory CategoryTheory.Limits Opposite
 
@@ -256,6 +256,16 @@ private theorem moduleSheaf_isIso_of_bijective {C : Type*} [Category* C]
   exact isIso_of_reflects_iso f (SheafOfModules.forget A)
 
 namespace SheafOfModules
+
+local instance restrictedUnitSectionSMul
+    {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
+    (A : Sheaf J CommRingCat.{u})
+    (T : SheafOfModules.{u}
+      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj A)) (U : Cᵒᵖ) :
+    SMul (((PresheafOfModules.restrictOver A.obj U.unop).obj
+      (unit ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj A)).val).obj
+        (op (Over.mk (𝟙 U.unop)))) (T.val.obj U) :=
+  (T.val.obj U).isModule.toSMul
 
 variable {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
   [HasSheafify J AddCommGrpCat.{max c v w}]
