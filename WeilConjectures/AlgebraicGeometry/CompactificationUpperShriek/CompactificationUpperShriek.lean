@@ -21,17 +21,14 @@ is *constructed* here out of the two halves of the derived lower shriek
 where `Rg^!` is a chosen right adjoint of the derived pushforward `Rg_*` along the *proper*
 morphism `g`, and `Di^*` is the levelwise pullback along the open immersion `i`, which is right
 adjoint to `Di_!` by `Etale.derivedOpenImmersionLowerShriekUpperStarAdjunction`. The
-adjunction `Rf_! ⊣ Rf^!` is then the composite of these two adjunctions. The only input taken
-for granted is that `Rg_*` is a left adjoint for proper `g`; it is *not* assumed that `Rf_!`
-is a left adjoint for a general `f`, that is a theorem here.
+adjunction `Rf_! ⊣ Rf^!` is then the composite of these two adjunctions. The only input is the
+hypothesis that `Rg_*` is a left adjoint for the proper map `g` of the compactification; then
+`Rf_!` is a left adjoint.
 
 `Rf^!` is only defined on the unbounded derived categories: it does not preserve bounded
 below objects in general, so it does not restrict to `D⁺`.
 
 # Main Results
-
-- `AlgebraicGeometry.Etale.isLeftAdjoint_rightDerivedLowerStar_of_isProper` : for `g` proper,
-  `Rg_*` is a left adjoint on `D(Z_ét)`.
 
 - `AlgebraicGeometry.Etale.rightDerivedUpperShriekOfCompactification` : `Rf^!` with respect to
   a compactification `c`, with scoped notation `Rf^!(c)[A]`.
@@ -50,12 +47,12 @@ below objects in general, so it does not restrict to `D⁺`.
 
 ## Implementation notes
 
-* `isLeftAdjoint_rightDerivedLowerStar_of_isProper` is `sorry` by design: this file only
-  *states* that `Rg_*` has a right adjoint for `g` proper, the proof is left to a later file.
-  The adjoint exists by Brown representability, `Rg_*` being, for `g` proper, a colimit
-  preserving functor between compactly generated triangulated categories.
+* That `Rg_*` is a left adjoint is a hypothesis, not an instance: for an arbitrary Grothendieck
+  abelian `A` it is not known. For finite coefficients `ModuleCat Λ` it is the instance
+  `AlgebraicGeometry.Etale.isLeftAdjoint_rightDerivedLowerStar_of_isProper`, proved by Brown
+  representability in `WeilConjectures.SixFunctors.Etale.Derived.UpperShriek`.
 * `Rg^!` for proper `g` is `Functor.rightAdjoint`, i.e. an arbitrary choice of right adjoint
-  extracted from the instance, not a construction. Only the adjunction
+  extracted from the hypothesis, not a construction. Only the adjunction
   `Adjunction.ofIsLeftAdjoint` should be used about it. The composite `Rf^!` is a construction
   out of it and `Di^*`.
 * The derived adjunction `Di_! ⊣ Di^*` goes through the total left derived functor of `i_!`,
@@ -90,28 +87,10 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 namespace Etale.CompactificationUpperShriek
 
-section Proper
-
-variable {Z Y : Scheme.{u}} (g : Z ⟶ Y) [IsProper g]
-
-/-- For a proper morphism `g : Z ⟶ Y`, the derived pushforward `Rg_* : D(Z_ét) ⥤ D(Y_ét)` is a
-left adjoint; its right adjoint is the exceptional inverse image `Rg^!` along `g`. -/
--- STATEMENT-DISPUTED: this instance quantifies over every Grothendieck abelian A, whereas
--- Derived.UpperShriek explicitly assumes adjoint existence for general A. The available
--- Derived.LowerShriekLeftAdjoint proves proper coproduct preservation only for ModuleCat Λ
--- with IsAddTorsion Λ; its finite-coefficient specialization cannot supply arbitrary A.
--- The historical generic coproduct node now states the finite-coefficient theorem instead.
--- Brown representability supplies only the last step after coproduct preservation. This is
--- a conflict of source contracts requiring review, not a certified counterexample.
-instance isLeftAdjoint_rightDerivedLowerStar_of_isProper :
-    ((g)_*[A]).rightDerivedFunctor.IsLeftAdjoint :=
-  sorry
-
-end Proper
-
 section OfCompactification
 
 variable {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
+  [((c.g)_*[A]).rightDerivedFunctor.IsLeftAdjoint]
 
 /-- The exceptional inverse image `Rf^! : D(Y_ét) ⥤ D(X_ét)` attached to a compactification
 `c = (X ⟶[i] Z ⟶[g] Y)` of `f`, on the unbounded derived categories of étale sheaves: a chosen
@@ -129,6 +108,7 @@ scoped notation "Rf^!("c")[" A "]" =>
 end OfCompactification
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+  [(((HasCompactification.compactification f).g)_*[A]).rightDerivedFunctor.IsLeftAdjoint]
 
 section Unbounded
 
@@ -159,7 +139,8 @@ variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [Mon
 the composite of the derived adjunction `Di_! ⊣ Di^*` along the open immersion `i` and of the
 adjunction `Rg_* ⊣ Rg^!` along the proper `g`. -/
 noncomputable def rightDerivedUpperShriekOfCompactificationAdjunction {f : X ⟶ Y}
-    (c : Compactification f) : Rf_!(c)[A] ⊣ Rf^!(c)[A] :=
+    (c : Compactification f) [((c.g)_*[A]).rightDerivedFunctor.IsLeftAdjoint] :
+    Rf_!(c)[A] ⊣ Rf^!(c)[A] :=
   (derivedOpenImmersionLowerShriekUpperStarAdjunction A c.i).comp
     (Adjunction.ofIsLeftAdjoint _)
 

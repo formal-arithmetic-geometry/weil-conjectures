@@ -14,9 +14,9 @@ public import WeilConjectures.WeilSheaf.UpperShriek
 import WeilConjectures.WeilSheaf.Bidual
 import WeilConjectures.WeilSheaf.DerivedHomSingleResolution
 import WeilConjectures.WeilSheaf.SmoothPurity
-import WeilConjectures.WeilSheaf.VerdierExchange
 import WeilConjectures.WeilSheaf.VerdierBiduality
 import WeilConjectures.WeilSheaf.VerdierDualUpperShriek
+import WeilConjectures.WeilSheaf.VerdierExchange
 
 /-!
 # The exceptional inverse image and the Verdier dual of Weil complexes
@@ -29,7 +29,7 @@ complexes; this is the constructible adjunction `Rf_! ⊣ Rf^!` of the six-funct
 `AlgebraicGeometry.WeilComplex.isLeftAdjoint_derivedLowerShriek`. The exceptional inverse image
 `AlgebraicGeometry.WeilComplex.upperShriek f` is *defined* as that right adjoint, which is how
 the blueprint characterizes it (`def-weil-exceptional-inverse-image`); so that no data is chosen
-from the unproved existence statement, it takes the existence of the right adjoint
+from the existence statement, it takes the existence of the right adjoint
 (`AlgebraicGeometry.WeilComplex.HasUpperShriek f`) as a hypothesis. It gives the dualizing
 complex `ω_X = Ra_X^! ℚ̄_ℓ` (`AlgebraicGeometry.WeilComplex.dualizingComplex`) and the Verdier
 dual `𝔻_X = RHom(-, ω_X)` (`AlgebraicGeometry.WeilComplex.verdierDual`), the derived internal
@@ -39,8 +39,8 @@ The statements of the duality theory for Weil complexes that the boundary dualit
 `sec-deligne-laumon-a1` uses belong to the chapters on the six functors and on smooth purity;
 they are stated here with `sorry`, each with the blueprint node it renders:
 
-- `det-pd-biduality-coefficients`: the adjunction `Rf₀! ⊣ Rf^!`, the fact that `𝔻_X` preserves Weil
-  complexes, its exactness, biduality `K ≅ 𝔻_X 𝔻_X K` and `Rf^! ≅ 𝔻_X f^* 𝔻_Y`;
+- `det-pd-biduality-coefficients`: the fact that `𝔻_X` preserves Weil complexes, its exactness,
+  biduality `K ≅ 𝔻_X 𝔻_X K` and `Rf^! ≅ 𝔻_X f^* 𝔻_Y`;
 - `fix-cor-verdier-exchange`: `𝔻_Y Rf₀! ≅ Rf_* 𝔻_X`;
 - `cor-pur-adic-and-rational-smooth-dualizing-complexes`: `ω_X ≅ ℚ̄_ℓ(d)[2d]` for `X` smooth of
   pure dimension `d`;
@@ -185,30 +185,6 @@ theorem nonempty_dualizingComplex_iso (d : ℕ)
   nonempty_rightAdjoint_obj_adicConstant_iso_of_smooth d (derivedLowerShriekUpperShriekAdjunction _)
 
 end Smooth
-
-section RelativePurity
-
-variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
-  [Y.Over (Spec (CommRingCat.of k₀))] (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))]
-  [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
-  [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
-  [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
-  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-  [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] [HasUpperShriek k₀ l f]
-
-/-- **Smooth purity for Weil complexes** (blueprint:
-`thm-pur-weil-equivariance-of-purity-and-trace`, the equivariance of the smooth purity
-isomorphism `γ_{f,K} : Lf^* K(d)[2d] ≅ Rf^! K`): for a morphism `f : X ⟶ Y` smooth of relative
-dimension `d`, the purity isomorphism commutes with the Weil structures, so it is an isomorphism
-`Rf^! L ≅ f^*(L(d)[2d])` of Weil complexes, natural in `L`. Only the existence of a natural
-isomorphism is stated here. -/
-theorem nonempty_upperShriek_iso_of_smoothOfRelativeDimension (d : ℕ)
-    [SmoothOfRelativeDimension d f] :
-    Nonempty (upperShriek (k₀ := k₀) (l := l) f ≅
-      (tateTwist k₀ l Y d ⋙ shiftFunctor (WeilComplex k₀ l Y) (2 * d : ℤ)) ⋙ upperStar f) :=
-  sorry
-
-end RelativePurity
 
 section Lisse
 
