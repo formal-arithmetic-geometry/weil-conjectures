@@ -24,15 +24,17 @@ open CategoryTheory MonoidalCategory Limits Opposite
 namespace PresheafOfModules
 
 variable {C : Type u} [Category.{u} C] {R : Cᵒᵖ ⥤ CommRingCat.{u}}
-  (M P : PresheafOfModules.{u} (R ⋙ forget₂ _ _))
+  (M P : PresheafOfModulesOfCommRing.{u} R)
 
 /-- The morphism `Hom(M, R) ⊗ P ⟶ Hom(M, P)` of presheaves of modules, sending `φ ⊗ p` to
 `m ↦ φ(m) • p`. -/
-noncomputable def dualTensorHom : homObj M (unit _) ⊗ P ⟶ homObj M P :=
-  tensorHomCurry ((α_ M (homObj M (unit _)) P).inv ≫ tensorHomUncurry (𝟙 _) ▷ P ≫ (λ_ P).hom)
+noncomputable def dualTensorHom : homObj M (PresheafOfModulesOfCommRing.unit R) ⊗ P ⟶ homObj M P :=
+  tensorHomCurry ((α_ M (homObj M (PresheafOfModulesOfCommRing.unit R)) P).inv ≫
+    tensorHomUncurry (𝟙 _) ▷ P ≫ (λ_ P).hom)
 
 /-- `Hom(M, R) ⊗ P ⟶ Hom(M, P)` sends `φ ⊗ p` to `m ↦ φ(m) • p`. -/
-lemma dualTensorHom_app_tmul_app_apply {U : C} (φ : (homObj M (unit _)).obj (op U))
+lemma dualTensorHom_app_tmul_app_apply {U : C}
+    (φ : (homObj M (PresheafOfModulesOfCommRing.unit R)).obj (op U))
     (p : P.obj (op U)) (W : (Over U)ᵒᵖ) (m : M.obj (op W.unop.left)) :
     (((dualTensorHom M P).app (op U) (φ ⊗ₜ p)).app W) m =
       (show R.obj (op W.unop.left) from (φ.app W) m) • P.map W.unop.hom.op p := by
@@ -46,21 +48,20 @@ variable {M P} in
 /-- The morphism `Hom(M, R) ⊗ P ⟶ Hom(M, P)` is bijective on sections over `U` if `P` is free of
 rank one over `U`, with basis `p₀` and coordinate `φ₀`. -/
 lemma dualTensorHom_app_bijective {U : C} (p₀ : P.obj (op U))
-    (φ₀ : (restrictOver R U).obj P ⟶ (restrictOver R U).obj (unit _))
+    (φ₀ : (restrictOver R U).obj P ⟶ (restrictOver R U).obj (PresheafOfModulesOfCommRing.unit R))
     (hφ₀ : ∀ (V : (Over U)ᵒᵖ) (r : R.obj (op V.unop.left)),
       (φ₀.app V) (r • P.map V.unop.hom.op p₀) = r)
     (hgen : ∀ (V : (Over U)ᵒᵖ) (x : P.obj (op V.unop.left)),
       ∃ r : R.obj (op V.unop.left), x = r • P.map V.unop.hom.op p₀) :
     Function.Bijective ((dualTensorHom M P).app (op U)) := by
-  have hp₀ : ∀ p : P.obj (op U), ∃ r : (R ⋙ forget₂ CommRingCat RingCat).obj (op U),
+  have hp₀ : ∀ p : P.obj (op U), ∃ r : R.obj (op U),
       p = r • p₀ := fun p ↦ by
     obtain ⟨r, hr⟩ := hgen (op (Over.mk (𝟙 U))) p
     refine ⟨r, hr.trans (congrArg (fun q : P.obj (op U) ↦ r • q) ?_)⟩
-    change P.map (𝟙 (op U)) p₀ = p₀
-    rw [PresheafOfModules.map_id]
-    rfl
-  have key (t : ((homObj M (unit _)) ⊗ P).obj (op U)) :
-      ∃ φ : (homObj M (unit _)).obj (op U), t = φ ⊗ₜ p₀ := by
+    exact P.map_id_apply (op U) p₀
+  have key (t : TensorProduct (R.obj (op U))
+      ((homObj M (PresheafOfModulesOfCommRing.unit R)).obj (op U)) (P.obj (op U))) :
+      ∃ φ : (homObj M (PresheafOfModulesOfCommRing.unit R)).obj (op U), t = φ ⊗ₜ p₀ := by
     induction t with
     | tmul φ p =>
       obtain ⟨a, rfl⟩ := hp₀ p
@@ -83,7 +84,7 @@ lemma dualTensorHom_app_bijective {U : C} (p₀ : P.obj (op U))
   · refine ⟨(ψ ≫ φ₀) ⊗ₜ p₀, hom_ext fun V ↦ ModuleCat.hom_ext (LinearMap.ext fun m ↦ ?_)⟩
     rw [dualTensorHom_app_tmul_app_apply]
     obtain ⟨r, hr⟩ := hgen V (ψ.app V m)
-    change (φ₀.app V (ψ.app V m)) • _ = _
+    change (show R.obj (op V.unop.left) from φ₀.app V (ψ.app V m)) • _ = _
     rw [hr, hφ₀]
 
 variable {M P} in
@@ -92,8 +93,10 @@ of copies of `R|_U`, with inclusions `s i` and projections `c i`, then `Hom(M, R
 is bijective on sections over `U`: both sides are `⨁ᵢ P(U)`, through `ψ ↦ (ψ(s i 1))ᵢ` and
 `∑ᵢ c i ⊗ pᵢ ↤ (pᵢ)ᵢ`. -/
 lemma dualTensorHom_app_bijective_of_free {U : C} {ι : Type*} [Fintype ι] [DecidableEq ι]
-    (s : ι → ((restrictOver R U).obj (unit _) ⟶ (restrictOver R U).obj M))
-    (c : ι → ((restrictOver R U).obj M ⟶ (restrictOver R U).obj (unit _)))
+    (s : ι → ((restrictOver R U).obj (PresheafOfModulesOfCommRing.unit R) ⟶
+      (restrictOver R U).obj M))
+    (c : ι → ((restrictOver R U).obj M ⟶
+      (restrictOver R U).obj (PresheafOfModulesOfCommRing.unit R)))
     (hsc : ∀ i j, s j ≫ c i = if j = i then 𝟙 _ else 0)
     (htot : ∑ i, c i ≫ s i = 𝟙 _) :
     Function.Bijective ((dualTensorHom M P).app (op U)) := by
@@ -112,7 +115,7 @@ lemma dualTensorHom_app_bijective_of_free {U : C} {ι : Type*} [Fintype ι] [Dec
     refine h.trans ?_
     split_ifs <;> rfl
   -- A morphism out of `M|_U` is determined by its values on the `m i`.
-  have hval {Q : PresheafOfModules.{u} (R ⋙ forget₂ _ _)}
+  have hval {Q : PresheafOfModulesOfCommRing.{u} R}
       (ψ : (restrictOver R U).obj M ⟶ (restrictOver R U).obj Q) (W : (Over U)ᵒᵖ)
       (x : M.obj (op W.unop.left)) :
       ψ.app W x = ∑ i, (show R.obj (op W.unop.left) from (c i).app W x) •
@@ -122,13 +125,15 @@ lemma dualTensorHom_app_bijective_of_free {U : C} {ι : Type*} [Fintype ι] [Dec
     refine ((ψ.app W).hom.map_smul _ _).trans (congrArg (_ • ·) ?_)
     exact naturality_apply ψ
       (Over.homMk W.unop.hom (Category.comp_id _) : W.unop ⟶ Over.mk (𝟙 U)).op (m i)
-  let c' : ι → (homObj M (unit _)).obj (op U) := c
-  let a (φ : (homObj M (unit _)).obj (op U)) (i : ι) :
-      (R ⋙ forget₂ CommRingCat RingCat).obj (op U) :=
+  let c' : ι → (homObj M (PresheafOfModulesOfCommRing.unit R)).obj (op U) := c
+  let a (φ : (homObj M (PresheafOfModulesOfCommRing.unit R)).obj (op U)) (i : ι) :
+      R.obj (op U) :=
     (show R.obj (op U) from φ.app T (m i))
   -- Every dual element is a combination of the `c i`.
-  have hdual (φ : (homObj M (unit _)).obj (op U)) : φ = ∑ i, a φ i • c' i := by
-    refine hom_ext (M₁ := (restrictOver R U).obj M) (M₂ := (restrictOver R U).obj (unit _))
+  have hdual (φ : (homObj M (PresheafOfModulesOfCommRing.unit R)).obj (op U)) :
+      φ = ∑ i, a φ i • c' i := by
+    refine hom_ext (M₁ := (restrictOver R U).obj M)
+      (M₂ := (restrictOver R U).obj (PresheafOfModulesOfCommRing.unit R))
       fun W ↦ ?_
     ext y
     refine (hval φ W y).trans ?_
@@ -140,7 +145,8 @@ lemma dualTensorHom_app_bijective_of_free {U : C} {ι : Type*} [Fintype ι] [Dec
       R.map W.unop.hom.op (φ.app T (m i)) * (show R.obj (op W.unop.left) from (c i).app W y)
     exact mul_comm _ _
   -- Every element of `Hom(M, R) ⊗ P` over `U` is `∑ i, c i ⊗ pᵢ`.
-  have key (t : ((homObj M (unit _)) ⊗ P).obj (op U)) :
+  have key (t : TensorProduct (R.obj (op U))
+      ((homObj M (PresheafOfModulesOfCommRing.unit R)).obj (op U)) (P.obj (op U))) :
       ∃ p : ι → P.obj (op U), t = ∑ i, c' i ⊗ₜ p i := by
     induction t with
     | tmul φ q =>
@@ -184,8 +190,10 @@ variable {M P} in
 /-- If `M` is free of finite rank on `U`, then `Hom(M, R) ⊗ P ⟶ Hom(M, P)` is bijective on
 sections over every `V ⟶ U`. -/
 lemma dualTensorHom_app_bijective_of_hom {U : C} {ι : Type*} [Fintype ι] [DecidableEq ι]
-    (s : ι → ((restrictOver R U).obj (unit _) ⟶ (restrictOver R U).obj M))
-    (c : ι → ((restrictOver R U).obj M ⟶ (restrictOver R U).obj (unit _)))
+    (s : ι → ((restrictOver R U).obj (PresheafOfModulesOfCommRing.unit R) ⟶
+      (restrictOver R U).obj M))
+    (c : ι → ((restrictOver R U).obj M ⟶
+      (restrictOver R U).obj (PresheafOfModulesOfCommRing.unit R)))
     (hsc : ∀ i j, s j ≫ c i = if j = i then 𝟙 _ else 0)
     (htot : ∑ i, c i ≫ s i = 𝟙 _) {V : C} (g : V ⟶ U) :
     Function.Bijective ((dualTensorHom M P).app (op V)) := by
@@ -194,7 +202,8 @@ lemma dualTensorHom_app_bijective_of_hom {U : C} {ι : Type*} [Fintype ι] [Deci
   · change restrictOverMap g (s j ≫ c i) = _
     rw [hsc]
     split_ifs
-    · exact restrictOverMap_id (R := R) (M := unit _) (N := unit _) (𝟙 _)
+    · exact restrictOverMap_id (R := R) (M := PresheafOfModulesOfCommRing.unit R)
+        (N := PresheafOfModulesOfCommRing.unit R) (𝟙 _)
     · rfl
   · change ∑ i, restrictOverMap g (c i ≫ s i) = _
     rw [← restrictOverMap_sum, htot]
@@ -210,8 +219,8 @@ variable {M} in
   Hom(M, R) ⊗ P  ---> Hom(M, P)
 ```
 commutes. -/
-lemma dualTensorHom_naturality {M' : PresheafOfModules.{u} (R ⋙ forget₂ _ _)} (f : M ⟶ M') :
-    homObjMap f (𝟙 (unit _)) ▷ P ≫ dualTensorHom M P =
+lemma dualTensorHom_naturality {M' : PresheafOfModulesOfCommRing.{u} R} (f : M ⟶ M') :
+    homObjMap f (𝟙 (PresheafOfModulesOfCommRing.unit R)) ▷ P ≫ dualTensorHom M P =
       dualTensorHom M' P ≫ homObjMap f (𝟙 P) := by
   ext U : 1
   refine ModuleCat.MonoidalCategory.tensor_ext fun φ p ↦ ?_
@@ -229,13 +238,15 @@ variable {P} in
   Hom(M, R) ⊗ P' ---> Hom(M, P')
 ```
 commutes. -/
-lemma dualTensorHom_naturality_right {P' : PresheafOfModules.{u} (R ⋙ forget₂ _ _)}
+lemma dualTensorHom_naturality_right {P' : PresheafOfModulesOfCommRing.{u} R}
     (g : P ⟶ P') :
-    homObj M (unit _) ◁ g ≫ dualTensorHom M P' = dualTensorHom M P ≫ homObjMap (𝟙 M) g := by
+    homObj M (PresheafOfModulesOfCommRing.unit R) ◁ g ≫ dualTensorHom M P' =
+      dualTensorHom M P ≫ homObjMap (𝟙 M) g := by
   ext U : 1
   refine ModuleCat.MonoidalCategory.tensor_ext fun φ p ↦ ?_
   refine hom_ext fun W ↦ ModuleCat.hom_ext (LinearMap.ext fun m ↦ ?_)
   refine (dualTensorHom_app_tmul_app_apply M P' φ (g.app _ p) W m).trans ?_
   change _ = g.app (op W.unop.left) ((((dualTensorHom M P).app U (φ ⊗ₜ p)).app W) m)
-  rw [dualTensorHom_app_tmul_app_apply, (g.app _).hom.map_smul, naturality_apply]
+  rw [dualTensorHom_app_tmul_app_apply, (g.app _).hom.map_smul]
+  exact congrArg _ (naturality_apply g W.unop.hom.op p).symm
 end PresheafOfModules
