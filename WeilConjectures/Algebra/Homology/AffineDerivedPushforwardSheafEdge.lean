@@ -75,6 +75,8 @@ variable [∀ Y : Scheme.{u},
 
 attribute [local irreducible] RingedSpace.moduleDirectImage
 
+-- The quotient identity conversions exceeded 200000 heartbeats in the v4.35 remote build.
+set_option maxHeartbeats 400000 in
 /-- The sheaf-level affine edge is compatible with the actual derived unit on an
 exact family of quasi-coherent sheaves. No tilde/Gamma coordinates or ordinary
 comparison isomorphism occur here.
