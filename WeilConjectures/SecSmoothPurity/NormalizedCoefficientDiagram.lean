@@ -57,6 +57,13 @@ noncomputable def total {R : Sheaf J CommRingCat.{w}} (P Q : Complex R) : Comple
       (PresheafOfModules.{w}
         ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R).obj) :=
     fun _ _ ↦ PresheafOfModules.hasColimitsOfShape _ _
+  let : HasCoproducts.{0} (Modules R) := fun I ↦ by
+    let : HasColimitsOfShape (Discrete I) (PresheafOfModules.{w}
+        ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R).obj) :=
+      PresheafOfModules.hasColimitsOfShape _ _
+    exact SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
+  let : HasFiniteCoproducts (Modules R) :=
+    hasFiniteCoproducts_of_hasCoproducts (C := Modules R)
   exact P ⊗ Q
 
 /-- The existing tensor map on total complexes, with its instances fixed once.
@@ -67,6 +74,13 @@ abbrev totalMap {R : Sheaf J CommRingCat.{w}} {P Q P' Q' : Complex R}
       (PresheafOfModules.{w}
         ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R).obj) :=
     fun _ _ ↦ PresheafOfModules.hasColimitsOfShape _ _
+  let : HasCoproducts.{0} (Modules R) := fun I ↦ by
+    let : HasColimitsOfShape (Discrete I) (PresheafOfModules.{w}
+        ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R).obj) :=
+      PresheafOfModules.hasColimitsOfShape _ _
+    exact SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
+  let : HasFiniteCoproducts (Modules R) :=
+    hasFiniteCoproducts_of_hasCoproducts (C := Modules R)
   exact f ⊗ₘ g
 
 /-- Presentation of precisely the ring diagrams in the statement. The fields L,
