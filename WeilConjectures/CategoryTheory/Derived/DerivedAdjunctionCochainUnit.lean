@@ -69,7 +69,6 @@ theorem derived_unit_cochain
   erw [hu']
   rw [Adjunction.mapHomotopyCategory_unit_app_quotient]
   dsimp only [Functor.rightDerivedFunctorUnitQ]
-  erw [Category.comp_id]
   erw [← DerivedCategory.quotientCompQhIso_hom_naturality_assoc,
     Iso.hom_inv_id_app_assoc]
   have hd : (DerivedCategory.quotientCompQhIso D).hom.app
