@@ -233,9 +233,15 @@
 # BZ824 in progress
 
 - Branch: u9/BZ824; starting commit 95c8987257f.
-- The user instructed continuation after the explicit upstream-restoration proposal.
-- Restoring the deleted predicate, transport, automorphism, and existence prerequisites
-  from Git history, with canonical Q/Qh transports for the pinned Mathlib API.
-- The target theorem and its direct caller remain present; no declaration deletion.
-- Baseline ucheck-bump is queued remotely. No local Lean/Lake execution.
-- Investigation and exact historical errors: /home/ubuntu/u9/bz/FIXES-BZ824.md.
+- The user instructed continuation after the upstream-restoration proposal.
+- Restored four prerequisite modules. The comparison predicate uses verified PZ003
+  Localization imports and a reflexive cast; the transport proof is unchanged,
+  and target automorphism specializes the existing arbitrary-degree theorem to zero.
+- All six submitted modules passed ucheck-bump at 826d8e1a1fb: rc=0, failed=0, 4065 jobs.
+- Green: DerivedModuleBaseChangeMap, DerivedModulePullbackComparison,
+  ModulePullbackComparisonIsoTransport, ModulePullbackComparisonTargetAutomorphism,
+  CanonicalModuleBaseChangeIsoComparisonCompat, CanonicalModuleBaseChangeIsoComparison.
+- All restored declaration headers and original assigned/caller sources are unchanged.
+- Full log: /home/ubuntu/u9/bz/BUILD-BZ824-restored-full.log.
+- Next: build layer-two importer CanonicalModuleBaseChangeAffineChartComparison.
+- Notes: /home/ubuntu/u9/bz/FIXES-BZ824.md. No local Lean/Lake or proof shortcuts.
