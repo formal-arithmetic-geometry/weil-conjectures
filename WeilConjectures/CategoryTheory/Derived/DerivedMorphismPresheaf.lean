@@ -54,7 +54,7 @@ private lemma exactComp_fac (e : H ≅ F ⋙ G)
   have hcomp := Functor.mapDerivedCategoryCompIso_fach F G P
   rw [Functor.mapHomotopyCategoryCompIso_refl_hom_app] at hcomp
   erw [CategoryTheory.Functor.map_id, Category.comp_id] at hcomp
-  simp only [exactComp, Iso.trans_hom, NatTrans.comp_app, Category.assoc]
+  simp only [exactComp, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
   rw [hcomp, Functor.mapDerivedCategoryNatIso_fach]
 
 end ExactFunctors
