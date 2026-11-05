@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.WeilSheaf.SmoothPurityDescendedTraceUniversal
-public import WeilConjectures.WeilSheaf.SmoothPurityEtaleAdjunction
+public import WeilConjectures.WeilSheaf.SmoothUnitBaseChangeEtale
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionUpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.GenericPoint
 
@@ -49,38 +49,9 @@ universe u
 open CategoryTheory Limits MonoidalCategory
 open scoped CategoryTheory.Obj
 
-namespace CategoryTheory.Adjunction
-
-variable {A B C D : Type*} [Category* A] [Category* B] [Category* C] [Category* D]
-  {G : A ⥤ C} {H : B ⥤ D} {L₁ : A ⥤ B} {R₁ R₁' : B ⥤ A} {L₂ : C ⥤ D} {R₂ R₂' : D ⥤ C}
-  (adj₁ : L₁ ⊣ R₁) (adj₁' : L₁ ⊣ R₁') (adj₂ : L₂ ⊣ R₂) (adj₂' : L₂ ⊣ R₂')
-
-/-- **Changing the right adjoints in the mates correspondence**: for two adjunctions with the same
-left adjoint on each side, the two mates of a square agree up to the canonical isomorphisms
-`R₁ ≅ R₁'` and `R₂' ≅ R₂` of the right adjoints. -/
-theorem mateEquiv_app_eq_conjugateEquiv (α : TwoSquare G L₁ L₂ H) (b : B) :
-    (mateEquiv adj₁ adj₂ α).app b =
-      G.map ((conjugateEquiv adj₁ adj₁' (𝟙 L₁)).app b) ≫ (mateEquiv adj₁' adj₂' α).app b ≫
-        (conjugateEquiv adj₂' adj₂ (𝟙 L₂)).app (H.obj b) := by
-  have h₁ := congr_app (mateEquiv_conjugateEquiv_vcomp adj₁' adj₂' adj₂ α (𝟙 L₂)) b
-  have h₂ := congr_app (conjugateEquiv_mateEquiv_vcomp adj₁ adj₁' adj₂ (𝟙 L₁) α) b
-  have e₁ : α.whiskerRight (𝟙 L₂) = α := by ext; simp [TwoSquare.whiskerRight]
-  have e₂ : α.whiskerLeft (𝟙 L₁) = α := by ext; simp [TwoSquare.whiskerLeft]
-  rw [e₁] at h₁
-  rw [e₂] at h₂
-  rw [h₂]
-  simp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom, NatTrans.comp_app,
-    Functor.whiskerRight_app, Functor.whiskerLeft_app] at h₁ ⊢
-  rw [h₁]
-
-/-- The mates of a square with respect to two choices of right adjoints are invertible at the
-same objects. -/
-theorem isIso_mateEquiv_app_iff (α : TwoSquare G L₁ L₂ H) (b : B) :
-    IsIso ((mateEquiv adj₁ adj₂ α).app b) ↔ IsIso ((mateEquiv adj₁' adj₂' α).app b) := by
-  rw [mateEquiv_app_eq_conjugateEquiv adj₁ adj₁' adj₂ adj₂', isIso_comp_left_iff,
-    isIso_comp_right_iff]
-
-end CategoryTheory.Adjunction
+/-! The lemmas `CategoryTheory.Adjunction.mateEquiv_app_eq_conjugateEquiv` and
+`CategoryTheory.Adjunction.isIso_mateEquiv_app_iff` (change of right adjoints in the mates
+correspondence) are in `WeilConjectures.WeilSheaf.SmoothUnitBaseChangeEtale`. -/
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -108,6 +79,9 @@ def boundedConstructibleOpenImmersionUpperStarAdjunction :
 
 end OpenImmersionAdjunction
 
+/-! `Rh_! ⊣ h^*` for étale `h`: `nonempty_boundedConstructibleLowerShriekUpperStarAdjunction_of_etale`
+and `boundedConstructibleLowerShriekUpperStarAdjunctionOfEtale` in
+`WeilConjectures.WeilSheaf.SmoothUnitBaseChangeEtale`. -/
 
 section Mate
 

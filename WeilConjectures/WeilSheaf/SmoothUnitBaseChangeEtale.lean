@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.WeilSheaf.SmoothPurityUnitBaseChangeEtale
-public import WeilConjectures.WeilSheaf.SmoothUnitBaseChangeOpenImmersion
+public import WeilConjectures.WeilSheaf.SmoothPurityDescendedTraceUniversal
+public import WeilConjectures.SmoothPurity.EtaleUpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionUpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.GenericPoint
 
@@ -34,7 +34,7 @@ invertible.
   adjunctions `Rh_! ⊣ h^*`, `Rh'_! ⊣ h'^*` compatible with `bc`.
 * `ProEtale.CondensedRing.isIso_smoothUnitBaseChange_of_counit`: the same at the unit, for
   `smoothUnitBaseChange` with `e` invertible.
-* `ProEtale.CondensedRing.isIso_smoothUnitBaseChange_of_isOpenImmersion`: the case of an open
+* `ProEtale.CondensedRing.isIso_smoothUnitBaseChange_of_isOpenImmersion_of_counit`: the case of an open
   immersion, where `Rj_! ≅ j_!` and `j_! ⊣ j^*` are in the library. The compatibility asked of
   `bc` is that of the extension by zero.
 * `ProEtale.CondensedRing.isIso_smoothUnitBaseChange_of_etale`: the case of an étale morphism,
@@ -45,12 +45,11 @@ invertible.
   `ProEtale.CondensedRing.etaleLowerShriekBaseChange` (the inverse of the mate of
   `πU^* h^* ≅ h'^* πV^*`), `smoothUnitBaseChange` is invertible, with no hypothesis on `bc`.
 
-## Remaining inputs (left as `sorry`)
+## Remaining input
 
-* `ProEtale.CondensedRing.nonempty_boundedConstructibleLowerShriekUpperStarAdjunction_of_etale`:
-  for étale `h`, the lower shriek `Rh_!` on bounded constructible `ℚ̄_ℓ`-complexes, defined
-  through a Nagata compactification, is left adjoint to `h^*`. For finite coefficients on the
-  étale site this is `AlgebraicGeometry.Etale.isIso_compactificationEtaleComparison`.
+The étale adjunction is proved by purity in relative dimension zero in
+`WeilConjectures.SmoothPurity.EtaleUpperShriek`. The remaining input is:
+
 * `ProEtale.CondensedRing.isIso_etaleLowerShriekExchange`: étale base change for `Rh_!`, the
   exchange `πU^* ⋙ Rh'_! ⟶ Rh_! ⋙ πV^*` of a cartesian square with `h` étale is invertible.
 
@@ -77,11 +76,42 @@ variable {C C' D D' : Type*} [Category C] [Category C'] [Category D] [Category D
   {b : C' ⥤ D'} {b' S' : D' ⥤ C'} (adj' : b ⊣ b') (adjS' : b ⊣ S')
   {G : C ⥤ C'} {H : D ⥤ D'}
 
+/-- The mate of a square under `a ⊣ S` and `b ⊣ S'` is its mate under `a ⊣ a'` and `b ⊣ b'`,
+conjugated by the canonical isomorphisms `S ≅ a'` and `b' ≅ S'`. -/
+lemma mateEquiv_app_eq_conjugateEquiv (α : TwoSquare G a b H) (U : D) :
+    (mateEquiv adjS adjS' α).app U =
+      G.map ((conjugateEquiv adjS adj (𝟙 a)).app U) ≫ (mateEquiv adj adj' α).app U ≫
+        (conjugateEquiv adj' adjS' (𝟙 b)).app (H.obj U) := by
+  have h₁ := congr_app (mateEquiv_conjugateEquiv_vcomp adj adj' adjS' α (𝟙 b)) U
+  have h₂ := congr_app (conjugateEquiv_mateEquiv_vcomp adjS adj adjS' (𝟙 a)
+    (α.whiskerRight (𝟙 b))) U
+  have h₃ : (α.whiskerRight (𝟙 b)).whiskerLeft (𝟙 a) = α := by
+    ext X
+    simp [TwoSquare.whiskerLeft, TwoSquare.whiskerRight]
+  rw [h₃] at h₂
+  rw [h₂]
+  simp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom, NatTrans.comp_app,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app] at h₁ ⊢
+  rw [h₁]
+
+/-- Whether a component of the mate of a square is invertible does not depend on the chosen
+right adjoints. -/
+lemma isIso_mateEquiv_app_iff (α : TwoSquare G a b H) (U : D) :
+    IsIso ((mateEquiv adjS adjS' α).app U) ↔ IsIso ((mateEquiv adj adj' α).app U) := by
+  rw [mateEquiv_app_eq_conjugateEquiv adj adjS adj' adjS']
+  constructor
+  · intro h
+    have := IsIso.of_isIso_comp_left (G.map ((conjugateEquiv adjS adj (𝟙 a)).app U))
+      ((mateEquiv adj adj' α).app U ≫ (conjugateEquiv adj' adjS' (𝟙 b)).app (H.obj U))
+    exact IsIso.of_isIso_comp_right _ ((conjugateEquiv adj' adjS' (𝟙 b)).app (H.obj U))
+  · intro h
+    infer_instance
+
 /-- Whether the mate of a square is invertible does not depend on the chosen right adjoints. -/
 lemma isIso_mateEquiv_iff (α : TwoSquare G a b H) :
     IsIso (mateEquiv adjS adjS' α).natTrans ↔ IsIso (mateEquiv adj adj' α).natTrans := by
   rw [NatTrans.isIso_iff_isIso_app, NatTrans.isIso_iff_isIso_app]
-  exact forall_congr' fun U ↦ isIso_mateEquiv_app_iff adjS adj adjS' adj' α U
+  exact forall_congr' fun U ↦ isIso_mateEquiv_app_iff adj adjS adj' adjS' α U
 
 /-- The mate of `α` is `c` as soon as `α` carries the counit of `a ⊣ S` to that of `b ⊣ S'`
 through `c`. -/
@@ -119,7 +149,7 @@ variable {bc : a ⋙ H ⟶ G ⋙ b} [IsIso bc] {U : D} {U' : D'} (e : H.obj U �
 the mate of `bc⁻¹` under any other adjunctions `a ⊣ S`, `b ⊣ S'` is invertible at `U`. -/
 lemma isIso_unitBaseChange_iff [IsIso e] :
     IsIso (unitBaseChange adj adj' bc e) ↔ IsIso ((mateEquiv adjS adjS' (inv bc)).app U) := by
-  rw [isIso_mateEquiv_app_iff adjS adj adjS' adj', unitBaseChange]
+  rw [isIso_mateEquiv_app_iff adj adjS adj' adjS', unitBaseChange]
   constructor
   · intro h
     exact IsIso.of_isIso_comp_right _ (b'.map e)
@@ -223,7 +253,44 @@ def boundedConstructibleLowerShriekUpperStarAdjunctionOfIsOpenImmersion (j : U �
     (Profinite.padicAlgClRingObj l) l j).ofNatIsoLeft
       (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl l j).symm
 
+/-- **The exceptional base change at the unit of an open immersion**: `smoothUnitBaseChange` is
+invertible for an invertible `e`, provided `bc` carries, through `Rj_! ≅ j_!` and
+`πU^* j^* ≅ j'^* πV^*`, the counit of `j_! ⊣ j^*` to that of `j'_! ⊣ j'^*`. -/
+theorem isIso_smoothUnitBaseChange_of_isOpenImmersion_of_counit
+    {j : U ⟶ V} {j' : U' ⟶ V'} [IsOpenImmersion j.left] [IsOpenImmersion j'.left]
+    (bc : boundedConstructibleLowerShriek l j ⋙ boundedConstructibleUpperStarOfMap l πV ≅
+      boundedConstructibleUpperStarOfMap l πU ⋙ boundedConstructibleLowerShriek l j')
+    (e : (boundedConstructibleUpperStarOfMap l πV).obj (𝟙_ _) ⟶ 𝟙_ _) [IsIso e]
+    (w : πU ≫ j.left = j'.left ≫ πV)
+    (hbc : ∀ M, (boundedConstructibleUpperStarOfMap l πV).map
+        ((boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl l j).hom.app
+            ((boundedConstructibleUpperStarOfMap l j.left).obj M) ≫
+          (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
+            (Profinite.padicAlgClRingObj l) l j).counit.app M) =
+      bc.hom.app ((boundedConstructibleUpperStarOfMap l j.left).obj M) ≫
+        (boundedConstructibleLowerShriek l j').map
+          ((boundedConstructibleUpperStarOfMapSquareIso l j j' w).hom.app M) ≫
+        (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl l j').hom.app
+            ((boundedConstructibleUpperStarOfMap l j'.left).obj
+              ((boundedConstructibleUpperStarOfMap l πV).obj M)) ≫
+          (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
+            (Profinite.padicAlgClRingObj l) l j').counit.app
+              ((boundedConstructibleUpperStarOfMap l πV).obj M)) :
+    IsIso (smoothUnitBaseChange l j j' bc e) :=
+  isIso_smoothUnitBaseChange_of_counit l bc e
+    (boundedConstructibleLowerShriekUpperStarAdjunctionOfIsOpenImmersion l j)
+    (boundedConstructibleLowerShriekUpperStarAdjunctionOfIsOpenImmersion l j') w
+    (by simpa [boundedConstructibleLowerShriekUpperStarAdjunctionOfIsOpenImmersion] using hbc)
+
 /-! ### Étale morphisms -/
+
+/-- The lower shriek of an étale morphism is left adjoint to pullback, by
+purity in relative dimension zero. -/
+theorem nonempty_boundedConstructibleLowerShriekUpperStarAdjunction_of_etale
+    (h : U ⟶ V) [Etale h.left] :
+    Nonempty (boundedConstructibleLowerShriek l h ⊣
+      boundedConstructibleUpperStarOfMap l h.left) :=
+  ⟨boundedConstructibleEtaleLowerShriekUpperStarAdjunction l h⟩
 
 /-- The adjunction `Rh_! ⊣ h^*` of an étale morphism `h`, chosen by
 `nonempty_boundedConstructibleLowerShriekUpperStarAdjunction_of_etale`. -/
@@ -280,7 +347,7 @@ def etaleLowerShriekBaseChange :
   have := isIso_etaleLowerShriekExchange l hsq
   (asIso (etaleLowerShriekExchange l hsq)).symm
 
-/-- The compact-support base change of an Ã©tale morphism is the inverse of the exchange
+/-- The compact-support base change of an étale morphism is the inverse of the exchange
 morphism. -/
 lemma etaleLowerShriekBaseChange_hom :
     (etaleLowerShriekBaseChange l hsq).hom =

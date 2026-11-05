@@ -6,6 +6,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriekIndependence
 public import WeilConjectures.WeilSheaf.CondensedModelBaseChange
+public import WeilConjectures.WeilSheaf.SmoothPurityReflectedSquareComponents
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseSliceInputs
 
 /-! # Compact-support base change between different fields
@@ -68,19 +69,12 @@ noncomputable def purityFieldCompactificationExchange :
         boundedConstructibleUpperStarOfMap ℓ πY ≅
       boundedConstructibleUpperStarOfMap ℓ πX ⋙
         boundedConstructibleLowerShriekOfCompactification ℓ c' :=
-  ((ObjectProperty.fullyFaithfulι _).whiskeringRight _).preimageIso
-    (Functor.associator _ _ _ ≪≫
-      Functor.isoWhiskerLeft _ (purityFieldPullbackCompatibility ℓ (πY := πY)) ≪≫
-      (Functor.associator _ _ _).symm ≪≫
-      Functor.isoWhiskerRight (boundedConstructibleLowerShriekOfCompactificationCompatibility ℓ c) _ ≪≫
-      Functor.associator _ _ _ ≪≫
-      Functor.isoWhiskerLeft _ (purityFieldCompactificationAmbientExchange ℓ f f' c c' hi hg) ≪≫
-      (Functor.associator _ _ _).symm ≪≫
-      Functor.isoWhiskerRight (purityFieldPullbackCompatibility ℓ (πY := πX)).symm _ ≪≫
-      Functor.associator _ _ _ ≪≫
-      Functor.isoWhiskerLeft _
-        (boundedConstructibleLowerShriekOfCompactificationCompatibility ℓ c').symm ≪≫
-      (Functor.associator _ _ _).symm)
+  ObjectProperty.preimageIso_liftSquareWithComparisons
+    (boundedConstructibleLowerShriekOfCompactificationCompatibility ℓ c)
+    (boundedConstructibleLowerShriekOfCompactificationCompatibility ℓ c')
+    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ πX K.obj K.property)
+    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ πY K.obj K.property)
+    (purityFieldCompactificationAmbientExchange ℓ f f' c c' hi hg)
 
 /-- Forgetting the bounded restriction gives the specified ambient exchange, with
 the two lower-shriek inclusion comparisons made explicit. -/
@@ -92,16 +86,14 @@ lemma purityFieldCompactificationExchange_hom_app_hom
       (purityFieldCompactificationAmbientExchange ℓ f f' c c' hi hg).hom.app K.obj ≫
       (boundedConstructibleLowerShriekOfCompactificationCompatibility ℓ c').inv.app
         ((boundedConstructibleUpperStarOfMap ℓ πX).obj K) := by
-  simp only [purityFieldCompactificationExchange,
-    Functor.FullyFaithful.preimageIso_hom, Functor.FullyFaithful.preimage_comp,
-    Functor.FullyFaithful.whiskeringRight_preimage_app, Iso.trans_hom, Iso.symm_hom,
-    NatTrans.comp_app, Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
-    Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    Functor.associator_hom_app, Functor.associator_inv_app,
-    purityFieldPullbackCompatibility, ObjectProperty.liftCompιIso,
-    Iso.refl_hom, Iso.refl_inv, NatTrans.id_app, Functor.map_id,
-    ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.homMk_hom,
-    Category.comp_id, Category.id_comp, Category.assoc]
+  have he := ObjectProperty.preimageIso_liftSquareWithComparisons_hom_app_hom
+    (boundedConstructibleLowerShriekOfCompactificationCompatibility ℓ c)
+    (boundedConstructibleLowerShriekOfCompactificationCompatibility ℓ c')
+    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ πX K.obj K.property)
+    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ πY K.obj K.property)
+    (purityFieldCompactificationAmbientExchange ℓ f f' c c' hi hg) K
+  dsimp only [purityFieldCompactificationExchange]
+  exact_mod_proofs he
 
 /-- The same cross-field exchange for the lower-shriek functors chosen by Nagata. -/
 noncomputable def purityFieldLowerShriekExchange :
