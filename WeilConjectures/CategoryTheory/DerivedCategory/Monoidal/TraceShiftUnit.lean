@@ -68,7 +68,7 @@ theorem trace_shiftFunctor_map_singleFunctor_map (n : ℤ) (r : 𝟙_ A ⟶ 𝟙
     letI := braidedCategory' A
     trace ((shiftFunctor (DerivedCategory A) n).map ((singleFunctor A 0).map r)) =
       (quotientCompQhIso A).hom.app (𝟙_ (CochainComplex A ℤ)) ≫
-        (n.negOnePow : ℤ) • (singleFunctor A 0).map r ≫
+        ((n.negOnePow : ℤ) • (singleFunctor A 0).map r) ≫
           (quotientCompQhIso A).inv.app (𝟙_ (CochainComplex A ℤ)) := by
   let := braidedCategory' A
   let P := (HomologicalComplex.single A (.up ℤ) (-n)).obj (𝟙_ A)
