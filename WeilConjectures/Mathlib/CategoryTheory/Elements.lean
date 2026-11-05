@@ -39,13 +39,13 @@ namespace Functor.Elements
 
 /-- The category of elements of `F ⋙ uliftFunctor.{w', w}` is equivalent to the category of
 elements of `F`. -/
-@[simps]
+@[simps!]
 def uliftEquivalence (F : C ⥤ Type w) :
     (F ⋙ uliftFunctor.{w', w}).Elements ≌ F.Elements where
-  functor.obj x := ⟨x.1, x.2.down⟩
-  functor.map f := ⟨f.1, congrArg ULift.down f.2⟩
-  inverse.obj x := ⟨x.1, ULift.up x.2⟩
-  inverse.map f := ⟨f.1, congrArg ULift.up f.2⟩
+  functor.obj x := ⟨x.val.down⟩
+  functor.map f := ⟨f.hom, congrArg ULift.down f.map_val⟩
+  inverse.obj x := ⟨ULift.up x.val⟩
+  inverse.map f := ⟨f.hom, congrArg ULift.up f.map_val⟩
   unitIso := Iso.refl _
   counitIso := Iso.refl _
 

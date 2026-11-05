@@ -390,7 +390,7 @@ theorem exists_ne_zero_forall_connectedSpace_quotient {k A B : Type u} [Field k]
   set w : Fin M → B := fun i ↦ algebraMap A B (v i)
   have h2 (q : Ideal B) (hq : q.IsPrime) (hwq : ∀ i, w i ∈ q) : 2 ≤ q.height := by
     have : (q.under A).IsMaximal := hSmax _ (hbase _ (Ideal.IsPrime.under A q) hwq)
-    have : q.IsMaximal := Ideal.isMaximal_of_isIntegral_of_isMaximal_comap q this
+    have : q.IsMaximal := Ideal.isMaximal_of_isIntegral_of_isMaximal_under q this
     have h := Ideal.ringKrullDim_le_height_of_isMaximal k q
     rw [hdim] at h
     exact WithBot.coe_le_coe.mp (hA.trans h)

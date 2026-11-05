@@ -5,11 +5,12 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.MonoidalCompat
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Pushforward
 public import Mathlib.Algebra.Category.Ring.Limits
 public import Mathlib.CategoryTheory.Comma.Over.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Basic
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.MonoidalCompat
 
 /-!
 # The internal hom of presheaves of modules
@@ -50,6 +51,8 @@ If `N` is a sheaf, then so is `homObj M N`: this is `PresheafOfModules.isSheaf_h
 -/
 
 @[expose] public section
+
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false
 
 universe v v₁ v₂ u₁ u₂ u
 

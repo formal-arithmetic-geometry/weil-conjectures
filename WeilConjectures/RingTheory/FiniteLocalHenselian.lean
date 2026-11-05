@@ -218,7 +218,7 @@ theorem finite_local_henselian
     have : Module.Finite A (D i) := Module.Finite.of_surjective φₐ.toLinearMap hφ
     have hmax : ((IsLocalRing.maximalIdeal (D i)).comap
         (algebraMap A (D i))).IsMaximal :=
-      Ideal.isMaximal_comap_of_isIntegral_of_isMaximal _
+      Ideal.isMaximal_under_of_isIntegral_of_isMaximal _
     have hcontract : (IsLocalRing.maximalIdeal (D i)).comap
         (algebraMap A (D i)) = IsLocalRing.maximalIdeal A :=
       IsLocalRing.eq_maximalIdeal hmax

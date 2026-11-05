@@ -193,7 +193,7 @@ lemma cofanOfIsZero_inj (j : J) :
   have hi : ι j ∈ Set.range ι := ⟨j, rfl⟩
   rw [dite_eq_left hi]
   apply Sigma.eqToHom_comp_ι (X ∘ ι)
-  exact (hι hi.choose_spec).symm
+  exact hι hi.choose_spec
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in

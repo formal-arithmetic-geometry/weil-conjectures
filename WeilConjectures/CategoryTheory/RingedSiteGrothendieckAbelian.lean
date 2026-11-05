@@ -14,6 +14,7 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 public import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
 import Mathlib.Algebra.DirectSum.Finsupp
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.MonoidalCompat
 
 /-!
 # Sheaves of modules on a small ringed site

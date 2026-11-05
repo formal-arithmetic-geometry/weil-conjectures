@@ -86,10 +86,10 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 instance : (leftDerived₂ F L₁ L₂ W₁ W₂).IsLeftDerivedFunctor₂
     (leftDerivedCounit₂ F L₁ L₂ W₁ W₂) W₁ W₂ := by
-  refine (isLeftDerivedFunctor_iff_of_iso _ _
-    ((uncurry.obj F).totalLeftDerivedCounit (L₁.prod L₂) (W₁.prod W₂)) _ _
-    (currying.counitIso.symm.app
-      (((uncurry.obj F).totalLeftDerived (L₁.prod L₂) (W₁.prod W₂)))) ?_).1 inferInstance
+  refine (isLeftDerivedFunctor_iff_of_iso _
+    ((uncurry.obj F).totalLeftDerivedCounit (L₁.prod L₂) (W₁.prod W₂)) _
+    (currying.counitIso.app
+      (((uncurry.obj F).totalLeftDerived (L₁.prod L₂) (W₁.prod W₂)))) ?_).2 inferInstance
   ext
   simp [leftDerivedCounit₂]
 

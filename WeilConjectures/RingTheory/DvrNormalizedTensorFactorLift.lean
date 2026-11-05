@@ -255,7 +255,7 @@ theorem dvr_normalized_tensor_factor_lift
       rw [IsScalarTower.algebraMap_eq A S S₁, ← Ideal.comap_comap, hcomap]
       exact hclosed
     have hmax : (Q₁.comap (algebraMap A₁ S₁)).IsMaximal :=
-      Ideal.isMaximal_of_isIntegral_of_isMaximal_comap (R := A)
+      Ideal.isMaximal_of_isIntegral_of_isMaximal_under (R := A)
         (Q₁.comap (algebraMap A₁ S₁)) (by
           rw [Ideal.comap_comap, ← IsScalarTower.algebraMap_eq A A₁ S₁, hclosedA]
           infer_instance)

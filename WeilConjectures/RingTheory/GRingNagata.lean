@@ -115,7 +115,7 @@ theorem isN1_of_finite_of_isGRing (A : Type u) (B : Type v) (L : Type*) [CommRin
   refine isN1_of_finite_maximal B L ?_ fun m _ ↦ ?_
   · refine (Algebra.QuasiFinite.finite_primesOver (R := A) (S := B) (maximalIdeal A)).subset ?_
     intro m (hm : m.IsMaximal)
-    have : (m.under A).IsMaximal := Ideal.isMaximal_comap_of_isIntegral_of_isMaximal m
+    have : (m.under A).IsMaximal := Ideal.isMaximal_under_of_isIntegral_of_isMaximal m
     exact ⟨hm.isPrime, ⟨(IsLocalRing.eq_maximalIdeal this).symm⟩⟩
   · have := IsLocalization.isNoetherianRing m.primeCompl (Localization.AtPrime m) inferInstance
     exact isN1_of_isAnalyticallyUnramified _ _

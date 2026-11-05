@@ -264,7 +264,7 @@ theorem exists_eq_unit_mul_pow_mul_finrank_residueField {π : R} (hπ : Irreduci
       uniq := fun q ↦ by
         obtain ⟨q, hq, hlo⟩ := q
         refine Subtype.ext (IsLocalRing.eq_maximalIdeal ?_)
-        refine Ideal.isMaximal_of_isIntegral_of_isMaximal_comap (R := R) q ?_
+        refine Ideal.isMaximal_of_isIntegral_of_isMaximal_under (R := R) q ?_
         rw [← Ideal.under_def, ← Ideal.over_def q (maximalIdeal R)]
         infer_instance }
   have hsum := Ideal.sum_ramification_inertia_eq_finrank (maximalIdeal R) B

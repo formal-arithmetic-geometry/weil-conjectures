@@ -8,6 +8,7 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings
 public import Mathlib.Topology.Sheaves.Sheaf
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.MonoidalCompat
 
 /-!
 # Change of rings for presheaves of modules
@@ -16,6 +17,8 @@ Source: Stacks Project, Sheaves, Tag 006R (blueprint: lem-pc-presheaf-change-of-
 -/
 
 @[expose] public section
+
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false
 
 universe u v w
 

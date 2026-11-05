@@ -27,6 +27,8 @@ Source: Stacks Project, Tags 0946, 03DA, 03CN and 00WN.
 
 @[expose] public section
 
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false
+
 universe u
 
 open CategoryTheory CategoryTheory.Limits Opposite

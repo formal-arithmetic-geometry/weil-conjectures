@@ -146,7 +146,7 @@ variable [IsLocalRing R]
 theorem toStrict_mem_of_isMaximal [Module.Finite (R ⧸ Ideal.span {g}) (strictTransform g x y)]
     (N : Ideal (strictTransform g x y)) [N.IsMaximal] {r : R} (hr : r ∈ maximalIdeal R) :
     toStrict g x y r ∈ N := by
-  have h1 := Ideal.isMaximal_comap_of_isIntegral_of_isMaximal (R := R ⧸ Ideal.span {g}) N
+  have h1 := Ideal.isMaximal_under_of_isIntegral_of_isMaximal (R := R ⧸ Ideal.span {g}) N
   have h2 : (Ideal.comap (Ideal.Quotient.mk (Ideal.span {g}))
       (N.comap (algebraMap (R ⧸ Ideal.span {g}) (strictTransform g x y)))).IsMaximal :=
     Ideal.comap_isMaximal_of_surjective _ Ideal.Quotient.mk_surjective

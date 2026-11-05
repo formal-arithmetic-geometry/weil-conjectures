@@ -100,7 +100,7 @@ theorem exists_finite_away_maximal_localization
   refine ⟨inferInstance, hi, hf, ?_⟩
   intro q hq
   have hqA : (q.comap (algebraMap A B)).IsMaximal :=
-    Ideal.isMaximal_comap_of_isIntegral_of_isMaximal q
+    Ideal.isMaximal_under_of_isIntegral_of_isMaximal q
   have hqAeq : q.comap (algebraMap A B) = IsLocalRing.maximalIdeal A :=
     IsLocalRing.eq_maximalIdeal hqA
   have hcomp : (algebraMap T B).comp h = (algebraMap A B).comp (algebraMap S A) := by
@@ -118,6 +118,6 @@ theorem exists_finite_away_maximal_localization
   have hJmax : J.IsMaximal :=
     IsLocalization.isMaximal_of_isMaximal_under (M := Submonoid.powers s)
   have : (q.comap (algebraMap T B)).IsPrime := Ideal.comap_isPrime _ q
-  exact ⟨Ideal.isMaximal_of_isIntegral_of_isMaximal_comap g hfin.to_isIntegral
+  exact ⟨Ideal.isMaximal_of_isIntegral_of_isMaximal_under g hfin.to_isIntegral
     (q.comap (algebraMap T B)) hJmax, hmem⟩
 

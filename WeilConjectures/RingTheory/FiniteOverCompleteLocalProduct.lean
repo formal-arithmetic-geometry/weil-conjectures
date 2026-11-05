@@ -115,7 +115,7 @@ theorem finite_over_complete_local_product
   have hfin : Finite {M : Ideal S // M.IsMaximal} := by
     let f : {M : Ideal S // M.IsMaximal} → Q := fun M ↦ by
       have : M.1.IsMaximal := M.2
-      have hcom := Ideal.isMaximal_comap_of_isIntegral_of_isMaximal (R := R) M.1
+      have hcom := Ideal.isMaximal_under_of_isIntegral_of_isMaximal (R := R) M.1
       exact ⟨M.1, M.2.isPrime, ⟨(IsLocalRing.eq_maximalIdeal hcom).symm⟩⟩
     exact Finite.of_injective f (by
       intro M N h
@@ -162,7 +162,7 @@ theorem finite_over_complete_local_product
     · apply (IsAdicComplete.congr_ringEquiv (IsLocalRing.maximalIdeal S) e₀).mp
       simpa using hDC q₀
     · exact IsLocalRing.eq_maximalIdeal
-        (Ideal.isMaximal_comap_of_isIntegral_of_isMaximal (R := R)
+        (Ideal.isMaximal_under_of_isIntegral_of_isMaximal (R := R)
           (IsLocalRing.maximalIdeal S))
     · intro M hM hcom
       have : M.IsPrime := hM
@@ -170,6 +170,6 @@ theorem finite_over_complete_local_product
         rw [hcom]
         infer_instance
       exact IsLocalRing.eq_maximalIdeal
-        (Ideal.isMaximal_of_isIntegral_of_isMaximal_comap M hmax)
+        (Ideal.isMaximal_of_isIntegral_of_isMaximal_under M hmax)
 
 end Algebra

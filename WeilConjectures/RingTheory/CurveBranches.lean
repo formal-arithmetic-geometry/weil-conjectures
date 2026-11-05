@@ -240,7 +240,7 @@ lemma eq_maximalIdeal_branch_of_ne_bot (Q : Ideal (branch R p)) [Q.IsPrime] (hQ 
   have : (Q.comap (algebraMap (R ⧸ p.1) (branch R p))).IsMaximal := by
     rw [hcm]
     exact maximalIdeal.isMaximal _
-  have := Ideal.isMaximal_of_isIntegral_of_isMaximal_comap Q this
+  have := Ideal.isMaximal_of_isIntegral_of_isMaximal_under Q this
   exact IsLocalRing.eq_maximalIdeal this
 
 variable (hfin : Module.Finite (R ⧸ p.1) (branch R p))

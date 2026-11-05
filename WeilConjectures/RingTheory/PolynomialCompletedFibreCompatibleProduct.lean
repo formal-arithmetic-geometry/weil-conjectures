@@ -118,7 +118,7 @@ theorem completed_fibre_compatible_product
           rw [← Ideal.LiesOver.over (P := t.1) (p := q)]
           exact hq
     apply IsLocalRing.eq_maximalIdeal
-    apply Ideal.isMaximal_of_isIntegral_of_isMaximal_comap (R := A)
+    apply Ideal.isMaximal_of_isIntegral_of_isMaximal_under (R := A)
     rw [hcomp]
     infer_instance
   let : Algebra (Polynomial A) L :=

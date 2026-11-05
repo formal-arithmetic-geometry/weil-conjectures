@@ -312,7 +312,7 @@ lemma exists_smul_eq_smul_baseChange [Algebra.IsIntegral k k']
       have := hx.mul hb
       rwa [Algebra.TensorProduct.tmul_mul_tmul, mul_one, one_mul] at this⟩
   obtain ⟨ω₀, s, hs, h⟩ := hsm (q.comap (algebraMap B (k' ⊗[k] B)))
-    (Ideal.isMaximal_comap_of_isIntegral_of_isMaximal q)
+    (Ideal.isMaximal_under_of_isIntegral_of_isMaximal q)
   refine ⟨KaehlerDifferential.map k k' B (k' ⊗[k] B) ω₀, algebraMap B _ s, hs, fun ω ↦ ?_⟩
   obtain ⟨z, rfl⟩ := (tensorKaehlerEquivBase k k' B (k' ⊗[k] B)).surjective ω
   induction z with

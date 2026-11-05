@@ -19,6 +19,8 @@ Source: Stacks Project, Constructions, Section 01M3 and Lemmas 01M4, 01M7 and 01
 
 @[expose] public section
 
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false
+
 universe u
 
 open CategoryTheory Opposite TopologicalSpace

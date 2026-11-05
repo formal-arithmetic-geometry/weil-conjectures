@@ -61,7 +61,7 @@ lemma eq_of_isIdempotentElem (p : Ideal R) [p.IsPrime] (L : Type u) [Field L]
     IsLocalRing.of_henselianLocalRing_of_isIntegral_of_isDomain (R := R)
   have hlochom : IsLocalHom (algebraMap R R') :=
     ((IsLocalRing.local_hom_TFAE (algebraMap R R')).out 0 4).mpr
-      (IsLocalRing.eq_maximalIdeal (Ideal.isMaximal_comap_of_isIntegral_of_isMaximal _))
+      (IsLocalRing.eq_maximalIdeal (Ideal.isMaximal_under_of_isIntegral_of_isMaximal _))
   have : Algebra.IsAlgebraic (IsLocalRing.ResidueField R) (IsLocalRing.ResidueField R') :=
     Algebra.IsAlgebraic.residueField_of_isIntegral
   -- Hence `R' ⊗[R] S` is a local ring.

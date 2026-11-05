@@ -83,7 +83,7 @@ section BaseChange
 
 variable {R' : Type*} [CommRing R'] [Algebra R R'] (q : Ideal R') [q.IsPrime] [q.LiesOver p]
   [Algebra (Localization.AtPrime p) (Localization.AtPrime q)]
-  [IsScalarTower p q]
+  [IsScalarTower R (Localization.AtPrime p) (Localization.AtPrime q)]
 
 /-- Fibre degrees are invariant under base change: the fibre degree of `R' ⊗[R] S` at a prime
 `q` of `R'` lying over `p` is the fibre degree of `S` at `p`. -/

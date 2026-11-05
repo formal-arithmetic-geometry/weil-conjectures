@@ -8,7 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback
-public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.MonoidalCompat
 public import Mathlib.LinearAlgebra.Basis.VectorSpace
 
 /-! # Constant vector-space coefficients extended to the structure presheaf

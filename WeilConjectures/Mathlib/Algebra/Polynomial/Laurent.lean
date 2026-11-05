@@ -31,7 +31,7 @@ variable {R : Type*} [Semiring R]
 @[simp]
 lemma coeff_toLaurent_natCast (p : R[X]) (j : ℕ) : (toLaurent p).coeff j = p.coeff j := by
   rw [coeff_toLaurent]
-  exact Finsupp.mapDomain_apply Nat.castEmbedding.injective _ j
+  exact Finsupp.mapDomain_apply_of_injective Nat.castEmbedding.injective _ j
 
 lemma coeff_toLaurent_of_neg (p : R[X]) {j : ℤ} (hj : j < 0) : (toLaurent p).coeff j = 0 := by
   rw [coeff_toLaurent]

@@ -326,7 +326,7 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits
 import WeilConjectures.AlgebraicGeometry.GlobalSectionModuleOplaxNormalized
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.PushforwardZeroMonoidal
 import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.ScalarExtensionMonoidal
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.MonoidalCompat
 import Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction
 import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
 import WeilConjectures.AlgebraicGeometry.GlobalSectionLocalizationFactor
