@@ -121,6 +121,15 @@ private theorem sectionMap_tmul (U : Cᵒᵖ) (s : S.obj.obj U) (x : M.val.obj U
       (show (changeOfRingsPresheaf g M).obj U from
         q.hom.app U s ⊗ₜ[R.obj.obj U,(g.hom.app U).hom] x) := rfl
 
+private local instance {A : Sheaf J CommRingCat.{r}}
+    {N : SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A)}
+    {U V : Cᵒᵖ} (i : U ⟶ V) :
+    Module (A.obj.obj V)
+      ((ModuleCat.restrictScalars
+        (((sheafCompose J (forget₂ CommRingCat RingCat)).obj A).obj.map i).hom).obj
+          (N.val.obj V)) :=
+  inferInstanceAs (Module (A.obj.obj V) (N.val.obj V))
+
 private theorem restriction_tmul {A B : Sheaf J CommRingCat.{r}} (c : A ⟶ B)
     (N : SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A))
     {U V : Cᵒᵖ} (i : U ⟶ V) (s : B.obj.obj U) (x : N.val.obj U) :
