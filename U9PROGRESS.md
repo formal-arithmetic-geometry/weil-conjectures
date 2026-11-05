@@ -106,15 +106,28 @@
 - Completion marker: `/home/ubuntu/u9/state/BZ311.DONE`.
 - This final commit changes only progress documentation; Lean sources match the green build.
 
-# BZ404 in progress
+# BZ404 complete
 
 - Branch: `u9/BZ404`; starting commit: `98654719b`.
-- Proof-local χ now uses the reversed Mathlib composition isomorphism.
-- The proof-only build eliminated both proof errors; the remaining error was the
-  mechanical sweep's misplaced `.symm` in the `hf` hypothesis.
-- The user instructed continuation after the exact statement-syntax proposal.
-  That patch is now applied, preserving the intended map.
-- Assigned module passed `ucheck-bump`: rc=0, failed=0, 3879 jobs at `5fc97c7523`.
-- Next: both direct importers, then DONE.
-- Fix notes and diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ404.md`.
-- No local Lean/Lake execution, proof placeholders, or limit increases.
+- Assigned module: `WeilConjectures.CategoryTheory.DerivedCategory.ProperBaseChange.PseudoCoherentNormalizedAlgebraTowerSupplement`.
+- The assigned module passed `ucheck-bump`: rc=0, failed=0, 3879 jobs at `5fc97c7523`.
+- Final Lean source, including line wrapping, rebuilt successfully in 30 seconds at
+  `162e18db10` during the downstream check. This completion commit changes only documentation.
+- The proof-local comparison now uses Mathlib's reversed composition isomorphism.
+- The user instructed continuation after the exact `hf` statement-syntax proposal;
+  the misplaced `.symm` was moved from the function to the resulting isomorphism.
+  All other statement text, assumptions, conclusions, and docstrings are unchanged.
+- Both direct importers were attempted and skipped for outside-unit dependency failures,
+  as the brief directs. No downstream modules are claimed green and no outside-unit
+  sources were edited. The blocked batches were stopped after their failures were confirmed.
+- FinitePerfectAdicTowerData is blocked by universe-constraint errors in
+  `ProEtaleFinitelyPresentedLocalModelsComparisonSupplement`.
+- LisseTowerAlgebraicDerivedPresentation is blocked by missing instances in
+  `ProEtaleOperationsCanonicalAdjunctionSupplement` and other outside-unit errors.
+- Full logs: `/home/ubuntu/u9/bz/BUILD-BZ404-unit-full.log`,
+  `/home/ubuntu/u9/bz/BUILD-BZ404-downstream-full.log`, and
+  `/home/ubuntu/u9/bz/BUILD-BZ404-lisse-full.log`.
+- Fix patterns and exact diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ404.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ404-contract-audit.txt`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or limit increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ404.DONE`.
