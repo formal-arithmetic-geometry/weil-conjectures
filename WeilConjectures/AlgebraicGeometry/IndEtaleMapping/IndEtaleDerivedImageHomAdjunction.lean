@@ -32,7 +32,11 @@ variable {X : Scheme.{u}} (K M : DerivedCategoryModule A X)
 /-- Naturality of a conjugate global-Hom comparison, in abstract form. All functors are
 variables, so that the coherence computation happens with opaque functors.
 The hypotheses are the counit normalizations of the comparisons, naturality of the
-target counits, and compatibility of the left-adjoint comparisons with composition. -/
+target counits, and compatibility of the left-adjoint comparisons with composition.
+The coefficient variance `γ` of the target global Hom is a variable: when the lemma is
+applied, `γ` matches the goal syntactically, so the kernel never compares `NatTrans.app` of
+two definitionally equal but distinct transformations, which it does by unfolding the
+derived functors. -/
 private theorem homIso_naturality_of_counit
     {B DX DS DT : Type*} [Category* B] [Category* DX] [Category* DS] [Category* DT]
     [MonoidalCategory DX] [MonoidalCategory DS] [MonoidalCategory DT]
@@ -50,6 +54,8 @@ private theorem homIso_naturality_of_counit
     (iS : (GX.obj (op K)).obj (ss.obj (ps.obj M)) ⟶ (GS.obj (op (ps.obj K))).obj (ps.obj M))
     (R : (GS.obj (op (ps.obj K))).obj (ps.obj M) ⟶
       (GT.obj (op (pq.obj (ps.obj K)))).obj (pq.obj (ps.obj M)))
+    (γ : GT.obj (op ((ps ⋙ pq).obj K)) ⟶ GT.obj (op (pt.obj K)))
+    (hγ : γ = GT.map (c.hom.app K).op)
     (hT : (cT ⋙ tensorLeft (pt.obj K)).map iT ≫ (aT (pt.obj K)).counit.app (pt.obj M) =
       τT.hom.app ((GX.obj (op K)).obj (st.obj (pt.obj M))) ≫
         ((aX K).comp adjT).counit.app (pt.obj M))
@@ -68,8 +74,9 @@ private theorem homIso_naturality_of_counit
       (c.hom.app K ▷ cT.obj Q) ≫ τq.hom.app Q ≫ pq.map (τS.hom.app Q)) :
     (GX.obj (op K)).map ((adjT.homEquiv _ _) (c.hom.app (ss.obj (ps.obj M)) ≫
         pq.map (adjS.counit.app (ps.obj M)) ≫ c.inv.app M)) ≫ iT =
-      iS ≫ R ≫ (GT.map (c.hom.app K).op).app (pq.obj (ps.obj M)) ≫
+      iS ≫ R ≫ γ.app (pq.obj (ps.obj M)) ≫
         (GT.obj (op (pt.obj K))).map (c.inv.app M) := by
+  subst hγ
   let Q₀ := (GX.obj (op K)).obj (ss.obj (ps.obj M))
   let W := τT.hom.app Q₀ ≫ c.hom.app (K ⊗ cX.obj Q₀) ≫
     pq.map (ps.map ((aX K).counit.app (ss.obj (ps.obj M)))) ≫
@@ -104,8 +111,6 @@ private theorem homIso_naturality_of_counit
   apply ((aT (pt.obj K)).homEquiv _ _).symm.injective
   rw [Adjunction.homEquiv_counit, Adjunction.homEquiv_counit, hL, hR']
 
-set_option maxHeartbeats 400000 in
--- The kernel compares the abstract instance with the concrete derived functors.
 /-- The global-Hom isomorphisms of derived adjunction are compatible with the
 specified pullback-of-evaluation transition maps.
 
@@ -149,12 +154,13 @@ theorem imageHomIso_naturality {T S : Over X} (f : T ⟶ S) :
     (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) T.hom)
     (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) f.left S.hom T.hom f.w.symm) K M
     (imageTensorIso A K T) (imageTensorIso A K S)
-    (imageTensorIso A ((ExternalRHom.pull A S.hom).obj K) (Over.mk f.left))
+    (restrictTensorIso A f.left ((ExternalRHom.pull A S.hom).obj K))
     (imageHomIso A M K T).hom (imageHomIso A M K S).hom
     (ExternalRHom.restriction A f.left
       ((ExternalRHom.pull A S.hom).obj K) ((ExternalRHom.pull A S.hom).obj M))
+    _ rfl
     (imageHomIso_counit A K M T) (imageHomIso_counit A K M S)
-    (imageRestriction_counit A _ _ (Over.mk f.left))
+    (restriction_counit A f.left _ _)
     (fun f g ↦ imageGlobalHom_counit_naturality A f g)
     (imageTensorIso_hom_app_comp A K f)
 

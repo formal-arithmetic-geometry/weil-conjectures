@@ -57,7 +57,9 @@ theorem imageHomIso_counit (T : Over X) :
     (ExternalRHom.globalAdjunction A ((ExternalRHom.pull A T.hom).obj K))
     (imageTensorIso A K T).hom ((ExternalRHom.pull A T.hom).obj M)
 
-private theorem pulledEvaluation_left
+/-- The pulled-back evaluation of a braided transpose, after one braiding, is the evaluation
+pushed through the tensor constraint of a braided lax monoidal functor. -/
+theorem pulledEvaluation_left
     {C D B : Type*} [Category* C] [MonoidalCategory C] [BraidedCategory C]
     [Category* D] [MonoidalCategory D] [BraidedCategory D] [Category* B]
     (F : C ⥤ D) [F.LaxMonoidal] (c : B ⥤ C) (d : B ⥤ D)
