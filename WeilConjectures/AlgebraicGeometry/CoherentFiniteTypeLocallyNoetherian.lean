@@ -159,23 +159,25 @@ theorem isCoherent_iff_isQuasicoherent_and_isFiniteType
     classical
     have : F.IsFiniteType := h.1
     obtain ⟨q, hq⟩ := SheafOfModules.IsFiniteType.exists_localGeneratorsData F
-    #count_heartbeats have hfp (i : q.I) : (F.over (q.X i)).IsFinitePresentation := by
-      have := hq.isFiniteType i
-      let _ := Fintype.ofFinite (q.generators i).I
-      let n := Fintype.card (q.generators i).I
-      let e := (SheafOfModules.freeFunctor (R := X.ringCatSheaf.over (q.X i))).mapIso
-        ((Equiv.ulift.trans (Fintype.equivFin (q.generators i).I).symm).toIso)
-      let f := e.hom ≫ (q.generators i).π
-      have : Epi f := inferInstanceAs (Epi (e.hom ≫ (q.generators i).π))
-      let G := SheafOfModules.GeneratingSections.ofEpiFree f
-      have : G.IsFiniteType := ⟨inferInstanceAs (Finite (ULift.{u} (Fin n)))⟩
-      have : (Limits.kernel G.π).IsFiniteType := by
-        simpa only [G, SheafOfModules.GeneratingSections.ofEpiFree_π]
-          using h.2 (q.X i) n f
-      exact isFinitePresentation_of_generators_kernel.{u} (F.over (q.X i)) G
-    #count_heartbeats have : F.IsFinitePresentation := by
-      exact @SheafOfModules.IsFinitePresentation.of_coversTop _ _ _ _ _ _ _ _
-        F q.I q.X q.coversTop hfp
+    #count_heartbeats
+      have hfp (i : q.I) : (F.over (q.X i)).IsFinitePresentation := by
+        have := hq.isFiniteType i
+        let _ := Fintype.ofFinite (q.generators i).I
+        let n := Fintype.card (q.generators i).I
+        let e := (SheafOfModules.freeFunctor (R := X.ringCatSheaf.over (q.X i))).mapIso
+          ((Equiv.ulift.trans (Fintype.equivFin (q.generators i).I).symm).toIso)
+        let f := e.hom ≫ (q.generators i).π
+        have : Epi f := inferInstanceAs (Epi (e.hom ≫ (q.generators i).π))
+        let G := SheafOfModules.GeneratingSections.ofEpiFree f
+        have : G.IsFiniteType := ⟨inferInstanceAs (Finite (ULift.{u} (Fin n)))⟩
+        have : (Limits.kernel G.π).IsFiniteType := by
+          simpa only [G, SheafOfModules.GeneratingSections.ofEpiFree_π]
+            using h.2 (q.X i) n f
+        exact isFinitePresentation_of_generators_kernel.{u} (F.over (q.X i)) G
+    #count_heartbeats
+      have : F.IsFinitePresentation := by
+        exact @SheafOfModules.IsFinitePresentation.of_coversTop _ _ _ _ _ _ _ _
+          F q.I q.X q.coversTop hfp
     exact ⟨inferInstance, h.1⟩
   · rintro ⟨hq, ht⟩
     change F.IsFiniteType ∧ ∀ (U : X.Opens) (n : ℕ)
@@ -183,14 +185,17 @@ theorem isCoherent_iff_isQuasicoherent_and_isFiniteType
         F.over U), (Limits.kernel f).IsFiniteType
     refine ⟨ht, ?_⟩
     intro U n f
-    #count_heartbeats have : (F.over U).IsQuasicoherent := SheafOfModules.isQuasicoherent_over F U
+    #count_heartbeats
+      have : (F.over U).IsQuasicoherent := SheafOfModules.isQuasicoherent_over F U
     let e := overEquiv (X := X) U
-    #count_heartbeats have hfree : (SheafOfModules.free
-        (R := (Scheme.Opens.toScheme (X := X) U).ringCatSheaf)
-        (ULift.{u} (Fin n))).IsFinitePresentation :=
-      isFinitePresentation_free.{u} _
-    #count_heartbeats have : (e.functor.obj (F.over U)).IsQuasicoherent :=
-      isQuasicoherent_overEquiv X U (F.over U)
+    #count_heartbeats
+      have hfree : (SheafOfModules.free
+          (R := (Scheme.Opens.toScheme (X := X) U).ringCatSheaf)
+          (ULift.{u} (Fin n))).IsFinitePresentation :=
+        isFinitePresentation_free.{u} _
+    #count_heartbeats
+      have : (e.functor.obj (F.over U)).IsQuasicoherent :=
+        isQuasicoherent_overEquiv X U (F.over U)
     have : (e.functor.obj
         (SheafOfModules.free (R := X.ringCatSheaf.over U)
           (ULift.{u} (Fin n)))).IsFinitePresentation :=
