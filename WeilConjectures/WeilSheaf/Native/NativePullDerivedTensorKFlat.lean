@@ -16,8 +16,9 @@ public import WeilConjectures.WeilSheaf.Native.NativeForgetBaseChange
 For a morphism `p : Z ⟶ Y` of `k₀`-schemes, the pullback of pro-étale Weil sheaves preserves
 native two-sided K-flat complexes
 (`AlgebraicGeometry.ProEtaleWeilSheaf.nativeIsKFlat_upperStar_mapHomologicalComplex`), so the
-hypothesis of `AlgebraicGeometry.ProEtaleWeilSheaf.native_pull_derived_tensor_of_kflat` holds: the
-balanced sheaf comparison `p^*(M ⊗ N) ≅ p^* M ⊗ p^* N` descends to a natural isomorphism
+hypothesis of
+`AlgebraicGeometry.ProEtaleWeilSheaf.exists_nativeOpenPull_nativeDerivedTensor_iso_of_nativeIsKFlat`
+holds: the balanced sheaf comparison `p^*(M ⊗ N) ≅ p^* M ⊗ p^* N` descends to a natural isomorphism
 `p^*(A ⊗ B) ≅ p^* A ⊗ p^* B` of native derived tensor products, for every `p`. This is the
 pullback/tensor comparison entering the proper projection formula (blueprint:
 `fix-prop-projection-formula`).
@@ -46,8 +47,8 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
 /-- Pullback of pro-étale Weil sheaves preserves native two-sided K-flat complexes: forgetting
 the Weil structure, native K-flatness is ordinary K-flatness
 (`AlgebraicGeometry.ProEtaleWeilSheaf.native_two_sided_kflat_forget`,
-`AlgebraicGeometry.ProEtaleWeilSheaf.native_two_sided_kflat_of_forget`), and the pullback of
-`ℓ`-adic sheaves along `p̄ : Z̄ ⟶ Ȳ` preserves ordinary K-flatness
+`AlgebraicGeometry.ProEtaleWeilSheaf.nativeIsKFlat_of_nativeOrdinaryKFlat_forget`), and the
+pullback of `ℓ`-adic sheaves along `p̄ : Z̄ ⟶ Ȳ` preserves ordinary K-flatness
 (`AlgebraicGeometry.ProEtale.nativeOrdinaryKFlat_adicUpperStar`). -/
 theorem nativeIsKFlat_upperStar_mapHomologicalComplex
     (T : CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ) (hT : NativeIsKFlat k₀ l Y T) :
@@ -62,7 +63,7 @@ theorem nativeIsKFlat_upperStar_mapHomologicalComplex
     (Functor.mapHomologicalComplexCompIso (forgetCompAdicUpperStarIso k₀ l p) (.up ℤ) ≪≫
       (Functor.mapHomologicalComplexCompIso
         (Iso.refl (upperStar k₀ l p ⋙ U Z)) (.up ℤ)).symm).app T
-  exact native_two_sided_kflat_of_forget k₀ l Z _
+  exact nativeIsKFlat_of_nativeOrdinaryKFlat_forget k₀ l Z _
     (nativeOrdinaryKFlat_of_iso e (ProEtale.nativeOrdinaryKFlat_adicUpperStar l
       (Scheme.Hom.geometricFiberMap p (comp_over p (Spec (CommRingCat.of k₀)))) _
       (native_two_sided_kflat_forget k₀ l Y T hT)))

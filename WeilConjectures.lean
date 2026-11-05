@@ -14686,6 +14686,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Trace
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.TraceShiftUnit
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.TraceSupertrace
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Unit
+public import WeilConjectures.CategoryTheory.DerivedCategory.NatIsoOfIsKInjective
 public import WeilConjectures.CategoryTheory.DerivedCategory.NatTransId
 public import WeilConjectures.CategoryTheory.DerivedCategory.NatTransIdTensor
 public import WeilConjectures.CategoryTheory.DerivedCategory.NativeDerivedMonoidalConstraintShifts
@@ -26061,6 +26062,7 @@ public import WeilConjectures.WeilSheaf.Native.NativeGeometricTensorComparison
 public import WeilConjectures.WeilSheaf.Native.NativeHomEvaluationSquareAllSources
 public import WeilConjectures.WeilSheaf.Native.NativeHomRepresentativeExistence
 public import WeilConjectures.WeilSheaf.Native.NativeHomRepresentativeUniqueness
+public import WeilConjectures.WeilSheaf.Native.NativeHomSingle
 public import WeilConjectures.WeilSheaf.Native.NativeImmersionHeartLocalization
 public import WeilConjectures.WeilSheaf.Native.NativeMapModLaxTensor
 public import WeilConjectures.WeilSheaf.Native.NativeNormalizedActionHom
