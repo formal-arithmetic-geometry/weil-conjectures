@@ -25,6 +25,14 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [NeZero (ℓ : k)]
   {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ] [IsCommMonObj Λ]
   (a : Profinite.continuousMapRingObj.{u} ℤ_[ℓ] ⟶ Λ) [IsMonHom a]
 
+/-- The canonical root pullback comparison, with invertibility of `ℓⁿ` inferred from
+invertibility of `ℓ` in the ground field. -/
+noncomputable def purityTateRootPullbackIso (n : ℕ) :
+    (g)^*[Ab.{u + 1}].obj (rootsOfUnitySheaf X (ℓ ^ n)) ≅
+      rootsOfUnitySheaf X' (ℓ ^ n) :=
+  have := NeZero.natCast_pow (R := k) ℓ n
+  upperStarRootsOfUnitySheafIsoOfInvertible g f (ℓ ^ n)
+
 /-- The canonical Tate pullback comparison after extension to any condensed coefficient
 ring, including the integral rings and their finite quotients. -/
 noncomputable def purityCoefficientTatePullbackIso :
@@ -53,8 +61,7 @@ lemma purityCoefficientTatePullbackIso_hom_comp_reduction
         (CondensedRing.freeFunctorCompUpperStarIso Λ g).hom.app
           (rootsOfUnitySheaf X (ℓ ^ n)) ≫
         (Mod.freeFunctor (condensedRingObj Λ X')).map
-          (upperStarRootsOfUnitySheafIsoOfInvertible g f (ℓ ^ n)).hom := by
-  have := NeZero.natCast_pow (R := k) ℓ n
+          (purityTateRootPullbackIso ℓ g f n).hom := by
   exact upperStarExtendScalarsLimitFreeTowerIso_hom_comp_projection
     (Profinite.continuousMapRingObj ℤ_[ℓ]) g
     (F := fun m ↦ rootsOfUnitySheaf X (ℓ ^ m))
