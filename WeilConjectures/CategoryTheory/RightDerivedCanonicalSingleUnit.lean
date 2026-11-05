@@ -43,12 +43,11 @@ theorem rightDerivedFunctorPlusUnit_canonical_single (X : B) (n : ℕ) :
     let e : (DerivedCategory.Plus.singleFunctor B n).obj X ≅
         DerivedCategory.Plus.Q.obj S :=
       DerivedCategory.Plus.ι.preimageIso
-        ((DerivedCategory.singleFunctorIsoCompQ B n).app X ≪≫
-          (DerivedCategory.quotientCompQhIso B).symm.app _)
+        ((DerivedCategory.singleFunctorIsoCompQ B n).app X)
     let GS := G.mapCochainComplexPlus.obj S
     GS.obj.homologyπ n ≫ (DerivedCategory.Plus.homologyFunctorObjQIso GS n).inv ≫
       (DerivedCategory.Plus.homologyFunctor C n).map
-        (G.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.quotient B).obj S)) ≫
+        (G.rightDerivedFunctorPlusUnit.app S) ≫
       (DerivedCategory.Plus.homologyFunctor C n).map (G.rightDerivedFunctorPlus.map e.inv) ≫
       (G.rightDerivedSingleDegreeComparison n).hom.app X =
     GS.obj.iCycles n ≫

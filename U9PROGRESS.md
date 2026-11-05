@@ -1,3 +1,18 @@
+# BZ264 in progress
+
+- Branch: `u9/BZ264`; starting commit: `c781553bf`.
+- Reread the brief and inherited progress notes after the user requested continuation.
+- The user instructed continuation after the exact three-site API proposal;
+  `BZ264-statement-api-proposal.patch` is applied to the assigned module and its
+  sole direct importer, `RightDerivedUnitSingleDegree`.
+- The canonical single comparison uses direct Q; both unit statements use the
+  cochain unit. The importer proof now uses cochain-unit naturality.
+- The original canonical-single proof is unchanged. All binders, assumptions,
+  and existing docstrings are unchanged.
+- Next: remote ucheck-bump on both modules, then check one more importer layer.
+- Patterns and full build logs: `/home/ubuntu/u9/bz/FIXES-BZ264.md`.
+- No local Lean/Lake, forbidden proof shortcuts, or heartbeat changes.
+
 # BZ150 complete
 
 - Branch: `u9/BZ150`; starting commit: `80aeb4bf4`.
