@@ -26,7 +26,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 local instance {X : TopCat.{u}} (A : X.Sheaf CommRingCat.{u})
     (P : _root_.PresheafOfModules.{u}
       ((sheafCompose (Opens.grothendieckTopology X)
-        (forget₂ CommRingCat.{u} RingCat.{u})).obj A).obj) (V : (Opens X)ᵒᵖ) :
+        (forget₂ CommRingCat.{u} RingCat.{u})).obj A).obj)
+    (V : (TopologicalSpace.Opens X)ᵒᵖ) :
     Module (A.obj.obj V) (P.obj V) :=
   (P.obj V).isModule
 
