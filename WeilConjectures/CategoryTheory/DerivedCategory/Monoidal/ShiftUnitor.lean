@@ -8,7 +8,6 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
 public import WeilConjectures.CategoryTheory.Monoidal.ShiftProduct
 public import WeilConjectures.Mathlib.Algebra.Homology.BifunctorShift
-import Mathlib.Util.CountHeartbeats
 
 /-!
 # The unitors of the derived tensor product commute with the shifts
@@ -54,7 +53,8 @@ noncomputable def unitKFlat : CochainComplex.KFlat C :=
 
 end TensorCommShift₂
 
-#count_heartbeats in
+set_option maxHeartbeats 400000 in
+-- Measured 310623 heartbeats on Lean v4.35.0-rc3 for the K-flat unit shift comparison.
 open TensorCommShift₂ in
 lemma leftUnitor_commShift (n : ℤ) :
     (((curriedTensor (DerivedCategory C)).obj (𝟙_ _)).commShiftIso n).hom.app (𝟙_ _) ≫
