@@ -29,8 +29,8 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgC
 noncomputable def purityExtendScalarsShiftIntegralTateIso
     (f : X ⟶ Spec (.of k)) (d : ℕ) (n : ℤ) :
     L(Mod.extendScalars (coefficientMap (Profinite.padicIntegersRingObjToPadicAlgCl ℓ E) X)).obj
-      (((DerivedCategory.singleFunctor _ 0).obj (integralTateTwistNat X ℓ E d))⟦n⟧) ≅
-      (tateTwistDerived X ℓ d)⟦n⟧ :=
+      (((DerivedCategory.singleFunctor _ 0).obj (integralTateTwistNat X ℓ E d)) ⟦n⟧) ≅
+      (tateTwistDerived X ℓ d) ⟦n⟧ :=
   (L(Mod.extendScalars
     (coefficientMap (Profinite.padicIntegersRingObjToPadicAlgCl ℓ E) X)).commShiftIso n).app _ ≪≫
       (shiftFunctor _ n).mapIso (purityExtendScalarsIntegralTateIso ℓ E f d)
@@ -40,7 +40,7 @@ canonical rational Tate datum under the nonflat coefficient/pullback comparison.
 lemma upperStarShiftIntegralTateTwistDerivedIso_hom_comp_rationalization
     (g : X' ⟶ X) (f : X ⟶ Spec (.of k)) (d : ℕ) (n : ℤ) :
     (derivedUpperStarExtendScalarsIso (Profinite.padicIntegersRingObjToPadicAlgCl ℓ E) g).inv.app
-          (((DerivedCategory.singleFunctor _ 0).obj (integralTateTwistNat X ℓ E d))⟦n⟧) ≫
+          (((DerivedCategory.singleFunctor _ 0).obj (integralTateTwistNat X ℓ E d)) ⟦n⟧) ≫
         L(Mod.extendScalars
           (coefficientMap (Profinite.padicIntegersRingObjToPadicAlgCl ℓ E) X')).map
           (upperStarShiftIntegralTateTwistDerivedIso ℓ E g f d n).hom ≫

@@ -510,3 +510,5 @@ K4-20261105T112453.log at43eb615a8 validates DerivedPullSingle16s and named homo
 2026-11-05 11:31 CST: K4-20261105T112901.log: FlatModuleComparison GREEN7.3s; DerivedDatumSquare GREEN8.6s. RationalDerived reached31s with only a namespace resolution error (ProEtale vs CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory); qualified it. Added generic coefficient-trivialization zsmul preservation and actual rational semilinear Frobenius scalar to test alongside Tate audit.
 
 2026-11-05 11:34 CST: K4-20261105T113144.log validates RationalTrivializationScalar4.5s: rational root trivialization along fσ equals q times that along f, with generic coefficient scalar transport. RationalDerived final normalization still mismatches tateTwistNat vs tateTwistDerived at a natural cast; explicitly unfold tateTwistDerived/tateTwist in the final comparison. No budgets raised.
+
+2026-11-05 11:36 CST: RationalDerived GREEN in K4-20261105T113247.log after explicit tateTwistDerived/tateTwist normalization. Shift helper failed only parsing at unspaced `)⟦`; fixed the notation spacing. RationalTrivializationScalar remains GREEN.
