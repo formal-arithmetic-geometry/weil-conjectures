@@ -17,13 +17,17 @@ Source: Stacks Project, Tags 01EQ and 01FD.
 
 @[expose] public section
 
-universe v
+universe v w
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
+
+local instance (R : Type v) [Ring R] (J : Type w) [Small.{v} J] :
+    HasLimitsOfShape (Discrete J) (ModuleCat.{v} R) :=
+  ModuleCat.hasLimitsOfShape
 
 /-- The functor applying Cech termwise to a module complex.
 Source: Stacks 01FD (blueprint: def-sc-cech-complex-augmentations). -/

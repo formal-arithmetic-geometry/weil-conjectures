@@ -15,11 +15,15 @@ Source: Stacks Project, Cohomology of Sheaves, Tag 01EQ, functoriality of alpha 
 
 @[expose] public section
 
-universe u
+universe u v
 
 open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 
 namespace AlgebraicGeometry.Scheme.Modules
+
+local instance (R : Type u) [Ring R] (J : Type v) [Small.{u} J] :
+    HasLimitsOfShape (Discrete J) (ModuleCat.{u} R) :=
+  ModuleCat.hasLimitsOfShape
 
 /-- Applying the Cech functor and totalization to a lift of a module morphism gives
 commuting squares with both comparison augmentations.

@@ -91,7 +91,7 @@ theorem moduleCech_resolution_column_zero {X : Scheme.{u}} {ι : Type u}
     infer_instance
   have (y : Fin (n + 1) → ι) : PreservesFiniteLimits (G y) := by
     dsimp [G]
-    infer_instance
+    exact comp_preservesFiniteLimits _ _
   have h (y : Fin (n + 1) → ι) :
       Nonempty (IsLimit (KernelFork.ofι ((G y).map (I.ι.f 0))
         (by
