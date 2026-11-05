@@ -95,6 +95,11 @@ theorem changeOfRingsTransitionMap_tmul (X : Cᵒᵖ) (s : R₂.obj.obj X) (m : 
 
 variable [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasWeakSheafify J AddCommGrpCat.{u}]
 
+local instance {X Y : Cᵒᵖ} (f : X ⟶ Y) :
+    Module (R₁.obj.obj Y)
+      ((ModuleCat.restrictScalars ((𝓡 R₁).obj.map f).hom).obj (M.val.obj Y)) :=
+  inferInstanceAs (Module (R₁.obj.obj Y) (M.val.obj Y))
+
 private theorem changeOfRingsMap_tmul' {X Y : Cᵒᵖ} (f : X ⟶ Y)
     (s : R₂.obj.obj X) (m : M.val.obj X) :
     changeOfRingsMap α M f (s ⊗ₜ[R₁.obj.obj X, (α.hom.app X).hom] m) =
