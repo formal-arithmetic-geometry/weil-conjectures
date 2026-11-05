@@ -53,7 +53,7 @@ lemma purity_freeFunctorCompUpperStarIso_comp
     NatTrans.id_app, CategoryTheory.Functor.map_id, Category.id_comp]
   have h := (lowerStarComp_hom_app_hom Λ f g N).symm
   dsimp only [Mod.forget, Functor.comp_obj] at h ⊢
-  trace_state
+  erw [Category.comp_id, Category.id_comp]
   exact_mod_proofs h
 
 end AlgebraicGeometry.ProEtale.CondensedRing

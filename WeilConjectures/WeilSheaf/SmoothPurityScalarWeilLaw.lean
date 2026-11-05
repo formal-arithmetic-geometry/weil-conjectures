@@ -45,14 +45,13 @@ theorem purityExtendPullbackIso_factor
       (s)^*⟦Λ⟧.map
           (purityExtendPullbackIso Λ p M N e).hom ≫
         (purityModuleFactorIso Λ p s hs).hom.app N := by
-  apply purity_scalarFactorSquare (Mod.forget (condensedRingObj Λ U))
+  apply purity_scalarFunctorFactorSquare (p)^*⟦Λ⟧
+    (Mod.forget (condensedRingObj Λ X) ⋙ (p)^*[Ab.{u + 1}])
+    (Mod.forget (condensedRingObj Λ U))
     (s)^*⟦Λ⟧ (s)^*[Ab.{u + 1}] (CondensedRing.upperStarForgetIso Λ s)
-    ((CondensedRing.upperStarForgetIso Λ p).app M)
-    ((CondensedRing.upperStarForgetIso Λ p).app N)
+    (CondensedRing.upperStarForgetIso Λ p) (purityModuleFactorIso Λ p s hs) M N
     ((purityAbelianFactorIso p s hs).hom.app M.X)
     ((purityAbelianFactorIso p s hs).hom.app N.X)
-    ((purityModuleFactorIso Λ p s hs).hom.app M)
-    ((purityModuleFactorIso Λ p s hs).hom.app N)
     e.hom.hom (purityExtendPullbackIso Λ p M N e).hom c
   · exact purity_upperStarForgetIso_factor_normalized Λ p s hs M
   · exact purity_upperStarForgetIso_factor_normalized Λ p s hs N

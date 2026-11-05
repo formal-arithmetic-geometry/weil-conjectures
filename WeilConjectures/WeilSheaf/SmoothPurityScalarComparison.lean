@@ -42,11 +42,11 @@ noncomputable def purityModuleFactorIso :
 /-- The factor square in the component spelling used by faithful transport. -/
 lemma purity_upperStarForgetIso_factor_normalized
     (M : Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
-    (s)^*[Ab.{u + 1}].map ((CondensedRing.upperStarForgetIso Λ p).app M).hom ≫
+    (s)^*[Ab.{u + 1}].map (CondensedRing.upperStarForgetIso Λ p).hom.app M ≫
         (CondensedRing.upperStarForgetIso Λ s).hom.app ((p)^*⟦Λ⟧.obj M) ≫
         (Mod.forget (condensedRingObj Λ U)).map ((purityModuleFactorIso Λ p s hs).hom.app M) =
       (purityAbelianFactorIso p s hs).hom.app M.X ≫
-        ((CondensedRing.upperStarForgetIso Λ p).app M).hom := by
+        (CondensedRing.upperStarForgetIso Λ p).hom.app M := by
   have h := CondensedRing.purity_upperStarForgetIso_factor_hom Λ p s hs M
   simp only [Iso.app_hom, Category.assoc, purityModuleFactorIso, purityAbelianFactorIso] at h ⊢
   dsimp only [Functor.comp_obj, Functor.comp_map, Mod.forget] at h ⊢
@@ -57,9 +57,9 @@ lemma purityExtendPullbackIso_forget
     (M N : Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
     (e : ((p)^*[Ab.{u + 1}].mapMod _).obj M ≅
       ((p)^*[Ab.{u + 1}].mapMod _).obj N) :
-    ((CondensedRing.upperStarForgetIso Λ p).app M).hom ≫
+    (CondensedRing.upperStarForgetIso Λ p).hom.app M ≫
         (Mod.forget (condensedRingObj Λ U)).map (purityExtendPullbackIso Λ p M N e).hom =
-      e.hom.hom ≫ ((CondensedRing.upperStarForgetIso Λ p).app N).hom := by
+      e.hom.hom ≫ (CondensedRing.upperStarForgetIso Λ p).hom.app N := by
   have h := purityExtendPullbackIso_unit Λ p M N e
   simp only [Iso.app_hom, CondensedRing.upperStarForgetIso_hom_app,
     Mod.forget, purityPullbackUnit] at h ⊢

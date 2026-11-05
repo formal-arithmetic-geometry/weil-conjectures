@@ -39,4 +39,24 @@ lemma purity_scalarFactorSquare
       (by simpa only [Category.assoc] using ha)
       (by simpa only [Category.assoc] using hb) hu hf he
 
+/-- Functor-indexed form, keeping the object comparisons at natural-transformation level. -/
+lemma purity_scalarFunctorFactorSquare
+    {C₀ C D : Type*} [Category C₀] [Category C] [Preadditive C]
+    [Category D] [Preadditive D]
+    (P : C₀ ⥤ C) (R : C₀ ⥤ D)
+    (F : C ⥤ D) [F.Faithful] [F.Additive]
+    (Q : C ⥤ C) (q : D ⥤ D) (τ : F ⋙ q ≅ Q ⋙ F) (u : R ≅ P ⋙ F)
+    (α : P ⋙ Q ≅ P) (M N : C₀)
+    (a : q.obj (R.obj M) ⟶ R.obj M) (b : q.obj (R.obj N) ⟶ R.obj N)
+    (e : R.obj M ⟶ R.obj N) (e' : P.obj M ⟶ P.obj N) (c : ℤ)
+    (ha : q.map (u.hom.app M) ≫ τ.hom.app (P.obj M) ≫ F.map (α.hom.app M) =
+      a ≫ u.hom.app M)
+    (hb : q.map (u.hom.app N) ≫ τ.hom.app (P.obj N) ≫ F.map (α.hom.app N) =
+      b ≫ u.hom.app N)
+    (hu : u.hom.app M ≫ F.map e' = e ≫ u.hom.app N)
+    (he : q.map e ≫ b = c • (a ≫ e)) :
+    c • (α.hom.app M ≫ e') = Q.map e' ≫ α.hom.app N := by
+  exact purity_scalarFactorSquare F Q q τ (u.app M) (u.app N) a b
+    (α.hom.app M) (α.hom.app N) e e' c ha hb hu he
+
 end CategoryTheory

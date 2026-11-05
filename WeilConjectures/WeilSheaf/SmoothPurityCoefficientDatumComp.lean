@@ -45,8 +45,9 @@ lemma purityCoefficientPullbackIso_geometric_comp
     Functor.mapIso_hom, Functor.map_comp, Category.assoc, Iso.hom_inv_id_app_assoc]
   rw [← Category.assoc, pullIso_hom_app_comp]
   simp only [Category.assoc]
-  rw [← Functor.map_comp_assoc, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id,
-    Category.id_comp, ← reassoc_of% hn, Iso.hom_inv_id_app_assoc,
+  rw [← Functor.map_comp_assoc, Iso.hom_inv_id_app]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp]
+  rw [← reassoc_of% hn, Iso.hom_inv_id_app_assoc,
     ← Functor.map_comp, ← Functor.map_comp, h]
 
 end AlgebraicGeometry.ProEtale.CondensedRing
