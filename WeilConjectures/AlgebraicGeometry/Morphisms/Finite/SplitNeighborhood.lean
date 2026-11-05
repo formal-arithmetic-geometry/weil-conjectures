@@ -78,7 +78,7 @@ lemma basePt_comp_etale_map_left {c c' : Nbhd y} (g : c ⟶ c') (t : GeometricFi
     basePt f c t ≫ (f.Etale.map g.val).left = basePt f c' t := by
   apply pullback.hom_ext
   · rw [Category.assoc, Hom.etale_map_left_comp_fst, basePt_fst_assoc, basePt_fst]
-    exact congrArg CategoryTheory.Over.Hom.left g.property
+    exact congrArg CategoryTheory.Over.Hom.left g.map_val
   · rw [Category.assoc]
     change basePt f c t ≫ pullback.lift _ _ _ ≫ pullback.snd _ _ = _
     rw [pullback.lift_snd, basePt_snd, basePt_snd]
@@ -112,12 +112,13 @@ structure Morphism (c c' : SplitNbhd f y) where
 instance : Category (SplitNbhd f y) where
   Hom := Morphism
   id c := ⟨𝟙 _, fun t ↦ by
-    rw [CategoryOfElements.id_val, CategoryTheory.Functor.map_id]
+    rw [Functor.Elements.Hom.val, Functor.Elements.id_hom, CategoryTheory.Functor.map_id]
     exact le_rfl⟩
   comp g g' := ⟨g.val ≫ g'.val, fun t ↦ by
     refine (g.le t).trans ?_
-    rw [CategoryOfElements.comp_val, CategoryTheory.Functor.map_comp]
+    rw [Functor.Elements.Hom.val, Functor.Elements.comp_hom, CategoryTheory.Functor.map_comp]
     exact Scheme.Hom.preimage_mono _ (g'.le t)⟩
+  assoc g g' g'' := Morphism.ext (Category.assoc g.val g'.val g''.val)
 
 @[simp]
 lemma id_val (c : SplitNbhd f y) : Morphism.val (𝟙 c) = 𝟙 c.obj := rfl
@@ -190,7 +191,7 @@ and does not contain `u`, since every point of `U ×_Y X` over `u` is hit by som
 theorem exists_hom_preimage_eq_bot (c : Nbhd y) (C : Set (pullback c.1.hom f : Scheme.{u}))
     (hC : IsClosed C) (h : ∀ t : GeometricFiber f y, basePt f c t default ∉ C) :
     ∃ (c' : Nbhd y) (g : c' ⟶ c), (f.Etale.map g.val).left.base ⁻¹' C = ∅ := by
-  obtain ⟨U, u⟩ := c
+  obtain @⟨U, u⟩ := c
   -- the image `Z` of `C` in `U` is closed and does not contain the marked point
   set Z : Set U.left := (pullback.fst U.hom f).base '' C with hZ
   have hZc : IsClosed Z := (pullback.fst U.hom f).isClosedMap C hC
@@ -297,7 +298,8 @@ def pieceFunctor (t : GeometricFiber f y) : SplitNbhd f y ⥤ (pointSmallEtale t
     apply MorphismProperty.Over.Hom.ext
     apply (cancel_mono (c.piece t).ι).mp
     change (pieceMap (𝟙 c) t).left ≫ (c.piece t).ι = 𝟙 _ ≫ _
-    rw [pieceMap_left_ι, id_val, CategoryOfElements.id_val, CategoryTheory.Functor.map_id,
+    rw [pieceMap_left_ι, id_val, Functor.Elements.Hom.val, Functor.Elements.id_hom,
+      CategoryTheory.Functor.map_id,
       Category.id_comp]
     rfl
   map_comp {c c' c''} g g' := by
@@ -306,7 +308,8 @@ def pieceFunctor (t : GeometricFiber f y) : SplitNbhd f y ⥤ (pointSmallEtale t
     apply (cancel_mono (c''.piece t).ι).mp
     change (pieceMap (g ≫ g') t).left ≫ (c''.piece t).ι =
       ((pieceMap g t).left ≫ (pieceMap g' t).left) ≫ (c''.piece t).ι
-    rw [pieceMap_left_ι, comp_val, CategoryOfElements.comp_val, CategoryTheory.Functor.map_comp,
+    rw [pieceMap_left_ι, comp_val, Functor.Elements.Hom.val, Functor.Elements.comp_hom,
+      CategoryTheory.Functor.map_comp,
       Category.assoc, pieceMap_left_ι, pieceMap_left_ι_assoc]
     rfl
 
