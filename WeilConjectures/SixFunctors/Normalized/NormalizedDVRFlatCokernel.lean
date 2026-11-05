@@ -66,7 +66,7 @@ private theorem exactComp_fac (K : CochainComplex A ℤ) :
     Functor.mapDerivedCategoryNatIso_fac]
   have h := Functor.mapDerivedCategoryCompIso_fac H R K
   rw [← h]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
   rw [← CategoryTheory.Functor.map_comp]
   congr 1
   congr 1
@@ -199,8 +199,8 @@ private def coefficientDerivedComp
     coefficientDerivedRes (syst := syst) hmn ⋙
         coefficientDerivedRes (syst := syst) hrm ≅
       coefficientDerivedRes (syst := syst) (le_trans hmn hrm) :=
-  ((Functor.mapDerivedCategoryCompIso (coefficientRes syst hmn)).symm
-    (coefficientRes syst hrm)).symm ≪≫
+  Functor.mapDerivedCategoryCompIso (coefficientRes syst hmn)
+      (coefficientRes syst hrm) ≪≫
       Functor.mapDerivedCategoryNatIso (syst.finiteComp hrm hmn)
 
 attribute [local irreducible] coefficientDerivedComp Functor.mapDerivedCategory
