@@ -68,6 +68,7 @@ private lemma map_comp_naturality {A B C D : Type*}
 
 -- Remote elaboration reached 200000 heartbeats in 21s after extracting generic proof steps.
 set_option maxHeartbeats 400000 in
+set_option diagnostics true in
 /-- Compute the derived mate on the chosen injective representative, before sections.
 
 Source: Stacks Project, Tag 03Q9, final injective-complex paragraph, with the
@@ -124,6 +125,7 @@ theorem smallModel_injectiveExchange_representative {X S : Scheme.{v}} (f : X �
       F.rightDerivedFunctor.map
         (P.mapDerivedCategoryFactors.inv.app M ≫ P.mapDerivedCategory.map q.inv) ≫
       F.rightDerivedFunctorPlusCompatibility.inv.app T := by
+  run_tac Lean.logInfo "BZ684: proof started"
   let M₁ := ((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj
   let M : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}) :=
     ⟨M₁, ((InjectiveObject.ι _).mapCochainComplexPlus.obj J).property⟩
@@ -151,6 +153,7 @@ theorem smallModel_injectiveExchange_representative {X S : Scheme.{v}} (f : X �
     (TwoSquare.mk _ _ _ _ (squareUpperStarIso AddCommGrpCat.{v + 1} sq).hom)
     (TwoSquare.mk _ _ _ _ (pullbackSquareComparison AddCommGrpCat.{v + 1} sq).hom)
     (pullbackSquareComparison_hom_app_factorsh AddCommGrpCat.{v + 1} sq) H
+  run_tac Lean.logInfo "BZ684: factorization obtained"
   have hb :
       U.mapDerivedCategoryPlus.map
         (R.rightDerivedFunctorPlusUnith.app H ≫ R.rightDerivedFunctorPlus.map q'.inv) ≫
@@ -171,6 +174,7 @@ theorem smallModel_injectiveExchange_representative {X S : Scheme.{v}} (f : X �
     refine hn.trans (hf.trans ?_)
     simp only [Functor.map_comp, Category.assoc]
     rfl
+  run_tac Lean.logInfo "BZ684: bounded-below identity proved"
   have hs := smallModel_injectiveExchange_source_transport f K J q
   have hs' :
       U.mapDerivedCategory.map (smallModel_sourceInjectiveDirectImageIso f K J q).inv =
@@ -180,9 +184,12 @@ theorem smallModel_injectiveExchange_representative {X S : Scheme.{v}} (f : X �
           (R.rightDerivedFunctorPlusUnith.app H ≫ R.rightDerivedFunctorPlus.map q'.inv)) := by
     rw [hs, U.mapDerivedCategory.map_comp, ← DerivedCategory.Plus.ι.map_comp,
       map_derivedCategory_ι_map]
-  exact assemble_exchange_transport DerivedCategory.Plus.ι
+  run_tac Lean.logInfo "BZ684: source transport proved"
+  have result := assemble_exchange_transport DerivedCategory.Plus.ι
     (U.mapDerivedCategoryFactors.inv.app
       ((R.mapHomologicalComplex (.up ℤ)).obj M.obj)) _ _ _ _ _ _ hs' hb
     (smallModel_injectiveExchange_target_transport f s K J q)
+  run_tac Lean.logInfo "BZ684: exchange assembled"
+  exact result
 
 end AlgebraicGeometry.Etale
