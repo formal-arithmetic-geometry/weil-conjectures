@@ -5,11 +5,8 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
-
-import all Mathlib.Algebra.Homology.Localization
 
 /-!
 # The derived unit on global sections, computed on complexes
@@ -156,12 +153,19 @@ lemma rightDerivedGlobalSections_map_unit_quotient {X Y : Scheme.{u}} (f : Y ⟶
         (rightDerivedGlobalSections A Y).map
           (((f)^*[A]).mapDerivedCategoryFactorsh.hom.app
             ((HomotopyCategory.quotient _ _).obj K)) =
-      DerivedCategory.Q.map
+      (DerivedCategory.quotientCompQhIso A).hom.app
+          (((Sheaf.Γ X.smallEtaleTopology A).mapHomologicalComplex (.up ℤ)).obj K) ≫
+        DerivedCategory.Q.map
           ((NatTrans.mapHomologicalComplex (globalSectionsUpperStarNatTrans A f) (.up ℤ)).app K) ≫
+        (DerivedCategory.quotientCompQhIso A).inv.app
+          (((Sheaf.Γ Y.smallEtaleTopology A).mapHomologicalComplex (.up ℤ)).obj
+            (((f)^*[A]).mapHomologicalComplex (.up ℤ) |>.obj K)) ≫
         (Sheaf.Γ Y.smallEtaleTopology A).rightDerivedFunctorUnit.app
           ((HomotopyCategory.quotient _ _).obj (((f)^*[A]).mapHomologicalComplex _ |>.obj K)) := by
   refine (rightDerivedGlobalSections_map_unit_homotopyCategory A f _).trans ?_
   rw [Adjunction.mapHomotopyCategory_unit_app_quotient]
+  rw [← DerivedCategory.quotientCompQhIso_hom_naturality_assoc]
+  simp only [Iso.hom_inv_id_app_assoc]
   congr 1
 
 end AlgebraicGeometry.Etale
