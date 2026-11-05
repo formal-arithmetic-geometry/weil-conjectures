@@ -12,7 +12,6 @@ public import Mathlib.RingTheory.Ideal.Span
 public import Mathlib.AlgebraicGeometry.AffineScheme
 import WeilConjectures.AlgebraicGeometry.AffineIdealGeneratorCover
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
-public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Compatible numerators on a finite principal-open cover
 
