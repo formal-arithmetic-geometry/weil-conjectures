@@ -237,14 +237,14 @@ theorem exists_affineDerivedPushforwardSheafEdge
       H.map (S.rightDerivedFunctor.map
         ((DerivedCategory.quotientCompQhIso C).hom.app K)) ≫ g = g := by
     change H.map (S.rightDerivedFunctor.map (𝟙 (DerivedCategory.Q.obj K))) ≫ g = g
-    rw [Functor.map_id, Functor.map_id, Category.id_comp]
+    rw [S.rightDerivedFunctor.map_id, H.map_id, Category.id_comp]
   have hinv {Z : D}
       (g : H.obj (DerivedCategory.Q.obj ((S.mapHomologicalComplex (.up ℤ)).obj K)) ⟶ Z) :
       H.map ((DerivedCategory.quotientCompQhIso D).inv.app
         ((S.mapHomologicalComplex (.up ℤ)).obj K)) ≫ g = g := by
     change H.map (𝟙 (DerivedCategory.Q.obj
       ((S.mapHomologicalComplex (.up ℤ)).obj K))) ≫ g = g
-    rw [Functor.map_id, Category.id_comp]
+    rw [H.map_id, Category.id_comp]
   simp only [Functor.map_comp] at hn
   simp only [Category.assoc, hhom, hinv] at hn
   apply (cancel_epi ((F ⋙ S).map (M.sc i).homologyData.left.π)).mp
