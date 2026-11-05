@@ -130,6 +130,9 @@ theorem cechH1_injective (X : Scheme.{u}) {ι : Type u} (U : ι → X.Opens)
       ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map
         (I.ι.f 0).val)
   have ha : a ≫ K.d 0 1 = 0 := by
+    let (J : Type u) :
+        HasLimitsOfShape (Discrete J) (ModuleCat.{u} (X.ringCatSheaf.obj.obj (op ⊤))) :=
+      ModuleCat.hasLimitsOfShape
     let G := SheafOfModules.forget X.ringCatSheaf ⋙
       PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op ⋙
         CategoryTheory.cechComplexFunctor U
