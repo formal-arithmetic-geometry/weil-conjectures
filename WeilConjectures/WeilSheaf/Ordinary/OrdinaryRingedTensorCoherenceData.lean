@@ -93,11 +93,22 @@ set_option synthInstance.maxHeartbeats 200000 in
 set_option maxHeartbeats 1200000 in
 -- Elaborating the concrete tensor instances requires large definitional comparisons.
 /-- The Hom comparison is the one arising from a coherent ordinary tensor comparison.
-The normalization equations fix every tensorator uniquely. This is a property of
+The normalization equations fix every tensorator uniquely. The first clause retains
+symmetry relative to the actual ordinary balanced tensor. This is a property of
 specified data, not a choice of an unrelated monoidal structure.
 Source: Stacks 06YS, 06YU, 0FPT
 (blueprint: new-sf-ordinary-ringed-tensor-coherence-data). -/
 def OrdinaryRingedTensorCoherence : Prop :=
+  (∀ (d : OrdinaryRingedTensorUnderivedData l Y J R E H)
+    (P Q : ProEtale.AdicSheaf l Y),
+    ∃ s : ((ordinaryTensorBifunctor l Y).obj Q).obj P ⟶
+        ((ordinaryTensorBifunctor l Y).obj P).obj Q,
+      (letI := SheafOfModules.isMonoidal_W_independentCoefficients R
+       letI := SheafOfModules.monoidalCategory R
+       letI := SheafOfModules.symmetricCategory R
+       E.functor.map s ≫ (d.underived P Q).hom =
+         (d.underived Q P).hom ≫ (β_ (E.functor.obj P) (E.functor.obj Q)).hom) ∧
+      Mod.tensorπ P Q ≫ s.hom = (β_ P.X Q.X).hom ≫ Mod.tensorπ Q P) ∧
   ∀ (κ : ∀ P Q : CochainComplex (ProEtale.AdicSheaf l Y) ℤ,
       ordinaryTensorTotal l Y P Q ≅ Q ⊗ P),
     (∀ (P Q : CochainComplex (ProEtale.AdicSheaf l Y) ℤ)

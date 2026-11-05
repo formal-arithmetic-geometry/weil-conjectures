@@ -25942,9 +25942,11 @@ public import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRinge
 public import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedModelNaturality
 public import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedStructure
 public import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedSwapComplex
+public import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedSwapForget
 public import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedSwapLocalization
 public import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedSwapModel
 public import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedSwapSummand
+public import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedSwapUnderived
 public import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedTransport
 public import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedTripleComplex
 public import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedUnderivedBinarySquare
@@ -25987,6 +25989,7 @@ public import WeilConjectures.WeilSheaf.Realizable
 public import WeilConjectures.WeilSheaf.ShiftedSheaf
 public import WeilConjectures.WeilSheaf.SixFunctors.CanonicalOrdinaryRingedTensorCoherence
 public import WeilConjectures.WeilSheaf.SixFunctors.CanonicalOrdinaryTensorInverseAssociativity
+public import WeilConjectures.WeilSheaf.SixFunctors.CanonicalOrdinaryTensorSymmetry
 public import WeilConjectures.WeilSheaf.SixFunctors.DerivedWeilTensorOperations
 public import WeilConjectures.WeilSheaf.SixFunctors.UnderlyingStandardHomRepresentatives
 public import WeilConjectures.WeilSheaf.SixFunctors.WeilGeometricHomConstructibility
