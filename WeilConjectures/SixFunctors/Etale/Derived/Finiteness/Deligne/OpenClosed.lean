@@ -61,7 +61,8 @@ instance isIso_derivedPlus_counit_of_isOpenImmersion {V X : Scheme.{u}} (v : V �
     infer_instance
   have := (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) v).isIso_derivedPlus_counit_app_Qh_obj
     (fun Y ↦ inferInstance) P
-  exact (NatTrans.isIso_app_iff_of_iso _ e).1 this
+  exact (NatTrans.isIso_app_iff_of_iso _
+    ((_root_.DerivedCategory.Plus.quotientCompQhIso _).app M ≪≫ e)).1 this
 
 /-- For an open immersion `v`, the pullback `v^*` of the unit `K ⟶ Rv_* v^* K` is an
 isomorphism, by the triangle identity. -/
