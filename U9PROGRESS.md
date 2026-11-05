@@ -142,17 +142,29 @@
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ584 in progress
 
-- Branch: `u9/BZ584`; starting source commit: `7b0df24fff`.
-- Reread the brief and this file on resumption; the brief has no new LEAD lines.
-- The user instructed continuation after the explicit two-statement API proposal.
-  Applied the exact `.inv` -> `.hom` and `.hom` -> `.inv` substitutions in
-  `mapDerivedCategoryCompIso_inv_app_Q` and `mapDerivedCategoryCompIso_hom_app_Q`.
-- These restore the original maps under Mathlib's reversed composition isomorphism.
-  Both proofs are updated; all other statements and existing docstrings are unchanged.
-- Next: remote validation of the assigned module and then its three direct importers.
-- Pinned API inspected at b63f6e8a; current remote next-units notes omit this unit,
-  so the supplied assignment and earlier BZ160 fix remain applicable.
-- Fix patterns and baseline logs: `/home/ubuntu/u9/bz/FIXES-BZ584.md`.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or limit increases.
+# BZ585 complete
+
+- Branch: `u9/BZ585`; starting commit: `8af5cb324`.
+- Assigned module `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebraFreeComparison`
+  passed ucheck-bump: rc=0, failed=0, 2022 jobs, target rebuilt in 4.8s.
+- Validated commit: `db7bb14d08c2234513afd1b158e2524d33864d66`; newsrv bumpw4, Lean v4.35.0-rc3
+  and Mathlib b63f6e8a68d220e3b3bc4f3792bb53650d375f24 confirmed on the build host.
+- Added the Localization public/import-all imports and made the two internal comparison
+  helpers private, following user continuation after that exact proposal. All statements,
+  proofs, binders, assumptions and existing docstrings are unchanged.
+- Contract audit: `/home/ubuntu/u9/bz/BZ585-contract-audit.txt`.
+  Fix patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ585.md`.
+- Direct importer `WeilConjectures.WeilSheaf.LowerShriekForget` was attempted at
+  `c7cb6c306b`; the assigned module rebuilt successfully in that batch in 6.1s.
+- The importer is blocked by unowned `FreeComparisonMapDerivedCategory` (BZ584)
+  and six other dependencies. Stopped only the verified timeout process for this
+  build after confirming dependency failures. Result: rc=255, failed=7; the downstream
+  batch is not green. No downstream or external dependency sources were changed.
+- Skipped `LowerShriekForget`, `AffineLineBundle`, and `SmoothPurityNativeTraceCriterion`
+  under the brief's external-dependency rule. Only the assigned module is claimed green.
+- Full logs: `/home/ubuntu/u9/bz/BUILD-BZ585-unit-full.log` and
+  `/home/ubuntu/u9/bz/BUILD-BZ585-downstream1-full.log`.
+- No local Lean/Lake execution, sorries, proof shortcuts, heartbeat increases, or profiler probes.
+- Completion marker: `/home/ubuntu/u9/state/BZ585.DONE`.
+- Final documentation commit leaves Lean source identical to the green revision.
