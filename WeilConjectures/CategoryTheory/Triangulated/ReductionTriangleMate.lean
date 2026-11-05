@@ -196,7 +196,6 @@ theorem isIso_mateEquiv_of_reductionTriangle [F.IsTriangulated] [resY.ReflectsIs
         dsimp [Functor.mapTriangle]
         simp only [id_comp, comp_id, Triangle.mk_mor₁, Functor.map_zsmul]
         erw [Functor.map_id]
-        rfl
       comm₂ := by
         dsimp [Functor.mapTriangle]
         rw [id_comp]
