@@ -224,11 +224,11 @@ instance isLeftDerivedFunctor_leftDerivedUpperStarTensorRight :
     obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective K
     exact (tensorRight c_Z).isIso_leftDerivedFunctorCounit_app_of_kFlat K
       ((HomotopyCategory.kFlat_quotient_obj_iff K).1 hK)
-  have : IsIso ((tensorRight c_Z).leftDerivedFunctorCounit.app
+  haveI : IsIso ((tensorRight c_Z).leftDerivedFunctorCounit.app
       (((g)^*[A].mapHomotopyCategory (.up ℤ)).obj
         ((HomotopyCategory.quasiIsoLocalizerMorphism (kFlatUpperStar A g)).functor.obj X))) :=
     hk _ X.property
-  have : IsIso ((g)^*[A].leftDerivedFunctorCounit.app
+  haveI : IsIso ((g)^*[A].leftDerivedFunctorCounit.app
       ((HomotopyCategory.quasiIsoLocalizerMorphism (kFlatUpperStar A g)).functor.obj X)) :=
     NatIso.isIso_app_of_isIso _ _
   dsimp [leftDerivedUpperStarTensorRightCounit]
