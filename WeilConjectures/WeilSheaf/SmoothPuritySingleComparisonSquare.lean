@@ -76,8 +76,14 @@ lemma puritySingleComparisonOfCochain_square
   rw [reassoc_of% hI, reassoc_of% hG]
   erw [reassoc_of% (h ((HomologicalComplex.single C (.up ℤ) 0).obj P))]
   congr 2
+  change _ = DerivedCategory.Q.map
+    ((G.mapHomologicalComplex (.up ℤ)).map
+        ((HomologicalComplex.singleMapHomologicalComplex F (.up ℤ) 0).hom.app P)) ≫
+      DerivedCategory.Q.map
+        ((HomologicalComplex.singleMapHomologicalComplex G (.up ℤ) 0).hom.app (F.obj P)) ≫
+      DerivedCategory.Q.map ((HomologicalComplex.single B (.up ℤ) 0).map (e.app P))
   simp only [← Functor.map_comp]
-  congr 1
+  apply congrArg DerivedCategory.Q.map
   apply HomologicalComplex.to_single_hom_ext
   simp only [HomologicalComplex.comp_f, NatTrans.mapHomologicalComplex_app_f,
     Functor.mapHomologicalComplex_map_f,
