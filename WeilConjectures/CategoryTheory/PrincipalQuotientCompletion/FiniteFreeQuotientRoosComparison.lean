@@ -93,6 +93,11 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
   [HasDerivedCategory.{wS}
     (ringedSiteModules.{r} (SheafOfModules.derivedChangeRingIndependentCoefficients J S))]
 
+local instance (T : Sheaf J CommRingCat.{r}) (I : Type r) :
+    HasColimitsOfShape (Discrete I)
+      (PresheafOfModules.{r} (SheafOfModules.derivedChangeRingIndependentCoefficients J T).obj) :=
+  PresheafOfModules.hasColimitsOfShape _ _
+
 /-- Cochain data for scalar extension of principal quotient towers. No derived
 completion functor occurs here. Naturality is required for all cochain maps.
 Source: the balanced quotient calculation and additive cone construction in steps
