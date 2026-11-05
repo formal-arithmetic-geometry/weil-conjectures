@@ -80,7 +80,7 @@ private lemma derivedSquareCoherence
     Iso.trans_hom, Iso.symm_hom, Functor.mapDerivedCategorySquareIso, Functor.map_comp,
     Category.assoc]
   rw [← cancel_epi ((Functor.mapDerivedCategoryCompIso (R ⋙ S) G).hom.app K ≫
-    G.mapDerivedCategory.map ((Functor.mapDerivedCategoryCompIso R S).hom.app K))]
+    G.mapDerivedCategory.map ((Functor.mapDerivedCategoryCompIso R S).inv.app K))]
   rw [← cancel_mono ((Functor.mapDerivedCategoryCompIso H P').inv.app K)]
   have ha := NatTrans.congr_app
     (Functor.mapDerivedCategoryNatIso_isoWhiskerRight a G) K
