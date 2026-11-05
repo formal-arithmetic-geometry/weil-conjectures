@@ -114,7 +114,7 @@ private def triangle {F : A₀ ⥤ A₁} {G : A₀ ⥤ A₂} {R : A₂ ⥤ A₁}
     ((G ⋙ R).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)
     F.mapDerivedCategory (G ⋙ R).mapDerivedCategory
     (Functor.whiskerRight (NatTrans.mapHomologicalComplex δ (.up ℤ)) DerivedCategory.Q) ≫
-      (Functor.mapDerivedCategoryCompIso G R).hom
+      (Functor.mapDerivedCategoryCompIso G R).inv
 
 private theorem triangle_fac {F : A₀ ⥤ A₁} {G : A₀ ⥤ A₂} {R : A₂ ⥤ A₁}
     [F.Additive] [G.Additive] [R.Additive]

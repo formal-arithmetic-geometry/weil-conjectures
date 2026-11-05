@@ -444,7 +444,7 @@ private theorem projector_lift_fac (K : CochainComplex A ℤ) :
 @[irreducible] private def projector_map :
     𝟭 (DerivedCategory A) ⟶ F.mapDerivedCategory ⋙ H.mapDerivedCategory :=
   (Functor.mapDerivedCategoryIdIso A).inv ≫ projector_lift F H p ≫
-    (Functor.mapDerivedCategoryCompIso F H).hom
+    (Functor.mapDerivedCategoryCompIso F H).inv
 
 private theorem projector_map_fac (K : CochainComplex A ℤ) :
     (projector_map F H p).app (DerivedCategory.Q.obj K) ≫
@@ -508,7 +508,7 @@ private theorem projector_complement_zero
     (h : ∀ N, IsZero ((H ⋙ F).obj N)) (M : DerivedCategory D) :
     IsZero (F.mapDerivedCategory.obj (H.mapDerivedCategory.obj M)) := by
   have hz := (H ⋙ F).isZero_mapDerivedCategory_obj M (fun _ ↦ h _)
-  exact hz.of_iso ((Functor.mapDerivedCategoryCompIso H F).app M).symm
+  exact hz.of_iso ((Functor.mapDerivedCategoryCompIso H F).symm.app M).symm
 
 private theorem intrinsic_projector_restriction {U X : Scheme.{u}}
     (s : U ⟶ X) [IsOpenImmersion s] [IsClosedImmersion s] (M : Derived B X) :

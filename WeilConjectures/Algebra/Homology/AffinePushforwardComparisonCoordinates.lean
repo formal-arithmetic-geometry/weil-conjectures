@@ -58,14 +58,14 @@ def affinePushforwardCohomologyMapOfComparison (A B : Type u) [CommRing A] [Comm
   let T := affinePushforwardTilde A
   let F := ModuleCat.restrictScalars φ ⋙ affinePushforwardTilde B
   let P := Scheme.Modules.pushforward (Spec.map (CommRingCat.ofHom φ))
-  let : (affinePushforwardTilde B).Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+  let : (affinePushforwardTilde B).Additive := by constructor; intro M N f g; exact tilde.map_add (R := R) f g
   let : (affinePushforwardTilde B).PreservesHomology := tilde_preservesHomology B
   let : PreservesFiniteLimits (affinePushforwardTilde B) :=
     Functor.preservesFiniteLimits_of_preservesHomology (affinePushforwardTilde B)
   let : PreservesFiniteColimits (affinePushforwardTilde B) :=
     Functor.preservesFiniteColimits_of_preservesHomology (affinePushforwardTilde B)
   let : F.PreservesHomology := inferInstance
-  let : T.Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+  let : T.Additive := by constructor; intro M N f g; exact tilde.map_add (R := R) f g
   let : P.Additive := inferInstance
   let D := (T.mapHomologicalComplex (.up ℤ)).obj C
   let a : (F.mapHomologicalComplex (.up ℤ)).obj C ⟶
@@ -93,7 +93,7 @@ def affinePushforwardRepresentativeCohomologyIso (A : Type u) [CommRing A]
       ((DerivedCategory.homologyFunctor
         (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) i).obj L) := by
   let T := affinePushforwardTilde A
-  let : T.Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+  let : T.Additive := by constructor; intro M N f g; exact tilde.map_add (R := R) f g
   let : T.PreservesHomology := tilde_preservesHomology A
   let H := DerivedCategory.homologyFunctor
     (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) i

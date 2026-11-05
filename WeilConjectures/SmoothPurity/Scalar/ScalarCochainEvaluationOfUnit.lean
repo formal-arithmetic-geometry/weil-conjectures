@@ -57,7 +57,7 @@ private theorem localization_square (δ : R ⋙ E ≅ F ⋙ S)
     (P : CochainComplex X ℤ) :
     ((Functor.mapDerivedCategoryCompIso R E).symm ≪≫
         Functor.mapDerivedCategoryNatIso δ ≪≫
-        Functor.mapDerivedCategoryCompIso F S).hom.app (DerivedCategory.Q.obj P) ≫
+        (Functor.mapDerivedCategoryCompIso F S).symm).hom.app (DerivedCategory.Q.obj P) ≫
         S.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app P) ≫
         S.mapDerivedCategoryFactors.hom.app
           ((F.mapHomologicalComplex (.up ℤ)).obj P) =

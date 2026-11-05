@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 import WeilConjectures.AlgebraicGeometry.CoherentCompletionOverNormalization
 import WeilConjectures.AlgebraicGeometry.TorsionLocalModelRestriction
 import WeilConjectures.AlgebraicGeometry.TorsionControlledCompletionHomLiftExists
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Torsion-controlled local descent data
 

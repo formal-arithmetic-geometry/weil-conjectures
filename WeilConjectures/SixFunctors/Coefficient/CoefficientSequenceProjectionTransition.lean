@@ -42,7 +42,7 @@ variable {C D E : Type*} [Category C] [Category D] [Category E]
   Localization.liftNatTrans DerivedCategory.Q (HomologicalComplex.quasiIso C (.up ℤ))
     _ _ F.mapDerivedCategory (G ⋙ R).mapDerivedCategory
     (Functor.whiskerRight (NatTrans.mapHomologicalComplex τ (.up ℤ)) DerivedCategory.Q) ≫
-    (Functor.mapDerivedCategoryCompIso G R).hom
+    (Functor.mapDerivedCategoryCompIso G R).inv
 
 @[reassoc] private theorem derivedTransition_fac (τ : F ⟶ G ⋙ R)
     (K : CochainComplex C ℤ) :
@@ -97,8 +97,8 @@ variable (U : C ⥤ A) (F : A ⥤ B) (G : C ⥤ D) (R : D ⥤ B)
 
 @[irreducible] private def derivedEvaluationIso (e : U ⋙ F ≅ G ⋙ R) :
     U.mapDerivedCategory ⋙ F.mapDerivedCategory ≅ G.mapDerivedCategory ⋙ R.mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso U F).symm ≪≫ Functor.mapDerivedCategoryNatIso e ≪≫
-    Functor.mapDerivedCategoryCompIso G R
+  (Functor.mapDerivedCategoryCompIso U F) ≪≫ Functor.mapDerivedCategoryNatIso e ≪≫
+    (Functor.mapDerivedCategoryCompIso G R).symm
 
 @[reassoc] private theorem derivedEvaluationIso_fac (e : U ⋙ F ≅ G ⋙ R)
     (K : CochainComplex C ℤ) :

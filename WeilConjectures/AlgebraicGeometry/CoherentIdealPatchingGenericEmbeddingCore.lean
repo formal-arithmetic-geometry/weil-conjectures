@@ -17,6 +17,7 @@ import WeilConjectures.AlgebraicGeometry.CoherentGenericPointIdealInclusion
 import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelSum
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Mathlib.Topology.Sheaves.Abelian
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 @[expose] public section
 

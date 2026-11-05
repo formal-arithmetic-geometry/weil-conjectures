@@ -506,7 +506,7 @@ def localizeComposition {C : Type c} [Category.{v} C] [Abelian C]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     [PreservesFiniteLimits H] [PreservesFiniteColimits H] (h : F ⋙ G ≅ H) :
     DerivedCompositionFamily F G H :=
-  (Functor.mapDerivedCategoryCompIso F G).symm ≪≫ Functor.mapDerivedCategoryNatIso h
+  (Functor.mapDerivedCategoryCompIso F G) ≪≫ Functor.mapDerivedCategoryNatIso h
 
 /-- The ordinary comparison uses the actual point-composition map on underlying sheaves.
 Source: HRS (4.1) (blueprint: lem-sfb-point-pullback-derived-hom). -/

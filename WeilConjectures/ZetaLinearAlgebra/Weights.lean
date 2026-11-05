@@ -12,6 +12,7 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.RingTheory.Coprime.Lemmas
 public import WeilConjectures.Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.ZetaLinearAlgebra.NormalizedGauss
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-!
 # Purity of a polynomial, and disjointness of distinct weights

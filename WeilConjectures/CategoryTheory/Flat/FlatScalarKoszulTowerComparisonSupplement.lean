@@ -278,7 +278,7 @@ Source: Stacks 0A07
 def evaluationComparison (φ : R ⟶ B) (m : ℕᵒᵖ) :
     restrictTowerDerived φ ⋙ evaluateDerived R m ≅
       evaluateDerived B m ⋙ restrictDerived φ :=
-  (Functor.mapDerivedCategoryCompIso (restrictTower φ)
+  ((Functor.mapDerivedCategoryCompIso (restrictTower φ)).symm
     ((evaluation ℕᵒᵖ (Modules R)).obj m)).symm ≪≫
       Functor.mapDerivedCategoryCompIso ((evaluation ℕᵒᵖ (Modules B)).obj m) (restriction φ)
 

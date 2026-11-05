@@ -45,7 +45,7 @@ def affineTensorPullbackHomologySheafIso
       SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace) := tilde.functor (.of A)
   let TB : ModuleCat.{u} A' ⥤
       SheafOfModules.{u} (moduleRings (Spec (.of A')).toRingedSpace) := tilde.functor (.of A')
-  let : TA.Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+  let : TA.Additive := by constructor; intro M N f g; exact tilde.map_add (R := R) f g
   let : TB.Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
   let : TA.PreservesZeroMorphisms := ⟨fun _ _ ↦ tilde.map_zero⟩
   let : TB.PreservesZeroMorphisms := ⟨fun _ _ ↦ tilde.map_zero⟩

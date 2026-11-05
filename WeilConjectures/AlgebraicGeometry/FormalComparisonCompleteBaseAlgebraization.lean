@@ -16,6 +16,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Limits
 import WeilConjectures.AlgebraicGeometry.FormalComparisonAlgebraizationQuotientLift
 import WeilConjectures.AlgebraicGeometry.AffineCompleteCoherentSections
 import WeilConjectures.AlgebraicGeometry.ProperCompleteQuotientSectionsJointlyMonic
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Algebraization of the comparison over a complete affine base
 
