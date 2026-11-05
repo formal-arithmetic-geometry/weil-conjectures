@@ -17,7 +17,8 @@ public import WeilConjectures.WeilSheaf.UpperShriekGeometric
 The Frobenius `(Fr_X⁻¹)_*` of the condensed model preserves and reflects bounded constructible
 complexes on the geometric fibre `X̄`
 (`AlgebraicGeometry.ProEtale.boundedConstructible_lowerStar_frobenius_mapDerivedCategory_obj_iff`):
-transported from the `ℓ`-adic model (`WeilSheaf.boundedConstructibleAdic_frobeniusPullback_mapDerivedCategory_obj_iff`)
+transported from the `ℓ`-adic model
+(`WeilSheaf.boundedConstructibleAdic_frobeniusPullback_mapDerivedCategory_obj_iff`)
 along `adicSheafDerivedEquivCondensedMod`, using the comparison of the two Frobenii
 `AlgebraicGeometry.ProEtaleWeilSheaf.condensedFrobeniusComparison`.
 -/
@@ -51,11 +52,11 @@ theorem boundedConstructible_lowerStar_frobenius_mapDerivedCategory_obj_iff
       boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj l)
         (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) M := by
   set E := adicSheafDerivedEquivCondensedMod l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber
-  haveI : (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l)
+  have : (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l)
       (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).IsEquivalence :=
     (CondensedRing.lowerStarEquivalenceOfIso (Profinite.padicAlgClRingObj l)
       (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm).isEquivalence_functor
-  haveI : PreservesFiniteColimits (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l)
+  have : PreservesFiniteColimits (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l)
       (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv) :=
     inferInstance
   let c := Functor.mapDerivedCategoryCompIsoOfIso

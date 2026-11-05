@@ -136,6 +136,10 @@ noncomputable abbrev condensedOpenImmersionShriekExchange :=
     (comp_over (shriekCompactification k₀ f).i (Spec (CommRingCat.of k₀)))
 
 variable (k₀) in
+omit [Fact (ringChar k₀ ≠ l)]
+    [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] in
 /-- The condensed Weil extension by zero `D(i_!)` along the open immersion of the
 compactification preserves bounded constructible condensed Weil complexes. -/
 theorem condensedWeilObjectProperty_extensionByZero
@@ -149,8 +153,10 @@ theorem condensedWeilObjectProperty_extensionByZero
       ((shriekCompactification k₀ f).Z ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure
   have : IsNoetherian ((shriekCompactification k₀ f).Z ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
     ⟨⟩
-  exact ObjectProperty.prop_of_iso (condensedBoundedConstructible k₀ l (shriekCompactification k₀ f).Z)
-    ((IsoAlgebra.derivedExactForgetCommIso (condensedOpenImmersionShriekExchange k₀ l f)).app M).symm
+  exact ObjectProperty.prop_of_iso
+    (condensedBoundedConstructible k₀ l (shriekCompactification k₀ f).Z)
+    ((IsoAlgebra.derivedExactForgetCommIso
+      (condensedOpenImmersionShriekExchange k₀ l f)).app M).symm
     (CondensedRing.boundedConstructible_mapDerivedCategory_openImmersionLowerShriek_obj _
       (condensedOpenImmersionMap k₀ f) _ hM)
 
@@ -276,7 +282,8 @@ theorem exists_adicSheafEquivCondensedMod_forget_upperShriek_obj_iso_isWeilEquiv
     (IsoAlgebra.derivedStrIso _).hom.naturality
       (condensedWeilEquivUpperShriekObjIso k₀ l f L).hom.hom
   exact ⟨((IsoAlgebra.derivedExactForgetCommIso
-      (ProEtaleWeilSheaf.condensedFrobeniusComparison k₀ l X)).app ((upperShriek f).obj L).obj).symm ≪≫
+      (ProEtaleWeilSheaf.condensedFrobeniusComparison k₀ l X)).app
+        ((upperShriek f).obj L).obj).symm ≪≫
     (IsoAlgebra.forget _).mapDerivedCategory.mapIso
       ((ObjectProperty.ι _).mapIso (condensedWeilEquivUpperShriekObjIso k₀ l f L)) ≪≫ θc,
     h₀'.comp (h₁.comp hθc)⟩

@@ -4,6 +4,29 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
+import all WeilConjectures.DeligneLaumon.Reduction.DirectImage
+import all WeilConjectures.DeligneLaumon.Reduction.RelativeLineStep
+import all WeilConjectures.DeligneLaumon.Reduction.RelativeAffineLine
+import all WeilConjectures.DeligneLaumon.Reduction.AffineCurve
+import all WeilConjectures.DeligneLaumon.Reduction.RealSheaves
+import all WeilConjectures.DeligneLaumon.AffineLine.AffineCurveUpper
+import all WeilConjectures.DeligneLaumon.Reduction.FiniteMiddleExtension
+import all WeilConjectures.DeligneLaumon.Reduction.RealCurve
+import all WeilConjectures.DeligneLaumon.Reduction.RealLissePurity
+import all WeilConjectures.DeligneLaumon.AffineLine.DegreeOne
+import all WeilConjectures.DeligneLaumon.AffineLine.Upper
+import all WeilConjectures.DeligneLaumon.Reduction.RealCurveConstituent
+import all WeilConjectures.EtaleCohomology.Purity.RealSheaves.Purity
+import all WeilConjectures.DeligneLaumon.AffineLine.FourierWeight
+import all WeilConjectures.DeligneLaumon.AffineLine.Purity
+import all WeilConjectures.DeligneLaumon.AffineLine.UpperReduction
+import all WeilConjectures.EtaleCohomology.Purity.RealSheaves.Rankin
+import all WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafSemicontinuity
+import all WeilConjectures.DeligneLaumon.AffineLine.Exactness
+import all WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy
+import all WeilConjectures.EtaleCohomology.Purity.RealSheaves.MiddleExtension
+import all WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafBoundaryPurity
+import all WeilConjectures.DeligneLaumon.AffineLine.LocalDuality
 import all WeilConjectures.LeanEval.WeilConjectures
 import all WeilConjectures.Statement
 import all WeilConjectures.WeilSheaf.AffineLineBundle

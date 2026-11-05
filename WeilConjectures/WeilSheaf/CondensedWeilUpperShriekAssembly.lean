@@ -72,6 +72,9 @@ noncomputable abbrev condensedProperOverHom :=
   (geometricFiberHomCompactification (k₀ := k₀) f).overG
 
 variable (k₀) in
+omit [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] in
 /-- **Deligne's finiteness for `Rḡ_*`** in the form used by `CondensedWeilUpperShriek`. -/
 theorem condensedProperPreserves (K)
     (hK : condensedBoundedConstructible k₀ l (shriekCompactification k₀ f).Z K) :
@@ -147,6 +150,9 @@ noncomputable def condensedWeilProperAdjunction :
   Adjunction.ofIsLeftAdjoint _
 
 variable (k₀) in
+omit [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] in
 /-- **The Frobenius structure of the Weil `Rg^!` is the exceptional datum of the upstream
 geometric adjunction** (condensed model, concrete adjunctions). -/
 theorem exists_condensedForget_obj_iso_isWeilEquivariant_rightWeilDatum_concrete
@@ -168,7 +174,8 @@ theorem exists_condensedForget_obj_iso_isWeilEquivariant_rightWeilDatum_concrete
             (X := (ObjectProperty.liftFullSubcategory _ _
               (condensedFrobenius k₀ l Y).mapDerivedCategory
               (fun K hK ↦
-                (boundedConstructible_lowerStar_frobenius_mapDerivedCategory_obj_iff l Y K).2 hK)).obj
+                (boundedConstructible_lowerStar_frobenius_mapDerivedCategory_obj_iff
+                  l Y K).2 hK)).obj
                 ⟨(IsoAlgebra.forget _).mapDerivedCategory.obj L'.obj, L'.property⟩)
             (Y := ⟨(IsoAlgebra.forget _).mapDerivedCategory.obj L'.obj, L'.property⟩)
             ((IsoAlgebra.derivedStrIso _).hom.app L'.obj))).hom θ.hom :=

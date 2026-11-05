@@ -17,8 +17,9 @@ The exceptional datum `WeilComplex.condensedUpperShriekExceptionalDatum` is the 
 of the composite adjunction `f̄_! = Rḡ_* ∘ D(ī_!) ⊣ ī^* ∘ ḡ^! = f̄^!` on bounded constructible
 condensed complexes (`WeilComplex.condensedCompactifiedAdjunction`), for the composite Frobenius
 exchange `WeilComplex.condensedCompactifiedExchange`. Hence an orientation
-`o : f̄^! ℚ̄_ℓ ≅ ℚ̄_ℓ(d)[2d]` (condensed model of the Tate twist) whose trace `f̄_! ℚ̄_ℓ(d)[2d] ⟶ ℚ̄_ℓ`
-is Frobenius equivariant gives the Weil orientation of the smooth purity leaf
+`o : f̄^! ℚ̄_ℓ ≅ ℚ̄_ℓ(d)[2d]` (condensed model of the Tate twist) whose trace
+`f̄_! ℚ̄_ℓ(d)[2d] ⟶ ℚ̄_ℓ` is Frobenius equivariant gives the Weil orientation of the smooth
+purity leaf
 `WeilComplex.exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso`
 (`WeilComplex.exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso_of_condensed_trace`).
 -/
@@ -95,18 +96,21 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f]
   [QuasiCompact f]
 
-instance : CompactSpace ((shriekCompactification k₀ f).Z ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
+instance :
+    CompactSpace ((shriekCompactification k₀ f).Z ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
   QuasiCompact.compactSpace_of_compactSpace
     ((shriekCompactification k₀ f).Z ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure
 
-instance : IsNoetherian ((shriekCompactification k₀ f).Z ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
+instance :
+    IsNoetherian ((shriekCompactification k₀ f).Z ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
   ⟨⟩
 
 variable (k₀) in
 /-- The lift of the condensed Frobenius `(Fr_S⁻¹)_*` to bounded constructible condensed
 complexes. -/
 noncomputable abbrev condensedFrobeniusLift (S : Scheme.{u}) [S.Over (Spec (CommRingCat.of k₀))]
-    [IsSeparated (S ↘ Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (S ↘ Spec (CommRingCat.of k₀))]
+    [IsSeparated (S ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (S ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (S ↘ Spec (CommRingCat.of k₀))] :=
   ObjectProperty.liftFullSubcategory (condensedBoundedConstructible k₀ l S)
     (condensedBoundedConstructible k₀ l S) (condensedFrobenius k₀ l S).mapDerivedCategory
@@ -154,7 +158,8 @@ noncomputable def condensedOpenImmersionGeometricExchange :
         φ.hom))
 
 variable (k₀) in
-/-- The adjunction `f̄_! ⊣ f̄^!` for `f̄_! = Rḡ_* ∘ D(ī_!)` and `f̄^! = ī^* ∘ ḡ^!`, condensed model. -/
+/-- The adjunction `f̄_! ⊣ f̄^!` for `f̄_! = Rḡ_* ∘ D(ī_!)` and `f̄^! = ī^* ∘ ḡ^!`, condensed
+model. -/
 noncomputable abbrev condensedCompactifiedAdjunction :=
   (condensedOpenImmersionGeometricAdjunction k₀ l f).comp (condensedProperAdjunction k₀ l f)
 
@@ -166,7 +171,8 @@ noncomputable def condensedCompactifiedExchange :=
     Functor.isoWhiskerLeft _ (IsoAlgebra.liftedDerivedCommIso (condensedProperExchange k₀ l f) _ _
       (boundedConstructible_lowerStar_frobenius_mapDerivedCategory_obj_iff l
         (shriekCompactification k₀ f).Z)
-      (fun K hK ↦ (boundedConstructible_lowerStar_frobenius_mapDerivedCategory_obj_iff l Y K).2 hK)
+      (fun K hK ↦
+        (boundedConstructible_lowerStar_frobenius_mapDerivedCategory_obj_iff l Y K).2 hK)
       (condensedProperPreserves k₀ l f)) ≪≫
     (Functor.associator _ _ _).symm ≪≫
     Functor.isoWhiskerRight (condensedOpenImmersionGeometricExchange k₀ l f) _ ≪≫
@@ -177,7 +183,8 @@ lemma condensedCompactifiedExchange_hom_app (K) :
       (IsoAlgebra.liftedDerivedCommIso (condensedProperExchange k₀ l f) _ _
         (boundedConstructible_lowerStar_frobenius_mapDerivedCategory_obj_iff l
           (shriekCompactification k₀ f).Z)
-        (fun K hK ↦ (boundedConstructible_lowerStar_frobenius_mapDerivedCategory_obj_iff l Y K).2 hK)
+        (fun K hK ↦
+          (boundedConstructible_lowerStar_frobenius_mapDerivedCategory_obj_iff l Y K).2 hK)
         (condensedProperPreserves k₀ l f)).hom.app
         ((ObjectProperty.liftFullSubcategory _ _
           (CondensedRing.openImmersionLowerShriek (Profinite.padicAlgClRingObj l)
@@ -192,6 +199,11 @@ lemma condensedCompactifiedExchange_hom_app (K) :
         ((condensedOpenImmersionGeometricExchange k₀ l f).hom.app K) := by
   simp [condensedCompactifiedExchange]
 
+omit [Fact (ringChar k₀ ≠ l)]
+    [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))] in
 /-- The exchange of `D(ī_!)` is the left mate of the exchange of `ī^*` (at the level of
 isomorphisms; stated to be rewritten before any component is unfolded). -/
 lemma condensedOpenImmersionShriekExchange_eq :
@@ -302,8 +314,9 @@ theorem exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso_of_condens
     (htrace : IsWeilEquivariant (condensedFrobeniusLift k₀ l Y)
       (Adjunction.leftWeilDatum (condensedCompactifiedExchange k₀ l f)
         (ObjectProperty.homMk
-          (X := (condensedFrobeniusLift k₀ l X).obj (condensedForgetAdic k₀ l (((tateTwist k₀ l X d).obj
-            (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)))⟦(2 * d : ℤ)⟧)))
+          (X := (condensedFrobeniusLift k₀ l X).obj
+            (condensedForgetAdic k₀ l (((tateTwist k₀ l X d).obj
+              (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)))⟦(2 * d : ℤ)⟧)))
           (Y := condensedForgetAdic k₀ l (((tateTwist k₀ l X d).obj
             (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)))⟦(2 * d : ℤ)⟧))
           (transportWeilDatum
@@ -369,8 +382,9 @@ noncomputable abbrev tateShift (d : ℕ) : WeilComplex k₀ l X :=
   ((tateTwist k₀ l X d).obj (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)))⟦(2 * d : ℤ)⟧
 
 /-- **The Weil orientation from the trace square, condensed model, with the condensed Weil
-structure of the Tate twist**: as `exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso_of_condensed_trace`,
-with the orientation landing in the condensed model `E_W ℚ̄_ℓ(d)[2d]` of the Tate twist as a
+structure of the Tate twist**: as
+`exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso_of_condensed_trace`, with the
+orientation landing in the condensed model `E_W ℚ̄_ℓ(d)[2d]` of the Tate twist as a
 condensed Weil complex, whose Frobenius structure is the derived structure isomorphism of the
 condensed Weil complex. -/
 theorem exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso_of_condensed_trace' (d : ℕ)

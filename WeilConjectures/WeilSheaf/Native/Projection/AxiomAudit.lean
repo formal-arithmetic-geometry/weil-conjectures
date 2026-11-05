@@ -90,7 +90,8 @@ open Lean in
 run_elab do
   let env ← getEnv
   let mut seen : NameSet := {}
-  let target := `AlgebraicGeometry.WeilComplex.nonempty_rightDerivedLowerStar_nativeDerivedTensor_iso
+  let target :=
+    `AlgebraicGeometry.WeilComplex.nonempty_rightDerivedLowerStar_nativeDerivedTensor_iso
   let axioms ← collectAxioms target
   for name in axioms do
     unless #[`propext, `Classical.choice, `Quot.sound, `sorryAx].contains name do

@@ -77,7 +77,8 @@ def boundedConstructibleOpenImmersionUpperStarAdjunction :
 
 end OpenImmersionAdjunction
 
-/-! `Rh_! ⊣ h^*` for étale `h`: `nonempty_boundedConstructibleLowerShriekUpperStarAdjunction_of_etale`
+/-! `Rh_! ⊣ h^*` for étale `h`:
+`nonempty_boundedConstructibleLowerShriekUpperStarAdjunction_of_etale`
 and `boundedConstructibleLowerShriekUpperStarAdjunctionOfEtale` in
 `WeilConjectures.WeilSheaf.SmoothUnitBaseChangeEtale`. -/
 

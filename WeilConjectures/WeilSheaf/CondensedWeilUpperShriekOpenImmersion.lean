@@ -101,10 +101,16 @@ noncomputable abbrev condensedOpenImmersionExchange :=
     (comp_over (shriekCompactification k₀ f).i (Spec (CommRingCat.of k₀)))
 
 variable (k₀) in
+omit [Fact (ringChar k₀ ≠ l)]
+    [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))] in
 /-- The condensed Weil pullback `D(i^*)` along the open immersion of the compactification
 preserves bounded constructible condensed Weil complexes. -/
 theorem condensedWeilObjectProperty_openImmersionUpperStar
-    (M : _root_.DerivedCategory (IsoAlgebra (condensedFrobenius k₀ l (shriekCompactification k₀ f).Z)))
+    (M : _root_.DerivedCategory
+      (IsoAlgebra (condensedFrobenius k₀ l (shriekCompactification k₀ f).Z)))
     (hM : condensedWeilObjectProperty k₀ l (shriekCompactification k₀ f).Z M) :
     condensedWeilObjectProperty k₀ l X
       ((IsoAlgebra.mapOfNatIso (condensedOpenImmersionExchange k₀ l f)).mapDerivedCategory.obj M) :=
@@ -139,7 +145,8 @@ noncomputable def condensedGeometricUpperShriek :
 
 variable (k₀) in
 /-- The underlying bounded constructible condensed complex of a condensed Weil complex. -/
-noncomputable abbrev condensedForgetObj (L' : (condensedWeilObjectProperty k₀ l Y).FullSubcategory) :
+noncomputable abbrev condensedForgetObj
+    (L' : (condensedWeilObjectProperty k₀ l Y).FullSubcategory) :
     (condensedBoundedConstructible k₀ l Y).FullSubcategory :=
   ⟨(IsoAlgebra.forget _).mapDerivedCategory.obj L'.obj, L'.property⟩
 
@@ -172,6 +179,9 @@ noncomputable def condensedUpperShriekExceptionalDatum
         ((IsoAlgebra.derivedStrIso _).hom.app L'.obj))).hom
 
 variable (k₀) in
+omit [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] in
 /-- **The Frobenius structure of the condensed Weil `Rf^!` is the exceptional datum**: the
 underlying complex of `Rf^! L'` is `ī^* ḡ^! L̄'`, by an isomorphism `θ` which is Frobenius
 equivariant for the structure of `Rf^! L'` and the exceptional datum. -/

@@ -121,17 +121,17 @@ abbrev map [Fact (𝒪' (Φ.map T.i₁))] [Fact (𝒪' (Φ.map T.i₂))] [Fact (
 variable [Fact (𝒪' (Φ.map T.i₁))] [Fact (𝒪' (Φ.map T.i₂))] [Fact (𝒪' (Φ.map T.i))]
   [Fact (𝒪' (Φ.map T.q))]
 
-@[simp] lemma map_Z₁ : (T.map Φ).Z₁ = Φ.obj T.Z₁ := rfl
-@[simp] lemma map_Z₂ : (T.map Φ).Z₂ = Φ.obj T.Z₂ := rfl
-@[simp] lemma map_W : (T.map Φ).W = Φ.obj T.W := rfl
-@[simp] lemma map_i₁ : (T.map Φ).i₁ = Φ.map T.i₁ := rfl
-@[simp] lemma map_p₁ : (T.map Φ).p₁ = Φ.map T.p₁ := rfl
-@[simp] lemma map_i₂ : (T.map Φ).i₂ = Φ.map T.i₂ := rfl
-@[simp] lemma map_p₂ : (T.map Φ).p₂ = Φ.map T.p₂ := rfl
-@[simp] lemma map_i : (T.map Φ).i = Φ.map T.i := rfl
-@[simp] lemma map_p : (T.map Φ).p = Φ.map T.p := rfl
-@[simp] lemma map_q : (T.map Φ).q = Φ.map T.q := rfl
-@[simp] lemma map_r : (T.map Φ).r = Φ.map T.r := rfl
+@[simp] lemma map_Z₁ : (T.map (𝒪' := 𝒪') Φ).Z₁ = Φ.obj T.Z₁ := rfl
+@[simp] lemma map_Z₂ : (T.map (𝒪' := 𝒪') Φ).Z₂ = Φ.obj T.Z₂ := rfl
+@[simp] lemma map_W : (T.map (𝒪' := 𝒪') Φ).W = Φ.obj T.W := rfl
+@[simp] lemma map_i₁ : (T.map (𝒪' := 𝒪') Φ).i₁ = Φ.map T.i₁ := rfl
+@[simp] lemma map_p₁ : (T.map (𝒪' := 𝒪') Φ).p₁ = Φ.map T.p₁ := rfl
+@[simp] lemma map_i₂ : (T.map (𝒪' := 𝒪') Φ).i₂ = Φ.map T.i₂ := rfl
+@[simp] lemma map_p₂ : (T.map (𝒪' := 𝒪') Φ).p₂ = Φ.map T.p₂ := rfl
+@[simp] lemma map_i : (T.map (𝒪' := 𝒪') Φ).i = Φ.map T.i := rfl
+@[simp] lemma map_p : (T.map (𝒪' := 𝒪') Φ).p = Φ.map T.p := rfl
+@[simp] lemma map_q : (T.map (𝒪' := 𝒪') Φ).q = Φ.map T.q := rfl
+@[simp] lemma map_r : (T.map (𝒪' := 𝒪') Φ).r = Φ.map T.r := rfl
 
 end ShriekTriangle
 
@@ -450,7 +450,7 @@ theorem compIso_shriekBaseChange (T : ShriekTriangle 𝒪 X Y S)
     Functor.whiskerRight (F.compIso T).hom (Θ.pull S) ≫
         (Θ.shriekBaseChange T.i T.p).natTrans =
       (Θ.shriekBaseChange T.i₁ T.p₁ ≫ₕ Θ.shriekBaseChange T.i₂ T.p₂).natTrans ≫
-        Functor.whiskerLeft (Θ.pull X) (F'.compIso (T.map Φ)).hom := by
+        Functor.whiskerLeft (Θ.pull X) (F'.compIso (T.map (𝒪' := 𝒪') Φ)).hom := by
   ext K
   -- the base change map of the extension by zero along `i = i₁ ≫ q`
   have hbc := congr_app (Θ.shBaseChange_comp T.i₁ T.q T.i T.i_q) K
@@ -462,7 +462,7 @@ theorem compIso_shriekBaseChange (T : ShriekTriangle 𝒪 X Y S)
       inv ((Θ.shBaseChange T.i).natTrans.app K) =
       inv ((Θ.shBaseChange T.q).natTrans.app ((F.sh T.i₁).obj K)) ≫
         (F'.sh (Φ.map T.q)).map (inv ((Θ.shBaseChange T.i₁).natTrans.app K)) ≫
-        (F'.shComp' (Φ.map T.i₁) (Φ.map T.q) (Φ.map T.i) (T.map Φ).i_q).inv.app
+        (F'.shComp' (Φ.map T.i₁) (Φ.map T.q) (Φ.map T.i) (T.map (𝒪' := 𝒪') Φ).i_q).inv.app
           ((Θ.pull X).obj K) := by
     rw [IsIso.comp_inv_eq, hbc]
     simp
@@ -505,7 +505,8 @@ theorem compIso_shriekBaseChange (T : ShriekTriangle 𝒪 X Y S)
   have hn₁ := (Θ.pfBaseChange T.p₂).natTrans.naturality
     ((F.exchange T.p₁ T.q T.i₂ T.r T.w).natTrans.app ((F.sh T.i₁).obj K) ≫
       (F.pf T.r).map ((F.shComp' T.i₁ T.q T.i T.i_q).inv.app K))
-  have hn₂ := (F'.pfComp' (Φ.map T.r) (Φ.map T.p₂) (Φ.map T.p) (T.map Φ).r_p).inv.naturality
+  have hn₂ := (F'.pfComp' (Φ.map T.r) (Φ.map T.p₂) (Φ.map T.p)
+      (T.map (𝒪' := 𝒪') Φ).r_p).inv.naturality
     (inv ((Θ.shBaseChange T.i).natTrans.app K))
   have hn₃ := congrArg (F'.pf (Φ.map T.p₂)).map ((Θ.pfBaseChange T.r).natTrans.naturality
     ((F.shComp' T.i₁ T.q T.i T.i_q).inv.app K))

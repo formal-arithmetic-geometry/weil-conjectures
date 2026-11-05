@@ -13,13 +13,14 @@ public import WeilConjectures.WeilSheaf.UpperShriekGeometric
 /-!
 # Prerequisites for the condensed model of the Weil exceptional datum
 
-Two inputs of the framework `CategoryTheory.Endofunctor.IsoAlgebra.exists_forget_obj_iso_counit_comm`
-in the condensed model, transported from the `ℓ`-adic model along
+Two inputs of the framework
+`CategoryTheory.Endofunctor.IsoAlgebra.exists_forget_obj_iso_counit_comm` in the condensed model,
+transported from the `ℓ`-adic model along
 `AlgebraicGeometry.ProEtale.adicSheafDerivedEquivCondensedMod`:
 - the derived direct image of condensed module objects preserves bounded below coproducts
   (`AlgebraicGeometry.ProEtale.preservesColimit_discrete_rightDerivedFunctor_condensedLowerStar`);
 - the Frobenius `(Fr_X⁻¹)_*` of the condensed model preserves bounded constructible complexes
-  (`AlgebraicGeometry.ProEtale.boundedConstructible_lowerStar_frobenius_mapDerivedCategory_obj_iff`).
+  (`ProEtale.boundedConstructible_lowerStar_frobenius_mapDerivedCategory_obj_iff`).
 -/
 
 @[expose] public section
@@ -46,7 +47,8 @@ theorem preservesColimit_discrete_rightDerivedFunctor_condensedLowerStar {Y X : 
   let EY := adicSheafDerivedEquivCondensedMod l Y
   let EX := adicSheafDerivedEquivCondensedMod l X
   have φ : (adicLowerStar l f).rightDerivedFunctor ⋙ EX.functor ≅
-      EY.functor ⋙ (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l) f).rightDerivedFunctor :=
+      EY.functor ⋙
+        (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l) f).rightDerivedFunctor :=
     Functor.rightDerivedFunctorCompMapDerivedCategoryIsoOfEquivalence
       (adicSheafEquivCondensedMod l Y) (adicSheafEquivCondensedMod l X)
       (adicLowerStarCompCondensedModIso l f)

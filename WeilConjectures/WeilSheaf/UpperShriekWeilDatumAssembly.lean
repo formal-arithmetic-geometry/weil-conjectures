@@ -12,11 +12,13 @@ public import WeilConjectures.WeilSheaf.UpperShriekWeilDatumComposite
 /-!
 # The Weil orientation from an equivariant geometric orientation
 
-The target `AlgebraicGeometry.WeilComplex.exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso`
+The target
+`AlgebraicGeometry.WeilComplex.exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso`
 (an isomorphism of the underlying complexes `Rf^! ℚ̄_ℓ ≅ ℚ̄_ℓ(d)[2d]` commuting with the Frobenius
-structures) follows from a *geometric orientation* `o : ī^* (ḡ^! ℚ̄_ℓ) ≅ ℚ̄_ℓ(d)[2d]` on `X̄` which is
-equivariant for the exceptional datum `AlgebraicGeometry.WeilComplex.upperShriekExceptionalDatum`
-and the Frobenius structure of `ℚ̄_ℓ(d)[2d]`: compose with the comparison
+structures) follows from a *geometric orientation* `o : ī^* (ḡ^! ℚ̄_ℓ) ≅ ℚ̄_ℓ(d)[2d]` on `X̄`
+which is equivariant for the exceptional datum
+`AlgebraicGeometry.WeilComplex.upperShriekExceptionalDatum` and the Frobenius structure of
+`ℚ̄_ℓ(d)[2d]`: compose with the comparison
 `AlgebraicGeometry.WeilComplex.exists_forget_upperShriek_obj_iso_isWeilEquivariant`, which carries
 the Frobenius structure of `Rf^! ℚ̄_ℓ` to the exceptional datum.
 -/
@@ -50,6 +52,8 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   {f : X ⟶ Y} [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f]
   [QuasiCompact f] [HasUpperShriek k₀ l f]
 
+omit [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] in
 /-- **The Weil orientation from an equivariant geometric orientation.** Let `ḡ^!` be a right
 adjoint of `Rḡ_*` for the compactification `ḡ` of `f̄` (`adjR'`), and let `o` be an isomorphism
 `ī^* (ḡ^! ℚ̄_ℓ) ≅ ℚ̄_ℓ(d)[2d]` of complexes on `X̄` which is Frobenius equivariant for the
@@ -59,8 +63,8 @@ statement of `exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso`. -/
 theorem exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso_of_isWeilEquivariant
     (d : ℕ) (hR : PreservesBoundedConstructibleAdicLowerStar k₀ l f)
     {R' : (DerivedCategory.boundedConstructibleAdic l
-        (Over.mk (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure).left
-          ).FullSubcategory ⥤
+        (Over.mk
+          (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure).left).FullSubcategory ⥤
       (DerivedCategory.boundedConstructibleAdic l
         (geometricFiberHomCompactification (k₀ := k₀) f).overObj.left).FullSubcategory}
     (adjR' : (DerivedCategory.boundedConstructibleAdic l
@@ -96,6 +100,8 @@ theorem exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso_of_isWeilE
     (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l Y))
   exact ⟨θ ≪≫ o, (hθ.comp ho).symm⟩
 
+omit [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] in
 /-- **The Weil orientation from the trace square** (the uniqueness route, blueprint
 `thm-pur-weil-equivariance-of-purity-and-trace`): let `o : f̄^! ℚ̄_ℓ ≅ ℚ̄_ℓ(d)[2d]` be an
 orientation on `X̄` (`f̄^! = ī^* ∘ ḡ^!` for the compactification), whose trace
@@ -106,8 +112,8 @@ that of `ℚ̄_ℓ(d)[2d]` compatibly with the Frobenius structures: the stateme
 theorem exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso_of_trace
     (d : ℕ) (hR : PreservesBoundedConstructibleAdicLowerStar k₀ l f)
     {R' : (DerivedCategory.boundedConstructibleAdic l
-        (Over.mk (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure).left
-          ).FullSubcategory ⥤
+        (Over.mk
+          (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure).left).FullSubcategory ⥤
       (DerivedCategory.boundedConstructibleAdic l
         (geometricFiberHomCompactification (k₀ := k₀) f).overObj.left).FullSubcategory}
     (adjR' : (DerivedCategory.boundedConstructibleAdic l
@@ -119,8 +125,9 @@ theorem exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso_of_trace
         hR ⊣ R')
     (o : (R' ⋙ ObjectProperty.liftFullSubcategory _ _
         (adicUpperStar l (compactificationOpenImmersion k₀ f)).mapDerivedCategory
-        (fun _ hK ↦ ProEtale.DerivedCategory.boundedConstructibleAdic.mapDerivedCategory_adicUpperStar
-          (compactificationOpenImmersion k₀ f) hK)).obj
+        (fun _ hK ↦
+          ProEtale.DerivedCategory.boundedConstructibleAdic.mapDerivedCategory_adicUpperStar
+            (compactificationOpenImmersion k₀ f) hK)).obj
         ⟨forget.obj (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l Y)),
           (WeilComplex.objectProperty_iff _).1
             (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l Y)).property⟩ ≅
