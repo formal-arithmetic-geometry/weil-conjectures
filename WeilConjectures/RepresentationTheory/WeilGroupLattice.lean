@@ -130,7 +130,6 @@ noncomputable def orbitLatticeCoord (ρ : W →* (M ≃ₗ[ℚ_[ℓ]] M)) (c : �
   map_add' x y := by
     ext i
     simp
-    rfl
   map_smul' a x := by
     ext i
     simp [← algebraMap_smul ℚ_[ℓ] a (x : M)]
