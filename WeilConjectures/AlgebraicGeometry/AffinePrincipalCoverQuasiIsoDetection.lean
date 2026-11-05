@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-public import Mathlib.Algebra.Category.ModuleCat.Limits
+public import Mathlib.CategoryTheory.Adjunction.Additive
 public import Mathlib.RingTheory.Localization.Away.Basic
 import WeilConjectures.AlgebraicGeometry.Modules.PullbackTilde
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
@@ -35,8 +35,9 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-private local instance (R : Type u) [Ring R] (J : Type) :
-    HasLimitsOfShape (Discrete J) (ModuleCat.{u} R) := ModuleCat.hasLimitsOfShape
+private local instance {R S : Type u} [CommRing R] [CommRing S] (f : R →+* S) :
+    (ModuleCat.extendScalars.{u, u, u} f).Additive :=
+  (ModuleCat.extendRestrictScalarsAdj.{u} f).left_adjoint_additive
 
 set_option backward.isDefEq.respectTransparency false in
 private theorem tilde_preservesHomology (R : CommRingCat.{u}) :
