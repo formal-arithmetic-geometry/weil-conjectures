@@ -25,12 +25,6 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
--- Keep constructed functors abstract; expose only category aliases to implicit unification.
-attribute [local irreducible] singleComplexOpenPullbackIso Functor.mapHomotopyCategory
-  Functor.mapDerivedCategory openPinnedHomotopyTensorRestrictionIso
-attribute [local implicit_reducible] Scheme.Modules Scheme.Modules.Hom TopCat.Sheaf
-  DerivedCategory HomotopyCategory
-
 private theorem remove_mapped_identity
     {C D : Type*} [Category C] [Category D] (F : D ⥤ C) (M : D)
     {A B E H : C} (s₁ : A ⟶ B) (s₂ : B ⟶ E) (s₃ : E ⟶ H)
@@ -52,6 +46,4 @@ private theorem cancel_restriction_counit
   simp only [hn]
   rw [reassoc_of% h]
 
-set_option linter.unusedVariables false in
--- Preserve the existing unused F₀ and a bindings in the public statement.
 end AlgebraicGeometry
