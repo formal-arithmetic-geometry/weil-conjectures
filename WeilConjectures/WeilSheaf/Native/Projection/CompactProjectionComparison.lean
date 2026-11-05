@@ -56,6 +56,14 @@ def projectionGeometricPullComp :
   (eqToIso (congrArg (CondensedRing.boundedConstructibleUpperStar Λ l) (cb).overI_overG.symm) ≪≫
     CondensedRing.boundedConstructibleUpperStarComp Λ l (cb).overI (cb).overG).symm
 
+/-- The geometric pullback compositor has the canonical ambient component. -/
+lemma projectionGeometricPullComp_hom_app
+    (N : BoundedConstructible (condensedRingObj Λ
+      (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber)) :
+    ((projectionGeometricPullComp k₀ l f).hom.app N).hom =
+      (CondensedRing.leftDerivedUpperStarOverCompactificationIso Λ cb).inv.app N.obj := by
+  exact CondensedRing.ι_map_eqToIso_trans_upperStarComp_inv_app_compactification l cb N
+
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Forget comparison for the compactification induced from the Weil category. -/
@@ -70,6 +78,16 @@ def projectionCompactificationForgetIso :
     G'
   let e := e₁ ≪≫ e₂
   exact e
+
+/-- The inverse compactification comparison is the stacked square, including its final identity. -/
+lemma projectionCompactificationForgetIso_inv_app_id (M : WeilComplex k₀ l X) :
+    (projectionCompactificationForgetIso k₀ l f).inv.app M =
+      (CondensedRing.boundedConstructibleLowerStar l (cb).overG).map
+        ((projectionOpenForgetIso k₀ l (c).i).inv.app M) ≫
+      (projectionProperForgetIso k₀ l (c).g).inv.app ((extensionByZero (c).i).obj M) ≫
+      (compactProjectionForget k₀ l Y).map (𝟙 ((derivedLowerShriek k₀ l f).obj M)) := by
+  erw [CategoryTheory.Functor.map_id, Category.comp_id]
+  rfl
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
@@ -130,7 +148,7 @@ theorem projectionCompactification_forget_square (M : WeilComplex k₀ l X)
           (CondensedRing.exceptionalProjectionMorphismOfCompactification Λ cb
             ((compactProjectionForget k₀ l X).obj M).obj
             ((compactProjectionForget k₀ l Y).obj N).obj) := by
-  have hε := CondensedRing.ι_map_eqToIso_trans_upperStarComp_inv_app_compactification l cb
+  have hε := projectionGeometricPullComp_hom_app k₀ l f
     ((compactProjectionForget k₀ l Y).obj N)
   have hp := CondensedRing.homMk_exceptionalProjectionMorphismOfCompactification_eq l cb
     ((compactProjectionForget k₀ l X).obj M) ((compactProjectionForget k₀ l Y).obj N)
@@ -182,13 +200,9 @@ theorem isIso_mateEquiv_projectionCompactificationForgetIso
     (TwoSquare.mk _ _ _ _ (projectionOpenForgetIso k₀ l (c).i).inv)
     (TwoSquare.mk _ _ _ _ (projectionProperForgetIso k₀ l (c).g).inv)
     (TwoSquare.mk _ _ _ _ (projectionCompactificationForgetIso k₀ l f).inv) (fun M ↦ by
-      simp only [e, e', NatIso.ofComponents_inv_app, Iso.refl_inv, Iso.refl_hom, NatTrans.id_app,
-        CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id,
-        projectionCompactificationForgetIso,
-        Iso.trans_inv, NatTrans.comp_app, Functor.isoWhiskerLeft_inv,
-        Functor.isoWhiskerRight_inv, Functor.whiskerLeft_app, Functor.whiskerRight_app]
-      erw [CategoryTheory.Functor.map_id, Category.comp_id]
-      rfl)] at h
+      simp only [e, e', NatIso.ofComponents_inv_app, Iso.refl_inv, Iso.refl_hom,
+        NatTrans.id_app, Category.id_comp]
+      exact projectionCompactificationForgetIso_inv_app_id k₀ l f M)] at h
   exact h
 
 end AlgebraicGeometry.WeilComplex
