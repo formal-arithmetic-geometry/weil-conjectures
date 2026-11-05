@@ -81,7 +81,7 @@
 - No local Lean/Lake, proof placeholders, trust escapes, or heartbeat increases.
 - This final commit changes only progress documentation after the successful build.
 
-# BZ302 in progress
+# BZ302 complete
 
 - Branch: `u9/BZ302`; starting commit `18e44f2d5127c179f285ccf7d988c2bf3963106e`.
 - Assigned module `WeilConjectures.RingTheory.PseudoCoherentNormalizedAlgebraTower`
@@ -89,8 +89,15 @@
 - Validated source commit: `0d7f5241259939090a66c9cf0c46ae2359caa63a`.
 - The user instructed continuation after the exact two-line statement compatibility
   proposal; the composition comparison now uses `.symm` to retain its old direction.
-- Full log: `/home/ubuntu/u9/bz/BUILD-BZ302-fix-full.log`.
-- Continuing into four direct importers, as the brief requires. RlimPerfectComplete
-  receives the same compositor fix without changes to declaration types.
-- Fix patterns and occurrence counts: `/home/ubuntu/u9/bz/FIXES-BZ302.md`.
+- Full successful log: `/home/ubuntu/u9/bz/BUILD-BZ302-fix-full.log`.
+- Attempted four direct importers: RlimPerfectComplete, IntegralConstantModelRealization,
+  IntegralContinuousEncodingConstructible, and ProEtaleTateTwistLevels.
+- They are blocked by unowned dependencies DerivedBaseChange, ConstantFieldFlat,
+  and RingedToposAdaptedFlatResolution. Skipped them as the brief directs.
+- The unvalidated RlimPerfectComplete changes were reverted; the candidate patch
+  is preserved at `/home/ubuntu/u9/bz/BZ302-rlim-proof.patch` for its owner.
+- Final Lean sources match the successful assigned-module build exactly.
+- Fix patterns, occurrence counts, and downstream diagnostics:
+  `/home/ubuntu/u9/bz/FIXES-BZ302.md`.
 - No local Lean/Lake, proof placeholders, trust escapes, or heartbeat increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ302.DONE`.
