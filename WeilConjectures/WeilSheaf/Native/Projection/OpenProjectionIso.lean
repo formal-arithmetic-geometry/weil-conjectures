@@ -17,6 +17,30 @@ universe u
 
 open CategoryTheory MonoidalCategory
 
+namespace CategoryTheory.Functor
+
+/-- Naturality of a left-adjoint projection map in uncurried form. -/
+lemma naturality_curry_leftProjection
+    {C D : Type*} [Category* C] [Category* D] {F : C ⥤ D} {G : D ⥤ C}
+    {T : C × C ⥤ C} {S : D × D ⥤ D}
+    (q : (postcompose₂.obj F).obj
+        ((((whiskeringLeft₂ C).obj (𝟭 C)).obj G).obj (curry.obj T)) ⟶
+      (((whiskeringLeft₂ D).obj F).obj (𝟭 D)).obj (curry.obj S))
+    {M M' : C} {N N' : D} (a : M ⟶ M') (b : N ⟶ N') :
+    F.map (T.map (Prod.mkHom a (G.map b))) ≫ (q.app M').app N' =
+      (q.app M).app N ≫ S.map (Prod.mkHom (F.map a) b) := by
+  have h₁ := NatTrans.congr_app (q.naturality a) N
+  have h₂ := (q.app M').naturality b
+  dsimp at h₁ h₂
+  have e₁ : Prod.mkHom a (G.map b) =
+      Prod.mkHom a (𝟙 _) ≫ Prod.mkHom (𝟙 _) (G.map b) := by ext <;> simp
+  have e₂ : Prod.mkHom (F.map a) b =
+      Prod.mkHom (F.map a) (𝟙 _) ≫ Prod.mkHom (𝟙 _) b := by ext <;> simp
+  rw [e₁, e₂, T.map_comp, F.map_comp, S.map_comp, Category.assoc,
+    h₂, ← Category.assoc, h₁, Category.assoc]
+
+end CategoryTheory.Functor
+
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
 variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
@@ -57,7 +81,7 @@ def nativeOpenProjectionIso : nativeOpenDerivedLeft k₀ l j ≅ nativeOpenDeriv
   refine (NatIso.ofComponents (fun MN ↦ @asIso _ _ _ _ ((q.app MN.1).app MN.2) (h MN))
     ?_).symm
   rintro ⟨M, N⟩ ⟨M', N'⟩ ⟨a, b⟩
-  exact Functor.naturality_curry_postcompose₂ q (𝟭 _) (𝟭 _) a b
+  exact Functor.naturality_curry_leftProjection q a b
 
 /-- The inverse of the open projection isomorphism is the canonical unit transpose. -/
 lemma nativeOpenProjectionIso_inverse_unit

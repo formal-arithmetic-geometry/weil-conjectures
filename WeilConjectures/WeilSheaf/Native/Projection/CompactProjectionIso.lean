@@ -8,6 +8,7 @@ module
 public import WeilConjectures.WeilSheaf.ProperProjectionFormula
 public import WeilConjectures.WeilSheaf.LowerShriekIndependence
 public import WeilConjectures.WeilSheaf.Native.Open.NativeOpenDerivedTensor
+public import WeilConjectures.WeilSheaf.Native.Projection.OpenProjectionIso
 
 /-!
 # A chosen compact-support projection isomorphism for Weil complexes
@@ -62,15 +63,14 @@ noncomputable def nativeCompactProjectionIso :
   have : IsOpenImmersion c.i := c.isOpenImmersion
   have : QuasiCompact c.i := c.quasiCompact_openImmersion inferInstance
   let π := rightDerivedLowerStarNativeDerivedTensorIso (k₀ := k₀) (l := l) c.g
-  let s := (ProEtaleWeilSheaf.native_open_derived_tensor k₀ l c.i).choose
-  let d := (ProEtaleWeilSheaf.native_open_derived_tensor k₀ l c.i).choose_spec.choose
+  let d := ProEtaleWeilSheaf.nativeOpenProjectionIso k₀ l c.i
   let ιX := (objectProperty k₀ l X).ι
   let ιY := (objectProperty k₀ l Y).ι
   let Rg := (ProEtaleWeilSheaf.lowerStar k₀ l c.g).rightDerivedFunctor
   let gs := ProEtaleWeilSheaf.nativeOpenPull k₀ l c.g
   let e : nativeCompactProjectionLeft k₀ l f ⋙ ιY ≅ nativeCompactProjectionRight k₀ l f ⋙ ιY :=
     Functor.isoWhiskerLeft ((extensionByZero c.i).prod (𝟭 _)) π ≪≫
-      Functor.isoWhiskerLeft (ιX.prod (ιY ⋙ gs)) (Functor.isoWhiskerRight d.gamma Rg) ≪≫
+      Functor.isoWhiskerLeft (ιX.prod (ιY ⋙ gs)) (Functor.isoWhiskerRight d Rg) ≪≫
       Functor.isoWhiskerRight (NatIso.prod (Iso.refl ιX)
         (Functor.isoWhiskerLeft ιY (nativeProjectionPullComp k₀ l f)))
         (ProEtaleWeilSheaf.nativeDerivedTensor k₀ l X ⋙
