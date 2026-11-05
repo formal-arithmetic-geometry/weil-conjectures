@@ -27,7 +27,7 @@ universe u w
 
 namespace CategoryTheory
 
-local instance (X : RingedSpace.{u}) (U : Opens X)
+noncomputable local instance (X : RingedSpace.{u}) (U : Opens X)
     [hU : HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X).over U))] :
     Category.{w} (@DerivedCategory (SheafOfModules.{u}
       ((sheafCompose ((Opens.grothendieckTopology X).over U)
