@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.CategoryTheory.Functor.FullyFaithful
-public import Mathlib.CategoryTheory.Yoneda
+public import WeilConjectures.Mathlib.CategoryTheory.Yoneda
 
 /-!
 # Fully faithful functors and the Yoneda embedding
@@ -22,12 +22,6 @@ universe v u₁ u₂
 namespace CategoryTheory.Functor.FullyFaithful
 
 variable {C : Type u₁} {D : Type u₂} [Category.{v} C] [Category.{v} D] {F : C ⥤ D}
-
-/-- For a fully faithful functor `F`, the functor `T ↦ Hom(F T, F A)` is `T ↦ Hom(T, A)`. -/
-noncomputable def opCompYonedaObjIso (hF : F.FullyFaithful) (A : C) :
-    F.op ⋙ yoneda.obj (F.obj A) ≅ yoneda.obj A :=
-  NatIso.ofComponents (fun _ ↦ hF.homEquiv.symm.toIso)
-    (fun g ↦ by ext x; exact hF.map_injective (by simp))
 
 /-- For a fully faithful functor `F`, the isomorphisms `Hom(F T, F A) ≅ Hom(T, A)`, natural in
 `A` and `T`. -/
