@@ -478,8 +478,7 @@ theorem isLocalRing_tensorProduct_aux
     have hSmax : (Q.comap inclS.toRingHom).IsMaximal := by
       refine Ideal.isMaximal_of_isIntegral_of_isMaximal_under (R := R)
         (Q.comap inclS.toRingHom) ?_
-      change (Ideal.comap (algebraMap R S) (Q.comap inclS.toRingHom)).IsMaximal
-      rw [hScomap]
+      rw [Ideal.under_def, hScomap]
       exact IsLocalRing.maximalIdeal.isMaximal R
     have hS : Q.comap inclS.toRingHom = maximalIdeal S := IsLocalRing.eq_maximalIdeal hSmax
     refine sup_le ?_ (Ideal.map_le_iff_le_comap.mpr hT.ge)
