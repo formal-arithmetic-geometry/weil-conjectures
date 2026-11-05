@@ -35,7 +35,6 @@ private lemma single_hom (G : C ⥤ D) [G.Additive]
         ((HomologicalComplex.singleMapHomologicalComplex G (.up ℤ) n).hom.app X) := by
   simp [mapDerivedCategorySingleFunctor, DerivedCategory.singleFunctorIsoCompQ]
   erw [Category.id_comp]
-  rfl
 
 omit [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E] in
 private lemma complex_single_comp (G : C ⥤ D) (H : D ⥤ E) [G.Additive] [H.Additive]
