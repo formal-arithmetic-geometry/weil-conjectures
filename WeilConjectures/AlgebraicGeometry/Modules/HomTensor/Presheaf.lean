@@ -26,6 +26,13 @@ namespace PresheafOfModules
 variable {C : Type u} [Category.{u} C] {R : Cᵒᵖ ⥤ CommRingCat.{u}}
   (M P : PresheafOfModules.{u} (R ⋙ forget₂ _ _))
 
+local instance (N : PresheafOfModules.{u} (R ⋙ forget₂ CommRingCat RingCat))
+    {X Y : Cᵒᵖ} (f : X ⟶ Y) :
+    Module (R.obj Y)
+      ((ModuleCat.restrictScalars ((R ⋙ forget₂ CommRingCat RingCat).map f).hom).obj
+        (N.obj Y)) :=
+  inferInstanceAs (Module (R.obj Y) (N.obj Y))
+
 /-- The morphism `Hom(M, R) ⊗ P ⟶ Hom(M, P)` of presheaves of modules, sending `φ ⊗ p` to
 `m ↦ φ(m) • p`. -/
 noncomputable def dualTensorHom : homObj M (unit _) ⊗ P ⟶ homObj M P :=
