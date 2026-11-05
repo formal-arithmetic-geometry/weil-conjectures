@@ -1,0 +1,10 @@
+module
+
+public import WeilConjectures.WeilSheaf.SmoothPurityUnitBaseChangeRelative
+
+#print axioms AlgebraicGeometry.ProEtale.CondensedRing.isIso_verdierBiduality
+#print axioms AlgebraicGeometry.ProEtale.CondensedRing.purityUpperShriekUnitDualIso
+#print axioms AlgebraicGeometry.ProEtale.CondensedRing.purityGeometricFiberDualizingIso
+#print axioms AlgebraicGeometry.ProEtale.CondensedRing.purityGeometricFiberUpperShriekUnitIso
+#print axioms AlgebraicGeometry.ProEtale.CondensedRing.purity_isIso_upperShriekBaseChangeOfMap_unit_geometricFiber
+#print axioms AlgebraicGeometry.ProEtale.CondensedRing.isIso_smoothUnitBaseChange_geometricFiberLowerShriekBaseChangeRelative
