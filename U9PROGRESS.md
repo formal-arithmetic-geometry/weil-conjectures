@@ -153,19 +153,27 @@
 - Notes and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ557.md`.
 - No local Lean/Lake, statement changes, proof escapes, or heartbeat increases.
 
-# BZ590 awaiting statement-repair authorization
+# BZ590 complete
 
 - Branch: `u9/BZ590`; starting commit: `cfcb63ad7`.
-- Added public Localization import and separate `import all` in
-  `InjectiveExchangeSourceTransport`; this fixes the proof's hidden-body error.
-- Remote `ucheck-bump` at `de7bd95a1f` failed with two public-statement type errors;
-  imports cannot make hidden Qh definitions available while checking the public type.
-- Exact unapplied proposal: `/home/ubuntu/u9/bz/BZ590-public-statement-proposal.patch`.
-  It changes the preimage target to `Plus.Qh.obj H` and adds the canonical
-  `quotientCompQhIso` inverse before the RHS. Asked for approval because the user's
-  explicit rule permits only proof/import edits. No statement change is applied.
-- Full log: `/home/ubuntu/u9/bz/BUILD-BZ590-import-full.log`.
-- Fix records: `/home/ubuntu/u9/bz/FIXES-BZ590.md`.
-- Next after approval: apply proposal, check unit, then build direct importer
-  `InjectiveExchangeRepresentative` and continue another layer if its dependencies pass.
-- No DONE marker; no local Lean/Lake, proof shortcuts, or heartbeat increases.
+- Assigned module `WeilConjectures.AlgebraicGeometry.InjectiveExchangeSourceTransport`
+  passed `ucheck-bump`: rc=0, failed=0, 4237 jobs, at
+  `393c972f1830b9c4b2503e820c97c3d716fd1b53` on poolb:43.157.184.90.
+- The user instructed continuation after the exact public transport proposal.
+  Applied its two changes: preimage target `Plus.Qh.obj H` and the canonical
+  `quotientCompQhIso` inverse before the RHS. Names, hypotheses, binders, and
+  existing docstrings are unchanged. Added the Localization imports for proof
+  reduction and removed the final `rfl`, since `erw` now closes the goal.
+- The assigned module rebuilt green at `14548dd95744e0e3e4af2c1bdba85f60a5410b71`
+  in the downstream check of `InjectiveExchangeRepresentative`.
+- Downstream skipped under the ownership rule: BZ591's
+  `InjectiveExchangeTargetTransport` failed with eight errors. No downstream
+  modules are claimed green; no second layer is reachable past this blocker.
+- Unit log: `/home/ubuntu/u9/bz/BUILD-BZ590-unit-green-full.log`.
+- Downstream log: `/home/ubuntu/u9/bz/BUILD-BZ590-downstream1-full.log`.
+- Fix patterns, exact errors, and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ590.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ590-contract-audit.txt`.
+- No local Lean/Lake, sorries, proof shortcuts, heartbeat increases, or profiler probes.
+- Completion marker: `/home/ubuntu/u9/state/BZ590.DONE`.
+- This final commit changes only progress documentation; Lean source matches both
+  successful module builds.
