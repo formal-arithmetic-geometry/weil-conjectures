@@ -1,25 +1,3 @@
-# BZ569 complete
-
-- Branch: `u9/BZ569`; assigned module: `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralReduction`.
-- Removed the redundant `rfl` after `simp` in the short-exactness proof.
-- The user instructed continuation after the concrete prerequisite-fix proposal.
-  Incorporated the owner's identical repair `216c997cc4f` as `d63827975` with provenance.
-- Reused the KFlat prerequisite repair from BZ558 commit `cba570747cc` as `809822403`;
-  BZ558's build diagnosed the same compatibility error, and KFlat is in our import closure.
-- The retry exposed the identical error in `KFlatResolutionIndependentCoefficients`;
-  reused that hunk from the same published commit as `f21a10b88`.
-- Assigned module and downstream `WeilConjectures.SixFunctors.ProEtale.ModuleObject.ModPowReduction`
-  passed `ucheck-bump`: rc=0, failed=0, 4370 jobs, on `poolb:43.166.72.113`.
-- Validated source commit: `f830bc63ed9c0f62dea2233d4746f27a6153ba5b`.
-- Full log: `/home/ubuntu/u9/bz/BUILD-BZ569-final-full.log`.
-- Tried four direct importers. `IntegralReductionConstructible`, `LisseLatticeValues`, and
-  `PushResidueShortExact` are blocked by unowned `CategoryTheory.Abelian.Ext.MapExactFunctor`.
-  The next-layer `DerivedComplete.RetractionLift` has the same blocker; skipped per brief.
-- Completion marker: `/home/ubuntu/u9/state/BZ569.DONE`.
-- This final commit changes only progress documentation; Lean sources match the green build.
-- Fix patterns, occurrence counts, and logs: `/home/ubuntu/u9/bz/FIXES-BZ569.md`.
-- No local Lean/Lake, statement changes, proof placeholders, or heartbeat increases.
-
 # BZ133 complete
 
 - Branch: `u9/BZ133`.
@@ -163,3 +141,34 @@
 - Existing `ucheck-bump` invocation is queued; it reads the pushed branch after
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+# BZ557 in progress
+
+- Branch: `u9/BZ557`; starting commit: `8af5cb324`.
+- Added the public AffineScheme import to direct importer AffineBasisSectionsDerivedUnit.
+- Initial remote builds stopped in the shared Presheaf.InternalHom dependency.
+- On continuation, merged BZ558 prerequisite repair `f28760733369366ac823f0084f3c4090afa3a90d`.
+- Next: ucheck-bump on AffineBasisSectionsResolutionHomologyEpi, AffineBasisSectionsDerivedUnit,
+  and AffineOpenSectionsResolutionQuasiIso; fix any owned errors and write DONE when green.
+- Notes and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ557.md`.
+- No local Lean/Lake, statement changes, proof escapes, or heartbeat increases.
+
+# BZ573 complete
+
+- Branch: `u9/BZ573`; starting commit: `8af5cb3248338412e860fdc16db73c8eeebd81d9`.
+- Assigned module `WeilConjectures.AlgebraicGeometry.QuotientChange.InternalScalarMateTransitivity`
+  passed `ucheck-bump`: rc=0, built=4, failed=0, 4083 jobs; target rebuilt in 39 seconds.
+- Validated source commit: `99ea0bf21a3ff18e8c7a102f6e05daf121d477ba`.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ573-final-full.log`.
+- Applied the one-line private helper API correction after the user instructed continuation;
+  updated inverse cancellation and removed obsolete local reducibility attributes.
+  All public statements, binders, assumptions, and existing docstrings are unchanged.
+- Incorporated owner/coordinator dependency repairs, including BZ581 and sweep29.
+- The direct importer was attempted and skipped because its unowned dependency
+  `WeilConjectures.CategoryTheory.Abelian.Ext.MapExactFunctor` (BZ589) fails at 230:16.
+  Stopped that blocked batch after the assigned target passed; no downstream source edits.
+- Patterns, counts, and evidence: `/home/ubuntu/u9/bz/FIXES-BZ573.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ573-contract-audit.txt` (46 declaration headers).
+- No local Lean/Lake, proof placeholders, trust bypasses, profiler probes, or limit increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ573.DONE`.
+- This final commit changes only progress documentation; Lean sources match the green build.
