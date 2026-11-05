@@ -116,19 +116,22 @@
 - Fix patterns and baseline log: `/home/ubuntu/u9/bz/FIXES-BZ384.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ430 complete
+# BZ469 in progress
 
-- Branch: `u9/BZ430`; starting commit: `99a06bbbb`.
-- Assigned module `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebraFreeComparison` passed `ucheck-bump`: rc=0, failed=0, 2022 jobs, target rebuilt in 6.1 seconds.
-- Validated source commit: `bb1af5fb2f`; tree: `poolb:43.157.174.214`.
-- User instructed continuation after the exact two-helper visibility proposal; both helper proposition texts are unchanged and both are now private. All proof bodies, binders, assumptions, and docstrings are unchanged.
-- Localization public/import-all directives permit proof and private-signature reduction through `Qh`.
-- Owned module also rebuilt successfully in the downstream batch at `e6c26edd04`.
-- Direct importer `WeilConjectures.WeilSheaf.LowerShriekForget` was blocked by unowned BZ373's `GrothendieckEtaleRelativeSectionColimit.lean:98:7` rewrite failure. Per the brief, stopped the downstream attempt and skipped its importer `WeilConjectures.WeilSheaf.AffineLineBundle`, which shares the blocker.
-- Owned green log: `/home/ubuntu/u9/bz/BZ430-owned-green-full.log`.
-- Downstream failure log: `/home/ubuntu/u9/bz/BZ430-downstream-full.log`.
-- Fixes and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ430.md`.
-- Contract audit: `/home/ubuntu/u9/bz/BZ430-contract-audit.txt`.
-- No local Lean/Lake, sorries, axioms, admissions, trust bypasses, profiler probes, or heartbeat increases.
-- Completion marker: `/home/ubuntu/u9/state/BZ430.DONE`.
-- This final commit updates only progress documentation; Lean source matches the green build.
+- Branch: `u9/BZ469`; starting commit: `99a06bbbb`.
+- Assigned module passed `ucheck-bump` at `5c3da91d0` (4234 jobs, rc=0).
+- The user instructed continuation after the explicit compositor API proposal.
+  The assigned theorem and its Etale wrapper now use `.symm` at the four affected sites.
+- `StrictLocalInjectiveSourceComparison` passes after giving its proof-local `q'` the
+  explicit quotient-then-Plus.Qh endpoint required by the homotopy-category derived unit.
+  Applied the same local fix to the Strict/Local counterpart for final validation.
+- Direct importers Etale.EtaleInjectiveSectionsComparison and
+  StrictLocalInjectiveSourceComparison/Transition passed at `9eddb01a93`.
+- SourceStageSectionsNaturality, SourceDerivedSectionsNaturalityCore, and
+  SourceDerivedSectionsNaturality passed as second-layer dependencies.
+- StrictLocalInjectiveSourceSections is skipped: its unowned dependencies
+  InjectiveExchangeSourceTransport, InjectiveExchangeTargetTransport, and
+  SourceLocalizedCocycleHomology fail. No edits to these blockers.
+- Next: final green batch including the Strict/Local comparison counterpart, then DONE.
+- Fix patterns, whole-tree counts, and logs: `/home/ubuntu/u9/bz/FIXES-BZ469.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
