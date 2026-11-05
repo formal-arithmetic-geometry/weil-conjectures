@@ -368,7 +368,7 @@ noncomputable def comparisonPresheafFullyFaithful (l : ℕ) [Fact l.Prime] (X : 
   map_preimage f := by apply Mod.hom_ext; rfl
   preimage_map f := by apply Mod.hom_ext; rfl
 
-local instance {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
+noncomputable local instance {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     (M : AdicSheaf l X) (V : X.ProEtᵒᵖ) :
     SMul ((adicConstantSheaf l X).obj.obj V)
       (((comparisonModuleFunctor l X).obj M).val.obj V) :=
