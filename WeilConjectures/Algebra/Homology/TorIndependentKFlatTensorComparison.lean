@@ -122,6 +122,7 @@ theorem localizedComparison_isIso_of_torIndependent_kFlat
         ((HomotopyCategory.quotient _ _).map s)) := by
       have : IsIso (DerivedCategory.Qh.map ((HomotopyCategory.quotient _ _).map s)) :=
         (NatIso.isIso_map_iff (DerivedCategory.quotientCompQhIso _) s).2 inferInstance
+      dsimp only [Functor.comp_map]
       infer_instance
     have htarget : IsIso
         (((extendScalars (algebraMap R B)).mapHomotopyCategory (.up ℤ) ⋙
