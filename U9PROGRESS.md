@@ -143,14 +143,22 @@
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
 
-# BZ549 in progress
+# BZ549 complete
 
 - Branch: `u9/BZ549`; owned module: `GlobalSectionsDirectImageKInjectiveAcyclic`.
-- Owned import fix pushed at `d5e8c22c2`: publicly import `ChangeOfRingsExact`.
-- The user instructed continuation after the explicit one-line dependency proposal.
-  Applied the compatibility tensor-map lemma in `Presheaf.InternalHom`.
-- Re-read the brief and refreshed coordinator notes; latest integrated branch is `8af5cb324`.
-- Next: remote validation, first importer `DerivedGlobalSectionsAffinizationComparison`,
-  then second layer `DerivedGlobalSectionsPreservesCoproducts`.
-- Fixes and exact errors: `/home/ubuntu/u9/bz/FIXES-BZ549.md`.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+- Owned module, direct importer `DerivedGlobalSectionsAffinizationComparison`,
+  and repaired dependencies `Presheaf.InternalHom` / `KFlat` passed together:
+  `ucheck-bump` rc=0, failed=0, 3264 jobs at `dbdb89efdb0299d34520e949f0f111887a96ea0f`.
+- Second-layer `DerivedGlobalSectionsPreservesCoproducts` also passed:
+  `ucheck-bump` rc=0, failed=0, 4153 jobs at `03552a1ed2fd031cd3423a169c0707e2d3a875f6`.
+- Both builds used `poolb:43.157.132.198`; Lean sources are identical in those commits.
+- Full logs: `/home/ubuntu/u9/bz/BUILD-BZ549-final-full.log` and
+  `/home/ubuntu/u9/bz/BUILD-BZ549-downstream-final-full.log`.
+- Fixes: public exactness import, compatibility tensor-map lemmas in two required
+  dependencies, and `dsimp only` to retain the importer's local IsIso instance.
+- Every declaration statement and docstring is unchanged. All five checked modules
+  are free of sorries, axioms, admits, and prohibited proof shortcuts.
+- No local Lean/Lake execution, heartbeat increases, or profiler probes.
+- Fix patterns and exact diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ549.md`.
+- Completion marker: `/home/ubuntu/u9/state/BZ549.DONE`.
+- This completion commit changes only progress documentation.
