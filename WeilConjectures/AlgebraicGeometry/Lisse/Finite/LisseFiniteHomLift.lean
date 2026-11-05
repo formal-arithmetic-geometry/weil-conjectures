@@ -428,6 +428,9 @@ theorem exists_lisse_finite_hom_lift [CompactSpace X] [QuasiSeparatedSpace X]
       c.hom.app M ≫
         (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ F)).map φ ≫
           c.inv.app N = ψ := by
+  let : ∀ _ : ℤ, HasZeroMorphisms
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)) :=
+    fun _ ↦ inferInstance
   have _ := hN
   let C := (HomologicalComplex.single _ (.up ℤ) 0).obj N
   let I := AsSmall.{u + 1} (Under E)
