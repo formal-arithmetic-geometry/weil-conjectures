@@ -13,7 +13,7 @@ public import WeilConjectures.WeilSheaf.SmoothPurityDescendedTrace
 
 universe u
 
-open CategoryTheory Limits
+open CategoryTheory Limits MonoidalCategory
 open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
