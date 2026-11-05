@@ -202,12 +202,12 @@ theorem rightDerivedFunctorCommIso_hom_app_comp (e₁₂ : P₂ ⋙ rY₁₂ ≅
       e₁₂.hom.app (rX₂₃.obj K) ≫ P₁.map (cX.hom.app K))
     (K : DerivedCategory C₃) :
     (rightDerivedFunctorCommIso e₁₃).hom.app K =
-      ((mapDerivedCategoryCompIso rY₂₃ rY₁₂).symm ≪≫ mapDerivedCategoryNatIso cY).inv.app
+      (mapDerivedCategoryCompIso rY₂₃ rY₁₂ ≪≫ mapDerivedCategoryNatIso cY).inv.app
           (P₃.rightDerivedFunctor.obj K) ≫
         rY₁₂.mapDerivedCategory.map ((rightDerivedFunctorCommIso e₂₃).hom.app K) ≫
         (rightDerivedFunctorCommIso e₁₂).hom.app (rX₂₃.mapDerivedCategory.obj K) ≫
         P₁.rightDerivedFunctor.map
-          (((mapDerivedCategoryCompIso rX₂₃ rX₁₂).symm ≪≫
+          ((mapDerivedCategoryCompIso rX₂₃ rX₁₂ ≪≫
             mapDerivedCategoryNatIso cX).hom.app K) := by
   let τ : P₃.rightDerivedFunctor ⋙ rY₁₃.mapDerivedCategory ⟶
       rX₁₃.mapDerivedCategory ⋙ P₁.rightDerivedFunctor :=

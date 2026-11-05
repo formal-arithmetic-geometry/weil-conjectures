@@ -86,3 +86,14 @@
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
 - Completion marker: `/home/ubuntu/u9/state/BZ229.DONE`.
 - This completion commit changes only progress documentation; Lean source matches the green build.
+
+# BZ307 in progress
+
+- Branch: `u9/BZ307`; starting commit: `ec1bc636d93cb23a821cc484ab6aef1db014813f`.
+- Assigned module: `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CommIsoComp`.
+- Baseline remote build failed only at the two obsolete compositor `.symm` uses in the statement.
+- The user instructed continuation after the exact two-expression compatibility proposal;
+  `BZ307-statement-compatibility.patch` is applied, along with the matching proof changes.
+- Next: validate with `ucheck-bump`, check direct importers, and write the DONE marker.
+- Fix patterns, whole-tree counts, and logs: `/home/ubuntu/u9/bz/FIXES-BZ307.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
