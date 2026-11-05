@@ -111,7 +111,7 @@ theorem tensorCoefficient_cone_boundary
       CochainComplex.homologyδOfTriangle] using
       (Functor.homologySequenceδ_naturality
         (HomologicalComplex.homologyFunctor (ModuleCat.{u} C) (.up ℤ) 0)
-        U' V' ψ i (i + 1) rfl).symm
+        ψ i (i + 1) rfl).symm
   rw [h₁, h₃] at hb
   simpa only [U', V', S, F, H, J, tensorConeTriangle, Functor.comp_obj,
     Functor.mapTriangle_obj] using hb

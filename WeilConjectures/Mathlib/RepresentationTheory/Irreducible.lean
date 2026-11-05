@@ -165,11 +165,11 @@ theorem exists_covBy_chain [FiniteDimensional k V] {M N : Subrepresentation ρ} 
     ∃ (n : ℕ) (F : ℕ → Subrepresentation ρ) (i₀ : ℕ), F 0 = ⊥ ∧ F n = ⊤ ∧
       (∀ i < n, F i ⋖ F (i + 1)) ∧ i₀ < n ∧ F i₀ = N ∧ F (i₀ + 1) = M := by
   have : WellFoundedLT (Subrepresentation ρ) :=
-    ⟨Subrelation.wf (r := fun a b ↦ a.toSubmodule < b.toSubmodule) (fun h ↦ h)
-      (InvImage.wf _ wellFounded_lt)⟩
+    Subrelation.wf (r := fun a b ↦ a.toSubmodule < b.toSubmodule) (fun h ↦ h)
+      (InvImage.wf _ wellFounded_lt)
   have : WellFoundedGT (Subrepresentation ρ) :=
-    ⟨Subrelation.wf (r := fun a b ↦ b.toSubmodule < a.toSubmodule) (fun h ↦ h)
-      (InvImage.wf _ wellFounded_gt)⟩
+    Subrelation.wf (r := fun a b ↦ b.toSubmodule < a.toSubmodule) (fun h ↦ h)
+      (InvImage.wf _ wellFounded_gt)
   obtain ⟨a, ha₀, n₁, hn₁, ha⟩ :=
     exists_covBy_seq_of_wellFoundedLT_wellFoundedGT_of_le (bot_le : ⊥ ≤ N)
   obtain ⟨b, hb₀, n₂, hn₂, hb⟩ :=
