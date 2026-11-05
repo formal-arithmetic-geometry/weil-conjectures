@@ -168,3 +168,15 @@
 - No local Lean/Lake execution, sorries, proof shortcuts, heartbeat increases, or profiler probes.
 - Completion marker: `/home/ubuntu/u9/state/BZ585.DONE`.
 - Final documentation commit leaves Lean source identical to the green revision.
+
+# BZ613 in progress
+
+- Branch: `u9/BZ613`; baseline: `b7a97a5ed`.
+- The user instructed continuation after the exact six-private-helper API patch.
+  Applied that patch, preserving comparison directions under Mathlib's reversed compositor.
+- All three public declaration headers are unchanged. Proof-local comparisons and
+  the coefficient comparison construction use the same orientation migration.
+- Next: validate the assigned module with `ucheck-bump`, repair residual proof errors,
+  then validate direct importers and one further layer before writing DONE.
+- Fix patterns and prior diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ613.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.

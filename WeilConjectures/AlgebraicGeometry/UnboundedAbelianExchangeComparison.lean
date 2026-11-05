@@ -51,9 +51,9 @@ private lemma exactComparison_factorsh
     [PreservesFiniteLimits F'] [PreservesFiniteColimits F']
     [PreservesFiniteLimits G'] [PreservesFiniteColimits G']
     (e : F ⋙ G ≅ F' ⋙ G') (P : HomotopyCategory C (.up ℤ)) :
-    ((Functor.mapDerivedCategoryCompIso F G).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso F G ≪≫
       Functor.mapDerivedCategoryNatIso e ≪≫
-      Functor.mapDerivedCategoryCompIso F' G').hom.app (DerivedCategory.Qh.obj P) ≫
+      (Functor.mapDerivedCategoryCompIso F' G').symm).hom.app (DerivedCategory.Qh.obj P) ≫
         G'.mapDerivedCategory.map (F'.mapDerivedCategoryFactorsh.hom.app P) ≫
         G'.mapDerivedCategoryFactorsh.hom.app ((F'.mapHomotopyCategory (.up ℤ)).obj P) =
       G.mapDerivedCategory.map (F.mapDerivedCategoryFactorsh.hom.app P) ≫
@@ -94,12 +94,12 @@ private lemma exactComparison_inv
     [PreservesFiniteLimits F'] [PreservesFiniteColimits F']
     [PreservesFiniteLimits G'] [PreservesFiniteColimits G']
     (e : F ⋙ G ≅ F' ⋙ G') :
-    ((Functor.mapDerivedCategoryCompIso F G).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso F G ≪≫
       Functor.mapDerivedCategoryNatIso e ≪≫
-      Functor.mapDerivedCategoryCompIso F' G').inv =
-    ((Functor.mapDerivedCategoryCompIso F' G').symm ≪≫
+      (Functor.mapDerivedCategoryCompIso F' G').symm).inv =
+    (Functor.mapDerivedCategoryCompIso F' G' ≪≫
       Functor.mapDerivedCategoryNatIso e.symm ≪≫
-      Functor.mapDerivedCategoryCompIso F G).hom := by
+      (Functor.mapDerivedCategoryCompIso F G).symm).hom := by
   have hi : (Functor.mapDerivedCategoryNatIso e).inv =
       (Functor.mapDerivedCategoryNatIso e.symm).hom := rfl
   simp only [Iso.trans_inv, Iso.trans_hom, Iso.symm_inv, Iso.symm_hom, hi, Category.assoc]
@@ -236,8 +236,8 @@ private lemma exactComparison_inv_factorsh
     (t : F ⋙ J ≅ F' ⋙ J') (M : HomotopyCategory X (.up ℤ)) :
     J'.mapDerivedCategoryFactorsh.inv.app ((F'.mapHomotopyCategory (.up ℤ)).obj M) ≫
       D(J').map (F'.mapDerivedCategoryFactorsh.inv.app M) ≫
-      ((Functor.mapDerivedCategoryCompIso F J).symm ≪≫ Functor.mapDerivedCategoryNatIso t ≪≫
-        Functor.mapDerivedCategoryCompIso F' J').inv.app (DerivedCategory.Qh.obj M) =
+      (Functor.mapDerivedCategoryCompIso F J ≪≫ Functor.mapDerivedCategoryNatIso t ≪≫
+        (Functor.mapDerivedCategoryCompIso F' J').symm).inv.app (DerivedCategory.Qh.obj M) =
     DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory t.inv (.up ℤ)).app M) ≫
       J.mapDerivedCategoryFactorsh.inv.app ((F.mapHomotopyCategory (.up ℤ)).obj M) ≫
       D(J).map (F.mapDerivedCategoryFactorsh.inv.app M) := by
@@ -300,10 +300,11 @@ private lemma derivedSquare_cube
     (K : DerivedCategory B) :
     D(V').map ((derivedSquare e).app K) ≫
         (derivedSquare b).app (D(P).obj K) ≫
-        R(H₀).map (((Functor.mapDerivedCategoryCompIso U P₀).symm ≪≫
-          Functor.mapDerivedCategoryNatIso d ≪≫ Functor.mapDerivedCategoryCompIso P U').inv.app K) =
-      ((Functor.mapDerivedCategoryCompIso V Q₀).symm ≪≫
-        Functor.mapDerivedCategoryNatIso c ≪≫ Functor.mapDerivedCategoryCompIso Q V').inv.app
+        R(H₀).map ((Functor.mapDerivedCategoryCompIso U P₀ ≪≫
+          Functor.mapDerivedCategoryNatIso d ≪≫
+          (Functor.mapDerivedCategoryCompIso P U').symm).inv.app K) =
+      (Functor.mapDerivedCategoryCompIso V Q₀ ≪≫
+        Functor.mapDerivedCategoryNatIso c ≪≫ (Functor.mapDerivedCategoryCompIso Q V').symm).inv.app
           (R(G).obj K) ≫
         D(Q₀).map ((derivedSquare a).app K) ≫
         (derivedSquare e₀).app (D(U).obj K) := by
@@ -628,9 +629,9 @@ private lemma derived_mate_exact_eq_square (adj : L ⊣ R) (adj' : L' ⊣ R')
     (e : G ⋙ L' ≅ L ⋙ G') :
     (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
       adj'.mapDerivedCategoryRightDerivedAdjunction
-      (TwoSquare.mk _ _ _ _ (((Functor.mapDerivedCategoryCompIso G L').symm ≪≫
+      (TwoSquare.mk _ _ _ _ ((Functor.mapDerivedCategoryCompIso G L' ≪≫
         Functor.mapDerivedCategoryNatIso e ≪≫
-        Functor.mapDerivedCategoryCompIso L G').hom))).natTrans =
+        (Functor.mapDerivedCategoryCompIso L G').symm).hom))).natTrans =
       derivedSquare (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ e.hom)).natTrans := by
   apply derived_mate_eq_square
   intro N
@@ -640,9 +641,9 @@ private lemma derived_mate_exact_inv_eq_square (adj : L ⊣ R) (adj' : L' ⊣ R'
     (e : L ⋙ G' ≅ G ⋙ L') :
     (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
       adj'.mapDerivedCategoryRightDerivedAdjunction
-      (TwoSquare.mk _ _ _ _ (((Functor.mapDerivedCategoryCompIso L G').symm ≪≫
+      (TwoSquare.mk _ _ _ _ ((Functor.mapDerivedCategoryCompIso L G' ≪≫
         Functor.mapDerivedCategoryNatIso e ≪≫
-        Functor.mapDerivedCategoryCompIso G L').inv))).natTrans =
+        (Functor.mapDerivedCategoryCompIso G L').symm).inv))).natTrans =
       derivedSquare (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ e.inv)).natTrans := by
   apply derived_mate_eq_square
   intro N
