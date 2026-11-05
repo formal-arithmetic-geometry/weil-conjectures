@@ -53,7 +53,7 @@ theorem exists_forall_exists_pieceObj_hom {ι : Type*} (W : ι → X.Etale)
     obtain ⟨Z, h, hh, z, -⟩ := (pointSmallEtale t.1).jointly_surjective _ hR
       (CategoryTheory.Over.homMk t.1 (by simp [T]))
     obtain ⟨_, g, _, ⟨i⟩, rfl⟩ := hh
-    obtain ⟨s, ⟨a⟩⟩ := exists_pieceFunctor_obj_hom f t ⟨Z, z⟩
+    obtain ⟨s, ⟨a⟩⟩ := exists_pieceFunctor_obj_hom f t (Functor.elementsMk _ Z z)
     exact ⟨s, i, ⟨a.val ≫ g⟩⟩
   choose s i a using hpiece
   have := Fintype.ofFinite (GeometricFiber f y)
