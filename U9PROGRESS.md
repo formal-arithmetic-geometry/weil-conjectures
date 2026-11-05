@@ -59,3 +59,12 @@ canonical targets retain Q.obj T. Native hom groups therefore retain each input'
 Pullback uses explicit step isomorphisms. Generic scalar conjugation runs in this category and
 realization is applied only once to the final equation. Not yet checked. The finite prototype's
 current ucheck landed on a cold pool tree and is still rebuilding prerequisites (~16k/22k).
+
+20:27 CST: Dedicated indexed category + scalar calculation GREEN at32be59e54, log202608:
+IndexedCategory category/preadditivity/fully-faithful realization/pullback/realization iso all
+kernel milliseconds; scalarDatum_conjugate_indexed kernel10.6ms. Category labels retain native
+(P ⋙ Q).obj M source and Q.obj T target presentations. Actual scalar application pending.
+Canceled ONLY own stale finite prototype job u9-K4c-1793880588 on verified newsrv t2 (log200947,
+ef3337a2e4) after17min prerequisite rebuild; that snapshot predates category method fixes.
+Runner reports rc0 on systemd cancellation; it is NOT a successful target check. No other jobs,
+locks or scheduler settings touched. Next combined concrete check uses corrected snapshot.
