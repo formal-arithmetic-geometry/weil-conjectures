@@ -115,3 +115,11 @@
 - Next: remote validation of the assigned module, then its three direct importers.
 - Fix patterns and baseline log: `/home/ubuntu/u9/bz/FIXES-BZ384.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+# BZ430 in progress
+
+- Branch: `u9/BZ430`; starting commit: `99a06bbbb`.
+- User instructed continuation after the exact two-helper visibility proposal; both helper proposition texts are unchanged and both are now private.
+- Localization public/import-all directives permit proof and private-signature reduction through `Qh`.
+- Next: validate owned module through `ucheck-bump`, then `WeilConjectures.WeilSheaf.LowerShriekForget` and its importer.
+- Fixes: `/home/ubuntu/u9/bz/FIXES-BZ430.md`. No local Lean/Lake or forbidden proof escapes.
