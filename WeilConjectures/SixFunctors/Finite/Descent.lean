@@ -332,7 +332,7 @@ lemma exists_pullSection_eq_map_toEtaleMkId [Surjective r]
     intro t
     have e := ConcreteCategory.congr_hom (Etale.toPresheafFiber_stalkRestrict
       AddCommGrpCat.{u + 1} r ybar t ((r)^*[AddCommGrpCat.{u + 1}].obj G)
-      ⟨U, fiberPt (v₀ ≫ φ₀) hu⟩) δ
+      (Functor.elementsMk _ U (fiberPt (v₀ ≫ φ₀) hu))) δ
     rw [ConcreteCategory.comp_apply] at e
     erw [e]
     obtain ⟨V₁, a₁, U₁, φ₁, hφ₁, g₁, ⟨x₁, hx₁⟩, hrep₁⟩ :=
@@ -355,7 +355,8 @@ lemma exists_pullSection_eq_map_toEtaleMkId [Surjective r]
       upperStarCompSheafFiberIso_hom_toPresheafFiber_pullSection]
     erw [upperStarCompSheafFiberIso_hom_toPresheafFiber_pullSection]
     exact toPresheafFiber_fiberPt_eq_of_eq rfl rfl
-      (Scheme.Hom.basePt_fst r ⟨U, fiberPt (v₀ ≫ φ₀) hu⟩ t).symm _ _ _ _ G.obj g₁ g C
+      (Scheme.Hom.basePt_fst r (Functor.elementsMk _ U (fiberPt (v₀ ≫ φ₀) hu)) t).symm
+      _ _ _ _ G.obj g₁ g C
   have hz : (pointSmallEtale ybar).toPresheafFiber U (fiberPt (v₀ ≫ φ₀) hu)
       ((r)_*[AddCommGrpCat.{u + 1}].obj ((r)^*[AddCommGrpCat.{u + 1}].obj G)).obj δ = 0 := by
     apply (ConcreteCategory.bijective_of_isIso (Pi.lift fun t ↦
