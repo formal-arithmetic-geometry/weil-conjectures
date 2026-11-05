@@ -88,41 +88,40 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
         have hn := projection_nativePullTensor_normalization k₀ l g
         dsimp only [ProjectionRestrictionTensorNormalization] at hn
         dsimp only [L, nativeOpenPull]
-        set_option pp.maxDepth 8 in
-          run_tac Lean.Elab.Tactic.withMainContext do
-            let pf ← Lean.Elab.Term.elabTerm (Lean.mkIdent `hn) none
-            let H ← Lean.instantiateMVars (← Lean.Meta.inferType pf)
-            let G ← Lean.instantiateMVars (← (← Lean.Elab.Tactic.getMainGoal).getType)
-            let mut pending := #[(H, G)]
-            let mut seen : Std.HashSet (Lean.Expr × Lean.Expr) := {}
-            let mut differences := 0
-            while !pending.isEmpty && differences < 20 do
-              let (a, b) := pending.back!
-              pending := pending.pop
-              let a := a.consumeMData
-              let b := b.consumeMData
-              if a == b || seen.contains (a, b) then continue
-              seen := seen.insert (a, b)
-              if !a.hasLooseBVars && (← Lean.Meta.isProof a) then continue
-              if a.isApp && b.isApp && a.getAppFn == b.getAppFn &&
-                  a.getAppNumArgs == b.getAppNumArgs then
-                pending := pending ++ (a.getAppArgs.zip b.getAppArgs)
-              else
-                match a, b with
-                | .lam _ ta ba _, .lam _ tb bb _ =>
-                    pending := pending ++ #[(ta, tb), (ba, bb)]
-                | .forallE _ ta ba _, .forallE _ tb bb _ =>
-                    pending := pending ++ #[(ta, tb), (ba, bb)]
-                | .proj _ i sa, .proj _ j sb =>
-                    if i == j then pending := pending.push (sa, sb)
-                    else
-                      differences := differences + 1
-                      Lean.logInfo m!"K5 data difference: {a}\nversus {b}"
-                | _, _ =>
+        run_tac Lean.Elab.Tactic.withMainContext do
+          let pf ← Lean.Elab.Term.elabTerm (Lean.mkIdent `hn) none
+          let H ← Lean.instantiateMVars (← Lean.Meta.inferType pf)
+          let G ← Lean.instantiateMVars (← (← Lean.Elab.Tactic.getMainGoal).getType)
+          let mut pending := #[(H, G)]
+          let mut seen : Std.HashSet (Lean.Expr × Lean.Expr) := {}
+          let mut differences := 0
+          while !pending.isEmpty && differences < 20 do
+            let (a, b) := pending.back!
+            pending := pending.pop
+            let a := a.consumeMData
+            let b := b.consumeMData
+            if a == b || seen.contains (a, b) then continue
+            seen := seen.insert (a, b)
+            if !a.hasLooseBVars && (← Lean.Meta.isProof a) then continue
+            if a.isApp && b.isApp && a.getAppFn == b.getAppFn &&
+                a.getAppNumArgs == b.getAppNumArgs then
+              pending := pending ++ (a.getAppArgs.zip b.getAppArgs)
+            else
+              match a, b with
+              | .lam _ ta ba _, .lam _ tb bb _ =>
+                  pending := pending ++ #[(ta, tb), (ba, bb)]
+              | .forallE _ ta ba _, .forallE _ tb bb _ =>
+                  pending := pending ++ #[(ta, tb), (ba, bb)]
+              | .proj _ i sa, .proj _ j sb =>
+                  if i == j then pending := pending.push (sa, sb)
+                  else
                     differences := differences + 1
-                    Lean.logInfo m!"K5 data difference: {a}\nversus {b}"
-            (throwError "K5 diagnostic: {differences} non-proof differences" :
-              Lean.Elab.Tactic.TacticM Unit))
+                    Lean.logInfo m!"K5 data difference heads: {a.getAppFn} / {b.getAppFn}"
+              | _, _ =>
+                  differences := differences + 1
+                  Lean.logInfo m!"K5 data difference heads: {a.getAppFn} / {b.getAppFn}"
+          (throwError "K5 diagnostic: {differences} non-proof differences" :
+            Lean.Elab.Tactic.TacticM Unit))
       (by exact projection_native_realization_model_normalization k₀ l Y)
       (by exact projection_native_realization_model_normalization k₀ l Z)
       (fun A B ↦ (R.mapCochainComplexμIso A B).symm)
