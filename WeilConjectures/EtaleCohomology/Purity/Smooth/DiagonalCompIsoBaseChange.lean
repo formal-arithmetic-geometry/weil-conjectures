@@ -61,7 +61,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasKummerClass Λ]
 -- `rfl` compares the tensor unit of `constantComplex` with the one inside the definition, which
 -- needs a deep (but fast: elaboration and type checking well below 0.1 s, measured) recursion.
 set_option maxRecDepth 20000 in
-omit [IsIso g] [IsIso g'] in
+omit [IsIso g] [IsIso g'] [HasKummerClass Λ] [HasKummerClass.IsNormalized Λ] in
 /-- The unfolding of
 `AlgebraicGeometry.Etale.rightDerivedUpperShriekDualizingComplexIsoOfCompEqId`. -/
 lemma compEqId_eq {V B : Scheme.{u}} (p : V ⟶ B) [HasCompactification p] (s : B ⟶ V)
