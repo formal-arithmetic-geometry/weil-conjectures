@@ -92,7 +92,10 @@ lemma projectionOpenAdjunction_unit_app_hom (K : BoundedConstructible (condensed
       CondensedRing.boundedConstructibleUpperStarCompatibility, ObjectProperty.liftCompιIso]
     rfl
 
-/-- The bounded open mate has the underlying ambient mate. -/
+/-- The bounded open mate has the underlying ambient mate. The two mates are expanded by
+`projection_mateEquiv_app`; the unit and counit components are identified by the named
+component lemmas and the middle factors are definitionally the ambient ones (no rewriting in
+the concrete goal). -/
 lemma projectionOpenMate_app_hom (M : WeilComplex k₀ l Z) :
     ((mateEquiv (extensionByZeroUpperStarAdjunction (k₀ := k₀) (l := l) j)
       (CondensedRing.boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ l jb)
@@ -108,12 +111,17 @@ lemma projectionOpenMate_app_hom (M : WeilComplex k₀ l Z) :
     (ProEtaleWeilSheaf.derivedExtensionByZeroUpperStarAdjunction k₀ l j)
     (CondensedRing.derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ (jb).left)
     (TwoSquare.mk _ _ _ _ (projectionOpenCompositeForgetIso k₀ l j).inv) M.obj
+  have hu := projectionOpenAdjunction_unit_app_hom k₀ l j
+    ((compactProjectionForget k₀ l U).obj ((upperStar j).obj M))
+  have hc := projectionOpenAdjunction_counit_app_hom k₀ l j M
   refine (congrArg (fun φ ↦ (boundedConstructible _).ι.map φ) h₁).trans ?_
   refine Eq.trans ?_ h₂.symm
-  change ((CondensedRing.boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ l jb).unit.app _).hom ≫ _ ≫ _ = _
-  rw [projectionOpenAdjunction_unit_app_hom]
-  conv_rhs => rw [← projectionOpenAdjunction_counit_app_hom k₀ l j M]
-  rfl
+  refine congrArg₂ (· ≫ ·) hu (congrArg₂ (· ≫ ·) ?_ ?_)
+  · rfl
+  · exact congrArg (fun φ ↦ (CondensedRing.upperStar Λ (jb).left).leftDerivedFunctor.map
+      (((IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l Z)).mapDerivedCategory ⋙
+        (adicSheafEquivCondensedMod l
+          (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor.mapDerivedCategory).map φ)) hc
 
 /-- The exceptional mate of the open forget square is invertible. -/
 theorem isIso_mateEquiv_projectionOpenForgetIso :

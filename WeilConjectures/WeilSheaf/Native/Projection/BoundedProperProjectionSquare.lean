@@ -9,6 +9,7 @@ public import WeilConjectures.WeilSheaf.Native.Projection.BoundedProjectionIso
 public import WeilConjectures.WeilSheaf.Native.Projection.BoundedForgetNormalization
 public import WeilConjectures.WeilSheaf.Native.Projection.ProperProjectionForgetSquare
 public import WeilConjectures.WeilSheaf.Native.Projection.ProjectionPushNormalization
+public import WeilConjectures.WeilSheaf.Native.Projection.ProjectionPushMateNormalization
 public import WeilConjectures.WeilSheaf.Native.Projection.MonoidalProjectionForgetSquare
 public import WeilConjectures.PoincareDuality.ProjectionFormulaOpenImmersion
 
@@ -46,34 +47,26 @@ local instance : IsProper (gb).left :=
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The bounded proper forget square has the same components as the canonical realization
-mate transported along the exact-functor compositor. -/
+mate transported along the exact-functor compositor: the generic normalization
+`projectionPushForgetIso_mateEquiv_hom_app` reads the middle factors off
+`nativeProjectionPushMate_normalization`, and the bounded components are definitionally
+those factors. -/
 lemma projectionProperForgetIso_hom_app (M : WeilComplex k₀ l X) :
     ((projectionProperForgetIso k₀ l g).hom.app M).hom =
       (projectionPushForgetIso (ProEtaleWeilSheaf.nativeProperForgetIso k₀ l g)
         (projectionRealizationCompIso k₀ l X)
         (projectionRealizationCompIso k₀ l Y)).hom.app M.obj := by
-  have h := projectionPushForgetIso_hom_app_of_factorization
-    (ProEtaleWeilSheaf.nativeProperForgetIso k₀ l g)
-    (projectionRealizationCompIso k₀ l X) (projectionRealizationCompIso k₀ l Y) M.obj
-    ((adicSheafDerivedEquivCondensedMod l _).functor.map
-      ((IsoAlgebra.derivedForgetCommIso (adicLowerStarGeometricFiberMapCompFrobeniusIso l g
-        (comp_over g (Spec (CommRingCat.of k₀))))).hom.app M.obj) ≫
-      (projectionAdicCondensedDerivedPushIso l (gb).left).hom.app
-        ((IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).mapDerivedCategory.obj M.obj))
-    (by
-      have hn := ProEtaleWeilSheaf.nativeProjectionPushMate_normalization k₀ l g M.obj
-      dsimp only [projectionRealizationCompIso, ProEtaleWeilSheaf.nativeProperForgetIso,
-        asIso_hom, TwoSquare.natTrans] at hn ⊢
-      simp only [Category.assoc] at hn ⊢
-      cast_proofs hn)
-  rw [h]
+  have h := projectionPushForgetIso_mateEquiv_hom_app _ _ _ _ _ _ _ _
+    (ProEtaleWeilSheaf.nativeProjectionPushMate_normalization k₀ l g M.obj)
+  refine Eq.trans ?_ h.symm
   simp only [projectionProperForgetIso, Functor.isoHComp, Iso.symm_hom, Iso.trans_inv,
     Iso.symm_inv, Functor.isoWhiskerRight_inv, Functor.isoWhiskerLeft_inv,
     Functor.whiskerRight_app, Functor.whiskerLeft_app, NatTrans.comp_app,
     Functor.associator_inv_app, Functor.associator_hom_app,
     ObjectProperty.FullSubcategory.comp_hom]
+  try dsimp only [Functor.comp_obj]
   simp only [ObjectProperty.FullSubcategory.id_hom, Category.id_comp, Category.comp_id]
-  erw [Category.id_comp]
+  try erw [Category.id_comp]
   rfl
 
 set_option backward.defeqAttrib.useBackward true in
