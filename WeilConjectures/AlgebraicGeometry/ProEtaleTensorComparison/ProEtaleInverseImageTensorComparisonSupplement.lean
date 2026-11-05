@@ -864,6 +864,10 @@ private theorem identityScalarIso_exists :
         intro U V i
         apply ModuleCat.ExtendScalars.hom_ext
         intro m
+        let : Module (A.obj.obj V)
+            ((ModuleCat.restrictScalars
+              (((sheafCompose J (forget₂ CommRingCat RingCat)).obj A).obj.map i).hom).obj
+                (P.val.obj V)) := inferInstanceAs (Module (A.obj.obj V) (P.val.obj V))
         change (ModuleCat.extendScalarsId (A.obj.obj V)).hom.app (P.val.obj V)
             (changeOfRingsMap (𝟙 A) P i
               ((1 : A.obj.obj U) ⊗ₜ[A.obj.obj U, ((𝟙 A : A ⟶ A).hom.app U).hom] m)) =
@@ -1021,10 +1025,13 @@ theorem moduleComp_exists {X Y Z : Scheme.{u}} (g : X ⟶ Y) (h : Y ⟶ Z)
               change Q.val.map (δ.hom.app U.unop).op (j.val.app U (r • s)) =
                 (ringComp g h R).hom.hom.app ((proEtaleBaseChange (g ≫ h)).op.obj U)
                   (((proEtaleSheafAdjunction (g ≫ h) CommRingCat.{u + 1}).unit.app R).hom.app
-                    U r) • Q.val.map (δ.hom.app U.unop).op (j.val.app U s)
+                    U r) • (show Q.val.obj ((proEtaleBaseChange (g ≫ h)).op.obj U) from
+                      Q.val.map (δ.hom.app U.unop).op (j.val.app U s))
               exact (congrArg (Q.val.map (δ.hom.app U.unop).op) hj).trans
                 ((Q.val.map_smul (δ.hom.app U.unop).op _ _).trans
-                  (congrArg (fun t ↦ t • Q.val.map (δ.hom.app U.unop).op (j.val.app U s))
+                  (congrArg (fun t ↦ t •
+                    (show Q.val.obj ((proEtaleBaseChange (g ≫ h)).op.obj U) from
+                      Q.val.map (δ.hom.app U.unop).op (j.val.app U s)))
                     (hr U r).symm)) }
         naturality := by
           intro U V i
@@ -1197,7 +1204,8 @@ theorem moduleId_exists {X : Scheme.{u}} (R : Rings X) (M : Modules R) :
               change M.val.map (δ.hom.app U.unop).op (r • m) =
                 (ringId R).hom.hom.app ((proEtaleBaseChange (𝟙 X)).op.obj U)
                   (((proEtaleSheafAdjunction (𝟙 X) CommRingCat.{u + 1}).unit.app R).hom.app U r) •
-                    (M.val.map (δ.hom.app U.unop).op m)
+                    (show M.val.obj ((proEtaleBaseChange (𝟙 X)).op.obj U) from
+                      M.val.map (δ.hom.app U.unop).op m)
               rw [hr]
               exact M.val.map_smul (δ.hom.app U.unop).op r m }
         naturality := by
