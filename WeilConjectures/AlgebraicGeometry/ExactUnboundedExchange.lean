@@ -35,7 +35,7 @@ noncomputable def exactDerivedSquareUpperStarIso
     {f : X ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X} {g : Y' ⟶ Y}
     (sq : CommSq g' f' f g) :
     D((g)^*[A]) ⋙ D((f')^*[A]) ≅ D((f)^*[A]) ⋙ D((g')^*[A]) :=
-  (Functor.mapDerivedCategoryCompIso _ _) ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (squareUpperStarIso A sq) ≪≫
     (Functor.mapDerivedCategoryCompIso _ _).symm
 
