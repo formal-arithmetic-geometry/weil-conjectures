@@ -49,3 +49,16 @@
   all other declaration statements and all existing docstrings are unchanged.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 - Completion marker: `/home/ubuntu/u9/state/BZ130.DONE`.
+
+# BZ154 in progress
+
+- Branch: `u9/BZ154`, starting commit `80aeb4bf4`.
+- Three assigned modules passed the first repair build at `31ce5f122`.
+- The user instructed continuation after the exact one-line statement correction in
+  `BZ154-shift-statement-proposal.patch`; that patch is now applied.
+- The shift comparison's target is quotient followed by `Plus.Qh`, matching its existing
+  construction and homotopy-category unit. All other changes are the mandated composition
+  isomorphism migration and imports for private definitional reductions.
+- Next: validate all four modules together with `ucheck-bump`, then write the DONE marker.
+- Fix patterns: `/home/ubuntu/u9/bz/FIXES-BZ154.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
