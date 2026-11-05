@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.WeilSheaf.SmoothPurityTatePullbackFactor
-public import WeilConjectures.WeilSheaf.SmoothPurityTateWeilLaw
+public import WeilConjectures.WeilSheaf.SmoothPurityRationalRootLaw
 public import WeilConjectures.WeilSheaf.SmoothPurityScalarDatumNamed
 public import WeilConjectures.WeilSheaf.SmoothPurityFrobeniusFactorAlias
 public import WeilConjectures.WeilSheaf.SmoothPurityCyclotomicField

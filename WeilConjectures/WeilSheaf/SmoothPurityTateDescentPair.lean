@@ -4,11 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.WeilSheaf.SmoothPurityTatePowersDescentLaw
-public import WeilConjectures.WeilSheaf.SmoothPurityPairTransport
-public import WeilConjectures.WeilSheaf.SmoothPurityFrobeniusFactorAlias
+public import WeilConjectures.WeilSheaf.SmoothPurityTateGeometricPair
 public import WeilConjectures.WeilSheaf.TateTwistCondensedBridge
-import WeilConjectures.Tactic.ExactModProofs
 
 /-! # The Tate datum from finite-base descent is the canonical root datum -/
 
@@ -36,23 +33,8 @@ noncomputable def purity_geometricFiberWeilLowerStarTateNatIso (d : ℕ) :
     (CondensedRing.geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj ℓ)
         (X ↘ Spec (.of k₀))).obj (tateTwistNat X ℓ d) ≅
       tateTwistLowerPair k₀ ℓ X d := by
-  have h := purity_upperStarTateTwistNatIso_geometricFiber ℓ (X ↘ Spec (.of k₀)) d
-  let e := purity_pairIso_transport (frobeniusUpperStarIsoLowerStarInv k₀ ℓ X)
-    ((geometricFiberProjUpperStarFrobeniusIso (Profinite.padicAlgClRingObj ℓ)
-      (X ↘ Spec (.of k₀))).app (tateTwistNat X ℓ d))
-    (upperStarTateTwistNatIso ℓ (X ↘ Spec (.of k₀)).geometricGaloisFrobenius.hom
-      (X ↘ Spec (.of k₀)).geometricFiberToAlgebraicClosure d)
-    ((geometricFiberProjLowerStarFrobeniusIso (Profinite.padicAlgClRingObj ℓ)
-      (X ↘ Spec (.of k₀))).app (tateTwistNat X ℓ d))
-    (((frobeniusUpperStarIsoLowerStarInv k₀ ℓ X).app _).symm ≪≫
-      upperStarTateTwistNatIso ℓ (X ↘ Spec (.of k₀)).geometricGaloisFrobenius.hom
-        (X ↘ Spec (.of k₀)).geometricFiberToAlgebraicClosure d)
-    (purity_geometricFiberProjLowerStarFrobeniusIso_app
-      (Profinite.padicAlgClRingObj ℓ) (X ↘ Spec (.of k₀)) (tateTwistNat X ℓ d))
-    rfl (upperStarTateTwistNatIso ℓ (X ↘ Spec (.of k₀)).geometricFiberProj
-      (X ↘ Spec (.of k₀)) d) (by
-        dsimp only [Iso.app_hom, Functor.comp_obj, Functor.comp_map] at h ⊢
-        exact_mod_proofs h)
-  exact e
+  dsimp only [tateTwistLowerPair, geometricFiberFrobeniusIso,
+    frobeniusUpperStarIsoLowerStarInv]
+  exact purity_geometricTatePairIso ℓ (X ↘ Spec (.of k₀)) d
 
 end AlgebraicGeometry.WeilSheaf
