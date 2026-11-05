@@ -457,7 +457,7 @@ private theorem evaluation_isIso (P : Modules.{uC, vC, r} R)
   rw [Adjunction.homEquiv_counit]
   infer_instance
 
-noncomputable local instance (M : Modules.{uC, vC, r} R) (U : Cᵒᵖ) :
+private noncomputable local instance (M : Modules.{uC, vC, r} R) (U : Cᵒᵖ) :
     SMul ((unit (ringSheaf.{uC, vC, r} R)).val.obj U) (M.val.obj U) :=
   inferInstanceAs (SMul (R.obj.obj U) (M.val.obj U))
 
