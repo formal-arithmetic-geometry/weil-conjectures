@@ -20,8 +20,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
-variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
-  [Fact (ringChar k ≠ ℓ)] [NeZero (ℓ : k)]
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k]
   (E : PadicAlgCl.FiniteIntermediateField ℓ)
   {X : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
@@ -37,8 +36,9 @@ theorem isIso_of_purityIntegralReduction_map
     (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X.left)).ι
   let g : K ⟶ L := (ObjectProperty.fullyFaithfulι _).preimage f
   have hg : ι.map g = f := (ObjectProperty.fullyFaithfulι _).map_preimage f
-  have hmap : IsIso ((Mod.extendScalars (integersModPowReduction X.left ℓ E.1 1)).leftDerivedFunctor.map
-      (ι.map g)) := by
+  have hmap : IsIso
+      ((Mod.extendScalars (integersModPowReduction X.left ℓ E.1 1)).leftDerivedFunctor.map
+        (ι.map g)) := by
     rw [hg]
     exact hf
   have hredι := (NatIso.isIso_map_iff

@@ -16,8 +16,10 @@ import WeilConjectures.WeilSheaf.SmoothPurityFiniteEquivariance
 The assigned Weil leaf is not asserted to be closed by this audit.
 -/
 
-#print axioms AlgebraicGeometry.ProEtale.CondensedRing.eq_of_isIntegralSmoothOrientation
-#print axioms AlgebraicGeometry.ProEtale.CondensedRing.exists_isIntegralSmoothOrientation_of_compatible
-#print axioms AlgebraicGeometry.ProEtale.CondensedRing.isIntegralSmoothOrientation_iff_trace
-#print axioms AlgebraicGeometry.ProEtale.CondensedRing.exists_equivariant_iso_of_finite_reductions
-#print axioms AlgebraicGeometry.Etale.isWeilMorphism_dualizingComplexTwistShiftIso_inv
+open AlgebraicGeometry.ProEtale.CondensedRing AlgebraicGeometry.Etale
+
+#print axioms eq_of_isIntegralSmoothOrientation
+#print axioms exists_isIntegralSmoothOrientation_of_compatible
+#print axioms isIntegralSmoothOrientation_iff_trace
+#print axioms exists_equivariant_iso_of_finite_reductions
+#print axioms isWeilMorphism_dualizingComplexTwistShiftIso_inv
