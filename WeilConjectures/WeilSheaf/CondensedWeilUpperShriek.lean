@@ -141,6 +141,7 @@ noncomputable abbrev condensedProperExchange :=
 
 variable (k₀) in
 set_option linter.style.longLine false in
+set_option linter.style.longLine false in
 set_option linter.unusedSectionVars false in
 /-- The Weil derived direct image along `g` in the condensed model preserves bounded
 constructible condensed Weil complexes, as soon as the geometric one preserves bounded
@@ -158,6 +159,7 @@ theorem condensedWeilObjectProperty_rightDerivedFunctor
     ((IsoAlgebra.derivedForgetCommIso (condensedProperExchange k₀ l f)).app M).symm (hR _ hM)
 
 variable (k₀) in
+set_option linter.style.longLine false in
 set_option linter.style.longLine false in
 /-- **The Weil derived direct image is a left adjoint in the condensed model**, as soon as the
 geometric derived direct image on bounded constructible complexes is. -/
@@ -192,6 +194,7 @@ theorem isLeftAdjoint_condensedWeilLowerStar
     (condensedWeilObjectProperty_rightDerivedFunctor k₀ l f hR)
 
 variable (k₀) in
+set_option linter.style.longLine false in
 set_option linter.style.longLine false in
 /-- **The Frobenius structure of the Weil `Rg^!` is the exceptional datum, condensed model**: for a
 right adjoint `R'` of the geometric `Rḡ_*` on bounded constructible condensed complexes and a right

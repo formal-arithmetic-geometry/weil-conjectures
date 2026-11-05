@@ -92,10 +92,10 @@ local instance : IsProper
   Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange (P := @IsProper)
     f (comp_over f _) inferInstance
 
-set_option linter.style.longLine false in
 variable {P : Dᵇc(X)⟦Profinite.padicAlgClRingObj l⟧}
   {N : Dᵇc(Y)⟦Profinite.padicAlgClRingObj l⟧}
-  (γ : P ⟶ (CondensedRing.boundedConstructibleUpperShriek l (properTraceBaseMap (k₀ := k₀) f)).obj N)
+  (γ : P ⟶
+    (CondensedRing.boundedConstructibleUpperShriek l (properTraceBaseMap (k₀ := k₀) f)).obj N)
   (T : WeilComplex k₀ l X) (U : WeilComplex k₀ l Y)
   (eT : (ProEtaleWeilSheaf.derivedEquivCondensed k₀ l X).functor.obj T.obj ≅
     (CondensedRing.geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l)

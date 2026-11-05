@@ -12,8 +12,6 @@ import WeilConjectures.Tactic.ExactModProofs
 
 @[expose] public section
 
-set_option profiler true
-set_option profiler.threshold 1
 
 universe u
 
@@ -32,6 +30,7 @@ variable {k : Type u} [Field k] [Finite k] (ℓ : ℕ) [Fact ℓ.Prime]
 local instance : NeZero (ℓ : k) := ⟨by
   rw [Ne, ringChar.spec, Nat.prime_dvd_prime_iff_eq (CharP.char_is_prime k _) Fact.out]
   exact Fact.out⟩
+set_option linter.style.longLine false in
 local instance : NeZero (ℓ : AlgebraicClosure k) := WeilSheaf.purity_neZero_natCast_algebraicClosure k ℓ
 
 /-- A root trivialization of the geometric Tate line, using its canonical pullback
@@ -42,6 +41,7 @@ noncomputable def purityCanonicalTateOneTrivialization :
         (condensedRingObj (Profinite.padicAlgClRingObj ℓ) a.geometricFiber)) :=
   purityScalarCanonicalTrivialization ℓ a hζ hζ'
 
+set_option linter.style.longLine false in
 /-- The canonical geometric Tate datum has the expected q-scalar law under the
 root trivialization. -/
 lemma purityCanonicalTateOneTrivialization_weil :

@@ -92,6 +92,7 @@ instance : QuasiCompact (compactificationOpenImmersion k₀ f) :=
 
 variable (k₀) in
 set_option linter.style.longLine false in
+set_option linter.style.longLine false in
 /-- The levelwise derived adjunction `D(ī_!) ⊣ D(ī^*)`, restricted to bounded constructible adic
 complexes. -/
 noncomputable abbrev openImmersionBoundedConstructibleAdjunction :

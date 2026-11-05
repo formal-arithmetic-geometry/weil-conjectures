@@ -102,6 +102,7 @@ noncomputable abbrev condensedOpenImmersionExchange :=
 
 variable (k₀) in
 set_option linter.style.longLine false in
+set_option linter.style.longLine false in
 set_option linter.unusedSectionVars false in
 /-- The condensed Weil pullback `D(i^*)` along the open immersion of the compactification
 preserves bounded constructible condensed Weil complexes. -/
@@ -140,6 +141,7 @@ noncomputable def condensedGeometricUpperShriek :
         (condensedOpenImmersionMap k₀ f) K hK)
 
 variable (k₀) in
+set_option linter.style.longLine false in
 set_option linter.style.longLine false in
 /-- The underlying bounded constructible condensed complex of a condensed Weil complex. -/
 noncomputable abbrev condensedForgetObj (L' : (condensedWeilObjectProperty k₀ l Y).FullSubcategory) :
