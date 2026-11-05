@@ -25186,6 +25186,7 @@ public import WeilConjectures.TraceFormula.Specialization.ComponentClassReductio
 public import WeilConjectures.TraceFormula.Specialization.ComponentCounitIso
 public import WeilConjectures.TraceFormula.Specialization.ComponentExchangeAssembly
 public import WeilConjectures.TraceFormula.Specialization.ComponentExchangeFactor
+public import WeilConjectures.TraceFormula.Specialization.ComponentFixedLocusModel
 public import WeilConjectures.TraceFormula.Specialization.ComponentModelHom
 public import WeilConjectures.TraceFormula.Specialization.ComponentSpecialFibre
 public import WeilConjectures.TraceFormula.Specialization.ComponentSpecialLiftUnit
@@ -25193,6 +25194,7 @@ public import WeilConjectures.TraceFormula.Specialization.ComponentSpecializatio
 public import WeilConjectures.TraceFormula.Specialization.ComponentUnitClass
 public import WeilConjectures.TraceFormula.Specialization.ComponentUnitClassF
 public import WeilConjectures.TraceFormula.Specialization.ConstantFamilySmoothUnit
+public import WeilConjectures.TraceFormula.Specialization.ContractingFixedComponent
 public import WeilConjectures.TraceFormula.Specialization.ContractingIdeals
 public import WeilConjectures.TraceFormula.Specialization.ContractingSquaring
 public import WeilConjectures.TraceFormula.Specialization.CoordinateCompactification
@@ -25546,6 +25548,7 @@ public import WeilConjectures.TraceFormula.Specialization.ZeroSectionAffine
 public import WeilConjectures.TraceFormula.Specialization.ZeroSectionCartier
 public import WeilConjectures.TraceFormula.Specialization.ZeroSectionPoint
 public import WeilConjectures.TraceFormula.Specialization.ZeroSectionVanishing
+public import WeilConjectures.TraceFormula.SquaringFixedLocus
 public import WeilConjectures.TraceFormula.Stalk
 public import WeilConjectures.TraceFormula.StalkDualizable
 public import WeilConjectures.TraceFormula.StalkFrobeniusGraph
