@@ -32,6 +32,9 @@ open CategoryTheory
 
 variable {C : Type*} [Category* C] {R : Cᵒᵖ ⥤ CommRingCat.{u}}
 
+local instance (X : Cᵒᵖ) : CommRing ((R ⋙ forget₂ CommRingCat RingCat).obj X) :=
+  inferInstanceAs (CommRing (R.obj X))
+
 namespace PresheafOfModules
 
 variable (M : PresheafOfModules.{u} (R ⋙ forget₂ CommRingCat RingCat)) (r : ℕ)
