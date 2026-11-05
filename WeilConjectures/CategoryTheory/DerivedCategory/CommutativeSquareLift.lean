@@ -101,7 +101,7 @@ private theorem derived_homotopy_square_lift
   have heqh : DerivedCategory.Qh.map (q.map (g ≫ r)) =
       DerivedCategory.Qh.map (q.map (s ≫ g')) := by
     apply (cancel_mono ((DerivedCategory.quotientCompQhIso C).hom.app L₀)).mp
-    simpa only [DerivedCategory.quotientCompQhIso_hom_naturality] using
+    simpa only [q, DerivedCategory.quotientCompQhIso_hom_naturality] using
       congrArg (fun f ↦ (DerivedCategory.quotientCompQhIso C).hom.app K ≫ f) heq
   obtain ⟨P, d₀, hd₀, hcomp⟩ :=
     (MorphismProperty.map_eq_iff_precomp DerivedCategory.Qh
