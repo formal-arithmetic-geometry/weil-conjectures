@@ -81,7 +81,8 @@ theorem exists_forall_isIso_property_derivedReduction_map
   obtain ⟨f, hf⟩ := exists_derivedReduction_map_eq hL t fun n ↦
     derivedReductionStep_compatible n _ _ (ht n)
   refine ⟨f, fun n ↦ ?_⟩
-  rw [hf n]
+  have hfn : (purityIntegralReduction X ℓ E (n + 1)).map f = t n := hf n
+  rw [hfn]
   exact htP n
 
 end AlgebraicGeometry.ProEtale

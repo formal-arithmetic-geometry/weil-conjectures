@@ -431,3 +431,7 @@ GREEN at ef09cfe05c in K4-20261105T090443.log: SmoothPurityCanonicalFinite (27s:
 ## 2026-11-05 09:33 +0800 — uniqueness conversion pinpointed
 - K4-20261105T092936.log rc=1 on the new remote pool. Unique now reaches the LAST comparison application;13.58s spent propagating its expected type into `congrArg ι.map`, again comparing the composite reduction with its inclusion factor. Bound that equality before passing it to the generic comparison theorem.
 - ReductionFunctor needs the CategoryTheory.Obj scope for the transported MonObj instance (the other files already open it). Added the scope. No budget changes.
+
+## 2026-11-05T09:32:40.917669+08:00 — canonical uniqueness GREEN
+- K4-20261105T093120.log validates SmoothPurityCanonicalUnique (8.4s): both eq_of_isIntegralSmoothOrientation and eq_of_isCanonicalSmoothOrientation. Binding the fully inferred inclusion-map equality avoids the last13.58s expected-type conversion. ReductionFunctor is GREEN (8.2s).
+- ConstrainedLift now elaborates its complete proof except the final rewrite, where the named functor is intentionally not unfolded by rw. Added the exact equality in the new functor spelling before rewriting. No resource raises.
