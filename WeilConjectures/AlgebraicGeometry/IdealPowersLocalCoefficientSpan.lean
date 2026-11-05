@@ -29,6 +29,12 @@ universe v
 open CategoryTheory Opposite
 namespace AlgebraicGeometry
 
+noncomputable local instance {X : Scheme.{v}} (F : X.Modules) {U V : X.Opens}
+    (i : U ⟶ V) : Module Γ(X, U)
+      ((ModuleCat.restrictScalars (X.ringCatSheaf.obj.map i.op).hom).obj
+        (F.val.obj (op U))) :=
+  inferInstanceAs (Module Γ(X, U) Γ(F, U))
+
 /-- Affine core of the local coefficient span argument.  On an affine open `W`,
 the ideal-power product section is in the coefficient span of the given affine
 generators.  This is the algebraic expansion step in Stacks Tag 02O8.
