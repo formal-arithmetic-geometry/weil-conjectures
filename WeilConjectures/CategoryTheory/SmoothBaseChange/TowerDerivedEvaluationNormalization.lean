@@ -206,9 +206,9 @@ def towerDerivedEvaluationInterchange
     ((Functor.whiskeringRight ℕᵒᵖ B A).obj F).mapDerivedCategory ⋙
         ((evaluation ℕᵒᵖ A).obj n).mapDerivedCategory ≅
       ((evaluation ℕᵒᵖ B).obj n).mapDerivedCategory ⋙ F.mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso
-    ((Functor.whiskeringRight ℕᵒᵖ B A).obj F) ((evaluation ℕᵒᵖ A).obj n)).symm ≪≫
-    Functor.mapDerivedCategoryCompIso ((evaluation ℕᵒᵖ B).obj n) F
+  Functor.mapDerivedCategoryCompIso
+    ((Functor.whiskeringRight ℕᵒᵖ B A).obj F) ((evaluation ℕᵒᵖ A).obj n) ≪≫
+    (Functor.mapDerivedCategoryCompIso ((evaluation ℕᵒᵖ B).obj n) F).symm
 
 private theorem derivedComposition_fac
     {A : Type uA} {B : Type uB} {C : Type uC}
@@ -248,10 +248,10 @@ private theorem towerInterchange_fac
   let EA := (evaluation ℕᵒᵖ A).obj n
   let EB := (evaluation ℕᵒᵖ B).obj n
   apply (cancel_epi
-    ((Functor.mapDerivedCategoryCompIso FT EA).hom.app (DerivedCategory.Q.obj K))).mp
+    ((Functor.mapDerivedCategoryCompIso FT EA).inv.app (DerivedCategory.Q.obj K))).mp
   dsimp only [FT, EA, EB]
   simp only [towerDerivedEvaluationInterchange, Iso.trans_hom, NatTrans.comp_app,
-    Iso.symm_hom, Category.assoc, Iso.hom_inv_id_app_assoc]
+    Iso.symm_hom, Category.assoc, Iso.inv_hom_id_app_assoc]
   exact (derivedComposition_fac EB F K).trans (derivedComposition_fac FT EA K).symm
 
 private theorem towerTransition_fac
