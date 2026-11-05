@@ -7,6 +7,7 @@ module
 public import WeilConjectures.WeilSheaf.Native.Projection.OpenProjectionForget
 public import WeilConjectures.WeilSheaf.Native.Projection.CompactForgetComparison
 public import WeilConjectures.WeilSheaf.Native.Projection.ProjectionForgetIsoTransport
+public import WeilConjectures.WeilSheaf.Native.Projection.MateComponentFormula
 
 /-! # The canonical open forget square on bounded constructible complexes -/
 
@@ -111,10 +112,7 @@ theorem isIso_mateEquiv_projectionOpenForgetIso :
   have hc := projectionOpenAdjunction_counit_app_hom k₀ l j M
   have hm : ((mateEquiv a b (projectionOpenForgetIso k₀ l j).inv).app M).hom =
       (mateEquiv A B (projectionOpenCompositeForgetIso k₀ l j).inv).app M.obj := by
-    simp only [mateEquiv_apply, NatTrans.comp_app, Functor.whiskerLeft_app,
-      Functor.whiskerRight_app, Functor.associator_hom_app, Functor.associator_inv_app,
-      Functor.rightUnitor_inv_app, Functor.leftUnitor_hom_app, Category.id_comp,
-      Category.comp_id]
+    rw [projection_mateEquiv_app, projection_mateEquiv_app]
     change (b.unit.app _).hom ≫ _ ≫ _ = _
     rw [projectionOpenAdjunction_unit_app_hom, hc]
     rfl

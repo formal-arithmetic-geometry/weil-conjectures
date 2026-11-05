@@ -8,6 +8,7 @@ public import WeilConjectures.WeilSheaf.Native.Projection.BoundedProperForget
 public import WeilConjectures.WeilSheaf.Native.Projection.BoundedProjectionIso
 public import WeilConjectures.WeilSheaf.Native.Projection.BoundedForgetNormalization
 public import WeilConjectures.WeilSheaf.Native.Projection.ProperProjectionForgetSquare
+public import WeilConjectures.WeilSheaf.Native.Projection.ProjectionPushNormalization
 public import WeilConjectures.WeilSheaf.Native.Projection.MonoidalProjectionForgetSquare
 public import WeilConjectures.PoincareDuality.ProjectionFormulaOpenImmersion
 
@@ -49,10 +50,19 @@ lemma projectionProperForgetIso_hom_app (M : WeilComplex k₀ l X) :
       (projectionPushForgetIso (ProEtaleWeilSheaf.nativeProperForgetIso k₀ l g)
         (projectionRealizationCompIso k₀ l X)
         (projectionRealizationCompIso k₀ l Y)).hom.app M.obj := by
-  simp [projectionProperForgetIso, projectionBoundedAdicCondensedPushIso,
-    properProjectionAdicForgetIso, Functor.isoHComp, projectionPushForgetIso,
-    projectionRealizationCompIso, ProEtaleWeilSheaf.nativeProperForgetIso,
-    ProEtaleWeilSheaf.nativeProjectionPushMate_normalization, ← Functor.map_comp]
+  have h := projectionPushForgetIso_hom_app_of_factorization
+    (ProEtaleWeilSheaf.nativeProperForgetIso k₀ l g)
+    (projectionRealizationCompIso k₀ l X) (projectionRealizationCompIso k₀ l Y) M.obj _
+    (ProEtaleWeilSheaf.nativeProjectionPushMate_normalization k₀ l g M.obj)
+  rw [h]
+  simp only [projectionProperForgetIso, Functor.isoHComp, Iso.symm_hom, Iso.trans_inv,
+    Iso.symm_inv, Functor.isoWhiskerRight_inv, Functor.isoWhiskerLeft_inv,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app, NatTrans.comp_app,
+    Functor.associator_inv_app, Functor.associator_hom_app,
+    ObjectProperty.FullSubcategory.comp_hom]
+  change 𝟙 _ ≫ _ ≫ _ ≫ 𝟙 _ = _
+  simp only [Category.id_comp, Category.comp_id]
+  rfl
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
@@ -84,6 +94,17 @@ theorem projectionForgetSquare_proper :
     ((CondensedRing.boundedConstructibleUpperStarLowerStarAdjunction l gb).projectionMorphism
       ((compactProjectionForget k₀ l X).obj M) ((compactProjectionForget k₀ l Y).obj N)).hom
   rw [hg]
+  change ((IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l Y)).mapDerivedCategory ⋙
+      (adicSheafEquivCondensedMod l _).functor.mapDerivedCategory).map
+        (((nativeBoundedProperProjectionIso g).hom.app (M, N)).hom) ≫
+      ((projectionProperForgetIso k₀ l g).hom.app _).hom ≫
+      (CondensedRing.lowerStar Λ (gb).left).rightDerivedFunctor.map
+        (((compactProjectionForgetTensorIso k₀ l X).hom.app (M, (upperStar g).obj N)).hom ≫
+          ((compactProjectionForget k₀ l X).obj M).obj ◁
+            ((compactProjectionForgetUpperStarIso k₀ l g).hom.app N).hom) =
+    ((compactProjectionForgetTensorIso k₀ l Y).hom.app ((derivedLowerStar g).obj M, N)).hom ≫
+      ((projectionProperForgetIso k₀ l g).hom.app M).hom ▷
+        ((compactProjectionForget k₀ l Y).obj N).obj ≫ _
   simp only [nativeBoundedProperProjectionIso_hom_app, projectionProperForgetIso_hom_app,
     compactProjectionForgetTensorIso_hom_app, compactProjectionForgetUpperStarIso_hom_app]
   exact hm
