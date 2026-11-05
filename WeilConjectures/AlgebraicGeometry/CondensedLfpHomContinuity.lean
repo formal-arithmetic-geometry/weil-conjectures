@@ -21,6 +21,12 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
+noncomputable local instance
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] (X : Scheme.{u}) :
+    HasZeroMorphisms (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)) := inferInstance
+
 /-- Continuity for a locally finitely presented module on the scheme itself.
 Source: Hemo--Richarz--Scholbach, proof of Lemma 5.3(2), the locally free calculation.
 (auxiliary; not a blueprint node)
