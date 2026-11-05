@@ -142,15 +142,27 @@
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
+# BZ538 in progress
 
-# BZ549 in progress
+- Branch: `u9/BZ538`; assigned module: `AffineBasisKInjectiveSectionsPreservesHomology`.
+- Its original IsAffineOpen visibility fix was already in the starting branch.
+- Added the same public AffineScheme import to second-layer `AffineBasisSectionsDerivedUnit`.
+- Two remote build attempts stopped in shared dependencies before reaching our targets.
+- Merged coordinator updates at `8af5cb324`; Monoidal now builds, but InternalHom remained blocked.
+- The user instructed continuation after the explicit one-line InternalHom repair proposal.
+  Applied the compatibility tensorObj_map_tmul lemma so the following map_comp_apply rewrite matches.
+- Next: ucheck-bump assigned module, AffineBasisSectionsResolutionHomologyEpi, and
+  AffineBasisSectionsDerivedUnit; then write DONE with every green module and PATTERN/ERROR pairs.
+- Detailed patterns, counts, and exact errors: `/home/ubuntu/u9/bz/FIXES-BZ538.md`.
+- No local Lean/Lake, proof placeholders, statement changes, trust bypasses, or heartbeat increases.
 
-- Branch: `u9/BZ549`; owned module: `GlobalSectionsDirectImageKInjectiveAcyclic`.
-- Owned import fix pushed at `d5e8c22c2`: publicly import `ChangeOfRingsExact`.
-- The user instructed continuation after the explicit one-line dependency proposal.
-  Applied the compatibility tensor-map lemma in `Presheaf.InternalHom`.
-- Re-read the brief and refreshed coordinator notes; latest integrated branch is `8af5cb324`.
-- Next: remote validation, first importer `DerivedGlobalSectionsAffinizationComparison`,
-  then second layer `DerivedGlobalSectionsPreservesCoproducts`.
-- Fixes and exact errors: `/home/ubuntu/u9/bz/FIXES-BZ549.md`.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+# BZ546 resumed
+
+- Branch: `u9/BZ546`; assigned module: `FiniteComparison.LowerStar`.
+- The owned compositor corrections were already integrated in `d30a09bfb`.
+- The initial two remote builds stopped in the unowned `Presheaf.InternalHom` dependency.
+- Imported the shared repair from BZ538, commit `e346fa32d2a`, using the compatibility
+  tensor formula. Its provenance is retained by `git cherry-pick -x`.
+- Next: validate LowerStar through `ucheck-bump`, then up to four direct importers.
+- Build logs and patterns: `/home/ubuntu/u9/bz/FIXES-BZ546.md`.
+- No local Lean/Lake execution, statement changes, proof placeholders, or heartbeat increases.
