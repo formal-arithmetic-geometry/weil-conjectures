@@ -46,8 +46,7 @@ theorem rightDerivedFunctorPlusUnit_canonical_single_shift (X : B) (n : ℕ) :
     let e : (DerivedCategory.Plus.singleFunctor B n).obj X ≅
         DerivedCategory.Plus.Q.obj S :=
       DerivedCategory.Plus.ι.preimageIso
-        ((DerivedCategory.singleFunctorIsoCompQ B n).app X ≪≫
-          (DerivedCategory.quotientCompQhIso B).symm.app _)
+        ((DerivedCategory.singleFunctorIsoCompQ B n).app X)
     let GS := G.mapCochainComplexPlus.obj S
     let H₀ := DerivedCategory.Plus.homologyFunctor C 0
     let RG := G.rightDerivedFunctorPlus
@@ -60,7 +59,7 @@ theorem rightDerivedFunctorPlusUnit_canonical_single_shift (X : B) (n : ℕ) :
         (H₀.shiftIso (-(n : ℤ)) (n : ℤ) 0 (by ring))
     GS.obj.homologyπ n ≫ (DerivedCategory.Plus.homologyFunctorObjQIso GS n).inv ≫
       (DerivedCategory.Plus.homologyFunctor C n).map
-        (G.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.quotient B).obj S)) ≫
+        (G.rightDerivedFunctorPlusUnit.app S) ≫
       (DerivedCategory.Plus.homologyFunctor C n).map (G.rightDerivedFunctorPlus.map e.inv) ≫
       c.hom.app X =
     GS.obj.iCycles n ≫
