@@ -63,7 +63,7 @@ theorem inv_one_sub_X_pow_sub_one {d : ℕ} (hd : d ≠ 0) :
 /-- The logarithmic derivative of the geometric series `(1 - X ^ d)⁻¹`:
 `X * ((1 - X ^ d)⁻¹)' = (∑ d * X ^ (d * m)) * (1 - X ^ d)⁻¹`. -/
 theorem X_mul_derivative_inv_one_sub_X_pow {d : ℕ} (hd : d ≠ 0) :
-    X * derivative (R := ℚ) ((1 - X ^ d)⁻¹ : ℚ⟦X⟧) =
+    X * derivative ℚ ((1 - X ^ d)⁻¹ : ℚ⟦X⟧) =
       (mk fun n ↦ if d ∣ n ∧ n ≠ 0 then (d : ℚ) else 0) * (1 - X ^ d)⁻¹ := by
   have hC : (C (d : ℚ) : ℚ⟦X⟧) = ((d : ℕ) : ℚ⟦X⟧) := map_natCast (C : ℚ →+* ℚ⟦X⟧) d
   have key : (mk fun n ↦ if d ∣ n ∧ n ≠ 0 then (d : ℚ) else 0) =
@@ -82,8 +82,8 @@ theorem X_mul_derivative_inv_one_sub_X_pow {d : ℕ} (hd : d ≠ 0) :
       rintro ⟨hdvd, hn⟩
       exact hle (Nat.le_of_dvd (Nat.pos_of_ne_zero hn) hdvd)
   have hmul := one_sub_X_pow_mul_inv hd
-  have hder : derivative (R := ℚ) ((1 - X ^ d) * (1 - X ^ d)⁻¹ : ℚ⟦X⟧) =
-      derivative (R := ℚ) (1 : ℚ⟦X⟧) := by
+  have hder : derivative ℚ ((1 - X ^ d) * (1 - X ^ d)⁻¹ : ℚ⟦X⟧) =
+      derivative ℚ (1 : ℚ⟦X⟧) := by
     rw [hmul]
   rw [Derivation.leibniz, Derivation.map_one_eq_zero, smul_eq_mul, smul_eq_mul, map_sub,
     derivative_pow, derivative_X, mul_one, Derivation.map_one_eq_zero, zero_sub] at hder
@@ -91,13 +91,13 @@ theorem X_mul_derivative_inv_one_sub_X_pow {d : ℕ} (hd : d ≠ 0) :
   obtain ⟨e, rfl⟩ : ∃ e, d = e + 1 := ⟨d - 1, by omega⟩
   rw [Nat.add_sub_cancel] at hder
   linear_combination (X * ((1 - X ^ (e + 1))⁻¹ : ℚ⟦X⟧)) * hder -
-    (X * derivative (R := ℚ) ((1 - X ^ (e + 1))⁻¹ : ℚ⟦X⟧)) * hmul
+    (X * derivative ℚ ((1 - X ^ (e + 1))⁻¹ : ℚ⟦X⟧)) * hmul
 
 /-- The logarithmic derivative of a finite product of geometric series is the sum of
 the logarithmic derivatives of the factors. -/
 theorem X_mul_derivative_prod_inv_one_sub_X_pow {ι : Type*} (d : ι → ℕ) (S : Finset ι)
     (hd : ∀ i ∈ S, d i ≠ 0) :
-    X * derivative (R := ℚ) (∏ i ∈ S, ((1 - X ^ d i)⁻¹ : ℚ⟦X⟧)) =
+    X * derivative ℚ (∏ i ∈ S, ((1 - X ^ d i)⁻¹ : ℚ⟦X⟧)) =
       (∑ i ∈ S, mk fun n ↦ if d i ∣ n ∧ n ≠ 0 then (d i : ℚ) else 0) *
         ∏ i ∈ S, ((1 - X ^ d i)⁻¹ : ℚ⟦X⟧) := by
   classical
@@ -121,7 +121,7 @@ logarithmic differential equations whose right hand sides agree up to order `m` 
 order `m`. The coefficients are determined by the recursion
 `n * c n = ∑ j < n, a (n - j) * c j`. -/
 theorem coeff_eq_of_X_mul_derivative_eq {R : Type*} [Field R] [CharZero R] {F G A B : R⟦X⟧}
-    (hF : X * derivative (R := R) F = A * F) (hG : X * derivative (R := R) G = B * G)
+    (hF : X * derivative R F = A * F) (hG : X * derivative R G = B * G)
     (h0 : constantCoeff F = constantCoeff G) (hA : constantCoeff A = 0)
     {m : ℕ} (hAB : ∀ i ≤ m, coeff i A = coeff i B) :
     ∀ n ≤ m, coeff n F = coeff n G := by
