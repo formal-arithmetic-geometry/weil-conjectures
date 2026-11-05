@@ -176,6 +176,16 @@ private theorem scalarExtension_laws
         ((F.mapLinearMap R).baseChange (Localization.Away p) a)) := by
   exact compactSupportScalarExtensionLaws p F
 
+section FiniteAction
+variable (l : ℕ) [Fact l.Prime]
+  (K₀ : Type u) [Field K₀] (hl : IsUnit (l : K₀))
+  {X Y : Scheme.{u}} {f : X ⟶ Y}
+  [X.Over (Spec (.of K₀))] [Y.Over (Spec (.of K₀))]
+  [LocallyOfFiniteType (X ↘ Spec (.of K₀))] [QuasiCompact (X ↘ Spec (.of K₀))]
+  [LocallyOfFiniteType (Y ↘ Spec (.of K₀))] [QuasiCompact (Y ↘ Spec (.of K₀))]
+  [f.IsOver (Spec (.of K₀))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+  (c : Compactification f)
+
 /-- Legacy archive (repair note of Sheaf.Paper.CompactSupportFiniteRealizationPredicate,
 2026-11-02: keep the old declarations, renamed `*_legacy`, until the dependents are
 re-pointed). This is the former `SfCompactSupportFiniteRealizationSpec`, verbatim: the exact
@@ -231,15 +241,6 @@ theorem sfCompactSupportFiniteRealization_legacy (E : Type u) [Field E] [Algebra
         throwError "expected existential, got {ty}"
       (← Lean.Elab.Tactic.getMainGoal).assign h
 
-section FiniteAction
-variable (l : ℕ) [Fact l.Prime]
-  (K₀ : Type u) [Field K₀] (hl : IsUnit (l : K₀))
-  {X Y : Scheme.{u}} {f : X ⟶ Y}
-  [X.Over (Spec (.of K₀))] [Y.Over (Spec (.of K₀))]
-  [LocallyOfFiniteType (X ↘ Spec (.of K₀))] [QuasiCompact (X ↘ Spec (.of K₀))]
-  [LocallyOfFiniteType (Y ↘ Spec (.of K₀))] [QuasiCompact (Y ↘ Spec (.of K₀))]
-  [f.IsOver (Spec (.of K₀))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
-  (c : Compactification f)
 
 attribute [local irreducible] SfCompactSupportFiniteRealizationSpec
 
