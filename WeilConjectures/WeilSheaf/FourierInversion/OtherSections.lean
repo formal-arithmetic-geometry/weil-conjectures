@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.WeilSheaf.AffineLineBundle
+public import WeilConjectures.WeilSheaf.AffineLineSmoothAdjunction
 public import WeilConjectures.WeilSheaf.FourierInversion.Defs
 public import WeilConjectures.WeilSheaf.Localization
 public import WeilConjectures.WeilSheaf.LowerShriekOperations
@@ -18,7 +20,8 @@ Statements of blueprint nodes of other sections (the projection formula, the ope
 recollement and the Thom isomorphism for Weil complexes) used in the proof of Fourier inversion.
 The projection formula is
 `AlgebraicGeometry.WeilComplex.derivedLowerShriekCompTensorLisseIso`; the Thom isomorphism is
-recorded here with `sorry`.
+deduced from smooth purity via `WeilConjectures.WeilSheaf.AffineLineSmoothAdjunction`
+and the homotopy invariance of `WeilConjectures.WeilSheaf.AffineLineBundle`.
 -/
 
 @[expose] public section
@@ -99,8 +102,14 @@ theorem WeilComplex.nonempty_iso_upperStar_comp_derivedLowerShriek_of_isPullback
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))] :
     Nonempty (WeilComplex.upperStar π ⋙ WeilComplex.derivedLowerShriek k₀ l π ≅
-      WeilComplex.tateTwist k₀ l X (-1) ⋙ shiftFunctor _ (-2 : ℤ)) :=
-  sorry
+      WeilComplex.tateTwist k₀ l X (-1) ⋙ shiftFunctor _ (-2 : ℤ)) := by
+  obtain ⟨adj⟩ := WeilComplex.nonempty_affineLineAdjunction_of_smoothPurity
+    (k₀ := k₀) (l := l) π s hπ
+  have := WeilComplex.isIso_upperStarDerivedLowerStarAdjunction_unit_app_of_isPullback
+    (k₀ := k₀) (l := l) π s hπ
+  have : IsIso (WeilComplex.upperStarDerivedLowerStarAdjunction (k₀ := k₀) (l := l) π).unit :=
+    NatIso.isIso_of_isIso_app _
+  exact ⟨WeilComplex.upperStarCompDerivedLowerShriekIsoOfAdjunction π adj⟩
 
 end OtherSections
 
