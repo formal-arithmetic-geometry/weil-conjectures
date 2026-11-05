@@ -1,27 +1,20 @@
-# BZ252 complete
+# BZ261 complete
 
-- Unit: `BZ252`; branch: `u9/BZ252`; starting commit: `c781553bf`.
-- The assigned EtaleComplexPullbackTransport module and direct importers
-  EtaleComplexPullbackCoherence and EtaleComplexPullbackPresentation passed together
-  via `ucheck-bump`: rc=0, failed=0, 3848 jobs.
-- Validated source commit: `e66b1a260a`; full log:
-  `/home/ubuntu/u9/bz/BUILD-BZ252-repair1-full.log`.
-- Verified build pins: Lean v4.35.0-rc3 and Mathlib
-  `b63f6e8a68d220e3b3bc4f3792bb53650d375f24` on newsrv bumpw5.
-- Applied the exact compositor compatibility proposals after the user's continuation:
-  four uses in Transport and two in Presentation now take the inverse of Mathlib's
-  reversed compositor. This preserves the original mathematical maps.
-- Only the proposed private helper statement and the hm/hs hypotheses changed;
-  all remaining declaration types and existing docstrings are unchanged.
-- FixedDerivedCohomologyDiagram and RawFixedDerivedComparisonNaturality were attempted
-  and skipped for other-owner dependency failures. The second-layer importer
-  DerivedEtaleCohomologyLimit is also blocked by other-owner dependencies.
-- Fix pattern, whole-tree counts, and dependency errors:
-  `/home/ubuntu/u9/bz/FIXES-BZ252.md`.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, profiler probes,
-  or heartbeat/recursion-limit increases. `git diff --check` passed.
-- Completion marker: `/home/ubuntu/u9/state/BZ252.DONE`.
-- This final progress update changes documentation only after the green source build.
+- Branch: `u9/BZ261`; starting commit: `c781553bf`.
+- Assigned module `WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarAdjunctionCompat`
+  passes `ucheck-bump`: rc=0, built=1, failed=0, 3616 jobs.
+- Validated source commit: `1a08e6d7b88fb29b066cfa086f8018c3e013051e`.
+- Full green log: `/home/ubuntu/u9/bz/BUILD-BZ261-fixed-full.log`.
+- The user instructed continuation after the exact one-line statement compatibility proposal.
+  Added `.symm` to the compositor at line 66; the original mathematical map and proof remain.
+- Checked three direct importers; all are blocked by other owners' dependencies
+  (BZ201, BZ206, BZ243, BZ258, BZ262), so skipped them as the brief directs.
+- Downstream log: `/home/ubuntu/u9/bz/BUILD-BZ261-downstream1-full.log`.
+  The assigned module rebuilt successfully again at commit `539013bcc2`.
+- Fix patterns, counts, and blocker details: `/home/ubuntu/u9/bz/FIXES-BZ261.md`.
+- No proof placeholders, trust bypasses, local Lean/Lake execution, or limit increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ261.DONE`.
+- This completion commit changes progress documentation only after source validation.
 
 # BZ150 complete
 
