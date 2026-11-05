@@ -115,3 +115,24 @@
 - Next: remote validation of the assigned module, then its three direct importers.
 - Fix patterns and baseline log: `/home/ubuntu/u9/bz/FIXES-BZ384.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+# BZ475 complete
+
+- Branch: `u9/BZ475`; starting commit: `99a06bbbb`.
+- Assigned `WeilConjectures.CategoryTheory.Scalar.ScalarHomTensorCoherence` passed
+  `ucheck-bump`: rc=0, failed=0, 3802 jobs, source commit `8ef9af9b30`.
+- Direct importer `WeilConjectures.CategoryTheory.Scalar.ScalarInternalHomTowerCoherence`
+  also passed: rc=0, failed=0, 3807 jobs, source commit `05405452cd`.
+- The user instructed continuation after the exact private-helper statement proposal.
+  The compositor now uses `.symm` in that statement and its proof; `Iso.symm_inv`
+  completes the explicit simplification. Public statements and docstrings are unchanged.
+- The second-layer importer `ScalarTensorTowerComparison` was attempted at
+  `0c686edf56d1346176344872f658766fe004c0f9` and skipped under the brief's ownership rule:
+  unowned dependency `KFlatRingedToposPullback` fails instance synthesis and times out.
+- Full logs: `/home/ubuntu/u9/bz/BUILD-BZ475-{assigned,downstream1,downstream2}-full.log`.
+- Fix pattern, whole-tree counts, and exact error: `/home/ubuntu/u9/bz/FIXES-BZ475.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ475-contract-audit.txt`.
+- No local Lean/Lake execution, proof placeholders, forbidden trust escapes,
+  heartbeat increases, profiler probes, or unrelated source edits.
+- Completion marker: `/home/ubuntu/u9/state/BZ475.DONE`.
+- This final commit changes only progress documentation; Lean sources match both green builds.
