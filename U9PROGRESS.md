@@ -80,3 +80,18 @@
 - Completion marker: `/home/ubuntu/u9/state/BZ190.DONE`.
 - No local Lean/Lake, proof placeholders, trust escapes, or heartbeat increases.
 - This final commit changes only progress documentation after the successful build.
+
+# BZ287 in progress
+
+- Branch: `u9/BZ287`; starting commit: `18e44f2d5`.
+- Owned module: `WeilConjectures.TraceFormula.CurveLocal.SectionsRestriction`.
+- Reread `/home/ubuntu/u9/briefs/BZ287.md` after the user's continuation instruction.
+- The user instructed continuation after the exact one-line statement-syntax proposal;
+  applied `BZ287-statement-syntax-proposal.patch`, moving `.symm` after both functor arguments.
+- Prepared the same composition-isomorphism orientation fix inside the proof in
+  `TraceFormula.CurveLocal.DerivedFiniteEtaleTrace` (a direct importer).
+- The original ucheck-bump request is queued; pushing this commit allows that request
+  to validate the corrected source once it obtains a tree. The eventual log's commit
+  identifies the source actually checked.
+- Fix patterns and inventories: `/home/ubuntu/u9/bz/FIXES-BZ287.md`.
+- No local Lean/Lake, forbidden proof escapes, heartbeat raises or profiler probes.
