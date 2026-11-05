@@ -65,8 +65,9 @@ private theorem bz189_canonical_single_shift_proposal (X : B) (n : ℕ) :
         RG.map eh.inv := by
     rw [rightDerivedFunctorPlusUnit_app]
     simp only [quotientCompMapHomotopyCategoryPlusIso, Iso.refl_inv, NatTrans.id_app,
-      Functor.map_id, Category.id_comp, Category.assoc]
+      Category.assoc]
     rw [← RG.map_comp, he]
+    erw [Functor.map_id, Category.id_comp]
   rw [← Functor.map_comp_assoc, hu]
   simp only [Functor.map_comp, Category.assoc]
   dsimp only [S, e, eh, GS, H₀, RG, c]
