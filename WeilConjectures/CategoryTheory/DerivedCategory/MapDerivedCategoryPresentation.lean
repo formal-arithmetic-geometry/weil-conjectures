@@ -306,7 +306,7 @@ lemma derivedRepresents_mapDerivedCategoryCompIso_symm_trans {F₁ : C ⥤ D} {F
     [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     (e : F₁ ⋙ F₂ ≅ G) :
     DerivedRepresents ((ofMap F₁).comp (ofMap F₂)) (ofMap G)
-      (mapDerivedCategoryCompIso F₁ F₂ ≪≫ mapDerivedCategoryNatIso e).inv e.hom :=
+      (mapDerivedCategoryCompIso F₁ F₂ ≪≫ mapDerivedCategoryNatIso e).hom e.hom :=
   ((derivedRepresents_mapDerivedCategoryCompIso_inv F₁ F₂).comp
     (derivedRepresents_mapDerivedCategoryNatIso e)).congr rfl (by simp)
 
