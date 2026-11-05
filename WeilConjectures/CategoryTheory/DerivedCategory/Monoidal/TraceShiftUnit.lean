@@ -6,6 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Trace
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 
 /-!
 # The trace of an endomorphism of a shifted unit

@@ -165,7 +165,7 @@ theorem quasiIso_homComplex_map_of_single_degree_exact_term
       (by simp; omega) (by simp; omega)).mp inferInstance
   have : ShortComplex.QuasiIso (B.map f) := by
     change ShortComplex.QuasiIso (F.mapShortComplex.map _)
-    infer_instance
+    exact ShortComplex.quasiIso_map_of_preservesLeftHomology F _
   exact (ShortComplex.quasiIso_iff_of_arrow_mk_iso _ _
     (Arrow.isoMk (e M) (e N) he.symm)).mpr this
 
