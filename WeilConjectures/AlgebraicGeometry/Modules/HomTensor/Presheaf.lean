@@ -90,7 +90,7 @@ lemma dualTensorHom_app_bijective {U : C} (p₀ : P.obj (op U))
   · refine ⟨(ψ ≫ φ₀) ⊗ₜ p₀, hom_ext fun V ↦ ModuleCat.hom_ext (LinearMap.ext fun m ↦ ?_)⟩
     rw [dualTensorHom_app_tmul_app_apply]
     obtain ⟨r, hr⟩ := hgen V (ψ.app V m)
-    change (φ₀.app V (ψ.app V m)) • _ = _
+    change (show R.obj (op V.unop.left) from φ₀.app V (ψ.app V m)) • _ = _
     rw [hr, hφ₀]
 
 variable {M P} in
