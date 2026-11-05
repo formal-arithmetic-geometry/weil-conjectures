@@ -2,10 +2,17 @@
 
 The independent Strategy3 reading chain and its dedicated coefficient category pass normal
 kernel checking. The unchanged live theorem `purityCanonicalTateOneTrivialization_weil` also
-passes after adopting K4a's audited native scalar proof. These are distinct results: the
-expanded original finite-reading statement has not passed on this branch. LEAD's 00:50 plan
-superseded the original round-trip requirement, and the 03:45 instruction directed adoption of
-K4a's successful scalar proof.
+passes after adopting K4a's audited native scalar proof. LEAD's 00:50 plan superseded the
+original dense round-trip requirement, and the 03:45 instruction directed adoption of K4a's
+successful scalar proof. After K4a's finite audit completed, its original-name finite wrapper
+and original-data predicate bridge were also adopted from `620ed3b89`; their recheck on this
+branch is pending. This is adoption of a verified repair, separate from the independent
+Strategy3 implementation.
+
+The finite wrapper's exposed `finiteReadingEquation` body is the original equation, with the
+original equivalences, pullback comparison, and reading isomorphisms supplied as data.
+`finiteReadingEquation_original` kernel-checks the transport of those data. No successful
+check of the fully expanded old statement is claimed.
 
 ## Verified results
 
