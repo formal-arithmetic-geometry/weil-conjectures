@@ -686,12 +686,18 @@ theorem exists_isKFlatResolutionIndependentCoefficients
   have (K : Type r) : HasColimitsOfShape (Discrete K) (PresheafOfModules.{r}
       ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R).obj) :=
     PresheafOfModules.hasColimitsOfShape _ _
-  have (K : Type r) : HasColimitsOfShape (Discrete K) A := inferInstance
+  have (K : Type r) : HasColimitsOfShape (Discrete K) A :=
+    SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf
+      _ _
   let := SheafOfModules.isMonoidal_W_independentCoefficients R
   let := SheafOfModules.monoidalCategory R
   let := SheafOfModules.symmetricCategory R
   let := SheafOfModules.monoidalClosed_kfi (R := R)
   let := SheafOfModules.monoidalPreadditive_kfi R
+  have : HasFiniteBiproducts (ObjectProperty.flat (A := A)).FullSubcategory :=
+    HasFiniteBiproducts.of_hasFiniteProducts
+  have : HasFiniteCoproducts (ObjectProperty.flat (A := A)).FullSubcategory :=
+    hasFiniteCoproducts_of_hasFiniteBiproducts _
   have := SheafOfModules.hasExactColimits_int_kfi R
   let := SheafOfModules.hasFunctorialFlatResolution_kfi R
   have hres : ∃ (P : CochainComplex A ℤ) (p : P ⟶ G),

@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.CategoryTheory.CanonicalResolutionDerivedIso
+public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 
 /-! # Resolution comparisons and the composite derived unit
 
@@ -104,8 +105,9 @@ theorem resolution_homology_transport
           F.rightDerivedFunctorPlus.map (resolutionAugmentationIso I).hom ≫
             inv (F.rightDerivedFunctorPlusUnit.app LY) := by
         simp [resolutionDerivedIso, Functor.rightDerivedFunctorPlusUnit_app,
-          Functor.quotientCompMapHomotopyCategoryPlusIso, LY, Category.assoc,
-          IsIso.inv_comp, ← Functor.map_inv]
+          Functor.quotientCompMapHomotopyCategoryPlusIso, LY, Category.assoc]
+        erw [Functor.map_id]
+        simp [← Functor.map_comp]
       rw [hI]
       change (F.rightDerivedFunctorPlus.map (resolutionAugmentationIso R).hom ≫
           inv (F.rightDerivedFunctorPlusUnit.app LX)) ≫ DerivedCategory.Plus.Q.map FG = _
