@@ -6,7 +6,7 @@ module
 
 public import WeilConjectures.WeilSheaf.SmoothPurityTatePullbackFactor
 public import WeilConjectures.WeilSheaf.SmoothPurityTateWeilLaw
-public import WeilConjectures.WeilSheaf.SmoothPurityScalarDatumConjugation
+public import WeilConjectures.WeilSheaf.SmoothPurityScalarDatumNamed
 public import WeilConjectures.WeilSheaf.FrobeniusTwist
 import WeilConjectures.Tactic.ExactModProofs
 
@@ -63,7 +63,7 @@ lemma purityCanonicalTateOneTrivialization_weil :
     a.geometricFiberProj a.geometricGaloisFrobenius.hom
     a.geometricGaloisFrobenius_hom_comp_geometricFiberProj
   have he := purityTateTwistOneTrivialization_weil a hζ hζ'
-  have h := purity_scalarDatum_conjugate
+  have h := purity_scalarDatum_conjugate_named
     (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricGaloisFrobenius.hom)
     (upperStarTateTwistOneIso ℓ a.geometricFiberProj a)
     (Functor.Monoidal.εIso (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricFiberProj)).symm
@@ -77,10 +77,12 @@ lemma purityCanonicalTateOneTrivialization_weil :
       a.geometricFiberToAlgebraicClosure).hom
     (Functor.Monoidal.εIso
       (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricGaloisFrobenius.hom)).inv
-    ha hb (purityTateTwistOneTrivialization a hζ hζ') (Nat.card k : ℤ)
+    ha hb (purityTateTwistOneTrivialization a hζ hζ')
+    (purityCanonicalTateOneTrivialization ℓ a hζ hζ') rfl (Nat.card k : ℤ)
     (by
       dsimp only [purityModuleFactorIso, geometricFiberProjUpperStarFrobeniusIso] at he ⊢
       exact_mod_proofs he)
-  exact h
+  dsimp only [Functor.comp_obj, Functor.comp_map] at h ⊢
+  exact_mod_proofs h
 
 end AlgebraicGeometry.ProEtale
