@@ -135,7 +135,7 @@ def schemeDerivedOpenRestrictionCompIso (X : Scheme.{u}) {W U : X.Opens} (i : W 
   letI : PreservesFiniteColimits
       (schemeOpenRestriction X U ⋙ schemeOpenOverlapRestriction X i) :=
     comp_preservesFiniteColimits _ _
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (schemeOpenRestrictionCompIso X i)
 
 /-- Restriction between derived direct images, defined as the adjoint of the
