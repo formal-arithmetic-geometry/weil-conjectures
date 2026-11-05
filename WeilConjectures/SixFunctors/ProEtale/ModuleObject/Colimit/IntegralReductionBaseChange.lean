@@ -86,6 +86,15 @@ private lemma fullSubcategory_eqToHom_hom {C : Type*} [Category C] {P : ObjectPr
   subst h
   rfl
 
+/-- The restricted reduction modulo `ℓⁿ` is the derived extension of scalars on morphisms. -/
+private lemma boundedConstructibleIntegersModPowReduction_map_hom (Z : Scheme.{u})
+    [TopologicalSpace.NoetherianSpace Z]
+    {K L : BoundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) Z)}
+    (φ : K ⟶ L) :
+    ((boundedConstructibleIntegersModPowReduction Z ℓ E n).map φ).hom =
+      (Mod.extendScalars (integersModPowReduction Z ℓ E n)).leftDerivedFunctor.map φ.hom :=
+  rfl
+
 set_option hygiene false in
 /-- Proves the cube condition `boundedConstructibleUpperStarIntegersModPowReductionIso_cube` for
 the square `sq` at the object `M` (in the context of this file): the restrictions to the ambient
