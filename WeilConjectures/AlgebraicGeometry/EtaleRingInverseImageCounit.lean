@@ -26,6 +26,14 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 namespace AlgebraicGeometry
 
+private local instance forgottenRingSheafHasBinaryProduct.{uC, vC, w}
+    {C : Type uC} [Category.{vC} C] (J : GrothendieckTopology C)
+    [J.HasSheafCompose (forget CommRingCat.{w})] (G H : Sheaf J CommRingCat.{w}) :
+    HasBinaryProduct (C := Sheaf J (Type w))
+      ((sheafForget J).obj G) ((sheafForget J).obj H) := by
+  letI : HasBinaryProducts (Sheaf J (Type w)) := Sheaf.instHasLimitsOfShape
+  exact HasLimitsOfShape.has_limit _
+
 attribute [-instance] instHasBinaryProductObjOfPreservesLimitDiscreteWalkingPairPair in
 private noncomputable def ringAdd.{uC, vC, w} {C : Type uC} [Category.{vC} C]
     (J : GrothendieckTopology C) [J.HasSheafCompose (forget CommRingCat.{w})]
