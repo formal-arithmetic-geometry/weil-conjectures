@@ -80,9 +80,10 @@ lemma exists_map_map_eq_zero {σ : Type*} {j : J} (p : MvPolynomial σ (F.obj j)
   obtain ⟨k, α, hα⟩ := exists_map_eq_zero_of_finset F c hc p.coeffs (fun x hx ↦ by
     obtain ⟨m, -, rfl⟩ := MvPolynomial.mem_coeffs_iff.1 hx
     have := congrArg (fun q : MvPolynomial σ c.pt ↦ q.coeff m) hp
-    rwa [MvPolynomial.coeff_map, AddMonoidAlgebra.coeff_zero] at this)
+    exact (MvPolynomial.coeff_map (c.ι.app j).hom p m).symm.trans
+      (this.trans (Finsupp.zero_apply m)))
   refine ⟨k, α, MvPolynomial.ext _ _ fun m ↦ ?_⟩
-  rw [MvPolynomial.coeff_map, AddMonoidAlgebra.coeff_zero]
+  rw [MvPolynomial.coeff_map, AddMonoidAlgebra.coeff_zero, Finsupp.zero_apply]
   by_cases hm : p.coeff m = 0
   · rw [hm, map_zero]
   · exact hα _ (MvPolynomial.coeff_mem_coeffs m hm)
