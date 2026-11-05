@@ -144,7 +144,7 @@
 
 # BZ575 complete
 
-- Branch: `u9/BZ575`; assigned ChangeOfRings passed `ucheck-bump`: rc=0, failed=0, 4417 jobs.
+- Branch: `u9/BZ575`; assigned ChangeOfRings passed `ucheck-bump`: rc=0, failed=0, 4416 jobs.
 - Tested source commit: `19933846843930b020db9c4d1aace62adcd94e64`.
 - Full log: `/home/ubuntu/u9/bz/BUILD-BZ575-final-full.log`.
 - User instructed continuation after the one-line shared dependency repair proposal.
