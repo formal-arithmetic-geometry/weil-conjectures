@@ -79,7 +79,9 @@ instance commShift_mapHomotopyCategoryδNatTrans_app (K : HomotopyCategory C (.u
         (.up ℤ) (.up ℤ) (.up ℤ) ((G.mapHomologicalComplex (.up ℤ)).obj K₀)) ≪≫
       (Functor.associator _ _ _).symm
   have : NatTrans.CommShift e₁.hom ℤ := by dsimp [e₁]; infer_instance
-  have : NatTrans.CommShift e₂.hom ℤ := by dsimp [e₂]; infer_instance
+  have : NatTrans.CommShift e₂.hom ℤ := by
+    dsimp only [e₂, Iso.trans_hom, Iso.symm_hom, isoWhiskerRight_hom, isoWhiskerLeft_hom]
+    infer_instance
   let δ' : (curriedTensor C).map₂CochainComplex.obj K₀ ⋙ G.mapHomologicalComplex (.up ℤ) ⟶
       G.mapHomologicalComplex (.up ℤ) ⋙ (curriedTensor D).map₂CochainComplex.obj
         ((G.mapHomologicalComplex (.up ℤ)).obj K₀) :=
@@ -141,7 +143,9 @@ instance commShift_mapHomotopyCategoryδNatTrans_flipApp (K : HomotopyCategory C
         (.up ℤ) (.up ℤ) (.up ℤ) ((G.mapHomologicalComplex (.up ℤ)).obj K₀)) ≪≫
       (Functor.associator _ _ _).symm
   have : NatTrans.CommShift e₁.hom ℤ := by dsimp [e₁]; infer_instance
-  have : NatTrans.CommShift e₂.hom ℤ := by dsimp [e₂]; infer_instance
+  have : NatTrans.CommShift e₂.hom ℤ := by
+    dsimp only [e₂, Iso.trans_hom, Iso.symm_hom, isoWhiskerRight_hom, isoWhiskerLeft_hom]
+    infer_instance
   let δ' : (curriedTensor C).map₂CochainComplex.flip.obj K₀ ⋙ G.mapHomologicalComplex (.up ℤ) ⟶
       G.mapHomologicalComplex (.up ℤ) ⋙ (curriedTensor D).map₂CochainComplex.flip.obj
         ((G.mapHomologicalComplex (.up ℤ)).obj K₀) :=
