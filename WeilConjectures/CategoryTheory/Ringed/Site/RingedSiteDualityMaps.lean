@@ -624,18 +624,6 @@ noncomputable local instance ringedSiteRestrictedUnitSMul
           f).hom).obj (M.val.obj (op W.unop.left))) :=
   (M.val.obj (op W.unop.left)).isModule.toSMul
 
-noncomputable local instance ringedSiteRestrictedIdentityUnitSMul
-    (M : SheafOfModules.{max c v r}
-      ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R))
-    {U V : Cᵒᵖ} (f : U ⟶ V) :
-    SMul (((PresheafOfModules.restrictOver R.obj V.unop).obj
-      ((ringedSiteDualityUnitComplex.{c, v, r} J R).X 0).val).obj
-        (op (Over.mk (𝟙 V.unop))))
-      ((ModuleCat.restrictScalars
-        (((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R).obj.map
-          f).hom).obj (M.val.obj V)) :=
-  (M.val.obj V).isModule.toSMul
-
 -- These unused generated lemmas expand the native derived coefficient category.
 set_option genSizeOfSpec false in
 set_option genInjectivity false in
@@ -1000,6 +988,15 @@ private theorem ringedSiteEvaluationFormula_iff
   · intro h
     constructor
     · intro p q k a hpq haq hak U y φ W x
+      let : SMul
+          (((PresheafOfModules.restrictOver R.obj (op W.unop.left).unop).obj
+            ((ringedSiteDualityUnitComplex.{c, v, r} J R).X 0).val).obj
+              (op (Over.mk (𝟙 W.unop.left))))
+          ((ModuleCat.restrictScalars
+            (((sheafCompose J (forget₂ CommRingCat.{max c v r}
+              RingCat.{max c v r})).obj R).obj.map W.unop.hom.op).hom).obj
+                ((F.X p).val.obj (op W.unop.left))) :=
+        ((F.X p).val.obj (op W.unop.left)).isModule.toSMul
       have hlocal := (h p q k a p hpq hak (op W.unop.left)
         ((F.X p).val.map W.unop.hom.op y)
         (((homComplex (R := R) E (ringedSiteDualityUnitComplex.{c, v, r} J R)).X q).val.map
