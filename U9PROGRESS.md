@@ -157,3 +157,6 @@
   `WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerScalarRestriction`.
 - Fix log: `/home/ubuntu/u9/bz/FIXES-BZ540.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+- Third validation cleared InternalHom and KFlat, then exposed the same tensor compatibility
+  rewrite in KFlatResolutionIndependentCoefficients. Cherry-picked owner repair
+  `fdf535299dfaebeb9014accdc88ae44909a579f7` as `e8639a47d`; next checker is submitted.
