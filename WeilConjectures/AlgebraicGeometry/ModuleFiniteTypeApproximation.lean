@@ -9,6 +9,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import WeilConjectures.AlgebraicGeometry.Coherent
 import WeilConjectures.AlgebraicGeometry.ModuleFiniteTypeAffineEnlargement
+import Mathlib.Util.CountHeartbeats
 
 /-! # Finite-type approximation of a global quasi-coherent module
 
@@ -46,6 +47,7 @@ private theorem isIso_over_of_le (X : Scheme.{u}) {E H : X.Modules} (j : E ⟶ H
   change IsIso ((SheafOfModules.overMap X.ringCatSheaf (homOfLE h)).map (j.over W))
   infer_instance
 
+#count_heartbeats in
 set_option backward.isDefEq.respectTransparency false in
 private theorem finiteType_of_top (X : Scheme.{u}) (M : X.Modules)
     [(M.over (⊤ : X.Opens)).IsFiniteType] : M.IsFiniteType := by
