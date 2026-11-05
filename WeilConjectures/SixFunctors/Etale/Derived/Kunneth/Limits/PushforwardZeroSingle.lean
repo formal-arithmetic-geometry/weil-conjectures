@@ -168,7 +168,7 @@ lemma homology_map_transition_homologyZeroIso {α β : LimitStage B W} (φ : Hom
   simp only [Functor.comp_map, Functor.map_comp] at ht hq
   simp only [homologyZeroIso, Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, Iso.app_hom,
     Iso.app_inv, asIso_inv, Category.assoc]
-  rw [← reassoc_of% ht]
+  erw [← reassoc_of% ht]
   congr 1
   rw [← cancel_epi ((DerivedCategory.Plus.homologyFunctor _ 0).map
       (homotopyUnit Λ β ((HomotopyCategory.Plus.quotient _).obj (singleComplex Λ G)))),
