@@ -1,18 +1,3 @@
-# BZ361 in progress
-
-- Branch: `u9/BZ361`; starting commit: `98654719bd`.
-- Assigned module: `WeilConjectures.AlgebraicGeometry.SchemeDerivedHomRestrictionTransport`.
-- Baseline `ucheck-bump` reproduced all 14 errors.
-- The user instructed continuation after the explicit statement API migration proposal.
-  The comparison-orientation substitutions are applied, preserving all binders, hypotheses,
-  and intended morphisms under Mathlib's reversed `mapDerivedCategoryCompIso`.
-- Proof cancellation uses the inverse comparison and `Iso.inv_hom_id_app`.
-- Current remote build is queued through `ucheck-bump`; no green result yet.
-- Next: complete the assigned module, then build `SchemeDerivedHomGluing` and its two
-  direct importers `DerivedOpenGluing` and `OpenUnionHomGluing` as instructed.
-- Fix patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ361.md`.
-- No local Lean/Lake, forbidden proof escapes, heartbeat increases, or DONE marker.
-
 # BZ133 complete
 
 - Branch: `u9/BZ133`.
@@ -121,12 +106,12 @@
 - Completion marker: `/home/ubuntu/u9/state/BZ311.DONE`.
 - This final commit changes only progress documentation; Lean sources match the green build.
 
-# BZ367 in progress
+# BZ384 in progress
 
-- Branch: `u9/BZ367`; assigned module: `WeilConjectures.WeilSheaf.Native.Projection.OrdinaryTensorNormalization`.
-- The import-only build failed on two public signatures because Mathlib marks `Qh` no_expose.
-- The user instructed continuation after the exact two-line visibility proposal.
-  The two internal helpers are now private; proposition texts and all proof bodies are unchanged.
-- Whole-tree search found no callers of either helper outside the assigned file.
-- Next: validate with `ucheck-bump`, then check the two downstream layers and write DONE.
-- Notes: `/home/ubuntu/u9/bz/FIXES-BZ367.md`. No local Lean/Lake execution.
+- Branch: `u9/BZ384`; starting commit: `98654719b`.
+- Baseline remote build confirmed five errors in compositor directions in declaration types.
+- The user instructed continuation after the explicit nine-direction patch proposal.
+  That patch is now applied, preserving the original equations under Mathlib's reversed compositor.
+- Next: remote validation of the assigned module, then its three direct importers.
+- Fix patterns and baseline log: `/home/ubuntu/u9/bz/FIXES-BZ384.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
