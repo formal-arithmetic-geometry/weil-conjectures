@@ -141,3 +141,15 @@
 - Existing `ucheck-bump` invocation is queued; it reads the pushed branch after
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+# BZ558 in progress
+
+- Branch: `u9/BZ558`; assigned module: `WeilConjectures.Algebra.Homology.SmoothPurity.NormalizedLeftExtension`.
+- The assigned module already contains BZ471's earlier proof repair.
+- Baseline was blocked by `Presheaf.InternalHom:375`: the new tensor lemma produced maps
+  from a different API than the subsequent compatibility `map_comp_apply` rewrite.
+- After the user requested continuation until green, applied the one-line prerequisite
+  proof repair in separate commit `f28760733`, using the existing compatibility tensor lemma.
+- Running `ucheck-bump` for the assigned module, then its four direct importers.
+- Fix pattern, whole-tree count, and logs: `/home/ubuntu/u9/bz/FIXES-BZ558.md`.
+- No local Lean/Lake, proof placeholders, statement changes, or heartbeat increases.
