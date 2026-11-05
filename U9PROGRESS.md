@@ -152,7 +152,10 @@
   rc=0, failed=0, 4924 jobs, on `poolb:43.157.148.197`.
 - Full log: `/home/ubuntu/u9/bz/BUILD-BZ566-repair3-importers-full.log`.
 - Merged coordinator `cfcb63ad7` to incorporate the shared dependency repairs.
-- Next: validate the two smallest importers in the second layer.
+- Second-layer IntegralResiduePullFlatModelComparison built successfully (8.2s).
+- Skipped CategoryTheory.Integral.IntegralResidueTensorPresentation: its unowned
+  IntegralResidueRestrictPullComp dependency fails at lines 24 and 99.
+- Next: final ucheck-bump of the four successful modules, then DONE.
 - Notes and logs: `/home/ubuntu/u9/bz/FIXES-BZ566.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
