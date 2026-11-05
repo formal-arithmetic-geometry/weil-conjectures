@@ -171,7 +171,7 @@ lemma mapExactFunctor_comp_mk₀_eq (G₁ : C ⥤ D) [G₁.Additive]
           (DerivedCategory.singleFunctor E 0).map (τ.hom.app A) := by
       rw [singleComparison_hom G₁, singleComparison_hom G₂, singleComparison_hom G,
         Functor.map_comp]
-      simp only [Iso.trans_hom, NatTrans.comp_app, Category.assoc]
+      simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
       simp only [← DerivedCategory.Q_obj_single_obj] at *
       erw [G₂.mapDerivedCategoryFactors.hom.naturality_assoc]
       have hf := Functor.mapDerivedCategoryCompIso_fac G₁ G₂
@@ -227,7 +227,7 @@ lemma mapExactFunctor_comp_mk₀_eq (G₁ : C ⥤ D) [G₁.Additive]
         ((G₁.mapDerivedCategorySingleFunctor 0).hom.app A) ≫
         (G₂.mapDerivedCategorySingleFunctor 0).hom.app (G₁.obj A))]
       simp only [Category.assoc]
-      rw [hc A, Iso.hom_inv_id_app_assoc,
+      rw [hc A, Iso.inv_hom_id_app_assoc,
         ← G₂.mapDerivedCategory.map_comp_assoc, Iso.inv_hom_id_app]
       erw [G₂.mapDerivedCategory.map_id]
       simp only [Category.id_comp, Iso.inv_hom_id_app]
