@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAdjunctionSupplement
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantRingOperations
 
 /-!
@@ -250,7 +252,7 @@ private noncomputable abbrev coefficientLocalization (X : Scheme.{u})
 private noncomputable abbrev coefficientDerivedRestriction (X : Scheme.{u})
     {A B : Type u} [CommRing A] [CommRing B] (φ : A →+* B) :
     proEtaleDerivedCategory X B ⥤ proEtaleDerivedCategory X A :=
-  @Functor.mapDerivedCategory.{u + 2, u + 2, u + 1, u + 1, u + 2, u + 2}
+  @Functor.mapDerivedCategory
     (proEtaleRingModules X (proEtaleConstantRing X B)) _ _ (HasDerivedCategory.standard _)
     (proEtaleRingModules X (proEtaleConstantRing X A)) _ _ (HasDerivedCategory.standard _)
     (proEtaleCoefficientRestrictScalars X φ) _ _ _
@@ -260,7 +262,7 @@ private noncomputable abbrev coefficientRestrictionFactors (X : Scheme.{u})
     coefficientLocalization X B ⋙ coefficientDerivedRestriction X φ ≅
       (proEtaleCoefficientRestrictScalars X φ).mapHomologicalComplex (.up ℤ) ⋙
         coefficientLocalization X A :=
-  @Functor.mapDerivedCategoryFactors.{u + 2, u + 2, u + 1, u + 1, u + 2, u + 2}
+  @Functor.mapDerivedCategoryFactors
     (proEtaleRingModules X (proEtaleConstantRing X B)) _ _ (HasDerivedCategory.standard _)
     (proEtaleRingModules X (proEtaleConstantRing X A)) _ _ (HasDerivedCategory.standard _)
     (proEtaleCoefficientRestrictScalars X φ) _ _ _

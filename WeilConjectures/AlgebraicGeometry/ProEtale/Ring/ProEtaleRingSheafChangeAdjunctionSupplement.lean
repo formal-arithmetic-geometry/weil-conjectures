@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsCanonicalAdjunctionSupplement
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 import all WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSupplement
 import Mathlib.CategoryTheory.Adjunction.FullyFaithful
@@ -333,6 +335,14 @@ private noncomputable def chainDerivedUnit
     F.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj K) ≫
     F.rightDerivedFunctor.map ((DerivedCategory.quotientCompQhIso A).hom.app K)
 
+private theorem quotient_hom_id {A : Type*} [Category A] [Abelian A]
+    [HasDerivedCategory A] (K : CochainComplex A ℤ) :
+    (DerivedCategory.quotientCompQhIso A).hom.app K = 𝟙 (DerivedCategory.Q.obj K) := rfl
+
+private theorem quotient_inv_id {A : Type*} [Category A] [Abelian A]
+    [HasDerivedCategory A] (K : CochainComplex A ℤ) :
+    (DerivedCategory.quotientCompQhIso A).inv.app K = 𝟙 (DerivedCategory.Q.obj K) := rfl
+
 private theorem homotopyFactors_inv_id
     {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]
     (F : A ⥤ B) [F.Additive] (K : CochainComplex A ℤ) :
@@ -359,14 +369,12 @@ private theorem chainDerivedUnit_isIso_of_resolution
     IsIso (chainDerivedUnit F K) := by
   let q := HomotopyCategory.quotient A (.up ℤ)
   have hj : IsIso (DerivedCategory.Qh.map (q.map j)) := by
-    exact (NatIso.isIso_map_iff (DerivedCategory.quotientCompQhIso A) j).2 inferInstance
+    change IsIso (DerivedCategory.Q.map j)
+    infer_instance
   have hFj : IsIso (DerivedCategory.Qh.map
       ((F.mapHomotopyCategory (.up ℤ)).map (q.map j))) := by
-    change IsIso (DerivedCategory.Qh.map
-      ((HomotopyCategory.quotient B (.up ℤ)).map
-        ((F.mapHomologicalComplex (.up ℤ)).map j)))
-    exact (NatIso.isIso_map_iff (DerivedCategory.quotientCompQhIso B)
-      ((F.mapHomologicalComplex (.up ℤ)).map j)).2 inferInstance
+    change IsIso (DerivedCategory.Q.map ((F.mapHomologicalComplex (.up ℤ)).map j))
+    infer_instance
   have hn := F.rightDerivedFunctorUnit.naturality (q.map j)
   dsimp only [Functor.comp_map] at hn
   have hJ : IsIso (F.rightDerivedFunctorUnit.app (q.obj J)) := inferInstance
@@ -409,12 +417,6 @@ private theorem derived_mate_factors
         ((NatTrans.mapHomologicalComplex
           (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans (.up ℤ)).app K) ≫
       chainDerivedUnit R' ((H.mapHomologicalComplex (.up ℤ)).obj K) := by
-  let m := (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
-    adj'.mapDerivedCategoryRightDerivedAdjunction
-    (TwoSquare.mk _ _ _ _
-      (Functor.mapDerivedCategoryCompIso G L' ≪≫
-        Functor.mapDerivedCategoryNatIso s ≪≫
-        (Functor.mapDerivedCategoryCompIso L H).symm).hom)).natTrans
   have hf := derived_mate_factorsh adj adj' s ((HomotopyCategory.quotient _ _).obj K)
   have hG := G.mapDerivedCategoryFactorsh_hom_app
     ((R.mapHomologicalComplex (.up ℤ)).obj K)
@@ -425,34 +427,30 @@ private theorem derived_mate_factors
       ((HomotopyCategory.quotient _ _).obj K) = 𝟙 _ := rfl
   have hq' : (Functor.mapHomotopyCategoryCompIso (Iso.refl (H ⋙ R')) (.up ℤ)).inv.app
       ((HomotopyCategory.quotient _ _).obj K) = 𝟙 _ := rfl
-  have hτ : (NatTrans.mapHomotopyCategory
-      (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans (.up ℤ)).app
-        ((HomotopyCategory.quotient _ _).obj K) =
-      (HomotopyCategory.quotient _ _).map ((NatTrans.mapHomologicalComplex
+  have hτ : DerivedCategory.Qh.map
+      ((NatTrans.mapHomotopyCategory
+        (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans (.up ℤ)).app
+          ((HomotopyCategory.quotient _ _).obj K)) =
+      DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
         (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans (.up ℤ)).app K) := rfl
   simp only [Functor.mapDerivedCategoryFactorsh_hom_app, hq, hq', hτ,
-    homotopyFactors_inv_id, CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id] at hf
+    chainDerivedUnit, quotient_hom_id, quotient_inv_id, homotopyFactors_inv_id,
+    CategoryTheory.Functor.map_comp, Category.assoc] at hf ⊢
   repeat first
-    | erw [Category.id_comp] at hf
-    | erw [Category.comp_id] at hf
+    | erw [G.mapDerivedCategory.map_id] at hf
+    | erw [H.mapDerivedCategory.map_id] at hf
+    | erw [R'.rightDerivedFunctor.map_id] at hf
     | erw [(DerivedCategory.Qh (C := C)).map_id] at hf
     | erw [(DerivedCategory.Qh (C := D)).map_id] at hf
-  have hn := m.naturality ((DerivedCategory.quotientCompQhIso B).hom.app K)
-  dsimp only [Functor.comp_map] at hn
-  have ht := congrArg (fun z ↦
-    G.mapDerivedCategory.map ((DerivedCategory.quotientCompQhIso A).inv.app
-      ((R.mapHomologicalComplex (.up ℤ)).obj K)) ≫ z ≫
-    R'.rightDerivedFunctor.map ((DerivedCategory.quotientCompQhIso D).hom.app
-      ((H.mapHomologicalComplex (.up ℤ)).obj K))) hf
-  simp only [Functor.map_comp, Category.assoc] at ht
-  simp only [← Functor.map_comp, ← Functor.map_comp_assoc, Iso.inv_hom_id_app,
-    CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id] at ht
-  erw [← DerivedCategory.quotientCompQhIso_inv_naturality_assoc] at ht
-  dsimp only [chainDerivedUnit]
-  simp only [Functor.map_comp, Category.assoc]
-  erw [reassoc_of% hn]
-  simpa only [Category.assoc, ← Functor.map_comp, ← Functor.map_comp_assoc,
-    Iso.inv_hom_id_app, CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id] using ht
+    | erw [Category.id_comp] at hf
+    | erw [Category.comp_id] at hf
+  repeat first
+    | erw [G.mapDerivedCategory.map_id]
+    | erw [R.rightDerivedFunctor.map_id]
+    | erw [R'.rightDerivedFunctor.map_id]
+    | erw [Category.id_comp]
+    | erw [Category.comp_id]
+  exact hf
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
