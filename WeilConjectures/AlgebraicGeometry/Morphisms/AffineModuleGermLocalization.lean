@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.Algebra.Module.LocalizedModule.Basic
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
