@@ -17,16 +17,14 @@ for other geometric realizations.
 
 @[expose] public noncomputable section
 
-universe a b
-
 open CategoryTheory
 
 namespace CategoryTheory
 
 /-- Compatibility of the unit with the specified open pushforward and pullback squares. -/
 def compactProjectionOpen_unitSquare
-    {A B A' B' : Type a} [Category.{b} A] [Category.{b} B]
-    [Category.{b} A'] [Category.{b} B']
+    {A B A' B' : Type*} [Category* A] [Category* B]
+    [Category* A'] [Category* B']
     {E : A ⥤ B} {R : B ⥤ A} {E' : A' ⥤ B'} {R' : B' ⥤ A'}
     (adj : E ⊣ R) (adj' : E' ⊣ R') (FA : A ⥤ A') (FB : B ⥤ B')
     (eE : E ⋙ FB ≅ FA ⋙ E') (eR : R ⋙ FA ≅ FB ⋙ R') : Prop :=
@@ -35,8 +33,8 @@ def compactProjectionOpen_unitSquare
 
 /-- The unit square identifies the adjunction transposes after realization. -/
 theorem compactProjectionOpen_forget_homEquiv
-    {A B A' B' : Type a} [Category.{b} A] [Category.{b} B]
-    [Category.{b} A'] [Category.{b} B']
+    {A B A' B' : Type*} [Category* A] [Category* B]
+    [Category* A'] [Category* B']
     {E : A ⥤ B} {R : B ⥤ A} {E' : A' ⥤ B'} {R' : B' ⥤ A'}
     (adj : E ⊣ R) (adj' : E' ⊣ R') (FA : A ⥤ A') (FB : B ⥤ B')
     (eE : E ⋙ FB ≅ FA ⋙ E') (eR : R ⋙ FA ≅ FB ⋙ R')
@@ -54,8 +52,8 @@ theorem compactProjectionOpen_forget_homEquiv
 
 /-- The canonical unit normalization determines the forward open projection square. -/
 theorem compactProjectionOpen_forget_of_unit_at
-    {A B A' B' : Type a} [Category.{b} A] [Category.{b} B]
-    [Category.{b} A'] [Category.{b} B']
+    {A B A' B' : Type*} [Category* A] [Category* B]
+    [Category* A'] [Category* B']
     {E : A ⥤ B} {R : B ⥤ A} {E' : A' ⥤ B'} {R' : B' ⥤ A'}
     (adj : E ⊣ R) (adj' : E' ⊣ R') (FA : A ⥤ A') (FB : B ⥤ B')
     {TA : A × A ⥤ A} {TB : B × B ⥤ B}
@@ -141,8 +139,8 @@ theorem compactProjectionOpen_forget_of_unit_at
 
 section InverseMate
 
-variable {A B A' B' : Type a} [Category.{b} A] [Category.{b} B]
-  [Category.{b} A'] [Category.{b} B']
+variable {A B A' B' : Type*} [Category* A] [Category* B]
+  [Category* A'] [Category* B']
   {E : A ⥤ B} {R : B ⥤ A} {E' : A' ⥤ B'} {R' : B' ⥤ A'}
   (adj : E ⊣ R) (adj' : E' ⊣ R') {FA : A ⥤ A'} {FB : B ⥤ B'}
   (eR : R ⋙ FA ≅ FB ⋙ R')
