@@ -349,7 +349,7 @@ private theorem adicSheafFlat {C : Type u} [SmallCategory C]
     fun i ↦ B.right.obj.map f.op (s i)
   have hsmul (i : Fin n) :
       c i • t i = ((constantSheaf J CommRingCat.{u}).obj (CommRingCat.of A)).obj.map
-        f.op (a i) • ((adicUnderlyingModule J A B).val.map f.op (s i)) := by
+        f.op (a i) • ((adicUnderlyingModule J A B).val.restrictₛₗ f.op (s i)) := by
     change (algebraMap A ((adicAlgebraSections J A (op V)).obj B) (c i)) * t i = _
     change B.hom.hom.app (op V)
       (((toSheafify J ((Functor.const Cᵒᵖ).obj (CommRingCat.of A))).app (op V)) (c i)) *
