@@ -979,4 +979,82 @@ def standardOpen (i : Fin (r + 1)) : (scheme X r).Opens :=
       ((TopologicalSpace.Opens.map ((construction X r).restrictionIso V).hom.base).obj
         (localStandardOpen X r V i)))
 
+private theorem coordinate_restriction {V W : X.affineOpens} (h : W ≤ V)
+    (i : Fin (r + 1)) :
+    (algebra X r).restriction h (coordinate X r V i) = coordinate X r W i := by
+  let t := (eqToHom (algebra_eq X r).symm).right.hom
+  have ht := CategoryTheory.congr_fun (t.naturality (homOfLE (X := X.Opens) h).op)
+    (generator X r V.1 i)
+  change t.app (op W.1)
+      ((SymmetricAlgebraSheaf.algebra (freeModule X r)).right.obj.map (homOfLE (X := X.Opens) h).op
+        (generator X r V.1 i)) =
+    (algebra X r).restriction h (coordinate X r V i) at ht
+  rw [generator_restriction] at ht
+  exact ht.symm
+
+private theorem localStandardOpen_compat {V W : X.affineOpens} (h : W ≤ V)
+    (i : Fin (r + 1)) :
+    (scheme X r).homOfLE ((π X r).preimage_mono h) ⁻¹ᵁ
+        (((construction X r).restrictionIso V).hom ⁻¹ᵁ localStandardOpen X r V i) =
+      ((construction X r).restrictionIso W).hom ⁻¹ᵁ localStandardOpen X r W i := by
+  have hc : (scheme X r).homOfLE ((π X r).preimage_mono h) ≫
+      ((construction X r).restrictionIso V).hom =
+    ((construction X r).restrictionIso W).hom ≫ (algebra X r).localTransition h := by
+    rw [← (construction X r).restriction_compatibility V W h, Iso.hom_inv_id_assoc]
+    rfl
+  rw [← Scheme.Hom.comp_preimage, hc, Scheme.Hom.comp_preimage]
+  congr 1
+  change Proj.map _ _ ⁻¹ᵁ Proj.basicOpen _ (coordinate X r V i) = _
+  rw [Proj.map_preimage_basicOpen, coordinate_restriction]
+  rfl
+
+/-- The global standard open restricts to the specified local standard open on every
+affine base. The chart map is therefore the inherited relative-Proj chart map.
+Source: blueprint, order 203 (blueprint: def-nagata-relative-projective-space).
+Proof: restriction of a coordinate is the same coordinate. The restriction transition
+maps of relative Proj are the canonical graded section-restriction maps, which pull
+back D_+(T_i) to D_+(T_i). Use restriction_compatibility, and cover overlaps by affine
+refinements. Taking the union defining standardOpen gives the asserted equality. -/
+theorem standardOpen_restrict (V : X.affineOpens) (i : Fin (r + 1)) :
+    (TopologicalSpace.Opens.map (π X r ⁻¹ᵁ V.1).ι.base).obj (standardOpen X r i) =
+      (TopologicalSpace.Opens.map ((construction X r).restrictionIso V).hom.base).obj
+        (localStandardOpen X r V i) := by
+  ext x
+  change x.1 ∈ standardOpen X r i ↔
+    x ∈ ((construction X r).restrictionIso V).hom ⁻¹ᵁ localStandardOpen X r V i
+  constructor
+  · intro hx
+    obtain ⟨W, hW⟩ := TopologicalSpace.Opens.mem_iSup.mp hx
+    obtain ⟨y, hy, hyx⟩ := hW
+    obtain ⟨Z, hZ, hxZ, hZVW⟩ := exists_isAffineOpen_mem_and_subset
+      (show (π X r) x.1 ∈ V.1 ⊓ W.1 from ⟨x.2, by
+        rw [← hyx]
+        exact y.2⟩)
+    let Z' : X.affineOpens := ⟨Z, hZ⟩
+    have hZV : Z' ≤ V := fun z hz ↦ (hZVW hz).1
+    have hZW : Z' ≤ W := fun z hz ↦ (hZVW hz).2
+    let z : (π X r ⁻¹ᵁ Z).toScheme := ⟨x.1, hxZ⟩
+    have hzy : (scheme X r).homOfLE ((π X r).preimage_mono hZW) z = y := by
+      apply Subtype.ext
+      rw [Scheme.homOfLE_apply]
+      exact hyx.symm
+    have hzx : (scheme X r).homOfLE ((π X r).preimage_mono hZV) z = x := by
+      apply Subtype.ext
+      rw [Scheme.homOfLE_apply]
+    have hz : z ∈ ((construction X r).restrictionIso Z').hom ⁻¹ᵁ
+        localStandardOpen X r Z' i := by
+      rw [← localStandardOpen_compat X r hZW i]
+      exact (show (scheme X r).homOfLE ((π X r).preimage_mono hZW) z ∈
+        ((construction X r).restrictionIso W).hom ⁻¹ᵁ localStandardOpen X r W i by
+          rw [hzy]
+          exact hy)
+    rw [← localStandardOpen_compat X r hZV i] at hz
+    have hz' : (scheme X r).homOfLE ((π X r).preimage_mono hZV) z ∈
+        ((construction X r).restrictionIso V).hom ⁻¹ᵁ localStandardOpen X r V i := hz
+    rw [hzx] at hz'
+    exact hz'
+  · intro hx
+    apply TopologicalSpace.Opens.mem_iSup.mpr
+    exact ⟨V, x, hx, rfl⟩
+
 end AlgebraicGeometry.RelativeProjectiveSpace
