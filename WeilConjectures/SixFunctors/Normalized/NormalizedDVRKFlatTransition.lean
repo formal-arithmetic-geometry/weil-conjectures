@@ -216,7 +216,7 @@ private theorem exactComp_fac (K : CochainComplex A ℤ) :
       R.mapDerivedCategoryFactors.hom.app
         ((H.mapHomologicalComplex (.up ℤ)).obj K) ≫
       DerivedCategory.Q.map ((Functor.mapHomologicalComplexCompIso i (.up ℤ)).hom.app K) := by
-  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc,
+  simp only [Iso.trans_hom, NatTrans.comp_app, Category.assoc,
     Functor.mapDerivedCategoryNatIso_fac]
   have h := Functor.mapDerivedCategoryCompIso_fac H R K
   rw [← h]
@@ -487,11 +487,12 @@ private theorem comparison_eq (n : ℕ)
   unfold normalizedDVRKFlatComparison
   simp only [Functor.mapHomotopyCategoryFactors, DerivedCategory.quotientCompQhIso,
     HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift_inv,
-    Quotient.lift.isLift_hom, Functor.map_id, Category.id_comp, Category.comp_id]
+    Quotient.lift.isLift_hom]
+  erw [(scalarReductionDerivedExtension l E X n).map_id, DerivedCategory.Qh.map_id,
+    Category.id_comp, Category.comp_id]
 
-local instance : Category.{max (t + 2) (u + 1)} (completedIntegralDerivedCategory l E X D hl) := by
-  unfold completedIntegralDerivedCategory
-  infer_instance
+local instance : Category.{max (t + 2) (u + 1)}
+    (DerivedCategory (scalarReductionSource l E X)) := inferInstance
 
 set_option linter.unusedVariables false in
 /-- The canonical quotient chain map is the restriction of the adjoint reduction
