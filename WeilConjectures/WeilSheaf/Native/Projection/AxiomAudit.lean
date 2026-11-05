@@ -39,6 +39,8 @@ The remote build records the remaining proof leaves reachable from the theorem.
 #print axioms
   AlgebraicGeometry.WeilComplex.nonempty_rightDerivedLowerStar_nativeDerivedTensor_iso
 
+#print axioms AlgebraicGeometry.WeilComplex.rightDerivedLowerStarNativeDerivedTensorIso
+#print axioms AlgebraicGeometry.WeilComplex.map_rightDerivedLowerStarNativeDerivedTensorIso_hom_app
 #print axioms AlgebraicGeometry.ProEtaleWeilSheaf.condensedRealizationTensor_pull_square
 #print axioms AlgebraicGeometry.ProEtaleWeilSheaf.condensedRealizationSheafTensor_pull_square
 #print axioms AlgebraicGeometry.ProEtaleWeilSheaf.native_two_sided_kflat_representatives

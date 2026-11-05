@@ -58,8 +58,9 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
 variable (htotal : ∀ P T : CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ,
   TotalPullTensorSquare k₀ l g P T)
 
-set_option maxHeartbeats 1000000 in
--- The native model interfaces previously exhausted 800000 elaboration heartbeats.
+set_option maxHeartbeats 2000000 in
+-- The concrete application still exhausted one million kernel heartbeats after the
+-- native model families were checked separately (755 seconds in the measured build).
 include htotal in
 /-- On K-flat representatives, the native tensor square is the localization of the
 square of total complexes. -/
