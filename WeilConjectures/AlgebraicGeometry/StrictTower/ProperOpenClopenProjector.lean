@@ -444,7 +444,7 @@ private theorem projector_lift_fac (K : CochainComplex A ℤ) :
 @[irreducible] private def projector_map :
     𝟭 (DerivedCategory A) ⟶ F.mapDerivedCategory ⋙ H.mapDerivedCategory :=
   (Functor.mapDerivedCategoryIdIso A).inv ≫ projector_lift F H p ≫
-    (Functor.mapDerivedCategoryCompIso F H).hom
+    (Functor.mapDerivedCategoryCompIso F H).inv
 
 private theorem projector_map_fac (K : CochainComplex A ℤ) :
     (projector_map F H p).app (DerivedCategory.Q.obj K) ≫
@@ -464,24 +464,6 @@ private theorem projector_map_fac (K : CochainComplex A ℤ) :
     _ = _ := by
       rw [projector_lift_fac, ← hi]
       exact Iso.inv_hom_id_app_assoc _ _ _
-
-private theorem projector_map_descent : ClopenProjectorDescent
-    (𝟭 A) (F ⋙ H) p ((Functor.mapDerivedCategoryIdIso A).hom ≫
-      projector_map F H p ≫ (Functor.mapDerivedCategoryCompIso F H).inv) := by
-  have h : (Functor.mapDerivedCategoryIdIso A).hom ≫ projector_map F H p ≫
-      (Functor.mapDerivedCategoryCompIso F H).inv = projector_lift F H p := by
-    rw [projector_map]
-    simp only [Category.assoc, Iso.hom_inv_id_assoc, Iso.hom_inv_id, Category.comp_id]
-  rw [h]
-  exact projector_lift_fac F H p
-
-private theorem projector_map_descent_eq
-    (e : 𝟭 (DerivedCategory A) ⟶ F.mapDerivedCategory ⋙ H.mapDerivedCategory)
-    (he : projector_map F H p = e) : ClopenProjectorDescent
-    (𝟭 A) (F ⋙ H) p ((Functor.mapDerivedCategoryIdIso A).hom ≫
-      e ≫ (Functor.mapDerivedCategoryCompIso F H).inv) := by
-  rw [← he]
-  exact projector_map_descent F H p
 
 end ProjectorLocalization
 
