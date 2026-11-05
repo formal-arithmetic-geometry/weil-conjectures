@@ -230,7 +230,7 @@
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 - This final commit changes only progress documentation; Lean source matches the green build.
 
-# BZ798 in progress
+# BZ798 complete
 
 - Branch: `u9/BZ798`; original baseline: `6a4b38f19`.
 - Resumed after rereading `/home/ubuntu/u9/briefs/BZ798.md` and the progress notes.
@@ -255,3 +255,15 @@
 - Dependency paths: `/home/ubuntu/u9/bz/BZ798-downstream-blockers.txt`.
 - Focused downstream validation of `ProEtaleProjectionMateData` and its sole importer
   `ProEtaleProjectionMateExact` is queued (exec session 71582); no further Lean edits.
+- Focused downstream validation finished at `097c128327f8a77b1db72bd3846df904744bf797`:
+  `ProEtaleProjectionMateData` rebuilt GREEN in 3.0s; `ProEtaleProjectionMateExact`
+  is blocked at line 71 by BZ764's removed `proEtaleProjectionMateData` API.
+  Wrapper rc=1, built=24, failed=1; the failing module is not claimed green.
+- `proEtaleProjectionMateExact` still has callers in `PerfectProjectionFormula`
+  and `ProjectionFormulaCompactified`, so the deletion guard prevents removing it.
+  No unowned upstream declaration was restored or modified.
+- Downstream pass complete: four extra modules attempted over two layers, one green,
+  three recorded external blockers. Log: `BUILD-BZ798-downstream2.log`.
+- Actual build-host pins verified: Lean v4.35.0-rc3 and Mathlib b63f6e8a68d220e3b3bc4f3792bb53650d375f24.
+- BZ798 COMPLETE for its assigned unit. Completion marker: `/home/ubuntu/u9/state/BZ798.DONE`.
+- Final documentation commit leaves all Lean source identical to the green unit build.
