@@ -439,7 +439,7 @@ theorem finiteRing_constant_derived_map_local
   let c := constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)
   let R := upperStar (ModuleCat.{u + 1} B) V.hom
   let cV := constantSheaf V.left.smallEtaleTopology (ModuleCat.{u + 1} B)
-  let e := (Functor.mapDerivedCategoryCompIso c R).symm ≪≫
+  let e := Functor.mapDerivedCategoryCompIso c R ≪≫
     Functor.mapDerivedCategoryNatIso
       (upperStarConstantSheafIso (ModuleCat.{u + 1} B) V.hom)
   let β := (e.app (DerivedCategory.Q.obj E)).inv ≫ α ≫
