@@ -131,10 +131,11 @@ theorem exists_affineDerivedPushforwardSheafEdge
               |>.mapHomologicalComplex (.up ℤ)).obj C)).inv ≫
         (DerivedCategory.homologyFunctor
           (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i).map
-          (((RingedSpace.moduleDirectImage
-            (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom).rightDerivedFunctorUnit).app
-            ((HomotopyCategory.quotient _ (.up ℤ)).obj
-              ((F.mapHomologicalComplex (.up ℤ)).obj C))) := by
+          (cast (by rfl)
+            (((RingedSpace.moduleDirectImage
+              (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom).rightDerivedFunctorUnit).app
+              ((HomotopyCategory.quotient _ (.up ℤ)).obj
+                ((F.mapHomologicalComplex (.up ℤ)).obj C)))) := by
   let X := Spec (.of A)
   let Y := Spec (.of B)
   let f := Spec.map (CommRingCat.ofHom φ)
