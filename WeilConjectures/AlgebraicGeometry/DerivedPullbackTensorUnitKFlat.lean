@@ -7,6 +7,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorUnitCounit
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare
 import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorUnitNormalization
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
@@ -354,8 +356,8 @@ theorem derivedPullback_tensor_unit_kFlat {T X : Scheme.{uModel}} (g : T ⟶ X)
           CochainComplex.IsKFlatTensor (R := X.sheaf) N →
           ((μ.app (DerivedCategory.Q.obj P)).app (DerivedCategory.Q.obj N)).hom ≫
               (derivedPullback g).map (Functor.LaxMonoidal.μ DerivedCategory.Q P N) ≫
-              ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj
-                (CochainComplex.mapBifunctor P N (curriedTensor _))) ≫
+              cast (by rfl) (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj
+                (CochainComplex.mapBifunctor P N (curriedTensor _)))) ≫
               DerivedCategory.Q.map (φ P N).hom =
             cast (by rfl) (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P) ⊗ₘ
               ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj N)) ≫
