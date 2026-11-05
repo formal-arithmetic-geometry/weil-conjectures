@@ -52,14 +52,14 @@ lemma upperStarExtendScalarsLimitFreeTowerIso_hom_comp_doubleProjection (n : ℕ
           (upperStarExtendScalarsLimitFreeTowerIso Λ g t t' e a he hK).hom ≫
         (Mod.extendScalarsCompIsoOfEq (coefficientMap_comp_eq a b c hc X')).hom.app (limit 𝒯') ≫
         purityFreeTowerProjection Λ t' c n =
-      (upperStar Λ'' g).map
+      (CondensedRing.upperStar Λ'' g).map
           ((Mod.extendScalarsCompIsoOfEq (coefficientMap_comp_eq a b c hc X)).hom.app (limit 𝒯) ≫
             purityFreeTowerProjection Λ t c n) ≫
         (upperStarFreeTowerIsoApp Λ'' g e n).hom := by
   let τ := upperStarLimitFreeTowerIso Λ g t t' e he hK
   have h := purityCoefficientPullbackIso_comp a b c g hc τ
   have hp : (purityCoefficientPullbackIso c g τ).hom ≫ purityFreeTowerProjection Λ t' c n =
-      (upperStar Λ'' g).map (purityFreeTowerProjection Λ t c n) ≫
+      (CondensedRing.upperStar Λ'' g).map (purityFreeTowerProjection Λ t c n) ≫
         (upperStarFreeTowerIsoApp Λ'' g e n).hom :=
     upperStarExtendScalarsLimitFreeTowerIso_hom_comp_projection Λ g t t' e he hK c n
   have h' := congrArg (· ≫ purityFreeTowerProjection Λ t' c n) h

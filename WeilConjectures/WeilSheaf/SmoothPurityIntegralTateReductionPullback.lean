@@ -35,7 +35,7 @@ lemma upperStarIntegralTateTwistOneIso_hom_comp_reduction :
         (Mod.extendScalars (integersModPowReduction X' ℓ E n)).map
           (upperStarIntegralTateTwistOneIso ℓ E g f).hom ≫
         (extendScalarsIntegralTateTwistOneIntegersModPowIso ℓ E n (g ≫ f)).hom =
-      (upperStar (Profinite.integersModPowRingObj ℓ E n) g).map
+      (CondensedRing.upperStar (Profinite.integersModPowRingObj ℓ E n) g).map
           (extendScalarsIntegralTateTwistOneIntegersModPowIso ℓ E n f).hom ≫
         (freeFunctorCompUpperStarIso (Profinite.integersModPowRingObj ℓ E n) g).hom.app
           (rootsOfUnitySheaf X (ℓ ^ n)) ≫
