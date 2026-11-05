@@ -35,18 +35,7 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
   [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
 
-local notation "CY" => ProEtaleWeilSheaf k₀ l Y
-local notation "CZ" => ProEtaleWeilSheaf k₀ l Z
-local notation "AY" => Mod
-  (Sheaf (Scheme.ProEt.topology (Scheme.Hom.geometricFiber (Y ↘ Spec (CommRingCat.of k₀)))) Ab)
-  (condensedRingObj (Profinite.padicAlgClRingObj l)
-    (Scheme.Hom.geometricFiber (Y ↘ Spec (CommRingCat.of k₀))))
-local notation "AZ" => Mod
-  (Sheaf (Scheme.ProEt.topology (Scheme.Hom.geometricFiber (Z ↘ Spec (CommRingCat.of k₀)))) Ab)
-  (condensedRingObj (Profinite.padicAlgClRingObj l)
-    (Scheme.Hom.geometricFiber (Z ↘ Spec (CommRingCat.of k₀))))
-
-variable (L : CY ⥤ CZ) (V : CZ ⥤ AZ) (F : CY ⥤ AY) (R : AY ⥤ AZ)
+variable (L : (ProEtaleWeilSheaf k₀ l Y) ⥤ (ProEtaleWeilSheaf k₀ l Z)) (V : (ProEtaleWeilSheaf k₀ l Z) ⥤ (Mod (Sheaf (Scheme.ProEt.topology (Scheme.Hom.geometricFiber (Z ↘ Spec (CommRingCat.of k₀)))) Ab) (condensedRingObj (Profinite.padicAlgClRingObj l) (Scheme.Hom.geometricFiber (Z ↘ Spec (CommRingCat.of k₀)))))) (F : (ProEtaleWeilSheaf k₀ l Y) ⥤ (Mod (Sheaf (Scheme.ProEt.topology (Scheme.Hom.geometricFiber (Y ↘ Spec (CommRingCat.of k₀)))) Ab) (condensedRingObj (Profinite.padicAlgClRingObj l) (Scheme.Hom.geometricFiber (Y ↘ Spec (CommRingCat.of k₀)))))) (R : (Mod (Sheaf (Scheme.ProEt.topology (Scheme.Hom.geometricFiber (Y ↘ Spec (CommRingCat.of k₀)))) Ab) (condensedRingObj (Profinite.padicAlgClRingObj l) (Scheme.Hom.geometricFiber (Y ↘ Spec (CommRingCat.of k₀))))) ⥤ (Mod (Sheaf (Scheme.ProEt.topology (Scheme.Hom.geometricFiber (Z ↘ Spec (CommRingCat.of k₀)))) Ab) (condensedRingObj (Profinite.padicAlgClRingObj l) (Scheme.Hom.geometricFiber (Z ↘ Spec (CommRingCat.of k₀))))))
   [L.Additive] [V.Additive] [F.Additive] [R.Additive]
   [PreservesFiniteLimits L] [PreservesFiniteColimits L]
   [PreservesFiniteLimits V] [PreservesFiniteColimits V]
@@ -82,14 +71,14 @@ lemma projection_derived_square_of_native_models
       (nativeDerivedTensor k₀ l Y) (NativeIsKFlat k₀ l Y) (nativeOpenTensorModel k₀ l Y) nY tz)
     (hV : ProjectionRealizationModelNormalization V (nativeTensorTotal k₀ l Z)
       (nativeDerivedTensor k₀ l Z) (NativeIsKFlat k₀ l Z) (nativeOpenTensorModel k₀ l Z) nZ tu)
-    (d : ∀ X Y : CochainComplex AY ℤ,
+    (d : ∀ X Y : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology (Scheme.Hom.geometricFiber (Y ↘ Spec (CommRingCat.of k₀)))) Ab) (condensedRingObj (Profinite.padicAlgClRingObj l) (Scheme.Hom.geometricFiber (Y ↘ Spec (CommRingCat.of k₀))))) ℤ,
       (R.mapHomologicalComplex (.up ℤ)).obj (X ⊗ Y) ≅
         (R.mapHomologicalComplex (.up ℤ)).obj X ⊗ (R.mapHomologicalComplex (.up ℤ)).obj Y)
-    (cmp : ∀ X Y : DerivedCategory AY,
+    (cmp : ∀ X Y : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology (Scheme.Hom.geometricFiber (Y ↘ Spec (CommRingCat.of k₀)))) Ab) (condensedRingObj (Profinite.padicAlgClRingObj l) (Scheme.Hom.geometricFiber (Y ↘ Spec (CommRingCat.of k₀))))),
       R.mapDerivedCategory.obj (X ⊗ Y) ⟶
         R.mapDerivedCategory.obj X ⊗ R.mapDerivedCategory.obj Y)
     (ho : ProjectionOrdinaryModelNormalization R d cmp)
-    (P T : CochainComplex CY ℤ)
+    (P T : CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ)
     (hP : NativeIsKFlat k₀ l Y P) (hT : NativeIsKFlat k₀ l Y T)
     (htotal : PullTensorSquareWithComparison
       (L.mapHomologicalComplex (.up ℤ)) (V.mapHomologicalComplex (.up ℤ))
