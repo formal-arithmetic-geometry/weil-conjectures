@@ -251,7 +251,9 @@ theorem etaleKInjective_unit_leray
     ((G.mapHomologicalComplex (.up ℤ)).obj I))]
   simp only [Category.assoc, Iso.hom_inv_id_app_assoc,
     ← DerivedCategory.quotientCompQhIso_hom_naturality_assoc]
-  rw [reassoc_of% hβ, ← H.rightDerivedFunctor.map_comp, ← hfactor,
-    H.rightDerivedFunctor.map_comp, ← Category.assoc, hcomp]
+  rw [reassoc_of% hβ, ← H.rightDerivedFunctor.map_comp, ← hfactor]
+  simpa only [Functor.map_comp, Category.assoc] using
+    congrArg (fun t ↦ t ≫ H.rightDerivedFunctor.map
+      ((DerivedCategory.quotientCompQhIso _).hom.app J)) hcomp.symm
 
 end AlgebraicGeometry.Etale
