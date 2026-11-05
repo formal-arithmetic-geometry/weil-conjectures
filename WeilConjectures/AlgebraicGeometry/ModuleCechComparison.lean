@@ -49,15 +49,10 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 universe u v
 
-attribute [-instance]
-  CategoryTheory.Limits.instHasBinaryProductObjOfPreservesLimitDiscreteWalkingPairPair
-
-private local instance (R : Type u) [Ring R] (J : Type v) [Small.{u} J] :
+local instance (R : Type u) [Ring R] (J : Type v) [Small.{u} J] :
     HasLimitsOfShape (Discrete J) (ModuleCat.{u} R) :=
   ModuleCat.hasLimitsOfShape
 
-set_option pp.universes true in
-set_option diagnostics true in
 /-- The Čech complex of the presheaf of `Γ(X, ⊤)`-modules underlying an `O_X`-module is
 additive in the module. Source: Stacks 01EQ (blueprint: def-sc-module-cech-comparison).
 Proof: the cochain maps apply the module morphism on each component; therefore they
