@@ -16,7 +16,7 @@ public import WeilConjectures.PoincareDuality.ProjectionFormulaOpenImmersion
 
 universe u
 
-open CategoryTheory MonoidalCategory
+open CategoryTheory MonoidalCategory Endofunctor
 
 namespace AlgebraicGeometry.WeilComplex
 
@@ -82,6 +82,17 @@ theorem projectionForgetSquare_open :
     (inv (b.projectionComparison ((compactProjectionForget k₀ l U).obj M)
       ((compactProjectionForget k₀ l Z).obj N))).hom
   rw [hg]
+  change ((IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l Z)).mapDerivedCategory ⋙
+      (adicSheafEquivCondensedMod l _).functor.mapDerivedCategory).map
+        (((nativeBoundedOpenProjectionIso j).hom.app (M, N)).hom) ≫
+      ((projectionOpenForgetIso k₀ l j).hom.app _).hom ≫
+      (CondensedRing.openImmersionLowerShriek Λ (jb).left).mapDerivedCategory.map
+        (((compactProjectionForgetTensorIso k₀ l U).hom.app (M, (upperStar j).obj N)).hom ≫
+          ((compactProjectionForget k₀ l U).obj M).obj ◁
+            ((compactProjectionForgetUpperStarIso k₀ l j).hom.app N).hom) =
+    ((compactProjectionForgetTensorIso k₀ l Z).hom.app ((extensionByZero j).obj M, N)).hom ≫
+      ((projectionOpenForgetIso k₀ l j).hom.app M).hom ▷
+        ((compactProjectionForget k₀ l Z).obj N).obj ≫ _
   simp only [nativeBoundedOpenProjectionIso_hom_app, projectionOpenForgetIso_hom_app,
     compactProjectionForgetTensorIso_hom_app, compactProjectionForgetUpperStarIso_hom_app]
   exact hm
