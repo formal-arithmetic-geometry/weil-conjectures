@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-import WeilConjectures.WeilSheaf.SmoothPurityDescendedTraceEquivariance
+import WeilConjectures.WeilSheaf.SmoothPurityDescendedSmoothTraceUniversal
 import WeilConjectures.WeilSheaf.SmoothPurityDescendedTraceUniversal
 
 /-! # Dependency audit of the descended-trace assembly of smooth purity -/
@@ -12,6 +12,8 @@ import WeilConjectures.WeilSheaf.SmoothPurityDescendedTraceUniversal
 open AlgebraicGeometry AlgebraicGeometry.WeilComplex
 
 #print axioms exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso_of_descendedTrace
+#print axioms exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso_of_tateEncoding
+#print axioms descendedSmoothTraceUniversal
 #print axioms nonempty_upperShriek_obj_adicConstant_iso_of_descendedTrace
 #print axioms isIso_homEquiv_descendedSmoothTrace
 #print axioms descendedSmoothTrace
