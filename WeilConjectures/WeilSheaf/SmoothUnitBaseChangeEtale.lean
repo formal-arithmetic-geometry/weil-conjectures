@@ -39,14 +39,19 @@ invertible.
 * `ProEtale.CondensedRing.isIso_smoothUnitBaseChange_of_etale`: the case of an étale morphism,
   for the adjunction `Rh_! ⊣ h^*` of
   `ProEtale.CondensedRing.boundedConstructibleLowerShriekUpperStarAdjunctionOfEtale`.
+* `ProEtale.CondensedRing.isIso_smoothUnitBaseChange_etaleLowerShriekBaseChange`: for a
+  cartesian square with `h` étale and the canonical compact-support base change
+  `ProEtale.CondensedRing.etaleLowerShriekBaseChange` (the inverse of the mate of
+  `πU^* h^* ≅ h'^* πV^*`), `smoothUnitBaseChange` is invertible, with no hypothesis on `bc`.
 
-## Remaining input
+## Remaining inputs (left as `sorry`)
 
-`ProEtale.CondensedRing.nonempty_boundedConstructibleLowerShriekUpperStarAdjunction_of_etale`
-(left as `sorry`): for étale `h`, the lower shriek `Rh_!` on bounded constructible
-`ℚ̄_ℓ`-complexes, defined through a Nagata compactification, is left adjoint to `h^*`. For finite
-coefficients on the étale site this is
-`AlgebraicGeometry.Etale.isIso_compactificationEtaleComparison`.
+* `ProEtale.CondensedRing.nonempty_boundedConstructibleLowerShriekUpperStarAdjunction_of_etale`:
+  for étale `h`, the lower shriek `Rh_!` on bounded constructible `ℚ̄_ℓ`-complexes, defined
+  through a Nagata compactification, is left adjoint to `h^*`. For finite coefficients on the
+  étale site this is `AlgebraicGeometry.Etale.isIso_compactificationEtaleComparison`.
+* `ProEtale.CondensedRing.isIso_etaleLowerShriekExchange`: étale base change for `Rh_!`, the
+  exchange `πU^* ⋙ Rh'_! ⟶ Rh_! ⋙ πV^*` of a cartesian square with `h` étale is invertible.
 
 The invertibility of `e : πV^* ℚ̄_ℓ ⟶ ℚ̄_ℓ` is needed: once the mate is invertible,
 `smoothUnitBaseChange` is invertible if and only if `Rh'^!(e)` is.
@@ -124,6 +129,16 @@ lemma isIso_mateEquiv_of_counit (α : TwoSquare G a b H) (c : TwoSquare S H G S'
     IsIso (mateEquiv adj adj' α).natTrans := by
   rw [← isIso_mateEquiv_iff adj adjS adj' adjS', mateEquiv_eq_of_counit adjS adjS' α c h]
   infer_instance
+
+/-- If the inverse mate `β` of an isomorphism `c` is invertible, then `β⁻¹` carries the counit of
+`a ⊣ S` to that of `b ⊣ S'` through `c`. -/
+lemma map_counit_eq_inv_mateEquiv_symm (c : TwoSquare S H G S')
+    [IsIso ((mateEquiv adjS adjS').symm c).natTrans] (M : D) :
+    H.map (adjS.counit.app M) =
+      (inv ((mateEquiv adjS adjS').symm c).natTrans).app (S.obj M) ≫ b.map (c.app M) ≫
+        adjS'.counit.app (H.obj M) := by
+  rw [mateEquiv_counit_symm, ← Category.assoc, ← NatTrans.comp_app, IsIso.inv_hom_id,
+    NatTrans.id_app, Category.id_comp]
 
 variable {bc : a ⋙ H ⟶ G ⋙ b} [IsIso bc] {U : D} {U' : D'} (e : H.obj U ⟶ U')
 
@@ -301,5 +316,62 @@ theorem isIso_smoothUnitBaseChange_of_etale
           ((boundedConstructibleUpperStarOfMap l πV).obj M)) :
     IsIso (smoothUnitBaseChange l h h' bc e) :=
   isIso_smoothUnitBaseChange_of_counit l bc e _ _ w hbc
+
+/-! ### The canonical compact-support base change of an étale morphism -/
+
+section Canonical
+
+variable {h : U ⟶ V} {h' : U' ⟶ V'} [Etale h.left] [Etale h'.left]
+  (hsq : IsPullback πU h'.left h.left πV)
+
+/-- The exchange morphism `πU^* ⋙ Rh'_! ⟶ Rh_! ⋙ πV^*` of an étale morphism: the mate, under
+`Rh_! ⊣ h^*` and `Rh'_! ⊣ h'^*`, of the composition isomorphism `πU^* h^* ≅ h'^* πV^*`. -/
+def etaleLowerShriekExchange :
+    boundedConstructibleUpperStarOfMap l πU ⋙ boundedConstructibleLowerShriek l h' ⟶
+      boundedConstructibleLowerShriek l h ⋙ boundedConstructibleUpperStarOfMap l πV :=
+  ((mateEquiv (boundedConstructibleLowerShriekUpperStarAdjunctionOfEtale l h)
+    (boundedConstructibleLowerShriekUpperStarAdjunctionOfEtale l h')).symm
+      (.mk _ _ _ _ (boundedConstructibleUpperStarOfMapSquareIso l h h' hsq.w).hom)).natTrans
+
+/-- **Étale base change for the lower shriek** on bounded constructible `ℚ̄_ℓ`-complexes: for a
+cartesian square with `h` étale, the exchange morphism `πU^* ⋙ Rh'_! ⟶ Rh_! ⋙ πV^*` is an
+isomorphism. -/
+theorem isIso_etaleLowerShriekExchange : IsIso (etaleLowerShriekExchange l hsq) :=
+  sorry
+
+/-- The **compact-support base change isomorphism of an étale morphism**,
+`Rh_! ⋙ πV^* ≅ πU^* ⋙ Rh'_!`: the inverse of `etaleLowerShriekExchange`. -/
+def etaleLowerShriekBaseChange :
+    boundedConstructibleLowerShriek l h ⋙ boundedConstructibleUpperStarOfMap l πV ≅
+      boundedConstructibleUpperStarOfMap l πU ⋙ boundedConstructibleLowerShriek l h' :=
+  have := isIso_etaleLowerShriekExchange l hsq
+  (asIso (etaleLowerShriekExchange l hsq)).symm
+
+/-- The compact-support base change of an Ã©tale morphism is the inverse of the exchange
+morphism. -/
+lemma etaleLowerShriekBaseChange_hom :
+    (etaleLowerShriekBaseChange l hsq).hom =
+      @inv _ _ _ _ (etaleLowerShriekExchange l hsq) (isIso_etaleLowerShriekExchange l hsq) :=
+  rfl
+
+/-- **The exceptional base change at the unit of an étale morphism**, for the canonical
+compact-support base change `etaleLowerShriekBaseChange`: `smoothUnitBaseChange` is invertible
+for every invertible `e`. -/
+theorem isIso_smoothUnitBaseChange_etaleLowerShriekBaseChange
+    (e : (boundedConstructibleUpperStarOfMap l πV).obj (𝟙_ _) ⟶ 𝟙_ _) [IsIso e] :
+    IsIso (smoothUnitBaseChange l h h' (etaleLowerShriekBaseChange l hsq) e) := by
+  have := isIso_etaleLowerShriekExchange l hsq
+  refine isIso_smoothUnitBaseChange_of_etale l _ e hsq.w fun M ↦ ?_
+  rw [etaleLowerShriekBaseChange_hom]
+  have : IsIso ((mateEquiv (boundedConstructibleLowerShriekUpperStarAdjunctionOfEtale l h)
+      (boundedConstructibleLowerShriekUpperStarAdjunctionOfEtale l h')).symm
+      (.mk _ _ _ _ (boundedConstructibleUpperStarOfMapSquareIso l h h' hsq.w).hom)).natTrans :=
+    isIso_etaleLowerShriekExchange l hsq
+  exact Adjunction.map_counit_eq_inv_mateEquiv_symm
+    (boundedConstructibleLowerShriekUpperStarAdjunctionOfEtale l h)
+    (boundedConstructibleLowerShriekUpperStarAdjunctionOfEtale l h')
+    (.mk _ _ _ _ (boundedConstructibleUpperStarOfMapSquareIso l h h' hsq.w).hom) M
+
+end Canonical
 
 end AlgebraicGeometry.ProEtale.CondensedRing
