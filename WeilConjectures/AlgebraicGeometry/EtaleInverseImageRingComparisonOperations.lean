@@ -26,6 +26,7 @@ set_option backward.defeqAttrib.useBackward true
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
+set_option backward.isDefEq.respectTransparency true in
 private noncomputable def ringMul.{uC, vC, w} {C : Type uC} [Category.{vC} C]
     (J : GrothendieckTopology C) [J.HasSheafCompose (forget CommRingCat.{w})]
     (G : Sheaf J CommRingCat.{w}) :
