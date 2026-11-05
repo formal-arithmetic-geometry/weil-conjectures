@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Mathlib.RingTheory.AdicCompletion.Functoriality
-public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 import WeilConjectures.AlgebraicGeometry.FormalCompletionAffineNaturalComparison
 import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelSum
