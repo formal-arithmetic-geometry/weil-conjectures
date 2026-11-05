@@ -87,7 +87,9 @@ private theorem unit_single (M : C) :
       Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Functor.associator_inv_app,
       Iso.symm_hom, NatTrans.comp_app, Functor.mapIso_hom,
       Category.id_comp]
-    simp [Functor.mapDerivedCategoryFactorsh_hom_app, Functor.mapHomotopyCategoryFactors,
+    simp [DerivedCategory.Plus.quotientCompQhIso,
+      DerivedCategory.Plus.QhCompιIsoιCompQh, Functor.mapDerivedCategoryPlusCompatibility,
+      Functor.mapDerivedCategoryFactorsh_hom_app, Functor.mapHomotopyCategoryFactors,
       Quotient.lift.isLift_inv, Category.assoc]
   rw [hL, Functor.map_comp, ← Category.assoc]
   erw [h]

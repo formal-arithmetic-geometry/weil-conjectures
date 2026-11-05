@@ -100,9 +100,12 @@ private theorem comparison_eq_unit
       (v.rightDerivedFunctorPlus.map (resolutionAugmentationIso R).hom) ≫
       DerivedCategory.Plus.ι.map (inv (v.rightDerivedFunctorPlusUnith.app
         ((HomotopyCategory.Plus.quotient A).obj (resolutionPlus R)))) ≫
-      DerivedCategory.Plus.ι.map
-        ((DerivedCategory.Plus.quotientCompQhIso B).hom.app
-          (v.mapCochainComplexPlus.obj (resolutionPlus R))) ≫
+      (DerivedCategory.Plus.QhCompιIsoιCompQh B).hom.app
+        (v.mapHomotopyCategoryPlus.obj
+          ((HomotopyCategory.Plus.quotient A).obj (resolutionPlus R))) ≫
+      (DerivedCategory.quotientCompQhIso B).hom.app
+        ((v.mapHomotopyCategoryPlus.obj
+          ((HomotopyCategory.Plus.quotient A).obj (resolutionPlus R))).obj.as) ≫
       DerivedCategory.Q.map (R.cocomplex.mapExtendIso ComplexShape.embeddingUpNat v).hom ≫
       DerivedCategory.Q.map (HomologicalComplex.extendMap
         ((v.mapHomologicalComplex _).map φ.hom) ComplexShape.embeddingUpNat) = _
@@ -211,6 +214,12 @@ private theorem augmentation_boundary
       (DerivedCategory.quotientCompQhIso A).hom.app IC.cochainComplex ≫
       DerivedCategory.triangleOfSESδ hH ≫
       ((DerivedCategory.quotientCompQhIso A).inv.app IA.cochainComplex)⟦(1 : ℤ)⟧' ≫
+      (shiftFunctor (DerivedCategory A) 1).map
+        ((DerivedCategory.Plus.QhCompιIsoιCompQh A).inv.app
+          ((HomotopyCategory.Plus.quotient A).obj (resolutionPlus IA))) ≫
+      (shiftFunctor (DerivedCategory A) 1).map
+        (DerivedCategory.Plus.ι.map
+          ((DerivedCategory.Plus.quotientCompQhIso A).hom.app (resolutionPlus IA))) ≫
       (DerivedCategory.Plus.ι.commShiftIso (1 : ℤ)).inv.app
         (DerivedCategory.Plus.Q.obj (resolutionPlus IA)) ≫
       (DerivedCategory.Plus.ι.commShiftIso (1 : ℤ)).hom.app
