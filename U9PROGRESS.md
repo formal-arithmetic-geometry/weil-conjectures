@@ -50,18 +50,32 @@
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 - Completion marker: `/home/ubuntu/u9/state/BZ130.DONE`.
 
-# BZ165 complete
+# BZ154 in progress
 
-- Branch: `u9/BZ165`; initial commit: `6504338cb`.
-- All four assigned modules passed `ucheck-bump` together: rc=0, failed=0, 3700 jobs.
-- Validated source commit: `22130ff98f14288bb3712ab5a1f105456bf44682`.
-- Build tree: `newsrv:/home/ubuntu/u9n/bumpw1`.
-- Full log: `/home/ubuntu/u9/bz/BUILD-BZ165-final-full.log`.
-- Fix patterns, occurrence counts, and exact errors: `/home/ubuntu/u9/bz/FIXES-BZ165.md`.
-- The user instructed continuation after the exact compositor migration proposal;
-  its three public statement expressions now select the original maps via the new
-  Mathlib compositor's opposite orientation. All other declaration types and
-  existing docstrings are unchanged.
-- No local Lean/Lake execution, prohibited proof shortcuts, or heartbeat increases.
-- This final completion commit changes only progress documentation after the green build.
-- Completion marker: `/home/ubuntu/u9/state/BZ165.DONE`.
+- Branch: `u9/BZ154`, starting commit `80aeb4bf4`.
+- Three assigned modules passed the first repair build at `31ce5f122`.
+- The user instructed continuation after the exact one-line statement correction in
+  `BZ154-shift-statement-proposal.patch`; that patch is now applied.
+- The shift comparison's target is quotient followed by `Plus.Qh`, matching its existing
+  construction and homotopy-category unit. All other changes are the mandated composition
+  isomorphism migration and imports for private definitional reductions.
+- Next: validate all four modules together with `ucheck-bump`, then write the DONE marker.
+- Fix patterns: `/home/ubuntu/u9/bz/FIXES-BZ154.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+
+
+# BZ189 complete
+
+- Branch: `u9/BZ189`, starting commit `c6f0e1da9`.
+- Assigned module: `WeilConjectures.CategoryTheory.RightDerivedCanonicalSingleUnitShift`.
+- `ucheck-bump` passed: rc=0, failed=0, 1925 jobs; target rebuilt in 1.9 seconds.
+- Validated source commit: `ad00a1745c51c41706839a8b38b06a57f64a70d1`.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ189-final-full.log`.
+- Fix patterns and exact errors: `/home/ubuntu/u9/bz/FIXES-BZ189.md`.
+- The user instructed continuation after the exact two-term statement proposal.
+  The single comparison now targets Q directly and uses the cochain-level unit;
+  the proof relates both to the existing homotopy-level shift and cycles comparisons.
+- Binders, mathematical assertion, and existing docstring are preserved.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+- This final progress commit changes no Lean source after the successful build.
+- Completion marker: `/home/ubuntu/u9/state/BZ189.DONE`.
