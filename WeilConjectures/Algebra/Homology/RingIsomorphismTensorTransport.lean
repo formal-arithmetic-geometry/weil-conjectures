@@ -318,16 +318,36 @@ Source: Stacks 03EK and 06YT
 (auxiliary; not a blueprint node). -/
 noncomputable instance (priority := 2000) ringIsoCochainMonoidal
     (A : Sheaf J CommRingCat.{r}) :
-    MonoidalCategory (CochainComplex (scalarModules J A) ℤ) :=
-  HomologicalComplex.monoidalCategory (C := scalarModules J A) (c := .up ℤ)
+    MonoidalCategory (CochainComplex (scalarModules J A) ℤ) := by
+  have : ∀ (I₁ I₂ : Type r), HasColimitsOfShape (Discrete I₂)
+      (PresheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A).obj) :=
+    fun _ _ ↦ PresheafOfModules.hasColimitsOfShape _ _
+  have : MonoidalPreadditive (scalarModules J A) := cochainModulesPreadditive A
+  have := scalarGradedHasTensor A
+  have := scalarGradedGoodTensorLeft A
+  have := scalarGradedGoodTensorRight A
+  have := scalarGradedTensorFour A
+  have := scalarTensorLeftColimits A
+  have := scalarTensorRightColimits A
+  exact HomologicalComplex.monoidalCategory (C := scalarModules J A) (c := .up ℤ)
 
 /-- The underlying structure of the existing total tensor, cached for elaboration.
 Source: Stacks 03EK and 06YT
 (auxiliary; not a blueprint node). -/
 noncomputable instance (priority := 2000) ringIsoCochainMonoidalStruct
     (A : Sheaf J CommRingCat.{r}) :
-    MonoidalCategoryStruct (CochainComplex (scalarModules J A) ℤ) :=
-  HomologicalComplex.monoidalCategoryStruct (C := scalarModules J A) (c := .up ℤ)
+    MonoidalCategoryStruct (CochainComplex (scalarModules J A) ℤ) := by
+  have : ∀ (I₁ I₂ : Type r), HasColimitsOfShape (Discrete I₂)
+      (PresheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A).obj) :=
+    fun _ _ ↦ PresheafOfModules.hasColimitsOfShape _ _
+  have : MonoidalPreadditive (scalarModules J A) := cochainModulesPreadditive A
+  have := scalarGradedHasTensor A
+  have := scalarGradedGoodTensorLeft A
+  have := scalarGradedGoodTensorRight A
+  have := scalarGradedTensorFour A
+  have := scalarTensorLeftColimits A
+  have := scalarTensorRightColimits A
+  exact HomologicalComplex.monoidalCategoryStruct (C := scalarModules J A) (c := .up ℤ)
 
 /-- Localization of termwise restriction, allowing independent localization universes.
 Source: Stacks 04VG and 06YP
