@@ -98,7 +98,7 @@ lemma mapDerivedCategoryCompIso_inv_app_Q (K : CochainComplex C ℤ) :
 
 /-- `Functor.mapDerivedCategoryCompIso` on the image of a complex. -/
 lemma mapDerivedCategoryCompIso_hom_app_Q (K : CochainComplex C ℤ) :
-    (mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Q.obj K) =
+    ((mapDerivedCategoryCompIso F G).symm).hom.app (DerivedCategory.Q.obj K) =
       (F ⋙ G).mapDerivedCategoryFactors.hom.app K ≫
         DerivedCategory.Q.map ((Functor.mapHomologicalComplexCompIso (Iso.refl (F ⋙ G))
           (.up ℤ)).inv.app K) ≫
