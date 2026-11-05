@@ -169,24 +169,24 @@
 - Completion marker: `/home/ubuntu/u9/state/BZ585.DONE`.
 - Final documentation commit leaves Lean source identical to the green revision.
 
-# BZ613 complete
 
-- Branch: `u9/BZ613`; baseline: `b7a97a5ed`.
-- Assigned module and both downstream layers passed together through `ucheck-bump`:
-  rc=0, failed=0, 4271 jobs, on `poolb:43.166.72.219`.
-- Validated source commit: `0e902a46c64af67052be08f98a01e96a3e7a1de6`.
-- Green modules: `WeilConjectures.AlgebraicGeometry.UnboundedAbelianExchangeComparison`,
-  `WeilConjectures.AlgebraicGeometry.UnboundedCoefficientForgetfulAux`, and
-  `WeilConjectures.AlgebraicGeometry.ProperUnboundedBaseChangeForgetful`.
-- Migrated compositor directions in the six proposed private helper signatures,
-  local proof comparisons, and coefficient comparison construction, following the
-  user continuation instruction after the exact patch proposal. Updated the
-  corresponding hom/inv cancellation. All public signatures remain unchanged.
-- The first downstream module needs the same one-line compositor migration in
-  a definition body; the second downstream module builds unchanged.
-- Full final log: `/home/ubuntu/u9/bz/BUILD-BZ613-final-full.log`.
-- Fix patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ613.md`.
-- Contract audit: `/home/ubuntu/u9/bz/BZ613-contract-audit.txt`.
-- No local Lean/Lake execution, sorries, trust bypasses, heartbeat increases, or profiler probes.
-- Completion marker: `/home/ubuntu/u9/state/BZ613.DONE`.
-- This final documentation commit leaves Lean sources identical to the green build.
+# BZ616 complete
+
+- Branch: `u9/BZ616`; baseline: `b7a97a5ed`.
+- Assigned leaf `TowerDerivedEvaluationNormalization` and five downstream modules
+  across two layers pass `ucheck-bump`; all three build batches completed successfully.
+- Direct importers: `TowerRightDerivedEvaluation`, `UnboundedExactAdjunctionSquare`,
+  and `RingedConstantTowerPushforwardNormalization` (rc=0, failed=0, 2913 jobs).
+- Second layer: `ExactTowerAugmentedCounitEvaluation` and `RightDerivedMateIndependence`
+  (rc=0, failed=0, 2958 jobs; validated source commit `989023db75`).
+- Ported compositor directions and cancellation proofs; added Localization public/import-all
+  imports in two private-proof consumers. Only three Lean files differ from baseline.
+- The user instructed continuation after the exact one-token private-helper statement proposal.
+  Its `.hom` -> `.inv` correction is applied. All other declaration headers and all
+  existing docstrings are unchanged; audit covers 59 headers across the six green modules.
+- Full module names, exact errors, fix patterns, occurrence counts, and all build logs:
+  `/home/ubuntu/u9/bz/FIXES-BZ616.md`. Audit: `/home/ubuntu/u9/bz/BZ616-contract-audit.txt`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, heartbeat increases,
+  profiler probes, or unowned dependency edits. `git diff --check` passes.
+- Completion marker: `/home/ubuntu/u9/state/BZ616.DONE`.
+- This final commit changes only progress documentation; Lean sources match the green builds.
