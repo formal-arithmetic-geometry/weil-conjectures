@@ -142,22 +142,30 @@
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ540 complete
+# BZ575 complete
 
-- Branch: `u9/BZ540`; starting commit: `29f3a8d81`.
-- Assigned module `WeilConjectures.CategoryTheory.Constant.ConstantDerivedNormalizationUniversalSupplement`
-  passed `ucheck-bump`: rc=0, built=9, failed=0, 3811 jobs.
-- Validated source commit: `e65cfc0cfe`; tree `poolb:43.157.184.90`.
-- Full log: `/home/ubuntu/u9/bz/BUILD-BZ540-owned-green.log`.
-- Only authored Lean change: exclude the successor-universe sheafification instance before
-  `constantSeed`. All owned statements, proofs, and docstrings match the starting file.
-- Reused validated dependency repairs from BZ581, BZ549, and BZ558; their tensor compatibility
-  changes are recorded in `/home/ubuntu/u9/bz/FIXES-BZ540.md`.
-- Both direct importers were attempted; skipped because of unowned dependency failures in
-  DerivedMorphismSheafComparison (BZ513), KFlatResolutionGeneral (BZ116), and
-  RingedTopoiDerivedPullback (BZ554), and HomTensorPair (BZ92). No second layer or downstream edits.
-- Owned module also rebuilt green at `2ba35ef7bd` in the downstream batch.
-- Contract audit: `/home/ubuntu/u9/bz/BZ540-contract-audit.txt`.
-- No local Lean/Lake, sorries, admissions, trust bypasses, or heartbeat increases.
-- Completion marker: `/home/ubuntu/u9/state/BZ540.DONE`.
-- This completion commit changes only progress documentation; Lean sources match the green build.
+- Branch: `u9/BZ575`; assigned ChangeOfRings passed `ucheck-bump`: rc=0, failed=0, 4416 jobs.
+- Tested source commit: `19933846843930b020db9c4d1aace62adcd94e64`.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ575-final-full.log`.
+- User instructed continuation after the one-line shared dependency repair proposal.
+  Applied the compatible tensor map lemma in Presheaf/InternalHom.lean, then merged
+  coordinator `bump/v4.35` at `cfcb63ad77e` to include the other dependency repairs.
+- Assigned module and both importer files are unchanged; no statement or docstring changes.
+- Direct importer EtaleReductionFiniteTor and second-layer EtaleReduction were attempted,
+  then skipped because unowned Ext.MapExactFunctor fails at line 230. No extra module claimed green.
+- Fix patterns, error evidence, and occurrence counts: `/home/ubuntu/u9/bz/FIXES-BZ575.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ575-contract-audit.txt`.
+- Completion marker: `/home/ubuntu/u9/state/BZ575.DONE`.
+- This completion commit changes only progress documentation after successful validation.
+- No local Lean/Lake, sorries, trust shortcuts, profiler probes, or heartbeat increases.
+
+# BZ557 in progress
+
+- Branch: `u9/BZ557`; starting commit: `8af5cb324`.
+- Added the public AffineScheme import to direct importer AffineBasisSectionsDerivedUnit.
+- Initial remote builds stopped in the shared Presheaf.InternalHom dependency.
+- On continuation, merged BZ558 prerequisite repair `f28760733369366ac823f0084f3c4090afa3a90d`.
+- Next: ucheck-bump on AffineBasisSectionsResolutionHomologyEpi, AffineBasisSectionsDerivedUnit,
+  and AffineOpenSectionsResolutionQuasiIso; fix any owned errors and write DONE when green.
+- Notes and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ557.md`.
+- No local Lean/Lake, statement changes, proof escapes, or heartbeat increases.
