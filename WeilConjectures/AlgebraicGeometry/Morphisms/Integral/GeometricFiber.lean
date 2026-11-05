@@ -80,7 +80,8 @@ theorem exists_hom_preimage_eq_bot_of_isIntegralHom (c : Nbhd y)
     (C : Set (pullback c.1.hom f : Scheme.{u}))
     (hC : IsClosed C) (h : ∀ t : GeometricFiber f y, basePt f c t default ∉ C) :
     ∃ (c' : Nbhd y) (g : c' ⟶ c), (f.Etale.map g.val).left.base ⁻¹' C = ∅ := by
-  obtain ⟨U, u⟩ := c
+  let U := c.1
+  let u := c.2
   set Z : Set U.left := (pullback.fst U.hom f).base '' C with hZ
   have hZc : IsClosed Z := (pullback.fst U.hom f).isClosedMap C hC
   have hu : u.left (default : Spec (.of Ω)) ∉ Z := by
@@ -90,7 +91,7 @@ theorem exists_hom_preimage_eq_bot_of_isIntegralHom (c : Nbhd y)
     refine h ⟨z'.1 ≫ pullback.snd U.hom f, ?_⟩ ?_
     · rw [Category.assoc, ← pullback.condition, ← Category.assoc, z'.2]
       exact CategoryTheory.Over.w u
-    · rw [basePt_eq_of_comp_fst_eq f ⟨U, u⟩ z'.1 z'.2, hz']
+    · rw [basePt_eq_of_comp_fst_eq f (Functor.elementsMk _ U u) z'.1 z'.2, hz']
       exact hzC
   let U' : U.left.Opens := ⟨Zᶜ, hZc.isOpen_compl⟩
   have hrange : Set.range u.left.base ⊆ Set.range U'.ι.base := by
