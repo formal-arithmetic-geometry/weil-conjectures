@@ -112,8 +112,13 @@ variable [HasDerivedCategory C] [HasDerivedCategory D]
 
 local instance (L : CochainComplex.Plus C) [∀ n, Injective (L.obj.X n)] :
     IsIso (F.rightDerivedFunctorPlusUnit.app L) := by
-  simp only [rightDerivedFunctorPlusUnit_app]
-  infer_instance
+  obtain ⟨L, n, hn⟩ := L
+  let L' : CochainComplex (InjectiveObject C) ℤ :=
+    HomologicalComplex.liftObjectProperty _ L inferInstance
+  have hL' : L'.IsStrictlyGE n := by
+    rwa [← CochainComplex.isStrictlyGE_mapHomologicalComplex_obj_iff _ (InjectiveObject.ι _)]
+  exact inferInstanceAs (IsIso (F.rightDerivedFunctorPlusUnit.app
+    ((InjectiveObject.ι C).mapCochainComplexPlus.obj ⟨L', n, hL'⟩)))
 
 /-- If `L` is a bounded below complex of injective objects, the homology of `R⁺F(L)` is the
 homology of `F(L)`. -/
@@ -141,6 +146,7 @@ noncomputable def rightDerivedFunctorPlusObjSingleFunctorIsoQ (X : C) :
   let L : CochainComplex.Plus C := ⟨R.cochainComplex, 0, inferInstance⟩
   have : ∀ n, Injective (L.obj.X n) := fun n ↦ inferInstanceAs (Injective (R.cochainComplex.X n))
   F.rightDerivedFunctorPlus.mapIso (DerivedCategory.Plus.ι.preimageIso
+    (X := (DerivedCategory.Plus.singleFunctor C 0).obj X) (Y := DerivedCategory.Plus.Q.obj L)
     ((DerivedCategory.singleFunctorIsoCompQ C 0).app X ≪≫
       asIso (DerivedCategory.Q.map R.ι'))) ≪≫
     (asIso (F.rightDerivedFunctorPlusUnit.app L)).symm
@@ -191,7 +197,7 @@ lemma rightDerivedFunctorPlusObjSingleFunctorIsoQ_hom_naturality {X Y : C} {f : 
     change (DerivedCategory.singleFunctor C 0).map f ≫ _ =
       _ ≫ DerivedCategory.Q.map φ.hom'
     rw [(DerivedCategory.singleFunctorIsoCompQ C 0).hom.naturality_assoc]
-    simp only [Functor.comp_map, ← Functor.map_comp_assoc,
+    simp only [Functor.comp_map, Category.assoc, ← Functor.map_comp,
       InjectiveResolution.Hom.ι'_comp_hom']
   dsimp [rightDerivedFunctorPlusObjSingleFunctorIsoQ]
   rw [← F.rightDerivedFunctorPlus.map_comp_assoc, h₂, Functor.map_comp, Category.assoc,
