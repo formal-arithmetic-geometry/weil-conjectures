@@ -89,8 +89,10 @@ private theorem localizationModelMap_left (i : ℤ)
     funext j
     apply ModuleCat.hom_ext
     ext y
-    change uQ.f j (a • (y : Q.X j)) =
-      algebraMap A Aq a • (uQ.f j y : ((extend A Aq).obj Q).X j)
+    change Q.X j at y
+    change uQ.f j (show Q.X j from a • y) =
+      (show ((extend A Aq).obj Q).X j from
+        algebraMap A Aq a • (show ((extend A Aq).obj Q).X j from uQ.f j y))
     rw [huQ, huQ]
     let : Module A Aq := Module.compHom Aq (algebraMap A Aq)
     rw [← TensorProduct.smul_tmul, TensorProduct.smul_tmul']
