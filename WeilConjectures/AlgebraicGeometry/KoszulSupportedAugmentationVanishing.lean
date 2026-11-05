@@ -16,15 +16,3 @@ import Mathlib.CategoryTheory.Localization.HomEquiv
 Source: Stacks Project, Tags 08DC, 08DD and 09IR.
 (blueprint: lem-pc-koszul-supported-augmentation-vanishing).
 -/
-
-@[expose] public section
-
-set_option autoImplicit false
-
-universe u w
-
-open CategoryTheory CategoryTheory.Limits
-
-namespace AlgebraicGeometry
-
-end AlgebraicGeometry
