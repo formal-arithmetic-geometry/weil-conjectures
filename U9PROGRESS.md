@@ -141,3 +141,16 @@
 - Existing `ucheck-bump` invocation is queued; it reads the pushed branch after
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+# BZ573 in progress
+
+- Branch: `u9/BZ573`; starting commit: `8af5cb3248338412e860fdc16db73c8eeebd81d9`.
+- The user instructed continuation after the exact one-line private helper API proposal.
+  Removed `.symm` in `exact_comp_normalization` and updated inverse cancellation.
+  All public statements are unchanged.
+- Removed obsolete local irreducible attributes for Mathlib's no_expose derived comparisons.
+- Baseline remote build was blocked by unowned `Presheaf.InternalHom` (BZ581).
+  Waiting for its owner's repair; no unowned source files changed.
+- Next: validate the owned module with `ucheck-bump`, then its direct importer.
+- Fix patterns and logs: `/home/ubuntu/u9/bz/FIXES-BZ573.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.

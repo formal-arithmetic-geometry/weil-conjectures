@@ -592,7 +592,7 @@ private theorem exact_comp_normalization
     [Limits.PreservesFiniteColimits R] [Limits.PreservesFiniteColimits S]
     [Limits.PreservesFiniteColimits U] (e : S ⋙ R ≅ U)
     (H : HomotopyCategory C (.up ℤ)) :
-    ((mapDerivedCategoryCompIso S R).symm ≪≫ mapDerivedCategoryNatIso e).hom.app
+    (mapDerivedCategoryCompIso S R ≪≫ mapDerivedCategoryNatIso e).hom.app
         (DerivedCategory.Qh.obj H) ≫ U.mapDerivedCategoryFactorsh.hom.app H =
       R.mapDerivedCategory.map (S.mapDerivedCategoryFactorsh.hom.app H) ≫
         R.mapDerivedCategoryFactorsh.hom.app ((S.mapHomotopyCategory (.up ℤ)).obj H) ≫
@@ -601,7 +601,7 @@ private theorem exact_comp_normalization
   dsimp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app]
   rw [Category.assoc, mapDerivedCategoryNatIso_fach]
   rw [← mapDerivedCategoryCompIso_fach S R]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
   rw [← DerivedCategory.Qh.map_comp]
   congr 2
   congr 1
