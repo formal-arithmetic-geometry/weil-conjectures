@@ -111,7 +111,8 @@ private theorem comparison_isIso_of_total
   change IsIso ((Cocone.forget (D ⋙ S ⋙ ev)).map φ)
   infer_instance
 
-local instance (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
+noncomputable local instance
+    (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
     [MonObj Λ] (X : Scheme.{u}) :
     HasZeroMorphisms (Mod (Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1})
       (condensedRingObj Λ X)) := inferInstance

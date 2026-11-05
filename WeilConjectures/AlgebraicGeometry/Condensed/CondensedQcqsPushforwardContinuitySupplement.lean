@@ -214,6 +214,7 @@ private theorem isIso_of_weaklyContractible_sections (X : Scheme.{u})
 set_option synthInstance.maxHeartbeats 100000 in
 -- Colimit inference for the internal module category needs a larger search budget.
 set_option synthInstance.maxSize 4096 in
+set_option backward.isDefEq.respectTransparency false in
 private theorem comparison_isIso_of_bounded_model
     {A : Type v} [Category.{w} A] [Abelian A]
     {B : Type u} [Category.{z} B]

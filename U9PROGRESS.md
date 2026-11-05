@@ -142,26 +142,14 @@
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ541 in progress
+# BZ543 in progress
 
-- Branch: `u9/BZ541`; starting commit: `29f3a8d8177`.
-- User instructed continuation after the exact three-private-statement proposal;
-  removed `.symm` in the private helper types, preserving the original maps.
-- The composition definition and inverse cancellation also use the new orientation.
-- Public theorem statements and all existing docstrings are unchanged.
-- Reused published shared dependency fix `f2876073336` by cherry-pick `09be0bfa2`;
-  this selects the compatibility tensor restriction lemma in `InternalHom`.
-- Remote `ucheck-bump` is queued; no local Lean/Lake execution.
-- Fix log: `/home/ubuntu/u9/bz/FIXES-BZ541.md`.
-- Next: validate the assigned module, build four direct importers, then DONE.
-
-# BZ557 in progress
-
-- Branch: `u9/BZ557`; starting commit: `8af5cb324`.
-- Added the public AffineScheme import to direct importer AffineBasisSectionsDerivedUnit.
-- Initial remote builds stopped in the shared Presheaf.InternalHom dependency.
-- On continuation, merged BZ558 prerequisite repair `f28760733369366ac823f0084f3c4090afa3a90d`.
-- Next: ucheck-bump on AffineBasisSectionsResolutionHomologyEpi, AffineBasisSectionsDerivedUnit,
-  and AffineOpenSectionsResolutionQuasiIso; fix any owned errors and write DONE when green.
-- Notes and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ557.md`.
-- No local Lean/Lake, statement changes, proof escapes, or heartbeat increases.
+- Branch: `u9/BZ543`; owned module: `CondensedQcqsPushforwardLocalComparison`.
+- Candidate local `HasZeroMorphisms` instance committed as `e12f4eef4`.
+- First ucheck-bump stopped in unowned `Presheaf.InternalHom`, before reaching the target.
+- On resume, found coordinator fix `04f9380d1`: public Mathlib Monoidal imports.
+  Merged integrated tip `8af5cb32483`; no independent edits to unowned modules.
+- Remote validation running; local log: `/home/ubuntu/u9/bz/BUILD-BZ543-resume1.log`.
+- Next: fix any owned errors, validate the leaf, then follow the brief's downstream layers.
+- Fix notes: `/home/ubuntu/u9/bz/FIXES-BZ543.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
