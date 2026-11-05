@@ -75,6 +75,7 @@ theorem resolutionDerivedSingleUnit_augmentation
     erw [(DerivedCategory.quotientCompQhIso A).inv.naturality]
     simp
     rfl
+  rw [← Category.assoc] at htransport
   have hunit := F.rightDerivedFunctorPlusUnith.naturality
     ((HomotopyCategory.Plus.quotient A).map g)
   have hcancel : F.rightDerivedPlusSingleUnit X ≫ (resolutionDerivedIso F I).hom =
@@ -87,10 +88,7 @@ theorem resolutionDerivedSingleUnit_augmentation
     rw [Category.assoc, Category.assoc, ← Functor.map_comp_assoc,
       ← Functor.map_comp_assoc, htransport]
     dsimp only [Functor.comp_map] at hunit
-    erw [← Category.assoc _ _ (CategoryTheory.inv _), ← hunit]
-    change _ ≫ _ ≫ CategoryTheory.inv
-      (F.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.quotient A).obj LI)) ≫ _ = _
-    erw [Category.assoc, IsIso.hom_inv_id_assoc]
+    erw [← reassoc_of% hunit, IsIso.hom_inv_id_assoc]
   let a := (HomologicalComplex.singleMapHomologicalComplex F (.up ℤ) 0).inv.app X ≫
     (F.mapHomologicalComplex (.up ℤ)).map I.ι' ≫
       (I.cocomplex.mapExtendIso ComplexShape.embeddingUpNat F).hom
@@ -119,11 +117,12 @@ theorem resolutionDerivedSingleUnit_augmentation
     resolutionAugmentationIso, Functor.preimageIso_hom,
     DerivedCategory.Plus.quotientCompQhIso_hom_app_hom]
   dsimp
-  change (DerivedCategory.Q.map _ ≫ (DerivedCategory.quotientCompQhIso B).inv.app _ ≫
+  simp only [Category.assoc]
+  change DerivedCategory.Q.map _ ≫ (DerivedCategory.quotientCompQhIso B).inv.app _ ≫
       DerivedCategory.Qh.map
         (F.mapHomotopyCategory (.up ℤ) |>.map
           ((HomotopyCategory.quotient A (.up ℤ)).map I.ι')) ≫
-      (DerivedCategory.quotientCompQhIso B).hom.app _) ≫ DerivedCategory.Q.map _ = _
+      (DerivedCategory.quotientCompQhIso B).hom.app _ ≫ DerivedCategory.Q.map _ = _
   rw [Functor.mapHomotopyCategory_map]
   simp only [Category.assoc, ← DerivedCategory.quotientCompQhIso_inv_naturality_assoc,
     Iso.inv_hom_id_app_assoc]

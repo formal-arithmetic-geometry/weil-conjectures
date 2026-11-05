@@ -122,7 +122,7 @@ private theorem unit_zero_comparison {C D : Type*}
     have hq (K : CochainComplex D ℤ) :
         (DerivedCategory.quotientCompQhIso D).inv.app K = 𝟙 _ := by
       rfl
-    simp only [hq, Category.comp_id]
+    erw [hq, Category.comp_id]
     change _ = (HomologicalComplex.singleObjHomologySelfIso (.up ℤ) 0 (F.obj M)).inv ≫
       (DerivedCategory.homologyFunctorFactors D 0).inv.app _ ≫
       (DerivedCategory.homologyFunctor D 0).map (DerivedCategory.Q.map t.inv)
@@ -183,7 +183,5 @@ theorem rightDerivedSingleUnit_zero (F : C ⥤ D) [F.Additive]
     whiskerRight_id', isoWhiskerLeft_hom, Category.id_comp, NatTrans.comp_app, comp_obj,
     id_obj, associator_hom_app, whiskerLeft_app,
     HomologicalComplex.homologyFunctorSingleIso_hom_app]
-  erw [Category.id_comp]
-  rfl
 
 end CategoryTheory.Functor
