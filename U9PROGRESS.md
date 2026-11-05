@@ -142,20 +142,16 @@
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ537 in progress
+# BZ538 in progress
 
-- Branch: `u9/BZ537`; assigned module:
-  `WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Limits.PushforwardZeroSingle`.
-- The two quotient/Qh API repairs are applied; all seven declaration signatures and
-  existing docstrings are unchanged. Their remote validation is pending.
-- First remote check hit missing imports in unowned dependencies. Merged the
-  coordinator's `bump/v4.35` at `8af5cb32483`, which supplies those imports.
-- Second check (`128f9db601`, log `BZ537-20261106T031801.log`) is blocked in
-  BZ581-owned `Presheaf.InternalHom:375` before the assigned target is reached.
-- On user-requested continuation, reread the brief, progress file, and fix notes.
-  BZ581 has now started; wait for its dependency repair and merge it, then retry.
-- Once green, build direct importer `PushforwardZeroDescent`, then its importer
-  `PushforwardLimit`, following the brief's downstream ownership rule.
-- Fix patterns, whole-tree counts, and logs: `/home/ubuntu/u9/bz/FIXES-BZ537.md`.
-- No local Lean/Lake, proof placeholders, forbidden shortcuts, or heartbeat raises.
-- Do not write DONE until the assigned target passes `ucheck-bump`.
+- Branch: `u9/BZ538`; assigned module: `AffineBasisKInjectiveSectionsPreservesHomology`.
+- Its original IsAffineOpen visibility fix was already in the starting branch.
+- Added the same public AffineScheme import to second-layer `AffineBasisSectionsDerivedUnit`.
+- Two remote build attempts stopped in shared dependencies before reaching our targets.
+- Merged coordinator updates at `8af5cb324`; Monoidal now builds, but InternalHom remained blocked.
+- The user instructed continuation after the explicit one-line InternalHom repair proposal.
+  Applied the compatibility tensorObj_map_tmul lemma so the following map_comp_apply rewrite matches.
+- Next: ucheck-bump assigned module, AffineBasisSectionsResolutionHomologyEpi, and
+  AffineBasisSectionsDerivedUnit; then write DONE with every green module and PATTERN/ERROR pairs.
+- Detailed patterns, counts, and exact errors: `/home/ubuntu/u9/bz/FIXES-BZ538.md`.
+- No local Lean/Lake, proof placeholders, statement changes, trust bypasses, or heartbeat increases.
