@@ -106,28 +106,32 @@
 - Completion marker: `/home/ubuntu/u9/state/BZ311.DONE`.
 - This final commit changes only progress documentation; Lean sources match the green build.
 
-# BZ404 complete
+# BZ384 in progress
 
-- Branch: `u9/BZ404`; starting commit: `98654719b`.
-- Assigned module: `WeilConjectures.CategoryTheory.DerivedCategory.ProperBaseChange.PseudoCoherentNormalizedAlgebraTowerSupplement`.
-- The assigned module passed `ucheck-bump`: rc=0, failed=0, 3879 jobs at `5fc97c7523`.
-- Final Lean source, including line wrapping, rebuilt successfully in 30 seconds at
-  `162e18db10` during the downstream check. This completion commit changes only documentation.
-- The proof-local comparison now uses Mathlib's reversed composition isomorphism.
-- The user instructed continuation after the exact `hf` statement-syntax proposal;
-  the misplaced `.symm` was moved from the function to the resulting isomorphism.
-  All other statement text, assumptions, conclusions, and docstrings are unchanged.
-- Both direct importers were attempted and skipped for outside-unit dependency failures,
-  as the brief directs. No downstream modules are claimed green and no outside-unit
-  sources were edited. The blocked batches were stopped after their failures were confirmed.
-- FinitePerfectAdicTowerData is blocked by universe-constraint errors in
-  `ProEtaleFinitelyPresentedLocalModelsComparisonSupplement`.
-- LisseTowerAlgebraicDerivedPresentation is blocked by missing instances in
-  `ProEtaleOperationsCanonicalAdjunctionSupplement` and other outside-unit errors.
-- Full logs: `/home/ubuntu/u9/bz/BUILD-BZ404-unit-full.log`,
-  `/home/ubuntu/u9/bz/BUILD-BZ404-downstream-full.log`, and
-  `/home/ubuntu/u9/bz/BUILD-BZ404-lisse-full.log`.
-- Fix patterns and exact diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ404.md`.
-- Contract audit: `/home/ubuntu/u9/bz/BZ404-contract-audit.txt`.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or limit increases.
-- Completion marker: `/home/ubuntu/u9/state/BZ404.DONE`.
+- Branch: `u9/BZ384`; starting commit: `98654719b`.
+- Baseline remote build confirmed five errors in compositor directions in declaration types.
+- The user instructed continuation after the explicit nine-direction patch proposal.
+  That patch is now applied, preserving the original equations under Mathlib's reversed compositor.
+- Next: remote validation of the assigned module, then its three direct importers.
+- Fix patterns and baseline log: `/home/ubuntu/u9/bz/FIXES-BZ384.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+# BZ416 complete
+
+- Branch: `u9/BZ416`; starting commit: `99a06bbbb`.
+- Assigned module `WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedCompCoherence`
+  passed `ucheck-bump`: rc=0, failed=0, 2138 jobs.
+- Validated source commit: `dea172a8ed`.
+- The user instructed continuation after the explicit compositor-orientation statement proposal.
+  The two coherence statements now preserve their original arrows using Mathlib's reversed
+  compositor; proof cancellation directions were updated to match.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ416-unit-green.log`.
+- The three direct importers were attempted together. The batch ended `rc=1` because four
+  external dependencies failed: `GrothendieckEtaleRelativeSectionColimit`,
+  `RingedSitePointUniversalTensor`, `KFlatRingedToposPullback`, and `ProfinitePointPullback`.
+  Each importer is blocked by at least one of these modules, so the brief's skip rule applies.
+- Full downstream log: `/home/ubuntu/u9/bz/BUILD-BZ416-downstream1.log`.
+- Fix patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ416.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ416.DONE`.
+- This final documentation commit leaves the validated Lean source unchanged.
