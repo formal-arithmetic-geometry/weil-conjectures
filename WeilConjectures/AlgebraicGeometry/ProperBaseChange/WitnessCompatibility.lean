@@ -901,17 +901,17 @@ noncomputable def pbcDerivedComparisonRestrict (φ : R →+* S) :
         Sheaf.derivedRestrictScalars (Scheme.ProEt.topology T) φ ≅
       Sheaf.derivedRestrictScalars T.smallEtaleTopology φ ⋙
         (comparisonUpperStar (ModuleCat.{u + 1} R) T).mapDerivedCategory :=
-  ((Functor.mapDerivedCategoryCompIso).symm
+  (Functor.mapDerivedCategoryCompIso
     (comparisonUpperStar (ModuleCat.{u + 1} S) T)
-    (Sheaf.restrictScalars (Scheme.ProEt.topology T) φ)).symm ≪≫
+    (Sheaf.restrictScalars (Scheme.ProEt.topology T) φ)) ≪≫
     Functor.mapDerivedCategoryNatIso
       (F := comparisonUpperStar (ModuleCat.{u + 1} S) T ⋙
         Sheaf.restrictScalars (Scheme.ProEt.topology T) φ)
       (G := Sheaf.restrictScalars T.smallEtaleTopology φ ⋙
         comparisonUpperStar (ModuleCat.{u + 1} R) T)
       (pbcComparisonRestrict T φ) ≪≫
-      (Functor.mapDerivedCategoryCompIso (Sheaf.restrictScalars T.smallEtaleTopology φ)).symm
-        (comparisonUpperStar (ModuleCat.{u + 1} R) T)
+      (Functor.mapDerivedCategoryCompIso (Sheaf.restrictScalars T.smallEtaleTopology φ)
+        (comparisonUpperStar (ModuleCat.{u + 1} R) T)).symm
 
 /-- The canonical scalar-extension comparison is the mate of the restriction comparison.
 Source: Stacks 07A4 (blueprint: def-weil-pbc-witness-compatibility). -/
@@ -1092,8 +1092,8 @@ noncomputable def pbcFixedOriginAlpha (T : Scheme.{u}) (Λ : Type (u + 1))
       ⟨(finiteCoefficientRealization T Λ).mapDerivedCategory.obj K, hK⟩) :
     (comparisonUpperStar (ModuleCat.{u + 1} Λ) T).mapDerivedCategory.obj W.L.obj ≅ K :=
   (finiteCoefficientRealization T Λ).mapDerivedCategory.preimageIso
-    (((Functor.mapDerivedCategoryCompIso (comparisonUpperStar (ModuleCat.{u + 1} Λ) T)).symm
-      (finiteCoefficientRealization T Λ)).symm.app W.L.obj ≪≫
+    ((Functor.mapDerivedCategoryCompIso (comparisonUpperStar (ModuleCat.{u + 1} Λ) T)
+      (finiteCoefficientRealization T Λ)).app W.L.obj ≪≫
         DerivedCategory.Plus.ι.mapIso W.alpha)
 
 /-- A normalized tower with compatible retained origins. Only adjacent normalization
