@@ -152,3 +152,16 @@
   and AffineOpenSectionsResolutionQuasiIso; fix any owned errors and write DONE when green.
 - Notes and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ557.md`.
 - No local Lean/Lake, statement changes, proof escapes, or heartbeat increases.
+
+# BZ603 in progress
+
+- Branch: `u9/BZ603`; starting commit: `cfcb63ad7`.
+- Baseline remote build: eight errors caused by hidden `HomologicalComplexUpToQuasiIso.Qh`.
+- Public and implementation Localization imports removed seven diagnostics; the private
+  helper statements and proofs compile. The one public representative statement still failed.
+- The user instructed continuation after the canonical Q/Qh endpoint-transport proposal.
+  Applied the comparison hom/inv maps only to that equality, preserving its mathematical
+  maps, binders, assumptions, and other statements. The proof normalizes identity transports.
+- Next: `ucheck-bump` on the assigned module, then `CompletedScalarAssociator` downstream.
+- Fix patterns and exact diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ603.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
