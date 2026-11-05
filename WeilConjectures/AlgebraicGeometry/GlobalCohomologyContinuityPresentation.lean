@@ -63,9 +63,9 @@ structure GlobalCohomologyContinuityPresentation
         ((Functor.mapDerivedCategoryNatIso
           (Etale.upperStarComp AddCommGrpCat.{v + 1} (D.map f) (t.app j)
             (t.app i) ((Category.comp_id (t.app i)).symm.trans (t.naturality f).symm)) ≪≫
-          Functor.mapDerivedCategoryCompIso
+          (Functor.mapDerivedCategoryCompIso
             (Etale.upperStar AddCommGrpCat.{v + 1} (t.app j))
-            (Etale.upperStar AddCommGrpCat.{v + 1} (D.map f))).inv.app K.obj) ≫
+            (Etale.upperStar AddCommGrpCat.{v + 1} (D.map f))).symm).inv.app K.obj) ≫
       (e i).inv
   sourceLegs : F ⟶ (Functor.const Iᵒᵖ).obj A
   sourceIsColimit : IsColimit (Cocone.mk A sourceLegs)
@@ -88,9 +88,9 @@ structure GlobalCohomologyContinuityPresentation
         ((Functor.mapDerivedCategoryNatIso
           (Etale.upperStarComp AddCommGrpCat.{v + 1} (c.π.app i) (t.app i) p
             (over i).symm) ≪≫
-          Functor.mapDerivedCategoryCompIso
+          (Functor.mapDerivedCategoryCompIso
             (Etale.upperStar AddCommGrpCat.{v + 1} (t.app i))
-            (Etale.upperStar AddCommGrpCat.{v + 1} (c.π.app i))).inv.app K.obj) ≫
+            (Etale.upperStar AddCommGrpCat.{v + 1} (c.π.app i))).symm).inv.app K.obj) ≫
       limitIso.inv
 
 end AlgebraicGeometry.Etale
