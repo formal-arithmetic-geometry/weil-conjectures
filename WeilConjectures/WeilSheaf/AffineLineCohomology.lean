@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.AffineSpace.LineSmooth
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.WeilSheaf.FourierInversion.OtherSections
 public import WeilConjectures.WeilSheaf.HomologyShift
@@ -94,8 +95,6 @@ Frobenius, is dual to `H_c^{2-r}(𝔸¹_k̄, ℚ̄_ℓ)`, which vanishes since `
 (blueprint: `lem-fd-affine-line-constant-cohomology`, subsection `sk-lem-as-properties`) -/
 theorem subsingleton_cohomology_adicConstant_affineLine {r : ℤ} (hr : r ≠ 0) :
     Subsingleton ((adicConstant k₀ l (affineLine k₀)).cohomology r).carrier := by
-  have : SmoothOfRelativeDimension 1 (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) := by
-    simpa using AffineSpace.smoothOfRelativeDimension_over PUnit.{u + 1} (Spec (.of k₀))
   obtain ⟨P, hP, -⟩ := exists_isPerfPair_compactlySupportedCohomology_adicConstant k₀ l
     (affineLine k₀) 1 (2 - r) r (by push_cast; ring)
   obtain ⟨E⟩ := nonempty_equiv_cohomology_tateTwistSheaf k₀ l (affineLine k₀) ((1 : ℕ) : ℤ) r
