@@ -254,7 +254,8 @@
 - Restoring projection-unit normalization, mixed projection mate, signed normalization,
   and mate data. Assigned theorem statement remains unchanged.
 - Applying known scalar carrier and canonical Q/Qh comparison repairs.
-- Baseline ucheck-bump remains queued; it will build the pushed branch when a tree is free.
+- First remote build at `9833fc9a1e` reached the restored unit proof; its remaining
+  input-scalar carrier error is now annotated. The Qh/Q repairs await downstream compilation.
 - Next: validate the leaf and attempt its two direct importers, then downstream layers.
 - Notes: `/home/ubuntu/u9/bz/FIXES-BZ857.md`.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
