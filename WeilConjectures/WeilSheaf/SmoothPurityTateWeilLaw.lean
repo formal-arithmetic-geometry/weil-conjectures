@@ -30,7 +30,6 @@ noncomputable def purityTateTwistOneTrivialization :
   purityRationalTateTrivialization a.geometricFiberProj a.geometricFiberToAlgebraicClosure l hζ hζ'
 
 set_option diagnostics true in
-set_option trace.profiler true in
 /-- The rational trivialization transports the geometric Frobenius with scalar q. -/
 theorem purityTateTwistOneTrivialization_weil :
     (Nat.card k : ℤ) •
@@ -48,7 +47,7 @@ theorem purityTateTwistOneTrivialization_weil :
         (a.geometricFiberProj)^*[Ab.{u + 1}].mapModUnitIso)
     (purity_tateModule_rootTrivialization_frobenius a hζ hζ')
   dsimp only [purityTateTwistOneTrivialization, purityRationalTateTrivialization,
-    Functor.comp_obj, Functor.comp_map] at h ⊢
+    tateTwistOne, Functor.comp_obj, Functor.comp_map] at h ⊢
   cast_proofs h
 
 end AlgebraicGeometry.ProEtale.CondensedRing

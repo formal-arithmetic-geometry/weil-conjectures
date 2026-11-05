@@ -31,7 +31,7 @@ lemma purity_tensor_composition
     c.app (M ⊗ N) ≫ G.map (δ F M N ≫ (u ⊗ₘ v)) ≫
         δ G M' N' ≫ (u' ⊗ₘ v') = δ H M N ≫ (w ⊗ₘ z) := by
   simp only [Functor.map_comp, Category.assoc]
-  rw [← δ_natural_assoc, ← Category.assoc, ← Category.assoc, hc]
+  rw [← δ_natural_assoc, reassoc_of% hc]
   simp only [Category.assoc, tensorHom_comp_tensorHom, hM, hN]
 
 end CategoryTheory
