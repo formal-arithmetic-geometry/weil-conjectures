@@ -19,6 +19,7 @@ public import WeilConjectures.WeilSheaf.UpperStarPointwise
 public import WeilConjectures.ZetaFunction.LissePurity
 public import WeilConjectures.ZetaFunction.Weights
 public import WeilConjectures.SixFunctors.ProEtale.Adic.SmoothProperLisse
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarFiniteness
 
 /-!
 # Relative purity for smooth proper morphisms

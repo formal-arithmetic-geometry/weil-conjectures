@@ -5,7 +5,7 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.FourierTransform.CompletedLineTensor.CompletedLineTensorCoherence
+public import WeilConjectures.SmoothPurity.CompletedLineTensor.CompletedScalarOrdinaryCoherence
 public import WeilConjectures.SmoothPurity.Integral.IntegralOperationsScalarComparisons
 import all Mathlib.CategoryTheory.Limits.HasLimits
 import WeilConjectures.TraceFormula.Integral.IntegralScalarOrdinaryModelComparison

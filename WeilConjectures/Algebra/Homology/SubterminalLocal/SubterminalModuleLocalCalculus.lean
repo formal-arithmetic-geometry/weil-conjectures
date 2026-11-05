@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.CategoryTheory.RingedSiteModules
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.SiteNestedExtensionMap
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import WeilConjectures.CategoryTheory.LocalizedModuleExactForSystems
 public import WeilConjectures.Algebra.Homology.SmoothPurity.LocalizedModuleExactIndependent
@@ -34,7 +35,7 @@ Tag 04B8 (blueprint: lem-sp-subterminal-module-local-calculus).
 
 * `Intersection`: the module-linear comparisons with their adjunction normalizations.
 * `JointDetection`: the zero, exactness, cohomology and quasi-isomorphism tests.
-* `nested`: the canonical map induced by an inclusion of subterminals.
+* `nested` is imported from `SiteNestedExtensionMap`, its definition-node module.
 
 ## Main statements
 
@@ -51,12 +52,6 @@ universe c v r a b ha hb wa wb w s
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace SheafOfModules.SubterminalLocal
 
-/-- The coefficient ring sheaf used by the recorded module-sheaf category.
-Source: Stacks 03DI (blueprint: lem-sp-subterminal-module-local-calculus). -/
-abbrev coefficients {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
-    (R : Sheaf J CommRingCat.{max c v r}) : Sheaf J RingCat.{max c v r} :=
-  (sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R
-
 /-- The recorded module sheafification with identity coefficient map.
 Source: Stacks 03DI (blueprint: lem-sp-subterminal-module-local-calculus). -/
 abbrev sheafify {D : Type a} [Category.{ha} D] {K : GrothendieckTopology D}
@@ -65,36 +60,9 @@ abbrev sheafify {D : Type a} [Category.{ha} D] {K : GrothendieckTopology D}
   PresheafOfModules.sheafification.{s, ha, s, a}
     (J := K) (R := S) (R₀ := S.obj) (𝟙 S.obj)
 
-/-- Modules on the ambient ringed site.
-Source: Stacks 03DI (blueprint: lem-sp-subterminal-module-local-calculus). -/
-abbrev Modules {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
-    (R : Sheaf J CommRingCat.{max c v r}) :=
-  ringedSiteModules.{max c v r} (coefficients.{c, v, r} R)
-
-/-- Modules on a slice ringed site.
-Source: Stacks 03DI (blueprint: lem-sp-subterminal-module-local-calculus). -/
-abbrev SliceModules {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
-    (R : Sheaf J CommRingCat.{max c v r}) (Z : C) :=
-  ringedSiteModules.{max c v r} ((coefficients.{c, v, r} R).over Z)
-
 variable {C : Type c} [Category.{v} C] [HasFiniteLimits C]
   {J : GrothendieckTopology C}
   (R : Sheaf J CommRingCat.{max c v r})
-
-/-- The exact extension-by-zero functor supplied by the localized-site framework.
-Source: Stacks 03DI--03DJ (blueprint: lem-sp-subterminal-module-local-calculus). -/
-abbrev jbang (Z : C) : SliceModules.{c, v, r} R Z ⥤ Modules.{c, v, r} R :=
-  localizedSystemExtension.{c, v, r} R Z
-
-/-- Restriction to a slice, supplied by the localized-site framework.
-Source: Stacks 03DH (blueprint: lem-sp-subterminal-module-local-calculus). -/
-abbrev jstar (Z : C) : Modules.{c, v, r} R ⥤ SliceModules.{c, v, r} R Z :=
-  localizedSystemRestriction.{c, v, r} R Z
-
-/-- The recorded extension/restriction adjunction.
-Source: Stacks 03DI (blueprint: lem-sp-subterminal-module-local-calculus). -/
-abbrev adj (Z : C) : jbang.{c, v, r} R Z ⊣ jstar.{c, v, r} R Z :=
-  localizedSystemAdjunction.{c, v, r} R Z
 
 section LocalCalculusProof
 set_option backward.defeqAttrib.useBackward true

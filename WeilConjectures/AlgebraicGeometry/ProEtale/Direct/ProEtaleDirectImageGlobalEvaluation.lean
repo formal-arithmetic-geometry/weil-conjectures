@@ -73,6 +73,16 @@ def proEtaleGlobalEvaluationTerminal (A : Type u) [CommRing A] [Finite A]
   isoWhiskerRight (proEtaleUnitLerayDirectImageIso A f).symm
     (proEtaleUnitLeraySections A Y) ≪≫ proEtaleUnitLerayTerminalIso A f
 
+/-- The normalized identity inverse image. The source theorem specifies every section
+of its module comparison, its termwise extension, and its localization, so the extracted
+isomorphism is determined by that normalization rather than by bare existence.
+Source: blueprint lem-pur-proetale-derived-pullback-identity
+(blueprint: lem-pur-proetale-direct-image-global-evaluation). -/
+def proEtaleGlobalEvaluationPullbackId (A : Type u) [CommRing A] [Finite A]
+    (X : Scheme.{u}) : proEtaleConstantRingDerivedPullback A (𝟙 X) ≅ 𝟭 _ :=
+  (proEtaleDerivedPullback_identity X A).choose_spec.2.2.choose_spec.2.choose_spec.2.2
+    |>.choose_spec.2.choose
+
 section MateTransport
 variable {C D E : Type*} [Category C] [Category D] [Category E]
   {Lf : D ⥤ C} {Lg : E ⥤ D} {Lc : E ⥤ C}
