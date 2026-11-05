@@ -71,6 +71,7 @@ private theorem derived_single_shift_inv (X : C) (n : ℤ) :
     apply (cancel_mono
       (((DerivedCategory.singleFunctors C).shiftIso (-n) n 0 (by simp)).hom.app X)).1
     erw [Iso.inv_hom_id_app, ← hs, Iso.inv_hom_id_app]
+    rfl
   simpa only [SingleFunctors.postcomp_shiftIso_inv_app] using hi
 
 omit [EnoughInjectives C] in
