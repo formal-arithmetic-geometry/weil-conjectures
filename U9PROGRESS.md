@@ -116,27 +116,34 @@
 - Fix patterns and baseline log: `/home/ubuntu/u9/bz/FIXES-BZ384.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ469 in progress
+# BZ459 complete
 
-- Branch: `u9/BZ469`; starting commit: `99a06bbbb`.
-- The user instructed continuation after the exact two-site API proposal.
-  Applied `.symm` to both composition comparisons in
-  `injectiveSections_strictLocal_comparison`, preserving the original map directions
-  under Mathlib's reversed compositor.
-- Pinned API inspected at b63f6e8a; known quotient patterns do not match this module.
-- Next: remote validation, then up to four direct importers and a second downstream layer.
-- Fix patterns: `/home/ubuntu/u9/bz/FIXES-BZ469.md`.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
-
-# BZ513 in progress
-
-- Branch: `u9/BZ513`; starting commit: `fa248eeed`.
-- The user instructed continuation after the exact two-line private-statement proposal.
-  Applied it at `74afc5e12`, preserving the intended maps under Mathlib's reversed compositor.
-- Proof cancellation factors were also reversed, only inside `derivedSquareCoherence`.
-- All public statements and existing docstrings remain unchanged.
-- The repaired source exactly matches the earlier green source at `5483714dbc`
-  (`ucheck-bump`, 3656 jobs); a fresh unit check at `d8765937a` is queued.
-- Next: build four direct importers, fix owned failures, then try a second downstream layer.
-- Fix patterns and logs: `/home/ubuntu/u9/bz/FIXES-BZ513.md`.
+- Branch: `u9/BZ459`; starting commit: `99a06bbbb46`.
+- Assigned module `WeilConjectures.AlgebraicGeometry.DerivedOpenGluingObjects` passed
+  `ucheck-bump`: rc=0, failed=0, 2927 jobs, on `poolb:43.157.132.198`.
+- Validated source commit: `841d33dd8504561794c58471ae53351e311c9f1d`.
+- The user instructed continuation after the explicit statement API migration proposal.
+  Two obsolete compositor `.symm` uses were removed to retain the original canonical maps.
+  All proof bodies, binders, hypotheses, docstrings, and options remain unchanged.
+- Direct importer `DerivedOpenGluing` was attempted but skipped because BZ361-owned
+  `SchemeDerivedHomGluing` fails. Its four-line repair is saved at
+  `/home/ubuntu/u9/bz/BZ459-downstream-deferred.patch`; committed importer source is unchanged.
+- Full green log: `/home/ubuntu/u9/bz/BUILD-BZ459-final-full.log`.
+- Fix patterns and dependency diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ459.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ459-contract-audit.txt`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ459.DONE`.
+- This final commit changes only progress documentation after the successful source build.
+
+# BZ531 in progress
+
+- Branch: `u9/BZ531`; starting commit: `7c1e4f912`.
+- The user instructed continuation after the concrete two-formula compositor proposal.
+  Applied that exact patch to `DerivedCoordinateCompatibility` and `derivedCoordinateSquare`,
+  preserving the intended maps after Mathlib reversed its compositor.
+- Added a local scalar instance using the module's native ring sheaf and removed
+  the opaque compositor from the local irreducibility list.
+- Remote validation remains through `ucheck-bump` only; no local Lean/Lake execution.
+- Next: finish the assigned module, attempt its direct importer and a further layer,
+  then write `/home/ubuntu/u9/state/BZ531.DONE` with green modules and fix/error pairs.
+- Fix inventory and build logs: `/home/ubuntu/u9/bz/FIXES-BZ531.md`.
