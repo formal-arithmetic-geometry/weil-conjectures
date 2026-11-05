@@ -169,18 +169,24 @@
 - Completion marker: `/home/ubuntu/u9/state/BZ585.DONE`.
 - Final documentation commit leaves Lean source identical to the green revision.
 
-# BZ613 in progress
+# BZ613 complete
 
 - Branch: `u9/BZ613`; baseline: `b7a97a5ed`.
-- The user instructed continuation after the exact six-private-helper API patch.
-  Applied that patch, preserving comparison directions under Mathlib's reversed compositor.
-- All three public declaration headers are unchanged. Proof-local comparisons and
-  the coefficient comparison construction use the same orientation migration.
-- Next: validate the assigned module with `ucheck-bump`, repair residual proof errors,
-  then validate direct importers and one further layer before writing DONE.
-- Fix patterns and prior diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ613.md`.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
-- Assigned module is green at `c9323a20fd`: ucheck-bump rc=0, failed=0,
-  4264 jobs; target rebuilt in 32s on poolb:43.166.72.113.
-- Applied the same known compositor fix in `UnboundedCoefficientForgetfulAux`.
-  Validating that direct importer and its importer `ProperUnboundedBaseChangeForgetful`.
+- Assigned module and both downstream layers passed together through `ucheck-bump`:
+  rc=0, failed=0, 4271 jobs, on `poolb:43.166.72.219`.
+- Validated source commit: `0e902a46c64af67052be08f98a01e96a3e7a1de6`.
+- Green modules: `WeilConjectures.AlgebraicGeometry.UnboundedAbelianExchangeComparison`,
+  `WeilConjectures.AlgebraicGeometry.UnboundedCoefficientForgetfulAux`, and
+  `WeilConjectures.AlgebraicGeometry.ProperUnboundedBaseChangeForgetful`.
+- Migrated compositor directions in the six proposed private helper signatures,
+  local proof comparisons, and coefficient comparison construction, following the
+  user continuation instruction after the exact patch proposal. Updated the
+  corresponding hom/inv cancellation. All public signatures remain unchanged.
+- The first downstream module needs the same one-line compositor migration in
+  a definition body; the second downstream module builds unchanged.
+- Full final log: `/home/ubuntu/u9/bz/BUILD-BZ613-final-full.log`.
+- Fix patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ613.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ613-contract-audit.txt`.
+- No local Lean/Lake execution, sorries, trust bypasses, heartbeat increases, or profiler probes.
+- Completion marker: `/home/ubuntu/u9/state/BZ613.DONE`.
+- This final documentation commit leaves Lean sources identical to the green build.
