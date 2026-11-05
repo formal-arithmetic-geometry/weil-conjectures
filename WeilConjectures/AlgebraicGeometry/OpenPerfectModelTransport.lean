@@ -133,11 +133,13 @@ theorem local_perfect_of_openRestriction_iso
       (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight c0 EO.inverse ≪≫
         Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft L EO.unitIso.symm ≪≫
         Functor.rightUnitor L
+    set_option backward.isDefEq.respectTransparency true in
+    let model : (G ⋙ H).mapDerivedCategory.obj R ≅ DerivedCategory.Q.obj K :=
+      (Functor.mapDerivedCategoryCompIso G H).symm.app R ≪≫
+        H.mapDerivedCategory.mapIso e ≪≫ hmodel
+    set_option backward.isDefEq.respectTransparency true in
     exact ⟨(Functor.mapDerivedCategoryNatIso c).symm.app R ≪≫
       (Functor.mapDerivedCategoryCompIso (G ⋙ H) A.functor).symm.app R ≪≫
-      A.functor.mapDerivedCategory.mapIso
-        ((Functor.mapDerivedCategoryCompIso G H).symm.app R ≪≫
-          H.mapDerivedCategory.mapIso e ≪≫ hmodel) ≪≫
-      A.functor.mapDerivedCategoryFactors.app K⟩
+      A.functor.mapDerivedCategory.mapIso model ≪≫ A.functor.mapDerivedCategoryFactors.app K⟩
 
 end AlgebraicGeometry.Scheme
