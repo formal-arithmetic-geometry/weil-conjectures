@@ -134,3 +134,16 @@
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 - Completion marker: `/home/ubuntu/u9/state/BZ459.DONE`.
 - This final commit changes only progress documentation after the successful source build.
+
+# BZ531 in progress
+
+- Branch: `u9/BZ531`; starting commit: `7c1e4f912`.
+- The user instructed continuation after the concrete two-formula compositor proposal.
+  Applied that exact patch to `DerivedCoordinateCompatibility` and `derivedCoordinateSquare`,
+  preserving the intended maps after Mathlib reversed its compositor.
+- Added a local scalar instance using the module's native ring sheaf and removed
+  the opaque compositor from the local irreducibility list.
+- Remote validation remains through `ucheck-bump` only; no local Lean/Lake execution.
+- Next: finish the assigned module, attempt its direct importer and a further layer,
+  then write `/home/ubuntu/u9/state/BZ531.DONE` with green modules and fix/error pairs.
+- Fix inventory and build logs: `/home/ubuntu/u9/bz/FIXES-BZ531.md`.
