@@ -108,7 +108,7 @@ private theorem total_map_ι {W : Scheme.{u}}
     Functor.map₂HomologicalComplex, HomologicalComplex.comp_f,
     HomologicalComplex.ι_mapBifunctorMap_assoc, HomologicalComplex.ι_mapBifunctorMap,
     HomologicalComplex.id_f, proEtaleOrdinaryTensor, curriedTensor_map_app,
-    curriedTensor_obj_map, tensorHom_def, Category.assoc]
+    curriedTensor_obj_map, MonoidalCategory.tensorHom_def, Category.assoc]
   simp only [whiskerLeft_id, id_whiskerRight]
   erw [Category.id_comp, Category.id_comp]
 
