@@ -672,7 +672,7 @@ private theorem geometric_computation {X Y : Scheme.{u}} (f : X ⟶ Y)
   change (ModuleRingedComparison.derivedEquivalence Λ X).functor.map
       ((CondensedRing.upperStar Λ f).leftDerivedFunctor.map (𝟙 _) ≫
         _ ≫ DerivedCategory.Qh.map (𝟙 _) ≫ 𝟙 _) ≫ _ = _ at hh
-  simp only [map_id_cleanup] at hh
+  simp only [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id] at hh
   unfold L CondensedRing.moduleObjectDerivedPullback pullCounit scalarSectionPullComparison
   dsimp only [_root_.id]
   simpa only [section_localization_iso_hom_app, complex_iso_hom_app,
