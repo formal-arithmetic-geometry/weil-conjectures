@@ -94,6 +94,7 @@
 - Baseline remote build failed only at the two obsolete compositor `.symm` uses in the statement.
 - The user instructed continuation after the exact two-expression compatibility proposal;
   `BZ307-statement-compatibility.patch` is applied, along with the matching proof changes.
-- Next: validate with `ucheck-bump`, check direct importers, and write the DONE marker.
+- Assigned module passed `ucheck-bump` at `fa8b9a053e`: rc=0, failed=0, 1924 jobs.
+- Next: check direct importers and write the DONE marker.
 - Fix patterns, whole-tree counts, and logs: `/home/ubuntu/u9/bz/FIXES-BZ307.md`.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
