@@ -98,9 +98,9 @@ theorem coeff_inv_prod_one_sub_C_mul_X_nonneg (s : Multiset ℂ)
       simp
   set G := P⁻¹
   have hPG : P * G = 1 := PowerSeries.mul_inv_cancel _ (by simp [hP])
-  have hG : X * d⁄dX (R := ℂ) G = G * S := by
+  have hG : X * d⁄dX G = G * S := by
     rw [derivative_inv']
-    calc X * (-G ^ 2 * d⁄dX (R := ℂ) P) = G ^ 2 * -(X * d⁄dX (R := ℂ) P) := by ring
+    calc X * (-G ^ 2 * d⁄dX P) = G ^ 2 * -(X * d⁄dX P) := by ring
       _ = G ^ 2 * (P * S) := by rw [neg_X_mul_derivative_prod_one_sub_C_mul_X]
       _ = G * S * (P * G) := by ring
       _ = G * S := by rw [hPG, mul_one]
