@@ -6,6 +6,9 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
+
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
 import WeilConjectures.CategoryTheory.RightDerivedSingleUnitHomologyComparison
 import WeilConjectures.CategoryTheory.SingleHomologyShiftComparison
@@ -47,33 +50,6 @@ private theorem map_lift_single_shift_inv
   simp [SingleFunctors.lift, SingleFunctors.lift.shiftIso,
     Functor.FullyFaithful.whiskeringRight, Functor.FullyFaithful.ofFullyFaithful]
 
-private theorem singleFunctors_comm_inv_app
-    {A B : Type*} [Category A] [Category B] [HasShift B ℤ]
-    {F G : SingleFunctors A B ℤ} (φ : F ⟶ G)
-    (k i j : ℤ) (h : k + i = j) (X : A) :
-    (φ.hom i).app X ≫ (G.shiftIso k i j h).inv.app X =
-      (F.shiftIso k i j h).inv.app X ≫ ((φ.hom j).app X)⟦k⟧' := by
-  have hs := congr_app (φ.comm k i j h) X
-  simp only [NatTrans.comp_app, whiskerRight_app] at hs
-  apply (cancel_epi ((F.shiftIso k i j h).hom.app X)).1
-  rw [← Category.assoc, hs]
-  simp
-
-omit [EnoughInjectives C] in
-private theorem quotient_single_inverse_shift_int (X : C) (n : ℤ) :
-    (DerivedCategory.quotientCompQhIso C).hom.app ((CochainComplex.singleFunctor C n).obj X) ≫
-      ((DerivedCategory.singleFunctors C).shiftIso (-n) n 0 (by simp)).inv.app X =
-    DerivedCategory.Qh.map
-        (((HomotopyCategory.singleFunctors C).shiftIso (-n) n 0 (by simp)).inv.app X) ≫
-      (DerivedCategory.Qh.commShiftIso (-n)).hom.app
-        ((HomotopyCategory.singleFunctor C 0).obj X) ≫
-      ((DerivedCategory.quotientCompQhIso C).hom.app
-        ((CochainComplex.singleFunctor C 0).obj X))⟦-n⟧' := by
-  simpa [DerivedCategory.singleFunctorsPostcompQhIso,
-    SingleFunctors.postcomp_shiftIso_inv_app] using
-    singleFunctors_comm_inv_app (DerivedCategory.singleFunctorsPostcompQhIso C).inv
-      (-n) n 0 (by simp) X
-
 omit [EnoughInjectives C] in
 private theorem single_quotient_inverse_shift_int (X : C) (n : ℤ) :
     let e (i : ℤ) : (DerivedCategory.Plus.singleFunctor C i).obj X ≅
@@ -90,40 +66,43 @@ private theorem single_quotient_inverse_shift_int (X : C) (n : ℤ) :
       (DerivedCategory.Plus.Qh.commShiftIso (-n)).hom.app K₀ ≫
       ((e 0).inv)⟦-n⟧' := by
   intro e K₀ h
+  have he (i : ℤ) : (e i).inv = 𝟙 ((DerivedCategory.Plus.singleFunctor C i).obj X) := by
+    apply DerivedCategory.Plus.ι.map_injective
+    simp only [e, Functor.preimageIso_inv, Functor.map_preimage, Iso.trans_inv]
+    change (𝟙 _) ≫ (𝟙 _) = 𝟙 _
+    exact Category.id_comp _
+  rw [he, he]
+  erw [Category.id_comp, Functor.map_id, Category.comp_id]
   apply DerivedCategory.Plus.ι.map_injective
-  simp only [Functor.map_comp, e, Functor.preimageIso_inv, Functor.map_preimage,
-    Iso.trans_inv, Iso.symm_inv, DerivedCategory.singleFunctorIsoCompQ,
-    Iso.refl_inv, NatTrans.id_app, Category.comp_id]
+  rw [Functor.map_comp]
   simp only [DerivedCategory.Plus.singleFunctors, map_lift_single_shift_inv,
     Iso.refl_hom, Iso.refl_inv, NatTrans.id_app]
   erw [Category.id_comp, Functor.map_id, Category.id_comp]
-  apply (cancel_mono ((DerivedCategory.Plus.ι.commShiftIso (-n)).hom.app
-    ((DerivedCategory.Plus.singleFunctor C 0).obj X))).1
-  simp only [Category.assoc]
-  erw [Iso.inv_hom_id_app, Category.comp_id,
-    DerivedCategory.Plus.ι.commShiftIso_hom_naturality]
-  rw [Functor.map_preimage]
+  simp only [DerivedCategory.singleFunctors, SingleFunctors.postcomp_shiftIso_inv_app,
+    Category.assoc]
+  change DerivedCategory.Qh.map
+      (((HomotopyCategory.singleFunctors C).shiftIso (-n) n 0 (by simp)).inv.app X) ≫
+    (DerivedCategory.Qh.commShiftIso (-n)).hom.app K₀.obj ≫
+    (DerivedCategory.Plus.ι.commShiftIso (-n)).inv.app
+      ((DerivedCategory.Plus.singleFunctor C 0).obj X) =
+    DerivedCategory.Qh.map ((HomotopyCategory.Plus.ι C).map h) ≫
+    DerivedCategory.Plus.ι.map
+      ((DerivedCategory.Plus.Qh.commShiftIso (-n)).hom.app K₀)
   have hq := Functor.CommShift.OfComp.map_iso_hom_app
     (DerivedCategory.TStructure.t.plus.liftCompιIso
       (HomotopyCategory.Plus.ι C ⋙ DerivedCategory.Qh)
       (fun K ↦ (DerivedCategory.Plus.Qh.obj K).property)) (-n) K₀
   simp only [ObjectProperty.liftCompιIso, Iso.refl_hom, Iso.refl_inv, NatTrans.id_app,
     Functor.commShiftIso_comp_hom_app, Category.id_comp] at hq
-  erw [hq, Functor.map_id, Category.id_comp]
-  simp only [Category.assoc]
-  erw [Iso.inv_hom_id_app_assoc]
-  change (DerivedCategory.quotientCompQhIso C).hom.app
-      ((CochainComplex.singleFunctor C n).obj X) ≫
-      ((DerivedCategory.singleFunctors C).shiftIso (-n) n 0 (by simp)).inv.app X =
-    DerivedCategory.Qh.map ((HomotopyCategory.Plus.ι C).map h) ≫
-      DerivedCategory.Qh.map (((HomotopyCategory.Plus.ι C).commShiftIso (-n)).hom.app K₀) ≫ _
+  erw [hq]
   dsimp only [h]
   simp only [HomotopyCategory.Plus.singleFunctors, map_lift_single_shift_inv,
     Iso.refl_hom, Iso.refl_inv, NatTrans.id_app]
-  erw [Category.id_comp, Functor.map_id, Category.id_comp]
-  simp only [Functor.map_comp, Category.assoc, ← Functor.map_comp_assoc]
+  erw [Category.id_comp, Functor.map_id, Category.id_comp, Functor.map_id, Category.id_comp]
+  simp only [Functor.map_comp, Category.assoc]
+  simp only [← Functor.map_comp_assoc]
   erw [Iso.inv_hom_id_app, Category.comp_id]
-  exact quotient_single_inverse_shift_int X n
+  rfl
 
 
 omit [EnoughInjectives C]
@@ -148,6 +127,8 @@ private theorem mapped_single_inverse_shift_int (X : C) (n : ℤ) :
   simp only [DerivedCategory.Plus.singleFunctors, map_lift_single_shift_inv,
     Iso.refl_hom, Iso.refl_inv, NatTrans.id_app]
   erw [Category.id_comp, Functor.map_id, Category.id_comp]
+  simp only [DerivedCategory.singleFunctors, SingleFunctors.postcomp_shiftIso_inv_app,
+    Category.assoc]
   apply (cancel_mono ((DerivedCategory.Plus.ι.commShiftIso (-n)).hom.app
     ((DerivedCategory.Plus.singleFunctor D 0).obj (S.obj X)))).1
   simp only [Category.assoc]
@@ -165,10 +146,11 @@ private theorem mapped_single_inverse_shift_int (X : C) (n : ℤ) :
   erw [Functor.map_id, Category.id_comp]
   simp only [Category.assoc]
   erw [Iso.inv_hom_id_app_assoc]
-  change (DerivedCategory.quotientCompQhIso D).hom.app _ ≫ DerivedCategory.Q.map
+  change DerivedCategory.Q.map
       ((HomologicalComplex.singleMapHomologicalComplex S (.up ℤ) n).app X).hom ≫
-      ((DerivedCategory.singleFunctors D).shiftIso (-n) n 0 (by simp)).inv.app
-        (S.obj X) =
+    DerivedCategory.Qh.map
+      (((HomotopyCategory.singleFunctors D).shiftIso (-n) n 0 (by simp)).inv.app
+        (S.obj X)) ≫ (DerivedCategory.Qh.commShiftIso (-n)).hom.app _ =
     DerivedCategory.Qh.map ((S.mapHomotopyCategory (.up ℤ)).map
       ((HomotopyCategory.Plus.ι C).map h)) ≫
     DerivedCategory.Qh.map ((HomotopyCategory.Plus.ι D).map
@@ -176,14 +158,8 @@ private theorem mapped_single_inverse_shift_int (X : C) (n : ℤ) :
     DerivedCategory.Qh.map (((HomotopyCategory.Plus.ι D).commShiftIso
       (-n)).hom.app (S.mapHomotopyCategoryPlus.obj K₀)) ≫
     (DerivedCategory.Qh.commShiftIso (-n)).hom.app _ ≫
-    ((DerivedCategory.quotientCompQhIso D).hom.app _ ≫ DerivedCategory.Q.map
+    (DerivedCategory.Q.map
       ((HomologicalComplex.singleMapHomologicalComplex S (.up ℤ) 0).app X).hom)⟦-n⟧'
-  rw [← DerivedCategory.quotientCompQhIso_hom_naturality_assoc,
-    quotient_single_inverse_shift_int]
-  rw [← DerivedCategory.quotientCompQhIso_hom_naturality]
-  simp only [Functor.map_comp, Category.assoc]
-  apply (cancel_mono (((DerivedCategory.quotientCompQhIso D).hom.app
-    ((CochainComplex.singleFunctor D 0).obj (S.obj X)))⟦-n⟧')).2
   have hg := Functor.CommShift.OfComp.map_iso_hom_app
     ((HomotopyCategory.plus D).liftCompιIso
       (HomotopyCategory.Plus.ι C ⋙ S.mapHomotopyCategory (.up ℤ))
@@ -202,6 +178,12 @@ private theorem mapped_single_inverse_shift_int (X : C) (n : ℤ) :
   simp only [Functor.map_comp, Category.assoc]
   simp only [← Functor.map_comp_assoc]
   erw [Iso.inv_hom_id_app, Category.comp_id]
+  have hp (i : ℤ) : DerivedCategory.Q.map
+      ((HomologicalComplex.singleMapHomologicalComplex S (.up ℤ) i).app X).hom =
+      DerivedCategory.Qh.map ((HomotopyCategory.quotient D (.up ℤ)).map
+        ((HomologicalComplex.singleMapHomologicalComplex S (.up ℤ) i).app X).hom) := by
+    rfl
+  rw [hp, hp]
   erw [← DerivedCategory.Qh.commShiftIso_hom_naturality]
   simp only [← Functor.map_comp_assoc]
   apply (cancel_mono ((DerivedCategory.Qh.commShiftIso (-n)).hom.app
