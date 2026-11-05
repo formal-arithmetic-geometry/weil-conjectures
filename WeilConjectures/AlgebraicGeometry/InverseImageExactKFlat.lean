@@ -34,6 +34,10 @@ private theorem isKFlat_of_iso {X : TopCat.{u}}
         (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ}
     (e : K ≅ L) (hK : CochainComplex.IsKFlatTensor (R := R) K) :
     CochainComplex.IsKFlatTensor (R := R) L := by
+  let instPresheafCoproducts (I : Type u) : HasColimitsOfShape (Discrete I)
+      (PresheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology X)
+        (forget₂ CommRingCat.{u} RingCat.{u})).obj R).obj) :=
+    PresheafOfModules.hasColimitsOfShape _ _
   let := SheafOfModules.monoidalCategory R
   intro F hF i
   exact (hK F hF i).of_iso
@@ -81,9 +85,10 @@ theorem exists_inverseImage_exact_kFlat {T S : Scheme.{u}} (g : T ⟶ S) :
     have : QuasiIso s := hs.1
     refine ⟨inferInstance, ?_⟩
     obtain ⟨e⟩ := TopCat.Sheaf.exists_inverseImage_tensorPullback_iso g.base S.sheaf P
-    exact isKFlat_of_iso e (CochainComplex.isKFlat_pullback g.base
+    apply isKFlat_of_iso (R := TopCat.Sheaf.inverseImageRing g.base S.sheaf) e
+    exact CochainComplex.isKFlat_pullback g.base
       (TopCat.Sheaf.inverseImageRing g.base S.sheaf) S.sheaf
       ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
-        (TopologicalSpace.Opens.map g.base) CommRingCat.{u} _ _).unit.app S.sheaf) P hs.2)
+        (TopologicalSpace.Opens.map g.base) CommRingCat.{u} _ _).unit.app S.sheaf) P hs.2
 
 end AlgebraicGeometry
