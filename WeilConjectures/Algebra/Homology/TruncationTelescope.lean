@@ -82,7 +82,8 @@ theorem quasiIso_hocolim_truncLE_and_filtered_colimit
   let M := SheafOfModules.{u}
     ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)
   have : HasColimitsOfShape (Discrete ℕ) M := inferInstance
-  have : HasColimitsOfShape (Discrete ℕ) (CochainComplex M ℤ) := inferInstance
+  have : HasColimitsOfShape (Discrete ℕ) (CochainComplex M ℤ) :=
+    ⟨fun F ↦ ⟨⟨⟨_, HomologicalComplex.isColimitCoconeOfHasColimitEval F⟩⟩⟩⟩
   let E : ℕ → CochainComplex M ℤ := fun n ↦ K.truncLE (n : ℤ)
   let D : ℕ ⥤ CochainComplex M ℤ :=
     { obj := E
