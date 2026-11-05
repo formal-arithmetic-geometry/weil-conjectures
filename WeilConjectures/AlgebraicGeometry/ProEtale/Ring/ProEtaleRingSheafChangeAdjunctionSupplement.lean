@@ -440,13 +440,13 @@ private theorem derived_mate_factors
     R'.rightDerivedFunctor.map ((DerivedCategory.quotientCompQhIso D).hom.app
       ((H.mapHomologicalComplex (.up ℤ)).obj K))) hf
   simp only [Functor.map_comp, Category.assoc] at ht
-  simp only [← Functor.map_comp_assoc, Iso.inv_hom_id_app,
+  simp only [← Functor.map_comp, ← Functor.map_comp_assoc, Iso.inv_hom_id_app,
     Functor.map_id, Category.id_comp, Category.comp_id] at ht
   rw [← DerivedCategory.quotientCompQhIso_inv_naturality_assoc] at ht
   dsimp only [chainDerivedUnit]
   simp only [Functor.map_comp, Category.assoc]
   rw [reassoc_of% hn]
-  simpa only [Functor.map_comp, Category.assoc, ← Functor.map_comp_assoc,
+  simpa only [Category.assoc, ← Functor.map_comp, ← Functor.map_comp_assoc,
     Iso.inv_hom_id_app, Functor.map_id, Category.id_comp, Category.comp_id] using ht
 
 set_option backward.isDefEq.respectTransparency false in
