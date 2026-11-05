@@ -98,7 +98,8 @@ theorem geometricFiberWeilSmoothTrace_weilUniversal
         ((rightDerivedLowerShriekGeometricFiberIso (Profinite.padicAlgClRingObj l)
           (compactificationOverField f) (Over.w f)).inv.app
             (boundedConstructibleTateTwist l X d (2 * d)).obj ≫
-          (upperStar (Profinite.padicAlgClRingObj l) Y.hom.geometricFiberProj).mapDerivedCategory.map
+          (upperStar (Profinite.padicAlgClRingObj l)
+            Y.hom.geometricFiberProj).mapDerivedCategory.map
             (ambientSmoothTrace l f d))) :
     (weilRightDerivedLowerShriek (Profinite.padicAlgClRingObj l)
       (compactificationOverField f) (Over.w f)).TraceUniversalAt K
