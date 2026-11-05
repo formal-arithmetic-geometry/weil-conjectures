@@ -211,6 +211,12 @@ private theorem cancellation_eq_evaluation
 attribute [local irreducible] LineUnbounded.cancellation LineUnbounded.pureTensor
   LineEvaluation.cancellation LineEvaluation.pureTensor
 
+private local instance
+    (A : Sheaf (Scheme.ProEt.topology X) CommRingCat.{max a (t + 1)})
+    (M : Modules.{t, a} X A) (U : X.ProEtᵒᵖ) :
+    SMul ((𝟙_ (Modules.{t, a} X A)).val.obj U) (M.val.obj U) :=
+  inferInstanceAs (SMul (A.obj.obj U) (M.val.obj U))
+
 private theorem cancellation_pure
     (A : Sheaf (Scheme.ProEt.topology X) CommRingCat.{max a (t + 1)})
     (P Q M : Modules.{t, a} X A) (e : P ⊗ Q ≅ 𝟙_ (Modules.{t, a} X A))
@@ -221,13 +227,15 @@ private theorem cancellation_pure
       e.hom.val.app U (LineUnbounded.pureTensor X A P Q U y z) • x := by
   rw [cancellation_eq_evaluation, pure_eq_evaluation, pure_eq_evaluation,
     pure_eq_evaluation]
-  have hcalc := LineEvaluation.cancellation_pure.{t + 1, t, a} A P Q M e U x y z
-  change _ = _ at hcalc
-  run_tac Lean.Elab.Tactic.withMainContext do
-    let some h := (← Lean.getLCtx).findFromUserName? `hcalc
-      | Lean.throwError "missing evaluation computation"
-    (← Lean.Elab.Tactic.getMainGoal).assign h.toExpr
-    Lean.Elab.Tactic.replaceMainGoal []
+  unfold LineEvaluation.cancellation
+  change (ρ_ M).hom.val.app U
+    ((M ◁ e.hom).val.app U ((α_ M P Q).hom.val.app U _)) = _
+  rw [LineEvaluation.pure_assoc.{t + 1, t, a}]
+  have hm := LineEvaluation.pure_map.{t + 1, t, a} A (𝟙 M) e.hom U x
+    (LineEvaluation.pureTensor.{t + 1, t, a} A P Q U y z)
+  rw [id_tensorHom] at hm
+  rw [hm]
+  exact LineEvaluation.pure_right_unitor.{t + 1, t, a} A M U x _
 
 private theorem cancellation_inv_pure
     (A : Sheaf (Scheme.ProEt.topology X) CommRingCat.{max a (t + 1)})
@@ -237,21 +245,14 @@ private theorem cancellation_inv_pure
     ((LineUnbounded.cancellation X A P Q e).inv.app M).val.app U x =
       LineUnbounded.pureTensor X A (M ⊗ P) Q U
         (LineUnbounded.pureTensor X A M P U x y) z := by
-  rw [cancellation_eq_evaluation, pure_eq_evaluation, pure_eq_evaluation]
-  have he : e.hom.val.app U (LineEvaluation.pureTensor.{t + 1, t, a} A P Q U y z) =
-      (1 : A.obj.obj U) := by
-    rw [pure_eq_evaluation] at h
-    run_tac Lean.Elab.Tactic.withMainContext do
-      let some hd := (← Lean.getLCtx).findFromUserName? `h
-        | Lean.throwError "missing basis normalization"
-      (← Lean.Elab.Tactic.getMainGoal).assign hd.toExpr
-      Lean.Elab.Tactic.replaceMainGoal []
-  have hcalc := LineEvaluation.cancellation_inv_pure.{t + 1, t, a} A P Q M e U y z he x
-  run_tac Lean.Elab.Tactic.withMainContext do
-    let some h := (← Lean.getLCtx).findFromUserName? `hcalc
-      | Lean.throwError "missing inverse evaluation computation"
-    (← Lean.Elab.Tactic.getMainGoal).assign h.toExpr
-    Lean.Elab.Tactic.replaceMainGoal []
+  let c := LineUnbounded.cancellation X A P Q e
+  let v := LineUnbounded.pureTensor X A (M ⊗ P) Q U
+    (LineUnbounded.pureTensor X A M P U x y) z
+  have hi := congrArg (fun k ↦ k.val.app U v) (c.hom_inv_id_app M)
+  change (c.inv.app M).val.app U ((c.hom.app M).val.app U v) = v at hi
+  dsimp only [c, v] at hi
+  rw [cancellation_pure, h, one_smul] at hi
+  exact hi
 
 attribute [local irreducible] LineUnbounded.derived LineUnbounded.normalization
   compute signedLinePower scalarTensorPower
