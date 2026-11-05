@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.WeilSheaf.SmoothPurityTatePullbackFactor
-public import WeilConjectures.WeilSheaf.SmoothPurityRationalRootLaw
+public import WeilConjectures.WeilSheaf.SmoothPurityRationalRootIsoLaw
 public import WeilConjectures.WeilSheaf.SmoothPurityFrobeniusFactorAlias
 public import WeilConjectures.WeilSheaf.SmoothPurityCyclotomicField
 public import WeilConjectures.WeilSheaf.SmoothPurityScalarIsoTransport
@@ -174,15 +174,14 @@ lemma purityScalarRootTrivialization_weil :
         (purityScalarSourceDatum ℓ a ≫ (purityScalarRootTrivialization ℓ a hζ hζ').hom) =
       (purityScalarFrobeniusPull ℓ a).map (purityScalarRootTrivialization ℓ a hζ hζ').hom ≫
         purityScalarSourceUnitDatum ℓ a := by
-  apply purity_scalarDatum_transport_isos
-    (purityScalarFrobeniusPull ℓ a)
-    _ (purityScalarSourceIso ℓ a) _ (purityScalarSourceUnitIso ℓ a)
-    _ (purityScalarRootTrivialization ℓ a hζ hζ')
+  have h := purity_rationalRootTrivialization_weil_of_iso_eq a hζ hζ'
+    (purityScalarSourceIso ℓ a) (purityScalarSourceUnitIso ℓ a)
+    (purityScalarRootTrivialization ℓ a hζ hζ')
     (purityScalarSourceIso_eq ℓ a) (purityScalarSourceUnitIso_eq ℓ a)
-    (purityScalarRootTrivialization_eq ℓ a hζ hζ') (Nat.card k : ℤ)
-  have h := purity_rationalRootTrivialization_weil a hζ hζ'
-  dsimp only [purityScalarFrobeniusPull, purityScalarSourceObject, purityScalarSourceUnit,
-    tateTwistOne, Iso.app_hom, Functor.comp_obj, Functor.comp_map] at h ⊢
+    (purityScalarRootTrivialization_eq ℓ a hζ hζ')
+  dsimp only [purityScalarSourceDatum, purityScalarSourceUnitDatum,
+    purityScalarFrobeniusPull, purityScalarSourceObject, purityScalarSourceUnit,
+    Functor.comp_obj, Functor.comp_map] at h ⊢
   exact_mod_proofs h
 
 /-- The canonical geometric trivialization in the scalar interface. -/
