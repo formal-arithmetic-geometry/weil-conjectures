@@ -77,5 +77,6 @@ theorem isIso_mateEquiv_restrictedDerivedForget_app
   apply ObjectProperty.hom_ext
   change (derivedForgetCommIso e).inv.app H ≫ (forget G).mapDerivedCategory.map d = _
   rw [hd, Iso.inv_hom_id_app_assoc]
+  rfl
 
 end CategoryTheory.Endofunctor.IsoAlgebra
