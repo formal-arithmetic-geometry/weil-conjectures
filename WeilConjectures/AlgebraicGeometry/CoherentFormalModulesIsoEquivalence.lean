@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 import WeilConjectures.AlgebraicGeometry.FormalSystemsPullback
 
 /-! # Transport of coherent formal modules along a scheme isomorphism
@@ -65,12 +66,12 @@ theorem coherentFormalModules_iso_equivalence {X Y : Scheme.{u}}
   let IY := ObjectProperty.ι (IsCoherentFormalModule (I.comap e.inv))
   have hPX : (P ⋙ Q) ⋙ IX = IX ⋙ WX.obj
       (Scheme.Modules.tensorPullback e.inv ⋙ Scheme.Modules.tensorPullback e.hom) := by
-    rw [Functor.assoc, hQ, ← Functor.assoc, hP, Functor.assoc]
-    exact congrArg (IX ⋙ ·) (Functor.whiskeringRight_obj_comp _ _)
+    rw [Functor.assoc, hQ, ← Functor.assoc, hP]
+    rfl
   have hQY : (Q ⋙ P) ⋙ IY = IY ⋙ WY.obj
       (Scheme.Modules.tensorPullback e.hom ⋙ Scheme.Modules.tensorPullback e.inv) := by
-    rw [Functor.assoc, hP, ← Functor.assoc, hQ, Functor.assoc]
-    exact congrArg (IY ⋙ ·) (Functor.whiskeringRight_obj_comp _ _)
+    rw [Functor.assoc, hP, ← Functor.assoc, hQ]
+    rfl
   -- Both composites already lie in the full subcategories; lift the ambient isomorphisms.
   let u : (P ⋙ Q) ⋙ IX ≅ (𝟭 _) ⋙ IX :=
     eqToIso hPX ≪≫ Functor.isoWhiskerLeft IX (WX.mapIso aX) ≪≫
