@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
+public import Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Plus
 
