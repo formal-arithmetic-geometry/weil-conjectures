@@ -383,7 +383,7 @@ theorem le_radius_inv_tprod_inv_eulerPoly (he : ∀ x, e x ≠ 0)
   refine (wnorm_prod_le (by positivity) _ _).trans ?_
   calc ∏ x ∈ lowDegree hfin n, wnorm r (eulerPoly (M x) (e x))
       ≤ ∏ x ∈ lowDegree hfin n, Real.exp (d * b ^ e x) :=
-        Finset.prod_le_prod (fun x _ ↦ wnorm_nonneg (by positivity) _)
+        Finset.prod_le_prod₀ (fun x _ ↦ wnorm_nonneg (by positivity) _)
           fun x _ ↦ wnorm_eulerPoly_le (by positivity) hc (hM x) (hd x)
     _ = Real.exp (d * ∑ x ∈ lowDegree hfin n, b ^ e x) := by
         rw [← Real.exp_sum, Finset.mul_sum]
