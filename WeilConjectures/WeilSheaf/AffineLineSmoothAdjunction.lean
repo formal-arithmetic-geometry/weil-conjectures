@@ -42,14 +42,16 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]
 
+include hπ in
 /-- The compact-support adjunction of an affine-line bundle follows from smooth
 purity and compatibility of pullback with twists and shifts. -/
 theorem nonempty_affineLineAdjunction_of_smoothPurity :
     Nonempty (derivedLowerShriek k₀ l π ⊣
       (tateTwist k₀ l X 1 ⋙ shiftFunctor (WeilComplex k₀ l X) (2 : ℤ)) ⋙
         upperStar π) := by
-  have : LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀)) :=
-    inferInstanceAs (LocallyOfFiniteType (π ≫ X ↘ Spec (CommRingCat.of k₀)))
+  have : LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← comp_over π]
+    infer_instance
   have : SmoothOfRelativeDimension 1 π :=
     (smoothOfRelativeDimension_isStableUnderBaseChange 1).of_isPullback hπ.flip
       (inferInstance : SmoothOfRelativeDimension 1

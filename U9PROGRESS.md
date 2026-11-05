@@ -72,3 +72,10 @@
 - Added a declaration-level audit which rejects any admitted dependency except
   nonempty_derivedLowerShriek_adjunction_of_smooth and explicitly rejects the trace.
 - Next: ucheck the helper, USER module, old leaf and audits together.
+- First remote check: TateTwistPullback GREEN (3.5s). AffineLineSmoothAdjunction
+  needed `include hπ` to retain the pullback assumption and an explicit rewrite
+  by comp_over for source finite type. Both repaired; no budget raises.
+- Source validation: USER statement byte-for-byte unchanged from 7cc59d1611;
+  AffineLineBundle/root aggregator match upstream; no trace/Thom import in either
+  current upstream or K4's evolving SmoothPurity closure.
+- Integration caveat discovered: current7cc59d1611 smooth-purity adjunction assumes only QuasiSeparated base, but K4/pr2110 now adds IsSeparated base; pr2097 propagates precisely this strengthening to the Thom/Fourier users. My current route B preserves the current upstream USER statement and uses its existing K4 leaf. Combining with pr2110 will require the pr2097 assumption propagation, or a separate nonseparated descent argument. No K4 declaration edited or copied.
