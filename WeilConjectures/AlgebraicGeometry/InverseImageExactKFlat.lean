@@ -36,8 +36,12 @@ private theorem isKFlat_of_iso {X : TopCat.{u}}
     CochainComplex.IsKFlatTensor (R := R) L := by
   let := SheafOfModules.monoidalCategory R
   intro F hF i
+  let tensor := (MonoidalCategory.curriedTensor (SheafOfModules.{u}
+    ((sheafCompose (Opens.grothendieckTopology X)
+      (forget₂ CommRingCat.{u} RingCat.{u})).obj R))).mapBifunctorHomologicalComplex
+        (ComplexShape.up ℤ) (ComplexShape.up ℤ)
   exact (hK F hF i).of_iso
-    (((MonoidalCategory.curriedTensor _).map₂CochainComplex.obj F).mapIso e)
+    (HomologicalComplex₂.total.mapIso ((tensor.obj F).mapIso e) (ComplexShape.up ℤ))
 
 /-- Exact module inverse image carries K-flat resolutions to K-flat resolutions.
 Source: Stacks Project, Cohomology, Tags 06YI and 06YC.
@@ -81,9 +85,10 @@ theorem exists_inverseImage_exact_kFlat {T S : Scheme.{u}} (g : T ⟶ S) :
     have : QuasiIso s := hs.1
     refine ⟨inferInstance, ?_⟩
     obtain ⟨e⟩ := TopCat.Sheaf.exists_inverseImage_tensorPullback_iso g.base S.sheaf P
-    exact isKFlat_of_iso e (CochainComplex.isKFlat_pullback g.base
+    have hP := CochainComplex.isKFlat_pullback g.base
       (TopCat.Sheaf.inverseImageRing g.base S.sheaf) S.sheaf
       ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
-        (TopologicalSpace.Opens.map g.base) CommRingCat.{u} _ _).unit.app S.sheaf) P hs.2)
+        (TopologicalSpace.Opens.map g.base) CommRingCat.{u} _ _).unit.app S.sheaf) P hs.2
+    exact isKFlat_of_iso (R := TopCat.Sheaf.inverseImageRing g.base S.sheaf) e hP
 
 end AlgebraicGeometry
