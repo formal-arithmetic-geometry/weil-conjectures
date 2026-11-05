@@ -69,7 +69,7 @@ private theorem exact_restriction_inv_factors {A B D : Type*}
       DerivedCategory.Q.map ((NatIso.mapHomologicalComplex e (.up ℤ)).inv.app P) ≫
         H.mapDerivedCategoryFactors.inv.app P ≫
           (Functor.mapDerivedCategoryNatIso e ≪≫
-            Functor.mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Q.obj P) := by
+            (Functor.mapDerivedCategoryCompIso F G).symm).hom.app (DerivedCategory.Q.obj P) := by
   have h := Functor.exactDerivedRestrictionComposition_inv_factors F G H e.symm P
   rw [← Category.assoc]
   apply (Iso.eq_comp_inv ((Functor.mapDerivedCategoryNatIso e ≪≫
