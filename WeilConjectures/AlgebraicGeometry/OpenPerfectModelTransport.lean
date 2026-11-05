@@ -81,7 +81,8 @@ theorem local_perfect_of_openRestriction_iso
     ((Modules.restrictFunctorComp s.inv s.hom).symm ≪≫
       Modules.restrictFunctorCongr s.inv_hom_id ≪≫ Modules.restrictFunctorId)
   let A := (EV.trans ES).trans EO.symm
-  have : A.functor.Additive := inferInstance
+  have : A.functor.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_full _
+  have : A.functor.Additive := Functor.additive_of_preserves_binary_products _
   let K' := (A.functor.mapHomologicalComplex (.up ℤ)).obj K
   have unitIso : A.functor.obj
       (SheafOfModules.unit ((moduleRings U.toScheme.toRingedSpace).over V)) ≅
@@ -133,9 +134,9 @@ theorem local_perfect_of_openRestriction_iso
         Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft L EO.unitIso.symm ≪≫
         Functor.rightUnitor L
     exact ⟨(Functor.mapDerivedCategoryNatIso c).symm.app R ≪≫
-      (Functor.mapDerivedCategoryCompIso (G ⋙ H) A.functor).app R ≪≫
+      (Functor.mapDerivedCategoryCompIso (G ⋙ H) A.functor).symm.app R ≪≫
       A.functor.mapDerivedCategory.mapIso
-        ((Functor.mapDerivedCategoryCompIso G H).app R ≪≫
+        ((Functor.mapDerivedCategoryCompIso G H).symm.app R ≪≫
           H.mapDerivedCategory.mapIso e ≪≫ hmodel) ≪≫
       A.functor.mapDerivedCategoryFactors.app K⟩
 
