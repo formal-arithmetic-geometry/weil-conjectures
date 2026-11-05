@@ -115,3 +115,17 @@
 - Next: remote validation of the assigned module, then its three direct importers.
 - Fix patterns and baseline log: `/home/ubuntu/u9/bz/FIXES-BZ384.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+# BZ457 in progress
+
+- Branch: `u9/BZ457`; starting commit: `99a06bbbb`.
+- Assigned module: `WeilConjectures.Algebra.Homology.AffineDerivedPushforwardSheafEdge`.
+- Baseline and import-only remote builds identify one public statement mismatch:
+  `HomologicalComplexUpToQuasiIso.Qh` is `@[no_expose]` in pinned Mathlib.
+- The user instructed continuation after the explicit identity-cast proposal.
+  Applied `cast (by rfl)` around the unit morphism, with public and implementation
+  imports of `Mathlib.Algebra.Homology.Localization`.
+- Remote leaf validation is queued via `ucheck-bump`; no local Lean/Lake execution.
+- Next: fix any remaining proof errors, validate both direct importers, then the
+  normalization layer and write `/home/ubuntu/u9/state/BZ457.DONE`.
+- Fix patterns and logs: `/home/ubuntu/u9/bz/FIXES-BZ457.md`.
