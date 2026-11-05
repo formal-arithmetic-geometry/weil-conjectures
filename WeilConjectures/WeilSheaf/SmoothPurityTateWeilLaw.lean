@@ -6,6 +6,7 @@ module
 
 public import WeilConjectures.WeilSheaf.SmoothPurityRootFrobeniusUnitLaw
 public import WeilConjectures.WeilSheaf.SmoothPurityChangeCoefficientWeilLaw
+public import WeilConjectures.WeilSheaf.SmoothPurityScalarIsoAlias
 import WeilConjectures.Tactic.ExactModProofs
 
 /-! # The rational Tate trivialization and its Frobenius law -/
@@ -29,6 +30,15 @@ noncomputable def purityTateTwistOneTrivialization :
       (a.geometricFiberProj)^*⟦Profinite.padicAlgClRingObj l⟧.obj (𝟙_ _) :=
   purityRationalTateTrivialization a.geometricFiberProj a.geometricFiberToAlgebraicClosure l hζ hζ'
 
+/-- Identify the two trivializations at the isomorphism level. -/
+lemma purityTateTwistOneTrivialization_eq :
+    purityTateTwistOneTrivialization a hζ hζ' =
+      purityChangeCoefficientTrivialization (Profinite.continuousMapRingObj ℤ_[l])
+        (Profinite.padicIntRingObjToPadicAlgCl l) a.geometricFiberProj (tateModule X l)
+        (upperStarMapModTateModuleIsoUnit a.geometricFiberProj
+          a.geometricFiberToAlgebraicClosure l hζ hζ' ≪≫
+          (a.geometricFiberProj)^*[Ab.{u + 1}].mapModUnitIso) := rfl
+
 set_option diagnostics true in
 /-- The rational trivialization transports the geometric Frobenius with scalar q. -/
 theorem purityTateTwistOneTrivialization_weil :
@@ -45,9 +55,20 @@ theorem purityTateTwistOneTrivialization_weil :
     (e₁ := upperStarMapModTateModuleIsoUnit a.geometricFiberProj
       a.geometricFiberToAlgebraicClosure l hζ hζ' ≪≫
         (a.geometricFiberProj)^*[Ab.{u + 1}].mapModUnitIso)
-    (purity_tateModule_rootTrivialization_frobenius a hζ hζ')
-  dsimp only [purityTateTwistOneTrivialization, purityRationalTateTrivialization,
-    tateTwistOne, Functor.comp_obj, Functor.comp_map] at h ⊢
-  cast_proofs h
+    (by
+      have hr := purity_tateModule_rootTrivialization_frobenius a hζ hζ'
+      dsimp only [Functor.comp_obj, Functor.comp_map] at hr ⊢
+      cast_proofs hr)
+  have h' := purity_scalarDatum_iso_alias
+    (a.geometricFiberProj)^*⟦Profinite.padicAlgClRingObj l⟧
+    (a.geometricGaloisFrobenius.hom)^*⟦Profinite.padicAlgClRingObj l⟧
+    (geometricFiberProjUpperStarFrobeniusIso (Profinite.padicAlgClRingObj l) a)
+    (M := tateTwistOne X l) _ (purityTateTwistOneTrivialization a hζ hζ')
+    (purityTateTwistOneTrivialization_eq a hζ hζ') (Nat.card k : ℤ)
+    (by
+      dsimp only [tateTwistOne, Functor.comp_obj, Functor.comp_map] at h ⊢
+      cast_proofs h)
+  dsimp only [Functor.comp_obj, Functor.comp_map] at h' ⊢
+  cast_proofs h'
 
 end AlgebraicGeometry.ProEtale.CondensedRing

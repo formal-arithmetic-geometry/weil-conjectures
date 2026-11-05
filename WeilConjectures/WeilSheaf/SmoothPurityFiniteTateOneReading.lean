@@ -104,8 +104,14 @@ lemma purity_finiteCoefficientIntegralTateOneReading_pullback
     (finiteCoefficientModEquivalenceExtendScalarsIntegralTateTwistOneIso ℓ E n (g ≫ f))
     (finiteCoefficientModEquivalenceExtendScalarsIntegralTateTwistOneIso ℓ E n f)
     (purity_finiteCoefficientIntegralTateOneReading_eq ℓ E n (g ≫ f))
-    (purity_finiteCoefficientIntegralTateOneReading_eq ℓ E n f) hr hf
-  dsimp only [Functor.comp_obj, Functor.comp_map] at h ⊢
+    (purity_finiteCoefficientIntegralTateOneReading_eq ℓ E n f)
+    (by
+      dsimp only [Functor.comp_obj, Functor.comp_map, integersModPowReduction] at hr ⊢
+      cast_proofs hr)
+    (by
+      dsimp only [Functor.comp_obj, Functor.comp_map] at hf ⊢
+      cast_proofs hf)
+  dsimp only [Functor.comp_obj, Functor.comp_map, integersModPowReduction] at h ⊢
   cast_proofs h
 
 end AlgebraicGeometry.ProEtale
