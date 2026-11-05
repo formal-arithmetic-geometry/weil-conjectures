@@ -142,7 +142,7 @@
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ558 in progress
+# BZ558 complete
 
 - Branch: `u9/BZ558`; assigned module: `WeilConjectures.Algebra.Homology.SmoothPurity.NormalizedLeftExtension`.
 - The assigned module already contains BZ471's earlier proof repair.
@@ -154,9 +154,15 @@
   issue in `KFlat`. Commit `cba570747` applies the same repair to `KFlat` and its copied
   proof in `KFlatResolutionIndependentCoefficients`; these are all three matches in
   the assigned module's import closure. All changes are one-line proof repairs.
-- The next `ucheck-bump` for the assigned module is queued for a shared tree. After
-  it passes, build the four direct importers listed in `BZ558-direct-importers.txt`.
+- The assigned module is GREEN at `b5a620ed5b15b3b59c0b6e493ffe04971ffecaab`:
+  `ucheck-bump` returned rc=0, failed=0, 3151 jobs on newsrv bumpw3. Both pins verified.
+- All four direct importers were attempted and skipped because the separately owned
+  `Sheaf.HomTensorPair:44` fails on the same namespace mismatch. Dependency closures
+  confirm it blocks every target; no downstream module is claimed green. The blocked
+  batch was stopped through its verified timeout supervisor to release the tree.
 - First retry full log: `/home/ubuntu/u9/bz/BUILD-BZ558-resumed-unit-full.log`.
-- Pending retry output: `/home/ubuntu/u9/bz/BUILD-BZ558-resumed-unit2.log`.
+- Green build log: `/home/ubuntu/u9/bz/BUILD-BZ558-resumed-unit2-full.log`.
+- Downstream log: `/home/ubuntu/u9/bz/BUILD-BZ558-downstream1-full.log`.
+- Completion marker: `/home/ubuntu/u9/state/BZ558.DONE`.
 - Fix pattern, whole-tree count, and logs: `/home/ubuntu/u9/bz/FIXES-BZ558.md`.
 - No local Lean/Lake, proof placeholders, statement changes, or heartbeat increases.
