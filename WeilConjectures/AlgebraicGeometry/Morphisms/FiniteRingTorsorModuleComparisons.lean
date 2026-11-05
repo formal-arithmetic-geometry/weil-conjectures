@@ -121,7 +121,6 @@ private theorem presheaf_diagonal (Λ : Type (u + 1)) [CommRing Λ] :
             f.unop.left ≫ c.diagonalSection W.unop := by
           apply Limits.pullback.hom_ext <;>
             simp [diagonalSection, sectionRestriction, MorphismProperty.Over.w f.unop]
-          rfl
         simpa only [Scheme.Hom.comp_apply] using
           congrArg (fun k ↦ s.val (k x)) h)) (by
       intro N N' f
