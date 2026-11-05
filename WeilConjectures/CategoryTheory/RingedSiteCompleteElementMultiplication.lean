@@ -180,9 +180,9 @@ theorem ringedSite_completeElement_mul
     IsRingedSiteCompleteElement J R K U (a * f) := by
   let O := (sheafCompose J (forget₂ CommRingCat RingCat)).obj R
   let A := SheafOfModules.{u} (O.over U)
-  let : HasDerivedCategory.{w} (SheafOfModules.{u}
-      ((sheafCompose (J.over U) (forget₂ CommRingCat RingCat)).obj (R.over U))) :=
-    inferInstanceAs (HasDerivedCategory.{w} (SheafOfModules.{u} (O.over U)))
+  let : ∀ W : C, HasDerivedCategory.{w} (SheafOfModules.{u}
+      ((sheafCompose (J.over W) (forget₂ CommRingCat RingCat)).obj (R.over W))) :=
+    fun W ↦ inferInstanceAs (HasDerivedCategory.{w} (SheafOfModules.{u} (O.over W)))
   let : MonoidalCategory A := SheafOfModules.monoidalCategory (R.over U)
   let : SymmetricCategory A := SheafOfModules.symmetricCategory (R.over U)
   let : MonoidalClosed A := SheafOfModules.monoidalClosed (R := R.over U)
@@ -190,6 +190,10 @@ theorem ringedSite_completeElement_mul
   let : MonoidalPreadditive A := tensor_monoidalPreadditive
   let Q : CochainComplex A ℤ ⥤ DerivedCategory A := DerivedCategory.Q
   let N := ringedSiteDerivedRestriction O U K
+  letI : Category.{w} (@DerivedCategory (SheafOfModules.{u}
+      ((sheafCompose (J.over U) (forget₂ CommRingCat RingCat)).obj (R.over U))) _ _
+      (inferInstanceAs (HasDerivedCategory.{w} (SheafOfModules.{u} (O.over U))))) :=
+    inferInstanceAs (Category.{w} (DerivedCategory (SheafOfModules.{u} (O.over U))))
   let P := Q.objPreimage N
   let I := (CochainComplex.kInjectiveResolutionFunctor.{u} A).obj P
   let η := (CochainComplex.toKInjectiveResolution.{u} A).app P
