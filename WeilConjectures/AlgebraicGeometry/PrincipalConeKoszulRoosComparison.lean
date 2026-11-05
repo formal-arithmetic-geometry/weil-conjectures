@@ -558,8 +558,7 @@ theorem principalConeKoszulRoosComparison
     exact (hμ q U x).trans (by
       have h := (quotientAction_apply R P b 0 q U x).symm
       simp only [b, Nat.zero_add, pow_one] at h
-      convert h using 1
-      rfl)
+      convert h using 1)
   subst μ
   obtain ⟨e, he⟩ := @coneTowerRoosComparison.{u, w} C inferInstance J R inferInstance P
     (End.of (quotientAction R P b 0)) (koszulTensorTower R P b)

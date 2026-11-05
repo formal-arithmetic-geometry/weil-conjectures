@@ -18,6 +18,7 @@ import WeilConjectures.AlgebraicGeometry.FormalComparisonCompleteBaseAlgebraizat
 import WeilConjectures.AlgebraicGeometry.CompletedAffineComplementBaseChange
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Mathlib.RingTheory.AdicCompletion.Completeness
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Algebraization of the completed affine comparison as an adjunction
 
