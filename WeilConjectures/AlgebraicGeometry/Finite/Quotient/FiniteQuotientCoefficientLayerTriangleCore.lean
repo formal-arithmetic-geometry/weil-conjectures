@@ -368,8 +368,9 @@ theorem finiteQuotient_coefficient_layer_core
     CochainComplex.exists_isKFlatResolutionIndependentCoefficients
       (R := completedAdicCommRing X d) G
   have : QuasiIso f := hf
-  let eC : DerivedCategory.Q.obj C ≅ M :=
-    asIso (DerivedCategory.Q.map f) ≪≫ DerivedCategory.Q.objObjPreimageIso M
+  let eC : (DerivedCategory.Q (C := CompletedAdicModules X d)).obj C ≅ M :=
+    asIso ((DerivedCategory.Q (C := CompletedAdicModules X d)).map f) ≪≫
+      DerivedCategory.Q.objObjPreimageIso M
   let φ := completedAdicCommProjection X d (n + 1)
   let E : CompletedAdicModules X d ⥤
       SheafOfModules.{t + 1} (completedAdicFiniteRing X d (n + 1)) := completedAdicChange X φ
