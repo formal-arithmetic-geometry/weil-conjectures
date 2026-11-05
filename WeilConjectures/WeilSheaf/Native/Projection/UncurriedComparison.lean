@@ -27,6 +27,7 @@ def uncurryCompIsoOfIso {TA : A ⥤ A ⥤ A} {TB : B ⥤ B ⥤ B} {R : B ⥤ A}
     dsimp at h ⊢
     simpa only [map_comp] using h)
 
+set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- The uncurried form of compatibility, with the pullback comparison pointing towards
 the realized pullback. -/
@@ -62,6 +63,7 @@ lemma comparisonCompatible_uncurried
   calc
     _ = eR.hom.app (TB.obj (M, N)) ≫ R'.map (tB.hom.app (M, N)) ≫
         (rho'.hom.app (FB.obj M)).app (FB.obj N) ≫ 𝟙 _ := by
+      dsimp [Functor.whiskeringLeft₂, Functor.postcompose₂] at *
       simpa only [uncurry_obj_map, Category.assoc] using
         congrArg (fun z ↦ eR.hom.app (TB.obj (M, N)) ≫ R'.map (tB.hom.app (M, N)) ≫
           (rho'.hom.app (FB.obj M)).app (FB.obj N) ≫ z) hc
