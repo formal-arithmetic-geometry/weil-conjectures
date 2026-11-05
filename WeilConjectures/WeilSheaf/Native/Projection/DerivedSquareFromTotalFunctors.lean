@@ -91,7 +91,8 @@ lemma projection_derived_square_of_total_functors
       TC TD t nY nZ (projection_model_complex_square L V F R e).symm
       (fun X Y ↦ (d X Y).hom) P T)
     (hmZ : F.mapDerivedCategory.map modelZ.hom ≫
-        F.mapDerivedCategoryFactors.hom.app (TC.obj (P, T)) ≫ DerivedCategory.Q.map (nY.app (P, T)).hom =
+        F.mapDerivedCategoryFactors.hom.app (TC.obj (P, T)) ≫ DerivedCategory.Q.map
+            (nY.app (P, T)).hom =
       tz.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj T) ≫
         (F.mapDerivedCategoryFactors.hom.app P ⊗ₘ F.mapDerivedCategoryFactors.hom.app T) ≫
         Functor.LaxMonoidal.μ DerivedCategory.Q

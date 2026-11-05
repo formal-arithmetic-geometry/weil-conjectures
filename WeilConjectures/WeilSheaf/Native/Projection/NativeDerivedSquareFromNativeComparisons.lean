@@ -40,33 +40,55 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
 variable (g : Z ⟶ Y) [g.IsOver (Spec (CommRingCat.of k₀))]
 
 variable
-  (R : (Mod (Sheaf (Scheme.ProEt.topology (Scheme.Hom.geometricFiber (Y ↘ Spec (CommRingCat.of k₀)))) Ab) (condensedRingObj (Profinite.padicAlgClRingObj l) (Scheme.Hom.geometricFiber (Y ↘ Spec (CommRingCat.of k₀))))) ⥤ (Mod (Sheaf (Scheme.ProEt.topology (Scheme.Hom.geometricFiber (Z ↘ Spec (CommRingCat.of k₀)))) Ab) (condensedRingObj (Profinite.padicAlgClRingObj l) (Scheme.Hom.geometricFiber (Z ↘ Spec (CommRingCat.of k₀))))))
+  (R :
+      (Mod (Sheaf (Scheme.ProEt.topology
+          (Scheme.Hom.geometricFiber (Y ↘ Spec (CommRingCat.of k₀)))) Ab)
+        (condensedRingObj (Profinite.padicAlgClRingObj l)
+          (Scheme.Hom.geometricFiber (Y ↘ Spec (CommRingCat.of k₀))))) ⥤
+      (Mod (Sheaf (Scheme.ProEt.topology
+          (Scheme.Hom.geometricFiber (Z ↘ Spec (CommRingCat.of k₀)))) Ab)
+        (condensedRingObj (Profinite.padicAlgClRingObj l)
+          (Scheme.Hom.geometricFiber (Z ↘ Spec (CommRingCat.of k₀))))))
   [R.Additive]
   [PreservesFiniteLimits R] [PreservesFiniteColimits R]
 
 /-- Fix all native comparisons and their normalizations, with the geometric functor abstract. -/
 lemma projection_derived_square_of_native_comparisons
     (e : (upperStar k₀ l g) ⋙ (condensedRealization k₀ l Z) ≅ (condensedRealization k₀ l Y) ⋙ R)
-    (d : ∀ X Y : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology (Scheme.Hom.geometricFiber (Y ↘ Spec (CommRingCat.of k₀)))) Ab) (condensedRingObj (Profinite.padicAlgClRingObj l) (Scheme.Hom.geometricFiber (Y ↘ Spec (CommRingCat.of k₀))))) ℤ,
+    (d : ∀ X Y : CochainComplex
+        (Mod (Sheaf (Scheme.ProEt.topology
+            (Scheme.Hom.geometricFiber (Y ↘ Spec (CommRingCat.of k₀)))) Ab)
+          (condensedRingObj (Profinite.padicAlgClRingObj l)
+            (Scheme.Hom.geometricFiber (Y ↘ Spec (CommRingCat.of k₀))))) ℤ,
       (R.mapHomologicalComplex (.up ℤ)).obj (X ⊗ Y) ≅
         (R.mapHomologicalComplex (.up ℤ)).obj X ⊗ (R.mapHomologicalComplex (.up ℤ)).obj Y)
-    (cmp : ∀ X Y : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology (Scheme.Hom.geometricFiber (Y ↘ Spec (CommRingCat.of k₀)))) Ab) (condensedRingObj (Profinite.padicAlgClRingObj l) (Scheme.Hom.geometricFiber (Y ↘ Spec (CommRingCat.of k₀))))),
+    (cmp : ∀ X Y : DerivedCategory
+        (Mod (Sheaf (Scheme.ProEt.topology
+            (Scheme.Hom.geometricFiber (Y ↘ Spec (CommRingCat.of k₀)))) Ab)
+          (condensedRingObj (Profinite.padicAlgClRingObj l)
+            (Scheme.Hom.geometricFiber (Y ↘ Spec (CommRingCat.of k₀))))),
       R.mapDerivedCategory.obj (X ⊗ Y) ⟶
         R.mapDerivedCategory.obj X ⊗ R.mapDerivedCategory.obj Y)
     (ho : ProjectionOrdinaryModelNormalization R d cmp)
     (P T : CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ)
     (hP : NativeIsKFlat k₀ l Y P) (hT : NativeIsKFlat k₀ l Y T)
     (htotal : PullTensorSquareWithComparison
-      ((upperStar k₀ l g).mapHomologicalComplex (.up ℤ)) ((condensedRealization k₀ l Z).mapHomologicalComplex (.up ℤ))
-      ((condensedRealization k₀ l Y).mapHomologicalComplex (.up ℤ)) (R.mapHomologicalComplex (.up ℤ))
+      ((upperStar k₀ l g).mapHomologicalComplex (.up ℤ))
+          ((condensedRealization k₀ l Z).mapHomologicalComplex (.up ℤ))
+      ((condensedRealization k₀ l Y).mapHomologicalComplex (.up ℤ))
+          (R.mapHomologicalComplex (.up ℤ))
       (Functor.uncurry.obj (nativeTensorTotal k₀ l Y))
-      (Functor.uncurry.obj (nativeTensorTotal k₀ l Z)) (nativePullTotalTensor k₀ l g) (condensedRealizationTotalTensorIso k₀ l Y) (condensedRealizationTotalTensorIso k₀ l Z)
-      (projection_model_complex_square (upperStar k₀ l g) (condensedRealization k₀ l Z) (condensedRealization k₀ l Y) R e).symm
+      (Functor.uncurry.obj (nativeTensorTotal k₀ l Z)) (nativePullTotalTensor k₀ l g)
+          (condensedRealizationTotalTensorIso k₀ l Y) (condensedRealizationTotalTensorIso k₀ l Z)
+      (projection_model_complex_square (upperStar k₀ l g) (condensedRealization k₀ l Z)
+          (condensedRealization k₀ l Y) R e).symm
       (fun X Y ↦ (d X Y).hom) P T) :
     PullTensorSquareWithComparison (upperStar k₀ l g).mapDerivedCategory
-      (condensedRealization k₀ l Z).mapDerivedCategory (condensedRealization k₀ l Y).mapDerivedCategory
+      (condensedRealization k₀ l Z).mapDerivedCategory
+          (condensedRealization k₀ l Y).mapDerivedCategory
       R.mapDerivedCategory (nativeDerivedTensor k₀ l Y) (nativeDerivedTensor k₀ l Z)
-      (nativePullTensor k₀ l g) (condensedRealizationTensor k₀ l Y) (condensedRealizationTensor k₀ l Z) (Functor.mapDerivedCategorySquareIso e).symm cmp
+      (nativePullTensor k₀ l g) (condensedRealizationTensor k₀ l Y)
+          (condensedRealizationTensor k₀ l Z) (Functor.mapDerivedCategorySquareIso e).symm cmp
       (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj T) := by
   exact projection_derived_square_of_native_restriction k₀ l g
     (condensedRealization k₀ l Z) (condensedRealization k₀ l Y) R e

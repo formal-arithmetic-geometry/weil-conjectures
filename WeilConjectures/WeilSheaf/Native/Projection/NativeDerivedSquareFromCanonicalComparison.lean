@@ -46,15 +46,22 @@ lemma projection_derived_square_of_canonical_comparison
     (P T : CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ)
     (hP : NativeIsKFlat k₀ l Y P) (hT : NativeIsKFlat k₀ l Y T)
     (htotal : PullTensorSquareWithComparison
-      ((upperStar k₀ l g).mapHomologicalComplex (.up ℤ)) ((condensedRealization k₀ l Z).mapHomologicalComplex (.up ℤ))
-      ((condensedRealization k₀ l Y).mapHomologicalComplex (.up ℤ)) ((CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
-        (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))).mapHomologicalComplex (.up ℤ))
+      ((upperStar k₀ l g).mapHomologicalComplex (.up ℤ))
+          ((condensedRealization k₀ l Z).mapHomologicalComplex (.up ℤ))
+      ((condensedRealization k₀ l Y).mapHomologicalComplex (.up ℤ))
+          ((CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
+        (Scheme.Hom.geometricFiberMap g
+            (comp_over g (Spec (CommRingCat.of k₀))))).mapHomologicalComplex (.up ℤ))
       (Functor.uncurry.obj (nativeTensorTotal k₀ l Y))
-      (Functor.uncurry.obj (nativeTensorTotal k₀ l Z)) (nativePullTotalTensor k₀ l g) (condensedRealizationTotalTensorIso k₀ l Y) (condensedRealizationTotalTensorIso k₀ l Z)
-      (projection_model_complex_square (upperStar k₀ l g) (condensedRealization k₀ l Z) (condensedRealization k₀ l Y) (CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
-        (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))) (condensedRealizationUpperStarIso k₀ l g).symm).symm
+      (Functor.uncurry.obj (nativeTensorTotal k₀ l Z)) (nativePullTotalTensor k₀ l g)
+          (condensedRealizationTotalTensorIso k₀ l Y) (condensedRealizationTotalTensorIso k₀ l Z)
+      (projection_model_complex_square (upperStar k₀ l g) (condensedRealization k₀ l Z)
+          (condensedRealization k₀ l Y) (CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
+        (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))
+            (condensedRealizationUpperStarIso k₀ l g).symm).symm
       (fun X Y ↦ ((CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
-        (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))).mapCochainComplexμIso X Y).inv) P T) :
+        (Scheme.Hom.geometricFiberMap g
+            (comp_over g (Spec (CommRingCat.of k₀))))).mapCochainComplexμIso X Y).inv) P T) :
     DerivedPullTensorSquare k₀ l g (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj T) := by
   dsimp only [DerivedPullTensorSquare, nativeOpenPull, derivedCondensedRealization]
   exact_mod_proofs projection_derived_square_of_geometric_functor k₀ l g

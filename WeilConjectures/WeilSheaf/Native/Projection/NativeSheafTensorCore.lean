@@ -104,6 +104,7 @@ lemma projection_realization_pull_tensor (M N : ProEtaleWeilSheaf k₀ l Y) :
     (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor.congr_map
       (projection_nativePullSheafTensor_carrier_eq k₀ l g M N)
 
+omit [Fact (ringChar k₀ ≠ l)] in
 /-- Tensoring the two carrier pullback comparisons. -/
 lemma projection_upperStar_tensor_hom (M N : ProEtaleWeilSheaf k₀ l Y) :
     (condensedRealizationUpperStarIso k₀ l g).hom.app M ⊗ₘ

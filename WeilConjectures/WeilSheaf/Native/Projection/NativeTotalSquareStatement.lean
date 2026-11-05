@@ -69,6 +69,7 @@ abbrev condensedRealizationPullComplexIso :=
           (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))))
         (.up ℤ)).symm
 
+omit [Fact (ringChar k₀ ≠ l)] in
 @[simp]
 lemma condensedRealizationPullComplexIso_hom_app_f
     (P : CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ) (n : ℤ) :

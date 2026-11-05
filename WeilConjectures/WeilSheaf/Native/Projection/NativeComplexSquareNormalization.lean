@@ -40,13 +40,15 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
 
 variable (g : Z ⟶ Y) [g.IsOver (Spec (CommRingCat.of k₀))]
 
+omit [Fact (ringChar k₀ ≠ l)] in
 /-- Compare the whole complex square before taking its components. -/
 lemma projection_model_complex_square_eq_native :
     projection_model_complex_square (upperStar k₀ l g)
       (condensedRealization k₀ l Z) (condensedRealization k₀ l Y)
       (CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
         (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))
-      (condensedRealizationUpperStarIso k₀ l g).symm = condensedRealizationPullComplexIso k₀ l g := by
+      (condensedRealizationUpperStarIso k₀ l g).symm =
+        condensedRealizationPullComplexIso k₀ l g := by
   rfl
 
 /-- Transport the total square at the level of its comparison isomorphism. -/
@@ -54,15 +56,22 @@ lemma projection_total_square_in_model_form
     (P T : CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ)
     (h : TotalPullTensorSquare k₀ l g P T) :
     PullTensorSquareWithComparison
-      ((upperStar k₀ l g).mapHomologicalComplex (.up ℤ)) ((condensedRealization k₀ l Z).mapHomologicalComplex (.up ℤ))
-      ((condensedRealization k₀ l Y).mapHomologicalComplex (.up ℤ)) ((CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
-        (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))).mapHomologicalComplex (.up ℤ))
+      ((upperStar k₀ l g).mapHomologicalComplex (.up ℤ))
+          ((condensedRealization k₀ l Z).mapHomologicalComplex (.up ℤ))
+      ((condensedRealization k₀ l Y).mapHomologicalComplex (.up ℤ))
+          ((CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
+        (Scheme.Hom.geometricFiberMap g
+            (comp_over g (Spec (CommRingCat.of k₀))))).mapHomologicalComplex (.up ℤ))
       (Functor.uncurry.obj (nativeTensorTotal k₀ l Y))
-      (Functor.uncurry.obj (nativeTensorTotal k₀ l Z)) (nativePullTotalTensor k₀ l g) (condensedRealizationTotalTensorIso k₀ l Y) (condensedRealizationTotalTensorIso k₀ l Z)
-      (projection_model_complex_square (upperStar k₀ l g) (condensedRealization k₀ l Z) (condensedRealization k₀ l Y) (CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
-        (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))) (condensedRealizationUpperStarIso k₀ l g).symm).symm
+      (Functor.uncurry.obj (nativeTensorTotal k₀ l Z)) (nativePullTotalTensor k₀ l g)
+          (condensedRealizationTotalTensorIso k₀ l Y) (condensedRealizationTotalTensorIso k₀ l Z)
+      (projection_model_complex_square (upperStar k₀ l g) (condensedRealization k₀ l Z)
+          (condensedRealization k₀ l Y) (CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
+        (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))
+            (condensedRealizationUpperStarIso k₀ l g).symm).symm
       (fun X Y ↦ ((CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
-        (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))).mapCochainComplexμIso X Y).inv) P T := by
+        (Scheme.Hom.geometricFiberMap g
+            (comp_over g (Spec (CommRingCat.of k₀))))).mapCochainComplexμIso X Y).inv) P T := by
   exact PullTensorSquareWithComparison.of_symm_eq
     (projection_model_complex_square_eq_native k₀ l g).symm h
 
