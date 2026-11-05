@@ -8,7 +8,7 @@ public import WeilConjectures.WeilSheaf.UpperShriekGeometric
 public import WeilConjectures.WeilSheaf.LowerShriekForget
 public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationDerivedTensor
 public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationUpperStar
-public import WeilConjectures.WeilSheaf.Native.NativeCompactProjectionFormula
+public import WeilConjectures.WeilSheaf.Native.Projection.CompactProjectionIso
 
 /-! # Natural geometric comparisons for the compact projection formula -/
 
