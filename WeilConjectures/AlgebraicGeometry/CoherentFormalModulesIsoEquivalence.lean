@@ -78,8 +78,9 @@ theorem coherentFormalModules_iso_equivalence {X Y : Scheme.{u}}
   let v : (Q ⋙ P) ⋙ IY ≅ (𝟭 _) ⋙ IY :=
     eqToIso hQY ≪≫ Functor.isoWhiskerLeft IY (WY.mapIso aY) ≪≫
       Functor.rightUnitor IY ≪≫ (Functor.leftUnitor IY).symm
-  exact ⟨CategoryTheory.Equivalence.mk P Q
+  let T := CategoryTheory.Equivalence.mk P Q
     (Functor.fullyFaithfulCancelRight IX u).symm
-    (Functor.fullyFaithfulCancelRight IY v)⟩
+    (Functor.fullyFaithfulCancelRight IY v)
+  exact ⟨T⟩
 
 end AlgebraicGeometry
