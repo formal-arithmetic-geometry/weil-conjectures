@@ -169,18 +169,21 @@
 - Completion marker: `/home/ubuntu/u9/state/BZ585.DONE`.
 - Final documentation commit leaves Lean source identical to the green revision.
 
-# BZ613 in progress
+# BZ621 in progress
 
-- Branch: `u9/BZ613`; baseline: `b7a97a5ed`.
-- The user instructed continuation after the exact six-private-helper API patch.
-  Applied that patch, preserving comparison directions under Mathlib's reversed compositor.
-- All three public declaration headers are unchanged. Proof-local comparisons and
-  the coefficient comparison construction use the same orientation migration.
-- Next: validate the assigned module with `ucheck-bump`, repair residual proof errors,
-  then validate direct importers and one further layer before writing DONE.
-- Fix patterns and prior diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ613.md`.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
-- Assigned module is green at `c9323a20fd`: ucheck-bump rc=0, failed=0,
-  4264 jobs; target rebuilt in 32s on poolb:43.166.72.113.
-- Applied the same known compositor fix in `UnboundedCoefficientForgetfulAux`.
-  Validating that direct importer and its importer `ProperUnboundedBaseChangeForgetful`.
+- Branch: `u9/BZ621`; starting commit: `b7a97a5ed`.
+- The import-only remote check at `83e9112438` cleared five of six errors.
+- The user instructed continuation after the exact one-line identity-cast proposal.
+  Applied `cast (by rfl)` to the public formula's homotopy counit; its mathematical
+  morphism is unchanged. Existing binders, hypotheses, RHS, and docstrings are unchanged.
+- The brief and this progress file were reread; there are no new LEAD lines.
+- Next: validate the assigned module with `ucheck-bump`, then direct importers.
+- Fix patterns, inventories, and logs: `/home/ubuntu/u9/bz/FIXES-BZ621.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, heartbeat raises, or profiler probes.
+
+- BZ621 assigned-module validation is GREEN at `5c47fa596b`: `ucheck-bump`
+  rc=0, built=3, failed=0, on `poolb:43.157.184.90`.
+- Full log: `/home/ubuntu/u9/bz/BZ621-owned-green.log`.
+- Continuing with four direct importers: SequenceProjectionDerivedAdjunction,
+  SequencePushforwardLimitProjections, RingedDerivedAdjointLift, and
+  SequenceSiteCompletionProjectionSupplement.
