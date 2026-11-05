@@ -9,6 +9,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
 
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
