@@ -49,3 +49,21 @@
   all other declaration statements and all existing docstrings are unchanged.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 - Completion marker: `/home/ubuntu/u9/state/BZ130.DONE`.
+
+# BZ159 complete
+
+- Unit: BZ159; branch: `u9/BZ159`.
+- All four assigned modules passed `ucheck-bump` together: rc=0, failed=0, 4255 jobs.
+- Validated source commit: `f69c33ffa45cfbe76eeabefd69b81cd9b1b10343`.
+  This completion update changes only progress documentation.
+- Build host: `newsrv:/home/ubuntu/u9n/bumpw6`.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ159-final-full.log`.
+- Modules: DerivedSingleShiftNormalization, NativeDerivedBaseChange, Inertia,
+  CyclicDerivedActionRealization.
+- The user instructed continuation after the explicit equivalent statement API proposal;
+  the two cyclic-action statement references now use the forward composition isomorphism.
+  All other existing statement text and docstrings remain unchanged.
+- Fix patterns and whole-tree baseline occurrence counts:
+  `/home/ubuntu/u9/bz/FIXES-BZ159.md`.
+- No proof placeholders, trust bypasses, local Lean/Lake execution, or heartbeat increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ159.DONE`.
