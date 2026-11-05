@@ -252,7 +252,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
 import Mathlib.CategoryTheory.Triangulated.Yoneda
 import Mathlib.CategoryTheory.Abelian.DiagramLemmas.Four
 import Mathlib.Algebra.Homology.HomologicalComplexLimits
-import WeilConjectures.AlgebraicGeometry.CondensedLfpHomContinuity
 import WeilConjectures.AlgebraicGeometry.CondensedFiniteFreeDerivedHom
 import WeilConjectures.AlgebraicGeometry.Condensed.CondensedQcqsPushforwardContinuitySupplement
 import WeilConjectures.AlgebraicGeometry.CondensedFiniteFreeInternalHomColimits
