@@ -30,7 +30,6 @@ universe u
 open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
-
 set_option linter.auxLemma false in
 attribute [local instance 100000] DerivedCategoryModule._proof_1 DerivedCategoryModule._proof_2
 attribute [local irreducible] HasDerivedCategory.ofIsGrothendieckAbelian

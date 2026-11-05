@@ -8,7 +8,6 @@ module
 public import WeilConjectures.Compactification.FiniteFieldDatum.FiniteFieldFiberSupplement
 public import WeilConjectures.AlgebraicGeometry.AbsoluteFrobenius
 public import WeilConjectures.TraceFormula.FiniteFieldDatum.FrobeniusOpenSquare
-import Mathlib.Algebra.CharP.CharAndCard
 
 /-!
 # Relative Frobenius on a geometric fibre
