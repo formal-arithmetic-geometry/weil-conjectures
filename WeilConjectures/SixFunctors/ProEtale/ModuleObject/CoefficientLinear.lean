@@ -11,6 +11,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.Linear
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMapMulLeft
 public import WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperStarFromPointAdditive
 
 /-!
 # Constant global sections of pulled back condensed rings
@@ -40,18 +41,6 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
-
-/-- The inverse image `p_X^*` from condensed abelian groups to abelian sheaves on `X_proét` is
-additive, being a left adjoint. -/
-theorem upperStarFromPoint_additive (X : Scheme.{u}) : (upperStarFromPoint X).Additive := by
-  have adj : upperStarFromPoint X ⊣ _ := pointUpperStarLowerStarAdjunction.comp
-    (ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ X))
-  have : (upperStarFromPoint X).IsLeftAdjoint := adj.isLeftAdjoint
-  have := Functor.preservesZeroMorphisms_of_isLeftAdjoint (upperStarFromPoint X)
-  have : PreservesColimitsOfSize.{0, 0} (upperStarFromPoint X) :=
-    adj.leftAdjoint_preservesColimits
-  have := preservesBinaryBiproducts_of_preservesBinaryCoproducts (upperStarFromPoint X)
-  exact Functor.additive_of_preservesBinaryBiproducts _
 
 section General
 

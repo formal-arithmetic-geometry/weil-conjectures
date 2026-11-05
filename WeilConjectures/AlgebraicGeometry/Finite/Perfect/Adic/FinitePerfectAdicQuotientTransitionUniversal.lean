@@ -16,6 +16,8 @@ import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
 import WeilConjectures.Algebra.Homology.ChangeOfRingsKFlatGeneral
 import WeilConjectures.Algebra.Homology.RestrictScalarsIsoKFlat
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalarsStrictArrow
+public import WeilConjectures.AlgebraicGeometry.Finite.Coefficient.FiniteCoefficientSliceRestrictionKFlat
+public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicQuotientTransitionTranspose
 
 /-! # Universality of the localized quotient arrows
 
@@ -106,35 +108,6 @@ theorem completedAdicChange_isAcyclicTensorKFlat
     (completedAdicChange X φ) (completedAdicChangeData X φ).choose_spec.choose
     (completedAdicChangeData X φ).choose_spec.choose_spec.choose hP
 
-/-- The fixed-scalar encoding followed by restriction to a weakly etale chart carries K-flat
-complexes over the constant ring sheaf to K-flat complexes of sheaves of `B`-modules on the
-chart. This is true but not yet formalized.
-Source: Stacks Project, Tags 03CY, 06YN and 03DH.
-
-Proof sketch: the fixed-scalar encoding is an exact monoidal equivalence: the sheafified tensor
-product over the constant ring sheaf is the sheafified tensor product of sheaves of `B`-modules
-(compare the private `restrictionTensor` in
-`ProEtaleRestrictedTensorFiniteLocalConstancySupplement`, stated only for finite `B`).
-Monoidal equivalences preserve K-flatness
-(`Functor.kFlat_mapHomologicalComplex_obj_of_isEquivalence`), once `IsKFlatTensor` is
-identified with `kFlat`. Restriction to the weakly etale chart preserves K-flatness: `j_!` is
-exact and faithful on the chart, and the projection formula `j_!(K|_V ⊗ L) ≅ K ⊗ j_! L`
-reduces acyclicity of `K|_V ⊗ L` to that of `K ⊗ j_! L`; the repository only has `j_!` for
-monomorphisms (`ProEtale.localizationLowerShriek`) and no projection formula for it. -/
-theorem finiteCoefficientSliceRestriction_kFlat_of_constant
-    (X : Scheme.{t}) (B : Type t) [CommRing B]
-    (R : Sheaf (ProEt.topology X) CommRingCat.{t + 1})
-    (φ : adicConstantRing X B ⟶ R) (V : X.Etale)
-    (K : CochainComplex (SheafOfModules.{t + 1}
-      ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj R)) ℤ)
-    (hK : CochainComplex.IsAcyclicTensorKFlat (R := adicConstantRing X B)
-      ((Functor.mapHomologicalComplex (SheafOfModules.restrictScalars.{t + 1}
-        ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).map φ))
-          (.up ℤ)).obj K)) :
-    (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat
-      (((finiteCoefficientSliceRestriction X B R φ V).mapHomologicalComplex (.up ℤ)).obj K) := by
-  sorry
-
 /-- Fixed-scalar chart coordinates along an isomorphism `adicConstantRing X B ≅ R` carry
 K-flat complexes of `R`-modules to K-flat complexes of sheaves of `B`-modules on the chart.
 Source: Stacks Project, Tags 03CY, 06YN and 03DH.
@@ -179,30 +152,6 @@ theorem finitePerfectAdicQuotientStrictCoordinates_kFlat
     (completedAdicFiniteCommRing X d m) (φ m) (hφ m) V _ ha
   exact ObjectProperty.prop_of_iso _
     ((Functor.mapHomologicalComplexCompIso (Iso.refl (Ch ⋙ G)) (.up ℤ)).app P) hb
-
-/-- The transpose of a consecutive quotient arrow under extension of scalars along the
-consecutive quotient map is invertible. This is true but not yet formalized.
-Source: Stacks Project, Tags 06YY and 09C6.
-
-Proof sketch: by `hδ` and since sheafified pure tensors generate, the transpose sends
-`s ⊗ (b ⊗ x)` to `s q(b) ⊗ x`; it is the balancing isomorphism
-`A_n ⊗ (R_(n+1) ⊗ N) ≅ R_n ⊗ N`, restricted to the chart, where `φ` and `hcompat` identify
-`A_n ⊗ R_(n+1)` with `R_n`. Its inverse sends `b ⊗ x` to `1 ⊗ (b' ⊗ x)` for a local lift `b'`
-of `b`. -/
-theorem finitePerfectAdicQuotientTransition_transpose_isIso
-    (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
-    (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶
-      completedAdicFiniteCommRing X d n)
-    (hφ : ∀ n : ℕ, IsIso (φ n)) (hcompat : FinitePerfectModelsCompatible X d φ)
-    (V : X.Etale) (n : ℕ)
-    (δ : finitePerfectAdicQuotientStrictCoordinates X d φ V (n + 1) ⟶
-      finitePerfectAdicQuotientStrictCoordinates X d φ V n ⋙
-        finitePerfectAdicStepRestrict X d V n)
-    (hδ : FinitePerfectAdicQuotientTransition X d φ V n δ) (N : CompletedAdicModules X d) :
-    IsIso (((ProEtale.sheafExtendScalarsAdjunction
-      (RingHom.ulift.{t + 1, t + 1} (Ideal.Quotient.factorPowSucc d.ideal (n + 1)))
-        V.left).homEquiv _ _).symm (δ.app N)) := by
-  sorry
 
 /-- The ordinary quotient arrow localizes, on every K-flat complex, to a universal arrow for
 derived restriction of scalars along the consecutive quotient map.

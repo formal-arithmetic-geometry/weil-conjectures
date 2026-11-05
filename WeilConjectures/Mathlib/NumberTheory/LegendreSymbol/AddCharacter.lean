@@ -7,7 +7,11 @@ module
 
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.NumberTheory.LegendreSymbol.AddCharacter
+public import WeilConjectures.Mathlib.Algebra.Group.AddChar
 public import Mathlib.RingTheory.Trace.Basic
+public import Mathlib.LinearAlgebra.Dimension.Constructions
+public import Mathlib.LinearAlgebra.Dimension.Finite
+public import Mathlib.SetTheory.Cardinal.Finite
 
 /-!
 # Additive characters induced along the trace and nontrivial additive characters
@@ -135,5 +139,16 @@ theorem exists_ne_one_of_isAlgClosed (F K : Type*) [Field F] [Finite F] [Field K
   apply φ.injective
   have := DFunLike.congr_fun h1 a
   simpa [mulShift_apply] using this
+
+
+section Dedekind
+
+/-- Every additive character of a finite field `F` with values in a field is a multiplicative
+shift `x ↦ ψ (a x)` of a given primitive character `ψ`. -/
+theorem exists_mulShift_eq_of_isPrimitive {F : Type*} [Field F] [Finite F] {ψ : AddChar F K}
+    (hψ : ψ.IsPrimitive) (φ : AddChar F K) : ∃ a : F, ψ.mulShift a = φ :=
+  ((to_mulShift_inj_of_isPrimitive hψ).bijective_of_nat_card_le natCard_le).2 φ
+
+end Dedekind
 
 end AddChar

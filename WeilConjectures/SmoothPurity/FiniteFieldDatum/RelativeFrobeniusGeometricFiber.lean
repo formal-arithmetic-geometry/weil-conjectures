@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.Compactification.FiniteFieldDatum.FiniteFieldFiberSupplement
 public import WeilConjectures.AlgebraicGeometry.AbsoluteFrobenius
-import Mathlib.Algebra.CharP.CharAndCard
+public import WeilConjectures.TraceFormula.FiniteFieldDatum.FrobeniusOpenSquare
 
 /-!
 # Relative Frobenius on a geometric fibre
@@ -30,45 +30,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 
 namespace WeilConjectures.FiniteFieldDatum
-
-/-- The characteristic of the finite base vanishes on every scheme over that base.
-Source: Deligne, Weil II (1.1.14), p. 153; Stacks, Tag 03SM
-(blueprint: def-weil-relative-frobenius-geometric-fiber).
-Proof: the base has cardinality p^a with a positive, hence characteristic p.
-The structure morphism induces a unital map from the base field to global sections,
-which takes the equality p = 0 to the asserted equality. This also covers the zero ring. -/
-theorem model_characteristic (D : WeilConjectures.FiniteFieldDatum.{u})
-    {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of D.k₀)) :
-    (D.p : Γ(X, ⊤)) = 0 := by
-  classical
-  let _ : Fintype D.k₀ := Fintype.ofFinite D.k₀
-  have : Fact D.p.Prime := ⟨D.prime⟩
-  have : CharP D.k₀ D.p := charP_of_card_eq_prime_pow
-    (by simpa only [Nat.card_eq_fintype_card] using D.card_base.trans D.cardinality_eq)
-  let φ := (Scheme.ΓSpecIso (CommRingCat.of D.k₀)).inv ≫ f.appTop
-  simpa only [map_natCast, map_zero] using
-    congrArg φ.hom (CharP.cast_eq_zero D.k₀ D.p)
-
-/-- The q-power absolute Frobenius of the model is a morphism over the finite base.
-Source: Deligne, Weil II (1.1.14), p. 153; Stacks, Tag 0CC7
-(blueprint: def-weil-relative-frobenius-geometric-fiber).
-Proof: absolute Frobenius is natural in a scheme morphism, by the naturality of taking
-p^a-th powers on sections. On Spec k₀ it is the identity because c^q = c in k₀.
-Use q = p^a to conclude that its composite with f is f. -/
-theorem model_frobenius_over (D : WeilConjectures.FiniteFieldDatum.{u})
-    {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of D.k₀)) :
-    X.iterateFrobenius D.prime (D.model_characteristic f) D.a ≫ f = f := by
-  classical
-  let _ : Fintype D.k₀ := Fintype.ofFinite D.k₀
-  apply AlgebraicGeometry.ext_to_Spec
-  change (Scheme.ΓSpecIso (CommRingCat.of D.k₀)).inv ≫
-      (X.iterateFrobenius D.prime (D.model_characteristic f) D.a ≫ f).appTop = _
-  rw [Scheme.Hom.comp_appTop]
-  ext x
-  change (f.appTop ((Scheme.ΓSpecIso (CommRingCat.of D.k₀)).inv x)) ^
-    D.p ^ D.a = f.appTop ((Scheme.ΓSpecIso (CommRingCat.of D.k₀)).inv x)
-  rw [← D.cardinality_eq, ← D.card_base, Nat.card_eq_fintype_card, ← map_pow,
-    ← map_pow, FiniteField.pow_card]
 
 /-- Base change of the q-power absolute Frobenius of the model, with its actual morphism
 as data. Its source and target are the geometric fibre from the recorded dependency.

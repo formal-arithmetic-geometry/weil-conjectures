@@ -1040,21 +1040,18 @@ theorem restrictionTensor_mate_model
   have hiZ : IsIso betaZ := hiZ₀
   have hiQ : IsIso betaQ := hiQ₀
   let ψ := inv betaZ ≫ T'.map t' ≫ betaQ
+  have hu (M : completedIntegralModuleSheaves l E X D hl) (W : X.ProEtᵒᵖ) (x : M.val.obj W) :
+      (reductionUnit l E X D hl n M).val.app W x = sfReductionTensor l E X n M W 1 x :=
+    (scalarReductionExtension_adjunction l E X n).choose_spec M W x
   have ho : adj₀.homEquiv _ _ ψ = TP.map t ≫ b Q := by
     apply MateOrdinary.ordinary_square X l E n P Q Z t betaZ betaQ (b Q)
     · intro i j W x z
       have hh := hbZ i j W x z
-      dsimp only [reductionUnit] at hh
-      erw [(scalarReductionExtension_adjunction l E X n).choose_spec,
-        (scalarReductionExtension_adjunction l E X n).choose_spec,
-        (scalarReductionExtension_adjunction l E X n).choose_spec] at hh
+      rw [hu, hu, hu] at hh
       exact hh
     · intro i j W x y
       have hh := hbQ i j W x y
-      dsimp only [reductionUnit] at hh
-      erw [(scalarReductionExtension_adjunction l E X n).choose_spec,
-        (scalarReductionExtension_adjunction l E X n).choose_spec,
-        (scalarReductionExtension_adjunction l E X n).choose_spec] at hh
+      rw [hu, hu, hu] at hh
       exact hh
     · exact hb Q
   let repZ := m.target.representative.app (⟨F.obj P, hFP⟩, ⟨F.obj Z, hFZ⟩)
