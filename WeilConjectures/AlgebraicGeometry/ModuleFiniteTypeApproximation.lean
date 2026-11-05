@@ -51,6 +51,10 @@ private theorem isIso_over_of_le (X : Scheme.{u}) {E H : X.Modules} (j : E ⟶ H
 set_option backward.isDefEq.respectTransparency false in
 private theorem finiteType_of_top (X : Scheme.{u}) (M : X.Modules)
     [(M.over (⊤ : X.Opens)).IsFiniteType] : M.IsFiniteType := by
+  have (V : X.Opens) : HasWeakSheafify ((Opens.grothendieckTopology X).over V)
+      AddCommGrpCat.{u} := inferInstance
+  have (V : X.Opens) : ((Opens.grothendieckTopology X).over V).WEqualsLocallyBijective
+      AddCommGrpCat.{u} := inferInstance
   obtain ⟨D, hD⟩ := IsFiniteType.exists_localGeneratorsData (M.over (⊤ : X.Opens))
   let q : M.LocalGeneratorsData :=
     { I := (_ : Unit) × D.I
