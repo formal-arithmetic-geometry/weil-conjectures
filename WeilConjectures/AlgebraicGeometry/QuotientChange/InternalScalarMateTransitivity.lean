@@ -976,7 +976,6 @@ private theorem pull_normalized (a : Λ₀ ⟶ Λ₁) [IsMonHom a]
 
 attribute [local irreducible] Functor.mapHomotopyCategoryCompIso
   Functor.mapHomotopyCategoryIdIso Functor.mapDerivedCategoryNatIso
-  Functor.mapDerivedCategoryCompIso Functor.mapDerivedCategoryIdIso
   NatTrans.mapHomotopyCategory
 
 private theorem scalar_pull_paste (a : Λ₀ ⟶ Λ₁) [IsMonHom a]
