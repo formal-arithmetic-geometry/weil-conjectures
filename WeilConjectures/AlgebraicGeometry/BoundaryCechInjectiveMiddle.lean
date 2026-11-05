@@ -35,6 +35,10 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 
 namespace AlgebraicGeometry.Scheme.Modules
 
+private local instance boundaryCechModuleProducts (R : Type u) [Ring R] (J : Type v)
+    [Small.{u} J] : HasLimitsOfShape (Discrete J) (ModuleCat.{u} R) :=
+  ModuleCat.hasLimitsOfShape
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 private theorem local_lift_cocycle (X : Scheme.{u})
@@ -52,8 +56,6 @@ private theorem local_lift_cocycle (X : Scheme.{u})
           S.X₂.val.presheaf.map (Pi.π (fun k : Fin 2 ↦ U (y k)) 1).op (x (y 1)) -
             S.X₂.val.presheaf.map (Pi.π (fun k : Fin 2 ↦ U (y k)) 0).op (x (y 0)) := by
   classical
-  let inst (R : Type u) [Ring R] (J : Type v) [Small.{u} J] :
-      HasLimitsOfShape (Discrete J) (ModuleCat.{u} R) := ModuleCat.hasLimitsOfShape
   let A := (cechComplexFunctor U).obj (presheafModuleCat (X := X) S.X₁)
   let B := (cechComplexFunctor U).obj (presheafModuleCat (X := X) S.X₂)
   let f := (cechComplexFunctor U).map
