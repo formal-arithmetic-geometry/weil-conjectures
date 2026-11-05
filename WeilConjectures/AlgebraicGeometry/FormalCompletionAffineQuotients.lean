@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.FormalAffineSectionLimit
 public import Mathlib.RingTheory.AdicCompletion.Functoriality
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import all WeilConjectures.AlgebraicGeometry.CoherentMapReductionTorsionKernel
 
