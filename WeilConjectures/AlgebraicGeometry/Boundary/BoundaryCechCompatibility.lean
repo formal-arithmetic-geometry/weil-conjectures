@@ -100,7 +100,6 @@ private theorem rightDerived_boundary_naturality
       comm₃ := singleTrianglePlus_comm₃ hS hT f }
   let G := F.rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.ι
   have h := (DerivedCategory.homologyFunctor _ 0).homologySequenceδ_naturality
-    (G.mapTriangle.obj hS.singleTrianglePlus) (G.mapTriangle.obj hT.singleTrianglePlus)
     (G.mapTriangle.map τ) (n : ℤ) ((n + 1 : ℕ) : ℤ) (Nat.cast_add_one n).symm
   change (DerivedCategory.homologyFunctor _ (n : ℤ)).map (G.map τ.hom₃) ≫
       DerivedCategory.HomologySequence.δ (G.mapTriangle.obj hT.singleTrianglePlus)
