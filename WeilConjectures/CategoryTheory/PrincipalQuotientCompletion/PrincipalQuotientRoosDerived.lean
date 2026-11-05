@@ -146,7 +146,6 @@ private noncomputable def pointwise_change_iso
   intro X
   dsimp [Functor.RightExtension.coneAt, Functor.RightExtension.mk, Φ, k]
   simp [Category.assoc]
-  rfl
 
 private theorem resolving_class_left_derived
     (A : Type u) [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]
@@ -298,25 +297,29 @@ private noncomputable def quotientTowerHomotopy
     {X Y : CochainComplex (ringedSiteModules.{r}
       (SheafOfModules.derivedChangeRingIndependentCoefficients J R)) ℤ}
     {f g : X ⟶ Y} (h : Homotopy f g) :
-    Homotopy ((quotientTower R t).map f) ((quotientTower R t).map g) where
-  hom i j :=
-    { app n := (HomologicalComplex.mapBifunctorMapHomotopy₂
-        (𝟙 ((principalReductionTower R t).obj n)) h
-        (MonoidalCategory.curriedTensor _) (.up ℤ)).hom i j
-      naturality n m a := tensorHomotopy_natural _
-        ((principalReductionTower R t).map a) h i j }
-  zero i j hij := by
-    apply NatTrans.ext
-    funext n
-    exact (HomologicalComplex.mapBifunctorMapHomotopy₂
-      (𝟙 ((principalReductionTower R t).obj n)) h
-      (MonoidalCategory.curriedTensor _) (.up ℤ)).zero i j hij
-  comm i := by
-    apply NatTrans.ext
-    funext n
-    exact (HomologicalComplex.mapBifunctorMapHomotopy₂
-      (𝟙 ((principalReductionTower R t).obj n)) h
-      (MonoidalCategory.curriedTensor _) (.up ℤ)).comm i
+    Homotopy ((quotientTower R t).map f) ((quotientTower R t).map g) := by
+  let instPresheafCoproducts (I : Type r) : HasColimitsOfShape (Discrete I)
+      (PresheafOfModules.{r} (SheafOfModules.derivedChangeRingIndependentCoefficients J R).obj) :=
+    PresheafOfModules.hasColimitsOfShape _ _
+  exact
+    { hom i j :=
+        { app n := (HomologicalComplex.mapBifunctorMapHomotopy₂
+            (𝟙 ((principalReductionTower R t).obj n)) h
+            (MonoidalCategory.curriedTensor _) (.up ℤ)).hom i j
+          naturality n m a := tensorHomotopy_natural _
+            ((principalReductionTower R t).map a) h i j }
+      zero i j hij := by
+        apply NatTrans.ext
+        funext n
+        exact (HomologicalComplex.mapBifunctorMapHomotopy₂
+          (𝟙 ((principalReductionTower R t).obj n)) h
+          (MonoidalCategory.curriedTensor _) (.up ℤ)).zero i j hij
+      comm i := by
+        apply NatTrans.ext
+        funext n
+        exact (HomologicalComplex.mapBifunctorMapHomotopy₂
+          (𝟙 ((principalReductionTower R t).obj n)) h
+          (MonoidalCategory.curriedTensor _) (.up ℤ)).comm i }
 
 variable [HasDerivedCategory.{w}
   (ringedSiteModules.{r} (SheafOfModules.derivedChangeRingIndependentCoefficients J R))]
