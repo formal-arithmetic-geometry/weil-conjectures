@@ -140,7 +140,6 @@ splits the same idempotent as an object of this full subcategory. The explicit
 isomorphism between the two splittings, and repleteness, put the retract in it.
 6. For S ≤ S' ≤ Loc(S), the intersection formulas give both inclusions between
 Loc(S) and Loc(S'), so antisymmetry gives equality. -/
-set_option maxHeartbeats 400000 in
 theorem localizingClosure_exists
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ]
     (X : Scheme.{u})
