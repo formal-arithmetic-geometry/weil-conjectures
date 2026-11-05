@@ -117,12 +117,14 @@ theorem ringKrullDim_adjoin_range_add_one_le {K L C R : Type*} [Field K] [Field 
     | tmul e l =>
       rw [Algebra.TensorProduct.productMap_apply_tmul]
       refine D.mul_mem ?_ (D.algebraMap_mem l)
-      induction e with
-      | add x y hx hy => rw [map_add]; exact D.add_mem hx hy
-      | tmul a b =>
+      refine TensorProduct.inductionOn e ?_ ?_
+      · intro a b
         rw [Algebra.TensorProduct.lift_tmul]
         refine D.mul_mem ?_ (Algebra.subset_adjoin ⟨b, rfl⟩)
         exact D.algebraMap_mem (ρ a)
+      · intro x y hx hy
+        rw [map_add]
+        exact D.add_mem hx hy
   have hDΦ (y : R) (hy : y ∈ D) : ∃ x, Φ x = y := by
     induction hy using Algebra.adjoin_induction with
     | mem y hy =>
