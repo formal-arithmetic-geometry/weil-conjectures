@@ -46,6 +46,8 @@ lemma derivedReductionStep_compatible
     (integersModPowReduction X ℓ E (n + 1))
     (integersModPowReduction_comp_integersModPowTransition X ℓ E (n + 1)) s
 
+set_option trace.profiler true in
+set_option trace.profiler.threshold 1000 in
 /-- A property stable under reduction can be imposed on every reduction of the lift. -/
 theorem exists_forall_isIso_property_derivedReduction_map
     {K L : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})

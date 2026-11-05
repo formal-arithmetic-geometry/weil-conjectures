@@ -26,7 +26,8 @@ private lemma map_inv_comm_of_hom_comm
     F.map e.inv ≫ v = τ ≫ e.inv := by
   apply (cancel_mono e.hom).mp
   rw [Category.assoc, h, ← Functor.map_comp_assoc, Iso.inv_hom_id,
-    CategoryTheory.Functor.map_id, Category.id_comp, Category.assoc, Iso.inv_hom_id, Category.comp_id]
+    CategoryTheory.Functor.map_id, Category.id_comp, Category.assoc, Iso.inv_hom_id,
+    Category.comp_id]
 
 namespace AlgebraicGeometry.Etale
 

@@ -53,7 +53,7 @@ theorem eq_of_isIntegralSmoothOrientation
         ((Mod.extendScalars (integersModPowReduction X.left ℓ E.1 (n + 1))).leftDerivedFunctor.obj
           W.obj)) := fun n ↦ finite_shift_hom_integralOrientation_reduction f d (n + 1)
   apply (ObjectProperty.fullyFaithfulι _).map_injective
-  apply eq_of_derivedReduction_map_eq hW
+  apply eq_of_derivedReduction_map_eq (K := K.obj) (L := W.obj) hW
   intro n
   have hred := (finiteEtaleReadingFullyFaithful (etaleOriginReading ℓ E.1 (n + 1) X)).map_injective
     ((hφ n).trans (hψ n).symm)
