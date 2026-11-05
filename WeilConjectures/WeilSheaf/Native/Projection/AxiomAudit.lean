@@ -23,6 +23,7 @@ import all WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareFromNa
 import all WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareFromNativeRestriction
 import all WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareFromNativeComparisons
 import all WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareFromOrdinaryComparison
+import all WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareFromGeometricFunctor
 import all WeilConjectures.WeilSheaf.Native.Projection.DerivedModelNormalizations
 import all WeilConjectures.WeilSheaf.Native.Projection.NativeModelFamilyNormalization
 import all WeilConjectures.WeilSheaf.Native.Projection.DerivedSquareFromTotalFunctors
@@ -32,7 +33,7 @@ import all WeilConjectures.WeilSheaf.Native.Projection.NativeModelNormalization
 import all WeilConjectures.WeilSheaf.Native.Projection.NativePullTensorNormalization
 import all WeilConjectures.WeilSheaf.Native.Projection.ModelSquareCancellation
 import all WeilConjectures.WeilSheaf.Native.Projection.TotalSquareToModel
-import Lean.Util.CollectAxioms
+import Lean
 
 /-! # Dependency audit for the native proper projection formula
 
@@ -50,10 +51,14 @@ The remote build records the remaining proof leaves reachable from the theorem.
 #print axioms AlgebraicGeometry.ProEtaleWeilSheaf.isIso_projectionMap_derivedCondensedRealization
 
 open Lean in
-run_cmd do
+run_elab do
   let env ← getEnv
   let mut seen : NameSet := {}
   let target := `AlgebraicGeometry.WeilComplex.nonempty_rightDerivedLowerStar_nativeDerivedTensor_iso
+  let axioms ← collectAxioms target
+  for name in axioms do
+    unless #[`propext, `Classical.choice, `Quot.sound, `sorryAx].contains name do
+      throwError "Unexpected axiom: {name}"
   let mut pending := #[target]
   let mut leaves : Array Name := #[]
   let mut unavailable : Array Name := #[]
@@ -65,7 +70,7 @@ run_cmd do
     seen := seen.insert name
     unless (← collectAxioms name).contains ``sorryAx do
       continue
-    if let some info := (env.setExporting false).find? name then
+    if let some info := env.checked.get.find? name then
       if info.value? true |>.isNone then
         unavailable := unavailable.push name
       let deps := info.type.getUsedConstants ++
@@ -79,5 +84,9 @@ run_cmd do
     logInfo m!"K5 existing proof leaf: {name}"
   for name in unavailable.qsort Name.lt do
     logInfo m!"K5 imported dependency with unavailable proof body: {name}"
+    if let some idx := env.getModuleIdxFor? name then
+      logInfo m!"K5 missing import all: {env.header.moduleNames[idx.toNat]!}"
   logInfo <| m!"K5 visible direct sorry dependencies: {leaves.size}; " ++
     m!"unavailable bodies: {unavailable.size}"
+  unless unavailable.isEmpty do
+    throwError "K5 dependency audit needs the imported proof bodies listed above"
