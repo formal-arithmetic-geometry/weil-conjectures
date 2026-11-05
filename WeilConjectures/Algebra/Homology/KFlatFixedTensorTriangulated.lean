@@ -7,6 +7,8 @@ module
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 public import WeilConjectures.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 public import WeilConjectures.CategoryTheory.RingedSiteModules
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorTriangulated
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
