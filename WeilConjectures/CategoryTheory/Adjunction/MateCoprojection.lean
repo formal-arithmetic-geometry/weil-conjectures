@@ -35,8 +35,6 @@ namespace CategoryTheory
 
 open MonoidalCategory
 
-
-
 universe v₁ v₂ v₃ v₄ u₁ u₂ u₃ u₄
 
 variable {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄}
@@ -47,7 +45,15 @@ variable {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄}
 /-- Let `α : G ⋙ L₂ ⟶ L₁ ⋙ H` be a square whose mate is invertible at `d`. If `G` carries
 `y : L₁ c ⟶ d` to `y' : L₂ e ⟶ H d` up to isomorphisms `ψ : G c ≅ e` and `σ : H d ≅ H d`, then
 it carries the transpose `c ⟶ R₁ d` of `y` to the transpose `e ⟶ R₂ (H d)` of `y'` up to
-isomorphisms. -/
+isomorphisms. The hypothesis and the conclusion are the commutative squares
+```
+L₂ (G c) --α--> H (L₁ c) --H y--> H d        G c --G (y♭)--> G (R₁ d)
+   |                               |           |                 |
+L₂ ψ                               σ           ψ                 φ
+   v                               v           v                 v
+L₂ e  ------------y'------------> H d         e  ----y'♭----> R₂ (H d)
+```
+where `♭` denotes the transposes. -/
 theorem Adjunction.exists_iso_map_homEquiv_comp_eq (α : TwoSquare G L₁ L₂ H) {c : C} {e : E}
     {d : D} [IsIso ((mateEquiv adj₁ adj₂ α).natTrans.app d)]
     (y : L₁.obj c ⟶ d) (y' : L₂.obj e ⟶ H.obj d) (ψ : G.obj c ≅ e) (σ : H.obj d ≅ H.obj d)
@@ -71,11 +77,28 @@ set_option backward.isDefEq.respectTransparency false in
 tensor functors on `C`, `D`, `PC : D ⥤ C`, `PE : F ⥤ E` pullbacks, and
 `pf : L₂ M ⊗ K ⟶ L₂ (M ⊗ PE K)` an invertible projection map on `E, F`, natural in `M`. Assume
 a projection formula `e : L₁ M ⊗ K ≅ L₁ (M ⊗ PC K)` on `C, D` lies over `pf` through comparisons
-`τC`, `τD` of the tensor functors and `γ` of the pullbacks, and `TD` has a left unit `one`
+`τC`, `τD` of the tensor functors and `γ` of the pullbacks, that is, the square
+```
+H (L₁ M ⊗ K) ----H e----> H (L₁ (M ⊗ PC K)) --α⁻¹--> L₂ (G (M ⊗ PC K))
+     |                                                      |
+    τD                                                L₂ (τC ≫ G M ◁ γ)
+     v                                                      v
+H (L₁ M) ⊗ H K --α⁻¹ ▷ _--> L₂ (G M) ⊗ H K --pf--> L₂ (G M ⊗ PE (H K))
+```
+commutes, and `TD` has a left unit `one`
 (with `H one ≅ 𝟙_ F`) and `TC` a symmetry.
 
 Then there is a co-projection map `PC d ⊗ R₁ one ⟶ R₁ d`, natural in `d`, which `G` carries
-to the co-projection map `PE (H d) ⊗ R₂ 𝟙 ⟶ R₂ (H d)` of `E, F` up to isomorphisms. -/
+to the co-projection map `PE (H d) ⊗ R₂ 𝟙 ⟶ R₂ (H d)` of `E, F` up to isomorphisms. That is,
+```
+G (PC d ⊗ R₁ one) ----G π_d----> G (R₁ d)
+        |                           |
+        ψ                           φ
+        v                           v
+PE (H d) ⊗ R₂ 𝟙 ------------> R₂ (H d)
+```
+commutes, the bottom map being the transpose of
+`L₂ (PE (H d) ⊗ R₂ 𝟙) ≅ L₂ (R₂ 𝟙 ⊗ PE (H d)) ≅ L₂ R₂ 𝟙 ⊗ H d ⟶ 𝟙 ⊗ H d ≅ H d`. -/
 theorem Adjunction.exists_natTrans_map_comp_eq_homEquiv_coprojection
     (TC : C × C ⥤ C) (TD : D × D ⥤ D) (PC : D ⥤ C) (PE : F ⥤ E)
     (α : G ⋙ L₂ ≅ L₁ ⋙ H)
@@ -168,8 +191,7 @@ theorem Adjunction.exists_natTrans_map_comp_eq_homEquiv_coprojection
   have hε : α.hom.app (R₁.obj one) ≫ H.map (adj₁.counit.app one) ≫ υ.hom =
       L₂.map a.hom ≫ adj₂.counit.app (𝟙_ F) := by
     have := mateEquiv_counit adj₁ adj₂ (TwoSquare.mk _ _ _ _ α.hom) one
-    simp only [a, Iso.trans_hom, asIso_hom, Functor.mapIso_hom, L₂.map_comp, Category.assoc,
-]
+    simp only [a, Iso.trans_hom, asIso_hom, Functor.mapIso_hom, L₂.map_comp, Category.assoc]
     refine ((reassoc_of% this) υ.hom).symm.trans ?_
     exact congrArg (L₂.map _ ≫ ·) (adj₂.counit_naturality υ.hom).symm
   -- the projection map, at `a`
