@@ -392,7 +392,7 @@ theorem exists_subalgebra_basicOpen_subset_etaleLocus [Algebra.FiniteType k A] [
       ∃ c : R, ¬ IsNilpotent (c : A) ∧
         ↑(PrimeSpectrum.basicOpen (c : A)) ⊆ Algebra.etaleLocus R A := by
   let G := Subgroup.zpowers σ
-  have : Finite G := (finite_zpowers.2 hσ).to_subtype
+  have : Finite G := finite_zpowers.2 hσ
   let R := FixedPoints.subalgebra k A G
   have : Algebra.IsInvariant R A G := ⟨fun b hb ↦ ⟨⟨b, hb⟩, rfl⟩⟩
   have : Algebra.IsIntegral R A := Algebra.IsInvariant.isIntegral R A G

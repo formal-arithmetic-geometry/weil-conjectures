@@ -247,7 +247,8 @@ noncomputable def bifunctorHomOpFunctorCommShiftIso (n : ℤ) :
 noncomputable instance : (bifunctorHomOpFunctor H Y).CommShift ℤ where
   commShiftIso := bifunctorHomOpFunctorCommShiftIso H Y
   commShiftIso_zero := by
-    ext K
+    ext : 2
+    funext K
     apply Quiver.Hom.unop_inj
     simp only [Functor.CommShift.isoZero_hom_app, bifunctorHomOpFunctorCommShiftIso,
       NatIso.ofComponents_hom_app, Iso.op_hom, Quiver.Hom.unop_op, unop_comp,
@@ -261,7 +262,8 @@ noncomputable instance : (bifunctorHomOpFunctor H Y).CommShift ℤ where
     erw [bifunctorHomObj_XIsoOfEq_hom_π]
     rfl
   commShiftIso_add a b := by
-    ext K
+    ext : 2
+    funext K
     apply Quiver.Hom.unop_inj
     rw [Functor.CommShift.isoAdd_hom_app, ← shiftFunctorAdd'_eq_shiftFunctorAdd,
       ← shiftFunctorAdd'_eq_shiftFunctorAdd,
