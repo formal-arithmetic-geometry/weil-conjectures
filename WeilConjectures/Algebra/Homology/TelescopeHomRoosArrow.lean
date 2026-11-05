@@ -331,6 +331,16 @@ end TelescopeHomRoosProof
 
 variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
 
+private local instance (O : Sheaf J CommRingCat.{u}) :
+    HasColimitsOfShape (Discrete ℕ) (ringedSiteComplex O) := by
+  let A := SheafOfModules.{u}
+    ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj O)
+  have : HasColimitsOfShape (Discrete ℕ) A := inferInstance
+  refine ⟨fun F ↦ ?_⟩
+  have (n : ℤ) : HasColimit (F ⋙ HomologicalComplex.eval A (.up ℤ) n) :=
+    HasColimitsOfShape.has_colimit _
+  exact ⟨⟨⟨_, HomologicalComplex.isColimitCoconeOfHasColimitEval F⟩⟩⟩
+
 namespace TelescopeHomRoosProof
 
 open SignedDoubleHomCone.Calculation
@@ -404,15 +414,6 @@ private noncomputable def ordinaryConeIsLimit (O : Sheaf J CommRingCat.{u})
 
 end TelescopeHomRoosProof
 
-private local instance (O : Sheaf J CommRingCat.{u}) (I : Type u) :
-    HasColimitsOfShape (Discrete I) (ringedSiteComplex O) := by
-  let A := SheafOfModules.{u}
-    ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj O)
-  have : HasColimitsOfShape (Discrete I) A := inferInstance
-  refine ⟨fun F ↦ ?_⟩
-  have (n : ℤ) : HasColimit (F ⋙ HomologicalComplex.eval A (.up ℤ) n) :=
-    HasColimitsOfShape.has_colimit _
-  exact ⟨⟨⟨_, HomologicalComplex.isColimitCoconeOfHasColimitEval F⟩⟩⟩
 
 set_option maxHeartbeats 400000 in
 -- The canonical sheaf limit instances require more than the default elaboration budget.
