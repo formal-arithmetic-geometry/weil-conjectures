@@ -295,7 +295,7 @@ Weil complexes is right adjoint to the direct image with compact support `Rf₀!
 `Rf^! ≅ f^*(d)[2d]`. The purity map `f^*(d)[2d] ⟶ Rf^!`
 (`AlgebraicGeometry.WeilComplex.exists_natTrans_upperShriek_isIso_forget_of_smooth`) is an
 isomorphism, since forgetting the Weil structures reflects isomorphisms. -/
-theorem nonempty_derivedLowerShriek_adjunction_of_smooth (d : ℕ)
+theorem nonempty_derivedLowerShriek_adjunction_of_smooth_of_isSeparated (d : ℕ)
     [SmoothOfRelativeDimension d f] [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))] :
     Nonempty (derivedLowerShriek k₀ l f ⊣
       upperStar f ⋙ tateTwist k₀ l X d ⋙ shiftFunctor (WeilComplex k₀ l X) (2 * d : ℤ)) := by
@@ -316,6 +316,25 @@ theorem nonempty_derivedLowerShriek_adjunction_of_smooth (d : ℕ)
   have : IsIso γ := NatIso.isIso_of_isIso_app γ
   exact ⟨(derivedLowerShriekUpperShriekAdjunction f).ofNatIsoRight (asIso γ).symm⟩
 
+/-- **Smooth purity for Weil complexes** (blueprint: `sk-thm-purity-transport`, at the coefficient
+stage `ℚ̄_ℓ` with Weil structures): for a smooth separated morphism `f : X ⟶ Y` of pure relative
+dimension `d` of `k₀`-schemes of finite type, the twisted shifted pullback `K ↦ f^* K(d)[2d]` of
+Weil complexes is right adjoint to the direct image with compact support `Rf₀!`; that is,
+`Rf^! ≅ f^*(d)[2d]`.
+
+This input of the chapter on smooth purity is not formalized for Weil complexes yet; it is stated
+with `sorry` (cross-section rule). 
+
+This is the statement of slopmaster2 (no separatedness of the base). The separated case is proved in
+`AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_adjunction_of_smooth_of_isSeparated`; this general form is still
+stated with `sorry` because the affine-line (Thom) route of `WeilConjectures.WeilSheaf.AffineLineSmoothAdjunction`
+uses it without separatedness of the base. -/
+theorem nonempty_derivedLowerShriek_adjunction_of_smooth (d : ℕ)
+    [SmoothOfRelativeDimension d f] :
+    Nonempty (derivedLowerShriek k₀ l f ⊣
+      upperStar f ⋙ tateTwist k₀ l X d ⋙ shiftFunctor (WeilComplex k₀ l X) (2 * d : ℤ)) :=
+  sorry
+
 variable {f} in
 /-- **The exceptional inverse image of `ℚ̄_ℓ` along a smooth morphism** (blueprint:
 `cor-pur-adic-and-rational-smooth-dualizing-complexes`, at the coefficient stage `ℚ̄_ℓ`): for a
@@ -330,7 +349,7 @@ theorem nonempty_rightAdjoint_obj_adicConstant_iso_of_smooth (d : ℕ)
     Nonempty (G.obj (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l Y)) ≅
       ((tateTwist k₀ l X d).obj
         (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)))⟦(2 * d : ℤ)⟧) := by
-  obtain ⟨adj'⟩ := nonempty_derivedLowerShriek_adjunction_of_smooth (k₀ := k₀) (l := l) f d
+  obtain ⟨adj'⟩ := nonempty_derivedLowerShriek_adjunction_of_smooth_of_isSeparated (k₀ := k₀) (l := l) f d
   let e : (upperStar f).obj (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l Y)) ≅
       WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X) :=
     (ObjectProperty.isoMk _ (((ProEtaleWeilSheaf.upperStar k₀ l f).mapDerivedCategorySingleFunctor
