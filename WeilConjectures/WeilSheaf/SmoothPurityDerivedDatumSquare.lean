@@ -58,14 +58,14 @@ lemma purity_derived_flat_datum_square
     (Mod.extendScalars (coefficientMap a X))
     L(Mod.extendScalars (coefficientMap a Y)) L((g)^*⟦Λ'⟧) L((g)^*⟦Λ⟧)
     L(Mod.extendScalars (coefficientMap a X))
-    (Mod.extendScalars (coefficientMap a Y)).puritySingleComparison
-    ((g)^*⟦Λ'⟧).puritySingleComparison ((g)^*⟦Λ⟧).puritySingleComparison
-    (Mod.extendScalars (coefficientMap a X)).puritySingleComparison
+    (purityExtendScalarsSingleComparison a Y)
+    (purityPullbackSingleComparison Λ' g) (purityPullbackSingleComparison Λ g)
+    (purityExtendScalarsSingleComparison a X)
     (derivedUpperStarExtendScalarsIso a g).inv (pullIso a g).inv u v r s
     (derivedUpperStarExtendScalarsIso_inv_app_single_comp_comparison a g M) h
-  simpa only [Functor.puritySingleComparison_app_eq_exact,
-    Functor.puritySingleComparison_app_eq_of_flat _ hM,
-    Functor.puritySingleComparison_app_eq_of_flat _ hM',
+  simpa only [purityPullbackSingleComparison_app_eq_exact,
+    purityExtendScalarsSingleComparison_app_eq_of_flat _ _ hM,
+    purityExtendScalarsSingleComparison_app_eq_of_flat _ _ hM',
     leftDerivedUpperStarIsoMapDerivedCategory, Category.assoc] using hs
 
 end AlgebraicGeometry.ProEtale.CondensedRing

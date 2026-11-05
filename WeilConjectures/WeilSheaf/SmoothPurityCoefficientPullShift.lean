@@ -55,6 +55,10 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
 
 instance purity_commShift_derivedComapLeftDerivedUpperStarIso_hom :
     (derivedComapLeftDerivedUpperStarIso a g).hom.CommShift ℤ := by
+  have : NatTrans.CommShift ((g)^*⟦Λ⟧).leftDerivedFunctorIsoMapDerivedCategory.hom ℤ :=
+    commShift_leftDerivedUpperStarIsoMapDerivedCategory_hom Λ g
+  have : NatTrans.CommShift ((g)^*⟦Λ'⟧).leftDerivedFunctorIsoMapDerivedCategory.hom ℤ :=
+    commShift_leftDerivedUpperStarIsoMapDerivedCategory_hom Λ' g
   dsimp only [derivedComapLeftDerivedUpperStarIso, Iso.trans_hom,
     Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom, Iso.symm_hom,
     Functor.mapDerivedCategorySquareIso]

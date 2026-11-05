@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.WeilSheaf.SmoothPuritySingleCochainNormalization
-public import WeilConjectures.WeilSheaf.SmoothPuritySingleExactNormalization
+public import WeilConjectures.WeilSheaf.SmoothPuritySingleModuleComparison
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushResidueIsoComplex
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.NonFlatPullMonoidal
 
@@ -31,11 +31,11 @@ ordinary coefficient/pullback comparison through the canonical single maps. -/
 lemma derivedUpperStarExtendScalarsIso_inv_app_single_comp_comparison
     (M : Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) :
     (derivedUpperStarExtendScalarsIso a g).inv.app ((DerivedCategory.singleFunctor _ 0).obj M) ≫
-        L(Mod.extendScalars (coefficientMap a X)).map (((g)^*⟦Λ⟧).puritySingleComparison.app M) ≫
-        (Mod.extendScalars (coefficientMap a X)).puritySingleComparison.app ((g)^*⟦Λ⟧.obj M) =
+        L(Mod.extendScalars (coefficientMap a X)).map ((purityPullbackSingleComparison Λ g).app M) ≫
+        (purityExtendScalarsSingleComparison a X).app ((g)^*⟦Λ⟧.obj M) =
       L((g)^*⟦Λ'⟧).map
-          ((Mod.extendScalars (coefficientMap a Y)).puritySingleComparison.app M) ≫
-        ((g)^*⟦Λ'⟧).puritySingleComparison.app
+          ((purityExtendScalarsSingleComparison a Y).app M) ≫
+        (purityPullbackSingleComparison Λ' g).app
           ((Mod.extendScalars (coefficientMap a Y)).obj M) ≫
         (DerivedCategory.singleFunctor _ 0).map ((pullIso a g).inv.app M) := by
   have hfac (K) := derivedUpperStarExtendScalarsIso_inv_app_Qh_comp_counit a g K
@@ -55,6 +55,7 @@ lemma derivedUpperStarExtendScalarsIso_inv_app_single_comp_comparison
     L(Mod.extendScalars (coefficientMap a Y)) L((g)^*⟦Λ'⟧) L((g)^*⟦Λ⟧)
     L(Mod.extendScalars (coefficientMap a X))
     _ _ _ _ (derivedUpperStarExtendScalarsIso a g).inv (pullIso a g).inv hcochain M
-  simpa only [Functor.puritySingleComparisonOfCochain_leftDerivedCounit] using hsingle
+  simpa only [Functor.puritySingleComparisonOfCochain_leftDerivedCounit,
+    purityPullbackSingleComparison, purityExtendScalarsSingleComparison] using hsingle
 
 end AlgebraicGeometry.ProEtale.CondensedRing
