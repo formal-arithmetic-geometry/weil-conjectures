@@ -207,41 +207,32 @@
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
 - This final commit changes only progress documentation; Lean sources match the green build.
 
-# BZ740 complete
+# BZ740 in progress
 
 - Branch: `u9/BZ740`; starting commit: `f271bd088`.
-- Assigned module `WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorUnitNormalization`
-  passed `ucheck-bump`: rc=0, failed=0, 3927 jobs; target rebuilt in 48 seconds.
-- Validated source commit: `814682ae46`. The assigned target also rebuilt successfully
-  in the downstream batch at `28be0e52ca`.
+- Reread the brief and progress notes on continuation; no new LEAD lines.
+- The import-only remote build fixed both private-helper errors, leaving the public Qh/Q mismatch.
 - The user instructed continuation after the exact one-line identity-cast proposal.
-  That patch and two Localization imports are the only Lean changes.
-- All other statement text, proof bodies, docstrings, and heartbeat settings are unchanged.
-  Both recorded rewrite rules exactly reproduce the source from the baseline.
-- Direct importer `DerivedPullbackTensorUnitKFlat` was checked and fails in a kept
-  public theorem's hμ binder (line 359), requiring further statement-level Qh/Q conversions.
-  It and next-layer `DerivedPullbackTensorUnit` are deferred under the kept-statement rule.
-  Neither downstream file was edited.
-- Full logs: `/home/ubuntu/u9/bz/BUILD-BZ740-assigned-green-full.log` and
-  `/home/ubuntu/u9/bz/BUILD-BZ740-downstream1-full.log`.
-- Fix patterns, exact diagnostics, and occurrence counts: `/home/ubuntu/u9/bz/FIXES-BZ740.md`.
-- Contract audit: `/home/ubuntu/u9/bz/BZ740-contract-audit.txt`.
-- Completion marker: `/home/ubuntu/u9/state/BZ740.DONE`.
+  Applied `BZ740-statement-cast-proposal.patch`, preserving the original morphism.
+- Next: validate the assigned normalization module through `ucheck-bump`, then its direct importer.
+- Fix patterns and exact diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ740.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
-- This final commit changes only progress documentation; Lean source matches the green build.
 
-# BZ824 in progress
+# BZ780 leaf and direct importer green
 
-- Branch: u9/BZ824; starting commit 95c8987257f.
-- The user instructed continuation after the upstream-restoration proposal.
-- Restored four prerequisite modules. The comparison predicate uses verified PZ003
-  Localization imports and a reflexive cast; the transport proof is unchanged,
-  and target automorphism specializes the existing arbitrary-degree theorem to zero.
-- All six submitted modules passed ucheck-bump at 826d8e1a1fb: rc=0, failed=0, 4065 jobs.
-- Green: DerivedModuleBaseChangeMap, DerivedModulePullbackComparison,
-  ModulePullbackComparisonIsoTransport, ModulePullbackComparisonTargetAutomorphism,
-  CanonicalModuleBaseChangeIsoComparisonCompat, CanonicalModuleBaseChangeIsoComparison.
-- All restored declaration headers and original assigned/caller sources are unchanged.
-- Full log: /home/ubuntu/u9/bz/BUILD-BZ824-restored-full.log.
-- Next: build layer-two importer CanonicalModuleBaseChangeAffineChartComparison.
-- Notes: /home/ubuntu/u9/bz/FIXES-BZ824.md. No local Lean/Lake or proof shortcuts.
+- Branch: `u9/BZ780`; starting commit: `8027d88a3`.
+- Green source commit: `5aead0ac1d861aa6ef525ef6f15a0e7c483bdc26`.
+- `ucheck-bump` completed successfully (3930 jobs) on `poolb:43.166.82.34`:
+  `DerivedPullbackTensorUnitKFlat` rebuilt in 56 seconds, and its direct importer
+  `DerivedPullbackTensorUnit` rebuilt in 16 seconds.
+- The user instructed continuation after the concrete two-identity-cast proposal.
+  Retained those `cast (by rfl)` wrappers in the public counit hypothesis; they preserve
+  the original morphisms and all mathematical assumptions and conclusions.
+- Added public and implementation Localization imports, normalized identity casts
+  with `cast_eq`, and used `erw` through the local functor aliases.
+- All six declarations are retained; no local Lean/Lake, proof placeholders, trust
+  bypasses, profiler probes, or heartbeat changes.
+- Next: build the next-layer importer `DerivedPullbackMonoidalDescent`; skip it if
+  its unowned sibling dependency `DerivedPullbackTensorAssociativity` (BZ800) fails.
+- Full successful log: `/home/ubuntu/u9/bz/BUILD-BZ780-leaf-and-unit-green-full.log`.
+- Five fix patterns and replay rules: `/home/ubuntu/u9/bz/FIXES-BZ780.md`.
