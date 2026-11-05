@@ -47,7 +47,7 @@ private theorem singleComparison (X : C) :
   dsimp [mapDerivedCategorySingleFunctor, DerivedCategory.singleFunctorIsoCompQ]
   simp only [Functor.map_id, Category.id_comp, Category.comp_id]
 private theorem derivedCompSingle (X : C) :
-    (mapDerivedCategoryCompIso F G).hom.app
+    (mapDerivedCategoryCompIso F G).inv.app
         ((DerivedCategory.singleFunctor C 0).obj X) ≫
       G.mapDerivedCategory.map ((F.mapDerivedCategorySingleFunctor 0).hom.app X) ≫
         (G.mapDerivedCategorySingleFunctor 0).hom.app (F.obj X) =
@@ -97,7 +97,7 @@ private theorem derivedTripleNatSingle
     (M : C ⥤ B) [M.Additive] [PreservesFiniteLimits M] [PreservesFiniteColimits M]
     (e : F ⋙ G ⋙ K ≅ M) (X : C) :
     let ρ := Functor.isoWhiskerLeft F.mapDerivedCategory
-        (Functor.mapDerivedCategoryCompIso G K).symm ≪≫
+        (Functor.mapDerivedCategoryCompIso G K) ≪≫
       (Functor.mapDerivedCategoryCompIso F (G ⋙ K)) ≪≫
         Functor.mapDerivedCategoryNatIso e
     ρ.hom.app ((DerivedCategory.singleFunctor C 0).obj X) ≫
