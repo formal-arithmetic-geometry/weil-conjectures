@@ -120,10 +120,13 @@
 
 - Branch: `u9/BZ459`; starting commit: `99a06bbbb46`.
 - The user instructed continuation after the explicit six-line statement API migration proposal.
-  The exact patch removes obsolete compositor `.symm` uses in `DerivedOpenGluingObjects`
-  (2 uses) and its direct importer `DerivedOpenGluing` (4 uses).
-- Mathlib b63f6e8a reverses the former local `mapDerivedCategoryCompIso`; these edits
-  preserve the original canonical maps. Proof bodies, binders, hypotheses, and docstrings are unchanged.
-- Next: finish the queued remote check, then validate the direct importer.
-- Fix patterns and diagnostic evidence: `/home/ubuntu/u9/bz/FIXES-BZ459.md`.
+- `DerivedOpenGluingObjects` rebuilt successfully at `9cba6ab4da` (28 seconds).
+  Its two obsolete compositor `.symm` uses are removed, preserving the original canonical maps.
+- The combined build could not check direct importer `DerivedOpenGluing` because the
+  BZ361-owned `SchemeDerivedHomGluing` has three type errors. Per the brief, skip this importer.
+  Its four-line repair is deferred at `/home/ubuntu/u9/bz/BZ459-downstream-deferred.patch`;
+  the committed downstream source is restored to the baseline.
+- Next: run the assigned module alone to obtain a clean rc=0, then complete the handoff.
+- Fix log: `/home/ubuntu/u9/bz/FIXES-BZ459.md`.
+- Build log: `/home/ubuntu/u9/bz/BUILD-BZ459-downstream-full.log`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
