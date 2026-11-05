@@ -241,7 +241,7 @@ lemma eq_zero_of_lowerShriek_support_of_isClosedImmersion
   rw [support_fst, support_snd]
   exact c.isZero_upperStar_lowerShriek_upperStar_openImmersionLowerShriek sq w₂ j hji B
 
-variable [IsClosedImmersion i.left] [IsClosedImmersion i'.left]
+variable [IsClosedImmersion i.left]
 
 /-- **Additivity of trace classes along an invariant open–closed decomposition** (blueprint
 `proposition-additivity-trace-classes`, item 2; Varshavsky, Prop. 1.5.10): let `i : Z ⟶ X` be a
@@ -269,7 +269,7 @@ theorem traceClass_eq_add_of_isClosedImmersion (F : c.FixedLocus) (U : X.left.Op
     (eq_zero_of_externalProduct_shift_to_diag_of_disjoint (opensOverι U) i hji _ _)
 
 
-omit [IsClosedImmersion i.left] [IsClosedImmersion i'.left] in
+omit [IsClosedImmersion i.left] in
 /-- No morphism `T ⟶ (Ri_* A)⟦n⟧` is nonzero when `Li^* T = 0`. -/
 lemma eq_zero_of_isZero_upperStar_shift {T : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     (hT : IsZero ((boundedConstructibleUpperStar _ ℓ i).obj T))
@@ -279,7 +279,6 @@ lemma eq_zero_of_isZero_upperStar_shift {T : Dᵇc(X.left)⟦Profinite.padicAlgC
   rw [← cancel_mono e.inv, zero_comp]
   exact eq_zero_of_isZero_upperStar i hT _
 
-omit [IsClosedImmersion i'.left] in
 /-- **Uniqueness of the open piece coefficient** (blueprint
 `lemma-lift-correspondence-invariant-decomposition`): when `c₂` maps `C_Z = c₁⁻¹(Z)` into the
 closed complement `Z` of `U`, the open piece coefficient `u_U` is the only coefficient map on

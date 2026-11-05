@@ -44,6 +44,13 @@ open CategoryTheory Limits MonoidalCategory
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
 
+/-- The base change `i' : C_Z ⟶ C` of a proper morphism `i : Z ⟶ X` along `c₁ : C ⟶ X` over
+a scheme `S` is proper. -/
+lemma AlgebraicGeometry.isProper_left_of_isPullback {S : Scheme} {X C Z CZ : Over S}
+    {c₁ : C ⟶ X} {i : Z ⟶ X} {i' : CZ ⟶ C} {c₁Z : CZ ⟶ Z} (sq : IsPullback i' c₁Z c₁ i)
+    [IsProper i.left] : IsProper i'.left :=
+  MorphismProperty.of_isPullback (P := @IsProper) (sq.flip.map (Over.forget _)) ‹_›
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
@@ -245,8 +252,8 @@ noncomputable def restrictClosed :
   c₂ := c₂Z
   u := restrictedCoeffOfIsPullback sq w₂ K c.u
 
-variable [hi : IsProper i.left] [hi' : IsProper i'.left]
-include hi hi'
+variable [hi : IsProper i.left]
+include hi
 
 /-- The proper pushforward diagram `(i, i')` from the restriction `c_Z` of `c` to a closed
 subscheme back to `c`: a diagram since `i' ≫ c₁ = c_{1Z} ≫ i` and `i' ≫ c₂ = c_{2Z} ≫ i`. Its
@@ -258,6 +265,7 @@ noncomputable abbrev closedPieceDiagram : (c.restrictClosed sq w₂).ProperPushf
   b₁ := c.c₁
   b₂ := c.c₂
   g := i'
+  isProper_g := isProper_left_of_isPullback sq
   w₁ := sq.w
   w₂ := w₂
 
@@ -265,13 +273,21 @@ noncomputable abbrev closedPieceDiagram : (c.restrictClosed sq w₂).ProperPushf
 `lemma-closed-piece-pushforward`; Varshavsky, Lemma 1.5.9): for a closed subscheme
 `i : Z ⟶ X` with `C_Z = c₁⁻¹(Z)` mapped into `Z` by `c₂`, the closed piece coefficient
 `u_Z = [i, i']_! u_{|Z}`, the pushforward of the restriction of `u` to `Z`, is compatible with `u`
-along the unit `η : K ⟶ Ri_* Li^* K`: `u_Z ∘ Lc₂^* η = Rc₁^! η ∘ u`. -/
+along the unit `η : K ⟶ Ri_* Li^* K`: `u_Z ∘ Lc₂^* η = Rc₁^! η ∘ u`, i.e. the square
+```
+Lc₂^* K --Lc₂^* η--> Lc₂^* K_Z
+   |u                    |u_Z
+   v                     v
+Rc₁^! K --Rc₁^! η--> Rc₁^! K_Z
+```
+commutes, where `K_Z = Ri_* Li^* K`. -/
 theorem upperStar_map_unit_comp_closedPieceCoeff :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂).map
         ((boundedConstructibleUpperStarLowerStarAdjunction ℓ i).unit.app K) ≫
       (c.closedPieceDiagram sq w₂).pushforwardCoeff =
     c.u ≫ (boundedConstructibleUpperShriek ℓ c.c₁).map
         ((boundedConstructibleUpperStarLowerStarAdjunction ℓ i).unit.app K) := by
+  have := isProper_left_of_isPullback sq
   have := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq
   have h := map_map_comp_pushforwardCoeff_mk_comp_counit (c.restrictClosed sq w₂) i c.c₁ c.c₂ i'
     sq.w w₂
