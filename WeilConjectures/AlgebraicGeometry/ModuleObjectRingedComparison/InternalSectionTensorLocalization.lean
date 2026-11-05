@@ -645,6 +645,7 @@ attribute [local implicit_reducible] sectionModuleEquivalence
 
 set_option backward.isDefEq.respectTransparency.types false
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The section equivalence identifies the native derived tensors with the ringed
 closed tensor, with the prescribed K-flat representative squares, globally and on
 all localized sites. This statement contains no comparison of internal Homs.
