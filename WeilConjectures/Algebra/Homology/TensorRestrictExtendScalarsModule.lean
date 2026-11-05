@@ -58,6 +58,7 @@ theorem exists_tensorRestrictExtend_module_natural
   induction x using TensorProduct.inductionOn with
   | add x y hx hy => simpa only [map_add] using congrArg₂ (· + ·) hx hy
   | tmul m x =>
+    change TensorProduct A B N at x
     induction x using TensorProduct.inductionOn with
     | add x y hx hy =>
       simpa only [TensorProduct.tmul_add, map_add] using congrArg₂ (· + ·) hx hy

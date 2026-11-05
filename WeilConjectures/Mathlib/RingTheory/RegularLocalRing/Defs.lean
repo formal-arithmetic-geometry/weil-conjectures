@@ -391,7 +391,7 @@ theorem IsRegularLocalRing.isDiscreteValuationRing (R : Type*) [CommRing R]
     rw [h] at this
     exact_mod_cast this
   have hp : (IsLocalRing.maximalIdeal R).IsPrincipal :=
-    ((IsDiscreteValuationRing.TFAE R hR).out 5 4).mp hfin
+    ((IsDiscreteValuationRing.TFAE R hR).out 6 5).mp hfin
   have hne : IsLocalRing.maximalIdeal R ≠ ⊥ := isField_iff_maximalIdeal_eq.not.mp hR
   refine .of_maximalIdeal_eq_span_singleton (t := hp.generator) (fun ht ↦ hne ?_) ?_
   · rw [← Ideal.span_singleton_generator (IsLocalRing.maximalIdeal R), ht,

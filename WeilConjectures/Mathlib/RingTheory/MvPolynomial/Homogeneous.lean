@@ -695,8 +695,8 @@ theorem linearIndependent_awayMonomial : LinearIndependent R (awayMonomial R s) 
         (e₀.1 + (N + k) • s.indicator (1 : n → ℤ)) i := by
       omega
     simpa using h3)
-  have := congrArg (coeff (u e₀)) hk'
-  rw [coeff_sum, coeff_zero, Finset.sum_eq_single e₀ (fun e he hne ↦ by
+  have := congrArg (fun p : MvPolynomial n R ↦ AddMonoidAlgebra.coeff p (u e₀)) hk'
+  rw [coeff_sum, AddMonoidAlgebra.coeff_zero, Finset.sum_eq_single e₀ (fun e he hne ↦ by
     rw [coeff_monomial, if_neg fun h ↦ hne (hu e he h)]) (fun h ↦ (h he₀).elim),
     coeff_monomial, if_pos rfl] at this
   exact this
