@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
 public import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
