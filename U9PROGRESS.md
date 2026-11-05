@@ -127,3 +127,13 @@
 - Next: remote validation, then up to four direct importers and a second downstream layer.
 - Fix patterns: `/home/ubuntu/u9/bz/FIXES-BZ469.md`.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
+
+# BZ508 in progress
+
+- Branch: `u9/BZ508`; starting commit: `fa248eeed`.
+- The user instructed continuation after the exact three-line private-helper API proposal.
+- Applied the three `.symm` removals in `exactComp_assoc`, preserving the original directions under the new Mathlib composition API. Public statements remain unchanged.
+- The explicit `homEquiv_id` rewrite and factorization/cancellation proof repairs already pass remotely.
+- Next: `ucheck-bump` on the assigned module, then up to four direct importers and a second downstream layer.
+- Patterns and logs: `/home/ubuntu/u9/bz/FIXES-BZ508.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
