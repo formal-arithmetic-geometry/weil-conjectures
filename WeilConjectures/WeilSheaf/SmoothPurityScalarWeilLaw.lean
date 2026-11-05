@@ -29,6 +29,11 @@ lemma purity_isoSquareOfInverseSquare {C : Type*} [Category C]
   simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id, h,
     Iso.hom_inv_id_assoc]
 
+/-- The isomorphism of underlying objects of a module isomorphism. -/
+noncomputable def purity_underlyingModuleIso {C : Type*} [Category C] [MonoidalCategory C]
+    {R : C} [MonObj R] {M N : Mod C R} (e : M ≅ N) : M.X ≅ N.X :=
+  (Mod.forget R).mapIso e
+
 end CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale
@@ -57,7 +62,9 @@ noncomputable def purityModuleFactorIso :
 
 /-- Compare two successive module pullbacks with their underlying abelian pullbacks. -/
 noncomputable def purityFactorUnit
-    (M : Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :=
+    (M : Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
+    ((p)^*[Ab.{u + 1}] ⋙ (s)^*[Ab.{u + 1}]).obj M.X ⟶
+      (((p)^*⟦Λ⟧ ⋙ (s)^*⟦Λ⟧).obj M).X :=
   (s)^*[Ab.{u + 1}].map
       (CondensedRing.upperStarUnitHom Λ p M) ≫
     CondensedRing.upperStarUnitHom Λ s
@@ -76,7 +83,7 @@ lemma purityFactorUnit_structure
   simp only [CondensedRing.upperStarForgetIso_hom_app, Mod.forget_map] at h
   exact purity_isoSquareOfInverseSquare
     ((purityAbelianFactorIso p s hs).app M.X)
-    ((Mod.forget (condensedRingObj Λ U)).mapIso ((purityModuleFactorIso Λ p s hs).app M))
+    (purity_underlyingModuleIso ((purityModuleFactorIso Λ p s hs).app M))
     (purityFactorUnit Λ p s M) (CondensedRing.upperStarUnitHom Λ p M) h
 
 attribute [local instance 20000] ProEtale.laxBraided_upperStar_of_weaklyEtale

@@ -352,3 +352,7 @@ BLOCKED: I have not constructed the general Weil purity morphism. The missing co
 ## 2026-11-05 08:28 +0800 — abstract the geometry of the factorization
 - K4-20261105T082423.log rc=1 (124s) shows the expanded geometric formula still times out: whnf at identity cancellation, plus kernel checking the scalar-law proof. The coefficient-general rational isomorphism remains GREEN.
 - Recast the factorization/unit/scalar-law calculation for arbitrary p:U→X, s:U→U and hs:s≫p=p. The finite-field geometric Frobenius version is now a single application of that abstract theorem. This avoids expanding the actual pullback-based geometric Frobenius inside the diagram calculation. Enabled local-file profiling at a 1000ms threshold for attribution; no heartbeat increase.
+
+## 2026-11-05 08:34 +0800 — comparison type boundary
+- K4-20261105T082916.log rc=1 (142s) shows geometry abstraction alone did not fix the conversion. Profile: 9.92s whnf at the inverse-square hypothesis application, 128s kernel in the scalar law; the finite-field wrapper also hits whnf.
+- Added an explicit composite-functor result type to purityFactorUnit so its target exactly matches the natural-isomorphism component. Factored forgetting a module iso through a generic transparent helper, inferring its monoidal data from the given module iso. Profiling remains scoped to this file; no heartbeat increases.
