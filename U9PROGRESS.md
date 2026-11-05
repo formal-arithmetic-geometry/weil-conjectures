@@ -165,3 +165,20 @@
 - Next: `ucheck-bump` on the assigned module, then `CompletedScalarAssociator` downstream.
 - Fix patterns and exact diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ603.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+
+# BZ646 complete
+
+- Green owned module: `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ComparisonUpperStarCoherence`.
+- Green direct importer: `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ComparisonBaseChangeMate`.
+- Final remote validation: `ucheck-bump` at source commit `e46a90620ceda4662bd450189ee57edb7cc5cad6`,
+  rc=0, failed=0, 5603 jobs; both changed modules rebuilt successfully.
+- Ported composition comparison directions, simplified composition components directly,
+  removed a redundant tactic, and normalized symmetric isomorphism projections.
+- Declaration statements, imports, and docstrings are unchanged; all source edits are in proofs.
+- All seven machine rewrite rules exactly reproduce the final files from baseline `bb4aa5315`.
+- Three direct importers were attempted. Identity coherence requires a statement change and is
+  left untouched. Étale-reading coherence and its next-layer importer are blocked by unowned
+  dependencies. The broad failing batch was stopped after those blockers were confirmed.
+- Handoff records: `/home/ubuntu/u9/bz/FIXES-BZ646.md` and `/home/ubuntu/u9/state/BZ646.DONE`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
