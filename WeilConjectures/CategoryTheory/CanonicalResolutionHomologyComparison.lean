@@ -116,6 +116,8 @@ theorem resolution_homology_transport
             inv (F.rightDerivedFunctorPlusUnit.app LY) := by
         simp [resolutionDerivedIso, Functor.rightDerivedFunctorPlusUnit,
           Functor.quotientCompMapHomotopyCategoryPlusIso, LY, Category.assoc]
+        erw [Functor.map_id]
+        simp [← Functor.map_comp]
       rw [hI]
       change (F.rightDerivedFunctorPlus.map (resolutionAugmentationIso R).hom ≫
           inv (F.rightDerivedFunctorPlusUnit.app LX)) ≫ DerivedCategory.Plus.Q.map FG = _
