@@ -32,7 +32,7 @@ to the members of a (pro-étale, here Zariski) cover jointly reflect isomorphism
 universe u
 
 open CategoryTheory Limits MonoidalCategory
-open scoped CategoryTheory.Obj
+open scoped CategoryTheory.Functor CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -101,7 +101,7 @@ theorem isIso_smoothUnitBaseChange_of_openCover
   -- hence so are the derived pullbacks of the underlying morphism
   have hU' : ∀ i, IsIso ((L(((j' i).left)^*⟦Profinite.padicAlgClRingObj l⟧)).map
       (smoothUnitBaseChange l f f' bc e).hom) := fun i ↦ by
-    rw [← boundedConstructibleUpperStar_map_hom]
+    rw [← boundedConstructibleUpperStar_map_hom _ l]
     exact (ObjectProperty.isIso_hom_iff _).2 (hU i)
   -- the `jᵢ'` form a Zariski, hence pro-étale, cover of `X'`
   let 𝒰 : Scheme.OpenCover.{u} X'.left :=
