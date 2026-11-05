@@ -379,3 +379,8 @@ BLOCKED: I have not constructed the general Weil purity morphism. The missing co
 ## 2026-11-05T08:50:33.531825+08:00 — first canonical lift check
 - K4-20261105T084515.log rc=1 (259s): finite orientation preimage and the mod-ell isomorphism criterion produce no errors. Inferred ambient-iso result exceeded recursion depth; a missing parenthesis in cancel_mono caused two application errors and a downstream whnf timeout. Added the precise ambient result type and explicit reduction inclusion, and fixed the parenthesis. No resource-budget raises.
 - Next check includes the trace-normalization file and the rational normalized-orientation isomorphism criterion.
+
+## 2026-11-05T08:57:59.399006+08:00 — reconstruction comparison split
+- Reread K4 brief: PR2110 remains the latest LEAD target. Last check K4-20261105T085034.log failed in CanonicalLift (272s): ambient-iso recursion limit and concrete Mono instance synthesis timeout; TraceNormalization was not reached.
+- Split finite orientation/Nakayama lemmas into SmoothPurityCanonicalFinite so trace work checks independently. Added generic comparison transport and cancellation in SmoothPurityReductionComparison, and used them in the integral lift. No resource raises.
+- Canonical reduction-transition compatibility remains a mathematical input; no completion claim.

@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.WeilSheaf.SmoothPurityCanonicalLift
+public import WeilConjectures.WeilSheaf.SmoothPurityCanonicalFinite
 public import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationMate
 
 /-! # Finite trace normalization of the integral orientation -/
@@ -53,10 +53,17 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 
 /-- The counit transpose of the prescribed finite orientation, with the actual comparison
 between integral and étale exceptional pullback. -/
-noncomputable def canonicalFiniteIntegralOrientationTrace (n : ℕ) :=
+noncomputable def canonicalFiniteIntegralOrientationTrace (n : ℕ) :
+    have := HasCompactification.of_over f
+    (Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E.1 n))
+      f.left).obj ((etaleReduction ℓ E.1 n X).obj
+        ((shiftFunctor _ (2 * d : ℤ)).obj
+          (integralTateTwistBoundedConstructible ℓ E.1 X.hom d))) ⟶
+      (etaleReduction ℓ E.1 n Y).obj
+        (𝟙_ (Dᵇc(Y.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧)) :=
   have := HasCompactification.of_over f
-  (Etale.rightDerivedUpperShriekAdjunction (integersModPowCoeff.{u} ℓ E.1 n)
-    f.left).homEquiv _ _ |>.symm
+  ((Etale.rightDerivedUpperShriekAdjunction (integersModPowCoeff.{u} ℓ E.1 n)
+    f.left).homEquiv _ _).symm
       ((finiteEtaleReading ℓ E.1 n X).map
           (canonicalFiniteIntegralOrientationIso ℓ E f d n).hom ≫
         (etaleReductionUpperShriekIso ℓ E.1 n f).hom.app (𝟙_ _))
@@ -68,8 +75,8 @@ theorem isIntegralSmoothOrientation_iff_trace
       (PadicIntegersRingObj.boundedConstructibleUpperShriek ℓ E.1 f).obj (𝟙_ _)) :
     IsIntegralSmoothOrientation ℓ E f d φ ↔
       ∀ n : ℕ, (etaleReduction ℓ E.1 (n + 1) Y).map
-          ((PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E.1 f).homEquiv
-            _ _ |>.symm φ) =
+          (((PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E.1 f).homEquiv
+            _ _).symm φ) =
         (etaleReductionLowerShriekIsoOfCompactification ℓ E.1 (n + 1)
           (compactificationOverField f)).hom.app _ ≫
             canonicalFiniteIntegralOrientationTrace ℓ E f d (n + 1) := by
