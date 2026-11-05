@@ -109,7 +109,7 @@ noncomputable abbrev purityTateShift : WeilComplex k₀ l X :=
 /-- The sheaf-level Tate encoding (A3): the native cyclotomic Tate sheaf is descent of the
 finite-base root-defined Tate sheaf. Provided by
 `WeilSheaf.purity_nonempty_toCondensedTateDescentIso`. -/
-abbrev TateEncoding : Type (u + 2) :=
+abbrev TateEncoding :=
   (ProEtaleWeilSheaf.toCondensed k₀ l X).obj (WeilSheaf.tateTwistSheaf k₀ l X d).obj ≅
     (CondensedRing.geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l)
       (X ↘ Spec (CommRingCat.of k₀))).obj (ProEtale.tateTwist X l d)
@@ -159,7 +159,9 @@ because it is a morphism of Weil complexes (`isWeilEquivariant_forget_map`). -/
 noncomputable def descendedSmoothTrace :
     (derivedLowerShriek k₀ l f).obj (purityTateShift (k₀ := k₀) (l := l) (X := X) d) ⟶
       WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l Y) :=
-  traceOfDescendedSmoothTrace f d _ _ (descendedTateSourceIso α) (descendedUnitTargetIso (Y := Y))
+  traceOfDescendedSmoothTrace f d (purityTateShift (k₀ := k₀) (l := l) (X := X) d)
+    (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l Y))
+    (descendedTateSourceIso α) (descendedUnitTargetIso (k₀ := k₀) (l := l) (Y := Y))
 
 /-- **A1' (universality of the descended trace).** The underlying geometric trace
 `f̄_! ℚ̄_ℓ(d)[2d] ⟶ ℚ̄_ℓ` on the geometric fibre is universal: composing with it identifies
