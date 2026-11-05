@@ -82,27 +82,27 @@ def isAffine : ObjectProperty (PointedEtaleNeighborhood s) :=
 
 /-- The pointed étale neighbourhood `(S, s)`; it is a terminal object. -/
 noncomputable def base : PointedEtaleNeighborhood s :=
-  ⟨Etale.mk (𝟙 S), CategoryTheory.Over.homMk s (by simp)⟩
+  Functor.elementsMk _ (Etale.mk (𝟙 S)) (CategoryTheory.Over.homMk s (by simp))
 
 /-- The structure morphism of a pointed étale neighbourhood, as a morphism to `base s`. -/
 noncomputable def toBase (x : PointedEtaleNeighborhood s) : x ⟶ base s :=
-  Functor.Elements.homMk _ _ (MorphismProperty.Over.homMk x.1.hom (Category.comp_id _)) (by
-    obtain ⟨X, x⟩ := x
+  Functor.Elements.homMk (MorphismProperty.Over.homMk x.1.hom (Category.comp_id _)) (by
+    obtain @⟨X, x⟩ := x
     exact CategoryTheory.Over.OverMorphism.ext (CategoryTheory.Over.w x))
 
 /-- The pointed étale neighbourhood `(S, s)` is terminal. -/
 noncomputable def isTerminalBase : IsTerminal (base s) :=
   IsTerminal.ofUniqueHom (toBase s) fun x f ↦ by
-    apply Subtype.ext
+    apply Functor.Elements.hom_ext
     apply MorphismProperty.Over.Hom.ext
-    exact f.1.w.trans (Category.comp_id _)
+    exact f.hom.w.trans (Category.comp_id _)
 
 /-- Every pointed étale neighbourhood `(V, v)` is refined by the spectrum of a ring with an
 étale morphism to `S`: take an affine open of `V` containing the image of `v`. -/
 lemma exists_precomp_hom (d : PointedEtaleNeighborhood s) :
     ∃ c, Nonempty ((Functor.Elements.precomp (AffineEtale.Spec S)
       (pointSmallEtale s).fiber).obj c ⟶ d) := by
-  obtain ⟨X, x⟩ := d
+  obtain @⟨X, x⟩ := d
   cases X with | _ Y f
   obtain ⟨y, hy, rfl⟩ := CategoryTheory.Over.homMk_surjective x
   dsimp at y hy
