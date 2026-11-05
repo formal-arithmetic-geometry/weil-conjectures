@@ -255,7 +255,7 @@ private theorem exactSquare_factorsh
     ((Functor.mapHomotopyCategoryCompIso (Iso.refl (L ⋙ H)) (.up ℤ)).hom.app K))).1
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
   rw [h₁, h₃, ← h₂]
-  simp only [Functor.map_comp, Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Functor.map_comp, Category.assoc, Iso.hom_inv_id_app_assoc]
   have hc : DerivedCategory.Qh.map
         ((Functor.mapHomotopyCategoryCompIso (Iso.refl (L ⋙ H)) (.up ℤ)).inv.app K) ≫
       DerivedCategory.Qh.map
@@ -586,9 +586,9 @@ theorem finiteFreeDirectImage_balancingComputed {Z W : Scheme.{u}} {q : Z ⟶ W}
     have he := exactSquare_factorsh LS LR UW UZ e K
     have heq : (proEtaleRingRestrictionDerivedPullback q R.target S.target
         R.source S.source a.target a.source R.identification S.identification a.comm).inv =
-        ((Functor.mapDerivedCategoryCompIso UW LR).symm ≪≫
+        (Functor.mapDerivedCategoryCompIso UW LR ≪≫
           Functor.mapDerivedCategoryNatIso e ≪≫
-          Functor.mapDerivedCategoryCompIso LS UZ).hom := by
+          (Functor.mapDerivedCategoryCompIso LS UZ).symm).hom := by
       exact derived_restriction_pullback_eq a
     rw [← heq] at he
     apply (cancel_epi (LR.mapDerivedCategory.map
