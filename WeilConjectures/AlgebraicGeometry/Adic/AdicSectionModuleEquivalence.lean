@@ -201,13 +201,8 @@ noncomputable def comparisonVectorPresheaf {l : ℕ} [Fact l.Prime] {X : Scheme.
         { toFun := P.val.map f
           map_add' := (P.val.map f).hom.map_add
           map_smul' := fun k m ↦ by
-            change P.val.map f (algebraMap _
-              (ULift.{u + 1} (PadicAlgCl.locallyFiniteFunctions l V.unop.left)) k • m) =
-                algebraMap _
-                  (ULift.{u + 1} (PadicAlgCl.locallyFiniteFunctions l W.unop.left)) k •
-                    (P.val.map f m : P.val.obj W)
-            rw [P.val.map_smul]
-            rfl }
+            exact P.val.map_smul f (algebraMap _
+              (ULift.{u + 1} (PadicAlgCl.locallyFiniteFunctions l V.unop.left)) k) m }
       map_id := fun V ↦ by ext m; simp
       map_comp := fun f g ↦ by ext m; exact P.val.map_comp_apply f g m }
 
@@ -373,7 +368,12 @@ noncomputable def comparisonPresheafFullyFaithful (l : ℕ) [Fact l.Prime] (X : 
   map_preimage f := by apply Mod.hom_ext; rfl
   preimage_map f := by apply Mod.hom_ext; rfl
 
-attribute [local reducible] comparisonRing in
+local instance {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
+    (M : AdicSheaf l X) (V : X.ProEtᵒᵖ) :
+    SMul ((adicConstantSheaf l X).obj.obj V)
+      (((comparisonModuleFunctor l X).obj M).val.obj V) :=
+  (comparisonSectionModule ((comparisonPresheafFunctor l X).obj M) V).toSMul
+
 /-- The action of a constant coefficient on native sections is their original vector-space action.
 Source: Stacks 03CV and 0GMW; the explicit native action and sheafification.
 (blueprint: lem-sf-adic-section-module-equivalence). -/
