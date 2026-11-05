@@ -156,6 +156,29 @@ lemma _root_.CategoryTheory.Functor.map_inv_app_comp_map_hom_app {C D E : Type*}
     H.map (e.inv.app c) ≫ H.map (e.hom.app c) = 𝟙 _ := by
   rw [← H.map_comp, Iso.inv_hom_id_app, H.map_id]
 
+section Reflect
+
+variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+  [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+
+/-- Forgetting the Weil structure reflects isomorphisms: so does the derived condensed
+realization. -/
+lemma isIso_of_isIso_geometricFiberBoundedConstructibleFunctor_map {A B : WeilComplex k₀ l X}
+    (φ : A ⟶ B) [IsIso ((geometricFiberBoundedConstructibleFunctor k₀ l X).map φ)] : IsIso φ := by
+  have : (ProEtaleWeilSheaf.derivedCondensedRealization k₀ l X).ReflectsIsomorphisms :=
+    Functor.reflectsIsomorphisms_mapDerivedCategory _
+  have h : IsIso ((geometricFiberBoundedConstructibleFunctor k₀ l X ⋙ ObjectProperty.ι _).map φ) :=
+    inferInstanceAs (IsIso ((ObjectProperty.ι _).map
+      ((geometricFiberBoundedConstructibleFunctor k₀ l X).map φ)))
+  have h' : IsIso ((ProEtaleWeilSheaf.derivedCondensedRealization k₀ l X).map φ.hom) :=
+    (NatIso.isIso_map_iff (geometricFiberBoundedConstructibleFunctorCompιIso k₀ l X) φ).1 h
+  have : IsIso φ.hom := isIso_of_reflects_iso φ.hom (ProEtaleWeilSheaf.derivedCondensedRealization k₀ l X)
+  exact (ObjectProperty.isIso_hom_iff φ).1 this
+
+end Reflect
+
 section OpenImmersion
 
 variable {U X : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
@@ -399,6 +422,8 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
   [QuasiCompact (nativeProjectionCompactification k₀ f).i]
 
+set_option maxHeartbeats 8000000 in
+-- the derived categories of condensed module objects are slow to elaborate
 set_option synthInstance.maxHeartbeats 400000 in
 -- the monoidal structure of the derived category of condensed modules is found slowly
 /-- **Forgetting the Weil structure commutes with the extension by zero, compatibly with the
@@ -448,7 +473,44 @@ theorem exists_extensionByZero_forget_iso_projection :
               (geometricFiberHom (k₀ := k₀) (nativeProjectionCompactification k₀ f).i)).projectionComparison
               ((geometricFiberBoundedConstructibleFunctor k₀ l X).obj M)
               ((geometricFiberBoundedConstructibleFunctor k₀ l
-                (nativeProjectionCompactification k₀ f).Z).obj N)) :=
-  sorry
+                (nativeProjectionCompactification k₀ f).Z).obj N)) := by
+  have : IsOpenImmersion (nativeProjectionCompactification k₀ f).i :=
+    (nativeProjectionCompactification k₀ f).isOpenImmersion
+  set adj := extensionByZeroUpperStarAdjunction (k₀ := k₀) (l := l)
+    (nativeProjectionCompactification k₀ f).i
+  set adj' := CondensedRing.boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
+    (Profinite.padicAlgClRingObj l) l
+    (geometricFiberHom (k₀ := k₀) (nativeProjectionCompactification k₀ f).i)
+  have hμ := map_upperStarTensorComparison_app_comp (k₀ := k₀) (l := l)
+    (nativeProjectionCompactification k₀ f).i
+  have : IsIso ((mateEquiv adj adj').symm (TwoSquare.mk _ _ _ _
+      (upperStarForgetIso k₀ l (nativeProjectionCompactification k₀ f).i).hom)).natTrans :=
+    isIso_extensionByZeroForgetHom (k₀ := k₀) (l := l) (nativeProjectionCompactification k₀ f).i
+  have hp (M : WeilComplex k₀ l X) (N : WeilComplex k₀ l (nativeProjectionCompactification k₀ f).Z) :
+      IsIso (adj.bifunctorProjectionComparison
+        (upperStarTensorComparison k₀ l (nativeProjectionCompactification k₀ f).i) M N) := by
+    have := adj.isIso_map_bifunctorProjectionComparison
+      (upperStarTensorComparison k₀ l (nativeProjectionCompactification k₀ f).i) adj'
+      (upperStarForgetIso k₀ l (nativeProjectionCompactification k₀ f).i).hom
+      (geometricFiberBoundedConstructibleFunctorTensorIso k₀ l X)
+      (geometricFiberBoundedConstructibleFunctorTensorIso k₀ l
+        (nativeProjectionCompactification k₀ f).Z) hμ M N
+    exact isIso_of_isIso_geometricFiberBoundedConstructibleFunctor_map _
+  refine ⟨asIso (extensionByZeroForgetHom k₀ l (nativeProjectionCompactification k₀ f).i).natTrans,
+    fun L ↦ ?_, upperStarForgetIso k₀ l (nativeProjectionCompactification k₀ f).i,
+    adj.bifunctorProjectionIso
+      (upperStarTensorComparison k₀ l (nativeProjectionCompactification k₀ f).i),
+    fun M N ↦ adj.map_bifunctorProjectionIso_hom_app
+      (upperStarTensorComparison k₀ l (nativeProjectionCompactification k₀ f).i) adj'
+      (upperStarForgetIso k₀ l (nativeProjectionCompactification k₀ f).i).hom
+      (geometricFiberBoundedConstructibleFunctorTensorIso k₀ l X)
+      (geometricFiberBoundedConstructibleFunctorTensorIso k₀ l
+        (nativeProjectionCompactification k₀ f).Z) hμ _ rfl M N⟩
+  have h : mateEquiv adj adj' (TwoSquare.mk _ _ _ _
+      (asIso (extensionByZeroForgetHom k₀ l (nativeProjectionCompactification k₀ f).i).natTrans).hom) =
+      TwoSquare.mk _ _ _ _ (upperStarForgetIso k₀ l (nativeProjectionCompactification k₀ f).i).hom :=
+    (mateEquiv adj adj').apply_symm_apply _
+  rw [h]
+  exact inferInstanceAs (IsIso ((upperStarForgetIso k₀ l (nativeProjectionCompactification k₀ f).i).hom.app L))
 
 end AlgebraicGeometry.WeilComplex

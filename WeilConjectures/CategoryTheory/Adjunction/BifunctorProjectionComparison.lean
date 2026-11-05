@@ -118,4 +118,72 @@ lemma mateEquiv_symm_app_comp_map_bifunctorProjectionComparison (γ : S ⋙ N_C 
   rw [<- comp_whiskerRight_assoc, hβ]
   simp [tensorHom_def, whisker_exchange_assoc]
 
+/-- If the base change `β` of the extensions by zero is an isomorphism and `γ` is an isomorphism at
+`N`, then `N_D` carries the projection comparison along `μ` to an isomorphism as soon as the
+projection comparison of `P' ⊣ S'` is an isomorphism. -/
+lemma isIso_map_bifunctorProjectionComparison (γ : S ⋙ N_C ⟶ N_D ⋙ S')
+    (τ_C : T_C ⋙ N_C ≅ N_C.prod N_C ⋙ tensor C') (τ_D : T_D ⋙ N_D ≅ N_D.prod N_D ⋙ tensor D')
+    (hμ : ∀ a b : D, N_C.map (μ.app (a, b)) ≫ γ.app (T_D.obj (a, b)) ≫
+        S'.map (τ_D.hom.app (a, b)) =
+      τ_C.hom.app (S.obj a, S.obj b) ≫ (γ.app a ⊗ₘ γ.app b) ≫
+        Functor.LaxMonoidal.μ S' (N_D.obj a) (N_D.obj b))
+    [IsIso ((mateEquiv adj adj').symm (TwoSquare.mk _ _ _ _ γ)).natTrans] (M : C) (N : D)
+    [IsIso (γ.app N)] [IsIso (adj'.projectionComparison (N_C.obj M) (N_D.obj N))] :
+    IsIso (N_D.map (adj.bifunctorProjectionComparison μ M N)) := by
+  have h := adj.mateEquiv_symm_app_comp_map_bifunctorProjectionComparison μ adj' γ τ_C τ_D hμ M N
+  have : IsIso (((mateEquiv adj adj').symm (TwoSquare.mk _ _ _ _ γ)).natTrans.app
+      (T_C.obj (M, S.obj N)) ≫ N_D.map (adj.bifunctorProjectionComparison μ M N) ≫
+        τ_D.hom.app (P.obj M, N)) := by
+    rw [h]
+    infer_instance
+  have := IsIso.of_isIso_comp_left (((mateEquiv adj adj').symm
+    (TwoSquare.mk _ _ _ _ γ)).natTrans.app (T_C.obj (M, S.obj N)))
+    (N_D.map (adj.bifunctorProjectionComparison μ M N) ≫ τ_D.hom.app (P.obj M, N))
+  exact IsIso.of_isIso_comp_right _ (τ_D.hom.app (P.obj M, N))
+
+variable [∀ M N, IsIso (adj.bifunctorProjectionComparison μ M N)]
+
+/-- The projection formula `T_D (P M, N) ≅ P (T_C (M, S N))`, the inverse of the projection
+comparison along `μ` when it is an isomorphism. -/
+noncomputable def bifunctorProjectionIso :
+    P.prod (𝟭 D) ⋙ T_D ≅ (𝟭 C).prod S ⋙ T_C ⋙ P :=
+  NatIso.ofComponents (fun MN ↦ (asIso (adj.bifunctorProjectionComparison μ MN.1 MN.2)).symm)
+    (fun {MN MN'} fg ↦ by
+      dsimp
+      rw [IsIso.eq_inv_comp, ← Category.assoc, IsIso.comp_inv_eq]
+      exact adj.bifunctorProjectionComparison_naturality μ fg.1 fg.2)
+
+@[simp]
+lemma bifunctorProjectionIso_hom_app (M : C) (N : D) :
+    (adj.bifunctorProjectionIso μ).hom.app (M, N) =
+      inv (adj.bifunctorProjectionComparison μ M N) :=
+  rfl
+
+/-- **Transport of the projection formula.** Under the hypotheses of
+`CategoryTheory.Adjunction.mateEquiv_symm_app_comp_map_bifunctorProjectionComparison`, for an
+isomorphism `β` lifting the mate of `γ`, `N_D` carries the projection formula
+`T_D (P M, N) ≅ P (T_C (M, S N))` to the inverse of the projection comparison of `P' ⊣ S'`, up to
+`τ_C`, `τ_D`, `β` and `γ`. -/
+lemma map_bifunctorProjectionIso_hom_app (γ : S ⋙ N_C ⟶ N_D ⋙ S')
+    (τ_C : T_C ⋙ N_C ≅ N_C.prod N_C ⋙ tensor C') (τ_D : T_D ⋙ N_D ≅ N_D.prod N_D ⋙ tensor D')
+    (hμ : ∀ a b : D, N_C.map (μ.app (a, b)) ≫ γ.app (T_D.obj (a, b)) ≫
+        S'.map (τ_D.hom.app (a, b)) =
+      τ_C.hom.app (S.obj a, S.obj b) ≫ (γ.app a ⊗ₘ γ.app b) ≫
+        Functor.LaxMonoidal.μ S' (N_D.obj a) (N_D.obj b))
+    (β : N_C ⋙ P' ≅ P ⋙ N_D)
+    (hβ : β.hom = ((mateEquiv adj adj').symm (TwoSquare.mk _ _ _ _ γ)).natTrans) (M : C) (N : D)
+    [IsIso (adj'.projectionComparison (N_C.obj M) (N_D.obj N))] :
+    N_D.map ((adj.bifunctorProjectionIso μ).hom.app (M, N)) ≫ β.inv.app _ ≫
+        P'.map (τ_C.hom.app (M, S.obj N) ≫ N_C.obj M ◁ γ.app N) =
+      τ_D.hom.app (P.obj M, N) ≫ β.inv.app M ▷ N_D.obj N ≫
+        inv (adj'.projectionComparison (N_C.obj M) (N_D.obj N)) := by
+  have h := adj.mateEquiv_symm_app_comp_map_bifunctorProjectionComparison μ adj' γ τ_C τ_D hμ M N
+  rw [← hβ] at h
+  rw [bifunctorProjectionIso_hom_app, Functor.map_inv, IsIso.inv_comp_eq,
+    ← cancel_epi (β.hom.app _), Iso.hom_inv_id_app_assoc]
+  dsimp only [Functor.prod_obj, Functor.id_obj]
+  rw [reassoc_of% h,
+    ← comp_whiskerRight_assoc, Iso.hom_inv_id_app]
+  simp
+
 end CategoryTheory.Adjunction
