@@ -28,6 +28,7 @@ variable (T : Type) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T]
 
 include T hT
 
+set_option linter.unusedSectionVars false in
 /-- Inverse-coordinate form of the root comparison square. -/
 lemma purity_comparisonUpperStarRootsOfUnityIso_pullback_inv :
     upperStarRootsOfUnitySheafHom g N ≫
