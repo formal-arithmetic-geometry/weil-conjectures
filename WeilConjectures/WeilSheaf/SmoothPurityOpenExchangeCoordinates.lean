@@ -30,12 +30,18 @@ theorem purity_exchangeLeft_coordinates (a : J ⊣ P₀) (a' : J' ⊣ P₀')
     exchangeLeft (a.ofNatIsoRight p) (a'.ofNatIsoRight p') θ =
       Functor.whiskerRight g.hom J' ≫ exchangeLeft a a' θ₀ ≫
         Functor.whiskerLeft J h.inv := by
-  rw [exchangeLeft_eq_mateEquiv_symm a a', exchangeLeft_eq_mateEquiv_symm a a']
-  apply (mateEquiv (a.ofNatIsoRight p) (a'.ofNatIsoRight p')).injective
-  rw [Equiv.apply_symm_apply, mateEquiv_comp_whiskerLeft, mateEquiv_whiskerRight_comp,
-    mateEquiv_ofNatIsoRight, Equiv.apply_symm_apply]
-  ext K
-  simpa only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    Category.assoc] using congr_app hθ K
+  calc
+    exchangeLeft (a.ofNatIsoRight p) (a'.ofNatIsoRight p') θ =
+        ((mateEquiv (a.ofNatIsoRight p) (a'.ofNatIsoRight p')).symm θ.hom).natTrans :=
+      exchangeLeft_eq_mateEquiv_symm (a.ofNatIsoRight p) (a'.ofNatIsoRight p') θ
+    _ = Functor.whiskerRight g.hom J' ≫ exchangeLeft a a' θ₀ ≫
+        Functor.whiskerLeft J h.inv := by
+      rw [exchangeLeft_eq_mateEquiv_symm a a' θ₀]
+      apply (mateEquiv (a.ofNatIsoRight p) (a'.ofNatIsoRight p')).injective
+      rw [Equiv.apply_symm_apply, mateEquiv_comp_whiskerLeft, mateEquiv_whiskerRight_comp,
+        mateEquiv_ofNatIsoRight, Equiv.apply_symm_apply]
+      ext K
+      simpa only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+        Category.assoc] using congr_app hθ K
 
 end CategoryTheory.Adjunction
