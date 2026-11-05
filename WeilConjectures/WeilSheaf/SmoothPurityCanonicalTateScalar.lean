@@ -7,7 +7,8 @@ module
 public import WeilConjectures.WeilSheaf.SmoothPurityTatePullbackFactor
 public import WeilConjectures.WeilSheaf.SmoothPurityTateWeilLaw
 public import WeilConjectures.WeilSheaf.SmoothPurityScalarDatumNamed
-public import WeilConjectures.WeilSheaf.FrobeniusTwist
+public import WeilConjectures.WeilSheaf.SmoothPurityFrobeniusFactorAlias
+public import WeilConjectures.WeilSheaf.SmoothPurityCyclotomicField
 import WeilConjectures.Tactic.ExactModProofs
 
 /-! # The scalar Frobenius law for the canonical geometric Tate line -/
@@ -31,7 +32,7 @@ variable {k : Type u} [Field k] [Finite k] (ℓ : ℕ) [Fact ℓ.Prime]
 local instance : NeZero (ℓ : k) := ⟨by
   rw [Ne, ringChar.spec, Nat.prime_dvd_prime_iff_eq (CharP.char_is_prime k _) Fact.out]
   exact Fact.out⟩
-local instance : NeZero (ℓ : AlgebraicClosure k) := WeilSheaf.neZero_natCast_algebraicClosure k ℓ
+local instance : NeZero (ℓ : AlgebraicClosure k) := WeilSheaf.purity_neZero_natCast_algebraicClosure k ℓ
 
 /-- A root trivialization of the geometric Tate line, using its canonical pullback
 from the finite-base model. -/
@@ -40,7 +41,11 @@ noncomputable def purityCanonicalTateOneTrivialization :
       𝟙_ (Mod (Sheaf (ProEt.topology a.geometricFiber) Ab.{u + 1})
         (condensedRingObj (Profinite.padicAlgClRingObj ℓ) a.geometricFiber)) :=
   (upperStarTateTwistOneIso ℓ a.geometricFiberProj a).symm ≪≫
-    purityTateTwistOneTrivialization a hζ hζ' ≪≫
+    purityChangeCoefficientTrivialization (Profinite.continuousMapRingObj ℤ_[ℓ])
+      (Profinite.padicIntRingObjToPadicAlgCl ℓ) a.geometricFiberProj (tateModule X ℓ)
+      (upperStarMapModTateModuleIsoUnit a.geometricFiberProj
+        a.geometricFiberToAlgebraicClosure ℓ hζ hζ' ≪≫
+        (a.geometricFiberProj)^*[Ab.{u + 1}].mapModUnitIso) ≪≫
     (Functor.Monoidal.εIso (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricFiberProj)).symm
 
 /-- The canonical geometric Tate datum has the expected q-scalar law under the
@@ -62,27 +67,29 @@ lemma purityCanonicalTateOneTrivialization_weil :
   have hb := purity_upperStar_unit_factor (Profinite.padicAlgClRingObj ℓ)
     a.geometricFiberProj a.geometricGaloisFrobenius.hom
     a.geometricGaloisFrobenius_hom_comp_geometricFiberProj
-  have he := purityTateTwistOneTrivialization_weil a hζ hζ'
+  have he := purity_rationalRootTrivialization_weil a hζ hζ'
+  rw [← purity_geometricFiberProjUpperStarFrobeniusIso_eq
+    (Profinite.padicAlgClRingObj ℓ) a] at ha hb
   have h := purity_scalarDatum_conjugate_named
     (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricGaloisFrobenius.hom)
     (upperStarTateTwistOneIso ℓ a.geometricFiberProj a)
     (Functor.Monoidal.εIso (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricFiberProj)).symm
-    ((purityModuleFactorIso (Profinite.padicAlgClRingObj ℓ) a.geometricFiberProj
-      a.geometricGaloisFrobenius.hom
-      a.geometricGaloisFrobenius_hom_comp_geometricFiberProj).hom.app (tateTwistOne X ℓ))
-    ((purityModuleFactorIso (Profinite.padicAlgClRingObj ℓ) a.geometricFiberProj
-      a.geometricGaloisFrobenius.hom
-      a.geometricGaloisFrobenius_hom_comp_geometricFiberProj).hom.app (𝟙_ _))
+    ((geometricFiberProjUpperStarFrobeniusIso (Profinite.padicAlgClRingObj ℓ) a).hom.app (tateTwistOne X ℓ))
+    ((geometricFiberProjUpperStarFrobeniusIso (Profinite.padicAlgClRingObj ℓ) a).hom.app (𝟙_ _))
     (upperStarTateTwistOneIso ℓ a.geometricGaloisFrobenius.hom
       a.geometricFiberToAlgebraicClosure).hom
     (Functor.Monoidal.εIso
       (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricGaloisFrobenius.hom)).inv
-    ha hb (purityTateTwistOneTrivialization a hζ hζ')
+    ha hb (purityChangeCoefficientTrivialization (Profinite.continuousMapRingObj ℤ_[ℓ])
+      (Profinite.padicIntRingObjToPadicAlgCl ℓ) a.geometricFiberProj (tateModule X ℓ)
+      (upperStarMapModTateModuleIsoUnit a.geometricFiberProj
+        a.geometricFiberToAlgebraicClosure ℓ hζ hζ' ≪≫
+        (a.geometricFiberProj)^*[Ab.{u + 1}].mapModUnitIso))
     (purityCanonicalTateOneTrivialization ℓ a hζ hζ') rfl (Nat.card k : ℤ)
     (by
-      dsimp only [purityModuleFactorIso, geometricFiberProjUpperStarFrobeniusIso] at he ⊢
+      dsimp only [tateTwistOne, Functor.comp_obj, Functor.comp_map] at he ⊢
       exact_mod_proofs he)
   dsimp only [Functor.comp_obj, Functor.comp_map] at h ⊢
-  cast_proofs h
+  exact_mod_proofs h
 
 end AlgebraicGeometry.ProEtale

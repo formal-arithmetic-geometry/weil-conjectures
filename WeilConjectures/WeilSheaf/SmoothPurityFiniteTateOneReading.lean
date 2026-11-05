@@ -69,17 +69,9 @@ lemma purity_finiteCoefficientIntegralTateOneReading_pullback
   have hr := upperStarIntegralTateTwistOneIso_hom_comp_reduction ℓ E g f n
   simp only [purityTateRootPullbackIso,
     upperStarRootsOfUnitySheafIsoOfInvertible_hom] at hr
-  have h := purity_reading_composition_named
-    (CondensedRing.upperStar (Profinite.integersModPowRingObj ℓ E n) g)
-    (finiteCoefficientModEquivalence Y (PadicAlgCl.integersModPow ℓ E n)).functor
-    (finiteCoefficientModEquivalence X (PadicAlgCl.integersModPow ℓ E n)).functor
-    (g)^*[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)]
+  have h := purity_reading_composition_named _ _ _ _
     (upperStarFiniteCoefficientModEquivalenceIso g (PadicAlgCl.integersModPow ℓ E n))
-    (Mod.extendScalars (coefficientMap
-      (Profinite.padicIntegersRingObjToIntegersModPow ℓ E n) Y))
-    (CondensedRing.upperStar (Profinite.padicIntegersRingObj ℓ E) g ⋙
-      Mod.extendScalars (coefficientMap
-        (Profinite.padicIntegersRingObjToIntegersModPow ℓ E n) X))
+    _ _
     (pullIso (Profinite.padicIntegersRingObjToIntegersModPow ℓ E n) g).inv
     (integralTateTwistOne Y ℓ E)
     ((Mod.extendScalars (integersModPowReduction X ℓ E n)).map
@@ -106,12 +98,15 @@ lemma purity_finiteCoefficientIntegralTateOneReading_pullback
     (purity_finiteCoefficientIntegralTateOneReading_eq ℓ E n (g ≫ f))
     (purity_finiteCoefficientIntegralTateOneReading_eq ℓ E n f)
     (by
-      dsimp only [Functor.comp_obj, Functor.comp_map, integersModPowReduction] at hr ⊢
-      cast_proofs hr)
+      dsimp only [Functor.comp_obj, Functor.comp_map, integersModPowReduction,
+        integersModPowCoeff, Profinite.integersModPowRingObj] at hr ⊢
+      exact_mod_proofs hr)
     (by
-      dsimp only [Functor.comp_obj, Functor.comp_map] at hf ⊢
-      cast_proofs hf)
-  dsimp only [Functor.comp_obj, Functor.comp_map, integersModPowReduction] at h ⊢
-  cast_proofs h
+      dsimp only [Functor.comp_obj, Functor.comp_map, integersModPowCoeff,
+        Profinite.integersModPowRingObj] at hf ⊢
+      exact_mod_proofs hf)
+  dsimp only [Functor.comp_obj, Functor.comp_map, integersModPowReduction,
+    integersModPowCoeff, Profinite.integersModPowRingObj] at h ⊢
+  exact_mod_proofs h
 
 end AlgebraicGeometry.ProEtale

@@ -5,8 +5,6 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.WeilSheaf.SmoothPurityRationalRootLaw
-public import WeilConjectures.WeilSheaf.SmoothPurityScalarIsoAlias
-import WeilConjectures.Tactic.ExactModProofs
 
 /-! # The rational Tate trivialization and its Frobenius law -/
 
@@ -38,7 +36,7 @@ lemma purityTateTwistOneTrivialization_eq :
           a.geometricFiberToAlgebraicClosure l hζ hζ' ≪≫
           (a.geometricFiberProj)^*[Ab.{u + 1}].mapModUnitIso) := rfl
 
-/-- The rational trivialization transports the geometric Frobenius with scalar q. -/
+/-- The rational Tate trivialization transports the geometric Frobenius with scalar q. -/
 theorem purityTateTwistOneTrivialization_weil :
     (Nat.card k : ℤ) •
         ((geometricFiberProjUpperStarFrobeniusIso (Profinite.padicAlgClRingObj l) a).hom.app
@@ -47,14 +45,8 @@ theorem purityTateTwistOneTrivialization_weil :
           (purityTateTwistOneTrivialization a hζ hζ').hom ≫
         (geometricFiberProjUpperStarFrobeniusIso (Profinite.padicAlgClRingObj l) a).hom.app
           (𝟙_ _) := by
-  have hr := purity_rationalRootTrivialization_weil a hζ hζ'
-  have h := purity_scalarDatum_iso_alias _ _
-    (geometricFiberProjUpperStarFrobeniusIso (Profinite.padicAlgClRingObj l) a)
-    _ (purityTateTwistOneTrivialization a hζ hζ')
-    (purityTateTwistOneTrivialization_eq a hζ hζ') (Nat.card k : ℤ) (by
-      dsimp only [tateTwistOne, Functor.comp_obj, Functor.comp_map] at hr ⊢
-      exact_mod_proofs hr)
-  dsimp only [Functor.comp_obj, Functor.comp_map] at h ⊢
-  exact_mod_proofs h
+  simpa only [purityTateTwistOneTrivialization, tateTwistOne,
+    Functor.comp_obj, Functor.comp_map] using
+    (purity_rationalRootTrivialization_weil a hζ hζ')
 
 end AlgebraicGeometry.ProEtale.CondensedRing
