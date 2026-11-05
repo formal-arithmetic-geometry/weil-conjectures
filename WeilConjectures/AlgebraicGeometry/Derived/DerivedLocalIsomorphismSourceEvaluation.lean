@@ -69,7 +69,7 @@ variable {C₀ : Type u₀} {C₁ : Type u₁} {C₂ : Type u₂} {C₃ : Type u
 
 include h in
 set_option backward.isDefEq.respectTransparency false in
-private theorem derived_path_coherence (K : DerivedCategory C₀) :
+theorem derived_path_coherence (K : DerivedCategory C₀) :
     ((mapDerivedCategoryCompIso Rv Sv).inv.app K ≫
       (mapDerivedCategoryNatIso ev).hom.app K) ≫
         (mapDerivedCategoryTriangleIso δ).hom.app K =
