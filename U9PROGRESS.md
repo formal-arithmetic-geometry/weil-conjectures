@@ -265,6 +265,13 @@
 - Restoring the referenced degree-zero open comparison chain with original signatures.
 - The assigned theorem now uses the degree-zero pinned square and target automorphisms.
 - No existing theorem statement changes, proof placeholders, or heartbeat increases.
-- All compilation is remote through `ucheck-bump`; builds 3 and 4 are queued.
+- All compilation is remote through `ucheck-bump`; build 6 is queued. Build 3 was cancelled while queued; builds 4 and 5 supplied concrete prerequisite diagnostics.
 - Fix records and restoration inventories: `/home/ubuntu/u9/bz/FIXES-BZ864.md`.
 - Next: repair errors reported by those builds, validate the leaf, then continue downstream.
+
+- BZ864 update: 17 Lean modules changed, primarily restoring 24 still-needed declarations.
+- Pinned single-counit definitions now compile using explicit universe `w` and reflexive casts.
+- Remaining diagnosed repairs: abstract the homotopy-square isomorphism construction and
+  normalize casts in the pinned counit composition proof; submitted in build 6.
+- Build logs: `/home/ubuntu/u9/bz/BZ864-build-4-full.log` and `BZ864-build-5-full.log`.
+- No original statement changes, forbidden proof escapes, or heartbeat raises.
