@@ -152,3 +152,22 @@
   and AffineOpenSectionsResolutionQuasiIso; fix any owned errors and write DONE when green.
 - Notes and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ557.md`.
 - No local Lean/Lake, statement changes, proof escapes, or heartbeat increases.
+
+# BZ593 in progress
+
+- Branch: `u9/BZ593`; starting commit: `cfcb63ad7`.
+- Assigned module DerivedLocalIsomorphismSourceEvaluation passed remote ucheck-bump
+  at `914ab6116b`: rc=0, failed=0, 3934 jobs; target rebuilt in 16 seconds.
+- Both independent direct importers ProEtaleNormalizationSquareTransport and
+  SourceIsomorphismNormalizedPresheafEvaluation passed together at `73a18d7258`:
+  rc=0, failed=0, 3950 jobs. No downstream source edits were required.
+- DerivedScalarExtensionLocalSystems is skipped due to external failures in
+  MapExactFunctor (BZ589), RingedTopoiDerivedPullback (BZ554), and
+  ModuleFiniteTypeApproximation (BZ587). No external dependency was edited.
+- The user instructed continuation after the exact two-line private statement proposal.
+  The compositor directions in derived_path_coherence now preserve the original maps
+  under Mathlib's reversed API. Public statements and all docstrings are unchanged.
+- Three definition bodies and the coherence proof use the new compositor orientation.
+- Fix patterns, exact errors, and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ593.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+- Next: validate second-layer importer EtaleUniversalNormalization, then write DONE.
