@@ -43,6 +43,6 @@ theorem IsIntegral.ringKrullDim_le_and_isMaximal_comap
     intro I J hIJ
     exact Ideal.IsIntegral.under_lt_under hIJ
   · intro I hI
-    exact Ideal.isMaximal_under_of_isIntegral_of_isMaximal f hf I
+    exact Ideal.isMaximal_comap_of_isIntegral_of_isMaximal f hf I
 
 end RingHom
