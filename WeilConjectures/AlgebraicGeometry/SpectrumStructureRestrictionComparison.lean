@@ -151,11 +151,11 @@ theorem exists_spectrum_structure_restriction_comparison
     let LX := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U
     let b : e.functor ⋙ (LX ⋙ EU.functor).mapDerivedCategory ≅
         (LS.mapDerivedCategory ⋙ eO.functor) ⋙ dU.functor :=
-      isoWhiskerLeft _ (Functor.mapDerivedCategoryCompIso LX EU.functor) ≪≫
+      isoWhiskerLeft _ (Functor.mapDerivedCategoryCompIso LX EU.functor).symm ≪≫
       (Functor.associator _ _ _).symm ≪≫ isoWhiskerRight hO _
     let c : (LS ⋙ EV.functor).mapDerivedCategory ⋙ G.functor ≅
         (LS.mapDerivedCategory ⋙ eO.functor) ⋙ dU.functor :=
-      isoWhiskerRight (Functor.mapDerivedCategoryCompIso LS EV.functor) G.functor ≪≫
+      isoWhiskerRight (Functor.mapDerivedCategoryCompIso LS EV.functor).symm G.functor ≪≫
       Functor.associator _ _ _ ≪≫
       isoWhiskerLeft _
         ((Functor.associator dV.functor (dV.inverse ⋙ eO.functor) dU.functor).symm ≪≫
