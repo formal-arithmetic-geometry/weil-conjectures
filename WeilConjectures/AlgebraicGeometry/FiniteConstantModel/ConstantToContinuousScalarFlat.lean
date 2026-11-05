@@ -200,8 +200,9 @@ theorem constantToContinuous_preservesFiniteLimits
     have he : ∑ i, c i • s' i = 0 := by
       have h := congrArg (fun z ↦ M.val.map f.op z) hs
       simp only [map_sum, M.val.map_smul, map_zero] at h
-      change (∑ i, RR.obj.map f.op (a i) • M.val.map f.op (s i)) = 0 at h
-      simpa only [← hc, hsmul] using h
+      have h' : (∑ i, RR.obj.map f.op (a i) • M.val.restrictₛₗ f.op (s i)) = 0 := by
+        simpa only [PresheafOfModules.restrictₛₗ_apply] using h
+      simpa only [← hc, hsmul] using h'
     have := hflat (op V)
     obtain ⟨l, b, t, hst, hcb⟩ := Module.Flat.isTrivialRelation_of_sum_smul_eq_zero he
     refine ⟨l, (fun i j ↦ ι (op V) (b i j)), t, ?_, ?_⟩
