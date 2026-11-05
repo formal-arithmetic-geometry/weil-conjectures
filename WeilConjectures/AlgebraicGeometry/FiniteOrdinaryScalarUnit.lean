@@ -117,7 +117,9 @@ private theorem finiteScalarMap_stalk
     (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} φ).isLeftAdjoint
   apply (isColimitOfPreserves E
     (p.isColimitPresheafFiberCocone ((lowerStar (ModuleCat.{u + 1} R) i).obj F).obj)).hom_ext
-  rintro ⟨⟨U, z⟩⟩
+  intro j
+  let U := j.unop.1
+  let z := j.unop.2
   change E.map (p.toPresheafFiber U z _) ≫ _ =
     E.map (p.toPresheafFiber U z _) ≫
       E.map (stalkRestrict (ModuleCat.{u + 1} R) i y t F) ≫
