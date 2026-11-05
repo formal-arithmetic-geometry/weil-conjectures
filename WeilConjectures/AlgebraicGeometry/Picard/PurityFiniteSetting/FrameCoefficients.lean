@@ -5,27 +5,9 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Supported.SupportedCup
-public import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicCoefficientTwistsUnrestricted
-public import WeilConjectures.AlgebraicGeometry.Cartesian.CartesianCoefficientTwistsSupplement
 public import WeilConjectures.SmoothPurity.PurityFiniteSetting.Affine.PurityAffineLineDatum
-public import WeilConjectures.CategoryTheory.Sites.SmoothPurity.SupportLongExact
-public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSiteComparisonDerived
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBaseChange
-public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSiteComparisonFiniteLevel
-public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
-public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import WeilConjectures.SixFunctors.ProEtale.OpenClosed.Sequence
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersion
-public import WeilConjectures.SixFunctors.ProEtale.Comparison.Monoidal
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionBaseChange
-public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.SmoothPurity.PurityFiniteSetting.PurityFrameKummer
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import WeilConjectures.AlgebraicGeometry.Abelian.AbelianEtaleProEtaleCohomologyComparison
-import WeilConjectures.CategoryTheory.LeftModuleDerivedEvaluation.LeftModuleDerivedEvaluationForget
-import WeilConjectures.CategoryTheory.RightDerivedUniversalDeltaFunctor
-import WeilConjectures.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 
 /-! # Coefficient twists and support boundaries of an étale frame
 

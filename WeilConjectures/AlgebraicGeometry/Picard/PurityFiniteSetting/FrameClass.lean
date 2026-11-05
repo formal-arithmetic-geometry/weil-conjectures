@@ -6,11 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Picard.PurityFiniteSetting.FrameKummer
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import WeilConjectures.AlgebraicGeometry.Abelian.AbelianEtaleProEtaleCohomologyComparison
-import WeilConjectures.CategoryTheory.LeftModuleDerivedEvaluation.LeftModuleDerivedEvaluationForget
-import WeilConjectures.CategoryTheory.RightDerivedUniversalDeltaFunctor
-import WeilConjectures.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionFrame
 
 /-! # The finite class of an étale frame
 
