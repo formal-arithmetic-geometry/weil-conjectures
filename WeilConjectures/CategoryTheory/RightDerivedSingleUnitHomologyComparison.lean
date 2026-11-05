@@ -40,7 +40,6 @@ noncomputable def rightDerivedPlusSingleUnit (Y : B) :
     ((HomologicalComplex.singleMapHomologicalComplex G (.up ℤ) 0).inv.app Y)
   DerivedCategory.Plus.Q.map s ≫ G.rightDerivedFunctorPlusUnit.app S
 
-
 /-- Degree-zero homology of the derived unit on a single complex.
 
 Source: the preceding unit and `DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso`
@@ -96,7 +95,8 @@ theorem rightDerivedPlusSingleUnitHomology_comp_comparison (Y : B) :
     let L' : CochainComplex (InjectiveObject B) ℤ :=
       HomologicalComplex.liftObjectProperty _ R.cochainComplex inferInstance
     have hL' : L'.IsStrictlyGE 0 := by
-      rwa [← CochainComplex.isStrictlyGE_mapHomologicalComplex_obj_iff _ (InjectiveObject.ι B)]
+      rw [← CochainComplex.isStrictlyGE_mapHomologicalComplex_obj_iff _ (InjectiveObject.ι B)]
+      exact inferInstanceAs (R.cochainComplex.IsStrictlyGE 0)
     exact inferInstanceAs (IsIso (G.rightDerivedFunctorPlusUnit.app
       ((InjectiveObject.ι B).mapCochainComplexPlus.obj ⟨L', 0, hL'⟩)))
   have hresolution : (G.rightDerivedFunctorPlusObjSingleFunctorIsoQ Y).hom =
@@ -153,8 +153,7 @@ theorem rightDerivedPlusSingleUnitHomology_comp_comparison (Y : B) :
       InjectiveResolution.toRightDerivedZero'_comp_iCycles]
     erw [HomologicalComplex.singleObjCyclesSelfIso_inv_iCycles_assoc]
     dsimp [b, a]
-    simp only [Functor.mapHomologicalComplex_map_f,
-      HomologicalComplex.singleMapHomologicalComplex_inv_app_self, Category.assoc]
+    simp only [HomologicalComplex.singleMapHomologicalComplex_inv_app_self, Category.assoc]
     rw [InjectiveResolution.ι'_f_zero]
     simp only [Functor.map_comp, Category.assoc]
     rw [← Functor.map_comp_assoc, Iso.inv_hom_id, Functor.map_id, Category.id_comp]
