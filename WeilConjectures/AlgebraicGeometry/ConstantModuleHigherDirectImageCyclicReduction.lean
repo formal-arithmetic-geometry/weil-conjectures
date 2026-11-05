@@ -86,6 +86,10 @@ theorem isZero_constantModHigherDirectImage_of_cyclic
     have : (ModuleCat.restrictScalars.{u + 1} (Int.castRingHom Λ)).IsLeftAdjoint :=
       (ModuleCat.restrictCoextendScalarsAdj.{u + 1} (Int.castRingHom Λ)).isLeftAdjoint
     infer_instance
+  have : Y.smallEtaleTopology.PreservesSheafification
+      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}) :=
+    Sheaf.preservesSheafification_of_adjunction _
+      (Adjunction.ofIsLeftAdjoint (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}))
   let UΛ := sheafCompose X.smallEtaleTopology
     (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})
   have : UΛ.PreservesZeroMorphisms := ⟨fun _ _ ↦ by rfl⟩
