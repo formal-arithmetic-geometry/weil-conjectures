@@ -46,13 +46,11 @@ lemma preservesLimit_discrete_of_distTriang (H : C ⥤ C) (m : ℤ) (η : 𝟭 C
   have h₁ : IsIso ψ.hom₁ := by
     have : ψ.hom₁ = 𝟙 _ := Pi.hom_ext _ _ fun j ↦ by
       simp [ψ, φ, T]
-      rfl
     rw [this]
     infer_instance
   have h₂ : IsIso ψ.hom₂ := by
     have : ψ.hom₂ = 𝟙 _ := Pi.hom_ext _ _ fun j ↦ by
       simp [ψ, φ, T]
-      rfl
     rw [this]
     infer_instance
   have : IsIso ψ.hom₃ := isIso₃_of_isIso₁₂ ψ (hT _) (productTriangle_distinguished T fun j ↦ hT _)

@@ -59,7 +59,7 @@ in `R`.
 theorem comap_eq_maximalIdeal_of_finite {B : Type v} [CommRing B] [Algebra R B]
     [Module.Finite R B] (n : Ideal B) [n.IsMaximal] :
     n.comap (algebraMap R B) = maximalIdeal R :=
-  have := Ideal.isMaximal_comap_of_isIntegral_of_isMaximal (R := R) n
+  have := Ideal.isMaximal_under_of_isIntegral_of_isMaximal (R := R) n
   IsLocalRing.eq_maximalIdeal this
 
 /-- **Finite algebras over a local ring: `𝔪B` lies in the Jacobson radical.** If `B` is a
