@@ -89,10 +89,9 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
       (condensedRealizationTotalTensorIso k₀ l Z)
       (by
         have hn := projection_nativePullTensor_normalization k₀ l g
-        dsimp only [ProjectionRestrictionTensorNormalization] at hn
+        delta ProjectionRestrictionTensorNormalization at hn
         dsimp only [L, nativeOpenPull]
-        with_reducible exact_mod_proofs hn
-        run_tac throwError "K5 diagnostic: restriction normalization matches at reducible transparency")
+        as_aux_lemma => with_reducible cast_proofs hn)
       (by
         have hF := projection_native_realization_model_normalization k₀ l Y
         dsimp only [F, derivedCondensedRealization]
