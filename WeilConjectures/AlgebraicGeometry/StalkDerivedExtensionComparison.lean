@@ -118,7 +118,8 @@ theorem exists_stalkDerivedExtensionComparison (z : X') :
                   (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P)
                     i).inv ≫
                 (comparisonStalkCohomology X' z i).map
-                  (cast (by rfl) (inv ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))) := by
+                  (cast (by rfl)
+                    (inv ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))) := by
   let := leftAlgebra f g' z
   let := rightAlgebra f f' g g' sq z
   let := (tensorMap f f' g g' sq z).toAlgebra
@@ -150,7 +151,8 @@ theorem exists_stalkDerivedExtensionComparison (z : X') :
   rw [hj P hP hcP]
   convert homology_comparison s k (tensorStalkIso f f' g g' sq z P)
     ((comparisonDerivedStalk X' z).map
-      (cast (by rfl) (inv ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))))) i using 1 <;>
+      (cast (by rfl)
+        (inv ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))))) i using 1 <;>
     simp only [s, k, E, ρ, tensorComplex, RingHom.algebraMap_toAlgebra,
       Functor.comp_obj, HomologicalComplex.homologyFunctor_obj,
       ModuleCat.scalarExtensionHomologyIso,

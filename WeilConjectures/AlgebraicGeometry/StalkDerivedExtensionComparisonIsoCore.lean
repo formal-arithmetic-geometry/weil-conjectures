@@ -79,8 +79,6 @@ private theorem tensorStalkIso_naturality (z : X')
 -- Keep the original named proof binders, even though they do not occur in the conclusion.
 set_option linter.unusedVariables false in
 set_option synthInstance.maxSize 2048 in
-set_option maxHeartbeats 800000 in
--- The sheaf tensor and total-complex instances require larger search terms and budget.
 /-- A natural comparison with the specified K-flat representative equation, without an
 invertibility assertion.
 
@@ -137,7 +135,8 @@ theorem exists_stalkDerivedExtensionComparisonTransformation (z : X') :
             (RingedSpace.moduleStalkFunctor X'.toRingedSpace z).mapDerivedCategoryFactors.inv.app
                 (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P) ≫
             (comparisonDerivedStalk X' z).map
-              (cast (by rfl) (inv ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))) := by
+              (cast (by rfl)
+                (inv ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))) := by
   let := leftAlgebra f g' z
   let := rightAlgebra f f' g g' sq z
   let := (tensorMap f f' g g' sq z).toAlgebra

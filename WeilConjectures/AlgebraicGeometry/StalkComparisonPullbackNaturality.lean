@@ -62,13 +62,11 @@ def comparisonIntoPullback (z : X')
     (comparisonStalkHomologyIso X' z
       (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P) i).inv ≫
     (comparisonStalkCohomology X' z i).map
-      (show DerivedCategory.Q.obj
+      (show (DerivedCategory.Q (C := SheafOfModules.{u} (moduleRings X'.toRingedSpace))).obj
           (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P) ⟶
           (derivedPullback g').obj (DerivedCategory.Q.obj P) from
         cast (by rfl) (inv ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))))
 
-set_option maxHeartbeats 1600000 in
--- Comparing the nested localization factors requires additional elaboration heartbeats.
 /-- The comparison into derived pullback is natural for derived isomorphisms of
 K-flat sheaf representatives, using any tensor-algebra lift of the specified
 underlying cohomology transport.
