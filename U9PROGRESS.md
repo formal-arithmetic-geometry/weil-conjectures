@@ -1,42 +1,23 @@
-# BZ244 complete
+# BZ345 complete
 
-- Unit: BZ244; branch: `u9/BZ244`; starting commit: `c781553bf`.
-- Five modules passed together through `ucheck-bump`: rc=0, failed=0, 3914 jobs.
-- Validated source commit: `04eeac193862d42de32c188c48615ffd41e07e5d`. This final update changes progress notes only.
-- Green modules:
-  - `WeilConjectures.AlgebraicGeometry.DerivedUnitLerayComp`
-  - `WeilConjectures.AlgebraicGeometry.DerivedEtaleCohomologyPullbackLaws`
-  - `WeilConjectures.SixFunctors.Etale.Derived.GlobalSectionsRestrictionBasic`
-  - `WeilConjectures.SixFunctors.Etale.Derived.GlobalSectionsRestrictionCoproduct`
-  - `WeilConjectures.AlgebraicGeometry.RawAffineComplexSystemMapCoherence`
-- The user instructed continuation after the two-site statement compatibility proposal.
-  Used the inverse of Mathlib's reversed compositor in the assigned module and its direct
-  importers, preserving the intended maps. Added `Iso.symm_hom` for rewrite matching.
-- All other statements and all existing docstrings are unchanged. No local Lean/Lake,
-  proof placeholders, trust bypasses, profiler probes, or heartbeat increases.
-- Two second-layer targets were skipped per the brief's ownership rule:
-  `GlobalSectionsRestrictionStrictlyLocal` (first blocker `OpenHomTriangleRealization`),
-  `EtaleHypercohomologyUniformBound` (`EtaleKInjectiveUnitLeray`, `EtaleRowSectionsExtend`).
-- Full final log: `/home/ubuntu/u9/bz/BUILD-BZ244-final-full.log`.
-- Fix patterns, whole-tree occurrence counts, and skipped dependency details:
-  `/home/ubuntu/u9/bz/FIXES-BZ244.md`.
-- Completion marker: `/home/ubuntu/u9/state/BZ244.DONE`.
-
-# BZ150 complete
-
-- Branch: `u9/BZ150`; starting commit: `80aeb4bf4`.
-- All four assigned modules passed together with `ucheck-bump`: rc=0, failed=0, 3644 jobs.
-- Validated source commit: `fb9bd7b27d169a5e395ed809947ee52e6fd0b46e`.
-- Build tree: `newsrv:/home/ubuntu/u9n/bumpw5`.
-- Full log: `/home/ubuntu/u9/bz/BUILD-BZ150-final-full.log`.
-- The user instructed continuation after the exact one-line statement migration proposal.
-  `rightDerivedPullback_comp` now uses `(mapDerivedCategoryCompIso P P').symm` because
-  Mathlib owns the old name with the opposite orientation; the intended map is preserved.
-- All remaining declaration statements and existing docstrings are unchanged.
-- Completion marker: `/home/ubuntu/u9/state/BZ150.DONE`.
-- This completion update changes only progress documentation after the successful source build.
-- Fix patterns and logs: `/home/ubuntu/u9/bz/FIXES-BZ150.md`.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+- Branch: `u9/BZ345`; starting commit: `04c3957dc56263143b9eaebd3d534360487f939e`.
+- Assigned module `WeilConjectures.AlgebraicGeometry.StrictlyPerfectFiniteFreeRefinement`
+  passed `ucheck-bump`: rc=0, failed=0, 3017 jobs, validated at `ec63878fb4`.
+- The compositor fix was already present in the starting tree; no Lean source changes
+  are delivered by this unit.
+- Direct importer `WeilConjectures.AlgebraicGeometry.PerfectImpliesQCoh` also rebuilt
+  successfully (2.7s) in the downstream check at `4fb37223f6`.
+- The other three direct importers were skipped because of external dependency errors.
+  All 20 direct importers of PerfectImpliesQCoh also have known external blockers.
+- Downstream batches were stopped after the external blockers were identified; their
+  wrapper exit codes are not treated as proof that the entire batch succeeded.
+- Fix record: `/home/ubuntu/u9/bz/FIXES-BZ345.md`.
+- Evidence: `/home/ubuntu/u9/bz/BUILD-BZ345-baseline-full.log`,
+  `/home/ubuntu/u9/bz/BUILD-BZ345-downstream1-full.log`,
+  `/home/ubuntu/u9/bz/BUILD-BZ345-downstream2-full.log`, and
+  `/home/ubuntu/u9/bz/BZ345-layer2-blockers.tsv`.
+- No local Lean/Lake, statement changes, forbidden proof shortcuts, or heartbeat raises.
+- Completion marker: `/home/ubuntu/u9/state/BZ345.DONE`.
 
 # BZ133 complete
 
@@ -90,20 +71,51 @@
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 - Completion marker: `/home/ubuntu/u9/state/BZ130.DONE`.
 
-# BZ159 complete
+# BZ154 complete
 
-- Unit: BZ159; branch: `u9/BZ159`.
-- All four assigned modules passed `ucheck-bump` together: rc=0, failed=0, 4255 jobs.
-- Validated source commit: `f69c33ffa45cfbe76eeabefd69b81cd9b1b10343`.
-  This completion update changes only progress documentation.
-- Build host: `newsrv:/home/ubuntu/u9n/bumpw6`.
-- Full log: `/home/ubuntu/u9/bz/BUILD-BZ159-final-full.log`.
-- Modules: DerivedSingleShiftNormalization, NativeDerivedBaseChange, Inertia,
-  CyclicDerivedActionRealization.
-- The user instructed continuation after the explicit equivalent statement API proposal;
-  the two cyclic-action statement references now use the forward composition isomorphism.
-  All other existing statement text and docstrings remain unchanged.
-- Fix patterns and whole-tree baseline occurrence counts:
-  `/home/ubuntu/u9/bz/FIXES-BZ159.md`.
-- No proof placeholders, trust bypasses, local Lean/Lake execution, or heartbeat increases.
-- Completion marker: `/home/ubuntu/u9/state/BZ159.DONE`.
+- Branch: `u9/BZ154`, starting commit `80aeb4bf4`.
+- All four assigned modules passed together through `ucheck-bump`: rc=0, failed=0, 3457 jobs.
+- Validated source commit: `d26e23a372af96d353232cce73966fa427f1419d`.
+- Each assigned module rebuilt successfully on `newsrv:/home/ubuntu/u9n/bumpw2`.
+- Full build log: `/home/ubuntu/u9/bz/BUILD-BZ154-final-full.log`.
+- The user instructed continuation after the exact one-line statement correction in
+  `BZ154-shift-statement-proposal.patch`; that patch is applied and validated.
+- The shift comparison's target is quotient followed by `Plus.Qh`, matching its existing
+  construction and homotopy-category unit. Other changes are the mandated composition
+  isomorphism migration and imports for private definitional reductions.
+- Fix patterns and whole-tree occurrence counts: `/home/ubuntu/u9/bz/FIXES-BZ154.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ154.DONE`.
+- This completion commit changes only progress documentation; Lean sources match the green build.
+
+# BZ229 complete
+
+- Branch: `u9/BZ229`; starting commit: `c0384594d`.
+- Assigned module: `WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraDerivedRightAdjointLift`.
+- The module passed `ucheck-bump`: rc=0, failed=0, 2110 jobs; target rebuilt in 10 seconds.
+- Validated source commit: `0673016c02360dade89345e38fc576c7609cf662`.
+- Build tree: `newsrv:/home/ubuntu/u9n/bumpw1`.
+- Full build log: `/home/ubuntu/u9/bz/BUILD-BZ229-final-full.log`.
+- The user instructed continuation after the explicit one-token statement correction proposal.
+  Applied `.hom` -> `.inv` in the composition-factor helper to preserve its original map
+  after adopting Mathlib's reversed composition isomorphism. Other statement types and
+  all existing docstrings are unchanged.
+- Definition bodies and inverse cancellation now use the new composition orientation.
+  Two trailing `rfl` tactics after `simp` were removed. The final `rfl` after `erw` is needed
+  in this module and is retained.
+- Fix patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ229.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ229.DONE`.
+- This completion commit changes only progress documentation; Lean source matches the green build.
+
+# BZ307 in progress
+
+- Branch: `u9/BZ307`; starting commit: `ec1bc636d93cb23a821cc484ab6aef1db014813f`.
+- Assigned module: `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CommIsoComp`.
+- Baseline remote build failed only at the two obsolete compositor `.symm` uses in the statement.
+- The user instructed continuation after the exact two-expression compatibility proposal;
+  `BZ307-statement-compatibility.patch` is applied, along with the matching proof changes.
+- Assigned module passed `ucheck-bump` at `fa8b9a053e`: rc=0, failed=0, 1924 jobs.
+- Next: check direct importers and write the DONE marker.
+- Fix patterns, whole-tree counts, and logs: `/home/ubuntu/u9/bz/FIXES-BZ307.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
