@@ -32,6 +32,8 @@ open CategoryTheory
 
 variable {C : Type*} [Category* C] {R : Cᵒᵖ ⥤ CommRingCat.{u}}
 
+attribute [local reducible] Functor.comp
+
 namespace PresheafOfModules
 
 variable (M : PresheafOfModules.{u} (R ⋙ forget₂ CommRingCat RingCat)) (r : ℕ)

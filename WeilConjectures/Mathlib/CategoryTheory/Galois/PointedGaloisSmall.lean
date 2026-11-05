@@ -51,7 +51,7 @@ variable [GaloisCategory C]
 
 /-- Being Galois is invariant under isomorphism. -/
 lemma isGalois_of_iso {X Y : C} (e : X ≅ Y) [IsGalois X] : IsGalois Y := by
-  obtain ⟨F, ⟨_⟩⟩ := GaloisCategory.hasFiberFunctor (C := C)
+  obtain ⟨F, hF⟩ := GaloisCategory.hasFiberFunctor (C := C)
   have : IsConnected Y := isConnected_of_iso e
   rw [isGalois_iff_pretransitive F]
   refine ⟨fun y₁ y₂ ↦ ?_⟩

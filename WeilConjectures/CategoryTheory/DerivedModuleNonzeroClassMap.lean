@@ -81,7 +81,6 @@ theorem derivedModule_nonzero_class_map
     simp only [a, f, HomologicalComplex.cyclesMap_i,
       HomologicalComplex.mkHomFromSingle_f,
       HomologicalComplex.singleObjCyclesSelfIso_hom, Category.assoc]
-    rfl
   have hg : g ≫ L.homologyπ 0 = 0 := by
     apply (cancel_epi a.hom).1
     rw [← Category.assoc, ← hcycles, ← HomologicalComplex.homologyπ_naturality, hhom]
