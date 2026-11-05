@@ -10,11 +10,14 @@ public import WeilConjectures.WeilSheaf.Native.Projection.NativeModelFamilyNorma
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareStatement
 public import WeilConjectures.WeilSheaf.Native.Projection.NativePullTensorNormalization
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeTensorTotalInstances
+import WeilConjectures.Tactic.ExactModProofs
 
 /-! # Localization with the canonical geometric pullback comparison -/
 
 @[expose] public noncomputable section
 set_option Elab.async false
+set_option profiler true
+set_option profiler.threshold 1000
 attribute [local instance 0] ModuleCat.isGrothendieckAbelian_of_commRing
 universe u
 open CategoryTheory MonoidalCategory Limits
@@ -55,7 +58,8 @@ lemma projection_derived_square_of_canonical_comparison
       (fun X Y ↦ ((CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
         (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))).mapCochainComplexμIso X Y).inv) P T) :
     DerivedPullTensorSquare k₀ l g (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj T) := by
-  exact projection_derived_square_of_geometric_functor k₀ l g
+  dsimp only [DerivedPullTensorSquare, nativeOpenPull, derivedCondensedRealization]
+  exact_mod_proofs projection_derived_square_of_geometric_functor k₀ l g
     (condensedRealizationUpperStarIso k₀ l g).symm P T hP hT htotal
 
 end AlgebraicGeometry.ProEtaleWeilSheaf

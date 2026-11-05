@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareFromGeometricFunctor
+public import WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareFromCanonicalComparison
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareOfRepresentatives
 public import WeilConjectures.WeilSheaf.Native.Projection.TotalSquareToModel
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeModelFamilyNormalization
@@ -58,9 +58,6 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
 variable (htotal : ∀ P T : CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ,
   TotalPullTensorSquare k₀ l g P T)
 
-set_option maxHeartbeats 2000000 in
--- The concrete application still exhausted one million kernel heartbeats after the
--- native model families were checked separately (755 seconds in the measured build).
 include htotal in
 /-- On K-flat representatives, the native tensor square is the localization of the
 square of total complexes. -/
@@ -69,10 +66,8 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
     (hP : NativeIsKFlat k₀ l Y P) (hT : NativeIsKFlat k₀ l Y T) :
     DerivedPullTensorSquare k₀ l g (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj T) := by
   projection_strict
-    exact projection_derived_square_of_geometric_functor k₀ l g
-      (condensedRealizationUpperStarIso k₀ l g).symm
-      P T hP hT
-      (by exact htotal P T)
+    exact projection_derived_square_of_canonical_comparison k₀ l g P T hP hT
+      (projection_total_square_in_model_form k₀ l g P T (htotal P T))
 
 include htotal in
 /-- The native pullback tensor square on arbitrary derived objects, extended from K-flat
