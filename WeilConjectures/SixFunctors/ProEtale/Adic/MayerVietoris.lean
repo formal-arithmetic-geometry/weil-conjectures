@@ -132,10 +132,10 @@ lemma isIso_Q_map_unit_of_isZero (hcov : ∀ x, x ∈ Set.range jU.base ∨ x �
       refine (((pullback.fst jU jV)^*ᵃ[l].mapDerivedCategory.map_isZero hI)).of_iso ?_
       exact (pullback.snd jU jV)^*ᵃ[l].mapDerivedCategory.mapIso
           (((jV)^*ᵃ[l].mapDerivedCategoryFactors).app I).symm ≪≫
-        (((jV)^*ᵃ[l].mapDerivedCategoryCompIso (pullback.snd jU jV)^*ᵃ[l]).app _).symm ≪≫
+        ((jV)^*ᵃ[l].mapDerivedCategoryCompIso (pullback.snd jU jV)^*ᵃ[l]).app _ ≪≫
         (Functor.mapDerivedCategoryNatIso
           (adicUpperStarCompIso l pullback.condition.symm)).app _ ≪≫
-        ((jU)^*ᵃ[l].mapDerivedCategoryCompIso (pullback.fst jU jV)^*ᵃ[l]).app _
+        (((jU)^*ᵃ[l].mapDerivedCategoryCompIso (pullback.fst jU jV)^*ᵃ[l]).app _).symm
     have h₂ : IsZero ((jU)^*ᵃ[l].mapDerivedCategory.obj (DerivedCategory.Q.obj
         (((jV)_*ᵃ[l].mapHomologicalComplex (ComplexShape.up ℤ)).obj J))) := by
       refine (((pullback.fst jU jV)_*ᵃ[l].rightDerivedFunctor.map_isZero hJ)).of_iso ?_
