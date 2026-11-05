@@ -1,3 +1,16 @@
+# BZ133 in progress
+
+- Branch: `u9/BZ133`.
+- Three assigned modules passed `ucheck-bump` at `dc56b324b779`.
+- The user instructed continuation after the exact definition-body repair proposal for
+  `injectiveResolutionDerivedComparison`; that patch is now applied.
+- The obsolete `quotientCompQhIso` factor and its proof rewrites are removed because `Plus.Q`
+  now directly lifts `Q`. All declaration types remain unchanged.
+- Next: validate all four assigned modules with `ucheck-bump`, then write
+  `/home/ubuntu/u9/state/BZ133.DONE`.
+- Fix patterns and build logs: `/home/ubuntu/u9/bz/FIXES-BZ133.md`.
+- No local Lean/Lake execution, forbidden proof escapes, or heartbeat increases.
+
 # BZ118 in progress
 
 - Branch: `u9/BZ118`.
