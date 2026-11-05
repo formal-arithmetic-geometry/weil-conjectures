@@ -377,13 +377,15 @@ private theorem extension_preserves_small_colimits (F : GMod R ⥤ GMod S)
     (hmF : ∀ {M N} (f : M ⟶ N), F.map f = eqToHom (hF M) ≫
       SheafOfModules.changeOfRingsHom a M f ≫ eqToHom (hF N).symm) :
     PreservesColimitsOfSize.{0, 0} F := by
-  let := HasDerivedCategory.standard (GMod R)
-  let := HasDerivedCategory.standard (GMod S)
-  obtain ⟨s⟩ := SheafOfModules.scalarDerivedPair_exists a
-  have hs : s.extension = F := SheafOfModules.coefficientPresentation_eq a
-    s.extension F s.extension_obj hF s.extension_map hmF
-  rw [← hs]
-  let := s.ordinaryAdjunction.isLeftAdjoint
+  let e : F ≅ SheafOfModules.CoefficientOrdinaryProof.tensorFunctor a :=
+    NatIso.ofComponents (fun M ↦ eqToIso (hF M)) (by
+      intro M N f
+      change F.map f ≫ eqToHom (hF N) =
+        eqToHom (hF M) ≫ SheafOfModules.changeOfRingsHom a M f
+      rw [hmF]
+      simp)
+  let := ((SheafOfModules.CoefficientOrdinaryProof.tensorAdjunction a).ofNatIsoLeft
+    e.symm).isLeftAdjoint
   infer_instance
 
 end TotalGenerators
