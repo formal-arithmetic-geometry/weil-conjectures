@@ -31,7 +31,12 @@ local instance {X : TopCat.{u}} (A : X.Sheaf CommRingCat.{u})
     Module (A.obj.obj V) (P.obj V) :=
   (P.obj V).isModule
 
-attribute [local instance] TopCat.Sheaf.inverseImageModuleInstances
+local instance {X Y : TopCat.{u}} (f : X ⟶ Y) (A : Y.Sheaf CommRingCat.{u})
+    (G : SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology Y)
+      (forget₂ CommRingCat.{u} RingCat.{u})).obj A)) (W : (TopologicalSpace.Opens X)ᵒᵖ) :
+    Module ((TopCat.Sheaf.inverseImageRing f A).obj.obj W)
+      ((TopCat.Sheaf.inverseImageModule f A G).val.obj W) :=
+  TopCat.Sheaf.inverseImageModuleInstances f A G W
 
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
