@@ -81,14 +81,16 @@
 - No local Lean/Lake, proof placeholders, trust escapes, or heartbeat increases.
 - This final commit changes only progress documentation after the successful build.
 
-# BZ298 in progress
+# BZ302 in progress
 
-- Branch: `u9/BZ298`; starting commit: `18e44f2d5`.
-- The user instructed continuation after the exact one-line statement compatibility proposal.
-- Applied `Unith.app (quotient.obj L)` → `Unit.app L` in
-  `GrothendieckResolutionUnitComparison`, matching `resolution_composite_unit_transport`.
-- The baseline and import-only remote checks both failed before proof checking; ineffective
-  imports were removed. No other statement, binder, or docstring changed.
-- Next: validate the assigned module, then its direct importer and one further layer.
-- Fix patterns and exact errors: `/home/ubuntu/u9/bz/FIXES-BZ298.md`.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+- Branch: `u9/BZ302`; starting commit `18e44f2d5127c179f285ccf7d988c2bf3963106e`.
+- Assigned module `WeilConjectures.RingTheory.PseudoCoherentNormalizedAlgebraTower`
+  passed `ucheck-bump`: rc=0, failed=0, 3874 jobs.
+- Validated source commit: `0d7f5241259939090a66c9cf0c46ae2359caa63a`.
+- The user instructed continuation after the exact two-line statement compatibility
+  proposal; the composition comparison now uses `.symm` to retain its old direction.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ302-fix-full.log`.
+- Continuing into four direct importers, as the brief requires. RlimPerfectComplete
+  receives the same compositor fix without changes to declaration types.
+- Fix patterns and occurrence counts: `/home/ubuntu/u9/bz/FIXES-BZ302.md`.
+- No local Lean/Lake, proof placeholders, trust escapes, or heartbeat increases.
