@@ -274,7 +274,8 @@ variable [HasDerivedCategory.{w} C]
 
 private noncomputable instance complexCommShift :
     (bifunctorHomComplexFunctor H I).CommShift ℤ :=
-  inferInstanceAs ((ordinaryFunctor H I ⋙ DerivedCategory.Q.op).CommShift ℤ)
+  inferInstanceAs ((ordinaryFunctor H I ⋙
+    (HomotopyCategory.quotient C (.up ℤ) ⋙ DerivedCategory.Qh).op).CommShift ℤ)
 
 private noncomputable instance liftedCommShift :
     (bifunctorHomHomotopyFunctor H I).CommShift ℤ := by
@@ -314,7 +315,8 @@ private theorem oppositeCoconeBoundary_f {X Y : CochainComplex C ℤ}
   simp only [Category.assoc, Category.id_comp]
   simp only [HomologicalComplex.XIsoOfEq_hom_comp_XIsoOfEq_hom,
     HomologicalComplex.XIsoOfEq_rfl, Iso.refl_hom, Category.comp_id]
-  simp only [mappingCocone, XIsoOfEq_shift]
+  dsimp only [mappingCocone]
+  simp only [XIsoOfEq_shift]
   simp only [HomologicalComplex.XIsoOfEq_hom_comp_XIsoOfEq_hom,
     HomologicalComplex.XIsoOfEq_rfl, Iso.refl_hom, Category.comp_id]
 
@@ -471,6 +473,8 @@ private theorem homotopyCone_distinguished {K L : CochainComplex A ℤ} (f : K �
     (Functor.mapTriangleCompIso (HomotopyCategory.quotient A (ComplexShape.up ℤ))
       (bifunctorHomHomotopyFunctor H I)).symm.app _ ≪≫
     (Functor.mapTriangleIso (quotientComparison H I)).app _ ≪≫
+    (Functor.mapTriangleIso (Functor.isoWhiskerLeft (ordinaryFunctor H I)
+      (NatIso.op (DerivedCategory.quotientCompQhIso C)))).app _ ≪≫
     (Functor.mapTriangleCompIso (ordinaryFunctor H I) DerivedCategory.Q.op).app _ ≪≫
     DerivedCategory.Q.op.mapTriangle.mapIso e.symm
   exact CategoryTheory.Pretriangulated.isomorphic_distinguished _
