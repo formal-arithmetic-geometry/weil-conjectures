@@ -50,6 +50,22 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
   [J.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]
   [K.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]
 
+private local instance (R : Sheaf J CommRingCat.{w}) (I : Type w) :
+    HasColimitsOfShape (Discrete I) (PresheafOfModules.{w}
+      ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R).obj) :=
+  PresheafOfModules.hasColimitsOfShape _ _
+
+private local instance (R : Sheaf J CommRingCat.{w}) (I : Type w) :
+    HasColimitsOfShape (Discrete I) (Modules R) :=
+  SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
+
+private local instance (R : Sheaf J CommRingCat.{w}) (I : Type) :
+    HasColimitsOfShape (Discrete I) (Modules R) := by
+  let : HasColimitsOfShape (Discrete I) (PresheafOfModules.{w}
+      ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R).obj) :=
+    PresheafOfModules.hasColimitsOfShape _ _
+  exact SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
+
 /-- The existing signed direct-sum total tensor, with its instances fixed once.
 Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
 noncomputable def total {R : Sheaf J CommRingCat.{w}} (P Q : Complex R) : Complex R := P ⊗ Q
