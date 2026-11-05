@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.DerivedGlobalScalar
+public import Mathlib.AlgebraicGeometry.AffineScheme
 import WeilConjectures.AlgebraicGeometry.PerfectSupportAffineModuleModel
 import WeilConjectures.CategoryTheory.DerivedCategory.BoundedProjectiveHomPowerTorsion
 
