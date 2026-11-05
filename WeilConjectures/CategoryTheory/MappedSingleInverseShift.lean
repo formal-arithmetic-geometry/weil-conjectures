@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+public import Mathlib.Algebra.Homology.Localization
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
 
 /-!
