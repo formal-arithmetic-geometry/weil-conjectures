@@ -49,7 +49,18 @@ private theorem isIso_over_of_le (X : Scheme.{u}) {E H : X.Modules} (j : E ⟶ H
 set_option backward.isDefEq.respectTransparency false in
 private theorem finiteType_of_top (X : Scheme.{u}) (M : X.Modules)
     [(M.over (⊤ : X.Opens)).IsFiniteType] : M.IsFiniteType := by
+  classical
   obtain ⟨D, hD⟩ := IsFiniteType.exists_localGeneratorsData (M.over (⊤ : X.Opens))
+  have hgen (i : D.I) :
+      ∃ g : (M.over (D.X i).left).GeneratingSections, g.IsFiniteType := by
+    let e := pushforwardPushforwardEquivalence (Over.iteratedSliceEquiv (D.X i))
+      (S := (X.ringCatSheaf.over _).over _) (R := X.ringCatSheaf.over _) (𝟙 _) (𝟙 _)
+      (by ext : 2; exact X.ringCatSheaf.1.map_id _)
+      (by ext : 2; exact X.ringCatSheaf.1.map_id _)
+    refine ⟨((D.generators i).map e.inverse (.refl _)).ofEpi
+      (e.fullyFaithfulFunctor.preimageIso
+        (by exact e.counitIso.app ((M.over (⊤ : X.Opens)).over (D.X i)))).hom, ?_⟩
+    exact ⟨(hD.isFiniteType i).finite⟩
   let q : M.LocalGeneratorsData :=
     { I := (_ : Unit) × D.I
       X i := (D.X i.2).left
@@ -57,17 +68,8 @@ private theorem finiteType_of_top (X : Scheme.{u}) (M : X.Modules)
         ((Opens.coversTop_iff _ (fun _ : Unit ↦ (⊤ : X.Opens))).mpr
           (by change (⨆ _ : Unit, (⊤ : X.Opens)) = ⊤; exact iSup_const)).over
             (fun _ ↦ D.coversTop)
-      generators i := by
-        let e := pushforwardPushforwardEquivalence (Over.iteratedSliceEquiv (D.X i.2))
-          (S := (X.ringCatSheaf.over _).over _) (R := X.ringCatSheaf.over _) (𝟙 _) (𝟙 _)
-          (by ext : 2; exact X.ringCatSheaf.1.map_id _)
-          (by ext : 2; exact X.ringCatSheaf.1.map_id _)
-        exact ((D.generators i.2).map e.inverse (.refl _)).ofEpi
-          (e.fullyFaithfulFunctor.preimageIso
-            (by exact e.counitIso.app ((M.over (⊤ : X.Opens)).over (D.X i.2)))).hom }
-  have : q.IsFiniteType :=
-    { isFiniteType := fun i ↦ ⟨(hD.isFiniteType i.2).finite⟩ }
-  exact { exists_localGeneratorsData := ⟨q, inferInstance⟩ }
+      generators i := (hgen i.2).choose }
+  exact ⟨q, ⟨fun i ↦ (hgen i.2).choose_spec⟩⟩
 
 /-- A global quasi-coherent module which is finite type on a quasi-compact open
 contains a finite-type quasi-coherent submodule equal to it on that open.
