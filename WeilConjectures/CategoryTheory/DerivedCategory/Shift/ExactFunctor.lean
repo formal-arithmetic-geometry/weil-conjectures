@@ -51,7 +51,7 @@ instance commShift_mapDerivedCategoryCompIso_hom (F : C ⥤ D) (G : D ⥤ E)
     [F.Additive] [G.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G] :
-    NatTrans.CommShift ((mapDerivedCategoryCompIso F G).symm).hom ℤ := by
+    NatTrans.CommShift (((mapDerivedCategoryCompIso F G).symm).symm).hom ℤ := by
   have eq : whiskerLeft DerivedCategory.Qh (mapDerivedCategoryCompIso F G).hom =
       (F ⋙ G).mapDerivedCategoryFactorsh.hom ≫
         whiskerRight (Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G))

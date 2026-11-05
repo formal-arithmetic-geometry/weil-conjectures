@@ -60,7 +60,7 @@ lemma TopologicalSpace.Opens.eq_of_forall_isClosed_singleton {X : Type*} [Topolo
   have key {U V : TopologicalSpace.Opens X} (h : ∀ x : X, IsClosed {x} → x ∈ U → x ∈ V) :
       U ≤ V := by
     by_contra hUV
-    obtain ⟨x, hxU, hxV⟩ := SetLike.not_le_iff_exists.mp hUV
+    obtain ⟨x, hxU, hxV⟩ := IsConcreteLE.not_le_iff_exists.mp hUV
     obtain ⟨y, ⟨hyU, hyV⟩, hy⟩ := nonempty_inter_closedPoints (Z := (U : Set X) ∩ (V : Set X)ᶜ)
       ⟨x, hxU, hxV⟩ ⟨U, (V : Set X)ᶜ, U.isOpen, V.isOpen.isClosed_compl, rfl⟩
     exact hyV (h y hy hyU)
