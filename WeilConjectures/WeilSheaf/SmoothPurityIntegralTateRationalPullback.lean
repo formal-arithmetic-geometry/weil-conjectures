@@ -52,9 +52,9 @@ lemma upperStarIntegralTateTwistOneIso_hom_comp_rationalization :
     (Profinite.padicIntegersRingObjToPadicAlgCl ℓ E)
     (Profinite.padicIntRingObjToPadicAlgCl ℓ)
     (Profinite.padicIntRingObjToPadicIntegers_comp_padicIntegersRingObjToPadicAlgCl ℓ E)
-  simp only [extendScalarsIntegralTateTwistOneIso,upperStarIntegralTateTwistOneIso, integralTateTwistOne,
-    upperStarTateTwistOneIso, tateModule, tateModuleSystem, tateModuleTransition,
-    tateModuleLevel, Iso.app_hom] at h ⊢
+  simp only [extendScalarsIntegralTateTwistOneIso, upperStarIntegralTateTwistOneIso,
+    integralTateTwistOne,
+    upperStarTateTwistOneIso, tateModule, tateModuleSystem, Iso.app_hom] at h ⊢
   delta tateModuleTransition
   exact h
 

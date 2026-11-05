@@ -48,6 +48,7 @@ lemma puritySingleComparison_app_eq_exact (P : C) :
   simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.inv_hom_id_app]
   simp [mapDerivedCategorySingleFunctor]
   erw [Functor.map_id, Category.id_comp]
+  rfl
 
 
 /-- On a flat object, the two canonical identifications for an exact functor coincide. -/

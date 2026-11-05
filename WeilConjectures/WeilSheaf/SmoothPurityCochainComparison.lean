@@ -27,6 +27,18 @@ noncomputable def purityCochainComparisonOfHomotopy
     whiskerRight (F.mapHomotopyCategoryFactors (.up ℤ)).hom DerivedCategory.Qh ≫
     whiskerLeft (F.mapHomologicalComplex (.up ℤ)) (DerivedCategory.quotientCompQhIso D).hom
 
+/-- On a complex, all the quotient comparisons are identity maps. -/
+lemma purityCochainComparisonOfHomotopy_app
+    (F : C ⥤ D) [F.Additive] (LF : DerivedCategory C ⥤ DerivedCategory D)
+    (η : DerivedCategory.Qh ⋙ LF ⟶ F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (K : CochainComplex C ℤ) :
+    (purityCochainComparisonOfHomotopy F LF η).app K =
+      η.app ((HomotopyCategory.quotient C (.up ℤ)).obj K) := by
+  simp only [purityCochainComparisonOfHomotopy, NatTrans.comp_app, whiskerRight_app,
+    whiskerLeft_app]
+  change LF.map (𝟙 _) ≫ η.app _ ≫ DerivedCategory.Qh.map (𝟙 _) ≫ 𝟙 _ = _
+  simp only [Functor.map_id, Category.id_comp, Category.comp_id]
+
 variable {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]
   [HasDerivedCategory A] [HasDerivedCategory B]
 
@@ -58,17 +70,7 @@ lemma purityCochainComparisonOfHomotopy_square
         (purityCochainComparisonOfHomotopy G LG ηG).app
           ((F.mapHomologicalComplex (.up ℤ)).obj K) ≫
         DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex e (.up ℤ)).app K) := by
-  simp only [purityCochainComparisonOfHomotopy, NatTrans.comp_app, whiskerRight_app,
-    whiskerLeft_app, Functor.map_comp, Category.assoc]
-  simp only [mapHomotopyCategoryFactors, Quotient.lift.isLift_hom, Functor.map_id,
-    Category.id_comp]
-  simp only [← Functor.map_comp_assoc, Iso.hom_inv_id_app, Functor.map_id, Category.id_comp]
-  erw [← α.naturality_assoc]
-  simp only [Functor.comp_map, Category.assoc]
-  erw [reassoc_of% (h ((HomotopyCategory.quotient C (.up ℤ)).obj K))]
-  congr 2
-  have he := (DerivedCategory.quotientCompQhIso B).hom.naturality
-    ((NatTrans.mapHomologicalComplex e (.up ℤ)).app K)
-  exact he
+  simp only [purityCochainComparisonOfHomotopy_app]
+  exact h ((HomotopyCategory.quotient C (.up ℤ)).obj K)
 
 end CategoryTheory.Functor
