@@ -5,6 +5,9 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
+
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantDerivedDirectImage
 public import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 public import Mathlib.Algebra.Category.Grp.AB
@@ -205,7 +208,7 @@ private theorem exactSquare_factorsh
     ((Functor.mapHomotopyCategoryCompIso (Iso.refl (L ⋙ H)) (.up ℤ)).hom.app K))).1
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
   rw [h₁, h₃, ← h₂]
-  simp only [Functor.map_comp, Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Functor.map_comp, Category.assoc, Iso.hom_inv_id_app_assoc]
   have hc : DerivedCategory.Qh.map
         ((Functor.mapHomotopyCategoryCompIso (Iso.refl (L ⋙ H)) (.up ℤ)).inv.app K) ≫
       DerivedCategory.Qh.map
@@ -313,8 +316,8 @@ private theorem derived_mate_factorsh
         NatTrans.mapHomotopyCategory s.hom (.up ℤ) ≫
         (Functor.mapHomotopyCategoryCompIso (Iso.refl (L ⋙ H)) (.up ℤ)).inv))
     (TwoSquare.mk _ _ _ _
-      ((Functor.mapDerivedCategoryCompIso G L').symm ≪≫
-        Functor.mapDerivedCategoryNatIso s ≪≫ Functor.mapDerivedCategoryCompIso L H).hom)
+      (Functor.mapDerivedCategoryCompIso G L' ≪≫
+        Functor.mapDerivedCategoryNatIso s ≪≫ (Functor.mapDerivedCategoryCompIso L H).symm).hom)
     K (exactSquare_factorsh L L' G H s _)
 
 private theorem adjunct_comp_comparison {C D E : Type*}
@@ -608,7 +611,7 @@ Source: blueprint evaluation normalization
 (blueprint: def-cbc-strict-constant-tower-operations). -/
 noncomputable def evalG {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     G B f ⋙ ev B X n ≅ ev B Y n ⋙ (modulePullback B f).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso _ _) ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
   Functor.mapDerivedCategoryNatIso (eqToIso (evaluationPullback B f n)) ≪≫
   (Functor.mapDerivedCategoryCompIso _ _).symm
 
@@ -684,9 +687,9 @@ theorem evalR_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     infer_instance
   have hm : (mateEquiv a a' (TwoSquare.mk _ _ _ _ s.hom)).natTrans =
       𝟙 (E' ⋙ P') := evaluation_mate B f n
-  have hs : ((Functor.mapDerivedCategoryCompIso E L').symm ≪≫
+  have hs : (Functor.mapDerivedCategoryCompIso E L' ≪≫
       Functor.mapDerivedCategoryNatIso s ≪≫
-      Functor.mapDerivedCategoryCompIso L E').hom = (evalG B f n).inv := by
+      (Functor.mapDerivedCategoryCompIso L E').symm).hom = (evalG B f n).inv := by
     dsimp only [s, evalG]
     simp only [Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv,
       Functor.mapDerivedCategoryNatIso_symm, Category.assoc]
