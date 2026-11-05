@@ -99,10 +99,11 @@ theorem schemeMV_restriction_chain_quotient_transport
     Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Category.assoc]
   erw [hy, hr]
-  simp only [Category.assoc, Functor.mapHomotopyCategoryFactors,
+  simp only [Functor.comp_obj, Category.assoc, Functor.mapHomotopyCategoryFactors,
     Quotient.lift.isLift_inv, CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
   erw [← Functor.map_comp_assoc, Iso.inv_hom_id_app,
     CategoryTheory.Functor.map_id, Category.id_comp]
+  simp only [← Functor.map_comp]
   erw [hxi]
   simp only [Functor.map_comp, Category.assoc]
   erw [DerivedCategory.quotientCompQhIso_inv_naturality_assoc]
