@@ -142,57 +142,43 @@
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
+# BZ557 in progress
 
-# BZ585 complete
+- Branch: `u9/BZ557`; starting commit: `8af5cb324`.
+- Added the public AffineScheme import to direct importer AffineBasisSectionsDerivedUnit.
+- Initial remote builds stopped in the shared Presheaf.InternalHom dependency.
+- On continuation, merged BZ558 prerequisite repair `f28760733369366ac823f0084f3c4090afa3a90d`.
+- Next: ucheck-bump on AffineBasisSectionsResolutionHomologyEpi, AffineBasisSectionsDerivedUnit,
+  and AffineOpenSectionsResolutionQuasiIso; fix any owned errors and write DONE when green.
+- Notes and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ557.md`.
+- No local Lean/Lake, statement changes, proof escapes, or heartbeat increases.
 
-- Branch: `u9/BZ585`; starting commit: `8af5cb324`.
-- Assigned module `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebraFreeComparison`
-  passed ucheck-bump: rc=0, failed=0, 2022 jobs, target rebuilt in 4.8s.
-- Validated commit: `db7bb14d08c2234513afd1b158e2524d33864d66`; newsrv bumpw4, Lean v4.35.0-rc3
-  and Mathlib b63f6e8a68d220e3b3bc4f3792bb53650d375f24 confirmed on the build host.
-- Added the Localization public/import-all imports and made the two internal comparison
-  helpers private, following user continuation after that exact proposal. All statements,
-  proofs, binders, assumptions and existing docstrings are unchanged.
-- Contract audit: `/home/ubuntu/u9/bz/BZ585-contract-audit.txt`.
-  Fix patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ585.md`.
-- Direct importer `WeilConjectures.WeilSheaf.LowerShriekForget` was attempted at
-  `c7cb6c306b`; the assigned module rebuilt successfully in that batch in 6.1s.
-- The importer is blocked by unowned `FreeComparisonMapDerivedCategory` (BZ584)
-  and six other dependencies. Stopped only the verified timeout process for this
-  build after confirming dependency failures. Result: rc=255, failed=7; the downstream
-  batch is not green. No downstream or external dependency sources were changed.
-- Skipped `LowerShriekForget`, `AffineLineBundle`, and `SmoothPurityNativeTraceCriterion`
-  under the brief's external-dependency rule. Only the assigned module is claimed green.
-- Full logs: `/home/ubuntu/u9/bz/BUILD-BZ585-unit-full.log` and
-  `/home/ubuntu/u9/bz/BUILD-BZ585-downstream1-full.log`.
-- No local Lean/Lake execution, sorries, proof shortcuts, heartbeat increases, or profiler probes.
-- Completion marker: `/home/ubuntu/u9/state/BZ585.DONE`.
-- Final documentation commit leaves Lean source identical to the green revision.
+# BZ603 in progress
 
-# BZ621 complete
+- Branch: `u9/BZ603`; starting commit: `cfcb63ad7`.
+- Baseline remote build: eight errors caused by hidden `HomologicalComplexUpToQuasiIso.Qh`.
+- Public and implementation Localization imports removed seven diagnostics; the private
+  helper statements and proofs compile. The one public representative statement still failed.
+- The user instructed continuation after the canonical Q/Qh endpoint-transport proposal.
+  Applied the comparison hom/inv maps only to that equality, preserving its mathematical
+  maps, binders, assumptions, and other statements. The proof normalizes identity transports.
+- Next: `ucheck-bump` on the assigned module, then `CompletedScalarAssociator` downstream.
+- Fix patterns and exact diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ603.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-- Branch: `u9/BZ621`; starting commit: `b7a97a5ed`.
-- Assigned module `WeilConjectures.CategoryTheory.SixFunctors.ResolvingDerivedAdjunction`
-  passed `ucheck-bump`: rc=0, built=3, failed=0, 2847 jobs, at `5c47fa596b`.
-  Target rebuilt in 3.2 seconds on `poolb:43.157.184.90`.
-- The same module rebuilt successfully again in 3.0 seconds at `310a82d624`
-  during the downstream batch on `poolb:43.166.74.12`.
-- Added the public/import-all Localization imports. The user instructed continuation
-  after the exact one-line identity-cast proposal; `cast (by rfl)` preserves the
-  public formula's original counit. Both proof bodies, all other statement text,
-  and existing docstrings are unchanged. Audit: `BZ621-contract-audit.txt`.
-- The downstream batch finished rc=1, built=53, failed=4. All failures are unowned:
-  CochainTensorCoherenceData (BZ608), RingedTopoiCanonicalTensorComparisonOfUniverses
-  (BZ609), ProEtaleDerivedPullbackComposition (BZ611), and ConstantTowerNormalization.
-- Skipped all four selected importers under the brief's dependency-ownership rule:
-  SequenceProjectionDerivedAdjunction, SequencePushforwardLimitProjections,
-  RingedDerivedAdjointLift, SequenceSiteCompletionProjectionSupplement.
-  No downstream source was changed; no second-layer build was started because
-  the same failed prerequisites block the selected first layer.
-- Full logs: `/home/ubuntu/u9/bz/BZ621-owned-green.log` and
-  `/home/ubuntu/u9/bz/BZ621-downstream1.log`.
-- Patterns, counts, and exact blocker errors: `/home/ubuntu/u9/bz/FIXES-BZ621.md`.
-- The build host confirms Lean v4.35.0-rc3 and Mathlib b63f6e8a.
-- No local Lean/Lake, sorries, forbidden proof shortcuts, heartbeat raises,
-  profiler probes, or unowned source edits. Final documentation changes no Lean source.
-- Completion marker: `/home/ubuntu/u9/state/BZ621.DONE`.
+
+# BZ646 complete
+
+- Green owned module: `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ComparisonUpperStarCoherence`.
+- Green direct importer: `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ComparisonBaseChangeMate`.
+- Final remote validation: `ucheck-bump` at source commit `e46a90620ceda4662bd450189ee57edb7cc5cad6`,
+  rc=0, failed=0, 5603 jobs; both changed modules rebuilt successfully.
+- Ported composition comparison directions, simplified composition components directly,
+  removed a redundant tactic, and normalized symmetric isomorphism projections.
+- Declaration statements, imports, and docstrings are unchanged; all source edits are in proofs.
+- All seven machine rewrite rules exactly reproduce the final files from baseline `bb4aa5315`.
+- Three direct importers were attempted. Identity coherence requires a statement change and is
+  left untouched. Étale-reading coherence and its next-layer importer are blocked by unowned
+  dependencies. The broad failing batch was stopped after those blockers were confirmed.
+- Handoff records: `/home/ubuntu/u9/bz/FIXES-BZ646.md` and `/home/ubuntu/u9/state/BZ646.DONE`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
