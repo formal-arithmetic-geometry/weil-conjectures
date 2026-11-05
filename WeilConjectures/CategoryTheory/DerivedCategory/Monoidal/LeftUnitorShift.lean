@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.ShiftUnitor
-import Mathlib.Util.CountHeartbeats
 
 /-!
 # The left unitor of the derived tensor product commutes with shifts
@@ -42,7 +41,8 @@ local instance hasColimitsOfSize_leftUnitorShift : HasColimitsOfSize.{0, 0} C :=
 
 variable [Qh.HasDerivedMonoidalCategory (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))]
 
-#count_heartbeats in
+set_option maxHeartbeats 400000 in
+-- Measured 243223 heartbeats on Lean v4.35.0-rc3 for this shift compatibility proof.
 open TensorCommShift₂ in
 /-- The left unitor of `D(C)` commutes with the shifts at the image of a cochain complex. -/
 lemma leftUnitor_commShift_app_obj (K₀ : CochainComplex C ℤ) (n : ℤ) :
