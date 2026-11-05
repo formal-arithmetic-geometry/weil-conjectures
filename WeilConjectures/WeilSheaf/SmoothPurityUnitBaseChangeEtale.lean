@@ -7,6 +7,7 @@ module
 public import WeilConjectures.WeilSheaf.SmoothPurityDescendedTraceUniversal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionUpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.GenericPoint
+public import WeilConjectures.SmoothPurity.EtaleUpperShriek
 
 /-!
 # The exceptional base change map along étale maps and open immersions (A1', step 2)
@@ -118,7 +119,7 @@ morphism `h`, `Rh_!` is left adjoint to the pullback `h^*` on bounded constructi
 theorem nonempty_boundedConstructibleLowerShriekUpperStarAdjunction_of_etale [Etale h.left] :
     Nonempty (boundedConstructibleLowerShriek l h ⊣
       boundedConstructibleUpperStarOfMap l (X := X) (Y := U) h.left) := by
-  sorry
+  exact ⟨boundedConstructibleEtaleLowerShriekUpperStarAdjunction l h⟩
 
 end EtaleAdjunction
 
