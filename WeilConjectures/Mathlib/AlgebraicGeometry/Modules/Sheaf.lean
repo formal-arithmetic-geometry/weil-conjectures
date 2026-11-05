@@ -71,12 +71,13 @@ open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 
 variable {X : Scheme.{u}} (U : X.Opens)
-  {M N : SheafOfModules.{u} X.ringCatSheaf} (f : M ⟶ N)
 
-/-- `SheafOfModules.evaluation R (op V)` is `forget ⋙ PresheafOfModules.evaluation`; instance search does
-not unfold the definition, so the additivity (hence `PreservesLimit`) is recorded here. -/
+/--  is ; instance search does
+not unfold the definition, so the additivity (hence ) is recorded here. -/
 instance (V : X.Opens) : (SheafOfModules.evaluation X.ringCatSheaf (op V)).Additive :=
   inferInstanceAs (SheafOfModules.forget _ ⋙ PresheafOfModules.evaluation _ (op V)).Additive
+
+variable {M N : SheafOfModules.{u} X.ringCatSheaf} (f : M ⟶ N)
 
 /-- **The sections of a kernel are the kernel of the sections.** Over any open `U`, the image
 of `kernel.ι f` on sections is the set of sections of `M` killed by `f`.
@@ -375,8 +376,8 @@ noncomputable def freeSectionsEquiv (I : Type u) [Fintype I] [DecidableEq I] :
     ext j
     dsimp only
     rw [map_sum, Finset.sum_eq_single j (fun i _ hi ↦ ?_) (by simp)]
-    · rw [freeπ_app_ιFree_app, ite_eq_left rfl]
-    · rw [freeπ_app_ιFree_app, ite_eq_right hi]
+    · rw [freeπ_app_ιFree_app, if_pos rfl]
+    · rw [freeπ_app_ιFree_app, if_neg hi]
 
 /-- The application `Γ(M, U) → Γ(N, U)` of a morphism of `𝒪_X`-modules, as a `Γ(X, U)`-linear
 map. -/
