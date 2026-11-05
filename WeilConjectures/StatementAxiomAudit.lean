@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.Statement
+public import WeilConjectures.LeanEval.WeilConjectures
 
 /-! # Axiom audit for the Weil conjectures statement
 
@@ -15,3 +16,4 @@ Declaration-level closure check (C9, 2026-11-06): the lean-eval statement must n
 the affine-line Thom user in `FourierInversion.OtherSections`) are routed through absolute purity. -/
 
 #print axioms AlgebraicGeometry.Scheme.weil_conjectures
+#print axioms LeanEval.AlgebraicGeometry.WeilConjectures.weil_conjectures
