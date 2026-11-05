@@ -82,8 +82,8 @@ theorem siteTensorSecondMap_naturality
   apply ModuleCat.hom_ext
   apply TensorProduct.ext'
   intro x y
-  change M.map f x ⊗ₜ[A.obj.obj V] (g.app V) (N.map f y) =
-    M.map f x ⊗ₜ[A.obj.obj V] N'.map f (g.app U y)
+  change (M.map f x : M.obj V) ⊗ₜ[A.obj.obj V] (g.app V) (N.map f y) =
+    (M.map f x : M.obj V) ⊗ₜ[A.obj.obj V] N'.map f (g.app U y)
   rw [PresheafOfModules.naturality_apply]
 
 /-- Tensor a presheaf morphism in the second variable, sectionwise `id ⊗ g`.

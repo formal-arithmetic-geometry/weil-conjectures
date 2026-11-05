@@ -76,8 +76,8 @@ theorem stalk_tensor_multiplication_range {X : Scheme.{u}} {J : X.Modules}
       (homOfLE inf_le_left : U ⊓ V ⟶ U) x hx r,
       ← TopCat.Presheaf.germ_res_apply F.val.presheaf
       (homOfLE inf_le_right : U ⊓ V ⟶ V) x hx t]
-    let r' := O.val.map (homOfLE inf_le_left : U ⊓ V ⟶ U).op r
-    let t' := F.val.map (homOfLE inf_le_right : U ⊓ V ⟶ V).op t
+    let r' : Γ(X, U ⊓ V) := O.val.map (homOfLE inf_le_left : U ⊓ V ⟶ U).op r
+    let t' : Γ(F, U ⊓ V) := F.val.map (homOfLE inf_le_right : U ⊓ V ⟶ V).op t
     let P := O.val ⊗ F.val
     let θ := (PresheafOfModules.sheafificationAdjunction
       (𝟙 X.ringCatSheaf.obj)).unit.app P ≫
