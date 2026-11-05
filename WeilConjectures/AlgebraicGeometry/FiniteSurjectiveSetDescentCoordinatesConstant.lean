@@ -41,10 +41,10 @@ private theorem restrictGerm_apply {S T : Scheme.{u}} (e : T ⟶ S)
         ((e.Etale.sheafPushforwardContinuous (Type (u + 1))
           S.smallEtaleTopology T.smallEtaleTopology).obj H).obj s) =
     (Scheme.pointSmallEtale t.1).toPresheafFiber ((MorphismProperty.Over.pullback @Etale ⊤ e).obj U)
-      ((Etale.baseChangeNbhd e x t).obj ⟨U, z⟩).2 H.obj s :=
+      ((Etale.baseChangeNbhd e x t).obj (Functor.elementsMk _ U z)).2 H.obj s :=
   ConcreteCategory.congr_hom (colimit.ι_pre
     ((Functor.Elements.π (Scheme.pointSmallEtale t.1).fiber).op ⋙ H.obj)
-    (Etale.baseChangeNbhd e x t).op (op ⟨U, z⟩)) s
+    (Etale.baseChangeNbhd e x t).op (op (Functor.elementsMk _ U z))) s
 
 private noncomputable def unitGerm {S T : Scheme.{u}} (e : T ⟶ S)
     (H : Sheaf S.smallEtaleTopology (Type (u + 1)))
@@ -65,7 +65,8 @@ private theorem unitGerm_apply {S T : Scheme.{u}} (e : T ⟶ S)
     unitGerm e H x t ((Scheme.pointSmallEtale x).toPresheafFiber U z H.obj s) =
       (Scheme.pointSmallEtale t.1).toPresheafFiber ((MorphismProperty.Over.pullback @Etale ⊤ e).obj
         U)
-        ((Etale.baseChangeNbhd e x t).obj ⟨U, z⟩).2 ((Scheme.etaleSetPullback e).obj H).obj
+        ((Etale.baseChangeNbhd e x t).obj (Functor.elementsMk _ U z)).2
+        ((Scheme.etaleSetPullback e).obj H).obj
         (etaleSetDescentUnit e H U s) := by
   change restrictGerm e ((Scheme.etaleSetPullback e).obj H) x t
     ((Scheme.pointSmallEtale x).presheafFiber.map
@@ -172,22 +173,22 @@ private theorem etaleSetDescentComparison_coordinates
       (unitGerm g H t.1 w'
         ((Scheme.pointSmallEtale t.1).toPresheafFiber ((MorphismProperty.Over.pullback @Etale ⊤
           f).obj V)
-          ((Etale.baseChangeNbhd f x t).obj ⟨V, y⟩).2 H.obj a)) = _
+          ((Etale.baseChangeNbhd f x t).obj (Functor.elementsMk _ V y)).2 H.obj a)) = _
     rw [unitGerm_apply]
     erw [GrothendieckTopology.Point.toPresheafFiber_naturality_apply]
     rw [restrictGerm_apply]
     let j := (MorphismProperty.Over.pullbackComp (P := @Etale) (Q := ⊤) g f).hom.app V
-    let z₀ := ((Etale.baseChangeNbhd (g ≫ f) x w).obj ⟨V, y⟩).2
+    let z₀ := ((Etale.baseChangeNbhd (g ≫ f) x w).obj (Functor.elementsMk _ V y)).2
     let z₁ := ((Etale.baseChangeNbhd g t.1 w').obj
-      ⟨(MorphismProperty.Over.pullback @Etale ⊤ f).obj V, ((Etale.baseChangeNbhd f x t).obj ⟨V,
-        y⟩).2⟩).2
+      (Functor.elementsMk _ ((MorphismProperty.Over.pullback @Etale ⊤ f).obj V)
+        ((Etale.baseChangeNbhd f x t).obj (Functor.elementsMk _ V y)).2)).2
     have hz : (Scheme.pointSmallEtale w.1).fiber.map j z₀ = z₁ := by
       apply Over.OverMorphism.ext
       change z₀.left ≫ j.left = z₁.left
-      change Scheme.Hom.basePt (g ≫ f) ⟨V, y⟩ w ≫ j.left =
+      change Scheme.Hom.basePt (g ≫ f) (Functor.elementsMk _ V y) w ≫ j.left =
         Scheme.Hom.basePt g
-          ⟨(MorphismProperty.Over.pullback @Etale ⊤ f).obj V, ((Etale.baseChangeNbhd f x t).obj ⟨V,
-            y⟩).2⟩ w'
+          (Functor.elementsMk _ ((MorphismProperty.Over.pullback @Etale ⊤ f).obj V)
+            ((Etale.baseChangeNbhd f x t).obj (Functor.elementsMk _ V y)).2) w'
       dsimp only [j]
       rw [MorphismProperty.Over.pullbackComp_hom_app_left]
       simp only [pullback.map_id, Category.id_comp]
@@ -303,7 +304,7 @@ private theorem descent_coordinate_at_lift
     (colimit.ι_pre
       ((Functor.Elements.π (Scheme.pointSmallEtale t).fiber).op ⋙
         ((Scheme.etaleSetPullback f).obj G).obj)
-      (Etale.baseChangeNbhd f (t ≫ f) ⟨t, rfl⟩).op (op ⟨U, z⟩))
+      (Etale.baseChangeNbhd f (t ≫ f) ⟨t, rfl⟩).op (op (Functor.elementsMk _ U z)))
     (etaleSetDescentUnit f G U s)
   erw [hpre]
   exact hg U z s
