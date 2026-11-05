@@ -51,8 +51,8 @@ Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
       (internalLocalizationFunctor Λ X).obj ((totalInternalPull Λ f).obj A) :=
   by
     with_unfolding_all
-      exact (CondensedRing.upperStar Λ f).leftDerivedFunctorCounit.app
-        ((HomotopyCategory.quotient _ (.up ℤ)).obj A)
+      exact cast (by rfl) ((CondensedRing.upperStar Λ f).leftDerivedFunctorCounit.app
+        ((HomotopyCategory.quotient _ (.up ℤ)).obj A))
 
 /-- The specified section resolution transformation epsilon, using exact localization.
 Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
