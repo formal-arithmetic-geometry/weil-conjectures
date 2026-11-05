@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.WeilSheaf.Native.NativePullDerivedTensor
+public import WeilConjectures.WeilSheaf.Native.NativePullDerivedTensorOfKFlat
 public import WeilConjectures.WeilSheaf.Native.NativeTwoSidedKFlatForget
 public import WeilConjectures.WeilSheaf.Native.NativeTwoSidedKFlatOfForget
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AdicUpperStarKFlat

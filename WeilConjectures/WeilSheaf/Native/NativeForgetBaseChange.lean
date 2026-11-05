@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.BaseChangeMateIsIso
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.DerivedBaseChangeIsIso
 public import WeilConjectures.WeilSheaf.Localization
 public import WeilConjectures.WeilSheaf.UpperStarLowerStarAdjunction
 
