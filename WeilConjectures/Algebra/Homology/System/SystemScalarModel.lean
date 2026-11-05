@@ -228,8 +228,9 @@ theorem nonempty_systemScalarModel {R S : Sheaf J CommRingCat.{w}} (φ : R ⟶ S
             unit_normalized := ?_
             adjunction := d
             transpose := adjunction_cochain_transpose D.E _ a D.T D.ε ε
-              (fun P ↦ by rw [hεP P]; simp only [Category.assoc, Iso.inv_hom_id_app,
-                Category.comp_id]) d hd }⟩
+              (fun P ↦ by
+                apply (Iso.eq_comp_inv ((DerivedCategory.quotientCompQhIso _).app _)).1
+                simpa only [Category.assoc] using hεP P) d hd }⟩
   intro P U x
   have hu := ha P (D.E.obj P) (eqToHom (D.obj_eq P).symm) U x
   dsimp only [systemModelTmul]
