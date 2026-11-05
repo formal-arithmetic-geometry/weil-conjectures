@@ -9,7 +9,7 @@ public import WeilConjectures.WeilSheaf.SmoothPurityRationalRootLaw
 public import WeilConjectures.WeilSheaf.SmoothPurityScalarDatumNamed
 public import WeilConjectures.WeilSheaf.SmoothPurityFrobeniusFactorAlias
 public import WeilConjectures.WeilSheaf.SmoothPurityCyclotomicField
-import WeilConjectures.Tactic.ExactModProofs
+import WeilConjectures.Tactic.ExactModProofsFallback
 
 /-! # The scalar Frobenius law for the canonical geometric Tate line -/
 
@@ -88,7 +88,7 @@ lemma purityCanonicalTateOneTrivialization_weil :
     (purityCanonicalTateOneTrivialization ℓ a hζ hζ') rfl (Nat.card k : ℤ)
     (by
       dsimp only [tateTwistOne, Functor.comp_obj, Functor.comp_map] at he ⊢
-      cast_proofs he)
+      exact_mod_proofs_fallback he)
   try dsimp only [Functor.comp_obj, Functor.comp_map] at h ⊢
   exact_mod_proofs h
 

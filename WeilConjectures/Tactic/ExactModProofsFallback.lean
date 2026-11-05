@@ -63,6 +63,7 @@ def exactModProofsFallback (h : Expr) : TacticM Unit := do
       let rb := find rep b
       if ra != rb then rep := rep.insert rb ra
     let cs := rep.toArray.filterMap fun (c, _) ↦ if find rep c == c then none else some c
+    logInfo m!"Minimal proof casts: {cs.size} unique representatives from {diffs.size} differences"
     if cs.isEmpty then
       g.assign h
       replaceMainGoal []
