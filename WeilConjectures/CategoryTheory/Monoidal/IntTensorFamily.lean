@@ -214,7 +214,7 @@ lemma map_addIso_comp (A : C ⥤ D) (B : D ⥤ E) (H : C ⥤ E) [A.OplaxMonoidal
       IsIso.inv_hom_id, Category.comp_id, ← cancel_epi (B.map (δ A (P.obj a) (P.obj b))),
       ← B.map_comp_assoc, IsIso.hom_inv_id, B.map_id, Category.id_comp,
       ← cancel_mono (c.hom.app (P.obj a) ⊗ₘ c.hom.app (P.obj b)), Category.assoc, hc,
-      Iso.inv_hom_id_app_assoc, Category.assoc, Category.assoc, tensorHom_comp_tensorHom,
+      Iso.hom_inv_id_app_assoc, Category.assoc, Category.assoc, tensorHom_comp_tensorHom,
       Iso.inv_hom_id_app, Iso.inv_hom_id_app]
     simp
   simp only [map, Iso.trans_hom, Iso.symm_hom, asIso_inv, Functor.mapIso_hom, B.map_comp,

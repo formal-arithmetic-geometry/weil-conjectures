@@ -78,7 +78,7 @@ private theorem paste_target_comparison
   rw [reassoc_of% ht]
   simp only [← H.map_comp]
   rw [hB K]
-  simp only [Iso.inv_hom_id_app_assoc]
+  simp only [Iso.hom_inv_id_app_assoc]
 
 private theorem morphism_transition
     {I : Type*} [Preorder I] [IsDirectedOrder I]
@@ -90,7 +90,7 @@ private theorem morphism_transition
       (T.transIso hij).hom.app ((F.Φ i).obj K) ≫
         F.functor.map ((S.transIso hij).inv.app K) := by
   apply (cancel_epi ((T.transIso hij).inv.app ((F.Φ i).obj K))).1
-  erw [Iso.inv_hom_id_app_assoc]
+  erw [Iso.hom_inv_id_app_assoc]
   change (T.isoToStage ⟨i, (F.Φ i).obj K⟩ hij).hom ≫ (T.ι j).map _ =
     F.functor.map (S.isoToStage ⟨i, K⟩ hij).hom
   dsimp only [StageSystem.isoToStage]
@@ -105,7 +105,7 @@ private theorem morphism_transition
         (F.β (le_rfl : j ≤ j)).inv.app ((S.T hij).obj K)) hc
   simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id_app] at hc'
   erw [CategoryTheory.Functor.map_id, Category.id_comp, Iso.hom_inv_id_app,
-    Category.comp_id, Iso.inv_hom_id_app_assoc] at hc'
+    Category.comp_id, Iso.hom_inv_id_app_assoc] at hc'
   exact hc'
 
 private theorem morphism_transition_with_inclusions

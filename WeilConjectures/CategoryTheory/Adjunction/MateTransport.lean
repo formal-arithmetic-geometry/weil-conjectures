@@ -82,7 +82,7 @@ lemma map_comp_mateEquiv_app_comp_map_of_transpose (X : D)
   have hα := α.inv.naturality (ϑ_D.app X)
   dsimp at hγ hα
   simp only [homEquiv_counit, Functor.map_comp, Category.assoc, counit_naturality]
-  rw [reassoc_of% hγ, reassoc_of% hα, ← Functor.map_comp_assoc, h, Iso.inv_hom_id_app_assoc,
+  rw [reassoc_of% hγ, reassoc_of% hα, ← Functor.map_comp_assoc, h, Iso.hom_inv_id_app_assoc,
     Functor.map_comp, Category.assoc]
   rfl
 
