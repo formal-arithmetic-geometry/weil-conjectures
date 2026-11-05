@@ -18,7 +18,6 @@ import all WeilConjectures.SmoothPurity.Coefficient.CoefficientSequenceRoosModel
 import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantModuleConstructibility
 import WeilConjectures.AlgebraicGeometry.ProEtale.Direct.ProEtaleDirectImageRestrictionOfScalars
 import Mathlib.LinearAlgebra.TensorProduct.Tower
-public import WeilConjectures.SmoothPurity.Compact.CompactSupportFiniteRealizationPredicate
 
 /-! # Normalized compact-support finite action
 
@@ -186,62 +185,6 @@ variable (l : ℕ) [Fact l.Prime]
   [f.IsOver (Spec (.of K₀))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
   (c : Compactification f)
 
-/-- Legacy archive (repair note of Sheaf.Paper.CompactSupportFiniteRealizationPredicate,
-2026-11-02: keep the old declarations, renamed `*_legacy`, until the dependents are
-re-pointed). This is the former `SfCompactSupportFiniteRealizationSpec`, verbatim: the exact
-integral-functor predicate of the recorded strict-tower realization.
-(blueprint: def-weil-compact-support-finite-action). -/
-def SfCompactSupportFiniteRealizationSpec_legacy
-    (E : Type u) [Field E] [Algebra (Padic l) E]
-    [FiniteDimensional (Padic l) E] :
-    (sfIntegralConstructibleCategory l E X ⥤ sfIntegralConstructibleCategory l E Y) → Prop :=
-  (fun {P : (sfIntegralConstructibleCategory l E X ⥤
-      sfIntegralConstructibleCategory l E Y) → Prop} (_h : ∃ F, P F) ↦ P)
-    ((exists_compactSupportRepresentativeComparison l
-      E K₀ hl X Y f c).choose_spec.choose_spec.2.2.choose_spec.choose_spec
-        |>.2.2.choose_spec.2)
-
-/-- Legacy archive: the former `sfCompactSupportFiniteRealization`, verbatim.
-(blueprint: def-weil-compact-support-finite-action).
-Proof: project the integral-functor conjunct of
-exists_compactSupportRepresentativeComparison; the predicate is exactly that conjunct. -/
-theorem sfCompactSupportFiniteRealization_legacy (E : Type u) [Field E] [Algebra (Padic l) E]
-    [FiniteDimensional (Padic l) E] :
-    ∃ F, SfCompactSupportFiniteRealizationSpec_legacy l K₀ hl c E F := by
-    run_tac Lean.Elab.Tactic.withMainContext do
-      let l ← Lean.Elab.Term.elabTerm (Lean.mkIdent `l) none
-      let E ← Lean.Elab.Term.elabTerm (Lean.mkIdent `E) none
-      let K₀ ← Lean.Elab.Term.elabTerm (Lean.mkIdent `K₀) none
-      let hl ← Lean.Elab.Term.elabTerm (Lean.mkIdent `hl) none
-      let X ← Lean.Elab.Term.elabTerm (Lean.mkIdent `X) none
-      let Y ← Lean.Elab.Term.elabTerm (Lean.mkIdent `Y) none
-      let f ← Lean.Elab.Term.elabTerm (Lean.mkIdent `f) none
-      let c ← Lean.Elab.Term.elabTerm (Lean.mkIdent `c) none
-      let h ← Lean.Meta.mkAppM ``exists_compactSupportRepresentativeComparison
-        #[l, E, K₀, hl, X, Y, f, c]
-      let mut h := h
-      let mut ty ← Lean.Meta.inferType h
-      for kind in [true, true, false, false, true, true, false, false, true, false] do
-        ty ← Lean.Meta.whnf ty
-        let args := ty.getAppArgs
-        if kind then
-          unless ty.isAppOfArity ``Exists 2 do
-            throwError "expected existential"
-          let levels := [← Lean.Meta.getLevel args[0]!]
-          let witness := Lean.mkAppN (Lean.mkConst ``Exists.choose levels) #[args[0]!, args[1]!, h]
-          h := Lean.mkAppN (Lean.mkConst ``Exists.choose_spec levels) #[args[0]!, args[1]!, h]
-          ty := args[1]!.beta #[witness]
-        else
-          unless ty.isAppOfArity ``And 2 do
-            throwError "expected conjunction"
-          h := Lean.mkAppN (Lean.mkConst ``And.right) #[args[0]!, args[1]!, h]
-          ty := args[1]!
-      ty ← Lean.Meta.whnf ty
-      unless ty.isAppOfArity ``Exists 2 do
-        throwError "expected existential, got {ty}"
-      (← Lean.Elab.Tactic.getMainGoal).assign h
-
-
 attribute [local irreducible] SfCompactSupportFiniteRealizationSpec
 
 /-- The already normalized integral compact-support functor, retaining its coherent
@@ -252,7 +195,7 @@ Source: blueprint order 1494, proof steps 1--4
     (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] :
     sfIntegralConstructibleCategory l E X ⥤ sfIntegralConstructibleCategory l E Y :=
-  (sfCompactSupportFiniteRealization_legacy l K₀ hl c E).choose
+  (sfCompactSupportFiniteRealization l K₀ hl c E).choose
 
 /-- Linearity of the fixed integral realization.
 Source: blueprint order 1494, proof steps 3--4
@@ -266,7 +209,7 @@ theorem sfCompactSupportFiniteIntegralFunctor_linear (E : Type u) [Field E] [Alg
         (Padic.coefficientExtensionIntegers l
           E) := by
   unfold sfCompactSupportFiniteIntegralFunctor
-  have h := (sfCompactSupportFiniteRealization_legacy l K₀ hl c E).choose_spec
+  have h := (sfCompactSupportFiniteRealization l K₀ hl c E).choose_spec
   with_unfolding_all
     exact ⟨h.1, h.2.1⟩
 
@@ -336,7 +279,7 @@ theorem sfCompactSupportFiniteIntegralFunctor_obj
     (sfCompactSupportFiniteIntegralFunctor l K₀ hl c E).obj K =
       sfIntegralCompactSupportValue l E K₀ hl c K := by
   unfold sfCompactSupportFiniteIntegralFunctor
-  have h := (sfCompactSupportFiniteRealization_legacy l K₀ hl c E).choose_spec
+  have h := (sfCompactSupportFiniteRealization l K₀ hl c E).choose_spec
   with_unfolding_all
     exact h.2.2.1 K
 

@@ -31,19 +31,48 @@ variable (l : ℕ) [Fact l.Prime]
   [f.IsOver (Spec (.of K₀))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
   (c : Compactification f)
 
-/-- The compact-support realization exists directly on condensed coefficient modules.
-Source: blueprint latest, det-def-sf-operations, clause (iv)
+/-- The integral realization package with its exact recorded predicate.
+Source: blueprint order 1494, proof steps 1--4
 (blueprint: lem-weil-compact-support-finite-realization-exists).
-
-Proof: take the functor obtained by deriving exact extension by zero along the open
-part and then deriving pushforward along the proper part of the compactification.
-The identity natural isomorphism witnesses the realization predicate. This constructs
-the functor directly and uses no existence theorem to choose its data. -/
-theorem sfCompactSupportFiniteRealization
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
-    ∃ F, SfCompactSupportFiniteRealizationSpec Λ c F := by
-  exact ⟨ProEtale.CondensedRing.rightDerivedLowerShriekOfCompactification Λ c, ⟨Iso.refl _⟩⟩
+Proof: project the integral-functor conjunct after the specified tower, evaluation,
+right-derived limit, unit and Roos projections in
+exists_compactSupportRepresentativeComparison. Unfold the named predicate; it is
+exactly the predicate in that conjunct, with no added choice or normalization. -/
+theorem sfCompactSupportFiniteRealization (E : Type u) [Field E] [Algebra (Padic l) E]
+    [FiniteDimensional (Padic l) E] :
+    ∃ F, SfCompactSupportFiniteRealizationSpec l K₀ hl c E F := by
+    run_tac Lean.Elab.Tactic.withMainContext do
+      let l ← Lean.Elab.Term.elabTerm (Lean.mkIdent `l) none
+      let E ← Lean.Elab.Term.elabTerm (Lean.mkIdent `E) none
+      let K₀ ← Lean.Elab.Term.elabTerm (Lean.mkIdent `K₀) none
+      let hl ← Lean.Elab.Term.elabTerm (Lean.mkIdent `hl) none
+      let X ← Lean.Elab.Term.elabTerm (Lean.mkIdent `X) none
+      let Y ← Lean.Elab.Term.elabTerm (Lean.mkIdent `Y) none
+      let f ← Lean.Elab.Term.elabTerm (Lean.mkIdent `f) none
+      let c ← Lean.Elab.Term.elabTerm (Lean.mkIdent `c) none
+      let h ← Lean.Meta.mkAppM ``exists_compactSupportRepresentativeComparison
+        #[l, E, K₀, hl, X, Y, f, c]
+      let mut h := h
+      let mut ty ← Lean.Meta.inferType h
+      for kind in [true, true, false, false, true, true, false, false, true, false] do
+        ty ← Lean.Meta.whnf ty
+        let args := ty.getAppArgs
+        if kind then
+          unless ty.isAppOfArity ``Exists 2 do
+            throwError "expected existential"
+          let levels := [← Lean.Meta.getLevel args[0]!]
+          let witness := Lean.mkAppN (Lean.mkConst ``Exists.choose levels) #[args[0]!, args[1]!, h]
+          h := Lean.mkAppN (Lean.mkConst ``Exists.choose_spec levels) #[args[0]!, args[1]!, h]
+          ty := args[1]!.beta #[witness]
+        else
+          unless ty.isAppOfArity ``And 2 do
+            throwError "expected conjunction"
+          h := Lean.mkAppN (Lean.mkConst ``And.right) #[args[0]!, args[1]!, h]
+          ty := args[1]!
+      ty ← Lean.Meta.whnf ty
+      unless ty.isAppOfArity ``Exists 2 do
+        throwError "expected existential, got {ty}"
+      (← Lean.Elab.Tactic.getMainGoal).assign h
 
 end FiniteAction
 end WeilConjectures

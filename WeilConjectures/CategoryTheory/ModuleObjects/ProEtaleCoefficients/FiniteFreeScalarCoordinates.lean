@@ -145,6 +145,7 @@ private lemma scalarTensorIso_hom (M : Mod H R) :
   dsimp only [scalarTensorIso]
   exact extendπ_extendDescHom φ _ _
 
+omit [Abelian H] [MonoidalPreadditive H] in
 private lemma tensorUnit_hom (M : Mod H R) :
     tensorObjπ (regular R) M ≫ (λ_ M).hom.hom = γ[R,M.X] := by
   change tensorObjπ (regular R) M ≫
@@ -157,6 +158,7 @@ private lemma tensorUnit_hom (M : Mod H R) :
   erw [toBimodRegularIso_hom_hom, id_whiskerRight, Category.id_comp]
   exact coequalizer.π_desc _ _
 
+omit [Abelian H] [MonoidalPreadditive H] in
 private lemma tensorUnit_inv (M : Mod H R) :
     (λ_ M).inv.hom = (λ_ M.X).inv ≫ η[R] ▷ M.X ≫ tensorObjπ (regular R) M := by
   apply (cancel_mono (λ_ M).hom.hom).1

@@ -23,6 +23,8 @@ open CategoryTheory
 open AlgebraicGeometry
 open AlgebraicGeometry.Scheme
 
+set_option linter.unusedVariables false in
+-- The hypothesis `hA` belongs to the blueprint statement but is not needed in the proof.
 /-- For a strictly henselian local ring, finite constant étale cohomology is concentrated
 in degree zero, where it is canonically the coefficient group.
 
