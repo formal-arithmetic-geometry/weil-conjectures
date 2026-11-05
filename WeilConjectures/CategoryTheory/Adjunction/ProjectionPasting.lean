@@ -139,7 +139,106 @@ theorem map_projectionIsoOfComp_hom_app
         p (I'.obj (FX.obj M)) (FY.obj T) ≫
         G'.map (q (FX.obj M) (Pg'.obj (FY.obj T)) ≫
           I'.map (FX.obj M ◁ ε.hom.app (FY.obj T))) := by
-  sorry
+  have hβG {A B : WZ} (h : A ⟶ B) : FY.map (G.map h) ≫ βG.inv.app B =
+      βG.inv.app A ≫ G'.map (FZ.map h) := βG.inv.naturality h
+  have hβI {A B : WX} (h : A ⟶ B) : FZ.map (I.map h) ≫ βI.inv.app B =
+      βI.inv.app A ≫ I'.map (FX.map h) := βI.inv.naturality h
+  have hτX {A B : WX × WX} (h : A ⟶ B) : FX.map (TX.map h) ≫ τX.hom.app B =
+      τX.hom.app A ≫ (FX.map h.1 ⊗ₘ FX.map h.2) := τX.hom.naturality h
+  have hτY {A B : WY × WY} (h : A ⟶ B) : FY.map (TY.map h) ≫ τY.hom.app B =
+      τY.hom.app A ≫ (FY.map h.1 ⊗ₘ FY.map h.2) := τY.hom.naturality h
+  have h₄ : FX.map (TX.map ((𝟙 M, pc.hom.app T) : (M, Pi.obj (Pg.obj T)) ⟶ (M, Pf.obj T))) ≫
+      τX.hom.app (M, Pf.obj T) ≫ FX.obj M ◁ FX.map (pc.inv.app T) =
+      τX.hom.app (M, Pi.obj (Pg.obj T)) := by
+    rw [reassoc_of% (hτX _)]
+    dsimp
+    simp only [Functor.map_id, id_tensorHom, ← MonoidalCategory.whiskerLeft_comp,
+      ← Functor.map_comp]
+    simp
+  have h₉ : FY.map (TY.map ((ℓ.hom.app M, 𝟙 T) : (Lf.obj M, T) ⟶ ((I ⋙ G).obj M, T))) ≫
+      τY.hom.app ((I ⋙ G).obj M, T) = τY.hom.app (Lf.obj M, T) ≫ FY.map (ℓ.hom.app M) ▷ FY.obj T := by
+    rw [hτY]
+    dsimp
+    rw [Functor.map_id, tensorHom_id]
+  have hI' := hI M (Pg.obj T)
+  have hG' := hG (I.obj M) T
+  simp only [projectionIsoOfComp_hom_app, forgetCompIsoOfComp_inv_app, forgetPullIsoOfComp_hom_app,
+    Functor.comp_map, Functor.map_comp, Category.assoc, MonoidalCategory.whiskerLeft_comp,
+    comp_whiskerRight] at hI' hG' ⊢
+  dsimp only [Functor.prod_obj, Functor.id_obj, Functor.comp_obj] at hI' hG' ⊢
+  have r3 {A B : WX} (h : A ⟶ B) {Z' : BY} (z : G'.obj (I'.obj (FX.obj B)) ⟶ Z') :
+      G'.map (FZ.map (I.map h)) ≫ G'.map (βI.inv.app B) ≫ z =
+        G'.map (βI.inv.app A) ≫ G'.map (I'.map (FX.map h)) ≫ z := by
+    rw [← G'.map_comp_assoc, hβI, G'.map_comp_assoc]
+  have r4 {Z' : BY} (z : G'.obj (I'.obj (FX.obj M ⊗ FX.obj (Pi.obj (Pg.obj T)))) ⟶ Z') :
+      G'.map (I'.map (FX.map (TX.map ((𝟙 M, pc.hom.app T) :
+          (M, Pi.obj (Pg.obj T)) ⟶ (M, Pf.obj T))))) ≫
+        G'.map (I'.map (τX.hom.app (M, Pf.obj T))) ≫
+        G'.map (I'.map (FX.obj M ◁ FX.map (pc.inv.app T))) ≫ z =
+      G'.map (I'.map (τX.hom.app (M, Pi.obj (Pg.obj T)))) ≫ z := by
+    simp only [← G'.map_comp_assoc, ← I'.map_comp, h₄]
+  have r6 {Z' : BY} (z : G'.obj (I'.obj (FX.obj M ⊗ Pi'.obj (FZ.obj (Pg.obj T)))) ⟶ Z') :
+      G'.map (FZ.map (eI.hom.app (M, Pg.obj T))) ≫
+        G'.map (βI.inv.app (TX.obj (M, Pi.obj (Pg.obj T)))) ≫
+        G'.map (I'.map (τX.hom.app (M, Pi.obj (Pg.obj T)))) ≫
+        G'.map (I'.map (FX.obj M ◁ γi.hom.app (Pg.obj T))) ≫ z =
+      G'.map (τZ.hom.app (I.obj M, Pg.obj T)) ≫
+        G'.map (βI.inv.app M ▷ FZ.obj (Pg.obj T)) ≫
+        G'.map (q (FX.obj M) (FZ.obj (Pg.obj T))) ≫ z := by
+    simp only [← G'.map_comp_assoc, hI']
+  have r7 {Z' : BY} (z : G'.obj (I'.obj (FX.obj M ⊗ Pi'.obj (Pg'.obj (FY.obj T)))) ⟶ Z') :
+      G'.map (q (FX.obj M) (FZ.obj (Pg.obj T))) ≫
+        G'.map (I'.map (FX.obj M ◁ Pi'.map (γg.hom.app T))) ≫ z =
+      G'.map (I'.obj (FX.obj M) ◁ γg.hom.app T) ≫ G'.map (q (FX.obj M) (Pg'.obj (FY.obj T))) ≫ z := by
+    rw [← G'.map_comp_assoc, ← G'.map_comp_assoc]
+    erw [hq]
+    rfl
+  have r8 {Z' : BY} (z : G'.obj (I'.obj (FX.obj M) ⊗ Pg'.obj (FY.obj T)) ⟶ Z') :
+      G'.map (βI.inv.app M ▷ FZ.obj (Pg.obj T)) ≫ G'.map (I'.obj (FX.obj M) ◁ γg.hom.app T) ≫ z =
+      G'.map (FZ.obj (I.obj M) ◁ γg.hom.app T) ≫ G'.map (βI.inv.app M ▷ Pg'.obj (FY.obj T)) ≫ z := by
+    rw [← G'.map_comp_assoc, ← G'.map_comp_assoc]
+    erw [← whisker_exchange]
+    rfl
+  have r10 {Z' : BY} (z : G'.obj (I'.obj (FX.obj M) ⊗ Pg'.obj (FY.obj T)) ⟶ Z') :
+      p (FZ.obj (I.obj M)) (FY.obj T) ≫ G'.map (βI.inv.app M ▷ Pg'.obj (FY.obj T)) ≫ z =
+      G'.map (βI.inv.app M) ▷ FY.obj T ≫ p (I'.obj (FX.obj M)) (FY.obj T) ≫ z := by
+    rw [← Category.assoc, ← hp]
+    exact Category.assoc _ _ _
+  rw [← FY.map_comp_assoc (ℓ.inv.app _), Iso.inv_hom_id_app, Functor.map_id, Category.id_comp,
+    reassoc_of% (hβG _), r3, r4, reassoc_of% (hβG _), r6, r7, r8, reassoc_of% hG', r10,
+    reassoc_of% h₉]
+
+omit [MonoidalCategory BX] [MonoidalCategory BZ] [MonoidalCategory BY] in
+/-- The pasted comparison `F_X ⋙ (I' ⋙ G') ≅ Lf ⋙ F_Y`, as a 2-square, is the vertical
+composite of the comparisons of `I` and `G`, whiskered by `ℓ⁻¹ : I ⋙ G ⟶ Lf`. -/
+lemma forgetCompIsoOfComp_hom_eq :
+    TwoSquare.mk _ _ _ _ (forgetCompIsoOfComp ℓ βI βG).hom =
+      (TwoSquare.vComp (TwoSquare.mk _ _ _ _ βI.hom)
+        (TwoSquare.mk _ _ _ _ βG.hom)).whiskerLeft ℓ.inv := by
+  ext X
+  simp [forgetCompIsoOfComp]
+
+omit [MonoidalCategory BX] [MonoidalCategory BZ] [MonoidalCategory BY] in
+/-- **The mate of a pasted comparison is invertible** if the mates of the comparisons of the
+factors `I` and `G` are: the mate of `F_X ⋙ (I' ⋙ G') ≅ Lf ⋙ F_Y` under `Lf ⊣ R` and the
+composite adjunction `I' ⋙ G' ⊣ R_G' ⋙ R_I'`. -/
+theorem isIso_mateEquiv_forgetCompIsoOfComp_app {RI : WZ ⥤ WX} {RG : WY ⥤ WZ} {R : WY ⥤ WX}
+    {RI' : BZ ⥤ BX} {RG' : BY ⥤ BZ} (adjI : I ⊣ RI) (adjG : G ⊣ RG) (adjLf : Lf ⊣ R)
+    (adjI' : I' ⊣ RI') (adjG' : G' ⊣ RG')
+    (hI : ∀ L, IsIso ((mateEquiv adjI adjI' (TwoSquare.mk _ _ _ _ βI.hom)).natTrans.app L))
+    (hG : ∀ L, IsIso ((mateEquiv adjG adjG' (TwoSquare.mk _ _ _ _ βG.hom)).natTrans.app L))
+    (L : WY) :
+    IsIso ((mateEquiv adjLf (adjI'.comp adjG')
+      (TwoSquare.mk _ _ _ _ (forgetCompIsoOfComp ℓ βI βG).hom)).natTrans.app L) := by
+  rw [forgetCompIsoOfComp_hom_eq, conjugateEquiv_mateEquiv_vcomp adjLf (adjI.comp adjG),
+    mateEquiv_hcomp]
+  dsimp only [TwoSquare.whiskerTop, TwoSquare.hComp, TwoSquare.natTrans, TwoSquare.mk]
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp, Category.comp_id]
+  have := hI (RG.obj L)
+  have := hG L
+  infer_instance
+
 
 end Forget
 
