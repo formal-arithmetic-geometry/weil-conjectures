@@ -142,31 +142,14 @@
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ554 in progress
+# BZ558 in progress
 
-- Branch: `u9/BZ554`; starting commit: `8af5cb324`.
-- The user instructed continuation after the exact identity-cast statement proposal.
-  That patch is now applied to the single `epsilon.app` expression in the public
-  `ringedTopoiDerivedPullback` alpha formula. All other declaration statements and
-  all existing docstrings are unchanged.
-- Added the known split public-import/import-all localization imports for `Qh` reduction.
-- Baseline remote build was blocked by `Presheaf.InternalHom` (BZ581), before
-  reaching the assigned module. The user instructed continuation after the exact
-  one-line prerequisite proposal; that compatibility-lemma proof fix is now applied.
-- Assigned module is green at `3947e09b34`: ucheck-bump rc=0, failed=0, 2802 jobs.
-- Added the public `Mathlib.CategoryTheory.Abelian.Exact` import for the existing
-  preserves-homology lemma after the cast repair reached the theorem proof.
-- Four direct importers are queued; continue one more layer before writing DONE.
-- Notes and logs: `/home/ubuntu/u9/bz/FIXES-BZ554.md`.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
-
-# BZ557 in progress
-
-- Branch: `u9/BZ557`; starting commit: `8af5cb324`.
-- Added the public AffineScheme import to direct importer AffineBasisSectionsDerivedUnit.
-- Initial remote builds stopped in the shared Presheaf.InternalHom dependency.
-- On continuation, merged BZ558 prerequisite repair `f28760733369366ac823f0084f3c4090afa3a90d`.
-- Next: ucheck-bump on AffineBasisSectionsResolutionHomologyEpi, AffineBasisSectionsDerivedUnit,
-  and AffineOpenSectionsResolutionQuasiIso; fix any owned errors and write DONE when green.
-- Notes and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ557.md`.
-- No local Lean/Lake, statement changes, proof escapes, or heartbeat increases.
+- Branch: `u9/BZ558`; assigned module: `WeilConjectures.Algebra.Homology.SmoothPurity.NormalizedLeftExtension`.
+- The assigned module already contains BZ471's earlier proof repair.
+- Baseline was blocked by `Presheaf.InternalHom:375`: the new tensor lemma produced maps
+  from a different API than the subsequent compatibility `map_comp_apply` rewrite.
+- After the user requested continuation until green, applied the one-line prerequisite
+  proof repair in separate commit `f28760733`, using the existing compatibility tensor lemma.
+- Running `ucheck-bump` for the assigned module, then its four direct importers.
+- Fix pattern, whole-tree count, and logs: `/home/ubuntu/u9/bz/FIXES-BZ558.md`.
+- No local Lean/Lake, proof placeholders, statement changes, or heartbeat increases.
