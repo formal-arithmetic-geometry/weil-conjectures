@@ -136,8 +136,6 @@ theorem nonvanishing_section_trivializes (Y : Scheme.{u}) (L : Y.Modules)
     rw [homOfGlobalSection_app_one] at h
     rw [presheaf_map_map_apply] at h
     convert h using 1
-    · ext r
-      congr 3
   refine ⟨U, (nonvanishing_eq_compl_support Y L s).symm, ?_, ?_⟩
   · let F := SheafOfModules.forget (Y.ringCatSheaf.over U) ⋙
       PresheafOfModules.toPresheaf (Y.ringCatSheaf.over U).obj
