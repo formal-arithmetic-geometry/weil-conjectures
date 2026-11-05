@@ -8,6 +8,8 @@ module
 
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.Topology.Sheaves.CommRingCat
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.LinearAlgebra.TensorProduct.Basic
 import Mathlib.RingTheory.Localization.BaseChange
