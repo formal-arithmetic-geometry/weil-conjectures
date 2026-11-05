@@ -298,7 +298,8 @@
   `FinitePerfectAdicConstantModelsReduction` is blocked by
   `OpenPinnedSingleDegreeZeroCounitIso`; `DerivedScalarMateData` by
   `ProEtaleProjectionFormulaArrows`; `IntegralAmbientOperationModels` by
-  `IntegralTensorReductionTowerComparison`. These unowned prerequisites were skipped
+  `IntegralTensorReductionTowerComparison` and `RingedPullbackPresentationOnSitesSupplement`.
+  These unowned prerequisites were skipped
   under the brief's ownership rule; their exact first errors are in the handoff record.
 - Fix pattern, contextual regex and occurrence counts: `/home/ubuntu/u9/bz/FIXES-BZ889.md`.
 - Full build logs: `BUILD-BZ889-assigned-full.log`, `BUILD-BZ889-downstream1-full.log`,
