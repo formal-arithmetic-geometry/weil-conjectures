@@ -126,6 +126,8 @@ private theorem isFinitePresentation_of_generators_kernel
       ⟨inferInstanceAs (Finite (r.generators j).I)⟩⟩⟩
   exact D.isFinitePresentation
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 300000 in
 -- The two local-presentation constructions and slice-kernel transport need more elaboration
 -- heartbeats; the complete file still compiles within the unchanged 60-second wall limit.
