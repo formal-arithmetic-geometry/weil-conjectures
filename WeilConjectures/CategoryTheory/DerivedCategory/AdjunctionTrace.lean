@@ -50,7 +50,7 @@ variable {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
 lemma mapDerivedCategoryAdjunction_unit_eq :
     adj.mapDerivedCategoryAdjunction.unit =
       (Functor.mapDerivedCategoryIdIso C).inv ≫ Functor.mapDerivedCategoryNatTrans adj.unit ≫
-        (Functor.mapDerivedCategoryCompIso f g).hom := by
+        (Functor.mapDerivedCategoryCompIso f g).inv := by
   refine Localization.natTrans_ext DerivedCategory.Q
     (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) fun Y ↦ ?_
   have hu := adj.mapDerivedCategoryAdjunction_unit_app_Qh_obj
@@ -117,14 +117,14 @@ variable {ι : Type*} [Fintype ι]
 /-- The trace `D(f) ⋙ D(g) ⟶ 𝟭` induced by a trace `t : f ⋙ g ⟶ 𝟭`. -/
 noncomputable def mapDerivedCategoryTrace (t : f ⋙ g ⟶ 𝟭 C) :
     f.mapDerivedCategory ⋙ g.mapDerivedCategory ⟶ 𝟭 _ :=
-  (Functor.mapDerivedCategoryCompIso f g).inv ≫ Functor.mapDerivedCategoryNatTrans t ≫
+  (Functor.mapDerivedCategoryCompIso f g).hom ≫ Functor.mapDerivedCategoryNatTrans t ≫
     (Functor.mapDerivedCategoryIdIso C).hom
 
 /-- The endomorphism of `D(f) ⋙ D(g)` induced by an endomorphism of `f ⋙ g`. -/
 noncomputable def mapDerivedCategoryEndo (σ : f ⋙ g ⟶ f ⋙ g) :
     f.mapDerivedCategory ⋙ g.mapDerivedCategory ⟶ f.mapDerivedCategory ⋙ g.mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso f g).inv ≫ Functor.mapDerivedCategoryNatTrans σ ≫
-    (Functor.mapDerivedCategoryCompIso f g).hom
+  (Functor.mapDerivedCategoryCompIso f g).hom ≫ Functor.mapDerivedCategoryNatTrans σ ≫
+    (Functor.mapDerivedCategoryCompIso f g).inv
 
 lemma mapDerivedCategoryAdjunction_unit_comp_mapDerivedCategoryTrace {t : f ⋙ g ⟶ 𝟭 C} {d : ℕ}
     (hd : adj.unit ≫ t = d • 𝟙 _) :
