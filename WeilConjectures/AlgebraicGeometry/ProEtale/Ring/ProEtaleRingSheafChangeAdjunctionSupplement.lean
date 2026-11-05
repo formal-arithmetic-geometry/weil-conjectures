@@ -192,8 +192,9 @@ private theorem exactSquare_factorsh
     [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     [PreservesFiniteLimits H] [PreservesFiniteColimits H]
     (s : G ⋙ L' ≅ L ⋙ H) (K : HomotopyCategory A (.up ℤ)) :
-    ((Functor.mapDerivedCategoryCompIso G L').symm ≪≫
-        Functor.mapDerivedCategoryNatIso s ≪≫ Functor.mapDerivedCategoryCompIso L H).hom.app
+    (Functor.mapDerivedCategoryCompIso G L' ≪≫
+        Functor.mapDerivedCategoryNatIso s ≪≫
+        (Functor.mapDerivedCategoryCompIso L H).symm).hom.app
           (DerivedCategory.Qh.obj K) ≫
         H.mapDerivedCategory.map (L.mapDerivedCategoryFactorsh.hom.app K) ≫
         H.mapDerivedCategoryFactorsh.hom.app ((L.mapHomotopyCategory (.up ℤ)).obj K) =
@@ -210,7 +211,7 @@ private theorem exactSquare_factorsh
     ((Functor.mapHomotopyCategoryCompIso (Iso.refl (L ⋙ H)) (.up ℤ)).hom.app K))).1
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
   rw [h₁, h₃, ← h₂]
-  simp only [Functor.map_comp, Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Functor.map_comp, Category.assoc, Iso.hom_inv_id_app_assoc]
   have hc : DerivedCategory.Qh.map
         ((Functor.mapHomotopyCategoryCompIso (Iso.refl (L ⋙ H)) (.up ℤ)).inv.app K) ≫
       DerivedCategory.Qh.map
@@ -294,9 +295,9 @@ private theorem derived_mate_factorsh
       (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
         adj'.mapDerivedCategoryRightDerivedAdjunction
         (TwoSquare.mk _ _ _ _
-          ((Functor.mapDerivedCategoryCompIso G L').symm ≪≫
+          (Functor.mapDerivedCategoryCompIso G L' ≪≫
             Functor.mapDerivedCategoryNatIso s ≪≫
-            Functor.mapDerivedCategoryCompIso L H).hom)).app (DerivedCategory.Qh.obj K) ≫
+            (Functor.mapDerivedCategoryCompIso L H).symm).hom)).app (DerivedCategory.Qh.obj K) ≫
       R'.rightDerivedFunctor.map (H.mapDerivedCategoryFactorsh.hom.app K) =
     G.mapDerivedCategoryFactorsh.hom.app ((R.mapHomotopyCategory (.up ℤ)).obj K) ≫
       DerivedCategory.Qh.map
@@ -318,8 +319,8 @@ private theorem derived_mate_factorsh
         NatTrans.mapHomotopyCategory s.hom (.up ℤ) ≫
         (Functor.mapHomotopyCategoryCompIso (Iso.refl (L ⋙ H)) (.up ℤ)).inv))
     (TwoSquare.mk _ _ _ _
-      ((Functor.mapDerivedCategoryCompIso G L').symm ≪≫
-        Functor.mapDerivedCategoryNatIso s ≪≫ Functor.mapDerivedCategoryCompIso L H).hom)
+      (Functor.mapDerivedCategoryCompIso G L' ≪≫
+        Functor.mapDerivedCategoryNatIso s ≪≫ (Functor.mapDerivedCategoryCompIso L H).symm).hom)
     K (exactSquare_factorsh L L' G H s _)
 
 private noncomputable def chainDerivedUnit
@@ -331,14 +332,6 @@ private noncomputable def chainDerivedUnit
   (DerivedCategory.quotientCompQhIso B).inv.app _ ≫
     F.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj K) ≫
     F.rightDerivedFunctor.map ((DerivedCategory.quotientCompQhIso A).hom.app K)
-
-private theorem quotient_hom_id {A : Type*} [Category A] [Abelian A]
-    [HasDerivedCategory A] (K : CochainComplex A ℤ) :
-    (DerivedCategory.quotientCompQhIso A).hom.app K = 𝟙 (DerivedCategory.Q.obj K) := rfl
-
-private theorem quotient_inv_id {A : Type*} [Category A] [Abelian A]
-    [HasDerivedCategory A] (K : CochainComplex A ℤ) :
-    (DerivedCategory.quotientCompQhIso A).inv.app K = 𝟙 (DerivedCategory.Q.obj K) := rfl
 
 private theorem homotopyFactors_inv_id
     {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]
@@ -366,12 +359,14 @@ private theorem chainDerivedUnit_isIso_of_resolution
     IsIso (chainDerivedUnit F K) := by
   let q := HomotopyCategory.quotient A (.up ℤ)
   have hj : IsIso (DerivedCategory.Qh.map (q.map j)) := by
-    change IsIso (DerivedCategory.Q.map j)
-    infer_instance
+    exact (NatIso.isIso_map_iff (DerivedCategory.quotientCompQhIso A) j).2 inferInstance
   have hFj : IsIso (DerivedCategory.Qh.map
       ((F.mapHomotopyCategory (.up ℤ)).map (q.map j))) := by
-    change IsIso (DerivedCategory.Q.map ((F.mapHomologicalComplex (.up ℤ)).map j))
-    infer_instance
+    change IsIso (DerivedCategory.Qh.map
+      ((HomotopyCategory.quotient B (.up ℤ)).map
+        ((F.mapHomologicalComplex (.up ℤ)).map j)))
+    exact (NatIso.isIso_map_iff (DerivedCategory.quotientCompQhIso B)
+      ((F.mapHomologicalComplex (.up ℤ)).map j)).2 inferInstance
   have hn := F.rightDerivedFunctorUnit.naturality (q.map j)
   dsimp only [Functor.comp_map] at hn
   have hJ : IsIso (F.rightDerivedFunctorUnit.app (q.obj J)) := inferInstance
@@ -405,15 +400,21 @@ private theorem derived_mate_factors
       (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
         adj'.mapDerivedCategoryRightDerivedAdjunction
         (TwoSquare.mk _ _ _ _
-          ((Functor.mapDerivedCategoryCompIso G L').symm ≪≫
+          (Functor.mapDerivedCategoryCompIso G L' ≪≫
             Functor.mapDerivedCategoryNatIso s ≪≫
-            Functor.mapDerivedCategoryCompIso L H).hom)).app (DerivedCategory.Q.obj K) ≫
+            (Functor.mapDerivedCategoryCompIso L H).symm).hom)).app (DerivedCategory.Q.obj K) ≫
       R'.rightDerivedFunctor.map (H.mapDerivedCategoryFactors.hom.app K) =
     G.mapDerivedCategoryFactors.hom.app ((R.mapHomologicalComplex (.up ℤ)).obj K) ≫
       DerivedCategory.Q.map
         ((NatTrans.mapHomologicalComplex
           (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans (.up ℤ)).app K) ≫
       chainDerivedUnit R' ((H.mapHomologicalComplex (.up ℤ)).obj K) := by
+  let m := (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
+    adj'.mapDerivedCategoryRightDerivedAdjunction
+    (TwoSquare.mk _ _ _ _
+      (Functor.mapDerivedCategoryCompIso G L' ≪≫
+        Functor.mapDerivedCategoryNatIso s ≪≫
+        (Functor.mapDerivedCategoryCompIso L H).symm).hom)).natTrans
   have hf := derived_mate_factorsh adj adj' s ((HomotopyCategory.quotient _ _).obj K)
   have hG := G.mapDerivedCategoryFactorsh_hom_app
     ((R.mapHomologicalComplex (.up ℤ)).obj K)
@@ -424,30 +425,29 @@ private theorem derived_mate_factors
       ((HomotopyCategory.quotient _ _).obj K) = 𝟙 _ := rfl
   have hq' : (Functor.mapHomotopyCategoryCompIso (Iso.refl (H ⋙ R')) (.up ℤ)).inv.app
       ((HomotopyCategory.quotient _ _).obj K) = 𝟙 _ := rfl
-  have hτ : DerivedCategory.Qh.map
-      ((NatTrans.mapHomotopyCategory
-        (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans (.up ℤ)).app
-          ((HomotopyCategory.quotient _ _).obj K)) =
-      DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
+  have hτ : (NatTrans.mapHomotopyCategory
+      (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans (.up ℤ)).app
+        ((HomotopyCategory.quotient _ _).obj K) =
+      (HomotopyCategory.quotient _ _).map ((NatTrans.mapHomologicalComplex
         (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans (.up ℤ)).app K) := rfl
   simp only [Functor.mapDerivedCategoryFactorsh_hom_app, hq, hq', hτ,
-    chainDerivedUnit, quotient_hom_id, quotient_inv_id, homotopyFactors_inv_id,
-    CategoryTheory.Functor.map_comp, Category.assoc] at hf ⊢
-  repeat first
-    | erw [G.mapDerivedCategory.map_id] at hf
-    | erw [H.mapDerivedCategory.map_id] at hf
-    | erw [R'.rightDerivedFunctor.map_id] at hf
-    | erw [(DerivedCategory.Qh (C := C)).map_id] at hf
-    | erw [(DerivedCategory.Qh (C := D)).map_id] at hf
-    | erw [Category.id_comp] at hf
-    | erw [Category.comp_id] at hf
-  repeat first
-    | erw [G.mapDerivedCategory.map_id]
-    | erw [R.rightDerivedFunctor.map_id]
-    | erw [R'.rightDerivedFunctor.map_id]
-    | erw [Category.id_comp]
-    | erw [Category.comp_id]
-  exact hf
+    homotopyFactors_inv_id, CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id] at hf
+  have hn := m.naturality ((DerivedCategory.quotientCompQhIso B).hom.app K)
+  dsimp only [Functor.comp_map] at hn
+  have ht := congrArg (fun z ↦
+    G.mapDerivedCategory.map ((DerivedCategory.quotientCompQhIso A).inv.app
+      ((R.mapHomologicalComplex (.up ℤ)).obj K)) ≫ z ≫
+    R'.rightDerivedFunctor.map ((DerivedCategory.quotientCompQhIso D).hom.app
+      ((H.mapHomologicalComplex (.up ℤ)).obj K))) hf
+  simp only [Functor.map_comp, Category.assoc] at ht
+  simp only [← Functor.map_comp, ← Functor.map_comp_assoc, Iso.inv_hom_id_app,
+    CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id] at ht
+  rw [← DerivedCategory.quotientCompQhIso_inv_naturality_assoc] at ht
+  dsimp only [chainDerivedUnit]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [reassoc_of% hn]
+  simpa only [Category.assoc, ← Functor.map_comp, ← Functor.map_comp_assoc,
+    Iso.inv_hom_id_app, CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id] using ht
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -771,12 +771,12 @@ noncomputable def proEtaleRingRestrictionDerivedPullback :
     proEtaleRingDerivedPullback f SV SU cS ⋙ (proEtaleRingRestrictScalars aU).mapDerivedCategory ≅
       (proEtaleRingRestrictScalars aV).mapDerivedCategory ⋙
         proEtaleRingDerivedPullback f RV RU cR :=
-  ((Functor.mapDerivedCategoryCompIso (proEtaleRingModulePullback f SV SU cS)).symm
-    (proEtaleRingRestrictScalars aU)).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso (proEtaleRingModulePullback f SV SU cS)
+    (proEtaleRingRestrictScalars aU)) ≪≫
     Functor.mapDerivedCategoryNatIso
       (asIso (proEtaleRingRestrictionPullbackInv f RV SV RU SU aV aU cR cS comm)).symm ≪≫
-    (Functor.mapDerivedCategoryCompIso (proEtaleRingRestrictScalars aV)).symm
-      (proEtaleRingModulePullback f RV RU cR)
+    (Functor.mapDerivedCategoryCompIso (proEtaleRingRestrictScalars aV)
+      (proEtaleRingModulePullback f RV RU cR)).symm
 
 /-- The right-derived unit on complexes, including the canonical quotient identifications.
 Source: Stacks, Tag 07A5 (blueprint: lem-weil-pbc-ring-sheaf-change-adjunction). -/
@@ -1030,10 +1030,10 @@ private theorem canonicalDerivedMate_factors
           (((proEtaleRingRestrictScalars aU).mapHomologicalComplex (.up ℤ)).obj K) := by
   let e := asIso (proEtaleRingRestrictionPullbackInv f RV SV RU SU aV aU cR cS comm)
   let b := (Functor.mapDerivedCategoryCompIso (proEtaleRingRestrictScalars aV)
-    (proEtaleRingModulePullback f RV RU cR)).symm ≪≫
+    (proEtaleRingModulePullback f RV RU cR)) ≪≫
       Functor.mapDerivedCategoryNatIso e ≪≫
-      Functor.mapDerivedCategoryCompIso (proEtaleRingModulePullback f SV SU cS)
-        (proEtaleRingRestrictScalars aU)
+      (Functor.mapDerivedCategoryCompIso (proEtaleRingModulePullback f SV SU cS)
+        (proEtaleRingRestrictScalars aU)).symm
   have hb : (proEtaleRingRestrictionDerivedPullback
       f RV SV RU SU aV aU cR cS comm).inv = b.hom := by
     dsimp [proEtaleRingRestrictionDerivedPullback, b]
