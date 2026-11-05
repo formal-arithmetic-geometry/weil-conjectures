@@ -61,6 +61,26 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
 local notation "gb" => Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))
 local notation "Λ" => Profinite.padicAlgClRingObj l
 
+/-- Forgetting the Weil structure identifies the underived pushforward mate. -/
+lemma nativeProjectionAdicUnderivedMate_normalization :
+    (mateEquiv (upperStarLowerStarAdjunction k₀ l g)
+      (adicUpperStarLowerStarAdjunction l gb)
+      (IsoAlgebra.mapOfNatIsoCompForgetIso
+        (adicUpperStarGeometricFiberMapCompFrobeniusIso l g
+          (comp_over g (Spec (CommRingCat.of k₀))))).inv).natTrans =
+      (IsoAlgebra.mapOfNatIsoCompForgetIso
+        (adicLowerStarGeometricFiberMapCompFrobeniusIso l g
+          (comp_over g (Spec (CommRingCat.of k₀))))).hom := by
+  ext K : 2
+  exact_mod_proofs IsoAlgebra.mateEquiv_mapOfNatIsoCompForgetIso_inv_app
+    (adicUpperStarLowerStarAdjunction l gb)
+    (adicUpperStarGeometricFiberMapCompFrobeniusIso l g
+      (comp_over g (Spec (CommRingCat.of k₀))))
+    (adicLowerStarGeometricFiberMapCompFrobeniusIso l g
+      (comp_over g (Spec (CommRingCat.of k₀))))
+    (mateEquiv_adicUpperStarGeometricFiberMapCompFrobeniusIso_inv l g
+      (comp_over g (Spec (CommRingCat.of k₀)))) K
+
 /-- The underived realization mate factors through the adic model. -/
 lemma nativeProjectionUnderivedPushMate_normalization :
     (mateEquiv (upperStarLowerStarAdjunction k₀ l g)
@@ -80,17 +100,10 @@ lemma nativeProjectionUnderivedPushMate_normalization :
   let β₁ := IsoAlgebra.mapOfNatIsoCompForgetIso
     (adicLowerStarGeometricFiberMapCompFrobeniusIso l g (comp_over g (Spec (CommRingCat.of k₀))))
   let β₂ := projectionAdicCondensedPushIso l gb
-  have h₁ : (mateEquiv a b α₁.hom).natTrans = β₁.hom := by
-    ext K : 2
-    exact IsoAlgebra.mateEquiv_mapOfNatIsoCompForgetIso_inv_app b
-      (adicUpperStarGeometricFiberMapCompFrobeniusIso l g
-        (comp_over g (Spec (CommRingCat.of k₀))))
-      (adicLowerStarGeometricFiberMapCompFrobeniusIso l g
-        (comp_over g (Spec (CommRingCat.of k₀))))
-      (mateEquiv_adicUpperStarGeometricFiberMapCompFrobeniusIso_inv l g
-        (comp_over g (Spec (CommRingCat.of k₀)))) K
+  have h₁ : (mateEquiv a b α₁.hom).natTrans = β₁.hom :=
+    nativeProjectionAdicUnderivedMate_normalization k₀ l g
   have h₂ : (mateEquiv b c α₂.hom).natTrans = β₂.hom := rfl
-  exact mateEquiv_isoHComp_eq a b c α₁ α₂ β₁ β₂ h₁ h₂
+  exact_mod_proofs mateEquiv_isoHComp_eq a b c α₁ α₂ β₁ β₂ h₁ h₂
 
 /-- The derived realization mate is the right-derived canonical commutation square. -/
 lemma nativeProjectionDerivedPushMate_normalization :

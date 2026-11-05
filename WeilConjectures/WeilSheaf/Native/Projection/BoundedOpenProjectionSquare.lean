@@ -36,6 +36,9 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
 local notation "jb" => geometricFiberHom (k₀ := k₀) j
 local notation "Λ" => Profinite.padicAlgClRingObj l
 
+local instance : IsOpenImmersion (jb).left :=
+  Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange (P := @IsOpenImmersion) j _ ‹_›
+
 /-- The bounded open forget comparison is a restriction of the composite realization square. -/
 lemma projectionOpenForgetIso_hom_app (M : WeilComplex k₀ l U) :
     ((projectionOpenForgetIso k₀ l j).hom.app M).hom =
@@ -51,7 +54,7 @@ theorem projectionForgetSquare_open :
       (nativeBoundedOpenProjectionIso (k₀ := k₀) (l := l) j).hom
       ((CondensedRing.boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ l jb).
         invProjectionComparisonNatTrans (fun _ _ ↦ inferInstance)) := by
-  let B := CondensedRing.derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ jb.left
+  let B := CondensedRing.derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ (jb).left
   have h₀ : ProjectionForgetSquare (ProEtaleWeilSheaf.nativeOpenForgetIso k₀ l j)
       (ProEtaleWeilSheaf.derivedCondensedRealizationUpperStarIso k₀ l j).symm
       (ProEtaleWeilSheaf.condensedRealizationTensor k₀ l U)

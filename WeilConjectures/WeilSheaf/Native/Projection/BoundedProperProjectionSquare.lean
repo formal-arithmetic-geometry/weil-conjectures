@@ -36,6 +36,9 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
 local notation "gb" => geometricFiberHom (k₀ := k₀) g
 local notation "Λ" => Profinite.padicAlgClRingObj l
 
+local instance : IsProper (gb).left :=
+  Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange (P := @IsProper) g _ ‹_›
+
 set_option backward.isDefEq.respectTransparency false in
 /-- The bounded proper forget square has the same components as the canonical realization
 mate transported along the exact-functor compositor. -/
@@ -65,7 +68,7 @@ theorem projectionForgetSquare_proper :
     (ProEtaleWeilSheaf.condensedRealizationTensor k₀ l Y)
     (projectionRealizationCompIso k₀ l X) (projectionRealizationCompIso k₀ l Y)
     (ProEtaleWeilSheaf.nativeProperProjectionNatTrans k₀ l g)
-    (CondensedRing.derivedUpperStarLowerStarAdjunction Λ gb.left).uncurriedProjectionMorphismNatTrans
+    (CondensedRing.derivedUpperStarLowerStarAdjunction Λ (gb).left).uncurriedProjectionMorphismNatTrans
     (ProEtaleWeilSheaf.nativeProperProjection_forgetSquare k₀ l g)
   intro M N
   apply ObjectProperty.hom_ext
