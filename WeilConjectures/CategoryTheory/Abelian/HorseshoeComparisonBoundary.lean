@@ -111,10 +111,10 @@ private theorem comparison_eq_unit
   change _ ≫ DerivedCategory.Plus.ι.map (inv
       (v.rightDerivedFunctorPlusUnit.app (resolutionPlus R))) ≫
       DerivedCategory.Plus.ι.map (DerivedCategory.Plus.Q.map vg) ≫ _ = _
-  have hη' := v.rightDerivedFunctorPlusUnit.naturality (DerivedCategory.Plus.Q.map g)
+  have hη' := v.rightDerivedFunctorPlusUnit.naturality g
   have hu' : inv (v.rightDerivedFunctorPlusUnit.app (resolutionPlus R)) ≫
         DerivedCategory.Plus.Q.map vg =
-      v.rightDerivedFunctorPlus.map (DerivedCategory.Plus.Q.map g) ≫
+      v.rightDerivedFunctorPlus.map g ≫
         inv (v.rightDerivedFunctorPlusUnit.app (resolutionPlus I)) := by
     rw [IsIso.inv_comp_eq, ← Category.assoc, eq_comm, IsIso.comp_inv_eq]
     exact hη'.symm
@@ -211,7 +211,8 @@ private theorem augmentation_boundary
       (DerivedCategory.Plus.ι.commShiftIso (1 : ℤ)).hom.app
         ((DerivedCategory.Plus.singleFunctor A 0).obj S.X₁) ≫
       (shiftFunctor (DerivedCategory A) 1).map
-        (((DerivedCategory.singleFunctorIsoCompQ A 0).app S.X₁).hom ≫
+        ((DerivedCategory.Plus.singleFunctorιIso A 0).hom.app S.X₁ ≫
+          (DerivedCategory.singleFunctorIsoCompQ A 0).hom.app S.X₁ ≫
           DerivedCategory.Q.map IA.ι') =
     ((DerivedCategory.singleFunctorIsoCompQ A 0).app S.X₃).hom ≫
       DerivedCategory.Q.map IC.ι' ≫ DerivedCategory.triangleOfSESδ hH ≫
@@ -226,7 +227,6 @@ private theorem augmentation_boundary
     DerivedCategory.singleFunctorsPostcompQIso_hom_hom,
     DerivedCategory.singleFunctorsPostcompQIso_inv_hom, NatTrans.id_app,
     Category.id_comp]
-  simp only [Functor.map_id, Category.comp_id]
   erw [reassoc_of% hn]
 
 /-- The explicit comparisons respect the connecting arrow of the derived
