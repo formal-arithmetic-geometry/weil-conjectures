@@ -161,7 +161,7 @@ lemma coeffHred :
           (upperStarRootsOfUnitySheafHom g (ℓ ^ n)) := by
   have hr := upperStarIntegralTateTwistOneIso_hom_comp_reduction ℓ E g f n
   simp only [purityTateRootPullbackIso, upperStarRootsOfUnitySheafIsoOfInvertible_hom] at hr
-  dsimp only [coeffPullInv, coeffReductionIso, coeffReduction, coeffRingObj,
+  dsimp +instances only [coeffPullInv, coeffReductionIso, coeffReduction, coeffRingObj,
     monObj_coeffRingObj, isCommMonObj_coeffRingObj,
     integersModPowReduction, Functor.comp_obj, Functor.comp_map,
     Profinite.integersModPowRingObj] at hr ⊢
@@ -188,7 +188,7 @@ lemma coeffHread :
     (PadicAlgCl.integersModPow ℓ E n) (ℓ ^ n) (pow_pos (Fact.out : ℓ.Prime).pos n)
     (ringChar_integersModPowCoeff ℓ E n) hzero g
     (isUnit_natCast_pow_of_neZero ℓ n f) (isUnit_natCast_pow_of_neZero ℓ n (g ≫ f))
-  dsimp only [coeffComparison, coeffPullbackIso, coeffRootReadingIso, coeffTatePull,
+  dsimp +instances only [coeffComparison, coeffPullbackIso, coeffRootReadingIso, coeffTatePull,
     coeffType, commRing_coeffType, coeffRingObj, monObj_coeffRingObj,
     isCommMonObj_coeffRingObj, integersModPowCoeff, Profinite.integersModPowRingObj,
     Functor.comp_obj, Functor.comp_map] at hf ⊢
@@ -227,7 +227,7 @@ lemma originalEquation
             (Etale.tateSheaf (integersModPowCoeff.{u} ℓ E n) Y) ≫
         ν^*(X)[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)].map
           (Etale.upperStarTateSheafToTateSheaf (integersModPowCoeff.{u} ℓ E n) g) := by
-  dsimp only [coeffComparison, coeffPullInv, coeffReduction, coeffPullbackIso,
+  dsimp +instances only [coeffComparison, coeffPullInv, coeffReduction, coeffPullbackIso,
     coeffTateReadingIso, coeffTatePull, coeffType, commRing_coeffType,
     coeffRingObj, monObj_coeffRingObj, isCommMonObj_coeffRingObj,
     integersModPowReduction, integersModPowCoeff, Profinite.integersModPowRingObj,

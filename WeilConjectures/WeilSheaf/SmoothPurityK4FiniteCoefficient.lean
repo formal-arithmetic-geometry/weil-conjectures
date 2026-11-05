@@ -100,7 +100,7 @@ lemma rootReading_pullback (hT : (N : T) = 0) {X Y : Scheme.{u}} (g : X ⟶ Y)
           (rootReading T N hN hchar Y hY).hom ≫
         tatePull T g := by
   have h := purityFiniteRootTateReadingIso_pullback T N hN hchar hT g hY hX
-  dsimp only [comparison, comparePull, rootReading, tatePull, ringObj, ringObjMon,
+  dsimp +instances only [comparison, comparePull, rootReading, tatePull, ringObj, ringObjMon,
     ringObjComm, coefficient, coefficientRing, Functor.comp_obj, Functor.comp_map] at h ⊢
   exact_mod_proofs h
 
