@@ -90,15 +90,15 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
         have hn := projection_nativePullTensor_normalization k₀ l g
         dsimp only [ProjectionRestrictionTensorNormalization] at hn
         dsimp only [L, nativeOpenPull]
-        with_reducible_and_instances exact_mod_proofs hn)
+        with_reducible_and_instances exact hn)
       (by
         have hF := projection_native_realization_model_normalization k₀ l Y
         dsimp only [F, derivedCondensedRealization]
-        with_reducible_and_instances exact_mod_proofs hF)
+        with_reducible_and_instances exact hF)
       (by
         have hV := projection_native_realization_model_normalization k₀ l Z
         dsimp only [V, derivedCondensedRealization]
-        with_reducible_and_instances exact_mod_proofs hV)
+        with_reducible_and_instances exact hV)
       (fun A B ↦ (R.mapCochainComplexμIso A B).symm)
       (fun A B ↦ (R.mapDerivedCategoryTensorComparison.app A).app B)
       (by exact R.projection_ordinary_model_normalization)
@@ -107,9 +107,9 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
         have ht := htotal P T
         dsimp only [TotalPullTensorSquare, condensedRealizationPullComplexIso, Iso.symm] at ht
         dsimp only [projection_model_complex_square, L, V, F, R, Iso.symm]
-        with_reducible_and_instances exact_mod_proofs ht)
+        with_reducible_and_instances exact ht)
     dsimp only [L, V, F, R, nativeOpenPull, derivedCondensedRealization] at h ⊢
-    exact_mod_proofs h
+    with_reducible_and_instances exact h
 
 include htotal in
 /-- The native pullback tensor square on arbitrary derived objects, extended from K-flat
