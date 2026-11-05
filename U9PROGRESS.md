@@ -171,3 +171,8 @@
   Applied exactly the two private modifiers; statements and proof bodies are unchanged.
 - Refreshed the remote notes and reread the brief; no new applicable LEAD instructions.
 - Next: validate the assigned module with ucheck-bump, then its direct importer.
+
+- Assigned module GREEN through ucheck-bump at `db7bb14d08`: rc=0, failed=0,
+  2022 jobs; target rebuilt in 4.8s on newsrv bumpw4.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ585-unit-full.log`.
+- Now building the sole direct importer, `WeilConjectures.WeilSheaf.LowerShriekForget`.
