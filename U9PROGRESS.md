@@ -82,3 +82,9 @@
 - Focused helper check on w4, K6-20261105T103316.log, exposed one remaining
   unresolved base-field parameter at the smooth-purity call. Supplied k₀/l
   explicitly in both the adjunction and the twist-pullback isomorphism.
+- GREEN: AffineLineSmoothAdjunction (and its TateTwistPullback dependency),
+  ucheck rc=0 at 2b59e904 (see git log for full commit), log
+  /home/ubuntu/u9/logs/K6-20261105T103517.log, built=1 failed=0.
+- Stopped only my initial, already-failed batch service after this focused success;
+  it was still rebuilding newly imported upstream trace-construction dependencies.
+  Restarting the final batch on corrected sources, reusing completed cache artifacts.
