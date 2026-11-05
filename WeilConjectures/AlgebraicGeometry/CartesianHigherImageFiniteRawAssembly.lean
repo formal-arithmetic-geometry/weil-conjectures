@@ -6,6 +6,7 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.CategoryTheory.ObjectProperty.Shift
 public import WeilConjectures.AlgebraicGeometry.CartesianHigherImageTransitions
 public import WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImageClassCompatibility
 import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Horizontal
