@@ -66,10 +66,10 @@ theorem isIso_mateEquiv_projectionProperForgetIso
   let δ := projectionBoundedAdicCondensedPushIso k₀ l g
   let aa := ((EX).toAdjunction.comp (adj'.comp (EY).symm.toAdjunction)).ofNatIsoLeft
     δ.isoCompInverse.symm
-  have : IsIso (mateEquiv adj aa (properProjectionAdicForgetIso k₀ l g).inv).natTrans :=
+  have h₁ : IsIso (mateEquiv adj aa (properProjectionAdicForgetIso k₀ l g).symm.hom).natTrans :=
     @NatIso.isIso_of_isIso_app _ _ _ _ _ _ _ (fun M ↦
       isIso_mateEquiv_properProjectionAdicForgetIso k₀ l g adj aa M)
-  have : IsIso (mateEquiv aa adj' δ.inv).natTrans :=
+  have h₂ : IsIso (mateEquiv aa adj' δ.symm.hom).natTrans :=
     @NatIso.isIso_of_isIso_app _ _ _ _ _ _ _ (fun M ↦
       Adjunction.isIso_mateEquiv_app_of_isIso aa adj' δ.symm
         (EX).toAdjunction (EY).toAdjunction M)

@@ -57,6 +57,21 @@ def projectionOpenForgetIso :
   ((boundedConstructible _).fullyFaithfulι.whiskeringRight _).preimageIso
     (Functor.isoWhiskerLeft (objectProperty k₀ l U).ι (projectionOpenCompositeForgetIso k₀ l j))
 
+/-- The bounded Weil open counit is the ambient counit. -/
+lemma projectionOpenAdjunction_counit_app_hom (M : WeilComplex k₀ l Z) :
+    ((extensionByZeroUpperStarAdjunction (k₀ := k₀) (l := l) j).counit.app M).hom =
+      (ProEtaleWeilSheaf.derivedExtensionByZeroUpperStarAdjunction k₀ l j).counit.app M.obj := by
+  let A := ProEtaleWeilSheaf.derivedExtensionByZeroUpperStarAdjunction k₀ l j
+  change (objectProperty k₀ l Z).ι.map ((A.restrictFullyFaithful
+    (L := extensionByZero (k₀ := k₀) (l := l) j) (R := upperStar j)
+    (objectProperty k₀ l U).fullyFaithfulι (objectProperty k₀ l Z).fullyFaithfulι
+    (Iso.refl _) (Iso.refl _)).counit.app M) = _
+  refine (Adjunction.map_restrictFullyFaithful_counit_app A
+    (L := extensionByZero (k₀ := k₀) (l := l) j) (R := upperStar j)
+    (objectProperty k₀ l U).fullyFaithfulι (objectProperty k₀ l Z).fullyFaithfulι
+    (Iso.refl _) (Iso.refl _) M).trans ?_
+  simp only [Iso.refl_inv, NatTrans.id_app, Functor.map_id, Category.id_comp]
+
 /-- The exceptional mate of the open forget square is invertible. -/
 theorem isIso_mateEquiv_projectionOpenForgetIso :
     IsIso (mateEquiv (extensionByZeroUpperStarAdjunction (k₀ := k₀) (l := l) j)
@@ -88,13 +103,7 @@ theorem isIso_mateEquiv_projectionOpenForgetIso :
       CondensedRing.boundedConstructibleUpperStarCompatibility, ObjectProperty.liftCompιIso]
   rw [NatTrans.isIso_iff_isIso_app]
   intro M
-  have hc : (a.counit.app M).hom = A.counit.app M.obj := by
-    change (ObjectProperty.ι _).map ((A.restrictFullyFaithful
-      (L := extensionByZero (k₀ := k₀) (l := l) j) (R := upperStar j)
-      (objectProperty k₀ l U).fullyFaithfulι (objectProperty k₀ l Z).fullyFaithfulι
-      (Iso.refl _) (Iso.refl _)).counit.app M) = _
-    rw [Adjunction.map_restrictFullyFaithful_counit_app]
-    simp
+  have hc := projectionOpenAdjunction_counit_app_hom k₀ l j M
   have hm : ((mateEquiv a b (projectionOpenForgetIso k₀ l j).inv).app M).hom =
       (mateEquiv A B (projectionOpenCompositeForgetIso k₀ l j).inv).app M.obj := by
     simp only [mateEquiv_apply, NatTrans.comp_app, Functor.whiskerLeft_app,
