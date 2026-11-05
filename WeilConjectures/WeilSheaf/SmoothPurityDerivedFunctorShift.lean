@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.WeilSheaf.SmoothPuritySingleModuleComparison
+public import WeilConjectures.WeilSheaf.SmoothPurityCoefficientPullShift
 
 /-! # Shift structures on the named derived coefficient and pullback functors -/
 
