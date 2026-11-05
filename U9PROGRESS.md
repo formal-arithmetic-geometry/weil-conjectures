@@ -218,33 +218,26 @@
 - Fix patterns and exact diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ740.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ780 leaf and first two downstream layers green
+# BZ780: 13 modules green; final downstream checks pending
 
-- Branch: `u9/BZ780`; starting commit: `8027d88a3`.
-- `DerivedPullbackTensorUnitKFlat` and `DerivedPullbackTensorUnit` passed `ucheck-bump`
-  at `5aead0ac1d861aa6ef525ef6f15a0e7c483bdc26`, 3930 jobs, poolb:43.166.82.34.
-- `DerivedPullbackMonoidalDescent` passed at `453fb49d85`: rc=0, failed=0.
-  Its associativity dependency also built successfully in this checkout.
-- The user instructed continuation after the concrete two-identity-cast proposal.
-  The retained casts preserve the original morphisms and mathematical assumptions.
-- Added public and implementation Localization imports, normalized identity casts
-  with `cast_eq`, and used `erw` through the local functor aliases.
-- Applied the same cast/import pattern inside the proposition-construction body of
-  `IsDerivedPullbackMonoidalModel`; its signature and theorem statements are unchanged.
-- Six machine rules exactly replay the two changed Lean files and are idempotent.
-- Four direct importers are blocked by unowned `SingleComplexBaseChangeStalkCondition`:
-  CanonicalPullbackTensorComparison, CanonicalPullbackTensorMonoidalRealization,
-  PerfectRHomTensorComparison, PerfectTensorHomDuality. Full diagnostics are saved.
-- Active repair batch: exec 32751, Weil bbuild PID 2557462, summary log
-  `BUILD-BZ780-downstream3-fix1.log`; targets Model, AcrossUniversesMonoidalAdjunction,
-  DerivedRestrictionTensorNaturality, OpenRestrictionDerivedMonoidal.
-- Active next-layer batch: exec 92062, Weil bbuild PID 2651696, summary log
-  `BUILD-BZ780-downstream4.log`; targets SchemeIsoDerivedFunctorComparisons,
-  DerivedRestrictionTensorHomCoherence, OpenRestrictionClosedMonoidal.
-- Both requests are queued; do not submit duplicates. All current tree slots are occupied.
-- Prune lists mark the potentially failing open-restriction theorem unused. Delete it
-  if its obsolete compositor direction fails; all its caller's declarations are unused too.
-- Next: finish downstream validation and fixes, then write `BZ780.DONE`.
-- Fix records, exact errors, counts, replay rules, and log names:
-  `/home/ubuntu/u9/bz/FIXES-BZ780.md`. Audit: `BZ780-contract-audit.txt`.
+- Branch: `u9/BZ780`; baseline: `8027d88a3`.
+- Assigned `DerivedPullbackTensorUnitKFlat` is sorry-free and green, with 12 downstream
+  modules green through `QCqsSheafRHomAdjunction`. Inventory: `BZ780-validation.json`.
+- Latest successful six-target batch: `ucheck-bump` rc=0, failed=0, 5684 jobs at
+  `19f7a3b3d4` on newsrv:/home/ubuntu/u9n/bumpw2. Full log:
+  `/home/ubuntu/u9/bz/BUILD-BZ780-downstream5-green-full.log`.
+- The user authorized the concrete two-identity-cast proposal for the leaf. Added
+  Localization imports and proof normalization, preserving its original morphisms.
+- Applied the same casts/imports inside the monoidal-model proposition body. Its
+  signature and theorem statements are unchanged; the old No goals error disappeared.
+- Deleted unused `AlgebraicGeometry.exists_openRestriction_derivedMonoidal` with its
+  docstring after its obsolete compositor direction failed. Its sole caller is in the
+  already-blocked unused open-restriction closed-monoidal theorem.
+- Seven machine rewrite rules exactly reproduce all three changed Lean files.
+- Six targets are blocked by unowned `SingleComplexBaseChangeStalkCondition`; details,
+  exact errors, occurrence counts, and replay rules are in `/home/ubuntu/u9/bz/FIXES-BZ780.md`.
+- Active four-module repair validation: exec 32751, Weil bbuild PID 2557462; still
+  queued. It will validate the pruned OpenRestrictionDerivedMonoidal module.
+- Next: check final direct importer GlobalHomAdjunctionIso (known transitive stalk-condition
+  blocker), finish the queued validation, then commit final records and write BZ780.DONE.
 - No local Lean/Lake, proof placeholders, trust bypasses, profiler probes, or heartbeat increases.
