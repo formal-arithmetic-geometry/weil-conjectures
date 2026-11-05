@@ -599,7 +599,10 @@ theorem tangentCoeff_tangentBracket (v w : pointsKer G aug₁) (a : stalkOne G) 
     group
   have h := congrArg (fun p ↦ (kerHom p a).snd.snd) e
   rw [kerHom_tangentMap_mul (eps₂ * del₂) aug₂_eps₂_mul_del₂ eps₂_mul_del₂_mul,
-    kerHom_tangentMap_mul_tangentMap, kerHom_tangentMap_mul_tangentMap] at h
+    kerHom_tangentMap_mul_tangentMap del₂ eps₂ del₂_mul_self eps₂_mul_self
+      aug₂_del₂ aug₂_eps₂ w v,
+    kerHom_tangentMap_mul_tangentMap eps₂ del₂ eps₂_mul_self del₂_mul_self
+      aug₂_eps₂ aug₂_del₂ v w] at h
   simp only [snd_add, snd_snd_algebraMap₂, snd_snd_algebraMap₂_mul_eps₂,
     snd_snd_algebraMap₂_mul_del₂, snd_snd_algebraMap₂_mul_eps₂_mul_del₂,
     snd_snd_algebraMap₂_mul_del₂_mul_eps₂] at h
