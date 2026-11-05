@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.ContinuousIntegralCoefficientData
 public import WeilConjectures.AlgebraicGeometry.ProEtaleInverseImage
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.Topology.ContinuousMap.Algebra
 import all WeilConjectures.AlgebraicGeometry.IntegralConstructibleKernels
 import all WeilConjectures.AlgebraicGeometry.IntegralMatrixEntryProperties
 import all WeilConjectures.AlgebraicGeometry.FiniteBiproductPivot
@@ -31,10 +32,13 @@ public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteCondensedRing
 universe u
 
 open CategoryTheory Limits
-open scoped CategoryTheory.Obj
+open scoped CategoryTheory.Obj ZeroObject
 
 attribute [local instance] Abelian.hasFiniteBiproducts
 attribute [local instance] comp_preservesFiniteLimits comp_preservesLimits
+
+private local instance {S R : Type*} [TopologicalSpace S] [TopologicalSpace R] [Zero R] :
+    OfNat C(S, R) 0 := ⟨ContinuousMap.const S 0⟩
 
 -- Cokernels of diagonal blocks, and integral elimination when the pivot divides its column.
 private noncomputable def diagonalCokernelIso
@@ -1139,8 +1143,6 @@ private lemma scalarChart_torsion {X : Scheme.{u}}
       ((Mod.forget R ⋙ sheafCompose (Scheme.ProEt.topology X) (forget Ab.{u + 1})).obj M ≅
         (constantSheaf (Scheme.ProEt.topology X) (Type (u + 1))).obj
           (ULift.{u + 1} (Fin n)))) : ScalarChart R k M := by
-  let : Zero (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) :=
-    HasZeroObject.zero' _
   have hzero : Mod.IsFree R (0 : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) := by
     refine ⟨0, ⟨(isZero_zero _).iso ((IsZero.iff_id_eq_zero _).mpr ?_)⟩⟩
     apply biproduct.hom_ext
