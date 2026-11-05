@@ -473,7 +473,7 @@ def restrictionComposition {l m n : ℕ} (h : n ≤ m) (k : m ≤ l) :
     resD.{c, v, r} (coefficientMap.{c, v, r} J B τ h) ⋙
         resD.{c, v, r} (coefficientMap.{c, v, r} J B τ k) ≅
       resD.{c, v, r} (coefficientMap.{c, v, r} J B τ (h.trans k)) :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso _ _) ≪≫
     Functor.mapDerivedCategoryNatIso
       (restrictionComposition_existsUnique.{c, v, r} J B τ h k).exists.choose
 
@@ -572,7 +572,7 @@ def derivedTransition {m n : ℕ} (h : n ≤ m) :
     (Functor.whiskerRight
       (NatTrans.mapHomologicalComplex (transition.{c, v, r} J B τ h) (.up ℤ))
         DerivedCategory.Q) ≫
-    (Functor.mapDerivedCategoryCompIso (evaluation.{c, v, r} J B τ n)
+    ((Functor.mapDerivedCategoryCompIso (evaluation.{c, v, r} J B τ n)).symm
       (res.{c, v, r} (coefficientMap.{c, v, r} J B τ h))).hom
 
 /-- The reduction of M is the extension/restriction transpose of its actual transition.
@@ -685,10 +685,10 @@ Source: Stacks 03CZ (auxiliary; not a blueprint node). -/
 def restrictionEvaluation (n : ℕ) :
     resD.{c, v, r} (systemMap.{c, v, r} J B τ F σ α hα) ⋙ e.{c, v, r} J B τ n ≅
       e.{c, v, r} J F σ n ⋙ resD.{c, v, r} (α n) :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso _ _) ≪≫
     Functor.mapDerivedCategoryNatIso
       (restrictionEvaluation_existsUnique.{c, v, r} J B τ F σ α hα n).exists.choose ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 end RingSystemMap
 

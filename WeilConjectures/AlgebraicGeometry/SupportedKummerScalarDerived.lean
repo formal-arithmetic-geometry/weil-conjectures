@@ -11,6 +11,7 @@ import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
 import WeilConjectures.CategoryTheory.FlatScalarUnit
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 import WeilConjectures.SixFunctors.Finite.Stalk
+public import Mathlib.Algebra.Category.ModuleCat.Products
 
 /-! Derived universal properties of normalized supported scalar maps.
 Source: Stacks Project, Tags 03QP, 03Q1 and 06YY

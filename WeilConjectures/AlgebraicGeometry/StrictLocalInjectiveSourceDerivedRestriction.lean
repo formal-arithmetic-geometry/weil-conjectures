@@ -96,7 +96,7 @@ theorem strictLocalInjectiveSourceIso_derivedRestriction {X S : Scheme.{v}}
         ((strictLocalNeighbourhoodProjection f s).app i) (pullback.fst f
         (Scheme.strictLocalizationToBase s))
             (Q.over i).symm) ≪≫
-          Functor.mapDerivedCategoryCompIso
+          (Functor.mapDerivedCategoryCompIso).symm
             (Etale.upperStar AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodProjection f s).app i))
             (Etale.upperStar AddCommGrpCat.{v + 1} (Q.legs.app i))).inv.app K.obj) := by
   intro i

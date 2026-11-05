@@ -77,9 +77,9 @@ theorem mateEquiv_rightDerivedComparisonBaseChange {X Y : Scheme.{u}} (p : X ⟶
   -- the commutation of the left adjoints, read on the functors induced on derived categories
   let β : (Etale.upperStar A p).mapDerivedCategory ⋙ ν^*(X)[A].mapDerivedCategory ⟶
       ν^*(Y)[A].mapDerivedCategory ⋙ (ProEtale.upperStar A p).mapDerivedCategory :=
-    (Functor.mapDerivedCategoryCompIso _ _).inv ≫
+    (Functor.mapDerivedCategoryCompIso _ _).hom ≫
       (Functor.mapDerivedCategoryNatIso (comparisonUpperStarUpperStarIso A p)).inv ≫
-      (Functor.mapDerivedCategoryCompIso _ _).hom
+      (Functor.mapDerivedCategoryCompIso _ _).inv
   have h₁ : (mateEquiv (ProEtale.derivedUpperStarLowerStarAdjunction A p)
       (Etale.derivedUpperStarLowerStarAdjunction A p)
       (rightDerivedComparisonBaseChange A p)).natTrans =
