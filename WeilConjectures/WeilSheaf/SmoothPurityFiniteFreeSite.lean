@@ -85,4 +85,15 @@ lemma purity_comparisonUpperStarFreeIso_factor :
   refine Eq.trans ?_ h
   congr 1
 
+/-- Component form of the factorization, without associator identities. -/
+lemma purity_comparisonUpperStarFreeIso_hom_app
+    (M : Sheaf X.smallEtaleTopology Ab.{u + 1}) :
+    (comparisonUpperStarFreeIso T X).hom.app M =
+      (purityFiniteCoefficientFreeIso T X).hom.app (ν^*(X)[Ab.{u + 1}].obj M) ≫
+        (purityComparisonFreeSheafIso T X).hom.app M := by
+  rw [purity_comparisonUpperStarFreeIso_factor]
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.associator_hom_app,
+    Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app]
+  erw [Category.id_comp]
+
 end AlgebraicGeometry.ProEtale

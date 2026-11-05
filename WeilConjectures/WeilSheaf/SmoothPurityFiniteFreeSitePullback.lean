@@ -47,6 +47,7 @@ noncomputable def purityComparisonFreePullbackIso :
     Functor.isoWhiskerRight (comparisonUpperStarUpperStarIso Ab.{u + 1} g) _ ≪≫
     Functor.associator _ _ _
 
+omit [TopologicalSpace T] [IsTopologicalRing T] [DiscreteTopology T] [Finite T] in
 lemma purityComparisonFreePullbackIso_conjugate :
     conjugateIsoEquiv
       ((Etale.upperStarLowerStarAdjunction Ab.{u + 1} g).comp

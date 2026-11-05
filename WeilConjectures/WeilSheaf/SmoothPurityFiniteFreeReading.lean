@@ -42,10 +42,9 @@ lemma purity_comparisonUpperStarFreeIso_pullback
           ((Etale.extendScalars (ULift.{u + 1} T) Y).obj M) ≫
         ν^*(X)[ModuleCat.{u + 1} (ULift.{u + 1} T)].map
           ((Etale.upperStarExtendScalarsIso (ULift.{u + 1} T) g).hom.app M) := by
-  rw [purity_comparisonUpperStarFreeIso_factor, purity_comparisonUpperStarFreeIso_factor]
-  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.associator_hom_app,
-    Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Category.id_comp,
-    Functor.map_comp, Category.assoc]
+  rw [purity_comparisonUpperStarFreeIso_hom_app,
+    purity_comparisonUpperStarFreeIso_hom_app]
+  simp only [Functor.map_comp, Category.assoc]
   rw [(purityFiniteCoefficientFreeIso T X).hom.naturality_assoc]
   rw [reassoc_of% (purity_upperStarFiniteCoefficient_free T g (ν^*(Y)[Ab.{u + 1}].obj M))]
   have h := purity_comparisonFreeSheaf_pullback_forward T g M

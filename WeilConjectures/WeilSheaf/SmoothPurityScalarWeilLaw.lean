@@ -14,6 +14,10 @@ public import WeilConjectures.WeilSheaf.SmoothPurityPullbackForgetFactor
 
 universe u
 
+set_option Elab.async false
+set_option trace.profiler true
+set_option trace.profiler.threshold 1000
+
 open CategoryTheory Limits MonoidalCategory
 open scoped CategoryTheory.Obj AlgebraicGeometry.ProEtale.CondensedRing
 
