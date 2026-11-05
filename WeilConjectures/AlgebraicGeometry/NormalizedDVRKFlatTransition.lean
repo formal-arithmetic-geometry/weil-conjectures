@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+public import Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 public import WeilConjectures.AlgebraicGeometry.IntegralDerivedReduction
 public import WeilConjectures.AlgebraicGeometry.IntegralReductionTowerWellDefinedUnrestricted
@@ -114,11 +115,17 @@ noncomputable def normalizedDVRKFlatComparison (n : ℕ)
         ((scalarReductionDerivedExtension l E X n).obj (DerivedCategory.Q.obj P)) ⟶
       DerivedCategory.Q.obj (unrestrictedTowerComplex l E X n P) :=
   (scalarReductionDerivedRestriction l E X n).map
-      ((scalarReductionCounit l E X n).app
-        ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫
-    (scalarReductionRestriction l E X n).mapDerivedCategoryFactorsh.hom.app
-      (((scalarReductionExtension l E X n).mapHomotopyCategory (.up ℤ)).obj
-        ((HomotopyCategory.quotient _ (.up ℤ)).obj P))
+      ((scalarReductionDerivedExtension l E X n).map
+          ((DerivedCategory.quotientCompQhIso _).inv.app P) ≫
+        (scalarReductionCounit l E X n).app
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ≫
+        DerivedCategory.Qh.map
+          (((scalarReductionExtension l E X n).mapHomotopyCategoryFactors (.up ℤ)).hom.app
+            P) ≫
+        (DerivedCategory.quotientCompQhIso _).hom.app
+          (unrestrictedTowerFiniteComplex l E X n P)) ≫
+    (scalarReductionRestriction l E X n).mapDerivedCategoryFactors.hom.app
+      (unrestrictedTowerFiniteComplex l E X n P)
 
 attribute [local irreducible] normalizedDVRKFlatComparison
 
