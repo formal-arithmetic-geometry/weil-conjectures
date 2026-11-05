@@ -136,6 +136,26 @@ private theorem continuity_preserves_strictlyGE
     IsColimit.ofPointIso (colimit.isColimit (E ⋙ T)) (i := hcomparison)
   exact preservesColimit_of_preserves_colimit_cocone hc hT
 
+private theorem continuity_preserves_coproduct
+    {I : Type (u + 1)} (E : I → CochainComplex
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) ℤ)
+    (N q : ℤ) (hE : ∀ i, (E i).IsStrictlyGE N) :
+    PreservesColimit (Discrete.functor E) (DerivedCategory.Q ⋙ R((f)_*⟦Λ⟧) ⋙
+      DerivedCategory.homologyFunctor _ q) := by
+  let C := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)
+  have : HasColimitsOfSize.{u + 1, u + 1} C := IsGrothendieckAbelian.hasColimits C
+  have : HasColimitsOfShape (Discrete I) C := inferInstance
+  have : HasColimitsOfShape (Discrete I) (CochainComplex C ℤ) := inferInstance
+  have : HasColimitsOfShape (Finset (Discrete I)) C := inferInstance
+  have : HasColimitsOfShape (Finset (Discrete I)) (CochainComplex C ℤ) := inferInstance
+  let S := CoproductsFromFiniteFiltered.liftToFinsetObj (Discrete.functor E)
+  have hS (s : Finset (Discrete I)) : (S.obj s).IsStrictlyGE N :=
+    isStrictlyGE_finitePartialSums E N hE s
+  have : PreservesColimit S (DerivedCategory.Q ⋙ R((f)_*⟦Λ⟧) ⋙
+      DerivedCategory.homologyFunctor _ q) :=
+    continuity_preserves_strictlyGE Λ f S N q hS
+  exact preservesCoproduct_of_finitePartialSums E _
+
 /-- Ordinary qcqs derived pushforward preserves coproducts of complexes with a common
 lower cohomology bound, for arbitrary condensed commutative coefficients.
 
@@ -167,6 +187,12 @@ theorem condensed_boundedBelow_preservesCoproduct
     HasColimitsOfSize.has_colimits_of_shape (Discrete J)
   have : HasCoproducts.{u + 1} (DerivedCategory C) := derived_hasCoproducts
   have : HasCoproducts.{u + 1} (DerivedCategory D) := derived_hasCoproducts
+  have : HasColimitsOfShape (Discrete I) C := inferInstance
+  have : HasColimitsOfShape (Discrete I) D := inferInstance
+  have : HasColimitsOfShape (Discrete I) (CochainComplex C ℤ) := inferInstance
+  have : HasColimitsOfShape (Discrete I) (DerivedCategory C) := inferInstance
+  have : HasColimitsOfShape (Discrete I) (DerivedCategory D) := inferInstance
+  have : HasExactColimitsOfShape (Discrete I) D := inferInstance
   have representatives (i : I) : ∃ E : CochainComplex C ℤ,
       E.IsStrictlyGE N ∧ Nonempty (DerivedCategory.Q.obj E ≅ K i) := by
     have : (K i).IsGE N := hN i
@@ -174,28 +200,16 @@ theorem condensed_boundedBelow_preservesCoproduct
     exact ⟨E, hE, ⟨e.symm⟩⟩
   choose E hE he using representatives
   have : ∀ i, (E i).IsStrictlyGE N := hE
-  let S := CoproductsFromFiniteFiltered.liftToFinsetObj (Discrete.functor E)
-  have hS (s : Finset (Discrete I)) : (S.obj s).IsStrictlyGE N :=
-    isStrictlyGE_finitePartialSums E N hE s
   have hT (q : ℤ) : PreservesColimit (Discrete.functor E)
-      (DerivedCategory.Q ⋙ F ⋙ DerivedCategory.homologyFunctor D q) := by
-    have : PreservesColimit S
-        (DerivedCategory.Q ⋙ F ⋙ DerivedCategory.homologyFunctor D q) :=
-      continuity_preserves_strictlyGE Λ f S N q hS
-    exact preservesCoproduct_of_finitePartialSums E _
+      (DerivedCategory.Q ⋙ F ⋙ DerivedCategory.homologyFunctor D q) :=
+    continuity_preserves_coproduct Λ f E N q hE
   let T := DerivedCategory.Q ⋙ F
   have hcomp : IsIso (sigmaComparison T E) := by
-    apply (DerivedCategory.isIso_iff D _).2
+    apply (DerivedCategory.isIso_sigmaComparison_iff T E).2
     intro q
-    let H := DerivedCategory.homologyFunctor D q
-    have : PreservesColimit (Discrete.functor E) (T ⋙ H) := hT q
-    have heq : sigmaComparison (T ⋙ H) E =
-        sigmaComparison H (fun i ↦ T.obj (E i)) ≫ H.map (sigmaComparison T E) := by
-      exact (sigmaComparison_map_desc H (fun i ↦ T.obj (E i)) _
-        (fun i ↦ T.map (Sigma.ι E i))).symm
-    have : IsIso (sigmaComparison H (fun i ↦ T.obj (E i)) ≫
-        H.map (sigmaComparison T E)) := by rw [← heq]; infer_instance
-    exact IsIso.of_isIso_comp_left (sigmaComparison H (fun i ↦ T.obj (E i))) _
+    have : PreservesColimit (Discrete.functor E)
+        (T ⋙ DerivedCategory.homologyFunctor D q) := hT q
+    infer_instance
   have : PreservesColimit (Discrete.functor E) T :=
     PreservesCoproduct.of_iso_comparison T E
   have : PreservesColimit (Discrete.functor (fun i ↦ DerivedCategory.Q.obj (E i))) F := by
