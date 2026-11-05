@@ -240,6 +240,7 @@ theorem exists_leftDerived_adjunction
           (DerivedCategory.quotientCompQhIso B).hom.app
             ((E.mapHomologicalComplex (.up ℤ)).obj X) = _
       simp only [Functor.map_id, Category.id_comp]
+      erw [Category.id_comp]
     have hfac' : R.mapDerivedCategoryFactorsh.inv.app
         ((HomotopyCategory.quotient B (.up ℤ)).obj K) ≫
           R.mapDerivedCategory.map ((DerivedCategory.quotientCompQhIso B).hom.app K) =
