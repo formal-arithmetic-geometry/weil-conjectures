@@ -173,7 +173,7 @@ to `U`. -/
 lemma Scheme.nonempty_hom_pointSmallEtaleElementsOpens (hU : (U : Set X).Subsingleton)
     (hsep : ∀ x ∈ U, IsSepClosed (X.residueField x)) (c : (pointSmallEtale s).fiber.Elements) :
     Nonempty (Scheme.pointSmallEtaleElementsOpens s U hs ⟶ c) := by
-  obtain ⟨V, v⟩ := c
+  obtain @⟨V, v⟩ := c
   have : Subsingleton U.toScheme := hU.coe_sort
   have hsep' (y : U.toScheme) : IsSepClosed (U.toScheme.residueField y) :=
     have := hsep (U.ι y) (by simp)
@@ -185,7 +185,7 @@ lemma Scheme.nonempty_hom_pointSmallEtaleElementsOpens (hU : (U : Set X).Subsing
   obtain ⟨σ, hσ, hσv⟩ := Scheme.exists_section_of_etale_of_subsingleton hsep'
     (pullback.snd V.hom U.ι) (pullback.lift v.left s' (by rw [hv, hs']))
   rw [pullback.lift_snd] at hσv
-  refine ⟨Functor.Elements.homMk _ ⟨V, v⟩
+  refine ⟨Functor.Elements.homMk
     (MorphismProperty.Over.homMk (σ ≫ pullback.fst V.hom U.ι) ?_) ?_⟩
   · change (σ ≫ pullback.fst V.hom U.ι) ≫ V.hom = U.ι
     rw [Category.assoc, pullback.condition, ← Category.assoc, hσ, Category.id_comp]
@@ -199,16 +199,17 @@ neighbourhood of `s`: two such morphisms agree on an open subset of `U` containi
 lemma Scheme.subsingleton_hom_pointSmallEtaleElementsOpens (hU : (U : Set X).Subsingleton)
     (c : (pointSmallEtale s).fiber.Elements) :
     Subsingleton (Scheme.pointSmallEtaleElementsOpens s U hs ⟶ c) := by
-  obtain ⟨V, v⟩ := c
+  obtain @⟨V, v⟩ := c
   have : Subsingleton U.toScheme := hU.coe_sort
   have : Etale V.hom := V.prop
-  refine ⟨fun g g' ↦ Functor.Elements.hom_ext _ _ _ (MorphismProperty.Over.Hom.ext ?_)⟩
-  have hab : g.val.left ≫ V.hom = g'.val.left ≫ V.hom := by
-    rw [MorphismProperty.Over.w g.val, MorphismProperty.Over.w g'.val]
+  refine ⟨fun g g' ↦ Functor.Elements.hom_ext (MorphismProperty.Over.Hom.ext ?_)⟩
+  have hab : g.hom.left ≫ V.hom = g'.hom.left ≫ V.hom := by
+    rw [MorphismProperty.Over.w g.hom, MorphismProperty.Over.w g'.hom]
   set s' := (Scheme.pointSmallEtaleFiberObjOpens s U hs).left
-  have hg (g : Scheme.pointSmallEtaleElementsOpens s U hs ⟶ ⟨V, v⟩) :
-      s' ≫ g.val.left = v.left :=
-    congrArg (fun t ↦ t.left) g.property
+  have hg (g : Scheme.pointSmallEtaleElementsOpens s U hs ⟶
+      (pointSmallEtale s).fiber.elementsMk V v) :
+      s' ≫ g.hom.left = v.left :=
+    congrArg (fun t ↦ t.left) g.map_val
   have hmem := FormallyUnramified.range_subset_eqLocus V.hom _ _ hab s' (by rw [hg, hg])
   let E := FormallyUnramified.eqLocus V.hom _ _ hab
   have : IsIso E.ι := by
