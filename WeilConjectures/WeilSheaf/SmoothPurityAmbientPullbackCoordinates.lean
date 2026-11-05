@@ -46,7 +46,7 @@ lemma purityAmbientPullbackSquareComparison_coordinates (sq : CommSq g' f' f g) 
     ((leftDerivedUpperStarIsoMapDerivedCategory Λ g).inv.app K) ≫
       (leftDerivedUpperStarIsoMapDerivedCategory Λ f').inv.app (L((g)^*⟦Λ⟧).obj K))]
   simp only [Category.assoc, Iso.inv_hom_id_app_assoc, ← Functor.map_comp_assoc,
-    Iso.inv_hom_id_app, Functor.map_id, Category.id_comp]
+    Iso.inv_hom_id_app, CategoryTheory.Functor.map_id, Category.id_comp]
   rw [h]
   congr 1
   exact (leftDerivedUpperStarIsoMapDerivedCategory Λ g').inv.naturality

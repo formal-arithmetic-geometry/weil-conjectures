@@ -45,8 +45,7 @@ lemma purity_upperStarOfMapSquareIso_hom_app_hom
       (pullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) sq.flip).hom.app K.obj := by
   simp only [upperStarOfMapSquareIso, pullbackSquareComparison, Iso.trans_hom,
     Iso.symm_hom, NatTrans.comp_app, ObjectProperty.FullSubcategory.comp_hom,
-    eqToIso.hom, eqToHom_app, ObjectProperty.FullSubcategory.eqToHom_hom']
-  rfl
+    eqToIso.hom, eqToHom_app, ObjectProperty.FullSubcategory.eqToHom_hom'] <;> rfl
 
 variable [IsOpenImmersion f.left] [IsOpenImmersion f'.left]
 
@@ -77,6 +76,7 @@ lemma purityOpenFieldExtensionExchange_inv :
   have : WeaklyEtale πX := MorphismProperty.of_isPullback sq.flip ‹WeaklyEtale πY›
   ext K
   apply ObjectProperty.hom_ext
+  rw [purityOpenFieldExtensionExchange_inv_app_hom]
   have he := Adjunction.purity_exchangeLeft_restrictFullyFaithful_app_hom
     ((derivedOpenImmersionLowerShriekUpperStarAdjunction
       (Profinite.padicAlgClRingObj ℓ) f.left).ofNatIsoRight
@@ -96,7 +96,9 @@ lemma purityOpenFieldExtensionExchange_inv :
     (upperStarOfMapSquareIso ℓ f f' sq.w)
     (purity_upperStarOfMapSquareIso_hom_app_hom ℓ f f' sq.toCommSq) K
   rw [purityOpenAmbientExchange_eq _ sq] at he
-  exact he.symm
+  simpa only [purityOpenFieldAmbientExchange, Iso.trans_inv, Functor.isoWhiskerLeft_inv,
+    Functor.isoWhiskerRight_inv, Iso.symm_inv, NatTrans.comp_app, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app, Category.assoc] using he.symm
 
 /-- The inverse of the specified compact-support open exchange is the canonical inverse mate. -/
 lemma purityOpenFieldLowerShriekExchange_inv :

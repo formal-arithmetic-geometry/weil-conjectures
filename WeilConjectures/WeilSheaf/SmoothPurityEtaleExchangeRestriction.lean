@@ -60,8 +60,7 @@ lemma purity_exchangeLeft_restrictFullyFaithful_app_hom
       (PA'.liftCompιIso (PB'.ι ⋙ R') hR').symm N
   simp only [exchangeLeft_app, ObjectProperty.FullSubcategory.comp_hom,
     ObjectProperty.lift_map, ObjectProperty.homMk_hom, Functor.comp_map,
-    ObjectProperty.ι_map, hu, hc, hθ]
-  rfl
+    ObjectProperty.ι_map, hu, hc, hθ] <;> rfl
 
 /-- Ambient invertibility descends through the full-subcategory inclusion. -/
 lemma purity_isIso_exchangeLeft_restrictFullyFaithful_app

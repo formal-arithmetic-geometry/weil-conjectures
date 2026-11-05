@@ -5,8 +5,8 @@ kernel checking. The unchanged live theorem `purityCanonicalTateOneTrivializatio
 passes after adopting K4a's audited native scalar proof. LEAD's 00:50 plan superseded the
 original dense round-trip requirement, and the 03:45 instruction directed adoption of K4a's
 successful scalar proof. After K4a's finite audit completed, its original-name finite wrapper
-and original-data predicate bridge were also adopted from `620ed3b89`; their recheck on this
-branch is pending. This is adoption of a verified repair, separate from the independent
+and original-data predicate bridge were also adopted from `620ed3b89`; they passed an independent
+check on this branch at `790f3865e7`, log `K4c-20261105T214212.log` (22,281 jobs). This is adoption of a verified repair, separate from the independent
 Strategy3 implementation.
 
 The finite wrapper's exposed `finiteReadingEquation` body is the original equation, with the
@@ -43,6 +43,12 @@ generated auxiliaries attached to the declaration. Earlier adopted files used a 
 threshold; absence of a recorded kernel event there means below the reporting threshold, not
 zero work. The final profiling pass uses threshold 0 throughout new helper modules.
 
+Snapshot `790f3865e7`, log `K4c-20261105T214212.log`, additionally checks the native
+finite predicate (648 ms kernel), the original-data bridge (373.043 ms kernel), and the
+original-name wrapper (49.5 ms kernel). Their logged elaboration times are 41.94 ms,
+779.882 ms, and 724.71 ms respectively. All three audit roots have exactly the standard
+axioms listed above; the combined invocation completed successfully.
+
 ## Failed controls
 
 - Mixing the old inferred target coefficient object into the new reduction map caused a
@@ -74,8 +80,9 @@ zero work. The final profiling pass uses threshold 0 throughout new helper modul
 
 ## Open-exchange follow-up
 
-Following LEAD's 04:25 instruction, the branch also develops the integral open-immersion
-contribution to W2(b). Abstract mate-coordinate transport and exchange transport are checked.
-Concrete canonical reduction and compactification normalization are under remote verification.
-The comparison with the actual finite étale compactification exchange remains separate from
-the adjunction-exchange cube; no completion of that outer boundary is claimed here.
+LEAD 00:20/01:25 superseded the W2 and étale assignments with step A of the point route:
+restrict the specified derived open-extension base-change isomorphism to bounded constructible
+complexes, then identify its mate under the specified open adjunction with the pullback square.
+The exact and levelwise-derived normalization helpers are green; the total-derived and bounded
+restriction steps are being checked in `K4c-20261106T001014.log`, snapshot `e11b448cfe`.
+No completion of step A is claimed before this focused check and its axiom audit pass.

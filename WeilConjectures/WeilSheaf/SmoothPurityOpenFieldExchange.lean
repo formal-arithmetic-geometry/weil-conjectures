@@ -69,6 +69,18 @@ noncomputable def purityOpenFieldExtensionExchange :
       apply ObjectProperty.hom_ext
       exact (purityOpenFieldAmbientExchange ℓ f f' sq).hom.naturality m.hom)
 
+/-- Forgetting the restricted open exchange gives the specified ambient comparison. -/
+lemma purityOpenFieldExtensionExchange_hom_app_hom
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    ((purityOpenFieldExtensionExchange ℓ f f' sq).hom.app K).hom =
+      (purityOpenFieldAmbientExchange ℓ f f' sq).hom.app K.obj := rfl
+
+/-- The inverse restricted open exchange has the specified ambient inverse component. -/
+lemma purityOpenFieldExtensionExchange_inv_app_hom
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    ((purityOpenFieldExtensionExchange ℓ f f' sq).inv.app K).hom =
+      (purityOpenFieldAmbientExchange ℓ f f' sq).inv.app K.obj := rfl
+
 /-- Cross-field compact-support base change for the actual chosen lower-shriek functors. -/
 noncomputable def purityOpenFieldLowerShriekExchange :
     boundedConstructibleLowerShriek ℓ f ⋙ boundedConstructibleUpperStarOfMap ℓ πY ≅
