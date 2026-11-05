@@ -62,7 +62,6 @@ noncomputable def canonicalFiniteIntegralOrientationIso (n : ℕ) :
       ((finiteEtaleReading ℓ E.1 n X).commShiftIso (2 * d : ℤ)).app _ ≪≫
       etaleReductionSmoothOrientationIso ℓ E f d n)
 
-@[reassoc]
 lemma canonicalFiniteIntegralOrientationIso_map_hom (n : ℕ) :
     (finiteEtaleReading ℓ E.1 n X).map
         (canonicalFiniteIntegralOrientationIso ℓ E f d n).hom =
@@ -71,6 +70,13 @@ lemma canonicalFiniteIntegralOrientationIso_map_hom (n : ℕ) :
             (2 * d : ℤ)).hom ≫
         ((finiteEtaleReading ℓ E.1 n X).commShiftIso (2 * d : ℤ)).hom.app _ ≫
           (etaleReductionSmoothOrientationIso ℓ E f d n).hom := by
-  exact (finiteEtaleReadingFullyFaithful (etaleOriginReading ℓ E.1 n X)).map_preimage _
+  dsimp only [canonicalFiniteIntegralOrientationIso, Functor.FullyFaithful.preimageIso,
+    Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom]
+  exact (finiteEtaleReadingFullyFaithful (etaleOriginReading ℓ E.1 n X)).map_preimage
+    ((finiteEtaleReading ℓ E.1 n X).map
+        (boundedConstructibleIntegersModPowReductionShiftIso ℓ E.1 n X.left _
+          (2 * d : ℤ)).hom ≫
+      ((finiteEtaleReading ℓ E.1 n X).commShiftIso (2 * d : ℤ)).hom.app _ ≫
+        (etaleReductionSmoothOrientationIso ℓ E f d n).hom)
 
 end AlgebraicGeometry.ProEtale.CondensedRing
