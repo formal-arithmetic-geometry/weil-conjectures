@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
-public import Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Plus
 
@@ -42,37 +41,34 @@ namespace Plus
 lemma exists_ι_map_eq {A : C} (M : CochainComplex.Plus C) [M.obj.IsKInjective]
     (β : (singleFunctor C 0).obj A ⟶ Q.obj M) :
     ∃ f : (HomologicalComplex.single C (.up ℤ) 0).obj A ⟶ M.obj,
-      ι.map β = DerivedCategory.Q.map f ≫ (DerivedCategory.quotientCompQhIso C).inv.app M.obj := by
+      ι.map β = DerivedCategory.Q.map f := by
   obtain ⟨g, hg⟩ := (CochainComplex.IsKInjective.Qh_map_bijective
     ((HomotopyCategory.quotient _ _).obj ((HomologicalComplex.single C (.up ℤ) 0).obj A))
-      M.obj).2 ((DerivedCategory.quotientCompQhIso C).hom.app _ ≫ ι.map β)
+      M.obj).2 ((DerivedCategory.quotientCompQhIso C).hom.app _ ≫ ι.map β ≫
+        (DerivedCategory.quotientCompQhIso C).inv.app M.obj)
   obtain ⟨f, rfl⟩ := (HomotopyCategory.quotient _ _).map_surjective g
   refine ⟨f, ?_⟩
-  rw [quotientCompQhIso_inv_naturality]
-  erw [hg]
+  rw [← cancel_epi ((DerivedCategory.quotientCompQhIso C).hom.app _),
+    ← quotientCompQhIso_hom_naturality, hg]
   simp
 
 /-- The degree-`0` homology of a morphism `A[0] ⟶ Q(M)` coming from `f : A[0] ⟶ M`. -/
 lemma singleFunctorCompHomologyFunctorIso_inv_app_comp_homologyFunctor_map {A : C}
     {M : CochainComplex.Plus C} (β : (singleFunctor C 0).obj A ⟶ Q.obj M)
     (f : (HomologicalComplex.single C (.up ℤ) 0).obj A ⟶ M.obj)
-    (hf : ι.map β = DerivedCategory.Q.map f ≫ (DerivedCategory.quotientCompQhIso C).inv.app M.obj) :
+    (hf : ι.map β = DerivedCategory.Q.map f) :
     (singleFunctorCompHomologyFunctorIso 0).inv.app A ≫ (homologyFunctor C 0).map β =
       singleCyclesHom A ≫ HomologicalComplex.cyclesMap f 0 ≫ M.obj.homologyπ 0 ≫
-        (homologyFunctorFactors C 0).inv.app M.obj ≫
-          (DerivedCategory.homologyFunctor C 0).map
-            ((DerivedCategory.quotientCompQhIso C).inv.app M.obj) := by
+        (homologyFunctorFactors C 0).inv.app M.obj := by
   change (DerivedCategory.singleFunctorCompHomologyFunctorIso C 0).inv.app A ≫
     (DerivedCategory.homologyFunctor C 0).map (ι.map β) = _
-  rw [hf, Functor.map_comp, ← Category.assoc,
-    singleFunctorCompHomologyFunctorIso_inv_app_comp_map_Q_map]
-  simp
+  rw [hf, singleFunctorCompHomologyFunctorIso_inv_app_comp_map_Q_map]
 
 /-- A morphism `A[0] ⟶ Q(M)` coming from a null-homotopic map of complexes is zero. -/
 lemma eq_zero_of_homotopy {A : C} {M : CochainComplex.Plus C}
     (β : (singleFunctor C 0).obj A ⟶ Q.obj M)
     (f : (HomologicalComplex.single C (.up ℤ) 0).obj A ⟶ M.obj)
-    (hf : ι.map β = DerivedCategory.Q.map f ≫ (DerivedCategory.quotientCompQhIso C).inv.app M.obj)
+    (hf : ι.map β = DerivedCategory.Q.map f)
     (h : Homotopy f 0) : β = 0 := by
   have h₀ : (HomotopyCategory.quotient _ _).map f = 0 := by
     rw [HomotopyCategory.eq_of_homotopy _ _ h, Functor.map_zero]
@@ -81,7 +77,7 @@ lemma eq_zero_of_homotopy {A : C} {M : CochainComplex.Plus C}
       ← quotientCompQhIso_hom_naturality, h₀]
     simp
   apply ι.map_injective
-  rw [hf, h₁, Functor.map_zero, zero_comp]
+  rw [hf, h₁, Functor.map_zero]
 
 end Plus
 
