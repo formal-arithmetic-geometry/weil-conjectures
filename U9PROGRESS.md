@@ -244,3 +244,17 @@
 - Next: validate the owned module, then its direct importers and downstream layers.
 - Previous diagnostic history is archived in FIXES-BZ798-preintegration.md.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+
+# BZ851 complete
+
+- Branch `u9/BZ851`; validated Lean source commit `b609d6fadf`.
+- Assigned `CoefficientConstantTowerRoosComparisonSupplement` and restored
+  `CoefficientRingedSequenceSiteSupplement` both built in 16s through ucheck-bump.
+- Restored five projection API declarations required by surviving closure users;
+  added Localization visibility and ported only proof/definition bodies.
+- All five original statement headers and docstrings are unchanged.
+- Both direct importers were attempted and skipped because their external
+  prerequisites fail. The broader batch was stopped after collecting blockers.
+- Exact fix/error/rule triples: `/home/ubuntu/u9/bz/FIXES-BZ851.md`.
+- Evidence: `BUILD-BZ851-layer1-full.log`, `BZ851-downstream-blocker-paths.txt`.
+- No local Lean/Lake, placeholders, trust bypasses, profiler probes, or heartbeat changes.
