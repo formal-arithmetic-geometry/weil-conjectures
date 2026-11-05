@@ -10,8 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Mathlib.AlgebraicGeometry.AffineScheme
 
-import WeilConjectures.AlgebraicGeometry.AffinePerfectSupportExtension
-import WeilConjectures.AlgebraicGeometry.SupportedOverlapRestrictionData
 
 /-! # Supported perfect extension across an affine overlap
 

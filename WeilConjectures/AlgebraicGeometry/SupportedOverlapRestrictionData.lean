@@ -9,9 +9,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Mathlib.AlgebraicGeometry.AffineScheme
-import WeilConjectures.AlgebraicGeometry.DerivedOpenLocalization
-import WeilConjectures.AlgebraicGeometry.DerivedPullbackPerfect
-import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 
 
 /-! # Supported perfect restriction in a compact-open overlap model

@@ -9,9 +9,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import WeilConjectures.AlgebraicGeometry.SupportedMapAffineUnionGluing
-import WeilConjectures.AlgebraicGeometry.SupportedMapInitialAmbientLift
-import WeilConjectures.AlgebraicGeometry.OpenDerivedLocalizationData
 
 /-! # One affine attachment for supported stabilized maps
 
