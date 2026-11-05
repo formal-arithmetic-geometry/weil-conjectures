@@ -5,6 +5,8 @@
 - First remote build stopped in the BZ581-owned prerequisite `Presheaf.InternalHom`.
 - The user instructed continuation after the concrete prerequisite-fix proposal.
   Incorporated the owner's identical repair `216c997cc4f` as `d63827975` with provenance.
+- Reused the KFlat prerequisite repair from BZ558 commit `cba570747cc` as `809822403`;
+  BZ558's build diagnosed the same compatibility error, and KFlat is in our import closure.
 - Next: validate the assigned module, then four direct importers and a second layer.
 - Fix patterns, occurrence counts, and logs: `/home/ubuntu/u9/bz/FIXES-BZ569.md`.
 - No local Lean/Lake, statement changes, proof placeholders, or heartbeat increases.
