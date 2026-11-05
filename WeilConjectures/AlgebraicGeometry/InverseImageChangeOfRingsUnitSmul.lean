@@ -25,6 +25,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false
 
 /-- The additive inverse-image unit, followed by extension and sheafification, is
 semilinear for the ring inverse-image unit followed by the extension ring map.
@@ -67,7 +68,6 @@ theorem inverseImage_changeOfRings_unit_smul
       sh ((1 : B.obj.obj W) ⊗ₜ[(TopCat.Sheaf.inverseImageRing f A).obj.obj W,
         (t.hom.app W).hom] eta (c • n)) := by
   classical
-  trace "BZ86 scalar proof entered"
   let W := (Opens.map f).op.obj V
   let sh := ((PresheafOfModules.sheafificationAdjunction
     (𝟙 ((sheafCompose (Opens.grothendieckTopology X)
