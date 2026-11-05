@@ -30,12 +30,12 @@ private theorem exactSquare_fac
       G.mapDerivedCategoryFactors.hom.app ((R.mapHomologicalComplex (.up ℤ)).obj K) ≫
       DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex e.hom (.up ℤ)).app K) := by
   have hc := mapDerivedCategoryCompIso_hom_app_factors R G K
-  have hi : (mapDerivedCategoryCompIso R G).inv.app (DerivedCategory.Q.obj K) ≫
+  have hi : (mapDerivedCategoryCompIso R G).hom.app (DerivedCategory.Q.obj K) ≫
       (R ⋙ G).mapDerivedCategoryFactors.hom.app K =
     G.mapDerivedCategory.map (R.mapDerivedCategoryFactors.hom.app K) ≫
       G.mapDerivedCategoryFactors.hom.app ((R.mapHomologicalComplex (.up ℤ)).obj K) := by
-    apply (cancel_epi ((mapDerivedCategoryCompIso R G).hom.app (DerivedCategory.Q.obj K))).mp
-    rw [Iso.hom_inv_id_app_assoc]
+    apply (cancel_epi ((mapDerivedCategoryCompIso R G).inv.app (DerivedCategory.Q.obj K))).mp
+    rw [Iso.inv_hom_id_app_assoc]
     exact hc.symm
   simp only [mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
     NatTrans.comp_app, Category.assoc]
@@ -170,7 +170,7 @@ private theorem exactSquare_comp_inverse
         F₁₂.mapDerivedCategoryFactors.hom.app ((F₀₁.mapHomologicalComplex (.up ℤ)).obj X) =
       F₀₂.mapDerivedCategoryFactors.hom.app X ≫
         DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex cF.hom (.up ℤ)).app X) := by
-      dsimp only [dF, Iso.trans_hom, NatTrans.comp_app]
+      dsimp only [dF, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app]
       rw [Category.assoc, mapDerivedCategoryCompIso_hom_app_factors,
         mapDerivedCategoryNatIso_fac]
     have hdG : dG.hom.app (DerivedCategory.Q.obj
@@ -182,7 +182,7 @@ private theorem exactSquare_comp_inverse
       G₀₂.mapDerivedCategoryFactors.hom.app ((U₀.mapHomologicalComplex (.up ℤ)).obj X) ≫
         DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex cG.hom (.up ℤ)).app
           ((U₀.mapHomologicalComplex (.up ℤ)).obj X)) := by
-      dsimp only [dG, Iso.trans_hom, NatTrans.comp_app]
+      dsimp only [dG, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app]
       rw [Category.assoc, mapDerivedCategoryCompIso_hom_app_factors,
         mapDerivedCategoryNatIso_fac]
     -- Normalize the left pasted square using the factorization of q₀₂.
