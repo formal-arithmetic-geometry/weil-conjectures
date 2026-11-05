@@ -169,21 +169,26 @@
 - Completion marker: `/home/ubuntu/u9/state/BZ585.DONE`.
 - Final documentation commit leaves Lean source identical to the green revision.
 
-# BZ621 in progress
 
-- Branch: `u9/BZ621`; starting commit: `b7a97a5ed`.
-- The import-only remote check at `83e9112438` cleared five of six errors.
-- The user instructed continuation after the exact one-line identity-cast proposal.
-  Applied `cast (by rfl)` to the public formula's homotopy counit; its mathematical
-  morphism is unchanged. Existing binders, hypotheses, RHS, and docstrings are unchanged.
-- The brief and this progress file were reread; there are no new LEAD lines.
-- Next: validate the assigned module with `ucheck-bump`, then direct importers.
-- Fix patterns, inventories, and logs: `/home/ubuntu/u9/bz/FIXES-BZ621.md`.
+# BZ630 complete
+
+- Branch: `u9/BZ630`; starting commit: `b7a97a5ed`.
+- Assigned module `WeilConjectures.AlgebraicGeometry.Injective.InjectiveExchangeSourceTransport`
+  passed ucheck-bump: rc=0, built=3, failed=0, 4242 jobs; target rebuilt in 12 seconds.
+- Validated source commit: `afb9e8c2c047f6cb0e4e0070c181f52e25eb696a`.
+- Green log: `/home/ubuntu/u9/bz/BZ630-unit-green-full.log`; poolb:43.157.135.193.
+  Lean v4.35.0-rc3 and exact Mathlib b63f6e8a pin confirmed on that host.
+- The user instructed continuation after the explicit endpoint-transport statement proposal.
+  That exact patch is applied. The proof keeps quotientCompQhIso opaque, reduces only the
+  exposed homotopy comparison, and cancels its mapped identity using erw.
+- Sole direct importer Injective.InjectiveExchangeRepresentative was attempted at
+  `a1f0d2dc924831564872c1058580050ba807ca78`; the assigned module rebuilt green in that batch.
+- The importer is blocked by eight errors in unowned Injective.InjectiveExchangeTargetTransport
+  (BZ631). Skipped it and its dependent Strict.Local.StrictLocalDerivedExchangeLeray under
+  the brief's ownership rule. No downstream modules are claimed green or edited.
+- Downstream log: `/home/ubuntu/u9/bz/BZ630-downstream-full.log` (rc=1, failed=1).
+- Patterns and occurrence counts: `/home/ubuntu/u9/bz/FIXES-BZ630.md`.
+  Contract audit: `/home/ubuntu/u9/bz/BZ630-contract-audit.txt`.
 - No local Lean/Lake, proof placeholders, trust bypasses, heartbeat raises, or profiler probes.
-
-- BZ621 assigned-module validation is GREEN at `5c47fa596b`: `ucheck-bump`
-  rc=0, built=3, failed=0, on `poolb:43.157.184.90`.
-- Full log: `/home/ubuntu/u9/bz/BZ621-owned-green.log`.
-- Continuing with four direct importers: SequenceProjectionDerivedAdjunction,
-  SequencePushforwardLimitProjections, RingedDerivedAdjointLift, and
-  SequenceSiteCompletionProjectionSupplement.
+- Completion marker: `/home/ubuntu/u9/state/BZ630.DONE`.
+- This final documentation commit leaves Lean source identical to the green revision.
