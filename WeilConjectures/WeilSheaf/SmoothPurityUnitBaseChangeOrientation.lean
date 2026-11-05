@@ -9,6 +9,7 @@ public import WeilConjectures.WeilSheaf.SmoothPurityTraceUnit
 public import WeilConjectures.WeilSheaf.SmoothPurityNativeUnitOrientation
 public import WeilConjectures.WeilSheaf.SmoothPurityDescentSingle
 public import WeilConjectures.WeilSheaf.SmoothPurityDescentUnit
+public import WeilConjectures.WeilSheaf.UpperShriek
 
 /-! # The cyclotomic Weil orientation from geometric unit base change -/
 
