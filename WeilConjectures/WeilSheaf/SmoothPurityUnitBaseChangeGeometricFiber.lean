@@ -67,7 +67,7 @@ abbrev geometricFiberOverMap {X Y : Over (Spec (.of k))} (h : X ⟶ Y) :
 lemma geometricFiberOverMap_comp {X Y Z : Over (Spec (.of k))} (h₁ : X ⟶ Y) (h₂ : Y ⟶ Z) :
     geometricFiberOverMap (h₁ ≫ h₂) = geometricFiberOverMap h₁ ≫ geometricFiberOverMap h₂ := by
   ext1
-  simp [Scheme.Hom.geometricFiberMap_comp]
+  exact Scheme.Hom.geometricFiberMap_comp h₁.left h₂.left (Over.w h₁) (Over.w h₂)
 
 /-- The base change square of `h` to `k̄` is cartesian (in the orientation of
 `ProEtale.CondensedRing.upperShriekBaseChangeOfMap`). -/
@@ -195,7 +195,8 @@ theorem isIso_smoothUnitBaseChange_geometricFiber_of_charts {ι : Type u} (c : �
         (isPullback_geometricFiberOverMap (c i).p) =
       properLowerShriekBaseChangeOfMap l (c i).p (geometricFiberOverMap (c i).p)
         (isPullback_geometricFiberOverMap (c i).p))
-    (eY : (boundedConstructibleUpperStarOfMap l Y.hom.geometricFiberProj).obj (𝟙_ _) ⟶ 𝟙_ _)
+    (eY : (boundedConstructibleUpperStarOfMap l (X := Y) (Y := geometricFiberOver Y)
+      Y.hom.geometricFiberProj).obj (𝟙_ _) ⟶ 𝟙_ _)
     [IsIso eY]
     (hj : ∀ i, IsIso ((upperShriekMateOfMap l (c i).j (geometricFiberOverMap (c i).j)
       (Ex (c i).j _ (isPullback_geometricFiberOverMap (c i).j))).app
@@ -254,7 +255,8 @@ theorem isIso_smoothUnitBaseChange_geometricFiber_of_charts {ι : Type u} (c : �
     (Ex (c i).jA _ (isPullback_geometricFiberOverMap (c i).jA))
     (Ex (c i).jV _ (isPullback_geometricFiberOverMap (c i).jV)) eY
     (isPullback_geometricFiberOverMap (c i).p)
-    (Functor.Monoidal.εIso (boundedConstructibleUpperStarOfMap l
+    (Functor.Monoidal.εIso (boundedConstructibleUpperStarOfMap l (X := (c i).V)
+      (Y := geometricFiberOver (c i).V)
       (c i).V.hom.geometricFiberProj)).inv (c i).n (c i).eP (c i).he
 
 end Charts
