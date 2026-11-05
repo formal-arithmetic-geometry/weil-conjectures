@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.System.SystemOrdinaryTensorReduction
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-!
 # Tensor compatibility of cochain horizontal reduction adjoints

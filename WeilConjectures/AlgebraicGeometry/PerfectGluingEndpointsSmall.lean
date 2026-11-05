@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectGluingEndpointProperties
 import WeilConjectures.AlgebraicGeometry.PerfectRestrictionClassesSmall
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # Small endpoint families for perfect gluing
 
