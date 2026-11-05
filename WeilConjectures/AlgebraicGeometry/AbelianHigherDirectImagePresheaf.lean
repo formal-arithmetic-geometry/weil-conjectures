@@ -473,8 +473,7 @@ noncomputable def sheafifyIsoOfLocallyBijective
       exact Presheaf.isLocallySurjective_of_isLocallySurjective J (toSheafify J P) ψ.hom
   exact asIso ψ
 
-omit [HasSheafify J AddCommGrpCat.{u + 1}]
-  [HasDerivedCategory.{u + 1} (Sheaf J AddCommGrpCat.{u + 1})]
+omit [HasDerivedCategory.{u + 1} (Sheaf J AddCommGrpCat.{u + 1})]
   [EnoughInjectives (Sheaf J AddCommGrpCat.{u + 1})] in
 lemma toSheafify_comp_sheafifyIsoOfLocallyBijective_hom
     {P : Cᵒᵖ ⥤ AddCommGrpCat.{u + 1}} {G : Sheaf J AddCommGrpCat.{u + 1}}
