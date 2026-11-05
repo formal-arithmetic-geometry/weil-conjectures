@@ -216,3 +216,16 @@
 - No local Lean/Lake execution, sorries, trust bypasses, heartbeat increases, or profiler probes.
 - Completion marker: `/home/ubuntu/u9/state/BZ673.DONE`.
 - This final documentation update leaves Lean sources identical to the successful unit build.
+
+
+# BZ713 in progress
+
+- Branch: `u9/BZ713`; starting commit: `a5261dcee`.
+- Assigned: `WeilConjectures.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition`.
+- The user instructed continuation after the exact one-line identity-cast proposal.
+  Applied `cast (by rfl)` to the counit in `Coordinates.represents`, preserving its map.
+- Localization imports restore hidden Qh reduction in proofs. Every other statement
+  and all existing docstrings remain unchanged. Kept declarations were audited.
+- Verification build submitted through `ucheck-bump`; next: downstream validation.
+- Notes, exact errors, machine rules and occurrence counts: `/home/ubuntu/u9/bz/FIXES-BZ713.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.

@@ -356,7 +356,7 @@ theorem nonempty_coordinates (K : schemeDerivedCategory X) (K' : schemeDerivedCa
     (inv ((counit g').app q) ≫ (derivedPullback g').map e.hom ≫ φ ≫ e'.inv)
   refine ⟨⟨P, N, e, e', hP, hc, t, ?_⟩⟩
   rw [ht]
-  simp only [q, Category.assoc, Iso.inv_hom_id, Category.comp_id,
+  simp only [cast_eq, q, Category.assoc, Iso.inv_hom_id, Category.comp_id,
     IsIso.hom_inv_id_assoc]
 
 /-- The canonical map H^i(K_x tensor-derived-over-R B) tensor-over-(A tensor-over-R B) C
