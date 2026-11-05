@@ -78,7 +78,6 @@ private noncomputable def pointwise_change_iso
   intro X
   dsimp [Functor.RightExtension.coneAt, Functor.RightExtension.mk, Φ, k]
   simp [Category.assoc]
-  rfl
 
 private theorem inverted_indDiagram
     {D : Type*} [Category* D] {H : Type*} [Category* H]

@@ -187,7 +187,7 @@ theorem extension_spec (F : C ⥤ D) [F.Additive] (hF : IsSemilinear φ F) :
     intro K L a f
     change extensionHom t b φ h F hF _ _ (a • f) =
       coefficientMap t b φ h a • extensionHom t b φ h F hF _ _ f
-    induction f with
+    induction f using TensorProduct.inductionOn with
     | tmul a' f =>
       rw [TensorProduct.smul_tmul', smul_eq_mul, extensionHom_tmul, map_mul,
         extensionHom_tmul, TensorProduct.smul_tmul', smul_eq_mul]
@@ -253,7 +253,7 @@ theorem extension_unique (F : C ⥤ D) [F.Additive] (hF : IsSemilinear φ F)
     have hi' := hom_smul_heq (hobj K.obj) (hobj L.obj) hi (coefficientMap t b φ h a)
     change HEq _ (coefficientMap t b φ h a • (1 ⊗ₜ[S] F.map f)) at hi'
     simpa only [TensorProduct.smul_tmul', smul_eq_mul, mul_one] using hi'
-  induction f with
+  induction f using TensorProduct.inductionOn with
   | tmul a f => exact hm a f
   | add f g hf hg =>
     rw [J.map_add, (extension t b φ h F hF).map_add]
@@ -275,7 +275,7 @@ theorem extensionNatTrans_naturality (η : F ⟶ G)
       (extensionHom t b φ h F hF _ _ f) =
     composition S D b _ _ _ (extensionHom t b φ h G hG _ _ f)
       (1 ⊗ₜ[S] η.app K.obj)
-  induction f with
+  induction f using TensorProduct.inductionOn with
   | tmul a f => simp [composition_tmul, η.naturality f]
   | add f g hf hg => simp [map_add, hf, hg]
 
