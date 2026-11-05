@@ -265,8 +265,7 @@ private def constantBridge (T : Scheme.{u}) :
   let mS := Sheaf.monObj_presheafToSheaf_obj (Scheme.ProEt.topology T)
     (ConstantInternalModuleSheafEncoding.A (C := T.ProEtᵒᵖ) (ULift.{u + 1} A))
   have hid : @IsMonHom _ _ _ S S mC mC (𝟙 S) := by
-    let : MonObj S := mC
-    infer_instance
+    exact @IsMonHom.mk _ _ _ S S mC mC (𝟙 S) (by simp) (by simp)
   have hi : @IsMonHom _ _ _ S S mS mC (𝟙 S) :=
     IsMonHom.of_eq (𝟙 S) (scheme_monObj A T) rfl (hf := hid)
   exact @Mod.comap (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) _ _
