@@ -103,6 +103,8 @@ private instance : Presheaf.IsLocallyInjective J (realizationRingUnit J R) :=
 private instance : Presheaf.IsLocallySurjective J (realizationRingUnit J R) :=
   (realizationRingUnit_locallyBijective J R).2
 
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
+
 private def constantSeed (M : ModuleCat.{max u v} R) :
     (Functor.const Cᵒᵖ).obj M ⟶
       ((restriction J R).obj ((commutativeSiteConstantModuleFunctor J R).obj M)).obj where

@@ -50,7 +50,7 @@ lemma preimageIso_comparisonSquare_trace_coordinates
       F'.map (cT.hom.app P) ≫ e.inv.app P.obj ≫
         T'.map (cF.inv.app P ≫ ε.hom) ≫ cT'.inv.app N := by
   rw [preimageIso_comparisonSquare_inv_app_hom]
-  simp only [Category.assoc, Iso.hom_inv_id_app_assoc, Functor.map_comp]
+  simp only [Category.assoc, Iso.inv_hom_id_app_assoc, Functor.map_comp]
   exact congrArg (fun a ↦ F'.map (cT.hom.app P) ≫ e.inv.app P.obj ≫
     T'.map (cF.inv.app P) ≫ a) (cT'.inv.naturality ε).symm
 

@@ -129,7 +129,7 @@ private noncomputable def tensorHomCurryApp_kfi (φ : M ⊗ P ⟶ N) {U : C} (p 
       (naturality_apply φ f.unop.left.op (m ⊗ₜ[R.obj (op W.unop.left)] P.map W.unop.hom.op p))
     refine (congrArg (fun q : P.obj (op W'.unop.left) ↦
       M.map f.unop.left.op m ⊗ₜ[R.obj (op W'.unop.left)] q) ?_).trans
-        (PresheafOfModules.Monoidal.tensorObj_map_tmul f.unop.left.op m _).symm
+        (Monoidal.tensorObj_map_tmul f.unop.left.op m _).symm
     rw [← map_comp_apply, ← op_comp, Over.w]
 
 omit [EssentiallySmall.{r} C] in
