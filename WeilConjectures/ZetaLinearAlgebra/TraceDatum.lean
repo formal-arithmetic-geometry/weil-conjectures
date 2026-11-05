@@ -63,8 +63,8 @@ theorem X_mul_derivative_exp_subst {K : Type*} [Field K] [CharZero K] (a : ℕ �
     match n with
     | 0 => simp
     | m + 1 =>
-      rw [coeff_succ_X_mul, coeff_derivative, coeff_mk, coeff_mk, if_neg m.succ_ne_zero,
-        if_neg m.succ_ne_zero]
+      rw [coeff_succ_X_mul, coeff_derivative, coeff_mk, coeff_mk, ite_eq_right m.succ_ne_zero,
+        ite_eq_right m.succ_ne_zero]
       have hm : ((m : K) + 1) ≠ 0 := by exact_mod_cast Nat.succ_ne_zero m
       push_cast
       rw [div_mul_cancel₀ _ hm]
@@ -105,8 +105,8 @@ private theorem sum_neg_one_pow_mul (c : Fin (r + 1) → K) :
   rw [Finset.sum_filter, Finset.sum_filter, ← Finset.sum_sub_distrib]
   refine Finset.sum_congr rfl fun i _ ↦ ?_
   rcases Nat.even_or_odd (i : ℕ) with h | h
-  · rw [if_pos h, if_neg (by simpa using h), h.neg_one_pow, one_mul, sub_zero]
-  · rw [if_neg (by simpa using h), if_pos h, h.neg_one_pow, neg_one_mul, zero_sub]
+  · rw [ite_eq_left h, ite_eq_right (by simpa using h), h.neg_one_pow, one_mul, sub_zero]
+  · rw [ite_eq_right (by simpa using h), ite_eq_left h, h.neg_one_pow, neg_one_mul, zero_sub]
 
 variable (D : TraceDatum.{u, v} K r)
 
@@ -189,12 +189,12 @@ theorem zeta_mul_prod_even_eq_prod_odd [CharZero K] :
       PowerSeries.coeff n (T i) = -LinearMap.trace K (D.V i) (D.F i ^ n) := by
     intro i n hn
     rw [hT]
-    simp [if_neg hn]
+    simp [ite_eq_right hn]
   have hkey : NS + ∑ i ∈ se, T i = ∑ i ∈ so, T i := by
     ext n
     rcases Nat.eq_zero_or_pos n with rfl | hn
     · simp [hT, hNS]
-    · rw [map_add, map_sum, map_sum, hNS, PowerSeries.coeff_mk, if_neg hn.ne',
+    · rw [map_add, map_sum, map_sum, hNS, PowerSeries.coeff_mk, ite_eq_right hn.ne',
         D.trace_eq n hn, sum_neg_one_pow_mul]
       simp only [hTcoeff _ _ hn.ne', Finset.sum_neg_distrib]
       ring

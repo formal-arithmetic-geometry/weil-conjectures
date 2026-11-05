@@ -201,8 +201,8 @@ private theorem exteriorCoordinate_join (r : ℕ) (a : Fin (r + 1) → A) (m : �
   have hn : n = (-p).toNat := by omega
   have hk : k = (-q).toNat := by omega
   subst n k
-  simp only [koszulJoinSummand, dif_pos (show p ≤ 0 by omega),
-    dif_pos (show q ≤ 0 by omega), ModuleCat.comp_apply,
+  simp only [koszulJoinSummand, dite_eq_left (show p ≤ 0 by omega),
+    dite_eq_left (show q ≤ 0 by omega), ModuleCat.comp_apply,
     ModuleCat.MonoidalCategory.tensorHom_tmul]
   change (((ExteriorAlgebra.koszulComplex A (r + 1) (fun j ↦ a j ^ (m + 1))).extendXIso
       ComplexShape.embeddingDownNat hi).hom

@@ -305,7 +305,7 @@ theorem strictLocalizationPullback_sections [IsProper f] :
   let Φ : CategoryTheory.Over d₀ ⥤ Scheme.AffinePointedEtaleNeighborhood y :=
     CategoryTheory.Over.forget d₀ ⋙ ι₀
   let U : CategoryTheory.Over d₀ ⥤ X.Etale :=
-    Φ ⋙ Scheme.AffinePointedEtaleNeighborhood.ι y ⋙ CategoryOfElements.π _ ⋙ f.Etale
+    Φ ⋙ Scheme.AffinePointedEtaleNeighborhood.ι y ⋙ Functor.Elements.π _ ⋙ f.Etale
   let cK := (CategoryTheory.Over.forget X).mapCone
     ((CategoryTheory.Over.pullback f).mapCone (Scheme.strictLocalizationConeOver y))
   let E : Φ ⋙ (Scheme.affineNeighborhoodDiagramOver y ⋙ CategoryTheory.Over.pullback f) ⋙

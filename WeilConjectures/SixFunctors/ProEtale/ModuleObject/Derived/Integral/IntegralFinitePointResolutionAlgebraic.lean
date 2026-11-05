@@ -67,7 +67,7 @@ theorem integralFinitePointResolution_algebraic
     exact Nat.cast_ne_zero.mpr hpow
   have hkill (a : ULift.{u + 1} A) : t • a = 0 := by
     rw [show t = ((ell ^ n : ℕ) : R) from rfl, Nat.cast_smul_eq_nsmul]
-    exact ULift.ext _ _ (hn a.down)
+    exact ULift.ext (hn a.down)
   let j : (Fin r → R) →ₗ[R] K :=
     (t • (LinearMap.id : (Fin r → R) →ₗ[R] (Fin r → R))).codRestrict K
       (fun x ↦ by

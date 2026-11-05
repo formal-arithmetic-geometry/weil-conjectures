@@ -280,7 +280,7 @@ lemma bijective_rightDerivedLowerShriekOfCompactification_map_comp_counit
         ⇑e.symm.homFromEquiv := by
     ext g
     simp only [Function.comp_apply, Iso.homFromEquiv_apply, Iso.symm_inv, Functor.mapIso_inv,
-      Functor.map_comp, Category.assoc, Iso.map_inv_hom_id_assoc]
+      Functor.map_comp, Category.assoc, Iso.inv_hom_id_map_assoc]
   rw [h]
   exact ((ProEtale.rightDerivedLowerShriekOfCompactification A c).mapIso
     e).homFromEquiv.bijective.comp

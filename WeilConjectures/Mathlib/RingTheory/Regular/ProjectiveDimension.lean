@@ -461,7 +461,7 @@ theorem of_hasProjectiveDimensionLE_residueField_aux :
     rw [show maximalIdeal R = ⊥ from h, Submodule.spanFinrank_bot]
     exact_mod_cast ringKrullDim_nonneg_of_nontrivial
   by_cases hZ : Disjoint (m : Set R) (nonZeroDivisors R)
-  · obtain ⟨s, hs, hs0⟩ := SetLike.exists_of_lt
+  · obtain ⟨s, hs, hs0⟩ := IsConcreteLE.exists_of_lt
       (Ideal.bot_lt_annihilator_of_disjoint_nonZeroDivisors hZ)
     have hsm : ∀ y ∈ m, s * y = 0 := fun y hy ↦ by
       simpa using congrArg Subtype.val (Module.mem_annihilator.1 hs ⟨y, hy⟩)

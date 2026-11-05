@@ -84,7 +84,7 @@ private theorem cofiber_snd {T : CochainComplex A ℤ} (a : T ⟶ T)
     (homotopyCofiber.XIsoBiprod a p j hpj).hom ≫ biprod.snd =
       homotopyCofiber.sndX a p := by
   obtain rfl := (ComplexShape.up ℤ).next_eq' hpj
-  simp only [homotopyCofiber.sndX, dif_pos hpj]
+  simp only [homotopyCofiber.sndX, dite_eq_left hpj]
 
 private theorem compatCoords_snd (i : ℤ) :
     (compatCoords a i).hom ≫ biprod.snd =

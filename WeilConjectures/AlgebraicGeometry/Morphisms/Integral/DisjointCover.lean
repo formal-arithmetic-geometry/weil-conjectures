@@ -70,7 +70,7 @@ abbrev restrict (c : Nbhd y) (U₁ : c.1.left.Opens)
 /-- The inclusion of the restriction of a pointed étale neighbourhood to an open. -/
 def restrictHom (c : Nbhd y) (U₁ : c.1.left.Opens)
     (hU₁ : c.2.left (default : Spec (.of Ω)) ∈ U₁) : c.restrict U₁ hU₁ ⟶ c :=
-  CategoryOfElements.homMk _ _ (MorphismProperty.Over.homMk U₁.ι rfl)
+  Functor.Elements.homMk (MorphismProperty.Over.homMk U₁.ι rfl)
     (CategoryTheory.Over.OverMorphism.ext (c.restrictPt_ι U₁ hU₁))
 
 /-- A pointed étale neighbourhood of the point `u` of a pointed étale neighbourhood `(U, u)` of
@@ -84,7 +84,7 @@ abbrev comp (c : Nbhd y) (d : Nbhd c.2.left) : Nbhd y :=
 
 /-- The structure morphism `c.comp d ⟶ c`. -/
 def compHom (c : Nbhd y) (d : Nbhd c.2.left) : c.comp d ⟶ c :=
-  CategoryOfElements.homMk _ _ (MorphismProperty.Over.homMk d.1.hom rfl)
+  Functor.Elements.homMk (MorphismProperty.Over.homMk d.1.hom rfl)
     (CategoryTheory.Over.OverMorphism.ext (CategoryTheory.Over.w d.2))
 
 @[simp]

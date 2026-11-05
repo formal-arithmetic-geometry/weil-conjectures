@@ -1121,7 +1121,7 @@ omit [EssentiallySmall.{r} C] [J.WEqualsLocallyBijective AddCommGrpCat.{r}]
 private theorem residue_nsmul_zero (n : ℕ) (M : Residue J n)
     (U : Cᵒᵖ) (x : M.val.obj U) : n • x = 0 := by
   have h : (n : ULift.{r} (ZMod n)) = 0 :=
-    ULift.ext _ _ (by rw [ULift.down_natCast, ZMod.natCast_self]; rfl)
+    ULift.ext (by rw [ULift.down_natCast, ZMod.natCast_self]; rfl)
   let α := ringUnit (J := J) (CommRingCat.of (ULift.{r} (ZMod n)))
   have h' : (α.app U).hom (n : ULift.{r} (ZMod n)) =
       (n : (residues J n).obj.obj U) := map_natCast _ n
@@ -1143,7 +1143,7 @@ private instance restriction_full (n : ℕ) [NeZero n] : (restriction J n).Full 
         intro U z x
         obtain ⟨z⟩ := z
         have hz : (⟨z⟩ : ULift.{r} (ZMod n)) = (z.val : ULift.{r} (ZMod n)) :=
-          ULift.ext _ _ (by rw [ULift.down_natCast, ZMod.natCast_zmod_val])
+          ULift.ext (by rw [ULift.down_natCast, ZMod.natCast_zmod_val])
         change f.val.app U ((α.app U).hom (⟨z⟩ : ULift.{r} (ZMod n)) •
           (show M.val.obj U from x)) =
           (α.app U).hom (⟨z⟩ : ULift.{r} (ZMod n)) •
@@ -1211,7 +1211,7 @@ private theorem integerUnit_mono (n : ℕ) (hn : n ≠ 0) :
     rw [AddCommGrpCat.mono_iff_injective]
     intro x y h
     change n • x = n • y at h
-    exact ULift.ext _ _ (nsmul_right_injective hn (congrArg ULift.down h))
+    exact ULift.ext (nsmul_right_injective hn (congrArg ULift.down h))
   have hm' : Mono (n • 𝟙 ((constantSheaf J AddCommGrpCat).obj
       (AddCommGrpCat.of (ULift.{r} ℤ)))) := by
     have : Mono ((CategoryTheory.Functor.const Cᵒᵖ).map

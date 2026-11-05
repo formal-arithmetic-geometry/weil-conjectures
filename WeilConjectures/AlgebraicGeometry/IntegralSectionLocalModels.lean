@@ -222,7 +222,7 @@ theorem integralSectionLocalModels (l : ℕ) [Fact l.Prime]
   have hqc : CompactSpace X ∧ QuasiSeparatedSpace X := ⟨inferInstance, inferInstance⟩
   have hbranch : IsConstantModelConstructible (DerivedNakayama.integerRing l E) X M ↔
       IsFiniteConstantStratified (DerivedNakayama.integerRing l E) X M := by
-    simp only [IsConstantModelConstructible, if_pos hqc]
+    simp only [IsConstantModelConstructible, ite_eq_left hqc]
   apply hbranch.trans
   exact stratifiedModels_transport (DerivedNakayama.integerRing l E) X M
     (fun g U ↦ integralSectionMemberModel l E g U M)

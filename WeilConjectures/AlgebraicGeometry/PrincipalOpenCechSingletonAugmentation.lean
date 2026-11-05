@@ -153,10 +153,10 @@ theorem principalOpenCech_singleton_augmentation_exists
         (modulesSpecToSheaf.obj (I.X (n + 1 - (S.val.card : ℤ)))).obj.map
           (homOfLE (hls S h)).op
           ((modulesSpecToSheaf.map (eqToHom (congrArg I.X (hes S h n)))).hom.app
-            (op V) ((σ₁ n).hom s)) := by rw [ha, dif_pos h]
+            (op V) ((σ₁ n).hom s)) := by rw [ha, dite_eq_left h]
   have ha_large (n : ℤ) (s : K₁.X n) (S : {S : Finset (Fin r) // S.Nonempty})
       (h : 1 < S.val.card) : (τ₁ n).hom (a n s) S = 0 := by
-    rw [ha, dif_neg (ne_of_gt h)]
+    rw [ha, dite_eq_right (ne_of_gt h)]
   have hcomm (n : ℤ) : a n ≫ T₁.d n (n + 1) = K₁.d n (n + 1) ≫ a (n + 1) := by
     apply (cancel_mono (τ₁ (n + 1)).hom).mp
     apply ModuleCat.hom_ext
@@ -223,7 +223,7 @@ theorem principalOpenCech_singleton_augmentation_exists
         have hny : (({x, y} : Finset (Fin r)).erase y).Nonempty := by simp [hey]
         have hcx : (({x, y} : Finset (Fin r)).erase x).card = 1 := by simp [hex]
         have hcy : (({x, y} : Finset (Fin r)).erase y).card = 1 := by simp [hey]
-        rw [dif_pos hnx, dif_pos hny, ha_one _ _ _ hcx, ha_one _ _ _ hcy]
+        rw [dite_eq_left hnx, dite_eq_left hny, ha_one _ _ _ hcx, ha_one _ _ _ hcy]
         have hx := ConcreteCategory.congr_hom
           (augmentation_transport_restrict I V _ _ (hls ⟨_, hnx⟩ hcx) (hle {x, y} x) n _ _
             (hes ⟨_, hnx⟩ hcx n) (he {x, y} x (by simp) n)) ((σ₁ n).hom s)

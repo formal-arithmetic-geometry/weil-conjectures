@@ -79,10 +79,10 @@ private theorem koszul_product_coefficient {A : Type z} [CommRing A]
   apply Finset.sum_congr rfl
   intro i hi
   by_cases h : I.erase i = L
-  · simp only [if_pos h]
+  · simp only [ite_eq_left h]
     rw [← h, ← Finset.prod_erase_mul _ _ hi, pow_succ]
     ring
-  · simp only [if_neg h, mul_zero, zero_mul]
+  · simp only [ite_eq_right h, mul_zero, zero_mul]
 
 private theorem pureTensor_naturality
     {E : Type*} [Category* E] [Preadditive E] [HasCountableCoproducts E]
@@ -313,12 +313,12 @@ theorem exists_ringedSignedKoszulFiniteCoordinates
     · by_cases h : I = L
       · subst L
         rfl
-      · simp only [if_neg h, smul_zero]
+      · simp only [ite_eq_right h, smul_zero]
     · by_cases h : q + (I.card : ℤ) = (q + 1) + (L.card : ℤ)
-      · simp only [dif_pos h, smul_smul, ← map_mul]
+      · simp only [dite_eq_left h, smul_smul, ← map_mul]
         apply congrArg (fun b : A ↦ ringedKoszulCoefficientSMul O ρ b (K.XIsoOfEq h).hom)
         exact (koszul_product_coefficient a m q I L).trans (mul_comm _ _)
-      · simp only [dif_neg h, smul_zero]
+      · simp only [dite_eq_right h, smul_zero]
   have htcomm (m : ℕ) (K : ringedSiteComplex O) (q : ℤ) :
       t m K q ≫ ((T m).obj K).d q (q + 1) =
         ((T (m + 1)).obj K).d q (q + 1) ≫ t m K (q + 1) := by
@@ -357,7 +357,7 @@ theorem exists_ringedSignedKoszulFiniteCoordinates
         by_cases h : I = P
         · subst P
           rfl
-        · simp only [dif_neg h, smul_zero] }
+        · simp only [dite_eq_right h, smul_zero] }
   have hstep (m : ℕ) (K : ringedSiteComplex O) (q : ℤ) (I L : Finset (Fin r)) :
       biproduct.ι _ I ≫ (c (m + 1) K q).inv ≫ ((step m).app K).f q ≫
           (c m K q).hom ≫ biproduct.π _ L =

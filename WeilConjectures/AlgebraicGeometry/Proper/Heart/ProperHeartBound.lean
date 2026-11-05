@@ -100,7 +100,7 @@ private theorem dimension_bound_of_finite_lower_bounds (D : WithBot ℕ∞) (d :
     | coe n =>
       have hn := h n le_rfl
       have hd : ¬ d < 0 := by omega
-      rw [if_neg hd]
+      rw [ite_eq_right hd]
       exact_mod_cast (show n ≤ d.toNat by omega)
 
 set_option synthInstance.maxHeartbeats 100000 in

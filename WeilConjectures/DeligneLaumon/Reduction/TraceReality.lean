@@ -78,7 +78,7 @@ theorem conj_trace_pow_of_charpolyRev (ι : K →+* ℂ) (A : Module.End K V)
   have hne : ((A.charpolyRev.map ι : Polynomial ℂ) : ℂ⟦X⟧) ≠ 0 := fun h0 ↦ by
     simpa [h0] using constantCoeff_coe_map_charpolyRev ι A
   have := congrArg (coeff m) (neg_injective (mul_right_cancel₀ hne e₂))
-  simp only [coeff_mk, if_neg hm, RingHom.coe_comp, Function.comp_apply] at this
+  simp only [coeff_mk, ite_eq_right hm, RingHom.coe_comp, Function.comp_apply] at this
   exact this.symm
 
 section IsAlgClosed

@@ -109,11 +109,11 @@ private noncomputable def oneStep
 
 private theorem oneStep_top
     {C : Type uB} [Category.{v} C] [Abelian C] (X : C) (p : ℤ) (hp : p ≤ 0) :
-    (oneStep X).step p = ⊤ := if_pos hp
+    (oneStep X).step p = ⊤ := ite_eq_left hp
 
 private theorem oneStep_bot
     {C : Type uB} [Category.{v} C] [Abelian C] (X : C) (p : ℤ) (hp : ¬p ≤ 0) :
-    (oneStep X).step p = ⊥ := if_neg hp
+    (oneStep X).step p = ⊥ := ite_eq_right hp
 
 private theorem oneStep_finite
     {C : Type uB} [Category.{v} C] [Abelian C] (X : C) : (oneStep X).IsFinite := by

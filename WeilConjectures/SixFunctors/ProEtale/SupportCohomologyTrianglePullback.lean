@@ -459,7 +459,7 @@ theorem homology_sectionsWithSupportTrianglePullback_comm
     rfl
   · simp only [← Functor.map_comp, φ.comm₂]
     rfl
-  · exact ((homologyFunctor A 0).homologySequenceδ_naturality _ _ φ q₀ q₁ hq).symm
+  · exact ((homologyFunctor A 0).homologySequenceδ_naturality φ q₀ q₁ hq).symm
 
 section Comp
 

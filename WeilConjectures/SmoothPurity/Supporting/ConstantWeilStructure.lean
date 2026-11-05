@@ -1063,7 +1063,7 @@ private theorem quotientProjection_locallySurjective (X : Scheme.{u}) (n : ℕ) 
   intro V f hf
   obtain ⟨x, hx⟩ := hf
   obtain ⟨a, ha⟩ := Ideal.Quotient.mk_surjective x.down
-  have hxa : x = ULift.up ((Ideal.Quotient.mk _) a) := ULift.ext _ _ ha.symm
+  have hxa : x = ULift.up ((Ideal.Quotient.mk _) a) := ULift.ext ha.symm
   subst x
   let A := CommRingCat.of (ULift.{u + 1, u} (Padic.coefficientExtensionIntegers l E))
   let b := (toSheafify J ((Functor.const X.ProEtᵒᵖ).obj A)).app (op V) (ULift.up a)

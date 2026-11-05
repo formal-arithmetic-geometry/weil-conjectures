@@ -177,14 +177,14 @@ theorem exists_covBy_chain [FiniteDimensional k V] {M N : Subrepresentation ρ} 
   refine ⟨n₁ + 1 + n₂, fun i ↦ if i ≤ n₁ then a i else b (i - (n₁ + 1)), n₁, by simp [ha₀], ?_,
     fun i hi ↦ ?_, by omega, by simp [hn₁], by simp [hb₀]⟩
   · dsimp only
-    rw [if_neg (by omega), show n₁ + 1 + n₂ - (n₁ + 1) = n₂ by omega, hn₂]
+    rw [ite_eq_right (by omega), show n₁ + 1 + n₂ - (n₁ + 1) = n₂ by omega, hn₂]
   · dsimp only
     rcases lt_trichotomy i n₁ with hi₁ | rfl | hi₁
-    · rw [if_pos hi₁.le, if_pos (by omega)]
+    · rw [ite_eq_left hi₁.le, ite_eq_left (by omega)]
       exact ha i hi₁
-    · rw [if_pos le_rfl, if_neg (by omega), hn₁, Nat.sub_self, hb₀]
+    · rw [ite_eq_left le_rfl, ite_eq_right (by omega), hn₁, Nat.sub_self, hb₀]
       exact h
-    · rw [if_neg (by omega), if_neg (by omega),
+    · rw [ite_eq_right (by omega), ite_eq_right (by omega),
         show i + 1 - (n₁ + 1) = i - (n₁ + 1) + 1 by omega]
       exact hb _ (by omega)
 

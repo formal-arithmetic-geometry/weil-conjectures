@@ -116,7 +116,7 @@ theorem surjective_map_of_injective (I : Sheaf J AddCommGrpCat.{max w v}) [Injec
       have : Mono ((uliftYoneda.{w}.map i).app V) := by
         rw [mono_iff_injective]
         intro a b hab
-        exact ULift.ext _ _ ((cancel_mono i).1 (congrArg ULift.down hab))
+        exact ULift.ext ((cancel_mono i).1 (congrArg ULift.down hab))
       exact AddCommGrpCat.free.map_mono _
     exact NatTrans.mono_of_mono_app _
   let m := (presheafToSheaf J AddCommGrpCat.{max w v}).map θ
@@ -132,7 +132,7 @@ theorem surjective_map_of_injective (I : Sheaf J AddCommGrpCat.{max w v}) [Injec
   have h1 : Py.map i.op (freeYonedaGen.{w} Y) = θ.app (op W) (freeYonedaGen.{w} W) := by
     refine Eq.trans (FreeAbelianGroup.map_of_apply _) ((congrArg FreeAbelianGroup.of ?_).trans
       (FreeAbelianGroup.map_of_apply _).symm)
-    exact ULift.ext _ _ (by simp)
+    exact ULift.ext (by simp)
   have key : θ ≫ toSheafify J Py ≫ g.hom = toSheafify J Pw ≫ f.hom := by
     rw [← Category.assoc, toSheafify_naturality, Category.assoc]
     exact congrArg (toSheafify J Pw ≫ ·) (congrArg (fun φ ↦ φ.hom) hg)

@@ -55,7 +55,7 @@ theorem ordinaryEvaluation_post_differential (X : Scheme.{u}) (U : X.Opens)
         localEvaluationComponent X U P F (p + 1) q m r (by omega)  := by
   classical
   by_cases h : r + q = 0
-  · simp only [localEvaluationComponent, dif_pos h]
+  · simp only [localEvaluationComponent, dite_eq_left h]
     rw [← SheafOfModules.tensorHomEquiv_comp_homObjMap (R := X.sheaf.over U),
       ← SheafOfModules.tensorHomEquiv_whiskerLeft_comp (R := X.sheaf.over U)]
     apply (SheafOfModules.tensorHomEquiv (R := X.sheaf.over U) (P.X r) _ _).congr_arg
@@ -64,6 +64,6 @@ theorem ordinaryEvaluation_post_differential (X : Scheme.{u}) (U : X.Opens)
       associator_naturality_left_assoc]
     rw [← whisker_exchange_assoc, rightUnitor_naturality_assoc]
     simp only [HomologicalComplex.d_comp_XIsoOfEq_hom F]
-  · simp only [localEvaluationComponent, dif_neg h, zero_comp, comp_zero]
+  · simp only [localEvaluationComponent, dite_eq_right h, zero_comp, comp_zero]
 
 end AlgebraicGeometry

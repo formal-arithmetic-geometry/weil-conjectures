@@ -210,7 +210,7 @@ theorem scalarModelIteratedStrictCalculation
       DerivedCategory.Q.map (integralOperationsRoosFunctor.map qEL.inv) ≫
       (integralComparisonRoosBridge l L X ρL D).inv) hnEL
     rw [reassoc_of% hc] at hn
-    have hcancel := Iso.map_hom_inv_id qEL
+    have hcancel := Iso.hom_inv_id_map qEL
       (integralOperationsRoosFunctor ⋙ DerivedCategory.Q)
     simp only [Functor.comp_map] at hcancel
     simp only [Category.assoc] at hn
@@ -280,9 +280,9 @@ theorem scalarModelIteratedStrictCalculation
         (CompletedLineTensor.associatorData l E X L ι F j).sheaf).hom.app P.obj) ≫
       DerivedCategory.Q.map
         ((completedScalarChainComparison l E F (j.comp ι) X).app P.obj) := by
-    have hwcancel := Iso.map_inv_hom_id wa
+    have hwcancel := Iso.inv_hom_id_map wa
       (integralOperationsRoosFunctor ⋙ DerivedCategory.Q)
-    have hqcancel := Iso.map_inv_hom_id q
+    have hqcancel := Iso.inv_hom_id_map q
       (integralOperationsRoosFunctor ⋙ DerivedCategory.Q)
     simp only [Functor.comp_map] at hwcancel hqcancel
     simp only [g, Functor.map_comp, Category.assoc]

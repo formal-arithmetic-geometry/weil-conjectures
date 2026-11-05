@@ -326,7 +326,7 @@ theorem coefficientHeart_essentiallySmall (ℓ : ℕ) [Fact ℓ.Prime]
       (IsConstantModelConstructible A X) := by
     rw [show IsConstantModelConstructible A X = IsFiniteConstantStratified A X by
       funext M
-      exact if_pos ⟨inferInstance, inferInstance⟩]
+      exact ite_eq_left ⟨inferInstance, inferInstance⟩]
     exact hsmall
   let : ObjectProperty.EssentiallySmall.{u + 1}
       (IsConstantModelConstructible A X) := hprop

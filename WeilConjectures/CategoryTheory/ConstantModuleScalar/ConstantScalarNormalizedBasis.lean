@@ -140,9 +140,9 @@ theorem inclC_projC (D : SheafOfModules.DerivedChangeOfRingsCochainModel.{u, v, 
     ← Functor.map_comp_assoc, eqToHom_trans, eqToHom_refl, Functor.map_id, Category.id_comp]
   by_cases h : c = d
   · subst h
-    rw [if_pos rfl, incl_proj_self]
+    rw [ite_eq_left rfl, incl_proj_self]
     rfl
-  · rw [if_neg h, incl_proj_of_ne J A B b h]
+  · rw [ite_eq_right h, incl_proj_of_ne J A B b h]
     rfl
 
 theorem sum_projC_inclC (D : SheafOfModules.DerivedChangeOfRingsCochainModel.{u, v, r, w, w}
@@ -347,9 +347,9 @@ theorem normalized_basis
         ← Category.assoc (DerivedCategory.Q.map _), ← Functor.map_comp,
         inclC_projC (A := A) (B := B) D a b hk]
       by_cases h : c = d
-      · rw [if_pos h, if_pos h, Functor.map_id, Category.id_comp, Iso.inv_hom_id]
+      · rw [ite_eq_left h, ite_eq_left h, Functor.map_id, Category.id_comp, Iso.inv_hom_id]
         rfl
-      · rw [if_neg h, if_neg h, Functor.map_zero, Limits.zero_comp, Limits.comp_zero]
+      · rw [ite_eq_right h, ite_eq_right h, Functor.map_zero, Limits.zero_comp, Limits.comp_zero]
     · have hΦ : ι (DerivedCategory.Q.obj K) = fun c ↦
           DerivedCategory.Q.map (inclC (A := A) (B := B) D a (b c) K) ≫ inv Φ := by
         funext c

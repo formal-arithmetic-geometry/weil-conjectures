@@ -451,13 +451,13 @@ private theorem free_coordinate_basis (T : (Over U)ᵒᵖ) (i j : Fin n) :
     ConcreteCategory.comp_apply] at hh
   by_cases hji : j = i
   · subst j
-    simpa only [one, if_pos rfl, if_true, SheafOfModules.id_val,
+    simpa only [one, ite_eq_left rfl, ite_true, SheafOfModules.id_val,
       PresheafOfModules.id_app, ModuleCat.id_apply] using hh
   · have hij : (ULift.up j : ULift.{u + 1} (Fin n)) ≠ ULift.up i := by
       intro e
       exact hji (ULift.up_injective e)
-    rw [if_neg hij] at hh
-    rw [if_neg hji]
+    rw [ite_eq_right hij] at hh
+    rw [ite_eq_right hji]
     exact hh
 
 private theorem free_coordinate_sum (T : (Over U)ᵒᵖ)
@@ -494,7 +494,7 @@ private theorem matrixColumnSection_mem
       (op T.unop.left)) (latticeConstantRingHom X A T.unop.left
         (if k = j then 1 else 0)) = _
   simp only [apply_ite, map_one, map_zero, mul_one, mul_zero,
-    Finset.sum_ite_eq', Finset.mem_univ, if_true]
+    Finset.sum_ite_eq', Finset.mem_univ, ite_true]
   rfl
 
 private theorem matrixColumn_coordinates
@@ -755,9 +755,9 @@ private theorem freeBasisCoordinate
     ConcreteCategory.comp_apply] at hh
   by_cases hij : i = j
   · subst i
-    simpa only [one, if_pos rfl, if_true, SheafOfModules.id_val,
+    simpa only [one, ite_eq_left rfl, ite_true, SheafOfModules.id_val,
       PresheafOfModules.id_app, ModuleCat.id_apply] using hh
-  · rw [if_neg hij] at hh ⊢
+  · rw [ite_eq_right hij] at hh ⊢
     exact hh
 
 end FreeExtension
@@ -864,13 +864,13 @@ private theorem finiteFreeCoordinates_sum (T : (Over U)ᵒᵖ)
       (latticeCoefficientSheaf X K) T (ULift.up j) (ULift.up i)
     by_cases h : j = i
     · subst j
-      rw [if_pos rfl] at hh ⊢
+      rw [ite_eq_left rfl] at hh ⊢
       exact hh
     · have h' : (ULift.up j : ULift.{u + 1} (Fin n)) ≠ ULift.up i := by
         intro e
         exact h (ULift.up_injective e)
-      rw [if_neg h'] at hh
-      rw [if_neg h]
+      rw [ite_eq_right h'] at hh
+      rw [ite_eq_right h]
       exact hh
   simp_rw [hb]
   simp

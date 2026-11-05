@@ -174,12 +174,12 @@ theorem hasProd_inv_alternatingCharpolyRevProd_of_sum_trace_eq [CharZero K]
     simp only [PowerSeries.coeff_mk]
     rcases eq_or_ne m 0 with rfl | hm0
     · simp
-    · rw [if_pos ⟨hm0, one_dvd m⟩, Nat.cast_one, one_mul, Nat.div_one,
+    · rw [ite_eq_left ⟨hm0, one_dvd m⟩, Nat.cast_one, one_mul, Nat.div_one,
         htr m (Nat.one_le_iff_ne_zero.2 hm0) (S n) fun j hj ↦
           hmem ((Nat.le_of_dvd (Nat.pos_of_ne_zero hm0) hj).trans hm), Finset.sum_filter]
       refine Finset.sum_congr rfl fun j _ ↦ ?_
       by_cases hj : e j ∣ m
-      · rw [if_pos ⟨hm0, hj⟩, if_pos hj, nsmul_eq_mul]
-      · rw [if_neg fun h ↦ hj h.2, if_neg hj]
+      · rw [ite_eq_left ⟨hm0, hj⟩, ite_eq_left hj, nsmul_eq_mul]
+      · rw [ite_eq_right fun h ↦ hj h.2, ite_eq_right hj]
 
 end LinearMap

@@ -274,7 +274,7 @@ theorem exists_isTwistedSection_finiteEtale_of_isIntegrallyClosed_stalk [IsLocal
       rw [← Nat.card_eq_fintype_card, Nat.card_coe_set_eq, hN w])).symm⟩
   let E (w : V) : Fin N → S := en (T w)
   have hE (w : V) (i : Fin N) : E w i = ((hen w).some i : S) := by
-    simp only [E, en, dif_pos (hen w)]
+    simp only [E, en, dite_eq_left (hen w)]
   have hEinj (w : V) : Function.Injective (E w) := fun i j h ↦ by
     rw [hE, hE] at h
     exact (hen w).some.injective (Subtype.ext h)

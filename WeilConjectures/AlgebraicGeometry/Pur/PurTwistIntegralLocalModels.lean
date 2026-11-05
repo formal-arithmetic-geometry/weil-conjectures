@@ -561,7 +561,7 @@ private theorem lifted_principal_kernel
   constructor
   · intro t
     obtain ⟨r, hr⟩ := hs t.down
-    exact ⟨ULift.up r, ULift.ext _ _ hr⟩
+    exact ⟨ULift.up r, ULift.ext hr⟩
   · ext r
     change (ULift.up (f r.down) : ULift.{u + 1} T) = 0 ↔ _
     rw [show (ULift.up (f r.down) : ULift.{u + 1} T) = 0 ↔ f r.down = 0 from
@@ -570,7 +570,7 @@ private theorem lifted_principal_kernel
     rw [hk, Ideal.mem_span_singleton, Ideal.mem_span_singleton]
     constructor
     · rintro ⟨b, hb⟩
-      exact ⟨ULift.up b, ULift.ext _ _ hb⟩
+      exact ⟨ULift.up b, ULift.ext hb⟩
     · rintro ⟨b, hb⟩
       exact ⟨b.down, congrArg ULift.down hb⟩
 

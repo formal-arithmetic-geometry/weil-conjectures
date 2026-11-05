@@ -43,7 +43,7 @@ private instance singletonLevelAdditive (n m : ℕ) :
   by_cases h : m = n
   · subst m; simpa [singletonLevel] using
       (inferInstance : (𝟭 (strictEtaleLevel T O ell n)).Additive)
-  · simpa only [singletonLevel, dif_neg h] using
+  · simpa only [singletonLevel, dite_eq_right h] using
       (inferInstance : (0 : strictEtaleLevel T O ell n ⥤ strictEtaleLevel T O ell m).Additive)
 
 private def singleton (n : ℕ) :
@@ -73,7 +73,7 @@ private def singletonOther (n m : ℕ) (h : m ≠ n) :
     singleton O ell T n ⋙ coefficientEvaluation.{u + 1, u, u + 1} (J := T.smallEtaleTopology)
       (O := O) (ell := ell) m ≅ 0 := by
   change singletonLevel O ell T n m ≅ 0
-  exact eqToIso (by simp only [singletonLevel, dif_neg h])
+  exact eqToIso (by simp only [singletonLevel, dite_eq_right h])
 
 private instance singletonAdditive (n : ℕ) : (singleton O ell T n).Additive where
   map_add {N N'} f g := by

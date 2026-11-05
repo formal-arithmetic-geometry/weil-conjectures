@@ -163,10 +163,10 @@ private theorem finite_locally_constant_of_finite_values
   let forgetLift := neighbourhoods.functor ⋙ Over.forget (Φ.fiber.elementsMk U lift)
   have : forgetLift.Initial := inferInstance
   have eStalk : Ψ.sheafFiber.obj (F.over U) ≅ Φ.sheafFiber.obj F := by
-    change colimit ((CategoryOfElements.π Ψ.fiber).op ⋙ (F.over U).obj) ≅
-      colimit ((CategoryOfElements.π Φ.fiber).op ⋙ F.obj)
-    have h : (CategoryOfElements.π Ψ.fiber).op ⋙ (F.over U).obj =
-        forgetLift.op ⋙ (CategoryOfElements.π Φ.fiber).op ⋙ F.obj := rfl
+    change colimit ((Functor.Elements.π Ψ.fiber).op ⋙ (F.over U).obj) ≅
+      colimit ((Functor.Elements.π Φ.fiber).op ⋙ F.obj)
+    have h : (Functor.Elements.π Ψ.fiber).op ⋙ (F.over U).obj =
+        forgetLift.op ⋙ (Functor.Elements.π Φ.fiber).op ⋙ F.obj := rfl
     rw [h]
     exact Functor.Final.colimitIso forgetLift.op _
   let eValue : Φ.sheafFiber.obj F ≅ S i :=

@@ -226,7 +226,7 @@ lemma exists_injective_linearMap_restrictScalars_of_addOrderOf {N ℓ : ℕ} [Ne
         rw [hx] at h
         rw [ULift.add_down, ZMod.val_add, h, add_nsmul] }
   have hcast (r : ULift.{u + 1} (ZMod N)) : r = ((r.down.val : ℕ) : ULift.{u + 1} (ZMod N)) :=
-    ULift.ext _ _ (by rw [ULift.down_natCast, ZMod.natCast_zmod_val])
+    ULift.ext (by rw [ULift.down_natCast, ZMod.natCast_zmod_val])
   refine ⟨{ toFun := g₀, map_add' := g₀.map_add, map_smul' := fun r a ↦ ?_ }, ?_⟩
   · rw [RingHom.id_apply, hcast r, Nat.cast_smul_eq_nsmul, Nat.cast_smul_eq_nsmul]
     exact g₀.map_nsmul _ a
@@ -234,7 +234,7 @@ lemma exists_injective_linearMap_restrictScalars_of_addOrderOf {N ℓ : ℕ} [Ne
     have ha' : (ULift.down a).val • x = 0 := ha
     have h₁ := addOrderOf_dvd_of_nsmul_eq_zero ha'
     rw [hx] at h₁
-    exact ULift.ext _ _ ((ZMod.val_eq_zero _).1
+    exact ULift.ext ((ZMod.val_eq_zero _).1
       (Nat.eq_zero_of_dvd_of_lt h₁ (ZMod.val_lt (ULift.down a))))
 
 /-- **Dévissage of the coefficients over `ℤ/N`.** Let `f : X ⟶ S` be a morphism and `N ≠ 0`. If
@@ -271,7 +271,7 @@ theorem constructibleHomology_rightDerivedLowerStar_constantSheaf_zmod {X S : Sc
     refine addOrderOf_dvd_of_nsmul_eq_zero ?_
     rw [← Nat.cast_smul_eq_nsmul (ULift.{u + 1} (ZMod N))]
     have : ((N : ℕ) : ULift.{u + 1} (ZMod N)) = 0 :=
-      ULift.ext _ _ (by rw [ULift.down_natCast, ZMod.natCast_self, ULift.zero_down])
+      ULift.ext (by rw [ULift.down_natCast, ZMod.natCast_self, ULift.zero_down])
     rw [this, zero_smul]
   let ψ : ULift.{u + 1} (ZMod N) →+* ULift.{u + 1} (ZMod ℓ) :=
     ULift.ringEquiv.symm.toRingHom.comp
@@ -332,7 +332,7 @@ theorem isConstructibleSheaf_homology_rightDerivedLowerStar_constantSheaf_of_zmo
       (fun ℓ _ hℓN q ↦ ?_) _ q)
   have : HasInvertibleExponent (ULift.{u + 1} (ZMod ℓ)) S := by
     obtain ⟨k, hk⟩ := hℓN.trans (ringChar.dvd hnΛ)
-    refine ⟨ℓ, (Fact.out : ℓ.Prime).pos, ULift.ext _ _ (by simp), ?_⟩
+    refine ⟨ℓ, (Fact.out : ℓ.Prime).pos, ULift.ext (by simp), ?_⟩
     rw [hk, Nat.cast_mul] at hnu
     exact isUnit_of_mul_isUnit_left hnu
   exact h ℓ q

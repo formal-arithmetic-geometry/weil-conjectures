@@ -291,7 +291,7 @@ private theorem iso_of_stonean {S : Profinite.{u}}
     let a := Profinite.presentation.π E.left
     let : ExtremallyDisconnected D :=
       inferInstanceAs (ExtremallyDisconnected E.left.presentation)
-    have : EffectiveEpi a := ((Profinite.effectiveEpi_tfae a).out 0 1).mpr (inferInstance : Epi a)
+    have : EffectiveEpi a := ((Profinite.effectiveEpi_tfae a).out 1 2).mpr (inferInstance : Epi a)
     exact stonean_cover_mem R D a (hR (Over.mk (a ≫ E.hom))
       (show ExtremallyDisconnected D from inferInstance)
       (Over.homMk a rfl))

@@ -213,7 +213,7 @@ theorem exists_hom_preimage_eq_bot (c : Nbhd y) (C : Set (pullback c.1.hom f : S
   have hu'ι : u' ≫ U'.ι = u.left := IsOpenImmersion.lift_fac _ _ _
   let θ : Scheme.Etale.mk (U'.ι ≫ U.hom) ⟶ U := MorphismProperty.Over.homMk U'.ι rfl
   refine ⟨⟨Scheme.Etale.mk (U'.ι ≫ U.hom), CategoryTheory.Over.homMk u' ?_⟩,
-    CategoryOfElements.homMk _ _ θ ?_, ?_⟩
+    Functor.Elements.homMk θ ?_, ?_⟩
   · change u' ≫ U'.ι ≫ U.hom = y
     rw [← Category.assoc, hu'ι]
     exact CategoryTheory.Over.w u
@@ -287,7 +287,7 @@ pointed étale neighbourhoods of the geometric point `t` in `X`. -/
 def pieceFunctor (t : GeometricFiber f y) : SplitNbhd f y ⥤ (pointSmallEtale t.1).fiber.Elements
     where
   obj c := ⟨c.pieceObj t, c.piecePt t⟩
-  map {c c'} g := CategoryOfElements.homMk _ _ (pieceMap g t) (by
+  map {c c'} g := Functor.Elements.homMk (pieceMap g t) (by
     apply CategoryTheory.Over.OverMorphism.ext
     apply (cancel_mono (c'.piece t).ι).mp
     change (c.piecePt t).left ≫ (pieceMap g t).left ≫ (c'.piece t).ι = _

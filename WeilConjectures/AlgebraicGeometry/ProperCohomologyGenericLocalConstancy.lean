@@ -201,7 +201,7 @@ private theorem constant_shriek
     obtain ⟨n, g, hg⟩ := Algebra.FiniteType.iff_quotient_mvPolynomial''.1
       (inferInstance : Algebra.FiniteType ℤ A)
     apply ne_top_of_le_ne_top ?_ (ringKrullDim_le_of_surjective g.toRingHom hg)
-    rw [MvPolynomial.ringKrullDim_of_isNoetherianRing]
+    rw [MvPolynomial.ringKrullDim_of_isNoetherianRing_of_finite]
     have hz : ringKrullDim ℤ ≤ 1 := by
       rw [← Nat.cast_one, ← Ring.krullDimLE_iff]
       infer_instance

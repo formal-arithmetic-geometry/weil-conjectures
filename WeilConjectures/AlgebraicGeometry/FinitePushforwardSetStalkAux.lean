@@ -40,7 +40,7 @@ theorem finite_pushforward_set_stalk_map_bijective_of_finite
               Y.smallEtaleTopology X.smallEtaleTopology).obj H) ↦
           fun t : {x : Spec (.of Ω) ⟶ X // x ≫ f = y} ↦
             (colimit.pre
-              ((CategoryOfElements.π (Scheme.pointSmallEtale t.1).fiber).op ⋙ H.obj)
+              ((Functor.Elements.π (Scheme.pointSmallEtale t.1).fiber).op ⋙ H.obj)
               (Etale.baseChangeNbhd f y t).op) a) := by
   set_option backward.isDefEq.respectTransparency.types false in
   open Scheme Scheme.Hom Scheme.Hom.SplitNbhd Opposite in
@@ -56,19 +56,19 @@ theorem finite_pushforward_set_stalk_map_bijective_of_finite
         ((f.Etale.sheafPushforwardContinuous (Type (u + 1))
           Y.smallEtaleTopology X.smallEtaleTopology).obj H) :=
     Functor.Final.colimitIso (forget f y).op
-      ((CategoryOfElements.π (pointSmallEtale y).fiber).op ⋙
+      ((Functor.Elements.π (pointSmallEtale y).fiber).op ⋙
         ((f.Etale.sheafPushforwardContinuous (Type (u + 1))
           Y.smallEtaleTopology X.smallEtaleTopology).obj H).obj)
   let e₁ (t : GeometricFiber f y) :
       colimit (pieceSectionsFunctor f y H t) ≅ (pointSmallEtale t.1).sheafFiber.obj H :=
     Functor.Final.colimitIso (pieceFunctor t).op
-      ((CategoryOfElements.π (pointSmallEtale t.1).fiber).op ⋙ H.obj)
+      ((Functor.Elements.π (pointSmallEtale t.1).fiber).op ⋙ H.obj)
   let r (t : GeometricFiber f y) :
       (pointSmallEtale y).sheafFiber.obj
         ((f.Etale.sheafPushforwardContinuous (Type (u + 1))
           Y.smallEtaleTopology X.smallEtaleTopology).obj H) ⟶
         (pointSmallEtale t.1).sheafFiber.obj H :=
-    colimit.pre ((CategoryOfElements.π (pointSmallEtale t.1).fiber).op ⋙ H.obj)
+    colimit.pre ((Functor.Elements.π (pointSmallEtale t.1).fiber).op ⋙ H.obj)
       (Etale.baseChangeNbhd f y t).op
   have he : e₀.hom ≫ Pi.lift r =
       colim.map (sectionsIsoPi f y H).hom ≫
@@ -81,13 +81,13 @@ theorem finite_pushforward_set_stalk_map_bijective_of_finite
     simp only [Category.assoc, Pi.lift_comp_π, Limits.Pi.map_π, PreservesProduct.iso_hom]
     dsimp only [r, e₀, e₁]
     erw [Functor.Final.ι_colimitIso_hom_assoc,
-      colimit.ι_pre ((CategoryOfElements.π (pointSmallEtale t.1).fiber).op ⋙ H.obj)
+      colimit.ι_pre ((Functor.Elements.π (pointSmallEtale t.1).fiber).op ⋙ H.obj)
         (Etale.baseChangeNbhd f y t).op (op s.unop.obj),
       piComparison_comp_π_assoc, colim_map, ι_colimMap_assoc, ι_colimMap_assoc,
       sectionsIsoPi_hom, ← NatTrans.comp_app_assoc, Pi.lift_comp_π,
       Functor.Final.ι_colimitIso_hom]
-    exact (colimit.w ((CategoryOfElements.π (pointSmallEtale t.1).fiber).op ⋙ H.obj)
-      (CategoryOfElements.homMk ⟨s.unop.pieceObj t, s.unop.piecePt t⟩
+    exact (colimit.w ((Functor.Elements.π (pointSmallEtale t.1).fiber).op ⋙ H.obj)
+      (Functor.Elements.homMk ⟨s.unop.pieceObj t, s.unop.piecePt t⟩
         ((Etale.baseChangeNbhd f y t).obj s.unop.obj) (s.unop.pieceIncl t)
         (CategoryTheory.Over.OverMorphism.ext (s.unop.piecePt_comp_pieceIncl t))).op).symm
   have : IsIso (Pi.lift r) := by

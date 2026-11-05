@@ -76,7 +76,7 @@ theorem valuationRing_stalk_of_smoothOfRelativeDimension_one (f : X ⟶ Spec (.o
     have hfin : Module.finrank (IsLocalRing.ResidueField (X.presheaf.stalk x))
         (IsLocalRing.CotangentSpace (X.presheaf.stalk x)) = 1 := by omega
     have : IsDiscreteValuationRing (X.presheaf.stalk x) :=
-      ((IsDiscreteValuationRing.TFAE _ hF).out 0 5).mpr hfin
+      ((IsDiscreteValuationRing.TFAE _ hF).out 1 6).mpr hfin
     infer_instance
 
 /-- **Localizations of affine coordinate rings of a smooth curve are valuation rings.** -/

@@ -72,7 +72,7 @@ instance isIso_unitSection (s : Spec (.of K) ⟶ Z) : IsIso (unitSection l s) :=
   · have h' := congrArg (fun f : (adicConstantSheaf l (Spec (.of K))).obj.obj
       (op (Scheme.ProEt.mk (𝟙 _))) ↦ f.down.1 (IsLocalRing.closedPoint K)) h
     simp only [adicConstantSheaf_one_app] at h'
-    exact ULift.ext _ _ (by simpa using h')
+    exact ULift.ext (by simpa using h')
   · refine ⟨ULift.up (f.down.1 (IsLocalRing.closedPoint K)), ?_⟩
     rw [adicConstantSheaf_one_app]
     exact congrArg ULift.up (@PadicAlgCl.locallyFiniteFunctions_eq_algebraMap _ _ _ _

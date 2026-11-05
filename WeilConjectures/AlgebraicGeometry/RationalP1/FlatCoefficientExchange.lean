@@ -325,7 +325,7 @@ theorem transport_scalar_models
   simp only [Category.assoc]
   rw [reassoc_of% hU]
   simp only [Functor.map_comp, Category.assoc,
-    Iso.map_hom_inv_id_assoc, Iso.hom_inv_id_assoc, Iso.map_inv_hom_id_assoc]
+    Iso.hom_inv_id_map_assoc, Iso.hom_inv_id_assoc, Iso.inv_hom_id_map_assoc]
   rw [← reassoc_of% (α.hom.naturality x),
     ← reassoc_of% (α.hom.naturality q.hom), hβ]
 

@@ -128,7 +128,7 @@ lemma bijective_twistSectionPairsCoeff (D : ℕ) :
     · funext i
       change (∑ j : Fin (D + 1), Polynomial.C (a j) * X ^ (j : ℕ)).coeff i = a i
       rw [Polynomial.finsetSum_coeff, Finset.sum_eq_single i (fun j _ hj ↦ by
-        rw [coeff_C_mul_X_pow, if_neg (fun h ↦ hj (Fin.ext h.symm))]) (by simp)]
+        rw [coeff_C_mul_X_pow, ite_eq_right (fun h ↦ hj (Fin.ext h.symm))]) (by simp)]
       simp
 
 /-- The exponent vectors of the monomials of degree `D` in the two variables `x₀, x₁` are

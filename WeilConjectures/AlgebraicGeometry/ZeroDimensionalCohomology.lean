@@ -185,7 +185,7 @@ lemma Scheme.nonempty_hom_pointSmallEtaleElementsOpens (hU : (U : Set X).Subsing
   obtain ⟨σ, hσ, hσv⟩ := Scheme.exists_section_of_etale_of_subsingleton hsep'
     (pullback.snd V.hom U.ι) (pullback.lift v.left s' (by rw [hv, hs']))
   rw [pullback.lift_snd] at hσv
-  refine ⟨CategoryOfElements.homMk _ ⟨V, v⟩
+  refine ⟨Functor.Elements.homMk _ ⟨V, v⟩
     (MorphismProperty.Over.homMk (σ ≫ pullback.fst V.hom U.ι) ?_) ?_⟩
   · change (σ ≫ pullback.fst V.hom U.ι) ≫ V.hom = U.ι
     rw [Category.assoc, pullback.condition, ← Category.assoc, hσ, Category.id_comp]

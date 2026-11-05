@@ -299,8 +299,8 @@ Elements (pointSmallEtale (s ≫ f)).fiber --- base change ---> Elements (pointS
 commutes, on the nose. -/
 lemma pointSmallEtaleElementsBaseChange_comp_π :
     pointSmallEtaleElementsBaseChange f s ⋙
-        CategoryOfElements.π (pointSmallEtale s).fiber =
-      CategoryOfElements.π (pointSmallEtale (s ≫ f)).fiber ⋙ f.Etale :=
+        Functor.Elements.π (pointSmallEtale s).fiber =
+      Functor.Elements.π (pointSmallEtale (s ≫ f)).fiber ⋙ f.Etale :=
   rfl
 
 end BaseChange
@@ -329,7 +329,7 @@ private theorem exists_hom_pointSmallEtaleElementsBaseChange
   have hv : (t ≫ pullback.fst q i) ≫ q = s ≫ i := by
     rw [Category.assoc, pullback.condition, ← Category.assoc, hts]
   refine ⟨⟨Scheme.Etale.mk q, CategoryTheory.Over.homMk (t ≫ pullback.fst q i) hv⟩,
-    ⟨CategoryOfElements.homMk _ _ (MorphismProperty.Over.homMk g hg) ?_⟩⟩
+    ⟨Functor.Elements.homMk (MorphismProperty.Over.homMk g hg) ?_⟩⟩
   -- the marked point of `V ×_X Z` is `t`, since its two components are those of `t`
   have hp : ((pointSmallEtaleFiberEtaleIso i s).inv.app (Scheme.Etale.mk q)
       (CategoryTheory.Over.homMk (t ≫ pullback.fst q i) hv)).left = t := by
@@ -394,7 +394,7 @@ private theorem exists_map_comp_eq_pointSmallEtaleElementsBaseChange
       pullback.fst (Scheme.Etale.mk (V₀.ι ≫ V.hom)).hom i ≫ V₀.ι := by
     simp [Scheme.Hom.Etale, hθ]
   refine ⟨⟨Scheme.Etale.mk (V₀.ι ≫ V.hom), CategoryTheory.Over.homMk v₀ ?_⟩,
-    CategoryOfElements.homMk _ _ θ ?_, ?_⟩
+    Functor.Elements.homMk θ ?_, ?_⟩
   · change v₀ ≫ V₀.ι ≫ V.hom = s ≫ i
     rw [← Category.assoc, hv₀ι]
     exact CategoryTheory.Over.w v

@@ -34,7 +34,7 @@ private theorem square_iso_cancel {C D E : Type*} [Category C] [Category D]
         (T.mapIso β ≪≫ e₁.symm ≪≫ e₂ ≪≫ S.mapIso α.symm).hom =
       e₂.hom ≫ S.map α.inv := by
   simp only [Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom,
-    Iso.map_inv_hom_id_assoc, Iso.hom_inv_id_assoc]
+    Iso.inv_hom_id_map_assoc, Iso.hom_inv_id_assoc]
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Coefficient-forgetting isomorphisms respect a commuting cohomology square.

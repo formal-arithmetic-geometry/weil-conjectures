@@ -240,7 +240,7 @@ theorem isLocallySurjective_gaArtinSchreier :
       ((ofArrows_mem_smallEtaleTopology_iff (fun _ : Unit ↦ g)).2 ?_)
     · rw [Sieve.ofArrows, Sieve.generate_le_iff]
       rintro _ _ ⟨⟩
-      exact ⟨ULift.up ω, ULift.ext _ _ hω⟩
+      exact ⟨ULift.up ω, ULift.ext hω⟩
     · simp only [Set.iUnion_const]
       exact Set.range_eq_univ.mpr hsurj.surj
 
@@ -373,7 +373,7 @@ lemma imageSieve_zmodToGaPresheaf_mem {U : X.Etale} (x : X.gaPresheaf.obj (op U)
     ((ofArrows_mem_smallEtaleTopology_iff g).2 ?_)
   · rw [Sieve.ofArrows, Sieve.generate_le_iff]
     rintro _ _ ⟨r⟩
-    refine ⟨ULift.up r, ULift.ext _ _ ?_⟩
+    refine ⟨ULift.up r, ULift.ext ?_⟩
     refine (X.zmodToGaPresheaf_app_apply p hp _ r).trans ?_
     change ((D r).ι ≫ U.hom).appTop (zmodRingHomOfNatCastEqZero p hp r) = (D r).ι.appTop u
     have h0 : (D r).ι.appTop (y r * (u - ρ r)) = 0 := by

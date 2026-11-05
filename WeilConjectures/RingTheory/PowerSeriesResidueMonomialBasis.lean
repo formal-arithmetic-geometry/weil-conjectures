@@ -71,9 +71,9 @@ private theorem monomial_coeff (p : ℕ) (k : Type u) [Field k] (n m : ℕ)
     simp [MvPowerSeries.coeff_add_mul_monomial]
   · rw [ite_eq_right heq, MvPolynomial.coeff_mul_monomial']
     by_cases hgl : h' ≤ g + h
-    · rw [if_pos hgl, MvPowerSeries.coeff_mul_monomial]
+    · rw [ite_eq_left hgl, MvPowerSeries.coeff_mul_monomial]
       by_cases hel : e' ≤ a + e
-      · rw [if_pos hel]
+      · rw [ite_eq_left hel]
         by_contra hn
         have hn' := left_ne_zero_of_mul hn
         obtain ⟨had, hgd⟩ := hc _ _ hn'
@@ -341,7 +341,7 @@ private theorem powerSeriesResidueCoefficientRecovery
     by_cases h : r = q
     · simp [h]
     · have hh : ¬ (r.1 = q.1 ∧ r.2 = q.2) := fun hh ↦ h (Prod.ext hh.1 hh.2)
-      simp only [if_neg h]
+      simp only [ite_eq_right h]
       split_ifs <;> simp_all
   simp_rw [hi]
   simp

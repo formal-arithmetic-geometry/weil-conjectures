@@ -808,7 +808,7 @@ private theorem derivedUnitCompatibility
       Gtw.mapDerivedCategory.map (Jtw.mapDerivedCategoryFactors.inv.app M)) ≫
       Gtw.mapDerivedCategory.map dJ ≫ dG = _
     simp only [dJ, dG, Category.assoc, ← Iso.app_inv, ← Iso.app_hom,
-      Iso.map_inv_hom_id_assoc, Iso.inv_hom_id, Category.comp_id]
+      Iso.inv_hom_id_map_assoc, Iso.inv_hom_id, Category.comp_id]
   calc
     _ = (restrictionUnitDerivedAdjunction.{a, b, c, d, wA, wB} adj).unit.app
           (LA.obj (DerivedCategory.Q.obj M)) ≫
@@ -864,7 +864,7 @@ private theorem derivedUnitCompatibility
           Gc.map (kappaJ M).hom ≫ (kappaG (Jt.obj M)).hom) := by
       rw [hloc]
       simp only [Category.assoc, ← Iso.app_inv, ← Iso.app_hom,
-        Iso.map_inv_hom_id_assoc]
+        Iso.inv_hom_id_map_assoc]
       simp only [Iso.app_hom]
       rw [G.mapDerivedCategoryFactors_hom_naturality_assoc]
       dsimp only [Jc, Gc]

@@ -173,12 +173,12 @@ private def freeSectionEquiv (I : Type u) [Fintype I] [DecidableEq I] (U : X.Ope
     rw [map_sum, Finset.sum_eq_single j _ (by simp)]
     · have h := congrArg (fun f ↦ f.val.app (op U) (c j))
         (Scheme.Modules.ιFree_freeπ (X := X) j j)
-      rw [if_pos rfl] at h
+      rw [ite_eq_left rfl] at h
       exact h
     · intro i _ hij
       have h := congrArg (fun f ↦ f.val.app (op U) (c i))
         (Scheme.Modules.ιFree_freeπ (X := X) i j)
-      rw [if_neg hij] at h
+      rw [ite_eq_right hij] at h
       exact h
 
 set_option backward.isDefEq.respectTransparency.types false in

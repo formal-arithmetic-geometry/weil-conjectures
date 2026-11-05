@@ -208,8 +208,8 @@ theorem Hom.X_mul_derivative_zetaSeries :
     | 0 => simp
     | m + 1 =>
       rw [PowerSeries.coeff_succ_X_mul, PowerSeries.coeff_derivative,
-        PowerSeries.coeff_mk, PowerSeries.coeff_mk, if_neg m.succ_ne_zero,
-        if_neg m.succ_ne_zero]
+        PowerSeries.coeff_mk, PowerSeries.coeff_mk, ite_eq_right m.succ_ne_zero,
+        ite_eq_right m.succ_ne_zero]
       have hm : ((m : ℚ) + 1) ≠ 0 := by positivity
       push_cast
       rw [div_mul_cancel₀ _ hm]

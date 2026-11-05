@@ -113,7 +113,7 @@ lemma substHom_linearForm (w : Fin M → B) (i : Fin M) : substHom w i (linearFo
   rw [linearForm]
   simp only [map_sum, map_mul, hX, hC]
   rw [Finset.sum_congr rfl fun j _ ↦ h j, Finset.sum_sub_distrib, Finset.sum_ite_eq',
-    if_pos (Finset.mem_univ _), IsLocalization.Away.mul_invSelf, map_one, one_mul, hF', sub_self]
+    ite_eq_left (Finset.mem_univ _), IsLocalization.Away.mul_invSelf, map_one, one_mul, hF', sub_self]
 
 /-- After inverting `wᵢ`, the universal member embeds into a polynomial ring over `B[1/wᵢ]`. -/
 lemma exists_injective_away (w : Fin M → B) (i : Fin M) :

@@ -173,7 +173,7 @@ theorem eq_zero_of_isHomogeneous_of_aeval_mem_pow_succ [_root_.Finite ι] {r : �
           ∑ i, aeval x (pderiv i f) * (D j (x i) - algebraMap k A (ε (D j (x i)))) := by
         rw [← Finset.sum_sub_distrib]
         simp_rw [mul_sub, sub_sub_cancel, hD, apply_ite (algebraMap k A), map_one, map_zero,
-          mul_ite, mul_one, mul_zero, Finset.sum_ite_eq', Finset.mem_univ, if_true]
+          mul_ite, mul_one, mul_zero, Finset.sum_ite_eq', Finset.mem_univ, ite_true]
       rw [h3]
       exact sub_mem h1 h2
     have h := hf.sum_X_mul_pderiv
@@ -201,8 +201,8 @@ theorem algebraicIndependent_mk_iInf_pow_ker [_root_.Finite ι] :
         refine aeval_mem_pow_of_homogeneousComponent_eq_zero hx fun m hm ↦ ?_
         rw [map_sub, homogeneousComponent_of_mem (homogeneousComponent_mem n p)]
         rcases (Nat.lt_succ_iff.1 hm).lt_or_eq with hm | rfl
-        · rw [ih m hm, if_neg hm.ne, sub_zero]
-        · rw [if_pos rfl, sub_self]
+        · rw [ih m hm, ite_eq_right hm.ne, sub_zero]
+        · rw [ite_eq_left rfl, sub_self]
       have h2 := sub_mem (Submodule.mem_iInf _ |>.1 hp (n + 1)) h1
       rwa [map_sub, sub_sub_cancel] at h2
   rw [← sum_homogeneousComponent p]
@@ -422,7 +422,7 @@ theorem mem_iInf_pow_ker_of_forall_exists_derivation [IsNoetherianRing A] {W : S
             ∑ i, aeval x (pderiv i f) * (D j (x i) - algebraMap k A (ε (D j (x i)))) := by
           rw [← Finset.sum_sub_distrib]
           simp_rw [mul_sub, sub_sub_cancel, hDx, apply_ite (algebraMap k A), map_one, map_zero,
-            mul_ite, mul_one, mul_zero, Finset.sum_ite_eq', Finset.mem_univ, if_true]
+            mul_ite, mul_one, mul_zero, Finset.sum_ite_eq', Finset.mem_univ, ite_true]
         rw [h3]
         exact sub_mem h1 h2
       have h := hf.sum_X_mul_pderiv

@@ -206,7 +206,7 @@ noncomputable def Etale.freeSheafObjIsoOfIsTerminal {X : Scheme.{u}} {T : X.Etal
     (Equiv.toIso
       { toFun := fun _ ↦ PUnit.unit
         invFun := fun _ ↦ ULift.up (hT.from V.unop)
-        left_inv := fun x ↦ ULift.ext _ _ (hT.hom_ext _ _)
+        left_inv := fun x ↦ ULift.ext (hT.hom_ext _ _)
         right_inv := fun _ ↦ rfl })) (fun f ↦ by
     dsimp
     rw [Category.comp_id, ← Functor.map_comp]

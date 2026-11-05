@@ -27,7 +27,7 @@ private noncomputable def restrictGerm {S T : Scheme.{u}} (e : T ⟶ S)
     (H : Sheaf T.smallEtaleTopology (Type (u + 1)))
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ S)
     (t : {t : Spec (.of Ω) ⟶ T // t ≫ e = x}) :=
-  colimit.pre ((CategoryOfElements.π (Scheme.pointSmallEtale t.1).fiber).op ⋙ H.obj)
+  colimit.pre ((Functor.Elements.π (Scheme.pointSmallEtale t.1).fiber).op ⋙ H.obj)
     (Etale.baseChangeNbhd e x t).op
 
 private theorem restrictGerm_apply {S T : Scheme.{u}} (e : T ⟶ S)
@@ -43,7 +43,7 @@ private theorem restrictGerm_apply {S T : Scheme.{u}} (e : T ⟶ S)
     (Scheme.pointSmallEtale t.1).toPresheafFiber ((MorphismProperty.Over.pullback @Etale ⊤ e).obj U)
       ((Etale.baseChangeNbhd e x t).obj ⟨U, z⟩).2 H.obj s :=
   ConcreteCategory.congr_hom (colimit.ι_pre
-    ((CategoryOfElements.π (Scheme.pointSmallEtale t.1).fiber).op ⋙ H.obj)
+    ((Functor.Elements.π (Scheme.pointSmallEtale t.1).fiber).op ⋙ H.obj)
     (Etale.baseChangeNbhd e x t).op (op ⟨U, z⟩)) s
 
 private noncomputable def unitGerm {S T : Scheme.{u}} (e : T ⟶ S)
@@ -123,7 +123,7 @@ private theorem etaleSetDescentComparison_coordinates
       (Scheme.pointSmallEtale x).sheafFiber.obj G)
     (hc : Function.Bijective c)
     (hdiag : ∀ a, c ((colimit.pre
-      ((CategoryOfElements.π (Scheme.pointSmallEtale t.1).fiber).op ⋙ ((Scheme.etaleSetPullback
+      ((Functor.Elements.π (Scheme.pointSmallEtale t.1).fiber).op ⋙ ((Scheme.etaleSetPullback
         f).obj G).obj)
       (Etale.baseChangeNbhd f x t).op)
       ((Scheme.pointSmallEtale x).sheafFiber.map
@@ -134,7 +134,7 @@ private theorem etaleSetDescentComparison_coordinates
       (Scheme.pointSmallEtale x).sheafFiber.obj G)
     (hd : Function.Bijective d)
     (hddiag : ∀ a, d ((colimit.pre
-      ((CategoryOfElements.π (Scheme.pointSmallEtale w.1).fiber).op ⋙ ((Scheme.etaleSetPullback
+      ((Functor.Elements.π (Scheme.pointSmallEtale w.1).fiber).op ⋙ ((Scheme.etaleSetPullback
         k).obj G).obj)
       (Etale.baseChangeNbhd k x w).op)
       ((Scheme.pointSmallEtale x).sheafFiber.map
@@ -273,7 +273,7 @@ private theorem descent_coordinate_at_lift
         (Scheme.pointSmallEtale x).sheafFiber.obj G,
       Function.Bijective c ∧ ∀ a : (Scheme.pointSmallEtale x).sheafFiber.obj G,
         c ((colimit.pre
-          ((CategoryOfElements.π (Scheme.pointSmallEtale t.1).fiber).op ⋙
+          ((Functor.Elements.π (Scheme.pointSmallEtale t.1).fiber).op ⋙
             ((Scheme.etaleSetPullback f).obj G).obj)
           (Etale.baseChangeNbhd f x t).op)
           ((Scheme.pointSmallEtale x).sheafFiber.map
@@ -289,7 +289,7 @@ private theorem descent_coordinate_at_lift
   obtain ⟨U, z, s, rfl⟩ :=
     (Scheme.pointSmallEtale (t ≫ f)).toPresheafFiber_jointly_surjective (P := G.obj) a
   change c ((colimit.pre
-    ((CategoryOfElements.π (Scheme.pointSmallEtale t).fiber).op ⋙
+    ((Functor.Elements.π (Scheme.pointSmallEtale t).fiber).op ⋙
       ((Scheme.etaleSetPullback f).obj G).obj)
     (Etale.baseChangeNbhd f (t ≫ f) ⟨t, rfl⟩).op)
       ((Scheme.pointSmallEtale (t ≫ f)).presheafFiber.map
@@ -301,7 +301,7 @@ private theorem descent_coordinate_at_lift
   erw [GrothendieckTopology.Point.toPresheafFiber_naturality_apply]
   have hpre := ConcreteCategory.congr_hom
     (colimit.ι_pre
-      ((CategoryOfElements.π (Scheme.pointSmallEtale t).fiber).op ⋙
+      ((Functor.Elements.π (Scheme.pointSmallEtale t).fiber).op ⋙
         ((Scheme.etaleSetPullback f).obj G).obj)
       (Etale.baseChangeNbhd f (t ≫ f) ⟨t, rfl⟩).op (op ⟨U, z⟩))
     (etaleSetDescentUnit f G U s)
@@ -339,7 +339,7 @@ private theorem coordinates_on_square
         (Scheme.pointSmallEtale x).sheafFiber.obj G)
     (hc : ∀ t, Function.Bijective (c t))
     (hdiag : ∀ t a, c t ((colimit.pre
-          ((CategoryOfElements.π (Scheme.pointSmallEtale t.1).fiber).op ⋙
+          ((Functor.Elements.π (Scheme.pointSmallEtale t.1).fiber).op ⋙
             ((Scheme.etaleSetPullback f).obj G).obj)
           (Etale.baseChangeNbhd f x t).op) ((Scheme.pointSmallEtale x).sheafFiber.map
             ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
@@ -384,7 +384,7 @@ private theorem coordinates_on_commuting_square
         (Scheme.pointSmallEtale x).sheafFiber.obj G)
     (hc : ∀ t, Function.Bijective (c t))
     (hdiag : ∀ t a, c t ((colimit.pre
-          ((CategoryOfElements.π (Scheme.pointSmallEtale t.1).fiber).op ⋙
+          ((Functor.Elements.π (Scheme.pointSmallEtale t.1).fiber).op ⋙
             ((Scheme.etaleSetPullback f).obj G).obj)
           (Etale.baseChangeNbhd f x t).op) ((Scheme.pointSmallEtale x).sheafFiber.map
             ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
@@ -453,7 +453,7 @@ theorem finiteSurjectiveSetDescent_coordinates_constant
         (Scheme.pointSmallEtale x).sheafFiber.obj G)
     (hc : ∀ t, Function.Bijective (c t))
     (hdiag : ∀ t a, c t ((colimit.pre
-          ((CategoryOfElements.π (Scheme.pointSmallEtale t.1).fiber).op ⋙
+          ((Functor.Elements.π (Scheme.pointSmallEtale t.1).fiber).op ⋙
             ((Scheme.etaleSetPullback f).obj G).obj)
           (Etale.baseChangeNbhd f x t).op) ((Scheme.pointSmallEtale x).sheafFiber.map
             ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
@@ -474,7 +474,7 @@ theorem finiteSurjectiveSetDescent_coordinates_constant
     (z : (Scheme.pointSmallEtale x).fiber.obj (Scheme.Etale.mk (𝟙 X))) :
     ∀ t v : {t : Spec (.of Ω) ⟶ X' // t ≫ f = x},
       c t ((colimit.pre
-          ((CategoryOfElements.π (Scheme.pointSmallEtale t.1).fiber).op ⋙
+          ((Functor.Elements.π (Scheme.pointSmallEtale t.1).fiber).op ⋙
             ((Scheme.etaleSetPullback f).obj G).obj)
           (Etale.baseChangeNbhd f x t).op)
         ((Scheme.pointSmallEtale x).toPresheafFiber (Scheme.Etale.mk (𝟙 X)) z
@@ -482,7 +482,7 @@ theorem finiteSurjectiveSetDescent_coordinates_constant
         X.smallEtaleTopology X'.smallEtaleTopology).obj
           ((Scheme.etaleSetPullback f).obj G)).obj s')) =
       c v ((colimit.pre
-          ((CategoryOfElements.π (Scheme.pointSmallEtale v.1).fiber).op ⋙
+          ((Functor.Elements.π (Scheme.pointSmallEtale v.1).fiber).op ⋙
             ((Scheme.etaleSetPullback f).obj G).obj)
           (Etale.baseChangeNbhd f x v).op)
         ((Scheme.pointSmallEtale x).toPresheafFiber (Scheme.Etale.mk (𝟙 X)) z

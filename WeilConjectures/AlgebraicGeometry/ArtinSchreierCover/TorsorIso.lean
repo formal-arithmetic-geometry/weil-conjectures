@@ -108,7 +108,7 @@ theorem isIso_artinSchreier_sigmaDesc (hP : P = X ^ p - X - C f)
   · intro a b hab
     simp only [Function.onFun, hR]
     rw [disjoint_iff, ← Scheme.basicOpen_mul,
-      FiniteField.lagrangeAt_mul_lagrangeAt ψ hd (fun h ↦ hab (ULift.ext _ _ h)),
+      FiniteField.lagrangeAt_mul_lagrangeAt ψ hd (fun h ↦ hab (ULift.ext h)),
       Scheme.basicOpen_zero]
 
 end AlgebraicGeometry

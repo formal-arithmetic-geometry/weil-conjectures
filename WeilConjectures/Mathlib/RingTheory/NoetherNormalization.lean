@@ -78,7 +78,7 @@ theorem ringKrullDim_eq_of_finite_inj_algHom_mvPolynomial {K B : Type*} [Field K
   have : FaithfulSMul (MvPolynomial (Fin d) K) B :=
     (faithfulSMul_iff_algebraMap_injective _ _).mpr hg
   rw [ringKrullDim_eq_of_isIntegral (MvPolynomial (Fin d) K) B,
-    MvPolynomial.ringKrullDim_of_isNoetherianRing, ringKrullDim_eq_zero_of_isField
+    MvPolynomial.ringKrullDim_of_isNoetherianRing_of_finite, ringKrullDim_eq_zero_of_isField
       (Field.toIsField K)]
   simp
 
@@ -451,7 +451,7 @@ theorem ringKrullDim_tensorProduct_of_finiteType (k A K : Type*) [Field k] [Comm
     rw [ringKrullDim_eq_of_isIntegral (MvPolynomial (Fin n) k ⊗[k] K) (A ⊗[k] K),
       ringKrullDim_eq_of_ringEquiv ((Algebra.TensorProduct.comm k _ K).toRingEquiv.trans
         (MvPolynomial.algebraTensorAlgEquiv k K).toRingEquiv),
-      MvPolynomial.ringKrullDim_of_isNoetherianRing,
+      MvPolynomial.ringKrullDim_of_isNoetherianRing_of_finite,
       ringKrullDim_eq_zero_of_isField (Field.toIsField K)]
     simp
 

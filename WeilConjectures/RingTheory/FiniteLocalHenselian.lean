@@ -231,7 +231,7 @@ theorem finite_local_henselian
   obtain ⟨e, he, huniq⟩ := product_idempotent_lifting D K hK (Q e₀) (he₀.map Q)
   refine ⟨E.symm e, ⟨he.1.map E.symm, ?_⟩, ?_⟩
   · apply Q.injective
-    simpa only [Q, Ideal.quotientEquiv_mk, AlgEquiv.coe_ringEquiv,
+    simpa only [Q, Ideal.quotientEquiv_mk, AlgEquiv.coe_toRingEquiv,
       E.apply_symm_apply] using he.2
   · intro f hf
     apply E.injective
@@ -239,6 +239,6 @@ theorem finite_local_henselian
     apply huniq
     refine ⟨hf.1.map E, ?_⟩
     have h := congrArg Q hf.2
-    simpa only [Q, Ideal.quotientEquiv_mk, AlgEquiv.coe_ringEquiv] using h
+    simpa only [Q, Ideal.quotientEquiv_mk, AlgEquiv.coe_toRingEquiv] using h
 
 end HenselianLocalRing

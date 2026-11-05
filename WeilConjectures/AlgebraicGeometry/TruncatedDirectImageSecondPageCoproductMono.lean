@@ -107,7 +107,7 @@ private theorem td_sheaf_sum_mono (Y : Scheme.{u}) (I : Type u)
     by_cases e : j = i
     · subst j
       simp [P]
-    · simp only [dif_neg e]
+    · simp only [dite_eq_right e]
       ext V x
       rfl
   have hm : Mono (Sigma.desc (fun i ↦ G.map (u i))) :=

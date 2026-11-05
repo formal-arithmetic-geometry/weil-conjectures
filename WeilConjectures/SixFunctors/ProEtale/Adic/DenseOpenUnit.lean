@@ -96,7 +96,7 @@ theorem isIso_openImmersionRestrictionLowerStarAdjunction_unit_app_adicConstantS
       change T.hom x ∈ Set.range ι ↔ p (T.hom x) ∈ Set.range j
       rw [hι]
       rfl)
-  refine ⟨fun a b h ↦ ULift.ext _ _ (hb.1 (congrArg ULift.down h)), fun b ↦ ?_⟩
+  refine ⟨fun a b h ↦ ULift.ext (hb.1 (congrArg ULift.down h)), fun b ↦ ?_⟩
   obtain ⟨a, ha⟩ := hb.2 b.down
   exact ⟨ULift.up a, congrArg ULift.up ha⟩
 

@@ -159,7 +159,7 @@ private theorem singleSquareOfSummands
     HomologicalComplex.id_f, CategoryTheory.Functor.map_id, NatTrans.id_app, Category.id_comp,
     singleMapHomologicalComplex_hom_app_self]
   erw [← CategoryTheory.Functor.map_comp_assoc]
-  rw [Iso.map_inv_hom_id_assoc]
+  rw [Iso.inv_hom_id_map_assoc]
   rfl
 
 set_option maxHeartbeats 800000 in

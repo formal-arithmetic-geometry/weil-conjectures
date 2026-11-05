@@ -227,7 +227,7 @@ instance epi_biprodDesc_one_padicIntAbSheaf (n : ℕ) :
   erw [← ObjectProperty.FullSubcategory.comp_hom, ← ObjectProperty.FullSubcategory.comp_hom,
     biprod.inl_desc, biprod.inr_desc]
   erw [← ConcreteCategory.comp_apply, ← NatTrans.comp_app, h₁]
-  refine ULift.ext _ _ (ContinuousMap.ext fun y ↦ ?_)
+  refine ULift.ext (ContinuousMap.ext fun y ↦ ?_)
   have h₂ : (((l ^ n : ℕ) : ℤ) • 𝟙 (padicIntAbSheaf X l)).hom.app
       (op (ProEt.ofOpens U ⟨O x, hO x⟩)) (ULift.up (g x)) =
       ((l ^ n : ℕ) : ℤ) • ULift.up (g x) := rfl
@@ -250,7 +250,7 @@ omit [Fact l.Prime] in
 lemma zsmul_id_zmodPowAbSheafDiagram_obj (n : ℕ) :
     ((l ^ n : ℕ) : ℤ) • 𝟙 ((zmodPowAbSheafDiagram X l).obj (op n)) = 0 := by
   ext U s
-  refine ULift.ext _ _ (ContinuousMap.ext fun t ↦ ?_)
+  refine ULift.ext (ContinuousMap.ext fun t ↦ ?_)
   calc _ = ((l ^ n : ℕ) : ℤ) • (ULift.down s t) := rfl
     _ = 0 := by
       rw [zsmul_eq_mul, Int.cast_natCast, ZMod.natCast_self, zero_mul]

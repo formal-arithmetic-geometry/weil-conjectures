@@ -225,7 +225,7 @@ lemma ord_eq_zero_of_mul_eq (W : X.Etale) (z : W.left)
       (pullback.fst W.hom X.fromSpecFunctionField).appTop a)
     (ha : z ∈ W.left.basicOpen a) (hb : z ∈ W.left.basicOpen b) : ord W z g = 0 := by
   by_cases hcoh : coheight (W.hom z) = 1
-  · rw [ord, if_pos hcoh]
+  · rw [ord, ite_eq_left hcoh]
     have := isDiscreteValuationRing_stalk W hcoh
     let := (stalkToLocalGenericRing W z).hom.toAlgebra
     have := isFractionRing_localGenericRing W z
@@ -354,7 +354,7 @@ lemma exists_toLocalGenericRing_eq_of_ord_eq_zero (V : X.Etale) (y : V.left)
     let := (stalkToLocalGenericRing V (V.left.fromSpecStalk y q)).hom.toAlgebra
     have := isFractionRing_localGenericRing V (V.left.fromSpecStalk y q)
     have hord := hf _ hw
-    rw [ord, if_pos hcoh] at hord
+    rw [ord, ite_eq_left hcoh] at hord
     obtain ⟨r, hr⟩ := Ring.exists_eq_algebraMap_of_ordOf_eq_zero
       (Units.map (toLocalGenericRing V (V.left.fromSpecStalk y q)).hom.toMonoidHom f) hord
     let σ := (V.left.presheaf.stalkSpecializes hw).hom
@@ -491,7 +491,7 @@ omit [IsLocallyNoetherian X] in
 lemma ord_fst_appTop_eq_one (W : X.Etale) {z : W.left} (a : Γ(W.left, ⊤))
     (hirr : Irreducible (W.left.presheaf.germ ⊤ z trivial a)) (hcoh : coheight (W.hom z) = 1) :
     ord W z ((pullback.fst W.hom X.fromSpecFunctionField).appTop a) = 1 := by
-  rw [ord, if_pos hcoh, toLocalGenericRing_fst_appTop]
+  rw [ord, ite_eq_left hcoh, toLocalGenericRing_fst_appTop]
   have := isDiscreteValuationRing_stalk W hcoh
   let := (stalkToLocalGenericRing W z).hom.toAlgebra
   have := isFractionRing_localGenericRing W z
@@ -806,7 +806,7 @@ lemma exists_ord_eq_of_forall_ne (V : X.Etale) (y : V.left) {x : X} (hx : coheig
     if hw : w ∈ F then V.left.presheaf.map (homOfLE (hUUw w hw)).op (s w) else 1
   have hr (w : V.left) (hw : w ∈ F) (z : U) :
       V.left.presheaf.germ U z z.2 (r w) = V.left.presheaf.germ (Uw w) z (hUUw w hw z.2) (s w) := by
-    simp only [r, dif_pos hw]
+    simp only [r, dite_eq_left hw]
     exact V.left.presheaf.germ_res_apply _ _ _ _
   -- a point of `U` at which `ρ_w` vanishes is a specialisation of a generalisation `g` of `y`
   -- at which `ρ_w` vanishes
@@ -833,7 +833,7 @@ lemma exists_ord_eq_of_forall_ne (V : X.Etale) (y : V.left) {x : X} (hx : coheig
       have := (hwg.map V.hom.continuous).trans (hgz.map V.hom.continuous)
       rw [(hFmem hw).2, hzη] at this
       exact hxη this
-    · simp only [r, dif_neg hw, map_one]
+    · simp only [r, dite_eq_right hw, map_one]
       exact isUnit_one
   -- the order of `ρ_w` at a point `z` of `U` is `1` if `z = w` and `0` otherwise
   have hord (w : V.left) (hw : w ∈ F) (z : U) :

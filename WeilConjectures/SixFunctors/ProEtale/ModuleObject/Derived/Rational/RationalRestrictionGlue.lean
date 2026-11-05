@@ -101,7 +101,7 @@ private theorem pullbackConstructible {X Y : Scheme.{u}}
   classical
   have hX : CompactSpace X ∧ QuasiSeparatedSpace X := ⟨inferInstance, inferInstance⟩
   have hY : CompactSpace Y ∧ QuasiSeparatedSpace Y := ⟨inferInstance, inferInstance⟩
-  simp only [IsConstantModelConstructible, if_pos hX, if_pos hY] at hM ⊢
+  simp only [IsConstantModelConstructible, ite_eq_left hX, ite_eq_left hY] at hM ⊢
   obtain ⟨S, hS⟩ := hM
   let T := S.pullback g
   refine ⟨T, fun i ↦ ?_⟩
@@ -125,7 +125,7 @@ private theorem constructibleOpenGlue (X : Scheme.{u}) [IsNoetherian X]
   let := Fintype.ofFinite I
   let e : Fin (Fintype.card I) ≃ I := (Fintype.equivFin I).symm
   have hqs : CompactSpace X ∧ QuasiSeparatedSpace X := ⟨inferInstance, inferInstance⟩
-  simp only [IsConstantModelConstructible, if_pos hqs]
+  simp only [IsConstantModelConstructible, ite_eq_left hqs]
   apply ((finiteConstantStratified_zariski_locality Λ X M).2.2 hqs.1 hqs.2).mpr
   intro W hW
   have : TopologicalSpace.NoetherianSpace W.toScheme :=
@@ -154,7 +154,7 @@ private theorem constructibleOpenGlue (X : Scheme.{u}) [IsNoetherian X]
     have h := ObjectProperty.prop_of_iso (IsConstantModelConstructible Λ (V a).toScheme)
       ((pullbackCompObjIso Λ q (U (e a)).ι M).symm ≪≫
         eqToIso (congrArg (fun t ↦ (upperStar Λ t).obj M) hq)) hp
-    simpa only [IsConstantModelConstructible, if_pos hlocalqs] using h
+    simpa only [IsConstantModelConstructible, ite_eq_left hlocalqs] using h
 
 private theorem zeroOpenGlue (X : Scheme.{u}) [IsNoetherian X]
     (I : Type w) [Finite I] (U : I → X.Opens) (hc : iSup U = ⊤)

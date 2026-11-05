@@ -135,7 +135,7 @@ private theorem exists_finite_free_section_germ_equality
   choose W r b hb he using hi
   let v : Φ.fiber.Elements := ⟨V, a⟩
   let j (i : Fin n) : Φ.fiber.Elements := ⟨W i, b i⟩
-  let f (i : Fin n) : j i ⟶ v := CategoryOfElements.homMk _ _ (r i) (hb i)
+  let f (i : Fin n) : j i ⟶ v := Functor.Elements.homMk (r i) (hb i)
   obtain ⟨k, q, g, hg⟩ := IsCofiltered.wideCospan f
   refine ⟨k.1, k.2, q.1, q.2, ?_⟩
   apply ModuleCat.hom_ext

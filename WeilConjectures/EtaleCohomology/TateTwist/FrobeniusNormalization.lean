@@ -86,7 +86,7 @@ lemma constantSheafIntToConstantZMod_comp_constantZModToRootsOfUnitySheaf_pow (�
   apply AddCommGrpCat.hom_ext_uliftInt
   have h₂ : c • (ULift.up ((1 : ℕ) : ZMod n) : ULift.{u + 1} (ZMod n)) =
       ULift.up ((c : ℕ) : ZMod n) :=
-    ULift.ext _ _ (by simp)
+    ULift.ext (by simp)
   rw [AddCommGrpCat.hom_comp, AddCommGrpCat.hom_nsmul, AddMonoidHom.nsmul_apply,
     AddCommGrpCat.hom_comp, AddMonoidHom.comp_apply, AddMonoidHom.comp_apply,
     AddCommGrpCat.uliftIntToZMod_apply_one, ← map_nsmul, h₂, zmodToGmSections_natCast,
@@ -189,7 +189,7 @@ theorem frobeniusOperator_tateWeilDatum_tateClassOfRootOfUnity (h : X ⟶ X) (ζ
   simp only [Functor.map_comp, Functor.map_nsmul, Category.assoc] at hS hE
   rw [frobeniusOperator_apply, hτ, ← cancel_mono (tateTwistObjectOneIso X Λ).hom, Category.assoc,
     Category.assoc, ← hT, tateClassOfRootOfUnity]
-  simp only [Functor.map_comp, Category.assoc, Iso.map_inv_hom_id_assoc, Linear.smul_comp,
+  simp only [Functor.map_comp, Category.assoc, Iso.inv_hom_id_map_assoc, Linear.smul_comp,
     Iso.inv_hom_id, Category.comp_id]
   rw [reassoc_of% hσ, hS]
   simp only [Preadditive.comp_nsmul]
@@ -208,7 +208,7 @@ lemma epi_extendScalarsRootOfUnity (ζ : Γ(X, ⊤)ˣ) (hζ : ζ ^ ringChar Λ =
     rw [AddCommGrpCat.epi_iff_surjective]
     intro x
     obtain ⟨a, ha⟩ := ZMod.castHom_surjective (dvd_zero (ringChar Λ)) x.down
-    exact ⟨ULift.up a, ULift.ext _ _ ha⟩
+    exact ⟨ULift.up a, ULift.ext ha⟩
   dsimp only [extendScalarsRootOfUnity, constantSheafIntToConstantZMod]
   infer_instance
 
@@ -289,7 +289,7 @@ theorem tateFrobeniusScalar_specGeometricFrobenius_mul_natCard :
     simp only [CommRingCat.hom_comp, RingHom.comp_apply, CommRingCat.hom_ofHom] at key
     ext
     simp only [ζ, u₀, Units.coe_map, Units.val_pow_eq_pow_val, IsUnit.unit_spec,
-      RingHom.toMonoidHom_eq_coe, MonoidHom.coe_coe, specGeometricFrobenius_hom]
+      RingHom.toMonoidHom_eq_coe, MonoidHom.coe_ofClass, specGeometricFrobenius_hom]
     rw [← key, ← map_pow]
     exact congrArg _ hγ
   have : IsIso ((Spec (.of (AlgebraicClosure k))).constantZModToRootsOfUnitySheaf _ ζ hζ) :=

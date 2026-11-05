@@ -173,7 +173,7 @@ lemma padicIntegersRegularEndOfAlgebra_mul (x y : PadicAlgCl.integers ℓ E) :
     ← Functor.map_comp]
   congr 1
   ext S a
-  exact ULift.ext _ _ (ContinuousMap.ext fun s ↦
+  exact ULift.ext (ContinuousMap.ext fun s ↦
     (congrArg (· * _) (mul_comm x y)).trans (mul_assoc _ _ _))
 
 /-- The multiplication by a nonzero `x ∈ 𝒪_E` on `𝒪_{E,X}` is a monomorphism. -/
@@ -192,7 +192,7 @@ lemma mono_padicIntegersRegularEndOfAlgebra {x : PadicAlgCl.integers ℓ E} (hx 
     have (S : Profinite.{u}ᵒᵖ) : Mono (((sheafToPresheaf _ _).map h).app S) := by
       rw [AddCommGrpCat.mono_iff_injective]
       intro a b hab
-      exact ULift.ext _ _ (ContinuousMap.ext fun s ↦ mul_left_cancel₀ hx
+      exact ULift.ext (ContinuousMap.ext fun s ↦ mul_left_cancel₀ hx
         (congrArg (fun z : ULift.{u + 1} C(S.unop, PadicAlgCl.integers ℓ E) ↦ z.down s) hab))
     exact NatTrans.mono_of_mono_app _
   refine (Mod.forget _).mono_of_mono_map ?_

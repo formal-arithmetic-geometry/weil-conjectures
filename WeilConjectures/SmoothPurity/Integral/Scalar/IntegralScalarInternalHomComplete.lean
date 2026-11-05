@@ -247,7 +247,7 @@ private theorem scalarSfLocalIff (W : AlgebraicGeometry.Scheme.{u})
       exact ⟨Δ,hl,(sfDerivedComplete_iff_legacy l E W Δ hl K).mp h⟩
     · rintro ⟨Δ',hl',h⟩
       exact (sfDerivedComplete_iff_legacy l E W Δ' hl' K).mpr h
-  exact hi.trans (ht.out 0 1)
+  exact hi.trans (ht.out 1 2)
 
 /-- Ambient internal Hom into a complete object is complete; constructibility of the
 Hom is not assumed. Source: Bhatt--Scholze 3.4.11; Stacks 08JB, 099B

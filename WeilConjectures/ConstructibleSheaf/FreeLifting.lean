@@ -203,7 +203,7 @@ lemma _root_.CategoryTheory.ObjectProperty.flat_colimit {A : Type*} [Category* A
     (ObjectProperty.flat_iff_preservesFiniteLimits (F.obj j)).1 (hF j)
   rw [ObjectProperty.flat_iff_preservesFiniteLimits]
   have : PreservesColimit F (MonoidalCategory.curriedTensor A) :=
-    MonoidalCategory.Limits.preservesCoLimit_curriedTensor _
+    MonoidalCategory.Limits.preservesColimit_curriedTensor _
   have e : tensorLeft (colimit F) ≅ (F ⋙ MonoidalCategory.curriedTensor A).flip ⋙ colim :=
     preservesColimitIso (MonoidalCategory.curriedTensor A) F ≪≫ colimitIsoFlipCompColim _
   have : PreservesFiniteLimits ((F ⋙ MonoidalCategory.curriedTensor A).flip) :=

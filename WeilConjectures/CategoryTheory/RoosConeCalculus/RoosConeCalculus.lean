@@ -574,7 +574,7 @@ private theorem ucoord_χ (N : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (p : ℤ) :
           biprod.snd := by
     obtain rfl := (ComplexShape.up ℤ).next_eq' hq
     dsimp only [HomologicalComplex.homotopyCofiber.sndX]
-    rw [dif_pos hq]
+    rw [dite_eq_left hq]
   simp [ucoord, roosχ, mappingCocone.snd, HomComplex.Cochain.leftShift_v,
     show Int.negOnePow 2 = 1 by rfl, mappingCone.snd, hs p (p + 1) rfl]
 

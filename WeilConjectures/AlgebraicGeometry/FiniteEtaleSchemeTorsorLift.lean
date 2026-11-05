@@ -188,7 +188,7 @@ private lemma eq_of_reprVadd {M : Type (u + 1)} [AddCommGroup M]
         (e.inv.hom.app (op V) ⟨κ⟩)) =
       e.hom.hom.app (op V) (R.vadd (op V) (ContinuousMap.const _ m')
         (e.inv.hom.app (op V) ⟨κ⟩)) :=
-    ULift.ext _ _ h₁
+    ULift.ext h₁
   have h₂' := congr_arg (fun z ↦ e.inv.hom.app (op V) z) h₂
   simp only [sectionIso_hom_inv_apply] at h₂'
   have h₃ := (R.bijective_vadd (op V) (e.inv.hom.app (op V) ⟨κ⟩)).1 h₂'

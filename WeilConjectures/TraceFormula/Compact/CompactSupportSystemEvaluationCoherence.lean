@@ -304,7 +304,7 @@ private theorem evaluated_tower_square
       rw [← reassoc_of% hn]
     _ = i.hom ≫ R.map (j.hom ≫ w) ≫ q.hom.app b' ≫ S.map k'.hom := by rw [hv]
     _ = _ := by
-      simp only [Functor.map_comp, Category.assoc, Iso.map_hom_inv_id_assoc]
+      simp only [Functor.map_comp, Category.assoc, Iso.hom_inv_id_map_assoc]
 
 /-- Coherent evaluation of the actual strict compact-support system before any limit.
 Index `n : ℕ` denotes positive exponent `n+1`. The theorem supplies the canonical

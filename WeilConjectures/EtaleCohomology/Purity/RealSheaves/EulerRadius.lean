@@ -107,7 +107,7 @@ theorem eq_tprod_mul_prod_of_forall_coeff_prod_eq {J : Type*} {f : J → R⟦X�
       (∏ x ∈ s', f x.1) * ∏ x ∈ hT.toFinset, f x + X ^ (n + 1) * (g * ∏ x ∈ hT.toFinset, f x) := by
     rw [← mul_assoc, ← hg]
     ring
-  rw [this, map_add, coeff_X_pow_mul', if_neg (by omega), add_zero]
+  rw [this, map_add, coeff_X_pow_mul', ite_eq_right (by omega), add_zero]
 
 end Split
 

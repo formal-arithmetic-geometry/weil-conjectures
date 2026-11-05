@@ -156,7 +156,7 @@ def finiteOrdinaryLineCoordinate
     (finiteOrdinaryRealization l E n T).obj
         ((finiteOrdinaryComparison (FiniteRing l E n) T).obj
           (Scheme.finiteEtaleTateLine T (l ^ (n + 1)) (FiniteRing l E n)
-            (ULift.ext _ _ (coefficient_annihilates l E n)))) ≅ finiteLine l E T n := c.line
+            (ULift.ext (coefficient_annihilates l E n)))) ≅ finiteLine l E T n := c.line
 
 attribute [local instance 100000] CategoryTheory.Abelian.toPreadditive
 

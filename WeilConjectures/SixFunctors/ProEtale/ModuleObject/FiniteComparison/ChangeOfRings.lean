@@ -111,7 +111,7 @@ other (`finiteCoefficientDerivedEquivalenceComapIso`). -/
 noncomputable def finiteCoefficientDerivedEquivalenceExtendScalarsIso :
     (finiteCoefficientDerivedEquivalence X T).functor ⋙
         derivedExtendScalars (φ := ρ.ulift) (fun y ↦ ⟨⟨(hρ y.down).choose⟩,
-          ULift.ext _ _ (hρ y.down).choose_spec⟩) ha X ≅
+          ULift.ext (hρ y.down).choose_spec⟩) ha X ≅
       (Mod.extendScalars (coefficientMap (Profinite.continuousMapRingObjMap.{u} ρ
           continuous_of_discreteTopology) X)).leftDerivedFunctor ⋙
         (finiteCoefficientDerivedEquivalence X T').functor :=

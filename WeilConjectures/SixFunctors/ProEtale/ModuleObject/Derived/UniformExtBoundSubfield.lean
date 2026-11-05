@@ -47,11 +47,11 @@ noncomputable def continuousMapRingSheafIsoOfRingEquiv (e : T ≃+* T') (he : Co
   inv := continuousMapRingSheafMap e.symm.toRingHom he'
   hom_inv_id := by
     ext S f
-    refine ULift.ext _ _ (ContinuousMap.ext fun x ↦ ?_)
+    refine ULift.ext (ContinuousMap.ext fun x ↦ ?_)
     exact e.symm_apply_apply _
   inv_hom_id := by
     ext S f
-    refine ULift.ext _ _ (ContinuousMap.ext fun x ↦ ?_)
+    refine ULift.ext (ContinuousMap.ext fun x ↦ ?_)
     exact e.apply_symm_apply _
 
 /-- A ring isomorphism `e : T ≃+* T'` which is a homeomorphism induces an isomorphism of ring

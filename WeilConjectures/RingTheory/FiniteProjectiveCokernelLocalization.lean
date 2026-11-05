@@ -138,7 +138,7 @@ theorem finiteProjectiveCokernel_residue_localization
     let q := LinearMap.range (φ.baseChange (Localization.Away f))
     have hsplit := (Function.Exact.split_tfae
       (φ.baseChange (Localization.Away f)).exact_map_mkQ_range hinj
-      (Submodule.mkQ_surjective q)).out 0 1
+      (Submodule.mkQ_surjective q)).out 1 2
     obtain ⟨i, hi⟩ := hsplit.mpr ⟨w, hw⟩
     exact ⟨f, hf, hinj, inferInstance, Module.Projective.of_split i q.mkQ hi⟩
   · intro hφ

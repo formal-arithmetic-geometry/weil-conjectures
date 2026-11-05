@@ -85,7 +85,7 @@ private theorem cofiber_biprod_snd
       biprod.snd = HomologicalComplex.homotopyCofiber.sndX f p := by
   obtain rfl := (ComplexShape.up ℤ).next_eq' h
   dsimp only [HomologicalComplex.homotopyCofiber.sndX]
-  rw [dif_pos h]
+  rw [dite_eq_left h]
 
 @[reassoc]
 private theorem cofiber_biprod_fst

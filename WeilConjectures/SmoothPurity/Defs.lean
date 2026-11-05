@@ -181,7 +181,7 @@ omit [SmoothOfRelativeDimension d f.left] in
 /-- For an open immersion, `smoothOrientationBase` is `openImmersionOrientation`. -/
 lemma smoothOrientationBase_of_isOpenImmersion (j : X ⟶ Y) [IsOpenImmersion j.left] :
     smoothOrientationBase ℓ j 0 = openImmersionOrientation ℓ j := by
-  rw [smoothOrientationBase, dif_pos (⟨rfl, inferInstance⟩ : 0 = 0 ∧ IsOpenImmersion j.left)]
+  rw [smoothOrientationBase, dite_eq_left (⟨rfl, inferInstance⟩ : 0 = 0 ∧ IsOpenImmersion j.left)]
 
 omit [SmoothOfRelativeDimension d f.left] in
 /-- The orientation of `f` attached to a factorization `f = g ≫ ι` through an open immersion `ι`:
@@ -334,7 +334,7 @@ lemma smoothOrientation_eq_smoothOrientationOfFactor {U : Over (Spec (.of k))}
     [SmoothOfRelativeDimension d g.left] (ι : U ⟶ Y) [IsOpenImmersion ι.left] (h : g ≫ ι = f)
     (e : smoothImageFactor f d = ⟨U, g⟩) (hp : IsSmoothImageFactor f d ⟨U, g⟩) :
     smoothOrientation ℓ f d = smoothOrientationOfFactor ℓ f d g ι h := by
-  rw [smoothOrientation, dif_pos (e ▸ hp)]
+  rw [smoothOrientation, dite_eq_left (e ▸ hp)]
   exact (smoothOrientationOfImageFactor_congr ℓ f d e _ hp).trans
     (smoothOrientationOfImageFactor_eq ℓ f d g ι h hp)
 
@@ -384,7 +384,7 @@ the canonical and the non-canonical orientations are (`isIso_smoothOrientationOf
 so are the transports along open immersions. -/
 instance isIso_smoothOrientation [SmoothOfRelativeDimension d f.left] :
     IsIso (smoothOrientation ℓ f d) := by
-  rw [smoothOrientation, dif_pos (isSmoothImageFactor_smoothImageFactor f d)]
+  rw [smoothOrientation, dite_eq_left (isSmoothImageFactor_smoothImageFactor f d)]
   infer_instance
 
 /-- Blueprint `def-pur-smooth-trace` (`sk-def-sp-trace`): the **trace map**

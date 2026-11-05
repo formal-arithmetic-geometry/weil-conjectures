@@ -62,7 +62,7 @@ theorem finiteP1_kummer_chern_realization_of_boundary
     (t : (SpTowerShriek.Ev l E X n).obj ((line l E cX)⟦(2 : ℤ)⟧) ≅
       (finiteOverRealization l E n e).obj
         (geoP1Twist (FiniteRing l E n) (l ^ (n + 1))
-          (ULift.ext _ _ (coefficient_annihilates l E n)) (ProjectiveLine S) 1 2))
+          (ULift.ext (coefficient_annihilates l E n)) (ProjectiveLine S) 1 2))
     (ht : t = finiteP1KummerCoordinate l E n e cX hS c)
     (hb : FiniteP1BoundaryData l E e cX n) :
     (SpTowerShriek.Ev l E X n).map
@@ -73,7 +73,7 @@ theorem finiteP1_kummer_chern_realization_of_boundary
           ((geoP1Comparison (FiniteRing l E n) (ProjectiveLine S)).map
             (geoP1EtaleChern (FiniteRing l E n) (l ^ (n + 1))
               (pow_pos (Fact.out : l.Prime).pos _)
-              (ULift.ext _ _ (coefficient_annihilates l E n)) S
+              (ULift.ext (coefficient_annihilates l E n)) S
               (by simpa only [Nat.cast_pow] using hS.pow (n + 1)))) := by
   subst t
   have hclass : evaluatedChern l E cX

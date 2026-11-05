@@ -740,8 +740,8 @@ Source: blueprint order 1307 (blueprint: lem-pbc-scalar-stage-coherence). -/
       (fun i ↦ pbcRationalScalarExtension l E.val E.val i T dim.out inv.out)
       (pbcSubfieldInclusion_id l Ω E)) ≪≫
         pbcRationalScalarUnit l E.val T dim.out inv.out ≪≫
-          eqToIso (by unfold pbcStageTransition; rw [dif_pos rfl])
-  · exact eqToIso (by simp only [pbcStageTransition, dif_neg e])
+          eqToIso (by unfold pbcStageTransition; rw [dite_eq_left rfl])
+  · exact eqToIso (by simp only [pbcStageTransition, dite_eq_right e])
 
 /-- Balancing, conjugated by the specified tensor units, is the chosen associator.
 Source: blueprint order 1307 (blueprint: lem-pbc-scalar-stage-coherence). -/
@@ -762,7 +762,7 @@ Source: blueprint order 1307 (blueprint: lem-pbc-scalar-stage-coherence). -/
 theorem pbcStageTransition_refl (E : Padic.FiniteCoefficientFields l Ω) :
     pbcStageTransition l Ω T (le_refl E) = 𝟭 _ := by
   unfold pbcStageTransition
-  rw [dif_pos rfl]
+  rw [dite_eq_left rfl]
 
 /-- The normalization at equal fields is the tensor unit.
 Source: blueprint order 1307 (blueprint: lem-pbc-scalar-stage-coherence). -/
@@ -770,7 +770,7 @@ theorem pbcStageNormalization_refl (E : Padic.FiniteCoefficientFields l Ω) :
     pbcStageNormalization l Ω T (le_refl E) =
       pbcRationalScalarUnit l E.val T dim.out inv.out ≪≫
         eqToIso (pbcStageTransition_refl l Ω T E).symm := by
-  rw [pbcStageNormalization, dif_pos rfl]
+  rw [pbcStageNormalization, dite_eq_left rfl]
   exact Iso.refl_trans _
 
 /-- Normalized tensor balancing satisfies both units and the four-field pentagon.

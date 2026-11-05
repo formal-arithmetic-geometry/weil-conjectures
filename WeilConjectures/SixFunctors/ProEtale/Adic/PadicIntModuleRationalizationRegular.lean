@@ -234,7 +234,7 @@ lemma zsmul_id_comp_padicIntScaledHom (n : ℕ) :
   have hl : (l : ℚ_[l]) ≠ 0 := Nat.cast_ne_zero.2 (Fact.out : l.Prime).ne_zero
   rw [Preadditive.zsmul_comp, Category.id_comp]
   ext U x
-  refine ULift.ext _ _ (ContinuousMap.ext fun t ↦ ?_)
+  refine ULift.ext (ContinuousMap.ext fun t ↦ ?_)
   have h : ((l : ℤ) • (padicIntScaledHom l X (n + 1)).hom.app U x).down t =
       (l : ℤ) • ((padicIntScaledHom l X (n + 1)).hom.app U x).down t := rfl
   erw [h]
@@ -267,8 +267,8 @@ noncomputable def padicIntToScaledPadicIntPresheaf (n : ℕ) :
     (padicIntAbSheaf X l).obj ⟶ scaledPadicIntPresheaf l X where
   app _ := AddCommGrpCat.ofHom
     { toFun x := ULift.up ⟨padicIntScaled _ n x.down, n, x.down, rfl⟩
-      map_zero' := ULift.ext _ _ (Subtype.ext (map_zero _))
-      map_add' x y := ULift.ext _ _ (Subtype.ext (map_add _ x.down y.down)) }
+      map_zero' := ULift.ext (Subtype.ext (map_zero _))
+      map_add' x y := ULift.ext (Subtype.ext (map_add _ x.down y.down)) }
   naturality _ _ _ := rfl
 
 /-- The inclusion of `scaledPadicIntPresheaf` into `ℚ_ℓ,X`. -/
@@ -289,7 +289,7 @@ lemma padicIntToScaledPadicIntPresheaf_comp (n : ℕ) :
 /-- The inclusion of `scaledPadicIntPresheaf` into `ℚ_ℓ,X` is injective. -/
 lemma injective_scaledPadicIntPresheafToPadicAbSheaf_app (U : X.ProEtᵒᵖ) :
     Function.Injective ((scaledPadicIntPresheafToPadicAbSheaf l X).app U) := fun _ _ h ↦
-  ULift.ext _ _ (Subtype.ext (congrArg ULift.down h))
+  ULift.ext (Subtype.ext (congrArg ULift.down h))
 
 /-- The inclusion of `scaledPadicIntPresheaf` into `ℚ_ℓ,X` is a monomorphism. -/
 instance : Mono (scaledPadicIntPresheafToPadicAbSheaf l X) := by
@@ -317,8 +317,8 @@ noncomputable def isColimitScaledPadicIntPresheafCocone :
   evaluationJointlyReflectsColimits _ fun _ ↦
     AddCommGrpCat.isColimitOfInjective _
       (fun x ↦ ⟨x.down.2.choose, ULift.up x.down.2.choose_spec.choose,
-        ULift.ext _ _ (Subtype.ext x.down.2.choose_spec.choose_spec.symm)⟩)
-      fun n _ _ h ↦ ULift.ext _ _ (padicIntScaled_injective l n
+        ULift.ext (Subtype.ext x.down.2.choose_spec.choose_spec.symm)⟩)
+      fun n _ _ h ↦ ULift.ext (padicIntScaled_injective l n
         (congrArg (fun z ↦ z.down.1) h))
 
 /-- The inclusion of `scaledPadicIntPresheaf` into `ℚ_ℓ,X` is locally injective. -/
@@ -522,7 +522,7 @@ lemma injective_padicDirectSumPresheafToAdicAbSheaf_app (U : X.ProEtᵒᵖ) :
     rfl
   refine DirectSum.ext fun b ↦ ?_
   by_cases hb : b ∈ x.support
-  · exact ULift.ext _ _ (ContinuousMap.ext fun t ↦ key t b hb)
+  · exact ULift.ext (ContinuousMap.ext fun t ↦ key t b hb)
   · simpa using hb
 
 /-- `(q_b) ↦ ∑ b q_b` is locally injective. -/
@@ -553,7 +553,7 @@ instance isLocallySurjective_padicDirectSumPresheafToAdicAbSheaf :
           exact ⟨_, hWN x y.2, rfl⟩))
     obtain ⟨S, q, hq⟩ := exists_finset_sum_padicAlgClBasisIndex l g hg
     refine ⟨∑ b ∈ S, DirectSum.of (fun _ ↦ (padicAbSheaf l X).obj.obj _) b (ULift.up (q b)), ?_⟩
-    refine ULift.ext _ _ (Subtype.ext (ContinuousMap.ext fun t ↦ ?_))
+    refine ULift.ext (Subtype.ext (ContinuousMap.ext fun t ↦ ?_))
     refine Eq.trans ?_ (hq t).symm
     let ev : (adicAbSheaf l X).obj.obj (op (ProEt.ofOpens U ⟨W x, hWo x⟩)) →+ PadicAlgCl l :=
       { toFun y := y.down.1 t
@@ -590,7 +590,7 @@ lemma rationalizationComparisonι_regular_comp (b : padicAlgClBasisIndex l) (n :
   rw [rationalizationComparisonι, Category.assoc, adicScalarMul_naturality, ← Category.assoc,
     adicSheafExtendScalarsUnitAb_regular_comp, padicIntSheafToAdicConstantSheaf_eq]
   ext U x
-  refine ULift.ext _ _ (Subtype.ext (ContinuousMap.ext fun t ↦ ?_))
+  refine ULift.ext (Subtype.ext (ContinuousMap.ext fun t ↦ ?_))
   calc _ = ((b : PadicAlgCl l) / (l : PadicAlgCl l) ^ n) *
         algebraMap ℚ_[l] (PadicAlgCl l) (x.down t : ℚ_[l]) := rfl
     _ = (b : PadicAlgCl l) *

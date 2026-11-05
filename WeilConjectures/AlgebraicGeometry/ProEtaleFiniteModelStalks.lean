@@ -88,7 +88,7 @@ private noncomputable def geometricStalkIsoFiber {X : Scheme.{u}} {Ω : Type u}
     (F : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ)) :
     proEtaleGeometricFixedModuleStalk x Λ F ≅ (geometricPoint x).sheafFiber.obj F :=
   Functor.Final.colimitIso (geometricElementsEquiv x).functor.op
-    ((CategoryOfElements.π (geometricPoint x).fiber).op ⋙ F.obj)
+    ((Functor.Elements.π (geometricPoint x).fiber).op ⋙ F.obj)
 
 set_option backward.isDefEq.respectTransparency false in
 private noncomputable def sheafFiberOverIso
@@ -100,7 +100,7 @@ private noncomputable def sheafFiberOverIso
   Functor.Final.colimitIso
     ((FunctorToTypes.fromOverFunctorElementsEquivalence Φ.fiber x).functor ⋙
       Over.forget (Φ.fiber.elementsMk U x)).op
-    ((CategoryOfElements.π Φ.fiber).op ⋙ F.obj)
+    ((Functor.Elements.π Φ.fiber).op ⋙ F.obj)
 
 /-- Finite constant models on a pro-etale covering give finite geometric stalks.
 Source: Stacks Project, Tags 099Y and 098K.

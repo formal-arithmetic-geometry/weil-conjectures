@@ -242,14 +242,14 @@ theorem stalkFrobeniusTrace_lowerStar [IsFinite f.left] [Etale f.left] [IsIso σ
   have hR : (∑ᶠ x : {x : FibrePoints f.left y // x.1 ≫ eX.hom.left = σ ≫ x.1},
       stalkFrobeniusTrace ℓ τ eX x.2 F.str.hom) =
       ∑ᶠ x : {x : FibrePoints f.left y // x.1 ≫ eX.hom.left = σ ≫ x.1}, G x.1 :=
-    finsum_congr fun x ↦ by dsimp only [G]; rw [dif_pos x.2]; rfl
+    finsum_congr fun x ↦ by dsimp only [G]; rw [dite_eq_left x.2]; rfl
   rw [hR, finsum_subtype_eq_finsum_cond]
   refine finsum_congr fun x ↦ ?_
   by_cases h : x.1 ≫ eX.hom.left = σ ≫ x.1
-  · rw [finsum_eq_if, if_pos h]
-  · rw [finsum_eq_if, if_neg h]
+  · rw [finsum_eq_if, ite_eq_left h]
+  · rw [finsum_eq_if, ite_eq_right h]
     dsimp only [G]
-    rw [dif_neg h]
+    rw [dite_eq_right h]
 
 
 /-- Reindexing a sum of traces of stalk Frobenii over the fixed points along a family `pt`

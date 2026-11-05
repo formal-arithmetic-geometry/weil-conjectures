@@ -62,7 +62,7 @@ theorem singleFunctorObjIsoQh_pullback_counit
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
     Iso.inv_hom_id_app_assoc, NatIso.cancel_natIso_hom_left]
-  erw [Iso.map_inv_hom_id_assoc]
+  erw [Iso.inv_hom_id_map_assoc]
   simp only [Functor.mapHomotopyCategoryFactors, CategoryTheory.Quotient.lift.isLift_inv]
   erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id]
   simp only [Category.id_comp]

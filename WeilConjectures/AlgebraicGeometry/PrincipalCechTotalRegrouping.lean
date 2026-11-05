@@ -136,7 +136,7 @@ private theorem rowToTerms_retract (p q n : ℤ) (h : p + q = n) :
   simp only [ModuleCat.comp_apply, ModuleCat.id_apply]
   change (affineOpenSections A (principalCechIntersection r f S.val.val)).map
     (eqToHom _) (principalCechRowToTerms r f F p q n h x S.val) = _
-  rw [principalCechRowToTerms_apply, dif_pos S.property]
+  rw [principalCechRowToTerms_apply, dite_eq_left S.property]
   rw [← ModuleCat.comp_apply, ← Functor.map_comp]
   simp
   rfl
@@ -154,7 +154,7 @@ private theorem rowToTerms_retract_ne (p q p' q' n : ℤ)
   simp only [ModuleCat.comp_apply]
   change (affineOpenSections A (principalCechIntersection r f S.val.val)).map
     (eqToHom _) (principalCechRowToTerms r f F p q n h x S.val) = 0
-  rw [principalCechRowToTerms_apply, dif_neg (by have hc := S.property; omega)]
+  rw [principalCechRowToTerms_apply, dite_eq_right (by have hc := S.property; omega)]
   exact map_zero _
 
 set_option backward.isDefEq.respectTransparency false in
@@ -252,7 +252,7 @@ theorem principalCechTotalRegroup_isIso
     rw [Finset.sum_eq_single ((J.val.card : ℤ) - 1)]
     · simp
     · intro p hp hne
-      rw [if_neg (by omega)]
+      rw [ite_eq_right (by omega)]
     · intro hnot
       exact (hnot (Finset.mem_image.mpr ⟨J, Finset.mem_univ _, rfl⟩)).elim
 

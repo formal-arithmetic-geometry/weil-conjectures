@@ -62,7 +62,7 @@ theorem rawCoefficientEquation (sq : ChosenCartesianSquare g' f' f g)
       (iotaT (g' := g') (f' := f') d K.obj K.property).hom = _
   rw [hT', hE]
   simp only [Category.assoc]
-  erw [Iso.map_inv_hom_id_assoc]
+  erw [Iso.inv_hom_id_map_assoc]
   erw [reassoc_of% hL]
   rw [reassoc_of% hV']
   erw [reassoc_of% hS]

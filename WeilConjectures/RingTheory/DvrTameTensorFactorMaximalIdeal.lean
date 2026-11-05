@@ -110,7 +110,7 @@ theorem dvr_tame_tensor_factor_map_maximalIdeal
         (R := B) (A := E) (B := A)) b).symm
   have hinj : Function.Injective alpha := by
     apply (RingHom.injective_iff_ker_eq_bot alpha).mpr
-    apply Ideal.eq_bot_of_comap_eq_bot (R := B)
+    apply Ideal.eq_bot_of_under_eq_bot (R := B)
     rw [RingHom.comap_ker, hcomp]
     apply (RingHom.injective_iff_ker_eq_bot _).mp
     exact beta.injective.comp ((algebraMap (FractionRing B) E).injective.comp

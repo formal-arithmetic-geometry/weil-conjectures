@@ -46,7 +46,7 @@ private theorem lift_idempotent_small
   refine ⟨E e, he.1.map E, ?_⟩
   have h := congrArg Q he.2
   rw [Q.apply_symm_apply] at h
-  simpa only [Q, Ideal.quotientEquiv_mk, AlgEquiv.coe_ringEquiv] using h
+  simpa only [Q, Ideal.quotientEquiv_mk, AlgEquiv.coe_toRingEquiv] using h
 
 private theorem factorization_of_lifting
     {R : Type u} [CommRing R] [IsLocalRing R]

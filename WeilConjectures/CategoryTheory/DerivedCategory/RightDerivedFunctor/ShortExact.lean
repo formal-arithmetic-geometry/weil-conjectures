@@ -296,7 +296,7 @@ lemma rightDerivedδAux_naturality {M N : DerivedCategory C} (R : M.InjectiveMod
     rw [← Functor.map_comp_assoc, ← Functor.map_comp, Iso.hom_inv_id, Functor.map_id,
       Functor.map_id, id_comp]
   rw [hf]
-  simp only [rightDerivedδAux, Functor.map_comp, assoc, Iso.map_hom_inv_id_assoc,
+  simp only [rightDerivedδAux, Functor.map_comp, assoc, Iso.hom_inv_id_map_assoc,
     reassoc_of% h, k]
 
 variable [EnoughInjectives C]

@@ -73,12 +73,12 @@ theorem X_mul_derivative_inv_one_sub_X_pow {d : ℕ} (hd : d ≠ 0) :
     simp only [coeff_mk, coeff_C_mul, coeff_X_pow_mul']
     by_cases hle : d ≤ n
     · have hn : n ≠ 0 := by omega
-      rw [if_pos hle]
+      rw [ite_eq_left hle]
       by_cases hdvd : d ∣ n
-      · rw [if_pos ⟨hdvd, hn⟩, if_pos ((dvd_iff_dvd_sub hle).mp hdvd), mul_one]
-      · rw [if_neg fun hc ↦ hdvd hc.1,
-          if_neg fun hc ↦ hdvd ((dvd_iff_dvd_sub hle).mpr hc), mul_zero]
-    · rw [if_neg hle, mul_zero, if_neg]
+      · rw [ite_eq_left ⟨hdvd, hn⟩, ite_eq_left ((dvd_iff_dvd_sub hle).mp hdvd), mul_one]
+      · rw [ite_eq_right fun hc ↦ hdvd hc.1,
+          ite_eq_right fun hc ↦ hdvd ((dvd_iff_dvd_sub hle).mpr hc), mul_zero]
+    · rw [ite_eq_right hle, mul_zero, ite_eq_right]
       rintro ⟨hdvd, hn⟩
       exact hle (Nat.le_of_dvd (Nat.pos_of_ne_zero hn) hdvd)
   have hmul := one_sub_X_pow_mul_inv hd

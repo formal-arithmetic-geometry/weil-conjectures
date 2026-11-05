@@ -123,7 +123,7 @@ private theorem complete_iff_principal (T : Scheme.{t})
   let : Fact p.Prime := ⟨hprime⟩
   obtain ⟨d, hd, _⟩ := WeilConjectures.PrincipalKoszulStrictReplacement.coefficient_datum l E
   have h := (WeilConjectures.roosIntrinsicCompletenessEquivalence p l (by omega)
-    E T d hd K P eP).out 0 1
+    E T d hd K P eP).out 1 2
   change complete l E T K ↔ WeilConjectures.IntegralPrincipalCone.locallyComplete l E T
     (WeilConjectures.integralCompletionScalarValue l E T) K at h
   exact h.trans (WeilConjectures.IntegralPrincipalCone.localCriterion l E T
@@ -350,6 +350,6 @@ theorem openRestrictionComplete
   let : Fact p.Prime := ⟨hprime⟩
   obtain ⟨d, hd, _⟩ := WeilConjectures.PrincipalKoszulStrictReplacement.coefficient_datum l E
   exact ((WeilConjectures.roosIntrinsicCompletenessEquivalence p l (by omega)
-    E U d hd _ P eP).out 0 4).mp hcomplete
+    E U d hd _ P eP).out 1 5).mp hcomplete
 
 end WeilConjectures.OpenRestrictionCompleteness

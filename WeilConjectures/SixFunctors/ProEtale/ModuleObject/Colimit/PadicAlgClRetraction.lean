@@ -88,9 +88,9 @@ noncomputable def padicAlgClRetraction : padicAlgClRingObj.{u} ℓ ⟶ continuou
   ⟨{ app _ := AddCommGrpCat.ofHom
         { toFun a := ULift.up ⟨fun s ↦ FiniteIntermediateField.linearRetraction E (a.down.1 s),
             FiniteIntermediateField.continuous_linearRetraction_comp E a.down⟩
-          map_zero' := ULift.ext _ _ (ContinuousMap.ext fun _ ↦
+          map_zero' := ULift.ext (ContinuousMap.ext fun _ ↦
             map_zero (FiniteIntermediateField.linearRetraction E))
-          map_add' _ _ := ULift.ext _ _ (ContinuousMap.ext fun _ ↦
+          map_add' _ _ := ULift.ext (ContinuousMap.ext fun _ ↦
             map_add (FiniteIntermediateField.linearRetraction E) _ _) }
      naturality _ _ _ := rfl }⟩
 
@@ -99,7 +99,7 @@ noncomputable def padicAlgClRetraction : padicAlgClRingObj.{u} ℓ ⟶ continuou
 lemma padicSubfieldRingObjToPadicAlgCl_comp_padicAlgClRetraction :
     padicSubfieldRingObjToPadicAlgCl.{u} ℓ E ≫ padicAlgClRetraction ℓ E = 𝟙 _ := by
   ext S a
-  exact ULift.ext _ _ (ContinuousMap.ext fun s ↦
+  exact ULift.ext (ContinuousMap.ext fun s ↦
     FiniteIntermediateField.linearRetraction_algebraMap E (a.down s))
 
 /-- The retraction `ℚ̲̄_ℓ ⟶ E̲` is `E̲`-linear: `ρ(a s) = a ρ(s)`. -/
@@ -117,7 +117,7 @@ lemma padicSubfieldRingObjToPadicAlgCl_whiskerRight_comp_mul_comp_padicAlgClRetr
     ← Functor.LaxMonoidal.μ_natural_right_assoc, h₂]
   ext S : 2
   refine AddCommGrpCat.hom_ext_toIntLinearMap (TensorProduct.ext' fun a b ↦ ?_)
-  exact ULift.ext _ _ (ContinuousMap.ext fun s ↦
+  exact ULift.ext (ContinuousMap.ext fun s ↦
     (FiniteIntermediateField.linearRetraction E).map_smul (a.down s) (b.down.1 s))
 
 /-- The retraction `ℚ̲̄_ℓ ⟶ E̲` is `E̲`-linear on the right: `ρ(s a) = ρ(s) a`. -/
@@ -135,7 +135,7 @@ lemma whiskerLeft_padicSubfieldRingObjToPadicAlgCl_comp_mul_comp_padicAlgClRetra
     ← Functor.LaxMonoidal.μ_natural_left_assoc, h₂]
   ext S : 2
   refine AddCommGrpCat.hom_ext_toIntLinearMap (TensorProduct.ext' fun a b ↦ ?_)
-  exact ULift.ext _ _ (ContinuousMap.ext fun s ↦
+  exact ULift.ext (ContinuousMap.ext fun s ↦
     (congrArg (FiniteIntermediateField.linearRetraction E)
       (mul_comm (a.down.1 s) (b.down s : PadicAlgCl ℓ))).trans
       (((FiniteIntermediateField.linearRetraction E).map_smul (b.down s) (a.down.1 s)).trans

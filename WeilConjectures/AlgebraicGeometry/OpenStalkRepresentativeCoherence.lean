@@ -306,7 +306,7 @@ theorem openStalk_representative_coherence
   let F := forget₂ (ModuleCat.{u} (X.presheaf.stalk z.val)) AddCommGrpCat.{u}
   apply (cancel_mono (F.map (comparisonStalkHomologyIso X z.val N i).hom)).mp
   simp only [Category.assoc]
-  erw [Iso.map_inv_hom_id]
+  erw [Iso.inv_hom_id_map]
   simp only [Category.comp_id]
   simp only [openDerivedAdditiveStalkIso, comparisonStalkCohomology,
     comparisonDerivedStalk, comparisonStalkHomologyIso, Iso.trans_hom, Iso.trans_inv,

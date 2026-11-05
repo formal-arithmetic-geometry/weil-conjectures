@@ -697,8 +697,8 @@ theorem linearIndependent_awayMonomial : LinearIndependent R (awayMonomial R s) 
     simpa using h3)
   have := congrArg (fun p : MvPolynomial n R ↦ AddMonoidAlgebra.coeff p (u e₀)) hk'
   rw [coeff_sum, AddMonoidAlgebra.coeff_zero, Finset.sum_eq_single e₀ (fun e he hne ↦ by
-    rw [coeff_monomial, if_neg fun h ↦ hne (hu e he h)]) (fun h ↦ (h he₀).elim),
-    coeff_monomial, if_pos rfl] at this
+    rw [coeff_monomial, ite_eq_right fun h ↦ hne (hu e he h)]) (fun h ↦ (h he₀).elim),
+    coeff_monomial, ite_eq_left rfl] at this
   exact this
 
 /-- **The Laurent monomials `xᵉ` span** the degree-zero part of the localization of

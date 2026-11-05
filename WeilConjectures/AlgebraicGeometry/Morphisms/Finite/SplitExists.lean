@@ -79,7 +79,7 @@ def split : SplitNbhd f y where
     change e (ch.basePoint f hY₀ hy t) ∉ RingHom.ker _
     rw [RingHom.mem_ker]
     change (ch.basePoint f hY₀ hy t).tensor hφ' (e (ch.basePoint f hY₀ hy t)) ≠ 0
-    rw [hval, if_pos rfl]
+    rw [hval, ite_eq_left rfl]
     exact one_ne_zero
 
 @[simp]

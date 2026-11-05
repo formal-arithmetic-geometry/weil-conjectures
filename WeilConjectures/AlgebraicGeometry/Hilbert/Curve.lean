@@ -936,7 +936,7 @@ theorem exists_transcendental_mem_range_stalk {X : Scheme.{u}} [X.Over (Spec (.o
     intro h0
     by_cases hint : (ψ x).IsIntegralElem (r x)
     · have hgx : Polynomial.eval₂ (ψ x) (r x) (g x) = 0 := by
-        simp only [g, dif_pos hint]
+        simp only [g, dite_eq_left hint]
         exact hint.choose_spec.2
       have : Polynomial.eval₂ (ψ x) (r x) (∏ y ∈ t, g y) = 0 := by
         rw [Polynomial.eval₂_finsetProd]
@@ -964,7 +964,7 @@ theorem exists_transcendental_mem_range_stalk {X : Scheme.{u}} [X.Over (Spec (.o
   by_cases hint : IsLocalization.IsInteger (X.presheaf.stalk x) a
   · -- `a` is regular at `x`, so `P(a)` is a unit there
     have ha' : algebraMap _ K hint.choose = a := hint.choose_spec
-    have hr : r x = IsLocalRing.residue _ hint.choose := by simp [r, dif_pos hint]
+    have hr : r x = IsLocalRing.residue _ hint.choose := by simp [r, dite_eq_left hint]
     have hv : IsUnit (Polynomial.eval₂ (ι x) hint.choose P) := by
       rw [← IsLocalRing.residue_ne_zero_iff_isUnit, Polynomial.hom_eval₂, ← hr]
       exact hPr x hx

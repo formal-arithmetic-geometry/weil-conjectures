@@ -375,7 +375,7 @@ lemma isFlasque_skyscraper (x : X) (I : Type u) [AddCommGroup I] [Module (X.pres
       fun _ ↦ if h : x ∈ U'.unop then t ⟨h⟩ else 0, ?_⟩
     refine SkyscraperSections.ext fun h ↦ ?_
     change (if h' : x ∈ U'.unop then t ⟨h'⟩ else 0) = _
-    rw [dif_pos h]
+    rw [dite_eq_left h]
 
 section ResidueSequence
 

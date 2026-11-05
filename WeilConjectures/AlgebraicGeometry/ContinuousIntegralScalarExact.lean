@@ -81,7 +81,7 @@ noncomputable def isColimitIntegralCoeffSmulSequenceCocone :
     have hloc := continuousIntegralFunctions_isLocalization ℓ E S.unop
     obtain ⟨n, a, ha⟩ := IsLocalization.Away.surj
       (ContinuousMap.const S.unop (ℓ : continuousIntegers ℓ E)) x
-    refine ⟨n, ULift.up a, ULift.ext _ _ (ContinuousMap.ext fun s ↦ ?_)⟩
+    refine ⟨n, ULift.up a, ULift.ext (ContinuousMap.ext fun s ↦ ?_)⟩
     have ha' := congrArg (fun f : C(S.unop, E) ↦ f s) ha
     change x s * (ℓ : E) ^ n = (a s : E) at ha'
     have key : (ℓ : E)⁻¹ ^ n * (a s : E) = x s := by

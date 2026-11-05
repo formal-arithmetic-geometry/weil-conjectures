@@ -414,7 +414,7 @@ theorem pbcQbarScalarCompatible :
   by_cases hEF : E = F
   · subst F
     rw [show pbcScalarExtension l Qbar T hDim.out hInv.out h = 𝟭 _ from
-      dif_pos (Eq.refl E)]
+      dite_eq_left (Eq.refl E)]
     rfl
   · let B := pbcRationalScalarExtension l (pbcFiniteField.{u} l Qbar E)
       (pbcFiniteField.{u} l Qbar F) (pbcFiniteFieldInclusion l Qbar h)
@@ -437,7 +437,7 @@ theorem pbcQbarScalarCompatible :
       simp only [map_one]
       rfl
     have hB : pbcScalarExtension l Qbar T hDim.out hInv.out h = B := by
-      simp only [pbcScalarExtension, dif_neg hEF]
+      simp only [pbcScalarExtension, dite_eq_right hEF]
       exact (pbcRationalScalarExtension_exists l Qbar T hDim.out hInv.out h).unique
         (pbcRationalScalarExtension_exists l Qbar T hDim.out hInv.out h).exists.choose_spec hb
     rw [hB]

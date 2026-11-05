@@ -174,7 +174,7 @@ theorem completedIntegralScalar_regular
           (ULift.up (Ideal.Quotient.mk _ π))) ^ m := by
       rw [← map_pow]
       exact congrArg ((toSheafify J ((Functor.const T.ProEtᵒᵖ).obj (B k))).app U)
-        (ULift.ext _ _ (map_pow (Ideal.Quotient.mk _) π m))
+        (ULift.ext (map_pow (Ideal.Quotient.mk _) π m))
     rw [hp]
     exact hh
   have he := family_regular π (uniformizer_ne_zero l E) m F (xx x) (xx y) (hx x) (hx y) hm

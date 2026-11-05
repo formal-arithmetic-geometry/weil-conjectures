@@ -76,7 +76,7 @@ theorem commonStageNormalizedComposition
   have eH : aH.hom = (u.app (H.obj K)).hom ≫ H.map (s.app K).inv := by
     rw [← hH]
     simp only [Iso.trans_hom, Functor.mapIso_hom, Category.assoc,
-      Iso.map_hom_inv_id, Category.comp_id]
+      Iso.hom_inv_id_map, Category.comp_id]
   have eG : aG.inv = G.map (s.app K).hom ≫ (t.app (G.obj K)).inv := by
     rw [← hG]
     dsimp only [Iso.trans_inv, Functor.mapIso_inv]
@@ -88,7 +88,7 @@ theorem commonStageNormalizedComposition
     rw [← F.map_comp_assoc, Iso.hom_inv_id, F.map_id, Category.id_comp]
   dsimp only [Functor.id_obj] at *
   rw [eH, eG, eF]
-  simp only [Functor.map_comp, Category.assoc, Iso.map_inv_hom_id_assoc]
+  simp only [Functor.map_comp, Category.assoc, Iso.inv_hom_id_map_assoc]
   have hn := α.hom.naturality (s.app K).inv
   dsimp only [Functor.comp_map, Functor.id_obj] at hn
   rw [← Category.assoc (H.map _), hn]

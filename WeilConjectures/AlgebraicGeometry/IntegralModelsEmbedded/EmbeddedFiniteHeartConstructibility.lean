@@ -151,7 +151,7 @@ theorem finiteHeartConstructibility
       IsConstructible (ULift.{u + 1} B) P := by
     have h := FiniteDiscreteOrdinary.constructible_comparison B X e N
     rw [FiniteDiscreteOrdinary.ordinaryConstructible,
-      if_pos ⟨inferInstance, inferInstance⟩] at h
+      ite_eq_left ⟨inferInstance, inferInstance⟩] at h
     refine h.trans ?_
     apply exists_congr
     intro S

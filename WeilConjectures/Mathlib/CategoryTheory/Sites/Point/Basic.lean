@@ -78,7 +78,7 @@ noncomputable def uliftPresheafFiberIso :
     Functor.initial_of_adjunction (Functor.Elements.uliftEquivalence.{w'} Φ.fiber).toAdjunction
   have : HasColimitsOfShape (Φ.fiber ⋙ uliftFunctor.{w', w}).Elementsᵒᵖ A :=
     inferInstanceAs (HasColimitsOfShape (Φ.ulift.{w'}).fiber.Elementsᵒᵖ A)
-  Functor.isoWhiskerLeft ((Functor.whiskeringLeft _ _ A).obj (CategoryOfElements.π Φ.fiber).op)
+  Functor.isoWhiskerLeft ((Functor.whiskeringLeft _ _ A).obj (Functor.Elements.π Φ.fiber).op)
     (Functor.Final.colimIso (Functor.Elements.uliftEquivalence.{w'} Φ.fiber).functor.op)
 
 /-- Taking the fibre of an `A`-valued sheaf at a point of a site does not depend on the

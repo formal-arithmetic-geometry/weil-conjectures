@@ -170,7 +170,7 @@ theorem milnor_boundary_factorization [HasDerivedCategory.{v} AddCommGrpCat.{u}]
   refine ⟨a, ?_, ?_⟩
   · intro K _ L p δ hT
     dsimp only [a]
-    rw [dif_pos hT]
+    rw [dite_eq_left hT]
     let T := Pretriangulated.Triangle.mk p
       (towerTransitionEndomorphism (fun n => K.map (homOfLE (Nat.le_succ n)).op)) δ
     let H := DerivedCategory.homologyFunctor AddCommGrpCat.{u} (i - 1)
@@ -226,7 +226,7 @@ theorem milnor_boundary_factorization [HasDerivedCategory.{v} AddCommGrpCat.{u}]
     exact ShortComplex.exact_of_iso e hex
   · intro K K' _ _ L L' p p' δ δ' hT hT' φ g hp hδ
     dsimp only [a]
-    rw [dif_pos hT, dif_pos hT']
+    rw [dite_eq_left hT, dite_eq_left hT']
     let H := DerivedCategory.homologyFunctor AddCommGrpCat.{u} (i - 1)
     let T := Pretriangulated.Triangle.mk p
       (towerTransitionEndomorphism (fun n => K.map (homOfLE (Nat.le_succ n)).op)) δ

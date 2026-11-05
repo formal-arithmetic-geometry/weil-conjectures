@@ -512,13 +512,13 @@ theorem finrank_eq_pow_mul_finrank_frobenius :
         rintro a (ha | ha)
         · exact Subalgebra.derivation_apply_eq_zero_of_mem_frobenius _ ha
         · obtain ⟨l', hl', rfl⟩ := (hX n).subset ha
-          rw [hD', if_neg (fun h ↦ by rw [← h] at hl'; exact lt_irrefl _ hl')]
+          rw [hD', ite_eq_right (fun h ↦ by rw [← h] at hl'; exact lt_irrefl _ hl')]
           rfl
       have hxl : (x l : A) ^ p ∈ E n := by
         rw [hE]
         exact Algebra.subset_adjoin (.inl (Subalgebra.pow_mem_frobenius _))
       rw [hEn, Subalgebra.finrank_adjoin_insert_eq_mul (E n) hxl (D' l) hkill
-        (by rw [hD', if_pos rfl]), ih (by omega), pow_succ]
+        (by rw [hD', ite_eq_left rfl]), ih (by omega), pow_succ]
       ring
   have htop : E r = ⊤ := by
     rw [hE]

@@ -228,7 +228,7 @@ theorem Algebra.WeaklyEtale.bijective_algebraMap_localization_atPrime
     .of_isLocalization B n.primeCompl _
   have : Algebra.WeaklyEtale A (Localization.AtPrime n) := .trans A B _
   have : IsLocalHom (algebraMap A (Localization.AtPrime n)) := by
-    apply ((IsLocalRing.local_hom_TFAE (algebraMap A (Localization.AtPrime n))).out 0 4).mpr
+    apply ((IsLocalRing.local_hom_TFAE (algebraMap A (Localization.AtPrime n))).out 1 5).mpr
     rw [IsScalarTower.algebraMap_eq A B (Localization.AtPrime n), ← Ideal.comap_comap,
       show (IsLocalRing.maximalIdeal (Localization.AtPrime n)).comap
           (algebraMap B (Localization.AtPrime n)) = n from

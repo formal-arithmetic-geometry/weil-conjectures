@@ -44,7 +44,7 @@ theorem completedChange_injective (l : ℕ) [Fact l.Prime]
   let O := Padic.coefficientExtensionIntegers l E.carrier
   have hO := (Padic.coefficientExtensionIntegers_dvr l E.carrier).choose_spec
   have : IsFractionRing O E.carrier := hO.2.2.2.2.2.2.1
-  apply AlgHom.coe_ringHom_injective
+  apply AlgHom.toRingHom_injective
   apply IsLocalization.ringHom_ext (nonZeroDivisors O)
   ext x
   exact congrArg Subtype.val (hi x)

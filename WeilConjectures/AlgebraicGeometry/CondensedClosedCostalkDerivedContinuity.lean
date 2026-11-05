@@ -54,7 +54,7 @@ private theorem triangleComparison_isIso
     Functor.whiskerRight (Functor.whiskerLeft T Triangle.π₂Toπ₃) (F.shift m)
   let d₁ : A₁ ⟶ A₂ :=
     { app s := F.homologySequenceδ (T.obj s) m n h
-      naturality _ _ f := F.homologySequenceδ_naturality _ _ (T.map f) m n h }
+      naturality _ _ f := F.homologySequenceδ_naturality (T.map f) m n h }
   let d₂ : A₂ ⟶ A₃ :=
     Functor.whiskerRight (Functor.whiskerLeft T Triangle.π₁Toπ₂) (F.shift n)
   let d₃ : A₃ ⟶ A₄ :=
@@ -119,7 +119,7 @@ private theorem triangleComparison_isIso
       dsimp only [A₀, A₁, A₂, A₃, A₄]
       simp only [triangleComparison, ι_colimMap_assoc, colimit.ι_desc,
         colimit.ι_desc_assoc]
-      exact (F.homologySequenceδ_naturality _ _ (c.ι.app s) m n h).symm)
+      exact (F.homologySequenceδ_naturality (c.ι.app s) m n h).symm)
     (by
       change colimMap d₂ ≫ triangleComparison T c F n Triangle.π₂ =
         triangleComparison T c F n Triangle.π₁ ≫ (F.shift n).map c.pt.mor₁

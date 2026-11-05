@@ -1014,7 +1014,7 @@ private theorem bp_local_structure_constructible
   classical
   obtain ⟨S, hS⟩ := hlocal
   intro q
-  rw [IsConstantModelConstructible, if_pos
+  rw [IsConstantModelConstructible, ite_eq_left
     (show CompactSpace X ∧ QuasiSeparatedSpace X from ⟨inferInstance, inferInstance⟩)]
   refine ⟨S, fun a ↦ ?_⟩
   obtain ⟨U, hU⟩ := hS a

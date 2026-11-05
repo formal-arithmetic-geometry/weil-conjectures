@@ -204,7 +204,7 @@ private theorem residue_annihilates (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
     (x : M.val.obj (op (n, U.unop))) : l ^ (n + 1) • x = 0 := by
   let α := ringUnit l T
   have h : ((l ^ (n + 1) : ℕ) : (rawRing l T).obj (op (n, U.unop))) = 0 :=
-    ULift.ext _ _ (by
+    ULift.ext (by
       change ((l ^ (n + 1) : ℕ) : ZMod (l ^ (n + 1))) = 0
       exact ZMod.natCast_self _)
   have h' := map_natCast (α.app (op (n, U.unop))).hom (l ^ (n + 1))
@@ -339,7 +339,7 @@ private theorem rawRing_natCast (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
     (U : (ℕ × T.ProEt)ᵒᵖ) (a : (rawRing l T).obj U) :
     ∃ k : ℕ, a = (k : (rawRing l T).obj U) := by
   have hn : NeZero l := ⟨(Fact.out : l.Prime).ne_zero⟩
-  refine ⟨a.down.val, ULift.ext _ _ ?_⟩
+  refine ⟨a.down.val, ULift.ext ?_⟩
   change a.down = (a.down.val : ZMod (l ^ (U.unop.1 + 1)))
   exact (ZMod.natCast_zmod_val _).symm
 

@@ -90,13 +90,13 @@ noncomputable def ord (V : X.Etale) (y : V.left)
 
 lemma ord_of_coheight_ne_one (V : X.Etale) {y : V.left} (hy : coheight (V.hom y) ≠ 1)
     (f : Γ(pullback V.hom X.fromSpecFunctionField, ⊤)) : ord V y f = 0 :=
-  if_neg hy
+  ite_eq_right hy
 
 /-- The order of vanishing is additive on units. -/
 lemma ord_mul (V : X.Etale) (y : V.left) (f g : Γ(pullback V.hom X.fromSpecFunctionField, ⊤)ˣ) :
     ord V y ↑(f * g) = ord V y f + ord V y g := by
   by_cases hy : coheight (V.hom y) = 1
-  · simp only [ord, if_pos hy]
+  · simp only [ord, ite_eq_left hy]
     let := (stalkToLocalGenericRing V y).hom.toAlgebra
     have := Ring.ordOf_mul (R := V.left.presheaf.stalk y)
       (Units.map (toLocalGenericRing V y).hom.toMonoidHom f)
@@ -126,14 +126,14 @@ lemma toLocalGenericRing_fst_appTop (V : X.Etale) (y : V.left) (a : Γ(V.left, �
 lemma ord_fst_appTop (V : X.Etale) (y : V.left) (u : Γ(V.left, ⊤)ˣ) :
     ord V y ((pullback.fst V.hom X.fromSpecFunctionField).appTop u.val) = 0 := by
   by_cases hy : coheight (V.hom y) = 1
-  · rw [ord, if_pos hy, toLocalGenericRing_fst_appTop]
+  · rw [ord, ite_eq_left hy, toLocalGenericRing_fst_appTop]
     let := (stalkToLocalGenericRing V y).hom.toAlgebra
     by_cases h : (IsNoetherianRing (V.left.presheaf.stalk y) ∧
         Ring.KrullDimLE 1 (V.left.presheaf.stalk y) ∧ IsDomain (V.left.presheaf.stalk y)) ∧
         IsFractionRing (V.left.presheaf.stalk y) (localGenericRing V y)
     · have := h.1.1; have := h.1.2.1; have := h.1.2.2; have := h.2
       exact Ring.ordOf_algebraMap_of_isUnit (u.isUnit.map _)
-    · rw [Ring.ordOf, dif_neg h]
+    · rw [Ring.ordOf, dite_eq_right h]
   · exact ord_of_coheight_ne_one V hy _
 
 /-- The order of vanishing at the points of `V`, as an additive map from the units on the
@@ -143,10 +143,10 @@ noncomputable def ordHom (V : X.Etale) :
   toFun f y := ULift.up (ord V y (Additive.toMul f).val)
   map_zero' := by
     funext y
-    exact ULift.ext _ _ (ord_one V y)
+    exact ULift.ext (ord_one V y)
   map_add' f g := by
     funext y
-    exact ULift.ext _ _ (ord_mul V y _ _)
+    exact ULift.ext (ord_mul V y _ _)
 
 /-- The map of local generic rings `Γ(Spec 𝒪_{V,φ y} ×_X Spec k(X), 𝒪) ⟶
 Γ(Spec 𝒪_{W,y} ×_X Spec k(X), 𝒪)` induced by a morphism `φ : W ⟶ V` of étale `X`-schemes. -/
@@ -355,7 +355,7 @@ lemma ord_map {V W : X.Etale} (φ : W ⟶ V) (y : W.left)
     (congrArg (fun g : W.left ⟶ X ↦ g y) (CategoryTheory.Over.w ((Etale.forget X).map φ))).symm
   by_cases hy : coheight (W.hom y) = 1
   · have hy' : coheight (V.hom (φ.left y)) = 1 := hx ▸ hy
-    rw [ord, if_pos hy, ord, if_pos hy']
+    rw [ord, ite_eq_left hy, ord, ite_eq_left hy']
     have := isDiscreteValuationRing_stalk V hy'
     have := isDiscreteValuationRing_stalk W hy
     let := (stalkToLocalGenericRing V (φ.left y)).hom.toAlgebra
@@ -397,6 +397,6 @@ noncomputable def divisorMap :
      naturality {V W} φ := by
       ext f
       funext y
-      exact ULift.ext _ _ (Etale.ord_map φ.unop y _) }⟩
+      exact ULift.ext (Etale.ord_map φ.unop y _) }⟩
 
 end AlgebraicGeometry.Scheme

@@ -520,7 +520,7 @@ lemma isIso_graphDesc (P : Y.FiniteEtale) [IsGalois P] :
   refine isIso_sigmaDesc_of_existsUnique (M := ULift.{u + 1} (Aut P)) y P
     (fun m ↦ m.down.hom) fun a b ↦ ?_
   obtain ⟨σ, hσ, hu⟩ := (evaluation_aut_bijective_of_isGalois (fiber y) P a).existsUnique b
-  exact ⟨⟨σ⟩, hσ, fun m hm ↦ ULift.ext _ _ (hu m.down hm)⟩
+  exact ⟨⟨σ⟩, hσ, fun m hm ↦ ULift.ext (hu m.down hm)⟩
 
 include y in
 omit [CompactSpace Y] [QuasiSeparatedSpace Y] in

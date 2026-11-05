@@ -37,7 +37,7 @@ def rightLevel (M : systemLevel B n) (k : ℕ) : systemLevel B k :=
 Source: Stacks 0941 and 015F (blueprint: lem-coef-system-coinduced-adjunction). -/
 def rightAboveIso (M : systemLevel B n) {k : ℕ} (hk : n ≤ k) :
     rightLevel B n M k ≅ (systemRestriction B hk).obj M :=
-  eqToIso (dif_pos hk)
+  eqToIso (dite_eq_left hk)
 
 /-- The coinduced transition, given by scalar-restriction coherence above the vertex.
 Source: Stacks 0941 and 015F (blueprint: lem-coef-system-coinduced-adjunction). -/
@@ -63,7 +63,7 @@ theorem rightTransition_above (M : systemLevel B n) {j k : ℕ}
         (systemScalarRestrictionComposition (B.map (homOfLE h).op)
           (B.map (homOfLE hj).op) (B.map (homOfLE (hj.trans h)).op)
           (by rw [← B.map_comp]; rfl)).inv.app M ≫
-        (systemRestriction B h).map (rightAboveIso B n M hj).inv := dif_pos hj
+        (systemRestriction B h).map (rightAboveIso B n M hj).inv := dite_eq_left hj
 
 /-- The coinduced strict system, with its sectionwise identity and composition laws.
 Source: Stacks 0941 and 015F (blueprint: lem-coef-system-coinduced-adjunction). -/
@@ -88,7 +88,7 @@ def rightObj (M : systemLevel B n) : StrictRingSystem B where
         rfl
       · have hz : IsZero (rightLevel B n M k) := by
           dsimp only [rightLevel]
-          rw [dif_neg hk]
+          rw [dite_eq_right hk]
           exact isZero_zero _
         exact hz.eq_of_src _ _
     exact congrArg (fun f ↦ f.val.app U x) he
@@ -118,7 +118,7 @@ def rightObj (M : systemLevel B n) : StrictRingSystem B where
         rfl
       · have hz : IsZero (rightLevel B n M j) := by
           dsimp only [rightLevel]
-          rw [dif_neg hj]
+          rw [dite_eq_right hj]
           exact isZero_zero _
         exact ((systemRestriction B (h.trans q)).map_isZero hz).eq_of_tgt _ _
     exact congrArg (fun f ↦ f.val.app U x) he
@@ -135,7 +135,7 @@ Source: Stacks 0941 and 015F (blueprint: lem-coef-system-coinduced-adjunction). 
 theorem rightLevelMap_above {M N : systemLevel B n} (f : M ⟶ N)
     {k : ℕ} (hk : n ≤ k) :
     rightLevelMap B n f k = (rightAboveIso B n M hk).hom ≫
-      (systemRestriction B hk).map f ≫ (rightAboveIso B n N hk).inv := dif_pos hk
+      (systemRestriction B hk).map f ≫ (rightAboveIso B n N hk).inv := dite_eq_left hk
 
 /-- The strict-system morphism induced by a module morphism.
 Source: Stacks 0941 and 015F (blueprint: lem-coef-system-coinduced-adjunction). -/
@@ -160,7 +160,7 @@ def rightMap {M N : systemLevel B n} (f : M ⟶ N) :
         (by rw [← B.map_comp]; rfl)).inv.naturality f
     · have hz : IsZero (rightLevel B n N j) := by
         dsimp only [rightLevel]
-        rw [dif_neg hj]
+        rw [dite_eq_right hj]
         exact isZero_zero _
       exact ((systemRestriction B h).map_isZero hz).eq_of_tgt _ _
 
@@ -178,7 +178,7 @@ def rightExtension : systemLevel B n ⥤ StrictRingSystem B where
         Iso.hom_inv_id]
     · have hz : IsZero (rightLevel B n M k) := by
         dsimp only [rightLevel]
-        rw [dif_neg hk]
+        rw [dite_eq_right hk]
         exact isZero_zero _
       exact hz.eq_of_src _ _
   map_comp {M N P} f g := by
@@ -192,7 +192,7 @@ def rightExtension : systemLevel B n ⥤ StrictRingSystem B where
       simp only [Category.assoc, Iso.inv_hom_id_assoc]
     · have hz : IsZero (rightLevel B n M k) := by
         dsimp only [rightLevel]
-        rw [dif_neg hk]
+        rw [dite_eq_right hk]
         exact isZero_zero _
       exact hz.eq_of_src _ _
 
@@ -213,7 +213,7 @@ instance rightExtension_additive : (rightExtension B n).Additive where
       simp only [Preadditive.comp_add, Preadditive.add_comp]
     · have hz : IsZero (rightLevel B n M k) := by
         dsimp only [rightLevel]
-        rw [dif_neg hk]
+        rw [dite_eq_right hk]
         exact isZero_zero _
       exact hz.eq_of_src _ _
 
@@ -239,7 +239,7 @@ Source: Stacks 0941 and 015F (blueprint: lem-coef-system-coinduced-adjunction). 
 theorem coextendApp_above (M : StrictRingSystem B) (N : systemLevel B n)
     (f : M.level n ⟶ N) {k : ℕ} (hk : n ≤ k) :
     coextendApp B n M N f k = M.transition hk ≫ (systemRestriction B hk).map f ≫
-      (rightAboveIso B n N hk).inv := dif_pos hk
+      (rightAboveIso B n N hk).inv := dite_eq_left hk
 
 /-- Extend a vertex map to its coinduced strict-system morphism.
 Source: Stacks 0941 and 015F (blueprint: lem-coef-system-coinduced-adjunction). -/
@@ -260,7 +260,7 @@ def coextend (M : StrictRingSystem B) (N : systemLevel B n)
       exact congrArg (fun y ↦ f.val.app U y) (M.compose hj h U x)
     · have hz : IsZero (rightLevel B n N j) := by
         dsimp only [rightLevel]
-        rw [dif_neg hj]
+        rw [dite_eq_right hj]
         exact isZero_zero _
       exact ((systemRestriction B h).map_isZero hz).eq_of_tgt _ _
 
@@ -323,7 +323,7 @@ theorem coextend_coevaluate (M : StrictRingSystem B) (N : systemLevel B n)
     exact he.symm
   · have hz : IsZero (rightLevel B n N k) := by
       dsimp only [rightLevel]
-      rw [dif_neg hk]
+      rw [dite_eq_right hk]
       exact isZero_zero _
     exact hz.eq_of_tgt _ _
 
@@ -357,7 +357,7 @@ def adjunction : systemEvaluation B n ⊣ rightExtension B n := by
       simp only [Category.assoc, Iso.inv_hom_id_assoc]
     · have hz : IsZero (rightLevel B n N' k) := by
         dsimp only [rightLevel]
-        rw [dif_neg hk]
+        rw [dite_eq_right hk]
         exact isZero_zero _
       exact hz.eq_of_tgt _ _
 

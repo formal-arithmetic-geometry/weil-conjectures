@@ -8,7 +8,11 @@ module
 
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import WeilConjectures.CategoryTheory.ArrowsFunctor
-public import Mathlib.CategoryTheory.Sites.Sieves
+public import Mathlib.CategoryTheory.Sites.Sieves.Basic
+public import Mathlib.CategoryTheory.Sites.Sieves.Functoriality
+public import Mathlib.CategoryTheory.Sites.Sieves.Presheaf
+public import Mathlib.CategoryTheory.Sites.Sieves.Presieve
+public import Mathlib.CategoryTheory.Sites.Sieves.Shrink
 import Mathlib.CategoryTheory.Limits.Types.Filtered
 
 /-! # Reindexing a finite presieve in a filtered colimit

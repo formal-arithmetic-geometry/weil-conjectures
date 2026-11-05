@@ -89,12 +89,12 @@ private noncomputable def homotopyOfInsertionIdentities
   hom j k := if hjk : k + 1 = j then (C.XIsoOfEq hjk).inv ≫ h k else 0
   zero j k hjk := by
     change (if h : k + 1 = j then (C.XIsoOfEq h).inv ≫ _ else 0) = 0
-    rw [dif_neg (by simpa using hjk)]
+    rw [dite_eq_right (by simpa using hjk)]
   comm k := by
     rw [dNext_eq _ (show (ComplexShape.up ℤ).Rel k (k + 1) from rfl),
       prevD_eq _ (show (ComplexShape.up ℤ).Rel (k - 1) k from by change k - 1 + 1 = k; omega)]
     simp only [HomologicalComplex.XIsoOfEq_rfl, Iso.refl_inv, Category.id_comp]
-    simp only [dif_pos (show k - 1 + 1 = k by omega)]
+    simp only [dite_eq_left (show k - 1 + 1 = k by omega)]
     have ht : (C.XIsoOfEq (show k - 1 + 1 = k by omega)).inv =
         (C.XIsoOfEq (show k = k - 1 + 1 by omega)).hom := by
       simp only [HomologicalComplex.XIsoOfEq, eqToIso.inv, eqToIso.hom]

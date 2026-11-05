@@ -107,7 +107,7 @@ theorem diagonalTrace_finite_chern_comparison
     (hS : IsUnit (l : Γ(S, ⊤))) (n : ℕ) [Finite (SpTowerShriek.R l E n)] :
     let A := FiniteRing l E n
     let hA : ((l ^ (n + 1) : ℕ) : A) = 0 :=
-      ULift.ext _ _ (coefficient_annihilates l E n)
+      ULift.ext (coefficient_annihilates l E n)
     let hNS : IsUnit ((l ^ (n + 1) : ℕ) : Γ(S, ⊤)) := by
       simpa only [Nat.cast_pow] using hS.pow (n + 1)
     let F := (Scheme.sfIntrinsicModuleEquivalence S (SpTowerShriek.R l E n)).functor

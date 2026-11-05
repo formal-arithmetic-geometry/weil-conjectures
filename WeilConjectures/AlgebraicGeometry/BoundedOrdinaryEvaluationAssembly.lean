@@ -94,7 +94,7 @@ theorem boundedOrdinaryEvaluation_degree (X : Scheme.{u}) (U : X.Opens)
         apply hij
         apply Subtype.ext
         omega
-      simp only [localEvaluationComponent, dif_neg hne, biproduct.mapIso_hom,
+      simp only [localEvaluationComponent, dite_eq_right hne, biproduct.mapIso_hom,
         biproduct.ι_map_assoc, asIso_hom]
       change 0 = d i ≫ biproduct.ι T i ≫ biproduct.π T j
       rw [biproduct.ι_π_ne T hij, comp_zero]

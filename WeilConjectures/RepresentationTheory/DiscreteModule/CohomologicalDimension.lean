@@ -518,7 +518,7 @@ theorem subsingleton_H_two_of_forall_finite (M : DiscreteModule.{w} G)
     else 0
   have hΦ (c) (hc : c ∈ Set.range f.1) : j (Φ c) = c := by
     have h : ∀ y, (rep c).1 y ∈ S := fun y ↦ hTS (Set.mem_biUnion hc ⟨y, rfl⟩)
-    simp only [Φ, dif_pos h, j, coker₁SubMap_mk, smoothFunctionsMap_codRestrict]
+    simp only [Φ, dite_eq_left h, j, coker₁SubMap_mk, smoothFunctionsMap_codRestrict]
     exact Function.surjInv_eq hrep c
   let fN : ((coind₁ G).obj (coker₁ (sub M S hS)).obj.V).obj.V :=
     ⟨Φ ∘ f.1, Subgroup.isOpen_mono (H₁ := rightStab G f.1)

@@ -87,9 +87,9 @@ def isColimitUliftIntToZMod :
     intro a ha
     have ha : ((a.down : ℤ) : ZMod n) = 0 := congrArg ULift.down ha
     obtain ⟨b, hb⟩ := (ZMod.intCast_zmod_eq_zero_iff_dvd _ _).1 ha
-    exact ⟨ULift.up b, ULift.ext _ _ (by simp [S, hb])⟩
+    exact ⟨ULift.up b, ULift.ext (by simp [S, hb])⟩
   have : Epi S.g := (AddCommGrpCat.epi_iff_surjective _).2 fun a ↦
-    ⟨ULift.up (a.down : ZMod n).valMinAbs, ULift.ext _ _ (ZMod.coe_valMinAbs (a.down : ZMod n))⟩
+    ⟨ULift.up (a.down : ZMod n).valMinAbs, ULift.ext (ZMod.coe_valMinAbs (a.down : ZMod n))⟩
   exact hS.gIsCokernel
 
 end AddCommGrpCat

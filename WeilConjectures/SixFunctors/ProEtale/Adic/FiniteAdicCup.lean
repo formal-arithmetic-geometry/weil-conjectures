@@ -195,7 +195,7 @@ lemma unitShiftAddEquivExt_cupProduct (Λ : Type (u + 1)) [CommRing Λ] {i j k :
     Etale.unitShiftAddEquivExt_hom, ShiftedHom.comp, Etale.cupProduct_eq_shiftProduct,
     shiftProduct_eq hU]
   simp only [Category.assoc, Functor.map_comp]
-  rw [Iso.map_hom_inv_id_assoc]
+  rw [Iso.hom_inv_id_map_assoc]
   congr 2
   have h₂ := (shiftFunctorAdd' (DerivedCategory (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (j : ℤ) i k (by lia)).inv.naturality (Etale.unitIsoSingleFunctorConstantSheaf Λ S).hom

@@ -95,7 +95,7 @@ theorem ordinaryEvaluation_component_factorization (X : Scheme.{u}) (U : X.Opens
       SheafOfModules.homObjMap (R := X.sheaf.over U) (𝟙 (P.X r))
         (F.XIsoOfEq (by omega : p = r + n)).hom := by
   set_option backward.isDefEq.respectTransparency.types false in
-    simp only [localEvaluationComponent, dif_pos hr]
+    simp only [localEvaluationComponent, dite_eq_left hr]
     exact evaluation_factorization.{u}
       (C := Over U) (J := (Opens.grothendieckTopology X).over U) (X.sheaf.over U)
       (P.X r) (F.X p) ((localEvaluationDual X U P).X q) (F.X (r + n)) _ _

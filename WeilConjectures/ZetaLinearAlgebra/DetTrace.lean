@@ -80,11 +80,11 @@ private theorem mk_pow_mul_one_sub (l : K) :
   | 0 => simp
   | (m + 1) =>
     rw [map_sub, coeff_mk, coeff_C_mul, coeff_succ_X_mul, coeff_mk, coeff_C_mul,
-      if_neg (Nat.succ_ne_zero m)]
+      ite_eq_right (Nat.succ_ne_zero m)]
     match m with
     | 0 => simp
     | (k + 1) =>
-      rw [if_neg (Nat.succ_ne_zero k)]
+      rw [ite_eq_right (Nat.succ_ne_zero k)]
       simp [pow_succ, coeff_X, mul_comm]
 
 private theorem derivative_one_sub_C_mul_X (l : K) :
@@ -229,8 +229,8 @@ theorem inv_charpolyRev_eq_exp [CharZero K] (F : Module.End K V) :
     | 0 => simp [hg, hT]
     | m + 1 =>
       rw [PowerSeries.coeff_succ_X_mul, PowerSeries.coeff_derivative, hg, hT,
-        PowerSeries.coeff_mk, PowerSeries.coeff_mk, if_neg m.succ_ne_zero,
-        if_neg m.succ_ne_zero]
+        PowerSeries.coeff_mk, PowerSeries.coeff_mk, ite_eq_right m.succ_ne_zero,
+        ite_eq_right m.succ_ne_zero]
       have hm : ((m : K) + 1) ≠ 0 := by exact_mod_cast Nat.succ_ne_zero m
       push_cast
       rw [div_mul_cancel₀ _ hm]
@@ -275,7 +275,7 @@ omit [FiniteDimensional K V] in
 @[simp]
 theorem constantCoeff_traceSeries (F : Module.End K V) :
     PowerSeries.constantCoeff (traceSeries F) = 0 := by
-  rw [← PowerSeries.coeff_zero_eq_constantCoeff_apply, coeff_traceSeries, if_pos rfl]
+  rw [← PowerSeries.coeff_zero_eq_constantCoeff_apply, coeff_traceSeries, ite_eq_left rfl]
 
 /-- **The determinant-trace identity**, logarithmic form: the formal logarithm of
 `det (1 - t F)` is minus the trace series,
@@ -297,8 +297,8 @@ theorem logOf_charpolyRev [CharZero K] (F : Module.End K V) :
     | 0 => simp [hT]
     | m + 1 =>
       rw [PowerSeries.coeff_succ_X_mul, PowerSeries.coeff_derivative, traceSeries, hT,
-        PowerSeries.coeff_mk, PowerSeries.coeff_mk, if_neg m.succ_ne_zero,
-        if_neg m.succ_ne_zero]
+        PowerSeries.coeff_mk, PowerSeries.coeff_mk, ite_eq_right m.succ_ne_zero,
+        ite_eq_right m.succ_ne_zero]
       have hm : ((m : K) + 1) ≠ 0 := by exact_mod_cast Nat.succ_ne_zero m
       push_cast
       rw [div_mul_cancel₀ _ hm]
@@ -337,7 +337,7 @@ theorem coeff_alternatingTraceSeries (s : Finset ℤ) (F : ∀ i, Module.End K (
   · simp [hn]
   · rw [div_eq_mul_inv, Finset.sum_mul]
     refine Finset.sum_congr rfl fun i _ ↦ ?_
-    rw [PowerSeries.coeff_smul, coeff_traceSeries, if_neg hn, zsmul_eq_mul, zsmul_eq_mul,
+    rw [PowerSeries.coeff_smul, coeff_traceSeries, ite_eq_right hn, zsmul_eq_mul, zsmul_eq_mul,
       div_eq_mul_inv, mul_assoc]
 
 omit [∀ i, FiniteDimensional K (W i)] in
@@ -347,7 +347,7 @@ omit [∀ i, FiniteDimensional K (W i)] in
 theorem constantCoeff_alternatingTraceSeries (s : Finset ℤ) (F : ∀ i, Module.End K (W i)) :
     PowerSeries.constantCoeff (alternatingTraceSeries s F) = 0 := by
   rw [← PowerSeries.coeff_zero_eq_constantCoeff_apply, coeff_alternatingTraceSeries,
-    if_pos rfl]
+    ite_eq_left rfl]
 
 /-- The alternating determinant
 

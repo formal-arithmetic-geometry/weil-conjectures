@@ -229,7 +229,7 @@ theorem Scheme.GaloisCover.exists_connected_subgroup_quotient
     intro k hk
     have hk' : x.left ≫ c.smul ⟨k.down.val⟩ = y.left :=
       congrArg (fun q ↦ q.left) hk
-    exact ULift.ext _ _ (Subtype.ext (congrArg ULift.down
+    exact ULift.ext (Subtype.ext (congrArg ULift.down
       (torsor_action_injective c x.left (hk'.trans hh'.symm))))
   have hiso := Scheme.FiniteEtale.isIso_sigmaDesc_of_existsUnique t PV α huniq
   let cH : Scheme.GaloisCover (ULift.{u + 1} H) V :=

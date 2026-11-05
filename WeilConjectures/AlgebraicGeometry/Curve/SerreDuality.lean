@@ -864,7 +864,7 @@ theorem finsum_ord_eq_finrank [IsIntegral X] [IsLocallyNoetherian X] {Y : Scheme
       X.functionField (X.presheaf.germ (π ⁻¹ᵁ V) x (show π.base x ∈ V from hx ▸ hyV)
         (π.app V t))) x) = ∑ᶠ x ∈ {x | π x = y}, G x :=
     finsum_congr fun x ↦ finsum_congr fun hx ↦ by
-      simp only [G, dif_pos (show π x ∈ V from hx ▸ hyV)]
+      simp only [G, dite_eq_left (show π x ∈ V from hx ▸ hyV)]
   let e : p.primesOver Γ(X, π ⁻¹ᵁ W) → X := fun q ↦ hU.fromSpec ⟨q.1, q.2.1⟩
   have he : Function.Injective e := fun q q' h ↦
     Subtype.ext (congrArg PrimeSpectrum.asIdeal (hU.fromSpec.isOpenEmbedding.injective h))
@@ -941,7 +941,7 @@ theorem finsum_ord_eq_finrank [IsIntegral X] [IsLocallyNoetherian X] {Y : Scheme
   have hs0 : X.presheaf.germ (π ⁻¹ᵁ V) (e q) hxV (π.app V t) ≠ 0 := by
     rw [← Scheme.Hom.germ_stalkMap_apply]
     exact (map_ne_zero_iff _ hinjx).mpr hgt
-  simp only [G, dif_pos hxV]
+  simp only [G, dite_eq_left hxV]
   rw [Scheme.ord_algebraMap_stalk hcoh hs0]
   -- the inertia degree is `1`
   let κA : k →+* Γ(Y, W) :=

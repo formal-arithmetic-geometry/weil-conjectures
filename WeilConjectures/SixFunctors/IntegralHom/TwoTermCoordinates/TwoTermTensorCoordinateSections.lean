@@ -185,7 +185,7 @@ theorem generator_zero_fst (n : ℤ)
       (generator Y R A Q n 0 n (by simp) U x z) = 0 := by
   have h := congrArg (fun f ↦ f.val.app U (pair Y R _ _ U x z))
     (neg_coordinate Y R A Q hzero eNeg eZero n 0 n (by simp))
-  simp only [dif_neg (by omega : (0 : ℤ) ≠ -1)] at h
+  simp only [dite_eq_right (by omega : (0 : ℤ) ≠ -1)] at h
   exact h.trans (zero_apply Y R _ _ U _)
 
 /-- Sectionwise coordinate calculus. Source: Stacks 03EK and 0A8X.
@@ -197,7 +197,7 @@ theorem generator_neg_snd (n : ℤ)
       (generator Y R A Q (n + 1) (-1) n (by omega) U x z) = 0 := by
   have h := congrArg (fun f ↦ f.val.app U (pair Y R _ _ U x z))
     (zero_coordinate Y R A Q hzero eNeg eZero (n + 1) (-1) n (by omega))
-  simp only [dif_neg (by omega : (-1 : ℤ) ≠ 0)] at h
+  simp only [dite_eq_right (by omega : (-1 : ℤ) ≠ 0)] at h
   exact h.trans (zero_apply Y R _ _ U _)
 
 /-- Sectionwise coordinate calculus. Source: Stacks 03EK and 0A8X.

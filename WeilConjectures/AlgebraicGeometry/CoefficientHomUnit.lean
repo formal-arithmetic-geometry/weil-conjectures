@@ -551,7 +551,7 @@ omit [HasZeroMorphisms E] [r.PreservesZeroMorphisms] in
 private theorem genericUnitComponent_zero (M : CochainComplex A ℤ) (n : ℤ) :
     genericUnitComponent r H L η M n 0 n (by omega) =
       η (M.X n) := by
-  simp only [genericUnitComponent, dif_pos]
+  simp only [genericUnitComponent, dite_eq_left]
 
 omit [HasZeroMorphisms E] [r.PreservesZeroMorphisms] in
 include hη in
@@ -571,7 +571,7 @@ private theorem genericUnitComponent_naturality {M N : CochainComplex A ℤ}
     rw [hq']
     intro h
     rw [genericUnitComponent_zero, genericUnitComponent_zero, hη]
-  · simp only [genericUnitComponent, dif_neg hp, comp_zero, zero_comp]
+  · simp only [genericUnitComponent, dite_eq_right hp, comp_zero, zero_comp]
 
 private theorem uncurryCurry_map
     {D E F : Type u} [Category.{v} D] [Category.{v} E] [Category.{v} F]

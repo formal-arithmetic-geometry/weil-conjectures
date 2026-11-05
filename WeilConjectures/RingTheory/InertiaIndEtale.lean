@@ -516,7 +516,7 @@ lemma exists_dvd_pow_inertiaInvariants {ϖ : R} (hϖ : ϖ ∈ m) {d : inertiaInv
     (isAlgebraic_algHom_iff (inertiaInvariantsToField K Q)
       (injective_inertiaInvariantsToField K Q)).1 (Algebra.IsAlgebraic.isAlgebraic _)
   have hne : P.comap (algebraMap R (inertiaInvariants K Q)) ≠ ⊥ :=
-    Ideal.comap_ne_bot_of_algebraic_mem hd (hdP (Ideal.mem_span_singleton_self d)) halg
+    Ideal.under_ne_bot_of_algebraic_mem hd (hdP (Ideal.mem_span_singleton_self d)) halg
   have hmax : (P.comap (algebraMap R (inertiaInvariants K Q))).IsMaximal :=
     (Ideal.IsPrime.comap _).isMaximal hne
   have hle : P.comap (algebraMap R (inertiaInvariants K Q)) ≤ m := fun r hr ↦ by

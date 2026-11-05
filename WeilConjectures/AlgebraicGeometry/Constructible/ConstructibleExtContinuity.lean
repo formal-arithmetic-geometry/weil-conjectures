@@ -346,10 +346,10 @@ private theorem constant_model_of_iso
   unfold IsConstantModelConstructible at hM ⊢
   split at hM
   · rename_i h
-    rw [if_pos h]
+    rw [ite_eq_left h]
     exact hstr e hM
   · rename_i h
-    rw [if_neg h]
+    rw [ite_eq_right h]
     exact fun U hU ↦ hstr ((CondensedRing.upperStar Λ U.ι).mapIso e) (hM U hU)
 
 private theorem constant_model_of_isZero

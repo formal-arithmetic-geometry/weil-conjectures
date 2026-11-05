@@ -504,7 +504,7 @@ private theorem unit_constructible
   apply P.prop_of_iso (DerivedCategory.singleFunctorObjUnitIso _)
   apply single_constructible
   rw [IsConstantModelConstructible,
-    if_pos (show CompactSpace X ∧ QuasiSeparatedSpace X from ⟨inferInstance,
+    ite_eq_left (show CompactSpace X ∧ QuasiSeparatedSpace X from ⟨inferInstance,
       inferInstance⟩)]
   apply stratified_of_finiteModel Λ X
   apply lisse_finiteModel
@@ -563,7 +563,7 @@ private theorem rationalTatePull_constructible
     single_constructible Λ X _
       (by
         rw [IsConstantModelConstructible,
-          if_pos (show CompactSpace X ∧ QuasiSeparatedSpace X from ⟨inferInstance,
+          ite_eq_left (show CompactSpace X ∧ QuasiSeparatedSpace X from ⟨inferInstance,
             inferInstance⟩)]
         exact stratified_of_finiteModel Λ X _
           (lisse_finiteModel Λ X _ (rationalLine_lisse ℓ c X)))

@@ -124,9 +124,9 @@ private lemma constructible_iso {X : Scheme.{u}}
   classical
   unfold IsConstantModelConstructible at hM ⊢
   by_cases h : CompactSpace X ∧ QuasiSeparatedSpace X
-  · simp only [if_pos h] at hM ⊢
+  · simp only [ite_eq_left h] at hM ⊢
     exact stratified_iso e hM
-  · simp only [if_neg h] at hM ⊢
+  · simp only [ite_eq_right h] at hM ⊢
     intro U hU
     exact stratified_iso ((CondensedRing.upperStar Λ U.ι).mapIso e) (hM U hU)
 private lemma constructible_comap (X : Scheme.{u})
@@ -136,9 +136,9 @@ private lemma constructible_comap (X : Scheme.{u})
   classical
   unfold IsConstantModelConstructible at hM ⊢
   by_cases h : CompactSpace X ∧ QuasiSeparatedSpace X
-  · simp only [if_pos h] at hM ⊢
+  · simp only [ite_eq_left h] at hM ⊢
     exact stratified_comap φ X M hM
-  · simp only [if_neg h] at hM ⊢
+  · simp only [ite_eq_right h] at hM ⊢
     intro U hU
     exact stratified_iso ((pull_comap φ U.ι).app M).symm
       (stratified_comap φ _ _ (hM U hU))

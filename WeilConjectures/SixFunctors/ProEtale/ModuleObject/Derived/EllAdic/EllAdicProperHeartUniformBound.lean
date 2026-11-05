@@ -387,7 +387,7 @@ private theorem continuousModel_bound (ℓ : ℕ) [Fact ℓ.Prime]
         (algebraMap (Y.residueField y) (AlgebraicClosure (Y.residueField y)))) ≫
           Y.fromSpecResidueField y) : Scheme.{u}) ≤
       if (d : ℤ) < 0 then ⊥ else (((d : ℤ).toNat : ℕ) : WithBot ℕ∞) := by
-    rw [if_neg (by omega), Int.toNat_natCast]
+    rw [ite_eq_right (by omega), Int.toNat_natCast]
     exact hd y
   refine ⟨2 * (d : ℤ) + 1, fun M hM ↦ bound_of_ind _ p _ (fun N hN ↦ ?_) M
     (continuous_closure_le_ind ℓ F Z M hM)⟩
@@ -407,7 +407,7 @@ private theorem qbar_bound (ℓ : ℕ) [Fact ℓ.Prime]
         (algebraMap (Y.residueField y) (AlgebraicClosure (Y.residueField y)))) ≫
           Y.fromSpecResidueField y) : Scheme.{u}) ≤
       if (d : ℤ) < 0 then ⊥ else (((d : ℤ).toNat : ℕ) : WithBot ℕ∞) := by
-    rw [if_neg (by omega), Int.toNat_natCast]
+    rw [ite_eq_right (by omega), Int.toNat_natCast]
     exact hd y
   refine ⟨2 * (d : ℤ) + 1, fun M hM ↦ bound_of_ind _ p _ (fun N hN ↦ ?_) M
     (qbar_closure_le_ind ℓ Z M hM)⟩

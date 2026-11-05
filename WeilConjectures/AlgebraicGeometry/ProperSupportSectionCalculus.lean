@@ -99,13 +99,13 @@ private theorem support_add
     let C : Fin 2 → TopologicalSpace.Closeds V.left := fun i => if i = 0 then Ts else Tt
     have hC : ∀ i, Scheme.IsClosedSubsetProperOver p (C i) := by
       intro i
-      by_cases hi : i = 0 <;> simp only [C, hi, if_true, if_false] <;> assumption
+      by_cases hi : i = 0 <;> simp only [C, hi, ite_true, ite_false] <;> assumption
     have h := (Scheme.isClosedSubsetProperOver_union_preimage p).1 2 C hC
     have he : (⨆ i, C i) = Ts ⊔ Tt := by
       apply le_antisymm
       · apply iSup_le
         intro i
-        by_cases hi : i = 0 <;> simp only [C, hi, if_true, if_false]
+        by_cases hi : i = 0 <;> simp only [C, hi, ite_true, ite_false]
         · exact le_sup_left
         · exact le_sup_right
       · apply sup_le

@@ -190,7 +190,7 @@ lemma refine_snd_left :
 
 /-- The refinement `Spec A' ⟶ U` of pointed étale neighbourhoods. -/
 def refineMap : ch.refine hY₀ A' φ'' hφ'' ⟶ c :=
-  CategoryOfElements.homMk _ _
+  Functor.Elements.homMk _ _
     (MorphismProperty.Over.homMk
       (Spec.map (CommRingCat.ofHom (algebraMap ch.Ring A')) ≫ ch.isAffineOpen.fromSpec) (by
         change (Spec.map (CommRingCat.ofHom (algebraMap ch.Ring A')) ≫ ch.isAffineOpen.fromSpec) ≫

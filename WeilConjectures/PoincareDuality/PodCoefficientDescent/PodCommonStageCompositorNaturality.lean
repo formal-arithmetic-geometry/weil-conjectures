@@ -139,7 +139,7 @@ private theorem pod_composition_representative_naturality
       (aK.hom ≫ eK.hom ≫ F.map bK.inv ≫ dK.inv) ≫
         (dK.hom ≫ F.map (bK.hom ≫ G.map r ≫ bN.inv) ≫ dN.inv) := by
   simp only [Functor.map_comp, Category.assoc, Iso.inv_hom_id_assoc,
-    Iso.map_inv_hom_id_assoc]
+    Iso.inv_hom_id_map_assoc]
   simpa only [Category.assoc] using
     congrArg (fun t ↦ aK.hom ≫ t ≫ F.map bN.inv ≫ dN.inv) nat
 

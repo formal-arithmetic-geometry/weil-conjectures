@@ -115,7 +115,7 @@ lemma cohomologyMap_cohomologyComparison (G : Sheaf Y.smallEtaleTopology AddComm
   congr 2
   simp only [upperStarConstantIntIso, Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom,
     Iso.symm_hom, Category.assoc, constantIntIsoComparisonUpperStar, Iso.symm_inv]
-  rw [← Iso.app_hom (comparisonUpperStarConstantSheafIsoAddCommGrpCat Y), Iso.map_hom_inv_id_assoc,
+  rw [← Iso.app_hom (comparisonUpperStarConstantSheafIsoAddCommGrpCat Y), Iso.hom_inv_id_map_assoc,
     Iso.inv_hom_id_app]
   exact congrArg (_ ≫ ·) (Category.comp_id _)
 

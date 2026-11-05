@@ -325,7 +325,7 @@ private lemma ccsUnitPresheaf_hom_ext {W : Scheme.{u}}
     rw [← ConcreteCategory.comp_apply, ← c.naturality]
     change c.app U n = n.down • c.app U (1 : ULift.{u + 1} ℤ)
     rw [← map_zsmul]
-    exact congrArg (c.app U) (ULift.ext _ _ (by
+    exact congrArg (c.app U) (ULift.ext (by
       change n.down = n.down * 1
       exact (_root_.mul_one _).symm))
   rw [key a, key b, h]

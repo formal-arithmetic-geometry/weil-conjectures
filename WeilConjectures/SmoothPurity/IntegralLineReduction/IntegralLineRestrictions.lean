@@ -134,7 +134,7 @@ private theorem complete_iff_unit (K : D.{u, u} l E X none) :
   obtain ⟨p, hp, hprime⟩ := Nat.exists_infinite_primes (l + 1)
   let : Fact p.Prime := ⟨hprime⟩
   obtain ⟨d, hd, _⟩ := PrincipalKoszulStrictReplacement.coefficient_datum l E
-  exact (roosIntrinsicCompletenessEquivalence p l (by omega) E X d hd K P e).out 0 4
+  exact (roosIntrinsicCompletenessEquivalence p l (by omega) E X d hd K P e).out 1 5
 
 private theorem comparison_isIso
     (hl : ∀ x : X, Invertible (l : X.residueField x))

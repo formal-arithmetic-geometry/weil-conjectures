@@ -44,7 +44,7 @@ private noncomputable def brutalInclusion {R : Type u} [CommRing R]
     · have hj : m ≤ j := by
         simp only [ComplexShape.up_Rel] at hij
         omega
-      simp only [dif_pos hi, dif_pos hj]
+      simp only [dite_eq_left hi, dite_eq_left hj]
       change (E.stupidTruncXIso _ (truncIndex m i hi)).hom ≫ E.d i j = _
       dsimp only [HomologicalComplex.stupidTrunc]
       rw [(E.restriction (ComplexShape.embeddingUpIntGE m)).extend_d_eq _
@@ -62,7 +62,7 @@ private theorem brutalInclusion_isIso_f {R : Type u} [CommRing R]
     (E : CochainComplex (ModuleCat.{v} R) ℤ) (m i : ℤ) (hi : m ≤ i) :
     IsIso ((brutalInclusion E m).f i) := by
   dsimp [brutalInclusion]
-  simp only [dif_pos hi]
+  simp only [dite_eq_left hi]
   infer_instance
 
 private theorem boundedFiniteFree_isMPseudoCoherent {R : Type u} [CommRing R]

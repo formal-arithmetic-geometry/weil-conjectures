@@ -112,7 +112,7 @@ def finiteScalarNormalizedModuleRoute (n : ℕ) [Finite (SpTowerShriek.R l E n)]
     (c : SpTowerP1.CoefficientCoordinates l E n T hT)
     (a : Etale.ordinaryFiniteUnit (FiniteRing l E n) T ⟶
       (Etale.ordinaryFiniteLine (FiniteRing l E n) (l ^ (n + 1))
-        (ULift.ext _ _ (coefficient_annihilates l E n)) T)⟦(2 : ℤ)⟧) :
+        (ULift.ext (coefficient_annihilates l E n)) T)⟦(2 : ℤ)⟧) :
     FiniteScalarBoundaryArrow l E n T :=
   (DerivedCategory.singleFunctor (DiagonalAb T) 0).map (finiteQuotient l E T n) ≫
         mapSingleArrow (finiteForget l E T n) (2 : ℤ)
@@ -126,7 +126,7 @@ def finiteScalarNormalizedAbelianRoute (n : ℕ) [Finite (SpTowerShriek.R l E n)
     (c : SpTowerP1.CoefficientCoordinates l E n T hT)
     (a : Etale.ordinaryFiniteUnit (FiniteRing l E n) T ⟶
       (Etale.ordinaryFiniteLine (FiniteRing l E n) (l ^ (n + 1))
-        (ULift.ext _ _ (coefficient_annihilates l E n)) T)⟦(2 : ℤ)⟧) :
+        (ULift.ext (coefficient_annihilates l E n)) T)⟦(2 : ℤ)⟧) :
     FiniteScalarBoundaryArrow l E n T :=
   (DerivedCategory.singleFunctor (DiagonalAb T) 0).map (integerComparison T).inv ≫
         (DerivedCategory.singleFunctor (DiagonalAb T) 0).map
@@ -144,12 +144,12 @@ def finiteScalarNormalizedCohomologyRoute (n : ℕ) [Finite (SpTowerShriek.R l E
     (c : SpTowerP1.CoefficientCoordinates l E n T hT)
     (b : Sheaf.H ((Etale.moduleAbelianForget (FiniteRing l E n) T).obj
       (Scheme.finiteEtaleTateLine T (l ^ (n + 1)) (FiniteRing l E n)
-        (ULift.ext _ _ (coefficient_annihilates l E n)))) 2) :
+        (ULift.ext (coefficient_annihilates l E n)))) 2) :
     FiniteScalarBoundaryArrow l E n T :=
   (DerivedCategory.singleFunctor (DiagonalAb T) 0).map (integerComparison T).inv ≫
     ordinaryFiniteComparedCohomologyClass (FiniteRing l E n) T
       (Scheme.finiteEtaleTateLine T (l ^ (n + 1)) (FiniteRing l E n)
-        (ULift.ext _ _ (coefficient_annihilates l E n))) b ≫
+        (ULift.ext (coefficient_annihilates l E n))) b ≫
     ((DerivedCategory.singleFunctor (DiagonalAb T) 0).map
       (finiteScalarLineCoordinate l E n T c))⟦(2 : ℤ)⟧'
 
@@ -161,12 +161,12 @@ def finiteScalarNormalizedClassRoute (n : ℕ) [Finite (SpTowerShriek.R l E n)]
     (c : SpTowerP1.CoefficientCoordinates l E n T hT)
     (a : Etale.ordinaryFiniteUnit (FiniteRing l E n) T ⟶
       (Etale.ordinaryFiniteLine (FiniteRing l E n) (l ^ (n + 1))
-        (ULift.ext _ _ (coefficient_annihilates l E n)) T)⟦(2 : ℤ)⟧) :
+        (ULift.ext (coefficient_annihilates l E n)) T)⟦(2 : ℤ)⟧) :
     FiniteScalarBoundaryArrow l E n T :=
   finiteScalarNormalizedCohomologyRoute l E n T c
     (Etale.ordinaryFiniteClass (FiniteRing l E n) T
       (Scheme.finiteEtaleTateLine T (l ^ (n + 1)) (FiniteRing l E n)
-        (ULift.ext _ _ (coefficient_annihilates l E n))) 2 a)
+        (ULift.ext (coefficient_annihilates l E n))) 2 a)
 
 /-- The normalized finite scalar image of an arbitrary integral root class.
 Source: the integral roots comparison and finite root insertion

@@ -321,7 +321,7 @@ private theorem principalCechHorizontalValue_square {A : Type u} [CommRing A]
     have hl := (principalCechIntersection_erase_le r f T.val a.val).trans
       (principalCechIntersection_erase_le r f (T.val.erase a.val) b.val)
     dsimp only [t, doubleTerm]
-    rw [dif_pos hc, dif_pos hl]
+    rw [dite_eq_left hc, dite_eq_left hl]
     split
     next hn₂ =>
       rw [map_smul, map_smul, smul_smul]

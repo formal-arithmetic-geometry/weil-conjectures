@@ -96,7 +96,7 @@ lemma injective_of_isIntegral {T : Type*} [CommRing T] [IsDomain T] [Algebra R T
     Function.Injective ψ := by
   refine (injective_iff_map_eq_zero ψ).2 fun x hx ↦ ?_
   have hker : RingHom.ker ψ.toRingHom = ⊥ := by
-    refine Ideal.eq_bot_of_comap_eq_bot (R := R) ?_
+    refine Ideal.eq_bot_of_under_eq_bot (R := R) ?_
     ext r
     simp only [Ideal.mem_comap, RingHom.mem_ker, AlgHom.toRingHom_eq_coe, RingHom.coe_coe,
       AlgHom.commutes, Ideal.mem_bot]
@@ -374,7 +374,7 @@ theorem etale_integralClosure_of_forall_inertia (hπ : π ≠ 0)
     powers_le_nonZeroDivisors_of_noZeroDivisors hπ
   have : IsDomain R' := IsLocalization.isDomain_of_le_nonZeroDivisors R' hπ'
   have : IsDedekindDomain R' := IsLocalization.isDedekindDomain R hπ' R'
-  have : IsDedekindDomain A := isDedekindDomain.of_formallyUnramified R' A
+  have : IsDedekindDomain A := IsDedekindDomain.of_formallyUnramified R' A
   have : Algebra.IsIntegral R' A := Algebra.IsIntegral.of_finite R' A
   -- the elements of `R'` map into `K`
   have hR'K (ψ : A →ₐ[R] Ω) (r' : R') :

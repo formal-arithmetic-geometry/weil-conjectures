@@ -253,7 +253,7 @@ theorem sectionGrade_internal (V : X.affineOpens) :
           rw [← hb]
           change (Scheme.Modules.Hom.app (X := X) (homogeneousProjection A n)) V.1
             ((Sigma.ι A.piece i ≫ A.decomposition.hom).app V.1 b) = 0
-          simpa only [if_neg h] using projection_inclusion_apply A V.1 i n b
+          simpa only [ite_eq_right h] using projection_inclusion_apply A V.1 i n b
     | add t s ht hs =>
         simp only [map_add, ht, hs, DirectSum.add_apply]
         rfl

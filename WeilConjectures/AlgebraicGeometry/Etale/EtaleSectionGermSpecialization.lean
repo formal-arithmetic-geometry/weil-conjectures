@@ -34,7 +34,7 @@ private noncomputable def affinePointedInclusion
 private noncomputable def pointedSchemeDiagram
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) :=
-  CategoryOfElements.π (pointSmallEtale s).fiber ⋙ Etale.forget S ⋙ Over.forget S
+  Functor.Elements.π (pointSmallEtale s).fiber ⋙ Etale.forget S ⋙ Over.forget S
 
 private noncomputable def affineSchemeCone
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]

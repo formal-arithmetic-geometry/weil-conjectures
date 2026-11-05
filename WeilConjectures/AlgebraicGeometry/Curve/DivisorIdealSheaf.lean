@@ -189,7 +189,7 @@ lemma IdealSheafData.ordAt_eq (I : X.IdealSheafData) {U : X.affineOpens} {b : Γ
     I.ordAt y = X.ord (X.germToFunctionField U.1 b) y := by
   have h : ∃ (U : X.affineOpens) (_ : y ∈ U.1) (b : Γ(X, U.1)), I.ideal U = Ideal.span {b} :=
     ⟨U, hy, b, hb⟩
-  rw [ordAt, dif_pos h]
+  rw [ordAt, dite_eq_left h]
   exact I.ord_eq_of_ideal_eq_span h.choose_spec.choose hy h.choose_spec.choose_spec.choose_spec hb
 
 /-- The order of an ideal sheaf at a point is nonnegative. -/
@@ -199,7 +199,7 @@ lemma IdealSheafData.ordAt_nonneg (I : X.IdealSheafData) (y : X) : 0 ≤ I.ordAt
     have : Nonempty U.1 := ⟨⟨y, hy⟩⟩
     rw [I.ordAt_eq hy hb]
     exact ord_germToFunctionField_nonneg b hy
-  · rw [IdealSheafData.ordAt, dif_neg h]
+  · rw [IdealSheafData.ordAt, dite_eq_right h]
 
 /-- The unit ideal sheaf has order zero everywhere. -/
 @[simp]
@@ -1081,7 +1081,7 @@ theorem Modules.exists_nonempty_iso_dual_toModules_idealSheaf_tensorObj (ℒ : C
     have hPT : P ∈ T := Finset.mem_biUnion.2 ⟨i, hi, hPS⟩
     have hEP : E P = N := by
       simp only [E, Finsupp.finsetSum_apply, Finsupp.single_apply, Finset.sum_ite_eq', hPT,
-        if_true]
+        ite_true]
     have h1 : (-C.ord (g i) P.1).toNat ≤ N :=
       (Finset.le_sup (f := fun P ↦ (-C.ord (g i) P.1).toNat) hPS).trans
         (Finset.le_sup (f := fun i ↦ (hS i).toFinset.sup fun P ↦ (-C.ord (g i) P.1).toNat) hi)

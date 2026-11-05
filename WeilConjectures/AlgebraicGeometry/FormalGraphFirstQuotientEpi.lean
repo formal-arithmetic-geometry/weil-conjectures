@@ -50,7 +50,7 @@ private theorem completion_preserves_limits {X : Scheme.{u}} [IsNoetherian X]
   let _ := hAdd'
   have hPres : PreservesFiniteLimits (completion X J) ∧
       PreservesFiniteColimits (completion X J) := by
-    apply ((Functor.exact_tfae (completion X J)).out 0 3).mp
+    apply ((Functor.exact_tfae (completion X J)).out 1 4).mp
     let P (z₁ : HasZeroMorphisms (CoherentModules X))
         (z₂ : HasZeroMorphisms (CoherentFormalModule X J)) : Prop :=
       ∀ hz : @Functor.PreservesZeroMorphisms _ _ _ _ z₁ z₂ (completion X J),

@@ -624,7 +624,7 @@ private def flattenElements
     {A B : Sheaf J (Type u)} (b : B ⟶ A) :
     (fibreSheaf b).obj.Elementsᵒᵖ ⥤ B.obj.Elementsᵒᵖ where
   obj X := op (B.obj.elementsMk X.unop.1.unop.unop.1 X.unop.2.val)
-  map {X Y} f := (CategoryOfElements.homMk
+  map {X Y} f := (Functor.Elements.homMk
     (B.obj.elementsMk Y.unop.1.unop.unop.1 Y.unop.2.val)
     (B.obj.elementsMk X.unop.1.unop.unop.1 X.unop.2.val)
     f.unop.val.unop.unop.val (congrArg Subtype.val f.unop.property)).op
@@ -655,8 +655,8 @@ private instance flattenElementsFull
       rw [hf]
       exact X.unop.2.property
     let g : X.unop.1.unop ⟶ Y.unop.1.unop :=
-      (CategoryOfElements.homMk (F := A.obj) _ _ f.unop.val hA).op
-    refine ⟨(CategoryOfElements.homMk Y.unop X.unop g.op ?_).op, ?_⟩
+      (Functor.Elements.homMk (F := A.obj) _ _ f.unop.val hA).op
+    refine ⟨(Functor.Elements.homMk Y.unop X.unop g.op ?_).op, ?_⟩
     · apply Subtype.ext
       exact f.unop.property
     · rfl
@@ -763,7 +763,7 @@ private theorem flattenRestrictionEquivalence
     let G := flattenElements b ⋙ elementMap b
     let P := elementProjection (fibreSheaf b)
     let α : G ≅ P := NatIso.ofComponents (fun X ↦
-      (CategoryOfElements.isoMk (P.obj X).unop (G.obj X).unop (Iso.refl _)
+      (Functor.Elements.isoMk (P.obj X).unop (G.obj X).unop (Iso.refl _)
         (by
           change A.obj.map (𝟙 _) X.unop.1.unop.unop.2 = b.hom.app _ X.unop.2.val
           rw [A.obj.map_id_apply]
@@ -800,7 +800,7 @@ private def representableElements
     Over U ⥤ ((presheafToSheaf J (Type u)).obj (yoneda.obj U)).obj.Elementsᵒᵖ where
   obj X := op (((presheafToSheaf J (Type u)).obj (yoneda.obj U)).obj.elementsMk
     (op X.left) ((toSheafify J (yoneda.obj U)).app _ X.hom))
-  map f := (CategoryOfElements.homMk _ _ f.left.op (by
+  map f := (Functor.Elements.homMk f.left.op (by
     rw [← NatTrans.naturality_apply]
     exact congrArg ((toSheafify J (yoneda.obj U)).app _) (Over.w f))).op
 
@@ -832,7 +832,7 @@ private instance representableElementsCoverDense
     obtain ⟨a, ha⟩ := hf
     let Y := Over.mk a
     let g : (representableElements J U).obj Y ⟶ X :=
-      (CategoryOfElements.homMk _ _ f.op ha.symm).op
+      (Functor.Elements.homMk f.op ha.symm).op
     exact ⟨_, g, 𝟙 _, Presieve.in_coverByImage _ g, by simp [g, representableElements,
       elementProjection, opOpEquivalence]⟩
 

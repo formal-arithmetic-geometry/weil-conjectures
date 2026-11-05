@@ -142,7 +142,7 @@ theorem coherent_support_power_ideal_kills (X : Scheme.{u}) [IsNoetherian X]
     intro U hU
     have hnt : n ⟨U, hU⟩ ≤ t := by
       have hm : U ∈ T := hfin.mem_toFinset.mpr hU
-      simpa only [dif_pos hU] using Finset.le_sup
+      simpa only [dite_eq_left hU] using Finset.le_sup
         (f := fun U ↦ if hU : U ∈ S then n ⟨U, hU⟩ else 0) hm
     exact (Ideal.pow_le_pow_right hnt).trans (hn ⟨U, hU⟩)
 

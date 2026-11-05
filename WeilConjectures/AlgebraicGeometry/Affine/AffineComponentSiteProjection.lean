@@ -203,7 +203,7 @@ private theorem component_algHom_bijective
     have hcomap (p : PrimeSpectrum C) :
         p.asIdeal.comap f₁.toRingHom = p.asIdeal.comap f₂.toRingHom :=
       congrArg PrimeSpectrum.asIdeal (DFunLike.congr_fun heq p)
-    apply AlgHom.coe_ringHom_injective
+    apply AlgHom.toRingHom_injective
     apply RingHom.ext
     intro b
     refine eq_of_localizationAtPrime_eq fun p ↦ ?_
@@ -842,7 +842,7 @@ private theorem component_coverPreserving (T : Scheme.{u}) [IsAffine T] :
   let E₀ : I → Over (componentProfinite T) := fun i ↦ Over.mk (f i ≫ E.hom)
   let a : ∀ i, E₀ i ⟶ E := fun i ↦ Over.homMk (f i) rfl
   have hjs : ∀ e : E.left, ∃ i x, (a i).left x = e :=
-    ((Profinite.effectiveEpiFamily_tfae V f).out 0 2).mp hf
+    ((Profinite.effectiveEpiFamily_tfae V f).out 1 3).mp hf
   have hc := component_cover E₀ E a hjs
   apply (topology T).superset_covering ?_ (Precoverage.generate_mem_toGrothendieck hc)
   apply (Sieve.generate_le_iff _ _).mpr

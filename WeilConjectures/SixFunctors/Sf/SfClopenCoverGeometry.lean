@@ -185,7 +185,7 @@ private theorem weak_of_refinement (T : Scheme.{t}) (W : T.ProEt)
       exact (ProEt.forget T ⋙ Over.forget T).mono_of_mono_map
         (inferInstanceAs (Mono (O i.down).ι))
     · intro i j hij Z a b hab
-      have hij' : i.down ≠ j.down := fun h ↦ hij (ULift.ext _ _ h)
+      have hij' : i.down ≠ j.down := fun h ↦ hij (ULift.ext h)
       have : IsEmpty Z.left := by
         constructor
         intro z

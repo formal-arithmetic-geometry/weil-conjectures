@@ -305,7 +305,7 @@ private theorem representative_braiding
       S.map (Prod.mkHom p.inv q.inv) ≫ x.inv) ≫
       (x.hom ≫ (γ P Q).hom ≫ y.inv) := by
   simp only [Functor.map_comp, Category.assoc, Iso.inv_hom_id_assoc,
-    Iso.map_inv_hom_id_assoc]
+    Iso.inv_hom_id_map_assoc]
   rw [reassoc_of% (hc M N), ← reassoc_of% (hn _ _ _ _ p.inv q.inv)]
 
 private theorem localizedBraiding_natural

@@ -312,7 +312,7 @@ lemma BorelMooreSection.pushforward_restrict (j : B ⟶ X) [IsOpenImmersion j.le
     Iso.inv_hom_id_assoc, Functor.map_comp, Category.assoc]
   rw [(boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ j).inv.naturality_assoc
       (dualizingComplexComp ℓ j).hom]
-  simp only [Iso.map_hom_inv_id_assoc]
+  simp only [Iso.hom_inv_id_map_assoc]
   exact (boundedConstructibleUpperStarLowerStarAdjunction ℓ
     j).unit_naturality_assoc α _
 

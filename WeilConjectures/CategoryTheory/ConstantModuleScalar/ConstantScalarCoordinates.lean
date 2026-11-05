@@ -562,7 +562,7 @@ theorem incl_proj_self {I : Type*} (b : Module.Basis I A B) (c : I)
   classical
   ext U x
   change (proj J A B (b.coord c) M).val.app U ((incl J A B (b c) M).val.app U x) = x
-  rw [incl_apply, proj_apply, coord_basis, if_pos rfl, one_smul]
+  rw [incl_apply, proj_apply, coord_basis, ite_eq_left rfl, one_smul]
 
 theorem incl_proj_of_ne {I : Type*} (b : Module.Basis I A B) {c d : I} (h : c â‰  d)
     (M : modules (constantRing J A)) :
@@ -570,7 +570,7 @@ theorem incl_proj_of_ne {I : Type*} (b : Module.Basis I A B) {c d : I} (h : c â‰
   classical
   ext U x
   change (proj J A B (b.coord d) M).val.app U ((incl J A B (b c) M).val.app U x) = 0
-  rw [incl_apply, proj_apply, coord_basis, if_neg h, zero_smul]
+  rw [incl_apply, proj_apply, coord_basis, ite_eq_right h, zero_smul]
 
 theorem sum_proj_incl {I : Type*} [Fintype I] (b : Module.Basis I A B)
     (M : modules (constantRing J A)) :

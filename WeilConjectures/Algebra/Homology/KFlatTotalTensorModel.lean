@@ -154,7 +154,7 @@ private theorem flat_coproductOnSite {I : Type} (F : I → Modules R)
     HasExactColimitsOfShape.domain_of_functor (Discrete I) (SheafOfModules.toSheaf.{r}
       ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))
   have : PreservesColimit (Discrete.functor F) (curriedTensor (Modules R)) :=
-    MonoidalCategory.Limits.preservesCoLimit_curriedTensor _
+    MonoidalCategory.Limits.preservesColimit_curriedTensor _
   let e : tensorLeft (∐ F) ≅ (Discrete.functor F ⋙ curriedTensor (Modules R)).flip ⋙ colim :=
     preservesColimitIso (curriedTensor (Modules R)) (Discrete.functor F) ≪≫
       colimitIsoFlipCompColim _

@@ -139,7 +139,7 @@ public import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
 public import Mathlib.CategoryTheory.Limits.Types.Filtered
 public import Mathlib.CategoryTheory.Filtered.Connected
 public import Mathlib.CategoryTheory.Filtered.Final
-public import Mathlib.Data.Finite.Prod
+public import Mathlib.Basic.Finite.Prod
 public import Mathlib.CategoryTheory.Sites.LocallySurjective
 public import Mathlib.CategoryTheory.Limits.Types.Colimits
 public import Mathlib.CategoryTheory.Sites.SheafHom
@@ -1413,7 +1413,7 @@ private theorem encoding_constructible_iff
         ((CondensedRing.finiteDiscreteCoefficientEquivalence B eR
           (internalToModule (ULift.{u + 1} B)) rfl X).functor.obj F) := by
   classical
-  rw [IsConstantModelConstructible, if_pos ⟨inferInstance, inferInstance⟩]
+  rw [IsConstantModelConstructible, ite_eq_left ⟨inferInstance, inferInstance⟩]
   constructor
   · rintro ⟨S, hS⟩
     refine ⟨S, fun i ↦ ?_⟩
@@ -1440,7 +1440,7 @@ private local instance constantModel_bounded_iso
     classical
     have hh := h.2 q
     have hX : CompactSpace X ∧ QuasiSeparatedSpace X := ⟨inferInstance, inferInstance⟩
-    simp only [IsConstantModelConstructible, if_pos hX] at hh ⊢
+    simp only [IsConstantModelConstructible, ite_eq_left hX] at hh ⊢
     exact constantConstructible_iso B X ((DerivedCategory.homologyFunctor _ q).mapIso e) hh
 
 end AlgebraicGeometry.ProEtale

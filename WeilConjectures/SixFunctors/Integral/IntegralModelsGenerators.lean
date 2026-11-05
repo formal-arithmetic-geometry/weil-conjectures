@@ -912,7 +912,7 @@ private theorem integralModel_extension_constructible
   apply single_constructible Λ X
   have hc : CompactSpace X := inferInstance
   have hq : QuasiSeparatedSpace X := inferInstance
-  rw [IsConstantModelConstructible, if_pos (And.intro hc hq)]
+  rw [IsConstantModelConstructible, ite_eq_left (And.intro hc hq)]
   exact hi
 
 set_option backward.isDefEq.respectTransparency.types false in
@@ -1687,7 +1687,7 @@ private theorem integralModel_constant_constructible
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
     (hM : IsConstantModelConstructible Λ X M) :
     IsConstructibleModuleObject (condensedRingObj Λ X) M := by
-  rw [IsConstantModelConstructible, if_pos ⟨inferInstance, inferInstance⟩] at hM
+  rw [IsConstantModelConstructible, ite_eq_left ⟨inferInstance, inferInstance⟩] at hM
   obtain ⟨S, hS⟩ := hM
   refine ⟨S, fun a ↦ ?_⟩
   have h := constantModel_lfp Λ (S.domain a) _ (hS a)

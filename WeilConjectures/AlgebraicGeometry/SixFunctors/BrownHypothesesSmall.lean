@@ -56,7 +56,7 @@ private theorem ordinary_constructible_iff (A : Type u) [CommRing A] [Finite A]
     FiniteDiscreteOrdinary.ordinaryConstructible A X M ↔
       IsConstructible (ULift.{u + 1} A) M := by
   classical
-  rw [FiniteDiscreteOrdinary.ordinaryConstructible, if_pos ⟨inferInstance, inferInstance⟩]
+  rw [FiniteDiscreteOrdinary.ordinaryConstructible, ite_eq_left ⟨inferInstance, inferInstance⟩]
   apply exists_congr
   intro S
   apply forall_congr'
@@ -97,7 +97,7 @@ private theorem small_bounded_constant_models
   have : ObjectProperty.EssentiallySmall.{u + 1} (IsConstantModelConstructible Λ X) := by
     rw [show IsConstantModelConstructible Λ X = IsFiniteConstantStratified Λ X by
       funext M
-      exact if_pos ⟨inferInstance, inferInstance⟩]
+      exact ite_eq_left ⟨inferInstance, inferInstance⟩]
     exact stratifiedModelsSmall Λ X
   have : ObjectProperty.IsClosedUnderIsomorphisms (IsConstantModelConstructible Λ X) :=
     (constantModelConstructibleFiniteTor_wellDefined Λ X).1
@@ -124,7 +124,7 @@ private theorem constant_heart_zero
       immersion := fun _ ↦ 𝟙 X
       range_immersion := fun _ ↦ Set.range_id' }
   refine ⟨0, isZero_zero _, ?_⟩
-  rw [IsConstantModelConstructible, if_pos ⟨inferInstance, inferInstance⟩]
+  rw [IsConstantModelConstructible, ite_eq_left ⟨inferInstance, inferInstance⟩]
   refine ⟨S, fun a ↦ ?_⟩
   let U : Scheme.Cover.{u} Scheme.proetalePrecoverage (S.domain a) :=
     .singleton (𝟙 _) (Precoverage.mem_coverings_of_isIso _)

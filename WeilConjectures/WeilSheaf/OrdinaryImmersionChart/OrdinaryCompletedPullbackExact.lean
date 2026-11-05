@@ -146,14 +146,14 @@ private instance liftSheafification (Y : Scheme.{t}) :
     have hh : f.app X x.down = f.app X y.down := congrArg ULift.down h
     apply J.superset_covering _ (Presheaf.equalizerSieve_mem J f x.down y.down hh)
     intro W a ha
-    exact ULift.ext _ _ ha
+    exact ULift.ext ha
   have : Presheaf.IsLocallySurjective J g := by
     constructor
     intro X x
     apply J.superset_covering _ (Presheaf.imageSieve_mem J f x.down)
     intro W a ha
     obtain ⟨y, hy⟩ := ha
-    exact ⟨ULift.up y, ULift.ext _ _ hy⟩
+    exact ⟨ULift.up y, ULift.ext hy⟩
   exact J.W_of_isLocallyBijective g
 
 private noncomputable def liftedYoneda (Y : Scheme.{t}) :

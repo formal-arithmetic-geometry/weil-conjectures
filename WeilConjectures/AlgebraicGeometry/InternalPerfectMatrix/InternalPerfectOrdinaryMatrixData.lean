@@ -79,7 +79,7 @@ instance sections_preservesHomology (W : Scheme.{u}) :
     congrArg (fun f : LocallyConstant (ConnectedComponents W) S.X₃ ↦ f x) hy'
   change S.f (k (y.down x)) = y.down x
   dsimp only [k]
-  rw [dif_pos hx]
+  rw [dite_eq_left hx]
   exact (hex (y.down x) hx).choose_spec
 
 /-- The locally constant quotient Hom complex, before taking cohomology.

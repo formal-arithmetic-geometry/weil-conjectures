@@ -278,13 +278,13 @@ private theorem adicProjection_surjective {C : Type u} [SmallCategory C]
     if h : n ≤ k then tail k h else adicTransition J A S n k (Nat.le_of_not_ge h) U b
   have hx (k : ℕ) : adicTransition J A S (k + 1) k (Nat.le_succ k) U (x (k + 1)) = x k := by
     by_cases h : n ≤ k
-    · simp only [x, dif_pos h, dif_pos (h.trans (Nat.le_succ k)), tail]
+    · simp only [x, dite_eq_left h, dite_eq_left (h.trans (Nat.le_succ k)), tail]
       rw [Nat.leRecOn_succ h, hlift]
     · by_cases h' : n ≤ k + 1
       · have he : n = k + 1 := by omega
         subst n
-        simp only [x, dif_pos le_rfl, dif_neg h, tail, Nat.leRecOn_self]
-      · simp only [x, dif_neg h, dif_neg h']
+        simp only [x, dite_eq_left le_rfl, dite_eq_right h, tail, Nat.leRecOn_self]
+      · simp only [x, dite_eq_right h, dite_eq_right h']
         exact adicTransition_comp J A S _ _ _ _ _ _ _
   have hcompat (k m : ℕ) (h : m ≤ k) : adicTransition J A S k m h U (x k) = x m := by
     induction k, h using Nat.le_induction with
@@ -304,7 +304,7 @@ private theorem adicProjection_surjective {C : Type u} [SmallCategory C]
   refine ⟨hc.lift cone PUnit.unit, ?_⟩
   have hp := congrArg (fun f ↦ f PUnit.unit) (hc.fac cone (op n))
   change adicProjection J A S n U (hc.lift cone PUnit.unit) = x n at hp
-  simpa only [x, dif_pos le_rfl, tail, Nat.leRecOn_self] using hp
+  simpa only [x, dite_eq_left le_rfl, tail, Nat.leRecOn_self] using hp
 
 private theorem adicConstantLifts {C : Type u} [SmallCategory C]
     (J : GrothendieckTopology C) (A : Type u) [CommRing A]

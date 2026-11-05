@@ -122,7 +122,7 @@ def groupPresheafUpEquiv (S : Profinite.{u}) :
 noncomputable abbrev continuousMapSheaf :
     Sheaf (coherentTopology Profinite.{u}) (Type u) :=
   TopCat.toSheafCompHausLike.{u, u} (fun X ↦ TotallyDisconnectedSpace X) (TopCat.of G)
-    (fun _ _ f h ↦ ((Profinite.effectiveEpi_tfae f).out 0 2).mp h)
+    (fun _ _ f h ↦ ((Profinite.effectiveEpi_tfae f).out 1 3).mp h)
 
 /-- The group presheaf is a sheaf on the small model. -/
 theorem groupPresheaf_isSheaf :

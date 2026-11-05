@@ -117,7 +117,7 @@ private theorem integerConstructibleComparison
   · exact integer_models.{u} l E X M
   · intro h
     have hqcqs : CompactSpace X ∧ QuasiSeparatedSpace X := ⟨inferInstance, inferInstance⟩
-    rw [IsConstantModelConstructible, if_pos hqcqs] at h
+    rw [IsConstantModelConstructible, ite_eq_left hqcqs] at h
     exact constructible_of_finiteConstantStratified.{u} _ X M h
 
 private theorem boundedConstructible_comap

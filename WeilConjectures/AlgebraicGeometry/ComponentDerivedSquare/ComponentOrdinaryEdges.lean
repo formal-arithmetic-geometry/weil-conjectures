@@ -213,7 +213,7 @@ private local instance componentContinuous (X : Scheme.{u}) [IsAffine X] :
   let E₀ : I → Over (affineComponentSpace X) := fun i ↦ Over.mk (f i ≫ E.hom)
   let a : ∀ i, E₀ i ⟶ E := fun i ↦ Over.homMk (f i) rfl
   have hjs : ∀ e : E.left, ∃ i x, (a i).left x = e :=
-    ((Profinite.effectiveEpiFamily_tfae V f).out 0 2).mp hf
+    ((Profinite.effectiveEpiFamily_tfae V f).out 1 3).mp hf
   have hc := hF.2.2.2.2.2.2.2.1 (ULift.{u} I) (fun i ↦ E₀ i.down) E
     (fun i ↦ a i.down) (by
       intro x

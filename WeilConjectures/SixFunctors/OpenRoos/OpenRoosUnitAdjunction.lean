@@ -601,13 +601,13 @@ private theorem reflectorFacts (T : Scheme.{t})
         IsIso ((IntegralOnSlice.completionUnit l E T none).app H) := by
     let P := (model H).choose
     let e := (model H).choose_spec.choose
-    exact (roosIntrinsicCompletenessEquivalence D.p l (Ne.symm hl) E T d hd H P e).out 0 4
+    exact (roosIntrinsicCompletenessEquivalence D.p l (Ne.symm hl) E T d hd H P e).out 1 5
   have localcrit (H : IntegralOnSlice.D l E T none) :
       IsIso ((IntegralOnSlice.completionUnit l E T none).app H) ↔
         IntegralPrincipalCone.locallyComplete l E T (integralCompletionScalarValue l E T) H := by
     let P := (model H).choose
     let e := (model H).choose_spec.choose
-    exact (roosIntrinsicCompletenessEquivalence D.p l (Ne.symm hl) E T d hd H P e).out 4 1
+    exact (roosIntrinsicCompletenessEquivalence D.p l (Ne.symm hl) E T d hd H P e).out 5 2
   have complete (H : IntegralOnSlice.D l E T none) :
       IntegralPrincipalCone.locallyComplete l E T (integralCompletionScalarValue l E T)
         ((IntegralOnSlice.completion l E T none).obj H) := by

@@ -128,7 +128,7 @@ theorem diagonalTrace_finite_unit_cohomology
   let A := ULift.{u + 1} (SpTowerShriek.R l E n)
   let F := (Scheme.sfIntrinsicModuleEquivalence S (SpTowerShriek.R l E n)).functor
   have hA : ((l ^ (n + 1) : ℕ) : A) = 0 :=
-    ULift.ext _ _ (coefficient_annihilates l E n)
+    ULift.ext (coefficient_annihilates l E n)
   have hpow : IsUnit ((l ^ (n + 1) : ℕ) : Γ(S, ⊤)) := by
     simpa only [Nat.cast_pow] using hS.pow (n + 1)
   have hi : IsIso ((F.mapDerivedCategory ⋙ DerivedCategory.homologyFunctor _ q).map

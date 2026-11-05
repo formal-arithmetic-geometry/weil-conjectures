@@ -185,9 +185,9 @@ theorem det_ind_heart_ii_sums
             dsimp [Preadditive.rightComp]
             change (x ≫ _) ≫ _ = _
             rw [Category.assoc, ← Functor.map_comp, ← Functor.map_comp, proj_comp]
-            simp only [dif_pos, eqToHom_refl]
+            simp only [dite_eq_left, eqToHom_refl]
             rw [(DerivedCategory.singleFunctor _ 0).map_id, (shiftFunctor _ q).map_id]
-            simp only [DirectSum.of_apply, dif_pos]
+            simp only [DirectSum.of_apply, dite_eq_left]
             change x ≫ 𝟙 (Y i) = x
             exact Category.comp_id x
           · dsimp [projShift, Preadditive.rightComp]

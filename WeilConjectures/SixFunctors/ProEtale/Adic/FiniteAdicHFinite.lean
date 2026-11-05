@@ -43,7 +43,7 @@ theorem finite_unitShift (hl : (l : k) ≠ 0) (m : ℕ) (n : ℤ) :
   let Λ := ULift.{u + 1} (ZMod (l ^ m))
   have : NeZero (l ^ m) := ⟨pow_ne_zero _ (Fact.out : l.Prime).ne_zero⟩
   have : HasInvertibleExponent Λ (Spec (.of k)) :=
-    ⟨l ^ m, Nat.pos_of_ne_zero (NeZero.ne _), ULift.ext _ _ (by simp [Λ]), by
+    ⟨l ^ m, Nat.pos_of_ne_zero (NeZero.ne _), ULift.ext (by simp [Λ]), by
       simpa using ((Ne.isUnit (pow_ne_zero m hl)).map (Scheme.ΓSpecIso (.of k)).inv.hom)⟩
   have hK : Etale.DerivedCategory.boundedConstructibleFiniteTor Λ S
       (𝟙_ (Etale.DerivedCategoryModule Λ S)) :=

@@ -44,7 +44,7 @@ theorem ordinary_relative_tensor_identification
       ((Mod.equalizerAdjTensorRightIso P).app Q).hom =
         Mod.equalizerAdjTensorπ Q P := by
     simp [Mod.equalizerAdjTensorRightIso, Mod.equalizerAdjTensorCofork,
-      Mod.equalizerAdjTensorπ, HasColimit.isoOfNatIso_ι_hom_assoc]
+      Mod.equalizerAdjTensorπ, HasColimit.ι_isoOfNatIso_hom_assoc]
   exact congrArg (fun f ↦ f.hom) h
 
 end AlgebraicGeometry.ProEtaleWeilSheaf

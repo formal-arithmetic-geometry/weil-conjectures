@@ -141,7 +141,7 @@ private theorem localization_flat
     change PreservesFiniteLimits (tensorLeft (𝟙_ A))
     exact preservesFiniteLimits_of_natIso (leftUnitorNatIso A).symm
   have : PreservesColimit D (curriedTensor A) :=
-    MonoidalCategory.Limits.preservesCoLimit_curriedTensor _
+    MonoidalCategory.Limits.preservesColimit_curriedTensor _
   let e : tensorLeft (colimit D) ≅ (D ⋙ curriedTensor A).flip ⋙ colim :=
     preservesColimitIso (curriedTensor A) D ≪≫ colimitIsoFlipCompColim _
   have : PreservesFiniteLimits ((D ⋙ curriedTensor A).flip) :=

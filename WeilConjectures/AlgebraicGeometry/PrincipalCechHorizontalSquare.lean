@@ -192,7 +192,7 @@ theorem principalCechHorizontal_square
     have hc := double_erase_card p S a.val b.val a.property b.property
     have hl := (principalCechIntersection_erase_le r f S.val.val a.val).trans
       (principalCechIntersection_erase_le r f (S.val.val.erase a.val) b.val)
-    simp only [doubleRestrictionTerm, rowRestrictionTerm, dif_pos hc, dif_pos hl]
+    simp only [doubleRestrictionTerm, rowRestrictionTerm, dite_eq_left hc, dite_eq_left hl]
     split_ifs with hn₂
     · simp only [Preadditive.zsmul_comp, smul_smul, Category.assoc]
       congr 2

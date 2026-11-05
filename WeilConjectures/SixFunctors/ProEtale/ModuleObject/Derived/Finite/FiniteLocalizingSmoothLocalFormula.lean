@@ -91,7 +91,7 @@ private theorem ordinary_constructible_iff (A : Type u) [CommRing A] [Finite A]
     FiniteDiscreteOrdinary.ordinaryConstructible A T M ↔
       IsConstructible (ULift.{u + 1} A) M := by
   classical
-  rw [FiniteDiscreteOrdinary.ordinaryConstructible, if_pos ⟨inferInstance, inferInstance⟩]
+  rw [FiniteDiscreteOrdinary.ordinaryConstructible, ite_eq_left ⟨inferInstance, inferInstance⟩]
   apply exists_congr
   intro S
   apply forall_congr'

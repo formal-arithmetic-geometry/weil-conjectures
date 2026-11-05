@@ -87,9 +87,9 @@ noncomputable def fieldFunctionsToLocallyFinite (T : Type u) [TopologicalSpace T
   toFun s := ULift.up ⟨(ContinuousMap.mk e he).comp s.down.1,
     comp_mem_locallyFiniteFunctions_of_algHom he _⟩
   map_add' s t :=
-    ULift.ext _ _ (Subtype.ext (ContinuousMap.ext fun x ↦ map_add e (s.down.1 x) (t.down.1 x)))
+    ULift.ext (Subtype.ext (ContinuousMap.ext fun x ↦ map_add e (s.down.1 x) (t.down.1 x)))
   map_smul' c s :=
-    ULift.ext _ _ (Subtype.ext (ContinuousMap.ext fun x ↦ map_mul e c.down (s.down.1 x)))
+    ULift.ext (Subtype.ext (ContinuousMap.ext fun x ↦ map_mul e c.down (s.down.1 x)))
 
 /-- The morphism of sheaves of rings `Λ_X ⟶ ℚ̄_ℓ,X`, composing functions with `e`, as a morphism
 of sheaves of `Λ`-modules into the restriction of scalars of `ℚ̄_ℓ,X`. -/
@@ -210,7 +210,7 @@ instance : Presheaf.IsLocallyInjective (Scheme.ProEt.topology X)
         { toFun y := ULift.up (y.down.1 t)
           map_add' _ _ := rfl
           map_smul' _ _ := rfl }) (fun x hx ↦ ?_) (fun _ _ ↦ rfl)
-    exact ULift.ext _ _ (Subtype.ext (ContinuousMap.ext fun t ↦ congrArg ULift.down (hx t)))
+    exact ULift.ext (Subtype.ext (ContinuousMap.ext fun t ↦ congrArg ULift.down (hx t)))
 
 
 omit [IsUltrametricDist Λ] in

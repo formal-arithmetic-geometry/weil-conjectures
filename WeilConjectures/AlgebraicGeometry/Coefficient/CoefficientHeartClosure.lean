@@ -348,7 +348,7 @@ private lemma heart_stratified_lisse
   · intro hM
     have hfinite : IsFiniteConstantStratified A X M := by
       simpa only [IsConstantModelConstructible,
-        if_pos (show CompactSpace X ∧ QuasiSeparatedSpace X from
+        ite_eq_left (show CompactSpace X ∧ QuasiSeparatedSpace X from
           ⟨inferInstance, inferInstance⟩)] using hM
     obtain ⟨S, hS⟩ := hfinite
     refine ⟨S, fun a ↦ ?_⟩
@@ -356,7 +356,7 @@ private lemma heart_stratified_lisse
       (S.immersion a).isEmbedding.isInducing.noetherianSpace
     exact (hlocal _ _).mpr ((hS a).isLocallyFinitelyPresented _)
   · rintro ⟨S, hS⟩
-    rw [IsConstantModelConstructible, if_pos ⟨inferInstance, inferInstance⟩]
+    rw [IsConstantModelConstructible, ite_eq_left ⟨inferInstance, inferInstance⟩]
     exact ⟨S, fun a ↦ heart_free_model A _ (hS a)⟩
 
 private lemma heart_closure_generic
@@ -418,7 +418,7 @@ private lemma heart_closure_generic
         (condensedRingObj A X)) :
         IsConstantModelConstructible A X M ↔
           IsConstructibleModuleObject (condensedRingObj A X) M := by
-      rw [IsConstantModelConstructible, if_pos ⟨inferInstance, inferInstance⟩]
+      rw [IsConstantModelConstructible, ite_eq_left ⟨inferInstance, inferInstance⟩]
       constructor
       · rintro ⟨S, hS⟩
         refine ⟨S, fun a ↦ ?_⟩

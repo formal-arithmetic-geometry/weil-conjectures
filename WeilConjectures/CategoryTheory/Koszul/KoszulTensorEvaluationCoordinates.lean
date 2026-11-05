@@ -170,7 +170,7 @@ theorem evaluation_coordinates (O : Sheaf J CommRingCat.{u})
   by_cases hp : p = n + d
   · subst p
     have ht : d + q = 0 := by omega
-    rw [dif_pos rfl, eqToHom_refl, Category.comp_id]
+    rw [dite_eq_left rfl, eqToHom_refl, Category.comp_id]
     erw [evaluationUncurry_component O P N d (n + d) q 0 (n + d)
       ht (by omega), Linear.comp_units_smul]
     rw [unitTensor_inclusion]
@@ -193,7 +193,7 @@ theorem evaluation_coordinates (O : Sheaf J CommRingCat.{u})
     simp only [hs, one_smul]
     change _ = N.X (n + d) ◁ basisDualCoordinate O P d b q ≫ (ρ_ (N.X (n + d))).hom
     unfold basisDualCoordinate
-    rw [dif_pos (show d + q = 0 from ht)]
+    rw [dite_eq_left (show d + q = 0 from ht)]
     erw [moduleHomMap]
     simp only [Category.assoc]
     exact congrArg (fun z ↦ N.X (n + d) ◁
@@ -201,7 +201,7 @@ theorem evaluation_coordinates (O : Sheaf J CommRingCat.{u})
         (ρ_ (N.X (n + d))).hom)
       (homPostBasis O (b)
         (HomologicalComplex.singleObjXSelf (.up ℤ) 0 (one O)).hom)
-  · rw [dif_neg hp]
+  · rw [dite_eq_right hp]
     have ht : d + q ≠ 0 := by omega
     erw [evaluationUncurry_component O P N d p q (d + q) (n + d)
       rfl (by omega), Linear.comp_units_smul]

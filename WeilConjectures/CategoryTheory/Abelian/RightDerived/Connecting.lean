@@ -190,7 +190,7 @@ lemma rightDerivedδ_naturality (q : ℕ) :
   let e := F.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso
   let ψ := (F.rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.ι).mapTriangle.map
     (plusSingleTriangleMap h₁ h₂ φ)
-  have hδ := (DerivedCategory.homologyFunctor D 0).homologySequenceδ_naturality _ _ ψ q _
+  have hδ := (DerivedCategory.homologyFunctor D 0).homologySequenceδ_naturality ψ q _
     (Nat.cast_succ q).symm
   simp only [rightDerivedδ, Category.assoc]
   rw [← (e (q + 1)).hom.naturality φ.τ₁, (e q).inv.naturality_assoc φ.τ₃]

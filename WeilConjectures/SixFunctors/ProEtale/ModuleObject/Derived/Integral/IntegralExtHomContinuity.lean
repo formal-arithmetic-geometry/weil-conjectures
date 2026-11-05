@@ -453,7 +453,7 @@ private theorem constructible_hom_continuity
   · intro q
     apply constructible_of_finiteConstantStratified Λ X
     have h := hC.2 q
-    simpa only [IsConstantModelConstructible, if_pos
+    simpa only [IsConstantModelConstructible, ite_eq_left
       (show CompactSpace X ∧ QuasiSeparatedSpace X from
         ⟨inferInstance, inferInstance⟩)] using h
 

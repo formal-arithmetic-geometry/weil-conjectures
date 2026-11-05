@@ -371,11 +371,11 @@ private def topCellSplitPresentationIso (k : Type u) [Field k]
   let e (q : Set.Icc a b) : sfResidueFree X k (r q.val) ≅ P.X q.val :=
     eqToIso (by
       dsimp [P, sfResidueSplit, sfSplitComplex]
-      rw [if_pos (show a ≤ q.val ∧ q.val ≤ b from q.property)])
+      rw [ite_eq_left (show a ≤ q.val ∧ q.val ≤ b from q.property)])
   have hd (p q : ℤ) : P.d p q = 0 := rfl
   have hs (q : ℤ) (hq : ¬ (a ≤ q ∧ q ≤ b)) : IsZero (P.X q) := by
     dsimp [P, sfResidueSplit, sfSplitComplex]
-    rw [if_neg hq]
+    rw [ite_eq_right hq]
     exact isZero_zero _
   exact Sigma.mapIso (fun q : Set.Icc a b ↦
     (CochainComplex.singleFunctor _ q.val).mapIso (e q)) ≪≫

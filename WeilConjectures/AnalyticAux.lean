@@ -60,13 +60,13 @@ private theorem hasSum_coeff_inv_one_sub_X_pow (hz : ‖z‖ < 1) {k : ℕ} (hk 
   have h0 : ∀ n, n ∉ Set.range (fun m : ℕ ↦ k * m) →
       (if k ∣ n then z ^ n else 0) = 0 := by
     intro n hn
-    refine if_neg ?_
+    refine ite_eq_right ?_
     rintro ⟨m, hm⟩
     exact hn ⟨m, hm.symm⟩
   have hcomp : ((fun n : ℕ ↦ if k ∣ n then z ^ n else 0) ∘ fun m : ℕ ↦ k * m) =
       fun m : ℕ ↦ (z ^ k) ^ m := by
     funext m
-    rw [Function.comp_apply, if_pos (dvd_mul_right k m), ← pow_mul]
+    rw [Function.comp_apply, ite_eq_left (dvd_mul_right k m), ← pow_mul]
   refine (hinj.hasSum_iff h0).mp ?_
   rw [hcomp]
   exact hasSum_geometric_of_norm_lt_one hza
@@ -96,7 +96,7 @@ private theorem summable_norm_and_hasSum_coeff_prod (hz : ‖z‖ < 1) (S : Fins
     simp only [Finset.prod_empty, coeff_one]
     constructor
     · refine summable_of_ne_finset_zero (s := ({0} : Finset ℕ)) fun n hn ↦ ?_
-      rw [if_neg (by simpa using hn), Rat.cast_zero, zero_mul, norm_zero]
+      rw [ite_eq_right (by simpa using hn), Rat.cast_zero, zero_mul, norm_zero]
     · have hfun : (fun n : ℕ ↦ ((if n = 0 then (1 : ℚ) else 0 : ℚ) : ℂ) * z ^ n) =
           fun n : ℕ ↦ if n = 0 then (1 : ℂ) else 0 := by
         funext n

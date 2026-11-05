@@ -69,12 +69,12 @@ theorem X_mul_derivative_expand_charpolyRev {W : Type*} [AddCommGroup W] [Module
       PowerSeries.coeff_C_mul, PowerSeries.coeff_expand]
     by_cases hm : e ∣ m
     · obtain ⟨k, rfl⟩ := hm
-      rw [if_pos (dvd_mul_right e k), Nat.mul_div_cancel_left _ (Nat.pos_of_ne_zero he)]
+      rw [ite_eq_left (dvd_mul_right e k), Nat.mul_div_cancel_left _ (Nat.pos_of_ne_zero he)]
       by_cases hk : k = 0
       · subst hk; simp [T]
-      · rw [if_pos ⟨mul_ne_zero he hk, dvd_mul_right e k⟩]
+      · rw [ite_eq_left ⟨mul_ne_zero he hk, dvd_mul_right e k⟩]
         simp [T, hk]
-    · rw [if_neg hm, if_neg fun h ↦ hm h.2, mul_zero]
+    · rw [ite_eq_right hm, ite_eq_right fun h ↦ hm h.2, mul_zero]
   have key := congrArg (PowerSeries.expand e he) hP
   rw [map_mul, map_mul, PowerSeries.expand_X, map_neg] at key
   rw [hD, ← hT, map_mul]
@@ -128,7 +128,7 @@ theorem charpolyRev_eq_prod_expand_of_trace_pow_eq [CharZero K] (A : Module.End 
     simp only [PowerSeries.coeff_mk]
     by_cases hm : m = 0
     · simp [hm]
-    · rw [if_neg hm, h m hm]
+    · rw [ite_eq_right hm, h m hm]
       refine Finset.sum_congr rfl fun i _ ↦ ?_
       simp [hm]
   rw [hsum] at hB

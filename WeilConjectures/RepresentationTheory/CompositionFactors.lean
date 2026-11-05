@@ -145,11 +145,11 @@ theorem exists_compositionSeries_append (A : Subrepresentation ρ) {m n : ℕ}
         ((F₂ (i + 1)).subquotient (F₂ i))) := by
   let F : ℕ → Subrepresentation ρ := fun i ↦
     if i ≤ m then map A.subtype (F₁ i) else comap A.mkQ (F₂ (i - m))
-  have hF₁ {i : ℕ} (hi : i ≤ m) : F i = map A.subtype (F₁ i) := if_pos hi
+  have hF₁ {i : ℕ} (hi : i ≤ m) : F i = map A.subtype (F₁ i) := ite_eq_left hi
   have hF₂ (i : ℕ) : F (m + i) = comap A.mkQ (F₂ i) := by
     rcases Nat.eq_zero_or_pos i with rfl | hi
     · rw [add_zero, hF₁ le_rfl, h₁m, h₂0, map_subtype_top, comap_mkQ_bot]
-    · exact (if_neg (by omega)).trans (by rw [Nat.add_sub_cancel_left])
+    · exact (ite_eq_right (by omega)).trans (by rw [Nat.add_sub_cancel_left])
   have he₁ (i : ℕ) (hi : i < m) :
       Nonempty (((F (i + 1)).subquotient (F i)).Equiv ((F₁ (i + 1)).subquotient (F₁ i))) := by
     rw [hF₁ hi.le, hF₁ hi]

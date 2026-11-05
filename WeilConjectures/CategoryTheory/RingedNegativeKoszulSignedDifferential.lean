@@ -168,8 +168,8 @@ private theorem negative_basis_d_signed
         have ht : eI.inv ≫ (K.XIsoOfEq hdeg).hom = eE.inv :=
           single_transport O _ _ hc (by omega) hdeg
         have hpar : Even (q + (I.1.card : ℤ)) := by rw [hc]; exact Even.zero
-        erw [dif_pos hdeg]
-        simp only [if_pos hpar, one_mul]
+        erw [dite_eq_left hdeg]
+        simp only [ite_eq_left hpar, one_mul]
         rw [← Category.assoc]
         change (eI.inv ≫ (ρS _ • (K.XIsoOfEq hdeg).hom)) ≫ _ = _
         rw [Linear.comp_smul, ht]

@@ -562,10 +562,10 @@ private def coordinateBicone {J : Type*} (D : J → Type*)
         simp [coordinateProjection, coordinateInclusion, coordinateInsertion,
           coordinateTransport, NatTrans.pi', Functor.pi', Pi.eval]
       · have hz : IsZero ((coordinateInsertion D i).obj (M i) l) := by
-          simpa only [coordinateInsertion, Functor.pi'_obj, dif_neg hl, Functor.const_obj_obj]
+          simpa only [coordinateInsertion, Functor.pi'_obj, dite_eq_right hl, Functor.const_obj_obj]
             using (HasZeroObject.zero (C := D l)).choose_spec
         exact hz.eq_of_src _ _
-    · simp only [dif_neg h]
+    · simp only [dite_eq_right h]
       apply NatTrans.ext
       funext M l
       by_cases hi : i = l
@@ -615,7 +615,7 @@ private def transportBicone {C : Type*} [Category C] [HasZeroMorphisms C]
     · subst k
       rw [Category.assoc, ← Category.assoc (b.ι i), b.ι_π]
       simp only [dite_true, eqToHom_refl, Category.id_comp, Iso.inv_hom_id]
-    · simp only [Category.assoc, ← Category.assoc (b.ι i), b.ι_π, dif_neg hik,
+    · simp only [Category.assoc, ← Category.assoc (b.ι i), b.ι_π, dite_eq_right hik,
         zero_comp, comp_zero]
 
 private def transportBicone_bilimit {C : Type*} [Category C] [Preadditive C]
@@ -869,7 +869,7 @@ private theorem insertionOffDiagonal (i k : I) (hki : k ≠ i) (M) :
   have hz : IsZero ((CoordinateSums.coordinateInsertion
       (fun l ↦ Modules.{t, u, v, w} ((clopenRingRestriction (j l)).obj R)) i).obj M k) := by
     simpa only [CoordinateSums.coordinateInsertion, Functor.pi'_obj,
-      dif_neg (Ne.symm hki), Functor.const_obj_obj] using
+      dite_eq_right (Ne.symm hki), Functor.const_obj_obj] using
         (HasZeroObject.zero (C := Modules.{t, u, v, w}
           ((clopenRingRestriction (j k)).obj R))).choose_spec
   exact hz.of_iso ((insertionCoordinate.{t, u, v, w} X I Y j hd hc R hcomm i k).app M)

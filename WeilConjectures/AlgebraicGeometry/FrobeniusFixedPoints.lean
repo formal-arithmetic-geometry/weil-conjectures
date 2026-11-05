@@ -87,14 +87,14 @@ theorem finite_setOf_spec_map_comp_eq_self_of_isOpenImmersion [Finite K] {X : Sc
     rintro _ ⟨P, ⟨-, hP, h⟩, rfl⟩
     rw [Set.mem_univ_pi]
     intro g
-    simp only [Φ, dif_pos h]
+    simp only [Φ, dite_eq_left h]
     exact hσ _ (congr_arg (fun F : R ⟶ .of Ω ↦ F g) (hφσ P h hP))
   · rintro P ⟨hPK, -, hP⟩ Q ⟨hQK, -, hQ⟩ hPQ
     let φP : R →ₐ[K] Ω := ⟨(φ P hP).hom, fun r ↦ congr_arg (fun F ↦ F r) (hφK P hP hPK)⟩
     let φQ : R →ₐ[K] Ω := ⟨(φ Q hQ).hom, fun r ↦ congr_arg (fun F ↦ F r) (hφK Q hQ hQK)⟩
     have : φP = φQ := AlgHom.ext_of_adjoin_eq_top hs fun g hg ↦ by
       have := congr_fun hPQ ⟨g, hg⟩
-      simp only [Φ, dif_pos hP, dif_pos hQ] at this
+      simp only [Φ, dite_eq_left hP, dite_eq_left hQ] at this
       exact this
     rw [← hφ P hP, ← hφ Q hQ]
     congr 2

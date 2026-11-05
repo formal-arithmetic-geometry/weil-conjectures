@@ -120,7 +120,7 @@ theorem truncated_directImage_affine_finiteSupport
       by_cases e : j = i
       · subst j
         simp [P, M]
-      · simp only [dif_neg e]
+      · simp only [dite_eq_right e]
         ext V x
         rfl
     have hm : Mono (Sigma.desc (fun i ↦ G.map (u i))) := by

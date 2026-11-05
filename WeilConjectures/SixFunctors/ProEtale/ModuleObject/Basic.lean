@@ -329,7 +329,7 @@ lemma coverPreserving_profiniteToProEt :
   intro T R hR
   obtain ⟨ι, hι, S, f, hf, hRf⟩ :=
     (coherentTopology.mem_sieves_iff_hasEffectiveEpiFamily R).mp hR
-  have hsurj := ((Profinite.effectiveEpiFamily_tfae S f).out 0 2).mp hf
+  have hsurj := ((Profinite.effectiveEpiFamily_tfae S f).out 1 3).mp hf
   have hgeom : ∀ q : profiniteToScheme.obj T,
       ∃ i, q ∈ Set.range (profiniteToScheme.map (f i)) := by
     intro q

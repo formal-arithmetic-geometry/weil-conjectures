@@ -179,7 +179,7 @@ theorem one_le_coeff_tprod_inv_one_sub_X_pow {β : Type*} {e : β → ℕ} (he :
   refine le_trans ?_ (Finset.single_le_sum (fun p _ ↦ mul_nonneg (hF.1 p.1) (hG.1 p.2)) hmem)
   have h0 : coeff 0 (∏ b ∈ s.erase b₀, F b) = 1 := by simpa using hG.2
   simp only [h0, mul_one, F, inv_one_sub_X_pow_eq_mk (he b₀), coeff_mk, dvd_mul_right,
-    if_true, le_refl]
+    ite_true, le_refl]
 
 /-- The product `∏ₓ (1 - X ^ eₓ)⁻¹` over a nonempty family is not a polynomial. -/
 theorem tprod_inv_one_sub_X_pow_ne_coe {β : Type*} [Nonempty β] {e : β → ℕ}

@@ -153,7 +153,7 @@ lemma bijective_dualLinearMap
     (θ : L ≃ₗ[ULift.{u + 1} (PadicAlgCl l)] ULift.{u + 1} (PadicAlgCl l)) :
     Function.Bijective (dualLinearMap p θ.toLinearMap) := by
   refine ⟨fun (m : M) (m' : M) h ↦ hp.1 (LinearMap.ext fun (n : N) ↦
-    θ.injective (ULift.ext _ _ ?_)), fun φ ↦ ?_⟩
+    θ.injective (ULift.ext ?_)), fun φ ↦ ?_⟩
   · exact LinearMap.congr_fun h n
   · let ψ : N →ₗ[ULift.{u + 1} (PadicAlgCl l)] L :=
       { toFun (n : N) := θ.symm (ULift.up (φ n))

@@ -83,7 +83,7 @@ theorem inv_alternatingCharpolyRevProd_eq_exp (s : Finset ℤ) (u : ∀ i, Modul
     rw [map_sum, PowerSeries.coeff_mk]
     split_ifs with hn
     · simp [hT, hn]
-    · simp only [hT, PowerSeries.coeff_smul, PowerSeries.coeff_mk, if_neg hn, ha]
+    · simp only [hT, PowerSeries.coeff_smul, PowerSeries.coeff_mk, ite_eq_right hn, ha]
   have hP1 (i : ℤ) :
       PowerSeries.constantCoeff (((u i).charpolyRev.comp (Polynomial.X ^ 1) :
         Polynomial K) : PowerSeries K) = 1 := by

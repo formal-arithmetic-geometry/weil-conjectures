@@ -513,7 +513,7 @@ theorem completedIntegralPrincipalUnitCriterion
   obtain ⟨p, hpl, hp⟩ := Nat.exists_infinite_primes (l + 1)
   let : Fact p.Prime := ⟨hp⟩
   obtain ⟨d, hd, _⟩ := PrincipalKoszulStrictReplacement.coefficient_datum l E
-  have h := (roosIntrinsicCompletenessEquivalence p l (by omega) E Y d hd K P e).out 0 4
+  have h := (roosIntrinsicCompletenessEquivalence p l (by omega) E Y d hd K P e).out 1 5
   change IsDerivedCompleteUnrestricted l E Y K ↔
     IsIso ((IntegralOnSlice.completionUnit l E Y none).app K) at h
   rw [h]

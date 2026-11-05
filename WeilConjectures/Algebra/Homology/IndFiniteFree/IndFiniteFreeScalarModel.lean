@@ -299,7 +299,7 @@ private theorem tensorLeft_colimit_finiteLimits {R : Sheaf J CommRingCat.{r}}
     have := tensorLeft_preservesColimits_independentCoefficients R M
     exact preservesColimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight M)
   have : PreservesColimit F (curriedTensor (Modules R)) :=
-    MonoidalCategory.Limits.preservesCoLimit_curriedTensor F
+    MonoidalCategory.Limits.preservesColimit_curriedTensor F
   let e : tensorLeft c.pt ≅ (F ⋙ curriedTensor (Modules R)).flip ⋙ colim :=
     (curriedTensor (Modules R)).mapIso (hc.coconePointUniqueUpToIso (colimit.isColimit F)) ≪≫
       preservesColimitIso (curriedTensor (Modules R)) F ≪≫ colimitIsoFlipCompColim _

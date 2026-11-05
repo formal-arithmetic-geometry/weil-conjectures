@@ -128,7 +128,7 @@ theorem ContinuousMapRingObj.isLocallyFree_of_isLocallyFinitelyPresented
   have : IsCommMonObj (Profinite.continuousCoefficientRingObj E') :=
     Sheaf.isCommMonObj_sheafCompose_obj
       (coherentTopology Profinite.{u}) (Profinite.continuousCoefficientRingSheaf E')
-      (fun _ a b ↦ ULift.ext _ _ (mul_comm a.down b.down))
+      (fun _ a b ↦ ULift.ext (mul_comm a.down b.down))
   let e := (sheafCompose (coherentTopology Profinite.{u})
     (forget₂ RingCat.{u + 1} Ab.{u + 1})).mapIso (Profinite.continuousMapRingSheafIsoULift E)
   let φ := (upperStarFromPoint Z).map e.hom

@@ -119,12 +119,12 @@ private lemma unit_pullbackExchange_aux
   have hn := adjM.unit.naturality ut.inv
   simp only [Functor.id_map, Functor.comp_map] at hn
   rw [Functor.map_comp, Category.assoc, reassoc_of% nat, hi]
-  simp only [Category.assoc, Iso.map_inv_hom_id_assoc, ← Functor.map_comp]
+  simp only [Category.assoc, Iso.inv_hom_id_map_assoc, ← Functor.map_comp]
   congr 3
   simp only [Functor.map_comp, Category.assoc]
   rw [reassoc_of% hβ, reassoc_of% hu, reassoc_of% hn, hj, hε]
-  simp only [← Functor.map_comp, Category.assoc, Iso.map_inv_hom_id_assoc, Iso.inv_hom_id_assoc,
-    Iso.map_inv_hom_id_assoc]
+  simp only [← Functor.map_comp, Category.assoc, Iso.inv_hom_id_map_assoc, Iso.inv_hom_id_assoc,
+    Iso.inv_hom_id_map_assoc]
 
 private lemma homEquiv_symm_comp_mateEquiv_aux {DY DX DY' DX' : Type*} [Category DY] [Category DX]
     [Category DY'] [Category DX'] {Ff : DY ⥤ DX} {Rf : DX ⥤ DY} {Ff' : DY' ⥤ DX'}

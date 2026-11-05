@@ -189,7 +189,7 @@ theorem exists_normalized_component_section_cover
     intro b
     by_cases hba : b = a
     · subst b
-      simpa only [m, dif_pos rfl] using he.map hUW
+      simpa only [m, dite_eq_left rfl] using he.map hUW
     · exact freeGenerator_empty (M b) (hempty b hba) (m b)
   have hoffCoefficient (x : ↥(Tᶜ)) : ∃ U : Y.Opens, (x : Y) ∈ U ∧
       (U : Set Y) ⊆ Tᶜ ∧ ∃ (f : Γ(Y, U)) (m : ∀ a, Γ(M a, (i a) ⁻¹ᵁ U)),
@@ -239,7 +239,7 @@ theorem exists_normalized_component_section_cover
       | inl t' =>
         have ht := hUpT t.down x (hWb hxW) hxT
         have ht' := hUpT t'.down x (hWc hxW) hxT
-        have heq : t = t' := ULift.ext _ _ (Subtype.ext (ht.symm.trans ht'))
+        have heq : t = t' := ULift.ext (Subtype.ext (ht.symm.trans ht'))
         exact hbc (congrArg Sum.inl heq)
       | inr y => exact hUoT y.down (hWc hxW) hxT
     | inr y => exact hUoT y.down (hWb hxW) hxT

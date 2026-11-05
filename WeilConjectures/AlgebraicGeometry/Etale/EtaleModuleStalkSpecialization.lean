@@ -118,7 +118,7 @@ theorem existsUnique_etaleModuleStalkSpecialization
   let hc : IsColimit c :=
     (Functor.Final.isColimitWhiskerEquiv F.op _).symm
       ((pointSmallEtale s).isColimitPresheafFiberCocone G.obj)
-  let d : Cocone (F.op ⋙ (CategoryOfElements.π (pointSmallEtale s).fiber).op ⋙
+  let d : Cocone (F.op ⋙ (Functor.Elements.π (pointSmallEtale s).fiber).op ⋙
       G.obj) :=
     { pt := (pointSmallEtale (t ≫ strictHenselizationStructuralMap s)).sheafFiber.obj G
       ι :=

@@ -184,7 +184,7 @@ private theorem profinite_cover_preserving :
   obtain ⟨A, _, S, f, hf, hmem⟩ :=
     (coherentTopology.mem_sieves_iff_hasEffectiveEpiFamily R).mp hR
   have hjs : ∀ t : T, ∃ a s, f a s = t :=
-    ((Profinite.effectiveEpiFamily_tfae S f).out 0 2).mp hf
+    ((Profinite.effectiveEpiFamily_tfae S f).out 1 3).mp hf
   have hcover : Presieve.ofArrows (fun a ↦ profiniteToProEt.obj (S a))
       (fun a ↦ profiniteToProEt.map (f a)) ∈ Scheme.ProEt.precoverage specZ _ := by
     rw [Scheme.ProEt.mem_precoverage_iff, Presieve.map_ofArrows]

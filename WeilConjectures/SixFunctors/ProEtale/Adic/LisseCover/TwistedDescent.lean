@@ -84,13 +84,13 @@ noncomputable def finInv {N : ℕ} (g : Fin N → Fin N) (a : Fin N) : Fin N :=
 lemma finInv_apply {N : ℕ} {g : Fin N → Fin N} (hg : Function.Injective g) (b : Fin N) :
     finInv g (g b) = b := by
   have h : ∃ b', g b' = g b := ⟨b, rfl⟩
-  simp only [finInv, dif_pos h]
+  simp only [finInv, dite_eq_left h]
   exact hg h.choose_spec
 
 lemma apply_finInv {N : ℕ} {g : Fin N → Fin N} (hg : Function.Surjective g) (a : Fin N) :
     g (finInv g a) = a := by
   have h : ∃ b, g b = a := hg a
-  simp only [finInv, dif_pos h]
+  simp only [finInv, dite_eq_left h]
   exact h.choose_spec
 
 lemma finInv_id {N : ℕ} (a : Fin N) : finInv id a = a :=

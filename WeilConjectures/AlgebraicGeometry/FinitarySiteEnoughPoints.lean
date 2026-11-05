@@ -178,7 +178,7 @@ private lemma systemHomIso_ι
         colimit.ι (U ⋙ uliftYoneda.{u}.obj X) i (ULift.up f) := by
   change (((colimit.ι (inverseSystemRepresentableDiagram U.leftOp) i).app X) ≫
     (systemHomIso U X).hom) f = _
-  simp [systemHomIso, HasColimit.isoOfNatIso_ι_hom]
+  simp [systemHomIso, HasColimit.ι_isoOfNatIso_hom]
   rfl
 
 private lemma systemHomIso_naturality

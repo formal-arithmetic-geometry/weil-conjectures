@@ -172,10 +172,10 @@ theorem exists_stalk_unit_cancellation_at {Y : Scheme.{u}} (y : Y)
     obtain ⟨ej⟩ := haway j (by omega) (by omega)
     exact (P.isZero_of_isStrictlyLE d j hj).of_iso ej
   · have hp := p.down.isLt
-    simp only [n', eq_self, true_or, if_true]
+    simp only [n', eq_self, true_or, ite_true]
     omega
   · have hq := q.down.isLt
-    simp only [n', eq_self, or_true, if_true]
+    simp only [n', eq_self, or_true, ite_true]
     omega
   · intro j hj hj'
     simp [n', hj, hj']

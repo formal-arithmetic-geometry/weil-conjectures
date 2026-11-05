@@ -238,8 +238,8 @@ private lemma freeMatrix_id [DecidableEq ι] :
   simp only [freeMatrix, Matrix.one_apply, Category.id_comp]
   by_cases h : i = j
   · subst h
-    rw [biproduct.ι_π_self, if_pos rfl, endFun_id]
-  · rw [biproduct.ι_π_ne _ (Ne.symm h), if_neg h, endFun_zero]
+    rw [biproduct.ι_π_self, ite_eq_left rfl, endFun_id]
+  · rw [biproduct.ι_π_ne _ (Ne.symm h), ite_eq_right h, endFun_zero]
 
 private lemma freeMatrix_injective :
     Function.Injective (freeMatrix e (ι := ι) (κ := κ)) := by

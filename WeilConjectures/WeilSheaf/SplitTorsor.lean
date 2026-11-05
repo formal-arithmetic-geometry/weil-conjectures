@@ -258,7 +258,7 @@ lemma torsorEval_hom_ext (hsplit : IsTorsorSplit π τ hτ)
     (show (f ≫ ε.hom.app _) ≫ (ε.inv.app _ ≫ (torsorEval l π τ hτ c).hom) =
       (g ≫ ε.hom.app _) ≫ (ε.inv.app _ ≫ (torsorEval l π τ hτ c).hom) by
         simpa using h c)).trans (key c _))
-  refine ULift.ext _ _ (Subtype.ext (ContinuousMap.ext fun z ↦ ?_))
+  refine ULift.ext (Subtype.ext (ContinuousMap.ext fun z ↦ ?_))
   have := congrArg (fun y ↦ y.down.1 (pullback.fst (V.hom ≫ π) π z))
     (hc (torsorIndex π τ hτ V.hom hsplit z))
   simp only [adicFunctionsPresheaf_map, ModuleCat.hom_ofHom] at this

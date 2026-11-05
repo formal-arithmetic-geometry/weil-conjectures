@@ -425,7 +425,7 @@ import Mathlib.CategoryTheory.Sites.LocalProperties
 import Mathlib.CategoryTheory.Limits.Connected
 import Mathlib.CategoryTheory.Filtered.Connected
 import Mathlib.CategoryTheory.Filtered.Final
-import Mathlib.Data.Finite.Prod
+import Mathlib.Basic.Finite.Prod
 import WeilConjectures.Mathlib.CategoryTheory.Sites.LocallySurjective
 import WeilConjectures.AlgebraicGeometry.LisseLatticeClassSheaf
 import WeilConjectures.AlgebraicGeometry.LatticeSheafLocallyConstant
@@ -461,7 +461,10 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 import Mathlib.Analysis.Normed.Field.WithAbs
 import Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.Defs
 import Mathlib.GroupTheory.Coset.Defs
-import Mathlib.Topology.Algebra.Module.Equiv
+import Mathlib.Topology.Algebra.Module.Equiv.Basic
+import Mathlib.Topology.Algebra.Module.Equiv.Pi
+import Mathlib.Topology.Algebra.Module.Equiv.Prod
+import Mathlib.Topology.Algebra.Module.Equiv.Submodule
 import Mathlib.Topology.CompactOpen
 import Mathlib.LinearAlgebra.Basis.Defs
 import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal

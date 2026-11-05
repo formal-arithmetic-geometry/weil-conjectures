@@ -383,7 +383,7 @@ theorem residue_eq_zero_iff_forall_monodromy_eq_one (V : C.Opens)
         exact hζ.pow_eq_one_iff_dvd _ |>.1 h1
       rw [hχ] at h2
       apply Multiplicative.toAdd.injective
-      exact ULift.ext _ _ h2
+      exact ULift.ext h2
     -- the kernel of the monodromy is a closed normal subgroup containing the image of inertia
     let K := (T.monodromy s G).toMonoidHom.ker
     have hKc : IsClosed (K : Set G) :=

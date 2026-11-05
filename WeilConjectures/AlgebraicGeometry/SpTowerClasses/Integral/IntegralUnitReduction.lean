@@ -98,7 +98,7 @@ private theorem single_transpose
       HomologicalComplex.single_map_f_self, HomologicalComplex.singleObjXSelf,
       HomologicalComplex.singleObjXIsoOfEq, HomologicalComplex.comp_f,
       Functor.mapHomologicalComplex_map_f, NatIso.ofComponents_hom_app,
-      dif_pos, eqToIso_refl, Iso.refl_hom, Iso.refl_inv, eqToHom_refl,
+      dite_eq_left, eqToIso_refl, Iso.refl_hom, Iso.refl_inv, eqToHom_refl,
       Functor.map_comp, Category.id_comp]
     change (adj.unit.app X ≫ G.map (𝟙 (F.obj X)) ≫ G.map f ≫ G.map (𝟙 Y)) ≫
       𝟙 _ = (adj.unit.app X ≫ 𝟙 _) ≫ G.map f ≫ 𝟙 _

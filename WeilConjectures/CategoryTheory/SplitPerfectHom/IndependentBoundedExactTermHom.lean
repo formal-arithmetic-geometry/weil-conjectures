@@ -119,7 +119,7 @@ private theorem quasiIso_homComplex_map_of_single_degree_exact_term
     intro S hS
     obtain ⟨hz, h⟩ := hexact S hS
     exact h
-  have : F.PreservesHomology := ((Functor.exact_tfae F).out 0 2).mp hF
+  have : F.PreservesHomology := ((Functor.exact_tfae F).out 1 3).mp hF
   classical
   let H := (homComplexFunctor.{c, v, max c v r, max c v r} (R := R)).obj (op P)
   let π := Classical.choose

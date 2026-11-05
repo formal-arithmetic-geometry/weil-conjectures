@@ -91,7 +91,7 @@ lemma isFiniteSheaf_uliftYoneda (P : T.Etale) [IsFinite P.hom] :
     refine ⟨Φ.fiber.map a.down v, ?_⟩
     have := GrothendieckTopology.Point.toPresheafFiber_w_apply (Φ := Φ) a.down v
       (uliftYoneda.{u + 1}.obj P) ⟨𝟙 P⟩
-    exact this.symm.trans (congrArg _ (ULift.ext _ _ (Category.comp_id a.down : a.down ≫ 𝟙 P = _)))
+    exact this.symm.trans (congrArg _ (ULift.ext (Category.comp_id a.down : a.down ≫ 𝟙 P = _)))
 
 /-- The sheaf of sections of a finite étale `T`-scheme is constant over the members of an étale
 cover of `T`, over which `P` becomes a trivial cover. -/

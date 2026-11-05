@@ -202,7 +202,7 @@ private theorem smith_transport {A B Y : Type u} [CommRing A] [CommRing B]
     have hz := congrArg (fun P : Matrix (Fin k) (Fin k) A ↦ P i j) (h z)
     by_cases hij : i = j <;>
       simpa only [Matrix.mul_apply, ContinuousMap.sum_apply, ContinuousMap.mul_apply,
-        Matrix.map_apply, Matrix.one_apply, hij, if_true, if_false, ContinuousMap.one_apply,
+        Matrix.map_apply, Matrix.one_apply, hij, ite_true, ite_false, ContinuousMap.one_apply,
         ContinuousMap.zero_apply] using hz
   have hunit {k : ℕ} (M : Matrix.GeneralLinearGroup (Fin k) B) :
       M.val.map e.symm * (M⁻¹).val.map e.symm = 1 ∧

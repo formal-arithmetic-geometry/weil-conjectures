@@ -78,9 +78,9 @@ private lemma freeMatrix_matrixHom {X : Scheme.{u}} {I J : Type u} [Fintype J]
     rw [← Category.assoc, hi, Preadditive.sum_comp]
     simp only [Category.assoc, ιFree_freeπ]
     rw [Finset.sum_eq_single j]
-    · rw [if_pos rfl, Category.comp_id]
+    · rw [ite_eq_left rfl, Category.comp_id]
     · intro k _ hkj
-      rw [if_neg hkj, comp_zero]
+      rw [ite_eq_right hkj, comp_zero]
     · intro h
       exact (h (Finset.mem_univ j)).elim
   rw [h, scalarHom_app_top]

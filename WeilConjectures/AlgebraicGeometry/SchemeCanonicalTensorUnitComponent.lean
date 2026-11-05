@@ -103,7 +103,7 @@ private theorem tensor_unit_action_component {C : Type*} [Category* C] [Preaddit
       else 0 := by
   classical
   by_cases h : r + q = 0
-  · rw [dif_pos h]
+  · rw [dite_eq_left h]
     have hpk : p = k := by omega
     cases hpk
     have ht := tensor_action_summand F V P _ e p q r n 0 p hpq hnr
@@ -114,7 +114,7 @@ private theorem tensor_unit_action_component {C : Type*} [Category* C] [Preaddit
     rw [ht', tensor_unit_summand]
     simp only [whiskerLeft_comp, Category.assoc, HomologicalComplex.XIsoOfEq,
       eqToIso_refl, Iso.refl_hom, Category.comp_id]
-  · rw [dif_neg h]
+  · rw [dite_eq_right h]
     have ht := tensor_action_summand F V P _ e p q r n (q + r) k hpq hnr rfl (by omega)
     have ht' := congrArg (fun t ↦ t ≫ (HomologicalComplex.rightUnitor F).hom.f k) ht
     simp only [HomologicalComplex.comp_f, Category.assoc] at ht'

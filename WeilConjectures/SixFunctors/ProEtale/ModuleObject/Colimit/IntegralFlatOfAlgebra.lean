@@ -117,7 +117,7 @@ noncomputable def isColimitPadicIntegersRingObjToSubfieldSmulSequenceCocone :
         map_natCast]
       exact hm s
     refine ⟨m, ULift.up ⟨fun s ↦ ⟨_, hmem s⟩, (continuous_const.mul x.continuous).subtype_mk _⟩,
-      ULift.ext _ _ (ContinuousMap.ext fun s ↦ ?_)⟩
+      ULift.ext (ContinuousMap.ext fun s ↦ ?_)⟩
     have key : (ℓ : E)⁻¹ ^ m * ((ℓ : E) ^ m * x s) = x s := by
       rw [← _root_.mul_assoc, ← mul_pow, inv_mul_cancel₀ hℓ, one_pow, _root_.one_mul]
     exact key.symm

@@ -208,7 +208,7 @@ theorem alternatingCechSheafPresheaf_degreeZero_identity
   · rw [show hj t = Pi.π _ (pairTuple i (t 0) hij) ≫
         capIntoCap G (U i) (alternatingCechIntersection U t)
           (alternatingCechIntersection U (pairTuple i (t 0) hij))
-          (by rw [singletonIntersection, pairIntersection]) from dif_pos hij]
+          (by rw [singletonIntersection, pairIntersection]) from dite_eq_left hij]
     simp only [alternatingCechSheafPresheafD, Pi.lift_comp_π_assoc, Category.assoc,
       Preadditive.sum_comp, Preadditive.zsmul_comp]
     rw [Fin.sum_univ_two]
@@ -232,7 +232,7 @@ theorem alternatingCechSheafPresheaf_degreeZero_identity
             (alternatingCechIntersection U (pairTuple (t 0) i hji))
             (by rw [singletonIntersection, pairIntersection, inf_comm])) := by
         dsimp only [hj]
-        rw [dif_neg hij, dif_pos hji]
+        rw [dite_eq_right hij, dite_eq_left hji]
       rw [hhj, Preadditive.comp_neg]
       simp only [alternatingCechSheafPresheafD, Pi.lift_comp_π_assoc, Category.assoc,
         Preadditive.sum_comp, Preadditive.zsmul_comp]
@@ -257,7 +257,7 @@ theorem alternatingCechSheafPresheaf_degreeZero_identity
         exact le_antisymm (le_of_not_gt hij) (le_of_not_gt hji)
       have hhj : hj t = 0 := by
         dsimp only [hj]
-        rw [dif_neg hij, dif_neg hji]
+        rw [dite_eq_right hij, dite_eq_right hji]
       rw [hhj, comp_zero, zero_add]
       rw [transport _ _ _ inf_le_right he.symm, capIntoCap_unit]
 

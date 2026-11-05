@@ -84,16 +84,16 @@ lemma IsFiniteFreeComplex.exists_iso_free_of_rank_eq_zero {P : CochainComplex X.
   choose r₀ e₀ using hP.exists_iso_free
   have := hP.isStrictlyGE
   have := hP.isStrictlyLE
-  refine ⟨fun n ↦ if n < 0 ∨ (d : ℤ) < n then 0 else r₀ n, fun n hn ↦ if_pos hn, ⟨fun n ↦ ?_⟩⟩
+  refine ⟨fun n ↦ if n < 0 ∨ (d : ℤ) < n then 0 else r₀ n, fun n hn ↦ ite_eq_left hn, ⟨fun n ↦ ?_⟩⟩
   by_cases hn : n < 0 ∨ (d : ℤ) < n
   · have h₁ : IsZero (P.X n) := by
       rcases hn with hn | hn
       · exact CochainComplex.isZero_of_isStrictlyGE P 0 n hn
       · exact CochainComplex.isZero_of_isStrictlyLE P d n hn
     refine h₁.iso ?_
-    simp only [if_pos hn]
+    simp only [ite_eq_left hn]
     exact isZero_free_of_isEmpty _
-  · simp only [if_neg hn]
+  · simp only [ite_eq_right hn]
     exact (e₀ n).some
 
 /-- **The perfect locus of a bounded complex of finite free modules.** Let `P` be a bounded complex
@@ -162,11 +162,11 @@ theorem IsFiniteFreeComplex.exists_opens_range_subset_iff {Y : Scheme.{u}}
     refine ⟨fun q hq ↦ ?_, ?_⟩
     · refine isZero_of_iSup_eq_top _ V hV fun y' ↦ ?_
       have : IsEmpty (ULift.{u} (Fin (if (q : ℤ) = i then r else 0))) := by
-        rw [if_neg (by exact_mod_cast hq)]
+        rw [ite_eq_right (by exact_mod_cast hq)]
         infer_instance
       exact (isZero_free_of_isEmpty _).of_iso (key y' q).some
     · exact isFiniteLocallyFreeOfRank_of_restrict_iso_free _ (fun y' ↦ (V y').ι)
-        (by simpa using hV) fun y' ↦ ⟨(key y' i).some ≪≫ eqToIso (by rw [if_pos rfl])⟩
+        (by simpa using hV) fun y' ↦ ⟨(key y' i).some ≪≫ eqToIso (by rw [ite_eq_left rfl])⟩
   · -- pull back to the spectrum of the local ring at a point of `Y'`
     intro h
     rintro _ ⟨y', rfl⟩

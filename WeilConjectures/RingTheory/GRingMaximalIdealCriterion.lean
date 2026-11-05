@@ -79,7 +79,7 @@ theorem isGRing_iff_maximalIdeal
     obtain ⟨φhat, _, hcomm, hflatHat⟩ :=
       flat_adicCompletion_of_flat_local A B φ hflat hlocal
     have hlocalHat : IsLocalHom φhat := by
-      apply ((IsLocalRing.local_hom_TFAE φhat).out 0 2).mpr
+      apply ((IsLocalRing.local_hom_TFAE φhat).out 1 3).mpr
       rw [AdicCompletion.maximalIdeal_eq_map, Ideal.map_map, hcomm]
       apply Ideal.map_le_iff_le_comap.mpr
       intro x hx

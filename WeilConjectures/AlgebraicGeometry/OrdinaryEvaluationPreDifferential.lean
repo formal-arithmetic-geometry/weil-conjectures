@@ -72,7 +72,7 @@ theorem ordinaryEvaluation_pre_differential (X : Scheme.{u}) (U : X.Opens)
     rw [hc]
     exact evaluation_sign p q n hpq _
   · have h' : ¬ (r + 1) + q = 0 := by omega
-    simp only [localEvaluationComponent, dif_neg h, dif_neg h', comp_zero,
+    simp only [localEvaluationComponent, dite_eq_right h, dite_eq_right h', comp_zero,
       zero_comp, smul_zero, neg_zero]
 
 end AlgebraicGeometry

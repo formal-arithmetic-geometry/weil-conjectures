@@ -249,7 +249,7 @@ lemma constRingSheafSection_comp_constRingSheafToContinuousMapRingObj (t : T) :
   erw [← reassoc_of% (adj.unit.naturality (constToContinuousMap T)), adj.right_triangle_components,
     Category.comp_id]
   ext S n
-  refine ULift.ext _ _ (ContinuousMap.ext fun s ↦ ?_)
+  refine ULift.ext (ContinuousMap.ext fun s ↦ ?_)
   change (n.down • (ULift.up t : ULift.{u + 1} T)).down =
     (((n.down : ℤ) : ULift.{u + 1} C(S.unop, T)) * ULift.up (ContinuousMap.const _ t)).down s
   simp

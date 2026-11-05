@@ -109,7 +109,7 @@ henselization (blueprint: def-weil-pbc-strict-henselization-limit). -/
 noncomputable def strictHenselizationCoordinateRings
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) : (strictHenselizationNeighbourhoods s)ᵒᵖ ⥤ CommRingCat.{u} :=
-  (CategoryOfElements.π _ ⋙ AffineEtale.Spec S ⋙ Etale.forget S ⋙ Over.forget S).op ⋙ Γ
+  (Functor.Elements.π _ ⋙ AffineEtale.Spec S ⋙ Etale.forget S ⋙ Over.forget S).op ⋙ Γ
 
 /-- The ring diagram on the chosen small representative category.
 Source: blueprint `sec-curve-estimates/lem-sc-second-kummer-divisors`, definition of strict

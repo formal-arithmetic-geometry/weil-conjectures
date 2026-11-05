@@ -272,7 +272,7 @@ lemma shortExact_continuousSheafShortComplex (U : ℕ → OpenAddSubgroup A)
     (continuousSheafShortComplex S U hU m).ShortExact := by
   have hinj (V : (Scheme.ProEt S)ᵒᵖ) :
       Function.Injective ((continuousSheafShortComplex S U hU m).f.hom.app V) := fun x y h ↦
-    ULift.ext _ _ (ContinuousMap.ext fun t ↦ Subtype.ext (congrArg
+    ULift.ext (ContinuousMap.ext fun t ↦ Subtype.ext (congrArg
       (fun z : ULift.{u + 1} C(V.unop.left, A ⧸ (U (m + 1) : AddSubgroup A)) ↦ z.down t) h))
   refine .mk' (Sheaf.exact_of_injective_of_exact_sections hinj fun V y hy ↦ ?_) ?_ ?_
   · let y' : ULift.{u + 1} C(V.unop.left, A ⧸ (U (m + 1) : AddSubgroup A)) := y

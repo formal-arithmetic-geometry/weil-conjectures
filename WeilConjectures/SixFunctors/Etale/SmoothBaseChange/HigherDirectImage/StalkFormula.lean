@@ -435,7 +435,7 @@ lemma cohomologyPresheafRestrict_stalkPoint_map {V V' : S.Etale} (a : V ⟶ V')
         (stalkPoint_w f s ⟨V', (Scheme.pointSmallEtale s).fiber.map a v⟩) p := by
   have e : stalkPoint f s ⟨V, v⟩ ≫ a.left =
       stalkPoint f s ⟨V', (Scheme.pointSmallEtale s).fiber.map a v⟩ :=
-    stalkPoint_map f s (CategoryOfElements.homMk ⟨V, v⟩ ⟨V', _⟩ a rfl)
+    stalkPoint_map f s (Functor.Elements.homMk ⟨V, v⟩ ⟨V', _⟩ a rfl)
   rw [cohomologyPresheafRestrict_map, cohomologyPresheafRestrict_congr Λ f F q _ V' _ e]
 
 /-- The comparison map from the fibre at `s` of the cohomology presheaf `V ↦ Hᵠ(V ×_S X, F|)`

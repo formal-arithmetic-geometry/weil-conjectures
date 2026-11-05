@@ -128,8 +128,8 @@ private def resolutionInclusion (O : Type) [CommRing O]
         { toFun b := ULift.up ⟨fun x j ↦ if i = j then b.down x else 0,
             continuous_pi fun j ↦ by
               by_cases h : i = j
-              · simpa only [if_pos h] using b.down.continuous
-              · simp only [if_neg h]; exact continuous_const⟩
+              · simpa only [ite_eq_left h] using b.down.continuous
+              · simp only [ite_eq_right h]; exact continuous_const⟩
           map_zero' := by
             apply ULift.ext
             ext x j
@@ -177,7 +177,7 @@ private def resolutionFreeIso (O : Type) [CommRing O]
           ext x
           change (if i = i then c.down x else 0) = c.down x
           simp
-        · rw [dif_neg h]
+        · rw [dite_eq_right h]
           apply Mod.hom_ext
           ext P c
           apply ULift.ext

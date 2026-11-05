@@ -99,7 +99,7 @@ theorem bijective_unitsProdZPowHom (ht : Prime t) :
           zpow_natCast, mul_inv_eq_one] at this
         exact this
       have h' := congrArg Units.val h2
-      rw [Units.coe_map, Units.val_pow_eq_pow_val, IsUnit.unit_spec, MonoidHom.coe_coe,
+      rw [Units.coe_map, Units.val_pow_eq_pow_val, IsUnit.unit_spec, MonoidHom.coe_ofClass,
         ← map_pow] at h'
       have h1 : (a : A) = t ^ k := hinj h'
       rcases k with _ | k
@@ -118,7 +118,7 @@ theorem bijective_unitsProdZPowHom (ht : Prime t) :
     rw [unitsProdZPowHom, MonoidHom.coprod_apply, zpowersHom_apply, toAdd_ofAdd, zpow_sub,
       zpow_natCast, zpow_natCast, ← mul_assoc, mul_inv_eq_iff_eq_mul]
     apply Units.ext
-    simp only [Units.val_mul, Units.coe_map, MonoidHom.coe_coe, Units.val_pow_eq_pow_val,
+    simp only [Units.val_mul, Units.coe_map, MonoidHom.coe_ofClass, Units.val_pow_eq_pow_val,
       IsUnit.unit_spec]
     rw [ha, ← map_pow, ← map_mul, ← hv, mul_comm, Units.mul_inv_cancel_right]
 
@@ -347,7 +347,7 @@ theorem bijective_unitsProdZPowHomLine : Function.Bijective (unitsProdZPowHomLin
     refine MonoidHom.ext fun ⟨c, m⟩ ↦ Units.ext ?_
     rw [unitsProdZPowHomLine_apply, MonoidHom.comp_apply, MonoidHom.comp_apply,
       MonoidHom.coe_prodMap, Prod.map_apply, MonoidHom.id_apply, Units.coe_map,
-      IsLocalization.Away.val_unitsProdZPowHom_apply, MonoidHom.coe_coe, map_mul, Units.val_mul]
+      IsLocalization.Away.val_unitsProdZPowHom_apply, MonoidHom.coe_ofClass, map_mul, Units.val_mul]
     congr 1
     · change _ = e (algebraMap _ _ (Scheme.Hom.structureRingHom k _ c))
       rw [basicOpenLineCoordRingEquiv_algebraMap, Scheme.Hom.structureRingHom,
@@ -359,7 +359,7 @@ theorem bijective_unitsProdZPowHomLine : Function.Bijective (unitsProdZPowHomLin
           (lineCoord (Spec (.of k)))).unit ^ m.toAdd) : Γ(G, ⊤)) from rfl, map_zpow]
       congr 2
       refine Units.ext ?_
-      rw [Units.coe_map, IsUnit.unit_spec, val_unitLineCoord, MonoidHom.coe_coe,
+      rw [Units.coe_map, IsUnit.unit_spec, val_unitLineCoord, MonoidHom.coe_ofClass,
         basicOpenLineCoordRingEquiv_algebraMap]
   rw [key]
   exact h3.comp (h2.comp (Prod.map_bijective.2 ⟨h1, Function.bijective_id⟩))

@@ -40,12 +40,12 @@ import WeilConjectures.AlgebraicGeometry.SiteHypercoverFiniteExtension
 import Mathlib.CategoryTheory.Limits.Shapes.FiniteLimits
 import WeilConjectures.AlgebraicGeometry.SiteHypercoverFiniteExtensionBase
 import Mathlib.AlgebraicTopology.SimplicialObject.Basic
-import Mathlib.Data.Finite.Sigma
+import Mathlib.Basic.Finite.Sigma
 import WeilConjectures.AlgebraicGeometry.SiteHypercoverFiniteExtensionConstruction
 import WeilConjectures.AlgebraicGeometry.SiteHypercoverAttachmentComposition
 import WeilConjectures.AlgebraicGeometry.SiteHypercoverAttachmentOperators
 import WeilConjectures.AlgebraicGeometry.SiteHypercoverFiniteExtensionSplit
-import Mathlib.Data.Finite.Sum
+import Mathlib.Basic.Finite.Sum
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Pullbacks
 import Mathlib.CategoryTheory.Limits.Types.Pullbacks
 import Mathlib.CategoryTheory.Limits.Constructions.Over.Basic

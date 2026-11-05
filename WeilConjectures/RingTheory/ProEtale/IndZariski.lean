@@ -494,12 +494,12 @@ noncomputable def awayDiag (R : Type u) [CommRing R] (M : Submonoid R) :
   obj m := .of R (Localization.Away m.val)
   map {m m'} h := CommAlgCat.ofHom (awayDvdHom R (m := m.val) (m' := m'.val) h.le)
   map_id m := by
-    refine CommAlgCat.hom_ext (AlgHom.coe_ringHom_injective ?_)
+    refine CommAlgCat.hom_ext (AlgHom.toRingHom_injective ?_)
     refine IsLocalization.ringHom_ext (.powers m.val) ?_
     ext _
     simp [awayDvdHom, IsLocalization.Away.lift]
   map_comp {m _ _} _ _ := by
-    refine CommAlgCat.hom_ext (AlgHom.coe_ringHom_injective ?_)
+    refine CommAlgCat.hom_ext (AlgHom.toRingHom_injective ?_)
     refine IsLocalization.ringHom_ext (.powers m.val) ?_
     ext _
     simp [awayDvdHom, IsLocalization.Away.lift]

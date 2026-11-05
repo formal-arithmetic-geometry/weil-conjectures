@@ -110,7 +110,7 @@ lemma gmSheaf_eq_add {Z : X.Etale} (a b c : X.gmSheaf.obj.obj (op Z))
       ((Additive.toMul a.down : Γ(Z.left, ⊤)ˣ) : Γ(Z.left, ⊤)) *
         ((Additive.toMul b.down : Γ(Z.left, ⊤)ˣ) : Γ(Z.left, ⊤))) :
     c = a + b :=
-  ULift.ext _ _ (Additive.toMul.injective (Units.ext (h.trans (Units.val_mul _ _).symm)))
+  ULift.ext (Additive.toMul.injective (Units.ext (h.trans (Units.val_mul _ _).symm)))
 
 set_option maxHeartbeats 4000000 in
 -- the defeq checks through the small étale and pro-étale sites are slow

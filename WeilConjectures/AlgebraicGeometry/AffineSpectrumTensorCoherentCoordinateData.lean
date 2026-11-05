@@ -229,7 +229,7 @@ theorem exists_affineSpectrum_tensor_coherent_coordinate_data
     rw [← Category.assoc, ht]
     simp only [H, affineSpectrumTensorAdditiveIso, ordinaryIsoPullbackStalkComplexIso,
       Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, Category.assoc,
-      Iso.map_inv_hom_id, Category.comp_id]
+      Iso.inv_hom_id_map, Category.comp_id]
 
 
 

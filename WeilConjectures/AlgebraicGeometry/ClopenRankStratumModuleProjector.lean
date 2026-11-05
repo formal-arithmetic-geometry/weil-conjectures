@@ -131,9 +131,9 @@ theorem clopenRankStratum_module_projector
       change Z.presheaf.Γgerm x e = _
       have hr : r x = k := hV hx
       by_cases hk : k = q
-      · rw [if_pos hk, map_one]
+      · rw [ite_eq_left hk, map_one]
         exact he.2.1 x (hr.trans hk)
-      · rw [if_neg hk, map_zero]
+      · rw [ite_eq_right hk, map_zero]
         exact he.2.2 x (fun hxq ↦ hk (hr.symm.trans hxq))
     have hscalar (V : Z.Opens) :
         j.app V (Z.presheaf.map (homOfLE (show V ≤ ⊤ from le_top)).op e) =
@@ -145,21 +145,21 @@ theorem clopenRankStratum_module_projector
       rintro x ⟨y, hy, rfl⟩
       exact y.property
     by_cases hk : k = q
-    · rw [if_pos hk]
+    · rw [ite_eq_left hk]
       ext V x
       dsimp [ringedScalar, s]
       change (j.app ((Opens.map i.base).obj V.unop)
         (Z.presheaf.map (homOfLE
           (show (Opens.map i.base).obj V.unop ≤ ⊤ from le_top)).op e)) •
           (show F.val.obj (op (j ⁻¹ᵁ (Opens.map i.base).obj V.unop)) from x) = x
-      rw [hscalar, if_pos hk, one_smul]
-    · rw [if_neg hk]
+      rw [hscalar, ite_eq_left hk, one_smul]
+    · rw [ite_eq_right hk]
       ext V x
       dsimp [ringedScalar, s]
       change (j.app ((Opens.map i.base).obj V.unop)
         (Z.presheaf.map (homOfLE
           (show (Opens.map i.base).obj V.unop ≤ ⊤ from le_top)).op e)) •
           (show F.val.obj (op (j ⁻¹ᵁ (Opens.map i.base).obj V.unop)) from x) = 0
-      rw [hscalar, if_neg hk, zero_smul]
+      rw [hscalar, ite_eq_right hk, zero_smul]
 
 end AlgebraicGeometry

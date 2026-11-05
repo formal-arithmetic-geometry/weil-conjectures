@@ -141,8 +141,8 @@ instance preservesEpimorphisms_lowerStar_of_isSepClosed :
 /-- The direct image along a geometric point `x : Spec k ⟶ X` is exact. -/
 instance preservesFiniteColimits_lowerStar_of_isSepClosed :
     PreservesFiniteColimits ((x)_*[ModuleCat.{u + 1} Λ]) := by
-  have h := (Functor.preservesFiniteLimits_tfae ((x)_*[ModuleCat.{u + 1} Λ])).out 3 0
-  have h' := (Functor.preservesFiniteColimits_tfae ((x)_*[ModuleCat.{u + 1} Λ])).out 0 3
+  have h := (Functor.preservesFiniteLimits_tfae ((x)_*[ModuleCat.{u + 1} Λ])).out 4 1
+  have h' := (Functor.preservesFiniteColimits_tfae ((x)_*[ModuleCat.{u + 1} Λ])).out 1 4
   exact h'.1 fun S hS ↦ ⟨(h.1 inferInstance S hS).1, by have := hS.epi_g; infer_instance⟩
 
 end Etale

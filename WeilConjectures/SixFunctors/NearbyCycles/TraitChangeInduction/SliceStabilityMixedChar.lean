@@ -101,7 +101,7 @@ theorem exists_pow_root_of_mixedChar (p : ℕ) [Fact p.Prime] [CharZero Ω₁]
   let lf : (𝒟₂).Ω → (𝒟₁).Ω := fun y ↦ if h : ∃ x, Γ x = y then h.choose else 0
   have hlf : ∀ x, lf (Γ x) = x := fun x ↦ by
     have h : ∃ x', Γ x' = Γ x := ⟨x, rfl⟩
-    simp only [lf, dif_pos h]
+    simp only [lf, dite_eq_left h]
     exact Γ.injective h.choose_spec
   have hlf0 : lf 0 = 0 := by
     have := hlf 0

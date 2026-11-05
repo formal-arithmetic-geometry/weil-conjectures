@@ -198,7 +198,7 @@ private theorem complete_local_iff (K : IntegralOnSlice.D l E T none) :
   obtain ⟨p, hpl, hp⟩ := Nat.exists_infinite_primes (l + 1)
   let : Fact p.Prime := ⟨hp⟩
   obtain ⟨d, hd, _⟩ := PrincipalKoszulStrictReplacement.coefficient_datum l E
-  exact (roosIntrinsicCompletenessEquivalence p l (by omega) E T d hd K P e).out 0 1
+  exact (roosIntrinsicCompletenessEquivalence p l (by omega) E T d hd K P e).out 1 2
 
 private theorem complete_cone (Δ : Triangle (DerivedCategory (scalarReductionSource l E T)))
     (hΔ : Δ ∈ distTriang _) (h₁ : IsDerivedCompleteUnrestricted l E T Δ.obj₁)

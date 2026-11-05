@@ -65,7 +65,7 @@ theorem boundedConstructible_rightDerivedLowerStar_obj_of_finite {k : Type u} [F
     (hK : boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj T) X) K) :
     boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj T) Y)
       ((R((f)_*⟦Profinite.continuousMapRingObj T⟧)).obj K) := by
-  have hN0 : ((N : ULift.{u + 1} T)) = 0 := ULift.ext _ _ (by simpa using hT)
+  have hN0 : ((N : ULift.{u + 1} T)) = 0 := ULift.ext (by simpa using hT)
   have hA (M : ModuleCat.{u + 1} (ULift.{u + 1} T)) : N • 𝟙 M = 0 := by
     ext x
     rw [ModuleCat.hom_nsmul, LinearMap.smul_apply, ModuleCat.hom_id, LinearMap.id_apply,

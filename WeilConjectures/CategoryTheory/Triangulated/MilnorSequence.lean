@@ -168,7 +168,7 @@ theorem milnor_shortExact [HasDerivedCategory.{v} AddCommGrpCat.{u}] (i : ℤ) :
         (K ⋙ DerivedCategory.homologyFunctor AddCommGrpCat.{u} i) (Opposite.op n) =
         (DerivedCategory.homologyFunctor AddCommGrpCat.{u} i).map
           (p ≫ Pi.π (fun n : ℕ => K.obj (Opposite.op n)) n) := by
-      simp only [b, dif_pos hT, limit.lift_π, milnorProjectionCone,
+      simp only [b, dite_eq_left hT, limit.lift_π, milnorProjectionCone,
         NatTrans.ofOpSequence_app]
     exact ⟨milnor_projection_epi i K L p δ hT _ hπ, hπ⟩
   refine ⟨a, b, ?_, ?_⟩

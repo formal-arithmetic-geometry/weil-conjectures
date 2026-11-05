@@ -485,7 +485,7 @@ theorem etaleOriginRestrictionPullbackCube
     Functor.map_comp, Category.assoc]
   erw [← reassoc_of% he, Iso.inv_hom_id_app_assoc]
   erw [← reassoc_of% hy]
-  erw [Iso.map_inv_hom_id_assoc
+  erw [Iso.inv_hom_id_map_assoc
     ((Scheme.FiniteCompactScalar.intrinsicSiteFunctorIso B Y).app N) (UY ⋙ LA)]
   erw [reassoc_of% hr, reassoc_of% hn, ← reassoc_of% hz]
   erw [reassoc_of% hs']

@@ -64,7 +64,7 @@ theorem finiteOrdinaryCoordinateArrow_scalar (n : ℕ) [Finite (SpTowerShriek.R 
     (c : SpTowerP1.CoefficientCoordinates l E n T hT)
     (a : Etale.ordinaryFiniteUnit (FiniteRing l E n) T ⟶
       (Etale.ordinaryFiniteLine (FiniteRing l E n) (l ^ (n + 1))
-        (ULift.ext _ _ (coefficient_annihilates l E n)) T)⟦(2 : ℤ)⟧) :
+        (ULift.ext (coefficient_annihilates l E n)) T)⟦(2 : ℤ)⟧) :
     @Eq (FiniteScalarBoundaryArrow l E n T)
       (finiteScalarNormalizedModuleRoute l E n T c a)
       (finiteScalarNormalizedClassRoute l E n T c a) := by

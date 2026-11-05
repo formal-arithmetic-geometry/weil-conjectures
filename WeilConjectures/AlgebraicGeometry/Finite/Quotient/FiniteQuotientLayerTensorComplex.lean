@@ -45,7 +45,7 @@ def finiteQuotientLayerKernelEquiv {A : Type t} [CommRing A] (I : Ideal A) (n : 
       Ideal.map (Ideal.Quotient.mk (I ^ (n + 1 + 1))) (I ^ (n + 1)) := by
     simpa only [finiteQuotientLayerModule, Nat.reduceAdd, pow_one] using
       Ideal.powQuotPowSuccEquivMapMkPowSuccPow I (n + 1)
-  exact e.trans (Equiv.setCongr (congrArg SetLike.coe
+  exact e.trans (Set.equivOfEq (congrArg SetLike.coe
     (Ideal.Quotient.factor_ker
       (Ideal.pow_le_pow_right (Nat.le_succ (n + 1)) :
         I ^ (n + 1 + 1) ≤ I ^ (n + 1))).symm))

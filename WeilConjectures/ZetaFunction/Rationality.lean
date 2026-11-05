@@ -98,7 +98,7 @@ theorem Hom.zetaSeries_mul_zetaSeries_eq {Y₁ Y₂ Y₃ Y₄ : Scheme.{u}} (g�
     ext n
     by_cases hn : n = 0
     · simp [hn]
-    · simp only [hn, if_false, h n hn]
+    · simp only [hn, ite_false, h n hn]
   rw [hfun] at h₁₂
   have hconst : PowerSeries.constantCoeff (g₁.zetaSeries * g₂.zetaSeries) =
       PowerSeries.constantCoeff (g₃.zetaSeries * g₄.zetaSeries) := by

@@ -289,7 +289,7 @@ private theorem coordinate_face {X : Scheme.{u}} {r q : ℕ}
         (Pi.π _ a ≫ capIntoCap G (U (a b))
           (alternatingCechIntersection U ((Fin.succAboveOrderEmb b).trans a))
           (alternatingCechIntersection U a) (intersection_face_cap_le U a b)) := by
-  rw [coordinate, dif_neg (face_omits a b), position_face]
+  rw [coordinate, dite_eq_right (face_omits a b), position_face]
   exact congrArg ((-1 : ℤ) ^ b.val • ·)
     (projection_cap_congr U G _ _ _ a _ _ (insert_face a b))
 
@@ -398,7 +398,7 @@ private theorem alternatingCechPresheaf_insertion_containing_coordinate
   classical
   rcases hi with ⟨b, rfl⟩
   have hzero : coordinate U G (a b) (p + 1) a = 0 := by
-    exact dif_pos ⟨b, rfl⟩
+    exact dite_eq_left ⟨b, rfl⟩
   rw [hzero, Limits.comp_zero, add_zero]
   rw [boundaryCoordinate, Finset.sum_eq_single b]
   · rw [coordinate_face]
@@ -411,7 +411,7 @@ private theorem alternatingCechPresheaf_insertion_containing_coordinate
     have hmem : a b ∈ Set.range ((Fin.succAboveOrderEmb j).trans a) := by
       obtain ⟨k, hk⟩ := Fin.exists_succAbove_eq (Ne.symm hj)
       exact ⟨k, congrArg a hk⟩
-    rw [coordinate, dif_pos hmem, Limits.zero_comp, smul_zero]
+    rw [coordinate, dite_eq_left hmem, Limits.zero_comp, smul_zero]
   · simp
 
 /- Paired noncentral faces cancel on a tuple omitting the inserted index.

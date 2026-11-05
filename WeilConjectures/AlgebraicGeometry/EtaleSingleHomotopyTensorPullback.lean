@@ -58,7 +58,7 @@ private lemma singleCochainTensorIso_pullback
   apply (cancel_epi (c.inv.app (L ⊗ M) ≫ T.map (singleCochainTensorIso L M).inv)).1
   apply (cancel_mono (singleCochainTensorIso (U.obj L) (U.obj M)).inv).1
   dsimp only [T, c]
-  simp only [Category.assoc, Iso.map_inv_hom_id_assoc,
+  simp only [Category.assoc, Iso.inv_hom_id_map_assoc,
     Iso.inv_hom_id_app_assoc, Iso.hom_inv_id, Category.comp_id]
   apply HomologicalComplex.from_single_hom_ext
   simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,

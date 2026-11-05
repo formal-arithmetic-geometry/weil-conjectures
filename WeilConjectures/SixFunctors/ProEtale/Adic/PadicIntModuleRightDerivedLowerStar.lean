@@ -71,7 +71,7 @@ noncomputable def continuousMapRingSheafToPushforward :
           ULift.ringEquiv.toRingHom))
      naturality V₁ V₂ a := by
        ext x
-       refine ULift.ext _ _ (ContinuousMap.ext fun y ↦ ?_)
+       refine ULift.ext (ContinuousMap.ext fun y ↦ ?_)
        change x.down (a.unop.left (pullback.fst _ f y)) =
          x.down (pullback.fst _ f (((MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).map
            a.unop).left y))

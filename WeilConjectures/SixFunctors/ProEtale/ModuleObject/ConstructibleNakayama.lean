@@ -131,7 +131,7 @@ theorem exists_mul_eq_one_of_forall_residue (π : O →+* k) (hπ : Continuous �
     if h : ∃ B : Matrix (Fin m) (Fin n) k, M * B = 1 then h.choose.map lift else 0
   have hχ (v : V) : Tb v * (χ (Tb v)).map π = 1 := by
     have h := hB v
-    simp only [χ, dif_pos h, Matrix.map_map]
+    simp only [χ, dite_eq_left h, Matrix.map_map]
     convert h.choose_spec
     ext i j
     exact hlift _

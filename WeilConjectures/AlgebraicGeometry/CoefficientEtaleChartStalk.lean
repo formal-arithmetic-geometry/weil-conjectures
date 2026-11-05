@@ -42,7 +42,7 @@ private def overStalkIso
     inferInstanceAs (HasColimitsOfShape (p.over z).fiber.Elementsᵒᵖ A)
   exact Functor.isoWhiskerLeft
     (sheafToPresheaf J A ⋙
-      (Functor.whiskeringLeft _ _ A).obj (CategoryOfElements.π p.fiber).op)
+      (Functor.whiskeringLeft _ _ A).obj (Functor.Elements.π p.fiber).op)
     (Functor.Final.colimIso F.op)
 
 /-- Taking a geometric stalk of one supplied constant chart recovers its algebraic model.

@@ -73,7 +73,7 @@ theorem grothendieckExistenceEasy_torsionTriple
         ∃! γ : F ≅ F', γ.hom ≫ a' = a ∧
           β.hom ≫ (completion X J).map γ.hom = β'.hom := by
   have hlocal := ((coherentFormalModule_annihilated_iff X J J N
-    ((completion X J).obj H) δ).out 0 1).mp htorsion
+    ((completion X J).obj H) δ).out 1 2).mp htorsion
   obtain ⟨F, a, β, hδ, ha⟩ :=
     torsionControlled_algebraization_construction J H N δ hlocal
   refine ⟨F, a, β, hδ, ha, ?_⟩

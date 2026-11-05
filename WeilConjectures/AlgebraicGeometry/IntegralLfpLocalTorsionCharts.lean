@@ -338,7 +338,7 @@ private lemma integralPrincipalCokernelIso (ℓ : ℕ) [Fact ℓ.Prime]
       intro y
       obtain ⟨x, hx⟩ := integralPrincipalQuotientFunctionsSurjective ℓ E a ha
         U.unop.left y.down
-      exact ⟨ULift.up x, ULift.ext _ _ hx⟩
+      exact ⟨ULift.up x, ULift.ext hx⟩
     have hex : T.Exact := by
       rw [ShortComplex.ab_exact_iff]
       intro x hx

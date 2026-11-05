@@ -111,8 +111,8 @@ theorem clopenRankStrata_homology_presentation
       by_cases hm : 0 ≤ m
       · apply hdisjoint m m.toNat (E m.toNat)
         · omega
-        · exact ⟨em ≪≫ eqToIso (congrArg g.obj ((hT m).trans (if_pos hm)))⟩
-      · have hTm : T m = 0 := (hT m).trans (if_neg hm)
+        · exact ⟨em ≪≫ eqToIso (congrArg g.obj ((hT m).trans (ite_eq_left hm)))⟩
+      · have hTm : T m = 0 := (hT m).trans (ite_eq_right hm)
         have hK : IsZero ((DerivedCategory.homologyFunctor C m).obj K) :=
           (g.map_isZero (hTm ▸ isZero_zero _)).of_iso em
         apply (IsZero.iff_id_eq_zero _).mpr
@@ -122,14 +122,14 @@ theorem clopenRankStrata_homology_presentation
           zero_comp]
     have hTn : T n =
         (Scheme.Modules.pushforward (Scheme.Modules.exteriorRankOpen r n.toNat).ι).obj
-          (E n.toNat) := (hT n).trans (if_pos hn)
+          (E n.toNat) := (hT n).trans (ite_eq_left hn)
     have hfix : ∀ b : g.obj (T n) ⟶ (DerivedCategory.homologyFunctor C n).obj K,
         b ≫ (DerivedCategory.homologyFunctor C n).map π ≫
           (DerivedCategory.homologyFunctor C n).map ι = b := by
       rw [hTn]
       exact hfixed n (E n.toNat)
     exact ⟨L, ι, π, hsplit, hL, hfix⟩
-  · have hTn : T n = 0 := (hT n).trans (if_neg hn)
+  · have hTn : T n = 0 := (hT n).trans (ite_eq_right hn)
     have hM : IsZero (g.obj (T n)) := g.map_isZero (hTn ▸ isZero_zero _)
     refine ⟨0, 0, 0, ?_, ?_, ?_⟩
     · exact (isZero_zero _).eq_of_tgt _ _

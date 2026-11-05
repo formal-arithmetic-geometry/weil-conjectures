@@ -107,13 +107,13 @@ theorem exists_small_finiteSubsum_diagram (X : Scheme.{u}) (I : Type v)
       obtain ⟨i, hi⟩ := i
       change (Cofan.mk S ι).ι.app (Discrete.mk i) ≫ _ = _
       rw [hS.fac]
-      simp only [Cofan.mk_ι_app, dif_pos hi]
+      simp only [Cofan.mk_ι_app, dite_eq_left hi]
     · intro s m hm
       apply hS.hom_ext
       intro ⟨i⟩
       rw [hS.fac]
       by_cases hi : ¬ IsZero (F i)
-      · simpa only [tN, cofan_mk_inj, Cofan.inj, Cofan.mk_ι_app, dif_pos hi]
+      · simpa only [tN, cofan_mk_inj, Cofan.inj, Cofan.mk_ι_app, dite_eq_left hi]
           using hm ⟨i, hi⟩
       · exact (not_not.mp hi).eq_of_src _ _
   let t : Cofan G := tN.whisker (Discrete.equivalence e.symm).functor

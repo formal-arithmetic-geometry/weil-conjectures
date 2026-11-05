@@ -55,7 +55,7 @@ to a root. -/
 lemma exists_isRoot_residue_eq (f : A[X]) (hf : f.Monic) (a₀ : ResidueField A)
     (h₁ : aeval a₀ f = 0) (h₂ : aeval a₀ (derivative f) ≠ 0) :
     ∃ a : A, f.IsRoot a ∧ residue A a = a₀ := by
-  have := (HenselianLocalRing.TFAE A).out 0 1
+  have := (HenselianLocalRing.TFAE A).out 1 2
   exact this.mp inferInstance f hf a₀ h₁ h₂
 
 variable [IsSepClosed (ResidueField A)] {N : ℕ} (hN : (N : ResidueField A) ≠ 0)
@@ -164,7 +164,7 @@ theorem isDiscreteValuationRing_integralClosure :
     IsDiscreteValuationRing (integralClosure R L) := by
   have := isDedekindDomain_integralClosure R F L
   have := isLocalRing_integralClosure R L
-  have h := (IsDiscreteValuationRing.TFAE _ (not_isField_integralClosure R F L)).out 0 2
+  have h := (IsDiscreteValuationRing.TFAE _ (not_isField_integralClosure R F L)).out 1 3
   exact h.2 inferInstance
 
 variable (R F L) in

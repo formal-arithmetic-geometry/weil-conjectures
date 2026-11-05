@@ -100,7 +100,7 @@ lemma mapDerivedCategoryHomologyFunctorIso_hom_app_naturality_natTrans (τ : F �
       exact (Category.comp_id _).symm
     rw [← Iso.app_inv F.mapDerivedCategoryFactors L,
       ← Iso.app_hom F.mapDerivedCategoryFactors L,
-      Iso.map_inv_hom_id_assoc, ← Functor.comp_map DerivedCategory.Q,
+      Iso.inv_hom_id_map_assoc, ← Functor.comp_map DerivedCategory.Q,
       ← (DerivedCategory.homologyFunctorFactors D n).inv.naturality_assoc,
       reassoc_of% h₂, ← τ.naturality_assoc]
   exact congr_app h K

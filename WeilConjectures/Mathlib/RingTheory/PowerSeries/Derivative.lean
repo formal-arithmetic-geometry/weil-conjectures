@@ -117,7 +117,7 @@ theorem coeff_inv_prod_one_sub_C_mul_X_nonneg (s : Multiset ℂ)
       · have hi : p.1 < k + 1 := by
           have := Finset.mem_antidiagonal.1 hp
           omega
-        simp only [S, coeff_mk, if_neg h0]
+        simp only [S, coeff_mk, ite_eq_right h0]
         exact mul_nonneg (ih p.1 hi) (hs p.2 (Nat.pos_of_ne_zero h0))
     have hk : coeff (k + 1) G = (((k + 1 : ℕ) : ℝ)⁻¹ : ℝ) *
         ∑ p ∈ Finset.antidiagonal (k + 1), coeff p.1 G * coeff p.2 S := by

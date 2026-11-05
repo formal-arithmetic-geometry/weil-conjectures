@@ -193,7 +193,7 @@ theorem exists_homology_reduction_retraction [IsDomain A] [IsPrincipalIdealRing 
     simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
       HomologicalComplex.mkHomToSingle_f, Functor.map_comp,
       HomologicalComplex.singleMapHomologicalComplex_hom_app_self, Category.assoc,
-      Iso.map_inv_hom_id_assoc, Functor.comp_obj, u, g', g]
+      Iso.inv_hom_id_map_assoc, Functor.comp_obj, u, g', g]
     exact adj.unit_naturality_assoc ψ _
   have hπ : HomologicalComplex.homologyMap (u ≫ g') q ≫
       (HomologicalComplex.singleObjHomologySelfIso _ q _).hom =

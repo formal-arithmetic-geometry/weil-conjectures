@@ -83,12 +83,12 @@ theorem schemeOrdinaryEvaluation_uncurried_component (Y : Scheme.{u})
         (F.X (r + n))).symm t) (hf p q n r hpq)
   apply he.trans
   by_cases h : r + q = 0
-  · simp only [dif_pos h, Equiv.symm_apply_apply, SymmetricCategory.symmetry_assoc]
+  · simp only [dite_eq_left h, Equiv.symm_apply_apply, SymmetricCategory.symmetry_assoc]
   · let := SheafOfModules.monoidalClosed (R := Y.sheaf)
     have : MonoidalPreadditive
         (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) :=
       Classical.choice (SheafOfModules.tensorClosed Y.sheaf).1
-    simp only [dif_neg h, ← SheafOfModules.uncurry_eq_tensorHomEquiv_symm (R := Y.sheaf),
+    simp only [dite_eq_right h, ← SheafOfModules.uncurry_eq_tensorHomEquiv_symm (R := Y.sheaf),
       MonoidalClosed.uncurry_eq, MonoidalPreadditive.whiskerLeft_zero, comp_zero, zero_comp]
 
 end AlgebraicGeometry

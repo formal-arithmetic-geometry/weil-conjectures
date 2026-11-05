@@ -85,8 +85,8 @@ theorem finite_free_kernel_ideal_filtration (X : Scheme.{u})
       obtain ⟨n, F, hzero, ⟨e⟩, hsteps⟩ := ih q
       obtain ⟨J, hJ, a, b, w, hs⟩ := finite_free_kernel_coordinate_step X p
       let G : ℕ → X.Modules := fun j ↦ if j ≤ n then F j else kernel p
-      have hG (j : ℕ) (hj : j ≤ n) : G j = F j := if_pos hj
-      have hGn : G (n + 1) = kernel p := if_neg (by omega)
+      have hG (j : ℕ) (hj : j ≤ n) : G j = F j := ite_eq_left hj
+      have hGn : G (n + 1) = kernel p := ite_eq_right (by omega)
       refine ⟨n + 1, G, ?_, ?_, ?_⟩
       · rw [hG 0 (Nat.zero_le n)]
         exact hzero

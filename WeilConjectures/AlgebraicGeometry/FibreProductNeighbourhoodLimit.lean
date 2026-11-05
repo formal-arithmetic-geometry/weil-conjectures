@@ -58,7 +58,7 @@ theorem fibre_product_neighbourhood_limit
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) :
     ∃ (p : Scheme.strictLocalization s ⟶ S)
       (q : (Functor.const (Scheme.pointSmallEtale s).fiber.Elements).obj (Over.mk p) ⟶
-        CategoryOfElements.π (Scheme.pointSmallEtale s).fiber ⋙ Scheme.Etale.forget S),
+        Functor.Elements.π (Scheme.pointSmallEtale s).fiber ⋙ Scheme.Etale.forget S),
       (∀ j : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s),
         (q.app ((Scheme.strictHenselizationAffineInclusion s ⋙ ObjectProperty.ι
           (fun n : (Scheme.pointSmallEtale s).fiber.Elements ↦ IsAffine n.1.left)).obj
@@ -75,7 +75,7 @@ theorem fibre_product_neighbourhood_limit
   let R := (equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse
   let F := R ⋙ Scheme.strictHenselizationAffineInclusion s ⋙ ObjectProperty.ι
     (fun n : (Scheme.pointSmallEtale s).fiber.Elements ↦ IsAffine n.1.left)
-  let D := CategoryOfElements.π (Scheme.pointSmallEtale s).fiber ⋙ Scheme.Etale.forget S
+  let D := Functor.Elements.π (Scheme.pointSmallEtale s).fiber ⋙ Scheme.Etale.forget S
   obtain ⟨hF, hJ, ⟨hlim⟩⟩ := Scheme.strictHenselizationAffineProperties s
   let : F.Initial := hF
   let : IsCofiltered J := hJ

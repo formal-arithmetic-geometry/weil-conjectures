@@ -133,7 +133,7 @@ theorem integralLineTensorComparison_iso
   -- Use the equivalent principal-cone unit, whose exact-equivalence API preserves its
   -- actual augmentation. This avoids a separate quotient-tower balancing argument.
   have hc := ((roosIntrinsicCompletenessEquivalence p l (by omega) E X d hdideal
-    C P e).out 0 2).mp hC
+    C P e).out 1 3).mp hC
   have hi : IsIso (DerivedCategory.Q.map
       (CochainComplex.PrincipalCone.unit (integralKoszulScalar l E X P.obj))) := by
     change IsIso (e.inv ≫ DerivedCategory.Q.map
@@ -188,12 +188,12 @@ theorem integralLineTensorComparison_iso
   let PG : (Good l E X none).FullSubcategory := ⟨G.obj P.obj, hGP⟩
   have hcG : IsComplete l E X none (DerivedCategory.Q.obj PG.obj) := by
     apply ((roosIntrinsicCompletenessEquivalence p l (by omega) E X d hdideal
-      (DerivedCategory.Q.obj PG.obj) PG (Iso.refl _)).out 0 2).mpr
+      (DerivedCategory.Q.obj PG.obj) PG (Iso.refl _)).out 1 3).mpr
     change IsIso (𝟙 _ ≫ DerivedCategory.Q.map
       (CochainComplex.PrincipalCone.unit (integralKoszulScalar l E X (G.obj P.obj))))
     simpa only [Category.id_comp] using hs
   have huG := ((roosIntrinsicCompletenessEquivalence p l (by omega) E X d hdideal
-    (DerivedCategory.Q.obj PG.obj) PG (Iso.refl _)).out 0 4).mp hcG
+    (DerivedCategory.Q.obj PG.obj) PG (Iso.refl _)).out 1 5).mp hcG
   let ed : DerivedCategory.Q.obj PG.obj ≅ (integralLineOrdinary l E X).obj (C, T) :=
     (DerivedCategory.Q.mapIso ec).symm ≪≫ er
   exact (NatTrans.isIso_app_iff_of_iso (completionUnit l E X none) ed).mp huG

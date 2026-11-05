@@ -254,12 +254,12 @@ theorem completedAffine_fiber_interpolation (l : ℕ) [Fact l.Prime]
   simp only [ContinuousMap.prod_apply, stageSection_eval]
   by_cases hj : W.left.fromSpecResidueField x ≫ (q j).down.left =
       W.left.fromSpecResidueField x ≫ (q i).down.left
-  · rw [if_pos hj]
+  · rw [ite_eq_left hj]
     apply Finset.prod_eq_one
     intro a _
-    simp only [← Category.assoc, hj, if_true]
-  · rw [if_neg hj]
+    simp only [← Category.assoc, hj, ite_true]
+  · rw [ite_eq_right hj]
     apply Finset.prod_eq_zero (Finset.mem_univ j)
-    rw [if_neg (fun h ↦ hj ((hk j).mp h))]
+    rw [ite_eq_right (fun h ↦ hj ((hk j).mp h))]
 
 end AlgebraicGeometry.ProEtale.DiagonalCoefficients

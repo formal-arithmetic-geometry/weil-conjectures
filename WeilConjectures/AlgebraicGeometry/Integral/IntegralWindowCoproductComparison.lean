@@ -65,9 +65,9 @@ private theorem constant_model_iso
       ((CondensedRing.upperStar Λ (S.immersion a)).mapIso e) (hS a)⟩
   unfold IsConstantModelConstructible at hM ⊢
   by_cases h : CompactSpace X ∧ QuasiSeparatedSpace X
-  · rw [if_pos h] at hM ⊢
+  · rw [ite_eq_left h] at hM ⊢
     exact hstrat X e hM
-  · rw [if_neg h] at hM ⊢
+  · rw [ite_eq_right h] at hM ⊢
     intro U hU
     exact hstrat U.toScheme ((CondensedRing.upperStar Λ U.ι).mapIso e) (hM U hU)
 

@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Algebra.Field.Defs
 public import Mathlib.Data.Nat.Prime.Defs
-public import Mathlib.Data.Finite.Defs
+public import Mathlib.Basic.Finite.Defs
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 import WeilConjectures.AlgebraicGeometry.Cohomological.CohomologicalDimension
 import WeilConjectures.AlgebraicGeometry.Base.BaseFieldCohomologicalDimension

@@ -346,7 +346,7 @@ theorem principalSubsetHorizontalFaceCoordinate
     apply Finset.card_pos.mp
     rw [Finset.card_erase_of_mem (S.val.orderIsoOfFin hcard k).property, hcard]
     omega
-  erw [dif_pos hn]
+  erw [dite_eq_left hn]
   erw [show (-1 : A) ^ k.val = (((-1 : ℤ) ^ k.val : ℤ) : A) by simp,
     Int.cast_smul_eq_zsmul A, b.map_zsmul]
   congr 1

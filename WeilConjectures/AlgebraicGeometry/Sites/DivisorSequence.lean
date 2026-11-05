@@ -170,7 +170,7 @@ theorem mono_gmSheafToLowerStarGmSheaf_fromSpecFunctionField :
   rw [AddCommGrpCat.mono_iff_injective]
   intro a b h
   have hinj := X.injective_Γ_map_pullback_fst_fromSpecFunctionField V.unop.hom
-  exact ULift.ext _ _ (Units.ext (hinj (congrArg (fun x ↦ (Additive.toMul x.down).val) h)))
+  exact ULift.ext (Units.ext (hinj (congrArg (fun x ↦ (Additive.toMul x.down).val) h)))
 
 /-- **The unit `𝔾ₘ ⟶ i_* i^* 𝔾ₘ` is a monomorphism**, the left exactness of the divisor
 sequence. Composed with `i_*` of the comparison map `i^* 𝔾ₘ ⟶ 𝔾ₘ` it is the restriction map
@@ -266,7 +266,7 @@ lemma gmSheafToLowerStarGmSheaf_comp_divisorMap [IsLocallyNoetherian X] [IsRegul
     gmSheafToLowerStarGmSheaf X.fromSpecFunctionField ≫ X.divisorMap = 0 := by
   ext V u
   funext y
-  exact ULift.ext _ _ (Etale.ord_fst_appTop V.unop y _)
+  exact ULift.ext (Etale.ord_fst_appTop V.unop y _)
 
 /-- **Local algebraic Hartogs on an étale neighbourhood.** Let `X` be an integral regular
 locally noetherian scheme, `V` an étale `X`-scheme and `f` a unit on the generic fibre of `V`
@@ -324,7 +324,7 @@ lemma Etale.exists_ord_eq_extendByZero [IsLocallyNoetherian X] [IsRegular X] (V 
     fun z hz ↦ by
       rw [extendByZero_of_notMem _ (by rwa [range_fromSpecResidueField])]
       rfl
-  exact ⟨U, hyU, f, fun y' ↦ ULift.ext _ _ (hf y')⟩
+  exact ⟨U, hyU, f, fun y' ↦ ULift.ext (hf y')⟩
 
 omit [IsIntegral X] in
 /-- On geometric stalks, extension by zero `⨁_{i} i_{e(i)*} ℤ ⟶ (V ↦ (V → ℤ))` is injective, for
@@ -483,7 +483,7 @@ lemma exists_sheafFiber_gmSheafToLowerStarGmSheaf_eq [IsLocallyNoetherian X] [Is
   obtain ⟨U, hyU, u, hu⟩ := Etale.exists_eq_of_ord_eq_zero X V y (Additive.toMul b.down)
     (fun y' ↦ congrArg ULift.down (congrFun hb y'))
   exact ⟨U, hyU, ULift.up (Additive.ofMul u),
-    ULift.ext _ _ (congrArg Additive.ofMul (Units.ext hu))⟩
+    ULift.ext (congrArg Additive.ofMul (Units.ext hu))⟩
 
 /-- On geometric stalks, the image of the divisor map is contained in that of
 `⨁_x i_{x*} ℤ ⟶ (V ↦ (V → ℤ))`: near a point, a divisor is supported over finitely many
@@ -526,7 +526,7 @@ lemma exists_sheafFiber_desc_eq_divisorMap [IsLocallyNoetherian X] [IsRegular X]
     · rw [hy']
       exact (Finset.sum_eq_zero fun x _ ↦ by split_ifs <;> rfl).symm
     · have hord : Etale.ord V (U.ι y') (Additive.toMul f₀.down).val ≠ 0 :=
-        fun h ↦ hy' (ULift.ext _ _ h)
+        fun h ↦ hy' (ULift.ext h)
       have hcoh : coheight (W.hom y') = 1 := by
         by_contra h
         exact hord (Etale.ord_of_coheight_ne_one V h _)
@@ -534,9 +534,9 @@ lemma exists_sheafFiber_desc_eq_divisorMap [IsLocallyNoetherian X] [IsRegular X]
         rw [Finset.mem_subtype]
         exact hT (U.ι y') ((Set.ext_iff.1 (Scheme.Opens.range_ι U) (U.ι y')).1
           (Set.mem_range_self y')) hord
-      rw [Finset.sum_eq_single_of_mem _ hmem, if_pos rfl]
+      rw [Finset.sum_eq_single_of_mem _ hmem, ite_eq_left rfl]
       intro x _ hx
-      rw [if_neg fun h ↦ hx (Subtype.ext h.symm)]
+      rw [ite_eq_right fun h ↦ hx (Subtype.ext h.symm)]
   refine ⟨∑ x ∈ T', F.map (c.inj x) (Φ.toPresheafFiber W v' (X.pointConstantInt x.1).obj
     ((X.pointFunctionSheafToPointConstantInt x.1).hom.app (Opposite.op W) D)), ?_⟩
   have hterm (x : {x : X // coheight x = 1}) :

@@ -110,7 +110,7 @@ theorem moduleCup_component_section_map_exists {F G : X.Modules} (D : CupResolut
   intro p q V a b
   dsimp only
   erw [HomologicalComplex.ι_mapBifunctorDesc_assoc]
-  simp only [pairingSummand, Int.natCast_nonneg, dif_pos, Int.toNat_natCast,
+  simp only [pairingSummand, Int.natCast_nonneg, dite_eq_left, Int.toNat_natCast,
     Category.assoc, Iso.inv_hom_id, Category.comp_id]
   simp only [SheafOfModules.comp_val, PresheafOfModules.comp_app,
     ConcreteCategory.comp_apply]

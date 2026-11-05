@@ -118,8 +118,8 @@ theorem isSheaf_locallyConstantIntPresheaf :
     rw [key]
     exact hv
   refine ⟨ULift.up (⟨φ, hφ⟩ : LocallyConstant T.left ℤ), fun Y g' hg' ↦ ?_, fun y hy ↦ ?_⟩
-  · exact ULift.ext _ _ (LocallyConstant.ext fun z' ↦ key g' hg' z')
-  · refine ULift.ext _ _ (LocallyConstant.ext fun t ↦ ?_)
+  · exact ULift.ext (LocallyConstant.ext fun z' ↦ key g' hg' z')
+  · refine ULift.ext (LocallyConstant.ext fun t ↦ ?_)
     rw [← hz t]
     exact (congrArg (fun s : (locallyConstantIntPresheaf S).obj (op (Z t)) ↦ ULift.down s (z t))
       (hy (g t) (hg t))).trans (key _ (hg t) (z t)).symm
@@ -148,7 +148,7 @@ noncomputable def picardDegreeMorphism [Flat f] : picardFunctor f ⟶ locallyCon
     { app T := ↾fun x ↦ ULift.up ⟨picardDegree f x, isLocallyConstant_picardDegree f x⟩
       naturality T T' g := by
         ext x
-        refine ULift.ext _ _ (LocallyConstant.ext fun t ↦ ?_)
+        refine ULift.ext (LocallyConstant.ext fun t ↦ ?_)
         exact picardDegree_map f g.unop x t }
 
 @[simp]

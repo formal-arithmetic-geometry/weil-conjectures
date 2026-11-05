@@ -212,7 +212,7 @@ private theorem stratified_direct_finiteness (ℓ : ℕ) [Fact ℓ.Prime]
   let Λ := Profinite.padicAlgClRingObj.{u} ℓ
   have : IsNoetherian X := ⟨⟩
   have hM' : IsFiniteConstantStratified Λ X M := by
-    simpa only [IsConstantModelConstructible, if_pos
+    simpa only [IsConstantModelConstructible, ite_eq_left
       (show CompactSpace X ∧ QuasiSeparatedSpace X from ⟨inferInstance, inferInstance⟩)]
       using hM
   obtain ⟨S, hS⟩ := hM'

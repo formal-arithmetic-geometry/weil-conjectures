@@ -86,7 +86,7 @@ theorem finite_pushforward_set_stalk_bijective
               Y.smallEtaleTopology X.smallEtaleTopology).obj H) ↦
           fun t : {x : Spec (.of Ω) ⟶ X // x ≫ f = y} ↦
             (colimit.pre
-              ((CategoryOfElements.π (Scheme.pointSmallEtale t.1).fiber).op ⋙ H.obj)
+              ((Functor.Elements.π (Scheme.pointSmallEtale t.1).fiber).op ⋙ H.obj)
               (Etale.baseChangeNbhd f y t).op) a) := by
   let hfin := finite_pushforward_set_stalk_fiber_finite f y
   exact ⟨hfin, finite_pushforward_set_stalk_map_bijective_of_finite f H y hfin⟩

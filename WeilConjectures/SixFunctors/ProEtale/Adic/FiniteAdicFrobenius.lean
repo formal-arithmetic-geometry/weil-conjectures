@@ -63,7 +63,7 @@ variable (l : ℕ) [Fact l.Prime] (m : ℕ) {S : Scheme.{u}} (e : S ≅ S)
 omit [Fact l.Prime] in
 lemma surjective_intCast_ulift_zmod :
     Function.Surjective (Int.cast : ℤ → ULift.{u + 1} (ZMod (l ^ m))) := fun x ↦
-  ⟨(ZMod.intCast_surjective x.down).choose, ULift.ext _ _ (by
+  ⟨(ZMod.intCast_surjective x.down).choose, ULift.ext (by
     simpa using (ZMod.intCast_surjective x.down).choose_spec)⟩
 
 /-- `ν^* ∘ forget` commutes with the pullbacks along `e`, the pro-étale one being the pushforward

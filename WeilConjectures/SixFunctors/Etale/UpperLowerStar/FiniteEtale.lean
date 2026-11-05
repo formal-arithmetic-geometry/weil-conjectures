@@ -541,7 +541,7 @@ lemma Etale.biproductSheafFiberToLowerStar_comp_lift_stalkRestrict :
   by_cases h : t = t'
   · subst h
     simp
-  · rw [dif_neg (Ne.symm h)]
+  · rw [dite_eq_right (Ne.symm h)]
     exact Etale.sheafFiberToLowerStar_stalkRestrict_of_ne A f (Ne.symm h) G
 
 instance Etale.isIso_biproductSheafFiberToLowerStar :
