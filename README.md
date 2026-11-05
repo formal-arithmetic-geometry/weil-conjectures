@@ -16,3 +16,6 @@ the explicitly spelled functor arguments of the generic lemma are only definitio
 Tried: cast_proofs (kernel timeout), exact_mod_proofs, plain exact at 2M heartbeats (kernel timeout), direct goal assignment without Meta check (kernel timeout),
 dsimp-normalizing the two aliases + exact_mod_proofs (K4, pending). Question: how to state/prove such instances so that neither the unifier nor the kernel
 compares the condensed pullback functors structurally (e.g. a canonical form for the Precoherent instance, or an API to instantiate α/pullIso with `_` functors).
+Variant (Nailin, Zulip #1852): WeilSheaf/SmoothPurityFiniteTateOneReadingSyn.lean — every input of the generic lemma gets a non-exposed synonym
+(`def`, no `@[expose]`), each input iso/equation is restated once for the synonyms (12 small declarations), the generic lemma is applied to the
+synonyms only (syntactic), and the original statement follows by unfolding the synonyms. `set_option profiler true` prints the time of each piece.
