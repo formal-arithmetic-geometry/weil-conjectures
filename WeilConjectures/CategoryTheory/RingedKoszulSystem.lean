@@ -551,7 +551,7 @@ def ringedKoszulDerivedOverComparison {U V : C} (f : V ⟶ U)
       (((sheafCompose J (forget₂ CommRingCat RingCat)).obj O).over U)) := hU
   letI : HasDerivedCategory.{w} (SheafOfModules.{u}
       (((sheafCompose J (forget₂ CommRingCat RingCat)).obj O).over V)) := hV
-  ((Functor.mapDerivedCategoryCompIso).symm
+  (Functor.mapDerivedCategoryCompIso
     (SheafOfModules.overFunctor.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O) U)
     (SheafOfModules.overMap.{u}
