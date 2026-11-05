@@ -91,6 +91,9 @@ private noncomputable def moduleAction (U : Scheme.{u})
        rw [hf, hs]
        exact (M.val.map_smul f _ _).symm }⟩
 
+private local instance presheafHasDiscreteLimits.{uC, uT} {C : Type uC} [Category C]
+    (I : Type) : HasLimitsOfShape (Discrete I) (Cᵒᵖ ⥤ Type uT) := inferInstance
+
 private theorem product_sections.{uC, uT} {C : Type uC} [Category C] (J : GrothendieckTopology C)
     (A B : Sheaf J (Type uT)) (W : Cᵒᵖ) (r : A.obj.obj W) (m : B.obj.obj W) :
     ∃ x : (A ⨯ B).obj.obj W,
