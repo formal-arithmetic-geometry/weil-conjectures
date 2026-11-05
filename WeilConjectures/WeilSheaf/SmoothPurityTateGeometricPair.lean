@@ -4,9 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.WeilSheaf.SmoothPurityTatePowersDescentLaw
-public import WeilConjectures.WeilSheaf.SmoothPurityPairTransport
-import WeilConjectures.Tactic.ExactModProofs
+public import WeilConjectures.WeilSheaf.SmoothPurityTateInterfacePair
 
 /-! # The geometric Tate pair as descent from the finite base -/
 
@@ -32,26 +30,7 @@ noncomputable def purity_geometricTatePairIso
           a.geometricGaloisFrobenius).app _).symm ≪≫
           upperStarTateTwistNatIso ℓ a.geometricGaloisFrobenius.hom
             a.geometricFiberToAlgebraicClosure d) := by
-  have h := purity_upperStarTateTwistNatIso_geometricFiber ℓ a d
-  let e := purity_pairIso_transport (upperStarIsoLowerStarInv (Profinite.padicAlgClRingObj ℓ)
-      a.geometricGaloisFrobenius)
-    ((geometricFiberProjUpperStarFrobeniusIso (Profinite.padicAlgClRingObj ℓ)
-      a).app (tateTwistNat X ℓ d))
-    (upperStarTateTwistNatIso ℓ a.geometricGaloisFrobenius.hom
-      a.geometricFiberToAlgebraicClosure d)
-    ((geometricFiberProjLowerStarFrobeniusIso (Profinite.padicAlgClRingObj ℓ)
-      a).app (tateTwistNat X ℓ d))
-    (((upperStarIsoLowerStarInv (Profinite.padicAlgClRingObj ℓ)
-      a.geometricGaloisFrobenius).app _).symm ≪≫
-      upperStarTateTwistNatIso ℓ a.geometricGaloisFrobenius.hom
-        a.geometricFiberToAlgebraicClosure d)
-    (purity_geometricFiberProjLowerStarFrobeniusIso_app
-      (Profinite.padicAlgClRingObj ℓ) a (tateTwistNat X ℓ d))
-    rfl (upperStarTateTwistNatIso ℓ a.geometricFiberProj
-      a d) (by
-        dsimp only [Iso.app_hom, Functor.comp_obj, Functor.comp_map] at h ⊢
-        exact_mod_proofs h)
-  dsimp only [geometricFiberWeilLowerStar, Functor.comp_obj] at e ⊢
-  exact e
+  exact purity_geometricTateInterfacePairIso ℓ a d ≪≫
+    eqToIso (purityTateRootPair_eq ℓ a d)
 
 end AlgebraicGeometry.ProEtale.CondensedRing
