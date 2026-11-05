@@ -64,7 +64,7 @@ lemma projectionGeometricPullComp_hom_app
       (CondensedRing.leftDerivedUpperStarOverCompactificationIso Λ cb).inv.app
         ((compactProjectionForget k₀ l Y).obj N).obj := by
   simpa only [projectionGeometricPullComp, Iso.symm_hom] using
-    CondensedRing.ι_map_eqToIso_trans_upperStarComp_inv_app_compactification l cb
+    CondensedRing.ι_map_eqToIso_trans_upperStarComp_inv_app_compactification (f := fb) l cb
       ((compactProjectionForget k₀ l Y).obj N)
 
 set_option backward.defeqAttrib.useBackward true in
@@ -152,7 +152,7 @@ theorem projectionCompactification_forget_square (M : WeilComplex k₀ l X)
             ((compactProjectionForget k₀ l X).obj M).obj
             ((compactProjectionForget k₀ l Y).obj N).obj) := by
   have hε := projectionGeometricPullComp_hom_app k₀ l f N
-  have hp := CondensedRing.homMk_exceptionalProjectionMorphismOfCompactification_eq l cb
+  have hp := CondensedRing.homMk_exceptionalProjectionMorphismOfCompactification_eq (f := fb) l cb
     ((compactProjectionForget k₀ l X).obj M) ((compactProjectionForget k₀ l Y).obj N)
     ((projectionGeometricPullComp k₀ l f).hom.app ((compactProjectionForget k₀ l Y).obj N)) hε
   rw [hp]
