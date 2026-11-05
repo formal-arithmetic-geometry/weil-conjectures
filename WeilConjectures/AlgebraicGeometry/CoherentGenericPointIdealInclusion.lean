@@ -11,6 +11,7 @@ public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.AlgebraicGeometry.CoherentGenericPointClosedDescent
 import WeilConjectures.AlgebraicGeometry.CoherentIntegralGenericIdealMap
 import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
