@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.Statement
+public import WeilConjectures.WeilSheaf.SmoothPurity
 public import WeilConjectures.LeanEval.WeilConjectures
 
 /-! # Axiom audit for the Weil conjectures statement
