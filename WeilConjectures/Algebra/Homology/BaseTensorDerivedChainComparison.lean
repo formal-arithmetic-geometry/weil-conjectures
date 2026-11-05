@@ -188,7 +188,8 @@ theorem exists_baseTensorDerivedChainComparison
     Functor.mapHomotopyCategoryFactors_hom_app]
   erw [hmape, hmapl]
   erw [Category.id_comp, Category.id_comp]
-  simpa only [Functor.map_id, Category.id_comp, Category.comp_id,
-    Functor.map_comp, Category.assoc] using h'.symm
+  simpa only [r, e, l, s, Functor.comp_obj, Functor.mapHomotopyCategory_obj,
+    Functor.map_id, Category.id_comp, Category.comp_id, Functor.map_comp,
+    Category.assoc] using h'.symm
 
 end ModuleCat
