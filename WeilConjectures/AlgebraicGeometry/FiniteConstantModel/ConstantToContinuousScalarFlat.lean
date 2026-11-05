@@ -201,7 +201,7 @@ theorem constantToContinuous_preservesFiniteLimits
       have h := congrArg (fun z : M.val.obj (op U) ↦ M.val.restrictₛₗ f.op z) hs
       simp only [map_sum, map_smulₛₗ, PresheafOfModules.restrictₛₗ_apply, map_zero] at h
       change (∑ i, RR.obj.map f.op (a i) • M.val.restrictₛₗ f.op (s i)) = 0 at h
-      simpa only [← hc, hsmul] using h
+      simpa only [← hc, hsmul, PresheafOfModules.restrictₛₗ_apply, s'] using! h
     have := hflat (op V)
     obtain ⟨l, b, t, hst, hcb⟩ := Module.Flat.isTrivialRelation_of_sum_smul_eq_zero he
     refine ⟨l, (fun i j ↦ ι (op V) (b i j)), t, ?_, ?_⟩
