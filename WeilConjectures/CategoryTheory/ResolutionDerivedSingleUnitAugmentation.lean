@@ -7,7 +7,6 @@ Authors: Bin Wu
 module
 
 public import Mathlib.Algebra.Homology.Localization
-import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.CategoryTheory.CanonicalResolutionDerivedIso
 public import WeilConjectures.CategoryTheory.RightDerivedSingleUnitHomologyComparison
 
@@ -126,6 +125,7 @@ theorem resolutionDerivedSingleUnit_augmentation
   rw [Functor.mapHomotopyCategory_map]
   simp only [Category.assoc, ← DerivedCategory.quotientCompQhIso_inv_naturality_assoc,
     Iso.inv_hom_id_app_assoc]
+  erw [Iso.inv_hom_id_app_assoc]
   change DerivedCategory.Q.map _ ≫ DerivedCategory.Q.map _ ≫ DerivedCategory.Q.map _ =
     𝟙 _ ≫ DerivedCategory.Q.map J.ι' ≫
       DerivedCategory.Q.map (HomologicalComplex.extendMap φ ComplexShape.embeddingUpNat)

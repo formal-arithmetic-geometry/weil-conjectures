@@ -1,3 +1,15 @@
+# BZ150 in progress
+
+- Branch: `u9/BZ150`; starting commit: `80aeb4bf4`.
+- Three modules passed together with `ucheck-bump` at commit `1fd21ddd01`.
+- The user instructed continuation after the exact one-line statement migration proposal.
+  `rightDerivedPullback_comp` now uses `(mapDerivedCategoryCompIso P P').symm` because
+  Mathlib owns the old name with the opposite orientation; the intended map is preserved.
+- All remaining declaration statements and existing docstrings are unchanged.
+- Next: validate all four assigned modules together, then write `~/u9/state/BZ150.DONE`.
+- Fix patterns and logs: `/home/ubuntu/u9/bz/FIXES-BZ150.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+
 # BZ133 complete
 
 - Branch: `u9/BZ133`.
