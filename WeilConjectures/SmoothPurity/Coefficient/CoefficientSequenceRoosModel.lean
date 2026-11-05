@@ -64,7 +64,7 @@ private theorem idDerived_fac (K : CochainComplex D ℤ) :
   have hi : (Functor.mapHomologicalComplexIdIso D (.up ℤ)).hom.app K = 𝟙 K := by
     ext i
     simp
-  rw [hi, DerivedCategory.Q.map_id, Category.comp_id]
+  erw [hi, DerivedCategory.Q.map_id, Category.comp_id]
 
 private theorem unitDerived_fac (S : D ⥤ D) [S.Additive]
     [PreservesFiniteLimits S] [PreservesFiniteColimits S] (e : S ≅ 𝟭 D)
