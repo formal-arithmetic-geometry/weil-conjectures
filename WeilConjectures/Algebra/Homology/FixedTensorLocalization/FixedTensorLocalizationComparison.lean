@@ -97,12 +97,14 @@ abbrev Homotopy := HomotopyCategory (Modules R) (.up ℤ)
 (blueprint: lem-weil-pbc-fixed-tensor-localization-comparison). -/
 abbrev quotient := HomotopyCategory.quotient (Modules R) (.up ℤ)
 
+private local instance (I : Type r) : Limits.HasColimitsOfShape (Discrete I)
+    (PresheafOfModules.{r}
+      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R).obj) :=
+  PresheafOfModules.hasColimitsOfShape _ _
+
 /-- The direct-sum total tensor with its canonical signs. Source: Stacks, Tag 06YM
 (blueprint: lem-weil-pbc-fixed-tensor-localization-comparison). -/
 abbrev totalTensor :=
-  have (I : Type r) : Limits.HasColimitsOfShape (Discrete I)
-      (PresheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj) :=
-    PresheafOfModules.hasColimitsOfShape _ _
   (@curriedTensor (Modules R) _ (SheafOfModules.monoidalCategory R)).map₂CochainComplex
 
 variable [HasDerivedCategory.{w} (Modules R)]
