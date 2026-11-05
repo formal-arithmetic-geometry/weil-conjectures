@@ -29,8 +29,8 @@ theorem purity_nonempty_toCondensedTateDescentIso (d : ℕ) :
         (tateTwistSheaf k₀ ℓ X d).obj ≅
       (CondensedRing.geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj ℓ)
         (X ↘ Spec (.of k₀))).obj (ProEtale.tateTwist X ℓ d)) := by
-  obtain ⟨e⟩ := purity_nonempty_tateTwistLowerPair_iso_toCondensed_constantTwist k₀ ℓ X d
+  obtain ⟨e⟩ := purity_nonempty_tateRootPair_iso_toCondensed_constantTwist k₀ ℓ X d
   exact ⟨(ProEtaleWeilSheaf.toCondensed k₀ ℓ X).mapIso (tateTwistSheafNatObjIso k₀ ℓ X d) ≪≫
-    e.symm ≪≫ (purity_geometricFiberWeilLowerStarTateNatIso k₀ ℓ X d).symm⟩
+    e.symm ≪≫ (purity_geometricFiberWeilLowerStarTateRootIso k₀ ℓ X d).symm⟩
 
 end AlgebraicGeometry.WeilSheaf
