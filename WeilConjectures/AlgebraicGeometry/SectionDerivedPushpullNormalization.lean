@@ -871,6 +871,12 @@ theorem sectionDerivedPushpullNormalization {X Y : Scheme.{u}} (f : X ⟶ Y) :
       (HomologicalComplex.quasiIso_map_iff_of_preservesHomology i (equivalence Λ T).functor)
       (hK T I)
   · intro P
+    simp only [DerivedCategory.quotientCompQhIso,
+      HomologicalComplexUpToQuasiIso.quotientCompQhIso,
+      Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv,
+      Quotient.lift.isLift_hom]
+    erw [(CondensedRing.upperStar Λ f).leftDerivedFunctor.map_id, DerivedCategory.Qh.map_id]
+    repeat first | erw [Category.id_comp] | erw [Category.comp_id]
     exact pullSquareFactors (CondensedRing.upperStar Λ f) (equivalence Λ X).functor
       (equivalence Λ Y).functor (pullback Λ f)
       (CondensedRing.upperStar Λ f).leftDerivedFunctor
@@ -879,6 +885,14 @@ theorem sectionDerivedPushpullNormalization {X Y : Scheme.{u}} (f : X ⟶ Y) :
       (CondensedRing.upperStar Λ f).leftDerivedFunctorIsoMapDerivedCategory_hom_fac
       (pullComparison Λ f) P
   · intro P
+    simp only [DerivedCategory.quotientCompQhIso,
+      HomologicalComplexUpToQuasiIso.quotientCompQhIso,
+      Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv,
+      Quotient.lift.isLift_hom]
+    erw [DerivedCategory.Qh.map_id, DerivedCategory.Qh.map_id,
+      (CondensedRing.lowerStar Λ f).rightDerivedFunctor.map_id,
+      (pushforward Λ f).rightDerivedFunctor.map_id]
+    repeat first | erw [Category.id_comp] | erw [Category.comp_id]
     exact rightSquareFactors (CondensedRing.lowerStar Λ f) (equivalence Λ Y).functor
       (equivalence Λ X).functor (pushforward Λ f) (pushComparison Λ f) P
   · intro M N q
