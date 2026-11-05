@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.Algebra.Homology.DerivedCategory.SingleHomology
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.DualizableProjectiveUnit
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.TraceShiftUnit
@@ -159,8 +161,8 @@ lemma trace_eq_singleFunctor_map_superTrace_of_shift (n : ℤ)
     ⟨(singleFunctor A 0).preimage ((shiftFunctor (DerivedCategory A) n).preimage b), by
       erw [Functor.map_preimage, Functor.map_preimage]⟩
   refine (@trace_shiftFunctor_map_singleFunctor_map _ _ _ _ _ _ _ _ _ _ n r ‹_›).trans ?_
-  erw [superTrace_homologyFunctor_map_shiftFunctor_map_singleFunctor_map, map_zsmul]
-  rfl
+  erw [superTrace_homologyFunctor_map_shiftFunctor_map_singleFunctor_map, map_zsmul,
+    Category.id_comp, Category.comp_id]
 
 /-- **The trace as a supertrace** (blueprint `prop-trf-trace-formal-laws`, item (4)): for an
 object `Y` of `D(A)` which is a finite direct sum of shifts of the unit, with dualizable
