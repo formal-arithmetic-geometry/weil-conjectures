@@ -185,9 +185,9 @@ def DerivedCoordinateCompatibility
                   (Iso.refl (F ⋙ T')) (.up ℤ)).inv.app K)) ∧
       ∀ K : DerivedCategory A,
         F.mapDerivedCategory.map (Φ.hom.app K) ≫ σD.hom.app K =
-          ((Functor.mapDerivedCategoryCompIso U F).symm ≪≫
+          ((Functor.mapDerivedCategoryCompIso U F) ≪≫
             Functor.mapDerivedCategoryNatIso ρ ≪≫
-            Functor.mapDerivedCategoryCompIso G U').hom.app
+            (Functor.mapDerivedCategoryCompIso G U').symm).hom.app
               (E.obj K) ≫
             U'.mapDerivedCategory.map (β.hom.app K) ≫
             Φ'.hom.app (F.mapDerivedCategory.obj K)
@@ -231,7 +231,7 @@ def IsFiniteFreeScalarCoordinateIso
     (s : S.obj.obj U) (m : M.val.obj U) (i : Fin d),
     ((φ.hom.app M) ≫ Pi.π (fun _ : Fin d ↦ M) i).val.app U
       (scalarPure a M U s m) =
-        (scalarBasisCoordinate a d θ i).val.app U s • m) ∧
+        (show R.obj.obj U from (scalarBasisCoordinate a d θ i).val.app U s) • m) ∧
   ∀ (M : SheafOfModules.{u} (ringSheaf R)) (U : Cᵒᵖ)
     (x : ((Functor.const (Discrete (Fin d)) ⋙ lim).obj M).val.obj U),
     (φ.inv.app M).val.app U x =
@@ -904,9 +904,9 @@ private theorem derivedCoordinateSquare
     (K : DerivedCategory A) :
     F.mapDerivedCategory.map (Φ.hom.app K) ≫
         (powerComparison F.mapDerivedCategory d).hom.app K =
-      ((Functor.mapDerivedCategoryCompIso U F).symm ≪≫
+      ((Functor.mapDerivedCategoryCompIso U F) ≪≫
         Functor.mapDerivedCategoryNatIso ρ ≪≫
-        Functor.mapDerivedCategoryCompIso G U').hom.app (E.obj K) ≫
+        (Functor.mapDerivedCategoryCompIso G U').symm).hom.app (E.obj K) ≫
         U'.mapDerivedCategory.map
           ((scalarComparisonDescent T F G T' E ε E' ε' χ).hom.app K) ≫
         Φ'.hom.app (F.mapDerivedCategory.obj K) := by
@@ -1007,6 +1007,6 @@ set_option backward.isDefEq.respectTransparency.types true
 
 attribute [local irreducible] Functor.mapDerivedCategoryFactors
   Functor.mapHomologicalComplexCompIso
-  Functor.mapDerivedCategoryCompIso Functor.mapDerivedCategoryNatIso
+  Functor.mapDerivedCategoryNatIso
 
 end SheafOfModules.RingedTensor
