@@ -92,7 +92,7 @@ private theorem exactNat_iso (e : F ≅ G) :
 private theorem exactNat_whiskerRight (t : F ⟶ G) (K : D ⥤ H)
     [K.Additive] [PreservesFiniteLimits K] [PreservesFiniteColimits K] :
     exactNat (Functor.whiskerRight t K) ≫ (Functor.mapDerivedCategoryCompIso G K).hom =
-      (Functor.mapDerivedCategoryCompIso F K).hom ≫
+      (Functor.mapDerivedCategoryCompIso F K).inv ≫
         Functor.whiskerRight (exactNat t) K.mapDerivedCategory := by
   refine Localization.natTrans_ext DerivedCategory.Q
     (HomologicalComplex.quasiIso C (.up ℤ)) (fun L ↦ ?_)
@@ -108,7 +108,7 @@ private theorem exactNat_whiskerRight (t : F ⟶ G) (K : D ⥤ H)
 private theorem exactNat_whiskerLeft (K : H ⥤ C)
     [K.Additive] [PreservesFiniteLimits K] [PreservesFiniteColimits K] (t : F ⟶ G) :
     exactNat (Functor.whiskerLeft K t) ≫ (Functor.mapDerivedCategoryCompIso K G).hom =
-      (Functor.mapDerivedCategoryCompIso K F).hom ≫
+      (Functor.mapDerivedCategoryCompIso K F).inv ≫
         Functor.whiskerLeft K.mapDerivedCategory (exactNat t) := by
   refine Localization.natTrans_ext DerivedCategory.Q
     (HomologicalComplex.quasiIso H (.up ℤ)) (fun L ↦ ?_)
@@ -240,8 +240,8 @@ private theorem exactSquare_unique
     (a : F₁.mapDerivedCategory ⋙ F₂.mapDerivedCategory ⟶
       G₁.mapDerivedCategory ⋙ G₂.mapDerivedCategory)
     (h : ClopenProjectorDescent (F₁ ⋙ F₂) (G₁ ⋙ G₂) t
-      ((Functor.mapDerivedCategoryCompIso F₁ F₂).hom ≫ a ≫
-        (Functor.mapDerivedCategoryCompIso G₁ G₂).inv)) :
+      ((Functor.mapDerivedCategoryCompIso F₁ F₂).inv ≫ a ≫
+        (Functor.mapDerivedCategoryCompIso G₁ G₂).hom)) :
     a = exactSquare F₁ F₂ G₁ G₂ t := by
   have he := exactNat_unique t _ h
   rw [← cancel_epi (Functor.mapDerivedCategoryCompIso F₁ F₂).hom,
@@ -412,7 +412,7 @@ def singleDerivedAlpha {V W S T : Scheme.{u}} (k : V ⟶ W) (f : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper f] [IsProper p]
     (h : k ≫ p = f ≫ i) : j B i ⋙ g B p ⟶ g B f ⋙ j B k :=
-  (Functor.mapDerivedCategoryCompIso _ _).inv ≫
+  (Functor.mapDerivedCategoryCompIso _ _).hom ≫
     Localization.liftNatTrans DerivedCategory.Q
       (HomologicalComplex.quasiIso (Modules B S) (.up ℤ))
       ((moduleJ B i ⋙ modulePullback B p).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)
@@ -669,9 +669,9 @@ def scalarJModule (φ : B →+* Λ) {U X : Scheme.{u}} (f : U ⟶ X) [IsOpenImme
 Source: Stacks 03DI, 03DJ, 015F (blueprint: lem-cbc-tower-mate-evaluation-scalars). -/
 def scalarJ (φ : B →+* Λ) {U X : Scheme.{u}} (f : U ⟶ X) [IsOpenImmersion f] :
     j Λ f ⋙ Res φ X ≅ Res φ U ⋙ j B f :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso _ _) ≪≫
     Functor.mapDerivedCategoryNatIso (scalarJModule φ f) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The scalar comparisons preserve the specified ordinary open unit and counit.
