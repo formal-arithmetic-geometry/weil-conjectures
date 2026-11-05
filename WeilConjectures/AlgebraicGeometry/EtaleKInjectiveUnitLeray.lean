@@ -231,22 +231,30 @@ theorem etaleKInjective_unit_leray
     rw [Functor.mapDerivedCategoryFactorsh_hom_app]
     simp only [Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv]
     erw [DerivedCategory.Qh.map_id, Category.comp_id]
-    simp only [Category.assoc, DerivedCategory.quotientCompQhIso_hom_naturality,
-      Iso.inv_hom_id_app_assoc]
+    simp only [Category.assoc, DerivedCategory.quotientCompQhIso_hom_naturality]
+    erw [Iso.inv_hom_id_app_assoc]
   have hβ := β.naturality ((DerivedCategory.quotientCompQhIso _).hom.app I)
   dsimp only [Functor.comp_map] at hβ
-  change (G.rightDerivedFunctorObjQIso I).hom ≫ DerivedCategory.Q.map w ≫
+  suffices (G.rightDerivedFunctorObjQIso I).hom ≫ DerivedCategory.Q.map w ≫
       (H.rightDerivedFunctorObjQIso J).inv =
-    β.app (DerivedCategory.Q.obj I) ≫
-      H.rightDerivedFunctor.map (L.mapDerivedCategoryFactors.hom.app I ≫ DerivedCategory.Q.map j)
+      β.app (DerivedCategory.Q.obj I) ≫
+        H.rightDerivedFunctor.map
+          (L.mapDerivedCategoryFactors.hom.app I ≫ DerivedCategory.Q.map j) by
+    simpa only [β, G, H, L, a, rightDerivedGlobalSections,
+      mapDerivedUpperStarLowerStarAdjunction, NatTrans.comp_app, Functor.whiskerRight_app,
+      Functor.whiskerLeft_app, Functor.leftUnitor_inv_app, Functor.associator_hom_app,
+      Category.id_comp, Category.comp_id, Category.assoc] using this
   rw [← cancel_epi (G.rightDerivedFunctorObjQIso I).inv, Iso.inv_hom_id_assoc]
   simp only [Functor.rightDerivedFunctorObjQIso, Iso.trans_inv, Iso.symm_inv,
-    Iso.app_hom, Iso.app_inv, Functor.mapIso_hom, Functor.mapIso_inv, asIso_hom]
+    Iso.app_hom, Iso.app_inv, Functor.mapIso_inv, asIso_hom]
   rw [← cancel_epi ((DerivedCategory.quotientCompQhIso _).hom.app
     ((G.mapHomologicalComplex (.up ℤ)).obj I))]
   simp only [Category.assoc, Iso.hom_inv_id_app_assoc,
     ← DerivedCategory.quotientCompQhIso_hom_naturality_assoc]
-  rw [reassoc_of% hβ, ← H.rightDerivedFunctor.map_comp, ← hfactor,
-    H.rightDerivedFunctor.map_comp, ← Category.assoc, hcomp]
+  erw [Iso.hom_inv_id_app_assoc]
+  rw [reassoc_of% hβ, ← H.rightDerivedFunctor.map_comp, ← hfactor]
+  simpa only [Functor.map_comp, Category.assoc] using
+    congrArg (fun t ↦ t ≫ H.rightDerivedFunctor.map
+      ((DerivedCategory.quotientCompQhIso _).hom.app J)) hcomp.symm
 
 end AlgebraicGeometry.Etale
