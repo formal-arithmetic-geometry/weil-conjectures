@@ -6,6 +6,7 @@ module
 
 public import WeilConjectures.WeilSheaf.SmoothPurityUnitBaseChangeCompactification
 public import WeilConjectures.WeilSheaf.SmoothPurityDescendedUnitBaseChange
+public import WeilConjectures.WeilSheaf.SmoothPurityUnitBaseChangePoint
 
 /-! # The bridge (D): the geometric-fibre exchange is the pasted compact-support base change
 
@@ -61,6 +62,26 @@ theorem isIso_smoothUnitBaseChange_descendedShriekGeometricExchange_toPoint
   change IsIso (Adjunction.unitBaseChange _ _ (descendedShriekGeometricExchange l (toPoint X)).hom e)
   rw [show (descendedShriekGeometricExchange l (toPoint X)).hom =
     (compactificationLowerShriekBaseChange l bcj).hom from h]
+  exact this
+
+/-- The geometric-fibre exchange of the structure morphism is the canonical pasted base change
+`geometricFiberLowerShriekBaseChangePoint` of #2144 (statement; the bridge (D) in the form
+needing no open-immersion input). -/
+def ExchangeEqPoint : Prop :=
+  (descendedShriekGeometricExchange l (toPoint X)).hom =
+    (geometricFiberLowerShriekBaseChangePoint l (toPoint X)).hom
+
+/-- **A1' over a point for the geometric-fibre exchange, from #2144**: invertibility transports
+from `geometricFiberLowerShriekBaseChangePoint`. -/
+theorem isIso_smoothUnitBaseChange_descendedShriekGeometricExchange_toPoint_of_eqPoint
+    (e : (boundedConstructibleUpperStarOfMap l (point k).hom.geometricFiberProj).obj (𝟙_ _) ⟶
+      𝟙_ _) [IsIso e] (h : ExchangeEqPoint l (X := X)) :
+    IsIso (smoothUnitBaseChange l (toPoint X) (traceGeometricFiberOverMap (toPoint X))
+      (descendedShriekGeometricExchange l (toPoint X)) e) := by
+  haveI := isIso_smoothUnitBaseChange_geometricFiberLowerShriekBaseChangePoint l (toPoint X) e
+  change IsIso (Adjunction.unitBaseChange _ _ (descendedShriekGeometricExchange l (toPoint X)).hom e)
+  rw [show (descendedShriekGeometricExchange l (toPoint X)).hom =
+    (geometricFiberLowerShriekBaseChangePoint l (toPoint X)).hom from h]
   exact this
 
 end AlgebraicGeometry.ProEtale.CondensedRing
