@@ -122,7 +122,7 @@ lemma mapDerivedCategoryHomologyFunctorIso_comp_hom_app (F : C ⥤ D) (G : D ⥤
     refine Localization.natTrans_ext DerivedCategory.Q
       (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) (fun L => ?_)
     have hc₀ : (F ⋙ G).mapDerivedCategoryFactors.inv.app L ≫
-        (mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Q.obj L) =
+        (mapDerivedCategoryCompIso F G).inv.app (DerivedCategory.Q.obj L) =
         G.mapDerivedCategoryFactors.inv.app ((F.mapHomologicalComplex (.up ℤ)).obj L) ≫
           G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.inv.app L) := by
       rw [← cancel_epi ((F ⋙ G).mapDerivedCategoryFactors.hom.app L), Iso.hom_inv_id_app_assoc,
@@ -131,7 +131,7 @@ lemma mapDerivedCategoryHomologyFunctorIso_comp_hom_app (F : C ⥤ D) (G : D ⥤
     have hc : (DerivedCategory.homologyFunctor E n).map
           ((F ⋙ G).mapDerivedCategoryFactors.inv.app L) ≫
         (DerivedCategory.homologyFunctor E n).map
-          ((mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Q.obj L)) =
+          ((mapDerivedCategoryCompIso F G).inv.app (DerivedCategory.Q.obj L)) =
         (DerivedCategory.homologyFunctor E n).map
           (G.mapDerivedCategoryFactors.inv.app ((F.mapHomologicalComplex (.up ℤ)).obj L)) ≫
         (DerivedCategory.homologyFunctor E n).map
