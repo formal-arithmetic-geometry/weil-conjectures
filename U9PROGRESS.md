@@ -230,40 +230,31 @@
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 - This final commit changes only progress documentation; Lean source matches the green build.
 
-# BZ798 complete
+# BZ824 in progress
 
-- Branch: `u9/BZ798`; original baseline: `6a4b38f19`.
-- Resumed after rereading `/home/ubuntu/u9/briefs/BZ798.md` and the progress notes.
-- Merged the current integrated bump branch at `d9a3ea12c`. It already removes the
-  unused signed-projection comparison chain and its downstream callers. The earlier
-  referenced-caller blocker therefore no longer applies.
-- Deleted only the remaining unused `SignedProjectionResolution.totalInverse`;
-  whole-tree `git grep -w totalInverse -- WeilConjectures Comparator` found its sole
-  declaration and no callers. It is listed unused and absent from kept-decls.txt.
-- All surviving declaration text is unchanged from the integrated branch.
-- Next: validate the owned module, then its direct importers and downstream layers.
-- Previous diagnostic history is archived in FIXES-BZ798-preintegration.md.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
-- Assigned module is now GREEN: `ucheck-bump` rc=0, failed=0, 4657 jobs;
-  rebuilt in 9.5 seconds on `poolb:43.166.83.208` at commit
-  `4157f12719d57cd9316afddebd65c58d9ac537bb`.
-- Unit log: `/home/ubuntu/u9/bz/BUILD-BZ798-unit-green.log`.
-- Direct importer batch attempted all three importers. `ConstantPerfectQuotientProjection`
-  and `PerfectProjectionFormula` are blocked by unowned `RingedKoszulSystem.lean:554`
-  (`Invalid field symm`). Cancelled only this verified batch's timeout process;
-  wrapper rc=255, built=29, failed=1. These importers are skipped, not claimed green.
-- Dependency paths: `/home/ubuntu/u9/bz/BZ798-downstream-blockers.txt`.
-- Focused downstream validation of `ProEtaleProjectionMateData` and its sole importer
-  `ProEtaleProjectionMateExact` is queued (exec session 71582); no further Lean edits.
-- Focused downstream validation finished at `097c128327f8a77b1db72bd3846df904744bf797`:
-  `ProEtaleProjectionMateData` rebuilt GREEN in 3.0s; `ProEtaleProjectionMateExact`
-  is blocked at line 71 by BZ764's removed `proEtaleProjectionMateData` API.
-  Wrapper rc=1, built=24, failed=1; the failing module is not claimed green.
-- `proEtaleProjectionMateExact` still has callers in `PerfectProjectionFormula`
-  and `ProjectionFormulaCompactified`, so the deletion guard prevents removing it.
-  No unowned upstream declaration was restored or modified.
-- Downstream pass complete: four extra modules attempted over two layers, one green,
-  three recorded external blockers. Log: `BUILD-BZ798-downstream2.log`.
-- Actual build-host pins verified: Lean v4.35.0-rc3 and Mathlib b63f6e8a68d220e3b3bc4f3792bb53650d375f24.
-- BZ798 COMPLETE for its assigned unit. Completion marker: `/home/ubuntu/u9/state/BZ798.DONE`.
-- Final documentation commit leaves all Lean source identical to the green unit build.
+- Branch: u9/BZ824; starting commit 95c8987257f.
+- The user instructed continuation after the upstream-restoration proposal.
+- Restored four prerequisite modules. The comparison predicate uses verified PZ003
+  Localization imports and a reflexive cast; the transport proof is unchanged,
+  and target automorphism specializes the existing arbitrary-degree theorem to zero.
+- All six submitted modules passed ucheck-bump at 826d8e1a1fb: rc=0, failed=0, 4065 jobs.
+- Green: DerivedModuleBaseChangeMap, DerivedModulePullbackComparison,
+  ModulePullbackComparisonIsoTransport, ModulePullbackComparisonTargetAutomorphism,
+  CanonicalModuleBaseChangeIsoComparisonCompat, CanonicalModuleBaseChangeIsoComparison.
+- All restored declaration headers and original assigned/caller sources are unchanged.
+- Full log: /home/ubuntu/u9/bz/BUILD-BZ824-restored-full.log.
+- Next: build layer-two importer CanonicalModuleBaseChangeAffineChartComparison.
+- Notes: /home/ubuntu/u9/bz/FIXES-BZ824.md. No local Lean/Lake or proof shortcuts.
+
+# BZ861 in progress
+
+- Branch: `u9/BZ861`; starting commit: `db406319f`.
+- The user instructed continuation after the exact restoration and canonical-transport proposal.
+- Restored `tilde_preservesHomology`, `affineBaseChangeTildeCohomologyIso`, and
+  `affineTensorPullbackHomologySheafIso` in their original two upstream modules.
+- Their external references were checked before restoration; the assigned theorem is still used.
+- Replaced obsolete generated additive instances using `tilde.map_add` and added the
+  proposed canonical Q/Qh transports around the inverse counit.
+- Next: remote validation, then the direct importer and further layers under the brief.
+- Fix records and baseline diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ861.md`.
+- No local Lean/Lake execution, forbidden proof shortcuts, or heartbeat changes.
