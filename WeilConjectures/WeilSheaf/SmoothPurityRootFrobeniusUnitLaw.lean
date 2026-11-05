@@ -26,6 +26,7 @@ lemma purityAbelianFactorIso_eq_upperStarFactorIso
     {U X : Scheme.{u}} (p : U ⟶ X) (s : U ⟶ U) (h : s ≫ p = p) :
     purityAbelianFactorIso p s h = upperStarFactorIso s p h := by
   simp [purityAbelianFactorIso, ProEtale.upperStarComp', upperStarFactorIso, upperStarCongr]
+  rfl
 
 variable {k : Type u} [Field k] [Finite k] {ℓ : ℕ} [Fact ℓ.Prime]
   [Fact (ringChar k ≠ ℓ)] {X : Scheme.{u}} (a : X ⟶ Spec (.of k))
