@@ -8,6 +8,7 @@ module
 public import Mathlib.LinearAlgebra.Dual.Lemmas
 public import Mathlib.RepresentationTheory.Irreducible
 public import Mathlib.RepresentationTheory.Subrepresentation
+public import Mathlib.RingTheory.Artinian.Module
 public import WeilConjectures.Mathlib.RepresentationTheory.Basic
 
 /-!
