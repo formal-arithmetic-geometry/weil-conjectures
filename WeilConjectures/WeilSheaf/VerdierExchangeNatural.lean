@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.WeilSheaf.DerivedHom
+public import WeilConjectures.WeilSheaf.VerdierExchangeYoneda
 public import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 public import WeilConjectures.WeilSheaf.Localization
 
@@ -85,7 +86,8 @@ theorem nonempty_verdierDual_derivedLowerShriek_natIso
       ObjectProperty.lift _ ((ObjectProperty.ι _).op ⋙
           ProEtaleWeilSheaf.derivedHom k₀ l X (dualizingComplexOfIsLeftAdjoint k₀ l X).obj)
           (fun K ↦ hX K.unop) ⋙ derivedLowerStar f) :=
-  sorry
+  nonempty_derivedLowerShriek_op_comp_iso_of_adjunction f _ _ (comp_over f _)
+    (Adjunction.ofIsLeftAdjoint _) (Adjunction.ofIsLeftAdjoint _) _ hX hY
 
 end WeilComplex
 
