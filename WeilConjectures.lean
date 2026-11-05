@@ -14615,6 +14615,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.IsZeroOfIsIsoZSMul
 public import WeilConjectures.CategoryTheory.DerivedCategory.IsoOfSyzygies
 public import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
 public import WeilConjectures.CategoryTheory.DerivedCategory.KFlatShortExact
+public import WeilConjectures.CategoryTheory.DerivedCategory.KInjectiveNatIso
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftComplete
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedExactOfLocalization
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
@@ -26063,6 +26064,7 @@ public import WeilConjectures.WeilSheaf.Native.NativeHomEvaluationSquareAllSourc
 public import WeilConjectures.WeilSheaf.Native.NativeHomRepresentativeExistence
 public import WeilConjectures.WeilSheaf.Native.NativeHomRepresentativeUniqueness
 public import WeilConjectures.WeilSheaf.Native.NativeHomSingle
+public import WeilConjectures.WeilSheaf.Native.NativeHomSingleShift
 public import WeilConjectures.WeilSheaf.Native.NativeImmersionHeartLocalization
 public import WeilConjectures.WeilSheaf.Native.NativeMapModLaxTensor
 public import WeilConjectures.WeilSheaf.Native.NativeNormalizedActionHom
