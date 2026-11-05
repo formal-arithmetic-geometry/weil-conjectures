@@ -7,6 +7,7 @@ module
 public import WeilConjectures.WeilSheaf.SmoothPurityDescendedTraceUniversal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionUpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.GenericPoint
+public import WeilConjectures.SmoothPurity.EtaleUpperShriek
 
 /-!
 # The exceptional base change at the unit for étale morphisms
@@ -44,12 +45,13 @@ invertible.
   `ProEtale.CondensedRing.etaleLowerShriekBaseChange` (the inverse of the mate of
   `πU^* h^* ≅ h'^* πV^*`), `smoothUnitBaseChange` is invertible, with no hypothesis on `bc`.
 
-## Remaining inputs (left as `sorry`)
+## Remaining input (left as `sorry`)
 
-* `ProEtale.CondensedRing.nonempty_boundedConstructibleLowerShriekUpperStarAdjunction_of_etale`:
-  for étale `h`, the lower shriek `Rh_!` on bounded constructible `ℚ̄_ℓ`-complexes, defined
-  through a Nagata compactification, is left adjoint to `h^*`. For finite coefficients on the
-  étale site this is `AlgebraicGeometry.Etale.isIso_compactificationEtaleComparison`.
+The adjunction `Rh_! ⊣ h^*` of an étale `h`
+(`ProEtale.CondensedRing.nonempty_boundedConstructibleLowerShriekUpperStarAdjunction_of_etale`) is
+purity in relative dimension zero, `Rh^! ≅ h^*`
+(`ProEtale.CondensedRing.boundedConstructibleUpperStarIsoUpperShriekOfEtale`). What remains is
+
 * `ProEtale.CondensedRing.isIso_etaleLowerShriekExchange`: étale base change for `Rh_!`, the
   exchange `πU^* ⋙ Rh'_! ⟶ Rh_! ⋙ πV^*` of a cartesian square with `h` étale is invertible.
 
@@ -283,14 +285,14 @@ theorem isIso_smoothUnitBaseChange_of_isOpenImmersion_of_counit
 
 /-- **`Rh_! ⊣ h^*` for étale `h`** on bounded constructible `ℚ̄_ℓ`-complexes: the lower shriek,
 defined through a Nagata compactification, is left adjoint to the pullback, that is
-`Rh^! ≅ h^*`. For finite coefficients on the étale site this is
-`AlgebraicGeometry.Etale.isIso_compactificationEtaleComparison`; for open immersions it is
+`Rh^! ≅ h^*` (`boundedConstructibleEtaleLowerShriekUpperStarAdjunction`, by purity in relative
+dimension zero); for open immersions it is
 `boundedConstructibleLowerShriekUpperStarAdjunctionOfIsOpenImmersion`. -/
 theorem nonempty_boundedConstructibleLowerShriekUpperStarAdjunction_of_etale
     (h : U ⟶ V) [Etale h.left] :
     Nonempty (boundedConstructibleLowerShriek l h ⊣
       boundedConstructibleUpperStarOfMap l h.left) :=
-  sorry
+  ⟨boundedConstructibleEtaleLowerShriekUpperStarAdjunction l h⟩
 
 /-- The adjunction `Rh_! ⊣ h^*` of an étale morphism `h`, chosen by
 `nonempty_boundedConstructibleLowerShriekUpperStarAdjunction_of_etale`. -/

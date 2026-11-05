@@ -8,6 +8,7 @@ public import WeilConjectures.WeilSheaf.SmoothPurityDescendedTraceUniversal
 public import WeilConjectures.WeilSheaf.SmoothUnitBaseChangeEtale
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionUpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.GenericPoint
+public import WeilConjectures.SmoothPurity.EtaleUpperShriek
 
 /-!
 # The exceptional base change map along étale maps and open immersions (A1', step 2)
