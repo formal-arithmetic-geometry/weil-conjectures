@@ -26,15 +26,18 @@ open CategoryTheory MonoidalCategory Opposite
 namespace PresheafOfModules
 
 variable {C : Type u} [Category.{u} C] {R : Cᵒᵖ ⥤ CommRingCat.{u}}
-  (A : PresheafOfModules.{u} (R ⋙ forget₂ _ _))
+  (A : PresheafOfModulesOfCommRing.{u} R)
 
 /-- The biduality morphism `A ⟶ Hom(Hom(A, R), R)`, sending a section `m` to evaluation at
 `m`. -/
-noncomputable def bidual : A ⟶ homObj (homObj A (unit _)) (unit _) :=
-  tensorHomCurry ((β_ (homObj A (unit _)) A).hom ≫ tensorHomUncurry (𝟙 _))
+noncomputable def bidual :
+    A ⟶ homObj (homObj A (PresheafOfModulesOfCommRing.unit R))
+      (PresheafOfModulesOfCommRing.unit R) :=
+  tensorHomCurry
+    ((β_ (homObj A (PresheafOfModulesOfCommRing.unit R)) A).hom ≫ tensorHomUncurry (𝟙 _))
 
 lemma bidual_app_app_apply {X : Cᵒᵖ} (m : A.obj X) (W : (Over X.unop)ᵒᵖ)
-    (φ : (homObj A (unit _)).obj (op W.unop.left)) :
+    (φ : (homObj A (PresheafOfModulesOfCommRing.unit R)).obj (op W.unop.left)) :
     (((bidual A).app X m).app W) φ =
       φ.app (op (Over.mk (𝟙 W.unop.left))) (A.map W.unop.hom.op m) :=
   rfl
@@ -42,15 +45,16 @@ lemma bidual_app_app_apply {X : Cᵒᵖ} (m : A.obj X) (W : (Over X.unop)ᵒᵖ)
 variable {A} in
 /-- The biduality morphism is natural. -/
 @[reassoc]
-lemma bidual_naturality {A' : PresheafOfModules.{u} (R ⋙ forget₂ _ _)} (f : A ⟶ A') :
+lemma bidual_naturality {A' : PresheafOfModulesOfCommRing.{u} R} (f : A ⟶ A') :
     f ≫ bidual A' = bidual A ≫ homObjMap (homObjMap f (𝟙 _)) (𝟙 _) := by
   ext X m : 3
-  refine hom_ext (M₁ := (restrictOver R X.unop).obj (homObj A' (unit _)))
-    (M₂ := (restrictOver R X.unop).obj (unit _)) fun W ↦ ?_
+  refine hom_ext
+    (M₁ := (restrictOver R X.unop).obj (homObj A' (PresheafOfModulesOfCommRing.unit R)))
+    (M₂ := (restrictOver R X.unop).obj (PresheafOfModulesOfCommRing.unit R)) fun W ↦ ?_
   ext φ
   change φ.app (op (Over.mk (𝟙 W.unop.left))) (A'.map W.unop.hom.op (f.app X m)) =
     φ.app (op (Over.mk (𝟙 W.unop.left))) (f.app (op W.unop.left) (A.map W.unop.hom.op m))
-  rw [naturality_apply]
+  exact congrArg _ (naturality_apply f W.unop.hom.op m).symm
 
 section Bijective
 
@@ -66,7 +70,8 @@ end Bijective
 variable {A} {U : C}
 
 /-- A morphism `R|_U ⟶ A|_U` sends `r` to `r` times the restriction of the image of `1`. -/
-lemma app_unit_eq_smul (s : (restrictOver R U).obj (unit _) ⟶ (restrictOver R U).obj A)
+lemma app_unit_eq_smul
+    (s : (restrictOver R U).obj (PresheafOfModulesOfCommRing.unit R) ⟶ (restrictOver R U).obj A)
     (W : (Over U)ᵒᵖ) (r : R.obj (op W.unop.left)) :
     s.app W r = r • (show A.obj (op W.unop.left) from
       A.map W.unop.hom.op (s.app (op (Over.mk (𝟙 U))) (1 : R.obj (op U)))) := by
@@ -83,8 +88,10 @@ lemma app_unit_eq_smul (s : (restrictOver R U).obj (unit _) ⟶ (restrictOver R 
 on `U`, i.e. `A|_U` is a finite direct sum of copies of `R|_U` with inclusions `s i` and
 projections `c i`, then the biduality morphism is bijective on sections over `U`. -/
 lemma bidual_app_bijective {ι : Type*} [Fintype ι] [DecidableEq ι]
-    (s : ι → ((restrictOver R U).obj (unit _) ⟶ (restrictOver R U).obj A))
-    (c : ι → ((restrictOver R U).obj A ⟶ (restrictOver R U).obj (unit _)))
+    (s : ι → ((restrictOver R U).obj (PresheafOfModulesOfCommRing.unit R) ⟶
+      (restrictOver R U).obj A))
+    (c : ι → ((restrictOver R U).obj A ⟶
+      (restrictOver R U).obj (PresheafOfModulesOfCommRing.unit R)))
     (hsc : ∀ i j, s j ≫ c i = if j = i then 𝟙 _ else 0)
     (htot : ∑ i, c i ≫ s i = 𝟙 _) :
     Function.Bijective ((bidual A).app (op U)) := by
@@ -117,15 +124,16 @@ lemma bidual_app_bijective {ι : Type*} [Fintype ι] [DecidableEq ι]
   · intro Ψ
     let a : ι → R.obj (op U) := fun i ↦ Ψ.app T (c i)
     refine ⟨∑ i, a i • m i, ?_⟩
-    refine hom_ext (M₁ := (restrictOver R U).obj (homObj A (unit _)))
-      (M₂ := (restrictOver R U).obj (unit _)) fun W ↦ ?_
+    refine hom_ext (M₁ := (restrictOver R U).obj (homObj A (PresheafOfModulesOfCommRing.unit R)))
+      (M₂ := (restrictOver R U).obj (PresheafOfModulesOfCommRing.unit R)) fun W ↦ ?_
     ext ψ
     let T' : (Over W.unop.left)ᵒᵖ := op (Over.mk (𝟙 W.unop.left))
     let b : ι → R.obj (op W.unop.left) := fun i ↦ ψ.app T' (A.map W.unop.hom.op (m i))
     -- `ψ` is a combination of the restrictions of the `c i`.
-    have hψ : ψ = ∑ i, b i • (homObj A (unit _)).map W.unop.hom.op (c i) := by
+    have hψ : ψ =
+        ∑ i, b i • (homObj A (PresheafOfModulesOfCommRing.unit R)).map W.unop.hom.op (c i) := by
       refine hom_ext (M₁ := (restrictOver R W.unop.left).obj A)
-        (M₂ := (restrictOver R W.unop.left).obj (unit _)) fun W' ↦ ?_
+        (M₂ := (restrictOver R W.unop.left).obj (PresheafOfModulesOfCommRing.unit R)) fun W' ↦ ?_
       ext y
       let W'' : (Over U)ᵒᵖ := op ((Over.map W.unop.hom).obj W'.unop)
       refine (congrArg (ψ.app W') (hspan W'' y)).trans ?_
@@ -137,7 +145,8 @@ lemma bidual_app_bijective {ι : Type*} [Fintype ι] [DecidableEq ι]
         exact naturality_apply ψ
           (Over.homMk W'.unop.hom (Category.comp_id _) : W'.unop ⟶ Over.mk (𝟙 W.unop.left)).op _
       refine ((ψ.app W').hom.map_smul _ _).trans ?_
-      refine Eq.trans ?_ (restrictOver_smul_app_apply (b i) _ W' y).symm
+      refine Eq.trans ?_ (restrictOver_smul_app_apply (M := A)
+        (P := PresheafOfModulesOfCommRing.unit R) (b i) _ W' y).symm
       change (show R.obj (op W'.unop.left) from (c i).app W'' y) *
           (show R.obj (op W'.unop.left) from ψ.app W' (A.map W''.unop.hom.op (m i))) =
         R.map W'.unop.hom.op (b i) * (show R.obj (op W'.unop.left) from (c i).app W'' y)
@@ -145,7 +154,8 @@ lemma bidual_app_bijective {ι : Type*} [Fintype ι] [DecidableEq ι]
       rw [hn]
       exact mul_comm _ _
     -- The value of `Ψ` at a restriction of `c i` is the restriction of `a i`.
-    have hΨ (i : ι) : Ψ.app W ((homObj A (unit _)).map W.unop.hom.op (c i)) =
+    have hΨ (i : ι) :
+        Ψ.app W ((homObj A (PresheafOfModulesOfCommRing.unit R)).map W.unop.hom.op (c i)) =
         R.map W.unop.hom.op (a i) :=
       naturality_apply Ψ
         (Over.homMk W.unop.hom (Category.comp_id _) : W.unop ⟶ Over.mk (𝟙 U)).op (c i)
@@ -167,7 +177,7 @@ lemma bidual_app_bijective {ι : Type*} [Fintype ι] [DecidableEq ι]
 
 /-- The restriction of a morphism between restrictions to `Over U` along `g : V ⟶ U` is additive
 in the morphism. -/
-lemma restrictOverMap_sum {M N : PresheafOfModules.{u} (R ⋙ forget₂ _ _)} {V : C} (g : V ⟶ U)
+lemma restrictOverMap_sum {M N : PresheafOfModulesOfCommRing.{u} R} {V : C} (g : V ⟶ U)
     {ι : Type*} (t : Finset ι) (f : ι → ((restrictOver R U).obj M ⟶ (restrictOver R U).obj N)) :
     restrictOverMap g (∑ i ∈ t, f i) = ∑ i ∈ t, restrictOverMap g (f i) :=
   map_sum ({ toFun := restrictOverMap g, map_zero' := rfl, map_add' _ _ := rfl } :
@@ -177,8 +187,10 @@ lemma restrictOverMap_sum {M N : PresheafOfModules.{u} (R ⋙ forget₂ _ _)} {V
 /-- **Biduality for locally free presheaves of modules of finite rank.** If `A` is free of
 finite rank on `U`, then the biduality morphism is bijective on sections over every `V ⟶ U`. -/
 lemma bidual_app_bijective_of_hom {ι : Type*} [Fintype ι] [DecidableEq ι]
-    (s : ι → ((restrictOver R U).obj (unit _) ⟶ (restrictOver R U).obj A))
-    (c : ι → ((restrictOver R U).obj A ⟶ (restrictOver R U).obj (unit _)))
+    (s : ι → ((restrictOver R U).obj (PresheafOfModulesOfCommRing.unit R) ⟶
+      (restrictOver R U).obj A))
+    (c : ι → ((restrictOver R U).obj A ⟶
+      (restrictOver R U).obj (PresheafOfModulesOfCommRing.unit R)))
     (hsc : ∀ i j, s j ≫ c i = if j = i then 𝟙 _ else 0)
     (htot : ∑ i, c i ≫ s i = 𝟙 _) {V : C} (g : V ⟶ U) :
     Function.Bijective ((bidual A).app (op V)) := by
@@ -187,7 +199,8 @@ lemma bidual_app_bijective_of_hom {ι : Type*} [Fintype ι] [DecidableEq ι]
   · change restrictOverMap g (s j ≫ c i) = _
     rw [hsc]
     split_ifs
-    · exact restrictOverMap_id (R := R) (M := unit _) (N := unit _) (𝟙 _)
+    · exact restrictOverMap_id (R := R) (M := PresheafOfModulesOfCommRing.unit R)
+        (N := PresheafOfModulesOfCommRing.unit R) (𝟙 _)
     · rfl
   · change ∑ i, restrictOverMap g (c i ≫ s i) = _
     rw [← restrictOverMap_sum, htot]

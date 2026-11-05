@@ -51,19 +51,18 @@ set_option autoImplicit false
 namespace PresheafOfModules
 
 variable {C : Type u} [Category.{v} C] {R : Cᵒᵖ ⥤ CommRingCat.{max u v w}}
-  (N : PresheafOfModules.{max u v w} (R ⋙ forget₂ _ _))
+  (N : PresheafOfModulesOfCommRing.{max u v w} R)
 
 /-- A section `n` of `N` over `U` gives the morphism `R|_U ⟶ N|_U`, `r ↦ r • n`. -/
 private noncomputable def chart_homObjUnitInvApp {U : C} (n : N.obj (op U)) :
-    (restrictOver R U).obj (unit _) ⟶ (restrictOver R U).obj N :=
+    (restrictOver R U).obj (PresheafOfModulesOfCommRing.unit R) ⟶ (restrictOver R U).obj N :=
   (unitHomEquiv ((restrictOver R U).obj N)).symm
     (sectionsMk (fun W ↦ N.map W.unop.hom.op n) fun {W W'} f ↦ by
       change N.map f.unop.left.op (N.map W.unop.hom.op n) = N.map W'.unop.hom.op n
-      rw [← map_comp_apply, ← op_comp, Over.w])
+      rw [← PresheafOfModulesOfCommRing.map_comp_apply, ← op_comp, Over.w])
 
-private lemma chart_map_id_apply' {X : Cᵒᵖ} (x : N.obj X) : N.map (𝟙 X) x = x := by
-  rw [map_id]
-  rfl
+private lemma chart_map_id_apply' {X : Cᵒᵖ} (x : N.obj X) : N.map (𝟙 X) x = x :=
+  PresheafOfModulesOfCommRing.map_id_apply N X x
 
 private lemma chart_homObjUnitInvApp_app_one {U : C} (n : N.obj (op U)) :
     (chart_homObjUnitInvApp N n).app (op (Over.mk (𝟙 U))) (1 : R.obj (op U)) = n :=
@@ -72,8 +71,10 @@ private lemma chart_homObjUnitInvApp_app_one {U : C} (n : N.obj (op U)) :
       ((N.congr_map_apply op_id n).trans (N.chart_map_id_apply' n))
 
 /-- The sections of `homObj R N` over `X` are the sections of `N` over `X`. -/
-private noncomputable def chart_homObjUnitIsoApp (X : Cᵒᵖ) : (homObj (unit _) N).obj X ≅ N.obj X :=
-    { hom := ConcreteCategory.ofHom
+private noncomputable def chart_homObjUnitIsoApp (X : Cᵒᵖ) :
+    (homObj (PresheafOfModulesOfCommRing.unit R) N).obj X ≅ N.obj X :=
+    { hom := ModuleCat.ofHom (X := (homObj (PresheafOfModulesOfCommRing.unit R) N).obj X)
+        (Y := N.obj X)
         { toFun φ := φ.app (op (Over.mk (𝟙 X.unop))) (1 : R.obj (op X.unop))
           map_add' _ _ := rfl
           map_smul' r φ := by
@@ -81,25 +82,27 @@ private noncomputable def chart_homObjUnitIsoApp (X : Cᵒᵖ) : (homObj (unit _
             change R.map (𝟙 _) r • _ = _
             rw [R.map_id]
             rfl }
-      inv := ConcreteCategory.ofHom
+      inv := ModuleCat.ofHom (X := N.obj X)
+        (Y := (homObj (PresheafOfModulesOfCommRing.unit R) N).obj X)
         { toFun n := chart_homObjUnitInvApp N n
-          map_add' n n' := hom_ext (M₁ := (restrictOver R X.unop).obj (unit _))
+          map_add' n n' := hom_ext
+            (M₁ := (restrictOver R X.unop).obj (PresheafOfModulesOfCommRing.unit R))
             (M₂ := (restrictOver R X.unop).obj N) fun W ↦ by
               ext
               change (1 : R.obj (op W.unop.left)) • N.map W.unop.hom.op (n + n') =
                 (1 : R.obj (op W.unop.left)) • N.map W.unop.hom.op n +
                   (1 : R.obj (op W.unop.left)) • N.map W.unop.hom.op n'
               rw [map_add, smul_add]
-          map_smul' r n := hom_ext (M₁ := (restrictOver R X.unop).obj (unit _))
+          map_smul' r n := hom_ext
+            (M₁ := (restrictOver R X.unop).obj (PresheafOfModulesOfCommRing.unit R))
             (M₂ := (restrictOver R X.unop).obj N) fun W ↦ by
               ext
               change (1 : R.obj (op W.unop.left)) • N.map W.unop.hom.op (r • n) =
                 R.map W.unop.hom.op r • (1 : R.obj (op W.unop.left)) • N.map W.unop.hom.op n
-              rw [one_smul, one_smul, N.map_smul]
-              rfl }
+              rw [one_smul, one_smul, N.map_smul] }
       hom_inv_id := by
         ext φ : 2
-        refine hom_ext (M₁ := (restrictOver R X.unop).obj (unit _))
+        refine hom_ext (M₁ := (restrictOver R X.unop).obj (PresheafOfModulesOfCommRing.unit R))
           (M₂ := (restrictOver R X.unop).obj N) fun W ↦ ?_
         refine ModuleCat.hom_ext (LinearMap.ext_ring ?_)
         change (1 : R.obj (op W.unop.left)) • N.map W.unop.hom.op
@@ -116,13 +119,13 @@ private noncomputable def chart_homObjUnitIsoApp (X : Cᵒᵖ) : (homObj (unit _
 
 /-- **The internal hom out of the unit.** `homObj R N ≅ N`: a morphism `R|_U ⟶ N|_U` is
 determined by the image of `1`. -/
-private noncomputable def chart_homObjUnitIso : homObj (unit _) N ≅ N :=
+private noncomputable def chart_homObjUnitIso : homObj (PresheafOfModulesOfCommRing.unit R) N ≅ N :=
   isoMk (chart_homObjUnitIsoApp N) fun X Y g ↦ by
     ext φ
     change φ.app (op (Over.mk (𝟙 Y.unop ≫ g.unop))) (1 : R.obj Y) =
       N.map g (φ.app (op (Over.mk (𝟙 X.unop))) (1 : R.obj X))
-    refine (restrictOver_hom_app_congr (M := unit _) (N := N) φ (Category.id_comp g.unop)
-      (1 : R.obj Y)).trans (Eq.trans ?_ (naturality_apply φ
+    refine (restrictOver_hom_app_congr (M := PresheafOfModulesOfCommRing.unit R) (N := N) φ
+      (Category.id_comp g.unop) (1 : R.obj Y)).trans (Eq.trans ?_ (naturality_apply φ
         (Over.homMk g.unop (Category.comp_id _) : Over.mk g.unop ⟶ Over.mk (𝟙 X.unop)).op
           (1 : R.obj X)))
     exact congrArg (φ.app _) (unit_map_one (R := R ⋙ forget₂ _ _) g).symm
