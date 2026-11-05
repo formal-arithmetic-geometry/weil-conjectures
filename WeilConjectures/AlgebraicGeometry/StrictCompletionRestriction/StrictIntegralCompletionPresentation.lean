@@ -176,10 +176,13 @@ theorem strictIntegralCompletionPresentation (X : Scheme.{u}) :
   have heval (M : CochainComplex (AdicCompletion.Modules l E X) ℤ) (n : ℕ) :
       aug.app M ≫ roosEval (tower.obj M) n = (data.j n).app M := by
     ext1 q
-    obtain ⟨p, rfl⟩ := (Equiv.addRight (1 : ℤ)).surjective q
+    obtain ⟨p, hp⟩ := (Equiv.addRight (1 : ℤ)).surjective q
+    change p + 1 = q at hp
+    subst q
     change (aug.app M).f (p + 1) ≫ (roosEval (tower.obj M) n).f (p + 1) = _
     rw [roosEval_f, ← Category.assoc, ← Category.assoc, haug, biprod.lift_snd]
-    erw [← HomologicalComplex.comp_f, Pi.lift_comp_π]
+    erw [← HomologicalComplex.comp_f,
+      Pi.lift_comp_π (C := CochainComplex (AdicCompletion.Modules l E X) ℤ)]
   have hcone (M : CochainComplex (AdicCompletion.Modules l E X) ℤ) (n : ℕ) :
       (tower.obj M).asFunctor.obj (op n) = CochainComplex.mappingCone
         ((NatTrans.mapHomologicalComplex (scalarEnd l E X data.d ^ (n + 1)) (.up ℤ)).app M) := by
@@ -213,7 +216,8 @@ theorem strictIntegralCompletionPresentation (X : Scheme.{u}) :
         intro M n p
         rw [← Category.assoc, ← Category.assoc, ← Category.assoc, haug]
         erw [biprod.lift_snd]
-        erw [← HomologicalComplex.comp_f, Pi.lift_comp_π]
+        erw [← HomologicalComplex.comp_f,
+          Pi.lift_comp_π (C := CochainComplex (AdicCompletion.Modules l E X) ℤ)]
         exact hj n M (p + 1)
       reduction := PrincipalReduction.reductionFunctor l E X
       reduction_descent := fun n ↦ (κR n).symm
