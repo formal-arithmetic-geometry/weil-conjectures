@@ -174,7 +174,7 @@ theorem exists_koszulTensorConeCoordinates {R : Type u} [CommRing R]
     change e₀ ((koszulBoundary R (r + 1) f 0).rTensor M x) =
       (koszulBoundary R r (fun i ↦ f i.castSucc) 0).rTensor M (e 0 x).1 +
         f (Fin.last r) • (e 0 x).2
-    induction x with
+    induction x using TensorProduct.inductionOn with
     | tmul x m =>
       obtain ⟨⟨a, b⟩, rfl⟩ := (i 0).surjective x
       rw [hi]
@@ -194,7 +194,7 @@ theorem exists_koszulTensorConeCoordinates {R : Type u} [CommRing R]
       ((koszulBoundary R r (fun i ↦ f i.castSucc) (n + 1)).rTensor M (e (n + 1) x).1 +
           f (Fin.last r) • (e (n + 1) x).2,
         -(koszulBoundary R r (fun i ↦ f i.castSucc) n).rTensor M (e (n + 1) x).2)
-    induction x with
+    induction x using TensorProduct.inductionOn with
     | tmul x m =>
       obtain ⟨⟨a, b⟩, rfl⟩ := (i (n + 1)).surjective x
       rw [hi]
