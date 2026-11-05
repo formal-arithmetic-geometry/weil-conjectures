@@ -169,40 +169,24 @@
 - Completion marker: `/home/ubuntu/u9/state/BZ585.DONE`.
 - Final documentation commit leaves Lean source identical to the green revision.
 
-# BZ605 in progress
+# BZ613 complete
 
-- Branch: `u9/BZ605`; baseline: `0d3c0ae938`.
-- Assigned module: `WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomPresheaf`.
-- The user instructed continuation after the exact `BZ605-public-api-proposal.patch`.
-  That patch is applied: the public chain-map hypothesis and homology comparison now
-  use direct `Q`, removing the obsolete identity quotient transport. All other
-  declaration headers remain unchanged.
-- Localization imports and proof-local identity normalization preserve both private
-  helper hypotheses. No local Lean/Lake, proof escapes, heartbeat changes, or profiler probes.
-- Next: remote validation of the unit and four direct importers, then one more downstream layer.
-- Fixes and build logs: `/home/ubuntu/u9/bz/FIXES-BZ605.md`.
-
-- BZ605 unit and all four selected direct importers are green together:
-  `ucheck-bump` returned rc=0, built=27, failed=0 at `d3dc5d8650`.
-- Remote log: `/home/ubuntu/u9/logs/BZ605-20261106T045422.log`;
-  tree: `poolb:43.157.189.27`. No downstream edits were required.
-- Next: one second-layer batch (four raw triangle pullback importers), then DONE.
-
-# BZ605 complete
-
-- Unit and both downstream layers are green: 9 selected modules passed `ucheck-bump`.
-- Unit plus layer 1: rc=0, built=27, failed=0, 4364 jobs at `d3dc5d8650`.
-- Layer 2: rc=0, built=21, failed=0, 4369 jobs at `7c34f43bef`.
-  The assigned module rebuilt successfully again on this second tree in 217 seconds.
-- Full logs: `/home/ubuntu/u9/bz/BUILD-BZ605-unit-layer1-full.log` and
-  `/home/ubuntu/u9/bz/BUILD-BZ605-layer2-full.log`.
-- Final Lean change is limited to `CohomPresheaf.lean`: direct-Q homology and chain-map
-  comparisons, localization imports, and proof-local identity normalization.
-- The user authorized the exact one-hypothesis/definition-body API proposal by
-  instructing continuation. All other 58 declaration headers and all docstrings
-  are unchanged. No downstream source edits were needed.
-- No local Lean/Lake, sorries, forbidden proof shortcuts, heartbeat increases, or profiler probes.
-- Fix patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ605.md`.
-- Contract audit: `/home/ubuntu/u9/bz/BZ605-contract-audit.txt`.
-- Completion marker: `/home/ubuntu/u9/state/BZ605.DONE`.
-- This final documentation commit leaves Lean sources identical to the validated revision.
+- Branch: `u9/BZ613`; baseline: `b7a97a5ed`.
+- Assigned module and both downstream layers passed together through `ucheck-bump`:
+  rc=0, failed=0, 4271 jobs, on `poolb:43.166.72.219`.
+- Validated source commit: `0e902a46c64af67052be08f98a01e96a3e7a1de6`.
+- Green modules: `WeilConjectures.AlgebraicGeometry.UnboundedAbelianExchangeComparison`,
+  `WeilConjectures.AlgebraicGeometry.UnboundedCoefficientForgetfulAux`, and
+  `WeilConjectures.AlgebraicGeometry.ProperUnboundedBaseChangeForgetful`.
+- Migrated compositor directions in the six proposed private helper signatures,
+  local proof comparisons, and coefficient comparison construction, following the
+  user continuation instruction after the exact patch proposal. Updated the
+  corresponding hom/inv cancellation. All public signatures remain unchanged.
+- The first downstream module needs the same one-line compositor migration in
+  a definition body; the second downstream module builds unchanged.
+- Full final log: `/home/ubuntu/u9/bz/BUILD-BZ613-final-full.log`.
+- Fix patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ613.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ613-contract-audit.txt`.
+- No local Lean/Lake execution, sorries, trust bypasses, heartbeat increases, or profiler probes.
+- Completion marker: `/home/ubuntu/u9/state/BZ613.DONE`.
+- This final documentation commit leaves Lean sources identical to the green build.
