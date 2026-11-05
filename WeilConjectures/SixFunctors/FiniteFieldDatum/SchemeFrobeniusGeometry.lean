@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SmoothPurity.PurityFiniteSetting.SchemeGeometricFrobenius
 import WeilConjectures.SixFunctors.FiniteFieldDatum.FrobeniusSquareCartesian
+public import WeilConjectures.TraceFormula.FiniteFieldDatum.FrobeniusOpenSquare
 public import WeilConjectures.AlgebraicGeometry.AbsoluteFrobeniusNatural
 
 /-!
@@ -56,36 +57,6 @@ abbrev purityGaloisMap (D : FiniteFieldDatum.{u})
   D.galoisMap T₀.hom
     (@FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k _
       (Fintype.ofFinite D.k₀) _ _ _)
-
-/-- The characteristic `p` vanishes in the finite base field.
-Source: `card k₀ = p ^ a` (blueprint: def-pur-scheme-geometric-frobenius). -/
-theorem prime_cast_eq_zero (D : FiniteFieldDatum.{u}) : (D.p : D.k₀) = 0 := by
-  let : Fintype D.k₀ := Fintype.ofFinite D.k₀
-  have h := FiniteField.cast_card_eq_zero D.k₀
-  rw [← Nat.card_eq_fintype_card, D.card_base, D.cardinality_eq, Nat.cast_pow] at h
-  exact (pow_eq_zero_iff (Nat.one_le_iff_ne_zero.mp D.exponent_pos)).mp h
-
-/-- Every scheme over the finite base field has characteristic `p`.
-Source: structure map to `Spec k₀` (blueprint: def-pur-scheme-geometric-frobenius). -/
-theorem model_characteristic (D : FiniteFieldDatum.{u}) {X : Scheme.{u}}
-    (f : X ⟶ Spec (CommRingCat.of D.k₀)) : (D.p : Γ(X, ⊤)) = 0 := by
-  rw [← map_natCast f.appTop.hom, ← map_natCast (ΓSpecIso (CommRingCat.of D.k₀)).inv.hom,
-    D.prime_cast_eq_zero, map_zero, map_zero]
-
-/-- The absolute `q`-power Frobenius of a model lies over `Spec k₀`, since `x ^ q = x` in `k₀`.
-Source: definition of Phi (blueprint: def-pur-scheme-geometric-frobenius). -/
-theorem model_frobenius_over (D : FiniteFieldDatum.{u}) {X : Scheme.{u}}
-    (f : X ⟶ Spec (CommRingCat.of D.k₀)) :
-    X.iterateFrobenius D.prime (D.model_characteristic f) D.a ≫ f = f := by
-  have hid : iterateFrobeniusOfPrime D.k₀ D.prime D.prime_cast_eq_zero D.a =
-      RingHom.id D.k₀ := by
-    let : Fintype D.k₀ := Fintype.ofFinite D.k₀
-    ext x
-    rw [iterateFrobeniusOfPrime_apply, ← D.cardinality_eq, ← D.card_base,
-      Nat.card_eq_fintype_card, FiniteField.pow_card, RingHom.id_apply]
-  rw [← comp_iterateFrobenius D.prime f (D.model_characteristic (𝟙 _)),
-    iterateFrobenius_Spec D.prime (CommRingCat.of D.k₀) D.prime_cast_eq_zero, hid]
-  simp
 
 /-- The base change of the model's absolute q-power Frobenius.
 Source: definition of Phi (blueprint: def-pur-scheme-geometric-frobenius). -/

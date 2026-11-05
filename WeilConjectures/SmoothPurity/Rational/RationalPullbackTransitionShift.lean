@@ -7,27 +7,42 @@ module
 
 public import WeilConjectures.SixFunctors.Common.CommonStagePullbackNormalizedDescent
 public import WeilConjectures.FourierTransform.IntegralCompletedComparison.IntegralPullbackShiftCoordinates
-import WeilConjectures.SmoothPurity.Sf.SfFrameworkThetaShiftCompatibility
-import WeilConjectures.FourierTransform.CompletedScalarShift
-import WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarPullbackCompletionNormalization
+import WeilConjectures.SmoothPurity.Rational.RationalPullbackTransitionShiftScalar
+import WeilConjectures.SmoothPurity.Rational.RationalPullbackTransitionShiftRational
+import WeilConjectures.CategoryTheory.Shift.CommShiftEqToIso
 
 /-! # Scalar compatibility of normalized pullback shifts
 
 Source: current blueprint sec-smooth-purity/sk-prop-sf-localization,
 prop-sf-open-closed-triangle-all-stages.proof.md, Weil-structures paragraph.
 (blueprint: lem-sf-rational-pullback-transition-shift).
+
+The proof is split into the following steps:
+- `WeilConjectures.SmoothPurity.Rational.RationalPullbackTransitionShiftRoos`: the Roos
+  scalar/tower chain comparison commutes with signed Roos shifts;
+- `WeilConjectures.SmoothPurity.Rational.RationalPullbackTransitionShiftLevel`: the
+  finite scalar pullback levels commute with shifts;
+- `WeilConjectures.SmoothPurity.Rational.RationalPullbackTransitionShiftIntegral`: the
+  ordinary scalar/pullback comparison commutes with shifts;
+- `WeilConjectures.SmoothPurity.Rational.RationalPullbackTransitionShiftScalar`: the
+  integral pullback scalar comparison commutes with shifts;
+- `WeilConjectures.SmoothPurity.Rational.RationalPullbackTransitionShiftRational`: the
+  rational pullback scalar comparison commutes with shifts.
 -/
 
 @[expose] public section
 set_option autoImplicit false
+set_option Elab.async false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 universe u v
 open CategoryTheory AlgebraicGeometry
 namespace WeilConjectures
-open AlgebraicallyClosedCoefficients (Index Coefficient)
+open AlgebraicallyClosedCoefficients (Index Coefficient coefficientInclusion)
 attribute [local irreducible] constructibleIntegralPullback rationalDerivedPullback
+  rationalPullbackScalarComparison
+
 set_option allowUnsafeReducibility true in
 attribute [local reducible] GeneralAlgebraicallyClosedCoefficients.Stage
   GeneralAlgebraicallyClosedCoefficients.stageCategory
@@ -122,6 +137,45 @@ theorem rationalPullbackTransitionShift
         (rationalDerivedPullback l (Coefficient.{u} l Ω L) f)
         ℤ _ _ _ _
         (GeneralAlgebraicallyClosedCoefficients.stageTransitionCommShift l Ω X E L h)
-        rL) := by sorry
+        rL) := by
+  obtain ⟨α, hα, hs⟩ := integralPullbackScalarComparison_commShift l Ω f E L h hE hL
+  let := GeneralAlgebraicallyClosedCoefficients.stageTransitionCommShift l Ω X E L h
+  let := GeneralAlgebraicallyClosedCoefficients.stageTransitionCommShift l Ω Y E L h
+  let := GeneralAlgebraicallyClosedCoefficients.transitionCommShift l Ω X E L h
+  let := GeneralAlgebraicallyClosedCoefficients.transitionCommShift l Ω Y E L h
+  let β : rationalDerivedPullback l (Coefficient.{u} l Ω E) f ⋙
+        GeneralAlgebraicallyClosedCoefficients.transition l Ω Y E L h ⟶
+      GeneralAlgebraicallyClosedCoefficients.transition l Ω X E L h ⋙
+        rationalDerivedPullback l (Coefficient.{u} l Ω L) f :=
+    (rationalPullbackScalarComparison l (Coefficient.{u} l Ω E)
+      (Coefficient.{u} l Ω L) (coefficientInclusion l Ω E L h) f).hom
+  have hβ : NatTrans.CommShift β ℤ :=
+    rationalPullbackScalarComparison_commShift
+      (iX := GeneralAlgebraicallyClosedCoefficients.integralTransitionCommShift l Ω X E L h)
+      (iY := GeneralAlgebraicallyClosedCoefficients.integralTransitionCommShift l Ω Y E L h)
+      (tX := GeneralAlgebraicallyClosedCoefficients.transitionCommShift l Ω X E L h)
+      (tY := GeneralAlgebraicallyClosedCoefficients.transitionCommShift l Ω Y E L h)
+      l Ω f E L h
+      (GeneralAlgebraicallyClosedCoefficients.transitionCommShift_existsUnique
+        l Ω X E L h).exists.choose_spec
+      (GeneralAlgebraicallyClosedCoefficients.transitionCommShift_existsUnique
+        l Ω Y E L h).exists.choose_spec
+      nE nL α hα hs
+  have htX : NatTrans.CommShift (operationStageTransitionIso l Ω X E L h).hom ℤ :=
+    NatTrans.CommShift.eqToIso_hom
+      ((GeneralAlgebraicallyClosedCoefficients.stageSystem_existsUnique
+        l Ω X).exists.choose_spec.1 E L h)
+      (GeneralAlgebraicallyClosedCoefficients.transitionCommShift l Ω X E L h)
+  have htY : NatTrans.CommShift (operationStageTransitionIso l Ω Y E L h).hom ℤ :=
+    NatTrans.CommShift.eqToIso_hom
+      ((GeneralAlgebraicallyClosedCoefficients.stageSystem_existsUnique
+        l Ω Y).exists.choose_spec.1 E L h)
+      (GeneralAlgebraicallyClosedCoefficients.transitionCommShift l Ω Y E L h)
+  have key : NatTrans.CommShift
+      (Functor.whiskerLeft (rationalDerivedPullback l (Coefficient.{u} l Ω E) f)
+          (operationStageTransitionIso l Ω Y E L h).hom ≫ β ≫
+        Functor.whiskerRight (operationStageTransitionIso l Ω X E L h).inv
+          (rationalDerivedPullback l (Coefficient.{u} l Ω L) f)) ℤ := inferInstance
+  exact key
 
 end WeilConjectures
