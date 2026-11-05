@@ -20,15 +20,20 @@
 - Completion marker: `/home/ubuntu/u9/state/BZ72.DONE`.
 - Outside-unit caller `NativeHomLocalizedConeBoundaryModel.lean:114` still needs its owner's port; details are in the fix log.
 
-# BZ129 in progress
+# BZ129 complete
 
 - Unit: BZ129, branch `u9/BZ129`.
-- ModulePullbackPushforwardAdjunction, RingedDerivedRestrictionGeneral, and
-  HypercohomologyLeftEdge passed `ucheck-bump` at `8fac98f81`.
-- The user instructed continuation after the explicit statement-adjustment
-  proposal for MappedSingleCyclesShiftComparison. That exact canonical
-  quotient/Qh comparison patch is now applied, together with its proof repair.
-- Next: validate all four assigned modules together with `ucheck-bump`, then
-  write `/home/ubuntu/u9/state/BZ129.DONE`.
-- Fix patterns and logs: `/home/ubuntu/u9/bz/FIXES-BZ129.md`.
-- No local Lean/Lake execution, no forbidden proof escapes or heartbeat increases.
+- All four assigned modules rebuilt successfully together via `ucheck-bump`:
+  rc=0, failed=0, 2500 jobs.
+- Tested source commit: `e79e593115f97655e43fa2c80278a052e6bd9272`; the final commit changes only progress notes.
+- Modules: ModulePullbackPushforwardAdjunction, RingedDerivedRestrictionGeneral,
+  HypercohomologyLeftEdge, and MappedSingleCyclesShiftComparison.
+- The user instructed continuation after the exact canonical quotient/Qh
+  statement-adjustment proposal. That patch and its proof repair are validated;
+  all other existing declaration statements and all docstrings are unchanged.
+- Full build log: `/home/ubuntu/u9/bz/BUILD-BZ129-final-full.log`.
+- Fix patterns, occurrence counts, and pinned API evidence:
+  `/home/ubuntu/u9/bz/FIXES-BZ129.md`.
+- No local Lean/Lake execution, no sorries or forbidden proof escapes,
+  no heartbeat increases; `git diff --check` passes.
+- Completion marker: `/home/ubuntu/u9/state/BZ129.DONE`.
