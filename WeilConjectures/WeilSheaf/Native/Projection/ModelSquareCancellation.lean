@@ -14,6 +14,15 @@ namespace CategoryTheory
 
 variable {C D : Type*} [Category* C] [Category* D]
 
+/-- Map a three-step equality without simplifying concrete functor expressions. -/
+lemma Functor.projection_map_comp3_eq (F : C ⥤ D)
+    {X Y A B A' B' : C}
+    {a : X ⟶ A} {b : A ⟶ B} {c : B ⟶ Y}
+    {a' : X ⟶ A'} {b' : A' ⟶ B'} {c' : B' ⟶ Y}
+    (h : a ≫ b ≫ c = a' ≫ b' ≫ c') :
+    F.map a ≫ F.map b ≫ F.map c = F.map a' ≫ F.map b' ≫ F.map c' := by
+  simpa only [Functor.map_comp] using F.congr_map h
+
 /-- Paste a model normalization with its image under a functor. -/
 lemma Functor.projection_map_model_square (F : C ⥤ D)
     {A B E : C} {U V W : D}

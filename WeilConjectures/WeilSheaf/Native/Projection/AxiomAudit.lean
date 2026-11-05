@@ -67,5 +67,5 @@ run_cmd do
     logInfo m!"K5 existing proof leaf: {name}"
   for name in unavailable.qsort Name.lt do
     logInfo m!"K5 imported dependency with unavailable proof body: {name}"
-  logInfo m!"K5 visible direct sorry dependencies: {leaves.size}; " ++
+  logInfo <| m!"K5 visible direct sorry dependencies: {leaves.size}; " ++
     m!"unavailable bodies: {unavailable.size}"
