@@ -1,12 +1,16 @@
-# BZ150 in progress
+# BZ150 complete
 
 - Branch: `u9/BZ150`; starting commit: `80aeb4bf4`.
-- Three modules passed together with `ucheck-bump` at commit `1fd21ddd01`.
+- All four assigned modules passed together with `ucheck-bump`: rc=0, failed=0, 3644 jobs.
+- Validated source commit: `fb9bd7b27d169a5e395ed809947ee52e6fd0b46e`.
+- Build tree: `newsrv:/home/ubuntu/u9n/bumpw5`.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ150-final-full.log`.
 - The user instructed continuation after the exact one-line statement migration proposal.
   `rightDerivedPullback_comp` now uses `(mapDerivedCategoryCompIso P P').symm` because
   Mathlib owns the old name with the opposite orientation; the intended map is preserved.
 - All remaining declaration statements and existing docstrings are unchanged.
-- Next: validate all four assigned modules together, then write `~/u9/state/BZ150.DONE`.
+- Completion marker: `/home/ubuntu/u9/state/BZ150.DONE`.
+- This completion update changes only progress documentation after the successful source build.
 - Fix patterns and logs: `/home/ubuntu/u9/bz/FIXES-BZ150.md`.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
 
