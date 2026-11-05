@@ -32,6 +32,16 @@ noncomputable def purityDerivedPullback
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (g : X ⟶ Y) := L((g)^*⟦Λ⟧)
 
+/-- The counit defining derived coefficient extension. -/
+noncomputable def purityCoefficientHomotopyCounit (a : Λ ⟶ Λ') [IsMonHom a]
+    (X : Scheme.{u}) := (Mod.extendScalars (coefficientMap a X)).leftDerivedFunctorCounit
+
+/-- The counit defining derived geometric pullback. -/
+noncomputable def purityPullbackHomotopyCounit
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (g : X ⟶ Y) :=
+  ((g)^*⟦Λ⟧).leftDerivedFunctorCounit
+
 /-- The degree-zero comparison for coefficient extension. -/
 noncomputable def purityExtendScalarsSingleComparison (a : Λ ⟶ Λ') [IsMonHom a]
     (X : Scheme.{u}) := (Mod.extendScalars (coefficientMap a X)).puritySingleComparison

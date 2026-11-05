@@ -27,8 +27,6 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
   (a : Λ ⟶ Λ') [IsMonHom a] {X Y : Scheme.{u}} (g : X ⟶ Y)
 
-set_option trace.profiler true in
-set_option trace.profiler.threshold 500 in
 /-- On an object in degree zero, the nonflat derived pullback comparison is the
 ordinary coefficient/pullback comparison through the canonical single maps. -/
 lemma derivedUpperStarExtendScalarsIso_inv_app_single_comp_comparison
@@ -50,11 +48,12 @@ lemma derivedUpperStarExtendScalarsIso_inv_app_single_comp_comparison
   have hsingle := Functor.puritySingleComparisonOfHomotopy_square
     (Mod.extendScalars (coefficientMap a Y)) (g)^*⟦Λ'⟧ (g)^*⟦Λ⟧
     (Mod.extendScalars (coefficientMap a X)) LF LG LH LI
-    (Mod.extendScalars (coefficientMap a Y)).leftDerivedFunctorCounit
-    ((g)^*⟦Λ'⟧).leftDerivedFunctorCounit ((g)^*⟦Λ⟧).leftDerivedFunctorCounit
-    (Mod.extendScalars (coefficientMap a X)).leftDerivedFunctorCounit
+    (purityCoefficientHomotopyCounit a Y) (purityPullbackHomotopyCounit Λ' g)
+    (purityPullbackHomotopyCounit Λ g) (purityCoefficientHomotopyCounit a X)
     (derivedUpperStarExtendScalarsIso a g).inv (pullIso a g).inv hfac M
-  simpa only [LF, LG, LH, LI, purityDerivedPullback, purityDerivedCoefficientExtension, Functor.puritySingleComparisonOfCochain_leftDerivedCounit,
+  simpa only [LF, LG, LH, LI, purityDerivedPullback, purityDerivedCoefficientExtension,
+    purityCoefficientHomotopyCounit, purityPullbackHomotopyCounit,
+    Functor.puritySingleComparisonOfCochain_leftDerivedCounit,
     purityPullbackSingleComparison, purityExtendScalarsSingleComparison] using hsingle
 
 end AlgebraicGeometry.ProEtale.CondensedRing
