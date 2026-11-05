@@ -238,3 +238,23 @@
   and restored its source. Next: leaf-only rc=0 validation, final audit, and DONE.
 - Fix patterns and diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ800.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
+
+# BZ849 in progress
+
+- Branch: `u9/BZ849`; original leaf fixes committed as `597ec227b`.
+- Reread the brief and progress notes on continuation; no new LEAD lines.
+- First remote build removed all three compositor errors; 15 remaining errors were caused by
+  required declarations deleted from `CoefficientRingedSequenceSiteSupplement` by PZ007.
+- The user instructed continuation after the explicit upstream-restoration scope question.
+  Restored the six required public declarations and their private projection helper with
+  unchanged types and docstrings. Ported the two compositor constructions and added the
+  known public/implementation Localization imports for the private projection proof.
+- Restoration submitted via `ucheck-bump` at `515872265`.
+- Next: green leaf validation, then `CoefficientSequenceReductionAdjunction` and further
+  importers, stopping at foreign blockers or the brief's 30-module limit.
+- Fix patterns, logs, and usage scan: `/home/ubuntu/u9/bz/FIXES-BZ849.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
+- Leaf and restored dependency GREEN at `515872265`: ucheck-bump rc=0, failed=0,
+  4943 jobs, on poolb:43.157.189.27; both targets rebuilt in 14/13 seconds.
+- Log: `/home/ubuntu/u9/bz/BUILD-BZ849-leaf-green.log`.
+- Proceeding to the required downstream direct-importer build.
