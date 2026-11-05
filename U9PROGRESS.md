@@ -141,3 +141,26 @@
 - Existing `ucheck-bump` invocation is queued; it reads the pushed branch after
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+# BZ585 awaiting visibility exception
+
+- Branch: `u9/BZ585`; starting commit: `8af5cb324`.
+- Assigned module: `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebraFreeComparison`.
+- Applied public/import-all Localization imports, the permitted proof-unfolding repair.
+- Two public helper signatures still rely on the hidden implementation of `Qh`.
+  The complete exact-module patch already passed BZ430's remote build at `bb1af5fb2f`.
+  It adds `private` to `rightDerivedFunctorUnitQ_eq_rightDerivedFunctorUnit_app`
+  and `mapDerivedCategoryFactorsh_inv_app_quotient_obj`, preserving their statements
+  and proofs. All eight name occurrences are confined to the assigned module.
+- The current proof/import-only rule does not authorize visibility changes.
+  Asked for an explicit exception; private modifiers remain unapplied.
+- Concrete patch: `/home/ubuntu/u9/bz/BZ585-proposed-fix.patch`.
+  Notes and evidence: `/home/ubuntu/u9/bz/FIXES-BZ585.md`.
+- Baseline `ucheck-bump` was submitted at `ce4ae5c8a` but stayed queued.
+  Stopped only its verified waiting wrapper before any build started, since
+  the identical five baseline errors are already in BZ430-build-1-full.log.
+- After approval: apply the two private modifiers, run `ucheck-bump` on the owned
+  module, then `WeilConjectures.WeilSheaf.LowerShriekForget`; second-layer importers
+  are `AffineLineBundle` and `SmoothPurityNativeTraceCriterion`.
+- No BZ585 module is claimed green yet; no DONE marker written.
+- No local Lean/Lake, statement edits, proof shortcuts, or limit increases.
