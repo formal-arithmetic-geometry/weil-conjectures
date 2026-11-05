@@ -110,8 +110,8 @@ noncomputable def Functor.mapDerivedCategoryCompIsoOfIso {F : C₁ ⥤ C₂} {G 
     [PreservesFiniteLimits F'] [PreservesFiniteColimits F'] (e : F ⋙ G ≅ G' ⋙ F') :
     F.mapDerivedCategory ⋙ G.mapDerivedCategory ≅
       G'.mapDerivedCategory ⋙ F'.mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso F G).symm ≪≫ Functor.mapDerivedCategoryNatIso e ≪≫
-    Functor.mapDerivedCategoryCompIso G' F'
+  (Functor.mapDerivedCategoryCompIso F G) ≪≫ Functor.mapDerivedCategoryNatIso e ≪≫
+    (Functor.mapDerivedCategoryCompIso G' F').symm
 
 /-- **Right derived functors along equivalences**: if `E₁ : C₁ ≌ D₁` and `E₂ : C₂ ≌ D₂` are
 equivalences of abelian categories and `e : F ⋙ E₂ ≅ E₁ ⋙ F'` intertwines additive functors

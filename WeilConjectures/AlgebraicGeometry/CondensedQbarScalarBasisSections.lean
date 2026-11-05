@@ -92,7 +92,7 @@ private lemma copowerTensorIso_hom {I : Type v} (M : Mod C R) [HasCoproduct (fun
   intro i
   simp only [copowerTensorIso, Iso.trans_hom, Sigma.ι_comp_desc,
     asIso_hom, Functor.mapIso_hom]
-  rw [HasColimit.isoOfNatIso_ι_hom_assoc]
+  rw [HasColimit.ι_isoOfNatIso_hom_assoc]
   change (λ_ M).inv ≫ Sigma.ι (fun _ : I ↦ (tensorRight M).obj (regular R)) i ≫
     sigmaComparison (tensorRight M) (fun _ : I ↦ regular R) ≫
       (tensorRight M).map e.hom = _

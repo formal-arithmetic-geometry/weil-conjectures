@@ -15,6 +15,7 @@ import WeilConjectures.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageForge
 import Mathlib.Algebra.Colimit.Finiteness
 import Mathlib.Algebra.Category.ModuleCat.Limits
 import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
+public import Mathlib.CategoryTheory.Sites.Adjunction
 
 /-!
 # Reduction of constant module coefficients to cyclic abelian coefficients

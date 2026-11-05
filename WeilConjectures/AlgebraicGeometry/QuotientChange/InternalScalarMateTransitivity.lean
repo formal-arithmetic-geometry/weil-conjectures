@@ -53,7 +53,7 @@ Source: Stacks 07A6 (blueprint: lem-sfb-internal-scalar-mate-transitivity). -/
 def scalarRestrictionComp (a : Λ₀ ⟶ Λ₁) [IsMonHom a]
     (b : Λ₁ ⟶ Λ₂) [IsMonHom b] (T : Scheme.{u}) :
     V b T ⋙ V a T ≅ V (a ≫ b) T :=
-  (Functor.mapDerivedCategoryCompIso (V₀ b T) (V₀ a T)).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso (V₀ b T) (V₀ a T)) ≪≫
     Functor.mapDerivedCategoryNatIso
       ((Mod.comapComp (coefficientMap a T) (coefficientMap b T)).symm ≪≫
         Mod.comapCongr (coefficientMap_comp a b T).symm)

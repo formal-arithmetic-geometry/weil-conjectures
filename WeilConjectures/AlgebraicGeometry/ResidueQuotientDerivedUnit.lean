@@ -112,7 +112,7 @@ private theorem derivedTripleNatSingle
     (e : F ⋙ G ⋙ K ≅ M) (X : C) :
     let ρ := Functor.isoWhiskerLeft F.mapDerivedCategory
         (Functor.mapDerivedCategoryCompIso G K).symm ≪≫
-      (Functor.mapDerivedCategoryCompIso F (G ⋙ K)).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso F (G ⋙ K)) ≪≫
         Functor.mapDerivedCategoryNatIso e
     ρ.hom.app ((DerivedCategory.singleFunctor C 0).obj X) ≫
         (M.mapDerivedCategorySingleFunctor 0).hom.app X =
@@ -122,8 +122,8 @@ private theorem derivedTripleNatSingle
         (K.mapDerivedCategorySingleFunctor 0).hom.app (G.obj (F.obj X)) ≫
           (DerivedCategory.singleFunctor B 0).map (e.hom.app X) := by
   dsimp only
-  change ((Functor.mapDerivedCategoryCompIso G K).inv.app _ ≫
-      (Functor.mapDerivedCategoryCompIso F (G ⋙ K)).hom.app _ ≫
+  change ((Functor.mapDerivedCategoryCompIso G K).hom.app _ ≫
+      (Functor.mapDerivedCategoryCompIso F (G ⋙ K)).inv.app _ ≫
         (Functor.mapDerivedCategoryNatIso e).hom.app _) ≫ _ = _
   simp only [Category.assoc]
   rw [derivedNatSingle (F ⋙ G ⋙ K) M e X]

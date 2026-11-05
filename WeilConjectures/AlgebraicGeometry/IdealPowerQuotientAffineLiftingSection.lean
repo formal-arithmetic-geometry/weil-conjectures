@@ -13,6 +13,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import WeilConjectures.AlgebraicGeometry.IdealPowerAffineDenominatorMap
 import WeilConjectures.AlgebraicGeometry.AffineSectionLinearMapExtension
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.AlgebraicGeometry.AffineScheme
 /-! # Affine lifting into ideal-power annihilator quotients
 
 Source: Stacks Project, Properties, Lemmas 01PM and 01PQ.

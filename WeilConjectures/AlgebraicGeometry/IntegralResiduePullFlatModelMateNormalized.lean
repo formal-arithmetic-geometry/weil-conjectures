@@ -161,8 +161,8 @@ private theorem exactLeftSquareFac
     [PreservesFiniteLimits I] [PreservesFiniteColimits I]
     (e : H ⋙ I ≅ F ⋙ G) (N : HomotopyCategory A (.up ℤ)) :
     (isoWhiskerLeft F.mapDerivedCategory G.leftDerivedFunctorIsoMapDerivedCategory ≪≫
-      ((mapDerivedCategoryCompIso F G).symm ≪≫ (mapDerivedCategoryNatIso e).symm ≪≫
-        mapDerivedCategoryCompIso H I) ≪≫
+      ((mapDerivedCategoryCompIso F G) ≪≫ (mapDerivedCategoryNatIso e).symm ≪≫
+        (mapDerivedCategoryCompIso H I).symm) ≪≫
       isoWhiskerRight H.leftDerivedFunctorIsoMapDerivedCategory.symm
         I.mapDerivedCategory).hom.app (DerivedCategory.Qh.obj N) ≫
       I.mapDerivedCategory.map (H.leftDerivedFunctorCounit.app N) ≫
@@ -177,8 +177,8 @@ private theorem exactLeftSquareFac
   exact liftedSquareFac F.mapDerivedCategory G.mapDerivedCategory
     G.leftDerivedFunctor H.mapDerivedCategory H.leftDerivedFunctor I.mapDerivedCategory
     G.leftDerivedFunctorIsoMapDerivedCategory H.leftDerivedFunctorIsoMapDerivedCategory
-    ((mapDerivedCategoryCompIso F G).symm ≪≫ (mapDerivedCategoryNatIso e).symm ≪≫
-      mapDerivedCategoryCompIso H I)
+    ((mapDerivedCategoryCompIso F G) ≪≫ (mapDerivedCategoryNatIso e).symm ≪≫
+      (mapDerivedCategoryCompIso H I).symm)
     (F.mapDerivedCategoryFactorsh.hom.app N)
     (G.mapDerivedCategoryFactorsh.hom.app ((F.mapHomotopyCategory (.up ℤ)).obj N))
     (H.mapDerivedCategoryFactorsh.hom.app N)

@@ -116,7 +116,7 @@ lemma mapDerivedCategoryHomologyFunctorIso_comp_hom_app (F : C ⥤ D) (G : D ⥤
       G.map ((F.mapDerivedCategoryHomologyFunctorIso n).hom.app K) ≫
         (G.mapDerivedCategoryHomologyFunctorIso n).hom.app (F.mapDerivedCategory.obj K) := by
   have h : ((F ⋙ G).mapDerivedCategoryHomologyFunctorIso n).hom ≫
-      whiskerRight (mapDerivedCategoryCompIso F G).hom (DerivedCategory.homologyFunctor E n) =
+      whiskerRight (mapDerivedCategoryCompIso F G).inv (DerivedCategory.homologyFunctor E n) =
       whiskerRight (F.mapDerivedCategoryHomologyFunctorIso n).hom G ≫
         whiskerLeft F.mapDerivedCategory (G.mapDerivedCategoryHomologyFunctorIso n).hom := by
     refine Localization.natTrans_ext DerivedCategory.Q
