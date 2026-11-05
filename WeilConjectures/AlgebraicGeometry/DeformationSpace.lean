@@ -205,7 +205,9 @@ noncomputable def reesPresheaf : X.AffineZariskiSiteᵒᵖ ⥤ CommRingCat.{u} w
 /-- The structure map `𝒪_X ⟶ 𝒪_X[t, I t⁻¹]`. -/
 @[simps]
 noncomputable def toReesPresheaf : X.affineStructurePresheaf ⟶ I.reesPresheaf where
-  app _ := CommRingCat.ofHom (algebraMap _ _)
+  app U := by
+    change CommRingCat.of Γ(X, U.unop.1) ⟶ .of (I.siteIdeal U.unop).extendedReesAlgebra
+    exact CommRingCat.ofHom (algebraMap _ _)
   naturality _ _ i := CommRingCat.hom_ext (RingHom.ext fun x ↦
     (Ideal.extendedReesAlgebraMap_algebraMap _ _ (I.map_siteIdeal i).le x).symm)
 
@@ -388,7 +390,7 @@ lemma toNormalConePresheaf_comp_normalConeToQuotient :
       I.toQuotientAlgebra := by
   ext U x
   change Polynomial.eval 0 (Ideal.extendedReesAlgebraToPolynomial _ (Ideal.Quotient.mk _)
-    Ideal.mk_ker.ge (algebraMap _ (I.siteIdeal U.unop).extendedReesAlgebra x)) = _
+    Ideal.mk_ker.ge (algebraMap Γ(X, U.unop.1) (I.siteIdeal U.unop).extendedReesAlgebra x)) = _
   exact (congrArg (Polynomial.eval 0) (Ideal.extendedReesAlgebraToPolynomial_algebraMap
     (I := I.siteIdeal U.unop) _ Ideal.mk_ker.ge x)).trans Polynomial.eval_C
 
