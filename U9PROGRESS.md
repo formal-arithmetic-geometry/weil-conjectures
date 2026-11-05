@@ -206,3 +206,14 @@
 - Completion marker: `/home/ubuntu/u9/state/BZ683.DONE`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
 - This final commit changes only progress documentation; Lean sources match the green build.
+
+# BZ740 in progress
+
+- Branch: `u9/BZ740`; starting commit: `f271bd088`.
+- Reread the brief and progress notes on continuation; no new LEAD lines.
+- The import-only remote build fixed both private-helper errors, leaving the public Qh/Q mismatch.
+- The user instructed continuation after the exact one-line identity-cast proposal.
+  Applied `BZ740-statement-cast-proposal.patch`, preserving the original morphism.
+- Next: validate the assigned normalization module through `ucheck-bump`, then its direct importer.
+- Fix patterns and exact diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ740.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.

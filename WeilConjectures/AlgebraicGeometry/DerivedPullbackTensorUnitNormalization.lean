@@ -99,7 +99,7 @@ theorem derivedPullback_tensorUnitIso_normalization {T X : Scheme.{uModel}} (g :
      (derivedPullback_tensorUnitIso g F mF ε).inv ≫
          Functor.LaxMonoidal.ε (DerivedCategory.Q (C := AT)) =
        (derivedPullback g).map (Functor.LaxMonoidal.ε (DerivedCategory.Q (C := AX))) ≫
-         ε.app ((HomotopyCategory.quotient AX (ComplexShape.up ℤ)).obj U) ≫
+         cast (by rfl) (ε.app ((HomotopyCategory.quotient AX (ComplexShape.up ℤ)).obj U)) ≫
            (DerivedCategory.Q (C := AT)).map u.inv) := by
   let AX := SheafOfModules.{uModel} (moduleRings X.toRingedSpace)
   let AT := SheafOfModules.{uModel} (moduleRings T.toRingedSpace)
