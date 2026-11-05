@@ -175,10 +175,10 @@ private theorem systemElements_initial {C : Type u} [Category.{u} C]
     {I : Type u} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)]
     (U : Iᵒᵖ ⥤ C) : (systemElements U).Initial := by
   refine Functor.initial_of_exists_of_isCofiltered _ ?_ ?_
-  · rintro ⟨X, x⟩
+  · rintro ⟨x⟩
     obtain ⟨i, f, rfl⟩ := homMk_surjective U x
     exact ⟨op i, ⟨f, by simp [systemElements, homMk_map]⟩⟩
-  · rintro ⟨X, x⟩ i ⟨f, hf⟩ ⟨g, hg⟩
+  · rintro ⟨x⟩ i ⟨f, hf⟩ ⟨g, hg⟩
     obtain ⟨j, q, hq⟩ := homMk_eq U
       (f := f) (g := g) (by simpa [systemElements, homMk_map] using hf.trans hg.symm)
     exact ⟨op j, q.op, by ext; exact hq⟩
