@@ -51,13 +51,13 @@ theorem comparison_comp (F : V ⥤ W) (G : W ⥤ X) (H : V ⥤ X)
     (e : F ⋙ G ≅ H) (M : V) :
     (comparison G).inv.app (F.obj M) ≫
       G.mapDerivedCategory.map ((comparison F).inv.app M) ≫
-      (Functor.mapDerivedCategoryCompIso F G).inv.app (obj V M) ≫
+      (Functor.mapDerivedCategoryCompIso F G).hom.app (obj V M) ≫
       (Functor.mapDerivedCategoryNatIso e).hom.app (obj V M) =
     map (e.hom.app M) ≫ (comparison H).inv.app M := by
   unfold comparison functor map obj
   change (G.mapDerivedCategorySingleFunctor 0).inv.app (F.obj M) ≫
     G.mapDerivedCategory.map ((F.mapDerivedCategorySingleFunctor 0).inv.app M) ≫
-    (Functor.mapDerivedCategoryCompIso F G).inv.app _ ≫
+    (Functor.mapDerivedCategoryCompIso F G).hom.app _ ≫
     (Functor.mapDerivedCategoryNatIso e).hom.app _ =
     (DerivedCategory.singleFunctor X 0).map (e.hom.app M) ≫
       (H.mapDerivedCategorySingleFunctor 0).inv.app M
@@ -65,7 +65,7 @@ theorem comparison_comp (F : V ⥤ W) (G : W ⥤ X) (H : V ⥤ X)
   simp only [Category.assoc]
   rw [Functor.mapDerivedCategoryNatIso_hom_app_singleFunctor,
     ← Functor.mapDerivedCategoryCompIso_hom_app_singleFunctor F G M]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc,
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc,
     ← Functor.map_comp_assoc, Iso.inv_hom_id_app]
   erw [CategoryTheory.Functor.map_id, Category.id_comp,
     Iso.inv_hom_id_app_assoc, Category.comp_id]
@@ -79,7 +79,7 @@ theorem unit_comp (F : V ⥤ W) (G : W ⥤ X) (H : V ⥤ X)
     [PreservesFiniteLimits H] [PreservesFiniteColimits H]
     (e : F ⋙ G ≅ H)
     (eD : F.mapDerivedCategory ⋙ G.mapDerivedCategory ≅ H.mapDerivedCategory)
-    (heD : eD = (Functor.mapDerivedCategoryCompIso F G).symm ≪≫
+    (heD : eD = Functor.mapDerivedCategoryCompIso F G ≪≫
       Functor.mapDerivedCategoryNatIso e)
     {K : X} {L : W} {M : V}
     (f : K ⟶ G.obj L) (g : L ⟶ F.obj M) (h : K ⟶ H.obj M)
