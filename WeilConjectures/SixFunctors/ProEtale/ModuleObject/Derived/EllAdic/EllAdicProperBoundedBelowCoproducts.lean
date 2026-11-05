@@ -14,6 +14,7 @@ import WeilConjectures.CategoryTheory.GrothendieckDerivedCoproducts
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 import Mathlib.Algebra.Homology.HomologicalComplexLimits
 import Mathlib.CategoryTheory.Limits.Shapes.Products
+import Mathlib.Util.CountHeartbeats
 import WeilConjectures.CategoryTheory.DerivedModuleDirectSums
 
 /-! # Coproduct continuity with a common lower cohomology bound
@@ -144,6 +145,7 @@ private theorem continuity_preserves_strictlyGE
     IsColimit.ofPointIso (colimit.isColimit (E ⋙ T)) (i := hcomparison)
   exact preservesColimit_of_preserves_colimit_cocone hc hT
 
+#count_heartbeats in
 private theorem continuity_preserves_coproduct
     {I : Type (u + 1)} (E : I → CochainComplex
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) ℤ)
@@ -168,6 +170,7 @@ private theorem continuity_preserves_coproduct
     continuity_preserves_strictlyGE Λ f S N q hS
   exact preservesCoproduct_of_finitePartialSums E _
 
+#count_heartbeats in
 /-- Ordinary qcqs derived pushforward preserves coproducts of complexes with a common
 lower cohomology bound, for arbitrary condensed commutative coefficients.
 
@@ -193,6 +196,10 @@ theorem condensed_boundedBelow_preservesCoproduct
   let F : DerivedCategory C ⥤ DerivedCategory D := R((f)_*⟦Λ⟧)
   have : HasColimitsOfSize.{u + 1, u + 1} C := IsGrothendieckAbelian.hasColimits C
   have : HasColimitsOfSize.{u + 1, u + 1} D := IsGrothendieckAbelian.hasColimits D
+  have : HasCoproducts.{u + 1} C := fun J ↦
+    HasColimitsOfSize.has_colimits_of_shape (Discrete J)
+  have : HasCoproducts.{u + 1} D := fun J ↦
+    HasColimitsOfSize.has_colimits_of_shape (Discrete J)
   have : HasColimitsOfShape (Discrete I) C :=
     HasColimitsOfSize.has_colimits_of_shape _
   have : HasColimitsOfShape (Discrete I) D :=
