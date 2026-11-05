@@ -218,12 +218,17 @@ theorem exists_pasted_tensorPullback_adjunction
       Functor.associator_inv_app, Functor.associator_hom_app,
       Functor.whiskerRight_app, Functor.whiskerLeft_app, Category.id_comp,
       Category.comp_id, Functor.comp_map, Functor.map_comp, Category.assoc]
-    have hn := df.unit.naturality (αg.app K)
-    dsimp at hn
+    have hn := df.unit.naturality
+      (X := Lg.obj (DerivedCategory.Qh.obj K))
+      (Y := DerivedCategory.Qh.obj ((Pg.mapHomotopyCategory (.up ℤ)).obj K)) (αg.app K)
+    dsimp only [Functor.comp_obj, Functor.comp_map, Functor.id_obj, Functor.id_map] at hn
     have hb := (moduleDirectImage g).rightDerivedFunctorUnit.naturality
+      (X := (Pg.mapHomotopyCategory (.up ℤ)).obj K)
+      (Y := ((moduleDirectImage f).mapHomotopyCategory (.up ℤ)).obj
+        ((Pf.mapHomotopyCategory (.up ℤ)).obj ((Pg.mapHomotopyCategory (.up ℤ)).obj K)))
       ((af.mapHomotopyCategory (.up ℤ)).unit.app
         ((Pg.mapHomotopyCategory (.up ℤ)).obj K))
-    dsimp at hb
+    dsimp only [Functor.comp_obj, Functor.comp_map, Functor.id_obj, Functor.id_map] at hb
     rw [← (derivedModuleDirectImage g).map_comp_assoc, ← hn, Functor.map_comp]
     rw [Category.assoc, ← Functor.map_comp, hdf, Functor.map_comp]
     rw [← Category.assoc, hdg, Category.assoc]
