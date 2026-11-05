@@ -153,24 +153,21 @@
 - Notes and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ557.md`.
 - No local Lean/Lake, statement changes, proof escapes, or heartbeat increases.
 
-# BZ593 complete
 
-- Branch: `u9/BZ593`; starting commit: `cfcb63ad7`.
-- Assigned module `WeilConjectures.AlgebraicGeometry.Derived.DerivedLocalIsomorphismSourceEvaluation`
-  passed at `914ab6116b`: rc=0, failed=0, 3934 jobs; target rebuilt in 16 seconds.
-- Direct importers `WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleNormalizationSquareTransport`
-  and `WeilConjectures.AlgebraicGeometry.Source.SourceIsomorphismNormalizedPresheafEvaluation`
-  passed at `73a18d7258`: rc=0, failed=0, 3950 jobs.
-- Second layer `WeilConjectures.AlgebraicGeometry.Etale.EtaleUniversalNormalization`
-  passed at `4702d1f06`: rc=0, failed=0, 3951 jobs.
-- `DerivedScalarExtensionLocalSystems` was skipped because its dependencies
-  `MapExactFunctor` (BZ589), `RingedTopoiDerivedPullback` (BZ554), and
-  `ModuleFiniteTypeApproximation` (BZ587) fail externally. No external files edited.
-- The user instructed continuation after the exact two-line private statement proposal.
-  Compositor directions in `derived_path_coherence`, its proof, and three definition
-  bodies preserve the original maps under Mathlib's reversed API. Public statements
-  and docstrings are unchanged.
-- Fix patterns, errors, and whole-tree occurrence counts: `/home/ubuntu/u9/bz/FIXES-BZ593.md`.
-- Build logs: `BUILD-BZ593-final-full.log`, `BUILD-BZ593-direct-importers-full.log`,
-  and `BUILD-BZ593-second-layer-full.log`.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+# BZ595 complete
+
+- Branch: `u9/BZ595`; starting commit: `cfcb63ad77e`.
+- Assigned `SixFunctors.ProEtale.DerivedCompletion` is green via `ucheck-bump`.
+- Reused BZ545's local `HasLimit F` cache (6ba502aac, cherry-picked as ef27bba33).
+  This eliminates the product timeout and cascading errors without heartbeat changes.
+- Four direct importers passed together: PrincipalTensorScalarExtension,
+  InternalPrincipalConeLevelAugmentation, InternalQuotientPrincipalConeComparison,
+  and PrincipalConeTensorNormalization (4723 jobs, rc=0).
+- Layer 2 also built PrincipalReductionDerivedNormalization and
+  PrincipalReductionConeCalculus successfully. Three selected targets were skipped
+  because of unowned failures in DerivedCompletionSupplement and RingedTopoiDerivedPullback.
+  The remaining batch was stopped after those dependency blocks were established.
+- Full evidence and the PATTERN/ERROR record: `/home/ubuntu/u9/bz/FIXES-BZ595.md`.
+- Completion marker: `/home/ubuntu/u9/state/BZ595.DONE`.
+- No existing statement/docstring changes, local Lean/Lake, proof escapes, or limit increases.
+- This final commit changes progress documentation only; Lean sources match the green builds.
