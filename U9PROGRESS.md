@@ -726,3 +726,7 @@ Diagnostic195431 CLOSED rc1: nearest three parents are ProEt(X) vs ProEt(geometr
 - Adopted from u9/K9: SmoothPurityFullyFaithfulBaseChange.lean (GREEN on K9), SmoothPurityOpenFieldBaseChange.lean (unverified).
 - Build 110 queued (module SmoothPurityOpenImmersionBaseChange) on tree pool:43.157.168.235 behind the A3-consumer build 109. NOT GREEN yet.
 - 00:30 LEAD 01:35: piece (A) STOPPED (superseded by Houyi #2144). Draft unbuilt at 8605351bd56; build 110 cancelled before launch. Idle.
+
+## 2026-11-06 01:30 CST — relative A1' draft (backup per LEAD 01:40)
+- 50fd9dfe677: SmoothPurityVerdierUnitIso.lean (ψ_f by Verdier duality for any f; endomorphism trick for any proper p over weakly étale πP; geometricFiber instance) + SmoothPurityVerdierUnitBaseChangeRelative.lean (Nagata over Y). Build 111 queued on my tree behind build 109. NOT GREEN yet.
+- K4c trap posted in NOTES-weil: boundedConstructibleUpperStarCompUpperStarOfMapIso needs IsOpenImmersion; use my boundedConstructibleUpperStarSquareIso.
