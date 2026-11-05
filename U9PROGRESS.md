@@ -153,19 +153,14 @@
 - Notes and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ557.md`.
 - No local Lean/Lake, statement changes, proof escapes, or heartbeat increases.
 
-# BZ590 awaiting statement-repair authorization
+# BZ591 in progress
 
-- Branch: `u9/BZ590`; starting commit: `cfcb63ad7`.
-- Added public Localization import and separate `import all` in
-  `InjectiveExchangeSourceTransport`; this fixes the proof's hidden-body error.
-- Remote `ucheck-bump` at `de7bd95a1f` failed with two public-statement type errors;
-  imports cannot make hidden Qh definitions available while checking the public type.
-- Exact unapplied proposal: `/home/ubuntu/u9/bz/BZ590-public-statement-proposal.patch`.
-  It changes the preimage target to `Plus.Qh.obj H` and adds the canonical
-  `quotientCompQhIso` inverse before the RHS. Asked for approval because the user's
-  explicit rule permits only proof/import edits. No statement change is applied.
-- Full log: `/home/ubuntu/u9/bz/BUILD-BZ590-import-full.log`.
-- Fix records: `/home/ubuntu/u9/bz/FIXES-BZ590.md`.
-- Next after approval: apply proposal, check unit, then build direct importer
-  `InjectiveExchangeRepresentative` and continue another layer if its dependencies pass.
-- No DONE marker; no local Lean/Lake, proof shortcuts, or heartbeat increases.
+- Branch: `u9/BZ591`; starting commit: `cfcb63ad77e4fcb54dba96c8cadcf5a61bf62295`.
+- Assigned module: `WeilConjectures.AlgebraicGeometry.InjectiveExchangeTargetTransport`.
+- The import-only remote build fixed six errors; two public-statement Q/Qh endpoint errors remained.
+- The user instructed continuation after the exact public-statement proposal.
+  Applied `BZ591-public-statement-proposal.patch`: correct the preimageIso target to Plus.Qh,
+  insert the canonical mapped Q-to-Qh comparison, and normalize it in the proof.
+- Next: ucheck-bump, then direct importer InjectiveExchangeRepresentative and one more layer.
+- Fix patterns and build logs: `/home/ubuntu/u9/bz/FIXES-BZ591.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
