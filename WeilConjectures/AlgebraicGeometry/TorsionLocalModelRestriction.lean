@@ -6,6 +6,7 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 import all WeilConjectures.AlgebraicGeometry.FormalSystemsPullback
 import all WeilConjectures.AlgebraicGeometry.TorsionControlledFormalRestriction
