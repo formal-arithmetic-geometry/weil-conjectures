@@ -74,13 +74,16 @@ theorem exists_changeOfRingsAdjunction :
       changeOfRingsPresheaf.{u, u, u} (J := 𝓙) α M ≅ T.obj M.val := by
     refine PresheafOfModules.isoMk (q M.val) ?_
     intro U V i
+    let : Module (A.presheaf.obj V)
+        ((ModuleCat.restrictScalars ((𝓡 A).obj.map i).hom).obj (M.val.obj V)) :=
+      inferInstanceAs (Module (A.presheaf.obj V) (M.val.obj V))
     apply ModuleCat.ExtendScalars.hom_ext
     intro m
     change (q M.val V).hom (changeOfRingsMap.{u, u, u} (J := 𝓙) α M i _) = _
     rw [show changeOfRingsMap.{u, u, u} (J := 𝓙) α M i
         ((1 : B.presheaf.obj U) ⊗ₜ[A.presheaf.obj U, (α.hom.app U).hom] m) =
         (B.presheaf.map i 1) ⊗ₜ[A.presheaf.obj V, (α.hom.app V).hom]
-          (M.val.map i m : M.val.obj V) from
+          (M.val.map i m) from
       Classical.choose_spec (exists_changeOfRingsMap.{u, u, u} (J := 𝓙) α M i) 1 m]
     exact (hres M.val U V i 1 m).symm
   let es (M : SheafOfModules.{u} (𝓡 A)) (N : SheafOfModules.{u} (𝓡 B)) :
