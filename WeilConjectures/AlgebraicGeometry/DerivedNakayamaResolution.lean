@@ -5,7 +5,6 @@ Authors: Bin Wu
 -/
 module
 public import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
-public import Mathlib.Topology.Algebra.Ring.Ideal
 public import WeilConjectures.AlgebraicGeometry.ContinuousCoefficientCommRing
 public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionFinite
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
@@ -77,8 +76,8 @@ Source: blueprint resolution, On the point, step 2
 def reductionRingSheaf (n : ℕ) : integerRingSheaf l E ⟶ quotientRingSheaf l E n :=
   letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   ⟨{
-      app := fun _ ↦ RingCat.ofHom
-        (ULift.ringEquiv.symm.toRingHom.comp
+      app := fun S ↦ RingCat.ofHom
+        ((ULift.ringEquiv (R := C(S.unop, Padic.coefficientExtensionRing l E n))).symm.toRingHom.comp
           (((Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E n)).compLeftContinuous _
             continuous_quot_mk).comp ULift.ringEquiv.toRingHom))
       naturality := fun _ _ _ ↦ rfl }⟩

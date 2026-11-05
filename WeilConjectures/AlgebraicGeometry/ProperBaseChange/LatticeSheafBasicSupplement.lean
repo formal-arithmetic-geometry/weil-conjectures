@@ -643,6 +643,14 @@ private noncomputable def freeTensorPresheafIso :
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (S.over U)) I).val := by
   refine PresheafOfModules.isoMk (freeTensorSection a U I) ?_
   intro T T' f
+  let : Module ((R.over U).obj.obj T')
+      ((ModuleCat.restrictScalars (((sheafCompose _
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (R.over U)).obj.map f).hom).obj
+          ((SheafOfModules.free (R := (sheafCompose _
+            (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (R.over U)) I).val.obj T')) :=
+    inferInstanceAs (Module ((R.over U).obj.obj T')
+      ((SheafOfModules.free (R := (sheafCompose _
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (R.over U)) I).val.obj T'))
   apply ModuleCat.ExtendScalars.hom_ext
   intro m
   change (freeTensorSection a U I T').hom
@@ -664,9 +672,7 @@ private noncomputable def freeTensorPresheafIso :
       ((S.over U).obj.map f 1) ⊗ₜ[(R.over U).obj.obj T',
         ((latticeScalarMap a U).hom.app T').hom]
         ((SheafOfModules.free (R := (sheafCompose _
-          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (R.over U)) I).val.map f m :
-            (SheafOfModules.free (R := (sheafCompose _
-              (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (R.over U)) I).val.obj T') from
+          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (R.over U)) I).val.map f m) from
     Classical.choose_spec (SheafOfModules.exists_changeOfRingsMap
       (latticeScalarMap a U) (SheafOfModules.free (R := (sheafCompose _
         (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (R.over U)) I) f) 1 m]
