@@ -184,8 +184,8 @@ private theorem sectionsDifferential_π {X : Scheme.{u}} {r : ℕ}
   apply LinearMap.ext
   intro s
   simp only [alternatingCechDifferential, ModuleCat.hom_sum, ModuleCat.hom_zsmul,
-    ModuleCat.hom_comp, ModuleCat.hom_ofHom, LinearMap.comp_apply, LinearMap.proj_apply,
-    LinearMap.pi_apply, LinearMap.sum_apply, LinearMap.smul_apply]
+    ModuleCat.hom_comp, ModuleCat.hom_ofHom]
+  rfl
 
 set_option backward.isDefEq.respectTransparency false in
 private theorem presheafTermsSectionsIso_comm {X : Scheme.{u}} {r : ℕ}
