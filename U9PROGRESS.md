@@ -1,3 +1,15 @@
+# BZ252 in progress
+
+- Branch: `u9/BZ252`; starting commit: `c781553bf`.
+- Re-read the unit brief and existing progress notes after the user requested continuation.
+- Applied the prepared compositor-orientation compatibility patches after that continuation:
+  one private helper statement in EtaleComplexPullbackTransport and the hm/hs hypotheses
+  in EtaleComplexPullbackPresentation. They preserve the original mathematical maps.
+- Next: validate the owned module and direct importers with `ucheck-bump`.
+- Previously observed outside-unit dependency failures are recorded in
+  `/home/ubuntu/u9/bz/FIXES-BZ252.md`; those dependencies are left to their owners.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or limit increases.
+
 # BZ150 complete
 
 - Branch: `u9/BZ150`; starting commit: `80aeb4bf4`.
