@@ -230,18 +230,27 @@
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 - This final commit changes only progress documentation; Lean source matches the green build.
 
-# BZ824 in progress
+# BZ824 complete
 
 - Branch: u9/BZ824; starting commit 95c8987257f.
 - The user instructed continuation after the upstream-restoration proposal.
-- Restored four prerequisite modules. The comparison predicate uses verified PZ003
-  Localization imports and a reflexive cast; the transport proof is unchanged,
+- Restored four prerequisite modules. The predicate uses the verified PZ003
+  Localization imports and reflexive cast; the transport proof is unchanged,
   and target automorphism specializes the existing arbitrary-degree theorem to zero.
-- All six submitted modules passed ucheck-bump at 826d8e1a1fb: rc=0, failed=0, 4065 jobs.
+- All six submitted modules passed ucheck-bump at 826d8e1a1fb:
+  rc=0, failed=0, 4065 jobs, poolb:43.157.187.72.
 - Green: DerivedModuleBaseChangeMap, DerivedModulePullbackComparison,
   ModulePullbackComparisonIsoTransport, ModulePullbackComparisonTargetAutomorphism,
   CanonicalModuleBaseChangeIsoComparisonCompat, CanonicalModuleBaseChangeIsoComparison.
-- All restored declaration headers and original assigned/caller sources are unchanged.
+- Restored declaration headers and original assigned/caller sources are unchanged.
 - Full log: /home/ubuntu/u9/bz/BUILD-BZ824-restored-full.log.
-- Next: build layer-two importer CanonicalModuleBaseChangeAffineChartComparison.
-- Notes: /home/ubuntu/u9/bz/FIXES-BZ824.md. No local Lean/Lake or proof shortcuts.
+- Layer-two importer CanonicalModuleBaseChangeAffineChartComparison was submitted
+  through ucheck-bump, then cancelled while queued after confirming that unowned
+  CanonicalModuleBaseChangeOpenComparison lacks its required theorem
+  exists_canonicalModuleBaseChange_open_comparison (deleted by 9580c3ee0).
+  This is a source-confirmed blocker; the layer-two module was not compiled or made green.
+- Fix records, exact historical diagnostics, and replay rules:
+  /home/ubuntu/u9/bz/FIXES-BZ824.md. Audit: BZ824-contract-audit.txt.
+- No local Lean/Lake, proof placeholders, trust shortcuts, or heartbeat increases.
+- Completion marker: /home/ubuntu/u9/state/BZ824.DONE.
+- This completion commit changes only progress documentation after the green source build.
