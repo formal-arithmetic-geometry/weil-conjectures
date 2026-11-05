@@ -275,7 +275,8 @@ private theorem derivedFactors_monoidal :
     simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.inv_hom_id_app,
       CategoryTheory.Functor.map_id, Category.id_comp]
     erw [CategoryTheory.Functor.map_id, Category.id_comp]
-    simp only [Iso.inv_hom_id_app, Category.comp_id]
+    simp only [Iso.inv_hom_id_app]
+    exact Category.comp_id _
   rw [← he]
   apply composeFactors_monoidal (DerivedCategory.quotientCompQhIso A)
     (DerivedCategory.quotientCompQhIso B) (F.mapHomotopyCategoryFactors (.up ℤ))
