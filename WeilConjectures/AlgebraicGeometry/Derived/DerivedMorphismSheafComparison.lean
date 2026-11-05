@@ -79,9 +79,9 @@ private lemma derivedSquareCoherence
   simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
     Iso.trans_hom, Iso.symm_hom, Functor.mapDerivedCategorySquareIso, Functor.map_comp,
     Category.assoc]
-  rw [← cancel_epi ((Functor.mapDerivedCategoryCompIso (R ⋙ S) G).hom.app K ≫
-    G.mapDerivedCategory.map ((Functor.mapDerivedCategoryCompIso R S).hom.app K))]
-  rw [← cancel_mono ((Functor.mapDerivedCategoryCompIso H P').inv.app K)]
+  rw [← cancel_epi ((Functor.mapDerivedCategoryCompIso (R ⋙ S) G).inv.app K ≫
+    G.mapDerivedCategory.map ((Functor.mapDerivedCategoryCompIso R S).inv.app K))]
+  rw [← cancel_mono ((Functor.mapDerivedCategoryCompIso H P').hom.app K)]
   have ha := NatTrans.congr_app
     (Functor.mapDerivedCategoryNatIso_isoWhiskerRight a G) K
   have he := NatTrans.congr_app
@@ -95,16 +95,16 @@ private lemma derivedSquareCoherence
   have hHP := NatTrans.congr_app (Functor.mapDerivedCategoryCompIso_assoc H P T) K
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app]
     at ha he hc hd hRS hRF hHP
-  simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id_app,
-    Iso.hom_inv_id_app_assoc]
-  rw [← reassoc_of% ha, Iso.hom_inv_id_app_assoc, Category.comp_id]
-  rw [← reassoc_of% hRS, Iso.hom_inv_id_app_assoc]
+  simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.inv_hom_id_app,
+    Iso.inv_hom_id_app_assoc]
+  rw [← reassoc_of% ha, Iso.inv_hom_id_app_assoc, Category.comp_id]
+  rw [← reassoc_of% hRS, Iso.inv_hom_id_app_assoc]
   simp only [Functor.map_comp, Category.assoc]
   rw [← reassoc_of% he, reassoc_of% hRF]
-  simp only [← Functor.map_comp_assoc, Iso.hom_inv_id_app_assoc]
+  simp only [← Functor.map_comp_assoc, Iso.inv_hom_id_app_assoc]
   simp only [Functor.map_comp, Category.assoc]
-  rw [← reassoc_of% hc, ← reassoc_of% hHP, Iso.hom_inv_id_app_assoc,
-    ← reassoc_of% hd, Iso.hom_inv_id_app, Category.comp_id]
+  rw [← reassoc_of% hc, ← reassoc_of% hHP, Iso.inv_hom_id_app_assoc,
+    ← reassoc_of% hd, Iso.inv_hom_id_app, Category.comp_id]
   have h := congrArg (fun z ↦ (Functor.mapDerivedCategoryNatIso z).hom.app K) hab
   simpa only [Functor.mapDerivedCategoryNatIso_trans, NatTrans.comp_app,
     Category.assoc] using h
@@ -560,11 +560,11 @@ private theorem derivedComparisonLocalHom_natural {V W : X.Etale} (g : W ⟶ V)
   change b.inv.app A ≫ G.map (a.inv.app A ≫ _ ≫ a.hom.app D) ≫ b.hom.app D =
     d.inv.app _ ≫ T.map (c.inv.app A ≫ _ ≫ c.hom.app D) ≫ d.hom.app _
   rw [← cancel_epi (G.map (a.hom.app A) ≫ b.hom.app A)]
-  simp only [Functor.map_comp, Category.assoc, Iso.hom_inv_id_app_assoc]
-  simp only [← G.map_comp_assoc, Iso.hom_inv_id_app_assoc]
+  simp only [Functor.map_comp, Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [← G.map_comp_assoc, Iso.inv_hom_id_app_assoc]
   rw [reassoc_of% hA]
-  simp only [Functor.map_comp, Category.assoc, Iso.hom_inv_id_app_assoc]
-  simp only [← T.map_comp_assoc, Iso.hom_inv_id_app_assoc]
+  simp only [Functor.map_comp, Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [← T.map_comp_assoc, Iso.inv_hom_id_app_assoc]
   simp only [Functor.map_comp, Category.assoc]
   have hn := e.hom.naturality f
   simp only [Functor.comp_map] at hn
@@ -826,7 +826,7 @@ private theorem isoFiniteProductsOfHom
         derivedLocalHomRestriction (ProEt.topology X) B A D (c.inj i) a ≫
           derivedLocalHomRestriction (ProEt.topology X) B D G (c.inj i) b := by
     simp only [derivedLocalHomRestriction, Functor.map_comp, Category.assoc,
-      Iso.hom_inv_id_app_assoc]
+      Iso.inv_hom_id_app_assoc]
   constructor
   · intro f g hfg
     apply Iso.ext

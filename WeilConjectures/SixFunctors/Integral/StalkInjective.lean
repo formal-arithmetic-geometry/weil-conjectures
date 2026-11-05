@@ -152,7 +152,7 @@ lemma Etale.eq_zero_of_forall_stalkRestrict_eq_zero {Ω : Type u} [Field Ω] [Is
     exact hp
   have h₂ := (pointSmallEtale y).toPresheafFiber_w_apply g.val c'.2
     ((f)_*[ModuleCat.{u + 1} Λ].obj G).obj σ
-  rw [g.2] at h₂
+  rw [Functor.Elements.Hom.val, g.map_val] at h₂
   rw [← h₂]
   change (pointSmallEtale y).toPresheafFiber c'.1 c'.2 ((f)_*[ModuleCat.{u + 1} Λ].obj G).obj
     (G.obj.map (f.Etale.map g.val).op σ') = 0
