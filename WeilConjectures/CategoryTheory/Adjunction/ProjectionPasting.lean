@@ -50,7 +50,8 @@ variable {I : WX ⥤ WZ} {G : WZ ⥤ WY} {Lf : WX ⥤ WY} {Pi : WZ ⥤ WX} {Pg :
 
 /-- The projection formula `Lf M ⊗ T ≅ Lf (M ⊗ Pf T)` pasted from projection formulas for the
 factors `I` and `G` of `Lf ≅ I ⋙ G`:
-`Lf M ⊗ T ≅ G (I M) ⊗ T ≅ G (I M ⊗ Pg T) ≅ G (I (M ⊗ Pi (Pg T))) ≅ G (I (M ⊗ Pf T)) ≅ Lf (M ⊗ Pf T)`.
+`Lf M ⊗ T ≅ G (I M) ⊗ T ≅ G (I M ⊗ Pg T) ≅ G (I (M ⊗ Pi (Pg T))) ≅ G (I (M ⊗ Pf T))
+  ≅ Lf (M ⊗ Pf T)`.
 -/
 noncomputable def projectionIsoOfComp :
     Lf.prod (𝟭 WY) ⋙ TY ≅ (𝟭 WX).prod Pf ⋙ TX ⋙ Lf :=
@@ -156,7 +157,8 @@ theorem map_projectionIsoOfComp_hom_app
       ← Functor.map_comp]
     simp
   have h₉ : FY.map (TY.map ((ℓ.hom.app M, 𝟙 T) : (Lf.obj M, T) ⟶ ((I ⋙ G).obj M, T))) ≫
-      τY.hom.app ((I ⋙ G).obj M, T) = τY.hom.app (Lf.obj M, T) ≫ FY.map (ℓ.hom.app M) ▷ FY.obj T := by
+      τY.hom.app ((I ⋙ G).obj M, T) =
+        τY.hom.app (Lf.obj M, T) ≫ FY.map (ℓ.hom.app M) ▷ FY.obj T := by
     rw [hτY]
     dsimp
     rw [Functor.map_id, tensorHom_id]
@@ -189,13 +191,15 @@ theorem map_projectionIsoOfComp_hom_app
   have r7 {Z' : BY} (z : G'.obj (I'.obj (FX.obj M ⊗ Pi'.obj (Pg'.obj (FY.obj T)))) ⟶ Z') :
       G'.map (q (FX.obj M) (FZ.obj (Pg.obj T))) ≫
         G'.map (I'.map (FX.obj M ◁ Pi'.map (γg.hom.app T))) ≫ z =
-      G'.map (I'.obj (FX.obj M) ◁ γg.hom.app T) ≫ G'.map (q (FX.obj M) (Pg'.obj (FY.obj T))) ≫ z := by
+      G'.map (I'.obj (FX.obj M) ◁ γg.hom.app T) ≫
+        G'.map (q (FX.obj M) (Pg'.obj (FY.obj T))) ≫ z := by
     rw [← G'.map_comp_assoc, ← G'.map_comp_assoc]
     erw [hq]
     rfl
   have r8 {Z' : BY} (z : G'.obj (I'.obj (FX.obj M) ⊗ Pg'.obj (FY.obj T)) ⟶ Z') :
       G'.map (βI.inv.app M ▷ FZ.obj (Pg.obj T)) ≫ G'.map (I'.obj (FX.obj M) ◁ γg.hom.app T) ≫ z =
-      G'.map (FZ.obj (I.obj M) ◁ γg.hom.app T) ≫ G'.map (βI.inv.app M ▷ Pg'.obj (FY.obj T)) ≫ z := by
+      G'.map (FZ.obj (I.obj M) ◁ γg.hom.app T) ≫
+        G'.map (βI.inv.app M ▷ Pg'.obj (FY.obj T)) ≫ z := by
     rw [← G'.map_comp_assoc, ← G'.map_comp_assoc]
     erw [← whisker_exchange]
     rfl

@@ -482,7 +482,8 @@ theorem exists_extensionByZero_forget_iso_projection :
             β.inv.app M ▷ (geometricFiberBoundedConstructibleFunctor k₀ l
               (nativeProjectionCompactification k₀ f).Z).obj N ≫
             inv ((CondensedRing.boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ l
-              (geometricFiberHom (k₀ := k₀) (nativeProjectionCompactification k₀ f).i)).projectionComparison
+              (geometricFiberHom (k₀ := k₀)
+                (nativeProjectionCompactification k₀ f).i)).projectionComparison
               ((geometricFiberBoundedConstructibleFunctor k₀ l X).obj M)
               ((geometricFiberBoundedConstructibleFunctor k₀ l
                 (nativeProjectionCompactification k₀ f).Z).obj N)) := by

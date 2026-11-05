@@ -76,7 +76,8 @@ theorem exists_derivedLowerStar_forget_iso_projection :
         (L : WeilComplex k₀ l Y),
         IsIso ((mateEquiv adj adj' (TwoSquare.mk _ _ _ _ β.hom)).natTrans.app L)) ∧
       ∃ (γ : upperStar (nativeProjectionCompactification k₀ f).g ⋙
-            geometricFiberBoundedConstructibleFunctor k₀ l (nativeProjectionCompactification k₀ f).Z ≅
+            geometricFiberBoundedConstructibleFunctor k₀ l
+              (nativeProjectionCompactification k₀ f).Z ≅
           geometricFiberBoundedConstructibleFunctor k₀ l Y ⋙
             CondensedRing.boundedConstructibleUpperStar _ l
               (geometricFiberHom (k₀ := k₀) (nativeProjectionCompactification k₀ f).g))
@@ -98,7 +99,8 @@ theorem exists_derivedLowerStar_forget_iso_projection :
               ((derivedLowerStar (nativeProjectionCompactification k₀ f).g).obj A, T) ≫
             β.inv.app A ▷ (geometricFiberBoundedConstructibleFunctor k₀ l Y).obj T ≫
             (CondensedRing.boundedConstructibleUpperStarLowerStarAdjunction l
-              (geometricFiberHom (k₀ := k₀) (nativeProjectionCompactification k₀ f).g)).projectionMorphism
+              (geometricFiberHom (k₀ := k₀)
+                (nativeProjectionCompactification k₀ f).g)).projectionMorphism
               ((geometricFiberBoundedConstructibleFunctor k₀ l
                 (nativeProjectionCompactification k₀ f).Z).obj A)
               ((geometricFiberBoundedConstructibleFunctor k₀ l Y).obj T) := by

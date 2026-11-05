@@ -122,7 +122,8 @@ lemma isPullback_geometricFiberLowerShriekRefinement :
     geometricFiberLowerShriekCompactification, Compactification.overI]⟩
 
 lemma geometricFiberLowerShriekRefinement_hom_comp_overG :
-    (geometricFiberLowerShriekRefinement (k₀ := k₀) f).hom ≫ (geometricFiberLowerShriekCompactification f).overG =
+    (geometricFiberLowerShriekRefinement (k₀ := k₀) f).hom ≫
+        (geometricFiberLowerShriekCompactification f).overG =
       geometricFiberHom (k₀ := k₀) (nativeProjectionCompactification k₀ f).g := by
   ext1
   simp [geometricFiberLowerShriekRefinement, geometricFiberLowerShriekCompactification,
@@ -165,6 +166,7 @@ set_option maxHeartbeats 2000000 in
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxHeartbeats 400000 in
 -- the monoidal structure of the derived category of condensed modules is found slowly
+open CondensedRing in
 open scoped CategoryTheory.Obj in
 /-- **The identification `ī_! ⋙ Rḡ_* ≅ Rf̄_!` intertwines the projection morphisms**: through it,
 the exceptional projection morphism of `f̄` is the projection morphism of `ḡ^* ⊣ Rḡ_*` followed
@@ -174,13 +176,15 @@ theorem geometricFiberLowerShriekIso_hom_app_whiskerRight_comp (K B) :
         CondensedRing.boundedConstructibleExceptionalProjectionMorphism l
           (geometricFiberHom (k₀ := k₀) f) K B =
       ((CondensedRing.boundedConstructibleUpperStarLowerStarAdjunction l
-          (geometricFiberHom (k₀ := k₀) (nativeProjectionCompactification k₀ f).g)).projectionMorphism
+          (geometricFiberHom (k₀ := k₀)
+            (nativeProjectionCompactification k₀ f).g)).projectionMorphism
           ((CondensedRing.boundedConstructibleOpenImmersionLowerShriek _ l
             (geometricFiberHom (k₀ := k₀) (nativeProjectionCompactification k₀ f).i)).obj K) B ≫
         (CondensedRing.boundedConstructibleLowerStar l
           (geometricFiberHom (k₀ := k₀) (nativeProjectionCompactification k₀ f).g)).map
           (inv ((CondensedRing.boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ l
-              (geometricFiberHom (k₀ := k₀) (nativeProjectionCompactification k₀ f).i)).projectionComparison
+              (geometricFiberHom (k₀ := k₀)
+                (nativeProjectionCompactification k₀ f).i)).projectionComparison
               K ((CondensedRing.boundedConstructibleUpperStar _ l
                 (geometricFiberHom (k₀ := k₀) (nativeProjectionCompactification k₀ f).g)).obj B)) ≫
             (CondensedRing.boundedConstructibleOpenImmersionLowerShriek _ l
@@ -197,7 +201,8 @@ theorem geometricFiberLowerShriekIso_hom_app_whiskerRight_comp (K B) :
     (geometricFiberLowerShriekCompactification (k₀ := k₀) f) K B _
     (CondensedRing.ι_map_eqToIso_trans_upperStarComp_inv_app_compactification l
       (geometricFiberLowerShriekCompactification (k₀ := k₀) f) B)
-  have h := CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_hom_app_whiskerRight_comp l
+  have h :=
+    boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_hom_app_whiskerRight_comp l
     (geometricFiberLowerShriekCompactification f)
     (CondensedRing.compactificationOverField (geometricFiberHom (k₀ := k₀) f)) K B
   rw [hc] at h

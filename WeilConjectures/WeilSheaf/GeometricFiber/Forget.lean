@@ -109,7 +109,8 @@ noncomputable def geometricFiberBoundedConstructibleFunctorTensorIso :
       Functor.isoWhiskerLeft _ (geometricFiberBoundedConstructibleFunctorCompιIso k₀ l X) ≪≫
       Functor.isoWhiskerLeft ((objectProperty k₀ l X).ι.prod (objectProperty k₀ l X).ι)
         (ProEtaleWeilSheaf.condensedRealizationTensor k₀ l X) ≪≫
-      Iso.refl (((objectProperty k₀ l X).ι ⋙ ProEtaleWeilSheaf.derivedCondensedRealization k₀ l X).prod
+      Iso.refl (((objectProperty k₀ l X).ι ⋙
+          ProEtaleWeilSheaf.derivedCondensedRealization k₀ l X).prod
         ((objectProperty k₀ l X).ι ⋙ ProEtaleWeilSheaf.derivedCondensedRealization k₀ l X) ⋙
           Functor.uncurry.obj (curriedTensor _)) ≪≫
       Functor.isoWhiskerRight
@@ -119,7 +120,8 @@ noncomputable def geometricFiberBoundedConstructibleFunctorTensorIso :
         (geometricFiberBoundedConstructibleFunctor k₀ l X) ⋙
           (ObjectProperty.ι _).prod (ObjectProperty.ι _) ⋙ Functor.uncurry.obj (curriedTensor _)) ≪≫
       Functor.isoWhiskerLeft ((geometricFiberBoundedConstructibleFunctor k₀ l X).prod
-        (geometricFiberBoundedConstructibleFunctor k₀ l X)) (boundedConstructibleιTensorIso k₀ l X) ≪≫
+        (geometricFiberBoundedConstructibleFunctor k₀ l X))
+        (boundedConstructibleιTensorIso k₀ l X) ≪≫
       (Functor.associator _ _ _).symm)
 
 

@@ -182,8 +182,10 @@ theorem exists_lowerShriek_forget_iso_projection :
   have : TopologicalSpace.NoetherianSpace X := c.i.isOpenEmbedding.isInducing.noetherianSpace
   have : QuasiCompact c.i := inferInstance
   have := isLeftAdjoint_derivedLowerStar_of_isProper (k₀ := k₀) (l := l) c.g
-  obtain ⟨βI, hβI, γi, eI, hI⟩ := exists_extensionByZero_forget_iso_projection (k₀ := k₀) (l := l) f
-  obtain ⟨βG, hβG, γg, eG, hG⟩ := exists_derivedLowerStar_forget_iso_projection (k₀ := k₀) (l := l) f
+  obtain ⟨βI, hβI, γi, eI, hI⟩ :=
+    exists_extensionByZero_forget_iso_projection (k₀ := k₀) (l := l) f
+  obtain ⟨βG, hβG, γg, eG, hG⟩ :=
+    exists_derivedLowerStar_forget_iso_projection (k₀ := k₀) (l := l) f
   -- `Rf₀! = Rg_* ∘ i_!` and `f^* = i^* ∘ g^*`
   let ℓ : derivedLowerShriek k₀ l f ≅ extensionByZero c.i ⋙ derivedLowerStar c.g :=
     NatIso.ofComponents (fun K ↦ Iso.refl _) (fun φ ↦ by
@@ -240,7 +242,8 @@ theorem exists_lowerShriek_forget_iso_projection :
       Functor.whiskerLeft_app, Iso.symm_inv, Category.assoc, comp_whiskerRight] at hA ⊢
     rw [hΘ, ← θ.hom.naturality]
     simp only [Functor.comp_map, Functor.comp_obj] at hA ⊢
-    have hA' := (reassoc_of% hA) (θ.hom.app ((geometricFiberBoundedConstructibleFunctor k₀ l X).obj M ⊗
+    have hA' := (reassoc_of% hA)
+      (θ.hom.app ((geometricFiberBoundedConstructibleFunctor k₀ l X).obj M ⊗
       (CondensedRing.boundedConstructibleUpperStar _ l (geometricFiberHom (k₀ := k₀) f)).obj
         ((geometricFiberBoundedConstructibleFunctor k₀ l Y).obj T)))
     simp only [Functor.map_comp, Category.assoc] at hA' ⊢
