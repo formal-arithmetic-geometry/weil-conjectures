@@ -38,9 +38,9 @@ instance (X : Scheme.{u}) : Category (Object T X) where
   Hom A B := A.val ⟶ B.val
   id A := 𝟙 A.val
   comp f g := f ≫ g
-  id_comp := Category.id_comp
-  comp_id := Category.comp_id
-  assoc := Category.assoc
+  id_comp f := Category.id_comp f
+  comp_id f := Category.comp_id f
+  assoc f g h := Category.assoc f g h
 
 /-- The only interpretation into the ambient coefficient category. -/
 def realize (X : Scheme.{u}) :

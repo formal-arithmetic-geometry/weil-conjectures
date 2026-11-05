@@ -49,3 +49,13 @@ objects/isomorphisms/square. No limits, monoidal or derived instances are needed
 It interprets the already rebuilt native constructions and never invokes the old reading square.
 One fully faithful realization is the intended outer operation. Separate generic boundary test
 now uses adjunction/low-level iso identities instead of asking rfl to unfold the full mate iso.
+
+20:22 CST: Applying minimal-category recipe to live scalar theorem. Imported its 41 missing,
+sorry-free dependencies from K4 f5d3862758dd592b4bf0a8ce769f0b01e7d5e1af, with all data exposed
+and profiler threshold0. Target statement/definition unchanged; only generic consumer is swapped
+for Strategy3.DescentCategory.scalarDatum_conjugate_indexed. The new category uses labeled
+objects and explicit realization: degree-one source objects retain (P ⋙ Q).obj M, whereas the
+canonical targets retain Q.obj T. Native hom groups therefore retain each input's exact type.
+Pullback uses explicit step isomorphisms. Generic scalar conjugation runs in this category and
+realization is applied only once to the final equation. Not yet checked. The finite prototype's
+current ucheck landed on a cold pool tree and is still rebuilding prerequisites (~16k/22k).
