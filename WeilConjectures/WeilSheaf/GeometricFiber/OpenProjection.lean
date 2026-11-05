@@ -8,6 +8,10 @@ module
 public import WeilConjectures.WeilSheaf.GeometricFiber.Forget
 public import WeilConjectures.WeilSheaf.LowerShriekIndependence
 public import WeilConjectures.PoincareDuality.ProjectionFormulaOpenImmersion
+public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationCoherence
+public import WeilConjectures.CategoryTheory.Adjunction.BifunctorProjectionComparison
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenClosedComplement
+public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryReflectsIsomorphisms
 
 /-!
 # Forgetting the Weil structure commutes with the extension by zero
@@ -36,6 +40,69 @@ open ProEtale
 attribute [local instance] Compactification.over
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
+
+/-- The components of a natural isomorphism of functors to a full subcategory, obtained as the
+preimage of a natural isomorphism after composition with the inclusion. -/
+lemma _root_.CategoryTheory.ObjectProperty.ι_map_whiskeringRight_preimageIso_hom_app
+    {C D : Type*} [Category* C] [Category* D] {P : ObjectProperty D}
+    {F G : C ⥤ P.FullSubcategory} (e : F ⋙ P.ι ≅ G ⋙ P.ι) (c : C) :
+    P.ι.map (((P.fullyFaithfulι.whiskeringRight C).preimageIso e).hom.app c) = e.hom.app c :=
+  P.fullyFaithfulι.map_preimage _
+
+section OpenImmersion
+
+variable {U X : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
+  [X.Over (Spec (CommRingCat.of k₀))]
+  [IsSeparated (U ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (U ↘ Spec (CommRingCat.of k₀))]
+  [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+  (j : U ⟶ X) [j.IsOver (Spec (CommRingCat.of k₀))] [IsOpenImmersion j] [QuasiCompact j]
+  [IsSeparated j] [LocallyOfFiniteType j]
+
+variable (k₀ l) in
+/-- Forgetting the Weil structure commutes with the restriction along `j`: the restriction to
+Weil and bounded constructible complexes of the comparison
+`AlgebraicGeometry.ProEtaleWeilSheaf.derivedCondensedRealizationUpperStarIso`. -/
+noncomputable def upperStarForgetIso :
+    upperStar j ⋙ geometricFiberBoundedConstructibleFunctor k₀ l U ≅
+      geometricFiberBoundedConstructibleFunctor k₀ l X ⋙
+        CondensedRing.boundedConstructibleUpperStar _ l (geometricFiberHom (k₀ := k₀) j) :=
+  ((ObjectProperty.fullyFaithfulι _).whiskeringRight _).preimageIso
+    (Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft _ (geometricFiberBoundedConstructibleFunctorCompιIso k₀ l U) ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (ObjectProperty.liftFullSubcategoryCompιIso _ _ _ _) _ ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft _ (ProEtaleWeilSheaf.derivedCondensedRealizationUpperStarIso k₀ l j).symm ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (geometricFiberBoundedConstructibleFunctorCompιIso k₀ l X).symm _ ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft _
+        (CondensedRing.boundedConstructibleUpperStarCompatibility (Profinite.padicAlgClRingObj l) l
+          (geometricFiberHom (k₀ := k₀) j)).symm ≪≫
+      (Functor.associator _ _ _).symm)
+
+set_option maxHeartbeats 2000000 in
+lemma ι_map_upperStarForgetIso_hom_app (N : WeilComplex k₀ l X) :
+    (ObjectProperty.ι _).map ((upperStarForgetIso k₀ l j).hom.app N) =
+      (geometricFiberBoundedConstructibleFunctorCompιIso k₀ l U).hom.app ((upperStar j).obj N) ≫
+        (ProEtaleWeilSheaf.derivedCondensedRealizationUpperStarIso k₀ l j).inv.app N.obj ≫
+        (CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
+          (Scheme.Hom.geometricFiberMap j
+            (comp_over j (Spec (CommRingCat.of k₀))))).leftDerivedFunctor.map
+          ((geometricFiberBoundedConstructibleFunctorCompιIso k₀ l X).inv.app N) := by
+  refine (ObjectProperty.ι_map_whiskeringRight_preimageIso_hom_app _ N).trans ?_
+  simp [CondensedRing.boundedConstructibleUpperStarCompatibility,
+    ObjectProperty.liftFullSubcategoryCompιIso]
+  erw [Category.id_comp, Category.comp_id]
+
+example : (geometricFiberHom (k₀ := k₀) j).left =
+    Scheme.Hom.geometricFiberMap j (comp_over j (Spec (CommRingCat.of k₀))) := rfl
+
+end OpenImmersion
 
 variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [Y.Over (Spec (CommRingCat.of k₀))]
