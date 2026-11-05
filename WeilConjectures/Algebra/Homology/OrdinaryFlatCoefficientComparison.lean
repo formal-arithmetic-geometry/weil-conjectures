@@ -29,8 +29,6 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 2048
-set_option linter.unusedSimpArgs false
-set_option linter.unusedSectionVars false
 attribute [local instance] isMonoidal_W_independentCoefficients
 attribute [local irreducible] monoidalCategory
 
@@ -110,6 +108,7 @@ private noncomputable def tensorPure (A : Sheaf J CommRingCat.{r})
     (((PresheafOfModules.sheafificationAdjunction (𝟙 _)).unit.app
       (M.val ⊗ N.val)).app V (x ⊗ₜ[A.obj.obj V] y))
 
+set_option linter.unusedSectionVars false in
 private theorem tensorPure_map (A : Sheaf J CommRingCat.{r})
     {M M' N N' : Modules A} (f : M ⟶ M') (g : N ⟶ N')
     (V : Cᵒᵖ) (x : M.val.obj V) (y : N.val.obj V) :
@@ -145,6 +144,7 @@ private theorem tensorPure_map (A : Sheaf J CommRingCat.{r})
     (adj.unit.naturality (f.val ⊗ₘ g.val))
   exact hh.trans (congrArg ((tensorObjIsoSheafification M' N').inv.val.app V) hη.symm)
 
+set_option linter.unusedSectionVars false in
 private theorem tensorPure_hom_ext (A : Sheaf J CommRingCat.{r})
     (M N H : Modules A)
     {f g : (monoidalCategory A).tensorObj M N ⟶ H}
@@ -161,6 +161,7 @@ private theorem tensorPure_hom_ext (A : Sheaf J CommRingCat.{r})
   intro x y
   exact h V x y
 
+set_option linter.unusedSectionVars false in
 private theorem restrictSheafify_hom_section
     {A D : Sheaf J RingCat.{r}} (a : A ⟶ D)
     (P : PresheafOfModules.{r} D.obj) (U : Cᵒᵖ)

@@ -20,7 +20,7 @@ open CategoryTheory Opposite
 namespace CategoryTheory
 
 set_option backward.isDefEq.respectTransparency true in
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- Comparing evaluated projections unfolds several composed functors and restriction wrappers.
 /-- The projection components of a localized degree-zero cycle form a chain map.
 Source: Stacks Project, Tag 0A8X, construction preceding Equation 0A8Y.

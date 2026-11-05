@@ -14,9 +14,9 @@ import WeilConjectures.WeilSheaf.Bidual
 import WeilConjectures.WeilSheaf.DerivedHomSingleResolution
 import WeilConjectures.WeilSheaf.ProperLowerStarAdjoint
 import WeilConjectures.WeilSheaf.SmoothPurity
+import WeilConjectures.CategoryTheory.Adjunction.DualityConjugate
+import WeilConjectures.WeilSheaf.VerdierExchangeNatural
 import WeilConjectures.WeilSheaf.VerdierBiduality
-import WeilConjectures.WeilSheaf.VerdierDualUpperShriek
-import WeilConjectures.WeilSheaf.VerdierExchange
 
 /-!
 # The exceptional inverse image and the Verdier dual of Weil complexes
@@ -226,9 +226,9 @@ finite type `f : X ⟶ Y`, `𝔻_Y (Rf₀! M) ≅ Rf_* (𝔻_X M)`. -/
 theorem nonempty_verdierDual_derivedLowerShriek_iso (M : WeilComplex k₀ l X) :
     Nonempty ((verdierDual k₀ l Y).obj (op ((derivedLowerShriek k₀ l f).obj M)) ≅
       (derivedLowerStar f).obj ((verdierDual k₀ l X).obj (op M))) :=
-  nonempty_iso_derivedLowerStar_of_adjunction f _ _ (comp_over f _)
-    (derivedLowerShriekUpperShriekAdjunction _) (derivedLowerShriekUpperShriekAdjunction _) _ M _ _
-    (Iso.refl _) (Iso.refl _)
+  ⟨(nonempty_verdierDual_derivedLowerShriek_natIso f
+    (objectProperty_derivedHom_dualizingComplex k₀ l)
+    (objectProperty_derivedHom_dualizingComplex k₀ l)).some.app (op M)⟩
 
 end Exchange
 

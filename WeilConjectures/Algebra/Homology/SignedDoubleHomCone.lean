@@ -20,7 +20,6 @@ local section and all restriction maps. Mathlib orders the cone summands as A[1]
 
 @[expose] public section
 
-set_option linter.unusedSectionVars false
 
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false

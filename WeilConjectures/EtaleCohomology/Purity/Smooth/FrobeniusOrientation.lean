@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpace
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.CanonicalPurityBaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalBaseChangeFinal
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientation
 public import WeilConjectures.EtaleCohomology.TateTwist.FrobeniusNormalization
@@ -30,13 +31,13 @@ morphism of Weil objects from the canonical datum of `Λ_X[2d]` to `q^d` times t
 datum (`AlgebraicGeometry.Etale.exists_iso_dualizingComplex_isWeilMorphism`).
 
 The input is the compatibility of the canonical orientation with base change
-(`AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso_baseChange`, blueprint
-`sk-prop-sp-purity-bc` at the unit), a node of the smooth purity section which the library does
-not prove yet.
+(`AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso_baseChange`), the case `K = Λ` of the
+compatibility of the canonical purity map with base change
+(`AlgebraicGeometry.Etale.canonicalSmoothPurityMap_baseChange`, blueprint
+`proposition-compatibility-purity-base-change` of the smooth purity chapter).
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso_baseChange` (`sk-prop-sp-purity-bc`).
 - `AlgebraicGeometry.Etale.exists_iso_dualizingComplex_isWeilMorphism`.
 -/
 
@@ -49,43 +50,6 @@ open CategoryTheory MonoidalCategory
 open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
-
-section BaseChange
-
-variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasKummerClass Λ]
-  [HasKummerClass.IsNormalized Λ] {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
-  {f : X ⟶ Y} {g : Y' ⟶ Y} (d : ℕ) [SmoothOfRelativeDimension d f]
-  [SmoothOfRelativeDimension d f'] [IsSeparated f] [IsSeparated f'] [HasCompactification f]
-  [HasCompactification f'] [QuasiCompact f'] [HasInvertibleExponent Λ X]
-  [HasInvertibleExponent Λ X'] {k k' : Type u} [Field k] [Field k']
-
-/-- Blueprint `sk-prop-sp-purity-bc`: compatibility of purity with base change, at the unit.
-
-For a cartesian square `g' ≫ f = f' ≫ g` with `f` and `f'` smooth separated of relative
-dimension `d`, the canonical orientations `θ_f : Rf^! Λ_Y ≅ Λ_X(d)[2d]` and
-`θ_{f'} : Rf'^! Λ_{Y'} ≅ Λ_{X'}(d)[2d]` (`AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso`)
-are compatible with the exceptional base change `Lg'^* Rf^! ⟶ Rf'^! Lg^*`
-(`AlgebraicGeometry.Etale.upperShriekBaseChangeMap`) and the pullback of the Tate twist
-(`AlgebraicGeometry.Etale.leftDerivedUpperStarTwistShiftIso`):
-```
-Lg'^* Rf^! Λ_Y ──Lg'^* θ_f──▶ Lg'^*(Λ_X(d)[2d])
-      │                              │ ≅
-      ▼                              ▼
-Rf'^! Lg^* Λ_Y ≅ Rf'^! Λ_{Y'} ──θ_{f'}──▶ Λ_{X'}(d)[2d]
-```
--/
-theorem dualizingComplexTwistShiftIso_baseChange (sq : IsPullback g' f' f g)
-    (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY]
-    (aY' : Y' ⟶ Spec (.of k')) [IsSeparated aY'] [LocallyOfFiniteType aY'] :
-    (upperShriekBaseChangeMap Λ sq).app (constantComplex Λ Y) ≫
-        (R(f')^![Λ]).map (leftDerivedUpperStarUnitIso _ g).hom ≫
-          (dualizingComplexTwistShiftIso Λ f' d aY').hom =
-      (L((g')^*[ModuleCat.{u + 1} Λ])).map (dualizingComplexTwistShiftIso Λ f d aY).hom ≫
-        (leftDerivedUpperStarTwistShiftIso Λ g' d (constantComplex Λ X)).hom ≫
-          (twistShift Λ X' d).map (leftDerivedUpperStarUnitIso _ g').hom :=
-  sorry
-
-end BaseChange
 
 section TateSection
 

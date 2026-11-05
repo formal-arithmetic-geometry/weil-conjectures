@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperNoetherianBase
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaPadicAlgCl
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaPadicIntegers
+import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaPadicSubfieldAux
 
 /-!
 # Proper base change and the projection formula for `E`-sheaves
@@ -128,8 +129,8 @@ theorem isIso_projectionMap_continuousMapRingObj_of_boundedConstructible
   obtain ⟨M₀, eM⟩ := kM
   have hKM₀ := (PadicIntegersRingObj.isMonoidal_boundedConstructible ℓ E.1 X).toTensorLE.prop_tensor
     _ _ K₀.property (boundedConstructible_leftDerivedUpperStar_obj _ ℓ p M₀)
-  have e₁ := isIso_projectionMap_app_app_padicSubfield_of_padicIntegers ℓ E p.left K₀.obj M₀.obj
-    _ _ (exists_isGE_of_boundedConstructible K₀.property).choose_spec
+  have e₁ := isIso_projectionMap_app_app_padicSubfield_of_padicIntegers_aux ℓ E p.left K₀.obj
+    M₀.obj _ _ (exists_isGE_of_boundedConstructible K₀.property).choose_spec
     (exists_isGE_of_boundedConstructible hKM₀).choose_spec
     (isIso_projectionMap_padicIntegersRingObj_of_boundedConstructible ℓ E.1 p K₀.obj M₀.obj
       K₀.property M₀.property)
