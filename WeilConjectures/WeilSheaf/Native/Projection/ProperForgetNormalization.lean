@@ -10,6 +10,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraDerivedRightAdjointFree
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraAdjunctionMate
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapMate
+public import WeilConjectures.WeilSheaf.Native.Projection.IsoAlgebraForgetMate
 import WeilConjectures.Tactic.ExactModProofs
 
 /-! # The proper realization square through the adic model -/
@@ -71,15 +72,15 @@ lemma nativeProjectionAdicUnderivedMate_normalization :
       (IsoAlgebra.mapOfNatIsoCompForgetIso
         (adicLowerStarGeometricFiberMapCompFrobeniusIso l g
           (comp_over g (Spec (CommRingCat.of k₀))))).hom := by
-  ext K : 2
-  exact_mod_proofs IsoAlgebra.mateEquiv_mapOfNatIsoCompForgetIso_inv_app
+  dsimp only [upperStarLowerStarAdjunction]
+  exact_mod_proofs IsoAlgebra.mateEquiv_mapOfNatIsoCompForgetIso_inv_eq
     (adicUpperStarLowerStarAdjunction l gb)
     (adicUpperStarGeometricFiberMapCompFrobeniusIso l g
       (comp_over g (Spec (CommRingCat.of k₀))))
     (adicLowerStarGeometricFiberMapCompFrobeniusIso l g
       (comp_over g (Spec (CommRingCat.of k₀))))
     (mateEquiv_adicUpperStarGeometricFiberMapCompFrobeniusIso_inv l g
-      (comp_over g (Spec (CommRingCat.of k₀)))) K
+      (comp_over g (Spec (CommRingCat.of k₀))))
 
 /-- The underived realization mate factors through the adic model. -/
 lemma nativeProjectionUnderivedPushMate_normalization :
@@ -91,6 +92,7 @@ lemma nativeProjectionUnderivedPushMate_normalization :
           (adicLowerStarGeometricFiberMapCompFrobeniusIso l g
             (comp_over g (Spec (CommRingCat.of k₀))))).symm
         (projectionAdicCondensedPushIso l gb).symm).symm.hom := by
+  dsimp only [condensedRealizationUpperStarIso]
   let a := upperStarLowerStarAdjunction k₀ l g
   let b := adicUpperStarLowerStarAdjunction l gb
   let c := CondensedRing.upperStarLowerStarAdjunction Λ gb
