@@ -93,7 +93,8 @@ theorem supported_complex_single_realization
     apply ι.map_injective
     simp only [e, Functor.preimageIso_inv, Functor.map_preimage,
       Iso.app_inv, DerivedCategory.singleFunctorIsoCompQ, Iso.refl_inv,
-      NatTrans.id_app, Functor.map_id]
+      NatTrans.id_app]
+    rfl
   have hn : (homologyFunctor B n).map (Q.map t ≫ e.inv) ≫
       (singleFunctorCompHomologyFunctorIso (C := B) n).hom.app X = 𝟙 X := by
     rw [he, Category.comp_id]

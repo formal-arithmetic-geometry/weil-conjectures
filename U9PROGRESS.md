@@ -13,7 +13,9 @@
   mathematical assertions are preserved. Other declaration statements are unchanged.
 - Category-theory proofs now use the direct Q homology comparison, cancel the
   explicit localization transport, and obtain pure-degree instances on Q directly.
-- All four modules are being checked together through `ucheck-bump`.
+- The first all-module check passed MappedSingleCyclesShiftComparison; only the
+  identity comparison in SupportedComplexSingleRealization remained. Its final
+  identity is now closed by rfl, and all four modules are being checked together.
 - Patterns and whole-tree candidate counts: `/home/ubuntu/u9/bz/FIXES-BZ94.md`.
 - No local Lean/Lake execution, no placeholders, no trust escapes, no heartbeat increases.
 - Write `/home/ubuntu/u9/state/BZ94.DONE` only after all four modules pass.
