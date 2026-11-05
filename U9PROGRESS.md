@@ -318,3 +318,8 @@ BLOCKED: I have not constructed the general Weil purity morphism. The missing co
 ## 2026-11-05 08:04 +0800 — functor comparison succeeds, component conversion fails
 - IntegralPullbackComparison in K4-20261105T080048.log proves purityIntegralPullbackForgetIso at the concrete ℤ_l coefficients. Only its explicitly typed component has a kernel timeout (42s). This locates a conversion below the functor-level comparison.
 - Removed the component's expanded result-type annotation (inferred result remains the actual isomorphism component). Added an explicit integral-extension functor and a functor-level pullback factorization; the root trivialization is now transported along that factorization, rather than relying on a final object-level conversion. Default heartbeat budget throughout.
+
+## 2026-11-05 08:15 +0800 — explicit factorization verdict
+- K4-20261105T080333.log (rc=1,123s): inferred component, separate integral-extension functor, and factored Tate trivialization all still fail kernel conversion; the functor-level forget isomorphism continues to pass. Saved unsuccessful bodies at /tmp/k4-integral-pullback-factor-timeout.lean.
+- C4 independently confirms the generic-helper specialization also fails (C4-20261105T080547.log). A 4-million-heartbeat integral-unit check already failed after921s, so larger budgets are excluded.
+- Next small probe fixes the commutative-monoid proof directly in ring-sheaf coordinates, targeting the generic CommRing-to-Ring specialization rather than changing the underlying mathematics. Actual Tate encoding and user replacement remain pending; no DONE.

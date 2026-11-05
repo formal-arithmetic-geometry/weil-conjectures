@@ -27,34 +27,19 @@ noncomputable def purityIntegralPullbackForgetIso :
         Mod.forget (condensedRingObj (Profinite.continuousMapRingObj ℤ_[l]) U) :=
   CondensedRing.upperStarForgetIso (Profinite.continuousMapRingObj ℤ_[l]) g
 
-/-- The underlying pullback comparison at an integral coefficient module. -/
+/-- Commutativity of the integral coefficient ring, in the native ring-sheaf coordinates. -/
+instance (priority := 20000) purityIntegralCommMonObj :
+    IsCommMonObj (Profinite.continuousMapRingObj.{u} ℤ_[l]) :=
+  Sheaf.isCommMonObj_sheafCompose_obj (coherentTopology Profinite.{u})
+    (Profinite.continuousMapRingSheaf ℤ_[l])
+    fun S (a b : ULift.{u + 1} C(S.unop, ℤ_[l])) ↦ mul_comm a b
+
+/-- The coefficient extension unit in the integral ring-sheaf coordinates. -/
 noncomputable def purityIntegralPullbackUnit
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.continuousMapRingObj ℤ_[l]) X)) :=
-  (purityIntegralPullbackForgetIso g l).hom.app M
-
-/-- The coefficient-extension functor used by the integral pullback. -/
-noncomputable def purityIntegralExtension :=
-  Mod.extendScalars (condensedPullbackHom (Profinite.continuousMapRingObj ℤ_[l]) g)
-
-/-- Factor the integral pullback before evaluating it on a module. -/
-noncomputable def purityIntegralPullbackFactorIso :
-    (g)^*⟦Profinite.continuousMapRingObj ℤ_[l]⟧ ≅
-      ((g)^*[Ab.{u + 1}].mapMod
-        (condensedRingObj (Profinite.continuousMapRingObj ℤ_[l]) X)) ⋙
-          purityIntegralExtension g l :=
-  Iso.refl _
-
-variable {K : Type u} [Field K] (f : U ⟶ Spec (.of K)) {ζ : ℕ → K}
-  (hζ : ∀ n, IsPrimitiveRoot (ζ n) (l ^ n)) (hζ' : ∀ n, ζ (n + 1) ^ l = ζ n)
-
-/-- Transport the root trivialization through the factored pullback. -/
-noncomputable def purityIntegralTateTrivialization :
-    (g)^*⟦Profinite.continuousMapRingObj ℤ_[l]⟧.obj (tateModule X l) ≅
-      (g)^*⟦Profinite.continuousMapRingObj ℤ_[l]⟧.obj (𝟙_ _) := by
-  let e := (purityIntegralExtension g l).mapIso
-    (upperStarMapModTateModuleIsoUnit g f l hζ hζ' ≪≫ (g)^*[Ab.{u + 1}].mapModUnitIso)
-  exact (purityIntegralPullbackFactorIso g l).app _ ≪≫ e ≪≫
-    ((purityIntegralPullbackFactorIso g l).app _).symm
+      (condensedRingObj (Profinite.continuousMapRingObj ℤ_[l]) X)) :
+    (g)^*[Ab.{u + 1}].obj M.X ⟶
+      ((g)^*⟦Profinite.continuousMapRingObj ℤ_[l]⟧.obj M).X :=
+  CondensedRing.upperStarUnitHom (Profinite.continuousMapRingObj ℤ_[l]) g M
 
 end AlgebraicGeometry.ProEtale
