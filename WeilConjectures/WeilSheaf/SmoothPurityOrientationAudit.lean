@@ -13,6 +13,8 @@ import WeilConjectures.WeilSheaf.SmoothPurityFiniteEquivariance
 import WeilConjectures.WeilSheaf.SmoothPurityGeometricEquivariantLift
 import WeilConjectures.WeilSheaf.SmoothPurityIntegralTatePullback
 import WeilConjectures.WeilSheaf.UpperShriekWeilDatum
+import WeilConjectures.WeilSheaf.SmoothPurityEtaleEquivariantLift
+import WeilConjectures.WeilSheaf.SmoothPurityTateTowerProjection
 
 /-! # Dependency audit of the orientation reconstruction helpers
 
@@ -30,3 +32,6 @@ open AlgebraicGeometry.ProEtale.CondensedRing AlgebraicGeometry.Etale
 #print axioms AlgebraicGeometry.ProEtale.isWeilEquivariant_derivedReductionStep
 #print axioms AlgebraicGeometry.ProEtale.upperStarShiftIntegralTateTwistDerivedIso
 #print axioms AlgebraicGeometry.WeilComplex.exists_forget_upperShriek_obj_iso_isWeilEquivariant
+#print axioms exists_equivariant_integralOrientation_iso_of_etale_reductions
+#print axioms purityFiniteEtaleReadingUpperStarIso
+#print axioms AlgebraicGeometry.ProEtale.upperStarExtendScalarsLimitFreeTowerIso_hom_comp_map_π

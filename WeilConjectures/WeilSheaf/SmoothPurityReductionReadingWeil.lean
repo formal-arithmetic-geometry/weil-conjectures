@@ -47,6 +47,17 @@ noncomputable def purityEtaleReducedWeilDatum (g : X.left ⟶ X.left)
   purityFiniteReadWeilDatum ℓ E n X g
     (purityReducedBoundedWeilDatum ℓ E n X g φ)
 
+/-- Equivariance for the specified integral data after the actual finite étale reduction. -/
+def PurityEtaleReducedWeilCondition (g : X.left ⟶ X.left)
+    {K L : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧}
+    (φK : L((g)^*⟦Profinite.padicIntegersRingObj ℓ E⟧).obj K.obj ⟶ K.obj)
+    (φL : L((g)^*⟦Profinite.padicIntegersRingObj ℓ E⟧).obj L.obj ⟶ L.obj)
+    (s : (etaleReduction ℓ E n X).obj K ⟶ (etaleReduction ℓ E n X).obj L) : Prop :=
+  IsWeilEquivariant
+    L(Etale.upperStar (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) g)
+    (purityEtaleReducedWeilDatum ℓ E n X g φK)
+    (purityEtaleReducedWeilDatum ℓ E n X g φL) s
+
 /-- An equivariant finite étale isomorphism for the actual reduced data gives an
 equivariant isomorphism between the ambient derived reductions. -/
 theorem exists_equivariant_derivedReduction_iso_of_etale
