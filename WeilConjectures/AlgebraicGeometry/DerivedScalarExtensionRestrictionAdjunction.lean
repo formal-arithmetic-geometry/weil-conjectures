@@ -98,7 +98,7 @@ private noncomputable def tensorToRestriction
         intro X Y i
         ext m
         change f.app Y ((1 : S.obj.obj Y) ⊗ₜ[A.obj.obj Y, (c.hom.app Y).hom]
-          M.val.map i m) = H.val.map i (f.app X
+          M.val.restrictₛₗ i m) = H.val.map i (f.app X
             ((1 : S.obj.obj X) ⊗ₜ[A.obj.obj X, (c.hom.app X).hom] m))
         have h := PresheafOfModules.naturality_apply f i
           ((1 : S.obj.obj X) ⊗ₜ[A.obj.obj X, (c.hom.app X).hom] m)
