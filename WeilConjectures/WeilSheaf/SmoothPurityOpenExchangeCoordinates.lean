@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.CategoryTheory.Adjunction.SquareCompatibleMate
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.ExchangeFormalism
 
 /-! # Changing all four pullback coordinates of an open exchange -/
 
@@ -29,7 +30,7 @@ theorem purity_exchangeLeft_coordinates (a : J ⊣ P₀) (a' : J' ⊣ P₀')
     exchangeLeft (a.ofNatIsoRight p) (a'.ofNatIsoRight p') θ =
       Functor.whiskerRight g.hom J' ≫ exchangeLeft a a' θ₀ ≫
         Functor.whiskerLeft J h.inv := by
-  rw [exchangeLeft_eq_mateEquiv_symm, exchangeLeft_eq_mateEquiv_symm]
+  rw [exchangeLeft_eq_mateEquiv_symm a a', exchangeLeft_eq_mateEquiv_symm a a']
   apply (mateEquiv (a.ofNatIsoRight p) (a'.ofNatIsoRight p')).injective
   rw [Equiv.apply_symm_apply, mateEquiv_comp_whiskerLeft, mateEquiv_whiskerRight_comp,
     mateEquiv_ofNatIsoRight, Equiv.apply_symm_apply]
