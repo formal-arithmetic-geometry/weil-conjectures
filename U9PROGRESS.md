@@ -81,16 +81,26 @@
 - No local Lean/Lake, proof placeholders, trust escapes, or heartbeat increases.
 - This final commit changes only progress documentation after the successful build.
 
-# BZ286 in progress
+# BZ286 complete
 
 - Branch: `u9/BZ286`, starting commit `18e44f2d5`.
-- Assigned module: `WeilConjectures.SixFunctors.Etale.Derived.UnitLerayQuotient`.
-- The user instructed continuation after the exact canonical endpoint-transport
-  proposal in `BZ286-statement-proposal.patch`; that exact patch is now applied.
-- The public statement transports its existing `Q.map` with `quotientCompQhIso.hom`
-  and `.inv`. Other statements and all existing docstrings are unchanged.
-- The proof uses quotient comparison naturality and cancellation.
-- Next: remote `ucheck-bump`, then direct importer `ExactSectionsRestriction` and
-  its importer `RestrictionGenerization`, respecting ownership boundaries.
-- Fix notes: `/home/ubuntu/u9/bz/FIXES-BZ286.md`.
-- No local Lean/Lake, proof placeholders, trust escapes, or heartbeat increases.
+- Assigned module `WeilConjectures.SixFunctors.Etale.Derived.UnitLerayQuotient`
+  passed `ucheck-bump`: rc=0, failed=0, checked source commit
+  `ec5a2215f14e1093ea2a331e42e95d2e72a519ca`.
+- Direct importer `WeilConjectures.SixFunctors.Etale.Derived.ExactSectionsRestriction`
+  also passed, rebuilding both modules: rc=0, built=2, failed=0, commit
+  `0b2696960a554bf0de357198b5d69cc758f7ccc2`.
+- The user instructed continuation after the exact endpoint-transport proposal;
+  that exact statement patch is applied. The proof uses public quotient-comparison
+  naturality and reducible hom/inv cancellation. Other statements and all existing
+  docstrings remain unchanged. No import changes were needed.
+- Second-layer `RestrictionGenerization` was skipped after its dependency
+  `WeilConjectures.Algebra.Homology.OpenHomTriangleRealization` (BZ232) failed at
+  lines 63, 64, and 304. The BZ286 systemd build was stopped after that confirmed
+  failure; its wrapper reported rc=0 with failed=1, which is NOT a green result.
+- No source outside the assigned module was edited. No local Lean/Lake execution,
+  proof placeholders, trust escapes, heartbeat increases, or profiler probes.
+- Logs, exact errors, candidate counts and fix patterns:
+  `/home/ubuntu/u9/bz/FIXES-BZ286.md`.
+- Completion marker: `/home/ubuntu/u9/state/BZ286.DONE`.
+- This final commit changes only progress documentation after the green builds.
