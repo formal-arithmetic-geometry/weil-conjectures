@@ -193,18 +193,27 @@
 - This completion commit changes only documentation; Lean source matches the green revision.
 
 
-# BZ671 leaf and first layer green
+# BZ671 complete
 
-- Branch: `u9/BZ671`; starting commit: `940f09365`.
-- Baseline and import-only builds fail in the public representative tensor equation:
-  Mathlib marks `HomologicalComplexUpToQuasiIso.Qh` as `no_expose`.
-- The user instructed continuation after the exact two-line identity-cast proposal.
-  Applied `cast (by rfl)` at both counit endpoints, preserving the mathematical
-  content; all other declaration statements and existing docstrings are unchanged.
-- Added Localization public/import-all imports for private proof reduction.
-- Leaf and direct importer `DerivedPullbackTensorComparisonDescent` both built at
-  `d14b1a4d7f`: rc=0, failed=0, 3919 jobs; full log
-  `/home/ubuntu/u9/bz/BZ671-unit-downstream1-green-full.log`.
-- Continuing with four direct importers of the newly green descent module.
-- Fix patterns and logs: `/home/ubuntu/u9/bz/FIXES-BZ671.md`.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
+- Branch: `u9/BZ671`; starting commit: `940f09365b032f2a461ef753114651a9cff61f84`.
+- Assigned leaf `WeilConjectures.AlgebraicGeometry.DerivedPullbackKFlatTensorModel`
+  and its only direct importer `WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorComparisonDescent`
+  passed `ucheck-bump` together: rc=0, failed=0, 3919 jobs.
+- Validated source commit: `d14b1a4d7f`; target times 43s and 31s.
+  The final Lean sources are identical to that green revision.
+- Build host pins independently verified: Lean v4.35.0-rc3 and Mathlib
+  b63f6e8a68d220e3b3bc4f3792bb53650d375f24.
+- The user instructed continuation after the identity-cast proposal. Both public
+  representative equations now use reflexive identity casts on the counit at the
+  tensor complex and the tensor of individual counits. All morphisms are unchanged.
+- Added Localization public/import-all imports. All proof bodies, binders,
+  assumptions, docstrings, and heartbeat settings are unchanged; no proof placeholders.
+- Full green log: `/home/ubuntu/u9/bz/BZ671-unit-downstream1-green-full.log`.
+- Fixes and replay rules: `/home/ubuntu/u9/bz/FIXES-BZ671.md`.
+  Audit: `/home/ubuntu/u9/bz/BZ671-contract-audit.txt`.
+- Optional second-layer check was queued for over 16 minutes without acquiring a
+  build tree. Confirmed all 16 bump trees occupied and 53 active build requests.
+  Cancelled only the verified queued BZ671 scheduler, whose sole child was `sleep 20`.
+  Removed all three unvalidated second-layer edits; no second-layer module claimed green.
+- No local Lean/Lake execution, trust bypasses, heartbeat increases, or profiler probes.
+- Completion marker: `/home/ubuntu/u9/state/BZ671.DONE`.
