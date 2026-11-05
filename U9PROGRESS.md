@@ -1,3 +1,43 @@
+# BZ244 complete
+
+- Unit: BZ244; branch: `u9/BZ244`; starting commit: `c781553bf`.
+- Five modules passed together through `ucheck-bump`: rc=0, failed=0, 3914 jobs.
+- Validated source commit: `04eeac193862d42de32c188c48615ffd41e07e5d`. This final update changes progress notes only.
+- Green modules:
+  - `WeilConjectures.AlgebraicGeometry.DerivedUnitLerayComp`
+  - `WeilConjectures.AlgebraicGeometry.DerivedEtaleCohomologyPullbackLaws`
+  - `WeilConjectures.SixFunctors.Etale.Derived.GlobalSectionsRestrictionBasic`
+  - `WeilConjectures.SixFunctors.Etale.Derived.GlobalSectionsRestrictionCoproduct`
+  - `WeilConjectures.AlgebraicGeometry.RawAffineComplexSystemMapCoherence`
+- The user instructed continuation after the two-site statement compatibility proposal.
+  Used the inverse of Mathlib's reversed compositor in the assigned module and its direct
+  importers, preserving the intended maps. Added `Iso.symm_hom` for rewrite matching.
+- All other statements and all existing docstrings are unchanged. No local Lean/Lake,
+  proof placeholders, trust bypasses, profiler probes, or heartbeat increases.
+- Two second-layer targets were skipped per the brief's ownership rule:
+  `GlobalSectionsRestrictionStrictlyLocal` (first blocker `OpenHomTriangleRealization`),
+  `EtaleHypercohomologyUniformBound` (`EtaleKInjectiveUnitLeray`, `EtaleRowSectionsExtend`).
+- Full final log: `/home/ubuntu/u9/bz/BUILD-BZ244-final-full.log`.
+- Fix patterns, whole-tree occurrence counts, and skipped dependency details:
+  `/home/ubuntu/u9/bz/FIXES-BZ244.md`.
+- Completion marker: `/home/ubuntu/u9/state/BZ244.DONE`.
+
+# BZ150 complete
+
+- Branch: `u9/BZ150`; starting commit: `80aeb4bf4`.
+- All four assigned modules passed together with `ucheck-bump`: rc=0, failed=0, 3644 jobs.
+- Validated source commit: `fb9bd7b27d169a5e395ed809947ee52e6fd0b46e`.
+- Build tree: `newsrv:/home/ubuntu/u9n/bumpw5`.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ150-final-full.log`.
+- The user instructed continuation after the exact one-line statement migration proposal.
+  `rightDerivedPullback_comp` now uses `(mapDerivedCategoryCompIso P P').symm` because
+  Mathlib owns the old name with the opposite orientation; the intended map is preserved.
+- All remaining declaration statements and existing docstrings are unchanged.
+- Completion marker: `/home/ubuntu/u9/state/BZ150.DONE`.
+- This completion update changes only progress documentation after the successful source build.
+- Fix patterns and logs: `/home/ubuntu/u9/bz/FIXES-BZ150.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+
 # BZ133 complete
 
 - Branch: `u9/BZ133`.
@@ -50,68 +90,20 @@
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 - Completion marker: `/home/ubuntu/u9/state/BZ130.DONE`.
 
-# BZ154 complete
+# BZ159 complete
 
-- Branch: `u9/BZ154`, starting commit `80aeb4bf4`.
-- All four assigned modules passed together through `ucheck-bump`: rc=0, failed=0, 3457 jobs.
-- Validated source commit: `d26e23a372af96d353232cce73966fa427f1419d`.
-- Each assigned module rebuilt successfully on `newsrv:/home/ubuntu/u9n/bumpw2`.
-- Full build log: `/home/ubuntu/u9/bz/BUILD-BZ154-final-full.log`.
-- The user instructed continuation after the exact one-line statement correction in
-  `BZ154-shift-statement-proposal.patch`; that patch is applied and validated.
-- The shift comparison's target is quotient followed by `Plus.Qh`, matching its existing
-  construction and homotopy-category unit. Other changes are the mandated composition
-  isomorphism migration and imports for private definitional reductions.
-- Fix patterns and whole-tree occurrence counts: `/home/ubuntu/u9/bz/FIXES-BZ154.md`.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
-- Completion marker: `/home/ubuntu/u9/state/BZ154.DONE`.
-- This completion commit changes only progress documentation; Lean sources match the green build.
-
-# BZ229 complete
-
-- Branch: `u9/BZ229`; starting commit: `c0384594d`.
-- Assigned module: `WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraDerivedRightAdjointLift`.
-- The module passed `ucheck-bump`: rc=0, failed=0, 2110 jobs; target rebuilt in 10 seconds.
-- Validated source commit: `0673016c02360dade89345e38fc576c7609cf662`.
-- Build tree: `newsrv:/home/ubuntu/u9n/bumpw1`.
-- Full build log: `/home/ubuntu/u9/bz/BUILD-BZ229-final-full.log`.
-- The user instructed continuation after the explicit one-token statement correction proposal.
-  Applied `.hom` -> `.inv` in the composition-factor helper to preserve its original map
-  after adopting Mathlib's reversed composition isomorphism. Other statement types and
-  all existing docstrings are unchanged.
-- Definition bodies and inverse cancellation now use the new composition orientation.
-  Two trailing `rfl` tactics after `simp` were removed. The final `rfl` after `erw` is needed
-  in this module and is retained.
-- Fix patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ229.md`.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
-- Completion marker: `/home/ubuntu/u9/state/BZ229.DONE`.
-- This completion commit changes only progress documentation; Lean source matches the green build.
-
-# BZ311 complete
-
-- Branch: `u9/BZ311`; starting commit: `ec1bc636d`.
-- Assigned module and both downstream layers passed `ucheck-bump` together:
-  rc=0, failed=0, 1935 jobs, on `poolb:43.166.72.113`.
-- Validated source commit: `d599eea1699030daa1a58ff564ab648fb03d536e`.
-- Green modules: `WeilConjectures.CategoryTheory.Abelian.DerivedBottomCycleTransport`,
-  `WeilConjectures.CategoryTheory.Abelian.DerivedBottomUnitNormalizationFormula`,
-  and `WeilConjectures.CategoryTheory.Abelian.DerivedBottomUnitNormalization`.
-- The user instructed continuation after the exact three-statement proposal.
-  Those canonical quotientCompQhIso endpoint transports are the only Lean changes;
-  all proof bodies, declaration binders, assumptions, and docstrings are unchanged.
-- Full log: `/home/ubuntu/u9/bz/BUILD-BZ311-final-full.log`.
-- Fix pattern and whole-tree candidate count: `/home/ubuntu/u9/bz/FIXES-BZ311.md`.
-- Contract audit: `/home/ubuntu/u9/bz/BZ311-contract-audit.txt`.
-- No local Lean/Lake execution, sorries, forbidden proof shortcuts, or limit increases.
-- Completion marker: `/home/ubuntu/u9/state/BZ311.DONE`.
-- This final commit changes only progress documentation; Lean sources match the green build.
-
-# BZ384 in progress
-
-- Branch: `u9/BZ384`; starting commit: `98654719b`.
-- Baseline remote build confirmed five errors in compositor directions in declaration types.
-- The user instructed continuation after the explicit nine-direction patch proposal.
-  That patch is now applied, preserving the original equations under Mathlib's reversed compositor.
-- Next: remote validation of the assigned module, then its three direct importers.
-- Fix patterns and baseline log: `/home/ubuntu/u9/bz/FIXES-BZ384.md`.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+- Unit: BZ159; branch: `u9/BZ159`.
+- All four assigned modules passed `ucheck-bump` together: rc=0, failed=0, 4255 jobs.
+- Validated source commit: `f69c33ffa45cfbe76eeabefd69b81cd9b1b10343`.
+  This completion update changes only progress documentation.
+- Build host: `newsrv:/home/ubuntu/u9n/bumpw6`.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ159-final-full.log`.
+- Modules: DerivedSingleShiftNormalization, NativeDerivedBaseChange, Inertia,
+  CyclicDerivedActionRealization.
+- The user instructed continuation after the explicit equivalent statement API proposal;
+  the two cyclic-action statement references now use the forward composition isomorphism.
+  All other existing statement text and docstrings remain unchanged.
+- Fix patterns and whole-tree baseline occurrence counts:
+  `/home/ubuntu/u9/bz/FIXES-BZ159.md`.
+- No proof placeholders, trust bypasses, local Lean/Lake execution, or heartbeat increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ159.DONE`.
