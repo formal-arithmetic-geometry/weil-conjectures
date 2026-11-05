@@ -9,6 +9,7 @@ public import WeilConjectures.RingTheory.GenericConnectedness
 public import WeilConjectures.Mathlib.RingTheory.NoetherNormalization
 public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Polynomial
 public import WeilConjectures.Mathlib.RingTheory.Nullstellensatz
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-!
 # Connectedness of generic members of a linear system on a finite cover

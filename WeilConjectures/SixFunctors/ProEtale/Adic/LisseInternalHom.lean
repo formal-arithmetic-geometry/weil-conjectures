@@ -80,7 +80,7 @@ theorem IsAdicLisseSheaf.preservesFiniteColimits_ihom {F : AdicSheaf l X}
   have : PreservesFiniteLimits (AdicSheaf.ihom F) := inferInstance
   refine (Functor.preservesFiniteColimits_iff_forall_exact_map_and_epi _).2 fun S hS ↦ ?_
   have := hS.epi_g
-  have h := (Functor.preservesFiniteLimits_tfae (AdicSheaf.ihom F)).out 3 0
+  have h := (Functor.preservesFiniteLimits_tfae (AdicSheaf.ihom F)).out 4 1
   exact ⟨(h.1 ‹_› S hS).1, hF.epi_ihom_map S.g⟩
 
 attribute [local instance] Abelian.hasFiniteBiproducts

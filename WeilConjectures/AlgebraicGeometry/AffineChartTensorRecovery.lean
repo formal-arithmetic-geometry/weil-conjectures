@@ -12,6 +12,7 @@ import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import WeilConjectures.AlgebraicGeometry.Modules.FaithfullyFlatDescent
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Pullback of morphisms in normalized tensor coordinates
 

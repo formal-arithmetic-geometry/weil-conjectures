@@ -7,6 +7,7 @@ module
 public import WeilConjectures.Algebra.Homology.PrincipalKoszulQuotientTowers
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # K-flat tensor transport at independent coefficient universes
 

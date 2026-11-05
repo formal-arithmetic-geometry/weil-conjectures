@@ -11,6 +11,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.Algebra.Module.LocalizedModule.Basic
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Category.ModuleCat.Stalk
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # The module germ map on an affine open is a localization
 

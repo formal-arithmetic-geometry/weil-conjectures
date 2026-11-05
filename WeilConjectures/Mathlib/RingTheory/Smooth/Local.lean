@@ -182,7 +182,7 @@ theorem Algebra.FormallySmooth.localization_of_isRegularLocalRing {k A : Type*} 
       change algebraMap P A s' ∉ q
       exact hs' ▸ s.2
     refine ⟨IsLocalization.mk' _ a' ⟨s', hs'Q⟩, ?_⟩
-    rw [Localization.AtPrime.IsLiesOverAlgebra.algebraMap_eq, Localization.localRingHom_mk']
+    rw [Localization.AtPrime.algebraMap_eq, Localization.localRingHom_mk']
     congr 1
     exact Subtype.ext hs'
   have : Algebra.FormallySmooth P (Localization.AtPrime Q) := .of_isLocalization Q.primeCompl

@@ -271,8 +271,8 @@ theorem exists_eq_unit_mul_pow_mul_finrank_residueField {π : R} (hπ : Irreduci
   rw [Fintype.sum_unique] at hsum
   change (maximalIdeal B).ramificationIdx R * (maximalIdeal B).inertiaDeg R = _ at hsum
   rw [← Ideal.ramificationIdx'_eq_ramificationIdx' _ _ hpS,
-    ← Ideal.inertiaDeg'_eq_inertiaDeg (maximalIdeal R) (maximalIdeal B), he,
-    Ideal.inertiaDeg'_algebraMap, ← IsFractionRing.finrank_eq R F B L] at hsum
+    ← inertiaDeg_eq_of_isMaximal (maximalIdeal R) (maximalIdeal B), he,
+    Ideal.inertiaDeg_eq_of_isMaximal, ← IsFractionRing.finrank_eq R F B L] at hsum
   exact hsum
 
 variable (R F L) in

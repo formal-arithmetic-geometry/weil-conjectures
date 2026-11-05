@@ -173,7 +173,7 @@ theorem exists_hasProjectiveDimensionLE_of_linearEquiv_quotient (p : Ideal R) [p
     let e' : N ≃ₗ[R] Shrink.{v} (R ⧸ maximalIdeal R) := e.trans (Shrink.linearEquiv R _).symm
     rw [projectiveDimension_eq_of_iso e'.toModuleIso, projectiveDimension_quotient_maximalIdeal]
     exact nofun
-  obtain ⟨y, hym, hyp⟩ := SetLike.not_le_iff_exists.1
+  obtain ⟨y, hym, hyp⟩ := IsConcreteLE.not_le_iff_exists.1
     (fun h ↦ hpm ((le_maximalIdeal hp.ne_top).antisymm h))
   have hreg : IsSMulRegular N y := by
     rw [e.isSMulRegular_congr]

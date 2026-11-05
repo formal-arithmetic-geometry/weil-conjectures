@@ -55,7 +55,7 @@ private theorem exists_singleton_fibre_affine_model
           q.asIdeal.comap (algebraMap A B) :=
         congrArg PrimeSpectrum.asIdeal (q'.property.1.trans hq.symm)
       exact hlt.ne heq
-    obtain ⟨b, hb, hbq⟩ := SetLike.not_le_iff_exists.mp hnot
+    obtain ⟨b, hb, hbq⟩ := IsConcreteLE.not_le_iff_exists.mp hnot
     exact ⟨b, hb, hbq⟩
   choose b hb hbq using hsep
   let C := Algebra.adjoin A (Set.range b)

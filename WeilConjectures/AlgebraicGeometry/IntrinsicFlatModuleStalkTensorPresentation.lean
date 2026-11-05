@@ -12,6 +12,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.LinearAlgebra.TensorProduct.Basic
 import Mathlib.RingTheory.Localization.BaseChange
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.Topology.Sheaves.CommRingCat
 
 /-! # Affine sections present a quasi-coherent stalk by a tensor product
 

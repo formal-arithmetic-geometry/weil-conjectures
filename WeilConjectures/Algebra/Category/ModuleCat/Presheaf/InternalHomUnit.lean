@@ -18,6 +18,8 @@ The internal hom is additive in its first variable (`PresheafOfModules.homObjMap
 
 @[expose] public section
 
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false
+
 universe v v₁ u₁ u
 
 open CategoryTheory Opposite
@@ -38,8 +40,8 @@ lemma homObjMap_add_left (f f' : M' ⟶ M) (g : N ⟶ N') :
 
 lemma homObjMap_zero_left (g : N ⟶ N') : homObjMap (0 : M' ⟶ M) g = 0 := by
   ext X φ : 3
-  exact congrArg (fun ψ ↦ ModuleCat.Hom.hom ψ φ)
-    (Limits.zero_comp (X := (restrictOver R X.unop).obj M'))
+  change (restrictOver R X.unop).map (0 : M' ⟶ M) ≫ φ ≫ (restrictOver R X.unop).map g = 0
+  rw [show (restrictOver R X.unop).map (0 : M' ⟶ M) = 0 from by ext; rfl, Limits.zero_comp]
 
 lemma restrictOver_smul_app_apply {M P : PresheafOfModules.{v} (R ⋙ forget₂ _ _)}
     {U : C} (r : R.obj (op U)) (φ : (restrictOver R U).obj M ⟶ (restrictOver R U).obj P)
@@ -79,9 +81,17 @@ lemma homObjUnitInvApp_app_one {U : C} (n : N.obj (op U)) :
       ((N.congr_map_apply op_id n).trans (N.map_id_apply' n))
 
 
+/-- The `R(X)`-module structure on the sections of `homObj M N` over `X`, stated for the ring
+`(R ⋙ forget₂ _ _).obj X` so that `ModuleCat.ofHom` finds it. -/
+noncomputable instance instModuleHomObjSections {M N : PresheafOfModules.{u} (R ⋙ forget₂ _ _)}
+    (X : Cᵒᵖ) :
+    Module ((R ⋙ forget₂ CommRingCat RingCat).obj X)
+      ((restrictOver R X.unop).obj M ⟶ (restrictOver R X.unop).obj N) :=
+  inferInstanceAs (Module (R.obj (op X.unop)) _)
+
 /-- The sections of `homObj R N` over `X` are the sections of `N` over `X`. -/
 noncomputable def homObjUnitIsoApp (X : Cᵒᵖ) : (homObj (unit _) N).obj X ≅ N.obj X :=
-    { hom := ConcreteCategory.ofHom
+    { hom := ModuleCat.ofHom
         { toFun φ := φ.app (op (Over.mk (𝟙 X.unop))) (1 : R.obj (op X.unop))
           map_add' _ _ := rfl
           map_smul' r φ := by
@@ -89,20 +99,25 @@ noncomputable def homObjUnitIsoApp (X : Cᵒᵖ) : (homObj (unit _) N).obj X ≅
             change R.map (𝟙 _) r • _ = _
             rw [R.map_id]
             rfl }
-      inv := ConcreteCategory.ofHom
+      inv := ModuleCat.ofHom
         { toFun n := homObjUnitInvApp N n
           map_add' n n' := hom_ext (M₁ := (restrictOver R X.unop).obj (unit _))
             (M₂ := (restrictOver R X.unop).obj N) fun W ↦ by
               ext
-              change (1 : R.obj (op W.unop.left)) • N.map W.unop.hom.op (n + n') =
-                (1 : R.obj (op W.unop.left)) • N.map W.unop.hom.op n +
-                  (1 : R.obj (op W.unop.left)) • N.map W.unop.hom.op n'
+              change (1 : R.obj (op W.unop.left)) •
+                (show N.obj (op W.unop.left) from N.map W.unop.hom.op (n + n')) =
+                (1 : R.obj (op W.unop.left)) •
+                  (show N.obj (op W.unop.left) from N.map W.unop.hom.op n) +
+                  (1 : R.obj (op W.unop.left)) •
+                    (show N.obj (op W.unop.left) from N.map W.unop.hom.op n')
               rw [map_add, smul_add]
           map_smul' r n := hom_ext (M₁ := (restrictOver R X.unop).obj (unit _))
             (M₂ := (restrictOver R X.unop).obj N) fun W ↦ by
               ext
-              change (1 : R.obj (op W.unop.left)) • N.map W.unop.hom.op (r • n) =
-                R.map W.unop.hom.op r • (1 : R.obj (op W.unop.left)) • N.map W.unop.hom.op n
+              change (1 : R.obj (op W.unop.left)) •
+                (show N.obj (op W.unop.left) from N.map W.unop.hom.op (r • n)) =
+                R.map W.unop.hom.op r • (1 : R.obj (op W.unop.left)) •
+                  (show N.obj (op W.unop.left) from N.map W.unop.hom.op n)
               rw [one_smul, one_smul, N.map_smul]
               rfl }
       hom_inv_id := by
