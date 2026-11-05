@@ -102,7 +102,7 @@ theorem etaleNormalization_coherence (Y : Scheme.{u})
     simp only [Iso.hom_inv_id_app_assoc]
     rw [← reassoc_of% hp]
     simp only [← Functor.map_comp, Iso.hom_inv_id_app]
-    erw [CategoryTheory.Functor.map_id, Category.comp_id]
+    simp only [CategoryTheory.Functor.map_id, Category.comp_id]
   have hn := (localIsomorphismRestrictionComp Y R f).inv.naturality δ
   dsimp only [Functor.comp_map] at hn
   change _ ≫ ((localIsomorphismRestriction Y R U).map δ ≫
