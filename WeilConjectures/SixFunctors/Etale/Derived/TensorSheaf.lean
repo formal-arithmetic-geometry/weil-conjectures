@@ -224,14 +224,15 @@ instance isLeftDerivedFunctor_leftDerivedUpperStarTensorRight :
     obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective K
     exact (tensorRight c_Z).isIso_leftDerivedFunctorCounit_app_of_kFlat K
       ((HomotopyCategory.kFlat_quotient_obj_iff K).1 hK)
-  haveI : IsIso ((tensorRight c_Z).leftDerivedFunctorCounit.app
+  have : IsIso ((tensorRight c_Z).leftDerivedFunctorCounit.app
       (((g)^*[A].mapHomotopyCategory (.up ℤ)).obj
         ((HomotopyCategory.quasiIsoLocalizerMorphism (kFlatUpperStar A g)).functor.obj X))) :=
     hk _ X.property
-  haveI : IsIso ((g)^*[A].leftDerivedFunctorCounit.app
+  have : IsIso ((g)^*[A].leftDerivedFunctorCounit.app
       ((HomotopyCategory.quasiIsoLocalizerMorphism (kFlatUpperStar A g)).functor.obj X)) :=
     NatIso.isIso_app_of_isIso _ _
-  dsimp [leftDerivedUpperStarTensorRightCounit]
+  dsimp only [leftDerivedUpperStarTensorRightCounit, NatTrans.comp_app,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app]
   infer_instance
 
 /-- The comparison `g^*(P ⊗ c_Y) ⟶ g^* P ⊗ c_Z` on homotopy categories. -/
