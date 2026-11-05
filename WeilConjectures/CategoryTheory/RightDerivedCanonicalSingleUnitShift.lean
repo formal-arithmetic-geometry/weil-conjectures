@@ -6,9 +6,11 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import WeilConjectures.CategoryTheory.RightDerivedSingleUnitHomologyComparison
 import WeilConjectures.CategoryTheory.RightDerivedSingleUnitShiftTransport
 import WeilConjectures.CategoryTheory.MappedSingleCyclesShiftComparison
+import all Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 
 @[expose] public section
 
@@ -55,8 +57,7 @@ private theorem bz189_canonical_single_shift_proposal (X : B) (n : ℕ) :
   have he : (DerivedCategory.Plus.quotientCompQhIso B).hom.app S ≫ e.inv = eh.inv := by
     apply DerivedCategory.Plus.ι.map_injective
     simp only [e, eh, Functor.map_comp, Functor.preimageIso_inv, Functor.map_preimage,
-      Iso.trans_inv, Iso.symm_inv, Iso.app_inv,
-      DerivedCategory.Plus.quotientCompQhIso_hom_app_hom]
+      Iso.trans_inv, Iso.symm_inv, Iso.app_inv]
     rfl
   have hu : G.rightDerivedFunctorPlusUnit.app S ≫ RG.map e.inv =
       (DerivedCategory.Plus.quotientCompQhIso C).inv.app GS ≫
