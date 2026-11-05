@@ -52,7 +52,6 @@ private lemma comp_fac
       (ComplexShape.up ℤ)).hom.app K = 𝟙 _ := by
     ext n
     simp
-    rfl
   simpa [h] using mapDerivedCategoryCompIso_fac F G K
 
 open CategoryTheory.Functor in
@@ -233,7 +232,7 @@ private lemma transport
       αD.hom.app Z ≫ qW.hom.app Z =
         S.mapDerivedCategory.map (qU.hom.app Z) ≫ k.hom.app (A.mapDerivedCategory.obj Z) ≫
           v.mapDerivedCategory.map (d.hom.app Z) := by
-    simpa only [αD, k, d, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    simpa only [α, αD, qU, qW, k, d, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
       whiskerRight_app, whiskerLeft_app, Category.assoc] using
       congr_app (pasting A e S T v B κ γ) Z
   let b := e.mapDerivedCategory.preimage (qU.inv.app F ≫ a ≫ qU.hom.app G)
