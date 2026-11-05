@@ -234,7 +234,7 @@ theorem exists_affineDerivedPushforwardSheafEdge
     infer_instance
   simp only [Functor.map_comp] at hn
   simp only [map_map_quotientCompQhIso_hom, map_quotientCompQhIso_inv,
-    Category.id_comp] at hn
+    Category.id_comp, Category.comp_id] at hn
   apply (cancel_epi ((F ⋙ S).map (M.sc i).homologyData.left.π)).mp
   apply (cancel_mono (γ.app ⟨_, hM⟩ ≫ δ.hom.app (DerivedCategory.Q.obj K))).mp
   simpa only [ε, NatTrans.comp_app, Functor.isoWhiskerLeft_inv,
