@@ -207,42 +207,41 @@
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
 - This final commit changes only progress documentation; Lean sources match the green build.
 
-# BZ740 in progress
+# BZ740 complete
 
 - Branch: `u9/BZ740`; starting commit: `f271bd088`.
-- Reread the brief and progress notes on continuation; no new LEAD lines.
-- The import-only remote build fixed both private-helper errors, leaving the public Qh/Q mismatch.
+- Assigned module `WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorUnitNormalization`
+  passed `ucheck-bump`: rc=0, failed=0, 3927 jobs; target rebuilt in 48 seconds.
+- Validated source commit: `814682ae46`. The assigned target also rebuilt successfully
+  in the downstream batch at `28be0e52ca`.
 - The user instructed continuation after the exact one-line identity-cast proposal.
-  Applied `BZ740-statement-cast-proposal.patch`, preserving the original morphism.
-- Next: validate the assigned normalization module through `ucheck-bump`, then its direct importer.
-- Fix patterns and exact diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ740.md`.
+  That patch and two Localization imports are the only Lean changes.
+- All other statement text, proof bodies, docstrings, and heartbeat settings are unchanged.
+  Both recorded rewrite rules exactly reproduce the source from the baseline.
+- Direct importer `DerivedPullbackTensorUnitKFlat` was checked and fails in a kept
+  public theorem's hμ binder (line 359), requiring further statement-level Qh/Q conversions.
+  It and next-layer `DerivedPullbackTensorUnit` are deferred under the kept-statement rule.
+  Neither downstream file was edited.
+- Full logs: `/home/ubuntu/u9/bz/BUILD-BZ740-assigned-green-full.log` and
+  `/home/ubuntu/u9/bz/BUILD-BZ740-downstream1-full.log`.
+- Fix patterns, exact diagnostics, and occurrence counts: `/home/ubuntu/u9/bz/FIXES-BZ740.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ740-contract-audit.txt`.
+- Completion marker: `/home/ubuntu/u9/state/BZ740.DONE`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
-- Assigned normalization module is GREEN at `814682ae46`: `ucheck-bump` rc=0,
-  failed=0, 3927 jobs, target rebuilt in 48 seconds.
-- Remote log: `/home/ubuntu/u9/logs/BZ740-20261106T061103.log`.
-- Checking downstream `DerivedPullbackTensorUnitKFlat` and `DerivedPullbackTensorUnit`.
+- This final commit changes only progress documentation; Lean source matches the green build.
 
-# BZ802 in progress
+# BZ824 in progress
 
-- Branch: `u9/BZ802`; starting commit: `fcbed6be3`.
-- Reread the brief and progress notes on continuation; no new LEAD lines.
-- The user instructed continuation after the explicit three-prerequisite restoration proposal.
-- Restored the original declarations in AffinePerfectOpenRepresentCohomologyColimit,
-  AffinePerfectOpenRepresentCohomology, and AffineKoszulSectionColimit.
-- Fixed the compositor isIso implication from `.2` to `.1`; omitted old heartbeat overrides.
-- Remote validation includes those three modules, assigned AffineKoszulSectionRoof,
-  and direct importer AffinePerfectTensorRoof. Continue downstream after green.
-- Fix records: `/home/ubuntu/u9/bz/FIXES-BZ802.md`.
-- No local Lean/Lake, changed statements, deleted callers, or proof escapes.
-
-- First remote build measured a 200000-heartbeat isDefEq timeout in the restored
-  cohomology-colimit proof at hv₂. Restored only that theorem's original 1000000 budget.
-- Direct importer AffinePerfectTensorRoof is blocked by unowned
-  DerivedPullbackTensorAssociativity.lean:323:12 (Type mismatch), also at 459:12.
-- Next build covers the four assigned/restored modules without the blocked importer.
-
-- The second remote build compiled AffinePerfectOpenRepresentCohomologyColimit (32s)
-  and AffinePerfectOpenRepresentCohomology (8.5s).
-- AffineKoszulSectionColimit also exhausted 200000 heartbeats at whnf. Restored its
-  original scoped 1000000 budget after this measured failure; no pre-deletion bound is raised.
-- Third validation batch again targets all four assigned/restored modules.
+- Branch: u9/BZ824; starting commit 95c8987257f.
+- The user instructed continuation after the upstream-restoration proposal.
+- Restored four prerequisite modules. The comparison predicate uses verified PZ003
+  Localization imports and a reflexive cast; the transport proof is unchanged,
+  and target automorphism specializes the existing arbitrary-degree theorem to zero.
+- All six submitted modules passed ucheck-bump at 826d8e1a1fb: rc=0, failed=0, 4065 jobs.
+- Green: DerivedModuleBaseChangeMap, DerivedModulePullbackComparison,
+  ModulePullbackComparisonIsoTransport, ModulePullbackComparisonTargetAutomorphism,
+  CanonicalModuleBaseChangeIsoComparisonCompat, CanonicalModuleBaseChangeIsoComparison.
+- All restored declaration headers and original assigned/caller sources are unchanged.
+- Full log: /home/ubuntu/u9/bz/BUILD-BZ824-restored-full.log.
+- Next: build layer-two importer CanonicalModuleBaseChangeAffineChartComparison.
+- Notes: /home/ubuntu/u9/bz/FIXES-BZ824.md. No local Lean/Lake or proof shortcuts.
