@@ -152,3 +152,19 @@
   and AffineOpenSectionsResolutionQuasiIso; fix any owned errors and write DONE when green.
 - Notes and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ557.md`.
 - No local Lean/Lake, statement changes, proof escapes, or heartbeat increases.
+
+# BZ546 in progress
+
+- Branch: `u9/BZ546`; owned module: `WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.LowerStar`.
+- Read `/home/ubuntu/u9/briefs/BZ546.md` again on the user's continuation request.
+- Its two compositor orientation corrections were already integrated in `d30a09bfb`.
+- Initial builds stopped in `InternalHom`, then `KFlat`, then `KFlatResolutionIndependentCoefficients`.
+- Imported shared fixes `e346fa32d2a` (BZ538) and `cbe4e4143da` (BZ549), then merged coordinator sweep29 at `cfcb63ad7`.
+- The merge resolves the KFlat namespace conflict using the coordinator's equivalent spelling.
+- Owned module is GREEN: `ucheck-bump` rc=0, failed=0, 4388 jobs on poolb:43.166.81.121.
+- Validated source commit: `5d0238f6bcce449df08636833344e61a32f53c55`; full log: `/home/ubuntu/u9/bz/BUILD-BZ546-sweep29-full.log`.
+- Next: build four smallest direct importer closures: ConstructibleReading,
+  LowerStarProperBoundedConstructible, ClosedPointsDetection, and EtaleReading.
+- Skip importers blocked in unrelated dependencies, as the brief requires.
+- Patterns, exact errors, and previous build logs: `/home/ubuntu/u9/bz/FIXES-BZ546.md`.
+- No independently edited unowned proofs; no local Lean/Lake or forbidden proof shortcuts.
