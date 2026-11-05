@@ -7,6 +7,7 @@ module
 public import WeilConjectures.WeilSheaf.SmoothPurityFiniteTateLineReading
 public import WeilConjectures.WeilSheaf.SmoothPurityReadingComposition
 public import WeilConjectures.WeilSheaf.SmoothPurityIntegralTateReductionPullback
+import WeilConjectures.Tactic.ExactModProofs
 
 /-! # The finite étale reading of the integral one-twist datum -/
 
@@ -96,6 +97,9 @@ lemma purity_finiteCoefficientIntegralTateOneReading_pullback
         (Etale.tateSheaf (integersModPowCoeff.{u} ℓ E n) Y) ≫
       ν^*(X)[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)].map
         (Etale.upperStarTateSheafToTateSheaf (integersModPowCoeff.{u} ℓ E n) g)) hr hf
-  exact h
+  rw [purity_finiteCoefficientIntegralTateOneReading_eq,
+    purity_finiteCoefficientIntegralTateOneReading_eq]
+  dsimp only [Functor.comp_obj, Functor.comp_map] at h ⊢
+  exact_mod_proofs h
 
 end AlgebraicGeometry.ProEtale

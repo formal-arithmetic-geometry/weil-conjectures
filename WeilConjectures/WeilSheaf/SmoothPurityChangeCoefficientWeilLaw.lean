@@ -99,6 +99,16 @@ theorem purityChangeCoefficientPullbackIso_weil
     (purityExtendPullbackIso Λ f.geometricFiberProj M N e) c
     (purityExtendPullbackIso_weil Λ f M N e c he)
 
+/-- Unfold the trivialization at the isomorphism level. -/
+lemma purityChangeCoefficientTrivialization_eq
+    (e₁ : ((f.geometricFiberProj)^*[Ab.{u + 1}].mapMod _).obj M ≅
+      ((f.geometricFiberProj)^*[Ab.{u + 1}].mapMod _).obj (𝟙_ _)) :
+    purityChangeCoefficientTrivialization Λ a f.geometricFiberProj M e₁ =
+      letI := Mod.extendScalarsMonoidal (coefficientMap a X)
+      purityChangeCoefficientPullbackIso Λ a f.geometricFiberProj M (𝟙_ _) e₁ ≪≫
+        (f.geometricFiberProj)^*⟦Λ'⟧.mapIso
+          (Functor.Monoidal.εIso (Mod.extendScalars (coefficientMap a X))).symm := rfl
+
 /-- The normalized trivialization obeys the same scalar Frobenius law. -/
 theorem purityChangeCoefficientTrivialization_weil
     (e₁ : ((f.geometricFiberProj)^*[Ab.{u + 1}].mapMod _).obj M ≅
@@ -113,15 +123,18 @@ theorem purityChangeCoefficientTrivialization_weil
           (purityChangeCoefficientTrivialization Λ a f.geometricFiberProj M e₁).hom ≫
         (geometricFiberProjUpperStarFrobeniusIso Λ' f).hom.app (𝟙_ _) := by
   let := Mod.extendScalarsMonoidal (coefficientMap a X)
+  rw [purityChangeCoefficientTrivialization_eq]
   have h := purity_scalarDatum_postcomposeIso (f.geometricFiberProj)^*⟦Λ'⟧
     (f.geometricGaloisFrobenius.hom)^*⟦Λ'⟧
     (geometricFiberProjUpperStarFrobeniusIso Λ' f)
     (purityChangeCoefficientPullbackIso Λ a f.geometricFiberProj M (𝟙_ _) e₁)
     (Functor.Monoidal.εIso (Mod.extendScalars (coefficientMap a X))).symm
-    (purityChangeCoefficientTrivialization Λ a f.geometricFiberProj M e₁) rfl c
+    (purityChangeCoefficientPullbackIso Λ a f.geometricFiberProj M (𝟙_ _) e₁ ≪≫
+      (f.geometricFiberProj)^*⟦Λ'⟧.mapIso
+        (Functor.Monoidal.εIso (Mod.extendScalars (coefficientMap a X))).symm) rfl c
     (purityChangeCoefficientPullbackIso_weil a f M (𝟙_ _) e₁ c he)
   dsimp only [Functor.comp_obj, Functor.comp_map] at h ⊢
-  exact_mod_proofs h
+  cast_proofs h
 
 end ScalarRelation
 
