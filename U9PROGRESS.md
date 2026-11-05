@@ -142,19 +142,22 @@
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ537: assigned module and first downstream layer green
+# BZ537 complete
 
-- Branch: `u9/BZ537`.
-- `PushforwardZeroSingle` and direct importer `PushforwardZeroDescent` passed
-  `ucheck-bump` together: rc=0, failed=0, 4213 jobs.
-- Validated source commit: `0716db1317`; remote log:
-  `/home/ubuntu/u9/logs/BZ537-20261106T034033.log`.
-- Full local log: `/home/ubuntu/u9/bz/BUILD-BZ537-resume2-full.log`.
-- Merged owner BZ581's `216c997cc4f` to clear the InternalHom prerequisite;
-  no BZ537 edits to that dependency.
+- Branch: `u9/BZ537`; assigned module and both downstream layers passed `ucheck-bump`.
+- Green modules under `WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Limits`:
+  `PushforwardZeroSingle`, `PushforwardZeroDescent`, and `PushforwardLimit`.
+- Final validation: rc=0, failed=0, 4251 jobs; all three modules rebuilt successfully.
+- Validated source commit: `e84836c9a1d191d254751b075d18633e2fdb44d6`.
+- Final remote log: `/home/ubuntu/u9/logs/BZ537-20261106T034929.log`.
+- Full local log: `/home/ubuntu/u9/bz/BUILD-BZ537-layer2-full.log`.
+- Merged owner BZ581's `216c997cc4f` to clear the InternalHom prerequisite.
 - Repairs use direct Q for the single-complex comparison, explicit public Qh/Q
   comparison isomorphisms in degree-zero homology, and `erw` for the transported
-  naturality proof. All seven declaration signatures and docstrings are unchanged.
-- Next: validate second-layer importer `PushforwardLimit`, then write DONE.
+  naturality proof. No downstream source changes were necessary.
+- All seven declaration signatures and existing docstrings are unchanged.
+- Audit: `/home/ubuntu/u9/bz/BZ537-contract-audit.txt`.
 - Fix patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ537.md`.
 - No local Lean/Lake, sorries, forbidden proof shortcuts, or heartbeat increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ537.DONE`.
+- This final commit changes only progress documentation; Lean sources match the green build.
