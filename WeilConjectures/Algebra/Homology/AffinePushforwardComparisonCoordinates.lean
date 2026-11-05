@@ -82,16 +82,16 @@ def affinePushforwardCohomologyMapOfComparison (A B : Type u) [CommRing A] [Comm
   let H := DerivedCategory.homologyFunctor
     (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i
   let β := (RingedSpace.moduleDirectImage
-    (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom).rightDerivedFunctorUnit
+    (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom).rightDerivedFunctorUnit.{_, _, _, _, w, w}
   exact ((C.sc i).mapHomologyIso F).inv ≫
     ((DerivedCategory.homologyFunctorFactors _ i).app
       ((F.mapHomologicalComplex (.up ℤ)).obj C)).inv ≫
     H.map (DerivedCategory.Q.map a) ≫
-    H.map ((DerivedCategory.quotientCompQhIso _).inv.app
+    H.map ((DerivedCategory.quotientCompQhIso.{w} _).inv.app
       ((P.mapHomologicalComplex (.up ℤ)).obj D) ≫
-      DerivedCategory.Qh.map ((P.mapHomotopyCategoryFactors (.up ℤ)).inv.app D) ≫
+      DerivedCategory.Qh.{w}.map ((P.mapHomotopyCategoryFactors (.up ℤ)).inv.app D) ≫
       β.app ((HomotopyCategory.quotient _ (.up ℤ)).obj D) ≫
-      P.rightDerivedFunctor.map ((DerivedCategory.quotientCompQhIso _).hom.app D))
+      P.rightDerivedFunctor.{_, _, _, _, w, w}.map ((DerivedCategory.quotientCompQhIso.{w} _).hom.app D))
 
 /-- Cohomology coordinates from the tilde unit and exact homology comparisons.
 Source: Stacks Project, Tags 01I9 and 06Z0.
