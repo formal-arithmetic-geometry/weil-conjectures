@@ -99,7 +99,7 @@ private def encodingDerivedOpenShriekIso {T U : Scheme.{u}} (j : U ⟶ T)
     (eU.ordinary.functor ⋙ eU.fixed.functor).Additive
   change F.mapDerivedCategory ⋙ ET.functor.mapDerivedCategory ≅
     EU.functor.mapDerivedCategory ⋙ G.mapDerivedCategory
-  exact (Functor.mapDerivedCategoryCompIso F ET.functor) ≪≫
+  exact Functor.mapDerivedCategoryCompIso F ET.functor ≪≫
     Functor.mapDerivedCategoryNatIso (encodingOpenShriekIso A j eT eU) ≪≫
     (Functor.mapDerivedCategoryCompIso EU.functor G).symm
 
