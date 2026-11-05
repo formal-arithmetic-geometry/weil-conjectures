@@ -97,7 +97,7 @@ theorem purityChangeCoefficientTrivialization_weil
     (purityChangeCoefficientTrivialization Λ a f.geometricFiberProj M e₁)
     (purityChangeCoefficientTrivialization_eq a f M e₁) c
     (purityChangeCoefficientPullbackIso_weil a f M (𝟙_ _) e₁ c he)
-  dsimp +instances only [Functor.comp_obj, Functor.comp_map] at h ⊢
+  dsimp +instances only [scalarFrobeniusIso, Functor.comp_obj, Functor.comp_map] at h ⊢
   exact_mod_proofs h
 
 end ScalarRelation
