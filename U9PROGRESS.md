@@ -153,27 +153,24 @@
 - Notes and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ557.md`.
 - No local Lean/Lake, statement changes, proof escapes, or heartbeat increases.
 
-# BZ590 complete
+# BZ593 complete
 
-- Branch: `u9/BZ590`; starting commit: `cfcb63ad7`.
-- Assigned module `WeilConjectures.AlgebraicGeometry.InjectiveExchangeSourceTransport`
-  passed `ucheck-bump`: rc=0, failed=0, 4237 jobs, at
-  `393c972f1830b9c4b2503e820c97c3d716fd1b53` on poolb:43.157.184.90.
-- The user instructed continuation after the exact public transport proposal.
-  Applied its two changes: preimage target `Plus.Qh.obj H` and the canonical
-  `quotientCompQhIso` inverse before the RHS. Names, hypotheses, binders, and
-  existing docstrings are unchanged. Added the Localization imports for proof
-  reduction and removed the final `rfl`, since `erw` now closes the goal.
-- The assigned module rebuilt green at `14548dd95744e0e3e4af2c1bdba85f60a5410b71`
-  in the downstream check of `InjectiveExchangeRepresentative`.
-- Downstream skipped under the ownership rule: BZ591's
-  `InjectiveExchangeTargetTransport` failed with eight errors. No downstream
-  modules are claimed green; no second layer is reachable past this blocker.
-- Unit log: `/home/ubuntu/u9/bz/BUILD-BZ590-unit-green-full.log`.
-- Downstream log: `/home/ubuntu/u9/bz/BUILD-BZ590-downstream1-full.log`.
-- Fix patterns, exact errors, and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ590.md`.
-- Contract audit: `/home/ubuntu/u9/bz/BZ590-contract-audit.txt`.
-- No local Lean/Lake, sorries, proof shortcuts, heartbeat increases, or profiler probes.
-- Completion marker: `/home/ubuntu/u9/state/BZ590.DONE`.
-- This final commit changes only progress documentation; Lean source matches both
-  successful module builds.
+- Branch: `u9/BZ593`; starting commit: `cfcb63ad7`.
+- Assigned module `WeilConjectures.AlgebraicGeometry.Derived.DerivedLocalIsomorphismSourceEvaluation`
+  passed at `914ab6116b`: rc=0, failed=0, 3934 jobs; target rebuilt in 16 seconds.
+- Direct importers `WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleNormalizationSquareTransport`
+  and `WeilConjectures.AlgebraicGeometry.Source.SourceIsomorphismNormalizedPresheafEvaluation`
+  passed at `73a18d7258`: rc=0, failed=0, 3950 jobs.
+- Second layer `WeilConjectures.AlgebraicGeometry.Etale.EtaleUniversalNormalization`
+  passed at `4702d1f06`: rc=0, failed=0, 3951 jobs.
+- `DerivedScalarExtensionLocalSystems` was skipped because its dependencies
+  `MapExactFunctor` (BZ589), `RingedTopoiDerivedPullback` (BZ554), and
+  `ModuleFiniteTypeApproximation` (BZ587) fail externally. No external files edited.
+- The user instructed continuation after the exact two-line private statement proposal.
+  Compositor directions in `derived_path_coherence`, its proof, and three definition
+  bodies preserve the original maps under Mathlib's reversed API. Public statements
+  and docstrings are unchanged.
+- Fix patterns, errors, and whole-tree occurrence counts: `/home/ubuntu/u9/bz/FIXES-BZ593.md`.
+- Build logs: `BUILD-BZ593-final-full.log`, `BUILD-BZ593-direct-importers-full.log`,
+  and `BUILD-BZ593-second-layer-full.log`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
