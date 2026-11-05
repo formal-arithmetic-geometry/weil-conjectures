@@ -25,7 +25,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgC
 
 /-- Reduction with the new coefficient object as its explicit codomain. -/
 noncomputable def finiteReduction :
-    Profinite.padicIntegersRingObj.{u} ℓ E ⟶ Profinite.continuousMapRingObj (PadicAlgCl.integersModPow ℓ E n) :=
+    Profinite.padicIntegersRingObj.{u} ℓ E ⟶ coeffRing (PadicAlgCl.integersModPow ℓ E n) :=
   (sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
     (Profinite.padicIntegersCondensedRingToIntegersModPow ℓ E n)
 
@@ -35,7 +35,7 @@ instance : IsMonHom (finiteReduction.{u} ℓ E n) := by
 
 /-- The composite coefficient map, built using the same finite reduction. -/
 noncomputable def compositeReduction :
-    Profinite.continuousMapRingObj.{u} ℤ_[ℓ] ⟶ Profinite.continuousMapRingObj (PadicAlgCl.integersModPow ℓ E n) :=
+    Profinite.continuousMapRingObj.{u} ℤ_[ℓ] ⟶ coeffRing (PadicAlgCl.integersModPow ℓ E n) :=
   Profinite.padicIntRingObjToPadicIntegers ℓ E ≫ finiteReduction ℓ E n
 
 instance : IsMonHom (compositeReduction.{u} ℓ E n) := by
@@ -45,7 +45,7 @@ instance : IsMonHom (compositeReduction.{u} ℓ E n) := by
 /-- Reduction on a scheme, with all implicit coefficient data inherited from `finiteReduction`. -/
 noncomputable abbrev integersModPowReduction (X : Scheme.{u}) :
     condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X ⟶
-      condensedRingObj (Profinite.continuousMapRingObj (PadicAlgCl.integersModPow ℓ E n)) X :=
+      condensedRingObj (coeffRing (PadicAlgCl.integersModPow ℓ E n)) X :=
   coefficientMap (finiteReduction ℓ E n) X
 
 lemma ringChar_coeffType :

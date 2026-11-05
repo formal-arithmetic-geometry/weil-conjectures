@@ -32,7 +32,7 @@ variable (T : Type) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] [Dis
 `Λ_X` corresponds to taking the underlying abelian sheaf. -/
 noncomputable def finiteCoefficientModEquivalenceInverseCompForgetIso :
     (finiteCoefficientModEquivalence X T).inverse ⋙
-        Mod.forget (condensedRingObj (Profinite.continuousMapRingObj T) X) ≅
+        Mod.forget (condensedRingObj (coeffRing T) X) ≅
       sheafCompose _ (forget₂ (ModuleCat.{u + 1} (coeffType.{u} T)) Ab.{u + 1}) :=
   Functor.isoWhiskerLeft _
       (eqToIso (finiteCoefficientModEquivalence_functor_comp_sheafCompose X T).symm) ≪≫
@@ -45,12 +45,12 @@ noncomputable def finiteCoefficientModEquivalenceInverseCompForgetIso :
 pro-étale sheaf of `T`-modules. Both functors are left adjoint to the functor taking a pro-étale
 sheaf of `T`-modules to the restriction to the étale site of its underlying abelian sheaf. -/
 noncomputable def comparisonUpperStarFreeIso :
-    ν^*(X)[Ab.{u + 1}] ⋙ Mod.freeFunctor (condensedRingObj (Profinite.continuousMapRingObj T) X) ⋙
+    ν^*(X)[Ab.{u + 1}] ⋙ Mod.freeFunctor (condensedRingObj (coeffRing T) X) ⋙
         (finiteCoefficientModEquivalence X T).functor ≅
       Etale.extendScalars (coeffType.{u} T) X ⋙
         ν^*(X)[ModuleCat.{u + 1} (coeffType.{u} T)] :=
   (((comparisonAdjunction Ab.{u + 1} X).comp
-    (Mod.freeForgetAdjunction (condensedRingObj (Profinite.continuousMapRingObj T) X))).comp
+    (Mod.freeForgetAdjunction (condensedRingObj (coeffRing T) X))).comp
       (finiteCoefficientModEquivalence X T).toAdjunction).leftAdjointUniq
     (((Etale.extendScalarsAdjunction (coeffType.{u} T) X).comp
       (comparisonAdjunction _ X)).ofNatIsoRight
@@ -67,7 +67,7 @@ noncomputable def finiteCoefficientModEquivalenceFreeRootsOfUnityIso (T : Type)
     [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] [DiscreteTopology T] [Finite T]
     (hN : 0 < N) (hX : IsUnit (N : Γ(X, ⊤))) :
     (finiteCoefficientModEquivalence X T).functor.obj
-        ((Mod.freeFunctor (condensedRingObj (Profinite.continuousMapRingObj T) X)).obj
+        ((Mod.freeFunctor (condensedRingObj (coeffRing T) X)).obj
           (rootsOfUnitySheaf X N)) ≅
       ν^*(X)[ModuleCat.{u + 1} (coeffType.{u} T)].obj
         ((Etale.extendScalars (coeffType.{u} T) X).obj (X.rootsOfUnitySheaf N)) :=

@@ -1,0 +1,9 @@
+module
+
+public import WeilConjectures.WeilSheaf.Strategy3.CoefficientCategoryReading
+public import WeilConjectures.WeilSheaf.Strategy3.DescentCategory
+public import WeilConjectures.WeilSheaf.Strategy3.PullbackBoundary
+
+#print axioms AlgebraicGeometry.ProEtale.Strategy3.purity_finiteCoefficientIntegralTateOneReading_pullback
+#print axioms CategoryTheory.K4Coefficient.scalarDatum_conjugate_indexed
+#print axioms AlgebraicGeometry.ProEtale.Strategy3.K4Coefficient.integralReading_pullback

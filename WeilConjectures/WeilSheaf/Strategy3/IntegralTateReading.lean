@@ -90,7 +90,7 @@ lemma purity_finiteCoefficientIntegralTateOneReading_pullback
   simp only [purityTateRootPullbackIso,
     upperStarRootsOfUnitySheafIsoOfInvertible_hom] at hr
   have h := purity_reading_composition_named
-    (Strategy3.upperStar (Profinite.continuousMapRingObj (PadicAlgCl.integersModPow ℓ E n)) g)
+    (Strategy3.upperStar (coeffRing (PadicAlgCl.integersModPow ℓ E n)) g)
     (finiteCoefficientModEquivalence Y (PadicAlgCl.integersModPow ℓ E n)).functor
     (finiteCoefficientModEquivalence X (PadicAlgCl.integersModPow ℓ E n)).functor
     (g)^*[ModuleCat.{u + 1} (coeffType.{u} (PadicAlgCl.integersModPow ℓ E n))]
@@ -106,9 +106,9 @@ lemma purity_finiteCoefficientIntegralTateOneReading_pullback
       (upperStarIntegralTateTwistOneIso ℓ E g f).hom)
     (extendScalarsIntegralTateTwistOneIntegersModPowIso ℓ E n (g ≫ f))
     (extendScalarsIntegralTateTwistOneIntegersModPowIso ℓ E n f)
-    ((freeFunctorCompUpperStarIso (Profinite.continuousMapRingObj (PadicAlgCl.integersModPow ℓ E n)) g).hom.app
+    ((freeFunctorCompUpperStarIso (coeffRing (PadicAlgCl.integersModPow ℓ E n)) g).hom.app
       (rootsOfUnitySheaf Y (ℓ ^ n)))
-    ((Mod.freeFunctor (condensedRingObj (Profinite.continuousMapRingObj (PadicAlgCl.integersModPow ℓ E n)) X)).map
+    ((Mod.freeFunctor (condensedRingObj (coeffRing (PadicAlgCl.integersModPow ℓ E n)) X)).map
       (upperStarRootsOfUnitySheafHom g (ℓ ^ n)))
     (purityFiniteRootTateReadingIso (PadicAlgCl.integersModPow ℓ E n) (ℓ ^ n)
       (pow_pos (Fact.out : ℓ.Prime).pos n) (ringChar_coeffType ℓ E n)

@@ -79,7 +79,7 @@ lemma upperStar_realize {X Y : Scheme.{u}} (g : X ⟶ Y) :
 
 /-- Read an actual module object in the dedicated coefficient category. -/
 noncomputable def reading (X : Scheme.{u}) :
-    Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj (Profinite.continuousMapRingObj T) X) ⥤
+    Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj (coeffRing T) X) ⥤
       Object T X where
   obj A := ⟨(finiteCoefficientModEquivalence X T).functor.obj A⟩
   map f := (finiteCoefficientModEquivalence X T).functor.map f
@@ -91,7 +91,7 @@ lemma reading_realize (X : Scheme.{u}) :
 
 /-- The pullback comparison is constructed in the dedicated category. -/
 noncomputable def readingPullbackIso {X Y : Scheme.{u}} (g : X ⟶ Y) :
-    Strategy3.upperStar (Profinite.continuousMapRingObj T) g ⋙ reading T X ≅
+    Strategy3.upperStar (coeffRing T) g ⋙ reading T X ≅
       reading T Y ⋙ upperStar T g :=
   NatIso.ofComponents (fun A ↦
     { hom := (upperStarFiniteCoefficientModEquivalenceIso g T).hom.app A

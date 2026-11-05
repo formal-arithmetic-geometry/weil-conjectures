@@ -32,10 +32,23 @@ instance (T : Type) [CommRing T] : CommRing (coeffType.{u} T) :=
 instance (T : Type) [Finite T] : Finite (coeffType.{u} T) :=
   inferInstanceAs (Finite (ULift.{u + 1} T))
 
+/-- The condensed coefficient object, retained as a named constructor. -/
+noncomputable def coeffRing (T : Type) [TopologicalSpace T] [CommRing T]
+    [IsTopologicalRing T] : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1} :=
+  Profinite.continuousMapRingObj T
+
+noncomputable instance (T : Type) [TopologicalSpace T] [CommRing T]
+    [IsTopologicalRing T] : MonObj (coeffRing.{u} T) :=
+  inferInstanceAs (MonObj (Profinite.continuousMapRingObj.{u} T))
+
+instance (T : Type) [TopologicalSpace T] [CommRing T]
+    [IsTopologicalRing T] : IsCommMonObj (coeffRing.{u} T) :=
+  inferInstanceAs (IsCommMonObj (Profinite.continuousMapRingObj.{u} T))
+
 /-- A constant global section typed using the duplicate coefficient object. -/
 noncomputable def coeffSection (T : Type) [TopologicalSpace T] [CommRing T]
     [IsTopologicalRing T] (t : T) : 𝟙_ (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) ⟶
-      Profinite.continuousMapRingObj T :=
+      coeffRing T :=
   (Profinite.continuousMapConstRingHom.{u} T t).hom
 
 variable (X : Scheme.{u})
@@ -53,7 +66,7 @@ constant sheaves and the identification `T_* ≅ T̲` of
 `Profinite.constRingSheafToContinuousMapRingObj`. -/
 noncomputable def constRingSheafToCondensedRingObj :
     Sheaf.constRingSheaf (Scheme.ProEt.topology X) (coeffType.{u} T) ⟶
-      condensedRingObj (Profinite.continuousMapRingObj T) X :=
+      condensedRingObj (coeffRing T) X :=
   (constantSheafToUpperStarToSpecZ X).app (AddCommGrpCat.of (coeffType.{u} T)) ≫
     (toSpecZ X)^*[Ab.{u + 1}].map
       (constantSheafToPointUpperStar.app (AddCommGrpCat.of (coeffType.{u} T))) ≫
@@ -112,7 +125,7 @@ the constant ring sheaf `T_X` with sheaves of `T`-modules
 preserved (`ProEtale.finiteCoefficientModEquivalence_functor_comp_sheafCompose`). -/
 noncomputable def finiteCoefficientModEquivalence :
     Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-        (condensedRingObj (Profinite.continuousMapRingObj T) X) ≌
+        (condensedRingObj (coeffRing T) X) ≌
       Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (coeffType.{u} T)) :=
   (Mod.comapEquivalenceOfIsIso (constRingSheafToCondensedRingObj X T)).trans
     (Sheaf.modConstRingSheafEquivalence _ (coeffType.{u} T))
@@ -121,7 +134,7 @@ noncomputable def finiteCoefficientModEquivalence :
 lemma finiteCoefficientModEquivalence_functor_comp_sheafCompose :
     (finiteCoefficientModEquivalence X T).functor ⋙
         sheafCompose _ (forget₂ (ModuleCat.{u + 1} (coeffType.{u} T)) Ab.{u + 1}) =
-      Mod.forget (condensedRingObj (Profinite.continuousMapRingObj T) X) :=
+      Mod.forget (condensedRingObj (coeffRing T) X) :=
   rfl
 
 end CommRing

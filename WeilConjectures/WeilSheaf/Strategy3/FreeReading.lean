@@ -32,13 +32,13 @@ lemma purity_comparisonUpperStarFreeIso_pullback
     (M : Sheaf Y.smallEtaleTopology Ab.{u + 1}) :
     (finiteCoefficientModEquivalence X T).functor.map
           ((Strategy3.freeFunctorCompUpperStarIso
-            (Profinite.continuousMapRingObj T) g).hom.app (ν^*(Y)[Ab.{u + 1}].obj M)) ≫
+            (coeffRing T) g).hom.app (ν^*(Y)[Ab.{u + 1}].obj M)) ≫
         (finiteCoefficientModEquivalence X T).functor.map
-          ((Mod.freeFunctor (condensedRingObj (Profinite.continuousMapRingObj T) X)).map
+          ((Mod.freeFunctor (condensedRingObj (coeffRing T) X)).map
             ((comparisonUpperStarUpperStarIso Ab.{u + 1} g).hom.app M)) ≫
         (comparisonUpperStarFreeIso T X).hom.app ((Etale.upperStar Ab.{u + 1} g).obj M) =
       (upperStarFiniteCoefficientModEquivalenceIso g T).hom.app
-          ((Mod.freeFunctor (condensedRingObj (Profinite.continuousMapRingObj T) Y)).obj
+          ((Mod.freeFunctor (condensedRingObj (coeffRing T) Y)).obj
             (ν^*(Y)[Ab.{u + 1}].obj M)) ≫
         (g)^*[ModuleCat.{u + 1} (coeffType.{u} T)].map
           ((comparisonUpperStarFreeIso T Y).hom.app M) ≫

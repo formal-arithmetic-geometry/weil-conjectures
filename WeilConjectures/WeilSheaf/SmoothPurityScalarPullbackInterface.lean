@@ -17,11 +17,10 @@ The coefficient-changed root object retains its original spelling. Pullback,
 the comparison maps and their compatibility equations are exported separately.
 -/
 
-set_option profiler true
-set_option profiler.threshold 0
-
 @[expose] public section
 
+set_option profiler true
+set_option profiler.threshold 1
 
 universe u
 
@@ -186,48 +185,13 @@ lemma purityScalarCanonicalTrivialization_eq :
       (purityScalarTateCompare ℓ a).symm ≪≫ purityScalarRootTrivialization ℓ a hζ hζ' ≪≫
         purityScalarUnitCompare ℓ a := (rfl)
 
-/-- The Tate square retains the original descent component representation. -/
-lemma purityScalarTateCompare_native_comm :
-    (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ)
-        a.geometricGaloisFrobenius.hom).map (purityScalarTateCompare ℓ a).hom ≫
-        purityScalarTargetDatum ℓ a =
-      (geometricFiberProjUpperStarFrobeniusIso (Profinite.padicAlgClRingObj ℓ) a).hom.app
-        ((Mod.extendScalars (coefficientMap (Profinite.padicIntRingObjToPadicAlgCl ℓ) X)).obj
-          (tateModule X ℓ)) ≫ (purityScalarTateCompare ℓ a).hom := by
-  have h := purityScalarTateCompare_comm ℓ a
-  dsimp only [purityScalarSourceDatum] at h
-  rw [purityScalarSourceIso_eq] at h
-  dsimp +instances only [purityScalarFrobeniusPull, Iso.app_hom,
-    Functor.comp_obj, Functor.comp_map] at h ⊢
-  exact_mod_proofs h
+/-- Expose the source datum as a projection before using the native scalar law. -/
+lemma purityScalarSourceDatum_eq_iso :
+    purityScalarSourceDatum ℓ a = (purityScalarSourceIso ℓ a).hom := rfl
 
-/-- The unit square retains the original descent component representation. -/
-lemma purityScalarUnitCompare_native_comm :
-    (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ)
-        a.geometricGaloisFrobenius.hom).map (purityScalarUnitCompare ℓ a).hom ≫
-        purityScalarTargetUnitDatum ℓ a =
-      (geometricFiberProjUpperStarFrobeniusIso (Profinite.padicAlgClRingObj ℓ) a).hom.app
-        (𝟙_ _) ≫ (purityScalarUnitCompare ℓ a).hom := by
-  have h := purityScalarUnitCompare_comm ℓ a
-  dsimp only [purityScalarSourceUnitDatum] at h
-  rw [purityScalarSourceUnitIso_eq] at h
-  dsimp +instances only [purityScalarFrobeniusPull, Iso.app_hom,
-    Functor.comp_obj, Functor.comp_map] at h ⊢
-  exact_mod_proofs h
-
-/-- Change the coordinate isomorphism at the whole-iso level. -/
-lemma purityScalarCanonicalTrivialization_native_eq :
-    purityScalarCanonicalTrivialization ℓ a hζ hζ' =
-      (purityScalarTateCompare ℓ a).symm ≪≫
-        purityChangeCoefficientTrivialization (Profinite.continuousMapRingObj ℤ_[ℓ])
-          (Profinite.padicIntRingObjToPadicAlgCl ℓ) a.geometricFiberProj (tateModule X ℓ)
-          (upperStarMapModTateModuleIsoUnit a.geometricFiberProj
-            a.geometricFiberToAlgebraicClosure ℓ hζ hζ' ≪≫
-            (a.geometricFiberProj)^*[Ab.{u + 1}].mapModUnitIso) ≪≫
-        purityScalarUnitCompare ℓ a := by
-  exact (purityScalarCanonicalTrivialization_eq ℓ a hζ hζ').trans
-    (congrArg (fun e ↦ (purityScalarTateCompare ℓ a).symm ≪≫ e ≪≫
-      purityScalarUnitCompare ℓ a) (purityScalarRootTrivialization_eq ℓ a hζ hζ'))
+/-- Expose the source unit datum as a projection. -/
+lemma purityScalarSourceUnitDatum_eq_iso :
+    purityScalarSourceUnitDatum ℓ a = (purityScalarSourceUnitIso ℓ a).hom := rfl
 
 /-- Export the scalar equation in the original Frobenius convention. -/
 lemma purityScalarCanonicalEquation

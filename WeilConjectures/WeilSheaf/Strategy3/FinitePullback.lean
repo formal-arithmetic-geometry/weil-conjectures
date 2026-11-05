@@ -56,10 +56,10 @@ omit [DiscreteTopology T] [Finite T] in
 its action on `M`. -/
 lemma globalSmul_lowerStar_obj (t : T)
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.continuousMapRingObj T) X)) :
+      (condensedRingObj (coeffRing T) X)) :
     Mod.globalSmul (ε (upperStarFromPoint Y) ≫
         (upperStarFromPoint Y).map (coeffSection T t))
-        ((Strategy3.lowerStar (Profinite.continuousMapRingObj T) f).obj M) =
+        ((Strategy3.lowerStar (coeffRing T) f).obj M) =
       (f)_*[Ab.{u + 1}].map (Mod.globalSmul (ε (upperStarFromPoint X) ≫
         (upperStarFromPoint X).map (coeffSection T t)) M) := by
   simp only [Strategy3.lowerStar, Functor.comp_obj]
@@ -71,19 +71,19 @@ lemma globalSmul_lowerStar_obj (t : T)
 underlying abelian sheaf `f_* M`, and the actions of `t ∈ T` on sections agree, being the actions
 of the constant global section `t` (`finiteCoefficientModEquivalence_smul`). -/
 noncomputable def lowerStarFiniteCoefficientModEquivalenceIso :
-    Strategy3.lowerStar (Profinite.continuousMapRingObj T) f ⋙
+    Strategy3.lowerStar (coeffRing T) f ⋙
         (finiteCoefficientModEquivalence Y T).functor ≅
       (finiteCoefficientModEquivalence X T).functor ⋙
         ProEtale.lowerStar (ModuleCat.{u + 1} (coeffType.{u} T)) f :=
   Sheaf.natIsoMkOfSheafCompose
-    (F₁ := Strategy3.lowerStar (Profinite.continuousMapRingObj T) f ⋙
+    (F₁ := Strategy3.lowerStar (coeffRing T) f ⋙
       (finiteCoefficientModEquivalence Y T).functor)
     (F₂ := (finiteCoefficientModEquivalence X T).functor ⋙
       ProEtale.lowerStar (ModuleCat.{u + 1} (coeffType.{u} T)) f) (fun M ↦ Iso.refl _)
     (fun M U r y ↦ by
       obtain ⟨t⟩ := r
       have h1 := finiteCoefficientModEquivalence_smul Y T
-        ((Strategy3.lowerStar (Profinite.continuousMapRingObj T) f).obj M) U t y
+        ((Strategy3.lowerStar (coeffRing T) f).obj M) U t y
       rw [globalSmul_lowerStar_obj, ProEtale.lowerStar_map_hom_app] at h1
       have h2 := finiteCoefficientModEquivalence_smul X T M
         (Opposite.op ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).obj U.unop)) t
@@ -95,12 +95,12 @@ noncomputable def lowerStarFiniteCoefficientModEquivalenceIso :
 /-- **The comparison of the two finite-coefficient models commutes with pullback**:
 `f^* ⋙ Φ_X ≅ Φ_Y ⋙ f^*`, the conjugate of `lowerStarFiniteCoefficientModEquivalenceIso`. -/
 noncomputable def upperStarFiniteCoefficientModEquivalenceIso :
-    Strategy3.upperStar (Profinite.continuousMapRingObj T) f ⋙
+    Strategy3.upperStar (coeffRing T) f ⋙
         (finiteCoefficientModEquivalence X T).functor ≅
       (finiteCoefficientModEquivalence Y T).functor ⋙
         ProEtale.upperStar (ModuleCat.{u + 1} (coeffType.{u} T)) f :=
   ((conjugateIsoEquiv
-    ((Strategy3.upperStarLowerStarAdjunction (Profinite.continuousMapRingObj T) f).comp
+    ((Strategy3.upperStarLowerStarAdjunction (coeffRing T) f).comp
       (finiteCoefficientModEquivalence X T).toAdjunction)
     ((finiteCoefficientModEquivalence Y T).toAdjunction.comp
       (ProEtale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} (coeffType.{u} T)) f))).symm
