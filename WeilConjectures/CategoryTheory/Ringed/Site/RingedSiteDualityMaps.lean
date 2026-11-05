@@ -605,32 +605,23 @@ def ringedSiteDualityUnit
 variable [HasDerivedCategory.{w} (SheafOfModules.{max c v r}
   ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R))]
 
-noncomputable local instance
+noncomputable local instance ringedSiteUnitSMul
     (M : SheafOfModules.{max c v r}
       ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R))
     (U : Cᵒᵖ) :
     SMul (((ringedSiteDualityUnitComplex.{c, v, r} J R).X 0).val.obj U) (M.val.obj U) :=
-  ⟨fun a x ↦
-    (show R.obj.obj U from
-      ((HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) (0 : ℤ)
-        (SheafOfModules.unit
-          ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))).hom.val.app U) a) • x⟩
+  (M.val.obj U).isModule.toSMul
 
-noncomputable local instance
+noncomputable local instance ringedSiteRestrictedUnitSMul
     (M : SheafOfModules.{max c v r}
       ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R))
     {U V : Cᵒᵖ} (W : (Over U.unop)ᵒᵖ) (f : V ⟶ op W.unop.left) :
     SMul (((PresheafOfModules.restrictOver R.obj U.unop).obj
       ((ringedSiteDualityUnitComplex.{c, v, r} J R).X 0).val).obj W)
       ((ModuleCat.restrictScalars
-        (((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R).obj
-          .map f).hom).obj (M.val.obj (op W.unop.left))) :=
-  ⟨fun a x ↦
-    (show R.obj.obj (op W.unop.left) from
-      ((HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) (0 : ℤ)
-        (SheafOfModules.unit
-          ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))).hom.val.app
-            (op W.unop.left)) a) • (show M.val.obj (op W.unop.left) from x)⟩
+        (((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R).obj.map
+          f).hom).obj (M.val.obj (op W.unop.left))) :=
+  (M.val.obj (op W.unop.left)).isModule.toSMul
 
 -- These unused generated lemmas expand the native derived coefficient category.
 set_option genSizeOfSpec false in
@@ -1111,141 +1102,6 @@ private theorem ringedSiteHomComparison_eq
   rw [ringedSiteAugmentationMap_eq]
   rfl
 
-private abbrev Mod := RingedTensorModules.{c, v, r} J R
-
-private def pure (A B : Mod.{c, v, r} J R) (U : Cᵒᵖ)
-    (x : A.val.obj U) (y : B.val.obj U) : (A ⊗ B).val.obj U :=
-  (tensorObjIsoSheafification A B).inv.val.app U
-    (((PresheafOfModules.sheafificationAdjunction.{max c v r} (𝟙 _)).unit.app
-      (A.val ⊗ B.val)).app U (x ⊗ₜ[R.obj.obj U] y))
-
-private theorem pure_restrict (A B : Mod.{c, v, r} J R)
-    {U V : Cᵒᵖ} (f : U ⟶ V) (x : A.val.obj U) (y : B.val.obj U) :
-    (A ⊗ B).val.map f (pure.{c, v, r} J R A B U x y) =
-      pure.{c, v, r} J R A B V (A.val.map f x) (B.val.map f y) := by
-  let η := ((PresheafOfModules.sheafificationAdjunction.{max c v r} (𝟙 _)).unit.app
-    (A.val ⊗ B.val)) ≫ (tensorObjIsoSheafification A B).inv.val
-  exact (PresheafOfModules.naturality_apply η f (x ⊗ₜ[R.obj.obj U] y)).symm
-
-private theorem pure_ext (A B N : Mod.{c, v, r} J R) {f g : A ⊗ B ⟶ N}
-    (h : ∀ U x y, f.val.app U (pure.{c, v, r} J R A B U x y) =
-      g.val.app U (pure.{c, v, r} J R A B U x y)) : f = g := by
-  apply (cancel_epi (tensorObjIsoSheafification A B).inv).mp
-  let adj := PresheafOfModules.sheafificationAdjunction.{max c v r} (𝟙
-    ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R).obj)
-  apply (adj.homEquiv (A.val ⊗ B.val) N).injective
-  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
-  apply PresheafOfModules.hom_ext
-  intro U
-  apply ModuleCat.MonoidalCategory.tensor_ext
-  intro x y
-  exact h U x y
-
-private theorem pure_braiding (A B : Mod.{c, v, r} J R) (U : Cᵒᵖ)
-    (x : A.val.obj U) (y : B.val.obj U) :
-    (β_ A B).hom.val.app U (pure.{c, v, r} J R A B U x y) = pure.{c, v, r} J R B A U y x := by
-  exact CochainPullback.moduleTmul_braiding A B U x y
-
-private theorem pure_map
-    {M M' N N' : Mod.{c, v, r} J R} (f : M ⟶ M') (g : N ⟶ N')
-    (V : Cᵒᵖ) (x : M.val.obj V) (y : N.val.obj V) :
-    (f ⊗ₘ g).val.app V (pure.{c, v, r} J R M N V x y) =
-      pure.{c, v, r} J R M' N' V (f.val.app V x) (g.val.app V y) := by
-  exact CochainPullback.moduleTmul_map f g V x y
-
-private theorem pure_ext₃ (A B D N : Mod.{c, v, r} J R)
-    {f g : (A ⊗ B) ⊗ D ⟶ N}
-    (h : ∀ U x y z,
-      f.val.app U (pure.{c, v, r} J R (A ⊗ B) D U (pure.{c, v, r} J R A B U x y) z) =
-        g.val.app U (pure.{c, v, r} J R (A ⊗ B) D U (pure.{c, v, r} J R A B U x y) z)) : f = g := by
-  apply (cancel_epi (β_ D (A ⊗ B)).hom).mp
-  apply (SheafOfModules.tensorHomEquiv_kfi (R := R) D (A ⊗ B) N).injective
-  change (SheafOfModules.tensorHomEquiv_kfi (R := R) D (A ⊗ B) N
-      ((β_ D (A ⊗ B)).hom ≫ f)) = _
-  refine pure_ext.{c, v, r} J R A B (SheafOfModules.homObjSmall_kfi (R := R) D N)
-    (f := SheafOfModules.tensorHomEquiv_kfi (R := R) D (A ⊗ B) N ((β_ D (A ⊗ B)).hom ≫ f))
-    (g := SheafOfModules.tensorHomEquiv_kfi (R := R) D (A ⊗ B) N ((β_ D (A ⊗ B)).hom ≫ g)) ?_
-  intro U x y
-  apply (PresheafOfModules.homEquivSmall_kfi.{max c v r, c, v} D.val N.val U).injective
-  change PresheafOfModules.homEquivSmall_kfi.{max c v r, c, v} D.val N.val U
-      ((PresheafOfModules.tensorHomCurry_kfi.{max c v r, c, v} _).app U
-        (pure.{c, v, r} J R A B U x y)) =
-    PresheafOfModules.homEquivSmall_kfi.{max c v r, c, v} D.val N.val U
-      ((PresheafOfModules.tensorHomCurry_kfi.{max c v r, c, v} _).app U
-        (pure.{c, v, r} J R A B U x y))
-  rw [PresheafOfModules.tensorHomCurry_app_apply_kfi.{max c v r, c, v},
-    PresheafOfModules.tensorHomCurry_app_apply_kfi.{max c v r, c, v}]
-  apply PresheafOfModules.hom_ext
-  intro W
-  ext z
-  change f.val.app (op W.unop.left)
-      ((β_ D (A ⊗ B)).hom.val.app (op W.unop.left)
-        (pure.{c, v, r} J R D (A ⊗ B) (op W.unop.left) z
-          ((A ⊗ B).val.map W.unop.hom.op (pure.{c, v, r} J R A B U x y)))) =
-    g.val.app (op W.unop.left)
-      ((β_ D (A ⊗ B)).hom.val.app (op W.unop.left)
-        (pure.{c, v, r} J R D (A ⊗ B) (op W.unop.left) z
-          ((A ⊗ B).val.map W.unop.hom.op (pure.{c, v, r} J R A B U x y))))
-  rw [pure_braiding, pure_restrict]
-  exact h (op W.unop.left) _ _ z
-
-private abbrev Complex := CochainComplex (Mod.{c, v, r} J R) ℤ
-
-private theorem tensorGenerator_ext
-    (P Q F : Complex.{c, v, r} J R)
-    (φ ψ : (coefficientTotalTensor.{r, c, v} J R).obj (P, Q) ⟶ F)
-    (h : ∀ (p q k : ℤ) (hpq : p + q = k) (U : Cᵒᵖ)
-      (x : (P.X p).val.obj U) (y : (Q.X q).val.obj U),
-      (φ.f k).val.app U (coefficientTensorGenerator.{r, c, v} J R P Q p q k hpq U x y) =
-        (ψ.f k).val.app U (coefficientTensorGenerator.{r, c, v} J R P Q p q k hpq U x y)) :
-    φ = ψ := by
-  apply HomologicalComplex.hom_ext
-  intro k
-  apply HomologicalComplex.mapBifunctor.hom_ext
-    (K₁ := P) (K₂ := Q) (F := curriedTensor (Mod.{c, v, r} J R)) (c := .up ℤ)
-  intro p q hpq
-  apply pure_ext.{c, v, r} J R (P.X p) (Q.X q) (F.X k)
-  intro U x y
-  exact h p q k hpq U x y
-
-private theorem tensorGenerator_ext₃
-    (P Q N F : Complex.{c, v, r} J R)
-    (φ ψ : (coefficientTotalTensor.{r, c, v} J R).obj
-      ((coefficientTotalTensor.{r, c, v} J R).obj (P, Q), N) ⟶ F)
-    (h : ∀ (p q t i k : ℤ) (hpq : p + q = i) (hit : i + t = k) (U : Cᵒᵖ)
-      (x : (P.X p).val.obj U) (y : (Q.X q).val.obj U) (z : (N.X t).val.obj U),
-      (φ.f k).val.app U (coefficientTensorGenerator.{r, c, v} J R
-        ((coefficientTotalTensor.{r, c, v} J R).obj (P, Q)) N i t k hit U
-        (coefficientTensorGenerator.{r, c, v} J R P Q p q i hpq U x y) z) =
-      (ψ.f k).val.app U (coefficientTensorGenerator.{r, c, v} J R
-        ((coefficientTotalTensor.{r, c, v} J R).obj (P, Q)) N i t k hit U
-        (coefficientTensorGenerator.{r, c, v} J R P Q p q i hpq U x y) z)) : φ = ψ := by
-  apply HomologicalComplex.hom_ext
-  intro k
-  apply HomologicalComplex.mapBifunctor₁₂.hom_ext
-    (K₁ := P) (K₂ := Q) (K₃ := N)
-    (F₁₂ := curriedTensor (Mod.{c, v, r} J R))
-    (G := curriedTensor (Mod.{c, v, r} J R)) (c₁₂ := .up ℤ) (c₄ := .up ℤ)
-  intro p q t hpqt
-  have hpqt' : (p + q) + t = k := hpqt
-  rw [HomologicalComplex.mapBifunctor₁₂.ι_eq
-    (curriedTensor (Mod.{c, v, r} J R)) (curriedTensor (Mod.{c, v, r} J R))
-    P Q N (.up ℤ) (.up ℤ) p q t (p + q) k rfl hpqt']
-  apply pure_ext₃.{c, v, r} J R (P.X p) (Q.X q) (N.X t) (F.X k)
-  intro U x y z
-  have hm := pure_map.{c, v, r} J R
-    (HomologicalComplex.ιMapBifunctor P Q (curriedTensor _) (.up ℤ) p q (p + q) rfl)
-    (𝟙 (N.X t)) U (pure.{c, v, r} J R (P.X p) (Q.X q) U x y) z
-  simp only [tensorHom_id, SheafOfModules.id_val,
-    PresheafOfModules.id_app, ModuleCat.id_apply] at hm
-  have hh := h p q t (p + q) k rfl hpqt' U x y z
-  let j := HomologicalComplex.ιMapBifunctor
-    ((coefficientTotalTensor.{r, c, v} J R).obj (P, Q)) N
-    (curriedTensor (Mod.{c, v, r} J R)) (.up ℤ) (p + q) t k hpqt'
-  exact (congrArg (fun a ↦ (φ.f k).val.app U (j.val.app U a)) hm).trans
-    (hh.trans (congrArg (fun a ↦ (ψ.f k).val.app U (j.val.app U a)) hm).symm)
-
-
 section NormalizedSymmetry
 private theorem ringedSiteNormalizedSymmetry_eq
   (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, r, w} J R))
@@ -1318,6 +1174,8 @@ private theorem ringedSiteNormalizedSymmetry_eq
   rw [base P Q hP hQ]
 
 end NormalizedSymmetry
+
+attribute [local semireducible] coefficientTotalTensor
 
 private theorem ringedSiteTensorCoherence
     (M : RingedSiteDualityModel.{c, v, r, w} J R) :
@@ -1418,7 +1276,8 @@ private theorem ringedSiteTensorCoherence
           BraidedCategory.braiding_naturality_assoc]
       rw [hu, ← Category.assoc, heσ]
       simp only [Category.assoc]
-      rw [← ht P _ hP M.unitKFlat, heρ, ← Functor.map_comp]
+      rw [← ht P (ringedTensorUnitComplex.{c, v, r} J R) hP M.unitKFlat,
+        heρ, ← Functor.map_comp]
       rfl
   exact ⟨⟨t, ht, hn, u, hs, ha, hl, hr⟩, rfl⟩
 

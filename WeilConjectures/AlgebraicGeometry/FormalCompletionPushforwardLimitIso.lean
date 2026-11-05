@@ -12,6 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 
 import WeilConjectures.AlgebraicGeometry.FormalCompletionPushforwardLimitAppBijective
 import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # The proper pushforward comparison is invertible on inverse limits
 
