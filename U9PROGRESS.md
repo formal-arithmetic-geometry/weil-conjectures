@@ -81,24 +81,26 @@
 - No local Lean/Lake, proof placeholders, trust escapes, or heartbeat increases.
 - This final commit changes only progress documentation after the successful build.
 
-# BZ279 complete
+# BZ286 complete
 
-- Branch: `u9/BZ279`; starting commit: `18e44f2d5127c179f285ccf7d988c2bf3963106e`.
-- Assigned module: `WeilConjectures.AlgebraicGeometry.Curve.MateProjectionData`.
-- The assigned module passed `ucheck-bump`: rc=0, failed=0, 4218 jobs.
-- Tested source commit: `0f6ab9a67eeba73ca365a57b0b34e20a127fed10`.
-  It rebuilt successfully again at `20620dba643c636d3204f34416f596e346082dc3`.
-- The user instructed continuation after the exact two-site structure-field compatibility
-  proposal. Applied that patch: `.symm` follows both functor arguments in `transition`,
-  and the reversed Mathlib compositor is inverted in `restriction`.
-  These are the only Lean source edits; hypotheses and intended maps are preserved.
-- Full green log: `/home/ubuntu/u9/bz/BZ279-build-repair-full.log`.
-- Built four direct importers as required. All seven direct importers depend on the
-  outside-unit failure in `EtaleSectionsRestrictionSquare.lean:111`. The downstream
-  build also failed in `StrictLocalMateProjectionData.lean:121`. Skipped the blocked
-  importers and second layer under the brief's explicit skip rule. No extra modules
-  are claimed green. Full log: `/home/ubuntu/u9/bz/BZ279-build-downstream-full.log`.
-- Fix patterns, counts, and exact errors: `/home/ubuntu/u9/bz/FIXES-BZ279.md`.
-- Completion marker: `/home/ubuntu/u9/state/BZ279.DONE`.
-- No local Lean/Lake execution, proof escapes, profiler probes, or heartbeat increases.
-- This final commit updates progress documentation only after the successful source build.
+- Branch: `u9/BZ286`, starting commit `18e44f2d5`.
+- Assigned module `WeilConjectures.SixFunctors.Etale.Derived.UnitLerayQuotient`
+  passed `ucheck-bump`: rc=0, failed=0, checked source commit
+  `ec5a2215f14e1093ea2a331e42e95d2e72a519ca`.
+- Direct importer `WeilConjectures.SixFunctors.Etale.Derived.ExactSectionsRestriction`
+  also passed, rebuilding both modules: rc=0, built=2, failed=0, commit
+  `0b2696960a554bf0de357198b5d69cc758f7ccc2`.
+- The user instructed continuation after the exact endpoint-transport proposal;
+  that exact statement patch is applied. The proof uses public quotient-comparison
+  naturality and reducible hom/inv cancellation. Other statements and all existing
+  docstrings remain unchanged. No import changes were needed.
+- Second-layer `RestrictionGenerization` was skipped after its dependency
+  `WeilConjectures.Algebra.Homology.OpenHomTriangleRealization` (BZ232) failed at
+  lines 63, 64, and 304. The BZ286 systemd build was stopped after that confirmed
+  failure; its wrapper reported rc=0 with failed=1, which is NOT a green result.
+- No source outside the assigned module was edited. No local Lean/Lake execution,
+  proof placeholders, trust escapes, heartbeat increases, or profiler probes.
+- Logs, exact errors, candidate counts and fix patterns:
+  `/home/ubuntu/u9/bz/FIXES-BZ286.md`.
+- Completion marker: `/home/ubuntu/u9/state/BZ286.DONE`.
+- This final commit changes only progress documentation after the green builds.
