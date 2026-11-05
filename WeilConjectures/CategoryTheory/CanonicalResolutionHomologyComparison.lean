@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.CategoryTheory.CanonicalResolutionDerivedIso
 public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+import all Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 
 /-! # Resolution comparisons and the composite derived unit
 
