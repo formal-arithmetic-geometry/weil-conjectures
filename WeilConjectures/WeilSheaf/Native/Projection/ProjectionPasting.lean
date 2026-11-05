@@ -24,6 +24,27 @@ variable {C D E C' D' E' : Type*}
   {TC : C × C ⥤ C} {TD : D × D ⥤ D} {TE : E × E ⥤ E}
   {TC' : C' × C' ⥤ C'} {TD' : D' × D' ⥤ D'} {TE' : E' × E' ⥤ E'}
 
+/-- Compose projection isomorphisms, including a specified comparison for the pullback. -/
+def projectionCompositeIso
+    (pI : I.prod (𝟭 D) ⋙ TD ≅ (𝟭 C).prod P ⋙ TC ⋙ I)
+    (pG : G.prod (𝟭 E) ⋙ TE ≅ (𝟭 D).prod Q ⋙ TD ⋙ G)
+    (e : Q ⋙ P ≅ F) :
+    (I ⋙ G).prod (𝟭 E) ⋙ TE ≅ (𝟭 C).prod F ⋙ TC ⋙ (I ⋙ G) :=
+  Functor.isoWhiskerLeft (I.prod (𝟭 E)) pG ≪≫
+    Functor.isoWhiskerRight (Functor.isoWhiskerLeft ((𝟭 C).prod Q) pI) G ≪≫
+    Functor.isoWhiskerRight (Functor.isoWhiskerRight (NatIso.prod (Iso.refl (𝟭 C)) e) TC)
+      (I ⋙ G)
+
+/-- The component of the composite projection is the proper map followed by the open map. -/
+lemma projectionCompositeIso_hom_app
+    (pI : I.prod (𝟭 D) ⋙ TD ≅ (𝟭 C).prod P ⋙ TC ⋙ I)
+    (pG : G.prod (𝟭 E) ⋙ TE ≅ (𝟭 D).prod Q ⋙ TD ⋙ G)
+    (e : Q ⋙ P ≅ F) (M : C) (N : E) :
+    (projectionCompositeIso pI pG e).hom.app (M, N) =
+      pG.hom.app (I.obj M, N) ≫
+        G.map (pI.hom.app (M, Q.obj N) ≫ I.map (TC.map (Prod.mkHom (𝟙 M) (e.hom.app N)))) := by
+  simp [projectionCompositeIso, Functor.map_comp]
+
 /-- Compatibility of a projection formula with three specified comparison isomorphisms. -/
 def ProjectionForgetSquare (δ : I ⋙ ND ≅ NC ⋙ I') (κ : P ⋙ NC ≅ ND ⋙ P')
     (tC : TC ⋙ NC ≅ NC.prod NC ⋙ TC') (tD : TD ⋙ ND ≅ ND.prod ND ⋙ TD')
@@ -34,6 +55,7 @@ def ProjectionForgetSquare (δ : I ⋙ ND ≅ NC ⋙ I') (κ : P ⋙ NC ≅ ND �
     tD.hom.app (I.obj M, N) ≫ TD'.map (Prod.mkHom (δ.hom.app M) (𝟙 _)) ≫
       p'.app (NC.obj M, ND.obj N)
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The open and proper projection-formula squares paste, with arbitrary specified
 composition isomorphisms for pullback. -/
 theorem projectionForgetSquare_paste
@@ -101,6 +123,7 @@ theorem projectionForgetSquare_paste
       congr 1
       ext <;> simp
     rw [reassoc_of% hs]
+    rfl
   have hnG := pG'.naturality (Prod.mkHom (δI.hom.app M) (𝟙 (NE.obj N)))
   dsimp only [Functor.comp_map, Functor.prod_map, Functor.comp_obj, Functor.prod_obj,
     Functor.id_map, Functor.id_obj] at hnG
@@ -112,6 +135,7 @@ theorem projectionForgetSquare_paste
   simp only [NE.map_comp, Category.assoc]
   rw [reassoc_of% hnδG, ← G'.map_comp, ← G'.map_comp, hi]
   simp only [Functor.map_comp, Category.assoc]
+  dsimp only [Functor.prod_obj, Functor.comp_obj, Functor.id_obj]
   rw [← G'.map_comp_assoc, reassoc_of% (hG (I.obj M) N)]
   rw [← reassoc_of% hnG]
   simp only [← TE'.map_comp_assoc]

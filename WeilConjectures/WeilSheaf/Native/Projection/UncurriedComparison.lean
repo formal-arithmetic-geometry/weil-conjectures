@@ -27,6 +27,7 @@ def uncurryCompIsoOfIso {TA : A ⥤ A ⥤ A} {TB : B ⥤ B ⥤ B} {R : B ⥤ A}
     dsimp at h ⊢
     simpa only [map_comp] using h)
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The uncurried form of compatibility, with the pullback comparison pointing towards
 the realized pullback. -/
 lemma comparisonCompatible_uncurried
