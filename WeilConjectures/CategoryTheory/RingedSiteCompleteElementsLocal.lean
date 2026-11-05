@@ -26,6 +26,18 @@ set_option synthInstance.maxSize 2048
 
 namespace CategoryTheory
 
+noncomputable local instance sliceDerivedCategory
+    {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
+    (R : Sheaf J CommRingCat.{u}) (U : C)
+    [hU : HasDerivedCategory.{w} (SheafOfModules.{u}
+      (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over U))] :
+    Category.{w} (@DerivedCategory
+      (SheafOfModules.{u}
+        ((sheafCompose (J.over U) (forget₂ CommRingCat RingCat)).obj (R.over U))) _ _ hU) :=
+  inferInstanceAs (Category.{w} (DerivedCategory
+    (SheafOfModules.{u}
+      (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over U))))
+
 private theorem overMap_preservesColimits
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J RingCat.{u}) {U V : C} (a : V ⟶ U) :
@@ -182,7 +194,7 @@ private theorem completeElementHom_comparison
   let F := SheafOfModules.overMap.{u} O a
   let FU := SheafOfModules.overFunctor.{u} O U
   let FV := SheafOfModules.overFunctor.{u} O V
-  letI : ∀ W : C, HasDerivedCategory.{w} (ringedSiteModules.{u}
+  let : ∀ W : C, HasDerivedCategory.{w} (ringedSiteModules.{u}
       ((sheafCompose (J.over W) (forget₂ CommRingCat RingCat)).obj (R.over W))) :=
     fun W ↦ inferInstanceAs (HasDerivedCategory.{w} (SheafOfModules.{u} (O.over W)))
   let Q : CochainComplex A ℤ ⥤ DerivedCategory A := DerivedCategory.Q
