@@ -1,20 +1,30 @@
-# BZ264 in progress
+# BZ264 complete
 
 - Branch: `u9/BZ264`; starting commit: `c781553bf`.
-- Reread the brief and inherited progress notes after the user requested continuation.
-- The user instructed continuation after the exact three-site API proposal;
-  `BZ264-statement-api-proposal.patch` is applied to the assigned module and its
-  sole direct importer, `RightDerivedUnitSingleDegree`.
-- The canonical single comparison uses direct Q; both unit statements use the
-  cochain unit. The importer proof now uses cochain-unit naturality.
-- The original canonical-single proof is unchanged. All binders, assumptions,
-  and existing docstrings are unchanged.
-- The assigned module and direct importer passed together at `63a5e3555`: rc=0,
-  built=8, failed=0. Log: `/home/ubuntu/u9/logs/BZ264-20261106T013140.log`.
-- Continuing into `HypercohomologyLeftEdgeSingleAux` and `HypercohomologyLeftEdgeSingle`.
-  The auxiliary proof uses direct-Q boundedness instances (known BZ130 pattern).
-- Patterns and full build logs: `/home/ubuntu/u9/bz/FIXES-BZ264.md`.
-- No local Lean/Lake, forbidden proof shortcuts, or heartbeat changes.
+- All four modules below rebuilt successfully in the final `ucheck-bump` run:
+  rc=0, built=10, failed=0; 2065 jobs.
+- Validated source commit: `15cb43852a074ab4190ed745f207728fcbc663a9`.
+- Build tree: `newsrv:/home/ubuntu/u9n/bumpw3`; toolchain and Mathlib pin verified:
+  Lean v4.35.0-rc3 and b63f6e8a68d220e3b3bc4f3792bb53650d375f24.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ264-downstream-full.log`.
+- The user instructed continuation after the reviewed three-site statement API
+  proposal. The canonical single comparison now uses direct Q, and the two unit
+  statements use the cochain unit. The importer uses cochain-unit naturality.
+- The auxiliary hypercohomology proof uses direct-Q boundedness instances.
+- All other statement text, binders, assumptions, and existing docstrings are
+  unchanged. The canonical-single proof body is unchanged.
+- Fix patterns, whole-tree counts, and diagnostic evidence:
+  `/home/ubuntu/u9/bz/FIXES-BZ264.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, profiler
+  probes, or heartbeat increases. Final diff passes `git diff --check`.
+- This completion commit changes only progress documentation after the green build.
+- Completion marker: `/home/ubuntu/u9/state/BZ264.DONE`.
+
+Verified modules:
+- `WeilConjectures.CategoryTheory.RightDerivedCanonicalSingleUnit`
+- `WeilConjectures.CategoryTheory.RightDerivedUnitSingleDegree`
+- `WeilConjectures.CategoryTheory.HypercohomologyLeftEdgeSingleAux`
+- `WeilConjectures.CategoryTheory.HypercohomologyLeftEdgeSingle`
 
 # BZ150 complete
 
