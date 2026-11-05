@@ -66,7 +66,8 @@ theorem identityDerivedHomologyComparison {C : Type*} [Category C] [Abelian C]
           (𝟭 C).mapDerivedCategoryFactors.hom.app K := by
       rw [mapDerivedCategoryIdIso_hom_app]
       have h : (mapHomologicalComplexIdIso C (.up ℤ)).hom.app K = 𝟙 _ := rfl
-      rw [h, Functor.map_id, Category.comp_id]
+      rw [h]
+      erw [DerivedCategory.Q.map_id, Category.comp_id]
     have hInv (K : CochainComplex C ℤ) :
         (mapDerivedCategoryIdIso C).inv.app (DerivedCategory.Q.obj K) =
           (𝟭 C).mapDerivedCategoryFactors.inv.app K := by
