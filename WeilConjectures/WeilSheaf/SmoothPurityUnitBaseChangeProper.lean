@@ -97,18 +97,16 @@ def properLowerShriekBaseChangeOfMap :
     boundedConstructibleLowerShriek l f ⋙ boundedConstructibleUpperStarOfMap l πP ≅
       boundedConstructibleUpperStarOfMap l πZ ⋙ boundedConstructibleLowerShriek l f' :=
   haveI := isIso_boundedConstructibleBaseChangeOfMap l sqf
-  Functor.isoWhiskerRight (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl l f) _ ≪≫
-    asIso (boundedConstructibleBaseChangeOfMap l sqf.toCommSq) ≪≫
-    Functor.isoWhiskerLeft _ (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl l f').symm
+  asIso (Adjunction.ofNatIsoBaseChange (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl l f)
+    (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl l f')
+    (boundedConstructibleBaseChangeOfMap l sqf.toCommSq))
 
 lemma properLowerShriekBaseChangeOfMap_hom :
     (properLowerShriekBaseChangeOfMap l f f' sqf).hom =
       Adjunction.ofNatIsoBaseChange (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl l f)
         (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl l f')
-        (boundedConstructibleBaseChangeOfMap l sqf.toCommSq) := by
-  simp only [properLowerShriekBaseChangeOfMap, Iso.trans_hom,
-    Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom, Iso.symm_hom, asIso_hom,
-    Adjunction.ofNatIsoBaseChange]
+        (boundedConstructibleBaseChangeOfMap l sqf.toCommSq) :=
+  rfl
 
 /-- **The exceptional base change map at the unit of a proper morphism** is the base change map
 of the exceptional inverse image `ProEtale.CondensedRing.upperShriekBaseChangeOfMap` at the unit,
@@ -117,15 +115,14 @@ theorem smoothUnitBaseChange_proper_eq :
     smoothUnitBaseChange l f f' (properLowerShriekBaseChangeOfMap l f f' sqf) e =
       (upperShriekBaseChangeOfMap l sqf).app (𝟙_ _) ≫
         (boundedConstructibleUpperShriek l f').map e := by
-  have := isIso_boundedConstructibleBaseChangeOfMap l sqf
-  have h := Adjunction.unitBaseChange_ofNatIsoLeft
-    (boundedConstructibleUpperShriekAdjunction l f)
+  haveI := isIso_boundedConstructibleBaseChangeOfMap l sqf
+  change Adjunction.unitBaseChange (boundedConstructibleUpperShriekAdjunction l f)
     (boundedConstructibleUpperShriekAdjunction l f')
-    (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl l f)
-    (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl l f')
-    (boundedConstructibleBaseChangeOfMap l sqf.toCommSq) e
-  simpa only [smoothUnitBaseChange, properLowerShriekBaseChangeOfMap_hom,
-    Adjunction.unitBaseChange, upperShriekBaseChangeOfMap, lowerStarUpperShriekAdjunction] using h
+    (Adjunction.ofNatIsoBaseChange (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl l f)
+      (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl l f')
+      (boundedConstructibleBaseChangeOfMap l sqf.toCommSq)) e = _
+  rw [Adjunction.unitBaseChange_ofNatIsoLeft]
+  rfl
 
 /-- The exceptional base change map at the unit of a proper morphism is invertible as soon as
 the base change map of `Rf^!` is invertible at the unit and `e` is invertible. -/
@@ -166,7 +163,8 @@ variable (l : ℕ) [Fact l.Prime] {k₁ k₂ : Type u} [Field k₁] [Field k₂]
   [IsSeparated Z'.hom] (f : Z ⟶ point k₁) (f' : Z' ⟶ point k₂) [IsProper f.left]
   [IsProper f'.left] {πₛ : Spec (.of k₂) ⟶ Spec (.of k₁)} {πZ : Z'.left ⟶ Z.left}
   (sqf : IsPullback πZ f'.left f.left πₛ)
-  (e : (boundedConstructibleUpperStarOfMap l (X := point k₁) (Y := point k₂) πₛ).obj (𝟙_ _) ⟶ 𝟙_ _)
+  (e : (boundedConstructibleUpperStarOfMap l (X := point k₁) (Y := point k₂) πₛ).obj (𝟙_ _) ⟶
+    𝟙_ _)
 
 /-- **The absolute proper smooth piece across fields**: for a smooth proper `k₁`-scheme of pure
 dimension `d` and any `πₛ : Spec k₂ ⟶ Spec k₁`, the exceptional base change map at the unit is

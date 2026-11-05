@@ -1,0 +1,18 @@
+module
+
+public import WeilConjectures.WeilSheaf.Strategy3.Audit
+public import WeilConjectures.WeilSheaf.SmoothPurityK4CanonicalAudit
+public import WeilConjectures.WeilSheaf.SmoothPurityK4NativeAudit
+public import WeilConjectures.WeilSheaf.SmoothPurityUnitBaseChangePoint
+
+/-! Audit of the kernel repair and the adopted point base-change proof. -/
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+#print axioms boundedConstructibleOpenImmersionLowerShriekUpperStarOfMapIso
+#print axioms openImmersionLowerShriekBaseChangeOfMap
+#print axioms isIso_upperShriekMateOfMap_app_of_isOpenImmersion'
+#print axioms geometricFiberLowerShriekBaseChangePoint
+#print axioms isIso_smoothUnitBaseChange_geometricFiberLowerShriekBaseChangePoint
+
+end AlgebraicGeometry.ProEtale.CondensedRing
