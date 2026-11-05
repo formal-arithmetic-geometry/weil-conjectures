@@ -142,36 +142,17 @@
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ575 in progress
+# BZ584 in progress
 
-- Re-read the unit brief; no new LEAD scope changes.
-- User instructed continuation after the exact one-line dependency repair proposal.
-- Applied BZ539's compatibility tensor lemma repair in Presheaf/InternalHom.lean.
-- Assigned ChangeOfRings comparison orientation was already fixed upstream.
-- Retrying ucheck-bump; then direct importer EtaleReductionFiniteTor and second-layer EtaleReduction.
-- Fix notes: /home/ubuntu/u9/bz/FIXES-BZ575.md.
-- No local Lean/Lake execution, statement changes, proof escapes, or heartbeat increases.
-
-# BZ557 in progress
-
-- Branch: `u9/BZ557`; starting commit: `8af5cb324`.
-- Added the public AffineScheme import to direct importer AffineBasisSectionsDerivedUnit.
-- Initial remote builds stopped in the shared Presheaf.InternalHom dependency.
-- On continuation, merged BZ558 prerequisite repair `f28760733369366ac823f0084f3c4090afa3a90d`.
-- Next: ucheck-bump on AffineBasisSectionsResolutionHomologyEpi, AffineBasisSectionsDerivedUnit,
-  and AffineOpenSectionsResolutionQuasiIso; fix any owned errors and write DONE when green.
-- Notes and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ557.md`.
-- No local Lean/Lake, statement changes, proof escapes, or heartbeat increases.
-
-# BZ573 in progress
-
-- Branch: `u9/BZ573`; starting commit: `8af5cb3248338412e860fdc16db73c8eeebd81d9`.
-- The user instructed continuation after the exact one-line private helper API proposal.
-  Removed `.symm` in `exact_comp_normalization` and updated inverse cancellation.
-  All public statements are unchanged.
-- Removed obsolete local irreducible attributes for Mathlib's no_expose derived comparisons.
-- Baseline remote build was blocked by unowned `Presheaf.InternalHom` (BZ581).
-  Waiting for its owner's repair; no unowned source files changed.
-- Next: validate the owned module with `ucheck-bump`, then its direct importer.
-- Fix patterns and logs: `/home/ubuntu/u9/bz/FIXES-BZ573.md`.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
+- Branch: `u9/BZ584`; starting source commit: `7b0df24fff`.
+- Reread the brief and this file on resumption; the brief has no new LEAD lines.
+- The user instructed continuation after the explicit two-statement API proposal.
+  Applied the exact `.inv` -> `.hom` and `.hom` -> `.inv` substitutions in
+  `mapDerivedCategoryCompIso_inv_app_Q` and `mapDerivedCategoryCompIso_hom_app_Q`.
+- These restore the original maps under Mathlib's reversed composition isomorphism.
+  Both proofs are updated; all other statements and existing docstrings are unchanged.
+- Next: remote validation of the assigned module and then its three direct importers.
+- Pinned API inspected at b63f6e8a; current remote next-units notes omit this unit,
+  so the supplied assignment and earlier BZ160 fix remain applicable.
+- Fix patterns and baseline logs: `/home/ubuntu/u9/bz/FIXES-BZ584.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or limit increases.
