@@ -142,28 +142,25 @@
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ554 in progress
+# BZ554 complete
 
 - Branch: `u9/BZ554`; starting commit: `8af5cb324`.
-- The user instructed continuation after the exact identity-cast statement proposal.
-  That patch is now applied to the single `epsilon.app` expression in the public
-  `ringedTopoiDerivedPullback` alpha formula. All other declaration statements and
-  all existing docstrings are unchanged.
-- Added the known split public-import/import-all localization imports for `Qh` reduction.
-- Baseline remote build was blocked by `Presheaf.InternalHom` (BZ581), before
-  reaching the assigned module. The user instructed continuation after the exact
-  one-line prerequisite proposal; that compatibility-lemma proof fix is now applied.
-- Assigned module is green at `3947e09b34`: ucheck-bump rc=0, failed=0, 2802 jobs.
-- Added the public `Mathlib.CategoryTheory.Abelian.Exact` import for the existing
-  preserves-homology lemma after the cast repair reached the theorem proof.
-- Three direct importers passed: DiagramKFlatReplacements,
-  RingedTowerPushforwardLimitAcyclic, and RingedTopoiCanonicalTensorPullback.
-- DiagramRingRestrictionPushforward needs a local scalar-action instance bridging
-  the underlying Type-valued ring sheaf to its native coefficient carrier. That
-  instance is committed at `b9f469ae2`; all existing declarations remain unchanged.
-- Its rebuild and three second-layer importers are queued. Write DONE after validation.
-- Notes and logs: `/home/ubuntu/u9/bz/FIXES-BZ554.md`.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
+- Assigned module and seven downstream modules passed `ucheck-bump` across two layers.
+- Final Lean-source commit: `3d1e83ae5e8d408991267e32ba100230a54cf3e0`.
+- Final check: rc=0, failed=0, 2853 jobs on `poolb:43.166.81.121`;
+  ConstantTowerNormalization and RingedTopoiDerivedPullback rebuilt successfully.
+- The earlier downstream run verified DiagramRingRestrictionPushforward's local
+  scalar-action bridge and the other second-layer comparison modules.
+- The user authorized the exact identity-cast statement proposal and one-line
+  InternalHom prerequisite repair by instructing continuation after each proposal.
+  All other existing statements and all docstrings are unchanged.
+- Additional fixes: public Abelian.Exact/localization imports, a private scalar-action
+  instance, and removal of a redundant rfl after simp.
+- Patterns and validation logs: `/home/ubuntu/u9/bz/FIXES-BZ554.md`.
+- Source contract audit: `/home/ubuntu/u9/bz/BZ554-contract-audit.txt`.
+- Completion marker: `/home/ubuntu/u9/state/BZ554.DONE`.
+- No local Lean/Lake, proof placeholders, trust bypasses, profiler probes or heartbeat increases.
+- This completion commit changes only documentation; Lean sources match the checked commits.
 
 # BZ557 in progress
 
