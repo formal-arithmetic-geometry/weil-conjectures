@@ -81,29 +81,21 @@
 - No local Lean/Lake, proof placeholders, trust escapes, or heartbeat increases.
 - This final commit changes only progress documentation after the successful build.
 
-# BZ287 complete
+# BZ298 complete
 
-- Branch: `u9/BZ287`; starting commit: `18e44f2d5`.
-- Assigned module `WeilConjectures.TraceFormula.CurveLocal.SectionsRestriction`
-  passed ucheck-bump at `20c9b2e93fd5c191dd08375caec64c9c99169d6b`:
-  Build completed successfully (3876 jobs), module compiled in 3.4s.
-- Verified build-host pins: Lean `v4.35.0-rc3`, Mathlib
-  `b63f6e8a68d220e3b3bc4f3792bb53650d375f24`.
-- The user instructed continuation after the exact one-line statement syntax proposal.
-  That correction moves `.symm` after both compositor arguments. All other text in
-  the assigned Lean module is unchanged.
-- All four direct importers were attempted. `SectionsRestrictionGlobal` and
-  `BlowupRestriction` are blocked by outside-unit `DerivedUnitLerayComp`;
-  `DerivedFiniteEtaleTrace` and `SectionsRestrictionOpen` are blocked by
-  outside-unit `SixFunctors.Finite.Stalk` (BZ293). Skipped per the brief.
-- The large first downstream batch was stopped after external failures; its
-  runner returned zero on cancellation, so it is explicitly NOT a green build.
-- Removed the unvalidated downstream proof edit; saved it as
-  `/home/ubuntu/u9/bz/BZ287-downstream-compositor-candidate.patch` for later use.
-  Only the assigned Lean module and this progress file differ from the start.
-- Core full log: `/home/ubuntu/u9/bz/BUILD-BZ287-core-full.log`.
-  Downstream logs: `BUILD-BZ287-downstream1-full.log` and
-  `BUILD-BZ287-downstream-unblocked-full.log` under the same directory.
-- Fix patterns: `/home/ubuntu/u9/bz/FIXES-BZ287.md`.
-- Completion marker: `/home/ubuntu/u9/state/BZ287.DONE`.
-- No local Lean/Lake, proof placeholders, trust escapes, heartbeat raises or profiler probes.
+- Branch: `u9/BZ298`; starting commit: `18e44f2d5`.
+- Assigned module passed `ucheck-bump`: rc=0, failed=0, 2091 jobs at `ee70c90142ac8a8821df34b90a826136c0ab8a8b`.
+- Direct importer `GrothendieckHypercohomologyEdge` also built successfully.
+- Final check of both modules passed: rc=0, built=2, failed=0 on `newsrv:/home/ubuntu/u9n/bumpw7`.
+- Tested source commit: `3e33f5ff0f020a734f371440e09bcf5fc72dc2b3`.
+- Full final log: `/home/ubuntu/u9/bz/BUILD-BZ298-final-full.log`.
+- The user instructed continuation after the exact one-line statement compatibility proposal.
+  Applied `Unith.app (quotient.obj L)` → `Unit.app L` in the assigned theorem.
+- The downstream repair uses the cochain `Q` IsGE instance directly. All other statements,
+  binders, assumptions, imports and existing docstrings are unchanged.
+- Second-layer importer `GrothendieckCocycleComparison` is skipped: its separate dependency
+  `RightDerivedCanonicalSingleUnit` fails at lines 47 and 51; it is owned by another helper.
+- Fix patterns, counts, exact errors and validation evidence: `/home/ubuntu/u9/bz/FIXES-BZ298.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ298.DONE`.
+- This final commit changes only progress documentation after the successful build.
