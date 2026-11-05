@@ -152,3 +152,16 @@
   then build its two direct importers and the next layer.
 - Notes and logs: `/home/ubuntu/u9/bz/FIXES-BZ566.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+
+# BZ549 in progress
+
+- Branch: `u9/BZ549`; owned module: `GlobalSectionsDirectImageKInjectiveAcyclic`.
+- Owned import fix pushed at `d5e8c22c2`: publicly import `ChangeOfRingsExact`.
+- The user instructed continuation after the explicit one-line dependency proposal.
+  Applied the compatibility tensor-map lemma in `Presheaf.InternalHom`.
+- Re-read the brief and refreshed coordinator notes; latest integrated branch is `8af5cb324`.
+- Next: remote validation, first importer `DerivedGlobalSectionsAffinizationComparison`,
+  then second layer `DerivedGlobalSectionsPreservesCoproducts`.
+- Fixes and exact errors: `/home/ubuntu/u9/bz/FIXES-BZ549.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
