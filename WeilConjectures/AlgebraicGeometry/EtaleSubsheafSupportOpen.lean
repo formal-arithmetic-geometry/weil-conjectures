@@ -8,7 +8,6 @@ module
 
 public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.CategoryTheory.Limits.Shapes.Terminal
-public import Mathlib.CategoryTheory.Sites.Limits
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 
 /-! # Construction of the open support of a subterminal étale sheaf -/
@@ -36,6 +35,7 @@ private theorem section_subsingleton (S : Scheme.{u})
     Subsingleton (H.obj.obj (op U)) := by
   let E := sheafToPresheaf S.smallEtaleTopology (Type (max u v)) ⋙
     (CategoryTheory.evaluation S.Etaleᵒᵖ (Type (max u v))).obj (op U)
+  have : PreservesFiniteLimits E := comp_preservesFiniteLimits _ _
   have ht := IsTerminal.isTerminalObj E _ terminalIsTerminal
   let : Unique (E.obj (⊤_ _)) := Types.isTerminalEquivUnique _ ht
   have hm : Mono (E.map (terminal.from H)) := inferInstance
