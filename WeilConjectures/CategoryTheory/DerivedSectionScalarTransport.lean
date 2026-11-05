@@ -105,11 +105,11 @@ private theorem derived_square_fac
   have hu := Functor.mapDerivedCategoryCompIso_fac U G P
   have hh := Functor.mapDerivedCategoryCompIso_fac H V P
   have he := Functor.mapDerivedCategoryNatIso_fac e P
-  change (Functor.mapDerivedCategoryCompIso U G).hom.app (DerivedCategory.Q.obj P) ≫
+  change (Functor.mapDerivedCategoryCompIso U G).inv.app (DerivedCategory.Q.obj P) ≫
     G.mapDerivedCategory.map (U.mapDerivedCategoryFactors.hom.app P) ≫
     G.mapDerivedCategoryFactors.hom.app ((U.mapHomologicalComplex (.up ℤ)).obj P) ≫
       DerivedCategory.Q.map (𝟙 _) = _ at hu
-  change (Functor.mapDerivedCategoryCompIso H V).hom.app (DerivedCategory.Q.obj P) ≫
+  change (Functor.mapDerivedCategoryCompIso H V).inv.app (DerivedCategory.Q.obj P) ≫
     V.mapDerivedCategory.map (H.mapDerivedCategoryFactors.hom.app P) ≫
     V.mapDerivedCategoryFactors.hom.app ((H.mapHomologicalComplex (.up ℤ)).obj P) ≫
       DerivedCategory.Q.map (𝟙 _) = _ at hh
@@ -118,7 +118,7 @@ private theorem derived_square_fac
   simp only [Category.assoc]
   rw [hh, he]
   rw [← Category.assoc, ← hu]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc, Functor.map_comp]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc, Functor.map_comp]
   change _ = G.mapDerivedCategory.map (U.mapDerivedCategoryFactors.hom.app P) ≫
     G.mapDerivedCategoryFactors.hom.app ((U.mapHomologicalComplex (.up ℤ)).obj P) ≫
       DerivedCategory.Q.map (𝟙 _) ≫
@@ -280,9 +280,9 @@ private theorem derivedTransport
     transportedLeftIso ERd F eS
   let dr : U.mapDerivedCategory ⋙ ERd ≅
       ESd ⋙ u.mapDerivedCategory :=
-    (Functor.mapDerivedCategoryCompIso U ER).symm ≪≫
+    Functor.mapDerivedCategoryCompIso U ER ≪≫
       Functor.mapDerivedCategoryNatIso restriction ≪≫
-      Functor.mapDerivedCategoryCompIso ES (u)
+      (Functor.mapDerivedCategoryCompIso ES (u)).symm
   let ce : EX ⋙ ESc ≅ ERc ⋙ lc :=
     (Functor.mapHomologicalComplexCompIso (Iso.refl (L ⋙ ES)) _).symm ≪≫
       NatIso.mapHomologicalComplex extension _ ≪≫
