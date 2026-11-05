@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.WeilSheaf.Native.Projection.CompactProjectionComparison
+public import WeilConjectures.WeilSheaf.Native.Projection.ProjectionChangeCompactification
 
 /-! # The compact projection square for the geometric category's chosen compactification -/
 
@@ -76,18 +77,13 @@ theorem projectionCompact_forget_square (M : WeilComplex k₀ l X) (N : WeilComp
   have hη := CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_hom_app_whiskerRight_comp
     l (CondensedRing.compactificationOverField fb) cb
       ((compactProjectionForget k₀ l X).obj M) ((compactProjectionForget k₀ l Y).obj N)
-  have hc : η.inv.app ((compactProjectionForget k₀ l X).obj M) ▷
-        (compactProjectionForget k₀ l Y).obj N ≫
-      η.hom.app ((compactProjectionForget k₀ l X).obj M) ▷
-        (compactProjectionForget k₀ l Y).obj N = 𝟙 _ := by
-    rw [← comp_whiskerRight, Iso.inv_hom_id_app, id_whiskerRight]
-  apply (cancel_mono (η.hom.app _)).1
-  simp only [projectionCompactForgetIso, Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app,
-    Functor.isoWhiskerLeft_inv, Functor.whiskerLeft_app, comp_whiskerRight, Category.assoc]
-  rw [η.hom.naturality t]
-  rw [← hη]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
-  rw [reassoc_of% hc, Category.id_comp]
-  exact projectionCompactification_forget_square k₀ l f M N
+  exact projectionForgetSquare_changeGeometricPush η
+    ((compactProjectionForget k₀ l Y).map ((projectionCompactIso k₀ l f).hom.app (M, N)))
+    ((projectionCompactificationForgetIso k₀ l f).hom.app _)
+    ((compactProjectionForgetTensorIso k₀ l Y).hom.app ((derivedLowerShriek k₀ l f).obj M, N))
+    ((projectionCompactificationForgetIso k₀ l f).hom.app M)
+    ((projectionCompactForgetIso k₀ l f).inv.app _)
+    ((projectionCompactForgetIso k₀ l f).inv.app M) t _ _ rfl rfl hη
+    (projectionCompactification_forget_square k₀ l f M N)
 
 end AlgebraicGeometry.WeilComplex
