@@ -153,14 +153,23 @@
 - Notes and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ557.md`.
 - No local Lean/Lake, statement changes, proof escapes, or heartbeat increases.
 
-# BZ591 in progress
+# BZ591 complete
 
 - Branch: `u9/BZ591`; starting commit: `cfcb63ad77e4fcb54dba96c8cadcf5a61bf62295`.
-- Assigned module: `WeilConjectures.AlgebraicGeometry.InjectiveExchangeTargetTransport`.
-- The import-only remote build fixed six errors; two public-statement Q/Qh endpoint errors remained.
-- The user instructed continuation after the exact public-statement proposal.
-  Applied `BZ591-public-statement-proposal.patch`: correct the preimageIso target to Plus.Qh,
-  insert the canonical mapped Q-to-Qh comparison, and normalize it in the proof.
-- Next: ucheck-bump, then direct importer InjectiveExchangeRepresentative and one more layer.
-- Fix patterns and build logs: `/home/ubuntu/u9/bz/FIXES-BZ591.md`.
+- Assigned module `WeilConjectures.AlgebraicGeometry.InjectiveExchangeTargetTransport`
+  passed ucheck-bump: rc=0, failed=0, 4238 jobs, target rebuilt in 48 seconds.
+- Validated source commit: `1b205aa47b4f9a3898adb9d6ac6a5fcd19ca7200`.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ591-unit3-full.log`.
+- The user instructed continuation after the exact public-statement proposal:
+  correct the preimageIso target to Plus.Qh and insert the canonical mapped Q-to-Qh comparison.
+  Imports restore private Q/Qh reduction; the proof normalizes the comparison using
+  the qualified CategoryTheory.Functor.map_id lemma with erw.
+- All other statements and existing docstrings remain unchanged.
+- Direct importer InjectiveExchangeRepresentative was tested and skipped because
+  BZ590-owned InjectiveExchangeSourceTransport fails in this branch. The assigned
+  module rebuilt green again in that check at `9871df5511606e8a59d6e780c66c01c21a5b2f54`.
+  No second layer was attempted past this unowned dependency.
+- Fix patterns, occurrence counts, and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ591.md`.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ591.DONE`.
+- This completion commit changes only progress documentation; Lean source matches the green build.
