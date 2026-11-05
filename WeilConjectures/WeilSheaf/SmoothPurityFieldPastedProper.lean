@@ -69,6 +69,7 @@ lemma purityFieldProperRestrictedExchange_hom :
     (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ πZ K.obj K.property) K
   dsimp +instances only [boundedConstructibleBaseChangeOfMap, Functor.comp_obj,
     Functor.comp_map] at he ⊢
-  simpa only [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id] using he.symm
+  simp only [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+  exact_mod_proofs he.symm
 
 end AlgebraicGeometry.ProEtale.CondensedRing
