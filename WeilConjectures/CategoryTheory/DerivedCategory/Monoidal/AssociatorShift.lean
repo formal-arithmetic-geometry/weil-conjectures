@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.ShiftUnitor
 public import WeilConjectures.Mathlib.Algebra.Homology.MonoidalShift
 public import WeilConjectures.Mathlib.CategoryTheory.Shift.CommShift
+import Mathlib.Util.CountHeartbeats
 
 /-!
 # The associator of the derived tensor product commutes with shifts
@@ -385,6 +386,7 @@ instance (X Y : DerivedCategory C) :
 
 variable {C}
 
+#count_heartbeats in
 lemma shiftTensorShiftIso_assoc_aux (K L M : DerivedCategory C) (b c : ℤ) :
     (((curriedTensor (DerivedCategory C)).obj K).commShiftIso b).hom.app L ▷ M⟦c⟧ ≫
       (((curriedTensor (DerivedCategory C)).flip.obj (M⟦c⟧)).commShiftIso b).hom.app (K ⊗ L) ≫
