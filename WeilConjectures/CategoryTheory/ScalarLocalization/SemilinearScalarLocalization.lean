@@ -343,7 +343,7 @@ theorem extension_comp (F : C ⥤ D) (J : D ⥤ E) [F.Additive] [J.Additive]
     (semilinear_composition t b φ h c ψ hψ F J hF hJ).1
     (F ⋙ J) (semilinear_composition t b φ h c ψ hψ F J hF hJ).2 K.obj L.obj f =
     extensionHom b c ψ hψ J hJ _ _ (extensionHom t b φ h F hF _ _ f)
-  induction f with
+  induction f using TensorProduct.inductionOn with
   | tmul a f =>
     rw [extensionHom_tmul, extensionHom_tmul, extensionHom_tmul, hc]
     rfl
@@ -385,7 +385,7 @@ theorem extension_id_and_linear :
     simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
     change extensionHom t t (RingHom.id R) _ (𝟭 C)
       (isSemilinear_of_linear (𝟭 C)) K.obj L.obj f = f
-    induction f with
+    induction f using TensorProduct.inductionOn with
     | tmul a f => rw [extensionHom_tmul, hc]; rfl
     | add f g hf hg => simp only [map_add, hf, hg]
   · intro J _ _
@@ -395,7 +395,7 @@ theorem extension_id_and_linear :
     simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
     change extensionHom t t (RingHom.id R) _ J
       (isSemilinear_of_linear J) K.obj L.obj f = mapHom R C t J _ _ f
-    induction f with
+    induction f using TensorProduct.inductionOn with
     | tmul a f => simp [hc, mapHom]
     | add f g hf hg => simp only [map_add, hf, hg]
 
@@ -446,9 +446,9 @@ private noncomputable def semilinearRationalComparison
     change Rationalization.tensorHomEquiv _ _ _ _ (1 ⊗ₜ[R] 𝟙 X.obj) = _
     simp
   map_comp {X Y Z} f g := by
-    induction f with
+    induction f using TensorProduct.inductionOn with
     | tmul a f =>
-      induction g with
+      induction g using TensorProduct.inductionOn with
       | tmul b g =>
         change Rationalization.tensorHomEquiv _ _ _ _
           (composition R C p _ _ _ (b ⊗ₜ[R] g) (a ⊗ₜ[R] f)) = _

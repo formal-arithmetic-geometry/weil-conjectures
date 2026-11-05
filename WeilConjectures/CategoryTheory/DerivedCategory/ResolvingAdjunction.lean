@@ -230,35 +230,19 @@ theorem exists_leftDerived_adjunction
     dsimp [ε, β]
     infer_instance
   · intro X K f
-    have hα : ε.app X = α.app (q.obj X) := by
-      dsimp [ε, β, i, j, DerivedCategory.quotientCompQhIso,
-        HomologicalComplexUpToQuasiIso.quotientCompQhIso]
-      simp only [Quotient.lift.isLift_hom,
-        Functor.mapHomotopyCategoryFactors, Category.id_comp]
-      change L.map (𝟙 _) ≫ (𝟙 _ ≫ α.app (q.obj X)) ≫
-        𝟙 _ ≫ DerivedCategory.Qh.map (𝟙 _) ≫ 𝟙 _ = _
-      simp only [Functor.map_id, Category.id_comp, Category.comp_id]
-      exact Category.comp_id _
-    have hfac : R.mapDerivedCategoryFactorsh.hom.app
-        ((HomotopyCategory.quotient B (.up ℤ)).obj K) =
-        R.mapDerivedCategoryFactors.hom.app K := by
-      rw [R.mapDerivedCategoryFactorsh_hom_app]
-      simp only [DerivedCategory.quotientCompQhIso,
-        HomologicalComplexUpToQuasiIso.quotientCompQhIso,
-        Quotient.lift.isLift_hom, Quotient.lift.isLift_inv,
-        Functor.mapHomotopyCategoryFactors]
-      change R.mapDerivedCategory.map (𝟙 _) ≫ _ ≫ 𝟙 _ ≫
-        DerivedCategory.Qh.map (𝟙 _) = _
-      simp only [Functor.map_id, Category.id_comp, Category.comp_id]
+    have hα : ε.app X = L.map (i.inv.app X) ≫ α.app (q.obj X) ≫
+        (DerivedCategory.quotientCompQhIso B).hom.app
+          ((E.mapHomologicalComplex (.up ℤ)).obj X) := by
+      simp [ε, β, j, Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_hom]
     have hfac' : R.mapDerivedCategoryFactorsh.inv.app
-        ((HomotopyCategory.quotient B (.up ℤ)).obj K) =
-        R.mapDerivedCategoryFactors.inv.app K := by
-      apply (cancel_mono (R.mapDerivedCategoryFactors.hom.app K)).1
-      rw [← hfac]
-      simp only [Iso.inv_hom_id_app]
-      rw [hfac]
-      simp only [Iso.inv_hom_id_app]
-      rfl
+        ((HomotopyCategory.quotient B (.up ℤ)).obj K) ≫
+          R.mapDerivedCategory.map ((DerivedCategory.quotientCompQhIso B).hom.app K) =
+        i.hom.app ((R.mapHomologicalComplex (.up ℤ)).obj K) ≫
+          R.mapDerivedCategoryFactors.inv.app K := by
+      apply (cancel_epi (R.mapDerivedCategoryFactorsh.hom.app
+        ((HomotopyCategory.quotient B (.up ℤ)).obj K))).1
+      rw [Iso.hom_inv_id_app_assoc, R.mapDerivedCategoryFactorsh_hom_app]
+      simp [i, Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv]
     have hequiv : (a.mapHomotopyCategory (.up ℤ)).homEquiv
         (q.obj X) ((HomotopyCategory.quotient B (.up ℤ)).obj K)
         ((HomotopyCategory.quotient B (.up ℤ)).map f) =
@@ -267,9 +251,14 @@ theorem exists_leftDerived_adjunction
       change q.map _ ≫ q.map _ = q.map _
       rw [← q.map_comp]
       rfl
-    rw [hα]
     have hh := hd (q.obj X) ((HomotopyCategory.quotient B (.up ℤ)).obj K)
       ((HomotopyCategory.quotient B (.up ℤ)).map f)
-    rw [hequiv, hfac'] at hh
-    exact hh
+    rw [hequiv] at hh
+    rw [hα]
+    simp only [Category.assoc]
+    rw [← DerivedCategory.quotientCompQhIso_hom_naturality f,
+      ← Category.assoc (α.app (q.obj X)), d.homEquiv_naturality_left,
+      d.homEquiv_naturality_right, hh]
+    simp only [Category.assoc, hfac', Iso.inv_hom_id_app_assoc,
+      ← DerivedCategory.quotientCompQhIso_inv_naturality_assoc]
 end CategoryTheory.Adjunction
