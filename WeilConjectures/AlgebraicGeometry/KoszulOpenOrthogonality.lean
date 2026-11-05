@@ -21,3 +21,13 @@ import WeilConjectures.AlgebraicGeometry.KoszulRestrictionZero
 Source: Stacks Project, Lemma 36.15.2, Tag 09IR
 (blueprint: lem-pc-perfect-generation-koszul-orthogonal).
 -/
+
+@[expose] public section
+
+universe u₁ w₁
+
+open CategoryTheory TopologicalSpace
+
+namespace AlgebraicGeometry
+
+end AlgebraicGeometry
