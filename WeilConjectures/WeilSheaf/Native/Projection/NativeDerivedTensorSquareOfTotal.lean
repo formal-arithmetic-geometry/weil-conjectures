@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.WeilSheaf.Native.Projection.DerivedSquareFromModels
+public import WeilConjectures.WeilSheaf.Native.Projection.CochainTensorNormalization
+public import WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareOfRepresentatives
 public import WeilConjectures.WeilSheaf.Native.Projection.TotalSquareToModel
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeModelNormalization
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeTensorTotalInstances
@@ -136,10 +138,7 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
           WZ, WU, cZ, cU, LP, LT, FP, FT]
         dsimp only [Functor.comp_obj, Functor.prod_obj, Functor.uncurry_obj_obj,
           curriedTensor_obj_obj, MonoidalCategory.tensor_obj] at ht ⊢
-        dsimp only [curriedTensor, Mod.monoidalCategoryCochainComplex,
-          HomologicalComplex.monoidalCategory, Monoidal.induced,
-          HomologicalComplex.monoidalCategoryStruct, HomologicalComplex.tensorObj,
-          Functor.map₂CochainComplex, Functor.map₂HomologicalComplex] at ht ⊢
+        simp only [projection_curriedTensorCochain_eq] at ht ⊢
         with_reducible_and_instances exact_mod_proofs ht)
       (by
         have hh := projection_condensed_model_normalization k₀ l Y P T hP hT
@@ -171,42 +170,7 @@ representatives by naturality. -/
 lemma condensedRealizationTensor_pull_square_of_total
     (M N : DerivedCategory (ProEtaleWeilSheaf k₀ l Y)) :
     DerivedPullTensorSquare k₀ l g M N := by
-  projection_strict
-    unfold DerivedPullTensorSquare PullTensorSquareWithComparison
-    simp only [Iso.symm_inv]
-    let R := CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
-      (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))
-    let c : Functor.uncurry.obj (curriedTensor _) ⋙ R.mapDerivedCategory ≅
-        R.mapDerivedCategory.prod R.mapDerivedCategory ⋙
-          Functor.uncurry.obj (curriedTensor _) :=
-      NatIso.ofComponents
-        (fun MN ↦ asIso ((R.mapDerivedCategoryTensorComparison.app MN.1).app MN.2))
-        (fun fg ↦ by
-          simpa only [asIso_hom, Functor.comp_map, Functor.prod_map, Functor.uncurry_obj_map,
-            curriedTensor_map_app, curriedTensor_obj_map, ← MonoidalCategory.tensorHom_def] using
-            R.projection_mapDerivedCategoryTensorComparison_naturality fg.1 fg.2)
-    have h := Adjunction.tensorSquare_of_representatives DerivedCategory.Q.obj
-      (NativeIsKFlat k₀ l Y) (native_two_sided_kflat_representatives k₀ l Y)
-      (nativeOpenPull k₀ l g) (derivedCondensedRealization k₀ l Z)
-      (derivedCondensedRealization k₀ l Y) R.mapDerivedCategory
-      (nativeDerivedTensor k₀ l Y) (nativeDerivedTensor k₀ l Z)
-      (Functor.uncurry.obj (curriedTensor _)) (Functor.uncurry.obj (curriedTensor _))
-      (nativePullTensor k₀ l g) (condensedRealizationTensor k₀ l Z)
-      (condensedRealizationTensor k₀ l Y)
-      (Functor.mapDerivedCategorySquareIso (condensedRealizationUpperStarIso k₀ l g).symm) c
-      (fun P T hP hT ↦ by
-        have hQ := condensedRealizationTensor_pull_square_Q_of_total k₀ l g htotal P T hP hT
-        dsimp only [DerivedPullTensorSquare, PullTensorSquareWithComparison] at hQ
-        simp only [Iso.symm_inv] at hQ
-        simp only [c, NatIso.ofComponents_hom_app, asIso_hom,
-          Functor.uncurry_obj_map, curriedTensor_map_app,
-          curriedTensor_obj_map, ← MonoidalCategory.tensorHom_def]
-        dsimp only [R]
-        exact_mod_proofs hQ) M N
-    simp only [c, NatIso.ofComponents_hom_app, asIso_hom,
-      Functor.uncurry_obj_map, curriedTensor_map_app,
-      curriedTensor_obj_map, ← MonoidalCategory.tensorHom_def] at h
-    dsimp only [R] at h
-    exact_mod_proofs h
+  exact projection_derived_square_of_representatives k₀ l g
+    (condensedRealizationTensor_pull_square_Q_of_total k₀ l g htotal) M N
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
