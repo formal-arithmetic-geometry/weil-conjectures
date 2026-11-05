@@ -6,6 +6,8 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorProduct
 public import WeilConjectures.AlgebraicGeometry.DerivedPullbackMonoidalDescent
 public import Mathlib.Algebra.Homology.Localization

@@ -257,14 +257,13 @@
 - Next: remote ucheck-bump on the assigned module, then both direct importers.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ864 in progress
+# BZ877 in progress
 
-- Branch: `u9/BZ864`; baseline `e167a50a4`.
-- The original missing open-comparison helper was pruned while its affine-chart caller remains.
-- First proof replacement exposed two upstream failures; user instructed continuation to green.
-- Restoring the referenced degree-zero open comparison chain with original signatures.
-- The assigned theorem now uses the degree-zero pinned square and target automorphisms.
-- No existing theorem statement changes, proof placeholders, or heartbeat increases.
-- All compilation is remote through `ucheck-bump`; builds 3 and 4 are queued.
-- Fix records and restoration inventories: `/home/ubuntu/u9/bz/FIXES-BZ864.md`.
-- Next: repair errors reported by those builds, validate the leaf, then continue downstream.
+- Branch: `u9/BZ877`; baseline: `e167a50a4`.
+- The user instructed continuation after the explicit two-cast proposal in the public hμ assumption.
+- Applied exactly `BZ877-proposed-statement-casts.patch`, plus Localization public/implementation imports.
+- Reviewed pinned Mathlib b63f6e8a: Qh is no_expose; reflexive casts preserve the counit morphisms.
+- Current source commit: `7a6c2085b`; existing `ucheck-bump` is queued.
+- Next: validate DerivedPullbackTensorUnit, then DerivedPullbackMonoidalDescent and later importers.
+- Patterns and exact diagnostic: `/home/ubuntu/u9/bz/FIXES-BZ877.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, deletions, or heartbeat changes.
