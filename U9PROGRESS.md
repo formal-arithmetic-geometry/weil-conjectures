@@ -81,14 +81,24 @@
 - No local Lean/Lake, proof placeholders, trust escapes, or heartbeat increases.
 - This final commit changes only progress documentation after the successful build.
 
-# BZ279 in progress
+# BZ279 complete
 
 - Branch: `u9/BZ279`; starting commit: `18e44f2d5127c179f285ccf7d988c2bf3963106e`.
 - Assigned module: `WeilConjectures.AlgebraicGeometry.Curve.MateProjectionData`.
-- Baseline `ucheck-bump` passed every dependency and failed only on the malformed `.symm`.
+- The assigned module passed `ucheck-bump`: rc=0, failed=0, 4218 jobs.
+- Tested source commit: `0f6ab9a67eeba73ca365a57b0b34e20a127fed10`.
+  It rebuilt successfully again at `20620dba643c636d3204f34416f596e346082dc3`.
 - The user instructed continuation after the exact two-site structure-field compatibility
-  proposal. That patch is now applied: `.symm` follows both functor arguments in
-  `transition`, and the reversed Mathlib compositor is inverted in `restriction`.
-- Next: validate the assigned module, check direct importers, then write the DONE marker.
-- Fix patterns, counts, and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ279.md`.
+  proposal. Applied that patch: `.symm` follows both functor arguments in `transition`,
+  and the reversed Mathlib compositor is inverted in `restriction`.
+  These are the only Lean source edits; hypotheses and intended maps are preserved.
+- Full green log: `/home/ubuntu/u9/bz/BZ279-build-repair-full.log`.
+- Built four direct importers as required. All seven direct importers depend on the
+  outside-unit failure in `EtaleSectionsRestrictionSquare.lean:111`. The downstream
+  build also failed in `StrictLocalMateProjectionData.lean:121`. Skipped the blocked
+  importers and second layer under the brief's explicit skip rule. No extra modules
+  are claimed green. Full log: `/home/ubuntu/u9/bz/BZ279-build-downstream-full.log`.
+- Fix patterns, counts, and exact errors: `/home/ubuntu/u9/bz/FIXES-BZ279.md`.
+- Completion marker: `/home/ubuntu/u9/state/BZ279.DONE`.
 - No local Lean/Lake execution, proof escapes, profiler probes, or heartbeat increases.
+- This final commit updates progress documentation only after the successful source build.
