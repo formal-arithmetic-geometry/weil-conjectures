@@ -23,6 +23,11 @@ open Scheme PadicAlgCl CondensedRing
 variable {X : Scheme.{u}} {ℓ : ℕ} [Fact ℓ.Prime]
   {E : Type} [Field E] [Algebra E (PadicAlgCl ℓ)]
 
+/-- The geometric pullback on a finite coefficient category. This named functor avoids
+reconstructing its derived tensor-category instances at each specialization. -/
+noncomputable def purityFiniteGeometricPullback (g : X ⟶ X) (n : ℕ) :=
+  L((g)^*⟦Profinite.integersModPowRingObj ℓ E n⟧)
+
 /-- The Weil equation at a finite geometric reduction. Naming it keeps applications
 from repeatedly elaborating the geometric and coefficient derived functors. -/
 def PurityGeometricReductionWeilCondition (g : X ⟶ X)
