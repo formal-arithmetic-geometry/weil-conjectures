@@ -6,7 +6,6 @@ Authors: Bin Wu
 module
 
 public import Mathlib.Algebra.Homology.Localization
-import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantRingOperations
 public import WeilConjectures.Algebra.Homology.CanonicalTensorPullbackOfUniverses.RingedTopoiCanonicalTensorPullbackOfUniverses
 public import WeilConjectures.Algebra.Homology.Strict.StrictPerfectCoefficientPackageOfUniverses
@@ -80,8 +79,11 @@ def derivedComparison (H : CochainComplex (proEtaleRingModules X S) ℤ) :
     DerivedCategory.Q.obj
         (((proEtaleRingModuleDirectImage f R S c).mapHomologicalComplex (.up ℤ)).obj H) ⟶
       (proEtaleRingDerivedDirectImage f R S c).obj (DerivedCategory.Q.obj H) :=
-  (proEtaleRingModuleDirectImage f R S c).rightDerivedFunctorUnit.app
-    ((HomotopyCategory.quotient _ (.up ℤ)).obj H)
+  (DerivedCategory.quotientCompQhIso (proEtaleRingModules Y R)).inv.app _ ≫
+    (proEtaleRingModuleDirectImage f R S c).rightDerivedFunctorUnit.app
+      ((HomotopyCategory.quotient _ (.up ℤ)).obj H) ≫
+    (proEtaleRingDerivedDirectImage f R S c).map
+      ((DerivedCategory.quotientCompQhIso (proEtaleRingModules X S)).hom.app H)
 
 /-- Flat-term K-flat coefficient models, the K-injective target total, and the
 invertible right-derived comparisons.
@@ -133,8 +135,8 @@ theorem model_properties
   let := hJ
   exact ⟨proEtaleStrictPerfect_flat R F package bounded,
     proEtaleStrictPerfect_flat S _ package' bounded', hJ,
-    proEtaleRingDerivedDirectImage_kInjective f R S c I,
-    proEtaleRingDerivedDirectImage_kInjective f R S c _⟩
+    by dsimp only [derivedComparison]; infer_instance,
+    by dsimp only [derivedComparison]; infer_instance⟩
 
 variable (a : ProEtaleTensorModel Y R) (b : ProEtaleTensorModel X S)
   (K : DerivedCategory (proEtaleRingModules X S))
