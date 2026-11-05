@@ -28,7 +28,6 @@ namespace SheafOfModules.OpenTensorNormalization
 variable {KX KU KR KS DX DU DR DS : Type*} [Category KX] [Category KU] [Category KR]
   [Category KS] [Category DX] [Category DU] [Category DR] [Category DS]
 
-set_option linter.style.longLine false in
 /-- Cancellation of the cochain model equations in the representative square, abstractly:
 `QX, QU, QR, QS` are the localizations, `xc, uc, fc, lc` the complex-level realizations,
 pullback and restriction, `x, y, a, b` their localization factorizations, `tXd, tUd` the

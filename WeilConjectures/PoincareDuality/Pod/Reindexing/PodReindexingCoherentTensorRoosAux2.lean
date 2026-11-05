@@ -48,6 +48,9 @@ theorem bifunctor_map_mkHom_comp₃ {C D B : Type*} [Category* C] [Category* D] 
   rfl
 
 set_option maxHeartbeats 1000000 in
+-- Without this, the unifier unfolds `integralOperationsRoos` into mapping cocones when comparing
+-- `integralOperationsRoosFunctor.obj` with `integralOperationsTensorComplexFunctor.obj`.
+attribute [local irreducible] integralOperationsRoos in
 -- Unifying the pasting lemma with the reference realizations unfolds large functor objects.
 /-- The derived part of the strict Roos normalization: if the coherent system tensor
 comparison is localized from an actual chain map `σ`, and the tower map induced by `σ`
