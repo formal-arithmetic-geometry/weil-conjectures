@@ -7,6 +7,7 @@ module
 public import WeilConjectures.WeilSheaf.SmoothPurityIntegralTateRationalDerived
 public import WeilConjectures.WeilSheaf.SmoothPurityCoefficientPullShift
 public import WeilConjectures.WeilSheaf.SmoothPurityShiftDatumSquare
+public import WeilConjectures.WeilSheaf.SmoothPurityDerivedFunctorShift
 
 /-! # Rationalization of shifted integral Tate data -/
 
@@ -49,17 +50,19 @@ lemma upperStarShiftIntegralTateTwistDerivedIso_hom_comp_rationalization
           (purityExtendScalarsShiftIntegralTateIso ℓ E f d n).hom ≫
         (upperStarShiftTateTwistDerivedIso ℓ g f d n).hom := by
   have h := purity_shift_datum_square
-    L((g)^*⟦Profinite.padicIntegersRingObj ℓ E⟧)
-    L(Mod.extendScalars (coefficientMap (Profinite.padicIntegersRingObjToPadicAlgCl ℓ E) X'))
-    L(Mod.extendScalars (coefficientMap (Profinite.padicIntegersRingObjToPadicAlgCl ℓ E) X))
-    L((g)^*⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (purityDerivedPullback (Profinite.padicIntegersRingObj ℓ E) g)
+    (purityDerivedCoefficientExtension (Profinite.padicIntegersRingObjToPadicAlgCl ℓ E) X')
+    (purityDerivedCoefficientExtension (Profinite.padicIntegersRingObjToPadicAlgCl ℓ E) X)
+    (purityDerivedPullback (Profinite.padicAlgClRingObj ℓ) g)
     (derivedUpperStarExtendScalarsIso (Profinite.padicIntegersRingObjToPadicAlgCl ℓ E) g).inv
     (upperStarIntegralTateTwistDerivedIso ℓ E g f d).hom
     (upperStarTateTwistDerivedIso ℓ g f d).hom
     (purityExtendScalarsIntegralTateIso ℓ E f d).hom
     (purityExtendScalarsIntegralTateIso ℓ E (g ≫ f) d).hom
     (upperStarIntegralTateTwistDerivedIso_hom_comp_rationalization ℓ E g f d) n
-  simpa only [upperStarShiftIntegralTateTwistDerivedIso, upperStarIntegralTateTwistDerivedIso,
+  simpa only [purityDerivedCoefficientExtension, purityDerivedPullback,
+    purityDerivedCoefficientExtension_commShift, purityDerivedPullback_commShift,
+    upperStarShiftIntegralTateTwistDerivedIso, upperStarIntegralTateTwistDerivedIso,
     purityExtendScalarsShiftIntegralTateIso, upperStarShiftTateTwistDerivedIso,
     Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Functor.map_comp, Category.assoc] using h
 
