@@ -141,3 +141,18 @@
 - Existing `ucheck-bump` invocation is queued; it reads the pushed branch after
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+# BZ584 in progress
+
+- Branch: `u9/BZ584`; starting source commit: `7b0df24fff`.
+- Reread the brief and this file on resumption; the brief has no new LEAD lines.
+- The user instructed continuation after the explicit two-statement API proposal.
+  Applied the exact `.inv` -> `.hom` and `.hom` -> `.inv` substitutions in
+  `mapDerivedCategoryCompIso_inv_app_Q` and `mapDerivedCategoryCompIso_hom_app_Q`.
+- These restore the original maps under Mathlib's reversed composition isomorphism.
+  Both proofs are updated; all other statements and existing docstrings are unchanged.
+- Next: remote validation of the assigned module and then its three direct importers.
+- Pinned API inspected at b63f6e8a; current remote next-units notes omit this unit,
+  so the supplied assignment and earlier BZ160 fix remain applicable.
+- Fix patterns and baseline logs: `/home/ubuntu/u9/bz/FIXES-BZ584.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or limit increases.
