@@ -265,7 +265,7 @@ theorem geometricCoefficientPullbackMate_isIso [PreservesFiniteLimits uInv]
     {m n : ℕ} (h : n ≤ m) :
     IsIso ((mateEquiv (A.scalar h).adjunction (target.scalar h).adjunction).symm
       (TwoSquare.mk _ _ _ _
-        (((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+        ((Functor.mapDerivedCategoryCompIso _ _ ≪≫
           Functor.mapDerivedCategoryNatIso (O.restrictionPullback h) ≪≫
             (Functor.mapDerivedCategoryCompIso _ _).symm).hom))).natTrans := by
   classical
