@@ -26,7 +26,7 @@ theorem purity_compose_pullback_cubes (P : C ⥤ D)
     (hread : p ≫ q ≫ P.map d = r ≫ s ≫ t) :
     p ≫ q ≫ P.map a ≫ P.map b ≫ P.map c =
       r ≫ s ≫ t ≫ P.map e ≫ P.map f := by
-  rw [← P.map_comp_assoc b c, ← P.map_comp_assoc a (b ≫ c), hred]
+  rw [← P.map_comp b c, ← P.map_comp a (b ≫ c), hred]
   simp only [Functor.map_comp, Category.assoc]
   rw [reassoc_of% hread]
 
