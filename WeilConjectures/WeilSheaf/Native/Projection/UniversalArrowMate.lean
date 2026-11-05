@@ -38,8 +38,9 @@ lemma isIso_mateEquiv_app_of_universalArrow (α : TwoSquare U L L' V)
   have : IsIso (adj.homEquiv A B d) := adj.isIso_homEquiv_of_bijective d hd
   have h : U.map (adj.homEquiv A B d) ≫ (mateEquiv adj adj' α).app B = e.hom := by
     apply (adj'.homEquiv _ _).symm.injective
-    rw [Adjunction.homEquiv_symm_map_comp_app]
-    simpa only [Equiv.symm_apply_apply, Adjunction.homEquiv_counit] using he
+    rw [Adjunction.homEquiv_symm_map_comp_app adj adj' (mateEquiv adj adj' α),
+      Equiv.symm_apply_apply, Equiv.symm_apply_apply, Adjunction.homEquiv_counit]
+    exact he
   have : IsIso (U.map (adj.homEquiv A B d) ≫ (mateEquiv adj adj' α).app B) := by
     rw [h]
     infer_instance

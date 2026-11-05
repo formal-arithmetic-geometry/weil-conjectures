@@ -143,25 +143,29 @@ variable {A B A' B' : Type a} [Category.{b} A] [Category.{b} B]
 are fully faithful and forgetting carries extensions into extensions. -/
 theorem isIso_inverseMate_of_extension_image
     [IsIso adj.unit] [IsIso adj'.unit] (M : A) (N : A') (e : FB.obj (E.obj M) ≅ E'.obj N) :
-    IsIso (((mateEquiv adj adj').symm eR.hom).app M) := by
+    IsIso (((mateEquiv adj adj').symm (TwoSquare.mk _ _ _ _ eR.hom)).app M) := by
   have : IsIso (adj'.counit.app (E'.obj N)) :=
     adj'.isIso_counit_app_obj_of_isIso_unit_app N
   have : IsIso (adj'.counit.app (FB.obj (E.obj M))) :=
     adj'.isIso_counit_app_of_iso' e.symm
-  change IsIso (E'.map (FA.map (adj.unit.app M) ≫ eR.hom.app (E.obj M)) ≫
-    adj'.counit.app (FB.obj (E.obj M)))
+  simp only [mateEquiv_symm_apply, NatTrans.comp_app, Functor.leftUnitor_inv_app,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.associator_hom_app,
+    Functor.associator_inv_app, Functor.rightUnitor_hom_app, Functor.comp_map,
+    Functor.id_obj, Functor.comp_obj, Category.id_comp, Category.comp_id]
   infer_instance
 
 /-- The inverse mate satisfies the open unit square by construction. -/
 theorem compactProjectionOpen_unitSquare_of_inverseMate
-    [IsIso ((mateEquiv adj adj').symm eR.hom).natTrans] :
+    [IsIso ((mateEquiv adj adj').symm (TwoSquare.mk _ _ _ _ eR.hom)).natTrans] :
     compactProjectionOpen_unitSquare adj adj' FA FB
-      (asIso ((mateEquiv adj adj').symm eR.hom).natTrans).symm eR := by
+      (asIso ((mateEquiv adj adj').symm (TwoSquare.mk _ _ _ _ eR.hom)).natTrans).symm eR := by
   intro M
-  have h := unit_mateEquiv_symm adj adj' eR.hom M
-  rw [← h]
-  simp only [Iso.symm_hom, asIso_inv, Category.assoc, ← Functor.map_comp,
-    IsIso.hom_inv_id, Functor.map_id, Category.comp_id]
+  let e := asIso ((mateEquiv adj adj').symm (TwoSquare.mk _ _ _ _ eR.hom)).natTrans
+  change FA.map (adj.unit.app M) ≫ eR.hom.app (E.obj M) ≫ R'.map (e.inv.app M) = _
+  have h := unit_mateEquiv_symm adj adj' (TwoSquare.mk _ _ _ _ eR.hom) M
+  rw [← Category.assoc, h, Category.assoc, ← R'.map_comp]
+  change adj'.unit.app (FA.obj M) ≫ R'.map (e.hom.app M ≫ e.inv.app M) = _
+  simp only [Iso.hom_inv_id_app, Functor.map_id, Category.comp_id]
 
 end InverseMate
 
