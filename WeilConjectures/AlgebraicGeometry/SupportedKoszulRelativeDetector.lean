@@ -224,7 +224,7 @@ theorem exists_supported_koszul_relative_detector
       have hz : IsZero (e.functor.obj
           ((SheafOfModules.overFunctor.{u}
             (moduleRings X.toRingedSpace) (V : X.Opens)).mapDerivedCategory.obj C.obj)) :=
-        hzV.of_iso ((Functor.mapDerivedCategoryCompIso _ _).app C.obj)
+        hzV.of_iso ((Functor.mapDerivedCategoryCompIso _ _).symm.app C.obj)
       apply (IsZero.iff_id_eq_zero _).mpr
       apply e.functor.map_injective
       exact hz.eq_of_src _ _
