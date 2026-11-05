@@ -268,8 +268,9 @@ theorem finiteEtale_adic_sections_kernel
   let : IsFinite P.obj.hom := P.property
   let : Etale P.obj.hom := P.obj.prop
   let : (Modules.unit P.obj.left).IsFiniteLocallyFree :=
-    inferInstanceAs (SheafOfModules.IsFiniteLocallyFree.{u, u, u}
-      (SheafOfModules.unit P.obj.left.ringCatSheaf))
+    SheafOfModules.IsInvertible.isFiniteLocallyFree
+      (SheafOfModules.unit P.obj.left.ringCatSheaf)
+      (h := SheafOfModules.instIsInvertibleUnit.{u, u, u})
   let : E.IsFiniteLocallyFree :=
     Modules.isFiniteLocallyFree_pushforward P.obj.hom (Modules.unit P.obj.left)
   obtain ⟨r, α, hα, hC, hαpb⟩ := Modules.exists_universally_mono_free V E
