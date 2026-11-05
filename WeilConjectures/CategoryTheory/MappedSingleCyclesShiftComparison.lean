@@ -100,18 +100,6 @@ theorem mappedSingle_cycles_shift_comparison (X : B) (n : ℕ) :
       DerivedCategory.Plus.homologyFunctorObjQIso, ObjectProperty.ι_obj,
       Iso.trans_hom, Iso.app_hom, SC]
     rw [DerivedCategory.singleFunctorsPostcompQIso_inv_hom]
-    change _ ≫ _ ≫ (DerivedCategory.homologyFunctor C n).map (𝟙 _) ≫
-      (DerivedCategory.homologyFunctorFactorsh C n).hom.app
-        ((HomotopyCategory.quotient C (.up ℤ)).obj SC.obj) ≫ _ = _
-    rw [Functor.map_id, Category.id_comp,
-      DerivedCategory.homologyFunctorFactorsh_hom_app_quotient_obj]
-    have hq : (DerivedCategory.quotientCompQhIso C).hom.app SC.obj = 𝟙 _ := rfl
-    rw [hq, Functor.map_id, Category.id_comp]
-    simp only [Category.assoc]
-    change _ ≫ (DerivedCategory.homologyFunctorFactors C n).inv.app SC.obj ≫
-      (DerivedCategory.homologyFunctorFactors C n).hom.app SC.obj ≫
-      (HomotopyCategory.homologyFunctorFactors C (.up ℤ) n).inv.app SC.obj ≫
-      (HomotopyCategory.homologyFunctorFactors C (.up ℤ) n).hom.app SC.obj = _
     simp
   have hsingle' : (DerivedCategory.Plus.homologyFunctorObjQIso SC n).inv ≫
       (DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso n).hom.app (G.obj X) =
