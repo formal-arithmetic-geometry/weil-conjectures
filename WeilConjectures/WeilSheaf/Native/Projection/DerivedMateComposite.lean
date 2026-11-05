@@ -74,8 +74,11 @@ lemma rightDerivedFunctorCommIso_isoHComp_inv_app
   have h := rightDerivedFunctorCommIso_hom_app_comp β₂ β₁
     (Functor.isoHComp β₁.symm β₂.symm).symm (Iso.refl _) (Iso.refl _)
     (fun K ↦ by simp [Functor.isoHComp]) M
-  simpa only [mapDerivedCategoryNatIso_refl, Iso.trans_refl, Iso.symm_inv, Iso.symm_hom]
-    using h
+  have hU : mapDerivedCategoryNatIso (Iso.refl (U₁ ⋙ U₂)) = Iso.refl _ :=
+    Iso.ext mapDerivedCategoryNatIso_refl
+  have hV : mapDerivedCategoryNatIso (Iso.refl (V₁ ⋙ V₂)) = Iso.refl _ :=
+    Iso.ext mapDerivedCategoryNatIso_refl
+  simpa only [hU, hV, Iso.trans_refl, Iso.symm_inv, Iso.symm_hom] using h
 
 end Functor
 
