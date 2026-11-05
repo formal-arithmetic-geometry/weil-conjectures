@@ -38,7 +38,8 @@ lemma homObjMap_add_left (f f' : M' ⟶ M) (g : N ⟶ N') :
 
 lemma homObjMap_zero_left (g : N ⟶ N') : homObjMap (0 : M' ⟶ M) g = 0 := by
   ext X φ : 3
-  exact Limits.zero_comp (X := (restrictOver R X.unop).obj M')
+  exact congrArg (fun ψ ↦ ModuleCat.Hom.hom ψ φ)
+    (Limits.zero_comp (X := (restrictOver R X.unop).obj M'))
 
 lemma restrictOver_smul_app_apply {M P : PresheafOfModules.{v} (R ⋙ forget₂ _ _)}
     {U : C} (r : R.obj (op U)) (φ : (restrictOver R U).obj M ⟶ (restrictOver R U).obj P)

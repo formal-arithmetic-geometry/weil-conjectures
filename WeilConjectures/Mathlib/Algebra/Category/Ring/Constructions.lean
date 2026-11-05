@@ -162,7 +162,8 @@ lemma IsPushout.closure_range_union_eq_top {R A B P : CommRingCat.{u}} {f : R �
       ⊤ := by
     rw [eq_top_iff]
     rintro x -
-    induction x with
+    induction x using TensorProduct.induction_on with
+    | zero => exact zero_mem _
     | tmul a b =>
       rw [← mul_one a, ← one_mul b, ← Algebra.TensorProduct.tmul_mul_tmul]
       exact mul_mem (Subring.subset_closure (Or.inl ⟨a, rfl⟩))

@@ -33,7 +33,7 @@ private lemma exactComparison_inv (F : C ⥤ D) [F.Additive]
     (K : HomotopyCategory.Plus C) :
     F.rightDerivedFunctorPlusIsoMapDerivedCategoryPlus.inv.app
         (_root_.DerivedCategory.Plus.Qh.obj K) =
-      F.mapDerivedCategoryPlusFactorsh.hom.app K ≫ F.rightDerivedFunctorPlusUnit.app K := by
+      F.mapDerivedCategoryPlusFactorsh.hom.app K ≫ F.rightDerivedFunctorPlusUnith.app K := by
   apply (cancel_mono (F.rightDerivedFunctorPlusIsoMapDerivedCategoryPlus.hom.app
     (_root_.DerivedCategory.Plus.Qh.obj K))).mp
   have h := congr_app F.rightDerivedFunctorPlusIsoMapDerivedCategoryPlus_hom_fac K
@@ -55,7 +55,7 @@ private lemma exactDerived_fac (τ : F ⟶ G) (K : HomotopyCategory.Plus C) :
     Functor.rightDerivedFunctorPlusNatTrans_app_assoc]
   have h := congr_app G.rightDerivedFunctorPlusIsoMapDerivedCategoryPlus_hom_fac K
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app] at h
-  rw [← Category.assoc (G.rightDerivedFunctorPlusUnit.app K), h]
+  rw [← Category.assoc (G.rightDerivedFunctorPlusUnith.app K), h]
   simp only [Functor.comp_obj, Iso.inv_hom_id_app, Category.comp_id]
 
 end ExactComparisons

@@ -50,7 +50,7 @@ noncomputable def resolutionDerivedIso
   have : ∀ n, Injective (L.obj.X n) := fun n ↦
     inferInstanceAs (Injective (I.cochainComplex.X n))
   F.rightDerivedFunctorPlus.mapIso (resolutionAugmentationIso I) ≪≫
-    (asIso (F.rightDerivedFunctorPlusUnit.app
+    (asIso (F.rightDerivedFunctorPlusUnith.app
       ((HomotopyCategory.Plus.quotient A).obj L))).symm
 
 /-- Canonical comparison with the extension of the natural-number-indexed complex F(I).

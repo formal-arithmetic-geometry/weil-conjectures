@@ -55,7 +55,7 @@ noncomputable def boundedBelowInjectiveComparison
         (DerivedCategory.Plus.Q.obj K) ⟶
       DerivedCategory.Q.obj ((v.mapHomologicalComplex (.up ℤ)).obj K.obj) :=
   DerivedCategory.Plus.ι.map
-      (inv (v.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient A).obj K))) ≫
+      (inv (v.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.quotient A).obj K))) ≫
     (DerivedCategory.quotientCompQhIso B).hom.app _
 
 /-- Lift the canonical SES boundary through the full inclusion of the bounded
@@ -114,7 +114,7 @@ theorem rightDerived_injectiveComplex_boundary
   let q := HomotopyCategory.Plus.quotient A
   let F := (v.mapHomotopyCategoryPlus ⋙ DerivedCategory.Plus.Qh) ⋙ DerivedCategory.Plus.ι
   let G := (DerivedCategory.Plus.Qh ⋙ v.rightDerivedFunctorPlus) ⋙ DerivedCategory.Plus.ι
-  let τ : F ⟶ G := Functor.whiskerRight v.rightDerivedFunctorPlusUnit
+  let τ : F ⟶ G := Functor.whiskerRight v.rightDerivedFunctorPlusUnith
     DerivedCategory.Plus.ι
   have hτ : NatTrans.CommShift τ ℤ := by
     dsimp [τ, F, G]
@@ -153,9 +153,9 @@ theorem rightDerived_injectiveComplex_boundary
       ShiftedHom.map (ShiftedHom.map f DerivedCategory.Plus.Qh)
           (v.rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.ι) ≫
         (DerivedCategory.Plus.ι.map
-          (inv (v.rightDerivedFunctorPlusUnit.app (q.obj H.X₁)) ))⟦(1 : ℤ)⟧' =
+          (inv (v.rightDerivedFunctorPlusUnith.app (q.obj H.X₁)) ))⟦(1 : ℤ)⟧' =
       DerivedCategory.Plus.ι.map
-          (inv (v.rightDerivedFunctorPlusUnit.app (q.obj H.X₃))) ≫
+          (inv (v.rightDerivedFunctorPlusUnith.app (q.obj H.X₃))) ≫
         ShiftedHom.map f F := by
     have hn := inverse_shifted_naturality τ f
     simpa only [ShiftedHom.map, F, G, τ, Functor.whiskerRight_app,

@@ -61,7 +61,7 @@ theorem rhom_injective_cocycle_map_bijective
             exact hf⟩)
         let b := (DerivedCategory.Plus.homologyFunctorObjQIso
           (V.mapCochainComplexPlus.obj I) n).inv a
-        let η := V.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient C).obj I)
+        let η := V.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.quotient C).obj I)
         β ((H n).map η b) =
           ShiftedHom.map (Cocycle.equivHomShift.symm
               (Cocycle.fromSingleMk f (zero_add n) (n + 1) rfl hf)) DerivedCategory.Q ≫
@@ -97,7 +97,7 @@ theorem rhom_injective_cocycle_map_bijective
   let T := (J.sc n).abCyclesIso.inv ≫ J.homologyπ n ≫
     (DerivedCategory.Plus.homologyFunctorObjQIso (V.mapCochainComplexPlus.obj I) n).inv ≫
     (DerivedCategory.Plus.homologyFunctor AddCommGrpCat.{v} n).map
-      (V.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient C).obj I))
+      (V.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.quotient C).obj I))
   have hT : Function.Surjective T :=
     (AddCommGrpCat.epi_iff_surjective T).1 inferInstance
   have hcycle (x : AddMonoidHom.ker (J.sc n).g.hom) :
@@ -141,7 +141,7 @@ theorem rhom_injective_cocycle_map_bijective
       simpa only [AddCommGrpCat.comp_apply, hq, map_zero] using hp.symm
     have ht : T (x - y) = 0 := by
       change ((DerivedCategory.Plus.homologyFunctor AddCommGrpCat.{v} n).map
-        (V.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient C).obj I)))
+        (V.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.quotient C).obj I)))
           ((DerivedCategory.Plus.homologyFunctorObjQIso
             (V.mapCochainComplexPlus.obj I) n).inv
               (J.homologyπ n ((J.sc n).abCyclesIso.inv (x - y)))) = 0

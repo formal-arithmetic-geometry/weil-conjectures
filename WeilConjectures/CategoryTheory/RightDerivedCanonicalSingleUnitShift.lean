@@ -58,7 +58,7 @@ theorem rightDerivedFunctorPlusUnit_canonical_single_shift (X : B) (n : ℕ) :
         (H₀.shiftIso (-(n : ℤ)) (n : ℤ) 0 (by ring))
     GS.obj.homologyπ n ≫ (DerivedCategory.Plus.homologyFunctorObjQIso GS n).inv ≫
       (DerivedCategory.Plus.homologyFunctor C n).map
-        (G.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient B).obj S)) ≫
+        (G.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.quotient B).obj S)) ≫
       (DerivedCategory.Plus.homologyFunctor C n).map (G.rightDerivedFunctorPlus.map e.inv) ≫
       c.hom.app X =
     GS.obj.iCycles n ≫

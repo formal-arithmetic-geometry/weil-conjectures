@@ -172,7 +172,7 @@ theorem rightDerivedFunctorPlusBaseChange_cube
   -- Absoluteness reduces equality to compatibility on the homotopy category.
   have heq : α = β := by
     apply Functor.rightDerived_ext (R+(G) ⋙ (D+(Q) ⋙ D+(V')))
-      (Functor.whiskerRight G.rightDerivedFunctorPlusUnit (D+(Q) ⋙ D+(V')) ≫
+      (Functor.whiskerRight G.rightDerivedFunctorPlusUnith (D+(Q) ⋙ D+(V')) ≫
         (Functor.associator _ _ _).hom) (HomotopyCategory.Plus.quasiIso B)
     apply NatTrans.ext
     funext M
@@ -185,7 +185,7 @@ theorem rightDerivedFunctorPlusBaseChange_cube
     simp only [NatTrans.comp_app, whiskerRight_app, whiskerLeft_app,
       Functor.associator_hom_app, Category.comp_id, Functor.comp_obj] at he ha
     rw [← D+(V').map_comp_assoc, he]
-    have hc := dc.inv.naturality (G.rightDerivedFunctorPlusUnit.app M)
+    have hc := dc.inv.naturality (G.rightDerivedFunctorPlusUnith.app M)
     simp only [Functor.comp_map] at hc
     rw [reassoc_of% hc, ← D+(Q₀).map_comp_assoc, ha]
     simp only [rightDerivedFunctorPlusBaseChangeAux, NatTrans.comp_app,
@@ -226,7 +226,7 @@ theorem rightDerivedFunctorPlusBaseChange_cube
       dd.inv.app (DerivedCategory.Plus.Qh.obj M) = _ at hd
     rw [← R+(H₀).map_comp, ← R+(H₀).map_comp, hd]
     simp only [Functor.map_comp]
-    have hn := H₀.rightDerivedFunctorPlusUnit.naturality
+    have hn := H₀.rightDerivedFunctorPlusUnith.naturality
       ((NatTrans.mapHomotopyCategoryPlus d.inv).app M)
     simp only [Functor.comp_map] at hn
     erw [← reassoc_of% hn]

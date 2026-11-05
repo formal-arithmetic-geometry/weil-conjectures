@@ -63,7 +63,7 @@ which, on the image of a bounded below complex `K`, is the underived base change
 `ν_Y^* f_* K ⟶ f_* ν_X^* K` followed by the unit `f_* ν_X^* K ⟶ R⁺f_* (ν_X^* K)`. -/
 @[reassoc]
 theorem rightDerivedLowerStarComparisonPlusBaseChange_fac :
-    (Functor.whiskerRight (Etale.lowerStar A f).rightDerivedFunctorPlusUnit D+(ν^*(Y)[A]) ≫
+    (Functor.whiskerRight (Etale.lowerStar A f).rightDerivedFunctorPlusUnith D+(ν^*(Y)[A]) ≫
         (Functor.associator _ _ _).hom) ≫
       Functor.whiskerLeft DerivedCategory.Plus.Qh
         (rightDerivedLowerStarComparisonPlusBaseChange f A) =

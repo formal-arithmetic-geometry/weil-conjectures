@@ -93,7 +93,7 @@ theorem cochainHypercohomologyLeftEdge_naturality
     simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
     rw [DerivedCategory.Plus.homologyFunctorObjQIso_hom_naturality]
     simp only [← Category.assoc, Iso.inv_hom_id, Category.id_comp]
-  have hu := G.rightDerivedFunctorPlusUnit.naturality
+  have hu := G.rightDerivedFunctorPlusUnith.naturality
     ((HomotopyCategory.Plus.quotient B).map f')
   have he := Abelian.SpectralObject.leftEdge_naturality
     (G.hypercohomologySpectralObjectFunctor.map (DerivedCategory.Plus.Q.map f')) (n : ℤ)

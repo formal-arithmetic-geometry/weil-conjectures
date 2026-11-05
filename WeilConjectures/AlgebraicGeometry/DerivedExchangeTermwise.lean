@@ -146,10 +146,10 @@ lemma derivedExchangeTermwise
       s.hom ≫ DerivedCategory.Qh.map h.1 = ρ →
       t ≫ DerivedCategory.Qh.map h.2 = ρ' →
       let χ := DerivedCategory.Qh.map ((F.mapHomotopyCategory (.up ℤ)).map h.1) ≫
-        DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnit.app P ≫
+        DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnith.app P ≫
           F.rightDerivedFunctorPlus.map (E.counitIso.hom.app K))
       let χ' := DerivedCategory.Qh.map ((F'.mapHomotopyCategory (.up ℤ)).map h.2) ≫
-        DerivedCategory.Plus.ι.map (F'.rightDerivedFunctorPlusUnit.app P' ≫
+        DerivedCategory.Plus.ι.map (F'.rightDerivedFunctorPlusUnith.app P' ≫
           F'.rightDerivedFunctorPlus.map (E'.counitIso.hom.app K'))
       let σsrc := G.mapDerivedCategoryFactorsh.inv.app
         ((F.mapHomotopyCategory (.up ℤ)).obj (q.obj I)) ≫ G.mapDerivedCategory.map χ

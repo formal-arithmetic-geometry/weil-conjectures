@@ -60,7 +60,7 @@ private theorem unit_zero_comparison {C D : Type*}
   have hu : F.rightDerivedFunctorUnit.app ((HomotopyCategory.singleFunctor C 0).obj M) ≫
       (F.rightDerivedFunctorPlusCompatibility.app
         ((DerivedCategory.Plus.singleFunctor C 0).obj M)).inv =
-      DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnit.app
+      DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnith.app
         ((HomotopyCategory.Plus.singleFunctor C 0).obj M)) := by
     apply (Iso.comp_inv_eq _).2
     have h := (Functor.rightDerivedNatTrans_app

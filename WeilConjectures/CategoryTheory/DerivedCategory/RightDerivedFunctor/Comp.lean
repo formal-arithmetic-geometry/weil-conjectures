@@ -209,8 +209,9 @@ instance isRightDerivedFunctor_rightDerivedFunctor_comp [F.PreservesKInjectiveCo
       ((HomotopyCategory.quotient D (ComplexShape.up ℤ)).obj
         ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj K))) := inferInstance
   have h₂' : IsIso (G.rightDerivedFunctorUnit.app
-      ((F.mapHomotopyCategory (ComplexShape.up ℤ)).obj
-        ((HomotopyCategory.quotient C (ComplexShape.up ℤ)).obj K))) := h₂
+      ((HomotopyCategory.quotient D (ComplexShape.up ℤ)).obj
+        ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj
+          ((HomotopyCategory.quotient C (ComplexShape.up ℤ)).obj K).as))) := h₂
   dsimp [rightDerivedFunctorCompUnit]
   infer_instance
 

@@ -70,7 +70,7 @@ private theorem derived_mate_eq
       Functor.rightDerivedFunctorPlusBaseChange
         (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ e.hom)).natTrans := by
   refine Functor.rightDerived_ext (R.rightDerivedFunctorPlus ⋙ G.mapDerivedCategoryPlus)
-    (Functor.whiskerRight R.rightDerivedFunctorPlusUnit G.mapDerivedCategoryPlus ≫
+    (Functor.whiskerRight R.rightDerivedFunctorPlusUnith G.mapDerivedCategoryPlus ≫
       (Functor.associator _ _ _).hom) (HomotopyCategory.Plus.quasiIso B) _ _ _ ?_
   rw [Functor.rightDerivedFunctorPlusBaseChange_fac]
   ext K : 2

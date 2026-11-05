@@ -1186,7 +1186,7 @@ private theorem normalizationRHom
           exact hf⟩
         psi (DerivedCategory.Plus.Q.obj I) a
           ((DerivedCategory.Plus.homologyFunctor AddCommGrpCat.{u + 1} a).map
-            (V.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient _).obj I))
+            (V.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.quotient _).obj I))
             ((DerivedCategory.Plus.homologyFunctorObjQIso
               (V.mapCochainComplexPlus.obj I) a).inv (VI.homologyπ a y))) =
           ShiftedHom.map (Cocycle.equivHomShift.symm
@@ -1250,7 +1250,7 @@ private theorem normalizationDerivedComparison
     let G : ModuleCat.{u + 1} A ⥤ AddCommGrpCat.{u + 1} := forget₂ _ _
     let HM (a : ℤ) := DerivedCategory.Plus.homologyFunctor (ModuleCat.{u + 1} A) a ⋙ G
     let RS (a : ℤ) := S.rightDerivedFunctorPlus ⋙ HM a
-    let αS (a : ℤ) := Functor.whiskerRight S.rightDerivedFunctorPlusUnit (HM a) ≫
+    let αS (a : ℤ) := Functor.whiskerRight S.rightDerivedFunctorPlusUnith (HM a) ≫
       (Functor.associator _ _ _).hom
     ∃ chi : ∀ (F : DerivedCategory.Plus D) (a : ℤ), (RS a).obj F ≃+
         ((DerivedCategory.singleFunctor D 0).obj B ⟶ F.obj⟦a⟧),
@@ -1281,9 +1281,9 @@ private theorem normalizationDerivedComparison
   let HM (a : ℤ) := DerivedCategory.Plus.homologyFunctor (ModuleCat.{u + 1} A) a ⋙ G
   let RS (a : ℤ) := S.rightDerivedFunctorPlus ⋙ HM a
   let RV (a : ℤ) := V.rightDerivedFunctorPlus ⋙ H a
-  let αS (a : ℤ) := Functor.whiskerRight S.rightDerivedFunctorPlusUnit (HM a) ≫
+  let αS (a : ℤ) := Functor.whiskerRight S.rightDerivedFunctorPlusUnith (HM a) ≫
     (Functor.associator _ _ _).hom
-  let αV (a : ℤ) := Functor.whiskerRight V.rightDerivedFunctorPlusUnit (H a) ≫
+  let αV (a : ℤ) := Functor.whiskerRight V.rightDerivedFunctorPlusUnith (H a) ≫
     (Functor.associator _ _ _).hom
   let baseIso (a : ℤ) := normalizationBaseIso A S V theta a
   let eH (a : ℤ) : RS a ≅ RV a :=
@@ -1335,7 +1335,7 @@ private theorem normalizationDerivedComparison
           (G.map (DerivedCategory.Plus.homologyFunctorObjQIso
             (S.mapCochainComplexPlus.obj I) a).inv (SI.homologyπ a x)))) =
         (H a).map (V.rightDerivedFunctorPlus.map eI.inv)
-          ((H a).map (V.rightDerivedFunctorPlusUnit.app
+          ((H a).map (V.rightDerivedFunctorPlusUnith.app
             ((HomotopyCategory.Plus.quotient _).obj I))
             ((DerivedCategory.Plus.homologyFunctorObjQIso
               (V.mapCochainComplexPlus.obj I) a).inv (VI.homologyπ a y))) := by

@@ -112,7 +112,7 @@ noncomputable def supportSequenceModelIso (E : Sheaf J A ⥤ A) [E.Additive]
   (DerivedCategory.Plus.homologyFunctorObjQIso
     (E.mapCochainComplexPlus.obj I) q).symm ≪≫
     (DerivedCategory.Plus.homologyFunctor A q).mapIso
-      (asIso (E.rightDerivedFunctorPlusUnit.app
+      (asIso (E.rightDerivedFunctorPlusUnith.app
         ((HomotopyCategory.Plus.quotient _).obj I))) ≪≫
     (E.rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.homologyFunctor A q).mapIso e
 

@@ -2216,7 +2216,7 @@ private lemma right_derived_plus_unit
     [HasDerivedCategory C] [HasDerivedCategory D] [EnoughInjectives C]
     [HasKInjectiveResolutions C] (F : C ⥤ D) [F.Additive]
     (K : HomotopyCategory.Plus C) :
-    DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnit.app K) ≫
+    DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnith.app K) ≫
         F.rightDerivedFunctorPlusCompatibility.hom.app (DerivedCategory.Plus.Qh.obj K) =
       F.rightDerivedFunctorUnit.app ((HomotopyCategory.Plus.ι C).obj K) := by
   simpa only [Functor.rightDerivedFunctorPlusCompatibility, Functor.rightDerivedUnique,
@@ -2236,7 +2236,7 @@ private lemma right_derived_plus_unit_assoc
     (K : HomotopyCategory.Plus C) {Z : DerivedCategory D}
     (h : F.rightDerivedFunctor.obj
       (DerivedCategory.Qh.obj ((HomotopyCategory.Plus.ι C).obj K)) ⟶ Z) :
-    DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnit.app K) ≫
+    DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnith.app K) ≫
         F.rightDerivedFunctorPlusCompatibility.hom.app (DerivedCategory.Plus.Qh.obj K) ≫ h =
       F.rightDerivedFunctorUnit.app ((HomotopyCategory.Plus.ι C).obj K) ≫ h := by
   rw [← Category.assoc, right_derived_plus_unit]
@@ -2310,12 +2310,12 @@ private lemma right_derived_comp_plus
   rw [← Functor.map_comp_assoc, Functor.rightDerivedFunctorPlusCompIso_fac_app,
     Functor.rightDerivedFunctorPlusCompUnit_app, Functor.map_comp]
   have hn := G.rightDerivedFunctorPlusCompatibility.hom.naturality
-    (F.rightDerivedFunctorPlusUnit.app K)
+    (F.rightDerivedFunctorPlusUnith.app K)
   simp only [Functor.comp_map] at hn
   rw [Category.assoc, reassoc_of% hn]
   rw [right_derived_plus_unit_assoc, right_derived_plus_unit_assoc]
   have hl := (G.rightDerivedFunctor.map_comp
-      (DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnit.app K))
+      (DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnith.app K))
       (F.rightDerivedFunctorPlusCompatibility.hom.app (DerivedCategory.Plus.Qh.obj K))).symm.trans
     (congrArg G.rightDerivedFunctor.map (right_derived_plus_unit F K))
   have hr := right_comp_unit F G ((HomotopyCategory.Plus.ι C).obj K)

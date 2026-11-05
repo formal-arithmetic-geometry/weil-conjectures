@@ -65,7 +65,7 @@ variable {C D : Type*} [Category* C] [Category* D] [Abelian C] [Abelian D]
 
 private lemma plus_comparison_unit (F : D ⥤ C) [F.Additive]
     (K : HomotopyCategory.Plus D) :
-    DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnit.app K) ≫
+    DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnith.app K) ≫
         F.rightDerivedFunctorPlusCompatibility.hom.app (DerivedCategory.Plus.Qh.obj K) =
       F.rightDerivedFunctorUnit.app K.obj := by
   simpa only [Functor.comp_obj, ObjectProperty.ι_obj,

@@ -109,7 +109,7 @@ private theorem unit_single (M : C) :
     rw [Functor.map_preimage]
     rfl
   rw [← hu, Category.assoc]
-  have hn := R.rightDerivedFunctorPlusUnit.naturality u.hom
+  have hn := R.rightDerivedFunctorPlusUnith.naturality u.hom
   dsimp only [Functor.comp_map] at hn
   erw [← hn]
   have he : (DerivedCategory.Plus.ι.preimageIso
@@ -131,7 +131,7 @@ private theorem unit_single (M : C) :
         (R.mapHomotopyCategoryPlusSingleFunctorQhObjIso 0 (L.obj M)).inv by
     erw [Category.comp_id]
     simpa only [Category.assoc] using congrArg (fun a ↦ a ≫
-      R.rightDerivedFunctorPlusUnit.app
+      R.rightDerivedFunctorPlusUnith.app
         ((HomotopyCategory.Plus.singleFunctor D 0).obj (L.obj M))) hp
   apply (cancel_mono
     (R.mapHomotopyCategoryPlusSingleFunctorQhObjIso 0 (L.obj M)).hom).1

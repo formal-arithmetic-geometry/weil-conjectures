@@ -68,7 +68,7 @@ private lemma bottom_resolution_composite_unit_transport
             ⟨((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).extend
               ComplexShape.embeddingUpNat, 0, inferInstance⟩) n).inv ≫
         (DerivedCategory.Plus.homologyFunctor C n).map
-          (G.rightDerivedFunctorPlusUnit.app
+          (G.rightDerivedFunctorPlusUnith.app
             ((HomotopyCategory.Plus.quotient B).obj
               ⟨((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).extend
                 ComplexShape.embeddingUpNat, 0, inferInstance⟩)) := by
@@ -84,7 +84,7 @@ private lemma bottom_resolution_composite_unit_transport
           ((DerivedCategory.Plus.singleFunctor A 0).obj X) ≫
           G.rightDerivedFunctorPlus.map (resolutionDerivedIso F I).hom =
         (resolutionDerivedIso (F ⋙ G) I).hom ≫
-          G.rightDerivedFunctorPlusUnit.app
+          G.rightDerivedFunctorPlusUnith.app
             ((HomotopyCategory.Plus.quotient B).obj
               ⟨(F.mapHomologicalComplex _).obj I.cochainComplex, 0, inferInstance⟩) := by
     let L : CochainComplex.Plus A := ⟨I.cochainComplex, 0, inferInstance⟩
@@ -92,10 +92,10 @@ private lemma bottom_resolution_composite_unit_transport
     have : ∀ n, Injective (L.obj.X n) := fun n ↦
       inferInstanceAs (Injective (I.cochainComplex.X n))
     let c := F.rightDerivedFunctorPlusCompIsoOfRightAcyclic G hFG
-    have hc : (F ⋙ G).rightDerivedFunctorPlusUnit.app H ≫
+    have hc : (F ⋙ G).rightDerivedFunctorPlusUnith.app H ≫
         c.hom.app (DerivedCategory.Plus.Qh.obj H) =
-          G.rightDerivedFunctorPlusUnit.app (F.mapHomotopyCategoryPlus.obj H) ≫
-            G.rightDerivedFunctorPlus.map (F.rightDerivedFunctorPlusUnit.app H) := by
+          G.rightDerivedFunctorPlusUnith.app (F.mapHomotopyCategoryPlus.obj H) ≫
+            G.rightDerivedFunctorPlus.map (F.rightDerivedFunctorPlusUnith.app H) := by
       dsimp [c, Functor.rightDerivedFunctorPlusCompIsoOfRightAcyclic]
       have := F.isRightDerivedFunctor_rightDerivedFunctorPlus_comp_of_rightAcyclic G hFG
       simp only [Functor.rightDerivedUnique, Functor.rightDerivedNatIso_hom,
@@ -108,7 +108,7 @@ private lemma bottom_resolution_composite_unit_transport
     erw [← Category.assoc, ← hn, Category.assoc]
     simp only [Category.assoc]
     congr 1
-    apply (cancel_epi ((F ⋙ G).rightDerivedFunctorPlusUnit.app H)).1
+    apply (cancel_epi ((F ⋙ G).rightDerivedFunctorPlusUnith.app H)).1
     erw [← Category.assoc, hc]
     simp [Category.assoc, H, L]
     rfl
@@ -155,7 +155,7 @@ private lemma bottom_resolution_composite_unit_transport
                 I.cocomplex).extend ComplexShape.embeddingUpNat, 0, inferInstance⟩)
               (((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).mapExtendIso
                 ComplexShape.embeddingUpNat G)).inv ≫
-          G.rightDerivedFunctorPlusUnit.app
+          G.rightDerivedFunctorPlusUnith.app
             ((HomotopyCategory.Plus.quotient B).obj
               ⟨((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).extend
                 ComplexShape.embeddingUpNat, 0, inferInstance⟩) := by
@@ -178,18 +178,18 @@ private lemma bottom_resolution_composite_unit_transport
     have hm : mFG.hom = G.mapCochainComplexPlus.map mF.hom ≫ mG.hom := by
       apply ObjectProperty.hom_ext
       exact mapExtendIso_comp_hom F G I.cocomplex
-    have hn := G.rightDerivedFunctorPlusUnit.naturality
+    have hn := G.rightDerivedFunctorPlusUnith.naturality
       ((HomotopyCategory.Plus.quotient B).map mF.hom)
     dsimp [canonicalResolutionDerivedIso]
     simp only [Functor.map_comp, Category.assoc]
     rw [← Category.assoc, resolutionDerivedIso_comp F G hFG I, Category.assoc]
     change (resolutionDerivedIso (F ⋙ G) I).hom ≫
-        G.rightDerivedFunctorPlusUnit.app
+        G.rightDerivedFunctorPlusUnith.app
           ((HomotopyCategory.Plus.quotient B).obj
             (F.mapCochainComplexPlus.obj ⟨I.cochainComplex, 0, inferInstance⟩)) ≫
           G.rightDerivedFunctorPlus.map (DerivedCategory.Plus.Q.map mF.hom) =
       (resolutionDerivedIso (F ⋙ G) I).hom ≫ DerivedCategory.Plus.Q.map mFG.hom ≫
-        DerivedCategory.Plus.Q.map mG.inv ≫ G.rightDerivedFunctorPlusUnit.app
+        DerivedCategory.Plus.Q.map mG.inv ≫ G.rightDerivedFunctorPlusUnith.app
           ((HomotopyCategory.Plus.quotient B).obj
             ⟨((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).extend
               ComplexShape.embeddingUpNat, 0, inferInstance⟩)
@@ -250,7 +250,7 @@ private lemma bottom_resolution_map_unit
         HomologicalComplex.homologyMap (K.mapExtendIso ComplexShape.embeddingUpNat G).inv n ≫
         (DerivedCategory.Plus.homologyFunctorObjQIso (G.mapCochainComplexPlus.obj L) n).inv ≫
         (DerivedCategory.Plus.homologyFunctor C n).map
-          (G.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient B).obj L)) =
+          (G.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.quotient B).obj L)) =
       (G.homologyRightDerivedFunctorPlusObjSingleFunctorIso Y n).inv ≫
         (DerivedCategory.Plus.homologyFunctor C n).map
           (G.rightDerivedFunctorPlus.map (resolutionAugmentationIso J).hom) ≫
@@ -269,7 +269,7 @@ private lemma bottom_resolution_map_unit
     (rfl : (n : ℤ) = n)
   have hq := DerivedCategory.Plus.homologyFunctorObjQIso_hom_naturality
     (G.mapCochainComplexPlus.map f) (n : ℤ)
-  have hu := G.rightDerivedFunctorPlusUnit.naturality
+  have hu := G.rightDerivedFunctorPlusUnith.naturality
     ((HomotopyCategory.Plus.quotient B).map f)
   have hh := resolution_homology_transport G Y J n
   apply (cancel_epi (G.homologyRightDerivedFunctorPlusObjSingleFunctorIso Y n).hom).1
@@ -307,8 +307,8 @@ private lemma bottom_resolution_map_unit
   erw [hm']
   erw [← reassoc_of% hq, Iso.hom_inv_id_assoc]
   have hu' : DerivedCategory.Plus.Q.map (G.mapCochainComplexPlus.map f) ≫
-        G.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient B).obj L) =
-      G.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient B).obj LJ) ≫
+        G.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.quotient B).obj L) =
+      G.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.quotient B).obj LJ) ≫
         G.rightDerivedFunctorPlus.map (DerivedCategory.Plus.Q.map f) := hu
   have hhu := congrArg ((DerivedCategory.Plus.homologyFunctor C n).map) hu'
   simp only [Functor.map_comp] at hhu
@@ -319,7 +319,7 @@ private lemma bottom_resolution_map_unit
   have : ∀ i, Injective (LJ.obj.X i) := fun i ↦
     inferInstanceAs (Injective (J.cochainComplex.X i))
   erw [← Functor.map_comp_assoc (DerivedCategory.Plus.homologyFunctor C n)
-    (inv (G.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient B).obj LJ)))]
+    (inv (G.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.quotient B).obj LJ)))]
   simp only [IsIso.inv_hom_id, Functor.map_id, Category.id_comp]
   rfl
 

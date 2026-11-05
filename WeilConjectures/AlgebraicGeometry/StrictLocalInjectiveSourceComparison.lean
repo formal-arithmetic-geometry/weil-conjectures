@@ -99,7 +99,7 @@ noncomputable def sourceInjectiveDirectImageIso {X S : Scheme.{v}} (f : X ⟶ S)
       (q ≪≫ (DerivedCategory.quotientCompQhIso _).symm.app M.obj)
   let F := lowerStar AddCommGrpCat.{v + 1} f
   let e := F.rightDerivedFunctorPlus.mapIso q' ≪≫
-    (asIso (F.rightDerivedFunctorPlusUnit.app
+    (asIso (F.rightDerivedFunctorPlusUnith.app
       ((HomotopyCategory.Plus.quotient _).obj M))).symm
   exact DerivedCategory.Plus.ι.mapIso e ≪≫
     DerivedCategory.Qh.mapIso ((F.mapHomotopyCategoryFactors (.up ℤ)).app M.obj) ≪≫

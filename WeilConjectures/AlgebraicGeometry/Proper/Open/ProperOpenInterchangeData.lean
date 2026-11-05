@@ -82,13 +82,13 @@ theorem ProperOpenInterchangeData.unitNormalization
       (h : k ≫ p = r ≫ i)
       (J : HomotopyCategory.Plus (Sheaf A.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
       (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) i).mapDerivedCategoryPlus.map
-          ((lowerStar (ModuleCat.{u + 1} Λ) r).rightDerivedFunctorPlusUnit.app J) ≫
+          ((lowerStar (ModuleCat.{u + 1} Λ) r).rightDerivedFunctorPlusUnith.app J) ≫
           (d.derived k i r p h).hom.app (DerivedCategory.Plus.Qh.obj J) =
         (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) i).mapDerivedCategoryPlusFactorsh.hom.app
             ((lowerStar (ModuleCat.{u + 1} Λ) r).mapHomotopyCategoryPlus.obj J) ≫
           DerivedCategory.Plus.Qh.map
             ((NatTrans.mapHomotopyCategoryPlus (d.underived k i r p h).hom).app J) ≫
-          (lowerStar (ModuleCat.{u + 1} Λ) p).rightDerivedFunctorPlusUnit.app
+          (lowerStar (ModuleCat.{u + 1} Λ) p).rightDerivedFunctorPlusUnith.app
             ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k).mapHomotopyCategoryPlus.obj J) ≫
           (lowerStar (ModuleCat.{u + 1} Λ) p).rightDerivedFunctorPlus.map
             ((Functor.mapDerivedCategoryPlusFactorsh

@@ -35,7 +35,7 @@ private theorem unit_plus {C D : Type*} [Category C] [Category D] [Abelian C] [A
     F.rightDerivedFunctorUnit.app ((HomotopyCategory.singleFunctor C 0).obj M) ≫
       (F.rightDerivedFunctorPlusCompatibility.app
         ((DerivedCategory.Plus.singleFunctor C 0).obj M)).inv =
-    DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnit.app
+    DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnith.app
       ((HomotopyCategory.Plus.singleFunctor C 0).obj M)) := by
   apply (Iso.comp_inv_eq _).2
   have h := (Functor.rightDerivedNatTrans_app
@@ -47,7 +47,7 @@ private theorem unit_plus {C D : Type*} [Category C] [Category D] [Abelian C] [A
   simp only [NatTrans.id_app, Category.id_comp] at h
   change F.rightDerivedFunctorUnit.app
       ((HomotopyCategory.Plus.singleFunctor C 0).obj M).obj =
-    DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnit.app
+    DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnith.app
       ((HomotopyCategory.Plus.singleFunctor C 0).obj M)) ≫
     (F.rightDerivedFunctorPlusCompatibility.app
       (DerivedCategory.Plus.Qh.obj
@@ -62,7 +62,7 @@ private theorem plus_unit_resolution {C D : Type*} [Category C] [Category D] [Ab
     [HasDerivedCategory C] [HasDerivedCategory D]
     [EnoughInjectives C]
     (F : C ⥤ D) [F.Additive] (M : C) :
-    F.rightDerivedFunctorPlusUnit.app
+    F.rightDerivedFunctorPlusUnith.app
         ((HomotopyCategory.Plus.singleFunctor C 0).obj M) ≫
       (F.rightDerivedFunctorPlusObjSingleFunctorIsoQ M).hom =
     DerivedCategory.Plus.Q.map (ObjectProperty.homMk
@@ -75,7 +75,7 @@ private theorem plus_unit_resolution {C D : Type*} [Category C] [Category D] [Ab
     ⟨(CochainComplex.singleFunctor C 0).obj M, 0, inferInstance⟩
   let L : CochainComplex.Plus C := ⟨R.cochainComplex, 0, inferInstance⟩
   let g : K ⟶ L := ObjectProperty.homMk R.ι'
-  have h := F.rightDerivedFunctorPlusUnit.naturality
+  have h := F.rightDerivedFunctorPlusUnith.naturality
     ((HomotopyCategory.Plus.quotient C).map g)
   dsimp only [Functor.comp_map] at h
   unfold Functor.rightDerivedFunctorPlusObjSingleFunctorIsoQ
@@ -94,15 +94,15 @@ private theorem plus_unit_resolution {C D : Type*} [Category C] [Category D] [Ab
     erw [Category.id_comp, Category.comp_id]
     rfl
   rw [he]
-  change _ ≫ _ ≫ inv (F.rightDerivedFunctorPlusUnit.app
+  change _ ≫ _ ≫ inv (F.rightDerivedFunctorPlusUnith.app
     ((HomotopyCategory.Plus.quotient C).obj L)) = _
-  have h' : F.rightDerivedFunctorPlusUnit.app
+  have h' : F.rightDerivedFunctorPlusUnith.app
       ((HomotopyCategory.Plus.singleFunctor C 0).obj M) ≫
       F.rightDerivedFunctorPlus.map
         (DerivedCategory.Plus.Qh.map ((HomotopyCategory.Plus.quotient C).map g)) =
     DerivedCategory.Plus.Qh.map (F.mapHomotopyCategoryPlus.map
       ((HomotopyCategory.Plus.quotient C).map g)) ≫
-      F.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient C).obj L) := h.symm
+      F.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.quotient C).obj L) := h.symm
   rw [← Category.assoc, h', Category.assoc, IsIso.hom_inv_id, Category.comp_id]
   rfl
 
@@ -135,7 +135,7 @@ private theorem unit_homology_resolution {C D : Type*}
     Iso.symm_hom, Functor.mapIso_hom, Category.assoc]
   rw [← Functor.map_comp_assoc, unit_plus]
   change (DerivedCategory.Plus.homologyFunctor D n).map
-      (F.rightDerivedFunctorPlusUnit.app
+      (F.rightDerivedFunctorPlusUnith.app
         ((HomotopyCategory.Plus.singleFunctor C 0).obj M)) ≫ _ = _
   rw [← Functor.map_comp_assoc, plus_unit_resolution]
   have h := DerivedCategory.Plus.homologyFunctorObjQIso_hom_naturality g n

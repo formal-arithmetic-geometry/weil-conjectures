@@ -51,7 +51,7 @@ structure RhomInjectiveCocycleFamily
           exact hf⟩)
       let b := (DerivedCategory.Plus.homologyFunctorObjQIso
         (V.mapCochainComplexPlus.obj I) n).inv a
-      let η := V.rightDerivedFunctorPlusUnit.app
+      let η := V.rightDerivedFunctorPlusUnith.app
         ((HomotopyCategory.Plus.quotient C).obj I)
       map I hi n ((H n).map η b) =
         ShiftedHom.map (Cocycle.equivHomShift.symm

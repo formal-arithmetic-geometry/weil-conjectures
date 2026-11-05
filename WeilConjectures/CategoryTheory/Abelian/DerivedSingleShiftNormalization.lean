@@ -240,7 +240,7 @@ private theorem rightDerivedPlusSingleUnit_shift_transport_int (X : C) (n : ℤ)
       Functor.isoWhiskerLeft (DerivedCategory.Plus.singleFunctor D 0)
         (H₀.shiftIso (-n) n 0 (by ring))
     (DerivedCategory.Plus.homologyFunctor D n).map
-      (S.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient C).obj M)) ≫
+      (S.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.quotient C).obj M)) ≫
       (DerivedCategory.Plus.homologyFunctor D n).map (S.rightDerivedFunctorPlus.map e.inv) ≫
       c.hom.app X =
     (DerivedCategory.Plus.homologyFunctor D n).map
@@ -261,7 +261,7 @@ private theorem rightDerivedPlusSingleUnit_shift_transport_int (X : C) (n : ℤ)
   let sC := ((DerivedCategory.Plus.singleFunctors D).shiftIso
     (-n) n 0 (by simp)).inv.app (S.obj X)
   let F := S.rightDerivedFunctorPlus
-  let U := S.rightDerivedFunctorPlusUnit
+  let U := S.rightDerivedFunctorPlusUnith
   have ht := single_quotient_inverse_shift_int X n
   have hs := mapped_single_inverse_shift_int S X n
   have hu := U.naturality h
@@ -312,7 +312,7 @@ noncomputable def rightDerivedPlusSingleUnitAt (n : ℤ) (Y : C) :
     (DerivedCategory.Plus.singleFunctor D n).obj (S.obj Y) ⟶
       S.rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor C n).obj Y) :=
   (S.mapHomotopyCategoryPlusSingleFunctorQhObjIso n Y).inv ≫
-    S.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.singleFunctor C n).obj Y) ≫
+    S.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.singleFunctor C n).obj Y) ≫
     S.rightDerivedFunctorPlus.map
       (DerivedCategory.Plus.ι.preimageIso
         (X := (DerivedCategory.Plus.singleFunctor C n).obj Y)
@@ -404,7 +404,7 @@ theorem rightDerivedPlusSingleUnitHomologyAt_comp_shiftIso (n : ℤ) (Y : C) :
       (DerivedCategory.Plus.homologyFunctor D n).map
         (S.mapHomotopyCategoryPlusSingleFunctorQhObjIso n Y).inv ≫
       ((DerivedCategory.Plus.homologyFunctor D n).map
-        (S.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.singleFunctor C n).obj Y)) ≫
+        (S.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.singleFunctor C n).obj Y)) ≫
       (DerivedCategory.Plus.homologyFunctor D n).map
         (S.rightDerivedFunctorPlus.map _) ≫ c.hom.app Y) = _
     erw [ht]

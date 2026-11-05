@@ -57,7 +57,7 @@ private theorem rightDerivedCompatibility_shift
     have he : α =
         (Functor.associator R.mapHomotopyCategoryPlus
           DerivedCategory.Plus.Qh DerivedCategory.Plus.ι).inv ≫
-        Functor.whiskerRight R.rightDerivedFunctorPlusUnit DerivedCategory.Plus.ι ≫
+        Functor.whiskerRight R.rightDerivedFunctorPlusUnith DerivedCategory.Plus.ι ≫
         (Functor.associator DerivedCategory.Plus.Qh
           R.rightDerivedFunctorPlus DerivedCategory.Plus.ι).hom := by
       ext K

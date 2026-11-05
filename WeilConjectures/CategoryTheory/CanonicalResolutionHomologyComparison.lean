@@ -71,7 +71,7 @@ theorem resolution_homology_transport
     let LX : CochainComplex.Plus A := ⟨R.cochainComplex, 0, inferInstance⟩
     let LY : CochainComplex.Plus A := ⟨I.cochainComplex, 0, inferInstance⟩
     let g : LX ⟶ LY := ObjectProperty.homMk φ.hom'
-    have h₁ := F.rightDerivedFunctorPlusUnit.naturality
+    have h₁ := F.rightDerivedFunctorPlusUnith.naturality
       ((HomotopyCategory.Plus.quotient A).map g)
     have h₂ : (resolutionAugmentationIso R).hom ≫ DerivedCategory.Plus.Q.map g =
         (resolutionAugmentationIso I).hom := by
@@ -92,20 +92,20 @@ theorem resolution_homology_transport
           inferInstance⟩ := ObjectProperty.homMk ((F.mapHomologicalComplex _).map φ.hom')
     have hcompare : (F.rightDerivedFunctorPlusObjSingleFunctorIsoQ X).hom ≫
         DerivedCategory.Plus.Q.map FG = (resolutionDerivedIso F I).hom := by
-      have hi : inv (F.rightDerivedFunctorPlusUnit.app
+      have hi : inv (F.rightDerivedFunctorPlusUnith.app
             ((HomotopyCategory.Plus.quotient A).obj LX)) ≫ DerivedCategory.Plus.Q.map FG =
           F.rightDerivedFunctorPlus.map (DerivedCategory.Plus.Q.map g) ≫
-            inv (F.rightDerivedFunctorPlusUnit.app
+            inv (F.rightDerivedFunctorPlusUnith.app
               ((HomotopyCategory.Plus.quotient A).obj LY)) := by
         rw [IsIso.inv_comp_eq, ← Category.assoc]
         symm
         rw [IsIso.comp_inv_eq]
         exact h₁.symm
       change (F.rightDerivedFunctorPlus.map (resolutionAugmentationIso R).hom ≫
-          inv (F.rightDerivedFunctorPlusUnit.app
+          inv (F.rightDerivedFunctorPlusUnith.app
             ((HomotopyCategory.Plus.quotient A).obj LX))) ≫ DerivedCategory.Plus.Q.map FG =
         F.rightDerivedFunctorPlus.map (resolutionAugmentationIso I).hom ≫
-          inv (F.rightDerivedFunctorPlusUnit.app
+          inv (F.rightDerivedFunctorPlusUnith.app
             ((HomotopyCategory.Plus.quotient A).obj LY))
       rw [Category.assoc, hi, ← Category.assoc, ← Functor.map_comp, h₂]
     have hnat := DerivedCategory.Plus.homologyFunctorObjQIso_hom_naturality FG (n : ℤ)

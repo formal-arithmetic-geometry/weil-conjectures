@@ -57,7 +57,7 @@ noncomputable def ulift : Point.{max w w'} J where
       (Functor.Elements.uliftEquivalence.{w'} Φ.fiber).inverse
   jointly_surjective _ hR x := by
     obtain ⟨Y, f, hf, y, hy⟩ := Φ.jointly_surjective _ hR x.down
-    exact ⟨Y, f, hf, ULift.up y, ULift.ext _ _ hy⟩
+    exact ⟨Y, f, hf, ULift.up y, ULift.ext hy⟩
 
 @[simp]
 lemma ulift_fiber_map {X Y : C} (f : X ⟶ Y) (x : (Φ.ulift.{w'}).fiber.obj X) :

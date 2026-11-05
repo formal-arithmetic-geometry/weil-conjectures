@@ -131,19 +131,19 @@ theorem injectiveExchange_representative {X S : Scheme.{v}} (f : X ⟶ S)
     (pullbackSquareComparison_hom_app_factorsh AddCommGrpCat.{v + 1} sq) H
   have hb :
       U.mapDerivedCategoryPlus.map
-        (R.rightDerivedFunctorPlusUnit.app H ≫ R.rightDerivedFunctorPlus.map q'.inv) ≫
+        (R.rightDerivedFunctorPlusUnith.app H ≫ R.rightDerivedFunctorPlus.map q'.inv) ≫
           θ.app K =
         U.mapDerivedCategoryPlusFactorsh.hom.app (R.mapHomotopyCategoryPlus.obj H) ≫
           DerivedCategory.Plus.Qh.map
             ((NatTrans.mapHomotopyCategoryPlus (baseChangeMap
               AddCommGrpCat.{v + 1} sq)).app H) ≫
-          F.rightDerivedFunctorPlusUnit.app (P.mapHomotopyCategoryPlus.obj H) ≫
+          F.rightDerivedFunctorPlusUnith.app (P.mapHomotopyCategoryPlus.obj H) ≫
           F.rightDerivedFunctorPlus.map
             (P.mapDerivedCategoryPlusFactorsh.inv.app H ≫
               P.mapDerivedCategoryPlus.map q'.inv) := by
     have hn := map_comp_naturality R.rightDerivedFunctorPlus U.mapDerivedCategoryPlus
       P.mapDerivedCategoryPlus F.rightDerivedFunctorPlus θ
-      (R.rightDerivedFunctorPlusUnit.app H) q'.inv
+      (R.rightDerivedFunctorPlusUnith.app H) q'.inv
     have hf := congrArg (fun z ↦ z ≫ F.rightDerivedFunctorPlus.map
       (P.mapDerivedCategoryPlus.map q'.inv)) fac
     refine hn.trans (hf.trans ?_)
@@ -153,7 +153,7 @@ theorem injectiveExchange_representative {X S : Scheme.{v}} (f : X ⟶ S)
   have hs' :
       U.mapDerivedCategory.map (sourceInjectiveDirectImageIso f K J q).inv =
         DerivedCategory.Plus.ι.map (U.mapDerivedCategoryPlus.map
-          (R.rightDerivedFunctorPlusUnit.app H ≫ R.rightDerivedFunctorPlus.map q'.inv)) :=
+          (R.rightDerivedFunctorPlusUnith.app H ≫ R.rightDerivedFunctorPlus.map q'.inv)) :=
     congrArg U.mapDerivedCategory.map hs
   have result := assemble_exchange DerivedCategory.Plus.ι
     (U.mapDerivedCategoryFactors.inv.app

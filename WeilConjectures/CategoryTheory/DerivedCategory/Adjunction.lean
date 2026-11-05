@@ -347,7 +347,7 @@ theorem Adjunction.derivedAdjunctionPlus_unit_app_fac {f : C ⥤ D} {g : D ⥤ C
     adj.derivedAdjunctionPlus.unit.app (DerivedCategory.Plus.Qh.obj K) ≫
         g.rightDerivedFunctorPlus.map (f.mapDerivedCategoryPlusFactorsh.hom.app K) =
       DerivedCategory.Plus.Qh.map (adj.mapHomotopyCategoryPlus.unit.app K) ≫
-        g.rightDerivedFunctorPlusUnit.app (f.mapHomotopyCategoryPlus.obj K) := by
+        g.rightDerivedFunctorPlusUnith.app (f.mapHomotopyCategoryPlus.obj K) := by
   apply DerivedCategory.Plus.ι.map_injective
   simp only [Functor.map_comp, Adjunction.derivedAdjunctionPlus,
     Adjunction.map_restrictFullyFaithful_unit_app, Adjunction.ofNatIsoLeft_unit]
@@ -362,7 +362,7 @@ theorem Adjunction.derivedAdjunctionPlus_unit_app_fac {f : C ⥤ D} {g : D ⥤ C
       g.ιRightDerivedFunctorUnit.app (f.mapHomotopyCategoryPlus.obj K) := by
     simp [Functor.rightDerivedFunctorPlusCompatibility]
   have h₄ : DerivedCategory.Plus.ι.map
-      (g.rightDerivedFunctorPlusUnit.app (f.mapHomotopyCategoryPlus.obj K)) =
+      (g.rightDerivedFunctorPlusUnith.app (f.mapHomotopyCategoryPlus.obj K)) =
       g.ιRightDerivedFunctorUnit.app (f.mapHomotopyCategoryPlus.obj K) ≫
         g.rightDerivedFunctorPlusCompatibility.inv.app
           (DerivedCategory.Plus.Qh.obj (f.mapHomotopyCategoryPlus.obj K)) := by

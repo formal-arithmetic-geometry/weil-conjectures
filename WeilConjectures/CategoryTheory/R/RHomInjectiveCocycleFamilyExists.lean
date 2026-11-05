@@ -221,7 +221,7 @@ theorem exists_rhom_injective_cocycle_family
           exact hf⟩)
       let b := (DerivedCategory.Plus.homologyFunctorObjQIso
         (V.mapCochainComplexPlus.obj I) n).inv a
-      let η := V.rightDerivedFunctorPlusUnit.app
+      let η := V.rightDerivedFunctorPlusUnith.app
         ((HomotopyCategory.Plus.quotient C).obj I)
       β I hi n ((H n).map η b) =
         ShiftedHom.map (Cocycle.equivHomShift.symm
@@ -245,8 +245,8 @@ theorem exists_rhom_injective_cocycle_family
   let γ := V.mapCochainComplexPlus.map φp
   let eQI := DerivedCategory.Plus.homologyFunctorObjQIso (V.mapCochainComplexPlus.obj I) n
   let eQJ := DerivedCategory.Plus.homologyFunctorObjQIso (V.mapCochainComplexPlus.obj J) n
-  let ηI := V.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient C).obj I)
-  let ηJ := V.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient C).obj J)
+  let ηI := V.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.quotient C).obj I)
+  let ηJ := V.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.quotient C).obj J)
   have heQ : HomologicalComplex.homologyMap φ' n ≫ eQJ.inv =
       eQI.inv ≫ (H n).map ((DerivedCategory.Plus.Q (C := AddCommGrpCat.{v})).map γ) := by
     apply (cancel_epi eQI.hom).1
@@ -256,7 +256,7 @@ theorem exists_rhom_injective_cocycle_family
       (eQJ.hom ≫ eQJ.inv) = _
     rw [Iso.hom_inv_id, Category.comp_id]
   have hη := congrArg ((H n).map)
-    (V.rightDerivedFunctorPlusUnit.naturality
+    (V.rightDerivedFunctorPlusUnith.naturality
       ((HomotopyCategory.Plus.quotient C).map φp))
   change (H n).map ((DerivedCategory.Plus.Q (C := AddCommGrpCat.{v})).map γ ≫ ηJ) =
     (H n).map (ηI ≫ RV.map (Q.map φp)) at hη

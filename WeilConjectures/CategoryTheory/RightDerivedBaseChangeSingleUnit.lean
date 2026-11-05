@@ -224,21 +224,21 @@ theorem rightDerivedBaseChange_single_unit (e : G ⋙ γ ⟶ β ⋙ G') (Y : B) 
   have ht := single_exact_transport β Y
   simp only [singleTransport_hom, Functor.map_id, Category.id_comp,
     Category.comp_id] at ht
-  have hu := G'.rightDerivedFunctorPlusUnit.naturality (homotopySingleIso β Y).hom
+  have hu := G'.rightDerivedFunctorPlusUnith.naturality (homotopySingleIso β Y).hom
   dsimp only [Functor.comp_map] at hu
   change γ.mapDerivedCategoryPlus.map
       ((G.mapHomotopyCategoryPlusSingleFunctorQhObjIso 0 Y).inv ≫
-        G.rightDerivedFunctorPlusUnit.app K ≫ G.rightDerivedFunctorPlus.map
+        G.rightDerivedFunctorPlusUnith.app K ≫ G.rightDerivedFunctorPlus.map
           (singleTransport B Y).hom) ≫ _ =
     _ ≫ _ ≫ (G'.mapHomotopyCategoryPlusSingleFunctorQhObjIso 0 (β.obj Y)).inv ≫
-      G'.rightDerivedFunctorPlusUnit.app _ ≫ G'.rightDerivedFunctorPlus.map
+      G'.rightDerivedFunctorPlusUnith.app _ ≫ G'.rightDerivedFunctorPlus.map
         (singleTransport B' (β.obj Y)).hom
   rw [singleTransport_hom, singleTransport_hom]
   erw [Functor.map_id, Functor.map_id]
   erw [Category.comp_id, Category.comp_id]
   rw [Functor.map_comp, Category.assoc]
   erw [← Category.assoc (γ.mapDerivedCategoryPlus.map
-    (G.rightDerivedFunctorPlusUnit.app K)), hfac]
+    (G.rightDerivedFunctorPlusUnith.app K)), hfac]
   simp only [rightDerivedFunctorPlusBaseChangeAux, NatTrans.comp_app,
     whiskerRight_app, whiskerLeft_app, Functor.associator_inv_app,
     Functor.associator_hom_app, mapHomotopyCategoryPlusCompIso_refl_hom_app,

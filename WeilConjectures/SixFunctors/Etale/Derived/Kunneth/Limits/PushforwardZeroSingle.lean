@@ -70,15 +70,15 @@ instance isIso_homology_homotopyUnit (α : LimitStage B W)
   have hu := Functor.isIso_homologyFunctor_zero_map_rightDerivedFunctorPlusUnit_app
     ((α.g)_*[ModuleCat.{u + 1} Λ]) (((α.w)^*[ModuleCat.{u + 1} Λ]).obj G)
   have hc : IsIso ((DerivedCategory.Plus.homologyFunctor _ 0).map
-      (((α.g)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnit.app
+      (((α.g)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnith.app
         (((α.w)^*[ModuleCat.{u + 1} Λ]).mapHomotopyCategoryPlus.obj
           ((HomotopyCategory.Plus.quotient _).obj (singleComplex Λ G))))) := by
     have hN := congrArg (DerivedCategory.Plus.homologyFunctor _ 0).map
-      (((α.g)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnit.naturality ψ.hom)
+      (((α.g)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnith.naturality ψ.hom)
     simp only [Functor.comp_map, Functor.map_comp] at hN
     exact IsIso.of_isIso_fac_left hN
   have hz : IsIso ((DerivedCategory.Plus.homologyFunctor _ 0).map
-      (((α.g)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnit.app
+      (((α.g)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnith.app
           (((α.w)^*[ModuleCat.{u + 1} Λ]).mapHomotopyCategoryPlus.obj
             ((HomotopyCategory.Plus.quotient _).obj (singleComplex Λ G))) ≫
         R+((α.g)_*[ModuleCat.{u + 1} Λ]).map
@@ -88,7 +88,7 @@ instance isIso_homology_homotopyUnit (α : LimitStage B W)
     infer_instance
   have ha : IsIso ((DerivedCategory.Plus.homologyFunctor _ 0).map
       (D+((α.π)^*[ModuleCat.{u + 1} Λ]).map
-        (((α.g)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnit.app
+        (((α.g)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnith.app
             (((α.w)^*[ModuleCat.{u + 1} Λ]).mapHomotopyCategoryPlus.obj
               ((HomotopyCategory.Plus.quotient _).obj (singleComplex Λ G))) ≫
           R+((α.g)_*[ModuleCat.{u + 1} Λ]).map
@@ -96,7 +96,7 @@ instance isIso_homology_homotopyUnit (α : LimitStage B W)
               ((HomotopyCategory.Plus.quotient _).obj (singleComplex Λ G)))))) := by
     have hN := (((α.π)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusHomologyFunctorIso
       0).hom.naturality
-      (((α.g)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnit.app
+      (((α.g)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnith.app
           (((α.w)^*[ModuleCat.{u + 1} Λ]).mapHomotopyCategoryPlus.obj
             ((HomotopyCategory.Plus.quotient _).obj (singleComplex Λ G))) ≫
         R+((α.g)_*[ModuleCat.{u + 1} Λ]).map

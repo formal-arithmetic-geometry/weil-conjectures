@@ -103,7 +103,7 @@ noncomputable def cochainHypercohomologyLeftEdge (K : CochainComplex B ℕ) (n :
     HomologicalComplex.homologyMap e.inv (n : ℤ) ≫
     (DerivedCategory.Plus.homologyFunctorObjQIso GL n).inv ≫
     (DerivedCategory.Plus.homologyFunctor C n).map
-      (G.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient B).obj L)) ≫
+      (G.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.quotient B).obj L)) ≫
     (G.hypercohomologySpectralObjectFunctor.obj (DerivedCategory.Plus.Q.obj L)).leftEdge n ≫
     (G.hypercohomologyLeftEdgeTargetIso n).hom.app (DerivedCategory.Plus.Q.obj L) ≫
     G.map ((DerivedCategory.Plus.homologyFunctorObjQIso L n).hom ≫

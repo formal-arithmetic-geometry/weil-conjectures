@@ -66,7 +66,7 @@ private theorem comparison_eq_unit
   let g : resolutionPlus R ⟶ resolutionPlus I := ObjectProperty.homMk φ.hom'
   let vg : v.rightDerivedPlusComplex X ⟶ v.mapCochainComplexPlus.obj (resolutionPlus I) :=
     ObjectProperty.homMk ((v.mapHomologicalComplex _).map φ.hom')
-  have hη := v.rightDerivedFunctorPlusUnit.naturality
+  have hη := v.rightDerivedFunctorPlusUnith.naturality
     ((HomotopyCategory.Plus.quotient A).map g)
   have ha : (resolutionAugmentationIso R).hom ≫ DerivedCategory.Plus.Q.map g =
       (resolutionAugmentationIso I).hom := by
@@ -80,11 +80,11 @@ private theorem comparison_eq_unit
     simp only [ObjectProperty.homMk_hom, InjectiveResolution.Hom.ι'_comp_hom',
       Functor.map_id, Category.id_comp, asIso_hom, Iso.symm_hom, Iso.app_hom]
     rfl
-  have hu : inv (v.rightDerivedFunctorPlusUnit.app
+  have hu : inv (v.rightDerivedFunctorPlusUnith.app
         ((HomotopyCategory.Plus.quotient A).obj (resolutionPlus R))) ≫
       DerivedCategory.Plus.Q.map vg =
     v.rightDerivedFunctorPlus.map (DerivedCategory.Plus.Q.map g) ≫
-      inv (v.rightDerivedFunctorPlusUnit.app
+      inv (v.rightDerivedFunctorPlusUnith.app
         ((HomotopyCategory.Plus.quotient A).obj (resolutionPlus I))) := by
     rw [IsIso.inv_comp_eq, ← Category.assoc, eq_comm, IsIso.comp_inv_eq]
     exact hη.symm
@@ -100,7 +100,7 @@ private theorem comparison_eq_unit
     Iso.symm_hom, asIso_inv, Functor.map_comp, Category.assoc, Functor.comp_map]
   change DerivedCategory.Plus.ι.map
       (v.rightDerivedFunctorPlus.map (resolutionAugmentationIso R).hom) ≫
-      DerivedCategory.Plus.ι.map (inv (v.rightDerivedFunctorPlusUnit.app
+      DerivedCategory.Plus.ι.map (inv (v.rightDerivedFunctorPlusUnith.app
         ((HomotopyCategory.Plus.quotient A).obj (resolutionPlus R)))) ≫
       (DerivedCategory.quotientCompQhIso B).hom.app _ ≫
       DerivedCategory.Q.map (R.cocomplex.mapExtendIso ComplexShape.embeddingUpNat v).hom ≫
@@ -108,7 +108,7 @@ private theorem comparison_eq_unit
         ((v.mapHomologicalComplex _).map φ.hom) ComplexShape.embeddingUpNat) = _
   rw [← DerivedCategory.Q.map_comp, ← he, Functor.map_comp]
   erw [← DerivedCategory.quotientCompQhIso_hom_naturality_assoc]
-  change _ ≫ DerivedCategory.Plus.ι.map (inv (v.rightDerivedFunctorPlusUnit.app
+  change _ ≫ DerivedCategory.Plus.ι.map (inv (v.rightDerivedFunctorPlusUnith.app
       ((HomotopyCategory.Plus.quotient A).obj (resolutionPlus R)))) ≫
       DerivedCategory.Plus.ι.map (DerivedCategory.Plus.Q.map vg) ≫ _ = _
   have hu' := congrArg (fun f ↦ DerivedCategory.Plus.ι.map f) hu

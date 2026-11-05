@@ -49,7 +49,7 @@ noncomputable def representableTransportUnit
     whiskerRight (mapHomotopyCategoryPlusCompIso (Iso.refl (L ⋙ S'))).inv
       DerivedCategory.Plus.Qh ≫
     (associator _ _ _).hom ≫
-    whiskerLeft L.mapHomotopyCategoryPlus S'.rightDerivedFunctorPlusUnit ≫
+    whiskerLeft L.mapHomotopyCategoryPlus S'.rightDerivedFunctorPlusUnith ≫
     (associator _ _ _).inv ≫
     whiskerRight L.mapDerivedCategoryPlusFactorsh.inv S'.rightDerivedFunctorPlus ≫
     (associator _ _ _).hom
@@ -61,7 +61,7 @@ noncomputable def representableTransportComparison
     (S : A ⥤ AddCommGrpCat.{v}) (S' : B ⥤ AddCommGrpCat.{v})
     [S.Additive] [S'.Additive] (tau : S ⟶ L ⋙ S') :
     S.rightDerivedFunctorPlus ⟶ L.mapDerivedCategoryPlus ⋙ S'.rightDerivedFunctorPlus :=
-  S.rightDerivedFunctorPlus.rightDerivedDesc S.rightDerivedFunctorPlusUnit
+  S.rightDerivedFunctorPlus.rightDerivedDesc S.rightDerivedFunctorPlusUnith
     (HomotopyCategory.Plus.quasiIso A) _ (representableTransportUnit L S S' tau)
 
 /-- Apply the exact derived functor to a shifted morphism and precompose with `d⁻¹`.
@@ -81,7 +81,7 @@ private lemma transport_fac
     (L : A ⥤ B) [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L]
     (S : A ⥤ AddCommGrpCat.{v}) (S' : B ⥤ AddCommGrpCat.{v})
     [S.Additive] [S'.Additive] (tau : S ⟶ L ⋙ S') :
-    S.rightDerivedFunctorPlusUnit ≫
+    S.rightDerivedFunctorPlusUnith ≫
         whiskerLeft DerivedCategory.Plus.Qh (representableTransportComparison L S S' tau) =
       representableTransportUnit L S S' tau := by
   exact S.rightDerivedFunctorPlus.rightDerived_fac _ _ _ _

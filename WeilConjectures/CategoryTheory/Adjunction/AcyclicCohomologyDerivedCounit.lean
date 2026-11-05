@@ -276,14 +276,14 @@ private theorem injective_counit [HasDerivedCategory C] [HasDerivedCategory D] [
   have : IsIso (DerivedCategory.Plus.Qh.map
       (adj.mapHomotopyCategoryPlus.counit.app K)) :=
     Localization.inverts DerivedCategory.Plus.Qh (HomotopyCategory.Plus.quasiIso D) _ hmem
-  have : IsIso (R.rightDerivedFunctorPlusUnit.app K) := inferInstance
-  have : IsIso (F.mapDerivedCategoryPlus.map (R.rightDerivedFunctorPlusUnit.app K) ≫
+  have : IsIso (R.rightDerivedFunctorPlusUnith.app K) := inferInstance
+  have : IsIso (F.mapDerivedCategoryPlus.map (R.rightDerivedFunctorPlusUnith.app K) ≫
       adj.derivedPlus.counit.app (DerivedCategory.Plus.Qh.obj K)) := by
     rw [adj.derivedPlus_counit_app_fac]
     infer_instance
   change IsIso (adj.derivedPlus.counit.app (DerivedCategory.Plus.Qh.obj K))
   exact IsIso.of_isIso_comp_left
-    (F.mapDerivedCategoryPlus.map (R.rightDerivedFunctorPlusUnit.app K)) _
+    (F.mapDerivedCategoryPlus.map (R.rightDerivedFunctorPlusUnith.app K)) _
 
 namespace CategoryTheory.Adjunction
 

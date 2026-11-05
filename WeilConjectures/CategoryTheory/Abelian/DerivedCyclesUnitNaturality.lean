@@ -75,7 +75,7 @@ theorem rightDerived_cycles_unit_naturality (n : ℤ) (K : CochainComplex C ℤ)
   let J := (HomotopyCategory.Plus.singleFunctor C n).obj Y
   have hcunit : S.rightDerivedFunctorUnit.app ((HomotopyCategory.Plus.ι C).obj J) ≫
       S.rightDerivedFunctorPlusCompatibility.inv.app (DerivedCategory.Plus.Qh.obj J) =
-      DerivedCategory.Plus.ι.map (S.rightDerivedFunctorPlusUnit.app J) := by
+      DerivedCategory.Plus.ι.map (S.rightDerivedFunctorPlusUnith.app J) := by
     simpa only [rightDerivedFunctorPlusCompatibility, rightDerivedUnique,
       rightDerivedNatIso, ιRightDerivedFunctorUnit, rightDerivedFunctorPlusιUnit,
       Functor.whiskerLeft_app, Functor.whiskerRight_app, NatTrans.id_app,

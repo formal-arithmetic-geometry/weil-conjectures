@@ -59,7 +59,7 @@ lemma _root_.CategoryTheory.Functor.ι_map_rightDerivedFunctorPlusUnit_app_comp
     {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
     [HasDerivedCategory C] [HasDerivedCategory D] (F : C ⥤ D) [F.Additive] [EnoughInjectives C]
     [Abelian.HasKInjectiveResolutions C] (K : HomotopyCategory.Plus C) :
-    Plus.ι.map (F.rightDerivedFunctorPlusUnit.app K) ≫
+    Plus.ι.map (F.rightDerivedFunctorPlusUnith.app K) ≫
         F.rightDerivedFunctorPlusCompatibility.hom.app (Plus.Qh.obj K) =
       F.rightDerivedFunctorUnit.app K.obj := by
   have h : F.rightDerivedFunctorPlusιUnit.app K ≫
@@ -132,7 +132,7 @@ theorem derivedBaseChangeMapRestrictPlus_eq (sq : CommSq g' f' f g) :
     exact congrArg Iso.inv (Iso.ext (α := Plus.ι.mapIso
       ((g')^*[A].mapDerivedCategoryPlusFactorsh.app K))
       (β := (g')^*[A].mapDerivedCategoryFactorsh.app K.obj) hF')
-  have hu'' : Plus.ι.map ((f')_*[A].rightDerivedFunctorPlusUnit.app
+  have hu'' : Plus.ι.map ((f')_*[A].rightDerivedFunctorPlusUnith.app
       ((g')^*[A].mapHomotopyCategoryPlus.obj K)) =
       (f')_*[A].rightDerivedFunctorUnit.app ((g')^*[A].mapHomotopyCategoryPlus.obj K).obj ≫
         (f')_*[A].rightDerivedFunctorPlusCompatibility.inv.app
@@ -151,8 +151,8 @@ theorem derivedBaseChangeMapRestrictPlus_eq (sq : CommSq g' f' f g) :
         (((f)_*[A].mapHomotopyCategory (ComplexShape.up ℤ)).obj K.obj) := by
     rw [← hc]
     exact Iso.inv_hom_id_app_assoc _ _ _
-  have e₁ : Plus.ι.map (D+((g)^*[A]).map ((f)_*[A].rightDerivedFunctorPlusUnit.app K)) =
-      D((g)^*[A]).map (Plus.ι.map ((f)_*[A].rightDerivedFunctorPlusUnit.app K)) := rfl
+  have e₁ : Plus.ι.map (D+((g)^*[A]).map ((f)_*[A].rightDerivedFunctorPlusUnith.app K)) =
+      D((g)^*[A]).map (Plus.ι.map ((f)_*[A].rightDerivedFunctorPlusUnith.app K)) := rfl
   have e₂ : Plus.ι.map (Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus (baseChangeMap A sq)).app
       K)) = Qh.map ((HomotopyCategory.Plus.ι _).map
         ((NatTrans.mapHomotopyCategoryPlus (baseChangeMap A sq)).app K)) := rfl

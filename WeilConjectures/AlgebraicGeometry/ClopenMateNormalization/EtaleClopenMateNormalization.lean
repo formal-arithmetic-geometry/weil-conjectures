@@ -327,7 +327,7 @@ private theorem mate_ambient (adj : L ⊣ R) (adj' : L' ⊣ R')
   have hab : a = b := by
     apply Functor.rightDerived_ext
       (R.rightDerivedFunctorPlus ⋙ (DerivedCategory.Plus.ι ⋙ G.mapDerivedCategory))
-      (Functor.whiskerRight R.rightDerivedFunctorPlusUnit
+      (Functor.whiskerRight R.rightDerivedFunctorPlusUnith
           (DerivedCategory.Plus.ι ⋙ G.mapDerivedCategory) ≫
         (Functor.associator _ _ _).hom) (HomotopyCategory.Plus.quasiIso C₁)
     apply NatTrans.ext
@@ -347,7 +347,7 @@ private theorem mate_ambient (adj : L ⊣ R) (adj' : L' ⊣ R')
       (derivedComplexUnitCompatibility (C := C₁) (D := C₂)).2.2.2 R K]
     erw [hu]
     change DerivedCategory.Plus.ι.map
-        (G.mapDerivedCategoryPlus.map (R.rightDerivedFunctorPlusUnit.app K)) ≫
+        (G.mapDerivedCategoryPlus.map (R.rightDerivedFunctorPlusUnith.app K)) ≫
       DerivedCategory.Plus.ι.map (gammaPlus.app (DerivedCategory.Plus.Qh.obj K)) ≫ _ = _
     rw [← DerivedCategory.Plus.ι.map_comp_assoc, hp]
     simp only [DerivedCategory.Plus.ι.map_comp, Category.assoc]
@@ -390,15 +390,15 @@ private theorem plus_mate_eq (adj : L ⊣ R) (adj' : L' ⊣ R')
       G'.mapDerivedCategoryPlus ⋙ R'.rightDerivedFunctorPlus)
     (hδ : (mateEquiv adj adj' σ).natTrans = δ)
     (hγ : ∀ K : HomotopyCategory.Plus C₁,
-      G.mapDerivedCategoryPlus.map (R.rightDerivedFunctorPlusUnit.app K) ≫
+      G.mapDerivedCategoryPlus.map (R.rightDerivedFunctorPlusUnith.app K) ≫
           γ.app (DerivedCategory.Plus.Qh.obj K) =
         G.mapDerivedCategoryPlusFactorsh.hom.app (R.mapHomotopyCategoryPlus.obj K) ≫
           DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus δ).app K) ≫
-          R'.rightDerivedFunctorPlusUnit.app (G'.mapHomotopyCategoryPlus.obj K) ≫
+          R'.rightDerivedFunctorPlusUnith.app (G'.mapHomotopyCategoryPlus.obj K) ≫
           R'.rightDerivedFunctorPlus.map (G'.mapDerivedCategoryPlusFactorsh.inv.app K)) :
     (mateEquiv adj.derivedPlus adj'.derivedPlus θ).natTrans = γ := by
   apply Functor.rightDerived_ext (R.rightDerivedFunctorPlus ⋙ G.mapDerivedCategoryPlus)
-    (Functor.whiskerRight R.rightDerivedFunctorPlusUnit G.mapDerivedCategoryPlus ≫
+    (Functor.whiskerRight R.rightDerivedFunctorPlusUnith G.mapDerivedCategoryPlus ≫
       (Functor.associator _ _ _).hom) (HomotopyCategory.Plus.quasiIso C₁)
   apply NatTrans.ext
   funext K

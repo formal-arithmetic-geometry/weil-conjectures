@@ -38,7 +38,7 @@ canonical single-functor, quotient and homology shift comparisons.
 (blueprint: lem-pc-right-derived-single-unit-shift-transport)
 
 Proof: Use the canonical shift isomorphism from single_n X to single_0 X[-n]
-in the bounded-below homotopy category. Naturality of rightDerivedFunctorPlusUnit
+in the bounded-below homotopy category. Naturality of rightDerivedFunctorPlusUnith
 along this isomorphism, followed by its NatTrans.CommShift equation at -n, moves
 the unit to degree zero. The canonical single/quotient identification e converts
 the target to the derived single object; its naturality identifies this with the
@@ -75,7 +75,7 @@ theorem rightDerivedPlusSingleUnit_shift_transport (X : B) (n : ℕ) :
       Functor.isoWhiskerLeft (DerivedCategory.Plus.singleFunctor C 0)
         (H₀.shiftIso (-(n : ℤ)) (n : ℤ) 0 (by ring))
     (DerivedCategory.Plus.homologyFunctor C n).map
-      (G.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient B).obj S)) ≫
+      (G.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.quotient B).obj S)) ≫
       (DerivedCategory.Plus.homologyFunctor C n).map (G.rightDerivedFunctorPlus.map e.inv) ≫
       c.hom.app X =
     (DerivedCategory.Plus.homologyFunctor C n).map
@@ -97,7 +97,7 @@ theorem rightDerivedPlusSingleUnit_shift_transport (X : B) (n : ℕ) :
   let sC := ((DerivedCategory.Plus.singleFunctors C).shiftIso
     (-(n : ℤ)) n 0 (by simp)).inv.app (G.obj X)
   let F := G.rightDerivedFunctorPlus
-  let U := G.rightDerivedFunctorPlusUnit
+  let U := G.rightDerivedFunctorPlusUnith
   have ht := single_quotient_inverse_shift X n
   have hs := mapped_single_inverse_shift G X n
   have hu := U.naturality h

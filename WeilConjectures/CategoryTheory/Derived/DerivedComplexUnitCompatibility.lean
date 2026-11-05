@@ -58,7 +58,7 @@ theorem derivedComplexUnitCompatibility :
         (DerivedCategory.quotientCompQhIso D).hom.app
           ((F.mapHomologicalComplex (.up ℤ)).obj J)) ∧
     (∀ [EnoughInjectives C] (F : C ⥤ D) [F.Additive] (K : HomotopyCategory.Plus C),
-      DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnit.app K) ≫
+      DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnith.app K) ≫
           F.rightDerivedFunctorPlusCompatibility.hom.app (DerivedCategory.Plus.Qh.obj K) =
         F.rightDerivedFunctorUnit.app ((HomotopyCategory.Plus.ι C).obj K)) := by
   refine ⟨fun F _ J _ ↦ ?_, fun F _ J I ρ ↦ ?_, fun F _ _ _ J ↦ ?_, fun F _ K ↦ ?_⟩

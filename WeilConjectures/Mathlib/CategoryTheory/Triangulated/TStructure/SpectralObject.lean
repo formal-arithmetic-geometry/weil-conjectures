@@ -375,7 +375,9 @@ noncomputable def mapTriangulatedSpectralObjectObjIso (X : C) :
       (fun {D D'} φ ↦ by
         have := F.eTruncGELTIsoApp_hom_naturality t₁ t₂ (φ.app 0) (φ.app 1) X
         rw [← F.map_comp_assoc] at this
-        exact this))
+        simpa only [Triangulated.SpectralObject.mapTriangulatedFunctor_ω₁,
+          TStructure.spectralObject_ω₁, Functor.comp_map, evaluation_obj_map, TStructure.ω₁_map,
+          NatTrans.hcomp_app] using this))
     (fun {i j k} f g ↦ by
       have := F.eTruncGELTIsoApp_δ t₁ t₂ i j k X
       rw [Triangulated.SpectralObject.mapTriangulatedFunctor_δ, TStructure.spectralObject_δ,
@@ -385,7 +387,8 @@ noncomputable def mapTriangulatedSpectralObjectObjIso (X : C) :
 @[simp]
 lemma mapTriangulatedSpectralObjectObjIso_hom_hom_app (X : C) (D : ComposableArrows EInt 1) :
     (F.mapTriangulatedSpectralObjectObjIso t₁ t₂ X).hom.hom.app D =
-      (F.eTruncGELTIsoApp t₁ t₂ (D.obj 0) (D.obj 1) X).hom := rfl
+      (F.eTruncGELTIsoApp t₁ t₂ (D.obj 0) (D.obj 1) X).hom := by
+  simp [mapTriangulatedSpectralObjectObjIso]
 
 /-- A t-exact triangulated functor `F` commutes with the formation of the spectral objects
 consisting of all the truncations of objects. -/
@@ -399,7 +402,8 @@ noncomputable def mapTriangulatedSpectralObjectIso :
 @[simp]
 lemma mapTriangulatedSpectralObjectIso_hom_app_hom_app (X : C) (D : ComposableArrows EInt 1) :
     ((F.mapTriangulatedSpectralObjectIso t₁ t₂).hom.app X).hom.app D =
-      (F.eTruncGELTIsoApp t₁ t₂ (D.obj 0) (D.obj 1) X).hom := rfl
+      (F.eTruncGELTIsoApp t₁ t₂ (D.obj 0) (D.obj 1) X).hom := by
+  simp [mapTriangulatedSpectralObjectIso]
 
 end Functor
 

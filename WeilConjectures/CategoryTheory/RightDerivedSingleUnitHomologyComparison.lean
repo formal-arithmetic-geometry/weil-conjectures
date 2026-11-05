@@ -26,14 +26,14 @@ variable {B C : Type*} [Category* B] [Category* C] [Abelian B] [Abelian C]
 
 /-- The unit on an object placed in degree zero, using the single-complex comparisons.
 
-Source: `rightDerivedFunctorPlusUnit` and `mapHomotopyCategoryPlusSingleFunctorQhObjIso`
+Source: `rightDerivedFunctorPlusUnith` and `mapHomotopyCategoryPlusSingleFunctorQhObjIso`
 in `WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus`.
 (blueprint: lem-sbc-right-derived-single-unit-homology-comparison). -/
 noncomputable def rightDerivedPlusSingleUnit (Y : B) :
     (DerivedCategory.Plus.singleFunctor C 0).obj (G.obj Y) ⟶
       G.rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor B 0).obj Y) :=
   (G.mapHomotopyCategoryPlusSingleFunctorQhObjIso 0 Y).inv ≫
-    G.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.singleFunctor B 0).obj Y) ≫
+    G.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.singleFunctor B 0).obj Y) ≫
     G.rightDerivedFunctorPlus.map
       (DerivedCategory.Plus.ι.preimageIso
         (X := (DerivedCategory.Plus.singleFunctor B 0).obj Y)
@@ -103,7 +103,7 @@ theorem rightDerivedPlusSingleUnitHomology_comp_comparison (Y : B) :
     erw [(DerivedCategory.quotientCompQhIso B).inv.naturality]
     simp
     rfl
-  have hunit := G.rightDerivedFunctorPlusUnit.naturality
+  have hunit := G.rightDerivedFunctorPlusUnith.naturality
     ((HomotopyCategory.Plus.quotient B).map g)
   have hcancel : G.rightDerivedPlusSingleUnit Y ≫
       (G.rightDerivedFunctorPlusObjSingleFunctorIsoQ Y).hom =
@@ -115,7 +115,7 @@ theorem rightDerivedPlusSingleUnitHomology_comp_comparison (Y : B) :
     dsimp only [Functor.comp_map] at hunit
     erw [← Category.assoc _ _ (CategoryTheory.inv _), ← hunit]
     change _ ≫ _ ≫ CategoryTheory.inv
-      (G.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient B).obj L)) = _
+      (G.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.quotient B).obj L)) = _
     erw [Category.assoc, IsIso.hom_inv_id, Category.comp_id]
   simp only [rightDerivedPlusSingleUnitHomology,
     singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso,

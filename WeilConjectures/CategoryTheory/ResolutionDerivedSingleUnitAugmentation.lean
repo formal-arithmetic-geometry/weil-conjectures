@@ -71,7 +71,7 @@ theorem resolutionDerivedSingleUnit_augmentation
     erw [(DerivedCategory.quotientCompQhIso A).inv.naturality]
     simp
     rfl
-  have hunit := F.rightDerivedFunctorPlusUnit.naturality
+  have hunit := F.rightDerivedFunctorPlusUnith.naturality
     ((HomotopyCategory.Plus.quotient A).map g)
   have hcancel : F.rightDerivedPlusSingleUnit X ≫ (resolutionDerivedIso F I).hom =
       (F.mapHomotopyCategoryPlusSingleFunctorQhObjIso 0 X).inv ≫
@@ -82,7 +82,7 @@ theorem resolutionDerivedSingleUnit_augmentation
     dsimp only [Functor.comp_map] at hunit
     erw [← Category.assoc _ _ (CategoryTheory.inv _), ← hunit]
     change _ ≫ _ ≫ CategoryTheory.inv
-      (F.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient A).obj LI)) = _
+      (F.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.quotient A).obj LI)) = _
     erw [Category.assoc, IsIso.hom_inv_id, Category.comp_id]
   let a := (HomologicalComplex.singleMapHomologicalComplex F (.up ℤ) 0).inv.app X ≫
     (F.mapHomologicalComplex (.up ℤ)).map I.ι' ≫

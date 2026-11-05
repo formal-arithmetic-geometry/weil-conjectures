@@ -134,7 +134,7 @@ private theorem target_unit_representative_transport
     let D := (P.mapHomologicalComplex (.up ℤ)).obj M.obj
     let T := P.mapDerivedCategoryPlus.obj K
     DerivedCategory.Plus.ι.map
-      (F.rightDerivedFunctorPlusUnit.app (P.mapHomotopyCategoryPlus.obj H) ≫
+      (F.rightDerivedFunctorPlusUnith.app (P.mapHomotopyCategoryPlus.obj H) ≫
         F.rightDerivedFunctorPlus.map
           (P.mapDerivedCategoryPlusFactorsh.inv.app H ≫
             P.mapDerivedCategoryPlus.map q'.inv)) =
@@ -149,7 +149,7 @@ private theorem target_unit_representative_transport
       (q ≪≫ (DerivedCategory.quotientCompQhIso _).symm.app M.obj)
   let N := P.mapHomotopyCategoryPlus.obj H
   let g := P.mapDerivedCategoryPlusFactorsh.inv.app H ≫ P.mapDerivedCategoryPlus.map q'.inv
-  have hc : DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnit.app N) ≫
+  have hc : DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnith.app N) ≫
       F.rightDerivedFunctorPlusCompatibility.hom.app (DerivedCategory.Plus.Qh.obj N) =
       F.rightDerivedFunctorUnit.app N.obj := by
     with_unfolding_all
@@ -160,7 +160,7 @@ private theorem target_unit_representative_transport
           F.rightDerivedFunctorPlusCompatibility.hom.app (DerivedCategory.Plus.Qh.obj N) =
           F.ιRightDerivedFunctorUnit.app N from by
         simp [Functor.rightDerivedFunctorPlusCompatibility])
-  have hu : DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnit.app N) =
+  have hu : DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnith.app N) =
       F.rightDerivedFunctorUnit.app N.obj ≫
         F.rightDerivedFunctorPlusCompatibility.inv.app (DerivedCategory.Plus.Qh.obj N) := by
     erw [← hc, Category.assoc, Iso.hom_inv_id_app, Category.comp_id]
@@ -180,7 +180,7 @@ private theorem target_unit_representative_transport
     rfl
   dsimp only
   change DerivedCategory.Plus.ι.map
-    (F.rightDerivedFunctorPlusUnit.app N ≫ F.rightDerivedFunctorPlus.map g) = _
+    (F.rightDerivedFunctorPlusUnith.app N ≫ F.rightDerivedFunctorPlus.map g) = _
   rw [Functor.map_comp, hu, Category.assoc]
   erw [← hn]
   have hph : P.mapDerivedCategoryFactorsh.hom.app H.obj =
@@ -277,7 +277,7 @@ theorem smallModel_injectiveExchange_target_transport {X S : Scheme.{v}} (f : X 
           DerivedCategory.Plus.Qh.map
             ((NatTrans.mapHomotopyCategoryPlus
               (baseChangeMap AddCommGrpCat.{v + 1} sq)).app H) ≫
-          F.rightDerivedFunctorPlusUnit.app (P.mapHomotopyCategoryPlus.obj H) ≫
+          F.rightDerivedFunctorPlusUnith.app (P.mapHomotopyCategoryPlus.obj H) ≫
           F.rightDerivedFunctorPlus.map
             (P.mapDerivedCategoryPlusFactorsh.inv.app H ≫
               P.mapDerivedCategoryPlus.map q'.inv)) =
@@ -317,7 +317,7 @@ theorem smallModel_injectiveExchange_target_transport {X S : Scheme.{v}} (f : X 
     (U.mapDerivedCategoryPlusFactorsh.hom.app (R.mapHomotopyCategoryPlus.obj H))
     (DerivedCategory.Plus.Qh.map
       ((NatTrans.mapHomotopyCategoryPlus (baseChangeMap AddCommGrpCat.{v + 1} sq)).app H))
-    (F.rightDerivedFunctorPlusUnit.app (P.mapHomotopyCategoryPlus.obj H))
+    (F.rightDerivedFunctorPlusUnith.app (P.mapHomotopyCategoryPlus.obj H))
     (F.rightDerivedFunctorPlus.map
       (P.mapDerivedCategoryPlusFactorsh.inv.app H ≫ P.mapDerivedCategoryPlus.map q'.inv))
     (DerivedCategory.Q.map a)

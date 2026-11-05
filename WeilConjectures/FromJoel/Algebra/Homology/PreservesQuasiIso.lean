@@ -98,7 +98,7 @@ lemma preserves_shortComplexQuasiIso [F.PreservesHomology] :
   intro _ _ _ hf
   simp only [ShortComplex.mem_quasiIso_iff, MorphismProperty.inverseImage_iff,
     mapShortComplex_obj] at hf ⊢
-  infer_instance
+  exact ShortComplex.quasiIso_map_of_preservesLeftHomology _ _
 
 instance [F.PreservesHomology] {ι : Type*} (c : ComplexShape ι) {K L : HomologicalComplex C c}
     (f : K ⟶ L) (i : ι) [hf : QuasiIsoAt f i] :

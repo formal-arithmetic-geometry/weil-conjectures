@@ -81,7 +81,7 @@ theorem exists_rhom_hom_derived_roof
             exact hf⟩)
         let b := (DerivedCategory.Plus.homologyFunctorObjQIso
           (V.mapCochainComplexPlus.obj I) n).inv a
-        let η := V.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient C).obj I)
+        let η := V.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.quotient C).obj I)
         ψ ((DerivedCategory.Plus.Q (C := C)).obj K) n
             ((H n).map (RV.map e.inv)
               ((H n).map η b)) =

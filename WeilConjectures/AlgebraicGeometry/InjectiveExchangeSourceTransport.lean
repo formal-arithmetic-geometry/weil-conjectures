@@ -52,7 +52,7 @@ theorem injectiveExchange_source_transport {X S : Scheme.{v}} (f : X ⟶ S)
         (q ≪≫ (DerivedCategory.quotientCompQhIso _).symm.app M.obj)
     let R := lowerStar AddCommGrpCat.{v + 1} f
     (sourceInjectiveDirectImageIso f K J q).inv =
-      DerivedCategory.Plus.ι.map (R.rightDerivedFunctorPlusUnit.app H) ≫
+      DerivedCategory.Plus.ι.map (R.rightDerivedFunctorPlusUnith.app H) ≫
       DerivedCategory.Plus.ι.map (R.rightDerivedFunctorPlus.map q'.inv) := by
   simp only [sourceInjectiveDirectImageIso, Iso.trans_inv, Iso.symm_inv,
     Functor.mapIso_inv, asIso_hom]

@@ -622,7 +622,7 @@ private theorem commonBoundAcyclicResolution
       (∀ K, K.obj.IsGE a → QuasiIso (α.app K)) ∧
       (∀ K, (I.obj K).obj.IsStrictlyGE a) ∧
       (∀ K n, Injective ((I.obj K).obj.X n)) ∧
-      (∀ K, IsIso (F.rightDerivedFunctorPlusUnit.app
+      (∀ K, IsIso (F.rightDerivedFunctorPlusUnith.app
         ((HomotopyCategory.Plus.quotient C).obj (I.obj K)))) := by
   obtain ⟨I, α, hα, hbound, hinj⟩ := commonBoundResolution (C := C) a
   refine ⟨I, α, hα, hbound, hinj, ?_⟩
@@ -744,7 +744,7 @@ theorem condensed_open_closed_recollement
           (∀ K, K.obj.IsGE a → QuasiIso (α.app K)) ∧
           (∀ K, (I.obj K).obj.IsStrictlyGE a) ∧
           (∀ (K) (n : ℤ), Injective ((I.obj K).obj.X n)) ∧
-          (∀ K, IsIso (ishriek.rightDerivedFunctorPlusUnit.app
+          (∀ K, IsIso (ishriek.rightDerivedFunctorPlusUnith.app
             ((HomotopyCategory.Plus.quotient _).obj (I.obj K))))) ∧
         (∀ a : ℤ, ∃
           (I : CochainComplex.Plus
@@ -755,7 +755,7 @@ theorem condensed_open_closed_recollement
           (∀ K, K.obj.IsGE a → QuasiIso (α.app K)) ∧
           (∀ K, (I.obj K).obj.IsStrictlyGE a) ∧
           (∀ (K) (n : ℤ), Injective ((I.obj K).obj.X n)) ∧
-          (∀ K, IsIso ((lowerStar Λ j).rightDerivedFunctorPlusUnit.app
+          (∀ K, IsIso ((lowerStar Λ j).rightDerivedFunctorPlusUnith.app
             ((HomotopyCategory.Plus.quotient _).obj (I.obj K))))) := by
   classical
   have hAb := ProEtale.isIso_upperStarLowerStarAdjunction_counit Ab.{u + 1} i

@@ -56,7 +56,7 @@ instance isIso_derivedPlus_counit_of_isOpenImmersion {V X : Scheme.{u}} (v : V �
   obtain ⟨L, _, ⟨e⟩⟩ := _root_.DerivedCategory.Plus.exists_injective_nonempty_iso N n
   let M := (InjectiveObject.ι _).mapCochainComplexPlus.obj L
   let P := (HomotopyCategory.Plus.quotient _).obj M
-  have : IsIso ((v)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnit.app P) := by
+  have : IsIso ((v)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnith.app P) := by
     dsimp only [P, M]
     infer_instance
   have := (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) v).isIso_derivedPlus_counit_app_Qh_obj

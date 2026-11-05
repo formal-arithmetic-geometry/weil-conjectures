@@ -107,7 +107,7 @@ theorem exists_stalk_tensor_iso {X : TopCat.{u}} (R : X.Presheaf CommRingCat.{u}
             induction z using TensorProduct.inductionOn with
             | add a b ha hb => simpa only [map_add] using congrArg₂ (· + ·) ha hb
             | tmul s t =>
-              erw [PresheafOfModulesOfCommRing.Monoidal.tensorObj_map_tmul, hp₀, hp₀]
+              erw [PresheafOfModules.Monoidal.tensorObj_map_tmul, hp₀, hp₀]
               congr 1
               · exact TopCat.Presheaf.germ_res_apply' F.presheaf _ x _ s
               · exact TopCat.Presheaf.germ_res_apply' G.presheaf _ x _ t } }
