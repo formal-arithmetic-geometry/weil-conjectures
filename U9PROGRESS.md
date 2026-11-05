@@ -180,3 +180,7 @@
   then validate direct importers and one further layer before writing DONE.
 - Fix patterns and prior diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ613.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
+- Assigned module is green at `c9323a20fd`: ucheck-bump rc=0, failed=0,
+  4264 jobs; target rebuilt in 32s on poolb:43.166.72.113.
+- Applied the same known compositor fix in `UnboundedCoefficientForgetfulAux`.
+  Validating that direct importer and its importer `ProperUnboundedBaseChangeForgetful`.
