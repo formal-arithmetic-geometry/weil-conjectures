@@ -32,7 +32,7 @@ private theorem scalar_unit_comp
     (U ⋙ V).DerivedUnit F H (η ≫ V.map θ) := by
   unfold DerivedUnit at *
   intro K
-  let e := (mapDerivedCategoryCompIso U V).symm.app K
+  let e := (mapDerivedCategoryCompIso U V).app K
   have hb := (hη (U.mapDerivedCategory.obj K)).comp (hθ K)
   have he (f : (DerivedCategory.singleFunctor A 0).obj H ⟶ K) :
       (DerivedCategory.singleFunctor C 0).map η ≫
@@ -44,15 +44,27 @@ private theorem scalar_unit_comp
           (U ⋙ V).mapDerivedCategory.map f ≫ e.hom := by
     simp only [Functor.map_comp, Category.assoc]
     erw [← (V.mapDerivedCategorySingleFunctor 0).inv.naturality_assoc θ]
+    have hc := derivedCompSingle U V H
     have hci : (V.mapDerivedCategorySingleFunctor 0).inv.app (U.obj H) ≫
         V.mapDerivedCategory.map ((U.mapDerivedCategorySingleFunctor 0).inv.app H) =
       ((U ⋙ V).mapDerivedCategorySingleFunctor 0).inv.app H ≫
-        (mapDerivedCategoryCompIso U V).inv.app
+        (mapDerivedCategoryCompIso U V).hom.app
           ((DerivedCategory.singleFunctor A 0).obj H) := by
-      exact (U.mapDerivedCategorySingleFunctor_inv_app_comp_mapDerivedCategoryCompIso_inv_app
-        V H).symm
+      let z := (V.mapDerivedCategorySingleFunctor 0).app (U.obj H)
+      let y := V.mapDerivedCategory.mapIso ((U.mapDerivedCategorySingleFunctor 0).app H)
+      apply (cancel_mono (y.hom ≫ z.hom)).1
+      change (z.inv ≫ y.inv) ≫ (y.hom ≫ z.hom) = _
+      simp only [Category.assoc, Iso.inv_hom_id_assoc, Iso.inv_hom_id]
+      change 𝟙 _ = ((U ⋙ V).mapDerivedCategorySingleFunctor 0).inv.app H ≫
+        ((mapDerivedCategoryCompIso U V).hom.app
+          ((DerivedCategory.singleFunctor A 0).obj H) ≫
+            V.mapDerivedCategory.map ((U.mapDerivedCategorySingleFunctor 0).hom.app H) ≫
+              (V.mapDerivedCategorySingleFunctor 0).hom.app (U.obj H))
+      rw [hc]
+      exact (Iso.inv_hom_id_app _ _).symm
     rw [reassoc_of% hci]
-    erw [← (mapDerivedCategoryCompIso U V).inv.naturality f]
+    erw [← (mapDerivedCategoryCompIso U V).hom.naturality f]
+    rfl
   have hb' : Function.Bijective (fun f : (DerivedCategory.singleFunctor A 0).obj H ⟶ K ↦
       ((DerivedCategory.singleFunctor C 0).map (η ≫ V.map θ) ≫
         ((U ⋙ V).mapDerivedCategorySingleFunctor 0).inv.app H ≫

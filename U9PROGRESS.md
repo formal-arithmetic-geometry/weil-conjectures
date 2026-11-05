@@ -128,27 +128,21 @@
 - Fix patterns: `/home/ubuntu/u9/bz/FIXES-BZ469.md`.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
 
-# BZ511 in progress
+# BZ511 complete
 
 - Branch: `u9/BZ511`; starting commit: `fa248eeed`.
-- The user instructed continuation after the exact two-private-helper API proposal.
-  The compositor inverse in `derivedCompSingle` and the direct compositor in
-  `derivedTripleNatSingle` are applied. The public theorem statement is unchanged.
-- Proofs now use Mathlib's single-object compositor lemma, hom naturality, and
-  hom/inv cancellation; the redundant `rfl` after `simp only` is removed.
-- Pinned Mathlib source was inspected at b63f6e8a. Patterns, occurrence counts,
-  and integration errors: `/home/ubuntu/u9/bz/FIXES-BZ511.md`.
-- Existing `ucheck-bump` invocation is queued; it reads the pushed branch after
-  acquiring a tree. Next: validate the owned module and continue downstream.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
-
-# BZ557 in progress
-
-- Branch: `u9/BZ557`; starting commit: `8af5cb324`.
-- Added the public AffineScheme import to direct importer AffineBasisSectionsDerivedUnit.
-- Initial remote builds stopped in the shared Presheaf.InternalHom dependency.
-- On continuation, merged BZ558 prerequisite repair `f28760733369366ac823f0084f3c4090afa3a90d`.
-- Next: ucheck-bump on AffineBasisSectionsResolutionHomologyEpi, AffineBasisSectionsDerivedUnit,
-  and AffineOpenSectionsResolutionQuasiIso; fix any owned errors and write DONE when green.
-- Notes and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ557.md`.
-- No local Lean/Lake, statement changes, proof escapes, or heartbeat increases.
+- Green module: `WeilConjectures.AlgebraicGeometry.ResidueQuotientDerivedUnit`.
+- `ucheck-bump` passed: 4159 jobs, target rebuilt in 29s, source `ffe5a7971`.
+- Full green log: `/home/ubuntu/u9/bz/BUILD-BZ511-owned-green.log`.
+- The final Lean sources match that successful source commit exactly.
+- The user instructed continuation after the two private-helper API substitutions.
+  The public theorem statement and all existing docstrings are unchanged.
+- Five downstream targets were attempted. Four are blocked by the outside-unit
+  `DivisibleExtensionDerivedReductionSupplement`; the remaining target is blocked
+  by `FiniteOrdinaryScalarUnit` and `ConstantModuleHigherDirectImageCyclicReduction`.
+- All direct importers and the reviewed second layer have confirmed external
+  blockers; paths and full logs are saved under `/home/ubuntu/u9/bz/BZ511-*`.
+  Both unvalidated downstream edits were reverted. No extra modules claimed green.
+- Patterns and exact errors: `/home/ubuntu/u9/bz/FIXES-BZ511.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or limit increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ511.DONE`.
