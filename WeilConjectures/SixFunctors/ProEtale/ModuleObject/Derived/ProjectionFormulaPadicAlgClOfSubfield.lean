@@ -42,25 +42,24 @@ quasi-separated `f`, if the projection map with coefficients `E` is invertible a
 invertible at `(ℚ̄_ℓ ⊗ᴸ K, ℚ̄_ℓ ⊗ᴸ M)`. -/
 theorem isIso_projectionMap_app_app_padicAlgCl_of_padicSubfield
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.continuousMapRingObj E.1) X)))
+      (condensedRingObj (Profinite.subfieldRingObj ℓ E) X)))
     (M : DerivedCategory (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1})
-      (condensedRingObj (Profinite.continuousMapRingObj E.1) Y)))
+      (condensedRingObj (Profinite.subfieldRingObj ℓ E) Y)))
     (n m : ℤ) (hn : K.IsGE n)
     (hm : (((curriedTensor _).obj K).obj
-      (((f)^*⟦Profinite.continuousMapRingObj E.1⟧).leftDerivedFunctor.obj M)).IsGE m)
-    (h : IsIso (((projectionMap (Profinite.continuousMapRingObj E.1) f).app K).app M)) :
+      (((f)^*⟦Profinite.subfieldRingObj ℓ E⟧).leftDerivedFunctor.obj M)).IsGE m)
+    (h : IsIso (((projectionMap (Profinite.subfieldRingObj ℓ E) f).app K).app M)) :
     IsIso (((projectionMap (Profinite.padicAlgClRingObj ℓ) f).app
-      ((Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
+      ((Mod.extendScalars (coefficientMap (Profinite.subfieldRingObjToPadicAlgClRingObj ℓ E)
         X)).leftDerivedFunctor.obj K)).app
-      ((Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
+      ((Mod.extendScalars (coefficientMap (Profinite.subfieldRingObjToPadicAlgClRingObj ℓ E)
         Y)).leftDerivedFunctor.obj M)) := by
   have e := isIso_projectionMap_app_app_extendScalars_of_isIso
-    (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) f K M
+    (Profinite.subfieldRingObjToPadicAlgClRingObj ℓ E) f K M
     (by exact_mod_proofs
       isIso_derivedPushHom_app_padicSubfieldRingObjToPadicAlgCl_of_isGE ℓ E f K n)
-    (by exact_mod_proofs (isIso_derivedPushHom_app_padicSubfieldRingObjToPadicAlgCl_of_isGE ℓ E f
-      (((curriedTensor _).obj K).obj
-        (((f)^*⟦Profinite.continuousMapRingObj E.1⟧).leftDerivedFunctor.obj M)) m))
+    (by exact_mod_proofs
+      (@isIso_derivedPushHom_app_padicSubfieldRingObjToPadicAlgCl_of_isGE ℓ _ E _ _ f _ _ _ m hm))
     (by exact_mod_proofs h)
   exact_mod_proofs e
 

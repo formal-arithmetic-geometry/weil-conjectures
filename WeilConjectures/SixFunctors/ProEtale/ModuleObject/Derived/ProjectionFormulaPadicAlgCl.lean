@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaPadicAlgClOfSubfield
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaPadicSubfield
+import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaPadicAlgClOfSubfieldAux
+import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaPadicSubfieldAux
 
 /-!
 # The `ℚ̄_ℓ` projection formula from the integral one
@@ -87,11 +89,11 @@ theorem isIso_projectionMap_padicAlgClRingObj_of_integral (p : X ⟶ Y)
   have hKM₁ := (ContinuousMapRingObj.isMonoidal_boundedConstructible ℓ E X).toTensorLE.prop_tensor
     _ _ hK₁ (boundedConstructible_leftDerivedUpperStar_obj _ ℓ p ⟨_, hM₁⟩)
   -- the changes of coefficients `𝒪_E ⟶ E ⟶ ℚ̄_ℓ`
-  have e₁ := isIso_projectionMap_app_app_padicSubfield_of_padicIntegers ℓ E p.left K₀.obj M₀.obj
-    _ _ (exists_isGE_of_boundedConstructible K₀.property).choose_spec
+  have e₁ := isIso_projectionMap_app_app_padicSubfield_of_padicIntegers_aux ℓ E p.left K₀.obj
+    M₀.obj _ _ (exists_isGE_of_boundedConstructible K₀.property).choose_spec
     (by exact_mod_proofs (exists_isGE_of_boundedConstructible hKM₀).choose_spec)
     (by exact_mod_proofs h E K₀.obj M₀.obj K₀.property M₀.property)
-  have e₂ := isIso_projectionMap_app_app_padicAlgCl_of_padicSubfield ℓ E p.left
+  have e₂ := isIso_projectionMap_app_app_padicAlgCl_of_padicSubfield_aux ℓ E p.left
     ((Mod.extendScalars (coefficientMap (padicIntegersRingObjToContinuousMapRingObj ℓ E)
       X.left)).leftDerivedFunctor.obj K₀.obj)
     ((Mod.extendScalars (coefficientMap (padicIntegersRingObjToContinuousMapRingObj ℓ E)

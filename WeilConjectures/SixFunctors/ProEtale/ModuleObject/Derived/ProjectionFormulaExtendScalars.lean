@@ -32,6 +32,37 @@ open CategoryTheory Limits MonoidalCategory
 
 open scoped CategoryTheory.Obj
 
+namespace Profinite
+
+variable (ℓ : ℕ) [Fact ℓ.Prime] (E : _root_.PadicAlgCl.FiniteIntermediateField ℓ)
+
+/-! ### Named coefficient rings
+
+The statements of the two coefficient changes of the projection formula are stated with these
+names rather than with `padicIntegersRingObj ℓ E.1` and `continuousMapRingObj E.1`. Their
+elaborated types stay small, and so does the export of their library-suggestion data, which
+walks the unshared statement trees (minutes per statement otherwise). -/
+
+/-- The ring object `𝒪̲_E` of condensed abelian groups for a finite subextension `E`. -/
+noncomputable abbrev integersRingObj : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1} :=
+  padicIntegersRingObj.{u} ℓ E.1
+
+/-- The ring object `E̲` of condensed abelian groups for a finite subextension `E`. -/
+noncomputable abbrev subfieldRingObj : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1} :=
+  continuousMapRingObj.{u} E.1
+
+/-- The inclusion `𝒪̲_E ⟶ E̲`. -/
+noncomputable abbrev integersRingObjToSubfieldRingObj :
+    integersRingObj.{u} ℓ E ⟶ subfieldRingObj ℓ E :=
+  AlgebraicGeometry.ProEtale.padicIntegersRingObjToContinuousMapRingObj.{u} ℓ E
+
+/-- The inclusion `E̲ ⟶ ℚ̲̄_ℓ`. -/
+noncomputable abbrev subfieldRingObjToPadicAlgClRingObj :
+    subfieldRingObj.{u} ℓ E ⟶ padicAlgClRingObj ℓ :=
+  padicSubfieldRingObjToPadicAlgCl.{u} ℓ E
+
+end Profinite
+
 namespace AlgebraicGeometry.ProEtale
 
 /-- A bounded constructible complex is bounded below. -/

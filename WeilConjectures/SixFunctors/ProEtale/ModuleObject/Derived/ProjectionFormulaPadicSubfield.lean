@@ -42,24 +42,22 @@ with `K₀` and `K₀ ⊗ᴸ Lf^* M₀` bounded below, then the projection map w
 invertible at `(E ⊗ᴸ K₀, E ⊗ᴸ M₀)`. -/
 theorem isIso_projectionMap_app_app_padicSubfield_of_padicIntegers
     (K₀ : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)))
+      (condensedRingObj (Profinite.integersRingObj ℓ E) X)))
     (M₀ : DerivedCategory (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) Y)))
+      (condensedRingObj (Profinite.integersRingObj ℓ E) Y)))
     (n m : ℤ) (hn : K₀.IsGE n)
     (hm : (((curriedTensor _).obj K₀).obj
-      (((f)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).leftDerivedFunctor.obj M₀)).IsGE m)
-    (h : IsIso (((projectionMap (Profinite.padicIntegersRingObj ℓ E.1) f).app K₀).app M₀)) :
-    IsIso (((projectionMap (Profinite.continuousMapRingObj E.1) f).app
-      ((Mod.extendScalars (coefficientMap (padicIntegersRingObjToContinuousMapRingObj ℓ E)
+      (((f)^*⟦Profinite.integersRingObj ℓ E⟧).leftDerivedFunctor.obj M₀)).IsGE m)
+    (h : IsIso (((projectionMap (Profinite.integersRingObj ℓ E) f).app K₀).app M₀)) :
+    IsIso (((projectionMap (Profinite.subfieldRingObj ℓ E) f).app
+      ((Mod.extendScalars (coefficientMap (Profinite.integersRingObjToSubfieldRingObj ℓ E)
         X)).leftDerivedFunctor.obj K₀)).app
-      ((Mod.extendScalars (coefficientMap (padicIntegersRingObjToContinuousMapRingObj ℓ E)
+      ((Mod.extendScalars (coefficientMap (Profinite.integersRingObjToSubfieldRingObj ℓ E)
         Y)).leftDerivedFunctor.obj M₀)) := by
   have e := isIso_projectionMap_app_app_extendScalars_of_isIso
-    (padicIntegersRingObjToContinuousMapRingObj ℓ E) f K₀ M₀
+    (Profinite.integersRingObjToSubfieldRingObj ℓ E) f K₀ M₀
     (by exact_mod_proofs isIso_derivedPushHom_app_padicIntegers_of_isGE ℓ E f K₀ n)
-    (by exact_mod_proofs (isIso_derivedPushHom_app_padicIntegers_of_isGE ℓ E f
-      (((curriedTensor _).obj K₀).obj
-        (((f)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).leftDerivedFunctor.obj M₀)) m))
+    (by exact_mod_proofs (@isIso_derivedPushHom_app_padicIntegers_of_isGE ℓ _ E _ _ f _ _ _ m hm))
     (by exact_mod_proofs h)
   exact_mod_proofs e
 
