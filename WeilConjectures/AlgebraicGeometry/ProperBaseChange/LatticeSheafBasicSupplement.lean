@@ -664,7 +664,9 @@ private noncomputable def freeTensorPresheafIso :
       ((S.over U).obj.map f 1) ⊗ₜ[(R.over U).obj.obj T',
         ((latticeScalarMap a U).hom.app T').hom]
         ((SheafOfModules.free (R := (sheafCompose _
-          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (R.over U)) I).val.map f m) from
+          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (R.over U)) I).val.map f m :
+            (SheafOfModules.free (R := (sheafCompose _
+              (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (R.over U)) I).val.obj T') from
     Classical.choose_spec (SheafOfModules.exists_changeOfRingsMap
       (latticeScalarMap a U) (SheafOfModules.free (R := (sheafCompose _
         (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (R.over U)) I) f) 1 m]

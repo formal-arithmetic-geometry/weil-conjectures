@@ -36,10 +36,8 @@ private theorem exact_sigma
     (f : ∀ i, U i ⟶ V i) (g : ∀ i, V i ⟶ W i)
     (h : ∀ i, f i ≫ g i = 0)
     (he : ∀ i, (ShortComplex.mk (f i) (g i) (h i)).Exact) :
-    ∃ w : Limits.Sigma.map (f := U) (g := V) f ≫
-        Limits.Sigma.map (f := V) (g := W) g = 0,
-      (ShortComplex.mk (Limits.Sigma.map (f := U) (g := V) f)
-        (Limits.Sigma.map (f := V) (g := W) g) w).Exact := by
+    ∃ w : Limits.Sigma.map f ≫ Limits.Sigma.map g = 0,
+      (ShortComplex.mk (Limits.Sigma.map f) (Limits.Sigma.map g) w).Exact := by
   let f' : Discrete.functor U ⟶ Discrete.functor V :=
     Discrete.natTrans (fun i ↦ f i.as)
   let g' : Discrete.functor V ⟶ Discrete.functor W :=
@@ -53,15 +51,15 @@ private theorem exact_sigma
     exact (IsZero.of_iso
       (ShortComplex.exact_iff_isZero_homology _ |>.mp hi)
       (S.mapHomologyIso ((evaluation (Discrete I) B).obj i)).symm).eq_of_src _ _
-  have w : Limits.Sigma.map (f := U) (g := V) f ≫ Limits.Sigma.map (f := V) (g := W) g = 0 := by
+  have w : Limits.Sigma.map f ≫ Limits.Sigma.map g = 0 := by
     apply Sigma.hom_ext
     intro i
     rw [Sigma.ι_map_assoc, Sigma.ι_map, ← Category.assoc, h i, zero_comp, comp_zero]
   refine ⟨w, ?_⟩
   exact colim.exact_mapShortComplex (S := S) hS (colimit.isColimit _)
     (colimit.isColimit _) (colimit.isColimit _)
-    (Limits.Sigma.map (f := U) (g := V) f)
-    (Limits.Sigma.map (f := V) (g := W) g) (fun i ↦ Sigma.ι_map f i.as)
+    (Limits.Sigma.map f)
+    (Limits.Sigma.map g) (fun i ↦ Sigma.ι_map f i.as)
     (fun i ↦ Sigma.ι_map g i.as)
 
 /-- A coproduct of zero objects is zero, including an empty coproduct. -/

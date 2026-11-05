@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 public import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
+public import Mathlib.Topology.Algebra.Ring.Ideal
 public import WeilConjectures.AlgebraicGeometry.ContinuousCoefficientCommRing
 public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionFinite
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
