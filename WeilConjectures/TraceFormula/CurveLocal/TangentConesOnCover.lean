@@ -34,6 +34,8 @@ the smooth surface `S' = C ×_k C` at the `k`-point `s' = (c, c)`, and `π : T' 
   `T ∖ (H ∪ V)`.
 - `AlgebraicGeometry.Etale.CurveLocalModel.CoverDatum.natCard_geometricFiber_π`: the geometric
   fibres of `π` over `T ∖ (H ∪ V)` have `e²` points.
+- `AlgebraicGeometry.Etale.CurveLocalModel.CoverDatum.free_and_finrank_π`: `π` is finite free of
+  degree `e²`.
 - `AlgebraicGeometry.Etale.CurveLocalModel.CoverDatum.tangentConesOnCover`: the assembled
   statement of blueprint `lemma-tangent-cones-on-cover`.
 -/
@@ -176,6 +178,52 @@ theorem natCard_geometricFiber_π {Ω : Type u} [Field Ω] [IsSepClosed Ω]
   congr 1
   · exact D.natCard_geometricFiber_ρ _ hO.1
   · exact D.natCard_geometricFiber_ρ _ hO.2
+
+/-- **`π` is finite free of degree `e²`** (blueprint `lemma-tangent-cones-on-cover`): the strict
+local ring of `T'` is a free module of rank `e²` over that of `T`. The rank is computed from the
+geometric fibre over a point of `T ∖ (H ∪ V)`, namely the image of a point of the diagonal `B'`
+other than the closed point. -/
+theorem free_and_finrank_π :
+    letI := (Spec.preimage D.π).hom.toAlgebra
+    Module.Free (strictHenselization M.diagPoint) (strictHenselization D.s') ∧
+      Module.finrank (strictHenselization M.diagPoint) (strictHenselization D.s') = D.e ^ 2 := by
+  set φ := Spec.preimage D.π
+  have hφ : Spec.map φ = D.π := Spec.map_preimage _
+  let := φ.hom.toAlgebra
+  have : Module.Finite (strictHenselization M.diagPoint) (strictHenselization D.s') := by
+    have : φ.hom.Finite := by
+      rw [← IsFinite.SpecMap_iff, hφ]
+      infer_instance
+    exact this
+  have : Module.Flat (strictHenselization M.diagPoint) (strictHenselization D.s') := by
+    have : φ.hom.Flat := by
+      rw [← Flat.SpecMap_iff, hφ]
+      exact D.flat_π
+    exact this
+  have : Module.Free (strictHenselization M.diagPoint) (strictHenselization D.s') :=
+    Module.free_of_flat_of_isLocalRing
+  refine ⟨this, ?_⟩
+  obtain ⟨P, hPb, hP⟩ := D.exists_mem_b_ne_closedPoint
+  have h := D.p_fst_eq_p_snd_of_mem_b hPb
+  have hz₀ : D.π P ∈ M.hH.openComplement ⊓ M.v.openComplement :=
+    ⟨fun hH ↦ hP (D.eq_closedPoint (h.trans (D.p_snd_of_mem_hH hH)) (D.p_snd_of_mem_hH hH)),
+      fun hv ↦ hP (D.eq_closedPoint (D.p_fst_of_mem_v hv) (h.symm.trans (D.p_fst_of_mem_v hv)))⟩
+  generalize D.π P = x at hz₀
+  let z := M.T.algClosurePoint x
+  have hrange : Set.range z.base ⊆ (M.hH.openComplement ⊓ M.v.openComplement : M.T.Opens) := by
+    rintro _ ⟨q, rfl⟩
+    rw [Scheme.algClosurePoint_base]
+    exact hz₀
+  rw [← D.natCard_geometricFiber_π z (hrange ⟨_, rfl⟩)]
+  obtain ⟨ζ, hζ⟩ : ∃ ζ, Spec.map ζ = z := ⟨Spec.preimage _, Spec.map_preimage _⟩
+  have het := etale_pullback_snd_of_range D.π _ z hrange
+  rw [← hφ, ← hζ] at het
+  have het' : Etale (pullback.fst (Spec.map ζ) (Spec.map φ)) := by
+    rw [← pullbackSymmetry_hom_comp_snd]
+    infer_instance
+  rw [← hζ, ← hφ]
+  exact (Scheme.Hom.natCard_geometricFiber_Spec_map_eq_finrank
+    (R := strictHenselization M.diagPoint) (S := strictHenselization D.s') ζ.hom het').symm
 
 /-- **Tangent cones on the cover** (blueprint `lemma-tangent-cones-on-cover`): `T'` is the strict
 localization of the smooth surface `S' = C ×_k C` at the `k`-point `s'`; the morphism

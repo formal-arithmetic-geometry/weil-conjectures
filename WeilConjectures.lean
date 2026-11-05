@@ -15326,6 +15326,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.Closed.InvertibleDualizing
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.LeftProjectionComp
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.PairingComparison
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.Preadditive
+public import WeilConjectures.CategoryTheory.Monoidal.Closed.ProjectionMapIhom
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.ProjectionPairing
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.SwapEvPairing
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.UnitEnd
@@ -25040,6 +25041,7 @@ public import WeilConjectures.TraceFormula.LefschetzVerdier
 public import WeilConjectures.TraceFormula.LocalTerm
 public import WeilConjectures.TraceFormula.LocalTermLocality
 public import WeilConjectures.TraceFormula.LocalTermPoint
+public import WeilConjectures.TraceFormula.LocalityWarning
 public import WeilConjectures.TraceFormula.LocalizationFrobenius
 public import WeilConjectures.TraceFormula.LowerShriekCoherence
 public import WeilConjectures.TraceFormula.Main
