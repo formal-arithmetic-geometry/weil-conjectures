@@ -1,8 +1,9 @@
 module
 
-public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 
 @[expose] public section
-open CategoryTheory
-#check @ObjectProperty.liftFullSubcategory_obj_obj
-#check @Over.homMk_left
+
+set_option profiler true in
+example (k₀ : Type) [Field k₀] :
+    (Field.toCommRing : CommRing (AlgebraicClosure k₀)) = AlgebraicClosure.instCommRing k₀ := rfl

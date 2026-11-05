@@ -220,7 +220,7 @@ lemma ι_map_geometricFiberBoundedConstructibleFunctorLowerStarIso_inv_app
 categories are the canonical projection maps. -/
 lemma ι_map_derivedLowerStarNativeConstructibleTensorIso_hom_app (A : WeilComplex k₀ l Z)
     (T : WeilComplex k₀ l Y) :
-    (ObjectProperty.ι _).map ((derivedLowerStarNativeConstructibleTensorIso g).hom.app (A, T)) =
+    ((derivedLowerStarNativeConstructibleTensorIso g).hom.app (A, T)).hom =
       (((ProEtaleWeilSheaf.derivedUpperStarLowerStarAdjunction k₀ l g).rightAdjointProjectionMap
         (ProEtaleWeilSheaf.nativeCurriedPullTensor k₀ l g)).app A.obj).app T.obj := by
   simp only [derivedLowerStarNativeConstructibleTensorIso, Functor.FullyFaithful.preimageIso_hom,
@@ -254,5 +254,73 @@ lemma rightAdjointProjectionMap_leftDerivedUpperStarTensor_app_app {X₀ Y₀ : 
       (CondensedRing.derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj l)
         f).projectionMorphism A B := by
   rw [Adjunction.projectionMorphism_eq_rightAdjointProjectionMap, δNatTrans_leftDerivedUpperStar]
+
+/-- On the ambient derived categories, forgetting the Weil structure acts on morphisms by the
+forgetful functor followed by the comparison of the two models. -/
+lemma ι_map_geometricFiberBoundedConstructibleFunctor_map (X : Scheme.{u})
+    [X.Over (Spec (CommRingCat.of k₀))] [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] {A B : WeilComplex k₀ l X} (φ : A ⟶ B) :
+    (ObjectProperty.ι _).map ((geometricFiberBoundedConstructibleFunctor k₀ l X).map φ) =
+      (adicSheafEquivCondensedMod l
+        (X ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor.mapDerivedCategory.map
+        ((IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).mapDerivedCategory.map φ.hom) :=
+  rfl
+
+set_option synthInstance.maxHeartbeats 400000 in
+-- the monoidal structure of the derived category of condensed modules is found slowly
+open scoped CategoryTheory.Obj in
+/-- The inclusion of bounded constructible complexes into the derived category commutes with
+right whiskering. -/
+lemma boundedConstructible_ι_map_whiskerRight (X : Scheme.{u})
+    [X.Over (Spec (CommRingCat.of k₀))] [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+    {M N : BoundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj l)
+      (Over.mk (X ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure).left)}
+    (φ : M ⟶ N) (A : BoundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj l)
+      (Over.mk (X ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure).left)) :
+    (ObjectProperty.ι _).map (φ ▷ A) = (ObjectProperty.ι _).map φ ▷ A.obj :=
+  rfl
+
+set_option synthInstance.maxHeartbeats 400000 in
+-- the monoidal structure of the derived category of condensed modules is found slowly
+open scoped CategoryTheory.Obj in
+/-- The inclusion of bounded constructible complexes into the derived category commutes with
+left whiskering. -/
+lemma boundedConstructible_ι_map_whiskerLeft' (X : Scheme.{u})
+    [X.Over (Spec (CommRingCat.of k₀))] [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+    (A : BoundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj l)
+      (Over.mk (X ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure).left))
+    {M N : BoundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj l)
+      (Over.mk (X ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure).left)}
+    (φ : M ⟶ N) :
+    (ObjectProperty.ι _).map (A ◁ φ) = A.obj ◁ (ObjectProperty.ι _).map φ :=
+  rfl
+
+/-- On the ambient derived categories, the direct image `Rḡ_*` of bounded constructible
+complexes acts on morphisms as that of the derived categories. -/
+lemma ι_map_boundedConstructibleLowerStar_geometricFiberHom_map {M M'} (φ : M ⟶ M') :
+    (ObjectProperty.ι _).map
+      ((CondensedRing.boundedConstructibleLowerStar l (geometricFiberHom (k₀ := k₀) g)).map φ) =
+      (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l)
+        (Scheme.Hom.geometricFiberMap g
+          (comp_over g (Spec (CommRingCat.of k₀))))).rightDerivedFunctor.map
+        ((ObjectProperty.ι _).map φ) :=
+  rfl
+
+set_option synthInstance.maxHeartbeats 400000 in
+-- the monoidal structure of the derived category of condensed modules is found slowly
+/-- The projection morphism of `Lḡ^* ⊣ Rḡ_*` on bounded constructible complexes is that of the
+ambient derived categories. -/
+lemma ι_map_boundedConstructibleProjectionMorphism_geometricFiberHom (M N) :
+    (ObjectProperty.ι _).map
+      ((CondensedRing.boundedConstructibleUpperStarLowerStarAdjunction l
+        (geometricFiberHom (k₀ := k₀) g)).projectionMorphism M N) =
+      (CondensedRing.derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj l)
+        (geometricFiberHom (k₀ := k₀) g).left).projectionMorphism M.obj N.obj :=
+  CondensedRing.boundedConstructibleProjectionMorphism_hom l _ M N
 
 end AlgebraicGeometry.WeilComplex

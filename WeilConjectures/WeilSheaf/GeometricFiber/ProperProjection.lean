@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.WeilSheaf.GeometricFiber.Forget
+public import WeilConjectures.WeilSheaf.GeometricFiber.ProperProjectionAmbient
 public import WeilConjectures.WeilSheaf.Native.Projection.ProperProjectionIso
 public import WeilConjectures.WeilSheaf.UpperShriek
 public import WeilConjectures.PoincareDuality.ProjectionFormulaOpenImmersion
@@ -48,6 +49,8 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))]
   [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
 
+set_option maxHeartbeats 2000000 in
+-- the derived categories of condensed modules are slow to elaborate
 set_option synthInstance.maxHeartbeats 400000 in
 -- the monoidal structure of the derived category of condensed modules is found slowly
 /-- **Forgetting the Weil structure commutes with the proper direct image, compatibly with the
@@ -98,7 +101,35 @@ theorem exists_derivedLowerStar_forget_iso_projection :
               (geometricFiberHom (k₀ := k₀) (nativeProjectionCompactification k₀ f).g)).projectionMorphism
               ((geometricFiberBoundedConstructibleFunctor k₀ l
                 (nativeProjectionCompactification k₀ f).Z).obj A)
-              ((geometricFiberBoundedConstructibleFunctor k₀ l Y).obj T) :=
-  sorry
+              ((geometricFiberBoundedConstructibleFunctor k₀ l Y).obj T) := by
+  have : IsProper (nativeProjectionCompactification k₀ f).g :=
+    (nativeProjectionCompactification k₀ f).isProper
+  refine ⟨geometricFiberBoundedConstructibleFunctorLowerStarIso (nativeProjectionCompactification k₀ f).g,
+    fun adj' adj L ↦ isIso_mateEquiv_geometricFiberBoundedConstructibleFunctorLowerStarIso _ adj' adj L,
+    geometricFiberBoundedConstructibleFunctorUpperStarIso (nativeProjectionCompactification k₀ f).g,
+    derivedLowerStarNativeConstructibleTensorIso (nativeProjectionCompactification k₀ f).g,
+    fun A T ↦ ?_⟩
+  apply (ObjectProperty.fullyFaithfulι _).map_injective
+  simp only [Functor.map_comp]
+  rw [ι_map_geometricFiberBoundedConstructibleFunctor_map]
+  rw [ι_map_derivedLowerStarNativeConstructibleTensorIso_hom_app]
+  rw [ι_map_geometricFiberBoundedConstructibleFunctorLowerStarIso_inv_app]
+  simp only [ι_map_boundedConstructibleLowerStar_geometricFiberHom_map,
+    ι_map_geometricFiberBoundedConstructibleFunctorTensorIso_hom_app,
+    boundedConstructible_ι_map_whiskerLeft',
+    ι_map_geometricFiberBoundedConstructibleFunctorUpperStarIso_hom_app,
+    boundedConstructible_ι_map_whiskerRight,
+    ι_map_geometricFiberBoundedConstructibleFunctorLowerStarIso_inv_app,
+    ι_map_boundedConstructibleProjectionMorphism_geometricFiberHom]
+  have hCT := ι_map_geometricFiberBoundedConstructibleFunctorTensorIso_hom_app
+    (nativeProjectionCompactification k₀ f).Z A ((upperStar (nativeProjectionCompactification k₀ f).g).obj T)
+  have hW := boundedConstructible_ι_map_whiskerLeft' (nativeProjectionCompactification k₀ f).Z
+    ((geometricFiberBoundedConstructibleFunctor k₀ l _).obj A)
+    ((geometricFiberBoundedConstructibleFunctorUpperStarIso (nativeProjectionCompactification k₀ f).g).hom.app T)
+  have hγ := ι_map_geometricFiberBoundedConstructibleFunctorUpperStarIso_hom_app
+    (nativeProjectionCompactification k₀ f).g T
+  dsimp only [Over.mk_left] at hCT hW hγ ⊢
+  simp only [hCT, hW, hγ]
+  exact forget_map_projection_eq _ A T
 
 end AlgebraicGeometry.WeilComplex
