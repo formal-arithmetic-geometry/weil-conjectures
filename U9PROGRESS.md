@@ -98,3 +98,10 @@
 - Assigned build log: `/home/ubuntu/u9/bz/BUILD-BZ275-assigned-green-full.log`.
 - Applied the same compositor and private-localization import patterns to direct importers;
   validating both together before advancing one more layer.
+
+- Both direct importers are green at `205625f5e362df5b09f0ffaa641f9878c3a32da7`: ucheck-bump rc=0, failed=0, 3876 jobs.
+- Local `SMul` instances expose the section-ring action on its definitionally equal
+  underlying sheaf sections without changing either helper statement.
+- Green importer log: `/home/ubuntu/u9/bz/BUILD-BZ275-importers-green-full.log`.
+- Checking four next-layer modules with the smallest dependency closures; any unrelated
+  dependency failures will be skipped according to the brief.
