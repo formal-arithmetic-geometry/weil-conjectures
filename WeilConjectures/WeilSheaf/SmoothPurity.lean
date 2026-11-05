@@ -325,10 +325,11 @@ Weil complexes is right adjoint to the direct image with compact support `Rf₀!
 This input of the chapter on smooth purity is not formalized for Weil complexes yet; it is stated
 with `sorry` (cross-section rule). 
 
-This is the statement of slopmaster2 (no separatedness of the base). The separated case is proved in
-`AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_adjunction_of_smooth_of_isSeparated`; this general form is still
-stated with `sorry` because the affine-line (Thom) route of `WeilConjectures.WeilSheaf.AffineLineSmoothAdjunction`
-uses it without separatedness of the base. -/
+This is the statement of slopmaster2 (no separatedness of the base). The separated case is proved
+in `AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_adjunction_of_smooth_of_isSeparated`,
+which is what the main theorem uses (the affine-line (Thom) route of
+`WeilConjectures.WeilSheaf.AffineLineSmoothAdjunction` assumes a separated base). This general form
+is kept as stated, with `sorry`, and is not used by `AlgebraicGeometry.Scheme.weil_conjectures`. -/
 theorem nonempty_derivedLowerShriek_adjunction_of_smooth (d : ℕ)
     [SmoothOfRelativeDimension d f] :
     Nonempty (derivedLowerShriek k₀ l f ⊣

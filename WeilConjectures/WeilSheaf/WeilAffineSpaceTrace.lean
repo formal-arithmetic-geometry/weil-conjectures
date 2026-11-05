@@ -258,10 +258,12 @@ private theorem trace_option_step
     (ih : ∀ (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
       [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
       [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+      [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
       [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))], traceClaim (k₀ := k₀) (l := l) n X)
     (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+    [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))] :
     traceClaim (k₀ := k₀) (l := l) (Option n) X := by
   let B := AffineSpace n X
@@ -285,6 +287,8 @@ private theorem trace_option_step
     inferInstanceAs (QuasiCompact (p ≫ X ↘ Spec (CommRingCat.of k₀)))
   have : QuasiSeparated (B ↘ Spec (CommRingCat.of k₀)) :=
     inferInstanceAs (QuasiSeparated (p ≫ X ↘ Spec (CommRingCat.of k₀)))
+  have : IsSeparated (B ↘ Spec (CommRingCat.of k₀)) :=
+    inferInstanceAs (IsSeparated (p ≫ X ↘ Spec (CommRingCat.of k₀)))
   let t := AffineSpace.reindex (fun _ : PUnit.{u + 1} ↦ (none : Option n)) X
   let s := t ≫ AffineSpace.map PUnit.{u + 1} (X ↘ Spec (CommRingCat.of k₀))
   have hq := (AffineSpace.option_coordinate_pullback n X).flip.paste_horiz
@@ -337,12 +341,14 @@ private theorem trace_reindex_step
     (ih : ∀ (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
       [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
       [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+      [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
       [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))], traceClaim (k₀ := k₀) (l := l) α X) :
     ∀ (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
       [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
       [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+      [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
       [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))], traceClaim (k₀ := k₀) (l := l) β X := by
-  intro X _ _ _ _
+  intro X _ _ _ _ _
   let pα := AffineSpace α X ↘ X
   let pβ := AffineSpace β X ↘ X
   let : (AffineSpace α X).Over (Spec (CommRingCat.of k₀)) :=
@@ -369,17 +375,19 @@ private theorem trace_all
     ∀ (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
       [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
       [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+      [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
       [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))], traceClaim (k₀ := k₀) (l := l) n X := by
   refine Fintype.induction_empty_option
     (P := fun n _ ↦ ∀ (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
       [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
       [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+      [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
       [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))], traceClaim (k₀ := k₀) (l := l) n X)
     ?_ ?_ ?_ n
   · intro α β _ e ih
     let : Fintype α := Fintype.ofEquiv β e.symm
     exact trace_reindex_step (k₀ := k₀) (l := l) e ih
-  · intro X _ _ _ _
+  · intro X _ _ _ _ _
     exact rank_zero_edge (k₀ := k₀) (l := l) X
   · intro α _ ih
     exact trace_option_step (k₀ := k₀) (l := l) α ih
@@ -409,6 +417,7 @@ theorem nonempty_iso_affineSpace_integral
     [X.Over (Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+    [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))] :
     letI : (AffineSpace n X).Over (Spec (CommRingCat.of k₀)) :=
       ⟨(AffineSpace n X ↘ X) ≫ (X ↘ Spec (CommRingCat.of k₀))⟩

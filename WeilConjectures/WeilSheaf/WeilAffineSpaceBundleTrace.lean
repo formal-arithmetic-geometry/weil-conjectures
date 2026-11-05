@@ -53,6 +53,7 @@ theorem nonempty_iso_upperStar_comp_derivedLowerShriek_affineSpace_of_isPullback
     (hπ : IsPullback π s (X ↘ Spec (CommRingCat.of k₀))
       (AffineSpace n (Spec (CommRingCat.of k₀)) ↘ Spec (CommRingCat.of k₀)))
     [IsSeparated π] [LocallyOfFiniteType π] [QuasiCompact π]
+    [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))] :
