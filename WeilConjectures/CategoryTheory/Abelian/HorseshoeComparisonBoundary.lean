@@ -93,42 +93,18 @@ private theorem comparison_eq_unit
           ComplexShape.embeddingUpNat := by
     ext i
     exact HomologicalComplex.mapExtensIso_hom_f_naturality _ _ _ _
-  let e : (v.mapHomotopyCategoryPlus ⋙ DerivedCategory.Plus.Qh).obj
-        ((HomotopyCategory.Plus.quotient A).obj (resolutionPlus R)) =
-      DerivedCategory.Plus.Qh.obj
-        (v.mapHomotopyCategoryPlus.obj ((HomotopyCategory.Plus.quotient A).obj
-          (resolutionPlus R))) := rfl
-  let ui := inv (v.rightDerivedFunctorPlusUnith.app
-    ((HomotopyCategory.Plus.quotient A).obj (resolutionPlus R)))
   simp only [injectiveResolutionDerivedComparison, boundedBelowInjectiveComparison,
     Functor.rightDerivedFunctorPlusObjSingleFunctorIsoQ, Iso.trans_hom,
     Iso.symm_hom, asIso_inv, Functor.map_comp, Category.assoc, Functor.comp_map]
   change DerivedCategory.Plus.ι.map
       (v.rightDerivedFunctorPlus.map (resolutionAugmentationIso R).hom) ≫
-      (v.rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.ι).map
-        ((DerivedCategory.Plus.quotientCompQhIso A).inv.app (resolutionPlus R)) ≫
-      DerivedCategory.Plus.ι.map ui ≫
-      DerivedCategory.Plus.ι.map (eqToHom e) ≫
-      (DerivedCategory.Plus.QhCompιIsoιCompQh B).hom.app
-        (v.mapHomotopyCategoryPlus.obj
-          ((HomotopyCategory.Plus.quotient A).obj (resolutionPlus R))) ≫
-      (DerivedCategory.quotientCompQhIso B).hom.app
-        ((v.mapHomotopyCategoryPlus.obj
-          ((HomotopyCategory.Plus.quotient A).obj (resolutionPlus R))).obj.as) ≫
+      DerivedCategory.Plus.ι.map (inv
+        (v.rightDerivedFunctorPlusUnit.app (resolutionPlus R))) ≫
       DerivedCategory.Q.map (R.cocomplex.mapExtendIso ComplexShape.embeddingUpNat v).hom ≫
       DerivedCategory.Q.map (HomologicalComplex.extendMap
         ((v.mapHomologicalComplex _).map φ.hom) ComplexShape.embeddingUpNat) = _
-  rw [← DerivedCategory.Q.map_comp, ← he, Functor.map_comp]
-  erw [← DerivedCategory.quotientCompQhIso_hom_naturality_assoc]
-  change _ ≫ DerivedCategory.Plus.ι.map (inv (v.rightDerivedFunctorPlusUnith.app
-      ((HomotopyCategory.Plus.quotient A).obj (resolutionPlus R)))) ≫
-      DerivedCategory.Plus.ι.map
-        (DerivedCategory.Plus.Qh.map ((HomotopyCategory.Plus.quotient B).map vg)) ≫ _ = _
-  have hu' := congrArg (fun f ↦ DerivedCategory.Plus.ι.map f) hu
-  simp only [Functor.map_comp] at hu'
-  erw [reassoc_of% hu']
-  rw [← DerivedCategory.Plus.ι.map_comp_assoc, ← v.rightDerivedFunctorPlus.map_comp, ha]
-  rfl
+  simp [Functor.rightDerivedFunctorPlusUnit,
+    Functor.quotientCompMapHomotopyCategoryPlusIso, Category.assoc]
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
@@ -217,9 +193,9 @@ private theorem augmentation_boundary
       (DerivedCategory.Plus.ι.commShiftIso (1 : ℤ)).hom.app
         ((DerivedCategory.Plus.singleFunctor A 0).obj S.X₁) ≫
       (shiftFunctor (DerivedCategory A) 1).map
-        (((DerivedCategory.singleFunctorIsoCompQ A 0).app S.X₁).hom ≫
+        (DerivedCategory.Plus.ι.map ((DerivedCategory.singleFunctorIsoCompQ A 0).app S.X₁).hom ≫
           DerivedCategory.Q.map IA.ι') =
-    ((DerivedCategory.singleFunctorIsoCompQ A 0).app S.X₃).hom ≫
+    DerivedCategory.Plus.ι.map ((DerivedCategory.singleFunctorIsoCompQ A 0).app S.X₃).hom ≫
       DerivedCategory.Q.map IC.ι' ≫ DerivedCategory.triangleOfSESδ hH ≫
       (DerivedCategory.Plus.ι.commShiftIso (1 : ℤ)).inv.app
         (DerivedCategory.Plus.Q.obj (resolutionPlus IA)) ≫

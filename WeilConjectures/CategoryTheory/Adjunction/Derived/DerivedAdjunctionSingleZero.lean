@@ -79,21 +79,15 @@ private theorem unit_single (M : C) :
           ((HomotopyCategory.Plus.singleFunctor C 0).obj M) ≫
         (L.mapHomotopyCategoryPlusSingleFunctorQhObjIso 0 M).hom := by
     apply DerivedCategory.Plus.ι.map_injective
-    simp only [Functor.map_comp, Functor.ι_map_mapDerivedCategoryPlusSingleFunctor_hom_app,
-      Functor.ι_map_mapDerivedCategoryPlusFactorsh_hom_app,
-      Functor.mapHomotopyCategoryPlusSingleFunctorQhObjIso, Functor.preimageIso_hom,
-      Functor.map_preimage]
-    simp only [Functor.mapDerivedCategorySingleFunctor, Functor.mapDerivedCategoryPlusSingleFunctor,
-      DerivedCategory.Plus.singleFunctorιIso, Iso.trans_hom,
-      Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, Functor.associator_hom_app,
-      Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Functor.associator_inv_app,
-      Iso.symm_hom, NatTrans.comp_app, Functor.mapIso_hom,
-      Category.id_comp]
-    rw [← Functor.ι_map_mapDerivedCategoryPlusFactorsh_hom_app]
-    simp [DerivedCategory.Plus.quotientCompQhIso,
-      DerivedCategory.Plus.QhCompιIsoιCompQh, Functor.mapDerivedCategoryPlusCompatibility,
-      Functor.mapDerivedCategoryFactorsh_hom_app, Functor.mapHomotopyCategoryFactors,
-      Quotient.lift.isLift_inv, Category.assoc]
+    simp [Functor.mapDerivedCategoryPlusSingleFunctor,
+      DerivedCategory.Plus.singleFunctorιIso,
+      Functor.mapDerivedCategoryPlusCompatibility,
+      Functor.mapHomotopyCategoryPlusSingleFunctorQhObjIso,
+      DerivedCategory.Plus.quotientCompQhIso,
+      DerivedCategory.Plus.QhCompιIsoιCompQh,
+      Functor.mapDerivedCategoryFactorsh_hom_app,
+      Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv,
+      Category.assoc]
   rw [hL, Functor.map_comp, ← Category.assoc]
   erw [h]
   let u : L.mapHomotopyCategoryPlus.obj ((HomotopyCategory.Plus.singleFunctor C 0).obj M) ≅
