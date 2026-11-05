@@ -61,10 +61,11 @@ lemma projectionProperForgetIso_hom_app (M : WeilComplex k₀ l X) :
       (projectionAdicCondensedDerivedPushIso l (gb).left).hom.app
         ((IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).mapDerivedCategory.obj M.obj))
     (by
+      have hn := ProEtaleWeilSheaf.nativeProjectionPushMate_normalization k₀ l g M.obj
       dsimp only [projectionRealizationCompIso, ProEtaleWeilSheaf.nativeProperForgetIso,
-        asIso_hom]
-      simp only [Category.assoc]
-      exact_mod_proofs ProEtaleWeilSheaf.nativeProjectionPushMate_normalization k₀ l g M.obj)
+        asIso_hom, TwoSquare.natTrans] at hn ⊢
+      simp only [Category.assoc] at hn ⊢
+      cast_proofs hn)
   rw [h]
   simp only [projectionProperForgetIso, Functor.isoHComp, Iso.symm_hom, Iso.trans_inv,
     Iso.symm_inv, Functor.isoWhiskerRight_inv, Functor.isoWhiskerLeft_inv,
@@ -72,6 +73,7 @@ lemma projectionProperForgetIso_hom_app (M : WeilComplex k₀ l X) :
     Functor.associator_inv_app, Functor.associator_hom_app,
     ObjectProperty.FullSubcategory.comp_hom]
   simp only [ObjectProperty.FullSubcategory.id_hom, Category.id_comp, Category.comp_id]
+  erw [Category.id_comp]
   rfl
 
 set_option backward.defeqAttrib.useBackward true in

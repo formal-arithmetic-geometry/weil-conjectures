@@ -112,11 +112,7 @@ lemma projectionOpenMate_app_hom (M : WeilComplex k₀ l Z) :
   refine Eq.trans ?_ h₂.symm
   change ((CondensedRing.boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ l jb).unit.app _).hom ≫ _ ≫ _ = _
   rw [projectionOpenAdjunction_unit_app_hom]
-  change _ ≫ _ ≫ (CondensedRing.upperStar Λ (jb).left).leftDerivedFunctor.map
-    (((IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l Z)).mapDerivedCategory ⋙
-      (adicSheafEquivCondensedMod l _).functor.mapDerivedCategory).map
-        (((extensionByZeroUpperStarAdjunction (k₀ := k₀) (l := l) j).counit.app M).hom)) = _
-  rw [projectionOpenAdjunction_counit_app_hom]
+  conv_rhs => rw [← projectionOpenAdjunction_counit_app_hom k₀ l j M]
   rfl
 
 /-- The exceptional mate of the open forget square is invertible. -/
