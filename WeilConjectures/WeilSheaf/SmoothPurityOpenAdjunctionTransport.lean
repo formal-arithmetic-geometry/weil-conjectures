@@ -43,7 +43,8 @@ theorem purity_exchangeLeft_ofNatIsoLeft
     exchangeLeft_app, ofNatIsoLeft_unit, ofNatIsoLeft_counit, Iso.symm_hom, Iso.symm_inv,
     Functor.map_comp, Category.assoc]
   rw [reassoc_of% hn₁, reassoc_of% hn₂, reassoc_of% hn₃,
-    ← J'.map_comp_assoc, hθ, J'.map_comp_assoc, reassoc_of% hε,
+    ← J'.map_comp_assoc (H.map (P.map (e.inv.app K))) (θ.hom.app (L.obj K)),
+    hθ, J'.map_comp_assoc, reassoc_of% hε,
     ← H'.map_comp, Iso.inv_hom_id_app, H'.map_id, Category.comp_id]
 
 end CategoryTheory.Adjunction
