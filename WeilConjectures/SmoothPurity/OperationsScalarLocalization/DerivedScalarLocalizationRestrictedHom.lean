@@ -84,6 +84,10 @@ private theorem homLocalizedAction_comp
   change homLocalizedAction A p q B q' hq' β P T
       (ScalarLocalization.composition A D p _ _ _ a a')
       (ScalarLocalization.composition A D p _ _ _ b' b) = _
+  change Localization.Away p ⊗[A] (Q.obj.1.unop.obj ⟶ P.obj.1.unop.obj) at a
+  change Localization.Away p ⊗[A] (T.obj.1.unop.obj ⟶ Q.obj.1.unop.obj) at a'
+  change Localization.Away p ⊗[A] (P.obj.2.obj ⟶ Q.obj.2.obj) at b
+  change Localization.Away p ⊗[A] (Q.obj.2.obj ⟶ T.obj.2.obj) at b'
   induction a using TensorProduct.inductionOn with
   | add a c ha hc => simp only [map_add, LinearMap.add_apply, ha, hc]
   | tmul x a =>
@@ -169,6 +173,8 @@ theorem restrictedHom_existsUnique :
     change γ f.hom.1.unop f.hom.2 = _ ≫
       homLocalizedAction A p q B q' hq' β P Q f.hom.1.unop f.hom.2 ≫ _
     generalize f.hom.1.unop = a, f.hom.2 = b
+    change Localization.Away p ⊗[A] (Q.obj.1.unop.obj ⟶ P.obj.1.unop.obj) at a
+    change Localization.Away p ⊗[A] (P.obj.2.obj ⟶ Q.obj.2.obj) at b
     induction a using TensorProduct.inductionOn with
     | tmul c a =>
       induction b with

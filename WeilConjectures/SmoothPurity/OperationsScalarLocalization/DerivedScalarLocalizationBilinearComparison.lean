@@ -102,6 +102,8 @@ private theorem rawBilinearIso_existsUnique
     change F.map (Prod.mkHom f.1 f.2) ≫ _ = _ ≫ G.map (Prod.mkHom f.1 f.2)
     rw [hβ, hγ]
     generalize f.1 = f₁, f.2 = f₂
+    change Localization.Away t ⊗[R] (K.1.obj ⟶ L.1.obj) at f₁
+    change Localization.Away t ⊗[R] (K.2.obj ⟶ L.2.obj) at f₂
     induction f₁ using TensorProduct.inductionOn with
     | tmul x f₁ =>
       induction f₂ with
