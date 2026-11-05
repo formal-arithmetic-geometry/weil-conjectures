@@ -219,7 +219,7 @@ private theorem pull_transition
     (G.pullEvaluation m).hom.app M ≫
       (G.inverseImage m).modules.mapDerivedCategory.map
         ((derivedTransition.{c, v, max c v r} J B τ h).app M) ≫
-      ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      ((Functor.mapDerivedCategoryCompIso _ _) ≪≫
         Functor.mapDerivedCategoryNatIso (G.restrictionPullback h) ≪≫
           (Functor.mapDerivedCategoryCompIso _ _).symm).hom.app
         ((e.{c, v, max c v r} J B τ n).obj M) := by

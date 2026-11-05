@@ -549,23 +549,6 @@ private theorem pastingCell_of_descent {X Y : Scheme.{u}}
   rw [he]
   simp only [Category.assoc, Iso.inv_hom_id_assoc, Iso.inv_hom_id, Category.comp_id]
 
-private theorem pastingAlpha {V W S T : Scheme.{u}}
-    (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
-    [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]
-    [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i) :
-    Word.cell (pastingCategories B)
-      (P := .comp (pastingJ B i) (pastingG B p))
-      (R := .comp (pastingG B r) (pastingJ B k))
-      (towerAlpha B k r p i h) = alpha B k r p i h := by
-  apply pastingCell_of_descent B (X := S) (Y := W)
-  simpa only [Word.comparison, Word.ordinary, Word.derived, ExactFunctor.of_fst, Iso.trans_hom,
-    Iso.trans_inv,
-    Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
-    Functor.isoWhiskerRight_inv, Functor.isoWhiskerLeft_inv,
-    Iso.refl_hom, Iso.refl_inv, Functor.whiskerLeft_id', Functor.whiskerRight_id',
-    Category.comp_id, Category.id_comp] using
-    alpha_eq_localized_singleAlpha B k r p i h
-
 private theorem pastingGComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     Word.cell (pastingCategories B)
       (P := pastingG B (f ≫ g)) (R := .comp (pastingG B g) (pastingG B f))
@@ -578,77 +561,6 @@ private theorem pastingGComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
   simp only [Functor.mapDerivedCategoryNatIso, Localization.liftNatIso_hom,
     Functor.isoWhiskerRight_hom]
   rfl
-
-private theorem pastingJComp {U V X : Scheme.{u}} (j : U ⟶ V) (k : V ⟶ X)
-    [IsOpenImmersion j] [IsOpenImmersion k] :
-    Word.cell (pastingCategories B)
-      (P := .comp (pastingJ B j) (pastingJ B k)) (R := pastingJ B (j ≫ k))
-      (termwiseCompHom (moduleJ B j) (moduleJ B k) (moduleJ B (j ≫ k))
-        (openBetaModuleJComp B j k).hom) = (jComp B j k).hom := by
-  exact @genericCompCell Scheme.{u} (pastingCategories B)
-    (fun X ↦ inferInstanceAs (Category.{u + 1} (Towers B X)))
-    (fun X ↦ clopenTowerAbelian B X) (fun X ↦ towers_hasDerivedCategory B X) U V X
-    (ExactFunctor.of (towerJ B j)) (ExactFunctor.of (towerJ B k))
-    (ExactFunctor.of (towerJ B (j ≫ k))) _ _ (jComp_fac B j k)
-
-private theorem pastingBeta {U' U X' X : Scheme.{u}}
-    (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
-    [IsOpenImmersion j] [IsOpenImmersion j'] (w : a ≫ j = j' ≫ g)
-    (sq : IsPullback a j' j g) :
-    Word.cell (pastingCategories B)
-      (P := .comp (pastingJ B j) (pastingG B g))
-      (R := .comp (pastingG B a) (pastingJ B j'))
-      (openBetaTower B a j' j g w sq).hom = (beta B a j' j g w sq).hom := by
-  exact @genericSquareCell Scheme.{u} (pastingCategories B)
-    (fun X ↦ inferInstanceAs (Category.{u + 1} (Towers B X)))
-    (fun X ↦ clopenTowerAbelian B X) (fun X ↦ towers_hasDerivedCategory B X) U X X' U'
-    (ExactFunctor.of (towerJ B j)) (ExactFunctor.of (towerPullback B g))
-    (ExactFunctor.of (towerPullback B a)) (ExactFunctor.of (towerJ B j')) _ _
-    (beta_fac B a j' j g w sq)
-
-private theorem pastingSquare {V W S T : Scheme.{u}}
-    (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T) (h : k ≫ p = r ≫ i) :
-    Word.cell (pastingCategories B)
-      (P := .comp (pastingG B i) (pastingG B r))
-      (R := .comp (pastingG B p) (pastingG B k))
-      (towerSquare (modulePullback B i) (modulePullback B r)
-        (modulePullback B p) (modulePullback B k) (moduleSquareG B k r p i h)).hom =
-      (squareG B k r p i h).hom := by
-  exact @genericSquareCell Scheme.{u} (pastingCategories B)
-    (fun X ↦ inferInstanceAs (Category.{u + 1} (Towers B X)))
-    (fun X ↦ clopenTowerAbelian B X) (fun X ↦ towers_hasDerivedCategory B X) T S V W
-    (ExactFunctor.of (towerPullback B i)) (ExactFunctor.of (towerPullback B r))
-    (ExactFunctor.of (towerPullback B p)) (ExactFunctor.of (towerPullback B k)) _ _
-    (squareCompatible_of_eq (towerPullback B i) (towerPullback B r)
-      (towerPullback B p) (towerPullback B k) _ _ (Iso.ext (squareG_lift B k r p i h)))
-
-private theorem pastingSquareInv {V W S T : Scheme.{u}}
-    (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T) (h : k ≫ p = r ≫ i) :
-    Word.cell (pastingCategories B)
-      (P := .comp (pastingG B p) (pastingG B k))
-      (R := .comp (pastingG B i) (pastingG B r))
-      (towerSquare (modulePullback B i) (modulePullback B r)
-        (modulePullback B p) (modulePullback B k) (moduleSquareG B k r p i h)).inv =
-      (squareG B k r p i h).inv := by
-  have hg : squareG B k r p i h = Functor.mapDerivedCategorySquareIso
-      (towerSquare (modulePullback B i) (modulePullback B r)
-        (modulePullback B p) (modulePullback B k) (moduleSquareG B k r p i h)) :=
-    Iso.ext (squareG_lift B k r p i h)
-  have hn := (congrArg Iso.symm hg).trans
-    (@genericSquareIsoSymm Scheme.{u} (pastingCategories B)
-      (fun X ↦ inferInstanceAs (Category.{u + 1} (Towers B X)))
-      (fun X ↦ clopenTowerAbelian B X) (fun X ↦ towers_hasDerivedCategory B X) T S V W
-      (ExactFunctor.of (towerPullback B i)) (ExactFunctor.of (towerPullback B r))
-      (ExactFunctor.of (towerPullback B p)) (ExactFunctor.of (towerPullback B k))
-      (towerSquare (modulePullback B i) (modulePullback B r)
-        (modulePullback B p) (modulePullback B k) (moduleSquareG B k r p i h)))
-  exact @genericSquareCell Scheme.{u} (pastingCategories B)
-    (fun X ↦ inferInstanceAs (Category.{u + 1} (Towers B X)))
-    (fun X ↦ clopenTowerAbelian B X) (fun X ↦ towers_hasDerivedCategory B X) T W V S
-    (ExactFunctor.of (towerPullback B p)) (ExactFunctor.of (towerPullback B k))
-    (ExactFunctor.of (towerPullback B i)) (ExactFunctor.of (towerPullback B r)) _ _
-    (squareCompatible_of_eq (towerPullback B p) (towerPullback B k)
-      (towerPullback B i) (towerPullback B r) _ _ hn)
 
 end PastingProofs
 

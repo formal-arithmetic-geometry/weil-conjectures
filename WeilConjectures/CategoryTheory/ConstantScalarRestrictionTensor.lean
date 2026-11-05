@@ -450,6 +450,8 @@ private def monoidalKeepingLax
     [∀ X Y, IsIso (Functor.LaxMonoidal.μ F X Y)] : F.Monoidal :=
   { (Functor.Monoidal.ofLaxMonoidal F) with toLaxMonoidal := inferInstance }
 
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
+
 section OrdinaryProof
 set_option warn.classDefReducibility false
 private def scalarUnit :
@@ -556,6 +558,8 @@ private def rawBraidedGeneric
   braided M N := by
     apply NatTrans.ext
     funext X
+    let : CommRing (((Functor.const Cᵒᵖ).obj (RingCat.of B)).obj X) :=
+      inferInstanceAs (CommRing B)
     change (𝟙 _ ≫ Functor.LaxMonoidal.μ
         (ModuleCat.restrictScalars (ι.app X).hom) (M.obj X) (N.obj X)) ≫
         (ModuleCat.restrictScalars (ι.app X).hom).map (β_ (M.obj X) (N.obj X)).hom =
@@ -1057,7 +1061,6 @@ def ordinary : Ordinary J B := (ordinary_exists J B).some
 Source: Stacks 0GMW (auxiliary; not a blueprint node). -/
 instance restrictionBraided : (restriction J B).Braided := (ordinary J B).braided
 
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The existing Grothendieck structure of module sheaves.
 Source: Stacks 03DA (auxiliary; not a blueprint node). -/
 instance ringGrothendieck : IsGrothendieckAbelian.{max u v} (Modules J B) :=

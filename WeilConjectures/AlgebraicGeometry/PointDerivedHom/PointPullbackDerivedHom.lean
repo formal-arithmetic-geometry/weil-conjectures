@@ -493,31 +493,9 @@ def DerivedCompositionFamily {C : Type c} [Category.{v} C] [Abelian C]
     [PreservesFiniteLimits H] [PreservesFiniteColimits H] :=
   F.mapDerivedCategory ⋙ G.mapDerivedCategory ≅ H.mapDerivedCategory
 
-/-- Localize an ordinary composition isomorphism of exact functors.
-Source: HRS (4.1), termwise localization
-(blueprint: lem-sfb-point-pullback-derived-hom). -/
-def localizeComposition {C : Type c} [Category.{v} C] [Abelian C]
-    [HasDerivedCategory.{v} C]
-    {D : Type d} [Category.{z} D] [Abelian D] [HasDerivedCategory.{z} D]
-    {E : Type e} [Category.{w} E] [Abelian E] [HasDerivedCategory.{w} E]
-    (F : C ⥤ D) (G : D ⥤ E) (H : C ⥤ E)
-    [F.Additive] [G.Additive] [H.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
-    [PreservesFiniteLimits H] [PreservesFiniteColimits H] (h : F ⋙ G ≅ H) :
-    DerivedCompositionFamily F G H :=
-  (Functor.mapDerivedCategoryCompIso F G) ≪≫ Functor.mapDerivedCategoryNatIso h
-
 /-- The ordinary comparison uses the actual point-composition map on underlying sheaves.
 Source: HRS (4.1) (blueprint: lem-sfb-point-pullback-derived-hom). -/
 def restrictionComparison {X Y : Scheme.{u}} (f : X ⟶ Y) : PointCompositionFamily Λ f :=
   uniqueChoice (restrictionComparison_existsUnique Λ f)
-
-/-- Termwise localization of the coefficient-normalized point-composition comparison.
-Source: HRS (4.1) (blueprint: lem-sfb-point-pullback-derived-hom). -/
-def derivedRestrictionComparison {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    DerivedCompositionFamily (pull Λ Y) (CondensedRing.supportPullback Λ f) (pull Λ X) :=
-  localizeComposition (pull Λ Y) (CondensedRing.supportPullback Λ f) (pull Λ X)
-    (restrictionComparison Λ f)
 
 end AlgebraicGeometry.ProEtale.PointDerivedHom

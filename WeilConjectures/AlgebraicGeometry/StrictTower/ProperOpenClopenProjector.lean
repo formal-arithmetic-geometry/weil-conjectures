@@ -397,22 +397,6 @@ def ClopenProjectorDescent
 attribute [local instance] clopenTowerAbelian
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-private theorem projector_factorsh
-    {A D : Type*} [Category A] [Category D] [Abelian A] [Abelian D]
-    [HasDerivedCategory A] [HasDerivedCategory D]
-    (F : A ⥤ D) [F.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    (K : CochainComplex A ℤ) :
-    F.mapDerivedCategoryFactorsh.hom.app ((HomotopyCategory.quotient A (.up ℤ)).obj K) =
-      F.mapDerivedCategoryFactors.hom.app K := by
-  rw [Functor.mapDerivedCategoryFactorsh_hom_app]
-  dsimp only [DerivedCategory.quotientCompQhIso,
-    HomologicalComplexUpToQuasiIso.quotientCompQhIso,
-    Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift, NatIso.ofComponents_hom_app,
-    NatIso.ofComponents_inv_app, Iso.refl_hom, Iso.refl_inv, Functor.comp_obj]
-  erw [F.mapDerivedCategory.map_id, Category.id_comp, DerivedCategory.Qh.map_id,
-    Category.comp_id, Category.comp_id]
-
 section ProjectorLocalization
 
 variable {A D : Type*} [Category A] [Category D] [Abelian A] [Abelian D]
@@ -465,24 +449,6 @@ private theorem projector_map_fac (K : CochainComplex A ℤ) :
       rw [projector_lift_fac, ← hi]
       exact Iso.inv_hom_id_app_assoc _ _ _
 
-private theorem projector_map_descent : ClopenProjectorDescent
-    (𝟭 A) (F ⋙ H) p ((Functor.mapDerivedCategoryIdIso A).hom ≫
-      projector_map F H p ≫ (Functor.mapDerivedCategoryCompIso F H).inv) := by
-  have h : (Functor.mapDerivedCategoryIdIso A).hom ≫ projector_map F H p ≫
-      (Functor.mapDerivedCategoryCompIso F H).inv = projector_lift F H p := by
-    rw [projector_map]
-    simp only [Category.assoc, Iso.hom_inv_id_assoc, Iso.hom_inv_id, Category.comp_id]
-  rw [h]
-  exact projector_lift_fac F H p
-
-private theorem projector_map_descent_eq
-    (e : 𝟭 (DerivedCategory A) ⟶ F.mapDerivedCategory ⋙ H.mapDerivedCategory)
-    (he : projector_map F H p = e) : ClopenProjectorDescent
-    (𝟭 A) (F ⋙ H) p ((Functor.mapDerivedCategoryIdIso A).hom ≫
-      e ≫ (Functor.mapDerivedCategoryCompIso F H).inv) := by
-  rw [← he]
-  exact projector_map_descent F H p
-
 end ProjectorLocalization
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
@@ -497,18 +463,6 @@ private theorem projector_unique
   apply (b.homEquiv M (G.obj M)).symm.injective
   simp only [Adjunction.homEquiv_counit, Functor.map_comp]
   rw [h]
-
-private theorem projector_complement_zero
-    {A D E : Type*} [Category A] [Category D] [Category E]
-    [Abelian A] [Abelian D] [Abelian E]
-    [HasDerivedCategory A] [HasDerivedCategory D] [HasDerivedCategory E]
-    (H : D ⥤ A) (F : A ⥤ E) [H.Additive] [F.Additive]
-    [PreservesFiniteLimits H] [PreservesFiniteColimits H]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    (h : ∀ N, IsZero ((H ⋙ F).obj N)) (M : DerivedCategory D) :
-    IsZero (F.mapDerivedCategory.obj (H.mapDerivedCategory.obj M)) := by
-  have hz := (H ⋙ F).isZero_mapDerivedCategory_obj M (fun _ ↦ h _)
-  exact hz.of_iso ((Functor.mapDerivedCategoryCompIso H F).symm.app M).symm
 
 private theorem intrinsic_projector_restriction {U X : Scheme.{u}}
     (s : U ⟶ X) [IsOpenImmersion s] [IsClosedImmersion s] (M : Derived B X) :

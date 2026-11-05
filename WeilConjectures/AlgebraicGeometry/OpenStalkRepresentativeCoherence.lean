@@ -36,7 +36,7 @@ private theorem comp_factors_inv
     (K : CochainComplex C ℤ) :
     G.mapDerivedCategoryFactors.inv.app ((F.mapHomologicalComplex (.up ℤ)).obj K) ≫
         G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.inv.app K) ≫
-        (Functor.mapDerivedCategoryCompIso F G).inv.app (DerivedCategory.Q.obj K) =
+        (Functor.mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Q.obj K) =
       (F ⋙ G).mapDerivedCategoryFactors.inv.app K := by
   let := comp_preservesFiniteLimits F G
   let := comp_preservesFiniteColimits F G
@@ -49,7 +49,7 @@ private theorem comp_factors_inv
   erw [CategoryTheory.Functor.map_id, Category.comp_id] at h
   rw [← cancel_mono ((F ⋙ G).mapDerivedCategoryFactors.hom.app K)]
   simp only [Category.assoc, Iso.inv_hom_id_app]
-  rw [← h, Iso.inv_hom_id_app_assoc, ← Functor.map_comp_assoc, Iso.inv_hom_id_app]
+  rw [← h, Iso.hom_inv_id_app_assoc, ← Functor.map_comp_assoc, Iso.inv_hom_id_app]
   erw [CategoryTheory.Functor.map_id, Category.id_comp, Iso.inv_hom_id_app]
   rfl
 
@@ -135,9 +135,9 @@ private theorem representative_factors
           (L₀.mapDerivedCategoryFactors.inv.app M ≫
             L₀.mapDerivedCategory.map (DerivedCategory.Q.map a) ≫
             L₀.mapDerivedCategory.map (R.mapDerivedCategoryFactors.inv.app N)) ≫
-        (Functor.mapDerivedCategoryCompIso L₀ F₀).inv.app
+        (Functor.mapDerivedCategoryCompIso L₀ F₀).hom.app
           (R.mapDerivedCategory.obj (DerivedCategory.Q.obj N)) ≫
-        (Functor.mapDerivedCategoryCompIso R (L₀ ⋙ F₀)).inv.app
+        (Functor.mapDerivedCategoryCompIso R (L₀ ⋙ F₀)).hom.app
           (DerivedCategory.Q.obj N) ≫
         (Functor.mapDerivedCategoryNatIso γ).hom.app (DerivedCategory.Q.obj N) ≫
         (Functor.mapDerivedCategoryCompIso L F).inv.app (DerivedCategory.Q.obj N) ≫
@@ -161,7 +161,7 @@ private theorem representative_factors
     ((L₀.mapHomologicalComplex (.up ℤ)).map a)
   simp only [Functor.comp_map] at hb
   rw [← reassoc_of% hb]
-  have hc := (Functor.mapDerivedCategoryCompIso L₀ F₀).inv.naturality
+  have hc := (Functor.mapDerivedCategoryCompIso L₀ F₀).hom.naturality
     (R.mapDerivedCategoryFactors.inv.app N)
   simp only [Functor.comp_map] at hc
   rw [reassoc_of% hc, reassoc_of% (comp_factors_inv L₀ F₀
@@ -197,10 +197,10 @@ private theorem representative_cohomology
       (F₀.mapDerivedCategoryHomologyFunctorIso i).hom.app
         (L₀.mapDerivedCategory.obj (R.mapDerivedCategory.obj (DerivedCategory.Q.obj N))) ≫
       (DerivedCategory.homologyFunctor E i).map
-        ((Functor.mapDerivedCategoryCompIso L₀ F₀).inv.app
+        ((Functor.mapDerivedCategoryCompIso L₀ F₀).hom.app
           (R.mapDerivedCategory.obj (DerivedCategory.Q.obj N))) ≫
       (DerivedCategory.homologyFunctor E i).map
-        ((Functor.mapDerivedCategoryCompIso R (L₀ ⋙ F₀)).inv.app (DerivedCategory.Q.obj N)) ≫
+        ((Functor.mapDerivedCategoryCompIso R (L₀ ⋙ F₀)).hom.app (DerivedCategory.Q.obj N)) ≫
       (DerivedCategory.homologyFunctor E i).map
         ((Functor.mapDerivedCategoryNatIso γ).hom.app (DerivedCategory.Q.obj N)) ≫
       (DerivedCategory.homologyFunctor E i).map
