@@ -31,13 +31,6 @@ noncomputable local instance {X : Scheme.{u}} (F : X.Modules) {V W : X.Opens} (h
         (F.val.obj (op V))) (F.val.obj (op V)) where
   hSMul := @SMul.smul Γ(X, V) Γ(F, V) inferInstance
 
-noncomputable local instance sectionCarrierTargetSMul {X : Scheme.{u}} (F : X.Modules)
-    {V W : X.Opens} (h : V ≤ W) :
-    SMul Γ(X, V)
-      ((ModuleCat.restrictScalars (X.ringCatSheaf.obj.map (homOfLE h).op).hom).obj
-        (F.val.obj (op V))) :=
-  (F.val.obj (op V)).isModule.toSMul
-
 /-- A quasi-coherent section on an ideal complement has a quasi-coherent carrier
 inside the original module with zero ideal-power annihilators.
 
