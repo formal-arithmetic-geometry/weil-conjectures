@@ -420,11 +420,35 @@ def nativeRestrictionDerivedTensor
     (nativeOpenTensorModel k₀ l Z) (nativeOpenTensorModel k₀ l Y)
     (nativeOpenTensorModel_naturality k₀ l Z) (nativeOpenTensorModel_naturality k₀ l Y) t
 
+/-- On native K-flat representatives `P`, `T`, the derived comparison
+`nativeRestrictionDerivedTensor` is the localization of the total comparison `t`, through the
+native K-flat models `nativeOpenTensorModel`. -/
+theorem nativeRestrictionDerivedTensor_normalization
+    (R : ProEtaleWeilSheaf k₀ l Y ⥤ ProEtaleWeilSheaf k₀ l Z) [R.Additive]
+    [PreservesFiniteLimits R] [PreservesFiniteColimits R]
+    (hR : ∀ T, NativeIsKFlat k₀ l Y T →
+      NativeIsKFlat k₀ l Z ((R.mapHomologicalComplex (.up ℤ)).obj T))
+    (t : Functor.uncurry.obj (nativeTensorTotal k₀ l Y) ⋙ R.mapHomologicalComplex (.up ℤ) ≅
+      (R.mapHomologicalComplex (.up ℤ)).prod (R.mapHomologicalComplex (.up ℤ)) ⋙
+        Functor.uncurry.obj (nativeTensorTotal k₀ l Z)) :
+    OpenTensorRestrictionNormalization R (nativeTensorTotal k₀ l Z) (nativeTensorTotal k₀ l Y)
+      (nativeDerivedTensor k₀ l Z) (nativeDerivedTensor k₀ l Y) (NativeIsKFlat k₀ l Z)
+      (NativeIsKFlat k₀ l Y) hR (nativeOpenTensorModel k₀ l Z) (nativeOpenTensorModel k₀ l Y)
+      (NativeRestrictionDescentProof.totalFamily R (nativeTensorTotal k₀ l Z)
+        (nativeTensorTotal k₀ l Y) t)
+      (nativeRestrictionDerivedTensor k₀ l R hR t) :=
+  have := native_open_tensor_full_kflat_localization k₀ l Y
+  NativeRestrictionDescentProof.restrictionDerivedOfTotal_normalization R
+    (nativeTensorTotal k₀ l Z) (nativeTensorTotal k₀ l Y) (nativeDerivedTensor k₀ l Z)
+    (nativeDerivedTensor k₀ l Y) (NativeIsKFlat k₀ l Z) (NativeIsKFlat k₀ l Y) hR
+    (nativeOpenTensorModel k₀ l Z) (nativeOpenTensorModel k₀ l Y)
+    (nativeOpenTensorModel_naturality k₀ l Z) (nativeOpenTensorModel_naturality k₀ l Y) t
+
 /-- The native derived pullback–tensor comparison `g^*(M ⊗ᴸ N) ≅ g^* M ⊗ᴸ g^* N` of
 pro-étale Weil complexes, for any morphism `g` of `k₀`-schemes: the descent of
 `nativePullTotalTensor` along the K-flat localization. On native K-flat representatives it is the
 localization of `nativePullTotalTensor` under the models `nativeOpenTensorModel`
-(`NativeRestrictionDescentProof.restrictionDerivedOfTotal_normalization`).
+(`AlgebraicGeometry.ProEtaleWeilSheaf.nativeRestrictionDerivedTensor_normalization`).
 Source: Stacks 07A4, 06YN, 06YW. -/
 def nativePullTensor :
     nativeDerivedTensor k₀ l Y ⋙ nativeOpenPull k₀ l g ≅

@@ -65,14 +65,21 @@ lemma NatTrans.ext₂_of_exists_iso {C D E : Type*} [Category* C] [Category* D] 
 
 
 
-variable {C₁ C₂ D₁ D₂ : Type a} [Category.{b} C₁] [Category.{b} C₂] [Category.{b} D₁]
-  [Category.{b} D₂] [Abelian C₁] [Abelian C₂] [Abelian D₁] [Abelian D₂]
-  [HasDerivedCategory.{b} C₁] [HasDerivedCategory.{b} C₂] [HasDerivedCategory.{b} D₁]
-  [HasDerivedCategory.{b} D₂]
-  {F : C₁ ⥤ C₂} [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-  {F' : D₁ ⥤ D₂} [F'.Additive] [PreservesFiniteLimits F'] [PreservesFiniteColimits F']
-  {N₁ : C₁ ⥤ D₁} [N₁.Additive] [PreservesFiniteLimits N₁] [PreservesFiniteColimits N₁]
-  {N₂ : C₂ ⥤ D₂} [N₂.Additive] [PreservesFiniteLimits N₂] [PreservesFiniteColimits N₂]
+-- The instances are implicit arguments, so that they are taken from the functors and comparisons
+-- rather than synthesized: at concrete categories, several instance paths exist, and comparing
+-- them is expensive.
+variable {C₁ C₂ D₁ D₂ : Type a} {instC₁ : Category.{b} C₁} {instC₂ : Category.{b} C₂}
+  {instD₁ : Category.{b} D₁} {instD₂ : Category.{b} D₂} {abC₁ : Abelian C₁} {abC₂ : Abelian C₂}
+  {abD₁ : Abelian D₁} {abD₂ : Abelian D₂} {dC₁ : HasDerivedCategory.{b} C₁}
+  {dC₂ : HasDerivedCategory.{b} C₂} {dD₁ : HasDerivedCategory.{b} D₁}
+  {dD₂ : HasDerivedCategory.{b} D₂}
+  {F : C₁ ⥤ C₂} {aF : F.Additive} {lF : PreservesFiniteLimits F} {cF : PreservesFiniteColimits F}
+  {F' : D₁ ⥤ D₂} {aF' : F'.Additive} {lF' : PreservesFiniteLimits F'}
+  {cF' : PreservesFiniteColimits F'}
+  {N₁ : C₁ ⥤ D₁} {aN₁ : N₁.Additive} {lN₁ : PreservesFiniteLimits N₁}
+  {cN₁ : PreservesFiniteColimits N₁}
+  {N₂ : C₂ ⥤ D₂} {aN₂ : N₂.Additive} {lN₂ : PreservesFiniteLimits N₂}
+  {cN₂ : PreservesFiniteColimits N₂}
   (a : N₁ ⋙ F' ≅ F ⋙ N₂)
   {F'' : DerivedCategory D₁ ⥤ DerivedCategory D₂} (e : F'' ≅ F'.mapDerivedCategory)
   {TC₁ : CochainComplex C₁ ℤ ⥤ CochainComplex C₁ ℤ ⥤ CochainComplex C₁ ℤ}
@@ -89,12 +96,18 @@ variable {C₁ C₂ D₁ D₂ : Type a} [Category.{b} C₁] [Category.{b} C₂] 
   {hN₁ : ∀ T, fC₁ T → fD₁ ((N₁.mapHomologicalComplex (.up ℤ)).obj T)}
   {hN₂ : ∀ T, fC₂ T → fD₂ ((N₂.mapHomologicalComplex (.up ℤ)).obj T)}
   (hF' : ∀ T, fD₁ T → fD₂ ((F'.mapHomologicalComplex (.up ℤ)).obj T))
-  {mC₁ : ∀ P T, fC₁ P → fC₁ T → (DC₁.obj (DerivedCategory.Q.obj P, DerivedCategory.Q.obj T) ≅ DerivedCategory.Q.obj ((TC₁.obj P).obj T))}
-  {mC₂ : ∀ P T, fC₂ P → fC₂ T → (DC₂.obj (DerivedCategory.Q.obj P, DerivedCategory.Q.obj T) ≅ DerivedCategory.Q.obj ((TC₂.obj P).obj T))}
+  {mC₁ : ∀ P T, fC₁ P → fC₁ T →
+    (DC₁.obj (DerivedCategory.Q.obj P, DerivedCategory.Q.obj T) ≅
+      DerivedCategory.Q.obj ((TC₁.obj P).obj T))}
+  {mC₂ : ∀ P T, fC₂ P → fC₂ T →
+    (DC₂.obj (DerivedCategory.Q.obj P, DerivedCategory.Q.obj T) ≅
+      DerivedCategory.Q.obj ((TC₂.obj P).obj T))}
   {mD₁ : ∀ P T, fD₁ P → fD₁ T →
-    ((Functor.uncurry.obj DD₁).obj (DerivedCategory.Q.obj P, DerivedCategory.Q.obj T) ≅ DerivedCategory.Q.obj ((TD₁.obj P).obj T))}
+    ((Functor.uncurry.obj DD₁).obj (DerivedCategory.Q.obj P, DerivedCategory.Q.obj T) ≅
+      DerivedCategory.Q.obj ((TD₁.obj P).obj T))}
   {mD₂ : ∀ P T, fD₂ P → fD₂ T →
-    ((Functor.uncurry.obj DD₂).obj (DerivedCategory.Q.obj P, DerivedCategory.Q.obj T) ≅ DerivedCategory.Q.obj ((TD₂.obj P).obj T))}
+    ((Functor.uncurry.obj DD₂).obj (DerivedCategory.Q.obj P, DerivedCategory.Q.obj T) ≅
+      DerivedCategory.Q.obj ((TD₂.obj P).obj T))}
   {tF : ∀ P T, (F.mapHomologicalComplex (.up ℤ)).obj ((TC₁.obj P).obj T) ≅
     (TC₂.obj ((F.mapHomologicalComplex (.up ℤ)).obj P)).obj
       ((F.mapHomologicalComplex (.up ℤ)).obj T)}
@@ -160,7 +173,8 @@ include hF hN₁ hN₂ in
 lemma comparisonCompatible_app_of_totalComparison
     (hmD₂ : ∀ P P' T T' (hP : fD₂ P) (hP' : fD₂ P') (hT : fD₂ T) (hT' : fD₂ T')
       (f : P ⟶ P') (g : T ⟶ T'),
-      (Functor.uncurry.obj DD₂).map (Prod.mkHom (DerivedCategory.Q.map f) (DerivedCategory.Q.map g)) ≫ (mD₂ P' T' hP' hT').hom =
+      (Functor.uncurry.obj DD₂).map (Prod.mkHom (DerivedCategory.Q.map f)
+        (DerivedCategory.Q.map g)) ≫ (mD₂ P' T' hP' hT').hom =
         (mD₂ P T hP hT).hom ≫ DerivedCategory.Q.map ((TD₂.map f).app T ≫ (TD₂.obj P').map g))
     (hφ : OpenTensorRestrictionNormalization F TC₂ TC₁ DC₂ DC₁ fC₂ fC₁ hF mC₂ mC₁ tF φ)
     (hm₁ : OpenTensorRestrictionNormalization N₁ TD₁ TC₁ (Functor.uncurry.obj DD₁) DC₁ fD₁ fC₁
@@ -175,9 +189,11 @@ lemma comparisonCompatible_app_of_totalComparison
         (TD₂.map ((Functor.mapHomologicalComplexSquareIso a (.up ℤ)).hom.app P)).app _ ≫
         (TD₂.obj _).map ((Functor.mapHomologicalComplexSquareIso a (.up ℤ)).hom.app T)) :
     N₂.mapDerivedCategory.map (φ.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj T)) ≫
-        m₂.hom.app (F.mapDerivedCategory.obj (DerivedCategory.Q.obj P), F.mapDerivedCategory.obj (DerivedCategory.Q.obj T)) =
+        m₂.hom.app (F.mapDerivedCategory.obj (DerivedCategory.Q.obj P),
+          F.mapDerivedCategory.obj (DerivedCategory.Q.obj T)) =
       (Functor.isoWhiskerLeft N₁.mapDerivedCategory e ≪≫
-          Functor.mapDerivedCategorySquareIso a).inv.app (DC₁.obj (DerivedCategory.Q.obj P, DerivedCategory.Q.obj T)) ≫
+          Functor.mapDerivedCategorySquareIso a).inv.app
+            (DC₁.obj (DerivedCategory.Q.obj P, DerivedCategory.Q.obj T)) ≫
         F''.map (m₁.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj T)) ≫
         (φ'.app (N₁.mapDerivedCategory.obj (DerivedCategory.Q.obj P))).app
           (N₁.mapDerivedCategory.obj (DerivedCategory.Q.obj T)) ≫
@@ -342,8 +358,8 @@ theorem comparisonCompatible_of_totalComparison
   intro x y
   obtain ⟨P, hP, ⟨i⟩⟩ := hess x
   obtain ⟨T, hT, ⟨j⟩⟩ := hess y
-  have hflat := comparisonCompatible_app_of_totalComparison a e hF' tF' φ' hmD₂ hφ hm₁ hm₂ hφ' P T hP
-    hT (H P T hP hT)
+  have hflat := comparisonCompatible_app_of_totalComparison a e hF' tF' φ' hmD₂ hφ hm₁ hm₂ hφ' P T
+    hP hT (H P T hP hT)
   have hmk := uncurry_map_mkHom_comp DD₂
   have hφ'nat := app_app_comp_uncurry_map_mkHom φ'
   let α := Functor.isoWhiskerLeft N₁.mapDerivedCategory e ≪≫ Functor.mapDerivedCategorySquareIso a
@@ -384,7 +400,8 @@ theorem comparisonCompatible_of_totalComparison
         (Functor.uncurry.obj DD₂).map (Prod.mkHom (α.hom.app (DerivedCategory.Q.obj P))
           (α.hom.app (DerivedCategory.Q.obj T))) := by
     rw [← Category.assoc ((DD₂.map (α.hom.app x)).app _)]
-    change _ ≫ _ ≫ _ ≫ (Functor.uncurry.obj DD₂).map (Prod.mkHom (α.hom.app x) (α.hom.app y)) ≫ _ = _
+    change _ ≫ _ ≫ _ ≫
+      (Functor.uncurry.obj DD₂).map (Prod.mkHom (α.hom.app x) (α.hom.app y)) ≫ _ = _
     have hαi := α.hom.naturality i.hom
     have hαj := α.hom.naturality j.hom
     dsimp at hαi hαj
