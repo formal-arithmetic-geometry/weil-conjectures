@@ -65,7 +65,7 @@ lemma projection_native_total_model_square
     (L.mapHomologicalComplex (.up ℤ)) (V.mapHomologicalComplex (.up ℤ))
     (F.mapHomologicalComplex (.up ℤ)) (R.mapHomologicalComplex (.up ℤ))
     (projection_model_complex_square L V F R (condensedRealizationUpperStarIso k₀ l g).symm)
-    P T WZ WU tr cZ cU (R.mapCochainComplexμIso FP FT).symm := by
+    P T WZ WU (by with_reducible exact tr) cZ cU (R.mapCochainComplexμIso FP FT).symm := by
   projection_strict
     dsimp only
     let L := upperStar k₀ l g
