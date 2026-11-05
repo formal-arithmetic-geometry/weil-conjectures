@@ -94,7 +94,7 @@ theorem exists_le_of_ofFiniteType_le_iSup [CompactSpace X] {A : X.IdealSheafData
     have hle' : A.ideal U ≤ ⨆ i, (B i).ideal U := by
       have h := hle U
       rwa [ideal_iSup, iSup_apply] at h
-    obtain ⟨s, hs⟩ := CompleteLattice.IsCompactElement.exists_finset_of_le_iSup _ hcpt
+    obtain ⟨s, hs⟩ := hcpt.exists_finset_of_le_iSup
       (fun i ↦ (B i).ideal U) hle'
     have hdir' : Directed (· ≤ ·) fun i ↦ (B i).ideal U := fun i j ↦ by
       obtain ⟨k, hik, hjk⟩ := hdir i j
