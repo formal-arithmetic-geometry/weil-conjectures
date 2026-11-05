@@ -247,7 +247,8 @@ theorem resolution_composite_unit_transport
   simp only [Category.assoc, Iso.hom_inv_id_assoc]
   congr 3
   erw [Functor.rightDerivedFunctorPlusUnit_app]
-  change _ = (𝟙 _) ≫ _ ≫ G.rightDerivedFunctorPlus.map (𝟙 _)
-  erw [Functor.map_id, Category.comp_id, Category.id_comp]
+  change _ = (𝟙 _) ≫ DerivedCategory.Plus.Qh.map (𝟙 _) ≫ _ ≫
+    G.rightDerivedFunctorPlus.map (𝟙 _)
+  erw [Functor.map_id, Functor.map_id, Category.id_comp, Category.id_comp, Category.comp_id]
 
 end CategoryTheory
