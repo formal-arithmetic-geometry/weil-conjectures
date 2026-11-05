@@ -7,6 +7,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedPullback
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.Algebra.Homology.BoundedFlatReplacement
 import WeilConjectures.AlgebraicGeometry.FlatComplexDerivedPullback
 import WeilConjectures.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
@@ -45,7 +47,12 @@ def IsModulePullbackComparisonInDegree
     (derivedPullback a).IsLeftDerivedFunctor ε
         (HomotopyCategory.quasiIso
           (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ)) ∧
-      c = ε.app ((HomotopyCategory.singleFunctor
+      c = (derivedPullback a).map
+          ((DerivedCategory.quotientCompQhIso
+            (SheafOfModules.{u} (moduleRings Y.toRingedSpace))).inv.app
+              ((CochainComplex.singleFunctor
+                (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) n).obj G)) ≫
+        ε.app ((HomotopyCategory.singleFunctor
             (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) n).obj G) ≫
         DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
           ((HomologicalComplex.singleMapHomologicalComplex
@@ -207,7 +214,8 @@ private theorem modulePullback_single_isLE
     flatComplexDerivedPullback a P ⟨n, hbound⟩ hflat
   have : F.Additive := hAdd
   have : P.IsStrictlyLE n := (CochainComplex.isStrictlyLE_iff P n).2 hbound
-  let e' := e ≪≫ (derivedPullback a).mapIso (asIso (DerivedCategory.Qh.map (q.map s)))
+  let e' := e ≪≫ (derivedPullback a).mapIso
+    ((DerivedCategory.quotientCompQhIso A).app P ≪≫ asIso (DerivedCategory.Q.map s))
   have : CochainComplex.IsStrictlyLE
       ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj P) n :=
     inferInstance
