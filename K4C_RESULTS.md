@@ -78,14 +78,26 @@ axioms listed above; the combined invocation completed successfully.
 8. Rewrite whole-isomorphism data inside that predicate and consume it abstractly.
 9. Profile intermediate applications and final declarations; audit complete axiom closures.
 
-## Open-exchange follow-up
+## Adopted point base change
 
-LEAD 00:20/01:25 superseded the W2 and étale assignments with step A of the point route:
-restrict the specified derived open-extension base-change isomorphism to bounded constructible
-complexes, then identify its mate under the specified open adjunction with the pullback square.
-The exact and levelwise-derived normalization helpers are green. The generic full-subcategory
-restriction helper also passed in 1.5 s in `K4c-20261106T001014.log`, snapshot `e11b448cfe`.
-LEAD 01:35 then adopted Houyi PR #2144 and explicitly stopped this competing step-A work.
-The sole superseded build was canceled after verifying its exact source and process group;
-the concrete total-derived and bounded mate proofs and their audit remain unverified.
-No completion of the local step A or overall green build is claimed.
+LEAD 01:35 superseded the competing step-A mate proof with Houyi PR #2144
+(`2b15c601a961165264943d1a28cf9e14214bdd84`). After the user renewed the instruction to
+continue, this branch adopted the point theorem and its C9 supporting modules. The adopted
+proof restricts the specified ambient open-extension isomorphism, proves invertibility of
+its exceptional mate by fully faithful left adjoints, and pastes it with proper base change
+through exactly `compactificationOverField`.
+
+The combined verification is `SmoothPurityK4cCompletionAudit`, including the independent
+Strategy3 audit, adopted finite and scalar kernel repairs, and the adopted point theorem.
+Its current log is `/home/ubuntu/u9/logs/K4c-20261106T002935.log`, source `4608c068e9`.
+Final status and measurements will be recorded after completion; no green claim yet.
+
+All 107 retained changed Lean modules occur in this audit's import closure and are listed
+in `K4C_FILES.txt`. Superseded chart/étale/open-mate experiments and their reusable checked
+helpers are preserved on `u9/K4c-archive-stepA` at `0dd633bc8`. They are outside the final
+patch. No remaining source imports any removed experimental module. The original fully
+expanded finite statement is not claimed; the accepted exposed-predicate restatement and
+its original-data bridge are the verified interface.
+
+The point theorem does not itself prove the Weil trace identification (step D), assigned
+to K4/C8. No completion of that separate task or of the main theorem is claimed here.
