@@ -84,6 +84,8 @@ theorem moduleCohomology_scalar_endomorphism {X : Scheme.{v}} (G : X.Modules)
     ((RingedSpace.moduleCohomology X.toRingedSpace q).map tau).hom x = r • x := by
   let : EnoughInjectives X.Modules :=
     (RingedSpace.moduleSheaves_abelian_enoughInjectives X.toRingedSpace).2
+  let : CommRing ((moduleRings X.toRingedSpace).obj.obj (op ⊤)) :=
+    inferInstanceAs (CommRing (X.presheaf.obj (op ⊤)))
   have ht : tau = scalarEnd G r := by
     apply SheafOfModules.hom_ext
     apply PresheafOfModules.hom_ext
