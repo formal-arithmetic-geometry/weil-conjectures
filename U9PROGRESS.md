@@ -140,5 +140,9 @@
   and integration errors: `/home/ubuntu/u9/bz/FIXES-BZ511.md`.
 - Owned module passed `ucheck-bump` at `ffe5a7971`: 4159 jobs, target rebuilt in 29s.
 - Full log: `/home/ubuntu/u9/bz/BUILD-BZ511-owned-green.log`.
-- Next: build four direct importers, including the `import all` edges.
+- Four direct importers are blocked by the outside-unit
+  `DivisibleExtensionDerivedReductionSupplement`; the owned module rebuilt green
+  in that check. The unvalidated downstream edit was reverted.
+- Next: check the independent importer `EtaleSupportedIntegralDerivedUnit`.
+- Downstream error log: `/home/ubuntu/u9/bz/BUILD-BZ511-downstream-blocked.log`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
