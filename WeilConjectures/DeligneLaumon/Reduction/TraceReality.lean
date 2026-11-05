@@ -148,10 +148,10 @@ theorem map_charpolyRev_mul_conj_eq_of_trace (ι : K →+* ℂ) {V₂ : Type*} [
     if n = 0 then 0 else ((starRingEnd ℂ).comp ι) (LinearMap.trace K V (A₁ ^ n))
   set T₂' := PowerSeries.mk fun n ↦
     if n = 0 then 0 else ((starRingEnd ℂ).comp ι) (LinearMap.trace K V₂ (A₂ ^ n))
-  have hQ : X * derivative ℂ (P₁ * P₂') = (-(T₁ + T₂')) * (P₁ * P₂') := by
+  have hQ : X * derivative (R := ℂ) (P₁ * P₂') = (-(T₁ + T₂')) * (P₁ * P₂') := by
     rw [Derivation.leibniz, smul_eq_mul, smul_eq_mul]
     linear_combination P₁ * e₂' + P₂' * e₁
-  have hR : X * derivative ℂ (P₁' * P₂) = (-(T₁' + T₂)) * (P₁' * P₂) := by
+  have hR : X * derivative (R := ℂ) (P₁' * P₂) = (-(T₁' + T₂)) * (P₁' * P₂) := by
     rw [Derivation.leibniz, smul_eq_mul, smul_eq_mul]
     linear_combination P₁' * e₂ + P₂ * e₁'
   have h0 : PowerSeries.constantCoeff (P₁ * P₂') = PowerSeries.constantCoeff (P₁' * P₂) := by

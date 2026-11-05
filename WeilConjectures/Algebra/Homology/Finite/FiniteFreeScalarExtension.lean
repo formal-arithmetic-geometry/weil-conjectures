@@ -188,7 +188,7 @@ attribute [local irreducible] changeOfRingsMap
           (((e.inv ≫ Pi.π (fun _ : Fin d ↦ unit (𝓡 R)) i).val.app V) s) m
         have hb := PresheafOfModules.naturality_apply
           (e.inv ≫ Pi.π (fun _ : Fin d ↦ unit (𝓡 R)) i).val f s
-        exact (congrArg (fun r ↦ r • M.val.map f m) hb).trans
+        exact (congrArg (fun r : R.obj.obj W ↦ r • (M.val.map f m : M.val.obj W)) hb).trans
           (hl.symm.trans ((congrArg (M.val.map f) hc).symm.trans hπ.symm)))))
 
 section SheafComparison
