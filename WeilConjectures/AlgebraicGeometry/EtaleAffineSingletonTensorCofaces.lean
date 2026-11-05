@@ -60,7 +60,7 @@ theorem singletonTensorDegreeComparison_coface
   apply AddCommGrpCat.ext
   intro x
   obtain ⟨x⟩ := x
-  induction x with
+  induction x using TensorProduct.inductionOn with
   | add x y hx hy =>
     change (_ : _ →+ _) (ULift.up x + ULift.up y) =
       (_ : _ →+ _) (ULift.up x + ULift.up y)

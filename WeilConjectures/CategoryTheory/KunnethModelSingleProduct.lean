@@ -68,5 +68,31 @@ private theorem modelCoefficientAction_f
   rw [← whiskerLeft_comp_assoc]
   congr 2
 
--- The total-tensor homology comparisons contain large canonical colimit expressions.
+/-- The cocycle product with a coefficient element: the coefficient action sends the class
+of a cocycle `z` to the class of the cocycle `z ⊗ a`.
+Source: Stacks Project, Tag 0H7Z, simple-tor-product.
+(blueprint: lem-pur-kunneth-model-single-product) -/
+theorem homologyMap_modelCoefficientAction_homologyπ
+    (P : CochainComplex (ModuleCat.{u} R) ℤ) (M : ModuleCat.{u} R) (a : M) (q : ℤ)
+    (z : P.cycles q) :
+    ∃ c : (P ⊗ (HomologicalComplex.single (ModuleCat.{u} R) (.up ℤ) 0).obj M).cycles q,
+      ((P ⊗ (HomologicalComplex.single (ModuleCat.{u} R) (.up ℤ) 0).obj M).iCycles q).hom c =
+        (HomologicalComplex.ιTensorObj P
+          ((HomologicalComplex.single (ModuleCat.{u} R) (.up ℤ) 0).obj M) q 0 q
+            (by simp)).hom ((P.iCycles q).hom z ⊗ₜ[R]
+              (HomologicalComplex.singleObjXSelf (.up ℤ) 0 M).inv.hom a) ∧
+      (HomologicalComplex.homologyMap (modelCoefficientAction R P M a) q).hom
+          ((P.homologyπ q).hom z) =
+        ((P ⊗ (HomologicalComplex.single (ModuleCat.{u} R) (.up ℤ) 0).obj M).homologyπ q).hom
+          c := by
+  refine ⟨HomologicalComplex.cyclesMap (modelCoefficientAction R P M a) q z, ?_, ?_⟩
+  · rw [← ModuleCat.comp_apply, HomologicalComplex.cyclesMap_i, ModuleCat.comp_apply,
+      modelCoefficientAction_f]
+    simp only [ModuleCat.of_coe, whiskerLeft_comp, Category.assoc, ModuleCat.hom_comp,
+      LinearMap.coe_comp, Function.comp_apply, ModuleCat.MonoidalCategory.rightUnitor_inv_apply,
+      ModuleCat.MonoidalCategory.whiskerLeft_apply, ConcreteCategory.hom_ofHom]
+    erw [LinearMap.toSpanSingleton_apply, one_smul]
+    rfl
+  · rw [← ModuleCat.comp_apply, HomologicalComplex.homologyπ_naturality, ModuleCat.comp_apply]
+
 end CategoryTheory

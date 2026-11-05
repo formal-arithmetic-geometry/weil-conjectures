@@ -7,6 +7,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.StrictLocalCohomologyGerms
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
 import Mathlib.CategoryTheory.Sites.EpiMono
 
@@ -106,9 +108,7 @@ its image in `D⁺`. -/
 private noncomputable def homologyComparison :
     M.obj.homology 0 ⟶
       (DerivedCategory.Plus.homologyFunctor _ 0).obj (DerivedCategory.Plus.Q.obj M) :=
-  (DerivedCategory.homologyFunctorFactors _ 0).inv.app M.obj ≫
-    (DerivedCategory.homologyFunctor _ 0).map
-      ((DerivedCategory.quotientCompQhIso _).inv.app M.obj)
+  (DerivedCategory.homologyFunctorFactors _ 0).inv.app M.obj
 
 private instance homologyComparison_isIso : IsIso (homologyComparison M) := by
   unfold homologyComparison
@@ -123,8 +123,10 @@ private lemma derivedHomToHomology_app_eq {W : Cᵒᵖ}
       DerivedCategory.Q.map f ≫ (DerivedCategory.quotientCompQhIso _).inv.app M.obj) :
     (strictLocalDerivedHomToHomology (DerivedCategory.Plus.Q.obj M)).app W β =
       DerivedCategory.singleCyclesHom _ ≫ HomologicalComplex.cyclesMap f 0 ≫
-        M.obj.homologyπ 0 ≫ homologyComparison M :=
-  DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso_inv_app_comp_homologyFunctor_map
+        M.obj.homologyπ 0 ≫ homologyComparison M := by
+  change _ = _ ≫ 𝟙 _ at hf
+  rw [Category.comp_id] at hf
+  exact DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso_inv_app_comp_homologyFunctor_map
     β f hf
 
 omit [J.HasSheafCompose (forget AddCommGrpCat.{v + 1})] in
@@ -166,11 +168,12 @@ private theorem isLocallySurjective_derivedHomToHomology [M.obj.IsKInjective] :
   obtain ⟨fM, hfM⟩ := exists_chainMap_of_cycle M c'
   obtain ⟨β, hβ⟩ : ∃ β : (DerivedCategory.Plus.singleFunctor _ 0).obj A ⟶
       DerivedCategory.Plus.Q.obj M, DerivedCategory.Plus.ι.map β =
-        DerivedCategory.Q.map fM ≫ (DerivedCategory.quotientCompQhIso _).inv.app M.obj :=
+        DerivedCategory.Q.map fM :=
     ⟨DerivedCategory.Plus.ι.preimage _, Functor.map_preimage _ _⟩
   refine ⟨β, ?_⟩
   rw [NatTrans.comp_app, ConcreteCategory.comp_apply,
-    derivedHomToHomology_app_eq M (W := op V) β fM hβ, reassoc_of% hfM,
+    derivedHomToHomology_app_eq M (W := op V) β fM
+      (by change _ = _ ≫ 𝟙 _; simpa using hβ), reassoc_of% hfM,
     ← freeSheafHomEquiv_apply, freeSheafHomEquiv_comp, Equiv.apply_symm_apply]
   rw [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app, ConcreteCategory.comp_apply,
     hc]
@@ -209,11 +212,13 @@ private theorem derivedMap_zero_of_boundary [M.obj.IsKInjective]
     (hb : ((HomologicalComplex.single _ (.up ℤ) 0).map φ ≫ f).f 0 =
       (HomologicalComplex.singleObjXSelf (.up ℤ) 0 A').hom ≫ b ≫ M.obj.d (-1) 0) :
     (DerivedCategory.Plus.singleFunctor _ 0).map φ ≫ β = 0 := by
+  change _ = _ ≫ 𝟙 _ at hf
+  rw [Category.comp_id] at hf
   let f' := (HomologicalComplex.single _ (.up ℤ) 0).map φ ≫ f
   have hβ' : DerivedCategory.Plus.ι.map
       ((DerivedCategory.Plus.singleFunctor _ 0).map φ ≫ β) =
-        DerivedCategory.Q.map f' ≫ (DerivedCategory.quotientCompQhIso _).inv.app M.obj := by
-    rw [Functor.map_comp, hf, Functor.map_comp, Category.assoc]
+        DerivedCategory.Q.map f' := by
+    simp only [f', Functor.map_comp, hf]
     rfl
   exact DerivedCategory.Plus.eq_zero_of_homotopy _ f' hβ'
     (homotopyOfSingle M f' b hb)
@@ -249,7 +254,8 @@ private theorem isLocallyInjective_derivedHomToHomology [M.obj.IsKInjective] :
       apply (freeSheafHomEquiv W.unop
         ((DerivedCategory.Plus.homologyFunctor _ 0).obj (DerivedCategory.Plus.Q.obj M))).injective
       rw [freeSheafHomEquiv_apply, freeSheafHomEquiv_apply, map_zero]
-      have := derivedHomToHomology_app_eq M β f hf
+      have := derivedHomToHomology_app_eq M β f
+        (by change _ = _ ≫ 𝟙 _; simpa using hf)
       simp only [z, Category.assoc]
       rw [← this]
       exact hβ
@@ -300,7 +306,8 @@ private theorem isLocallyInjective_derivedHomToHomology [M.obj.IsKInjective] :
     simp only [Category.assoc]
     rw [← h]
     simp
-  have h0 := derivedMap_zero_of_boundary M β f hf φ (inv τ' ≫ b') hf'0
+  have h0 := derivedMap_zero_of_boundary M β f
+    (by change _ = _ ≫ 𝟙 _; simpa using hf) φ (inv τ' ≫ b') hf'0
   simp only [Presheaf.equalizerSieve_apply, map_zero, map_sub]
   have h0' : (ConcreteCategory.hom (((strictLocalFreeSheaf J ⋙
       DerivedCategory.Plus.singleFunctor _ 0).op ⋙

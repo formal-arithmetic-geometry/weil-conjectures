@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 import WeilConjectures.AlgebraicGeometry.ShortComplexSectionComparison
 import WeilConjectures.AlgebraicGeometry.IntegerSectionAcyclicIncomingKernelImage
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Mono part of affine-basis section resolution comparison
 

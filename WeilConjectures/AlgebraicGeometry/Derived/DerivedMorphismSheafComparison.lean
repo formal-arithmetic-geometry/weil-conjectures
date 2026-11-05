@@ -338,9 +338,9 @@ noncomputable def derivedComparisonSliceIso (V : X.Etale) :
       (comparisonSliceUpperStar X B V).mapDerivedCategory ≅
     derivedComparison X B ⋙
       derivedSliceRestriction (ProEt.topology X) B ((toProEt X).obj V) :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso _ _) ≪≫
     Functor.mapDerivedCategoryNatIso (comparisonSliceBaseIso X B V) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
 
 private noncomputable def comparisonPullbackIso {V W : X.Etale} (g : W ⟶ V) :
     Over.pullback g ⋙ Over.post (toProEt X) ≅
@@ -1040,8 +1040,8 @@ adjunctions. (blueprint: def-weil-pbc-derived-morphism-sheaf-comparison) -/
 noncomputable def comparisonRestrictScalarsIso (φ : B →+* B') :
     Sheaf.derivedRestrictScalars X.smallEtaleTopology φ ⋙ derivedComparison X B ≅
       derivedComparison X B' ⋙ Sheaf.derivedRestrictScalars (ProEt.topology X) φ :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso _ _) ≪≫
     Functor.mapDerivedCategoryNatIso (comparisonRestrictScalarsSheafIso X B φ) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
 
 end AlgebraicGeometry.Scheme

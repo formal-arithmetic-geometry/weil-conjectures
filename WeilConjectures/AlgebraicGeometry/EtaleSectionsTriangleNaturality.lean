@@ -69,7 +69,7 @@ private theorem triangle_localization {X Y T : Scheme.{v}}
     let e := upperStarComp AddCommGrpCat.{v + 1} a g h hh
     L.mapDerivedCategory.map (G.mapDerivedCategoryFactors.inv.app J) ≫
       (Functor.mapDerivedCategoryNatIso e ≪≫
-        Functor.mapDerivedCategoryCompIso G L).inv.app (DerivedCategory.Q.obj J) =
+        (Functor.mapDerivedCategoryCompIso G L).symm).inv.app (DerivedCategory.Q.obj J) =
       L.mapDerivedCategoryFactors.hom.app C ≫
         DerivedCategory.Q.map ((NatIso.mapHomologicalComplex e (.up ℤ)).inv.app J) ≫
           H.mapDerivedCategoryFactors.inv.app J := by
@@ -89,19 +89,19 @@ private theorem triangle_localization {X Y T : Scheme.{v}}
       rfl
     erw [hid, CategoryTheory.Functor.map_id, Category.comp_id] at hc
     have hf : (Functor.mapDerivedCategoryNatIso e ≪≫
-        Functor.mapDerivedCategoryCompIso G L).hom.app (DerivedCategory.Q.obj J) ≫
+        (Functor.mapDerivedCategoryCompIso G L).symm).hom.app (DerivedCategory.Q.obj J) ≫
         L.mapDerivedCategory.map (G.mapDerivedCategoryFactors.hom.app J) ≫
           L.mapDerivedCategoryFactors.hom.app
             ((G.mapHomologicalComplex (.up ℤ)).obj J) =
         (upperStar AddCommGrpCat.{v + 1} h).mapDerivedCategoryFactors.hom.app J ≫
           DerivedCategory.Q.map ((NatIso.mapHomologicalComplex e (.up ℤ)).hom.app J) := by
-      simp only [Iso.trans_hom, NatTrans.comp_app, Category.assoc]
+      simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
       rw [hc]
       exact hn
     apply (cancel_epi (L.mapDerivedCategory.map
       (G.mapDerivedCategoryFactors.hom.app J))).1
     apply (cancel_epi ((Functor.mapDerivedCategoryNatIso e ≪≫
-      Functor.mapDerivedCategoryCompIso G L).hom.app (DerivedCategory.Q.obj J))).1
+      (Functor.mapDerivedCategoryCompIso G L).symm).hom.app (DerivedCategory.Q.obj J))).1
     rw [← L.mapDerivedCategory.map_comp_assoc]
     simp only [G, L, e, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id,
       Category.id_comp]
@@ -184,9 +184,9 @@ theorem sectionsComparison_triangle_naturality {X Y T : Scheme.{v}}
     (cohomology AddCommGrpCat.{v + 1} X n).map
       ((Functor.mapDerivedCategoryNatIso
         (upperStarComp AddCommGrpCat.{v + 1} a g h hh) ≪≫
-          Functor.mapDerivedCategoryCompIso
+          (Functor.mapDerivedCategoryCompIso
             (upperStar AddCommGrpCat.{v + 1} g)
-            (upperStar AddCommGrpCat.{v + 1} a)).inv.app K) =
+            (upperStar AddCommGrpCat.{v + 1} a)).symm).inv.app K) =
     chainRestriction ≫ comparison X h := by
   set_option backward.isDefEq.respectTransparency false in
   set_option backward.isDefEq.respectTransparency.types false in
@@ -202,7 +202,7 @@ theorem sectionsComparison_triangle_naturality {X Y T : Scheme.{v}}
     let E := (H.mapHomologicalComplex (.up ℤ)).obj J
     let e := upperStarComp AddCommGrpCat.{v + 1} a g h hh
     let d := (Functor.mapDerivedCategoryNatIso e ≪≫
-      Functor.mapDerivedCategoryCompIso G L).inv
+      (Functor.mapDerivedCategoryCompIso G L).symm).inv
     let u := (mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{v + 1} a).unit
     let l := (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso
       AddCommGrpCat.{v + 1} a).hom

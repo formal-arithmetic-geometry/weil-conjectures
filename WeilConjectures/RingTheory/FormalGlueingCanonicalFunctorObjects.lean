@@ -216,7 +216,7 @@ private theorem canonical_square {R : Type u} {S : Type v}
     apply local_ext (restrict φ (extend φ M)) e he
     intro y
     change TensorProduct R S M at y
-    induction y with
+    induction y using TensorProduct.inductionOn with
     | tmul s m =>
       simp only [LinearMap.comp_apply, LocalizedModule.mkLinearMap_apply]
       rw [local_map_one d (compare φ e M), compare_tensor_one φ e M,

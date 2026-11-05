@@ -69,13 +69,8 @@ theorem derived_unit_cochain
   erw [hu']
   rw [Adjunction.mapHomotopyCategory_unit_app_quotient]
   dsimp only [Functor.rightDerivedFunctorUnitQ]
-  erw [Category.comp_id]
   erw [← DerivedCategory.quotientCompQhIso_hom_naturality_assoc,
     Iso.hom_inv_id_app_assoc]
-  have hd : (DerivedCategory.quotientCompQhIso D).hom.app
-      ((L.mapHomologicalComplex (.up ℤ)).obj E) = 𝟙 _ := rfl
-  rw [hd]
-  erw [F.rightDerivedFunctor.map_id, Category.comp_id]
   rfl
 
 end CategoryTheory

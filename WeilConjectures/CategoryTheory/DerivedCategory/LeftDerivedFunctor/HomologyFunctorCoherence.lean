@@ -48,13 +48,13 @@ lemma mapDerivedCategoryFactors_inv_app_comp_mapDerivedCategoryCompIso_hom_app
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G] (L : CochainComplex C ℤ) :
     (F ⋙ G).mapDerivedCategoryFactors.inv.app L ≫
-        (mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Q.obj L) =
+        (mapDerivedCategoryCompIso F G).inv.app (DerivedCategory.Q.obj L) =
       DerivedCategory.Q.map
           ((mapHomologicalComplexCompIso (Iso.refl (F ⋙ G)) (.up ℤ)).inv.app L) ≫
         G.mapDerivedCategoryFactors.inv.app ((F.mapHomologicalComplex (.up ℤ)).obj L) ≫
         G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.inv.app L) := by
   have h := congrArg Iso.inv (Iso.ext (mapDerivedCategoryCompIso_fac F G L) :
-    (mapDerivedCategoryCompIso F G).app (DerivedCategory.Q.obj L) ≪≫
+    (mapDerivedCategoryCompIso F G).symm.app (DerivedCategory.Q.obj L) ≪≫
       G.mapDerivedCategory.mapIso (F.mapDerivedCategoryFactors.app L) ≪≫
       G.mapDerivedCategoryFactors.app ((F.mapHomologicalComplex (.up ℤ)).obj L) ≪≫
       DerivedCategory.Q.mapIso
@@ -73,13 +73,13 @@ lemma mapDerivedCategoryHomologyFunctorIso_hom_app_comp_map_mapDerivedCategoryCo
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G] (n : ℤ) (K : DerivedCategory C) :
     ((F ⋙ G).mapDerivedCategoryHomologyFunctorIso n).hom.app K ≫
-        (DerivedCategory.homologyFunctor E n).map ((mapDerivedCategoryCompIso F G).hom.app K) =
+        (DerivedCategory.homologyFunctor E n).map ((mapDerivedCategoryCompIso F G).inv.app K) =
       G.map ((F.mapDerivedCategoryHomologyFunctorIso n).hom.app K) ≫
         (G.mapDerivedCategoryHomologyFunctorIso n).hom.app (F.mapDerivedCategory.obj K) := by
   have h := Localization.natTrans_ext DerivedCategory.Q
     (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))
     (τ := ((F ⋙ G).mapDerivedCategoryHomologyFunctorIso n).hom ≫
-      whiskerRight (mapDerivedCategoryCompIso F G).hom (DerivedCategory.homologyFunctor E n))
+      whiskerRight (mapDerivedCategoryCompIso F G).inv (DerivedCategory.homologyFunctor E n))
     (τ' := (whiskerRight (F.mapDerivedCategoryHomologyFunctorIso n).hom G ≫
       (associator _ _ _).hom ≫
       whiskerLeft F.mapDerivedCategory (G.mapDerivedCategoryHomologyFunctorIso n).hom ≫

@@ -265,14 +265,14 @@ theorem exists_eq_unit_mul_pow_mul_finrank_residueField {π : R} (hπ : Irreduci
         obtain ⟨q, hq, hlo⟩ := q
         refine Subtype.ext (IsLocalRing.eq_maximalIdeal ?_)
         refine Ideal.isMaximal_of_isIntegral_of_isMaximal_under (R := R) q ?_
-        rw [← Ideal.under_def, ← Ideal.over_def q (maximalIdeal R)]
+        rw [← Ideal.over_def q (maximalIdeal R)]
         infer_instance }
   have hsum := Ideal.sum_ramification_inertia_eq_finrank (maximalIdeal R) B
   rw [Fintype.sum_unique] at hsum
   change (maximalIdeal B).ramificationIdx R * (maximalIdeal B).inertiaDeg R = _ at hsum
-  rw [← Ideal.ramificationIdx'_eq_ramificationIdx' _ _ hpS,
-    ← Ideal.inertiaDeg'_eq_inertiaDeg (maximalIdeal R) (maximalIdeal B), he,
-    Ideal.inertiaDeg'_algebraMap, ← IsFractionRing.finrank_eq R F B L] at hsum
+  rw [← Ideal.ramificationIdx'_eq_ramificationIdx' _ _ hpS, he,
+    Ideal.inertiaDeg_eq_of_isMaximal (maximalIdeal R) (maximalIdeal B),
+    ← IsFractionRing.finrank_eq R F B L] at hsum
   exact hsum
 
 variable (R F L) in

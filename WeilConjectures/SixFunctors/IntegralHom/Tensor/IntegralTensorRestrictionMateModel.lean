@@ -380,7 +380,7 @@ private noncomputable def rawIso (M : Modules.{u, u} X R) :
   PresheafOfModules.isoMk (fun _ ↦ Iso.refl _) (by
     intro U V f
     ext z
-    induction z with
+    induction z using TensorProduct.inductionOn with
     | add z w hz hw => simp only [map_add, hz, hw]
     | tmul s x =>
       exact (Classical.choose_spec (SheafOfModules.exists_changeOfRingsMap c M f) s x))

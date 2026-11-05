@@ -76,7 +76,7 @@ private theorem directComparison (X : Scheme.{u}) {A Y : X.Opens} (i : A ⟶ Y)
     Functor.isoWhiskerRight (Modules.overFunctorEquiv U) e₀.functor ≪≫
       (Modules.restrictFunctorComp s.inv U.ι).symm ≪≫
       Modules.restrictFunctorCongr fac ≪≫ (overlapRestrictionIso X i).symm
-  exact ⟨e₀.mapDerivedCategory, ⟨(Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  exact ⟨e₀.mapDerivedCategory, ⟨Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso c⟩⟩
 
 attribute [local irreducible] Functor.mapDerivedCategory transportDerived

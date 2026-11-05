@@ -47,7 +47,7 @@ noncomputable def extendScalarsTensorIso (A : Type u) [AddCommGroup A] [Module R
       map_smul' := by
         intro b x
         change t (b • x) = b • t x
-        induction x with
+        induction x using TensorProduct.inductionOn with
         | tmul s a => rfl
         | add x y hx hy => simp only [smul_add, map_add, hx, hy] }
   exact eS.toModuleIso
@@ -213,7 +213,7 @@ theorem exists_cechBaseChange_cohomology_square [Module.Flat R S]
     change e'.hom (D.homologyπ q (extendedCechCycles f U M c q x)) =
       H.baseChange (S := S) f M q ((extendScalarsTensorIso (S := S) (HOver f M q)).hom
         (F.map e.hom (F.map (C.homologyπ q) x)))
-    induction x with
+    induction x using TensorProduct.inductionOn with
     | add x y hx hy => simp only [map_add, hx, hy]
     | tmul b z =>
       have h := hz z

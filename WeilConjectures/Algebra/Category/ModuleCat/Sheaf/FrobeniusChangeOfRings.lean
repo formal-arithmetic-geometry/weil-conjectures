@@ -126,7 +126,7 @@ def counitPresheaf (M : SheafOfModules.{u} (𝓡 R)) :
     ext z
     change (F.data W).counitApp _ (changeOfRingsMap φ M f z) =
       M.val.map f ((F.data V).counitApp _ z)
-    induction z with
+    induction z using TensorProduct.inductionOn with
     | add z z' hz hz' => erw [map_add, map_add, hz, hz', map_add, map_add]
     | tmul s m =>
       refine (congrArg _ (changeMap_tmul φ M f s m)).trans ?_

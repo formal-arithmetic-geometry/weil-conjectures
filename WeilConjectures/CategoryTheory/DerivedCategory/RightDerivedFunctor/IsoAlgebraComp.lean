@@ -157,7 +157,8 @@ lemma isIso_rightDerivedFunctorUnit_app_mapOfNatIso (Y : CochainComplex (IsoAlge
     have : IsIso (L.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj
         (((forget G).mapHomologicalComplex _).obj Y))) := inferInstance
     have : IsIso (L.rightDerivedFunctorUnit.app
-        (((forget G).mapHomotopyCategory (ComplexShape.up ℤ)).obj qY)) := this
+        ((HomotopyCategory.quotient D (ComplexShape.up ℤ)).obj
+          (((forget G).mapHomologicalComplex (ComplexShape.up ℤ)).obj qY.as))) := this
     dsimp [α₂, Functor.rightDerivedFunctorCompUnit]
     infer_instance
   have h₁ : IsIso (α₁.app qY) := by
@@ -215,8 +216,9 @@ instance isRightDerivedFunctor_rightDerivedFunctor_comp_mapOfNatIso :
   have h₂ := isIso_rightDerivedFunctorUnit_app_mapOfNatIso e₂
     (((mapOfNatIso e₁).mapHomologicalComplex (ComplexShape.up ℤ)).obj K)
   have h₂' : IsIso ((mapOfNatIso e₂).rightDerivedFunctorUnit.app
-      (((mapOfNatIso e₁).mapHomotopyCategory (ComplexShape.up ℤ)).obj
-        ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj K))) := h₂
+      ((HomotopyCategory.quotient (IsoAlgebra G) (ComplexShape.up ℤ)).obj
+        (((mapOfNatIso e₁).mapHomologicalComplex (ComplexShape.up ℤ)).obj
+          ((HomotopyCategory.quotient (IsoAlgebra F) (ComplexShape.up ℤ)).obj K).as))) := h₂
   dsimp [Functor.rightDerivedFunctorCompUnit]
   infer_instance
 

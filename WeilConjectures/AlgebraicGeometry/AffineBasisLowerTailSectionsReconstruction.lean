@@ -9,7 +9,9 @@ module
 public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import Mathlib.Algebra.Category.Grp.AB
@@ -19,6 +21,7 @@ import WeilConjectures.CategoryTheory.Triangulated.DerivedFunctorDerivedLimit
 import WeilConjectures.AlgebraicGeometry.TruncationDerivedLimit
 import WeilConjectures.AlgebraicGeometry.AffineBasisRestrictedLowerTailLocalBound
 import WeilConjectures.AlgebraicGeometry.OpenDerivedSectionsTruncationTowerComparison
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Affine-basis lower truncation tower inputs
 Source: Stacks Project, Tags 0BKT, 0D64, 071B and 08D4. -/

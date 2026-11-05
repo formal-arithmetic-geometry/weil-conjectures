@@ -203,7 +203,7 @@ theorem exists_sum_comp_eq_id_over (M : X.Modules) [M.IsFiniteLocallyFree] {U : 
       ∑ j, ξ j ≫ m j = 𝟙 _ := by
   have : (restrictFunctor hU.isoSpec.hom).Additive :=
     Functor.additive_of_iso (restrictFunctorIsoPullback _).symm
-  have : HasBinaryBiproducts (SheafOfModules (X.ringCatSheaf.over U)) :=
+  have : HasBinaryBiproducts (SheafOfModules.{u} (X.ringCatSheaf.over U)) :=
     HasBinaryBiproducts.of_hasBinaryProducts
   have : PreservesBinaryBiproducts (overEquiv U).inverse :=
     preservesBinaryBiproducts_of_preservesBinaryProducts _

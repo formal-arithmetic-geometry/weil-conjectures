@@ -90,7 +90,9 @@ private noncomputable def finiteHypercoverColimit
   rw [Category.assoc, hr.conePointUniqueUpToIso_hom_comp hE k]
   simp only [r, e, Cone.postcompose_obj_π, NatTrans.comp_app, Functor.mapCone_π_app,
     colim_map, Iso.trans_hom, Iso.symm_hom, colimit.cocone_ι, ι_colimMap_assoc,
-    colimitIsoFlipCompColim_inv_app]
+    colimitIsoFlipCompColim_inv_app, HasColimit.ι_isoOfNatIso_inv_assoc,
+    compEvaluation_inv_app, Category.assoc]
+  erw [Category.id_comp]
   have h := colimitObjIsoColimitCompEvaluation_ι_inv B j k
   have h' := congrArg (fun f ↦ f ≫
     ((colimit.isColimit B).coconePointUniqueUpToIso hd).hom.app k) h

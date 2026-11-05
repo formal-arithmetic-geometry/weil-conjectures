@@ -63,7 +63,7 @@ private theorem derivedRestrictScalars_isRightAdjoint_sameUniverse
     (AddEquiv.toLinearEquiv (M := ↑((F ⋙ restrictScalars φ).obj M))
       (M₂ := ↑((tensorLeft B).obj M)) (AddEquiv.refl _) (by
         intro r z
-        induction z with
+        induction z using TensorProduct.inductionOn with
         | tmul s m => rfl
         | add a b ha hb =>
             simpa only [map_add, smul_add] using congrArg₂ (· + ·) ha hb)).toModuleIso
@@ -141,8 +141,8 @@ theorem derivedRestrictScalars_isRightAdjoint
         (restrictScalars ψ).mapDerivedCategory) ⋙
         (restrictScalars r).mapDerivedCategory :=
     Functor.mapDerivedCategoryNatIso e ≪≫
-      Functor.mapDerivedCategoryCompIso _ _ ≪≫
-      Functor.isoWhiskerRight (Functor.mapDerivedCategoryCompIso _ _) _
+      (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      Functor.isoWhiskerRight (Functor.mapDerivedCategoryCompIso _ _).symm _
   exact Functor.isRightAdjoint_of_iso ed.symm
 
 end ModuleCat

@@ -83,7 +83,7 @@ noncomputable def externalConstantSectionsTensorMap
         obtain ⟨z, rfl⟩ :=
           (picardConstantTensorBalancedSections k Y g (scalarObj f F (op ⊤)) G V.unop).symm
             |>.surjective x
-        induction z with
+        induction z using TensorProduct.inductionOn with
         | tmul s t =>
           rw [picardConstantTensorBalancedSections_smul]
           simpa only [AddEquiv.apply_symm_apply, RingHom.id_apply] using

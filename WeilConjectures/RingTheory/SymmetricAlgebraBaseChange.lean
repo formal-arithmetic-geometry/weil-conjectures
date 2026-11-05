@@ -64,7 +64,7 @@ theorem baseChange_bijective
     apply algHom_ext
     apply LinearMap.ext
     intro x
-    induction x with
+    induction x using TensorProduct.inductionOn with
     | tmul s m =>
       change Φ (Ψ (ι S (S ⊗[R] M) (s ⊗ₜ[R] m))) =
         ι S (S ⊗[R] M) (s ⊗ₜ[R] m)

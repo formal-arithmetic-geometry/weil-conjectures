@@ -529,7 +529,7 @@ lemma Algebra.IsEpi.tensorProductMap {R S T B : Type*} [CommRing R] [CommRing S]
     have h2 := congrArg (_root_.TensorProduct.lift φ) h
     simpa [φ, ← Algebra.TensorProduct.one_def] using h2
   intro y
-  induction y with
+  induction y using TensorProduct.inductionOn with
   | add y₁ y₂ h₁ h₂ => rw [TensorProduct.tmul_add, TensorProduct.add_tmul, h₁, h₂]
   | tmul t b =>
     have h1 : (t ⊗ₜ[R] b : T ⊗[R] B) =
@@ -580,7 +580,7 @@ theorem Algebra.WeaklyEtale.isIntegrallyClosedIn_tensorProduct
     RingHom.Flat.tensorProductMap (RingHom.flat_algebraMap_iff.mpr hMflat) (RingHom.Flat.id B)
   have hg_eq : ∀ v, g v = (IsScalarTower.toAlgHom A S T).toLinearMap.rTensor B v := by
     intro v
-    induction v with
+    induction v using TensorProduct.inductionOn with
     | add a b ha hb => simp [ha, hb]
     | tmul s b => simp [hgdef]
   have hginj : Function.Injective g := fun a b hab ↦
@@ -600,7 +600,7 @@ theorem Algebra.WeaklyEtale.isIntegrallyClosedIn_tensorProduct
         (IsScalarTower.toAlgHom A S T).toLinearMap ∘ₗ LinearMap.snd A L S).rTensor B w =
       hL (e w).1 - g (e w).2 := by
     intro w
-    induction w with
+    induction w using TensorProduct.inductionOn with
     | add w₁ w₂ h₁ h₂ =>
       simp only [map_add, h₁, h₂, Prod.fst_add, Prod.snd_add]
       ring

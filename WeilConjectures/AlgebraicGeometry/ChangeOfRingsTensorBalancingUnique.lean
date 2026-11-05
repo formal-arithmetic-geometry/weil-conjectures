@@ -69,7 +69,7 @@ theorem changeOfRings_tensor_balancing_universal_unique (Y : Scheme.{u})
   apply (PresheafOfModules.toPresheaf _).map_injective
   apply CategoryTheory.sheafify_hom_ext (Opens.grothendieckTopology Y) _ _ Q.isSheaf
   ext W x
-  induction x with
+  induction x using TensorProduct.inductionOn with
   | tmul c p =>
     have hcomp := congrArg (fun k => k.val.app W
       (tmulSection (M := C.toModule)

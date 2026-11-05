@@ -152,7 +152,7 @@ theorem completed_fibre_compatible_product
     (E₃.symm.toRingEquiv.trans (E₄.toRingEquiv.trans
       (E₅.toRingEquiv.trans E₆.toRingEquiv))))
   have hzero (t : Q) (h : ¬ s ≤ t.1) : Subsingleton (s.Fiber (D t)) := by
-    obtain ⟨x, hxs, hxt⟩ := SetLike.not_le_iff_exists.mp h
+    obtain ⟨x, hxs, hxt⟩ := IsConcreteLE.not_le_iff_exists.mp h
     have hu : IsUnit (algebraMap (Polynomial B) (D t) x) := by
       rw [IsScalarTower.algebraMap_apply (Polynomial B) (Localization.AtPrime t.1) (D t)]
       exact (IsLocalization.map_units (Localization.AtPrime t.1) (⟨x, hxt⟩ : t.1.primeCompl)).map _

@@ -66,7 +66,7 @@ theorem exists_comap_eq_of_galois
         ext z
         change map (AlgHom.id k A) (σ * τ).toAlgHom z =
           map (AlgHom.id k A) σ.toAlgHom (map (AlgHom.id k A) τ.toAlgHom z)
-        induction z with
+        induction z using TensorProduct.inductionOn with
         | tmul a t => simp
         | add z w hz hw => simp [hz, hw] }
   let : MulSemiringAction (K ≃ₐ[k] K) B := MulSemiringAction.compHom B ρ

@@ -7,9 +7,11 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.LinearAlgebra.TensorProduct.Map
 import WeilConjectures.AlgebraicGeometry.Modules.PullbackTilde
 import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineChartUnit
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-!
 # Bijectivity of the affine tensor-sections map
@@ -95,7 +97,7 @@ theorem tensorPullback_affine_sections_bijective
   have h₀ := ConcreteCategory.bijective_of_isIso ((k₀.hom.app G).app U.1)
   have eqc (t : Γ(G, V.1) ⊗[Γ(Y, V.1)] Γ(X, U.1)) :
       ((k₀.hom.app G).app U.1) (c t) = eU (e₂ (e₁ (e₀' (e₀ t)))) := by
-    induction t with
+    induction t using TensorProduct.inductionOn with
     | tmul s b =>
       rw [hc, Hom.app_smul]
       change b • ((k₀.hom.app G).app U.1) _ =

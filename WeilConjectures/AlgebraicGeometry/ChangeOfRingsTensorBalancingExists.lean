@@ -120,7 +120,7 @@ theorem changeOfRings_tensor_balancing_universal_exists (Y : Scheme.{u})
           map_add' := (L W.unop).map_add
           map_smul' := by
             intro r x
-            induction x with
+            induction x using TensorProduct.inductionOn with
             | tmul c p =>
               change L W.unop ((C.hom.hom.app W r *
                 (show C.right.obj.obj W from c)) ⊗ₜ[B.right.obj.obj W,
@@ -133,7 +133,7 @@ theorem changeOfRings_tensor_balancing_universal_exists (Y : Scheme.{u})
       naturality := by
         intro W V i
         ext x
-        induction x with
+        induction x using TensorProduct.inductionOn with
         | tmul c p =>
           change L V.unop (SheafOfModules.changeOfRingsMap φ.right P i
             (c ⊗ₜ[B.right.obj.obj W, (φ.right.hom.app W).hom] p)) =

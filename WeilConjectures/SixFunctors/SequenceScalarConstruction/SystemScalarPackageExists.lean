@@ -106,7 +106,13 @@ theorem scalarPackageExists
             ordinaryAdj := a
             unit_normalized := ?_
             adjunction := d
-            transpose := adjunction_cochain_transpose D.E _ a D.T D.ε ε hεP d hd }, rfl⟩
+            transpose := adjunction_cochain_transpose D.E _ a D.T D.ε ε
+              (fun P ↦ by
+                apply (Iso.eq_comp_inv ((DerivedCategory.quotientCompQhIso
+                  (ringedSiteModules.{sw}
+                    (SheafOfModules.derivedChangeRingIndependentCoefficients J S))).app
+                      ((D.E.mapHomologicalComplex (.up ℤ)).obj P))).1
+                simpa only [Iso.app_inv, Category.assoc] using hεP P) d hd }, rfl⟩
   intro P U x
   have hu := ha P (D.E.obj P) (eqToHom (D.obj_eq P).symm) U x
   dsimp only [SheafOfModules.systemModelTmul]

@@ -51,9 +51,9 @@ private noncomputable def tensorMatrixAlgEquiv (K : Type u) [Field K]
       simp [Matrix.one_apply, TensorProduct.tmul_ite, ← Algebra.TensorProduct.one_def])
     (by
       intro x y
-      induction x with
+      induction x using TensorProduct.inductionOn with
       | tmul s a =>
-        induction y with
+        induction y using TensorProduct.inductionOn with
         | tmul t b =>
           rw [Algebra.TensorProduct.tmul_mul_tmul]
           simp only [tensorMatrixLinear_tmul]

@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Analysis.Normed.Module.FiniteDimension
 public import Mathlib.NumberTheory.Padics.ProperSpace
+public import Mathlib.Topology.Algebra.Group.Units
 public import Mathlib.Topology.Algebra.Module.FiniteDimension
 public import Mathlib.Topology.Instances.Matrix
 public import Mathlib.Topology.MetricSpace.Ultra.TotallySeparated

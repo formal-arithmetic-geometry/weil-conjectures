@@ -486,7 +486,7 @@ private theorem quotientTensor_bijective
   have hu : Function.Surjective
       (fun x : M ↦ (1 : D.A) ⊗ₜ[R, D.quotientMap] x) := by
     intro z
-    induction z with
+    induction z using TensorProduct.inductionOn with
     | add z w hz hw =>
       obtain ⟨x, rfl⟩ := hz
       obtain ⟨y, rfl⟩ := hw

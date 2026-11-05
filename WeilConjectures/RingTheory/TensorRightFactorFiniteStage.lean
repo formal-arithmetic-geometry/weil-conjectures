@@ -214,7 +214,7 @@ theorem exists_tensor_right_factor_finite_stage
     let := aPj
     have square (z : ↥(F.obj j) ⊗[F.obj i₀] B₀) :
         t i k hik (φ i (tjB i z)) = φ k (tjB k z) := by
-      induction z with
+      induction z using TensorProduct.inductionOn with
       | tmul a b =>
         let := (F.map (homOfLE (h₀ k))).hom.toAlgebra
         dsimp [t, φ, tjB]
@@ -246,7 +246,7 @@ theorem exists_tensor_right_factor_finite_stage
     refine ⟨ik, Algebra.TensorProduct.map β (AlgHom.id (F.obj i₀) C₀) x, ?_⟩
     rw [← hx]
     clear hx
-    induction x with
+    induction x using TensorProduct.inductionOn with
     | tmul a b =>
       dsimp [μ, α, β]
       exact congrArg (fun a ↦ a ⊗ₜ[F.obj i₀] b)

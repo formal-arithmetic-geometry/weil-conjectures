@@ -115,7 +115,7 @@ theorem Algebra.TensorProduct.eq_zero_of_forall_lift_algHom_eq_zero (B : Type*) 
     (fun a ha ↦ eq_zero_of_forall_algHom_apply_eq_zero k A ha) fun φ ↦ ?_
   have key (ψ : B →ₐ[k] k) (t : A ⊗[k] B) :
       ψ (TensorProduct.lid k B (φ.toLinearMap.rTensor B t)) = lift φ ψ (fun _ _ ↦ .all _ _) t := by
-    induction t with
+    induction t using TensorProduct.inductionOn with
     | tmul a b => simp
     | add x y hx hy => simp [hx, hy]
   simpa using eq_zero_of_forall_algHom_apply_eq_zero k B fun ψ ↦ (key ψ t).trans (h φ ψ)

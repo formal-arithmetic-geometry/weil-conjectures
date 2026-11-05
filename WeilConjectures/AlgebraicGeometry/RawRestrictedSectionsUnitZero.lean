@@ -6,6 +6,8 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.RawRestrictedHomotopySectionsIso
 import WeilConjectures.CategoryTheory.RightDerivedSingleUnitHomologyComparison
 
@@ -100,9 +102,15 @@ private theorem unit_zero_comparison {C D : Type*}
     dsimp only [DerivedCategory.Plus.homologyFunctor,
       CategoryTheory.Functor.comp_map]
     rw [CategoryTheory.Functor.map_preimage]
+    have hq (K : CochainComplex D ℤ) :
+        (DerivedCategory.quotientCompQhIso D).inv.app K = 𝟙 _ := by
+      rfl
     change _ = (HomologicalComplex.singleObjHomologySelfIso (.up ℤ) 0 (F.obj M)).inv ≫
       (DerivedCategory.homologyFunctorFactors D 0).inv.app _ ≫
-      (DerivedCategory.homologyFunctor D 0).map (DerivedCategory.Q.map t.inv)
+      (DerivedCategory.homologyFunctor D 0).map
+        (DerivedCategory.Q.map t.inv ≫ (DerivedCategory.quotientCompQhIso D).inv.app T)
+    rw [hq]
+    erw [Category.comp_id]
     have hn := (DerivedCategory.homologyFunctorFactors D 0).inv.naturality t.inv
     dsimp only [CategoryTheory.Functor.comp_map] at hn
     exact congrArg (_ ≫ ·) hn

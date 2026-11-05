@@ -50,7 +50,7 @@ private theorem power_multiplication_range {X : Scheme.{u}} {K : X.Modules}
     apply le_antisymm
     · rintro _ ⟨z, rfl⟩
       obtain ⟨w, rfl⟩ := ht.2 z
-      induction w with
+      induction w using TensorProduct.inductionOn with
       | tmul s t =>
         change a.app U.1 (Scheme.Modules.tensorSectionsMap K M U.1 (s ⊗ₜ t)) ∈ I • ⊤
         rw [hp]

@@ -41,7 +41,7 @@ private theorem left_injective_at_regular_stage
   let t : C ⊗[B] H1Cotangent A B →ₗ[C] (P.cotangentComplex.baseChange C).ker :=
     { toFun := fun x ↦ ⟨(LinearMap.lTensor C P.h1Cotangentι) x, by
         change P.cotangentComplex.baseChange C ((LinearMap.lTensor C P.h1Cotangentι) x) = 0
-        induction x with
+        induction x using TensorProduct.inductionOn with
         | tmul c h => simp [P, LinearMap.baseChange_tmul]
         | add x y hx hy => simp [hx, hy]⟩
       map_add' := fun _ _ ↦ Subtype.ext (map_add _ _ _)
@@ -50,7 +50,7 @@ private theorem left_injective_at_regular_stage
         apply Subtype.ext
         change (LinearMap.lTensor C P.h1Cotangentι) (c • x) =
           c • (LinearMap.lTensor C P.h1Cotangentι) x
-        induction x with
+        induction x using TensorProduct.inductionOn with
         | tmul c' h => simp [smul_tmul']
         | add x y hx hy => simp [smul_add, hx, hy] }
   have ht : Function.Injective t := by
@@ -61,7 +61,7 @@ private theorem left_injective_at_regular_stage
       j (t x) = (H1Cotangent.map A A B C).liftBaseChange C x := by
     apply Q.h1Cotangentι_injective
     rw [hj]
-    induction x with
+    induction x using TensorProduct.inductionOn with
     | tmul c h => rfl
     | add x y hx hy => simpa only [map_add, Submodule.coe_add] using congrArg₂ (· + ·) hx hy
   intro x y hxy
@@ -188,7 +188,7 @@ private theorem tensor_conormal_finite_support
           (((H1Cotangent.map A A B S).liftBaseChange S) y).val =
             Extension.Cotangent.mk q := by
   classical
-  induction x with
+  induction x using TensorProduct.inductionOn with
   | tmul c h =>
       obtain ⟨g, hg⟩ := Extension.Cotangent.mk_surjective h.val
       obtain ⟨hG, hGrep⟩ := canonical_conormal_tmul A B C c h g hg

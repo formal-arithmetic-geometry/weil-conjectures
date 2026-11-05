@@ -41,11 +41,11 @@ attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimi
 private noncomputable def face (q : R ⋙ G ≅ L ⋙ S) :
     R.mapDerivedCategory ⋙ G.mapDerivedCategory ≅
       L.mapDerivedCategory ⋙ S.mapDerivedCategory :=
-  (mapDerivedCategoryCompIso R G).symm ≪≫
-    mapDerivedCategoryNatIso q ≪≫ mapDerivedCategoryCompIso L S
+  mapDerivedCategoryCompIso R G ≪≫
+    mapDerivedCategoryNatIso q ≪≫ (mapDerivedCategoryCompIso L S).symm
 
 private lemma comp_fac (K : CochainComplex C ℤ) :
-    (mapDerivedCategoryCompIso R G).hom.app (DerivedCategory.Q.obj K) ≫
+    (mapDerivedCategoryCompIso R G).inv.app (DerivedCategory.Q.obj K) ≫
       G.mapDerivedCategory.map (R.mapDerivedCategoryFactors.hom.app K) ≫
       G.mapDerivedCategoryFactors.hom.app
         ((R.mapHomologicalComplex (.up ℤ)).obj K) =
@@ -67,14 +67,14 @@ private lemma face_fac (q : R ⋙ G ≅ L ⋙ S) (K : CochainComplex C ℤ) :
       G.mapDerivedCategoryFactors.hom.app
         ((R.mapHomologicalComplex (.up ℤ)).obj K) ≫
       DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex q.hom (.up ℤ)).app K) := by
-  have hi : (mapDerivedCategoryCompIso R G).inv.app (DerivedCategory.Q.obj K) ≫
+  have hi : (mapDerivedCategoryCompIso R G).hom.app (DerivedCategory.Q.obj K) ≫
       (R ⋙ G).mapDerivedCategoryFactors.hom.app K =
       G.mapDerivedCategory.map (R.mapDerivedCategoryFactors.hom.app K) ≫
       G.mapDerivedCategoryFactors.hom.app
         ((R.mapHomologicalComplex (.up ℤ)).obj K) := by
-    apply (cancel_epi ((mapDerivedCategoryCompIso R G).hom.app
+    apply (cancel_epi ((mapDerivedCategoryCompIso R G).inv.app
       (DerivedCategory.Q.obj K))).mp
-    rw [Iso.hom_inv_id_app_assoc]
+    rw [Iso.inv_hom_id_app_assoc]
     exact (comp_fac R G K).symm
   simp only [face, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
   rw [comp_fac, mapDerivedCategoryNatIso_fac]
@@ -142,18 +142,18 @@ theorem mapDerivedCategory_exactCube
     (comm : ∀ X : C,
       c.map (q1.hom.app X) ≫ q2.hom.app (d.obj X) ≫ g.map (q3.hom.app X) =
         q4.hom.app (a.obj X) ≫ k.map (q5.hom.app X) ≫ q6.hom.app (h.obj X)) :
-    let s1 := (mapDerivedCategoryCompIso a b).symm ≪≫
-      mapDerivedCategoryNatIso q1 ≪≫ mapDerivedCategoryCompIso d e
-    let s2 := (mapDerivedCategoryCompIso e c).symm ≪≫
-      mapDerivedCategoryNatIso q2 ≪≫ mapDerivedCategoryCompIso f g
-    let s3 := (mapDerivedCategoryCompIso d f).symm ≪≫
-      mapDerivedCategoryNatIso q3 ≪≫ mapDerivedCategoryCompIso h i
-    let s4 := (mapDerivedCategoryCompIso b c).symm ≪≫
-      mapDerivedCategoryNatIso q4 ≪≫ mapDerivedCategoryCompIso j k
-    let s5 := (mapDerivedCategoryCompIso a j).symm ≪≫
-      mapDerivedCategoryNatIso q5 ≪≫ mapDerivedCategoryCompIso h m
-    let s6 := (mapDerivedCategoryCompIso m k).symm ≪≫
-      mapDerivedCategoryNatIso q6 ≪≫ mapDerivedCategoryCompIso i g
+    let s1 := mapDerivedCategoryCompIso a b ≪≫
+      mapDerivedCategoryNatIso q1 ≪≫ (mapDerivedCategoryCompIso d e).symm
+    let s2 := mapDerivedCategoryCompIso e c ≪≫
+      mapDerivedCategoryNatIso q2 ≪≫ (mapDerivedCategoryCompIso f g).symm
+    let s3 := mapDerivedCategoryCompIso d f ≪≫
+      mapDerivedCategoryNatIso q3 ≪≫ (mapDerivedCategoryCompIso h i).symm
+    let s4 := mapDerivedCategoryCompIso b c ≪≫
+      mapDerivedCategoryNatIso q4 ≪≫ (mapDerivedCategoryCompIso j k).symm
+    let s5 := mapDerivedCategoryCompIso a j ≪≫
+      mapDerivedCategoryNatIso q5 ≪≫ (mapDerivedCategoryCompIso h m).symm
+    let s6 := mapDerivedCategoryCompIso m k ≪≫
+      mapDerivedCategoryNatIso q6 ≪≫ (mapDerivedCategoryCompIso i g).symm
     whiskerRight s1.hom c.mapDerivedCategory ≫
         whiskerLeft d.mapDerivedCategory s2.hom ≫
         whiskerRight s3.hom g.mapDerivedCategory =

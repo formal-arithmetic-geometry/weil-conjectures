@@ -210,7 +210,7 @@ theorem exists_site_bounded_constant_model
               (Over.map g) (ModuleCat.{u} B)
               (J.toGrothendieck.over V) (J.toGrothendieck.over (U i))))⟩
       refine ⟨N, hNfinite, hNzero, ⟨?_⟩⟩
-      exact (Functor.mapDerivedCategoryCompIso F R).app K ≪≫
+      exact (Functor.mapDerivedCategoryCompIso F R).symm.app K ≪≫
         R.mapDerivedCategory.mapIso eK ≪≫ R.mapDerivedCategoryFactors.app P ≪≫
         DerivedCategory.Q.mapIso eN
     choose S hS hh using hlocal

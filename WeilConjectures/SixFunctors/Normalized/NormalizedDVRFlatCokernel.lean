@@ -199,7 +199,7 @@ private def coefficientDerivedComp
     coefficientDerivedRes (syst := syst) hmn ⋙
         coefficientDerivedRes (syst := syst) hrm ≅
       coefficientDerivedRes (syst := syst) (le_trans hmn hrm) :=
-  (Functor.mapDerivedCategoryCompIso (coefficientRes syst hmn)
+  ((Functor.mapDerivedCategoryCompIso (coefficientRes syst hmn)).symm
     (coefficientRes syst hrm)).symm ≪≫
       Functor.mapDerivedCategoryNatIso (syst.finiteComp hrm hmn)
 

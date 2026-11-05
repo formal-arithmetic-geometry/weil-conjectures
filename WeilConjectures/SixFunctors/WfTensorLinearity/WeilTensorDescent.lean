@@ -286,10 +286,10 @@ theorem rationalTensorHom_exists
   intro x
   apply LinearMap.ext
   intro y
-  induction x with
+  induction x using TensorProduct.inductionOn with
   | add x x' hx hx' => simp only [map_add, LinearMap.add_apply, hx, hx']
   | tmul s f =>
-    induction y with
+    induction y using TensorProduct.inductionOn with
     | add y y' hy hy' => simp only [map_add, hy, hy']
     | tmul t g => exact (hγ f g s t).trans (hβ f g s t).symm
 

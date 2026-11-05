@@ -136,7 +136,7 @@ theorem isDomain_of_isSeparable [Algebra.IsSeparable k L]
   -- every element comes from a finite subextension
   have hmem (x : K ⊗[k] L) : ∃ E : IntermediateField k L, FiniteDimensional k E ∧
       x ∈ Set.range (Algebra.TensorProduct.map (AlgHom.id k K) E.val) := by
-    induction x with
+    induction x using TensorProduct.inductionOn with
     | tmul a b =>
       have : FiniteDimensional k (IntermediateField.adjoin k {b}) :=
         IntermediateField.adjoin.finiteDimensional (Algebra.IsSeparable.isIntegral k b)

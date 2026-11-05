@@ -51,7 +51,7 @@ theorem exists_finset_forall_mem_range_map_val {k K R : Type*} [Field k] [Field 
     ∃ T : Finset K, ∀ F : IntermediateField k K, (T : Set K) ⊆ F →
       x ∈ (map F.val (AlgHom.id k R)).range := by
   classical
-  induction x with
+  induction x using TensorProduct.inductionOn with
   | tmul a r =>
     refine ⟨{a}, fun F hF ↦ ⟨⟨a, hF (by simp)⟩ ⊗ₜ r, ?_⟩⟩
     simp
@@ -95,7 +95,7 @@ theorem exists_ringEquiv_quotient_tensorProduct {k K R Ω : Type*} [Field k] [Fi
   have hΨι : (Ψ : K ⊗[k] R →+* _).comp (ι : L ⊗[k] R →+* K ⊗[k] R) =
       (Algebra.TensorProduct.includeRight : L ⊗[k] R →ₐ[L] Ω ⊗[L] (L ⊗[k] R)).toRingHom := by
     refine RingHom.ext fun x ↦ ?_
-    induction x with
+    induction x using TensorProduct.inductionOn with
     | tmul l r =>
       simp only [RingHom.coe_comp, Function.comp_apply, AlgHom.toRingHom_eq_coe, RingHom.coe_coe,
         ι, Algebra.TensorProduct.map_tmul, AlgHom.id_apply, hΨ,
@@ -273,7 +273,7 @@ theorem exists_finiteModel_of_isClosedImmersion {k₀ : Type u} [Field k₀] [Fi
   have : ConnectedSpace (Spec (.of B)) := connectedSpace_of_isPullback_Spec_map_algebraMap hP
   -- the `L`-rational point of `Y` induced by `c₀`
   have hmem (x : L ⊗[k₀] R) : χ (ι x) ∈ L := by
-    induction x with
+    induction x using TensorProduct.inductionOn with
     | tmul l r =>
       have hl : ι (l ⊗ₜ r) = algebraMap K (K ⊗[k₀] R) l *
           (Algebra.TensorProduct.includeRight : R →ₐ[k₀] K ⊗[k₀] R) r := by

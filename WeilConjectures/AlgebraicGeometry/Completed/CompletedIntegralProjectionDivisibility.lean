@@ -185,7 +185,6 @@ private theorem kernel_family {A : Type u} [CommRing A] [IsDomain A]
       change F.map _ (F.map _ (y n)) = _
       rw [hy n]
       convert (hx n ((m + 1) + n) (Nat.le_add_left n (m + 1))) using 1
-      rfl
 section
 variable {C : Type w} [Category.{v} C] (J : GrothendieckTopology C)
   [HasSheafify J CommRingCat.{u}] [HasSheafify J (Type u)]

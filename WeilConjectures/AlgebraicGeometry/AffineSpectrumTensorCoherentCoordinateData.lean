@@ -27,7 +27,7 @@ private theorem tensor_additive_smul
     (hg : ∀ d x, h (d ⊗ₜ[A₁,a] x) = e d ⊗ₜ[A₂,a₀] p x)
     (r : D₁) (v : (ModuleCat.extendScalars a).obj M) :
     h (r • v) = e r • (show (ModuleCat.extendScalars a₀).obj M₀ from h v) := by
-  induction v with
+  induction v using TensorProduct.inductionOn with
   | tmul d x =>
     rw [ModuleCat.ExtendScalars.smul_tmul, hg, hg, map_mul]
     rfl

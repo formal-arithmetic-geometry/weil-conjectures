@@ -90,7 +90,7 @@ private noncomputable def tensorCoordinate
     apply AddCommGrpCat.hom_ext
     apply AddMonoidHom.ext
     intro z
-    induction z with
+    induction z using TensorProduct.inductionOn with
     | add z w hz hw => simpa using congrArg₂ (· + ·) hz hw
     | tmul s m =>
       change basisTensorEquiv n (b V)
@@ -196,7 +196,7 @@ private theorem tensorProductIso_naturality
   simp only [tensorProductHom, Category.assoc, Pi.map_π, Pi.lift_comp_π, Pi.lift_comp_π_assoc]
   ext U z
   let : Module (R.obj.obj U) (S.obj.obj U) := Module.compHom _ (α.hom.app U).hom
-  induction z with
+  induction z using TensorProduct.inductionOn with
   | add z w hz hw => simpa using congrArg₂ (· + ·) hz hw
   | tmul s m =>
     change basisTensorEquiv (M := N.val.obj U) n (b U)

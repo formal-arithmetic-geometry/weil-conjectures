@@ -130,7 +130,7 @@ private theorem tensor_section_induction {X : Scheme.{v}} (M N : X.Modules)
   change k.app (op V) z = (M ⊗ N).val.map f.op x at hz
   rw [← hz]
   clear hz
-  induction z with
+  induction z using TensorProduct.inductionOn with
   | tmul a b => exact htmul V a b
   | add a b ha hb => rw [map_add]; exact hadd V _ _ ha hb
 

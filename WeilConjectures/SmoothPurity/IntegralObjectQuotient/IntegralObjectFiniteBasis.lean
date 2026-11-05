@@ -59,7 +59,7 @@ private noncomputable def tensorPresentation :
     intro V W i
     apply ModuleCat.hom_ext
     ext t
-    induction t with
+    induction t using TensorProduct.inductionOn with
     | add z z' hz hz' => simp only [_root_.map_add, hz, hz']
     | tmul s x =>
       change changeOfRingsMap φ M i (s ⊗ₜ[R.obj.obj V, (φ.hom.app V).hom] x) =

@@ -138,8 +138,7 @@ instance (X : A) : DerivedCategory.Plus.TStructure.t.IsGE
     have : (F.rightDerivedPlusComplex X).obj.IsStrictlyGE 0 :=
       inferInstanceAs (CochainComplex.IsStrictlyGE ((F.mapHomologicalComplex _).obj
         (injectiveResolution X).cochainComplex) 0)
-    exact DerivedCategory.TStructure.t.isGE_of_iso
-      ((DerivedCategory.quotientCompQhIso B).app (F.rightDerivedPlusComplex X).obj).symm 0
+    exact inferInstanceAs ((DerivedCategory.Q.obj (F.rightDerivedPlusComplex X).obj).IsGE 0)
   exact DerivedCategory.Plus.TStructure.t.isGE_of_iso
     (F.rightDerivedFunctorPlusObjSingleFunctorIsoQ X).symm 0
 

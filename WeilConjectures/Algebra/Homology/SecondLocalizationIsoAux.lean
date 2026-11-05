@@ -183,7 +183,7 @@ private theorem secondLocalizationCohomologyMap_smul
         (show K.cohomology i from
           secondLocalizationCohomologyMap R A B Bp D hflat Q L K i x) := by
   let α := secondLocalizationCohomologyMap R A B Bp D hflat Q L K i
-  induction t with
+  induction t using TensorProduct.inductionOn with
   | add t t' ht ht' => simp only [map_add, add_smul, ht, ht']
   | tmul a b =>
     have ht : a ⊗ₜ[R] b =
@@ -321,7 +321,7 @@ private theorem secondLocalization_tensor_adjunct_isIso
   change Function.Bijective (fun x ↦ _) at hb
   convert hb using 1
   ext x
-  induction x with
+  induction x using TensorProduct.inductionOn with
   | add x y hx hy => simp only [map_add, hx, hy]
   | tmul t x =>
     change _ = hc.equiv (t ⊗ₜ[A ⊗[R] B] x)
@@ -338,7 +338,7 @@ private theorem secondLocalization_algebraMap_comp :
       algebraMap (A ⊗[R] B) D := by
   apply RingHom.ext
   intro z
-  induction z with
+  induction z using TensorProduct.inductionOn with
   | add x y hx hy => simpa only [map_add] using congrArg₂ (· + ·) hx hy
   | tmul a b =>
     change algebraMap (A ⊗[R] Bp) D (a ⊗ₜ[R] algebraMap B Bp b) =

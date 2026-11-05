@@ -40,8 +40,11 @@ Source: Stacks Project, `more-algebra.tex`, Tag 0H7Z, lemma-kunneth-spectral-seq
 the p=0 product calculation is the Products and Tor equation `simple-tor-product`
 (blueprint: lem-pur-kunneth-flat-spectral-sequence).
 
-The theorem below states the bounded bigraded spectral sequence, its finite abutment
-filtration, and the product description of the p=0 edge.  The proof is postponed.
+This file provides the terms of the bounded Künneth spectral sequence: the cohomology
+modules, the Tor modules of the `E₂` page, the direct-sum `E₂` term `kunnethE₂Term`, the
+abutment `derivedTensorHomology`, and the comparison maps for complex representatives.
+The spectral sequence itself, with its finite abutment filtration and the product
+description of the `p = 0` edge, is not yet formalized here.
 -/
 
 @[expose] public noncomputable section

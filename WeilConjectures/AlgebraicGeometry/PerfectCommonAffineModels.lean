@@ -65,7 +65,7 @@ private theorem restrict_model (X : Scheme.{u})
   have : PreservesFiniteColimits (G ⋙ F) := comp_preservesFiniteColimits _ _
   exact ⟨(Functor.mapDerivedCategoryNatIso
     (SheafOfModules.overFunctorMap (moduleRings X.toRingedSpace) (homOfLE h))).symm.app E ≪≫
-      (Functor.mapDerivedCategoryCompIso G F).app E ≪≫ F.mapDerivedCategory.mapIso e ≪≫
+      (Functor.mapDerivedCategoryCompIso G F).symm.app E ≪≫ F.mapDerivedCategory.mapIso e ≪≫
         F.mapDerivedCategoryFactors.app K⟩
 
 /-- Two perfect objects have strictly perfect representatives on one affine neighbourhood

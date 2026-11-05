@@ -135,11 +135,11 @@ theorem picardConstantTensorBalancedSections_map
   let P := (PresheafOfModules.pullback (picardConstantRingMap k Y g)).obj
     (picardConstantVector k Y M)
   change e V.unop ((MonoidalCategory.tensorObj P G.val).map i x) = _
-  induction x with
+  induction x using TensorProduct.inductionOn with
   | add x y hx hy => simpa only [map_add] using congrArg₂ (· + ·) hx hy
   | tmul p t =>
     obtain ⟨z, rfl⟩ := (q U.unop).surjective p
-    induction z with
+    induction z using TensorProduct.inductionOn with
     | add z z' hz hz' =>
       simpa only [map_add, TensorProduct.add_tmul] using congrArg₂ (· + ·) hz hz'
     | tmul a s =>

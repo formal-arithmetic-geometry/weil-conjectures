@@ -583,7 +583,7 @@ private noncomputable def scalarTensorSectionIso (T : Scheme.{u})
     intro U V f
     apply AddCommGrpCat.hom_ext
     ext z
-    induction z with
+    induction z using TensorProduct.inductionOn with
     | add x y hx hy => simp only [map_add, hx, hy]
     | tmul b m =>
       change (TensorProduct.comm (R.obj.obj V) (S.obj.obj V) (M.val.obj V))
@@ -637,7 +637,7 @@ private noncomputable def scalarTensorRawIso (T : Scheme.{u})
     funext U
     apply AddCommGrpCat.hom_ext
     ext z
-    induction z with
+    induction z using TensorProduct.inductionOn with
     | add x y hx hy => simp only [map_add, hx, hy]
     | tmul b m =>
       unfold scalarTensorSectionIso

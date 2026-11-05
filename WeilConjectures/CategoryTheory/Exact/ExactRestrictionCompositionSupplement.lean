@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 public import WeilConjectures.CategoryTheory.DerivedCategory.ExactRestrictionComposition
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Composition of the inverse factorization comparisons of exact functors
 
@@ -35,16 +36,10 @@ components through the quotient-to-derived comparison, whose components are iden
 theorem mapDerivedCategoryIdIso_hom_app_Q_obj (K : CochainComplex A ℤ) :
     (mapDerivedCategoryIdIso A).hom.app (DerivedCategory.Q.obj K) =
       (𝟭 A).mapDerivedCategoryFactors.hom.app K := by
-  let q := HomotopyCategory.quotient A (.up ℤ)
-  change (mapDerivedCategoryIdIso A).hom.app (DerivedCategory.Qh.obj (q.obj K)) = _
-  rw [mapDerivedCategoryIdIso_hom_app_Qh_obj,
-    mapDerivedCategoryFactorsh_hom_app]
-  simp only [DerivedCategory.quotientCompQhIso,
-    HomologicalComplexUpToQuasiIso.quotientCompQhIso,
-    Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv,
-    Functor.comp_obj, Quotient.lift.isLift_hom, Functor.map_id,
-    Category.comp_id]
-  erw [Functor.map_id, Category.id_comp, Category.comp_id]
+  rw [mapDerivedCategoryIdIso_hom_app]
+  have h : (mapHomologicalComplexIdIso A (.up ℤ)).hom.app K = 𝟙 _ := rfl
+  rw [h]
+  erw [DerivedCategory.Q.map_id, Category.comp_id]
 
 /-- The derived comparison of an exact restriction identified with the identity.
 Source: localization functoriality

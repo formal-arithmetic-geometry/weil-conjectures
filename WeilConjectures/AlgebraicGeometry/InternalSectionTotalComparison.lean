@@ -206,14 +206,16 @@ theorem sectionForward_eq : sectionForward Λ X = (equivalence Λ X).functor := 
 /-- The primitive forward functor is additive.
 Source: Stacks 00YV (auxiliary; not a blueprint node).
 Proof: use the generic section-functor additivity theorem. -/
-@[instance] theorem sectionForward_additive : (sectionForward Λ X).Additive :=
-  sectionFunctorAdditiveForSite (Scheme.ProEt.topology X) (condensedRingObj Λ X)
+@[instance] theorem sectionForward_additive : (sectionForward Λ X).Additive := by
+  exact sectionFunctorAdditiveForSite (hcomm := isCommMonObj_condensedRingObj Λ X)
+    (Scheme.ProEt.topology X) (condensedRingObj Λ X)
 
 /-- The primitive forward functor is an equivalence.
 Source: Stacks 00YV (blueprint: def-sfb-internal-section-total-comparison).
 Proof: use the generic section-functor equivalence theorem. -/
-@[instance] theorem sectionForward_isEquivalence : (sectionForward Λ X).IsEquivalence :=
-  sectionFunctorEquivalenceForSite (Scheme.ProEt.topology X) (condensedRingObj Λ X)
+@[instance] theorem sectionForward_isEquivalence : (sectionForward Λ X).IsEquivalence := by
+  exact sectionFunctorEquivalenceForSite (hcomm := isCommMonObj_condensedRingObj Λ X)
+    (Scheme.ProEt.topology X) (condensedRingObj Λ X)
 
 /-- Additivity of the recorded section equivalence through its forward-functor API.
 Source: Stacks 00YV (auxiliary; not a blueprint node).
@@ -272,13 +274,15 @@ sheaf to its underlying ring sheaf does not change this category. -/
 Source: Stacks 012Z; lem-pe-internal-section-tensor-comparison
 (auxiliary; not a blueprint node). -/
 instance internalTotalExists (P Q : CochainComplex (Internal Λ X) ℤ) :
-    P.HasMapBifunctor Q (curriedTensor (Internal Λ X)) :=
-  comparison_internalTotalExists (Scheme.ProEt.topology X) (condensedRingObj Λ X) P Q
+    P.HasMapBifunctor Q (curriedTensor (Internal Λ X)) := by
+  exact @comparison_internalTotalExists _ _ (Scheme.ProEt.topology X) _ _ _
+    (condensedRingObj Λ X) _ (isCommMonObj_condensedRingObj Λ X) P Q
 
 /-- The native total tensor on internal complexes.
 Source: Stacks 06YL (auxiliary; not a blueprint node). -/
-instance internalComplexMonoidal : MonoidalCategory (CochainComplex (Internal Λ X) ℤ) :=
-  CategoryTheory.Mod.monoidalCategoryCochainComplex
+instance internalComplexMonoidal : MonoidalCategory (CochainComplex (Internal Λ X) ℤ) := by
+  exact @CategoryTheory.Mod.monoidalCategoryCochainComplex _ _ _ _ _ _ _
+    (condensedRingObj Λ X) _ (isCommMonObj_condensedRingObj Λ X) _
 
 /-- The native total tensor, with its instance fixed explicitly.
 Source: Stacks 06YL (auxiliary; not a blueprint node). -/

@@ -119,8 +119,7 @@ theorem grothendieckLeftEdgeMap_eq_hypercohomology
     inferInstance⟩
   have : DerivedCategory.Plus.TStructure.t.IsGE (DerivedCategory.Plus.Q.obj L) 0 := by
     apply (DerivedCategory.Plus.isGE_ι_obj_iff _ 0).mp
-    exact DerivedCategory.TStructure.t.isGE_of_iso
-      ((DerivedCategory.quotientCompQhIso B).app L.obj).symm 0
+    exact inferInstanceAs ((DerivedCategory.Q.obj L.obj).IsGE 0)
   obtain ⟨e, hF, hFG'⟩ := exists_grothendieck_resolution_unit_comparison F G hFG X I n
   let φ := G.hypercohomologySpectralObjectFunctor.map e.hom
   have hnat := Abelian.SpectralObject.leftEdge_naturality φ (n : ℤ)

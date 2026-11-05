@@ -32,7 +32,7 @@ private theorem finiteTensorBijective
   have heq : (ofTensorProduct I M : _ → _) ∘ t = c ∘ ofTensorProduct I (Shrink.{u} M) := by
     funext x
     change (ofTensorProduct I M) (t x) = c ((ofTensorProduct I (Shrink.{u} M)) x)
-    induction x with
+    induction x using TensorProduct.inductionOn with
     | tmul a b => simp [t, c, congr_apply, map_of]
     | add x y hx hy => simp_all
   exact (Function.Bijective.of_comp_iff _ t.bijective).mp (heq ▸ c.bijective.comp h)
@@ -161,7 +161,7 @@ theorem completion_finite_extension_tensor_bijective
   have heq : (completionFiniteExtensionTensorMap R S p : _ → _) =
       fun x ↦ e (ofTensorProduct m B (t x)) := by
     funext x
-    induction x with
+    induction x using TensorProduct.inductionOn with
     | add x y hx hy => simp_all only [map_add]
     | tmul c s =>
       apply ext_evalₐ

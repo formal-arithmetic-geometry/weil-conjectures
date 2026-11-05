@@ -4,6 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.Algebra.Homology.ScalarInternalHomData
 public import WeilConjectures.CategoryTheory.InternalSectionTensorComparison
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
@@ -329,6 +331,10 @@ private theorem scalarExtension_unit_image
   simp only [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app] at h
   exact congrArg (fun f ↦ f.val.app U m) h
 
+noncomputable local instance (U : Cᵒᵖ) (N : ModuleCat ((sectionRingSheaf J S).obj.obj U)) :
+    SMul (S.obj.obj U) N :=
+  inferInstanceAs (SMul ((sectionRingSheaf J S).obj.obj U) N)
+
 omit [HasDerivedCategory (scalarInternalModules J R)]
   [HasDerivedCategory (scalarInternalModules J S)]
   [HasDerivedCategory (SheafOfModules.scalarModules J (sectionRingSheaf J R))]
@@ -453,11 +459,11 @@ def InternalSectionScalarAdjunction : Prop :=
       SheafOfModules.scalarDerivedRestriction (sectionScalarMap J a)),
   -- Restriction comparison is precisely localization of the ordinary one.
   (derivedRestriction =
-    (Functor.mapDerivedCategoryCompIso (Mod.comap a)
-      (sectionModuleEquivalence J R).functor).symm ≪≫
+    Functor.mapDerivedCategoryCompIso (Mod.comap a)
+      (sectionModuleEquivalence J R).functor ≪≫
     Functor.mapDerivedCategoryNatIso restriction ≪≫
-    Functor.mapDerivedCategoryCompIso (sectionModuleEquivalence J S).functor
-      (SheafOfModules.scalarRestriction (sectionScalarMap J a))) ∧
+    (Functor.mapDerivedCategoryCompIso (sectionModuleEquivalence J S).functor
+      (SheafOfModules.scalarRestriction (sectionScalarMap J a))).symm) ∧
   -- The comparison of the universal derived extensions.
   ∃ derivedExtension : (internalDerived ⋙
       (sectionModuleEquivalence J S).functor.mapDerivedCategory ≅

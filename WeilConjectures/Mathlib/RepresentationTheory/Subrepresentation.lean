@@ -722,7 +722,7 @@ theorem exists_subquotient_tprod_equiv_of_subrepresentation [FiniteDimensional k
   · -- `A ⊗ σ` is zero, so it has no irreducible subquotient
     subst hA
     have h0 (z : (⊥ : Subrepresentation ρ).toSubmodule ⊗[k] V') : z = 0 := by
-      induction z with
+      induction z using TensorProduct.inductionOn with
       | tmul a b =>
         rw [show a = 0 from Subtype.ext ((Submodule.mem_bot k).1 a.2), TensorProduct.zero_tmul]
       | add a b ha hb => rw [ha, hb, add_zero]

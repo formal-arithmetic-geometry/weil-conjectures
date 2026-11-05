@@ -349,7 +349,7 @@ theorem exists_tensor_model_comparison_diagram
       Algebra.TensorProduct.map (AlgHom.id (c.pt : Type v) (c.pt : Type v)) f (XA a) from
       RingHom.congr_fun he (XA a)]
     clear hex
-    induction a with
+    induction a using TensorProduct.inductionOn with
     | tmul r a => simp [XA, XB]
     | add a b ha hb => simpa only [map_add] using congrArg₂ (· + ·) ha hb
   obtain ⟨r, hir, aPs, D, E, α, d, b, cD, cE, g, hD, hE,
@@ -374,7 +374,7 @@ theorem exists_tensor_model_comparison_diagram
         (Algebra.TensorProduct.map t (AlgHom.id (F.obj i) A)).toRingHom := by
       apply RingHom.ext
       intro z
-      induction z with
+      induction z using TensorProduct.inductionOn with
       | add z w hz hw => simpa only [map_add] using congrArg₂ (· + ·) hz hw
       | tmul s a =>
         change base (tc s) ⊗ₜ[F.obj i] a = t s ⊗ₜ[F.obj i] a
@@ -405,7 +405,7 @@ theorem exists_tensor_model_comparison_diagram
       (Algebra.TensorProduct.map t (AlgHom.id (F.obj i) B)).toRingHom := by
     apply RingHom.ext
     intro z
-    induction z with
+    induction z using TensorProduct.inductionOn with
     | add z w hz hw => simpa only [map_add] using congrArg₂ (· + ·) hz hw
     | tmul s b =>
       change base (tc s) ⊗ₜ[F.obj i] b = t s ⊗ₜ[F.obj i] b

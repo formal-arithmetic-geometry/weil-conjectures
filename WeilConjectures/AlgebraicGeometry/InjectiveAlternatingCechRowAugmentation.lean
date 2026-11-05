@@ -34,6 +34,7 @@ private theorem alternatingRow_d_apply {X : Scheme.{u}} {r : ℕ}
       ∑ j : Fin (p + 2), (-1 : ℤ) ^ j.val •
         (G.map (homOfLE (alternatingCechIntersection_face_le U p t j)).op).hom
           (s ((Fin.succAboveOrderEmb j).trans t)) := by
+  change (∀ q : Fin (p + 1) ↪o Fin r, G.obj (op (alternatingCechIntersection U q))) at s
   change ((∑ j : Fin (p + 2), (-1 : ℤ) ^ j.val •
     (G.map (homOfLE (alternatingCechIntersection_face_le U p t j)).op).hom.comp
       (LinearMap.proj ((Fin.succAboveOrderEmb j).trans t))) s) = _

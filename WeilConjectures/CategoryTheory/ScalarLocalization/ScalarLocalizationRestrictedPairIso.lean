@@ -95,7 +95,7 @@ theorem restrictedPairIso_existsUnique
       simp only [map_add, AddMonoidHom.add_apply, Preadditive.add_comp,
         Preadditive.comp_add, ha, hb]
     | tmul x a =>
-      induction b with
+      induction b using TensorProduct.inductionOn with
       | add b c hb hc =>
         simp only [map_add, Preadditive.add_comp, Preadditive.comp_add, hb, hc]
       | tmul y b =>

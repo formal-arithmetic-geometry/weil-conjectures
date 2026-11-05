@@ -6,6 +6,7 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 import WeilConjectures.AlgebraicGeometry.ModuleSheafConstantRingEquivalence
 import WeilConjectures.CategoryTheory.Sites.InjectivePresheafModuleCechCocycleLiftMax

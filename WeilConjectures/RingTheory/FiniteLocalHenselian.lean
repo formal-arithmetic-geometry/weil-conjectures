@@ -198,7 +198,7 @@ theorem finite_local_henselian
     [HenselianLocalRing R] [IsLocalRing A] [Algebra R A] [Module.Finite R A] :
     HenselianLocalRing A := by
   classical
-  apply ((HenselianLocalRing.TFAE A).out 1 0).mp
+  apply ((HenselianLocalRing.TFAE A).out 2 1).mp
   apply (IsLocalRing.idempotent_lifting_iff_monic_simple_root_lifting.{v, u} A).mp
   intro C _ _ _ e₀ he₀
   let : Algebra R C := Algebra.compHom C (algebraMap R A)

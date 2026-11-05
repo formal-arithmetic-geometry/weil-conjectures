@@ -79,20 +79,20 @@ theorem composition_laws :
         composition R C p K L N (composition R C p L M N h g) f) := by
   constructor
   · intro K L f
-    induction f with
+    induction f using TensorProduct.inductionOn with
     | tmul a f => simp [composition_tmul]
     | add f g hf hg => simp [map_add, hf, hg]
   constructor
   · intro K L f
-    induction f with
+    induction f using TensorProduct.inductionOn with
     | tmul a f => simp [composition_tmul]
     | add f g hf hg => simp [map_add, hf, hg]
   · intro K L M N f g h
-    induction h with
+    induction h using TensorProduct.inductionOn with
     | tmul c h =>
-      induction g with
+      induction g using TensorProduct.inductionOn with
       | tmul b g =>
-        induction f with
+        induction f using TensorProduct.inductionOn with
         | tmul a f => simp [composition_tmul, Category.assoc, mul_assoc]
         | add f f' hf hf' => simp [map_add, hf, hf']
       | add g g' hg hg' => simp [map_add, hg, hg']
@@ -215,9 +215,9 @@ theorem map_laws :
   · intro K
     simp [mapHom]
   · intro K L M f g
-    induction g with
+    induction g using TensorProduct.inductionOn with
     | tmul b g =>
-      induction f with
+      induction f using TensorProduct.inductionOn with
       | tmul a f => simp [mapHom, composition_tmul]
       | add f f' hf hf' => simp [map_add, hf, hf']
     | add g g' hg hg' => simp [map_add, hg, hg']

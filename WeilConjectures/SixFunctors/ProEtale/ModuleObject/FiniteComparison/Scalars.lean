@@ -200,7 +200,7 @@ lemma ε_comp_constRingSheafSection (t : T) :
       (sheafToPresheaf J Ab.{u + 1}).map (ε (presheafToSheaf J Ab.{u + 1})) =
       (sheafificationAdjunction J Ab.{u + 1}).unit.app _ := by
     rw [← (sheafificationAdjunction J Ab.{u + 1}).unit_app_unit_comp_map_η, Category.assoc,
-      Functor.Monoidal.map_η_ε]
+      Functor.Monoidal.η_ε_map]
     exact Category.comp_id _
   rw [constRingSheafSection, ε_constantSheaf, Functor.map_comp, ← Category.assoc, e]
   exact ((sheafificationAdjunction J Ab.{u + 1}).unit.naturality _).symm

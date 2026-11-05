@@ -102,7 +102,7 @@ theorem dvr_tame_tensor_factor_formallyUnramified
   have hmax := dvr_tame_tensor_factor_map_maximalIdeal B n hnpos hn A hindex E hE
     hbounds P hP hfinite Q hQ hclosed
   have hlocal : IsLocalHom (algebraMap A (Localization.AtPrime Q)) :=
-    ((IsLocalRing.local_hom_TFAE _).out 2 0).mp (le_of_eq hmax)
+    ((IsLocalRing.local_hom_TFAE _).out 3 1).mp (le_of_eq hmax)
   have hsep := dvr_tame_tensor_factor_residue_isSeparable B n hnpos hn A hindex E hE
     hbounds P hP hfinite Q hQ hclosed hlocal
   have : Module.Finite A (integralClosure A F) := hfinite

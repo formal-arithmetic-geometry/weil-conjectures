@@ -141,7 +141,7 @@ residue fields, for any pair of primes `q ∈ Spec S` lying over `p ∈ Spec R`.
 instance isSeparable_residueField [IndEtale R S] (p : Ideal R) (q : Ideal S)
     [q.LiesOver p] [p.IsPrime] [q.IsPrime]
     [Algebra (Localization.AtPrime p) (Localization.AtPrime q)]
-    [Localization.AtPrime.IsLiesOverAlgebra p q] :
+    [IsScalarTower R (Localization.AtPrime p) (Localization.AtPrime q)] :
     Algebra.IsSeparable p.ResidueField q.ResidueField := by
   -- Every image in `q.ResidueField` of an element of `S` factors through a finite étale
   -- `p.ResidueField`-subalgebra, hence is separable over `p.ResidueField`.

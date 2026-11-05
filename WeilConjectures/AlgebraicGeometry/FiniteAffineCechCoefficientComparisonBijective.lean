@@ -117,7 +117,7 @@ theorem coefficientComparison_affine_bijective {X T : Scheme.{u}} (f : X ⟶ T)
     b.symm (TensorProduct.tmul Γ(U.toScheme, ⊤) (1 : Γ(T', B)) s) at hgen
   have hcompare (t : TensorProduct Γ(U.toScheme, ⊤) Γ(T', B) N) :
       qlin (a.symm t) = b.symm t := by
-    induction t with
+    induction t using TensorProduct.inductionOn with
     | tmul r s =>
       have ht : TensorProduct.tmul Γ(U.toScheme, ⊤) r s =
           r • (TensorProduct.tmul Γ(U.toScheme, ⊤) (1 : Γ(T', B)) s) := by

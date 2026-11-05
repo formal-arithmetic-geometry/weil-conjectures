@@ -34,6 +34,13 @@ open CategoryTheory CategoryTheory.Functor CategoryTheory.Limits MonoidalCategor
 open scoped ZeroObject
 namespace SheafOfModules
 
+private local instance {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
+    {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{w}) (I : Type w) :
+    HasColimitsOfShape (Discrete I) (PresheafOfModules.{w}
+      ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R).obj) :=
+  PresheafOfModules.hasColimitsOfShape
+    ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R).obj (Discrete I)
+
 
 section Tensor
 

@@ -48,7 +48,7 @@ def proEtalePullbackTensorGenerator {X Y : Scheme.{u}} (f : X ⟶ Y)
     (p : T ⟶ (proEtaleBaseChange f).obj U)
     (m : M.val.obj (op U)) (r : S.obj.obj (op T)) :
     ((proEtaleRingModulePullback f R S c).obj M).val.obj (op T) :=
-  r • (((proEtaleRingModulePullback f R S c).obj M).val.map p.op
+  r • (((proEtaleRingModulePullback f R S c).obj M).val.restrictₛₗ p.op
     (((proEtaleRingModuleAdjunction f R S c).unit.app M).val.app (op U) m))
 
 /-- The image of a local scalar in the source coefficient sheaf: apply the ring map
@@ -356,6 +356,7 @@ theorem proEtale_tensor_composition_unit
           (((proEtaleRingModuleAdjunction (h ≫ k) R_V R_Z c_hk).unit.app M).val.app
             (op U) m) at hu
     unfold proEtalePullbackTensorGenerator
+    simp only [PresheafOfModules.restrictₛₗ_apply]
     rw [unit_smul]
     erw [PresheafOfModules.map_smul]
     rw [map_smul, map_smul, unit_restrict]

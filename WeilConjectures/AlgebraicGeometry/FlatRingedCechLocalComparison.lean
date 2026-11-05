@@ -49,7 +49,7 @@ private noncomputable def rawScalarIso
   intro X Y g
   apply AddCommGrpCat.hom_ext
   ext z
-  induction z with
+  induction z using TensorProduct.inductionOn with
   | add z t hz ht => simp only [map_add, hz, ht]
   | tmul m b =>
     change B.obj.map g b ⊗ₜ[R.obj.obj Y, (φ.hom.app Y).hom] M.val.map g m =
@@ -187,7 +187,7 @@ private theorem underlying_pure_hom_ext
   apply AddCommGrpCat.hom_ext
   apply AddMonoidHom.ext
   intro z
-  induction z with
+  induction z using TensorProduct.inductionOn with
   | add z t hz ht => simp only [map_add, hz, ht]
   | tmul m n => exact h X m n
 
@@ -276,7 +276,7 @@ private noncomputable def rawOverScalarIso
   apply ModuleCat.hom_ext
   apply LinearMap.ext
   intro z
-  induction z with
+  induction z using TensorProduct.inductionOn with
   | add z t hz ht => simp only [map_add, hz, ht]
   | tmul b m =>
     change SheafOfModules.changeOfRingsMap φ M ((Over.forget U).op.map g)
@@ -400,7 +400,7 @@ private theorem underlyingScalarIso_naturality
   rw [← S.map_comp, ← S.map_comp]
   apply congrArg S.map
   ext X z
-  induction z with
+  induction z using TensorProduct.inductionOn with
   | add z t hz ht => simp only [map_add, hz, ht]
   | tmul m b =>
     change B.obj.obj X at b

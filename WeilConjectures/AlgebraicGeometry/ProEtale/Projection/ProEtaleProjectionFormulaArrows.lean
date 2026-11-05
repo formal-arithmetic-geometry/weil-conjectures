@@ -144,7 +144,7 @@ private theorem proEtaleTensorPair_hom_ext
       ((adj.unit.app (M.val ⊗ N.val)).app U t)) =
     w.val.app U ((SheafOfModules.tensorObjIsoSheafification M N).inv.val.app U
       ((adj.unit.app (M.val ⊗ N.val)).app U t))
-  induction t with
+  induction t using TensorProduct.inductionOn with
   | tmul x y => exact h U x y
   | add t s ht hs => simp only [map_add, ht, hs]
 

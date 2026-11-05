@@ -117,7 +117,7 @@ variable {M N x} in
 lemma tmulGerm_map {U V : X.Opens} (h : V ≤ U) (hx : x ∈ V)
     (z : (presheafTensor M N).obj (op U)) :
     tmulGerm M N x hx ((presheafTensor M N).map (homOfLE h).op z) = tmulGerm M N x (h hx) z := by
-  induction z with
+  induction z using TensorProduct.inductionOn with
   | tmul m n =>
     exact congrArg₂ (· ⊗ₜ ·) (M.presheaf.germ_res_apply (homOfLE h) x hx m)
       (N.presheaf.germ_res_apply (homOfLE h) x hx n)
@@ -260,7 +260,7 @@ noncomputable def presheafTensorStalkEquiv :
       fun z ↦ ?_, fun z ↦ ?_⟩
     · obtain ⟨U, hxU, z, rfl⟩ := (presheafTensor M N).exists_germ_eq z
       rw [presheafTensorStalkToTensor_germ]
-      induction z with
+      induction z using TensorProduct.inductionOn with
       | tmul m n => exact tensorToPresheafTensorStalk_germ_tmul_germ hxU m n
       | add z z' hz hz' => rw [map_add, map_add, hz, hz', map_add]
     · induction z using TensorProduct.inductionOn with
@@ -359,7 +359,7 @@ lemma stalk_tensor_induction {p : (M ⊗ N).presheaf.stalk x → Prop}
       p ((M ⊗ N).presheaf.germ U x hx (tmulSection m n))) : p z := by
   obtain ⟨w, rfl⟩ := (bijective_stalkFunctor_map_presheafTensorToTensor M N x).2 z
   obtain ⟨U, hx, y, rfl⟩ := (presheafTensor M N).exists_germ_eq w
-  induction y with
+  induction y using TensorProduct.inductionOn with
   | tmul m n => exact (germ_tmulSection_eq hx m n) ▸ tmul U hx m n
   | add y y' hy hy' => rw [map_add, map_add]; exact add _ _ hy hy'
 

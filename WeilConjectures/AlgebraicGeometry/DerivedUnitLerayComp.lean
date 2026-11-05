@@ -25,8 +25,8 @@ private theorem derivedUnit_comp {X Y Z : Scheme.{u}} (f : Y ⟶ X) (g : Z ⟶ Y
     (mapDerivedUpperStarLowerStarAdjunction A (g ≫ f)).unit.app K ≫
       (lowerStar A (g ≫ f)).rightDerivedFunctor.map
         ((Functor.mapDerivedCategoryNatIso (upperStarComp A g f) ≪≫
-          Functor.mapDerivedCategoryCompIso (upperStar A f)
-            (upperStar A g)).hom.app K) =
+          (Functor.mapDerivedCategoryCompIso (upperStar A f)
+            (upperStar A g)).symm).hom.app K) =
     (mapDerivedUpperStarLowerStarAdjunction A f).unit.app K ≫
       (lowerStar A f).rightDerivedFunctor.map
         ((mapDerivedUpperStarLowerStarAdjunction A g).unit.app
@@ -41,8 +41,8 @@ private theorem derivedUnit_comp {X Y Z : Scheme.{u}} (f : Y ⟶ X) (g : Z ⟶ Y
         (mapDerivedUpperStarLowerStarAdjunction A g))
       (mapDerivedUpperStarLowerStarAdjunction A (g ≫ f))
       (Functor.mapDerivedCategoryNatIso (upperStarComp A g f) ≪≫
-        Functor.mapDerivedCategoryCompIso (upperStar A f)
-          (upperStar A g)).hom K).symm
+        (Functor.mapDerivedCategoryCompIso (upperStar A f)
+          (upperStar A g)).symm).hom K).symm
 
 /-- The derived unit--Leray composites respect inverse-image composition.
 Source: Stacks Project, Tags 015M and 03CB.
@@ -78,8 +78,8 @@ theorem derivedUnitLeray_comp {X Y Z : Scheme.{u}} (f : Y ⟶ X) (g : Z ⟶ Y)
       ((upperStar A (g ≫ f)).mapDerivedCategory.obj K) ≫
     (rightDerivedGlobalSections A Z).map
       ((Functor.mapDerivedCategoryNatIso (upperStarComp A g f) ≪≫
-        Functor.mapDerivedCategoryCompIso (upperStar A f)
-          (upperStar A g)).hom.app K) =
+        (Functor.mapDerivedCategoryCompIso (upperStar A f)
+          (upperStar A g)).symm).hom.app K) =
     (rightDerivedGlobalSections A X).map
       ((mapDerivedUpperStarLowerStarAdjunction A f).unit.app K) ≫
     (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso A f).hom.app
@@ -91,8 +91,8 @@ theorem derivedUnitLeray_comp {X Y Z : Scheme.{u}} (f : Y ⟶ X) (g : Z ⟶ Y)
       ((upperStar A g).mapDerivedCategory.obj
         ((upperStar A f).mapDerivedCategory.obj K)) := by
   let C := Functor.mapDerivedCategoryNatIso (upperStarComp A g f) ≪≫
-    Functor.mapDerivedCategoryCompIso (upperStar A f)
-      (upperStar A g)
+    (Functor.mapDerivedCategoryCompIso (upperStar A f)
+      (upperStar A g)).symm
   let U := (upperStar A f).mapDerivedCategory
   let V := (upperStar A g).mapDerivedCategory
   let R := (lowerStar A f).rightDerivedFunctor

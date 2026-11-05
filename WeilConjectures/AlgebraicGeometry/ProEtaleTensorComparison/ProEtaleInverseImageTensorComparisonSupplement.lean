@@ -238,7 +238,7 @@ theorem coefficientQuotient_exists {X : Scheme.{u}} {R S : Rings X} (a : R ⟶ S
       naturality := by
         intro U V i
         ext t
-        induction t with
+        induction t using TensorProduct.inductionOn with
         | tmul x y =>
           change pure M N V.unop (M.val.map i x) (N.val.map i y) =
             (tensor M N).val.map i (pure M N U.unop x y)
@@ -264,7 +264,7 @@ theorem coefficientQuotient_exists {X : Scheme.{u}} {R S : Rings X} (a : R ⟶ S
   apply PresheafOfModules.hom_ext
   intro U
   ext t
-  induction t with
+  induction t using TensorProduct.inductionOn with
   | tmul x y => exact (hp' U.unop x y).trans (hp U.unop x y).symm
   | add t s ht hs => simp only [map_add, ht, hs]
 
@@ -519,7 +519,7 @@ private theorem tensorPushforwardPairing_exists
       naturality := by
         intro U V i
         ext t
-        induction t with
+        induction t using TensorProduct.inductionOn with
         | tmul x y =>
           change siteSheafTensorTmul P Q (F.op.obj V)
             (ηM.val.app V (M.val.map i x)) (ηN.val.app V (N.val.map i y)) =
@@ -553,7 +553,7 @@ private theorem tensorPushforwardPairing_exists
   apply PresheafOfModules.hom_ext
   intro U
   ext t
-  induction t with
+  induction t using TensorProduct.inductionOn with
   | tmul x y => exact (hk' U.unop x y).trans (hk U.unop x y).symm
   | add t s ht hs => simp only [map_add, ht, hs]
 
@@ -644,7 +644,7 @@ private theorem tensor_hom_ext {X : Scheme.{u}} {R : Rings X}
   apply PresheafOfModules.hom_ext
   intro U
   ext t
-  induction t with
+  induction t using TensorProduct.inductionOn with
   | tmul x y => exact h U.unop x y
   | add t s ht hs => simp only [map_add, ht, hs]
 

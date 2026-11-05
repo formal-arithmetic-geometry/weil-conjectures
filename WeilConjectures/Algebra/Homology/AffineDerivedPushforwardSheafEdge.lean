@@ -8,6 +8,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.CategoryTheory.Abelian.DerivedBottomUnitNormalization
 import WeilConjectures.AlgebraicGeometry.QCohAcyclicDerivedPushforwardCohomology
 import WeilConjectures.Topology.RingedSpaceModuleEnoughInjectives
@@ -129,10 +131,11 @@ theorem exists_affineDerivedPushforwardSheafEdge
               |>.mapHomologicalComplex (.up ℤ)).obj C)).inv ≫
         (DerivedCategory.homologyFunctor
           (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i).map
-          (((RingedSpace.moduleDirectImage
-            (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom).rightDerivedFunctorUnit).app
-            ((HomotopyCategory.quotient _ (.up ℤ)).obj
-              ((F.mapHomologicalComplex (.up ℤ)).obj C))) := by
+          (cast (by rfl)
+            (((RingedSpace.moduleDirectImage
+              (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom).rightDerivedFunctorUnit).app
+              ((HomotopyCategory.quotient _ (.up ℤ)).obj
+                ((F.mapHomologicalComplex (.up ℤ)).obj C)))) := by
   let X := Spec (.of A)
   let Y := Spec (.of B)
   let f := Spec.map (CommRingCat.ofHom φ)
@@ -212,6 +215,9 @@ theorem exists_affineDerivedPushforwardSheafEdge
     change Epi U.π
     infer_instance
   simp only [Functor.map_comp] at hn
+  have hqC : (DerivedCategory.quotientCompQhIso C).hom.app K = 𝟙 _ := rfl
+  have hqD : (DerivedCategory.quotientCompQhIso D).inv.app
+      ((S.mapHomologicalComplex (.up ℤ)).obj K) = 𝟙 _ := rfl
   apply (cancel_epi ((F ⋙ S).map (M.sc i).homologyData.left.π)).mp
   apply (cancel_mono (γ.app ⟨_, hM⟩ ≫ δ.hom.app (DerivedCategory.Q.obj K))).mp
   simpa only [ε, NatTrans.comp_app, Functor.isoWhiskerLeft_inv,
@@ -219,7 +225,8 @@ theorem exists_affineDerivedPushforwardSheafEdge
     IsIso.inv_hom_id_assoc, Iso.inv_hom_id_app, Category.comp_id,
     γ, S, T, U, K, ι, H, f, X, Y, C, D, Functor.whiskerRight_app, ObjectProperty.ι_obj,
     ShortComplex.LeftHomologyData.map_π, ShortComplex.mapHomologyIso,
-    Functor.comp_map, Functor.map_comp, Functor.mapHomologicalComplex, Functor.comp_obj]
+    Functor.comp_map, Functor.map_comp, Functor.mapHomologicalComplex, Functor.comp_obj,
+    cast_eq, hqC, hqD, Functor.map_id]
     using hn.symm
 
 end AlgebraicGeometry

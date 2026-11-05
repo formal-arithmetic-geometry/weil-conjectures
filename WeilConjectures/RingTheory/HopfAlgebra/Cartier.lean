@@ -448,10 +448,10 @@ private theorem mul'_map_id_algebraMap_mul (d e : A →ₗ[k] k)
           LinearMap.mul' k A (map LinearMap.id (Algebra.linearMap k A ∘ₗ d) v) +
         LinearMap.mul' k A (map LinearMap.id (Algebra.linearMap k A ∘ₗ e) v) *
           LinearMap.mul' k A (map LinearMap.id (Algebra.linearMap k A ∘ₗ d) u) := by
-  induction u with
+  induction u using TensorProduct.inductionOn with
   | add u₁ u₂ h₁ h₂ => simp only [add_mul, map_add, h₁, h₂]; ring
   | tmul a b =>
-    induction v with
+    induction v using TensorProduct.inductionOn with
     | add v₁ v₂ h₁ h₂ => simp only [mul_add, map_add, h₁, h₂]; ring
     | tmul c f =>
       simp only [Algebra.TensorProduct.tmul_mul_tmul, TensorProduct.map_tmul, LinearMap.id_apply,
@@ -583,7 +583,7 @@ theorem ker_liftEquiv_le_map :
   set ε' := liftEquiv k K A K ((Algebra.ofId k K).comp ε)
   have key (b : K ⊗[k] A) : b - algebraMap K (K ⊗[k] A) (ε' b) ∈
       (RingHom.ker ε).map (Algebra.TensorProduct.includeRight : A →ₐ[k] K ⊗[k] A) := by
-    induction b with
+    induction b using TensorProduct.inductionOn with
     | add b c hb hc =>
       rw [map_add, map_add, add_sub_add_comm]
       exact add_mem hb hc

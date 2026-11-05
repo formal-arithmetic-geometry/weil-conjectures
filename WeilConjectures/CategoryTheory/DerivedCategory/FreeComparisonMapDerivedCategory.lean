@@ -86,25 +86,23 @@ variable (F : C ⥤ D) (G : D ⥤ E) [F.Additive] [G.Additive] [PreservesFiniteL
 
 /-- The inverse of `Functor.mapDerivedCategoryCompIso` on the image of a complex. -/
 lemma mapDerivedCategoryCompIso_inv_app_Q (K : CochainComplex C ℤ) :
-    (mapDerivedCategoryCompIso F G).inv.app (DerivedCategory.Q.obj K) =
+    (mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Q.obj K) =
       G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app K) ≫
         G.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj K) ≫
         DerivedCategory.Q.map ((Functor.mapHomologicalComplexCompIso (Iso.refl (F ⋙ G))
           (.up ℤ)).hom.app K) ≫
         (F ⋙ G).mapDerivedCategoryFactors.inv.app K := by
-  rw [← cancel_epi ((mapDerivedCategoryCompIso F G).hom.app _), Iso.hom_inv_id_app,
-    mapDerivedCategoryCompIso_fac_assoc, Iso.hom_inv_id_app]
-  rfl
+  exact mapDerivedCategoryCompIso_hom_app_Q_obj F G K
 
 /-- `Functor.mapDerivedCategoryCompIso` on the image of a complex. -/
 lemma mapDerivedCategoryCompIso_hom_app_Q (K : CochainComplex C ℤ) :
-    (mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Q.obj K) =
+    (mapDerivedCategoryCompIso F G).inv.app (DerivedCategory.Q.obj K) =
       (F ⋙ G).mapDerivedCategoryFactors.hom.app K ≫
         DerivedCategory.Q.map ((Functor.mapHomologicalComplexCompIso (Iso.refl (F ⋙ G))
           (.up ℤ)).inv.app K) ≫
         G.mapDerivedCategoryFactors.inv.app ((F.mapHomologicalComplex (.up ℤ)).obj K) ≫
         G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.inv.app K) := by
-  rw [← cancel_mono ((mapDerivedCategoryCompIso F G).inv.app _), Iso.hom_inv_id_app,
+  rw [← cancel_mono ((mapDerivedCategoryCompIso F G).hom.app _), Iso.inv_hom_id_app,
     mapDerivedCategoryCompIso_inv_app_Q]
   simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.inv_hom_id_app]
   erw [Functor.map_id, Functor.map_id, Category.id_comp, Category.id_comp, Category.id_comp,
@@ -145,8 +143,8 @@ variable {A A' B B' : Type*} [Category A] [Category A'] [Category B] [Category B
 noncomputable def Functor.mapDerivedCategoryCompForgetIso (c : L ⋙ forget₂ ≅ forget₁ ⋙ L') :
     L.mapDerivedCategory ⋙ forget₂.mapDerivedCategory ≅
       forget₁.mapDerivedCategory ⋙ L'.mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso L forget₂).symm ≪≫ Functor.mapDerivedCategoryNatIso c ≪≫
-    Functor.mapDerivedCategoryCompIso forget₁ L'
+  Functor.mapDerivedCategoryCompIso L forget₂ ≪≫ Functor.mapDerivedCategoryNatIso c ≪≫
+    (Functor.mapDerivedCategoryCompIso forget₁ L').symm
 
 /-- The isomorphism `Functor.mapDerivedCategoryCompForgetIso c` on the image of a complex. -/
 lemma Functor.mapDerivedCategoryCompForgetIso_inv_app_Q (c : L ⋙ forget₂ ≅ forget₁ ⋙ L')

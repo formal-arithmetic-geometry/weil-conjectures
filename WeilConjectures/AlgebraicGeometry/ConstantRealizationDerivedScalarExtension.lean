@@ -583,7 +583,7 @@ private theorem moduleComparison_isIso (M : ModuleCat.{max u v} R) :
     change (moduleComparison J q M).val.app V
       (g.val.app V (constantSection J ((ModuleCat.extendScalars q).obj M) V z)) =
         constantSection J ((ModuleCat.extendScalars q).obj M) V z
-    induction z with
+    induction z using TensorProduct.inductionOn with
     | tmul s x =>
       rw [tensorLift_constantSection, tensorSection_tmul]
       exact moduleComparison_formula J q M V x s

@@ -69,7 +69,18 @@ private theorem unit_single (M : C) :
         R.rightDerivedPlusSingleUnit (L.obj M) := by
   have h := adj.derivedPlus_unit_app_fac ((HomotopyCategory.Plus.singleFunctor C 0).obj M)
   have hL : (L.mapDerivedCategoryPlusSingleFunctor 0).hom.app M =
-      L.mapDerivedCategoryPlusFactorsh.hom.app
+      let S : CochainComplex.Plus C :=
+        ⟨(CochainComplex.singleFunctor C 0).obj M, by
+          rw [CochainComplex.plus_iff]
+          exact ⟨0, inferInstance⟩⟩
+      let s : (DerivedCategory.Plus.singleFunctor C 0).obj M ≅
+          DerivedCategory.Plus.Q.obj S :=
+        DerivedCategory.Plus.ι.preimageIso
+          ((DerivedCategory.Plus.singleFunctorιIso C 0).hom.app M ≫
+            (DerivedCategory.singleFunctorIsoCompQ C 0).hom.app M)
+      s.hom ≫ L.mapDerivedCategoryPlus.map
+          ((DerivedCategory.Plus.quotientCompQhIso C).inv.app S) ≫
+        L.mapDerivedCategoryPlusFactorsh.hom.app
           ((HomotopyCategory.Plus.singleFunctor C 0).obj M) ≫
         (L.mapHomotopyCategoryPlusSingleFunctorQhObjIso 0 M).hom := by
     apply DerivedCategory.Plus.ι.map_injective
@@ -82,16 +93,11 @@ private theorem unit_single (M : C) :
       Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Functor.associator_inv_app,
       Iso.symm_hom, NatTrans.comp_app, Functor.mapIso_hom,
       Category.id_comp]
-    change L.mapDerivedCategory.map (𝟙 _) ≫ _ ≫ _ ≫ 𝟙 _ =
-      L.mapDerivedCategoryFactorsh.hom.app
-        ((HomotopyCategory.quotient C (.up ℤ)).obj
-          ((CochainComplex.singleFunctor C 0).obj M)) ≫ _
-    simp only [Functor.map_id, Category.id_comp, Category.comp_id]
-    rw [Functor.mapDerivedCategoryFactorsh_hom_app]
-    simp only [Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv, Category.assoc]
-    change _ = L.mapDerivedCategory.map (𝟙 _) ≫ _ ≫ 𝟙 _ ≫
-      DerivedCategory.Qh.map (𝟙 _) ≫ _
-    simp
+    rw [← Functor.ι_map_mapDerivedCategoryPlusFactorsh_hom_app]
+    simp [DerivedCategory.Plus.quotientCompQhIso,
+      DerivedCategory.Plus.QhCompιIsoιCompQh, Functor.mapDerivedCategoryPlusCompatibility,
+      Functor.mapDerivedCategoryFactorsh_hom_app, Functor.mapHomotopyCategoryFactors,
+      Quotient.lift.isLift_inv, Category.assoc]
   rw [hL, Functor.map_comp, ← Category.assoc]
   erw [h]
   let u : L.mapHomotopyCategoryPlus.obj ((HomotopyCategory.Plus.singleFunctor C 0).obj M) ≅

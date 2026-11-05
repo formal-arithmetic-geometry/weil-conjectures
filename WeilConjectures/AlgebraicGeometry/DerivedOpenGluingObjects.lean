@@ -155,7 +155,7 @@ theorem derived_open_gluing_objects
           Equivalence.functor
             (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over (U ⊓ V)))
             (D := SheafOfModules.{u} (moduleRings (U ⊓ V).toScheme.toRingedSpace))
-            (Scheme.Modules.overEquiv (U ⊓ V)))).symm ≪≫
+            (Scheme.Modules.overEquiv (U ⊓ V)))) ≪≫
         Functor.mapDerivedCategoryNatIso
           (Functor.associator _ _ _ ≪≫
           Functor.isoWhiskerLeft
@@ -193,7 +193,7 @@ theorem derived_open_gluing_objects
           Equivalence.functor
             (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over (U ⊓ V)))
             (D := SheafOfModules.{u} (moduleRings (U ⊓ V).toScheme.toRingedSpace))
-            (Scheme.Modules.overEquiv (U ⊓ V)))).symm ≪≫
+            (Scheme.Modules.overEquiv (U ⊓ V)))) ≪≫
         Functor.mapDerivedCategoryNatIso
           (Functor.associator _ _ _ ≪≫
           Functor.isoWhiskerLeft

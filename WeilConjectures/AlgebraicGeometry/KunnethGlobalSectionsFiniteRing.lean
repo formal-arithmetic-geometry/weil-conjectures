@@ -97,7 +97,7 @@ theorem isIso_kunnethGlobalSectionsMap_finiteCoefficientRing
     have hdvr := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
     have hm : (l : Padic.coefficientExtensionIntegers l E) ∈
         Padic.coefficientExtensionMaximalIdeal l E := by
-      apply (hdvr.2.1 _).2
+      refine (hdvr.2.1 _).2 ?_
       change spectralNorm (Padic l) E (l : E) < 1
       rw [← map_natCast (algebraMap (Padic l) E),
         spectralNorm_extends (K := Padic l) (L := E)]

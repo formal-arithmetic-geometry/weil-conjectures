@@ -409,7 +409,7 @@ theorem existsUnique_baseChange (F : V →ₚ[k, p] V) :
     | add x y hx hy => simp only [smul_add, map_add] at hx hy ⊢; rw [hx, hy]
   · simp [hG]
   · ext x
-    induction x with
+    induction x using TensorProduct.inductionOn with
     | tmul a v =>
       rw [show a ⊗ₜ[k] v = a • (1 ⊗ₜ[k] v) by simp [TensorProduct.smul_tmul'], map_smulₛₗ,
         hF'']

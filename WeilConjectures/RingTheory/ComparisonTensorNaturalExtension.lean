@@ -169,7 +169,7 @@ theorem exists_comparison_tensor_natural_extension
     simp only [AlgHom.toRingHom_eq_coe, AlgHom.coe_toRingHom] at hb
     rw [hb]
     clear hb
-    induction z with
+    induction z using TensorProduct.inductionOn with
     | add z z' hz hz' => simpa only [map_add] using congrArg₂ (· + ·) hz hz'
     | tmul s b => rfl
   let q₀ : Q →+* (↥(F.obj i) ⊗[F.obj i₀] C₀) :=
@@ -217,7 +217,7 @@ theorem exists_comparison_tensor_natural_extension
         (Algebra.TensorProduct.map (t r) (AlgHom.id (F.obj i₀) B₀)).toRingHom)
       (z : B j ⊗[P] Q) :
       e r (χ j z) = χ k (Algebra.TensorProduct.map β (AlgHom.id P Q) z) := by
-    induction z with
+    induction z using TensorProduct.inductionOn with
     | add z z' hz hz' => simpa only [map_add] using congrArg₂ (· + ·) hz hz'
     | tmul b q' =>
       rw [Algebra.TensorProduct.map_tmul, hχ, hχ, map_mul, hqtrans r q', hφtrans r β hβ]

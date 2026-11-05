@@ -171,9 +171,12 @@ private noncomputable def sectionScalar
          apply ModuleCat.hom_ext
          apply LinearMap.ext
          intro x
-         change (s.val V) • M.val.map i x = M.val.map i ((s.val U) • x)
+         change (show R.obj.obj V from s.val V) •
+           (show M.val.obj V from M.val.map i x) =
+             M.val.map i ((show R.obj.obj U from s.val U) • x)
          rw [M.val.map_smul]
-         exact congrArg (fun a : R.obj.obj V => a • M.val.map i x) (s.property i).symm }⟩
+         exact congrArg (fun a : R.obj.obj V ↦ a •
+           (show M.val.obj V from M.val.map i x)) (s.property i).symm }⟩
   naturality {M N} a := by
     apply SheafOfModules.hom_ext
     apply PresheafOfModules.hom_ext
@@ -227,7 +230,7 @@ private theorem sectionScalar_central
     intro x a
     change R.obj.obj U at a
     change (a * (show R.obj.obj U from s.val U)) • x =
-      (s.val U) • (a • x)
+      (show R.obj.obj U from s.val U) • (a • x)
     rw [mul_smul, smul_comm]
   change (ρ_ M).inv ≫ M ◁ scalar R s ≫ (ρ_ M).hom = _
   apply (cancel_epi (ρ_ M).hom).1

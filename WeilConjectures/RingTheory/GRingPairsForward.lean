@@ -53,7 +53,7 @@ theorem isGRing_pairsOfPrimes_forward (R : Type u) [CommRing R] [IsNoetherianRin
   have hgeom := Algebra.isGeometricallyRegular_of_fieldIso σ.toRingEquiv e.toRingEquiv
     (by
       intro x y
-      induction y with
+      induction y using TensorProduct.inductionOn with
       | tmul a c =>
         change σ (x * a) ⊗ₜ[B] c = σ x • (σ a ⊗ₜ[B] c)
         simp [Algebra.smul_def]

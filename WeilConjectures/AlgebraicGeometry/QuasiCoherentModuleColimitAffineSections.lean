@@ -6,12 +6,14 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.CategoryTheory.Filtered.Basic
 import WeilConjectures.AlgebraicGeometry.QuasiCoherentModuleColimitEvaluation
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Directed colimits of quasi-coherent modules
 

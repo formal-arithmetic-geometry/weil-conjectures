@@ -148,7 +148,7 @@ theorem exists_openOrdinaryTensor_germ_coordinates
   refine ⟨eR, _, eB, eC, hRA, hRB, hCA, hCB, α, hα, τ, hτ, ?_⟩
   intro n
   ext x
-  induction x with
+  induction x using TensorProduct.inductionOn with
   | tmul c q =>
     simp only [AddCommGrpCat.comp_apply]
     erw [hτ n (show C z from c) q]

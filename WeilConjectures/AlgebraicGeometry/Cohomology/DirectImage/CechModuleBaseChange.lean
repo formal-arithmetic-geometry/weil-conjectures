@@ -118,7 +118,7 @@ noncomputable def sectionsModuleBaseChange (H : IsPullback g' f' f g) (ℱ : X.M
   map_smul' c x := by
     change sectionsModuleBaseChangeAddHom H ℱ hg W (c • x) =
       c • sectionsModuleBaseChangeAddHom H ℱ hg W x
-    induction x with
+    induction x using TensorProduct.inductionOn with
     | add x y hx hy => rw [smul_add, map_add, map_add, hx, hy, smul_add]
     | tmul b m =>
       rw [TensorProduct.smul_tmul', sectionsModuleBaseChangeAddHom_tmul,
@@ -180,7 +180,7 @@ theorem bijective_sectionsModuleBaseChange [IsAffine S] [IsAffine T]
     rw [this]
     exact Φ.bijective
   intro x
-  induction x with
+  induction x using TensorProduct.inductionOn with
   | add x y hx hy => rw [map_add, map_add, hx, hy]
   | tmul b m =>
     rw [sectionsModuleBaseChange_tmul]
@@ -253,7 +253,7 @@ theorem cechModuleBaseChange_d (k : ℕ)
     cechModuleBaseChange H ℱ hg U (k + 1) ((cechModuleD f ℱ U k).baseChange Γ(T, ⊤) x) =
       cechModuleD f' ((pullback g').obj ℱ) (fun i ↦ g' ⁻¹ᵁ U i) k
         (cechModuleBaseChange H ℱ hg U k x) := by
-  induction x with
+  induction x using TensorProduct.inductionOn with
   | add x y hx hy => simp only [map_add, hx, hy]
   | tmul b c =>
     funext y
@@ -284,7 +284,7 @@ theorem bijective_cechModuleBaseChange [IsAffine S] [IsAffine T]
     rw [this]
     exact e.bijective
   intro x
-  induction x with
+  induction x using TensorProduct.inductionOn with
   | add x y hx hy => rw [map_add, map_add, hx, hy]
   | tmul b c =>
     funext y

@@ -102,7 +102,7 @@ theorem picardAffineCech_normalized_differential
   rintro n _ rfl
   apply AddCommGrpCat.ext
   intro z
-  induction z with
+  induction z using TensorProduct.inductionOn with
   | add z z' hz hz' => simpa only [map_add] using congrArg₂ (· + ·) hz hz'
   | tmul a t =>
     simp only [AddCommGrpCat.comp_apply]

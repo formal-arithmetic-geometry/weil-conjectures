@@ -173,10 +173,12 @@ theorem tensorUnit_existsUnique {B : Sheaf J CommRingCat.{r}} (ι : R ⟶ B) :
       naturality := by
         intro U V g
         ext p
-        change M.val.map g p ⊗ₜ[R.obj.obj V]
+        change (show M.val.obj V from M.val.map g p) ⊗ₜ[R.obj.obj V]
             (show (algebraModule ι).val.obj V from (1 : B.obj.obj V)) =
-          M.val.map g p ⊗ₜ[R.obj.obj V]
-            ((algebraModule ι).val.map g (show (algebraModule ι).val.obj U from (1 : B.obj.obj U)))
+          (show M.val.obj V from M.val.map g p) ⊗ₜ[R.obj.obj V]
+            (show (algebraModule ι).val.obj V from
+              (algebraModule ι).val.map g
+                (show (algebraModule ι).val.obj U from (1 : B.obj.obj U)))
         have h_one : (algebraModule ι).val.map g
             (show (algebraModule ι).val.obj U from (1 : B.obj.obj U)) =
               (show (algebraModule ι).val.obj V from (1 : B.obj.obj V)) :=

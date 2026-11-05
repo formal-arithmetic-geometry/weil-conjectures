@@ -147,7 +147,7 @@ theorem secondLocalization_comparison (hflat : (algebraMap B Bp).Flat) (i : ℤ)
     obtain ⟨z, rfl⟩ := (CategoryTheory.Iso.toLinearEquiv
       ((HomologicalComplex.eval (ModuleCat.{u} B) (.up ℤ) j).mapIso
         L.ordinaryIso)).surjective z
-    induction z with
+    induction z using TensorProduct.inductionOn with
     | tmul b x =>
       change B at b
       change Q.X j at x

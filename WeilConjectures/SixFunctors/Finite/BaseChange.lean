@@ -104,9 +104,9 @@ lemma Etale.sheafFiber_map_lowerStarComp_hom_app_stalkRestrict (h₁₂ : T ⟶ 
       Etale.stalkRestrict A h₂ y ⟨t.1 ≫ h₁, _⟩ ((h₁)_*[A].obj G) ≫
         Etale.stalkRestrict A h₁ (t.1 ≫ h₁) ⟨t.1, rfl⟩ G
   erw [GrothendieckTopology.Point.toPresheafFiber_naturality_assoc,
-    Etale.toPresheafFiber_stalkRestrict A (h₁ ≫ h₂) y t G ⟨V, v⟩,
-    Etale.toPresheafFiber_stalkRestrict_assoc A h₂ y _ _ ⟨V, v⟩,
-    Etale.toPresheafFiber_stalkRestrict A h₁ _ _ G ⟨h₂.Etale.obj V, _⟩]
+    Etale.toPresheafFiber_stalkRestrict A (h₁ ≫ h₂) y t G (Functor.elementsMk _ V v),
+    Etale.toPresheafFiber_stalkRestrict_assoc A h₂ y _ _ (Functor.elementsMk _ V v),
+    Etale.toPresheafFiber_stalkRestrict A h₁ _ _ G (Functor.elementsMk _ (h₂.Etale.obj V) _)]
   -- the component of the composition isomorphism is restriction along the pasting
   -- isomorphism `(V ×_R S) ×_S T ≅ V ×_R T`
   set ψ := (MorphismProperty.Over.pullbackComp (P := @Etale) (Q := ⊤) h₁ h₂).hom.app V with hψ
@@ -119,8 +119,9 @@ lemma Etale.sheafFiber_map_lowerStarComp_hom_app_stalkRestrict (h₁₂ : T ⟶ 
   -- the pasting isomorphism carries the point `(v, t)` to the point `((v, t ≫ h₁), t)`
   refine CategoryTheory.Over.OverMorphism.ext ?_
   have hmap : (pointSmallEtale t.1).fiber.map ψ
-      ((Etale.baseChangeNbhd (h₁ ≫ h₂) y t).obj ⟨V, v⟩).snd =
-      ((Etale.baseChangeNbhd (h₁ ≫ h₂) y t).obj ⟨V, v⟩).snd ≫ (Etale.forget T).map ψ := rfl
+      ((Etale.baseChangeNbhd (h₁ ≫ h₂) y t).obj (Functor.elementsMk _ V v)).val =
+      ((Etale.baseChangeNbhd (h₁ ≫ h₂) y t).obj (Functor.elementsMk _ V v)).val ≫
+        (Etale.forget T).map ψ := rfl
   have hl : ((Etale.forget T).map ψ).left = ψ.left := rfl
   have hψ₁ : ψ.left ≫ pullback.fst ((MorphismProperty.Over.pullback (P := @Etale) (Q := ⊤)
       h₂).obj V).hom h₁ ≫ pullback.fst V.hom h₂ = pullback.fst V.hom (h₁ ≫ h₂) :=
@@ -137,16 +138,18 @@ lemma Etale.sheafFiber_map_lowerStarComp_hom_app_stalkRestrict (h₁₂ : T ⟶ 
       Category.comp_id]
   have ht : (t.1 ≫ h₁) ≫ h₂ = y := by rw [Category.assoc, t.2]
   set c' : Nbhd (t.1 ≫ h₁) :=
-    ⟨h₂.Etale.obj V, CategoryTheory.Over.homMk (basePt h₂ ⟨V, v⟩ ⟨t.1 ≫ h₁, ht⟩)
-      (basePt_snd h₂ ⟨V, v⟩ ⟨t.1 ≫ h₁, ht⟩)⟩ with hc'
+    Functor.elementsMk _ (h₂.Etale.obj V)
+      (CategoryTheory.Over.homMk (basePt h₂ (Functor.elementsMk _ V v) ⟨t.1 ≫ h₁, ht⟩)
+        (basePt_snd h₂ (Functor.elementsMk _ V v) ⟨t.1 ≫ h₁, ht⟩)) with hc'
   have hb₁ : basePt h₁ c' ⟨t.1, rfl⟩ ≫ pullback.fst ((MorphismProperty.Over.pullback
-      (P := @Etale) (Q := ⊤) h₂).obj V).hom h₁ = basePt h₂ ⟨V, v⟩ ⟨t.1 ≫ h₁, ht⟩ :=
+      (P := @Etale) (Q := ⊤) h₂).obj V).hom h₁ =
+      basePt h₂ (Functor.elementsMk _ V v) ⟨t.1 ≫ h₁, ht⟩ :=
     basePt_fst h₁ c' ⟨t.1, rfl⟩
   have hb₂ : basePt h₁ c' ⟨t.1, rfl⟩ ≫ pullback.snd ((MorphismProperty.Over.pullback
       (P := @Etale) (Q := ⊤) h₂).obj V).hom h₁ = t.1 :=
     basePt_snd h₁ c' ⟨t.1, rfl⟩
   rw [hmap, CategoryTheory.Over.comp_left, hl]
-  simp only [Etale.baseChangeNbhd_obj_snd_left]
+  simp only [Etale.baseChangeNbhd_obj_val_left]
   apply pullback.hom_ext
   · apply pullback.hom_ext
     · rw [Category.assoc, Category.assoc, hψ₁, basePt_fst, hb₁, basePt_fst]

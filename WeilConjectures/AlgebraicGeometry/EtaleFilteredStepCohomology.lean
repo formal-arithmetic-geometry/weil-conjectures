@@ -6,6 +6,8 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.EtaleTermwiseHypercohomology
 public import WeilConjectures.FromJoel.Algebra.Homology.Embedding.StupidTrunc
 public import WeilConjectures.AlgebraicGeometry.EtaleRestrictedTotalResolution

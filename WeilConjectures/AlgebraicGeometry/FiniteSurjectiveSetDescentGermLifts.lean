@@ -67,7 +67,7 @@ private theorem descent_coordinate
     (colimit.ι_pre
       ((Functor.Elements.π (Scheme.pointSmallEtale t).fiber).op ⋙
         ((Scheme.etaleSetPullback f).obj G).obj)
-      (Etale.baseChangeNbhd f (t ≫ f) ⟨t, rfl⟩).op (op ⟨U, z⟩))
+      (Etale.baseChangeNbhd f (t ≫ f) ⟨t, rfl⟩).op (op (Functor.elementsMk _ U z)))
     (etaleSetDescentUnit f G U s)
   erw [hpre]
   exact hg U z s

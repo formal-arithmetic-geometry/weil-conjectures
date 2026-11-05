@@ -297,7 +297,7 @@ private noncomputable def tensorRingEmbedding
         (pushout φ.hom (φ ≫ b).hom).map f ((ringTensorIso φ (φ ≫ b) U).hom z)
     let := (φ.hom.app U).hom.toAlgebra
     let := ((φ ≫ b).hom.app U).hom.toAlgebra
-    induction z with
+    induction z using TensorProduct.inductionOn with
     | add x y hx hy =>
       change (ringTensorIso φ (φ ≫ b) V).hom
         ((changeOfRingsPresheaf φ _).map f (x + y)) =
@@ -338,7 +338,7 @@ private theorem multiplicationRaw_locallyInjective
       (multiplicationRaw φ b).app U z
     let := (φ.hom.app U).hom.toAlgebra
     let := ((φ ≫ b).hom.app U).hom.toAlgebra
-    induction z with
+    induction z using TensorProduct.inductionOn with
     | add x y hx hy =>
       change μ.app U ((ringTensorIso φ (φ ≫ b) U).hom (x + y)) =
         (multiplicationRaw φ b).app U (x + y)

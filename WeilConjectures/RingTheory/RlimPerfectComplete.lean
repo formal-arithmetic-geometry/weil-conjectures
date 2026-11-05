@@ -66,7 +66,7 @@ noncomputable def adicRestrictionComp {A : Type u} [CommRing A] (I : Ideal A)
       (Ideal.Quotient.factorPowSucc I (n + 1))
       (Ideal.Quotient.mk (I ^ (n + 1)))
       (Ideal.Quotient.factor_comp_mk (Ideal.pow_le_pow_right (Nat.le_succ (n + 1)))).symm) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- Restrict a supplied transition in `D(A/I^(n+2))` to `D(A)`.
 Source: Stacks Project, Tag 09AW
@@ -421,8 +421,8 @@ theorem rlim_perfect_complete {A : Type u} [CommRing A] (I : Ideal A)
         (ModuleCat.restrictScalars (q (n + 1))).mapDerivedCategory :=
     Functor.mapDerivedCategoryNatIso
       (ModuleCat.restrictScalarsComp' (q (n + 1)) (φ n) (q n) (hq n)) ≪≫
-        Functor.mapDerivedCategoryCompIso (ModuleCat.restrictScalars (φ n))
-          (ModuleCat.restrictScalars (q (n + 1)))
+        (Functor.mapDerivedCategoryCompIso (ModuleCat.restrictScalars (φ n))
+          (ModuleCat.restrictScalars (q (n + 1)))).symm
   have hχ := fun n ↦ restrictScalarsComp_derived_factors
     (q (n + 1)) (φ n) (q n) (hq n)
   have htri : IsDerivedLimitTriangle

@@ -103,7 +103,6 @@ theorem derivedPulledGlobalGerm_fac
     rw [Functor.rightDerivedFunctorPlusNatTrans_app_assoc,
       Functor.rightDerivedFunctorPlusCompIso_fac_app,
       Functor.rightDerivedFunctorPlusCompUnit_app]
-    rfl
   let β := Functor.rightDerivedFunctorPlusNatTrans (pulledGlobalGerm g t) ≫
     (G ⋙ S).rightDerivedFunctorPlusIsoMapDerivedCategoryPlus.hom ≫
     (Functor.mapDerivedCategoryPlusCompIso G S).hom

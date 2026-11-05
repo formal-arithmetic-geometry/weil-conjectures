@@ -82,7 +82,7 @@ variable (J) in
 noncomputable def derivedRestrictScalarsCompIso {A'' : Type (u + 1)} [CommRing A'']
     {g : A' →+* A''} {gf : A →+* A''} (hgf : gf = g.comp f) :
     derivedRestrictScalars J g ⋙ derivedRestrictScalars J f ≅ derivedRestrictScalars J gf :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (restrictScalarsCompIso J f g gf hgf)
 
 namespace IsDerivedBaseChange

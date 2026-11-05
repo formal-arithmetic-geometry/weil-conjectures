@@ -841,7 +841,7 @@ theorem DegreeDatum.detWeight_subquotient_tprod_eq_add
       p (Matrix.toLin B B (r z : Matrix _ _ k) x) = ((c * d : kˣ) : k) • p x := by
     change p (Matrix.toLin B B ((z : Matrix n n k) ⊗ₖ (z : Matrix n n k)) x) = _
     rw [Matrix.toLin_kronecker]
-    induction x with
+    induction x using TensorProduct.inductionOn with
     | tmul x y =>
       simp only [TensorProduct.map_tmul, p, Representation.IntertwiningMap.tensor_apply, hc, hd,
         TensorProduct.smul_tmul_smul, Units.val_mul]

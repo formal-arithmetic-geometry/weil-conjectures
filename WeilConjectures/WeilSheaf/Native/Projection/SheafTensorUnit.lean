@@ -7,6 +7,7 @@ module
 public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationSheafTensor
 public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelUpperStarCompCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.CompMonoidal
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.DisjointUnion
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Evaluation
 
 /-! # Tensor generators and the units of pullback adjunctions
@@ -70,17 +71,6 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
-
-/-- The unit of module pullback, on underlying abelian sheaves. -/
-lemma upperStarLowerStarAdjunction_unit_app_hom
-    (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) :
-    ((upperStarLowerStarAdjunction Λ f).unit.app M).hom =
-      (ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} f).unit.app M.X ≫
-        (ProEtale.lowerStar Ab.{u + 1} f).map (upperStarUnitHom Λ f M) := by
-  have h := upperStarLowerStarAdjunction_homEquiv_hom Λ f M _ (𝟙 _)
-  rw [Adjunction.homEquiv_id] at h
-  erw [Mod.id_hom', Category.comp_id] at h
-  exact h
 
 /-- The adjoint of the condensed pullback tensor comparison on pure tensors. -/
 @[reassoc]

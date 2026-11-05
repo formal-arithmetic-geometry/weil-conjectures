@@ -109,7 +109,7 @@ private theorem affinePullbackTensorMap_bijective {A W : Scheme.{u}} [IsAffine A
     exact congr($(hu).app ⊤ m)
   have heq (z : (ModuleCat.extendScalars r).obj R) :
       affinePullbackTensorMap q M S r ρ hρ z = j (d (e₀ z)) := by
-    induction z with
+    induction z using TensorProduct.inductionOn with
     | tmul b₀ m =>
       let b : S := b₀
       change affinePullbackTensorMap q M S r ρ hρ (b ⊗ₜ[Γ(A, ⊤), r] m) =

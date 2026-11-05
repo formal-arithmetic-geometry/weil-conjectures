@@ -8,8 +8,12 @@ module
 
 public import WeilConjectures.CategoryTheory.GrothendieckComposablePair
 public import WeilConjectures.CategoryTheory.CanonicalResolutionDerivedIso
+public import Mathlib.Algebra.Homology.Localization
+public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 import WeilConjectures.CategoryTheory.CanonicalResolutionHomologyComparison
 import WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck
+import all Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 
 /-! # Resolution comparisons and the composite derived unit
 
@@ -64,7 +68,14 @@ private lemma resolutionDerivedIso_comp
   congr 1
   apply (cancel_epi ((F ⋙ G).rightDerivedFunctorPlusUnith.app H)).1
   erw [← Category.assoc, hc]
+  have hA : (DerivedCategory.Plus.quotientCompQhIso A).inv.app L = 𝟙 _ := rfl
+  have hB : (DerivedCategory.Plus.quotientCompQhIso B).hom.app
+      (F.mapCochainComplexPlus.obj L) = 𝟙 _ := rfl
+  have hC : (DerivedCategory.Plus.quotientCompQhIso C).hom.app
+      ((F ⋙ G).mapCochainComplexPlus.obj L) = 𝟙 _ := rfl
+  erw [hA, hB, hC]
   simp [Category.assoc, H, L]
+  erw [Functor.map_id, Category.comp_id, Category.id_comp]
   rfl
 
 set_option backward.isDefEq.respectTransparency false in
@@ -202,10 +213,9 @@ theorem resolution_composite_unit_transport
             ⟨((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).extend
               ComplexShape.embeddingUpNat, 0, inferInstance⟩) n).inv ≫
         (DerivedCategory.Plus.homologyFunctor C n).map
-          (G.rightDerivedFunctorPlusUnith.app
-            ((HomotopyCategory.Plus.quotient B).obj
-              ⟨((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).extend
-                ComplexShape.embeddingUpNat, 0, inferInstance⟩)) := by
+          (G.rightDerivedFunctorPlusUnit.app
+            ⟨((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).extend
+              ComplexShape.embeddingUpNat, 0, inferInstance⟩) := by
   let mG : G.mapCochainComplexPlus.obj
       ⟨((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).extend
         ComplexShape.embeddingUpNat, 0, inferInstance⟩ ≅
@@ -235,6 +245,10 @@ theorem resolution_composite_unit_transport
     (DerivedCategory.Plus.homologyFunctorObjQIso _ n).hom]
   erw [← hn]
   simp only [Category.assoc, Iso.hom_inv_id_assoc]
-  rfl
+  congr 3
+  erw [Functor.rightDerivedFunctorPlusUnit_app]
+  change _ = (𝟙 _) ≫ DerivedCategory.Plus.Qh.map (𝟙 _) ≫ _ ≫
+    G.rightDerivedFunctorPlus.map (𝟙 _)
+  erw [Functor.map_id, Functor.map_id, Category.id_comp, Category.id_comp, Category.comp_id]
 
 end CategoryTheory

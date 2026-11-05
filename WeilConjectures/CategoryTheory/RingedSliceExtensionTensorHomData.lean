@@ -351,12 +351,14 @@ open Classical in
     apply TensorProduct.ext' (R := R.obj.obj V)
     intro x y
     induction x using DirectSum.induction_on with
-    | zero => simp
+    | zero => simp [LinearMap.map_zero]
     | of φ x =>
       change sumTensorLift.{u, v} (R := R.obj.obj W)
+        (N := G.val.obj W) (P := H.val.obj W)
         (fun ψ ↦ by exact (a.app (op (Over.mk ψ))).hom)
           (extensionByZeroPresheafRestrictAdd A U F i (DirectSum.of _ φ x) ⊗ₜ[R.obj.obj W]
-            G.val.map i y) = H.val.map i (sumTensorLift.{u, v} (R := R.obj.obj V)
+            (show G.val.obj W from G.val.map i y)) =
+            H.val.map i (sumTensorLift.{u, v} (R := R.obj.obj V)
               (fun ψ ↦ by exact (a.app (op (Over.mk ψ))).hom)
                 (DirectSum.of (fun ψ ↦ F.val.obj (op (Over.mk ψ))) φ x ⊗ₜ[R.obj.obj V] y))
       erw [extensionRestrict_of.{uC, u, v} A U F i φ (i.unop ≫ φ) rfl]

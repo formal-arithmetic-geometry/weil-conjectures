@@ -282,7 +282,7 @@ noncomputable def pointSmallEtaleElementsBaseChange :
 @[simp]
 lemma pointSmallEtaleElementsBaseChange_obj_fst
     (c : (pointSmallEtale (s ≫ f)).fiber.Elements) :
-    ((pointSmallEtaleElementsBaseChange f s).obj c).fst = f.Etale.obj c.fst :=
+    ((pointSmallEtaleElementsBaseChange f s).obj c).obj = f.Etale.obj c.obj :=
   rfl
 
 @[simp]
@@ -303,8 +303,8 @@ Elements (pointSmallEtale (s ≫ f)).fiber --- base change ---> Elements (pointS
 commutes, on the nose. -/
 lemma pointSmallEtaleElementsBaseChange_comp_π :
     pointSmallEtaleElementsBaseChange f s ⋙
-        CategoryOfElements.π (pointSmallEtale s).fiber =
-      CategoryOfElements.π (pointSmallEtale (s ≫ f)).fiber ⋙ f.Etale :=
+        Functor.Elements.π (pointSmallEtale s).fiber =
+      Functor.Elements.π (pointSmallEtale (s ≫ f)).fiber ⋙ f.Etale :=
   rfl
 
 end BaseChange

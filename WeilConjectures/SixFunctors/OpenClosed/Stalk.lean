@@ -95,7 +95,8 @@ lemma Etale.toPresheafFiber_lowerStarCompPresheafFiberIso_hom_app (P : Z.Etale�
         ((pointSmallEtaleFiberEtaleIso i s).inv.app V y) P :=
   have := Scheme.initial_pointSmallEtaleElementsBaseChange i s
   Functor.Final.ι_colimitIso_hom (pointSmallEtaleElementsBaseChange i s).op
-    ((Functor.Elements.π (pointSmallEtale s).fiber).op ⋙ P) (op ⟨V, y⟩)
+    ((Functor.Elements.π (pointSmallEtale s).fiber).op ⋙ P)
+    (op (Functor.elementsMk _ V y))
 
 /-- Blueprint `lemma-openclosed-stalk-lowerstar`: **The stalk of a pushforward along a closed
 immersion.** For a closed immersion

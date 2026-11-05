@@ -202,7 +202,7 @@ lemma Scheme.subsingleton_hom_pointSmallEtaleElementsOpens (hU : (U : Set X).Sub
   obtain ⟨V, v⟩ := c
   have : Subsingleton U.toScheme := hU.coe_sort
   have : Etale V.hom := V.prop
-  refine ⟨fun g g' ↦ CategoryOfElements.ext _ _ _ (MorphismProperty.Over.Hom.ext ?_)⟩
+  refine ⟨fun g g' ↦ Functor.Elements.hom_ext _ _ _ (MorphismProperty.Over.Hom.ext ?_)⟩
   have hab : g.val.left ≫ V.hom = g'.val.left ≫ V.hom := by
     rw [MorphismProperty.Over.w g.val, MorphismProperty.Over.w g'.val]
   set s' := (Scheme.pointSmallEtaleFiberObjOpens s U hs).left

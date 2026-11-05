@@ -153,12 +153,19 @@ lemma rightDerivedGlobalSections_map_unit_quotient {X Y : Scheme.{u}} (f : Y ⟶
         (rightDerivedGlobalSections A Y).map
           (((f)^*[A]).mapDerivedCategoryFactorsh.hom.app
             ((HomotopyCategory.quotient _ _).obj K)) =
-      DerivedCategory.Q.map
+      (DerivedCategory.quotientCompQhIso A).hom.app
+          (((Sheaf.Γ X.smallEtaleTopology A).mapHomologicalComplex (.up ℤ)).obj K) ≫
+        DerivedCategory.Q.map
           ((NatTrans.mapHomologicalComplex (globalSectionsUpperStarNatTrans A f) (.up ℤ)).app K) ≫
+        (DerivedCategory.quotientCompQhIso A).inv.app
+          (((Sheaf.Γ Y.smallEtaleTopology A).mapHomologicalComplex (.up ℤ)).obj
+            (((f)^*[A]).mapHomologicalComplex (.up ℤ) |>.obj K)) ≫
         (Sheaf.Γ Y.smallEtaleTopology A).rightDerivedFunctorUnit.app
           ((HomotopyCategory.quotient _ _).obj (((f)^*[A]).mapHomologicalComplex _ |>.obj K)) := by
   refine (rightDerivedGlobalSections_map_unit_homotopyCategory A f _).trans ?_
   rw [Adjunction.mapHomotopyCategory_unit_app_quotient]
+  rw [← DerivedCategory.quotientCompQhIso_hom_naturality_assoc]
+  erw [Iso.hom_inv_id_app_assoc]
   congr 1
 
 end AlgebraicGeometry.Etale

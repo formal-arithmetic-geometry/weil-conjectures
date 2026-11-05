@@ -201,7 +201,7 @@ private noncomputable abbrev degEquiv (n : ℕ) : S ⊗[R] 𝒜 n ≃ₗ[S] ℬ 
 private lemma chartMap_baseChange_mkLinearMap (k : ℕ) (y : S ⊗[R] 𝒜 (k • d)) :
     chartMap h ((Away.mkLinearMap 𝒜 hs k).baseChange S y) =
       Away.mkLinearMap ℬ (φ.map_mem hs) k (degEquiv h (k • d) y) := by
-  induction y with
+  induction y using TensorProduct.inductionOn with
   | tmul c a =>
     rw [LinearMap.baseChange_tmul, LinearMap.liftBaseChange_tmul, IsBaseChange.equiv_tmul,
       map_smul, Away.mkLinearMap_apply, awayLinearMap_apply, Away.map_mk]
@@ -221,7 +221,7 @@ private lemma degEquiv_comp_baseChange_mulPowLinearMap (k m n : ℕ) (hn : k + m
 omit h in
 private lemma exists_baseChange_mkLinearMap (x : S ⊗[R] Away 𝒜 s) :
     ∃ (k : ℕ) (y : S ⊗[R] 𝒜 (k • d)), (Away.mkLinearMap 𝒜 hs k).baseChange S y = x := by
-  induction x with
+  induction x using TensorProduct.inductionOn with
   | tmul c z =>
     obtain ⟨n, a, ha, rfl⟩ := Away.mk_surjective 𝒜 hs z
     exact ⟨n, c ⊗ₜ ⟨a, ha⟩, rfl⟩

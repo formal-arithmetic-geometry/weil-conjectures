@@ -139,6 +139,11 @@ private theorem constant_product {C : Type*} [Category* C]
     (n : ℕ) (F : Fin n → Sheaf J (Type (u + 1)))
     (hF : ∀ i, (F i).IsConstant J) : (∏ᶜ F).IsConstant J := by
   classical
+  have : HasProductsOfShape (Fin n) (Cᵒᵖ ⥤ Type (u + 1)) :=
+    functorCategoryHasLimitsOfShape
+  have : HasProductsOfShape (Fin n) (Sheaf J (Type (u + 1))) :=
+    hasLimitsOfShape_of_hasLimitsOfShape_createsLimitsOfShape
+      (sheafToPresheaf J (Type (u + 1)))
   have he (i : Fin n) := @Sheaf.mem_essImage_of_isConstant _ _ J _ _ _ (F i) (hF i)
   choose A e using he
   exact Sheaf.isConstant_of_iso J

@@ -364,7 +364,7 @@ theorem isLocalRing_tensorProduct_of_isPurelyInseparable_left
   let Φ : (ResidueField R) ⊗[R] K →ₐ[R] K := Algebra.TensorProduct.productMap u (AlgHom.id R K)
   have htmul : ∀ z : (ResidueField R) ⊗[R] K, ∃ x : K, z = 1 ⊗ₜ[R] x := by
     intro z
-    induction z with
+    induction z using TensorProduct.inductionOn with
     | tmul r x =>
       obtain ⟨r, rfl⟩ := IsLocalRing.residue_surjective r
       refine ⟨algebraMap R K r * x, ?_⟩

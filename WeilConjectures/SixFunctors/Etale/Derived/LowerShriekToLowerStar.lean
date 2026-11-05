@@ -105,7 +105,7 @@ instance isIso_derivedOpenImmersionLowerShriekToLowerStar {U X : Scheme.{u}} (j 
   let eR : R((j)_*[A]) ≅ D((j)_*[A]) := ((j)_*[A]).rightDerivedFunctorIsoMapDerivedCategory
   let adjD := mapDerivedUpperStarLowerStarAdjunction A j
   have : IsIso adjD.counit := adjD.isIso_counit_of_iso
-    (Functor.isoWhiskerRight eR _ ≪≫ (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    (Functor.isoWhiskerRight eR _ ≪≫ (Functor.mapDerivedCategoryCompIso _ _) ≪≫
       Functor.mapDerivedCategoryNatIso (asIso adj.counit) ≪≫ Functor.mapDerivedCategoryIdIso _)
   let e : D((j)_!open[A]) ≅ R((j)_*[A]) :=
     Functor.mapDerivedCategoryNatIso

@@ -123,7 +123,7 @@ private theorem derivedTripleNatSingle
           (DerivedCategory.singleFunctor B 0).map (e.hom.app X) := by
   dsimp only
   change ((Functor.mapDerivedCategoryCompIso G K).inv.app _ ≫
-      (Functor.mapDerivedCategoryCompIso F (G ⋙ K)).inv.app _ ≫
+      (Functor.mapDerivedCategoryCompIso F (G ⋙ K)).hom.app _ ≫
         (Functor.mapDerivedCategoryNatIso e).hom.app _) ≫ _ = _
   simp only [Category.assoc]
   rw [derivedNatSingle (F ⋙ G ⋙ K) M e X]
@@ -290,8 +290,8 @@ private theorem universal_single_transport
           (V.mapDerivedCategorySingleFunctor 0).inv.app H ≫ V.mapDerivedCategory.map f) := by
   let ρ : E.mapDerivedCategory ⋙ U.mapDerivedCategory ⋙ TZ.mapDerivedCategory ≅
       V.mapDerivedCategory :=
-    Functor.isoWhiskerLeft E.mapDerivedCategory (Functor.mapDerivedCategoryCompIso U TZ).symm ≪≫
-      (Functor.mapDerivedCategoryCompIso E (U ⋙ TZ)).symm ≪≫
+    Functor.isoWhiskerLeft E.mapDerivedCategory (Functor.mapDerivedCategoryCompIso U TZ) ≪≫
+      (Functor.mapDerivedCategoryCompIso E (U ⋙ TZ)) ≪≫
         Functor.mapDerivedCategoryNatIso ρ₀
   let sZ := DerivedCategory.singleFunctor B 0
   let sR := DerivedCategory.singleFunctor A 0

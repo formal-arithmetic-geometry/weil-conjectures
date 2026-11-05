@@ -269,7 +269,6 @@ theorem etale_limit_binary_successor_cocone_segment
   intro j
   simp only [colimit.ι_desc]
   -- The supplied tail functor evaluates to the underlying index.
-  convert hr j using 1
-  rfl
+  convert hr j using 1 <;> rfl
 
 end AlgebraicGeometry.Etale

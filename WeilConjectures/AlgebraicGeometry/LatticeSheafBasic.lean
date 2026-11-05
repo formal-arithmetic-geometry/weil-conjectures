@@ -1041,6 +1041,11 @@ private noncomputable def freeTensorPresheafIso :
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (S.over U)) I).val := by
   refine PresheafOfModules.isoMk (freeTensorSection a U I) ?_
   intro T T' f
+  let R' := (sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (R.over U)
+  let M := SheafOfModules.free (R := R') I
+  let : Module ((R.over U).obj.obj T')
+      ((ModuleCat.restrictScalars (R'.obj.map f).hom).obj (M.val.obj T')) :=
+    inferInstanceAs (Module ((R.over U).obj.obj T') (M.val.obj T'))
   apply ModuleCat.ExtendScalars.hom_ext
   intro m
   change (freeTensorSection a U I T').hom

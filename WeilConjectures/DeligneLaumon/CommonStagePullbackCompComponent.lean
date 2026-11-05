@@ -8,6 +8,9 @@ module
 public import WeilConjectures.TraceFormula.Integral.IntegralPullbackComposition
 public import WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorHom
 public import WeilConjectures.DeligneLaumon.CommonStagePullbackCompData
+public import WeilConjectures.DeligneLaumon.CommonStagePullbackCompComponentAux
+import WeilConjectures.TraceFormula.Integral.IntegralPullbackCompositionScalarRational
+import all Mathlib.Logic.Small.Defs
 
 /-! # Common-stage pullback composition component
 
@@ -55,6 +58,9 @@ attribute [local irreducible] ScalarLocalization.composition
   completedIntegralCoefficientSheafUnrestricted scalarReductionExistence
   scalarReductionDerivedExistence Scheme.residueField
 
+set_option allowUnsafeReducibility true in
+attribute [local reducible] rationalDerivedPullback
+
 private theorem normalization_map_heq
     {C D : Type*} [Category* C] [Category* D] (F : C ⥤ D)
     {A B A' B' : C} (hA : A = A') (hB : B = B')
@@ -63,145 +69,6 @@ private theorem normalization_map_heq
   cases hB
   cases h
   rfl
-
-private theorem rational_naturality
-    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
-    [FiniteDimensional ℚ_[l] E]
-    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
-    [∀ x : X, Invertible (l : X.residueField x)]
-    [∀ y : Y, Invertible (l : Y.residueField y)]
-    [∀ z : Z, Invertible (l : Z.residueField z)]
-    {K J : sfRationalConstructibleCategory l E Z}
-    (ρK : (rationalDerivedPullback l E (f ≫ g)).obj K ≅
-      (rationalDerivedPullback l E f).obj ((rationalDerivedPullback l E g).obj K))
-    (ρJ : (rationalDerivedPullback l E (f ≫ g)).obj J ≅
-      (rationalDerivedPullback l E f).obj ((rationalDerivedPullback l E g).obj J))
-    (hK : HEq ρK.hom ((sfRationalConstructibleLocalization l E X).map
-      (((integralPullbackComposition l E).choose f g).hom.app K.obj)))
-    (hJ : HEq ρJ.hom ((sfRationalConstructibleLocalization l E X).map
-      (((integralPullbackComposition l E).choose f g).hom.app J.obj)))
-    (v : K ⟶ J) :
-    ρK.hom ≫ (rationalDerivedPullback l E f).map
-        ((rationalDerivedPullback l E g).map v) =
-      (rationalDerivedPullback l E (f ≫ g)).map v ≫ ρJ.hom := by
-  have obj {V W : Scheme.{u}} (k : V ⟶ W)
-      [∀ v : V, Invertible (l : V.residueField v)]
-      [∀ w : W, Invertible (l : W.residueField w)]
-      (M : sfRationalConstructibleCategory l E W) :
-      (rationalDerivedPullback l E k).obj M =
-        ⟨(constructibleIntegralPullback l E k).obj M.obj⟩ := by
-    simpa only [rationalDerivedPullback] using
-      (rationalDerivedPullback_existsUnique l E k).exists.choose_spec.2.1 M
-  have hom {V W : Scheme.{u}} (k : V ⟶ W)
-      [∀ v : V, Invertible (l : V.residueField v)]
-      [∀ w : W, Invertible (l : W.residueField w)]
-      (M N : sfIntegralConstructibleCategory l E W) (b : M ⟶ N)
-      (c : Localization.Away (Padic.coefficientExtensionUniformizer l E)) :
-      HEq ((rationalDerivedPullback l E k).map
-        (c ⊗ₜ[Padic.coefficientExtensionIntegers l E] b))
-        (c ⊗ₜ[Padic.coefficientExtensionIntegers l E]
-          (constructibleIntegralPullback l E k).map b) := by
-    unfold rationalDerivedPullback
-    exact (rationalDerivedPullback_existsUnique l E k).exists.choose_spec.2.2 M N b c
-  have : (rationalDerivedPullback l E (f ≫ g)).Additive := by
-    simpa only [rationalDerivedPullback] using
-      (rationalDerivedPullback_existsUnique l E (f ≫ g)).exists.choose_spec.1
-  have : (rationalDerivedPullback l E g).Additive := by
-    simpa only [rationalDerivedPullback] using
-      (rationalDerivedPullback_existsUnique l E g).exists.choose_spec.1
-  have : (rationalDerivedPullback l E f).Additive := by
-    simpa only [rationalDerivedPullback] using
-      (rationalDerivedPullback_existsUnique l E f).exists.choose_spec.1
-  have compobj (M) : (rationalDerivedPullback l E f).obj
-      ((rationalDerivedPullback l E g).obj M) =
-      ⟨(constructibleIntegralPullback l E f).obj
-        ((constructibleIntegralPullback l E g).obj M.obj)⟩ := by
-    rw [obj, obj]
-  induction v with
-  | tmul c a =>
-    have hm := (normalization_map_heq (rationalDerivedPullback l E f)
-      (obj g K) (obj g J)
-      (hom g _ _ a c)).trans
-        (hom f _ _ ((constructibleIntegralPullback l E g).map a) c)
-    have hleft := heq_comp (obj (f ≫ g) K)
-      (compobj K) (compobj J) hK hm
-    have hright := heq_comp (obj (f ≫ g) K)
-      (obj (f ≫ g) J) (compobj J)
-      (hom (f ≫ g) _ _ a c) hJ
-    apply eq_of_heq
-    refine hleft.trans (HEq.trans ?_ hright.symm)
-    apply heq_of_eq
-    change ScalarLocalization.composition _ _ _ _ _ _
-        (c ⊗ₜ (constructibleIntegralPullback l E f).map
-          ((constructibleIntegralPullback l E g).map a))
-        (1 ⊗ₜ ((integralPullbackComposition l E).choose f g).hom.app K.obj) =
-      ScalarLocalization.composition _ _ _ _ _ _
-        (1 ⊗ₜ ((integralPullbackComposition l E).choose f g).hom.app J.obj)
-        (c ⊗ₜ (constructibleIntegralPullback l E (f ≫ g)).map a)
-    simp only [ScalarLocalization.composition_tmul, one_mul, mul_one]
-    exact congrArg (fun b ↦ c ⊗ₜ b)
-      (((integralPullbackComposition l E).choose f g).hom.naturality a).symm
-  | add a b ha hb =>
-    change _ ≫ (rationalDerivedPullback l E f).map
-        ((rationalDerivedPullback l E g).map (a + b : K ⟶ J)) =
-      (rationalDerivedPullback l E (f ≫ g)).map
-        (a + b : K ⟶ J) ≫ _
-    rw [Functor.map_add, Functor.map_add, Functor.map_add,
-      Preadditive.add_comp, Preadditive.comp_add, ha, hb]
-
-set_option allowUnsafeReducibility true in
-attribute [local reducible] rationalDerivedPullback
-
-/-- Naturality of the fixed-stage rational compositor on localized representatives.
-Source: Stacks 099N(5), coefficient-compatibility calculation on pure tensors and additivity.
-(blueprint: lem-zl-common-stage-pullback-comp-naturality-representative).
-The proof expands the chosen integral compositor on pure tensors, applies its integral
-naturality, and extends by additivity. -/
-theorem commonStagePullbackRationalComposition_naturality
-    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
-    [∀ x : X, Invertible (l : X.residueField x)]
-    [∀ y : Y, Invertible (l : Y.residueField y)]
-    [∀ z : Z, Invertible (l : Z.residueField z)]
-    (L : AlgebraicallyClosedCoefficients.Index l Ω)
-    {K J : generalAlgebraicallyClosedConstructibleCategory l Ω Z}
-    (hK : K.stage ≤ L) (hJ : J.stage ≤ L)
-    (v : K.toStage hK ⟶ J.toStage hJ) :
-    (commonStagePullbackRationalComposition l Ω f g L K hK).hom ≫
-        (rationalDerivedPullback l
-          (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f).map
-          ((rationalDerivedPullback l
-            (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) g).map v) =
-      (rationalDerivedPullback l
-        (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) (f ≫ g)).map v ≫
-        (commonStagePullbackRationalComposition l Ω f g L J hJ).hom := by
-  have hc (M : generalAlgebraicallyClosedConstructibleCategory l Ω Z) (hM : M.stage ≤ L) :
-      HEq (commonStagePullbackRationalComposition l Ω f g L M hM).hom
-        ((sfRationalConstructibleLocalization l
-          (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) X).map
-          (((integralPullbackComposition l
-            (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L)).choose f g).hom.app
-            (M.toStage hM).obj)) := by
-    unfold commonStagePullbackRationalComposition
-    have ha := (rationalDerivedPullback_existsUnique l
-      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) (f ≫ g)).exists.choose_spec.2.1
-      (M.toStage hM)
-    have hb := (congrArg (rationalDerivedPullback l
-      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f).obj
-      ((rationalDerivedPullback_existsUnique l
-        (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) g).exists.choose_spec.2.1
-        (M.toStage hM))).trans
-      ((rationalDerivedPullback_existsUnique l
-        (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f).exists.choose_spec.2.1
-        ((sfRationalConstructibleLocalization l
-          (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) Y).obj
-          ((constructibleIntegralPullback l
-            (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) g).obj
-            (M.toStage hM).obj)))
-    exact (conj_eqToHom_iff_heq _ _ ha hb).mp rfl
-  exact rational_naturality l
-    (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f g
-    (commonStagePullbackRationalComposition l Ω f g L K hK)
-    (commonStagePullbackRationalComposition l Ω f g L J hJ) (hc K hK) (hc J hJ) v
 
 /-- Cancellation of the inserted comparison isomorphisms in a conjugated square. -/
 private theorem stage_square_cancel {C D : Type*} [Category* C] [Category* D] (G : C ⥤ D)
@@ -260,7 +127,19 @@ theorem commonStagePullbackCompComponent_stage_square
             (commonStagePullbackComparison l Ω g Q L hQ).inv) ≫
         (commonStagePullbackComparison l Ω f
           (commonStagePullbackObject l Ω g Q) L hQ).inv) := by
-  exact stage_square_cancel _ _ _ _ _ _ _ _ _ _ _
+  exact stage_square_cancel
+    (rationalDerivedPullback l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f)
+    (commonStagePullbackComparison l Ω (f ≫ g) P L hP).hom
+    ((rationalDerivedPullback l
+        (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) (f ≫ g)).map r)
+    (commonStagePullbackComparison l Ω (f ≫ g) Q L hQ)
+    (commonStagePullbackRationalComposition l Ω f g L P hP).hom
+    (commonStagePullbackRationalComposition l Ω f g L Q hQ).hom
+    (commonStagePullbackComparison l Ω g P L hP)
+    (commonStagePullbackComparison l Ω g Q L hQ)
+    (commonStagePullbackComparison l Ω f (commonStagePullbackObject l Ω g P) L hP)
+    (commonStagePullbackComparison l Ω f (commonStagePullbackObject l Ω g Q) L hQ)
+    ((rationalDerivedPullback l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) g).map r)
     (commonStagePullbackRationalComposition_naturality l Ω f g L hP hQ r)
 
 /-- The selected common-stage component is represented at every larger coefficient stage.
@@ -270,14 +149,14 @@ This is the scalar-extension transport of the chosen integral compositor; it is 
 finite-stage calculation used by the naturality proof.
 Proof: by the object representation both sides are arrows of the pair category between the
 same literal objects. The left side is represented at `P.stage` by the localized integral
-compositor at `P.stage`. Enlarging that representative to `L` applies the coefficient
-transition `P.stage ≤ L`, conjugated by the recorded stage-transition identifications.
-The scalar-extension compatibility of integral pullback (pullback identities and scalar
-extension) carries the `P.stage` compositor to the `L` compositor conjugated by the rational
-pullback scalar comparisons of `f ≫ g`, `f` and `g`; the compositor is pinned by its finite
-reductions, which are jointly faithful, so the two compositors agree. These comparisons,
-with the transition identifications, are exactly the three `commonStagePullbackComparison`
-factors, and the literal equality transports cancel by proof irrelevance. -/
+compositor at `P.stage`, i.e. by the fixed-stage rational compositor. Enlarging that
+representative to `L` applies the coefficient transition `P.stage ≤ L`
+(StageSystem.ι_map_eq). The recorded transitions are the rational scalar extensions, and
+rationalPullbackComposition_scalar_transport (from integralPullbackComposition_scalar: the
+compositor is pinned by its system-level reduction, on which scalar extension acts
+compatibly) carries the `P.stage` compositor to the `L` compositor conjugated by exactly the
+three `commonStagePullbackComparison` factors; the literal equality transports cancel by
+proof irrelevance. -/
 theorem commonStagePullbackCompComponent_stage_representation
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -297,6 +176,68 @@ theorem commonStagePullbackCompComponent_stage_representation
             ((commonStagePullbackComparison l Ω g P L hP).inv) ≫
           (commonStagePullbackComparison l Ω f
             (commonStagePullbackObject l Ω g P) L hP).inv)) := by
-  sorry
+  have h0 := commonStagePullbackCompComponent_heq l Ω f g P
+  have hw := rationalPullbackCompositionIso_heq l
+    (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) f g P.obj
+  have eA : (sfRationalConstructibleLocalization l
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) X).obj
+        ((constructibleIntegralPullback l _ (f ≫ g)).obj P.obj.obj) =
+      (rationalDerivedPullback l
+        (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) (f ≫ g)).obj P.obj :=
+    ((rationalDerivedPullback_existsUnique l
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) (f ≫ g)).exists.choose_spec.2.1
+        P.obj).symm
+  have eB : (sfRationalConstructibleLocalization l
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) X).obj
+        ((constructibleIntegralPullback l _ f).obj
+          ((constructibleIntegralPullback l _ g).obj P.obj.obj)) =
+      (rationalDerivedPullback l
+        (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) f).obj
+          ((rationalDerivedPullback l
+            (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) g).obj P.obj) :=
+    ((congrArg (rationalDerivedPullback l
+        (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) f).obj
+      ((rationalDerivedPullback_existsUnique l
+        (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) g).exists.choose_spec.2.1
+          P.obj)).trans
+      ((rationalDerivedPullback_existsUnique l
+        (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) f).exists.choose_spec.2.1
+        ((sfRationalConstructibleLocalization l _ Y).obj
+          ((constructibleIntegralPullback l _ g).obj P.obj.obj)))).symm
+  have h1 := normalization_map_heq
+    (GeneralAlgebraicallyClosedCoefficients.inclusion (l := l) (Ω := Ω) (Y := X) P.stage)
+    eA eB hw.symm
+  refine h0.trans (h1.trans (heq_of_eq ?_))
+  have eX : (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω X).T hP =
+      GeneralAlgebraicallyClosedCoefficients.transition l Ω X P.stage L hP := by
+    simpa only [GeneralAlgebraicallyClosedCoefficients.stageSystem] using
+      (GeneralAlgebraicallyClosedCoefficients.stageSystem_existsUnique l Ω X).exists.choose_spec.1
+        P.stage L hP
+  have eY : (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω Y).T hP =
+      GeneralAlgebraicallyClosedCoefficients.transition l Ω Y P.stage L hP := by
+    simpa only [GeneralAlgebraicallyClosedCoefficients.stageSystem] using
+      (GeneralAlgebraicallyClosedCoefficients.stageSystem_existsUnique l Ω Y).exists.choose_spec.1
+        P.stage L hP
+  have eZ : (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω Z).T hP =
+      GeneralAlgebraicallyClosedCoefficients.transition l Ω Z P.stage L hP := by
+    simpa only [GeneralAlgebraicallyClosedCoefficients.stageSystem] using
+      (GeneralAlgebraicallyClosedCoefficients.stageSystem_existsUnique l Ω Z).exists.choose_spec.1
+        P.stage L hP
+  have key := rationalPullbackComposition_scalar_transport l
+    (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage)
+    (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L)
+    (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω P.stage L hP) f g
+    _ _ _ eX eY eZ P.obj
+  refine (StageSystem.ι_map_eq hP _).trans ?_
+  have eR : commonStagePullbackRationalComposition l Ω f g L P hP =
+      rationalPullbackCompositionIso l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f g
+        (P.toStage hP) := by
+    unfold commonStagePullbackRationalComposition rationalPullbackCompositionIso
+    rfl
+  rw [eR]
+  unfold commonStagePullbackComparison
+    operationStageTransitionIso GeneralAlgebraicallyClosedCoefficients.ofHom
+  exact congrArg (StageSystem.PairCategory.mkHom (X := commonStagePullbackObject l Ω (f ≫ g) P)
+      (Y := commonStagePullbackObject l Ω f (commonStagePullbackObject l Ω g P)) L hP hP) key
 
 end WeilConjectures

@@ -63,7 +63,8 @@ private theorem single_iso_id
       DerivedCategory.Q.map ((CochainComplex.singleFunctor C 0).map (e.hom.app X)) = _
   rw [← Functor.map_comp, ← Functor.map_comp]
   congr 2
-  ext i
+  apply HomologicalComplex.hom_ext
+  intro i
   by_cases hi : i = 0
   · subst i
     simp only [CochainComplex.singleFunctor, CochainComplex.singleFunctors, Functor.comp_obj,

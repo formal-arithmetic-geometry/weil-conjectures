@@ -105,7 +105,7 @@ lemma span_range_restrict_basis [F.IsQuasicoherent] {c : ℕ} (W U : X.affineOpe
   refine eq_top_iff.2 fun x hx ↦ ?_
   clear hx
   obtain ⟨t, rfl⟩ := hc.2 x
-  induction t with
+  induction t using TensorProduct.inductionOn with
   | tmul m r =>
     rw [ht m r]
     refine Submodule.smul_mem _ r ?_

@@ -112,7 +112,7 @@ lemma mapDerivedCategoryHomologyFunctorIso_comp_hom_app (F : C ⥤ D) (G : D ⥤
     [F.Additive] [G.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G] (n : ℤ) (K : DerivedCategory C) :
     ((F ⋙ G).mapDerivedCategoryHomologyFunctorIso n).hom.app K ≫
-        (DerivedCategory.homologyFunctor E n).map ((mapDerivedCategoryCompIso F G).hom.app K) =
+        (DerivedCategory.homologyFunctor E n).map ((mapDerivedCategoryCompIso F G).inv.app K) =
       G.map ((F.mapDerivedCategoryHomologyFunctorIso n).hom.app K) ≫
         (G.mapDerivedCategoryHomologyFunctorIso n).hom.app (F.mapDerivedCategory.obj K) := by
   have h : ((F ⋙ G).mapDerivedCategoryHomologyFunctorIso n).hom ≫

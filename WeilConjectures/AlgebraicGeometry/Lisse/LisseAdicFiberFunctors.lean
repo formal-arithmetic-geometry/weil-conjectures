@@ -103,9 +103,9 @@ private lemma rationalFiberMap_comp (F G H : LisseRationalSheaf l E Y)
     (f : F ⟶ G) (g : G ⟶ H) :
     rationalFiberMap l E Y y F H ((lisseRationalComposition l E Y).comp F G H f g) =
       (rationalFiberMap l E Y y G H g).comp (rationalFiberMap l E Y y F G f) := by
-  induction f with
+  induction f using TensorProduct.inductionOn with
   | tmul a f =>
-    induction g with
+    induction g using TensorProduct.inductionOn with
     | tmul b g =>
       rw [(lisseRationalComposition l E Y).comp_tmul, rationalFiberMap_tmul,
         rationalFiberMap_tmul, rationalFiberMap_tmul, Functor.map_comp]

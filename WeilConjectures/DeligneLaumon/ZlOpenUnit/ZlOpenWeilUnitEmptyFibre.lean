@@ -185,7 +185,7 @@ private theorem tensor_natural {R : Type*} [CommRing R] {p : R}
       e ⟨K⟩ ≫ G.map (b ⊗ₜ[R] a) = F.map (b ⊗ₜ[R] a) ≫ e ⟨L⟩)
     (K L : ScalarLocalization R C p) (v : K ⟶ L) :
     e K ≫ G.map v = F.map v ≫ e L := by
-  induction v with
+  induction v using TensorProduct.inductionOn with
   | tmul b a => exact he K.obj L.obj a b
   | add a b ha hb =>
     rw [F.map_add, G.map_add, Preadditive.comp_add, Preadditive.add_comp, ha, hb]

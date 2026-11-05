@@ -117,7 +117,7 @@ lemma preimage_comp_val {c c' c'' : Nbhd y} (g : c'' ⟶ c') (g' : c' ⟶ c)
     (V : (pullback c.1.hom f).Opens) :
     (f.Etale.map (g ≫ g').val).left ⁻¹ᵁ V =
       (f.Etale.map g.val).left ⁻¹ᵁ ((f.Etale.map g'.val).left ⁻¹ᵁ V) := by
-  rw [CategoryOfElements.comp_val, CategoryTheory.Functor.map_comp,
+  rw [Functor.Elements.Hom.val, Functor.Elements.comp_hom, CategoryTheory.Functor.map_comp,
     MorphismProperty.Comma.comp_left]
   rfl
 

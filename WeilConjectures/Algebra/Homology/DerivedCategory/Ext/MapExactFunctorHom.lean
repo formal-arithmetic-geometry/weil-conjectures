@@ -61,6 +61,6 @@ theorem mapExactFunctor_conj_hom {X Y : C} {X' Y' : D} (αX : F.obj X ≅ X') (�
     ShiftedHom.mk₀_comp, hεX', hεY, ShiftedHom.map]
   simp only [Functor.map_comp, Category.assoc,
     NatTrans.shift_app_comm_assoc θ.hom (n : ℤ)]
-  rw [θ.hom.naturality_assoc, Iso.inv_hom_id_app_assoc]
+  rw [θ.hom.naturality_assoc, Iso.hom_inv_id_app_assoc]
 
 end CategoryTheory.Abelian.Ext

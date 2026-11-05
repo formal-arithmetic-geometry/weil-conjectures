@@ -329,7 +329,7 @@ private theorem local_top_epi [J.HasIsos] [J.IsStableUnderComposition]
       dsimp only [α]
       rw [Functor.map_comp, Functor.map_comp]
       infer_instance
-    let ecomp := ((Functor.mapDerivedCategoryCompIso F G).symm ≪≫
+    let ecomp := (Functor.mapDerivedCategoryCompIso F G ≪≫
       Functor.mapDerivedCategoryNatIso
         (J.toGrothendieck.overMapPullbackComp (ModuleCat.{u} B) (g t) (f i))).app K
     refine ⟨r, α ≫ ecomp.hom, ?_⟩

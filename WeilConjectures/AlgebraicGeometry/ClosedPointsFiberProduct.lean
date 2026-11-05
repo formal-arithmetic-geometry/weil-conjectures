@@ -66,8 +66,8 @@ theorem Scheme.Pullback.isClosed_singleton_iff {K : Type u} [Field K] {X Y : Sch
     IsClosed {z} ↔ IsClosed {pullback.fst f g z} ∧ IsClosed {pullback.snd f g z} := by
   have : JacobsonSpace X := LocallyOfFiniteType.jacobsonSpace f
   have : JacobsonSpace Y := LocallyOfFiniteType.jacobsonSpace g
-  refine ⟨fun hz ↦ ⟨(pullback.fst f g).closePoints_subset_preimage_closedPoints hz,
-    (pullback.snd f g).closePoints_subset_preimage_closedPoints hz⟩, fun ⟨hx, hy⟩ ↦ ?_⟩
+  refine ⟨fun hz ↦ ⟨(pullback.fst f g).closedPoints_subset_preimage_closedPoints hz,
+    (pullback.snd f g).closedPoints_subset_preimage_closedPoints hz⟩, fun ⟨hx, hy⟩ ↦ ?_⟩
   have := isClosed_singleton_iff_isClosedImmersion.mp hx
   have := isClosed_singleton_iff_isClosedImmersion.mp hy
   set ix := X.fromSpecResidueField (pullback.fst f g z)

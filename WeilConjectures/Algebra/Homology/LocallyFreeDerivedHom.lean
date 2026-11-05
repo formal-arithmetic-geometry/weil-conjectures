@@ -145,7 +145,7 @@ private theorem abstract_singleHomologyEquiv_cycle
       ((CochainComplex.HomComplex.Cochain.fromSingleEquiv (zero_add (0 : ℤ))).symm
         (S.iCycles 0 z)) = _
     rw [AddEquiv.apply_symm_apply]
-    simpa [CochainComplex.HomComplex.Cochain.fromSingleEquiv] using hf.symm
+    simpa [S, CochainComplex.HomComplex.Cochain.fromSingleEquiv] using hf.symm
   have hπ : HomologicalComplex.homologyMap E.inv 0 (S.homologyπ 0 z) =
       (((CochainComplex.singleFunctor A 0).obj P).HomComplex K).homologyπ 0 y :=
     ConcreteCategory.congr_hom (HomologicalComplex.homologyπ_naturality E.inv 0) z

@@ -125,7 +125,7 @@ private theorem powers_from_generators
           Algebra.algebraMap_eq_smul_one]
       rw [hm, mul_pow]
   intro x
-  induction x with
+  induction x using TensorProduct.inductionOn with
   | add x y hx hy =>
     obtain ⟨b, hb⟩ := hx
     obtain ⟨c, hc⟩ := hy

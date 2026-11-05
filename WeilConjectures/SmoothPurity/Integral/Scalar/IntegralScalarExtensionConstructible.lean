@@ -330,7 +330,7 @@ private theorem tensorPresentation_hom_ext
   apply ModuleCat.hom_ext
   apply LinearMap.ext
   intro z
-  induction z with
+  induction z using TensorProduct.inductionOn with
   | tmul a x => exact h U a x
   | add z z' hz hz' => simp only [map_add, hz, hz']
 

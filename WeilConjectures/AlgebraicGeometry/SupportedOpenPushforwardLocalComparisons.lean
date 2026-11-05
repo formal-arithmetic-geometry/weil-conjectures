@@ -120,7 +120,7 @@ private theorem direct_image_support
       ((Functor.mapDerivedCategoryCompIso
         (SheafOfModules.overFunctor.{u} (moduleRings Y.toRingedSpace) V)
         (Equivalence.functor (C := SheafOfModules.{u}
-          ((moduleRings Y.toRingedSpace).over V)) (D := D) e)).app K)
+          ((moduleRings Y.toRingedSpace).over V)) (D := D) e)).symm.app K)
   obtain ⟨bc⟩ := schemeDerivedDirectImage_openRestriction f O
   have hout : IsZero ((schemeOpenRestriction X O).mapDerivedCategory.obj
       ((schemeDerivedDirectImage f).obj K)) := by
@@ -156,7 +156,7 @@ private theorem over_restriction_map_isIso
   let e : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U) ≌
       SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace) := Modules.overEquiv U
   let : IsIso (e.functor.mapDerivedCategory.map (r.mapDerivedCategory.map f)) :=
-    (NatIso.isIso_map_iff (Functor.mapDerivedCategoryCompIso r e.functor) f).mp hf
+    (NatIso.isIso_map_iff (Functor.mapDerivedCategoryCompIso r e.functor) f).mpr hf
   change IsIso (r.mapDerivedCategory.map f)
   exact isIso_of_reflects_iso _ e.functor.mapDerivedCategory
 

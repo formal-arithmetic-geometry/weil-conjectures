@@ -162,7 +162,7 @@ theorem exists_popescu_polynomial_kernel_parameters
     rw [← IsLocalization.AtPrime.map_eq_maximalIdeal p A, Ideal.map_map, hψ₀]
     exact hideal₀.symm.trans (IsLocalization.AtPrime.map_eq_maximalIdeal q.asIdeal L)
   have : IsLocalHom ψ₀ :=
-    ((IsLocalRing.local_hom_TFAE ψ₀).out 2 0).mp (le_of_eq hmap)
+    ((IsLocalRing.local_hom_TFAE ψ₀).out 3 1).mp (le_of_eq hmap)
   let : Algebra A L := ψ₀.toAlgebra
   have : Module.Flat A L := hflat₀
   have : (IsLocalRing.maximalIdeal L).LiesOver (IsLocalRing.maximalIdeal A) :=

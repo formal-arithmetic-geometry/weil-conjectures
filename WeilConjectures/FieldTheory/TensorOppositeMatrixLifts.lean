@@ -106,16 +106,16 @@ private def tensorBaseChangeEquiv (K S A B : Type*) [CommRing K] [CommRing S]
       TensorProduct.AlgebraTensorModule.distribBaseChange_tmul])
     (by
       intro x y
-      induction x with
+      induction x using TensorProduct.inductionOn with
       | add x y hx hy => simp [hx, hy, add_mul]
       | tmul s x =>
-        induction x with
+        induction x using TensorProduct.inductionOn with
         | add x y hx hy => simp [hx, hy, TensorProduct.tmul_add, add_mul]
         | tmul a b =>
-          induction y with
+          induction y using TensorProduct.inductionOn with
           | add x y hx hy => simp [hx, hy, mul_add]
           | tmul t y =>
-            induction y with
+            induction y using TensorProduct.inductionOn with
             | add x y hx hy =>
                 simp only [TensorProduct.tmul_add, mul_add, map_add, hx, hy]
             | tmul c d =>
@@ -169,7 +169,7 @@ theorem exists_tensor_opposite_matrix_conjugation (K : Type u) [Field K]
         (Matrix.reindexAlgEquiv S S finProdFinEquiv)))
   refine ⟨e, ?_⟩
   intro g v
-  induction v with
+  induction v using TensorProduct.inductionOn with
   | add x y hx hy =>
     simp only [TensorProduct.tmul_add, map_add, Matrix.map_add g g.map_add,
       Matrix.mul_add, Matrix.add_mul, hx, hy]

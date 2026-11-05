@@ -78,7 +78,7 @@ private theorem singletonCoface_projection (X : Scheme.{u}) (U : X.Etale)
       (Pi.π (fun _ : Fin (n + 1) → Fin 1 ↦
         G.obj (op (∏ᶜ (fun _ : Fin (n + 1) ↦ V)))) (fun _ ↦ 0) s) := by
   dsimp only [CosimplicialObject.δ, FormalCoproduct.cosimplicialObjectFunctor_obj_map]
-  erw [Pi.lift_π_apply]
+  erw [Pi.lift_comp_π_apply]
   rfl
 
 /-- Raw categorical coface projection, before evaluating lifted sections.

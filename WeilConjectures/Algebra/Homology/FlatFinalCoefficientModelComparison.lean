@@ -49,7 +49,7 @@ private theorem tensorAdditiveLift
   refine ⟨ofHom { toFun := f, map_add' := f.map_add, map_smul' := ?_ }, ?_⟩
   · intro e x
     change f (e • x) = e • f x
-    induction e with
+    induction e using TensorProduct.inductionOn with
     | tmul a b =>
       have he : (a ⊗ₜ[R] b : A ⊗[R] B) =
           (Algebra.TensorProduct.includeLeft (S := R) a : A ⊗[R] B) *

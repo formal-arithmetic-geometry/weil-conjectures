@@ -8,6 +8,8 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategoryMonoidal
 public import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # The ordinary pullback/tensor comparison on representatives
 
@@ -56,7 +58,7 @@ variable {C : Type u₁} [Category.{u + 1} C] [Abelian C] [IsGrothendieckAbelian
 omit [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
   [F.PreservesFlat] [F.IsLeftAdjoint] [F.Monoidal] in
 /-- The tensorator of the localization functor `Q` is the one of `Qh`. -/
-lemma projection_μ_Q_eq_μ_Qh (P T : CochainComplex C ℤ) : LaxMonoidal.μ Q P T =
+private lemma projection_μ_Q_eq_μ_Qh (P T : CochainComplex C ℤ) : LaxMonoidal.μ Q P T =
     LaxMonoidal.μ Qh ((HomotopyCategory.quotient C (.up ℤ)).obj P)
       ((HomotopyCategory.quotient C (.up ℤ)).obj T) := by
   have : LaxMonoidal.μ Q P T =
@@ -72,7 +74,7 @@ omit [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCat
   [F.PreservesFlat] [F.IsLeftAdjoint] [F.Monoidal] in
 /-- On complexes, the factorization isomorphism of `D(F)` through the homotopy category is
 the one through cochain complexes. -/
-lemma projection_mapDerivedCategoryFactorsh_hom_app_quotient_obj (P : CochainComplex C ℤ) :
+private lemma projection_mapDerivedCategoryFactorsh_hom_app_quotient_obj (P : CochainComplex C ℤ) :
     F.mapDerivedCategoryFactorsh.hom.app ((HomotopyCategory.quotient C (.up ℤ)).obj P) =
       F.mapDerivedCategoryFactors.hom.app P := by
   rw [mapDerivedCategoryFactorsh_hom_app]

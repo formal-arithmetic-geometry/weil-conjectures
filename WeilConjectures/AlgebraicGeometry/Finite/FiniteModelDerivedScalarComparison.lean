@@ -64,7 +64,7 @@ private def liftedTensorComparison {A B : Type t} [CommRing A] [CommRing B]
   apply LinearMap.ext
   intro x
   rcases x with ⟨x⟩
-  induction x with
+  induction x using TensorProduct.inductionOn with
   | tmul b m => rfl
   | add x y hx hy =>
     have h : (ULift.up (x + y) : ULift.{t + 1} _) = ULift.up x + ULift.up y := rfl

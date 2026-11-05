@@ -84,6 +84,10 @@ theorem isKFlatIndependentCoefficients_of_boundedAbove_flatOnSite
   let := monoidalCategory R
   let := symmetricCategory R
   let := tensorPreadditive R
+  have (I : Type w) : HasColimitsOfShape (Discrete I)
+      (PresheafOfModules.{w}
+        ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R).obj) :=
+    PresheafOfModules.hasColimitsOfShape _ _
   have (M : 𝒜) : PreservesColimitsOfSize.{0, 0} (tensorLeft M) := by
     have := tensorLeft_preservesColimits_independentCoefficients R M
     exact preservesColimitsOfSize_shrink (tensorLeft M)

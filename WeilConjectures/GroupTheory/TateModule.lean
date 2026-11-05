@@ -345,7 +345,7 @@ variable {ℓ M} in
 with `t ∈ T_ℓ M`. -/
 theorem exists_eq_inv_pow_tmul (v : ℚ_[ℓ] ⊗[ℤ_[ℓ]] tateModule ℓ M) :
     ∃ (b : ℕ) (t : tateModule ℓ M), v = ((ℓ : ℚ_[ℓ]) ^ b)⁻¹ ⊗ₜ[ℤ_[ℓ]] t := by
-  induction v with
+  induction v using TensorProduct.inductionOn with
   | tmul q t =>
     obtain ⟨b, z, rfl⟩ := Padic.exists_eq_inv_pow_mul q
     refine ⟨b, z • t, ?_⟩

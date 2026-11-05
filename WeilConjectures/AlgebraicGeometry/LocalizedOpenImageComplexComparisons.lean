@@ -83,7 +83,7 @@ private theorem localized_comparison_unit (X : Scheme.{u}) (U : X.Opens)
       schemeDerivedCategory U.toScheme := F.mapDerivedCategory
   exact comparison_of_fullyFaithful FD
     (Functor.mapDerivedCategoryCompIso
-      (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) F) a G adj _ _ _
+      (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) F).symm a G adj _ _ _
     (schemeOpenModuleImageComplexComparison X U I a)
     (schemeOpenModuleImageComplexComparison_unit X U I a)
 
@@ -249,7 +249,7 @@ theorem schemeOpenModuleImageComplex_localized_comparisons
   let : PreservesFiniteLimits (A ⋙ B) := comp_preservesFiniteLimits _ _
   let : PreservesFiniteColimits (A ⋙ B) := comp_preservesFiniteColimits _ _
   let α : R T ⋙ B.mapDerivedCategory ≅ R W :=
-    (Functor.mapDerivedCategoryCompIso A B).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso A B) ≪≫
       Functor.mapDerivedCategoryNatIso (SheafOfModules.overFunctorMap.{u}
         (moduleRings X.toRingedSpace) i)
   let β := ((adj T).homEquiv ((G T).obj ((R T).obj E)) ((R T).obj E)).symm (𝟙 _)

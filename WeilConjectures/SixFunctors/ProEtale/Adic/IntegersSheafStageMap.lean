@@ -141,7 +141,7 @@ lemma stageMap_rTensor {F F' : FiniteIntermediateFieldOver l E.1} (hFF' : F.1.1 
     stageMap Φ E θ hθ F' ((Subalgebra.inclusion hs).toLinearMap.rTensor A τ) =
       Φ.map ((sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
         (padicIntegersSheafMapOfLE T l hFF')) (stageMap Φ E θ hθ F τ) := by
-  induction τ with
+  induction τ using TensorProduct.inductionOn with
   | add τ τ' hτ hτ' => simp only [map_add, hτ, hτ']
   | tmul o a =>
     change Φ.map (padicIntegersSheafMulOfLE T (E := E) (F := F'.1) F'.2

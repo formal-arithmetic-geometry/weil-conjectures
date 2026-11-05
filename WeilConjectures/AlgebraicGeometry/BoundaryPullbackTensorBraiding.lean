@@ -35,7 +35,7 @@ private theorem tensor_hom_ext {X : Scheme.{u}} {A B C : X.Modules}
   apply PresheafOfModules.hom_ext
   intro U
   ext z
-  induction z with
+  induction z using TensorProduct.inductionOn with
   | tmul s t => exact h U.unop s t
   | add z w hz hw => simp only [map_add, hz, hw]
 

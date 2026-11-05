@@ -137,13 +137,13 @@ private noncomputable def χ₃ (p : (L ≃ₐ[K] L) × (L ≃ₐ[K] L)) :
   lift (AlgHom.id L L) (φ₂ p.1 p.2) fun _ _ ↦ .all _ _
 
 private lemma χ₂_apply (b : L ≃ₐ[K] L) (x : L ⊗[K] L) : χ₂ b x = φ₂ 1 b x := by
-  induction x with
+  induction x using TensorProduct.inductionOn with
   | tmul => simp [χ₂, φ₂]
   | add x y hx hy => simp only [map_add, hx, hy]
 
 private lemma χ₃_apply (p : (L ≃ₐ[K] L) × (L ≃ₐ[K] L)) (x : L ⊗[K] (L ⊗[K] L)) :
     χ₃ p x = φ₃ 1 p.1 p.2 x := by
-  induction x with
+  induction x using TensorProduct.inductionOn with
   | tmul => simp [χ₃, φ₃]
   | add x y hx hy => simp only [map_add, hx, hy]
 

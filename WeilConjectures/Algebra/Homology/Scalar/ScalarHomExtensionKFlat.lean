@@ -55,6 +55,10 @@ private theorem kflatOfScalarExtensionIdentification
     CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := S)
       ((scalarComplex E inferInstance).obj P) := by
   classical
+  let instPresheafCoproducts (A : Sheaf J CommRingCat.{r}) (I : Type r) :
+      HasColimitsOfShape (Discrete I)
+        (PresheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A).obj) :=
+    PresheafOfModules.hasColimitsOfShape _ _
   let := monoidalCategory R
   let := monoidalCategory S
   let U := scalarRestriction a

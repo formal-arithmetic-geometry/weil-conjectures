@@ -1334,6 +1334,9 @@ private theorem scalarFiniteCoordinates
   classical
   obtain ⟨d, ⟨e⟩⟩ := hfree
   obtain ⟨i⟩ := restrictedScalarTensorIso a D
+  have (I : Type r) : HasColimitsOfShape (Discrete I) (PresheafOfModules.{r}
+      (derivedChangeRingIndependentCoefficients J O).obj) :=
+    PresheafOfModules.hasColimitsOfShape _ _
   let j := e.symm ≪≫ Sigma.reindex (Equiv.ulift : ULift.{r} (Fin d) ≃ Fin d)
     (fun _ ↦ unit (derivedChangeRingIndependentCoefficients J O))
   exact ⟨d, ⟨i ≪≫ (tensoringLeft _).mapIso j ≪≫
@@ -1386,6 +1389,9 @@ private theorem scalarFiniteExact
     (derivedChangeRingIndependentCoefficients J O) ⥤ _) ⋙ lim
   let : PreservesLimitsOfSize.{0, 0} P := inferInstance
   let : PreservesFiniteColimits P := by
+    have (I : Type r) : HasColimitsOfShape (Discrete I) (PresheafOfModules.{r}
+        (derivedChangeRingIndependentCoefficients J O).obj) :=
+      PresheafOfModules.hasColimitsOfShape _ _
     let : PreservesFiniteColimits (Functor.const (Discrete (Fin d)) ⋙
         (colim : (Discrete (Fin d) ⥤ ringedSiteModules.{r}
           (derivedChangeRingIndependentCoefficients J O)) ⥤ _)) := inferInstance

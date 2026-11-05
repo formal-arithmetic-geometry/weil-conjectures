@@ -244,19 +244,19 @@ private theorem rawHom_comp (p : R) (U : C × C ⥤ D)
         (tensorComp R C p Y Y' Y'' g' g) =
       tensorComp R D p _ _ _
         (rawHom p U hU X' X'' Y' Y'' f' g') (rawHom p U hU X X' Y Y' f g) := by
-  induction f with
+  induction f using TensorProduct.inductionOn with
   | add f f₁ hf hf₁ => simp only [tensorComp_add_right, rawHom_add_left,
     hf, hf₁]
   | tmul a f =>
-    induction f' with
+    induction f' using TensorProduct.inductionOn with
     | add f' f₁ hf hf₁ => simp only [tensorComp_add_left, rawHom_add_left,
       hf, hf₁]
     | tmul a' f' =>
-      induction g with
+      induction g using TensorProduct.inductionOn with
       | add g g₁ hg hg₁ => simp only [tensorComp_add_right, rawHom_add_right,
         hg, hg₁]
       | tmul b g =>
-        induction g' with
+        induction g' using TensorProduct.inductionOn with
         | add g' g₁ hg hg₁ => simp only [tensorComp_add_left,
           rawHom_add_right,
           hg, hg₁]
@@ -322,9 +322,9 @@ theorem raw_extension_existsUnique (p : R) (U : C × C ⥤ D)
     have hh (f₁ : X.1 ⟶ Y.1) (f₂ : X.2 ⟶ Y.2) :
         HEq (integralHom F hF.1 X.1 Y.1 X.2 Y.2 f₁ f₂)
           (rawHom p U hU _ _ _ _ f₁ f₂) := by
-      induction f₁ with
+      induction f₁ using TensorProduct.inductionOn with
       | tmul a f₁ =>
-        induction f₂ with
+        induction f₂ using TensorProduct.inductionOn with
         | tmul b f₂ =>
           rw [integralHom_apply, rawHom_tmul]
           exact hF.2.2 _ _ _ _ f₁ f₂ a b
@@ -1047,13 +1047,13 @@ private theorem rationalComparison_naturality
           (ScalarLocalization.extensionHom (π i) (π j) (φ h) (unitImage h)
             (S.T h) (semi h) Y Y' g))
         (1 ⊗ₜ[O j] (U.comparison h).hom.app (X, Y)) := by
-  induction f with
+  induction f using TensorProduct.inductionOn with
   | add f f' hf hf' =>
     simp only [tensorComp_add_left, tensorComp_add_right, rawHom_add_left,
       AddMonoidHom.map_add]
     exact congrArg₂ (· + ·) hf hf'
   | tmul a f =>
-    induction g with
+    induction g using TensorProduct.inductionOn with
     | add g g' hg hg' =>
       simp only [tensorComp_add_left, tensorComp_add_right, rawHom_add_right,
         AddMonoidHom.map_add]

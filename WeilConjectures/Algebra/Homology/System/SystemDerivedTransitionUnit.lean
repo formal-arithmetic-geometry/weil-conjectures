@@ -84,7 +84,6 @@ theorem systemDerivedTransition_identity (n : ℕ)
         (δ.inv.app _ ≫ R.mapDerivedCategoryFactors.hom.app _)
     erw [Functor.exactDerivedRestrictionUnit_inv_fac R η]
     rw [hs]
-    rfl
   have hh := congrArg (fun τ ↦ τ.app M) he
   dsimp only [σ, NatTrans.comp_app, Functor.rightUnitor_inv_app,
     Functor.whiskerLeft_app] at hh

@@ -51,6 +51,10 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
     [J.WEqualsLocallyBijective AddCommGrpCat.{r}]
     (R : Sheaf J CommRingCat.{r})
 
+local instance (I : Type r) : HasColimitsOfShape (Discrete I)
+    (PresheafOfModules.{r} (SheafOfModules.derivedChangeRingIndependentCoefficients J R).obj) :=
+  PresheafOfModules.hasColimitsOfShape _ _
+
 attribute [local instance] SheafOfModules.isMonoidal_W_independentCoefficients
 attribute [local instance] SheafOfModules.monoidalCategory
 private theorem tensorUnit_eq :

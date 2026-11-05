@@ -77,6 +77,7 @@ private noncomputable def constantPresheaf {C : Type u} [Category.{v} C]
   obj _ := M
   map _ := 𝟙 M
 
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 private noncomputable def constantComparison {C : Type u} [Category.{v} C]
     (J : GrothendieckTopology C) (B : Type (max u v)) [CommRing B]
     (R : Sheaf J RingCat.{max u v})
@@ -91,6 +92,7 @@ private noncomputable def constantComparison {C : Type u} [Category.{v} C]
     { app U := η.app U
       naturality _ _ f := by ext x; exact ConcreteCategory.congr_hom (η.naturality f) x }
 
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 private theorem constantComparison_isIso {C : Type u} [Category.{v} C]
     (J : GrothendieckTopology C) (B : Type (max u v)) [CommRing B]
     (R : Sheaf J RingCat.{max u v})
@@ -214,6 +216,7 @@ attribute [local instance] asSmallDense
 attribute [local instance] asSmallDownEquivalence asSmallUpEquivalence
   asSmallDense asSmallUpDense
 
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 private theorem fixedModels_asSmall {C : Type u} [Category.{v} C]
     (J : GrothendieckTopology C) (B : Type (max u v)) [CommRing B]
     (F : Sheaf J (ModuleCat.{max u v} B)) :

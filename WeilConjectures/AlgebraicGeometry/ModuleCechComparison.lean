@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
+public import Mathlib.Algebra.Category.ModuleCat.Limits
 public import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
 public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 import WeilConjectures.AlgebraicGeometry.InjectiveModuleCechAugmentation
@@ -46,7 +47,11 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-universe u
+universe u v
+
+local instance (R : Type u) [Ring R] (J : Type v) [Small.{u} J] :
+    HasLimitsOfShape (Discrete J) (ModuleCat.{u} R) :=
+  ModuleCat.hasLimitsOfShape
 
 /-- The Čech complex of the presheaf of `Γ(X, ⊤)`-modules underlying an `O_X`-module is
 additive in the module. Source: Stacks 01EQ (blueprint: def-sc-module-cech-comparison).

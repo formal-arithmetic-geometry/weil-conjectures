@@ -321,6 +321,7 @@ lemma commShiftTensorLeft_eq (P : CochainComplex.KFlat C) :
   rw [eq]
   infer_instance
 
+set_option maxHeartbeats 400000 in
 open TensorCommShift₂ in
 /-- On `Qh.obj P` for a K-flat complex `P`, the commutation of `- ⊗ᴸ K` with the shifts given
 by `DerivedCategory.commShift₂CurriedTensor` is the one of `commShiftTensorRightQhObj`, which is

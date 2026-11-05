@@ -1001,7 +1001,7 @@ private theorem level_hom_ext (X : Scheme.{u})
   apply sheafify_hom_ext (ProEt.topology X) _ _
     ((SheafOfModules.toSheaf (reductionModuleRing X R)).obj N).property
   ext U t
-  induction t with
+  induction t using TensorProduct.inductionOn with
   | add t t' ht ht' => simp only [map_add, ht, ht']
   | tmul s x =>
       have ht := h U s x

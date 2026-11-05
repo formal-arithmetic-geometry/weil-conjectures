@@ -160,7 +160,7 @@ theorem exists_noetherian_model_flat_at_prime
     let eLiftS : S' ⊗[B.obj i] D.obj i ≃ₗ[S] S ⊗[B.obj i] D.obj i :=
       { eLift.toAddEquiv with
         map_smul' := fun s x ↦ by
-          induction x with
+          induction x using TensorProduct.inductionOn with
           | add x y hx hy =>
               change eLift (s • (x + y)) = s • eLift (x + y)
               change eLift (s • x) = s • eLift x at hx

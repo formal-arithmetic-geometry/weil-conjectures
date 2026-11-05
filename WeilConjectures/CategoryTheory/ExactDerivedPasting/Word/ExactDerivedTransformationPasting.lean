@@ -77,7 +77,7 @@ def Word.comparison {i j : I} (P : Word C i j) :
   | .nil i => Functor.mapDerivedCategoryIdIso (C i)
   | .edge _ => Iso.refl _
   | .comp P R =>
-      Functor.mapDerivedCategoryCompIso P.ordinary.obj R.ordinary.obj ≪≫
+      (Functor.mapDerivedCategoryCompIso P.ordinary.obj R.ordinary.obj).symm ≪≫
         Functor.isoWhiskerRight P.comparison R.ordinary.obj.mapDerivedCategory ≪≫
         Functor.isoWhiskerLeft P.derived R.comparison
 

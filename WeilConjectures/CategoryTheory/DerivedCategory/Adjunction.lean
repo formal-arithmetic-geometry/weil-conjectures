@@ -231,7 +231,7 @@ instance Adjunction.isIso_mapDerivedCategoryAdjunction_unit {f : C ⥤ D} {g : D
   -- `f.mapDerivedCategory ⋙ g.mapDerivedCategory ≅ (f ⋙ g).mapDerivedCategory ≅ 𝟭`, so
   -- `f.mapDerivedCategory` is fully faithful.
   have h := adj.mapDerivedCategoryAdjunction.fullyFaithfulLOfCompIsoId
-    ((Functor.mapDerivedCategoryCompIso f g).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso f g ≪≫
       Functor.mapDerivedCategoryNatIso (asIso adj.unit).symm ≪≫
         Functor.mapDerivedCategoryIdIso C)
   have := h.full
@@ -248,7 +248,7 @@ instance Adjunction.isIso_mapDerivedCategoryAdjunction_counit {f : C ⥤ D} {g :
   -- `g.mapDerivedCategory ⋙ f.mapDerivedCategory ≅ (g ⋙ f).mapDerivedCategory ≅ 𝟭`, so
   -- `g.mapDerivedCategory` is fully faithful.
   have h := adj.mapDerivedCategoryAdjunction.fullyFaithfulROfCompIsoId
-    ((Functor.mapDerivedCategoryCompIso g f).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso g f ≪≫
       Functor.mapDerivedCategoryNatIso (asIso adj.counit) ≪≫
         Functor.mapDerivedCategoryIdIso D)
   have := h.full

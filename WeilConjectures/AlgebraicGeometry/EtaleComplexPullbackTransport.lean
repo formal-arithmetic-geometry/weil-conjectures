@@ -120,9 +120,9 @@ noncomputable def presentationDerivedMap {X Y T : Scheme.{u}}
   (cohomology AddCommGrpCat.{u + 1} X n).map
     ((Functor.mapDerivedCategoryNatIso
       (upperStarComp AddCommGrpCat.{u + 1} f g h hh) ≪≫
-      Functor.mapDerivedCategoryCompIso
+      (Functor.mapDerivedCategoryCompIso
         (upperStar AddCommGrpCat.{u + 1} g)
-        (upperStar AddCommGrpCat.{u + 1} f)).inv.app K)
+        (upperStar AddCommGrpCat.{u + 1} f)).symm).inv.app K)
 
 set_option backward.isDefEq.respectTransparency false in
 private theorem composition_factors {X Y T : Scheme.{u}}
@@ -130,9 +130,9 @@ private theorem composition_factors {X Y T : Scheme.{u}}
     (C : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ) :
     (Functor.mapDerivedCategoryNatIso
       (upperStarComp AddCommGrpCat.{u + 1} f g h hh) ≪≫
-      Functor.mapDerivedCategoryCompIso
+      (Functor.mapDerivedCategoryCompIso
         (upperStar AddCommGrpCat.{u + 1} g)
-        (upperStar AddCommGrpCat.{u + 1} f)).inv.app (DerivedCategory.Q.obj C) ≫
+        (upperStar AddCommGrpCat.{u + 1} f)).symm).inv.app (DerivedCategory.Q.obj C) ≫
         (upperStar AddCommGrpCat.{u + 1} h).mapDerivedCategoryFactors.hom.app C =
     (upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategory.map
         ((upperStar AddCommGrpCat.{u + 1} g).mapDerivedCategoryFactors.hom.app C) ≫
@@ -141,9 +141,9 @@ private theorem composition_factors {X Y T : Scheme.{u}}
       DerivedCategory.Q.map (presentationCompIso f g h hh C).inv := by
   apply (cancel_epi ((Functor.mapDerivedCategoryNatIso
       (upperStarComp AddCommGrpCat.{u + 1} f g h hh) ≪≫
-      Functor.mapDerivedCategoryCompIso
+      (Functor.mapDerivedCategoryCompIso
         (upperStar AddCommGrpCat.{u + 1} g)
-        (upperStar AddCommGrpCat.{u + 1} f)).hom.app (DerivedCategory.Q.obj C))).mp
+        (upperStar AddCommGrpCat.{u + 1} f)).symm).hom.app (DerivedCategory.Q.obj C))).mp
   rw [Iso.hom_inv_id_app_assoc]
   simp only [Iso.trans_hom, NatTrans.comp_app, Category.assoc]
   have hc := Functor.mapDerivedCategoryCompIso_fac
@@ -253,8 +253,8 @@ theorem presentation_pullback_transport {X Y T : Scheme.{u}}
     (upperStar AddCommGrpCat.{u + 1} g).mapDerivedCategoryFactors.app C
   let d := Functor.mapDerivedCategoryNatIso
     (upperStarComp AddCommGrpCat.{u + 1} f g h hh) ≪≫
-      Functor.mapDerivedCategoryCompIso
-        (upperStar AddCommGrpCat.{u + 1} g) (upperStar AddCommGrpCat.{u + 1} f)
+      (Functor.mapDerivedCategoryCompIso
+        (upperStar AddCommGrpCat.{u + 1} g) (upperStar AddCommGrpCat.{u + 1} f)).symm
   have hd : d.inv.app K ≫
       (upperStar AddCommGrpCat.{u + 1} h).mapDerivedCategory.map q.hom ≫
       (upperStar AddCommGrpCat.{u + 1} h).mapDerivedCategoryFactors.hom.app C =

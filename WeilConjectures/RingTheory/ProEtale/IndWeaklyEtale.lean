@@ -39,7 +39,7 @@ lemma lmul'_map {C D : Type u} [CommRing C] [CommRing D] [Algebra R C]
     [Algebra R D] (α : C →ₐ[R] D) (y : C ⊗[R] C) :
     Algebra.TensorProduct.lmul' R (Algebra.TensorProduct.map α α y) =
       α (Algebra.TensorProduct.lmul' R y) := by
-  induction y with
+  induction y using TensorProduct.inductionOn with
   | tmul a b => simp [Algebra.TensorProduct.lmul'_apply_tmul]
   | add a b ha hb => simp [ha, hb]
 
@@ -64,7 +64,7 @@ theorem exists_isIdempotentElem_mul_eq_of_mem_kaehlerDifferential_ideal
   -- Every element of `S ⊗[R] S` is defined at some stage.
   have hsurj : ∀ z : S ⊗[R] S, ∃ (i : ι) (y : P.diag.obj i ⊗[R] P.diag.obj i), Φ i y = z := by
     intro z
-    induction z with
+    induction z using TensorProduct.inductionOn with
     | tmul a b =>
       obtain ⟨i, a', ha⟩ := Types.jointly_surjective_of_isColimit hc' a
       obtain ⟨j, b', hb⟩ := Types.jointly_surjective_of_isColimit hc' b
@@ -164,7 +164,7 @@ theorem Algebra.WeaklyEtale.localization_base (M : Submonoid A) [Algebra A A']
     have key : (Algebra.TensorProduct.lmul' A' (S := B)).toRingHom =
         (Algebra.TensorProduct.lmul' A (S := B)).toRingHom.comp (e : B ⊗[A'] B →+* B ⊗[A] B) := by
       refine RingHom.ext fun x ↦ ?_
-      induction x with
+      induction x using TensorProduct.inductionOn with
       | tmul a b =>
         simp only [AlgHom.toRingHom_eq_coe, RingHom.coe_comp, RingHom.coe_coe,
           Function.comp_apply, Algebra.TensorProduct.lmul'_apply_tmul]

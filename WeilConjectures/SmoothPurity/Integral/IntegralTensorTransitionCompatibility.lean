@@ -148,7 +148,7 @@ private theorem pure_local_ext
     exact (he.trans (hh _)).symm
   rw [hz]
   clear hw hz
-  induction w with
+  induction w using TensorProduct.inductionOn with
   | tmul x y => exact h (op U) (T.map i.op s) x y
   | add a b ha hb => simpa only [map_add] using congrArg₂ (· + ·) ha hb
 

@@ -407,7 +407,7 @@ lemma injective_crossι_app (x : 𝟙_ _ ⟶ X) (y : 𝟙_ _ ⟶ Y) {O : ((X ⊗
       (Module.Flat.lTensor_preserves_injective_linearMap ιL (J.injective_toModulesι_app U))
   have hcomp (w) : (Scheme.Modules.unitSectionsEquiv O).symm ((crossι X Y Z x y).app O (e w)) =
       μ w := by
-    induction w with
+    induction w using TensorProduct.inductionOn with
     | add a b ha hb => simp only [map_add, ha, hb]
     | tmul r m =>
       have h1 : (r ⊗ₜ m : Γ(((X ⊗ Y) ⊗ Z).left, O) ⊗[Γ((X ⊗ Y).left, U)] Γ(J.toModules, U)) =
@@ -547,7 +547,7 @@ lemma crossι_app_mem_map (x : 𝟙_ _ ⟶ X) (y : 𝟙_ _ ⟶ Y) {O : ((X ⊗ Y
   obtain ⟨e, he⟩ := Scheme.Modules.exists_linearEquiv_pullback_sections
     (fst (X ⊗ Y) Z).left (crossIdeal X Y x y).toModules hU hO hle
   obtain ⟨w, rfl⟩ := e.surjective a
-  induction w with
+  induction w using TensorProduct.inductionOn with
   | add a b ha hb =>
     simp only [map_add]
     exact Submodule.add_mem _ ha hb

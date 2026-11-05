@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.Algebra.Homology.DerivedInternalHom
+public import Mathlib.AlgebraicGeometry.AffineScheme
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
 import WeilConjectures.Algebra.Homology.BoundedExactTermHomQuasiIso
 import Mathlib.CategoryTheory.MorphismProperty.Retract

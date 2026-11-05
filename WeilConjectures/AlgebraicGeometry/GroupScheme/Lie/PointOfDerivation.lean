@@ -41,7 +41,7 @@ noncomputable def homOfDerivation (g : S ⟶ G.left)
     (Scheme.Modules.pullback g).obj G.hom.cotangentSheaf ⟶ Scheme.Modules.unitModule S :=
   ((Scheme.Modules.pullbackPushforwardAdjunction _).homEquiv _ _).symm
     ((PresheafOfModules.sheafificationHomEquiv (𝟙 _)).symm
-      ((PresheafOfModules.DifferentialsConstruction.isUniversal' _).desc D))
+      ((PresheafOfModulesOfCommRing.DifferentialsConstruction.isUniversal' _).desc D))
 
 omit [GrpObj G] in
 theorem omegaHom_eq_homOfDerivation (v : Scheme.dualNumbersOver S ⟶ G) :

@@ -76,7 +76,7 @@ private theorem tensorZeroEquiv_boundary_range {R : Type u} [CommRing R]
       Ideal.span (Set.range f) • (⊤ : Submodule R M) := by
   apply le_antisymm
   · rintro _ ⟨x, rfl⟩
-    induction x with
+    induction x using TensorProduct.inductionOn with
     | tmul x m =>
       change tensorZeroEquiv M r ((ExteriorAlgebra.koszulBoundary R r f 0).rTensor M
         (x ⊗ₜ[R] m)) ∈ _

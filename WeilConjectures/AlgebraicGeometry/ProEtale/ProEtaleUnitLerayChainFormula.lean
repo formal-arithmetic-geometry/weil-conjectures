@@ -212,49 +212,73 @@ private theorem unitLerayChain
       ((a.mapHomologicalComplex (.up ℤ)).unit.app I) ≫
     (NatTrans.mapHomologicalComplex e.hom (.up ℤ)).app
       ((L.mapHomologicalComplex (.up ℤ)).obj I)
-  have hfactor : L.mapDerivedCategoryFactorsh.hom.app K =
-      L.mapDerivedCategoryFactors.hom.app I := by
-    rw [Functor.mapDerivedCategoryFactorsh_hom_app]
-    simp only [DerivedCategory.quotientCompQhIso,
-      HomologicalComplexUpToQuasiIso.quotientCompQhIso, Functor.mapHomotopyCategoryFactors,
-      Quotient.lift.isLift_hom, Quotient.lift.isLift_inv]
-    repeat erw [CategoryTheory.Functor.map_id]
-    repeat erw [Category.comp_id]
-    repeat erw [Category.id_comp]
-  have hquotient : DerivedCategory.Qh.map
-      (((G.mapHomotopyCategory (.up ℤ)).map
+  let w :=
+    (NatTrans.mapHomologicalComplex (whiskerRight a.unit G ≫ whiskerLeft L e.hom)
+      (.up ℤ)).app I ≫ (H.mapHomologicalComplex (.up ℤ)).map j
+  let β : G.rightDerivedFunctor ⟶ L.mapDerivedCategory ⋙ H.rightDerivedFunctor :=
+    (Functor.leftUnitor G.rightDerivedFunctor).inv ≫
+      Functor.whiskerRight a.mapDerivedCategoryRightDerivedAdjunction.unit G.rightDerivedFunctor ≫
+      (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft L.mapDerivedCategory
+        (Functor.rightDerivedFunctorCompIso' F G e).hom
+  have hquotient :
+      ((G.mapHomotopyCategory (.up ℤ)).map
           ((a.mapHomotopyCategory (.up ℤ)).unit.app K) ≫
         (NatTrans.mapHomotopyCategory e.hom (.up ℤ)).app U) ≫
         (H.mapHomotopyCategory (.up ℤ)).map
-          ((HomotopyCategory.quotient _ (.up ℤ)).map j)) =
-      DerivedCategory.Q.map
-        ((NatTrans.mapHomologicalComplex (whiskerRight a.unit G ≫ whiskerLeft L e.hom)
-          (.up ℤ)).app I ≫ (H.mapHomologicalComplex (.up ℤ)).map j) := by
+          ((HomotopyCategory.quotient _ (.up ℤ)).map j) =
+      (HomotopyCategory.quotient _ (.up ℤ)).map w := by
     rw [Adjunction.mapHomotopyCategory_unit_app_quotient]
-    change DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (.up ℤ)).map
-      (v ≫ (H.mapHomologicalComplex (.up ℤ)).map j)) = _
+    change (HomotopyCategory.quotient _ (.up ℤ)).map
+      (v ≫ (H.mapHomologicalComplex (.up ℤ)).map j) = _
     rfl
   have hc := unitLerayHomotopy a e K
-  rw [hfactor] at hc
   have hj := H.rightDerivedFunctorUnit.naturality
     ((HomotopyCategory.quotient _ (.up ℤ)).map j)
   dsimp only [Functor.comp_map] at hj
-  have hc' := congrArg (fun t ↦ t ≫ H.rightDerivedFunctor.map (DerivedCategory.Q.map j)) hc
+  have hc' := congrArg (fun t ↦ t ≫ H.rightDerivedFunctor.map
+    (DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (.up ℤ)).map j))) hc
   simp only [Category.assoc] at hc'
-  erw [← hj, ← DerivedCategory.Qh.map_comp_assoc] at hc'
-  erw [hquotient] at hc'
-  simp only [Functor.rightDerivedFunctorObjQIso, Iso.trans_hom, Iso.trans_inv,
-    Iso.symm_hom, Iso.symm_inv, Iso.app_hom, Iso.app_inv, Functor.mapIso_hom,
-    Functor.mapIso_inv, DerivedCategory.quotientCompQhIso,
-    HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift_hom,
-    Quotient.lift.isLift_inv, asIso_hom, asIso_inv]
-  repeat erw [CategoryTheory.Functor.map_id]
-  repeat erw [Category.id_comp]
-  repeat erw [Category.comp_id]
-  rw [← cancel_epi (G.rightDerivedFunctorUnit.app K)]
-  erw [IsIso.hom_inv_id_assoc]
-  simp only [Functor.map_comp, Category.assoc] at hc' ⊢
-  exact hc'.symm
+  erw [← hj, ← DerivedCategory.Qh.map_comp_assoc, hquotient] at hc'
+  have hcomp : G.rightDerivedFunctorUnit.app K ≫ β.app (DerivedCategory.Qh.obj K) ≫
+      H.rightDerivedFunctor.map (L.mapDerivedCategoryFactorsh.hom.app K ≫
+        DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (.up ℤ)).map j)) =
+      DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (.up ℤ)).map w) ≫
+        H.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ (.up ℤ)).obj J) := by
+    simpa only [β, NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+      Functor.leftUnitor_inv_app, Functor.associator_hom_app, Category.id_comp,
+      Functor.map_comp, Category.assoc] using hc'
+  -- Transport the homotopy computation along the canonical comparison with Q.
+  have hfactor : L.mapDerivedCategoryFactorsh.hom.app K ≫
+      DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (.up ℤ)).map j) ≫
+        (DerivedCategory.quotientCompQhIso _).hom.app J =
+      L.mapDerivedCategory.map ((DerivedCategory.quotientCompQhIso _).hom.app I) ≫
+        L.mapDerivedCategoryFactors.hom.app I ≫ DerivedCategory.Q.map j := by
+    rw [Functor.mapDerivedCategoryFactorsh_hom_app]
+    simp only [Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv]
+    erw [DerivedCategory.Qh.map_id, Category.comp_id]
+    simp only [Category.assoc, DerivedCategory.quotientCompQhIso_hom_naturality]
+    erw [Iso.inv_hom_id_app_assoc]
+  have hβ := β.naturality ((DerivedCategory.quotientCompQhIso _).hom.app I)
+  dsimp only [Functor.comp_map] at hβ
+  suffices (G.rightDerivedFunctorObjQIso I).hom ≫ DerivedCategory.Q.map w ≫
+      (H.rightDerivedFunctorObjQIso J).inv =
+      β.app (DerivedCategory.Q.obj I) ≫
+        H.rightDerivedFunctor.map
+          (L.mapDerivedCategoryFactors.hom.app I ≫ DerivedCategory.Q.map j) by
+    simpa only [β, w, NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+      Functor.leftUnitor_inv_app, Functor.associator_hom_app, Category.id_comp,
+      Category.assoc] using this
+  rw [← cancel_epi (G.rightDerivedFunctorObjQIso I).inv, Iso.inv_hom_id_assoc]
+  simp only [Functor.rightDerivedFunctorObjQIso, Iso.trans_inv, Iso.symm_inv,
+    Iso.app_hom, Iso.app_inv, Functor.mapIso_inv, asIso_hom]
+  rw [← cancel_epi ((DerivedCategory.quotientCompQhIso _).hom.app
+    ((G.mapHomologicalComplex (.up ℤ)).obj I))]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc,
+    ← DerivedCategory.quotientCompQhIso_hom_naturality_assoc]
+  rw [reassoc_of% hβ, ← H.rightDerivedFunctor.map_comp, ← hfactor]
+  simpa only [Functor.map_comp, Category.assoc] using
+    congrArg (fun t ↦ t ≫ H.rightDerivedFunctor.map
+      ((DerivedCategory.quotientCompQhIso _).hom.app J)) hcomp.symm
 
 end UnitLerayCalculation
 

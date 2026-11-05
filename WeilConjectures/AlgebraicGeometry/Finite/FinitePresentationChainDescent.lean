@@ -593,8 +593,7 @@ theorem exists_finitePresentation_chain_stage
     exact pullback.condition.symm
   let q₃ : (∐ Y₃) ⟶ D.obj (op l) := Sigma.desc (fun k ↦ w₃ (some (.inl k)))
   have Hσ₃ : IsPullback
-      (Limits.Sigma.map (f := Y₃) (g := Y)
-        (fun k ↦ pullback.fst (w₂ (some (.inl k))) (D.map d)))
+      (Limits.Sigma.map (fun k ↦ pullback.fst (w₂ (some (.inl k))) (D.map d)))
       q₃ qY (D.map d) :=
     isPullback_sigmaDesc _ _ _ _ (fun k ↦ IsPullback.of_hasPullback _ _)
   let ν₃ : (∐ Y₃) ⟶ W₃ none :=

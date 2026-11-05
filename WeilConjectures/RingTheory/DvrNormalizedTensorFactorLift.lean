@@ -150,7 +150,7 @@ theorem dvr_normalized_tensor_factor_lift
     induction x using TensorProduct.inductionOn with
     | tmul f a =>
       obtain ⟨z, rfl⟩ := Ideal.Quotient.mk_surjective f
-      induction z with
+      induction z using TensorProduct.inductionOn with
       | tmul e b =>
         refine ⟨e ⊗ₜ[B] (algebraMap A A₁ b * a), ?_⟩
         simp only [phi, Algebra.TensorProduct.lift_tmul, IsScalarTower.toAlgHom_apply,

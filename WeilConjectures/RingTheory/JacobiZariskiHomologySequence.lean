@@ -109,7 +109,7 @@ private theorem lifted_kernel.{b, c, n₁, n₀, h}
       ((_root_.TensorProduct.congr (LinearEquiv.refl B' C') k).restrictScalars B)
   have hd (x : C ⊗[B] N₁) :
       d'.baseChange C' (e₁ x) = e₂ (d.baseChange C x) := by
-    induction x with
+    induction x using TensorProduct.inductionOn with
     | tmul c n => rfl
     | add x y hx hy => simp [hx, hy]
   let eT : (d.baseChange C).ker ≃ₗ[B] (d'.baseChange C').ker :=
@@ -126,7 +126,7 @@ private theorem lifted_kernel.{b, c, n₁, n₀, h}
   have hc (x : C ⊗[B] d.ker) : eT (d.tensorKer C C x) = d'.tensorKer C' C' (eK x) := by
     apply Subtype.ext
     change e₁ _ = _
-    induction x with
+    induction x using TensorProduct.inductionOn with
     | tmul c n => rfl
     | add x y hx hy => simpa only [map_add, Submodule.coe_add] using congrArg₂ (· + ·) hx hy
   constructor

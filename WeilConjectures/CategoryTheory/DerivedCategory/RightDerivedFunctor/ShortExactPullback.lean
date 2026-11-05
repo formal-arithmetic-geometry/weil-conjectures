@@ -234,12 +234,12 @@ lemma rightDerivedPullback_comp (ε : P'' ≅ P ⋙ P') (α : F ⟶ P ⋙ F') (�
     (hα : α'' ≫ Functor.whiskerRight ε.hom F'' = α ≫ Functor.whiskerLeft P α')
     (M : DerivedCategory C) :
     (rightDerivedPullback P'' α'').app M ≫ F''.rightDerivedFunctor.map
-        ((mapDerivedCategoryNatIso ε ≪≫ mapDerivedCategoryCompIso P P').hom.app M) =
+        ((mapDerivedCategoryNatIso ε ≪≫ (mapDerivedCategoryCompIso P P').symm).hom.app M) =
       (rightDerivedPullback P α).app M ≫
         (rightDerivedPullback P' α').app (P.mapDerivedCategory.obj M) := by
   have := rightDerivedFunctor_hom_ext
     (rightDerivedPullback P'' α'' ≫ Functor.whiskerRight
-      (mapDerivedCategoryNatIso ε ≪≫ mapDerivedCategoryCompIso P P').hom
+      (mapDerivedCategoryNatIso ε ≪≫ (mapDerivedCategoryCompIso P P').symm).hom
         F''.rightDerivedFunctor ≫ (Functor.associator _ _ _).hom)
     (rightDerivedPullback P α ≫ Functor.whiskerLeft P.mapDerivedCategory
       (rightDerivedPullback P' α')) (fun K ↦ by
@@ -260,7 +260,7 @@ lemma rightDerivedPullback_comp (ε : P'' ≅ P ⋙ P') (α : F ⟶ P ⋙ F') (�
         erw [Q.map_id, comp_id] at h₂
         have hI : P''.mapDerivedCategoryFactors.inv.app K ≫
             (mapDerivedCategoryNatIso ε).hom.app (Q.obj K) ≫
-              (mapDerivedCategoryCompIso P P').hom.app (Q.obj K) =
+              (mapDerivedCategoryCompIso P P').inv.app (Q.obj K) =
             Q.map ((NatTrans.mapHomologicalComplex ε.hom _).app K) ≫
               P'.mapDerivedCategoryFactors.inv.app ((P.mapHomologicalComplex _).obj K) ≫
                 P'.mapDerivedCategory.map (P.mapDerivedCategoryFactors.inv.app K) := by
@@ -447,7 +447,7 @@ lemma rightDerivedTrianglePullback_comp
   have k₁ := Functor.rightDerivedPullback_comp P P' P'' ε α₁ α'₁ α''₁ hα₁ M.obj
   have k₂ := Functor.rightDerivedPullback_comp P P' P'' ε α₂ α'₂ α''₂ hα₂ M.obj
   have k₃ := Functor.rightDerivedPullback_comp P P' P'' ε α₃ α'₃ α''₃ hα₃ M.obj
-  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.map_comp] at k₁ k₂ k₃
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.map_comp] at k₁ k₂ k₃
   ext
   · simp only [Pretriangulated.comp_hom₁, rightDerivedTrianglePullback_app_hom₁,
       rightDerivedTriangle,

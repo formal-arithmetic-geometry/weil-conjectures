@@ -39,7 +39,7 @@ private theorem tensor_generators_ext
     (hp : ∀ m b, H (m ⊗ₜ[R] PiTensorProduct.tprod R b) =
       E (m ⊗ₜ[R] PiTensorProduct.tprod R b)) : ∀ t, H t = E t := by
   intro t
-  induction t with
+  induction t using TensorProduct.inductionOn with
   | add t s ht hs =>
     simp only [map_add]
     exact congrArg₂ (· + ·) ht hs

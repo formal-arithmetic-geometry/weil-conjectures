@@ -91,25 +91,22 @@ private theorem derivedUnit_homotopy
     Category.assoc]
   rw [← reassoc_of% h₄]
   erw [reassoc_of% h₁]
-  rw [reassoc_of% h₃, Iso.inv_hom_id_app]
-  exact Category.comp_id _
+  rw [reassoc_of% h₃]
+  erw [Iso.inv_hom_id_app, Category.comp_id]
 
 private def computationCounit :
     DerivedCategory.Q ⋙ (Mod.extendScalars φ).leftDerivedFunctor ⟶
-      (Mod.extendScalars φ).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q where
-  app P := (Mod.extendScalars φ).leftDerivedFunctorCounit.app
-    ((HomotopyCategory.quotient (Mod C R) (.up ℤ)).obj P)
-  naturality P P' f := by
-    have h := (Mod.extendScalars φ).leftDerivedFunctorCounit.naturality
-      ((HomotopyCategory.quotient (Mod C R) (.up ℤ)).map f)
-    change (Mod.extendScalars φ).leftDerivedFunctor.map (DerivedCategory.Q.map f) ≫
-      (Mod.extendScalars φ).leftDerivedFunctorCounit.app
-        ((HomotopyCategory.quotient (Mod C R) (.up ℤ)).obj P') =
-      (Mod.extendScalars φ).leftDerivedFunctorCounit.app
-        ((HomotopyCategory.quotient (Mod C R) (.up ℤ)).obj P) ≫
-      DerivedCategory.Q.map (((Mod.extendScalars φ).mapHomologicalComplex (.up ℤ)).map f)
-      at h
-    exact h
+      (Mod.extendScalars φ).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q := by
+  let E := Mod.extendScalars φ
+  let q := HomotopyCategory.quotient (Mod C R) (.up ℤ)
+  let j : q ⋙ (E.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh) ≅
+      E.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q :=
+    (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (E.mapHomotopyCategoryFactors (.up ℤ)) _ ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft _ (DerivedCategory.quotientCompQhIso (Mod C S))
+  exact Functor.whiskerRight (DerivedCategory.quotientCompQhIso (Mod C R)).inv
+      E.leftDerivedFunctor ≫ Functor.whiskerLeft q E.leftDerivedFunctorCounit ≫ j.hom
 
 private theorem transpose_homotopy
     (Y : HomotopyCategory (Mod C R) (.up ℤ))
@@ -141,7 +138,9 @@ private theorem transpose_cochain
         (((Mod.extendRestrictAdjunction φ).mapHomologicalComplex (.up ℤ)).homEquiv P Z f) ≫
         (Mod.comap φ).mapDerivedCategoryFactors.inv.app Z := by
   exact adjunction_cochain_transpose (Mod.extendScalars φ) (Mod.comap φ)
-    (Mod.extendRestrictAdjunction φ) _ (computationCounit φ) _ (fun _ ↦ rfl)
+    (Mod.extendRestrictAdjunction φ) _ (computationCounit φ) _ (fun P ↦ by
+      simp [computationCounit, Functor.mapHomotopyCategoryFactors_hom_app,
+        ← Functor.map_comp_assoc])
     (Mod.derivedExtendMapDerivedCategoryAdjunction φ) (transpose_homotopy φ) P Z f
 
 variable {T : C} [MonObj T] [IsCommMonObj T]
@@ -271,7 +270,7 @@ private def derivedRestrictionComp :
     (Mod.comap ψ : Mod C T ⥤ Mod C S).mapDerivedCategory ⋙
       (Mod.comap φ).mapDerivedCategory ≅
       (Mod.comap χ).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso (Mod.comap ψ) (Mod.comap φ)).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso (Mod.comap ψ) (Mod.comap φ)) ≪≫
     Functor.mapDerivedCategoryNatIso (ordinaryRestrictionComp φ ψ χ h)
 
 private def derivedAssociation :
@@ -498,8 +497,13 @@ private def computationRight (P : CochainComplex (Mod C R) ℤ) :
 private theorem computationRight_isIso (P : CochainComplex (Mod C R) ℤ)
     (hP : (HomologicalComplex.quasiIso (Mod C R) (.up ℤ)).kFlat P) :
     IsIso (computationRight φ P) := by
-  have : IsIso ((computationCounit φ).app P) :=
+  have : IsIso ((Mod.extendScalars φ).leftDerivedFunctorCounit.app
+      ((HomotopyCategory.quotient (Mod C R) (.up ℤ)).obj P)) :=
     (Mod.extendScalars φ).isIso_leftDerivedFunctorCounit_app_of_kFlat P hP
+  have : IsIso ((computationCounit φ).app P) := by
+    dsimp only [computationCounit, NatTrans.comp_app, Functor.whiskerRight_app,
+      Functor.whiskerLeft_app]
+    infer_instance
   dsimp only [computationRight]
   infer_instance
 
@@ -660,7 +664,7 @@ abbrev restriction (n : ℕ) : DerivedCategory (Mod C (S n)) ⥤ DerivedCategory
 def restrictionComp (n : ℕ) :
     (Mod.comap (r n)).mapDerivedCategory ⋙ restriction R S q (n + 1) ≅
       restriction R S q n :=
-  (Functor.mapDerivedCategoryCompIso (Mod.comap (r n)) (Mod.comap (q (n + 1)))).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso (Mod.comap (r n)) (Mod.comap (q (n + 1)))) ≪≫
     Functor.mapDerivedCategoryNatIso
       ((Mod.comapComp (q (n + 1)) (r n)).symm ≪≫ Mod.comapCongr (h n))
 

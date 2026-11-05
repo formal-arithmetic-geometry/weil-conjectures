@@ -28,6 +28,8 @@ namespace AlgebraicGeometry
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
+set_option maxHeartbeats 400000 in
+-- This declaration measured 218490 heartbeats on Lean v4.35.0-rc3; retain a local budget.
 /-- Exact open restriction, expressed on the localized site or on the open subscheme,
 identifies quasi-coherent cohomology, support, shifted orthogonality and zero objects.
 Source: Stacks Project, Tag 079W, Lemma cohomology-lemma-adjoint, and Tag 0A9A,
@@ -93,7 +95,7 @@ theorem open_derived_restriction_comparison
   let F := r ⋙ e
   let M := F.mapDerivedCategory
   let L := r.mapDerivedCategory
-  let c : M ≅ L ⋙ e.mapDerivedCategory := Functor.mapDerivedCategoryCompIso r e
+  let c : M ≅ L ⋙ e.mapDerivedCategory := (Functor.mapDerivedCategoryCompIso r e).symm
   refine ⟨hD, (nonempty_derivedOpenLocalization.{u, w} U.toScheme).some, R, adj,
     ?_, ?_, ?_, ?_⟩
   · intro K hK

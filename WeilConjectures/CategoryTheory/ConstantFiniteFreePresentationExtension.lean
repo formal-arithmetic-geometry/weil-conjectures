@@ -670,15 +670,15 @@ private def rawFlatIso : scalarPresheafFunctor J R B σ ⋙
     (by
       intro U V f
       ext z
-      induction z with
+      induction z using TensorProduct.inductionOn with
       | add z w hz hw => simp only [map_add, hz, hw]
       | tmul b x =>
         change (TensorProduct.comm ((baseRing J R).obj.obj V)
             ((restrictedB J R B σ).val.obj V) (M.val.obj V))
             (SheafOfModules.changeOfRingsMapOfUniverses σ M f
               (b ⊗ₜ[((baseRing J R).obj.obj U), (σ.hom.app U).hom] x)) =
-          M.val.map f x ⊗ₜ[(baseRing J R).obj.obj V]
-            ((restrictedB J R B σ).val.map f b)
+          M.val.restrictₛₗ f x ⊗ₜ[(baseRing J R).obj.obj V]
+            ((restrictedB J R B σ).val.restrictₛₗ f b)
         exact congrArg (fun z ↦
           (TensorProduct.comm ((baseRing J R).obj.obj V)
             ((restrictedB J R B σ).val.obj V) (M.val.obj V)) z)
@@ -687,7 +687,7 @@ private def rawFlatIso : scalarPresheafFunctor J R B σ ⋙
     (by
       intro M N f
       ext U z
-      induction z with
+      induction z using TensorProduct.inductionOn with
       | add z w hz hw => simp only [map_add, hz, hw]
       | tmul b x => rfl)
 

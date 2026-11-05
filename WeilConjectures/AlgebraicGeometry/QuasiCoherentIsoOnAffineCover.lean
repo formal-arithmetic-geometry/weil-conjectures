@@ -9,6 +9,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Coherent
 import WeilConjectures.Topology.SheafIsomorphismLocalOpenCover
 import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-!
 # Isomorphisms of quasi-coherent modules detected on an affine open cover

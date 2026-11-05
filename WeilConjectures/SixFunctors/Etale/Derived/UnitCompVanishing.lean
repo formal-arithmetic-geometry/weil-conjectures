@@ -48,7 +48,7 @@ theorem mapDerivedUpperStarLowerStarAdjunction_unit_comp {X Y Z : Scheme.{u}} (f
     (mapDerivedUpperStarLowerStarAdjunction A (g ≫ f)).unit.app K ≫
       R((g ≫ f)_*[A]).map
         ((Functor.mapDerivedCategoryNatIso (Etale.upperStarComp A g f) ≪≫
-          Functor.mapDerivedCategoryCompIso ((f)^*[A]) ((g)^*[A])).hom.app K) =
+          (Functor.mapDerivedCategoryCompIso ((f)^*[A]) ((g)^*[A])).symm).hom.app K) =
     (mapDerivedUpperStarLowerStarAdjunction A f).unit.app K ≫
       R((f)_*[A]).map
         ((mapDerivedUpperStarLowerStarAdjunction A g).unit.app (D((f)^*[A]).obj K)) ≫
@@ -61,7 +61,7 @@ theorem mapDerivedUpperStarLowerStarAdjunction_unit_comp {X Y Z : Scheme.{u}} (f
         (mapDerivedUpperStarLowerStarAdjunction A g))
       (mapDerivedUpperStarLowerStarAdjunction A (g ≫ f))
       (Functor.mapDerivedCategoryNatIso (Etale.upperStarComp A g f) ≪≫
-        Functor.mapDerivedCategoryCompIso ((f)^*[A]) ((g)^*[A])).hom K).symm
+        (Functor.mapDerivedCategoryCompIso ((f)^*[A]) ((g)^*[A])).symm).hom K).symm
 
 /-- Naturality of the Leray isomorphism: `RΓ(X, Rf_* φ)` corresponds to `RΓ(X', φ)`. -/
 lemma rightDerivedGlobalSections_map_rightDerivedLowerStar_map {X Y : Scheme.{u}} (f : Y ⟶ X)
@@ -87,7 +87,7 @@ theorem rightDerivedGlobalSections_map_unit_comp_eq_zero {X Y Z : Scheme.{u}} (f
   rw [Functor.map_comp, Functor.map_comp, h, zero_comp] at hc
   rw [← cancel_mono ((rightDerivedGlobalSections A X).map (R((g ≫ f)_*[A]).map
     ((Functor.mapDerivedCategoryNatIso (Etale.upperStarComp A g f) ≪≫
-      Functor.mapDerivedCategoryCompIso ((f)^*[A]) ((g)^*[A])).hom.app K))), hc, zero_comp]
+      (Functor.mapDerivedCategoryCompIso ((f)^*[A]) ((g)^*[A])).symm).hom.app K))), hc, zero_comp]
 
 /-- If `RΓ(X, η_{g ≫ f}(K))` vanishes and `RΓ(Y, η_g(f^* K))` is an isomorphism, then
 `RΓ(X, η_f(K))` vanishes. -/

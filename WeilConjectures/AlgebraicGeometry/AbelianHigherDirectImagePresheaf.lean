@@ -197,9 +197,7 @@ its image in `D⁺`. -/
 private noncomputable def homologyComparison :
     M.obj.homology 0 ⟶
       (DerivedCategory.Plus.homologyFunctor _ 0).obj (DerivedCategory.Plus.Q.obj M) :=
-  (DerivedCategory.homologyFunctorFactors _ 0).inv.app M.obj ≫
-    (DerivedCategory.homologyFunctor _ 0).map
-      ((DerivedCategory.quotientCompQhIso _).inv.app M.obj)
+  (DerivedCategory.homologyFunctorFactors _ 0).inv.app M.obj
 
 private instance homologyComparison_isIso : IsIso (homologyComparison M) := by
   unfold homologyComparison
@@ -211,7 +209,7 @@ private lemma derivedHomToHomology_app_eq {W : Cᵒᵖ}
       DerivedCategory.Plus.Q.obj M)
     (f : (HomologicalComplex.single _ (.up ℤ) 0).obj ((freeSheaf J).obj W.unop) ⟶ M.obj)
     (hf : DerivedCategory.Plus.ι.map β =
-      DerivedCategory.Q.map f ≫ (DerivedCategory.quotientCompQhIso _).inv.app M.obj) :
+      DerivedCategory.Q.map f) :
     (derivedHomToHomology (DerivedCategory.Plus.Q.obj M)).app W β =
       DerivedCategory.singleCyclesHom _ ≫ HomologicalComplex.cyclesMap f 0 ≫
         M.obj.homologyπ 0 ≫ homologyComparison M :=
@@ -257,7 +255,7 @@ private theorem isLocallySurjective_derivedHomToHomology [M.obj.IsKInjective] :
   obtain ⟨fM, hfM⟩ := exists_chainMap_of_cycle M c'
   obtain ⟨β, hβ⟩ : ∃ β : (DerivedCategory.Plus.singleFunctor _ 0).obj A ⟶
       DerivedCategory.Plus.Q.obj M, DerivedCategory.Plus.ι.map β =
-        DerivedCategory.Q.map fM ≫ (DerivedCategory.quotientCompQhIso _).inv.app M.obj :=
+        DerivedCategory.Q.map fM :=
     ⟨DerivedCategory.Plus.ι.preimage _, Functor.map_preimage _ _⟩
   refine ⟨β, ?_⟩
   rw [NatTrans.comp_app, ConcreteCategory.comp_apply,
@@ -295,7 +293,7 @@ private theorem derivedMap_zero_of_boundary [M.obj.IsKInjective]
     (β : (DerivedCategory.Plus.singleFunctor _ 0).obj A ⟶ DerivedCategory.Plus.Q.obj M)
     (f : (HomologicalComplex.single _ (.up ℤ) 0).obj A ⟶ M.obj)
     (hf : DerivedCategory.Plus.ι.map β =
-      DerivedCategory.Q.map f ≫ (DerivedCategory.quotientCompQhIso _).inv.app M.obj)
+      DerivedCategory.Q.map f)
     (φ : A' ⟶ A) (b : A' ⟶ M.obj.X (-1))
     (hb : ((HomologicalComplex.single _ (.up ℤ) 0).map φ ≫ f).f 0 =
       (HomologicalComplex.singleObjXSelf (.up ℤ) 0 A').hom ≫ b ≫ M.obj.d (-1) 0) :
@@ -303,8 +301,8 @@ private theorem derivedMap_zero_of_boundary [M.obj.IsKInjective]
   let f' := (HomologicalComplex.single _ (.up ℤ) 0).map φ ≫ f
   have hβ' : DerivedCategory.Plus.ι.map
       ((DerivedCategory.Plus.singleFunctor _ 0).map φ ≫ β) =
-        DerivedCategory.Q.map f' ≫ (DerivedCategory.quotientCompQhIso _).inv.app M.obj := by
-    rw [Functor.map_comp, hf, Functor.map_comp, Category.assoc]
+        DerivedCategory.Q.map f' := by
+    rw [Functor.map_comp, hf, Functor.map_comp]
     rfl
   exact DerivedCategory.Plus.eq_zero_of_homotopy _ f' hβ'
     (homotopyOfSingle M f' b hb)
@@ -475,8 +473,7 @@ noncomputable def sheafifyIsoOfLocallyBijective
       exact Presheaf.isLocallySurjective_of_isLocallySurjective J (toSheafify J P) ψ.hom
   exact asIso ψ
 
-omit [HasSheafify J AddCommGrpCat.{u + 1}]
-  [HasDerivedCategory.{u + 1} (Sheaf J AddCommGrpCat.{u + 1})]
+omit [HasDerivedCategory.{u + 1} (Sheaf J AddCommGrpCat.{u + 1})]
   [EnoughInjectives (Sheaf J AddCommGrpCat.{u + 1})] in
 lemma toSheafify_comp_sheafifyIsoOfLocallyBijective_hom
     {P : Cᵒᵖ ⥤ AddCommGrpCat.{u + 1}} {G : Sheaf J AddCommGrpCat.{u + 1}}

@@ -57,12 +57,12 @@ private noncomputable def tensorEquiv (R S : Type u) [CommRing R] [CommRing S]
             ((TensorProduct.mk R S N).map_smul r (show S from s)) }
   have h₁ : ∀ x, invFun (toFun x) = x := by
     intro x
-    induction x with
+    induction x using TensorProduct.inductionOn with
     | tmul s n => rfl
     | add x y hx hy => simp only [map_add, hx, hy]
   have h₂ : ∀ x, toFun (invFun x) = x := by
     intro x
-    induction x with
+    induction x using TensorProduct.inductionOn with
     | tmul s n => rfl
     | add x y hx hy => simp only [map_add, hx, hy]
   exact
@@ -70,7 +70,7 @@ private noncomputable def tensorEquiv (R S : Type u) [CommRing R] [CommRing S]
       invFun := invFun
       map_add' := toFun.map_add
       map_smul' s x := by
-        induction x with
+        induction x using TensorProduct.inductionOn with
         | tmul s' n => rfl
         | add x y hx hy =>
           rw [smul_add, map_add, hx, hy, map_add]
@@ -145,7 +145,7 @@ private theorem finiteFreeComplex_fibre_rank_formula
         (K.d n m).hom.baseChange F := by
       apply LinearMap.ext
       intro z
-      induction z with
+      induction z using TensorProduct.inductionOn with
       | add x y hx hy => simp only [map_add, hx, hy]
       | tmul s x =>
         apply (E m).injective

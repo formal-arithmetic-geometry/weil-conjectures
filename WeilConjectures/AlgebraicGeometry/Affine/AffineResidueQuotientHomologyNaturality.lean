@@ -62,7 +62,7 @@ private theorem termIso_d
     (i j : ℤ) (x : affineResidueTerm W U p K i) :
     termIso W U p K j (affineResidueDifferential W U p K i j x) =
       ((residueComplexFunctor W U p).obj K).d i j (termIso W U p K i x) := by
-  induction x with
+  induction x using TensorProduct.inductionOn with
   | tmul r m => rfl
   | add x y hx hy => simp only [map_add, hx, hy]
 
@@ -72,7 +72,7 @@ private theorem termIso_map
     (φ : K ⟶ C) (j : ℤ) (x : affineResidueTerm W U p K j) :
     termIso W U p C j (affineResidueComponent φ j x) =
       ((residueComplexFunctor W U p).map φ).f j (termIso W U p K j x) := by
-  induction x with
+  induction x using TensorProduct.inductionOn with
   | tmul r m => rfl
   | add x y hx hy => simp only [map_add, hx, hy]
 

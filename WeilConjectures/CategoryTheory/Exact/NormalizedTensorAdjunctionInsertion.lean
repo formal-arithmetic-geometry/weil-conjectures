@@ -79,7 +79,8 @@ private theorem single_unit_formula (M : C) :
     DerivedCategory.Q.map _ ≫ DerivedCategory.Q.map _
   rw [← DerivedCategory.Q.map_comp, ← DerivedCategory.Q.map_comp]
   congr 1
-  ext i
+  apply HomologicalComplex.hom_ext
+  intro i
   by_cases hi : i = 0
   · subst hi
     simp [Functor.mapCochainComplexSingleFunctor, CochainComplex.singleFunctors,

@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.WeilSheaf.Native.NativeCondensedModelTensor
 public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealization
+public import WeilConjectures.WeilSheaf.Native.NativeForgetTotalTensor
 public import WeilConjectures.WeilSheaf.Native.Open.NativeOpenTensorOperations
 public import WeilConjectures.CategoryTheory.ModuleObjects.RelativeTensorCoequalizer
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Evaluation
@@ -80,15 +81,6 @@ end RelativeTensor
 
 variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
-
-/-- The native tensor map in the parameter variable is, on underlying `ℓ`-adic sheaves, the map
-`Mod.tensorLeftMap` of coequalizer tensors. -/
-lemma nativeTensorMap_app_hom_f [Fact (ringChar k₀ ≠ l)] {P P' : ProEtaleWeilSheaf k₀ l X}
-    (f : P ⟶ P') (Q : ProEtaleWeilSheaf k₀ l X) :
-    ((nativeTensorMap k₀ l X f).app Q).hom.f = (Mod.tensorLeftMap f.hom.f).app Q.carrier := by
-  change ((conjugateEquiv (Mod.ihomAdjunction P'.carrier)
-    (Mod.ihomAdjunction P.carrier)).symm (Mod.ihomMap f.hom.f)).app Q.carrier = _
-  rw [Mod.ihomMap, Equiv.symm_apply_apply]
 
 variable [Fact (ringChar k₀ ≠ l)]
 

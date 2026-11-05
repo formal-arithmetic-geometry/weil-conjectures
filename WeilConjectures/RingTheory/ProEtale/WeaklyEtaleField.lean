@@ -66,10 +66,10 @@ lemma exists_eq_mul_self_mul_tensor_of_intermediateField {L : Type*} [Field L]
       map_smul, smul_eq_mul]
   have hr : ∀ (c : E ⊗[k] E) (z : L ⊗[k] L), r (ι c * z) = c * r z := by
     intro c z
-    induction c with
+    induction c using TensorProduct.inductionOn with
     | add c c' hc hc' => simp only [map_add, add_mul, hc, hc']
     | tmul c₁ c₂ =>
-      induction z with
+      induction z using TensorProduct.inductionOn with
       | add z z' hz hz' => simp only [map_add, mul_add, hz, hz']
       | tmul z₁ z₂ =>
         simp only [ι, r, Algebra.TensorProduct.map_tmul, IntermediateField.coe_val,

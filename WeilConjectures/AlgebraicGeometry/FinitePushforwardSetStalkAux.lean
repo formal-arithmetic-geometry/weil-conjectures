@@ -87,8 +87,9 @@ theorem finite_pushforward_set_stalk_map_bijective_of_finite
       sectionsIsoPi_hom, ← NatTrans.comp_app_assoc, Pi.lift_comp_π,
       Functor.Final.ι_colimitIso_hom]
     exact (colimit.w ((Functor.Elements.π (pointSmallEtale t.1).fiber).op ⋙ H.obj)
-      (Functor.Elements.homMk ⟨s.unop.pieceObj t, s.unop.piecePt t⟩
-        ((Etale.baseChangeNbhd f y t).obj s.unop.obj) (s.unop.pieceIncl t)
+      (Functor.Elements.homMk
+        (x := Functor.elementsMk _ (s.unop.pieceObj t) (s.unop.piecePt t))
+        (y := (Etale.baseChangeNbhd f y t).obj s.unop.obj) (s.unop.pieceIncl t)
         (CategoryTheory.Over.OverMorphism.ext (s.unop.piecePt_comp_pieceIncl t))).op).symm
   have : IsIso (Pi.lift r) := by
     rw [← Iso.eq_inv_comp] at he

@@ -102,7 +102,7 @@ private theorem lift_tensor_iso
   let F := ModuleCat.restrictScalars.{u}
     (Algebra.TensorProduct.includeRight (R := R₀) (A := A₀) (B := B₀)).toRingHom
   have hs (r : A₀ ⊗[R₀] B₀) (x : U) : e.hom (r • x) = r • e.hom x := by
-    induction r with
+    induction r using TensorProduct.inductionOn with
     | tmul a b =>
       have hr : a ⊗ₜ[R₀] b =
           Algebra.TensorProduct.includeRight b * Algebra.TensorProduct.includeLeft (S := R₀) a := by

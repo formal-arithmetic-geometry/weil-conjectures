@@ -96,7 +96,7 @@ theorem quasi_coherent_algebra_affine_inclusion
         Scheme.Modules.quasiCoherent_affine_section_baseChange S A.toModule U V hUV
       have he : ∀ t, q t = c t := by
         intro t
-        induction t with
+        induction t using TensorProduct.inductionOn with
         | tmul b t =>
           rw [Algebra.TensorProduct.productMap_apply_tmul, hct]
           change i b * j t = j t * i b

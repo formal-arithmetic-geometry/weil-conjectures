@@ -78,7 +78,7 @@ theorem affinePushforward_baseChange_app_bijective {X S X' S' : Scheme.{u}}
     obtain ⟨e, he⟩ := tensor_baseChange_equiv R B R' M
     have hcalc (t : TensorProduct R R' M) : b (beta.app W (a.symm t)) = e t := by
       change b ((beta.app W).hom (a.symm t)) = e t
-      induction t with
+      induction t using TensorProduct.inductionOn with
       | tmul r m => exact (hab r m).trans (he r m).symm
       | add t s ht hs =>
           rw [a.symm.map_add, map_add, b.map_add, e.map_add, ht, hs]

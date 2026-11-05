@@ -124,7 +124,7 @@ lemma map_unitProjection_comp_mateEquiv [F.OplaxMonoidal] [adj.IsMonoidal] [F'.O
   have hδ' : F'.map (δ U K (G.obj (𝟙_ D))) ≫ δ F' (U.obj K) (U.obj (G.obj (𝟙_ D))) =
       e.inv.app _ ≫ (V.map (δ F K (G.obj (𝟙_ D))) ≫ δ V (F.obj K) (F.obj (G.obj (𝟙_ D)))) ≫
         (e.hom.app K ⊗ₘ e.hom.app (G.obj (𝟙_ D))) := by
-    rw [hδ, Iso.inv_hom_id_app_assoc]
+    rw [hδ, Iso.hom_inv_id_app_assoc]
   erw [← δ_natural_right_assoc]
   rw [reassoc_of% hδ']
   congr 1
