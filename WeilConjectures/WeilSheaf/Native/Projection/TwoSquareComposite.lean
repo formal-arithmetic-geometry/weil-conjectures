@@ -18,6 +18,8 @@ open CategoryTheory
 
 namespace CategoryTheory
 
+open TwoSquare
+
 variable {A B C D E F : Type*} [Category* A] [Category* B] [Category* C] [Category* D]
   [Category* E] [Category* F]
 
