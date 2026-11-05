@@ -221,7 +221,7 @@ private theorem unitLerayChain
       (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft L.mapDerivedCategory
         (Functor.rightDerivedFunctorCompIso' F G e).hom
   have hquotient :
-      (((G.mapHomotopyCategory (.up ℤ)).map
+      ((G.mapHomotopyCategory (.up ℤ)).map
           ((a.mapHomotopyCategory (.up ℤ)).unit.app K) ≫
         (NatTrans.mapHomotopyCategory e.hom (.up ℤ)).app U) ≫
         (H.mapHomotopyCategory (.up ℤ)).map
