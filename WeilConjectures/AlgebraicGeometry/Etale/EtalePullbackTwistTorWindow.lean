@@ -165,8 +165,8 @@ Source: Stacks Project, Tags 03TT (lemma-when-ctf), 0963 (lemma-pullback-ctf),
 Proof:
 1. A field is Noetherian. Apply lem-weil-pbc-finite-type-over-noetherian to the
    structure maps of T and T' to obtain Noetherian schemes.
-2. The prime ell differs from the positive characteristic p, so N = ell^n is
-   invertible in k and in every local ring of T', including n=0. Apply
+2. The prime ell differs from ringChar k, so N = ell^n is invertible in k
+   and every local ring of T', including characteristic zero and n=0. Apply
    lem-asd-finite-etale-twist-line to obtain the locally trivial rank-one module
    R(c), including the zeroth twist; R need not be flat over Z/N.
 3. Apply lem-sp-etale-pullback-line-flat-model to P, its representing isomorphism,
@@ -183,8 +183,7 @@ Proof:
    the line-model theorem with the constant R line and zero shift; multiplication
    identifies tensor with R with the original pullback, preserving [a,b]. -/
 theorem etale_pullback_twist_tor_window
-    (k : Type u) [Field k] (p ell : ℕ) [CharP k p]
-    (_hp : 0 < p) (_hell : ell.Prime) (_hne : ell ≠ p)
+    (k : Type u) [Field k] (ell : ℕ) (_hell : ell.Prime) (_hne : ringChar k ≠ ell)
     (T T' : Over (Spec (CommRingCat.of k)))
     [IsSeparated T.hom] [LocallyOfFiniteType T.hom] [QuasiCompact T.hom]
     [IsSeparated T'.hom] [LocallyOfFiniteType T'.hom] [QuasiCompact T'.hom]
@@ -238,7 +237,7 @@ theorem etale_pullback_twist_tor_window
   have hk : IsUnit ((ell ^ n : ℕ) : k) := by
     rw [Nat.cast_pow]
     exact (isUnit_iff_ne_zero.2 (CharP.cast_ne_zero_of_ne_of_prime k _hell
-      (Ne.symm _hne))).pow n
+      _hne)).pow n
   have hInv : ∀ t : T'.left, IsUnit ((ell ^ n : ℕ) : T'.left.presheaf.stalk t) := by
     intro t
     let φ := (Scheme.ΓSpecIso (CommRingCat.of k)).inv ≫ T'.hom.appTop ≫
