@@ -38,6 +38,10 @@ private local instance cechForgetModuleSheaf_preservesProducts (X : Scheme.{u}) 
     PreservesLimitsOfShape (Discrete α) (cechForgetModuleSheaf X) := by
   apply preservesLimitsOfShape_of_evaluation
   intro V
+  have : PreservesLimitsOfShape (Discrete α)
+      (ModuleCat.restrictScalars.{u}
+        (X.ringCatSheaf.obj.map (isTerminalTop.op.to V)).hom) :=
+    ⟨fun {K} ↦ inferInstance⟩
   change PreservesLimitsOfShape (Discrete α)
     (SheafOfModules.evaluation X.ringCatSheaf V ⋙
       ModuleCat.restrictScalars (X.ringCatSheaf.obj.map (isTerminalTop.op.to V)).hom)
