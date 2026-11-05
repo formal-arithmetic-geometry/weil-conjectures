@@ -101,3 +101,15 @@
   `/home/ubuntu/u9/bz/FIXES-BZ159.md`.
 - No proof placeholders, trust bypasses, local Lean/Lake execution, or heartbeat increases.
 - Completion marker: `/home/ubuntu/u9/state/BZ159.DONE`.
+
+# BZ266 in progress
+
+- Branch: `u9/BZ266`; starting commit: `c781553bf`.
+- Re-read the brief and progress notes on continuation.
+- The user instructed continuation after the explicit compositor compatibility proposal.
+  Applied `.inv` → `.hom` in `comparison_comp`, removed `.symm` in `unit_comp`'s `heD`,
+  and adjusted the proof cancellation; the original mathematical maps are preserved.
+- Replaced the obsolete identity computation with Mathlib's exact single-object lemma.
+- Proof-only remote build checked the identity repair; next build checks the compositor patch.
+- Patterns and logs: `/home/ubuntu/u9/bz/FIXES-BZ266.md`.
+- Only remote `ucheck-bump` builds; no proof placeholders, trust bypasses, or limit raises.

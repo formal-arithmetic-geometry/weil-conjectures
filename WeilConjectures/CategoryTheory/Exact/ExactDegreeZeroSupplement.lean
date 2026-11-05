@@ -65,7 +65,7 @@ theorem comparison_comp (F : V ⥤ W) (G : W ⥤ X) (H : V ⥤ X)
   simp only [Category.assoc]
   rw [Functor.mapDerivedCategoryNatIso_hom_app_singleFunctor,
     ← Functor.mapDerivedCategoryCompIso_hom_app_singleFunctor F G M]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc,
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc,
     ← Functor.map_comp_assoc, Iso.inv_hom_id_app]
   erw [CategoryTheory.Functor.map_id, Category.id_comp,
     Iso.inv_hom_id_app_assoc, Category.comp_id]
@@ -79,7 +79,7 @@ theorem unit_comp (F : V ⥤ W) (G : W ⥤ X) (H : V ⥤ X)
     [PreservesFiniteLimits H] [PreservesFiniteColimits H]
     (e : F ⋙ G ≅ H)
     (eD : F.mapDerivedCategory ⋙ G.mapDerivedCategory ≅ H.mapDerivedCategory)
-    (heD : eD = (Functor.mapDerivedCategoryCompIso F G).symm ≪≫
+    (heD : eD = Functor.mapDerivedCategoryCompIso F G ≪≫
       Functor.mapDerivedCategoryNatIso e)
     {K : X} {L : W} {M : V}
     (f : K ⟶ G.obj L) (g : L ⟶ F.obj M) (h : K ⟶ H.obj M)
