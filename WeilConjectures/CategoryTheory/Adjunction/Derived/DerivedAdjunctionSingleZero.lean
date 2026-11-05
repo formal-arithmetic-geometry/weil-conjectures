@@ -79,10 +79,14 @@ private theorem unit_single (M : C) :
       Functor.ι_map_mapDerivedCategoryPlusFactorsh_hom_app,
       Functor.mapHomotopyCategoryPlusSingleFunctorQhObjIso, Functor.preimageIso_hom,
       Functor.map_preimage]
+    change _ = L.mapDerivedCategoryFactorsh.hom.app
+      ((HomotopyCategory.quotient C (.up ℤ)).obj ((CochainComplex.singleFunctor C 0).obj M)) ≫ _
+    rw [Functor.mapDerivedCategoryFactorsh_hom_app]
     simp [Functor.mapDerivedCategorySingleFunctor, DerivedCategory.singleFunctorIsoCompQ,
       DerivedCategory.quotientCompQhIso, HomologicalComplexUpToQuasiIso.quotientCompQhIso,
-      Functor.mapDerivedCategoryFactorsh_hom_app, Functor.mapHomotopyCategoryFactors,
+      Functor.mapHomotopyCategoryFactors,
       Quotient.lift.isLift_hom, Quotient.lift.isLift_inv, Category.assoc]
+    erw [Functor.map_id, Category.id_comp, Category.id_comp, Category.comp_id]
   rw [hL, Functor.map_comp, ← Category.assoc]
   erw [h]
   let u : L.mapHomotopyCategoryPlus.obj ((HomotopyCategory.Plus.singleFunctor C 0).obj M) ≅
@@ -98,7 +102,8 @@ private theorem unit_single (M : C) :
     change DerivedCategory.Qh.map ((HomotopyCategory.Plus.ι D).map
       ((HomotopyCategory.Plus.ι D).preimage _)) = _
     rw [Functor.map_preimage]
-    rfl
+    change _ = 𝟙 _ ≫ _
+    exact (Category.id_comp _).symm
   rw [← hu, Category.assoc]
   have hn := R.rightDerivedFunctorPlusUnith.naturality u.hom
   dsimp only [Functor.comp_map] at hn
@@ -129,7 +134,9 @@ private theorem unit_single (M : C) :
   simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
   apply DerivedCategory.Plus.ι.map_injective
   simp only [Functor.map_comp, Functor.mapHomotopyCategoryPlusSingleFunctorQhObjIso,
-    Functor.preimageIso_hom, Functor.map_preimage]
+    Functor.preimageIso_hom, Functor.map_preimage, Iso.trans_hom, Iso.app_hom,
+    Functor.mapIso_hom]
+  erw [Category.id_comp]
   change DerivedCategory.Qh.map ((HomotopyCategory.Plus.ι C).map
       (adj.mapHomotopyCategoryPlus.unit.app
         ((HomotopyCategory.Plus.singleFunctor C 0).obj M))) ≫
