@@ -37,7 +37,8 @@ open scoped CategoryTheory.Obj ZeroObject
 attribute [local instance] Abelian.hasFiniteBiproducts
 attribute [local instance] comp_preservesFiniteLimits comp_preservesLimits
 
-private local instance {S R : Type*} [TopologicalSpace S] [TopologicalSpace R] [Zero R] :
+private local instance {S : Type*} {R : Type*}
+    [TopologicalSpace S] [TopologicalSpace R] [Zero R] :
     OfNat C(S, R) 0 := ⟨ContinuousMap.const S 0⟩
 
 -- Cokernels of diagonal blocks, and integral elimination when the pivot divides its column.
