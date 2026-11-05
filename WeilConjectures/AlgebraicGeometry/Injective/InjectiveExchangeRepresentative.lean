@@ -48,6 +48,14 @@ private lemma assemble_exchange_transport {A B : Type*} [Category A] [Category B
   rw [hs, Category.assoc, ← Functor.map_comp, hm]
   exact ht
 
+private lemma map_derivedCategory_ι_map
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    {K L : DerivedCategory.Plus C} (g : K ⟶ L) :
+    F.mapDerivedCategory.map (DerivedCategory.Plus.ι.map g) =
+      DerivedCategory.Plus.ι.map (F.mapDerivedCategoryPlus.map g) := rfl
+
 private lemma map_comp_naturality {A B C D : Type*}
     [Category A] [Category B] [Category C] [Category D]
     (R : A ⥤ B) (U : B ⥤ C) (P : A ⥤ D) (F : D ⥤ C)
@@ -168,8 +176,8 @@ theorem smallModel_injectiveExchange_representative {X S : Scheme.{v}} (f : X �
           ((R.mapHomologicalComplex (.up ℤ)).obj M.obj)) ≫
         DerivedCategory.Plus.ι.map (U.mapDerivedCategoryPlus.map
           (R.rightDerivedFunctorPlusUnith.app H ≫ R.rightDerivedFunctorPlus.map q'.inv)) := by
-    rw [hs, U.mapDerivedCategory.map_comp, ← DerivedCategory.Plus.ι.map_comp]
-    rfl
+    rw [hs, U.mapDerivedCategory.map_comp, ← DerivedCategory.Plus.ι.map_comp,
+      map_derivedCategory_ι_map]
   exact assemble_exchange_transport DerivedCategory.Plus.ι
     (U.mapDerivedCategoryFactors.inv.app
       ((R.mapHomologicalComplex (.up ℤ)).obj M.obj)) _ _ _ _ _ _ hs' hb
