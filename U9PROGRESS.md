@@ -106,23 +106,24 @@
 - Completion marker: `/home/ubuntu/u9/state/BZ311.DONE`.
 - This final commit changes only progress documentation; Lean sources match the green build.
 
-# BZ367 complete
+# BZ384 complete
 
-- Branch: `u9/BZ367`; starting commit: `98654719b`.
-- Assigned module `WeilConjectures.WeilSheaf.Native.Projection.OrdinaryTensorNormalization`
-  passed `ucheck-bump`: rc=0, failed=0, 2225 jobs, at `a75d107ae0`.
-- Direct importer `WeilConjectures.WeilSheaf.Native.Projection.DerivedModelNormalizations`
-  also built successfully at `7c097cb5fe`; the assigned module rebuilt successfully there.
-- The user instructed continuation after the exact two-line visibility proposal.
-  Both internal helpers are private, with the required Localization imports.
-  All proposition texts and proof bodies are unchanged; neither helper has external callers.
-- Three other direct importers and all five second-layer candidates are skipped because
-  they transitively import failing unowned `ProfinitePointPullback` (BZ395).
-  The downstream batch additionally found failures owned by BZ436, BZ390, and BZ389.
-  Its remaining dependency work was stopped after all target outcomes were known;
-  its wrapper rc=0 after stopping must not be mistaken for an all-green batch.
-- Build logs, exact errors, patterns, and counts: `/home/ubuntu/u9/bz/FIXES-BZ367.md`.
-- Contract audit: `/home/ubuntu/u9/bz/BZ367-contract-audit.txt`.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or limit increases.
-- This completion commit changes only progress documentation; Lean sources match the green build.
-- Completion marker: `/home/ubuntu/u9/state/BZ367.DONE`.
+- Branch: `u9/BZ384`; starting commit: `98654719b`.
+- Assigned module: `WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategorySquarePasting`.
+- Passed `ucheck-bump`: rc=0, failed=0, 2138 jobs; target rebuilt in 2.6 seconds.
+- Validated source commit: `22bd5056b9ba101992a3761fcce9a18b6236a7b2`.
+- Green build log: `/home/ubuntu/u9/bz/BUILD-BZ384-unit-green.log`.
+- The user instructed continuation after the precise orientation correction proposal.
+  Completed the nine remaining compositor direction changes and adapted the cancellation
+  and symmetry proofs. All hypotheses, binders, and docstrings are unchanged.
+- Tested all three direct importers. All share the failing unowned dependency
+  `WeilConjectures.SixFunctors.Finite.BaseChange`, so all are skipped per the brief.
+  Other unowned failures: `RawRestrictedSectionsUnitZero` and `UpperLowerStar.FiniteEtale`.
+  Stopped the blocked downstream batch after recording dependency paths; its wrapper
+  rc=0 reflects the stop and is not a green downstream build.
+- Downstream log: `/home/ubuntu/u9/bz/BUILD-BZ384-downstream.log`.
+- Fix patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ384.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ384-contract-audit.txt`.
+- No local Lean/Lake execution, sorries, forbidden proof shortcuts, or heartbeat increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ384.DONE`.
+- This final commit changes only progress documentation; Lean source matches the green build.
