@@ -12,6 +12,8 @@ public import WeilConjectures.WeilSheaf.Native.Projection.ProjectionPushNormaliz
 public import WeilConjectures.WeilSheaf.Native.Projection.MonoidalProjectionForgetSquare
 public import WeilConjectures.PoincareDuality.ProjectionFormulaOpenImmersion
 
+import WeilConjectures.Tactic.ExactModProofs
+
 /-! # The proper projection square on Weil complexes -/
 
 @[expose] public noncomputable section
@@ -52,16 +54,24 @@ lemma projectionProperForgetIso_hom_app (M : WeilComplex k₀ l X) :
         (projectionRealizationCompIso k₀ l Y)).hom.app M.obj := by
   have h := projectionPushForgetIso_hom_app_of_factorization
     (ProEtaleWeilSheaf.nativeProperForgetIso k₀ l g)
-    (projectionRealizationCompIso k₀ l X) (projectionRealizationCompIso k₀ l Y) M.obj _
-    (ProEtaleWeilSheaf.nativeProjectionPushMate_normalization k₀ l g M.obj)
+    (projectionRealizationCompIso k₀ l X) (projectionRealizationCompIso k₀ l Y) M.obj
+    ((adicSheafDerivedEquivCondensedMod l _).functor.map
+      ((IsoAlgebra.derivedForgetCommIso (adicLowerStarGeometricFiberMapCompFrobeniusIso l g
+        (comp_over g (Spec (CommRingCat.of k₀))))).hom.app M.obj) ≫
+      (projectionAdicCondensedDerivedPushIso l (gb).left).hom.app
+        ((IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).mapDerivedCategory.obj M.obj))
+    (by
+      dsimp only [projectionRealizationCompIso, ProEtaleWeilSheaf.nativeProperForgetIso,
+        asIso_hom]
+      simp only [Category.assoc]
+      exact_mod_proofs ProEtaleWeilSheaf.nativeProjectionPushMate_normalization k₀ l g M.obj)
   rw [h]
   simp only [projectionProperForgetIso, Functor.isoHComp, Iso.symm_hom, Iso.trans_inv,
     Iso.symm_inv, Functor.isoWhiskerRight_inv, Functor.isoWhiskerLeft_inv,
     Functor.whiskerRight_app, Functor.whiskerLeft_app, NatTrans.comp_app,
     Functor.associator_inv_app, Functor.associator_hom_app,
     ObjectProperty.FullSubcategory.comp_hom]
-  change 𝟙 _ ≫ _ ≫ _ ≫ 𝟙 _ = _
-  simp only [Category.id_comp, Category.comp_id]
+  simp only [ObjectProperty.FullSubcategory.id_hom, Category.id_comp, Category.comp_id]
   rfl
 
 set_option backward.defeqAttrib.useBackward true in

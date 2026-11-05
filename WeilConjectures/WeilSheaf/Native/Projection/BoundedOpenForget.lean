@@ -72,7 +72,8 @@ lemma projectionOpenAdjunction_counit_app_hom (M : WeilComplex k₀ l Z) :
     (objectProperty k₀ l U).fullyFaithfulι (objectProperty k₀ l Z).fullyFaithfulι
     (Iso.refl _) (Iso.refl _) M).trans ?_
   simp only [Iso.refl_inv, NatTrans.id_app]
-  erw [Category.id_comp, Functor.map_id, Category.id_comp]
+  erw [Category.id_comp, CategoryTheory.Functor.map_id, Category.id_comp]
+  rfl
 
 /-- The bounded geometric open unit is the ambient unit. -/
 lemma projectionOpenAdjunction_unit_app_hom (K : BoundedConstructible (condensedRingObj Λ
@@ -89,6 +90,34 @@ lemma projectionOpenAdjunction_unit_app_hom (K : BoundedConstructible (condensed
     rw [Adjunction.map_restrictFullyFaithful_unit_app]
     simp [CondensedRing.boundedConstructibleOpenImmersionLowerShriekCompatibility,
       CondensedRing.boundedConstructibleUpperStarCompatibility, ObjectProperty.liftCompιIso]
+    rfl
+
+/-- The bounded open mate has the underlying ambient mate. -/
+lemma projectionOpenMate_app_hom (M : WeilComplex k₀ l Z) :
+    ((mateEquiv (extensionByZeroUpperStarAdjunction (k₀ := k₀) (l := l) j)
+      (CondensedRing.boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ l jb)
+      (projectionOpenForgetIso k₀ l j).inv).app M).hom =
+    (mateEquiv (ProEtaleWeilSheaf.derivedExtensionByZeroUpperStarAdjunction k₀ l j)
+      (CondensedRing.derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ (jb).left)
+      (projectionOpenCompositeForgetIso k₀ l j).inv).app M.obj := by
+  have h₁ := projection_mateEquiv_app
+    (extensionByZeroUpperStarAdjunction (k₀ := k₀) (l := l) j)
+    (CondensedRing.boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ l jb)
+    (TwoSquare.mk _ _ _ _ (projectionOpenForgetIso k₀ l j).inv) M
+  have h₂ := projection_mateEquiv_app
+    (ProEtaleWeilSheaf.derivedExtensionByZeroUpperStarAdjunction k₀ l j)
+    (CondensedRing.derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ (jb).left)
+    (TwoSquare.mk _ _ _ _ (projectionOpenCompositeForgetIso k₀ l j).inv) M.obj
+  refine (congrArg (fun φ ↦ (boundedConstructible _).ι.map φ) h₁).trans ?_
+  refine Eq.trans ?_ h₂.symm
+  change ((CondensedRing.boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ l jb).unit.app _).hom ≫ _ ≫ _ = _
+  rw [projectionOpenAdjunction_unit_app_hom]
+  change _ ≫ _ ≫ (CondensedRing.upperStar Λ (jb).left).leftDerivedFunctor.map
+    (((IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l Z)).mapDerivedCategory ⋙
+      (adicSheafEquivCondensedMod l _).functor.mapDerivedCategory).map
+        (((extensionByZeroUpperStarAdjunction (k₀ := k₀) (l := l) j).counit.app M).hom)) = _
+  rw [projectionOpenAdjunction_counit_app_hom]
+  rfl
 
 /-- The exceptional mate of the open forget square is invertible. -/
 theorem isIso_mateEquiv_projectionOpenForgetIso :
@@ -109,16 +138,12 @@ theorem isIso_mateEquiv_projectionOpenForgetIso :
   let b := CondensedRing.boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ l jb
   rw [NatTrans.isIso_iff_isIso_app]
   intro M
-  have hc := projectionOpenAdjunction_counit_app_hom k₀ l j M
-  have hm : ((mateEquiv a b (projectionOpenForgetIso k₀ l j).inv).app M).hom =
-      (mateEquiv A B (projectionOpenCompositeForgetIso k₀ l j).inv).app M.obj := by
-    rw [projection_mateEquiv_app, projection_mateEquiv_app]
-    change (b.unit.app _).hom ≫ _ ≫ _ = _
-    rw [projectionOpenAdjunction_unit_app_hom, hc]
-    rfl
-  apply isIso_of_reflects_iso _ (boundedConstructible _).ι
-  change IsIso (((mateEquiv a b (projectionOpenForgetIso k₀ l j).inv).app M).hom)
-  rw [hm]
-  infer_instance
+  have hm := projectionOpenMate_app_hom k₀ l j M
+  have : IsIso ((boundedConstructible _).ι.map
+      ((mateEquiv a b (projectionOpenForgetIso k₀ l j).inv).app M)) := by
+    change IsIso (((mateEquiv a b (projectionOpenForgetIso k₀ l j).inv).app M).hom)
+    rw [hm]
+    infer_instance
+  exact isIso_of_reflects_iso _ (boundedConstructible _).ι
 
 end AlgebraicGeometry.WeilComplex

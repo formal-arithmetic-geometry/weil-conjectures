@@ -7,7 +7,7 @@ module
 public import WeilConjectures.WeilSheaf.Native.Projection.BoundedOpenProjectionSquare
 public import WeilConjectures.WeilSheaf.Native.Projection.BoundedProperProjectionSquare
 public import WeilConjectures.WeilSheaf.Native.Projection.MateAdjunctionChoice
-public import WeilConjectures.CategoryTheory.Adjunction.MateVCompIsIso
+public import WeilConjectures.WeilSheaf.Native.Projection.TwoSquareComposite
 public import WeilConjectures.WeilSheaf.Native.Projection.ProjectionPastingMonoidal
 public import WeilConjectures.WeilSheaf.Native.Projection.TwoSquareComposite
 
