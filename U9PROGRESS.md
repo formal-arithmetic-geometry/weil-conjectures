@@ -21,3 +21,16 @@
 - No local Lean/Lake execution, no sorries or trust escapes, no heartbeat increases.
 - Completion marker: `/home/ubuntu/u9/state/BZ72.DONE`.
 - Outside-unit caller `NativeHomLocalizedConeBoundaryModel.lean:114` still needs its owner's port; details are in the fix log.
+
+# BZ129 in progress
+
+- Unit: BZ129, branch `u9/BZ129`.
+- ModulePullbackPushforwardAdjunction, RingedDerivedRestrictionGeneral, and
+  HypercohomologyLeftEdge passed `ucheck-bump` at `8fac98f81`.
+- The user instructed continuation after the explicit statement-adjustment
+  proposal for MappedSingleCyclesShiftComparison. That exact canonical
+  quotient/Qh comparison patch is now applied, together with its proof repair.
+- Next: validate all four assigned modules together with `ucheck-bump`, then
+  write `/home/ubuntu/u9/state/BZ129.DONE`.
+- Fix patterns and logs: `/home/ubuntu/u9/bz/FIXES-BZ129.md`.
+- No local Lean/Lake execution, no forbidden proof escapes or heartbeat increases.
