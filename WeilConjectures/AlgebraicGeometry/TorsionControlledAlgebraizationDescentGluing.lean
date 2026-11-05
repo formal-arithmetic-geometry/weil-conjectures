@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 import WeilConjectures.Topology.GlueSheavesOfModules
 import WeilConjectures.AlgebraicGeometry.TorsionControlledAlgebraizationLocalDescent
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Gluing torsion-controlled triples -/
 

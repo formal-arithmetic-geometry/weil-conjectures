@@ -12,6 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.StalkComparisonSourceTransport
 import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 import WeilConjectures.AlgebraicGeometry.TensorPullbackKFlatQuasiIso
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! Natural comparison transformation for the derived stalk extension.
 (blueprint: lem-pc-stalk-derived-extension-comparison-core) -/
