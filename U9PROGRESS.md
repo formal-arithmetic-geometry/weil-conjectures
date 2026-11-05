@@ -148,8 +148,11 @@
 - The user instructed continuation after the explicit two-private-helper API proposal.
   The compositor orientation edits and matching inverse cancellation are now applied.
 - Baseline `ucheck-bump` stopped before the target in `Presheaf.InternalHom`, assigned to BZ581.
-- Next: resolve the upstream build dependency, remotely validate the assigned module,
-  then build its two direct importers and the next layer.
+- Assigned module and both direct importers passed together at `e4462d9530`:
+  rc=0, failed=0, 4924 jobs, on `poolb:43.157.148.197`.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ566-repair3-importers-full.log`.
+- Merged coordinator `cfcb63ad7` to incorporate the shared dependency repairs.
+- Next: validate the two smallest importers in the second layer.
 - Notes and logs: `/home/ubuntu/u9/bz/FIXES-BZ566.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
