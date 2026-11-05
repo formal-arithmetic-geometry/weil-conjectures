@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import WeilConjectures.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
 import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
@@ -276,7 +277,8 @@ theorem ideal_tensor_restricted_multiplication_image
         let f := J.subschemeι
         let F := SheafOfModules.unit J.subscheme.ringCatSheaf
         refine isQuasicoherent_of_forall_isAffineOpen _ (fun W hW g s ↦ ?_) (fun W hW g t ht ↦ ?_)
-        · obtain ⟨n, t, ht⟩ := exists_map_eq_pow_smul_of_basicOpen_eq F (hW.preimage f) (f.app W g)
+        · obtain ⟨n, t, ht⟩ := exists_map_eq_pow_smul_of_basicOpen_eq F
+            (IsAffineOpen.preimage (U := W) hW f) (f.app W g)
             (f.preimage_basicOpen g).symm (f.preimage_mono (X.basicOpen_le g)) s
           refine ⟨n, t, ht.trans ?_⟩
           have h : f.app (X.basicOpen g) (X.presheaf.map (homOfLE (X.basicOpen_le g)).op g) =
@@ -286,7 +288,8 @@ theorem ideal_tensor_restricted_multiplication_image
             rfl
           rw [← h, ← map_pow]
           rfl
-        · obtain ⟨n, hn⟩ := exists_pow_smul_eq_zero_of_basicOpen_eq F (hW.preimage f) (f.app W g)
+        · obtain ⟨n, hn⟩ := exists_pow_smul_eq_zero_of_basicOpen_eq F
+            (IsAffineOpen.preimage (U := W) hW f) (f.app W g)
             (f.preimage_basicOpen g).symm (f.preimage_mono (X.basicOpen_le g)) t ht
           rw [← map_pow] at hn
           exact ⟨n, hn⟩
