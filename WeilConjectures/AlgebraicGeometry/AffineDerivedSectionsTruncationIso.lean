@@ -68,7 +68,7 @@ theorem affineDerivedSections_truncGE_isIso (A : Type u) [CommRing A]
   let F := S ⋙ V
   let : HasDerivedCategory AddCommGrpCat.{u} := HasDerivedCategory.standard _
   have : Limits.PreservesLimitsOfShape (Discrete ℕ) F := by
-    dsimp [F, S, RingedSpace.globalSectionsFunctor]
+    dsimp only [F, S, RingedSpace.globalSectionsFunctor]
     infer_instance
   have hN (M : C) (hM : M.IsQuasicoherent) (p : ℕ) (hp : 1 ≤ p) :
       Limits.IsZero ((F.rightDerived p).obj M) := by
