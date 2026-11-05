@@ -49,7 +49,10 @@ theorem isIso_mateEquiv_projectionCompactForgetIso
     (adj : derivedLowerShriek k₀ l f ⊣ R) :
     IsIso (mateEquiv adj (CondensedRing.boundedConstructibleUpperShriekAdjunction l fb)
       (projectionCompactForgetIso k₀ l f).hom).natTrans := by
-  have := isIso_mateEquiv_projectionCompactificationForgetIso k₀ l f adj
+  have : IsIso (mateEquiv adj
+      (CondensedRing.boundedConstructibleUpperShriekOfCompactificationAdjunction l cb)
+      (projectionCompactificationForgetIso k₀ l f).symm.hom).natTrans :=
+    isIso_mateEquiv_projectionCompactificationForgetIso k₀ l f adj
   exact isIso_mateEquiv_whiskerLeftIso adj
     (CondensedRing.boundedConstructibleUpperShriekOfCompactificationAdjunction l cb)
     (CondensedRing.boundedConstructibleUpperShriekAdjunction l fb)

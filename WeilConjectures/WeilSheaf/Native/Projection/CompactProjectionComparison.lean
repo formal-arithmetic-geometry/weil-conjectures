@@ -142,7 +142,6 @@ theorem projectionCompactification_forget_square (M : WeilComplex k₀ l X)
             ((compactProjectionForget k₀ l X).obj M).obj
             ((compactProjectionForget k₀ l Y).obj N).obj) := by
   have hp := CondensedRing.compactProjectionGeometricPullIso_projection_eq (f := fb) l cb
-    (projectionGeometricPullComp k₀ l f) rfl
     ((compactProjectionForget k₀ l X).obj M) ((compactProjectionForget k₀ l Y).obj N)
   rw [hp]
   -- the pasted square, with all spelling conversions done on abstract functors

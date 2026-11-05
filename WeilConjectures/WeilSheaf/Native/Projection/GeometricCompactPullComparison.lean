@@ -27,22 +27,38 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   {f : X ⟶ Y} (c : Compactification f.left)
 
+/-- The bounded pullback compositor induced by an ambient composition comparison `e`. -/
+def boundedConstructibleUpperStarCompIsoOfAmbient
+    (e : type_of% (leftDerivedUpperStarOverCompactificationIso (f := f) Λ c)) :
+    boundedConstructibleUpperStar Λ l c.overG ⋙
+      boundedConstructibleUpperStar Λ l c.overI ≅ boundedConstructibleUpperStar Λ l f :=
+  NatIso.ofComponents (fun N ↦ ObjectProperty.isoMk _ (e.symm.app N.obj))
+    (fun φ ↦ ObjectProperty.hom_ext _ (e.inv.naturality φ.hom))
+
+/-- The underlying component of `boundedConstructibleUpperStarCompIsoOfAmbient` is the inverse
+of the ambient comparison. It is stated for a variable `e`, so that the kernel never unfolds a
+concrete comparison. -/
+lemma boundedConstructibleUpperStarCompIsoOfAmbient_hom_app
+    (e : type_of% (leftDerivedUpperStarOverCompactificationIso (f := f) Λ c))
+    (N : Dᵇc(Y.left)⟦Λ⟧) :
+    ((boundedConstructibleUpperStarCompIsoOfAmbient Λ l c e).hom.app N).hom = e.inv.app N.obj :=
+  rfl
+
 /-- The bounded pullback compositor with its ambient components. -/
 def compactProjectionGeometricPullIso :
     boundedConstructibleUpperStar Λ l c.overG ⋙
       boundedConstructibleUpperStar Λ l c.overI ≅ boundedConstructibleUpperStar Λ l f :=
-  (eqToIso (congrArg (boundedConstructibleUpperStar Λ l) c.overI_overG.symm) ≪≫
-    boundedConstructibleUpperStarComp Λ l c.overI c.overG).symm
+  boundedConstructibleUpperStarCompIsoOfAmbient Λ l c
+    (leftDerivedUpperStarOverCompactificationIso (f := f) Λ c)
 
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-set_option pp.all true in
+/-- The underlying component is the inverse of the ambient composition comparison. -/
+lemma compactProjectionGeometricPullIso_hom_app (N : Dᵇc(Y.left)⟦Λ⟧) :
+    ((compactProjectionGeometricPullIso Λ l c).hom.app N).hom =
+      (leftDerivedUpperStarOverCompactificationIso (f := f) Λ c).inv.app N.obj :=
+  boundedConstructibleUpperStarCompIsoOfAmbient_hom_app Λ l c (e := _) N
+
 /-- The geometric exceptional projection factors through the canonical pullback compositor. -/
 lemma compactProjectionGeometricPullIso_projection_eq
-    (ε : boundedConstructibleUpperStar (Profinite.padicAlgClRingObj l) l c.overG ⋙
-      boundedConstructibleUpperStar _ l c.overI ≅ boundedConstructibleUpperStar _ l f)
-    (hε : ε = (eqToIso (congrArg (boundedConstructibleUpperStar _ l)
-      c.overI_overG.symm) ≪≫ boundedConstructibleUpperStarComp _ l c.overI c.overG).symm)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj l⟧)
     (B : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj l⟧) :
     ObjectProperty.homMk
@@ -57,13 +73,8 @@ lemma compactProjectionGeometricPullIso_projection_eq
               c.overI).projectionComparison K
               ((boundedConstructibleUpperStar _ l c.overG).obj B)) ≫
             (boundedConstructibleOpenImmersionLowerShriek _ l c.overI).map
-              (K ◁ ε.hom.app B)) := by
-  subst ε
-  have h := ι_map_eqToIso_trans_upperStarComp_inv_app_compactification (f := f) l c B
-  have h' := homMk_exceptionalProjectionMorphismOfCompactification_eq (f := f) l c K B
-    ((eqToIso (congrArg (boundedConstructibleUpperStar _ l) c.overI_overG.symm) ≪≫
-      boundedConstructibleUpperStarComp _ l c.overI c.overG).inv.app B) h
-  trace_state
-  simpa only [Iso.symm_hom] using h'
+              (K ◁ (compactProjectionGeometricPullIso _ l c).hom.app B)) :=
+  homMk_exceptionalProjectionMorphismOfCompactification_eq l c K B _
+    (compactProjectionGeometricPullIso_hom_app _ l c B)
 
 end AlgebraicGeometry.ProEtale.CondensedRing
