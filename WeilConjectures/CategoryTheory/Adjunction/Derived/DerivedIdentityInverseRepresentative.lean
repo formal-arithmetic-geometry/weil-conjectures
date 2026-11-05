@@ -36,15 +36,17 @@ theorem mapDerivedCategoryNatIso_trans_idIso_inv_app_Q_obj {D : Type*} [Category
         (DerivedCategory.Q.obj P) =
       DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex r.inv (.up ℤ)).app P) ≫
         (Functor.mapDerivedCategoryFactors (C₁ := D) (C₂ := D) R).inv.app P := by
+  have hId : (Functor.mapDerivedCategoryIdIso D).hom.app (DerivedCategory.Q.obj P) =
+      (𝟭 D).mapDerivedCategoryFactors.hom.app P := by
+    rw [Functor.mapDerivedCategoryIdIso_hom_app]
+    have h : (Functor.mapHomologicalComplexIdIso D (.up ℤ)).hom.app P = 𝟙 _ := rfl
+    rw [h]
+    erw [DerivedCategory.Q.map_id, Category.comp_id]
   apply (Iso.eq_comp_inv ((Functor.mapDerivedCategoryFactors (C₁ := D) (C₂ := D) R).app P)).2
-  have hh := Adjunction.mapDerivedCategoryNatIso_trans_idIso_inv_app_Qh_obj (C := D) (F := R) r
-    ((HomotopyCategory.quotient _ (.up ℤ)).obj P)
-  simp only [Functor.mapDerivedCategoryFactorsh_hom_app,
-    NatTrans.mapHomotopyCategory_app, DerivedCategory.quotientCompQhIso,
-    HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift_hom,
-    Quotient.lift.isLift_inv, Functor.mapHomotopyCategoryFactors] at hh
-  erw [R.mapDerivedCategory.map_id, DerivedCategory.Qh.map_id,
-    Category.id_comp, Category.comp_id, Category.comp_id] at hh
-  exact hh
+  have hh := Functor.mapDerivedCategoryNatIso_fac r.symm P
+  rw [Functor.mapDerivedCategoryNatIso_symm, Iso.symm_hom] at hh
+  simp only [Iso.trans_inv, NatTrans.comp_app, Iso.app_hom, Category.assoc]
+  rw [hh, ← Category.assoc, ← hId, Iso.inv_hom_id_app]
+  erw [Category.id_comp]
 
 end CategoryTheory.Adjunction
