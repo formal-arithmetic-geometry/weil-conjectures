@@ -9,6 +9,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.DerivedPullbackMonoidalModel
 public import WeilConjectures.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 public import Mathlib.Algebra.Homology.Monoidal
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.Algebra.Homology.KFlatPullback
 import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
 
