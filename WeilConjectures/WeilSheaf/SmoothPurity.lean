@@ -60,8 +60,11 @@ The first two inputs of `γ_f` listed above are stated with `sorry`:
   orientation `AlgebraicGeometry.ProEtale.CondensedRing.smoothOrientation` is not canonical, and
   `AlgebraicGeometry.Etale.exists_iso_dualizingComplex_isWeilMorphism` is for finite coefficients
   over `Spec k₀`;
-- the co-projection map needs the compatibility of forgetting the Weil structure with the native
-  tensor product, the projection formula and the counit of `Rf₀! ⊣ Rf^!`.
+- the co-projection map needs a natural comparison of forgetting the Weil structure after `Rf₀!`
+  with the condensed `Rf̄_!`, compatible with the counits, a monoidal structure on
+  `adicSheafDerivedEquivCondensedMod` matching the native tensor product, and the compatibility of
+  both with the projection formulas; see the module docstring of
+  `WeilConjectures.WeilSheaf.UpperShriekUnitTensorMap`.
 -/
 
 @[expose] public section

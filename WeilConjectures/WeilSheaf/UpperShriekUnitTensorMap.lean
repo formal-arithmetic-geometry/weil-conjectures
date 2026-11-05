@@ -27,11 +27,17 @@ The tensor product is the native derived tensor product of Weil complexes
 The statement is proved with `sorry`. The map itself is the adjoint under `Rf₀! ⊣ Rf^!` of
 `Rf₀!(f^* L ⊗ Rf^! ℚ̄_ℓ) ≅ L ⊗ Rf₀! Rf^! ℚ̄_ℓ ⟶ L ⊗ ℚ̄_ℓ ≅ L`, built from the compact-support
 projection formula (`AlgebraicGeometry.WeilComplex.nonempty_nativeCompactProjectionLeft_iso`) and
-the counit. That it lies over the geometric map needs the compatibility of forgetting the Weil
-structure with the native tensor product, the projection formula, and the counit of
-`Rf₀! ⊣ Rf^!`. Part of this compatibility is
-`WeilComplex.nonempty_adicSheafDerivedEquivCondensedMod_forget_obj_iso_upperShriek`;
-the rest is missing from the library.
+the counit. Proving that it lies over the geometric map needs three comparisons that the library
+does not have:
+- a natural isomorphism between forgetting the Weil structure after `Rf₀!` and the condensed
+  `Rf̄_!` (`CondensedRing.boundedConstructibleLowerShriek`), compatible with the counits of
+  `Rf₀! ⊣ Rf^!` and `Rf̄_! ⊣ Rf̄^!`. Only an objectwise identification of the right adjoints exists
+  (`WeilComplex.nonempty_adicSheafDerivedEquivCondensedMod_forget_obj_iso_upperShriek`);
+- a monoidal structure on `adicSheafDerivedEquivCondensedMod` that matches the native tensor
+  product after forgetting. `nativeScalarForgetting_monoidal` only gives a `Nonempty` statement;
+- the compatibility of these two comparisons with the projection formulas
+  (`WeilComplex.nonempty_nativeCompactProjectionLeft_iso` and
+  `CondensedRing.boundedConstructibleExceptionalProjection`).
 -/
 
 @[expose] public section
@@ -55,9 +61,9 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
   [IsSeparated (X ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
   [HasUpperShriek k₀ l f]
 
-/-- **The co-projection map of Weil complexes lies over the geometric one** (blueprint:
-`thm-pur-weil-equivariance-of-purity-and-trace`, the Weil equivariance of the map
-`φ_{f,K} : Lf^* K ⊗ ω_f ⟶ Rf^! K` of `pur9-cs-def-phi`, at the coefficient stage `ℚ̄_ℓ`): for a
+/-- **The co-projection map of Weil complexes lies over the geometric one.** This is a helper for
+`thm-pur-weil-equivariance-of-purity-and-trace`, not a blueprint node: it concerns the map
+`φ_{f,K} : Lf^* K ⊗ ω_f ⟶ Rf^! K` of `pur9-cs-def-phi`, at the coefficient stage `ℚ̄_ℓ`. For a
 separated morphism of finite type `f : X ⟶ Y` of separated `k₀`-schemes of finite type, there is
 a morphism of Weil complexes `f^* L ⊗ Rf^! ℚ̄_ℓ ⟶ Rf^! L`, natural in `L`, which on the geometric
 fibre `X̄` is the geometric co-projection map `f̄^* L̄ ⊗ Rf̄^! ℚ̄_ℓ ⟶ Rf̄^! L̄`
