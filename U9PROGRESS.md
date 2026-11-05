@@ -127,3 +127,17 @@
 - Next: remote validation, then up to four direct importers and a second downstream layer.
 - Fix patterns: `/home/ubuntu/u9/bz/FIXES-BZ469.md`.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
+
+# BZ511 in progress
+
+- Branch: `u9/BZ511`; starting commit: `fa248eeed`.
+- The user instructed continuation after the exact two-private-helper API proposal.
+  The compositor inverse in `derivedCompSingle` and the direct compositor in
+  `derivedTripleNatSingle` are applied. The public theorem statement is unchanged.
+- Proofs now use Mathlib's single-object compositor lemma, hom naturality, and
+  hom/inv cancellation; the redundant `rfl` after `simp only` is removed.
+- Pinned Mathlib source was inspected at b63f6e8a. Patterns, occurrence counts,
+  and integration errors: `/home/ubuntu/u9/bz/FIXES-BZ511.md`.
+- Existing `ucheck-bump` invocation is queued; it reads the pushed branch after
+  acquiring a tree. Next: validate the owned module and continue downstream.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
