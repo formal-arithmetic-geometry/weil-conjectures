@@ -12,6 +12,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.RingTheory.Flat.Basic
 import Mathlib.RingTheory.Flat.Stability
 import WeilConjectures.AlgebraicGeometry.IntrinsicFlatModuleStalkTensorPresentation
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Flat affine sections give flat stalks
 

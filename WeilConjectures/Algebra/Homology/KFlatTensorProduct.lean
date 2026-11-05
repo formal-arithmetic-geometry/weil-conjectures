@@ -10,6 +10,7 @@ public import WeilConjectures.Algebra.Homology.KFlat
 public import Mathlib.Geometry.RingedSpace.SheafedSpace
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import Mathlib.Algebra.Homology.Monoidal
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-!
 # Tensor products of K-flat complexes
