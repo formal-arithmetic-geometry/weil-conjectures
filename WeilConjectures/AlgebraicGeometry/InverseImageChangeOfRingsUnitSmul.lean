@@ -6,7 +6,6 @@ Authors: Bin Wu
 
 module
 
-public import Mathlib.Util.CountHeartbeats
 public import WeilConjectures.Topology.InverseImageModule
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 
@@ -27,8 +26,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-#count_heartbeats in
-set_option maxHeartbeats 400000 in
+set_option maxHeartbeats 250000 in
+-- Measured 209286 heartbeats on Lean v4.35.0-rc3 with Mathlib b63f6e8a.
 /-- The additive inverse-image unit, followed by extension and sheafification, is
 semilinear for the ring inverse-image unit followed by the extension ring map.
 
@@ -70,7 +69,6 @@ theorem inverseImage_changeOfRings_unit_smul
       sh ((1 : B.obj.obj W) ⊗ₜ[(TopCat.Sheaf.inverseImageRing f A).obj.obj W,
         (t.hom.app W).hom] eta (c • n)) := by
   classical
-  trace "BZ86 scalar proof entered"
   let W := (Opens.map f).op.obj V
   let sh := ((PresheafOfModules.sheafificationAdjunction
     (𝟙 ((sheafCompose (Opens.grothendieckTopology X)
