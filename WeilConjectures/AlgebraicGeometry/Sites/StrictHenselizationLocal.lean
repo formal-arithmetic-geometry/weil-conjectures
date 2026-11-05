@@ -90,7 +90,7 @@ variable {s} (N : SpecPointedEtaleNeighborhood s)
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The affine pointed étale neighbourhood `(Spec R, Spec.map pt)` of `s`. -/
 noncomputable def toAffine : AffinePointedEtaleNeighborhood s :=
-  ⟨⟨Etale.mk N.hom, CategoryTheory.Over.homMk (Spec.map N.pt) N.w⟩,
+  ⟨Functor.elementsMk _ (Etale.mk N.hom) (CategoryTheory.Over.homMk (Spec.map N.pt) N.w),
     (inferInstance : IsAffine (Spec N.R))⟩
 
 set_option backward.isDefEq.respectTransparency.types false in
