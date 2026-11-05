@@ -1,19 +1,3 @@
-# BZ150 complete
-
-- Branch: `u9/BZ150`; starting commit: `80aeb4bf4`.
-- All four assigned modules passed together with `ucheck-bump`: rc=0, failed=0, 3644 jobs.
-- Validated source commit: `fb9bd7b27d169a5e395ed809947ee52e6fd0b46e`.
-- Build tree: `newsrv:/home/ubuntu/u9n/bumpw5`.
-- Full log: `/home/ubuntu/u9/bz/BUILD-BZ150-final-full.log`.
-- The user instructed continuation after the exact one-line statement migration proposal.
-  `rightDerivedPullback_comp` now uses `(mapDerivedCategoryCompIso P P').symm` because
-  Mathlib owns the old name with the opposite orientation; the intended map is preserved.
-- All remaining declaration statements and existing docstrings are unchanged.
-- Completion marker: `/home/ubuntu/u9/state/BZ150.DONE`.
-- This completion update changes only progress documentation after the successful source build.
-- Fix patterns and logs: `/home/ubuntu/u9/bz/FIXES-BZ150.md`.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
-
 # BZ133 complete
 
 - Branch: `u9/BZ133`.
@@ -66,20 +50,18 @@
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 - Completion marker: `/home/ubuntu/u9/state/BZ130.DONE`.
 
-# BZ159 complete
+# BZ165 complete
 
-- Unit: BZ159; branch: `u9/BZ159`.
-- All four assigned modules passed `ucheck-bump` together: rc=0, failed=0, 4255 jobs.
-- Validated source commit: `f69c33ffa45cfbe76eeabefd69b81cd9b1b10343`.
-  This completion update changes only progress documentation.
-- Build host: `newsrv:/home/ubuntu/u9n/bumpw6`.
-- Full log: `/home/ubuntu/u9/bz/BUILD-BZ159-final-full.log`.
-- Modules: DerivedSingleShiftNormalization, NativeDerivedBaseChange, Inertia,
-  CyclicDerivedActionRealization.
-- The user instructed continuation after the explicit equivalent statement API proposal;
-  the two cyclic-action statement references now use the forward composition isomorphism.
-  All other existing statement text and docstrings remain unchanged.
-- Fix patterns and whole-tree baseline occurrence counts:
-  `/home/ubuntu/u9/bz/FIXES-BZ159.md`.
-- No proof placeholders, trust bypasses, local Lean/Lake execution, or heartbeat increases.
-- Completion marker: `/home/ubuntu/u9/state/BZ159.DONE`.
+- Branch: `u9/BZ165`; initial commit: `6504338cb`.
+- All four assigned modules passed `ucheck-bump` together: rc=0, failed=0, 3700 jobs.
+- Validated source commit: `22130ff98f14288bb3712ab5a1f105456bf44682`.
+- Build tree: `newsrv:/home/ubuntu/u9n/bumpw1`.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ165-final-full.log`.
+- Fix patterns, occurrence counts, and exact errors: `/home/ubuntu/u9/bz/FIXES-BZ165.md`.
+- The user instructed continuation after the exact compositor migration proposal;
+  its three public statement expressions now select the original maps via the new
+  Mathlib compositor's opposite orientation. All other declaration types and
+  existing docstrings are unchanged.
+- No local Lean/Lake execution, prohibited proof shortcuts, or heartbeat increases.
+- This final completion commit changes only progress documentation after the green build.
+- Completion marker: `/home/ubuntu/u9/state/BZ165.DONE`.

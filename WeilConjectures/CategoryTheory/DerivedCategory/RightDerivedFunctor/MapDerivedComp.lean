@@ -186,8 +186,8 @@ lemma mapDerivedCategoryFactorsh_inv_app_mapDerivedCategoryCompIso_inv_app (F : 
           ((mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) (ComplexShape.up ℤ)).hom.app X) ≫
         (F ⋙ G).mapDerivedCategoryFactorsh.inv.app X := by
   have H := mapDerivedCategoryFactorsh_inv_app_mapDerivedCategoryCompIso_hom_app F G X
-  rw [← cancel_mono ((mapDerivedCategoryCompIso F G).hom.app _)]
-  simp only [Category.assoc, Iso.inv_hom_id_app, H]
+  rw [← cancel_mono ((mapDerivedCategoryCompIso F G).inv.app _)]
+  simp only [Category.assoc, Iso.hom_inv_id_app, H]
   rw [← DerivedCategory.Qh.map_comp_assoc, Iso.hom_inv_id_app, DerivedCategory.Qh.map_id,
     Category.id_comp]
   erw [Category.comp_id]
@@ -226,7 +226,7 @@ lemma rightDerivedFunctorIsoMapDerivedCategoryComp_hom_app_comp (γ₁ : L₁ �
       whiskerLeft L₁.mapDerivedCategory (rightDerivedFunctorIsoMapDerivedCategoryComp γ₂).hom =
       (rightDerivedFunctorIsoMapDerivedCategoryComp γ₁₂).hom ≫
         whiskerRight ((mapDerivedCategoryNatIso ε.symm).hom ≫
-          (mapDerivedCategoryCompIso L₁ L₂).hom) Γ₃.rightDerivedFunctor from congr_app H K
+          (mapDerivedCategoryCompIso L₁ L₂).inv) Γ₃.rightDerivedFunctor from congr_app H K
   refine rightDerived_ext Γ₁.rightDerivedFunctor Γ₁.rightDerivedFunctorUnit
     (HomotopyCategory.quasiIso C₁ (ComplexShape.up ℤ)) _ _ _ ?_
   ext X
