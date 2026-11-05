@@ -156,7 +156,13 @@ private theorem resolution_baseChange_sections
     dsimp only [Functor.comp_map] at hf
     simp only [rightDerivedFunctorPlusObjSingleFunctorIsoQ, Iso.trans_hom,
       mapIso_hom, Iso.symm_hom, asIso_inv, Category.assoc]
-    erw [huI, huJ]
+    have : IsIso (F.rightDerivedFunctorPlusUnit.app I) := by
+      rw [huI]
+      infer_instance
+    have : IsIso (F'.rightDerivedFunctorPlusUnit.app J) := by
+      rw [huJ]
+      infer_instance
+    erw [IsIso.inv_eq_inv.mpr huI, IsIso.inv_eq_inv.mpr huJ]
     change _ ≫ _ ≫ F'.rightDerivedFunctorPlus.map
       ((L.mapDerivedCategoryPlusSingleFunctor 0).hom.app G) ≫
       F'.rightDerivedFunctorPlus.map a'.hom ≫
