@@ -81,15 +81,14 @@
 - No local Lean/Lake, proof placeholders, trust escapes, or heartbeat increases.
 - This final commit changes only progress documentation after the successful build.
 
-# BZ275 in progress
+# BZ279 in progress
 
-- Branch: `u9/BZ275`, starting commit `18e44f2d5`.
-- Assigned target: `WeilConjectures.CategoryTheory.DerivedSectionScalarTransport`.
-- The user instructed continuation after the exact three-statement API proposal; applied
-  `/home/ubuntu/u9/bz/BZ275-statement-api.patch` to preserve the comparison under Mathlib's
-  reversed `mapDerivedCategoryCompIso` orientation.
-- Proofs use the corresponding inverse factors and cancellation. Localization API and
-  implementation imports fix the private `Qh` definitional reductions.
-- Next: remote validation, direct importers, then DONE with all green modules.
-- Fix patterns and logs: `/home/ubuntu/u9/bz/FIXES-BZ275.md`.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+- Branch: `u9/BZ279`; starting commit: `18e44f2d5127c179f285ccf7d988c2bf3963106e`.
+- Assigned module: `WeilConjectures.AlgebraicGeometry.Curve.MateProjectionData`.
+- Baseline `ucheck-bump` passed every dependency and failed only on the malformed `.symm`.
+- The user instructed continuation after the exact two-site structure-field compatibility
+  proposal. That patch is now applied: `.symm` follows both functor arguments in
+  `transition`, and the reversed Mathlib compositor is inverted in `restriction`.
+- Next: validate the assigned module, check direct importers, then write the DONE marker.
+- Fix patterns, counts, and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ279.md`.
+- No local Lean/Lake execution, proof escapes, profiler probes, or heartbeat increases.
