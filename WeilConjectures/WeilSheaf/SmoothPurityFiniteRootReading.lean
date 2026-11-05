@@ -8,6 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.Finite.FiniteRootSiteComparison
 public import WeilConjectures.TateTwist.FiniteRootsOfUnity
 public import WeilConjectures.TateTwist.RootsOfUnityUpperStar
 public import WeilConjectures.EtaleCohomology.TateTwist.Sheaf
+public import WeilConjectures.WeilSheaf.SmoothPurityRootKernelPullback
 
 /-! # The canonical root comparison and geometric pullback
 
@@ -38,6 +39,8 @@ lemma purity_finiteEtaleRootPullback_eq :
 
 variable [Finite A]
 
+include A hA
+
 /-- Cartier comparison intertwines the canonical étale root pullback and the
 pro-étale root pullback, for arbitrary scheme maps. -/
 lemma purity_cartierRootsIso_pullback (hX : IsUnit (N : Γ(X, ⊤))) :
@@ -50,5 +53,21 @@ lemma purity_cartierRootsIso_pullback (hX : IsUnit (N : Γ(X, ⊤))) :
   have hroot := h.2.2.2.2.2.2.1 N hN hA g hY hX
   rw [purity_finiteEtaleRootPullback_eq] at hroot
   exact hroot
+
+/-- The comparison used in finite Tate reduction commutes with the canonical
+geometric root datum on both sites. -/
+lemma purity_comparisonUpperStarRootsOfUnityIso_pullback (hX : IsUnit (N : Γ(X, ⊤))) :
+    (g)^*[Ab.{u + 1}].map (comparisonUpperStarRootsOfUnityIso Y N hN hY).hom ≫
+        upperStarRootsOfUnitySheafHom g N =
+      (comparisonCoefficientPullbackIso Ab.{u + 1} g).inv.app (Y.rootsOfUnitySheaf N) ≫
+        ν^*(X)[Ab.{u + 1}].map (upperStarRootsOfUnitySheafToRootsOfUnitySheaf N g) ≫
+        (comparisonUpperStarRootsOfUnityIso X N hN hX).hom := by
+  apply (cancel_mono (rootsOfUnitySheafIsoKernel X N).hom).mp
+  simp only [comparisonUpperStarRootsOfUnityIso, Iso.trans_hom, Iso.symm_hom,
+    Functor.map_comp, Category.assoc, Iso.inv_hom_id, Category.comp_id]
+  rw [← purity_rootsOfUnitySheafIsoKernel_upperStar]
+  rw [← Functor.map_comp_assoc, Iso.inv_hom_id, CategoryTheory.Functor.map_id,
+    Category.id_comp]
+  exact purity_cartierRootsIso_pullback A N hN hA g hY hX
 
 end AlgebraicGeometry.ProEtale
