@@ -186,6 +186,22 @@ attribute [local irreducible] _root_.DerivedCategory.monoidalClosed
   _root_.DerivedCategory.instMonoidalCategory_weilConjectures
   _root_.DerivedCategory.commShift₂CurriedTensor
 
+/-- `EtaleHomShiftNormalization` in the form used by the abstract chase. Stated once for both
+coefficient categories, so the kernel unfolds the normalization only here. -/
+private theorem etaleHomShiftNormalization_apply
+    (C : Type*) [Category.{u + 1} C] [Abelian C]
+    [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]
+    [MonoidalClosed C] [SymmetricCategory C] [Abelian.HasFunctorialFlatResolution C]
+    (X : Scheme.{u}) (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology C))
+    (s : ((derivedHom C X).flip.obj M).CommShift ℤ) (h : EtaleHomShiftNormalization C X M s)
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology C)) (n : ℤ) :
+    ((derivedTensor C X).obj (K⟦-n⟧)).map
+      (((n * (n + 1)) / 2).negOnePow • ((s.commShiftIso n).hom.app (op K))) ≫
+      etaleHomTensorShiftCancellation C X K (((derivedHom C X).flip.obj M).obj (op K)) n ≫
+        (derivedTensorHomAdjunction C (X := X) K).counit.app M =
+      (derivedTensorHomAdjunction C (X := X) (K⟦-n⟧)).counit.app M := by
+  exact h K n
+
 /-- Derived tensor-Hom comparison respects normalized shifts.
 Source: Stacks Project, Tags 08JC and 08J9; blueprint `thm-coef-finite-hom`, proof paragraph 2.
 
@@ -238,7 +254,8 @@ theorem derivedTensorHomShiftComparison_component
     (derivedTensor C X) (derivedHom C X) (derivedTensor D X) (derivedHom D X)
     (derivedTensorHomAdjunction C (X := X)) (derivedTensorHomAdjunction D (X := X))
     μ (etaleHomTensorShiftCancellation C X) (etaleHomTensorShiftCancellation D X)
-    M v hv sA sB K n (hA K n) (hB (F.obj K) n)
+    M v hv sA sB K n (etaleHomShiftNormalization_apply C X M sA hA K n)
+    (etaleHomShiftNormalization_apply D X (F.obj M) sB hB (F.obj K) n)
     (fun K L P f g ↦ etaleTensorHomTranspose_naturality D X K L (F.obj M) P f g)
     (fun K L L' g n ↦ etaleHomTensorShiftCancellation_naturality D X K g n)
     hμ hs
