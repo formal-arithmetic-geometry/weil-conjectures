@@ -26,6 +26,9 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
   (a : Λ ⟶ Λ') [IsMonHom a] {X Y : Scheme.{u}} (g : X ⟶ Y)
 
+set_option trace.profiler true in
+set_option trace.profiler.threshold 200 in
+set_option diagnostics true in
 /-- On an object in degree zero, the nonflat derived pullback comparison is the
 ordinary coefficient/pullback comparison through the canonical single maps. -/
 lemma derivedUpperStarExtendScalarsIso_inv_app_single_comp_comparison
