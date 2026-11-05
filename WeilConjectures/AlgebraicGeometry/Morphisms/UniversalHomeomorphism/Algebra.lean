@@ -110,7 +110,7 @@ lemma of_subalgebra (B₀ : Subalgebra A B) : Algebra.IsUniversalHomeomorphism A
       constructor
       intro x
       have := Algebra.IsIntegral.isIntegral (R := A) (x : B)
-      rwa [← isIntegral_algebraMap_iff (A := B₀) (B := B) Subtype.val_injective]
+      rwa [← isIntegral_algebraMap_iff (A := B₀) (B := B)]
     have hint' : Algebra.IsIntegral B₀ B :=
       Algebra.IsIntegral.tower_top (R := A) (S := B₀) (T := B)
     have hsurj : Function.Surjective (PrimeSpectrum.comap (algebraMap B₀ B)) :=
