@@ -17,8 +17,6 @@ Source: literature/stacks-project/algebra.tex, Lemma Tag 00R0
 (blueprint: lem-weil-pbc-limit-finite-presentation).
 -/
 
-set_option linter.unusedVariables false
-
 @[expose] public section
 
 open CategoryTheory CategoryTheory.Limits
@@ -27,6 +25,7 @@ universe u
 
 namespace Algebra
 
+set_option linter.unusedVariables false in
 /-- Noetherian approximation of a finitely presented ring map (Stacks Tag 00R0).
 (blueprint: lem-weil-pbc-limit-finite-presentation)
 Proof (Stacks Tag 00R0, expanded from the non-local version of Tag 00QV):
