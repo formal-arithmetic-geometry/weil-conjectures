@@ -83,8 +83,50 @@
   unresolved base-field parameter at the smooth-purity call. Supplied k₀/l
   explicitly in both the adjunction and the twist-pullback isomorphism.
 - GREEN: AffineLineSmoothAdjunction (and its TateTwistPullback dependency),
-  ucheck rc=0 at 2b59e904 (see git log for full commit), log
+  ucheck rc=0 at 3eb86e4fe7, log
   /home/ubuntu/u9/logs/K6-20261105T103517.log, built=1 failed=0.
 - Stopped only my initial, already-failed batch service after this focused success;
   it was still rebuilding newly imported upstream trace-construction dependencies.
   Restarting the final batch on corrected sources, reusing completed cache artifacts.
+- Hardened the audit: any unavailable body on an admitted dependency path is an
+  error, even if the declaration type has constants. The final audit will be
+  rerun after the current batch if it has already taken its source snapshot.
+- Proof review: the adjoint of upperStar π ⋙ derivedLowerShriek π is the
+  twist-shift (1)[2] followed by upperStar π ⋙ derivedLowerStar π. Homotopy
+  invariance identifies the latter with identity. Uniqueness of left adjoints
+  compares the resulting left adjoint to the inverse autoequivalence (-1)[-2].
+  This proves a natural isomorphism without choosing any lift of a geometric map.
+- The only source references to the old trace-derived adjunction are now its own
+  declaration/docstrings. Its sole former consumer, OtherSections, uses the new
+  smooth-purity adjunction. The trace statement itself is retained unchanged.
+- Read C6 AffineLineTraceReduction: any natural Thom iso supplies its Weil input T; the remaining geometric input G is bijectivity of geometric compact pushforward on Hom into twisted pullbacks. Current condensed geometric APIs (PoincareDuality/Poincare.boundedConstructibleSmoothPurityIso, TraceFormula/PurityDevissage.isIso_upperShriekUnitTensorMap_of_smooth) work on separated schemes and still need comparison with the adic compactification functor of LowerShriekForget. This is additional work beyond the route-B USER proof, not a completed literal trace proof. C6/lead informed through the authorized shared notes.
+- Build coordination: the corrected batch K6-20261105T103738.log had no errors,
+  but was rebuilding the same upstream dependencies as C6-20261105T104350.log
+  nearly in lockstep. Stopped only K6's duplicate service (rc143, built124 failed0) to free a shared
+  tree; C6 was asked in the shared notes to keep its build running. Once C6's
+  shared artifacts are ready, rerun our final USER/audit batch. This is cache
+  coordination, not a completed verification or a proof blocker.
+- Clarified in shared notes: our Thom iso depends on K4, so it must not be fed back
+  into K4's own orientation proof as an independent normalization input. Current
+  K4 code has no such import/declaration cycle. This dependency will be explicit
+  in DONE, as required by the brief.
+- Read the newly appended LEAD expert answer (Zulip1787): constant trace lifts
+  uniquely by negative-Hom vanishing; projection formula extends it naturally.
+  Fetched/read pr2115 (68dedea46). It does not change our assigned declaration;
+  it adds exists_lowerShriek_forget_iso_projection as an admitted compatibility
+  input, still over separated bases. No merge of unrelated K4/K5 declarations.
+- The explicit general lift API is IsoAlgebra.exists_forget_mapDerivedCategory_map_eq;
+  it needs the actual derived Frobenius commutation equation. StrictWeilComplex
+  provides fully faithful heart realizations, and CyclicDerivedHomExactSequence
+  provides the negative-Hom obstruction calculus. These support the expert's
+  route, but do not themselves construct the geometric constant trace or its
+  Frobenius equation. We retain the already implemented permitted route B and
+  record the K4 dependency, rather than claim the literal trace proof is complete.
+- 2026-11-05 11:31 +0800: still awaiting C6's shared cache fill
+  (/home/ubuntu/u9/logs/C6-20261105T104350.log), currently22611/22760 jobs,
+  no errors. K6 has no running build now; its final USER/audit batch must still
+  be run on this branch. Only the audit and this log differ from the commit
+  whose adjunction helper passed. No DONE file has been written for the new task.
+- Shared-cache batch C6-20261105T104350.log reached the final new C6 module.
+  Its own AffineLineTraceReduction failed, but common upstream imports are ready.
+  Starting K6's final verification now, including the strengthened audit.

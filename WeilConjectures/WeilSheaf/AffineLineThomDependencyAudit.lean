@@ -24,6 +24,11 @@ run_elab do
   let root :=
     `AlgebraicGeometry.WeilComplex.nonempty_iso_upperStar_comp_derivedLowerShriek_of_isPullback
   let env ← getEnv
+  let rootAxioms ← collectAxioms root
+  logInfo m!"Thom axioms: {rootAxioms}"
+  for name in rootAxioms do
+    unless #[`propext, `Classical.choice, `Quot.sound, `sorryAx].contains name do
+      throwError "Unexpected axiom: {name}"
   let mut pending := #[root]
   let mut seen : NameSet := {}
   let mut leaves : Array Name := #[]
@@ -42,14 +47,16 @@ run_elab do
       if info.isAxiom then
         unavailable := unavailable.push name
         continue
-      let deps := info.type.getUsedConstants ++
-        ((info.value? true).map Expr.getUsedConstants).getD #[]
-      if deps.contains `sorryAx then
-        leaves := leaves.push name
-      else if deps.isEmpty then
-        unavailable := unavailable.push name
-      else
-        pending := pending ++ deps
+      match info.value? true with
+      | none => unavailable := unavailable.push name
+      | some value =>
+        let deps := info.type.getUsedConstants ++ value.getUsedConstants
+        if deps.contains `sorryAx then
+          leaves := leaves.push name
+        else if deps.isEmpty then
+          unavailable := unavailable.push name
+        else
+          pending := pending ++ deps
   logInfo m!"Direct admitted dependencies: {leaves.qsort Name.lt}"
   logInfo m!"Unavailable dependency bodies: {unavailable.qsort Name.lt}"
   for name in unavailable do
