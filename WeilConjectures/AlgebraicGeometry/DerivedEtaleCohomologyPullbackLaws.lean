@@ -80,7 +80,7 @@ private lemma compFactors {C D E : Type*}
   rw [hid] at hc
   dsimp only [Functor.comp_obj] at hc
   simp only [Category.comp_id] at hc
-  simp only [Iso.trans_hom, NatTrans.comp_app, Category.assoc]
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
   rw [hc, hn]
   rfl
 
