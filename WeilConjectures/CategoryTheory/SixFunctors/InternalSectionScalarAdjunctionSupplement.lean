@@ -314,6 +314,11 @@ private theorem scalarExtension_unit_image
   simp only [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app] at h
   exact congrArg (fun f ↦ f.val.app U m) h
 
+noncomputable local instance (N : scalarInternalModules J S) (U : Cᵒᵖ) :
+    SMul (S.obj.obj U) (((sectionModuleEquivalence J S).functor.obj N).val.obj U) :=
+  inferInstanceAs (SMul ((sectionRingSheaf J S).obj.obj U)
+    (((sectionModuleEquivalence J S).functor.obj N).val.obj U))
+
 omit [HasDerivedCategory (scalarInternalModules J R)]
   [HasDerivedCategory (scalarInternalModules J S)]
   [HasDerivedCategory (SheafOfModules.scalarModules J (sectionRingSheaf J R))]
