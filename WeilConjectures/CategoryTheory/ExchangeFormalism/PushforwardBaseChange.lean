@@ -145,7 +145,7 @@ lemma sqIso_inv_paste_vert {U' U W' W Z' Z : 𝒞} (t : U' ⟶ U) (h : W' ⟶ W)
     Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
     Functor.associator_inv_app, Category.id_comp, Category.assoc, NatTrans.id_app,
     Functor.comp_obj]
-  rw [Iso.inv_hom_id_app_assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id_app]
+  rw [Iso.hom_inv_id_app_assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id_app]
   erw [CategoryTheory.Functor.map_id, Category.id_comp]
   rw [Iso.hom_inv_id_app_assoc, ← Functor.map_comp, Iso.hom_inv_id_app]
   erw [CategoryTheory.Functor.map_id]
