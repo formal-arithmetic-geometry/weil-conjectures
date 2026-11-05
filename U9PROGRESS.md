@@ -25,3 +25,9 @@ new coeffRing interface. Added a typed coeffSection. IntegralReductionPullback k
 (60.9s cumulative): its supplied coefficient morphism still inferred the OLD target object.
 Now reconstructing finiteReduction/compositeReduction/integersModPowReduction with explicit new
 coefficient codomains. This is exactly the implicit-data mixing warned against in strategy 3.
+
+19:56 CST: Breakthrough on the reduction half: IntegralReductionPullback GREEN9.8s in195405
+once finiteReduction/compositeReduction explicitly target coeffRing. Previous version had kernel
+60.9s timeout. Scalars ordinary rewrite fix prepared; new const section appeared folded in an
+internal change command, so keep that proof's raw section expression while its exported statement
+uses the typed new section. Next target includes original-statement boundary and axiom print.

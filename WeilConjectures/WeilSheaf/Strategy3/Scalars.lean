@@ -53,7 +53,7 @@ lemma constRingSheafSection_comp_constRingSheafToCondensedRingObj (t : T) :
   change π.map (ε cS) ≫ π.map (cS.map tab) ≫ π.map (constantSheafToPointUpperStar.app _) ≫
       π.map (pointUpperStar.map (Profinite.constRingSheafToContinuousMapRingObj T)) =
     π.map (ε pointUpperStar.{u}) ≫
-      π.map (pointUpperStar.map (coeffSection T t))
+      π.map (pointUpperStar.map (Profinite.continuousMapConstRingHom.{u} T t).hom)
   rw [← π.map_comp, ← π.map_comp, ← π.map_comp, ← π.map_comp, reassoc_of% h₂, e₂, Category.assoc,
     ← pointUpperStar.map_comp, ← pointUpperStar.map_comp, ← Category.assoc (ε cP), ← h₃]
   rfl
