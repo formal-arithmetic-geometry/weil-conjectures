@@ -142,39 +142,31 @@
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ539 in progress
+# BZ554 in progress
 
-- Branch: `u9/BZ539`; original start: `29f3a8d8177`.
-- Re-read the brief and prior notes on user-requested continuation.
-- Baseline build stopped in unowned `Presheaf.InternalHom:373` with an unknown
-  `PresheafOfModulesOfCommRing.Monoidal.tensorObj_map_tmul` identifier.
-- The coordinator subsequently added the public Mathlib monoidal import in
-  `04f9380d1`. Merged coordinator head `8af5cb324` to take that fix and retry.
-- The proposed compatibility-namespace patch remains unapplied while testing
-  the coordinator's repair.
-- Next: validate ChangeOfCoefficients via ucheck-bump, repair its proof errors,
-  then check up to four direct importers and one further downstream layer.
-- Notes and logs: `/home/ubuntu/u9/bz/FIXES-BZ539.md`.
-- No local Lean/Lake, proof placeholders, statement edits, or heartbeat raises.
+- Branch: `u9/BZ554`; starting commit: `8af5cb324`.
+- The user instructed continuation after the exact identity-cast statement proposal.
+  That patch is now applied to the single `epsilon.app` expression in the public
+  `ringedTopoiDerivedPullback` alpha formula. All other declaration statements and
+  all existing docstrings are unchanged.
+- Added the known split public-import/import-all localization imports for `Qh` reduction.
+- Baseline remote build was blocked by `Presheaf.InternalHom` (BZ581), before
+  reaching the assigned module. The user instructed continuation after the exact
+  one-line prerequisite proposal; that compatibility-lemma proof fix is now applied.
+- Assigned module is green at `3947e09b34`: ucheck-bump rc=0, failed=0, 2802 jobs.
+- Added the public `Mathlib.CategoryTheory.Abelian.Exact` import for the existing
+  preserves-homology lemma after the cast repair reached the theorem proof.
+- Four direct importers are queued; continue one more layer before writing DONE.
+- Notes and logs: `/home/ubuntu/u9/bz/FIXES-BZ554.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
 
-- The public import resolved the missing name, but the resumed build failed in
-  `InternalHom:375` because its proof mixed new and compatibility map APIs.
-- User continuation followed the explicit one-line dependency patch proposal;
-  that exact compatibility-namespace proof repair is now applied.
-- Retrying the assigned module; declarations and heartbeat settings unchanged.
+# BZ557 in progress
 
-# BZ547 in progress
-
-- Assigned module `WeilConjectures.AlgebraicGeometry.Etale.EtaleInjectiveSectionsComparison`
-  is GREEN and unchanged from the starting branch.
-- ucheck-bump: rc=0, built=19, failed=0, 4239 jobs, poolb:43.166.85.105.
-- Validated source commit: `44c93779b6a562139fbe1167b08eaa054d9af518`.
-- Full log: `/home/ubuntu/u9/bz/BUILD-BZ547-assigned-green-full.log`.
-- Integrated coordinator fixes through `8af5cb324`, then reused BZ539's exact
-  dependency repair from `2a96dae096e7`: use the compatibility namespace
-  `PresheafOfModules.Monoidal.tensorObj_map_tmul` in InternalHom's proof.
-- Its previous rewrite/kernel-error blocker is resolved; no BLOCKED marker remains.
-- Direct-importer batch is running for Strict.Local.StrictLocalInjectiveSourceComparison
-  and Strict.Local.StrictLocalInjectiveSourceSections. Next: one more importer layer.
-- Notes and generic pattern/count: `/home/ubuntu/u9/bz/FIXES-BZ547.md`.
-- No local Lean/Lake execution, statement edits, proof placeholders, or limit raises.
+- Branch: `u9/BZ557`; starting commit: `8af5cb324`.
+- Added the public AffineScheme import to direct importer AffineBasisSectionsDerivedUnit.
+- Initial remote builds stopped in the shared Presheaf.InternalHom dependency.
+- On continuation, merged BZ558 prerequisite repair `f28760733369366ac823f0084f3c4090afa3a90d`.
+- Next: ucheck-bump on AffineBasisSectionsResolutionHomologyEpi, AffineBasisSectionsDerivedUnit,
+  and AffineOpenSectionsResolutionQuasiIso; fix any owned errors and write DONE when green.
+- Notes and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ557.md`.
+- No local Lean/Lake, statement changes, proof escapes, or heartbeat increases.
