@@ -184,15 +184,25 @@
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
 
 
-# BZ683 in progress
+# BZ683 complete
 
 - Branch: `u9/BZ683`; starting commit: `4bbea9d82`.
-- Baseline `ucheck-bump` confirmed a generated local-instance proof-name collision
-  between ChangeOfRingsTransition and TensorProductOfUniverses.
+- Assigned module `WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsTensorTransition`
+  passed `ucheck-bump`: rc=0, failed=0, 2873 jobs, target rebuilt in 9.4 seconds.
+- Validated source commit: `9ebd05ad943b03304d7e35268cffa36c7118fa18`.
 - The user instructed continuation after the exact one-line dependency-name proposal.
-  Applied `changeOfRingsTransitionRestrictedModule` to the anonymous local instance;
-  its type and proof and all theorem statements are unchanged.
-- Next: validate ChangeOfRingsTensorTransition, then its direct importer and one more layer.
-- Fix pattern, exact diagnostic, contextual rewrite rule, and occurrence counts:
+  Named the local instance in `ChangeOfRingsTransition` as
+  `changeOfRingsTransitionRestrictedModule`; its type and proof remain unchanged.
+  This removes the generated proof-name collision with `TensorProductOfUniverses`.
+- The dependency also rebuilt successfully. Assigned leaf source and all statements are unchanged.
+- Both downstream layers were attempted: `FinitePerfectAdicQuotientStrictRealizationData`
+  and `FinitePerfectAdicQuotientStrictRealizationSquare`. Skipped because six dependencies
+  outside this unit fail; the batch was stopped after collecting those diagnostics.
+- Full logs: `/home/ubuntu/u9/bz/BUILD-BZ683-fix1-full.log` and
+  `/home/ubuntu/u9/bz/BUILD-BZ683-downstream-full.log`.
+- Fix pattern, exact diagnostic, contextual rewrite rule, and whole-tree occurrence counts:
   `/home/ubuntu/u9/bz/FIXES-BZ683.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ683-contract-audit.txt`.
+- Completion marker: `/home/ubuntu/u9/state/BZ683.DONE`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
+- This final commit changes only progress documentation; Lean sources match the green build.
