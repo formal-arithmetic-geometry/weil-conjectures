@@ -7,6 +7,7 @@ module
 public import WeilConjectures.WeilSheaf.SmoothPurityRationalTrivialization
 public import WeilConjectures.WeilSheaf.SmoothPurityScalarFactorSquare
 public import WeilConjectures.WeilSheaf.SmoothPurityPullbackForgetFactor
+import WeilConjectures.Tactic.ExactModProofs
 
 /-! # Transport of a scalar Frobenius law with abstract coefficients -/
 
@@ -68,12 +69,16 @@ theorem purityExtendPullbackIso_factor
     ((purityModuleFactorIso Λ p s hs).hom.app M)
     ((purityModuleFactorIso Λ p s hs).hom.app N)
     e.hom.hom (purityExtendPullbackIso Λ p M N e).hom c
-  · simpa only [Iso.app_hom, Category.assoc, purityModuleFactorIso, purityAbelianFactorIso] using
-      CondensedRing.purity_upperStarForgetIso_factor_hom Λ p s hs M
-  · simpa only [Iso.app_hom, Category.assoc, purityModuleFactorIso, purityAbelianFactorIso] using
-      CondensedRing.purity_upperStarForgetIso_factor_hom Λ p s hs N
-  · simpa only [Iso.app_hom, CondensedRing.upperStarForgetIso_hom_app,
-      Mod.forget, purityPullbackUnit] using purityExtendPullbackIso_unit Λ p M N e
+  · have h := CondensedRing.purity_upperStarForgetIso_factor_hom Λ p s hs M
+    simp only [Iso.app_hom, Category.assoc, purityModuleFactorIso, purityAbelianFactorIso] at h ⊢
+    exact_mod_proofs h
+  · have h := CondensedRing.purity_upperStarForgetIso_factor_hom Λ p s hs N
+    simp only [Iso.app_hom, Category.assoc, purityModuleFactorIso, purityAbelianFactorIso] at h ⊢
+    exact_mod_proofs h
+  · have h := purityExtendPullbackIso_unit Λ p M N e
+    simp only [Iso.app_hom, CondensedRing.upperStarForgetIso_hom_app,
+      Mod.forget, purityPullbackUnit] at h ⊢
+    exact_mod_proofs h
   · exact he
 
 
@@ -104,11 +109,12 @@ theorem purityExtendPullbackIso_weil
       (a.geometricGaloisFrobenius.hom)^*⟦Λ⟧.map
           (purityExtendPullbackIso Λ a.geometricFiberProj M₀ N₀ e₀).hom ≫
         (CondensedRing.geometricFiberProjUpperStarFrobeniusIso Λ a).hom.app N₀ := by
-  simpa only [CondensedRing.geometricFiberProjUpperStarFrobeniusIso,
-    purityModuleFactorIso, purityAbelianFrobeniusFactorIso] using
-    purityExtendPullbackIso_factor Λ a.geometricFiberProj
+  have h := purityExtendPullbackIso_factor Λ a.geometricFiberProj
     a.geometricGaloisFrobenius.hom a.geometricGaloisFrobenius_hom_comp_geometricFiberProj
     M₀ N₀ e₀ c₀ he
+  simp only [CondensedRing.geometricFiberProjUpperStarFrobeniusIso,
+    purityModuleFactorIso, purityAbelianFrobeniusFactorIso] at h ⊢
+  exact_mod_proofs h
 
 end FiniteBase
 
