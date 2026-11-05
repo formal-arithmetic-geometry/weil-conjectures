@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Etale.Hom.EtaleHomComparisonModels
 import WeilConjectures.AlgebraicGeometry.Etale.Scalar.EtaleScalarTensorShiftCancellation
 import WeilConjectures.AlgebraicGeometry.Tensor.TensorHomShiftComparisonComponent
+import WeilConjectures.Tactic.TransportExact
 
 /-! # Fixed-degree étale Hom shift component
 
@@ -84,15 +85,18 @@ theorem etaleHomComparison_reversedExact_commShift_component
       (sB.commShiftIso n).hom.app (op ((scalarExtension φ X).obj K)) := by
   let : (scalarExtension φ X).Additive := (Adjunction.ofIsRightAdjoint
     (Sheaf.derivedRestrictScalars X.smallEtaleTopology φ)).left_adjoint_additive
-  exact @derivedTensorHomShiftComparison_component (ModuleCat.{u + 1} A)
+  have h := @derivedTensorHomShiftComparison_component (ModuleCat.{u + 1} A)
     _ _ _ _
     _ _ _ _
     (ModuleCat.{u + 1} B)
     _ _ _ _
     _ _ _ _ X
     (scalarExtension φ X) inferInstance (etaleHomScalarCommShift X φ)
-    (etaleHomTensorComparison X φ) M v hv sA sB hA hB
+    (etaleHomTensorComparison X φ) M v (fun K ↦ by transport_exact hv K) sA sB hA hB
     (fun K L L' g ↦ comparison_natural_second X φ K g)
     (fun K L n ↦ etaleHomTensorComparison_shiftCancellation X φ K L n) K n
+  -- `h` is the goal with the categories spelled as `DerivedCategory (Sheaf …)`; `exact h` makes
+  -- the kernel unfold `derivedHom` under `Functor.map` (9 GB), so transport along small leaves.
+  transport_exact h
 
 end AlgebraicGeometry.Etale
