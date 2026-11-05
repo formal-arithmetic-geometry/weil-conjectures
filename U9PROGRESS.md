@@ -153,7 +153,7 @@
 - Notes and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ557.md`.
 - No local Lean/Lake, statement changes, proof escapes, or heartbeat increases.
 
-# BZ603 complete
+# BZ603 in progress
 
 - Branch: `u9/BZ603`; starting commit: `cfcb63ad7`.
 - Baseline remote build: eight errors caused by hidden `HomologicalComplexUpToQuasiIso.Qh`.
@@ -162,18 +162,89 @@
 - The user instructed continuation after the canonical Q/Qh endpoint-transport proposal.
   Applied the comparison hom/inv maps only to that equality, preserving its mathematical
   maps, binders, assumptions, and other statements. The proof normalizes identity transports.
-- Assigned module passed `ucheck-bump`: rc=0, failed=0, 2801 jobs.
-- Validated source commit: `974d379baf767ed838321842cac084b329d839b1`.
-- Green log: `/home/ubuntu/u9/bz/BUILD-BZ603-owned-final-full.log`.
-- Direct importer `WeilConjectures.SmoothPurity.CompletedScalarAssociator.CompletedScalarAssociator`
-  was attempted and skipped because unowned dependencies failed:
-  `AlgebraicGeometry.RingedTopoiDerivedPullback:423` and
-  `CategoryTheory.Abelian.Ext.MapExactFunctor:230`. Its remote job was stopped after
-  confirming the blockers, releasing the tree (rc=255, failed=2; not a green result).
-- Downstream log: `/home/ubuntu/u9/bz/BUILD-BZ603-downstream-full.log`.
-- No second layer: the only direct importer is blocked by those dependencies.
+- Next: `ucheck-bump` on the assigned module, then `CompletedScalarAssociator` downstream.
 - Fix patterns and exact diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ603.md`.
-- Contract audit: `/home/ubuntu/u9/bz/BZ603-contract-audit.txt`.
-- Completion marker: `/home/ubuntu/u9/state/BZ603.DONE`.
-- This final update changes only progress documentation; Lean source matches the green build.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+
+# BZ646 complete
+
+- Green owned module: `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ComparisonUpperStarCoherence`.
+- Green direct importer: `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ComparisonBaseChangeMate`.
+- Final remote validation: `ucheck-bump` at source commit `e46a90620ceda4662bd450189ee57edb7cc5cad6`,
+  rc=0, failed=0, 5603 jobs; both changed modules rebuilt successfully.
+- Ported composition comparison directions, simplified composition components directly,
+  removed a redundant tactic, and normalized symmetric isomorphism projections.
+- Declaration statements, imports, and docstrings are unchanged; all source edits are in proofs.
+- All seven machine rewrite rules exactly reproduce the final files from baseline `bb4aa5315`.
+- Three direct importers were attempted. Identity coherence requires a statement change and is
+  left untouched. Étale-reading coherence and its next-layer importer are blocked by unowned
+  dependencies. The broad failing batch was stopped after those blockers were confirmed.
+- Handoff records: `/home/ubuntu/u9/bz/FIXES-BZ646.md` and `/home/ubuntu/u9/state/BZ646.DONE`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
+
+
+# BZ683 complete
+
+- Branch: `u9/BZ683`; starting commit: `4bbea9d82`.
+- Assigned module `WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsTensorTransition`
+  passed `ucheck-bump`: rc=0, failed=0, 2873 jobs, target rebuilt in 9.4 seconds.
+- Validated source commit: `9ebd05ad943b03304d7e35268cffa36c7118fa18`.
+- The user instructed continuation after the exact one-line dependency-name proposal.
+  Named the local instance in `ChangeOfRingsTransition` as
+  `changeOfRingsTransitionRestrictedModule`; its type and proof remain unchanged.
+  This removes the generated proof-name collision with `TensorProductOfUniverses`.
+- The dependency also rebuilt successfully. Assigned leaf source and all statements are unchanged.
+- Both downstream layers were attempted: `FinitePerfectAdicQuotientStrictRealizationData`
+  and `FinitePerfectAdicQuotientStrictRealizationSquare`. Skipped because six dependencies
+  outside this unit fail; the batch was stopped after collecting those diagnostics.
+- Full logs: `/home/ubuntu/u9/bz/BUILD-BZ683-fix1-full.log` and
+  `/home/ubuntu/u9/bz/BUILD-BZ683-downstream-full.log`.
+- Fix pattern, exact diagnostic, contextual rewrite rule, and whole-tree occurrence counts:
+  `/home/ubuntu/u9/bz/FIXES-BZ683.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ683-contract-audit.txt`.
+- Completion marker: `/home/ubuntu/u9/state/BZ683.DONE`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
+- This final commit changes only progress documentation; Lean sources match the green build.
+
+# BZ740 in progress
+
+- Branch: `u9/BZ740`; starting commit: `f271bd088`.
+- Reread the brief and progress notes on continuation; no new LEAD lines.
+- The import-only remote build fixed both private-helper errors, leaving the public Qh/Q mismatch.
+- The user instructed continuation after the exact one-line identity-cast proposal.
+  Applied `BZ740-statement-cast-proposal.patch`, preserving the original morphism.
+- Next: validate the assigned normalization module through `ucheck-bump`, then its direct importer.
+- Fix patterns and exact diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ740.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+# BZ780 leaf and first two downstream layers green
+
+- Branch: `u9/BZ780`; starting commit: `8027d88a3`.
+- `DerivedPullbackTensorUnitKFlat` and `DerivedPullbackTensorUnit` passed `ucheck-bump`
+  at `5aead0ac1d861aa6ef525ef6f15a0e7c483bdc26`, 3930 jobs, poolb:43.166.82.34.
+- `DerivedPullbackMonoidalDescent` passed at `453fb49d85`: rc=0, failed=0.
+  Its associativity dependency also built successfully in this checkout.
+- The user instructed continuation after the concrete two-identity-cast proposal.
+  The retained casts preserve the original morphisms and mathematical assumptions.
+- Added public and implementation Localization imports, normalized identity casts
+  with `cast_eq`, and used `erw` through the local functor aliases.
+- Applied the same cast/import pattern inside the proposition-construction body of
+  `IsDerivedPullbackMonoidalModel`; its signature and theorem statements are unchanged.
+- Six machine rules exactly replay the two changed Lean files and are idempotent.
+- Four direct importers are blocked by unowned `SingleComplexBaseChangeStalkCondition`:
+  CanonicalPullbackTensorComparison, CanonicalPullbackTensorMonoidalRealization,
+  PerfectRHomTensorComparison, PerfectTensorHomDuality. Full diagnostics are saved.
+- Active repair batch: exec 32751, Weil bbuild PID 2557462, summary log
+  `BUILD-BZ780-downstream3-fix1.log`; targets Model, AcrossUniversesMonoidalAdjunction,
+  DerivedRestrictionTensorNaturality, OpenRestrictionDerivedMonoidal.
+- Active next-layer batch: exec 92062, Weil bbuild PID 2651696, summary log
+  `BUILD-BZ780-downstream4.log`; targets SchemeIsoDerivedFunctorComparisons,
+  DerivedRestrictionTensorHomCoherence, OpenRestrictionClosedMonoidal.
+- Both requests are queued; do not submit duplicates. All current tree slots are occupied.
+- Prune lists mark the potentially failing open-restriction theorem unused. Delete it
+  if its obsolete compositor direction fails; all its caller's declarations are unused too.
+- Next: finish downstream validation and fixes, then write `BZ780.DONE`.
+- Fix records, exact errors, counts, replay rules, and log names:
+  `/home/ubuntu/u9/bz/FIXES-BZ780.md`. Audit: `BZ780-contract-audit.txt`.
+- No local Lean/Lake, proof placeholders, trust bypasses, profiler probes, or heartbeat increases.
