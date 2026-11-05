@@ -19,7 +19,7 @@ import all WeilConjectures.WeilSheaf.Native.Weil.NativeWeilUnderivedTensor
 /-!
 # The condensed realization and the native tensor product
 
-* `AlgebraicGeometry.ProEtaleWeilSheaf.ordinaryTensorBifunctorFlipIso`: the ordinary relative
+* `AlgebraicGeometry.ProEtaleWeilSheaf.condensedOrdinaryTensorBifunctorFlipIso`: the ordinary relative
   tensor of `ℓ`-adic sheaves (a coequalizer) agrees with the monoidal tensor product.
 * `AlgebraicGeometry.ProEtaleWeilSheaf.nonempty_condensedTensorIso`: the condensed model
   `AdicSheaf ℓ ≌ Mod_{Λ}` carries the ordinary relative tensor to the tensor of module objects.
@@ -50,7 +50,7 @@ variable (l : ℕ) [Fact l.Prime] (S : Scheme.{u})
 
 /-- The ordinary relative tensor of `ℓ`-adic sheaves, flipped so that the left factor comes
 first, is the monoidal tensor product of module objects. -/
-noncomputable def ordinaryTensorBifunctorFlipIso :
+noncomputable def condensedOrdinaryTensorBifunctorFlipIso :
     (ordinaryTensorBifunctor l S).flip ≅ curriedTensor (AdicSheaf l S) :=
   NatIso.ofComponents (fun M ↦ NatIso.ofComponents
     (fun N ↦ (Mod.relativeTensorRightIso N).app M)
@@ -70,7 +70,7 @@ theorem nonempty_condensedTensorIso :
   let : (adicSheafEquivCondensedMod l S).functor.Monoidal :=
     inferInstanceAs
       (AdicSheaf.forgetAb l S ⋙ Mod.comap (condensedRingObjIsoForgetAb l S).hom).Monoidal
-  exact ⟨(Functor.postcompose₂.obj _).mapIso (ordinaryTensorBifunctorFlipIso l S) ≪≫
+  exact ⟨(Functor.postcompose₂.obj _).mapIso (condensedOrdinaryTensorBifunctorFlipIso l S) ≪≫
     Functor.Monoidal.postcomposeCurriedTensorIso _⟩
 
 end Ordinary
