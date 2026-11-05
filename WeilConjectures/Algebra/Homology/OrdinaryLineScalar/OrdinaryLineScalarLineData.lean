@@ -263,11 +263,16 @@ theorem exists_lineData
     obtain ⟨hP, hPf, hl, hc, _, _, _, _, _, _, chi, _, hn, _⟩ :=
       FlatSingleDerivedNormalization.flat_single_derived_normalization.{t + 1, t,
         max a (t + 1), w} R (power.{t, a} L m) hflat
-    let c := chi ≪≫ Functor.isoWhiskerRight
-      (FlatSingleDerivedNormalization.collapse R (power.{t, a} L m)) 𝒬[R]
+    let c : 𝒬[R] ⋙ twist.{t, a, w} L m ≅
+        (tensor.{t, a} L m).mapHomologicalComplex (.up ℤ) ⋙ 𝒬[R] := by
+      unfold twist LineUnbounded.derived
+      exact chi ≪≫ Functor.isoWhiskerRight
+        (FlatSingleDerivedNormalization.collapse R (power.{t, a} L m)) 𝒬[R]
     refine ⟨⟨hP, hPf⟩, c, ⟨hl, hc⟩, ?_⟩
-    intro P hK hKf
-    dsimp only [LineUnbounded.normalization, c, NatIso.trans_app]
+    intro P
+    unfold LineUnbounded.normalization
+    intro hK hKf
+    dsimp only [c, NatIso.trans_app]
     simp only [eqToIso_refl, Iso.refl_trans]
     exact LineUnbounded.whiskered_normalization _ _ _ _ _ (hn P hK hKf)
   choose h c hc hn using hs
