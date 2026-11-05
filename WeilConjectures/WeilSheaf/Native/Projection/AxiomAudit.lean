@@ -22,6 +22,7 @@ import all WeilConjectures.WeilSheaf.Native.Projection.NativeModelNormalization
 import all WeilConjectures.WeilSheaf.Native.Projection.NativePullTensorNormalization
 import all WeilConjectures.WeilSheaf.Native.Projection.ModelSquareCancellation
 import all WeilConjectures.WeilSheaf.Native.Projection.TotalSquareToModel
+import all WeilConjectures.WeilSheaf.Native.Projection.NativeRealizedPullNormalization
 import Lean.Util.CollectAxioms
 
 /-! # Dependency audit for the native proper projection formula
