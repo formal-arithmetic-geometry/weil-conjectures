@@ -189,10 +189,10 @@ def constantInterchange :
     (Functor.const ℕᵒᵖ : B ⥤ _).mapDerivedCategory ⋙
         ((Functor.whiskeringRight ℕᵒᵖ B A).obj F).mapDerivedCategory ≅
       F.mapDerivedCategory ⋙ (Functor.const ℕᵒᵖ : A ⥤ _).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso (Functor.const ℕᵒᵖ)
+  ((Functor.mapDerivedCategoryCompIso (Functor.const ℕᵒᵖ)).symm
     ((Functor.whiskeringRight ℕᵒᵖ B A).obj F)).symm ≪≫
     Functor.mapDerivedCategoryNatIso (Functor.compConstIso ℕᵒᵖ F).symm ≪≫
-    Functor.mapDerivedCategoryCompIso F (Functor.const ℕᵒᵖ)
+    (Functor.mapDerivedCategoryCompIso F (Functor.const ℕᵒᵖ)).symm
 
 variable {F} {G : A ⥤ B} [G.Additive]
   [Abelian.HasKInjectiveResolutions A]
@@ -294,8 +294,8 @@ composition isomorphisms. Source: Stacks 015F and 07A7
 def localizedSquare (θ : g ⋙ F' ≅ F ⋙ h) :
     g.mapDerivedCategory ⋙ F'.mapDerivedCategory ≅
       F.mapDerivedCategory ⋙ h.mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso g F').symm ≪≫
-    Functor.mapDerivedCategoryNatIso θ ≪≫ Functor.mapDerivedCategoryCompIso F h
+  (Functor.mapDerivedCategoryCompIso g F') ≪≫
+    Functor.mapDerivedCategoryNatIso θ ≪≫ (Functor.mapDerivedCategoryCompIso F h).symm
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

@@ -66,12 +66,12 @@ noncomputable def unboundedDirectImagePullbackIso
         (ProEtale.upperStar (ModuleCat.{u + 1} A) g).mapDerivedCategory ≅
       (Etale.upperStar (ModuleCat.{u + 1} A) g).mapDerivedCategory ⋙
         (comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso
+  ((Functor.mapDerivedCategoryCompIso).symm
     (comparisonUpperStar (ModuleCat.{u + 1} A) Y)
     (ProEtale.upperStar (ModuleCat.{u + 1} A) g)).symm ≪≫
     Functor.mapDerivedCategoryNatIso
       (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} A) g) ≪≫
-    Functor.mapDerivedCategoryCompIso
+    (Functor.mapDerivedCategoryCompIso).symm
       (Etale.upperStar (ModuleCat.{u + 1} A) g)
       (comparisonUpperStar (ModuleCat.{u + 1} A) X)
 
