@@ -139,7 +139,7 @@ Source: Stacks 03D2 (auxiliary; not a blueprint node). -/
 def restrictPointPullD (X : Scheme.{u}) :
     (restrictPoint R S φ).mapDerivedCategory ⋙ pointPullD R X ≅
       pointPullD S X ⋙ (restrictScheme R S φ X).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso _ _) ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso ((upperStarFromPoint X).mapModComapIso φ) ≪≫
     (Functor.mapDerivedCategoryCompIso _ _).symm
 
