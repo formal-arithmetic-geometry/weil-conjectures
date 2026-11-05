@@ -66,7 +66,8 @@ lemma geometricFiberWeilRightDerivedLowerShriekIso_forget
   rw [rightDerivedLowerShriekGeometricFiberIso_eq_compForgetIso,
     geometricFiberWeilRightDerivedLowerShriekIso_eq_traceCompDescentIso,
     weilRightDerivedLowerShriekCompForgetIso_eq_compForgetIso]
-  dsimp +instances only [Functor.comp_obj, Functor.comp_map, Iso.symm_hom, Iso.symm_inv] at he ⊢
+  dsimp +instances only [rightDerivedLowerShriekOfCompactification, weilRightDerivedLowerShriek,
+    Functor.comp_obj, Functor.comp_map, Iso.symm_hom, Iso.symm_inv] at he ⊢
   exact_mod_proofs he
 
 variable
