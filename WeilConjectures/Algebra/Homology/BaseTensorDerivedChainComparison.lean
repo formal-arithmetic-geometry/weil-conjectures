@@ -187,6 +187,7 @@ theorem exists_baseTensorDerivedChainComparison
   simp only [Iso.trans_inv, Iso.app_inv, Iso.symm_inv,
     Functor.mapHomotopyCategoryFactors_hom_app]
   erw [hmape, hmapl]
+  erw [Category.id_comp, Category.id_comp]
   simpa only [Functor.map_id, Category.id_comp, Category.comp_id,
     Functor.map_comp, Category.assoc] using h'.symm
 
