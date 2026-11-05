@@ -24,6 +24,7 @@ lemma projection_mateEquiv_app (a : L ⊣ R) (b : L' ⊣ R')
   simp only [mateEquiv_apply, NatTrans.comp_app, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Functor.associator_hom_app, Functor.associator_inv_app,
     Functor.rightUnitor_inv_app, Functor.leftUnitor_hom_app, Category.id_comp,
-    Category.comp_id]
+    Category.comp_id, Functor.comp_obj, Functor.comp_map, Functor.id_obj,
+    Functor.id_map, Category.assoc]
 
 end CategoryTheory
