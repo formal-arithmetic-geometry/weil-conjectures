@@ -599,6 +599,10 @@ private noncomputable def scalarTensorSectionIso (T : Scheme.{u})
     induction z using TensorProduct.inductionOn with
     | add x y hx hy => simp only [map_add, hx, hy]
     | tmul b m =>
+      let : Module (R.obj.obj V)
+          ((ModuleCat.restrictScalars (((adicLisseForget T).obj R).obj.map f).hom).obj
+            (M.val.obj V)) :=
+        inferInstanceAs (Module (R.obj.obj V) (M.val.obj V))
       change (TensorProduct.comm (R.obj.obj V) (S.obj.obj V) (M.val.obj V))
           ((SheafOfModules.changeOfRingsPresheaf.{u, u + 1, u + 1} c M).map f
             (b ⊗ₜ[R.obj.obj U, (c.hom.app U).hom] m)) =
