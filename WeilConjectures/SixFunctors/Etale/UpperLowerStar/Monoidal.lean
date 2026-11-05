@@ -68,12 +68,16 @@ attribute [local instance] Sheaf.monoidalCategory Sheaf.braidedCategory
 /-- The pushforward `g_*` on étale sheaves is lax monoidal, being the pushforward along the
 continuous base change functor. -/
 noncomputable instance Etale.laxMonoidal_lowerStar : (g)_*[A].LaxMonoidal := by
+  have : (MorphismProperty.Over.pullback @Etale ⊤ g).IsContinuous
+      Y.smallEtaleTopology Z.smallEtaleTopology := Etale.isContinuous_overPullback g
   exact Functor.sheafPushforwardContinuousLaxMonoidal
     (MorphismProperty.Over.pullback @Etale ⊤ g) A Y.smallEtaleTopology Z.smallEtaleTopology
 
 /-- The pushforward `g_*` on étale sheaves is lax braided. When `A` is symmetric, this says
 that `g_*` is lax symmetric monoidal. -/
 noncomputable instance Etale.laxBraided_lowerStar : (g)_*[A].LaxBraided := by
+  have : (MorphismProperty.Over.pullback @Etale ⊤ g).IsContinuous
+      Y.smallEtaleTopology Z.smallEtaleTopology := Etale.isContinuous_overPullback g
   exact Functor.sheafPushforwardContinuousLaxBraided
     (MorphismProperty.Over.pullback @Etale ⊤ g) A Y.smallEtaleTopology Z.smallEtaleTopology
 
@@ -140,6 +144,8 @@ open MonoidalCategory Functor.OplaxMonoidal
 functor, whose comma categories are connected, being filtered: base change is representably
 flat by `CategoryTheory.MorphismProperty.Over.representablyFlat_pullback`. -/
 instance Etale.isIso_upperStar_η : IsIso (η (g)^*[A]) := by
+  have : (MorphismProperty.Over.pullback @Etale ⊤ g).IsContinuous
+      Y.smallEtaleTopology Z.smallEtaleTopology := Etale.isContinuous_overPullback g
   exact Functor.sheafPullbackConstruction.isIso_η_sheafPullback
     (MorphismProperty.Over.pullback @Etale ⊤ g) A Y.smallEtaleTopology Z.smallEtaleTopology
 
@@ -157,6 +163,8 @@ functor, whose comma categories are filtered since base change is representably 
 (`CategoryTheory.MorphismProperty.Over.representablyFlat_pullback`). -/
 instance Etale.isIso_upperStar_δ (F G : Sheaf Y.smallEtaleTopology A) :
     IsIso (δ (g)^*[A] F G) := by
+  have : (MorphismProperty.Over.pullback @Etale ⊤ g).IsContinuous
+      Y.smallEtaleTopology Z.smallEtaleTopology := Etale.isContinuous_overPullback g
   exact Functor.sheafPullbackConstruction.isIso_δ_sheafPullback
     (MorphismProperty.Over.pullback @Etale ⊤ g) A Y.smallEtaleTopology Z.smallEtaleTopology F G
 
