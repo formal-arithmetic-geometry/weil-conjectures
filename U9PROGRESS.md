@@ -105,3 +105,13 @@
 - No local Lean/Lake execution, sorries, forbidden proof shortcuts, or limit increases.
 - Completion marker: `/home/ubuntu/u9/state/BZ311.DONE`.
 - This final commit changes only progress documentation; Lean sources match the green build.
+
+# BZ367 in progress
+
+- Branch: `u9/BZ367`; assigned module: `WeilConjectures.WeilSheaf.Native.Projection.OrdinaryTensorNormalization`.
+- The import-only build failed on two public signatures because Mathlib marks `Qh` no_expose.
+- The user instructed continuation after the exact two-line visibility proposal.
+  The two internal helpers are now private; proposition texts and all proof bodies are unchanged.
+- Whole-tree search found no callers of either helper outside the assigned file.
+- Next: validate with `ucheck-bump`, then check the two downstream layers and write DONE.
+- Notes: `/home/ubuntu/u9/bz/FIXES-BZ367.md`. No local Lean/Lake execution.
