@@ -6,6 +6,8 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
@@ -109,8 +111,8 @@ theorem sectionsComparison_restriction_square {X Y : Scheme.{v}} (a : X ⟶ Y)
     rw [Functor.mapHomotopyCategoryCompIso_refl_hom_app, Category.comp_id]
   dsimp [Functor.rightDerivedFunctorCompUnit] at hc
   erw [hi] at hc
-  simp only [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id,
-    Category.assoc] at hc
+  erw [DerivedCategory.Qh.map_id] at hc
+  simp only [Category.id_comp, Category.comp_id, Category.assoc] at hc
   -- Use naturality to establish the square before transporting to complexes.
   have hh : G.rightDerivedFunctorUnit.app K ≫
       G.rightDerivedFunctor.map
