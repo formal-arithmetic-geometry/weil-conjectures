@@ -98,7 +98,8 @@ theorem derivedGlobalSections_affinization_comparison (X : Scheme.{u})
           ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj I))) :=
       isIso_globalSections_restrictScalars_unit_on_directImage_kInjective
         X.toSpecΓ (Scheme.ΓSpecIso Γ(X, ⊤)).inv I
-    dsimp [β, Functor.rightDerivedFunctorCompUnit]
+    dsimp only [β, Functor.rightDerivedFunctorCompUnit, NatTrans.comp_app,
+      Functor.whiskerRight_app, Functor.whiskerLeft_app]
     infer_instance
   let e := Functor.rightDerivedUnique (F ⋙ G).rightDerivedFunctor
     (F.rightDerivedFunctor ⋙ G.rightDerivedFunctor)
