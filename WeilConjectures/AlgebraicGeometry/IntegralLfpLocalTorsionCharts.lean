@@ -31,7 +31,7 @@ public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteCondensedRing
 universe u
 
 open CategoryTheory Limits
-open scoped CategoryTheory.Obj ZeroObject
+open scoped CategoryTheory.Obj
 
 attribute [local instance] Abelian.hasFiniteBiproducts
 attribute [local instance] comp_preservesFiniteLimits comp_preservesLimits
@@ -1139,6 +1139,8 @@ private lemma scalarChart_torsion {X : Scheme.{u}}
       ((Mod.forget R ⋙ sheafCompose (Scheme.ProEt.topology X) (forget Ab.{u + 1})).obj M ≅
         (constantSheaf (Scheme.ProEt.topology X) (Type (u + 1))).obj
           (ULift.{u + 1} (Fin n)))) : ScalarChart R k M := by
+  let : Zero (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) :=
+    HasZeroObject.zero' _
   have hzero : Mod.IsFree R (0 : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) := by
     refine ⟨0, ⟨(isZero_zero _).iso ((IsZero.iff_id_eq_zero _).mpr ?_)⟩⟩
     apply biproduct.hom_ext
