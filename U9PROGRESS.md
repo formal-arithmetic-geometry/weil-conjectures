@@ -173,13 +173,13 @@
 # BZ630 in progress
 
 - Branch: `u9/BZ630`; starting commit: `b7a97a5ed`.
-- Read the brief again on continuation; there are no appended LEAD overrides.
+- Assigned module passed ucheck-bump: rc=0, built=3, failed=0, 4242 jobs.
+- Validated commit: `afb9e8c2c047f6cb0e4e0070c181f52e25eb696a`.
+- Green log: `/home/ubuntu/u9/bz/BZ630-unit-green-full.log`.
 - The user instructed continuation after the explicit endpoint-transport statement proposal.
-  That exact patch is applied; the proof reduces the new transport to an identity.
-- The proof keeps quotientCompQhIso opaque and reduces only the exposed homotopy comparison;
-  the final source uses a public Localization import and no import-all directive.
-- Original ucheck-bump is queued; it will build the newly pushed branch once a tree is free.
-- Next: validate the assigned module, then attempt its direct importer and follow the
-  external-dependency skip rule if BZ631's target-transport module fails.
+  That exact patch is applied. The proof keeps quotientCompQhIso opaque, reduces only the
+  homotopy comparison, and cancels the mapped identity using erw.
+- Next: build the sole direct importer Injective.InjectiveExchangeRepresentative;
+  skip it if its unowned dependency Injective.InjectiveExchangeTargetTransport fails.
 - Notes and pattern counts: `/home/ubuntu/u9/bz/FIXES-BZ630.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, heartbeat raises, or profiler probes.
