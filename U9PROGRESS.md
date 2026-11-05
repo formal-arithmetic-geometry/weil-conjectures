@@ -20,20 +20,16 @@
 - Completion marker: `/home/ubuntu/u9/state/BZ72.DONE`.
 - Outside-unit caller `NativeHomLocalizedConeBoundaryModel.lean:114` still needs its owner's port; details are in the fix log.
 
-# BZ129 complete
+# BZ130 complete
 
-- Unit: BZ129, branch `u9/BZ129`.
-- All four assigned modules rebuilt successfully together via `ucheck-bump`:
-  rc=0, failed=0, 2500 jobs.
-- Tested source commit: `e79e593115f97655e43fa2c80278a052e6bd9272`; the final commit changes only progress notes.
-- Modules: ModulePullbackPushforwardAdjunction, RingedDerivedRestrictionGeneral,
-  HypercohomologyLeftEdge, and MappedSingleCyclesShiftComparison.
-- The user instructed continuation after the exact canonical quotient/Qh
-  statement-adjustment proposal. That patch and its proof repair are validated;
-  all other existing declaration statements and all docstrings are unchanged.
-- Full build log: `/home/ubuntu/u9/bz/BUILD-BZ129-final-full.log`.
-- Fix patterns, occurrence counts, and pinned API evidence:
-  `/home/ubuntu/u9/bz/FIXES-BZ129.md`.
-- No local Lean/Lake execution, no sorries or forbidden proof escapes,
-  no heartbeat increases; `git diff --check` passes.
-- Completion marker: `/home/ubuntu/u9/state/BZ129.DONE`.
+- Branch: `u9/BZ130`; starting commit: `c958d67ac`.
+- All four assigned modules pass `ucheck-bump` together: rc=0, failed=0, 3944 jobs.
+- Validated source commit: `93bec539e906a136a2b7aa346d86bc9a7b991060`.
+  This completion update changes only progress documentation.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ130-final-full.log`.
+- Fix patterns: `/home/ubuntu/u9/bz/FIXES-BZ130.md`.
+- The user instructed continuation after the explicit statement-only proposal.
+  The local comparison in `SupportedComplexSingleRealization` now uses direct Q;
+  all other declaration statements and all existing docstrings are unchanged.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ130.DONE`.
