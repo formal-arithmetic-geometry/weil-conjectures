@@ -275,7 +275,7 @@ theorem derivedOpen_tensorHom_bijective
   have he (A E : schemeDerivedCategory X) :
       Function.Bijective (fun f : A ⟶ E ↦ (R₀ ⋙ H).mapDerivedCategory.map f) ↔
         Function.Bijective (fun f : A ⟶ E ↦ R₀.mapDerivedCategory.map f) := by
-    rw [hom_bijective_natIso (Functor.mapDerivedCategoryCompIso R₀ H)]
+    rw [← hom_bijective_natIso (Functor.mapDerivedCategoryCompIso R₀ H)]
     exact (Functor.FullyFaithful.ofFullyFaithful H.mapDerivedCategory).homEquiv.bijective
       |>.of_comp_iff' (fun f : A ⟶ E ↦ R₀.mapDerivedCategory.map f)
   intro hB L E
