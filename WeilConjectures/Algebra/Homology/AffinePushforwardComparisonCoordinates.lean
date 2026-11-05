@@ -10,6 +10,7 @@ public import WeilConjectures.Algebra.Homology.AffineBaseChangeTildeCoordinates
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.Algebra.Homology.Localization
 import all Mathlib.Algebra.Homology.Localization
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Affine cohomology coordinates for a supplied ordinary comparison
 

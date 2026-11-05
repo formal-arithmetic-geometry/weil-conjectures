@@ -15,6 +15,7 @@ import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
 import WeilConjectures.AlgebraicGeometry.FormalSystemsPushPullComparison
 import WeilConjectures.AlgebraicGeometry.FormalSystemsPushPullAffineAnnihilation
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 @[expose] public section
 
