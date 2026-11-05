@@ -25094,6 +25094,7 @@ public import WeilConjectures.TraceFormula.Primitive.PrimitiveQuotientScalarMode
 public import WeilConjectures.TraceFormula.Product
 public import WeilConjectures.TraceFormula.ProjectiveLineFibre
 public import WeilConjectures.TraceFormula.ProjectiveLineFrobenius
+public import WeilConjectures.TraceFormula.ProjectiveLineTraceFormula
 public import WeilConjectures.TraceFormula.ProperCompatibility
 public import WeilConjectures.TraceFormula.ProperCompatibilityEvaluation
 public import WeilConjectures.TraceFormula.ProperCompatibilityExchange

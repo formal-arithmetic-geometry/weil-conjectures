@@ -29,9 +29,9 @@ geometric Frobenius `F` acts on the line `H⁰(ℙ¹ ⊗ k̄, ℚ̄_ℓ)` by `1`
 
 The local side is stated as the point count `#ℙ¹(𝔽_{qᵐ})`, the number of fixed points of `Φ_m`,
 each of local term `1` for the constant sheaf; the global side is the alternating trace of `Fᵐ`
-on the cohomology `Hⁱ(ℙ¹ ⊗ k̄, ℚ̄_ℓ)` of the Weil sheaf `ℚ̄_ℓ`. The library has no model
-Frobenius (`IsModelFrobenius`) for `ℙ¹`, so the local terms of the Frobenius correspondence are
-not computed here.
+on the cohomology `Hⁱ(ℙ¹ ⊗ k̄, ℚ̄_ℓ)` of the Weil sheaf `ℚ̄_ℓ`. The local terms `1` at the
+fixed points, and the equality of both sides of the trace formula for the constant Weil object,
+are `ProEtale.CondensedRing.projectiveLine_weilTraceFormula`.
 
 -/
 
