@@ -58,7 +58,8 @@ lemma purity_upperStarTateTwistOneIso_comp :
     (fun n ↦ by
       simp only [upperStarRootsOfUnitySheafIsoOfInvertible_hom]
       rw [upperStar_map_upperStarRootsOfUnitySheafHom_comp, Iso.hom_inv_id_app_assoc])
-  simpa only [upperStarTateTwistOneIso, tateTwistOne, tateModule, tateModuleSystem,
-    tateModuleTransition] using h
+  simp only [upperStarTateTwistOneIso, tateTwistOne, tateModule, tateModuleSystem]
+  delta tateModuleTransition
+  exact h
 
 end AlgebraicGeometry.ProEtale

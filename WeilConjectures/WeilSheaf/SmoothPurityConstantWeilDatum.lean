@@ -54,9 +54,10 @@ lemma purity_adicLowerStarUnit_condensed {X : Scheme.{u}} (e : X ≅ X) :
   · have h := NatTrans.congr_app (adicUpperStarCompCondensedModIso_inv_of_iso l e)
       (AdicSheaf.unit l X)
     simpa only [TwoSquare.whiskerLeft, TwoSquare.whiskerRight, NatTrans.comp_app,
-      Functor.whiskerLeft_app, Functor.whiskerRight_app] using h
+      Functor.whiskerLeft_app, Functor.whiskerRight_app, Iso.symm_hom,
+      Category.assoc] using h
   · exact adicUpperStarIsoLowerStarInv_hom_comp_unit e
-  · exact upperStar_map_inv_comp_adicUpperStarCompCondensedModIso_inv_app_unit l e.hom
+  · exact upperStar_map_inv_comp_adicUpperStarCompCondensedModIso_inv_app_unit (l := l) e.hom
 
 end AlgebraicGeometry.ProEtale
 

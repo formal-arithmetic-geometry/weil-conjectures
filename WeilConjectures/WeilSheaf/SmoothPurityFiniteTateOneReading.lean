@@ -75,6 +75,6 @@ lemma purity_finiteCoefficientIntegralTateOneReading_pullback
     upperStarRootsOfUnitySheafIsoOfInvertible_hom] at hr
   simp only [purity_finiteCoefficientIntegralTateOneReading_eq, Iso.trans_hom,
     Functor.mapIso_hom, Functor.map_comp, Category.assoc]
-  rw [reassoc_of% hr, reassoc_of% hf, reassoc_of% hn]
+  rw [reassoc_of% hr, hf, reassoc_of% hn]
 
 end AlgebraicGeometry.ProEtale
