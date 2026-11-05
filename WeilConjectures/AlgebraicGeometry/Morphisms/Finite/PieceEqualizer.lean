@@ -92,7 +92,7 @@ theorem exists_pieceFunctor_map_comp_eq (t : GeometricFiber f y) (s : SplitNbhd 
     · exact s.basePt_notMem_piece htt h₁
   obtain ⟨c', k, hk⟩ := exists_hom_preimage_eq_bot f s.obj C hCc hnot
   refine ⟨s.pullbackDec k, s.pullbackDecHom k, ?_⟩
-  apply CategoryOfElements.ext
+  apply Functor.Elements.hom_ext
   apply MorphismProperty.Over.Hom.ext
   change (pieceMap (s.pullbackDecHom k) t).left ≫ a = (pieceMap (s.pullbackDecHom k) t).left ≫ b
   -- the piece of the smaller neighbourhood maps into the agreement locus
