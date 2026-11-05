@@ -81,7 +81,10 @@ theorem quasiIso_flat_truncation_telescope
     ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)
   have : HasColimitsOfShape (Discrete ℕ) A := inferInstance
   have : HasColimitsOfShape (Discrete ℕ) (CochainComplex A ℤ) := by
-    infer_instance
+    refine ⟨fun F ↦ ?_⟩
+    have (n : ℤ) : HasColimit (F ⋙ HomologicalComplex.eval A (.up ℤ) n) :=
+      HasColimitsOfShape.has_colimit _
+    exact ⟨⟨⟨_, HomologicalComplex.isColimitCoconeOfHasColimitEval F⟩⟩⟩
   let := HasDerivedCategory.standard A
   let D : ℕ → CochainComplex A ℤ := fun n ↦ G.truncLE (n : ℤ)
   obtain ⟨v, hv, g, hginr, hginl, hg⟩ :=
