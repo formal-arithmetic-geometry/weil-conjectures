@@ -55,6 +55,11 @@ lemma projection_model_complex_square_eq_native :
         condensedRealizationPullComplexIso k₀ l g := by
   rfl
 
+omit [LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (Z ↘ Spec (CommRingCat.of k₀))]
+  [IsSeparated (Z ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
+  [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))] in
 /-- Transport the total square at the level of its comparison isomorphism. -/
 lemma projection_total_square_in_model_form
     (P T : CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ)
