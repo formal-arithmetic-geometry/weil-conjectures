@@ -134,7 +134,7 @@ theorem ValuationSubring.isDiscreteValuationRing_of_ringKrullDim_eq_one {O K : T
   have hφ : Function.Injective φ := fun x y h ↦
     IsFractionRing.injective O K (congrArg Subtype.val h)
   have : IsNoetherianRing V := by
-    rw [IsNoetherianRing, isNoetherian_iff, WellFoundedGT, isWellFounded_iff,
+    rw [IsNoetherianRing, isNoetherian_iff, WellFoundedGT,
       RelEmbedding.wellFounded_iff_isEmpty]
     refine ⟨fun f ↦ ?_⟩
     have hf : StrictMono f := fun i j h ↦ f.map_rel_iff.2 h
