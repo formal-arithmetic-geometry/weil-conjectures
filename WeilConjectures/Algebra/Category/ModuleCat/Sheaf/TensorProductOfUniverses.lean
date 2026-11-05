@@ -36,11 +36,6 @@ namespace SheafOfModules
 
 set_option backward.isDefEq.respectTransparency false
 
-noncomputable local instance {R S : Type*} [Ring R] [Ring S] (f : R →+* S)
-    (M : ModuleCat.{m} S) :
-    Module S ((ModuleCat.restrictScalars f).obj M) :=
-  inferInstanceAs (Module S M)
-
 section ChangeOfRings
 
 variable {C : Type u₀} [Category.{v₀} C] {J : GrothendieckTopology C}
@@ -100,8 +95,10 @@ theorem exists_changeOfRingsMapMixedUniverses
       map_add' := map_add _
       map_smul' := ?_ }, ?_⟩
   · intro s z
-    change TensorProduct (R₁.obj.obj X) (R₂.obj.obj X) (M.val.obj X) at z
-    induction z using TensorProduct.inductionOn with
+    change TensorProduct (R₁.obj.obj X)
+      ((ModuleCat.restrictScalars (α.hom.app X).hom).obj
+        (ModuleCat.of _ (R₂.obj.obj X))) (M.val.obj X) at z
+    induction z with
     | tmul t n =>
       change R₂.obj.obj X at t
       change R₂.obj.map f (s * t) ⊗ₜ[R₁.obj.obj Y, (α.hom.app Y).hom]

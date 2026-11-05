@@ -19,7 +19,6 @@ Source: Stacks Project, Modules on Sites, Tag 03EK; Tag 06YY.
 universe u
 
 open CategoryTheory MonoidalCategory
-open scoped ChangeOfRings
 
 namespace SheafOfModules
 
@@ -56,7 +55,7 @@ private noncomputable def sectionTensorIso
         change TensorProduct (O.obj.obj X)
           ((ModuleCat.restrictScalars (φ.hom.app X).hom).obj
             (ModuleCat.of _ (O'.obj.obj X))) (M.val.obj X) at x
-        induction x using TensorProduct.inductionOn with
+        induction x with
         | tmul s m => rfl
         | add x y hx hy => simpa only [smul_add] using congrArg₂ (· + ·) hx hy }
   exact e.toModuleIso
@@ -80,7 +79,7 @@ private noncomputable def presheafTensorIso
     change TensorProduct (O.obj.obj X)
       ((ModuleCat.restrictScalars (φ.hom.app X).hom).obj
         (ModuleCat.of _ (O'.obj.obj X))) (M.val.obj X) at x
-    induction x using TensorProduct.inductionOn with
+    induction x with
     | tmul s m =>
       change changeOfRingsMap φ M f (s ⊗ₜ m) = _
       rw [show changeOfRingsMap φ M f (s ⊗ₜ m) = _ from
@@ -117,7 +116,7 @@ private lemma presheafTensorIso_naturality
   change TensorProduct (O.obj.obj X)
     ((ModuleCat.restrictScalars (φ.hom.app X).hom).obj
       (ModuleCat.of _ (O'.obj.obj X))) (M.val.obj X) at x
-  induction x using TensorProduct.inductionOn with
+  induction x with
   | tmul s m => rfl
   | add x y hx hy => simpa only [map_add] using congrArg₂ (· + ·) hx hy
 
