@@ -212,8 +212,10 @@ private theorem mapSingleArrow_id {C : Type*} [Category C] [Abelian C]
   rw [← hβ, ← mapSingleArrow_ext, Ext.mapExactFunctor_id]
   rfl
 
+-- Stated over `Ab T`, the category of `lineBundleClass`: over the unfolded functor category
+-- the kernel unfolds derived categories to identify the two forms of the source.
 private theorem evaluatedLineBundleArrow (T : Scheme.{u}) (P : T.Pic) (n : ℕ) :
-    mapSingleArrow (abEvaluation T n) (1 : ℤ) (lineBundleClass T P) =
+    mapSingleArrow (C := SpTowerClasses.Ab T) (abEvaluation T n) (1 : ℤ) (lineBundleClass T P) =
       lineBundleEtaleClass T P := by
   unfold lineBundleClass
   rw [mapSingleArrow_composite]
