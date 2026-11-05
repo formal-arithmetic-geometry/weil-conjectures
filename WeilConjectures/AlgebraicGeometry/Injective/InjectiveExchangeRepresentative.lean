@@ -180,9 +180,10 @@ theorem smallModel_injectiveExchange_representative {X S : Scheme.{v}} (f : X �
           (R.rightDerivedFunctorPlusUnith.app H ≫ R.rightDerivedFunctorPlus.map q'.inv)) := by
     rw [hs, U.mapDerivedCategory.map_comp, ← DerivedCategory.Plus.ι.map_comp,
       map_derivedCategory_ι_map]
-  exact assemble_exchange_transport DerivedCategory.Plus.ι
+  have result := assemble_exchange_transport DerivedCategory.Plus.ι
     (U.mapDerivedCategoryFactors.inv.app
       ((R.mapHomologicalComplex (.up ℤ)).obj M.obj)) _ _ _ _ _ _ hs' hb
     (smallModel_injectiveExchange_target_transport f s K J q)
+  exact result
 
 end AlgebraicGeometry.Etale
