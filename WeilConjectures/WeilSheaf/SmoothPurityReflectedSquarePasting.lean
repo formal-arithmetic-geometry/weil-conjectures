@@ -109,6 +109,6 @@ lemma isoWhisker_conjugate_cancel (a : U ≅ V) (b : T ≅ S) (e : F ⋙ U ≅ T
         (isoWhiskerLeft F a.symm ≪≫ e ≪≫ isoWhiskerRight b F') ≪≫
         isoWhiskerRight b.symm F' = e := by
   ext K
-  simp [Category.assoc]
+  simp [Category.assoc, ← F'.map_comp]
 
 end CategoryTheory.Functor
