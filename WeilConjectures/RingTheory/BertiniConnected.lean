@@ -352,7 +352,8 @@ lemma BertiniConnected.connectedSpace_quotient_of_fiber {k B : Type*} [Field k] 
   have hψφ : ψ.toRingHom.comp φ = RingHom.id _ := by
     apply Ideal.Quotient.ringHom_ext
     ext x
-    simp [ψ, φ, g, g₀, Ideal.Quotient.liftₐ_apply]
+    set_option backward.isDefEq.respectTransparency false in
+      simp [ψ, φ, g, g₀]
   have hsurj : Function.Surjective (PrimeSpectrum.comap φ) := fun x ↦
     ⟨PrimeSpectrum.comap ψ.toRingHom x, by
       rw [← PrimeSpectrum.comap_comp_apply, hψφ, PrimeSpectrum.comap_id]⟩
