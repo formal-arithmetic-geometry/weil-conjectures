@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareFromCanonicalRaw
+public import WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareFromGeometricFunctor
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeComplexSquareNormalization
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeModelFamilyNormalization
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareStatement
@@ -16,8 +16,6 @@ import WeilConjectures.Tactic.ExactModProofs
 
 @[expose] public noncomputable section
 set_option Elab.async false
-set_option profiler true
-set_option profiler.threshold 1000
 attribute [local instance 0] ModuleCat.isGrothendieckAbelian_of_commRing
 universe u
 open CategoryTheory MonoidalCategory Limits
@@ -59,6 +57,7 @@ lemma projection_derived_square_of_canonical_comparison
         (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))).mapCochainComplexμIso X Y).inv) P T) :
     DerivedPullTensorSquare k₀ l g (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj T) := by
   dsimp only [DerivedPullTensorSquare, nativeOpenPull, derivedCondensedRealization]
-  exact_mod_proofs projection_derived_square_of_canonical_raw k₀ l g P T hP hT htotal
+  exact_mod_proofs projection_derived_square_of_geometric_functor k₀ l g
+    (condensedRealizationUpperStarIso k₀ l g).symm P T hP hT htotal
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
