@@ -197,9 +197,7 @@ its image in `D⁺`. -/
 private noncomputable def homologyComparison :
     M.obj.homology 0 ⟶
       (DerivedCategory.Plus.homologyFunctor _ 0).obj (DerivedCategory.Plus.Q.obj M) :=
-  (DerivedCategory.homologyFunctorFactors _ 0).inv.app M.obj ≫
-    (DerivedCategory.homologyFunctor _ 0).map
-      ((DerivedCategory.quotientCompQhIso _).inv.app M.obj)
+  (DerivedCategory.homologyFunctorFactors _ 0).inv.app M.obj
 
 private instance homologyComparison_isIso : IsIso (homologyComparison M) := by
   unfold homologyComparison
@@ -257,7 +255,7 @@ private theorem isLocallySurjective_derivedHomToHomology [M.obj.IsKInjective] :
   obtain ⟨fM, hfM⟩ := exists_chainMap_of_cycle M c'
   obtain ⟨β, hβ⟩ : ∃ β : (DerivedCategory.Plus.singleFunctor _ 0).obj A ⟶
       DerivedCategory.Plus.Q.obj M, DerivedCategory.Plus.ι.map β =
-        DerivedCategory.Q.map fM ≫ (DerivedCategory.quotientCompQhIso _).inv.app M.obj :=
+        DerivedCategory.Q.map fM :=
     ⟨DerivedCategory.Plus.ι.preimage _, Functor.map_preimage _ _⟩
   refine ⟨β, ?_⟩
   rw [NatTrans.comp_app, ConcreteCategory.comp_apply,
@@ -303,8 +301,8 @@ private theorem derivedMap_zero_of_boundary [M.obj.IsKInjective]
   let f' := (HomologicalComplex.single _ (.up ℤ) 0).map φ ≫ f
   have hβ' : DerivedCategory.Plus.ι.map
       ((DerivedCategory.Plus.singleFunctor _ 0).map φ ≫ β) =
-        DerivedCategory.Q.map f' ≫ (DerivedCategory.quotientCompQhIso _).inv.app M.obj := by
-    rw [Functor.map_comp, hf, Functor.map_comp, Category.assoc]
+        DerivedCategory.Q.map f' := by
+    rw [Functor.map_comp, hf, Functor.map_comp]
     rfl
   exact DerivedCategory.Plus.eq_zero_of_homotopy _ f' hβ'
     (homotopyOfSingle M f' b hb)

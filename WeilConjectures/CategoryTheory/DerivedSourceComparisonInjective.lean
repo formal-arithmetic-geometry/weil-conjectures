@@ -9,6 +9,7 @@ module
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 public import Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
+public import Mathlib.Algebra.Category.Grp.Zero
 import Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
 import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 import WeilConjectures.CategoryTheory.Abelian.ExtRightDerivedHom
