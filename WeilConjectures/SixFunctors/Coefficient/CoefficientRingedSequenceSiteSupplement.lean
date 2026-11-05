@@ -978,22 +978,22 @@ private theorem derived_projection_exists
       F.rightDerivedFunctorUnit (HomotopyCategory.quasiIso A (.up ℤ))
       G.mapDerivedCategory β ((HomotopyCategory.quotient A (.up ℤ)).obj I)
     have hqA : (DerivedCategory.quotientCompQhIso A).hom.app I = 𝟙 _ := by
-      simp [DerivedCategory.quotientCompQhIso, HomologicalComplexUpToQuasiIso.quotientCompQhIso,
-        Quotient.lift.isLift_hom]
+      simp [DerivedCategory.quotientCompQhIso,
+        HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift_hom]
       rfl
     have hqAi : (DerivedCategory.quotientCompQhIso A).inv.app I = 𝟙 _ := by
-      simp [DerivedCategory.quotientCompQhIso, HomologicalComplexUpToQuasiIso.quotientCompQhIso,
-        Quotient.lift.isLift_inv]
+      simp [DerivedCategory.quotientCompQhIso,
+        HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift_inv]
       rfl
     have hqB (K : CochainComplex B ℤ) :
         (DerivedCategory.quotientCompQhIso B).hom.app K = 𝟙 _ := by
-      simp [DerivedCategory.quotientCompQhIso, HomologicalComplexUpToQuasiIso.quotientCompQhIso,
-        Quotient.lift.isLift_hom]
+      simp [DerivedCategory.quotientCompQhIso,
+        HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift_hom]
       rfl
     have hqBi (K : CochainComplex B ℤ) :
         (DerivedCategory.quotientCompQhIso B).inv.app K = 𝟙 _ := by
-      simp [DerivedCategory.quotientCompQhIso, HomologicalComplexUpToQuasiIso.quotientCompQhIso,
-        Quotient.lift.isLift_inv]
+      simp [DerivedCategory.quotientCompQhIso,
+        HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift_inv]
       rfl
     have hf : G.mapDerivedCategoryFactorsh.hom.app
         ((HomotopyCategory.quotient A (.up ℤ)).obj I) =
@@ -1115,5 +1115,29 @@ noncomputable def coefficientFiniteInternalHom (n : ℕ) :
       normalizedDVRDerived l E W n :=
   @derivedInternalHomOfUniverses.{t+1, t, u} _ _ (Scheme.ProEt.topology W) _ _
     (integralCoefficientCommRingSheaf l E W n) (HasDerivedCategory.standard _)
+
+/-- The canonical derived identification of restricted evaluation.
+Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site). -/
+noncomputable def coefficientRestrictedEvaluationIso (n : ℕ) :
+    coefficientSequenceDerivedRestriction l E W ⋙ coefficientConstantTowerEvaluation l E W n ≅
+      coefficientSequenceDerivedEvaluation l E W n ⋙ coefficientFiniteDerivedRestriction l E W n :=
+  letI := HasDerivedCategory.standard (coefficientSequenceModules l E W)
+  letI := (scalarReductionRestriction_exact l E W n).1
+  letI := (scalarReductionRestriction_exact l E W n).2
+  Functor.mapDerivedCategoryCompIso (coefficientSequenceRestriction l E W)
+    ((evaluation ℕᵒᵖ (scalarReductionSource l E W)).obj (op n)) ≪≫
+    Functor.mapDerivedCategoryNatIso
+      (eqToIso (coefficientSequenceRestriction_evaluation l E W n)) ≪≫
+    (Functor.mapDerivedCategoryCompIso (coefficientSequenceEvaluation l E W n)
+      (scalarReductionRestriction l E W n)).symm
+
+/-- The actual projection L N to the restricted nth coefficient component.
+Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site). -/
+noncomputable def coefficientSequenceProjection (n : ℕ) :
+    coefficientSequenceLimit l E W ⟶
+      coefficientSequenceDerivedEvaluation l E W n ⋙ coefficientFiniteDerivedRestriction l E W n :=
+  Functor.whiskerLeft (coefficientSequenceDerivedRestriction l E W)
+    (coefficientConstantTowerProjection l E W n) ≫
+    (coefficientRestrictedEvaluationIso l E W n).hom
 
 end WeilConjectures
