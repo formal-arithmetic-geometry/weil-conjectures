@@ -55,7 +55,9 @@ lemma projection_derived_square_of_total_functors
     (modelU : DU.obj
         (DerivedCategory.Q.obj ((L.mapHomologicalComplex (.up ℤ)).obj P),
           DerivedCategory.Q.obj ((L.mapHomologicalComplex (.up ℤ)).obj T)) ≅
-      DerivedCategory.Q.obj (TD.obj (((L.mapHomologicalComplex (.up ℤ)).obj P), ((L.mapHomologicalComplex (.up ℤ)).obj T))))
+      DerivedCategory.Q.obj (TD.obj
+        (((L.mapHomologicalComplex (.up ℤ)).obj P),
+          ((L.mapHomologicalComplex (.up ℤ)).obj T))))
     (hr : V.mapDerivedCategory.map
           (rho.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj T)) ≫
         V.mapDerivedCategory.map
@@ -66,7 +68,12 @@ lemma projection_derived_square_of_total_functors
         V.mapDerivedCategory.map (L.mapDerivedCategoryFactors.hom.app (TC.obj (P, T))) ≫
         V.mapDerivedCategory.map (DerivedCategory.Q.map (t.app (P, T)).hom))
     (hmU : V.mapDerivedCategory.map modelU.hom ≫
-        V.mapDerivedCategoryFactors.hom.app (TD.obj (((L.mapHomologicalComplex (.up ℤ)).obj P), ((L.mapHomologicalComplex (.up ℤ)).obj T))) ≫ DerivedCategory.Q.map (nZ.app (((L.mapHomologicalComplex (.up ℤ)).obj P), ((L.mapHomologicalComplex (.up ℤ)).obj T))).hom =
+        V.mapDerivedCategoryFactors.hom.app (TD.obj
+          (((L.mapHomologicalComplex (.up ℤ)).obj P),
+            ((L.mapHomologicalComplex (.up ℤ)).obj T))) ≫
+        DerivedCategory.Q.map (nZ.app
+          (((L.mapHomologicalComplex (.up ℤ)).obj P),
+            ((L.mapHomologicalComplex (.up ℤ)).obj T))).hom =
       tu.hom.app
           (DerivedCategory.Q.obj ((L.mapHomologicalComplex (.up ℤ)).obj P),
             DerivedCategory.Q.obj ((L.mapHomologicalComplex (.up ℤ)).obj T)) ≫
@@ -109,13 +116,18 @@ lemma projection_derived_square_of_total_functors
               ((F.mapHomologicalComplex (.up ℤ)).obj T)) ≫
         R.mapDerivedCategoryFactors.hom.app
           ((F.mapHomologicalComplex (.up ℤ)).obj P ⊗
-            (F.mapHomologicalComplex (.up ℤ)).obj T) ≫ DerivedCategory.Q.map (d ((F.mapHomologicalComplex (.up ℤ)).obj P) ((F.mapHomologicalComplex (.up ℤ)).obj T)).hom) :
+            (F.mapHomologicalComplex (.up ℤ)).obj T) ≫
+        DerivedCategory.Q.map (d ((F.mapHomologicalComplex (.up ℤ)).obj P)
+          ((F.mapHomologicalComplex (.up ℤ)).obj T)).hom) :
     PullTensorSquareWithComparison L.mapDerivedCategory V.mapDerivedCategory F.mapDerivedCategory
       R.mapDerivedCategory DZ DU rho tz tu (Functor.mapDerivedCategorySquareIso e).symm cmp
       (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj T) := by
   exact projection_derived_square_of_total_models L V F R e DZ DU tz tu rho P T
-    (TC.obj (P, T)) (TD.obj (((L.mapHomologicalComplex (.up ℤ)).obj P), ((L.mapHomologicalComplex (.up ℤ)).obj T))) modelZ modelU
-    (t.app (P, T)) hr (nY.app (P, T)) (nZ.app (((L.mapHomologicalComplex (.up ℤ)).obj P), ((L.mapHomologicalComplex (.up ℤ)).obj T))) hmU
+    (TC.obj (P, T)) (TD.obj (((L.mapHomologicalComplex (.up ℤ)).obj P),
+      ((L.mapHomologicalComplex (.up ℤ)).obj T))) modelZ modelU
+    (t.app (P, T)) hr (nY.app (P, T)) (nZ.app
+      (((L.mapHomologicalComplex (.up ℤ)).obj P),
+        ((L.mapHomologicalComplex (.up ℤ)).obj T))) hmU
     (d ((F.mapHomologicalComplex (.up ℤ)).obj P) ((F.mapHomologicalComplex (.up ℤ)).obj T))
     (projection_model_square_from_tensor_square
       (L.mapHomologicalComplex (.up ℤ)) (V.mapHomologicalComplex (.up ℤ))
