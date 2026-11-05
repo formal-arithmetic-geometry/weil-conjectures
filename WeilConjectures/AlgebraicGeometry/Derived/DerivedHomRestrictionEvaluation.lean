@@ -100,7 +100,7 @@ private theorem derived_cube
     Iso.trans_hom, Iso.symm_hom, Iso.refl_hom, NatTrans.comp_app,
     NatTrans.id_app, Category.comp_id, CategoryTheory.Functor.map_comp,
     Category.assoc, CategoryTheory.Functor.map_id, Category.id_comp] at h₁ h₂
-  rw [← cancel_epi ((Functor.mapDerivedCategoryCompIso r K).hom.app
+  rw [← cancel_epi ((Functor.mapDerivedCategoryCompIso r K).inv.app
     (U.mapDerivedCategory.obj x))]
   rw [← cancel_mono (Z.mapDerivedCategory.map
     ((Functor.mapDerivedCategoryCompIso H' s').inv.app x))]
