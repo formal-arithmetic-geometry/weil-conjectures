@@ -14,7 +14,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Localizi
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalQNormalization
 public import WeilConjectures.CategoryTheory.Native.NativeTotalComparisonSummands
 public import WeilConjectures.WeilSheaf.Native.NativePullKFlat
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 
 /-!
 # The condensed realization is compatible with the pullback–tensor comparisons
@@ -38,7 +37,9 @@ open CategoryTheory MonoidalCategory Limits
 
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
-attribute [local instance 2000] HasDerivedCategory.ofIsGrothendieckAbelian
+-- Use Mathlib's Grothendieck instance on module categories, as `nativePullTensor` does, so that
+-- the native K-flatness statements agree syntactically.
+attribute [local instance 0] ModuleCat.isGrothendieckAbelian_of_commRing
 
 variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
@@ -92,7 +93,6 @@ theorem tensorComparisonCompatible_condensedRealizationUpperStarIso :
       (condensedRealizationSheafTensorIso k₀ l Z) :=
   sorry
 
-set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- the descent is instantiated at the concrete realization and tensor functors
 /-- **Compatibility of the condensed realization with a restriction–tensor comparison.** Let
@@ -149,7 +149,7 @@ theorem comparisonCompatible_nativeRestrictionDerivedTensor
     simp only [Functor.uncurry_obj_map, curriedTensor_map_app, curriedTensor_obj_map,
       Category.assoc] at h ⊢
     convert h using 3
-    all_goals first | rfl | exact HEq.rfl
+    all_goals rfl
   case H =>
     exact fun P T _ _ ↦ totalComparison_compatible_of_sheaf a r
       (condensedRealizationSheafTensorIso k₀ l Y) (condensedRealizationSheafTensorIso k₀ l Z) t
@@ -166,19 +166,25 @@ theorem comparisonCompatible_nativeRestrictionDerivedTensor
     let L := ObjectProperty.ι (NativeIsKFlat k₀ l Y) ⋙ DerivedCategory.Q
     exact ⟨(L.objPreimage x).obj, (L.objPreimage x).property, ⟨(L.objObjPreimageIso x).symm⟩⟩
 
+
 /-- **Compatibility of the condensed realization with the pullback–tensor comparisons.** The
 derived condensed realization carries the native pullback–tensor comparison
 `g^*(A ⊗ B) ≅ g^* A ⊗ g^* B` to the comparison `Lḡ^*(K ⊗ᴸ L) ⟶ Lḡ^* K ⊗ᴸ Lḡ^* L` of condensed
 `ℚ̲̄_ℓ`-modules, up to the tensor comparisons `condensedRealizationTensor` and the pullback
-comparison `derivedCondensedRealizationUpperStarIso`
-(`comparisonCompatible_nativeRestrictionDerivedTensor`), given the sheaf-level compatibility
-`tensorComparisonCompatible_condensedRealizationUpperStarIso`. -/
+comparison `derivedCondensedRealizationUpperStarIso`: this is
+`comparisonCompatible_nativeRestrictionDerivedTensor` for the pullback `g^*`, given the
+sheaf-level compatibility `tensorComparisonCompatible_condensedRealizationUpperStarIso`. -/
 theorem comparisonCompatible_derivedCondensedRealization :
     Adjunction.ComparisonCompatible (derivedCondensedRealizationUpperStarIso k₀ l g)
       (nativeCurriedPullTensor k₀ l g)
       (ProEtale.CondensedRing.leftDerivedUpperStarTensor (Profinite.padicAlgClRingObj l)
         (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))
       (condensedRealizationCurriedTensor k₀ l Z) (condensedRealizationCurriedTensor k₀ l Y) :=
-  sorry
+  have : (upperStar k₀ l g).IsLeftAdjoint := (upperStarLowerStarAdjunction k₀ l g).isLeftAdjoint
+  comparisonCompatible_nativeRestrictionDerivedTensor k₀ l (upperStar k₀ l g)
+    (nativeIsKFlat_mapHomologicalComplex_upperStar_obj k₀ l g) (nativePullSheafTensor k₀ l g)
+    (nativePullTotalTensor k₀ l g) (nativePullTotalTensor_summands k₀ l g) _
+    (condensedRealizationUpperStarIso k₀ l g)
+    (tensorComparisonCompatible_condensedRealizationUpperStarIso k₀ l g)
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
