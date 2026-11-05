@@ -61,8 +61,7 @@ theorem nonempty_homology_rightDerivedFunctorPlus_obj_Q_iso [PreservesFiniteLimi
   have := F.quasiIso_map_of_rightAcyclic i.hom a hL
     (fun n ↦ F.rightAcyclic_of_injective _)
   have : IsIso (DerivedCategory.Plus.Q.map i) :=
-    Localization.inverts DerivedCategory.Plus.Qh (HomotopyCategory.Plus.quasiIso C) _
-      ((HomotopyCategory.quotient_map_mem_quasiIso_iff _).2 hi)
+    Localization.inverts DerivedCategory.Plus.Q (CochainComplex.Plus.quasiIso C) i hi
   exact ⟨(DerivedCategory.Plus.homologyFunctor D n).mapIso
       (F.rightDerivedFunctorPlus.mapIso (asIso (DerivedCategory.Plus.Q.map i))) ≪≫
     F.homologyRightDerivedFunctorPlusObjQIsoOfInjective T' n ≪≫
@@ -79,8 +78,8 @@ theorem nonempty_homology_rightDerivedFunctorPlus_obj_Q_iso_of_quasiIso [Preserv
         (F.rightDerivedFunctorPlus.obj (DerivedCategory.Plus.Q.obj K)) ≅
       ((F.mapHomologicalComplex _).obj L.obj).homology n) := by
   have : IsIso (DerivedCategory.Plus.Q.map φ) :=
-    Localization.inverts DerivedCategory.Plus.Qh (HomotopyCategory.Plus.quasiIso C) _
-      ((HomotopyCategory.quotient_map_mem_quasiIso_iff _).2 ‹_›)
+    Localization.inverts DerivedCategory.Plus.Q (CochainComplex.Plus.quasiIso C) φ
+      (show QuasiIso φ.hom from inferInstance)
   obtain ⟨e⟩ := F.nonempty_homology_rightDerivedFunctorPlus_obj_Q_iso L hL n
   exact ⟨(DerivedCategory.Plus.homologyFunctor D n).mapIso
     (F.rightDerivedFunctorPlus.mapIso (asIso (DerivedCategory.Plus.Q.map φ))) ≪≫ e⟩

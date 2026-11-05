@@ -19,6 +19,7 @@ Source: Stacks Project, Modules on Sites, Tag 03EK; Tag 06YY.
 universe u
 
 open CategoryTheory MonoidalCategory
+open scoped ChangeOfRings
 
 namespace SheafOfModules
 
@@ -52,6 +53,7 @@ private noncomputable def sectionTensorIso
       map_add' := fun _ _ ↦ rfl
       map_smul' := by
         intro r x
+        change (O'.obj.obj X) ⊗[O.obj.obj X, (φ.hom.app X).hom] (M.val.obj X) at x
         induction x with
         | tmul s m => rfl
         | add x y hx hy => simpa only [smul_add] using congrArg₂ (· + ·) hx hy }
@@ -73,6 +75,7 @@ private noncomputable def presheafTensorIso
   PresheafOfModules.isoMk (sectionTensorIso φ M) (by
     intro X Y f
     ext x
+    change (O'.obj.obj X) ⊗[O.obj.obj X, (φ.hom.app X).hom] (M.val.obj X) at x
     induction x with
     | tmul s m =>
       change changeOfRingsMap φ M f (s ⊗ₜ m) = _
@@ -107,6 +110,7 @@ private lemma presheafTensorIso_naturality
         ((restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)).obj
           (unit (𝓡 O'))).val ◁ a.val := by
   ext X x
+  change (O'.obj.obj X) ⊗[O.obj.obj X, (φ.hom.app X).hom] (M.val.obj X) at x
   induction x with
   | tmul s m => rfl
   | add x y hx hy => simpa only [map_add] using congrArg₂ (· + ·) hx hy

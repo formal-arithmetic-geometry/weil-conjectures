@@ -36,6 +36,9 @@ namespace SheafOfModules
 
 set_option backward.isDefEq.respectTransparency false
 
+local instance {R S : Type*} [Ring R] [Ring S] (f : R →+* S) (M : ModuleCat.{m} S) :
+    Module S ((ModuleCat.restrictScalars f).obj M) :=
+  inferInstanceAs (Module S M)
 
 section ChangeOfRings
 
@@ -89,6 +92,7 @@ theorem exists_changeOfRingsMapMixedUniverses
       map_add' := map_add _
       map_smul' := ?_ }, ?_⟩
   · intro s z
+    change (R₂.obj.obj X) ⊗[R₁.obj.obj X, (α.hom.app X).hom] (M.val.obj X) at z
     induction z with
     | tmul t n =>
       change R₂.obj.obj X at t
