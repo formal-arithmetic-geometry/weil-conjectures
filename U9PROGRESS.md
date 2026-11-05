@@ -128,12 +128,21 @@
 - Fix patterns: `/home/ubuntu/u9/bz/FIXES-BZ469.md`.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
 
-# BZ508 in progress
+# BZ511 in progress
 
-- Branch: `u9/BZ508`; starting commit: `fa248eeed`.
-- The user instructed continuation after the exact three-line private-helper API proposal.
-- Applied the three `.symm` removals in `exactComp_assoc`, preserving the original directions under the new Mathlib composition API. Public statements remain unchanged.
-- The explicit `homEquiv_id` rewrite and factorization/cancellation proof repairs already pass remotely.
-- Next: `ucheck-bump` on the assigned module, then up to four direct importers and a second downstream layer.
-- Patterns and logs: `/home/ubuntu/u9/bz/FIXES-BZ508.md`.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
+- Branch: `u9/BZ511`; starting commit: `fa248eeed`.
+- The user instructed continuation after the exact two-private-helper API proposal.
+  The compositor inverse in `derivedCompSingle` and the direct compositor in
+  `derivedTripleNatSingle` are applied. The public theorem statement is unchanged.
+- Proofs now use Mathlib's single-object compositor lemma, hom naturality, and
+  hom/inv cancellation; the redundant `rfl` after `simp only` is removed.
+- Pinned Mathlib source was inspected at b63f6e8a. Patterns, occurrence counts,
+  and integration errors: `/home/ubuntu/u9/bz/FIXES-BZ511.md`.
+- Owned module passed `ucheck-bump` at `ffe5a7971`: 4159 jobs, target rebuilt in 29s.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ511-owned-green.log`.
+- Four direct importers are blocked by the outside-unit
+  `DivisibleExtensionDerivedReductionSupplement`; the owned module rebuilt green
+  in that check. The unvalidated downstream edit was reverted.
+- Next: check the independent importer `EtaleSupportedIntegralDerivedUnit`.
+- Downstream error log: `/home/ubuntu/u9/bz/BUILD-BZ511-downstream-blocked.log`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
