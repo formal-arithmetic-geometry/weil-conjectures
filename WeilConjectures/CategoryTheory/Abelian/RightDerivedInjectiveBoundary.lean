@@ -54,7 +54,8 @@ private lemma map_Q_comp_ι
   erw [Functor.map_id, Category.comp_id, Category.id_comp] at hn
   exact hn
 
-private lemma isIso_cochain_unit
+/-- The cochain derived unit is invertible on a bounded below complex of injectives. -/
+lemma isIso_rightDerivedFunctorPlusUnit_of_injective
     (v : A ⥤ B) [v.Additive] (K : CochainComplex.Plus A)
     [∀ n : ℤ, Injective (K.obj.X n)] :
     IsIso (v.rightDerivedFunctorPlusUnit.app K) := by
@@ -81,7 +82,7 @@ noncomputable def boundedBelowInjectiveComparison
         (DerivedCategory.Plus.Q.obj K) ⟶
       DerivedCategory.Q.obj ((v.mapHomologicalComplex (.up ℤ)).obj K.obj) := by
   have : IsIso (v.rightDerivedFunctorPlusUnit.app K) := by
-    exact isIso_cochain_unit v K
+    exact isIso_rightDerivedFunctorPlusUnit_of_injective v K
   exact DerivedCategory.Plus.ι.map (inv (v.rightDerivedFunctorPlusUnit.app K))
 
 /-- Lift the canonical SES boundary through the full inclusion of the bounded
@@ -185,7 +186,7 @@ theorem rightDerived_injectiveComplex_boundary
     infer_instance
   have hi (K : CochainComplex.Plus A) [∀ n : ℤ, Injective (K.obj.X n)] :
       IsIso (τ.app K) := by
-    have := isIso_cochain_unit v K
+    have := isIso_rightDerivedFunctorPlusUnit_of_injective v K
     change IsIso (DerivedCategory.Plus.ι.map (v.rightDerivedFunctorPlusUnit.app K))
     infer_instance
   have hv : ShiftedHom.map d' F = DerivedCategory.triangleOfSESδ hvH := by
