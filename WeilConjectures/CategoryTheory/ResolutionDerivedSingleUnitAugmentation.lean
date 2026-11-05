@@ -7,7 +7,6 @@ Authors: Bin Wu
 module
 
 public import Mathlib.Algebra.Homology.Localization
-import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.CategoryTheory.CanonicalResolutionDerivedIso
 public import WeilConjectures.CategoryTheory.RightDerivedSingleUnitHomologyComparison
 

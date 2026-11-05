@@ -126,7 +126,8 @@ private theorem unit_zero_comparison {C D : Type*}
       (DerivedCategory.homologyFunctorFactors D 0).inv.app _ ≫
       (DerivedCategory.homologyFunctor D 0).map
         (DerivedCategory.Q.map t.inv ≫ (DerivedCategory.quotientCompQhIso D).inv.app T)
-    rw [hq, Category.comp_id]
+    rw [hq]
+    erw [Category.comp_id]
     have hn := (DerivedCategory.homologyFunctorFactors D 0).inv.naturality t.inv
     dsimp only [CategoryTheory.Functor.comp_map] at hn
     exact congrArg (_ ≫ ·) hn
