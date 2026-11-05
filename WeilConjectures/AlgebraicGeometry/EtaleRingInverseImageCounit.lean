@@ -26,8 +26,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 namespace AlgebraicGeometry
 
-set_option trace.Meta.synthInstance true in
-set_option synthInstance.maxHeartbeats 1000 in
+attribute [-instance] instHasBinaryProductObjOfPreservesLimitDiscreteWalkingPairPair in
 private noncomputable def ringAdd.{uC, vC, w} {C : Type uC} [Category.{vC} C]
     (J : GrothendieckTopology C) [J.HasSheafCompose (forget CommRingCat.{w})]
     (G : Sheaf J CommRingCat.{w}) :
@@ -47,6 +46,7 @@ private noncomputable def ringAdd.{uC, vC, w} {C : Type uC} [Category.{vC} C]
        dsimp at hf hs ⊢
        rw [hf, hs]
        exact (G.obj.map f).hom.map_add _ _ |>.symm }⟩
+attribute [-instance] instHasBinaryProductObjOfPreservesLimitDiscreteWalkingPairPair in
 private noncomputable def ringMul.{uC, vC, w} {C : Type uC} [Category.{vC} C]
     (J : GrothendieckTopology C) [J.HasSheafCompose (forget CommRingCat.{w})]
     (G : Sheaf J CommRingCat.{w}) :
