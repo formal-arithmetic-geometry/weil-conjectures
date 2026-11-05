@@ -303,6 +303,7 @@ theorem exists_integral_field_hypersurface_presentation
   obtain ⟨hA, ⟨e⟩⟩ := fraction_equiv_of_hypersurface v hv Q hQ hQv hrep
   let A := MvPolynomial (Fin (r + 1)) K ⧸ Ideal.span {Q}
   let := hA
+  let : DistribMulAction A A := (Semiring.toModule : Module A A).toDistribMulAction
   let Z := Spec (.of A)
   let q : Z ⟶ Spec (.of K) := Spec.map (CommRingCat.ofHom
     ((Ideal.Quotient.mk (Ideal.span {Q})).comp MvPolynomial.C))

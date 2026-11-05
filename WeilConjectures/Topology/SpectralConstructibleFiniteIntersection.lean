@@ -72,7 +72,4 @@ theorem finite_subfamily_iInter_eq_empty_of_isConstructible
     simp only [Set.mem_iInter]
     intro a ha
     simpa [E', y] using Set.mem_iInter.mp (Set.mem_iInter.mp hx a) ha
-  have : y ∈ (∅ : Set (WithConstructibleTopology T)) := by
-    rw [← hA₀]
-    exact ⟨Set.mem_univ _, hy⟩
-  simp at this
+  exact Set.disjoint_left.mp hA₀ (Set.mem_univ y) hy
