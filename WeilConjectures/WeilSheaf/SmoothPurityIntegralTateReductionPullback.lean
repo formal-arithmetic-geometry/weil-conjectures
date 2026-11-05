@@ -66,4 +66,51 @@ lemma upperStarIntegralTateTwistOneIso_hom_comp_reduction :
   delta tateModuleTransition
   exact h
 
+/-- `upperStarIntegralTateTwistOneIso_hom_comp_reduction`, with the finite coefficient ring
+object spelled `Profinite.continuousMapRingObj (PadicAlgCl.integersModPow ℓ E n)` throughout,
+as in the finite-coefficient reading `upperStarFiniteCoefficientModEquivalenceIso`. Mixing this
+spelling with the abbreviation `Profinite.integersModPowRingObj` under the condensed pullback
+makes the kernel unfold the pullback when the two squares are composed. -/
+lemma upperStarIntegralTateTwistOneIso_hom_comp_reduction_continuousMapRingObj :
+    (pullIso (Λ' := Profinite.continuousMapRingObj (PadicAlgCl.integersModPow ℓ E n))
+      (Profinite.padicIntegersRingObjToIntegersModPow ℓ E n) g).inv.app
+          (integralTateTwistOne X ℓ E) ≫
+        (Mod.extendScalars (integersModPowReduction X' ℓ E n)).map
+          (upperStarIntegralTateTwistOneIso ℓ E g f).hom ≫
+        (extendScalarsIntegralTateTwistOneIntegersModPowIso ℓ E n (g ≫ f)).hom =
+      (CondensedRing.upperStar
+          (Profinite.continuousMapRingObj (PadicAlgCl.integersModPow ℓ E n)) g).map
+          (extendScalarsIntegralTateTwistOneIntegersModPowIso ℓ E n f).hom ≫
+        (freeFunctorCompUpperStarIso
+          (Profinite.continuousMapRingObj (PadicAlgCl.integersModPow ℓ E n)) g).hom.app
+          (rootsOfUnitySheaf X (ℓ ^ n)) ≫
+        (Mod.freeFunctor (condensedRingObj
+          (Profinite.continuousMapRingObj (PadicAlgCl.integersModPow ℓ E n)) X')).map
+          (upperStarRootsOfUnitySheafHom g (ℓ ^ n)) := by
+  have h := upperStarExtendScalarsLimitFreeTowerIso_hom_comp_doubleProjection
+    (Profinite.continuousMapRingObj ℤ_[ℓ]) g
+    (F := fun m ↦ rootsOfUnitySheaf X (ℓ ^ m))
+    (F' := fun m ↦ rootsOfUnitySheaf X' (ℓ ^ m))
+    (fun m ↦ eqToHom (congrArg (rootsOfUnitySheaf X) (pow_succ' ℓ m)) ≫
+      rootsOfUnitySheafPow X (ℓ ^ m) ℓ)
+    (fun m ↦ eqToHom (congrArg (rootsOfUnitySheaf X') (pow_succ' ℓ m)) ≫
+      rootsOfUnitySheafPow X' (ℓ ^ m) ℓ)
+    (fun m ↦ have := NeZero.natCast_pow (R := k) ℓ m
+      upperStarRootsOfUnitySheafIsoOfInvertible g f (ℓ ^ m))
+    (upperStar_map_rootsOfUnityTransition_comp_upperStarRootsOfUnitySheafHom ℓ g)
+    (preservesLimit_upperStar_tateModuleSystem ℓ g f)
+    (Λ'' := Profinite.continuousMapRingObj (PadicAlgCl.integersModPow ℓ E n))
+    (Profinite.padicIntRingObjToPadicIntegers ℓ E)
+    (Profinite.padicIntegersRingObjToIntegersModPow ℓ E n)
+    (Profinite.padicIntRingObjToIntegersModPow ℓ E n) rfl n
+  simp only [upperStarIntegralTateTwistOneIso, integralTateTwistOne, tateModule,
+    tateModuleSystem,
+    integersModPowReduction, extendScalarsIntegralTateTwistOneIntegersModPowIso,
+    extendScalarsTateModuleIso, purityFreeTowerProjection, upperStarFreeTowerIsoApp,
+    upperStarRootsOfUnitySheafIsoOfInvertible_hom,
+    Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, asIso_hom,
+    Functor.map_comp, Category.assoc] at h ⊢
+  delta tateModuleTransition
+  exact h
+
 end AlgebraicGeometry.ProEtale
