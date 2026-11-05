@@ -36,6 +36,39 @@ namespace AlgebraicGeometry
         (tilde.functor (.of A))).PreservesZeroMorphisms :=
   ⟨fun _ _ ↦ tilde.map_zero⟩
 
+/-- Exact tilde commutes with cohomology. Source: Stacks, Tag 01I9.
+(blueprint: def-pc-affine-base-change-tilde-coordinates).
+Proof: tilde is left adjoint to global sections, so preserves cokernels. Its maps
+on sections are maps of localizations, which preserve injectivity. Thus it preserves
+monomorphisms and cokernels, and consequently homology. -/
+theorem tilde_preservesHomology (A : Type u) [CommRing A] :
+    (@id (ModuleCat.{u} A ⥤ SheafOfModules.{u}
+      (moduleRings (Spec (.of A)).toRingedSpace))
+        (tilde.functor (.of A))).PreservesHomology := by
+  let T : ModuleCat.{u} A ⥤ SheafOfModules.{u}
+      (moduleRings (Spec (.of A)).toRingedSpace) := tilde.functor (.of A)
+  let : T.Additive := by
+    constructor
+    intro M N f g
+    exact tilde.map_add (R := .of A) f g
+  have adj : T ⊣ moduleSpecΓFunctor (R := .of A) := tilde.adjunction
+  let : T.IsLeftAdjoint := adj.isLeftAdjoint
+  let : PreservesFiniteColimits T := inferInstance
+  let : T.PreservesMonomorphisms := ⟨by
+    intro M N f hf
+    let : Mono f := hf
+    apply (SheafOfModules.forget _).mono_of_mono_map
+    apply PresheafOfModules.mono_of_injective
+    intro U s t h
+    apply Subtype.ext
+    funext x
+    apply IsLocalizedModule.map_injective x.1.asIdeal.primeCompl
+      (LocalizedModule.mkLinearMap x.1.asIdeal.primeCompl M)
+      (LocalizedModule.mkLinearMap x.1.asIdeal.primeCompl N)
+      f.hom ((ModuleCat.mono_iff_injective f).mp inferInstance)
+    exact congrArg (fun z ↦ z.val x) h⟩
+  exact Functor.preservesHomology_of_preservesMonos_and_cokernels T
+
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 

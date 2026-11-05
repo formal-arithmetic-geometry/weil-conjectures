@@ -246,15 +246,17 @@
 - Next: build layer-two importer CanonicalModuleBaseChangeAffineChartComparison.
 - Notes: /home/ubuntu/u9/bz/FIXES-BZ824.md. No local Lean/Lake or proof shortcuts.
 
-# BZ857 in progress
 
-- Branch: `u9/BZ857`; initial baseline `2ab2b07a3`.
-- User instructed continuation after the explicit four-upstream-module restoration proposal.
-- Merged integrated bump commit `db406319f` before restoring the required proof chain.
-- Restoring projection-unit normalization, mixed projection mate, signed normalization,
-  and mate data. Assigned theorem statement remains unchanged.
-- Applying known scalar carrier and canonical Q/Qh comparison repairs.
-- Baseline ucheck-bump remains queued; it will build the pushed branch when a tree is free.
-- Next: validate the leaf and attempt its two direct importers, then downstream layers.
-- Notes: `/home/ubuntu/u9/bz/FIXES-BZ857.md`.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+# BZ859 in progress
+
+- Branch: u9/BZ859; initial commit db406319f.
+- The user instructed continuation after the concrete upstream-restoration proposal.
+- Applied BZ859-proposed-restoration.patch: restores tilde_preservesHomology,
+  affinePushforwardCohomologyMapOfComparison, and affinePushforwardRepresentativeCohomologyIso
+  with their original signatures/docs; ports generated additive-instance references.
+- Assigned factorization uses Localization implementation imports and a reflexive cast
+  for the original homology map, following the supplied BZ457 pattern.
+- Remote ucheck-bump is queued and reads the pushed branch upon acquiring a build tree.
+- Next: validate the assigned module; build its sole direct importer
+  AffinePushforwardCohomologyEdgeIdentity, then continue downstream up to the brief's limit.
+- Fix log: /home/ubuntu/u9/bz/FIXES-BZ859.md. No local Lean/Lake, proof escapes, or limit raises.
