@@ -46,6 +46,8 @@ open SheafOfModules.SuccessiveDerivedQuotient
 
 namespace AlgebraicGeometry.Scheme.FiniteFreeDirectImage
 
+set_option maxHeartbeats 800000 in
+-- The inlined coordinate construction exceeded 200000 heartbeats at the derived square.
 private theorem comparison_isIso_app {Z W : Scheme.{u}} (q : Z ⟶ W)
     (sW : ScalarModel W) (sZ : ScalarModel Z)
     (R S : Coefficients q) (a : CoefficientMap R S) (d : ℕ)
