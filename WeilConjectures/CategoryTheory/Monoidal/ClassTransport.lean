@@ -58,7 +58,7 @@ lemma transportζ_comp_ιΦ (Y : S) :
   have h₂ := ιΦ.hom.naturality (adjFG.counit.app Y)
   simp only [Functor.id_map, Functor.comp_map, Functor.id_obj] at h₂
   rw [transportζ, h₁, Category.assoc, h₂]
-  exact Iso.hom_inv_id_app_assoc ιΦ (F.obj (G.obj Y)) _
+  exact Iso.inv_hom_id_app_assoc ιΦ (F.obj (G.obj Y)) _
 
 /-- `ζ` read through the exceptional adjunction `S₁ ⊣ B₁`. -/
 lemma transportζ_homEquiv {B₁ : S ⥤ P} (adjSB : S₁ ⊣ B₁) {Z : P} {K : S} (g : S₁.obj Z ⟶ K) :
@@ -223,7 +223,7 @@ lemma conjugate_counit_aux (c : L₂ ≅ L₁) (eL : L₁ ≅ L₀) (eR : R₁ �
   change _ ≫ Adjunction.id.counit.app K = _ at h₂
   simp only [Adjunction.id] at h₂
   rw [← h₁, ← he, ← L₁.map_comp_assoc]
-  erw [← reassoc_of% h₃, Iso.hom_inv_id_app_assoc, ← reassoc_of% h₄]
+  erw [← reassoc_of% h₃, Iso.inv_hom_id_app_assoc, ← reassoc_of% h₄]
   rw [← h₂, NatTrans.id_app, Category.comp_id]
   rfl
 
