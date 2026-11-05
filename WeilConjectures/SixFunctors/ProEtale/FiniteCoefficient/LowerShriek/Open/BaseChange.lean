@@ -123,9 +123,9 @@ with `j`, `j'` open immersions, the isomorphism `D(j'_!) D(g'^*) ≅ D(g''^*) D(
 exact (blueprint `lem-cbc-proetale-extension-zero-base-change`). -/
 noncomputable def derivedOpenImmersionLowerShriekBaseChangeIso (hsq : IsPullback g' j' j g'') :
     D((g')^*[A]) ⋙ D((j')_!open[A]) ≅ D((j)_!open[A]) ⋙ D((g'')^*[A]) :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (openImmersionLowerShriekBaseChangeIso A hsq) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 end ProEtale
 

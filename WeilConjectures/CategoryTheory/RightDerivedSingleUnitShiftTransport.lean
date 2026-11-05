@@ -7,8 +7,10 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.CategoryTheory.RightDerivedSingleUnitHomologyComparison
+public import Mathlib.Algebra.Homology.Localization
 import WeilConjectures.CategoryTheory.SingleQuotientInverseShift
 import WeilConjectures.CategoryTheory.MappedSingleInverseShift
+import all Mathlib.Algebra.Homology.Localization
 
 /-!
 # Canonical single-complex shift comparisons
@@ -55,7 +57,7 @@ theorem rightDerivedPlusSingleUnit_shift_transport (X : B) (n : ℕ) :
     let S : CochainComplex.Plus B :=
       ⟨(CochainComplex.singleFunctor B (n : ℤ)).obj X, n, inferInstance⟩
     let e : (DerivedCategory.Plus.singleFunctor B n).obj X ≅
-        DerivedCategory.Plus.Q.obj S :=
+        DerivedCategory.Plus.Qh.obj ((HomotopyCategory.Plus.quotient B).obj S) :=
       DerivedCategory.Plus.ι.preimageIso
         ((DerivedCategory.singleFunctorIsoCompQ B n).app X ≪≫
           (DerivedCategory.quotientCompQhIso B).symm.app _)
