@@ -480,18 +480,6 @@ private theorem projector_unique
   simp only [Adjunction.homEquiv_counit, Functor.map_comp]
   rw [h]
 
-private theorem projector_complement_zero
-    {A D E : Type*} [Category A] [Category D] [Category E]
-    [Abelian A] [Abelian D] [Abelian E]
-    [HasDerivedCategory A] [HasDerivedCategory D] [HasDerivedCategory E]
-    (H : D ⥤ A) (F : A ⥤ E) [H.Additive] [F.Additive]
-    [PreservesFiniteLimits H] [PreservesFiniteColimits H]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    (h : ∀ N, IsZero ((H ⋙ F).obj N)) (M : DerivedCategory D) :
-    IsZero (F.mapDerivedCategory.obj (H.mapDerivedCategory.obj M)) := by
-  have hz := (H ⋙ F).isZero_mapDerivedCategory_obj M (fun _ ↦ h _)
-  exact hz.of_iso ((Functor.mapDerivedCategoryCompIso H F).app M).symm
-
 private theorem intrinsic_projector_restriction {U X : Scheme.{u}}
     (s : U ⟶ X) [IsOpenImmersion s] [IsClosedImmersion s] (M : Derived B X) :
     (G B s).map ((pi B s).app M) = (jAdj B s).unit.app ((G B s).obj M) := by
