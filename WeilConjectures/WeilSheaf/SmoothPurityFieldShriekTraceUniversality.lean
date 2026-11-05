@@ -51,16 +51,13 @@ theorem baseChangedSmoothTrace_ambient_universal
           ((boundedConstructibleLowerShriekOfCompactificationCompatibility l
             (compactificationOverField f)).inv.app (boundedConstructibleTateTwist l X d (2 * d)) ≫
             (smoothTrace l f d).hom)) := by
-  have ht := Functor.bijective_map_comp_iso_trace
-    (rightDerivedLowerShriekOfCompactification (Profinite.padicAlgClRingObj l) c')
-    ((purityFieldPullbackCompatibility l (πY := πX)).symm.app
-      (boundedConstructibleTateTwist l X d (2 * d)))
-    ((purityFieldPullbackCompatibility l (πY := πY)).app (𝟙_ _)) _
-    (baseChangedSmoothTrace_compactification_universal l f f' c' hi hg e d K)
+  have ht := baseChangedSmoothTrace_compactification_universal l f f' c' hi hg e d K
   rw [purityFieldCompactificationTrace_coordinates] at ht
-  simpa only [Functor.TraceUniversalAt, Iso.app_hom, Iso.symm_hom, Iso.app_inv,
-    Category.assoc, ← Functor.map_comp_assoc, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id,
-    Category.id_comp, Iso.inv_hom_id_app_assoc, Category.comp_id] using ht
+  exact Functor.traceUniversalAt_of_coordinates
+    (rightDerivedLowerShriekOfCompactification (Profinite.padicAlgClRingObj l) c')
+    ((purityFieldPullbackCompatibility l (πY := πX)).app
+      (boundedConstructibleTateTwist l X d (2 * d)))
+    ((purityFieldPullbackCompatibility l (πY := πY)).app (𝟙_ _)) _ ht
 
 /-- Pass from left-derived to levelwise pullback coordinates, as used by the
 specified geometric descent comparison. -/
@@ -90,7 +87,7 @@ theorem baseChangedSmoothTrace_levelwise_universal
     Functor.isoWhiskerRight_inv, Functor.whiskerRight_app,
     Iso.app_hom, Iso.symm_hom, Iso.app_inv, Category.assoc,
     ← Functor.map_comp_assoc, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id, Category.id_comp] at ht
-  rw [← (leftDerivedUpperStarIsoMapDerivedCategory (Profinite.padicAlgClRingObj l) πY).hom.naturality,
+  rw [(leftDerivedUpperStarIsoMapDerivedCategory (Profinite.padicAlgClRingObj l) πY).hom.naturality,
     Iso.inv_hom_id_app_assoc] at ht
   exact ht
 

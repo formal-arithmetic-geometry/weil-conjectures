@@ -59,4 +59,16 @@ lemma traceUniversalAt_of_iso
     dsimp only at hφ ⊢
     rw [he, hφ, Iso.hom_inv_id_app_assoc]
 
+/-- Remove specified source and target coordinates from a universal trace. -/
+lemma traceUniversalAt_of_coordinates
+    {C D : Type*} [Category C] [Category D] (L : C ⥤ D)
+    {P P' K : C} {N N' : D} (eP : P ≅ P') (eN : N ≅ N')
+    (ε : L.obj P' ⟶ N')
+    (h : L.TraceUniversalAt K (L.map eP.hom ≫ ε ≫ eN.inv)) :
+    L.TraceUniversalAt K ε := by
+  have ht := bijective_map_comp_iso_trace L eP.symm eN _ h
+  simpa only [TraceUniversalAt, Iso.symm_hom, Category.assoc,
+    ← L.map_comp_assoc, Iso.inv_hom_id, Functor.map_id, Category.id_comp,
+    Iso.inv_hom_id_assoc, Category.comp_id] using ht
+
 end CategoryTheory.Functor

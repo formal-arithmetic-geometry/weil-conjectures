@@ -101,16 +101,23 @@ theorem isIso_purityMapOfDescendedSmoothTrace_of_universal
   have := (objectProperty k₀ l X).fullyFaithfulι.faithful
   have := (objectProperty k₀ l Y).fullyFaithfulι.full
   have := (objectProperty k₀ l Y).fullyFaithfulι.faithful
-  apply Adjunction.isIso_homEquiv_of_fullyFaithful_trace adj
+  let L := CondensedRing.weilRightDerivedLowerShriek
+    (s := X ↘ Spec (CommRingCat.of k₀)) (t := Y ↘ Spec (CommRingCat.of k₀))
+    (Profinite.padicAlgClRingObj l)
+    (CondensedRing.compactificationOverField
+      (Over.homMk (U := Over.mk (X ↘ Spec (CommRingCat.of k₀)))
+        (V := Over.mk (Y ↘ Spec (CommRingCat.of k₀))) f (comp_over f _))) (comp_over f _)
+  have he := Adjunction.isIso_homEquiv_of_fullyFaithful_trace adj
     ((objectProperty k₀ l X).ι ⋙ (ProEtaleWeilSheaf.derivedEquivCondensed k₀ l X).functor)
     ((objectProperty k₀ l Y).ι ⋙ (ProEtaleWeilSheaf.derivedEquivCondensed k₀ l Y).functor)
-    _ (shriekTraceCondensedComparison f) (traceOfDescendedSmoothTrace f d T U eT eU)
-    (_ ≫ CondensedRing.geometricFiberWeilSmoothTrace l
+    L (shriekTraceCondensedComparison f) (traceOfDescendedSmoothTrace f d T U eT eU)
+    (L.map eT.hom ≫ CondensedRing.geometricFiberWeilSmoothTrace l
       (Over.homMk (U := Over.mk (X ↘ Spec (CommRingCat.of k₀)))
         (V := Over.mk (Y ↘ Spec (CommRingCat.of k₀))) f (comp_over f _)) d ≫ eU.inv)
-  · rw [shriekTraceCondensedComparison_hom_app]
-    exact map_traceOfDescendedSmoothTrace f d T U eT eU
-  · intro K
-    exact Functor.bijective_map_comp_iso_trace _ eT eU.symm _ (h K)
+    (by
+      rw [shriekTraceCondensedComparison_hom_app]
+      exact map_traceOfDescendedSmoothTrace f d T U eT eU)
+    (fun K ↦ Functor.bijective_map_comp_iso_trace L eT eU.symm _ (h K))
+  exact he
 
 end AlgebraicGeometry.WeilComplex
