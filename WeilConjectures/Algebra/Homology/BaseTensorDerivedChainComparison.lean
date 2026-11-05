@@ -171,7 +171,7 @@ theorem exists_baseTensorDerivedChainComparison
           ((l.mapHomologicalComplex (.up ℤ)).obj P)))) = 𝟙 _ := DerivedCategory.Qh.map_id _
   simp only [hr, hs, Category.assoc] at h'
   erw [hmapr, hmaps] at h'
-  simp only [Category.comp_id, Iso.inv_hom_id_app] at h'
+  erw [Category.comp_id, Category.id_comp, Iso.inv_hom_id_app, Category.comp_id] at h'
   erw [DerivedCategory.quotientCompQhIso_hom_naturality (γ.app P)] at h'
   rw [reassoc_of% hn] at h'
   simp only [G, T, Functor.comp_map, Functor.map_comp, Category.assoc] at h'
