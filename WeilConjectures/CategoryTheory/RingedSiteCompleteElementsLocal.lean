@@ -200,7 +200,7 @@ private theorem completeElementHom_comparison
       F.mapDerivedCategory.mapIso (eK U).symm
     let e₂ : F.mapDerivedCategory.obj (FU.mapDerivedCategory.obj K) ≅
         (FU ⋙ F).mapDerivedCategory.obj K :=
-      (Functor.mapDerivedCategoryCompIso FU F).symm.app K
+      (Functor.mapDerivedCategoryCompIso FU F).app K
     let e₃ : (FU ⋙ F).mapDerivedCategory.obj K ≅ FV.mapDerivedCategory.obj K :=
       (Functor.mapDerivedCategoryNatIso (SheafOfModules.overFunctorMap.{u} O a)).app K
     exact e₁ ≪≫ e₂ ≪≫ e₃ ≪≫ eK V

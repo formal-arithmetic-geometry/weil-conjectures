@@ -289,7 +289,7 @@ private theorem derivedFormula_components
     funext n
     exact hb K n
   rw [hbK]
-  simp only [Iso.trans_hom, NatTrans.comp_app, Category.assoc]
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
   rw [Functor.mapDerivedCategoryCompIso_hom_app_factors]
   exact (Functor.mapDerivedCategoryNatIso_fac a K).symm
 
@@ -518,7 +518,7 @@ private theorem descend_coherence
           H.mapDerivedCategory =
       (Functor.mapDerivedCategoryNatIso e).hom ≫
         (Functor.mapDerivedCategoryNatIso a1).hom ≫
-        (Functor.mapDerivedCategoryCompIso F F13).hom ≫
+        (Functor.mapDerivedCategoryCompIso F F13).inv ≫
         Functor.whiskerLeft F.mapDerivedCategory (Functor.mapDerivedCategoryNatIso a13).hom ≫
         Functor.whiskerLeft F.mapDerivedCategory (Functor.mapDerivedCategoryCompIso G H).inv := by
   have hd := congrArg (fun t ↦ (Functor.mapDerivedCategoryNatIso t).hom) ho

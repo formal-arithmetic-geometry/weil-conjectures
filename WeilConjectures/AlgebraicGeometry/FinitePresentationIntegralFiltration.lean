@@ -11,6 +11,7 @@ public import Mathlib.CategoryTheory.Subobject.Limits
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 import WeilConjectures.AlgebraicGeometry.FinitePresentationSupportReductionFiltration
 import WeilConjectures.CategoryTheory.FiniteFiltrationRefinement
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # Integral-ideal filtrations in the finite-presentation interface
 
