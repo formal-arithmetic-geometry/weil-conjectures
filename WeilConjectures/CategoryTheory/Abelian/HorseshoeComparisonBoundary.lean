@@ -225,7 +225,8 @@ private theorem augmentation_boundary
     DerivedCategory.singleFunctorsPostcompQIso_hom_hom,
     DerivedCategory.singleFunctorsPostcompQIso_inv_hom, NatTrans.id_app,
     Category.id_comp]
-  simpa [DerivedCategory.singleFunctorIsoCompQ, Functor.commShiftIso_comp_hom_app] using hn
+  simpa [DerivedCategory.singleFunctorIsoCompQ, Functor.commShiftIso_comp_hom_app,
+    Functor.map_id, Category.id_comp, Category.comp_id] using hn
 
 /-- The explicit comparisons respect the connecting arrow of the derived
 horseshoe triangle.
@@ -321,8 +322,8 @@ theorem horseshoe_comparison_boundary
         (boundedBelowInjectiveComparison v H.X₁)⟦(1 : ℤ)⟧' =
       boundedBelowInjectiveComparison v H.X₃ ≫
         DerivedCategory.triangleOfSESδ hV := by
-    simpa only [Functor.comp_map, Functor.commShiftIso_comp_hom_app] using hunit
-  simp only [Functor.comp_map]
+    simpa only [Functor.comp_map, Functor.commShiftIso_comp_hom_app, Category.assoc] using hunit
+  simp only [Functor.comp_map, Functor.commShiftIso_comp_hom_app, Category.assoc]
   erw [reassoc_of% hunit', he]
   rfl
 
