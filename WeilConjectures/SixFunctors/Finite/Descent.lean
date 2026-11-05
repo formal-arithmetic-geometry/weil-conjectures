@@ -332,7 +332,7 @@ lemma exists_pullSection_eq_map_toEtaleMkId [Surjective r]
     intro t
     have e := ConcreteCategory.congr_hom (Etale.toPresheafFiber_stalkRestrict
       AddCommGrpCat.{u + 1} r ybar t ((r)^*[AddCommGrpCat.{u + 1}].obj G)
-      ⟨U, fiberPt (v₀ ≫ φ₀) hu⟩) δ
+      (Functor.elementsMk _ U (fiberPt (v₀ ≫ φ₀) hu))) δ
     rw [ConcreteCategory.comp_apply] at e
     erw [e]
     obtain ⟨V₁, a₁, U₁, φ₁, hφ₁, g₁, ⟨x₁, hx₁⟩, hrep₁⟩ :=
