@@ -156,6 +156,7 @@ private theorem extend_bijective {R : Type u} {S : Type v}
   have heq : (fun x : restrict φ (extend φ M) ↦ r • x) =
       (E.baseChange R S : TensorProduct R S M → TensorProduct R S M) := by
     funext x
+    change TensorProduct R S M at x
     change (φ r) • (x : TensorProduct R S M) = (E.baseChange R S) x
     induction x using TensorProduct.inductionOn with
     | tmul s m =>

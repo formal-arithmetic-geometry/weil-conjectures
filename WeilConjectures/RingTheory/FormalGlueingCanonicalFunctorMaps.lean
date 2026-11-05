@@ -70,6 +70,7 @@ private theorem compare_natural {R : Type u} {S : Type v}
     show compare φ a M (LocalizedModule.mk x 1) =
       restrictMap φ (extendMap φ (LocalizedModule.mkLinearMap _ M)) x from
       LinearMap.congr_fun (exists_compare φ a M).exists.choose_spec x]
+  change TensorProduct R S M at x
   induction x using TensorProduct.inductionOn with
   | tmul s m =>
     simp [extendMap, extendMapR, restrictMap, IsLocalizedModule.map_LocalizedModules]
