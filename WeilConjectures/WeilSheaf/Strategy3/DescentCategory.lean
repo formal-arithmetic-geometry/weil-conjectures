@@ -88,16 +88,16 @@ lemma scalarDatum_conjugate_indexed
   let v' := liftIso P Q M N T U (0, .target) (0, .targetUnit) v
   have h := purity_scalarDatum_conjugate_named F α' β'
     (b.hom.app M) (b.hom.app N) t u
-    (by simpa [F, pullback, step, shift, α', liftIso] using ha)
-    (by simpa [F, pullback, step, shift, β', liftIso] using hb)
+    (by simpa [F, pullback, step, shift, object, α', liftIso] using ha)
+    (by simpa [F, pullback, step, shift, object, β', liftIso] using hb)
     e' v'
     (by
       apply Iso.ext
       change v.hom = α.inv ≫ e.hom ≫ β.hom
       rw [hv]
       rfl)
-    c (by simpa [F, pullback, step, shift, e', liftIso] using he)
+    c (by simpa [F, pullback, step, shift, object, e', liftIso] using he)
   have h' := congrArg ((realize V).map) h
-  simpa [realize, F, pullback, step, shift, v', liftIso] using h'
+  simpa [realize, F, pullback, step, shift, object, v', liftIso] using h'
 
 end CategoryTheory.K4Coefficient
