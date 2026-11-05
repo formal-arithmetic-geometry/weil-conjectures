@@ -32,8 +32,10 @@ The new construction introduces no extra base-change hypothesis.
 
 The isomorphism built in step 3 need not equal the specified base-change map. Step 4 proves
 invertibility of the specified map by the existing proper criterion; it does not assert
-that an arbitrary isomorphism is the desired comparison. The remaining trace-identification
-and Tate-encoding consumer work belongs to K4/C9 and is not claimed by this report.
+that an arbitrary isomorphism is the desired comparison. The actual descended-exchange adapter and full native orientation have also been drafted
+in `SmoothPurityDescendedRelativeUnit` and `SmoothPurityRelativeOrientation`, using K4's checked descent and Tate-encoding support. Their independent validation is pending.
+LEAD01:40 makes this relative route a backup; the primary route is the separate Thom
+integration on K4/C9.
 
 ## Existing inputs
 

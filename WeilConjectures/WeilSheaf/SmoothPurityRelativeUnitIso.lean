@@ -57,15 +57,17 @@ def purityGeometricFiberUpperShriekUnitIso :
 /-- For a proper relative morphism the specified exceptional base change at the unit is
 invertible. An abstract Verdier-duality isomorphism suffices by the endomorphism criterion. -/
 theorem purity_isIso_upperShriekBaseChangeOfMap_unit_geometricFiber [IsProper f.left] :
-    IsIso ((upperShriekBaseChangeOfMap l (isPullback_geometricFiberOverMap f)).app (𝟙_ _)) := by
+    IsIso ((upperShriekBaseChangeOfMap l (f := f) (f' := geometricFiberOverMap f)
+      (isPullback_geometricFiberOverMap f)).app (𝟙_ _)) := by
   have h := isIso_nearbyDualityMap_upperStarOfMap_id_of_weaklyEtale l
     (P := Y) (P' := geometricFiberOver Y) Y.hom.geometricFiberProj (𝟙_ _)
     ((boundedConstructibleLowerStar l f).obj (𝟙_ _))
   have := isIso_lowerStar_map_upperShriekBaseChangeOfMap_app l
-    (isPullback_geometricFiberOverMap f) (𝟙_ _) h
+    (f := f) (f' := geometricFiberOverMap f) (isPullback_geometricFiberOverMap f) (𝟙_ _) h
   let e := Functor.Monoidal.εIso (boundedConstructibleUpperStarOfMap l
     (X := Y) (Y := geometricFiberOver Y) Y.hom.geometricFiberProj)
-  exact isIso_upperShriekBaseChangeOfMap_app_of_iso l (isPullback_geometricFiberOverMap f)
+  exact isIso_upperShriekBaseChangeOfMap_app_of_iso l
+    (f := f) (f' := geometricFiberOverMap f) (isPullback_geometricFiberOverMap f)
     (𝟙_ _) (purityGeometricFiberUpperShriekUnitIso l f ≪≫
       (boundedConstructibleUpperShriek l (geometricFiberOverMap f)).mapIso e)
 

@@ -93,7 +93,7 @@ theorem purity_nonempty_relative_shriekRightAdjoint_adicConstant_iso
   have := CondensedRing.isIso_smoothUnitBaseChange_descendedShriekGeometricExchange_relative l
     (Over.homMk (U := Over.mk (X ↘ Spec (CommRingCat.of k₀)))
       (V := Over.mk (Y ↘ Spec (CommRingCat.of k₀))) f (comp_over f _)) e.hom
-  exact nonempty_shriekRightAdjoint_adicConstant_iso_of_unitBaseChange f d α e adj
+  exact purity_nonempty_relativeRightAdjoint_unit_of_baseChange f d α e adj
 
 /-- Forgetting the relative orientation gives the original Frobenius-commuting equation,
 with an arbitrary exceptional right adjoint supplied explicitly. -/

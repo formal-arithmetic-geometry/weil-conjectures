@@ -105,7 +105,7 @@ include α e
 
 /-- The native Tate encoding turns the shriek universality criterion into the
 usual orientation of the constant Weil complex. -/
-theorem nonempty_shriekRightAdjoint_adicConstant_iso_of_unitBaseChange
+theorem purity_nonempty_relativeRightAdjoint_unit_of_baseChange
     {J : WeilComplex k₀ l Y ⥤ WeilComplex k₀ l X} (adj : derivedLowerShriek k₀ l f ⊣ J) :
     Nonempty (J.obj (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l Y)) ≅
       ((tateTwist k₀ l X d).obj
