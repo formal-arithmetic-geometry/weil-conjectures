@@ -476,7 +476,7 @@ structure RingedPullbackResolutionComparisons
     (hq : QuasiIso p),
     (comparison (A := A) (P := P) p hp hf hq).hom =
       inv (LF.map (DerivedCategory.Q.map p)) ≫
-        epsilon.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)
+        cast (by rfl) (epsilon.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))
   naturality : ∀ {A A' P P' : CochainComplex (Mod JC R) ℤ}
     (p : P ⟶ A) (p' : P' ⟶ A') (a : P ⟶ P') (b : A ⟶ A')
     (hp : P.IsKFlatIndependentCoefficients) (hf : ∀ n : ℤ, IsFlatOnSite (J := JC) (R := R) (P.X n))

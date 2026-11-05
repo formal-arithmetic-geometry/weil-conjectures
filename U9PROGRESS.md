@@ -238,3 +238,15 @@
   and restored its source. Next: leaf-only rc=0 validation, final audit, and DONE.
 - Fix patterns and diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ800.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
+
+
+# BZ845 in progress
+
+- Branch: `u9/BZ845`; baseline: `c3b522379`.
+- Reread the brief and progress notes on continuation; no new LEAD lines.
+- Proof/import repairs removed the five original proof-local diagnostics remotely.
+- The user instructed continuation after the exact one-line reflexive-cast proposal.
+  Applied `BZ845-statement-cast-proposal.patch` to the public normalization field.
+- Next: `ucheck-bump` on the leaf and three direct importers, then further unblocked layers.
+- Fix patterns and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ845.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
