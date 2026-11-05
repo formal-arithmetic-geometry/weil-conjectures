@@ -88,14 +88,14 @@ private theorem mk_pow_mul_one_sub (l : K) :
       simp [pow_succ, coeff_X, mul_comm]
 
 private theorem derivative_one_sub_C_mul_X (l : K) :
-    derivative K (1 - C l * X : K⟦X⟧) = -C l := by
+    derivative (R := K) (1 - C l * X : K⟦X⟧) = -C l := by
   rw [map_sub, Derivation.map_one_eq_zero, Derivation.leibniz, derivative_X, derivative_C,
     smul_zero, add_zero, smul_eq_mul, mul_one, zero_sub]
 
 /-- The logarithmic derivative of a finite product `∏ (1 - λ t)` is
 `- ∑_{n ≥ 1} (∑ λ ^ n) t ^ n`. -/
 private theorem X_mul_derivative_multiset_prod (s : Multiset K) :
-    X * derivative K (s.map fun l ↦ (1 - C l * X : K⟦X⟧)).prod =
+    X * derivative (R := K) (s.map fun l ↦ (1 - C l * X : K⟦X⟧)).prod =
       (-mk fun n ↦ if n = 0 then 0 else (s.map (· ^ n)).sum) *
         (s.map fun l ↦ (1 - C l * X : K⟦X⟧)).prod := by
   induction s using Multiset.induction with
@@ -130,7 +130,7 @@ series of the power sums of its reciprocal roots:
 `t * Q' = - (∑_{n ≥ 1} (∑_z z⁻ⁿ) tⁿ) * Q`, the inner sum running over the roots `z` of `Q`. -/
 theorem X_mul_derivative_coe_of_coeff_zero_eq_one {Q : Polynomial K} (hQ : Q.Splits)
     (h0 : Q.coeff 0 = 1) :
-    X * derivative K (Q : K⟦X⟧) =
+    X * derivative (R := K) (Q : K⟦X⟧) =
       (-mk fun n ↦ if n = 0 then 0 else (Q.roots.map fun z ↦ z⁻¹ ^ n).sum) * (Q : K⟦X⟧) := by
   have h : (Q : K⟦X⟧) = ((Q.roots.map (·⁻¹)).map fun l ↦ (1 - C l * X : K⟦X⟧)).prod := by
     conv_lhs => rw [Polynomial.eq_prod_one_sub_inv_roots hQ h0]
@@ -150,7 +150,7 @@ namespace Matrix
 variable {K : Type*} [Field K] {ι : Type*} [Fintype ι] [DecidableEq ι]
 
 private theorem X_mul_derivative_charpolyRev_of_isAlgClosed [IsAlgClosed K] (A : Matrix ι ι K) :
-    X * derivative K (A.charpolyRev : K⟦X⟧) =
+    X * derivative (R := K) (A.charpolyRev : K⟦X⟧) =
       (-mk fun n ↦ if n = 0 then 0 else (A ^ n).trace) * (A.charpolyRev : K⟦X⟧) := by
   simp only [Matrix.trace_pow_eq_sum_pow_roots_charpoly]
   rw [Matrix.charpolyRev_eq_prod_one_sub_smul, coe_multiset_prod_one_sub]
@@ -159,7 +159,7 @@ private theorem X_mul_derivative_charpolyRev_of_isAlgClosed [IsAlgClosed K] (A :
 /-- The logarithmic derivative of the reciprocal characteristic polynomial `det (1 - t A)` of a
 square matrix is minus the generating series of the traces of the powers of `A`. -/
 theorem X_mul_derivative_charpolyRev (A : Matrix ι ι K) :
-    X * derivative K (A.charpolyRev : K⟦X⟧) =
+    X * derivative (R := K) (A.charpolyRev : K⟦X⟧) =
       (-mk fun n ↦ if n = 0 then 0 else (A ^ n).trace) * (A.charpolyRev : K⟦X⟧) := by
   set φ := algebraMap K (AlgebraicClosure K)
   have hinj : Function.Injective φ := (algebraMap K (AlgebraicClosure K)).injective
@@ -189,7 +189,7 @@ derivative of the reciprocal characteristic polynomial `det (1 - t F)` of an end
 of a finite dimensional vector space is minus the generating series of the traces of the
 powers of `F`, i.e. `t * (det (1 - t F))' = - (∑_{n ≥ 1} tr (F ^ n) t ^ n) * det (1 - t F)`. -/
 theorem X_mul_derivative_charpolyRev (F : Module.End K V) :
-    X * derivative K (F.charpolyRev : K⟦X⟧) =
+    X * derivative (R := K) (F.charpolyRev : K⟦X⟧) =
       (-PowerSeries.mk fun n ↦ if n = 0 then 0 else LinearMap.trace K V (F ^ n)) *
         (F.charpolyRev : K⟦X⟧) := by
   classical
