@@ -293,6 +293,7 @@ private theorem tensorLeft_additive_independent (S : SheafOfModules.{r} (𝓡 O)
     intro M N f g
     apply PresheafOfModules.hom_ext
     intro X
+    let : CommRing ((𝓡 O).obj.obj X) := inferInstanceAs (CommRing (O.obj.obj X))
     change S.val.obj X ◁ (f.app X + g.app X) =
       S.val.obj X ◁ f.app X + S.val.obj X ◁ g.app X
     exact MonoidalPreadditive.whiskerLeft_add _ _

@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
 
