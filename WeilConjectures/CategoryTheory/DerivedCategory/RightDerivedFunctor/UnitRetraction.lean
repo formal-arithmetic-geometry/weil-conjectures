@@ -128,7 +128,7 @@ theorem Q_map_unit_comp_derivedUnitIso_hom (adj : f ⊣ g) :
     Functor.mapIso_hom, Iso.app_hom, asIso_inv, Functor.map_comp]
   rw [reassoc_of% h₁, reassoc_of% h₃, ← Functor.map_comp_assoc,
     IsIso.hom_inv_id, Functor.map_id, Category.id_comp]
-  exact (Iso.inv_comp_eq _).2 h₂.symm
+  exact (Iso.inv_comp_eq ((DerivedCategory.quotientCompQhIso C).app K)).2 h₂.symm
 
 variable (t : (g.mapHomologicalComplex _).obj ((f.mapHomologicalComplex _).obj K) ⟶ K)
 
