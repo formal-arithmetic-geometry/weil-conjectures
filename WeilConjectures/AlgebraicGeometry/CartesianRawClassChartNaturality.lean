@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.CartesianChartClassPullback
 import WeilConjectures.AlgebraicGeometry.CartesianChartLiftNaturality
+import all WeilConjectures.AlgebraicGeometry.CartesianHigherImageTransitions
 import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Horizontal
 import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompAssoc
 
