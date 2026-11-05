@@ -103,6 +103,15 @@ private local instance (I : Type r) : HasColimitsOfShape (Discrete I)
       ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R).obj) :=
   PresheafOfModules.hasColimitsOfShape _ _
 
+private local instance (I : Type r) : HasColimitsOfShape (Discrete I) (Modules R) :=
+  SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
+
+private local instance (I : Type) : HasColimitsOfShape (Discrete I) (Modules R) := by
+  let : HasColimitsOfShape (Discrete I) (PresheafOfModules.{r}
+      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R).obj) :=
+    PresheafOfModules.hasColimitsOfShape _ _
+  exact SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
+
 /-- Reuse the coproduct totalization of the canonical tensor bicomplex.
 Source: Stacks, Tag 06YM (auxiliary; not a blueprint node). -/
 instance hasTotal (K L : CochainComplex (Modules R) ℤ) :
