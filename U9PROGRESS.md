@@ -218,7 +218,7 @@
 - Fix patterns and exact diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ740.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ780 leaf and direct importer green
+# BZ780 leaf and first two downstream layers green
 
 - Branch: `u9/BZ780`; starting commit: `8027d88a3`.
 - Green source commit: `5aead0ac1d861aa6ef525ef6f15a0e7c483bdc26`.
@@ -232,7 +232,8 @@
   with `cast_eq`, and used `erw` through the local functor aliases.
 - All six declarations are retained; no local Lean/Lake, proof placeholders, trust
   bypasses, profiler probes, or heartbeat changes.
-- Next: build the next-layer importer `DerivedPullbackMonoidalDescent`; skip it if
-  its unowned sibling dependency `DerivedPullbackTensorAssociativity` (BZ800) fails.
+- `DerivedPullbackMonoidalDescent` also passed `ucheck-bump` at `453fb49d85`: rc=0,
+  failed=0. Its associativity dependency built successfully in this checkout.
+- Next: `DerivedPullbackMonoidalModel` and its direct importers, in batches of at most six.
 - Full successful log: `/home/ubuntu/u9/bz/BUILD-BZ780-leaf-and-unit-green-full.log`.
 - Five fix patterns and replay rules: `/home/ubuntu/u9/bz/FIXES-BZ780.md`.
