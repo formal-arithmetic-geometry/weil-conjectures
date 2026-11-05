@@ -11,6 +11,7 @@ public import WeilConjectures.Topology.OpenModuleCohomology
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 import WeilConjectures.AlgebraicGeometry.AffineBasisRestrictedLowerTailLocalBoundAux
 public import Mathlib.AlgebraicGeometry.AffineScheme
