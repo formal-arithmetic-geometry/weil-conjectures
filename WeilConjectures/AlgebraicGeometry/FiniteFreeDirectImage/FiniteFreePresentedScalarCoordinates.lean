@@ -22,6 +22,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.FiniteFreeDirectImage
 
+attribute [local instance] SheafOfModules.sectionUnitSMul
+
 private def basisPowerIso (X : Scheme.{u})
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (d : ℕ) :
     (∏ᶜ fun _ : Fin d ↦ SheafOfModules.unit ((sheafCompose (ProEt.topology X)
