@@ -19,6 +19,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleCountableProductsExact
 public import WeilConjectures.CategoryTheory.RingedSiteModules
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 public import Mathlib.CategoryTheory.Limits.Shapes.Countable
+public import Mathlib.CategoryTheory.Limits.FullSubcategory
 public import WeilConjectures.AlgebraicGeometry.ProEtaleAffineWeaklyContractibleCover
 public import WeilConjectures.AlgebraicGeometry.ProEtaleAffineContractibleExtension
 public import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
@@ -1622,8 +1623,15 @@ private local instance integralScalarGood_binaryProducts :
   exact IntegralScalarAux.goodClosed (completedIntegralCommRingSheafUnrestricted l E Y)
 
 private noncomputable local instance integralScalarGood_biproducts :
-    HasBinaryBiproducts (integralOperationsGoodComplex l E Y).FullSubcategory :=
-  HasBinaryBiproducts.of_hasBinaryProducts
+    HasBinaryBiproducts (integralOperationsGoodComplex l E Y).FullSubcategory := by
+  have : HasLimitsOfShape (Discrete WalkingPair) (integralTowerModules l E Y) :=
+    SheafOfModules.hasLimitsOfShape _ _
+  have : HasLimitsOfShape (Discrete WalkingPair)
+      (CochainComplex (integralTowerModules l E Y) ℤ) := inferInstance
+  have : HasBinaryProducts (integralOperationsGoodComplex l E Y).FullSubcategory :=
+    hasLimitsOfShape_of_closedUnderLimits (Discrete WalkingPair)
+      (integralOperationsGoodComplex l E Y)
+  exact HasBinaryBiproducts.of_hasBinaryProducts
 
 private local instance integralScalarGood_shift :
     (integralOperationsGoodComplex l E Y).IsStableUnderShift ℤ where
