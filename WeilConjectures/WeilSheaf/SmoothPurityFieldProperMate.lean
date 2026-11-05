@@ -56,7 +56,9 @@ lemma purity_properLowerShriekBaseChange_mate_app
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f')
     (boundedConstructibleBaseChangeOfMap ℓ sq.toCommSq)
     (𝟙 ((boundedConstructibleUpperStarOfMap ℓ πY).obj N))
-  simpa only [Adjunction.unitBaseChange, Functor.map_id, Category.comp_id] using h
+  simpa only [Adjunction.unitBaseChange, Functor.map_id, Category.comp_id,
+    upperShriekMateOfMap, properLowerShriekBaseChangeOfMap_hom,
+    upperShriekBaseChangeOfMap, lowerStarUpperShriekAdjunction] using h
 
 /-- The proper smooth exceptional mate is invertible at all bounded constructible objects. -/
 theorem isIso_purityProperMate_of_smooth

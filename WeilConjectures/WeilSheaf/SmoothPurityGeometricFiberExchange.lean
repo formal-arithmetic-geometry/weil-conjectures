@@ -8,7 +8,6 @@ public import WeilConjectures.WeilSheaf.SmoothPurityFieldCompactificationExchang
 public import WeilConjectures.WeilSheaf.SmoothPurityOpenFieldBaseChange
 public import WeilConjectures.WeilSheaf.SmoothPurityUnitBaseChangeComp
 public import WeilConjectures.WeilSheaf.SmoothPurityChartBaseChange
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CoefficientChangeRefinement
 
 /-! # One geometric-fiber exchange for all compact-support morphisms
 
