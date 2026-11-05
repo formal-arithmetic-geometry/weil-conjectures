@@ -55,7 +55,8 @@ private theorem derivedCompositionOfAcyclic
     have h₁ : IsIso (F.rightDerivedFunctorUnit.app
         ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj I)) := inferInstance
     have h₂ := h I
-    dsimp [β, Functor.rightDerivedFunctorCompUnit]
+    dsimp only [β, Functor.rightDerivedFunctorCompUnit, NatTrans.comp_app,
+      Functor.whiskerRight_app, Functor.whiskerLeft_app]
     infer_instance
   let δ := (F ⋙ G).rightDerivedFunctor.rightDerivedDesc
     (F ⋙ G).rightDerivedFunctorUnit (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))
