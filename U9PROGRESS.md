@@ -129,3 +129,14 @@
 - Next: fix any remaining proof errors, validate both direct importers, then the
   normalization layer and write `/home/ubuntu/u9/state/BZ457.DONE`.
 - Fix patterns and logs: `/home/ubuntu/u9/bz/FIXES-BZ457.md`.
+
+# BZ457 complete
+
+- Branch: `u9/BZ457`; final source commit: `a15d4de9c`.
+- Assigned module green: `WeilConjectures.Algebra.Homology.AffineDerivedPushforwardSheafEdge`.
+- Leaf validation: `ucheck-bump` rc=0, failed=0, 3865 jobs at commit `a816d14e5c`; it was rebuilt again as a dependency in the final downstream attempt at `a15d4de9c`.
+- Direct importers attempted: `WeilConjectures.Algebra.Homology.AffinePushforwardCohomologyEdgeIdentity` and `WeilConjectures.Algebra.Homology.AffinePushforwardCohomologyEdgeExists`. Their batch reached 4424/4426 targets and failed only in unowned `WeilConjectures.AlgebraicGeometry.Modules.StalkTensor.lean:372` with `Alternative zero has not been provided`; skipped per brief.
+- Final fix notes: `/home/ubuntu/u9/bz/FIXES-BZ457.md`.
+- Final leaf log: `/home/ubuntu/u9/bz/BUILD-BZ457-leaf-green-full.log`.
+- Downstream blocked log: `/home/ubuntu/u9/bz/BUILD-BZ457-downstream-blocked-current-full.log`.
+- No local Lean/Lake execution, sorry/admit/axiom/native_decide/kernel bypass, profiler probe, or heartbeat increase remains.
