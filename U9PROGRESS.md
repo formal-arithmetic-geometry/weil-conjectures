@@ -191,3 +191,16 @@
 - No local Lean/Lake execution, sorries, proof escapes, heartbeat increases, or profiler probes.
 - Completion marker: `/home/ubuntu/u9/state/BZ631.DONE`.
 - This completion commit changes only documentation; Lean source matches the green revision.
+
+
+# BZ673 in progress
+
+- Branch: `u9/BZ673`; starting commit: `940f09365`.
+- User instructed continuation after the exact one-token theorem-statement proposal.
+  Applied `.hom` -> `.inv` in `whiskerLeft_Q_leftDerivedFunctorSquareIso_hom`,
+  preserving its map direction under Mathlib's reversed compositor.
+- The earlier proof repair uses `Iso.hom_inv_id_app_assoc`; remote validation
+  confirmed that proof error is resolved.
+- Next: validate the assigned module with `ucheck-bump`, then check its direct importer.
+- Records: `/home/ubuntu/u9/bz/FIXES-BZ673.md`.
+- No local Lean/Lake execution, sorries, proof escapes, or heartbeat increases.

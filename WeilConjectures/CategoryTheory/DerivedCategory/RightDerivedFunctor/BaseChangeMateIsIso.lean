@@ -282,7 +282,7 @@ lemma whiskerLeft_Q_leftDerivedFunctorSquareIso_hom (α : N_D ⋙ F' ≅ F ⋙ N
       whiskerLeft _ (DerivedCategory.quotientCompQhIso C').hom ≫
       whiskerRight (mapHomologicalComplexCompIso α (.up ℤ)).hom DerivedCategory.Q ≫
       (F ⋙ N_C).mapDerivedCategoryFactors.inv ≫
-      whiskerLeft DerivedCategory.Q (mapDerivedCategoryCompIso F N_C).hom := by
+      whiskerLeft DerivedCategory.Q (mapDerivedCategoryCompIso F N_C).inv := by
   ext P
   have h₁ := leftDerivedFunctorSquareIso_hom_app_Q_obj α P
   have h₂ := mapDerivedCategoryCompIso_fac F N_C P
