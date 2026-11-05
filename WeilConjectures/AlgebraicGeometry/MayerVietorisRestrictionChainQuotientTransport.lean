@@ -103,7 +103,6 @@ theorem schemeMV_restriction_chain_quotient_transport
     Quotient.lift.isLift_inv, CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
   erw [← Functor.map_comp_assoc, Iso.inv_hom_id_app,
     CategoryTheory.Functor.map_id, Category.id_comp]
-  simp only [← Functor.map_comp]
   erw [hxi]
   simp only [Functor.map_comp, Category.assoc]
   erw [DerivedCategory.quotientCompQhIso_inv_naturality_assoc]
