@@ -143,84 +143,54 @@ theorem exists_baseTensorDerivedChainComparison
   dsimp only [η, α, τ, G, T, NatTrans.comp_app, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Functor.associator_hom_app, Functor.associator_inv_app] at h
   simp only [Category.id_comp, Category.comp_id] at h
-  have hr : r.mapDerivedCategoryFactorsh.hom.app
-      ((HomotopyCategory.quotient _ (.up ℤ)).obj P) =
-      r.mapDerivedCategoryFactors.hom.app P := by
-    rw [Functor.mapDerivedCategoryFactorsh_hom_app]
-    change r.mapDerivedCategory.map (𝟙 _) ≫ r.mapDerivedCategoryFactors.hom.app P ≫
-      𝟙 _ ≫ DerivedCategory.Qh.map (𝟙 _) = _
-    erw [r.mapDerivedCategory.map_id (DerivedCategory.Q.obj P),
-      DerivedCategory.Qh.map_id ((HomotopyCategory.quotient _ (.up ℤ)).obj
-        ((r.mapHomologicalComplex (.up ℤ)).obj P))]
-    simp only [Category.id_comp]
-    exact Category.comp_id _
-  have hs : s.mapDerivedCategoryFactorsh.hom.app
-      ((HomotopyCategory.quotient _ (.up ℤ)).obj
-        ((l.mapHomologicalComplex (.up ℤ)).obj P)) =
-      s.mapDerivedCategoryFactors.hom.app
-        ((l.mapHomologicalComplex (.up ℤ)).obj P) := by
-    rw [Functor.mapDerivedCategoryFactorsh_hom_app]
-    change s.mapDerivedCategory.map (𝟙 _) ≫ s.mapDerivedCategoryFactors.hom.app _ ≫
-      𝟙 _ ≫ DerivedCategory.Qh.map (𝟙 _) = _
-    erw [s.mapDerivedCategory.map_id (DerivedCategory.Q.obj
-        ((l.mapHomologicalComplex (.up ℤ)).obj P)),
-      DerivedCategory.Qh.map_id ((HomotopyCategory.quotient _ (.up ℤ)).obj
-        ((s.mapHomologicalComplex (.up ℤ)).obj
-          ((l.mapHomologicalComplex (.up ℤ)).obj P)))]
-    simp only [Category.id_comp]
-    exact Category.comp_id _
-  change η.app (DerivedCategory.Q.obj P) ≫ s.mapDerivedCategory.map
+  change η.app (DerivedCategory.Qh.obj
+      ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫ s.mapDerivedCategory.map
       (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫
       s.mapDerivedCategoryFactorsh.hom.app
         ((HomotopyCategory.quotient _ (.up ℤ)).obj
           ((l.mapHomologicalComplex (.up ℤ)).obj P)) =
     F.map (r.mapDerivedCategoryFactorsh.hom.app
       ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫ δ.app _ ≫
-      DerivedCategory.Q.map (γ.app P) at h
-  rw [hr, hs] at h
-  have hqR : (DerivedCategory.quotientCompQhIso (ModuleCat.{u} R)).inv.app
-      ((r.mapHomologicalComplex (.up ℤ)).obj P) = 𝟙 _ := rfl
-  have he : (e.mapHomotopyCategoryFactors (.up ℤ)).hom.app
-      ((r.mapHomologicalComplex (.up ℤ)).obj P) = 𝟙 _ := rfl
-  have hqB : (DerivedCategory.quotientCompQhIso (ModuleCat.{u} B)).hom.app
-      ((e.mapHomologicalComplex (.up ℤ)).obj
-        ((r.mapHomologicalComplex (.up ℤ)).obj P)) = 𝟙 _ := rfl
-  have hqA : (DerivedCategory.quotientCompQhIso (ModuleCat.{u} A)).inv.app P = 𝟙 _ := rfl
-  have hl : (l.mapHomotopyCategoryFactors (.up ℤ)).hom.app P = 𝟙 _ := rfl
-  have hqD : (DerivedCategory.quotientCompQhIso (ModuleCat.{u} D)).hom.app
+      DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (.up ℤ)).map (γ.app P)) at h
+  have hn := η.naturality ((DerivedCategory.quotientCompQhIso _).inv.app P)
+  have h' := congrArg (fun f ↦
+    G.map ((DerivedCategory.quotientCompQhIso _).inv.app P) ≫ f ≫
+      (DerivedCategory.quotientCompQhIso _).hom.app
+        ((s.mapHomologicalComplex (.up ℤ)).obj
+          ((l.mapHomologicalComplex (.up ℤ)).obj P))) h
+  rw [Functor.mapDerivedCategoryFactorsh_hom_app,
+    Functor.mapDerivedCategoryFactorsh_hom_app] at h'
+  have hr : (r.mapHomotopyCategoryFactors (.up ℤ)).inv.app P = 𝟙 _ := rfl
+  have hs : (s.mapHomotopyCategoryFactors (.up ℤ)).inv.app
       ((l.mapHomologicalComplex (.up ℤ)).obj P) = 𝟙 _ := rfl
-  simp only [Iso.trans_inv, Iso.app_inv, Iso.symm_inv]
-  erw [hqR, he, hqB, hqA, hl, hqD]
-  change F.map (r.mapDerivedCategoryFactors.hom.app P ≫ 𝟙 _) ≫
-      δ.app ((HomotopyCategory.quotient _ (.up ℤ)).obj
-        ((r.mapHomologicalComplex (.up ℤ)).obj P)) ≫
-      DerivedCategory.Qh.map (𝟙 _) ≫ 𝟙 _ ≫ DerivedCategory.Q.map (γ.app P) =
-    η.app (DerivedCategory.Q.obj P) ≫ s.mapDerivedCategory.map
-      (L.map (𝟙 _) ≫ ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ≫
-        DerivedCategory.Qh.map (𝟙 _) ≫ 𝟙 _) ≫ s.mapDerivedCategoryFactors.hom.app _
-  have hmapQ : DerivedCategory.Qh.map
+  have hmapr : DerivedCategory.Qh.map
+      (𝟙 ((HomotopyCategory.quotient _ (.up ℤ)).obj
+        ((r.mapHomologicalComplex (.up ℤ)).obj P))) = 𝟙 _ := DerivedCategory.Qh.map_id _
+  have hmaps : DerivedCategory.Qh.map
+      (𝟙 ((HomotopyCategory.quotient _ (.up ℤ)).obj
+        ((s.mapHomologicalComplex (.up ℤ)).obj
+          ((l.mapHomologicalComplex (.up ℤ)).obj P)))) = 𝟙 _ := DerivedCategory.Qh.map_id _
+  simp only [hr, hs, Category.assoc] at h'
+  erw [hmapr, hmaps] at h'
+  erw [Category.comp_id, Category.id_comp, Iso.inv_hom_id_app, Category.comp_id] at h'
+  erw [DerivedCategory.quotientCompQhIso_hom_naturality (γ.app P)] at h'
+  rw [reassoc_of% hn] at h'
+  simp only [G, T, Functor.comp_map, Functor.map_comp, Category.assoc] at h'
+  rw [← F.map_comp_assoc, ← r.mapDerivedCategory.map_comp, Iso.inv_hom_id_app,
+    r.mapDerivedCategory.map_id, F.map_id, Category.id_comp] at h'
+  have hmape : DerivedCategory.Qh.map
       (𝟙 ((HomotopyCategory.quotient _ (.up ℤ)).obj
         ((e.mapHomologicalComplex (.up ℤ)).obj
-          ((r.mapHomologicalComplex (.up ℤ)).obj P)))) = 𝟙 _ :=
-    DerivedCategory.Qh.map_id _
-  have hmapQ' : DerivedCategory.Qh.map
+          ((r.mapHomologicalComplex (.up ℤ)).obj P)))) = 𝟙 _ := DerivedCategory.Qh.map_id _
+  have hmapl : DerivedCategory.Qh.map
       (𝟙 ((HomotopyCategory.quotient _ (.up ℤ)).obj
-        ((l.mapHomologicalComplex (.up ℤ)).obj P))) = 𝟙 _ :=
-    DerivedCategory.Qh.map_id _
-  have hmapL : L.map (𝟙 (DerivedCategory.Q.obj P)) = 𝟙 _ := L.map_id _
-  erw [hmapQ, hmapQ', hmapL]
-  simp only [Category.id_comp, Category.comp_id]
-  have hidγ : 𝟙 (DerivedCategory.Qh.obj
-      ((HomotopyCategory.quotient _ (.up ℤ)).obj
-        ((e.mapHomologicalComplex (.up ℤ)).obj
-          ((r.mapHomologicalComplex (.up ℤ)).obj P)))) ≫
-      DerivedCategory.Q.map (γ.app P) = DerivedCategory.Q.map (γ.app P) :=
-    Category.id_comp _
-  have hidε : ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ≫
-      𝟙 (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ (.up ℤ)).obj
-        ((l.mapHomologicalComplex (.up ℤ)).obj P))) =
-      ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P) := Category.comp_id _
-  erw [hidγ, hidε]
-  exact h.symm
+        ((l.mapHomologicalComplex (.up ℤ)).obj P))) = 𝟙 _ := DerivedCategory.Qh.map_id _
+  simp only [Iso.trans_inv, Iso.app_inv, Iso.symm_inv,
+    Functor.mapHomotopyCategoryFactors_hom_app]
+  erw [hmape, hmapl]
+  erw [Category.id_comp, Category.id_comp]
+  simpa only [r, e, l, s, Functor.comp_obj, Functor.mapHomotopyCategory_obj,
+    HomotopyCategory.quotient_obj_as, Functor.map_id, Category.id_comp,
+    Category.comp_id, Functor.map_comp, Category.assoc] using h'.symm
 
 end ModuleCat
