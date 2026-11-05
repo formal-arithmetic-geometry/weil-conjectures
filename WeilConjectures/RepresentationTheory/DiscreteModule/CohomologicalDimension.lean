@@ -180,7 +180,7 @@ def ofInvariant (X : DiscreteModule.{w} G) (x : X.obj.V) (hx : ℓ • x = 0)
     { hom := AddCommGrpCat.ofHom (zmodHom.{max u w} ℓ x hx)
       comm g := AddCommGrpCat.ext fun a ↦ by
         obtain ⟨n, hn⟩ := ZMod.intCast_surjective a.down
-        obtain rfl : a = ULift.up (n : ZMod ℓ) := ULift.ext _ _ hn.symm
+        obtain rfl : a = ULift.up (n : ZMod ℓ) := ULift.ext hn.symm
         change zmodHom.{max u w} ℓ x hx (ULift.up (n : ZMod ℓ)) =
           (X.obj.ρ g).hom (zmodHom.{max u w} ℓ x hx (ULift.up (n : ZMod ℓ)))
         rw [zmodHom_intCast, map_zsmul, hxg g] }
@@ -234,7 +234,7 @@ theorem subsingleton_H_two_of_forall_pow_mem (N : Subgroup G) [N.Normal]
   have hzero : ofInvariant ℓ X x hxℓ hxg ≫ quotientπ X S hS = 0 := by
     ext a
     obtain ⟨m, hm⟩ := ZMod.intCast_surjective a.down
-    obtain rfl : a = ULift.up (m : ZMod ℓ) := ULift.ext _ _ hm.symm
+    obtain rfl : a = ULift.up (m : ZMod ℓ) := ULift.ext hm.symm
     change QuotientAddGroup.mk ((ofInvariant ℓ X x hxℓ hxg).hom.hom.hom _) = 0
     rw [ofInvariant_apply_intCast, QuotientAddGroup.eq_zero_iff]
     exact ⟨m, rfl⟩

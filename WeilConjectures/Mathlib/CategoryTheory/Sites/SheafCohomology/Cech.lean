@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Category.Grp.AB
+public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
@@ -101,7 +102,7 @@ noncomputable def Sheaf.cohomologyPresheafULiftIso [HasExt.{w} (Sheaf J AddCommG
       ((Abelian.Ext.chgUnivAddEquiv.{w', w} _ _ n).trans AddEquiv.ulift.symm)))
     (fun {V V'} h ↦ by
       ext x
-      refine ULift.ext _ _ ?_
+      refine ULift.ext ?_
       change Abelian.Ext.chgUniv.{w'} ((Abelian.Ext.mk₀ _).comp x.down (zero_add n)) =
         (Abelian.Ext.mk₀ _).comp (Abelian.Ext.chgUniv.{w'} x.down) (zero_add n)
       rw [Abelian.Ext.chgUniv_comp, Abelian.Ext.chgUniv_mk₀])
@@ -136,6 +137,8 @@ theorem Sheaf.exists_cechDoubleComplex [HasExt.{v} (Sheaf J AddCommGrpCat.{v})]
         (cechComplexFunctor fun i ↦ Over.mk (π i)).obj
           ((Over.forget X).op ⋙ F.cohomologyPresheaf q))) ∧
       ∀ n : ℕ, Nonempty ((D.total (ComplexShape.up ℕ)).homology n ≅ F.H' n X) := by
+  have : HasProducts.{v} (CochainComplex AddCommGrpCat.{v} ℕ) :=
+    fun _ ↦ HomologicalComplex.instHasLimitsOfShape
   let R : InjectiveResolution F := injectiveResolution F
   let V : ι → Over X := fun i ↦ Over.mk (π i)
   -- the presheaf of complexes `V ↦ I^•(V)` on `Over X`
@@ -214,6 +217,8 @@ theorem Sheaf.exists_cechDoubleComplex_uliftFunctor [EssentiallySmall.{v} C]
             ((Over.forget X).op ⋙ (F.cohomologyPresheaf q : Cᵒᵖ ⥤ AddCommGrpCat.{w}))))) ∧
       ∀ n : ℕ, Nonempty ((D.total (ComplexShape.up ℕ)).homology n ≅
         AddCommGrpCat.uliftFunctor.{v}.obj (F.H' n X : AddCommGrpCat.{w})) := by
+  have : HasProducts.{max v w} (CochainComplex AddCommGrpCat.{max v w} ℕ) :=
+    fun _ ↦ HomologicalComplex.instHasLimitsOfShape
   have := Sheaf.isGrothendieckAbelian_of_essentiallySmall J AddCommGrpCat.{v}
   let G := AddCommGrpCat.uliftFunctor.{w, v}
   let R : InjectiveResolution F := injectiveResolution F

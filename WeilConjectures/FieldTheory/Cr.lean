@@ -177,7 +177,7 @@ theorem IsQuasiAlgClosed.of_finiteDimensional (K L : Type*) [Field K] [Field L] 
     -- the matrix of multiplication by `G` in the basis `b`, a matrix of forms over `K`
     let f : Fin m → Fin m → L →ₗ[K] K := fun j k => (b.coord j).comp (LinearMap.mulRight K (b k))
     let M : Matrix (Fin m) (Fin m) (MvPolynomial (Fin N × Fin m) K) :=
-      fun j k => ∑ s ∈ G.support, monomial s (f j k (coeff s G))
+      fun j k => ∑ s ∈ G.support, monomial s (f j k (G.coeff s))
     have hM : M.det.IsHomogeneous (m * d) := by
       simpa using IsHomogeneous.det fun j k => hG.sum_monomial_linearMap (f j k)
     have hm : 0 < m := Module.finrank_pos
