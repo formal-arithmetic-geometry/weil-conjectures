@@ -256,3 +256,30 @@
 - The assigned CoefficientConstantTowerRoos source is unchanged.
 - Next: remote ucheck-bump on the assigned module, then both direct importers.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+# BZ824 in progress
+
+- Branch: u9/BZ824; starting commit 95c8987257f.
+- The user instructed continuation after the upstream-restoration proposal.
+- Restored four prerequisite modules. The comparison predicate uses verified PZ003
+  Localization imports and a reflexive cast; the transport proof is unchanged,
+  and target automorphism specializes the existing arbitrary-degree theorem to zero.
+- All six submitted modules passed ucheck-bump at 826d8e1a1fb: rc=0, failed=0, 4065 jobs.
+- Green: DerivedModuleBaseChangeMap, DerivedModulePullbackComparison,
+  ModulePullbackComparisonIsoTransport, ModulePullbackComparisonTargetAutomorphism,
+  CanonicalModuleBaseChangeIsoComparisonCompat, CanonicalModuleBaseChangeIsoComparison.
+- All restored declaration headers and original assigned/caller sources are unchanged.
+- Full log: /home/ubuntu/u9/bz/BUILD-BZ824-restored-full.log.
+- Next: build layer-two importer CanonicalModuleBaseChangeAffineChartComparison.
+- Notes: /home/ubuntu/u9/bz/FIXES-BZ824.md. No local Lean/Lake or proof shortcuts.
+
+# BZ856 in progress
+
+- Branch: `u9/BZ856`; original start: `2ab2b07a3`.
+- Reread the brief and prior notes on continuation; no new LEAD lines were present.
+- User instructed continuation after the explicit five-upstream-module restoration proposal.
+  The six deleted prerequisites are restored from the reviewed draft, retaining later
+  repairs to surviving helpers. They now need remote Lean 4.35 validation and porting.
+- Merged integrated bump branch `db406319f` before restoring the prerequisites.
+- Assigned theorem remains intact: it has live callers and cannot be pruned.
+- Next: ucheck-bump assigned module, repair prerequisite errors, then downstream targets.
+- No local Lean/Lake execution; no proof placeholders, trust bypasses, or heartbeat raises.
