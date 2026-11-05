@@ -437,7 +437,7 @@ theorem exists_lisse_finite_hom_lift [CompactSpace X] [QuasiSeparatedSpace X]
     (AsSmall.equiv (C := Under E)).inverse ⋙ Under.forget E
   let : H.Final := by dsimp only [H]; infer_instance
   let he (i : I) : E ≤ H.obj i := leOfHom (ULift.down i).hom
-  let : HasColimitsOfShape I
+  letI : HasColimitsOfShape I
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)) :=
     inferInstance
   let c := (HomologicalComplex.eval _ (.up ℤ) 0).mapCocone
