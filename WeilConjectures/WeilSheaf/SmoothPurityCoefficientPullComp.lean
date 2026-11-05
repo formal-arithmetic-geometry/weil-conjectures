@@ -31,9 +31,38 @@ lemma purity_inverse_restriction_square_comp
       a.inv.app (B.obj K) ≫ G₀.map (κ.hom.app K) := by
   apply (cancel_epi (c.hom.app K)).mp
   rw [Iso.hom_inv_id_app, ← reassoc_of% (h K)]
-  simp only [Category.assoc, ← A'.map_comp_assoc, Iso.hom_inv_id_app,
+  simp only [Functor.comp_obj, ← A'.map_comp_assoc, Iso.hom_inv_id_app,
     CategoryTheory.Functor.map_id, Category.id_comp, Iso.hom_inv_id_app_assoc,
     ← G₀.map_comp, Iso.inv_hom_id_app]
+
+/-- Mate composition with named left comparisons, avoiding rewrites through concrete
+derived functors when applying the abstract composition theorem. -/
+lemma purity_mate_coefficient_comp
+    {X₁ X₂ X₃ Y₁ Y₂ Y₃ : Type*}
+    [Category X₁] [Category X₂] [Category X₃]
+    [Category Y₁] [Category Y₂] [Category Y₃]
+    {La : X₁ ⥤ X₂} {Ra : X₂ ⥤ X₁} (adja : La ⊣ Ra)
+    {Lb : X₂ ⥤ X₃} {Rb : X₃ ⥤ X₂} (adjb : Lb ⊣ Rb)
+    {Lc : X₁ ⥤ X₃} {Rc : X₃ ⥤ X₁} (adjc : Lc ⊣ Rc)
+    {La' : Y₁ ⥤ Y₂} {Ra' : Y₂ ⥤ Y₁} (adja' : La' ⊣ Ra')
+    {Lb' : Y₂ ⥤ Y₃} {Rb' : Y₃ ⥤ Y₂} (adjb' : Lb' ⊣ Rb')
+    {Lc' : Y₁ ⥤ Y₃} {Rc' : Y₃ ⥤ Y₁} (adjc' : Lc' ⊣ Rc')
+    {P₁ : X₁ ⥤ Y₁} {P₂ : X₂ ⥤ Y₂} {P₃ : X₃ ⥤ Y₃}
+    (ea : P₂ ⋙ Ra' ≅ Ra ⋙ P₁) (eb : P₃ ⋙ Rb' ≅ Rb ⋙ P₂)
+    (ec : P₃ ⋙ Rc' ≅ Rc ⋙ P₁) (κ : Rb ⋙ Ra ≅ Rc) (κ' : Rb' ⋙ Ra' ≅ Rc')
+    (h : ∀ K, ec.hom.app K = κ'.inv.app (P₃.obj K) ≫ Ra'.map (eb.hom.app K) ≫
+      ea.hom.app (Rb.obj K) ≫ P₁.map (κ.hom.app K))
+    (αa : P₁ ⋙ La' ⟶ La ⋙ P₂) (αb : P₂ ⋙ Lb' ⟶ Lb ⋙ P₃)
+    (αc : P₁ ⋙ Lc' ⟶ Lc ⋙ P₃)
+    (ha : αa = Adjunction.pushHomOfComapIso adja adja' ea)
+    (hb : αb = Adjunction.pushHomOfComapIso adjb adjb' eb)
+    (hc : αc = Adjunction.pushHomOfComapIso adjc adjc' ec) (K : X₁) :
+    αc.app K = ((conjugateIsoEquiv (adja'.comp adjb') adjc').symm κ').hom.app (P₁.obj K) ≫
+      Lb'.map (αa.app K) ≫ αb.app (La.obj K) ≫
+      P₃.map (((conjugateIsoEquiv (adja.comp adjb) adjc).symm κ).inv.app K) := by
+  rw [ha, hb, hc]
+  exact Adjunction.pushHomOfComapIso_app_eq_comp adja adjb adjc adja' adjb' adjc'
+    ea eb ec κ κ' h K
 
 end CategoryTheory
 
@@ -77,10 +106,7 @@ theorem derivedUpperStarExtendScalarsIso_hom_app_of_coefficient_comp
     (Mod.mapDerivedCategoryComapCompIso _ _ _ (coefficientMap_comp_eq a b c hc Y))
     (Mod.mapDerivedCategoryComapCompIso _ _ _ (coefficientMap_comp_eq a b c hc X))
     (derivedComapLeftDerivedUpperStarIso_hom_app_of_coefficient_comp a b c f hc)
-  rw [derivedUpperStarExtendScalarsIso_hom_eq_mate,
-    derivedUpperStarExtendScalarsIso_hom_eq_mate,
-    derivedUpperStarExtendScalarsIso_hom_eq_mate]
-  exact Adjunction.pushHomOfComapIso_app_eq_comp
+  exact purity_mate_coefficient_comp
     (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a Y))
     (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap b Y))
     (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap c Y))
@@ -91,6 +117,12 @@ theorem derivedUpperStarExtendScalarsIso_hom_app_of_coefficient_comp
     (derivedComapLeftDerivedUpperStarIso b f).symm
     (derivedComapLeftDerivedUpperStarIso c f).symm
     (Mod.mapDerivedCategoryComapCompIso _ _ _ (coefficientMap_comp_eq a b c hc Y))
-    (Mod.mapDerivedCategoryComapCompIso _ _ _ (coefficientMap_comp_eq a b c hc X)) h K
+    (Mod.mapDerivedCategoryComapCompIso _ _ _ (coefficientMap_comp_eq a b c hc X)) h
+    (derivedUpperStarExtendScalarsIso a f).hom
+    (derivedUpperStarExtendScalarsIso b f).hom
+    (derivedUpperStarExtendScalarsIso c f).hom
+    (derivedUpperStarExtendScalarsIso_hom_eq_mate a f)
+    (derivedUpperStarExtendScalarsIso_hom_eq_mate b f)
+    (derivedUpperStarExtendScalarsIso_hom_eq_mate c f) K
 
 end AlgebraicGeometry.ProEtale.CondensedRing
