@@ -126,6 +126,7 @@ theorem exists_formalFiber_extension
       E (Algebra.TensorProduct.includeLeftRingHom (b : M)) =
         Algebra.TensorProduct.includeLeftRingHom (D b : M) := by
   classical
+  let : CommRing B := inferInstance
   let K := (⊥ : Ideal A).ResidueField
   let C := AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q))
     (Localization.AtPrime q)
