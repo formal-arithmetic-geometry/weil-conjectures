@@ -272,9 +272,10 @@ theorem exists_lineData
     intro P
     unfold LineUnbounded.normalization
     intro hK hKf
-    dsimp only [c, NatIso.trans_app]
-    simp only [eqToIso_refl, Iso.refl_trans]
-    exact LineUnbounded.whiskered_normalization _ _ _ _ _ (hn P hK hKf)
+    simpa only [c, id_eq, twist, LineUnbounded.derived, eqToIso_refl, Iso.refl_trans,
+      LineUnbounded.collapse] using
+      (LineUnbounded.whiskered_normalization _ _ chi
+        (FlatSingleDerivedNormalization.collapse R (power.{t, a} L m)) P (hn P hK hKf))
   choose h c hc hn using hs
   have hev (m : ℤ) (U : X.ProEtᵒᵖ) (E : ∀ n : ℤ, (power.{t, a} L n).val.obj U)
       (hE : SignedLineBasisPowers.{t + 1, t, a} L U E) :
