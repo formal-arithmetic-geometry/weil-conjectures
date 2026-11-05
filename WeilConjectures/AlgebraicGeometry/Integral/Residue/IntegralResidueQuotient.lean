@@ -41,11 +41,11 @@ private theorem continuousMap_toZModPow_kernel
     (f : C(S, ℤ_[p])) (hf : ∀ x, toZModPow n (f x) = 0) :
     ∃ g : C(S, ℤ_[p]), ∀ x, f x = (p : ℤ_[p]) ^ n * g x := by
   have hpn : (p : ℚ_[p]) ^ n ≠ 0 := pow_ne_zero n (by exact_mod_cast (Fact.out : p.Prime).ne_zero)
-  let g : S → ℤ_[p] := fun x ↦ ⟨(f x : ℚ_[p]) / (p : ℚ_[p]) ^ n, by
+  let g : S → ℤ_[p] := fun x ↦ Padic.lift ((f x : ℚ_[p]) / (p : ℚ_[p]) ^ n) (by
     rw [norm_div, div_le_one₀ (norm_pos_iff.mpr hpn), Padic.norm_p_pow]
     apply (norm_le_pow_iff_mem_span_pow (f x) n).mpr
     rw [← ker_toZModPow, RingHom.mem_ker]
-    exact hf x⟩
+    exact hf x)
   have hg : Continuous g := by
     apply Continuous.subtype_mk
     exact (continuous_subtype_val.comp f.continuous).div_const _
@@ -95,7 +95,8 @@ private noncomputable def residueCokernel (X : Scheme.{u}) (ℓ n : ℕ) [Fact �
     obtain ⟨b, hb⟩ := PadicInt.continuousMap_toZModPow_kernel n U.unop.left a.down hres
     refine ⟨ULift.up b, ?_⟩
     apply ULift.ext
-    ext x
+    apply ContinuousMap.ext
+    intro x
     change (ℓ ^ n) • b x = a.down x
     rw [hb x, nsmul_eq_mul, ← Nat.cast_pow]
   exact hS.gIsCokernel
