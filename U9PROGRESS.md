@@ -217,3 +217,7 @@
 - Next: validate the assigned normalization module through `ucheck-bump`, then its direct importer.
 - Fix patterns and exact diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ740.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+- Assigned normalization module is GREEN at `814682ae46`: `ucheck-bump` rc=0,
+  failed=0, 3927 jobs, target rebuilt in 48 seconds.
+- Remote log: `/home/ubuntu/u9/logs/BZ740-20261106T061103.log`.
+- Checking downstream `DerivedPullbackTensorUnitKFlat` and `DerivedPullbackTensorUnit`.
