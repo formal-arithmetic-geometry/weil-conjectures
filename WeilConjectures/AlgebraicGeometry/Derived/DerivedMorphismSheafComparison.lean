@@ -67,13 +67,13 @@ private lemma derivedSquareCoherence
       Functor.isoWhiskerLeft R e ≪≫ Functor.isoWhiskerRight c T ≪≫
         Functor.isoWhiskerLeft H d) :
     Functor.whiskerRight
-        ((Functor.mapDerivedCategoryCompIso R S).symm ≪≫
+        (Functor.mapDerivedCategoryCompIso R S ≪≫
           Functor.mapDerivedCategoryNatIso a).hom G.mapDerivedCategory ≫
       (Functor.mapDerivedCategorySquareIso b).hom =
     Functor.whiskerLeft R.mapDerivedCategory (Functor.mapDerivedCategorySquareIso e).hom ≫
       Functor.whiskerRight (Functor.mapDerivedCategorySquareIso c).hom T.mapDerivedCategory ≫
         Functor.whiskerLeft H.mapDerivedCategory
-          ((Functor.mapDerivedCategoryCompIso P T).symm ≪≫
+          (Functor.mapDerivedCategoryCompIso P T ≪≫
             Functor.mapDerivedCategoryNatIso d).hom := by
   ext K
   simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
