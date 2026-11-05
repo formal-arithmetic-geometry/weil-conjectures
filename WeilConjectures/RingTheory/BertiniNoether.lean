@@ -105,8 +105,9 @@ private lemma map_generic_mul_eq (P : MvPolynomial (Fin n) A)
     map ψ (generic A n d false) * map ψ (generic A n d true) = map (ψ.comp C) P := by
   have h : map ψ (generic A n d false * generic A n d true - map C P) = 0 := by
     ext m
-    rw [coeff_map, coeff_zero]
-    by_cases hm : coeff m (generic A n d false * generic A n d true - map C P) = 0
+    rw [coeff_map, AddMonoidAlgebra.coeff_zero, Finsupp.zero_apply]
+    by_cases hm :
+        AddMonoidAlgebra.coeff (generic A n d false * generic A n d true - map C P) m = 0
     · rw [hm, map_zero]
     · exact hψ (Ideal.subset_span (coeff_mem_coeffs m hm))
   rwa [map_sub, map_mul, map_map, sub_eq_zero] at h
@@ -145,7 +146,7 @@ private lemma exists_hom_of_mul_eq (P : MvPolynomial (Fin n) A) (φ : A →+* E)
   rw [SetLike.mem_coe, RingHom.mem_ker, ← coeff_map, map_sub, map_mul,
     key false F hF (by simp), key true G hG (by simp), map_map]
   have : ψ.comp C = φ := by ext; simp [ψ]
-  rw [this, hFG, sub_self, coeff_zero]
+  rw [this, hFG, sub_self, AddMonoidAlgebra.coeff_zero, Finsupp.zero_apply]
 
 
 /-- A constructible subset of `Spec R` (`R` a domain) not containing the generic point is
