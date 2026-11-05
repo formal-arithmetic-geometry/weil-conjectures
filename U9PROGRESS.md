@@ -1,3 +1,13 @@
+# BZ261 in progress
+
+- Branch: `u9/BZ261`; starting commit: `c781553bf`.
+- The user instructed continuation after the exact one-line statement compatibility proposal.
+- Applied `.symm` to `mapDerivedCategoryCompIso` at UpperLowerStarAdjunctionCompat:66,
+  preserving the original mathematical map under Mathlib's reversed compositor API.
+- The existing proof is unchanged; next validate the unit and up to four direct importers.
+- Validation uses `ucheck-bump` only; no local Lean/Lake, proof placeholders, or limit increases.
+- Fix patterns and logs: `/home/ubuntu/u9/bz/FIXES-BZ261.md`.
+
 # BZ150 complete
 
 - Branch: `u9/BZ150`; starting commit: `80aeb4bf4`.
