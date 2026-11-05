@@ -255,6 +255,11 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
   [HasSheafify J AddCommGrpCat.{r}] [J.WEqualsLocallyBijective AddCommGrpCat.{r}]
   {R S : Sheaf J CommRingCat.{r}}
 
+private local instance scalarPresheafCoproducts (A : Sheaf J CommRingCat.{r})
+    (K : Type r) : HasColimitsOfShape (Discrete K)
+      (PresheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A).obj) :=
+  PresheafOfModules.hasColimitsOfShape _ _
+
 /-- The existing monoidal structure on module cochain complexes, cached for elaboration.
 Source: Stacks 03EK and 06YT
 (auxiliary; not a blueprint node). -/
@@ -577,6 +582,7 @@ private theorem scalarExtension_tensor_pure (a : R ⟶ S) (M N : scalarModules J
   let f := extensionPullback a
   let k := extensionComparison a
   let ev := sheafToPresheaf J (Type r) ⋙ (CategoryTheory.evaluation Cᵒᵖ (Type r)).obj U
+  have (K : Type) : HasLimitsOfShape (Discrete K) (Cᵒᵖ ⥤ Type r) := inferInstance
   obtain ⟨t, hx, hy⟩ := SheafOfModules.CochainTensorComparison.productElements ev
     ((underlying R).obj M) ((underlying R).obj N) x y
   let px : (underlying R).obj M ⨯ (underlying R).obj N ⟶ (underlying R).obj M := prod.fst
