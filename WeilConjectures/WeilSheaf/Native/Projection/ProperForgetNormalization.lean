@@ -10,6 +10,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraDerivedRightAdjointFree
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraAdjunctionMate
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapMate
+import WeilConjectures.Tactic.ExactModProofs
 
 /-! # The proper realization square through the adic model -/
 
@@ -60,6 +61,54 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
 local notation "gb" => Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))
 local notation "Λ" => Profinite.padicAlgClRingObj l
 
+/-- The underived realization mate factors through the adic model. -/
+lemma nativeProjectionUnderivedPushMate_normalization :
+    (mateEquiv (upperStarLowerStarAdjunction k₀ l g)
+      (CondensedRing.upperStarLowerStarAdjunction Λ gb)
+      (condensedRealizationUpperStarIso k₀ l g).hom).natTrans =
+      (Functor.isoHComp
+        (IsoAlgebra.mapOfNatIsoCompForgetIso
+          (adicLowerStarGeometricFiberMapCompFrobeniusIso l g
+            (comp_over g (Spec (CommRingCat.of k₀))))).symm
+        (projectionAdicCondensedPushIso l gb).symm).symm.hom := by
+  let a := upperStarLowerStarAdjunction k₀ l g
+  let b := adicUpperStarLowerStarAdjunction l gb
+  let c := CondensedRing.upperStarLowerStarAdjunction Λ gb
+  let α₁ := (IsoAlgebra.mapOfNatIsoCompForgetIso
+    (adicUpperStarGeometricFiberMapCompFrobeniusIso l g (comp_over g (Spec (CommRingCat.of k₀))))).symm
+  let α₂ := (adicUpperStarCompCondensedModIso l gb).symm
+  let β₁ := IsoAlgebra.mapOfNatIsoCompForgetIso
+    (adicLowerStarGeometricFiberMapCompFrobeniusIso l g (comp_over g (Spec (CommRingCat.of k₀))))
+  let β₂ := projectionAdicCondensedPushIso l gb
+  have h₁ : (mateEquiv a b α₁.hom).natTrans = β₁.hom := by
+    ext K : 2
+    exact IsoAlgebra.mateEquiv_mapOfNatIsoCompForgetIso_inv_app b
+      (adicUpperStarGeometricFiberMapCompFrobeniusIso l g
+        (comp_over g (Spec (CommRingCat.of k₀))))
+      (adicLowerStarGeometricFiberMapCompFrobeniusIso l g
+        (comp_over g (Spec (CommRingCat.of k₀))))
+      (mateEquiv_adicUpperStarGeometricFiberMapCompFrobeniusIso_inv l g
+        (comp_over g (Spec (CommRingCat.of k₀)))) K
+  have h₂ : (mateEquiv b c α₂.hom).natTrans = β₂.hom := rfl
+  exact mateEquiv_isoHComp_eq a b c α₁ α₂ β₁ β₂ h₁ h₂
+
+/-- The derived realization mate is the right-derived canonical commutation square. -/
+lemma nativeProjectionDerivedPushMate_normalization :
+    (mateEquiv (derivedUpperStarLowerStarAdjunction k₀ l g)
+      (CondensedRing.derivedUpperStarLowerStarAdjunction Λ gb)
+      (derivedCondensedRealizationUpperStarIso k₀ l g).hom).natTrans =
+      (Functor.rightDerivedFunctorCommIso
+        (Functor.isoHComp
+          (IsoAlgebra.mapOfNatIsoCompForgetIso
+            (adicLowerStarGeometricFiberMapCompFrobeniusIso l g
+              (comp_over g (Spec (CommRingCat.of k₀))))).symm
+          (projectionAdicCondensedPushIso l gb).symm).symm).hom := by
+  exact Adjunction.mateEquiv_derivedSquare_eq_rightDerivedFunctorCommIso
+    (upperStarLowerStarAdjunction k₀ l g)
+    (CondensedRing.upperStarLowerStarAdjunction Λ gb)
+    (condensedRealizationUpperStarIso k₀ l g) _
+    (nativeProjectionUnderivedPushMate_normalization k₀ l g)
+
 /-- The canonical proper pushforward comparison is the paste of the canonical adic forget
 comparison and a comparison through the equivalence of geometric models. -/
 lemma nativeProjectionPushMate_normalization
@@ -86,37 +135,8 @@ lemma nativeProjectionPushMate_normalization
     (AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ
   have := Equivalence.preservesKInjectiveComplexes_functor (adicSheafEquivCondensedMod l
     (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-  let a := upperStarLowerStarAdjunction k₀ l g
-  let b := adicUpperStarLowerStarAdjunction l gb
-  let c := CondensedRing.upperStarLowerStarAdjunction Λ gb
-  let α₁ := (IsoAlgebra.mapOfNatIsoCompForgetIso
-    (adicUpperStarGeometricFiberMapCompFrobeniusIso l g (comp_over g (Spec (CommRingCat.of k₀))))).symm
-  let α₂ := (adicUpperStarCompCondensedModIso l gb).symm
-  let β₁ := IsoAlgebra.mapOfNatIsoCompForgetIso
-    (adicLowerStarGeometricFiberMapCompFrobeniusIso l g (comp_over g (Spec (CommRingCat.of k₀))))
-  let β₂ := projectionAdicCondensedPushIso l gb
-  have h₁ : (mateEquiv a b α₁.hom).natTrans = β₁.hom := by
-    ext K : 2
-    exact IsoAlgebra.mateEquiv_mapOfNatIsoCompForgetIso_inv_app b
-      (adicUpperStarGeometricFiberMapCompFrobeniusIso l g
-        (comp_over g (Spec (CommRingCat.of k₀))))
-      (adicLowerStarGeometricFiberMapCompFrobeniusIso l g
-        (comp_over g (Spec (CommRingCat.of k₀))))
-      (mateEquiv_adicUpperStarGeometricFiberMapCompFrobeniusIso_inv l g
-        (comp_over g (Spec (CommRingCat.of k₀)))) K
-  have h₂ : (mateEquiv b c α₂.hom).natTrans = β₂.hom := rfl
-  have h := Adjunction.derivedBaseChange_eq_rightDerivedFunctorCommIso a c
-    (Functor.isoHComp α₁ α₂) (Functor.isoHComp β₁.symm β₂.symm).symm
-    (mateEquiv_isoHComp_eq a b c α₁ α₂ β₁ β₂ h₁ h₂)
-  have hm := NatTrans.congr_app h M
+  have hm := NatTrans.congr_app (nativeProjectionDerivedPushMate_normalization k₀ l g) M
   rw [Functor.rightDerivedFunctorCommIso_isoHComp_inv_app] at hm
-  change (mateEquiv a.mapDerivedCategoryRightDerivedAdjunction c.derivedAdjunction
-    (Functor.leftDerivedFunctorSquareIso (Functor.isoHComp α₁ α₂)).hom).app M = _
-  rw [show (mateEquiv a.mapDerivedCategoryRightDerivedAdjunction c.derivedAdjunction
-      (Functor.leftDerivedFunctorSquareIso (Functor.isoHComp α₁ α₂)).hom).app M =
-      (a.derivedBaseChange c (Functor.isoHComp α₁ α₂)).app M from
-    NatTrans.congr_app (Adjunction.mateEquiv_derivedAdjunction_leftDerivedFunctorSquareIso
-      a c (Functor.isoHComp α₁ α₂)) M]
-  exact hm
+  exact_mod_proofs hm
 
 end AlgebraicGeometry.ProEtaleWeilSheaf

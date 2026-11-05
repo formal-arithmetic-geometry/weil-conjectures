@@ -38,6 +38,10 @@ lemma projectionForgetSquare_of_comparisonCompatible
       adj'.uncurriedProjectionMorphismNatTrans := by
   intro M N
   have hh := map_rightAdjointProjectionMap_comp_mateEquiv adj adj' h M N
+  have hp : ((adj'.rightAdjointProjectionMap
+      (Functor.OplaxMonoidal.δNatTrans F')).app (NC.obj M)).app (ND.obj N) =
+      adj'.projectionMorphism (NC.obj M) (ND.obj N) := rfl
+  rw [hp] at hh
   dsimp [Functor.uncurryRightProjection, uncurriedProjectionMorphismNatTrans,
     Functor.curryCompIsoOfIso', Functor.whiskeringLeft₂, Functor.postcompose₂] at hh ⊢
   simpa only [id_whiskerRight, whiskerLeft_id, Category.comp_id, Category.id_comp] using hh
