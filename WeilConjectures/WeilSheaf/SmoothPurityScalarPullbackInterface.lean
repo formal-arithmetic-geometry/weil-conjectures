@@ -42,16 +42,16 @@ noncomputable def purityScalarBasePull :=
   CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricFiberProj
 
 /-- Frobenius pullback in the scalar interface. -/
-noncomputable def purityScalarFrobeniusPull :=
+@[expose] noncomputable def purityScalarFrobeniusPull :=
   CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricGaloisFrobenius.hom
 
 /-- The pulled-back Tate object, named separately from its pullback functor. -/
-noncomputable def purityScalarSourceObject :=
+@[expose] noncomputable def purityScalarSourceObject :=
   (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricFiberProj).obj
     (tateTwistOne X ℓ)
 
 /-- The pulled-back unit object. -/
-noncomputable def purityScalarSourceUnit :=
+@[expose] noncomputable def purityScalarSourceUnit :=
   (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricFiberProj).obj (𝟙_ _)
 
 /-- The Tate pullback comparison in the original coefficient spelling. -/
