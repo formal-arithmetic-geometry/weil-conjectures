@@ -135,15 +135,25 @@
 - Completion marker: `/home/ubuntu/u9/state/BZ459.DONE`.
 - This final commit changes only progress documentation after the successful source build.
 
-# BZ531 in progress
+# BZ531 complete
 
 - Branch: `u9/BZ531`; starting commit: `7c1e4f912`.
-- The user instructed continuation after the concrete two-formula compositor proposal.
-  Applied that exact patch to `DerivedCoordinateCompatibility` and `derivedCoordinateSquare`,
-  preserving the intended maps after Mathlib reversed its compositor.
-- Added a local scalar instance using the module's native ring sheaf and removed
-  the opaque compositor from the local irreducibility list.
-- Remote validation remains through `ucheck-bump` only; no local Lean/Lake execution.
-- Next: finish the assigned module, attempt its direct importer and a further layer,
-  then write `/home/ubuntu/u9/state/BZ531.DONE` with green modules and fix/error pairs.
-- Fix inventory and build logs: `/home/ubuntu/u9/bz/FIXES-BZ531.md`.
+- Assigned module `WeilConjectures.AlgebraicGeometry.Derived.DerivedFiniteFreeScalarCoordinates`
+  passed `ucheck-bump`: rc=0, failed=0, 2988 jobs, on `poolb:43.135.211.170`.
+- Validated source commit: `2583dc9284c42fa3ccdd60c5c48820f84ae3588d`.
+- Full green log: `/home/ubuntu/u9/bz/BUILD-BZ531-unit-final-full.log`.
+- The user instructed continuation after the concrete two-formula proposal.
+  Its compositor corrections preserve the intended maps after Mathlib reversed
+  the compositor. A local native-ring SMul instance preserves the scalar formula,
+  and the opaque compositor is removed from the local irreducibility list.
+- All existing proof bodies, binders, assumptions, docstrings, and options are unchanged.
+- Direct importer `FiniteFreeDirectImagePullbackCoordinates` was attempted and
+  skipped because BZ554-owned `RingedTopoiDerivedPullback` and BZ508-owned
+  `SuccessiveDerivedQuotientNormalization` fail in its dependency closure.
+  The owned module rebuilt GREEN again during that attempt.
+- Its sole second-layer importer shares those blockers; no independent target remains.
+- Fix patterns, exact errors, and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ531.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ531-contract-audit.txt`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ531.DONE`.
+- This final commit changes only progress documentation; Lean source matches the green build.
