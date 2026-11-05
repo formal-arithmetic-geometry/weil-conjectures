@@ -50,7 +50,8 @@ lemma purity_conjugate_extendScalarsCompIsoOfEq (h : a ≫ b = c) :
     conjugateIsoEquiv_trans _ (extendRestrictAdjunction (a ≫ b)),
     extendScalarsIsoOfEq, purity_conjugate_leftAdjointUniq_ofNatIsoRight,
     conjugateIsoEquiv_iso_symm, extendScalarsComp,
-    purity_conjugate_leftAdjointUniq_ofNatIsoRight, Iso.symm_symm]
+    purity_conjugate_leftAdjointUniq_ofNatIsoRight]
+  rfl
 
 end Mod
 
