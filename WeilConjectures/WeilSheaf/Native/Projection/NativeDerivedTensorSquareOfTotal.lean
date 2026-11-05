@@ -109,11 +109,11 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
         dsimp only [Functor.uncurry_obj_obj]
         with_reducible exact nativeOpenTensorModel k₀ l Z LP LT hLP hLT)
       (by
-        dsimp only [L, V, LP, LT, NativeRestrictionDescentProof.totalFamily,
+        dsimp only [id, L, V, LP, LT, NativeRestrictionDescentProof.totalFamily,
           Functor.uncurry_obj_obj, Functor.comp_obj, Functor.prod_obj, Iso.app] at hr ⊢
         with_reducible_and_instances exact_mod_proofs hr)
       (by
-        dsimp only [V, LP, LT, L, derivedCondensedRealization,
+        dsimp only [id, V, LP, LT, L, derivedCondensedRealization,
           Functor.comp_obj, Functor.prod_obj, Functor.uncurry_obj_obj,
           curriedTensor_obj_obj, MonoidalCategory.tensor_obj, Iso.app] at hmU ⊢
         dsimp only [Mod.monoidalCategoryCochainComplex, HomologicalComplex.monoidalCategory,
@@ -129,7 +129,7 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
         with_reducible_and_instances exact_mod_proofs ht)
       (by
         have hh := projection_condensed_model_normalization k₀ l Y P T hP hT
-        dsimp only [F, FP, FT]
+        dsimp only [id, F, FP, FT]
         simp only [Iso.app_hom] at hh ⊢
         dsimp only [Functor.comp_obj, Functor.prod_obj, Functor.uncurry_obj_obj,
           curriedTensor_obj_obj, MonoidalCategory.tensor_obj] at hh ⊢
