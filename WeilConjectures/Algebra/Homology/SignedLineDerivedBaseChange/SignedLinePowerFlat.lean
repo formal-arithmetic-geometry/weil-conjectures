@@ -68,49 +68,4 @@ private theorem chart_sieve (M : KFlatFixedTensor.Modules A)
   rintro W f ⟨i, ⟨g⟩⟩
   exact ⟨chart_restrict A M (hM i).some g⟩
 
-/-- Every signed power of a locally trivial line is flat.
-Source: Stacks Project, Modules on Sites, Tags 03EL and 0B8Q.
-(blueprint: lem-pur-signed-line-power-flat)
-Proof: on each given line chart, induction identifies every positive tensor power with
-the unit. Restriction commutes with the specified site tensor. Tensor isomorphisms and
-the right unitor identify the induction step with the unit. These charts give a covering
-sieve over every object. The evaluation-inverse-pair theorem then proves flatness both
-of the positive power and its internal dual. These are exactly the two constructors of
-the signed power. The argument also covers degree zero, zero rings and empty covers. -/
-theorem signed_line_power_flat
-    [∀ V : C, (J.over V).WEqualsLocallyBijective AddCommGrpCat.{max u v w}]
-    (P : KFlatFixedTensor.Modules A)
-    (hP : ∃ (I : Type u) (V : I → C), J.CoversTop V ∧ ∀ i,
-      Nonempty (P.over (V i) ≅
-        unit (((sheafCompose J (forget₂ CommRingCat RingCat)).obj A).over (V i))))
-    (d : ℤ) : IsFlatOnSite (R := A) (signedLinePower.{u, v, w} P d) := by
-  obtain ⟨I, V, hV, hP⟩ := hP
-  have hc (i : I) : ∀ n : ℕ, (scalarTensorPower A P n).over (V i) ≅
-      unit (((sheafCompose J (forget₂ CommRingCat RingCat)).obj A).over (V i)) := by
-    intro n
-    induction n using Nat.twoStepInduction with
-    | zero => exact Iso.refl _
-    | one => exact (hP i).some
-    | more n _ ih =>
-      let c := (exists_localizedSiteTensorRestriction J A (V i)).choose
-      let := monoidalCategory (A.over (V i))
-      let X := (scalarTensorPower A P (n + 1)).over (V i)
-      let Y := P.over (V i)
-      exact c (scalarTensorPower A P (n + 1)) P ≪≫
-        (siteSheafTensorRightIso (A.over (V i)) Y).app X ≪≫
-          @MonoidalCategory.tensorIso _ _ (monoidalCategory (A.over (V i))) _ _ _ _
-            ih (hP i).some ≪≫
-          ((siteSheafTensorRightIso (A.over (V i)) (unit _)).app (unit _)).symm ≪≫
-            scalarTensorRightUnitor (A.over (V i)) _
-  have hs (n : ℕ) := chart_sieve A (scalarTensorPower A P n)
-    ⟨I, V, hV, fun i ↦ ⟨hc i n⟩⟩
-  cases d with
-  | ofNat n =>
-    exact (LineEvaluation.evaluation_inverse_pair_impl.{u, v, w} A (scalarTensorPower A P n) (hs n))
-      |>.2.2.2.2.2.2.2.1
-  | negSucc n =>
-    exact (LineEvaluation.evaluation_inverse_pair_impl.{u, v, w} A
-      (scalarTensorPower A P (n + 1)) (hs (n + 1)))
-      |>.2.2.2.2.2.2.2.2.1
-
 end SheafOfModules.SignedLineDerivedBaseChange
