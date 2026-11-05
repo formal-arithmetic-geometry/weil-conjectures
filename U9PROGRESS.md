@@ -106,15 +106,30 @@
 - Completion marker: `/home/ubuntu/u9/state/BZ311.DONE`.
 - This final commit changes only progress documentation; Lean sources match the green build.
 
-# BZ408 in progress
+# BZ408 complete
 
 - Branch: `u9/BZ408`; starting commit: `98654719bdfe7ff3e77ff047b3bce53405d2dc4a`.
-- Assigned module: `WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryPresentation`.
-- Baseline remote build confirmed one application type mismatch at line 309.
+- Assigned module `WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryPresentation`
+  passed `ucheck-bump`: rc=0, failed=0, 2138 jobs, source commit
+  `81a4c2b5d2bc052a74104df30cd813cf4988dcd6`.
+- Direct importer `WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryPresentationPaste`
+  also compiled successfully at `4d5d301df854976e319630b9f8ca84a742167850`, without edits.
+- The other direct importer, `LisseTowerConstantComplexPresentation`, is blocked by
+  unowned `ProEtaleOperationsCanonicalAdjunctionSupplement.lean:43:6` (instance synthesis)
+  and line 55 (unsolved goals), plus `KFlatRingedToposPullback` (instance failures
+  and timeout). Both second-layer importers depend on the blocked path.
+  These modules are skipped under the brief's ownership rule. The remaining
+  jobs of the failed downstream build were terminated to release the shared tree
+  after recording both unowned failures (harness rc=255, failed=2).
 - The user instructed continuation after the exact one-line statement correction
-  proposal; that patch is now applied. It uses the forward composition comparison
-  followed by the induced isomorphism, with `.hom` selecting the required direction.
-- All other statement text, proof bodies, and existing docstrings remain unchanged.
-- Next: validate the assigned module, then both downstream layers via `ucheck-bump`.
-- Pattern, whole-tree counts, and baseline log: `/home/ubuntu/u9/bz/FIXES-BZ408.md`.
+  proposal; that patch is applied and validated. The comparison uses Mathlib's
+  forward compositor followed by the induced isomorphism, with `.hom`.
+- All other statement text, proof bodies, and existing docstrings are unchanged.
+- Build logs: `/home/ubuntu/u9/bz/BUILD-BZ408-unit-full.log` and
+  `/home/ubuntu/u9/bz/BUILD-BZ408-downstream1-full.log`.
+- Fix pattern, whole-tree counts, and blocker details: `/home/ubuntu/u9/bz/FIXES-BZ408.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ408-contract-audit.txt`.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
+- Completion marker: `/home/ubuntu/u9/state/BZ408.DONE`.
+- This completion update changes only progress documentation; Lean source matches
+  the successful assigned-module build.
