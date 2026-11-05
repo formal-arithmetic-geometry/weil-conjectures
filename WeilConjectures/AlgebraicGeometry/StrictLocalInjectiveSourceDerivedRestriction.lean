@@ -96,9 +96,9 @@ theorem strictLocalInjectiveSourceIso_derivedRestriction {X S : Scheme.{v}}
         ((strictLocalNeighbourhoodProjection f s).app i) (pullback.fst f
         (Scheme.strictLocalizationToBase s))
             (Q.over i).symm) ≪≫
-          Functor.mapDerivedCategoryCompIso
+          (Functor.mapDerivedCategoryCompIso
             (Etale.upperStar AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodProjection f s).app i))
-            (Etale.upperStar AddCommGrpCat.{v + 1} (Q.legs.app i))).inv.app K.obj) := by
+            (Etale.upperStar AddCommGrpCat.{v + 1} (Q.legs.app i))).symm).inv.app K.obj) := by
   intro i
   let M : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ :=
     ((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj
