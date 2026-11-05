@@ -142,23 +142,6 @@
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ575 complete
-
-- Branch: `u9/BZ575`; assigned ChangeOfRings passed `ucheck-bump`: rc=0, failed=0, 4416 jobs.
-- Tested source commit: `19933846843930b020db9c4d1aace62adcd94e64`.
-- Full log: `/home/ubuntu/u9/bz/BUILD-BZ575-final-full.log`.
-- User instructed continuation after the one-line shared dependency repair proposal.
-  Applied the compatible tensor map lemma in Presheaf/InternalHom.lean, then merged
-  coordinator `bump/v4.35` at `cfcb63ad77e` to include the other dependency repairs.
-- Assigned module and both importer files are unchanged; no statement or docstring changes.
-- Direct importer EtaleReductionFiniteTor and second-layer EtaleReduction were attempted,
-  then skipped because unowned Ext.MapExactFunctor fails at line 230. No extra module claimed green.
-- Fix patterns, error evidence, and occurrence counts: `/home/ubuntu/u9/bz/FIXES-BZ575.md`.
-- Contract audit: `/home/ubuntu/u9/bz/BZ575-contract-audit.txt`.
-- Completion marker: `/home/ubuntu/u9/state/BZ575.DONE`.
-- This completion commit changes only progress documentation after successful validation.
-- No local Lean/Lake, sorries, trust shortcuts, profiler probes, or heartbeat increases.
-
 # BZ557 in progress
 
 - Branch: `u9/BZ557`; starting commit: `8af5cb324`.
@@ -169,3 +152,28 @@
   and AffineOpenSectionsResolutionQuasiIso; fix any owned errors and write DONE when green.
 - Notes and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ557.md`.
 - No local Lean/Lake, statement changes, proof escapes, or heartbeat increases.
+
+# BZ590 complete
+
+- Branch: `u9/BZ590`; starting commit: `cfcb63ad7`.
+- Assigned module `WeilConjectures.AlgebraicGeometry.InjectiveExchangeSourceTransport`
+  passed `ucheck-bump`: rc=0, failed=0, 4237 jobs, at
+  `393c972f1830b9c4b2503e820c97c3d716fd1b53` on poolb:43.157.184.90.
+- The user instructed continuation after the exact public transport proposal.
+  Applied its two changes: preimage target `Plus.Qh.obj H` and the canonical
+  `quotientCompQhIso` inverse before the RHS. Names, hypotheses, binders, and
+  existing docstrings are unchanged. Added the Localization imports for proof
+  reduction and removed the final `rfl`, since `erw` now closes the goal.
+- The assigned module rebuilt green at `14548dd95744e0e3e4af2c1bdba85f60a5410b71`
+  in the downstream check of `InjectiveExchangeRepresentative`.
+- Downstream skipped under the ownership rule: BZ591's
+  `InjectiveExchangeTargetTransport` failed with eight errors. No downstream
+  modules are claimed green; no second layer is reachable past this blocker.
+- Unit log: `/home/ubuntu/u9/bz/BUILD-BZ590-unit-green-full.log`.
+- Downstream log: `/home/ubuntu/u9/bz/BUILD-BZ590-downstream1-full.log`.
+- Fix patterns, exact errors, and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ590.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ590-contract-audit.txt`.
+- No local Lean/Lake, sorries, proof shortcuts, heartbeat increases, or profiler probes.
+- Completion marker: `/home/ubuntu/u9/state/BZ590.DONE`.
+- This final commit changes only progress documentation; Lean source matches both
+  successful module builds.
