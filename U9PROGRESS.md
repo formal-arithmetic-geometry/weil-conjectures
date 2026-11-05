@@ -66,3 +66,20 @@
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
 - Completion marker: `/home/ubuntu/u9/state/BZ154.DONE`.
 - This completion commit changes only progress documentation; Lean sources match the green build.
+
+
+# BZ228 complete
+
+- Branch: `u9/BZ228`; starting commit: `c0384594d`.
+- Assigned module: `WeilConjectures.CategoryTheory.Abelian.DerivedCyclesUnitNaturality`.
+- Passed `ucheck-bump`: rc=0, failed=0, 1930 jobs; target rebuilt in 3.5 seconds.
+- Validated source commit: `58356b8d4fcc893861064280b373d19a3f95f96d`.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ228-final-full.log`.
+- The user instructed continuation after the explicit canonical-transport proposal;
+  that exact statement patch is applied and validated. All other statement terms
+  and existing docstrings remain unchanged.
+- Added localization imports and simplified identity comparison factors in the proof.
+- Fix patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ228.md`.
+- No local Lean/Lake execution, sorries, trust escapes, or heartbeat increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ228.DONE`.
+- This completion commit changes only progress documentation after the green build.
