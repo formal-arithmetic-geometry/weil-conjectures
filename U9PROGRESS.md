@@ -142,26 +142,60 @@
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ557 in progress
+# BZ539 in progress
 
-- Branch: `u9/BZ557`; starting commit: `8af5cb324`.
-- Added the public AffineScheme import to direct importer AffineBasisSectionsDerivedUnit.
-- Initial remote builds stopped in the shared Presheaf.InternalHom dependency.
-- On continuation, merged BZ558 prerequisite repair `f28760733369366ac823f0084f3c4090afa3a90d`.
-- Next: ucheck-bump on AffineBasisSectionsResolutionHomologyEpi, AffineBasisSectionsDerivedUnit,
-  and AffineOpenSectionsResolutionQuasiIso; fix any owned errors and write DONE when green.
-- Notes and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ557.md`.
-- No local Lean/Lake, statement changes, proof escapes, or heartbeat increases.
+- Branch: `u9/BZ539`; original start: `29f3a8d8177`.
+- Re-read the brief and prior notes on user-requested continuation.
+- Baseline build stopped in unowned `Presheaf.InternalHom:373` with an unknown
+  `PresheafOfModulesOfCommRing.Monoidal.tensorObj_map_tmul` identifier.
+- The coordinator subsequently added the public Mathlib monoidal import in
+  `04f9380d1`. Merged coordinator head `8af5cb324` to take that fix and retry.
+- The proposed compatibility-namespace patch remains unapplied while testing
+  the coordinator's repair.
+- Next: validate ChangeOfCoefficients via ucheck-bump, repair its proof errors,
+  then check up to four direct importers and one further downstream layer.
+- Notes and logs: `/home/ubuntu/u9/bz/FIXES-BZ539.md`.
+- No local Lean/Lake, proof placeholders, statement edits, or heartbeat raises.
 
-# BZ603 in progress
+- The public import resolved the missing name, but the resumed build failed in
+  `InternalHom:375` because its proof mixed new and compatibility map APIs.
+- User continuation followed the explicit one-line dependency patch proposal;
+  that exact compatibility-namespace proof repair is now applied.
+- Retrying the assigned module; declarations and heartbeat settings unchanged.
 
-- Branch: `u9/BZ603`; starting commit: `cfcb63ad7`.
-- Baseline remote build: eight errors caused by hidden `HomologicalComplexUpToQuasiIso.Qh`.
-- Public and implementation Localization imports removed seven diagnostics; the private
-  helper statements and proofs compile. The one public representative statement still failed.
-- The user instructed continuation after the canonical Q/Qh endpoint-transport proposal.
-  Applied the comparison hom/inv maps only to that equality, preserving its mathematical
-  maps, binders, assumptions, and other statements. The proof normalizes identity transports.
-- Next: `ucheck-bump` on the assigned module, then `CompletedScalarAssociator` downstream.
-- Fix patterns and exact diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ603.md`.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+- Compatibility build validated Presheaf.InternalHom and exposed the identical
+  copied-proof failure in Algebra.Homology.KFlat:82. Applied the same one-line
+  namespace correction there; no old-name occurrences remain in the target closure.
+- Retrying the target after these two minimal dependency proof corrections.
+
+- KFlat now passes. Its resolution module exposed the same copied-proof mismatch;
+  applied the same correction in KFlatResolutionIndependentCoefficients:132.
+- Corrected the dependency scan to include import all and trailing import comments.
+  All three changes are the same one-line proof-body replacement.
+
+- Assigned module and all four selected direct importers passed together at
+  `5b2cf87cce` (rc=0, failed=0, 4423 jobs).
+- All three compatibility-lemma dependency corrections are validated.
+- Green log: `/home/ubuntu/u9/logs/BZ539-20261106T041952.log`;
+  local full copy: `/home/ubuntu/u9/bz/BUILD-BZ539-layer1-full.log`.
+- Checking second-layer importers ChangeOfCoefficientsPullCounit and
+  DerivedPullIsoCoherenceLowerStar next; skip failures in unowned dependencies.
+
+# BZ539 complete
+
+- Branch: `u9/BZ539`; all requested checks passed with no errors.
+- Assigned ChangeOfCoefficients and four direct importers passed together at
+  `5b2cf87cce1ee5a9a9899d85b7088cdfeec32cfd`: rc=0, failed=0, 4423 jobs.
+- Second layer, ChangeOfCoefficientsPullCounit and DerivedPullIsoCoherenceLowerStar,
+  passed at `5dd5f342374d26b47e452feda618987f9d34617e`: rc=0, failed=0, 4106 jobs.
+- Three dependency proofs now use the compatibility tensor restriction lemma:
+  Presheaf.InternalHom, Algebra.Homology.KFlat, and KFlatResolutionIndependentCoefficients.
+- The assigned module and all six downstream targets needed no source edits.
+- All declaration statements, imports, and docstrings are preserved relative to
+  coordinator base `8af5cb324`; no placeholders, trust bypasses, or heartbeat changes.
+- No local Lean/Lake execution. All validation used ucheck-bump.
+- Logs, exact PATTERN/ERROR records, and occurrence counts:
+  `/home/ubuntu/u9/bz/FIXES-BZ539.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ539-contract-audit.txt`.
+- This final commit changes only progress documentation; Lean sources match both green builds.
+- Completion marker: `/home/ubuntu/u9/state/BZ539.DONE`.
