@@ -11,6 +11,7 @@ public import WeilConjectures.TateTwist.FiniteRootsOfUnity
 /-! # A separate coefficient interface and finite module equivalence -/
 
 set_option profiler true
+set_option profiler.threshold 0
 
 @[expose] public section
 
@@ -44,6 +45,8 @@ noncomputable instance (T : Type) [TopologicalSpace T] [CommRing T]
 instance (T : Type) [TopologicalSpace T] [CommRing T]
     [IsTopologicalRing T] : IsCommMonObj (coeffRing.{u} T) :=
   inferInstanceAs (IsCommMonObj (Profinite.continuousMapRingObj.{u} T))
+
+variable (X : Scheme.{u})
 
 variable (T : Type) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] [DiscreteTopology T]
   [Finite T]

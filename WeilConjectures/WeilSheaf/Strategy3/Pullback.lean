@@ -9,6 +9,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.D
 /-! # Independent ordinary module pullback constructors for the K4 kernel experiment -/
 
 set_option profiler true
+set_option profiler.threshold 0
 
 @[expose] public section
 
@@ -38,7 +39,7 @@ noncomputable def lowerStar :
   (f)_*[Ab.{u + 1}].mapMod _ ⋙ Mod.comap (condensedPushforwardHom Λ f)
 
 @[inherit_doc lowerStar]
-local notation "(" f ")_*⟦" Λ "⟧" => lowerStar Λ f
+scoped notation "(" f ")_*⟦" Λ "⟧" => lowerStar Λ f
 
 omit [IsCommMonObj Λ] in
 /-- The underlying sheaf of `f_* M` is `f_* M`. -/
@@ -86,7 +87,7 @@ noncomputable def upperStar :
   (f)^*[Ab.{u + 1}].mapMod _ ⋙ Mod.extendScalars (condensedPullbackHom Λ f)
 
 @[inherit_doc upperStar]
-local notation "(" f ")^*⟦" Λ "⟧" => upperStar Λ f
+scoped notation "(" f ")^*⟦" Λ "⟧" => upperStar Λ f
 
 /-- The underlying sheaf of `f^* M` is the extension of scalars `Λ_X ⊗_{f^* Λ_Y} f^* M` of
 the `f^* Λ_Y`-module `f^* M`. -/
