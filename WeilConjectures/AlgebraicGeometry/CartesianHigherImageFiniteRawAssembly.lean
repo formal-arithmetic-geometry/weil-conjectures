@@ -17,7 +17,7 @@ open CategoryTheory Limits Opposite
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
-local instance (X : Scheme.{u}) :
+noncomputable local instance (X : Scheme.{u}) :
     HasShift (DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) ℤ :=
   inferInstance
 
