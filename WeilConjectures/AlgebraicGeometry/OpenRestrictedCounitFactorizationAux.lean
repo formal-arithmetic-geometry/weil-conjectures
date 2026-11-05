@@ -139,7 +139,6 @@ private theorem tensor_square_inverse
   intro n
   simp [openTensorRestrictionComplexIso, openTensorRestrictionSquareIso,
     NatIso.mapHomologicalComplex, NatTrans.mapHomologicalComplex]
-  rfl
 
 private theorem restriction_counit_glue
     {V : Type*} [Category V] {A B C D E F G H I J : V}
