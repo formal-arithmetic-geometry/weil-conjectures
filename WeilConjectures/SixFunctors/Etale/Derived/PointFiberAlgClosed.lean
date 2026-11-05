@@ -155,6 +155,35 @@ section Transition
 abbrev StageInt (E : FiniteIntermediateField l) : Type (u + 1) :=
   Shrink.{u + 1} (PadicAlgCl.integers l E.1)
 
+section IntegralPointStage
+
+variable (E : FiniteIntermediateField l)
+
+/-- The integral stage `Dᵇc(s, 𝒪_E)` over `s = Spec k`, for a finite subextension `E ⊆ ℚ̄_ℓ`. -/
+abbrev IntegralPointStage : Type _ :=
+  (DerivedCategory.boundedConstructibleIntegral (PadicAlgCl.maximalIdealShrink l E.1)
+    (Spec (.of k))).FullSubcategory
+
+/-! The instances below are shortcuts: they keep the instance arguments in the statements about
+the integral stages small, which the export of the theorem statements to the `.olean` file
+otherwise traverses unshared. -/
+
+noncomputable instance : Category (IntegralPointStage l k E) := inferInstance
+
+noncomputable instance : Preadditive (IntegralPointStage l k E) := inferInstance
+
+noncomputable instance : Linear (StageInt.{u} l E) (IntegralPointStage l k E) := inferInstance
+
+instance : HasZeroObject (IntegralPointStage l k E) := inferInstance
+
+noncomputable instance : HasShift (IntegralPointStage l k E) ℤ := inferInstance
+
+instance (n : ℤ) : (shiftFunctor (IntegralPointStage l k E) n).Additive := inferInstance
+
+noncomputable instance : Pretriangulated (IntegralPointStage l k E) := inferInstance
+
+end IntegralPointStage
+
 variable {l} {E F : FiniteIntermediateField l} (h : E ≤ F)
 
 /-- The inclusion `E ⊆ F` as an algebra structure. -/
@@ -235,10 +264,7 @@ instance : (stageDerivedBaseChange k h).IsTriangulated := by
 /-- The scalar extension `K ↦ K ⊗ᴸ_{𝒪_E} 𝒪_F` on the integral stages `Dᵇc(s, 𝒪_E)` over
 `s = Spec k`. -/
 noncomputable def integralStageTransition :
-    (DerivedCategory.boundedConstructibleIntegral (PadicAlgCl.maximalIdealShrink l E.1)
-      (Spec (.of k))).FullSubcategory ⥤
-    (DerivedCategory.boundedConstructibleIntegral (PadicAlgCl.maximalIdealShrink l F.1)
-      (Spec (.of k))).FullSubcategory :=
+    IntegralPointStage l k E ⥤ IntegralPointStage l k F :=
   ObjectProperty.lift _ (ObjectProperty.ι _ ⋙ stageDerivedBaseChange k h)
     fun L ↦ boundedConstructibleIntegral_derivedBaseChange_obj k _ (flat_integersStageMap h) _ L.2
 

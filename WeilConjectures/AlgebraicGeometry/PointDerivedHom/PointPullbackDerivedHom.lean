@@ -13,6 +13,7 @@ public import WeilConjectures.CategoryTheory.RingObjects.Ab
 public import WeilConjectures.CategoryTheory.Sites.MonObj
 public import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
 import WeilConjectures.AlgebraicGeometry.ModuleObjectRingedComparison.ModuleObjectRingedSiteDerivedComparison
+import WeilConjectures.AlgebraicGeometry.ProfinitePointPullbackFlat
 import WeilConjectures.CategoryTheory.DerivedInternalHomSectionsModel.DerivedInternalHomSectionsModel
 import WeilConjectures.CategoryTheory.InternalSectionTensorComparison
 import WeilConjectures.CategoryTheory.InternalAbelianSheafModuleEquivalence
@@ -368,8 +369,8 @@ to the finite free module over the pulled-back ring. The resulting local filtere
 colimit is flat. Equivalently the exact inverse image preserves the tensor tests for
 flatness on local generators. The underlying coefficient and action maps are the
 recorded mapMod construction, so transport back gives the asserted property. -/
-@[instance] theorem pullFlat (X : Scheme.{u}) : (pull Λ X).PreservesFlat := by
-  sorry
+@[instance] theorem pullFlat (X : Scheme.{u}) : (pull Λ X).PreservesFlat :=
+  preservesFlat_mapMod_upperStarFromPoint Λ X
 
 /-- The canonical K-flat derived tensor comparison transported to termwise pullback.
 Its maps come from the existing normalized left-derived tensor comparison.
@@ -430,6 +431,38 @@ def PointCompositionNormalization {X Y : Scheme.{u}} (f : X ⟶ Y)
   ∀ M : Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) Λ,
     (e.hom.app M).hom = (upperStarFromPointComp f).hom.app M.X
 
+/-- The point-composition comparison on module objects: the module version of
+`upperStarFromPointComp f`, followed by restricting scalars back along `α_f⁻¹ ≫ α_f = 𝟙`.
+Source: HRS (4.1) (blueprint: lem-sfb-point-pullback-derived-hom). -/
+private def restrictionComparisonAux {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    PointCompositionFamily Λ f :=
+  (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight (Functor.mapModCompIso (upperStarFromPoint Y)
+      (f)^*[Ab.{u + 1}] (upperStarFromPointComp f).hom Λ)
+      (Mod.comap (asIso (condensedPullbackHom Λ f)).inv) ≪≫
+    Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft (pull Λ X)
+      ((Mod.comapComp (asIso (condensedPullbackHom Λ f)).inv
+          (condensedPullbackHom Λ f)).symm ≪≫
+        Mod.comapCongr (by simp) ≪≫ Mod.comapId _) ≪≫
+    Functor.rightUnitor _
+
+omit [IsCommMonObj Λ] in
+private lemma restrictionComparisonAux_normalization {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    PointCompositionNormalization Λ f (restrictionComparisonAux Λ f) := by
+  intro M
+  simp only [Functor.comp_obj, restrictionComparisonAux, asIso_inv, Functor.isoWhiskerLeft_trans,
+    Iso.trans_assoc, Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerRight_hom,
+    Functor.isoWhiskerLeft_hom, NatTrans.comp_app, Functor.associator_inv_app,
+    Functor.whiskerRight_app, Functor.associator_hom_app, Functor.whiskerLeft_app, Functor.id_obj,
+    Functor.rightUnitor_hom_app, Category.comp_id, Category.id_comp, Mod.comp_hom', Mod.id_hom',
+    Mod.comap_map_hom, Functor.mapModCompIso_hom_app_hom, Mod.comapComp_inv_app_hom,
+    Mod.comapCongr_hom_app_hom, Mod.comapId_hom_app_hom]
+  -- the remaining identities live on objects that agree only up to unfolding `mapMod`
+  erw [Category.id_comp, Category.comp_id]
+
+-- the commutativity of `Λ` is part of the fixed statement but not needed by the proof
+set_option linter.unusedSectionVars false in
 /-- The ordinary point-composition comparison, including coefficient transport,
 is uniquely determined by its underlying abelian-sheaf map.
 Source: HRS (4.1), and the recorded profinite-point composition comparisons
@@ -443,7 +476,9 @@ map. The forgetful functor is faithful, so the stated underlying maps determine 
 natural isomorphism uniquely. -/
 theorem restrictionComparison_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃! e : PointCompositionFamily Λ f, PointCompositionNormalization Λ f e := by
-  sorry
+  refine ⟨restrictionComparisonAux Λ f, restrictionComparisonAux_normalization Λ f,
+    fun e' he' ↦ Iso.ext (NatTrans.ext (funext fun M ↦ Mod.hom_ext _ _ ?_))⟩
+  exact (he' M).trans (restrictionComparisonAux_normalization Λ f M).symm
 
 /-- Type of canonical composition identifications after exact localization.
 Source: HRS (4.1) (blueprint: lem-sfb-point-pullback-derived-hom). -/
