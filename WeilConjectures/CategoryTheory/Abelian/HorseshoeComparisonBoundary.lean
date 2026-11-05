@@ -42,8 +42,11 @@ private noncomputable def resolutionAugmentationIso
     (DerivedCategory.Plus.singleFunctor A 0).obj X ≅
       DerivedCategory.Plus.Q.obj (resolutionPlus I) :=
   DerivedCategory.Plus.ι.preimageIso
-    ((DerivedCategory.singleFunctorIsoCompQ A 0).app X ≪≫
-      asIso (DerivedCategory.Q.map I.ι'))
+    ((DerivedCategory.Plus.singleFunctorιIso A 0).app X) ≪≫
+      (DerivedCategory.singleFunctorIsoCompQ A 0).app X ≪≫
+      asIso (DerivedCategory.Q.map I.ι') ≪≫
+      (DerivedCategory.quotientCompQhIso A).symm.app I.cochainComplex ≪≫
+      (DerivedCategory.Plus.quotientCompQhIso A).app (resolutionPlus I)
 
 set_option maxHeartbeats 100000 in
 -- The quotient factorization and the lifted unit involve several nested functors.
@@ -81,9 +84,9 @@ private theorem comparison_eq_unit
     rfl
   have hu : inv (v.rightDerivedFunctorPlusUnith.app
         ((HomotopyCategory.Plus.quotient A).obj (resolutionPlus R))) ≫
-      DerivedCategory.Plus.Q.map vg =
+      (DerivedCategory.Plus.Qh (C := B)).map ((HomotopyCategory.Plus.quotient B).map vg) =
     v.rightDerivedFunctorPlus.map
-        (DerivedCategory.Plus.Qh.map ((HomotopyCategory.Plus.quotient A).map g)) ≫
+        ((DerivedCategory.Plus.Qh (C := A)).map ((HomotopyCategory.Plus.quotient A).map g)) ≫
       inv (v.rightDerivedFunctorPlusUnith.app
         ((HomotopyCategory.Plus.quotient A).obj (resolutionPlus I))) := by
     rw [IsIso.inv_comp_eq, ← Category.assoc, eq_comm, IsIso.comp_inv_eq]
@@ -110,7 +113,8 @@ private theorem comparison_eq_unit
   erw [← DerivedCategory.quotientCompQhIso_hom_naturality_assoc]
   change _ ≫ DerivedCategory.Plus.ι.map (inv (v.rightDerivedFunctorPlusUnith.app
       ((HomotopyCategory.Plus.quotient A).obj (resolutionPlus R)))) ≫
-      DerivedCategory.Plus.ι.map (DerivedCategory.Plus.Q.map vg) ≫ _ = _
+      DerivedCategory.Plus.ι.map
+        (DerivedCategory.Plus.Qh.map ((HomotopyCategory.Plus.quotient B).map vg)) ≫ _ = _
   have hu' := congrArg (fun f ↦ DerivedCategory.Plus.ι.map f) hu
   simp only [Functor.map_comp] at hu'
   erw [reassoc_of% hu']

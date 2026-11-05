@@ -69,7 +69,11 @@ private theorem unit_single (M : C) :
         R.rightDerivedPlusSingleUnit (L.obj M) := by
   have h := adj.derivedPlus_unit_app_fac ((HomotopyCategory.Plus.singleFunctor C 0).obj M)
   have hL : (L.mapDerivedCategoryPlusSingleFunctor 0).hom.app M =
-      L.mapDerivedCategoryPlusFactorsh.hom.app
+      let S : CochainComplex.Plus C :=
+        ⟨(CochainComplex.singleFunctor C 0).obj M, 0, inferInstance⟩
+      L.mapDerivedCategoryPlus.map
+          ((DerivedCategory.Plus.quotientCompQhIso C).inv.app S) ≫
+        L.mapDerivedCategoryPlusFactorsh.hom.app
           ((HomotopyCategory.Plus.singleFunctor C 0).obj M) ≫
         (L.mapHomotopyCategoryPlusSingleFunctorQhObjIso 0 M).hom := by
     apply DerivedCategory.Plus.ι.map_injective
