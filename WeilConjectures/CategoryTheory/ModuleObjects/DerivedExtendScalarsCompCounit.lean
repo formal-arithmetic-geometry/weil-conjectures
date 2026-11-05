@@ -163,8 +163,6 @@ lemma derivedExtendScalarsCompIso_hom_app_comp_counit
   erw [Category.id_comp, hcI,
     NatTrans.mapHomotopyCategory_app, Functor.mapHomotopyCategory_map,
     ← Functor.map_comp]
-  erw [Functor.mapHomotopyCategory_map]
-  rw [← Functor.map_comp, ← Functor.map_comp]
   congr 1
   ext n
   simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
