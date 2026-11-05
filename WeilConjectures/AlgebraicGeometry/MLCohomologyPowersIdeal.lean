@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.CategoryTheory.CofilteredSystem
 public import Mathlib.RingTheory.Ideal.Operations
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
