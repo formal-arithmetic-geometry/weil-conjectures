@@ -265,7 +265,9 @@ lemma Etale.stalkIsoColimitSections_hom_comp_piLift_stalkRestrict :
     ι_colimMap_assoc, sectionsIsoPi_hom, ← NatTrans.comp_app_assoc, Pi.lift_comp_π, Etale.pieceIsoStalk,
     Functor.Final.ι_colimitIso_hom]
   exact (colimit.w ((Functor.Elements.π (pointSmallEtale t.1).fiber).op ⋙ G.obj)
-    (Functor.Elements.homMk (s.unop.pieceIncl t)
+    (Functor.Elements.homMk
+      (x := Functor.elementsMk _ (s.unop.pieceObj t) (s.unop.piecePt t))
+      (y := (Etale.baseChangeNbhd f y t).obj s.unop.obj) (s.unop.pieceIncl t)
       (CategoryTheory.Over.OverMorphism.ext (s.unop.piecePt_comp_pieceIncl t))).op).symm
 
 /-- The stalk of `f_* G` at `y` is the product of the stalks of `G` at the geometric points
