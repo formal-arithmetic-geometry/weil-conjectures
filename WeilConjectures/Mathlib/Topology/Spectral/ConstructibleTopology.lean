@@ -73,13 +73,6 @@ lemma isCompact_iInter_of_isConstructible [CompactSpace X] [QuasiSober X] [Presp
   have := hK.isCompact.image hφ
   rwa [Set.image_preimage_eq _ fun x ↦ ⟨WithTopology.toTopology _ x, rfl⟩] at this
 
-/-- A compact open is closed in the constructible topology. -/
-lemma IsCompact.isClosed_constructibleTopology_of_isOpen {s : Set X}
-    (hs : IsCompact s) (ho : IsOpen s) : IsClosed[constructibleTopology X] s := by
-  rw [← @isOpen_compl_iff]
-  apply TopologicalSpace.isOpen_generateFrom_of_mem
-  simp [constructibleTopologySubbasis, ho, hs]
-
 /-- In a prespectral space, a closed set is closed in the constructible topology, which is finer
 than the topology of the space. -/
 lemma IsClosed.isClosed_constructibleTopology [PrespectralSpace X] {s : Set X} (hs : IsClosed s) :
