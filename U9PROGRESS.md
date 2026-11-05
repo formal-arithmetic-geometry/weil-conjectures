@@ -1,18 +1,3 @@
-# BZ569 in progress
-
-- Branch: `u9/BZ569`; assigned module: `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralReduction`.
-- Removed the redundant `rfl` after `simp` in the short-exactness proof.
-- First remote build stopped in the BZ581-owned prerequisite `Presheaf.InternalHom`.
-- The user instructed continuation after the concrete prerequisite-fix proposal.
-  Incorporated the owner's identical repair `216c997cc4f` as `d63827975` with provenance.
-- Reused the KFlat prerequisite repair from BZ558 commit `cba570747cc` as `809822403`;
-  BZ558's build diagnosed the same compatibility error, and KFlat is in our import closure.
-- The retry exposed the identical error in `KFlatResolutionIndependentCoefficients`;
-  reused that hunk from the same published commit as `f21a10b88`.
-- Next: validate the assigned module, then four direct importers and a second layer.
-- Fix patterns, occurrence counts, and logs: `/home/ubuntu/u9/bz/FIXES-BZ569.md`.
-- No local Lean/Lake, statement changes, proof placeholders, or heartbeat increases.
-
 # BZ133 complete
 
 - Branch: `u9/BZ133`.
@@ -156,3 +141,27 @@
 - Existing `ucheck-bump` invocation is queued; it reads the pushed branch after
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+# BZ557 in progress
+
+- Branch: `u9/BZ557`; starting commit: `8af5cb324`.
+- Added the public AffineScheme import to direct importer AffineBasisSectionsDerivedUnit.
+- Initial remote builds stopped in the shared Presheaf.InternalHom dependency.
+- On continuation, merged BZ558 prerequisite repair `f28760733369366ac823f0084f3c4090afa3a90d`.
+- Next: ucheck-bump on AffineBasisSectionsResolutionHomologyEpi, AffineBasisSectionsDerivedUnit,
+  and AffineOpenSectionsResolutionQuasiIso; fix any owned errors and write DONE when green.
+- Notes and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ557.md`.
+- No local Lean/Lake, statement changes, proof escapes, or heartbeat increases.
+
+# BZ573 in progress
+
+- Branch: `u9/BZ573`; starting commit: `8af5cb3248338412e860fdc16db73c8eeebd81d9`.
+- The user instructed continuation after the exact one-line private helper API proposal.
+  Removed `.symm` in `exact_comp_normalization` and updated inverse cancellation.
+  All public statements are unchanged.
+- Removed obsolete local irreducible attributes for Mathlib's no_expose derived comparisons.
+- Baseline remote build was blocked by unowned `Presheaf.InternalHom` (BZ581).
+  Waiting for its owner's repair; no unowned source files changed.
+- Next: validate the owned module with `ucheck-bump`, then its direct importer.
+- Fix patterns and logs: `/home/ubuntu/u9/bz/FIXES-BZ573.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
