@@ -59,7 +59,8 @@ lemma projectionOpenProjectionComparison_inv_hom (M : WeilComplex k₀ l U)
   change ((CondensedRing.boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ l jb).projectionComparison
     ((compactProjectionForget k₀ l U).obj M)
       ((compactProjectionForget k₀ l Z).obj N)).hom = _ at h
-  rw [ObjectProperty.hom_inv, h]
+  rw [ObjectProperty.hom_inv]
+  exact IsIso.inv_eq_inv.mpr h
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
