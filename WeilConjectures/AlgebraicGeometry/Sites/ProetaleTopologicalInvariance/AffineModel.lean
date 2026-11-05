@@ -76,7 +76,6 @@ lemma ofAlgebraMap_left (f : D₁ →ₐ[Γ(S, U)] D₂) :
 lemma ofAlgebraMap_id : ofAlgebraMap hU (AlgHom.id Γ(S, U) D₁) = 𝟙 _ := by
   apply MorphismProperty.Over.Hom.ext
   simp
-  rfl
 
 @[simp]
 lemma ofAlgebraMap_comp (f : D₁ →ₐ[Γ(S, U)] D₂) (g : D₂ →ₐ[Γ(S, U)] D₃) :
