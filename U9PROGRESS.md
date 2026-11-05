@@ -191,3 +191,17 @@
 - No local Lean/Lake execution, sorries, proof escapes, heartbeat increases, or profiler probes.
 - Completion marker: `/home/ubuntu/u9/state/BZ631.DONE`.
 - This completion commit changes only documentation; Lean source matches the green revision.
+
+
+# BZ671 in progress
+
+- Branch: `u9/BZ671`; starting commit: `940f09365`.
+- Baseline and import-only builds fail in the public representative tensor equation:
+  Mathlib marks `HomologicalComplexUpToQuasiIso.Qh` as `no_expose`.
+- The user instructed continuation after the exact two-line identity-cast proposal.
+  Applied `cast (by rfl)` around the right-hand morphism, preserving its mathematical
+  content; all other declaration statements and existing docstrings are unchanged.
+- Added Localization public/import-all imports for private proof reduction.
+- Next: validate the owned leaf through `ucheck-bump`, then direct importers.
+- Fix patterns and logs: `/home/ubuntu/u9/bz/FIXES-BZ671.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
