@@ -19,9 +19,9 @@ and shifts moves the twist to the base.
 Together with homotopy invariance, this proves the rank-one Thom isomorphism without
 using `WeilComplex.exists_weilTrace_of_isPullback`. That separate trace statement and
 its lifting construction in `AffineLineBundle` are unused by this route. The input is smooth
-purity, `WeilComplex.nonempty_derivedLowerShriek_adjunction_of_smooth`, used for a separated
-base (the form proved in #2087); the base `X` of the line bundle is therefore assumed separated
-over `k₀`.
+purity for a separated base,
+`WeilComplex.nonempty_derivedLowerShriek_adjunction_of_smooth_of_isSeparated`; the base `X` of the
+line bundle is therefore assumed separated over `k₀`.
 -/
 
 @[expose] public section
@@ -39,6 +39,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   (hπ : IsPullback π s (X ↘ Spec (CommRingCat.of k₀))
     (affineLine k₀ ↘ Spec (CommRingCat.of k₀)))
   [IsSeparated π] [LocallyOfFiniteType π] [QuasiCompact π]
+  [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]
@@ -46,8 +47,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
 include hπ in
 /-- The compact-support adjunction of an affine-line bundle over a separated base follows from
 smooth purity and compatibility of pullback with twists and shifts. -/
-theorem nonempty_affineLineAdjunction_of_smoothPurity
-    [IsSeparated (X ↘ Spec (CommRingCat.of k₀))] :
+theorem nonempty_affineLineAdjunction_of_smoothPurity :
     Nonempty (derivedLowerShriek k₀ l π ⊣
       (tateTwist k₀ l X 1 ⋙ shiftFunctor (WeilComplex k₀ l X) (2 : ℤ)) ⋙
         upperStar π) := by
@@ -58,7 +58,8 @@ theorem nonempty_affineLineAdjunction_of_smoothPurity
     (smoothOfRelativeDimension_isStableUnderBaseChange 1).of_isPullback hπ.flip
       (inferInstance : SmoothOfRelativeDimension 1
         (affineLine k₀ ↘ Spec (CommRingCat.of k₀)))
-  obtain ⟨adj⟩ := nonempty_derivedLowerShriek_adjunction_of_smooth (k₀ := k₀) (l := l) π 1
+  obtain ⟨adj⟩ :=
+    nonempty_derivedLowerShriek_adjunction_of_smooth_of_isSeparated (k₀ := k₀) (l := l) π 1
   exact ⟨adj.ofNatIsoRight (tateTwistShiftCompUpperStarIso (k₀ := k₀) (l := l) π 1 2).symm⟩
 
 end AlgebraicGeometry.WeilComplex

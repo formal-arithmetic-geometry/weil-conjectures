@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.WeilSheaf.AffineLineBundle
 public import WeilConjectures.WeilSheaf.AffineLineSmoothAdjunction
+import WeilConjectures.WeilSheaf.SmoothPurityThomFromTate
 public import WeilConjectures.WeilSheaf.FourierInversion.Defs
 public import WeilConjectures.WeilSheaf.Localization
 public import WeilConjectures.WeilSheaf.LowerShriekOperations
@@ -105,13 +106,7 @@ theorem WeilComplex.nonempty_iso_upperStar_comp_derivedLowerShriek_of_isPullback
     [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))] :
     Nonempty (WeilComplex.upperStar π ⋙ WeilComplex.derivedLowerShriek k₀ l π ≅
       WeilComplex.tateTwist k₀ l X (-1) ⋙ shiftFunctor _ (-2 : ℤ)) := by
-  obtain ⟨adj⟩ := WeilComplex.nonempty_affineLineAdjunction_of_smoothPurity
-    (k₀ := k₀) (l := l) π s hπ
-  have := WeilComplex.isIso_upperStarDerivedLowerStarAdjunction_unit_app_of_isPullback
-    (k₀ := k₀) (l := l) π s hπ
-  have : IsIso (WeilComplex.upperStarDerivedLowerStarAdjunction (k₀ := k₀) (l := l) π).unit :=
-    NatIso.isIso_of_isIso_app _
-  exact ⟨WeilComplex.upperStarCompDerivedLowerShriekIsoOfAdjunction π adj⟩
+  exact WeilComplex.purity_nonempty_trivialLineThom π s hπ
 
 end OtherSections
 
