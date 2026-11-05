@@ -83,6 +83,10 @@ theorem finite_globalSectionsRingHom_of_isProper [IsProper (X ↘ Spec (.of k))]
     (globalSectionsRingHom k (X := X)).Finite := by
   let := (globalSectionsRingHom k (X := X)).toAlgebra
   let O : X.Modules := SheafOfModules.unit X.ringCatSheaf
+  have : (SheafOfModules.unit X.ringCatSheaf).IsInvertible :=
+    SheafOfModules.instIsInvertibleUnit.{u, u, u}
+  have : (SheafOfModules.unit X.ringCatSheaf).IsFiniteLocallyFree :=
+    SheafOfModules.IsInvertible.isFiniteLocallyFree.{u, u, u} _
   have : (SheafOfModules.unit X.ringCatSheaf).IsFinitePresentation :=
     SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
   have := Modules.finiteDimensional_H_of_isProper (k := k) O 0
