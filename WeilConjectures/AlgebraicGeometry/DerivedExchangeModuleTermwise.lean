@@ -45,7 +45,7 @@ attribute [local irreducible] upperStar lowerStar squareUpperStarIso
   Functor.mapDerivedCategory Functor.mapDerivedCategoryFactors Functor.mapDerivedCategoryFactorsh
   Functor.rightDerivedFunctor Functor.rightDerivedFunctorUnit Functor.rightDerivedFunctorUnitQ
   Functor.rightDerivedFunctorObjQIso
-  Functor.mapDerivedCategoryNatIso Functor.mapDerivedCategoryCompIso
+  Functor.mapDerivedCategoryNatIso
 
 private theorem square_factors
     {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
@@ -77,6 +77,6 @@ private theorem square_factors
   simp only [NatTrans.comp_app, Category.assoc]
   erw [h₂, h₃, ← h₁]
   simp only [Category.assoc]
-  erw [Iso.inv_hom_id_app_assoc]
+  erw [Iso.hom_inv_id_app_assoc]
 
 end AlgebraicGeometry.Etale
