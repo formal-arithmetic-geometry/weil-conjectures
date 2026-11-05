@@ -10,6 +10,7 @@ public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.Algebra.Polynomial.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
+public import Mathlib.RingTheory.AdjoinRoot
 
 /-!
 # Base change of a simple degree-p field presentation

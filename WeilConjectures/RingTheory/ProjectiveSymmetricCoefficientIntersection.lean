@@ -131,8 +131,8 @@ theorem projective_symmetric_coefficient_intersection
   have hcoeff : ∀ x : Q, x ∈ H → ∀ d, MvPolynomial.C (AddMonoidAlgebra.coeff x d) ∈ H := by
     intro x hx d
     change π (MvPolynomial.C (AddMonoidAlgebra.coeff x d)) = 0
-    have hc := congrArg (MvPolynomial.coeff d) (show π x = 0 from hx)
-    have hc' : Ideal.Quotient.mk I (MvPolynomial.coeff d x) = 0 := by
+    have hc := congrArg (fun p ↦ AddMonoidAlgebra.coeff p d) (show π x = 0 from hx)
+    have hc' : Ideal.Quotient.mk I (AddMonoidAlgebra.coeff x d) = 0 := by
       rw [← MvPolynomial.coeff_map (Ideal.Quotient.mk I) x d]
       exact hc
     rw [MvPolynomial.map_C, hc', MvPolynomial.C_0]
@@ -146,8 +146,8 @@ theorem projective_symmetric_coefficient_intersection
     have hmono : MvPolynomial.monomial d (AddMonoidAlgebra.coeff x d) =
         MvPolynomial.C (AddMonoidAlgebra.coeff x d) * MvPolynomial.monomial d 1 := by
       simp [MvPolynomial.monomial_eq]
-    rw [hmono, map_mul, show β (MvPolynomial.C (MvPolynomial.coeff d x)) =
-      MvPolynomial.C (MvPolynomial.coeff d x) from MvPolynomial.eval₂Hom_C _ _ _,
+    rw [hmono, map_mul, show β (MvPolynomial.C (AddMonoidAlgebra.coeff x d)) =
+      MvPolynomial.C (AddMonoidAlgebra.coeff x d) from MvPolynomial.eval₂Hom_C _ _ _,
       ← mul_sub]
     exact Ideal.mul_mem_mul (hcoeff x hx d) (hdiff _)
   change H ⊓ J ^ 2 = H * J
