@@ -183,17 +183,23 @@
 - Handoff records: `/home/ubuntu/u9/bz/FIXES-BZ646.md` and `/home/ubuntu/u9/state/BZ646.DONE`.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
 
-# PZ004 in progress
+# PZ004 complete
 
-- Branch: `u9/PZ004`; starting commit: `6a2f94596`.
-- The user instructed continuation after the explicit four-private-helper API patch proposal.
-  That patch is now applied, preserving the square comparisons under Mathlib's reversed compositor.
-- Added public and implementation Localization imports for the strict-tower hidden Qh proof reduction.
-- The internal unit map now uses the canonical homotopy factorization; its proof unfolds to rfl.
-- Updated compositor definition bodies, inverse cancellation, and the balancing map_id rewrite.
-- All three assigned modules passed `ucheck-bump` at source commit `e6ef96a921` (4749 jobs).
-- Full unit log: `/home/ubuntu/u9/bz/BUILD-PZ004-unit-green-full.log`.
-- Exact prior errors: `/home/ubuntu/u9/bz/BUILD-PZ004-prior-errors.log`.
-- Fix records and whole-tree inventories: `/home/ubuntu/u9/bz/FIXES-PZ004.md`.
-- Next: validate four direct importers, resolve owned downstream errors, then write DONE.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+- Branch: `u9/PZ004`; baseline: `6a2f94596`.
+- All three assigned modules passed `ucheck-bump` together at `e6ef96a92174a542b10314c70b8e808c55543e51`
+  (4749 jobs). Their Lean files are unchanged in the final source tree.
+- Five downstream modules are green: StrictTowerOpenExtension,
+  FiniteConstantCoefficientTransport, FiniteOpenBaseChangeNormalized,
+  TowerSquareUnitSections, ScalarRestrictionOpenSupport.
+- Final downstream build at `ffe256e2b966d4316b52a27eb7ac85a3a4ae4561`: rc=0, failed=0, 5844 jobs.
+- Ported compositor directions, explicit homotopy factorization of the unit map,
+  hidden-Qh proof imports, inverse cancellation, and the balancing identity rewrite.
+  The user's continuation authorized the proposed private-helper API repairs.
+- Coordinate importers were skipped per ownership rule: unowned
+  FiniteFreePresentedScalarCoordinates.lean:111 lacks an HSMul instance.
+  No changes to the blocked coordinate modules remain in the final diff.
+- Logs: `/home/ubuntu/u9/bz/BUILD-PZ004-unit-green-full.log` and
+  `/home/ubuntu/u9/bz/BUILD-PZ004-downstream2-green-full.log`.
+- Handoff: `/home/ubuntu/u9/bz/FIXES-PZ004.md`, `/home/ubuntu/u9/state/PZ004.DONE`.
+- No local Lean/Lake, sorries, trust bypasses, option increases, or docstring changes.
+- This completion commit changes only documentation after successful source validation.
