@@ -17,7 +17,7 @@ The coefficient-changed root object retains its original spelling. Pullback,
 the comparison maps and their compatibility equations are exported separately.
 -/
 
-public section
+@[expose] public section
 
 set_option profiler true
 set_option profiler.threshold 1

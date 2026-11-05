@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.WeilSheaf.SmoothPurityK4NativeReadingBoundary
+public import WeilConjectures.WeilSheaf.SmoothPurityK4NativeReadingEquation
 import WeilConjectures.Tactic.ExactModProofs
 
 /-! # The finite étale reading of the integral one-twist datum -/
@@ -42,56 +42,25 @@ lemma purity_finiteCoefficientIntegralTateOneReading_eq
 geometric pullback datum. -/
 lemma purity_finiteCoefficientIntegralTateOneReading_pullback
     {X Y : Scheme.{u}} (g : X ⟶ Y) (f : Y ⟶ Spec (.of k)) :
-    (finiteCoefficientModEquivalence X (PadicAlgCl.integersModPow ℓ E n)).functor.map
-          ((pullIso (Profinite.padicIntegersRingObjToIntegersModPow ℓ E n) g).inv.app
-            (integralTateTwistOne Y ℓ E)) ≫
-        (finiteCoefficientModEquivalence X (PadicAlgCl.integersModPow ℓ E n)).functor.map
-          ((Mod.extendScalars (integersModPowReduction X ℓ E n)).map
-            (upperStarIntegralTateTwistOneIso ℓ E g f).hom) ≫
-        (finiteCoefficientModEquivalenceExtendScalarsIntegralTateTwistOneIso
-          ℓ E n (g ≫ f)).hom =
-      (upperStarFiniteCoefficientModEquivalenceIso g
-        (PadicAlgCl.integersModPow ℓ E n)).hom.app
-          ((Mod.extendScalars (integersModPowReduction Y ℓ E n)).obj
-            (integralTateTwistOne Y ℓ E)) ≫
-        (g)^*[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)].map
-          (finiteCoefficientModEquivalenceExtendScalarsIntegralTateTwistOneIso ℓ E n f).hom ≫
-        (comparisonUpperStarUpperStarIso
-          (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) g).hom.app
-            (Etale.tateSheaf (integersModPowCoeff.{u} ℓ E n) Y) ≫
-        ν^*(X)[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)].map
-          (Etale.upperStarTateSheafToTateSheaf (integersModPowCoeff.{u} ℓ E n) g) := by
-  have h := K4Native.purity_finiteCoefficientIntegralTateOneReading_pullback ℓ E n g f
-  simp only [K4Native.finiteCoefficientModEquivalence_eq,
-    K4Native.upperStarFiniteCoefficientModEquivalenceIso_eq,
-    K4Native.finiteCoefficientModEquivalenceExtendScalarsIntegralTateTwistOneIso_eq] at h
-  dsimp +instances only [Functor.comp_obj, Functor.comp_map, integersModPowReduction] at h ⊢
-  exact_mod_proofs h
+    K4Native.finiteReadingEquation ℓ E n g f
+      (finiteCoefficientModEquivalence X (PadicAlgCl.integersModPow ℓ E n))
+      (finiteCoefficientModEquivalence Y (PadicAlgCl.integersModPow ℓ E n))
+      (upperStarFiniteCoefficientModEquivalenceIso g (PadicAlgCl.integersModPow ℓ E n))
+      (finiteCoefficientModEquivalenceExtendScalarsIntegralTateTwistOneIso ℓ E n (g ≫ f))
+      (finiteCoefficientModEquivalenceExtendScalarsIntegralTateTwistOneIso ℓ E n f) := by
+  exact K4Native.finiteReadingEquation_original ℓ E n g f
 
 
 /-- The actual finite-coefficient reading of the integral Tate line preserves its
 geometric pullback datum. -/
 lemma purity_finiteCoefficientIntegralTateOneReading_pullback_exact
     {X Y : Scheme.{u}} (g : X ⟶ Y) (f : Y ⟶ Spec (.of k)) :
-    (finiteCoefficientModEquivalence X (PadicAlgCl.integersModPow ℓ E n)).functor.map
-          ((pullIso (Profinite.padicIntegersRingObjToIntegersModPow ℓ E n) g).inv.app
-            (integralTateTwistOne Y ℓ E)) ≫
-        (finiteCoefficientModEquivalence X (PadicAlgCl.integersModPow ℓ E n)).functor.map
-          ((Mod.extendScalars (integersModPowReduction X ℓ E n)).map
-            (upperStarIntegralTateTwistOneIso ℓ E g f).hom) ≫
-        (finiteCoefficientModEquivalenceExtendScalarsIntegralTateTwistOneIso
-          ℓ E n (g ≫ f)).hom =
-      (upperStarFiniteCoefficientModEquivalenceIso g
-        (PadicAlgCl.integersModPow ℓ E n)).hom.app
-          ((Mod.extendScalars (integersModPowReduction Y ℓ E n)).obj
-            (integralTateTwistOne Y ℓ E)) ≫
-        (g)^*[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)].map
-          (finiteCoefficientModEquivalenceExtendScalarsIntegralTateTwistOneIso ℓ E n f).hom ≫
-        (comparisonUpperStarUpperStarIso
-          (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) g).hom.app
-            (Etale.tateSheaf (integersModPowCoeff.{u} ℓ E n) Y) ≫
-        ν^*(X)[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)].map
-          (Etale.upperStarTateSheafToTateSheaf (integersModPowCoeff.{u} ℓ E n) g) := by
-  exact_mod_proofs purity_finiteCoefficientIntegralTateOneReading_pullback ℓ E n g f
+    K4Native.finiteReadingEquation ℓ E n g f
+      (finiteCoefficientModEquivalence X (PadicAlgCl.integersModPow ℓ E n))
+      (finiteCoefficientModEquivalence Y (PadicAlgCl.integersModPow ℓ E n))
+      (upperStarFiniteCoefficientModEquivalenceIso g (PadicAlgCl.integersModPow ℓ E n))
+      (finiteCoefficientModEquivalenceExtendScalarsIntegralTateTwistOneIso ℓ E n (g ≫ f))
+      (finiteCoefficientModEquivalenceExtendScalarsIntegralTateTwistOneIso ℓ E n f) := by
+  exact purity_finiteCoefficientIntegralTateOneReading_pullback ℓ E n g f
 
 end AlgebraicGeometry.ProEtale
