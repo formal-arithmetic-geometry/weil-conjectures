@@ -28,9 +28,6 @@ variable (S : SystemScalarAssignment (J := J)) (T : SystemTensorCoherence S)
   {B D : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}} (a : B ⟶ D)
   (A : SystemScalarModel (singletonSequenceRingMap a))
 
-end SheafOfModules
-
-namespace SheafOfModules
 
 /-- The normalized singleton coefficient comparisons commute with the canonical
 lower-singleton maps and the specified scalar associators.

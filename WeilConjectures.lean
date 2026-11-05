@@ -9788,7 +9788,6 @@ public import WeilConjectures.AlgebraicGeometry.Picard.Residue.PicardResidueHomo
 public import WeilConjectures.AlgebraicGeometry.Picard.Residue.PicardResidueNormalizationMap
 public import WeilConjectures.AlgebraicGeometry.Picard.Scheme
 public import WeilConjectures.AlgebraicGeometry.Picard.Seams
-public import WeilConjectures.AlgebraicGeometry.Picard.SfbCompletionNormalization
 public import WeilConjectures.AlgebraicGeometry.Picard.Termwise.PicardTermwiseModelComparison
 public import WeilConjectures.AlgebraicGeometry.Picard.Termwise.PicardTermwiseSingleMapComposition
 public import WeilConjectures.AlgebraicGeometry.Picard.Termwise.PicardTermwiseSourceCoherence

@@ -174,6 +174,8 @@ def singletonRestrictionEvaluation (n : ℕ) :
     (PresheafOfModules.isoMk (fun U ↦ Iso.refl _) (by intros; ext x; rfl)))
     (by intros; ext U x; rfl)
 
+variable (A : SystemScalarModel (singletonSequenceRingMap a))
+
 /-- The ordinary comparison is the conjugate of identity-on-sections restriction.
 Source: Stacks 03D7 and 03EK
 (blueprint: def-pur-system-singleton-scalar-comparisons). -/
@@ -242,7 +244,5 @@ def singletonScalarSquare (n m : ℕ) (h : n ≤ m) :
   (systemScalarModelDerivedComposition (a.naturality (homOfLE h).op)
     (S (a.app (op m))) (S (D.map (homOfLE h).op))
       (S (B.map (homOfLE h).op ≫ a.app (op n)))).symm
-
-variable (A : SystemScalarModel (singletonSequenceRingMap a))
 
 end SheafOfModules

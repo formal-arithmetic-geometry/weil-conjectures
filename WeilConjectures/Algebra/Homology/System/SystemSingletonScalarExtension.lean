@@ -180,9 +180,6 @@ variable (S : SystemScalarAssignment (J := J)) (T : SystemTensorCoherence S)
   {B D : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}} (a : B ⟶ D)
   (A : SystemScalarModel (singletonSequenceRingMap a))
 
-end SheafOfModules
-
-namespace SheafOfModules
 
 private def singletonIdentityInverseImage (R : Sheaf J CommRingCat.{w}) :
     AlgebraicInverseImage (𝟭 (Sheaf J (Type w))) R R where
