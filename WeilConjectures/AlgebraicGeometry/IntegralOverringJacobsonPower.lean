@@ -82,7 +82,10 @@ theorem integral_overring_jacobson_power
     have heq : Ideal.comap (algebraMap A B') q.asIdeal = p.asIdeal :=
       congrArg PrimeSpectrum.asIdeal hq
     have hm : q.asIdeal.IsMaximal :=
-      Ideal.isMaximal_of_isIntegral_of_isMaximal_under (R := A) q.asIdeal (heq ▸ p.isMaximal)
+      Ideal.isMaximal_of_isIntegral_of_isMaximal_under (R := A) q.asIdeal (by
+        change (Ideal.comap (algebraMap A B') q.asIdeal).IsMaximal
+        rw [heq]
+        exact p.isMaximal)
     exact ⟨⟨q.asIdeal, hm⟩, heq⟩
   let f : MaximalSpectrum B' → MaximalSpectrum A := fun q ↦
     ⟨Ideal.comap (algebraMap A B') q.asIdeal,
