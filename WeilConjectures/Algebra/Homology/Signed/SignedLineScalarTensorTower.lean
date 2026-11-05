@@ -676,7 +676,7 @@ noncomputable def signedLinePower {R : Sheaf J CommRingCat.{max uC vC u}}
   | .negSucc n => homObj (scalarTensorPower R L (n + 1))
       (unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
 
-private noncomputable local instance {A B : Type*} [Ring A] [Ring B] (f : A →+* B)
+noncomputable local instance {A B : Type*} [Ring A] [Ring B] (f : A →+* B)
     (M : ModuleCat.{max uC vC u} B) : Module B ((ModuleCat.restrictScalars f).obj M) :=
   inferInstanceAs (Module B M)
 
