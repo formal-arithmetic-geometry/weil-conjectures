@@ -63,7 +63,7 @@ lemma mapDerivedCategoryAdjunction_unit_app_Qh_obj (X : HomotopyCategory C (.up 
     ((f.mapHomotopyCategory (.up ℤ)).obj X)
   have h₄ := g.rightDerivedFunctorIsoMapDerivedCategory.hom.naturality
     (f.mapDerivedCategoryFactorsh.hom.app X)
-  dsimp at h₁ h₂ h₃ h₄
+  dsimp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.comp_obj] at h₁ h₂ h₃ h₄
   simp only [mapDerivedCategoryAdjunction, ofNatIsoRight_unit, ofNatIsoLeft_unit,
     NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app, Category.assoc]
   rw [← reassoc_of% h₄, ← Functor.map_comp_assoc, h₂]
@@ -90,7 +90,7 @@ lemma mapDerivedCategoryAdjunction_counit_app_Qh_obj (X : HomotopyCategory D (.u
   have h₃ := NatTrans.congr_app g.rightDerivedFunctorIsoMapDerivedCategory_hom_fac X
   have h₄ := f.leftDerivedFunctorIsoMapDerivedCategory.inv.naturality
     (g.rightDerivedFunctorUnit.app X)
-  dsimp at h₁ h₂ h₃ h₄
+  dsimp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.comp_obj] at h₁ h₂ h₃ h₄
   have h₃' : g.rightDerivedFunctorIsoMapDerivedCategory.inv.app (DerivedCategory.Qh.obj X) =
       g.mapDerivedCategoryFactorsh.hom.app X ≫ g.rightDerivedFunctorUnit.app X := by
     rw [← cancel_mono (g.rightDerivedFunctorIsoMapDerivedCategory.hom.app _),
