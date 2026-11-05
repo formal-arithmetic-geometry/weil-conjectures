@@ -10,10 +10,11 @@ public import Mathlib.RingTheory.FiniteType
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
 
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import WeilConjectures.SixFunctors.Finite.Exact
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusExact
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusExact
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
 import WeilConjectures.Compactification.NagataCompactification
 import WeilConjectures.CategoryTheory.Abelian.PrimeFactorDevissage
@@ -26,7 +27,7 @@ import WeilConjectures.AlgebraicGeometry.Etale.Open.EtaleOpenCoverShriekNaturalS
 import WeilConjectures.AlgebraicGeometry.Lisse.Finite.LisseFiniteEtaleFiltration
 import WeilConjectures.AlgebraicGeometry.Curve.DisjointOpenExtensionBiproduct
 import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
-import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 
 /-!
@@ -50,19 +51,23 @@ set_option backward.isDefEq.respectTransparency true
 
 section StableInstances
 
-@[instance_reducible] private noncomputable def stableAbelian
+/-- A fixed abelian structure on étale sheaves of modules, used as a high-priority local
+instance to keep instance paths stable. -/
+@[instance_reducible] noncomputable def etaleSheafModuleAbelian
     (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u}) :
     Abelian (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) := inferInstance
 
-attribute [local instance 2000] stableAbelian
+attribute [local instance 2000] etaleSheafModuleAbelian
 
-@[instance_reducible] private noncomputable def stableDerived
+/-- A fixed choice of derived category of étale sheaves of modules, compatible with
+`etaleSheafModuleAbelian`. -/
+@[instance_reducible] noncomputable def etaleSheafModuleHasDerivedCategory
     (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u}) :
     HasDerivedCategory.{u + 1} (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) := by
-  unfold stableAbelian
+  unfold etaleSheafModuleAbelian
   infer_instance
 
-attribute [local instance 2000] stableDerived
+attribute [local instance 2000] etaleSheafModuleHasDerivedCategory
 
 -- Stalk calculation adapted from Bin Wu, FiniteEtaleModuleTraceData.
 private theorem lisse_unit_stalk_component
@@ -109,7 +114,9 @@ private theorem lisse_trace_stalk_component
   simp
 
 -- The trace proof tests equality only at algebraically closed stalks.
-private theorem lisse_trace_degree
+/-- For a finite étale map of constant geometric degree `d`, the trace retracts the
+adjunction unit up to multiplication by `d`. -/
+theorem lisse_trace_degree
     {X Y : Scheme.{u}} (R : Type (u + 1)) [CommRing R]
     (f : Y ⟶ X) [IsFinite f] [Etale f]
     (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)) (d : ℕ)
@@ -164,23 +171,29 @@ private theorem lisse_trace_degree
       erw [Finset.sum_const, Finset.card_univ, ← Nat.card_eq_fintype_card,
         hdeg _ s, ← Nat.cast_smul_eq_nsmul R]
 
-private noncomputable abbrev singleZero (C : Type*) [Category* C] [Abelian C]
+/-- The single-complex functor in degree zero to the bounded-below derived category. -/
+noncomputable abbrev singleZero (C : Type*) [Category* C] [Abelian C]
     [HasDerivedCategory C] : C ⥤ _root_.DerivedCategory.Plus C :=
   _root_.DerivedCategory.Plus.singleFunctor C 0
 
-private theorem property_natIso
+/-- An isomorphism-closed property holds on `F.obj K` iff it holds on `G.obj K` for
+naturally isomorphic functors. -/
+theorem prop_iff_of_natIso
     {C D : Type*} [Category* C] [Category* D]
     (W : ObjectProperty D) [W.IsClosedUnderIsomorphisms]
     {F G : C ⥤ D} (e : F ≅ G) (K : C) : W (F.obj K) ↔ W (G.obj K) :=
   W.prop_iff_of_iso (e.app K)
 
-private theorem abelian_biproducts
+/-- An abelian category has finite biproducts for any choice of zero morphisms. -/
+theorem abelian_hasFiniteBiproducts
     {C : Type*} [Category* C] [Abelian C] [Z : HasZeroMorphisms C] :
     HasFiniteBiproducts C := by
   obtain rfl : Z = Preadditive.preadditiveHasZeroMorphisms := Subsingleton.elim _ _
   exact Abelian.hasFiniteBiproducts
 
-private theorem property_image_biproduct
+/-- A property closed under finite products holds on the image of a finite biproduct
+if it holds on the images of its summands. -/
+theorem objectProperty_map_biproduct
     {C D : Type*} [Category* C] [Category* D]
     [HasZeroMorphisms C] [HasZeroMorphisms D]
     (F : C ⥤ D) [F.PreservesZeroMorphisms]
@@ -190,7 +203,8 @@ private theorem property_image_biproduct
     W (F.obj (⨁ G)) := by
   exact W.prop_of_iso (F.mapBiproduct G ≪≫ biproduct.isoProduct _).symm (W.prop_product hG)
 
-private abbrev constructibleProperty (Λ : Type (u + 1)) [CommRing Λ]
+/-- The constructible étale sheaves of `Λ`-modules, as an object property. -/
+abbrev constructibleProperty (Λ : Type (u + 1)) [CommRing Λ]
     (X : Scheme.{u}) : ObjectProperty (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
   fun F ↦ Scheme.IsConstructibleSheaf F
 
@@ -229,7 +243,7 @@ private instance (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (X : Scheme.{u}) 
 
 /-- The bounded-below compact-support functor of the specified compactification. -/
 @[irreducible]
-private noncomputable def shriekFunctor
+noncomputable def shriekFunctor
     (A : Type u') [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
@@ -261,7 +275,9 @@ private instance
   unfold shriekFunctor
   infer_instance
 
-private noncomputable def shriekOpenIso
+/-- For an open immersion, compact support with the trivial compactification is the
+derived extension by zero. -/
+noncomputable def shriekOpenIso
     (A : Type u') [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A]
     {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] :
@@ -270,14 +286,17 @@ private noncomputable def shriekOpenIso
   unfold shriekFunctor
   exact Functor.isoWhiskerLeft _ (lowerStarIdDerivedPlus A Y) ≪≫ Functor.rightUnitor _
 
-private noncomputable def shriekIdentityIso
+/-- The extension by zero along the identity is the identity functor. -/
+noncomputable def shriekIdentityIso
     (A : Type u') [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A]
     (X : Scheme.{u}) : openImmersionLowerShriek A (𝟙 X) ≅ 𝟭 _ :=
   (openImmersionLowerShriekUpperStarAdjunction A (𝟙 X)).leftAdjointUniq
     (Adjunction.id.ofNatIsoRight (upperStarId A X).symm)
 
-private noncomputable def shriekProperIso
+/-- For a proper morphism, compact support with the identity compactification is the
+derived direct image. -/
+noncomputable def shriekProperIso
     (A : Type u') [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]
@@ -308,11 +327,13 @@ private theorem shriek_comp
   unfold shriekFunctor
   exact nonempty_iso_etaleShriek_qcqs_compactification_comp Λ f g cf cg cgf
 
-private def plusProperty {C : Type*} [Category* C] [Abelian C] [HasDerivedCategory C]
+/-- Bounded-below complexes all of whose cohomology objects satisfy `P`. -/
+def plusProperty {C : Type*} [Category* C] [Abelian C] [HasDerivedCategory C]
     (P : ObjectProperty C) : ObjectProperty (_root_.DerivedCategory.Plus C) :=
   fun K ↦ ∀ q : ℤ, P ((_root_.DerivedCategory.Plus.homologyFunctor C q).obj K)
 
-private theorem plusProperty_eq {C : Type*} [Category* C] [Abelian C]
+/-- `plusProperty` is the inverse image of the homology property along the inclusion. -/
+theorem plusProperty_eq {C : Type*} [Category* C] [Abelian C]
     [HasDerivedCategory C] (P : ObjectProperty C) :
     plusProperty P = (_root_.DerivedCategory.homologyProperty P).inverseImage
       _root_.DerivedCategory.Plus.ι := rfl
@@ -326,7 +347,8 @@ private instance {C : Type*} [Category* C] [Abelian C] [HasDerivedCategory C]
     [P.IsClosedUnderKernels] [P.IsClosedUnderCokernels] [P.IsClosedUnderExtensions] :
     (plusProperty P).IsTriangulated := by rw [plusProperty_eq]; infer_instance
 
-@[irreducible] private noncomputable def sourceFunctor
+/-- Compact support applied to a sheaf placed in degree zero. -/
+@[irreducible] noncomputable def sourceFunctor
     (A : Type u') [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
@@ -358,7 +380,8 @@ private theorem constant_shriek
   unfold sourceFunctor shriekFunctor
   exact constructibleCohomology_lowerShriek_constant_of_smooth_relativeDimension_one Λ A h hΛ M c q
 
-private def cohomologySourceProperty
+/-- The sheaves whose compactly supported cohomology sheaves all satisfy `P`. -/
+def cohomologySourceProperty
     (A : Type u') [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A]
     {X Y : Scheme.{u}} (P : ObjectProperty (Sheaf Y.smallEtaleTopology A))
@@ -386,7 +409,8 @@ private instance (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
   unfold sourceProperty cohomologySourceProperty
   infer_instance
 
-private noncomputable def single_composite_iso
+/-- Compose a single-degree inclusion with an exact functor and a derived identification. -/
+noncomputable def single_composite_iso
     {C D E : Type*} [Category* C] [Category* D] [Category* E]
     [Abelian C] [Abelian D] [HasDerivedCategory C] [HasDerivedCategory D]
     (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
@@ -442,9 +466,11 @@ private theorem sourceProperty_openExtension
   have : CompactSpace T.toScheme := isCompact_iff_compactSpace.mp hT
   have : QuasiSeparatedSpace T.toScheme := T.ι.isOpenEmbedding.quasiSeparatedSpace
   obtain ⟨e⟩ := source_open_hom_comp Λ T.ι f c ca
-  exact (property_natIso (plusProperty (constructibleProperty Λ Y)) e Q).mpr h
+  exact (prop_iff_of_natIso (plusProperty (constructibleProperty Λ Y)) e Q).mpr h
 
-private theorem sourceFunctor_shortExact
+/-- Two-out-of-three for the compactly supported cohomology property along a short exact
+sequence of sheaves. -/
+theorem sourceFunctor_shortExact
     (A : Type u') [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
@@ -508,7 +534,9 @@ private theorem cohomology_property_filtration
   obtain ⟨M, hM, ⟨e⟩⟩ := hQ i
   exact ((plusProperty P).inverseImage ((singleZero C) ⋙ Φ)).prop_of_iso e.symm (hT M hM)
 
-private theorem sourceFunctor_filtration
+/-- A finite filtration whose graded pieces have constructible-type compactly supported
+cohomology gives the same property for the filtered sheaf. -/
+theorem sourceFunctor_filtration
     (A : Type u') [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
@@ -571,7 +599,7 @@ private theorem shriekProperty_disjoint
     sourceProperty Λ c L := by
   classical
   let A := ModuleCat.{u + 1} Λ
-  have : HasFiniteBiproducts (Sheaf X.smallEtaleTopology A) := abelian_biproducts
+  have : HasFiniteBiproducts (Sheaf X.smallEtaleTopology A) := abelian_hasFiniteBiproducts
   let G (a : Fin n) := (openImmersionLowerShriek A (U a).ι).obj
     ((upperStar A (U a).ι).obj L)
   have htop : (⨆ a, U a) = ⊤ := by
@@ -593,7 +621,7 @@ private theorem shriekProperty_disjoint
       (inferInstance : HasCompactification ((U a).ι ≫ f)).nonempty_compactification
     exact sourceProperty_openExtension Λ f c (U a) (hcompact a) ca _ (hlocal a ca)
   apply (sourceProperty Λ c).prop_of_iso eL.symm
-  exact property_image_biproduct (sourceFunctor A c)
+  exact objectProperty_map_biproduct (sourceFunctor A c)
     (plusProperty (constructibleProperty Λ Y)) G hG
 
 private theorem shriekProperty_affine_prime
@@ -638,7 +666,7 @@ private theorem shriekProperty_affine_prime
       ((upperStar B (U a).ι).obj G) r F hF h₀ hᵣ hQ
   obtain ⟨ecomp⟩ := source_proper_comp Λ g f c cf
   have hpush : sourceProperty Λ c ((lowerStar B g).obj G) :=
-    (property_natIso (plusProperty (constructibleProperty Λ (Spec (.of R)))) ecomp G).mpr hG
+    (prop_iff_of_natIso (plusProperty (constructibleProperty Λ (Spec (.of R)))) ecomp G).mpr hG
   obtain ⟨t, ht⟩ := lisse_trace_degree Λ g L d hdeg
   obtain ⟨a, _, ha⟩ := Nat.exists_mul_mod_eq_one_of_coprime
     ((hℓ.coprime_iff_not_dvd.mpr hd).symm) hℓ.one_lt
@@ -656,7 +684,10 @@ private theorem shriekProperty_affine_prime
   have : Scheme.IsConstructibleSheaf (H.obj ((lowerStar B g).obj G)) := hpush q
   exact Scheme.IsConstructibleSheaf.of_retract (retract.map H)
 
-private theorem property_prime_induction
+/-- Strong induction on a positive integer killing an object: a property closed under
+extensions holds on every object killed by a positive integer if it holds on objects killed by
+a prime, provided the auxiliary property is stable under kernels and images of multiples. -/
+theorem objectProperty_of_nsmul_id_eq_zero
     {C : Type*} [Category* C] [Abelian C] [Z : HasZeroMorphisms C]
     (P H : ObjectProperty C)
     (hext : ∀ S : ShortComplex C, S.ShortExact → P S.X₁ → P S.X₃ → P S.X₂)
@@ -703,7 +734,7 @@ private theorem shriekProperty_spec
     have := Scheme.IsFiniteLocallyConstantSheaf.cokernel (kernel.ι (r • 𝟙 F))
     exact Scheme.IsFiniteLocallyConstantSheaf.of_iso (Abelian.coimageIsoImage' (r • 𝟙 F))
   let : Fintype Λ := Fintype.ofFinite Λ
-  apply property_prime_induction (sourceProperty Λ c) H
+  apply objectProperty_of_nsmul_id_eq_zero (sourceProperty Λ c) H
     (shriekProperty_shortExact Λ c) hk hi
     (fun r hr F hF hkill ↦ by
       have : Scheme.IsFiniteLocallyConstantSheaf F := hF
@@ -725,7 +756,7 @@ private theorem shriekProperty_iso_source
   obtain ⟨ec⟩ := source_open_hom_comp Λ e.hom f c c'
   apply (sourceProperty Λ c).prop_of_iso
     (asIso ((openImmersionLowerShriekUpperStarAdjunction B e.hom).counit.app L))
-  exact (property_natIso (plusProperty (constructibleProperty Λ Y)) ec
+  exact (prop_iff_of_natIso (plusProperty (constructibleProperty Λ Y)) ec
     ((upperStar B e.hom).obj L)).mpr h
 
 private theorem shriekProperty_affine
@@ -911,9 +942,9 @@ theorem isConstructibleEtaleModuleSheaf_lisse_openRelativeLine_shriek
             (Sheaf U.toScheme.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0).obj L))) := by
   classical
   let : ∀ X : Scheme.{u}, Abelian
-      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) := stableAbelian Λ
+      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) := etaleSheafModuleAbelian Λ
   let : ∀ X : Scheme.{u}, HasDerivedCategory.{u + 1}
-      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) := stableDerived Λ
+      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) := etaleSheafModuleHasDerivedCategory Λ
   have : IsNoetherianRing R := Algebra.FiniteType.isNoetherianRing ℤ R
   let X := U.toScheme
   let f := U.ι ≫ (AffineSpace (ULift.{u} (Fin 1)) (Spec (.of R)) ↘ Spec (.of R))
