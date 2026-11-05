@@ -153,15 +153,22 @@
 - Notes and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ557.md`.
 - No local Lean/Lake, statement changes, proof escapes, or heartbeat increases.
 
-# BZ573 in progress
+# BZ573 complete
 
 - Branch: `u9/BZ573`; starting commit: `8af5cb3248338412e860fdc16db73c8eeebd81d9`.
-- The user instructed continuation after the exact one-line private helper API proposal.
-  Removed `.symm` in `exact_comp_normalization` and updated inverse cancellation.
-  All public statements are unchanged.
-- Removed obsolete local irreducible attributes for Mathlib's no_expose derived comparisons.
-- Baseline remote build was blocked by unowned `Presheaf.InternalHom` (BZ581).
-  Waiting for its owner's repair; no unowned source files changed.
-- Next: validate the owned module with `ucheck-bump`, then its direct importer.
-- Fix patterns and logs: `/home/ubuntu/u9/bz/FIXES-BZ573.md`.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
+- Assigned module `WeilConjectures.AlgebraicGeometry.QuotientChange.InternalScalarMateTransitivity`
+  passed `ucheck-bump`: rc=0, built=4, failed=0, 4083 jobs; target rebuilt in 39 seconds.
+- Validated source commit: `99ea0bf21a3ff18e8c7a102f6e05daf121d477ba`.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ573-final-full.log`.
+- Applied the one-line private helper API correction after the user instructed continuation;
+  updated inverse cancellation and removed obsolete local reducibility attributes.
+  All public statements, binders, assumptions, and existing docstrings are unchanged.
+- Incorporated owner/coordinator dependency repairs, including BZ581 and sweep29.
+- The direct importer was attempted and skipped because its unowned dependency
+  `WeilConjectures.CategoryTheory.Abelian.Ext.MapExactFunctor` (BZ589) fails at 230:16.
+  Stopped that blocked batch after the assigned target passed; no downstream source edits.
+- Patterns, counts, and evidence: `/home/ubuntu/u9/bz/FIXES-BZ573.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ573-contract-audit.txt` (46 declaration headers).
+- No local Lean/Lake, proof placeholders, trust bypasses, profiler probes, or limit increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ573.DONE`.
+- This final commit changes only progress documentation; Lean sources match the green build.
