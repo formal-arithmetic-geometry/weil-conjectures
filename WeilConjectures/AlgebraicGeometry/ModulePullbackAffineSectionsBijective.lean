@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.LinearAlgebra.TensorProduct.Map
 import WeilConjectures.AlgebraicGeometry.Modules.PullbackTilde
 import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineChartUnit
