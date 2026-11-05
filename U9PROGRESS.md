@@ -162,3 +162,8 @@
 - User continuation followed the explicit one-line dependency patch proposal;
   that exact compatibility-namespace proof repair is now applied.
 - Retrying the assigned module; declarations and heartbeat settings unchanged.
+
+- Compatibility build validated Presheaf.InternalHom and exposed the identical
+  copied-proof failure in Algebra.Homology.KFlat:82. Applied the same one-line
+  namespace correction there; no old-name occurrences remain in the target closure.
+- Retrying the target after these two minimal dependency proof corrections.
