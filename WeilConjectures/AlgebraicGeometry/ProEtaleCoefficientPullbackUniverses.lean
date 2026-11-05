@@ -115,6 +115,7 @@ noncomputable def coefficientProEtaleModuleDirectImage {X Y : Scheme.{t}} (f : X
     ⟨Functor.whiskerRight (coefficientProEtaleDirectRingMap f A).hom
       (forget₂ CommRingCat.{max r (t + 1)} RingCat.{max r (t + 1)})⟩
 
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The module Kan extension and sheafification supply the left adjoint in the
 independent coefficient universe.
 Source: Stacks Tags 00VC and 03D2 (auxiliary; not a blueprint node).
@@ -149,18 +150,11 @@ theorem coefficientProEtaleModuleDirectImage_isRightAdjoint {X Y : Scheme.{t}} (
             (ProEt.topology Z)).obj (rings Z)) (𝟙 _) (𝟙 _)
       (by ext : 2; exact (rings Z).obj.map_id _)
       (by ext : 2; exact (rings Z).obj.map_id _)
-  have : HasWeakSheafify (coefficientProEtaleModelTopology.{t, r} X)
-      AddCommGrpCat.{max r (t + 1)} := by
-    infer_instance
-  have : (coefficientProEtaleModelTopology.{t, r} X).WEqualsLocallyBijective
-      AddCommGrpCat.{max r (t + 1)} := by
-    infer_instance
   let smallPush := SheafOfModules.pushforward.{max r (t + 1)}
     (coefficientProEtaleModelRingMap f A)
   have : smallPush.IsRightAdjoint := by
-    exact (SheafOfModules.PullbackConstruction.adjunction.{max r (t + 1)}
-      (F := coefficientProEtaleModelBaseChange f)
-      (coefficientProEtaleModelRingMap f A)).isRightAdjoint
+    dsimp [smallPush]
+    infer_instance
   have hx : (e X).inverse.IsRightAdjoint := (e X).isRightAdjoint_inverse
   have hy : (e Y).functor.IsRightAdjoint := (e Y).isRightAdjoint_functor
   apply Functor.isRightAdjoint_of_iso
