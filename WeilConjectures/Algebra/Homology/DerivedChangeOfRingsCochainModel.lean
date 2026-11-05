@@ -82,7 +82,6 @@ private noncomputable def pointwise_change_iso
   intro X
   dsimp [Functor.RightExtension.coneAt, Functor.RightExtension.mk, Φ, k]
   simp [Category.assoc]
-  rfl
 
 namespace SheafOfModules
 
