@@ -20,6 +20,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersion
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Monoidal
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionBaseChange
 public import WeilConjectures.ConstructibleSheaf.Defs
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.PurityFrameKummer
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import WeilConjectures.AlgebraicGeometry.Abelian.AbelianEtaleProEtaleCohomologyComparison
 import WeilConjectures.CategoryTheory.LeftModuleDerivedEvaluation.LeftModuleDerivedEvaluationForget
@@ -94,17 +95,6 @@ def frameCoefficientPullback (P : PurityFiniteSetting.{u})
       (P.twistEtale h Y) ≪≫
     (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X).mapIso
       (asIso (P.twistEtalePullback h f))
-
-/-- The canonical pullback of the constant coefficient unit, including site comparison.
-Source: def-pur-frame-class, restriction to the complementary open
-(blueprint: def-pur-frame-class). -/
-def frameConstantPullback (P : PurityFiniteSetting.{u}) {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    (upperStar (ModuleCat.{u + 1} P.Coefficient) f).obj (P.constant Y) ≅ P.constant X :=
-  (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} P.Coefficient) f).app
-      (P.constantEtale Y) ≪≫
-    (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X).mapIso
-      ((Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} P.Coefficient) f).app
-        (ModuleCat.of P.Coefficient P.Coefficient))
 
 /-- The finite coefficient support connecting morphism in degree one. Its construction
 is the Yoneda splice with the canonical localization sequence; it has degree two.
