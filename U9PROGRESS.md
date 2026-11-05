@@ -153,7 +153,10 @@
 - Baseline remote build was blocked by `Presheaf.InternalHom` (BZ581), before
   reaching the assigned module. The user instructed continuation after the exact
   one-line prerequisite proposal; that compatibility-lemma proof fix is now applied.
-- Next: validate remotely, continue downstream, then write DONE after a green build.
+- Assigned module is green at `3947e09b34`: ucheck-bump rc=0, failed=0, 2802 jobs.
+- Added the public `Mathlib.CategoryTheory.Abelian.Exact` import for the existing
+  preserves-homology lemma after the cast repair reached the theorem proof.
+- Four direct importers are queued; continue one more layer before writing DONE.
 - Notes and logs: `/home/ubuntu/u9/bz/FIXES-BZ554.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
 
