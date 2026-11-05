@@ -23,6 +23,7 @@ import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
 import Mathlib.Topology.Sheaves.Abelian
 import Mathlib.Algebra.Category.Grp.Zero
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # Comparing an integral ideal with a module of generic rank one
 

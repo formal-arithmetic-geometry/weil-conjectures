@@ -64,6 +64,7 @@ import WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # Normalization of the scalar and geometric balancing comparison
 

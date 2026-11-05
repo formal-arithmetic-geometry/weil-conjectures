@@ -213,8 +213,8 @@ theorem localizedPullback_perfectModel_iso {T X : Scheme.{u}} (g : T ⟶ X)
       (RX.mapDerivedCategory.obj ((derivedPullback g).obj E)) ≅
       DerivedCategory.Q.obj
         (((Scheme.Modules.pullback f).mapHomologicalComplex (.up ℤ)).obj P) :=
-    ((Functor.mapDerivedCategoryCompIso RX C).app _).symm ≪≫ θ.app E ≪≫
-      (derivedPullback f).mapIso ((Functor.mapDerivedCategoryCompIso RY A).app E ≪≫ eP) ≪≫ q
+    ((Functor.mapDerivedCategoryCompIso RX C).symm.app _).symm ≪≫ θ.app E ≪≫
+      (derivedPullback f).mapIso ((Functor.mapDerivedCategoryCompIso RY A).symm.app E ≪≫ eP) ≪≫ q
   let δ : F ⋙ C ≅ A ⋙ Scheme.Modules.pullback f :=
     Functor.associator A (Scheme.Modules.pullback f ⋙ B) C ≪≫
       Functor.isoWhiskerLeft A (Functor.associator (Scheme.Modules.pullback f) B C) ≪≫
