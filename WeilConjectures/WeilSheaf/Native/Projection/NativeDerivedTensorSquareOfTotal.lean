@@ -88,6 +88,9 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
       (nativePullTotalTensor k₀ l g) (condensedRealizationTotalTensorIso k₀ l Y)
       (condensedRealizationTotalTensorIso k₀ l Z)
       (by
+        have hn := projection_nativePullTensor_normalization k₀ l g
+        unfold ProjectionRestrictionTensorNormalization at hn
+        dsimp only [L, nativeOpenPull]
         set_option maxHeartbeats 100000 in
           run_tac do
             let target ← (← Lean.Elab.Tactic.getMainGoal).getType
@@ -96,9 +99,6 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
             let _ ← Mathlib.Tactic.FirstOrderApply.sealProof ty pf
             (throwError "K5 diagnostic: normalization type checks with identity" :
               Lean.Elab.Tactic.TacticM Unit)
-        have hn := projection_nativePullTensor_normalization k₀ l g
-        unfold ProjectionRestrictionTensorNormalization at hn
-        dsimp only [L, nativeOpenPull]
         projection_seal with_reducible cast_proofs hn)
       (by
         have hF := projection_native_realization_model_normalization k₀ l Y
