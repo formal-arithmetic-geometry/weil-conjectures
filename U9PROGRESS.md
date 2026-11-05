@@ -1,31 +1,3 @@
-# BZ264 complete
-
-- Branch: `u9/BZ264`; starting commit: `c781553bf`.
-- All four modules below rebuilt successfully in the final `ucheck-bump` run:
-  rc=0, built=10, failed=0; 2065 jobs.
-- Validated source commit: `15cb43852a074ab4190ed745f207728fcbc663a9`.
-- Build tree: `newsrv:/home/ubuntu/u9n/bumpw3`; toolchain and Mathlib pin verified:
-  Lean v4.35.0-rc3 and b63f6e8a68d220e3b3bc4f3792bb53650d375f24.
-- Full log: `/home/ubuntu/u9/bz/BUILD-BZ264-downstream-full.log`.
-- The user instructed continuation after the reviewed three-site statement API
-  proposal. The canonical single comparison now uses direct Q, and the two unit
-  statements use the cochain unit. The importer uses cochain-unit naturality.
-- The auxiliary hypercohomology proof uses direct-Q boundedness instances.
-- All other statement text, binders, assumptions, and existing docstrings are
-  unchanged. The canonical-single proof body is unchanged.
-- Fix patterns, whole-tree counts, and diagnostic evidence:
-  `/home/ubuntu/u9/bz/FIXES-BZ264.md`.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, profiler
-  probes, or heartbeat increases. Final diff passes `git diff --check`.
-- This completion commit changes only progress documentation after the green build.
-- Completion marker: `/home/ubuntu/u9/state/BZ264.DONE`.
-
-Verified modules:
-- `WeilConjectures.CategoryTheory.RightDerivedCanonicalSingleUnit`
-- `WeilConjectures.CategoryTheory.RightDerivedUnitSingleDegree`
-- `WeilConjectures.CategoryTheory.HypercohomologyLeftEdgeSingleAux`
-- `WeilConjectures.CategoryTheory.HypercohomologyLeftEdgeSingle`
-
 # BZ150 complete
 
 - Branch: `u9/BZ150`; starting commit: `80aeb4bf4`.
@@ -111,3 +83,26 @@ Verified modules:
   `/home/ubuntu/u9/bz/FIXES-BZ159.md`.
 - No proof placeholders, trust bypasses, local Lean/Lake execution, or heartbeat increases.
 - Completion marker: `/home/ubuntu/u9/state/BZ159.DONE`.
+
+# BZ266 complete
+
+- Branch: `u9/BZ266`; starting commit: `c781553bf`.
+- Assigned module and two downstream modules passed `ucheck-bump` together:
+  `ExactDegreeZeroSupplement`, `ExactDegreeZeroAdjoint`, `NormalizedTensorAdjunctionInsertion`.
+- Validated source commit: `2403113eebe24e55b6bf2e95ee3b63fadb521a2a`.
+  This completion commit changes only progress documentation.
+- Result: rc=0, failed=0, 3580 jobs; newsrv `/home/ubuntu/u9n/bumpw7`.
+- Toolchain and Mathlib revision verified on the build host:
+  Lean v4.35.0-rc3 / b63f6e8a68d220e3b3bc4f3792bb53650d375f24.
+- Full log: `/home/ubuntu/u9/bz/BZ266-build-6-full.log`.
+- The user instructed continuation after the explicit orientation-only compatibility proposal.
+  Compositor references now preserve their original mathematical maps under Mathlib's
+  reversed isomorphism; all other declaration statements and docstrings are unchanged.
+- Reused Mathlib's identity-on-single-object lemma and selected degreewise complex
+  extensionality explicitly in the downstream tensor proof.
+- Skipped `OrdinarySupportedKummerScalarSupplement` because its outside-unit dependency
+  `SixFunctors.Etale.SmoothBaseChange.Defs` fails with a duplicate `CategoryTheory.Sheaf.H.δ` import.
+- Patterns, whole-tree counts, exact errors, and scope audit:
+  `/home/ubuntu/u9/bz/FIXES-BZ266.md`, `/home/ubuntu/u9/bz/BZ266-source-audit.json`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or limit raises.
+- Completion marker: `/home/ubuntu/u9/state/BZ266.DONE`.
