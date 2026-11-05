@@ -162,14 +162,32 @@ theorem exists_baseTensorDerivedChainComparison
   have hr : (r.mapHomotopyCategoryFactors (.up ℤ)).inv.app P = 𝟙 _ := rfl
   have hs : (s.mapHomotopyCategoryFactors (.up ℤ)).inv.app
       ((l.mapHomologicalComplex (.up ℤ)).obj P) = 𝟙 _ := rfl
-  simp only [hr, hs, Functor.map_id, Category.comp_id, Category.assoc,
-    Iso.inv_hom_id_app_assoc, DerivedCategory.quotientCompQhIso_hom_naturality] at h'
+  have hmapr : DerivedCategory.Qh.map
+      (𝟙 ((HomotopyCategory.quotient _ (.up ℤ)).obj
+        ((r.mapHomologicalComplex (.up ℤ)).obj P))) = 𝟙 _ := DerivedCategory.Qh.map_id _
+  have hmaps : DerivedCategory.Qh.map
+      (𝟙 ((HomotopyCategory.quotient _ (.up ℤ)).obj
+        ((s.mapHomologicalComplex (.up ℤ)).obj
+          ((l.mapHomologicalComplex (.up ℤ)).obj P)))) = 𝟙 _ := DerivedCategory.Qh.map_id _
+  simp only [hr, hs, Category.assoc] at h'
+  erw [hmapr, hmaps] at h'
+  simp only [Category.comp_id, Iso.inv_hom_id_app] at h'
+  erw [DerivedCategory.quotientCompQhIso_hom_naturality (γ.app P)] at h'
   rw [reassoc_of% hn] at h'
   simp only [G, T, Functor.comp_map, Functor.map_comp, Category.assoc] at h'
   rw [← F.map_comp_assoc, ← r.mapDerivedCategory.map_comp, Iso.inv_hom_id_app,
     r.mapDerivedCategory.map_id, F.map_id, Category.id_comp] at h'
-  simpa only [Iso.trans_inv, Iso.app_inv, Iso.symm_inv,
-    Functor.mapHomotopyCategoryFactors_hom_app, Functor.map_id, Category.id_comp,
-    Category.comp_id, Functor.map_comp, Category.assoc] using h'.symm
+  have hmape : DerivedCategory.Qh.map
+      (𝟙 ((HomotopyCategory.quotient _ (.up ℤ)).obj
+        ((e.mapHomologicalComplex (.up ℤ)).obj
+          ((r.mapHomologicalComplex (.up ℤ)).obj P)))) = 𝟙 _ := DerivedCategory.Qh.map_id _
+  have hmapl : DerivedCategory.Qh.map
+      (𝟙 ((HomotopyCategory.quotient _ (.up ℤ)).obj
+        ((l.mapHomologicalComplex (.up ℤ)).obj P))) = 𝟙 _ := DerivedCategory.Qh.map_id _
+  simp only [Iso.trans_inv, Iso.app_inv, Iso.symm_inv,
+    Functor.mapHomotopyCategoryFactors_hom_app]
+  erw [hmape, hmapl]
+  simpa only [Functor.map_id, Category.id_comp, Category.comp_id,
+    Functor.map_comp, Category.assoc] using h'.symm
 
 end ModuleCat
