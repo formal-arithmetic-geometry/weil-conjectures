@@ -62,6 +62,7 @@ lemma compactProjectionGeometricPullIso_projection_eq
   have h' := homMk_exceptionalProjectionMorphismOfCompactification_eq (f := f) l c K B
     ((eqToIso (congrArg (boundedConstructibleUpperStar _ l) c.overI_overG.symm) ≪≫
       boundedConstructibleUpperStarComp _ l c.overI c.overG).inv.app B) h
-  exact h'
+  trace_state
+  simpa only [Iso.symm_hom] using h'
 
 end AlgebraicGeometry.ProEtale.CondensedRing
