@@ -142,38 +142,30 @@
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ584 in progress
+# BZ584 complete
 
 - Branch: `u9/BZ584`; starting source commit: `7b0df24fff`.
-- Reread the brief and this file on resumption; the brief has no new LEAD lines.
-- The user instructed continuation after the explicit two-statement API proposal.
-  Applied the exact `.inv` -> `.hom` and `.hom` -> `.inv` substitutions in
-  `mapDerivedCategoryCompIso_inv_app_Q` and `mapDerivedCategoryCompIso_hom_app_Q`.
-- These restore the original maps under Mathlib's reversed composition isomorphism.
-  Both proofs are updated; all other statements and existing docstrings are unchanged.
-- Next: remote validation of the assigned module and then its three direct importers.
-- Pinned API inspected at b63f6e8a; current remote next-units notes omit this unit,
-  so the supplied assignment and earlier BZ160 fix remain applicable.
-- Fix patterns and baseline logs: `/home/ubuntu/u9/bz/FIXES-BZ584.md`.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or limit increases.
-
-## BZ584 assigned module green
-
-- `ucheck-bump WeilConjectures.CategoryTheory.DerivedCategory.FreeComparisonMapDerivedCategory`
-  passed: rc=0, built=1, failed=0, 1890 jobs; target rebuilt in 4.1 seconds.
+- The assigned module `WeilConjectures.CategoryTheory.DerivedCategory.FreeComparisonMapDerivedCategory`
+  passed `ucheck-bump`: rc=0, built=1, failed=0, 1890 jobs; rebuilt in 4.1 seconds.
 - Validated source commit: `ac06f213ce0fa83101e06826d358d98662962dcf`.
-- Tree: `poolb:43.166.85.105`.
-- Full log: `/home/ubuntu/u9/bz/BUILD-BZ584-unit-full.log`.
-- Continuing with direct importers `LowerShriekForget`, `SmoothPurityCondensedCarrier`,
-  and `SmoothPurityShriekFreeComparison` under `WeilConjectures.WeilSheaf`.
-
-## BZ584 downstream layer one
-
-- `SmoothPurityShriekFreeComparison` built successfully in 2.1 seconds.
-- The assigned module rebuilt successfully in 4.4 seconds in the same batch.
-- Source commit: `078691b129121f437f17e2d3248b90a991a9db9b`.
-- Batch result: rc=1, built=55, failed=16; all errors are external dependencies.
-- Skipped `LowerShriekForget` and `SmoothPurityCondensedCarrier` under the ownership rule.
-- Full log: `/home/ubuntu/u9/bz/BUILD-BZ584-downstream-full.log`.
-- No downstream source changes. Next: layer two, `SmoothPurityOpenDescentNormalization`
-  and `SmoothPurityShriekWeilUniversality`.
+  Tree: `poolb:43.166.85.105`; log: `/home/ubuntu/u9/bz/BUILD-BZ584-unit-full.log`.
+- Additional green target: `WeilConjectures.WeilSheaf.SmoothPurityShriekFreeComparison`,
+  rebuilt in 2.1 seconds in the first downstream batch at `078691b129`.
+- Tested five downstream targets across two layers. Four were skipped under the
+  ownership rule because of external dependency failures: `LowerShriekForget`,
+  `SmoothPurityCondensedCarrier`, `SmoothPurityOpenDescentNormalization`, and
+  `SmoothPurityShriekWeilUniversality` (all under `WeilConjectures.WeilSheaf`).
+- Downstream batch results: rc=1, failed=16, then rc=1, failed=21. All errors were in
+  unowned dependencies. No downstream source changes were needed or attempted.
+- The user instructed continuation after the exact two-statement API proposal.
+  The two `.hom`/`.inv` substitutions preserve the original maps under Mathlib's
+  reversed compositor. Both proofs are updated; all other declaration headers,
+  names, binders, and existing docstrings are unchanged.
+- Fix patterns with whole-tree counts and exact errors: `/home/ubuntu/u9/bz/FIXES-BZ584.md`.
+- Full downstream logs: `BUILD-BZ584-downstream-full.log` and `BUILD-BZ584-layer2-full.log`
+  under `/home/ubuntu/u9/bz`; dependency paths: `BZ584-downstream-blockers.txt`.
+- Static contract audit: `/home/ubuntu/u9/bz/BZ584-contract-audit.txt`.
+- No local Lean/Lake execution, sorry, admit, axiom, native_decide, kernel bypass,
+  heartbeat increase, or profiler probes. Both green modules are sorry-free.
+- This completion commit changes only progress documentation; Lean sources match
+  the successful builds. Final branch commit is recorded in `/home/ubuntu/u9/state/BZ584.DONE`.
