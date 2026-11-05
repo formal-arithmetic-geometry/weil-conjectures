@@ -81,7 +81,7 @@ variable (A) in
 /-- The endomorphisms of the unit of `A`, placed in degree `0`, as endomorphisms of the unit of
 `D(A)`. -/
 noncomputable def singleFunctorUnitEndRingHom : End (𝟙_ A) →+* End (𝟙_ (DerivedCategory A)) :=
-  (singleFunctor A 0).mapEndRingHom (𝟙_ A)
+  cast (by rfl) ((singleFunctor A 0).mapEndRingHom (𝟙_ A))
 
 variable (A) in
 /-- The homology in degree `-n` of the shift by `n` of an object placed in degree `0`. -/
@@ -163,6 +163,7 @@ lemma trace_eq_singleFunctor_map_superTrace_of_shift (n : ℤ)
   refine (@trace_shiftFunctor_map_singleFunctor_map _ _ _ _ _ _ _ _ _ _ n r ‹_›).trans ?_
   erw [superTrace_homologyFunctor_map_shiftFunctor_map_singleFunctor_map, map_zsmul,
     Category.id_comp, Category.comp_id]
+  rfl
 
 /-- **The trace as a supertrace** (blueprint `prop-trf-trace-formal-laws`, item (4)): for an
 object `Y` of `D(A)` which is a finite direct sum of shifts of the unit, with dualizable
