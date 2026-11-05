@@ -113,13 +113,14 @@ theorem purityChangeCoefficientTrivialization_weil
           (purityChangeCoefficientTrivialization Λ a f.geometricFiberProj M e₁).hom ≫
         (geometricFiberProjUpperStarFrobeniusIso Λ' f).hom.app (𝟙_ _) := by
   let := Mod.extendScalarsMonoidal (coefficientMap a X)
-  exact purity_scalarDatum_postcomposeIso (f.geometricFiberProj)^*⟦Λ'⟧
+  have h := purity_scalarDatum_postcomposeIso (f.geometricFiberProj)^*⟦Λ'⟧
     (f.geometricGaloisFrobenius.hom)^*⟦Λ'⟧
     (geometricFiberProjUpperStarFrobeniusIso Λ' f)
     (purityChangeCoefficientPullbackIso Λ a f.geometricFiberProj M (𝟙_ _) e₁)
     (Functor.Monoidal.εIso (Mod.extendScalars (coefficientMap a X))).symm
     (purityChangeCoefficientTrivialization Λ a f.geometricFiberProj M e₁) rfl c
     (purityChangeCoefficientPullbackIso_weil a f M (𝟙_ _) e₁ c he)
+  exact h
 
 end ScalarRelation
 

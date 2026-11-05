@@ -8,6 +8,7 @@ public import WeilConjectures.WeilSheaf.SmoothPurityUnitDatumTransport
 public import WeilConjectures.WeilSheaf.SmoothPurityUnitConstraint
 public import WeilConjectures.WeilSheaf.SmoothPurityDescentUnit
 public import WeilConjectures.WeilSheaf.ConstantTwistCondensed
+import WeilConjectures.Tactic.ExactModProofs
 
 /-! # The constant Weil datum is the canonical pullback-unit datum -/
 
@@ -40,8 +41,8 @@ lemma purity_adicLowerStarUnit_condensed {X : Scheme.{u}} (e : X ≅ X) :
         (adicSheafEquivCondensedModTensorUnitIso l X).hom =
       (CondensedRing.upperStarIsoLowerStarInv (Profinite.padicAlgClRingObj l) e).inv.app
           (𝟙_ _) ≫
-        tateUnitDatum l e.hom :=
-  purity_unitDatum_transport_of_square (adicSheafEquivCondensedMod l X).functor
+        tateUnitDatum l e.hom := by
+  have h := purity_unitDatum_transport_of_square (adicSheafEquivCondensedMod l X).functor
     (e.hom)^*ᵃ[l] (e.inv)_*ᵃ[l]
     (CondensedRing.upperStar (Profinite.padicAlgClRingObj l) e.hom)
     (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l) e.inv)
@@ -55,6 +56,8 @@ lemma purity_adicLowerStarUnit_condensed {X : Scheme.{u}} (e : X ≅ X) :
     (adicUpperStarCompCondensedModIso_inv_of_iso l e)
     (adicUpperStarIsoLowerStarInv_hom_comp_unit (l := l) e)
     (purity_upperStarUnit_tateUnitDatum l e.hom)
+  dsimp only [Functor.comp_obj, Functor.comp_map] at h ⊢
+  exact_mod_proofs h
 
 end AlgebraicGeometry.ProEtale
 
