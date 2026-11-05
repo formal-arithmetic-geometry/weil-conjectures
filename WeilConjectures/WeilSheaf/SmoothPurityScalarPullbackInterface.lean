@@ -19,8 +19,8 @@ the comparison maps and their compatibility equations are exported separately.
 
 public section
 
-set_option trace.profiler true
-set_option trace.profiler.threshold 1
+set_option profiler true
+set_option profiler.threshold 1
 
 universe u
 

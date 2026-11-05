@@ -22,4 +22,13 @@ lemma purity_scalarDatum_transport_isos
   subst a' b' e'
   exact h
 
+/-- Replace a descent isomorphism before taking its component in a square. -/
+lemma purity_square_transport_source_iso
+    {C : Type*} [Category C] (Q : C ⥤ C) {A T : C}
+    (α : A ⟶ T) (t : Q.obj T ⟶ T) (s s' : Q.obj A ≅ A) (hs : s = s')
+    (h : Q.map α ≫ t = s.hom ≫ α) :
+    Q.map α ≫ t = s'.hom ≫ α := by
+  rw [← hs]
+  exact h
+
 end CategoryTheory
