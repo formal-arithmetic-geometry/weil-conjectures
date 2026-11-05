@@ -21023,6 +21023,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.RestrictScalarsTorAmplit
 public import WeilConjectures.SixFunctors.Etale.Derived.RestrictionGenerization
 public import WeilConjectures.SixFunctors.Etale.Derived.ScalarExtension
 public import WeilConjectures.SixFunctors.Etale.Derived.SchemeGaloisComparison
+public import WeilConjectures.SixFunctors.Etale.Derived.SchemeGaloisIterate
 public import WeilConjectures.SixFunctors.Etale.Derived.SepClosedCohomology
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
 public import WeilConjectures.SixFunctors.Etale.Derived.ShiftAssoc
@@ -26098,6 +26099,7 @@ public import WeilConjectures.ZetaFunction.CurveZeta
 public import WeilConjectures.ZetaFunction.DualityReciprocity
 public import WeilConjectures.ZetaFunction.Examples
 public import WeilConjectures.ZetaFunction.ExamplesCohomology
+public import WeilConjectures.ZetaFunction.ExamplesFunctionalEquation
 public import WeilConjectures.ZetaFunction.FinalTheorems
 public import WeilConjectures.ZetaFunction.HasseWeil
 public import WeilConjectures.ZetaFunction.IntegralFactors
