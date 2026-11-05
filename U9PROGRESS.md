@@ -142,23 +142,33 @@
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
+# BZ554 complete
 
-# BZ549 complete
+- Branch: `u9/BZ554`; starting commit: `8af5cb324`.
+- Assigned module and seven downstream modules passed `ucheck-bump` across two layers.
+- Final Lean-source commit: `3d1e83ae5e8d408991267e32ba100230a54cf3e0`.
+- Final check: rc=0, failed=0, 2853 jobs on `poolb:43.166.81.121`;
+  ConstantTowerNormalization and RingedTopoiDerivedPullback rebuilt successfully.
+- The earlier downstream run verified DiagramRingRestrictionPushforward's local
+  scalar-action bridge and the other second-layer comparison modules.
+- The user authorized the exact identity-cast statement proposal and one-line
+  InternalHom prerequisite repair by instructing continuation after each proposal.
+  All other existing statements and all docstrings are unchanged.
+- Additional fixes: public Abelian.Exact/localization imports, a private scalar-action
+  instance, and removal of a redundant rfl after simp.
+- Patterns and validation logs: `/home/ubuntu/u9/bz/FIXES-BZ554.md`.
+- Source contract audit: `/home/ubuntu/u9/bz/BZ554-contract-audit.txt`.
+- Completion marker: `/home/ubuntu/u9/state/BZ554.DONE`.
+- No local Lean/Lake, proof placeholders, trust bypasses, profiler probes or heartbeat increases.
+- This completion commit changes only documentation; Lean sources match the checked commits.
 
-- Branch: `u9/BZ549`; owned module: `GlobalSectionsDirectImageKInjectiveAcyclic`.
-- Owned module, direct importer `DerivedGlobalSectionsAffinizationComparison`,
-  and repaired dependencies `Presheaf.InternalHom` / `KFlat` passed together:
-  `ucheck-bump` rc=0, failed=0, 3264 jobs at `dbdb89efdb0299d34520e949f0f111887a96ea0f`.
-- Second-layer `DerivedGlobalSectionsPreservesCoproducts` also passed:
-  `ucheck-bump` rc=0, failed=0, 4153 jobs at `03552a1ed2fd031cd3423a169c0707e2d3a875f6`.
-- Both builds used `poolb:43.157.132.198`; Lean sources are identical in those commits.
-- Full logs: `/home/ubuntu/u9/bz/BUILD-BZ549-final-full.log` and
-  `/home/ubuntu/u9/bz/BUILD-BZ549-downstream-final-full.log`.
-- Fixes: public exactness import, compatibility tensor-map lemmas in two required
-  dependencies, and `dsimp only` to retain the importer's local IsIso instance.
-- Every declaration statement and docstring is unchanged. All five checked modules
-  are free of sorries, axioms, admits, and prohibited proof shortcuts.
-- No local Lean/Lake execution, heartbeat increases, or profiler probes.
-- Fix patterns and exact diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ549.md`.
-- Completion marker: `/home/ubuntu/u9/state/BZ549.DONE`.
-- This completion commit changes only progress documentation.
+# BZ557 in progress
+
+- Branch: `u9/BZ557`; starting commit: `8af5cb324`.
+- Added the public AffineScheme import to direct importer AffineBasisSectionsDerivedUnit.
+- Initial remote builds stopped in the shared Presheaf.InternalHom dependency.
+- On continuation, merged BZ558 prerequisite repair `f28760733369366ac823f0084f3c4090afa3a90d`.
+- Next: ucheck-bump on AffineBasisSectionsResolutionHomologyEpi, AffineBasisSectionsDerivedUnit,
+  and AffineOpenSectionsResolutionQuasiIso; fix any owned errors and write DONE when green.
+- Notes and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ557.md`.
+- No local Lean/Lake, statement changes, proof escapes, or heartbeat increases.
