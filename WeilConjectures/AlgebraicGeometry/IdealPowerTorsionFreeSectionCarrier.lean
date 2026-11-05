@@ -25,12 +25,11 @@ universe u
 open CategoryTheory Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 
-local instance {X : Scheme.{u}} (H : X.Modules)
-    {V W : X.Opens} (h : V ≤ W) :
-    SMul ((SheafOfModules.unit X.ringCatSheaf).val.obj (op V))
+noncomputable local instance {X : Scheme.{u}} (F : X.Modules) {V W : X.Opens} (h : V ≤ W) :
+    HSMul ((SheafOfModules.unit X.ringCatSheaf).val.obj (op V))
       ((ModuleCat.restrictScalars (X.ringCatSheaf.obj.map (homOfLE h).op).hom).obj
-        (H.val.obj (op V))) :=
-  inferInstanceAs (SMul (X.sheaf.obj.obj (op V)) (H.val.obj (op V)))
+        (F.val.obj (op V))) (F.val.obj (op V)) where
+  hSMul := @SMul.smul Γ(X, V) Γ(F, V) inferInstance
 
 /-- A quasi-coherent section on an ideal complement has a quasi-coherent carrier
 inside the original module with zero ideal-power annihilators.
