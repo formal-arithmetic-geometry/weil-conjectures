@@ -62,7 +62,7 @@ theorem isWeilEquivariant_of_purityIntegralReduction
     {K L : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))}
     (hL : derivedCompleteIntegers ℓ E X L)
-    [∀ n : ℕ, Finite ((G.obj K) ⟦(1 : ℤ)⟧ ⟶
+    [hfin : ∀ n : ℕ, Finite ((G.obj K) ⟦(1 : ℤ)⟧ ⟶
       (Mod.comap (integersModPowReduction X ℓ E (n + 1))).mapDerivedCategory.obj
         ((purityIntegralReduction X ℓ E (n + 1)).obj L))]
     (φK : G.obj K ⟶ K) (φL : G.obj L ⟶ L) (f : K ⟶ L)
@@ -71,7 +71,7 @@ theorem isWeilEquivariant_of_purityIntegralReduction
       (transportWeilDatum (purityIntegralReduction X ℓ E (n + 1)) (c n) φL)
       ((purityIntegralReduction X ℓ E (n + 1)).map f)) :
     IsWeilEquivariant G φK φL f := by
-  apply eq_of_derivedReduction_map_eq (K := G.obj K) (L := L) hL
+  apply @eq_of_derivedReduction_map_eq X ℓ _ E _ _ (G.obj K) L hL hfin
   intro n
   exact (purity_map_weil_equation_iff (purityIntegralReduction X ℓ E (n + 1))
     (c n) φK φL f).mpr (hf n)
