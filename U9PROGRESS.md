@@ -1,3 +1,24 @@
+# BZ345 complete
+
+- Branch: `u9/BZ345`; starting commit: `04c3957dc56263143b9eaebd3d534360487f939e`.
+- Assigned module `WeilConjectures.AlgebraicGeometry.StrictlyPerfectFiniteFreeRefinement`
+  passed `ucheck-bump`: rc=0, failed=0, 3017 jobs, validated at `ec63878fb4`.
+- The compositor fix was already present in the starting tree; no Lean source changes
+  are delivered by this unit.
+- Direct importer `WeilConjectures.AlgebraicGeometry.PerfectImpliesQCoh` also rebuilt
+  successfully (2.7s) in the downstream check at `4fb37223f6`.
+- The other three direct importers were skipped because of external dependency errors.
+  All 20 direct importers of PerfectImpliesQCoh also have known external blockers.
+- Downstream batches were stopped after the external blockers were identified; their
+  wrapper exit codes are not treated as proof that the entire batch succeeded.
+- Fix record: `/home/ubuntu/u9/bz/FIXES-BZ345.md`.
+- Evidence: `/home/ubuntu/u9/bz/BUILD-BZ345-baseline-full.log`,
+  `/home/ubuntu/u9/bz/BUILD-BZ345-downstream1-full.log`,
+  `/home/ubuntu/u9/bz/BUILD-BZ345-downstream2-full.log`, and
+  `/home/ubuntu/u9/bz/BZ345-layer2-blockers.tsv`.
+- No local Lean/Lake, statement changes, forbidden proof shortcuts, or heartbeat raises.
+- Completion marker: `/home/ubuntu/u9/state/BZ345.DONE`.
+
 # BZ133 complete
 
 - Branch: `u9/BZ133`.
