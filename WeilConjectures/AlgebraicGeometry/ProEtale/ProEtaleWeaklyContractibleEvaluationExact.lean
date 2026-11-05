@@ -7,7 +7,6 @@ module
 
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 import Mathlib.CategoryTheory.Abelian.Exact
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
@@ -33,6 +32,11 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme.ProEt
+
+local instance (X : Scheme.{u}) (R : Sheaf (topology X) RingCat.{u + 1}) (W : X.ProEt) :
+    (SheafOfModules.evaluation.{u + 1} R (op W)).Additive :=
+  inferInstanceAs ((SheafOfModules.forget R ⋙
+    PresheafOfModules.evaluation R.obj (op W)).Additive)
 
 /-- Evaluation at a weakly contractible object preserves homology of module complexes.
 Source: Stacks Project, Tag 0946 (1), with the module sheaf epimorphism criterion 03DA.
