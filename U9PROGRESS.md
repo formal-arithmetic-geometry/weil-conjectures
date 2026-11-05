@@ -63,16 +63,20 @@
 - Fix patterns: `/home/ubuntu/u9/bz/FIXES-BZ154.md`.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ190 in progress
+# BZ190 complete
 
 - Branch: `u9/BZ190`.
-- Private helper statements and proofs pass `ucheck-bump`; the previous final check
-  had only the public theorem's Q/Qh endpoint mismatch.
-- The user instructed continuation after the exact statement repair proposal.
-  Applied `BZ190-statement-api-proposal.patch`: use the canonical cochain derived
-  unit `G.rightDerivedFunctorPlusUnit.app L` at the theorem's Q endpoints.
-- The private proofs use the Localization implementation import and explicitly
-  cancel new quotient-comparison identity factors.
-- Next: validate and repair the public proof through `ucheck-bump`, then write DONE.
-- Fix patterns/logs: `/home/ubuntu/u9/bz/FIXES-BZ190.md`.
-- No local Lean/Lake, forbidden proof escapes, or heartbeat increases.
+- Assigned module: `WeilConjectures.CategoryTheory.CanonicalResolutionCompositeUnitComparison`.
+- The module passed `ucheck-bump`: rc=0, failed=0, 2090 jobs.
+- Tested source commit: `a20255451c8530a95240e9634ea6bab8a027d11d`.
+- Final log: `/home/ubuntu/u9/bz/BUILD-BZ190-final-full.log`.
+- Build tree: `newsrv:/home/ubuntu/u9n/bumpw7`; both requested pins verified.
+- The user instructed continuation after the exact canonical unit proposal.
+  Applied `Unith.app (quotient.obj L)` → `Unit.app L` in the public statement.
+  The proof expands the unit and cancels its canonical comparison identities.
+  All other declaration statements and existing docstrings are unchanged.
+- Private helpers use implementation imports and explicit comparison cancellation.
+- Fix patterns and exact errors: `/home/ubuntu/u9/bz/FIXES-BZ190.md`.
+- Completion marker: `/home/ubuntu/u9/state/BZ190.DONE`.
+- No local Lean/Lake, proof placeholders, trust escapes, or heartbeat increases.
+- This final commit changes only progress documentation after the successful build.
