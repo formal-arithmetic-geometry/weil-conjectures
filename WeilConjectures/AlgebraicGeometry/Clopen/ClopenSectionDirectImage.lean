@@ -67,8 +67,9 @@ private theorem exact_derived_counit_isIso
   exact NatIso.isIso_of_isIso_app _
 
 /-- Restriction to an open and closed section gives `Rp_* s_! ≅ id` on bounded below
-étale derived categories with finite coefficients. Source: blueprint,
-sec-smooth-purity/sk-def-sf-operations, lemma lem-weil-pbc-clopen-section-direct-image
+étale derived categories with coefficients in any commutative ring. Source: blueprint,
+part-six-operations/sec-six-functors-basics/sec-brown-construction/
+sec-construction-of-rf/sk-prop-sf-comp-coherence, lemma lem-weil-pbc-clopen-section-direct-image
 (blueprint: lem-weil-pbc-clopen-section-direct-image).
 
 The equation characterizes the canonical isomorphism: after the unit identifying `K`
@@ -84,7 +85,7 @@ is isomorphic to `Rs_*`, the derived unit is invertible on its image. Apply `Rp_
 to this unit, then the composition isomorphism `Rp_* Rs_* ≅ R(ps)_* ≅ id`.
 Finally invert the derived unit of `s_! ⊣ s^*`. This constructs the isomorphism with
 exactly the asserted canonical-map equation. -/
-theorem clopenSectionDirectImage (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+theorem clopenSectionDirectImage_of_commRing (Λ : Type (u + 1)) [CommRing Λ]
     {X V : Scheme.{u}} (p : V ⟶ X) (s : X ⟶ V) [IsOpenImmersion s]
     (hs : IsClosed (Set.range s.base)) (hsp : s ≫ p = 𝟙 X) :
     ∃ e : (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) s).mapDerivedCategoryPlus ⋙
@@ -178,5 +179,48 @@ theorem clopenSectionDirectImage (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
   rw [← ha, Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
   dsimp [t, c, P, U, R, J, adj, A]
   simp only [Category.id_comp, Category.comp_id]
+
+/-- The finite-coefficient case of `clopenSectionDirectImage_of_commRing`, kept for its existing
+users. Source: blueprint, lemma lem-weil-pbc-clopen-section-direct-image
+(blueprint: lem-weil-pbc-clopen-section-direct-image). -/
+theorem clopenSectionDirectImage (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    {X V : Scheme.{u}} (p : V ⟶ X) (s : X ⟶ V) [IsOpenImmersion s]
+    (hs : IsClosed (Set.range s.base)) (hsp : s ≫ p = 𝟙 X) :
+    ∃ e : (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) s).mapDerivedCategoryPlus ⋙
+        rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) p ≅
+          𝟭 (DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
+      ∀ K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
+        @Eq
+          (((rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) p).obj
+            ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) s).mapDerivedCategoryPlus.obj K)) ⟶
+          ((upperStar (ModuleCat.{u + 1} Λ) s).mapDerivedCategoryPlus.obj
+            ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) s).mapDerivedCategoryPlus.obj K)))
+          (e.hom.app K ≫
+            (Functor.mapDerivedCategoryPlusIdIso
+              (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))).inv.app K ≫
+            (Functor.mapDerivedCategoryPlusNatIso
+              (asIso (openImmersionLowerShriekUpperStarAdjunction
+                (ModuleCat.{u + 1} Λ) s).unit)).hom.app K ≫
+            (Functor.mapDerivedCategoryPlusCompIso
+              (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) s)
+              (upperStar (ModuleCat.{u + 1} Λ) s)).hom.app K)
+          ((rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) p).map
+            ((Adjunction.derivedPlus
+              (L := upperStar (ModuleCat.{u + 1} Λ) s)
+              (R := lowerStar (ModuleCat.{u + 1} Λ) s)
+              (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) s)).unit.app
+              ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) s).mapDerivedCategoryPlus.obj K)) ≫
+          (@Functor.rightDerivedFunctorPlusCompIso' _ _ _ _ _ _ _ _ _ _ _ _ _ _
+            (lowerStar (ModuleCat.{u + 1} Λ) s) (lowerStar (ModuleCat.{u + 1} Λ) p) _ _ _ _
+            (Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms
+              (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) s))
+            (lowerStarComp (ModuleCat.{u + 1} Λ) s p (𝟙 X) hsp.symm)).hom.app
+              ((upperStar (ModuleCat.{u + 1} Λ) s).mapDerivedCategoryPlus.obj
+                ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) s).mapDerivedCategoryPlus.obj K)) ≫
+          (lowerStarIdDerivedPlus (ModuleCat.{u + 1} Λ) X).hom.app
+            ((upperStar (ModuleCat.{u + 1} Λ) s).mapDerivedCategoryPlus.obj
+              ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) s).mapDerivedCategoryPlus.obj
+                K))) :=
+  clopenSectionDirectImage_of_commRing Λ p s hs hsp
 
 end AlgebraicGeometry.Etale
