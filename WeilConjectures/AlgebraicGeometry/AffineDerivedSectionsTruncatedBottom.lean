@@ -65,7 +65,7 @@ theorem affineDerivedSections_truncated_bottom (A : Type u) [CommRing A]
   let S := RingedSpace.globalSectionsFunctor (Spec (.of A)).toRingedSpace ⋙
     ModuleCat.restrictScalars (Scheme.ΓSpecIso (.of A)).inv.hom
   have : Limits.PreservesFiniteLimits S := by
-    dsimp [S, RingedSpace.globalSectionsFunctor]
+    dsimp only [S, RingedSpace.globalSectionsFunctor]
     infer_instance
   let t := DerivedCategory.TStructure.t (C := C)
   let tp := DerivedCategory.Plus.TStructure.t (C := C)
