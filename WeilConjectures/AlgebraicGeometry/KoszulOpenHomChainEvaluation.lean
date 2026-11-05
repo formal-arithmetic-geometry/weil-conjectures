@@ -134,6 +134,5 @@ theorem koszulOpenHom_chain_evaluation
     (koszulOpenSheafComplex A r f e) F e (𝟙 _) t
   rw [Category.id_comp] at hn
   convert hn using 1
-  congr 1
 
 end AlgebraicGeometry
