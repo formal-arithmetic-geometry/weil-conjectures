@@ -141,3 +141,16 @@
 - Existing `ucheck-bump` invocation is queued; it reads the pushed branch after
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+# BZ541 in progress
+
+- Branch: `u9/BZ541`; starting commit: `29f3a8d8177`.
+- User instructed continuation after the exact three-private-statement proposal;
+  removed `.symm` in the private helper types, preserving the original maps.
+- The composition definition and inverse cancellation also use the new orientation.
+- Public theorem statements and all existing docstrings are unchanged.
+- Reused published shared dependency fix `f2876073336` by cherry-pick `09be0bfa2`;
+  this selects the compatibility tensor restriction lemma in `InternalHom`.
+- Remote `ucheck-bump` is queued; no local Lean/Lake execution.
+- Fix log: `/home/ubuntu/u9/bz/FIXES-BZ541.md`.
+- Next: validate the assigned module, build four direct importers, then DONE.
