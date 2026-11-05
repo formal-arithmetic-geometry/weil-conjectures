@@ -86,7 +86,7 @@ private theorem publishedRepresentative (P Q : CochainComplex (Mod R) ℤ)
       (SheafOfModules.KFlatFixedTensor.representativeIso R P Q hp.1 hq.1 hp.2 hq.2).hom := by
   unfold SheafOfModules.cochainTensorRepresentativeArrow
     SheafOfModules.KFlatFixedTensor.representativeIso
-  simp only [SheafOfModules.KFlatFixedTensor.TensorPresentation.representativeIso,
+  simp only [id_eq, SheafOfModules.KFlatFixedTensor.TensorPresentation.representativeIso,
     Iso.trans_hom, Iso.symm_hom, Iso.app_inv, Iso.app_hom,
     Functor.mapIso_hom, Functor.mapIso_inv, Iso.prod_hom, Category.assoc]
 
