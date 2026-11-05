@@ -168,19 +168,6 @@ private def unitCompatible (F : A ⥤ D) (H : D ⥤ A) [F.Additive] [H.Additive]
         H.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj K) =
       DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex p (.up ℤ)).app K)
 
-private theorem factorsh_eq (F : A ⥤ D) [F.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    (K : CochainComplex A ℤ) :
-    F.mapDerivedCategoryFactorsh.hom.app ((HomotopyCategory.quotient A (.up ℤ)).obj K) =
-      F.mapDerivedCategoryFactors.hom.app K := by
-  rw [Functor.mapDerivedCategoryFactorsh_hom_app]
-  dsimp only [DerivedCategory.quotientCompQhIso,
-    HomologicalComplexUpToQuasiIso.quotientCompQhIso,
-    Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift, NatIso.ofComponents_hom_app,
-    NatIso.ofComponents_inv_app, Iso.refl_hom, Iso.refl_inv, Functor.comp_obj]
-  erw [F.mapDerivedCategory.map_id, Category.id_comp, DerivedCategory.Qh.map_id,
-    Category.comp_id, Category.comp_id]
-
 private theorem hom_fac
     {L : A ⥤ D} {R : D ⥤ A} [L.Additive] [R.Additive]
     [PreservesFiniteLimits L] [PreservesFiniteColimits L]
