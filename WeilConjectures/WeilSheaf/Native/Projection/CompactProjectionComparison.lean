@@ -58,11 +58,12 @@ def projectionGeometricPullComp :
 
 /-- The geometric pullback compositor has the canonical ambient component. -/
 lemma projectionGeometricPullComp_hom_app
-    (N : BoundedConstructible (condensedRingObj Λ
-      (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber)) :
-    ((projectionGeometricPullComp k₀ l f).hom.app N).hom =
-      (CondensedRing.leftDerivedUpperStarOverCompactificationIso Λ cb).inv.app N.obj := by
-  exact CondensedRing.ι_map_eqToIso_trans_upperStarComp_inv_app_compactification l cb N
+    (N : WeilComplex k₀ l Y) :
+    ((projectionGeometricPullComp k₀ l f).hom.app ((compactProjectionForget k₀ l Y).obj N)).hom =
+      (CondensedRing.leftDerivedUpperStarOverCompactificationIso Λ cb).inv.app
+        ((compactProjectionForget k₀ l Y).obj N).obj := by
+  exact CondensedRing.ι_map_eqToIso_trans_upperStarComp_inv_app_compactification l cb
+    ((compactProjectionForget k₀ l Y).obj N)
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
@@ -148,8 +149,7 @@ theorem projectionCompactification_forget_square (M : WeilComplex k₀ l X)
           (CondensedRing.exceptionalProjectionMorphismOfCompactification Λ cb
             ((compactProjectionForget k₀ l X).obj M).obj
             ((compactProjectionForget k₀ l Y).obj N).obj) := by
-  have hε := projectionGeometricPullComp_hom_app k₀ l f
-    ((compactProjectionForget k₀ l Y).obj N)
+  have hε := projectionGeometricPullComp_hom_app k₀ l f N
   have hp := CondensedRing.homMk_exceptionalProjectionMorphismOfCompactification_eq l cb
     ((compactProjectionForget k₀ l X).obj M) ((compactProjectionForget k₀ l Y).obj N)
     ((projectionGeometricPullComp k₀ l f).hom.app ((compactProjectionForget k₀ l Y).obj N)) hε
