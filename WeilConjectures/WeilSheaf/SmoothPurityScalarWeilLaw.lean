@@ -15,9 +15,24 @@ universe u
 open CategoryTheory Limits MonoidalCategory
 open scoped CategoryTheory.Obj AlgebraicGeometry.ProEtale.CondensedRing
 
+namespace CategoryTheory
+
+/-- An inverse comparison square is equivalent to its forward comparison square. -/
+lemma purity_isoSquareOfInverseSquare {C : Type*} [Category C]
+    {A B A' B' : C} (a : A ≅ B) (b : A' ≅ B')
+    (u : A ⟶ A') (v : B ⟶ B') (h : v ≫ b.inv = a.inv ≫ u) :
+    u ≫ b.hom = a.hom ≫ v := by
+  apply (cancel_mono b.inv).mp
+  simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id, h,
+    Iso.hom_inv_id_assoc]
+
+end CategoryTheory
+
 namespace AlgebraicGeometry.ProEtale
 
 open Scheme
+
+attribute [local instance 20000] ProEtale.laxBraided_upperStar_of_weaklyEtale
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
@@ -33,7 +48,7 @@ noncomputable def purityAbelianFrobeniusFactorIso :
     a.geometricGaloisFrobenius_hom_comp_geometricFiberProj.symm).symm
 
 /-- Compare two successive module pullbacks with their underlying abelian pullbacks. -/
-noncomputable abbrev purityFrobeniusProjUnit
+noncomputable def purityFrobeniusProjUnit
     (M : Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :=
   (a.geometricGaloisFrobenius.hom)^*[Ab.{u + 1}].map
       (CondensedRing.upperStarUnitHom Λ a.geometricFiberProj M) ≫
@@ -51,11 +66,10 @@ lemma purityFrobeniusProjUnit_structure
   have h := CondensedRing.upperStarForgetIso_hom_app_map_upperStarComp_symm_trans_inv_app
     Λ a.geometricFiberProj a.geometricGaloisFrobenius_hom_comp_geometricFiberProj M
   simp only [CondensedRing.upperStarForgetIso_hom_app, Mod.forget_map] at h
-  rw [← cancel_mono ((CondensedRing.geometricFiberProjUpperStarFrobeniusIso Λ a).inv.app M).hom,
-    Category.assoc, Category.assoc, ← Mod.comp_hom', Iso.hom_inv_id_app, Mod.id_hom',
-    Functor.comp_obj, Category.comp_id,
-    CondensedRing.geometricFiberProjUpperStarFrobeniusIso, h]
-  exact (Iso.hom_inv_id_app_assoc (purityAbelianFrobeniusFactorIso a) M.X _).symm
+  exact purity_isoSquareOfInverseSquare
+    ((purityAbelianFrobeniusFactorIso a).app M.X)
+    ((Mod.forget _).mapIso ((CondensedRing.geometricFiberProjUpperStarFrobeniusIso Λ a).app M))
+    (purityFrobeniusProjUnit Λ a M) (CondensedRing.upperStarUnitHom Λ a.geometricFiberProj M) h
 
 attribute [local instance 20000] ProEtale.laxBraided_upperStar_of_weaklyEtale
 
@@ -74,6 +88,9 @@ theorem purityExtendPullbackIso_weil
       (a.geometricGaloisFrobenius.hom)^*⟦Λ⟧.map
           (purityExtendWeakPullbackIso Λ a.geometricFiberProj M N e).hom ≫
         (CondensedRing.geometricFiberProjUpperStarFrobeniusIso Λ a).hom.app N := by
+  have : IsIso (purityFrobeniusProjUnit Λ a M) := by
+    dsimp only [purityFrobeniusProjUnit]
+    infer_instance
   refine Mod.hom_ext _ _ ?_
   rw [← cancel_epi (purityFrobeniusProjUnit Λ a M), Mod.zsmul_hom,
     Preadditive.comp_zsmul, Mod.comp_hom', Mod.comp_hom',

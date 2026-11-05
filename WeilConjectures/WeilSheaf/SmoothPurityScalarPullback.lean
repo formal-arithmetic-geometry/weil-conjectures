@@ -70,6 +70,13 @@ lemma purityExtendWeakPullbackIso_unit
       e.hom.hom ≫ purityPullbackUnit Λ g N :=
   Mod.extendUnitHom_extendScalarsMap (condensedPullbackHom Λ g) e.hom
 
+/-- The unit comparison for mapped modules is the identity on underlying objects. -/
+@[simp]
+lemma purityMapModUnitIso_hom_hom :
+    ((g)^*[Ab.{u + 1}].mapModUnitIso (R := condensedRingObj Λ X)).hom.hom =
+      𝟙 ((g)^*[Ab.{u + 1}].obj (condensedRingObj Λ X)) :=
+  rfl
+
 /-- The pullback unit for a variable commutative topological coefficient ring. -/
 noncomputable def purityContinuousPullbackUnit (T : Type) [TopologicalSpace T]
     [CommRing T] [IsTopologicalRing T]

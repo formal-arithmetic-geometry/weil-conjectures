@@ -52,13 +52,18 @@ already GREEN here. C4's finite-root, tower, trivialization, pullback, and pullb
 layers are green; its integral coefficient/Weil-structure and subsequent encoding layers
 remain unvalidated and have not been merged.
 
-The current obstruction is kernel conversion for concrete integral coefficients
-`Profinite.continuousMapRingObj ℤ_[l]`. Generic coefficient and generic topological-ring
-comparisons pass. Two concrete instance pins and a scoped 400000-heartbeat experiment did
-not solve it; the failed probes and heartbeat override were removed. The functor-level
-`purityIntegralPullbackForgetIso` passes, while its explicitly expanded component type timed
-out. An explicit functor-factorization experiment is ongoing in
-`SmoothPurityIntegralPullbackComparison.lean`; it is not yet validated.
+Concrete integral pullback/module morphism types triggered kernel timeouts. The upstream
+`TateModuleUpperStar` implementation documents the solution: keep the integral coefficient
+abstract until after extension to the final rational ring. This is now validated in
+`SmoothPurityRationalTrivialization`: `purityRationalTateTrivialization` specializes the root
+comparison with only Qbar modules in its result. It is GREEN at `3e120c984480`, log
+`/home/ubuntu/u9/logs/K4-20261105T081138.log`, without a heartbeat raise or opacity.
+
+The generic scalar Frobenius law and its coefficient-change transport are written and awaiting
+validation. The six validated C4 finite-root modules have been copied unchanged from C4 commit
+`fb1a1a08e329`. New local integration files `SmoothPurityTateWeilLaw`, `SmoothPurityTatePowers`,
+and `SmoothPurityTateEncoding` connect them to the rational construction; these drafts are NOT
+yet validated. No failing integral unit or factorization remains in the stable helper files.
 
 ## Validation
 

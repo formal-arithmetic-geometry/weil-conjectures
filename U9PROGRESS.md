@@ -331,3 +331,13 @@ BLOCKED: I have not constructed the general Weil purity morphism. The missing co
 ## 2026-11-05 08:12 +0800 — rational trivialization GREEN
 - SmoothPurityRationalTrivialization is GREEN, rc=0, log /home/ubuntu/u9/logs/K4-20261105T081138.log. The first check only needed the explicit local Mod.extendScalarsMonoidal instance. Concrete purityRationalTateTrivialization specializes Λ=ℤ_l AFTER extending coefficients; both source and target are Qbar pullbacks, and no kernel timeout occurs.
 - This confirms the workaround documented in upstream TateModuleUpperStar. Next: carry the Frobenius relation generically through coefficient extension and specialize its Qbar-only conclusion. No actual Weil encoding/DONE yet.
+
+## 2026-11-05 08:18 +0800 — generic law and Tate integration drafts
+- ScalarWeilLaw check submitted at869060668 is queued (remote ubuild PID1648387; no allocated log yet). No duplicate check submitted.
+- Added generic coefficient-change Frobenius coherence and scalar-law transport, using C4’s formal transport argument with Λ left abstract. Added a normalized unit-target version for the validated rational trivialization.
+- Copied C4’s six GREEN root modules unchanged from fetched fb1a1a08e329. Prepared new SmoothPurityTateWeilLaw/Powers/Encoding integrations, with distinct declaration names in the latter two to avoid collisions with C4’s still-unvalidated final files. These are drafts, not a completion claim.
+- Shared the concrete GREEN workaround and commit in both local and Weil shared NOTES. Original user-proof replacement patch remains unapplied and the general leaf unchanged. No DONE.
+
+## 2026-11-05 08:21 +0800 — generic Frobenius law rewrite repair
+- K4-20261105T081728.log rc=1 (131s) validates the rational comparison again, then reports two rewrite failures in ScalarWeilLaw: rewriting Functor.comp_obj inside a dependent identity motive, and an associativity mismatch caused by the unfolded composite-unit abbreviation. A kernel timeout followed the failed law proof.
+- Replaced the first proof by a fully generic isomorphism-square lemma, named the composite unit with a transparent def, and made its IsIso instance explicit. Aligned the weakly-etale instance choice across the whole file. No heartbeat changes. Next check includes the drafted coefficient-change and actual Tate encoding chain so further independent errors appear in one batch.

@@ -25,6 +25,18 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 
 attribute [local instance 20000] ProEtale.laxBraided_upperStar_of_weaklyEtale
 
+/-- Change coefficients after extending an isomorphism of pulled-back modules. -/
+noncomputable def purityChangeCoefficientPullbackIso
+    (M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
+    (e : ((g)^*[Ab.{u + 1}].mapMod _).obj M ≅
+      ((g)^*[Ab.{u + 1}].mapMod _).obj N) :
+    (g)^*⟦Λ'⟧.obj ((Mod.extendScalars (coefficientMap a X)).obj M) ≅
+      (g)^*⟦Λ'⟧.obj ((Mod.extendScalars (coefficientMap a X)).obj N) :=
+  ((CondensedRing.pullIso a g).app M).symm ≪≫
+    (Mod.extendScalars (coefficientMap a U)).mapIso
+      (purityExtendWeakPullbackIso Λ g M N e) ≪≫
+    (CondensedRing.pullIso a g).app N
+
 /-- Extend a pulled-back trivialization to the final coefficient ring before specializing it. -/
 noncomputable def purityChangeCoefficientTrivialization
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
@@ -33,10 +45,7 @@ noncomputable def purityChangeCoefficientTrivialization
     (g)^*⟦Λ'⟧.obj ((Mod.extendScalars (coefficientMap a X)).obj M) ≅
       (g)^*⟦Λ'⟧.obj (𝟙_ _) :=
   letI := Mod.extendScalarsMonoidal (coefficientMap a X)
-  ((CondensedRing.pullIso a g).app M).symm ≪≫
-    (Mod.extendScalars (coefficientMap a U)).mapIso
-      (purityExtendWeakPullbackIso Λ g M (𝟙_ _) e) ≪≫
-    (CondensedRing.pullIso a g).app (𝟙_ _) ≪≫
+  purityChangeCoefficientPullbackIso Λ a g M (𝟙_ _) e ≪≫
     (g)^*⟦Λ'⟧.mapIso (Functor.Monoidal.εIso
       (Mod.extendScalars (coefficientMap a X))).symm
 
