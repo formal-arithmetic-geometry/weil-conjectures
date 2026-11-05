@@ -107,7 +107,8 @@ lemma condensedRealizationLowerStarIso_hom :
         (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l)
           (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))
         (adicLowerStarCompCondensedModIso l
-        (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))).hom).natTrans := by
+        (Scheme.Hom.geometricFiberMap g
+          (comp_over g (Spec (CommRingCat.of k₀))))).hom).natTrans := by
   have h := mateEquiv_vcomp (upperStarLowerStarAdjunction k₀ l g)
     (adicUpperStarLowerStarAdjunction l
       (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))
@@ -179,7 +180,8 @@ lemma mateEquiv_derivedCondensedRealizationUpperStarIso_app
         (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))
       (derivedCondensedRealizationUpperStarIso k₀ l g).hom).natTrans.app K =
       (Functor.mapDerivedCategoryCompIso (IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l Y))
-          (adicSheafEquivCondensedMod l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor).hom.app
+          (adicSheafEquivCondensedMod l
+            (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor).hom.app
           ((lowerStar k₀ l g).rightDerivedFunctor.obj K) ≫
         (adicSheafEquivCondensedMod l
           (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor.mapDerivedCategory.map
@@ -253,7 +255,8 @@ with the identifications `D(forget ⋙ Φ) ≅ D(forget) ⋙ D(Φ)` moved to the
 lemma mateEquiv_derivedCondensedRealizationUpperStarIso_app'
     (K : DerivedCategory (ProEtaleWeilSheaf k₀ l Z)) :
     (Functor.mapDerivedCategoryCompIso (IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l Y))
-          (adicSheafEquivCondensedMod l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor).inv.app
+          (adicSheafEquivCondensedMod l
+            (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor).inv.app
           ((lowerStar k₀ l g).rightDerivedFunctor.obj K) ≫
       (mateEquiv (derivedUpperStarLowerStarAdjunction k₀ l g)
         (CondensedRing.derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj l)

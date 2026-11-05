@@ -23,7 +23,7 @@ direct images: `For ∘ Rg_* ≅ Rḡ_* ∘ For`
 (`AlgebraicGeometry.WeilComplex.geometricFiberBoundedConstructibleFunctorLowerStarIso`), the
 inverse of the derived base change map of the condensed realization. Its mate
 `For ∘ Rg^! ⟶ Rḡ^! ∘ For` is invertible for all right adjoints `Rg^!`, `Rḡ^!`
-(`AlgebraicGeometry.WeilComplex.isIso_mateEquiv_geometricFiberBoundedConstructibleFunctorLowerStarIso`).
+(`isIso_mateEquiv_geometricFiberBoundedConstructibleFunctorLowerStarIso`).
 
 ## Proof of the invertibility of the mate
 
@@ -161,7 +161,8 @@ theorem isIso_mateEquiv_geometricFiberBoundedConstructibleFunctorLowerStarIso
     (adicLowerStar l (Scheme.Hom.geometricFiberMap g
       (comp_over g (Spec (CommRingCat.of k₀))))).rightDerivedFunctor hR
   have : T_A.IsLeftAdjoint :=
-    isLeftAdjoint_boundedConstructibleAdicRightDerivedLowerStar_of_isProper k₀ (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure hk _
+    isLeftAdjoint_boundedConstructibleAdicRightDerivedLowerStar_of_isProper k₀
+      (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure hk _
   let adjA := Adjunction.ofIsLeftAdjoint T_A
   let U_Z := (objectProperty k₀ l Z).liftFullSubcategory
     (DerivedCategory.boundedConstructibleAdic l (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber)

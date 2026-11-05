@@ -45,8 +45,9 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
   (g : Z ⟶ Y) [g.IsOver (Spec (CommRingCat.of k₀))]
 
-omit [Finite k₀] [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] [IsSeparated (Z ↘ Spec (CommRingCat.of k₀))]
-  [LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (Z ↘ Spec (CommRingCat.of k₀))]
+omit [Finite k₀] [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
+  [IsSeparated (Z ↘ Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (Z ↘ Spec (CommRingCat.of k₀))]
   [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] in
 /-- The underlying morphism of `geometricFiberHom g` is the base change of `g`. -/
@@ -73,7 +74,8 @@ noncomputable def geometricFiberBoundedConstructibleFunctorUpperStarIso :
         CondensedRing.boundedConstructibleUpperStar _ l (geometricFiberHom (k₀ := k₀) g) :=
   ((ObjectProperty.fullyFaithfulι _).whiskeringRight _).preimageIso
     (Functor.associator _ _ _ ≪≫
-      Functor.isoWhiskerLeft (upperStar g) (geometricFiberBoundedConstructibleFunctorCompιIso k₀ l Z) ≪≫
+      Functor.isoWhiskerLeft (upperStar g)
+        (geometricFiberBoundedConstructibleFunctorCompιIso k₀ l Z) ≪≫
       (Functor.associator _ _ _).symm ≪≫
       Functor.isoWhiskerRight
         ((objectProperty k₀ l Y).liftFullSubcategoryCompιIso (objectProperty k₀ l Z)
@@ -95,13 +97,15 @@ ambient derived categories. -/
 lemma ι_map_geometricFiberBoundedConstructibleFunctorUpperStarIso_hom_app (T : WeilComplex k₀ l Y) :
     (ObjectProperty.ι _).map ((geometricFiberBoundedConstructibleFunctorUpperStarIso g).hom.app T) =
       (Functor.mapDerivedCategoryCompIso (IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l Z))
-          (adicSheafEquivCondensedMod l (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor).inv.app
+          (adicSheafEquivCondensedMod l
+            (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor).inv.app
           ((ProEtaleWeilSheaf.upperStar k₀ l g).mapDerivedCategory.obj T.obj) ≫
         (ProEtaleWeilSheaf.derivedCondensedRealizationUpperStarIso k₀ l g).inv.app T.obj ≫
         (CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
           (Scheme.Hom.geometricFiberMap g
             (comp_over g (Spec (CommRingCat.of k₀))))).leftDerivedFunctor.map
-          ((Functor.mapDerivedCategoryCompIso (IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l Y))
+          ((Functor.mapDerivedCategoryCompIso
+            (IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l Y))
             (adicSheafEquivCondensedMod l
               (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor).hom.app T.obj) := by
   simp only [geometricFiberBoundedConstructibleFunctorUpperStarIso,
@@ -135,7 +139,8 @@ lemma ι_map_geometricFiberBoundedConstructibleFunctorTensorIso_hom_app (X : Sch
     (ObjectProperty.ι _).map
       ((geometricFiberBoundedConstructibleFunctorTensorIso k₀ l X).hom.app (A, B)) =
       (Functor.mapDerivedCategoryCompIso (IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X))
-          (adicSheafEquivCondensedMod l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor).inv.app
+          (adicSheafEquivCondensedMod l
+            (X ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor).inv.app
           ((ProEtaleWeilSheaf.nativeDerivedTensor k₀ l X).obj (A.obj, B.obj)) ≫
         (ProEtaleWeilSheaf.condensedRealizationTensor k₀ l X).hom.app (A.obj, B.obj) ≫
         (Functor.mapDerivedCategoryCompIso (IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X))
@@ -186,7 +191,8 @@ lemma ι_map_geometricFiberBoundedConstructibleFunctorLowerStarIso_inv_app
     (M : WeilComplex k₀ l Z) :
     (ObjectProperty.ι _).map ((geometricFiberBoundedConstructibleFunctorLowerStarIso g).inv.app M) =
       (Functor.mapDerivedCategoryCompIso (IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l Y))
-          (adicSheafEquivCondensedMod l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor).inv.app
+          (adicSheafEquivCondensedMod l
+            (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor).inv.app
           ((ProEtaleWeilSheaf.lowerStar k₀ l g).rightDerivedFunctor.obj M.obj) ≫
         (mateEquiv (ProEtaleWeilSheaf.derivedUpperStarLowerStarAdjunction k₀ l g)
           (CondensedRing.derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj l)

@@ -118,7 +118,8 @@ theorem forget_map_projection_eq (A : WeilComplex k₀ l Z) (T : WeilComplex k�
       ((κ_ Y).inv.app ((Rg).obj A.obj) ≫ (β₀).app A.obj ≫ (Rḡ).map ((κ_ Z).hom.app A.obj)) ▷
         (Φ_ Y).obj ((U_ Y).obj T.obj) ≫
       (CondensedRing.derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj l)
-        (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))).projectionMorphism
+        (Scheme.Hom.geometricFiberMap g
+          (comp_over g (Spec (CommRingCat.of k₀))))).projectionMorphism
         ((Φ_ Z).obj ((U_ Z).obj A.obj)) ((Φ_ Y).obj ((U_ Y).obj T.obj)) := by
   have hPF := map_rightDerivedLowerStarNativeDerivedTensorIso_hom_app g A T
   simp only [rightDerivedLowerStarNativeDerivedTensorIso_hom_app, curriedTensor_obj_map,
