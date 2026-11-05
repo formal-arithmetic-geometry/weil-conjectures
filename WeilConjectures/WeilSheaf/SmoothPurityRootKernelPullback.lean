@@ -20,6 +20,8 @@ namespace AlgebraicGeometry.ProEtale
 
 open Scheme
 
+attribute [local implicit_reducible] MorphismProperty Scheme.ProEt
+
 /-- The two section identifications of the kernel of the power map agree, because
 both identify a section with its image in the sheaf of units. -/
 lemma purity_proEtaleRootsOfUnitySections_eq (X : Scheme.{u}) (N : ℕ) (V : X.ProEtᵒᵖ) :
@@ -61,7 +63,7 @@ lemma purityRootsPresheafKernelIso_lowerStar {X Y : Scheme.{u}} (g : X ⟶ Y) (N
     proEtaleRootsOfUnitySections X N _
       ((purityRootsPresheafKernelIso X N).hom.hom.app _
         ((rootsOfUnityToLowerStar g N).hom.app V x))
-  rw [(existsUnique_proEtaleRootsOfUnityDirectImageMap g N).exists.choose_spec,
+  erw [(existsUnique_proEtaleRootsOfUnityDirectImageMap g N).exists.choose_spec,
     purityRootsPresheafKernelIso_sections, purityRootsPresheafKernelIso_sections]
   rfl
 
@@ -75,8 +77,8 @@ lemma purityRootsPresheafKernelIso_upperStar {X Y : Scheme.{u}} (g : X ⟶ Y) (N
     homEquiv_upperStarRootsOfUnityComparison]
   change (purityRootsPresheafKernelIso Y N).hom ≫
       (proEtaleSheafAdjunction g Ab.{u + 1}).homEquiv _ _
-        ((proEtaleSheafAdjunction g Ab.{u + 1}).homEquiv _ _).symm
-          (proEtaleRootsOfUnityDirectImageMap g N) = _
+        (((proEtaleSheafAdjunction g Ab.{u + 1}).homEquiv _ _).symm
+          (proEtaleRootsOfUnityDirectImageMap g N)) = _
   rw [Equiv.apply_symm_apply]
   exact purityRootsPresheafKernelIso_lowerStar g N
 
@@ -88,6 +90,7 @@ lemma purity_rootsOfUnitySheafIsoKernel_upperStar {X Y : Scheme.{u}} (g : X ⟶ 
       upperStarRootsOfUnitySheafHom g N ≫ (rootsOfUnitySheafIsoKernel X N).hom := by
   simp only [rootsOfUnitySheafIsoKernel, upperStarRootsOfUnitySheafHom,
     Iso.trans_hom, Functor.map_comp, Category.assoc, Iso.inv_hom_id_assoc]
-  rw [purityRootsPresheafKernelIso_upperStar]
+  exact congrArg (fun a ↦ (g)^*[Ab.{u + 1}].map (rootsOfUnitySheafIso Y N).hom ≫ a)
+    (purityRootsPresheafKernelIso_upperStar g N)
 
 end AlgebraicGeometry.ProEtale
