@@ -65,12 +65,13 @@ private theorem derived_single_shift_inv (X : C) (n : ℤ) :
     exact Category.id_comp _
   simp only [NatTrans.comp_app, Functor.whiskerRight_app, he, Category.comp_id,
     Functor.map_id, Category.id_comp] at hs
-  change ((DerivedCategory.singleFunctors C).shiftIso (-n) n 0 (by simp)).inv.app X =
-    (((HomotopyCategory.singleFunctors C).postcomp DerivedCategory.Qh).shiftIso
-      (-n) n 0 (by simp)).inv.app X
-  apply (cancel_mono
-    (((DerivedCategory.singleFunctors C).shiftIso (-n) n 0 (by simp)).hom.app X)).1
-  rw [Iso.inv_hom_id_app, ← hs, Iso.inv_hom_id_app]
+  have hi : ((DerivedCategory.singleFunctors C).shiftIso (-n) n 0 (by simp)).inv.app X =
+      (((HomotopyCategory.singleFunctors C).postcomp DerivedCategory.Qh).shiftIso
+        (-n) n 0 (by simp)).inv.app X := by
+    apply (cancel_mono
+      (((DerivedCategory.singleFunctors C).shiftIso (-n) n 0 (by simp)).hom.app X)).1
+    rw [Iso.inv_hom_id_app, ← hs, Iso.inv_hom_id_app]
+  simpa only [SingleFunctors.postcomp_shiftIso_inv_app] using hi
 
 omit [EnoughInjectives C] in
 private theorem single_quotient_inverse_shift_int (X : C) (n : ℤ) :
