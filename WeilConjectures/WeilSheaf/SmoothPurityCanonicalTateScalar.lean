@@ -83,6 +83,6 @@ lemma purityCanonicalTateOneTrivialization_weil :
       dsimp only [purityModuleFactorIso, geometricFiberProjUpperStarFrobeniusIso] at he ⊢
       exact_mod_proofs he)
   dsimp only [Functor.comp_obj, Functor.comp_map] at h ⊢
-  exact_mod_proofs h
+  cast_proofs h
 
 end AlgebraicGeometry.ProEtale
