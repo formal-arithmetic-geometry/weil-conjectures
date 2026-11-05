@@ -136,7 +136,7 @@ theorem strictHenselization_residue_separable_model
   intro x
   have hx : IsSeparable F (d x) :=
     mem_separableClosure_iff.mp (σA x).property
-  exact hx.of_algHom a
+  exact IsSeparable.of_algHom F a hx
 
 
 end AlgebraicGeometry.Scheme

@@ -14,6 +14,7 @@ public import Mathlib.AlgebraicGeometry.OpenImmersion
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import WeilConjectures.Mathlib.Algebra.Module.LocalizedModule.Basic
 public import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
+public import WeilConjectures.AlgebraicGeometry.Modules.LocalDerivation
 public import WeilConjectures.AlgebraicGeometry.PicardFunctor
 public import WeilConjectures.Mathlib.RingTheory.Smooth.StandardSmoothCotangent
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
@@ -86,7 +87,7 @@ For an `A`-algebra `B`, apply these to `φ = CommRingCat.ofHom (algebraMap A B)`
 universe u
 
 open CategoryTheory Limits Opposite TopologicalSpace PresheafOfModules
-  PresheafOfModules.DifferentialsConstruction
+  PresheafOfModulesOfCommRing PresheafOfModulesOfCommRing.DifferentialsConstruction
 
 namespace AlgebraicGeometry.Scheme.Hom
 
@@ -536,7 +537,7 @@ noncomputable def relativeDifferentialsSpecΓDerivation :
     (fun a ↦ by
       rw [← Scheme.specMap_appTop_ΓSpecIso_inv, ← Scheme.Hom.appLE_top_top _ le_top,
         Scheme.Hom.appLE_eq_pullbackPresheafToPresheaf_app]
-      exact PresheafOfModules.Derivation'.d_app _ _)
+      exact PresheafOfModulesOfCommRing.Derivation'.d_app _ _)
 
 /-- For a ring map `φ : R ⟶ S`, the `S`-linear map `Ω_{S/R} → Γ(Spec S, Ω¹_{Spec S / Spec R})`
 sending `D b` to `d b`, given by the universal property of Kähler differentials. -/

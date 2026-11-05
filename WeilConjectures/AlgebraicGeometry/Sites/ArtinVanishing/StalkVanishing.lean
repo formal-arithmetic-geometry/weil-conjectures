@@ -211,7 +211,7 @@ lemma surjective_sheafFiber_map_lowerStar (t : Spec (.of Ω) ⟶ S)
   intro p
   obtain ⟨V, v, σ, rfl⟩ := (pointSmallEtale t).toPresheafFiber_jointly_surjective p
   have hTx := hT.map_of_exact (pullback.fst h V.hom)^*[AddCommGrpCat.{u + 1}]
-  obtain ⟨y, f, hf⟩ := H ⟨V, v⟩ (Sheaf.H.δSucc hTx 0
+  obtain ⟨y, f, hf⟩ := H ⟨v⟩ (Sheaf.H.δSucc hTx 0
     ((Sheaf.H.equiv₀ _ (Scheme.isTerminalEtale _)).symm (pullbackSection h T.X₃ V σ)))
   replace hf := (cohomologyMap_δSucc (pullbackEtaleMap h f.1) hTx 0 _).symm.trans hf
   obtain ⟨z, hz⟩ := (Sheaf.H.exact_map_δSucc (hTx.map_of_exact _) 0 _).1 hf
@@ -286,7 +286,7 @@ lemma isZero_sheafFiber_rightDerived_lowerStar (t : Spec (.of Ω) ⟶ S) (q : �
       have : Epi (Φ.map (((h)_*[AddCommGrpCat.{u + 1}]).map T.g)) :=
         (AddCommGrpCat.epi_iff_surjective _).2 (surjective_sheafFiber_map_lowerStar t hT H)
       rw [e', Φ.map_comp, Φ.map_comp]
-      infer_instance
+      exact epi_comp' inferInstance (epi_comp' this inferInstance)
     have h0 : Φ.map (hT.rightDerivedδ ((h)_*[AddCommGrpCat.{u + 1}]) 0) = 0 := by
       rw [← cancel_epi (Φ.map ((((h)_*[AddCommGrpCat.{u + 1}]).rightDerived 0).map T.g)),
         ← Φ.map_comp, hT.comp_rightDerivedδ ((h)_*[AddCommGrpCat.{u + 1}]) 0, Φ.map_zero, comp_zero]
