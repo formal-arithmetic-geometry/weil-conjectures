@@ -162,7 +162,7 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
   dsimp only [L, V, F, R, nativeOpenPull, derivedCondensedRealization,
     Functor.comp_obj, Functor.prod_obj, Functor.uncurry_obj_obj,
     curriedTensor_obj_obj, MonoidalCategory.tensor_obj] at hfinal ⊢
-  with_reducible_and_instances cast_proofs hfinal
+  with_reducible_and_instances exact hfinal
 
 include htotal in
 /-- The native pullback tensor square on arbitrary derived objects, extended from K-flat
