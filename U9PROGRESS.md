@@ -81,14 +81,21 @@
 - No local Lean/Lake, proof placeholders, trust escapes, or heartbeat increases.
 - This final commit changes only progress documentation after the successful build.
 
-# BZ298 in progress
+# BZ298 complete
 
 - Branch: `u9/BZ298`; starting commit: `18e44f2d5`.
+- Assigned module passed `ucheck-bump`: rc=0, failed=0, 2091 jobs at `ee70c90142ac8a8821df34b90a826136c0ab8a8b`.
+- Direct importer `GrothendieckHypercohomologyEdge` also built successfully.
+- Final check of both modules passed: rc=0, built=2, failed=0 on `newsrv:/home/ubuntu/u9n/bumpw7`.
+- Tested source commit: `3e33f5ff0f020a734f371440e09bcf5fc72dc2b3`.
+- Full final log: `/home/ubuntu/u9/bz/BUILD-BZ298-final-full.log`.
 - The user instructed continuation after the exact one-line statement compatibility proposal.
-- Applied `Unith.app (quotient.obj L)` → `Unit.app L` in
-  `GrothendieckResolutionUnitComparison`, matching `resolution_composite_unit_transport`.
-- The baseline and import-only remote checks both failed before proof checking; ineffective
-  imports were removed. No other statement, binder, or docstring changed.
-- Next: validate the assigned module, then its direct importer and one further layer.
-- Fix patterns and exact errors: `/home/ubuntu/u9/bz/FIXES-BZ298.md`.
+  Applied `Unith.app (quotient.obj L)` → `Unit.app L` in the assigned theorem.
+- The downstream repair uses the cochain `Q` IsGE instance directly. All other statements,
+  binders, assumptions, imports and existing docstrings are unchanged.
+- Second-layer importer `GrothendieckCocycleComparison` is skipped: its separate dependency
+  `RightDerivedCanonicalSingleUnit` fails at lines 47 and 51; it is owned by another helper.
+- Fix patterns, counts, exact errors and validation evidence: `/home/ubuntu/u9/bz/FIXES-BZ298.md`.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ298.DONE`.
+- This final commit changes only progress documentation after the successful build.
