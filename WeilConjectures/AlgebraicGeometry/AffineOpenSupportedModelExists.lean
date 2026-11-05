@@ -82,7 +82,7 @@ theorem affine_open_supported_model_exists
   have : PreservesFiniteColimits (t.inverse ⋙ t.functor) :=
     comp_preservesFiniteColimits t.inverse t.functor
   let counit : ti ⋙ td ≅ 𝟭 (DerivedCategory D) :=
-    (Functor.mapDerivedCategoryCompIso t.inverse t.functor).symm ≪≫
+    Functor.mapDerivedCategoryCompIso t.inverse t.functor ≪≫
       Functor.mapDerivedCategoryNatIso t.counitIso ≪≫ Functor.mapDerivedCategoryIdIso D
   let r := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U
   let K₀ := E'.obj⟦k⟧
@@ -147,7 +147,7 @@ theorem affine_open_supported_model_exists
     (QA ⋙ F) (QA ⋙ G) F G (cf ≪≫ cmp.symm)
   refine ⟨M, ⟨?_⟩⟩
   let d : K ≅ ti.obj (r.mapDerivedCategory.obj K₀) :=
-    (Functor.mapDerivedCategoryCompIso r t.inverse).app K₀
+    (Functor.mapDerivedCategoryCompIso r t.inverse).symm.app K₀
   exact fg.app M ≪≫ td.mapIso (j.mapIso (eq.counitIso.app Kq) ≪≫ d) ≪≫
     counit.app (r.mapDerivedCategory.obj K₀)
 
