@@ -68,6 +68,9 @@ private noncomputable def tensorRestriction (M : PresheafOfModules.{u} (R ⋙ fo
     (ModuleCat.extendScalars (α.app U).hom).obj (M.obj U) ⟶
       (ModuleCat.restrictScalars (S.map i).hom).obj
         ((ModuleCat.extendScalars (α.app V).hom).obj (M.obj V)) := by
+  let : Module (R.obj V)
+      ((ModuleCat.restrictScalars ((R ⋙ forget₂ CommRingCat RingCat).map i).hom).obj
+        (M.obj V)) := inferInstanceAs (Module (R.obj V) (M.obj V))
   let : Module (R.obj V) (S.obj V) :=
     Module.compHom (S.obj V) (α.app V).hom
   let T := (ModuleCat.restrictScalars (S.map i).hom).obj
@@ -101,6 +104,9 @@ private theorem tensorRestriction_tmul (M : PresheafOfModules.{u} (R ⋙ forget�
     (b : S.obj U) (m : M.obj U) :
     tensorRestriction R S α M i (b ⊗ₜ[R.obj U, (α.app U).hom] m) =
       S.map i b ⊗ₜ[R.obj V, (α.app V).hom] M.map i m := by
+  let : Module (R.obj V)
+      ((ModuleCat.restrictScalars ((R ⋙ forget₂ CommRingCat RingCat).map i).hom).obj
+        (M.obj V)) := inferInstanceAs (Module (R.obj V) (M.obj V))
   let : Module (R.obj V) (S.obj V) :=
     Module.compHom (S.obj V) (α.app V).hom
   let T := (ModuleCat.restrictScalars (S.map i).hom).obj
