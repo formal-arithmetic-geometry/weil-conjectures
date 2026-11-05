@@ -120,6 +120,47 @@ lemma ι_map_geometricFiberBoundedConstructibleFunctorUpperStarIso_hom_app (T : 
   simp only [Category.id_comp, Category.comp_id]
   erw [Category.id_comp]
 
+set_option maxHeartbeats 1000000 in
+set_option synthInstance.maxHeartbeats 400000 in
+-- the monoidal structure of the derived category of condensed modules is found slowly
+/-- The components of `AlgebraicGeometry.WeilComplex.geometricFiberBoundedConstructibleFunctorTensorIso`
+on the ambient derived categories. -/
+lemma ι_map_geometricFiberBoundedConstructibleFunctorTensorIso_hom_app (X : Scheme.{u})
+    [X.Over (Spec (CommRingCat.of k₀))] [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] (A B : WeilComplex k₀ l X) :
+    (ObjectProperty.ι _).map
+      ((geometricFiberBoundedConstructibleFunctorTensorIso k₀ l X).hom.app (A, B)) =
+      (Functor.mapDerivedCategoryCompIso (IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X))
+          (adicSheafEquivCondensedMod l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor).inv.app
+          ((ProEtaleWeilSheaf.nativeDerivedTensor k₀ l X).obj (A.obj, B.obj)) ≫
+        (ProEtaleWeilSheaf.condensedRealizationTensor k₀ l X).hom.app (A.obj, B.obj) ≫
+        (Functor.mapDerivedCategoryCompIso (IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X))
+          (adicSheafEquivCondensedMod l
+            (X ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor).hom.app A.obj ▷ _ ≫
+        _ ◁ (Functor.mapDerivedCategoryCompIso
+          (IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X))
+          (adicSheafEquivCondensedMod l
+            (X ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor).hom.app B.obj := by
+  simp only [geometricFiberBoundedConstructibleFunctorTensorIso,
+    Functor.FullyFaithful.preimageIso_hom, Functor.FullyFaithful.whiskeringRight_preimage_app,
+    ObjectProperty.ι_map, ObjectProperty.homMk_hom, Iso.trans_hom, NatTrans.comp_app, Iso.symm_hom,
+    Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app, Functor.associator_hom_app, Functor.associator_inv_app,
+    geometricFiberBoundedConstructibleFunctorCompιIso, Iso.symm_inv, Functor.isoWhiskerLeft_inv,
+    Iso.refl_hom, NatTrans.id_app, Iso.refl_inv, Category.id_comp, Category.comp_id,
+    CategoryTheory.Functor.map_id, boundedConstructibleιTensorIso, NatIso.ofComponents_hom_app,
+    NatIso.prod_hom, Functor.prod_map, NatTrans.prod_app_fst, NatTrans.prod_app_snd,
+    curriedTensor_map_app, curriedTensor_obj_map]
+  dsimp only [Functor.comp_obj, ObjectProperty.ι_obj, ObjectProperty.lift_obj_obj,
+    geometricFiberBoundedConstructibleFunctor, WeilComplex.forget, nativeConstructibleTensor,
+    ProEtaleWeilSheaf.derivedCondensedRealization, adicSheafDerivedEquivCondensedMod_functor,
+    Functor.prod_obj, Functor.uncurry_obj_obj, Functor.uncurry_obj_map]
+  erw [NatTrans.prod_app_fst, NatTrans.prod_app_snd]
+  simp only [Functor.whiskerLeft_app, curriedTensor_map_app, curriedTensor_obj_map,
+    Category.id_comp, Category.comp_id, ObjectProperty.ι_obj]
+  erw [Category.id_comp, Category.comp_id]
+
 variable [IsProper g]
 
 /-- **The proper projection formula of Weil complexes**: `Rg_* A ⊗ T ≅ Rg_*(A ⊗ g^* T)`, the
