@@ -182,3 +182,17 @@
   dependencies. The broad failing batch was stopped after those blockers were confirmed.
 - Handoff records: `/home/ubuntu/u9/bz/FIXES-BZ646.md` and `/home/ubuntu/u9/state/BZ646.DONE`.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
+
+
+# BZ683 in progress
+
+- Branch: `u9/BZ683`; starting commit: `4bbea9d82`.
+- Baseline `ucheck-bump` confirmed a generated local-instance proof-name collision
+  between ChangeOfRingsTransition and TensorProductOfUniverses.
+- The user instructed continuation after the exact one-line dependency-name proposal.
+  Applied `changeOfRingsTransitionRestrictedModule` to the anonymous local instance;
+  its type and proof and all theorem statements are unchanged.
+- Next: validate ChangeOfRingsTensorTransition, then its direct importer and one more layer.
+- Fix pattern, exact diagnostic, contextual rewrite rule, and occurrence counts:
+  `/home/ubuntu/u9/bz/FIXES-BZ683.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
