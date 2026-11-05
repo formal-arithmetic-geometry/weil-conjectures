@@ -34,7 +34,7 @@ lemma purity_upperStarFreeTowerIsoApp_comp (n : ℕ)
         (f)^*[Ab.{u + 1}].map (e n).hom ≫ (e' n).hom = (e'' n).hom) :
     (CondensedRing.upperStarComp Λ f g).hom.app
           ((Mod.freeFunctor (condensedRingObj Λ Z)).obj (F n)) ≫
-        (upperStar Λ f).map (upperStarFreeTowerIsoApp Λ g e n).hom ≫
+        (CondensedRing.upperStar Λ f).map (upperStarFreeTowerIsoApp Λ g e n).hom ≫
         (upperStarFreeTowerIsoApp Λ f e' n).hom =
       (upperStarFreeTowerIsoApp Λ (f ≫ g) e'' n).hom := by
   have hn := (freeFunctorCompUpperStarIso Λ f).hom.naturality (e n).hom

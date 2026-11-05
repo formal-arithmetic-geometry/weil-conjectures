@@ -60,7 +60,7 @@ lemma purity_upperStarExtendScalarsLimitFreeTowerIso_geometric_comp
       (f)^*[Ab.{u + 1}].map (e n).hom ≫ (e' n).hom = (e'' n).hom) :
     (CondensedRing.upperStarComp Λ' f g).hom.app
           ((Mod.extendScalars (coefficientMap a Z)).obj (limit TF)) ≫
-        (upperStar Λ' f).map
+        (CondensedRing.upperStar Λ' f).map
           (upperStarExtendScalarsLimitFreeTowerIso Λ g tF tG e a he hP).hom ≫
         (upperStarExtendScalarsLimitFreeTowerIso Λ f tG tH e' a he' hQ).hom =
       (upperStarExtendScalarsLimitFreeTowerIso Λ (f ≫ g) tF tH e'' a he'' hR).hom := by

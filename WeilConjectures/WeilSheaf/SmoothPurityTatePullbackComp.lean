@@ -27,7 +27,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [NeZero (ℓ : k)]
 lemma purity_upperStarTateTwistOneIso_comp :
     (CondensedRing.upperStarComp (Profinite.padicAlgClRingObj ℓ) f g).hom.app
           (tateTwistOne Z ℓ) ≫
-        (upperStar (Profinite.padicAlgClRingObj ℓ) f).map
+        (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) f).map
           (upperStarTateTwistOneIso ℓ g a).hom ≫
         (upperStarTateTwistOneIso ℓ f (g ≫ a)).hom =
       (upperStarTateTwistOneIso ℓ (f ≫ g) a).hom := by

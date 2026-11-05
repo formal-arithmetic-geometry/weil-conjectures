@@ -57,11 +57,11 @@ lemma purity_upperStarLimitFreeTowerIso_comp
     (hw : ∀ n, (ProEtale.upperStarComp Ab.{u + 1} f g).hom.app (F n) ≫
       (f)^*[Ab.{u + 1}].map (e n).hom ≫ (e' n).hom = (e'' n).hom) :
     (CondensedRing.upperStarComp Λ f g).hom.app (limit TF) ≫
-        (upperStar Λ f).map (upperStarLimitFreeTowerIso Λ g tF tG e he hP).hom ≫
+        (CondensedRing.upperStar Λ f).map (upperStarLimitFreeTowerIso Λ g tF tG e he hP).hom ≫
         (upperStarLimitFreeTowerIso Λ f tG tH e' he' hQ).hom =
       (upperStarLimitFreeTowerIso Λ (f ≫ g) tF tH e'' he'' hR).hom := by
   apply purity_limit_pullback_composition TF TG TH
-    (upperStar Λ g) (upperStar Λ f) (upperStar Λ (f ≫ g))
+    (CondensedRing.upperStar Λ g) (CondensedRing.upperStar Λ f) (CondensedRing.upperStar Λ (f ≫ g))
     (CondensedRing.upperStarComp Λ f g)
     (upperStarFreeTowerHom Λ g tF tG e he)
     (upperStarFreeTowerHom Λ f tG tH e' he')

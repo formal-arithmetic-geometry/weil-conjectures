@@ -37,7 +37,7 @@ theorem purity_nonempty_tateTwistOnePair_iso_unitScalar :
   obtain ⟨ζ, hζ, hζ'⟩ := IsSepClosed.exists_isPrimitiveRoot_pow_eq (AlgebraicClosure k₀) ℓ
   let e := purityCanonicalTateOneTrivialization ℓ (X ↘ Spec (.of k₀)) hζ hζ'
   refine ⟨IsoAlgebra.isoMk e ?_⟩
-  change (upperStar (Profinite.padicAlgClRingObj ℓ)
+  change (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ)
       (X ↘ Spec (.of k₀)).geometricGaloisFrobenius.hom).map e.hom ≫
       (Functor.OplaxMonoidal.η _ ≫
         (ProEtaleWeilSheaf.regularSmulIso k₀ ℓ X (WeilSheaf.cyclotomicUnit k₀ ℓ)).hom) =

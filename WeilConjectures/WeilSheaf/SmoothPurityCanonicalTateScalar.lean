@@ -41,7 +41,7 @@ noncomputable def purityCanonicalTateOneTrivialization :
         (condensedRingObj (Profinite.padicAlgClRingObj ℓ) a.geometricFiber)) :=
   (upperStarTateTwistOneIso ℓ a.geometricFiberProj a).symm ≪≫
     purityTateTwistOneTrivialization a hζ hζ' ≪≫
-    (Functor.Monoidal.εIso (upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricFiberProj)).symm
+    (Functor.Monoidal.εIso (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricFiberProj)).symm
 
 /-- The canonical geometric Tate datum has the expected q-scalar law under the
 root trivialization. -/
@@ -50,10 +50,10 @@ lemma purityCanonicalTateOneTrivialization_weil :
         ((upperStarTateTwistOneIso ℓ a.geometricGaloisFrobenius.hom
           a.geometricFiberToAlgebraicClosure).hom ≫
           (purityCanonicalTateOneTrivialization ℓ a hζ hζ').hom) =
-      (upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricGaloisFrobenius.hom).map
+      (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricGaloisFrobenius.hom).map
           (purityCanonicalTateOneTrivialization ℓ a hζ hζ').hom ≫
         (Functor.Monoidal.εIso
-          (upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricGaloisFrobenius.hom)).inv := by
+          (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricGaloisFrobenius.hom)).inv := by
   have ha := purity_upperStarTateTwistOneIso_factor ℓ a.geometricFiberProj
     a.geometricGaloisFrobenius.hom
     a.geometricGaloisFrobenius_hom_comp_geometricFiberProj a
@@ -64,9 +64,9 @@ lemma purityCanonicalTateOneTrivialization_weil :
     a.geometricGaloisFrobenius_hom_comp_geometricFiberProj
   have he := purityTateTwistOneTrivialization_weil a hζ hζ'
   have h := purity_scalarDatum_conjugate
-    (upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricGaloisFrobenius.hom)
+    (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricGaloisFrobenius.hom)
     (upperStarTateTwistOneIso ℓ a.geometricFiberProj a)
-    (Functor.Monoidal.εIso (upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricFiberProj)).symm
+    (Functor.Monoidal.εIso (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricFiberProj)).symm
     ((purityModuleFactorIso (Profinite.padicAlgClRingObj ℓ) a.geometricFiberProj
       a.geometricGaloisFrobenius.hom
       a.geometricGaloisFrobenius_hom_comp_geometricFiberProj).hom.app (tateTwistOne X ℓ))
@@ -76,7 +76,7 @@ lemma purityCanonicalTateOneTrivialization_weil :
     (upperStarTateTwistOneIso ℓ a.geometricGaloisFrobenius.hom
       a.geometricFiberToAlgebraicClosure).hom
     (Functor.Monoidal.εIso
-      (upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricGaloisFrobenius.hom)).inv
+      (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricGaloisFrobenius.hom)).inv
     ha hb (purityTateTwistOneTrivialization a hζ hζ') (Nat.card k : ℤ)
     (by
       dsimp only [purityModuleFactorIso, geometricFiberProjUpperStarFrobeniusIso] at he ⊢

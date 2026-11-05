@@ -45,7 +45,7 @@ lemma purity_upperStarTateTwistOneIso_congr
 lemma purity_upperStarTateTwistOneIso_factor
     {X U : Scheme.{u}} (p : U ⟶ X) (s : U ⟶ U) (hs : s ≫ p = p)
     (a : X ⟶ Spec (.of k)) :
-    (upperStar (Profinite.padicAlgClRingObj ℓ) s).map (upperStarTateTwistOneIso ℓ p a).hom ≫
+    (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) s).map (upperStarTateTwistOneIso ℓ p a).hom ≫
         (upperStarTateTwistOneIso ℓ s (p ≫ a)).hom =
       (purityModuleFactorIso (Profinite.padicAlgClRingObj ℓ) p s hs).hom.app
           (tateTwistOne X ℓ) ≫ (upperStarTateTwistOneIso ℓ p a).hom := by
@@ -61,18 +61,18 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 
 /-- The unit comparison respects equality of the geometric pullback. -/
 lemma purity_upperStar_unit_congr {X Y : Scheme.{u}} {f g : X ⟶ Y} (h : f = g) :
-    (upperStarCongr Λ h).hom.app (𝟙_ _) ≫ (Functor.Monoidal.εIso (upperStar Λ g)).inv =
-      (Functor.Monoidal.εIso (upperStar Λ f)).inv := by
+    (CondensedRing.upperStarCongr Λ h).hom.app (𝟙_ _) ≫ (Functor.Monoidal.εIso (CondensedRing.upperStar Λ g)).inv =
+      (Functor.Monoidal.εIso (CondensedRing.upperStar Λ f)).inv := by
   subst g
-  simp [upperStarCongr]
+  simp [CondensedRing.upperStarCongr]
 
 /-- The canonical unit comparison carries the descent datum to the unit datum. -/
 lemma purity_upperStar_unit_factor {X U : Scheme.{u}}
     (p : U ⟶ X) (s : U ⟶ U) (hs : s ≫ p = p) :
-    (upperStar Λ s).map (Functor.Monoidal.εIso (upperStar Λ p)).inv ≫
-        (Functor.Monoidal.εIso (upperStar Λ s)).inv =
+    (CondensedRing.upperStar Λ s).map (Functor.Monoidal.εIso (CondensedRing.upperStar Λ p)).inv ≫
+        (Functor.Monoidal.εIso (CondensedRing.upperStar Λ s)).inv =
       (purityModuleFactorIso Λ p s hs).hom.app (𝟙_ _) ≫
-        (Functor.Monoidal.εIso (upperStar Λ p)).inv := by
+        (Functor.Monoidal.εIso (CondensedRing.upperStar Λ p)).inv := by
   apply (cancel_epi ((CondensedRing.upperStarComp Λ s p).hom.app (𝟙_ _))).mp
   simp only [purityModuleFactorIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     Category.assoc, Iso.hom_inv_id_app_assoc]

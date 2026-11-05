@@ -26,6 +26,8 @@ variable (T : Type) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T]
   {X Y : Scheme.{u}} (g : X ⟶ Y) (hY : IsUnit (N : Γ(Y, ⊤)))
   (hX : IsUnit (N : Γ(X, ⊤)))
 
+include T hT
+
 /-- Inverse-coordinate form of the root comparison square. -/
 lemma purity_comparisonUpperStarRootsOfUnityIso_pullback_inv :
     upperStarRootsOfUnitySheafHom g N ≫
