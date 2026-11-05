@@ -46,11 +46,11 @@ lemma projection_derived_square_of_model_families
     (flatC : CochainComplex C ℤ → Prop) (flatD : CochainComplex D ℤ → Prop)
     (hL : ∀ P, flatC P → flatD ((L.mapHomologicalComplex (.up ℤ)).obj P))
     (modelC : ∀ P T, flatC P → flatC T →
-      DZ.obj (DerivedCategory.Q.obj P, DerivedCategory.Q.obj T) ≅
-        DerivedCategory.Q.obj ((TC.obj P).obj T))
+      (DZ.obj (DerivedCategory.Q.obj P, DerivedCategory.Q.obj T) ≅
+        DerivedCategory.Q.obj ((TC.obj P).obj T)))
     (modelD : ∀ P T, flatD P → flatD T →
-      DU.obj (DerivedCategory.Q.obj P, DerivedCategory.Q.obj T) ≅
-        DerivedCategory.Q.obj ((TD.obj P).obj T))
+      (DU.obj (DerivedCategory.Q.obj P, DerivedCategory.Q.obj T) ≅
+        DerivedCategory.Q.obj ((TD.obj P).obj T)))
     (t : Functor.uncurry.obj TC ⋙ L.mapHomologicalComplex (.up ℤ) ≅
       (L.mapHomologicalComplex (.up ℤ)).prod (L.mapHomologicalComplex (.up ℤ)) ⋙
         Functor.uncurry.obj TD)

@@ -402,3 +402,5 @@ derivedCondensedRealization before casting, including hmZ and htotal interfaces.
 2026-11-05 09:58 CST: 095706 rc1 in10s, generic new wrapper GREEN. Native modelZ data now sees uncurry.obj.object versus curried.obj.obj; explicitly normalize Functor.uncurry_obj_obj before the two existing reducible model casts. This is an ordinary component conversion, not the prior totalFamily type.
 
 2026-11-05 10:01 CST: 095840 rc1 in8.1s: model data interfaces pass; hr differs only at nativeOpenTensorModel versus id nativeOpenTensorModel, introduced by explicit uncurry normalization. Add id delta reduction at hr and the two model-normalization interfaces. No budget change.
+
+2026-11-05 10:08 CST: While100054 remains active, prepare independent generic family wrapper: maps restriction normalization through realization abstractly and applies both realization normalizations to arbitrary flat inputs. Added generic normalization predicates and native family lemma; first genericcheck100631 caught only missing parentheses around iso types after arrows, fixed. This moves model formation and the remaining native LP/LT-specific casts to the generic context if100054 still fails.

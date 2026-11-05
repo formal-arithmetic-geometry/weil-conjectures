@@ -25,8 +25,8 @@ def ProjectionRealizationModelNormalization
     (DC : DerivedCategory C × DerivedCategory C ⥤ DerivedCategory C)
     (flat : CochainComplex C ℤ → Prop)
     (model : ∀ P T, flat P → flat T →
-      DC.obj (DerivedCategory.Q.obj P, DerivedCategory.Q.obj T) ≅
-        DerivedCategory.Q.obj ((TC.obj P).obj T))
+      (DC.obj (DerivedCategory.Q.obj P, DerivedCategory.Q.obj T) ≅
+        DerivedCategory.Q.obj ((TC.obj P).obj T)))
     (n : Functor.uncurry.obj TC ⋙ F.mapHomologicalComplex (.up ℤ) ≅
       (F.mapHomologicalComplex (.up ℤ)).prod (F.mapHomologicalComplex (.up ℤ)) ⋙
         Functor.uncurry.obj (curriedTensor _))
@@ -69,4 +69,25 @@ def ProjectionOrdinaryModelNormalization
       R.mapDerivedCategory.map ((f ⊗ₘ g) ≫ Functor.LaxMonoidal.μ DerivedCategory.Q P T) ≫
         R.mapDerivedCategoryFactors.hom.app (P ⊗ T) ≫ DerivedCategory.Q.map (d P T).hom
 
+universe u u₁ u₂
+
+namespace Functor
+
+variable {C : Type u₁} [Category.{u + 1} C] [Abelian C] [IsGrothendieckAbelian.{u + 1} C]
+  [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
+  [Abelian.HasFunctorialFlatResolution C]
+  {D : Type u₂} [Category.{u + 1} D] [Abelian D] [IsGrothendieckAbelian.{u + 1} D]
+  [MonoidalCategory D] [MonoidalPreadditive D] [MonoidalClosed D] [BraidedCategory D]
+  [Abelian.HasFunctorialFlatResolution D]
+  (R : C ⥤ D) [R.Additive] [PreservesFiniteLimits R] [PreservesFiniteColimits R]
+  [R.PreservesFlat] [R.IsLeftAdjoint] [R.Monoidal]
+
+/-- The ordinary exact-derived tensor comparison is normalized on every total model. -/
+lemma projection_ordinary_model_normalization :
+    ProjectionOrdinaryModelNormalization R (fun P T ↦ (R.mapCochainComplexμIso P T).symm)
+      (fun X Y ↦ (R.mapDerivedCategoryTensorComparison.app X).app Y) := by
+  intro X Y P T f g
+  exact R.projection_mapDerivedCategoryTensorComparison_total_model X Y P T f g
+
+end Functor
 end CategoryTheory
