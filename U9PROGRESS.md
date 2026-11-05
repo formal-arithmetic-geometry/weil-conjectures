@@ -1,11 +1,14 @@
-# BZ152 in progress
+# BZ152 complete
 
 - Branch: `u9/BZ152`.
 - The user instructed continuation after the exact statement-compatibility proposal;
   the proposed compositor orientation and explicit homotopy-localization edits are applied.
-- DVR and identity homology comparison modules already passed `ucheck-bump`.
-- Next: build all four assigned modules together, repair any remaining proof errors,
-  and write `/home/ubuntu/u9/state/BZ152.DONE` only after success.
+- All four assigned modules passed `ucheck-bump` together: rc=0, failed=0, 3357 jobs.
+- Validated source commit: `a0e75fbc428ca3fe9724a0cd92c7a8cc14ea3060`.
+- Each target rebuilt successfully on `newsrv:/home/ubuntu/u9n/bumpw2`.
+- Full log: `/home/ubuntu/u9/bz/BZ152-build-final-full.log`.
+- Completion marker: `/home/ubuntu/u9/state/BZ152.DONE`.
+- This final commit changes progress documentation only.
 - Patterns, proposal, and build logs: `/home/ubuntu/u9/bz/FIXES-BZ152.md`.
 - No local Lean/Lake execution, forbidden proof escapes, or heartbeat increases.
 
