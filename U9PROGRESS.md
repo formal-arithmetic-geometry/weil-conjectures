@@ -142,33 +142,21 @@
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ554 complete
-
-- Branch: `u9/BZ554`; starting commit: `8af5cb324`.
-- Assigned module and seven downstream modules passed `ucheck-bump` across two layers.
-- Final Lean-source commit: `3d1e83ae5e8d408991267e32ba100230a54cf3e0`.
-- Final check: rc=0, failed=0, 2853 jobs on `poolb:43.166.81.121`;
-  ConstantTowerNormalization and RingedTopoiDerivedPullback rebuilt successfully.
-- The earlier downstream run verified DiagramRingRestrictionPushforward's local
-  scalar-action bridge and the other second-layer comparison modules.
-- The user authorized the exact identity-cast statement proposal and one-line
-  InternalHom prerequisite repair by instructing continuation after each proposal.
-  All other existing statements and all docstrings are unchanged.
-- Additional fixes: public Abelian.Exact/localization imports, a private scalar-action
-  instance, and removal of a redundant rfl after simp.
-- Patterns and validation logs: `/home/ubuntu/u9/bz/FIXES-BZ554.md`.
-- Source contract audit: `/home/ubuntu/u9/bz/BZ554-contract-audit.txt`.
-- Completion marker: `/home/ubuntu/u9/state/BZ554.DONE`.
-- No local Lean/Lake, proof placeholders, trust bypasses, profiler probes or heartbeat increases.
-- This completion commit changes only documentation; Lean sources match the checked commits.
-
-# BZ557 in progress
+# BZ557 complete
 
 - Branch: `u9/BZ557`; starting commit: `8af5cb324`.
-- Added the public AffineScheme import to direct importer AffineBasisSectionsDerivedUnit.
-- Initial remote builds stopped in the shared Presheaf.InternalHom dependency.
-- On continuation, merged BZ558 prerequisite repair `f28760733369366ac823f0084f3c4090afa3a90d`.
-- Next: ucheck-bump on AffineBasisSectionsResolutionHomologyEpi, AffineBasisSectionsDerivedUnit,
-  and AffineOpenSectionsResolutionQuasiIso; fix any owned errors and write DONE when green.
-- Notes and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ557.md`.
-- No local Lean/Lake, statement changes, proof escapes, or heartbeat increases.
+- Assigned leaf and both downstream layers passed `ucheck-bump` together:
+  rc=0, failed=0, 3579 jobs, on `poolb:43.166.72.219`.
+- Validated source commit: `2d40c3770cd21a6acd45398c358a55e70050beee`.
+- Green modules: `WeilConjectures.AlgebraicGeometry.AffineBasisSectionsResolutionHomologyEpi`,
+  `WeilConjectures.AlgebraicGeometry.AffineBasisSectionsDerivedUnit`, and
+  `WeilConjectures.AlgebraicGeometry.AffineOpenSectionsResolutionQuasiIso`.
+- Added the public AffineScheme import to AffineBasisSectionsDerivedUnit.
+- Integrated BZ558 prerequisite proof repair `f28760733369366ac823f0084f3c4090afa3a90d`.
+- All three requested modules retain their original statements and proof bodies.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ557-resumed-full.log`.
+- Patterns and counts: `/home/ubuntu/u9/bz/FIXES-BZ557.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ557-contract-audit.txt`.
+- No local Lean/Lake, sorries, forbidden proof shortcuts, or heartbeat increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ557.DONE`.
+- This final commit changes only progress documentation; Lean sources match the green build.
