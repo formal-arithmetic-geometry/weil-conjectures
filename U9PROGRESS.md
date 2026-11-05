@@ -95,3 +95,7 @@
   identifies the source actually checked.
 - Fix patterns and inventories: `/home/ubuntu/u9/bz/FIXES-BZ287.md`.
 - No local Lean/Lake, forbidden proof escapes, heartbeat raises or profiler probes.
+- Core validation succeeded at `20c9b2e93fd5c191dd08375caec64c9c99169d6b`:
+  `SectionsRestriction` built in 3.4s; Build completed successfully (3876 jobs).
+  Log: `/home/ubuntu/u9/bz/BUILD-BZ287-core-full.log`.
+- Next: validate the four direct importers with ucheck-bump; skip out-of-unit blockers.
