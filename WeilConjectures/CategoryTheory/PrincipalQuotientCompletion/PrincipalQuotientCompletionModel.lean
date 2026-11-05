@@ -108,6 +108,9 @@ noncomputable def quotientTower
       (SheafOfModules.derivedChangeRingIndependentCoefficients J R)) ℤ ⥤
     CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{r}
       (SheafOfModules.derivedChangeRingIndependentCoefficients J R)) ℤ := by
+  let instPresheafCoproducts (I : Type r) : HasColimitsOfShape (Discrete I)
+      (PresheafOfModules.{r} (SheafOfModules.derivedChangeRingIndependentCoefficients J R).obj) :=
+    PresheafOfModules.hasColimitsOfShape _ _
   letI := SheafOfModules.isMonoidal_W_independentCoefficients R
   letI := SheafOfModules.monoidalCategory R
   letI := SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients R
