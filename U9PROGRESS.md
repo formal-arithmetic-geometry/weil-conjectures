@@ -106,23 +106,40 @@
 - Completion marker: `/home/ubuntu/u9/state/BZ311.DONE`.
 - This final commit changes only progress documentation; Lean sources match the green build.
 
-# BZ407 complete
+# BZ384 in progress
 
-- Branch: `u9/BZ407`; starting commit: `98654719b`.
-- Assigned module: `WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryStrictSquare`.
-- Passed `ucheck-bump`: rc=0, failed=0, 2138 jobs, on `poolb:43.135.211.170`.
-- Validated source commit: `9d25365cc1bf621e7647d57a5a76f5cb42b0456d`.
-- Full successful log: `/home/ubuntu/u9/bz/BUILD-BZ407-assigned-green.log`.
-- The user instructed continuation after the exact three-hypothesis API correction proposal.
-  Applied those corrections and matching proof changes to preserve the maps under Mathlib's
-  reversed composition isomorphism; cancellation now uses `Iso.eq_inv_comp`.
-- Checked all four direct importers and one second-layer importer. All are blocked by
-  outside-unit dependencies, so they were skipped as the brief requires. The adic importers
-  depend on `ProEtaleFinitelyPresentedLocalModelsComparisonSupplement`; the category-theory
-  branch depends on `RightDerivedFunctor.UnitRetraction`. Full diagnostics are in the fix log.
-- Stopped the two blocked downstream batches after confirming their unowned dependency failures;
-  verified their exact build processes exited. No downstream source files were edited.
-- Fix patterns, occurrence counts, and downstream logs: `/home/ubuntu/u9/bz/FIXES-BZ407.md`.
-- No local Lean/Lake execution, sorries, forbidden proof shortcuts, or heartbeat increases.
-- Completion marker: `/home/ubuntu/u9/state/BZ407.DONE`.
-- This final commit changes only progress documentation; Lean source matches the green build.
+- Branch: `u9/BZ384`; starting commit: `98654719b`.
+- Baseline remote build confirmed five errors in compositor directions in declaration types.
+- The user instructed continuation after the explicit nine-direction patch proposal.
+  That patch is now applied, preserving the original equations under Mathlib's reversed compositor.
+- Next: remote validation of the assigned module, then its three direct importers.
+- Fix patterns and baseline log: `/home/ubuntu/u9/bz/FIXES-BZ384.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+# BZ469 complete
+
+- Branch: `u9/BZ469`; starting commit: `99a06bbbb`.
+- Assigned module and downstream continuation pass `ucheck-bump`: rc=0, failed=0,
+  4250 jobs on `newsrv:/home/ubuntu/u9n/bumpw1`.
+- Validated source commit: `aa9e4bf9dd9d54aaf2c32a7536f56be00764afeb`.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ469-final-full.log`.
+- The user instructed continuation after the explicit compositor API proposal.
+  Four approved statement sites use `.symm` for Mathlib's reversed compositor;
+  two proof-local q' annotations explicitly target quotient followed by Plus.Qh.
+- Green modules:
+- WeilConjectures.AlgebraicGeometry.EtaleInjectiveSectionsComparison
+- WeilConjectures.AlgebraicGeometry.Etale.EtaleInjectiveSectionsComparison
+- WeilConjectures.AlgebraicGeometry.StrictLocalInjectiveSourceComparison
+- WeilConjectures.AlgebraicGeometry.StrictLocalInjectiveSourceTransition
+- WeilConjectures.AlgebraicGeometry.Strict.Local.StrictLocalInjectiveSourceComparison
+- WeilConjectures.AlgebraicGeometry.SourceStageSectionsNaturality
+- WeilConjectures.AlgebraicGeometry.SourceDerivedSectionsNaturalityCore
+- WeilConjectures.AlgebraicGeometry.SourceDerivedSectionsNaturality
+- Skipped StrictLocalInjectiveSourceSections because unowned dependencies
+  InjectiveExchangeSourceTransport, InjectiveExchangeTargetTransport, and
+  SourceLocalizedCocycleHomology fail. Their source files are untouched.
+- Patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ469.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ469-contract-audit.txt`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ469.DONE`.
+- This final commit updates only progress documentation; Lean sources match the green build.
