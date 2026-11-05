@@ -5,3 +5,7 @@
 19:42: Baseline ucheck ec39b3fb1f: CoeffSynInstance + original reading (inherited 2M diagnostic remains unchanged at this baseline only). Log /home/ubuntu/u9/logs/K4a-20261105T194229.log, poolr:43.157.132.198. Read NOTES and k4-experiments. Prior C1 Syn log193556 confirms synHread kernel56.8s and bridge59.6s timeouts.
 
 19:46: Prepared new K4CoefficientInterface / K4CoefficientComposition. Explicit no_expose coeffType/coeffRingObj, all instances and data consistently use synonyms, rfl characterizations, individually normalized input squares, separate consumer. profiler.threshold 0 measures all declarations. This avoids editing C1-owned files and tests real import opacity. Baseline still running.
+
+19:48: Baseline CoeffSyn completed with missing factorization helper + coeffHred/coeffHread/original bridge timeouts. Canceled only verified own timeout process4087540 on43.157.132.198; inherited 2M original probe was unnecessary. New API fixes the missing helper by rfl, exports originalEquation as a checked implication; ucheck now only K4CoefficientComposition at default budgets.
+
+19:54: New concrete interface FAILED at normal budgets (913381cea7, K4a-194652). coeffHred kernel60.6s, coeffHread63.6s, originalEquation62.6s. All definitions/instances/factorization themselves fast. Normalizing aliases inside each theorem does not remove the final conversion from its declared type. Plan: move ring/type synonyms + equations to an interface generic in finite T, establish characterization/bridge with abstract T, then specialize the API across a module boundary.

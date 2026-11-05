@@ -17,10 +17,7 @@ Each compatibility equation is checked here; composition uses only this exported
 -/
 
 set_option profiler true
-set_option profiler.threshold 0` prints the time of each piece. -/
-
-set_option profiler true
-set_option profiler.threshold 0
+set_option profiler.threshold 1
 
 public section
 
