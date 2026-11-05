@@ -183,22 +183,41 @@
 - Handoff records: `/home/ubuntu/u9/bz/FIXES-BZ646.md` and `/home/ubuntu/u9/state/BZ646.DONE`.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
 
-# BZ697 complete
 
-- Branch: `u9/BZ697`; starting source commit: `6a2f94596`.
-- User continuation authorized the exact two-field compositor API patch proposed earlier.
-  `pullEvaluation_model` and `coefficientPullback_transpose` now use the pinned Mathlib
-  compositor direction; all other declaration text and existing docstrings are unchanged.
-- Leaf validation: `2250be4ddc3d32a1a720e9a716432dca4cbcd57e`, rc=0, failed=0, 4895 jobs.
-- Final downstream validation: `0c023010b6`, rc=0, failed=0, 5132 jobs.
-- Three modules rebuilt green: `SemilinearGeometryDerived`,
-  `RingedCoefficientProjectionData`, and `RingedCoefficientPullbackComparison`, all under
-  `WeilConjectures.AlgebraicGeometry`.
-- Skipped `Geometry.SemilinearGeometryOps` and `Geometric.GeometricOrdinaryRealization`
-  because their unowned PZ007 dependency `CoefficientRingedSequenceSiteSupplement` has
-  four confirmed errors in identical source. The unvalidated downstream edit was reverted.
-- Full logs, source-hash blocker evidence, contract audit and machine rule are recorded in
-  `/home/ubuntu/u9/bz/FIXES-BZ697.md`. Completion marker: `/home/ubuntu/u9/state/BZ697.DONE`.
-- Actual build pins checked: Lean v4.35.0-rc3, Mathlib b63f6e8a68d220e3b3bc4f3792bb53650d375f24.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
+# BZ683 complete
+
+- Branch: `u9/BZ683`; starting commit: `4bbea9d82`.
+- Assigned module `WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsTensorTransition`
+  passed `ucheck-bump`: rc=0, failed=0, 2873 jobs, target rebuilt in 9.4 seconds.
+- Validated source commit: `9ebd05ad943b03304d7e35268cffa36c7118fa18`.
+- The user instructed continuation after the exact one-line dependency-name proposal.
+  Named the local instance in `ChangeOfRingsTransition` as
+  `changeOfRingsTransitionRestrictedModule`; its type and proof remain unchanged.
+  This removes the generated proof-name collision with `TensorProductOfUniverses`.
+- The dependency also rebuilt successfully. Assigned leaf source and all statements are unchanged.
+- Both downstream layers were attempted: `FinitePerfectAdicQuotientStrictRealizationData`
+  and `FinitePerfectAdicQuotientStrictRealizationSquare`. Skipped because six dependencies
+  outside this unit fail; the batch was stopped after collecting those diagnostics.
+- Full logs: `/home/ubuntu/u9/bz/BUILD-BZ683-fix1-full.log` and
+  `/home/ubuntu/u9/bz/BUILD-BZ683-downstream-full.log`.
+- Fix pattern, exact diagnostic, contextual rewrite rule, and whole-tree occurrence counts:
+  `/home/ubuntu/u9/bz/FIXES-BZ683.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ683-contract-audit.txt`.
+- Completion marker: `/home/ubuntu/u9/state/BZ683.DONE`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
 - This final commit changes only progress documentation; Lean sources match the green build.
+
+# BZ740 in progress
+
+- Branch: `u9/BZ740`; starting commit: `f271bd088`.
+- Reread the brief and progress notes on continuation; no new LEAD lines.
+- The import-only remote build fixed both private-helper errors, leaving the public Qh/Q mismatch.
+- The user instructed continuation after the exact one-line identity-cast proposal.
+  Applied `BZ740-statement-cast-proposal.patch`, preserving the original morphism.
+- Next: validate the assigned normalization module through `ucheck-bump`, then its direct importer.
+- Fix patterns and exact diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ740.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+- Assigned normalization module is GREEN at `814682ae46`: `ucheck-bump` rc=0,
+  failed=0, 3927 jobs, target rebuilt in 48 seconds.
+- Remote log: `/home/ubuntu/u9/logs/BZ740-20261106T061103.log`.
+- Checking downstream `DerivedPullbackTensorUnitKFlat` and `DerivedPullbackTensorUnit`.
