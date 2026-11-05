@@ -106,12 +106,24 @@
 - Completion marker: `/home/ubuntu/u9/state/BZ311.DONE`.
 - This final commit changes only progress documentation; Lean sources match the green build.
 
-# BZ384 in progress
+# BZ384 complete
 
 - Branch: `u9/BZ384`; starting commit: `98654719b`.
-- Baseline remote build confirmed five errors in compositor directions in declaration types.
-- The user instructed continuation after the explicit nine-direction patch proposal.
-  That patch is now applied, preserving the original equations under Mathlib's reversed compositor.
-- Next: remote validation of the assigned module, then its three direct importers.
-- Fix patterns and baseline log: `/home/ubuntu/u9/bz/FIXES-BZ384.md`.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+- Assigned module: `WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategorySquarePasting`.
+- Passed `ucheck-bump`: rc=0, failed=0, 2138 jobs; target rebuilt in 2.6 seconds.
+- Validated source commit: `22bd5056b9ba101992a3761fcce9a18b6236a7b2`.
+- Green build log: `/home/ubuntu/u9/bz/BUILD-BZ384-unit-green.log`.
+- The user instructed continuation after the precise orientation correction proposal.
+  Completed the nine remaining compositor direction changes and adapted the cancellation
+  and symmetry proofs. All hypotheses, binders, and docstrings are unchanged.
+- Tested all three direct importers. All share the failing unowned dependency
+  `WeilConjectures.SixFunctors.Finite.BaseChange`, so all are skipped per the brief.
+  Other unowned failures: `RawRestrictedSectionsUnitZero` and `UpperLowerStar.FiniteEtale`.
+  Stopped the blocked downstream batch after recording dependency paths; its wrapper
+  rc=0 reflects the stop and is not a green downstream build.
+- Downstream log: `/home/ubuntu/u9/bz/BUILD-BZ384-downstream.log`.
+- Fix patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ384.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ384-contract-audit.txt`.
+- No local Lean/Lake execution, sorries, forbidden proof shortcuts, or heartbeat increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ384.DONE`.
+- This final commit changes only progress documentation; Lean source matches the green build.
