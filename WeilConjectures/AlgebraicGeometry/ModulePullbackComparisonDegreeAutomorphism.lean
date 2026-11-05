@@ -49,7 +49,9 @@ def IsModulePullbackComparisonInDegree
             (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) n).obj G) ≫
         DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
           ((HomologicalComplex.singleMapHomologicalComplex
-            (Scheme.Modules.tensorPullback a) (ComplexShape.up ℤ) n).hom.app G))
+            (Scheme.Modules.tensorPullback a) (ComplexShape.up ℤ) n).hom.app G)) ≫
+        (DerivedCategory.quotientCompQhIso
+          (SheafOfModules.{u} (moduleRings X.toRingedSpace))).hom.app _
 
 private theorem rightExact_homology_degree_isIso
     {A B : Type*} [Category* A] [Category* B] [Abelian A] [Abelian B]
@@ -205,7 +207,7 @@ private theorem modulePullback_single_isLE
     flatComplexDerivedPullback a P ⟨n, hbound⟩ hflat
   have : F.Additive := hAdd
   have : P.IsStrictlyLE n := (CochainComplex.isStrictlyLE_iff P n).2 hbound
-  let e' := e ≪≫ (derivedPullback a).mapIso (asIso (DerivedCategory.Q.map s))
+  let e' := e ≪≫ (derivedPullback a).mapIso (asIso (DerivedCategory.Qh.map (q.map s)))
   have : CochainComplex.IsStrictlyLE
       ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj P) n :=
     inferInstance
