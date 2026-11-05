@@ -25830,6 +25830,8 @@ public import WeilConjectures.WeilObject.Sheaf.StalkFrobenius
 public import WeilConjectures.WeilObject.Sheaf.StalkUnit
 public import WeilConjectures.WeilSheaf.AffineLineBundle
 public import WeilConjectures.WeilSheaf.AffineLineCohomology
+public import WeilConjectures.WeilSheaf.AffineLineSmoothAdjunction
+public import WeilConjectures.WeilSheaf.AffineLineThomDependencyAudit
 public import WeilConjectures.WeilSheaf.AlgClosedCoefficientCohomology
 public import WeilConjectures.WeilSheaf.ArtinSchreierDual
 public import WeilConjectures.WeilSheaf.ArtinSchreierFrobenius
@@ -25985,6 +25987,7 @@ public import WeilConjectures.WeilSheaf.HigherLowerStarZero
 public import WeilConjectures.WeilSheaf.HomologySequence
 public import WeilConjectures.WeilSheaf.HomologyShift
 public import WeilConjectures.WeilSheaf.HomotopyInvariance
+public import WeilConjectures.WeilSheaf.HomotopyInvariance.AxiomAudit
 public import WeilConjectures.WeilSheaf.HomotopyInvariance.Basic
 public import WeilConjectures.WeilSheaf.HomotopyInvariance.Lisse
 public import WeilConjectures.WeilSheaf.HomotopyInvariance.Restriction
@@ -26292,6 +26295,7 @@ public import WeilConjectures.WeilSheaf.SupportUpperStar
 public import WeilConjectures.WeilSheaf.Supporting.CompletedCoefficientRingedCoherence
 public import WeilConjectures.WeilSheaf.TateTwist
 public import WeilConjectures.WeilSheaf.TateTwistCohomology
+public import WeilConjectures.WeilSheaf.TateTwistPullback
 public import WeilConjectures.WeilSheaf.Tensor
 public import WeilConjectures.WeilSheaf.TensorHomAdjunction
 public import WeilConjectures.WeilSheaf.TensorObjPairing
