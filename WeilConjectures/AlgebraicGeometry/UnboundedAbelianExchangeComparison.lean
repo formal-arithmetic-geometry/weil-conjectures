@@ -69,7 +69,7 @@ private lemma exactComparison_factorsh
   erw [CategoryTheory.Functor.map_id, Category.comp_id] at hc
   erw [← hc]
   simp only [Category.assoc]
-  erw [Iso.inv_hom_id_app_assoc]
+  erw [Iso.hom_inv_id_app_assoc]
 
 private lemma homotopyCompIso_inv_app
     {C D E : Type*} [Category* C] [Category* D] [Category* E]
@@ -254,8 +254,8 @@ private lemma exactComparison_inv_factorsh
       inv_hom_id := by
         rw [← NatTrans.mapHomotopyCategory_comp, Iso.inv_hom_id,
           NatTrans.mapHomotopyCategory_id] }
-  have hi : (((Functor.mapDerivedCategoryCompIso F J).symm ≪≫
-      Functor.mapDerivedCategoryNatIso t ≪≫ Functor.mapDerivedCategoryCompIso F' J').app
+  have hi : ((Functor.mapDerivedCategoryCompIso F J ≪≫
+      Functor.mapDerivedCategoryNatIso t ≪≫ (Functor.mapDerivedCategoryCompIso F' J').symm).app
         (DerivedCategory.Qh.obj M)) ≪≫ A' =
       A ≪≫ DerivedCategory.Qh.mapIso (r.app M) := by
     apply Iso.ext
@@ -307,10 +307,10 @@ private lemma derivedSquare_cube
           (R(G).obj K) ≫
         D(Q₀).map ((derivedSquare a).app K) ≫
         (derivedSquare e₀).app (D(U).obj K) := by
-  let dc := (Functor.mapDerivedCategoryCompIso V Q₀).symm ≪≫
-    Functor.mapDerivedCategoryNatIso c ≪≫ Functor.mapDerivedCategoryCompIso Q V'
-  let dd := (Functor.mapDerivedCategoryCompIso U P₀).symm ≪≫
-    Functor.mapDerivedCategoryNatIso d ≪≫ Functor.mapDerivedCategoryCompIso P U'
+  let dc := Functor.mapDerivedCategoryCompIso V Q₀ ≪≫
+    Functor.mapDerivedCategoryNatIso c ≪≫ (Functor.mapDerivedCategoryCompIso Q V').symm
+  let dd := Functor.mapDerivedCategoryCompIso U P₀ ≪≫
+    Functor.mapDerivedCategoryNatIso d ≪≫ (Functor.mapDerivedCategoryCompIso P U').symm
   let α : R(G) ⋙ (D(Q) ⋙ D(V')) ⟶ (D(U) ⋙ D(P₀)) ⋙ R(H₀) :=
     Functor.whiskerRight (derivedSquare e) D(V') ≫
     Functor.whiskerLeft D(P) (derivedSquare b) ≫
@@ -661,9 +661,9 @@ noncomputable def moduleAbelianUnboundedUpperStarIso
     (Λ : Type (u + 1)) [CommRing Λ] {A B : Scheme.{u}} (v : A ⟶ B) :
     D((v)^*[ModuleCat.{u + 1} Λ]) ⋙ D(moduleAbelianForget Λ A) ≅
       D(moduleAbelianForget Λ B) ⋙ D((v)^*[AddCommGrpCat.{u + 1}]) :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (moduleAbelianUpperStarIso Λ v).symm ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The adjunction mate of the termwise inverse-image comparison. Its right-derived-unit
 normalization below identifies it with the map computed by a module K-injective complex
