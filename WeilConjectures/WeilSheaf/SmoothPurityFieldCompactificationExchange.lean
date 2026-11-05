@@ -86,10 +86,14 @@ lemma purityFieldCompactificationExchange_hom_app_hom
       (purityFieldCompactificationAmbientExchange ℓ f f' c c' hi hg).hom.app K.obj ≫
       (boundedConstructibleLowerShriekOfCompactificationCompatibility ℓ c').inv.app
         ((boundedConstructibleUpperStarOfMap ℓ πX).obj K) := by
-  exact ObjectProperty.preimageIso_liftSquareWithComparisons_hom_app_hom
+  have he := ObjectProperty.preimageIso_liftSquareWithComparisons_hom_app_hom
     (boundedConstructibleLowerShriekOfCompactificationCompatibility ℓ c)
-    (boundedConstructibleLowerShriekOfCompactificationCompatibility ℓ c') _ _
+    (boundedConstructibleLowerShriekOfCompactificationCompatibility ℓ c')
+    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ πX K.obj K.property)
+    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ πY K.obj K.property)
     (purityFieldCompactificationAmbientExchange ℓ f f' c c' hi hg) K
+  dsimp only [purityFieldCompactificationExchange]
+  exact_mod_proofs he
 
 /-- The same cross-field exchange for the lower-shriek functors chosen by Nagata. -/
 noncomputable def purityFieldLowerShriekExchange :
