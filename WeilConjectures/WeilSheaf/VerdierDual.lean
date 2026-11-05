@@ -50,9 +50,7 @@ they are proved here, each with the blueprint node it renders:
   `Q ⟶ Ri^! Ri_* Q` is an isomorphism, for complementary immersions `i` and `j`.
 
 Three of these proofs rest on inputs from other sections that are still stated with `sorry`:
-`Rf^! ≅ 𝔻_X f^* 𝔻_Y` on the natural Verdier exchange
-(`AlgebraicGeometry.WeilComplex.nonempty_verdierDual_derivedLowerShriek_natIso`), the Verdier
-exchange on the proper projection formula
+`Rf^! ≅ 𝔻_X f^* 𝔻_Y` and the Verdier exchange on the proper projection formula
 (`AlgebraicGeometry.WeilComplex.nonempty_rightDerivedLowerStar_nativeDerivedTensor_iso`,
 `fix-prop-projection-formula`), and the smooth dualizing complex on smooth purity
 (`AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_adjunction_of_smooth`,
