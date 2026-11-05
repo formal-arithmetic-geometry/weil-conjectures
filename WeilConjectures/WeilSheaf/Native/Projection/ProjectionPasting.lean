@@ -44,6 +44,7 @@ lemma projectionCompositeIso_hom_app
       pG.hom.app (I.obj M, N) ≫
         G.map (pI.hom.app (M, Q.obj N) ≫ I.map (TC.map (Prod.mkHom (𝟙 M) (e.hom.app N)))) := by
   simp [projectionCompositeIso, Functor.map_comp]
+  rfl
 
 /-- Compatibility of a projection formula with three specified comparison isomorphisms. -/
 def ProjectionForgetSquare (δ : I ⋙ ND ≅ NC ⋙ I') (κ : P ⋙ NC ≅ ND ⋙ P')
@@ -142,6 +143,5 @@ theorem projectionForgetSquare_paste
   congr 2
   · apply congrArg TE'.map
     ext <;> simp
-  · simp only [Functor.map_comp, Category.assoc]
 
 end CategoryTheory

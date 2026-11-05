@@ -59,9 +59,14 @@ lemma comparisonCompatible_uncurried
     convert (uncurry.obj TA').map_id _ using 1
     congr 1
     ext <;> simp
-  simpa only [uncurry_obj_map, uncurry_obj_obj, Functor.comp_obj, Category.assoc,
-    Category.comp_id] using
-    congrArg (fun z ↦ eR.hom.app (TB.obj (M, N)) ≫ R'.map (tB.hom.app (M, N)) ≫
-      (rho'.hom.app (FB.obj M)).app (FB.obj N) ≫ z) hc
+  calc
+    _ = eR.hom.app (TB.obj (M, N)) ≫ R'.map (tB.hom.app (M, N)) ≫
+        (rho'.hom.app (FB.obj M)).app (FB.obj N) ≫ 𝟙 _ := by
+      simpa only [uncurry_obj_map, Category.assoc] using
+        congrArg (fun z ↦ eR.hom.app (TB.obj (M, N)) ≫ R'.map (tB.hom.app (M, N)) ≫
+          (rho'.hom.app (FB.obj M)).app (FB.obj N) ≫ z) hc
+    _ = _ := congrArg
+      (fun z ↦ eR.hom.app (TB.obj (M, N)) ≫ R'.map (tB.hom.app (M, N)) ≫ z)
+      (Category.comp_id ((rho'.hom.app (FB.obj M)).app (FB.obj N)))
 
 end CategoryTheory.Functor
