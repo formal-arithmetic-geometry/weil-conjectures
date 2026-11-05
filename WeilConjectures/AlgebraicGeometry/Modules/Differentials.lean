@@ -17,6 +17,13 @@ public import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
 public import WeilConjectures.AlgebraicGeometry.PicardFunctor
 public import WeilConjectures.Mathlib.RingTheory.Smooth.StandardSmoothCotangent
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
+public import Mathlib.CategoryTheory.ConcreteCategory.Forget
+public import Mathlib.CategoryTheory.EqToHom
+public import Mathlib.CategoryTheory.Filtered.Basic
+public import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
+public import Mathlib.CategoryTheory.Limits.Shapes.ZeroMorphisms
+public import Mathlib.CategoryTheory.Limits.Shapes.ZeroObjects
 
 /-!
 # The sheaf of relative differentials of a morphism of schemes

@@ -282,7 +282,7 @@ noncomputable def pointSmallEtaleElementsBaseChange :
 @[simp]
 lemma pointSmallEtaleElementsBaseChange_obj_fst
     (c : (pointSmallEtale (s ≫ f)).fiber.Elements) :
-    ((pointSmallEtaleElementsBaseChange f s).obj c).fst = f.Etale.obj c.fst :=
+    ((pointSmallEtaleElementsBaseChange f s).obj c).obj = f.Etale.obj c.obj :=
   rfl
 
 @[simp]
