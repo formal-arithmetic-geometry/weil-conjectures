@@ -85,8 +85,10 @@ fibres: the pullback compatibility `ḡ^* ⋙ E_Z ≅ E_Y ⋙ ḡ^*` of the cond
 the conjugate of the pushforward compatibility) is a monoidal natural isomorphism, for the
 pullback–tensor comparison `AlgebraicGeometry.ProEtale.adicUpperStarTensorLeftIso` of `ℓ`-adic
 sheaves, the monoidal comparison `AlgebraicGeometry.ProEtale.adicSheafEquivCondensedModTensorIso`
-of `E` and the strong monoidal structure of the pullback of condensed module objects. This is
-part of the comparison of the two models of `ℓ`-adic sheaves and is not proved here. -/
+of `E` and the strong monoidal structure of the pullback of condensed module objects. It is the
+componentwise form of `condensedRealizationUpperStarIso_tensor`
+(`WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationPullTotalTensor`), and is not
+proved here. -/
 theorem tensorComparisonCompatible_condensedRealizationUpperStarIso :
     TensorComparisonCompatible (condensedRealizationUpperStarIso k₀ l g)
       (nativePullSheafTensor k₀ l g) (condensedRealizationSheafTensorIso k₀ l Y)
