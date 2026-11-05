@@ -145,8 +145,8 @@ variable {A A' B B' : Type*} [Category A] [Category A'] [Category B] [Category B
 noncomputable def Functor.mapDerivedCategoryCompForgetIso (c : L ⋙ forget₂ ≅ forget₁ ⋙ L') :
     L.mapDerivedCategory ⋙ forget₂.mapDerivedCategory ≅
       forget₁.mapDerivedCategory ⋙ L'.mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso L forget₂).symm ≪≫ Functor.mapDerivedCategoryNatIso c ≪≫
-    Functor.mapDerivedCategoryCompIso forget₁ L'
+  (Functor.mapDerivedCategoryCompIso L forget₂) ≪≫ Functor.mapDerivedCategoryNatIso c ≪≫
+    (Functor.mapDerivedCategoryCompIso forget₁ L').symm
 
 /-- The isomorphism `Functor.mapDerivedCategoryCompForgetIso c` on the image of a complex. -/
 lemma Functor.mapDerivedCategoryCompForgetIso_inv_app_Q (c : L ⋙ forget₂ ≅ forget₁ ⋙ L')
