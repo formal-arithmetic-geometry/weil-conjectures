@@ -62,6 +62,7 @@ lemma pullIso_inv_app_comp_extendScalarsCompIsoOfEq (hc : a ≫ b = c)
   apply (cancel_epi ((comapLowerStarIso c g).hom.app N)).mp
   rw [Iso.hom_inv_id_app_assoc, comapLowerStarIso_hom_app_of_comp_eq a b c g hc]
   simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id_app,
-    Functor.comp_obj, Functor.map_id, Category.id_comp, Category.comp_id]
+    Functor.comp_obj]
+  erw [Functor.map_id, Category.id_comp, Iso.hom_inv_id_app, Category.comp_id]
 
 end AlgebraicGeometry.ProEtale.CondensedRing
