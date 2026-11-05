@@ -139,6 +139,7 @@ private theorem adjData_exists {R S : Sheaf J CommRingCat.{r}} {a : R ⟶ S}
         ((HomotopyCategory.quotient _ _).obj P)) (𝟙 _)
     have h' := congrArg (fun f ↦ f ≫
       (restriction a).mapDerivedCategoryFactorsh.hom.app _) h
+    rw [Adjunction.homEquiv_id] at h
     simpa [Adjunction.homEquiv_unit, Category.assoc] using h'
 
 set_option backward.isDefEq.respectTransparency false in
@@ -336,14 +337,14 @@ private theorem exactComp_assoc
     (h : isoWhiskerLeft F₃₂ e₀₁₂ ≪≫ e₀₂₃ =
       (Functor.associator _ _ _).symm ≪≫ isoWhiskerRight e₁₂₃ F₁₀ ≪≫ e₀₁₃) :
     isoWhiskerLeft F₃₂.mapDerivedCategory
-        ((Functor.mapDerivedCategoryCompIso F₂₁ F₁₀).symm ≪≫
+        ((Functor.mapDerivedCategoryCompIso F₂₁ F₁₀) ≪≫
           Functor.mapDerivedCategoryNatIso e₀₁₂) ≪≫
       ((Functor.mapDerivedCategoryCompIso F₃₂ F₂₀) ≪≫
         Functor.mapDerivedCategoryNatIso e₀₂₃) =
     (Functor.associator _ _ _).symm ≪≫
-      isoWhiskerRight ((Functor.mapDerivedCategoryCompIso F₃₂ F₂₁).symm ≪≫
+      isoWhiskerRight ((Functor.mapDerivedCategoryCompIso F₃₂ F₂₁) ≪≫
         Functor.mapDerivedCategoryNatIso e₁₂₃) F₁₀.mapDerivedCategory ≪≫
-      ((Functor.mapDerivedCategoryCompIso F₃₁ F₁₀).symm ≪≫
+      ((Functor.mapDerivedCategoryCompIso F₃₁ F₁₀) ≪≫
         Functor.mapDerivedCategoryNatIso e₀₁₃) := by
   -- Invert the ordinary coherence square, then transport it through exact derivation.
   have hi : e₀₂₃.symm ≪≫ isoWhiskerLeft F₃₂ e₀₁₂.symm =
@@ -411,7 +412,7 @@ private theorem rightComp_normalization {R S T : Sheaf J CommRingCat.{r}}
     := by
   dsimp only [rightComp, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app]
   rw [Category.assoc, Functor.mapDerivedCategoryNatIso_fach]
-  rw [← Functor.mapDerivedCategoryCompIso_fach (restriction b) (restriction a)]
+  rw [← Functor.mapDerivedCategoryCompIso_hom_app_factorsh (restriction b) (restriction a)]
   simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
   rw [← DerivedCategory.Qh.map_comp]
   congr 2
