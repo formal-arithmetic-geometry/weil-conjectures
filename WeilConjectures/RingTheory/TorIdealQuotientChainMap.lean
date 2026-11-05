@@ -135,6 +135,7 @@ theorem exists_quotient_tensor_comparison
     have hw := ConcreteCategory.congr_hom (D.liftCycles_i v 0 (by simp) hv) 1
     dsimp only [ModuleCat.hom_comp, LinearMap.comp_apply] at hw
     change D.iCycles 1 (w 1) = v 1 at hw
-    simpa [v] using hw.symm
+    change x = D.iCycles 1 (w 1)
+    exact (show v 1 = x from one_smul A x).symm.trans hw.symm
 
 end ModuleCat
