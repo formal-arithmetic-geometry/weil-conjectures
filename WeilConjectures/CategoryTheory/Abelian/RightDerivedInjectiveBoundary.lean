@@ -53,10 +53,11 @@ noncomputable def boundedBelowInjectiveComparison
     [∀ n : ℤ, Injective (K.obj.X n)] :
     (v.rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.ι).obj
         (DerivedCategory.Plus.Q.obj K) ⟶
-      DerivedCategory.Q.obj ((v.mapHomologicalComplex (.up ℤ)).obj K.obj) :=
-  DerivedCategory.Plus.ι.map
-      (inv (v.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.quotient A).obj K))) ≫
-    (DerivedCategory.quotientCompQhIso B).hom.app _
+      DerivedCategory.Q.obj ((v.mapHomologicalComplex (.up ℤ)).obj K.obj) := by
+  have : IsIso (v.rightDerivedFunctorPlusUnit.app K) := by
+    rw [v.rightDerivedFunctorPlusUnit_app]
+    infer_instance
+  exact DerivedCategory.Plus.ι.map (inv (v.rightDerivedFunctorPlusUnit.app K))
 
 /-- Lift the canonical SES boundary through the full inclusion of the bounded
 below derived category, after the quotient factorization on its endpoints.
@@ -67,9 +68,7 @@ noncomputable def boundedBelowSESBoundary (H : ShortComplex (CochainComplex.Plus
     (hH : (H.map (CochainComplex.plus A).ι).ShortExact) :
     DerivedCategory.Plus.Q.obj H.X₃ ⟶ (DerivedCategory.Plus.Q.obj H.X₁)⟦(1 : ℤ)⟧ :=
   DerivedCategory.Plus.ι.preimage
-    ((DerivedCategory.quotientCompQhIso A).hom.app H.X₃.obj ≫
-      DerivedCategory.triangleOfSESδ hH ≫
-      ((DerivedCategory.quotientCompQhIso A).inv.app H.X₁.obj)⟦(1 : ℤ)⟧' ≫
+    (DerivedCategory.triangleOfSESδ hH ≫
       (DerivedCategory.Plus.ι.commShiftIso (1 : ℤ)).inv.app
         (DerivedCategory.Plus.Q.obj H.X₁))
 
@@ -111,64 +110,75 @@ theorem rightDerived_injectiveComplex_boundary
         (DerivedCategory.Plus.Q.obj H.X₁) ≫
       (boundedBelowInjectiveComparison v H.X₁)⟦(1 : ℤ)⟧' =
     boundedBelowInjectiveComparison v H.X₃ ≫ DerivedCategory.triangleOfSESδ hvH := by
-  let q := HomotopyCategory.Plus.quotient A
-  let F := (v.mapHomotopyCategoryPlus ⋙ DerivedCategory.Plus.Qh) ⋙ DerivedCategory.Plus.ι
-  let G := (DerivedCategory.Plus.Qh ⋙ v.rightDerivedFunctorPlus) ⋙ DerivedCategory.Plus.ι
-  let τ : F ⟶ G := Functor.whiskerRight v.rightDerivedFunctorPlusUnith
+  let S := H.map (CochainComplex.plus A).ι
+  let σ (n : ℤ) : (S.map (HomologicalComplex.eval A (.up ℤ) n)).Splitting := by
+    have : Injective ((S.map (HomologicalComplex.eval A (.up ℤ) n)).X₁) := by
+      change Injective (H.X₁.obj.X n)
+      infer_instance
+    exact ShortComplex.ShortExact.splittingOfInjective
+      ((HomologicalComplex.shortExact_iff_degreewise_shortExact S).mp hH n)
+  let d := CochainComplex.homOfDegreewiseSplit S σ
+  let d' : H.X₃ ⟶ H.X₁⟦(1 : ℤ)⟧ := ObjectProperty.homMk
+    (d ≫ ((CochainComplex.plus A).ι.commShiftIso (1 : ℤ)).inv.app H.X₁)
+  have hd : ShiftedHom.map d' (CochainComplex.plus A).ι = d := by
+    change (d ≫ _) ≫ _ = d
+    rw [Category.assoc, Iso.inv_hom_id_app]
+    erw [Category.comp_id]
+  have hQ {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
+      {X Y : CochainComplex.Plus C} (g : X ⟶ Y⟦(1 : ℤ)⟧) :
+      ShiftedHom.map g (DerivedCategory.Plus.Q ⋙ DerivedCategory.Plus.ι) =
+        ShiftedHom.map g (CochainComplex.Plus.ι C ⋙ DerivedCategory.Q) := by
+    have hn := ShiftedHom.map_naturality g (DerivedCategory.Plus.QCompιIso C).hom
+    simpa only [ShiftedHom.comp_mk₀, ShiftedHom.mk₀_comp,
+      DerivedCategory.Plus.QCompιIso_hom_app, Functor.map_id,
+      Category.comp_id, Category.id_comp] using hn
+  have hdQ : ShiftedHom.map d' DerivedCategory.Plus.Q =
+      boundedBelowSESBoundary H hH := by
+    apply DerivedCategory.Plus.ι.map_injective
+    apply (cancel_mono ((DerivedCategory.Plus.ι.commShiftIso (1 : ℤ)).hom.app
+      (DerivedCategory.Plus.Q.obj H.X₁))).1
+    rw [boundedBelowSESBoundary, Functor.map_preimage, Category.assoc,
+      Iso.inv_hom_id_app, Category.comp_id]
+    change ShiftedHom.map (ShiftedHom.map d' DerivedCategory.Plus.Q)
+      DerivedCategory.Plus.ι = _
+    rw [← ShiftedHom.comp_map, hQ, ShiftedHom.comp_map, hd]
+    exact (DerivedCategory.triangleOfSESδ_eq_degreewiseSplit S hH σ).symm
+  let σv (n : ℤ) : ((S.map (v.mapHomologicalComplex (.up ℤ))).map
+      (HomologicalComplex.eval B (.up ℤ) n)).Splitting := (σ n).map v
+  have hdv : ShiftedHom.map d (v.mapHomologicalComplex (.up ℤ)) =
+      CochainComplex.homOfDegreewiseSplit (S.map (v.mapHomologicalComplex (.up ℤ))) σv := by
+    ext n
+    simp [ShiftedHom.map, d, CochainComplex.cocycleOfDegreewiseSplit, σv,
+      Functor.map_comp]
+  have hdv' : ShiftedHom.map (ShiftedHom.map d' v.mapCochainComplexPlus)
+      (CochainComplex.Plus.ι B) = ShiftedHom.map d (v.mapHomologicalComplex (.up ℤ)) := by
+    have hn := ShiftedHom.map_naturality d' v.mapCochainComplexPlusCompι.hom
+    simp only [ShiftedHom.comp_mk₀, ShiftedHom.mk₀_comp,
+      Functor.mapCochainComplexPlusCompι_hom_app, Functor.map_id,
+      Category.comp_id, Category.id_comp, ShiftedHom.comp_map, hd] at hn
+    exact hn
+  let F := (v.mapCochainComplexPlus ⋙ DerivedCategory.Plus.Q) ⋙ DerivedCategory.Plus.ι
+  let G := (DerivedCategory.Plus.Q ⋙ v.rightDerivedFunctorPlus) ⋙ DerivedCategory.Plus.ι
+  let τ : F ⟶ G := Functor.whiskerRight v.rightDerivedFunctorPlusUnit
     DerivedCategory.Plus.ι
   have hτ : NatTrans.CommShift τ ℤ := by
     dsimp [τ, F, G]
     infer_instance
   have hi (K : CochainComplex.Plus A) [∀ n : ℤ, Injective (K.obj.X n)] :
-      IsIso (τ.app (q.obj K)) := by
-    dsimp [τ, q]
+      IsIso (v.rightDerivedFunctorPlusUnit.app K) := by
+    rw [v.rightDerivedFunctorPlusUnit_app]
     infer_instance
-  obtain ⟨f, hf, hvf⟩ := injective_ses_homotopy_boundary_lift v H hH hvH
-  have hd : ShiftedHom.map f DerivedCategory.Plus.Qh =
-      boundedBelowSESBoundary H hH := by
-    apply DerivedCategory.Plus.ι.map_injective
-    unfold boundedBelowSESBoundary
-    rw [Functor.map_preimage]
-    have hs := hf
-    rw [ShiftedHom.comp_map] at hs
-    dsimp only [ShiftedHom.map] at hs
-    apply (cancel_mono ((DerivedCategory.Plus.ι.commShiftIso (1 : ℤ)).hom.app
-      (DerivedCategory.Plus.Q.obj H.X₁))).1
-    dsimp only [DerivedCategory.Plus.Q, Functor.comp_obj]
-    simp only [Category.assoc]
-    erw [Iso.inv_hom_id_app]
-    apply (cancel_mono
-      (((DerivedCategory.quotientCompQhIso A).hom.app H.X₁.obj)⟦(1 : ℤ)⟧')).1
-    simp only [Category.assoc]
-    erw [Category.id_comp
-      (((DerivedCategory.quotientCompQhIso A).hom.app H.X₁.obj)⟦(1 : ℤ)⟧')]
-    erw [← Functor.map_comp, Iso.inv_hom_id_app, Functor.map_id, Category.comp_id]
-    convert hs using 1 <;>
-      simp only [ShiftedHom.map, ObjectProperty.ι_obj, ObjectProperty.ι_map,
-        Functor.comp_obj, ObjectProperty.FullSubcategory.comp_hom, Category.assoc]
-    all_goals
-      repeat first | erw [Category.id_comp] | erw [Category.comp_id] |
-        erw [Functor.map_id]
-  have hn :
-      ShiftedHom.map (ShiftedHom.map f DerivedCategory.Plus.Qh)
-          (v.rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.ι) ≫
-        (DerivedCategory.Plus.ι.map
-          (inv (v.rightDerivedFunctorPlusUnith.app (q.obj H.X₁)) ))⟦(1 : ℤ)⟧' =
-      DerivedCategory.Plus.ι.map
-          (inv (v.rightDerivedFunctorPlusUnith.app (q.obj H.X₃))) ≫
-        ShiftedHom.map f F := by
-    have hn := inverse_shifted_naturality τ f
-    simpa only [ShiftedHom.map, F, G, τ, Functor.whiskerRight_app,
-      Functor.commShiftIso_comp_hom_app, Functor.comp_map, Functor.map_comp,
-      Functor.comp_obj, Functor.map_inv, Category.assoc] using hn
-  have hn' := congrArg (fun k ↦ k ≫
-    ((DerivedCategory.quotientCompQhIso B).hom.app
-      ((v.mapHomologicalComplex (.up ℤ)).obj H.X₁.obj))⟦(1 : ℤ)⟧') hn
-  simp only [Category.assoc] at hn'
-  erw [hvf] at hn'
-  rw [← hd]
-  simp only [ShiftedHom.map, boundedBelowInjectiveComparison, Functor.map_comp,
-    Category.assoc] at hn' ⊢
-  convert hn' using 1 <;> rfl
+  have hv : ShiftedHom.map d' F = DerivedCategory.triangleOfSESδ hvH := by
+    rw [show F = v.mapCochainComplexPlus ⋙
+      (DerivedCategory.Plus.Q ⋙ DerivedCategory.Plus.ι) from rfl,
+      ShiftedHom.comp_map, hQ, ShiftedHom.comp_map, hdv', hdv]
+    exact (DerivedCategory.triangleOfSESδ_eq_degreewiseSplit _ hvH σv).symm
+  have hn := inverse_shifted_naturality τ d'
+  change ShiftedHom.map d' G ≫ _ = _ at hn
+  rw [show G = DerivedCategory.Plus.Q ⋙
+    (v.rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.ι) from rfl,
+    ShiftedHom.comp_map, hdQ, hv] at hn
+  simpa only [ShiftedHom.map, boundedBelowInjectiveComparison, τ,
+    Functor.whiskerRight_app, Functor.map_inv, Category.assoc] using hn
 
 end CategoryTheory

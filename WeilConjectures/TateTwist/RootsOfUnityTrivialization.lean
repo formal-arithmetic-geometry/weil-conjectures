@@ -324,7 +324,7 @@ lemma isLocallyInjective_cokernelToRootsOfUnityPresheaf (f : U ⟶ Spec (.of K))
       rintro ⟨c, hc⟩
       apply hab
       have hac : a = b + ((N : ℤ) • 𝟙 (𝟙_ (U.ProEtᵒᵖ ⥤ Ab.{u + 1}))).app V (ULift.up c) := by
-        refine ULift.ext _ _ ?_
+        refine ULift.ext ?_
         exact sub_eq_iff_eq_add'.1 hc
       rw [hac, map_add, ← ConcreteCategory.comp_apply, ← NatTrans.comp_app, cokernel.condition]
       simp
