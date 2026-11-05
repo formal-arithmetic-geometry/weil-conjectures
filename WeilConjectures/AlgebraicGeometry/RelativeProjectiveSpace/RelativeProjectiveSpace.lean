@@ -375,7 +375,8 @@ private theorem monomialSum_bijective (V : X.affineOpens) :
     rw [LinearEquiv.coe_coe, Module.Basis.equiv_apply]
     change _ = c (monomialIndexEquiv r a)
     rw [directSumBasis_apply]
-    rw [← DirectSum.lof_eq_of Γ(X, V.1), DirectSum.toModule_lof, monomialMap_basis]
+    rw [← DirectSum.lof_eq_of Γ(X, V.1)]
+    erw [DirectSum.toModule_lof, monomialMap_basis]
     change monomial X r a.1 a.2 V.1 =
       e (MvPolynomial.monomial (Finsupp.equivFunOnFinite.symm a.2.down.val) 1)
     have hp : (∏ i : Fin (r + 1), (MvPolynomial.X i :
