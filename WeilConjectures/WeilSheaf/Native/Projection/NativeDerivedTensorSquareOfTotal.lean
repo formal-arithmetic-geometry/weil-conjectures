@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareFromNativeComparisons
+public import WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareFromOrdinaryComparison
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareOfRepresentatives
 public import WeilConjectures.WeilSheaf.Native.Projection.TotalSquareToModel
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeModelFamilyNormalization
@@ -71,11 +71,8 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
   projection_strict
     let R := CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
       (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))
-    exact projection_derived_square_of_native_comparisons k₀ l g R
+    exact projection_derived_square_of_ordinary_comparison k₀ l g R
       (condensedRealizationUpperStarIso k₀ l g).symm
-      (fun A B ↦ (R.mapCochainComplexμIso A B).symm)
-      (fun A B ↦ (R.mapDerivedCategoryTensorComparison.app A).app B)
-      (by exact R.projection_ordinary_model_normalization)
       P T hP hT
       (by exact htotal P T)
 
