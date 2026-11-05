@@ -451,9 +451,8 @@ lemma H_map_isColimit_succ_of_shortExact {D I Q : K ⥤ Sheaf J AddCommGrpCat.{m
     have hm : Sheaf.H.map (cQ.ι.app m) n
         (Sheaf.H.map (Q.map a) n w - Sheaf.H.map (Q.map b) n (Sheaf.H.map (π.app k₁) n v₁)) =
           0 := by
-      rw [map_sub, ← Sheaf.H.map_comp_apply, ← Sheaf.H.map_comp_apply,
-        ← Sheaf.H.map_comp_apply, cQ.w a, cQ.w b, ← hg, Sheaf.H.map_comp_apply]
-      exact sub_eq_zero.2 hv.symm
+      simpa only [map_sub, sub_eq_zero, ← Sheaf.H.map_comp_apply,
+        Category.assoc, cQ.w, ← hg] using hv.symm
     obtain ⟨k', a', ha'⟩ := injQ m _ hm
     run_tac Lean.logInfo m!"BZ08 after hm: {((← Lean.getRemainingHeartbeats) / 1000)}"
     refine ⟨k', a ≫ a', ?_⟩
@@ -461,11 +460,12 @@ lemma H_map_isColimit_succ_of_shortExact {D I Q : K ⥤ Sheaf J AddCommGrpCat.{m
     rw [Sheaf.H.map_δSucc (hS k) (hS k') (shortComplexAppMap ι π h (a ≫ a')) n w]
     change Sheaf.H.δSucc (hS k') n (Sheaf.H.map (Q.map (a ≫ a')) n w) = 0
     run_tac Lean.logInfo m!"BZ08 before ha: {((← Lean.getRemainingHeartbeats) / 1000)}"
-    rw [map_sub, sub_eq_zero, ← Sheaf.H.map_comp_apply, ← Sheaf.H.map_comp_apply,
-      ← Q.map_comp, ← Q.map_comp, ← Sheaf.H.map_comp_apply, ← π.naturality,
-      Sheaf.H.map_comp_apply] at ha'
+    simp only [map_sub, sub_eq_zero, ← Sheaf.H.map_comp_apply,
+      Category.assoc, ← Q.map_comp, ← π.naturality] at ha'
     run_tac Lean.logInfo m!"BZ08 after ha: {((← Lean.getRemainingHeartbeats) / 1000)}"
-    exact ((Sheaf.H.exact_map_δSucc (hS k') n) _).2 ⟨_, ha'.symm⟩
+    exact ((Sheaf.H.exact_map_δSucc (hS k') n) _).2
+      ⟨_, by simpa only [Sheaf.H.map_comp_apply] using ha'.symm⟩
+  run_tac Lean.logInfo m!"BZ08 done: {((← Lean.getRemainingHeartbeats) / 1000)}"
 
 variable [∀ V : C, HasFiniteProducts (Over V)] {T : C}
 
