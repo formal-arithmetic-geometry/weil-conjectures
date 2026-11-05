@@ -136,7 +136,6 @@ lemma mapDerivedCategoryCompIso_hom_app_Q_obj_comp_factors (K : CochainComplex A
       K = 𝟙 _ := by
     ext n
     simp
-    rfl
   rw [h]
   simp
 
@@ -166,7 +165,7 @@ variable [HasDerivedCategory.{w} C] [HasDerivedCategory.{w} (IsoAlgebra F)]
 algebras, where `U` is induced by the forgetful functor. -/
 def derivedStrIso :
     (forget F).mapDerivedCategory ⋙ F.mapDerivedCategory ≅ (forget F).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso (forget F) F).symm ≪≫
+  Functor.mapDerivedCategoryCompIso (forget F) F ≪≫
     Functor.mapDerivedCategoryNatIso (strNatIso F)
 
 omit [IsGrothendieckAbelian.{w} C] in
@@ -184,14 +183,14 @@ lemma derivedStrIso_hom_app_Q_obj (K : CochainComplex (IsoAlgebra F) ℤ) :
   simp only [derivedStrIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc,
     Functor.mapDerivedCategoryNatIso_fac]
   rw [← mapDerivedCategoryCompIso_hom_app_Q_obj_comp_factors (forget F) F K]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
 
 /-- The derived shift `I ⟶ I ∘ F` of free algebras, induced by `Free.shiftNatTrans`. -/
 def derivedFreeShift :
     (Free.functor F).mapDerivedCategory ⟶
       F.mapDerivedCategory ⋙ (Free.functor F).mapDerivedCategory :=
   Functor.mapDerivedCategoryNatTrans (Free.shiftNatTrans F) ≫
-    (Functor.mapDerivedCategoryCompIso F (Free.functor F)).hom
+    (Functor.mapDerivedCategoryCompIso F (Free.functor F)).inv
 
 @[reassoc]
 lemma derivedFreeShift_app_Q_obj (X : CochainComplex C ℤ) :
@@ -235,7 +234,6 @@ lemma derivedFreeShiftStr_app_Q_obj (K : CochainComplex (IsoAlgebra F) ℤ) :
     Functor.whiskerRight_app, NatTrans.mapHomologicalComplex_app_f, HomologicalComplex.comp_f,
     Functor.mapHomologicalComplex_map_f]
   erw [Category.id_comp]
-  rfl
 
 /-- **Lifting equivariant morphisms to the derived category of algebras.** A morphism
 `g : U A ⟶ U B` between the underlying objects of objects of `D(IsoAlgebra F)` which commutes
@@ -270,7 +268,6 @@ theorem exists_forget_mapDerivedCategory_map_eq {A B : DerivedCategory (IsoAlgeb
         𝟙 _ - (NatTrans.mapHomologicalComplex (freeShift F) (ComplexShape.up ℤ)).app K := by
       ext n
       simp [hdτ]
-      rfl
     rw [← cancel_mono (freeWeilLocalizationComponent F K).hom, hdD, NatTrans.app_sub,
       NatTrans.id_app, Preadditive.sub_comp, derivedFreeShiftStr_app_Q_obj, hK, Functor.map_sub,
       Functor.map_id, Preadditive.comp_sub, Category.comp_id, Category.id_comp]
