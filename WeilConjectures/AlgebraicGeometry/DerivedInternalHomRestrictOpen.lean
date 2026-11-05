@@ -27,6 +27,13 @@ universe u w
 
 namespace CategoryTheory
 
+local instance (X : RingedSpace.{u}) (U : Opens X)
+    [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X).over U))] :
+    HasDerivedCategory.{w} (SheafOfModules.{u}
+      ((sheafCompose ((Opens.grothendieckTopology X).over U)
+        (forget₂ CommRingCat RingCat)).obj (X.sheaf.over U))) :=
+  inferInstanceAs (HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X).over U)))
+
 /-- Restriction of derived internal Hom to an open agrees canonically with the
 internal Hom of the restricted objects.
 
