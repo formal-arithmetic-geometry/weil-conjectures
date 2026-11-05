@@ -115,3 +115,15 @@
 - Next: remote validation of the assigned module, then its three direct importers.
 - Fix patterns and baseline log: `/home/ubuntu/u9/bz/FIXES-BZ384.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+# BZ459 in progress
+
+- Branch: `u9/BZ459`; starting commit: `99a06bbbb46`.
+- The user instructed continuation after the explicit six-line statement API migration proposal.
+  The exact patch removes obsolete compositor `.symm` uses in `DerivedOpenGluingObjects`
+  (2 uses) and its direct importer `DerivedOpenGluing` (4 uses).
+- Mathlib b63f6e8a reverses the former local `mapDerivedCategoryCompIso`; these edits
+  preserve the original canonical maps. Proof bodies, binders, hypotheses, and docstrings are unchanged.
+- Next: finish the queued remote check, then validate the direct importer.
+- Fix patterns and diagnostic evidence: `/home/ubuntu/u9/bz/FIXES-BZ459.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
