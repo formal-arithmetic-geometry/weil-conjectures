@@ -142,29 +142,39 @@
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ557 in progress
+# BZ539 in progress
 
-- Branch: `u9/BZ557`; starting commit: `8af5cb324`.
-- Added the public AffineScheme import to direct importer AffineBasisSectionsDerivedUnit.
-- Initial remote builds stopped in the shared Presheaf.InternalHom dependency.
-- On continuation, merged BZ558 prerequisite repair `f28760733369366ac823f0084f3c4090afa3a90d`.
-- Next: ucheck-bump on AffineBasisSectionsResolutionHomologyEpi, AffineBasisSectionsDerivedUnit,
-  and AffineOpenSectionsResolutionQuasiIso; fix any owned errors and write DONE when green.
-- Notes and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ557.md`.
-- No local Lean/Lake, statement changes, proof escapes, or heartbeat increases.
+- Branch: `u9/BZ539`; original start: `29f3a8d8177`.
+- Re-read the brief and prior notes on user-requested continuation.
+- Baseline build stopped in unowned `Presheaf.InternalHom:373` with an unknown
+  `PresheafOfModulesOfCommRing.Monoidal.tensorObj_map_tmul` identifier.
+- The coordinator subsequently added the public Mathlib monoidal import in
+  `04f9380d1`. Merged coordinator head `8af5cb324` to take that fix and retry.
+- The proposed compatibility-namespace patch remains unapplied while testing
+  the coordinator's repair.
+- Next: validate ChangeOfCoefficients via ucheck-bump, repair its proof errors,
+  then check up to four direct importers and one further downstream layer.
+- Notes and logs: `/home/ubuntu/u9/bz/FIXES-BZ539.md`.
+- No local Lean/Lake, proof placeholders, statement edits, or heartbeat raises.
 
-# BZ546 in progress
+- The public import resolved the missing name, but the resumed build failed in
+  `InternalHom:375` because its proof mixed new and compatibility map APIs.
+- User continuation followed the explicit one-line dependency patch proposal;
+  that exact compatibility-namespace proof repair is now applied.
+- Retrying the assigned module; declarations and heartbeat settings unchanged.
 
-- Branch: `u9/BZ546`; owned module: `WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.LowerStar`.
-- Read `/home/ubuntu/u9/briefs/BZ546.md` again on the user's continuation request.
-- Its two compositor orientation corrections were already integrated in `d30a09bfb`.
-- Initial builds stopped in `InternalHom`, then `KFlat`, then `KFlatResolutionIndependentCoefficients`.
-- Imported shared fixes `e346fa32d2a` (BZ538) and `cbe4e4143da` (BZ549), then merged coordinator sweep29 at `cfcb63ad7`.
-- The merge resolves the KFlat namespace conflict using the coordinator's equivalent spelling.
-- Owned module is GREEN: `ucheck-bump` rc=0, failed=0, 4388 jobs on poolb:43.166.81.121.
-- Validated source commit: `5d0238f6bcce449df08636833344e61a32f53c55`; full log: `/home/ubuntu/u9/bz/BUILD-BZ546-sweep29-full.log`.
-- Next: build four smallest direct importer closures: ConstructibleReading,
-  LowerStarProperBoundedConstructible, ClosedPointsDetection, and EtaleReading.
-- Skip importers blocked in unrelated dependencies, as the brief requires.
-- Patterns, exact errors, and previous build logs: `/home/ubuntu/u9/bz/FIXES-BZ546.md`.
-- No independently edited unowned proofs; no local Lean/Lake or forbidden proof shortcuts.
+# BZ547 in progress
+
+- Assigned module `WeilConjectures.AlgebraicGeometry.Etale.EtaleInjectiveSectionsComparison`
+  is GREEN and unchanged from the starting branch.
+- ucheck-bump: rc=0, built=19, failed=0, 4239 jobs, poolb:43.166.85.105.
+- Validated source commit: `44c93779b6a562139fbe1167b08eaa054d9af518`.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ547-assigned-green-full.log`.
+- Integrated coordinator fixes through `8af5cb324`, then reused BZ539's exact
+  dependency repair from `2a96dae096e7`: use the compatibility namespace
+  `PresheafOfModules.Monoidal.tensorObj_map_tmul` in InternalHom's proof.
+- Its previous rewrite/kernel-error blocker is resolved; no BLOCKED marker remains.
+- Direct-importer batch is running for Strict.Local.StrictLocalInjectiveSourceComparison
+  and Strict.Local.StrictLocalInjectiveSourceSections. Next: one more importer layer.
+- Notes and generic pattern/count: `/home/ubuntu/u9/bz/FIXES-BZ547.md`.
+- No local Lean/Lake execution, statement edits, proof placeholders, or limit raises.
