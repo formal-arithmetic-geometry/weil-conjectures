@@ -56,6 +56,9 @@ lemma upperStarIntegralTateTwistOneIso_hom_comp_reduction :
     (Profinite.padicIntRingObjToPadicIntegers ℓ E)
     (Profinite.padicIntegersRingObjToIntegersModPow ℓ E n)
     (Profinite.padicIntRingObjToIntegersModPow ℓ E n) rfl n
+  dsimp only [extendScalarsIntegralTateTwistOneIntegersModPowIso,
+    extendScalarsTateModuleIso, tateModule, tateModuleSystem, tateModuleTransition,
+    tateModuleLevel] at ⊢
   simpa only [upperStarIntegralTateTwistOneIso, integralTateTwistOne, tateModule,
     tateModuleSystem, tateModuleTransition, tateModuleLevel,
     integersModPowReduction, purityTateRootPullbackIso,
