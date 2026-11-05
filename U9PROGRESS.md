@@ -183,17 +183,37 @@
 - Handoff records: `/home/ubuntu/u9/bz/FIXES-BZ646.md` and `/home/ubuntu/u9/state/BZ646.DONE`.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
 
-# PZ004 in progress
 
-- Branch: `u9/PZ004`; starting commit: `6a2f94596`.
-- The user instructed continuation after the explicit four-private-helper API patch proposal.
-  That patch is now applied, preserving the square comparisons under Mathlib's reversed compositor.
-- Added public and implementation Localization imports for the strict-tower hidden Qh proof reduction.
-- The internal unit map now uses the canonical homotopy factorization; its proof unfolds to rfl.
-- Updated compositor definition bodies, inverse cancellation, and the balancing map_id rewrite.
-- All three assigned modules passed `ucheck-bump` at source commit `e6ef96a921` (4749 jobs).
-- Full unit log: `/home/ubuntu/u9/bz/BUILD-PZ004-unit-green-full.log`.
-- Exact prior errors: `/home/ubuntu/u9/bz/BUILD-PZ004-prior-errors.log`.
-- Fix records and whole-tree inventories: `/home/ubuntu/u9/bz/FIXES-PZ004.md`.
-- Next: validate four direct importers, resolve owned downstream errors, then write DONE.
+# BZ683 complete
+
+- Branch: `u9/BZ683`; starting commit: `4bbea9d82`.
+- Assigned module `WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsTensorTransition`
+  passed `ucheck-bump`: rc=0, failed=0, 2873 jobs, target rebuilt in 9.4 seconds.
+- Validated source commit: `9ebd05ad943b03304d7e35268cffa36c7118fa18`.
+- The user instructed continuation after the exact one-line dependency-name proposal.
+  Named the local instance in `ChangeOfRingsTransition` as
+  `changeOfRingsTransitionRestrictedModule`; its type and proof remain unchanged.
+  This removes the generated proof-name collision with `TensorProductOfUniverses`.
+- The dependency also rebuilt successfully. Assigned leaf source and all statements are unchanged.
+- Both downstream layers were attempted: `FinitePerfectAdicQuotientStrictRealizationData`
+  and `FinitePerfectAdicQuotientStrictRealizationSquare`. Skipped because six dependencies
+  outside this unit fail; the batch was stopped after collecting those diagnostics.
+- Full logs: `/home/ubuntu/u9/bz/BUILD-BZ683-fix1-full.log` and
+  `/home/ubuntu/u9/bz/BUILD-BZ683-downstream-full.log`.
+- Fix pattern, exact diagnostic, contextual rewrite rule, and whole-tree occurrence counts:
+  `/home/ubuntu/u9/bz/FIXES-BZ683.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ683-contract-audit.txt`.
+- Completion marker: `/home/ubuntu/u9/state/BZ683.DONE`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
+- This final commit changes only progress documentation; Lean sources match the green build.
+
+# BZ740 in progress
+
+- Branch: `u9/BZ740`; starting commit: `f271bd088`.
+- Reread the brief and progress notes on continuation; no new LEAD lines.
+- The import-only remote build fixed both private-helper errors, leaving the public Qh/Q mismatch.
+- The user instructed continuation after the exact one-line identity-cast proposal.
+  Applied `BZ740-statement-cast-proposal.patch`, preserving the original morphism.
+- Next: validate the assigned normalization module through `ucheck-bump`, then its direct importer.
+- Fix patterns and exact diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ740.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
