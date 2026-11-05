@@ -37,7 +37,7 @@ hom of pro-étale Weil sheaves into `ω_X` (`AlgebraicGeometry.ProEtaleWeilSheaf
 
 The statements of the duality theory for Weil complexes that the boundary duality of
 `sec-deligne-laumon-a1` uses belong to the chapters on the six functors and on smooth purity;
-they are stated here with `sorry`, each with the blueprint node it renders:
+they are proved here, each with the blueprint node it renders:
 
 - `det-pd-biduality-coefficients`: the fact that `𝔻_X` preserves Weil complexes, its exactness,
   biduality `K ≅ 𝔻_X 𝔻_X K` and `Rf^! ≅ 𝔻_X f^* 𝔻_Y`;
@@ -48,6 +48,15 @@ they are stated here with `sorry`, each with the blueprint node it renders:
   `P ≅ P^∨∨` is proved in `WeilConjectures.WeilSheaf.Bidual`);
 - `prop-sf-localization-all-stages`, clause (4): `Ri^! Rj_* = 0` and the unit
   `Q ⟶ Ri^! Ri_* Q` is an isomorphism, for complementary immersions `i` and `j`.
+
+Three of these proofs rest on inputs from other sections that are still stated with `sorry`:
+`Rf^! ≅ 𝔻_X f^* 𝔻_Y` on the natural Verdier exchange
+(`AlgebraicGeometry.WeilComplex.nonempty_verdierDual_derivedLowerShriek_natIso`), the Verdier
+exchange on the proper projection formula
+(`AlgebraicGeometry.WeilComplex.nonempty_rightDerivedLowerStar_nativeDerivedTensor_iso`,
+`fix-prop-projection-formula`), and the smooth dualizing complex on smooth purity
+(`AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_adjunction_of_smooth`,
+`sk-thm-purity-transport`).
 
 All isomorphisms are stated as the existence of an isomorphism, as in
 `WeilConjectures.WeilSheaf.LowerShriekFunctoriality`.
