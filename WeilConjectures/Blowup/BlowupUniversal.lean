@@ -1248,8 +1248,8 @@ lemma Scheme.IdealSheafData.exists_probe_lift (I : X.IdealSheafData)
         = ((I.ideal V).map (t.appLE V.1 W.1 hWle).hom).map
             (algebraMap Γ(T, W.1) Γ(T, T.basicOpen (tt j))) := by
           rw [happ, ← Ideal.map_map]
-      _ = Ideal.span {algebraMap Γ(T, W.1) Γ(T, T.basicOpen (tt j))
-            ((t.appLE V.1 W.1 hWle).hom (x j))} := hspan
+      _ = Ideal.span {(algebraMap Γ(T, W.1) Γ(T, T.basicOpen (tt j))
+            ((t.appLE V.1 W.1 hWle).hom (x j)))} := hspan
       _ = Ideal.span {(t.appLE V.1 (T.affineBasicOpen (tt j)).1 hOle).hom (x j)} := by
           have h2 : (t.appLE V.1 (T.affineBasicOpen (tt j)).1 hOle).hom (x j) =
               algebraMap Γ(T, W.1) Γ(T, T.basicOpen (tt j))
