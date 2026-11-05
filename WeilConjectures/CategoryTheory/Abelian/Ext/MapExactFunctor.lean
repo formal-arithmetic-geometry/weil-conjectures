@@ -162,7 +162,8 @@ lemma mapExactFunctor_comp_mk₀_eq (G₁ : C ⥤ D) [G₁.Additive]
     let := comp_preservesFiniteLimits G₁ G₂
     let := comp_preservesFiniteColimits G₁ G₂
     have hc (A : C) :
-        (Functor.mapDerivedCategoryNatIso τ ≪≫ (Functor.mapDerivedCategoryCompIso G₁ G₂).symm).hom.app
+        (Functor.mapDerivedCategoryNatIso τ ≪≫
+            (Functor.mapDerivedCategoryCompIso G₁ G₂).symm).hom.app
             ((DerivedCategory.singleFunctor C 0).obj A) ≫
           G₂.mapDerivedCategory.map ((G₁.mapDerivedCategorySingleFunctor 0).hom.app A) ≫
           (G₂.mapDerivedCategorySingleFunctor 0).hom.app (G₁.obj A) =
@@ -210,12 +211,14 @@ lemma mapExactFunctor_comp_mk₀_eq (G₁ : C ⥤ D) [G₁.Additive]
     ext
     simp only [Ext.comp_hom, Ext.mk₀_hom, Ext.mapExactFunctor_hom]
     have : NatTrans.CommShift
-        (Functor.mapDerivedCategoryNatIso τ ≪≫ (Functor.mapDerivedCategoryCompIso G₁ G₂).symm).hom ℤ := by
+        (Functor.mapDerivedCategoryNatIso τ ≪≫
+          (Functor.mapDerivedCategoryCompIso G₁ G₂).symm).hom ℤ := by
       dsimp only [Iso.trans_hom]
       infer_instance
     have hi (A : C) :
         (G.mapDerivedCategorySingleFunctor 0).inv.app A ≫
-          (Functor.mapDerivedCategoryNatIso τ ≪≫ (Functor.mapDerivedCategoryCompIso G₁ G₂).symm).hom.app
+          (Functor.mapDerivedCategoryNatIso τ ≪≫
+              (Functor.mapDerivedCategoryCompIso G₁ G₂).symm).hom.app
             ((DerivedCategory.singleFunctor C 0).obj A) =
         (DerivedCategory.singleFunctor E 0).map (τ.hom.app A) ≫
           (G₂.mapDerivedCategorySingleFunctor 0).inv.app (G₁.obj A) ≫
