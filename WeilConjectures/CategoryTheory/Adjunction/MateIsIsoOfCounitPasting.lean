@@ -85,4 +85,21 @@ lemma isIso_mateEquiv_app_of_counit_of_pasting (adjW : T_W ⊣ R_W) (adjA : T_A 
   have := hρ (U_Y.obj L)
   infer_instance
 
+/-- The variant of `CategoryTheory.isIso_mateEquiv_app_of_counit_of_pasting` for an invertible
+pasted square `β`, described through its inverse. -/
+lemma isIso_mateEquiv_app_of_counit_of_pasting_inv (adjW : T_W ⊣ R_W) (adjA : T_A ⊣ R_A)
+    (adjB : T_B ⊣ R_B) (σ : T_W ⋙ U_Y ≅ U_Z ⋙ T_A) (ρ : T_A ⋙ Φ_Y ≅ Φ_Z ⋙ T_B)
+    (eZ : F_Z ≅ U_Z ⋙ Φ_Z) (eY : F_Y ≅ U_Y ⋙ Φ_Y) (β : F_Z ⋙ T_B ≅ T_W ⋙ F_Y)
+    (hβ : ∀ M, β.inv.app M = eY.hom.app (T_W.obj M) ≫ Φ_Y.map (σ.hom.app M) ≫
+      ρ.hom.app (U_Z.obj M) ≫ T_B.map (eZ.inv.app M))
+    (hcounit : ∀ L, ∃ e : U_Z.obj (R_W.obj L) ≅ R_A.obj (U_Y.obj L),
+      U_Y.map (adjW.counit.app L) =
+        σ.hom.app (R_W.obj L) ≫ T_A.map e.hom ≫ adjA.counit.app (U_Y.obj L))
+    (hρ : ∀ Y, IsIso ((mateEquiv adjA adjB (TwoSquare.mk _ _ _ _ ρ.inv)).app Y)) (L : W_Y) :
+    IsIso ((mateEquiv adjW adjB (TwoSquare.mk _ _ _ _ β.hom)).app L) := by
+  refine isIso_mateEquiv_app_of_counit_of_pasting adjW adjA adjB σ ρ eZ eY β.hom
+    (fun M ↦ ?_) hcounit hρ L
+  rw [← cancel_mono (β.inv.app M), Iso.hom_inv_id_app, hβ]
+  simp [← Functor.map_comp, ← Functor.map_comp_assoc]
+
 end CategoryTheory

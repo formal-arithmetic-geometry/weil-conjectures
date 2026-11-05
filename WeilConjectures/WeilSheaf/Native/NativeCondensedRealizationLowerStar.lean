@@ -245,4 +245,35 @@ lemma mateEquiv_derivedCondensedRealizationUpperStarIso_app
       Category.comp_id]
     erw [CategoryTheory.Functor.map_id, Category.id_comp]
 
+set_option maxHeartbeats 1000000 in
+/-- `AlgebraicGeometry.ProEtaleWeilSheaf.mateEquiv_derivedCondensedRealizationUpperStarIso_app`,
+with the identifications `D(forget ⋙ Φ) ≅ D(forget) ⋙ D(Φ)` moved to the source. -/
+lemma mapDerivedCategoryCompIso_inv_app_mateEquiv_derivedCondensedRealizationUpperStarIso_app
+    (K : DerivedCategory (ProEtaleWeilSheaf k₀ l Z)) :
+    (Functor.mapDerivedCategoryCompIso (IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l Y))
+          (adicSheafEquivCondensedMod l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor).inv.app
+          ((lowerStar k₀ l g).rightDerivedFunctor.obj K) ≫
+      (mateEquiv (derivedUpperStarLowerStarAdjunction k₀ l g)
+        (CondensedRing.derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj l)
+          (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))
+        (derivedCondensedRealizationUpperStarIso k₀ l g).hom).natTrans.app K ≫
+      (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l)
+          (Scheme.Hom.geometricFiberMap g
+            (comp_over g (Spec (CommRingCat.of k₀))))).rightDerivedFunctor.map
+        ((Functor.mapDerivedCategoryCompIso
+          (IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l Z))
+          (adicSheafEquivCondensedMod l
+            (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor).hom.app K) =
+      (adicSheafEquivCondensedMod l
+          (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor.mapDerivedCategory.map
+          ((IsoAlgebra.derivedForgetCommIso.{u + 1, u + 1, u + 2, u + 2}
+            (adicLowerStarGeometricFiberMapCompFrobeniusIso l g (comp_over g _))).hom.app K) ≫
+        (Functor.rightDerivedFunctorCommIso (adicLowerStarCompCondensedModIso l
+          (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))).hom.app
+          ((IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l Z)).mapDerivedCategory.obj K) := by
+  rw [mateEquiv_derivedCondensedRealizationUpperStarIso_app]
+  simp only [Category.assoc, Iso.inv_hom_id_app_assoc, ← Functor.map_comp, Iso.inv_hom_id_app,
+    CategoryTheory.Functor.map_id, Category.comp_id]
+  erw [CategoryTheory.Functor.map_id, Category.comp_id]
+
 end AlgebraicGeometry.ProEtaleWeilSheaf
