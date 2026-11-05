@@ -151,20 +151,20 @@ theorem derivedComparisonUpperStarUpperStarIso_compCoherence {X Y Z : Scheme.{u}
       (ProEtale.leftDerivedUpperStarIsoMapDerivedCategory A q)
       (ProEtale.leftDerivedUpperStarIsoMapDerivedCategory A p)
       (ProEtale.leftDerivedUpperStarIsoMapDerivedCategory A (p ≫ q))
-      ((Functor.mapDerivedCategoryCompIso (Etale.upperStar A q) ν^*(Y)[A]).inv ≫
+      ((Functor.mapDerivedCategoryCompIso (Etale.upperStar A q) ν^*(Y)[A]).hom ≫
         (Functor.mapDerivedCategoryNatIso (comparisonUpperStarUpperStarIso A q).symm).hom ≫
-        (Functor.mapDerivedCategoryCompIso ν^*(Z)[A] (ProEtale.upperStar A q)).hom)
-      ((Functor.mapDerivedCategoryCompIso (Etale.upperStar A p) ν^*(X)[A]).inv ≫
+        (Functor.mapDerivedCategoryCompIso ν^*(Z)[A] (ProEtale.upperStar A q)).inv)
+      ((Functor.mapDerivedCategoryCompIso (Etale.upperStar A p) ν^*(X)[A]).hom ≫
         (Functor.mapDerivedCategoryNatIso (comparisonUpperStarUpperStarIso A p).symm).hom ≫
-        (Functor.mapDerivedCategoryCompIso ν^*(Y)[A] (ProEtale.upperStar A p)).hom)
-      ((Functor.mapDerivedCategoryCompIso (Etale.upperStar A (p ≫ q)) ν^*(X)[A]).inv ≫
+        (Functor.mapDerivedCategoryCompIso ν^*(Y)[A] (ProEtale.upperStar A p)).inv)
+      ((Functor.mapDerivedCategoryCompIso (Etale.upperStar A (p ≫ q)) ν^*(X)[A]).hom ≫
         (Functor.mapDerivedCategoryNatIso (comparisonUpperStarUpperStarIso A (p ≫ q)).symm).hom ≫
-        (Functor.mapDerivedCategoryCompIso ν^*(Z)[A] (ProEtale.upperStar A (p ≫ q))).hom)
+        (Functor.mapDerivedCategoryCompIso ν^*(Z)[A] (ProEtale.upperStar A (p ≫ q))).inv)
       ((Functor.mapDerivedCategoryNatIso (Etale.upperStarComp A p q)).hom ≫
-        (Functor.mapDerivedCategoryCompIso (Etale.upperStar A q) (Etale.upperStar A p)).hom)
+        (Functor.mapDerivedCategoryCompIso (Etale.upperStar A q) (Etale.upperStar A p)).inv)
       ((Functor.mapDerivedCategoryNatIso (ProEtale.upperStarComp A p q)).hom ≫
         (Functor.mapDerivedCategoryCompIso (ProEtale.upperStar A q)
-          (ProEtale.upperStar A p)).hom)
+          (ProEtale.upperStar A p)).inv)
       ?_ (derivedComparisonUpperStarUpperStarIso A q).symm
       (derivedComparisonUpperStarUpperStarIso A p).symm
       (derivedComparisonUpperStarUpperStarIso A (p ≫ q)).symm ?_ ?_ ?_
