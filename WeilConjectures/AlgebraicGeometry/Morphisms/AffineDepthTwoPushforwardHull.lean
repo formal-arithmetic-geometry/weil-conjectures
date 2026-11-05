@@ -148,6 +148,10 @@ theorem affine_depth_two_pushforward_hull
   let W := j ⁻¹ᵁ U
   let t := j ∣_ U
   let P := (Modules.pushforward f).obj (SheafOfModules.unit X.ringCatSheaf)
+  have : (SheafOfModules.unit X.ringCatSheaf).IsInvertible :=
+    SheafOfModules.instIsInvertibleUnit.{u, u, u}
+  have : (SheafOfModules.unit X.ringCatSheaf).IsFiniteLocallyFree :=
+    SheafOfModules.IsInvertible.isFiniteLocallyFree.{u, u, u} _
   have : P.IsFiniteLocallyFree :=
     Modules.isFiniteLocallyFree_pushforward f (SheafOfModules.unit X.ringCatSheaf)
   have : ((Modules.pullback t).obj P).IsFiniteLocallyFree := inferInstance
