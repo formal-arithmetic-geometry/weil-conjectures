@@ -103,7 +103,7 @@ theorem sourceLocalizedCocycleHomology {S : Scheme.{v}}
     erw [CohomologyClass.toHom_mk]
     simp only [DerivedCategory.singleFunctorIsoCompQ, Iso.refl_hom,
       NatTrans.id_app, Category.id_comp]
-    erw [DerivedCategory.quotientCompQhIso_inv_naturality_assoc]
+    erw [← DerivedCategory.quotientCompQhIso_inv_naturality_assoc]
     erw [Iso.inv_hom_id_app_assoc]
     rfl
   -- Cancel the inclusion shift comparison and move r inverse past the homology shift.
