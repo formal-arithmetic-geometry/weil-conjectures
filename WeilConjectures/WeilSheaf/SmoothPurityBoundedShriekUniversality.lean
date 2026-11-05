@@ -67,7 +67,8 @@ theorem baseChangedSmoothTrace_without_unit_universal
     Functor.comp_obj, Iso.symm_hom, Category.assoc, Iso.hom_inv_id_app_assoc,
     Iso.hom_inv_id, Category.id_comp, Category.comp_id, a] at ht
   dsimp +instances only [Functor.comp_obj, Functor.comp_map] at ht ⊢
-  simpa only [Functor.TraceUniversalAt, Functor.map_id, Category.id_comp] using ht
+  erw [Functor.map_id, Category.id_comp, Functor.map_id, Category.id_comp] at ht
+  exact ht
 
 /-- The chosen compactification trace is universal on the ambient geometric hom
 sets when C9's unit base-change component is invertible. -/
