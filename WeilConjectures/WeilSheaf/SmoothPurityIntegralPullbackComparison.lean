@@ -27,19 +27,4 @@ noncomputable def purityIntegralPullbackForgetIso :
         Mod.forget (condensedRingObj (Profinite.continuousMapRingObj ℤ_[l]) U) :=
   CondensedRing.upperStarForgetIso (Profinite.continuousMapRingObj ℤ_[l]) g
 
-/-- Commutativity of the integral coefficient ring, in the native ring-sheaf coordinates. -/
-instance (priority := 20000) purityIntegralCommMonObj :
-    IsCommMonObj (Profinite.continuousMapRingObj.{u} ℤ_[l]) :=
-  Sheaf.isCommMonObj_sheafCompose_obj (coherentTopology Profinite.{u})
-    (Profinite.continuousMapRingSheaf ℤ_[l])
-    fun S (a b : ULift.{u + 1} C(S.unop, ℤ_[l])) ↦ mul_comm a b
-
-/-- The coefficient extension unit in the integral ring-sheaf coordinates. -/
-noncomputable def purityIntegralPullbackUnit
-    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.continuousMapRingObj ℤ_[l]) X)) :
-    (g)^*[Ab.{u + 1}].obj M.X ⟶
-      ((g)^*⟦Profinite.continuousMapRingObj ℤ_[l]⟧.obj M).X :=
-  CondensedRing.upperStarUnitHom (Profinite.continuousMapRingObj ℤ_[l]) g M
-
 end AlgebraicGeometry.ProEtale

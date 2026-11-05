@@ -1,0 +1,54 @@
+/-
+Copyright (c) 2026 The Weil Conjectures contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+-/
+module
+
+public import WeilConjectures.WeilSheaf.SmoothPurityScalarPullback
+public import WeilConjectures.TateTwist.UpperStarExtendScalars
+
+/-! # Trivialization after changing the coefficient ring -/
+
+@[expose] public section
+
+universe u
+open CategoryTheory Limits MonoidalCategory
+open scoped CategoryTheory.Obj AlgebraicGeometry.ProEtale.CondensedRing
+
+namespace AlgebraicGeometry.ProEtale
+
+variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+  [MonObj Λ] [IsCommMonObj Λ]
+  {Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
+  [MonObj Λ'] [IsCommMonObj Λ'] (a : Λ ⟶ Λ') [IsMonHom a]
+  {X U : Scheme.{u}} (g : U ⟶ X) [WeaklyEtale g]
+
+attribute [local instance 20000] ProEtale.laxBraided_upperStar_of_weaklyEtale
+
+/-- Extend a pulled-back trivialization to the final coefficient ring before specializing it. -/
+noncomputable def purityChangeCoefficientTrivialization
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
+    (e : ((g)^*[Ab.{u + 1}].mapMod _).obj M ≅
+      ((g)^*[Ab.{u + 1}].mapMod _).obj (𝟙_ _)) :
+    (g)^*⟦Λ'⟧.obj ((Mod.extendScalars (coefficientMap a X)).obj M) ≅
+      (g)^*⟦Λ'⟧.obj (𝟙_ _) :=
+  ((CondensedRing.pullIso a g).app M).symm ≪≫
+    (Mod.extendScalars (coefficientMap a U)).mapIso
+      (purityExtendWeakPullbackIso Λ g M (𝟙_ _) e) ≪≫
+    (CondensedRing.pullIso a g).app (𝟙_ _) ≪≫
+    (g)^*⟦Λ'⟧.mapIso (Functor.Monoidal.εIso
+      (Mod.extendScalars (coefficientMap a X))).symm
+
+variable {K : Type u} [Field K] (f : U ⟶ Spec (.of K)) (l : ℕ) [Fact l.Prime]
+  {ζ : ℕ → K} (hζ : ∀ n, IsPrimitiveRoot (ζ n) (l ^ n))
+  (hζ' : ∀ n, ζ (n + 1) ^ l = ζ n)
+
+/-- The root trivialization with only rational coefficient modules in its result. -/
+noncomputable def purityRationalTateTrivialization :
+    (g)^*⟦Profinite.padicAlgClRingObj l⟧.obj (tateTwistOne X l) ≅
+      (g)^*⟦Profinite.padicAlgClRingObj l⟧.obj (𝟙_ _) :=
+  purityChangeCoefficientTrivialization (Profinite.continuousMapRingObj ℤ_[l])
+    (Profinite.padicIntRingObjToPadicAlgCl l) g (tateModule X l)
+    (upperStarMapModTateModuleIsoUnit g f l hζ hζ' ≪≫ (g)^*[Ab.{u + 1}].mapModUnitIso)
+
+end AlgebraicGeometry.ProEtale
