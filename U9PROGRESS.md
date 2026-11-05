@@ -106,15 +106,20 @@
 - Completion marker: `/home/ubuntu/u9/state/BZ311.DONE`.
 - This final commit changes only progress documentation; Lean sources match the green build.
 
-# BZ408 in progress
+# BZ384 in progress
 
-- Branch: `u9/BZ408`; starting commit: `98654719bdfe7ff3e77ff047b3bce53405d2dc4a`.
-- Assigned module: `WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryPresentation`.
-- Baseline remote build confirmed one application type mismatch at line 309.
-- The user instructed continuation after the exact one-line statement correction
-  proposal; that patch is now applied. It uses the forward composition comparison
-  followed by the induced isomorphism, with `.hom` selecting the required direction.
-- All other statement text, proof bodies, and existing docstrings remain unchanged.
-- Next: validate the assigned module, then both downstream layers via `ucheck-bump`.
-- Pattern, whole-tree counts, and baseline log: `/home/ubuntu/u9/bz/FIXES-BZ408.md`.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
+- Branch: `u9/BZ384`; starting commit: `98654719b`.
+- Baseline remote build confirmed five errors in compositor directions in declaration types.
+- The user instructed continuation after the explicit nine-direction patch proposal.
+  That patch is now applied, preserving the original equations under Mathlib's reversed compositor.
+- Next: remote validation of the assigned module, then its three direct importers.
+- Fix patterns and baseline log: `/home/ubuntu/u9/bz/FIXES-BZ384.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+# BZ430 in progress
+
+- Branch: `u9/BZ430`; starting commit: `99a06bbbb`.
+- User instructed continuation after the exact two-helper visibility proposal; both helper proposition texts are unchanged and both are now private.
+- Localization public/import-all directives permit proof and private-signature reduction through `Qh`.
+- Next: validate owned module through `ucheck-bump`, then `WeilConjectures.WeilSheaf.LowerShriekForget` and its importer.
+- Fixes: `/home/ubuntu/u9/bz/FIXES-BZ430.md`. No local Lean/Lake or forbidden proof escapes.
