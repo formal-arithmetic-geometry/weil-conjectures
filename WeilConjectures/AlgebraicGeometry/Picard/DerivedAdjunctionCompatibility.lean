@@ -15,7 +15,7 @@ public import Mathlib.CategoryTheory.Limits.Cones
 public import WeilConjectures.CategoryTheory.DerivedCategory.EssentiallyConstantPro
 import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 import Mathlib.CategoryTheory.Functor.Derived.Adjunction
-import Mathlib.CategoryTheory.Functor.KanExtension.Preserves
+public import Mathlib.CategoryTheory.Functor.KanExtension.Preserves
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedPointwiseKanBridge
 
 @[expose] public section
@@ -25,7 +25,7 @@ open CategoryTheory CategoryTheory.Limits
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-private theorem pro_preserves_at
+theorem pro_preserves_at
     {C : Type*} [Category* C] {D : Type*} [Category* D]
     {E : Type*} [Category* E] {T : Type*} [Category* T]
     (W : MorphismProperty C) [W.HasRightCalculusOfFractions]
@@ -91,7 +91,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-private theorem pro_absolute
+theorem pro_absolute
     {C : Type*} [Category* C] {D : Type*} [Category* D]
     {E : Type*} [Category* E] {T : Type*} [Category* T]
     (W : MorphismProperty C) [W.HasRightCalculusOfFractions]
