@@ -33,7 +33,7 @@ of the type of all module objects does not enlarge the required coproduct existe
 
 set_option autoImplicit false
 
-universe u v w
+universe u v w t
 
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 open AlgebraicGeometry Scheme
@@ -101,6 +101,17 @@ private theorem triangleCoproducts
   · exact unop_distinguished U (productTriangle_distinguished T'
       (fun i ↦ op_distinguished (T i) (hT i)))
 
+private theorem derivedCoproductCocone
+    (A : Type u) [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{w} A]
+    [HasDerivedCategory.{t} A] (I : Type w) (K : I → CochainComplex A ℤ) :
+    ∃ c : Cofan K,
+      (∀ n : ℤ, Nonempty (IsColimit ((HomologicalComplex.eval _ _ n).mapCocone c))) ∧
+      Nonempty (IsColimit (DerivedCategory.Q.mapCocone c)) := by
+  let : HasColimitsOfSize.{w, w} A := IsGrothendieckAbelian.hasColimits A
+  refine ⟨HomologicalComplex.coconeOfHasColimitEval (Discrete.functor K), ?_, ?_⟩
+  · exact fun n ↦ ⟨colimit.isColimit _⟩
+  · exact DerivedCategory.isColimit_mapCocone_grothendieckSum A I K
+
 /-- The three assertions of the localizing-closure existence lemma.
 
 The termwise cocone assertion specifies both degreewise coproducts and the
@@ -140,7 +151,6 @@ splits the same idempotent as an object of this full subcategory. The explicit
 isomorphism between the two splittings, and repleteness, put the retract in it.
 6. For S ≤ S' ≤ Loc(S), the intersection formulas give both inclusions between
 Loc(S) and Loc(S'), so antisymmetry gives equality. -/
-set_option maxHeartbeats 400000 in
 theorem localizingClosure_exists
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ]
     (X : Scheme.{u})
@@ -229,15 +239,7 @@ theorem localizingClosure_exists
     fun P hP hS K hK ↦ hK P hP hS
   refine ⟨inferInstance, ?_, ?_, hloc, hcontains, hminimal, ?_, ?_⟩
   · intro I K
-    let : HasColimitsOfShape (Discrete I) A := inferInstance
-    let (n : ℤ) : HasColimit
-        (Discrete.functor K ⋙ HomologicalComplex.eval A (ComplexShape.up ℤ) n) := inferInstance
-    let c : Cofan K :=
-      HomologicalComplex.coconeOfHasColimitEval (C := A) (c := ComplexShape.up ℤ)
-        (Discrete.functor K)
-    refine ⟨c, ?_, ?_⟩
-    · exact fun n ↦ ⟨colimit.isColimit _⟩
-    · exact DerivedCategory.isColimit_mapCocone_grothendieckSum A I K
+    exact derivedCoproductCocone A I K
   · exact triangleCoproducts
   · let P := localizingClosure S
     let (I : Type (u + 2)) : P.IsClosedUnderColimitsOfShape (Discrete I) := by
