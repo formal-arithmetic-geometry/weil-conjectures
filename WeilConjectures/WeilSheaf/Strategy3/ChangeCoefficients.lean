@@ -23,8 +23,6 @@ namespace AlgebraicGeometry.ProEtale.Strategy3
 
 open Scheme
 
-local notation "(" f ")_*⟦" Λ "⟧" => lowerStar Λ f
-local notation "(" f ")^*⟦" Λ "⟧" => upperStar Λ f
 
 section CoefficientMap
 
@@ -87,7 +85,7 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 `f_*^Λ' ⋙ Res_{a_Y} ≅ Res_{a_X} ⋙ f_*^Λ`, both being `mapMod(f_*)` followed by the restriction
 of scalars along the common composite of the square `a_Y ≫ η_f = η_f ≫ f_* a_X`. -/
 noncomputable def comapLowerStarIso :
-    (f)_*⟦Λ'⟧ ⋙ Mod.comap (coefficientMap a Y) ≅ Mod.comap (coefficientMap a X) ⋙ (f)_*⟦Λ⟧ :=
+    (Strategy3.lowerStar Λ' (f)) ⋙ Mod.comap (coefficientMap a Y) ≅ Mod.comap (coefficientMap a X) ⋙ (Strategy3.lowerStar Λ (f)) :=
   Mod.comapMapModComapIso (f)_*[Ab.{u + 1}] (coefficientMap a X) (coefficientMap a Y)
     (condensedPushforwardHom Λ f) (condensedPushforwardHom Λ' f)
     (condensedPushforwardHom_comp_map_coefficientMap a f).symm
@@ -95,8 +93,8 @@ noncomputable def comapLowerStarIso :
 /-- **(Pull)**, underived: `f^*_Λ ⋙ Ext_{a_X} ≅ Ext_{a_Y} ⋙ f^*_Λ'`, the conjugate of
 `comapLowerStarIso` along `f^* ⊣ f_*` and `Ext ⊣ Res`. -/
 noncomputable def pullIso :
-    (f)^*⟦Λ⟧ ⋙ Mod.extendScalars (coefficientMap a X) ≅
-      Mod.extendScalars (coefficientMap a Y) ⋙ (f)^*⟦Λ'⟧ :=
+    (Strategy3.upperStar Λ (f)) ⋙ Mod.extendScalars (coefficientMap a X) ≅
+      Mod.extendScalars (coefficientMap a Y) ⋙ (Strategy3.upperStar Λ' (f)) :=
   Adjunction.pullIsoOfComapIso (Mod.extendRestrictAdjunction (coefficientMap a X))
     (Mod.extendRestrictAdjunction (coefficientMap a Y))
     (upperStarLowerStarAdjunction Λ f) (upperStarLowerStarAdjunction Λ' f)

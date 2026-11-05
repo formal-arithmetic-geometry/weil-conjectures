@@ -38,37 +38,35 @@ noncomputable def lowerStar :
       Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y) :=
   (f)_*[Ab.{u + 1}].mapMod _ ⋙ Mod.comap (condensedPushforwardHom Λ f)
 
-@[inherit_doc lowerStar]
-scoped notation "(" f ")_*⟦" Λ "⟧" => lowerStar Λ f
 
 omit [IsCommMonObj Λ] in
 /-- The underlying sheaf of `f_* M` is `f_* M`. -/
 lemma lowerStar_comp_forget :
-    (f)_*⟦Λ⟧ ⋙ Mod.forget (condensedRingObj Λ Y) =
+    (Strategy3.lowerStar Λ (f)) ⋙ Mod.forget (condensedRingObj Λ Y) =
       Mod.forget (condensedRingObj Λ X) ⋙ (f)_*[Ab.{u + 1}] := rfl
 
 omit [IsCommMonObj Λ] in
 lemma lowerStar_obj_X
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
-    ((f)_*⟦Λ⟧.obj M).X = (f)_*[Ab.{u + 1}].obj M.X := rfl
+    ((Strategy3.lowerStar Λ (f)).obj M).X = (f)_*[Ab.{u + 1}].obj M.X := rfl
 
 omit [IsCommMonObj Λ] in
 /-- The action of `Λ_Y` on `f_* M` is `η_f` followed by the action of `f_* Λ_X` on `f_* M`
 induced by the lax monoidal structure of `f_*`. -/
 lemma lowerStar_obj_smul
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
-    γ[condensedRingObj Λ Y,((f)_*⟦Λ⟧.obj M).X] =
+    γ[condensedRingObj Λ Y,((Strategy3.lowerStar Λ (f)).obj M).X] =
       condensedPushforwardHom Λ f ▷ (f)_*[Ab.{u + 1}].obj M.X ≫
         Functor.LaxMonoidal.μ (f)_*[Ab.{u + 1}] (condensedRingObj Λ X) M.X ≫
           (f)_*[Ab.{u + 1}].map γ[condensedRingObj Λ X,M.X] := rfl
 
-instance lowerStar_additive : (f)_*⟦Λ⟧.Additive := by
+instance lowerStar_additive : (Strategy3.lowerStar Λ (f)).Additive := by
   unfold lowerStar
   infer_instance
 
 /-- The pushforward `f_*` on module objects is left exact, since `f_*` is and finite limits of
 module objects are computed on the underlying sheaves. -/
-instance preservesFiniteLimits_lowerStar : PreservesFiniteLimits (f)_*⟦Λ⟧ := by
+instance preservesFiniteLimits_lowerStar : PreservesFiniteLimits (Strategy3.lowerStar Λ (f)) := by
   unfold lowerStar
   infer_instance
 
@@ -86,29 +84,27 @@ noncomputable def upperStar :
       Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X) :=
   (f)^*[Ab.{u + 1}].mapMod _ ⋙ Mod.extendScalars (condensedPullbackHom Λ f)
 
-@[inherit_doc upperStar]
-scoped notation "(" f ")^*⟦" Λ "⟧" => upperStar Λ f
 
 /-- The underlying sheaf of `f^* M` is the extension of scalars `Λ_X ⊗_{f^* Λ_Y} f^* M` of
 the `f^* Λ_Y`-module `f^* M`. -/
 lemma upperStar_comp_forget :
-    (f)^*⟦Λ⟧ ⋙ Mod.forget (condensedRingObj Λ X) =
+    (Strategy3.upperStar Λ (f)) ⋙ Mod.forget (condensedRingObj Λ X) =
       (f)^*[Ab.{u + 1}].mapMod _ ⋙ Mod.extendScalars (condensedPullbackHom Λ f) ⋙
         Mod.forget (condensedRingObj Λ X) := rfl
 
 lemma upperStar_obj
     (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) :
-    (f)^*⟦Λ⟧.obj M =
+    (Strategy3.upperStar Λ (f)).obj M =
       Mod.extendScalarsObj (condensedPullbackHom Λ f) (((f)^*[Ab.{u + 1}].mapMod _).obj M) := rfl
 
-instance upperStar_additive : (f)^*⟦Λ⟧.Additive := by
+instance upperStar_additive : (Strategy3.upperStar Λ (f)).Additive := by
   unfold upperStar
   infer_instance
 
 /-- The pullback `f^*` on module objects is right exact, being a composition of a left adjoint
 with the exact functor `mapMod(f^*)`. It is also left exact
 (`ProEtale.CondensedRing.preservesFiniteLimits_upperStar`). -/
-instance preservesFiniteColimits_upperStar : PreservesFiniteColimits (f)^*⟦Λ⟧ := by
+instance preservesFiniteColimits_upperStar : PreservesFiniteColimits (Strategy3.upperStar Λ (f)) := by
   unfold upperStar
   exact comp_preservesFiniteColimits _ _
 
@@ -151,7 +147,7 @@ instance preservesFiniteLimits_linearLowerStar : PreservesFiniteLimits (linearLo
 `α_f` followed by the linear pushforward: restricting scalars along `α_f`, then along `f_* α_f`
 and the unit `Λ_Y ⟶ f_* f^* Λ_Y`, is restricting scalars along their composition `η_f`. -/
 noncomputable def comapPullbackHomCompIso :
-    Mod.comap (condensedPullbackHom Λ f) ⋙ linearLowerStar Λ f ≅ (f)_*⟦Λ⟧ :=
+    Mod.comap (condensedPullbackHom Λ f) ⋙ linearLowerStar Λ f ≅ (Strategy3.lowerStar Λ (f)) :=
   (Functor.associator _ _ _).symm ≪≫
     Functor.isoWhiskerRight ((f)_*[Ab.{u + 1}].mapModComapIso (condensedPullbackHom Λ f)) _ ≪≫
     Functor.associator _ _ _ ≪≫
@@ -161,25 +157,25 @@ noncomputable def comapPullbackHomCompIso :
 /-- The adjunction `f^* ⊣ f_*` on module objects over `Λ`: a `Λ_X`-linear map
 `Λ_X ⊗_{f^* Λ_Y} f^* M ⟶ N` is the same as an `f^* Λ_Y`-linear map `f^* M ⟶ N`, which
 is the same as a `Λ_Y`-linear map `M ⟶ f_* N`. -/
-noncomputable def upperStarLowerStarAdjunction : (f)^*⟦Λ⟧ ⊣ (f)_*⟦Λ⟧ :=
+noncomputable def upperStarLowerStarAdjunction : (Strategy3.upperStar Λ (f)) ⊣ (Strategy3.lowerStar Λ (f)) :=
   (((ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} f).mapModAdjunction
     (condensedRingObj Λ Y)).comp
     (Mod.extendRestrictAdjunction (condensedPullbackHom Λ f))).ofNatIsoRight
     (comapPullbackHomCompIso Λ f)
 
-instance : (f)_*⟦Λ⟧.IsRightAdjoint := (upperStarLowerStarAdjunction Λ f).isRightAdjoint
+instance : (Strategy3.lowerStar Λ (f)).IsRightAdjoint := (upperStarLowerStarAdjunction Λ f).isRightAdjoint
 
-instance : (f)^*⟦Λ⟧.IsLeftAdjoint := (upperStarLowerStarAdjunction Λ f).isLeftAdjoint
+instance : (Strategy3.upperStar Λ (f)).IsLeftAdjoint := (upperStarLowerStarAdjunction Λ f).isLeftAdjoint
 
 /-- The pushforward `f_*` on module objects preserves all limits of size `0`, being a right
 adjoint. -/
-noncomputable instance preservesLimitsOfSize_lowerStar : PreservesLimitsOfSize.{0, 0} (f)_*⟦Λ⟧ :=
+noncomputable instance preservesLimitsOfSize_lowerStar : PreservesLimitsOfSize.{0, 0} (Strategy3.lowerStar Λ (f)) :=
   (upperStarLowerStarAdjunction Λ f).rightAdjoint_preservesLimits
 
 /-- The pullback `f^*` on module objects preserves all colimits of size `0`, being a left
 adjoint. -/
 noncomputable instance preservesColimitsOfSize_upperStar :
-    PreservesColimitsOfSize.{0, 0} (f)^*⟦Λ⟧ :=
+    PreservesColimitsOfSize.{0, 0} (Strategy3.upperStar Λ (f)) :=
   (upperStarLowerStarAdjunction Λ f).leftAdjoint_preservesColimits
 
 end Adjunction
@@ -192,13 +188,13 @@ section Exact
 (`ProEtale.isIso_condensedPullbackHom`), the extension of scalars along it is the restriction of
 scalars along its inverse, and `f^*` on module objects is the left exact `mapMod(f^*)` up to this
 equivalence. -/
-instance preservesFiniteLimits_upperStar : PreservesFiniteLimits (f)^*⟦Λ⟧ :=
+instance preservesFiniteLimits_upperStar : PreservesFiniteLimits (Strategy3.upperStar Λ (f)) :=
   preservesFiniteLimits_of_natIso (Functor.isoWhiskerLeft
     ((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y))
     (Mod.extendScalarsIsoComapInv (condensedPullbackHom Λ f))).symm
 
 /-- The pullback `f^*` on module objects over `Λ` is exact. -/
-instance preservesHomology_upperStar : (f)^*⟦Λ⟧.PreservesHomology := {}
+instance preservesHomology_upperStar : (Strategy3.upperStar Λ (f)).PreservesHomology := {}
 
 end Exact
 
@@ -229,7 +225,7 @@ noncomputable def comapCondensedPushforwardHomComp :
 which is monoidal (`ProEtale.isMonoidal_lowerStarComp`), and the two actions of `Λ_Z`
 agree since `η_{f ≫ g}` is `η_g` followed by `g_* η_f` up to `ProEtale.lowerStarComp`
 (`ProEtale.CondensedRing.comapCondensedPushforwardHomComp`). -/
-noncomputable def lowerStarComp : (f)_*⟦Λ⟧ ⋙ (g)_*⟦Λ⟧ ≅ (f ≫ g)_*⟦Λ⟧ :=
+noncomputable def lowerStarComp : (Strategy3.lowerStar Λ (f)) ⋙ (Strategy3.lowerStar Λ (g)) ≅ (Strategy3.lowerStar Λ (f ≫ g)) :=
   Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft _ ((Functor.associator _ _ _).symm ≪≫
       Functor.isoWhiskerRight
@@ -245,7 +241,7 @@ noncomputable def lowerStarComp : (f)_*⟦Λ⟧ ⋙ (g)_*⟦Λ⟧ ≅ (f ≫ g)_
 /-- The composition isomorphism `(f ≫ g)^* ≅ g^* ⋙ f^*` of pullbacks on module objects over
 `Λ`, obtained from `ProEtale.CondensedRing.lowerStarComp` by uniqueness of left
 adjoints: both sides are left adjoint to `f_* ⋙ g_*`. -/
-noncomputable def upperStarComp : (f ≫ g)^*⟦Λ⟧ ≅ (g)^*⟦Λ⟧ ⋙ (f)^*⟦Λ⟧ :=
+noncomputable def upperStarComp : (Strategy3.upperStar Λ (f ≫ g)) ≅ (Strategy3.upperStar Λ (g)) ⋙ (Strategy3.upperStar Λ (f)) :=
   ((conjugateIsoEquiv (upperStarLowerStarAdjunction Λ (f ≫ g))
       ((upperStarLowerStarAdjunction Λ g).comp (upperStarLowerStarAdjunction Λ f))).symm
     (lowerStarComp Λ f g).symm).symm
@@ -264,7 +260,7 @@ underlying sheaves it is the identity isomorphism `ProEtale.lowerStarId`, which 
 `η_{𝟙 X}` is the inverse of `ProEtale.lowerStarId` at `Λ_X`
 (`ProEtale.condensedPushforwardHom_id`). -/
 noncomputable def lowerStarId :
-    (𝟙 X)_*⟦Λ⟧ ≅ 𝟭 (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :=
+    (Strategy3.lowerStar Λ (𝟙 X)) ≅ 𝟭 (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :=
   NatIso.ofComponents (fun M ↦ Mod.isoMk ((ProEtale.lowerStarId Ab.{u + 1} X).app M.X) (by
     have h := NatTrans.IsMonoidal.tensor (τ := (ProEtale.lowerStarId Ab.{u + 1} X).hom)
       (condensedRingObj Λ X) M.X
@@ -281,7 +277,7 @@ noncomputable def lowerStarId :
 /-- The identity isomorphism `(𝟙 X)^* ≅ 𝟭` of the pullback on module objects over `Λ`, obtained
 from `ProEtale.CondensedRing.lowerStarId` by uniqueness of left adjoints. -/
 noncomputable def upperStarId :
-    (𝟙 X)^*⟦Λ⟧ ≅ 𝟭 (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :=
+    (Strategy3.upperStar Λ (𝟙 X)) ≅ 𝟭 (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :=
   ((conjugateIsoEquiv (upperStarLowerStarAdjunction Λ (𝟙 X)) Adjunction.id).symm
     (lowerStarId Λ X)).symm
 

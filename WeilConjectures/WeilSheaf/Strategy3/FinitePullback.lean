@@ -15,7 +15,8 @@ set_option profiler.threshold 0
 
 universe u
 
-open CategoryTheory Limits MonoidalCategory MonObj Opposite
+open CategoryTheory Limits MonoidalCategory MonObj Opposite Functor.LaxMonoidal
+open Functor.OplaxMonoidal
 open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.Strategy3
