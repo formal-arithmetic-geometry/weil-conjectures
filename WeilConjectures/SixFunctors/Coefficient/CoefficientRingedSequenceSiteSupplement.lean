@@ -1104,4 +1104,28 @@ noncomputable def coefficientFiniteInternalHom (n : ℕ) :
   @derivedInternalHomOfUniverses.{t+1, t, u} _ _ (Scheme.ProEt.topology W) _ _
     (integralCoefficientCommRingSheaf l E W n) (HasDerivedCategory.standard _)
 
+/-- The canonical derived identification of restricted evaluation.
+Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site). -/
+noncomputable def coefficientRestrictedEvaluationIso (n : ℕ) :
+    coefficientSequenceDerivedRestriction l E W ⋙ coefficientConstantTowerEvaluation l E W n ≅
+      coefficientSequenceDerivedEvaluation l E W n ⋙ coefficientFiniteDerivedRestriction l E W n :=
+  letI := HasDerivedCategory.standard (coefficientSequenceModules l E W)
+  letI := (scalarReductionRestriction_exact l E W n).1
+  letI := (scalarReductionRestriction_exact l E W n).2
+  Functor.mapDerivedCategoryCompIso (coefficientSequenceRestriction l E W)
+    ((evaluation ℕᵒᵖ (scalarReductionSource l E W)).obj (op n)) ≪≫
+    Functor.mapDerivedCategoryNatIso
+      (eqToIso (coefficientSequenceRestriction_evaluation l E W n)) ≪≫
+    (Functor.mapDerivedCategoryCompIso (coefficientSequenceEvaluation l E W n)
+      (scalarReductionRestriction l E W n)).symm
+
+/-- The actual projection L N to the restricted nth coefficient component.
+Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site). -/
+noncomputable def coefficientSequenceProjection (n : ℕ) :
+    coefficientSequenceLimit l E W ⟶
+      coefficientSequenceDerivedEvaluation l E W n ⋙ coefficientFiniteDerivedRestriction l E W n :=
+  Functor.whiskerLeft (coefficientSequenceDerivedRestriction l E W)
+    (coefficientConstantTowerProjection l E W n) ≫
+    (coefficientRestrictedEvaluationIso l E W n).hom
+
 end WeilConjectures
