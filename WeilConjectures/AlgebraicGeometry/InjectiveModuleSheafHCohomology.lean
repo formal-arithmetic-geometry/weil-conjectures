@@ -35,6 +35,10 @@ namespace AlgebraicGeometry
 
 open Scheme Etale
 
+private local instance (X : Scheme.{u}) :
+    HasExt.{u + 1} (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :=
+  hasExt_of_hasDerivedCategory _
+
 /-- The underlying abelian sheaf of an injective module sheaf is acyclic for H.
 This concerns an injective on its own site, without a closed immersion or torsion.
 
