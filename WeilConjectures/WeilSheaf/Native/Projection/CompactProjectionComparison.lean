@@ -132,10 +132,10 @@ theorem projectionCompactification_forget_square (M : WeilComplex k₀ l X)
             ((compactProjectionForget k₀ l Y).obj N).obj) := by
   -- the geometric exceptional projection morphism, as the pasted bounded projection morphisms
   -- (stated with explicit objects: no rewriting in the concrete goal)
-  have hq := CondensedRing.homMk_exceptionalProjectionMorphismOfCompactification_eq l cb
+  have hq := CondensedRing.homMk_exceptionalProjectionMorphismOfCompactification_eq (f := fb) l cb
     ((compactProjectionForget k₀ l X).obj M) ((compactProjectionForget k₀ l Y).obj N)
     ((projectionGeometricPullComp k₀ l f).hom.app ((compactProjectionForget k₀ l Y).obj N))
-    (CondensedRing.ι_map_eqToIso_trans_upperStarComp_inv_app_compactification l cb
+    (CondensedRing.ι_map_eqToIso_trans_upperStarComp_inv_app_compactification (f := fb) l cb
       ((compactProjectionForget k₀ l Y).obj N))
   -- the pasted square, with all spelling conversions done on abstract functors
   refine Eq.trans (projectionForgetSquare_paste_monoidal
