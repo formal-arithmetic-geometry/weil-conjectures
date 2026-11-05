@@ -24,7 +24,7 @@ private lemma purity_adjunction_ofNatIsoRight_refl
     (adj : L ⊣ R) : adj.ofNatIsoRight (Iso.refl R) = adj := by
   ext X
   simp only [Adjunction.ofNatIsoRight_unit, NatTrans.comp_app, Functor.whiskerLeft_app,
-    Iso.refl_hom, NatTrans.id_app, Category.comp_id]
+    Iso.refl_hom, NatTrans.id_app, Functor.comp_obj, Functor.id_obj, Category.comp_id]
 
 namespace Mod
 
@@ -40,7 +40,8 @@ lemma purity_conjugate_freeFunctorCompExtendScalarsIso :
         ((freeForgetAdjunction R).comp (extendRestrictAdjunction a))
         (freeFunctorCompExtendScalarsIso a) = Iso.refl _ := by
   rw [freeFunctorCompExtendScalarsIso, purity_adjunction_ofNatIsoRight_refl,
-    Adjunction.leftAdjointUniq, conjugateIsoEquiv_iso_symm, Equiv.apply_symm_apply]
+    Adjunction.leftAdjointUniq, conjugateIsoEquiv_iso_symm]
+  erw [Equiv.apply_symm_apply]
   rfl
 
 end Mod
@@ -77,8 +78,7 @@ lemma pullIso_hom_app_free_comp (M : Sheaf (ProEt.topology Y) Ab.{u + 1}) :
   rw [Mod.purity_conjugate_freeFunctorCompExtendScalarsIso,
     Mod.purity_conjugate_freeFunctorCompExtendScalarsIso]
   simp only [freeFunctorCompUpperStarIso, pullIso, Adjunction.pullIsoOfComapIso,
-    Equiv.apply_symm_apply, Iso.refl_hom, NatTrans.id_app, Functor.map_id,
-    Category.id_comp, Category.comp_id]
+    Equiv.apply_symm_apply, Iso.refl_hom, NatTrans.id_app, Category.id_comp]
   change 𝟙 _ = ((comapLowerStarIso a g).hom.app N).hom
   symm
   exact Mod.comapMapModComapIso_hom_app_hom _ _ _ _ _ _ N
