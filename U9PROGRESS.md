@@ -142,15 +142,22 @@
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ575 in progress
+# BZ575 complete
 
-- Re-read the unit brief; no new LEAD scope changes.
-- User instructed continuation after the exact one-line dependency repair proposal.
-- Applied BZ539's compatibility tensor lemma repair in Presheaf/InternalHom.lean.
-- Assigned ChangeOfRings comparison orientation was already fixed upstream.
-- Retrying ucheck-bump; then direct importer EtaleReductionFiniteTor and second-layer EtaleReduction.
-- Fix notes: /home/ubuntu/u9/bz/FIXES-BZ575.md.
-- No local Lean/Lake execution, statement changes, proof escapes, or heartbeat increases.
+- Branch: `u9/BZ575`; assigned ChangeOfRings passed `ucheck-bump`: rc=0, failed=0, 4417 jobs.
+- Tested source commit: `19933846843930b020db9c4d1aace62adcd94e64`.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ575-final-full.log`.
+- User instructed continuation after the one-line shared dependency repair proposal.
+  Applied the compatible tensor map lemma in Presheaf/InternalHom.lean, then merged
+  coordinator `bump/v4.35` at `cfcb63ad77e` to include the other dependency repairs.
+- Assigned module and both importer files are unchanged; no statement or docstring changes.
+- Direct importer EtaleReductionFiniteTor and second-layer EtaleReduction were attempted,
+  then skipped because unowned Ext.MapExactFunctor fails at line 230. No extra module claimed green.
+- Fix patterns, error evidence, and occurrence counts: `/home/ubuntu/u9/bz/FIXES-BZ575.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ575-contract-audit.txt`.
+- Completion marker: `/home/ubuntu/u9/state/BZ575.DONE`.
+- This completion commit changes only progress documentation after successful validation.
+- No local Lean/Lake, sorries, trust shortcuts, profiler probes, or heartbeat increases.
 
 # BZ557 in progress
 
