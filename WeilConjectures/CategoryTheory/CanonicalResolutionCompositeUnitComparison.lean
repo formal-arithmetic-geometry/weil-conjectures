@@ -71,7 +71,7 @@ private lemma resolutionDerivedIso_comp
       (F.mapCochainComplexPlus.obj L) = 𝟙 _ := rfl
   have hC : (DerivedCategory.Plus.quotientCompQhIso C).hom.app
       ((F ⋙ G).mapCochainComplexPlus.obj L) = 𝟙 _ := rfl
-  simp only [hA, hB, hC, Functor.map_id, Category.comp_id, Category.id_comp]
+  erw [hA, hB, hC]
   simp [Category.assoc, H, L]
   rfl
 
