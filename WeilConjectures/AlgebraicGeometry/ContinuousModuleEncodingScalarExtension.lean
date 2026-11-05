@@ -32,7 +32,7 @@ variable {C : Type v} [Category.{w} C] {J : GrothendieckTopology C}
   [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasWeakSheafify J AddCommGrpCat.{u}]
   {A B : Sheaf J CommRingCat.{u}} (α : A ⟶ B)
 
-local instance {U V : Cᵒᵖ} (i : U ⟶ V)
+local instance scalarExtensionRestrictedModule {U V : Cᵒᵖ} (i : U ⟶ V)
     (M : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A)) :
     Module (A.obj.obj V)
       ((ModuleCat.restrictScalars
