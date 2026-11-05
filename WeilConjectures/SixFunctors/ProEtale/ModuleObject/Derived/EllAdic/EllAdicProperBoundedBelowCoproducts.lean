@@ -164,6 +164,8 @@ theorem condensed_boundedBelow_preservesCoproduct
   have : ∀ i, (E i).IsStrictlyGE N := hE
   let S := CoproductsFromFiniteFiltered.liftToFinsetObj (Discrete.functor E)
   have hS (s : Finset (Discrete I)) : (S.obj s).IsStrictlyGE N := by
+    have : HasColimitsOfShape (Discrete s) C := inferInstance
+    have : HasColimitsOfShape (Discrete s) (CochainComplex C ℤ) := inferInstance
     rw [CochainComplex.isStrictlyGE_iff]
     intro n hn
     exact (isColimitOfPreserves (HomologicalComplex.eval C (.up ℤ) n)
