@@ -189,7 +189,7 @@ lemma tmul_one_sub_one_tmul_mem (r : Ideal (B ⊗[A] B)) [r.IsPrime] (q : Ideal 
   let := Ideal.Quotient.field e
   have : IsSepClosed (A ⧸ e) :=
     IsSepClosed.of_ringEquiv (k := IsLocalRing.ResidueField (Localization.AtPrime e))
-    (IsLocalization.AtPrime.equivQuotMaximalIdeal e (Localization.AtPrime e)).symm
+    (IsLocalization.AtPrime.equivQuotMaximalIdeal e (Localization.AtPrime e)).symm.toRingEquiv
   have hrl : r.LiesOver e := ⟨by
     rw [Ideal.under_def, algebraMap_eq_inl_comp, ← Ideal.comap_comap, hl]⟩
   set p := ringExpChar (A ⧸ e)

@@ -122,7 +122,7 @@ lemma exists_subsingleton_surjective_toPresheafFiber {Ω : Type u} [Field Ω] [I
   have hrep (p : ToType (Φ.sheafFiber.obj H)) : ∃ (E : Φ.fiber.Elements)
       (σ : ToType (H.obj.obj (op E.1))), Φ.toPresheafFiber E.1 E.2 H.obj σ = p := by
     obtain ⟨V, v, σ, hσ⟩ := Φ.toPresheafFiber_jointly_surjective p
-    exact ⟨⟨V, v⟩, σ, hσ⟩
+    exact ⟨Φ.fiber.elementsMk V v, σ, hσ⟩
   choose E σ hσ using hrep
   classical
   have := Fintype.ofFinite (ToType (Φ.sheafFiber.obj H))
