@@ -134,6 +134,23 @@ theorem purityChangeCoefficientTrivialization_weil
         (Functor.Monoidal.εIso (Mod.extendScalars (coefficientMap a X))).symm) rfl c
     (purityChangeCoefficientPullbackIso_weil a f M (𝟙_ _) e₁ c he)
   dsimp only [Functor.comp_obj, Functor.comp_map] at h ⊢
+  run_tac
+    let h ← Lean.Elab.Tactic.elabTerm (← `(h)) none
+    let H ← Lean.Meta.inferType h
+    let G ← Lean.Elab.Tactic.getMainTarget
+    let rec diffs (fuel : Nat) (a b : Lean.Expr) : Lean.MetaM Unit := do
+      if a == b then return
+      if ← Lean.Meta.isProof a then return
+      match fuel with
+      | 0 => Lean.logInfo m!"DIFF {a}\nVERSUS {b}"
+      | n + 1 =>
+        let xs := a.getAppArgs
+        let ys := b.getAppArgs
+        if a.getAppFn == b.getAppFn && xs.size == ys.size && xs.size > 0 then
+          for i in [:xs.size] do
+            diffs n xs[i]! ys[i]!
+        else Lean.logInfo m!"DIFF {a}\nVERSUS {b}"
+    diffs 64 H G
   cast_proofs h
 
 end ScalarRelation

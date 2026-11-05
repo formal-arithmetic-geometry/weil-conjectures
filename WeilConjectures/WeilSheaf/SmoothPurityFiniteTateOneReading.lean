@@ -73,9 +73,11 @@ lemma purity_finiteCoefficientIntegralTateOneReading_pullback
     (finiteCoefficientModEquivalence X (PadicAlgCl.integersModPow ℓ E n)).functor
     (g)^*[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)]
     (upperStarFiniteCoefficientModEquivalenceIso g (PadicAlgCl.integersModPow ℓ E n))
-    (Mod.extendScalars (integersModPowReduction Y ℓ E n))
+    (Mod.extendScalars (coefficientMap
+      (Profinite.padicIntegersRingObjToIntegersModPow ℓ E n) Y))
     (CondensedRing.upperStar (Profinite.padicIntegersRingObj ℓ E) g ⋙
-      Mod.extendScalars (integersModPowReduction X ℓ E n))
+      Mod.extendScalars (coefficientMap
+        (Profinite.padicIntegersRingObjToIntegersModPow ℓ E n) X))
     (pullIso (Profinite.padicIntegersRingObjToIntegersModPow ℓ E n) g).inv
     (integralTateTwistOne Y ℓ E)
     ((Mod.extendScalars (integersModPowReduction X ℓ E n)).map
@@ -100,6 +102,6 @@ lemma purity_finiteCoefficientIntegralTateOneReading_pullback
   rw [purity_finiteCoefficientIntegralTateOneReading_eq,
     purity_finiteCoefficientIntegralTateOneReading_eq]
   dsimp only [Functor.comp_obj, Functor.comp_map] at h ⊢
-  exact_mod_proofs h
+  cast_proofs h
 
 end AlgebraicGeometry.ProEtale
