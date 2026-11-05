@@ -120,17 +120,17 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
   [HasDerivedCategory.{w} (ringedSiteModules.{r}
     ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))]
 
-private local instance (I : Type r) :
+local instance (I : Type r) :
     Limits.HasColimitsOfShape (Discrete I) (PresheafOfModules.{r}
       ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R).obj) :=
   PresheafOfModules.hasColimitsOfShape _ _
 
-private local instance (I : Type r) :
+local instance (I : Type r) :
     Limits.HasColimitsOfShape (Discrete I) (ringedSiteModules.{r}
       ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) :=
   SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
 
-private local instance (I : Type) :
+local instance (I : Type) :
     Limits.HasColimitsOfShape (Discrete I) (ringedSiteModules.{r}
       ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) := by
   let : Limits.HasColimitsOfShape (Discrete I) (PresheafOfModules.{r}
