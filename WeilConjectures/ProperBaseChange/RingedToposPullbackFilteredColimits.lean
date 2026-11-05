@@ -7,7 +7,9 @@ module
 
 public import WeilConjectures.Algebra.Homology.RingedToposPullbackFilteredColimits
 
-/-! # Re-export of `WeilConjectures.Algebra.Homology.RingedToposPullbackFilteredColimits`
+/-! # Re-export
+
+Re-exports `WeilConjectures.Algebra.Homology.RingedToposPullbackFilteredColimits`.
 
 This path only re-exports the original module, whose declarations the importers use.
 -/

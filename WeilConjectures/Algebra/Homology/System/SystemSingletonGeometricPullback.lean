@@ -266,6 +266,12 @@ def SystemGeometricInverseImageData.derivedEvaluation
         systemEvaluation BY n ⋙ F.levelFunctor n) ≪≫
     Functor.mapDerivedCategoryCompIso (systemEvaluation BY n) (F.levelFunctor n)
 
+variable (SY : SystemScalarAssignment (J := J)) (TY : SystemTensorCoherence SY)
+  (SX : SystemScalarAssignment (J := K)) (TX : SystemTensorCoherence SX)
+
+set_option linter.unusedVariables false
+set_option linter.unusedSectionVars false
+
 /-- Multiplication at the selected level of ordinary singleton extension.
 Source: Zheng, Construction 4.1, p. 21
 (blueprint: lem-pur-system-singleton-geometric-pullback). -/
@@ -408,7 +414,7 @@ def SystemSingletonGeometricComparisons
         (systemSingleDerivedExtension BX n SX TX).derived.map ((scalar h).hom.app P) ≫
         systemSingletonLowerMap SX TX h ((F.levelFunctor m).mapDerivedCategory.obj P))
 
-private theorem geometricLevelKFlat (n : ℕ)
+private theorem geometricLevelKFlat (SX : SystemScalarAssignment (J := K)) (n : ℕ)
     [H : ∀ n : ℕ, (I n).modules.Additive]
     (Q : CochainComplex (systemLevel BY n) ℤ) (hQ : systemLevelKFlat BY n Q) :
     systemLevelKFlat BX n (((I n).modules.mapHomologicalComplex (.up ℤ)).obj Q) := by
@@ -529,14 +535,4 @@ theorem systemSingletonGeometricPullback
   exact ⟨hX, singletonFlatModels SY TY BY n Q hQ,
     singletonFlatModels SX TX BX n _ hX⟩
 
-variable (SY : SystemScalarAssignment (J := J)) (TY : SystemTensorCoherence SY)
-  (SX : SystemScalarAssignment (J := K)) (TX : SystemTensorCoherence SX)
-
-set_option linter.unusedVariables false in
-set_option linter.unusedVariables false
-set_option linter.unusedSectionVars false
-
-include SX in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end SheafOfModules

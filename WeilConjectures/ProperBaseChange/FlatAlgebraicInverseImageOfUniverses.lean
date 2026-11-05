@@ -7,7 +7,9 @@ module
 
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatAlgebraicInverseImageOfUniverses
 
-/-! # Re-export of `WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatAlgebraicInverseImageOfUniverses`
+/-! # Re-export
+
+Re-exports `WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatAlgebraicInverseImageOfUniverses`.
 
 This path only re-exports the original module, whose declarations the importers use.
 -/

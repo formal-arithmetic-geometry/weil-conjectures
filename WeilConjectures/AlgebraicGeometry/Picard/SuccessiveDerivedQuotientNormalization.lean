@@ -7,7 +7,9 @@ module
 
 public import WeilConjectures.Algebra.Homology.SuccessiveDerivedQuotientNormalization
 
-/-! # Re-export of `WeilConjectures.Algebra.Homology.SuccessiveDerivedQuotientNormalization`
+/-! # Re-export
+
+Re-exports `WeilConjectures.Algebra.Homology.SuccessiveDerivedQuotientNormalization`.
 
 This path only re-exports the original module, whose declarations the importers use.
 -/

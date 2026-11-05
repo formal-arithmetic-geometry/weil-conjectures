@@ -116,6 +116,21 @@ Source: Zheng 4.1 (blueprint: def-pur-system-singleton-scalar-comparisons). -/
 instance singletonSequenceInverseAdditive :
     (strictSystemSequenceEquivalence B).inverse.Additive := sequenceToStrictSystemAdditive B
 
+/-- Sequence-site evaluation is the inverse equivalence followed by exact evaluation,
+so it preserves finite limits. Source: Zheng 4.1
+(blueprint: def-pur-system-singleton-scalar-comparisons). -/
+instance singletonSequenceEvaluationLimits (n : ℕ) :
+    PreservesFiniteLimits (systemSequenceEvaluation B n) :=
+  inferInstanceAs (PreservesFiniteLimits
+    ((strictSystemSequenceEquivalence B).inverse ⋙ systemEvaluation B n))
+
+/-- Sequence-site evaluation preserves finite colimits, for the same reason.
+Source: Zheng 4.1 (blueprint: def-pur-system-singleton-scalar-comparisons). -/
+instance singletonSequenceEvaluationColimits (n : ℕ) :
+    PreservesFiniteColimits (systemSequenceEvaluation B n) :=
+  inferInstanceAs (PreservesFiniteColimits
+    ((strictSystemSequenceEquivalence B).inverse ⋙ systemEvaluation B n))
+
 /-- The existing ordinary singleton, realized on its ringed sequence site.
 Source: Zheng 4.1 (blueprint: def-pur-system-singleton-scalar-comparisons). -/
 abbrev singletonSequenceOrdinary (n : ℕ) :=
@@ -176,6 +191,8 @@ def singletonRestrictionEvaluation (n : ℕ) :
   NatIso.ofComponents (fun M ↦ (fullyFaithfulForget _).preimageIso
     (PresheafOfModules.isoMk (fun U ↦ Iso.refl _) (by intros; ext x; rfl)))
     (by intros; ext U x; rfl)
+
+variable (A : SystemScalarModel (singletonSequenceRingMap a))
 
 /-- The ordinary comparison is the conjugate of identity-on-sections restriction.
 Source: Stacks 03D7 and 03EK
@@ -245,7 +262,5 @@ def singletonScalarSquare (n m : ℕ) (h : n ≤ m) :
   (systemScalarModelDerivedComposition (a.naturality (homOfLE h).op)
     (S (a.app (op m))) (S (D.map (homOfLE h).op))
       (S (B.map (homOfLE h).op ≫ a.app (op n)))).symm
-
-variable (A : SystemScalarModel (singletonSequenceRingMap a))
 
 end SheafOfModules

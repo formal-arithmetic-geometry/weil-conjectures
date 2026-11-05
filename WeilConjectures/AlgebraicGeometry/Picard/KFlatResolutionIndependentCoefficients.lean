@@ -7,7 +7,9 @@ module
 
 public import WeilConjectures.Algebra.Homology.KFlatResolutionIndependentCoefficients
 
-/-! # Re-export of `WeilConjectures.Algebra.Homology.KFlatResolutionIndependentCoefficients`
+/-! # Re-export
+
+Re-exports `WeilConjectures.Algebra.Homology.KFlatResolutionIndependentCoefficients`.
 
 This path only re-exports the original module, whose declarations the importers use.
 -/

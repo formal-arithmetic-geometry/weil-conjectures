@@ -18,6 +18,7 @@ public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.OpenTenso
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryBraided
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriekProj
 
 import Mathlib.CategoryTheory.Adjunction.Mates
 import WeilConjectures.SecSmoothPurity.CochainPullbackTensorCoherenceSupplement
@@ -55,6 +56,27 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 open AlgebraicGeometry AlgebraicGeometry.Scheme
 open SheafOfModules.OpenTensorNormalization
 
+namespace SheafOfModules.OpenTensorNormalization
+
+/-- The published finite projection arrow in the direction of the node's gamma.
+This is its actual inverse projection map, with explicit endpoints to keep
+elaboration independent of the surrounding realization square.
+Source: Stacks 0GL1 and the recorded finite open projection formula
+(blueprint: lem-sf-open-tensor-normalization). -/
+def finiteGamma (A : Type (u + 1)) [CommRing A] [Finite A]
+    {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
+    (M : FiniteD A U) (N : FiniteD A X) :
+    (((ProEtale.derivedTensor (ModuleCat.{u + 1} A) X).obj
+      ((finiteShriek A j).obj M)).obj N) ⟶
+    (finiteShriek A j).obj
+      (((ProEtale.derivedTensor (ModuleCat.{u + 1} A) U).obj M).obj
+        ((ProEtale.upperStar (ModuleCat.{u + 1} A) j).leftDerivedFunctor.obj N)) :=
+  letI : IsNoetherianRing A := isNoetherian_of_finite A A
+  ((ProEtale.derivedOpenImmersionLowerShriekProjectionIso
+    (ModuleCat.{u + 1} A) j).inv.app M).app N
+
+end SheafOfModules.OpenTensorNormalization
+
 namespace WeilConjectures.FiniteOpenProduct
 
 /-- The chosen fibre-product object, kept named while deriving its operations.
@@ -91,6 +113,8 @@ def proetSigma (V : Type v) [Category.{u + 1} V] [Abelian V]
       ((ProEtale.derivedTensor V Y).obj N).obj M :=
   (DerivedCategory.braidedCategory' (Sheaf (ProEt.topology Y) V)).braiding M N |>.hom
 
+variable (A : Type (u + 1)) [CommRing A] [Finite A]
+
 /-- The published derived tensor, with its coefficient specialization named.
 Source: Stacks 06YS (blueprint: lem-pur-finite-open-product-swap). -/
 abbrev tensor (Y : Scheme.{u}) (M N : FiniteD A Y) : FiniteD A Y :=
@@ -109,8 +133,6 @@ def tensorIsoMap (Y : Scheme.{u}) {M M' N N' : FiniteD A Y}
     (f : M ≅ M') (g : N ≅ N') : tensor A Y M N ≅ tensor A Y M' N' :=
   ((ProEtale.derivedTensor (ModuleCat.{u + 1} A) Y).mapIso f).app N ≪≫
     ((ProEtale.derivedTensor (ModuleCat.{u + 1} A) Y).obj M').mapIso g
-
-variable (A : Type (u + 1)) [CommRing A] [Finite A]
 
 /-- Exact inverse image on complexes, with its canonical K-flat derived identification.
 Source: Stacks 07A4 (blueprint: lem-pur-finite-open-product-swap). -/
@@ -223,6 +245,20 @@ def rightOpen (a : Xb ⟶ B) (b : Zb ⟶ B) (k : Z ⟶ Zb) :
   unfold product
   exact pullback.map a (k ≫ b) a b (𝟙 Xb) k (𝟙 B) (by simp) (by simp)
 
+/-- The first open on a product is an open immersion, as a base change of `j`.
+Source: node proof Step 1 (blueprint: lem-pur-finite-open-product-swap). -/
+instance leftOpen_isOpenImmersion (a : Xb ⟶ B) (b : Zb ⟶ B) (j : X ⟶ Xb)
+    [IsOpenImmersion j] : IsOpenImmersion (leftOpen a b j) := by
+  unfold leftOpen product
+  exact Scheme.pullback_map_isOpenImmersion (j ≫ a) b a b j (𝟙 Zb) (𝟙 B) (by simp) (by simp)
+
+/-- The second open on a product is an open immersion, as a base change of `k`.
+Source: node proof Step 1 (blueprint: lem-pur-finite-open-product-swap). -/
+instance rightOpen_isOpenImmersion (a : Xb ⟶ B) (b : Zb ⟶ B) (k : Z ⟶ Zb)
+    [IsOpenImmersion k] : IsOpenImmersion (rightOpen a b k) := by
+  unfold rightOpen product
+  exact Scheme.pullback_map_isOpenImmersion a (k ≫ b) a b (𝟙 Xb) k (𝟙 B) (by simp) (by simp)
+
 set_option linter.defProp false in
 /-- Product base change for the first open, with its two projection equations.
 Source: node proof Step 1 (blueprint: lem-pur-finite-open-product-swap). -/
@@ -312,6 +348,13 @@ def productOpen (a : Xb ⟶ B) (b : Zb ⟶ B) (j : X ⟶ Xb) (k : Z ⟶ Zb) :
   unfold product
   exact pullback.map (j ≫ a) (k ≫ b) a b j k (𝟙 B) (by simp) (by simp)
 
+/-- The product open is an open immersion when both factors are.
+Source: node statement and proof Step 1 (blueprint: lem-pur-finite-open-product-swap). -/
+instance productOpen_isOpenImmersion (a : Xb ⟶ B) (b : Zb ⟶ B) (j : X ⟶ Xb) (k : Z ⟶ Zb)
+    [IsOpenImmersion j] [IsOpenImmersion k] : IsOpenImmersion (productOpen a b j k) := by
+  unfold productOpen product
+  exact Scheme.pullback_map_isOpenImmersion (j ≫ a) (k ≫ b) a b j k (𝟙 B) (by simp) (by simp)
+
 /-- The canonical compositor, followed only by a geometric equality of open maps.
 Source: node proof Step 2 (blueprint: lem-pur-finite-open-product-swap). -/
 def compTo {T U Y : Scheme.{u}} (i : T ⟶ U) (j : U ⟶ Y) (h : T ⟶ Y)
@@ -334,5 +377,4 @@ def comparison (a : Xb ⟶ B) (b : Zb ⟶ B) (j : X ⟶ Xb) (k : Z ⟶ Zb)
           dsimp only [id_eq]
           apply pullback.hom_ext <;> simp)).hom.app _
 
-set_option linter.defProp false in
 end WeilConjectures.FiniteOpenProduct

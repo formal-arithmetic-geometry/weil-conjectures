@@ -7,7 +7,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.KFlatRingedToposPullback
 
-/-! # Re-export of `WeilConjectures.AlgebraicGeometry.KFlatRingedToposPullback`
+/-! # Re-export
+
+Re-exports `WeilConjectures.AlgebraicGeometry.KFlatRingedToposPullback`.
 
 This path only re-exports the original module, whose declarations the importers use.
 -/
