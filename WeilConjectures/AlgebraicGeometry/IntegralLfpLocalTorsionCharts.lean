@@ -8,7 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.ContinuousIntegralCoefficientData
 public import WeilConjectures.AlgebraicGeometry.ProEtaleInverseImage
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
-public import Mathlib.Topology.ContinuousMap.Algebra
 import all WeilConjectures.AlgebraicGeometry.IntegralConstructibleKernels
 import all WeilConjectures.AlgebraicGeometry.IntegralMatrixEntryProperties
 import all WeilConjectures.AlgebraicGeometry.FiniteBiproductPivot
@@ -36,10 +35,6 @@ open scoped CategoryTheory.Obj ZeroObject
 
 attribute [local instance] Abelian.hasFiniteBiproducts
 attribute [local instance] comp_preservesFiniteLimits comp_preservesLimits
-
-private local instance {S : Type*} {R : Type*}
-    [TopologicalSpace S] [TopologicalSpace R] [Zero R] :
-    OfNat C(S, R) 0 := ⟨ContinuousMap.const S 0⟩
 
 -- Cokernels of diagonal blocks, and integral elimination when the pivot divides its column.
 private noncomputable def diagonalCokernelIso
@@ -227,7 +222,7 @@ private lemma integralPrincipalQuotientFunctionsSurjective (ℓ : ℕ) [Fact ℓ
     (a : continuousIntegers ℓ E) (ha : a ≠ 0)
     (S : Type u) [TopologicalSpace S] :
     Function.Surjective ((Ideal.Quotient.mk (Ideal.span {a})).compLeftContinuous S
-      continuous_quot_mk) := by
+      continuous_quotient_mk') := by
   classical
   let : DiscreteTopology ((continuousIntegers ℓ E) ⧸ Ideal.span {a}) :=
     integralPrincipalQuotientDiscrete ℓ E a ha
@@ -238,14 +233,12 @@ private lemma integralPrincipalQuotientFunctionsSurjective (ℓ : ℕ) [Fact ℓ
   ext x
   exact Quotient.out_eq (f x)
 
-set_option trace.Meta.synthInstance true in
-set_option pp.all true in
 private lemma integralPrincipalQuotientFunctionsKernel (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     (a : continuousIntegers ℓ E) (ha : a ≠ 0)
     (S : Type u) [TopologicalSpace S] (f : C(S, continuousIntegers ℓ E))
     (hf : ((Ideal.Quotient.mk (Ideal.span {a})).compLeftContinuous S
-      continuous_quot_mk) f = 0) :
+      continuous_quotient_mk') f = 0) :
     ∃ g : C(S, continuousIntegers ℓ E), ContinuousMap.const S a * g = f := by
   have ha' : (a : E) ≠ 0 := fun h ↦ ha (Subtype.ext h)
   have hdiv (x : S) : (f x : E) / a ∈ continuousIntegers ℓ E := by
@@ -313,7 +306,7 @@ private lemma integralPrincipalCokernelIso (ℓ : ℕ) [Fact ℓ.Prime]
   let q : R ⟶ continuousAbRing X ((continuousIntegers ℓ E) ⧸ Ideal.span {a}) :=
     (sheafCompose J (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
       (continuousMapRingSheafMap X (Ideal.Quotient.mk (Ideal.span {a}))
-        continuous_quot_mk)
+        continuous_quotient_mk')
   have hqa : Ideal.Quotient.mk (Ideal.span {a}) a = 0 :=
     Ideal.Quotient.eq_zero_iff_mem.mpr (Ideal.subset_span (Set.mem_singleton a))
   have hw : p.hom ≫ q = 0 := by
@@ -350,7 +343,7 @@ private lemma integralPrincipalCokernelIso (ℓ : ℕ) [Fact ℓ.Prime]
       rw [ShortComplex.ab_exact_iff]
       intro x hx
       have hx' : ((Ideal.Quotient.mk (Ideal.span {a})).compLeftContinuous
-          U.unop.left continuous_quot_mk) x.down = 0 := congrArg ULift.down hx
+          U.unop.left continuous_quotient_mk') x.down = 0 := congrArg ULift.down hx
       obtain ⟨g, hg⟩ := integralPrincipalQuotientFunctionsKernel ℓ E a ha U.unop.left
         x.down hx'
       refine ⟨ULift.up g, ?_⟩
