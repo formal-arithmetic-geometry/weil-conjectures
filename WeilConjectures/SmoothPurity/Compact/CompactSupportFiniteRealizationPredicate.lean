@@ -21,6 +21,7 @@ set_option Elab.async false
 set_option synthInstance.maxSize 4096
 universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Scheme
+open scoped CategoryTheory.Obj
 namespace WeilConjectures
 
 attribute [local irreducible] HasDerivedCategory.standard
