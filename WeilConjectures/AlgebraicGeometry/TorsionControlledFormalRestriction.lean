@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 import all WeilConjectures.AlgebraicGeometry.ModulePullbackIdealPowerProductImage
 import WeilConjectures.AlgebraicGeometry.IdealPowerProductRestrictionZero
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
