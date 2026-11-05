@@ -20,14 +20,20 @@
 - Completion marker: `/home/ubuntu/u9/state/BZ72.DONE`.
 - Outside-unit caller `NativeHomLocalizedConeBoundaryModel.lean:114` still needs its owner's port; details are in the fix log.
 
-# BZ130 in progress
+# BZ129 complete
 
-- Branch: `u9/BZ130`; starting commit: `c958d67ac`.
-- Three sheaf modules passed `ucheck-bump`; all proof-side errors in the fourth module are fixed.
-- The user instructed continuation after the exact statement-only proposal. Applied that
-  correction: remove the obsolete quotient/Qh factor from the local isomorphism in
-  `SupportedComplexSingleRealization`, since `Plus.Q` now directly lifts `DerivedCategory.Q`.
-- All other declaration statements and all existing docstrings are unchanged.
-- Next: validate all four modules together, then write `/home/ubuntu/u9/state/BZ130.DONE`.
-- Patterns and logs: `/home/ubuntu/u9/bz/FIXES-BZ130.md`.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+- Unit: BZ129, branch `u9/BZ129`.
+- All four assigned modules rebuilt successfully together via `ucheck-bump`:
+  rc=0, failed=0, 2500 jobs.
+- Tested source commit: `e79e593115f97655e43fa2c80278a052e6bd9272`; the final commit changes only progress notes.
+- Modules: ModulePullbackPushforwardAdjunction, RingedDerivedRestrictionGeneral,
+  HypercohomologyLeftEdge, and MappedSingleCyclesShiftComparison.
+- The user instructed continuation after the exact canonical quotient/Qh
+  statement-adjustment proposal. That patch and its proof repair are validated;
+  all other existing declaration statements and all docstrings are unchanged.
+- Full build log: `/home/ubuntu/u9/bz/BUILD-BZ129-final-full.log`.
+- Fix patterns, occurrence counts, and pinned API evidence:
+  `/home/ubuntu/u9/bz/FIXES-BZ129.md`.
+- No local Lean/Lake execution, no sorries or forbidden proof escapes,
+  no heartbeat increases; `git diff --check` passes.
+- Completion marker: `/home/ubuntu/u9/state/BZ129.DONE`.
