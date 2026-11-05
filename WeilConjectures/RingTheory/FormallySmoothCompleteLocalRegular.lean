@@ -149,7 +149,7 @@ theorem isRegular_of_formallySmoothAdic
     rw [hB.2.2.1]
     exact formallySmoothAdic_quotient p (IsLocalRing.maximalIdeal B) hfs
   have hlocal : IsLocalHom (algebraMap (A ⧸ p) (B ⧸ I)) := by
-    apply ((IsLocalRing.local_hom_TFAE _).out 3 0).mp
+    apply ((IsLocalRing.local_hom_TFAE _).out 4 1).mp
     rw [hA.2.2.1, Ideal.map_le_iff_le_comap]
     intro a ha
     change Ideal.Quotient.mk I (φ a) ∈ IsLocalRing.maximalIdeal (B ⧸ I)
