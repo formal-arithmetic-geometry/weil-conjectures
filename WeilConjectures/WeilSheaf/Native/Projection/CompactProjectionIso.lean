@@ -62,7 +62,8 @@ noncomputable def nativeCompactProjectionIso :
   have : IsOpenImmersion c.i := c.isOpenImmersion
   have : QuasiCompact c.i := c.quasiCompact_openImmersion inferInstance
   let π := rightDerivedLowerStarNativeDerivedTensorIso (k₀ := k₀) (l := l) c.g
-  obtain ⟨s, d, -, -⟩ := ProEtaleWeilSheaf.native_open_derived_tensor k₀ l c.i
+  let s := (ProEtaleWeilSheaf.native_open_derived_tensor k₀ l c.i).choose
+  let d := (ProEtaleWeilSheaf.native_open_derived_tensor k₀ l c.i).choose_spec.choose
   let ιX := (objectProperty k₀ l X).ι
   let ιY := (objectProperty k₀ l Y).ι
   let Rg := (ProEtaleWeilSheaf.lowerStar k₀ l c.g).rightDerivedFunctor

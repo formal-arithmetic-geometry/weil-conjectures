@@ -55,9 +55,6 @@ def compactProjectionForgetRealizationIso :
 def compactProjectionForgetTensorIso :
     nativeConstructibleTensor k₀ l X ⋙ compactProjectionForget k₀ l X ≅
       (compactProjectionForget k₀ l X).prod (compactProjectionForget k₀ l X) ⋙ tensor _ := by
-  let ι := (CondensedRing.boundedConstructible
-    (condensedRingObj (Profinite.padicAlgClRingObj l)
-      (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)).ι
   let e := compactProjectionForgetRealizationIso k₀ l X
   let t := Functor.isoWhiskerLeft ((objectProperty k₀ l X).ι.prod (objectProperty k₀ l X).ι)
     (ProEtaleWeilSheaf.condensedRealizationTensor k₀ l X)
