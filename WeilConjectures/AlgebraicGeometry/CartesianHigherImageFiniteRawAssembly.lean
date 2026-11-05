@@ -17,6 +17,14 @@ open CategoryTheory Limits Opposite
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
+noncomputable local instance (X : Scheme.{u}) :
+    HasShift (DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) ℤ :=
+  inferInstance
+
+noncomputable local instance (X : Scheme.{u}) :
+    HasZeroMorphisms (DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) :=
+  inferInstance
+
 private theorem cartesian_map_eq {X S T T' : Scheme.{u}}
     (f : X ⟶ S) (g : T ⟶ S) (g' : T' ⟶ S) (a : T' ⟶ T) (w : g' = a ≫ g)
     (r : pullback f g' ⟶ pullback f g)
@@ -164,7 +172,6 @@ private theorem rawTransition_comp {X S : Scheme.{u}} {I : Type u}
   apply pulled_cartesian_map_congr
   exact (congrArg (fun x ↦ x.left) (D.map_comp b a)).symm
 
-set_option trace.Meta.synthInstance true in
 /-- Common-stage assembly for a finite family of raw cartesian classes.
 
 Given the individual eventual-zero witnesses for each member of a finite family,
