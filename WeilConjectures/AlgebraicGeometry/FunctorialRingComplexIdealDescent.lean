@@ -729,6 +729,7 @@ private theorem restrictedAugmentationZero
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O) U).PreservesZeroMorphisms :=
     overFunctor_preservesZero ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O) U
   have h := singleRestrictionAugmentationIso
+    (D := SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))
     (E := SheafOfModules.{u}
       (((sheafCompose J (forget₂ CommRingCat RingCat)).obj O).over U))
     (SheafOfModules.overFunctor
