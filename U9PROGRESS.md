@@ -150,9 +150,9 @@
   `ringedTopoiDerivedPullback` alpha formula. All other declaration statements and
   all existing docstrings are unchanged.
 - Added the known split public-import/import-all localization imports for `Qh` reduction.
-- Baseline remote build was blocked by unowned `Presheaf.InternalHom` (BZ581), before
-  reaching the assigned module. No edits made to that dependency.
-- Next: validate remotely once the owner repair is available, continue downstream,
-  then write DONE only after a green build.
+- Baseline remote build was blocked by `Presheaf.InternalHom` (BZ581), before
+  reaching the assigned module. The user instructed continuation after the exact
+  one-line prerequisite proposal; that compatibility-lemma proof fix is now applied.
+- Next: validate remotely, continue downstream, then write DONE after a green build.
 - Notes and logs: `/home/ubuntu/u9/bz/FIXES-BZ554.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
