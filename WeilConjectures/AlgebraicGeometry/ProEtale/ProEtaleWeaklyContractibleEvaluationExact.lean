@@ -35,6 +35,11 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme.ProEt
 
+local instance (X : Scheme.{u}) (R : Sheaf (topology X) RingCat.{u + 1}) (W : X.ProEt) :
+    (SheafOfModules.evaluation.{u + 1} R (op W)).Additive :=
+  inferInstanceAs ((SheafOfModules.forget R ⋙
+    PresheafOfModules.evaluation R.obj (op W)).Additive)
+
 /-- Evaluation at a weakly contractible object preserves homology of module complexes.
 Source: Stacks Project, Tag 0946 (1), with the module sheaf epimorphism criterion 03DA.
 (blueprint: lem-weil-pbc-proetale-weakly-contractible-evaluation-exact).

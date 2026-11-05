@@ -46,7 +46,7 @@ private theorem cochain_comparison (Y : C) (n : ℤ) :
     CategoryTheory.Functor.comp_obj, CochainComplex.shiftFunctor_obj_X']
   dsimp [HomologicalComplex.XIsoOfEq]
   erw [Category.comp_id, eqToHom_trans]
-  · rfl
+  · simp
   all_goals simp [CochainComplex.singleFunctor, CochainComplex.singleFunctors]
 
 set_option backward.isDefEq.respectTransparency false in
@@ -108,7 +108,6 @@ private theorem derived_comparison (Y : C) (n : ℤ) :
   simp only [Category.assoc]
   erw [Iso.inv_hom_id_app_assoc]
   rw [cochain_comparison]
-  rfl
 
 
 set_option backward.isDefEq.respectTransparency false in
