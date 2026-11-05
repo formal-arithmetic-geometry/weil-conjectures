@@ -97,13 +97,13 @@ private theorem resolution_baseChange_sections
   let f : LI ⟶ J := ObjectProperty.homMk φ
   let a := DerivedCategory.Plus.ι.preimageIso
     (X := (DerivedCategory.Plus.singleFunctor _ 0).obj G)
-    (Y := DerivedCategory.Plus.Q.obj I)
+    (Y := (HomotopyCategory.Plus.quotient A ⋙ DerivedCategory.Plus.Qh).obj I)
     ((DerivedCategory.singleFunctorIsoCompQ _ 0).app G ≪≫
       asIso (DerivedCategory.Q.map (injectiveResolution G).ι') ≪≫
       (DerivedCategory.quotientCompQhIso _).symm.app _)
   let a' := DerivedCategory.Plus.ι.preimageIso
     (X := (DerivedCategory.Plus.singleFunctor _ 0).obj (L.obj G))
-    (Y := DerivedCategory.Plus.Q.obj J)
+    (Y := (HomotopyCategory.Plus.quotient A' ⋙ DerivedCategory.Plus.Qh).obj J)
     ((DerivedCategory.singleFunctorIsoCompQ _ 0).app (L.obj G) ≪≫
       asIso (DerivedCategory.Q.map (injectiveResolution (L.obj G)).ι') ≪≫
       (DerivedCategory.quotientCompQhIso _).symm.app _)
@@ -116,7 +116,8 @@ private theorem resolution_baseChange_sections
         (F'.mapHomologicalComplex (.up ℤ)).map φ)
   have ha := Functor.resolution_pullback_augmentation L G φ hφ
   change L.mapDerivedCategoryPlus.map a.hom ≫
-    L.mapDerivedCategoryPlusFactorsh.hom.app KI ≫ DerivedCategory.Plus.Q.map f =
+    L.mapDerivedCategoryPlusFactorsh.hom.app KI ≫
+    (HomotopyCategory.Plus.quotient A' ⋙ DerivedCategory.Plus.Qh).map f =
     (L.mapDerivedCategoryPlusSingleFunctor 0).hom.app G ≫ a'.hom at ha
   have hu := Functor.resolution_baseChange_unit F F' L η KI
   have hrep :
@@ -126,6 +127,40 @@ private theorem resolution_baseChange_sections
         (F'.rightDerivedFunctorPlusObjSingleFunctorIsoQ (L.obj G)).hom =
       (F.rightDerivedFunctorPlusObjSingleFunctorIsoQ G).hom ≫
         DerivedCategory.Plus.Q.map b := by
+    have hFI :
+        (F.rightDerivedFunctorPlusObjSingleFunctorIsoQ G).hom =
+          F.rightDerivedFunctorPlus.map a.hom ≫
+            CategoryTheory.inv (F.rightDerivedFunctorPlusUnith.app KI) ≫
+            (DerivedCategory.Plus.quotientCompQhIso D).hom.app
+              (F.rightDerivedPlusComplex G) := by
+      simp only [rightDerivedFunctorPlusObjSingleFunctorIsoQ, Iso.trans_hom,
+        mapIso_hom, Iso.symm_hom, asIso_inv, rightDerivedFunctorPlusUnit_app,
+        quotientCompMapHomotopyCategoryPlusIso, Iso.refl_inv, NatTrans.id_app,
+        map_id, Category.comp_id, Category.id_comp, IsIso.inv_comp,
+        ← Functor.map_inv, Iso.inv_hom, Iso.inv_inv, Category.assoc]
+      rw [← Functor.map_comp_assoc]
+      congr 2
+      apply DerivedCategory.Plus.ι.map_injective
+      simp only [a, Functor.map_comp, Functor.preimageIso_hom, Functor.map_preimage,
+        Iso.trans_hom, Iso.symm_hom, Iso.app_hom, asIso_hom]
+      rfl
+    have hFJ :
+        (F'.rightDerivedFunctorPlusObjSingleFunctorIsoQ (L.obj G)).hom =
+          F'.rightDerivedFunctorPlus.map a'.hom ≫
+            CategoryTheory.inv (F'.rightDerivedFunctorPlusUnith.app KJ) ≫
+            (DerivedCategory.Plus.quotientCompQhIso D).hom.app
+              (F'.rightDerivedPlusComplex (L.obj G)) := by
+      simp only [rightDerivedFunctorPlusObjSingleFunctorIsoQ, Iso.trans_hom,
+        mapIso_hom, Iso.symm_hom, asIso_inv, rightDerivedFunctorPlusUnit_app,
+        quotientCompMapHomotopyCategoryPlusIso, Iso.refl_inv, NatTrans.id_app,
+        map_id, Category.comp_id, Category.id_comp, IsIso.inv_comp,
+        ← Functor.map_inv, Iso.inv_hom, Iso.inv_inv, Category.assoc]
+      rw [← Functor.map_comp_assoc]
+      congr 2
+      apply DerivedCategory.Plus.ι.map_injective
+      simp only [a', Functor.map_comp, Functor.preimageIso_hom, Functor.map_preimage,
+        Iso.trans_hom, Iso.symm_hom, Iso.app_hom, asIso_hom]
+      rfl
     have hn := (Functor.rightDerivedFunctorPlusBaseChange e).naturality a.hom
     have hi := (Functor.mapDerivedCategoryPlusIdIso D).inv.naturality
       (F.rightDerivedFunctorPlus.map a.hom)
@@ -133,8 +168,12 @@ private theorem resolution_baseChange_sections
     have hf := F'.rightDerivedFunctorPlusUnith.naturality
       ((HomotopyCategory.Plus.quotient A').map f)
     dsimp only [Functor.comp_map] at hf
-    simp only [rightDerivedFunctorPlusObjSingleFunctorIsoQ, Iso.trans_hom,
-      mapIso_hom, Iso.symm_hom, asIso_inv, Category.assoc]
+    rw [hFI, hFJ]
+    rw [← (DerivedCategory.Plus.quotientCompQhIso D).hom.naturality b]
+    simp only [Functor.comp_map, Category.assoc]
+    apply (cancel_mono ((DerivedCategory.Plus.quotientCompQhIso D).hom.app
+      (F'.rightDerivedPlusComplex (L.obj G)))).1
+    simp only [Category.assoc]
     change _ ≫ _ ≫ F'.rightDerivedFunctorPlus.map
       ((L.mapDerivedCategoryPlusSingleFunctor 0).hom.app G) ≫
       F'.rightDerivedFunctorPlus.map a'.hom ≫
@@ -156,12 +195,12 @@ private theorem resolution_baseChange_sections
     erw [← reassoc_of% hf]
     erw [IsIso.hom_inv_id, Category.comp_id]
     apply DerivedCategory.Plus.ι.map_injective
-    change DerivedCategory.Q.map
-      ((NatTrans.mapHomologicalComplex η (.up ℤ)).app I.obj) ≫
-      DerivedCategory.Q.map ((F'.mapHomologicalComplex (.up ℤ)).map φ) =
-      DerivedCategory.Q.map b.hom
-    rw [← Functor.map_comp]
-    rfl
+    change DerivedCategory.Qh.map ((HomotopyCategory.quotient D (.up ℤ)).map
+      ((NatTrans.mapHomologicalComplex η (.up ℤ)).app I.obj)) ≫
+      DerivedCategory.Qh.map ((HomotopyCategory.quotient D (.up ℤ)).map
+        ((F'.mapHomologicalComplex (.up ℤ)).map φ)) =
+      DerivedCategory.Qh.map ((HomotopyCategory.quotient D (.up ℤ)).map b.hom)
+    rw [← Functor.map_comp, ← Functor.map_comp]
   rw [Functor.rightDerivedBaseChange_app]
   simp only [Functor.id_map]
   rw [Functor.identityDerivedHomologyComparison]
