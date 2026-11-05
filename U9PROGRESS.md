@@ -1,3 +1,18 @@
+# BZ242 in progress
+
+- Branch: `u9/BZ242`; starting commit: `c781553bf`.
+- Removed the redundant `rfl` after `erw [Category.id_comp]`; the remote proof-only
+  checkpoint confirmed that the `No goals to be solved` error disappeared.
+- The user instructed continuation after the exact private helper statement API proposal.
+  `derived_single_comp` now uses `(mapDerivedCategoryCompIso G H).inv`, preserving
+  the intended morphism after Mathlib reversed the isomorphism orientation.
+- The exported theorem statement and all existing docstrings are unchanged.
+- Source commit `11f8e323b4347c55a07712ed5e944af3d5d4a5ba` is queued in `ucheck-bump`.
+- Next: confirm the target builds, then test its four direct importers and a further layer
+  where dependencies permit, and write `/home/ubuntu/u9/state/BZ242.DONE`.
+- Patterns, exact errors, and whole-tree occurrence counts: `/home/ubuntu/u9/bz/FIXES-BZ242.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+
 # BZ150 complete
 
 - Branch: `u9/BZ150`; starting commit: `80aeb4bf4`.
