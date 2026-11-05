@@ -146,7 +146,8 @@ theorem isIso_mateEquiv_projectionCompactificationForgetIso
     (TwoSquare.mk _ _ _ _ (projectionProperForgetIso k₀ l (c).g).inv)
     (TwoSquare.mk _ _ _ _ (projectionCompactificationForgetIso k₀ l f).inv) (fun M ↦ by
       simp only [e, NatIso.ofComponents_inv_app, Iso.refl_inv, Iso.refl_hom, NatTrans.id_app,
-        Functor.map_id, Category.id_comp, Category.comp_id, projectionCompactificationForgetIso,
+        CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id,
+        projectionCompactificationForgetIso,
         Iso.trans_inv, NatTrans.comp_app, Functor.isoWhiskerLeft_inv,
         Functor.isoWhiskerRight_inv, Functor.whiskerLeft_app, Functor.whiskerRight_app])] at h
   exact h
