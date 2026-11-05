@@ -409,7 +409,6 @@ private theorem complexBasis_zero (n : ℕ) :
   simp only [complexBasis, Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom,
     HomologicalComplex.comp_f, HomologicalComplex.singleMapHomologicalComplex_hom_app_self,
     CochainComplex.singleFunctor]
-  dsimp only [CochainComplex.singleFunctors]
   rw [HomologicalComplex.single_map_f_self]
   simp only [Category.assoc, finiteZero, Iso.inv_hom_id, Category.comp_id,
     Iso.inv_hom_id_assoc]
