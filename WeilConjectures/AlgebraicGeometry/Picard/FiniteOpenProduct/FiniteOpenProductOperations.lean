@@ -15,10 +15,10 @@ public import Mathlib.CategoryTheory.Adjunction.CompositionIso
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.OpenTensorNormalization
-public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.OpenTensorNormalizationData
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryBraided
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriekProj
 
 import Mathlib.CategoryTheory.Adjunction.Mates
 import WeilConjectures.SecSmoothPurity.CochainPullbackTensorCoherenceSupplement
@@ -55,6 +55,27 @@ universe u v
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 open AlgebraicGeometry AlgebraicGeometry.Scheme
 open SheafOfModules.OpenTensorNormalization
+
+namespace SheafOfModules.OpenTensorNormalization
+
+/-- The published finite projection arrow in the direction of the node's gamma.
+This is its actual inverse projection map, with explicit endpoints to keep
+elaboration independent of the surrounding realization square.
+Source: Stacks 0GL1 and the recorded finite open projection formula
+(blueprint: lem-sf-open-tensor-normalization). -/
+def finiteGamma (A : Type (u + 1)) [CommRing A] [Finite A]
+    {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
+    (M : FiniteD A U) (N : FiniteD A X) :
+    (((ProEtale.derivedTensor (ModuleCat.{u + 1} A) X).obj
+      ((finiteShriek A j).obj M)).obj N) ⟶
+    (finiteShriek A j).obj
+      (((ProEtale.derivedTensor (ModuleCat.{u + 1} A) U).obj M).obj
+        ((ProEtale.upperStar (ModuleCat.{u + 1} A) j).leftDerivedFunctor.obj N)) :=
+  letI : IsNoetherianRing A := isNoetherian_of_finite A A
+  ((ProEtale.derivedOpenImmersionLowerShriekProjectionIso
+    (ModuleCat.{u + 1} A) j).inv.app M).app N
+
+end SheafOfModules.OpenTensorNormalization
 
 namespace WeilConjectures.FiniteOpenProduct
 
@@ -117,10 +138,6 @@ def tensorIsoMap (Y : Scheme.{u}) {M M' N N' : FiniteD A Y}
 Source: Stacks 07A4 (blueprint: lem-pur-finite-open-product-swap). -/
 def pull {X Y : Scheme.{u}} (f : X ⟶ Y) : FiniteD A Y ⥤ FiniteD A X :=
   (ProEtale.upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategory
-
-/-- The finite ring is Noetherian; this supplies the published flat-pullback API.
-Source: finite coefficient conventions (blueprint: lem-pur-finite-open-product-swap). -/
-instance coefficientNoetherian : IsNoetherianRing A := isNoetherian_of_finite A A
 
 /-- Tensor comparison for exact inverse image, with its canonical derived identification.
 Source: Stacks 07A4 (blueprint: lem-pur-finite-open-product-swap). -/
@@ -228,21 +245,19 @@ def rightOpen (a : Xb ⟶ B) (b : Zb ⟶ B) (k : Z ⟶ Zb) :
   unfold product
   exact pullback.map a (k ≫ b) a b (𝟙 Xb) k (𝟙 B) (by simp) (by simp)
 
-/-- Openness of the first factor inclusion is the base-change instance.
-Source: Stacks 01JY (blueprint: lem-pur-finite-open-product-swap). -/
-instance leftOpen_open (a : Xb ⟶ B) (b : Zb ⟶ B) (j : X ⟶ Xb)
+/-- The first open on a product is an open immersion, as a base change of `j`.
+Source: node proof Step 1 (blueprint: lem-pur-finite-open-product-swap). -/
+instance leftOpen_isOpenImmersion (a : Xb ⟶ B) (b : Zb ⟶ B) (j : X ⟶ Xb)
     [IsOpenImmersion j] : IsOpenImmersion (leftOpen a b j) := by
   unfold leftOpen product
-  dsimp only [id_eq]
-  infer_instance
+  exact Scheme.pullback_map_isOpenImmersion (j ≫ a) b a b j (𝟙 Zb) (𝟙 B) (by simp) (by simp)
 
-/-- Openness of the second factor inclusion is the base-change instance.
-Source: Stacks 01JY (blueprint: lem-pur-finite-open-product-swap). -/
-instance rightOpen_open (a : Xb ⟶ B) (b : Zb ⟶ B) (k : Z ⟶ Zb)
+/-- The second open on a product is an open immersion, as a base change of `k`.
+Source: node proof Step 1 (blueprint: lem-pur-finite-open-product-swap). -/
+instance rightOpen_isOpenImmersion (a : Xb ⟶ B) (b : Zb ⟶ B) (k : Z ⟶ Zb)
     [IsOpenImmersion k] : IsOpenImmersion (rightOpen a b k) := by
   unfold rightOpen product
-  dsimp only [id_eq]
-  infer_instance
+  exact Scheme.pullback_map_isOpenImmersion a (k ≫ b) a b (𝟙 Xb) k (𝟙 B) (by simp) (by simp)
 
 set_option linter.defProp false in
 /-- Product base change for the first open, with its two projection equations.
@@ -333,13 +348,12 @@ def productOpen (a : Xb ⟶ B) (b : Zb ⟶ B) (j : X ⟶ Xb) (k : Z ⟶ Zb) :
   unfold product
   exact pullback.map (j ≫ a) (k ≫ b) a b j k (𝟙 B) (by simp) (by simp)
 
-/-- The product map is open by the existing base-change instance.
-Source: Stacks 01JY (blueprint: lem-pur-finite-open-product-swap). -/
-instance productOpen_open (a : Xb ⟶ B) (b : Zb ⟶ B) (j : X ⟶ Xb) (k : Z ⟶ Zb)
+/-- The product open is an open immersion when both factors are.
+Source: node statement and proof Step 1 (blueprint: lem-pur-finite-open-product-swap). -/
+instance productOpen_isOpenImmersion (a : Xb ⟶ B) (b : Zb ⟶ B) (j : X ⟶ Xb) (k : Z ⟶ Zb)
     [IsOpenImmersion j] [IsOpenImmersion k] : IsOpenImmersion (productOpen a b j k) := by
   unfold productOpen product
-  dsimp only [id_eq]
-  infer_instance
+  exact Scheme.pullback_map_isOpenImmersion (j ≫ a) (k ≫ b) a b j k (𝟙 B) (by simp) (by simp)
 
 /-- The canonical compositor, followed only by a geometric equality of open maps.
 Source: node proof Step 2 (blueprint: lem-pur-finite-open-product-swap). -/
@@ -362,86 +376,5 @@ def comparison (a : Xb ⟶ B) (b : Zb ⟶ B) (j : X ⟶ Xb) (k : Z ⟶ Zb)
           unfold rightOpen leftOpen productOpen product
           dsimp only [id_eq]
           apply pullback.hom_ext <;> simp)).hom.app _
-
-/-- The other factorization, through Xbar times Z, defines e-op independently.
-Source: node proof Step 6 (blueprint: lem-pur-finite-open-product-swap). -/
-def comparisonOp (a : Xb ⟶ B) (b : Zb ⟶ B) (j : X ⟶ Xb) (k : Z ⟶ Zb)
-    [IsOpenImmersion j] [IsOpenImmersion k] (M : FiniteD A X) (N : FiniteD A Z) :=
-  rightComparison A a b k ((finiteShriek A j).obj M) N ≫
-    (finiteShriek A (rightOpen a b k)).map (leftComparison A a (k ≫ b) j M N) ≫
-      (compTo A (leftOpen a (k ≫ b) j) (rightOpen a b k) (productOpen a b j k)
-        (by
-          unfold rightOpen leftOpen productOpen product
-          dsimp only [id_eq]
-          apply pullback.hom_ext <;> simp)).hom.app _
-
-/-- Pulling the reversed external tensor along the actual fibre-product swap.
-There is no symmetry in this identification: the reversed factors stay reversed.
-Source: node proof Step 8 (blueprint: lem-pur-finite-open-product-swap). -/
-def swapFactors (a : Xb ⟶ B) (b : Zb ⟶ B)
-    (M : FiniteD A Xb) (N : FiniteD A Zb) :=
-  tensorPullIso A _ _ _ ≪≫
-    tensorIsoMap A _
-      ((composeEq A (swap a b).hom (first b a)
-        (second a b) (by
-          unfold swap first second product
-          dsimp only [id_eq]
-          simp)).app N)
-      ((composeEq A (swap a b).hom (second b a)
-        (first a b) (by
-          unfold swap first second product
-          dsimp only [id_eq]
-          simp)).app M)
-
-set_option linter.defProp false in
-/-- The Cartesian square between the two actual product opens under factor swap.
-Source: node proof Step 8 (blueprint: lem-pur-finite-open-product-swap). -/
-def swapSquare (a : Xb ⟶ B) (b : Zb ⟶ B) (j : X ⟶ Xb) (k : Z ⟶ Zb) :
-    IsPullback (swap (j ≫ a) (k ≫ b)).hom
-      (productOpen a b j k) (productOpen b a k j) (swap a b).hom :=
-  IsPullback.of_horiz_isIso ⟨by
-    unfold swap productOpen product
-    dsimp only [id_eq]
-    apply pullback.hom_ext <;> simp⟩
-
-/-- The reversed construction pulled back by the ambient swap, followed by the
-normalized open base change and the projection/tensor identifications.
-Source: node proof Step 8 (blueprint: lem-pur-finite-open-product-swap). -/
-def transportedReverse (a : Xb ⟶ B) (b : Zb ⟶ B) (j : X ⟶ Xb) (k : Z ⟶ Zb)
-    [IsOpenImmersion j] [IsOpenImmersion k] (M : FiniteD A X) (N : FiniteD A Z) :=
-  (swapFactors A a b ((finiteShriek A j).obj M) ((finiteShriek A k).obj N)).inv ≫
-    (pull A (swap a b).hom).map (comparison A b a k j N M) ≫
-      (beta A _ _ _ _ (swapSquare a b j k)).hom.app _ ≫
-        (finiteShriek A (productOpen a b j k)).map
-          (swapFactors A (j ≫ a) (k ≫ b) M N).hom
-
-/-- Identify D with the restriction of the ambient external product using exactly
-both open units and the canonical pullback/tensor identifications. Written in the
-forward direction so the restriction identity is its unit equation.
-Source: node proof Step 5 (blueprint: lem-pur-finite-open-product-swap). -/
-def restrictionSource (a : Xb ⟶ B) (b : Zb ⟶ B) (j : X ⟶ Xb) (k : Z ⟶ Zb)
-    [IsOpenImmersion j] [IsOpenImmersion k] (M : FiniteD A X) (N : FiniteD A Z) :=
-  tensorMap A _
-    ((pull A (first (j ≫ a) (k ≫ b))).map ((adj A j).unit.app M) ≫
-      (square A (productOpen a b j k) (first a b)
-        (first (j ≫ a) (k ≫ b)) j (by
-          unfold productOpen first product
-          dsimp only [id_eq]
-          simp)).inv.app _)
-    ((pull A (second (j ≫ a) (k ≫ b))).map ((adj A k).unit.app N) ≫
-      (square A (productOpen a b j k) (second a b)
-        (second (j ≫ a) (k ≫ b)) k (by
-          unfold productOpen second product
-          dsimp only [id_eq]
-          simp)).inv.app _) ≫
-    (tensorPullIso A (productOpen a b j k) _ _).inv
-
-/-- Finiteness of the recorded coefficient ring, with its standard size lift.
-Source: finite purity conventions (blueprint: lem-pur-finite-open-product-swap). -/
-instance settingCoefficientFinite (S : PurityFiniteSetting.{u}) : Finite S.Coefficient :=
-  letI : Finite S.Ring := Padic.finite_coefficientExtensionRing
-    S.coefficients.l S.extension S.level S.level_pos
-  inferInstanceAs (Finite (ULift.{u + 1} S.Ring))
-
 
 end WeilConjectures.FiniteOpenProduct

@@ -267,6 +267,9 @@ def SystemGeometricInverseImageData.derivedEvaluation
 variable (SY : SystemScalarAssignment (J := J)) (TY : SystemTensorCoherence SY)
   (SX : SystemScalarAssignment (J := K)) (TX : SystemTensorCoherence SX)
 
+set_option linter.unusedVariables false
+set_option linter.unusedSectionVars false
+
 /-- Multiplication at the selected level of ordinary singleton extension.
 Source: Zheng, Construction 4.1, p. 21
 (blueprint: lem-pur-system-singleton-geometric-pullback). -/
@@ -294,7 +297,6 @@ def systemSingletonLowerMap {n m : ℕ} (h : n ≤ m)
   ((systemSingleDerivedExtension BY n SY TY).adjunction.homEquiv _ _).symm
     ((systemSingleDerivedBelow BY h SY TY).inv.app P)
 
-set_option linter.unusedVariables false in
 /-- The geometric singleton comparison, together with all its specified normalizations.
 This is the full conclusion of the node, including the ordinary representatives and the
 canonical scalar comparison used in the lower-singleton square. It is not an unnormalized
@@ -410,12 +412,7 @@ def SystemSingletonGeometricComparisons
         (systemSingleDerivedExtension BX n SX TX).derived.map ((scalar h).hom.app P) ≫
         systemSingletonLowerMap SX TX h ((F.levelFunctor m).mapDerivedCategory.obj P))
 
-
-set_option linter.unusedVariables false
-set_option linter.unusedSectionVars false
-
-include SX in
-private theorem geometricLevelKFlat (n : ℕ)
+private theorem geometricLevelKFlat (SX : SystemScalarAssignment (J := K)) (n : ℕ)
     [H : ∀ n : ℕ, (I n).modules.Additive]
     (Q : CochainComplex (systemLevel BY n) ℤ) (hQ : systemLevelKFlat BY n Q) :
     systemLevelKFlat BX n (((I n).modules.mapHomologicalComplex (.up ℤ)).obj Q) := by
@@ -448,7 +445,6 @@ private theorem singletonFlatModelsFromScalar
   have h := (singletonScalarExtension (B := B) (D := B) S T (𝟙 B) A).2.1 n Q hQ
   exact ⟨h.1, h.2.1⟩
 
-
 private theorem singletonFlatModels
     (S : SystemScalarAssignment (J := J)) (T : SystemTensorCoherence S)
     (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (n : ℕ)
@@ -462,9 +458,6 @@ private theorem singletonFlatModels
   singletonFlatModelsFromScalar S T B n Q hQ
     (Classical.choice (nonempty_systemScalarModel (singletonSequenceRingMap (𝟙 B))))
 
-
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 /-- Geometric inverse image commutes with singleton left extension on the ordinary
 unbounded derived categories, with the common model and all normalization clauses.
 The ring equation says exactly that the target transitions are the pulled-back source

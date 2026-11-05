@@ -5,20 +5,7 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Supported.SupportedCup
-public import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicCoefficientTwistsUnrestricted
-public import WeilConjectures.AlgebraicGeometry.Cartesian.CartesianCoefficientTwistsSupplement
-public import WeilConjectures.SmoothPurity.PurityFiniteSetting.Affine.PurityAffineLineDatum
-public import WeilConjectures.CategoryTheory.Sites.SmoothPurity.SupportLongExact
-public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSiteComparisonDerived
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBaseChange
-public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSiteComparisonFiniteLevel
-public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
-public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-public import WeilConjectures.SixFunctors.ProEtale.OpenClosed.Sequence
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersion
-public import WeilConjectures.SixFunctors.ProEtale.Comparison.Monoidal
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionBaseChange
+public import WeilConjectures.AlgebraicGeometry.Picard.PurityFiniteSetting.FrameKummer
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import WeilConjectures.AlgebraicGeometry.Abelian.AbelianEtaleProEtaleCohomologyComparison
 import WeilConjectures.CategoryTheory.LeftModuleDerivedEvaluation.LeftModuleDerivedEvaluationForget
@@ -48,188 +35,30 @@ open AlgebraicGeometry.ProEtale
 open scoped CategoryTheory.Functor
 namespace WeilConjectures.PurityFiniteSetting
 
-/-- The finite clause of the coefficient twists, in fixed-scalar coordinates.
-This reuses the published finite Tate sheaves and exact comparison inverse image.
-Source: def-coefficient-twists-detailed, finite twists and nonnegative powers;
-def-pur-affine-line-datum, coefficient-identification paragraph
-(blueprint: def-pur-frame-class). -/
-def frameCoefficientTwist (P : PurityFiniteSetting.{u})
-    (h : P.ramificationIndex ∣ P.level) (X : Scheme.{u}) (d : ℕ) :
-    Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} P.Coefficient) :=
-  (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X).obj
-    (Scheme.finiteEtaleTateTwist X P.exponent P.Coefficient
-      (P.exponent_coefficient_eq_zero h) d)
+/-- Direct image along an isomorphism of schemes is an equivalence, with inverse the direct
+image along the inverse isomorphism.
+Source: functoriality of direct image (blueprint: def-pur-frame-class). -/
+def frameLowerStarEquivalence (A : Type*) [Category.{u + 1} A] {D D' : Scheme.{u}}
+    (e : D ≅ D') : Sheaf (Scheme.ProEt.topology D) A ≌ Sheaf (Scheme.ProEt.topology D') A :=
+  CategoryTheory.Equivalence.mk (lowerStar A e.hom) (lowerStar A e.inv)
+    ((lowerStarId A D).symm ≪≫ eqToIso (by rw [e.hom_inv_id]) ≪≫
+      (lowerStarComp A e.hom e.inv).symm)
+    (lowerStarComp A e.inv e.hom ≪≫ eqToIso (by rw [e.inv_hom_id]) ≪≫ lowerStarId A D')
 
-/-- Multiplication of nonnegative finite twists, obtained from the published tensor
-powers through the strong monoidal comparison. Degree zero uses its unit constraint.
-Source: def-coefficient-twists-detailed, nonnegative powers
-(blueprint: def-pur-frame-class). -/
-def frameCoefficientTensorNext (P : PurityFiniteSetting.{u})
-    (h : P.ramificationIndex ∣ P.level) (X : Scheme.{u}) :
-    (d : ℕ) → P.frameCoefficientTwist h X d ⊗ P.frameCoefficientTwist h X 1 ≅
-      P.frameCoefficientTwist h X (d + 1)
-  | 0 => by
-    let ν := comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X
-    let e : P.frameCoefficientTwist h X 0 ≅ 𝟙_ _ :=
-      ν.mapIso (Functor.Monoidal.εIso
-        (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient))).symm ≪≫
-        (Functor.Monoidal.εIso ν).symm
-    exact tensorIso e (Iso.refl _) ≪≫ λ_ _
-  | d + 1 => by
-    exact Functor.Monoidal.μIso
-      (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X)
-      (Scheme.finiteEtaleTateTwist X P.exponent P.Coefficient
-        (P.exponent_coefficient_eq_zero h) (d + 1))
-      (Scheme.finiteEtaleTateLine X P.exponent P.Coefficient
-        (P.exponent_coefficient_eq_zero h))
-
-/-- The finite degree-one cartesian twist comparison. The map is the exact inverse image
-of the canonical scalar-extension map on roots, including the site-comparison square.
-Its inverse is the inverse of this specified isomorphism, with no existence choice.
-Source: det-prop-sfb-cartesian-coefficients-twists, finite coefficients paragraph;
-def-pur-affine-line-datum, canonical root pullback
-(blueprint: def-pur-frame-class). -/
-def frameCoefficientPullback (P : PurityFiniteSetting.{u})
-    (h : P.ramificationIndex ∣ P.level) {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (a : Y ⟶ Spec (.of P.field.k)) :
-    (upperStar (ModuleCat.{u + 1} P.Coefficient) f).obj
-      (P.frameCoefficientTwist h Y 1) ≅ P.frameCoefficientTwist h X 1 := by
-  letI := P.isIso_twistEtalePullback h f (P.exponent_isUnit Y a)
-  exact (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} P.Coefficient) f).app
-      (P.twistEtale h Y) ≪≫
-    (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X).mapIso
-      (asIso (P.twistEtalePullback h f))
-
-/-- The finite coefficient support connecting morphism in degree one. Its construction
-is the Yoneda splice with the canonical localization sequence; it has degree two.
-Source: thm-pur-with-support-exactness, finite-torsion pro-etale clause;
-literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/
-sec-the-trace-map-of-affine-space/sk-prop-an/def-pur-frame-class.md, step 2
-(blueprint: def-pur-frame-class). -/
-def frameSupportBoundary (P : PurityFiniteSetting.{u}) (X : Scheme.{u}) (f : Γ(X, ⊤))
-    (L : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} P.Coefficient))
-    (κ : Abelian.Ext
-      ((openImmersionLowerShriek (ModuleCat.{u + 1} P.Coefficient) (X.basicOpen f).ι).obj
-        ((upperStar (ModuleCat.{u + 1} P.Coefficient) (X.basicOpen f).ι).obj
-          (P.constant X))) L 1) :
-    Abelian.Ext ((lowerStar (ModuleCat.{u + 1} P.Coefficient)
-      (X.zeroLocusSubschemeι {f})).obj (P.constant (X.zeroLocusSubscheme {f}))) L 2 := by
-  let i := X.zeroLocusSubschemeι {f}
-  let j := (X.basicOpen f).ι
-  have hij : IsCompl (Set.range i.base) (Set.range j.base) := by
-    dsimp only [i, j]
-    rw [Scheme.range_zeroLocusSubschemeι_singleton, Scheme.Opens.range_ι]
-    exact isCompl_compl.symm
-  exact (Abelian.Ext.mk₀ ((lowerStar (ModuleCat.{u + 1} P.Coefficient) i).map
-    (P.frameConstantPullback i).inv)).comp
-      ((shortExact_openClosedShortComplex i j hij (P.constant X)).extClass.comp
-        κ (rfl : 1 + 1 = 2)) (zero_add 2)
-
-/-- The map defined by a unit to the punctured affine line over the coefficient base.
-Its factorization through the coordinate basic open is the explicit frame map used
-for the Kummer pullback.
-Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/
-sec-smooth-purity/sec-the-trace-map-of-affine-space/sk-prop-an/def-pur-frame-class.md,
-step 1 (blueprint: def-pur-frame-class). -/
-noncomputable def frameCoordinateMap (P : PurityFiniteSetting.{u}) {X : Scheme.{u}}
-    (a : X ⟶ Spec (.of P.field.k)) (t : Γ(X, ⊤)ˣ) :
-    X ⟶ Punctured (Spec (.of P.field.k)) := by
-  let S := Spec (CommRingCat.of P.field.k)
-  let q : X ⟶ AffineSpace (ULift.{u} (Fin 1)) S :=
-    AffineSpace.homOfVector a (fun _ ↦ (t : Γ(X, ⊤)))
-  let j := openImmersion S
-  letI : IsOpenImmersion j := by
-    dsimp [j, openImmersion]
-    infer_instance
-  have hpre : q ⁻¹ᵁ ((AffineSpace (ULift.{u} (Fin 1)) S).basicOpen
-      (AffineSpace.coord S (ULift.up 0))) = ⊤ := by
-    dsimp [q]
-    rw [Scheme.preimage_basicOpen_top,
-      AffineSpace.homOfVector_appTop_coord, X.basicOpen_of_isUnit t.isUnit]
-  have hrange : Set.range q.base ⊆ Set.range j.base := by
-    change Set.range q.base ⊆ Set.range
-      (((AffineSpace (ULift.{u} (Fin 1)) S).basicOpen
-        (AffineSpace.coord S (ULift.up 0))).ι.base)
-    rw [Scheme.Opens.range_ι]
-    rintro _ ⟨x, rfl⟩
-    exact hpre.ge trivial
-  exact IsOpenImmersion.lift j q hrange
-
-/-- Pull back the recorded affine-line datum's coordinate Kummer class along the unit's
-map to G_m over Spec k. The cartesian twist comparison identifies its target with A(1).
-The inherited divisibility hypothesis is the one required by `coordinateKummer`.
-Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/
-sec-smooth-purity/sec-the-trace-map-of-affine-space/sk-prop-an/def-pur-frame-class.md,
-step 1 (blueprint: def-pur-frame-class). -/
-def frameCoordinateKummer (P : PurityFiniteSetting.{u})
-    (h : P.ramificationIndex ∣ P.level)
-    (X : Scheme.{u}) (a : X ⟶ Spec (.of P.field.k)) (t : Γ(X, ⊤)ˣ) :
-    Abelian.Ext (P.constant X) (P.frameCoefficientTwist h X 1) 1 := by
-  let S := Spec (CommRingCat.of P.field.k)
-  let g := P.frameCoordinateMap a t
-  let κg := (P.coordinateKummer h S (𝟙 S)).mapExactFunctor
-    (upperStar (ModuleCat.{u + 1} P.Coefficient) g)
-  exact (Abelian.Ext.mk₀ (P.frameConstantPullback g).inv).comp κg (zero_add 1) |>.comp
-    (Abelian.Ext.mk₀ (P.frameCoefficientPullback h g (puncturedProjection S)).hom) (add_zero 1)
-
-/-- The frame unit's Kummer class, namely g^* kappa(t) from the affine-line datum.
-Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/
-sec-smooth-purity/sec-the-trace-map-of-affine-space/sk-prop-an/def-pur-frame-class.md,
-step 1 (blueprint: def-pur-frame-class). -/
-def finiteFrameKummer (P : PurityFiniteSetting.{u}) (h : P.ramificationIndex ∣ P.level)
-    (X : Scheme.{u}) (a : X ⟶ Spec (.of P.field.k)) (t : Γ(X, ⊤)ˣ) :
-    Abelian.Ext (P.constant X) (P.frameCoefficientTwist h X 1) 1 :=
-  P.frameCoordinateKummer h X a t
-
-/-- The normalized twist counit for the individual complementary basic open.
-Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/
-sec-smooth-purity/sec-the-trace-map-of-affine-space/sk-prop-an/def-pur-frame-class.md,
-step 2, restriction of A(1) and the open-immersion counit
-(blueprint: def-pur-frame-class). -/
-def finiteFrameTwistCounit (P : PurityFiniteSetting.{u})
-    (h : P.ramificationIndex ∣ P.level) (X : Scheme.{u})
-    (a : X ⟶ Spec (.of P.field.k)) (f : Γ(X, ⊤)) :
-    (openImmersionLowerShriek (ModuleCat.{u + 1} P.Coefficient) (X.basicOpen f).ι).obj
-      (P.frameCoefficientTwist h (X.basicOpen f).toScheme 1) ⟶ P.frameCoefficientTwist h X 1 :=
-  (openImmersionLowerShriek (ModuleCat.{u + 1} P.Coefficient) (X.basicOpen f).ι).map
-      (P.frameCoefficientPullback h (X.basicOpen f).ι a).inv ≫
-    (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} P.Coefficient)
-      (X.basicOpen f).ι).counit.app (P.frameCoefficientTwist h X 1)
-
-/-- Extend the Kummer class by zero and apply the normalized twist counit.
-The source is the first object of the canonical coefficient localization sequence.
-Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/
-sec-smooth-purity/sec-the-trace-map-of-affine-space/sk-prop-an/def-pur-frame-class.md,
-step 2, extend the individual Kummer class by zero before the connecting map
-(blueprint: def-pur-frame-class). -/
-def finiteFrameOpenKummer (P : PurityFiniteSetting.{u})
-    (h : P.ramificationIndex ∣ P.level) (X : Scheme.{u})
-    (a : X ⟶ Spec (.of P.field.k)) (f : Γ(X, ⊤)) :
-    Abelian.Ext
-      ((openImmersionLowerShriek (ModuleCat.{u + 1} P.Coefficient) (X.basicOpen f).ι).obj
-        ((upperStar (ModuleCat.{u + 1} P.Coefficient) (X.basicOpen f).ι).obj
-          (P.constant X))) (P.frameCoefficientTwist h X 1) 1 :=
-  (Abelian.Ext.mk₀
-    ((openImmersionLowerShriek (ModuleCat.{u + 1} P.Coefficient) (X.basicOpen f).ι).map
-      (P.frameConstantPullback (X.basicOpen f).ι).hom)).comp
-    (((P.finiteFrameKummer h (X.basicOpen f).toScheme ((X.basicOpen f).ι ≫ a)
-      (X.basicOpenUnit f)).mapExactFunctor
-        (openImmersionLowerShriek (ModuleCat.{u + 1} P.Coefficient) (X.basicOpen f).ι)).comp
-          (Abelian.Ext.mk₀ (P.finiteFrameTwistCounit h X a f)) (add_zero 1)) (zero_add 1)
-
-/-- The boundary for (X,V(f)), formed before intersecting any supports. Its Yoneda
-splice with the canonical short exact localization sequence is the right-derived
-support connecting map, with the usual positive boundary convention. A principal
-basic-open immersion is affine, hence quasi-compact; no quasi-compactness assumption
-on X is imposed. Constant pullback identifies the closed source with i_* A_D.
-Source: thm-pur-with-support-exactness (blueprint: def-pur-frame-class). -/
-def finiteFrameBoundary (P : PurityFiniteSetting.{u})
-    (h : P.ramificationIndex ∣ P.level) (X : Scheme.{u})
-    (a : X ⟶ Spec (.of P.field.k)) (f : Γ(X, ⊤)) :
-    cupSupportedHom P (X.zeroLocusSubschemeι {f})
-      ((cupSingle P X).obj (P.frameCoefficientTwist h X 1)) 2 := by
-  exact (P.frameSupportBoundary X f (P.frameCoefficientTwist h X 1)
-    (P.finiteFrameOpenKummer h X a f)).hom
+/-- Transport the closed constant coefficient along an isomorphism of closed subschemes
+over the ambient scheme: direct image along an isomorphism is the inverse image along its
+inverse, which preserves the constant coefficient.
+Source: def-pur-frame-class, identification of supports (blueprint: def-pur-frame-class). -/
+def finiteFrameClosedCoefficientIso (P : PurityFiniteSetting.{u}) {D D' X : Scheme.{u}}
+    (c : D ⟶ X) (g : D' ⟶ X) (e : D ≅ D') (w : e.hom ≫ g = c) :
+    (lowerStar (ModuleCat.{u + 1} P.Coefficient) c).obj (P.constant D) ≅
+      (lowerStar (ModuleCat.{u + 1} P.Coefficient) g).obj (P.constant D') := by
+  subst w
+  exact (lowerStarComp (ModuleCat.{u + 1} P.Coefficient) e.hom g).symm.app (P.constant D) ≪≫
+    (lowerStar (ModuleCat.{u + 1} P.Coefficient) g).mapIso
+      (((frameLowerStarEquivalence (ModuleCat.{u + 1} P.Coefficient) e).toAdjunction.leftAdjointUniq
+        (upperStarLowerStarAdjunction (ModuleCat.{u + 1} P.Coefficient) e.inv)).app
+          (P.constant D) ≪≫ P.frameConstantPullback e.inv)
 
 /-- The supported unit for the zero ideal. Its closed immersion is an isomorphism:
 the inverse is the universal lift of the identity through the empty zero locus.
@@ -258,6 +87,78 @@ def finiteFrameEmptyClass (P : PurityFiniteSetting.{u})
       (lowerStarId (ModuleCat.{u + 1} P.Coefficient) X).hom.app (P.constant X) ≫
       (cupConstantIso P X).hom ≫ e.hom) ≫
     (shiftFunctorZero (CupDerivedCategory P X) ℤ).inv.app _
+
+/-- The zero locus of a family of global sections is the intersection of the zero locus
+of its prefix with the zero locus of its last member.
+Source: def-pur-frame-class, Step 4, common zero support (blueprint: def-pur-frame-class). -/
+def finiteFrameZeroLocusIso {X : Scheme.{u}} (n : ℕ) (f : Fin (n + 1) → Γ(X, ⊤)) :
+    X.zeroLocusSubscheme (Set.range f) ≅
+      pullback (X.zeroLocusSubschemeι (Set.range fun k : Fin n ↦ f k.castSucc))
+        (X.zeroLocusSubschemeι {f (Fin.last n)}) where
+  hom := pullback.lift
+    ((X.zeroLocusSubschemeι (Set.range f)).liftZeroLocusSubscheme (by
+      rintro _ ⟨k, rfl⟩
+      exact Scheme.zeroLocusSubschemeι_appTop ⟨k.castSucc, rfl⟩))
+    ((X.zeroLocusSubschemeι (Set.range f)).liftZeroLocusSubscheme (by
+      rintro t rfl
+      exact Scheme.zeroLocusSubschemeι_appTop ⟨Fin.last n, rfl⟩))
+    (by simp)
+  inv := (pullback.fst _ _ ≫ X.zeroLocusSubschemeι _).liftZeroLocusSubscheme (by
+    rintro _ ⟨k, rfl⟩
+    induction k using Fin.lastCases with
+    | last =>
+      rw [pullback.condition, Scheme.Hom.comp_appTop, CommRingCat.comp_apply,
+        Scheme.zeroLocusSubschemeι_appTop (Set.mem_singleton _), map_zero]
+    | cast k =>
+      rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply,
+        Scheme.zeroLocusSubschemeι_appTop (s := Set.range fun k : Fin n ↦ f k.castSucc) ⟨k, rfl⟩,
+        map_zero])
+  hom_inv_id := by
+    rw [← cancel_mono (X.zeroLocusSubschemeι _)]
+    simp only [Category.assoc, Scheme.Hom.liftZeroLocusSubscheme_zeroLocusSubschemeι,
+      pullback.lift_fst_assoc, Category.id_comp]
+  inv_hom_id := by
+    apply pullback.hom_ext
+    · rw [← cancel_mono (X.zeroLocusSubschemeι _)]
+      simp only [Category.assoc, pullback.lift_fst_assoc,
+        Scheme.Hom.liftZeroLocusSubscheme_zeroLocusSubschemeι, Category.id_comp]
+    · rw [← cancel_mono (X.zeroLocusSubschemeι _)]
+      simp only [Category.assoc, pullback.lift_snd_assoc,
+        Scheme.Hom.liftZeroLocusSubscheme_zeroLocusSubschemeι, Category.id_comp,
+        pullback.condition]
+
+/-- Append the boundary of the last section to the supported product of the prefix: the
+supported cup product, followed by the identification of the common zero support and the
+multiplication of the nonnegative finite twists.
+Source: def-pur-frame-class, Steps 3 and 4 (blueprint: def-pur-frame-class). -/
+def finiteFrameCupNext (P : PurityFiniteSetting.{u})
+    (h : P.ramificationIndex ∣ P.level) (X : Scheme.{u})
+    (a : X ⟶ Spec (.of P.field.k)) (n : ℕ) (f : Fin (n + 1) → Γ(X, ⊤))
+    (α : cupSupportedHom P (X.zeroLocusSubschemeι (Set.range fun k : Fin n ↦ f k.castSucc))
+      ((cupSingle P X).obj (P.frameCoefficientTwist h X n)) (2 * (n : ℤ))) :
+    cupSupportedHom P (X.zeroLocusSubschemeι (Set.range f))
+      ((cupSingle P X).obj (P.frameCoefficientTwist h X (n + 1))) (2 * ((n + 1 : ℕ) : ℤ)) :=
+  letI : X.Over (Spec (.of P.field.k)) := ⟨a⟩
+  let i := X.zeroLocusSubschemeι (Set.range fun k : Fin n ↦ f k.castSucc)
+  let j := X.zeroLocusSubschemeι {f (Fin.last n)}
+  let F : CupPlus P X := ⟨(cupSingle P X).obj (P.frameCoefficientTwist h X n), ⟨0, by
+    dsimp only [cupSingle]
+    infer_instance⟩⟩
+  let G : CupPlus P X := ⟨(cupSingle P X).obj (P.frameCoefficientTwist h X 1), ⟨0, by
+    dsimp only [cupSingle]
+    infer_instance⟩⟩
+  (cupSingle P X).map (P.finiteFrameClosedCoefficientIso (X.zeroLocusSubschemeι (Set.range f))
+      (cupIntersection i j) (finiteFrameZeroLocusIso n f)
+      (by
+        simp only [finiteFrameZeroLocusIso, i, j, pullback.lift_fst_assoc,
+          Scheme.Hom.liftZeroLocusSubscheme_zeroLocusSubschemeι])).hom ≫
+    supportedCup P i j F G (2 * (n : ℤ)) 2 α (P.finiteFrameBoundary h X a (f (Fin.last n))) ≫
+    (shiftFunctor (CupDerivedCategory P X) (2 * (n : ℤ) + 2)).map
+      (cupDerivedCoefficientMap (hD := cupHasDerivedCategory P X) (hDM := cupMonoidal P X)
+        (P.frameCoefficientTensorNext h X n).hom) ≫
+    eqToHom (by
+      simp only [Nat.cast_add, Nat.cast_one, mul_add, mul_one]
+      rfl)
 
 /-- Ordered supported product with explicit edge cases. For c=0 it is the unit;
 for c=1 it is precisely the single principal boundary, after the tautological support

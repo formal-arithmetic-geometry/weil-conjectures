@@ -28,7 +28,6 @@ variable (S : SystemScalarAssignment (J := J)) (T : SystemTensorCoherence S)
   {B D : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}} (a : B ⟶ D)
   (A : SystemScalarModel (singletonSequenceRingMap a))
 
-
 /-- The normalized singleton coefficient comparisons commute with the canonical
 lower-singleton maps and the specified scalar associators.
 Source: Zheng, Construction 4.1, and Stacks, Cohomology on Sites, 0D6D and 06YT;

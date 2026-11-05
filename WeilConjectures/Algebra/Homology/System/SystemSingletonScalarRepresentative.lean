@@ -28,7 +28,6 @@ variable (S : SystemScalarAssignment (J := J)) (T : SystemTensorCoherence S)
   {B D : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}} (a : B ⟶ D)
   (A : SystemScalarModel (singletonSequenceRingMap a))
 
-
 /-- The specified derived conjugate is represented by the ordinary singleton
 coefficient comparison, with the actual universal comparison maps.
 Source: Stacks, Derived Categories, lemmas pre-derived-adjoint-functors (0FND) and
