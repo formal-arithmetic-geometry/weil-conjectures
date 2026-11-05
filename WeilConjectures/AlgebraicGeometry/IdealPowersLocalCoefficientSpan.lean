@@ -208,7 +208,6 @@ theorem idealPowersLocalCoefficientSpan {A : Type v} [CommRing A]
   dsimp [tW] at hcore
   convert hcore using 1
   · congr 2
-  · rfl
 
 
 end AlgebraicGeometry
