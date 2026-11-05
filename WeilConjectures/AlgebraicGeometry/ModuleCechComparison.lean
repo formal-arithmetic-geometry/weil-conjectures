@@ -47,12 +47,12 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-universe u
+universe u v
 
 attribute [-instance]
   CategoryTheory.Limits.instHasBinaryProductObjOfPreservesLimitDiscreteWalkingPairPair
 
-private local instance (R : Type u) [Ring R] (J : Type) :
+private local instance (R : Type u) [Ring R] (J : Type v) :
     HasLimitsOfShape (Discrete J) (ModuleCat.{u} R) :=
   ModuleCat.hasLimitsOfShape
 
