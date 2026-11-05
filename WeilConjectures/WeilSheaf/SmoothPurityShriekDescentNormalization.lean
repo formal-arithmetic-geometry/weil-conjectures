@@ -15,6 +15,7 @@ public import WeilConjectures.WeilSheaf.SmoothPurityShriekWeilUniversality
 universe u
 
 open CategoryTheory Limits
+open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 

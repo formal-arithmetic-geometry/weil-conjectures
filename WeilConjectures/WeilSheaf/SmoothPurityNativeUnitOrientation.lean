@@ -49,6 +49,13 @@ local instance : QuasiCompact (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom :
 local instance : IsSeparated (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom :=
   inferInstanceAs (IsSeparated (Y ↘ Spec (CommRingCat.of k₀)))
 
+local instance : (boundedConstructible (condensedRingObj
+    (Profinite.padicAlgClRingObj l) Y)).IsMonoidal :=
+  CondensedRing.isMonoidal_boundedConstructible l (Over.mk (Y ↘ Spec (CommRingCat.of k₀)))
+noncomputable local instance : MonoidalCategory (BoundedConstructible
+    (condensedRingObj (Profinite.padicAlgClRingObj l) Y)) :=
+  ObjectProperty.fullMonoidalSubcategory _
+
 variable (d : ℕ) (T : WeilComplex k₀ l X) (U : WeilComplex k₀ l Y)
   (eT : (ProEtaleWeilSheaf.derivedEquivCondensed k₀ l X).functor.obj T.obj ≅
     (CondensedRing.geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l)

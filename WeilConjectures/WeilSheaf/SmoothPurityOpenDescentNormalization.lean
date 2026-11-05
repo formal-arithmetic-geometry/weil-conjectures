@@ -8,6 +8,7 @@ public import WeilConjectures.WeilSheaf.SmoothPurityExactDescentNormalization
 public import WeilConjectures.WeilSheaf.SmoothPurityProperTraceCoordinates
 public import WeilConjectures.WeilSheaf.SmoothPurityShriekFreeComparison
 public import WeilConjectures.WeilSheaf.SmoothPurityAmbientOpenExchange
+public import WeilConjectures.WeilSheaf.SmoothPurityInverseMateExchange
 
 /-! # The geometric comparison underlying descended extension by zero -/
 
@@ -16,6 +17,7 @@ public import WeilConjectures.WeilSheaf.SmoothPurityAmbientOpenExchange
 universe u
 
 open CategoryTheory Limits
+open scoped CategoryTheory.Obj
 
 namespace CategoryTheory.Endofunctor.IsoAlgebra
 
@@ -66,7 +68,7 @@ lemma openTraceInverseMate_eq :
         (Scheme.Hom.isPullback_geometricFiberMap j h)).inv := by
   rw [purityOpenImmersionLowerShriekUpperStarBaseChangeIso_inv,
     geometricFiberUpperStarComparison, Iso.symm_hom, upperStarSquareComparison_flip_inv]
-  rfl
+  exact Adjunction.inverseMate_natTrans_eq_exchangeLeft _ _ _
 
 /-- Forgetting the sheaf-level descended open comparison gives the ordinary one. -/
 lemma geometricFiberWeilExtensionByZeroBaseChange_app_forget
@@ -86,6 +88,7 @@ lemma geometricFiberWeilExtensionByZeroBaseChange_app_forget
     (fun N ↦ by simp [upperStarCompGeometricFiberWeilLowerStarIso]) M
   simp only [eqToHom_refl, Category.id_comp, Category.comp_id] at he
   rw [openTraceInverseMate_eq] at he
+  unfold geometricFiberWeilExtensionByZeroBaseChange
   exact he
 
 /-- Forgetting the exactly derived descended open comparison gives ordinary
@@ -122,6 +125,6 @@ lemma geometricFiberWeilExtensionByZeroMapDerivedCategoryIso_forget
     ((openImmersionLowerShriekUpperStarBaseChangeIso Λ
       (Scheme.Hom.isPullback_geometricFiberMap j h)).symm.app M)
     (geometricFiberWeilExtensionByZeroBaseChange_app_forget Λ hc M)
-  simpa [Endofunctor.IsoAlgebra.mapOfNatIsoCompForgetIso] using he.symm
+  simpa [Endofunctor.IsoAlgebra.mapOfNatIsoCompForgetIso, Functor.comp_obj] using he.symm
 
 end AlgebraicGeometry.ProEtale.CondensedRing
