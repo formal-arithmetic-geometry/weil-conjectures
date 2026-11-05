@@ -5,11 +5,8 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
-
-import all Mathlib.Algebra.Homology.Localization
 
 /-!
 # The derived unit on global sections, computed on complexes
