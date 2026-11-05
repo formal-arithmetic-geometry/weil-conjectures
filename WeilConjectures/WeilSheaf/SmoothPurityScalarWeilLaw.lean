@@ -4,9 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.WeilSheaf.SmoothPurityRationalTrivialization
+public import WeilConjectures.WeilSheaf.SmoothPurityScalarComparison
 public import WeilConjectures.WeilSheaf.SmoothPurityScalarFactorSquare
-public import WeilConjectures.WeilSheaf.SmoothPurityPullbackForgetFactor
 import WeilConjectures.Tactic.ExactModProofs
 
 /-! # Transport of a scalar Frobenius law with abstract coefficients -/
@@ -30,20 +29,6 @@ open Scheme
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
   {X U : Scheme.{u}} (p : U ⟶ X) (s : U ⟶ U) (hs : s ≫ p = p)
-
-/-- The underlying abelian-sheaf factorization of the geometric Frobenius pullback. -/
-noncomputable def purityAbelianFactorIso :
-    (p)^*[Ab.{u + 1}] ⋙
-        (s)^*[Ab.{u + 1}] ≅
-      (p)^*[Ab.{u + 1}] :=
-  (ProEtale.upperStarComp' Ab.{u + 1} s
-    p p
-    hs.symm).symm
-
-/-- The module pullback factorization attached to s ≫ p = p. -/
-noncomputable def purityModuleFactorIso :
-    (p)^*⟦Λ⟧ ⋙ (s)^*⟦Λ⟧ ≅ (p)^*⟦Λ⟧ :=
-  (CondensedRing.upperStarComp Λ s p).symm ≪≫ CondensedRing.upperStarCongr Λ hs
 
 variable (M N : Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
   (e : ((p)^*[Ab.{u + 1}].mapMod _).obj M ≅
@@ -69,19 +54,9 @@ theorem purityExtendPullbackIso_factor
     ((purityModuleFactorIso Λ p s hs).hom.app M)
     ((purityModuleFactorIso Λ p s hs).hom.app N)
     e.hom.hom (purityExtendPullbackIso Λ p M N e).hom c
-  · have h := CondensedRing.purity_upperStarForgetIso_factor_hom Λ p s hs M
-    simp only [Iso.app_hom, Category.assoc, purityModuleFactorIso, purityAbelianFactorIso] at h ⊢
-    dsimp only [Functor.comp_obj, Functor.comp_map, Mod.forget] at h ⊢
-    exact_mod_proofs h
-  · have h := CondensedRing.purity_upperStarForgetIso_factor_hom Λ p s hs N
-    simp only [Iso.app_hom, Category.assoc, purityModuleFactorIso, purityAbelianFactorIso] at h ⊢
-    dsimp only [Functor.comp_obj, Functor.comp_map, Mod.forget] at h ⊢
-    exact_mod_proofs h
-  · have h := purityExtendPullbackIso_unit Λ p M N e
-    simp only [Iso.app_hom, CondensedRing.upperStarForgetIso_hom_app,
-      Mod.forget, purityPullbackUnit] at h ⊢
-    dsimp only [Functor.comp_obj, Functor.comp_map, Mod.forget] at h ⊢
-    exact_mod_proofs h
+  · exact purity_upperStarForgetIso_factor_normalized Λ p s hs M
+  · exact purity_upperStarForgetIso_factor_normalized Λ p s hs N
+  · exact purityExtendPullbackIso_forget Λ p M N e
   · exact he
 
 
