@@ -361,3 +361,8 @@ BLOCKED: I have not constructed the general Weil purity morphism. The missing co
 - K4-20261105T083403.log rc=1 (115s): explicit composite object types and the generic underlying-iso wrapper did not resolve the boundary. The same inverse-square hypothesis conversion takes9.43s and the scalar proof times out in kernel (103s).
 - Removed our weakly-etale instance-priority override from the new transport files and generalized their core helpers to arbitrary morphisms, using the original GREEN purityExtendPullbackIso. The weakly-etale assumption remains only where the roots theorem needs it. This aligns the core comparison with the upstream generic pullback/forget theorem instead of forcing an alternate instance path.
 - Factored the scalar diagram into SmoothPurityScalarSquare, a purely preadditive-category lemma; the sheaf proof now supplies the two structure equations, the unit equation, and one naturality square. No heartbeat increase; final encoding still unvalidated.
+
+## 2026-11-05 08:44 +0800 — LEAD re-plan to PR2110
+- Reread the new LEAD directive and C4 proposal. Accept split: K4 studies canonical-orientation existence / integral reduction lifting and trace normalization; C4 handles uniqueness-to-equivariance and Frobenius stability; C1 owns the Frobenius-structure/Tate transport.
+- Previous check K4-20261105T084042.log rc=1 stops at a missing parenthesis in the pure scalar diagram calculation; fixed it, but no claim that the untested transport chain is green. Preserve that work for C1.
+- Merge pr/2110 next as directed; target now exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso. No DONE.

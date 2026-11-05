@@ -27,7 +27,7 @@ lemma purity_scalarSquare {C : Type*} [Category C] [Preadditive C]
     c • (a' ≫ e') = f' ≫ b' := by
   apply (cancel_epi u).mp
   calc
-    u ≫ c • (a' ≫ e') = c • ((u ≫ a') ≫ e') := by
+    u ≫ (c • (a' ≫ e')) = c • ((u ≫ a') ≫ e') := by
       rw [Preadditive.comp_zsmul, Category.assoc]
     _ = c • (a ≫ e ≫ θ) := by rw [ha, Category.assoc, he]
     _ = (c • (a ≫ e)) ≫ θ := by rw [Preadditive.zsmul_comp, Category.assoc]

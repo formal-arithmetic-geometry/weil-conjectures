@@ -95,7 +95,12 @@ theorem purityTateTwistOneTrivialization_weil :
           (purityTateTwistOneTrivialization a hζ hζ').hom ≫
         (geometricFiberProjUpperStarFrobeniusIso (Profinite.padicAlgClRingObj l) a).hom.app
           (𝟙_ _) := by
-  apply purityChangeCoefficientTrivialization_weil
+  refine purityChangeCoefficientTrivialization_weil
+    (a := Profinite.padicIntRingObjToPadicAlgCl l) (f := a) (M := tateModule X l)
+    (c := (Nat.card k : ℤ))
+    (e₁ := upperStarMapModTateModuleIsoUnit a.geometricFiberProj
+      a.geometricFiberToAlgebraicClosure l hζ hζ' ≪≫
+        (a.geometricFiberProj)^*[Ab.{u + 1}].mapModUnitIso) ?_
   simpa only [Iso.trans_hom, Mod.comp_hom', purityMapModUnitIso_hom_hom,
     Category.comp_id, purityAbelianFrobeniusFactorIso, purityAbelianFactorIso,
     ProEtale.upperStarComp',
