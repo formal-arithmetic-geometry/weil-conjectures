@@ -88,8 +88,8 @@ lemma purityCanonicalTateOneTrivialization_weil :
     (purityCanonicalTateOneTrivialization ℓ a hζ hζ') rfl (Nat.card k : ℤ)
     (by
       dsimp only [tateTwistOne, Functor.comp_obj, Functor.comp_map] at he ⊢
-      exact_mod_proofs he)
-  dsimp only [Functor.comp_obj, Functor.comp_map] at h ⊢
+      cast_proofs he)
+  try dsimp only [Functor.comp_obj, Functor.comp_map] at h ⊢
   exact_mod_proofs h
 
 end AlgebraicGeometry.ProEtale

@@ -36,7 +36,7 @@ noncomputable def purityTateFrobeniusPull :
 
 lemma purityTateFrobeniusPull_eq :
     purityTateFrobeniusPull ℓ a =
-      upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricGaloisFrobenius.hom := rfl
+      upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricGaloisFrobenius.hom := (rfl)
 
 /-- The comparison of the two Frobenius conventions in the module interface. -/
 noncomputable def purityTateFrobeniusCompare :
@@ -91,7 +91,7 @@ noncomputable def purityTateRootPair (d : ℕ) :
 lemma purityTateRootPair_def (d : ℕ) :
     purityTateRootPair ℓ a d =
       IsoAlgebra.mk (tateTwistNat a.geometricFiber ℓ d)
-        (((purityTateFrobeniusCompare ℓ a).app _).symm ≪≫ purityTateRootDatum ℓ a d) := rfl
+        (((purityTateFrobeniusCompare ℓ a).app _).symm ≪≫ purityTateRootDatum ℓ a d) := (rfl)
 
 lemma purityTateRootPair_eq (d : ℕ) :
     purityTateRootPair ℓ a d =
@@ -99,6 +99,6 @@ lemma purityTateRootPair_eq (d : ℕ) :
         (((upperStarIsoLowerStarInv (Profinite.padicAlgClRingObj ℓ)
           a.geometricGaloisFrobenius).app _).symm ≪≫
           upperStarTateTwistNatIso ℓ a.geometricGaloisFrobenius.hom
-            a.geometricFiberToAlgebraicClosure d) := rfl
+            a.geometricFiberToAlgebraicClosure d) := (rfl)
 
 end AlgebraicGeometry.ProEtale.CondensedRing
