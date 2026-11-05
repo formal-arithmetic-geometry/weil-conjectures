@@ -207,66 +207,6 @@ private theorem conjugate_hom_fac
   simpa only [Category.assoc] using
     congrArg (b.unit.app K ≫ ·) ((conjugateEquiv b a e.hom).naturality f).symm
 
-private theorem square_fac
-    {F : A ⥤ D} {H : D ⥤ E} {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
-    {G : A ⥤ C} {L : C ⥤ E}
-    [F.Additive] [H.Additive] [G.Additive] [L.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    [PreservesFiniteLimits H] [PreservesFiniteColimits H]
-    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
-    [PreservesFiniteLimits L] [PreservesFiniteColimits L]
-    (e : F ⋙ H ≅ G ⋙ L) (K : CochainComplex A ℤ) :
-    (Functor.mapDerivedCategorySquareIso e).hom.app (DerivedCategory.Q.obj K) ≫
-        L.mapDerivedCategory.map (G.mapDerivedCategoryFactors.hom.app K) ≫
-        L.mapDerivedCategoryFactors.hom.app ((G.mapHomologicalComplex (.up ℤ)).obj K) =
-      H.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app K) ≫
-        H.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj K) ≫
-        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex e.hom (.up ℤ)).app K) := by
-  simp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
-    NatTrans.comp_app, Category.assoc]
-  rw [Functor.mapDerivedCategoryCompIso_hom_app_factors,
-    Functor.mapDerivedCategoryNatIso_fac]
-  rw [← Category.assoc]
-  have ht := Functor.mapDerivedCategoryCompIso_hom_app_factors F H K
-  rw [← ht]
-  simp only [← Category.assoc, Iso.inv_hom_id_app, Category.id_comp]
-
-private theorem square_fac_of_eq
-    {F : A ⥤ D} {H : D ⥤ E} {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
-    {G : A ⥤ C} {L : C ⥤ E}
-    [F.Additive] [H.Additive] [G.Additive] [L.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    [PreservesFiniteLimits H] [PreservesFiniteColimits H]
-    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
-    [PreservesFiniteLimits L] [PreservesFiniteColimits L]
-    (e : F ⋙ H ≅ G ⋙ L)
-    (d : F.mapDerivedCategory ⋙ H.mapDerivedCategory ≅ G.mapDerivedCategory ⋙ L.mapDerivedCategory)
-    (hd : d = Functor.mapDerivedCategorySquareIso e) (K : CochainComplex A ℤ) :
-    d.hom.app (DerivedCategory.Q.obj K) ≫
-        L.mapDerivedCategory.map (G.mapDerivedCategoryFactors.hom.app K) ≫
-        L.mapDerivedCategoryFactors.hom.app ((G.mapHomologicalComplex (.up ℤ)).obj K) =
-      H.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app K) ≫
-        H.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj K) ≫
-        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex e.hom (.up ℤ)).app K) := by
-  subst d
-  exact square_fac e K
-
-private theorem squareCompatible_of_eq
-    {C : Type*} [Category C] [aC : Abelian C] [HasDerivedCategory C]
-    (F : A ⥤ D) (H : D ⥤ E) (G : A ⥤ C) (L : C ⥤ E)
-    [F.Additive] [H.Additive] [G.Additive] [L.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    [PreservesFiniteLimits H] [PreservesFiniteColimits H]
-    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
-    [PreservesFiniteLimits L] [PreservesFiniteColimits L]
-    (t : F ⋙ H ≅ G ⋙ L)
-    (d : F.mapDerivedCategory ⋙ H.mapDerivedCategory ≅
-      G.mapDerivedCategory ⋙ L.mapDerivedCategory)
-    (hd : d = Functor.mapDerivedCategorySquareIso t) :
-    squareCompatible F H G L t.hom d.hom := by
-  intro K
-  exact square_fac_of_eq t d hd K
-
 omit [Abelian A] [Abelian D] [Abelian E]
     [HasDerivedCategory A] [HasDerivedCategory D] [HasDerivedCategory E] in
 private theorem whisker_comp_hom
