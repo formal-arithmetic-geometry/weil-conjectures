@@ -66,10 +66,10 @@ lemma purityFrobeniusProjUnit_structure
   have h := CondensedRing.upperStarForgetIso_hom_app_map_upperStarComp_symm_trans_inv_app
     Λ a.geometricFiberProj a.geometricGaloisFrobenius_hom_comp_geometricFiberProj M
   simp only [CondensedRing.upperStarForgetIso_hom_app, Mod.forget_map] at h
-  exact purity_isoSquareOfInverseSquare
-    ((purityAbelianFrobeniusFactorIso a).app M.X)
-    ((Mod.forget _).mapIso ((CondensedRing.geometricFiberProjUpperStarFrobeniusIso Λ a).app M))
-    (purityFrobeniusProjUnit Λ a M) (CondensedRing.upperStarUnitHom Λ a.geometricFiberProj M) h
+  rw [← cancel_mono ((CondensedRing.geometricFiberProjUpperStarFrobeniusIso Λ a).inv.app M).hom,
+    Category.assoc, Category.assoc, ← Mod.comp_hom', Iso.hom_inv_id_app, Mod.id_hom',
+    Category.comp_id, Category.assoc, CondensedRing.geometricFiberProjUpperStarFrobeniusIso, h]
+  exact (Iso.hom_inv_id_app_assoc (purityAbelianFrobeniusFactorIso a) M.X _).symm
 
 attribute [local instance 20000] ProEtale.laxBraided_upperStar_of_weaklyEtale
 
@@ -91,13 +91,17 @@ theorem purityExtendPullbackIso_weil
   have : IsIso (purityFrobeniusProjUnit Λ a M) := by
     dsimp only [purityFrobeniusProjUnit]
     infer_instance
+  have hunit : CondensedRing.upperStarUnitHom Λ a.geometricFiberProj M ≫
+        (purityExtendWeakPullbackIso Λ a.geometricFiberProj M N e).hom.hom =
+      e.hom.hom ≫ CondensedRing.upperStarUnitHom Λ a.geometricFiberProj N := by
+    exact purityExtendWeakPullbackIso_unit Λ a.geometricFiberProj M N e
   refine Mod.hom_ext _ _ ?_
   rw [← cancel_epi (purityFrobeniusProjUnit Λ a M), Mod.zsmul_hom,
     Preadditive.comp_zsmul, Mod.comp_hom', Mod.comp_hom',
     purityFrobeniusProjUnit_structure_assoc,
-    purityExtendWeakPullbackIso_unit, purityFrobeniusProjUnit, Category.assoc,
+    hunit, purityFrobeniusProjUnit, Category.assoc,
     CondensedRing.upperStarUnitHom_map_hom_assoc, ← Functor.map_comp_assoc,
-    purityExtendWeakPullbackIso_unit, Functor.map_comp_assoc,
+    hunit, Functor.map_comp_assoc,
     purityFrobeniusProjUnit_structure, ← Category.assoc, he,
     Preadditive.zsmul_comp, Category.assoc]
 

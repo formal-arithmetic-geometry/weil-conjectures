@@ -341,3 +341,7 @@ BLOCKED: I have not constructed the general Weil purity morphism. The missing co
 ## 2026-11-05 08:21 +0800 — generic Frobenius law rewrite repair
 - K4-20261105T081728.log rc=1 (131s) validates the rational comparison again, then reports two rewrite failures in ScalarWeilLaw: rewriting Functor.comp_obj inside a dependent identity motive, and an associativity mismatch caused by the unfolded composite-unit abbreviation. A kernel timeout followed the failed law proof.
 - Replaced the first proof by a fully generic isomorphism-square lemma, named the composite unit with a transparent def, and made its IsIso instance explicit. Aligned the weakly-etale instance choice across the whole file. No heartbeat changes. Next check includes the drafted coefficient-change and actual Tate encoding chain so further independent errors appear in one batch.
+
+## 2026-11-05 08:24 +0800 — small generic rewrite boundary
+- K4-20261105T082207.log rc=1 (11s for ScalarWeilLaw): stable generic/rational helpers GREEN, copied C4 root modules replayed successfully. Kernel timeout is gone. Two elaboration failures remain: conversion of the inverse-square hypothesis into the categorical helper, and rewrite matching through the transparent purityPullbackUnit wrapper.
+- Returned the structure proof to the direct inverse cancellation, omitting only the offending dependent Functor.comp_obj rewrite; gave the unit equation an explicit original-unit type before rewriting. New final encoding still pending.
