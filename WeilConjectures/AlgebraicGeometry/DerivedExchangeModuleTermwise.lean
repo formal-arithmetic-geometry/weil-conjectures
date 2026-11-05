@@ -63,9 +63,9 @@ private theorem square_factors
     [CategoryTheory.Limits.PreservesFiniteLimits H]
     [CategoryTheory.Limits.PreservesFiniteColimits H]
     (e : G ⋙ L' ≅ L ⋙ H) (N : HomotopyCategory C (.up ℤ)) :
-    ((Functor.mapDerivedCategoryCompIso G L').hom ≫
+    ((Functor.mapDerivedCategoryCompIso G L').inv ≫
       (Functor.mapDerivedCategoryNatIso e).hom ≫
-      (Functor.mapDerivedCategoryCompIso L H).inv).app (DerivedCategory.Qh.obj N) ≫
+      (Functor.mapDerivedCategoryCompIso L H).hom).app (DerivedCategory.Qh.obj N) ≫
       H.mapDerivedCategory.map (L.mapDerivedCategoryFactorsh.hom.app N) ≫
       H.mapDerivedCategoryFactorsh.hom.app ((L.mapHomotopyCategory (.up ℤ)).obj N) =
     L'.mapDerivedCategory.map (G.mapDerivedCategoryFactorsh.hom.app N) ≫
