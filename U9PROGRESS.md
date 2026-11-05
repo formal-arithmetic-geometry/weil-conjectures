@@ -169,14 +169,16 @@
 - Completion marker: `/home/ubuntu/u9/state/BZ585.DONE`.
 - Final documentation commit leaves Lean source identical to the green revision.
 
-# BZ621 in progress
 
-- Branch: `u9/BZ621`; starting commit: `b7a97a5ed`.
-- The import-only remote check at `83e9112438` cleared five of six errors.
-- The user instructed continuation after the exact one-line identity-cast proposal.
-  Applied `cast (by rfl)` to the public formula's homotopy counit; its mathematical
-  morphism is unchanged. Existing binders, hypotheses, RHS, and docstrings are unchanged.
-- The brief and this progress file were reread; there are no new LEAD lines.
-- Next: validate the assigned module with `ucheck-bump`, then direct importers.
-- Fix patterns, inventories, and logs: `/home/ubuntu/u9/bz/FIXES-BZ621.md`.
+# BZ630 in progress
+
+- Branch: `u9/BZ630`; starting commit: `b7a97a5ed`.
+- Read the brief again on continuation; there are no appended LEAD overrides.
+- The user instructed continuation after the explicit endpoint-transport statement proposal.
+  That exact patch is applied; the proof reduces the new transport to an identity.
+- The Localization public/import-all imports restore the opaque implementation in the proof.
+- Original ucheck-bump is queued; it will build the newly pushed branch once a tree is free.
+- Next: validate the assigned module, then attempt its direct importer and follow the
+  external-dependency skip rule if BZ631's target-transport module fails.
+- Notes and pattern counts: `/home/ubuntu/u9/bz/FIXES-BZ630.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, heartbeat raises, or profiler probes.
