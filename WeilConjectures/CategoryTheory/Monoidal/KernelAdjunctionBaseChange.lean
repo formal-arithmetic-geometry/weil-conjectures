@@ -180,7 +180,7 @@ lemma map_unit_comp_kernelPushforwardComparison
   simp only [B.map_comp, assoc]
   erw [adjB.counit_naturality, adjB.left_triangle_components_assoc]
   rw [reassoc_of% h₁, ← Δ'.map_comp, h₂, hιF, Δ'.map_comp, ← reassoc_of% h₃,
-    Iso.inv_hom_id_app_assoc]
+    Iso.hom_inv_id_app_assoc]
   exact h₄.symm
 
 /-- **The first triangle identity from the integral along `b`.** The unit given by a kernel

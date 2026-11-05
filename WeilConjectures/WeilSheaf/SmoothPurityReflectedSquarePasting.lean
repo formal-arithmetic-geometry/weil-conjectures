@@ -94,7 +94,7 @@ lemma compForgetIso_conjugate :
     Functor.whiskerRight_app, Functor.associator_hom_app, Functor.associator_inv_app,
     Category.id_comp, Category.comp_id, Functor.map_comp, Functor.map_id,
     Functor.comp_obj, Functor.comp_map, Category.assoc]
-  simp only [← Functor.map_comp_assoc, Iso.inv_hom_id_app_assoc]
+  simp only [← Functor.map_comp_assoc, Iso.hom_inv_id_app_assoc]
 
 end CategoryTheory.Adjunction
 

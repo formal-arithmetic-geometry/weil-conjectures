@@ -159,7 +159,7 @@ lemma map_μ_comp_trans_hom_app {F : C ⥤ D} [F.Monoidal] {A B : D ⥤ E} [A.Mo
   have hA' : A.map (μ F Y X) ≫ cA.inv.app (Y ⊗ X) ≫ δ H Y X =
       δ A _ _ ≫ (cA.inv.app Y ⊗ₘ cA.inv.app X) := by
     rw [← cancel_mono (cA.hom.app Y ⊗ₘ cA.hom.app X), assoc, assoc, hA,
-      Iso.inv_hom_id_app_assoc, ← A.map_comp_assoc, Functor.Monoidal.μ_δ, A.map_id, id_comp,
+      Iso.hom_inv_id_app_assoc, ← A.map_comp_assoc, Functor.Monoidal.μ_δ, A.map_id, id_comp,
       assoc, tensorHom_comp_tensorHom, Iso.inv_hom_id_app, Iso.inv_hom_id_app]
     simp
   have hB' : cB.hom.app (Y ⊗ X) =
@@ -177,7 +177,7 @@ lemma trans_hom_app_tensorUnit_comp_η {F : C ⥤ D} [F.Monoidal] {A B : D ⥤ E
     (hB : cB.hom.app (𝟙_ C) ≫ B.map (η F) ≫ η B = η H) :
     (cA.symm ≪≫ cB).hom.app (𝟙_ C) ≫ B.map (η F) ≫ η B = A.map (η F) ≫ η A := by
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, assoc]
-  rw [hB, ← hA, Iso.inv_hom_id_app_assoc]
+  rw [hB, ← hA, Iso.hom_inv_id_app_assoc]
 
 /-- **Comparing two factorizations of a monoidal functor, on the outside.** Let
 `cA : H ≅ A ⋙ Δ` and `cB : H ≅ B ⋙ Δ` be isomorphisms compatible with the comonoidal structures
@@ -195,7 +195,7 @@ lemma trans_hom_app_tensor {A B : C ⥤ D} [A.Monoidal] [B.Monoidal] {Δ : D ⥤
         μ Δ _ _ ≫ Δ.map (μ B X Y) := by
   have hA' : cA.inv.app (X ⊗ Y) ≫ δ H X Y =
       Δ.map (δ A X Y) ≫ δ Δ _ _ ≫ (cA.inv.app X ⊗ₘ cA.inv.app Y) := by
-    rw [← cancel_mono (cA.hom.app X ⊗ₘ cA.hom.app Y), assoc, hA, Iso.inv_hom_id_app_assoc,
+    rw [← cancel_mono (cA.hom.app X ⊗ₘ cA.hom.app Y), assoc, hA, Iso.hom_inv_id_app_assoc,
       assoc, assoc, tensorHom_comp_tensorHom, Iso.inv_hom_id_app, Iso.inv_hom_id_app]
     simp
   have hB' : cB.hom.app (X ⊗ Y) =

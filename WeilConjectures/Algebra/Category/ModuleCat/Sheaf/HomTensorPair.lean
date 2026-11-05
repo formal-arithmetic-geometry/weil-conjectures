@@ -40,7 +40,7 @@ private noncomputable def tensorHomCurryApp_pair (φ : M ⊗ P ⟶ N) {U : C} (p
     refine (congrArg (fun q : P.obj (op W'.unop.left) ↦
       (show M.obj (op W'.unop.left) from M.map f.unop.left.op m)
         ⊗ₜ[R.obj (op W'.unop.left)] q) ?_).trans
-        (Monoidal.tensorObj_map_tmul f.unop.left.op m _).symm
+        (PresheafOfModulesOfCommRing.Monoidal.tensorObj_map_tmul f.unop.left.op m _).symm
     rw [← map_comp_apply, ← op_comp, Over.w]
 
 @[local simp]
