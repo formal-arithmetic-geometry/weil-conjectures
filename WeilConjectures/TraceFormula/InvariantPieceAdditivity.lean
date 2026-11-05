@@ -198,10 +198,33 @@ lemma preimage_le_of_isPullback (U : X.left.Opens)
   congr 1
   rw [← Scheme.Hom.comp_apply, hsq.isoPullback_inv_fst]
 
+/-- `Li^* Rc₁_! Lc₂^* (j_! B) = 0` when `c₂` maps `C_Z = c₁⁻¹(Z)` into `Z` and `j` misses `Z`: by
+compact-support base change in the cartesian square `i' ≫ c₁ = c_{1Z} ≫ i` it is
+`Rc_{1Z!} Li'^* Lc₂^* (j_! B) = Rc_{1Z!} Lc_{2Z}^* Li^* j_! B = 0`. -/
+lemma isZero_upperStar_lowerShriek_upperStar_openImmersionLowerShriek
+    (sq : IsPullback i' c₁Z c.c₁ i) (w₂ : i' ≫ c.c₂ = c₂Z ≫ i)
+    {U : Over (Spec (.of k))} [LocallyOfFiniteType U.hom] [QuasiCompact U.hom]
+    [IsSeparated U.hom] (j : U ⟶ X) [IsOpenImmersion j.left]
+    (hji : Disjoint (Set.range j.left.base) (Set.range i.left.base))
+    (B : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    IsZero ((boundedConstructibleUpperStar _ ℓ i).obj
+      ((boundedConstructibleLowerShriek ℓ c.c₁).obj
+        ((boundedConstructibleUpperStar _ ℓ c.c₂).obj
+          ((boundedConstructibleOpenImmersionLowerShriek _ ℓ j).obj B)))) := by
+  have := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq
+  refine IsZero.of_iso ?_
+    (asIso ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq).app _))
+  have hrange : Disjoint (Set.range j.left.base) (Set.range (i' ≫ c.c₂).left.base) := by
+    refine hji.mono_right ?_
+    rw [w₂, Over.comp_left, Scheme.Hom.comp_base, TopCat.coe_comp]
+    exact Set.range_comp_subset_range _ _
+  exact (boundedConstructibleLowerShriek ℓ c₁Z).map_isZero
+    ((isZero_boundedConstructibleUpperStar_obj_openImmersionLowerShriek _ ℓ j (i' ≫ c.c₂) hrange
+      B).of_iso ((boundedConstructibleUpperStarComp _ ℓ i' c.c₂).app _).symm)
+
 /-- There is no morphism of degree `-1` from the class `Rc_! ℚ̄_ℓ` of the support of `c` to
-`Ri_* A ⊠ D_X (j_! B)` when `c₂` maps `C_Z = c₁⁻¹(Z)` into `Z`: by compact-support base change in
-the cartesian square `i' ≫ c₁ = c_{1Z} ≫ i`,
-`Li^* Rc₁_! Lc₂^* (j_! B) ≅ Rc_{1Z!} Li'^* Lc₂^* (j_! B) = Rc_{1Z!} Lc_{2Z}^* Li^* j_! B = 0`. -/
+`Ri_* A ⊠ D_X (j_! B)` when `c₂` maps `C_Z = c₁⁻¹(Z)` into `Z`
+(`isZero_upperStar_lowerShriek_upperStar_openImmersionLowerShriek`). -/
 lemma eq_zero_of_lowerShriek_support_of_isClosedImmersion
     (sq : IsPullback i' c₁Z c.c₁ i) (w₂ : i' ≫ c.c₂ = c₂Z ≫ i)
     {U : Over (Spec (.of k))} [LocallyOfFiniteType U.hom] [QuasiCompact U.hom]
@@ -216,16 +239,7 @@ lemma eq_zero_of_lowerShriek_support_of_isClosedImmersion
     φ = 0 := by
   refine eq_zero_of_lowerShriek_unit_of_lowerStar i A _ _ ?_ φ
   rw [support_fst, support_snd]
-  have := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq
-  refine IsZero.of_iso ?_
-    (asIso ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq).app _))
-  have hrange : Disjoint (Set.range j.left.base) (Set.range (i' ≫ c.c₂).left.base) := by
-    refine hji.mono_right ?_
-    rw [w₂, Over.comp_left, Scheme.Hom.comp_base, TopCat.coe_comp]
-    exact Set.range_comp_subset_range _ _
-  exact (boundedConstructibleLowerShriek ℓ c₁Z).map_isZero
-    ((isZero_boundedConstructibleUpperStar_obj_openImmersionLowerShriek _ ℓ j (i' ≫ c.c₂) hrange
-      B).of_iso ((boundedConstructibleUpperStarComp _ ℓ i' c.c₂).app _).symm)
+  exact c.isZero_upperStar_lowerShriek_upperStar_openImmersionLowerShriek sq w₂ j hji B
 
 variable [IsClosedImmersion i.left] [IsClosedImmersion i'.left]
 
@@ -253,6 +267,109 @@ theorem traceClass_eq_add_of_isClosedImmersion (F : c.FixedLocus) (U : X.left.Op
     (eq_zero_of_externalProduct_openPiece_of_disjoint (opensOverι U) i hji _ _ K _)
     (eq_zero_of_externalProduct_closedPiece_of_disjoint (opensOverι U) i hji _ _ K _)
     (eq_zero_of_externalProduct_shift_to_diag_of_disjoint (opensOverι U) i hji _ _)
+
+
+omit [IsClosedImmersion i.left] [IsClosedImmersion i'.left] in
+/-- No morphism `T ⟶ (Ri_* A)⟦n⟧` is nonzero when `Li^* T = 0`. -/
+lemma eq_zero_of_isZero_upperStar_shift {T : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+    (hT : IsZero ((boundedConstructibleUpperStar _ ℓ i).obj T))
+    (A : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (n : ℤ)
+    (φ : T ⟶ (shiftFunctor _ n).obj ((boundedConstructibleLowerStar ℓ i).obj A)) : φ = 0 := by
+  have e := ((boundedConstructibleLowerStar ℓ i).commShiftIso n).app A
+  rw [← cancel_mono e.inv, zero_comp]
+  exact eq_zero_of_isZero_upperStar i hT _
+
+omit [IsClosedImmersion i'.left] in
+/-- **Uniqueness of the open piece coefficient** (blueprint
+`lemma-lift-correspondence-invariant-decomposition`): when `c₂` maps `C_Z = c₁⁻¹(Z)` into the
+closed complement `Z` of `U`, the open piece coefficient `u_U` is the only coefficient map on
+`K_U = j_! Lj^* K` compatible with `u` along the counit `ε : K_U ⟶ K`. -/
+theorem eq_openPieceCoeff_of_comp_map_counit (U : X.left.Opens)
+    (hUi : IsCompl (Set.range (opensOverι U).left.base) (Set.range i.left.base))
+    (sq : IsPullback i' c₁Z c.c₁ i) (w₂ : i' ≫ c.c₂ = c₂Z ≫ i)
+    (v : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂).obj
+        (openPiece K U) ⟶
+      (boundedConstructibleUpperShriek ℓ c.c₁).obj (openPiece K U))
+    (hv : v ≫ (boundedConstructibleUpperShriek ℓ c.c₁).map
+          ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ
+            (opensOverι U)).counit.app K) =
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂).map
+          ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ
+            (opensOverι U)).counit.app K) ≫ c.u) :
+    v = c.openPieceCoeff U (c.preimage_le_of_isPullback U hUi sq w₂) := by
+  have key : ∀ g : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂).obj
+      (openPiece K U) ⟶ (boundedConstructibleUpperShriek ℓ c.c₁).obj ((shiftFunctor _ (-1 : ℤ)).obj
+        ((boundedConstructibleLowerStar ℓ i).obj
+          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K))), g = 0 := by
+    intro g
+    rw [← ((boundedConstructibleUpperShriekAdjunction ℓ c.c₁).homEquiv _ _).apply_symm_apply g,
+      eq_zero_of_isZero_upperStar_shift
+        (c.isZero_upperStar_lowerShriek_upperStar_openImmersionLowerShriek sq w₂ (opensOverι U)
+          hUi.disjoint _) _ _
+        (((boundedConstructibleUpperShriekAdjunction ℓ c.c₁).homEquiv _ _).symm g),
+      Adjunction.homEquiv_unit, Functor.map_zero, comp_zero]
+  rw [← sub_eq_zero]
+  obtain ⟨δ, hT⟩ := exists_distTriang_openImmersionLowerShriek_lowerStar (opensOverι U) i hUi K
+  have hT' := (boundedConstructibleUpperShriek ℓ c.c₁).map_distinguished _
+    (Pretriangulated.inv_rot_of_distTriang _ hT)
+  obtain ⟨g, hg⟩ := Pretriangulated.Triangle.coyoneda_exact₂ _ hT'
+    (v - c.openPieceCoeff U (c.preimage_le_of_isPullback U hUi sq w₂)) (by
+      change _ ≫ (boundedConstructibleUpperShriek ℓ c.c₁).map
+        ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ
+          (opensOverι U)).counit.app K) = 0
+      rw [Preadditive.sub_comp, hv, openPieceCoeff_comp_map_counit, sub_self])
+  rw [hg, key g, zero_comp]
+
+/-- **Uniqueness of the closed piece coefficient** (blueprint
+`lemma-lift-correspondence-invariant-decomposition`, `lemma-closed-piece-pushforward`): when `c₂`
+maps `C_Z = c₁⁻¹(Z)` into `Z`, the closed piece coefficient `u_Z = [i, i']_! u_{|Z}` is the only
+coefficient map on `K_Z = Ri_* Li^* K` compatible with `u` along the unit `η : K ⟶ K_Z`. -/
+theorem eq_closedPieceCoeff_of_upperStar_map_unit_comp (U : X.left.Opens)
+    (hUi : IsCompl (Set.range (opensOverι U).left.base) (Set.range i.left.base))
+    (sq : IsPullback i' c₁Z c.c₁ i) (w₂ : i' ≫ c.c₂ = c₂Z ≫ i)
+    (v : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂).obj
+        ((boundedConstructibleLowerStar ℓ i).obj
+          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K)) ⟶
+      (boundedConstructibleUpperShriek ℓ c.c₁).obj
+        ((boundedConstructibleLowerStar ℓ i).obj
+          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K)))
+    (hv : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂).map
+          ((boundedConstructibleUpperStarLowerStarAdjunction ℓ i).unit.app K) ≫ v =
+      c.u ≫ (boundedConstructibleUpperShriek ℓ c.c₁).map
+          ((boundedConstructibleUpperStarLowerStarAdjunction ℓ i).unit.app K)) :
+    v = (c.closedPieceDiagram sq w₂).pushforwardCoeff := by
+  have hz := c.isZero_upperStar_lowerShriek_upperStar_openImmersionLowerShriek sq w₂
+    (opensOverι U) hUi.disjoint ((boundedConstructibleUpperStar _ ℓ (opensOverι U)).obj K)
+  have hz' : IsZero ((boundedConstructibleUpperStar _ ℓ i).obj
+      ((boundedConstructibleLowerShriek ℓ c.c₁).obj ((shiftFunctor _ (1 : ℤ)).obj
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂).obj
+          (openPiece K U))))) :=
+    ((shiftFunctor _ (1 : ℤ)).map_isZero hz).of_iso
+      ((boundedConstructibleUpperStar _ ℓ i).mapIso
+          (((boundedConstructibleLowerShriek ℓ c.c₁).commShiftIso (1 : ℤ)).app _) ≪≫
+        ((boundedConstructibleUpperStar _ ℓ i).commShiftIso (1 : ℤ)).app _)
+  have key : ∀ g : (shiftFunctor _ (1 : ℤ)).obj
+      ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂).obj
+        (openPiece K U)) ⟶
+      (boundedConstructibleUpperShriek ℓ c.c₁).obj
+        ((boundedConstructibleLowerStar ℓ i).obj
+          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K)), g = 0 := by
+    intro g
+    rw [← ((boundedConstructibleUpperShriekAdjunction ℓ c.c₁).homEquiv _ _).apply_symm_apply g,
+      eq_zero_of_isZero_upperStar i hz'
+        (((boundedConstructibleUpperShriekAdjunction ℓ c.c₁).homEquiv _ _).symm g),
+      Adjunction.homEquiv_unit, Functor.map_zero, comp_zero]
+  rw [← sub_eq_zero]
+  obtain ⟨δ, hT⟩ := exists_distTriang_openImmersionLowerShriek_lowerStar (opensOverι U) i hUi K
+  have hT' :=
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂).map_distinguished _ hT
+  obtain ⟨g, hg⟩ := Pretriangulated.Triangle.yoneda_exact₃ _ hT'
+    (v - (c.closedPieceDiagram sq w₂).pushforwardCoeff)
+    ((Preadditive.comp_sub _ _ _).trans
+      (sub_eq_zero.2 (hv.trans (c.upperStar_map_unit_comp_closedPieceCoeff sq w₂).symm)))
+  refine hg.trans ?_
+  have hg0 := key g
+  simp only [hg0, comp_zero]
 
 end Correspondence
 
