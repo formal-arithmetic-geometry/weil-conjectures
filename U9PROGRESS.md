@@ -81,21 +81,29 @@
 - No local Lean/Lake, proof placeholders, trust escapes, or heartbeat increases.
 - This final commit changes only progress documentation after the successful build.
 
-# BZ287 in progress
+# BZ287 complete
 
 - Branch: `u9/BZ287`; starting commit: `18e44f2d5`.
-- Owned module: `WeilConjectures.TraceFormula.CurveLocal.SectionsRestriction`.
-- Reread `/home/ubuntu/u9/briefs/BZ287.md` after the user's continuation instruction.
-- The user instructed continuation after the exact one-line statement-syntax proposal;
-  applied `BZ287-statement-syntax-proposal.patch`, moving `.symm` after both functor arguments.
-- Prepared the same composition-isomorphism orientation fix inside the proof in
-  `TraceFormula.CurveLocal.DerivedFiniteEtaleTrace` (a direct importer).
-- The original ucheck-bump request is queued; pushing this commit allows that request
-  to validate the corrected source once it obtains a tree. The eventual log's commit
-  identifies the source actually checked.
-- Fix patterns and inventories: `/home/ubuntu/u9/bz/FIXES-BZ287.md`.
-- No local Lean/Lake, forbidden proof escapes, heartbeat raises or profiler probes.
-- Core validation succeeded at `20c9b2e93fd5c191dd08375caec64c9c99169d6b`:
-  `SectionsRestriction` built in 3.4s; Build completed successfully (3876 jobs).
-  Log: `/home/ubuntu/u9/bz/BUILD-BZ287-core-full.log`.
-- Next: validate the four direct importers with ucheck-bump; skip out-of-unit blockers.
+- Assigned module `WeilConjectures.TraceFormula.CurveLocal.SectionsRestriction`
+  passed ucheck-bump at `20c9b2e93fd5c191dd08375caec64c9c99169d6b`:
+  Build completed successfully (3876 jobs), module compiled in 3.4s.
+- Verified build-host pins: Lean `v4.35.0-rc3`, Mathlib
+  `b63f6e8a68d220e3b3bc4f3792bb53650d375f24`.
+- The user instructed continuation after the exact one-line statement syntax proposal.
+  That correction moves `.symm` after both compositor arguments. All other text in
+  the assigned Lean module is unchanged.
+- All four direct importers were attempted. `SectionsRestrictionGlobal` and
+  `BlowupRestriction` are blocked by outside-unit `DerivedUnitLerayComp`;
+  `DerivedFiniteEtaleTrace` and `SectionsRestrictionOpen` are blocked by
+  outside-unit `SixFunctors.Finite.Stalk` (BZ293). Skipped per the brief.
+- The large first downstream batch was stopped after external failures; its
+  runner returned zero on cancellation, so it is explicitly NOT a green build.
+- Removed the unvalidated downstream proof edit; saved it as
+  `/home/ubuntu/u9/bz/BZ287-downstream-compositor-candidate.patch` for later use.
+  Only the assigned Lean module and this progress file differ from the start.
+- Core full log: `/home/ubuntu/u9/bz/BUILD-BZ287-core-full.log`.
+  Downstream logs: `BUILD-BZ287-downstream1-full.log` and
+  `BUILD-BZ287-downstream-unblocked-full.log` under the same directory.
+- Fix patterns: `/home/ubuntu/u9/bz/FIXES-BZ287.md`.
+- Completion marker: `/home/ubuntu/u9/state/BZ287.DONE`.
+- No local Lean/Lake, proof placeholders, trust escapes, heartbeat raises or profiler probes.
