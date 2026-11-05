@@ -172,8 +172,8 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 private theorem fourModels_factors
     (P : CochainComplex (Mod.{c, v, max c v r} J₀ R₀) ℤ) :
-    ((Functor.mapDerivedCategoryCompIso F G).symm ≪≫
-      Functor.mapDerivedCategoryNatIso θ ≪≫ Functor.mapDerivedCategoryCompIso H I).hom.app
+    (Functor.mapDerivedCategoryCompIso F G ≪≫
+      Functor.mapDerivedCategoryNatIso θ ≪≫ (Functor.mapDerivedCategoryCompIso H I).symm).hom.app
         (DerivedCategory.Q.obj P) ≫ (twoFactors.{c, v, r} J₀ J₂ J₃ R₀ R₂ R₃ H I P).hom =
     (twoFactors.{c, v, r} J₀ J₁ J₃ R₀ R₁ R₃ F G P).hom ≫
       DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex θ.hom (.up ℤ)).app P) := by
@@ -182,7 +182,7 @@ private theorem fourModels_factors
   rw [Functor.mapDerivedCategoryCompIso_hom_app_factors]
   rw [Functor.mapDerivedCategoryNatIso_fac]
   erw [← Functor.mapDerivedCategoryCompIso_hom_app_factors F G P]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 private theorem fourModels_composite
