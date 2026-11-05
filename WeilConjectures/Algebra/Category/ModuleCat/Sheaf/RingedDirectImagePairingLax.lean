@@ -172,7 +172,6 @@ namespace SheafOfModules
 
 set_option autoImplicit false
 set_option Elab.async false
-set_option linter.unusedSectionVars false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
@@ -195,6 +194,7 @@ private noncomputable def unitSection (U : Eᵒᵖ) :
       ((sheafCompose H (forget₂ CommRingCat.{w} RingCat.{w})).obj A))).val.obj U :=
   LinearEquiv.refl _ _
 
+set_option linter.unusedSectionVars false in
 private theorem unitSection_smul_one (U : Eᵒᵖ)
     (x : (𝟙_ (SheafOfModules.{w}
       ((sheafCompose H (forget₂ CommRingCat.{w} RingCat.{w})).obj A))).val.obj U) :
@@ -203,6 +203,7 @@ private theorem unitSection_smul_one (U : Eᵒᵖ)
   rw [smul_eq_mul, mul_one] at h
   exact h.symm.trans ((unitSection A U).apply_symm_apply x)
 
+set_option linter.unusedSectionVars false in
 private theorem unit_hom_ext_one
     (M : SheafOfModules.{w}
       ((sheafCompose H (forget₂ CommRingCat.{w} RingCat.{w})).obj A))
@@ -226,6 +227,7 @@ private noncomputable def pureMap (M N : SheafOfModules.{w}
     (x : M.val.obj U) (y : N.val.obj U) : (M ⊗ N).val.obj U :=
   CochainScalarConstruction.pure A M N U x y
 
+set_option linter.unusedSectionVars false in
 private theorem pureLinearMap_apply (M N : SheafOfModules.{w}
     ((sheafCompose H (forget₂ CommRingCat.{w} RingCat.{w})).obj A)) (U : Eᵒᵖ)
     (x : M.val.obj U) (y : N.val.obj U) :
@@ -240,6 +242,7 @@ private theorem pureMap_eq (M N : SheafOfModules.{w}
           (M.val ⊗ N.val)).app U (x ⊗ₜ[A.obj.obj U] y)) := by
   rfl
 
+set_option linter.unusedSectionVars false in
 private theorem pureMap_restrict (M N : SheafOfModules.{w}
     ((sheafCompose H (forget₂ CommRingCat.{w} RingCat.{w})).obj A))
     {U V : Eᵒᵖ} (f : U ⟶ V) (x : M.val.obj U) (y : N.val.obj U) :
@@ -247,6 +250,7 @@ private theorem pureMap_restrict (M N : SheafOfModules.{w}
       (M ⊗ N).val.map f (pureMap A M N U x y) := by
   exact (CategoryTheory.CochainPullback.moduleTmul_restrict M N f x y).symm
 
+set_option linter.unusedSectionVars false in
 private theorem pureMap_naturality
     {M M' N N' : SheafOfModules.{w}
       ((sheafCompose H (forget₂ CommRingCat.{w} RingCat.{w})).obj A)}
@@ -256,6 +260,7 @@ private theorem pureMap_naturality
       pureMap A M' N' U (f.val.app U x) (g.val.app U y) := by
   exact CategoryTheory.CochainPullback.moduleTmul_map f g U x y
 
+set_option linter.unusedSectionVars false in
 private theorem pureMap_associator (M N T : SheafOfModules.{w}
     ((sheafCompose H (forget₂ CommRingCat.{w} RingCat.{w})).obj A))
     (U : Eᵒᵖ) (x : M.val.obj U) (y : N.val.obj U) (z : T.val.obj U) :
@@ -264,6 +269,7 @@ private theorem pureMap_associator (M N T : SheafOfModules.{w}
         pureMap A M (N ⊗ T) U x (pureMap A N T U y z) := by
   exact CategoryTheory.CochainPullback.moduleTmul_associator M N T U x y z
 
+set_option linter.unusedSectionVars false in
 private theorem pureMap_rightUnitor (M : SheafOfModules.{w}
     ((sheafCompose H (forget₂ CommRingCat.{w} RingCat.{w})).obj A))
     (U : Eᵒᵖ) (x : M.val.obj U)
@@ -321,6 +327,7 @@ private theorem pureMap_ext
   intro U x y
   simpa only [pureMap_eq, CochainScalarConstruction.pure] using h U x y
 
+set_option linter.unusedSectionVars false in
 private theorem presheaf_tensor_ext₃
     (P Q T Z : PresheafOfModules.{w}
       ((sheafCompose H (forget₂ CommRingCat.{w} RingCat.{w})).obj A).obj)
@@ -333,8 +340,6 @@ private theorem presheaf_tensor_ext₃
   intro U
   exact ModuleCat.MonoidalCategory.tensor_ext₃' (h U)
 
-set_option maxHeartbeats 600000 in
--- Elaborating the localization comparison needs additional heartbeats.
 -- Compare the localization and sheafification tensor interfaces.
 private theorem pureMap_ext₃
     (M N T Q : SheafOfModules.{w}
@@ -462,6 +467,7 @@ private theorem sectionTensorData
     unit_ext := unit_hom_ext_one A
     left_one := pureMap_leftUnitor_one A }
 
+set_option linter.unusedSectionVars false in
 private theorem unitTo_section (U : Cᵒᵖ)
     (r : (𝟙_ (SheafOfModules.{w}
       ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R))).val.obj U) :
@@ -516,6 +522,7 @@ private theorem sectionPushData
         exact congrArg (unitSection S (v.op.obj U)) (c.hom.app U).hom.map_one
       regular := fun U r ↦ pureMap_leftUnitor_regular S (v.op.obj U) r }
 
+set_option linter.unusedSectionVars false in
 private theorem tensorator_exists :
     ∃ μ : ∀ (M N : ringedSiteModules.{w}
         ((sheafCompose K (forget₂ CommRingCat.{w} RingCat.{w})).obj S)),

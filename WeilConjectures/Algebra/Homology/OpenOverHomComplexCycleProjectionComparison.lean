@@ -34,8 +34,8 @@ noncomputable local instance (priority := 2000) openOverHomComplexCycleProjectio
 attribute [local irreducible] Scheme.Modules.restrictFunctor SheafOfModules.overFunctor
 attribute [local irreducible] homComplexFunctor
 
-set_option maxHeartbeats 2000000 in
--- Elaborating the restricted complexes and comparison maps needs this larger budget.
+set_option maxHeartbeats 800000 in
+-- Elaborating the restricted complexes and comparison maps exceeds the default budget.
 /-- The projection square on Hom cycles and the cycle-to-homology quotient square.
 Source: Stacks Project, Tags 0A8X and 08DL; steps 1 and 2 of the parent plan.
 (blueprint: new-t4-open-over-hom-complex-cycle-projection-comparison).

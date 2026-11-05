@@ -38,8 +38,6 @@ variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
   [J.HasSheafCompose (forget (ModuleCat.{u + 1} S))]
   [J.WEqualsLocallyBijective (ModuleCat.{u + 1} S)]
 
-set_option synthInstance.maxHeartbeats 400000 in
--- `HasWeakSheafify` for sheaves of modules over the two rings is slow to synthesize
 /-- **Restricting the scalars of the extension gives the tensor product with `S`.** For a
 sheaf `F` of `R`-modules, the extension `S ⊗_R F` with scalars restricted back to `R` is
 `F ⊗ S_X`, naturally in `F`. -/
