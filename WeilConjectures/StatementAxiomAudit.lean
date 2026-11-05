@@ -17,3 +17,4 @@ the affine-line Thom user in `FourierInversion.OtherSections`) are routed throug
 
 #print axioms AlgebraicGeometry.Scheme.weil_conjectures
 #print axioms LeanEval.AlgebraicGeometry.WeilConjectures.weil_conjectures
+#print axioms AlgebraicGeometry.WeilComplex.exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso

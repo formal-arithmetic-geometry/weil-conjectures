@@ -15,6 +15,8 @@ public import WeilConjectures.WeilSheaf.UpperShriekUnitTensorMap
 public import WeilConjectures.WeilSheaf.UpperStarConstant
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebraComp
 import WeilConjectures.TraceFormula.PurityDevissage
+import WeilConjectures.WeilSheaf.SmoothPurityNativeTateDescent
+import WeilConjectures.WeilSheaf.SmoothPurityOrientationOfTateEncoding
 
 /-!
 # Smooth purity for Weil complexes
@@ -54,20 +56,16 @@ As in the blueprint (`def-pur-smooth-purity-map`), `γ_f` is the composite
 
 ## Unfinished
 
-The identification of the Tate twist with a tensor product is proved. The other two inputs of
-`γ_f` rest on statements with `sorry`:
-- the Weil orientation is lifted from a Frobenius-equivariant isomorphism
-  `Rf̄^! ℚ̄_ℓ ≅ ℚ̄_ℓ(d)[2d]` of underlying complexes
-  (`AlgebraicGeometry.WeilComplex.exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso`,
-  `thm-pur-weil-equivariance-of-purity-and-trace`), which is stated with `sorry`. The condensed
-  orientation `AlgebraicGeometry.ProEtale.CondensedRing.smoothOrientation` is not canonical, and
-  `AlgebraicGeometry.Etale.exists_iso_dualizingComplex_isWeilMorphism` is for finite coefficients
-  over `Spec k₀`;
+The identification of the Tate twist with a tensor product is proved, and so is the
+Frobenius-equivariant orientation
+(`AlgebraicGeometry.WeilComplex.exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso`,
+`thm-pur-weil-equivariance-of-purity-and-trace`), from the native Tate encoding (A3) and the
+invertibility of the exceptional unit base change along `k₀ ⟶ k̄₀` (A1', by Verdier duality).
+The remaining input of `γ_f` rests on a statement with `sorry`:
 - the co-projection map needs the compatibility of forgetting the Weil structure with the native
   tensor product, the projection formula and the counit of `Rf₀! ⊣ Rf^!`. The Weil projection
-  formula is only known to exist, through the proper projection formula
-  `AlgebraicGeometry.WeilComplex.nonempty_rightDerivedLowerStar_nativeDerivedTensor_iso`, which is
-  itself stated with `sorry`.
+  formula is known to exist, through the proper projection formula
+  `AlgebraicGeometry.WeilComplex.nonempty_rightDerivedLowerStar_nativeDerivedTensor_iso`.
 
 The absolute dualizing-complex theorem and the trivial-line Thom theorem use a separate route:
 `WeilConjectures.WeilSheaf.SmoothPurityAbsolute` descends the finite-base dualizing object and
@@ -129,21 +127,16 @@ Frobenius structure of `Rf^! ℚ̄_ℓ` is the exceptional datum
 canonical orientation is compatible with base change along this square
 (`thm-pur-smooth-base-change-coherence`), so it carries the exceptional datum to the Tate datum
 (`def-pur-tate-datum`), which is the Frobenius structure of `ℚ̄_ℓ(d)[2d]`. Equivalently,
-geometric Frobenius acts on `R^{2d} f̄_! ℚ̄_ℓ` by `q^d` through the trace. This is stated with
-`sorry`, for three reasons:
-- the library has no canonical `ℚ̄_ℓ`-orientation. The condensed orientation
-  `AlgebraicGeometry.ProEtale.CondensedRing.smoothOrientation` is a non-canonical isomorphism
-  unless its integral lift (`det-sp-purity-coefficient-change`) is known, and an arbitrary
-  isomorphism need not be equivariant when Frobenius permutes the components of `X̄`;
-- the identification of the Frobenius structure of the Weil `Rf^!` with the exceptional datum is
-  not formalized: the comparison of underlying complexes is only an existence statement;
-- the finite-coefficient form `AlgebraicGeometry.Etale.exists_iso_dualizingComplex_isWeilMorphism`
-  holds over `Spec k₀` and on the étale site, and there is no comparison of the étale `Rf^!`
-  with finite coefficients and the `ℓ`-adic Weil `Rf^!`.
+geometric Frobenius acts on `R^{2d} f̄_! ℚ̄_ℓ` by `q^d` through the trace.
 
-The node itself, the purity square for the purity map `γ_{f,K}` against the data `φ^pur` and
-`φ^!`, is not stated here: the exceptional datum `φ^!` of the geometric `Rf̄^!` along the Frobenius
-square, and its identification with the Weil structure of `Rf^!`, are not formalized. -/
+Proof: the native Tate encoding `α` (A3,
+`AlgebraicGeometry.WeilSheaf.purity_nonempty_toCondensedTateDescentIso`: the Tate twist sheaf is
+the descent of the finite-base root-defined Tate sheaf) and the invertibility of the exceptional
+base change map at the unit along `k₀ ⟶ k̄₀` for every smooth `f` (A1',
+`AlgebraicGeometry.ProEtale.CondensedRing.isIso_smoothUnitBaseChange_descendedShriekGeometricExchange`,
+by Verdier duality) produce the orientation as an isomorphism of native Weil complexes
+(`exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso_of_tateEncoding`), so it
+commutes with the Frobenius structures. -/
 theorem exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso (d : ℕ)
     [SmoothOfRelativeDimension d f] :
     ∃ g : forget.obj ((upperShriek f).obj
@@ -155,8 +148,9 @@ theorem exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso (d : ℕ)
           g.hom =
         (WeilSheaf.frobeniusPullback k₀ l X).mapDerivedCategory.map g.hom ≫
           (Endofunctor.IsoAlgebra.derivedStrIso _).hom.app (((tateTwist k₀ l X d).obj
-            (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)))⟦(2 * d : ℤ)⟧).obj :=
-  sorry
+            (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)))⟦(2 * d : ℤ)⟧).obj := by
+  obtain ⟨α⟩ := WeilSheaf.purity_nonempty_toCondensedTateDescentIso k₀ l X d
+  exact exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso_of_tateEncoding f d α
 
 /-- **The Weil orientation of a smooth morphism** (blueprint:
 `cor-pur-adic-and-rational-smooth-dualizing-complexes`, at the coefficient stage `ℚ̄_ℓ` with Weil
