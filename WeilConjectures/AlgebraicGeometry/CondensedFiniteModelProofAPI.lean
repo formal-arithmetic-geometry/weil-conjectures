@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.CategoryTheory.Monoidal.Mon
 public import Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
 import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
