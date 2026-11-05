@@ -82,7 +82,7 @@ lemma mapDerivedCategoryCompIso_hom_app_singleFunctor (F : C ⥤ D) (G : D ⥤ E
     [F.Additive] [G.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G] (X : C) :
-    (mapDerivedCategoryCompIso F G).hom.app ((DerivedCategory.singleFunctor C 0).obj X) ≫
+    (mapDerivedCategoryCompIso F G).inv.app ((DerivedCategory.singleFunctor C 0).obj X) ≫
         G.mapDerivedCategory.map ((F.mapDerivedCategorySingleFunctor 0).hom.app X) ≫
         (G.mapDerivedCategorySingleFunctor 0).hom.app (F.obj X) =
       ((F ⋙ G).mapDerivedCategorySingleFunctor 0).hom.app X := by
