@@ -12,6 +12,7 @@ import WeilConjectures.AlgebraicGeometry.DerivedOpenLocalization
 import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionQCoh
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.Algebra.Category.Grp.Zero
+import Mathlib.Util.CountHeartbeats
 
 /-! # Comparison of the two derived restrictions to an open subscheme
 
@@ -28,8 +29,7 @@ namespace AlgebraicGeometry
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-attribute [local irreducible] Functor.mapDerivedCategory
-
+#count_heartbeats in
 /-- Exact open restriction, expressed on the localized site or on the open subscheme,
 identifies quasi-coherent cohomology, support, shifted orthogonality and zero objects.
 Source: Stacks Project, Tag 079W, Lemma cohomology-lemma-adjoint, and Tag 0A9A,
