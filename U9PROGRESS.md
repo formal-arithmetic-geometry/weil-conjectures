@@ -1,4 +1,4 @@
-# BZ242 in progress
+# BZ242 complete
 
 - Branch: `u9/BZ242`; starting commit: `c781553bf`.
 - Removed the redundant `rfl` after `erw [Category.id_comp]`; the remote proof-only
@@ -7,9 +7,20 @@
   `derived_single_comp` now uses `(mapDerivedCategoryCompIso G H).inv`, preserving
   the intended morphism after Mathlib reversed the isomorphism orientation.
 - The exported theorem statement and all existing docstrings are unchanged.
-- Source commit `11f8e323b4347c55a07712ed5e944af3d5d4a5ba` is queued in `ucheck-bump`.
-- Next: confirm the target builds, then test its four direct importers and a further layer
-  where dependencies permit, and write `/home/ubuntu/u9/state/BZ242.DONE`.
+- The assigned module and two direct importers passed together with `ucheck-bump`:
+  rc=0, built=9, failed=0, 3850 jobs on `newsrv:/home/ubuntu/u9n/bumpw4`.
+- Validated commit: `ae429d5a5de4d886616a78ad95d67c258d5302e7`.
+- Green modules: `EtalePullbackSingleComp`, `BaseChangePullbackComparisonComp`,
+  `HigherDirectImageRestrictedCoefficientComposition` (all under AlgebraicGeometry).
+- The four-direct-importer batch also checked `HigherDirectImageRawTriangleAdjunct`
+  and `HigherDirectImageTransitionCoreComposition`; skipped because of out-of-scope
+  failures in `SixFunctors.Etale.SmoothBaseChange.Defs` and
+  `CategoryTheory.DerivedCategory.AdjunctionUnit`. Their owners must repair them.
+- The second-layer importers depend on the same failing `SmoothBaseChange.Defs`
+  and were skipped under the brief's dependency rule; exact paths are in the fix notes.
+- Final log: `/home/ubuntu/u9/bz/BUILD-BZ242-final.log`.
+- Completion marker: `/home/ubuntu/u9/state/BZ242.DONE`.
+- This completion update changes only progress documentation after the successful build.
 - Patterns, exact errors, and whole-tree occurrence counts: `/home/ubuntu/u9/bz/FIXES-BZ242.md`.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
 
