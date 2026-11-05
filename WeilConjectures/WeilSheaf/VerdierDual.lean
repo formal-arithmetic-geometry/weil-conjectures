@@ -14,6 +14,7 @@ import WeilConjectures.WeilSheaf.Bidual
 import WeilConjectures.WeilSheaf.DerivedHomSingleResolution
 import WeilConjectures.WeilSheaf.ProperLowerStarAdjoint
 import WeilConjectures.WeilSheaf.SmoothPurity
+import WeilConjectures.WeilSheaf.TateTwistPullback
 import WeilConjectures.CategoryTheory.Adjunction.DualityConjugate
 import WeilConjectures.WeilSheaf.VerdierExchangeNatural
 import WeilConjectures.WeilSheaf.VerdierBiduality
@@ -251,6 +252,33 @@ theorem nonempty_dualizingComplex_iso (d : ℕ)
   nonempty_rightAdjoint_obj_adicConstant_iso_of_smooth d (derivedLowerShriekUpperShriekAdjunction _)
 
 end Smooth
+
+section RelativePurity
+
+variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+  [Y.Over (Spec (CommRingCat.of k₀))] (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))]
+  [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+  [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] [HasUpperShriek k₀ l f]
+
+set_option linter.unusedSectionVars false in
+/-- **Smooth purity for Weil complexes** (blueprint:
+`thm-pur-weil-equivariance-of-purity-and-trace`, the equivariance of the smooth purity
+isomorphism `γ_{f,K} : Lf^* K(d)[2d] ≅ Rf^! K`): for a morphism `f : X ⟶ Y` smooth of relative
+dimension `d`, the purity isomorphism commutes with the Weil structures, so it is an isomorphism
+`Rf^! L ≅ f^*(L(d)[2d])` of Weil complexes, natural in `L`. Only the existence of a natural
+isomorphism is stated here. -/
+theorem nonempty_upperShriek_iso_of_smoothOfRelativeDimension (d : ℕ)
+    [SmoothOfRelativeDimension d f] :
+    Nonempty (upperShriek (k₀ := k₀) (l := l) f ≅
+      (tateTwist k₀ l Y d ⋙ shiftFunctor (WeilComplex k₀ l Y) (2 * d : ℤ)) ⋙ upperStar f) := by
+  obtain ⟨adj⟩ := nonempty_derivedLowerShriek_adjunction_of_smooth (k₀ := k₀) (l := l) f d
+  exact ⟨(derivedLowerShriekUpperShriekAdjunction f).rightAdjointUniq adj ≪≫
+    (tateTwistShiftCompUpperStarIso f d (2 * d : ℤ)).symm⟩
+
+end RelativePurity
 
 section Lisse
 
