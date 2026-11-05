@@ -68,11 +68,14 @@ derived categories. -/
 noncomputable def frobeniusIso :
     forget (k₀ := k₀) (l := l) (X := X) ⋙ (WeilSheaf.frobeniusPullback k₀ l X).mapDerivedCategory ≅
       forget (X := X) :=
+  let F := WeilSheaf.frobeniusPullback k₀ l X
+  let e : IsoAlgebra.forget F ⋙ F ≅ IsoAlgebra.forget F :=
+    IsoAlgebra.forgetCompIso F
+  let c : (IsoAlgebra.forget F ⋙ F).mapDerivedCategory ≅
+      (IsoAlgebra.forget F).mapDerivedCategory ⋙ F.mapDerivedCategory :=
+    Functor.mapDerivedCategoryCompIso (IsoAlgebra.forget F) F
   Functor.isoWhiskerLeft (ObjectProperty.ι _)
-    ((Functor.mapDerivedCategoryCompIso (IsoAlgebra.forget _)
-        (WeilSheaf.frobeniusPullback k₀ l X)).symm ≪≫
-      Functor.mapDerivedCategoryNatIso
-        (IsoAlgebra.forgetCompIso (WeilSheaf.frobeniusPullback k₀ l X)))
+    (c.symm ≪≫ Functor.mapDerivedCategoryNatIso e)
 
 end WeilComplex
 
