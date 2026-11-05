@@ -17,8 +17,6 @@ public import WeilConjectures.WeilSheaf.Native.NativeTwoSidedKFlatRepresentative
 public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationDerivedTensor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalLeftDerived
 import WeilConjectures.WeilSheaf.Native.Projection.StrictProof
-import WeilConjectures.Tactic.TransportExact
-import WeilConjectures.Tactic.ExactModProofs
 
 /-! # Localization of the native pullback tensor square -/
 
@@ -70,13 +68,12 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
     (hP : NativeIsKFlat k₀ l Y P) (hT : NativeIsKFlat k₀ l Y T) :
     DerivedPullTensorSquare k₀ l g (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj T) := by
   projection_strict
-    unfold DerivedPullTensorSquare
     let L := upperStar k₀ l g
     let V := condensedRealization k₀ l Z
     let F := condensedRealization k₀ l Y
     let R := CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
       (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))
-    have h := projection_derived_square_of_model_families L V F R
+    exact projection_derived_square_of_model_families L V F R
       (condensedRealizationUpperStarIso k₀ l g).symm
       (nativeDerivedTensor k₀ l Y) (nativeDerivedTensor k₀ l Z)
       (condensedRealizationTensor k₀ l Y) (condensedRealizationTensor k₀ l Z)
@@ -87,38 +84,14 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
       (nativeOpenTensorModel k₀ l Y) (nativeOpenTensorModel k₀ l Z)
       (nativePullTotalTensor k₀ l g) (condensedRealizationTotalTensorIso k₀ l Y)
       (condensedRealizationTotalTensorIso k₀ l Z)
-      (by
-        have hn := projection_nativePullTensor_normalization k₀ l g
-        unfold ProjectionRestrictionTensorNormalization at hn
-        dsimp only [L, nativeOpenPull]
-        set_option maxHeartbeats 100000 in
-          run_tac do
-            let target ← (← Lean.Elab.Tactic.getMainGoal).getType
-            let ty := Lean.mkForall `h .default target target
-            let pf := Lean.mkLambda `h .default target (.bvar 0)
-            let _ ← Mathlib.Tactic.FirstOrderApply.sealProof ty pf
-            (throwError "K5 diagnostic: normalization type checks with identity" :
-              Lean.Elab.Tactic.TacticM Unit)
-        projection_seal with_reducible cast_proofs hn)
-      (by
-        have hF := projection_native_realization_model_normalization k₀ l Y
-        dsimp only [F, derivedCondensedRealization]
-        with_reducible_and_instances transport_exact hF)
-      (by
-        have hV := projection_native_realization_model_normalization k₀ l Z
-        dsimp only [V, derivedCondensedRealization]
-        with_reducible_and_instances transport_exact hV)
+      (by exact projection_nativePullTensor_normalization k₀ l g)
+      (by exact projection_native_realization_model_normalization k₀ l Y)
+      (by exact projection_native_realization_model_normalization k₀ l Z)
       (fun A B ↦ (R.mapCochainComplexμIso A B).symm)
       (fun A B ↦ (R.mapDerivedCategoryTensorComparison.app A).app B)
       (by exact R.projection_ordinary_model_normalization)
       P T hP hT
-      (by
-        have ht := htotal P T
-        dsimp only [TotalPullTensorSquare, condensedRealizationPullComplexIso, Iso.symm] at ht
-        dsimp only [projection_model_complex_square, L, V, F, R, Iso.symm]
-        with_reducible_and_instances transport_exact ht)
-    dsimp only [L, V, F, R, nativeOpenPull, derivedCondensedRealization] at h ⊢
-    with_reducible_and_instances transport_exact h
+      (by exact htotal P T)
 
 include htotal in
 /-- The native pullback tensor square on arbitrary derived objects, extended from K-flat
