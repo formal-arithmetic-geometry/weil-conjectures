@@ -14,26 +14,35 @@ public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationTensorM
 /-!
 # Transfer of the pullback–tensor comparison to condensed modules
 
-Let `h : Z' ⟶ Y'` be a morphism of schemes and `Λ` a commutative condensed ring. Let `G : B_Y ⥤ B_Z`
-be an exact functor of abelian categories, carrying derived tensor products `D_Y`, `D_Z` computed on
-K-flat models, and a derived pullback–tensor comparison `φ : G(A ⊗ B) ≅ G A ⊗ G B` normalized on
-K-flat representatives by a comparison `t` of total tensor complexes. Let `N_Y : B_Y ⥤ Mod_{Λ_Y'}`
-and `N_Z : B_Z ⥤ Mod_{Λ_Z'}` be exact *realizations* in condensed `Λ`-modules, carrying K-flat
-complexes to K-flat complexes, with derived tensor comparisons `m_Y`, `m_Z` normalized on K-flat
-representatives by comparisons of total tensor complexes, and let `u : N_Y ⋙ h^* ≅ G ⋙ N_Z`.
+Let `g : Z ⟶ Y` be a morphism of `k₀`-schemes and `ḡ` its base change to the geometric fibres.
+Let `G` be an exact functor from pro-étale Weil sheaves on `Y` to those on `Z`, carrying native
+derived tensor products `D_Y`, `D_Z` computed on K-flat models and a derived comparison
+`φ : G(A ⊗ B) ≅ G A ⊗ G B` normalized on K-flat representatives by a comparison `t` of total
+tensor complexes. Let `N_Y`, `N_Z` be exact *realizations* in condensed `ℚ̲̄_ℓ`-modules on the
+geometric fibres, carrying K-flat complexes to K-flat complexes, with derived tensor comparisons
+`m_Y`, `m_Z` normalized on K-flat representatives by comparisons of total tensor complexes, and let
+`u : N_Y ⋙ ḡ^* ≅ G ⋙ N_Z`.
 
-If `u` carries `t` to the comonoidal structure of `h^*` on complexes, then the derived square
-`D(N_Y) ⋙ Lh^* ≅ D(G) ⋙ D(N_Z)` carries `φ` to the comparison
-`Lh^*(K ⊗ᴸ L) ⟶ Lh^* K ⊗ᴸ Lh^* L` of `AlgebraicGeometry.ProEtale.CondensedRing.leftDerivedUpperStarTensor`
-(`AlgebraicGeometry.ProEtale.CondensedRing.comparisonCompatible_of_normalized`): this is the
-hypothesis `CategoryTheory.Adjunction.ComparisonCompatible` under which projection formulas transfer
-along the realizations (`CategoryTheory.Adjunction.isIso_rightAdjointProjectionMap_of_mateEquiv`).
+If `u` carries `t` to the comonoidal structure of `ḡ^*` on complexes, then the derived square
+`D(N_Y) ⋙ Lḡ^* ≅ D(G) ⋙ D(N_Z)` carries `φ` to the comparison `Lḡ^*(K ⊗ᴸ L) ⟶ Lḡ^* K ⊗ᴸ Lḡ^* L`
+of `AlgebraicGeometry.ProEtale.CondensedRing.leftDerivedUpperStarTensor`
+(`AlgebraicGeometry.ProEtaleWeilSheaf.comparisonCompatible_of_normalized`). This is the hypothesis
+`CategoryTheory.Adjunction.ComparisonCompatible` under which projection formulas transfer along
+the realizations (`CategoryTheory.Adjunction.isIso_rightAdjointProjectionMap_of_mateEquiv`); it
+applies to the native pullback with the condensed realization, and to any other exact functor of
+Weil sheaves with a normalized tensor comparison.
 
-The proof is a computation on K-flat representatives, to which every object is isomorphic: there
-all comparisons are localizations of chain maps, and the statement reduces to the given
-compatibility on complexes. The categories `B_Y`, `B_Z` and the functors are kept abstract, so the
-statement can be instantiated with concrete functors (pro-étale Weil sheaves and their
-condensed realizations) without the kernel unfolding them.
+The proof reduces to K-flat representatives, to which every object is isomorphic
+(`CategoryTheory.Adjunction.comparisonCompatible_of_iso`), and there compares both sides after
+the factorizations through `Q` and the lax monoidal structure of `Q`: the left side is the
+localization of `t` and of the realization of `D_Z`
+(`AlgebraicGeometry.ProEtaleWeilSheaf.comparisonCompatible_aux_left`), and the right side is the
+same, through the condensed computation
+`AlgebraicGeometry.ProEtaleWeilSheaf.comparisonCompatible_aux_right`, which is not yet formalized.
+
+The categories are the concrete ones, but the functors and comparisons are variables: the
+statement is then instantiated with concrete functors without the kernel unfolding them, and the
+instance paths of the categories agree with those of the files defining the concrete data.
 -/
 
 @[expose] public section
@@ -56,28 +65,35 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   (g : Z ⟶ Y) [g.IsOver (Spec (CommRingCat.of k₀))]
 
 set_option hygiene false in
+/-- Pro-étale Weil sheaves on `X`. -/
+local notation "𝐖[" X "]" => ProEtaleWeilSheaf k₀ l X
+
+set_option hygiene false in
 /-- Condensed `ℚ̲̄_ℓ`-modules on the geometric fibre of `X`. -/
 local notation "𝐂[" X "]" => CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology
   (Scheme.Hom.geometricFiber (X ↘ Spec (CommRingCat.of k₀)))) Ab.{u + 1})
   (condensedRingObj (Profinite.padicAlgClRingObj l)
     (Scheme.Hom.geometricFiber (X ↘ Spec (CommRingCat.of k₀))))
 
-variable (G : ProEtaleWeilSheaf k₀ l Y ⥤ ProEtaleWeilSheaf k₀ l Z) [G.Additive]
-  [PreservesFiniteLimits G] [PreservesFiniteColimits G]
-  (N_Y : ProEtaleWeilSheaf k₀ l Y ⥤ CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology
-      (Scheme.Hom.geometricFiber (Y ↘ Spec (CommRingCat.of k₀)))) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj l)
-        (Scheme.Hom.geometricFiber (Y ↘ Spec (CommRingCat.of k₀))))) (N_Z : ProEtaleWeilSheaf k₀ l Z ⥤ CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology
-      (Scheme.Hom.geometricFiber (Z ↘ Spec (CommRingCat.of k₀)))) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj l)
-        (Scheme.Hom.geometricFiber (Z ↘ Spec (CommRingCat.of k₀)))))
+set_option hygiene false in
+/-- The condensed pullback along the geometric fibre `ḡ` of `g`. -/
+local notation "𝐠^*" => CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
+  (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))
+
+set_option hygiene false in
+/-- The comparison `Lḡ^*(K ⊗ᴸ L) ⟶ Lḡ^* K ⊗ᴸ Lḡ^* L`. -/
+local notation "𝐦" => CondensedRing.leftDerivedUpperStarTensor (Profinite.padicAlgClRingObj l)
+  (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))
+
+variable (G : 𝐖[Y] ⥤ 𝐖[Z]) [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+  (N_Y : 𝐖[Y] ⥤ 𝐂[Y]) (N_Z : 𝐖[Z] ⥤ 𝐂[Z])
   [N_Y.Additive] [PreservesFiniteLimits N_Y] [PreservesFiniteColimits N_Y]
   [N_Z.Additive] [PreservesFiniteLimits N_Z] [PreservesFiniteColimits N_Z]
-  (TY : CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ ⥤ CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ ⥤ CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ)
-  (TZ : CochainComplex (ProEtaleWeilSheaf k₀ l Z) ℤ ⥤ CochainComplex (ProEtaleWeilSheaf k₀ l Z) ℤ ⥤ CochainComplex (ProEtaleWeilSheaf k₀ l Z) ℤ)
-  (DY : DerivedCategory (ProEtaleWeilSheaf k₀ l Y) × DerivedCategory (ProEtaleWeilSheaf k₀ l Y) ⥤ DerivedCategory (ProEtaleWeilSheaf k₀ l Y))
-  (DZ : DerivedCategory (ProEtaleWeilSheaf k₀ l Z) × DerivedCategory (ProEtaleWeilSheaf k₀ l Z) ⥤ DerivedCategory (ProEtaleWeilSheaf k₀ l Z))
-  (flatY : CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ → Prop) (flatZ : CochainComplex (ProEtaleWeilSheaf k₀ l Z) ℤ → Prop)
+  (TY : CochainComplex 𝐖[Y] ℤ ⥤ CochainComplex 𝐖[Y] ℤ ⥤ CochainComplex 𝐖[Y] ℤ)
+  (TZ : CochainComplex 𝐖[Z] ℤ ⥤ CochainComplex 𝐖[Z] ℤ ⥤ CochainComplex 𝐖[Z] ℤ)
+  (DY : DerivedCategory 𝐖[Y] × DerivedCategory 𝐖[Y] ⥤ DerivedCategory 𝐖[Y])
+  (DZ : DerivedCategory 𝐖[Z] × DerivedCategory 𝐖[Z] ⥤ DerivedCategory 𝐖[Z])
+  (flatY : CochainComplex 𝐖[Y] ℤ → Prop) (flatZ : CochainComplex 𝐖[Z] ℤ → Prop)
   (hG : ∀ T, flatY T → flatZ ((G.mapHomologicalComplex (.up ℤ)).obj T))
   (modelY : ∀ P T, flatY P → flatY T →
     (DY.obj (DerivedCategory.Q.obj P, DerivedCategory.Q.obj T) ≅
@@ -91,8 +107,6 @@ variable (G : ProEtaleWeilSheaf k₀ l Y ⥤ ProEtaleWeilSheaf k₀ l Z) [G.Addi
   (φ : DY ⋙ G.mapDerivedCategory ≅ G.mapDerivedCategory.prod G.mapDerivedCategory ⋙ DZ)
   (hφ : OpenTensorRestrictionNormalization G TZ TY DZ DY flatZ flatY hG modelZ modelY
     (fun P T ↦ t.app (P, T)) φ)
-  (hNY : ∀ P, flatY P → (HomotopyCategory.quasiIso _ (.up ℤ)).kFlat
-    ((HomotopyCategory.quotient _ (.up ℤ)).obj ((N_Y.mapHomologicalComplex (.up ℤ)).obj P)))
   (hNZ : ∀ P, flatZ P → (HomotopyCategory.quasiIso _ (.up ℤ)).kFlat
     ((HomotopyCategory.quotient _ (.up ℤ)).obj ((N_Z.mapHomologicalComplex (.up ℤ)).obj P)))
   (totalY : Functor.uncurry.obj TY ⋙ N_Y.mapHomologicalComplex (.up ℤ) ≅
@@ -123,33 +137,30 @@ variable (G : ProEtaleWeilSheaf k₀ l Y ⥤ ProEtaleWeilSheaf k₀ l Z) [G.Addi
         ((N_Z.mapHomologicalComplex (.up ℤ)).obj T) =
     N_Z.mapDerivedCategory.map (modelZ P T hP hT).hom ≫
       N_Z.mapDerivedCategoryFactors.hom.app _ ≫ DerivedCategory.Q.map (totalZ.app (P, T)).hom)
-  (u : N_Y ⋙ (CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
-      (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))) ≅ G ⋙ N_Z)
+  (u : N_Y ⋙ (𝐠^*) ≅ G ⋙ N_Z)
 
-/-- The isomorphism `u : N_Y ⋙ h^* ≅ G ⋙ N_Z` on cochain complexes, degreewise. -/
+/-- The isomorphism `u : N_Y ⋙ ḡ^* ≅ G ⋙ N_Z` on cochain complexes, degreewise. -/
 noncomputable def upperStarComplexIso :
-    N_Y.mapHomologicalComplex (.up ℤ) ⋙ ((CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
-      (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))).mapHomologicalComplex (.up ℤ) ≅
+    N_Y.mapHomologicalComplex (.up ℤ) ⋙ (𝐠^*).mapHomologicalComplex (.up ℤ) ≅
       G.mapHomologicalComplex (.up ℤ) ⋙ N_Z.mapHomologicalComplex (.up ℤ) :=
   Functor.mapHomologicalComplexCompIso (Iso.refl _) _ ≪≫
     NatIso.mapHomologicalComplex u _ ≪≫ (Functor.mapHomologicalComplexCompIso (Iso.refl _) _).symm
 
 variable
-    (hC : Functor.whiskerLeft (Functor.uncurry.obj TY) (upperStarComplexIso k₀ l g G N_Y N_Z u).hom ≫
+    (hC : Functor.whiskerLeft (Functor.uncurry.obj TY)
+          (upperStarComplexIso k₀ l g G N_Y N_Z u).hom ≫
         (Functor.associator _ _ _).inv ≫
         Functor.whiskerRight t.hom (N_Z.mapHomologicalComplex (.up ℤ)) ≫
         (Functor.associator _ _ _).hom ≫
         Functor.whiskerLeft ((G.mapHomologicalComplex (.up ℤ)).prod
             (G.mapHomologicalComplex (.up ℤ))) totalZ.hom =
       (Functor.associator _ _ _).inv ≫
-        Functor.whiskerRight totalY.hom (((CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
-      (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))).mapHomologicalComplex (.up ℤ)) ≫
+        Functor.whiskerRight totalY.hom ((𝐠^*).mapHomologicalComplex (.up ℤ)) ≫
         (Functor.associator _ _ _).hom ≫
         Functor.whiskerLeft ((N_Y.mapHomologicalComplex (.up ℤ)).prod
             (N_Y.mapHomologicalComplex (.up ℤ)))
           (HomologicalComplex.mapBifunctorComparisonUncurried
-            (Functor.OplaxMonoidal.δNatTrans ((CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
-      (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))))) (.up ℤ)) ≫
+            (Functor.OplaxMonoidal.δNatTrans (𝐠^*)) (.up ℤ)) ≫
         (Functor.associator _ _ _).inv ≫
         Functor.whiskerRight ((Functor.prodCompIso _ _).hom ≫
             NatTrans.prod (upperStarComplexIso k₀ l g G N_Y N_Z u).hom
@@ -164,7 +175,7 @@ open DerivedCategory Functor.LaxMonoidal in
 include hφ hmZ in
 /-- The left side of the compatibility, after the factorizations through `Q` and the lax monoidal
 structure of `Q`: the localization of the total comparisons `t` and `totalZ`. -/
-lemma comparisonCompatible_aux_left (P T : CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ)
+lemma comparisonCompatible_aux_left (P T : CochainComplex 𝐖[Y] ℤ)
     (hP : flatY P) (hT : flatY T) :
     N_Z.mapDerivedCategory.map (φ.hom.app (Q.obj P, Q.obj T)) ≫
       mZ.hom.app (G.mapDerivedCategory.obj (Q.obj P), G.mapDerivedCategory.obj (Q.obj T)) ≫
@@ -224,7 +235,8 @@ open DerivedCategory Functor.LaxMonoidal in
 include hmY hC in
 /-- The right side of the compatibility, after the factorizations through `Q` and the lax monoidal
 structure of `Q`: on the images of native K-flat complexes `P`, `T`, the condensed comparison
-`Lḡ^*(K ⊗ᴸ L) ⟶ Lḡ^* K ⊗ᴸ Lḡ^* L` (`AlgebraicGeometry.ProEtale.CondensedRing.leftDerivedUpperStarTensor`)
+`Lḡ^*(K ⊗ᴸ L) ⟶ Lḡ^* K ⊗ᴸ Lḡ^* L`
+(`AlgebraicGeometry.ProEtale.CondensedRing.leftDerivedUpperStarTensor`)
 applied to the realizations, followed by the derived square `α` in both variables, is `α` followed
 by the localization of the total comparisons `t` and `totalZ`.
 
@@ -238,13 +250,11 @@ formalized, because the identification of the tensor product of complexes with t
 in the homotopy category, needed to read
 `AlgebraicGeometry.ProEtale.CondensedRing.leftDerivedUpperStarTensor_app_app_fac` through
 `DerivedCategory.Q`, goes through definitions that are not exposed to this file. -/
-lemma comparisonCompatible_aux_right (P T : CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ)
+lemma comparisonCompatible_aux_right (P T : CochainComplex 𝐖[Y] ℤ)
     (hP : flatY P) (hT : flatY T) :
-    (CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
-        (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))).leftDerivedFunctor.map
+    (𝐠^*).leftDerivedFunctor.map
         (mY.hom.app (Q.obj P, Q.obj T)) ≫
-      ((CondensedRing.leftDerivedUpperStarTensor (Profinite.padicAlgClRingObj l)
-        (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))).app
+      ((𝐦).app
           (N_Y.mapDerivedCategory.obj (Q.obj P))).app (N_Y.mapDerivedCategory.obj (Q.obj T)) ≫
       (Functor.uncurry.obj (curriedTensor _)).map (Prod.mkHom
         ((Functor.leftDerivedFunctorSquareIso u).hom.app (Q.obj P) ≫
@@ -269,25 +279,24 @@ lemma comparisonCompatible_aux_right (P T : CochainComplex (ProEtaleWeilSheaf k�
 set_option maxHeartbeats 8000000 in
 -- the derived categories of condensed module objects make the unification slow
 open DerivedCategory Functor.LaxMonoidal in
-include hφ hNY hNZ hmY hmZ hC in
+include hφ hNZ hmY hmZ hC in
 /-- **Transfer of the pullback–tensor comparison to condensed modules.** If the isomorphism
-`u : N_Y ⋙ h^* ≅ G ⋙ N_Z` carries the total comparison `t` to the comonoidal structure of `h^*`
-on complexes (`hC`), then the derived square `D(N_Y) ⋙ Lh^* ≅ D(G) ⋙ D(N_Z)` carries the derived
+`u : N_Y ⋙ ḡ^* ≅ G ⋙ N_Z` carries the total comparison `t` to the comonoidal structure of `ḡ^*`
+on complexes (`hC`), then the derived square `D(N_Y) ⋙ Lḡ^* ≅ D(G) ⋙ D(N_Z)` carries the derived
 comparison `φ` to `AlgebraicGeometry.ProEtale.CondensedRing.leftDerivedUpperStarTensor`, up to the
 realizations `m_Y`, `m_Z` of the derived tensor products. -/
 theorem comparisonCompatible_of_normalized
     [((ObjectProperty.ι flatY) ⋙ DerivedCategory.Q).IsLocalization
-      ((HomologicalComplex.quasiIso (ProEtaleWeilSheaf k₀ l Y) (.up ℤ)).inverseImage (ObjectProperty.ι flatY))]
+      ((HomologicalComplex.quasiIso 𝐖[Y] (.up ℤ)).inverseImage (ObjectProperty.ι flatY))]
  :
     Adjunction.ComparisonCompatible (Functor.leftDerivedFunctorSquareIso u)
-      (Functor.curryCompIsoOfIso φ).hom (CondensedRing.leftDerivedUpperStarTensor (Profinite.padicAlgClRingObj l)
-        (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))
+      (Functor.curryCompIsoOfIso φ).hom (𝐦)
       (Functor.curryCompIsoOfIso' mZ) (Functor.curryCompIsoOfIso' mY) := by
   refine Adjunction.comparisonCompatible_of_iso _ _ _ _ _
     (fun a ↦ ∃ P, flatY P ∧ a = DerivedCategory.Q.obj P) (fun a ↦ ?_) ?_
   · let L := ObjectProperty.ι flatY ⋙ DerivedCategory.Q
     have : L.EssSurj := Localization.essSurj L
-      ((HomologicalComplex.quasiIso (ProEtaleWeilSheaf k₀ l Y) (.up ℤ)).inverseImage (ObjectProperty.ι flatY))
+      ((HomologicalComplex.quasiIso 𝐖[Y] (.up ℤ)).inverseImage (ObjectProperty.ι flatY))
     exact ⟨_, ⟨(L.objPreimage a).1, (L.objPreimage a).2, rfl⟩, ⟨(L.objObjPreimageIso a).symm⟩⟩
   rintro _ _ ⟨P, hP, rfl⟩ ⟨T, hT, rfl⟩
   have hL := comparisonCompatible_aux_left (hφ := hφ) (hmZ := hmZ) (P := P) (T := T) (hP := hP)

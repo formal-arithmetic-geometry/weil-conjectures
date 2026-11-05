@@ -11,6 +11,9 @@ public import WeilConjectures.WeilSheaf.Native.NativePullTensor
 public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationDerivedTensor
 public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationUpperStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Localizing
+public import WeilConjectures.WeilSheaf.Native.CondensedRealizationPullTensorTransfer
+public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationPullTotalTensor
+public import WeilConjectures.WeilSheaf.Native.NativePullTensorNormalization
 
 /-!
 # The condensed realization is compatible with the pullback–tensor comparisons
@@ -31,6 +34,9 @@ this is `CategoryTheory.Adjunction.ComparisonCompatible`, the hypothesis of
 universe u
 
 open CategoryTheory
+
+-- Use Mathlib's Grothendieck instance on module categories, as the native tensor files do.
+attribute [local instance 0] ModuleCat.isGrothendieckAbelian_of_commRing
 
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
@@ -71,7 +77,26 @@ theorem comparisonCompatible_derivedCondensedRealization :
       (nativeCurriedPullTensor k₀ l g)
       (ProEtale.CondensedRing.leftDerivedUpperStarTensor (Profinite.padicAlgClRingObj l)
         (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))
-      (condensedRealizationCurriedTensor k₀ l Z) (condensedRealizationCurriedTensor k₀ l Y) :=
-  sorry
+      (condensedRealizationCurriedTensor k₀ l Z) (condensedRealizationCurriedTensor k₀ l Y) := by
+  have := native_open_tensor_full_kflat_localization k₀ l Y
+  exact comparisonCompatible_of_normalized k₀ l g
+    (G := upperStar k₀ l g) (N_Y := condensedRealization k₀ l Y)
+    (N_Z := condensedRealization k₀ l Z)
+    (TY := nativeTensorTotal k₀ l Y) (TZ := nativeTensorTotal k₀ l Z)
+    (DY := nativeDerivedTensor k₀ l Y) (DZ := nativeDerivedTensor k₀ l Z)
+    (flatY := NativeIsKFlat k₀ l Y) (flatZ := NativeIsKFlat k₀ l Z)
+    (hG := nativeIsKFlat_mapHomologicalComplex_upperStar_obj k₀ l g)
+    (modelY := nativeOpenTensorModel k₀ l Y) (modelZ := nativeOpenTensorModel k₀ l Z)
+    (t := nativePullTotalTensor k₀ l g) (φ := nativePullTensor k₀ l g)
+    (hφ := nativeRestrictionDerivedTensor_normalization k₀ l (upperStar k₀ l g)
+      (nativeIsKFlat_mapHomologicalComplex_upperStar_obj k₀ l g) (nativePullTotalTensor k₀ l g))
+    (hNZ := kFlat_condensedRealization k₀ l Z)
+    (totalY := condensedRealizationTotalTensorIso k₀ l Y)
+    (totalZ := condensedRealizationTotalTensorIso k₀ l Z)
+    (mY := condensedRealizationTensor k₀ l Y) (mZ := condensedRealizationTensor k₀ l Z)
+    (hmY := condensedRealizationTensor_hom_app_comp k₀ l Y)
+    (hmZ := condensedRealizationTensor_hom_app_comp k₀ l Z)
+    (u := condensedRealizationUpperStarIso k₀ l g)
+    (hC := condensedRealizationUpperStarIso_totalTensor k₀ l g)
 
 end AlgebraicGeometry.ProEtaleWeilSheaf

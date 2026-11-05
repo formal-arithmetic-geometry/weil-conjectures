@@ -13746,6 +13746,7 @@ public import WeilConjectures.CategoryTheory.AdjointEquivalenceConjugation.Adjoi
 public import WeilConjectures.CategoryTheory.AdjointProjectionTensorTransfer.AdjointProjectionTensorTransfer
 public import WeilConjectures.CategoryTheory.Adjunction.ClopenIdempotent
 public import WeilConjectures.CategoryTheory.Adjunction.CompUnitCounit
+public import WeilConjectures.CategoryTheory.Adjunction.ComparisonCompatibleOfIso
 public import WeilConjectures.CategoryTheory.Adjunction.ComparisonNotFormal
 public import WeilConjectures.CategoryTheory.Adjunction.ConjugateComp
 public import WeilConjectures.CategoryTheory.Adjunction.ConjugateCounit
@@ -25381,6 +25382,7 @@ public import WeilConjectures.WeilSheaf.LowerStarPairing
 public import WeilConjectures.WeilSheaf.LowerStarTensorPow
 public import WeilConjectures.WeilSheaf.LowerStarTriangulated
 public import WeilConjectures.WeilSheaf.MiddleExtension
+public import WeilConjectures.WeilSheaf.Native.CondensedRealizationPullTensorTransfer
 public import WeilConjectures.WeilSheaf.Native.NativeAdicRestrictionFlat
 public import WeilConjectures.WeilSheaf.Native.NativeClosedTransposition
 public import WeilConjectures.WeilSheaf.Native.NativeCoefficientTensorComparison
@@ -25416,6 +25418,7 @@ public import WeilConjectures.WeilSheaf.Native.NativePullDerivedTensor
 public import WeilConjectures.WeilSheaf.Native.NativePullKFlat
 public import WeilConjectures.WeilSheaf.Native.NativePullSheafTensor
 public import WeilConjectures.WeilSheaf.Native.NativePullTensor
+public import WeilConjectures.WeilSheaf.Native.NativePullTensorNormalization
 public import WeilConjectures.WeilSheaf.Native.NativeRestrictionForgetTotalModel
 public import WeilConjectures.WeilSheaf.Native.NativeRingedForgetTensorChainComparison
 public import WeilConjectures.WeilSheaf.Native.NativeStandardHomRepresentatives
