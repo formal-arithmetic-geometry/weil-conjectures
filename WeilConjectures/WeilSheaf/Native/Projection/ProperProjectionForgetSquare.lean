@@ -61,12 +61,14 @@ theorem nativeProperProjection_forgetSquare :
     (derivedUpperStarLowerStarAdjunction k₀ l g)
     (CondensedRing.derivedUpperStarLowerStarAdjunction Λ gb)
     (comparisonCompatible_derivedCondensedRealization k₀ l g) M N
-  simpa only [nativeProperProjectionNatTrans, Functor.uncurryRightProjection,
+  dsimp +instances only [Functor.comp_obj, Functor.prod_obj, Functor.id_obj] at h ⊢
+  simp only [nativeProperProjectionNatTrans, Functor.uncurryRightProjection,
     nativeProperForgetIso, Adjunction.uncurriedProjectionMorphismNatTrans,
     condensedRealizationCurriedTensor, Functor.curryCompIsoOfIso',
     Functor.comp_obj, Functor.prod_obj, Functor.id_obj,
     asIso_hom, Iso.symm_hom, Functor.uncurry_obj_map,
     curriedTensor_map_app, curriedTensor_obj_map, id_whiskerRight, whiskerLeft_id,
-    Category.comp_id, Category.id_comp] using h
+    Category.comp_id, Category.id_comp] at h ⊢
+  exact_mod_proofs h
 
 end AlgebraicGeometry.ProEtaleWeilSheaf

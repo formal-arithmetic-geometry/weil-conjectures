@@ -72,3 +72,20 @@ def uncurriedInvProjectionComparisonNatTrans {I : C ⥤ D} {P : D ⥤ C}
     tensor_map, tensorHom_def] using hn
 
 end CategoryTheory.Adjunction
+
+namespace CategoryTheory.Adjunction
+
+variable {C D : Type*} [Category* C] [Category* D]
+  [MonoidalCategory C] [MonoidalCategory D] {E : C ⥤ D} {R : D ⥤ C}
+
+/-- The open projection transpose, expressed using an uncurried tensor functor. -/
+lemma homEquiv_projectionComparison_uncurried (adj : E ⊣ R) [R.LaxMonoidal]
+    (M : C) (N : D) :
+    adj.homEquiv _ _ (adj.projectionComparison M N) =
+      (Functor.uncurry.obj (curriedTensor C)).map
+        (Prod.mkHom (adj.unit.app M) (𝟙 (R.obj N))) ≫
+          Functor.LaxMonoidal.μ R (E.obj M) N := by
+  rw [projectionComparison, Equiv.apply_symm_apply]
+  simp [Functor.uncurry_obj_map]
+
+end CategoryTheory.Adjunction

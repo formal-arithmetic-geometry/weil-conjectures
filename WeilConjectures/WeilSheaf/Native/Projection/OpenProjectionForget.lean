@@ -8,7 +8,7 @@ public import WeilConjectures.WeilSheaf.Native.Projection.OpenProjectionIso
 public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationCoherence
 public import WeilConjectures.WeilSheaf.Native.Projection.OpenProjectionForgetFormal
 public import WeilConjectures.WeilSheaf.Native.Projection.UncurriedComparison
-public import WeilConjectures.PoincareDuality.ProjectionFormula
+public import WeilConjectures.WeilSheaf.Native.Projection.GeometricOpenProjectionTranspose
 
 /-! # The canonical open projection formula under condensed realization -/
 
@@ -86,6 +86,9 @@ lemma map_nativeOpenProjectionIso_hom_app
   let adj := derivedExtensionByZeroUpperStarAdjunction k₀ l j
   let adj' := CondensedRing.derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ jb
   let ρ' := Functor.uncurryCompIsoOfIso (CondensedRing.leftDerivedUpperStarTensorIso Λ jb)
+  have : IsIso ((mateEquiv adj adj').symm
+      (TwoSquare.mk _ _ _ _ (derivedCondensedRealizationUpperStarIso k₀ l j).symm.hom)).natTrans :=
+    isIso_nativeOpenForgetInverseMate k₀ l j
   have hu := compactProjectionOpen_unitSquare_of_inverseMate adj adj'
     (derivedCondensedRealizationUpperStarIso k₀ l j).symm
   have hr := Functor.comparisonCompatible_uncurried
@@ -103,10 +106,7 @@ lemma map_nativeOpenProjectionIso_hom_app
             ((CondensedRing.openImmersionLowerShriek Λ jb).mapDerivedCategory.obj
               ((derivedCondensedRealization k₀ l U).obj M),
                 (derivedCondensedRealization k₀ l Z).obj N) := by
-    rw [CondensedRing.openImmersionProjectionComparison, Adjunction.projectionComparison,
-      Equiv.apply_symm_apply]
-    simp [Adjunction.projectionMapTranspose, ρ', Functor.uncurryCompIsoOfIso,
-      Functor.uncurry_obj_map]
+    exact CondensedRing.projection_open_homEquiv Λ jb _ _
   have h := compactProjectionOpen_forget_of_unit_at adj adj'
     (derivedCondensedRealization k₀ l U) (derivedCondensedRealization k₀ l Z)
     (nativeOpenForgetIso k₀ l j) (derivedCondensedRealizationUpperStarIso k₀ l j).symm

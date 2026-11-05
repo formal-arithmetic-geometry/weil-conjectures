@@ -62,9 +62,15 @@ def compactProjectionForgetTensorIso :
   refine NatIso.ofComponents (fun MN ↦ ObjectProperty.isoMk _ (e.app (MN.1.obj, MN.2.obj))) ?_
   intro A B φ
   apply ObjectProperty.hom_ext
+  let F := (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).mapDerivedCategory ⋙
+    (adicSheafEquivCondensedMod l _).functor.mapDerivedCategory
+  change F.map ((ProEtaleWeilSheaf.nativeDerivedTensor k₀ l X).map
+      (Prod.mkHom φ.1.hom φ.2.hom)) ≫ e.hom.app (B.1.obj, B.2.obj) =
+    e.hom.app (A.1.obj, A.2.obj) ≫ (F.map φ.1.hom ⊗ₘ F.map φ.2.hom)
   have h := e.hom.naturality (Prod.mkHom φ.1.hom φ.2.hom)
-  simpa only [Functor.comp_map, Functor.prod_map, Functor.uncurry_obj_map,
-    curriedTensor_map_app, curriedTensor_obj_map, tensorHom_def] using h
+  simpa only [F, Functor.comp_obj, Functor.prod_obj, Functor.comp_map, Functor.prod_map,
+    Functor.uncurry_obj_map, curriedTensor_map_app, curriedTensor_obj_map,
+    MonoidalCategory.tensorHom_def] using h
 
 variable {X} {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of k₀))]
   [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
