@@ -30,16 +30,16 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgC
 
 noncomputable def comparisonUpperStarFreeIso :
     ν^*(X)[Ab.{u + 1}] ⋙ Mod.freeFunctor (condensedRingObj (Profinite.integersModPowRingObj ℓ E n) X) ⋙
-        (finiteCoefficientModEquivalence X (PadicAlgCl.integersModPow ℓ E n)).functor ≅
+        (finiteCoefficientModEquivalence ℓ E n X).functor ≅
       Etale.extendScalars (integersModPowCoeff.{u} ℓ E n) X ⋙
         ν^*(X)[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)] :=
   (((comparisonAdjunction Ab.{u + 1} X).comp
     (Mod.freeForgetAdjunction (condensedRingObj (Profinite.integersModPowRingObj ℓ E n) X))).comp
-      (finiteCoefficientModEquivalence X (PadicAlgCl.integersModPow ℓ E n)).toAdjunction).leftAdjointUniq
+      (finiteCoefficientModEquivalence ℓ E n X).toAdjunction).leftAdjointUniq
     (((Etale.extendScalarsAdjunction (integersModPowCoeff.{u} ℓ E n) X).comp
       (comparisonAdjunction _ X)).ofNatIsoRight
       ((NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun _ ↦ rfl)) ≪≫
-        Functor.isoWhiskerRight (finiteCoefficientModEquivalenceInverseCompForgetIso (PadicAlgCl.integersModPow ℓ E n) X).symm
+        Functor.isoWhiskerRight (finiteCoefficientModEquivalenceInverseCompForgetIso ℓ E n X).symm
           ν_*(X)[Ab.{u + 1}]))
 
 
@@ -64,10 +64,10 @@ lemma purity_comparisonUpperStarFreeIso_factor :
   rw [CategoryTheory.purity_leftAdjointUniq_ofNatIsoRight]
   have h := purity_conjugate_comp_factor (comparisonAdjunction Ab.{u + 1} X)
     (Mod.freeForgetAdjunction (condensedRingObj (Profinite.integersModPowRingObj ℓ E n) X))
-    (finiteCoefficientModEquivalence X (PadicAlgCl.integersModPow ℓ E n)).toAdjunction
+    (finiteCoefficientModEquivalence ℓ E n X).toAdjunction
     (purityFiniteFreeSheafAdjunction ℓ E n X)
     ((Etale.extendScalarsAdjunction (integersModPowCoeff.{u} ℓ E n) X).comp (comparisonAdjunction _ X))
-    (finiteCoefficientModEquivalenceInverseCompForgetIso (PadicAlgCl.integersModPow ℓ E n) X).symm (Iso.refl _)
+    (finiteCoefficientModEquivalenceInverseCompForgetIso ℓ E n X).symm (Iso.refl _)
   refine Eq.trans ?_ h
   congr 1
 

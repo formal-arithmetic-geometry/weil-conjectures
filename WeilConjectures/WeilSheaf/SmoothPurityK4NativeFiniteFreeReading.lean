@@ -30,14 +30,14 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgC
 coefficient pullback comparison and the canonical geometric pullbacks. -/
 lemma purity_comparisonUpperStarFreeIso_pullback
     (M : Sheaf Y.smallEtaleTopology Ab.{u + 1}) :
-    (finiteCoefficientModEquivalence X (PadicAlgCl.integersModPow ℓ E n)).functor.map
+    (finiteCoefficientModEquivalence ℓ E n X).functor.map
           ((CondensedRing.freeFunctorCompUpperStarIso
             (Profinite.integersModPowRingObj ℓ E n) g).hom.app (ν^*(Y)[Ab.{u + 1}].obj M)) ≫
-        (finiteCoefficientModEquivalence X (PadicAlgCl.integersModPow ℓ E n)).functor.map
+        (finiteCoefficientModEquivalence ℓ E n X).functor.map
           ((Mod.freeFunctor (condensedRingObj (Profinite.integersModPowRingObj ℓ E n) X)).map
             ((comparisonUpperStarUpperStarIso Ab.{u + 1} g).hom.app M)) ≫
         (comparisonUpperStarFreeIso ℓ E n X).hom.app ((Etale.upperStar Ab.{u + 1} g).obj M) =
-      (upperStarFiniteCoefficientModEquivalenceIso g (PadicAlgCl.integersModPow ℓ E n)).hom.app
+      (upperStarFiniteCoefficientModEquivalenceIso ℓ E n g).hom.app
           ((Mod.freeFunctor (condensedRingObj (Profinite.integersModPowRingObj ℓ E n) Y)).obj
             (ν^*(Y)[Ab.{u + 1}].obj M)) ≫
         (g)^*[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)].map

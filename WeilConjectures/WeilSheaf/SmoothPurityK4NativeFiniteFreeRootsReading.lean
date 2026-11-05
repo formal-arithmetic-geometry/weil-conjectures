@@ -32,12 +32,12 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgC
 
 noncomputable def finiteCoefficientModEquivalenceFreeRootsOfUnityIso
     (Z : Scheme.{u}) (hZ : IsUnit (N : Γ(Z, ⊤))) :
-    (finiteCoefficientModEquivalence Z (PadicAlgCl.integersModPow ℓ E n)).functor.obj
+    (finiteCoefficientModEquivalence ℓ E n Z).functor.obj
         ((Mod.freeFunctor (condensedRingObj (Profinite.integersModPowRingObj ℓ E n) Z)).obj
           (rootsOfUnitySheaf Z N)) ≅
       ν^*(Z)[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)].obj
         ((Etale.extendScalars (integersModPowCoeff.{u} ℓ E n) Z).obj (Z.rootsOfUnitySheaf N)) :=
-  (finiteCoefficientModEquivalence Z (PadicAlgCl.integersModPow ℓ E n)).functor.mapIso
+  (finiteCoefficientModEquivalence ℓ E n Z).functor.mapIso
       ((Mod.freeFunctor _).mapIso (comparisonUpperStarRootsOfUnityIso Z N hN hZ).symm) ≪≫
     (comparisonUpperStarFreeIso ℓ E n Z).app (Z.rootsOfUnitySheaf N)
 
@@ -66,14 +66,14 @@ lemma purity_comparisonUpperStarRootsOfUnityIso_pullback_inv :
 /-- The finite reading of the free module on roots of unity carries its actual
 geometric datum to the canonical étale root datum. -/
 lemma purity_finiteCoefficientModEquivalenceFreeRootsOfUnityIso_pullback :
-    (finiteCoefficientModEquivalence X (PadicAlgCl.integersModPow ℓ E n)).functor.map
+    (finiteCoefficientModEquivalence ℓ E n X).functor.map
           ((CondensedRing.freeFunctorCompUpperStarIso
             (Profinite.integersModPowRingObj ℓ E n) g).hom.app (rootsOfUnitySheaf Y N)) ≫
-        (finiteCoefficientModEquivalence X (PadicAlgCl.integersModPow ℓ E n)).functor.map
+        (finiteCoefficientModEquivalence ℓ E n X).functor.map
           ((Mod.freeFunctor (condensedRingObj (Profinite.integersModPowRingObj ℓ E n) X)).map
             (upperStarRootsOfUnitySheafHom g N)) ≫
         (finiteCoefficientModEquivalenceFreeRootsOfUnityIso ℓ E n N hN X hX).hom =
-      (upperStarFiniteCoefficientModEquivalenceIso g (PadicAlgCl.integersModPow ℓ E n)).hom.app
+      (upperStarFiniteCoefficientModEquivalenceIso ℓ E n g).hom.app
           ((Mod.freeFunctor (condensedRingObj (Profinite.integersModPowRingObj ℓ E n) Y)).obj
             (rootsOfUnitySheaf Y N)) ≫
         (g)^*[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)].map
@@ -91,7 +91,7 @@ lemma purity_finiteCoefficientModEquivalenceFreeRootsOfUnityIso_pullback :
     (comparisonUpperStarRootsOfUnityIso Y N hN hY).inv
   have hread := (comparisonUpperStarFreeIso ℓ E n X).hom.naturality
     (upperStarRootsOfUnitySheafToRootsOfUnitySheaf N g)
-  have hcoeff := (upperStarFiniteCoefficientModEquivalenceIso g (PadicAlgCl.integersModPow ℓ E n)).hom.naturality
+  have hcoeff := (upperStarFiniteCoefficientModEquivalenceIso ℓ E n g).hom.naturality
     ((Mod.freeFunctor (condensedRingObj (Profinite.integersModPowRingObj ℓ E n) Y)).map
       (comparisonUpperStarRootsOfUnityIso Y N hN hY).inv)
   dsimp +instances only [Functor.comp_map, Functor.comp_obj] at hfree hread hcoeff
