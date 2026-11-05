@@ -140,7 +140,7 @@ theorem exists_pointed_disjoint_cover (c₀ : Nbhd y) [IsAffine c₀.1.left]
     let τ'' : B₂ →+* Ω := (Spec.preimage t''.1).hom
     obtain ⟨Q, -, hQ, hQc⟩ := Ideal.exists_ideal_over_prime_of_isIntegral (RingHom.ker τ'')
       (⊥ : Ideal B) (by
-        rw [Ideal.comap_bot_of_injective _ Subtype.val_injective]
+        rw [Ideal.under_def, Ideal.comap_bot_of_injective _ Subtype.val_injective]
         exact bot_le)
     have : Q.LiesOver (RingHom.ker τ'') := ⟨hQc.symm⟩
     obtain ⟨τ, -⟩ := PointsOver.exists_ker_eq (φ := τ'') Q
