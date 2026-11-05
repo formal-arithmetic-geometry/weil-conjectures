@@ -8,7 +8,6 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.CartesianChartClassPullback
 import WeilConjectures.AlgebraicGeometry.CartesianChartLiftNaturality
-import all WeilConjectures.AlgebraicGeometry.CartesianHigherImageFiniteRawAssembly
 
 /-! # Naturality of a finite-stage raw cartesian chart representative
 
@@ -28,6 +27,38 @@ attribute [local irreducible] restrictedOverCohomologyMap
   upperStar upperStarCompDerivedPlus
 
 set_option backward.isDefEq.respectTransparency true
+
+private noncomputable def rawTransitionLocal {X S : Scheme.{u}} {I : Type u}
+    [SmallCategory I] (D : I ⥤ Over S) (c : Cone D) (f : X ⟶ S)
+    (P : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
+    {i j : I} (a : j ⟶ i) :
+    (D+(((c.π.app i).left)^*[AddCommGrpCat.{u + 1}])).obj
+        (cartesianDerivedImage f (D.obj i).hom P) ⟶
+      (D+(((c.π.app j).left)^*[AddCommGrpCat.{u + 1}])).obj
+        (cartesianDerivedImage f (D.obj j).hom P) :=
+  (upperStarCompDerivedPlus AddCommGrpCat.{u + 1}
+    (c.π.app j).left (D.map a).left (c.π.app i).left
+    (congrArg (fun b ↦ b.left) (c.w a)).symm).hom.app _ ≫
+    (D+(((c.π.app j).left)^*[AddCommGrpCat.{u + 1}])).map
+      (cartesianDerivedImageMap f (D.obj i).hom (D.obj j).hom
+        (D.map a).left (Over.w (D.map a)).symm P)
+
+private theorem rawTransitionLocal_comp {X S : Scheme.{u}} {I : Type u}
+    [SmallCategory I] (D : I ⥤ Over S) (c : Cone D) (f : X ⟶ S)
+    (P : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
+    {i j k : I} (a : j ⟶ i) (b : k ⟶ j) :
+    rawTransitionLocal (i := i) (j := j) D c f P a ≫
+      rawTransitionLocal (i := j) (j := k) D c f P b =
+      rawTransitionLocal (i := i) (j := k) D c f P (b ≫ a) := by
+  have h := pulled_cartesian_map_comp f (D.obj i).hom (D.obj j).hom (D.obj k).hom
+      (D.map a).left (D.map b).left (Over.w (D.map a)).symm (Over.w (D.map b)).symm
+      (c.π.app i).left (c.π.app j).left (c.π.app k).left
+      (congrArg (fun x ↦ x.left) (c.w a)).symm
+      (congrArg (fun x ↦ x.left) (c.w b)).symm P
+  dsimp only [rawTransitionLocal]
+  refine h.trans ?_
+  apply pulled_cartesian_map_congr
+  exact (congrArg (fun x ↦ x.left) (D.map_comp b a)).symm
 
 /-- The finite-stage chart identity propagates to every arrow above the chosen stage.
 
@@ -86,11 +117,11 @@ theorem cartesianRawClass_chart_naturality
               (q : ℤ) ((cartesianChartDiagram f D j).map a) W x) := by
   intro m a
   change z ≫ (shiftFunctor _ (q : ℤ)).map
-    (rawTransition (i := i) (j := m.left) D c f
+    (rawTransitionLocal (i := i) (j := m.left) D c f
       ((DerivedCategory.Plus.singleFunctor _ 0).obj F) (a.left ≫ b)) = _
-  rw [← rawTransition_comp (i := i) (j := l.left) (k := m.left) D c f
+  rw [← rawTransitionLocal_comp (i := i) (j := l.left) (k := m.left) D c f
     ((DerivedCategory.Plus.singleFunctor _ 0).obj F) b a.left, Functor.map_comp, ← Category.assoc]
-  dsimp only [rawTransition]
+  dsimp only [rawTransitionLocal]
   rw [hbase]
   exact cartesianChartCohomologyLift_naturality f D c F q j W V r hr l m a x
 
