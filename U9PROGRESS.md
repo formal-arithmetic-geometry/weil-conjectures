@@ -222,27 +222,22 @@
 - Remote log: `/home/ubuntu/u9/logs/BZ740-20261106T061103.log`.
 - Checking downstream `DerivedPullbackTensorUnitKFlat` and `DerivedPullbackTensorUnit`.
 
-# BZ802 in progress
+# BZ802 complete
 
 - Branch: `u9/BZ802`; starting commit: `fcbed6be3`.
-- Reread the brief and progress notes on continuation; no new LEAD lines.
-- The user instructed continuation after the explicit three-prerequisite restoration proposal.
-- Restored the original declarations in AffinePerfectOpenRepresentCohomologyColimit,
+- Assigned AffineKoszulSectionRoof and its three restored prerequisites passed
+  `ucheck-bump` together: rc=0, built=4, failed=0, 5712 jobs.
+- Validated source commit: `42b631194575d0152e16c8d2cf707b1d7fa51e21`.
+- Full build log: `/home/ubuntu/u9/bz/BUILD-BZ802-final-full.log`.
+- The user instructed continuation after the explicit prerequisite-restoration proposal.
+  Restored the original declarations in AffinePerfectOpenRepresentCohomologyColimit,
   AffinePerfectOpenRepresentCohomology, and AffineKoszulSectionColimit.
-- Fixed the compositor isIso implication from `.2` to `.1`; omitted old heartbeat overrides.
-- Remote validation includes those three modules, assigned AffineKoszulSectionRoof,
-  and direct importer AffinePerfectTensorRoof. Continue downstream after green.
-- Fix records: `/home/ubuntu/u9/bz/FIXES-BZ802.md`.
-- No local Lean/Lake, changed statements, deleted callers, or proof escapes.
-
-- First remote build measured a 200000-heartbeat isDefEq timeout in the restored
-  cohomology-colimit proof at hv₂. Restored only that theorem's original 1000000 budget.
-- Direct importer AffinePerfectTensorRoof is blocked by unowned
-  DerivedPullbackTensorAssociativity.lean:323:12 (Type mismatch), also at 459:12.
-- Next build covers the four assigned/restored modules without the blocked importer.
-
-- The second remote build compiled AffinePerfectOpenRepresentCohomologyColimit (32s)
-  and AffinePerfectOpenRepresentCohomology (8.5s).
-- AffineKoszulSectionColimit also exhausted 200000 heartbeats at whnf. Restored its
-  original scoped 1000000 budget after this measured failure; no pre-deletion bound is raised.
-- Third validation batch again targets all four assigned/restored modules.
+- Fixed the compositor isIso implication from `.2` to `.1`; all statements are preserved.
+- Both original scoped 1000000-heartbeat budgets are retained after remote builds
+  measured deterministic failures at the default 200000 limit. No pre-deletion bound is raised.
+- Direct importer AffinePerfectTensorRoof was attempted and skipped because unowned
+  DerivedPullbackTensorAssociativity and DerivedPullbackTensorUnitKFlat fail with type mismatches.
+- Fix records, exact errors, tested machine rules, and whole-tree counts:
+  `/home/ubuntu/u9/bz/FIXES-BZ802.md`. Completion marker: `/home/ubuntu/u9/state/BZ802.DONE`.
+- No local Lean/Lake, declaration deletions, changed statements, or proof escapes.
+- This final commit changes only progress documentation; Lean source matches the green build.
