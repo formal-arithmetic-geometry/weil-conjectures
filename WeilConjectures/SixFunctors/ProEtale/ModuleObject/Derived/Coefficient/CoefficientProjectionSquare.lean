@@ -353,8 +353,4 @@ private theorem path_conjugate :
 attribute [local irreducible]
   AlgebraicGeometry.ProEtale.CondensedRing.coefficientScalarPathIso
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option synthInstance.maxHeartbeats 200000 in
--- The statement shares geometric and scalar derived tensor instances.
 end AlgebraicGeometry.ProEtale.CondensedRing

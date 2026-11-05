@@ -233,6 +233,4 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (p : X ⟶ Y) [IsProper p.left]
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end AlgebraicGeometry.ProEtale.CondensedRing
