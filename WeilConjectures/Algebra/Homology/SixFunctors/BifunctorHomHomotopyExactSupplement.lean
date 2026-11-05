@@ -597,7 +597,7 @@ theorem bifunctorHomHomotopyFunctor_leftOp_exact_coordinates
         change ((HomotopyCategory.quotient C (.up ℤ) ⋙ DerivedCategory.Qh).commShiftIso
           (1 : ℤ)).inv.app (bifunctorHomObj H K I) ≫ _ = _
         rw [Functor.commShiftIso_comp_inv_app]
-        simp only [unop_id, Category.id_comp]
+        exact Category.assoc _ _ _
       · rw [NatTrans.shift_app (DerivedCategory.quotientCompQhIso C).hom]
         simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
         erw [← (DerivedCategory.quotientCompQhIso C).hom.naturality_assoc σ]
