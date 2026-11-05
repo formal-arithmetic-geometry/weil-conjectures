@@ -248,7 +248,7 @@ theorem derivedAdjunctionOfResolvingClass
       ∀ (M : CochainComplex A ℤ) (I : CochainComplex B ℤ)
         (f : (G.mapHomologicalComplex (.up ℤ)).obj M ⟶ I),
         d.homEquiv (DerivedCategory.Q.obj M) (DerivedCategory.Q.obj I)
-            (εh.app ((HomotopyCategory.quotient A (.up ℤ)).obj M) ≫
+            (cast (by rfl) (εh.app ((HomotopyCategory.quotient A (.up ℤ)).obj M)) ≫
               DerivedCategory.Q.map f) =
           DerivedCategory.Q.map ((adj.mapHomologicalComplex (.up ℤ)).homEquiv M I f) ≫
             η.app I := by
