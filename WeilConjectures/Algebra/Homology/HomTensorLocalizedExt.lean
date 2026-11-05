@@ -58,7 +58,9 @@ private noncomputable def tensorHomCurryApp (φ : M ⊗ P ⟶ N) {U : C} (p : P.
     refine (congrArg (φ.app (op W'.unop.left)) ?_).trans
       (naturality_apply φ f.unop.left.op (m ⊗ₜ[R.obj (op W.unop.left)] P.map W.unop.hom.op p))
     refine (congrArg (fun q : P.obj (op W'.unop.left) ↦
-      M.map f.unop.left.op m ⊗ₜ[R.obj (op W'.unop.left)] q) ?_).trans
+      TensorProduct.tmul (R.obj (op W'.unop.left))
+        (M := M.obj (op W'.unop.left)) (N := P.obj (op W'.unop.left))
+        (M.map f.unop.left.op m) q) ?_).trans
         (Monoidal.tensorObj_map_tmul f.unop.left.op m _).symm
     rw [← map_comp_apply, ← op_comp, Over.w]
 
