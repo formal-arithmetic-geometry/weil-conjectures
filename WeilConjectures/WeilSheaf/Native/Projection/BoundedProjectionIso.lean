@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.WeilSheaf.ProperProjectionFormula
+public import WeilConjectures.WeilSheaf.LowerShriekIndependence
 public import WeilConjectures.WeilSheaf.Native.Projection.OpenProjectionIso
 public import WeilConjectures.WeilSheaf.Native.Projection.ProjectionPasting
 

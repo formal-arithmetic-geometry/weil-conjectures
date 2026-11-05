@@ -8,6 +8,7 @@ public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationCoheren
 public import WeilConjectures.WeilSheaf.Native.Projection.UncurriedComparison
 public import WeilConjectures.WeilSheaf.Native.Projection.ProjectionForgetIsoTransport
 public import WeilConjectures.WeilSheaf.Native.Projection.GeometricProjectionNaturality
+import WeilConjectures.Tactic.ExactModProofs
 
 /-! # The proper projection square before restriction to bounded complexes -/
 
@@ -55,15 +56,21 @@ theorem nativeProperProjection_forgetSquare :
       (derivedCondensedRealizationUpperStarIso k₀ l g).symm
       (condensedRealizationTensor k₀ l X) (condensedRealizationTensor k₀ l Y)
       (nativeProperProjectionNatTrans k₀ l g)
-      (CondensedRing.derivedUpperStarLowerStarAdjunction Λ gb).projectionMorphismNatTrans := by
+      (CondensedRing.derivedUpperStarLowerStarAdjunction Λ gb).uncurriedProjectionMorphismNatTrans := by
   intro M N
   have h := Adjunction.map_rightAdjointProjectionMap_comp_mateEquiv
     (derivedUpperStarLowerStarAdjunction k₀ l g)
     (CondensedRing.derivedUpperStarLowerStarAdjunction Λ gb)
     (comparisonCompatible_derivedCondensedRealization k₀ l g) M N
-  simpa only [nativeProperProjectionNatTrans, Functor.uncurryRightProjection,
-    nativeProperForgetIso, asIso_hom, Iso.symm_hom, Functor.uncurry_obj_map,
+  dsimp +instances only [Functor.comp_obj, Functor.prod_obj, Functor.id_obj] at h ⊢
+  simp only [nativeProperProjectionNatTrans, Functor.uncurryRightProjection,
+    nativeProperForgetIso, Adjunction.uncurriedProjectionMorphismNatTrans,
+    condensedRealizationCurriedTensor, Functor.curryCompIsoOfIso',
+    Functor.comp_obj, Functor.prod_obj, Functor.id_obj,
+    asIso_hom, Iso.symm_hom, Functor.uncurry_obj_map,
     curriedTensor_map_app, curriedTensor_obj_map, id_whiskerRight, whiskerLeft_id,
-    Category.comp_id, Category.id_comp] using h
+    Category.comp_id, Category.id_comp] at h ⊢
+  simp only [Category.comp_id, Category.id_comp]
+  exact_mod_proofs h
 
 end AlgebraicGeometry.ProEtaleWeilSheaf

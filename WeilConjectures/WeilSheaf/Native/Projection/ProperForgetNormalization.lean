@@ -96,7 +96,7 @@ lemma nativeProjectionPushMate_normalization
     (adicLowerStarGeometricFiberMapCompFrobeniusIso l g (comp_over g (Spec (CommRingCat.of k₀))))
   let β₂ := projectionAdicCondensedPushIso l gb
   have h₁ : (mateEquiv a b α₁.hom).natTrans = β₁.hom := by
-    ext K
+    ext K : 2
     exact IsoAlgebra.mateEquiv_mapOfNatIsoCompForgetIso_inv_app b
       (adicUpperStarGeometricFiberMapCompFrobeniusIso l g
         (comp_over g (Spec (CommRingCat.of k₀))))
