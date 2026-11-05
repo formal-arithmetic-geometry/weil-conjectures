@@ -191,7 +191,7 @@ attribute [local irreducible] Scheme.Modules.tensorPullback Scheme.Modules.tenso
 attribute [local implicit_reducible] Scheme.isoSpec asIso
 attribute [local instance_reducible] Scheme.Modules TopCat.Sheaf
 attribute [local implicit_reducible] DerivedCategory
-  Functor.mapHomologicalComplex HomotopyCategory Functor.mapHomotopyCategory
+  HomotopyCategory Functor.mapHomotopyCategory
   HomotopyCategory.quotient DerivedCategory.Q DerivedCategory.Qh
   HomologicalComplexUpToQuasiIso.Qh
 
