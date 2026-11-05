@@ -10,7 +10,6 @@ public import Mathlib.Algebra.Category.ModuleCat.Limits
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModulesRestrictionObjects
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
-public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 import WeilConjectures.AlgebraicGeometry.CoherentFormalModuleAffineLimitEquivalence
 import WeilConjectures.AlgebraicGeometry.CoherentFormalModuleAffineLimitComparison
