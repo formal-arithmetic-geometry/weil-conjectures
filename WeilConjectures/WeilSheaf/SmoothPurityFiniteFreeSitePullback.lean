@@ -16,6 +16,18 @@ universe u
 open CategoryTheory Limits
 open scoped CategoryTheory.Obj
 
+namespace CategoryTheory
+
+private lemma purity_forward_square_of_two_inverses {C : Type*} [Category C]
+    {A B C' D E : C} (a : A ≅ B) (b : B ≅ C') (d : D ≅ E)
+    (u : C' ⟶ E) (v : A ⟶ D)
+    (h : u ≫ d.inv = b.inv ≫ a.inv ≫ v) :
+    a.hom ≫ b.hom ≫ u = v ≫ d.hom := by
+  apply (cancel_mono d.inv).mp
+  simp only [Category.assoc, h, Iso.hom_inv_id_assoc, Iso.hom_inv_id, Category.comp_id]
+
+end CategoryTheory
+
 namespace AlgebraicGeometry.ProEtale
 
 open Scheme
@@ -95,5 +107,24 @@ lemma purity_comparisonFreeSheaf_pullback
     Adjunction.symm_conjugateIsoEquiv_symm_apply, Equiv.apply_symm_apply,
     lowerStarComparisonLowerStarIso, Iso.refl_symm, Iso.refl_hom, NatTrans.id_app,
     NatIso.ofComponents_hom_app, Functor.map_id, Category.id_comp, Category.comp_id]
+
+/-- Forward form of the free-sheaf site comparison square. -/
+lemma purity_comparisonFreeSheaf_pullback_forward
+    (M : Sheaf Y.smallEtaleTopology Ab.{u + 1}) :
+    (g)^*[ModuleCat.{u + 1} (ULift.{u + 1} T)].map
+          ((purityComparisonFreeSheafIso T Y).hom.app M) ≫
+        (comparisonUpperStarUpperStarIso (ModuleCat.{u + 1} (ULift.{u + 1} T)) g).hom.app
+          ((Etale.extendScalars (ULift.{u + 1} T) Y).obj M) ≫
+        ν^*(X)[ModuleCat.{u + 1} (ULift.{u + 1} T)].map
+          ((Etale.upperStarExtendScalarsIso (ULift.{u + 1} T) g).hom.app M) =
+      (purityComparisonFreePullbackIso T g).hom.app M ≫
+        (purityComparisonFreeSheafIso T X).hom.app ((Etale.upperStar Ab.{u + 1} g).obj M) := by
+  exact purity_forward_square_of_two_inverses
+    ((g)^*[ModuleCat.{u + 1} (ULift.{u + 1} T)].mapIso
+      ((purityComparisonFreeSheafIso T Y).app M))
+    ((comparisonUpperStarUpperStarIso (ModuleCat.{u + 1} (ULift.{u + 1} T)) g).app
+      ((Etale.extendScalars (ULift.{u + 1} T) Y).obj M))
+    ((purityComparisonFreeSheafIso T X).app ((Etale.upperStar Ab.{u + 1} g).obj M))
+    _ _ (purity_comparisonFreeSheaf_pullback T g M)
 
 end AlgebraicGeometry.ProEtale

@@ -25,6 +25,29 @@ lemma purity_leftAdjointUniq_ofNatIsoRight
   ext X
   simp [Adjunction.leftAdjointUniq, conjugateEquiv_symm_apply_app]
 
+/-- Composition of two comparisons of left adjoints, expressed through their
+right-adjoint comparisons. -/
+lemma purity_conjugate_comp_factor
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    {F : A ⥤ B} {RF : B ⥤ A} (f : F ⊣ RF)
+    {G : B ⥤ C} {RG : C ⥤ B} (g : G ⊣ RG)
+    {H : C ⥤ D} {RH : D ⥤ C} (h : H ⊣ RH)
+    {I : B ⥤ D} {RI : D ⥤ B} (i : I ⊣ RI)
+    {J : A ⥤ D} {RJ : D ⥤ A} (j : J ⊣ RJ)
+    (a : RI ≅ RH ⋙ RG) (b : RJ ≅ RI ⋙ RF) :
+    (conjugateIsoEquiv j ((f.comp g).comp h)).symm
+        (b ≪≫ Functor.isoWhiskerRight a RF ≪≫ Functor.associator _ _ _) =
+      Functor.associator _ _ _ ≪≫
+        Functor.isoWhiskerLeft F ((conjugateIsoEquiv i (g.comp h)).symm a) ≪≫
+        (conjugateIsoEquiv j (f.comp i)).symm b := by
+  apply (conjugateIsoEquiv j ((f.comp g).comp h)).injective
+  rw [Equiv.apply_symm_apply,
+    conjugateIsoEquiv_trans _ (f.comp (g.comp h)),
+    conjugateIsoEquiv_trans _ (f.comp i),
+    conjugateIsoEquiv_isoWhiskerLeft, conjugateIsoEquiv_associator,
+    Equiv.apply_symm_apply, Equiv.apply_symm_apply]
+  simp only [Iso.trans_assoc]
+
 end CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale
@@ -53,24 +76,17 @@ lemma purity_comparisonUpperStarFreeIso_factor :
         purityComparisonFreeSheafIso T X := by
   unfold comparisonUpperStarFreeIso
   rw [CategoryTheory.purity_leftAdjointUniq_ofNatIsoRight]
-  apply (conjugateIsoEquiv
+  have h := purity_conjugate_comp_factor (comparisonAdjunction Ab.{u + 1} X)
+    (Mod.freeForgetAdjunction (condensedRingObj (Profinite.continuousMapRingObj T) X))
+    (finiteCoefficientModEquivalence X T).toAdjunction
+    (purityFiniteFreeSheafAdjunction T X)
     ((Etale.extendScalarsAdjunction (ULift.{u + 1} T) X).comp (comparisonAdjunction _ X))
-    (((comparisonAdjunction Ab.{u + 1} X).comp
-      (Mod.freeForgetAdjunction (condensedRingObj (Profinite.continuousMapRingObj T) X))).comp
-        (finiteCoefficientModEquivalence X T).toAdjunction)).injective
-  rw [Equiv.apply_symm_apply]
-  rw [conjugateIsoEquiv_trans _ ((comparisonAdjunction Ab.{u + 1} X).comp
-      ((Mod.freeForgetAdjunction _).comp (finiteCoefficientModEquivalence X T).toAdjunction)),
-    conjugateIsoEquiv_trans _
-      ((comparisonAdjunction Ab.{u + 1} X).comp (purityFiniteFreeSheafAdjunction T X)),
-    conjugateIsoEquiv_isoWhiskerLeft]
-  erw [conjugateIsoEquiv_associator]
-  simp only [purityComparisonFreeSheafIso, purityFiniteCoefficientFreeIso,
-    Equiv.apply_symm_apply]
+    (finiteCoefficientModEquivalenceInverseCompForgetIso T X).symm (Iso.refl _)
+  refine Eq.trans ?_ h
+  congr 1
   ext N
   simp only [Iso.trans_hom, NatTrans.comp_app, Iso.refl_hom, NatTrans.id_app,
-    Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, Functor.associator_hom_app,
-    Functor.associator_inv_app, Category.id_comp, Category.comp_id,
+    Functor.associator_hom_app, Category.id_comp, Category.comp_id,
     NatIso.ofComponents_hom_app]
 
 end AlgebraicGeometry.ProEtale
