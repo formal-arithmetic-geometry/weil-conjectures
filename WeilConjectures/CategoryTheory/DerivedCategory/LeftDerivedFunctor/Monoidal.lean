@@ -285,6 +285,7 @@ lemma mapHomologicalComplexδNatTrans_comp (F : C ⥤ D) (G : D ⥤ E) [F.Additi
   erw [Functor.comp_map, ← G.map_comp_assoc, map_ιMapBifunctor_mapBifunctorComparisonX,
     G.map_comp_assoc, map_ιMapBifunctor_mapBifunctorComparisonX]
   simp
+  rfl
 
 omit [HasFunctorialFlatResolution C] [HasFunctorialFlatResolution D] in
 open HomologicalComplex in
@@ -526,7 +527,7 @@ lemma leftDerivedTensorComparison_comp :
   have nG := G.leftDerivedFunctorCounit.naturality
     (((mapHomotopyCategoryδNatTrans (.up ℤ) F).app X₁).app X₂)
   have ne := (F.leftDerivedFunctorCompIso G).hom.naturality (μ Qh X₁ X₂)
-  dsimp at nG ne
+  dsimp only [Functor.comp_obj, Functor.comp_map] at nG ne
   rw [← Functor.map_comp_assoc, ← Functor.map_comp_assoc, Category.assoc, cF,
     Functor.map_comp, Functor.map_comp, Category.assoc, Category.assoc, reassoc_of% nG,
     ← reassoc_of% ne, leftDerivedFunctorCompIso_hom_app_comp_counit_assoc,
