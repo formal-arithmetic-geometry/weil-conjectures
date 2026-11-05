@@ -143,7 +143,7 @@ noncomputable def rightDerivedLowerShriekOfCompactificationComparisonIso {f : X 
           (Functor.mapDerivedCategoryCompIso _ _ ≪≫
             Functor.mapDerivedCategoryNatIso
               (openImmersionLowerShriekComparisonUpperStarIso A c.i).symm ≪≫
-            Functor.mapDerivedCategoryCompIso _ _) R(ProEtale.lowerStar A c.g) ≪≫
+            (Functor.mapDerivedCategoryCompIso _ _).symm) R(ProEtale.lowerStar A c.g) ≪≫
         Functor.associator _ _ _) ≪≫
     (Functor.associator _ _ _).symm ≪≫
     Functor.isoWhiskerRight
