@@ -106,21 +106,29 @@
 - Completion marker: `/home/ubuntu/u9/state/BZ311.DONE`.
 - This final commit changes only progress documentation; Lean sources match the green build.
 
-# BZ395 complete
+# BZ384 in progress
 
-- Branch: `u9/BZ395`; baseline: `9bc0d70a6`.
-- Owned module `WeilConjectures.AlgebraicGeometry.ProfinitePointPullback` passed
-  `ucheck-bump`: rc=0, failed=0, 3949 jobs, source `ec3927a96a`.
-- Five downstream modules also built green: `FiniteEtaleSplitHomDescent`,
-  `FiniteEtaleSheetSumCompatibility`, `ComponentRelativeProfiniteSite`,
-  `RelativeComponentLiftPullbackSpace`, and `ComponentLiftBaseChange`.
-- Final downstream batch: rc=0, failed=0, 4211 jobs; source `95f839c52e499e598b7ca3a36676450016985d60`.
-- Applied the exact three-header API patch after the user's continuation instruction.
-  Added explicit inverse-isomorphism simp rules and a local slice-coproduct instance.
-- Two downstream targets were skipped for foreign dependency errors owned by
-  BZ389/BZ390; BZ436 also failed in the exploratory batch. Their sources are untouched.
-- Fix patterns, exact errors, counts, and full log paths: `/home/ubuntu/u9/bz/FIXES-BZ395.md`.
-- Contract audit: `/home/ubuntu/u9/bz/BZ395-contract-audit.txt`.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or limit increases.
-- Completion marker: `/home/ubuntu/u9/state/BZ395.DONE`.
-- This final commit changes only progress documentation; Lean sources match the green builds.
+- Branch: `u9/BZ384`; starting commit: `98654719b`.
+- Baseline remote build confirmed five errors in compositor directions in declaration types.
+- The user instructed continuation after the explicit nine-direction patch proposal.
+  That patch is now applied, preserving the original equations under Mathlib's reversed compositor.
+- Next: remote validation of the assigned module, then its three direct importers.
+- Fix patterns and baseline log: `/home/ubuntu/u9/bz/FIXES-BZ384.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+# BZ430 complete
+
+- Branch: `u9/BZ430`; starting commit: `99a06bbbb`.
+- Assigned module `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebraFreeComparison` passed `ucheck-bump`: rc=0, failed=0, 2022 jobs, target rebuilt in 6.1 seconds.
+- Validated source commit: `bb1af5fb2f`; tree: `poolb:43.157.174.214`.
+- User instructed continuation after the exact two-helper visibility proposal; both helper proposition texts are unchanged and both are now private. All proof bodies, binders, assumptions, and docstrings are unchanged.
+- Localization public/import-all directives permit proof and private-signature reduction through `Qh`.
+- Owned module also rebuilt successfully in the downstream batch at `e6c26edd04`.
+- Direct importer `WeilConjectures.WeilSheaf.LowerShriekForget` was blocked by unowned BZ373's `GrothendieckEtaleRelativeSectionColimit.lean:98:7` rewrite failure. Per the brief, stopped the downstream attempt and skipped its importer `WeilConjectures.WeilSheaf.AffineLineBundle`, which shares the blocker.
+- Owned green log: `/home/ubuntu/u9/bz/BZ430-owned-green-full.log`.
+- Downstream failure log: `/home/ubuntu/u9/bz/BZ430-downstream-full.log`.
+- Fixes and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ430.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ430-contract-audit.txt`.
+- No local Lean/Lake, sorries, axioms, admissions, trust bypasses, profiler probes, or heartbeat increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ430.DONE`.
+- This final commit updates only progress documentation; Lean source matches the green build.
