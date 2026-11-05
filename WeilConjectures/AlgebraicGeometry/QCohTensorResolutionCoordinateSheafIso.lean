@@ -25,7 +25,6 @@ local instance TensorResolutionCoordinateSheafIso_localInst3 (X : Scheme.{u}) (M
     ((curriedTensor X.Modules).obj M).PreservesZeroMorphisms :=
   SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X.sheaf M
 
-set_option maxHeartbeats 800000 in
 -- Tensor-resolution comparisons require substantial definitional reduction.
 /-- Affine ordinary tensor coordinates obtained through one global second resolution. -/
 noncomputable def tensorResolutionCoordinateSheafIso
