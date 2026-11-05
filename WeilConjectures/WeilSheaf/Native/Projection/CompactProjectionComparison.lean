@@ -56,39 +56,52 @@ def projectionGeometricPullComp :
   (eqToIso (congrArg (CondensedRing.boundedConstructibleUpperStar Λ l) (cb).overI_overG.symm) ≪≫
     CondensedRing.boundedConstructibleUpperStarComp Λ l (cb).overI (cb).overG).symm
 
-set_option maxHeartbeats 800000 in
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Forget comparison for the compactification induced from the Weil category. -/
 def projectionCompactificationForgetIso :
     derivedLowerShriek k₀ l f ⋙ compactProjectionForget k₀ l Y ≅
       compactProjectionForget k₀ l X ⋙
-        CondensedRing.boundedConstructibleLowerShriekOfCompactification l cb :=
-  Functor.isoWhiskerLeft (extensionByZero (c).i) (projectionProperForgetIso k₀ l (c).g) ≪≫
-    Functor.isoWhiskerRight (projectionOpenForgetIso k₀ l (c).i)
-      (CondensedRing.boundedConstructibleLowerStar l (cb).overG)
+        CondensedRing.boundedConstructibleLowerShriekOfCompactification l cb := by
+  let e₁ := Functor.isoWhiskerLeft (extensionByZero (c).i)
+    (projectionProperForgetIso k₀ l (c).g)
+  let e₂ := Functor.isoWhiskerRight (projectionOpenForgetIso k₀ l (c).i)
+    (CondensedRing.boundedConstructibleLowerStar l (cb).overG)
+  let e := e₁ ≪≫ e₂
+  exact e
 
-set_option maxHeartbeats 800000 in
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Pullback comparison obtained by pasting the open and proper comparisons. -/
 def projectionCompactPullForgetIso :
     upperStar f ⋙ compactProjectionForget k₀ l X ≅
-      compactProjectionForget k₀ l Y ⋙ CondensedRing.boundedConstructibleUpperStar Λ l fb :=
-  Functor.isoWhiskerRight (projectionBoundedPullComp k₀ l f).symm
-      (compactProjectionForget k₀ l X) ≪≫
-    Functor.isoWhiskerLeft (upperStar (c).g) (compactProjectionForgetUpperStarIso k₀ l (c).i) ≪≫
-    Functor.isoWhiskerRight (compactProjectionForgetUpperStarIso k₀ l (c).g)
-      (CondensedRing.boundedConstructibleUpperStar Λ l (cb).overI) ≪≫
-    Functor.isoWhiskerLeft (compactProjectionForget k₀ l Y) (projectionGeometricPullComp k₀ l f)
+      compactProjectionForget k₀ l Y ⋙ CondensedRing.boundedConstructibleUpperStar Λ l fb := by
+  let e₁ := Functor.isoWhiskerRight (projectionBoundedPullComp k₀ l f).symm
+    (compactProjectionForget k₀ l X)
+  let e₂ := Functor.isoWhiskerLeft (upperStar (c).g)
+    (compactProjectionForgetUpperStarIso k₀ l (c).i)
+  let e₃ := Functor.isoWhiskerRight (compactProjectionForgetUpperStarIso k₀ l (c).g)
+    (CondensedRing.boundedConstructibleUpperStar Λ l (cb).overI)
+  let e₄ := Functor.isoWhiskerLeft (compactProjectionForget k₀ l Y)
+    (projectionGeometricPullComp k₀ l f)
+  let e := e₁ ≪≫ e₂ ≪≫ e₃ ≪≫ e₄
+  exact e
 
-set_option maxHeartbeats 800000 in
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- The compact projection isomorphism, with both factors canonically normalized. -/
-def projectionCompactIso : nativeCompactProjectionLeft k₀ l f ≅ nativeCompactProjectionRight k₀ l f :=
-  projectionCompositeIso (nativeBoundedOpenProjectionIso (c).i) (nativeBoundedProperProjectionIso (c).g)
+def projectionCompactIso : nativeCompactProjectionLeft k₀ l f ≅ nativeCompactProjectionRight k₀ l f := by
+  let e := projectionCompositeIso
+    (I := extensionByZero (k₀ := k₀) (l := l) (c).i)
+    (G := derivedLowerStar (k₀ := k₀) (l := l) (c).g)
+    (P := upperStar (k₀ := k₀) (l := l) (c).i)
+    (Q := upperStar (k₀ := k₀) (l := l) (c).g)
+    (TC := nativeConstructibleTensor k₀ l X)
+    (TD := nativeConstructibleTensor k₀ l (c).Z)
+    (TE := nativeConstructibleTensor k₀ l Y)
+    (nativeBoundedOpenProjectionIso (c).i) (nativeBoundedProperProjectionIso (c).g)
     (projectionBoundedPullComp k₀ l f)
+  exact e
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
