@@ -404,7 +404,7 @@ theorem derivedPullback_tensor_unit_kFlat {T X : Scheme.{uModel}} (g : T ⟶ X)
   have hη : η.inv = (derivedPullback g).map (Functor.LaxMonoidal.ε QX) ≫
       e U ≫ QT.map u.inv ≫ inv (Functor.LaxMonoidal.ε QT) := by
     apply (cancel_mono (Functor.LaxMonoidal.ε QT)).mp
-    simpa only [Category.assoc, IsIso.inv_hom_id, Category.comp_id] using hη'
+    simpa only [cast_eq, Category.assoc, IsIso.inv_hom_id, Category.comp_id] using hη'
   have he : ∀ {K N : CochainComplex AX ℤ} (f : K ⟶ N),
       (derivedPullback g).map (QX.map f) ≫ e N = e K ≫ QT.map (FC.map f) := by
     intro K N f
@@ -417,7 +417,9 @@ theorem derivedPullback_tensor_unit_kFlat {T X : Scheme.{uModel}} (g : T ⟶ X)
       (derivedPullback g).map (Functor.LaxMonoidal.μ QX K N) ≫ e (K ⊗ N) ≫
         QT.map (φ K N).hom := by
     intro K N hK hN
-    rw [← hμ K N hK hN]
+    have hμ' := hμ K N hK hN
+    simp only [cast_eq] at hμ'
+    erw [← hμ']
     dsimp only [QX, QT, e]
     simp only [Iso.app_hom]
     rw [Iso.inv_hom_id_app_app_assoc]
