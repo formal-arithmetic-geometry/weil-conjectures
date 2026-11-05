@@ -109,7 +109,7 @@ private theorem X_mul_derivative_multiset_prod (s : Multiset K) :
       ext n
       simp only [coeff_mk, map_add, Multiset.map_cons, Multiset.sum_cons]
       split <;> simp
-    have h4 : X * derivative K (1 - C a * X : K⟦X⟧) =
+    have h4 : X * derivative (R := K) (1 - C a * X : K⟦X⟧) =
         (-mk fun n ↦ if n = 0 then 0 else a ^ n) * (1 - C a * X) := by
       rw [neg_mul, mk_pow_mul_one_sub, derivative_one_sub_C_mul_X]
       ring
@@ -220,10 +220,10 @@ theorem inv_charpolyRev_eq_exp [CharZero K] (F : Module.End K V) :
   have hP1 : PowerSeries.constantCoeff P = 1 := by
     rw [hP, Polynomial.constantCoeff_coe, Polynomial.coeff_zero_eq_eval_zero, eval_charpolyRev]
   have hmul : P * P⁻¹ = 1 := PowerSeries.mul_inv_cancel _ (by rw [hP1]; exact one_ne_zero)
-  have hlogPinv : X * derivative K P⁻¹ = T * P⁻¹ := by
+  have hlogPinv : X * derivative (R := K) P⁻¹ = T * P⁻¹ := by
     rw [PowerSeries.derivative_inv']
     linear_combination (-(P⁻¹ ^ 2)) * hlogP + (T * P⁻¹) * hmul
-  have hXg : X * derivative K g = T := by
+  have hXg : X * derivative (R := K) g = T := by
     ext n
     match n with
     | 0 => simp [hg, hT]
@@ -234,7 +234,7 @@ theorem inv_charpolyRev_eq_exp [CharZero K] (F : Module.End K V) :
       have hm : ((m : K) + 1) ≠ 0 := by exact_mod_cast Nat.succ_ne_zero m
       push_cast
       rw [div_mul_cancel₀ _ hm]
-  have hlogE : X * derivative K ((PowerSeries.exp K).subst g) =
+  have hlogE : X * derivative (R := K) ((PowerSeries.exp K).subst g) =
       T * (PowerSeries.exp K).subst g := by
     rw [PowerSeries.derivative_subst hsubst, PowerSeries.derivative_exp,
       mul_comm (PowerSeries.subst g (PowerSeries.exp K)), ← mul_assoc, hXg]
@@ -290,8 +290,8 @@ theorem logOf_charpolyRev [CharZero K] (F : Module.End K V) :
   have hP1 : PowerSeries.constantCoeff P = 1 := by
     rw [hP, Polynomial.constantCoeff_coe, Polynomial.coeff_zero_eq_eval_zero, eval_charpolyRev]
   have hP0 : P ≠ 0 := fun h ↦ by simp [h] at hP1
-  have hlogP : X * derivative K P = -T * P := X_mul_derivative_charpolyRev F
-  have hXg : X * derivative K (traceSeries F) = T := by
+  have hlogP : X * derivative (R := K) P = -T * P := X_mul_derivative_charpolyRev F
+  have hXg : X * derivative (R := K) (traceSeries F) = T := by
     ext n
     match n with
     | 0 => simp [hT]
