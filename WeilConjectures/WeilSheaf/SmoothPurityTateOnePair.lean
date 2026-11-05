@@ -8,6 +8,7 @@ public import WeilConjectures.WeilSheaf.SmoothPurityCanonicalTateScalar
 public import WeilConjectures.WeilSheaf.SmoothPurityCyclotomicScalar
 public import WeilConjectures.TateTwist.TateTwistPowerDatum
 public import WeilConjectures.Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
+import WeilConjectures.Tactic.ExactModProofs
 
 /-! # The canonical one-twist pair has cyclotomic Frobenius -/
 
@@ -43,8 +44,20 @@ theorem purity_nonempty_tateTwistOnePair_iso_unitScalar :
         (ProEtaleWeilSheaf.regularSmulIso k₀ ℓ X (WeilSheaf.cyclotomicUnit k₀ ℓ)).hom) =
     (upperStarTateTwistOneIso ℓ (X ↘ Spec (.of k₀)).geometricGaloisFrobenius.hom
       (X ↘ Spec (.of k₀)).geometricFiberToAlgebraicClosure).hom ≫ e.hom
-  exact purity_scalarDatum_inverse _ _ _ e.hom (Nat.card k₀ : ℤ) _
-    (purityCanonicalTateOneTrivialization_weil ℓ (X ↘ Spec (.of k₀)) hζ hζ')
-    (ProEtaleWeilSheaf.purity_regularSmulIso_cyclotomic_cancel k₀ ℓ X)
+  have he := purityCanonicalTateOneTrivialization_weil ℓ (X ↘ Spec (.of k₀)) hζ hζ'
+  have hs := ProEtaleWeilSheaf.purity_regularSmulIso_cyclotomic_cancel k₀ ℓ X
+  have h := purity_scalarDatum_inverse
+    (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ)
+      (X ↘ Spec (.of k₀)).geometricGaloisFrobenius.hom)
+    (upperStarTateTwistOneIso ℓ (X ↘ Spec (.of k₀)).geometricGaloisFrobenius.hom
+      (X ↘ Spec (.of k₀)).geometricFiberToAlgebraicClosure).hom
+    (Functor.Monoidal.εIso (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ)
+      (X ↘ Spec (.of k₀)).geometricGaloisFrobenius.hom)).inv
+    (purityCanonicalTateOneTrivialization ℓ (X ↘ Spec (.of k₀)) hζ hζ').hom
+    (Nat.card k₀ : ℤ)
+    (ProEtaleWeilSheaf.regularSmulIso k₀ ℓ X (WeilSheaf.cyclotomicUnit k₀ ℓ)).hom
+    (by exact_mod_proofs he) hs
+  dsimp only [e]
+  exact_mod_proofs h
 
 end AlgebraicGeometry.ProEtale

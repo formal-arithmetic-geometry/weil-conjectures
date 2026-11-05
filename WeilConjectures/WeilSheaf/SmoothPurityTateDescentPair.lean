@@ -6,6 +6,7 @@ module
 
 public import WeilConjectures.WeilSheaf.SmoothPurityTateGeometricPair
 public import WeilConjectures.WeilSheaf.TateTwistCondensedBridge
+import WeilConjectures.Tactic.ExactModProofs
 
 /-! # The Tate datum from finite-base descent is the canonical root datum -/
 
@@ -33,8 +34,9 @@ noncomputable def purity_geometricFiberWeilLowerStarTateNatIso (d : ℕ) :
     (CondensedRing.geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj ℓ)
         (X ↘ Spec (.of k₀))).obj (tateTwistNat X ℓ d) ≅
       tateTwistLowerPair k₀ ℓ X d := by
+  apply Classical.choice
   dsimp only [tateTwistLowerPair, geometricFiberFrobeniusIso,
     frobeniusUpperStarIsoLowerStarInv]
-  exact purity_geometricTatePairIso ℓ (X ↘ Spec (.of k₀)) d
+  exact_mod_proofs Nonempty.intro (purity_geometricTatePairIso ℓ (X ↘ Spec (.of k₀)) d)
 
 end AlgebraicGeometry.WeilSheaf
