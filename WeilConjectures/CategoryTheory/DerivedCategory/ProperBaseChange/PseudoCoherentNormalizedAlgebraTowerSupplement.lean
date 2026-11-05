@@ -305,7 +305,8 @@ theorem pseudoCoherent_normalizedAlgebraTower
       (Functor.mapDerivedCategoryCompIso
         (ModuleCat.restrictScalars.{max u v} (Ideal.Quotient.factor
           (Ideal.pow_le_pow_right (I := J) (Nat.le_succ (n + 1)))))
-        (ModuleCat.restrictScalars.{max u v} (Ideal.Quotient.mk (J ^ (n + 2))))).symm.inv.app (K n) ≫
+        (ModuleCat.restrictScalars.{max u v} (Ideal.Quotient.mk (J ^ (n + 2))))).symm.inv.app
+          (K n) ≫
       (Functor.mapDerivedCategoryNatIso (ModuleCat.restrictScalarsComp'.{max u v}
         (Ideal.Quotient.mk (J ^ (n + 2)))
         (Ideal.Quotient.factor (Ideal.pow_le_pow_right (I := J) (Nat.le_succ (n + 1))))

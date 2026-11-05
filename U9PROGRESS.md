@@ -114,6 +114,7 @@
   mechanical sweep's misplaced `.symm` in the `hf` hypothesis.
 - The user instructed continuation after the exact statement-syntax proposal.
   That patch is now applied, preserving the intended map.
-- Next: remote unit validation, then both direct importers, then DONE.
+- Assigned module passed `ucheck-bump`: rc=0, failed=0, 3879 jobs at `5fc97c7523`.
+- Next: both direct importers, then DONE.
 - Fix notes and diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ404.md`.
 - No local Lean/Lake execution, proof placeholders, or limit increases.
