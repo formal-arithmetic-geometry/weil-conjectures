@@ -34,7 +34,8 @@ lemma constRingSheafSection_comp_constRingSheafToCondensedRingObj (t : T) :
     Sheaf.constRingSheafSection (Scheme.ProEt.topology X) (ULift.up t : coeffType.{u} T) ≫
         constRingSheafToCondensedRingObj X T =
       ε (upperStarFromPoint X) ≫
-        (upperStarFromPoint X).map (Profinite.continuousMapConstRingHom.{u} T t).hom := by
+        (upperStarFromPoint X).map (coeffSection T t) := by
+  dsimp only [coeffSection]
   let tab := AddCommGrpCat.unitHom (M := AddCommGrpCat.of (coeffType.{u} T)) (ULift.up t)
   let π := (toSpecZ X)^*[Ab.{u + 1}]
   let cS := constantSheaf (Scheme.ProEt.topology specZ.{u}) Ab.{u + 1}
@@ -52,7 +53,7 @@ lemma constRingSheafSection_comp_constRingSheafToCondensedRingObj (t : T) :
   change π.map (ε cS) ≫ π.map (cS.map tab) ≫ π.map (constantSheafToPointUpperStar.app _) ≫
       π.map (pointUpperStar.map (Profinite.constRingSheafToContinuousMapRingObj T)) =
     π.map (ε pointUpperStar.{u}) ≫
-      π.map (pointUpperStar.map (Profinite.continuousMapConstRingHom.{u} T t).hom)
+      π.map (pointUpperStar.map (coeffSection T t))
   rw [← π.map_comp, ← π.map_comp, ← π.map_comp, ← π.map_comp, reassoc_of% h₂, e₂, Category.assoc,
     ← pointUpperStar.map_comp, ← pointUpperStar.map_comp, ← Category.assoc (ε cP), ← h₃]
   rfl
@@ -66,7 +67,7 @@ lemma finiteCoefficientModEquivalence_smul
     (U : X.ProEtᵒᵖ) (t : T) (y : ((finiteCoefficientModEquivalence X T).functor.obj M).obj.obj U) :
     (ULift.up t : coeffType.{u} T) • y =
       (Mod.globalSmul (ε (upperStarFromPoint X) ≫
-        (upperStarFromPoint X).map (Profinite.continuousMapConstRingHom.{u} T t).hom) M).hom.app
+        (upperStarFromPoint X).map (coeffSection T t)) M).hom.app
           U y := by
   refine (Sheaf.modSmul_modToPresheafMod
     ((Mod.comap (constRingSheafToCondensedRingObj X T)).obj M) U _ y).trans ?_

@@ -15,3 +15,13 @@ so declarations after those sections failed parsing. Fixed by keeping the duplic
 scoped notation. Also corrected a missing X binder in the generated coefficient file. The run
 continues rebuilding prerequisite cache; no second build launched. Prepared separate finite
 reading constructors and iso-level boundary declarations, all profiled with threshold 0.
+
+19:55 CST: Batch 195111 green for duplicated Pullback, ChangeCoefficients, Coefficient,
+Tower, FreeCoefficientPull, FiniteRoots, IntegralPullback, Scalars, TowerProjection,
+ChangeCoefficientsComp, IntegralReduction, TowerReduction, PullCoefficientComposition,
+TateCoefficientComposition, TowerDoubleReduction. FinitePullback has an ordinary rewrite
+failure: old constant-section morphism's codomain leaks original continuousMapRingObj into the
+new coeffRing interface. Added a typed coeffSection. IntegralReductionPullback kernel timed out
+(60.9s cumulative): its supplied coefficient morphism still inferred the OLD target object.
+Now reconstructing finiteReduction/compositeReduction/integersModPowReduction with explicit new
+coefficient codomains. This is exactly the implicit-data mixing warned against in strategy 3.

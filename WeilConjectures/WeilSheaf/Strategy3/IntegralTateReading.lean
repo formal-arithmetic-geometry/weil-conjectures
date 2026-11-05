@@ -4,6 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
+public import WeilConjectures.WeilSheaf.Strategy3.ReductionCoefficients
+
 public import WeilConjectures.WeilSheaf.Strategy3.TateReading
 public import WeilConjectures.WeilSheaf.SmoothPurityReadingComposition
 public import WeilConjectures.WeilSheaf.Strategy3.IntegralReductionPullback
@@ -33,7 +35,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgC
 noncomputable def finiteCoefficientModEquivalenceExtendScalarsIntegralTateTwistOneIso
     {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) :
     (finiteCoefficientModEquivalence X (PadicAlgCl.integersModPow ℓ E n)).functor.obj
-        ((Mod.extendScalars (integersModPowReduction X ℓ E n)).obj
+        ((Mod.extendScalars (integersModPowReduction ℓ E n X)).obj
           (integralTateTwistOne X ℓ E)) ≅
       ν^*(X)[ModuleCat.{u + 1} (coeffType.{u} (PadicAlgCl.integersModPow ℓ E n))].obj
         (Etale.tateSheaf (coeffType.{u} (PadicAlgCl.integersModPow ℓ E n)) X) :=
@@ -41,7 +43,7 @@ noncomputable def finiteCoefficientModEquivalenceExtendScalarsIntegralTateTwistO
       (extendScalarsIntegralTateTwistOneIntegersModPowIso ℓ E n f) ≪≫
     purityFiniteRootTateReadingIso (PadicAlgCl.integersModPow ℓ E n) (ℓ ^ n)
       (pow_pos (Fact.out : ℓ.Prime).pos n)
-      (ProEtale.CondensedRing.ringChar_integersModPowCoeff ℓ E n) X
+      (ringChar_coeffType ℓ E n) X
       (isUnit_natCast_pow_of_neZero ℓ n f)
 
 /-- Factor the existing integral Tate reading through its finite free-root line. -/
@@ -51,7 +53,7 @@ lemma purity_finiteCoefficientIntegralTateOneReading_eq
       (finiteCoefficientModEquivalence X (PadicAlgCl.integersModPow ℓ E n)).functor.mapIso
           (extendScalarsIntegralTateTwistOneIntegersModPowIso ℓ E n f) ≪≫
         purityFiniteRootTateReadingIso (PadicAlgCl.integersModPow ℓ E n) (ℓ ^ n)
-          (pow_pos (Fact.out : ℓ.Prime).pos n) (ProEtale.CondensedRing.ringChar_integersModPowCoeff ℓ E n)
+          (pow_pos (Fact.out : ℓ.Prime).pos n) (ringChar_coeffType ℓ E n)
           X (isUnit_natCast_pow_of_neZero ℓ n f) := by
   rfl
 
@@ -60,16 +62,16 @@ geometric pullback datum. -/
 lemma purity_finiteCoefficientIntegralTateOneReading_pullback
     {X Y : Scheme.{u}} (g : X ⟶ Y) (f : Y ⟶ Spec (.of k)) :
     (finiteCoefficientModEquivalence X (PadicAlgCl.integersModPow ℓ E n)).functor.map
-          ((pullIso (Profinite.padicIntegersRingObjToIntegersModPow ℓ E n) g).inv.app
+          ((pullIso (finiteReduction ℓ E n) g).inv.app
             (integralTateTwistOne Y ℓ E)) ≫
         (finiteCoefficientModEquivalence X (PadicAlgCl.integersModPow ℓ E n)).functor.map
-          ((Mod.extendScalars (integersModPowReduction X ℓ E n)).map
+          ((Mod.extendScalars (integersModPowReduction ℓ E n X)).map
             (upperStarIntegralTateTwistOneIso ℓ E g f).hom) ≫
         (finiteCoefficientModEquivalenceExtendScalarsIntegralTateTwistOneIso
           ℓ E n (g ≫ f)).hom =
       (upperStarFiniteCoefficientModEquivalenceIso g
         (PadicAlgCl.integersModPow ℓ E n)).hom.app
-          ((Mod.extendScalars (integersModPowReduction Y ℓ E n)).obj
+          ((Mod.extendScalars (integersModPowReduction ℓ E n Y)).obj
             (integralTateTwistOne Y ℓ E)) ≫
         (g)^*[ModuleCat.{u + 1} (coeffType.{u} (PadicAlgCl.integersModPow ℓ E n))].map
           (finiteCoefficientModEquivalenceExtendScalarsIntegralTateTwistOneIso ℓ E n f).hom ≫
@@ -82,7 +84,7 @@ lemma purity_finiteCoefficientIntegralTateOneReading_pullback
     exact (PadicAlgCl.natCast_eq_zero_integersModPow_iff ℓ E n (ℓ ^ n)).mpr dvd_rfl
   have hf := purityFiniteRootTateReadingIso_pullback
     (PadicAlgCl.integersModPow ℓ E n) (ℓ ^ n) (pow_pos (Fact.out : ℓ.Prime).pos n)
-    (ProEtale.CondensedRing.ringChar_integersModPowCoeff ℓ E n) hzero g
+    (ringChar_coeffType ℓ E n) hzero g
     (isUnit_natCast_pow_of_neZero ℓ n f) (isUnit_natCast_pow_of_neZero ℓ n (g ≫ f))
   have hr := upperStarIntegralTateTwistOneIso_hom_comp_reduction ℓ E g f n
   simp only [purityTateRootPullbackIso,
@@ -94,13 +96,13 @@ lemma purity_finiteCoefficientIntegralTateOneReading_pullback
     (g)^*[ModuleCat.{u + 1} (coeffType.{u} (PadicAlgCl.integersModPow ℓ E n))]
     (upperStarFiniteCoefficientModEquivalenceIso g (PadicAlgCl.integersModPow ℓ E n))
     (Mod.extendScalars (coefficientMap
-      (Profinite.padicIntegersRingObjToIntegersModPow ℓ E n) Y))
+      (finiteReduction ℓ E n) Y))
     (Strategy3.upperStar (Profinite.padicIntegersRingObj ℓ E) g ⋙
       Mod.extendScalars (coefficientMap
-        (Profinite.padicIntegersRingObjToIntegersModPow ℓ E n) X))
-    (pullIso (Profinite.padicIntegersRingObjToIntegersModPow ℓ E n) g).inv
+        (finiteReduction ℓ E n) X))
+    (pullIso (finiteReduction ℓ E n) g).inv
     (integralTateTwistOne Y ℓ E)
-    ((Mod.extendScalars (integersModPowReduction X ℓ E n)).map
+    ((Mod.extendScalars (integersModPowReduction ℓ E n X)).map
       (upperStarIntegralTateTwistOneIso ℓ E g f).hom)
     (extendScalarsIntegralTateTwistOneIntegersModPowIso ℓ E n (g ≫ f))
     (extendScalarsIntegralTateTwistOneIntegersModPowIso ℓ E n f)
@@ -109,10 +111,10 @@ lemma purity_finiteCoefficientIntegralTateOneReading_pullback
     ((Mod.freeFunctor (condensedRingObj (coeffRing (PadicAlgCl.integersModPow ℓ E n)) X)).map
       (upperStarRootsOfUnitySheafHom g (ℓ ^ n)))
     (purityFiniteRootTateReadingIso (PadicAlgCl.integersModPow ℓ E n) (ℓ ^ n)
-      (pow_pos (Fact.out : ℓ.Prime).pos n) (ProEtale.CondensedRing.ringChar_integersModPowCoeff ℓ E n)
+      (pow_pos (Fact.out : ℓ.Prime).pos n) (ringChar_coeffType ℓ E n)
       X (isUnit_natCast_pow_of_neZero ℓ n (g ≫ f)))
     (purityFiniteRootTateReadingIso (PadicAlgCl.integersModPow ℓ E n) (ℓ ^ n)
-      (pow_pos (Fact.out : ℓ.Prime).pos n) (ProEtale.CondensedRing.ringChar_integersModPowCoeff ℓ E n)
+      (pow_pos (Fact.out : ℓ.Prime).pos n) (ringChar_coeffType ℓ E n)
       Y (isUnit_natCast_pow_of_neZero ℓ n f))
     ((comparisonUpperStarUpperStarIso
       (ModuleCat.{u + 1} (coeffType.{u} (PadicAlgCl.integersModPow ℓ E n))) g).hom.app

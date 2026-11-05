@@ -4,6 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
+public import WeilConjectures.WeilSheaf.Strategy3.ReductionCoefficients
+
 public import WeilConjectures.WeilSheaf.Strategy3.Coefficient
 
 public import WeilConjectures.WeilSheaf.Strategy3.TowerDoubleReduction
@@ -37,9 +39,9 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgC
 /-- The canonical integral Tate pullback datum reduces to the canonical pullback
 of finite roots of unity under the actual integral Tate reduction isomorphism. -/
 lemma upperStarIntegralTateTwistOneIso_hom_comp_reduction :
-    (pullIso (Profinite.padicIntegersRingObjToIntegersModPow ℓ E n) g).inv.app
+    (pullIso (finiteReduction ℓ E n) g).inv.app
           (integralTateTwistOne X ℓ E) ≫
-        (Mod.extendScalars (integersModPowReduction X' ℓ E n)).map
+        (Mod.extendScalars (integersModPowReduction ℓ E n X')).map
           (upperStarIntegralTateTwistOneIso ℓ E g f).hom ≫
         (extendScalarsIntegralTateTwistOneIntegersModPowIso ℓ E n (g ≫ f)).hom =
       (Strategy3.upperStar (coeffRing (PadicAlgCl.integersModPow ℓ E n)) g).map
@@ -61,8 +63,8 @@ lemma upperStarIntegralTateTwistOneIso_hom_comp_reduction :
     (upperStar_map_rootsOfUnityTransition_comp_upperStarRootsOfUnitySheafHom ℓ g)
     (preservesLimit_upperStar_tateModuleSystem ℓ g f)
     (Profinite.padicIntRingObjToPadicIntegers ℓ E)
-    (Profinite.padicIntegersRingObjToIntegersModPow ℓ E n)
-    (Profinite.padicIntRingObjToIntegersModPow ℓ E n) rfl n
+    (finiteReduction ℓ E n)
+    (compositeReduction ℓ E n) rfl n
   simp only [upperStarIntegralTateTwistOneIso, integralTateTwistOne, tateModule,
     tateModuleSystem,
     integersModPowReduction, purityTateRootPullbackIso,

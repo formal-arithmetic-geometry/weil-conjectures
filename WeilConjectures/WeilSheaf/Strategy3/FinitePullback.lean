@@ -58,10 +58,10 @@ lemma globalSmul_lowerStar_obj (t : T)
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (coeffRing T) X)) :
     Mod.globalSmul (ε (upperStarFromPoint Y) ≫
-        (upperStarFromPoint Y).map (Profinite.continuousMapConstRingHom.{u} T t).hom)
+        (upperStarFromPoint Y).map (coeffSection T t))
         ((Strategy3.lowerStar (coeffRing T) f).obj M) =
       (f)_*[Ab.{u + 1}].map (Mod.globalSmul (ε (upperStarFromPoint X) ≫
-        (upperStarFromPoint X).map (Profinite.continuousMapConstRingHom.{u} T t).hom) M) := by
+        (upperStarFromPoint X).map (coeffSection T t)) M) := by
   simp only [Strategy3.lowerStar, Functor.comp_obj]
   rw [Mod.globalSmul_comap, Category.assoc,
     ε_comp_map_comp_condensedPushforwardHom, Mod.globalSmul_mapMod]

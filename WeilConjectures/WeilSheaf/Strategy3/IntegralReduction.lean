@@ -4,6 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
+public import WeilConjectures.WeilSheaf.Strategy3.ReductionCoefficients
+
 public import WeilConjectures.WeilSheaf.Strategy3.Coefficient
 
 public import WeilConjectures.WeilSheaf.Strategy3.ChangeCoefficientsComp
@@ -33,11 +35,11 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgC
 variable [NeZero (ℓ : k)]
 
 noncomputable def extendScalarsIntegralTateTwistOneIntegersModPowIso (f : X ⟶ Spec (.of k)) :
-    (Mod.extendScalars (integersModPowReduction X ℓ E n)).obj (integralTateTwistOne X ℓ E) ≅
+    (Mod.extendScalars (integersModPowReduction ℓ E n X)).obj (integralTateTwistOne X ℓ E) ≅
       (Mod.freeFunctor (condensedRingObj (coeffRing (PadicAlgCl.integersModPow ℓ E n)) X)).obj
         (rootsOfUnitySheaf X (ℓ ^ n)) :=
   (Mod.extendScalarsCompIsoOfEq (coefficientMap_comp_eq _ _ _ rfl X)).app (tateModule X ℓ) ≪≫
-    extendScalarsTateModuleIso f ℓ (Profinite.padicIntRingObjToIntegersModPow ℓ E n) n
+    extendScalarsTateModuleIso f ℓ (compositeReduction ℓ E n) n
       (Profinite.natCast_pow_zsmul_id_integersModPowRingObj_eq_zero ℓ E n)
 
 

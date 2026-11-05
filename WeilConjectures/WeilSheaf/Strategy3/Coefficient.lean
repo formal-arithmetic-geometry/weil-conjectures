@@ -46,6 +46,12 @@ instance (T : Type) [TopologicalSpace T] [CommRing T]
     [IsTopologicalRing T] : IsCommMonObj (coeffRing.{u} T) :=
   inferInstanceAs (IsCommMonObj (Profinite.continuousMapRingObj.{u} T))
 
+/-- A constant global section typed using the duplicate coefficient object. -/
+noncomputable def coeffSection (T : Type) [TopologicalSpace T] [CommRing T]
+    [IsTopologicalRing T] (t : T) : 𝟙_ (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) ⟶
+      coeffRing T :=
+  (Profinite.continuousMapConstRingHom.{u} T t).hom
+
 variable (X : Scheme.{u})
 
 variable (T : Type) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] [DiscreteTopology T]
