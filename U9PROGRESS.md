@@ -116,17 +116,21 @@
 - Fix patterns and baseline log: `/home/ubuntu/u9/bz/FIXES-BZ384.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ459 in progress
+# BZ459 complete
 
 - Branch: `u9/BZ459`; starting commit: `99a06bbbb46`.
-- The user instructed continuation after the explicit six-line statement API migration proposal.
-- `DerivedOpenGluingObjects` rebuilt successfully at `9cba6ab4da` (28 seconds).
-  Its two obsolete compositor `.symm` uses are removed, preserving the original canonical maps.
-- The combined build could not check direct importer `DerivedOpenGluing` because the
-  BZ361-owned `SchemeDerivedHomGluing` has three type errors. Per the brief, skip this importer.
-  Its four-line repair is deferred at `/home/ubuntu/u9/bz/BZ459-downstream-deferred.patch`;
-  the committed downstream source is restored to the baseline.
-- Next: run the assigned module alone to obtain a clean rc=0, then complete the handoff.
-- Fix log: `/home/ubuntu/u9/bz/FIXES-BZ459.md`.
-- Build log: `/home/ubuntu/u9/bz/BUILD-BZ459-downstream-full.log`.
+- Assigned module `WeilConjectures.AlgebraicGeometry.DerivedOpenGluingObjects` passed
+  `ucheck-bump`: rc=0, failed=0, 2927 jobs, on `poolb:43.157.132.198`.
+- Validated source commit: `841d33dd8504561794c58471ae53351e311c9f1d`.
+- The user instructed continuation after the explicit statement API migration proposal.
+  Two obsolete compositor `.symm` uses were removed to retain the original canonical maps.
+  All proof bodies, binders, hypotheses, docstrings, and options remain unchanged.
+- Direct importer `DerivedOpenGluing` was attempted but skipped because BZ361-owned
+  `SchemeDerivedHomGluing` fails. Its four-line repair is saved at
+  `/home/ubuntu/u9/bz/BZ459-downstream-deferred.patch`; committed importer source is unchanged.
+- Full green log: `/home/ubuntu/u9/bz/BUILD-BZ459-final-full.log`.
+- Fix patterns and dependency diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ459.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ459-contract-audit.txt`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ459.DONE`.
+- This final commit changes only progress documentation after the successful source build.
