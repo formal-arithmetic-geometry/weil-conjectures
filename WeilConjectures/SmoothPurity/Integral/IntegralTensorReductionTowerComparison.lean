@@ -122,7 +122,7 @@ private def scalarSection
 
 attribute [local implicit_reducible] SheafOfModules.restrictScalars
   PresheafOfModules.restrictScalars PresheafOfModules.restrictScalarsObj
-  PresheafOfModules.presheaf ModuleCat.restrictScalars in
+  PresheafOfModules.presheaf ModuleCat.restrictScalars ModuleCat.RestrictScalars.obj' in
 set_option maxHeartbeats 500000 in
 -- Elaborate the simultaneous scalar-extension and total-tensor comparisons.
 private theorem scalarTensorTotal
