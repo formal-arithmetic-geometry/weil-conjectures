@@ -141,5 +141,28 @@ lemma condensedRealizationLowerStarIso_hom :
     mateEquiv_adicUpperStarCompCondensedModIso_inv_eq_hom _
   rw [condensedRealizationLowerStarIso, asIso_hom]
   exact (congrArg TwoSquare.natTrans h).trans (by rw [h₂, h₁])
+/-- **The derived base change map of the condensed realization along a pushforward.** The mate
+`Rg_* ⋙ D(N_Y) ⟶ D(N_Z) ⋙ Rḡ_*` of
+`AlgebraicGeometry.ProEtaleWeilSheaf.derivedCondensedRealizationUpperStarIso` is the right derived
+comparison of the underived pushforward comparison
+`AlgebraicGeometry.ProEtaleWeilSheaf.condensedRealizationLowerStarIso`
+(`CategoryTheory.Adjunction.derived_exact_forget_mate`). -/
+lemma mateEquiv_derivedCondensedRealizationUpperStarIso :
+    (mateEquiv (derivedUpperStarLowerStarAdjunction k₀ l g)
+      (CondensedRing.derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj l)
+        (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))
+      (derivedCondensedRealizationUpperStarIso k₀ l g).hom).natTrans =
+      (Functor.rightDerivedFunctorCommIso (condensedRealizationLowerStarIso k₀ l g)).hom := by
+  refine (Adjunction.mateEquiv_derivedAdjunction_leftDerivedFunctorSquareIso
+    (upperStarLowerStarAdjunction k₀ l g)
+    (CondensedRing.upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj l)
+      (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))
+    (condensedRealizationUpperStarIso k₀ l g)).trans ?_
+  rw [← Functor.mapDerivedCategorySquareIso_symm_inv]
+  exact Adjunction.derived_exact_forget_mate (upperStarLowerStarAdjunction k₀ l g)
+    (CondensedRing.upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj l)
+      (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))
+    (condensedRealization k₀ l Y) (condensedRealization k₀ l Z)
+    (condensedRealizationUpperStarIso k₀ l g).symm (condensedRealizationLowerStarIso k₀ l g) rfl
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
