@@ -17,6 +17,7 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryFlatExchangePrescribedAdjunctio
 import WeilConjectures.AlgebraicGeometry.FormalSystemExchangeMateCompatibility
 import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Ordinary flat quotient comparisons and adjunction mates
 

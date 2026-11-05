@@ -52,6 +52,7 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Specified evaluation and inverse tensor pair for a sheaf line
 

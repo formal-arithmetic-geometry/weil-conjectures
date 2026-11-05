@@ -12,6 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.Coherent
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Coherence of finite direct images
 

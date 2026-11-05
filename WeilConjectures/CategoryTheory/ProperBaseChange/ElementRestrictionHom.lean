@@ -847,7 +847,7 @@ private instance representableElementsLocallyFull
     have he : η.app (op X.left) (f.unop.hom.unop ≫ Y.hom) = η.app (op X.left) X.hom := by
       change η.app _ ((yoneda.obj U).map f.unop.hom Y.hom) = _
       rw [NatTrans.naturality_apply]
-      exact f.unop.property
+      exact f.unop.map_val
     apply J.superset_covering _ (Presheaf.equalizerSieve_mem J η _ _ he)
     intro V k hk
     change k ≫ (f.unop.hom.unop ≫ Y.hom) = k ≫ X.hom at hk

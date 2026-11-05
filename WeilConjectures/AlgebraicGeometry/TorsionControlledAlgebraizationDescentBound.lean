@@ -11,6 +11,7 @@ import WeilConjectures.AlgebraicGeometry.IdealPowerProductRestrictionZero
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Uniform annihilation on a finite cover -/
 

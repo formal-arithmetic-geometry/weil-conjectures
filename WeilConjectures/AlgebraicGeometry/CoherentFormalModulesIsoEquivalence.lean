@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 import WeilConjectures.AlgebraicGeometry.FormalSystemsPullback
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Transport of coherent formal modules along a scheme isomorphism
 

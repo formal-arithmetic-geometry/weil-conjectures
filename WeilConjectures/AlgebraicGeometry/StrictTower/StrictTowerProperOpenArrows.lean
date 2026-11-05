@@ -327,8 +327,8 @@ variable {C D H : Type*} [Category C] [Category D] [Category H]
 private noncomputable def evalD (n : ℕ) :
     (W F).mapDerivedCategory ⋙ (E D n).mapDerivedCategory ≅
       (E C n).mapDerivedCategory ⋙ F.mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso (W F) (E D n)).symm ≪≫
-    Functor.mapDerivedCategoryCompIso (E C n) F
+  (Functor.mapDerivedCategoryCompIso (W F) (E D n)) ≪≫
+    (Functor.mapDerivedCategoryCompIso (E C n) F).symm
 
 private theorem evalD_nat (e : F ≅ G) (n : ℕ) :
     Functor.whiskerRight
@@ -356,7 +356,7 @@ private theorem evalD_comp (n : ℕ) :
       Functor.whiskerLeft (W F).mapDerivedCategory (evalD K n).hom ≫
       Functor.whiskerRight (evalD F n).hom K.mapDerivedCategory =
     (evalD (F ⋙ K) n).hom ≫ Functor.whiskerLeft (E C n).mapDerivedCategory
-      (Functor.mapDerivedCategoryCompIso F K).hom := by
+      (Functor.mapDerivedCategoryCompIso F K).inv := by
   have h₁ := Functor.mapDerivedCategoryCompIso_assoc (W F) (W K) (E H n)
   simp only [W, Functor.whiskeringRight_obj_comp] at h₁
   have h₂ := Functor.mapDerivedCategoryCompIso_assoc (W F) (E D n) K
@@ -522,7 +522,7 @@ private theorem exact_unit_iso
     [PreservesFiniteLimits R] [PreservesFiniteColimits R]
     (a : L ⊣ R) [IsIso a.unit] (d : L.mapDerivedCategory ⊣ R.mapDerivedCategory) :
     IsIso d.unit :=
-  d.isIso_unit_of_iso ((Functor.mapDerivedCategoryCompIso L R).symm ≪≫
+  d.isIso_unit_of_iso ((Functor.mapDerivedCategoryCompIso L R) ≪≫
     Functor.mapDerivedCategoryNatIso (asIso a.unit).symm ≪≫
     Functor.mapDerivedCategoryIdIso C)
 
@@ -837,9 +837,9 @@ private theorem derivedSquare_comp
     (hd : L.mapDerivedCategory = L'.mapDerivedCategory) :
     (Functor.mapDerivedCategorySquareIso (a.symm ≪≫ eqToIso h ≪≫ b)).hom =
       ((Functor.mapDerivedCategoryNatIso a ≪≫
-        Functor.mapDerivedCategoryCompIso F₁ F₂).symm ≪≫ eqToIso hd ≪≫
+        (Functor.mapDerivedCategoryCompIso F₁ F₂).symm).symm ≪≫ eqToIso hd ≪≫
         (Functor.mapDerivedCategoryNatIso b ≪≫
-          Functor.mapDerivedCategoryCompIso G₁ G₂)).hom := by
+          (Functor.mapDerivedCategoryCompIso G₁ G₂).symm)).hom := by
   simp only [Functor.mapDerivedCategorySquareIso, Functor.mapDerivedCategoryNatIso_trans,
     Functor.mapDerivedCategoryNatIso_symm, Iso.trans_hom, Iso.trans_inv,
     Iso.symm_hom, Category.assoc]

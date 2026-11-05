@@ -11,6 +11,7 @@ import all WeilConjectures.AlgebraicGeometry.ModulePullbackIdealPowerProductImag
 import WeilConjectures.AlgebraicGeometry.IdealPowerProductRestrictionZero
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # The restriction dictionary for torsion-controlled formal maps
 

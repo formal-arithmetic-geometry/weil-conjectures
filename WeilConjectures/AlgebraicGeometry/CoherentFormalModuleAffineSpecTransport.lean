@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 
 import WeilConjectures.AlgebraicGeometry.FormalSystemsPullback
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Affine section comparisons for coherent formal modules
 

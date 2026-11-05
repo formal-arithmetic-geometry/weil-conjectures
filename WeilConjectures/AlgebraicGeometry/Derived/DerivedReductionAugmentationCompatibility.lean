@@ -133,7 +133,7 @@ theorem derivedReduction_augmentationOfCounits
     Functor.whiskerRight iX G.mapDerivedCategory ≫ τ.hom =
       ((Functor.mapDerivedCategoryCompIso CX G).symm ≪≫
         Functor.mapDerivedCategoryNatIso c ≪≫
-          Functor.mapDerivedCategoryCompIso F CY).hom ≫
+          (Functor.mapDerivedCategoryCompIso F CY).symm).hom ≫
         Functor.whiskerLeft F.mapDerivedCategory iY := by
     let ff := cochainRepresentativeWhiskering good res (DerivedCategory E)
     apply ff.map_injective

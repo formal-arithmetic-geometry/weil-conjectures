@@ -12,6 +12,7 @@ import WeilConjectures.AlgebraicGeometry.ModulePullbackIdealQuotient
 import WeilConjectures.AlgebraicGeometry.ClosedImmersionIdealPowerImage
 import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardCokernel
 import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-!
 # Pushforward of ideal powers along a closed immersion

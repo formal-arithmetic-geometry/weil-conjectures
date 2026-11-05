@@ -23,6 +23,7 @@ import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
 import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Coherent objects on the completed affine pullback
 
