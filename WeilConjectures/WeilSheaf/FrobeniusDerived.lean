@@ -71,7 +71,8 @@ noncomputable def frobeniusIso :
   Functor.isoWhiskerLeft (ObjectProperty.ι _)
     ((Functor.mapDerivedCategoryCompIso (IsoAlgebra.forget _)
         (WeilSheaf.frobeniusPullback k₀ l X)).symm ≪≫
-      Functor.mapDerivedCategoryNatIso (IsoAlgebra.forgetCompIso _))
+      Functor.mapDerivedCategoryNatIso
+        (IsoAlgebra.forgetCompIso (WeilSheaf.frobeniusPullback k₀ l X)))
 
 end WeilComplex
 

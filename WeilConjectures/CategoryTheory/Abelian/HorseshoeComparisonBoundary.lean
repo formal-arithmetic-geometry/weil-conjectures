@@ -43,8 +43,7 @@ private noncomputable def resolutionAugmentationIso
       DerivedCategory.Plus.Q.obj (resolutionPlus I) :=
   DerivedCategory.Plus.ι.preimageIso
     ((DerivedCategory.singleFunctorIsoCompQ A 0).app X ≪≫
-      asIso (DerivedCategory.Q.map I.ι') ≪≫
-      (DerivedCategory.quotientCompQhIso A).symm.app _)
+      asIso (DerivedCategory.Q.map I.ι'))
 
 set_option maxHeartbeats 100000 in
 -- The quotient factorization and the lifted unit involve several nested functors.
@@ -83,7 +82,8 @@ private theorem comparison_eq_unit
   have hu : inv (v.rightDerivedFunctorPlusUnith.app
         ((HomotopyCategory.Plus.quotient A).obj (resolutionPlus R))) ≫
       DerivedCategory.Plus.Q.map vg =
-    v.rightDerivedFunctorPlus.map (DerivedCategory.Plus.Q.map g) ≫
+    v.rightDerivedFunctorPlus.map
+        (DerivedCategory.Plus.Qh.map ((HomotopyCategory.Plus.quotient A).map g)) ≫
       inv (v.rightDerivedFunctorPlusUnith.app
         ((HomotopyCategory.Plus.quotient A).obj (resolutionPlus I))) := by
     rw [IsIso.inv_comp_eq, ← Category.assoc, eq_comm, IsIso.comp_inv_eq]
