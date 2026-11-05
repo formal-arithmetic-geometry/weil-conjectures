@@ -7,6 +7,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.CategoryTheory.CanonicalResolutionHomologyComparison
 import WeilConjectures.CategoryTheory.GrothendieckBottomAugmentation
 
