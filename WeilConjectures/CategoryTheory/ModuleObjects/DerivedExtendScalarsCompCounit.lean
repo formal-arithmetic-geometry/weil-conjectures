@@ -56,7 +56,7 @@ lemma mapDerivedCategoryComapCompIso_hom_app_Qh_comp_factorsh
     ((comapComp φ ψ).symm ≪≫ comapCongr (rfl : φ ≫ ψ = φ ≫ ψ)) Z
   simp only [mapDerivedCategoryComapCompIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     Category.assoc] at h₂ ⊢
-  rw [h₂, ← reassoc_of% h₁, Iso.inv_hom_id_app_assoc]
+  rw [h₂, ← reassoc_of% h₁, Iso.hom_inv_id_app_assoc]
 
 omit [MonoidalPreadditive C] [Abelian.HasFunctorialFlatResolution C] [IsCommMonObj T] in
 /-- The underived transitivity isomorphism `Mod.extendScalarsComp` is compatible with the units
@@ -159,7 +159,7 @@ lemma derivedExtendScalarsCompIso_hom_app_comp_counit
       (HomotopyCategory.quotient (Mod C T) (ComplexShape.up ℤ)).map
         ((Functor.mapHomologicalComplexCompIso (extendScalarsComp φ ψ).symm
           (ComplexShape.up ℤ)).hom.app P) := rfl
-  rw [Functor.mapHomotopyCategoryCompIso_refl_hom_app, Category.id_comp, hcI,
+  rw [Functor.mapHomotopyCategoryCompIso_refl_hom_app, Category.comp_id, hcI,
     NatTrans.mapHomotopyCategory_app, Functor.mapHomotopyCategory_map,
     ← Functor.map_comp]
   erw [Functor.mapHomotopyCategory_map]
