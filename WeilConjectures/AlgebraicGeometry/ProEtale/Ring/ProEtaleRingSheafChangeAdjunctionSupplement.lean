@@ -771,11 +771,11 @@ noncomputable def proEtaleRingRestrictionDerivedPullback :
     proEtaleRingDerivedPullback f SV SU cS ⋙ (proEtaleRingRestrictScalars aU).mapDerivedCategory ≅
       (proEtaleRingRestrictScalars aV).mapDerivedCategory ⋙
         proEtaleRingDerivedPullback f RV RU cR :=
-  (Functor.mapDerivedCategoryCompIso (proEtaleRingModulePullback f SV SU cS)
+  ((Functor.mapDerivedCategoryCompIso (proEtaleRingModulePullback f SV SU cS)).symm
     (proEtaleRingRestrictScalars aU)).symm ≪≫
     Functor.mapDerivedCategoryNatIso
       (asIso (proEtaleRingRestrictionPullbackInv f RV SV RU SU aV aU cR cS comm)).symm ≪≫
-    Functor.mapDerivedCategoryCompIso (proEtaleRingRestrictScalars aV)
+    (Functor.mapDerivedCategoryCompIso (proEtaleRingRestrictScalars aV)).symm
       (proEtaleRingModulePullback f RV RU cR)
 
 /-- The right-derived unit on complexes, including the canonical quotient identifications.

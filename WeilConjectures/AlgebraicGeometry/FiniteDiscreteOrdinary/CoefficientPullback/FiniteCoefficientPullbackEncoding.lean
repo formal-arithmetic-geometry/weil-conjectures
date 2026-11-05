@@ -135,7 +135,7 @@ private lemma triangle_fac (cU : U₀ ≅ U₁ ⋙ U₂) (K : CochainComplex C�
         ((U₁.mapHomologicalComplex (.up ℤ)).obj K) =
     U₀.mapDerivedCategoryFactors.hom.app K ≫ DerivedCategory.Q.map
       ((NatTrans.mapHomologicalComplex cU.hom (.up ℤ)).app K) := by
-  simp only [mapDerivedCategoryTriangleIso, Iso.trans_hom, NatTrans.comp_app,
+  simp only [mapDerivedCategoryTriangleIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     Category.assoc]
   rw [comp_fac]
   exact mapDerivedCategoryNatIso_fac cU K
@@ -266,7 +266,7 @@ private def heartDerivedIso (e : Mon.mk R ≅ Mon.mk (coefficient A))
     (T : Scheme.{u}) (E : Encoding A T) :
     (heart A R e T E).mapDerivedCategory ≅ coefficientEncoding A e T E :=
   mapDerivedCategoryNatIso (eqToIso (heart_eq A R e T E)) ≪≫
-    mapDerivedCategoryCompIso (Mod.comap (coefficientMap e.inv.hom T))
+    (mapDerivedCategoryCompIso (Mod.comap (coefficientMap e.inv.hom T))).symm
       (E.ordinary.functor ⋙ E.fixed.functor)
 
 private def localizedPull (e : Mon.mk R ≅ Mon.mk (coefficient A))

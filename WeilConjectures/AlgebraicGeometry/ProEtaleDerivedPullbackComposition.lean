@@ -127,7 +127,7 @@ private theorem derived_formula
     (K : CochainComplex C ℤ) :
     H.mapDerivedCategoryFactors.hom.app K ≫ DerivedCategory.Q.map (b.hom.app K) =
       (Functor.mapDerivedCategoryNatIso a ≪≫
-        Functor.mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Q.obj K) ≫
+        (Functor.mapDerivedCategoryCompIso F G).symm).hom.app (DerivedCategory.Q.obj K) ≫
         G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app K) ≫
         G.mapDerivedCategoryFactors.hom.app
           ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj K) := by
@@ -258,7 +258,7 @@ theorem proEtaleRingDerivedPullbackComposition
     · intro K n
       change a.hom.app (K.X n) ≫ 𝟙 _ = a.hom.app (K.X n)
       exact Category.comp_id _
-    · let c := Functor.mapDerivedCategoryNatIso a ≪≫ Functor.mapDerivedCategoryCompIso F G
+    · let c := Functor.mapDerivedCategoryNatIso a ≪≫ (Functor.mapDerivedCategoryCompIso F G).symm
       refine ⟨c, ?_⟩
       intro K hK hflat
       obtain ⟨I, hI⟩ := proEtaleAlgebraicInverseImage_exists k R_V

@@ -75,7 +75,7 @@ private theorem derived_path_coherence (K : DerivedCategory C₀) :
         (mapDerivedCategoryTriangleIso δ).hom.app K =
     Sv.mapDerivedCategory.map ((mapDerivedCategoryTriangleIso β).hom.app K) ≫
       (mapDerivedCategorySquareIso α).hom.app (Rw.mapDerivedCategory.obj K) ≫
-      L.mapDerivedCategory.map ((mapDerivedCategoryCompIso Rw Sw).inv.app K ≫
+      L.mapDerivedCategory.map ((mapDerivedCategoryCompIso Rw Sw).hom.app K ≫
         (mapDerivedCategoryNatIso ew).hom.app K) := by
   have hh : ev ≪≫ δ = isoWhiskerRight β Sv ≪≫
       isoWhiskerLeft Rw α ≪≫ isoWhiskerRight ew L := by

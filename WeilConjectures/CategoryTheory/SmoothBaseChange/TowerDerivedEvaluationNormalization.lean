@@ -206,7 +206,7 @@ def towerDerivedEvaluationInterchange
     ((Functor.whiskeringRight ℕᵒᵖ B A).obj F).mapDerivedCategory ⋙
         ((evaluation ℕᵒᵖ A).obj n).mapDerivedCategory ≅
       ((evaluation ℕᵒᵖ B).obj n).mapDerivedCategory ⋙ F.mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso
+  ((Functor.mapDerivedCategoryCompIso).symm
     ((Functor.whiskeringRight ℕᵒᵖ B A).obj F) ((evaluation ℕᵒᵖ A).obj n)).symm ≪≫
     Functor.mapDerivedCategoryCompIso ((evaluation ℕᵒᵖ B).obj n) F
 

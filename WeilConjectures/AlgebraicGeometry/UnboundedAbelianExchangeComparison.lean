@@ -661,9 +661,9 @@ noncomputable def moduleAbelianUnboundedUpperStarIso
     (Λ : Type (u + 1)) [CommRing Λ] {A B : Scheme.{u}} (v : A ⟶ B) :
     D((v)^*[ModuleCat.{u + 1} Λ]) ⋙ D(moduleAbelianForget Λ A) ≅
       D(moduleAbelianForget Λ B) ⋙ D((v)^*[AddCommGrpCat.{u + 1}]) :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso _ _) ≪≫
     Functor.mapDerivedCategoryNatIso (moduleAbelianUpperStarIso Λ v).symm ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The adjunction mate of the termwise inverse-image comparison. Its right-derived-unit
 normalization below identifies it with the map computed by a module K-injective complex

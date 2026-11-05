@@ -615,7 +615,7 @@ instance isIso_rationalizationComparison_app_regular :
     refine rationalizationModel_hom_ext l X fun b n ↦ ?_
     rw [rationalizationComparison_app, ι_ι_rationalizationComparisonApp_assoc,
       rationalizationComparisonι_regular_comp]
-    erw [Iso.trans_hom, HasColimit.isoOfNatIso_ι_hom_assoc,
+    erw [Iso.trans_hom, HasColimit.ι_isoOfNatIso_hom_assoc,
       IsColimit.comp_coconePointUniqueUpToIso_hom, Functor.mapIso_hom, Functor.const_map_app,
       IsColimit.comp_coconePointUniqueUpToIso_hom_assoc]
     rfl
