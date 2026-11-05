@@ -170,15 +170,24 @@
 - Final documentation commit leaves Lean source identical to the green revision.
 
 
-# BZ631 in progress
+# BZ631 complete
 
 - Branch: `u9/BZ631`; starting commit: `b7a97a5ed`.
-- The user instructed continuation after the exact two-statement proposal.
-  Applied the `Plus.Qh.obj H` endpoint and canonical mapped quotient comparison
-  in `smallModel_injectiveExchange_target_transport`.
-- Localization public/import-all imports expose the private proof reductions;
-  the new comparison is normalized to identity in the proof.
-- Existing `ucheck-bump` invocation is queued and will read the pushed branch
-  after acquiring a tree. Next: validate the assigned module, then its importer.
-- Fix patterns: `/home/ubuntu/u9/bz/FIXES-BZ631.md`.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+- Assigned module `WeilConjectures.AlgebraicGeometry.Injective.InjectiveExchangeTargetTransport`
+  passed `ucheck-bump`: 4243 jobs, target freshly rebuilt in 47 seconds.
+- Validated source commit: `a0b448506d61187b0aa3f3811cf84153b5f977c9`.
+- Build tree: `poolb:43.166.82.34`; exact Lean v4.35.0-rc3 and Mathlib b63f6e8a pins verified.
+- The user instructed continuation after the exact two-statement proposal. Applied
+  the `Plus.Qh.obj H` endpoint and canonical quotient comparison, with the latter
+  reduced to identity in the proof. All other statement text and docstrings are unchanged.
+- Full successful log: `/home/ubuntu/u9/bz/BUILD-BZ631-unit-full.log`.
+- Direct importer `Injective.InjectiveExchangeRepresentative` was submitted, then
+  skipped under the unowned-dependency rule: BZ630's `InjectiveExchangeSourceTransport`
+  is byte-for-byte identical to the source with three recorded Lean errors at
+  `3c12182227`. Cancelled only the verified queued downstream request before it acquired
+  a tree. The importer and its next layer are not claimed green; no downstream edits.
+- Fix patterns, occurrence counts, and blocker evidence: `/home/ubuntu/u9/bz/FIXES-BZ631.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ631-contract-audit.txt`.
+- No local Lean/Lake execution, sorries, proof escapes, heartbeat increases, or profiler probes.
+- Completion marker: `/home/ubuntu/u9/state/BZ631.DONE`.
+- This completion commit changes only documentation; Lean source matches the green revision.
