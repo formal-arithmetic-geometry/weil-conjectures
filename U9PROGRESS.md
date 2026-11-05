@@ -314,3 +314,7 @@ BLOCKED: I have not constructed the general Weil purity morphism. The missing co
 ## 2026-11-05 08:00 +0800 — concrete instance pins do not fix the unit
 - K4-20261105T075618.log validates the stable generic ScalarPullback module but both concrete unit probes still time out (45s each): canonical PadicInt CommRing and raw Sheaf monoidal/braided instances. Removed the failed probe files, saving copies in /tmp. No heartbeat overrides or profiling remain in the stable helper.
 - C4's isolated 4000000-heartbeat concrete-unit diagnostic (Diag33, C4-20261105T074812.log) is still running. Next small test uses the existing functor-level upperStarForgetIso and its component instead of constructing the scalar-extension unit directly.
+
+## 2026-11-05 08:04 +0800 — functor comparison succeeds, component conversion fails
+- IntegralPullbackComparison in K4-20261105T080048.log proves purityIntegralPullbackForgetIso at the concrete ℤ_l coefficients. Only its explicitly typed component has a kernel timeout (42s). This locates a conversion below the functor-level comparison.
+- Removed the component's expanded result-type annotation (inferred result remains the actual isomorphism component). Added an explicit integral-extension functor and a functor-level pullback factorization; the root trivialization is now transported along that factorization, rather than relying on a final object-level conversion. Default heartbeat budget throughout.
