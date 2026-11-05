@@ -17,6 +17,8 @@ import all WeilConjectures.WeilSheaf.Native.Projection.AdicSheafTensorSquare
 import all WeilConjectures.WeilSheaf.Native.Projection.SheafTensorUnit
 import all WeilConjectures.WeilSheaf.Native.Projection.NativeTotalTensorCore
 import all WeilConjectures.WeilSheaf.Native.Projection.TensorSquareCompatibility
+import all WeilConjectures.WeilSheaf.Native.Projection.DerivedSquareFromTotalFunctors
+import all WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareOfRepresentatives
 import all WeilConjectures.WeilSheaf.Native.Projection.DerivedSquareFromModels
 import all WeilConjectures.WeilSheaf.Native.Projection.NativeModelNormalization
 import all WeilConjectures.WeilSheaf.Native.Projection.NativePullTensorNormalization
