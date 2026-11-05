@@ -69,6 +69,13 @@ noncomputable def tensorι {A : Sheaf J CommRingCat.{w}}
       (PresheafOfModules.{w}
         ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj A).obj) :=
     fun _ _ ↦ PresheafOfModules.hasColimitsOfShape _ _
+  have : HasCoproducts.{0} (Modules A) := fun I ↦ by
+    have : HasColimitsOfShape (Discrete I) (PresheafOfModules.{w}
+        ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj A).obj) :=
+      PresheafOfModules.hasColimitsOfShape _ _
+    exact SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
+  have : HasFiniteCoproducts (Modules A) :=
+    hasFiniteCoproducts_of_hasCoproducts (C := Modules A)
   exact CochainComplex.ιMapBifunctor P Q (curriedTensor (Modules A)) p q n h
 
 /-- Auxiliary formula for scalar tensor transitions. Source: Stacks 03EK, 03EL, 07A4
