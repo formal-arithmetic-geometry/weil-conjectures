@@ -120,6 +120,10 @@ private noncomputable def tensorHomCurryApp_kfi (φ : M ⊗ P ⟶ N) {U : C} (p 
     (restrictOver R U).obj M ⟶ (restrictOver R U).obj N where
   app W := tmulRight_kfi M (P.map W.unop.hom.op p) ≫ φ.app (op W.unop.left)
   naturality {W W'} f := by
+    let : Module (R.obj (op W'.unop.left))
+        ((ModuleCat.restrictScalars ((R ⋙ forget₂ CommRingCat RingCat).map
+          f.unop.left.op).hom).obj (M.obj (op W'.unop.left))) :=
+      inferInstanceAs (Module (R.obj (op W'.unop.left)) (M.obj (op W'.unop.left)))
     ext m
     refine (congrArg (φ.app (op W'.unop.left)) ?_).trans
       (naturality_apply φ f.unop.left.op (m ⊗ₜ[R.obj (op W.unop.left)] P.map W.unop.hom.op p))
@@ -679,11 +683,21 @@ theorem exists_isKFlatResolutionIndependentCoefficients
   classical
   let A := SheafOfModules.{r}
     ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)
+  have (K : Type r) : HasColimitsOfShape (Discrete K) (PresheafOfModules.{r}
+      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R).obj) :=
+    PresheafOfModules.hasColimitsOfShape _ _
+  have (K : Type r) : HasColimitsOfShape (Discrete K) A :=
+    SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf
+      _ _
   let := SheafOfModules.isMonoidal_W_independentCoefficients R
   let := SheafOfModules.monoidalCategory R
   let := SheafOfModules.symmetricCategory R
   let := SheafOfModules.monoidalClosed_kfi (R := R)
   let := SheafOfModules.monoidalPreadditive_kfi R
+  have : HasFiniteBiproducts (ObjectProperty.flat (A := A)).FullSubcategory :=
+    HasFiniteBiproducts.of_hasFiniteProducts
+  have : HasFiniteCoproducts (ObjectProperty.flat (A := A)).FullSubcategory :=
+    hasFiniteCoproducts_of_hasFiniteBiproducts _
   have := SheafOfModules.hasExactColimits_int_kfi R
   let := SheafOfModules.hasFunctorialFlatResolution_kfi R
   have hres : ∃ (P : CochainComplex A ℤ) (p : P ⟶ G),
