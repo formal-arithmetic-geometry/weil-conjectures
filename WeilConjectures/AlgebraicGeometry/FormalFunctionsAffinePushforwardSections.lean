@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
