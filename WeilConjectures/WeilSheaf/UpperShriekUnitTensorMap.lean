@@ -106,8 +106,9 @@ theorem nonempty_nativeConstructibleTensor_adicConstant_iso :
       rw [id_tensorHom, whisker_exchange_assoc, leftUnitor_naturality, Category.assoc]))⟩
 
 set_option synthInstance.maxHeartbeats 400000 in
-set_option backward.isDefEq.respectTransparency false in
 -- the monoidal structure of the derived category of condensed modules is found slowly
+set_option backward.isDefEq.respectTransparency false in
+-- `Mod.monoidalClosed` needs `IsCommMonObj (condensedRingObj _ _)` up to instance unfolding
 open scoped CategoryTheory.Obj in
 /-- The underlying bounded constructible complex of the constant Weil complex `ℚ̄_ℓ` is the
 unit `ℚ̄_ℓ` on the geometric fibre. -/
