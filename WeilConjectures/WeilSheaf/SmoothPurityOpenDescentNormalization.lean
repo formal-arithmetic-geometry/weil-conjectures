@@ -88,8 +88,8 @@ lemma geometricFiberWeilExtensionByZeroBaseChange_app_forget
     (fun N ↦ by simp [upperStarCompGeometricFiberWeilLowerStarIso]) M
   simp only [eqToHom_refl, Category.id_comp, Category.comp_id] at he
   rw [openTraceInverseMate_eq] at he
-  unfold geometricFiberWeilExtensionByZeroBaseChange
-  exact he
+  dsimp only [geometricFiberWeilExtensionByZeroBaseChange]
+  exact_mod_proofs he
 
 /-- Forgetting the exactly derived descended open comparison gives ordinary
 extension-by-zero base change, with the derived composition coordinates. -/
@@ -125,6 +125,9 @@ lemma geometricFiberWeilExtensionByZeroMapDerivedCategoryIso_forget
     ((openImmersionLowerShriekUpperStarBaseChangeIso Λ
       (Scheme.Hom.isPullback_geometricFiberMap j h)).symm.app M)
     (geometricFiberWeilExtensionByZeroBaseChange_app_forget Λ hc M)
-  simpa [Endofunctor.IsoAlgebra.mapOfNatIsoCompForgetIso, Functor.comp_obj] using he.symm
+  simp only [Endofunctor.IsoAlgebra.mapOfNatIsoCompForgetIso,
+    Iso.refl_hom, NatTrans.id_app]
+  erw [Category.comp_id]
+  exact_mod_proofs he.symm
 
 end AlgebraicGeometry.ProEtale.CondensedRing
