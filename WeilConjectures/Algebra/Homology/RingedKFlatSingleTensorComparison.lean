@@ -62,6 +62,13 @@ private theorem functorial_resolution :
       (∀ P n, IsFlatOnSite (J := J) (R := R) ((F.obj P).X n)) := by
   let := (nonempty_monoidalClosed_independentCoefficients (R := R)).some
   let := hasFunctorialFlatResolution_kfi R
+  have (I : Type r) : HasColimitsOfShape (Discrete I) (Modules R) :=
+    SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf
+      _ _
+  have : HasFiniteBiproducts (ObjectProperty.flat (A := Modules R)).FullSubcategory :=
+    HasFiniteBiproducts.of_hasFiniteProducts
+  have : HasFiniteCoproducts (ObjectProperty.flat (A := Modules R)).FullSubcategory :=
+    hasFiniteCoproducts_of_hasFiniteBiproducts _
   have : HasExactColimitsOfShape ℤ (Modules R) := by
     have := AB5OfSize_of_univLE.{0, 0, r, r} AddCommGrpCat.{r}
     have : HasExactColimitsOfShape ℤ (Sheaf J AddCommGrpCat.{r}) :=
