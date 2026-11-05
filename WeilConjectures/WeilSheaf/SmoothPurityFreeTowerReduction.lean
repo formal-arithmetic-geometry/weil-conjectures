@@ -57,6 +57,6 @@ lemma upperStarExtendScalarsLimitFreeTowerIso_hom_comp_projection (n : ℕ) :
   rw [upperStarExtendScalarsLimitFreeTowerIso_hom_comp_map_π_assoc]
   simp only [upperStarFreeTowerIsoApp, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom,
     Functor.map_comp, Category.assoc]
-  rw [reassoc_of% hn, reassoc_of% hp, Iso.inv_hom_id_app_assoc]
+  erw [hn, reassoc_of% hp, Iso.inv_hom_id_app_assoc]
 
 end AlgebraicGeometry.ProEtale
