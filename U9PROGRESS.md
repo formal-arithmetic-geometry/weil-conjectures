@@ -156,7 +156,12 @@
 - Assigned module is green at `3947e09b34`: ucheck-bump rc=0, failed=0, 2802 jobs.
 - Added the public `Mathlib.CategoryTheory.Abelian.Exact` import for the existing
   preserves-homology lemma after the cast repair reached the theorem proof.
-- Four direct importers are queued; continue one more layer before writing DONE.
+- Three direct importers passed: DiagramKFlatReplacements,
+  RingedTowerPushforwardLimitAcyclic, and RingedTopoiCanonicalTensorPullback.
+- DiagramRingRestrictionPushforward needs a local scalar-action instance bridging
+  the underlying Type-valued ring sheaf to its native coefficient carrier. That
+  instance is committed at `b9f469ae2`; all existing declarations remain unchanged.
+- Its rebuild and three second-layer importers are queued. Write DONE after validation.
 - Notes and logs: `/home/ubuntu/u9/bz/FIXES-BZ554.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
 
