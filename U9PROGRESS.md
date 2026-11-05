@@ -167,3 +167,8 @@
   copied-proof failure in Algebra.Homology.KFlat:82. Applied the same one-line
   namespace correction there; no old-name occurrences remain in the target closure.
 - Retrying the target after these two minimal dependency proof corrections.
+
+- KFlat now passes. Its resolution module exposed the same copied-proof mismatch;
+  applied the same correction in KFlatResolutionIndependentCoefficients:132.
+- Corrected the dependency scan to include import all and trailing import comments.
+  All three changes are the same one-line proof-body replacement.
