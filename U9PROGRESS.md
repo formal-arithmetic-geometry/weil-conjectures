@@ -6,7 +6,9 @@
   Added `.symm` in the `hm` and `hs` hypotheses to preserve their canonical maps
   under Mathlib's reversed `mapDerivedCategoryCompIso`.
 - Baseline `ucheck-bump` confirmed exactly these two errors; all dependencies passed.
-- Next: validate the assigned module, then attempt the four nearest direct importers.
+- Assigned module passed `ucheck-bump` at `2aef04c18f`: rc=0, failed=0, 4486 jobs.
+  The target rebuilt in 49s on `poolb:43.157.148.197`.
+- Next: attempt the four nearest direct importers.
 - Fix patterns and occurrence counts: `/home/ubuntu/u9/bz/FIXES-BZ606.md`.
 - No local Lean/Lake execution, proof placeholders, or heartbeat changes.
 
