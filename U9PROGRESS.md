@@ -468,3 +468,9 @@ Reread brief and current notes. C4 is explicitly lead-assigned finite purity iso
 
 ## 2026-11-05T09:56:40.417703+08:00 — actual coefficient composition
 Added SmoothPurityCoefficientPullCompOrdinary (GREEN9.2s), SmoothPurityCoefficientPullMate (GREEN4.6s), SmoothPurityCoefficientPullCompDerived (GREEN16s). Last check K4-20261105T095457 failed only final mate composition: generic inverse cancellation needs comp_obj normalization and concrete rw exceeds200k heartbeats. Replaced concrete rw by a generic named-comparison mate composition lemma. Drafted actual isWeilEquivariant_derivedReductionStep and exists_geometric_equivariant_integralOrientation_iso, discharging hstep/finite Hom/shifted Hom internally; pending checks.
+
+## 2026-11-05T10:02:31.586574+08:00 — reduction stability and integral Tate datum GREEN
+
+[K4] 2026-11-05T10:02:31.586574+08:00: Actual hstep is now GREEN at d7e43695b2, log /home/ubuntu/u9/logs/K4-20261105T100049.log: SmoothPurityCoefficientWeilReduction12s + SmoothPurityReductionWeilStep15s, theorem isWeilEquivariant_derivedReductionStep, no hypotheses beyond the finite Weil equation. It proves ordinary coefficient reduction preserves the transported Weil equation for ANY scheme endomorphism, using canonical nonflat pull comparison coefficient-composition (GREEN21s). SmoothPurityIntegralTatePullback also GREEN8.9s: actual integral Tate geometric datum from root-of-unity tower, all nonnegative twists and shifts. Final purity-specific reconstruction wrapper in repair (header timeout); core hstep proof closed. Copied C1 four new green helper files from9b1b4154f8 (UpperShriekWeilDatum+3 CategoryTheory files) into K4 for combined audit; no existing C1/shared declarations changed.
+
+The finite/adic comparison inputs remain the only mathematical assembly gap for this alternative; no DONE or target-body edit.

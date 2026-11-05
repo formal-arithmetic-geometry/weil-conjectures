@@ -55,14 +55,16 @@ theorem exists_geometric_equivariant_integralOrientation_iso (g : X.left ⟶ X.l
   have hshift (n : ℕ) : Finite ((G.obj 𝐓.obj) ⟦(1 : ℤ)⟧ ⟶
       (Mod.comap (integersModPowReduction X.left ℓ E.1 (n + 1))).mapDerivedCategory.obj
         ((purityIntegralReduction X.left ℓ E.1 (n + 1)).obj 𝐖.obj)) := by
-    have := finite_shift_hom_integralOrientation_reduction (ℓ := ℓ) (E := E.1) f d (n + 1)
-    exact Finite.of_equiv _
+    have h := finite_shift_hom_integralOrientation_reduction (ℓ := ℓ) (E := E.1) f d (n + 1)
+    exact @Finite.of_equiv _ _ h
       (((shiftFunctor _ (1 : ℤ)).mapIso φT).homCongr (Iso.refl _)).symm
-  exact exists_equivariant_iso_of_finite_reductions ℓ E G
+  have hfin (n : ℕ) :=
+    finite_hom_derivedReduction_integralOrientation (ℓ := ℓ) (E := E.1) f d (n + 1)
+  have h := exists_equivariant_iso_of_finite_reductions ℓ E G
     (fun n ↦ L((g)^*⟦Profinite.integersModPowRingObj ℓ E.1 (n + 1)⟧))
     (fun n ↦ integersModPowReductionUpperStarIso ℓ E.1 (n + 1) g)
-    𝐓 𝐖 φT.hom φW
-    (fun n ↦ finite_hom_derivedReduction_integralOrientation (ℓ := ℓ) (E := E.1) f d (n + 1))
+    𝐓 𝐖 φT.hom φW (inst := hshift) hfin
     hne (fun n s hs ↦ isWeilEquivariant_derivedReductionStep g (n + 1) φT.hom φW s hs)
+  exact h
 
 end AlgebraicGeometry.ProEtale.CondensedRing
