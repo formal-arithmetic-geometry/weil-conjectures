@@ -22,12 +22,16 @@ trivial radical, in the forms used by the blueprint.
   `A` of endomorphisms with `tr (X Y) = 0` for all `X ∈ ⁅A, A⁆` and `Y ∈ A` is solvable.
 * `LieAlgebra.HasTrivialRadical.killingForm_nondegenerate`: the Killing form of a
   finite-dimensional characteristic-zero Lie algebra with trivial radical is non-degenerate.
+* `LieAlgebra.HasTrivialRadical.derivedSeries_eq_top`: a finite-dimensional characteristic-zero
+  Lie algebra with trivial radical is perfect, `⁅L, L⁆ = L`.
 
 ## Blueprint
 
 * `LieSubalgebra.isSolvable_of_trace_mul_eq_zero` implements `lem-wf-cartan-trace-criterion`.
 * `LieAlgebra.HasTrivialRadical.killingForm_nondegenerate` implements
   `lem-ag-killing-nondegenerate`.
+* `LieAlgebra.HasTrivialRadical.killingForm_nondegenerate` and
+  `LieAlgebra.HasTrivialRadical.derivedSeries_eq_top` together implement `sk-lem-walg-killing`.
 -/
 
 @[expose] public section
@@ -81,5 +85,29 @@ characteristic zero is non-degenerate. This is Cartan's criterion for semisimpli
 (blueprint: `lem-ag-killing-nondegenerate`) -/
 theorem killingForm_nondegenerate [HasTrivialRadical k L] : (killingForm k L).Nondegenerate :=
   IsKilling.killingForm_nondegenerate k L
+
+/-- A finite-dimensional Lie algebra with trivial radical over a field of characteristic zero is
+perfect: `⁅L, L⁆ = L`. The Killing complement of `⁅L, L⁆` is an ideal meeting `⁅L, L⁆` trivially,
+so it is central; the centre lies in the radical, which is zero. Together with
+`LieAlgebra.HasTrivialRadical.killingForm_nondegenerate` this is the blueprint lemma
+`sk-lem-walg-killing`. -/
+theorem derivedSeries_eq_top [HasTrivialRadical k L] : derivedSeries k L 1 = ⊤ := by
+  set D := derivedSeries k L 1
+  have hc := D.isCompl_killingCompl
+  have hD : D.killingCompl ≤ center k L := fun z hz ↦ by
+    refine (mem_maxTrivSubmodule k L L z).mpr fun x ↦ ?_
+    have hx : ⁅x, z⁆ ∈ D := by
+      have hD : D = ⁅(⊤ : LieIdeal k L), ⊤⁆ := by
+        simp only [D, derivedSeriesOfIdeal_succ, derivedSeriesOfIdeal_zero]
+      rw [hD]
+      exact LieSubmodule.lie_mem_lie (LieSubmodule.mem_top x) (LieSubmodule.mem_top z)
+    have h : ⁅x, z⁆ ∈ D ⊓ D.killingCompl := ⟨hx, lie_mem_right k L _ x z hz⟩
+    rwa [hc.inf_eq_bot, LieSubmodule.mem_bot] at h
+  have hZ : center k L = ⊥ := by
+    rw [eq_bot_iff, ← HasTrivialRadical.radical_eq_bot (R := k) (L := L)]
+    exact center_le_radical k L
+  have hD : D.killingCompl = ⊥ := le_bot_iff.mp (hD.trans hZ.le)
+  have := hc.sup_eq_top
+  rwa [hD, sup_bot_eq] at this
 
 end LieAlgebra.HasTrivialRadical

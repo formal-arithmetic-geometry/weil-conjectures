@@ -58,7 +58,6 @@ private theorem homologyMap_smul_id
   rfl
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 800000 in
 -- Several localization and homology factorization functors occur in the scalar transport.
 /-- Source: Stacks Project, Tag 06Y6, lemma-derived-base-change.
 (blueprint: lem-pc-base-derived-extension-scalar).

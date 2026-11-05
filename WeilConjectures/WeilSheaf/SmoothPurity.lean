@@ -51,7 +51,7 @@ Weil complexes is right adjoint to the direct image with compact support `Rf₀!
 `Rf^! ≅ f^*(d)[2d]`.
 
 This input of the chapter on smooth purity is not formalized for Weil complexes yet; it is stated
-with `sorry` (cross-section rule). -/
+with `sorry`. -/
 theorem nonempty_derivedLowerShriek_adjunction_of_smooth (d : ℕ)
     [SmoothOfRelativeDimension d f] :
     Nonempty (derivedLowerShriek k₀ l f ⊣

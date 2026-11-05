@@ -28,7 +28,6 @@ variable (A : Type (u + 1)) [CommRing A] [Finite A]
     (e : FiniteComparisons A o)
 
 set_option linter.unusedSectionVars false in
-set_option linter.style.haveILetI false in
 /-- The left half: the restricted tensor model, the open pin and the mixed representative
 equation. (blueprint: lem-sf-finite-restriction-representative-square) -/
 theorem leftEq (P Q : CochainComplex (FiniteModules A X) ℤ)
@@ -38,7 +37,7 @@ theorem leftEq (P Q : CochainComplex (FiniteModules A X) ℤ)
       ((finiteComplexRealization e.realizeX).obj Q)) :
     LeftEq A gU j' j g sq o e P Q hp hq := by
   constructor
-  letI : (restrict .ordinary j (finiteInput A gU j' j g sq).R).Additive :=
+  let : (restrict .ordinary j (finiteInput A gU j' j g sq).R).Additive :=
     (restriction_exact .ordinary j (finiteInput A gU j' j g sq).R).1
   exact representative_square_left
     (QX := DerivedCategory.Q) (QU := DerivedCategory.Q) (QR := DerivedCategory.Q)
