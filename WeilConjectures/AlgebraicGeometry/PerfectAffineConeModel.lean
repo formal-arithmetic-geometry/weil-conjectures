@@ -59,7 +59,7 @@ private theorem strictlyPerfect_mappingCone (X : Scheme.{u}) (U : X.Opens)
       · rw [Category.assoc, biprod.map_snd, ← Category.assoc, biprod.map_snd,
           Category.assoc, hj₂, Category.comp_id, Category.id_comp]
     rw [← Category.assoc (biprod.map j₁ j₂), hbip]
-    rw [Category.id_comp]
+    rw [Category.id_comp e₁.inv]
     exact e₁.hom_inv_id
 
 /-- On an affine open, strictly perfect models of the first two objects of a distinguished
