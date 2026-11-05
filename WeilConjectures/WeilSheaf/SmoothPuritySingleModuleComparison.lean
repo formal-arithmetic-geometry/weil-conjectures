@@ -23,6 +23,15 @@ open Scheme
 variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
 
+/-- Derived coefficient extension, with its instances fixed at this definition. -/
+noncomputable def purityDerivedCoefficientExtension (a : Λ ⟶ Λ') [IsMonHom a]
+    (X : Scheme.{u}) := L(Mod.extendScalars (coefficientMap a X))
+
+/-- Derived geometric pullback, with its instances fixed at this definition. -/
+noncomputable def purityDerivedPullback
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (g : X ⟶ Y) := L((g)^*⟦Λ⟧)
+
 /-- The degree-zero comparison for coefficient extension. -/
 noncomputable def purityExtendScalarsSingleComparison (a : Λ ⟶ Λ') [IsMonHom a]
     (X : Scheme.{u}) := (Mod.extendScalars (coefficientMap a X)).puritySingleComparison

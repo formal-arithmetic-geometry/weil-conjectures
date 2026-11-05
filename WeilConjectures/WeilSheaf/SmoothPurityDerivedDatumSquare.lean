@@ -53,17 +53,20 @@ lemma purity_derived_flat_datum_square
           ((DerivedCategory.singleFunctor _ 0).obj N) ≫
         (((g)^*⟦Λ'⟧).mapDerivedCategorySingleFunctor 0).hom.app N ≫
         (DerivedCategory.singleFunctor _ 0).map v := by
+  let LF := purityDerivedCoefficientExtension a Y
+  let LG := purityDerivedPullback Λ' g
+  let LH := purityDerivedPullback Λ g
+  let LI := purityDerivedCoefficientExtension a X
   have hs := purity_single_datum_square
     (Mod.extendScalars (coefficientMap a Y)) (g)^*⟦Λ'⟧ (g)^*⟦Λ⟧
     (Mod.extendScalars (coefficientMap a X))
-    L(Mod.extendScalars (coefficientMap a Y)) L((g)^*⟦Λ'⟧) L((g)^*⟦Λ⟧)
-    L(Mod.extendScalars (coefficientMap a X))
+    LF LG LH LI
     (purityExtendScalarsSingleComparison a Y)
     (purityPullbackSingleComparison Λ' g) (purityPullbackSingleComparison Λ g)
     (purityExtendScalarsSingleComparison a X)
     (derivedUpperStarExtendScalarsIso a g).inv (pullIso a g).inv u v r s
     (derivedUpperStarExtendScalarsIso_inv_app_single_comp_comparison a g M) h
-  simpa only [purityPullbackSingleComparison_app_eq_exact,
+  simpa only [LF, LG, LH, LI, purityDerivedPullback, purityDerivedCoefficientExtension, purityPullbackSingleComparison_app_eq_exact,
     purityExtendScalarsSingleComparison_app_eq_of_flat _ _ hM,
     purityExtendScalarsSingleComparison_app_eq_of_flat _ _ hM',
     leftDerivedUpperStarIsoMapDerivedCategory, Category.assoc] using hs

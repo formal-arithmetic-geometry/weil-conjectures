@@ -39,10 +39,10 @@ lemma derivedUpperStarExtendScalarsIso_inv_app_single_comp_comparison
         (purityPullbackSingleComparison Λ' g).app
           ((Mod.extendScalars (coefficientMap a Y)).obj M) ≫
         (DerivedCategory.singleFunctor _ 0).map ((pullIso a g).inv.app M) := by
-  let LF := L(Mod.extendScalars (coefficientMap a Y))
-  let LG := L((g)^*⟦Λ'⟧)
-  let LH := L((g)^*⟦Λ⟧)
-  let LI := L(Mod.extendScalars (coefficientMap a X))
+  let LF := purityDerivedCoefficientExtension a Y
+  let LG := purityDerivedPullback Λ' g
+  let LH := purityDerivedPullback Λ g
+  let LI := purityDerivedCoefficientExtension a X
   have hfac (K) := derivedUpperStarExtendScalarsIso_inv_app_Qh_comp_counit a g K
   simp only [pullIsoInvHomotopy, Functor.mapHomotopyCategoryCommIsoHom_app] at hfac
   have hsingle := Functor.puritySingleComparisonOfHomotopy_square
@@ -52,7 +52,7 @@ lemma derivedUpperStarExtendScalarsIso_inv_app_single_comp_comparison
     ((g)^*⟦Λ'⟧).leftDerivedFunctorCounit ((g)^*⟦Λ⟧).leftDerivedFunctorCounit
     (Mod.extendScalars (coefficientMap a X)).leftDerivedFunctorCounit
     (derivedUpperStarExtendScalarsIso a g).inv (pullIso a g).inv hfac M
-  simpa only [LF, LG, LH, LI, Functor.puritySingleComparisonOfCochain_leftDerivedCounit,
+  simpa only [LF, LG, LH, LI, purityDerivedPullback, purityDerivedCoefficientExtension, Functor.puritySingleComparisonOfCochain_leftDerivedCounit,
     purityPullbackSingleComparison, purityExtendScalarsSingleComparison] using hsingle
 
 end AlgebraicGeometry.ProEtale.CondensedRing
