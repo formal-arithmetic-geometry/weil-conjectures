@@ -50,7 +50,7 @@ lemma exists_ι_map_eq {A : C} (M : CochainComplex.Plus C) [M.obj.IsKInjective]
   refine ⟨f, ?_⟩
   rw [← cancel_epi ((DerivedCategory.quotientCompQhIso C).hom.app _),
     ← quotientCompQhIso_hom_naturality, hg]
-  simp
+  simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
 
 /-- The degree-`0` homology of a morphism `A[0] ⟶ Q(M)` coming from `f : A[0] ⟶ M`. -/
 lemma singleFunctorCompHomologyFunctorIso_inv_app_comp_homologyFunctor_map {A : C}
