@@ -41,7 +41,12 @@ uniquely to a local derivation over `U`.
 universe u
 
 open CategoryTheory Opposite TopologicalSpace
-open PresheafOfModulesOfCommRing (Derivation')
+
+namespace PresheafOfModules
+
+export PresheafOfModulesOfCommRing (Derivation')
+
+end PresheafOfModules
 
 namespace AlgebraicGeometry.Scheme.Modules
 
