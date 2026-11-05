@@ -35,11 +35,14 @@ theorem purity_exchangeLeft_ofNatIsoLeft
   ext K
   have hθ := θ.hom.naturality (e.inv.app K)
   have hε := b'.counit.naturality (H'.map (e.inv.app K))
+  have hn₁ := e'.hom.naturality (θ.hom.app (L.obj K))
+  have hn₂ := e'.hom.naturality (H.map (P.map (e.inv.app K)))
+  have hn₃ := e'.hom.naturality (H.map (b.unit.app K))
   simp only [Functor.comp_map, Functor.id_map] at hθ hε
   simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
     exchangeLeft_app, ofNatIsoLeft_unit, ofNatIsoLeft_counit, Iso.symm_hom, Iso.symm_inv,
     Functor.map_comp, Category.assoc]
-  rw [e'.hom.naturality_assoc, e'.hom.naturality_assoc, e'.hom.naturality_assoc,
+  rw [reassoc_of% hn₁, reassoc_of% hn₂, reassoc_of% hn₃,
     ← J'.map_comp_assoc, hθ, J'.map_comp_assoc, reassoc_of% hε,
     ← H'.map_comp, Iso.inv_hom_id_app, H'.map_id, Category.comp_id]
 
