@@ -229,7 +229,9 @@ theorem nonempty_systemScalarModel {R S : Sheaf J CommRingCat.{w}} (φ : R ⟶ S
             adjunction := d
             transpose := adjunction_cochain_transpose D.E _ a D.T D.ε ε
               (fun P ↦ by
-                apply (Iso.eq_comp_inv ((DerivedCategory.quotientCompQhIso _).app _)).1
+                apply (Iso.eq_comp_inv ((DerivedCategory.quotientCompQhIso
+                  (ringedSiteModules.{w} (derivedChangeRingIndependentCoefficients J S))).app
+                    ((D.E.mapHomologicalComplex (.up ℤ)).obj P))).1
                 simpa only [Category.assoc] using hεP P) d hd }⟩
   intro P U x
   have hu := ha P (D.E.obj P) (eqToHom (D.obj_eq P).symm) U x
