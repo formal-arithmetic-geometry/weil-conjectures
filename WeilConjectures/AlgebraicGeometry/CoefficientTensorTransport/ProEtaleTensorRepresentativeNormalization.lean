@@ -14,7 +14,6 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Canonical.ProEtaleCanon
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
 attribute [local implicit_reducible] CategoryTheory.Functor.map₂HomologicalComplex
-  CategoryTheory.Functor.mapHomologicalComplex
 attribute [local irreducible] SheafOfModules.monoidalCategory
   CategoryTheory.Functor.mapDerivedCategory
   AlgebraicGeometry.Scheme.proEtaleRingDerivedPullbackFactors
