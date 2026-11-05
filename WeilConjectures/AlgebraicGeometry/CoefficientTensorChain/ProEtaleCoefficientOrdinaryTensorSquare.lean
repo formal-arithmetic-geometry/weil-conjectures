@@ -101,7 +101,6 @@ attribute [local implicit_reducible] CategoryTheory.Functor.map₂HomologicalCom
   PresheafOfModules.pushforward PresheafOfModules.restrictScalars
   PresheafOfModules.pushforward₀ PresheafOfModules.pushforward₀Obj
   PresheafOfModules.restrictScalarsObj
-  CategoryTheory.Functor.mapHomologicalComplex
 attribute [local irreducible] SheafOfModules.monoidalCategory
 universe u
 open CategoryTheory CategoryTheory.Functor CategoryTheory.Limits
