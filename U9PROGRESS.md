@@ -142,16 +142,23 @@
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ538 in progress
+# BZ539 in progress
 
-- Branch: `u9/BZ538`; assigned module: `AffineBasisKInjectiveSectionsPreservesHomology`.
-- Its original IsAffineOpen visibility fix was already in the starting branch.
-- Added the same public AffineScheme import to second-layer `AffineBasisSectionsDerivedUnit`.
-- Two remote build attempts stopped in shared dependencies before reaching our targets.
-- Merged coordinator updates at `8af5cb324`; Monoidal now builds, but InternalHom remained blocked.
-- The user instructed continuation after the explicit one-line InternalHom repair proposal.
-  Applied the compatibility tensorObj_map_tmul lemma so the following map_comp_apply rewrite matches.
-- Next: ucheck-bump assigned module, AffineBasisSectionsResolutionHomologyEpi, and
-  AffineBasisSectionsDerivedUnit; then write DONE with every green module and PATTERN/ERROR pairs.
-- Detailed patterns, counts, and exact errors: `/home/ubuntu/u9/bz/FIXES-BZ538.md`.
-- No local Lean/Lake, proof placeholders, statement changes, trust bypasses, or heartbeat increases.
+- Branch: `u9/BZ539`; original start: `29f3a8d8177`.
+- Re-read the brief and prior notes on user-requested continuation.
+- Baseline build stopped in unowned `Presheaf.InternalHom:373` with an unknown
+  `PresheafOfModulesOfCommRing.Monoidal.tensorObj_map_tmul` identifier.
+- The coordinator subsequently added the public Mathlib monoidal import in
+  `04f9380d1`. Merged coordinator head `8af5cb324` to take that fix and retry.
+- The proposed compatibility-namespace patch remains unapplied while testing
+  the coordinator's repair.
+- Next: validate ChangeOfCoefficients via ucheck-bump, repair its proof errors,
+  then check up to four direct importers and one further downstream layer.
+- Notes and logs: `/home/ubuntu/u9/bz/FIXES-BZ539.md`.
+- No local Lean/Lake, proof placeholders, statement edits, or heartbeat raises.
+
+- The public import resolved the missing name, but the resumed build failed in
+  `InternalHom:375` because its proof mixed new and compatibility map APIs.
+- User continuation followed the explicit one-line dependency patch proposal;
+  that exact compatibility-namespace proof repair is now applied.
+- Retrying the assigned module; declarations and heartbeat settings unchanged.
