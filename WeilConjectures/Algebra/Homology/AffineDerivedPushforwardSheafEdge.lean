@@ -242,7 +242,8 @@ theorem exists_affineDerivedPushforwardSheafEdge
     γ, S, T, U, K, ι, H, f, X, Y, C, D, Functor.whiskerRight_app, ObjectProperty.ι_obj,
     ShortComplex.LeftHomologyData.map_π, ShortComplex.mapHomologyIso,
     Functor.comp_map, Functor.map_comp, Functor.mapHomologicalComplex, Functor.comp_obj,
-    cast_eq]
+    cast_eq, S.rightDerivedFunctor.map_id, (DerivedCategory.homologyFunctor D i).map_id,
+    Functor.map_id]
     using hn.symm
 
 end AlgebraicGeometry
