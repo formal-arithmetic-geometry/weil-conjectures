@@ -180,3 +180,10 @@
 - Next: validate the assigned module with `ucheck-bump`, then direct importers.
 - Fix patterns, inventories, and logs: `/home/ubuntu/u9/bz/FIXES-BZ621.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, heartbeat raises, or profiler probes.
+
+- BZ621 assigned-module validation is GREEN at `5c47fa596b`: `ucheck-bump`
+  rc=0, built=3, failed=0, on `poolb:43.157.184.90`.
+- Full log: `/home/ubuntu/u9/bz/BZ621-owned-green.log`.
+- Continuing with four direct importers: SequenceProjectionDerivedAdjunction,
+  SequencePushforwardLimitProjections, RingedDerivedAdjointLift, and
+  SequenceSiteCompletionProjectionSupplement.
