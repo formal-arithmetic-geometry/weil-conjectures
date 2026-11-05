@@ -142,41 +142,18 @@
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ539 in progress
+# BZ540 in progress
 
-- Branch: `u9/BZ539`; original start: `29f3a8d8177`.
-- Re-read the brief and prior notes on user-requested continuation.
-- Baseline build stopped in unowned `Presheaf.InternalHom:373` with an unknown
-  `PresheafOfModulesOfCommRing.Monoidal.tensorObj_map_tmul` identifier.
-- The coordinator subsequently added the public Mathlib monoidal import in
-  `04f9380d1`. Merged coordinator head `8af5cb324` to take that fix and retry.
-- The proposed compatibility-namespace patch remains unapplied while testing
-  the coordinator's repair.
-- Next: validate ChangeOfCoefficients via ucheck-bump, repair its proof errors,
-  then check up to four direct importers and one further downstream layer.
-- Notes and logs: `/home/ubuntu/u9/bz/FIXES-BZ539.md`.
-- No local Lean/Lake, proof placeholders, statement edits, or heartbeat raises.
-
-- The public import resolved the missing name, but the resumed build failed in
-  `InternalHom:375` because its proof mixed new and compatibility map APIs.
-- User continuation followed the explicit one-line dependency patch proposal;
-  that exact compatibility-namespace proof repair is now applied.
-- Retrying the assigned module; declarations and heartbeat settings unchanged.
-
-- Compatibility build validated Presheaf.InternalHom and exposed the identical
-  copied-proof failure in Algebra.Homology.KFlat:82. Applied the same one-line
-  namespace correction there; no old-name occurrences remain in the target closure.
-- Retrying the target after these two minimal dependency proof corrections.
-
-- KFlat now passes. Its resolution module exposed the same copied-proof mismatch;
-  applied the same correction in KFlatResolutionIndependentCoefficients:132.
-- Corrected the dependency scan to include import all and trailing import comments.
-  All three changes are the same one-line proof-body replacement.
-
-- Assigned module and all four selected direct importers passed together at
-  `5b2cf87cce` (rc=0, failed=0, 4423 jobs).
-- All three compatibility-lemma dependency corrections are validated.
-- Green log: `/home/ubuntu/u9/logs/BZ539-20261106T041952.log`;
-  local full copy: `/home/ubuntu/u9/bz/BUILD-BZ539-layer1-full.log`.
-- Checking second-layer importers ChangeOfCoefficientsPullCounit and
-  DerivedPullIsoCoherenceLowerStar next; skip failures in unowned dependencies.
+- Branch: `u9/BZ540`; owned module:
+  `WeilConjectures.CategoryTheory.Constant.ConstantDerivedNormalizationUniversalSupplement`.
+- Applied known BZ301 sheafification-instance exclusion before `constantSeed`.
+  All declaration statements and existing proofs are unchanged.
+- Imported dependency owners' fixes: BZ581 `216c997cc` for Presheaf.InternalHom,
+  BZ549 `cbe4e4143` for Algebra.Homology.KFlat, plus coordinator baseline `8af5cb324`.
+- Fresh ucheck on 2026-11-06 reached KFlat, where the second owner repair was needed.
+  Build with both repairs is now submitted. Do not mark DONE before assigned module is green.
+- Next: finish assigned validation, then check direct importers
+  `WeilConjectures.AlgebraicGeometry.Etale.EtaleNormalizationArrowUniversal` and
+  `WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerScalarRestriction`.
+- Fix log: `/home/ubuntu/u9/bz/FIXES-BZ540.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
