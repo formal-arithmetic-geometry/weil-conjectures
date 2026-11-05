@@ -454,7 +454,8 @@ lemma Etale.sheafFiberToLowerStar_stalkRestrict (t : Scheme.Hom.GeometricFiber f
   rw [Etale.toPresheafFiber_stalkRestrict A f y t G
     (Functor.elementsMk _ _ (Etale.fiberMapPoint f t U x))]
   have hx : x.left ≫ U.hom = t.1 := CategoryTheory.Over.w x
-  have : ((Etale.baseChangeNbhd f y t).obj (Functor.elementsMk _ _ (Etale.fiberMapPoint f t U x))).2 =
+  have : ((Etale.baseChangeNbhd f y t).obj
+      (Functor.elementsMk _ _ (Etale.fiberMapPoint f t U x))).2 =
       (Scheme.pointSmallEtale t.1).fiber.map (Scheme.Etale.graph f U) x := by
     refine CategoryTheory.Over.OverMorphism.ext (pullback.hom_ext ?_ ?_)
     · change Scheme.Hom.basePt f _ t ≫ _ = (x.left ≫ (Scheme.Etale.graph f U).left) ≫ _
@@ -509,7 +510,8 @@ lemma Etale.sheafFiberToLowerStar_stalkRestrict_of_ne {t t' : Scheme.Hom.Geometr
         change _ ≫ (Scheme.Etale.graphComplι f U).left ≫ _ = _
         rw [← Category.assoc, IsOpenImmersion.lift_fac]
         exact pullback.lift_snd _ _ _)
-  have : ((Etale.baseChangeNbhd f y t').obj (Functor.elementsMk _ _ (Etale.fiberMapPoint f t U x))).2 =
+  have : ((Etale.baseChangeNbhd f y t').obj
+      (Functor.elementsMk _ _ (Etale.fiberMapPoint f t U x))).2 =
       (Scheme.pointSmallEtale t'.1).fiber.map (Scheme.Etale.graphComplι f U) w :=
     CategoryTheory.Over.OverMorphism.ext (IsOpenImmersion.lift_fac _ _ _).symm
   rw [this]
