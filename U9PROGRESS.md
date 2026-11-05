@@ -465,3 +465,6 @@ BLOCKED: the actual integral exceptional/Tate Weil data have not been identified
 
 ## 2026-11-05T09:48:36.041312+08:00 — resume actual reduction coherence
 Reread brief and current notes. C4 is explicitly lead-assigned finite purity iso-square base change. Checking actual coefficient/pullback composition coherence to supply the reduction-stability input of the equivariant reconstruction. No new assumptions are being hidden in the target.
+
+## 2026-11-05T09:56:40.417703+08:00 — actual coefficient composition
+Added SmoothPurityCoefficientPullCompOrdinary (GREEN9.2s), SmoothPurityCoefficientPullMate (GREEN4.6s), SmoothPurityCoefficientPullCompDerived (GREEN16s). Last check K4-20261105T095457 failed only final mate composition: generic inverse cancellation needs comp_obj normalization and concrete rw exceeds200k heartbeats. Replaced concrete rw by a generic named-comparison mate composition lemma. Drafted actual isWeilEquivariant_derivedReductionStep and exists_geometric_equivariant_integralOrientation_iso, discharging hstep/finite Hom/shifted Hom internally; pending checks.

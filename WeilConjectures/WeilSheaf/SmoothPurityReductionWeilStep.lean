@@ -19,7 +19,7 @@ private lemma purity_weil_inverse {C : Type*} [Category C] (G : C ⥤ C)
     {K L : C} (φK : G.obj K ⟶ K) (φL : G.obj L ⟶ L) (e : K ≅ L)
     (h : IsWeilEquivariant G φK φL e.hom) : IsWeilEquivariant G φL φK e.inv := by
   apply (cancel_epi (G.map e.hom)).mp
-  simp only [IsWeilEquivariant, ← G.map_comp_assoc, Iso.hom_inv_id,
+  simp only [← G.map_comp_assoc, Iso.hom_inv_id,
     CategoryTheory.Functor.map_id, Category.id_comp, ← Category.assoc]
   rw [h]
   simp
@@ -40,7 +40,7 @@ lemma purity_isWeilEquivariant_compositor
   dsimp only [IsWeilEquivariant, transportWeilDatum]
   simp only [Functor.map_comp, Category.assoc, Iso.hom_inv_id_app_assoc]
   rw [h K]
-  simp only [Category.assoc, ← G₂.map_comp_assoc, Iso.inv_hom_id_app,
+  simp only [Functor.comp_obj, Category.assoc, ← G₂.map_comp_assoc, Iso.inv_hom_id_app,
     CategoryTheory.Functor.map_id, Category.id_comp, Iso.hom_inv_id_app_assoc,
     ← S.map_comp_assoc, Iso.hom_inv_id_app]
   exact (μ.hom.naturality φ).symm
@@ -96,20 +96,20 @@ theorem isWeilEquivariant_derivedReductionStep (g : X ⟶ X) (n : ℕ)
       (transportWeilDatum _ (integersModPowReductionUpperStarIso ℓ E n g) φK)
       (transportWeilDatum _ (integersModPowReductionUpperStarIso ℓ E n g) φL)
       (derivedReductionStep n s) := by
+  let α := integersModPowReductionUpperStarIso ℓ E (n + 1) g
+  let β := derivedUpperStarExtendScalarsIso (Profinite.integersModPowRingObjTransition ℓ E n) g
+  let γ := integersModPowReductionUpperStarIso ℓ E n g
+  let μ := Mod.derivedExtendScalarsCompIso _ _ _
+    (integersModPowReduction_comp_integersModPowTransition X ℓ E n)
+  have hcomp := derivedUpperStarExtendScalarsIso_hom_app_of_coefficient_comp
+    (Profinite.padicIntegersRingObjToIntegersModPow ℓ E (n + 1))
+    (Profinite.integersModPowRingObjTransition ℓ E n)
+    (Profinite.padicIntegersRingObjToIntegersModPow ℓ E n) g
+    (Profinite.padicIntegersRingObjToIntegersModPow_comp_integersModPowRingObjTransition ℓ E n)
   exact purity_isWeilEquivariant_reduction
     (purityIntegralReduction X ℓ E (n + 1))
     (Mod.extendScalars (integersModPowTransition X ℓ E n)).leftDerivedFunctor
     (purityIntegralReduction X ℓ E n)
-    (integersModPowReductionUpperStarIso ℓ E (n + 1) g)
-    (derivedUpperStarExtendScalarsIso (Profinite.integersModPowRingObjTransition ℓ E n) g)
-    (integersModPowReductionUpperStarIso ℓ E n g)
-    (Mod.derivedExtendScalarsCompIso _ _ _
-      (integersModPowReduction_comp_integersModPowTransition X ℓ E n))
-    (derivedUpperStarExtendScalarsIso_hom_app_of_coefficient_comp
-      (Profinite.padicIntegersRingObjToIntegersModPow ℓ E (n + 1))
-      (Profinite.integersModPowRingObjTransition ℓ E n)
-      (Profinite.padicIntegersRingObjToIntegersModPow ℓ E n) g
-      (Profinite.padicIntegersRingObjToIntegersModPow_comp_integersModPowRingObjTransition ℓ E n))
-    φK φL s hs
+    α β γ μ hcomp φK φL s hs
 
 end AlgebraicGeometry.ProEtale
