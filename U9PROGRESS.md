@@ -1,11 +1,19 @@
-# BZ72 complete
+# BZ94 progress
 
-- Unit: BZ72, branch `u9/BZ72`.
-- All four assigned modules passed `ucheck-bump` together: rc=0, 3821 jobs.
-- Checked source commit: `1ff41157e8e837eefed5af2db7bae1d35eab175d`; this final update changes only progress documentation.
-- Full build log: `/home/ubuntu/u9/bz/BUILD-BZ72-final3-full.log`.
-- Fix patterns and the coordinate statement's canonical endpoint transports: `/home/ubuntu/u9/bz/FIXES-BZ72.md`.
-- The user instructed continuation after the explicit statement-adjustment proposal. All other declaration statements and existing docstrings are unchanged.
-- No local Lean/Lake execution, no sorries or trust escapes, no heartbeat increases.
-- Completion marker: `/home/ubuntu/u9/state/BZ72.DONE`.
-- Outside-unit caller `NativeHomLocalizedConeBoundaryModel.lean:114` still needs its owner's port; details are in the fix log.
+- Unit: BZ94; branch: `u9/BZ94`; start: `4f9f7e361`.
+- Owned modules: `CategoryTheory.MappedSingleCyclesShiftComparison`,
+  `CategoryTheory.SupportedComplexSingleRealization`,
+  `Algebra.Category.ModuleCat.Sheaf.ExtensionTensorComparison`, and
+  `AlgebraicGeometry.Modules.ExteriorPower`, all under `WeilConjectures`.
+- Both sheaf modules passed together at `90536461af393040e06541849014e02bc7067746`
+  via `ucheck-bump`: rc=0, failed=0.
+- The user instructed continuation after reviewing the two statement API
+  corrections in `/home/ubuntu/u9/bz/BZ94-statement-api-proposal.patch`.
+  These now make the canonical localization transports explicit; all binders and
+  mathematical assertions are preserved. Other declaration statements are unchanged.
+- Category-theory proofs now use the direct Q homology comparison, cancel the
+  explicit localization transport, and obtain pure-degree instances on Q directly.
+- All four modules are being checked together through `ucheck-bump`.
+- Patterns and whole-tree candidate counts: `/home/ubuntu/u9/bz/FIXES-BZ94.md`.
+- No local Lean/Lake execution, no placeholders, no trust escapes, no heartbeat increases.
+- Write `/home/ubuntu/u9/state/BZ94.DONE` only after all four modules pass.

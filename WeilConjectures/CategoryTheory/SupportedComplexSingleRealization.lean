@@ -43,8 +43,7 @@ theorem supported_complex_single_realization
     let e : (DerivedCategory.Plus.singleFunctor B n).obj X ≅
         DerivedCategory.Plus.Q.obj S :=
       DerivedCategory.Plus.ι.preimageIso
-        ((DerivedCategory.singleFunctorIsoCompQ B n).app X ≪≫
-          (DerivedCategory.quotientCompQhIso B).symm.app _)
+        ((DerivedCategory.singleFunctorIsoCompQ B n).app X)
     ∀ (f : Q.obj L ⟶ (singleFunctor B n).obj X),
       (homologyFunctor B n).map f ≫
         (singleFunctorCompHomologyFunctorIso (C := B) n).hom.app X = 𝟙 X →
@@ -58,8 +57,7 @@ theorem supported_complex_single_realization
   let S : CochainComplex.Plus B :=
     ⟨(CochainComplex.singleFunctor B (n : ℤ)).obj X, n, inferInstance⟩
   let e : (singleFunctor B n).obj X ≅ Q.obj S :=
-    ι.preimageIso ((DerivedCategory.singleFunctorIsoCompQ B n).app X ≪≫
-      (DerivedCategory.quotientCompQhIso B).symm.app _)
+    ι.preimageIso ((DerivedCategory.singleFunctorIsoCompQ B n).app X)
   have hd : L.obj.d (n : ℤ) (n + 1) = 0 :=
     (hL (n + 1) (by omega)).eq_of_tgt _ _
   have : IsIso (L.obj.iCycles n) := L.obj.isIso_iCycles n (n + 1) (by simp) hd
@@ -94,11 +92,8 @@ theorem supported_complex_single_realization
   have he : e.inv = 𝟙 _ := by
     apply ι.map_injective
     simp only [e, Functor.preimageIso_inv, Functor.map_preimage,
-      Iso.trans_inv, Iso.symm_inv, Iso.app_inv,
-      DerivedCategory.singleFunctorIsoCompQ, Iso.refl_inv, NatTrans.id_app]
-    change (DerivedCategory.quotientCompQhIso B).hom.app S.obj ≫ 𝟙 _ = 𝟙 _
-    rw [Category.comp_id]
-    rfl
+      Iso.app_inv, DerivedCategory.singleFunctorIsoCompQ, Iso.refl_inv,
+      NatTrans.id_app, Functor.map_id]
   have hn : (homologyFunctor B n).map (Q.map t ≫ e.inv) ≫
       (singleFunctorCompHomologyFunctorIso (C := B) n).hom.app X = 𝟙 X := by
     rw [he, Category.comp_id]
