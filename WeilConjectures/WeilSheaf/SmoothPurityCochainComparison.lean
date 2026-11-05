@@ -38,6 +38,7 @@ lemma purityCochainComparisonOfHomotopy_app
     whiskerLeft_app]
   change LF.map (𝟙 _) ≫ η.app _ ≫ DerivedCategory.Qh.map (𝟙 _) ≫ 𝟙 _ = _
   simp only [Functor.map_id, Category.id_comp, Category.comp_id]
+  erw [Category.comp_id]
 
 variable {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]
   [HasDerivedCategory A] [HasDerivedCategory B]
