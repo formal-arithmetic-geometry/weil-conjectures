@@ -103,7 +103,8 @@ theorem moduleCohomology_scalar_endomorphism {X : Scheme.{v}} (G : X.Modules)
   have hn := InjectiveResolution.isoRightDerivedObj_hom_naturality tau I I phi hw E q
   have hm : (E.mapHomologicalComplex _ ⋙ HomologicalComplex.homologyFunctor _ _ q).map phi =
       r • 𝟙 _ := by
-    change ShortComplex.homologyMap _ = _
+    change ShortComplex.homologyMap
+      (C := ModuleCat ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) _ = _
     have hsc : ((HomologicalComplex.shortComplexFunctor _ (ComplexShape.up ℕ) q).map
         ((E.mapHomologicalComplex (ComplexShape.up ℕ)).map phi)) =
         r • 𝟙 _ := by
