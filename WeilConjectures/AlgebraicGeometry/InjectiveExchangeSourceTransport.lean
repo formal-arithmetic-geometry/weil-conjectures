@@ -64,6 +64,5 @@ theorem injectiveExchange_source_transport {X S : Scheme.{v}} (f : X ⟶ S)
     DerivedCategory.quotientCompQhIso, HomologicalComplexUpToQuasiIso.quotientCompQhIso,
     Quotient.lift.isLift, NatIso.ofComponents.app, Iso.refl_inv]
   erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.id_comp]
-  rfl
 
 end AlgebraicGeometry.Etale
