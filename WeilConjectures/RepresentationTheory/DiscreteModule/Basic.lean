@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Category.Grp.EnoughInjectives
 public import Mathlib.Algebra.Category.Grp.Zero
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughInjectives
+public import Mathlib.CategoryTheory.Abelian.Exact
 public import Mathlib.CategoryTheory.Abelian.Subcategory
 public import Mathlib.CategoryTheory.Action.Limits
 public import Mathlib.CategoryTheory.Preadditive.LeftExact
