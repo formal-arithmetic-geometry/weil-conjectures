@@ -91,7 +91,8 @@ theorem Etale.isIso_derivedBaseChangeMapPlus_of_etale (sq : IsPullback g' f' f g
     let P := (HomotopyCategory.Plus.quotient _).obj M
     suffices IsIso ((Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app
         (DerivedCategory.Plus.Qh.obj P)) by
-      rw [← NatTrans.isIso_app_iff_of_iso _ e]
+      rw [← NatTrans.isIso_app_iff_of_iso _
+        ((DerivedCategory.Plus.quotientCompQhIso _).app M ≪≫ e)]
       exact this
     have hM : ∀ m, (f')_*[ModuleCat.{u + 1} Λ].rightAcyclic
         ((((g')^*[ModuleCat.{u + 1} Λ]).mapCochainComplexPlus.obj M).obj.X m) := fun m ↦
