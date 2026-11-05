@@ -98,7 +98,8 @@ lemma purity_finiteCoefficient_free_right_square {X Y : Scheme.{u}} (g : X ⟶ Y
   rw [← Functor.map_comp_assoc]
   erw [Equivalence.counitIso_inv_hom_id_app]
   rw [CategoryTheory.Functor.map_id, Category.id_comp,
-    purity_lowerStarFiniteCoefficient_forget_inv, Category.comp_id]
+    purity_lowerStarFiniteCoefficient_forget_inv]
+  erw [Category.comp_id]
   rfl
 
 /-- The actual finite coefficient pullback comparison respects the free-module
