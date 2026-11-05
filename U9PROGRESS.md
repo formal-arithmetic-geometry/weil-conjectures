@@ -114,6 +114,8 @@
 - The user instructed continuation after the exact API-only statement patch proposal.
   Applied that patch: use the reversed Mathlib compositor and repair two misplaced
   `.symm` projections, preserving the intended maps.
-- Validating via `ucheck-bump`, then continuing the requested downstream layers.
+- Owned module passed `ucheck-bump`: rc=0, failed=0, 3949 jobs, at `ec3927a96a`.
+- Added explicit `Iso.symm_hom` / `Iso.symm_inv` normalization at eight restricted
+  simp sites after the header migration. Continuing with four direct importers.
 - Fix patterns, exact errors, and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ395.md`.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or limit increases.
