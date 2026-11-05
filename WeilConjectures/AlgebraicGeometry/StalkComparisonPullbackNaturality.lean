@@ -65,7 +65,8 @@ def comparisonIntoPullback (z : X')
     (comparisonStalkCohomology X' z i).map
       (cast (by rfl)
         (inv ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) :
-        DerivedCategory.Q.obj
+        (DerivedCategory.Q
+          (C := SheafOfModules.{u} (moduleRings X'.toRingedSpace))).obj
             (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P) ⟶
           (derivedPullback g').obj (DerivedCategory.Q.obj P))
 
