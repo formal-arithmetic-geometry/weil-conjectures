@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.AlgebraicGeometry.Stalk
 public import WeilConjectures.RingTheory.Depth
 import WeilConjectures.AlgebraicGeometry.Morphisms.DepthTwoHartogsRestriction
 import WeilConjectures.RingTheory.DepthLeSupportDimension
