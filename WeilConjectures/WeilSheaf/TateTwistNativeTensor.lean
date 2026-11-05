@@ -49,7 +49,7 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime] [Fa
 
 /-- The Tate sheaf `ℚ̄_ℓ(m)`, as the Tate twist of the Weil complex `ℚ̄_ℓ`, is the constant twist
 `ℚ̄_ℓ ⊗ 𝓑_{χ_ℓ(σ)ᵐ}` placed in degree `0`. -/
-noncomputable def tateTwistObjAdicConstantIso (m : ℤ) :
+noncomputable def tateTwistObjAdicConstantSingleIso (m : ℤ) :
     ((tateTwist k₀ l X m).obj (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X))).obj ≅
       (DerivedCategory.singleFunctor _ 0).obj
         ((constantTwist k₀ l X (WeilSheaf.cyclotomicUnit k₀ l ^ m)).obj (adicConstant k₀ l X)) :=
@@ -66,7 +66,7 @@ noncomputable def tateTwistShiftObjIso (m n : ℤ) :
         ((constantTwist k₀ l X (WeilSheaf.cyclotomicUnit k₀ l ^ m)).obj
           (adicConstant k₀ l X))) :=
   ((objectProperty k₀ l X).ι.commShiftIso n).app _ ≪≫
-    (shiftFunctor _ n).mapIso (tateTwistObjAdicConstantIso k₀ l X m) ≪≫
+    (shiftFunctor _ n).mapIso (tateTwistObjAdicConstantSingleIso k₀ l X m) ≪≫
     ((DerivedCategory.singleFunctors _).shiftIso n (-n) 0 (by omega)).app _
 
 /-- The native internal hom out of the shifted Tate sheaf `ℚ̄_ℓ(m)[n]` is the derived constant
