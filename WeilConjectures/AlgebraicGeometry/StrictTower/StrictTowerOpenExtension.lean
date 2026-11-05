@@ -184,7 +184,7 @@ Source: blueprint evaluation normalization
 (blueprint: def-cbc-strict-tower-open-extension). -/
 noncomputable def evalJ {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] (n : ℕ) :
     J B j ⋙ ev B X n ≅ ev B U n ⋙ (moduleJ B j).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso _ _) ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
   Functor.mapDerivedCategoryNatIso (eqToIso (evaluationOpen B j n)) ≪≫
   (Functor.mapDerivedCategoryCompIso _ _).symm
 
