@@ -102,7 +102,8 @@ theorem picardPresheafDegree_map [IsProper f] [LocallyOfFinitePresentation f] {T
       picardPresheafDegree f L (g.left t) := by
   have := Modules.isGrothendieckAbelian (pullback f T.hom)
   have := Pic.isInvertible (Y := pullback f T.hom) L
-  have : SheafOfModules.IsInvertible.{u, u, u} (SheafOfModules.unit (pullback f T.hom).ringCatSheaf) :=
+  have : SheafOfModules.IsInvertible.{u, u, u}
+      (SheafOfModules.unit (pullback f T.hom).ringCatSheaf) :=
     SheafOfModules.instIsInvertibleUnit.{u, u, u}
   have : SheafOfModules.IsFinitePresentation.{u, u, u}
       (SheafOfModules.unit (pullback f T.hom).ringCatSheaf) :=
@@ -128,7 +129,8 @@ theorem picardPresheafDegree_pic_map_of_isPullback [IsProper f] [LocallyOfFinite
     picardPresheafDegree f' (Pic.map e L) t = picardPresheafDegree f L (φ t) := by
   have := Modules.isGrothendieckAbelian (pullback f T.hom)
   have := Pic.isInvertible (Y := pullback f T.hom) L
-  have : SheafOfModules.IsInvertible.{u, u, u} (SheafOfModules.unit (pullback f T.hom).ringCatSheaf) :=
+  have : SheafOfModules.IsInvertible.{u, u, u}
+      (SheafOfModules.unit (pullback f T.hom).ringCatSheaf) :=
     SheafOfModules.instIsInvertibleUnit.{u, u, u}
   have : SheafOfModules.IsFinitePresentation.{u, u, u}
       (SheafOfModules.unit (pullback f T.hom).ringCatSheaf) :=
@@ -151,7 +153,8 @@ theorem isLocallyConstant_picardPresheafDegree [IsProper f] [LocallyOfFinitePres
     IsLocallyConstant (picardPresheafDegree f L) := by
   have := Modules.isGrothendieckAbelian (pullback f T.hom)
   have := Pic.isInvertible (Y := pullback f T.hom) L
-  have : SheafOfModules.IsInvertible.{u, u, u} (SheafOfModules.unit (pullback f T.hom).ringCatSheaf) :=
+  have : SheafOfModules.IsInvertible.{u, u, u}
+      (SheafOfModules.unit (pullback f T.hom).ringCatSheaf) :=
     SheafOfModules.instIsInvertibleUnit.{u, u, u}
   have : SheafOfModules.IsFinitePresentation.{u, u, u}
       (SheafOfModules.unit (pullback f T.hom).ringCatSheaf) :=
