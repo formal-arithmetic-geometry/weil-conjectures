@@ -142,24 +142,47 @@
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ540 complete
+# BZ566 complete
 
-- Branch: `u9/BZ540`; starting commit: `29f3a8d81`.
-- Assigned module `WeilConjectures.CategoryTheory.Constant.ConstantDerivedNormalizationUniversalSupplement`
-  passed `ucheck-bump`: rc=0, built=9, failed=0, 3811 jobs.
-- Validated source commit: `e65cfc0cfe`; tree `poolb:43.157.184.90`.
-- Full log: `/home/ubuntu/u9/bz/BUILD-BZ540-owned-green.log`.
-- Only authored Lean change: exclude the successor-universe sheafification instance before
-  `constantSeed`. All owned statements, proofs, and docstrings match the starting file.
-- Reused validated dependency repairs from BZ581, BZ549, and BZ558; their tensor compatibility
-  changes are recorded in `/home/ubuntu/u9/bz/FIXES-BZ540.md`.
-- Both direct importers were attempted; skipped because of unowned dependency failures in
-  DerivedMorphismSheafComparison (BZ513), KFlatResolutionGeneral (BZ116), and
-  RingedTopoiDerivedPullback (BZ554), and HomTensorPair (BZ92). No second layer or downstream edits.
-- Owned module also rebuilt green at `2ba35ef7bd` in the downstream batch.
-- Stopped the optional downstream batch after its four unowned failures (wrapper rc=255;
-  built=144, failed=4). Log: `/home/ubuntu/u9/bz/BUILD-BZ540-downstream-full.log`.
-- Contract audit: `/home/ubuntu/u9/bz/BZ540-contract-audit.txt`.
-- No local Lean/Lake, sorries, admissions, trust bypasses, or heartbeat increases.
-- Completion marker: `/home/ubuntu/u9/state/BZ540.DONE`.
-- This completion commit changes only progress documentation; Lean sources match the green build.
+- Branch: `u9/BZ566`; coordinator base: `cfcb63ad7` (sweep29).
+- Assigned module and three downstream modules passed together through `ucheck-bump`:
+  rc=0, failed=0, 4925 jobs, on `poolb:43.157.174.214`.
+- Validated source commit: `4917c92b48a3cd585a9abcb62d70cbfe688512d2`.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ566-final-full.log`.
+- The user instructed continuation after the explicit private-helper compositor proposal.
+  Migrated the assigned helpers and their downstream copies to Mathlib's reversed
+  composition isomorphism, with the matching hom/inv cancellation. Public statements
+  and existing docstrings are unchanged.
+- Reused BZ549's dependency repairs and then merged coordinator sweep29; the remaining
+  Lean diff against that coordinator base is confined to the two mate-normalization files.
+- Second-layer CategoryTheory.Integral.IntegralResidueTensorPresentation was skipped:
+  its unowned IntegralResidueRestrictPullComp and IntegralResiduePullSquareIsIso
+  dependencies failed. No changes to those dependencies.
+- Fix patterns, exact errors, occurrence counts and all four validated module names:
+  `/home/ubuntu/u9/bz/FIXES-BZ566.md`.
+- Completion marker: `/home/ubuntu/u9/state/BZ566.DONE`.
+- No local Lean/Lake, proof placeholders, forbidden shortcuts, or heartbeat increases.
+- This final commit changes progress documentation only; Lean sources match the green build.
+
+# BZ549 in progress
+
+- Branch: `u9/BZ549`; owned module: `GlobalSectionsDirectImageKInjectiveAcyclic`.
+- Owned import fix pushed at `d5e8c22c2`: publicly import `ChangeOfRingsExact`.
+- The user instructed continuation after the explicit one-line dependency proposal.
+  Applied the compatibility tensor-map lemma in `Presheaf.InternalHom`.
+- Re-read the brief and refreshed coordinator notes; latest integrated branch is `8af5cb324`.
+- Next: remote validation, first importer `DerivedGlobalSectionsAffinizationComparison`,
+  then second layer `DerivedGlobalSectionsPreservesCoproducts`.
+- Fixes and exact errors: `/home/ubuntu/u9/bz/FIXES-BZ549.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+# BZ557 in progress
+
+- Branch: `u9/BZ557`; starting commit: `8af5cb324`.
+- Added the public AffineScheme import to direct importer AffineBasisSectionsDerivedUnit.
+- Initial remote builds stopped in the shared Presheaf.InternalHom dependency.
+- On continuation, merged BZ558 prerequisite repair `f28760733369366ac823f0084f3c4090afa3a90d`.
+- Next: ucheck-bump on AffineBasisSectionsResolutionHomologyEpi, AffineBasisSectionsDerivedUnit,
+  and AffineOpenSectionsResolutionQuasiIso; fix any owned errors and write DONE when green.
+- Notes and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ557.md`.
+- No local Lean/Lake, statement changes, proof escapes, or heartbeat increases.
