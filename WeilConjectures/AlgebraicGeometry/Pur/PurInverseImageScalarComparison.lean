@@ -66,6 +66,15 @@ private noncomputable abbrev restriction
     {A S : Sheaf K CommRingCat.{u}} (c : A ⟶ S) :=
   SheafOfModules.restrictScalars.{u} ((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).map c)
 
+noncomputable local instance
+    {D : Type s} [Category.{h} D] {K : GrothendieckTopology D}
+    [K.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
+    {A : Sheaf K CommRingCat.{u}} (M : SheafOfModules.{u} (ringSheaf A))
+    {X Y : Dᵒᵖ} (i : X ⟶ Y) :
+    Module (A.obj.obj Y)
+      ((ModuleCat.restrictScalars ((ringSheaf A).obj.map i).hom).obj (M.val.obj Y)) :=
+  inferInstanceAs (Module (A.obj.obj Y) (M.val.obj Y))
+
 private theorem tensorRestriction_tmul
     {D : Type s} [Category.{h} D] {K : GrothendieckTopology D}
     [K.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
@@ -120,7 +129,7 @@ private noncomputable def tensorToRestriction
         intro X Y i
         ext m
         change f.app Y ((1 : S.obj.obj Y) ⊗ₜ[A.obj.obj Y, (c.hom.app Y).hom]
-          M.val.restrictₛₗ i m) = H.val.map i (f.app X
+          M.val.map i m) = H.val.map i (f.app X
             ((1 : S.obj.obj X) ⊗ₜ[A.obj.obj X, (c.hom.app X).hom] m))
         have h := PresheafOfModules.naturality_apply f i
           ((1 : S.obj.obj X) ⊗ₜ[A.obj.obj X, (c.hom.app X).hom] m)
