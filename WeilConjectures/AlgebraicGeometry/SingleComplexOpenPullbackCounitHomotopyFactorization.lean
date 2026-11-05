@@ -35,6 +35,17 @@ section
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
+private noncomputable def mapHomotopySquare
+    {C D B E : Type*} [Category C] [Category D] [Category B] [Category E]
+    [Preadditive C] [Preadditive D] [Preadditive B] [Preadditive E]
+    {F : C ⥤ D} {G : D ⥤ E} {R : C ⥤ B} {J : B ⥤ E}
+    [F.Additive] [G.Additive] [R.Additive] [J.Additive]
+    (e : F ⋙ G ≅ R ⋙ J) :
+    F.mapHomotopyCategory (.up ℤ) ⋙ G.mapHomotopyCategory (.up ℤ) ≅
+      R.mapHomotopyCategory (.up ℤ) ⋙ J.mapHomotopyCategory (.up ℤ) :=
+  Functor.mapHomotopyCategoryCompIso e (.up ℤ) ≪≫
+    (Functor.mapHomotopyCategoryCompIso (Iso.refl (R ⋙ J)) (.up ℤ)).symm
+
 /-- Termwise tensor restriction comparison on the homotopy categories.
 Source: Stacks Project, Tags 08DW and 08HY.
 (blueprint: def-pc-open-pinned-single-tensor-restriction-iso). -/
@@ -53,10 +64,7 @@ noncomputable def openPinnedHomotopyTensorRestrictionIso
     dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
     letI := schemeOpenRestriction_additive X U
     letI := schemeOpenRestriction_additive X' U'
-    refine Functor.mapHomotopyCategoryCompIso
-      (openPinnedTensorRestrictionIso k U U' j hj) (.up ℤ) ≪≫ ?_
-    exact (Functor.mapHomotopyCategoryCompIso
-      (Iso.refl (schemeOpenRestriction X U ⋙ Scheme.Modules.tensorPullback j)) (.up ℤ)).symm
+    exact mapHomotopySquare (openPinnedTensorRestrictionIso k U U' j hj)
 
 private theorem targetHomotopyComparison
     {C D E : Type*} [Category C] [Preadditive C] [Category D] [Preadditive D]
