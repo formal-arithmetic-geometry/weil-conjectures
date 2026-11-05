@@ -175,7 +175,7 @@ The equation follows by evaluating the defining left-derived composition
 factorization and the exact restriction adjunction, then identifying the
 remaining tensor comparisons with `openRestrictedTensorDerivedIso`.
 -/
-theorem openRestricted_counit_compatibility_aux
+private theorem openRestricted_counit_compatibility_aux
     [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     {X X' : Scheme.{u}} (g' : X' ⟶ X) (U : X.Opens)
     (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :

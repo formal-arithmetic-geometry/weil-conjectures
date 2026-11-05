@@ -11,7 +11,7 @@ import all Mathlib.Algebra.Homology.Localization
 
 public import WeilConjectures.AlgebraicGeometry.OpenRestrictedTensorComplexIso
 public import WeilConjectures.AlgebraicGeometry.OpenRestrictedComparisonComposition
-import WeilConjectures.AlgebraicGeometry.OpenRestrictedCounitFactorization
+import all WeilConjectures.AlgebraicGeometry.OpenRestrictedCounitFactorization
 
 /-! # The counit equation for literal open restriction
 
@@ -55,7 +55,7 @@ complexes use the same natural-transformation equations.
 Source: Stacks Project, Tag 0D5S, pullback composition; Tag 0D5U, exact
 restriction to an open subspace.
 (blueprint: lem-pc-open-restricted-counit-compatibility). -/
-theorem openRestricted_counit_compatibility
+private theorem openRestricted_counit_compatibility
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     {X X' : Scheme.{u}} (g' : X' ⟶ X) (U : X.Opens)
