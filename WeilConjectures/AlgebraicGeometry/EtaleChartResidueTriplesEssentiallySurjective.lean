@@ -121,9 +121,9 @@ theorem etale_chart_residue_triples_essentially_surjective
           Category.comp_id, fromSpecResidueField_toSpecΓ]
       _ = _ := congrArg (fun f ↦ f ≫ (Spec A).toSpecΓ) hxU
   have : Etale (Spec.map t.α) := t.etale
-  let c0 : Nall := ⟨Etale.mk (Spec.map t.α ≫ i), Over.homMk y (by
+  let c0 : Nall := Functor.elementsMk _ (Etale.mk (Spec.map t.α ≫ i)) (Over.homMk y (by
     dsimp [y] at hy ⊢
-    rw [← Category.assoc, hy])⟩
+    rw [← Category.assoc, hy]))
   let c : NU := ⟨⟨c0, inferInstanceAs (IsAffine (Spec t.B))⟩,
     ⟨Spec.map t.α, rfl⟩⟩
   let r : t.B ≅ (H.obj (op c)).B := (ΓSpecIso t.B).symm ≪≫ δ.app (op c)
