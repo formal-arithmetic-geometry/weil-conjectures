@@ -9,6 +9,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.AlgebraicGeometry.FunctionField
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.LinearAlgebra.Dimension.Finite
 public import Mathlib.CategoryTheory.Subobject.Limits
