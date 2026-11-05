@@ -91,7 +91,7 @@ instance : (f)^*ᵃ[l].IsLeftAdjoint := (adicUpperStarLowerStarAdjunction l f).i
 
 /-- The pullback of `ℓ`-adic sheaves preserves flat objects: through the comparison of the two
 models, it is the pullback of module objects over the condensed coefficient ring. -/
-instance preservesFlat_adicUpperStar : (f)^*ᵃ[l].PreservesFlat := by
+instance preservesFlat_adicUpperStar_via_condensedModel : (f)^*ᵃ[l].PreservesFlat := by
   let := condensedModFunctorMonoidal l X
   let := condensedModFunctorMonoidal l Y
   have := (adicSheafEquivCondensedMod l Y).functor.preservesFlat_of_isEquivalence

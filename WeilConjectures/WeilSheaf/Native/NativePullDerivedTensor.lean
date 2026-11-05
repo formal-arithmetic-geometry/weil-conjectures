@@ -506,6 +506,10 @@ theorem native_pull_derived_tensor_of_kflat
   obtain ⟨t, mu, ht, hmu⟩ := pullAbstract k₀ l (upperStar k₀ l p) r hR
   exact ⟨r, t, mu, hr, ht, hmu⟩
 
+/-- Compatibility name for the balanced native pullback comparison. -/
+alias exists_nativeOpenPull_nativeDerivedTensor_iso_of_nativeIsKFlat :=
+  native_pull_derived_tensor_of_kflat
+
 end
 
 end AlgebraicGeometry.ProEtaleWeilSheaf

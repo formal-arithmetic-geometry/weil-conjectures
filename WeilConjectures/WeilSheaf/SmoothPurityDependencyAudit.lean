@@ -96,17 +96,19 @@ run_elab do
     match env.checked.get.find? name with
     | none => unavailable := unavailable.push name
     | some info =>
-      if info.isAxiom then
-        unavailable := unavailable.push name
-        continue
-      let some value := info.value? true | do
-        unavailable := unavailable.push name
-        continue
-      let deps := info.type.getUsedConstants ++ value.getUsedConstants
+      let deps ← match info with
+        | .defnInfo v => pure (v.type.getUsedConstants ++ v.value.getUsedConstants)
+        | .thmInfo v => pure (v.type.getUsedConstants ++ v.value.getUsedConstants)
+        | .opaqueInfo v => pure (v.type.getUsedConstants ++ v.value.getUsedConstants)
+        | .ctorInfo v => pure v.type.getUsedConstants
+        | .recInfo v => pure v.type.getUsedConstants
+        | .inductInfo v => pure (v.type.getUsedConstants ++ v.ctors.toArray)
+        | .quotInfo _ => pure #[]
+        | .axiomInfo _ =>
+          unavailable := unavailable.push name
+          pure #[]
       if deps.contains `sorryAx then
         leaves := leaves.push name
-      else if deps.isEmpty then
-        unavailable := unavailable.push name
       else
         pending := pending ++ deps
   logInfo m!"Direct sorry dependencies: {leaves.qsort Name.lt}"
@@ -128,11 +130,7 @@ run_elab do
   for name in forbidden do
     if seen.contains name then
       throwError "An absolute-purity user uses the relative-purity declaration {name}"
-  let allowed := #[
-    `AlgebraicGeometry.ProEtaleWeilSheaf.native_weil_tensor_ringed_swap_localization,
-    `AlgebraicGeometry.WeilComplex.nonempty_rightDerivedLowerStar_nativeDerivedTensor_iso]
-  for name in leaves do
-    unless allowed.contains name do
-      throwError "Unexpected sorry dependency: {name}"
+  unless leaves.isEmpty do
+    throwError "A purity user still depends on sorry: {leaves}"
   unless unavailable.isEmpty do
     throwError "The dependency audit needs the imported proof bodies listed above"

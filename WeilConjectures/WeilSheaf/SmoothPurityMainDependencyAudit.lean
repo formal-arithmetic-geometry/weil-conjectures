@@ -403,6 +403,112 @@ import all WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedTr
 import all WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedUnitSymmetryRepresentatives
 import all WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorTransport
 import all WeilConjectures.WeilSheaf.SixFunctors.DerivedWeilTensorOperations
+import all WeilConjectures.CategoryTheory.K.KFlatBifunctorTensorHom
+import all WeilConjectures.CategoryTheory.Normalized.NormalizedKFlatTensorModels
+import all WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationCoherence
+import all WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationDerivedTensor
+import all WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationProjection
+import all WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationSheafTensor
+import all WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationTensorModels
+import all WeilConjectures.WeilSheaf.Native.NativePullTensor
+import all WeilConjectures.WeilSheaf.Native.NativeTensorAcyclicTestComparison
+import all WeilConjectures.WeilSheaf.Native.NativeTwoSidedKFlatRepresentatives
+import all WeilConjectures.WeilSheaf.Native.Open.NativeOpenSheafProjectionTensor
+import all WeilConjectures.WeilSheaf.Native.Open.NativeOpenTensorCanonicalData
+import all WeilConjectures.WeilSheaf.Native.Open.NativeOpenTensorFullKFlatLocalization
+import all WeilConjectures.WeilSheaf.Native.Open.NativeOpenTensorSheafComparisons
+import all WeilConjectures.WeilSheaf.Native.Projection.AdicSheafTensorSquare
+import all WeilConjectures.WeilSheaf.Native.Projection.DerivedModelNormalizations
+import all WeilConjectures.WeilSheaf.Native.Projection.DerivedSquareFromModelFamilies
+import all WeilConjectures.WeilSheaf.Native.Projection.DerivedSquareFromModels
+import all WeilConjectures.WeilSheaf.Native.Projection.DerivedSquareFromTotalFunctors
+import all WeilConjectures.WeilSheaf.Native.Projection.ModelSquareCancellation
+import all WeilConjectures.WeilSheaf.Native.Projection.NativeComplexSquareNormalization
+import all WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedCoherenceOfSquare
+import all WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareFromCanonicalComparison
+import all WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareFromGeometricFunctor
+import all WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareFromNativeComparisons
+import all WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareFromNativeModels
+import all WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareFromNativeRestriction
+import all WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareFromOrdinaryComparison
+import all WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareOfRepresentatives
+import all WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedTensorSquare
+import all WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedTensorSquareOfTotal
+import all WeilConjectures.WeilSheaf.Native.Projection.NativeModelFamilyNormalization
+import all WeilConjectures.WeilSheaf.Native.Projection.NativeModelNormalization
+import all WeilConjectures.WeilSheaf.Native.Projection.NativePullTensorNormalization
+import all WeilConjectures.WeilSheaf.Native.Projection.NativeSheafTensorCore
+import all WeilConjectures.WeilSheaf.Native.Projection.NativeSheafTensorSquare
+import all WeilConjectures.WeilSheaf.Native.Projection.NativeTotalTensorCore
+import all WeilConjectures.WeilSheaf.Native.Projection.NativeTotalTensorSquare
+import all WeilConjectures.WeilSheaf.Native.Projection.NativeTotalTensorSquareOfSheaf
+import all WeilConjectures.WeilSheaf.Native.Projection.ProperProjectionIso
+import all WeilConjectures.WeilSheaf.Native.Projection.SheafTensorUnit
+import all WeilConjectures.WeilSheaf.Native.Projection.TensorSquareCompatibility
+import all WeilConjectures.WeilSheaf.Native.Projection.TotalSquareToModel
+import all WeilConjectures.DeligneLaumon.AffineLine.AffineCurveUpper
+import all WeilConjectures.DeligneLaumon.AffineLine.ArtinSchreierDual
+import all WeilConjectures.DeligneLaumon.AffineLine.BoundaryTransform
+import all WeilConjectures.DeligneLaumon.AffineLine.BoundaryWeights
+import all WeilConjectures.DeligneLaumon.AffineLine.Concentration
+import all WeilConjectures.DeligneLaumon.AffineLine.ConstantTwist
+import all WeilConjectures.DeligneLaumon.AffineLine.Constituent
+import all WeilConjectures.DeligneLaumon.AffineLine.Defs
+import all WeilConjectures.DeligneLaumon.AffineLine.DegreeOne
+import all WeilConjectures.DeligneLaumon.AffineLine.DenseOpen
+import all WeilConjectures.DeligneLaumon.AffineLine.DirectImageUnit
+import all WeilConjectures.DeligneLaumon.AffineLine.DualNonexceptional
+import all WeilConjectures.DeligneLaumon.AffineLine.Exactness
+import all WeilConjectures.DeligneLaumon.AffineLine.ExceptionalConstituents
+import all WeilConjectures.DeligneLaumon.AffineLine.FiniteBoundary
+import all WeilConjectures.DeligneLaumon.AffineLine.FourierAmplitude
+import all WeilConjectures.DeligneLaumon.AffineLine.FourierTopSupport
+import all WeilConjectures.DeligneLaumon.AffineLine.FourierWeight
+import all WeilConjectures.DeligneLaumon.AffineLine.GeometricSMul
+import all WeilConjectures.DeligneLaumon.AffineLine.LaurentPoints
+import all WeilConjectures.DeligneLaumon.AffineLine.LinearCharacters
+import all WeilConjectures.DeligneLaumon.AffineLine.LocalDuality
+import all WeilConjectures.DeligneLaumon.AffineLine.MiddleExtension
+import all WeilConjectures.DeligneLaumon.AffineLine.Perverse
+import all WeilConjectures.DeligneLaumon.AffineLine.Punctual
+import all WeilConjectures.DeligneLaumon.AffineLine.PunctualSupport
+import all WeilConjectures.DeligneLaumon.AffineLine.PunctualTransform
+import all WeilConjectures.DeligneLaumon.AffineLine.Purity
+import all WeilConjectures.DeligneLaumon.AffineLine.RamifiedAtInfinity
+import all WeilConjectures.DeligneLaumon.AffineLine.RealPushforward
+import all WeilConjectures.DeligneLaumon.AffineLine.RealifiedKernel
+import all WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy
+import all WeilConjectures.DeligneLaumon.AffineLine.Upper
+import all WeilConjectures.DeligneLaumon.AffineLine.UpperReduction
+import all WeilConjectures.DeligneLaumon.AffineLine.ZeroExtension
+import all WeilConjectures.DeligneLaumon.CommonStagePullbackCompComponent
+import all WeilConjectures.DeligneLaumon.CommonStagePullbackCompData
+import all WeilConjectures.DeligneLaumon.PrincipalIntrinsicCompletion.PrincipalIntrinsicCompletion
+import all WeilConjectures.DeligneLaumon.PrincipalKoszulStrictReplacement.PrincipalKoszulStrictReplacement
+import all WeilConjectures.DeligneLaumon.QuotientTensorScalarTowerComparison
+import all WeilConjectures.DeligneLaumon.Reduction.AffineCurve
+import all WeilConjectures.DeligneLaumon.Reduction.CompactSupport
+import all WeilConjectures.DeligneLaumon.Reduction.CurveTesting
+import all WeilConjectures.DeligneLaumon.Reduction.FibreCohomology
+import all WeilConjectures.DeligneLaumon.Reduction.FiniteDirectImage
+import all WeilConjectures.DeligneLaumon.Reduction.FiniteEtaleChart
+import all WeilConjectures.DeligneLaumon.Reduction.FiniteMiddleExtension
+import all WeilConjectures.DeligneLaumon.Reduction.FormalSteps
+import all WeilConjectures.DeligneLaumon.Reduction.MixedStalk
+import all WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteMixed
+import all WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteStalk
+import all WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteVanishing
+import all WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteWeights
+import all WeilConjectures.DeligneLaumon.Reduction.RealCurve
+import all WeilConjectures.DeligneLaumon.Reduction.RealCurveConstituent
+import all WeilConjectures.DeligneLaumon.Reduction.RealLissePurity
+import all WeilConjectures.DeligneLaumon.Reduction.RealSheaves
+import all WeilConjectures.DeligneLaumon.Reduction.RelativeAffineLine
+import all WeilConjectures.DeligneLaumon.Reduction.RelativeLineStep
+import all WeilConjectures.DeligneLaumon.Reduction.RelativeLineStratification
+import all WeilConjectures.DeligneLaumon.Reduction.TraceReality
+import all WeilConjectures.DeligneLaumon.Reduction.Weights
+import all WeilConjectures.DeligneLaumon.SfScalarExtensionComposition
 import Lean
 
 /-! # Declaration closure of the Weil conjectures after absolute purity
@@ -437,17 +543,19 @@ run_elab do
     match env.checked.get.find? name with
     | none => unavailable := unavailable.push name
     | some info =>
-      if info.isAxiom then
-        unavailable := unavailable.push name
-        continue
-      let some value := info.value? true | do
-        unavailable := unavailable.push name
-        continue
-      let deps := info.type.getUsedConstants ++ value.getUsedConstants
+      let deps ← match info with
+        | .defnInfo v => pure (v.type.getUsedConstants ++ v.value.getUsedConstants)
+        | .thmInfo v => pure (v.type.getUsedConstants ++ v.value.getUsedConstants)
+        | .opaqueInfo v => pure (v.type.getUsedConstants ++ v.value.getUsedConstants)
+        | .ctorInfo v => pure v.type.getUsedConstants
+        | .recInfo v => pure v.type.getUsedConstants
+        | .inductInfo v => pure (v.type.getUsedConstants ++ v.ctors.toArray)
+        | .quotInfo _ => pure #[]
+        | .axiomInfo _ =>
+          unavailable := unavailable.push name
+          pure #[]
       if deps.contains `sorryAx then
         leaves := leaves.push name
-      else if deps.isEmpty then
-        unavailable := unavailable.push name
       else
         pending := pending ++ deps
   logInfo m!"Direct sorry dependencies: {leaves.qsort Name.lt}"
@@ -461,5 +569,13 @@ run_elab do
     logInfo m!"Missing import all: {name}"
   for name in inspected.toArray.qsort Name.lt do
     logInfo m!"Proof import all: {name}"
+  let forbidden := #[
+    `AlgebraicGeometry.WeilComplex.exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso,
+    `AlgebraicGeometry.WeilComplex.nonempty_upperShriek_iso_of_smoothOfRelativeDimension,
+    `AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_adjunction_of_smooth,
+    `AlgebraicGeometry.WeilComplex.exists_natTrans_upperShriek_isIso_forget_of_smooth]
+  for name in forbidden do
+    if seen.contains name then
+      throwError "The main theorem uses the relative-purity declaration {name}"
   unless unavailable.isEmpty do
     throwError "The dependency audit needs the imported proof bodies listed above"
