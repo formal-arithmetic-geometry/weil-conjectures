@@ -99,6 +99,72 @@ variable {J : Type (u + 1)} [SmallCategory J]
 variable (E : J ⥤ Over X) (d : Cone E) (r : J ⥤ I)
 variable (K' M' : DerivedCategoryModule A X) (α : K' ⟶ K) (β : M ⟶ M')
 
+/-- Global RHom of the two exact inverse images along a scheme over X.
+This is the existing RΓ of the existing derived internal Hom.
+Source: Bhatt--Scholze 6.3.16, p. 48
+(blueprint: lem-per-ind-etale-constructible-mapping-continuity). -/
+def value (T : Over X) : DerivedCategory (ModuleCat.{u + 1} A) :=
+  ((ExternalRHom.globalHom A T.left).obj
+    (op ((ExternalRHom.pull A T.hom).obj K))).obj
+      ((ExternalRHom.pull A T.hom).obj M)
+
+/-- Pullback of derived morphisms, transported along the canonical composition
+isomorphisms for inverse image. Its source is the evaluation transpose already
+provided by `ExternalRHom.restriction`; no map or isomorphism is chosen.
+Source: Bhatt--Scholze 6.3.16, p. 48
+(blueprint: lem-per-ind-etale-constructible-mapping-continuity). -/
+def pullback {T S : Over X} (f : T ⟶ S) : value A K M S ⟶ value A K M T :=
+  ExternalRHom.restriction A f.left
+      ((ExternalRHom.pull A S.hom).obj K) ((ExternalRHom.pull A S.hom).obj M) ≫
+    ((ExternalRHom.globalHom A T.left).map
+      ((leftDerivedUpperStarComp (ModuleCat.{u + 1} A) f.left S.hom T.hom
+        f.w.symm).hom.app K).op).app
+          ((ExternalRHom.pull A f.left).obj ((ExternalRHom.pull A S.hom).obj M)) ≫
+    ((ExternalRHom.globalHom A T.left).obj
+      (op ((ExternalRHom.pull A T.hom).obj K))).map
+        ((leftDerivedUpperStarComp (ModuleCat.{u + 1} A) f.left S.hom T.hom
+          f.w.symm).inv.app M)
+
+variable {K' M'} in
+/-- The map of global RHom induced by the coefficient maps `α : K' ⟶ K`
+(contravariantly) and `β : M ⟶ M'` (covariantly), after exact inverse image
+to a scheme over X.
+Source: Bhatt--Scholze 6.3.16, Step 7
+(blueprint: lem-per-ind-etale-constructible-mapping-continuity). -/
+def coefficientMap (T : Over X) : value A K M T ⟶ value A K' M' T :=
+  ExternalRHom.homMap A ((ExternalRHom.pull A T.hom).map α)
+    ((ExternalRHom.pull A T.hom).map β)
+
+/-- Compatible strict representatives for the global RHom diagram and its
+pullback cocone. The two equations normalize every transition and every leg
+against the canonical pullback of morphisms. This is computational input for an
+exact filtered colimit, not an assumed continuity isomorphism.
+Source: Bhatt--Scholze 6.3.16, p. 48; the node's proof, Steps 2--6
+(blueprint: lem-per-ind-etale-constructible-mapping-continuity). -/
+structure Model where
+  /-- The strict diagram of representatives. -/
+  diagram : Iᵒᵖ ⥤ CochainComplex (ModuleCat.{u + 1} A) ℤ
+  /-- The strict cocone of representatives over the limit. -/
+  cocone : Cocone diagram
+  /-- The identification of each stage with the global RHom on `D.obj i`. -/
+  stage : ∀ i : I, DerivedCategory.Q.obj (diagram.obj (op i)) ≅ value A K M (D.obj i)
+  /-- The identification of the apex with the global RHom on `c.pt`. -/
+  apex : DerivedCategory.Q.obj cocone.pt ≅ value A K M c.pt
+  transition : ∀ {i j : I} (f : i ⟶ j),
+    DerivedCategory.Q.map (diagram.map f.op) ≫ (stage i).hom =
+      (stage j).hom ≫ pullback A K M (D.map f)
+  leg : ∀ i : I,
+    DerivedCategory.Q.map (cocone.ι.app (op i)) ≫ apex.hom =
+      (stage i).hom ≫ pullback A K M (c.π.app i)
+
+/-- The canonical comparison, computed by the exact colimit of complexes and
+then localized. The normalization in `Model` fixes its pullback legs.
+Source: Bhatt--Scholze 6.3.16, p. 48
+(blueprint: lem-per-ind-etale-constructible-mapping-continuity). -/
+def comparison (P : Model A K M D c) :
+    DerivedCategory.Q.obj (colimit P.diagram) ⟶ value A K M c.pt :=
+  DerivedCategory.Q.map (colimit.desc P.diagram P.cocone) ≫ P.apex.hom
+
 /-- A compatible representative map without the cone-square field.
 The geometric cone equation is supplied separately by the square hypothesis.
 Source: Bhatt--Scholze 6.3.16, Step 7

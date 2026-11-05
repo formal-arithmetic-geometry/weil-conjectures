@@ -52,7 +52,8 @@ theorem compatible_model_map_skeleton_exists [Finite A] [IsAffine X] [IsNoetheri
     (hTor : ∃ a b : ℤ, DerivedCategory.hasTorAmplitudeIn A X a b K)
     (hTor' : ∃ a b : ℤ, DerivedCategory.hasTorAmplitudeIn A X a b K')
     (hM : ∃ a : ℤ, M.IsGE a) (hM' : ∃ a : ℤ, M'.IsGE a)
-    (η : E ⟶ r ⋙ D) (v : d.pt ⟶ c.pt) :
+    (η : E ⟶ r ⋙ D) (v : d.pt ⟶ c.pt)
+    (hv : ∀ j : J, v ≫ c.π.app (r.obj j) = d.π.app j ≫ η.app j) :
     ∃ (P : Model A K M D c) (Q : Model A K' M' E d),
       Nonempty (ModelMapSkeleton A K M D c E d r K' M' α β P Q η v) := by
   sorry

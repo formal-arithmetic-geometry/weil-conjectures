@@ -14,6 +14,9 @@ public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionFinite
 public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionSupplement
 public import Mathlib.RingTheory.Ideal.Quotient.Index
 public import Mathlib.AlgebraicGeometry.Noetherian
+public import WeilConjectures.AlgebraicGeometry.FiniteConstructibilityLocalTriangle
+public import WeilConjectures.AlgebraicGeometry.FiniteConstructibilityOuterLocalTransfer
+public import WeilConjectures.AlgebraicGeometry.FiniteConstructibilityOuterTransfer
 
 /-! # Finite constructibility through one quotient-linear triangle -/
 
@@ -37,6 +40,15 @@ def finiteLocalModelsOnStratum
   ∀ q : ℤ, HasFiniteConstantLocalModel Λ (S.domain i)
     ((CondensedRing.upperStar Λ (S.immersion i)).obj
       ((DerivedCategory.homologyFunctor _ q).obj L))
+
+private theorem scalarFiniteLocalModelsOnStratum_iff
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u})
+    (S : Scheme.Stratification X) (i : Fin S.n)
+    (L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))) :
+    scalarFiniteLocalModelsOnStratum Λ X S i L ↔
+      finiteLocalModelsOnStratum Λ X S i L := Iff.rfl
 
 /-- All homology sheaves have finite constant local models on this specified stratum.
 This is the generic predicate at the actual positive finite coefficient quotient.
@@ -93,6 +105,15 @@ theorem integral_finite_constructibility_triangle
     (∀ (S : Scheme.Stratification X) (i : Fin S.n),
       integralFiniteLocalOnStratum l E X 0 S i L₀ →
       integralFiniteLocalOnStratum l E X n S i Lₙ →
-      integralFiniteLocalOnStratum l E X (n + 1) S i Δ.obj₂) := by sorry
+      integralFiniteLocalOnStratum l E X (n + 1) S i Δ.obj₂) := by
+  constructor
+  · exact finite_constructibility_outer_transfer l E X n L₀ Lₙ Δ hΔ e₀ eₙ h₀ hₙ
+  · intro S i hS₀ hSₙ
+    obtain ⟨h₁, h₃⟩ :=
+      finite_constructibility_outer_local_transfer l E X n L₀ Lₙ Δ e₀ eₙ S i
+    apply (scalarFiniteLocalModelsOnStratum_iff _ X S i Δ.obj₂).mp
+    apply finite_constructibility_local_triangle l E X (n + 1) S i Δ hΔ
+    · exact h₁ ((scalarFiniteLocalModelsOnStratum_iff _ X S i L₀).mpr hS₀)
+    · exact h₃ ((scalarFiniteLocalModelsOnStratum_iff _ X S i Lₙ).mpr hSₙ)
 
 end AlgebraicGeometry.ProEtale

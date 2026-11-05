@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Native.NativeDerivedBaseChange
 public import WeilConjectures.AlgebraicGeometry.Native.NativeModuleConstructibilityComparison
+public import WeilConjectures.AlgebraicGeometry.NativeEncoding.NativeAdicEncodingCore
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Proper.ProperBaseChangeRational
 import WeilConjectures.AlgebraicGeometry.Native.NativeScalarForgetting
 import WeilConjectures.AlgebraicGeometry.Exact.ExactCondensedExchangeComparison
@@ -188,6 +189,13 @@ private theorem coefficientIso_eq (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) :
   intro x
   rw [(locallyFiniteCoefficientRing_realization l).choose_spec.2.1 T E V s x]
   exact (finiteLeg_native l T E V ((chartComparison T E).hom.app V s) x).symm
+
+/-- The chosen native coefficient isomorphism is the normalized coefficient isomorphism of the
+native encoding. -/
+theorem nativeModuleCoefficientIso_eq_nativeEncodingCoefficientIso (l : ℕ) [Fact l.Prime]
+    (T : Scheme.{u}) :
+    nativeModuleCoefficientIso l T = NativeEncoding.coefficientIso l T :=
+  coefficientIso_eq l T
 
 private theorem encoding_eq (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) :
     nativeExchangeEncoding l T = NativeEncoding.encoding l T := by

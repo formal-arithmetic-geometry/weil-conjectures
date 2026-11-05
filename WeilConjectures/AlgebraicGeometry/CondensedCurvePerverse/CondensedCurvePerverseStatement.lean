@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.Compactification.PureDimension
 public import Mathlib.FieldTheory.Perfect
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
-public import WeilConjectures.CategoryTheory.Triangulated.TStructure.Homology
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebra
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Mathlib.Algebra.Homology.ExactSequence
@@ -88,16 +87,6 @@ Source: current blueprint sk-lem-wft-curve-heart, heart definition
 (blueprint: sk-lem-wft-curve-heart). -/
 def heart (C : Scheme.{u}) : ObjectProperty (DerivedCategory (Modules Λ C)) :=
   constantModelBoundedConstructible Λ C ⊓ (upper Λ C 0 ⊓ lower Λ C 0)
-
-/-- Perverse cohomology H^n, once the t-structure with the specified classes is supplied.
-It is H^0(K[n]) with values in the actual Mathlib heart, using the existing cohomology
-functor of the recorded t-structure dependency.
-Source: current blueprint sk-lem-wft-curve-heart, notation paragraph
-(blueprint: sk-lem-wft-curve-heart). -/
-abbrev cohomology (C : Scheme.{u})
-    [(constantModelBoundedConstructible Λ C).IsTriangulated]
-    (t : TStructure (ConstantModelBoundedConstructible Λ C)) (n : ℤ) :=
-  shiftFunctor (ConstantModelBoundedConstructible Λ C) n ⋙ t.homology₀
 
 /-- Perverse Weil sheaves are the full subcategory of the recorded strict Weil pairs
 whose underlying geometric complex lies in the perverse heart.

@@ -129,10 +129,12 @@ variable {C D : Type*} [Category* C] [Category* D]
   [∀ X₂, PreservesColimit (Functor.empty.{0} C) ((curriedTensor C).flip.obj X₂)]
   [∀ X₁, PreservesColimit (Functor.empty.{0} D) ((curriedTensor D).obj X₁)]
   [∀ X₂, PreservesColimit (Functor.empty.{0} D) ((curriedTensor D).flip.obj X₂)]
-  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C),
+      GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
-  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ D), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ D),
+      GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ D), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ D), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
   (G : C ⥤ D) [G.Additive] [G.LaxMonoidal]
@@ -144,8 +146,10 @@ def chainTensor (K L : CochainComplex C ℤ) :
   comm' n m _ := CategoryTheory.CanonicalLaxTotal.laxTotalComponent_comm G
     (LaxMonoidal.μ G) (fun f g => (LaxMonoidal.μ_natural G f g).symm) K L n m
 
-omit [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
-  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ D), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄] in
+omit [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C),
+      GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ D),
+      GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄] in
 @[reassoc]
 lemma ιTensorObj_chainTensor_f (K L : CochainComplex C ℤ) (p q n : ℤ)
     (h : p + q = n) :
@@ -165,16 +169,20 @@ def chainUnit :
     ((singleMapHomologicalComplex G (.up ℤ) 0).app (𝟙_ C)).inv
 
 omit [HasCoproducts.{0} C] [HasCoproducts.{0} D]
-  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
-  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ D), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄] in
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C),
+      GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ D),
+      GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄] in
 lemma chainUnit_f_zero :
     (chainUnit G).f 0 =
       (singleObjXSelf (.up ℤ) 0 (𝟙_ D)).hom ≫ LaxMonoidal.ε G ≫
         G.map (singleObjXSelf (.up ℤ) 0 (𝟙_ C)).inv := by
   simp [chainUnit, single_map_f_self]
 
-omit [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
-  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ D), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄] in
+omit [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C),
+      GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ D),
+      GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄] in
 @[reassoc]
 lemma chainTensor_naturality_left {K K' : CochainComplex C ℤ} (f : K ⟶ K')
     (L : CochainComplex C ℤ) :
@@ -191,8 +199,10 @@ lemma chainTensor_naturality_left {K K' : CochainComplex C ℤ} (f : K ⟶ K')
   erw [LaxMonoidal.μ_natural_left_assoc]
   rw [← G.map_comp, ← G.map_comp, CochainComplex.Monoidal.ι_whiskerRight]
 
-omit [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
-  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ D), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄] in
+omit [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C),
+      GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ D),
+      GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄] in
 @[reassoc]
 lemma chainTensor_naturality_right (K : CochainComplex C ℤ)
     {L L' : CochainComplex C ℤ} (f : L ⟶ L') :
@@ -209,8 +219,10 @@ lemma chainTensor_naturality_right (K : CochainComplex C ℤ)
   erw [LaxMonoidal.μ_natural_right_assoc]
   rw [← G.map_comp, ← G.map_comp, CochainComplex.ιTensorObj_whiskerLeft_f]
 
-omit [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
-  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ D), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄] in
+omit [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C),
+      GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ D),
+      GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄] in
 @[reassoc]
 lemma whiskerLeft_ιTensorObj_chainTensor_f (X : D) (K L : CochainComplex C ℤ)
     (p q n : ℤ) (h : p + q = n) :
@@ -221,8 +233,10 @@ lemma whiskerLeft_ιTensorObj_chainTensor_f (X : D) (K L : CochainComplex C ℤ)
   rw [← MonoidalCategory.whiskerLeft_comp, ← MonoidalCategory.whiskerLeft_comp]
   erw [ιTensorObj_chainTensor_f]
 
-omit [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
-  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ D), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄] in
+omit [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C),
+      GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ D),
+      GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄] in
 @[reassoc]
 lemma ιTensorObj_chainTensor_f_whiskerRight (X : D) (K L : CochainComplex C ℤ)
     (p q n : ℤ) (h : p + q = n) :
@@ -234,8 +248,10 @@ lemma ιTensorObj_chainTensor_f_whiskerRight (X : D) (K L : CochainComplex C ℤ
   simp only [comp_whiskerRight] at this
   exact this
 
-omit [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
-  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ D), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄] in
+omit [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C),
+      GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ D),
+      GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄] in
 lemma chainTensor_associativity (K L M : CochainComplex C ℤ) :
     (chainTensor G K L) ▷ (G.mapHomologicalComplex (.up ℤ)).obj M ≫
       (chainTensor G (K ⊗ L) M) ≫
@@ -249,7 +265,8 @@ lemma chainTensor_associativity (K L M : CochainComplex C ℤ) :
   intro p q r h
   have h' : p + q + r = n := h
   have h'' : p + (q + r) = n := by rw [← h', add_assoc]
-  have key : (ιTensorObj K L p q (p + q) rfl ▷ M.X r) ≫ ιTensorObj (K ⊗ L) M (p + q) r n h' ≫
+  have key : (ιTensorObj K L p q (p + q) rfl ▷ M.X r) ≫
+      ιTensorObj (K ⊗ L) M (p + q) r n h' ≫
       (α_ K L M).hom.f n =
       (α_ (K.X p) (L.X q) (M.X r)).hom ≫ (K.X p ◁ ιTensorObj L M q r (q + r) rfl) ≫
         ιTensorObj K (L ⊗ M) p (q + r) n h'' := by
@@ -264,15 +281,18 @@ lemma chainTensor_associativity (K L M : CochainComplex C ℤ) :
     CochainComplex.Monoidal.ι₂₃_eq _ _ _ p q r (q + r) n rfl h'']
   on_goal 2 => exact h'
   simp only [assoc]
-  erw [CochainComplex.Monoidal.ι_whiskerRight_assoc, CochainComplex.ιTensorObj_whiskerLeft_f_assoc,
+  erw [CochainComplex.Monoidal.ι_whiskerRight_assoc,
+    CochainComplex.ιTensorObj_whiskerLeft_f_assoc,
     ιTensorObj_chainTensor_f_whiskerRight_assoc,
     whiskerLeft_ιTensorObj_chainTensor_f_assoc,
     ιTensorObj_chainTensor_f_assoc, ιTensorObj_chainTensor_f]
   erw [LaxMonoidal.μ_natural_left_assoc, LaxMonoidal.μ_natural_right_assoc, key']
   exact LaxMonoidal.associativity_assoc G _ _ _ _
 
-omit [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
-  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ D), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄] in
+omit [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C),
+      GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ D),
+      GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄] in
 lemma mapCochainComplex_leftUnitor_inv (K : CochainComplex C ℤ) :
     (λ_ ((G.mapHomologicalComplex (.up ℤ)).obj K)).inv ≫
       (chainUnit G) ▷ (G.mapHomologicalComplex (.up ℤ)).obj K ≫
@@ -290,8 +310,10 @@ lemma mapCochainComplex_leftUnitor_inv (K : CochainComplex C ℤ) :
   erw [LaxMonoidal.μ_natural_left_assoc, LaxMonoidal.left_unitality_inv_assoc]
   rfl
 
-omit [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
-  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ D), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄] in
+omit [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C),
+      GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ D),
+      GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄] in
 lemma mapCochainComplex_rightUnitor_inv (K : CochainComplex C ℤ) :
     (ρ_ ((G.mapHomologicalComplex (.up ℤ)).obj K)).inv ≫
       (G.mapHomologicalComplex (.up ℤ)).obj K ◁ (chainUnit G) ≫
@@ -299,7 +321,8 @@ lemma mapCochainComplex_rightUnitor_inv (K : CochainComplex C ℤ) :
     (G.mapHomologicalComplex (.up ℤ)).map (ρ_ K).inv := by
   ext i
   have e : ∀ (X : CochainComplex D ℤ), (ρ_ X).inv.f i = (rightUnitor' X).inv i := fun _ ↦ rfl
-  have e' : ∀ (X : CochainComplex C ℤ), (ρ_ X).inv.f i = (rightUnitor' X).inv i := fun _ ↦ rfl
+  have e' : ∀ (X : CochainComplex C ℤ), (ρ_ X).inv.f i = (rightUnitor' X).inv i :=
+    fun _ ↦ rfl
   simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f, e, e']
   erw [rightUnitor'_inv, rightUnitor'_inv]
   simp only [assoc]

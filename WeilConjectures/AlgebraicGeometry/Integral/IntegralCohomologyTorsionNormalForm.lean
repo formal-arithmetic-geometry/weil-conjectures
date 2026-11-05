@@ -10,6 +10,9 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.RingTheory.Nilpotent.Defs
 public import Mathlib.LinearAlgebra.Basis.Defs
 public import Mathlib.CategoryTheory.Limits.Shapes.BinaryBiproducts
+import WeilConjectures.AlgebraicGeometry.Integral.IntegralTorsionNormalFormChart
+import WeilConjectures.AlgebraicGeometry.Integral.IntegralStratifiedPerfectCharts
+import WeilConjectures.AlgebraicGeometry.Integral.IntegralStratifiedPerfectCharacterization
 
 /-! # Torsion normal form and its consecutive-quotient obstruction
 
@@ -92,6 +95,15 @@ theorem pbc_integral_cohomology_torsion_normal_form
               ((proEtaleRingModulePullback g ((pbcAdicRings T d).obj (op n))
                 ((adicTowerInverseImage g).obj ((pbcAdicRings T d).obj (op n)))
                 (Iso.refl _)).obj (tor n)) ⟶ cokernel f,
-              Epi t := by sorry
+              Epi t := by
+  have hl' : IsUnit (l : Γ(T, ⊤)) := by
+    apply T.toRingedSpace.isUnit_of_isUnit_germ
+    intro t ht
+    simpa using (hl t)
+  have hK := ((integralStratifiedPerfectCharacterization T l E hdim hl' K.obj).1).1 K.property
+  obtain ⟨S, V, hch⟩ := IsIntegralStratifiedPerfect.exists_cover_charts T _ K.obj hK
+  refine ⟨S, V, fun a j ↦ ?_⟩
+  obtain ⟨C, hC, ⟨e⟩⟩ := hch a j
+  exact torsion_normal_form_chart T l E _ K.obj q C hC e
 
 end AlgebraicGeometry.Scheme

@@ -125,6 +125,7 @@ import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 import WeilConjectures.AlgebraicGeometry.CondensedCoverRestrictionConservative
 public import Mathlib.RingTheory.DedekindDomain.Basic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
+public import WeilConjectures.ProEtaleCoefficients.DerivedNakayamaResolution
 
 /-! # Completeness of finite constant scalar local models
 
@@ -549,7 +550,7 @@ private theorem local_complete_of_free
       (DerivedCategory.Q.obj ((singleFunctor (Modules l E T) 0).obj M)) := by
   classical
   obtain ⟨S, hS, hlocal, hsection, hrestrict⟩ :=
-    StrictCompletionRestriction.strict_completion_restriction_comparison l E
+    StrictCompletionRestriction.strict_completion_restriction_comparison (l := l) (E := E)
   have hcomplete (X : Scheme.{u}) (K : DerivedCategory (Modules l E X)) :
       IsDerivedComplete l E X K ↔ IsIso ((S X).unit.app K) := by
     obtain ⟨data, hd, ht, hs, hr, hu, hc⟩ := hS X

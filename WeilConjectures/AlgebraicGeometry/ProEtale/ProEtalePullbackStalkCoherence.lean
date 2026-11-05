@@ -52,6 +52,11 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryCocycle
 import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
 import Mathlib.AlgebraicGeometry.Pullbacks
 import Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
+public import WeilConjectures.AlgebraicGeometry.ProperBaseChange.SmallStrictHenselizationIndEtale
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationFunctoriality
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Reflective
+public import WeilConjectures.RingTheory.ProperBaseChange.IndEtaleStability
 
 /-!
 # Coherence of pro-etale pullback stalk comparisons
@@ -589,6 +594,14 @@ def proEtaleStalkIdentityPullback (A : Type u) [CommRing A] (T : Scheme.{u}) :
     proEtaleConstantRingPullback A (𝟙 T) ≅
       𝟭 (proEtaleRingModules T (proEtaleConstantRing T A)) :=
   (proEtaleStalkIdentityPullback_existsUnique A T).exists.choose
+
+/-- The canonical identity comparison descended termwise, including the localization
+identity unitor. Source: Stacks Tag 0D6D
+(blueprint: lem-trf-proetale-pullback-stalk-coherence). -/
+def proEtaleStalkDerivedIdentityPullback (A : Type u) [CommRing A] (T : Scheme.{u}) :
+    proEtaleConstantRingDerivedPullback A (𝟙 T) ≅ 𝟭 (proEtaleDerivedCategory T A) :=
+  Functor.mapDerivedCategoryNatIso (proEtaleStalkIdentityPullback A T) ≪≫
+    Functor.mapDerivedCategoryIdIso _
 
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
