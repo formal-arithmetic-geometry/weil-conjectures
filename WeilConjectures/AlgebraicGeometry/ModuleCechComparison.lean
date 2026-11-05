@@ -49,9 +49,9 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 universe u
 
-private local instance (R : Type u) [Ring R] (J : Type u) :
-    HasLimitsOfShape (Discrete J) (ModuleCat.{u} R) :=
-  ModuleCat.hasLimitsOfShape
+private local instance (R : Type u) [Ring R] :
+    HasProducts.{u} (ModuleCat.{u} R) :=
+  ModuleCat.hasLimits
 
 /-- The Čech complex of the presheaf of `Γ(X, ⊤)`-modules underlying an `O_X`-module is
 additive in the module. Source: Stacks 01EQ (blueprint: def-sc-module-cech-comparison).
