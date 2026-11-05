@@ -5,10 +5,7 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.IndEtaleMapping.IndEtaleDerivedImageModel
-import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Braided
-import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.NatIso
-import WeilConjectures.ConstructibleSheaf.UpperStarConstantSheafComp
+public import WeilConjectures.AlgebraicGeometry.IndEtaleMapping.IndEtaleDerivedImageHomComp
 
 /-! # Global Hom and the derived direct-image adjunction
 
@@ -32,222 +29,83 @@ namespace AlgebraicGeometry.Etale.IndEtaleMapping
 variable (A : Type (u + 1)) [CommRing A]
 variable {X : Scheme.{u}} (K M : DerivedCategoryModule A X)
 
-/-- The comparison is the mate of the specified left-adjoint comparison.
-This records its counit normalization without any continuity hypothesis.
-Source: Stacks 08JA (blueprint: lem-per-ind-etale-derived-image-hom-adjunction).
+/-- Naturality of a conjugate global-Hom comparison, in abstract form. All functors are
+variables, so that the coherence computation happens with opaque functors.
+The hypotheses are the counit normalizations of the comparisons, naturality of the
+target counits, and compatibility of the left-adjoint comparisons with composition. -/
+private theorem homIso_naturality_of_counit
+    {B DX DS DT : Type*} [Category* B] [Category* DX] [Category* DS] [Category* DT]
+    [MonoidalCategory DX] [MonoidalCategory DS] [MonoidalCategory DT]
+    {cX : B ⥤ DX} {cS : B ⥤ DS} {cT : B ⥤ DT}
+    {GX : DXᵒᵖ ⥤ DX ⥤ B} {GS : DSᵒᵖ ⥤ DS ⥤ B} {GT : DTᵒᵖ ⥤ DT ⥤ B}
+    (aX : ∀ E : DX, cX ⋙ tensorLeft E ⊣ GX.obj (op E))
+    (aS : ∀ E : DS, cS ⋙ tensorLeft E ⊣ GS.obj (op E))
+    (aT : ∀ E : DT, cT ⋙ tensorLeft E ⊣ GT.obj (op E))
+    {ps : DX ⥤ DS} {ss : DS ⥤ DX} {pt : DX ⥤ DT} {st : DT ⥤ DX} {pq : DS ⥤ DT}
+    (adjS : ps ⊣ ss) (adjT : pt ⊣ st) (c : pt ≅ ps ⋙ pq) (K M : DX)
+    (τT : cT ⋙ tensorLeft (pt.obj K) ≅ (cX ⋙ tensorLeft K) ⋙ pt)
+    (τS : cS ⋙ tensorLeft (ps.obj K) ≅ (cX ⋙ tensorLeft K) ⋙ ps)
+    (τq : cT ⋙ tensorLeft (pq.obj (ps.obj K)) ≅ (cS ⋙ tensorLeft (ps.obj K)) ⋙ pq)
+    (iT : (GX.obj (op K)).obj (st.obj (pt.obj M)) ⟶ (GT.obj (op (pt.obj K))).obj (pt.obj M))
+    (iS : (GX.obj (op K)).obj (ss.obj (ps.obj M)) ⟶ (GS.obj (op (ps.obj K))).obj (ps.obj M))
+    (R : (GS.obj (op (ps.obj K))).obj (ps.obj M) ⟶
+      (GT.obj (op (pq.obj (ps.obj K)))).obj (pq.obj (ps.obj M)))
+    (hT : (cT ⋙ tensorLeft (pt.obj K)).map iT ≫ (aT (pt.obj K)).counit.app (pt.obj M) =
+      τT.hom.app ((GX.obj (op K)).obj (st.obj (pt.obj M))) ≫
+        ((aX K).comp adjT).counit.app (pt.obj M))
+    (hS : (cS ⋙ tensorLeft (ps.obj K)).map iS ≫ (aS (ps.obj K)).counit.app (ps.obj M) =
+      τS.hom.app ((GX.obj (op K)).obj (ss.obj (ps.obj M))) ≫
+        ((aX K).comp adjS).counit.app (ps.obj M))
+    (hR : (cT ⋙ tensorLeft (pq.obj (ps.obj K))).map R ≫
+        (aT (pq.obj (ps.obj K))).counit.app (pq.obj (ps.obj M)) =
+      τq.hom.app ((GS.obj (op (ps.obj K))).obj (ps.obj M)) ≫
+        pq.map ((aS (ps.obj K)).counit.app (ps.obj M)))
+    (hG : ∀ {E E' N N' : DT} (f : E' ⟶ E) (g : N ⟶ N'),
+      (cT ⋙ tensorLeft E').map ((GT.map f.op).app N ≫ (GT.obj (op E')).map g) ≫
+          (aT E').counit.app N' =
+        (f ▷ cT.obj ((GT.obj (op E)).obj N)) ≫ (aT E).counit.app N ≫ g)
+    (hτ : ∀ Q : B, τT.hom.app Q ≫ c.hom.app (K ⊗ cX.obj Q) =
+      (c.hom.app K ▷ cT.obj Q) ≫ τq.hom.app Q ≫ pq.map (τS.hom.app Q)) :
+    (GX.obj (op K)).map ((adjT.homEquiv _ _) (c.hom.app (ss.obj (ps.obj M)) ≫
+        pq.map (adjS.counit.app (ps.obj M)) ≫ c.inv.app M)) ≫ iT =
+      iS ≫ R ≫ (GT.map (c.hom.app K).op).app (pq.obj (ps.obj M)) ≫
+        (GT.obj (op (pt.obj K))).map (c.inv.app M) := by
+  let Q₀ := (GX.obj (op K)).obj (ss.obj (ps.obj M))
+  let W := τT.hom.app Q₀ ≫ c.hom.app (K ⊗ cX.obj Q₀) ≫
+    pq.map (ps.map ((aX K).counit.app (ss.obj (ps.obj M)))) ≫
+    pq.map (adjS.counit.app (ps.obj M)) ≫ c.inv.app M
+  have hL : (cT ⋙ tensorLeft (pt.obj K)).map ((GX.obj (op K)).map ((adjT.homEquiv _ _)
+      (c.hom.app (ss.obj (ps.obj M)) ≫ pq.map (adjS.counit.app (ps.obj M)) ≫ c.inv.app M)) ≫
+        iT) ≫ (aT (pt.obj K)).counit.app (pt.obj M) = W := by
+    rw [Functor.map_comp_assoc, hT, NatTrans.naturality_assoc, Adjunction.comp_counit_app,
+      Functor.comp_map (cX ⋙ tensorLeft K) pt, ← Functor.map_comp_assoc,
+      Adjunction.counit_naturality, Functor.map_comp_assoc]
+    erw [← Adjunction.homEquiv_counit]
+    erw [Equiv.symm_apply_apply]
+    rw [NatTrans.naturality_assoc]
+    rfl
+  have hw {E E' : DT} (g : E' ⟶ E) {Q Q' : B} (h : Q ⟶ Q') {Z : DT}
+      (k : E ⊗ cT.obj Q' ⟶ Z) :
+      (cT ⋙ tensorLeft E').map h ≫ (g ▷ cT.obj Q') ≫ k =
+        (g ▷ cT.obj Q) ≫ (cT ⋙ tensorLeft E).map h ≫ k :=
+    whisker_exchange_assoc g (cT.map h) k
+  have hR' : (cT ⋙ tensorLeft (pt.obj K)).map (iS ≫ R ≫
+      (GT.map (c.hom.app K).op).app (pq.obj (ps.obj M)) ≫
+        (GT.obj (op (pt.obj K))).map (c.inv.app M)) ≫
+      (aT (pt.obj K)).counit.app (pt.obj M) = W := by
+    rw [← Category.assoc iS, Functor.map_comp_assoc, hG]
+    erw [hw]
+    rw [Functor.map_comp_assoc]
+    erw [reassoc_of% hR]
+    rw [NatTrans.naturality_assoc, Functor.comp_map (cS ⋙ tensorLeft (ps.obj K)) pq,
+      ← Functor.map_comp_assoc, hS, Adjunction.comp_counit_app]
+    simp only [W, Functor.map_comp, Category.assoc]
+    rw [reassoc_of% hτ]
+  apply ((aT (pt.obj K)).homEquiv _ _).symm.injective
+  rw [Adjunction.homEquiv_counit, Adjunction.homEquiv_counit, hL, hR']
 
-Proof: apply the counit identity for conjugation of adjunctions to imageTensorIso.
--/
-theorem imageHomIso_counit (T : Over X) :
-    (ExternalRHom.constant A T.left ⋙
-      CategoryTheory.MonoidalCategory.tensorLeft ((ExternalRHom.pull A T.hom).obj K)).map
-        (imageHomIso A M K T).hom ≫
-      (ExternalRHom.globalAdjunction A ((ExternalRHom.pull A T.hom).obj K)).counit.app
-        ((ExternalRHom.pull A T.hom).obj M) =
-      (imageTensorIso A K T).hom.app
-        (((ExternalRHom.globalHom A X).obj (op K)).obj (imageValue A M T)) ≫
-      ((ExternalRHom.globalAdjunction A K).comp
-        (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) T.hom)).counit.app
-          ((ExternalRHom.pull A T.hom).obj M) := by
-  exact conjugateEquiv_counit
-    ((ExternalRHom.globalAdjunction A K).comp
-      (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) T.hom))
-    (ExternalRHom.globalAdjunction A ((ExternalRHom.pull A T.hom).obj K))
-    (imageTensorIso A K T).hom ((ExternalRHom.pull A T.hom).obj M)
-
-private theorem pulledEvaluation_left
-    {C D B : Type*} [Category* C] [MonoidalCategory C] [BraidedCategory C]
-    [Category* D] [MonoidalCategory D] [BraidedCategory D] [Category* B]
-    (F : C ⥤ D) [F.LaxMonoidal] (c : B ⥤ C) (d : B ⥤ D)
-    (α : d ≅ c ⋙ F) (E N : C) (Q : B) (ε : E ⊗ c.obj Q ⟶ N)
-    (hβ : (β_ (F.obj E) (F.obj (c.obj Q))).hom ≫
-      Functor.LaxMonoidal.μ F (c.obj Q) E =
-        Functor.LaxMonoidal.μ F E (c.obj Q) ≫ F.map (β_ E (c.obj Q)).hom) :
-    (β_ (F.obj E) (d.obj Q)).hom ≫
-      ExternalRHom.pullEvaluationOf F c d α (Functor.LaxMonoidal.μ F) E N Q
-        ((β_ E (c.obj Q)).inv ≫ ε) =
-      (F.obj E ◁ α.hom.app Q) ≫ Functor.LaxMonoidal.μ F E (c.obj Q) ≫ F.map ε := by
-  unfold ExternalRHom.pullEvaluationOf
-  simp only [Functor.map_comp]
-  rw [← BraidedCategory.braiding_naturality_right_assoc]
-  dsimp only [Functor.comp_obj]
-  rw [reassoc_of% hβ]
-  simp only [← F.map_comp_assoc, Iso.hom_inv_id]
-  rw [F.map_id, Category.id_comp]
-
-/-- Restriction transposes to pullback of the global tensor-Hom counit.
-Source: Bhatt--Scholze 6.3.16, adjunction; Stacks 08JA
-(blueprint: lem-per-ind-etale-derived-image-hom-adjunction).
-
-Proof: expand restriction as a transpose. Braided compatibility of inverse image
-moves the braiding across its tensor constraint; the two braidings cancel.
--/
-theorem imageRestriction_counit (T : Over X) :
-    (ExternalRHom.constant A T.left ⋙ tensorLeft ((ExternalRHom.pull A T.hom).obj K)).map
-        (ExternalRHom.restriction A T.hom K M) ≫
-      (ExternalRHom.globalAdjunction A ((ExternalRHom.pull A T.hom).obj K)).counit.app
-        ((ExternalRHom.pull A T.hom).obj M) =
-      (imageTensorIso A K T).hom.app
-        (((ExternalRHom.globalHom A X).obj (op K)).obj M) ≫
-      (ExternalRHom.pull A T.hom).map ((ExternalRHom.globalAdjunction A K).counit.app M) := by
-  let := ExternalRHom.derivedBraiding A X
-  let := ExternalRHom.derivedBraiding A T.left
-  let := leftDerivedUpperStarMonoidal (ModuleCat.{u + 1} A) T.hom
-  let Q := ((ExternalRHom.globalHom A X).obj (op K)).obj M
-  have hb := (leftDerivedUpperStar_μ_map_braiding_hom (ModuleCat.{u + 1} A)
-    T.hom K ((ExternalRHom.constant A X).obj Q)).symm
-  have h := pulledEvaluation_left (ExternalRHom.pull A T.hom)
-    (ExternalRHom.constant A X) (ExternalRHom.constant A T.left)
-    (ExternalRHom.constantPullbackIso A T.hom) K M Q
-    ((ExternalRHom.globalAdjunction A K).counit.app M) hb
-  change ((ExternalRHom.globalAdjunction A
-    ((ExternalRHom.pull A T.hom).obj K)).homEquiv _ _).symm
-      (ExternalRHom.restriction A T.hom K M) = _
-  rw [ExternalRHom.restriction, ExternalRHom.transpose, Equiv.symm_apply_apply]
-  simpa only [ExternalRHom.pulledEvaluation, ExternalRHom.evaluation,
-    imageTensorIso, Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
-    Functor.whiskerRight_app, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
-    Functor.associator_hom_app, Functor.associator_inv_app, Category.comp_id,
-    Category.id_comp, Functor.Monoidal.commTensorLeft_hom_app,
-    Functor.Monoidal.μIso_hom, Functor.comp_obj, Iso.symm_hom,
-    ExternalRHom.pullTensorIso, Q, tensorLeft, curriedTensor, Category.assoc] using h
-
-
-private theorem hom_counit_naturality
-    {C B : Type*} [Category* C] [MonoidalCategory C] [BraidedCategory C]
-    [MonoidalClosed C] [Category* B] {c : B ⥤ C} {s : C ⥤ B} (a : c ⊣ s)
-    {E E' N N' : C} (f : E' ⟶ E) (g : N ⟶ N') :
-    (c ⋙ tensorLeft E').map
-        (s.map ((MonoidalClosed.pre f).app N) ≫ s.map ((ihom E').map g)) ≫
-      (a.comp (MonoidalClosed.internalHomAdjunction₂.adj E')).counit.app N' =
-      (f ▷ c.obj (s.obj ((ihom E).obj N))) ≫
-        (a.comp (MonoidalClosed.internalHomAdjunction₂.adj E)).counit.app N ≫ g := by
-  have h := ExternalRHom.GenericTranspose.ev_naturality a f g
-  unfold ExternalRHom.GenericTranspose.ev at h
-  have h := congrArg (fun k ↦
-    (β_ E' (c.obj (s.obj ((ihom E).obj N)))).hom ≫ k) h
-  simp only [Category.assoc] at h
-  rw [← BraidedCategory.braiding_naturality_right_assoc] at h
-  simp only [Iso.hom_inv_id_assoc] at h
-  rw [← BraidedCategory.braiding_naturality_left_assoc] at h
-  simpa only [Iso.hom_inv_id_assoc, Functor.comp_map, tensorLeft, curriedTensor] using h
-
-/-- Both coefficient variances of global Hom respect its left-tensor counit.
-Source: Stacks 08JA (blueprint: lem-per-ind-etale-derived-image-hom-adjunction).
-
-Proof: the existing evaluation naturality identity gives the square with the
-constant coefficient on the left. Naturality of the braiding moves this
-coefficient to the right and cancels both inverse braidings.
--/
-theorem imageGlobalHom_counit_naturality
-    {E E' N N' : DerivedCategoryModule A X} (f : E' ⟶ E) (g : N ⟶ N') :
-    (ExternalRHom.constant A X ⋙ tensorLeft E').map
-        (((ExternalRHom.globalHom A X).map f.op).app N ≫
-          ((ExternalRHom.globalHom A X).obj (op E')).map g) ≫
-      (ExternalRHom.globalAdjunction A E').counit.app N' =
-      (f ▷ (ExternalRHom.constant A X).obj
-        (((ExternalRHom.globalHom A X).obj (op E)).obj N)) ≫
-        (ExternalRHom.globalAdjunction A E).counit.app N ≫ g := by
-  let := ExternalRHom.derivedBraiding A X
-  exact hom_counit_naturality (ExternalRHom.constantSectionsAdjunction A X) f g
-
-section Composition
-
-variable {S T : Scheme.{u}} (f : T ⟶ S) (g : S ⟶ X)
-
-private theorem leftDerivedComp_assoc
-    (Z : DerivedCategory (ModuleCat.{u + 1} A)) :
-    ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)).leftDerivedFunctorCompIso
-      (upperStar (ModuleCat.{u + 1} A) g ⋙ upperStar (ModuleCat.{u + 1} A) f)).hom.app Z ≫
-      ((upperStar (ModuleCat.{u + 1} A) g).leftDerivedFunctorCompIso
-        (upperStar (ModuleCat.{u + 1} A) f)).hom.app
-          ((ExternalRHom.constant A X).obj Z) =
-    (((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) ⋙
-      upperStar (ModuleCat.{u + 1} A) g).leftDerivedFunctorCompIso
-        (upperStar (ModuleCat.{u + 1} A) f)).hom.app Z ≫
-      (ExternalRHom.pull A f).map
-        (((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)).leftDerivedFunctorCompIso
-          (upperStar (ModuleCat.{u + 1} A) g)).hom.app Z) := by
-  let F := constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)
-  let G := upperStar (ModuleCat.{u + 1} A) g
-  let H := upperStar (ModuleCat.{u + 1} A) f
-  have h := NatTrans.congr_app (Functor.mapDerivedCategoryCompIso_assoc F G H) Z
-  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app] at h
-  simp only [Functor.leftDerivedFunctorCompIso, Iso.trans_hom, Iso.symm_hom,
-    NatTrans.comp_app, Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
-    Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Category.assoc,
-    Functor.map_comp]
-  rw [← NatTrans.naturality_assoc]
-  simp only [← Functor.map_comp_assoc, Iso.inv_hom_id_app_assoc]
-  simp only [Iso.inv_hom_id_app]
-  rw [← NatTrans.naturality_assoc]
-  simp only [← Functor.map_comp_assoc]
-  simp only [Functor.map_comp, Category.assoc]
-  rw [NatTrans.naturality_assoc]
-  erw [H.mapDerivedCategory.map_id]
-  rw [Category.id_comp]
-  rw [← H.leftDerivedFunctorIsoMapDerivedCategory.inv.naturality]
-  rw [← reassoc_of% h]
-  rfl
-
-
-/-- The canonical derived constant comparison respects inverse-image composition.
-Source: Stacks 0G7E; Bhatt--Scholze 6.3.16, adjunction
-(blueprint: lem-per-ind-etale-derived-image-hom-adjunction).
-
-Proof: transport the underived constant-sheaf composition identity through exact
-derivation. Naturality in each functor and associativity of the derived
-composition constraints give the displayed equation.
--/
-theorem imageConstantPullback_comp
-    (Z : DerivedCategory (ModuleCat.{u + 1} A)) :
-    (ExternalRHom.constantPullbackIso A (f ≫ g)).hom.app Z ≫
-        (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) f g).hom.app
-          ((ExternalRHom.constant A X).obj Z) =
-      (ExternalRHom.constantPullbackIso A f).hom.app Z ≫
-        (ExternalRHom.pull A f).map ((ExternalRHom.constantPullbackIso A g).hom.app Z) := by
-  let F := constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)
-  let G := upperStar (ModuleCat.{u + 1} A) g
-  let H := upperStar (ModuleCat.{u + 1} A) f
-  let J := upperStar (ModuleCat.{u + 1} A) (f ≫ g)
-  let e := (Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} A) g).symm
-  let d := (Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} A) f).symm
-  let a := (Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} A) (f ≫ g)).symm
-  let b := upperStarComp (ModuleCat.{u + 1} A) f g
-  have hi : (a ≪≫ Functor.isoWhiskerLeft F b).symm =
-      (d ≪≫ Functor.isoWhiskerRight e H).symm := by
-    apply Iso.ext
-    apply NatTrans.ext
-    funext Q
-    apply (cancel_epi (b.hom.app (F.obj Q))).1
-    simp only [Iso.symm_hom, Iso.trans_inv, NatTrans.comp_app,
-      Functor.isoWhiskerLeft_inv, Functor.whiskerLeft_app,
-      Functor.isoWhiskerRight_inv, Functor.whiskerRight_app,
-      Iso.hom_inv_id_app_assoc]
-    exact (Scheme.upperStarConstantSheafIso_comp (ModuleCat.{u + 1} A) f g Q).symm
-  have he : a ≪≫ Functor.isoWhiskerLeft F b =
-      d ≪≫ Functor.isoWhiskerRight e H := by
-    exact congrArg Iso.symm hi
-  have hl := congrArg (Functor.leftDerivedFunctorNatIso _ ) he
-  simp only [Functor.leftDerivedFunctorNatIso_trans] at hl
-  have h₁ := NatTrans.congr_app
-    (Functor.leftDerivedFunctorNatIso_isoWhiskerLeft F b) Z
-  have h₂ := NatTrans.congr_app
-    (Functor.leftDerivedFunctorNatIso_isoWhiskerRight _ e H) Z
-  simp only [NatTrans.comp_app, Functor.whiskerLeft_app,
-    Functor.whiskerRight_app] at h₁ h₂
-  dsimp only [ExternalRHom.constantPullbackIso, leftDerivedUpperStarComp,
-    Iso.trans_hom, NatTrans.comp_app]
-  simp only [Functor.map_comp, Category.assoc]
-  rw [← reassoc_of% h₁]
-  rw [leftDerivedComp_assoc A f g Z]
-  rw [← reassoc_of% h₂]
-  have hl' := NatTrans.congr_app (congrArg Iso.hom hl) Z
-  simp only [Iso.trans_hom, NatTrans.comp_app] at hl'
-  rw [reassoc_of% hl']
-
-end Composition
-
+set_option maxHeartbeats 400000 in
+-- The kernel compares the abstract instance with the concrete derived functors.
 /-- The global-Hom isomorphisms of derived adjunction are compatible with the
 specified pullback-of-evaluation transition maps.
 
@@ -276,7 +134,28 @@ theorem imageHomIso_naturality {T S : Over X} (f : T ⟶ S) :
         ((ExternalRHom.globalHom A T.left).obj
           (op ((ExternalRHom.pull A T.hom).obj K))).map
             ((leftDerivedUpperStarComp (ModuleCat.{u + 1} A) f.left S.hom T.hom
-              f.w.symm).inv.app M) := by
-  sorry
+              f.w.symm).inv.app M) :=
+  homIso_naturality_of_counit (cX := ExternalRHom.constant A X)
+    (cS := ExternalRHom.constant A S.left)
+    (cT := ExternalRHom.constant A T.left) (GX := ExternalRHom.globalHom A X)
+    (GS := ExternalRHom.globalHom A S.left) (GT := ExternalRHom.globalHom A T.left)
+    (ps := ExternalRHom.pull A S.hom) (pt := ExternalRHom.pull A T.hom)
+    (pq := ExternalRHom.pull A f.left)
+    (ss := (lowerStar (ModuleCat.{u + 1} A) S.hom).rightDerivedFunctor)
+    (st := (lowerStar (ModuleCat.{u + 1} A) T.hom).rightDerivedFunctor)
+    (ExternalRHom.globalAdjunction A)
+    (ExternalRHom.globalAdjunction A) (ExternalRHom.globalAdjunction A)
+    (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) S.hom)
+    (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) T.hom)
+    (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) f.left S.hom T.hom f.w.symm) K M
+    (imageTensorIso A K T) (imageTensorIso A K S)
+    (imageTensorIso A ((ExternalRHom.pull A S.hom).obj K) (Over.mk f.left))
+    (imageHomIso A M K T).hom (imageHomIso A M K S).hom
+    (ExternalRHom.restriction A f.left
+      ((ExternalRHom.pull A S.hom).obj K) ((ExternalRHom.pull A S.hom).obj M))
+    (imageHomIso_counit A K M T) (imageHomIso_counit A K M S)
+    (imageRestriction_counit A _ _ (Over.mk f.left))
+    (fun f g ↦ imageGlobalHom_counit_naturality A f g)
+    (imageTensorIso_hom_app_comp A K f)
 
 end AlgebraicGeometry.Etale.IndEtaleMapping
