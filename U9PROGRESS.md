@@ -78,3 +78,11 @@ this should distinguish type conversion of two iso types from comparison of the 
 again ELAB isDefEq200000 at the unit native-comm argument (20s). Interface stays GREEN11s.
 Next variant uses by-blocks only for the two cheap comparison-square inputs, bounded dsimp
 +instances on comp_obj/map, then exact_mod_proofs. Keep scalar root input native and untouched.
+
+20:41 CST: Found and removed an unnecessary heavy import in Coefficient: FiniteRootsOfUnity
+belongs in FiniteRoots, not foundational coefficient data. CoefficientCategory now imports only
+FinitePullback; its concrete integral consumer imports IntegralTateReading explicitly. This keeps
+small boundary/category checks from rebuilding all Cartier/finite-duality prerequisites. Canceled
+ONLY own boundary-check process group3768184 on verified pool43.166.79.118 (log203152) because
+its obsolete import graph was still rebuilding baseline dependencies. Next small check uses the
+reduced graph. Construction/proof bodies are unchanged by this import correction.

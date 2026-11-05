@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.WeilSheaf.Strategy3.IntegralTateReading
+public import WeilConjectures.WeilSheaf.Strategy3.FinitePullback
 
 /-! # A minimal category for finite K4 coefficient readings
 

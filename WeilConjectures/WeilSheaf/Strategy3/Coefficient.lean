@@ -6,7 +6,6 @@ module
 
 public import WeilConjectures.WeilSheaf.Strategy3.Pullback
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.UpperStar
-public import WeilConjectures.TateTwist.FiniteRootsOfUnity
 
 /-! # A separate coefficient interface and finite module equivalence -/
 

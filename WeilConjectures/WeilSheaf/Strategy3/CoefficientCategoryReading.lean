@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.WeilSheaf.Strategy3.CoefficientCategory
+public import WeilConjectures.WeilSheaf.Strategy3.IntegralTateReading
 
 set_option profiler true
 set_option profiler.threshold 0
