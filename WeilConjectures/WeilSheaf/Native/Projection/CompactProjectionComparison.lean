@@ -63,8 +63,7 @@ def projectionGeometricPullComp :
 lemma projectionGeometricPullComp_hom_app
     (N : BoundedConstructible (condensedRingObj Λ
       (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber)) :
-    (ObjectProperty.ι _).map
-      ((projectionGeometricPullComp k₀ l f).hom.app N) =
+    ((projectionGeometricPullComp k₀ l f).hom.app N).hom =
       (CondensedRing.leftDerivedUpperStarOverCompactificationIso (f := fb) Λ cb).inv.app N.obj := rfl
 
 set_option backward.defeqAttrib.useBackward true in

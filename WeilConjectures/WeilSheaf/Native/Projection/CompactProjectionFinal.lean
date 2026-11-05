@@ -39,7 +39,8 @@ def projectionCompactForgetIso :
     compactProjectionForget k₀ l X ⋙ CondensedRing.boundedConstructibleLowerShriek l fb ≅
       derivedLowerShriek k₀ l f ⋙ compactProjectionForget k₀ l Y :=
   Functor.isoWhiskerLeft (compactProjectionForget k₀ l X)
-    (CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl l _ cb) ≪≫
+    (CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl
+      (f := fb) l (CondensedRing.compactificationOverField fb) cb) ≪≫
       (projectionCompactificationForgetIso k₀ l f).symm
 
 /-- Its mate under arbitrary Weil exceptional adjunctions is invertible. -/
@@ -52,7 +53,8 @@ theorem isIso_mateEquiv_projectionCompactForgetIso
   exact isIso_mateEquiv_whiskerLeftIso adj
     (CondensedRing.boundedConstructibleUpperShriekOfCompactificationAdjunction l cb)
     (CondensedRing.boundedConstructibleUpperShriekAdjunction l fb)
-    (CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl l _ cb)
+    (CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl
+      (f := fb) l (CondensedRing.compactificationOverField fb) cb)
     (projectionCompactificationForgetIso k₀ l f).symm
 
 set_option backward.defeqAttrib.useBackward true in
@@ -71,11 +73,12 @@ theorem projectionCompact_forget_square (M : WeilComplex k₀ l X) (N : WeilComp
         CondensedRing.boundedConstructibleExceptionalProjectionMorphism l fb _ _ := by
   let η : CondensedRing.boundedConstructibleLowerShriek l fb ≅
       CondensedRing.boundedConstructibleLowerShriekOfCompactification l cb :=
-    CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl l _ cb
+    CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl
+      (f := fb) l (CondensedRing.compactificationOverField fb) cb
   let t := (compactProjectionForgetTensorIso k₀ l X).hom.app (M, (upperStar f).obj N) ≫
     (compactProjectionForget k₀ l X).obj M ◁ (projectionCompactPullForgetIso k₀ l f).hom.app N
   have hη := CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_hom_app_whiskerRight_comp
-    l (CondensedRing.compactificationOverField fb) cb
+    (f := fb) l (CondensedRing.compactificationOverField fb) cb
       ((compactProjectionForget k₀ l X).obj M) ((compactProjectionForget k₀ l Y).obj N)
   exact projectionForgetSquare_changeGeometricPush η
     ((compactProjectionForget k₀ l Y).map ((projectionCompactIso k₀ l f).hom.app (M, N)))
