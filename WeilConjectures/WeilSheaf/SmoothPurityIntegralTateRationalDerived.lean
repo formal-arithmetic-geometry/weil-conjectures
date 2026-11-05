@@ -68,6 +68,8 @@ lemma upperStarIntegralTateTwistDerivedIso_hom_comp_rationalization
     (extendScalarsIntegralTateTwistNatIso X' ℓ E d).hom
     (upperStarIntegralTateTwistNatIso_hom_comp_rationalization ℓ E g f d)
   simpa only [upperStarIntegralTateTwistDerivedIso, purityExtendScalarsIntegralTateIso,
+    purityDerivedCoefficientExtension, purityDerivedPullback,
+    purityExtendScalarsFlatSingleIso, purityPullbackSingleIso,
     upperStarTateTwistDerivedIso, upperStarTateTwistIso, Iso.trans_hom, Iso.app_hom,
     Functor.mapIso_hom, Category.assoc] using h
 

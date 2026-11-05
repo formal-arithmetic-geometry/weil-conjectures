@@ -6,6 +6,7 @@ module
 
 public import WeilConjectures.WeilSheaf.SmoothPurityDerivedPullSingle
 public import WeilConjectures.WeilSheaf.SmoothPuritySingleDatumSquare
+public import WeilConjectures.WeilSheaf.SmoothPurityFlatModuleComparison
 
 /-! # Deriving a compatible geometric and coefficient datum on flat objects -/
 
@@ -39,19 +40,15 @@ lemma purity_derived_flat_datum_square
     (h : (pullIso a g).inv.app M ≫
         (Mod.extendScalars (coefficientMap a X)).map u ≫ s = (g)^*⟦Λ'⟧.map r ≫ v) :
     (derivedUpperStarExtendScalarsIso a g).inv.app ((DerivedCategory.singleFunctor _ 0).obj M) ≫
-        L(Mod.extendScalars (coefficientMap a X)).map
-          ((leftDerivedUpperStarIsoMapDerivedCategory Λ g).hom.app
-              ((DerivedCategory.singleFunctor _ 0).obj M) ≫
-            (((g)^*⟦Λ⟧).mapDerivedCategorySingleFunctor 0).hom.app M ≫
+        (purityDerivedCoefficientExtension a X).map
+          ((purityPullbackSingleIso Λ g M).hom ≫
             (DerivedCategory.singleFunctor _ 0).map u) ≫
-        ((Mod.extendScalars (coefficientMap a X)).leftDerivedFunctorSingleFunctorIsoOfFlat
-          hM').hom ≫ (DerivedCategory.singleFunctor _ 0).map s =
-      L((g)^*⟦Λ'⟧).map
-          (((Mod.extendScalars (coefficientMap a Y)).leftDerivedFunctorSingleFunctorIsoOfFlat
-            hM).hom ≫ (DerivedCategory.singleFunctor _ 0).map r) ≫
-        (leftDerivedUpperStarIsoMapDerivedCategory Λ' g).hom.app
-          ((DerivedCategory.singleFunctor _ 0).obj N) ≫
-        (((g)^*⟦Λ'⟧).mapDerivedCategorySingleFunctor 0).hom.app N ≫
+        (purityExtendScalarsFlatSingleIso a X hM').hom ≫
+        (DerivedCategory.singleFunctor _ 0).map s =
+      (purityDerivedPullback Λ' g).map
+          ((purityExtendScalarsFlatSingleIso a Y hM).hom ≫
+            (DerivedCategory.singleFunctor _ 0).map r) ≫
+        (purityPullbackSingleIso Λ' g N).hom ≫
         (DerivedCategory.singleFunctor _ 0).map v := by
   let LF := purityDerivedCoefficientExtension a Y
   let LG := purityDerivedPullback Λ' g
@@ -66,9 +63,8 @@ lemma purity_derived_flat_datum_square
     (purityExtendScalarsSingleComparison a X)
     (derivedUpperStarExtendScalarsIso a g).inv (pullIso a g).inv u v r s
     (derivedUpperStarExtendScalarsIso_inv_app_single_comp_comparison a g M) h
-  simpa only [LF, LG, LH, LI, purityDerivedPullback, purityDerivedCoefficientExtension, purityPullbackSingleComparison_app_eq_exact,
-    purityExtendScalarsSingleComparison_app_eq_of_flat _ _ hM,
-    purityExtendScalarsSingleComparison_app_eq_of_flat _ _ hM',
-    leftDerivedUpperStarIsoMapDerivedCategory, Category.assoc] using hs
+  simpa only [LF, LG, LH, LI, purityPullbackSingleComparison_app_eq_singleIso,
+    purityExtendScalarsSingleComparison_app_eq_flatSingleIso _ _ hM,
+    purityExtendScalarsSingleComparison_app_eq_flatSingleIso _ _ hM'] using hs
 
 end AlgebraicGeometry.ProEtale.CondensedRing
