@@ -39,6 +39,15 @@ private lemma assemble_exchange {A B : Type*} [Category A] [Category B]
   rw [hs, ← Functor.map_comp, hm]
   exact ht
 
+private lemma assemble_exchange_transport {A B : Type*} [Category A] [Category B]
+    (I : A ⥤ B) {X Y Z : A} {V W : B}
+    (a : V ⟶ W) (u : W ⟶ I.obj X) (b : W ⟶ I.obj Y) (c : X ⟶ Y)
+    (d : Y ⟶ Z) (e : X ⟶ Z) (t : V ⟶ I.obj Z)
+    (hs : b = u ≫ I.map c) (hm : c ≫ d = e) (ht : a ≫ u ≫ I.map e = t) :
+    a ≫ b ≫ I.map d = t := by
+  rw [hs, Category.assoc, ← Functor.map_comp, hm]
+  exact ht
+
 private lemma map_comp_naturality {A B C D : Type*}
     [Category A] [Category B] [Category C] [Category D]
     (R : A ⥤ B) (U : B ⥤ C) (P : A ⥤ D) (F : D ⥤ C)
@@ -159,11 +168,11 @@ theorem smallModel_injectiveExchange_representative {X S : Scheme.{v}} (f : X �
           ((R.mapHomologicalComplex (.up ℤ)).obj M.obj)) ≫
         DerivedCategory.Plus.ι.map (U.mapDerivedCategoryPlus.map
           (R.rightDerivedFunctorPlusUnith.app H ≫ R.rightDerivedFunctorPlus.map q'.inv)) := by
-    simpa only [Functor.map_comp] using congrArg U.mapDerivedCategory.map hs
-  dsimp only
-  rw [hs']
-  simp only [Category.assoc, ← DerivedCategory.Plus.ι.map_comp]
-  rw [hb]
-  exact smallModel_injectiveExchange_target_transport f s K J q
+    rw [hs, U.mapDerivedCategory.map_comp, ← DerivedCategory.Plus.ι.map_comp]
+    rfl
+  exact assemble_exchange_transport DerivedCategory.Plus.ι
+    (U.mapDerivedCategoryFactors.inv.app
+      ((R.mapHomologicalComplex (.up ℤ)).obj M.obj)) _ _ _ _ _ _ hs' hb
+    (smallModel_injectiveExchange_target_transport f s K J q)
 
 end AlgebraicGeometry.Etale
