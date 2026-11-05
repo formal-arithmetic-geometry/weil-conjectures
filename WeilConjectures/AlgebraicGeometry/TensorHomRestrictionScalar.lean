@@ -23,6 +23,12 @@ universe u
 open CategoryTheory MonoidalCategory Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 
+local instance {X : Scheme.{u}} (M : X.Modules) {U W : X.Opens} (h : W ≤ U) :
+    SMul ((SheafOfModules.unit X.ringCatSheaf).val.obj (op W))
+      ((ModuleCat.restrictScalars (X.ringCatSheaf.obj.map (homOfLE h).op).hom).obj
+        (M.val.obj (op W))) :=
+  inferInstanceAs (SMul (X.sheaf.obj.obj (op W)) (M.val.obj (op W)))
+
 set_option maxHeartbeats 600000 in
 -- Normalizing the slice and scheme restriction comparisons requires extra elaboration fuel.
 set_option backward.isDefEq.respectTransparency false in
