@@ -108,6 +108,7 @@ theorem integralConstructible_sheaf_hom_colimit (X : Scheme.{u})
         colimMap e.hom ≫ colimit.desc _ (G.mapCocone (colimit.cocone L)) := by
       apply colimit.hom_ext
       intro s
+      dsimp only [G]
       simp only [colimit.ι_desc_assoc, ι_colimMap_assoc, colimit.ι_desc]
       exact hleg s
     have : IsIso (colimit.desc _ (F.mapCocone c') ≫ v.hom) := by
