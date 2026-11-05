@@ -127,7 +127,8 @@ theorem Modules.exists_ne_zero_of_nontrivial_H_zero {X : Scheme.{u}} (M : X.Modu
   let m : Γ(M, ⊤) := e y
   have hm : m ≠ 0 := fun h ↦ hy (e.injective (h.trans e.map_zero.symm))
   let σ : M.sections := PresheafOfModules.sectionsMk
-    (fun W ↦ M.val.map (homOfLE le_top : W.unop ⟶ ⊤).op m)
+    (fun W ↦ PresheafOfModulesOfCommRing.map (R := X.sheaf) M.val
+      (homOfLE le_top : W.unop ⟶ ⊤).op m)
     (fun W _ f ↦ (ConcreteCategory.congr_hom (M.val.map_comp
         (homOfLE le_top : W.unop ⟶ ⊤).op f) _).symm)
   refine ⟨M.unitHomEquiv.symm σ, fun h ↦ hm ?_⟩
@@ -135,7 +136,8 @@ theorem Modules.exists_ne_zero_of_nontrivial_H_zero {X : Scheme.{u}} (M : X.Modu
   rw [h] at h1
   rw [SheafOfModules.unitHomEquiv_apply_coe] at h1
   have h2 : SheafOfModules.Hom.val (0 : 𝟙_ X.Modules ⟶ M) = 0 := rfl
-  replace h1 : M.val.map (homOfLE le_top : (⊤ : X.Opens) ⟶ ⊤).op m = 0 := h1.symm
+  replace h1 : PresheafOfModulesOfCommRing.map (R := X.sheaf) M.val
+      (homOfLE le_top : (⊤ : X.Opens) ⟶ ⊤).op m = 0 := h1.symm
   rw [show (homOfLE le_top : (⊤ : X.Opens) ⟶ ⊤) = 𝟙 _ from Subsingleton.elim _ _, op_id,
     M.val.map_id] at h1
   exact h1
