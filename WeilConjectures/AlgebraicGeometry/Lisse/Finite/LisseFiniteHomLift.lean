@@ -442,6 +442,8 @@ theorem exists_lisse_finite_hom_lift [CompactSpace X] [QuasiSeparatedSpace X]
     inferInstance
   let c := (HomologicalComplex.eval _ (.up ℤ) 0).mapCocone
     (coefficientComplexCocone X ℓ (E := E) (F := E) C H he he)
+  letI : ∀ n : ℤ, HasColimit (coefficientComplexDiagram X ℓ C H he he) :=
+    fun _ ↦ inferInstance
   have hc0 : IsColimit (coefficientComplexCocone X ℓ (E := E) (F := E) C H he he) :=
     Classical.choice (nonempty_isColimit_coefficientComplexCocone X ℓ
       (E := E) (F := E) C H he he)
