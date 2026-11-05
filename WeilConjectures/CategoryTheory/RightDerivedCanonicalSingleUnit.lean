@@ -7,8 +7,11 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.CategoryTheory.RightDerivedSingleDegreeComparison
+public import Mathlib.Algebra.Homology.Localization
 import WeilConjectures.CategoryTheory.RightDerivedSingleUnitHomologyComparison
 import WeilConjectures.CategoryTheory.RightDerivedCanonicalSingleUnitShift
+import all Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 
 @[expose] public section
 
