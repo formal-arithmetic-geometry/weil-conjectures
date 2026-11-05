@@ -218,7 +218,6 @@ theorem exists_affineDerivedPushforwardSheafEdge
   have hqC : (DerivedCategory.quotientCompQhIso C).hom.app K = 𝟙 _ := rfl
   have hqD : (DerivedCategory.quotientCompQhIso D).inv.app
       ((S.mapHomologicalComplex (.up ℤ)).obj K) = 𝟙 _ := rfl
-  simp only [hqC, hqD, Functor.map_id, Category.id_comp, Category.comp_id] at hn
   apply (cancel_epi ((F ⋙ S).map (M.sc i).homologyData.left.π)).mp
   apply (cancel_mono (γ.app ⟨_, hM⟩ ≫ δ.hom.app (DerivedCategory.Q.obj K))).mp
   simpa only [ε, NatTrans.comp_app, Functor.isoWhiskerLeft_inv,
@@ -227,7 +226,7 @@ theorem exists_affineDerivedPushforwardSheafEdge
     γ, S, T, U, K, ι, H, f, X, Y, C, D, Functor.whiskerRight_app, ObjectProperty.ι_obj,
     ShortComplex.LeftHomologyData.map_π, ShortComplex.mapHomologyIso,
     Functor.comp_map, Functor.map_comp, Functor.mapHomologicalComplex, Functor.comp_obj,
-    cast_eq]
+    cast_eq, hqC, hqD, Functor.map_id]
     using hn.symm
 
 end AlgebraicGeometry
