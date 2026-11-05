@@ -183,8 +183,14 @@ private theorem coefficientLocallyBijective
     {C : Type u} [SmallCategory C] (K : GrothendieckTopology C) :
     K.WEqualsLocallyBijective AddCommGrpCat.{u} := inferInstance
 
+private noncomputable abbrev coefficientSMul
+    {C : Type u} [SmallCategory C] {K : GrothendieckTopology C}
+    (R : Sheaf K RingCat.{u}) (M : ringedSiteModules.{u} R) (U : Cᵒᵖ) :
+    SMul (((sheafCompose K (forget RingCat)).obj R).obj.obj U) (M.val.obj U) :=
+  inferInstanceAs (SMul (R.obj.obj U) (M.val.obj U))
+
 attribute [local instance] coefficientSheafify
-  coefficientLocallyBijective
+  coefficientLocallyBijective coefficientSMul
 
 private noncomputable def linearOperation
     {C : Type u} [SmallCategory C] {K : GrothendieckTopology C}
