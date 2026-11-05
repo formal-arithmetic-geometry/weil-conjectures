@@ -1,15 +1,22 @@
-# BZ569 in progress
+# BZ569 complete
 
 - Branch: `u9/BZ569`; assigned module: `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralReduction`.
 - Removed the redundant `rfl` after `simp` in the short-exactness proof.
-- First remote build stopped in the BZ581-owned prerequisite `Presheaf.InternalHom`.
 - The user instructed continuation after the concrete prerequisite-fix proposal.
   Incorporated the owner's identical repair `216c997cc4f` as `d63827975` with provenance.
 - Reused the KFlat prerequisite repair from BZ558 commit `cba570747cc` as `809822403`;
   BZ558's build diagnosed the same compatibility error, and KFlat is in our import closure.
 - The retry exposed the identical error in `KFlatResolutionIndependentCoefficients`;
   reused that hunk from the same published commit as `f21a10b88`.
-- Next: validate the assigned module, then four direct importers and a second layer.
+- Assigned module and downstream `WeilConjectures.SixFunctors.ProEtale.ModuleObject.ModPowReduction`
+  passed `ucheck-bump`: rc=0, failed=0, 4370 jobs, on `poolb:43.166.72.113`.
+- Validated source commit: `f830bc63ed9c0f62dea2233d4746f27a6153ba5b`.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ569-final-full.log`.
+- Tried four direct importers. `IntegralReductionConstructible`, `LisseLatticeValues`, and
+  `PushResidueShortExact` are blocked by unowned `CategoryTheory.Abelian.Ext.MapExactFunctor`.
+  The next-layer `DerivedComplete.RetractionLift` has the same blocker; skipped per brief.
+- Completion marker: `/home/ubuntu/u9/state/BZ569.DONE`.
+- This final commit changes only progress documentation; Lean sources match the green build.
 - Fix patterns, occurrence counts, and logs: `/home/ubuntu/u9/bz/FIXES-BZ569.md`.
 - No local Lean/Lake, statement changes, proof placeholders, or heartbeat increases.
 
