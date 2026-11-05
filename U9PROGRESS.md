@@ -326,3 +326,5 @@ derivedCondensedRealization before casting, including hmZ and htotal interfaces.
 2026-11-05 07:56 CST: 075345 rc=1 but both native model identifications and the total-square proof now PASS. Failure reaches final hright categorical rewrite with only 1.6s budget remaining. Move the model pasting and final cancellation into new generic ModelSquareCancellation lemmas, avoiding native rewriting. No further budget raise.
 
 2026-11-05 08:00 CST: 075629 rc=1; generic composition and cancellation BOTH PASS, reaching only the final proof-irrelevant hfinal conversion. Scoped 800k runs out in final cast after 84s cumulative elaboration. Use structural exact_mod_proofs in instance-only mode for a precise remaining mismatch, with scoped 1M budget based on this completed-chain measurement.
+
+2026-11-05 08:04 CST: 080021 final exact_mod_proofs candidate still running after 3m45 with RSS 7.2GB and increasing (no errors yet). Test incremental cast_proofs at the SAME 1M budget to avoid simultaneous-proof-cast kernel growth; raise profiler threshold to 20s to suppress huge nested traces. Focused derived-only check, existing integration job left running.
