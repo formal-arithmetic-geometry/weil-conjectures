@@ -160,11 +160,11 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
   dsimp only [L, V, F, R, nativeOpenPull, derivedCondensedRealization,
     Functor.comp_obj, Functor.prod_obj, Functor.uncurry_obj_obj,
     curriedTensor_obj_obj, MonoidalCategory.tensor_obj] at hfinal ⊢
-  run_tac liftIO <| IO.FS.writeFile "/tmp/K5-derived-0815-before-exact" "ready"
+  run_tac do IO.FS.writeFile "/tmp/K5-derived-0815-before-exact" "ready"
   with_reducible_and_instances exact hfinal
-  run_tac liftIO <| IO.FS.writeFile "/tmp/K5-derived-0815-proof-elaborated" "ready"
+  run_tac do IO.FS.writeFile "/tmp/K5-derived-0815-proof-elaborated" "ready"
 
-run_cmd liftIO <| IO.FS.writeFile "/tmp/K5-derived-0815-Q-checked" "ready"
+run_cmd do IO.FS.writeFile "/tmp/K5-derived-0815-Q-checked" "ready"
 
 include htotal in
 /-- The native pullback tensor square on arbitrary derived objects, extended from K-flat
