@@ -26,12 +26,7 @@ variable {A : Type*} [CommRing A] [Algebra ℚ A]
 
 /-- The derivative of `log (1 + X)` is the inverse of `1 + X`. -/
 theorem one_add_X_mul_derivative_log : (1 + X) * d⁄dX A (log A) = 1 := by
-  rw [deriv_log]
-  ext n
-  rcases n with _ | n
-  · simp
-  · rw [add_mul, one_mul, map_add, coeff_succ_X_mul, coeff_mk, coeff_mk, coeff_one,
-      if_neg n.succ_ne_zero, ← map_add, pow_succ, mul_neg_one, neg_add_cancel, map_zero]
+  simpa only [mul_comm] using (derivative_log_mul_one_add_X (A := A))
 
 /-- The formal logarithm `logOf f` of a series `f` with constant coefficient `1` is a
 logarithmic primitive of `f`: `f * (logOf f)' = f'`. -/
