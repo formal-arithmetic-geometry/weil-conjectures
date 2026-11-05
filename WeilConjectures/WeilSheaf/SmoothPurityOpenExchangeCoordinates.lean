@@ -43,7 +43,8 @@ theorem purity_exchangeLeft_coordinates (a : J ⊣ P₀) (a' : J' ⊣ P₀')
         Functor.whiskerLeft J h.inv := by
       rw [purity_exchangeLeft_eq_inverseMate a a' θ₀]
       apply (mateEquiv (a.ofNatIsoRight p) (a'.ofNatIsoRight p')).injective
-      rw [Equiv.apply_symm_apply, mateEquiv_comp_whiskerLeft, mateEquiv_whiskerRight_comp,
+      rw [Equiv.apply_symm_apply]
+      erw [← Category.assoc, mateEquiv_comp_whiskerLeft, mateEquiv_whiskerRight_comp,
         mateEquiv_ofNatIsoRight, Equiv.apply_symm_apply]
       ext K
       simpa only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
