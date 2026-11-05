@@ -393,7 +393,6 @@ lemma leftDerivedFunctor_map_smul_id
       (F.mapHomologicalComplex (.up ℤ)).map (a • 𝟙 P) = φ a • 𝟙 _ := by
     ext n
     simp [hF]
-    rfl
   -- on the homotopy category
   have hK (P : HomotopyCategory C (.up ℤ)) :
       (F.mapHomotopyCategory (.up ℤ)).map (a • 𝟙 P) = φ a • 𝟙 _ := by
