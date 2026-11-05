@@ -369,10 +369,10 @@ lemma stalkTensorEquiv_naturality {M' : X.Modules} (φ : M ⟶ M')
     (z : (M ⊗ N).presheaf.stalk x) :
     stalkTensorEquiv M' N x ((φ ▷ N).stalkLinearMap x z) =
       LinearMap.rTensor _ (φ.stalkLinearMap x) (stalkTensorEquiv M N x z) := by
-  induction z using stalk_tensor_induction with
-  | add a b ha hb => rw [map_add, map_add, map_add, map_add, ha, hb]
-  | tmul U hx m n =>
-    rw [Hom.stalkLinearMap_germ, whiskerRight_app_tmulSection, stalkTensorEquiv_germ_tmulSection,
+  refine stalk_tensor_induction z ?_ (fun a b ha hb ↦ ?_) (fun U hx m n ↦ ?_)
+  · simp only [map_zero]
+  · rw [map_add, map_add, map_add, map_add, ha, hb]
+  · rw [Hom.stalkLinearMap_germ, whiskerRight_app_tmulSection, stalkTensorEquiv_germ_tmulSection,
       stalkTensorEquiv_germ_tmulSection, LinearMap.rTensor_tmul, Hom.stalkLinearMap_germ]
 
 
