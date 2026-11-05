@@ -39,22 +39,22 @@ open CategoryTheory CategoryTheory.Limits
 noncomputable section
 namespace AlgebraicGeometry
 
-private theorem map_map_quotientCompQhIso_hom {A E E' : Type*} [Category* A] [Abelian A]
+private theorem map_map_quotientCompQhIso_hom_comp {A E E' : Type*} [Category* A] [Abelian A]
     [HasDerivedCategory A] [Category* E] [Category* E']
     (G : DerivedCategory A ⥤ E) (H : E ⥤ E')
-    (K : CochainComplex A ℤ) :
-    H.map (G.map ((DerivedCategory.quotientCompQhIso A).hom.app K)) =
-      𝟙 (H.obj (G.obj (DerivedCategory.Q.obj K))) := by
-  change H.map (G.map (𝟙 (DerivedCategory.Q.obj K))) = _
-  rw [G.map_id, H.map_id]
+    (K : CochainComplex A ℤ) {Z : E'}
+    (f : H.obj (G.obj (DerivedCategory.Q.obj K)) ⟶ Z) :
+    H.map (G.map ((DerivedCategory.quotientCompQhIso A).hom.app K)) ≫ f = f := by
+  change H.map (G.map (𝟙 (DerivedCategory.Q.obj K))) ≫ f = f
+  rw [G.map_id, H.map_id, Category.id_comp]
 
-private theorem map_quotientCompQhIso_inv {A E : Type*} [Category* A] [Abelian A]
+private theorem map_quotientCompQhIso_inv_comp {A E : Type*} [Category* A] [Abelian A]
     [HasDerivedCategory A] [Category* E] (G : DerivedCategory A ⥤ E)
-    (K : CochainComplex A ℤ) :
-    G.map ((DerivedCategory.quotientCompQhIso A).inv.app K) =
-      𝟙 (G.obj (DerivedCategory.Q.obj K)) := by
-  change G.map (𝟙 (DerivedCategory.Q.obj K)) = _
-  exact G.map_id _
+    (K : CochainComplex A ℤ) {Z : E}
+    (f : G.obj (DerivedCategory.Q.obj K) ⟶ Z) :
+    G.map ((DerivedCategory.quotientCompQhIso A).inv.app K) ≫ f = f := by
+  change G.map (𝟙 (DerivedCategory.Q.obj K)) ≫ f = f
+  rw [G.map_id, Category.id_comp]
 
 /-- Affine direct image is acyclic on quasi-coherent modules.
 Source: Stacks, Tags 01EO and 01XJ; the Čech dimension-shifting argument of
@@ -233,8 +233,8 @@ theorem exists_affineDerivedPushforwardSheafEdge
     change Epi U.π
     infer_instance
   simp only [Functor.map_comp] at hn
-  simp only [map_map_quotientCompQhIso_hom, map_quotientCompQhIso_inv,
-    Category.id_comp] at hn
+  simp only [Category.assoc, map_map_quotientCompQhIso_hom_comp,
+    map_quotientCompQhIso_inv_comp] at hn
   apply (cancel_epi ((F ⋙ S).map (M.sc i).homologyData.left.π)).mp
   apply (cancel_mono (γ.app ⟨_, hM⟩ ≫ δ.hom.app (DerivedCategory.Q.obj K))).mp
   simpa only [ε, NatTrans.comp_app, Functor.isoWhiskerLeft_inv,
