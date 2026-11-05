@@ -41,7 +41,7 @@ lemma preimageIso_liftSquareWithComparisons_comp :
         (preimageIso_liftSquareWithComparisons cG cG' hB hC eG) := by
   apply Iso.ext
   apply NatTrans.ext
-  intro K
+  funext K
   apply PC'.ι.map_injective
   rw [show PC'.ι.map _ = _ from
     preimageIso_liftSquareWithComparisons_hom_app_hom
@@ -65,3 +65,25 @@ lemma preimageIso_liftSquareWithComparisons_comp :
     ← G'.map_comp_assoc, Iso.inv_hom_id_app, Functor.map_id, Category.id_comp]
 
 end CategoryTheory.ObjectProperty
+
+namespace CategoryTheory.Adjunction
+
+variable {A B C A' B' C' : Type*}
+  [Category A] [Category B] [Category C] [Category A'] [Category B'] [Category C']
+  {F : A ⥤ B} {G : B ⥤ C} {F' : A' ⥤ B'} {G' : B' ⥤ C'}
+  {TA SA : A ⥤ A'} {TB SB : B ⥤ B'} {TC SC : C ⥤ C'}
+  (aA : SA ≅ TA) (aB : SB ≅ TB) (aC : SC ≅ TC)
+  (eF : F ⋙ TB ≅ TA ⋙ F') (eG : G ⋙ TC ≅ TB ⋙ G')
+
+/-- Changing the vertical coordinates of a pasted square cancels the comparison at
+its middle vertex. -/
+lemma compForgetIso_conjugate :
+    compForgetIso
+        (Functor.isoWhiskerLeft F aB ≪≫ eF ≪≫ Functor.isoWhiskerRight aA.symm F')
+        (Functor.isoWhiskerLeft G aC ≪≫ eG ≪≫ Functor.isoWhiskerRight aB.symm G') =
+      Functor.isoWhiskerLeft (F ⋙ G) aC ≪≫ compForgetIso eF eG ≪≫
+        Functor.isoWhiskerRight aA.symm (F' ⋙ G') := by
+  ext K
+  simp [compForgetIso, Functor.map_comp, Category.assoc, ← Functor.map_comp_assoc]
+
+end CategoryTheory.Adjunction
