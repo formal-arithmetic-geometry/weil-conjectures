@@ -250,3 +250,6 @@
 - Next: `ucheck-bump` on the leaf and three direct importers, then further unblocked layers.
 - Fix patterns and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ845.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+- Assigned leaf is GREEN at `09b5612398`: rebuilt successfully in 59 seconds.
+- Remote log: `/home/ubuntu/u9/logs/BZ845-20261106T075214.log`,
+  tree `poolb:43.166.81.121`. Direct-importer checks are still running.
