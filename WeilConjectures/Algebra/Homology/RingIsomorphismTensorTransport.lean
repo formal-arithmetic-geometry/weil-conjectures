@@ -287,6 +287,15 @@ private local instance scalarGradedHasTensor (A : Sheaf J CommRingCat.{r}) :
   intro X Y n
   exact (scalarSheafCoproducts A _).has_colimit _
 
+private local instance scalarSheafFiniteCoproducts (A : Sheaf J CommRingCat.{r}) :
+    HasFiniteCoproducts (scalarModules J A) :=
+  ⟨fun n ↦ scalarSheafSmallCoproducts A (Fin n)⟩
+
+private local instance scalarGradedHasTensor (A : Sheaf J CommRingCat.{r}) :
+    ∀ X Y : GradedObject ℤ (scalarModules J A), GradedObject.HasTensor X Y := by
+  intro X Y n
+  exact (scalarSheafSmallCoproducts A _).has_colimit _
+
 /-- The existing monoidal structure on module cochain complexes, cached for elaboration.
 Source: Stacks 03EK and 06YT
 (auxiliary; not a blueprint node). -/
