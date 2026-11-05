@@ -108,8 +108,8 @@ def Etale.baseChangeNbhd : Nbhd y ⥤ (pointSmallEtale t.1).fiber.Elements where
   obj c := ⟨f.Etale.obj c.1, CategoryTheory.Over.homMk (basePt f c t) (basePt_snd f c t)⟩
   map g := Functor.Elements.homMk (f.Etale.map g.val)
     (CategoryTheory.Over.OverMorphism.ext (basePt_comp_etale_map_left f g t))
-  map_id _ := CategoryOfElements.ext _ _ _ (f.Etale.map_id _)
-  map_comp _ _ := CategoryOfElements.ext _ _ _ (f.Etale.map_comp _ _)
+  map_id _ := Functor.Elements.hom_ext _ _ _ (f.Etale.map_id _)
+  map_comp _ _ := Functor.Elements.hom_ext _ _ _ (f.Etale.map_comp _ _)
 
 variable (G : Sheaf X.smallEtaleTopology A)
 
