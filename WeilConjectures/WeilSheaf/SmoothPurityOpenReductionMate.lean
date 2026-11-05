@@ -28,6 +28,24 @@ theorem isMateSquare_ofNatIsoRight_of_conjugate
   simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
     Iso.trans_hom, Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
     Iso.symm_hom, Category.assoc, ← T.map_comp_assoc, Iso.inv_hom_id_app,
-    T.map_id, Category.id_comp, Iso.inv_hom_id_app, Category.comp_id]
+    T.map_id, Category.id_comp, Iso.inv_hom_id_app, Category.comp_id, TwoSquare.natTrans]
 
 end CategoryTheory.Adjunction
+
+namespace CategoryTheory.NatTrans.SquareCompatible
+
+variable {A B A' B' : Type*} [Category A] [Category B] [Category A'] [Category B']
+  {T : A ⥤ A'} {U : B ⥤ B'} {F G : A ⥤ B} {F' G' : A' ⥤ B'}
+
+/-- Read a coefficient cube supplied in inverse-comparison coordinates. -/
+theorem of_inv_app (cF : F ⋙ U ≅ T ⋙ F') (cG : G ⋙ U ≅ T ⋙ G')
+    (α : F ⟶ G) (α' : F' ⟶ G')
+    (h : ∀ K, cF.inv.app K ≫ U.map (α.app K) = α'.app (T.obj K) ≫ cG.inv.app K) :
+    SquareCompatible cF cG α α' := by
+  intro K
+  apply (cancel_epi (cF.inv.app K)).mp
+  rw [← Category.assoc, h K]
+  simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id,
+    Iso.inv_hom_id_app_assoc]
+
+end CategoryTheory.NatTrans.SquareCompatible
