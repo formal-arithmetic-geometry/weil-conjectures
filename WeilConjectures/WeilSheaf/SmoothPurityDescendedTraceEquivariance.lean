@@ -9,13 +9,13 @@ public import WeilConjectures.WeilSheaf.SmoothPurityDescentSingle
 public import WeilConjectures.WeilSheaf.SmoothPurityDescentUnit
 public import WeilConjectures.WeilSheaf.SmoothPurityNativeTrace
 public import WeilConjectures.WeilSheaf.SmoothPurityNativeTraceCriterion
-public import WeilConjectures.WeilSheaf.TateTwistWeilDatum
+public import WeilConjectures.CategoryTheory.WeilEquivariance
 
 /-!
 # The Weil orientation from the descended finite-field trace (sorry ①, sub-problem A1+A2)
 
 Let `f : X ⟶ Y` be smooth separated of pure relative dimension `d` over the finite field `k₀`.
-The target `AlgebraicGeometry.WeilComplex.exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso`
+The target `WeilComplex.exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso`
 asks for an isomorphism `Rf^! ℚ̄_ℓ ≅ ℚ̄_ℓ(d)[2d]` of underlying complexes on the geometric fibre
 `X̄` which commutes with the Frobenius structures. By the reductions R1/R2 it is enough to produce
 an orientation `o : f̄^! ℚ̄_ℓ ≅ ℚ̄_ℓ(d)[2d]` whose trace `f̄_! ℚ̄_ℓ(d)[2d] ⟶ ℚ̄_ℓ` is Frobenius
@@ -23,14 +23,15 @@ equivariant.
 
 ## The route: descend the trace from `k₀` (A2) and test it geometrically (A1')
 
-* **A2 (Frobenius stability).** The smooth trace `Tr_f : Rf_! ℚ̄_ℓ,X(d)[2d] ⟶ ℚ̄_ℓ,Y` exists over the
-  finite field `k₀` itself (`AlgebraicGeometry.ProEtale.CondensedRing.smoothTrace`, smooth purity
-  holds over any field of characteristic `p ≠ ℓ`). Its pullback to the geometric fibre is a
+* **A2 (Frobenius stability).** The smooth trace `Tr_f : Rf_! ℚ̄_ℓ,X(d)[2d] ⟶ ℚ̄_ℓ,Y` exists over
+  the finite field `k₀` itself (`AlgebraicGeometry.ProEtale.CondensedRing.smoothTrace`, smooth
+  purity holds over any field of characteristic `p ≠ ℓ`). Its pullback to the geometric fibre is a
   morphism of *Weil* complexes `descendedSmoothTrace : Rf₀! ℚ̄_ℓ(d)[2d] ⟶ ℚ̄_ℓ`
   (K4's `traceOfDescendedSmoothTrace`, through the condensed descent
   `geometricFiberWeilSmoothTrace`), because the geometric Frobenius of `X̄ = X ×_{k₀} k̄` lies
   over `X`. Hence its underlying trace is automatically Frobenius equivariant
-  (`isWeilEquivariant_forget_map`): no normalization is needed for equivariance. This is the
+  (naturality of `Endofunctor.IsoAlgebra.derivedStrIso`): no normalization is needed for
+  equivariance. This is the
   precise content of "integration on `𝔸¹` is defined over `k₀`".
 * **A1' (universality).** What remains is that the descended trace is *universal*, i.e. its
   transpose `ℚ̄_ℓ(d)[2d] ⟶ f̄^! ℚ̄_ℓ` on `X̄` is an isomorphism: the hypothesis
@@ -50,7 +51,7 @@ equivariant.
 The main results are
 `AlgebraicGeometry.WeilComplex.nonempty_upperShriek_obj_adicConstant_iso_of_descendedTrace`
 (the Weil orientation `Rf^! ℚ̄_ℓ ≅ ℚ̄_ℓ(d)[2d]` as an isomorphism of Weil complexes) and
-`AlgebraicGeometry.WeilComplex.exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso_of_descendedTrace`
+`WeilComplex.exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso_of_descendedTrace`
 (the statement of sorry ①), both from `α` and `DescendedSmoothTraceUniversal`.
 -/
 
@@ -94,12 +95,6 @@ local instance : QuasiCompact (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom :
   inferInstanceAs (QuasiCompact (Y ↘ Spec (CommRingCat.of k₀)))
 local instance : IsSeparated (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom :=
   inferInstanceAs (IsSeparated (Y ↘ Spec (CommRingCat.of k₀)))
-local instance : (boundedConstructible (condensedRingObj
-    (Profinite.padicAlgClRingObj l) Y)).IsMonoidal :=
-  CondensedRing.isMonoidal_boundedConstructible l (Over.mk (Y ↘ Spec (CommRingCat.of k₀)))
-noncomputable local instance : MonoidalCategory (BoundedConstructible
-    (condensedRingObj (Profinite.padicAlgClRingObj l) Y)) :=
-  ObjectProperty.fullMonoidalSubcategory _
 
 /-- The native Tate line `ℚ̄_ℓ,X(d)[2d]` as a Weil complex (the target of the orientation in
 `exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso`). -/
@@ -147,6 +142,11 @@ noncomputable def descendedUnitTargetIso :
         (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l Y)).obj ≅
       (CondensedRing.geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l)
         (Y ↘ Spec (CommRingCat.of k₀))).mapDerivedCategory.obj (𝟙_ _) :=
+  letI : (boundedConstructible
+      (condensedRingObj (Profinite.padicAlgClRingObj l) Y)).IsMonoidal :=
+    CondensedRing.isMonoidal_boundedConstructible l (Over.mk (Y ↘ Spec (CommRingCat.of k₀)))
+  letI := ObjectProperty.fullMonoidalSubcategory
+    (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj l) Y))
   (ProEtaleWeilSheaf.derivedEquivCondensed k₀ l Y).functor.mapIso
       ((objectProperty k₀ l Y).ι.mapIso
         (finiteBaseNativeDescentUnitIso (k₀ := k₀) (l := l) (X := Y)).symm) ≪≫
@@ -155,7 +155,8 @@ noncomputable def descendedUnitTargetIso :
 /-- **A2: the descended smooth trace.** The finite-field smooth trace
 `Tr_f : Rf_! ℚ̄_ℓ,X(d)[2d] ⟶ ℚ̄_ℓ,Y`, pulled back to the geometric fibre as a morphism of Weil
 complexes `Rf₀! ℚ̄_ℓ(d)[2d] ⟶ ℚ̄_ℓ`. Its underlying geometric trace is Frobenius equivariant
-because it is a morphism of Weil complexes (`isWeilEquivariant_forget_map`). -/
+because it is a morphism of Weil complexes (naturality of
+`Endofunctor.IsoAlgebra.derivedStrIso`). -/
 noncomputable def descendedSmoothTrace :
     (derivedLowerShriek k₀ l f).obj (purityTateShift (k₀ := k₀) (l := l) (X := X) d) ⟶
       WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l Y) :=
@@ -229,6 +230,6 @@ theorem exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso_of_descend
           (Endofunctor.IsoAlgebra.derivedStrIso _).hom.app (((tateTwist k₀ l X d).obj
             (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)))⟦(2 * d : ℤ)⟧).obj := by
   obtain ⟨e⟩ := nonempty_upperShriek_obj_adicConstant_iso_of_descendedTrace f α h
-  exact ⟨forget.mapIso e, (isWeilEquivariant_forget_map e.hom).symm⟩
+  exact ⟨forget.mapIso e, ((Endofunctor.IsoAlgebra.derivedStrIso _).hom.naturality e.hom.hom).symm⟩
 
 end AlgebraicGeometry.WeilComplex
