@@ -92,34 +92,4 @@ private theorem localizedPullbackStrictlyPerfect {T X : Scheme.{u}} (g : T ⟶ X
     simp only [Category.assoc, Iso.hom_inv_id_assoc, ← Functor.map_comp, hιπ]
     exact F.map_id _
 
-/-- Derived pullback of a perfect complex is perfect.
-Source: Stacks Project, perfect.tex, Tag 09UA
-(blueprint: lem-pc-derived-pullback-perfect).
-Proof: at t choose a strictly perfect local model K on a neighbourhood U of g(t).
-The constructed functor `Scheme.Modules.localizedPullback g U` carries K to a complex
-on the localized site of the inverse-image open. Its unit-sheaf isomorphism and
-preservation of coproducts identify every pulled finite free module with a finite free
-module of the same rank. Applying the functor to the given retract maps and transporting
-through this isomorphism preserves their splitting equation. Additivity preserves the
-zero terms outside the original finite interval. Thus the pulled complex is strictly
-perfect. The proved `localizedPullback_perfectModel_iso` identifies its derived object
-with the restriction of Lg* E, using the existing restriction comparison and
-`flatComplexDerivedPullback` on the transported model. This supplies the local witness
-at t, including empty schemes and zero complexes. -/
-theorem derivedPullback_preserve_perfect {T X : Scheme.{u}} (g : T ⟶ X)
-    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
-    [∀ U : X.Opens, HasDerivedCategory.{w}
-      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]
-    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings T.toRingedSpace))]
-    [∀ U : T.Opens, HasDerivedCategory.{w}
-      (SheafOfModules.{u} ((moduleRings T.toRingedSpace).over U))]
-    (E : schemeDerivedCategory X) (hE : Scheme.IsPerfect X E) :
-    Scheme.IsPerfect T ((derivedPullback g).obj E) := by
-  intro t
-  obtain ⟨U, ht, K, hK, ⟨e⟩⟩ := hE (g t)
-  refine ⟨g ⁻¹ᵁ U, ht,
-    ((Scheme.Modules.localizedPullback g U).mapHomologicalComplex (.up ℤ)).obj K,
-    localizedPullbackStrictlyPerfect g U K hK, ?_⟩
-  exact localizedPullback_perfectModel_iso g U E K hK e
-
 end AlgebraicGeometry
