@@ -70,7 +70,6 @@ theorem injectiveResolutionDerivedComparison_naturality
     ((v.mapHomotopy hh).extend ComplexShape.embeddingUpNat)
   simp only [injectiveResolutionDerivedComparison, Functor.comp_map, Category.assoc]
   rw [← Functor.map_comp_assoc, hc, Functor.map_comp, Category.assoc]
-  erw [DerivedCategory.quotientCompQhIso_hom_naturality_assoc]
   rw [← DerivedCategory.Q.map_comp_assoc]
   erw [he, Functor.map_comp, Category.assoc]
   simp only [Functor.map_comp, HomologicalComplex.extendMap_comp] at hq
@@ -78,7 +77,6 @@ theorem injectiveResolutionDerivedComparison_naturality
     Functor.map_comp, Category.assoc] using
     congrArg (fun g ↦ DerivedCategory.Plus.ι.map
       (v.rightDerivedFunctorPlusObjSingleFunctorIsoQ X).hom ≫
-      (DerivedCategory.quotientCompQhIso B).hom.app _ ≫
       DerivedCategory.Q.map
         ((injectiveResolution X).cocomplex.mapExtendIso ComplexShape.embeddingUpNat v).hom ≫ g)
       hq

@@ -52,7 +52,7 @@ noncomputable def ordinaryOpenExtensionBaseChangeIso
         (upperStar (ModuleCat.{u + 1} Λ) g).mapDerivedCategory ≅
       (upperStar (ModuleCat.{u + 1} Λ) gU).mapDerivedCategory ⋙
         (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j').mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso
       ((conjugateIsoEquiv
         ((openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j).comp
@@ -62,6 +62,6 @@ noncomputable def ordinaryOpenExtensionBaseChangeIso
             (ModuleCat.{u + 1} Λ) j'))).symm
         (@asIso _ _ _ _ (ProEtale.baseChangeMap (ModuleCat.{u + 1} Λ) hsq.toCommSq)
           (ProEtale.isIso_baseChangeMap_of_isPullback (ModuleCat.{u + 1} Λ) hsq))).symm ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 end AlgebraicGeometry.ProEtale
