@@ -135,3 +135,29 @@
   trees are currently busy. Queueing the same checks while that slot is occupied
   so the next warm slot can reuse C6's completed shared artifacts; stop the cold
   duplicate once the warm run is confirmed. No proof error has appeared on K6.
+- Warm final batch confirmed on slopci-w3 at66d6d02f9d, log
+  /home/ubuntu/u9/logs/K6-20261105T114410.log. Stopped only the cold duplicate
+  newsrv service u9-K6-1793849988. Its wrapper printed rc0 after the explicit
+  service stop, but it did NOT finish the targets and is NOT a green validation.
+  The real final check is the still-running warm batch above.
+- GREEN: final ucheck of all six requested modules returned rc0, built3 failed0,
+  and `Build completed successfully (22823 jobs)` at66d6d02f9d. Log:
+  /home/ubuntu/u9/logs/K6-20261105T114410.log.
+- OtherSections compiled in8s; the hardened Thom dependency audit compiled in11s.
+  It reports exactly one direct admitted dependency:
+  AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_adjunction_of_smooth.
+  Unavailable dependency bodies: []. The audit rejects the affine-line trace
+  dependency and unexpected axioms; both checks passed.
+- The original homotopy-invariance leaf, the constant and lisse input theorems,
+  smooth base change, and twist/shift pullback compatibility each have only
+  [propext, Classical.choice, Quot.sound]. The original leaf is still sorry-free.
+- New assignment resolved by LEAD route B: the unchanged Thom USER theorem is
+  proved, so the admitted exists_weilTrace_of_isPullback and its old adjunction
+  wrapper are unused by this route. The trace statement is retained unchanged
+  and documented unused in AffineLineSmoothAdjunction and DONE.
+- Remaining admitted input is K4's smooth-purity adjunction (allowed by the brief;
+  lead decides). Its future pr2110 separated-base strengthening requires the
+  pr2097 propagation or a separate descent argument. No K4 statement was edited.
+- Final commit changes only this log; all Lean sources are exactly the checked
+  sources at66d6d02f9d. K6.DONE records the final commit, files, logs, proof summary,
+  explicit remaining dependency, and integration caveat.
