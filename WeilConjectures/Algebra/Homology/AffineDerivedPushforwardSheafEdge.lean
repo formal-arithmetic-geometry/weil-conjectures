@@ -215,11 +215,12 @@ theorem exists_affineDerivedPushforwardSheafEdge
     change Epi U.π
     infer_instance
   simp only [Functor.map_comp] at hn
-  have hqC : (DerivedCategory.quotientCompQhIso C).hom.app K = 𝟙 _ := rfl
-  have hqD : (DerivedCategory.quotientCompQhIso D).inv.app
-      ((S.mapHomologicalComplex (.up ℤ)).obj K) = 𝟙 _ := rfl
-  have hqD' : (DerivedCategory.quotientCompQhIso D).inv.app
-      (((F ⋙ S).mapHomologicalComplex (.up ℤ)).obj M) = 𝟙 _ := rfl
+  simp only [DerivedCategory.quotientCompQhIso,
+    HomologicalComplexUpToQuasiIso.quotientCompQhIso,
+    Quotient.lift.isLift_hom, Quotient.lift.isLift_inv] at hn
+  erw [S.rightDerivedFunctor.map_id, (DerivedCategory.homologyFunctor D i).map_id,
+    (DerivedCategory.homologyFunctor D i).map_id] at hn
+  simp only [Category.id_comp, Category.comp_id] at hn
   apply (cancel_epi ((F ⋙ S).map (M.sc i).homologyData.left.π)).mp
   apply (cancel_mono (γ.app ⟨_, hM⟩ ≫ δ.hom.app (DerivedCategory.Q.obj K))).mp
   simpa only [ε, NatTrans.comp_app, Functor.isoWhiskerLeft_inv,
@@ -228,10 +229,7 @@ theorem exists_affineDerivedPushforwardSheafEdge
     γ, S, T, U, K, ι, H, f, X, Y, C, D, Functor.whiskerRight_app, ObjectProperty.ι_obj,
     ShortComplex.LeftHomologyData.map_π, ShortComplex.mapHomologyIso,
     Functor.comp_map, Functor.map_comp, Functor.mapHomologicalComplex, Functor.comp_obj,
-    cast_eq, hqC, hqD, hqD', Functor.map_id,
-    DerivedCategory.quotientCompQhIso,
-    HomologicalComplexUpToQuasiIso.quotientCompQhIso,
-    Quotient.lift.isLift_hom, Quotient.lift.isLift_inv]
+    cast_eq]
     using hn.symm
 
 end AlgebraicGeometry
