@@ -260,7 +260,7 @@ theorem hasProd_inv_one_sub_pow (hd : ∀ i, d i ≠ 0) (hfin : ∀ n, {i | d i 
     intro T
     calc ∏ i ∈ T, (1 - ‖z‖ ^ d i)⁻¹
         ≤ ∏ i ∈ T, Real.exp (‖z‖ ^ d i / (1 - ‖z‖)) :=
-          Finset.prod_le_prod
+          Finset.prod_le_prod₀
             (fun i _ ↦ inv_nonneg.mpr (by
               have := pow_lt_one₀ hz0 hz (hd i)
               linarith))
