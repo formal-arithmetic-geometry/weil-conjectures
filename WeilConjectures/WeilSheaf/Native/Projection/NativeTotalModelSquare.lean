@@ -39,6 +39,8 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   [Y.Over (Spec (CommRingCat.of k₀))]
   (g : Z ⟶ Y) [g.IsOver (Spec (CommRingCat.of k₀))]
 
+set_option maxHeartbeats 400000 in
+-- Forming the native model parameters exhausted 200000 heartbeats after 13.6s.
 /-- The model form of the native total square, with its geometric data named once. -/
 def NativeTotalModelSquare (P T : CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ) : Prop :=
   let L := upperStar k₀ l g
