@@ -624,6 +624,18 @@ noncomputable local instance ringedSiteRestrictedUnitSMul
           f).hom).obj (M.val.obj (op W.unop.left))) :=
   (M.val.obj (op W.unop.left)).isModule.toSMul
 
+noncomputable local instance ringedSiteRestrictedIdentityUnitSMul
+    (M : SheafOfModules.{max c v r}
+      ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R))
+    {U V : Cᵒᵖ} (f : U ⟶ V) :
+    SMul (((PresheafOfModules.restrictOver R.obj V.unop).obj
+      ((ringedSiteDualityUnitComplex.{c, v, r} J R).X 0).val).obj
+        (op (Over.mk (𝟙 V.unop))))
+      ((ModuleCat.restrictScalars
+        (((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R).obj.map
+          f).hom).obj (M.val.obj V)) :=
+  (M.val.obj V).isModule.toSMul
+
 -- These unused generated lemmas expand the native derived coefficient category.
 set_option genSizeOfSpec false in
 set_option genInjectivity false in
@@ -1178,109 +1190,130 @@ end NormalizedSymmetry
 
 attribute [local semireducible] coefficientTotalTensor
 
+private theorem ringedSiteTensorSymmetryModel
+    (M : RingedSiteDualityModel.{c, v, r, w} J R) :
+    RingedDerivedTensorSymmetryModel.{c, v, r, w} J R M.closed M.models M.symmetric := by
+  intro P Q hP hQ
+  obtain ⟨σ, hσ, he⟩ := M.symmetry_model P Q hP hQ
+  have hs : σ = (β_ P Q).hom := by
+    apply tensorGenerator_ext.{c, v, r} J R
+    intro p q k hpq U x y
+    have hqp : q + p = k := (add_comm q p).trans hpq
+    exact (hσ p q k hpq hqp U x y).trans
+      ((RingedDerivedNative.complexConstraints.{c, v, r} J R).symmetry
+        P Q p q k hpq hqp U x y).symm
+  exact ⟨β_ P Q, (RingedDerivedNative.complexConstraints.{c, v, r} J R).symmetry P Q,
+    hs ▸ he⟩
+
+private theorem ringedSiteTensorAssociatorModel
+    (M : RingedSiteDualityModel.{c, v, r, w} J R)
+    (t : RingedDerivedTensorComparison.{c, v, r, w} J R M.closed)
+    (ht : RingedDerivedTensorBothModel.{c, v, r, w} J R M.closed M.models t) :
+    RingedDerivedTensorAssociatorModel.{c, v, r, w} J R M.closed M.models t := by
+  intro P Q N hP hQ hN
+  obtain ⟨a, ha, he⟩ := M.associator_model P Q N hP hQ hN
+  have heq : a = (α_ P Q N).hom := by
+    apply tensorGenerator_ext₃.{c, v, r} J R
+    intro p q t i k hpq hit U x y z
+    have hpj : p + (q + t) = k := by omega
+    exact (ha p q t i (q + t) k hpq hit rfl hpj U x y z).trans
+      ((RingedDerivedNative.complexConstraints.{c, v, r} J R).associator
+        P Q N p q t i (q + t) k hpq rfl hit hpj U x y z).symm
+  refine ⟨α_ P Q N,
+    (RingedDerivedNative.complexConstraints.{c, v, r} J R).associator P Q N, ?_⟩
+  rw [ht _ N (coefficientTotalTensor_isKFlat.{r, c, v} J R P Q hP hQ) hN,
+    ht P _ hP (coefficientTotalTensor_isKFlat.{r, c, v} J R Q N hQ hN)]
+  exact heq ▸ he
+
+private theorem ringedSiteTensorRightUnitorModel
+    (M : RingedSiteDualityModel.{c, v, r, w} J R)
+    (t : RingedDerivedTensorComparison.{c, v, r, w} J R M.closed)
+    (ht : RingedDerivedTensorBothModel.{c, v, r, w} J R M.closed M.models t) :
+    RingedDerivedTensorRightUnitorModel.{c, v, r, w} J R M.closed t M.unitIso := by
+  intro P hP
+  obtain ⟨ρ, hρ, he⟩ := M.unit_model P hP
+  have heq : ρ = (ρ_ P).hom := by
+    apply HomologicalComplex.hom_ext
+    intro k
+    apply HomologicalComplex.mapBifunctor.hom_ext
+      (K₁ := P) (K₂ := ringedTensorUnitComplex.{c, v, r} J R)
+      (F := curriedTensor (RingedTensorModules.{c, v, r} J R)) (c := .up ℤ)
+    intro p q hpq
+    change p + q = k at hpq
+    by_cases hq : q = 0
+    · subst q
+      have hk : k = p := by omega
+      subst hk
+      apply pure_ext.{c, v, r} J R (P.X k)
+        ((ringedTensorUnitComplex.{c, v, r} J R).X 0) (P.X k)
+      intro U x a
+      exact (hρ k U x a).trans
+        ((RingedDerivedNative.complexConstraints.{c, v, r} J R).rightUnitor
+          P k (Int.add_zero k) U a x).symm
+    · apply IsZero.eq_of_src
+      exact (tensorLeft (P.X p)).map_isZero
+        (HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 _ q hq)
+  refine ⟨ρ_ P, (RingedDerivedNative.complexConstraints.{c, v, r} J R).rightUnitor P, ?_⟩
+  rw [ht P (ringedTensorUnitComplex.{c, v, r} J R) hP M.unitKFlat]
+  exact heq ▸ he
+
+private theorem ringedSiteTensorLeftUnitorModel
+    (M : RingedSiteDualityModel.{c, v, r, w} J R)
+    (t : RingedDerivedTensorComparison.{c, v, r, w} J R M.closed)
+    (ht : RingedDerivedTensorBothModel.{c, v, r, w} J R M.closed M.models t) :
+    RingedDerivedTensorLeftUnitorModel.{c, v, r, w} J R M.closed t M.unitIso := by
+  let S := M.closed
+  let s := M.symmetric
+  let u := M.unitIso
+  have hs := ringedSiteTensorSymmetryModel J R M
+  have hr := ringedSiteTensorRightUnitorModel J R M t ht
+  intro P hP
+  obtain ⟨σ, hσ, heσ⟩ := hs
+    (ringedTensorUnitComplex.{c, v, r} J R) P M.unitKFlat hP
+  obtain ⟨ρ, hρ, heρ⟩ := hr P hP
+  refine ⟨σ ≪≫ ρ, ?_, ?_⟩
+  · intro n hn U a x
+    change (ρ.hom.f n).val.app U ((σ.hom.f n).val.app U
+      (coefficientTensorGenerator.{r, c, v} J R
+        (ringedTensorUnitComplex.{c, v, r} J R) P 0 n n hn U
+        (ringedTensorUnitSection.{c, v, r} J R U a) x)) = _
+    rw [hσ 0 n n hn (Int.add_zero n) U _ x]
+    simpa only [zero_mul, Int.negOnePow_zero, one_smul] using hρ n (Int.add_zero n) U a x
+  · let := S.monoidal
+    let := s
+    rw [ht (ringedTensorUnitComplex.{c, v, r} J R) P M.unitKFlat hP]
+    have hu : S.tensor.map
+        (X := (DerivedCategory.Q.obj (ringedTensorUnitComplex.{c, v, r} J R),
+          DerivedCategory.Q.obj P))
+        (Y := (S.monoidal.tensorUnit, DerivedCategory.Q.obj P))
+        (u.inv, 𝟙 (DerivedCategory.Q.obj P)) ≫
+        (λ_ (DerivedCategory.Q.obj P)).hom =
+      (s.braiding (DerivedCategory.Q.obj
+        (ringedTensorUnitComplex.{c, v, r} J R)) (DerivedCategory.Q.obj P)).hom ≫
+        S.tensor.map
+          (X := (DerivedCategory.Q.obj P,
+            DerivedCategory.Q.obj (ringedTensorUnitComplex.{c, v, r} J R)))
+          (Y := (DerivedCategory.Q.obj P, S.monoidal.tensorUnit))
+          (𝟙 (DerivedCategory.Q.obj P), u.inv) ≫
+          (ρ_ (DerivedCategory.Q.obj P)).hom := by
+      change (u.inv ⊗ₘ 𝟙 _) ≫ (λ_ _).hom =
+        (β_ _ _).hom ≫ (𝟙 _ ⊗ₘ u.inv) ≫ (ρ_ _).hom
+      rw [← braiding_rightUnitor,
+        BraidedCategory.braiding_naturality_assoc]
+    rw [hu, ← Category.assoc, heσ]
+    simp only [Category.assoc]
+    rw [← ht P (ringedTensorUnitComplex.{c, v, r} J R) hP M.unitKFlat,
+      heρ, ← Functor.map_comp]
+    rfl
+
 private theorem ringedSiteTensorCoherence
     (M : RingedSiteDualityModel.{c, v, r, w} J R) :
     ∃ K : RingedDerivedTensorCoherence.{c, v, r, w} J R M.closed M.models M.symmetric,
       K.unitIso = M.unitIso := by
-  let S := M.closed
-  let T := M.models
-  let s := M.symmetric
-  let u := M.unitIso
-  obtain ⟨t, ht, hn⟩ := ringedTensorComparison_extension.{c, v, r, w} J R S T
-  have hs : RingedDerivedTensorSymmetryModel.{c, v, r, w} J R S T s := by
-    intro P Q hP hQ
-    obtain ⟨σ, hσ, he⟩ := M.symmetry_model P Q hP hQ
-    have hs : σ = (β_ P Q).hom := by
-      apply tensorGenerator_ext.{c, v, r} J R
-      intro p q k hpq U x y
-      have hqp : q + p = k := (add_comm q p).trans hpq
-      exact (hσ p q k hpq hqp U x y).trans
-        ((RingedDerivedNative.complexConstraints.{c, v, r} J R).symmetry
-          P Q p q k hpq hqp U x y).symm
-    exact ⟨β_ P Q, (RingedDerivedNative.complexConstraints.{c, v, r} J R).symmetry P Q,
-      hs ▸ he⟩
-  have ha : RingedDerivedTensorAssociatorModel.{c, v, r, w} J R S T t := by
-    intro P Q N hP hQ hN
-    obtain ⟨a, ha, he⟩ := M.associator_model P Q N hP hQ hN
-    have heq : a = (α_ P Q N).hom := by
-      apply tensorGenerator_ext₃.{c, v, r} J R
-      intro p q t i k hpq hit U x y z
-      have hpj : p + (q + t) = k := by omega
-      exact (ha p q t i (q + t) k hpq hit rfl hpj U x y z).trans
-        ((RingedDerivedNative.complexConstraints.{c, v, r} J R).associator
-          P Q N p q t i (q + t) k hpq rfl hit hpj U x y z).symm
-    refine ⟨α_ P Q N,
-      (RingedDerivedNative.complexConstraints.{c, v, r} J R).associator P Q N, ?_⟩
-    rw [ht _ N (coefficientTotalTensor_isKFlat.{r, c, v} J R P Q hP hQ) hN,
-      ht P _ hP (coefficientTotalTensor_isKFlat.{r, c, v} J R Q N hQ hN)]
-    exact heq ▸ he
-  have hr : RingedDerivedTensorRightUnitorModel.{c, v, r, w} J R S t u := by
-    intro P hP
-    obtain ⟨ρ, hρ, he⟩ := M.unit_model P hP
-    have heq : ρ = (ρ_ P).hom := by
-      apply HomologicalComplex.hom_ext
-      intro k
-      apply HomologicalComplex.mapBifunctor.hom_ext
-        (K₁ := P) (K₂ := ringedTensorUnitComplex.{c, v, r} J R)
-        (F := curriedTensor (RingedTensorModules.{c, v, r} J R)) (c := .up ℤ)
-      intro p q hpq
-      change p + q = k at hpq
-      by_cases hq : q = 0
-      · subst q
-        have hk : k = p := by omega
-        subst hk
-        apply pure_ext.{c, v, r} J R (P.X k)
-          ((ringedTensorUnitComplex.{c, v, r} J R).X 0) (P.X k)
-        intro U x a
-        exact (hρ k U x a).trans
-          ((RingedDerivedNative.complexConstraints.{c, v, r} J R).rightUnitor
-            P k (Int.add_zero k) U a x).symm
-      · apply IsZero.eq_of_src
-        exact (tensorLeft (P.X p)).map_isZero
-          (HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 _ q hq)
-    refine ⟨ρ_ P, (RingedDerivedNative.complexConstraints.{c, v, r} J R).rightUnitor P, ?_⟩
-    rw [ht P (ringedTensorUnitComplex.{c, v, r} J R) hP M.unitKFlat]
-    exact heq ▸ he
-  have hl : RingedDerivedTensorLeftUnitorModel.{c, v, r, w} J R S t u := by
-    intro P hP
-    obtain ⟨σ, hσ, heσ⟩ := hs
-      (ringedTensorUnitComplex.{c, v, r} J R) P M.unitKFlat hP
-    obtain ⟨ρ, hρ, heρ⟩ := hr P hP
-    refine ⟨σ ≪≫ ρ, ?_, ?_⟩
-    · intro n hn U a x
-      change (ρ.hom.f n).val.app U ((σ.hom.f n).val.app U
-        (coefficientTensorGenerator.{r, c, v} J R
-          (ringedTensorUnitComplex.{c, v, r} J R) P 0 n n hn U
-          (ringedTensorUnitSection.{c, v, r} J R U a) x)) = _
-      rw [hσ 0 n n hn (Int.add_zero n) U _ x]
-      simpa only [zero_mul, Int.negOnePow_zero, one_smul] using hρ n (Int.add_zero n) U a x
-    · let := S.monoidal
-      let := s
-      rw [ht (ringedTensorUnitComplex.{c, v, r} J R) P M.unitKFlat hP]
-      have hu : S.tensor.map
-          (X := (DerivedCategory.Q.obj (ringedTensorUnitComplex.{c, v, r} J R),
-            DerivedCategory.Q.obj P))
-          (Y := (S.monoidal.tensorUnit, DerivedCategory.Q.obj P))
-          (u.inv, 𝟙 (DerivedCategory.Q.obj P)) ≫
-          (λ_ (DerivedCategory.Q.obj P)).hom =
-        (s.braiding (DerivedCategory.Q.obj
-          (ringedTensorUnitComplex.{c, v, r} J R)) (DerivedCategory.Q.obj P)).hom ≫
-          S.tensor.map
-            (X := (DerivedCategory.Q.obj P,
-              DerivedCategory.Q.obj (ringedTensorUnitComplex.{c, v, r} J R)))
-            (Y := (DerivedCategory.Q.obj P, S.monoidal.tensorUnit))
-            (𝟙 (DerivedCategory.Q.obj P), u.inv) ≫
-            (ρ_ (DerivedCategory.Q.obj P)).hom := by
-        change (u.inv ⊗ₘ 𝟙 _) ≫ (λ_ _).hom =
-          (β_ _ _).hom ≫ (𝟙 _ ⊗ₘ u.inv) ≫ (ρ_ _).hom
-        rw [← braiding_rightUnitor,
-          BraidedCategory.braiding_naturality_assoc]
-      rw [hu, ← Category.assoc, heσ]
-      simp only [Category.assoc]
-      rw [← ht P (ringedTensorUnitComplex.{c, v, r} J R) hP M.unitKFlat,
-        heρ, ← Functor.map_comp]
-      rfl
-  exact ⟨⟨t, ht, hn, u, hs, ha, hl, hr⟩, rfl⟩
+  obtain ⟨t, ht, hn⟩ := ringedTensorComparison_extension.{c, v, r, w} J R M.closed M.models
+  exact ⟨⟨t, ht, hn, M.unitIso, ringedSiteTensorSymmetryModel J R M,
+    ringedSiteTensorAssociatorModel J R M t ht, ringedSiteTensorLeftUnitorModel J R M t ht,
+    ringedSiteTensorRightUnitorModel J R M t ht⟩, rfl⟩
 
 set_option maxHeartbeats 800000 in
 -- The fixed derived Hom comparisons have dependent instance arguments.
