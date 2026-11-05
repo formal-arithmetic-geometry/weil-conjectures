@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
+public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.Topology.QuasiSeparated
 import WeilConjectures.AlgebraicGeometry.SupportedOpenPushforward
 import WeilConjectures.Algebra.Homology.OpenRestrictionAdjunctionExact
