@@ -307,7 +307,7 @@ theorem isColimit_invertible_symmetricAlgebra_cofan {X : Scheme.{u}}
     let e (U : X.affineOpens) := LinearEquiv.ofBijective (sumB U) ⟨hinj U, hsurj U⟩
     let localMap (U : X.affineOpens) : Γ(N, U.1) →ₗ[Γ(X, U.1)] Γ(M, U.1) :=
       (DirectSum.toModule (Γ(X, U.1)) ℕ (Γ(M, U.1))
-        (fun d ↦ ((c d).val.app (op U.1)).hom)).comp (e U).symm.toLinearMap
+        (fun d ↦ ((c d).val.app (op U.1)).hom)) ∘ₗ (e U).symm.toLinearMap
     have localFac (U : X.affineOpens) (d : ℕ) (s : Γ(L.tensorPow d, U.1)) :
         localMap U ((b d).app U.1 s) = (c d).app U.1 s := by
       have he : e U (DirectSum.lof (Γ(X, U.1)) ℕ
