@@ -99,6 +99,7 @@ theorem schemeMVOpenComposition_complex_localization
   erw [← (schemeDerivedDirectImage W.ι).map_comp_assoc, Iso.hom_inv_id_app,
     (schemeDerivedDirectImage W.ι).map_id, Category.id_comp]
   erw [β.hom.naturality, DerivedCategory.quotientCompQhIso_inv_naturality_assoc]
+  repeat erw [Category.id_comp]
   have ht := congrArg (fun t ↦
     (DerivedCategory.quotientCompQhIso _).inv.app
       ((F.mapHomologicalComplex (.up ℤ)).obj ((RX.mapHomologicalComplex (.up ℤ)).obj J)) ≫
