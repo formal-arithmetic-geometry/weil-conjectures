@@ -67,19 +67,22 @@
 - Completion marker: `/home/ubuntu/u9/state/BZ154.DONE`.
 - This completion commit changes only progress documentation; Lean sources match the green build.
 
+# BZ229 complete
 
-# BZ228 complete
-
-- Branch: `u9/BZ228`; starting commit: `c0384594d`.
-- Assigned module: `WeilConjectures.CategoryTheory.Abelian.DerivedCyclesUnitNaturality`.
-- Passed `ucheck-bump`: rc=0, failed=0, 1930 jobs; target rebuilt in 3.5 seconds.
-- Validated source commit: `58356b8d4fcc893861064280b373d19a3f95f96d`.
-- Full log: `/home/ubuntu/u9/bz/BUILD-BZ228-final-full.log`.
-- The user instructed continuation after the explicit canonical-transport proposal;
-  that exact statement patch is applied and validated. All other statement terms
-  and existing docstrings remain unchanged.
-- Added localization imports and simplified identity comparison factors in the proof.
-- Fix patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ228.md`.
-- No local Lean/Lake execution, sorries, trust escapes, or heartbeat increases.
-- Completion marker: `/home/ubuntu/u9/state/BZ228.DONE`.
-- This completion commit changes only progress documentation after the green build.
+- Branch: `u9/BZ229`; starting commit: `c0384594d`.
+- Assigned module: `WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraDerivedRightAdjointLift`.
+- The module passed `ucheck-bump`: rc=0, failed=0, 2110 jobs; target rebuilt in 10 seconds.
+- Validated source commit: `0673016c02360dade89345e38fc576c7609cf662`.
+- Build tree: `newsrv:/home/ubuntu/u9n/bumpw1`.
+- Full build log: `/home/ubuntu/u9/bz/BUILD-BZ229-final-full.log`.
+- The user instructed continuation after the explicit one-token statement correction proposal.
+  Applied `.hom` -> `.inv` in the composition-factor helper to preserve its original map
+  after adopting Mathlib's reversed composition isomorphism. Other statement types and
+  all existing docstrings are unchanged.
+- Definition bodies and inverse cancellation now use the new composition orientation.
+  Two trailing `rfl` tactics after `simp` were removed. The final `rfl` after `erw` is needed
+  in this module and is retained.
+- Fix patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ229.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ229.DONE`.
+- This completion commit changes only progress documentation; Lean source matches the green build.
