@@ -157,6 +157,8 @@
   DerivedMorphismSheafComparison (BZ513), KFlatResolutionGeneral (BZ116), and
   RingedTopoiDerivedPullback (BZ554), and HomTensorPair (BZ92). No second layer or downstream edits.
 - Owned module also rebuilt green at `2ba35ef7bd` in the downstream batch.
+- Stopped the optional downstream batch after its four unowned failures (wrapper rc=255;
+  built=144, failed=4). Log: `/home/ubuntu/u9/bz/BUILD-BZ540-downstream-full.log`.
 - Contract audit: `/home/ubuntu/u9/bz/BZ540-contract-audit.txt`.
 - No local Lean/Lake, sorries, admissions, trust bypasses, or heartbeat increases.
 - Completion marker: `/home/ubuntu/u9/state/BZ540.DONE`.
