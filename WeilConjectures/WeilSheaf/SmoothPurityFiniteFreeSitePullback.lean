@@ -73,6 +73,7 @@ lemma purityComparisonFreePullbackIso_conjugate :
     lowerStarComparisonLowerStarIso, Equiv.apply_symm_apply]
   ext N
   simp
+  rfl
 
 /-- The site comparison respects the free-sheaf geometric datum. -/
 lemma purity_comparisonFreeSheaf_pullback
@@ -106,7 +107,9 @@ lemma purity_comparisonFreeSheaf_pullback
     Etale.upperStarExtendScalarsIso, purity_leftAdjointUniq_ofNatIsoRight,
     Adjunction.symm_conjugateIsoEquiv_symm_apply, Equiv.apply_symm_apply,
     lowerStarComparisonLowerStarIso, Iso.refl_symm, Iso.refl_hom, NatTrans.id_app,
-    NatIso.ofComponents_hom_app, Functor.map_id, Category.id_comp, Category.comp_id]
+    NatIso.ofComponents_hom_app, Category.id_comp]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp]
+  rfl
 
 /-- Forward form of the free-sheaf site comparison square. -/
 lemma purity_comparisonFreeSheaf_pullback_forward
