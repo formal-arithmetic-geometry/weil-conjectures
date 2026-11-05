@@ -7,6 +7,7 @@ module
 public import Mathlib.Algebra.Homology.Localization
 import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.SectionDerivedPushpullNormalization
+import all WeilConjectures.AlgebraicGeometry.SectionDerivedPushpullNormalization
 public import WeilConjectures.AlgebraicGeometry.SectionKFlatTensorComparison
 public import WeilConjectures.AlgebraicGeometry.SectionOplaxTotalComparison
 public import WeilConjectures.AlgebraicGeometry.SectionRepresentativeTensorArrow
@@ -571,8 +572,14 @@ theorem section_resolution_conjugation_identities {X Y : Scheme.{u}} (f : X ⟶ 
       (derivedSectionFunctor Λ X).map (eta Λ f A) ≫ d Λ f A =
         j Λ f A ≫ epsilon Λ f ((totalSectionEquivalence Λ Y).obj A) := by
     have h := (sectionDerivedPushpullNormalization Λ f).2.2.2.2.1 A
+    conv at h =>
+      rhs
+      lhs
+      rw [_root_.counit_quotient_transport]
     with_unfolding_all
       unfold eta d j epsilon cochainLocalizationIso termwisePullComparison
+      simp only [internalDerivedPullFunctor, internalLocalizationFunctor,
+        totalInternalPull, retainedCochainFunctor, retainedCochainObject, cast_eq]
       exact reverse_assoc_square _ _ _ h
   have qTensor_naturality (T : Scheme.{u})
       {A A' B B' : CochainComplex (modules Λ T) ℤ} (a : A ⟶ A') (b : B ⟶ B') :
@@ -769,10 +776,11 @@ theorem section_resolution_conjugation_identities {X Y : Scheme.{u}} (f : X ⟶ 
         eta Λ f A ≫ (internalLocalizationFunctor Λ X).map ((totalInternalPull Λ f).map a) := by
     have h := (CondensedRing.upperStar Λ f).leftDerivedFunctorCounit.naturality
       ((HomotopyCategory.quotient _ (.up ℤ)).map a)
-    simpa only [eta, internalDerivedPullFunctor, internalLocalizationFunctor,
-      comparisonSource, totalInternalPull,
-      Functor.comp_map,
-      Functor.mapHomotopyCategory_map, qh_map_quotient] using h
+    with_unfolding_all
+      simpa only [eta, internalDerivedPullFunctor, internalLocalizationFunctor,
+        comparisonSource, totalInternalPull, retainedCochainFunctor, retainedCochainObject,
+        retainedCochainMap, cast_eq, Functor.comp_map,
+        Functor.mapHomotopyCategory_map, qh_map_quotient] using h
   have aInternal_naturality
       {A A' B B' : CochainComplex (internalModules Λ Y) ℤ} (a : A ⟶ A') (b : B ⟶ B') :
       (internalDerivedPullFunctor Λ f).map ((internalLocalizationFunctor Λ Y).map a ⊗ₘ
