@@ -64,13 +64,13 @@ theorem affineBaseChangeTildeCohomologyIso_globalSections_factorization
     let H := DerivedCategory.homologyFunctor
       (SheafOfModules.{u} (moduleRings (Spec (.of A')).toRingedSpace)) i
     let d := affineTensorPullbackHomologySheafIso A A' φg' M i
+    let E : SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace) ⥤
+        SheafOfModules.{u} (moduleRings (Spec (.of A')).toRingedSpace) :=
+      Scheme.Modules.tensorPullback (Spec.map (CommRingCat.ofHom φg'))
     let c :=
       (DerivedCategory.quotientCompQhIso.{w} _).inv.app
-        (((Scheme.Modules.tensorPullback
-          (Spec.map (CommRingCat.ofHom φg'))).mapHomologicalComplex (.up ℤ)).obj P) ≫
-      DerivedCategory.Qh.map
-        (((Scheme.Modules.tensorPullback
-          (Spec.map (CommRingCat.ofHom φg'))).mapHomotopyCategoryFactors (.up ℤ)).inv.app P) ≫
+        ((E.mapHomologicalComplex (.up ℤ)).obj P) ≫
+      DerivedCategory.Qh.map ((E.mapHomotopyCategoryFactors (.up ℤ)).inv.app P) ≫
       inv ((SingleComplexBaseChange.counit (Spec.map (CommRingCat.ofHom φg'))).app
         ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫
       (derivedPullback (Spec.map (CommRingCat.ofHom φg'))).map
