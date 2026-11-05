@@ -228,7 +228,7 @@ private theorem action_comparison
     [HasDerivedCategory.{w} C] [HasDerivedCategory.{wF} (IsoAlgebra F)]
     (Y : CochainComplex C ℤ) (τ : (F.mapHomologicalComplex (.up ℤ)).obj Y ≅ Y) :
     let B := complexOfAction F Y τ
-    ((Functor.mapDerivedCategoryCompIso (forget F) F).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso (forget F) F ≪≫
       Functor.mapDerivedCategoryNatIso (strNatIso F)).hom.app (DerivedCategory.Q.obj B) ≫
         (forget F).mapDerivedCategoryFactors.hom.app B =
       F.mapDerivedCategory.map ((forget F).mapDerivedCategoryFactors.hom.app B) ≫
@@ -300,7 +300,7 @@ theorem exists_cyclicDerivedActionRealization
     (vN : F.mapDerivedCategory.obj N ≅ N) :
     ∃ (M : DerivedCategory (IsoAlgebra F))
       (e : (forget F).mapDerivedCategory.obj M ≅ N),
-      ((Functor.mapDerivedCategoryCompIso (forget F) F).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso (forget F) F ≪≫
         Functor.mapDerivedCategoryNatIso (F := forget F ⋙ F) (G := forget F)
           (NatIso.ofComponents (fun (K : IsoAlgebra F) ↦ K.str)
             (fun f ↦ f.hom.h))).hom.app M ≫ e.hom =
@@ -331,7 +331,7 @@ theorem exists_cyclicDerivedActionRealization
   refine ⟨DerivedCategory.Q.obj B, e, ?_, ?_, ?_⟩
   · change _ ≫ (α.hom ≫ β.hom) = _
     rw [← Category.assoc]
-    change (((Functor.mapDerivedCategoryCompIso (forget F) F).symm ≪≫
+    change ((Functor.mapDerivedCategoryCompIso (forget F) F ≪≫
       Functor.mapDerivedCategoryNatIso (strNatIso F)).hom.app _ ≫ α.hom) ≫ β.hom = _
     have hcomp := action_comparison F Y τ
     change _ ≫ α.hom = F.mapDerivedCategory.map α.hom ≫
