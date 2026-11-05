@@ -163,7 +163,7 @@ theorem exists_baseDerivedTensor_ring_transport
   have hτlinear : ∀ (j : ℤ) (c : C₀) (z : T₀.X j),
       τ.hom.f j (c • z) = eC c • (show T.X j from τ.hom.f j z) := by
     intro j c z
-    induction z with
+    induction z using TensorProduct.inductionOn with
     | tmul d x =>
       rw [ExtendScalars.smul_tmul, hτ, hτ, ExtendScalars.smul_tmul, map_mul]
     | add z w hz hw =>
@@ -209,7 +209,7 @@ theorem exists_baseDerivedTensor_ring_transport
     apply HomologicalComplex.Hom.ext
     funext j
     ext z
-    induction z with
+    induction z using TensorProduct.inductionOn with
     | tmul r x =>
       change τ.hom.f j (M.ordinaryToLocalized.f j
         (r ⊗ₜ[A₀, algebraMap A₀ (A₀ ⊗[R₀] B₀)] x)) =
