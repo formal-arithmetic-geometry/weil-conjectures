@@ -119,3 +119,20 @@
 - Next: check direct importers and write the DONE marker.
 - Fix patterns, whole-tree counts, and logs: `/home/ubuntu/u9/bz/FIXES-BZ307.md`.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+
+
+# BZ350 complete
+
+- Branch: `u9/BZ350`; starting commit: `04c3957dc`.
+- Assigned `DerivedOpenLocalization` passed unchanged; its known fix was already integrated.
+- Four direct importers passed together at `3364bac7e7`: rc=0, failed=0, 2940 jobs.
+- Green importers: `OpenDerivedLocalizationData`, `OpenDerivedLocalizationAdjunction`,
+  `OpenDerivedRestrictionComparison`, `OpenUnionRestrictionComparisonData`.
+- Two proof bodies corrected the Mathlib compositor orientation; the restriction comparison
+  has a local 400000 budget justified by a measured 218490 heartbeats.
+- Statements/docstrings unchanged; temporary diagnostic probes removed.
+- Optional second-layer batch could not acquire a shared tree and was canceled before building.
+- Fix patterns and exact errors: `/home/ubuntu/u9/bz/FIXES-BZ350.md`.
+- Full green log: `/home/ubuntu/u9/bz/BUILD-BZ350-layer1-final-full.log`.
+- No local Lean/Lake, forbidden proof shortcuts, or profiler options.
+- DONE: `/home/ubuntu/u9/state/BZ350.DONE`.
