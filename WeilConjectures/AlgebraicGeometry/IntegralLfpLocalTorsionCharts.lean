@@ -238,6 +238,8 @@ private lemma integralPrincipalQuotientFunctionsSurjective (ℓ : ℕ) [Fact ℓ
   ext x
   exact Quotient.out_eq (f x)
 
+set_option trace.Meta.synthInstance true in
+set_option pp.all true in
 private lemma integralPrincipalQuotientFunctionsKernel (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     (a : continuousIntegers ℓ E) (ha : a ≠ 0)
