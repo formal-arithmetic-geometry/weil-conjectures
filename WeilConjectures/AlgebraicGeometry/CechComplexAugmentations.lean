@@ -96,6 +96,7 @@ theorem moduleCechComplexAlpha_comm {X : Scheme.{v}} {ι : Type v} (U : ι → X
           moduleCechZero U (K.X m)
       exact moduleCechZero_naturality U (K.d n m)
     rw [hh]
+    rfl
   · rw [HomologicalComplex.shape _ _ _ hnm, HomologicalComplex.shape _ _ _ hnm]
     simp
 

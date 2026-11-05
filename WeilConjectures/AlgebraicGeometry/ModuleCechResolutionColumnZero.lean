@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.ModuleCechComparison
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 
 @[expose] public section
 
@@ -91,7 +92,7 @@ theorem moduleCech_resolution_column_zero {X : Scheme.{u}} {ι : Type u}
     infer_instance
   have (y : Fin (n + 1) → ι) : PreservesFiniteLimits (G y) := by
     dsimp [G]
-    exact comp_preservesFiniteLimits _ _
+    infer_instance
   have h (y : Fin (n + 1) → ι) :
       Nonempty (IsLimit (KernelFork.ofι ((G y).map (I.ι.f 0))
         (by
