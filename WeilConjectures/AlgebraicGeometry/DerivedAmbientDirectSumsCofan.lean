@@ -27,6 +27,10 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
+local instance (X : Scheme.{u}) (I : Type u)
+    (K : I → CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :
+    HasCoproduct K := HasColimitsOfShape.has_colimit _
+
 /-- The termwise coproduct representative has the coproduct universal property in the
 derived category. This is the localization and coproduct part of the direct-sums lemma.
 Source: Stacks Project, Injectives, Lemma 07D9 (1)-(2).
