@@ -58,7 +58,7 @@ private lemma isIso_cochain_unit
     (v : A ⥤ B) [v.Additive] (K : CochainComplex.Plus A)
     [∀ n : ℤ, Injective (K.obj.X n)] :
     IsIso (v.rightDerivedFunctorPlusUnit.app K) := by
-  let L := HomologicalComplex.liftObjectProperty (injectiveObjects A) K.obj
+  let L := HomologicalComplex.liftObjectProperty (isInjective A) K.obj
     (fun n ↦ inferInstance)
   have hL : (CochainComplex.plus (InjectiveObject A)) L := by
     obtain ⟨n, hn⟩ := K.property
