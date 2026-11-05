@@ -5,8 +5,6 @@ Authors: Nailin Guan
 -/
 module
 
-public import Mathlib.Algebra.Homology.Localization
-import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import
   WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
