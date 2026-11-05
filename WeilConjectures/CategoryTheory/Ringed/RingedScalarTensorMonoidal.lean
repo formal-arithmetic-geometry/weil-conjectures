@@ -101,8 +101,6 @@ variable {C : Type c} [Category.{v} C] [EssentiallySmall.{r} C] (J : Grothendiec
   [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
 variable {R} {S : Sheaf J CommRingCat.{r}} (φ : R ⟶ S)
 open CochainPullback
-private theorem scalarGradedTensor (A : Sheaf J CommRingCat.{r})
-    (X Y : GradedObject ℤ (Modules A)) : X.HasTensor Y := inferInstance
 omit [HasSheafify J AddCommGrpCat.{r}]
     [J.WEqualsLocallyBijective AddCommGrpCat.{r}] in
 private theorem scalarGradedFour (A : Sheaf J CommRingCat.{r})
@@ -118,7 +116,7 @@ omit [HasSheafify J AddCommGrpCat.{r}]
 private theorem scalarGradedRight (A : Sheaf J CommRingCat.{r})
     (X Y Z : GradedObject ℤ (Modules A)) :
     GradedObject.HasGoodTensorTensor₂₃ X Y Z := inferInstance
-attribute [local instance] scalarGradedTensor scalarGradedFour scalarGradedLeft scalarGradedRight
+attribute [local instance] scalarGradedFour scalarGradedLeft scalarGradedRight
 
 private def scalarModuleCore
     (d : SheafOfModules.ScalarExtensionConstraintData R S φ) :
