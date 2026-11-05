@@ -87,7 +87,8 @@ theorem stalkDerivedExtensionComparison_isIso (z : X') :
                 (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P) ≫
             (comparisonDerivedStalk X' z).map
               (cast (by rfl)
-                (inv ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))))), IsIso j := by
+                (inv ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))))),
+      IsIso j := by
   let := leftAlgebra f g' z
   let := rightAlgebra f f' g g' sq z
   let := (tensorMap f f' g g' sq z).toAlgebra
@@ -120,7 +121,6 @@ theorem stalkDerivedExtensionComparison_isIso (z : X') :
     have heq := j.naturality c.e.hom
     have : IsIso (((comparisonDerivedStalk X (g' z) ⋙ L).map c.e.hom) ≫ j.app K) := by
       rw [heq]
-      simp only [cast_eq]
       infer_instance
     exact IsIso.of_isIso_comp_left
       ((comparisonDerivedStalk X (g' z) ⋙ L).map c.e.hom) _
