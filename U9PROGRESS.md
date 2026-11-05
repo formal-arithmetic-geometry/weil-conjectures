@@ -1,3 +1,13 @@
+# BZ118 in progress
+
+- Branch: `u9/BZ118`.
+- Three assigned modules passed the first repair build (commit `ccbe951d0655`).
+- `TraceShiftUnit` needed canonical endpoint transport in its public statement because Mathlib marks `Qh` `no_expose`.
+- The user instructed continuation after the explicit statement-adjustment proposal; that exact patch is now applied.
+- Next: validate all four modules with `ucheck-bump`, then write `/home/ubuntu/u9/state/BZ118.DONE`.
+- Fix patterns and build logs: `/home/ubuntu/u9/bz/FIXES-BZ118.md`.
+- No local Lean/Lake execution; no forbidden proof escapes or heartbeat increases.
+
 # BZ72 complete
 
 - Unit: BZ72, branch `u9/BZ72`.
