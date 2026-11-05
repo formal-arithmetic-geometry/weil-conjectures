@@ -68,7 +68,9 @@ private theorem tensorPullback_preserves_kFlat
   let := SheafOfModules.monoidalCategory X.sheaf
   intro F hF i
   exact (ht F hF i).of_iso
-    (((MonoidalCategory.curriedTensor _).map₂CochainComplex.obj F).mapIso e.symm)
+    (HomologicalComplex₂.total.mapIso
+      ((((MonoidalCategory.curriedTensor _).mapBifunctorHomologicalComplex
+        (.up ℤ) (.up ℤ)).obj F).mapIso e.symm) (.up ℤ))
 
 private theorem compatible_single_adjunction
     {X Y : RingedSpace.{u}}
