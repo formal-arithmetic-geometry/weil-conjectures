@@ -86,7 +86,7 @@ variable (F : C ⥤ D) (G : D ⥤ E) [F.Additive] [G.Additive] [PreservesFiniteL
 
 /-- The inverse of `Functor.mapDerivedCategoryCompIso` on the image of a complex. -/
 lemma mapDerivedCategoryCompIso_inv_app_Q (K : CochainComplex C ℤ) :
-    (mapDerivedCategoryCompIso F G).symm.inv.app (DerivedCategory.Q.obj K) =
+    (mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Q.obj K) =
       G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app K) ≫
         G.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj K) ≫
         DerivedCategory.Q.map ((Functor.mapHomologicalComplexCompIso (Iso.refl (F ⋙ G))
@@ -96,7 +96,7 @@ lemma mapDerivedCategoryCompIso_inv_app_Q (K : CochainComplex C ℤ) :
 
 /-- `Functor.mapDerivedCategoryCompIso` on the image of a complex. -/
 lemma mapDerivedCategoryCompIso_hom_app_Q (K : CochainComplex C ℤ) :
-    (mapDerivedCategoryCompIso F G).symm.hom.app (DerivedCategory.Q.obj K) =
+    (mapDerivedCategoryCompIso F G).inv.app (DerivedCategory.Q.obj K) =
       (F ⋙ G).mapDerivedCategoryFactors.hom.app K ≫
         DerivedCategory.Q.map ((Functor.mapHomologicalComplexCompIso (Iso.refl (F ⋙ G))
           (.up ℤ)).inv.app K) ≫
