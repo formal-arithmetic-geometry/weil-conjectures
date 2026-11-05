@@ -1,17 +1,23 @@
-# BZ151 in progress
+# BZ151 complete
 
-- Branch: `u9/BZ151`; baseline source commit: `4a7cff55183c155d87df3930f5d55228be9388ef`.
+- Unit: BZ151, branch `u9/BZ151`.
+- All four assigned modules pass `ucheck-bump` together: rc=0, failed=0, 4013 jobs.
+- Validated source commit: `2c0c45e4a0cac7aea18dc549888feca5e6f8fb1e`. This completion commit changes only documentation.
+- Modules: CompConjugate, AbelianHigherDirectImagePresheaf,
+  RawModuleScalarSourceSquareCore, DerivedSourceComparisonInjective.
+- Final build: `newsrv:/home/ubuntu/u9n/bumpw3`;
+  remote log `/home/ubuntu/u9/logs/BZ151-20261106T004440.log`.
+- Full local log: `/home/ubuntu/u9/bz/BUILD-BZ151-final-full.log`.
 - The user instructed continuation after the exact four declaration-type API substitutions
-  in `/home/ubuntu/u9/bz/BZ151-statement-api.patch`; that exact patch is now applied.
-- Mathlib owns `mapDerivedCategoryCompIso` with the opposite orientation. Adapt the public
-  conjugacy statement and one private scalar-square lemma to the corresponding inverse.
-- `Plus.Q` now lifts `Q` directly. Remove the obsolete quotient transport from the two
-  private chain-map hypotheses and their local proof constructions.
-- The public Grp.Zero import fixes DerivedSourceComparisonInjective, which already passed
-  remotely with only standard axioms. Redundant rfl and invalid omit fixes are also applied.
-- Next: validate all four modules together through ucheck-bump and resolve any remaining proofs.
-- Fixes, baseline inventories, and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ151.md`.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+  in `/home/ubuntu/u9/bz/BZ151-statement-api.patch`; those substitutions are applied.
+  They use the inverse Mathlib composition comparison and direct Q instead of the obsolete
+  quotient-to-Qh transport. All other declaration-type expressions and docstrings are unchanged.
+- Public Grp.Zero import, redundant-rfl removal, and invalid-omit correction also pass.
+- Existing axiom checks in DerivedSourceComparisonInjective report only propext,
+  Classical.choice, and Quot.sound. No prohibited proof escapes or heartbeat increases.
+- No local Lean/Lake execution. Only the four assigned Lean modules and this file changed.
+- Fix patterns and occurrence counts: `/home/ubuntu/u9/bz/FIXES-BZ151.md`.
+- Completion marker: `/home/ubuntu/u9/state/BZ151.DONE`.
 
 # BZ133 complete
 
