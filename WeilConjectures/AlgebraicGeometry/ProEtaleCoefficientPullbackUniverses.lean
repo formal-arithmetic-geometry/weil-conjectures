@@ -152,8 +152,8 @@ theorem coefficientProEtaleModuleDirectImage_isRightAdjoint {X Y : Scheme.{t}} (
   let smallPush := SheafOfModules.pushforward.{max r (t + 1)}
     (coefficientProEtaleModelRingMap f A)
   have : smallPush.IsRightAdjoint := by
-    dsimp [smallPush]
-    infer_instance
+    exact (SheafOfModules.PullbackConstruction.adjunction.{max r (t + 1)}
+      (coefficientProEtaleModelRingMap f A)).isRightAdjoint
   have hx : (e X).inverse.IsRightAdjoint := (e X).isRightAdjoint_inverse
   have hy : (e Y).functor.IsRightAdjoint := (e Y).isRightAdjoint_functor
   apply Functor.isRightAdjoint_of_iso
