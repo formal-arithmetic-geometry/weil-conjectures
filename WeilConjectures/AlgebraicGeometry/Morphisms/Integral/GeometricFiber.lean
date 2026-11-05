@@ -91,7 +91,7 @@ theorem exists_hom_preimage_eq_bot_of_isIntegralHom (c : Nbhd y)
     refine h ⟨z'.1 ≫ pullback.snd U.hom f, ?_⟩ ?_
     · rw [Category.assoc, ← pullback.condition, ← Category.assoc, z'.2]
       exact CategoryTheory.Over.w u
-    · rw [basePt_eq_of_comp_fst_eq f ⟨U, u⟩ z'.1 z'.2, hz']
+    · rw [basePt_eq_of_comp_fst_eq f (Functor.elementsMk _ U u) z'.1 z'.2, hz']
       exact hzC
   let U' : U.left.Opens := ⟨Zᶜ, hZc.isOpen_compl⟩
   have hrange : Set.range u.left.base ⊆ Set.range U'.ι.base := by
