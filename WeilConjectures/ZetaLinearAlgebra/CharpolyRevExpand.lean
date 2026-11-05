@@ -49,7 +49,7 @@ theorem coe_expand (p : ℕ) (hp : p ≠ 0) (f : Polynomial K) :
 series of the traces `e tr (B^{m / e})`, `e ∣ m`. -/
 theorem X_mul_derivative_expand_charpolyRev {W : Type*} [AddCommGroup W] [Module K W]
     [FiniteDimensional K W] (B : Module.End K W) (e : ℕ) (he : e ≠ 0) :
-    X * derivative (R := K) (PowerSeries.expand e he (B.charpolyRev : K⟦X⟧)) =
+    X * derivative K (PowerSeries.expand e he (B.charpolyRev : K⟦X⟧)) =
       (-PowerSeries.mk fun m ↦ if m ≠ 0 ∧ e ∣ m then (e : K) * trace K W (B ^ (m / e)) else 0) *
         PowerSeries.expand e he (B.charpolyRev : K⟦X⟧) := by
   set P : K⟦X⟧ := (B.charpolyRev : K⟦X⟧)
@@ -91,7 +91,7 @@ theorem X_mul_derivative_expand_charpolyRev {W : Type*} [AddCommGroup W] [Module
 theorem X_mul_derivative_prod_expand_charpolyRev {ι : Type*} (s : Finset ι) {W : ι → Type*}
     [∀ i, AddCommGroup (W i)] [∀ i, Module K (W i)] [∀ i, FiniteDimensional K (W i)]
     (B : ∀ i, Module.End K (W i)) (e : ι → ℕ) (he : ∀ i, e i ≠ 0) :
-    X * derivative (R := K) (∏ i ∈ s, PowerSeries.expand (e i) (he i) ((B i).charpolyRev : K⟦X⟧)) =
+    X * derivative K (∏ i ∈ s, PowerSeries.expand (e i) (he i) ((B i).charpolyRev : K⟦X⟧)) =
       (-∑ i ∈ s, PowerSeries.mk fun m ↦
           if m ≠ 0 ∧ e i ∣ m then (e i : K) * trace K (W i) (B i ^ (m / e i)) else 0) *
         ∏ i ∈ s, PowerSeries.expand (e i) (he i) ((B i).charpolyRev : K⟦X⟧) := by

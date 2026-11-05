@@ -52,7 +52,7 @@ namespace PowerSeries
 /-- The logarithmic derivative of the counting series `exp (∑_{n ≥ 1} a n tⁿ / n)` is the
 generating series `∑_{n ≥ 1} a n tⁿ`. -/
 theorem X_mul_derivative_exp_subst {K : Type*} [Field K] [CharZero K] (a : ℕ → K) :
-    X * derivative (R := K) ((exp K).subst (mk fun n ↦ if n = 0 then 0 else a n / n)) =
+    X * derivative K ((exp K).subst (mk fun n ↦ if n = 0 then 0 else a n / n)) =
       (mk fun n ↦ if n = 0 then 0 else a n) *
         (exp K).subst (mk fun n ↦ if n = 0 then 0 else a n / n) := by
   have hsub : HasSubst (mk fun n ↦ if n = 0 then 0 else a n / n) :=
@@ -119,7 +119,7 @@ theorem P_def (i : Fin (r + 1)) : D.P i = (D.F i).charpolyRev := rfl
 /-- The logarithmic derivative of `P i` is minus the generating series of the traces of the
 powers of `F i`. -/
 theorem X_mul_derivative_P (i : Fin (r + 1)) :
-    X * derivative (R := K) (D.P i : K⟦X⟧) =
+    X * derivative K (D.P i : K⟦X⟧) =
       (-PowerSeries.mk fun n ↦ if n = 0 then 0 else LinearMap.trace K (D.V i) (D.F i ^ n)) *
         (D.P i : K⟦X⟧) :=
   LinearMap.X_mul_derivative_charpolyRev (D.F i)
@@ -151,7 +151,7 @@ theorem constantCoeff_zeta [CharZero K] : PowerSeries.constantCoeff D.zeta = 1 :
 /-- The logarithmic derivative of the counting series of a trace datum is the generating
 series of the integers `N n`. -/
 theorem X_mul_derivative_zeta [CharZero K] :
-    X * derivative (R := K) D.zeta =
+    X * derivative K D.zeta =
       (PowerSeries.mk fun n ↦ if n = 0 then 0 else (D.N n : K)) * D.zeta :=
   PowerSeries.X_mul_derivative_exp_subst _
 
