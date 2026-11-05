@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 import all WeilConjectures.WeilSheaf.ProperProjectionFormula
+import all WeilConjectures.WeilSheaf.Native.Projection.ProperProjectionIso
 import all WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationCoherence
 import all WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedTensorSquare
 import all WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedTensorSquareOfTotal
