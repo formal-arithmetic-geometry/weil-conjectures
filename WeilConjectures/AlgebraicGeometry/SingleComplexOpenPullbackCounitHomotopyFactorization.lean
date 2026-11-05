@@ -89,6 +89,14 @@ variable [∀ Y : Scheme.{u}, HasDerivedCategory.{w}
   (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
   [∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z), (Scheme.Modules.tensorPullback k).Additive]
 
+section
+attribute [local irreducible] Scheme.Modules.tensorPullbackCompositionIso
+  Scheme.Modules.tensorPullback Scheme.Modules.tensorPullbackObj
+attribute [local instance_reducible] Scheme.Modules TopCat.Sheaf
+attribute [local implicit_reducible] DerivedCategory
+  HomotopyCategory DerivedCategory.Q DerivedCategory.Qh
+attribute [local irreducible] singleComplexOpenPullbackIso openPinnedTensorOpenIso
+
 /-- The target-open leg of the derived counit composition calculation.
 Source: Stacks Project, Tags 08DW and 0D5S.
 (blueprint: lem-pc-open-pinned-target-counit-triangle).
@@ -138,6 +146,8 @@ private theorem open_pinned_target_counit_triangle
   have hn := (singleComplexOpenPullbackIso X' U').hom.naturality
     ((pinnedPullbackCounit.{u, w} k).app P)
   exact targetTriangleAlgebra _ _ _ _ _ _ _ _ _ _ _ hn.symm ho' hc hg
+
+end
 
 /-- Coherence of the underived localized comparison factors.
 Source: Stacks Project, Tags 08DW and 08HY; the explicitly constructed tensor comparisons.
@@ -279,6 +289,12 @@ private theorem open_pinned_counit_homotopy_restriction
     CategoryTheory.Functor.map_id,
     Category.comp_id, Category.assoc] using h
 
+section
+attribute [local irreducible] singleComplexOpenPullbackIso Functor.mapHomotopyCategory
+  Functor.mapDerivedCategory openPinnedHomotopyTensorRestrictionIso
+attribute [local implicit_reducible] Scheme.Modules Scheme.Modules.Hom TopCat.Sheaf
+  DerivedCategory HomotopyCategory
+
 /-- A separate step of the open counit factorization.
 Source: Stacks Project, Tags 08FE, 08HY and 0D5S.
 (blueprint: lem-pc-k3-open-restricted-counit-cancellation).
@@ -388,6 +404,8 @@ private theorem singleComplexOpen_restricted_counit_cancellation
     pinnedPullbackCounit, Functor.mapIso_hom, Functor.mapIso_inv, Iso.trans_hom,
     Iso.symm_hom, Iso.symm_inv, Iso.app_hom, Iso.app_inv, eqToIso.hom,
     Category.assoc, Functor.map_comp] using hmain
+
+end
 
 end
 
