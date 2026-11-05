@@ -32,7 +32,8 @@ open CategoryTheory
 
 variable {C : Type*} [Category* C] {R : Cᵒᵖ ⥤ CommRingCat.{u}}
 
-attribute [local reducible] Functor.comp
+local instance (X : Cᵒᵖ) : CommRing ((R ⋙ forget₂ CommRingCat RingCat).obj X) :=
+  inferInstanceAs (CommRing (R.obj X))
 
 namespace PresheafOfModules
 
