@@ -8,6 +8,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.CategoryTheory.Abelian.DerivedBottomUnitNormalization
 import WeilConjectures.AlgebraicGeometry.QCohAcyclicDerivedPushforwardCohomology
 import WeilConjectures.Topology.RingedSpaceModuleEnoughInjectives
