@@ -308,7 +308,7 @@ private theorem descend_coherence
         (Functor.mapDerivedCategoryCompIso F02 H).hom ≫
         Functor.whiskerRight (Functor.mapDerivedCategoryNatIso a02).hom
           H.mapDerivedCategory ≫
-        Functor.whiskerRight (Functor.mapDerivedCategoryCompIso F G).hom
+        Functor.whiskerRight (Functor.mapDerivedCategoryCompIso F G).inv
           H.mapDerivedCategory =
       (Functor.mapDerivedCategoryNatIso e).hom ≫
         (Functor.mapDerivedCategoryNatIso a1).hom ≫

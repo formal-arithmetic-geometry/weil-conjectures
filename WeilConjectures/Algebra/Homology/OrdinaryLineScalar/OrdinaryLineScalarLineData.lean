@@ -9,6 +9,7 @@ public import WeilConjectures.Algebra.Homology.OrdinaryLineScalar.OrdinaryLineSc
 import all WeilConjectures.Algebra.Homology.ScalarHomOrdinary.ScalarHomOrdinaryTensorComparisonSupplement
 import all WeilConjectures.Algebra.Homology.Signed.SignedLineScalarTensorTower
 import all WeilConjectures.Algebra.Homology.LineUnbounded.LineUnboundedDerivedTensor
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Ordinary signed-line tensor and derived scalar extension
 

@@ -13,6 +13,7 @@ public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Limits
 
 import WeilConjectures.AlgebraicGeometry.FormalFunctionsCompleteBase
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Separation by proper infinitesimal quotient sections
 

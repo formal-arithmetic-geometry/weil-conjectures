@@ -17,6 +17,7 @@ import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
 import WeilConjectures.AlgebraicGeometry.CoherentLocalIsomorphism
 import WeilConjectures.AlgebraicGeometry.FinitePushforwardCoherent
 import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # A coherent ideal inclusion near a generic point
 

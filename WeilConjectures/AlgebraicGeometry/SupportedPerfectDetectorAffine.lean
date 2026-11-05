@@ -12,6 +12,7 @@ public import Mathlib.Topology.QuasiSeparated
 import WeilConjectures.AlgebraicGeometry.SupportedPerfectDetectorAffineConstruction
 import WeilConjectures.AlgebraicGeometry.SupportedDerivedRestrictionZero
 import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Affine supported zero detection
 Source: Stacks Project, Tag 0A9A, affine case.

@@ -71,6 +71,7 @@ import all WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedPointwiseKa
 import all WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
 import all Mathlib.CategoryTheory.Functor.Derived.PointwiseRightDerived
 import all WeilConjectures.CategoryTheory.Scalar.ScalarInternalHomAdjunction
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Compatibility of the normalized tensor comparison with quotient transitions
 

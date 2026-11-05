@@ -47,7 +47,7 @@ theorem tilde_preservesHomology (A : Type u) [CommRing A] :
         (tilde.functor (.of A))).PreservesHomology := by
   let T : ModuleCat.{u} A ⥤ SheafOfModules.{u}
       (moduleRings (Spec (.of A)).toRingedSpace) := tilde.functor (.of A)
-  let : T.Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+  let : T.Additive := by constructor; intro M N f g; exact tilde.map_add (R := R) f g
   have adj : T ⊣ moduleSpecΓFunctor (R := .of A) := tilde.adjunction
   let : T.IsLeftAdjoint := adj.isLeftAdjoint
   let : PreservesFiniteColimits T := inferInstance
@@ -100,7 +100,7 @@ def affineBaseChangeTildeCohomologyIso
       SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace) := tilde.functor (.of A)
   let TB : ModuleCat.{u} A' ⥤
       SheafOfModules.{u} (moduleRings (Spec (.of A')).toRingedSpace) := tilde.functor (.of A')
-  let : TA.Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+  let : TA.Additive := by constructor; intro M N f g; exact tilde.map_add (R := R) f g
   let : TB.Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
   let : TA.PreservesZeroMorphisms := ⟨fun _ _ ↦ tilde.map_zero⟩
   let : TB.PreservesZeroMorphisms := ⟨fun _ _ ↦ tilde.map_zero⟩

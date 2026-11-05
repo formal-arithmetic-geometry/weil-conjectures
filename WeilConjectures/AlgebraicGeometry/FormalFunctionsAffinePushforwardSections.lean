@@ -14,6 +14,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import WeilConjectures.AlgebraicGeometry.FormalFunctionsAffineRestrictionDictionary
 import WeilConjectures.AlgebraicGeometry.TheoremFormalFunctions
 import Mathlib.RingTheory.AdicCompletion.Functoriality
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Formal functions on an affine open of the base
 
