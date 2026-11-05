@@ -57,8 +57,8 @@ theorem X_mul_derivative_expand_charpolyRev {W : Type*} [AddCommGroup W] [Module
   have hP := X_mul_derivative_charpolyRev B
   have hsubst : PowerSeries.HasSubst (X ^ e : K⟦X⟧) :=
     PowerSeries.HasSubst.of_constantCoeff_zero' (by simp [he])
-  have hD : derivative K (PowerSeries.expand e he P) =
-      PowerSeries.expand e he (derivative K P) * ((e : K⟦X⟧) * X ^ (e - 1)) := by
+  have hD : derivative (R := K) (PowerSeries.expand e he P) =
+      PowerSeries.expand e he (derivative (R := K) P) * ((e : K⟦X⟧) * X ^ (e - 1)) := by
     rw [PowerSeries.expand_apply, PowerSeries.expand_apply, PowerSeries.derivative_subst hsubst]
     congr 1
     rw [Derivation.leibniz_pow, PowerSeries.derivative_X, smul_eq_mul, nsmul_eq_mul, mul_one]
@@ -78,8 +78,8 @@ theorem X_mul_derivative_expand_charpolyRev {W : Type*} [AddCommGroup W] [Module
   have key := congrArg (PowerSeries.expand e he) hP
   rw [map_mul, map_mul, PowerSeries.expand_X, map_neg] at key
   rw [hD, ← hT, map_mul]
-  calc X * (PowerSeries.expand e he (derivative K P) * ((e : K⟦X⟧) * X ^ (e - 1)))
-      = (e : K⟦X⟧) * (X ^ e * PowerSeries.expand e he (derivative K P)) := by
+  calc X * (PowerSeries.expand e he (derivative (R := K) P) * ((e : K⟦X⟧) * X ^ (e - 1)))
+      = (e : K⟦X⟧) * (X ^ e * PowerSeries.expand e he (derivative (R := K) P)) := by
         rw [show X ^ e = X ^ (e - 1) * X from by
           rw [← pow_succ, Nat.sub_add_cancel (Nat.pos_of_ne_zero he)]]
         ring

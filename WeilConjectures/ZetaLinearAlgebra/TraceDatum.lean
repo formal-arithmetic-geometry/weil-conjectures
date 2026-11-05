@@ -57,7 +57,7 @@ theorem X_mul_derivative_exp_subst {K : Type*} [Field K] [CharZero K] (a : ℕ �
         (exp K).subst (mk fun n ↦ if n = 0 then 0 else a n / n) := by
   have hsub : HasSubst (mk fun n ↦ if n = 0 then 0 else a n / n) :=
     HasSubst.of_constantCoeff_zero' (by simp)
-  have hXF : X * derivative K (mk fun n ↦ if n = 0 then 0 else a n / n) =
+  have hXF : X * derivative (R := K) (mk fun n ↦ if n = 0 then 0 else a n / n) =
       mk fun n ↦ if n = 0 then 0 else a n := by
     ext n
     match n with
@@ -171,17 +171,17 @@ theorem zeta_mul_prod_even_eq_prod_odd [CharZero K] :
     with hse
   set so : Finset (Fin (r + 1)) := Finset.univ.filter (fun i : Fin (r + 1) ↦ Odd (i : ℕ))
     with hso
-  have hP : ∀ i ∈ se, X * derivative K (D.P i : K⟦X⟧) = T i * (D.P i : K⟦X⟧) :=
+  have hP : ∀ i ∈ se, X * derivative (R := K) (D.P i : K⟦X⟧) = T i * (D.P i : K⟦X⟧) :=
     fun i _ ↦ D.X_mul_derivative_P i
-  have hP' : ∀ i ∈ so, X * derivative K (D.P i : K⟦X⟧) = T i * (D.P i : K⟦X⟧) :=
+  have hP' : ∀ i ∈ so, X * derivative (R := K) (D.P i : K⟦X⟧) = T i * (D.P i : K⟦X⟧) :=
     fun i _ ↦ D.X_mul_derivative_P i
-  have hEven : X * derivative K (∏ i ∈ se, (D.P i : K⟦X⟧)) =
+  have hEven : X * derivative (R := K) (∏ i ∈ se, (D.P i : K⟦X⟧)) =
       (∑ i ∈ se, T i) * ∏ i ∈ se, (D.P i : K⟦X⟧) := X_mul_derivative_prod se hP
-  have hOdd : X * derivative K (∏ i ∈ so, (D.P i : K⟦X⟧)) =
+  have hOdd : X * derivative (R := K) (∏ i ∈ so, (D.P i : K⟦X⟧)) =
       (∑ i ∈ so, T i) * ∏ i ∈ so, (D.P i : K⟦X⟧) := X_mul_derivative_prod so hP'
   have hzeta := D.X_mul_derivative_zeta
   rw [← hNS] at hzeta
-  have hLHS : X * derivative K (D.zeta * ∏ i ∈ se, (D.P i : K⟦X⟧)) =
+  have hLHS : X * derivative (R := K) (D.zeta * ∏ i ∈ se, (D.P i : K⟦X⟧)) =
       (NS + ∑ i ∈ se, T i) * (D.zeta * ∏ i ∈ se, (D.P i : K⟦X⟧)) := by
     rw [Derivation.leibniz, smul_eq_mul, smul_eq_mul]
     linear_combination D.zeta * hEven + (∏ i ∈ se, (D.P i : K⟦X⟧)) * hzeta

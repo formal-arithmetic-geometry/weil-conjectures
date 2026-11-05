@@ -93,6 +93,7 @@ noncomputable def substHom (w : Fin M → B) (i : Fin M) :
     X j - C (IsLocalization.Away.invSelf (w i)) *
       MvPolynomial.map (algebraMap B _) (linearForm w) else X j
 
+set_option backward.isDefEq.respectTransparency true in
 /-- The substitution `substHom w i` kills the linear form `∑ⱼ wⱼ Xⱼ`. -/
 lemma substHom_linearForm (w : Fin M → B) (i : Fin M) : substHom w i (linearForm w) = 0 := by
   set u := IsLocalization.Away.invSelf (S := Localization.Away (w i)) (w i)
@@ -115,6 +116,7 @@ lemma substHom_linearForm (w : Fin M → B) (i : Fin M) : substHom w i (linearFo
   rw [Finset.sum_congr rfl fun j _ ↦ h j, Finset.sum_sub_distrib, Finset.sum_ite_eq',
     if_pos (Finset.mem_univ _), IsLocalization.Away.mul_invSelf, map_one, one_mul, hF', sub_self]
 
+set_option backward.isDefEq.respectTransparency true in
 /-- After inverting `wᵢ`, the universal member embeds into a polynomial ring over `B[1/wᵢ]`. -/
 lemma exists_injective_away (w : Fin M → B) (i : Fin M) :
     ∃ α : Localization.Away (ofBase w (w i)) →+* MvPolynomial (Fin M) (Localization.Away (w i)),
@@ -273,6 +275,7 @@ lemma irreducibleSpace_tensor_of_forall_le {R D : Type*} [CommRing R] [IsDomain 
 
 attribute [local instance] MvPolynomial.algebraMvPolynomial in
 open BertiniConnected in
+set_option backward.isDefEq.respectTransparency true in
 /-- The fibre of the universal member over the `k`-point `b` of the parameter space surjects on
 spectra onto `Spec (B ⧸ (∑ bᵢ wᵢ))`; in particular connectedness of the fibre passes to this
 hypersurface section. -/
@@ -357,6 +360,7 @@ lemma BertiniConnected.connectedSpace_quotient_of_fiber {k B : Type*} [Field k] 
 
 attribute [local instance] MvPolynomial.algebraMvPolynomial in
 open BertiniConnected in
+set_option backward.isDefEq.respectTransparency true in
 /-- **Generic members of a linear system on a finite cover are connected.** Let `k` be an
 algebraically closed field, `A` a finitely generated `k`-domain of Krull dimension `≥ 2` and `B`
 a domain which is a finite torsion-free `A`-algebra. Let `v₁, …, v_M ∈ A` have common zero locus
@@ -402,8 +406,9 @@ theorem exists_ne_zero_forall_connectedSpace_quotient {k A B : Type u} [Field k]
   obtain ⟨φ, hφ⟩ := exists_algHom_ker_eq_of_isMaximal k B n
   have hφw (i : Fin M) : φ (w i) = 0 := by
     rw [← RingHom.mem_ker, hφ]
-    have : v i ∈ n.comap (algebraMap A B) := hnm ▸ hvS m hmS i
-    exact this
+    change v i ∈ n.under A
+    rw [hnm]
+    exact hvS m hmS i
   let s₀ : MvPolynomial (Fin M) B →ₐ[MvPolynomial (Fin M) k] MvPolynomial (Fin M) k :=
     { MvPolynomial.map (φ : B →+* k) with
       commutes' := fun r ↦ by simp [MvPolynomial.map_map, MvPolynomial.map_id] }
