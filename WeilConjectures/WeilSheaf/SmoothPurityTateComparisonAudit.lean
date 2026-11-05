@@ -4,7 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-import WeilConjectures.WeilSheaf.SmoothPurityIntegralTateReductionPullback
+import WeilConjectures.WeilSheaf.SmoothPurityFiniteTateShift
+import WeilConjectures.WeilSheaf.SmoothPurityPullbackForgetFactor
 import WeilConjectures.WeilSheaf.SmoothPurityIntegralTateRationalShift
 import WeilConjectures.WeilSheaf.SmoothPurityRationalTrivializationScalar
 
@@ -23,3 +24,8 @@ open AlgebraicGeometry.ProEtale
 #print axioms CondensedRing.purity_commShift_derivedUpperStarExtendScalarsIso_hom
 
 #print axioms purityRationalTateTrivialization_comp_specGeometricFrobenius_hom
+
+#print axioms upperStarIntegralTateTwistNatIso_hom_comp_reduction
+#print axioms upperStarIntegralTateTwistDerivedIso_hom_comp_reduction
+#print axioms upperStarShiftIntegralTateTwistDerivedIso_hom_comp_reduction
+#print axioms CondensedRing.purity_upperStarForgetIso_factor_hom

@@ -65,8 +65,8 @@ lemma upperStarShiftIntegralTateTwistDerivedIso_hom_comp_rationalization
     purityExtendScalarsShiftIntegralTateIso, upperStarShiftTateTwistDerivedIso,
     Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom] at h ⊢
   dsimp only [purityDerivedCoefficientExtension, purityDerivedPullback,
-    purityDerivedCoefficientExtension_commShift, purityDerivedPullback_commShift] at h
-  trace_state
+    purityDerivedCoefficientExtension_commShift, purityDerivedPullback_commShift,
+    Functor.comp_obj, Functor.comp_map] at h ⊢
   exact_mod_proofs h
 
 end AlgebraicGeometry.ProEtale
