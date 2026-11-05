@@ -128,21 +128,15 @@
 - Fix patterns: `/home/ubuntu/u9/bz/FIXES-BZ469.md`.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
 
-# BZ511 in progress
+# BZ513 in progress
 
-- Branch: `u9/BZ511`; starting commit: `fa248eeed`.
-- The user instructed continuation after the exact two-private-helper API proposal.
-  The compositor inverse in `derivedCompSingle` and the direct compositor in
-  `derivedTripleNatSingle` are applied. The public theorem statement is unchanged.
-- Proofs now use Mathlib's single-object compositor lemma, hom naturality, and
-  hom/inv cancellation; the redundant `rfl` after `simp only` is removed.
-- Pinned Mathlib source was inspected at b63f6e8a. Patterns, occurrence counts,
-  and integration errors: `/home/ubuntu/u9/bz/FIXES-BZ511.md`.
-- Owned module passed `ucheck-bump` at `ffe5a7971`: 4159 jobs, target rebuilt in 29s.
-- Full log: `/home/ubuntu/u9/bz/BUILD-BZ511-owned-green.log`.
-- Four direct importers are blocked by the outside-unit
-  `DivisibleExtensionDerivedReductionSupplement`; the owned module rebuilt green
-  in that check. The unvalidated downstream edit was reverted.
-- Next: check the independent importer `EtaleSupportedIntegralDerivedUnit`.
-- Downstream error log: `/home/ubuntu/u9/bz/BUILD-BZ511-downstream-blocked.log`.
+- Branch: `u9/BZ513`; starting commit: `fa248eeed`.
+- The user instructed continuation after the exact two-line private-statement proposal.
+  Applied it at `74afc5e12`, preserving the intended maps under Mathlib's reversed compositor.
+- Proof cancellation factors were also reversed, only inside `derivedSquareCoherence`.
+- All public statements and existing docstrings remain unchanged.
+- The repaired source exactly matches the earlier green source at `5483714dbc`
+  (`ucheck-bump`, 3656 jobs); a fresh unit check at `d8765937a` is queued.
+- Next: build four direct importers, fix owned failures, then try a second downstream layer.
+- Fix patterns and logs: `/home/ubuntu/u9/bz/FIXES-BZ513.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
