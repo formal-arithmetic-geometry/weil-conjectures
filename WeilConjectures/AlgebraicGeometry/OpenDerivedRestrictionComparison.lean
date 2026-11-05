@@ -28,6 +28,8 @@ namespace AlgebraicGeometry
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
+set_option maxHeartbeats 400000 in
+-- This declaration measured 218490 heartbeats on Lean v4.35.0-rc3; retain a local budget.
 /-- Exact open restriction, expressed on the localized site or on the open subscheme,
 identifies quasi-coherent cohomology, support, shifted orthogonality and zero objects.
 Source: Stacks Project, Tag 079W, Lemma cohomology-lemma-adjoint, and Tag 0A9A,
