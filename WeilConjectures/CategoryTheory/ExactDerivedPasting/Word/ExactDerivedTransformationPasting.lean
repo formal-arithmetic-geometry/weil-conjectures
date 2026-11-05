@@ -177,6 +177,7 @@ private lemma wordFactors_comp {i j k : I} (P : Word C i j) (R : Word C j k)
     Functor.whiskerLeft_app, Functor.whiskerRight_app]
   simp only [Category.assoc]
   rw [← Functor.mapDerivedCategoryCompIso_hom_app_factors P.ordinary.obj R.ordinary.obj K]
+  simp only [Iso.hom_inv_id_app_assoc]
   rw [← NatTrans.naturality_assoc, ← NatTrans.naturality_assoc]
   simp only [Functor.map_comp, Category.assoc]
   rfl
