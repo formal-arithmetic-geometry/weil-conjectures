@@ -42,3 +42,10 @@ No original final statement has passed. K4C_BENCHMARK.tsv records individual pro
 for all current helper declarations (raw elaboration messages do not include tactics/TC synthesis).
 Next: keep native proof, inspect minimal dedicated category interface and a single interpretation;
 replace the expensive defeq comparison with small propositional adjunction/functor identities.
+
+20:07 CST: Minimal dedicated-category prototype prepared: own Object type, own Category instance,
+realize/ofSheaf, native geometric pullback, native finite reading and comparison, concrete Tate
+objects/isomorphisms/square. No limits, monoidal or derived instances are needed for this square.
+It interprets the already rebuilt native constructions and never invokes the old reading square.
+One fully faithful realization is the intended outer operation. Separate generic boundary test
+now uses adjunction/low-level iso identities instead of asking rfl to unfold the full mate iso.
