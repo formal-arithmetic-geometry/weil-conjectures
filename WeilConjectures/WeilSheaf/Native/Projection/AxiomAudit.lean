@@ -33,6 +33,11 @@ import all WeilConjectures.WeilSheaf.Native.Projection.NativeModelNormalization
 import all WeilConjectures.WeilSheaf.Native.Projection.NativePullTensorNormalization
 import all WeilConjectures.WeilSheaf.Native.Projection.ModelSquareCancellation
 import all WeilConjectures.WeilSheaf.Native.Projection.TotalSquareToModel
+import all WeilConjectures.WeilSheaf.Native.NativePullTensor
+import all WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationDerivedTensor
+import all WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationProjection
+import all WeilConjectures.WeilSheaf.Native.NativeTwoSidedKFlatRepresentatives
+import all WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedSwapLocalization
 import Lean
 
 /-! # Dependency audit for the native proper projection formula
