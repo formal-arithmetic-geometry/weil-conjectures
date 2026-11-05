@@ -29,9 +29,7 @@ attribute [local irreducible] Scheme.Modules.tensorPullbackCompositionIso
 
 attribute [local instance_reducible] Scheme.Modules TopCat.Sheaf
 attribute [local implicit_reducible] DerivedCategory
-  Functor.mapHomologicalComplex HomotopyCategory Functor.mapHomotopyCategory
-  HomotopyCategory.quotient DerivedCategory.Q DerivedCategory.Qh
-  HomologicalComplexUpToQuasiIso.Qh
+  HomotopyCategory DerivedCategory.Q DerivedCategory.Qh
 
 private theorem pushforwardCongr_refl {X Y : Scheme.{u}} (f : X ⟶ Y) :
     Scheme.Modules.pushforwardCongr (rfl : f = f) = Iso.refl _ := by
