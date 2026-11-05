@@ -81,27 +81,25 @@
 - No local Lean/Lake, proof placeholders, trust escapes, or heartbeat increases.
 - This final commit changes only progress documentation after the successful build.
 
-# BZ275 in progress
+# BZ275 complete
 
-- Branch: `u9/BZ275`, starting commit `18e44f2d5`.
-- Assigned target: `WeilConjectures.CategoryTheory.DerivedSectionScalarTransport`.
-- The user instructed continuation after the exact three-statement API proposal; applied
-  `/home/ubuntu/u9/bz/BZ275-statement-api.patch` to preserve the comparison under Mathlib's
-  reversed `mapDerivedCategoryCompIso` orientation.
-- Proofs use the corresponding inverse factors and cancellation. Localization API and
-  implementation imports fix the private `Qh` definitional reductions.
-- Next: remote validation, direct importers, then DONE with all green modules.
-- Fix patterns and logs: `/home/ubuntu/u9/bz/FIXES-BZ275.md`.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
-
-- Assigned module green at `94ea31c9cda188870dc8c0b0642a600420754bf0`: ucheck-bump rc=0, failed=0, 3869 jobs.
-- Assigned build log: `/home/ubuntu/u9/bz/BUILD-BZ275-assigned-green-full.log`.
-- Applied the same compositor and private-localization import patterns to direct importers;
-  validating both together before advancing one more layer.
-
-- Both direct importers are green at `205625f5e362df5b09f0ffaa641f9878c3a32da7`: ucheck-bump rc=0, failed=0, 3876 jobs.
-- Local `SMul` instances expose the section-ring action on its definitionally equal
-  underlying sheaf sections without changing either helper statement.
-- Green importer log: `/home/ubuntu/u9/bz/BUILD-BZ275-importers-green-full.log`.
-- Checking four next-layer modules with the smallest dependency closures; any unrelated
-  dependency failures will be skipped according to the brief.
+- Branch: `u9/BZ275`; starting commit: `18e44f2d5`.
+- Assigned module and both direct importers built successfully with `ucheck-bump`:
+  - `WeilConjectures.CategoryTheory.DerivedSectionScalarTransport`.
+  - `WeilConjectures.CategoryTheory.InternalSectionScalarAdjunction`.
+  - `WeilConjectures.CategoryTheory.SixFunctors.InternalSectionScalarAdjunctionSupplement`.
+- Validated source commit: `205625f5e362df5b09f0ffaa641f9878c3a32da7`; rc=0, failed=0, 3876 jobs.
+- Full green log: `/home/ubuntu/u9/bz/BUILD-BZ275-importers-green-full.log`.
+- The user instructed continuation after the exact compositor-statement proposal.
+  Applied that API orientation change and the identical downstream comparison migration.
+- Localization imports restore private Qh reductions. Local SMul instances expose the
+  existing section-ring action through definitionally equal carriers. All other statement
+  text and existing docstrings are unchanged.
+- Four next-layer importers were attempted and skipped because every one depends on
+  `RingedToposAdaptedFlatResolution` (BZ290) and `RingedToposAcyclicKFlatPullback` (BZ291),
+  both of which failed. Stopped only this optional build after confirming the shared blockers.
+- Skipped-module log: `/home/ubuntu/u9/bz/BUILD-BZ275-next-layer-blocked-full.log`.
+- Fix patterns, exact errors, occurrence counts: `/home/ubuntu/u9/bz/FIXES-BZ275.md`.
+- Completion marker: `/home/ubuntu/u9/state/BZ275.DONE`.
+- No local Lean/Lake, sorries, admissions, added axioms, trust bypasses, heartbeat increases,
+  or profiler probes. Final commit changes progress documentation only.
