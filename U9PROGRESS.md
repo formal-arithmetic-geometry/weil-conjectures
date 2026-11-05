@@ -218,10 +218,10 @@
 - Fix patterns and exact diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ740.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ780: 13 modules green; final downstream checks pending
+# BZ780: 14 modules green; final importer check pending
 
 - Branch: `u9/BZ780`; baseline: `8027d88a3`.
-- Assigned `DerivedPullbackTensorUnitKFlat` is sorry-free and green, with 12 downstream
+- Assigned `DerivedPullbackTensorUnitKFlat` is sorry-free and green, with 13 downstream
   modules green through `QCqsSheafRHomAdjunction`. Inventory: `BZ780-validation.json`.
 - Latest successful six-target batch: `ucheck-bump` rc=0, failed=0, 5684 jobs at
   `19f7a3b3d4` on newsrv:/home/ubuntu/u9n/bumpw2. Full log:
@@ -236,8 +236,12 @@
 - Seven machine rewrite rules exactly reproduce all three changed Lean files.
 - Six targets are blocked by unowned `SingleComplexBaseChangeStalkCondition`; details,
   exact errors, occurrence counts, and replay rules are in `/home/ubuntu/u9/bz/FIXES-BZ780.md`.
-- Active four-module repair validation: exec 32751, Weil bbuild PID 2557462; still
-  queued. It will validate the pruned OpenRestrictionDerivedMonoidal module.
-- Next: check final direct importer GlobalHomAdjunctionIso (known transitive stalk-condition
-  blocker), finish the queued validation, then commit final records and write BZ780.DONE.
+- The four-module repair batch also passed at 19f7a3b3d4: rc=0, failed=0, 3957 jobs,
+  including the pruned OpenRestrictionDerivedMonoidal module. Full log:
+  `/home/ubuntu/u9/bz/BUILD-BZ780-downstream3-green-full.log`.
+- Final direct importer GlobalHomAdjunctionIso is queued: exec 80076, Weil PID 3233493.
+  It transitively depends on the confirmed stalk-condition blocker. Do not duplicate the request.
+- Final source audit passes: exact seven-rule replay, idempotence, whole-tree counts, pruning
+  eligibility, unchanged heartbeat options, forbidden-proof scan, and git diff --check.
+- Next: record the final importer result and write BZ780.DONE.
 - No local Lean/Lake, proof placeholders, trust bypasses, profiler probes, or heartbeat increases.
