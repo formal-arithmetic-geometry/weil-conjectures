@@ -39,7 +39,8 @@ noncomputable def restriction {U V : X.Opensᵒᵖ} (i : U ⟶ V) :
       map_smul' := by
         intro r x
         rw [F.val.map_smul]
-        change SymmetricAlgebra.ι _ _ ((X.presheaf.map i) r • F.val.map i x) = _
+        change SymmetricAlgebra.ι (X.presheaf.obj V) (F.val.obj V)
+          ((X.presheaf.map i) r • (F.val.map i x : F.val.obj V)) = _
         rw [map_smul]
         rfl }
   exact (SymmetricAlgebra.lift f).toRingHom
