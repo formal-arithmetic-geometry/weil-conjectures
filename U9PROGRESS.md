@@ -245,3 +245,13 @@
 - Full log: /home/ubuntu/u9/bz/BUILD-BZ824-restored-full.log.
 - Next: build layer-two importer CanonicalModuleBaseChangeAffineChartComparison.
 - Notes: /home/ubuntu/u9/bz/FIXES-BZ824.md. No local Lean/Lake or proof shortcuts.
+
+# BZ862 in progress
+
+- Branch: u9/BZ862; starting commit db406319f.
+- User continuation authorizes the previously proposed upstream prerequisite restoration.
+- Restored comparisonIntoPullback and the five-file counit prerequisite path from pre-prune commits.
+- Applied known public/implementation Localization imports for Qh definitional conversions.
+- The earlier ucheck-bump request is still queued; its runner takes the latest branch when a tree frees.
+- Next: commit/push restorations, repair remote build diagnostics, then continue downstream and write DONE.
+- Fix notes: /home/ubuntu/u9/bz/FIXES-BZ862.md. No local Lean/Lake or proof shortcuts.
