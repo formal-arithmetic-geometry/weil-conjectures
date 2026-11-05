@@ -24,8 +24,8 @@ noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance 2000] schemeMVModuleAbelian
 
-set_option maxHeartbeats 800000 in
--- Quotient transport elaborates several derived-category and sheaf-category conversions.
+set_option maxHeartbeats 1200000 in
+-- The explicit quotient transports exhausted 800000 heartbeats at whnf (34s on v4.35).
 /-- Transport of the explicit four-map restriction chain to the homotopy quotient.
 Source: Stacks Project, Tags 08FE and 079V.
 Proof: Expand the chain and the transported direct-image unit. Substitute
@@ -107,5 +107,6 @@ theorem schemeMV_restriction_chain_quotient_transport
   erw [hxi]
   simp only [Functor.map_comp, Category.assoc]
   erw [DerivedCategory.quotientCompQhIso_inv_naturality_assoc]
+  rfl
 
 end AlgebraicGeometry
