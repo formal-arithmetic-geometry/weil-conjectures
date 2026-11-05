@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.WeilSheaf.SmoothPurityScalarComparison
+public import WeilConjectures.WeilSheaf.SmoothPurityInverseSquare
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.NonFlatPullCoherence
 
 /-! # Coefficient extension and a pullback factorization -/
@@ -31,7 +32,7 @@ lemma purity_pullIso_hom_app_comp_upperStarCongr_hom_app {X Y : Scheme.{u}} {f g
         (pullIso a g).hom.app M := by
   subst h
   simp only [upperStarCongr_self, Iso.refl_hom, NatTrans.id_app]
-  erw [CategoryTheory.Functor.map_id, Category.comp_id, Category.id_comp]
+  erw [CategoryTheory.Functor.map_id, Category.comp_id]
 
 variable {X U : Scheme.{u}} (p : U ⟶ X) (s : U ⟶ U) (hs : s ≫ p = p)
 
@@ -52,13 +53,14 @@ lemma purity_extendScalars_map_factor_hom_comp_pullIso
         (s)^*⟦Λ'⟧.map ((pullIso a p).hom.app M) ≫
           (upperStarComp Λ' s p).inv.app
             ((Mod.extendScalars (coefficientMap a X)).obj M) := by
-    rw [← cancel_mono ((upperStarComp Λ' s
-      p).hom.app ((Mod.extendScalars (coefficientMap a X)).obj M))]
-    simp only [Category.assoc]
-    rw [Iso.inv_hom_id_app]
-    erw [Category.comp_id]
-    rw [pullIso_hom_app_comp, ← Functor.map_comp_assoc, Iso.inv_hom_id_app]
-    erw [CategoryTheory.Functor.map_id, Category.id_comp]
+    simpa only [Functor.mapIso_hom, Functor.mapIso_inv, Iso.app_hom, Iso.app_inv] using
+      purity_inverse_square
+        ((Mod.extendScalars (coefficientMap a U)).mapIso ((upperStarComp Λ s p).app M))
+        ((upperStarComp Λ' s p).app ((Mod.extendScalars (coefficientMap a X)).obj M))
+        ((pullIso a (s ≫ p)).hom.app M)
+        ((pullIso a s).hom.app ((p)^*⟦Λ⟧.obj M) ≫
+          (s)^*⟦Λ'⟧.map ((pullIso a p).hom.app M))
+        (pullIso_hom_app_comp a s p M)
   simp only [purityModuleFactorIso, Iso.trans_hom, Iso.symm_hom,
     NatTrans.comp_app, Functor.map_comp, Category.assoc]
   rw [← purity_pullIso_hom_app_comp_upperStarCongr_hom_app a

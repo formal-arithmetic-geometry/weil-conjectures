@@ -91,4 +91,24 @@ theorem exists_iso_tensorPowPair_carrier {K : IsoAlgebra P} {s : 𝟙_ C ≅ �
       P.map ê.hom ≫ (η P ≫ (scalarPow s d).hom) = (tensorPowPair P K d).obj.str ≫ ê.hom :=
   ⟨(forget P).mapIso (tensorPowPairIso P e d), (tensorPowPairIso P e d).hom.hom.h⟩
 
+section Conj
+
+variable {C : Type u} [Category.{v} C] {P L : C ⥤ C} (u : P ≅ L)
+
+/-- **Transport of a trivialized pair along `u : P ≅ L`.** A pair `(T, u⁻¹ ≫ φ)` for `L`, obtained
+from a pair `(T, φ)` for `P`, is isomorphic to `(R, σ ≫ r)` as soon as `ê : T ≅ R` carries `φ` to
+`ψ ≫ sd` (the datum on `R` for `P`), where `σ = u⁻¹ ≫ ψ` and `r = sd`. -/
+def isoMkOfConj {T R : C} (φ : P.obj T ≅ T) (ψ : P.obj R ⟶ R) (sd : R ⟶ R) (σ : L.obj R ≅ R)
+    (r : R ≅ R) (ê : T ≅ R) (hê : P.map ê.hom ≫ (ψ ≫ sd) = φ.hom ≫ ê.hom)
+    (hunit : σ.hom = u.inv.app R ≫ ψ) (hr : r.hom = sd) :
+    mk T ((u.app T).symm ≪≫ φ) ≅ mk R (σ ≪≫ r) :=
+  isoMk ê (by
+    have hn : L.map ê.hom ≫ u.inv.app R = u.inv.app T ≫ P.map ê.hom := u.inv.naturality ê.hom
+    change L.map ê.hom ≫ (σ.hom ≫ r.hom) = ((u.app T).symm.hom ≫ φ.hom) ≫ ê.hom
+    rw [hunit, hr]
+    simp only [Iso.symm_hom, Iso.app_inv, Category.assoc]
+    rw [reassoc_of% hn, hê])
+
+end Conj
+
 end CategoryTheory.Endofunctor.IsoAlgebra

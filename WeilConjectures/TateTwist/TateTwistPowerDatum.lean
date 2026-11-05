@@ -36,6 +36,12 @@ open Scheme
 variable {k : Type u} [Field k] (ℓ : ℕ) [Fact ℓ.Prime] [NeZero (ℓ : k)] {X : Scheme.{u}}
   (g : X ⟶ X) (f : X ⟶ Spec (.of k))
 
+/-- The unit datum `g^* ℚ̄_ℓ,X ⟶ ℚ̄_ℓ,X`: the inverse unit constraint of the monoidal pullback
+`g^*`. It is a `def` so that it is a fixed constant (no comparison of monoidal instances). -/
+noncomputable def tateUnitDatum :
+    (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) g).obj (𝟙_ _) ⟶ 𝟙_ _ :=
+  η (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) g)
+
 /-- The pair `(ℚ̄_ℓ,X(1), g^* ℚ̄_ℓ,X(1) ≅ ℚ̄_ℓ,X(1))`. -/
 noncomputable def tateTwistOnePair :
     IsoAlgebra (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) g) :=
@@ -59,8 +65,7 @@ theorem exists_iso_tateTwistNat_of_one (s : 𝟙_ _ ≅ 𝟙_ _)
     (e : tateTwistOnePair ℓ g f ≅ IsoAlgebra.unitScalarPair _ s) (d : ℕ) :
     ∃ ê : tateTwistNat X ℓ d ≅ 𝟙_ _,
       (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) g).map ê.hom ≫
-          (η (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) g) ≫
-            (IsoAlgebra.scalarPow s d).hom) =
+          (tateUnitDatum ℓ g ≫ (IsoAlgebra.scalarPow s d).hom) =
         (upperStarTateTwistNatIso ℓ g f d).hom ≫ ê.hom := by
   have key := IsoAlgebra.exists_iso_tensorPowPair_carrier _ e d
   rw [tensorPowPair_tateTwistOnePair] at key
