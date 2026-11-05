@@ -329,13 +329,12 @@ private lemma bottom_resolution_map_unit
   have hC : (DerivedCategory.Plus.quotientCompQhIso C).hom.app
       (G.mapCochainComplexPlus.obj LJ) = 𝟙 _ := rfl
   erw [hB, hC]
-  simp only [Functor.map_id, Category.comp_id, Category.id_comp]
+  erw [Functor.map_id, Functor.map_id, Functor.map_id, Category.id_comp, Category.id_comp]
   have : ∀ i, Injective (LJ.obj.X i) := fun i ↦
     inferInstanceAs (Injective (J.cochainComplex.X i))
   erw [← Functor.map_comp_assoc (DerivedCategory.Plus.homologyFunctor C n)
     (inv (G.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.quotient B).obj LJ)))]
-  simp only [IsIso.inv_hom_id, Functor.map_id, Category.id_comp]
-  rfl
+  erw [IsIso.inv_hom_id, Functor.map_id, Category.id_comp]
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The bottom edge is computed by applying the second functor to a comparison
