@@ -152,3 +152,20 @@
   and AffineOpenSectionsResolutionQuasiIso; fix any owned errors and write DONE when green.
 - Notes and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ557.md`.
 - No local Lean/Lake, statement changes, proof escapes, or heartbeat increases.
+
+# BZ590 awaiting statement-repair authorization
+
+- Branch: `u9/BZ590`; starting commit: `cfcb63ad7`.
+- Added public Localization import and separate `import all` in
+  `InjectiveExchangeSourceTransport`; this fixes the proof's hidden-body error.
+- Remote `ucheck-bump` at `de7bd95a1f` failed with two public-statement type errors;
+  imports cannot make hidden Qh definitions available while checking the public type.
+- Exact unapplied proposal: `/home/ubuntu/u9/bz/BZ590-public-statement-proposal.patch`.
+  It changes the preimage target to `Plus.Qh.obj H` and adds the canonical
+  `quotientCompQhIso` inverse before the RHS. Asked for approval because the user's
+  explicit rule permits only proof/import edits. No statement change is applied.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ590-import-full.log`.
+- Fix records: `/home/ubuntu/u9/bz/FIXES-BZ590.md`.
+- Next after approval: apply proposal, check unit, then build direct importer
+  `InjectiveExchangeRepresentative` and continue another layer if its dependencies pass.
+- No DONE marker; no local Lean/Lake, proof shortcuts, or heartbeat increases.
