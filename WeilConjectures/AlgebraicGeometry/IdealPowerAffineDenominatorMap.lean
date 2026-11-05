@@ -9,7 +9,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
 public import Mathlib.LinearAlgebra.Quotient.Basic
-public import Mathlib.AlgebraicGeometry.AffineScheme
 import WeilConjectures.AlgebraicGeometry.AffineCompatibleDenominatorData
 import WeilConjectures.AlgebraicGeometry.IdealPowerNumeratorPresentation
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
