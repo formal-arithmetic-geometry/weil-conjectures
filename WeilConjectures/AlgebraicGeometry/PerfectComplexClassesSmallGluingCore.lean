@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.PerfectComplexClassesSmallOnOpen
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import WeilConjectures.AlgebraicGeometry.PerfectGluingEndpointsSmall
 import WeilConjectures.AlgebraicGeometry.PerfectGluingTrianglePresentation
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 @[expose] public section
 

@@ -137,7 +137,7 @@ def proEtaleSliceDerivedComparison {X : Scheme.{u}} (U : X.ProEt)
     proEtaleRingDerivedPullback U.hom O B c ≅
       proEtaleSliceDerivedRestriction U O ⋙ proEtaleSliceDerivedScalarTransport U O B
         (proEtaleSliceCoefficientIso U O B c delta) :=
-  Functor.mapDerivedCategoryNatIso a ≪≫ Functor.mapDerivedCategoryCompIso _ _
+  Functor.mapDerivedCategoryNatIso a ≪≫ (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The exact termwise functor used in the representative normalizations.
 Source: Stacks 07A4 (blueprint: lem-zl-proetale-coefficient-slice-closed-comparison). -/

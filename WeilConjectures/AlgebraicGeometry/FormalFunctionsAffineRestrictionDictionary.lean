@@ -15,6 +15,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 import all WeilConjectures.AlgebraicGeometry.TorsionControlledFormalRestriction
 import all WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # The affine restriction dictionary for formal functions
 

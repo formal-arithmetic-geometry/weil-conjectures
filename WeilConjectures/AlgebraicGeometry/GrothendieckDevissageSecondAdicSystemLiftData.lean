@@ -13,6 +13,7 @@ import WeilConjectures.AlgebraicGeometry.ClosedSupportedFormalAlgebraization
 import WeilConjectures.AlgebraicGeometry.FormalSecondIdealQuotientAdic
 import WeilConjectures.AlgebraicGeometry.FormalSecondIdealQuotientSupported
 import WeilConjectures.AlgebraicGeometry.FormalSecondIdealAlgebraizationTransitions
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 @[expose] public section
 

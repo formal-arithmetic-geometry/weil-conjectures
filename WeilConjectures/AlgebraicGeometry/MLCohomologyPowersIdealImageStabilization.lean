@@ -12,6 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 public import WeilConjectures.AlgebraicGeometry.PQFCohomology
 import WeilConjectures.AlgebraicGeometry.CohomologyPowersIdealApplication
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Cohomology reductions: ImageStabilization
 Source: Stacks Project, Lemma 02OB. -/

@@ -84,11 +84,11 @@ theorem integralConstructible_sheaf_hom_colimit (X : Scheme.{u})
           ((openImmersionLowerShriek (integralCoeff ℓ E) j).obj P))))
     let G := condensedShiftedHom (integralCoeff ℓ E) U
       ((DerivedCategory.singleFunctor _ 0).obj P) n
-    let d := G.mapCocone (colimit.cocone L)
-    have : IsIso (colimit.desc _ d) := integral_lfp_hom_continuity U ℓ E P hP L hL n
+    have hd : IsIso (colimit.desc _ (G.mapCocone (colimit.cocone L))) :=
+      integral_lfp_hom_continuity U ℓ E P hP L hL n
     change IsIso (colimit.desc _ (F.mapCocone c'))
     have heq : colimit.desc _ (F.mapCocone c') ≫ v.hom =
-        colimMap e.hom ≫ colimit.desc _ d := by
+        colimMap e.hom ≫ colimit.desc _ (G.mapCocone (colimit.cocone L)) := by
       apply colimit.hom_ext
       intro s
       simp only [colimit.ι_desc_assoc, ι_colimMap_assoc, colimit.ι_desc]

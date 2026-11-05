@@ -8,11 +8,13 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.RingTheory.AdicCompletion.Functoriality
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 import WeilConjectures.AlgebraicGeometry.FormalCompletionAffineQuotients
 import WeilConjectures.Algebra.Module.AdicCompletionStableRanges
 import WeilConjectures.AlgebraicGeometry.CoherentFormalModulesAffine
 import WeilConjectures.AlgebraicGeometry.CoherentFormalModulesIsoEquivalence
 import WeilConjectures.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Natural affine comparison for coherent completion
 

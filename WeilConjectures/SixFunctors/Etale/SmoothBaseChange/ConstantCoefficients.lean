@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Category.ModuleCat.Biproducts
+public import Mathlib.Algebra.Field.ULift
 public import WeilConjectures.AlgebraicGeometry.Sites.PointConstantSheaf
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Devissage
 public import WeilConjectures.SixFunctors.Etale.Derived.RestrictScalarsLowerStar
@@ -200,8 +201,6 @@ end Field
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
--- The coefficient-change proof exceeds 200000 heartbeats on Lean v4.35.0-rc3.
-set_option maxHeartbeats 400000 in
 -- the linear maps into restrictions of scalars need to unfold `ModuleCat.restrictScalars`
 set_option backward.isDefEq.respectTransparency false in
 /-- Let `r` be a prime and `M` a `Λ`-module killed by `r`. If `R^q h_* (M_Y) ≠ 0` for a
