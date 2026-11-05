@@ -26,9 +26,10 @@ set_option backward.defeqAttrib.useBackward true
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-private local instance ringPresheafHasProducts.{uC, vC, w} {C : Type uC} [Category.{vC} C] :
-    HasProducts.{w} (Cᵒᵖ ⥤ CommRingCat.{w}) :=
-  fun _ ↦ functorCategoryHasLimitsOfShape
+private local instance setSheafHasBinaryProducts.{uC, vC, w}
+    {C : Type uC} [Category.{vC} C] (J : GrothendieckTopology C) :
+    HasBinaryProducts (Sheaf J (Type w)) :=
+  Sheaf.instHasLimitsOfShape
 
 private noncomputable def ringMul.{uC, vC, w} {C : Type uC} [Category.{vC} C]
     (J : GrothendieckTopology C) [J.HasSheafCompose (forget CommRingCat.{w})]
