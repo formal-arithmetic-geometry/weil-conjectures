@@ -60,11 +60,17 @@ private theorem derived_single_shift_inv (X : C) (n : ℤ) :
   have hs := congr_app ((DerivedCategory.singleFunctorsPostcompQhIso C).inv.comm
     (-n) n 0 (by simp)) X
   have he (i : ℤ) : ((DerivedCategory.singleFunctorsPostcompQhIso C).inv.hom i).app X =
-      𝟙 ((DerivedCategory.singleFunctor C i).obj X) := by rfl
+      𝟙 ((DerivedCategory.singleFunctor C i).obj X) := by
+    change (𝟙 _) ≫ (𝟙 _) = 𝟙 _
+    exact Category.id_comp _
   simp only [NatTrans.comp_app, Functor.whiskerRight_app, he, Category.comp_id,
     Functor.map_id, Category.id_comp] at hs
-  have hi := congrArg inv hs
-  simpa only [IsIso.inv_hom, SingleFunctors.postcomp_shiftIso_inv_app] using hi.symm
+  change ((DerivedCategory.singleFunctors C).shiftIso (-n) n 0 (by simp)).inv.app X =
+    (((HomotopyCategory.singleFunctors C).postcomp DerivedCategory.Qh).shiftIso
+      (-n) n 0 (by simp)).inv.app X
+  apply (cancel_mono
+    (((DerivedCategory.singleFunctors C).shiftIso (-n) n 0 (by simp)).hom.app X)).1
+  rw [Iso.inv_hom_id_app, ← hs, Iso.inv_hom_id_app]
 
 omit [EnoughInjectives C] in
 private theorem single_quotient_inverse_shift_int (X : C) (n : ℤ) :
@@ -160,6 +166,8 @@ private theorem mapped_single_inverse_shift_int (X : C) (n : ℤ) :
   erw [Functor.map_id, Category.id_comp]
   simp only [Category.assoc]
   erw [Iso.inv_hom_id_app_assoc]
+  simp only [Iso.trans_hom, Functor.mapIso_hom]
+  erw [Category.id_comp, Category.id_comp]
   change DerivedCategory.Q.map
       ((HomologicalComplex.singleMapHomologicalComplex S (.up ℤ) n).app X).hom ≫
     DerivedCategory.Qh.map
