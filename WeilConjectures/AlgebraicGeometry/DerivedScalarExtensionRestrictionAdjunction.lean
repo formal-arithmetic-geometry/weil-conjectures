@@ -58,6 +58,12 @@ private noncomputable abbrev restriction
     {A S : Sheaf K CommRingCat.{r}} (c : A ⟶ S) :=
   restrictScalars ((sheafCompose K (forget₂ CommRingCat RingCat)).map c)
 
+private local instance {A : Sheaf K CommRingCat.{r}}
+    {M : SheafOfModules.{r} (ringSheaf A)} {X Y : Dᵒᵖ} (i : X ⟶ Y) :
+    Module (A.obj.obj Y)
+      ((ModuleCat.restrictScalars ((ringSheaf A).obj.map i).hom).obj (M.val.obj Y)) :=
+  inferInstanceAs (Module (A.obj.obj Y) (M.val.obj Y))
+
 private theorem tensorRestriction_tmul
     {A S : Sheaf K CommRingCat.{r}} (c : A ⟶ S) (M : SheafOfModules.{r} (ringSheaf A))
     {X Y : Dᵒᵖ} (i : X ⟶ Y) (s : S.obj.obj X) (m : M.val.obj X) :
