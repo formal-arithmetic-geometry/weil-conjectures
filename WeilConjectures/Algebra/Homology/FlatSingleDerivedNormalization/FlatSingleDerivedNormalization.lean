@@ -390,6 +390,5 @@ theorem flat_single_derived_normalization (L : KFlatFixedTensor.Modules R)
           Functor.flip_obj_map, curriedTensor_map_app, Functor.mapIso_hom, Category.id_comp,
           cancelIso, Category.comp_id, DerivedCategory.homologyFunctorFactors_hom_naturality_assoc,
           Functor.mapIso_trans, H, b, F, h]
-        erw [Category.id_comp]
 
 end SheafOfModules.FlatSingleDerivedNormalization
