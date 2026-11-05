@@ -32,6 +32,7 @@ noncomputable def purityChangeCoefficientTrivialization
       ((g)^*[Ab.{u + 1}].mapMod _).obj (𝟙_ _)) :
     (g)^*⟦Λ'⟧.obj ((Mod.extendScalars (coefficientMap a X)).obj M) ≅
       (g)^*⟦Λ'⟧.obj (𝟙_ _) :=
+  letI := Mod.extendScalarsMonoidal (coefficientMap a X)
   ((CondensedRing.pullIso a g).app M).symm ≪≫
     (Mod.extendScalars (coefficientMap a U)).mapIso
       (purityExtendWeakPullbackIso Λ g M (𝟙_ _) e) ≪≫
