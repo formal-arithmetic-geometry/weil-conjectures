@@ -1,3 +1,19 @@
+# BZ150 complete
+
+- Branch: `u9/BZ150`; starting commit: `80aeb4bf4`.
+- All four assigned modules passed together with `ucheck-bump`: rc=0, failed=0, 3644 jobs.
+- Validated source commit: `fb9bd7b27d169a5e395ed809947ee52e6fd0b46e`.
+- Build tree: `newsrv:/home/ubuntu/u9n/bumpw5`.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ150-final-full.log`.
+- The user instructed continuation after the exact one-line statement migration proposal.
+  `rightDerivedPullback_comp` now uses `(mapDerivedCategoryCompIso P P').symm` because
+  Mathlib owns the old name with the opposite orientation; the intended map is preserved.
+- All remaining declaration statements and existing docstrings are unchanged.
+- Completion marker: `/home/ubuntu/u9/state/BZ150.DONE`.
+- This completion update changes only progress documentation after the successful source build.
+- Fix patterns and logs: `/home/ubuntu/u9/bz/FIXES-BZ150.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+
 # BZ133 complete
 
 - Branch: `u9/BZ133`.
@@ -49,20 +65,3 @@
   all other declaration statements and all existing docstrings are unchanged.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 - Completion marker: `/home/ubuntu/u9/state/BZ130.DONE`.
-
-# BZ154 complete
-
-- Branch: `u9/BZ154`, starting commit `80aeb4bf4`.
-- All four assigned modules passed together through `ucheck-bump`: rc=0, failed=0, 3457 jobs.
-- Validated source commit: `d26e23a372af96d353232cce73966fa427f1419d`.
-- Each assigned module rebuilt successfully on `newsrv:/home/ubuntu/u9n/bumpw2`.
-- Full build log: `/home/ubuntu/u9/bz/BUILD-BZ154-final-full.log`.
-- The user instructed continuation after the exact one-line statement correction in
-  `BZ154-shift-statement-proposal.patch`; that patch is applied and validated.
-- The shift comparison's target is quotient followed by `Plus.Qh`, matching its existing
-  construction and homotopy-category unit. Other changes are the mandated composition
-  isomorphism migration and imports for private definitional reductions.
-- Fix patterns and whole-tree occurrence counts: `/home/ubuntu/u9/bz/FIXES-BZ154.md`.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
-- Completion marker: `/home/ubuntu/u9/state/BZ154.DONE`.
-- This completion commit changes only progress documentation; Lean sources match the green build.
