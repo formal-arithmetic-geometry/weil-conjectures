@@ -323,12 +323,13 @@ private lemma bottom_resolution_map_unit
   simp only [Functor.map_comp] at hhu
   erw [hhu]
   dsimp only [resolutionDerivedIso]
-  simp only [Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, asIso_inv,
+  simp only [Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv, asIso_inv,
     Functor.map_comp, Category.assoc]
   have hB : (DerivedCategory.Plus.quotientCompQhIso B).inv.app LJ = 𝟙 _ := rfl
   have hC : (DerivedCategory.Plus.quotientCompQhIso C).hom.app
       (G.mapCochainComplexPlus.obj LJ) = 𝟙 _ := rfl
-  erw [hB, hC, Functor.map_id, Functor.map_id, Category.comp_id, Category.id_comp]
+  erw [hB, hC]
+  simp only [Functor.map_id, Category.comp_id, Category.id_comp]
   have : ∀ i, Injective (LJ.obj.X i) := fun i ↦
     inferInstanceAs (Injective (J.cochainComplex.X i))
   erw [← Functor.map_comp_assoc (DerivedCategory.Plus.homologyFunctor C n)
