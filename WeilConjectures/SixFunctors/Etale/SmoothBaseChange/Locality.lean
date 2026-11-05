@@ -5,6 +5,7 @@ Authors: Nailin Guan
 -/
 module
 
+public import Mathlib
 public import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting
 public import WeilConjectures.SixFunctors.BaseChange.EtaleDerived
