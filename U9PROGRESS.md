@@ -116,16 +116,21 @@
 - Fix patterns and baseline log: `/home/ubuntu/u9/bz/FIXES-BZ384.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ457 in progress
+# BZ459 complete
 
-- Branch: `u9/BZ457`; starting commit: `99a06bbbb`.
-- Assigned module: `WeilConjectures.Algebra.Homology.AffineDerivedPushforwardSheafEdge`.
-- Baseline and import-only remote builds identify one public statement mismatch:
-  `HomologicalComplexUpToQuasiIso.Qh` is `@[no_expose]` in pinned Mathlib.
-- The user instructed continuation after the explicit identity-cast proposal.
-  Applied `cast (by rfl)` around the unit morphism, with public and implementation
-  imports of `Mathlib.Algebra.Homology.Localization`.
-- Remote leaf validation is queued via `ucheck-bump`; no local Lean/Lake execution.
-- Next: fix any remaining proof errors, validate both direct importers, then the
-  normalization layer and write `/home/ubuntu/u9/state/BZ457.DONE`.
-- Fix patterns and logs: `/home/ubuntu/u9/bz/FIXES-BZ457.md`.
+- Branch: `u9/BZ459`; starting commit: `99a06bbbb46`.
+- Assigned module `WeilConjectures.AlgebraicGeometry.DerivedOpenGluingObjects` passed
+  `ucheck-bump`: rc=0, failed=0, 2927 jobs, on `poolb:43.157.132.198`.
+- Validated source commit: `841d33dd8504561794c58471ae53351e311c9f1d`.
+- The user instructed continuation after the explicit statement API migration proposal.
+  Two obsolete compositor `.symm` uses were removed to retain the original canonical maps.
+  All proof bodies, binders, hypotheses, docstrings, and options remain unchanged.
+- Direct importer `DerivedOpenGluing` was attempted but skipped because BZ361-owned
+  `SchemeDerivedHomGluing` fails. Its four-line repair is saved at
+  `/home/ubuntu/u9/bz/BZ459-downstream-deferred.patch`; committed importer source is unchanged.
+- Full green log: `/home/ubuntu/u9/bz/BUILD-BZ459-final-full.log`.
+- Fix patterns and dependency diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ459.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ459-contract-audit.txt`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ459.DONE`.
+- This final commit changes only progress documentation after the successful source build.
