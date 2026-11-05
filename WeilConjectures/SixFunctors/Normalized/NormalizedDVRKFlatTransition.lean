@@ -489,7 +489,7 @@ private theorem comparison_eq (n : ℕ)
     HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift_inv,
     Quotient.lift.isLift_hom]
   erw [(scalarReductionDerivedExtension l E X n).map_id, DerivedCategory.Qh.map_id,
-    Category.id_comp, Category.comp_id, Category.comp_id]
+    Category.id_comp, Category.comp_id]
 
 local instance : Category.{max (t + 2) (u + 1)}
     (DerivedCategory (scalarReductionSource l E X)) := inferInstance
