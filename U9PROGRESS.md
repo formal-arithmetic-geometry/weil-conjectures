@@ -50,56 +50,57 @@
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 - Completion marker: `/home/ubuntu/u9/state/BZ130.DONE`.
 
-# BZ154 in progress
+# BZ154 complete
 
 - Branch: `u9/BZ154`, starting commit `80aeb4bf4`.
-- Three assigned modules passed the first repair build at `31ce5f122`.
+- All four assigned modules passed together through `ucheck-bump`: rc=0, failed=0, 3457 jobs.
+- Validated source commit: `d26e23a372af96d353232cce73966fa427f1419d`.
+- Each assigned module rebuilt successfully on `newsrv:/home/ubuntu/u9n/bumpw2`.
+- Full build log: `/home/ubuntu/u9/bz/BUILD-BZ154-final-full.log`.
 - The user instructed continuation after the exact one-line statement correction in
-  `BZ154-shift-statement-proposal.patch`; that patch is now applied.
+  `BZ154-shift-statement-proposal.patch`; that patch is applied and validated.
 - The shift comparison's target is quotient followed by `Plus.Qh`, matching its existing
-  construction and homotopy-category unit. All other changes are the mandated composition
+  construction and homotopy-category unit. Other changes are the mandated composition
   isomorphism migration and imports for private definitional reductions.
-- Next: validate all four modules together with `ucheck-bump`, then write the DONE marker.
-- Fix patterns: `/home/ubuntu/u9/bz/FIXES-BZ154.md`.
+- Fix patterns and whole-tree occurrence counts: `/home/ubuntu/u9/bz/FIXES-BZ154.md`.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ154.DONE`.
+- This completion commit changes only progress documentation; Lean sources match the green build.
 
-# BZ190 complete
+# BZ229 complete
 
-- Branch: `u9/BZ190`.
-- Assigned module: `WeilConjectures.CategoryTheory.CanonicalResolutionCompositeUnitComparison`.
-- The module passed `ucheck-bump`: rc=0, failed=0, 2090 jobs.
-- Tested source commit: `a20255451c8530a95240e9634ea6bab8a027d11d`.
-- Final log: `/home/ubuntu/u9/bz/BUILD-BZ190-final-full.log`.
-- Build tree: `newsrv:/home/ubuntu/u9n/bumpw7`; both requested pins verified.
-- The user instructed continuation after the exact canonical unit proposal.
-  Applied `Unith.app (quotient.obj L)` → `Unit.app L` in the public statement.
-  The proof expands the unit and cancels its canonical comparison identities.
-  All other declaration statements and existing docstrings are unchanged.
-- Private helpers use implementation imports and explicit comparison cancellation.
-- Fix patterns and exact errors: `/home/ubuntu/u9/bz/FIXES-BZ190.md`.
-- Completion marker: `/home/ubuntu/u9/state/BZ190.DONE`.
-- No local Lean/Lake, proof placeholders, trust escapes, or heartbeat increases.
-- This final commit changes only progress documentation after the successful build.
+- Branch: `u9/BZ229`; starting commit: `c0384594d`.
+- Assigned module: `WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraDerivedRightAdjointLift`.
+- The module passed `ucheck-bump`: rc=0, failed=0, 2110 jobs; target rebuilt in 10 seconds.
+- Validated source commit: `0673016c02360dade89345e38fc576c7609cf662`.
+- Build tree: `newsrv:/home/ubuntu/u9n/bumpw1`.
+- Full build log: `/home/ubuntu/u9/bz/BUILD-BZ229-final-full.log`.
+- The user instructed continuation after the explicit one-token statement correction proposal.
+  Applied `.hom` -> `.inv` in the composition-factor helper to preserve its original map
+  after adopting Mathlib's reversed composition isomorphism. Other statement types and
+  all existing docstrings are unchanged.
+- Definition bodies and inverse cancellation now use the new composition orientation.
+  Two trailing `rfl` tactics after `simp` were removed. The final `rfl` after `erw` is needed
+  in this module and is retained.
+- Fix patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ229.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ229.DONE`.
+- This completion commit changes only progress documentation; Lean source matches the green build.
 
-# BZ302 complete
+# BZ307 complete
 
-- Branch: `u9/BZ302`; starting commit `18e44f2d5127c179f285ccf7d988c2bf3963106e`.
-- Assigned module `WeilConjectures.RingTheory.PseudoCoherentNormalizedAlgebraTower`
-  passed `ucheck-bump`: rc=0, failed=0, 3874 jobs.
-- Validated source commit: `0d7f5241259939090a66c9cf0c46ae2359caa63a`.
-- The user instructed continuation after the exact two-line statement compatibility
-  proposal; the composition comparison now uses `.symm` to retain its old direction.
-- Full successful log: `/home/ubuntu/u9/bz/BUILD-BZ302-fix-full.log`.
-- Attempted four direct importers: RlimPerfectComplete, IntegralConstantModelRealization,
-  IntegralContinuousEncodingConstructible, and ProEtaleTateTwistLevels.
-- They are blocked by unowned dependencies, including DerivedBaseChange, ConstantFieldFlat,
-  and RingedToposAdaptedFlatResolution. Skipped them as the brief directs.
-- Stopped the downstream batch after confirming all four targets were blocked; its
-  complete captured log is `/home/ubuntu/u9/bz/BUILD-BZ302-downstream-full.log`.
-- The unvalidated RlimPerfectComplete changes were reverted; the candidate patch
-  is preserved at `/home/ubuntu/u9/bz/BZ302-rlim-proof.patch` for its owner.
-- Final Lean sources match the successful assigned-module build exactly.
-- Fix patterns, occurrence counts, and downstream diagnostics:
-  `/home/ubuntu/u9/bz/FIXES-BZ302.md`.
-- No local Lean/Lake, proof placeholders, trust escapes, or heartbeat increases.
-- Completion marker: `/home/ubuntu/u9/state/BZ302.DONE`.
+- Branch: `u9/BZ307`; starting commit: `ec1bc636d93cb23a821cc484ab6aef1db014813f`.
+- Assigned `RightDerivedFunctor.CommIsoComp` and three downstream modules passed together:
+  `HomotopyCategory.MateCounit`, `IsoAlgebraDerivedRightAdjointFree`, and
+  `IsoAlgebraDerivedRightAdjointCounit`.
+- Final `ucheck-bump`: rc=0, failed=0, 2143 jobs, on `poolb:43.166.74.12`.
+- Validated source commit: `fadcb6a99f64bef30efc7db992eb12fb2d852d0e`. This completion commit changes documentation only.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ307-downstream2-full.log`.
+- The user instructed continuation after the exact two-expression statement proposal.
+  Applied the compositor orientation substitutions and matching proof migration;
+  other declarations and all existing docstrings are unchanged.
+- Two direct importers were skipped after failures in dependencies owned by BZ289,
+  BZ290, and BZ291. Their errors are recorded in the fix log.
+- Fix patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ307.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ307.DONE`.
