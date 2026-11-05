@@ -19,6 +19,7 @@ import WeilConjectures.CategoryTheory.Triangulated.DerivedFunctorDerivedLimit
 import WeilConjectures.AlgebraicGeometry.TruncationDerivedLimit
 import WeilConjectures.AlgebraicGeometry.AffineBasisRestrictedLowerTailLocalBound
 import WeilConjectures.AlgebraicGeometry.OpenDerivedSectionsTruncationTowerComparison
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Affine-basis lower truncation tower inputs
 Source: Stacks Project, Tags 0BKT, 0D64, 071B and 08D4. -/

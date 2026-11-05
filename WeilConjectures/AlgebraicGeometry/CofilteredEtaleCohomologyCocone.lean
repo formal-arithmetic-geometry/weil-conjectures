@@ -9,6 +9,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import WeilConjectures.AlgebraicGeometry.CofilteredFixedBaseCohomologyContinuity
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-!
 # A cohomology colimit cocone for a cofiltered system over a fixed scheme

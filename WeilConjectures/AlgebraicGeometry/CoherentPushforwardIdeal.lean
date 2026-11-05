@@ -14,6 +14,7 @@ import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.FinitePushforwardFiniteType
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! Coherence of an ideal pushforward.
 (blueprint: lem-pc-r2-coherent-pushforward-ideal)

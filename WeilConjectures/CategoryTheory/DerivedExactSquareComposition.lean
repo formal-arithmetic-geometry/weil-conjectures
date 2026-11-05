@@ -143,7 +143,7 @@ private theorem exactSquare_comp_inverse
   let b := mapDerivedCategorySquareIso q₀₁
   let c := mapDerivedCategorySquareIso q₁₂
   let dF := mapDerivedCategoryNatIso cF ≪≫ (mapDerivedCategoryCompIso F₀₁ F₁₂).symm
-  let dG := mapDerivedCategoryNatIso cG ≪≫ mapDerivedCategoryCompIso G₀₁ G₁₂
+  let dG := mapDerivedCategoryNatIso cG ≪≫ (mapDerivedCategoryCompIso G₀₁ G₁₂).symm
   let τ₁ := a.hom ≫ whiskerRight dF.hom U₂.mapDerivedCategory
   let τ₂ := whiskerLeft U₀.mapDerivedCategory dG.hom ≫
     (associator _ _ _).inv ≫ whiskerRight b.hom G₁₂.mapDerivedCategory ≫

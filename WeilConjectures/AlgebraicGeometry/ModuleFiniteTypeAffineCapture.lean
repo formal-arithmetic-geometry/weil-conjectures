@@ -9,6 +9,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Coherent
 import WeilConjectures.AlgebraicGeometry.ModuleFiniteTypeAffineGenerators
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Finite-type capture on a compact open inside an affine open
 

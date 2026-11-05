@@ -19,6 +19,7 @@ import WeilConjectures.AlgebraicGeometry.IntegralIdealGenericStalk
 import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
 import WeilConjectures.Algebra.Homology.ModuleStalkExact
 import WeilConjectures.AlgebraicGeometry.FinitePushforwardFiniteType
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! Construction of the common generic lattice, with coherence separated from the
 coherence of the original pushed ideal.

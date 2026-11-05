@@ -1048,7 +1048,7 @@ private lemma derivedAssociativity
     (mapDerivedCategoryNatIso c₀).hom.app M ≫
         (mapDerivedCategoryCompIso F Q).hom.app M ≫
         ((mapDerivedCategoryNatIso c₁).hom.app (F.mapDerivedCategory.obj M) ≫
-          (mapDerivedCategoryCompIso G H).hom.app (F.mapDerivedCategory.obj M)) =
+          (mapDerivedCategoryCompIso G H).inv.app (F.mapDerivedCategory.obj M)) =
       (eqToHom (show R'.mapDerivedCategory = R.mapDerivedCategory by cases w; rfl)).app M ≫
         (mapDerivedCategoryNatIso c₂).hom.app M ≫
         (mapDerivedCategoryCompIso P H).inv.app M ≫

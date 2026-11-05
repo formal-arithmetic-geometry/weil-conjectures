@@ -11,6 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalence
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import WeilConjectures.Algebra.Homology.DerivedFreeModuleHomology
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Perfect generation over an affine base
 

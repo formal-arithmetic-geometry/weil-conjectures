@@ -118,7 +118,7 @@ theorem exists_pointed_clopen_refinement
     apply pullback.hom_ext
     · change pt ≫ μ ≫ pullback.fst W.hom ρ = r ≫ pullback.fst W.hom ρ
       rw [pullback.lift_fst, ← Category.assoc, hptθ]
-      exact congrArg CategoryTheory.Over.Hom.left b.property
+      exact congrArg CategoryTheory.Over.Hom.left b.map_val
     · change pt ≫ μ ≫ pullback.snd W.hom ρ = r ≫ pullback.snd W.hom ρ
       rw [pullback.lift_snd, hrs]
       change pt ≫ (P.ι ≫ (f.Etale.map gm.val).left) = basePt f c t

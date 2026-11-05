@@ -31,7 +31,7 @@ Source: Stacks 015F (blueprint: lem-pur-system-derived-subsequence). -/
 def systemDerivedSubsequenceEvaluation (r : ℕ ↪o ℕ) (n : ℕ) :
     derivedSystemSubsequence B r ⋙ derivedSystemEvaluation (selectedSystemRings B r) n ≅
       derivedSystemEvaluation B (r n) :=
-  (Functor.mapDerivedCategoryCompIso (systemSubsequence B r)
+  ((Functor.mapDerivedCategoryCompIso (systemSubsequence B r)).symm
     (systemEvaluation (selectedSystemRings B r) n)).symm
 
 /-- The selected-evaluation comparison has the canonical cochain representative formula.
@@ -59,7 +59,7 @@ Source: Stacks 015F (blueprint: lem-pur-system-derived-subsequence). -/
 def systemDerivedSubsequenceComposition (r s : ℕ ↪o ℕ) :
     derivedSystemSubsequence B r ⋙ derivedSystemSubsequence (selectedSystemRings B r) s ≅
       derivedSystemSubsequence B (s.trans r) :=
-  (Functor.mapDerivedCategoryCompIso (systemSubsequence B r)
+  ((Functor.mapDerivedCategoryCompIso (systemSubsequence B r)).symm
     (systemSubsequence (selectedSystemRings B r) s)).symm
 
 /-- The subsequence compositor has the canonical cochain representative formula.

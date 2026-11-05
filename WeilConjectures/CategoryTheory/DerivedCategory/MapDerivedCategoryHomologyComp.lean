@@ -54,7 +54,7 @@ lemma mapDerivedCategoryHomologyFunctorIso_comp (n : ℤ) (K : DerivedCategory C
     refine Localization.natTrans_ext DerivedCategory.Q
       (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) (fun L => ?_)
     have hfac : (F ⋙ G).mapDerivedCategoryFactors.inv.app L ≫
-        (mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Q.obj L) =
+        (mapDerivedCategoryCompIso F G).inv.app (DerivedCategory.Q.obj L) =
         G.mapDerivedCategoryFactors.inv.app ((F.mapHomologicalComplex (.up ℤ)).obj L) ≫
           G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.inv.app L) := by
       rw [← cancel_epi ((F ⋙ G).mapDerivedCategoryFactors.hom.app L), Iso.hom_inv_id_app_assoc,
