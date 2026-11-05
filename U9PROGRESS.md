@@ -1,17 +1,3 @@
-# BZ152 complete
-
-- Branch: `u9/BZ152`.
-- The user instructed continuation after the exact statement-compatibility proposal;
-  the proposed compositor orientation and explicit homotopy-localization edits are applied.
-- All four assigned modules passed `ucheck-bump` together: rc=0, failed=0, 3357 jobs.
-- Validated source commit: `a0e75fbc428ca3fe9724a0cd92c7a8cc14ea3060`.
-- Each target rebuilt successfully on `newsrv:/home/ubuntu/u9n/bumpw2`.
-- Full log: `/home/ubuntu/u9/bz/BZ152-build-final-full.log`.
-- Completion marker: `/home/ubuntu/u9/state/BZ152.DONE`.
-- This final commit changes progress documentation only.
-- Patterns, proposal, and build logs: `/home/ubuntu/u9/bz/FIXES-BZ152.md`.
-- No local Lean/Lake execution, forbidden proof escapes, or heartbeat increases.
-
 # BZ133 complete
 
 - Branch: `u9/BZ133`.
@@ -63,3 +49,20 @@
   all other declaration statements and all existing docstrings are unchanged.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 - Completion marker: `/home/ubuntu/u9/state/BZ130.DONE`.
+
+# BZ154 complete
+
+- Branch: `u9/BZ154`, starting commit `80aeb4bf4`.
+- All four assigned modules passed together through `ucheck-bump`: rc=0, failed=0, 3457 jobs.
+- Validated source commit: `d26e23a372af96d353232cce73966fa427f1419d`.
+- Each assigned module rebuilt successfully on `newsrv:/home/ubuntu/u9n/bumpw2`.
+- Full build log: `/home/ubuntu/u9/bz/BUILD-BZ154-final-full.log`.
+- The user instructed continuation after the exact one-line statement correction in
+  `BZ154-shift-statement-proposal.patch`; that patch is applied and validated.
+- The shift comparison's target is quotient followed by `Plus.Qh`, matching its existing
+  construction and homotopy-category unit. Other changes are the mandated composition
+  isomorphism migration and imports for private definitional reductions.
+- Fix patterns and whole-tree occurrence counts: `/home/ubuntu/u9/bz/FIXES-BZ154.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ154.DONE`.
+- This completion commit changes only progress documentation; Lean sources match the green build.
