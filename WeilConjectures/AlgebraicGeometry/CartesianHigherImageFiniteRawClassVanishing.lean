@@ -23,11 +23,11 @@ open CategoryTheory Limits Opposite
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
-noncomputable local instance finiteRawClassVanishingHasShift (T : Scheme.{u}) :
+noncomputable local instance cartesianHigherImageFiniteRawClassHasShift (T : Scheme.{u}) :
     HasShift (DerivedCategory.Plus (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})) ℤ :=
   inferInstance
 
-noncomputable local instance finiteRawClassVanishingHasZeroMorphisms (T : Scheme.{u}) :
+noncomputable local instance cartesianHigherImageFiniteRawClassHasZeroMorphisms (T : Scheme.{u}) :
     HasZeroMorphisms (DerivedCategory.Plus (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})) :=
   inferInstance
 
