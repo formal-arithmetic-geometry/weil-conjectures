@@ -8,7 +8,7 @@ public import WeilConjectures.WeilSheaf.SmoothPurityTatePullbackFactor
 public import WeilConjectures.WeilSheaf.SmoothPurityRationalRootLaw
 public import WeilConjectures.WeilSheaf.SmoothPurityFrobeniusFactorAlias
 public import WeilConjectures.WeilSheaf.SmoothPurityCyclotomicField
-import WeilConjectures.Tactic.ExactModProofs
+import WeilConjectures.Tactic.CastProofsTrace
 
 /-! # A module interface for the scalar Tate comparison
 
@@ -103,7 +103,10 @@ lemma purityScalarTateCompare_comm :
   rw [purity_upperStarTateTwistOneIso_independent_base ℓ a.geometricGaloisFrobenius.hom
     (a.geometricFiberProj ≫ a) a.geometricFiberToAlgebraicClosure,
     ← purity_geometricFiberProjUpperStarFrobeniusIso_eq (Profinite.padicAlgClRingObj ℓ) a] at h
-  exact h
+  dsimp only [purityScalarFrobeniusPull, purityScalarTateCompare,
+    purityScalarTargetDatum, purityScalarSourceDatum, purityScalarSourceObject,
+    Functor.comp_obj, Functor.comp_map] at h ⊢
+  exact_mod_proofs h
 
 lemma purityScalarUnitCompare_comm :
     (purityScalarFrobeniusPull ℓ a).map (purityScalarUnitCompare ℓ a).hom ≫
@@ -114,7 +117,10 @@ lemma purityScalarUnitCompare_comm :
     a.geometricGaloisFrobenius_hom_comp_geometricFiberProj
   rw [← purity_geometricFiberProjUpperStarFrobeniusIso_eq
     (Profinite.padicAlgClRingObj ℓ) a] at h
-  exact h
+  dsimp only [purityScalarFrobeniusPull, purityScalarUnitCompare,
+    purityScalarTargetUnitDatum, purityScalarSourceUnitDatum, purityScalarSourceUnit,
+    Iso.symm_hom, Functor.comp_obj, Functor.comp_map] at h ⊢
+  exact_mod_proofs h
 
 variable {ζ : ℕ → AlgebraicClosure k} (hζ : ∀ n, IsPrimitiveRoot (ζ n) (ℓ ^ n))
   (hζ' : ∀ n, ζ (n + 1) ^ ℓ = ζ n)
@@ -138,7 +144,7 @@ lemma purityScalarRootTrivialization_weil :
   unfold purityScalarSourceDatum purityScalarRootTrivialization
     purityScalarFrobeniusPull purityScalarSourceUnitDatum
   dsimp only [tateTwistOne, Functor.comp_obj, Functor.comp_map] at h ⊢
-  exact h
+  cast_proofs_trace h
 
 /-- The canonical geometric trivialization in the scalar interface. -/
 noncomputable def purityScalarCanonicalTrivialization :
@@ -170,6 +176,8 @@ lemma purityScalarCanonicalEquation
         (Functor.Monoidal.εIso
           (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ)
             a.geometricGaloisFrobenius.hom)).inv := by
-  exact h
+  dsimp only [purityScalarFrobeniusPull, purityScalarTargetDatum,
+    purityScalarTargetUnitDatum, Functor.comp_obj, Functor.comp_map] at h ⊢
+  exact_mod_proofs h
 
 end AlgebraicGeometry.ProEtale
