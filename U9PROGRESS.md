@@ -170,25 +170,24 @@
 - Final documentation commit leaves Lean source identical to the green revision.
 
 
-# BZ630 complete
+# BZ631 complete
 
-- Branch: `u9/BZ630`; starting commit: `b7a97a5ed`.
-- Assigned module `WeilConjectures.AlgebraicGeometry.Injective.InjectiveExchangeSourceTransport`
-  passed ucheck-bump: rc=0, built=3, failed=0, 4242 jobs; target rebuilt in 12 seconds.
-- Validated source commit: `afb9e8c2c047f6cb0e4e0070c181f52e25eb696a`.
-- Green log: `/home/ubuntu/u9/bz/BZ630-unit-green-full.log`; poolb:43.157.135.193.
-  Lean v4.35.0-rc3 and exact Mathlib b63f6e8a pin confirmed on that host.
-- The user instructed continuation after the explicit endpoint-transport statement proposal.
-  That exact patch is applied. The proof keeps quotientCompQhIso opaque, reduces only the
-  exposed homotopy comparison, and cancels its mapped identity using erw.
-- Sole direct importer Injective.InjectiveExchangeRepresentative was attempted at
-  `a1f0d2dc924831564872c1058580050ba807ca78`; the assigned module rebuilt green in that batch.
-- The importer is blocked by eight errors in unowned Injective.InjectiveExchangeTargetTransport
-  (BZ631). Skipped it and its dependent Strict.Local.StrictLocalDerivedExchangeLeray under
-  the brief's ownership rule. No downstream modules are claimed green or edited.
-- Downstream log: `/home/ubuntu/u9/bz/BZ630-downstream-full.log` (rc=1, failed=1).
-- Patterns and occurrence counts: `/home/ubuntu/u9/bz/FIXES-BZ630.md`.
-  Contract audit: `/home/ubuntu/u9/bz/BZ630-contract-audit.txt`.
-- No local Lean/Lake, proof placeholders, trust bypasses, heartbeat raises, or profiler probes.
-- Completion marker: `/home/ubuntu/u9/state/BZ630.DONE`.
-- This final documentation commit leaves Lean source identical to the green revision.
+- Branch: `u9/BZ631`; starting commit: `b7a97a5ed`.
+- Assigned module `WeilConjectures.AlgebraicGeometry.Injective.InjectiveExchangeTargetTransport`
+  passed `ucheck-bump`: 4243 jobs, target freshly rebuilt in 47 seconds.
+- Validated source commit: `a0b448506d61187b0aa3f3811cf84153b5f977c9`.
+- Build tree: `poolb:43.166.82.34`; exact Lean v4.35.0-rc3 and Mathlib b63f6e8a pins verified.
+- The user instructed continuation after the exact two-statement proposal. Applied
+  the `Plus.Qh.obj H` endpoint and canonical quotient comparison, with the latter
+  reduced to identity in the proof. All other statement text and docstrings are unchanged.
+- Full successful log: `/home/ubuntu/u9/bz/BUILD-BZ631-unit-full.log`.
+- Direct importer `Injective.InjectiveExchangeRepresentative` was submitted, then
+  skipped under the unowned-dependency rule: BZ630's `InjectiveExchangeSourceTransport`
+  is byte-for-byte identical to the source with three recorded Lean errors at
+  `3c12182227`. Cancelled only the verified queued downstream request before it acquired
+  a tree. The importer and its next layer are not claimed green; no downstream edits.
+- Fix patterns, occurrence counts, and blocker evidence: `/home/ubuntu/u9/bz/FIXES-BZ631.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ631-contract-audit.txt`.
+- No local Lean/Lake execution, sorries, proof escapes, heartbeat increases, or profiler probes.
+- Completion marker: `/home/ubuntu/u9/state/BZ631.DONE`.
+- This completion commit changes only documentation; Lean source matches the green revision.
