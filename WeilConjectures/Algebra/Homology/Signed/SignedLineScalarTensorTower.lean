@@ -58,6 +58,18 @@ open scoped ChangeOfRings
 
 namespace SheafOfModules
 
+noncomputable local instance
+    {D : Type uC} [Category.{vC} D] {K : GrothendieckTopology D}
+    [K.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
+    {R : Sheaf K CommRingCat.{u}}
+    (M : SheafOfModules.{u} ((sheafCompose K (forget₂ CommRingCat RingCat)).obj R))
+    {U V : Dᵒᵖ} (f : U ⟶ V) :
+    SMul (R.obj.obj V)
+      ((ModuleCat.restrictScalars
+        (((sheafCompose K (forget₂ CommRingCat RingCat)).obj R).obj.map f).hom).obj
+          (M.val.obj V)) :=
+  (M.val.obj V).isModule.toSMul
+
 private theorem linearEquiv_basis_bijective
     {A : Type u} [Ring A] {M : Type vC} [AddCommGroup M] [Module A M]
     (q : M ≃ₗ[A] A) (x : M) (hx : q x = 1) :
@@ -675,10 +687,6 @@ noncomputable def signedLinePower {R : Sheaf J CommRingCat.{max uC vC u}}
   | .ofNat n => scalarTensorPower R L n
   | .negSucc n => homObj (scalarTensorPower R L (n + 1))
       (unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
-
-noncomputable local instance {A B : Type*} [Ring A] [Ring B] (f : A →+* B)
-    (M : ModuleCat.{u} B) : Module B ((ModuleCat.restrictScalars f).obj M) :=
-  inferInstanceAs (Module B M)
 
 /-- Local signed basis normalization: a genuine basis after every restriction, positive
 powers by tensors, and negative powers dual to the positive ones on every slice object.
