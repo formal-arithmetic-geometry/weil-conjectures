@@ -56,6 +56,9 @@ def projectionGeometricPullComp :
   (eqToIso (congrArg (CondensedRing.boundedConstructibleUpperStar Λ l) (cb).overI_overG.symm) ≪≫
     CondensedRing.boundedConstructibleUpperStarComp Λ l (cb).overI (cb).overG).symm
 
+set_option maxHeartbeats 800000 in
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency false in
 /-- Forget comparison for the compactification induced from the Weil category. -/
 def projectionCompactificationForgetIso :
     derivedLowerShriek k₀ l f ⋙ compactProjectionForget k₀ l Y ≅
@@ -65,6 +68,9 @@ def projectionCompactificationForgetIso :
     Functor.isoWhiskerRight (projectionOpenForgetIso k₀ l (c).i)
       (CondensedRing.boundedConstructibleLowerStar l (cb).overG)
 
+set_option maxHeartbeats 800000 in
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency false in
 /-- Pullback comparison obtained by pasting the open and proper comparisons. -/
 def projectionCompactPullForgetIso :
     upperStar f ⋙ compactProjectionForget k₀ l X ≅
@@ -76,6 +82,9 @@ def projectionCompactPullForgetIso :
       (CondensedRing.boundedConstructibleUpperStar Λ l (cb).overI) ≪≫
     Functor.isoWhiskerLeft (compactProjectionForget k₀ l Y) (projectionGeometricPullComp k₀ l f)
 
+set_option maxHeartbeats 800000 in
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency false in
 /-- The compact projection isomorphism, with both factors canonically normalized. -/
 def projectionCompactIso : nativeCompactProjectionLeft k₀ l f ≅ nativeCompactProjectionRight k₀ l f :=
   projectionCompositeIso (nativeBoundedOpenProjectionIso (c).i) (nativeBoundedProperProjectionIso (c).g)
