@@ -57,13 +57,23 @@ lemma purityCanonicalTateOneTrivialization_weil :
   have h := K4Coefficient.scalarDatum_conjugate_indexed
     (M := (Mod.extendScalars (coefficientMap (Profinite.padicIntRingObjToPadicAlgCl ℓ) X)).obj
       (tateModule X ℓ))
+    (N := 𝟙_ (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X)))
+    (T := tateTwistOne a.geometricFiber ℓ)
+    (U := 𝟙_ (Mod (Sheaf (ProEt.topology a.geometricFiber) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) a.geometricFiber)))
     (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricFiberProj)
     (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricGaloisFrobenius.hom)
     (geometricFiberProjUpperStarFrobeniusIso (Profinite.padicAlgClRingObj ℓ) a)
     (purityScalarTateCompare ℓ a) (purityScalarUnitCompare ℓ a)
     (purityScalarTargetDatum ℓ a) (purityScalarTargetUnitDatum ℓ a)
     (purityScalarTateCompare_native_comm ℓ a) (purityScalarUnitCompare_native_comm ℓ a)
-    _ (purityScalarCanonicalTrivialization ℓ a hζ hζ')
+    (purityChangeCoefficientTrivialization (Profinite.continuousMapRingObj ℤ_[ℓ])
+      (Profinite.padicIntRingObjToPadicAlgCl ℓ) a.geometricFiberProj (tateModule X ℓ)
+      (upperStarMapModTateModuleIsoUnit a.geometricFiberProj
+        a.geometricFiberToAlgebraicClosure ℓ hζ hζ' ≪≫
+        (a.geometricFiberProj)^*[Ab.{u + 1}].mapModUnitIso))
+    (purityScalarCanonicalTrivialization ℓ a hζ hζ')
     (purityScalarCanonicalTrivialization_native_eq ℓ a hζ hζ') (Nat.card k : ℤ)
     (purity_rationalRootTrivialization_weil a hζ hζ')
   have h' := purityScalarCanonicalEquation ℓ a hζ hζ' h
