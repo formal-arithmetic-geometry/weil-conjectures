@@ -42,11 +42,8 @@ private noncomputable def resolutionAugmentationIso
     (DerivedCategory.Plus.singleFunctor A 0).obj X ≅
       DerivedCategory.Plus.Q.obj (resolutionPlus I) :=
   DerivedCategory.Plus.ι.preimageIso
-    ((DerivedCategory.Plus.singleFunctorιIso A 0).app X) ≪≫
-      (DerivedCategory.singleFunctorIsoCompQ A 0).app X ≪≫
-      asIso (DerivedCategory.Q.map I.ι') ≪≫
-      (DerivedCategory.quotientCompQhIso A).symm.app I.cochainComplex ≪≫
-      (DerivedCategory.Plus.quotientCompQhIso A).app (resolutionPlus I)
+    ((DerivedCategory.singleFunctorIsoCompQ A 0).app X ≪≫
+      asIso (DerivedCategory.Q.map I.ι'))
 
 set_option maxHeartbeats 100000 in
 -- The quotient factorization and the lifted unit involve several nested functors.
@@ -77,11 +74,9 @@ private theorem comparison_eq_unit
       Functor.map_preimage, Iso.trans_hom, Category.assoc]
     dsimp only [DerivedCategory.Plus.Q, Functor.comp_map, ObjectProperty.ι_map,
       HomotopyCategory.Plus.quotient, ObjectProperty.lift, g]
-    erw [← DerivedCategory.quotientCompQhIso_inv_naturality,
-      ← DerivedCategory.Q.map_comp_assoc]
-    simp only [ObjectProperty.homMk_hom, InjectiveResolution.Hom.ι'_comp_hom',
-      Functor.map_id, Category.id_comp, asIso_hom, Iso.symm_hom, Iso.app_hom]
-    rfl
+    simp only [ObjectProperty.homMk_hom, asIso_hom]
+    rw [← DerivedCategory.Q.map_comp]
+    simp [InjectiveResolution.Hom.ι'_comp_hom']
   have hu : inv (v.rightDerivedFunctorPlusUnith.app
         ((HomotopyCategory.Plus.quotient A).obj (resolutionPlus R))) ≫
       (DerivedCategory.Plus.Qh (C := B)).map ((HomotopyCategory.Plus.quotient B).map vg) =
@@ -105,7 +100,12 @@ private theorem comparison_eq_unit
       (v.rightDerivedFunctorPlus.map (resolutionAugmentationIso R).hom) ≫
       DerivedCategory.Plus.ι.map (inv (v.rightDerivedFunctorPlusUnith.app
         ((HomotopyCategory.Plus.quotient A).obj (resolutionPlus R)))) ≫
-      (DerivedCategory.quotientCompQhIso B).hom.app _ ≫
+      (DerivedCategory.Plus.QhCompιIsoιCompQh B).hom.app
+        (v.mapHomotopyCategoryPlus.obj
+          ((HomotopyCategory.Plus.quotient A).obj (resolutionPlus R))) ≫
+      (DerivedCategory.quotientCompQhIso B).hom.app
+        ((v.mapHomotopyCategoryPlus.obj
+          ((HomotopyCategory.Plus.quotient A).obj (resolutionPlus R))).obj.as) ≫
       DerivedCategory.Q.map (R.cocomplex.mapExtendIso ComplexShape.embeddingUpNat v).hom ≫
       DerivedCategory.Q.map (HomologicalComplex.extendMap
         ((v.mapHomologicalComplex _).map φ.hom) ComplexShape.embeddingUpNat) = _
@@ -214,6 +214,12 @@ private theorem augmentation_boundary
       (DerivedCategory.quotientCompQhIso A).hom.app IC.cochainComplex ≫
       DerivedCategory.triangleOfSESδ hH ≫
       ((DerivedCategory.quotientCompQhIso A).inv.app IA.cochainComplex)⟦(1 : ℤ)⟧' ≫
+      (shiftFunctor (DerivedCategory A) 1).map
+        ((DerivedCategory.Plus.QhCompιIsoιCompQh A).inv.app
+          ((HomotopyCategory.Plus.quotient A).obj (resolutionPlus IA))) ≫
+      (shiftFunctor (DerivedCategory A) 1).map
+        (DerivedCategory.Plus.ι.map
+          ((DerivedCategory.Plus.quotientCompQhIso A).hom.app (resolutionPlus IA))) ≫
       (DerivedCategory.Plus.ι.commShiftIso (1 : ℤ)).inv.app
         (DerivedCategory.Plus.Q.obj (resolutionPlus IA)) ≫
       (DerivedCategory.Plus.ι.commShiftIso (1 : ℤ)).hom.app
