@@ -404,6 +404,10 @@ private noncomputable def ordinaryConeIsLimit (O : Sheaf J CommRingCat.{u})
 
 end TelescopeHomRoosProof
 
+private local instance (O : Sheaf J CommRingCat.{u}) (I : Type u)
+    (K : I → ringedSiteComplex O) : HasCoproduct K :=
+  HasColimitsOfShape.has_colimit _
+
 set_option maxHeartbeats 400000 in
 -- The canonical sheaf limit instances require more than the default elaboration budget.
 /-- The algebraic telescope-Hom comparison identifies the actual arrow, using both
