@@ -168,3 +168,17 @@
 - No local Lean/Lake execution, sorries, proof shortcuts, heartbeat increases, or profiler probes.
 - Completion marker: `/home/ubuntu/u9/state/BZ585.DONE`.
 - Final documentation commit leaves Lean source identical to the green revision.
+
+
+# BZ631 in progress
+
+- Branch: `u9/BZ631`; starting commit: `b7a97a5ed`.
+- The user instructed continuation after the exact two-statement proposal.
+  Applied the `Plus.Qh.obj H` endpoint and canonical mapped quotient comparison
+  in `smallModel_injectiveExchange_target_transport`.
+- Localization public/import-all imports expose the private proof reductions;
+  the new comparison is normalized to identity in the proof.
+- Existing `ucheck-bump` invocation is queued and will read the pushed branch
+  after acquiring a tree. Next: validate the assigned module, then its importer.
+- Fix patterns: `/home/ubuntu/u9/bz/FIXES-BZ631.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
