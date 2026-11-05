@@ -189,8 +189,8 @@ def constantInterchange :
     (Functor.const ℕᵒᵖ : B ⥤ _).mapDerivedCategory ⋙
         ((Functor.whiskeringRight ℕᵒᵖ B A).obj F).mapDerivedCategory ≅
       F.mapDerivedCategory ⋙ (Functor.const ℕᵒᵖ : A ⥤ _).mapDerivedCategory :=
-  ((Functor.mapDerivedCategoryCompIso (Functor.const ℕᵒᵖ)).symm
-    ((Functor.whiskeringRight ℕᵒᵖ B A).obj F)).symm ≪≫
+  Functor.mapDerivedCategoryCompIso (Functor.const ℕᵒᵖ)
+    ((Functor.whiskeringRight ℕᵒᵖ B A).obj F) ≪≫
     Functor.mapDerivedCategoryNatIso (Functor.compConstIso ℕᵒᵖ F).symm ≪≫
     (Functor.mapDerivedCategoryCompIso F (Functor.const ℕᵒᵖ)).symm
 
@@ -294,7 +294,7 @@ composition isomorphisms. Source: Stacks 015F and 07A7
 def localizedSquare (θ : g ⋙ F' ≅ F ⋙ h) :
     g.mapDerivedCategory ⋙ F'.mapDerivedCategory ≅
       F.mapDerivedCategory ⋙ h.mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso g F') ≪≫
+  Functor.mapDerivedCategoryCompIso g F' ≪≫
     Functor.mapDerivedCategoryNatIso θ ≪≫ (Functor.mapDerivedCategoryCompIso F h).symm
 
 set_option backward.isDefEq.respectTransparency false in
@@ -321,7 +321,7 @@ private theorem localizedSquare_fac (θ : g ⋙ F' ≅ F ⋙ h)
   erw [hi', Functor.map_id, Category.comp_id] at hc'
   erw [hc, Functor.mapDerivedCategoryNatIso_fac]
   erw [← hc']
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
 
 /-- The termwise inverse-image comparison, with component θ at each level.
 Source: Stacks 07A7, termwise diagram application
