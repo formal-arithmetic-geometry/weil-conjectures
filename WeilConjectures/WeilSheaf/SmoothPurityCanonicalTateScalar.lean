@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.WeilSheaf.SmoothPurityScalarPullbackInterface
-public import WeilConjectures.WeilSheaf.SmoothPurityScalarDescentConjugation
+public import WeilConjectures.WeilSheaf.SmoothPurityK4NativeScalarNamed
+public import WeilConjectures.WeilSheaf.SmoothPurityScalarDatumNamed
 import WeilConjectures.Tactic.ExactModProofs
 
 /-! # The scalar Frobenius law for the canonical geometric Tate line -/
@@ -18,7 +18,7 @@ set_option profiler.threshold 1
 universe u
 
 open CategoryTheory Limits MonoidalCategory
-open scoped CategoryTheory.Obj AlgebraicGeometry.ProEtale.CondensedRing
+open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
@@ -53,35 +53,16 @@ lemma purityCanonicalTateOneTrivialization_weil :
           (purityCanonicalTateOneTrivialization ℓ a hζ hζ').hom ≫
         (Functor.Monoidal.εIso
           (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricGaloisFrobenius.hom)).inv := by
-  have h := purity_scalarDatum_conjugate_descent
-    (M := (Mod.extendScalars (coefficientMap (Profinite.padicIntRingObjToPadicAlgCl ℓ) X)).obj
-      (tateModule X ℓ))
-    (N := 𝟙_ (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X)))
-    (T := tateTwistOne a.geometricFiber ℓ)
-    (U := 𝟙_ (Mod (Sheaf (ProEt.topology a.geometricFiber) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) a.geometricFiber)))
-    (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricFiberProj)
-    (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricGaloisFrobenius.hom)
-    (geometricFiberProjUpperStarFrobeniusIso (Profinite.padicAlgClRingObj ℓ) a)
+  have h := CategoryTheory.K4Native.scalarEquation_conjugate_named
+    (purityScalarFrobeniusPull ℓ a)
     (purityScalarTateCompare ℓ a) (purityScalarUnitCompare ℓ a)
+    (purityScalarSourceDatum ℓ a) (purityScalarSourceUnitDatum ℓ a)
     (purityScalarTargetDatum ℓ a) (purityScalarTargetUnitDatum ℓ a)
-    (purityScalarTateCompare_native_comm ℓ a)
-    (by
-      have hb := purityScalarUnitCompare_native_comm ℓ a
-      dsimp +instances only [purityScalarSourceUnit, purityScalarFrobeniusPull,
-        Functor.comp_obj, Functor.comp_map] at hb ⊢
-      exact_mod_proofs hb)
-    (purityChangeCoefficientTrivialization (Profinite.continuousMapRingObj ℤ_[ℓ])
-      (Profinite.padicIntRingObjToPadicAlgCl ℓ) a.geometricFiberProj (tateModule X ℓ)
-      (upperStarMapModTateModuleIsoUnit a.geometricFiberProj
-        a.geometricFiberToAlgebraicClosure ℓ hζ hζ' ≪≫
-        (a.geometricFiberProj)^*[Ab.{u + 1}].mapModUnitIso))
+    (purityScalarTateCompare_comm ℓ a) (purityScalarUnitCompare_comm ℓ a)
+    (purityScalarRootTrivialization ℓ a hζ hζ')
     (purityScalarCanonicalTrivialization ℓ a hζ hζ')
-    (purityScalarCanonicalTrivialization_native_eq ℓ a hζ hζ') (Nat.card k : ℤ)
-    (by
-      have he := purity_rationalRootTrivialization_weil a hζ hζ'
-      exact_mod_proofs he)
+    (purityScalarCanonicalTrivialization_eq ℓ a hζ hζ') (Nat.card k : ℤ)
+    (K4Native.scalarRootEquation_named a hζ hζ')
   have h' := purityScalarCanonicalEquation ℓ a hζ hζ' h
   dsimp only [purityCanonicalTateOneTrivialization]
   exact_mod_proofs h'
