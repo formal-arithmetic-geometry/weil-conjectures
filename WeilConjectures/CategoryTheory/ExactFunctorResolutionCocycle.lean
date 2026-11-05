@@ -128,7 +128,6 @@ theorem exactFunctor_resolution_cocycle_hom
     simp only [← Functor.map_comp_assoc]
     erw [haug]
     simp [Functor.map_comp, DerivedCategory.singleFunctor, CochainComplex.singleFunctor]
-    rfl
   let b := a ≫ (R.cochainComplexXIso q q rfl).inv
   have hb : b ≫ R.cochainComplex.d (q : ℤ) ((q : ℤ) + 1) = 0 := by
     simp [b, R.cochainComplex_d (q : ℤ) ((q : ℤ) + 1) q (q + 1) rfl (by simp),

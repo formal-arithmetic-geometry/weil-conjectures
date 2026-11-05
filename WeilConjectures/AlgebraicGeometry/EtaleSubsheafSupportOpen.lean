@@ -8,6 +8,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.CategoryTheory.Limits.Shapes.Terminal
+public import Mathlib.CategoryTheory.Sites.Limits
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 
 /-! # Construction of the open support of a subterminal étale sheaf -/
