@@ -43,8 +43,8 @@ noncomputable def strictHenselizationPointCocone
       have h := (N.map f.unop).map_val
       have hp := congrArg Over.Hom.left h
       change (N.obj k.unop).2.left ≫
-        Spec.map (N.map f.unop).1.left.unop = (N.obj j.unop).2.left at hp
-      change (Spec.map (N.map f.unop).1.left.unop).appTop ≫
+        Spec.map (N.map f.unop).hom.left.unop = (N.obj j.unop).2.left at hp
+      change (Spec.map (N.map f.unop).hom.left.unop).appTop ≫
         (N.obj k.unop).2.left.appTop ≫ (ΓSpecIso (.of Ω)).hom = _
       rw [← Category.assoc, ← Hom.comp_appTop, hp]
       simp
