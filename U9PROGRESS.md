@@ -794,3 +794,5 @@ Diagnostic195431 CLOSED rc1: nearest three parents are ProEt(X) vs ProEt(geometr
 234604 CLOSED rc1: NativeShriekTraceCriterion GREEN14s (explicit L and typed-have solve inference timeout); generic traceUniversalAt_of_coordinates GREEN3.1s; field levelwise proof passes. Sole error is associativity of the middle trace in ambient generic coordinate application; adding simp only [Iso.app_hom, Iso.app_inv, Category.assoc] to its input.
 
 234755 CLOSED rc1: FieldShriekTraceUniversality GREEN (both ambient and levelwise theorems). DescendedUnitBaseChange now only times out in statement e.hom elaboration: pullback unit iso had unspecified source/target Over objects, so specified Y and Over.mk Y.hom.geometricFiberToAlgebraicClosure explicitly as in C9 geometric-fiber fix. No mathematical statement change.
+
+234948 CLOSED rc1: statement/proof elaboration of geometric specialization still hits200k whnf at declaration start after explicit e Over objects. Next pins both πX/πY in the IsIso hypothesis and separates generic levelwise theorem application into typed-have; enabled profiler only to locate remaining inference cost (no limits raised).

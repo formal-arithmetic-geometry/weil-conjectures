@@ -9,6 +9,9 @@ public import WeilConjectures.WeilSheaf.SmoothPurityDescendedShriekUniversality
 
 /-! # Unit base change implies universality of the descended Weil smooth trace -/
 
+set_option profiler true
+set_option profiler.threshold 0
+
 @[expose] public section
 
 universe u
@@ -64,6 +67,7 @@ theorem geometricFiberWeilSmoothTrace_weilUniversal_of_unitBaseChange
       (Y := Over.mk Y.hom.geometricFiberToAlgebraicClosure)
       Y.hom.geometricFiberProj).obj (𝟙_ _) ≅ 𝟙_ _)
     [IsIso (smoothUnitBaseChange l f (traceGeometricFiberOverMap f)
+      (πX := X.hom.geometricFiberProj) (πY := Y.hom.geometricFiberProj)
       (descendedShriekGeometricExchange l f) e.hom)]
     (d : ℕ) [SmoothOfRelativeDimension d f.left]
     (K : DerivedCategory (Endofunctor.IsoAlgebra
@@ -75,10 +79,11 @@ theorem geometricFiberWeilSmoothTrace_weilUniversal_of_unitBaseChange
         (geometricFiberWeilSmoothTrace l f d) := by
   apply geometricFiberWeilSmoothTrace_weilUniversal l f d K hK
   intro Q
-  exact baseChangedSmoothTrace_levelwise_universal l f (traceGeometricFiberOverMap f)
+  have he := baseChangedSmoothTrace_levelwise_universal l f (traceGeometricFiberOverMap f)
     ((compactificationOverField f).geometricFiber (Over.w f))
     (Scheme.Hom.isPullback_geometricFiberMap (compactificationOverField f).i
       ((compactificationOverField f).i_comp_g_comp (Over.w f)))
     (Scheme.Hom.isPullback_geometricFiberMap (compactificationOverField f).g rfl).flip e d Q
+  exact he
 
 end AlgebraicGeometry.ProEtale.CondensedRing
