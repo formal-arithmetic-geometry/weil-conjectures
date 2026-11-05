@@ -64,6 +64,21 @@ Source: Stacks 08JJ (blueprint: lem-sfb-ringed-site-bounded-evaluation-assembly)
 abbrev Modules := ringedSiteModules.{max u v w, max u v w, v, u}
   ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)
 
+local instance (B : Modules.{u, v, w} R) {U V : Cᵒᵖ} (f : U ⟶ V) :
+    SMul (R.obj.obj V)
+      ((ModuleCat.restrictScalars
+        (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj.map f).hom).obj
+          (B.val.obj V)) :=
+  inferInstanceAs (SMul (R.obj.obj V) (B.val.obj V))
+
+local instance (B : Modules.{u, v, w} R) (U : Cᵒᵖ) (V : (Over U.unop)ᵒᵖ) :
+    SMul (((PresheafOfModules.restrictOver R.obj U.unop).obj
+      (𝟙_ (Modules.{u, v, w} R)).val).obj V)
+      ((ModuleCat.restrictScalars
+        (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj.map V.unop.hom.op).hom).obj
+          (B.val.obj (op V.unop.left))) :=
+  inferInstanceAs (SMul (R.obj.obj (op V.unop.left)) (B.val.obj (op V.unop.left)))
+
 /-- The structure sheaf placed in degree zero.
 Source: Stacks 08JJ (blueprint: lem-sfb-ringed-site-bounded-evaluation-assembly). -/
 def unitComplex : CochainComplex (Modules.{u, v, w} R) ℤ :=
