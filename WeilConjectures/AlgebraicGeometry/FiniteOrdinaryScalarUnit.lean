@@ -128,9 +128,9 @@ private theorem finiteScalarMap_stalk
     ((lowerStar (ModuleCat.{u + 1} R) i).obj F) U z)]
   erw [reassoc_of% (p.toPresheafFiber_naturality (finiteScalarMap φ i F).hom U z)]
   erw [toPresheafFiber_stalkRestrict (ModuleCat.{u + 1} A) i y t
-    ((scalar φ D).obj F) ⟨U, z⟩]
+    ((scalar φ D).obj F) (p.fiber.elementsMk U z)]
   erw [← E.map_comp_assoc,
-    toPresheafFiber_stalkRestrict (ModuleCat.{u + 1} R) i y t F ⟨U, z⟩]
+    toPresheafFiber_stalkRestrict (ModuleCat.{u + 1} R) i y t F (p.fiber.elementsMk U z)]
   erw [scalarStalkIso_germ]
   erw [← Category.assoc, finiteScalarMap_sections]
 
