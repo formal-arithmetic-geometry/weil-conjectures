@@ -4,7 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.WeilSheaf.SmoothPurityIntegralTateRationalDerived
+public import WeilConjectures.WeilSheaf.SmoothPurityIntegralTateShiftNormalization
+import WeilConjectures.Tactic.ExactModProofs
 public import WeilConjectures.WeilSheaf.SmoothPurityCoefficientPullShift
 public import WeilConjectures.WeilSheaf.SmoothPurityShiftDatumSquare
 public import WeilConjectures.WeilSheaf.SmoothPurityDerivedFunctorShift
@@ -60,10 +61,9 @@ lemma upperStarShiftIntegralTateTwistDerivedIso_hom_comp_rationalization
     (purityExtendScalarsIntegralTateIso ℓ E f d).hom
     (purityExtendScalarsIntegralTateIso ℓ E (g ≫ f) d).hom
     (upperStarIntegralTateTwistDerivedIso_hom_comp_rationalization ℓ E g f d) n
-  simpa only [purityDerivedCoefficientExtension, purityDerivedPullback,
-    purityDerivedCoefficientExtension_commShift, purityDerivedPullback_commShift,
-    upperStarShiftIntegralTateTwistDerivedIso, upperStarIntegralTateTwistDerivedIso,
+  simp only [upperStarShiftIntegralTateTwistDerivedIso_hom_eq,
     purityExtendScalarsShiftIntegralTateIso, upperStarShiftTateTwistDerivedIso,
-    Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Functor.map_comp, Category.assoc] using h
+    Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom] at h ⊢
+  exact_mod_proofs h
 
 end AlgebraicGeometry.ProEtale

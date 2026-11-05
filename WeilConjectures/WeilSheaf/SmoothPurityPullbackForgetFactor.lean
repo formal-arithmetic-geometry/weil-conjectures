@@ -52,8 +52,10 @@ lemma purity_upperStarForgetIso_factor_hom
     ((s)^*[Ab.{u + 1}].map ((upperStarForgetIso Λ p).hom.app M) ≫
       (upperStarForgetIso Λ s).hom.app ((p)^*⟦Λ⟧.obj M))
     ((upperStarForgetIso Λ p).hom.app M)
-    (by simpa only [Functor.mapIso_inv, Iso.app_inv, Category.assoc,
-      Functor.comp_obj, Mod.forget_obj] using h)
+    (by
+      simp only [Functor.mapIso_inv, Iso.app_inv, Category.assoc, Functor.comp_obj] at h ⊢
+      dsimp only [Mod.forget] at h ⊢
+      exact h)
   exact h'
 
 end AlgebraicGeometry.ProEtale.CondensedRing
