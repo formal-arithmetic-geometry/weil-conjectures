@@ -26,7 +26,7 @@ private theorem comp_reassoc :
       (mapDerivedCategoryCompIso F (G ⋙ H)).inv =
     (isoWhiskerRight (mapDerivedCategoryCompIso F G).symm D(H)).hom ≫
       (isoWhiskerLeft D(F) (mapDerivedCategoryCompIso G H)).hom := by
-  rw [Iso.hom_comp_eq, ← Category.assoc, Iso.eq_comp_hom]
+  rw [← Iso.eq_inv_comp, ← Category.assoc, ← Iso.comp_inv_eq]
   exact mapDerivedCategoryCompIso_assoc F G H
 
 private theorem comp_reassoc_inv :
@@ -34,7 +34,7 @@ private theorem comp_reassoc_inv :
       (mapDerivedCategoryCompIso (F ⋙ G) H).inv =
     (isoWhiskerLeft D(F) (mapDerivedCategoryCompIso G H).symm).hom ≫
       (isoWhiskerRight (mapDerivedCategoryCompIso F G) D(H)).hom := by
-  rw [Iso.hom_comp_eq, ← Category.assoc, Iso.eq_comp_hom]
+  rw [← Iso.eq_inv_comp, ← Category.assoc, ← Iso.comp_inv_eq]
   exact (mapDerivedCategoryCompIso_assoc F G H).symm
 
 section WhiskerEq
@@ -50,7 +50,7 @@ private theorem nat_left (F : A ⥤ B) {G G' : B ⥤ C}
       (mapDerivedCategoryCompIso F G).inv ≫
         (isoWhiskerLeft D(F) (mapDerivedCategoryNatIso e)).hom ≫
         (mapDerivedCategoryCompIso F G').hom := by
-  rw [← Category.assoc, Iso.eq_comp_hom]
+  rw [← Category.assoc, ← Iso.comp_inv_eq]
   exact mapDerivedCategoryNatIso_isoWhiskerLeft F e
 private theorem nat_right {F F' : A ⥤ B} (G : B ⥤ C)
     [F.Additive] [F'.Additive] [G.Additive]
@@ -61,7 +61,7 @@ private theorem nat_right {F F' : A ⥤ B} (G : B ⥤ C)
       (mapDerivedCategoryCompIso F G).inv ≫
         (isoWhiskerRight (mapDerivedCategoryNatIso e) D(G)).hom ≫
         (mapDerivedCategoryCompIso F' G).hom := by
-  rw [← Category.assoc, Iso.eq_comp_hom]
+  rw [← Category.assoc, ← Iso.comp_inv_eq]
   exact mapDerivedCategoryNatIso_isoWhiskerRight e G
 end WhiskerEq
 
@@ -115,12 +115,11 @@ theorem mapDerivedCategorySquareIso_paste (α : F ⋙ E₁ ≅ E₀ ⋙ P) (β :
         (isoWhiskerLeft D(E₀) (mapDerivedCategoryCompIso P Q)).hom := by
   simp only [mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
     mapDerivedCategoryNatIso_trans, nat_left, nat_right, Category.assoc,
-    isoWhiskerLeft_hom, isoWhiskerRight_hom, isoWhiskerLeft_inv,
+    isoWhiskerLeft_hom, isoWhiskerRight_hom,
     whiskerLeft_comp, whiskerRight_comp]
   rw [reassoc_of% (comp_reassoc F G E₂),
     reassoc_of% (comp_reassoc_inv F E₁ Q), comp_reassoc E₀ P Q]
-  simp only [isoWhiskerLeft_hom, isoWhiskerRight_hom, isoWhiskerLeft_inv,
-    isoWhiskerRight_inv]
+  simp only [isoWhiskerLeft_hom, isoWhiskerRight_hom, Iso.symm_hom]
 end Paste
 
 end CategoryTheory.Functor
