@@ -1,17 +1,3 @@
-# BZ606 in progress
-
-- Branch: `u9/BZ606`; starting commit: `b7a97a5ed`.
-- Re-read the brief and progress notes following the user's continuation request.
-- The user instructed continuation after the exact two-site statement proposal.
-  Added `.symm` in the `hm` and `hs` hypotheses to preserve their canonical maps
-  under Mathlib's reversed `mapDerivedCategoryCompIso`.
-- Baseline `ucheck-bump` confirmed exactly these two errors; all dependencies passed.
-- Assigned module passed `ucheck-bump` at `2aef04c18f`: rc=0, failed=0, 4486 jobs.
-  The target rebuilt in 49s on `poolb:43.157.148.197`.
-- Next: attempt the four nearest direct importers.
-- Fix patterns and occurrence counts: `/home/ubuntu/u9/bz/FIXES-BZ606.md`.
-- No local Lean/Lake execution, proof placeholders, or heartbeat changes.
-
 # BZ133 complete
 
 - Branch: `u9/BZ133`.
@@ -156,32 +142,41 @@
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ557 in progress
 
-- Branch: `u9/BZ557`; starting commit: `8af5cb324`.
-- Added the public AffineScheme import to direct importer AffineBasisSectionsDerivedUnit.
-- Initial remote builds stopped in the shared Presheaf.InternalHom dependency.
-- On continuation, merged BZ558 prerequisite repair `f28760733369366ac823f0084f3c4090afa3a90d`.
-- Next: ucheck-bump on AffineBasisSectionsResolutionHomologyEpi, AffineBasisSectionsDerivedUnit,
-  and AffineOpenSectionsResolutionQuasiIso; fix any owned errors and write DONE when green.
-- Notes and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ557.md`.
-- No local Lean/Lake, statement changes, proof escapes, or heartbeat increases.
+# BZ585 complete
 
+- Branch: `u9/BZ585`; starting commit: `8af5cb324`.
+- Assigned module `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebraFreeComparison`
+  passed ucheck-bump: rc=0, failed=0, 2022 jobs, target rebuilt in 4.8s.
+- Validated commit: `db7bb14d08c2234513afd1b158e2524d33864d66`; newsrv bumpw4, Lean v4.35.0-rc3
+  and Mathlib b63f6e8a68d220e3b3bc4f3792bb53650d375f24 confirmed on the build host.
+- Added the Localization public/import-all imports and made the two internal comparison
+  helpers private, following user continuation after that exact proposal. All statements,
+  proofs, binders, assumptions and existing docstrings are unchanged.
+- Contract audit: `/home/ubuntu/u9/bz/BZ585-contract-audit.txt`.
+  Fix patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ585.md`.
+- Direct importer `WeilConjectures.WeilSheaf.LowerShriekForget` was attempted at
+  `c7cb6c306b`; the assigned module rebuilt successfully in that batch in 6.1s.
+- The importer is blocked by unowned `FreeComparisonMapDerivedCategory` (BZ584)
+  and six other dependencies. Stopped only the verified timeout process for this
+  build after confirming dependency failures. Result: rc=255, failed=7; the downstream
+  batch is not green. No downstream or external dependency sources were changed.
+- Skipped `LowerShriekForget`, `AffineLineBundle`, and `SmoothPurityNativeTraceCriterion`
+  under the brief's external-dependency rule. Only the assigned module is claimed green.
+- Full logs: `/home/ubuntu/u9/bz/BUILD-BZ585-unit-full.log` and
+  `/home/ubuntu/u9/bz/BUILD-BZ585-downstream1-full.log`.
+- No local Lean/Lake execution, sorries, proof shortcuts, heartbeat increases, or profiler probes.
+- Completion marker: `/home/ubuntu/u9/state/BZ585.DONE`.
+- Final documentation commit leaves Lean source identical to the green revision.
 
-# BZ595 complete
+# BZ613 in progress
 
-- Branch: `u9/BZ595`; starting commit: `cfcb63ad77e`.
-- Assigned `SixFunctors.ProEtale.DerivedCompletion` is green via `ucheck-bump`.
-- Reused BZ545's local `HasLimit F` cache (6ba502aac, cherry-picked as ef27bba33).
-  This eliminates the product timeout and cascading errors without heartbeat changes.
-- Four direct importers passed together: PrincipalTensorScalarExtension,
-  InternalPrincipalConeLevelAugmentation, InternalQuotientPrincipalConeComparison,
-  and PrincipalConeTensorNormalization (4723 jobs, rc=0).
-- Layer 2 also built PrincipalReductionDerivedNormalization and
-  PrincipalReductionConeCalculus successfully. Three selected targets were skipped
-  because of unowned failures in DerivedCompletionSupplement and RingedTopoiDerivedPullback.
-  The remaining batch was stopped after those dependency blocks were established.
-- Full evidence and the PATTERN/ERROR record: `/home/ubuntu/u9/bz/FIXES-BZ595.md`.
-- Completion marker: `/home/ubuntu/u9/state/BZ595.DONE`.
-- No existing statement/docstring changes, local Lean/Lake, proof escapes, or limit increases.
-- This final commit changes progress documentation only; Lean sources match the green builds.
+- Branch: `u9/BZ613`; baseline: `b7a97a5ed`.
+- The user instructed continuation after the exact six-private-helper API patch.
+  Applied that patch, preserving comparison directions under Mathlib's reversed compositor.
+- All three public declaration headers are unchanged. Proof-local comparisons and
+  the coefficient comparison construction use the same orientation migration.
+- Next: validate the assigned module with `ucheck-bump`, repair residual proof errors,
+  then validate direct importers and one further layer before writing DONE.
+- Fix patterns and prior diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ613.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
