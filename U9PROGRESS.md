@@ -106,16 +106,28 @@
 - Completion marker: `/home/ubuntu/u9/state/BZ311.DONE`.
 - This final commit changes only progress documentation; Lean sources match the green build.
 
-# BZ395 in progress
+# BZ404 complete
 
-- Branch: `u9/BZ395`; baseline commit: `9bc0d70a6`.
-- Owned module: `WeilConjectures.AlgebraicGeometry.ProfinitePointPullback`.
-- Baseline remote build found five errors in three statement headers.
-- The user instructed continuation after the exact API-only statement patch proposal.
-  Applied that patch: use the reversed Mathlib compositor and repair two misplaced
-  `.symm` projections, preserving the intended maps.
-- Owned module passed `ucheck-bump`: rc=0, failed=0, 3949 jobs, at `ec3927a96a`.
-- Added explicit `Iso.symm_hom` / `Iso.symm_inv` normalization at eight restricted
-  simp sites after the header migration. Continuing with four direct importers.
-- Fix patterns, exact errors, and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ395.md`.
+- Branch: `u9/BZ404`; starting commit: `98654719b`.
+- Assigned module: `WeilConjectures.CategoryTheory.DerivedCategory.ProperBaseChange.PseudoCoherentNormalizedAlgebraTowerSupplement`.
+- The assigned module passed `ucheck-bump`: rc=0, failed=0, 3879 jobs at `5fc97c7523`.
+- Final Lean source, including line wrapping, rebuilt successfully in 30 seconds at
+  `162e18db10` during the downstream check. This completion commit changes only documentation.
+- The proof-local comparison now uses Mathlib's reversed composition isomorphism.
+- The user instructed continuation after the exact `hf` statement-syntax proposal;
+  the misplaced `.symm` was moved from the function to the resulting isomorphism.
+  All other statement text, assumptions, conclusions, and docstrings are unchanged.
+- Both direct importers were attempted and skipped for outside-unit dependency failures,
+  as the brief directs. No downstream modules are claimed green and no outside-unit
+  sources were edited. The blocked batches were stopped after their failures were confirmed.
+- FinitePerfectAdicTowerData is blocked by universe-constraint errors in
+  `ProEtaleFinitelyPresentedLocalModelsComparisonSupplement`.
+- LisseTowerAlgebraicDerivedPresentation is blocked by missing instances in
+  `ProEtaleOperationsCanonicalAdjunctionSupplement` and other outside-unit errors.
+- Full logs: `/home/ubuntu/u9/bz/BUILD-BZ404-unit-full.log`,
+  `/home/ubuntu/u9/bz/BUILD-BZ404-downstream-full.log`, and
+  `/home/ubuntu/u9/bz/BUILD-BZ404-lisse-full.log`.
+- Fix patterns and exact diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ404.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ404-contract-audit.txt`.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or limit increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ404.DONE`.
