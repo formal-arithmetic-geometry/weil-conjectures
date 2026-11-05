@@ -67,17 +67,18 @@ abbrev normalizedDVRKFlatReductionModelLocal3 :
     AddCommGrpCat.{max u (t + 1)} := integralCoefficientAbLocallyBijective.{t, u} X
 attribute [local instance] normalizedDVRKFlatReductionModelLocal3
 
+local instance : Category.{max (t + 2) (u + 1)}
+    (DerivedCategory (scalarReductionSource l E X)) := inferInstance
+
 private theorem representativeComparison_isIso (n : ℕ)
     (P : CochainComplex (scalarReductionSource l E X) ℤ)
     (hP : CochainComplex.IsKFlatIndependentCoefficients.{t + 1, t, max u (t + 1)}
       (J := AlgebraicGeometry.Scheme.ProEt.topology X)
       (R := completedIntegralCommRingSheafUnrestricted l E X) P) :
     IsIso (normalizedDVRKFlatComparison l E X n P) := by
+  have := unrestrictedTowerCounit_isIso l E X n P hP
   unfold normalizedDVRKFlatComparison
-  exact IsIso.comp_isIso'
-    (@Functor.map_isIso _ _ _ _ _ _ _ _
-      (unrestrictedTowerCounit_isIso l E X n P hP))
-    (NatIso.hom_app_isIso _ _)
+  infer_instance
 
 /-- The canonical K-flat augmented quotient tower computes the derived reduction
 units and their quotient transitions, for an arbitrary derived object.

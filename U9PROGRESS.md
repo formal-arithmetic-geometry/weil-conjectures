@@ -142,27 +142,13 @@
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ538 in progress
+# BZ557 in progress
 
-- Branch: `u9/BZ538`; assigned module: `AffineBasisKInjectiveSectionsPreservesHomology`.
-- Its original IsAffineOpen visibility fix was already in the starting branch.
-- Added the same public AffineScheme import to second-layer `AffineBasisSectionsDerivedUnit`.
-- Two remote build attempts stopped in shared dependencies before reaching our targets.
-- Merged coordinator updates at `8af5cb324`; Monoidal now builds, but InternalHom remained blocked.
-- The user instructed continuation after the explicit one-line InternalHom repair proposal.
-  Applied the compatibility tensorObj_map_tmul lemma so the following map_comp_apply rewrite matches.
-- Next: ucheck-bump assigned module, AffineBasisSectionsResolutionHomologyEpi, and
-  AffineBasisSectionsDerivedUnit; then write DONE with every green module and PATTERN/ERROR pairs.
-- Detailed patterns, counts, and exact errors: `/home/ubuntu/u9/bz/FIXES-BZ538.md`.
-- No local Lean/Lake, proof placeholders, statement changes, trust bypasses, or heartbeat increases.
-
-# BZ546 resumed
-
-- Branch: `u9/BZ546`; assigned module: `FiniteComparison.LowerStar`.
-- The owned compositor corrections were already integrated in `d30a09bfb`.
-- The initial two remote builds stopped in the unowned `Presheaf.InternalHom` dependency.
-- Imported the shared repair from BZ538, commit `e346fa32d2a`, using the compatibility
-  tensor formula. Its provenance is retained by `git cherry-pick -x`.
-- Next: validate LowerStar through `ucheck-bump`, then up to four direct importers.
-- Build logs and patterns: `/home/ubuntu/u9/bz/FIXES-BZ546.md`.
-- No local Lean/Lake execution, statement changes, proof placeholders, or heartbeat increases.
+- Branch: `u9/BZ557`; starting commit: `8af5cb324`.
+- Added the public AffineScheme import to direct importer AffineBasisSectionsDerivedUnit.
+- Initial remote builds stopped in the shared Presheaf.InternalHom dependency.
+- On continuation, merged BZ558 prerequisite repair `f28760733369366ac823f0084f3c4090afa3a90d`.
+- Next: ucheck-bump on AffineBasisSectionsResolutionHomologyEpi, AffineBasisSectionsDerivedUnit,
+  and AffineOpenSectionsResolutionQuasiIso; fix any owned errors and write DONE when green.
+- Notes and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ557.md`.
+- No local Lean/Lake, statement changes, proof escapes, or heartbeat increases.

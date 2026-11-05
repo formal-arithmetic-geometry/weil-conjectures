@@ -78,7 +78,7 @@ private noncomputable def tensorHomCurryApp_kf (φ : M ⊗ P ⟶ N) {U : C} (p :
       TensorProduct.tmul (R := R.obj (op W'.unop.left))
         (M := M.obj (op W'.unop.left)) (N := P.obj (op W'.unop.left))
         (M.map f.unop.left.op m) q) ?_).trans
-        (PresheafOfModules.Monoidal.tensorObj_map_tmul f.unop.left.op m _).symm
+        (Monoidal.tensorObj_map_tmul f.unop.left.op m _).symm
     rw [← map_comp_apply, ← op_comp, Over.w]
 
 @[local simp]
