@@ -244,3 +244,15 @@
 - Next: validate the owned module, then its direct importers and downstream layers.
 - Previous diagnostic history is archived in FIXES-BZ798-preintegration.md.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+
+# BZ850 in progress
+
+- Branch: `u9/BZ850`; baseline: `2ab2b07a3`.
+- The user instructed continuation after the explicit three-declaration upstream restoration proposal.
+- Restored `derived_projection_exists`, `coefficientConstantTowerProjection_exists`, and
+  `coefficientConstantTowerProjection` in CoefficientRingedSequenceSiteSupplement with their
+  original statements and docstrings. Their surviving users prohibit pruning them.
+- Added Localization imports and explicit simplification of its hidden comparison components.
+- The assigned CoefficientConstantTowerRoos source is unchanged.
+- Next: remote ucheck-bump on the assigned module, then both direct importers.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
