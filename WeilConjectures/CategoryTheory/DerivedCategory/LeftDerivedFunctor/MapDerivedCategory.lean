@@ -199,7 +199,7 @@ functors between abelian categories with functorial flat resolutions, obtained f
 noncomputable def leftDerivedFunctorCompIso (G : D ⥤ E) [G.Additive]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G] :
     (F ⋙ G).leftDerivedFunctor ≅ F.leftDerivedFunctor ⋙ G.leftDerivedFunctor :=
-  (F ⋙ G).leftDerivedFunctorIsoMapDerivedCategory ≪≫ mapDerivedCategoryCompIso F G ≪≫
+  (F ⋙ G).leftDerivedFunctorIsoMapDerivedCategory ≪≫ (mapDerivedCategoryCompIso F G).symm ≪≫
     isoWhiskerRight F.leftDerivedFunctorIsoMapDerivedCategory.symm G.mapDerivedCategory ≪≫
     isoWhiskerLeft F.leftDerivedFunctor G.leftDerivedFunctorIsoMapDerivedCategory.symm
 
