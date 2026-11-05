@@ -374,3 +374,5 @@ derivedCondensedRealization before casting, including hmZ and htotal interfaces.
 2026-11-05 09:22 CST: 091938 rc1 in16s; CochainTensorNormalization GREEN1.5s. Generic functor equality resolves the bound-variable mismatch. Structural check now isolates a closed instance diamond, sheafSymmetricCategory.toBraidedCategory versus sheafBraidedCategory. Allow ordinary definitional reduction only in the structural hchain matcher; keep all other reduced interfaces and budgets unchanged.
 
 2026-11-05 09:23 CST: 092152 rc1 in16s. Ordinary reduction resolves the braiding diamond; structural exact_mod_proofs then reaches proof-valued tensor-existence instances under bound variables. Use cast_proofs at hchain to identify the entire closed forall proof before descending under its binders. Same mathematical equality and budget.
+
+2026-11-05 09:25 CST: 092345 rc1 in27s; hchain now passes completely. The next/final ordinary-model interface ho differs only at whiskeringLeft₂ object evaluation; add its standard component normalization alongside postcompose₂. No heartbeat change.

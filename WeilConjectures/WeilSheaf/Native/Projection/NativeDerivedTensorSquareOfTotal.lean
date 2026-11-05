@@ -158,8 +158,8 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
           (F.mapDerivedCategory.obj (DerivedCategory.Q.obj T)) FP FT
           (F.mapDerivedCategoryFactors.hom.app P) (F.mapDerivedCategoryFactors.hom.app T)
         dsimp only [Iso.symm, FP, FT, Functor.postcompose₂, Functor.comp_obj,
-          Functor.whiskeringRight_obj_obj, Functor.comp_map,
-          curriedTensor_obj_obj, curriedTensor_obj_map] at ho ⊢
+          Functor.whiskeringRight_obj_obj, Functor.whiskeringLeft₂_obj_obj_obj_obj_obj,
+          Functor.comp_map, curriedTensor_obj_obj, curriedTensor_obj_map] at ho ⊢
         with_reducible_and_instances exact_mod_proofs ho)
     dsimp only [L, V, F, R, nativeOpenPull, derivedCondensedRealization] at h ⊢
     exact_mod_proofs h
