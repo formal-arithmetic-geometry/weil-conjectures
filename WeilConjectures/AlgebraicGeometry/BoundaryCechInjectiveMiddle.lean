@@ -52,6 +52,8 @@ private theorem local_lift_cocycle (X : Scheme.{u})
           S.X₂.val.presheaf.map (Pi.π (fun k : Fin 2 ↦ U (y k)) 1).op (x (y 1)) -
             S.X₂.val.presheaf.map (Pi.π (fun k : Fin 2 ↦ U (y k)) 0).op (x (y 0)) := by
   classical
+  have (J : Type) : HasLimitsOfShape (Discrete J) (ModuleCat.{u} Γ(X, ⊤)) :=
+    ModuleCat.hasLimitsOfShape
   let A := (cechComplexFunctor U).obj (presheafModuleCat (X := X) S.X₁)
   let B := (cechComplexFunctor U).obj (presheafModuleCat (X := X) S.X₂)
   let f := (cechComplexFunctor U).map
