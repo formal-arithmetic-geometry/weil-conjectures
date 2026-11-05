@@ -77,11 +77,12 @@ namespace PresheafOfModules
 
 private noncomputable local instance spRestrictedSMul
     {D : Type c} [Category.{v} D] {S : Dᵒᵖ ⥤ CommRingCat.{r}}
-    (M : PresheafOfModules.{r} (S ⋙ forget₂ _ _)) {U V : Dᵒᵖ} (f : U ⟶ V) :
-    SMul (S.obj V)
-      ((ModuleCat.restrictScalars ((S ⋙ forget₂ CommRingCat RingCat).map f).hom).obj
-        (M.obj V)) :=
-  (M.obj V).isModule.toSMul
+    (M : PresheafOfModules.{r} (S ⋙ forget₂ _ _)) (U : Dᵒᵖ) (W : (Over U.unop)ᵒᵖ) :
+    SMul (((restrictOver S U.unop).obj (unit (S ⋙ forget₂ _ _))).obj W)
+      ((ModuleCat.restrictScalars
+        ((S ⋙ forget₂ CommRingCat RingCat).map W.unop.hom.op).hom).obj
+          (M.obj (op W.unop.left))) :=
+  (M.obj (op W.unop.left)).isModule.toSMul
 
 variable {C : Type c} [Category.{v} C]
   {R : Cᵒᵖ ⥤ CommRingCat.{max c v r}}
@@ -229,12 +230,13 @@ private local instance spSheafRestrictedSMul
     [K.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
     {S : Sheaf K CommRingCat.{r}}
     (M : SheafOfModules.{r} ((sheafCompose K (forget₂ CommRingCat RingCat)).obj S))
-    {U V : Dᵒᵖ} (f : U ⟶ V) :
-    SMul (S.obj.obj V)
+    (U : Dᵒᵖ) (W : (Over U.unop)ᵒᵖ) :
+    SMul (((PresheafOfModules.restrictOver S.obj U.unop).obj
+      (SheafOfModules.unit ((sheafCompose K (forget₂ CommRingCat RingCat)).obj S)).val).obj W)
       ((ModuleCat.restrictScalars
-        (((sheafCompose K (forget₂ CommRingCat RingCat)).obj S).obj.map f).hom).obj
-          (M.val.obj V)) :=
-  (M.val.obj V).isModule.toSMul
+        (((sheafCompose K (forget₂ CommRingCat RingCat)).obj S).obj.map W.unop.hom.op).hom).obj
+          (M.val.obj (op W.unop.left))) :=
+  (M.val.obj (op W.unop.left)).isModule.toSMul
 
 variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   [J.HasSheafCompose (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})]
