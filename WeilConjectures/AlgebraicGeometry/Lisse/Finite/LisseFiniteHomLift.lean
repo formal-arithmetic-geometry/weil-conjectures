@@ -390,7 +390,6 @@ private lemma conjugation_of_mixed_factorization
 
 variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
 
-set_option maxHeartbeats 800000 in
 /-- A morphism of algebraic-closure extensions of two lisse finite-field modules
 is obtained at a finite field. This asserts only existence of representatives, not their
 comparison or equality relation.
@@ -437,20 +436,21 @@ theorem exists_lisse_finite_hom_lift [CompactSpace X] [QuasiSeparatedSpace X]
     (AsSmall.equiv (C := Under E)).inverse ⋙ Under.forget E
   let : H.Final := by dsimp only [H]; infer_instance
   let he (i : I) : E ≤ H.obj i := leOfHom (ULift.down i).hom
-  letI : HasColimitsOfShape I
+  let : HasColimitsOfShape I
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)) :=
     inferInstance
-  let c := (HomologicalComplex.eval _ (.up ℤ) 0).mapCocone
-    (coefficientComplexCocone X ℓ (E := E) (F := E) C H he he)
   have hc0 : IsColimit (coefficientComplexCocone X ℓ (E := E) (F := E) C H he he) :=
     Classical.choice (nonempty_isColimit_coefficientComplexCocone X ℓ
       (E := E) (F := E) C H he he)
+  let : HasColimit (coefficientComplexDiagram X ℓ C H he he) :=
+    ⟨⟨coefficientComplexCocone X ℓ (E := E) (F := E) C H he he, hc0⟩⟩
+  let c := (HomologicalComplex.eval _ (.up ℤ) 0).mapCocone
+    (coefficientComplexCocone X ℓ (E := E) (F := E) C H he he)
   have hc : IsColimit c :=
     isColimitOfPreserves (HomologicalComplex.eval _ (.up ℤ) 0) hc0
   let a := (Mod.extendRestrictAdjunction
     (padicSubfieldRingObjToPadicAlgCl X ℓ E)).homEquiv _ _ ψ
-  have hfactor := hM.isLocallyFree.exists_comp_eq_of_isColimit c hc a
-  obtain ⟨i, b, hb⟩ := hfactor
+  obtain ⟨i, b, hb⟩ := hM.isLocallyFree.exists_comp_eq_of_isColimit c hc a
   refine ⟨H.obj i, he i,
     ((Mod.extendRestrictAdjunction (padicSubfieldRingObjMap X ℓ (he i))).homEquiv _ _).symm b,
     ?_⟩
