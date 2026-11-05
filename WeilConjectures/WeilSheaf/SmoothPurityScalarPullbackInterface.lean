@@ -8,7 +8,8 @@ public import WeilConjectures.WeilSheaf.SmoothPurityTatePullbackFactor
 public import WeilConjectures.WeilSheaf.SmoothPurityRationalRootLaw
 public import WeilConjectures.WeilSheaf.SmoothPurityFrobeniusFactorAlias
 public import WeilConjectures.WeilSheaf.SmoothPurityCyclotomicField
-import WeilConjectures.Tactic.ExactModProofsFallback
+public import WeilConjectures.WeilSheaf.SmoothPurityScalarIsoTransport
+import WeilConjectures.Tactic.ExactModProofs
 
 /-! # A module interface for the scalar Tate comparison
 
@@ -65,19 +66,42 @@ noncomputable def purityScalarUnitCompare :
   (Functor.Monoidal.εIso
     (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricFiberProj)).symm
 
+/-- The whole descent isomorphism on the pulled-back Tate object. -/
+noncomputable def purityScalarSourceIso :
+    (purityScalarFrobeniusPull ℓ a).obj (purityScalarSourceObject ℓ a) ≅
+      purityScalarSourceObject ℓ a :=
+  (geometricFiberProjUpperStarFrobeniusIso (Profinite.padicAlgClRingObj ℓ) a).app
+    (tateTwistOne X ℓ)
+
+/-- Identify the whole isomorphism before projecting its morphism. -/
+lemma purityScalarSourceIso_eq :
+    purityScalarSourceIso ℓ a =
+      (geometricFiberProjUpperStarFrobeniusIso (Profinite.padicAlgClRingObj ℓ) a).app
+        ((Mod.extendScalars (coefficientMap (Profinite.padicIntRingObjToPadicAlgCl ℓ) X)).obj
+          (tateModule X ℓ)) := (rfl)
+
+/-- The whole descent isomorphism on the pulled-back unit. -/
+noncomputable def purityScalarSourceUnitIso :
+    (purityScalarFrobeniusPull ℓ a).obj (purityScalarSourceUnit ℓ a) ≅
+      purityScalarSourceUnit ℓ a :=
+  (geometricFiberProjUpperStarFrobeniusIso (Profinite.padicAlgClRingObj ℓ) a).app (𝟙_ _)
+
+lemma purityScalarSourceUnitIso_eq :
+    purityScalarSourceUnitIso ℓ a =
+      (geometricFiberProjUpperStarFrobeniusIso (Profinite.padicAlgClRingObj ℓ) a).app
+        (𝟙_ _) := (rfl)
+
 /-- The descent datum on the root module. -/
 noncomputable def purityScalarSourceDatum :
-    (purityScalarFrobeniusPull ℓ a).obj
-        (purityScalarSourceObject ℓ a) ⟶
+    (purityScalarFrobeniusPull ℓ a).obj (purityScalarSourceObject ℓ a) ⟶
       purityScalarSourceObject ℓ a :=
-  (geometricFiberProjUpperStarFrobeniusIso (Profinite.padicAlgClRingObj ℓ) a).hom.app
-    (tateTwistOne X ℓ)
+  (purityScalarSourceIso ℓ a).hom
 
 /-- The descent datum on the pulled-back unit. -/
 noncomputable def purityScalarSourceUnitDatum :
     (purityScalarFrobeniusPull ℓ a).obj (purityScalarSourceUnit ℓ a) ⟶
       purityScalarSourceUnit ℓ a :=
-  (geometricFiberProjUpperStarFrobeniusIso (Profinite.padicAlgClRingObj ℓ) a).hom.app (𝟙_ _)
+  (purityScalarSourceUnitIso ℓ a).hom
 
 /-- The canonical Tate datum on the geometric fibre. -/
 noncomputable def purityScalarTargetDatum :
@@ -104,7 +128,8 @@ lemma purityScalarTateCompare_comm :
     (a.geometricFiberProj ≫ a) a.geometricFiberToAlgebraicClosure,
     ← purity_geometricFiberProjUpperStarFrobeniusIso_eq (Profinite.padicAlgClRingObj ℓ) a] at h
   dsimp only [purityScalarFrobeniusPull, purityScalarTateCompare,
-    purityScalarTargetDatum, purityScalarSourceDatum, purityScalarSourceObject,
+    purityScalarTargetDatum, purityScalarSourceDatum, purityScalarSourceIso,
+    purityScalarSourceObject, Iso.app_hom,
     Functor.comp_obj, Functor.comp_map] at h ⊢
   exact_mod_proofs h
 
@@ -118,7 +143,8 @@ lemma purityScalarUnitCompare_comm :
   rw [← purity_geometricFiberProjUpperStarFrobeniusIso_eq
     (Profinite.padicAlgClRingObj ℓ) a] at h
   dsimp only [purityScalarFrobeniusPull, purityScalarUnitCompare,
-    purityScalarTargetUnitDatum, purityScalarSourceUnitDatum, purityScalarSourceUnit,
+    purityScalarTargetUnitDatum, purityScalarSourceUnitDatum, purityScalarSourceUnitIso,
+    purityScalarSourceUnit, Iso.app_hom,
     Iso.symm_hom, Functor.comp_obj, Functor.comp_map] at h ⊢
   exact_mod_proofs h
 
@@ -135,17 +161,29 @@ noncomputable def purityScalarRootTrivialization :
       a.geometricFiberToAlgebraicClosure ℓ hζ hζ' ≪≫
       (a.geometricFiberProj)^*[Ab.{u + 1}].mapModUnitIso)
 
+lemma purityScalarRootTrivialization_eq :
+    purityScalarRootTrivialization ℓ a hζ hζ' =
+      purityChangeCoefficientTrivialization (Profinite.continuousMapRingObj ℤ_[ℓ])
+        (Profinite.padicIntRingObjToPadicAlgCl ℓ) a.geometricFiberProj (tateModule X ℓ)
+        (upperStarMapModTateModuleIsoUnit a.geometricFiberProj
+          a.geometricFiberToAlgebraicClosure ℓ hζ hζ' ≪≫
+          (a.geometricFiberProj)^*[Ab.{u + 1}].mapModUnitIso) := (rfl)
+
 lemma purityScalarRootTrivialization_weil :
     (Nat.card k : ℤ) •
         (purityScalarSourceDatum ℓ a ≫ (purityScalarRootTrivialization ℓ a hζ hζ').hom) =
       (purityScalarFrobeniusPull ℓ a).map (purityScalarRootTrivialization ℓ a hζ hζ').hom ≫
         purityScalarSourceUnitDatum ℓ a := by
+  apply purity_scalarDatum_transport_isos
+    (purityScalarFrobeniusPull ℓ a)
+    _ (purityScalarSourceIso ℓ a) _ (purityScalarSourceUnitIso ℓ a)
+    _ (purityScalarRootTrivialization ℓ a hζ hζ')
+    (purityScalarSourceIso_eq ℓ a) (purityScalarSourceUnitIso_eq ℓ a)
+    (purityScalarRootTrivialization_eq ℓ a hζ hζ') (Nat.card k : ℤ)
   have h := purity_rationalRootTrivialization_weil a hζ hζ'
-  unfold purityScalarSourceDatum purityScalarRootTrivialization
-    purityScalarFrobeniusPull purityScalarSourceUnitDatum
-  dsimp only [purityScalarSourceObject, purityScalarSourceUnit,
-    tateTwistOne, Functor.comp_obj, Functor.comp_map] at h ⊢
-  exact_mod_proofs_fallback h
+  dsimp only [purityScalarFrobeniusPull, purityScalarSourceObject, purityScalarSourceUnit,
+    tateTwistOne, Iso.app_hom, Functor.comp_obj, Functor.comp_map] at h ⊢
+  exact_mod_proofs h
 
 /-- The canonical geometric trivialization in the scalar interface. -/
 noncomputable def purityScalarCanonicalTrivialization :
