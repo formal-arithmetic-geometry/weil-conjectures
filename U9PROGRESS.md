@@ -1,12 +1,20 @@
-# BZ261 in progress
+# BZ261 complete
 
 - Branch: `u9/BZ261`; starting commit: `c781553bf`.
+- Assigned module `WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarAdjunctionCompat`
+  passes `ucheck-bump`: rc=0, built=1, failed=0, 3616 jobs.
+- Validated source commit: `1a08e6d7b88fb29b066cfa086f8018c3e013051e`.
+- Full green log: `/home/ubuntu/u9/bz/BUILD-BZ261-fixed-full.log`.
 - The user instructed continuation after the exact one-line statement compatibility proposal.
-- Applied `.symm` to `mapDerivedCategoryCompIso` at UpperLowerStarAdjunctionCompat:66,
-  preserving the original mathematical map under Mathlib's reversed compositor API.
-- The existing proof is unchanged; next validate the unit and up to four direct importers.
-- Validation uses `ucheck-bump` only; no local Lean/Lake, proof placeholders, or limit increases.
-- Fix patterns and logs: `/home/ubuntu/u9/bz/FIXES-BZ261.md`.
+  Added `.symm` to the compositor at line 66; the original mathematical map and proof remain.
+- Checked three direct importers; all are blocked by other owners' dependencies
+  (BZ201, BZ206, BZ243, BZ258, BZ262), so skipped them as the brief directs.
+- Downstream log: `/home/ubuntu/u9/bz/BUILD-BZ261-downstream1-full.log`.
+  The assigned module rebuilt successfully again at commit `539013bcc2`.
+- Fix patterns, counts, and blocker details: `/home/ubuntu/u9/bz/FIXES-BZ261.md`.
+- No proof placeholders, trust bypasses, local Lean/Lake execution, or limit increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ261.DONE`.
+- This completion commit changes progress documentation only after source validation.
 
 # BZ150 complete
 
