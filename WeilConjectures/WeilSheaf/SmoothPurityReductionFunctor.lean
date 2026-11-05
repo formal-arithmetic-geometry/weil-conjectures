@@ -16,6 +16,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale
 
+open Scheme PadicAlgCl CondensedRing
+
 /-- Derived reduction modulo a power of the coefficient prime. Naming the functor avoids
 repeated elaboration of the derived-functor instance in reconstruction statements. -/
 noncomputable def purityIntegralReduction (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]

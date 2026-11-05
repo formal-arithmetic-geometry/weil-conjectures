@@ -113,7 +113,8 @@ theorem isIntegralSmoothOrientation_iff_trace
       (compactificationOverField f))
     (etaleReductionUpperShriekIso ℓ E.1 (n + 1) f) rfl φ
     θ _ hθ
-  dsimp only [etaleReduction, Functor.comp_map, canonicalFiniteIntegralOrientationTrace] at h ⊢
+  dsimp only [etaleReduction, finiteEtaleReading, Functor.comp_map, Functor.comp_obj, θ,
+    canonicalFiniteIntegralOrientationTrace] at h ⊢
   exact_mod_proofs h
 
 end AlgebraicGeometry.ProEtale.CondensedRing
