@@ -61,8 +61,8 @@ private theorem monomial_coeff (p : ℕ) (k : Type u) [Field k] (n m : ℕ)
     (ha : ∀ i, p ∣ a i) (hg : ∀ j, p ∣ g j)
     (he : ∀ i, e i < p) (he' : ∀ i, e' i < p)
     (hh : ∀ j, h j < p) (hh' : ∀ j, h' j < p) :
-    MvPowerSeries.coeff (a + e) (MvPolynomial.coeff (g + h)
-      (c * MvPolynomial.monomial h' (MvPowerSeries.monomial e' z))) =
+    MvPowerSeries.coeff (a + e) (AddMonoidAlgebra.coeff
+      (c * MvPolynomial.monomial h' (MvPowerSeries.monomial e' z)) (g + h)) =
     if e' = e ∧ h' = h then MvPowerSeries.coeff a (AddMonoidAlgebra.coeff c g) * z
       else 0 := by
   classical
@@ -281,14 +281,14 @@ private theorem powerSeriesResidueCoefficientRecovery
       (∀ i, p ∣ a i) → (∀ j, p ∣ g j) →
       (((b.repr (MvPowerSeries.coeff
         (a + Finsupp.equivFunOnFinite.symm (fun i ↦ (q.2.1 i : ℕ)))
-        (MvPolynomial.coeff
-          (g + Finsupp.equivFunOnFinite.symm (fun j ↦ (q.2.2 j : ℕ)))
+        (AddMonoidAlgebra.coeff
           (Finsupp.linearCombination S (fun q : Q × (Fin n → Fin p) × (Fin m → Fin p) ↦
       MvPolynomial.C (MvPowerSeries.C (b q.1) *
         ∏ i : Fin n, MvPowerSeries.X i ^ (q.2.1 i : ℕ)) *
-      ∏ j : Fin m, MvPolynomial.X j ^ (q.2.2 j : ℕ)) l)))) q.1 : K) : k) =
-      MvPowerSeries.coeff a (MvPolynomial.coeff g (l q :
-        MvPolynomial (Fin m) (MvPowerSeries (Fin n) k))) := by
+      ∏ j : Fin m, MvPolynomial.X j ^ (q.2.2 j : ℕ)) l)
+          (g + Finsupp.equivFunOnFinite.symm (fun j ↦ (q.2.2 j : ℕ)))))) q.1 : K) : k) =
+      MvPowerSeries.coeff a (AddMonoidAlgebra.coeff (l q :
+        MvPolynomial (Fin m) (MvPowerSeries (Fin n) k)) g) := by
   classical
   let := Fintype.ofFinite Q
   intro l q a g ha hg
@@ -302,11 +302,11 @@ private theorem powerSeriesResidueCoefficientRecovery
   let H := fun h : Fin m → Fin p ↦
     Finsupp.equivFunOnFinite.symm (fun j ↦ (h j : ℕ))
   let c := fun r : Q × (Fin n → Fin p) × (Fin m → Fin p) ↦
-    MvPowerSeries.coeff a (MvPolynomial.coeff g (l r :
-      MvPolynomial (Fin m) (MvPowerSeries (Fin n) k)))
+    MvPowerSeries.coeff a (AddMonoidAlgebra.coeff (l r :
+      MvPolynomial (Fin m) (MvPowerSeries (Fin n) k)) g)
   have hf (r : Q × (Fin n → Fin p) × (Fin m → Fin p)) :
-      MvPowerSeries.coeff (a + E q.2.1) (MvPolynomial.coeff (g + H q.2.2)
-        ((l r : MvPolynomial (Fin m) (MvPowerSeries (Fin n) k)) * v r)) =
+      MvPowerSeries.coeff (a + E q.2.1) (AddMonoidAlgebra.coeff
+        ((l r : MvPolynomial (Fin m) (MvPowerSeries (Fin n) k)) * v r) (g + H q.2.2)) =
       if r.2 = q.2 then c r * b r.1 else 0 := by
     dsimp [v]
     rw [vector_eq]
@@ -327,7 +327,7 @@ private theorem powerSeriesResidueCoefficientRecovery
     rw [map_smul, b.repr_self]
     simp [Finsupp.single_apply]
   change (((b.repr (MvPowerSeries.coeff (a + E q.2.1)
-    (MvPolynomial.coeff (g + H q.2.2) (Finsupp.linearCombination S v l)))) q.1 : K) : k) = c q
+    (AddMonoidAlgebra.coeff (Finsupp.linearCombination S v l) (g + H q.2.2)))) q.1 : K) : k) = c q
   rw [Finsupp.linearCombination_apply,
     Finsupp.sum_fintype l (fun i s ↦ s • v i) (fun i ↦ zero_smul S (v i))]
   simp only [Subring.smul_def, smul_eq_mul, MvPolynomial.coeff_sum, map_sum]
@@ -406,17 +406,17 @@ theorem powerSeriesResidueMonomialBasis
     intro g
     apply MvPowerSeries.ext
     intro a
-    change MvPowerSeries.coeff a (MvPolynomial.coeff g (l q :
-      MvPolynomial (Fin m) (MvPowerSeries (Fin n) k))) = 0
-    by_cases hc : MvPowerSeries.coeff a (MvPolynomial.coeff g (l q :
-      MvPolynomial (Fin m) (MvPowerSeries (Fin n) k))) = 0
+    change MvPowerSeries.coeff a (AddMonoidAlgebra.coeff (l q :
+      MvPolynomial (Fin m) (MvPowerSeries (Fin n) k)) g) = 0
+    by_cases hc : MvPowerSeries.coeff a (AddMonoidAlgebra.coeff (l q :
+      MvPolynomial (Fin m) (MvPowerSeries (Fin n) k)) g) = 0
     · exact hc
     · obtain ⟨ha, hg⟩ := ((hS _).mp (l q).property a g).2 hc
       have hr := powerSeriesResidueCoefficientRecovery p k K Q b n m S
         (fun f hf ↦ (hS f).mp hf) l q a g ha hg
       change Finsupp.linearCombination S v l = 0 at hl
-      change (((b.repr (MvPowerSeries.coeff _ (MvPolynomial.coeff _
-        (Finsupp.linearCombination S v l)))) q.1 : K) : k) = _ at hr
+      change (((b.repr (MvPowerSeries.coeff _ (AddMonoidAlgebra.coeff
+        (Finsupp.linearCombination S v l) _))) q.1 : K) : k) = _ at hr
       rw [hl] at hr
       simpa using hr.symm
   have hsp : ⊤ ≤ Submodule.span S (Set.range v) :=
