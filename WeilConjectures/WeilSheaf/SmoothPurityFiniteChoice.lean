@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Mathlib.CategoryTheory.CofilteredSystem
+public import Mathlib.CategoryTheory.Functor.OfSequence
 
 /-! # Compatible choices satisfying a reduction-stable condition -/
 

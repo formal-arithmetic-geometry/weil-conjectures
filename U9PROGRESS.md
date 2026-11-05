@@ -391,3 +391,7 @@ Possible smaller existence route for the PR2110 existential target: use Konig on
 ## 2026-11-05T09:01:21.361578+08:00 — precise failure location and constrained lifting
 - K4-20261105T085800.log rc=1: ReductionComparison GREEN (0.9s); CanonicalFinite failed at map_preimage (152s). CORRECTION to previous diagnoses: line79 in3359 was the finite reading equation, NOT the ambient iso definition. Removed unused reassoc generation, unfolded only the preimage-iso constructor, and supplied the mapped morphism explicitly.
 - Added SmoothPurityFiniteChoice and SmoothPurityConstrainedLift: Konig choice for finite nonempty subsets preserved by transitions; lifts isomorphisms satisfying any reduction-stable property; equality detection retains the necessary shifted-Hom finiteness hypothesis. These are pending checks, and the geometric equivariance inputs remain unproved.
+
+## 2026-11-05T09:04:42.534952+08:00 — retain the finite reading equation as data
+- K4-20261105T090122.log rc=1: FiniteChoice missed Mathlib.CategoryTheory.Functor.OfSequence (fixed). CanonicalFinite map_preimage still exceeds recursion depth with explicit morphism (119s).
+- Changed its construction to a generic subtype carrying the lifted isomorphism together with the reading equation; concrete proof now projects that equation. No opacity or budget changes. Added finite_hom_derivedReduction_integralOrientation by extracting the existing finite endomorphism argument.

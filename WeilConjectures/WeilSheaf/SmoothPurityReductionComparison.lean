@@ -14,6 +14,14 @@ open CategoryTheory
 
 namespace CategoryTheory
 
+/-- Keep the defining equation with the lifted isomorphism, so concrete applications need
+only project the equation rather than elaborate a fully faithful preimage again. -/
+def purityPreimageIsoWithHom
+    {C D : Type*} [Category C] [Category D] {F : C ⥤ D}
+    (hF : F.FullyFaithful) {X Y : C} (e : F.obj X ≅ F.obj Y) :
+    {e' : X ≅ Y // F.map e'.hom = e.hom} :=
+  ⟨hF.preimageIso e, hF.map_preimage e.hom⟩
+
 /-- Transport an isomorphism across a comparison of reduction functors. -/
 def purityReductionIso
     {C A D B : Type*} [Category C] [Category A] [Category D] [Category B]

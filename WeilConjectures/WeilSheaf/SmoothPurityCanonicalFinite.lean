@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.SmoothPurity.OrientationCanonical
+public import WeilConjectures.WeilSheaf.SmoothPurityReductionComparison
 
 /-! # Prescribed finite smooth orientations and their invertibility criterion -/
 
@@ -49,6 +50,15 @@ theorem isIso_of_isCanonicalSmoothOrientation
   have := isIso_of_isIntegralSmoothOrientation ℓ ⟨⊥, inferInstance⟩ f d φ₀ hφ₀
   infer_instance
 
+/-- The finite orientation together with its specified étale reading. -/
+noncomputable def canonicalFiniteIntegralOrientationData (n : ℕ) :=
+  purityPreimageIsoWithHom
+    (finiteEtaleReadingFullyFaithful (etaleOriginReading ℓ E.1 n X))
+    ((finiteEtaleReading ℓ E.1 n X).mapIso
+        (boundedConstructibleIntegersModPowReductionShiftIso ℓ E.1 n X.left _ (2 * d : ℤ)) ≪≫
+      ((finiteEtaleReading ℓ E.1 n X).commShiftIso (2 * d : ℤ)).app _ ≪≫
+      etaleReductionSmoothOrientationIso ℓ E f d n)
+
 /-- The canonical finite orientation, transported back from the fully faithful étale reading. -/
 noncomputable def canonicalFiniteIntegralOrientationIso (n : ℕ) :
     (boundedConstructibleIntegersModPowReduction X.left ℓ E.1 n).obj
@@ -56,11 +66,7 @@ noncomputable def canonicalFiniteIntegralOrientationIso (n : ℕ) :
           (integralTateTwistBoundedConstructible ℓ E.1 X.hom d)) ≅
       (boundedConstructibleIntegersModPowReduction X.left ℓ E.1 n).obj
         ((PadicIntegersRingObj.boundedConstructibleUpperShriek ℓ E.1 f).obj (𝟙_ _)) :=
-  (finiteEtaleReadingFullyFaithful (etaleOriginReading ℓ E.1 n X)).preimageIso
-    ((finiteEtaleReading ℓ E.1 n X).mapIso
-        (boundedConstructibleIntegersModPowReductionShiftIso ℓ E.1 n X.left _ (2 * d : ℤ)) ≪≫
-      ((finiteEtaleReading ℓ E.1 n X).commShiftIso (2 * d : ℤ)).app _ ≪≫
-      etaleReductionSmoothOrientationIso ℓ E f d n)
+  (canonicalFiniteIntegralOrientationData ℓ E f d n).val
 
 lemma canonicalFiniteIntegralOrientationIso_map_hom (n : ℕ) :
     (finiteEtaleReading ℓ E.1 n X).map
@@ -70,13 +76,6 @@ lemma canonicalFiniteIntegralOrientationIso_map_hom (n : ℕ) :
             (2 * d : ℤ)).hom ≫
         ((finiteEtaleReading ℓ E.1 n X).commShiftIso (2 * d : ℤ)).hom.app _ ≫
           (etaleReductionSmoothOrientationIso ℓ E f d n).hom := by
-  dsimp only [canonicalFiniteIntegralOrientationIso, Functor.FullyFaithful.preimageIso,
-    Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom]
-  exact (finiteEtaleReadingFullyFaithful (etaleOriginReading ℓ E.1 n X)).map_preimage
-    ((finiteEtaleReading ℓ E.1 n X).map
-        (boundedConstructibleIntegersModPowReductionShiftIso ℓ E.1 n X.left _
-          (2 * d : ℤ)).hom ≫
-      ((finiteEtaleReading ℓ E.1 n X).commShiftIso (2 * d : ℤ)).hom.app _ ≫
-        (etaleReductionSmoothOrientationIso ℓ E f d n).hom)
+  exact (canonicalFiniteIntegralOrientationData ℓ E f d n).property
 
 end AlgebraicGeometry.ProEtale.CondensedRing
