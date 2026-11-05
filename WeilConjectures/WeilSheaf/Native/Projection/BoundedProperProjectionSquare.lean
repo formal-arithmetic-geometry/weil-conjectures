@@ -44,6 +44,23 @@ local instance : IsProper (gb).left :=
   Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange (P := @IsProper) g
     (comp_over g (Spec (CommRingCat.of k₀))) ‹_›
 
+/-- The ambient proper comparison factors through the adic realization. -/
+lemma projectionProperForgetIso_factorization
+    (M : DerivedCategory (ProEtaleWeilSheaf k₀ l X)) :
+    (ProEtaleWeilSheaf.nativeProperForgetIso k₀ l g).hom.app M =
+      (projectionRealizationCompIso k₀ l Y).hom.app
+        ((ProEtaleWeilSheaf.lowerStar k₀ l g).rightDerivedFunctor.obj M) ≫
+      (adicSheafDerivedEquivCondensedMod l _).functor.map
+        ((IsoAlgebra.derivedForgetCommIso (adicLowerStarGeometricFiberMapCompFrobeniusIso l g
+          (comp_over g (Spec (CommRingCat.of k₀))))).hom.app M) ≫
+      (projectionAdicCondensedDerivedPushIso l
+        (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))).hom.app
+          ((IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).mapDerivedCategory.obj M) ≫
+      (CondensedRing.lowerStar Λ
+        (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))).
+          rightDerivedFunctor.map ((projectionRealizationCompIso k₀ l X).inv.app M) := by
+  exact ProEtaleWeilSheaf.nativeProjectionPushMate_normalization k₀ l g M
+
 set_option backward.isDefEq.respectTransparency false in
 /-- The bounded proper forget square has the same components as the canonical realization
 mate transported along the exact-functor compositor. -/
@@ -58,14 +75,11 @@ lemma projectionProperForgetIso_hom_app (M : WeilComplex k₀ l X) :
     ((adicSheafDerivedEquivCondensedMod l _).functor.map
       ((IsoAlgebra.derivedForgetCommIso (adicLowerStarGeometricFiberMapCompFrobeniusIso l g
         (comp_over g (Spec (CommRingCat.of k₀))))).hom.app M.obj) ≫
-      (projectionAdicCondensedDerivedPushIso l (gb).left).hom.app
+      (projectionAdicCondensedDerivedPushIso l
+        (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))).hom.app
         ((IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).mapDerivedCategory.obj M.obj))
     (by
-      have hn := ProEtaleWeilSheaf.nativeProjectionPushMate_normalization k₀ l g M.obj
-      dsimp only [projectionRealizationCompIso, ProEtaleWeilSheaf.nativeProperForgetIso,
-        asIso_hom, TwoSquare.natTrans] at hn ⊢
-      simp only [Category.assoc] at hn ⊢
-      cast_proofs hn)
+      simpa only [Category.assoc] using projectionProperForgetIso_factorization k₀ l g M.obj)
   rw [h]
   simp only [projectionProperForgetIso, Functor.isoHComp, Iso.symm_hom, Iso.trans_inv,
     Iso.symm_inv, Functor.isoWhiskerRight_inv, Functor.isoWhiskerLeft_inv,
