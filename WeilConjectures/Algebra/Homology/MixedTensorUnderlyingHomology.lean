@@ -62,6 +62,7 @@ private theorem coeff_left (R A : Type u) [CommRing R] [CommRing A] [Algebra R A
     induction t using TensorProduct.inductionOn with
     | add x y hx hy => simp_all [TensorProduct.tmul_add]
     | tmul a n =>
+      change A at a
       change (a • g m) ⊗ₜ[R] n = g (a • m) ⊗ₜ[R] n
       rw [g.hom.map_smul]
 
