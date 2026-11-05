@@ -622,7 +622,7 @@ theorem proEtaleMixedProjectionMate
       simp only [eta, Functor.rightDerivedFunctorUnitQ, DerivedCategory.quotientCompQhIso,
         HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift,
         NatIso.ofComponents_hom_app, NatIso.ofComponents_inv_app, Iso.refl_hom, Iso.refl_inv]
-      erw [Category.id_comp, Functor.map_id, Category.comp_id]
+      erw [Category.id_comp, CategoryTheory.Functor.map_id, Category.comp_id]
     rw [heta]
     exact proEtale_cochain_counit f R S c I
   obtain ⟨D, q, hres⟩ := flat_resolution_functor Y R
