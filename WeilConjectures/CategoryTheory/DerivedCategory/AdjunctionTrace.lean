@@ -5,9 +5,12 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.CategoryTheory.DerivedCategory.AdjunctionUnit
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryNatTransAdditive
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
+
+import all Mathlib.Algebra.Homology.Localization
 
 /-!
 # Traces of derived adjunctions of exact functors
@@ -58,14 +61,11 @@ lemma mapDerivedCategoryAdjunction_unit_eq :
   rw [mapHomotopyCategory_unit_app_quotient] at hu
   have hc := Functor.mapDerivedCategoryCompIso_fac f g Y
   have hn := Functor.mapDerivedCategoryNatTrans_fac adj.unit Y
-  have hi := congr_app (congr_arg Iso.hom (Functor.mapDerivedCategoryIdIso_factorsh C))
-    ((HomotopyCategory.quotient C (ComplexShape.up ℤ)).obj Y)
   have hu' : adj.mapDerivedCategoryAdjunction.unit.app (DerivedCategory.Q.obj Y) ≫
       g.mapDerivedCategory.map (f.mapDerivedCategoryFactors.hom.app Y) ≫
         g.mapDerivedCategoryFactors.hom.app ((f.mapHomologicalComplex _).obj Y) =
       DerivedCategory.Q.map ((mapHomologicalComplex (ComplexShape.up ℤ) adj).unit.app Y) := by
-    have e1 : (DerivedCategory.quotientCompQhIso C).hom.app Y = 𝟙 _ :=
-      Quotient.lift.isLift_hom _ _ _ Y
+    have e1 : (DerivedCategory.quotientCompQhIso C).hom.app Y = 𝟙 _ := rfl
     have e2 : (DerivedCategory.quotientCompQhIso D).inv.app ((f.mapHomologicalComplex _).obj Y) =
       𝟙 _ := rfl
     have e3 : (f.mapHomotopyCategoryFactors (ComplexShape.up ℤ)).inv.app Y = 𝟙 _ := rfl
@@ -82,22 +82,7 @@ lemma mapDerivedCategoryAdjunction_unit_eq :
     erw [e4] at hu
     simp only [Functor.id_obj, Functor.comp_obj, Functor.map_id, comp_id] at hu
     exact hu
-  have hi' : (Functor.mapDerivedCategoryIdIso C).hom.app (DerivedCategory.Q.obj Y) =
-      (𝟭 C).mapDerivedCategoryFactors.hom.app Y ≫ DerivedCategory.Q.map
-        ((Functor.mapHomologicalComplexIdIso C (ComplexShape.up ℤ)).hom.app Y) := by
-    simp only [Functor.mapDerivedCategoryFactorsh_hom_app, Iso.trans_hom, NatTrans.comp_app,
-      Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Functor.rightUnitor_hom_app,
-      Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, Functor.leftUnitor_hom_app] at hi
-    have e1 : (DerivedCategory.quotientCompQhIso C).hom.app Y = 𝟙 _ :=
-      Quotient.lift.isLift_hom _ _ _ Y
-    have e3 : ((𝟭 C).mapHomotopyCategoryFactors (ComplexShape.up ℤ)).inv.app Y = 𝟙 _ := rfl
-    have e4 : (DerivedCategory.quotientCompQhIso C).inv.app
-      (((𝟭 C).mapHomologicalComplex (ComplexShape.up ℤ)).obj Y) = 𝟙 _ := rfl
-    simp only [e1, e3, CategoryTheory.Functor.map_id, Category.id_comp] at hi
-    simp only [e4] at hi
-    simp only [Functor.comp_obj, Functor.id_obj, comp_id, Functor.map_id,
-      Functor.mapHomotopyCategoryIdIso_hom_app] at hi
-    exact hi
+  have hi' := Functor.mapDerivedCategoryIdIso_hom_app Y
   rw [← cancel_mono (g.mapDerivedCategory.map (f.mapDerivedCategoryFactors.hom.app Y) ≫
     g.mapDerivedCategoryFactors.hom.app ((f.mapHomologicalComplex _).obj Y) ≫
     DerivedCategory.Q.map ((Functor.mapHomologicalComplexCompIso (Iso.refl (f ⋙ g))
