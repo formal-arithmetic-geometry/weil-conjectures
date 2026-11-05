@@ -316,6 +316,9 @@ private theorem oppositeCoconeBoundary_f {X Y : CochainComplex C ℤ}
     HomologicalComplex.XIsoOfEq_hom_comp_XIsoOfEq_hom,
     HomologicalComplex.XIsoOfEq_rfl, Iso.refl_hom, Category.comp_id,
     Functor.opId, Iso.refl_inv, NatTrans.id_app, unop_id, HomologicalComplex.id_f]
+  erw [unop_id, HomologicalComplex.id_f, Category.comp_id, Category.id_comp,
+    HomologicalComplex.XIsoOfEq_hom_comp_XIsoOfEq_hom,
+    HomologicalComplex.XIsoOfEq_rfl, Iso.refl_hom, Category.comp_id]
 
 private theorem coneTriangle_boundary_f {K L : CochainComplex A ℤ}
     (f : K ⟶ L) (p : ℤ) :
