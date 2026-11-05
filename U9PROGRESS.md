@@ -68,3 +68,8 @@ Canceled ONLY own stale finite prototype job u9-K4c-1793880588 on verified newsr
 ef3337a2e4) after17min prerequisite rebuild; that snapshot predates category method fixes.
 Runner reports rc0 on systemd cancellation; it is NOT a successful target check. No other jobs,
 locks or scheduler settings touched. Next combined concrete check uses corrected snapshot.
+
+20:30 CST: C1/K4a now confirm the original dense repro proposition itself times out without
+any equation proof. Avoiding that global target per new LEAD plan. Isolating our different outer
+iso boundary with an admission-free Prop type control and explicit source/target functor transport:
+this should distinguish type conversion of two iso types from comparison of the iso values.
