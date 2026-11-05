@@ -117,6 +117,7 @@ theorem exists_localization_ideal_kernel_generators
         intro a n
         induction a using TensorProduct.inductionOn with
         | tmul s r =>
+          change R' ⊗[R] M at n
           induction n using TensorProduct.inductionOn with
           | tmul r₁ m =>
             change f (s • r • (r₁ ⊗ₜ[R] m)) = q (s ⊗ₜ[R] r) • f (r₁ ⊗ₜ[R] m)
@@ -152,6 +153,7 @@ theorem exists_localization_ideal_kernel_generators
         | tmul s r =>
           induction x with
           | tmul b m =>
+            change S ⊗[R] R' at b
             induction b using TensorProduct.inductionOn with
             | tmul s₁ r₁ =>
               change eR (((s ⊗ₜ[R] r) * (s₁ ⊗ₜ[R] r₁)) ⊗ₜ[S] m) =
