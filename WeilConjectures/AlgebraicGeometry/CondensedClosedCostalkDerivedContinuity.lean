@@ -352,7 +352,7 @@ theorem condensed_closed_costalk_derived_continuity
   let F := DerivedCategory.homologyFunctor A 0
   let eQ : CochainComplex.Plus.ι A ⋙ DerivedCategory.Q ≅
       DerivedCategory.Plus.Q ⋙ DerivedCategory.Plus.ι :=
-    Functor.isoWhiskerLeft (CochainComplex.Plus.ι A) (DerivedCategory.quotientCompQhIso A)
+    (DerivedCategory.Plus.QCompιIso A).symm
   have hid (r : ℤ) : IsIso (triangleComparison TT tc F r Triangle.π₂) := by
     let C := HomologicalComplex.homologyFunctor A (.up ℤ) r
     have hb : IsIso (colimit.desc (D ⋙ C) (C.mapCocone d)) := by
