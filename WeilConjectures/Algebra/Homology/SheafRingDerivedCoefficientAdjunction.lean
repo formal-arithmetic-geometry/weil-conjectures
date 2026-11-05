@@ -229,7 +229,7 @@ theorem sheafRingDerivedCoefficientAdjunction (φ : O ⟶ O')
     have hu' := congrArg
       (fun t ↦ t ≫ F.mapDerivedCategoryFactorsh.hom.app
         ((E.mapHomotopyCategory (ComplexShape.up ℤ)).obj M)) hu
-    simpa [F, M, Adjunction.homEquiv_unit] using hu'
+    simpa [F, M, Adjunction.homEquiv_unit, Adjunction.homEquiv_id] using hu'
   · intro H g
     have ht := hd M H ((ah.homEquiv M H).symm g)
     rw [Equiv.apply_symm_apply] at ht
