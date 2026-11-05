@@ -95,7 +95,7 @@ private theorem triangle_localization {X Y T : Scheme.{v}}
             ((G.mapHomologicalComplex (.up ℤ)).obj J) =
         (upperStar AddCommGrpCat.{v + 1} h).mapDerivedCategoryFactors.hom.app J ≫
           DerivedCategory.Q.map ((NatIso.mapHomologicalComplex e (.up ℤ)).hom.app J) := by
-      simp only [Iso.trans_hom, NatTrans.comp_app, Category.assoc]
+      simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
       rw [hc]
       exact hn
     apply (cancel_epi (L.mapDerivedCategory.map
