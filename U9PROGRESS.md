@@ -49,3 +49,15 @@
   all other declaration statements and all existing docstrings are unchanged.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 - Completion marker: `/home/ubuntu/u9/state/BZ130.DONE`.
+
+# BZ165 in progress
+
+- Branch: `u9/BZ165`; initial commit: `6504338cb`.
+- Three assigned modules have built with `ucheck-bump`: KFlatFixedTensorTriangulated,
+  KFlatRHomCurrying, InternalSectionTensorComparison.
+- The user instructed continuation after the exact compositor migration proposal;
+  the proposed hom/inv swaps in MapDerivedComp are now applied. These preserve
+  the original maps after Mathlib reversed mapDerivedCategoryCompIso.
+- Next: build all four assigned modules together, then write `/home/ubuntu/u9/state/BZ165.DONE`.
+- Fix patterns and exact errors: `/home/ubuntu/u9/bz/FIXES-BZ165.md`.
+- No local Lean/Lake execution, prohibited proof escapes, or heartbeat increases.
