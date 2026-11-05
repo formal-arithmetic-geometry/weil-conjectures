@@ -41,7 +41,7 @@ private noncomputable def extensionTensorIso
     { e.toAddEquiv with
       map_smul' := by
         intro r x
-        induction x with
+        induction x using TensorProduct.inductionOn with
         | add x y hx hy => simp_all
         | tmul b m =>
           change B at b
@@ -58,7 +58,7 @@ private noncomputable def extensionTensorNatIso
   NatIso.ofComponents (extensionTensorIso f) (by
     intro M N g
     ext x
-    induction x with
+    induction x using TensorProduct.inductionOn with
     | add x y hx hy => simp_all
     | tmul b m => rfl)
 

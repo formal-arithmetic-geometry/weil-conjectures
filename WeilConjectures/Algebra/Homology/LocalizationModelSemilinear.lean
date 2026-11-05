@@ -96,7 +96,7 @@ private theorem localizationModelMap_left (i : ℤ)
     change uQ.f j (a • (y : Q.X j)) =
       algebraMap A Aq a • (uQ.f j y : ((extend A Aq).obj Q).X j)
     rw [huQ, huQ]
-    let : Module A Aq := Module.compHom Aq (algebraMap A Aq)
+    let : Algebra A Aq := (algebraMap A Aq).toAlgebra
     rw [← TensorProduct.smul_tmul, TensorProduct.smul_tmul']
     rfl
   have hd : L.derived.map (V.map α) ≫ L.derived.map v ≫ ζ.hom.app _ =
