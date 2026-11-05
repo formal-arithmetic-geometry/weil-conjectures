@@ -221,3 +221,17 @@
   failed=0, 3927 jobs, target rebuilt in 48 seconds.
 - Remote log: `/home/ubuntu/u9/logs/BZ740-20261106T061103.log`.
 - Checking downstream `DerivedPullbackTensorUnitKFlat` and `DerivedPullbackTensorUnit`.
+
+
+# BZ800 in progress
+
+- Branch: `u9/BZ800`; starting commit: `fcbed6be3`.
+- Reread the brief and progress notes on continuation; no new LEAD lines.
+- Import-only remote build at `47f88332d4` resolved the private helper error,
+  leaving the public hypothesis's Qh/Q mismatch.
+- The user instructed continuation after the exact two-cast proposal and downstream request.
+  Applied `BZ800-statement-cast-proposal.patch` and the same identity casts to
+  direct importer `DerivedPullbackMonoidalDescent`, preserving the existing morphisms.
+- Next: validate both modules with `ucheck-bump`, then continue downstream (up to 30 extra modules).
+- Fix patterns and diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ800.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
