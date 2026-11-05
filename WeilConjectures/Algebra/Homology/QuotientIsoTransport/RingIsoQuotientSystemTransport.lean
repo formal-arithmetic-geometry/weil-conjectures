@@ -203,8 +203,8 @@ def derivedSquare {R R' S S' : Sheaf J CommRingCat.{w}}
       (transport e').mapDerivedCategory ⋙
         (restrictScalars
           ((sheafCompose J (forget₂ CommRingCat RingCat)).map b)).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
-    Functor.mapDerivedCategoryNatIso rho ≪≫ Functor.mapDerivedCategoryCompIso _ _
+  (Functor.mapDerivedCategoryCompIso _ _) ≪≫
+    Functor.mapDerivedCategoryNatIso rho ≪≫ (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- Abstract comparison data with its specified normalization predicate.
 Source: Stacks 03D7, 015F and 06YY

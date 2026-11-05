@@ -153,17 +153,17 @@ theorem derivedComparisonUpperStarUpperStarIso_compCoherence {X Y Z : Scheme.{u}
       (ProEtale.leftDerivedUpperStarIsoMapDerivedCategory A (p ≫ q))
       ((Functor.mapDerivedCategoryCompIso (Etale.upperStar A q) ν^*(Y)[A]).inv ≫
         (Functor.mapDerivedCategoryNatIso (comparisonUpperStarUpperStarIso A q).symm).hom ≫
-        (Functor.mapDerivedCategoryCompIso ν^*(Z)[A] (ProEtale.upperStar A q)).hom)
+        ((Functor.mapDerivedCategoryCompIso ν).symm^*(Z)[A] (ProEtale.upperStar A q)).hom)
       ((Functor.mapDerivedCategoryCompIso (Etale.upperStar A p) ν^*(X)[A]).inv ≫
         (Functor.mapDerivedCategoryNatIso (comparisonUpperStarUpperStarIso A p).symm).hom ≫
-        (Functor.mapDerivedCategoryCompIso ν^*(Y)[A] (ProEtale.upperStar A p)).hom)
-      ((Functor.mapDerivedCategoryCompIso (Etale.upperStar A (p ≫ q)) ν^*(X)[A]).inv ≫
+        ((Functor.mapDerivedCategoryCompIso ν).symm^*(Y)[A] (ProEtale.upperStar A p)).hom)
+      (((Functor.mapDerivedCategoryCompIso (Etale.upperStar A (p ≫ q)) ν).symm^*(X)[A]).inv ≫
         (Functor.mapDerivedCategoryNatIso (comparisonUpperStarUpperStarIso A (p ≫ q)).symm).hom ≫
-        (Functor.mapDerivedCategoryCompIso ν^*(Z)[A] (ProEtale.upperStar A (p ≫ q))).hom)
+        ((Functor.mapDerivedCategoryCompIso ν).symm^*(Z)[A] (ProEtale.upperStar A (p ≫ q))).hom)
       ((Functor.mapDerivedCategoryNatIso (Etale.upperStarComp A p q)).hom ≫
-        (Functor.mapDerivedCategoryCompIso (Etale.upperStar A q) (Etale.upperStar A p)).hom)
+        (Functor.mapDerivedCategoryCompIso (Etale.upperStar A q) (Etale.upperStar A p)).inv)
       ((Functor.mapDerivedCategoryNatIso (ProEtale.upperStarComp A p q)).hom ≫
-        (Functor.mapDerivedCategoryCompIso (ProEtale.upperStar A q)
+        ((Functor.mapDerivedCategoryCompIso (ProEtale.upperStar A q)).symm
           (ProEtale.upperStar A p)).hom)
       ?_ (derivedComparisonUpperStarUpperStarIso A q).symm
       (derivedComparisonUpperStarUpperStarIso A p).symm
