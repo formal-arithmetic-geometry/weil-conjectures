@@ -78,10 +78,11 @@ theorem exists_isIntegralSmoothOrientation_of_compatible
     apply purity_reduction_map_eq_of_comparison ι _ _ _
       (ObjectProperty.fullyFaithfulι _)
       (boundedConstructibleIntegersModPowReductionCompatibility X.left ℓ E.1 (n + 1))
-    rw [hg, hφ n]
-    rfl
-  rw [hr]
-  exact canonicalFiniteIntegralOrientationIso_map_hom ℓ E f d (n + 1)
+    exact (congrArg
+      (Mod.extendScalars (integersModPowReduction X.left ℓ E.1 (n + 1))).leftDerivedFunctor.map
+      hg).trans (hφ n)
+  exact (congrArg (finiteEtaleReading ℓ E.1 (n + 1) X).map hr).trans
+    (canonicalFiniteIntegralOrientationIso_map_hom ℓ E f d (n + 1))
 
 /-- The integral reconstruction supplies an invertible canonical rational orientation. -/
 theorem exists_isIso_isCanonicalSmoothOrientation_of_compatible

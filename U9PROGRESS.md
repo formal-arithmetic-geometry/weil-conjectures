@@ -395,3 +395,10 @@ Possible smaller existence route for the PR2110 existential target: use Konig on
 ## 2026-11-05T09:04:42.534952+08:00 — retain the finite reading equation as data
 - K4-20261105T090122.log rc=1: FiniteChoice missed Mathlib.CategoryTheory.Functor.OfSequence (fixed). CanonicalFinite map_preimage still exceeds recursion depth with explicit morphism (119s).
 - Changed its construction to a generic subtype carrying the lifted isomorphism together with the reading equation; concrete proof now projects that equation. No opacity or budget changes. Added finite_hom_derivedReduction_integralOrientation by extracting the existing finite endomorphism argument.
+
+## 2026-11-05T09:06:29.929709+08:00 — finite orientation and finiteness GREEN
+GREEN at ef09cfe05c in K4-20261105T090443.log: SmoothPurityCanonicalFinite (27s: isIso_of_isIntegralSmoothOrientation, isIso_of_isCanonicalSmoothOrientation, prescribed finite iso and map equation), SmoothPurityReductionHom (11s: finite_hom_derivedReduction_integralOrientation at every n), SmoothPurityFiniteChoice (0.7s constrained Konig), ReductionComparison (0.6s). TraceNormalization has 7s rw conversion timeout at finite-map equation; fixed via direct equality transitivity plus generic mate-iso criterion. ConstrainedLift has 17s rewrite conversion timeout; replacing rewrite with explicit transition naturality + congrArg. CanonicalLift pending. Finite reading exact map_preimage recursion was solved by generic subtype bundling iso AND its map equation (no limit raise).
+
+## 2026-11-05T09:08:32.872699+08:00 — direct equalities replace concrete rewrites
+- Full K4-20261105T090443.log rc=1: CanonicalLift failed at rw[hg,hphi] (122s), while its ambient iso and generic comparison application passed. Replaced both concrete rewrites by congrArg/trans. Trace and constrained lift repaired similarly.
+- Added pending SmoothPurityReductionHomShift: finite shifted Hom required by the Milnor uniqueness theorem, using negative Ext of finite Tate lines. This supplies the missing hypothesis identified earlier; no blanket claim that reductions are jointly faithful.

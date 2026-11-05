@@ -56,8 +56,16 @@ theorem exists_forall_isIso_property_derivedReduction_map
   obtain ⟨t, htP, ht⟩ := exists_compatible_choices_with_property r (fun n e ↦ P n e.hom)
     htfin hne (fun n e he ↦ hP n e.hom he)
   obtain ⟨f, hf⟩ := exists_derivedReduction_map_eq hL (fun n ↦ (t n).hom) fun n ↦ by
-    rw [← congrArg Iso.hom (ht n)]
-    exact Mod.map_comp_derivedReductionTransition_app _ _ _ _ _
+    have he : derivedReductionStep (n + 1) (t (n + 1)).hom = (t n).hom :=
+      congrArg Iso.hom (ht n)
+    exact (Mod.map_comp_derivedReductionTransition_app
+      (integersModPowReduction X ℓ E (n + 1 + 1))
+      (integersModPowTransition X ℓ E (n + 1))
+      (integersModPowReduction X ℓ E (n + 1))
+      (integersModPowReduction_comp_integersModPowTransition X ℓ E (n + 1))
+      (t (n + 1)).hom).trans
+        (congrArg (fun s ↦ reductionTransition E (n + 1) K ≫
+          (Mod.comap (integersModPowReduction X ℓ E (n + 1))).mapDerivedCategory.map s) he)
   refine ⟨f, fun n ↦ ?_⟩
   rw [hf n]
   exact ⟨inferInstance, htP n⟩
