@@ -23,11 +23,15 @@ Source: Stacks Project, Cohomology, Lemma 0B8S, local-lift computation.
 
 @[expose] public section
 
-universe u
+universe u v
 
 open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 
 namespace AlgebraicGeometry
+
+private local instance squareZeroModuleProducts (R : Type u) [Ring R] (J : Type v)
+    [Small.{u} J] : HasLimitsOfShape (Discrete J) (ModuleCat.{u} R) :=
+  ModuleCat.hasLimitsOfShape
 
 set_option backward.isDefEq.respectTransparency false in
 private theorem common_lifts (X : Scheme.{u})
