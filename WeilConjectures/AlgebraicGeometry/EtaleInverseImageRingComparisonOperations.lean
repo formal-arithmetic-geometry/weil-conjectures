@@ -26,7 +26,7 @@ set_option backward.defeqAttrib.useBackward true
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-private local instance.{uC, vC, w} {C : Type uC} [Category.{vC} C] :
+private local instance ringPresheafHasProducts.{uC, vC, w} {C : Type uC} [Category.{vC} C] :
     HasProducts.{w} (Cᵒᵖ ⥤ CommRingCat.{w}) :=
   fun _ ↦ functorCategoryHasLimitsOfShape
 
