@@ -759,6 +759,35 @@ noncomputable def coefficientSequenceTransition {m n : ℕ} (h : n ≤ m) :
       coefficientSequenceEvaluation l E W n ⋙ normalizedDVRModuleRes l E W h :=
   (coefficientSequenceTransition_exists l E W h).exists.choose
 
+/-- The same transition descended to the ordinary derived system category.
+Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site). -/
+noncomputable def coefficientSequenceDerivedTransition {m n : ℕ} (h : n ≤ m) :
+    coefficientSequenceDerivedEvaluation l E W m ⟶
+      coefficientSequenceDerivedEvaluation l E W n ⋙ normalizedDVRRes l E W h :=
+  letI := HasDerivedCategory.standard (coefficientSequenceModules l E W)
+  letI := HasDerivedCategory.standard (normalizedDVRModules l E W m)
+  letI := HasDerivedCategory.standard (normalizedDVRModules l E W n)
+  Localization.liftNatTrans DerivedCategory.Q
+    (HomologicalComplex.quasiIso (coefficientSequenceModules l E W) (ComplexShape.up ℤ))
+    _ _ (coefficientSequenceEvaluation l E W m).mapDerivedCategory
+    ((coefficientSequenceEvaluation l E W n ⋙ normalizedDVRModuleRes l E W h).mapDerivedCategory)
+    (Functor.whiskerRight
+      (NatTrans.mapHomologicalComplex (coefficientSequenceTransition l E W h)
+        (ComplexShape.up ℤ)) DerivedCategory.Q) ≫
+    (Functor.mapDerivedCategoryCompIso (coefficientSequenceEvaluation l E W n)
+      (normalizedDVRModuleRes l E W h)).inv
+
+/-- Normalization of an actual derived semilinear system, using the dependency's
+universal derived tensor/restriction criterion for its specified transitions.
+Source: Stacks 0941, normalized coefficient systems
+(blueprint: def-coef-ringed-sequence-site). -/
+def IsNormalizedCoefficientSequence (N : coefficientSequenceDerived l E W) : Prop :=
+  ∀ {m n : ℕ} (h : n ≤ m) (P : normalizedDVRDerived l E W n),
+    Function.Bijective
+      (fun f : (coefficientSequenceDerivedEvaluation l E W n).obj N ⟶ P ↦
+        (coefficientSequenceDerivedTransition l E W h).app N ≫
+          (normalizedDVRRes l E W h).map f)
+
 private theorem moduleSheaf_hom_eq_of_heq
     {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
     {R : Sheaf J RingCat.{u}} {M M' N N' : SheafOfModules.{t} R}
