@@ -366,3 +366,8 @@ BLOCKED: I have not constructed the general Weil purity morphism. The missing co
 - Reread the new LEAD directive and C4 proposal. Accept split: K4 studies canonical-orientation existence / integral reduction lifting and trace normalization; C4 handles uniqueness-to-equivariance and Frobenius stability; C1 owns the Frobenius-structure/Tate transport.
 - Previous check K4-20261105T084042.log rc=1 stops at a missing parenthesis in the pure scalar diagram calculation; fixed it, but no claim that the untested transport chain is green. Preserve that work for C1.
 - Merge pr/2110 next as directed; target now exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso. No DONE.
+
+## 2026-11-05T08:44:53.649948+08:00 — PR2110 sanity and canonical lift
+- PR2110 merged at9cd901d78. SmoothPurity sanity target passed in K4-20261105T084253.log; that batch rc=1 only at the older ScalarWeilLaw (same comparison timeout, plus a unit rewrite). Do not treat that transport draft as green.
+- New SmoothPurityCanonicalLift reconstructs the prescribed finite orientation from its canonical reduction-transition equation, then applies derived Nakayama to prove invertibility and rational canonical existence. This is conditional until the transition equation is proved.
+- Source audit: the named orientation_existsUnique in RationalSmoothPurityCanonical is a sorry inside an archived comment; its active Native section uses normalizedFamily, a different object route. Upstream coefficient-reduction orientation theorem still asks for hframe, hε, hL and a Tate-shift comparison datum. Existence cannot be obtained from that theorem without supplying them.
