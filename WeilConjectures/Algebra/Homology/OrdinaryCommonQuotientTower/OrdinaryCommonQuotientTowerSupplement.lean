@@ -382,7 +382,7 @@ private theorem kernel_forward
   have hquot := congrArg
     (TensorProduct.quotTensorEquivQuotSMul (M.val.obj (op V)) (K q (op V))) hg
   rw [TensorProduct.quotTensorEquivQuotSMul_mk_one_tmul, map_zero] at hquot
-  have hmem : M.val.map g.op x ∈ K q (op V) • (⊤ : Submodule _ (M.val.obj (op V))) :=
+  have hmem : M.val.restrictₛₗ g.op x ∈ K q (op V) • (⊤ : Submodule _ (M.val.obj (op V))) :=
     (Submodule.Quotient.mk_eq_zero _).mp hquot
   have hle : K q (op V) • (⊤ : Submodule _ (M.val.obj (op V))) ≤
       Submodule.span (R.obj.obj (op V))
