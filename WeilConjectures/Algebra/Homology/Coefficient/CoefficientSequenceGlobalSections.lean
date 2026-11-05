@@ -246,23 +246,6 @@ instance sequenceTowerSectionsAdditive (A : Sheaf J CommRingCat.{w}) :
   dsimp only [sequenceTowerSections]
   infer_instance
 
-/-- The evaluation comparison for exact restriction is its localized ordinary comparison.
-Source: Stacks 015F (blueprint: lem-coef-sequence-global-sections-evaluation). -/
-def sequenceRestrictionDerivedEvaluation
-    {B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}} {A : Sheaf J CommRingCat.{w}}
-    {α : (Functor.const ℕᵒᵖ).obj A ⟶ B} (r : SequenceCoefficientRestrictionData B A α)
-    (n : ℕ) :
-    r.functor.mapDerivedCategory ⋙
-        ((CategoryTheory.evaluation ℕᵒᵖ (sequenceCoefficientModules A)).obj
-          (op n)).mapDerivedCategory ≅
-      derivedSystemEvaluation B n ⋙
-        (sequenceCoefficientRestriction (α.app (op n))).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso r.functor
-    ((CategoryTheory.evaluation ℕᵒᵖ _).obj (op n))).symm ≪≫
-    Functor.mapDerivedCategoryNatIso (r.evaluation n) ≪≫
-    Functor.mapDerivedCategoryCompIso (systemEvaluation B n)
-      (sequenceCoefficientRestriction (α.app (op n)))
-
 /-- The two finite comparisons, with the actual total derived functors as their endpoints.
 Source: Stacks 0941, 0D6E (blueprint: lem-coef-sequence-global-sections-evaluation). -/
 structure SequenceSectionsComparisons
@@ -287,76 +270,6 @@ def SequenceSectionsComparisons.global
     {α : (Functor.const ℕᵒᵖ).obj A ⟶ B} (d : SequenceSectionsComparisons B A α) :
     DerivedCategory (StrictRingSystem B) ⥤ DerivedCategory (ℕᵒᵖ ⥤ AddCommGrpCat.{w}) :=
   d.restriction.functor.mapDerivedCategory ⋙ d.tower.functor
-
-/-- The first comparison: restrict scalars exactly, then evaluate the same tower resolution.
-Source: Stacks 0941 (blueprint: lem-coef-sequence-global-sections-evaluation). -/
-def SequenceSectionsComparisons.restrictedEvaluation
-    {B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}} {A : Sheaf J CommRingCat.{w}}
-    {α : (Functor.const ℕᵒᵖ).obj A ⟶ B} (d : SequenceSectionsComparisons B A α) (n : ℕ) :
-    d.global ⋙ ((CategoryTheory.evaluation ℕᵒᵖ AddCommGrpCat.{w}).obj
-        (op n)).mapDerivedCategory ≅
-      derivedSystemEvaluation B n ⋙
-        (sequenceCoefficientRestriction (α.app (op n))).mapDerivedCategory ⋙
-          (d.finite A).functor :=
-  Functor.isoWhiskerLeft d.restriction.functor.mapDerivedCategory (d.evaluation n) ≪≫
-    Functor.isoWhiskerRight (sequenceRestrictionDerivedEvaluation d.restriction n)
-      (d.finite A).functor
-
-/-- The second comparison is the inverse of the normalized scalar composition comparison.
-Source: Stacks 0D6E (blueprint: lem-coef-sequence-global-sections-evaluation). -/
-def SequenceSectionsComparisons.finiteEvaluation
-    {B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}} {A : Sheaf J CommRingCat.{w}}
-    {α : (Functor.const ℕᵒᵖ).obj A ⟶ B} (d : SequenceSectionsComparisons B A α) (n : ℕ) :
-    d.global ⋙ ((CategoryTheory.evaluation ℕᵒᵖ AddCommGrpCat.{w}).obj
-        (op n)).mapDerivedCategory ≅
-      derivedSystemEvaluation B n ⋙ (d.finite (B.obj (op n))).functor :=
-  d.restrictedEvaluation n ≪≫
-    Functor.isoWhiskerLeft (derivedSystemEvaluation B n) (d.scalar (α.app (op n))).symm
-
-/-- Normalization by derived units and compatibility with every actual transition.
-No condition on K-injectivity of varying-coefficient evaluations occurs here.
-Source: Stacks 0941, 0D6E (blueprint: lem-coef-sequence-global-sections-evaluation). -/
-structure SequenceSectionsComparisons.Normalized
-    {B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}} {A : Sheaf J CommRingCat.{w}}
-    {α : (Functor.const ℕᵒᵖ).obj A ⟶ B} (d : SequenceSectionsComparisons B A α) : Prop where
-  /-- The first comparison evaluates precisely the unit on the same K-injective tower. -/
-  evaluation_unit : ∀ (n : ℕ)
-    (I : CochainComplex (ℕᵒᵖ ⥤ sequenceCoefficientModules A) ℤ), I.IsKInjective →
-    ((CategoryTheory.evaluation ℕᵒᵖ AddCommGrpCat.{w}).obj (op n)).mapDerivedCategoryFactors.inv.app
-        (((sequenceTowerSections A).mapHomologicalComplex (.up ℤ)).obj I) ≫
-      ((CategoryTheory.evaluation ℕᵒᵖ AddCommGrpCat.{w}).obj (op n)).mapDerivedCategory.map
-        (d.tower.unit.app I) ≫
-      (d.evaluation n).hom.app (DerivedCategory.Q.obj I) ≫
-      (d.finite A).functor.map
-        (((CategoryTheory.evaluation ℕᵒᵖ (sequenceCoefficientModules A)).obj
-          (op n)).mapDerivedCategoryFactors.hom.app I) =
-      (d.finite A).unit.app
-        ((((CategoryTheory.evaluation ℕᵒᵖ (sequenceCoefficientModules A)).obj
-          (op n)).mapHomologicalComplex (.up ℤ)).obj I)
-  /-- The second comparison is the canonical derived direct-image composition map. -/
-  scalar_unit : ∀ {R S : Sheaf J CommRingCat.{w}} (f : R ⟶ S)
-    (K : CochainComplex (sequenceCoefficientModules S) ℤ),
-    (d.finite S).unit.app K ≫ (d.scalar f).hom.app (DerivedCategory.Q.obj K) ≫
-      (d.finite R).functor.map
-        ((sequenceCoefficientRestriction f).mapDerivedCategoryFactors.hom.app K) =
-    (d.finite R).unit.app
-      (((sequenceCoefficientRestriction f).mapHomologicalComplex (.up ℤ)).obj K)
-  /-- The evaluated tower comparison commutes with all constant-coefficient transitions. -/
-  evaluation_transition : ∀ {m n : ℕ} (h : m ≤ n)
-    (M : DerivedCategory (ℕᵒᵖ ⥤ sequenceCoefficientModules A)),
-    (towerDerivedEvaluationTransition AddCommGrpCat.{w} (homOfLE h).op).app
-        (d.tower.functor.obj M) ≫ (d.evaluation m).hom.app M =
-      (d.evaluation n).hom.app M ≫ (d.finite A).functor.map
-        ((towerDerivedEvaluationTransition (sequenceCoefficientModules A)
-          (homOfLE h).op).app M)
-  /-- Under both comparisons, the actual strict tower arrow is the derived-sections arrow
-  of the original semilinear transition, followed by inverse scalar composition. -/
-  finite_transition : ∀ {m n : ℕ} (h : m ≤ n) (M : DerivedCategory (StrictRingSystem B)),
-    (towerDerivedEvaluationTransition AddCommGrpCat.{w} (homOfLE h).op).app
-        (d.global.obj M) ≫ (d.finiteEvaluation m).hom.app M =
-      (d.finiteEvaluation n).hom.app M ≫
-        (d.finite (B.obj (op n))).functor.map ((systemDerivedTransition B h).app M) ≫
-        (d.scalar (B.map (homOfLE h).op)).inv.app ((derivedSystemEvaluation B m).obj M)
 
 -- Keep localization constructions behind their factorization API in the proof.
 attribute [local irreducible] Functor.mapDerivedCategory

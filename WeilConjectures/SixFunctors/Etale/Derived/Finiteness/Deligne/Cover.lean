@@ -51,7 +51,7 @@ lemma boundedConstructible_of_finite_cover {X : Scheme.{u}} [IsLocallyNoetherian
   · have e := (a i).isoOpensRange_hom_ι
     have hc := (h i).mapDerivedCategory_upperStar (a i).isoOpensRange.inv
     refine ObjectProperty.prop_of_iso _ ?_ hc
-    exact ((Functor.mapDerivedCategoryCompIso _ _).app K).symm ≪≫
+    exact (Functor.mapDerivedCategoryCompIso _ _).app K ≪≫
       (Functor.mapDerivedCategoryNatIso ((upperStarComp (ModuleCat.{u + 1} Λ)
         (a i).isoOpensRange.inv (a i) ((a i).opensRange.ι)
         (by rw [← cancel_epi (a i).isoOpensRange.hom, Iso.hom_inv_id_assoc]; exact e)).symm)).app
