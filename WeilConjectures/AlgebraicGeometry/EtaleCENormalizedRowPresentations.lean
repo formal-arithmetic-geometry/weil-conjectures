@@ -412,7 +412,7 @@ theorem exists_etaleCE_normalized_row_presentations
           intro m s n h
           dsimp [w]
           rw [← Category.assoc, he m s n h, Category.assoc,
-            Functor.mapHomologicalComplex_map_f, ← F.map_comp, Category.assoc]
+            ← F.map_comp, Category.assoc]
         c := c
         c_formula := by
           intro n
