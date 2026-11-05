@@ -22,7 +22,7 @@ partial def traceFirstProofMismatch (a b : Expr) (remaining : IO.Ref Nat) : Meta
           let n ← remaining.get
           if n > 0 then
             remaining.set (n - 1)
-            logInfo m!"Mismatch parent argument {i} of {fa}:\nLEFT {a}\nRIGHT {b}"
+            throwError m!"{err.toMessageData}\nMismatch parent argument {i} of {fa}:\nLEFT {a}\nRIGHT {b}"
           throw err
       return
   | _, _ => pure ()
