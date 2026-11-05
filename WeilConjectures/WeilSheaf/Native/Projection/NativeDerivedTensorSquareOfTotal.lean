@@ -139,7 +139,7 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
         dsimp only [Functor.comp_obj, Functor.prod_obj, Functor.uncurry_obj_obj,
           curriedTensor_obj_obj, MonoidalCategory.tensor_obj] at ht ⊢
         simp only [projection_curriedTensorCochain_eq] at ht ⊢
-        with_reducible_and_instances exact_mod_proofs ht)
+        exact_mod_proofs ht)
       (by
         have hh := projection_condensed_model_normalization k₀ l Y P T hP hT
         dsimp only [F, FP, FT, WZ, cZ]
