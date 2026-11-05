@@ -165,7 +165,7 @@ lemma rightDerivedGlobalSections_map_unit_quotient {X Y : Scheme.{u}} (f : Y ⟶
   refine (rightDerivedGlobalSections_map_unit_homotopyCategory A f _).trans ?_
   rw [Adjunction.mapHomotopyCategory_unit_app_quotient]
   rw [← DerivedCategory.quotientCompQhIso_hom_naturality_assoc]
-  simp only [Iso.hom_inv_id_app_assoc]
+  erw [Iso.hom_inv_id_app_assoc]
   congr 1
 
 end AlgebraicGeometry.Etale
