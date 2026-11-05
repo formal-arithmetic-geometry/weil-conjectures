@@ -20,14 +20,16 @@
 - Completion marker: `/home/ubuntu/u9/state/BZ72.DONE`.
 - Outside-unit caller `NativeHomLocalizedConeBoundaryModel.lean:114` still needs its owner's port; details are in the fix log.
 
-# BZ130 in progress
+# BZ130 complete
 
 - Branch: `u9/BZ130`; starting commit: `c958d67ac`.
-- Three sheaf modules passed `ucheck-bump`; all proof-side errors in the fourth module are fixed.
-- The user instructed continuation after the exact statement-only proposal. Applied that
-  correction: remove the obsolete quotient/Qh factor from the local isomorphism in
-  `SupportedComplexSingleRealization`, since `Plus.Q` now directly lifts `DerivedCategory.Q`.
-- All other declaration statements and all existing docstrings are unchanged.
-- Next: validate all four modules together, then write `/home/ubuntu/u9/state/BZ130.DONE`.
-- Patterns and logs: `/home/ubuntu/u9/bz/FIXES-BZ130.md`.
+- All four assigned modules pass `ucheck-bump` together: rc=0, failed=0, 3944 jobs.
+- Validated source commit: `93bec539e906a136a2b7aa346d86bc9a7b991060`.
+  This completion update changes only progress documentation.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ130-final-full.log`.
+- Fix patterns: `/home/ubuntu/u9/bz/FIXES-BZ130.md`.
+- The user instructed continuation after the explicit statement-only proposal.
+  The local comparison in `SupportedComplexSingleRealization` now uses direct Q;
+  all other declaration statements and all existing docstrings are unchanged.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ130.DONE`.
