@@ -255,87 +255,37 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
   [HasSheafify J AddCommGrpCat.{r}] [J.WEqualsLocallyBijective AddCommGrpCat.{r}]
   {R S : Sheaf J CommRingCat.{r}}
 
-private local instance scalarPresheafCoproducts (A : Sheaf J CommRingCat.{r})
+local instance scalarPresheafCoproducts (A : Sheaf J CommRingCat.{r})
     (K : Type r) : HasColimitsOfShape (Discrete K)
       (PresheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A).obj) :=
   PresheafOfModules.hasColimitsOfShape _ _
 
-public local instance scalarRingPresheafCoproducts (A : Cᵒᵖ ⥤ RingCat.{r})
-    (I : Type r) : HasColimitsOfShape (Discrete I) (PresheafOfModules.{r} A) :=
-  PresheafOfModules.hasColimitsOfShape _ _
+local instance scalarSheafCoproducts (A : Sheaf J CommRingCat.{r})
+    (K : Type r) : HasColimitsOfShape (Discrete K) (scalarModules J A) :=
+  SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
 
-public local instance scalarRingSheafCoproducts (A : Sheaf J RingCat.{r})
-    (I : Type r) : HasColimitsOfShape (Discrete I) (SheafOfModules.{r} A) := by
-  have : HasColimitsOfShape (Discrete I) (PresheafOfModules.{r} A.obj) :=
-    PresheafOfModules.hasColimitsOfShape _ _
-  exact instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
-
-public local instance scalarRingSheafSmallCoproducts (A : Sheaf J RingCat.{r})
-    (I : Type) : HasColimitsOfShape (Discrete I) (SheafOfModules.{r} A) := by
-  have : HasColimitsOfShape (Discrete I) (PresheafOfModules.{r} A.obj) :=
-    PresheafOfModules.hasColimitsOfShape _ _
-  exact instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
-
-public local instance scalarRingSheafFiniteCoproducts (A : Sheaf J RingCat.{r}) :
-    HasFiniteCoproducts (SheafOfModules.{r} A) :=
-  ⟨fun n ↦ scalarRingSheafSmallCoproducts A (Fin n)⟩
-
-public local instance scalarSheafCoproducts (A : Sheaf J CommRingCat.{r}) :
-    HasCoproducts.{0} (scalarModules J A) := by
-  intro I
-  have : HasColimitsOfShape (Discrete I)
+local instance scalarSheafSmallCoproducts (A : Sheaf J CommRingCat.{r})
+    (K : Type) : HasColimitsOfShape (Discrete K) (scalarModules J A) := by
+  have : HasColimitsOfShape (Discrete K)
       (PresheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A).obj) :=
     PresheafOfModules.hasColimitsOfShape _ _
-  exact instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
-
-public local instance scalarSheafFiniteCoproducts (A : Sheaf J CommRingCat.{r}) :
-    HasFiniteCoproducts (scalarModules J A) :=
-  hasFiniteCoproducts_of_hasCoproducts (C := scalarModules J A)
-
-public local instance scalarGradedHasTensor (A : Sheaf J CommRingCat.{r}) :
-    ∀ X Y : GradedObject ℤ (scalarModules J A), GradedObject.HasTensor X Y := by
-  intro X Y n
-  exact (scalarSheafCoproducts A _).has_colimit _
-
-public local instance scalarComplexHasTensor (A : Sheaf J CommRingCat.{r})
-    (P Q : CochainComplex (scalarModules J A) ℤ) : HomologicalComplex.HasTensor P Q := by
-  intro n
-  exact (scalarSheafCoproducts A _).has_colimit _
-
-public local instance scalarTensorLeftColimits (A : Sheaf J CommRingCat.{r})
-    (M : scalarModules J A) : PreservesColimitsOfSize.{0, 0} (tensorLeft M) := by
-  have := tensorLeft_preservesColimits_independentCoefficients A M
-  exact preservesColimitsOfSize_shrink (tensorLeft M)
-
-public local instance scalarTensorRightColimits (A : Sheaf J CommRingCat.{r})
-    (M : scalarModules J A) : PreservesColimitsOfSize.{0, 0} (tensorRight M) :=
-  preservesColimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight M)
+  exact SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
 
 /-- The existing monoidal structure on module cochain complexes, cached for elaboration.
 Source: Stacks 03EK and 06YT
 (auxiliary; not a blueprint node). -/
 noncomputable instance (priority := 2000) ringIsoCochainMonoidal
     (A : Sheaf J CommRingCat.{r}) :
-    MonoidalCategory (CochainComplex (scalarModules J A) ℤ) := by
-  let : ∀ (I₁ I₂ : Type r), HasColimitsOfShape (Discrete I₂)
-      (PresheafOfModules.{r}
-        ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj A).obj) :=
-    fun _ _ ↦ PresheafOfModules.hasColimitsOfShape _ _
-  let : HasFiniteCoproducts (scalarModules J A) := scalarSheafFiniteCoproducts A
-  exact HomologicalComplex.monoidalCategory (C := scalarModules J A) (c := .up ℤ)
+    MonoidalCategory (CochainComplex (scalarModules J A) ℤ) :=
+  HomologicalComplex.monoidalCategory (C := scalarModules J A) (c := .up ℤ)
 
 /-- The underlying structure of the existing total tensor, cached for elaboration.
 Source: Stacks 03EK and 06YT
 (auxiliary; not a blueprint node). -/
 noncomputable instance (priority := 2000) ringIsoCochainMonoidalStruct
     (A : Sheaf J CommRingCat.{r}) :
-    MonoidalCategoryStruct (CochainComplex (scalarModules J A) ℤ) := by
-  let : ∀ (I₁ I₂ : Type r), HasColimitsOfShape (Discrete I₂)
-      (PresheafOfModules.{r}
-        ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj A).obj) :=
-    fun _ _ ↦ PresheafOfModules.hasColimitsOfShape _ _
-  let : HasFiniteCoproducts (scalarModules J A) := scalarSheafFiniteCoproducts A
-  exact HomologicalComplex.monoidalCategoryStruct (C := scalarModules J A) (c := .up ℤ)
+    MonoidalCategoryStruct (CochainComplex (scalarModules J A) ℤ) :=
+  HomologicalComplex.monoidalCategoryStruct (C := scalarModules J A) (c := .up ℤ)
 
 /-- Localization of termwise restriction, allowing independent localization universes.
 Source: Stacks 04VG and 06YP
@@ -643,11 +593,11 @@ private theorem scalarExtension_tensor_pure (a : R ⟶ S) (M N : scalarModules J
   let f := extensionPullback a
   let k := extensionComparison a
   let ev := sheafToPresheaf J (Type r) ⋙ (CategoryTheory.evaluation Cᵒᵖ (Type r)).obj U
-  have (I : Type) : HasLimitsOfShape (Discrete I) (Cᵒᵖ ⥤ Type r) :=
+  have (K : Type) : HasLimitsOfShape (Discrete K) (Type r) := Types.hasLimitsOfShape
+  have (K : Type) : HasLimitsOfShape (Discrete K) (Cᵒᵖ ⥤ Type r) :=
     functorCategoryHasLimitsOfShape
-  have (I : Type) : HasLimitsOfShape (Discrete I) (Sheaf J (Type r)) :=
-    hasLimitsOfShape_of_hasLimitsOfShape_createsLimitsOfShape
-      (sheafToPresheaf J (Type r))
+  have (K : Type) : HasLimitsOfShape (Discrete K) (Sheaf J (Type r)) :=
+    hasLimitsOfShape_of_hasLimitsOfShape_createsLimitsOfShape (sheafToPresheaf J (Type r))
   obtain ⟨t, hx, hy⟩ := SheafOfModules.CochainTensorComparison.productElements ev
     ((underlying R).obj M) ((underlying R).obj N) x y
   let px : (underlying R).obj M ⨯ (underlying R).obj N ⟶ (underlying R).obj M := prod.fst
