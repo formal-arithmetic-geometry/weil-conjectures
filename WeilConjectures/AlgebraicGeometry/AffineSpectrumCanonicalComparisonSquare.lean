@@ -28,19 +28,4 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.SingleComplexBaseChange
 
-private theorem comparisonIntoPullback_eq
-    [∀ Y : Scheme.{u},
-      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
-    {X X' S S' : Scheme.{u}}
-    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
-    (sq : IsPullback g' f' f g) (z : X')
-    (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-    (hc : IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))
-    (i : ℤ) :
-    comparisonIntoPullback f f' g g' sq z P hc i =
-      comparisonIntoTensorPullback f f' g g' sq z P i ≫
-        (comparisonStalkCohomology X' z i).map
-          (inv ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) := by
-  simp only [comparisonIntoPullback, comparisonIntoTensorPullback, Category.assoc]
-
 end AlgebraicGeometry.SingleComplexBaseChange
