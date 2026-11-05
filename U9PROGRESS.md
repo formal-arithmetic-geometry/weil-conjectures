@@ -106,15 +106,15 @@
 - Completion marker: `/home/ubuntu/u9/state/BZ311.DONE`.
 - This final commit changes only progress documentation; Lean sources match the green build.
 
-# BZ407 in progress
+# BZ408 in progress
 
-- Branch: `u9/BZ407`; starting commit: `98654719b`.
-- Assigned module: `WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryStrictSquare`.
-- The user instructed continuation after the exact three-hypothesis API correction proposal.
-  Applied those corrections to preserve the maps under Mathlib's reversed composition isomorphism.
-- Matching proof changes use the new orientation and `Iso.eq_inv_comp` cancellation.
-- Baseline reproduced the three reported errors; repaired validation is next.
-- Fix patterns and full baseline log: `/home/ubuntu/u9/bz/FIXES-BZ407.md` and
-  `/home/ubuntu/u9/bz/BUILD-BZ407-baseline.log`.
-- After the assigned module is green, check its four direct importers and one more layer.
-- No local Lean/Lake execution, forbidden proof escapes, or heartbeat increases.
+- Branch: `u9/BZ408`; starting commit: `98654719bdfe7ff3e77ff047b3bce53405d2dc4a`.
+- Assigned module: `WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryPresentation`.
+- Baseline remote build confirmed one application type mismatch at line 309.
+- The user instructed continuation after the exact one-line statement correction
+  proposal; that patch is now applied. It uses the forward composition comparison
+  followed by the induced isomorphism, with `.hom` selecting the required direction.
+- All other statement text, proof bodies, and existing docstrings remain unchanged.
+- Next: validate the assigned module, then both downstream layers via `ucheck-bump`.
+- Pattern, whole-tree counts, and baseline log: `/home/ubuntu/u9/bz/FIXES-BZ408.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
