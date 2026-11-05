@@ -239,7 +239,8 @@ instance isLeftDerivedFunctor_mapDerivedCategory_comp_leftDerivedFunctor :
       ((F.mapHomotopyCategory (ComplexShape.up ℤ)).obj
         ((HomotopyCategory.quotient C (ComplexShape.up ℤ)).obj K))) :=
     G.isIso_leftDerivedFunctorCounit_app_of_kFlat _ (F.kFlat_mapHomologicalComplex_obj K hK)
-  dsimp [leftDerivedFunctorCompMapDerivedCategoryCounit]
+  dsimp only [leftDerivedFunctorCompMapDerivedCategoryCounit, NatTrans.comp_app,
+    whiskerRight_app, whiskerLeft_app]
   infer_instance
 
 /-- **Composition with an exact functor preserving K-flat complexes**: for an exact functor

@@ -36,6 +36,8 @@ set_option backward.isDefEq.respectTransparency.types false
 
 variable {X Y Z : Scheme.{w}} (g : X ⟶ Y)
 
+private local instance : Limits.HasColimits.{w} CommRingCat.{w} := inferInstance
+
 /-- The ring map `g⁻¹ O_Y → O_X` adjoint to the structure-sheaf map of `g`.
 Source: Stacks, Tag 0095 (blueprint: def-pc-module-pullback). -/
 def tensorPullbackRingMap : TopCat.Sheaf.inverseImageRing g.base Y.sheaf ⟶ X.sheaf :=
