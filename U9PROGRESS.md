@@ -166,3 +166,14 @@
 - Full log: `/home/ubuntu/u9/bz/BUILD-BZ584-unit-full.log`.
 - Continuing with direct importers `LowerShriekForget`, `SmoothPurityCondensedCarrier`,
   and `SmoothPurityShriekFreeComparison` under `WeilConjectures.WeilSheaf`.
+
+## BZ584 downstream layer one
+
+- `SmoothPurityShriekFreeComparison` built successfully in 2.1 seconds.
+- The assigned module rebuilt successfully in 4.4 seconds in the same batch.
+- Source commit: `078691b129121f437f17e2d3248b90a991a9db9b`.
+- Batch result: rc=1, built=55, failed=16; all errors are external dependencies.
+- Skipped `LowerShriekForget` and `SmoothPurityCondensedCarrier` under the ownership rule.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ584-downstream-full.log`.
+- No downstream source changes. Next: layer two, `SmoothPurityOpenDescentNormalization`
+  and `SmoothPurityShriekWeilUniversality`.
