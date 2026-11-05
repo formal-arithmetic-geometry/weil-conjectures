@@ -163,18 +163,31 @@
   that exact compatibility-namespace proof repair is now applied.
 - Retrying the assigned module; declarations and heartbeat settings unchanged.
 
-# BZ547 in progress
+# BZ547 complete
 
-- Assigned module `WeilConjectures.AlgebraicGeometry.Etale.EtaleInjectiveSectionsComparison`
-  is GREEN and unchanged from the starting branch.
-- ucheck-bump: rc=0, built=19, failed=0, 4239 jobs, poolb:43.166.85.105.
-- Validated source commit: `44c93779b6a562139fbe1167b08eaa054d9af518`.
-- Full log: `/home/ubuntu/u9/bz/BUILD-BZ547-assigned-green-full.log`.
-- Integrated coordinator fixes through `8af5cb324`, then reused BZ539's exact
-  dependency repair from `2a96dae096e7`: use the compatibility namespace
-  `PresheafOfModules.Monoidal.tensorObj_map_tmul` in InternalHom's proof.
-- Its previous rewrite/kernel-error blocker is resolved; no BLOCKED marker remains.
-- Direct-importer batch is running for Strict.Local.StrictLocalInjectiveSourceComparison
-  and Strict.Local.StrictLocalInjectiveSourceSections. Next: one more importer layer.
-- Notes and generic pattern/count: `/home/ubuntu/u9/bz/FIXES-BZ547.md`.
-- No local Lean/Lake execution, statement edits, proof placeholders, or limit raises.
+- Branch: `u9/BZ547`; assigned module is green and unchanged from the starting branch.
+- Final six-target ucheck-bump: rc=0, built=24, failed=0, 4249 jobs,
+  on `poolb:43.157.132.198`.
+- Validated source commit: `f08f7e292475e9dd6796d87f7d05cfdd81f73dc3`.
+- Full final log: `/home/ubuntu/u9/bz/BUILD-BZ547-final-green-full.log`.
+- Seven modules validated across the two downstream layers:
+  - `WeilConjectures.AlgebraicGeometry.Etale.EtaleInjectiveSectionsComparison`.
+  - `WeilConjectures.AlgebraicGeometry.Strict.Local.StrictLocalInjectiveSourceComparison`.
+  - `WeilConjectures.AlgebraicGeometry.Source.SourceDerivedSectionsNaturalityCore`.
+  - `WeilConjectures.AlgebraicGeometry.Source.SourceDerivedSectionsNaturality`.
+  - `WeilConjectures.AlgebraicGeometry.Source.SourceStageSectionsNaturality`.
+  - `WeilConjectures.AlgebraicGeometry.Source.SourceLocalizedCocycleHomology`.
+  - `WeilConjectures.AlgebraicGeometry.Strict.Local.StrictLocalInjectiveSourceTransition`.
+- The source-transition module passed in the previous downstream batch and is
+  unaffected by the subsequent cocycle proof repair.
+- Reused BZ539's existing InternalHom compatibility-lemma repair and applied
+  BZ536's known reverse-naturality/cancellation fix to the second-layer cocycle proof.
+- Strict.Local.StrictLocalInjectiveSourceSections was skipped under the brief's
+  ownership rule because its unowned source/target transport and root cocycle
+  dependencies fail. Exact locations and logs are recorded in the fix notes.
+- Patterns, whole-tree counts, validation history, and audit:
+  `/home/ubuntu/u9/bz/FIXES-BZ547.md`.
+- Statements and docstrings unchanged; no local Lean/Lake, proof placeholders,
+  trust bypasses, heartbeat increases, or profiler probes.
+- Completion marker: `/home/ubuntu/u9/state/BZ547.DONE`.
+- This completion commit changes only progress documentation after the green build.
