@@ -106,6 +106,9 @@ theorem schemeMVOpenComposition_complex_localization
         t ≫ (schemeDerivedDirectImage W.ι).map
           ((schemeDerivedDirectImage (h ∣_ W)).map
             ((DerivedCategory.quotientCompQhIso _).hom.app J))) hn
-  simpa only [Functor.comp_map, Category.assoc] using ht
+  dsimp +instances [F, RX, G, RY, b₀, DerivedCategory.Q, DerivedCategory.Qh,
+    schemeDerivedDirectImage, RingedSpace.derivedModuleDirectImage,
+    instCategoryDerivedCategory] at ht ⊢
+  simpa only [Functor.comp_map, Functor.mapHomotopyCategory_obj, Category.assoc] using ht
 
 end AlgebraicGeometry
