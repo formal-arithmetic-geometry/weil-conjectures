@@ -1692,21 +1692,12 @@ theorem unboundedEtaleCompactSupport_tower_adjunct
   exact CategoryTheory.Functor.map_id _ _
 
 set_option backward.isDefEq.respectTransparency false in
-/-- On a compactification, exchange is exactly proper exchange followed by the inverse
-of the degreewise open-extension comparison, with the displayed canonical associators.
-Source: Stacks Project, Tag 0F7L
-(blueprint: lem-amb-unbounded-compact-support-comparisons).
-Proof: expand the exact-functor transport in the existing exchange definition.
-The proper factor becomes the exact inverse-image adjunction mate of def-kun-unbounded-exchange.
-The open factor is the degreewise inverse conjugate of the sheaf exchange, hence the map
-of def-weil-pbc-etale-shriek-base-change-map. Triangle identities cancel the exact-functor
-transport isomorphisms. Localization descends this equation on every complex. -/
-theorem unboundedEtaleCompactSupport_exchange_normalization
+/-- `AlgebraicGeometry.Etale.unboundedEtaleCompactSupport_exchange_normalization` without the
+noetherianity and finiteness hypotheses, which its proof does not use. -/
+private theorem exchange_normalization_general
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X X' Y Y' : Scheme.{u}}
-    [IsNoetherian X] [IsNoetherian X'] [IsNoetherian Y] [IsNoetherian Y']
     {f : X ⟶ Y} {f' : X' ⟶ Y'} {v : Y' ⟶ Y} {v' : X' ⟶ X}
-    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
     (sq : IsPullback v' f' f v) (c : Compactification f) :
     unboundedEtaleCompactSupportExchange A sq c =
       (Functor.associator _ _ _).hom ≫
@@ -1744,6 +1735,37 @@ theorem unboundedEtaleCompactSupport_exchange_normalization
   rw [Category.comp_id]
   rfl
 
+set_option backward.isDefEq.respectTransparency false in
+/-- On a compactification, exchange is exactly proper exchange followed by the inverse
+of the degreewise open-extension comparison, with the displayed canonical associators.
+Source: Stacks Project, Tag 0F7L
+(blueprint: lem-amb-unbounded-compact-support-comparisons).
+Proof: expand the exact-functor transport in the existing exchange definition.
+The proper factor becomes the exact inverse-image adjunction mate of def-kun-unbounded-exchange.
+The open factor is the degreewise inverse conjugate of the sheaf exchange, hence the map
+of def-weil-pbc-etale-shriek-base-change-map. Triangle identities cancel the exact-functor
+transport isomorphisms. Localization descends this equation on every complex. -/
+theorem unboundedEtaleCompactSupport_exchange_normalization
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X X' Y Y' : Scheme.{u}}
+    [IsNoetherian X] [IsNoetherian X'] [IsNoetherian Y] [IsNoetherian Y']
+    {f : X ⟶ Y} {f' : X' ⟶ Y'} {v : Y' ⟶ Y} {v' : X' ⟶ X}
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    (sq : IsPullback v' f' f v) (c : Compactification f) :
+    unboundedEtaleCompactSupportExchange A sq c =
+      (Functor.associator _ _ _).hom ≫
+      Functor.whiskerLeft
+        (openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i).mapDerivedCategory
+        (exactDerivedBaseChangeMap (ModuleCat.{u + 1} A)
+          (IsPullback.of_hasPullback c.g v).toCommSq) ≫
+      (Functor.associator _ _ _).inv ≫
+      Functor.whiskerRight
+        (mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso (ModuleCat.{u + 1} A)
+          (c.isPullback_i_ofIsPullback sq)).inv
+        (rightDerivedLowerStar (ModuleCat.{u + 1} A) (c.ofIsPullback sq).g) ≫
+      (Functor.associator _ _ _).hom :=
+  exchange_normalization_general A sq c
+
 section UnboundedBaseChange
 
 set_option backward.isDefEq.respectTransparency false
@@ -1754,9 +1776,8 @@ attribute [local irreducible] upperStar lowerStar openImmersionLowerShriek
 private lemma unbounded_shriek_base_change
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X X' Y Y' : Scheme.{u}}
-    [IsNoetherian X] [IsNoetherian X'] [IsNoetherian Y] [IsNoetherian Y']
     {f : X ⟶ Y} {f' : X' ⟶ Y'}
-    {v : Y' ⟶ Y} {v' : X' ⟶ X} [IsSeparated f] [QuasiCompact f] [LocallyOfFiniteType f]
+    {v : Y' ⟶ Y} {v' : X' ⟶ X}
     (sq : IsPullback v' f' f v)
     (c : Compactification f) :
     ((unboundedFormalism A).shriekBaseChangeOfIsPullback sq c).natTrans =
@@ -1770,7 +1791,7 @@ private lemma unbounded_shriek_base_change
     apply IsIso.inv_eq_of_hom_inv_id
     rw [unbounded_open_base_change]
     exact Iso.hom_inv_id _
-  rw [unboundedEtaleCompactSupport_exchange_normalization]
+  rw [exchange_normalization_general]
   dsimp only [CompactSupportFormalism.shriekBaseChangeOfIsPullback,
     CompactSupportFormalism.shriekBaseChange, ExchangeFormalism.shriekBaseChange,
     TwoSquare.hComp, TwoSquare.natTrans, TwoSquare.mk]
@@ -1780,11 +1801,9 @@ private lemma unbounded_shriek_base_change
 private lemma unbounded_chosen_base_change
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X X' Y Y' : Scheme.{u}}
-    [IsNoetherian X] [IsNoetherian X'] [IsNoetherian Y] [IsNoetherian Y']
     {f : X ⟶ Y} {f' : X' ⟶ Y'}
-    {v : Y' ⟶ Y} {v' : X' ⟶ X} [IsSeparated f]
-    [HasCompactification f] [HasCompactification f'] [QuasiCompact f] [QuasiCompact f']
-    [LocallyOfFiniteType f]
+    {v : Y' ⟶ Y} {v' : X' ⟶ X}
+    [HasCompactification f] [HasCompactification f'] [QuasiCompact f']
     (sq : IsPullback v' f' f v) :
     ((unboundedFormalism A).lowerShriekBaseChange sq).natTrans =
       unboundedEtaleCompactSupportBaseChange A sq := by
@@ -1989,6 +2008,47 @@ private lemma chosenBaseChange_paste_horiz
 
 end HorizontalPasting
 
+/-- **Horizontal pasting of the compact-support exchange maps**: the exchange map of two
+successive changes of base `Y'' ⟶ Y' ⟶ Y` is the composite of the two exchange maps, up to the
+termwise inverse-image composition isomorphisms. This is
+`AlgebraicGeometry.Etale.unboundedEtaleCompactSupport_baseChange_comp` without its noetherianity
+and finiteness hypotheses. -/
+theorem unboundedEtaleCompactSupportBaseChange_paste_horiz
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X X' X'' Y Y' Y'' : Scheme.{u}}
+    {f : X ⟶ Y} {f' : X' ⟶ Y'} {f'' : X'' ⟶ Y''}
+    {v : Y' ⟶ Y} {w : Y'' ⟶ Y'} {v' : X' ⟶ X} {w' : X'' ⟶ X'}
+    [QuasiCompact f]
+    [HasCompactification f] [HasCompactification f'] [HasCompactification f'']
+    [QuasiCompact f'] [QuasiCompact f'']
+    (sq₁ : IsPullback v' f' f v) (sq₂ : IsPullback w' f'' f' w)
+    (sq₃ : IsPullback (w' ≫ v') f'' f (w ≫ v)) :
+    unboundedEtaleCompactSupportBaseChange A sq₃ =
+      Functor.whiskerLeft (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f)
+        (unboundedEtaleUpperStarCompIso A w v).hom ≫
+      (Functor.associator _ _ _).inv ≫
+      Functor.whiskerRight (unboundedEtaleCompactSupportBaseChange A sq₁)
+        (upperStar (ModuleCat.{u + 1} A) w).mapDerivedCategory ≫
+      (Functor.associator _ _ _).hom ≫
+      Functor.whiskerLeft (upperStar (ModuleCat.{u + 1} A) v').mapDerivedCategory
+        (unboundedEtaleCompactSupportBaseChange A sq₂) ≫
+      (Functor.associator _ _ _).inv ≫
+      Functor.whiskerRight (unboundedEtaleUpperStarCompIso A w' v').inv
+        (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f'') := by
+  have h := congrArg TwoSquare.natTrans
+    (chosenBaseChange_paste_horiz (unboundedFormalism A) sq₁ sq₂ sq₃)
+  have hc {S T U : Scheme.{u}} (a : S ⟶ T) (b : T ⟶ U) :
+      (unboundedFormalism A).pbComp a b = unboundedEtaleUpperStarCompIso A a b := rfl
+  rw [hc, hc] at h
+  simp only [unbounded_chosen_base_change, TwoSquare.whiskerLeft,
+    TwoSquare.whiskerRight, TwoSquare.vComp, TwoSquare.mk, TwoSquare.natTrans] at h
+  change (_ : (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f ⋙
+      (upperStar (ModuleCat.{u + 1} A) (w ≫ v)).mapDerivedCategory ⟶
+      (upperStar (ModuleCat.{u + 1} A) (w' ≫ v')).mapDerivedCategory ⋙
+        rightDerivedLowerShriek (ModuleCat.{u + 1} A) f'')) = _ at h
+  simp only [Category.assoc] at h
+  exact h
+
 /-- Successive changes of base give the composite exchange, with the termwise
 inverse-image composition identifications.
 Source: Stacks Project, Tag 0F7L
@@ -2019,20 +2079,8 @@ theorem unboundedEtaleCompactSupport_baseChange_comp
         (unboundedEtaleCompactSupportBaseChange A sq₂) ≫
       (Functor.associator _ _ _).inv ≫
       Functor.whiskerRight (unboundedEtaleUpperStarCompIso A w' v').inv
-        (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f'') := by
-  have h := congrArg TwoSquare.natTrans
-    (chosenBaseChange_paste_horiz (unboundedFormalism A) sq₁ sq₂ sq₃)
-  have hc {S T U : Scheme.{u}} (a : S ⟶ T) (b : T ⟶ U) :
-      (unboundedFormalism A).pbComp a b = unboundedEtaleUpperStarCompIso A a b := rfl
-  rw [hc, hc] at h
-  simp only [unbounded_chosen_base_change, TwoSquare.whiskerLeft,
-    TwoSquare.whiskerRight, TwoSquare.vComp, TwoSquare.mk, TwoSquare.natTrans] at h
-  change (_ : (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f ⋙
-      (upperStar (ModuleCat.{u + 1} A) (w ≫ v)).mapDerivedCategory ⟶
-      (upperStar (ModuleCat.{u + 1} A) (w' ≫ v')).mapDerivedCategory ⋙
-        rightDerivedLowerShriek (ModuleCat.{u + 1} A) f'')) = _ at h
-  simp only [Category.assoc] at h
-  exact h
+        (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f'') :=
+  unboundedEtaleCompactSupportBaseChange_paste_horiz A sq₁ sq₂ sq₃
 
 attribute [local irreducible] unboundedEtaleCompactSupportBaseChange
 
@@ -2077,22 +2125,18 @@ theorem unboundedEtaleCompactSupport_baseChange_id
   dsimp only [F, I, J, C]
   exact hK
 
-/-- Base change is compatible with the specified compact-support composition maps.
-Source: Stacks Project, Tag 0F7L
-(blueprint: lem-amb-unbounded-compact-support-comparisons).
-Proof: apply the proved compact-support-formalism exchange/compositor pasting equation.
-Identify its chosen compact-support compositor and exchange with the concrete maps, and
-its inverse-image compositor with the exact termwise-derived inverse-image comparison.
-The resulting component equation is the asserted equality. -/
-theorem unboundedEtaleCompactSupport_baseChange_composition
+/-- **Vertical pasting of the compact-support exchange maps**: for two stacked cartesian squares
+along `f` and `g`, the exchange map of the outer rectangle along `f ≫ g` is the composite of the
+two exchange maps, up to the composition isomorphisms
+`AlgebraicGeometry.Etale.unboundedEtaleLowerShriekCompIso`. This is
+`AlgebraicGeometry.Etale.unboundedEtaleCompactSupport_baseChange_composition` without its
+noetherianity, separatedness and finiteness hypotheses. -/
+theorem unboundedEtaleCompactSupportBaseChange_paste_vert
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X X' Y Y' Z Z' : Scheme.{u}}
-    [IsNoetherian X] [IsNoetherian X'] [IsNoetherian Y] [IsNoetherian Y']
-    [IsNoetherian Z] [IsNoetherian Z']
     {f : X ⟶ Y} {f' : X' ⟶ Y'} {g : Y ⟶ Z} {g' : Y' ⟶ Z'}
     {vX : X' ⟶ X} {vY : Y' ⟶ Y} {vZ : Z' ⟶ Z}
-    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
-    [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g]
+    [QuasiCompact f] [QuasiCompact (f ≫ g)]
     [QuasiCompact f'] [QuasiCompact g'] [QuasiCompact (f' ≫ g')]
     [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
     [HasCompactification f'] [HasCompactification g'] [HasCompactification (f' ≫ g')]
@@ -2127,6 +2171,41 @@ theorem unboundedEtaleCompactSupport_baseChange_composition
         rightDerivedLowerShriek (ModuleCat.{u + 1} A) (f' ≫ g'))) = _ at h
   simp only [Category.assoc] at h
   exact h
+
+/-- Base change is compatible with the specified compact-support composition maps.
+Source: Stacks Project, Tag 0F7L
+(blueprint: lem-amb-unbounded-compact-support-comparisons).
+Proof: apply the proved compact-support-formalism exchange/compositor pasting equation.
+Identify its chosen compact-support compositor and exchange with the concrete maps, and
+its inverse-image compositor with the exact termwise-derived inverse-image comparison.
+The resulting component equation is the asserted equality. -/
+theorem unboundedEtaleCompactSupport_baseChange_composition
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X X' Y Y' Z Z' : Scheme.{u}}
+    [IsNoetherian X] [IsNoetherian X'] [IsNoetherian Y] [IsNoetherian Y']
+    [IsNoetherian Z] [IsNoetherian Z']
+    {f : X ⟶ Y} {f' : X' ⟶ Y'} {g : Y ⟶ Z} {g' : Y' ⟶ Z'}
+    {vX : X' ⟶ X} {vY : Y' ⟶ Y} {vZ : Z' ⟶ Z}
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g]
+    [QuasiCompact f'] [QuasiCompact g'] [QuasiCompact (f' ≫ g')]
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    [HasCompactification f'] [HasCompactification g'] [HasCompactification (f' ≫ g')]
+    (sqf : IsPullback vX f' f vY) (sqg : IsPullback vY g' g vZ)
+    (sqgf : IsPullback vX (f' ≫ g') (f ≫ g) vZ) :
+    Functor.whiskerRight (unboundedEtaleLowerShriekCompIso A f g).hom
+        (upperStar (ModuleCat.{u + 1} A) vZ).mapDerivedCategory ≫
+      unboundedEtaleCompactSupportBaseChange A sqgf =
+    (Functor.associator _ _ _).hom ≫
+      Functor.whiskerLeft (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f)
+        (unboundedEtaleCompactSupportBaseChange A sqg) ≫
+      (Functor.associator _ _ _).inv ≫
+      Functor.whiskerRight (unboundedEtaleCompactSupportBaseChange A sqf)
+        (rightDerivedLowerShriek (ModuleCat.{u + 1} A) g') ≫
+      (Functor.associator _ _ _).hom ≫
+      Functor.whiskerLeft (upperStar (ModuleCat.{u + 1} A) vX).mapDerivedCategory
+        (unboundedEtaleLowerShriekCompIso A f' g').hom  :=
+  unboundedEtaleCompactSupportBaseChange_paste_vert A sqf sqg sqgf
 
 section BoundedBelowRestriction
 

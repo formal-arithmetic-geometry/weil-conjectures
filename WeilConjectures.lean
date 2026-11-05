@@ -20922,6 +20922,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LocalizationRationalWeil
 public import WeilConjectures.SixFunctors.Etale.Derived.LocallyConstantInvertible
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChange
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChangePaste
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChangeShift
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCoherence
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCompactificationExact
