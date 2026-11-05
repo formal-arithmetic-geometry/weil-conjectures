@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.WeilSheaf.SmoothPurityTatePowersFactor
+public import WeilConjectures.WeilSheaf.SmoothPurityTatePowersDescentLaw
 public import WeilConjectures.WeilSheaf.SmoothPurityPairTransport
 public import WeilConjectures.WeilSheaf.SmoothPurityFrobeniusFactorAlias
 public import WeilConjectures.WeilSheaf.TateTwistCondensedBridge
@@ -36,17 +36,7 @@ noncomputable def purity_geometricFiberWeilLowerStarTateNatIso (d : ℕ) :
     (CondensedRing.geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj ℓ)
         (X ↘ Spec (.of k₀))).obj (tateTwistNat X ℓ d) ≅
       tateTwistLowerPair k₀ ℓ X d := by
-  have h := purity_upperStarTateTwistNatIso_factor ℓ
-    (X ↘ Spec (.of k₀)).geometricFiberProj
-    (X ↘ Spec (.of k₀)).geometricGaloisFrobenius.hom
-    (X ↘ Spec (.of k₀)).geometricGaloisFrobenius_hom_comp_geometricFiberProj
-    (X ↘ Spec (.of k₀)) d
-  rw [purity_upperStarTateTwistNatIso_independent_base ℓ
-    (X ↘ Spec (.of k₀)).geometricGaloisFrobenius.hom
-    ((X ↘ Spec (.of k₀)).geometricFiberProj ≫ (X ↘ Spec (.of k₀)))
-    (X ↘ Spec (.of k₀)).geometricFiberToAlgebraicClosure d] at h
-  rw [← purity_geometricFiberProjUpperStarFrobeniusIso_eq
-    (Profinite.padicAlgClRingObj ℓ) (X ↘ Spec (.of k₀))] at h
+  have h := purity_upperStarTateTwistNatIso_geometricFiber ℓ (X ↘ Spec (.of k₀)) d
   let e := purity_pairIso_transport (frobeniusUpperStarIsoLowerStarInv k₀ ℓ X)
     ((geometricFiberProjUpperStarFrobeniusIso (Profinite.padicAlgClRingObj ℓ)
       (X ↘ Spec (.of k₀))).app (tateTwistNat X ℓ d))
@@ -57,7 +47,9 @@ noncomputable def purity_geometricFiberWeilLowerStarTateNatIso (d : ℕ) :
     (((frobeniusUpperStarIsoLowerStarInv k₀ ℓ X).app _).symm ≪≫
       upperStarTateTwistNatIso ℓ (X ↘ Spec (.of k₀)).geometricGaloisFrobenius.hom
         (X ↘ Spec (.of k₀)).geometricFiberToAlgebraicClosure d)
-    rfl rfl (upperStarTateTwistNatIso ℓ (X ↘ Spec (.of k₀)).geometricFiberProj
+    (purity_geometricFiberProjLowerStarFrobeniusIso_app
+      (Profinite.padicAlgClRingObj ℓ) (X ↘ Spec (.of k₀)) (tateTwistNat X ℓ d))
+    rfl (upperStarTateTwistNatIso ℓ (X ↘ Spec (.of k₀)).geometricFiberProj
       (X ↘ Spec (.of k₀)) d) (by
         dsimp only [Iso.app_hom, Functor.comp_obj, Functor.comp_map] at h ⊢
         cast_proofs h)
