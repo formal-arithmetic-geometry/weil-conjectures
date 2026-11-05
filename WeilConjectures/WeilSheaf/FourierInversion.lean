@@ -69,6 +69,10 @@ instance : QuasiSeparated (affinePlane k₀ ↘ Spec (CommRingCat.of k₀)) := b
   have : QuasiSeparated (affinePlane.fst k₀) := MorphismProperty.pullback_fst _ _ inferInstance
   exact inferInstanceAs (QuasiSeparated (affinePlane.fst k₀ ≫ _))
 
+instance : IsSeparated (affinePlane k₀ ↘ Spec (CommRingCat.of k₀)) := by
+  have : IsSeparated (affinePlane.fst k₀) := MorphismProperty.pullback_fst _ _ inferInstance
+  exact inferInstanceAs (IsSeparated (affinePlane.fst k₀ ≫ _))
+
 variable (k₀) in
 /-- The subtraction `(x, y) ↦ x - y` on the affine plane. -/
 noncomputable def affinePlane.sub : affinePlane k₀ ⟶ affineLine k₀ :=
