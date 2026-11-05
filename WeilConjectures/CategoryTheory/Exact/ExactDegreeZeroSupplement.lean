@@ -101,45 +101,7 @@ private theorem derived_id_single {V : Type*} [Category V] [Abelian V]
     [HasDerivedCategory V] (X : V) :
     (Functor.mapDerivedCategoryIdIso V).hom.app ((DerivedCategory.singleFunctor V 0).obj X) =
       ((𝟭 V).mapDerivedCategorySingleFunctor 0).hom.app X := by
-  rw [Functor.mapDerivedCategorySingleFunctor_hom_app_eq]
-  have hi := congr_app (congr_arg Iso.hom (Functor.mapDerivedCategoryIdIso_factorsh V))
-    (((HomotopyCategory.singleFunctors V).functor 0).obj X)
-  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
-    Functor.whiskerLeft_app, Functor.rightUnitor_hom_app, Functor.isoWhiskerRight_hom,
-    Functor.whiskerRight_app, Functor.leftUnitor_hom_app,
-    Functor.mapHomotopyCategoryIdIso_hom_app_eq_id] at hi
-  dsimp at hi
-  erw [CategoryTheory.Functor.map_id, Category.comp_id] at hi
-  rw [hi]
-  change (𝟭 V).mapDerivedCategoryFactorsh.hom.app
-    ((HomotopyCategory.quotient V (.up ℤ)).obj
-      ((HomologicalComplex.single V (.up ℤ) 0).obj X)) ≫ 𝟙 _ ≫ 𝟙 _ = _
-  simp only [Category.comp_id]
-  erw [Functor.mapDerivedCategoryFactorsh_hom_app]
-  simp only [Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv]
-  have hq (K : CochainComplex V ℤ) :
-      (DerivedCategory.quotientCompQhIso V).hom.app K = 𝟙 _ := by
-    exact Quotient.lift.isLift_hom _ _ _ K
-  have hq' (K : CochainComplex V ℤ) :
-      (DerivedCategory.quotientCompQhIso V).inv.app K = 𝟙 _ := by
-    exact Quotient.lift.isLift_inv _ _ _ K
-  rw [hq, hq']
-  erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id,
-    Category.id_comp, Category.comp_id, Category.comp_id]
-  have hs : (HomologicalComplex.singleMapHomologicalComplex (𝟭 V) (.up ℤ) 0).hom.app X =
-      𝟙 _ := by
-    change (HomologicalComplex.singleMapHomologicalComplex (𝟭 V) (.up ℤ) 0).hom.app X =
-      𝟙 ((HomologicalComplex.single V (.up ℤ) 0).obj X)
-    ext n
-    by_cases hn : n = 0
-    · subst n
-      simp only [HomologicalComplex.singleMapHomologicalComplex_hom_app_self,
-        Functor.id_map, Functor.id_obj, Iso.hom_inv_id, HomologicalComplex.id_f]
-    · exact (HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 X n hn).eq_of_src _ _
-  change _ = _ ≫ DerivedCategory.Q.map
-    ((HomologicalComplex.singleMapHomologicalComplex (𝟭 V) (.up ℤ) 0).hom.app X)
-  rw [hs]
-  erw [CategoryTheory.Functor.map_id, Category.comp_id]
+  exact Functor.mapDerivedCategoryIdIso_hom_app_singleFunctor_obj X
 
 private theorem raw_unit_id
     {V : Type*} [Category V] [Abelian V] [HasDerivedCategory V]
