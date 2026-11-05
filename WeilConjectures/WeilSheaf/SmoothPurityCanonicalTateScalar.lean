@@ -53,7 +53,7 @@ lemma purityCanonicalTateOneTrivialization_weil :
           (purityCanonicalTateOneTrivialization ℓ a hζ hζ').hom ≫
         (Functor.Monoidal.εIso
           (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricGaloisFrobenius.hom)).inv := by
-  have h := purity_scalarDatum_conjugate_named
+  have h := CategoryTheory.K4Native.scalarEquation_conjugate_named
     (purityScalarFrobeniusPull ℓ a)
     (purityScalarTateCompare ℓ a) (purityScalarUnitCompare ℓ a)
     (purityScalarSourceDatum ℓ a) (purityScalarSourceUnitDatum ℓ a)
@@ -62,7 +62,7 @@ lemma purityCanonicalTateOneTrivialization_weil :
     (purityScalarRootTrivialization ℓ a hζ hζ')
     (purityScalarCanonicalTrivialization ℓ a hζ hζ')
     (purityScalarCanonicalTrivialization_eq ℓ a hζ hζ') (Nat.card k : ℤ)
-    (K4Native.scalarRootTrivialization_weil a hζ hζ')
+    (K4Native.scalarRootEquation_named a hζ hζ')
   have h' := purityScalarCanonicalEquation ℓ a hζ hζ' h
   dsimp only [purityCanonicalTateOneTrivialization]
   exact_mod_proofs h'

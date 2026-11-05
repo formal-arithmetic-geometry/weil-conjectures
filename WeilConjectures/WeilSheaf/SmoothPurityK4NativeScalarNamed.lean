@@ -6,6 +6,7 @@ module
 
 public import WeilConjectures.WeilSheaf.SmoothPurityScalarPullbackInterface
 public import WeilConjectures.WeilSheaf.SmoothPurityK4NativeScalarRoot
+public import WeilConjectures.WeilSheaf.SmoothPurityK4NativeScalarEquation
 import WeilConjectures.Tactic.ExactModProofs
 
 /-! # The scalar law immediately after rational coefficient change -/
@@ -45,18 +46,30 @@ lemma scalarSourceUnitIso_eq :
   rw [purityScalarSourceUnitIso_eq]
   rfl
 
-/-- The native scalar law in the consumer's named data. -/
-lemma scalarRootTrivialization_weil :
-    (Nat.card k : ℤ) •
-        (purityScalarSourceDatum ℓ a ≫ (purityScalarRootTrivialization ℓ a hζ hζ').hom) =
-      (purityScalarFrobeniusPull ℓ a).map
-          (purityScalarRootTrivialization ℓ a hζ hζ').hom ≫
-        purityScalarSourceUnitDatum ℓ a := by
-  have h := purity_rationalRootTrivialization_weil a hζ hζ'
-  rw [← purityScalarRootTrivialization_eq] at h
-  rw [← scalarSourceIso_eq a, ← scalarSourceUnitIso_eq a] at h
-  rw [purityScalarSourceDatum_eq_iso, purityScalarSourceUnitDatum_eq_iso]
-  dsimp +instances only [purityScalarFrobeniusPull, Functor.comp_obj, Functor.comp_map] at h ⊢
-  exact_mod_proofs h
+/-- Package the native law without changing the raw coefficient source. -/
+lemma scalarRootEquation_native :
+    CategoryTheory.K4Native.scalarEquation
+      (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricGaloisFrobenius.hom)
+      (scalarFrobeniusIso (Profinite.padicAlgClRingObj ℓ) a
+        ((Mod.extendScalars (coefficientMap (Profinite.padicIntRingObjToPadicAlgCl ℓ) X)).obj
+          (tateModule X ℓ))).hom
+      (scalarFrobeniusIso (Profinite.padicAlgClRingObj ℓ) a (𝟙_ _)).hom
+      (purityChangeCoefficientTrivialization (Profinite.continuousMapRingObj ℤ_[ℓ])
+        (Profinite.padicIntRingObjToPadicAlgCl ℓ) a.geometricFiberProj (tateModule X ℓ)
+        (upperStarMapModTateModuleIsoUnit a.geometricFiberProj
+          a.geometricFiberToAlgebraicClosure ℓ hζ hζ' ≪≫
+          (a.geometricFiberProj)^*[Ab.{u + 1}].mapModUnitIso)) (Nat.card k : ℤ) := by
+  dsimp only [CategoryTheory.K4Native.scalarEquation]
+  exact_mod_proofs purity_rationalRootTrivialization_weil a hζ hζ'
+
+/-- Change only the data arguments of the scalar interface. -/
+lemma scalarRootEquation_named :
+    CategoryTheory.K4Native.scalarEquation (purityScalarFrobeniusPull ℓ a)
+      (purityScalarSourceDatum ℓ a) (purityScalarSourceUnitDatum ℓ a)
+      (purityScalarRootTrivialization ℓ a hζ hζ') (Nat.card k : ℤ) := by
+  dsimp only [purityScalarFrobeniusPull]
+  rw [purityScalarSourceDatum_eq_iso, purityScalarSourceUnitDatum_eq_iso,
+    scalarSourceIso_eq, scalarSourceUnitIso_eq, purityScalarRootTrivialization_eq]
+  exact_mod_proofs scalarRootEquation_native a hζ hζ'
 
 end AlgebraicGeometry.ProEtale.K4Native
