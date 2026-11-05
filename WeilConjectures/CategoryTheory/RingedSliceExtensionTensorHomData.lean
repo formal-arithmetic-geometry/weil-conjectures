@@ -354,6 +354,7 @@ open Classical in
     | zero => simp [LinearMap.map_zero]
     | of φ x =>
       change sumTensorLift.{u, v} (R := R.obj.obj W)
+        (N := G.val.obj W) (P := H.val.obj W)
         (fun ψ ↦ by exact (a.app (op (Over.mk ψ))).hom)
           (extensionByZeroPresheafRestrictAdd A U F i (DirectSum.of _ φ x) ⊗ₜ[R.obj.obj W]
             (show G.val.obj W from G.val.map i y)) =

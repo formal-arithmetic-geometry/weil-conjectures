@@ -52,7 +52,7 @@ private noncomputable abbrev restriction
     {A S : Sheaf K CommRingCat.{u}} (c : A ⟶ S) :=
   restrictScalars ((sheafCompose K (forget₂ CommRingCat RingCat)).map c)
 
-local instance
+private local instance
     {D : Type uC} [Category.{vC} D] [EssentiallySmall.{u} D]
     {K : GrothendieckTopology D}
     [K.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
@@ -494,8 +494,8 @@ private theorem rawPairing_restrict
     | add y y' hy hy' => simp only [map_add, hy, hy']
     | tmul t n =>
       change B.obj.obj W at t
-      rw [tensorRestriction_tmul, tensorRestriction_tmul, rawPairing_tmul,
-        rawPairing_tmul]
+      rw [tensorRestriction_tmul, tensorRestriction_tmul, rawPairing_tmul c,
+        rawPairing_tmul c]
       have h := PresheafOfModules.naturality_apply
         ((PresheafOfModules.sheafificationAdjunction (𝟙 (ringSheaf B).obj)).unit.app
           (changeOfRingsPresheaf.{vC, uC, u} c ((monoidalCategory A).tensorObj M N)))

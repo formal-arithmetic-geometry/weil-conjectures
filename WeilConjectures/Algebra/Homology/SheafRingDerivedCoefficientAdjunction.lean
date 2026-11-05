@@ -224,12 +224,13 @@ theorem sheafRingDerivedCoefficientAdjunction (φ : O ⟶ O')
   let ah := a.mapHomotopyCategory (ComplexShape.up ℤ)
   refine ⟨coefficientDerived_computes φ E h hm LF ε hLF P hP, ?_, ?_⟩
   · have hu := hd M ((E.mapHomotopyCategory (ComplexShape.up ℤ)).obj M) (𝟙 _)
+    rw [ah.homEquiv_id M] at hu
     change d.unit.app (DerivedCategory.Qh.obj M) ≫
       F.mapDerivedCategory.map (ε.app M ≫ DerivedCategory.Qh.map (𝟙 _)) = _ at hu
     have hu' := congrArg
       (fun t ↦ t ≫ F.mapDerivedCategoryFactorsh.hom.app
         ((E.mapHomotopyCategory (ComplexShape.up ℤ)).obj M)) hu
-    simpa [F, M, Adjunction.homEquiv_unit, Adjunction.homEquiv_id] using hu'
+    simpa [F, M, Adjunction.homEquiv_unit] using hu'
   · intro H g
     have ht := hd M H ((ah.homEquiv M H).symm g)
     rw [Equiv.apply_symm_apply] at ht
