@@ -7,6 +7,7 @@ module
 public import WeilConjectures.WeilSheaf.SmoothPuritySemilinearReading
 public import WeilConjectures.WeilSheaf.SmoothPurityEquivarianceDetection
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReadingUpperShriek
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleOriginReadingProof
 
 /-! # Recovering finite equivariant isomorphisms from étale reading -/
 
@@ -80,6 +81,6 @@ theorem exists_finite_equivariant_iso_of_etale_reading (g : X.left ⟶ X.left)
     hne
   obtain ⟨e, he⟩ := h
   refine ⟨(boundedConstructible _).ι.mapIso e, ?_⟩
-  exact congrArg ObjectProperty.Hom.hom he
+  exact congrArg InducedCategory.Hom.hom he
 
 end AlgebraicGeometry.ProEtale.CondensedRing
