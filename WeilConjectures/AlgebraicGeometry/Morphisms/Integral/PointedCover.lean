@@ -214,13 +214,13 @@ theorem exists_pointed_disjoint_cover (c₀ : Nbhd y) [IsAffine c₀.1.left]
       (hpt t'')) (pullback.lift_fst _ _ _)
   -- a split neighbourhood whose pieces map to these pointed neighbourhoods
   have hs (t'' : GeometricFiber gU c₀.2.left) : ∃ s : SplitNbhd gU c₀.2.left,
-      Nonempty ((SplitNbhd.pieceFunctor t'').obj s ⟶ ⟨W t'', pt t''⟩) :=
+      Nonempty ((SplitNbhd.pieceFunctor t'').obj s ⟶ Functor.elementsMk _ (W t'') (pt t'')) :=
     SplitNbhd.exists_pieceFunctor_obj_hom gU t'' _
   choose s a using hs
   have := Fintype.ofFinite (GeometricFiber gU c₀.2.left)
   obtain ⟨s₀, hs₀⟩ := IsCofiltered.inf_objs_exists (Finset.univ.image s)
   let a₀ (t'' : GeometricFiber gU c₀.2.left) :
-      (SplitNbhd.pieceFunctor t'').obj s₀ ⟶ ⟨W t'', pt t''⟩ :=
+      (SplitNbhd.pieceFunctor t'').obj s₀ ⟶ Functor.elementsMk _ (W t'') (pt t'') :=
     (SplitNbhd.pieceFunctor t'').map
       (hs₀ (Finset.mem_image_of_mem s (Finset.mem_univ t''))).some ≫ (a t'').some
   -- the neighbourhood `(U, u)` of `y` and the map `U ×_Y X ⟶ U ×_{U₀} Spec B₂`
