@@ -386,7 +386,12 @@ private local instance intrinsicWeakSheafify : HasWeakSheafify J AddCommGrpCat.{
 
 private local instance intrinsicAbelian : Abelian 𝒜 := inferInstance
 
-private local instance intrinsicCoproducts : HasCoproducts.{0} 𝒜 := inferInstance
+private local instance intrinsicCoproducts : HasCoproducts.{0} 𝒜 := by
+  intro I
+  have : HasColimitsOfShape (Discrete I) (PresheafOfModules.{r}
+      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R).obj) :=
+    PresheafOfModules.hasColimitsOfShape _ _
+  exact SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
 
 private local instance intrinsicMonoidal : MonoidalCategory 𝒜 :=
   SheafOfModules.cochainModulesMonoidal R
