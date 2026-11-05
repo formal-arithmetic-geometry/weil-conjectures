@@ -87,15 +87,21 @@
 - Completion marker: `/home/ubuntu/u9/state/BZ229.DONE`.
 - This completion commit changes only progress documentation; Lean source matches the green build.
 
-# BZ311 in progress
+# BZ311 complete
 
 - Branch: `u9/BZ311`; starting commit: `ec1bc636d`.
-- Assigned: `WeilConjectures.CategoryTheory.Abelian.DerivedBottomCycleTransport`.
-- Baseline and import-only remote builds fail in the public statement because Qh is no_expose.
-- The user instructed continuation after the exact three-statement compatibility proposal.
-  Its canonical quotientCompQhIso endpoint transports are applied to the assigned theorem
-  and its first two importer layers, DerivedBottomUnitNormalizationFormula and
-  DerivedBottomUnitNormalization. Assumptions and binders are unchanged.
-- Next: validate all three through `ucheck-bump` and repair any proof failures.
-- Fix patterns and logs: `/home/ubuntu/u9/bz/FIXES-BZ311.md`.
-- No local Lean/Lake execution, forbidden proof shortcuts, or heartbeat increases.
+- Assigned module and both downstream layers passed `ucheck-bump` together:
+  rc=0, failed=0, 1935 jobs, on `poolb:43.166.72.113`.
+- Validated source commit: `d599eea1699030daa1a58ff564ab648fb03d536e`.
+- Green modules: `WeilConjectures.CategoryTheory.Abelian.DerivedBottomCycleTransport`,
+  `WeilConjectures.CategoryTheory.Abelian.DerivedBottomUnitNormalizationFormula`,
+  and `WeilConjectures.CategoryTheory.Abelian.DerivedBottomUnitNormalization`.
+- The user instructed continuation after the exact three-statement proposal.
+  Those canonical quotientCompQhIso endpoint transports are the only Lean changes;
+  all proof bodies, declaration binders, assumptions, and docstrings are unchanged.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ311-final-full.log`.
+- Fix pattern and whole-tree candidate count: `/home/ubuntu/u9/bz/FIXES-BZ311.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ311-contract-audit.txt`.
+- No local Lean/Lake execution, sorries, forbidden proof shortcuts, or limit increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ311.DONE`.
+- This final commit changes only progress documentation; Lean sources match the green build.
