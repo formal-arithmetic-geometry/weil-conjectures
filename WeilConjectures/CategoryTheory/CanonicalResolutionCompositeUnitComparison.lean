@@ -66,6 +66,12 @@ private lemma resolutionDerivedIso_comp
   congr 1
   apply (cancel_epi ((F ⋙ G).rightDerivedFunctorPlusUnith.app H)).1
   erw [← Category.assoc, hc]
+  have hA : (DerivedCategory.Plus.quotientCompQhIso A).inv.app L = 𝟙 _ := rfl
+  have hB : (DerivedCategory.Plus.quotientCompQhIso B).hom.app
+      (F.mapCochainComplexPlus.obj L) = 𝟙 _ := rfl
+  have hC : (DerivedCategory.Plus.quotientCompQhIso C).hom.app
+      ((F ⋙ G).mapCochainComplexPlus.obj L) = 𝟙 _ := rfl
+  simp only [hA, hB, hC, Functor.map_id, Category.comp_id, Category.id_comp]
   simp [Category.assoc, H, L]
   rfl
 
