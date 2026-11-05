@@ -190,8 +190,9 @@ geometric point `t ≫ (S_(s) ⟶ S)` for a geometric point `t` of the strict lo
 pointed by `t` followed by the leg `S_(s) ⟶ V`. -/
 noncomputable def cospecializationNeighborhoodFunctor :
     PointedEtaleNeighborhood s ⥤ PointedEtaleNeighborhood (t ≫ strictLocalizationToBase s) where
-  obj x := { obj := x.1, val := CategoryTheory.Over.homMk (t ≫ (strictLocalizationConeAll s).π.app x)
-    (by simp) }
+  obj x :=
+    { obj := x.1
+      val := CategoryTheory.Over.homMk (t ≫ (strictLocalizationConeAll s).π.app x) (by simp) }
   map {x y} f := Functor.Elements.homMk f.1 (by
     apply CategoryTheory.Over.OverMorphism.ext
     exact (Category.assoc _ _ _).trans (congrArg (t ≫ ·) ((strictLocalizationConeAll s).w f)))

@@ -11,6 +11,7 @@ public import Mathlib.CategoryTheory.Sites.Over
 public import Mathlib.CategoryTheory.Sites.Sheafification
 public import Mathlib.CategoryTheory.Sites.LeftExact
 public import Mathlib.CategoryTheory.Sites.Limits
+public import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
 
 import Mathlib.CategoryTheory.Sites.LocalProperties
 import Mathlib.CategoryTheory.Sites.Equivalence
@@ -282,8 +283,8 @@ private theorem over_site
       rfl)
     refine ⟨V, p', q', ?_, ?_⟩
     · intro i
-      apply IsPullback.of_map_of_faithful (Over.forget B)
-      exact hp i
+      exact IsPullback.of_map_of_faithful (Over.forget B)
+        (f := p' i) (g := q' i) (h := b) (i := a i) (hp i)
     · simpa [V, p'] using hP
 
 private theorem over_topology
