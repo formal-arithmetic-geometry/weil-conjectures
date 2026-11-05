@@ -165,6 +165,55 @@ theorem isIso_smoothUnitBaseChange_structureCompactification
   exact isIso_smoothUnitBaseChange_paste l (structureCompactification X).overI
     (structureCompactification X).overG _ _ bcj _ e
 
+/-- **The compact-support base change isomorphism of the structure morphism through the chosen
+compactification**: for `X ⟶[j] X^c ⟶[p] Spec k` the chosen compactification of `a_X = toPoint X`
+and `bcj` a compact-support base change isomorphism of `j` along the geometric fibre, the pasted
+isomorphism `R(a_X)_! ⋙ π_s^* ≅ π_X^* ⋙ R(ā_X)_!`, transported along `j ≫ p = a_X`. This is the
+`bc` that the bridge to the ambient `rightDerivedLowerShriekGeometricFiberIso` has to match. -/
+noncomputable def compactificationLowerShriekBaseChange
+    (bcj : boundedConstructibleLowerShriek l (structureCompactification X).overI ⋙
+        boundedConstructibleUpperStarOfMap l
+          (structureCompactification X).overObj.hom.geometricFiberProj ≅
+      boundedConstructibleUpperStarOfMap l X.hom.geometricFiberProj ⋙
+        boundedConstructibleLowerShriek l (geometricFiberOverMap (structureCompactification X).overI)) :
+    boundedConstructibleLowerShriek l (toPoint X) ⋙
+        boundedConstructibleUpperStarOfMap l (point k).hom.geometricFiberProj ≅
+      boundedConstructibleUpperStarOfMap l X.hom.geometricFiberProj ⋙
+        boundedConstructibleLowerShriek l (geometricFiberOverMap (toPoint X)) :=
+  eqToIso (by rw [(structureCompactification X).overI_overG]) ≪≫
+    pasteLowerShriekBaseChange l (structureCompactification X).overI
+      (structureCompactification X).overG _ _ bcj
+      (properLowerShriekBaseChangeOfMap l (structureCompactification X).overG
+        (geometricFiberOverMap (structureCompactification X).overG)
+        (isPullback_geometricFiberOverMap (structureCompactification X).overG)) ≪≫
+    eqToIso (by rw [← geometricFiberOverMap_comp, (structureCompactification X).overI_overG])
+
+/-- **A1' over a point through the chosen compactification**: the exceptional base change map
+at the unit of the structure morphism `a_X : X ⟶ Spec k` along the geometric fibre is invertible
+for the pasted compact-support base change isomorphism `compactificationLowerShriekBaseChange`.
+The only input is `bcj` with `hEx` (the open-immersion compact-support base change on bounded
+constructible complexes and its mate). -/
+theorem isIso_smoothUnitBaseChange_toPoint
+    (bcj : boundedConstructibleLowerShriek l (structureCompactification X).overI ⋙
+        boundedConstructibleUpperStarOfMap l
+          (structureCompactification X).overObj.hom.geometricFiberProj ≅
+      boundedConstructibleUpperStarOfMap l X.hom.geometricFiberProj ⋙
+        boundedConstructibleLowerShriek l (geometricFiberOverMap (structureCompactification X).overI))
+    (hEx : (mateEquiv
+        (boundedConstructibleOpenImmersionUpperStarAdjunction l (structureCompactification X).overI)
+        (boundedConstructibleOpenImmersionUpperStarAdjunction l
+          (geometricFiberOverMap (structureCompactification X).overI)) (inv bcj.hom)).natTrans =
+      (upperStarOfMapSquareIso l (structureCompactification X).overI
+        (geometricFiberOverMap (structureCompactification X).overI)
+        (isPullback_geometricFiberOverMap (structureCompactification X).overI).w).hom)
+    (e : (boundedConstructibleUpperStarOfMap l (point k).hom.geometricFiberProj).obj (𝟙_ _) ⟶
+      𝟙_ _) [IsIso e] :
+    IsIso (smoothUnitBaseChange l (toPoint X) (geometricFiberOverMap (toPoint X))
+      (compactificationLowerShriekBaseChange l bcj) e) := by
+  haveI := isIso_smoothUnitBaseChange_structureCompactification l bcj hEx e
+  exact isIso_smoothUnitBaseChange_of_eq l (structureCompactification X).overI_overG
+    (by rw [← geometricFiberOverMap_comp, (structureCompactification X).overI_overG]) _ e
+
 end Compactification
 
 end AlgebraicGeometry.ProEtale.CondensedRing
