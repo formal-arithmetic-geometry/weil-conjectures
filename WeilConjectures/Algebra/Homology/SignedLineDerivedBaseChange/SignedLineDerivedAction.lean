@@ -22,8 +22,6 @@ universe u v w z
 open CategoryTheory CategoryTheory.Limits MonoidalCategory Opposite
 namespace SheafOfModules.SignedLineDerivedBaseChange
 
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
-
 variable {C D : Type u} [Category.{v} C] [Category.{v} D]
   {J : GrothendieckTopology C} {K : GrothendieckTopology D}
   {U : C ⥤ D} [U.IsContinuous J K]
