@@ -70,11 +70,13 @@ theorem adjunction_cochain_transpose
     apply (cancel_epi (R.mapDerivedCategoryFactorsh.hom.app (qB.obj K))).1
     rw [Iso.hom_inv_id_app_assoc, R.mapDerivedCategoryFactorsh_hom_app]
     simp only [Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv,
-      Functor.map_id, Category.comp_id, Category.assoc, Iso.inv_hom_id_app_assoc,
+      Category.assoc]
+    erw [DerivedCategory.Qh.map_id, Category.id_comp, Iso.inv_hom_id_app_assoc,
       Iso.hom_inv_id_app, Category.comp_id]
   apply (cancel_epi ((DerivedCategory.quotientCompQhIso A).hom.app P)).1
   rw [← d.homEquiv_naturality_left, ← Category.assoc, ← hε P, Category.assoc,
     ← DerivedCategory.quotientCompQhIso_hom_naturality, ← Category.assoc,
-    d.homEquiv_naturality_right, ht, Category.assoc, hf,
+    d.homEquiv_naturality_right]
+  erw [ht, Category.assoc, hf,
     ← Category.assoc, DerivedCategory.quotientCompQhIso_hom_naturality, Category.assoc]
 end CategoryTheory
