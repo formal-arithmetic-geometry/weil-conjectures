@@ -79,3 +79,6 @@
   AffineLineBundle/root aggregator match upstream; no trace/Thom import in either
   current upstream or K4's evolving SmoothPurity closure.
 - Integration caveat discovered: current7cc59d1611 smooth-purity adjunction assumes only QuasiSeparated base, but K4/pr2110 now adds IsSeparated base; pr2097 propagates precisely this strengthening to the Thom/Fourier users. My current route B preserves the current upstream USER statement and uses its existing K4 leaf. Combining with pr2110 will require the pr2097 assumption propagation, or a separate nonseparated descent argument. No K4 declaration edited or copied.
+- Focused helper check on w4, K6-20261105T103316.log, exposed one remaining
+  unresolved base-field parameter at the smooth-purity call. Supplied k₀/l
+  explicitly in both the adjunction and the twist-pullback isomorphism.
