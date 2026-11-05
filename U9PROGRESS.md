@@ -310,3 +310,7 @@ BLOCKED: I have not constructed the general Weil purity morphism. The missing co
 ## 2026-11-05 07:56 +0800 — specialization boundary confirmed
 - Reduced/strengthened dependency audit remains GREEN in K4-20261105T075231.log. ScalarPullback's abstract weakly-etale and variable-topological-ring helpers all pass, but both concrete ℤ_l specializations still have kernel timeouts (69s total). Removed these failed specializations from the stable helper file; saved the reproducer in /tmp/k4-scalar-pullback-specializations.lean.
 - Next check isolates two concrete instance choices in separate tiny files (canonical PadicInt CommRing, raw sheaf monoidal/braided instances), with kernel diagnostics and the default heartbeat budget. This avoids sharing a failed generated proof between control cases. Main chain and top-level build stay GREEN at their recorded commits.
+
+## 2026-11-05 08:00 +0800 — concrete instance pins do not fix the unit
+- K4-20261105T075618.log validates the stable generic ScalarPullback module but both concrete unit probes still time out (45s each): canonical PadicInt CommRing and raw Sheaf monoidal/braided instances. Removed the failed probe files, saving copies in /tmp. No heartbeat overrides or profiling remain in the stable helper.
+- C4's isolated 4000000-heartbeat concrete-unit diagnostic (Diag33, C4-20261105T074812.log) is still running. Next small test uses the existing functor-level upperStarForgetIso and its component instead of constructing the scalar-extension unit directly.
