@@ -8,7 +8,7 @@ module
 public import WeilConjectures.SmoothPurity.Integral.Reduction.IntegralReductionTowerCanonical
 public import WeilConjectures.SmoothPurity.Supporting.CoefDerivedSystemEvaluationCalculus
 public import WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSupplement
-import WeilConjectures.AlgebraicGeometry.Picard.KFlatResolutionIndependentCoefficients
+import WeilConjectures.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 
 /-! # A universal computation map for simultaneous integral reduction

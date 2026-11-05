@@ -156,10 +156,7 @@ import WeilConjectures.Algebra.Homology.System.SystemSingletonKFlat
 import WeilConjectures.Algebra.Homology.System.SystemSingletonScalarRepresentative
 import WeilConjectures.Algebra.Homology.System.SystemSingletonScalarLower
 public import WeilConjectures.AlgebraicGeometry.Picard.DerivedAdjunctionCompatibility
-public import WeilConjectures.AlgebraicGeometry.Picard.DerivedChangeOfRingsIndependentCoefficients
-public import WeilConjectures.AlgebraicGeometry.Picard.KFlatResolutionIndependentCoefficients
-public import WeilConjectures.AlgebraicGeometry.Picard.KFlatRingedToposPullback
-public import WeilConjectures.SmoothPurity.SheafRingCoefficientOrdinaryAdjunction
+public import WeilConjectures.AlgebraicGeometry.KFlatRingedToposPullback
 /-! # Singleton extension and arbitrary coefficient change
 
 Source: Stacks 0D6D, lemma-derived-pullback-composition, and Zheng, Construction 4.1.

@@ -17,7 +17,7 @@ public import WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 public import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
-public import WeilConjectures.AlgebraicGeometry.Picard.DerivedChangeOfRingsIndependentCoefficients
+public import WeilConjectures.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
 
 /-! # Constant-ring pro-etale scalar and open operations
 

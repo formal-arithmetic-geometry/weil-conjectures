@@ -205,7 +205,8 @@ import all WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
 import all Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.AlgebraicGeometry.CoefficientComparisonFixedPullback
-public import WeilConjectures.AlgebraicGeometry.Picard.KFlatResolutionIndependentCoefficients
+public import WeilConjectures.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import all WeilConjectures.AlgebraicGeometry.CoefficientComparisonFixedPullback
 
 /-! # Finite internal coefficients on the coefficient-sized site
 

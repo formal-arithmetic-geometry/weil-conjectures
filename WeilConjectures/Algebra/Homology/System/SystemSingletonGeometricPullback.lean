@@ -154,9 +154,7 @@ import WeilConjectures.Algebra.Homology.System.SystemSingletonScalarExtension
 import WeilConjectures.Algebra.Homology.System.SystemScalarCoherence
 
 import WeilConjectures.Algebra.Homology.System.SystemGeometricDerivedLift
-public import WeilConjectures.AlgebraicGeometry.Picard.DerivedChangeOfRingsIndependentCoefficients
-public import WeilConjectures.AlgebraicGeometry.Picard.KFlatResolutionIndependentCoefficients
-public import WeilConjectures.AlgebraicGeometry.Picard.KFlatRingedToposPullback
+public import WeilConjectures.AlgebraicGeometry.KFlatRingedToposPullback
 
 /-! # Geometric inverse image and derived singleton extension
 

@@ -85,7 +85,8 @@ attribute [local irreducible] scalarAssoc scalarUnit
 /-- Composition and identity in the ordinary derived category of whole systems.
 Source: blueprint (2), balanced coefficient cocycle
 (blueprint: def-sp-field-shriek-system-coherence). -/
-structure CoherenceLaw (D : Models P) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) where
+structure CoherenceLaw (D : Models P) {X Y : Scheme.{u}} {f : X ⟶ Y}
+    (c : Compactification f) where
   coefficientComposition : ∀ (E F L : Index P) (h : E ≤ F) (k : F ≤ L) (T : Scheme.{u}),
     coefficientMap P (D.coefficients E L (h.trans k)) T =
       coefficientMap P (D.coefficients E F h) T ≫ coefficientMap P (D.coefficients F L k) T
