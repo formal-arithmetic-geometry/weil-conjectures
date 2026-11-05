@@ -46,7 +46,7 @@ private noncomputable abbrev restriction
     {A S : Sheaf K CommRingCat.{u}} (c : A ⟶ S) :=
   restrictScalars ((sheafCompose K (forget₂ CommRingCat RingCat)).map c)
 
-local instance {D : Type u} [Category.{u} D] {K : GrothendieckTopology D}
+private local instance {D : Type u} [Category.{u} D] {K : GrothendieckTopology D}
     {A : Sheaf K CommRingCat.{u}} {M : SheafOfModules.{u} (ringSheaf A)}
     {X Y : Dᵒᵖ} (i : X ⟶ Y) :
     Module (A.obj.obj Y)

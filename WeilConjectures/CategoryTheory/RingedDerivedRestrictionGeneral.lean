@@ -72,7 +72,7 @@ theorem ringedOverFunctor_exactGeneral (U : C)
   have : F.PreservesHomology := Functor.preservesHomology_of_preservesEpis_and_kernels F
   have : HasFiniteBiproducts (SheafOfModules.{m} R) := Abelian.hasFiniteBiproducts
   have : HasFiniteCoproducts (SheafOfModules.{m} R) :=
-    hasFiniteCoproducts_of_hasFiniteBiproducts
+    hasFiniteCoproducts_of_hasFiniteBiproducts _
   exact ⟨inferInstance, inferInstance, Functor.preservesFiniteColimits_of_preservesHomology F⟩
 
 /-- The functor on derived categories induced by the actual exact slice restriction.
