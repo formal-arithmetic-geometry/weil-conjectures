@@ -207,33 +207,63 @@
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
 - This final commit changes only progress documentation; Lean sources match the green build.
 
-# BZ740 in progress
+# BZ740 complete
 
 - Branch: `u9/BZ740`; starting commit: `f271bd088`.
-- Reread the brief and progress notes on continuation; no new LEAD lines.
-- The import-only remote build fixed both private-helper errors, leaving the public Qh/Q mismatch.
+- Assigned module `WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorUnitNormalization`
+  passed `ucheck-bump`: rc=0, failed=0, 3927 jobs; target rebuilt in 48 seconds.
+- Validated source commit: `814682ae46`. The assigned target also rebuilt successfully
+  in the downstream batch at `28be0e52ca`.
 - The user instructed continuation after the exact one-line identity-cast proposal.
-  Applied `BZ740-statement-cast-proposal.patch`, preserving the original morphism.
-- Next: validate the assigned normalization module through `ucheck-bump`, then its direct importer.
-- Fix patterns and exact diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ740.md`.
+  That patch and two Localization imports are the only Lean changes.
+- All other statement text, proof bodies, docstrings, and heartbeat settings are unchanged.
+  Both recorded rewrite rules exactly reproduce the source from the baseline.
+- Direct importer `DerivedPullbackTensorUnitKFlat` was checked and fails in a kept
+  public theorem's hμ binder (line 359), requiring further statement-level Qh/Q conversions.
+  It and next-layer `DerivedPullbackTensorUnit` are deferred under the kept-statement rule.
+  Neither downstream file was edited.
+- Full logs: `/home/ubuntu/u9/bz/BUILD-BZ740-assigned-green-full.log` and
+  `/home/ubuntu/u9/bz/BUILD-BZ740-downstream1-full.log`.
+- Fix patterns, exact diagnostics, and occurrence counts: `/home/ubuntu/u9/bz/FIXES-BZ740.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ740-contract-audit.txt`.
+- Completion marker: `/home/ubuntu/u9/state/BZ740.DONE`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+- This final commit changes only progress documentation; Lean source matches the green build.
 
-# BZ780 leaf and first two downstream layers green
+# BZ798 complete
 
-- Branch: `u9/BZ780`; starting commit: `8027d88a3`.
-- Green source commit: `5aead0ac1d861aa6ef525ef6f15a0e7c483bdc26`.
-- `ucheck-bump` completed successfully (3930 jobs) on `poolb:43.166.82.34`:
-  `DerivedPullbackTensorUnitKFlat` rebuilt in 56 seconds, and its direct importer
-  `DerivedPullbackTensorUnit` rebuilt in 16 seconds.
-- The user instructed continuation after the concrete two-identity-cast proposal.
-  Retained those `cast (by rfl)` wrappers in the public counit hypothesis; they preserve
-  the original morphisms and all mathematical assumptions and conclusions.
-- Added public and implementation Localization imports, normalized identity casts
-  with `cast_eq`, and used `erw` through the local functor aliases.
-- All six declarations are retained; no local Lean/Lake, proof placeholders, trust
-  bypasses, profiler probes, or heartbeat changes.
-- `DerivedPullbackMonoidalDescent` also passed `ucheck-bump` at `453fb49d85`: rc=0,
-  failed=0. Its associativity dependency built successfully in this checkout.
-- Next: `DerivedPullbackMonoidalModel` and its direct importers, in batches of at most six.
-- Full successful log: `/home/ubuntu/u9/bz/BUILD-BZ780-leaf-and-unit-green-full.log`.
-- Five fix patterns and replay rules: `/home/ubuntu/u9/bz/FIXES-BZ780.md`.
+- Branch: `u9/BZ798`; original baseline: `6a4b38f19`.
+- Resumed after rereading `/home/ubuntu/u9/briefs/BZ798.md` and the progress notes.
+- Merged the current integrated bump branch at `d9a3ea12c`. It already removes the
+  unused signed-projection comparison chain and its downstream callers. The earlier
+  referenced-caller blocker therefore no longer applies.
+- Deleted only the remaining unused `SignedProjectionResolution.totalInverse`;
+  whole-tree `git grep -w totalInverse -- WeilConjectures Comparator` found its sole
+  declaration and no callers. It is listed unused and absent from kept-decls.txt.
+- All surviving declaration text is unchanged from the integrated branch.
+- Next: validate the owned module, then its direct importers and downstream layers.
+- Previous diagnostic history is archived in FIXES-BZ798-preintegration.md.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+- Assigned module is now GREEN: `ucheck-bump` rc=0, failed=0, 4657 jobs;
+  rebuilt in 9.5 seconds on `poolb:43.166.83.208` at commit
+  `4157f12719d57cd9316afddebd65c58d9ac537bb`.
+- Unit log: `/home/ubuntu/u9/bz/BUILD-BZ798-unit-green.log`.
+- Direct importer batch attempted all three importers. `ConstantPerfectQuotientProjection`
+  and `PerfectProjectionFormula` are blocked by unowned `RingedKoszulSystem.lean:554`
+  (`Invalid field symm`). Cancelled only this verified batch's timeout process;
+  wrapper rc=255, built=29, failed=1. These importers are skipped, not claimed green.
+- Dependency paths: `/home/ubuntu/u9/bz/BZ798-downstream-blockers.txt`.
+- Focused downstream validation of `ProEtaleProjectionMateData` and its sole importer
+  `ProEtaleProjectionMateExact` is queued (exec session 71582); no further Lean edits.
+- Focused downstream validation finished at `097c128327f8a77b1db72bd3846df904744bf797`:
+  `ProEtaleProjectionMateData` rebuilt GREEN in 3.0s; `ProEtaleProjectionMateExact`
+  is blocked at line 71 by BZ764's removed `proEtaleProjectionMateData` API.
+  Wrapper rc=1, built=24, failed=1; the failing module is not claimed green.
+- `proEtaleProjectionMateExact` still has callers in `PerfectProjectionFormula`
+  and `ProjectionFormulaCompactified`, so the deletion guard prevents removing it.
+  No unowned upstream declaration was restored or modified.
+- Downstream pass complete: four extra modules attempted over two layers, one green,
+  three recorded external blockers. Log: `BUILD-BZ798-downstream2.log`.
+- Actual build-host pins verified: Lean v4.35.0-rc3 and Mathlib b63f6e8a68d220e3b3bc4f3792bb53650d375f24.
+- BZ798 COMPLETE for its assigned unit. Completion marker: `/home/ubuntu/u9/state/BZ798.DONE`.
+- Final documentation commit leaves all Lean source identical to the green unit build.
