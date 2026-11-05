@@ -291,8 +291,13 @@ private noncomputable def rawScalarCocone : Cocone (rawScalarDiagram T X f ℓ E
     (rawScalarMap_toAlgCl T X f ℓ E Y g) P
 
 private noncomputable def rawScalarCocone_isColimit :
-    IsColimit (rawScalarCocone T X f ℓ E Y g P) :=
-  scalarCocone_isColimit _ _ _ _ _ _ P (rawRingCocone_isColimit T X f ℓ E Y g)
+    IsColimit (rawScalarCocone T X f ℓ E Y g P) := by
+  have : IsMonHom (show _ ⟶ (rawRingCocone T X f ℓ E Y g).pt from
+      (upperStar Ab.{u + 1} g).map ((upperStar Ab.{u + 1} f).map
+        (padicSubfieldRingObjToPadicAlgCl T ℓ E))) :=
+    inferInstanceAs (IsMonHom ((upperStar Ab.{u + 1} g).map
+      ((upperStar Ab.{u + 1} f).map (padicSubfieldRingObjToPadicAlgCl T ℓ E))))
+  exact scalarCocone_isColimit _ _ _ _ _ _ P (rawRingCocone_isColimit T X f ℓ E Y g)
 
 end RawCoefficients
 
