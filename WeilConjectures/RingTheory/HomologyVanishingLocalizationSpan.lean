@@ -115,11 +115,11 @@ theorem homology_vanishes_of_localization_span
         apply ModuleCat.hom_ext
         apply LinearMap.ext
         intro z
-        induction z with
+        induction z using TensorProduct.inductionOn with
         | tmul s x => simp [F, ModuleCat.ExtendScalars.map_tmul, TensorProduct.tmul_add]
         | add z z' hz hz' => simp only [map_add, hz, hz']⟩
     have : F.PreservesHomology := by
-      apply ((Functor.exact_tfae F).out 1 2).mp
+      apply ((Functor.exact_tfae F).out 2 3).mp
       intro S hS
       rw [ShortComplex.ShortExact.moduleCat_exact_iff_function_exact] at hS ⊢
       have := IsLocalization.flat (Localization.Away (f i)) (Submonoid.powers (f i))
