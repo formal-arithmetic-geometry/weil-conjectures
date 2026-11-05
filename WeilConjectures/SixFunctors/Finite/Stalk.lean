@@ -107,7 +107,7 @@ obtained from a pointed étale neighbourhood `(U, u)` of `y`, functorially. -/
 def Etale.baseChangeNbhd : Nbhd y ⥤ (pointSmallEtale t.1).fiber.Elements where
   obj c := Functor.elementsMk _ (f.Etale.obj c.1)
     (CategoryTheory.Over.homMk (basePt f c t) (basePt_snd f c t))
-  map g := Functor.Elements.homMk (f.Etale.map g.hom)
+  map g := Functor.Elements.homMk (f.Etale.map g.val)
     (CategoryTheory.Over.OverMorphism.ext (basePt_comp_etale_map_left f g t))
   map_id _ := Functor.Elements.hom_ext (f.Etale.map_id _)
   map_comp _ _ := Functor.Elements.hom_ext (f.Etale.map_comp _ _)
