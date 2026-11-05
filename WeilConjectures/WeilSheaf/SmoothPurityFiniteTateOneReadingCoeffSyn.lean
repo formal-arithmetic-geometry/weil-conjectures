@@ -53,7 +53,7 @@ noncomputable def coeffRingObj : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 
 
 /-- The synonym is the original (usable only here). -/
 lemma coeffRingObj_eq : coeffRingObj.{u} ℓ E n = Profinite.integersModPowRingObj.{u} ℓ E n :=
-  rfl
+  (rfl)
 
 noncomputable instance monObj_coeffRingObj : MonObj (coeffRingObj.{u} ℓ E n) :=
   inferInstanceAs (MonObj (Profinite.integersModPowRingObj.{u} ℓ E n))
@@ -65,7 +65,7 @@ instance isCommMonObj_coeffRingObj : IsCommMonObj (coeffRingObj.{u} ℓ E n) :=
 def coeffType : Type (u + 1) := integersModPowCoeff.{u} ℓ E n
 
 /-- The synonym is the original (usable only here). -/
-lemma coeffType_eq : coeffType.{u} ℓ E n = integersModPowCoeff.{u} ℓ E n := rfl
+lemma coeffType_eq : coeffType.{u} ℓ E n = integersModPowCoeff.{u} ℓ E n := (rfl)
 
 noncomputable instance commRing_coeffType : CommRing (coeffType.{u} ℓ E n) :=
   inferInstanceAs (CommRing (integersModPowCoeff.{u} ℓ E n))
