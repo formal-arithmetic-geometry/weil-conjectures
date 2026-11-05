@@ -41,17 +41,14 @@ geometric map by a formal argument on adjunctions
 natural isomorphism `Rf̄_! ∘ For ≅ For ∘ Rf₀!` whose mate `For ∘ Rf^! ⟶ Rf̄^! ∘ For` is invertible
 and which carries a projection formula for Weil complexes to the geometric projection formula.
 
-## Unfinished
-
-This input is stated with `sorry`
-(`AlgebraicGeometry.WeilComplex.exists_lowerShriek_forget_iso_projection`). The library has no
-natural comparison of `For ∘ Rf₀!` with the condensed `Rf̄_!`
-(`CondensedRing.boundedConstructibleLowerShriek`): only an objectwise identification of the right
-adjoints exists
-(`WeilComplex.nonempty_adicSheafDerivedEquivCondensedMod_forget_obj_iso_upperShriek`), and the
-comparison of forgetting with the native tensor product
-(`ProEtaleWeilSheaf.nativeGeometricForget_tensorComparison`) and the Weil projection formula
-(`WeilComplex.nonempty_nativeCompactProjectionLeft_iso`) are only `Nonempty` statements.
+This input (`AlgebraicGeometry.WeilComplex.exists_lowerShriek_forget_iso_projection`) is pasted
+from the compactification `Rf₀! = Rg_* ∘ i_!` defining `Rf₀!`
+(`CategoryTheory.Functor.map_projectionIsoOfComp_hom_app`,
+`CategoryTheory.Functor.isIso_mateEquiv_forgetCompIsoOfComp_app`): the comparisons for the open
+immersion `i` (`AlgebraicGeometry.WeilComplex.exists_extensionByZero_forget_iso_projection`) and
+for the proper `g` (`AlgebraicGeometry.WeilComplex.exists_derivedLowerStar_forget_iso_projection`),
+and the identification of `ī_! ⋙ Rḡ_*` with `Rf̄_!` together with its projection morphisms
+(`AlgebraicGeometry.WeilComplex.geometricFiberLowerShriekIso_hom_app_whiskerRight_comp`).
 -/
 
 @[expose] public section
