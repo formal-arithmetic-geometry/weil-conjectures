@@ -190,8 +190,8 @@ private theorem exactSquare_factorsh
     [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     [PreservesFiniteLimits H] [PreservesFiniteColimits H]
     (s : G ⋙ L' ≅ L ⋙ H) (K : HomotopyCategory A (.up ℤ)) :
-    ((Functor.mapDerivedCategoryCompIso G L').symm ≪≫
-        Functor.mapDerivedCategoryNatIso s ≪≫ Functor.mapDerivedCategoryCompIso L H).hom.app
+    (Functor.mapDerivedCategoryCompIso G L' ≪≫
+        Functor.mapDerivedCategoryNatIso s ≪≫ (Functor.mapDerivedCategoryCompIso L H).symm).hom.app
           (DerivedCategory.Qh.obj K) ≫
         H.mapDerivedCategory.map (L.mapDerivedCategoryFactorsh.hom.app K) ≫
         H.mapDerivedCategoryFactorsh.hom.app ((L.mapHomotopyCategory (.up ℤ)).obj K) =
@@ -292,9 +292,9 @@ private theorem derived_mate_factorsh
       (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
         adj'.mapDerivedCategoryRightDerivedAdjunction
         (TwoSquare.mk _ _ _ _
-          ((Functor.mapDerivedCategoryCompIso G L').symm ≪≫
+          (Functor.mapDerivedCategoryCompIso G L' ≪≫
             Functor.mapDerivedCategoryNatIso s ≪≫
-            Functor.mapDerivedCategoryCompIso L H).hom)).app (DerivedCategory.Qh.obj K) ≫
+            (Functor.mapDerivedCategoryCompIso L H).symm).hom)).app (DerivedCategory.Qh.obj K) ≫
       R'.rightDerivedFunctor.map (H.mapDerivedCategoryFactorsh.hom.app K) =
     G.mapDerivedCategoryFactorsh.hom.app ((R.mapHomotopyCategory (.up ℤ)).obj K) ≫
       DerivedCategory.Qh.map

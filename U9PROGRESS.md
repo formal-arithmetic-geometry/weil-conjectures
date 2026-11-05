@@ -182,3 +182,16 @@
   dependencies. The broad failing batch was stopped after those blockers were confirmed.
 - Handoff records: `/home/ubuntu/u9/bz/FIXES-BZ646.md` and `/home/ubuntu/u9/state/BZ646.DONE`.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
+
+# PZ004 in progress
+
+- Branch: `u9/PZ004`; starting commit: `6a2f94596`.
+- The user instructed continuation after the explicit four-private-helper API patch proposal.
+  That patch is now applied, preserving the square comparisons under Mathlib's reversed compositor.
+- Added public and implementation Localization imports for hidden Qh reductions in two modules.
+- Updated compositor definition bodies, inverse cancellation, and the balancing map_id rewrite.
+- The three-module `ucheck-bump` invocation is queued; it reads the branch when a tree is acquired.
+- Exact prior errors: `/home/ubuntu/u9/bz/BUILD-PZ004-prior-errors.log`.
+- Fix records and whole-tree inventories: `/home/ubuntu/u9/bz/FIXES-PZ004.md`.
+- Next: validate all three modules, resolve remaining owned errors, continue downstream, write DONE.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
