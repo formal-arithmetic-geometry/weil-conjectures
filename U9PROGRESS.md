@@ -245,3 +245,16 @@
 - Full log: /home/ubuntu/u9/bz/BUILD-BZ824-restored-full.log.
 - Next: build layer-two importer CanonicalModuleBaseChangeAffineChartComparison.
 - Notes: /home/ubuntu/u9/bz/FIXES-BZ824.md. No local Lean/Lake or proof shortcuts.
+
+# BZ861 in progress
+
+- Branch: `u9/BZ861`; starting commit: `db406319f`.
+- The user instructed continuation after the exact restoration and canonical-transport proposal.
+- Restored `tilde_preservesHomology`, `affineBaseChangeTildeCohomologyIso`, and
+  `affineTensorPullbackHomologySheafIso` in their original two upstream modules.
+- Their external references were checked before restoration; the assigned theorem is still used.
+- Replaced obsolete generated additive instances using `tilde.map_add` and added the
+  proposed canonical Q/Qh transports around the inverse counit.
+- Next: remote validation, then the direct importer and further layers under the brief.
+- Fix records and baseline diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ861.md`.
+- No local Lean/Lake execution, forbidden proof shortcuts, or heartbeat changes.
