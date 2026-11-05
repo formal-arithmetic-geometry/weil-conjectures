@@ -97,8 +97,8 @@ universe u' u
 
 open CategoryTheory Limits Opposite
 
--- Retain the projection spelling in the existing public lemma statement.
-private alias CategoryTheory.Functor.Elements.Hom.val :=
+/-- Compatibility projection for the underlying morphism of an element morphism. -/
+alias CategoryTheory.Functor.Elements.Hom.val :=
   CategoryTheory.Functor.Elements.Hom.hom
 
 namespace AlgebraicGeometry.Scheme

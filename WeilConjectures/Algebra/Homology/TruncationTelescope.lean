@@ -81,9 +81,9 @@ theorem quasiIso_hocolim_truncLE_and_filtered_colimit
           QuasiIso (colim.map α)) := by
   let M := SheafOfModules.{u}
     ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)
+  have : HasColimitsOfShape (Discrete ℕ) M := inferInstance
+  have : HasColimitsOfShape (Discrete ℕ) (CochainComplex M ℤ) := inferInstance
   let E : ℕ → CochainComplex M ℤ := fun n ↦ K.truncLE (n : ℤ)
-  have : HasCoproduct E :=
-    inferInstanceAs (HasCoproduct (fun n : ℕ ↦ K.truncLE (n : ℤ)))
   let D : ℕ ⥤ CochainComplex M ℤ :=
     { obj := E
       map := fun {n m} f ↦ K.truncLEMapOfLE n m (by exact_mod_cast leOfHom f)
