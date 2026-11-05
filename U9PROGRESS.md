@@ -221,17 +221,20 @@
 # BZ721 in progress
 
 - Branch: `u9/BZ721`; starting source commit: `a5261dcee`.
-- Read `/home/ubuntu/u9/briefs/BZ721.md` again on continuation; no new LEAD lines.
-- User instructed continuation after the exact public endpoint-transport patch proposal.
-  Applied that patch to the two representative equalities in
-  `SectionDerivedPushpullNormalization`; binders, assumptions, other conjuncts,
-  existing docstrings, and all private helper statements are unchanged.
-- Remote build `BZ721-20261106T060347.log` confirms both statement errors are fixed.
-  Its two remaining errors were proof mismatches from the inserted identities;
-  explicit comparison reduction and identity cancellation are submitted for validation.
-- Prior known localization imports and compositor proof fixes were already inherited.
-- No source declarations are eligible for deletion under the kept/unused lists.
-- Direct importers inventoried in `/home/ubuntu/u9/bz/BZ721-downstream-plan.json`.
-  Next: validate assigned module, then up to four smallest direct importer closures.
-- Fixes and exact-context rules: `/home/ubuntu/u9/bz/FIXES-BZ721.md`.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+- Assigned module `WeilConjectures.AlgebraicGeometry.SectionDerivedPushpullNormalization`
+  passed `ucheck-bump`: rc=0, failed=0, 4689 jobs; target rebuilt in 42 seconds.
+- Validated source: `ef6cc704368fff17895dd6f3be02732a5d3b0ba0`.
+- Tree: `poolb:43.157.187.72`; exact Lean v4.35.0-rc3 and Mathlib b63f6e8a pins verified.
+- User instructed continuation after the exact public endpoint-transport proposal.
+  That patch is applied. Two generic private cancellation lemmas and targeted `conv`
+  rewrites prove the transported equalities without raising heartbeat limits.
+- Existing private declarations, binders, assumptions, other conjuncts, and docstrings
+  are unchanged; no declarations qualified for deletion under the prune lists.
+- Full unit log: `/home/ubuntu/u9/bz/BUILD-BZ721-unit-full.log`.
+- Fix records: `/home/ubuntu/u9/bz/FIXES-BZ721.md`; audit: `/home/ubuntu/u9/bz/BZ721-contract-audit.txt`.
+- Four direct importers submitted at `6a187f55d4ff9f16bb2421bb8a75ad3aa0ac1c37`:
+  `SectionResolvingOplaxConstraintData`, `SectionResolutionConjugationIdentities`,
+  `SectionPullComputationOfRealization`, and `SectionDerivedRepresentativeSquare`.
+- Next: inspect downstream results, fix owned importer failures or skip unowned blockers,
+  then commit final documentation and write `/home/ubuntu/u9/state/BZ721.DONE`.
+- No local Lean/Lake, proof placeholders, trust bypasses, heartbeat increases, or profiler probes.
