@@ -7,7 +7,7 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 public import WeilConjectures.WeilSheaf.Native.Projection.ModelSquareCancellation
 public import WeilConjectures.WeilSheaf.Native.Projection.OrdinaryTensorNormalization
-public import WeilConjectures.WeilSheaf.Native.Projection.SheafSquareTransport
+public import WeilConjectures.WeilSheaf.Native.Projection.TotalSquareToModel
 import all WeilConjectures.WeilSheaf.Native.NativeRestrictionForgetTotalModel
 
 /-! # Pasting normalized total models before specializing the coefficient categories -/
@@ -88,11 +88,10 @@ lemma projection_derived_square_of_total_models
           (F.mapHomologicalComplex (.up ℤ)).obj T) ≅
       (R.mapHomologicalComplex (.up ℤ)).obj ((F.mapHomologicalComplex (.up ℤ)).obj P) ⊗
         (R.mapHomologicalComplex (.up ℤ)).obj ((F.mapHomologicalComplex (.up ℤ)).obj T))
-    (hchain : (V.mapHomologicalComplex (.up ℤ)).map tr.hom ≫ cU.hom ≫
-        ((projection_model_complex_square L V F R e).hom.app P ⊗ₘ
-          (projection_model_complex_square L V F R e).hom.app T) =
-      (projection_model_complex_square L V F R e).hom.app WZ ≫
-        (R.mapHomologicalComplex (.up ℤ)).map cZ.hom ≫ ord.hom)
+    (hchain : ProjectionTotalModelSquare
+      (L.mapHomologicalComplex (.up ℤ)) (V.mapHomologicalComplex (.up ℤ))
+      (F.mapHomologicalComplex (.up ℤ)) (R.mapHomologicalComplex (.up ℤ))
+      (projection_model_complex_square L V F R e) P T WZ WU tr cZ cU ord)
     (hmZ : F.mapDerivedCategory.map modelZ.hom ≫
         F.mapDerivedCategoryFactors.hom.app WZ ≫ DerivedCategory.Q.map cZ.hom =
       tz.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj T) ≫
@@ -133,7 +132,8 @@ lemma projection_derived_square_of_total_models
         Functor.uncurry_obj_obj, curriedTensor_obj_obj]
       erw [Category.id_comp]
       exact hmU) ord
-    (by simpa only [MonoidalCategory.tensor_map, projection_model_complex_square,
+    (by simpa only [ProjectionTotalModelSquare, MonoidalCategory.tensor_map,
+      projection_model_complex_square,
       complex_square] using hchain) mZ rfl
   simp only [Functor.projection_uncurryTensorIso_hom_app, Category.id_comp,
     MonoidalCategory.tensor_map, Functor.uncurry_obj_obj, curriedTensor_obj_obj] at hmU'

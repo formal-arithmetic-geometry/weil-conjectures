@@ -61,15 +61,11 @@ lemma projection_native_total_model_square
   let cU := (condensedRealizationTotalTensorIso k₀ l Z).app (LP, LT)
   let tr := NativeRestrictionDescentProof.totalFamily L
     (nativeTensorTotal k₀ l Z) (nativeTensorTotal k₀ l Y) (nativePullTotalTensor k₀ l g) P T
-  (V.mapHomologicalComplex (.up ℤ)).map tr.hom ≫ cU.hom ≫
-      ((projection_model_complex_square L V F R
-        (condensedRealizationUpperStarIso k₀ l g).symm).hom.app P ⊗ₘ
-        (projection_model_complex_square L V F R
-          (condensedRealizationUpperStarIso k₀ l g).symm).hom.app T) =
-    (projection_model_complex_square L V F R
-      (condensedRealizationUpperStarIso k₀ l g).symm).hom.app WZ ≫
-      (R.mapHomologicalComplex (.up ℤ)).map cZ.hom ≫
-        (R.mapCochainComplexμIso FP FT).symm.hom := by
+  ProjectionTotalModelSquare
+    (L.mapHomologicalComplex (.up ℤ)) (V.mapHomologicalComplex (.up ℤ))
+    (F.mapHomologicalComplex (.up ℤ)) (R.mapHomologicalComplex (.up ℤ))
+    (projection_model_complex_square L V F R (condensedRealizationUpperStarIso k₀ l g).symm)
+    P T WZ WU tr cZ cU (R.mapCochainComplexμIso FP FT).symm := by
   projection_strict
     dsimp only
     let L := upperStar k₀ l g
@@ -77,16 +73,6 @@ lemma projection_native_total_model_square
     let F := condensedRealization k₀ l Y
     let R := CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
       (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))
-    let LP := (L.mapHomologicalComplex (.up ℤ)).obj P
-    let LT := (L.mapHomologicalComplex (.up ℤ)).obj T
-    let FP := (F.mapHomologicalComplex (.up ℤ)).obj P
-    let FT := (F.mapHomologicalComplex (.up ℤ)).obj T
-    let WZ := ((nativeTensorTotal k₀ l Y).obj P).obj T
-    let WU := ((nativeTensorTotal k₀ l Z).obj LP).obj LT
-    let cZ := (condensedRealizationTotalTensorIso k₀ l Y).app (P, T)
-    let cU := (condensedRealizationTotalTensorIso k₀ l Z).app (LP, LT)
-    let tr := NativeRestrictionDescentProof.totalFamily L
-      (nativeTensorTotal k₀ l Z) (nativeTensorTotal k₀ l Y) (nativePullTotalTensor k₀ l g) P T
     have ht := projection_model_square_from_tensor_square
       (L.mapHomologicalComplex (.up ℤ)) (V.mapHomologicalComplex (.up ℤ))
       (F.mapHomologicalComplex (.up ℤ)) (R.mapHomologicalComplex (.up ℤ))
@@ -104,9 +90,6 @@ lemma projection_native_total_model_square
         with_reducible_and_instances exact_mod_proofs h)
     dsimp only [L, V, F, R] at ht
     dsimp only [NativeRestrictionDescentProof.totalFamily]
-    dsimp only [Functor.comp_obj, Functor.prod_obj, Functor.uncurry_obj_obj,
-      curriedTensor_obj_obj, MonoidalCategory.tensor_obj] at ht ⊢
-    simp only [projection_curriedTensorCochain_eq] at ht ⊢
     cast_proofs ht
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
