@@ -136,7 +136,8 @@ private noncomputable def tensorComparisonPresheaf (U : Scheme.{u})
           ((1 : S.obj.obj X) ⊗ₜ[R.obj.obj X, (c.hom.hom.app X).hom] m))
     rw [show SheafOfModules.changeOfRingsMap c.hom M i
         ((1 : S.obj.obj X) ⊗ₜ[R.obj.obj X, (c.hom.hom.app X).hom] m) =
-          S.obj.map i 1 ⊗ₜ[R.obj.obj Y, (c.hom.hom.app Y).hom] M.val.map i m from
+          S.obj.map i 1 ⊗ₜ[R.obj.obj Y, (c.hom.hom.app Y).hom]
+            (show M.val.obj Y from M.val.map i m) from
       Classical.choose_spec (SheafOfModules.exists_changeOfRingsMap c.hom M i) 1 m]
     rw [tensorComparisonApp_tmul, tensorComparisonApp_tmul]
     simp only [map_one, one_smul]

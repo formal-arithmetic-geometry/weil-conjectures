@@ -79,8 +79,8 @@ private theorem finite_sheafFiber (R : Sheaf.Torsor (Scheme.Etale.continuousMapS
     Φ.toPresheafFiber V₀ v₀ R.sheaf.obj (R.vadd (op V₀) (ContinuousMap.const _ m) x₀)
   refine Finite.of_surjective φ fun p ↦ ?_
   obtain ⟨V, v, z, rfl⟩ := Φ.toPresheafFiber_jointly_surjective (P := R.sheaf.obj) p
-  let E₁ : Φ.fiber.Elements := ⟨V, v⟩
-  let E₂ : Φ.fiber.Elements := ⟨V₀, v₀⟩
+  let E₁ : Φ.fiber.Elements := Φ.fiber.elementsMk V v
+  let E₂ : Φ.fiber.Elements := Φ.fiber.elementsMk V₀ v₀
   let Wel := IsCofiltered.min E₁ E₂
   let f₁ := IsCofiltered.minToLeft E₁ E₂
   let f₂ := IsCofiltered.minToRight E₁ E₂
