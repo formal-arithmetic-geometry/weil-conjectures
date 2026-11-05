@@ -33,8 +33,7 @@ one. This file collects the inputs of the proof of Serre duality on `X`
 (`AlgebraicGeometry.Scheme.serreDuality`): the local rings of `X` at closed points are discrete
 valuation rings and closed points are effective Cartier divisors; a rational function `t` on a
 proper `X`, transcendental over `k`, defines a finite flat morphism `X ⟶ ℙ¹_k`; along a finite
-flat morphism `f : X ⟶ ℙ¹_k` one has the duality `Hom(f_* ℳ, ω_{ℙ¹}) ≅ H⁰(X, ℳᵛ ⊗ ω_X)`; and the
-degree of a principal divisor is zero.
+flat morphism `f : X ⟶ ℙ¹_k` one has the duality `Hom(f_* ℳ, ω_{ℙ¹}) ≅ H⁰(X, ℳᵛ ⊗ ω_X)`.
 
 ## Main statements
 
@@ -53,9 +52,7 @@ degree of a principal divisor is zero.
   `AlgebraicGeometry.Scheme.nonempty_dual_H_zero_iso`: Serre duality on a smooth proper curve in
   degrees `1` and `0`, assembled from the above; they make up
   `AlgebraicGeometry.Scheme.serreDuality`.
-- `AlgebraicGeometry.Scheme.finsum_ord_eq_finrank` and
-  `AlgebraicGeometry.Scheme.finsum_ord_eq_zero`: degrees of pulled back points and of principal
-  divisors.
+- `AlgebraicGeometry.Scheme.finsum_ord_eq_finrank`: degrees of pulled back points.
 -/
 
 @[expose] public section
