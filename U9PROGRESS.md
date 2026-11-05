@@ -1,3 +1,19 @@
+# BZ133 complete
+
+- Branch: `u9/BZ133`.
+- All four assigned modules passed `ucheck-bump` together: rc=0, failed=0, 4216 jobs.
+- Checked source commit: `145f9e74c47425595177ae3c1948ed9381a251e5`.
+- Each assigned target rebuilt successfully on `newsrv:/home/ubuntu/u9n/bumpw9`.
+- Full build log: `/home/ubuntu/u9/bz/BUILD-BZ133-final-full.log`.
+- The user instructed continuation after the exact definition-body repair proposal for
+  `injectiveResolutionDerivedComparison`; that patch is now applied.
+- The obsolete `quotientCompQhIso` factor and its proof rewrites are removed because `Plus.Q`
+  now directly lifts `Q`. All declaration types remain unchanged.
+- Completion marker: `/home/ubuntu/u9/state/BZ133.DONE`.
+- This final commit changes only progress documentation after the successful source build.
+- Fix patterns and build logs: `/home/ubuntu/u9/bz/FIXES-BZ133.md`.
+- No local Lean/Lake execution, forbidden proof escapes, or heartbeat increases.
+
 # BZ118 in progress
 
 - Branch: `u9/BZ118`.
