@@ -76,7 +76,8 @@ variable {X : Scheme.{u}} (U : X.Opens)
 not unfold the definition, so the additivity (hence ) is recorded here. -/
 instance (V : X.Opens) : (SheafOfModules.evaluation X.ringCatSheaf (op V)).Additive :=
   inferInstanceAs (SheafOfModules.forget _ ⋙ PresheafOfModules.evaluation _ (op V)).Additive
-  {M N : SheafOfModules.{u} X.ringCatSheaf} (f : M ⟶ N)
+
+variable {M N : SheafOfModules.{u} X.ringCatSheaf} (f : M ⟶ N)
 
 /-- **The sections of a kernel are the kernel of the sections.** Over any open `U`, the image
 of `kernel.ι f` on sections is the set of sections of `M` killed by `f`.

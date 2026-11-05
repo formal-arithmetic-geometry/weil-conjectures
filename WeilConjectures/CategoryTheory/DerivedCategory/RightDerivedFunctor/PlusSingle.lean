@@ -5,7 +5,9 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import Mathlib.Algebra.Homology.Embedding.ExtendHomology
+public import Mathlib.Algebra.Homology.Localization
 public import Mathlib.CategoryTheory.Abelian.Injective.Extend
 public import WeilConjectures.FromJoel.Algebra.Homology.Embedding.ExtendMap
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
