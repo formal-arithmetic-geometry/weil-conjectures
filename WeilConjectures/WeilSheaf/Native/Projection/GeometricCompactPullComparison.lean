@@ -58,7 +58,10 @@ lemma compactProjectionGeometricPullIso_projection_eq
             (boundedConstructibleOpenImmersionLowerShriek _ l c.overI).map
               (K ◁ ε.hom.app B)) := by
   subst ε
-  exact homMk_exceptionalProjectionMorphismOfCompactification_eq l c K B _
-    (ι_map_eqToIso_trans_upperStarComp_inv_app_compactification (f := f) l c B)
+  have h := ι_map_eqToIso_trans_upperStarComp_inv_app_compactification (f := f) l c B
+  have h' := homMk_exceptionalProjectionMorphismOfCompactification_eq (f := f) l c K B
+    ((eqToIso (congrArg (boundedConstructibleUpperStar _ l) c.overI_overG.symm) ≪≫
+      boundedConstructibleUpperStarComp _ l c.overI c.overG).inv.app B) h
+  exact h'
 
 end AlgebraicGeometry.ProEtale.CondensedRing
