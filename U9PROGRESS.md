@@ -50,14 +50,18 @@
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 - Completion marker: `/home/ubuntu/u9/state/BZ130.DONE`.
 
-# BZ165 in progress
+# BZ165 complete
 
 - Branch: `u9/BZ165`; initial commit: `6504338cb`.
-- Three assigned modules have built with `ucheck-bump`: KFlatFixedTensorTriangulated,
-  KFlatRHomCurrying, InternalSectionTensorComparison.
+- All four assigned modules passed `ucheck-bump` together: rc=0, failed=0, 3700 jobs.
+- Validated source commit: `22130ff98f14288bb3712ab5a1f105456bf44682`.
+- Build tree: `newsrv:/home/ubuntu/u9n/bumpw1`.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ165-final-full.log`.
+- Fix patterns, occurrence counts, and exact errors: `/home/ubuntu/u9/bz/FIXES-BZ165.md`.
 - The user instructed continuation after the exact compositor migration proposal;
-  the proposed hom/inv swaps in MapDerivedComp are now applied. These preserve
-  the original maps after Mathlib reversed mapDerivedCategoryCompIso.
-- Next: build all four assigned modules together, then write `/home/ubuntu/u9/state/BZ165.DONE`.
-- Fix patterns and exact errors: `/home/ubuntu/u9/bz/FIXES-BZ165.md`.
-- No local Lean/Lake execution, prohibited proof escapes, or heartbeat increases.
+  its three public statement expressions now select the original maps via the new
+  Mathlib compositor's opposite orientation. All other declaration types and
+  existing docstrings are unchanged.
+- No local Lean/Lake execution, prohibited proof shortcuts, or heartbeat increases.
+- This final completion commit changes only progress documentation after the green build.
+- Completion marker: `/home/ubuntu/u9/state/BZ165.DONE`.
