@@ -142,43 +142,24 @@
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
+# BZ540 complete
 
-# BZ585 complete
-
-- Branch: `u9/BZ585`; starting commit: `8af5cb324`.
-- Assigned module `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebraFreeComparison`
-  passed ucheck-bump: rc=0, failed=0, 2022 jobs, target rebuilt in 4.8s.
-- Validated commit: `db7bb14d08c2234513afd1b158e2524d33864d66`; newsrv bumpw4, Lean v4.35.0-rc3
-  and Mathlib b63f6e8a68d220e3b3bc4f3792bb53650d375f24 confirmed on the build host.
-- Added the Localization public/import-all imports and made the two internal comparison
-  helpers private, following user continuation after that exact proposal. All statements,
-  proofs, binders, assumptions and existing docstrings are unchanged.
-- Contract audit: `/home/ubuntu/u9/bz/BZ585-contract-audit.txt`.
-  Fix patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ585.md`.
-- Direct importer `WeilConjectures.WeilSheaf.LowerShriekForget` was attempted at
-  `c7cb6c306b`; the assigned module rebuilt successfully in that batch in 6.1s.
-- The importer is blocked by unowned `FreeComparisonMapDerivedCategory` (BZ584)
-  and six other dependencies. Stopped only the verified timeout process for this
-  build after confirming dependency failures. Result: rc=255, failed=7; the downstream
-  batch is not green. No downstream or external dependency sources were changed.
-- Skipped `LowerShriekForget`, `AffineLineBundle`, and `SmoothPurityNativeTraceCriterion`
-  under the brief's external-dependency rule. Only the assigned module is claimed green.
-- Full logs: `/home/ubuntu/u9/bz/BUILD-BZ585-unit-full.log` and
-  `/home/ubuntu/u9/bz/BUILD-BZ585-downstream1-full.log`.
-- No local Lean/Lake execution, sorries, proof shortcuts, heartbeat increases, or profiler probes.
-- Completion marker: `/home/ubuntu/u9/state/BZ585.DONE`.
-- Final documentation commit leaves Lean source identical to the green revision.
-
-
-# BZ631 in progress
-
-- Branch: `u9/BZ631`; starting commit: `b7a97a5ed`.
-- The user instructed continuation after the exact two-statement proposal.
-  Applied the `Plus.Qh.obj H` endpoint and canonical mapped quotient comparison
-  in `smallModel_injectiveExchange_target_transport`.
-- Localization public/import-all imports expose the private proof reductions;
-  the new comparison is normalized to identity in the proof.
-- Existing `ucheck-bump` invocation is queued and will read the pushed branch
-  after acquiring a tree. Next: validate the assigned module, then its importer.
-- Fix patterns: `/home/ubuntu/u9/bz/FIXES-BZ631.md`.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+- Branch: `u9/BZ540`; starting commit: `29f3a8d81`.
+- Assigned module `WeilConjectures.CategoryTheory.Constant.ConstantDerivedNormalizationUniversalSupplement`
+  passed `ucheck-bump`: rc=0, built=9, failed=0, 3811 jobs.
+- Validated source commit: `e65cfc0cfe`; tree `poolb:43.157.184.90`.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ540-owned-green.log`.
+- Only authored Lean change: exclude the successor-universe sheafification instance before
+  `constantSeed`. All owned statements, proofs, and docstrings match the starting file.
+- Reused validated dependency repairs from BZ581, BZ549, and BZ558; their tensor compatibility
+  changes are recorded in `/home/ubuntu/u9/bz/FIXES-BZ540.md`.
+- Both direct importers were attempted; skipped because of unowned dependency failures in
+  DerivedMorphismSheafComparison (BZ513), KFlatResolutionGeneral (BZ116), and
+  RingedTopoiDerivedPullback (BZ554), and HomTensorPair (BZ92). No second layer or downstream edits.
+- Owned module also rebuilt green at `2ba35ef7bd` in the downstream batch.
+- Stopped the optional downstream batch after its four unowned failures (wrapper rc=255;
+  built=144, failed=4). Log: `/home/ubuntu/u9/bz/BUILD-BZ540-downstream-full.log`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ540-contract-audit.txt`.
+- No local Lean/Lake, sorries, admissions, trust bypasses, or heartbeat increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ540.DONE`.
+- This completion commit changes only progress documentation; Lean sources match the green build.
