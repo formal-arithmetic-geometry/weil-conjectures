@@ -89,7 +89,7 @@ private theorem triangle_localization {X Y T : Scheme.{v}}
       rfl
     erw [hid, CategoryTheory.Functor.map_id, Category.comp_id] at hc
     have hf : (Functor.mapDerivedCategoryNatIso e ≪≫
-        Functor.mapDerivedCategoryCompIso G L).hom.app (DerivedCategory.Q.obj J) ≫
+        (Functor.mapDerivedCategoryCompIso G L).symm).hom.app (DerivedCategory.Q.obj J) ≫
         L.mapDerivedCategory.map (G.mapDerivedCategoryFactors.hom.app J) ≫
           L.mapDerivedCategoryFactors.hom.app
             ((G.mapHomologicalComplex (.up ℤ)).obj J) =
@@ -101,7 +101,7 @@ private theorem triangle_localization {X Y T : Scheme.{v}}
     apply (cancel_epi (L.mapDerivedCategory.map
       (G.mapDerivedCategoryFactors.hom.app J))).1
     apply (cancel_epi ((Functor.mapDerivedCategoryNatIso e ≪≫
-      Functor.mapDerivedCategoryCompIso G L).hom.app (DerivedCategory.Q.obj J))).1
+      (Functor.mapDerivedCategoryCompIso G L).symm).hom.app (DerivedCategory.Q.obj J))).1
     rw [← L.mapDerivedCategory.map_comp_assoc]
     simp only [G, L, e, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id,
       Category.id_comp]
@@ -202,7 +202,7 @@ theorem sectionsComparison_triangle_naturality {X Y T : Scheme.{v}}
     let E := (H.mapHomologicalComplex (.up ℤ)).obj J
     let e := upperStarComp AddCommGrpCat.{v + 1} a g h hh
     let d := (Functor.mapDerivedCategoryNatIso e ≪≫
-      Functor.mapDerivedCategoryCompIso G L).inv
+      (Functor.mapDerivedCategoryCompIso G L).symm).inv
     let u := (mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{v + 1} a).unit
     let l := (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso
       AddCommGrpCat.{v + 1} a).hom
