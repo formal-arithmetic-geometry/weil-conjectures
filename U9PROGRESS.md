@@ -99,13 +99,17 @@
 - Fix patterns, whole-tree counts, and logs: `/home/ubuntu/u9/bz/FIXES-BZ307.md`.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ332 in progress
+# BZ332 complete
 
 - Branch: `u9/BZ332`; starting commit: `04c3957dc56263143b9eaebd3d534360487f939e`.
 - Assigned module: `WeilConjectures.AlgebraicGeometry.EtaleSectionsTriangleNaturality`.
 - Ported three proof uses of the reversed derived compositor and normalized `Iso.symm_hom`.
 - The proof-only check passed the private localization proof; only the malformed public signature remained.
 - The user instructed continuation after the exact signature correction proposal; applied `BZ332-signature-compatibility.patch`.
-- Next: validate the assigned module, then its direct importers and a further layer if feasible.
+- Assigned module passed `ucheck-bump` at `a83c47ee4f`: rc=0, failed=0, 3845 jobs, target rebuilt in 17 seconds.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ332-unit-full.log`.
+- Checked all three direct importers. `EtaleInjectiveSectionsComparison` needs statement-level compositor migration at lines 181 and 216; both other importers depend on it. The aggregator also has unrelated dependency failures.
+- Stopped the blocked downstream batch after recording the errors; no extra module is claimed green.
+- Completion marker: `/home/ubuntu/u9/state/BZ332.DONE`. Final commit updates documentation only; owned Lean source matches the green build.
 - Fix patterns and logs: `/home/ubuntu/u9/bz/FIXES-BZ332.md`.
 - No local Lean/Lake execution, forbidden proof escapes, or heartbeat increases.
