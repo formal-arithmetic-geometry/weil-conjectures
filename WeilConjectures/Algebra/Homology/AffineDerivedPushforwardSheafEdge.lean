@@ -228,7 +228,10 @@ theorem exists_affineDerivedPushforwardSheafEdge
     γ, S, T, U, K, ι, H, f, X, Y, C, D, Functor.whiskerRight_app, ObjectProperty.ι_obj,
     ShortComplex.LeftHomologyData.map_π, ShortComplex.mapHomologyIso,
     Functor.comp_map, Functor.map_comp, Functor.mapHomologicalComplex, Functor.comp_obj,
-    cast_eq, hqC, hqD, hqD', Functor.map_id]
+    cast_eq, hqC, hqD, hqD', Functor.map_id,
+    DerivedCategory.quotientCompQhIso,
+    HomologicalComplexUpToQuasiIso.quotientCompQhIso,
+    Quotient.lift.isLift_hom, Quotient.lift.isLift_inv]
     using hn.symm
 
 end AlgebraicGeometry
