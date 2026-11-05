@@ -7,8 +7,9 @@
   The comparison-orientation substitutions are applied, preserving all binders, hypotheses,
   and intended morphisms under Mathlib's reversed `mapDerivedCategoryCompIso`.
 - Proof cancellation uses the inverse comparison and `Iso.inv_hom_id_app`.
-- Current remote build is queued through `ucheck-bump`; no green result yet.
-- Next: complete the assigned module, then build `SchemeDerivedHomGluing` and its two
+- Assigned module is green: `ef081fb90b`, rc=0, failed=0, 2801 jobs on
+  `poolb:43.157.187.72`; log: `/home/ubuntu/u9/bz/BUILD-BZ361-unit-green-full.log`.
+- Next: build `SchemeDerivedHomGluing` and its two
   direct importers `DerivedOpenGluing` and `OpenUnionHomGluing` as instructed.
 - Fix patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ361.md`.
 - No local Lean/Lake, forbidden proof escapes, heartbeat increases, or DONE marker.
