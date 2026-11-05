@@ -52,8 +52,15 @@ lemma projectionProperForgetIso_hom_app (M : WeilComplex k₀ l X) :
         (projectionRealizationCompIso k₀ l Y)).hom.app M.obj := by
   have h := projectionPushForgetIso_hom_app_of_factorization
     (ProEtaleWeilSheaf.nativeProperForgetIso k₀ l g)
-    (projectionRealizationCompIso k₀ l X) (projectionRealizationCompIso k₀ l Y) M.obj _
-    (ProEtaleWeilSheaf.nativeProjectionPushMate_normalization k₀ l g M.obj)
+    (projectionRealizationCompIso k₀ l X) (projectionRealizationCompIso k₀ l Y) M.obj
+    ((adicSheafDerivedEquivCondensedMod l _).functor.map
+      ((IsoAlgebra.derivedForgetCommIso (adicLowerStarGeometricFiberMapCompFrobeniusIso l g
+        (comp_over g (Spec (CommRingCat.of k₀))))).hom.app M.obj) ≫
+      (projectionAdicCondensedDerivedPushIso l (gb).left).hom.app
+        ((IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).mapDerivedCategory.obj M.obj))
+    (by simpa only [projectionRealizationCompIso, ProEtaleWeilSheaf.nativeProperForgetIso,
+      asIso_hom, Category.assoc] using
+        ProEtaleWeilSheaf.nativeProjectionPushMate_normalization k₀ l g M.obj)
   rw [h]
   simp only [projectionProperForgetIso, Functor.isoHComp, Iso.symm_hom, Iso.trans_inv,
     Iso.symm_inv, Functor.isoWhiskerRight_inv, Functor.isoWhiskerLeft_inv,

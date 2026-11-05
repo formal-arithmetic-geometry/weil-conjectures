@@ -7,7 +7,7 @@ module
 public import WeilConjectures.WeilSheaf.Native.Projection.BoundedOpenProjectionSquare
 public import WeilConjectures.WeilSheaf.Native.Projection.BoundedProperProjectionSquare
 public import WeilConjectures.WeilSheaf.Native.Projection.MateAdjunctionChoice
-public import WeilConjectures.CategoryTheory.Adjunction.MateVCompIsIso
+public import WeilConjectures.WeilSheaf.Native.Projection.TwoSquareComposite
 public import WeilConjectures.WeilSheaf.Native.Projection.ProjectionPastingMonoidal
 
 /-! # The normalized compact-support projection and forget comparisons -/
@@ -140,10 +140,15 @@ theorem isIso_mateEquiv_projectionCompactificationForgetIso
   have h := isIso_mateEquiv_vComp_whiskerLeft_whiskerRight ai bi ag bg adj
     (CondensedRing.boundedConstructibleUpperShriekOfCompactificationAdjunction l cb)
     e (Iso.refl _) (projectionOpenForgetIso k₀ l (c).i).inv (projectionProperForgetIso k₀ l (c).g).inv
-  convert h using 1
-  congr 1
-  ext M
-  simp [projectionCompactificationForgetIso, e, TwoSquare.vComp,
-    TwoSquare.whiskerLeft, TwoSquare.whiskerRight]
+  -- identify the stacked square with the compactification comparison, by components
+  rw [TwoSquare.vComp_whiskerLeft_whiskerRight_eq e (Iso.refl _)
+    (TwoSquare.mk _ _ _ _ (projectionOpenForgetIso k₀ l (c).i).inv)
+    (TwoSquare.mk _ _ _ _ (projectionProperForgetIso k₀ l (c).g).inv)
+    (TwoSquare.mk _ _ _ _ (projectionCompactificationForgetIso k₀ l f).inv) (fun M ↦ by
+      simp only [e, NatIso.ofComponents_inv_app, Iso.refl_inv, Iso.refl_hom, NatTrans.id_app,
+        Functor.map_id, Category.id_comp, Category.comp_id, projectionCompactificationForgetIso,
+        Iso.trans_inv, NatTrans.comp_app, Functor.isoWhiskerLeft_inv,
+        Functor.isoWhiskerRight_inv, Functor.whiskerLeft_app, Functor.whiskerRight_app])] at h
+  exact h
 
 end AlgebraicGeometry.WeilComplex
