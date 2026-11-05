@@ -88,6 +88,8 @@ private lemma copowerTensorIso_hom {I : Type v} (M : Mod C R) [HasCoproduct (fun
     (e : (∐ fun _ : I ↦ regular R) ≅ (comap φ).obj (regular S)) :
     (copowerTensorIso φ M e).hom =
       Sigma.desc (fun i ↦ (λ_ M).inv ≫ ((Sigma.ι _ i ≫ e.hom) ▷ M)) := by
+  have : HasColimitsOfShape (Discrete I) (Mod C R) :=
+    (IsGrothendieckAbelian.hasColimits (Mod C R)).has_colimits_of_shape _
   apply Sigma.hom_ext
   intro i
   simp only [copowerTensorIso, Iso.trans_hom, Sigma.ι_comp_desc,
@@ -107,6 +109,8 @@ private lemma isIso_copowerAdjUnitDesc {I : Type v} (M : Mod C R) [HasCoproduct 
       (extendRestrictAdjunction φ).unit.app M ≫ (comap φ).map
         (qbar_scalarEndo (S := S) (η[R] ≫ (Sigma.ι _ i ≫ e.hom).hom)
           ((extendScalars φ).obj M))) := by
+  have : HasColimitsOfShape (Discrete I) (Mod C R) :=
+    (IsGrothendieckAbelian.hasColimits (Mod C R)).has_colimits_of_shape _
   have hu : (extendRestrictAdjunction φ).unit.app M = extendUnit φ M := by
     change extendUnit φ M ≫ (comap φ).map (𝟙 _) = _
     rw [CategoryTheory.Functor.map_id, Category.comp_id]

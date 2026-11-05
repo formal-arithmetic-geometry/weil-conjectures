@@ -85,6 +85,5 @@ theorem integralFibreSection_localLift
   have hh := hformula.symm.trans h
   simp only [Iso.inv_hom_id_apply] at hh
   convert hh using 1
-  rfl
 
 end AlgebraicGeometry.Etale
