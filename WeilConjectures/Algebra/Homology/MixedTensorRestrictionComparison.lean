@@ -73,6 +73,7 @@ private theorem coefficientIso_naturality₂ {R A : Type u} [CommRing R] [CommRi
   · intro n t
     refine TensorProduct.inductionOn t ?_ ?_
     · intro b e
+      change A at b
       change e ⊗ₜ[R] (b • a n) = e ⊗ₜ[R] a (b • n)
       rw [map_smul]
     · intro x y hx hy
