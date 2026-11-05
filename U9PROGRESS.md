@@ -141,3 +141,18 @@
 - Existing `ucheck-bump` invocation is queued; it reads the pushed branch after
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+# BZ554 in progress
+
+- Branch: `u9/BZ554`; starting commit: `8af5cb324`.
+- The user instructed continuation after the exact identity-cast statement proposal.
+  That patch is now applied to the single `epsilon.app` expression in the public
+  `ringedTopoiDerivedPullback` alpha formula. All other declaration statements and
+  all existing docstrings are unchanged.
+- Added the known split public-import/import-all localization imports for `Qh` reduction.
+- Baseline remote build was blocked by unowned `Presheaf.InternalHom` (BZ581), before
+  reaching the assigned module. No edits made to that dependency.
+- Next: validate remotely once the owner repair is available, continue downstream,
+  then write DONE only after a green build.
+- Notes and logs: `/home/ubuntu/u9/bz/FIXES-BZ554.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.

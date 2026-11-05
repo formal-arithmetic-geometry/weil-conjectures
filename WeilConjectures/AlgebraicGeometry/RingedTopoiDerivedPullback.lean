@@ -371,7 +371,8 @@ theorem ringedTopoiDerivedPullback
       ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ} (p : P ⟶ A)
           (hp : P.IsKFlatTensor) (hf : ∀ n : ℤ, (P.X n).IsFlat) [hq : QuasiIso p],
           (alpha p hp hf hq).hom = inv (LF.map (DerivedCategory.Q.map p)) ≫
-            epsilon.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P)) ∧
+            cast (by rfl)
+              (epsilon.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P))) ∧
         (∀ {A A' P P' : CochainComplex (SheafOfModules.{u}
       ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ}
           (p : P ⟶ A) (p' : P' ⟶ A') (a : P ⟶ P') (b : A ⟶ A')
