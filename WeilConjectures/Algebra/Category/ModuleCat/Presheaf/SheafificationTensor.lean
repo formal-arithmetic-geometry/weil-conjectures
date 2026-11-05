@@ -82,8 +82,9 @@ private noncomputable def tensorSheafificationUnits
     change (show ((S).obj F).val.obj V from ((η).app F).app V (F.map i f))
       ⊗ₜ[R.obj.obj V]
         (show ((S).obj G).val.obj V from ((η).app G).app V (G.map i g)) =
-      ((S).obj F).val.map i (((η).app F).app U f) ⊗ₜ[R.obj.obj V]
-        ((S).obj G).val.map i (((η).app G).app U g)
+      (show ((S).obj F).val.obj V from ((S).obj F).val.map i (((η).app F).app U f))
+        ⊗ₜ[R.obj.obj V]
+          (show ((S).obj G).val.obj V from ((S).obj G).val.map i (((η).app G).app U g))
     congr 1
     · exact naturality_apply ((η).app F) i f
     · exact naturality_apply ((η).app G) i g
