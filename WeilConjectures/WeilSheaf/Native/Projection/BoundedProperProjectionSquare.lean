@@ -38,7 +38,8 @@ local notation "gb" => geometricFiberHom (k₀ := k₀) g
 local notation "Λ" => Profinite.padicAlgClRingObj l
 
 local instance : IsProper (gb).left :=
-  Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange (P := @IsProper) g _ ‹_›
+  Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange (P := @IsProper) g
+    (comp_over g (Spec (CommRingCat.of k₀))) ‹_›
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The bounded proper forget square has the same components as the canonical realization

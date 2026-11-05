@@ -33,12 +33,10 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   (g : X ⟶ Y) [g.IsOver (Spec (CommRingCat.of k₀))] [IsProper g]
 
 local notation "gb" => geometricFiberHom (k₀ := k₀) g
-set_option quotPrecheck false in
 local notation "EX" => boundedConstructibleAdicEquivBoundedConstructible l k₀
-  (Over.mk (X ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure)
-set_option quotPrecheck false in
+  (Over.mk (Scheme.Hom.geometricFiberToAlgebraicClosure (X ↘ Spec (CommRingCat.of k₀))))
 local notation "EY" => boundedConstructibleAdicEquivBoundedConstructible l k₀
-  (Over.mk (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure)
+  (Over.mk (Scheme.Hom.geometricFiberToAlgebraicClosure (Y ↘ Spec (CommRingCat.of k₀))))
 
 /-- The proper geometric comparison chosen as the derived mate of the pullback comparison. -/
 def projectionBoundedAdicCondensedPushIso :
@@ -68,15 +66,13 @@ theorem isIso_mateEquiv_projectionProperForgetIso
   let δ := projectionBoundedAdicCondensedPushIso k₀ l g
   let aa := ((EX).toAdjunction.comp (adj'.comp (EY).symm.toAdjunction)).ofNatIsoLeft
     δ.isoCompInverse.symm
-  have : IsIso (mateEquiv adj aa (properProjectionAdicForgetIso k₀ l g).inv).natTrans := by
-    rw [NatTrans.isIso_iff_isIso_app]
-    intro M
-    exact isIso_mateEquiv_properProjectionAdicForgetIso k₀ l g adj aa M
-  have : IsIso (mateEquiv aa adj' δ.inv).natTrans := by
-    rw [NatTrans.isIso_iff_isIso_app]
-    intro M
-    exact Adjunction.isIso_mateEquiv_app_of_isIso aa adj' δ.symm
-      (EX).toAdjunction (EY).toAdjunction M
+  have : IsIso (mateEquiv adj aa (properProjectionAdicForgetIso k₀ l g).inv).natTrans :=
+    @NatIso.isIso_of_isIso_app _ _ _ _ _ _ _ (fun M ↦
+      isIso_mateEquiv_properProjectionAdicForgetIso k₀ l g adj aa M)
+  have : IsIso (mateEquiv aa adj' δ.inv).natTrans :=
+    @NatIso.isIso_of_isIso_app _ _ _ _ _ _ _ (fun M ↦
+      Adjunction.isIso_mateEquiv_app_of_isIso aa adj' δ.symm
+        (EX).toAdjunction (EY).toAdjunction M)
   exact isIso_mateEquiv_isoHComp adj aa adj'
     (properProjectionAdicForgetIso k₀ l g).symm δ.symm
 
