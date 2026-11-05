@@ -228,8 +228,7 @@ private theorem transport_rightKan
       (T.isUniversalOfIsRightKanExtension (α ≫ j.hom))
   exact IsTerminal.ofIso h (CostructuredArrow.isoMk (Iso.refl _) (by
     ext X
-    simp [Ψ, Functor.rightExtensionEquivalenceOfIso₁]
-    rfl))
+    simp [Ψ, Functor.rightExtensionEquivalenceOfIso₁]))
 
 private theorem derived_scalar_adjunction {C : Type u} [SmallCategory C]
     {J : GrothendieckTopology C} {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :
