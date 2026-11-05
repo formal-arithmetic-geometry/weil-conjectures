@@ -42,8 +42,9 @@ theorem comapUpperStarIso_inv_app_of_coefficient_comp (hc : a ≫ b = c)
   rw [upperStarUnitHom_map_hom_assoc]
   simp only [comapCoefficientMapCompIso, Iso.trans_inv, Iso.symm_inv,
     NatTrans.comp_app, Mod.comp_hom', Mod.comapCongr_inv_app_hom,
-    Mod.comapComp_hom_app_hom, Category.comp_id, Category.id_comp,
-    CategoryTheory.Functor.map_id]
+    Mod.comapComp_hom_app_hom, Functor.comp_obj, Mod.comap_obj_X]
+  erw [Category.id_comp, CategoryTheory.Functor.map_id, Category.id_comp,
+    Category.comp_id, Category.comp_id]
   rw [upperStarUnitHom_comapUpperStarIso_inv_app_hom_assoc,
     upperStarUnitHom_comapUpperStarIso_inv_app_hom,
     upperStarUnitHom_comapUpperStarIso_inv_app_hom]
