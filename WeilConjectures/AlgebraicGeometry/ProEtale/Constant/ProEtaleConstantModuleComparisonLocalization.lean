@@ -296,8 +296,8 @@ private theorem pullbackData_comparison
       proEtaleRingDerivedPullback k RV RW ck ⋙ proEtaleRingDerivedPullback h RW RZ ch)
     (D : PullbackData h k RV RW RZ ck ch c hc comparison) :
     comparison = Functor.mapDerivedCategoryNatIso D.a ≪≫
-      (Functor.mapDerivedCategoryCompIso (proEtaleRingModulePullback k RV RW ck)).symm
-        (proEtaleRingModulePullback h RW RZ ch) := by
+      (Functor.mapDerivedCategoryCompIso (proEtaleRingModulePullback k RV RW ck)
+        (proEtaleRingModulePullback h RW RZ ch)).symm := by
   apply UniqueData.unique_of_formula (proEtaleCanonicalPullbackComposition_existsUnique
     h k RV RW RZ ck ch c hc.symm) D
   intro b hb hD K hK hflat
@@ -311,8 +311,8 @@ private theorem constantComparison_eq
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V) (A : Type u) [CommRing A] :
     (proEtaleConstantRingPullbackComposition h k A).symm =
       Functor.mapDerivedCategoryNatIso (ordinaryComp h k A) ≪≫
-        (Functor.mapDerivedCategoryCompIso (proEtaleConstantRingPullback A k)).symm
-          (proEtaleConstantRingPullback A h) := by
+        (Functor.mapDerivedCategoryCompIso (proEtaleConstantRingPullback A k)
+          (proEtaleConstantRingPullback A h)).symm := by
   unfold ordinaryComp
   exact pullbackData_comparison h k _ _ _ _ _ _ _ _ (constantData h k A)
 
@@ -357,8 +357,8 @@ theorem proEtaleConstantRingPullbackComposition_eq_mapModuleComparison
     (proEtaleConstantRingPullbackComposition h k A).symm =
       Functor.mapDerivedCategoryNatIso
         (proEtaleConstantRingModulePullbackComposition h k A).choose ≪≫
-      (Functor.mapDerivedCategoryCompIso).symm
-        (proEtaleConstantRingPullback A k) (proEtaleConstantRingPullback A h) := by
+      (Functor.mapDerivedCategoryCompIso
+        (proEtaleConstantRingPullback A k) (proEtaleConstantRingPullback A h)).symm := by
   have hn {X Y : Scheme.{u}} (f : X ⟶ Y) :
       proEtaleConstantRingAdjunction A f = normalizedAdj f A :=
     normalizedAdj_eq f A _ (proEtaleRingModuleAdjunction_normalized f
