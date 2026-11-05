@@ -7,6 +7,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Strict.Local.StrictLocalInjectiveSourceComparison
 public import WeilConjectures.SixFunctors.BaseChange.Square
+public import Mathlib.Algebra.Homology.Localization
+
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # Target localization and derived-unit transport
 
