@@ -142,18 +142,28 @@
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ540 in progress
+# BZ543 complete
 
-- Branch: `u9/BZ540`; owned module:
-  `WeilConjectures.CategoryTheory.Constant.ConstantDerivedNormalizationUniversalSupplement`.
-- Applied known BZ301 sheafification-instance exclusion before `constantSeed`.
-  All declaration statements and existing proofs are unchanged.
-- Imported dependency owners' fixes: BZ581 `216c997cc` for Presheaf.InternalHom,
-  BZ549 `cbe4e4143` for Algebra.Homology.KFlat, plus coordinator baseline `8af5cb324`.
-- Fresh ucheck on 2026-11-06 reached KFlat, where the second owner repair was needed.
-  Build with both repairs is now submitted. Do not mark DONE before assigned module is green.
-- Next: finish assigned validation, then check direct importers
-  `WeilConjectures.AlgebraicGeometry.Etale.EtaleNormalizationArrowUniversal` and
-  `WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerScalarRestriction`.
-- Fix log: `/home/ubuntu/u9/bz/FIXES-BZ540.md`.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+- Branch: `u9/BZ543`; assigned module and six downstream modules passed together
+  through `ucheck-bump`: rc=0, failed=0, 4523 jobs.
+- Validated source commit: `a732a755a776bd6a4d43d64d629ef8638eb15798`.
+- Build tree: `poolb:43.166.81.121`; toolchain and Mathlib pins verified directly.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ543-final-full.log`.
+- Fix patterns and all seven module names: `/home/ubuntu/u9/bz/FIXES-BZ543.md`.
+- The four edited BZ543 modules add only local instance proofs and scoped
+  elaboration options. Existing statements and heartbeat limits are unchanged.
+- Imported tested prerequisite repairs and coordinator integration through `cfcb63ad77e`.
+- No local Lean/Lake, sorries in target sources, proof escapes, or heartbeat increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ543.DONE`.
+- This final commit changes only progress documentation after the successful build.
+
+# BZ557 in progress
+
+- Branch: `u9/BZ557`; starting commit: `8af5cb324`.
+- Added the public AffineScheme import to direct importer AffineBasisSectionsDerivedUnit.
+- Initial remote builds stopped in the shared Presheaf.InternalHom dependency.
+- On continuation, merged BZ558 prerequisite repair `f28760733369366ac823f0084f3c4090afa3a90d`.
+- Next: ucheck-bump on AffineBasisSectionsResolutionHomologyEpi, AffineBasisSectionsDerivedUnit,
+  and AffineOpenSectionsResolutionQuasiIso; fix any owned errors and write DONE when green.
+- Notes and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ557.md`.
+- No local Lean/Lake, statement changes, proof escapes, or heartbeat increases.
