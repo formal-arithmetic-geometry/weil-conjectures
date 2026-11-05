@@ -7,6 +7,7 @@ module
 public import WeilConjectures.WeilSheaf.SmoothPurityOpenDescentNormalization
 public import WeilConjectures.WeilSheaf.SmoothPurityDescentPasting
 public import WeilConjectures.WeilSheaf.SmoothPurityShriekWeilUniversality
+public import WeilConjectures.WeilSheaf.SmoothPurityShriekDescentComparisons
 
 /-! # The geometric carrier of descended compact support -/
 
@@ -62,6 +63,10 @@ lemma geometricFiberWeilRightDerivedLowerShriekIso_forget
     (rightDerivedLowerStarBaseChangeIso Λ (Scheme.Hom.isPullback_geometricFiberMap c.g rfl).flip)
     (geometricFiberWeilExtensionByZeroMapDerivedCategoryIso_forget Λ hi)
     (geometricFiberWeilRightDerivedLowerStarIso_forget Λ hg) K
+  rw [rightDerivedLowerShriekGeometricFiberIso_eq_compForgetIso,
+    geometricFiberWeilRightDerivedLowerShriekIso_eq_traceCompDescentIso,
+    weilRightDerivedLowerShriekCompForgetIso_eq_compForgetIso]
+  dsimp +instances only [Functor.comp_obj, Functor.comp_map, Iso.symm_hom, Iso.symm_inv] at he ⊢
   exact_mod_proofs he
 
 variable

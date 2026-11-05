@@ -41,4 +41,17 @@ lemma preimageIso_comparisonSquare_inv_app_hom (K : PA.FullSubcategory) :
         T'.map (cF.inv.app K) ≫ cT'.inv.app (FR.obj K) := by
   simp [preimageIso_comparisonSquare]
 
+/-- A trace transported through the reflected square has the ambient trace coordinates. -/
+lemma preimageIso_comparisonSquare_trace_coordinates
+    {P : PA.FullSubcategory} {N : PB.FullSubcategory} (ε : FR.obj P ⟶ N) :
+    cF'.inv.app (TR.obj P) ≫
+        ((preimageIso_comparisonSquare cF cF' cT cT' e).inv.app P).hom ≫
+        (TR'.map ε).hom =
+      F'.map (cT.hom.app P) ≫ e.inv.app P.obj ≫
+        T'.map (cF.inv.app P ≫ ε.hom) ≫ cT'.inv.app N := by
+  rw [preimageIso_comparisonSquare_inv_app_hom]
+  simp only [Category.assoc, Iso.inv_hom_id_app_assoc, Functor.map_comp]
+  rw [← cT'.inv.naturality_assoc]
+  rfl
+
 end CategoryTheory.ObjectProperty

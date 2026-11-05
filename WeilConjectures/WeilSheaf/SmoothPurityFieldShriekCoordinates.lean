@@ -72,9 +72,12 @@ lemma purityFieldCompactificationTrace_coordinates :
       (upperStar (Profinite.padicAlgClRingObj l) πY).leftDerivedFunctor.map
         ((boundedConstructibleLowerShriekOfCompactificationCompatibility l c).inv.app P ≫ ε.hom) ≫
       (purityFieldPullbackCompatibility l (πY := πY)).inv.app N := by
-  rw [purityFieldCompactificationExchange_inv_app_hom]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc, Functor.map_comp]
-  rw [← (purityFieldPullbackCompatibility l (πY := πY)).inv.naturality_assoc]
-  rfl
+  have he := ObjectProperty.preimageIso_comparisonSquare_trace_coordinates
+    (boundedConstructibleLowerShriekOfCompactificationCompatibility l c)
+    (boundedConstructibleLowerShriekOfCompactificationCompatibility l c')
+    (purityFieldPullbackCompatibility l (πY := πX))
+    (purityFieldPullbackCompatibility l (πY := πY))
+    (purityFieldCompactificationAmbientExchange l f f' c c' hi hg) ε
+  exact he
 
 end AlgebraicGeometry.ProEtale.CondensedRing
