@@ -119,6 +119,7 @@ private theorem cancellationPresheafIso_naturality (α : R ⟶ S)
     induction z using TensorProduct.inductionOn with
     | add x y hx hy => simp only [TensorProduct.tmul_add, map_add, hx, hy]
     | tmul s n =>
+      change S.obj.obj W at s
       change (cancellationApp α M' N' W).hom
           (f.val.app W m ⊗ₜ[S.obj.obj W]
             (s ⊗ₜ[R.obj.obj W,(α.hom.app W).hom] g.val.app W n)) =
