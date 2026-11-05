@@ -284,63 +284,6 @@ private theorem tower_coherence {X Y Z W : Scheme.{u}}
   exact ordinary_coherence j h k A (M.obj n)
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
-private theorem descend_coherence
-    {C D E B : Type*} [Category C] [Category D] [Category E] [Category B]
-    [Abelian C] [Abelian D] [Abelian E] [Abelian B]
-    [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
-    [HasDerivedCategory B]
-    (F : C ⥤ D) (G : D ⥤ E) (H : E ⥤ B)
-    (F02 : C ⥤ E) (F13 : D ⥤ B) (F03 F03' : C ⥤ B)
-    [F.Additive] [G.Additive] [H.Additive] [F02.Additive] [F13.Additive]
-    [F03.Additive] [F03'.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
-    [PreservesFiniteLimits H] [PreservesFiniteColimits H]
-    [PreservesFiniteLimits F02] [PreservesFiniteColimits F02]
-    [PreservesFiniteLimits F13] [PreservesFiniteColimits F13]
-    [PreservesFiniteLimits F03] [PreservesFiniteColimits F03]
-    [PreservesFiniteLimits F03'] [PreservesFiniteColimits F03']
-    (a02 : F02 ≅ F ⋙ G) (a13 : F13 ≅ G ⋙ H)
-    (a0 : F03 ≅ F02 ⋙ H) (a1 : F03' ≅ F ⋙ F13) (e : F03 ≅ F03')
-    (ho : a0 ≪≫ Functor.isoWhiskerRight a02 H =
-      e ≪≫ a1 ≪≫ Functor.isoWhiskerLeft F a13) :
-    (Functor.mapDerivedCategoryNatIso a0).hom ≫
-        (Functor.mapDerivedCategoryCompIso F02 H).hom ≫
-        Functor.whiskerRight (Functor.mapDerivedCategoryNatIso a02).hom
-          H.mapDerivedCategory ≫
-        Functor.whiskerRight (Functor.mapDerivedCategoryCompIso F G).hom
-          H.mapDerivedCategory =
-      (Functor.mapDerivedCategoryNatIso e).hom ≫
-        (Functor.mapDerivedCategoryNatIso a1).hom ≫
-        (Functor.mapDerivedCategoryCompIso F F13).hom ≫
-        Functor.whiskerLeft F.mapDerivedCategory (Functor.mapDerivedCategoryNatIso a13).hom ≫
-        Functor.whiskerLeft F.mapDerivedCategory (Functor.mapDerivedCategoryCompIso G H).hom := by
-  have hd := congrArg (fun t ↦ (Functor.mapDerivedCategoryNatIso t).hom) ho
-  simp only [Functor.mapDerivedCategoryNatIso_trans] at hd
-  have hR := Functor.mapDerivedCategoryNatIso_isoWhiskerRight a02 H
-  have hL := Functor.mapDerivedCategoryNatIso_isoWhiskerLeft F a13
-  have hC := Functor.mapDerivedCategoryCompIso_assoc F G H
-  rw [← Category.assoc (Functor.mapDerivedCategoryCompIso F02 H).hom,
-    ← hR, Category.assoc, ← hC]
-  have ht := congrArg (fun t ↦ t ≫
-    (Functor.mapDerivedCategoryCompIso F (G ⋙ H)).hom ≫
-    Functor.whiskerLeft F.mapDerivedCategory
-      (Functor.mapDerivedCategoryCompIso G H).hom) hd
-  calc
-    _ = ((Functor.mapDerivedCategoryNatIso e).hom ≫
-          (Functor.mapDerivedCategoryNatIso a1).hom ≫
-          (Functor.mapDerivedCategoryNatIso (Functor.isoWhiskerLeft F a13)).hom) ≫
-        (Functor.mapDerivedCategoryCompIso F (G ⋙ H)).hom ≫
-        Functor.whiskerLeft F.mapDerivedCategory
-          (Functor.mapDerivedCategoryCompIso G H).hom := by
-            simpa only [Category.assoc] using ht
-    _ = _ := by
-      simp only [Category.assoc]
-      rw [← Category.assoc (Functor.mapDerivedCategoryNatIso
-        (Functor.isoWhiskerLeft F a13)).hom, hL]
-      simp only [Category.assoc]
-
-attribute [-instance] CategoryTheory.catToReflQuiver in
 private theorem derived_transport
     {X Y : Scheme.{u}} {f g : X ⟶ Y} (e : f = g) (A : Type (u + 1)) [CommRing A] :
     (Functor.mapDerivedCategoryNatIso
@@ -348,38 +291,6 @@ private theorem derived_transport
       (eqToIso (congrArg (G A) e)).hom := by
   cases e
   exact Functor.mapDerivedCategoryNatIso_refl
-
-attribute [-instance] CategoryTheory.catToReflQuiver in
-private theorem gComp_coherence {X Y Z W : Scheme.{u}}
-    (j : W ⟶ Z) (h : Z ⟶ Y) (k : Y ⟶ X) (A : Type (u + 1)) [CommRing A]
-    (M : Derived A X) :
-    (gComp A j (h ≫ k)).hom.app M ≫
-        (G A j).map ((gComp A h k).hom.app M) =
-      (eqToIso (congrArg (G A) (Category.assoc j h k).symm)).hom.app M ≫
-        (gComp A (j ≫ h) k).hom.app M ≫
-        (gComp A j h).hom.app ((G A k).obj M) := by
-  let F₁ := towerPullback A k
-  let F₂ := towerPullback A h
-  let F₃ := towerPullback A j
-  let F₀₂ := towerPullback A (h ≫ k)
-  let F₁₃ := towerPullback A (j ≫ h)
-  let a₀₂ := towerGComp A h k
-  let a₁₃ := towerGComp A j h
-  let a₀ := towerGComp A j (h ≫ k)
-  let a₁ := towerGComp A (j ≫ h) k
-  let e := eqToIso (congrArg (towerPullback A) (Category.assoc j h k).symm)
-  have ho : a₀ ≪≫ Functor.isoWhiskerRight a₀₂ F₃ =
-      e ≪≫ a₁ ≪≫ Functor.isoWhiskerLeft F₁ a₁₃ := tower_coherence j h k A
-  have hh := descend_coherence F₁ F₂ F₃ F₀₂ F₁₃
-    (towerPullback A (j ≫ h ≫ k)) (towerPullback A ((j ≫ h) ≫ k))
-    a₀₂ a₁₃ a₀ a₁ e ho
-  have hm := NatTrans.congr_app hh M
-  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app] at hm
-  have he := congrArg (fun t ↦ t.app M) (derived_transport (Category.assoc j h k).symm A)
-  change (Functor.mapDerivedCategoryNatIso e).hom.app M = _ at he
-  rw [he] at hm
-  simpa only [gComp, G, F₁, F₂, F₃, F₀₂, F₁₃, a₀₂, a₁₃, a₀, a₁, e,
-    Iso.trans_hom, NatTrans.comp_app, Functor.map_comp, Category.assoc] using hm
 
 private lemma conjugate_triangle_assoc
     {C₀ C₁ C₂ C₃ : Type*}
@@ -424,51 +335,12 @@ private noncomputable def gCompEq {X Y Z : Scheme.{u}}
   eqToIso (congrArg (G A) w.symm) ≪≫ gComp A f g
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
-private theorem gCompEq_coherence {W X Y Z : Scheme.{u}}
-    (A : Type (u + 1)) [CommRing A] (a : W ⟶ X) (b : X ⟶ Y) (c : Y ⟶ Z)
-    (ab : W ⟶ Y) (bc : X ⟶ Z) (abc : W ⟶ Z)
-    (hab : a ≫ b = ab) (hbc : b ≫ c = bc)
-    (hl : ab ≫ c = abc) (hr : a ≫ bc = abc) :
-    gCompEq A a bc abc hr ≪≫ Functor.isoWhiskerRight (gCompEq A b c bc hbc) (G A a) =
-      gCompEq A ab c abc hl ≪≫ Functor.isoWhiskerLeft (G A c) (gCompEq A a b ab hab) := by
-  subst ab bc
-  cases hr
-  apply Iso.ext
-  apply NatTrans.ext
-  funext M
-  simpa only [gCompEq, eqToIso_refl, Iso.refl_trans, Iso.trans_hom, NatTrans.comp_app,
-    Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
-    Functor.whiskerRight_app, Functor.whiskerLeft_app, Iso.refl_hom,
-    NatTrans.id_app, Category.id_comp] using gComp_coherence a b c A M
-
-attribute [-instance] CategoryTheory.catToReflQuiver in
 private theorem rCompEq_conjugate {X Y Z : Scheme.{u}}
     (A : Type (u + 1)) [CommRing A] (f : X ⟶ Y) (g : Y ⟶ Z)
     (h : X ⟶ Z) (w : f ≫ g = h) :
     rCompEq A f g h w =
       conjugateIsoEquiv ((adj A g).comp (adj A f)) (adj A h) (gCompEq A f g h w) := by
   exact rCompEq_spec A f g h w
-
-attribute [-instance] CategoryTheory.catToReflQuiver in
-private theorem rCompEq_coherence (A : Type (u + 1)) [CommRing A]
-    {W X Y Z : Scheme.{u}} (a : W ⟶ X) (b : X ⟶ Y) (c : Y ⟶ Z)
-    (ab : W ⟶ Y) (bc : X ⟶ Z) (abc : W ⟶ Z)
-    (hab : a ≫ b = ab) (hbc : b ≫ c = bc)
-    (hl : ab ≫ c = abc) (hr : a ≫ bc = abc) (M : Derived A W) :
-    (R A c).map ((rCompEq A a b ab hab).hom.app M) ≫
-        (rCompEq A ab c abc hl).hom.app M =
-      (rCompEq A b c bc hbc).hom.app ((R A a).obj M) ≫
-        (rCompEq A a bc abc hr).hom.app M := by
-  have hg := congrArg Iso.hom (gCompEq_coherence A a b c ab bc abc hab hbc hl hr)
-  simp only [Iso.trans_hom, Functor.isoWhiskerRight_hom,
-    Functor.isoWhiskerLeft_hom] at hg
-  have hh := conjugate_triangle_assoc (adj A c) (adj A b) (adj A a)
-    (adj A bc) (adj A ab) (adj A abc)
-    (gCompEq A b c bc hbc) (gCompEq A a b ab hab)
-    (gCompEq A ab c abc hl) (gCompEq A a bc abc hr) hg.symm
-  have hm := NatTrans.congr_app hh M
-  simpa only [rCompEq_conjugate, conjugateIsoEquiv_apply_hom, NatTrans.comp_app,
-    Functor.whiskerLeft_app, Functor.whiskerRight_app] using hm.symm
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
 private theorem site_congr_transport
@@ -599,61 +471,6 @@ private theorem tower_left_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
   simpa only [Category.comp_id, Category.assoc] using ordinary_left_unit f A (M.obj n)
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
-private theorem descend_left_unit
-    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
-    [HasDerivedCategory C] [HasDerivedCategory D]
-    (F H : C ⥤ D) (I : D ⥤ D)
-    [F.Additive] [H.Additive] [I.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    [PreservesFiniteLimits H] [PreservesFiniteColimits H]
-    [PreservesFiniteLimits I] [PreservesFiniteColimits I]
-    (q : F ≅ H) (k : H ≅ F ⋙ I) (e : I ≅ 𝟭 D)
-    (ho : q ≪≫ k ≪≫ Functor.isoWhiskerLeft F e ≪≫
-      Functor.rightUnitor F = Iso.refl F) :
-    (Functor.mapDerivedCategoryNatIso q).hom ≫
-        (Functor.mapDerivedCategoryNatIso k).hom ≫
-        (Functor.mapDerivedCategoryCompIso F I).hom ≫
-        Functor.whiskerLeft F.mapDerivedCategory
-          ((Functor.mapDerivedCategoryNatIso e).hom ≫
-            (Functor.mapDerivedCategoryIdIso D).hom) = 𝟙 _ := by
-  have hd := congrArg (fun t ↦ (Functor.mapDerivedCategoryNatIso t).hom) ho
-  simp only [Functor.mapDerivedCategoryNatIso_trans,
-    Functor.mapDerivedCategoryNatIso_refl] at hd
-  have hr : (Functor.mapDerivedCategoryNatIso (Functor.rightUnitor F)).hom = 𝟙 _ :=
-    Functor.mapDerivedCategoryNatIso_refl
-  rw [hr, Category.comp_id] at hd
-  rw [Functor.whiskerLeft_comp]
-  rw [← Category.assoc (Functor.mapDerivedCategoryCompIso F I).hom,
-    ← Functor.mapDerivedCategoryNatIso_isoWhiskerLeft F e]
-  simp only [Category.assoc]
-  rw [Functor.mapDerivedCategoryCompIso_comp_id]
-  erw [Category.comp_id]
-  simpa only [Category.assoc] using hd
-
-attribute [-instance] CategoryTheory.catToReflQuiver in
-private theorem gCompEq_left_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (A : Type (u + 1)) [CommRing A] :
-    gCompEq A (𝟙 X) f f (Category.id_comp f) ≪≫
-        Functor.isoWhiskerLeft (G A f) (gId A X) ≪≫
-        Functor.rightUnitor (G A f) = Iso.refl _ := by
-  have hh := descend_left_unit (towerPullback A f) (towerPullback A (𝟙 X ≫ f))
-    (towerPullback A (𝟙 X))
-    (eqToIso (congrArg (towerPullback A) (Category.id_comp f).symm))
-    (towerGComp A (𝟙 X) f) (towerGId A X) (tower_left_unit f A)
-  rw [derived_transport (Category.id_comp f).symm A] at hh
-  apply Iso.ext
-  apply NatTrans.ext
-  funext M
-  have hm := NatTrans.congr_app hh M
-  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
-    Functor.whiskerLeft_app, Functor.rightUnitor_hom_app, Iso.refl_hom, NatTrans.id_app]
-  erw [Category.comp_id]
-  simpa only [gCompEq, gComp, gId, towerGId, moduleGId, moduleAdj, G,
-    Iso.trans_hom, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
-    Functor.rightUnitor_hom_app, NatTrans.comp_app, Iso.refl_hom, NatTrans.id_app,
-    Functor.map_comp, Category.assoc, Category.comp_id] using hm
-
-attribute [-instance] CategoryTheory.catToReflQuiver in
 private theorem conjugate_unit {C D : Type*} [Category C] [Category D]
     {F : C ⥤ D} {R : D ⥤ C} {I RI : D ⥤ D}
     (a : F ⊣ R) (b : I ⊣ RI) (e : I ≅ 𝟭 D) (k : F ≅ F ⋙ I)
@@ -674,21 +491,6 @@ private theorem conjugate_unit {C D : Type*} [Category C] [Category D]
     conjugateIsoEquiv_isoWhiskerLeft b Adjunction.id a,
     conjugateIsoEquiv_iso_symm a (a.comp Adjunction.id),
     conjugateIsoEquiv_rightUnitor, Iso.symm_symm_eq]
-
-attribute [-instance] CategoryTheory.catToReflQuiver in
-private theorem rCompEq_left_unit (A : Type (u + 1)) [CommRing A]
-    {X Y : Scheme.{u}} (f : X ⟶ Y) (M : Derived A X) :
-    (rCompEq A (𝟙 X) f f (Category.id_comp f)).hom.app M =
-      (R A f).map ((rId A X).hom.app M) := by
-  have h := conjugate_unit (adj A f) (adj A (𝟙 X)) (gId A X)
-    (gCompEq A (𝟙 X) f f (Category.id_comp f)) (gCompEq_left_unit f A)
-  rw [← rCompEq_conjugate] at h
-  have hm := NatTrans.congr_app (congrArg Iso.hom h) M
-  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
-    Functor.whiskerRight_app, Functor.leftUnitor_hom_app,
-    conjugateIsoEquiv_iso_symm] at hm
-  erw [Category.comp_id] at hm
-  exact hm
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
 private theorem site_right_unit
@@ -779,60 +581,6 @@ private theorem tower_right_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
       (moduleGComp A f (𝟙 Y)).hom.app (M.obj n)) ≫
       (modulePullback A f).map ((moduleGId A Y).hom.app (M.obj n) ≫ 𝟙 _) = 𝟙 _
   simpa only [Category.comp_id, Category.assoc] using ordinary_right_unit f A (M.obj n)
-
-attribute [-instance] CategoryTheory.catToReflQuiver in
-private theorem descend_right_unit
-    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
-    [HasDerivedCategory C] [HasDerivedCategory D]
-    (F H : C ⥤ D) (I : C ⥤ C)
-    [F.Additive] [H.Additive] [I.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    [PreservesFiniteLimits H] [PreservesFiniteColimits H]
-    [PreservesFiniteLimits I] [PreservesFiniteColimits I]
-    (q : F ≅ H) (k : H ≅ I ⋙ F) (e : I ≅ 𝟭 C)
-    (ho : q ≪≫ k ≪≫ Functor.isoWhiskerRight e F ≪≫
-      Functor.leftUnitor F = Iso.refl F) :
-    (Functor.mapDerivedCategoryNatIso q).hom ≫
-        (Functor.mapDerivedCategoryNatIso k).hom ≫
-        (Functor.mapDerivedCategoryCompIso I F).hom ≫
-        Functor.whiskerRight ((Functor.mapDerivedCategoryNatIso e).hom ≫
-          (Functor.mapDerivedCategoryIdIso C).hom) F.mapDerivedCategory = 𝟙 _ := by
-  have hd := congrArg (fun t ↦ (Functor.mapDerivedCategoryNatIso t).hom) ho
-  simp only [Functor.mapDerivedCategoryNatIso_trans,
-    Functor.mapDerivedCategoryNatIso_refl] at hd
-  have hr : (Functor.mapDerivedCategoryNatIso (Functor.leftUnitor F)).hom = 𝟙 _ :=
-    Functor.mapDerivedCategoryNatIso_refl
-  rw [hr, Category.comp_id] at hd
-  rw [Functor.whiskerRight_comp]
-  rw [← Category.assoc (Functor.mapDerivedCategoryCompIso I F).hom,
-    ← Functor.mapDerivedCategoryNatIso_isoWhiskerRight e F]
-  simp only [Category.assoc]
-  rw [Functor.mapDerivedCategoryCompIso_id_comp]
-  erw [Category.comp_id]
-  simpa only [Category.assoc] using hd
-
-attribute [-instance] CategoryTheory.catToReflQuiver in
-private theorem gCompEq_right_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (A : Type (u + 1)) [CommRing A] :
-    gCompEq A f (𝟙 Y) f (Category.comp_id f) ≪≫
-        Functor.isoWhiskerRight (gId A Y) (G A f) ≪≫
-        Functor.leftUnitor (G A f) = Iso.refl _ := by
-  have hh := descend_right_unit (towerPullback A f) (towerPullback A (f ≫ 𝟙 Y))
-    (towerPullback A (𝟙 Y))
-    (eqToIso (congrArg (towerPullback A) (Category.comp_id f).symm))
-    (towerGComp A f (𝟙 Y)) (towerGId A Y) (tower_right_unit f A)
-  rw [derived_transport (Category.comp_id f).symm A] at hh
-  apply Iso.ext
-  apply NatTrans.ext
-  funext M
-  have hm := NatTrans.congr_app hh M
-  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
-    Functor.whiskerRight_app, Functor.leftUnitor_hom_app, Iso.refl_hom, NatTrans.id_app]
-  erw [Category.comp_id]
-  simpa only [gCompEq, gComp, gId, towerGId, moduleGId, moduleAdj, G,
-    Iso.trans_hom, Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
-    NatTrans.comp_app, Functor.map_comp, Category.assoc, NatTrans.id_app,
-    Functor.comp_obj, Functor.id_obj] using hm
 
 attribute [local irreducible] G R rId rComp adj exchange towers_hasDerivedCategory
 
@@ -1198,13 +946,6 @@ private theorem system_mateIdentityLaw {C : Scheme.{u} → Type*}
   exact system_exchange_identity S a w M
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
-private theorem pullbackSystem (A : Type (u + 1)) [CommRing A] :
-    PullbackCoherentSystem (Derived A) (G A) (R A) (adj A) (gCompEq A) (gId A) where
-  assoc := gCompEq_coherence A
-  left_unit f := gCompEq_left_unit f A
-  right_unit f := gCompEq_right_unit f A
-
-attribute [-instance] CategoryTheory.catToReflQuiver in
 private theorem normalizeIsoSquare {D : Type*} [Category D]
     {X Y Z W : D} (e : X ≅ Y) (f : Z ≅ W) (h : X = Z) :
     e.symm ≪≫ eqToIso h ≪≫ f =
@@ -1246,46 +987,6 @@ private theorem system_rComp_eq {X Y Z : Scheme.{u}}
   (rCompEq_conjugate A f g h w).symm
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
-private theorem concrete_mateIdentityLaw (A : Type (u + 1)) [CommRing A] :
-    mateIdentityLaw (G A) (R A) (rId A) (@exchange.{u} A _) := by
-  let I : ∀ X, R A (𝟙 X) ≅ 𝟭 (Derived A X) := systemRId (adj A) (gId A)
-  let E : ExchangeFamily (Derived A) (G A) (R A) :=
-    fun {_ _ _ _} a f' f b w ↦ systemExchange (adj A) (gCompEq A) a f' f b w
-  have hI : I = rId A := by
-    funext X
-    exact system_rId_eq A X
-  have hE : @E = @exchange.{u} A _ := by
-    funext W X Y Z a f' f b w
-    exact system_exchange_eq A a f' f b w
-  exact (congrArg₂ (mateIdentityLaw (G A) (R A)) hI hE).mp
-    (system_mateIdentityLaw (pullbackSystem A))
-
-attribute [-instance] CategoryTheory.catToReflQuiver in
-private theorem concrete_matePastingLaw (A : Type (u + 1)) [CommRing A] :
-    matePastingLaw (G A) (R A) (@rCompEq.{u} A _) (@exchange.{u} A _) := by
-  let K : RightCompositionFamily (Derived A) (R A) :=
-    fun {_ _ _} f g h w ↦ systemRComp (adj A) (gCompEq A) f g h w
-  let E : ExchangeFamily (Derived A) (G A) (R A) :=
-    fun {_ _ _ _} a f' f b w ↦ systemExchange (adj A) (gCompEq A) a f' f b w
-  have hK : @K = @rCompEq.{u} A _ := by
-    funext X Y Z f g h w
-    exact system_rComp_eq A f g h w
-  have hE : @E = @exchange.{u} A _ := by
-    funext W X Y Z a f' f b w
-    exact system_exchange_eq A a f' f b w
-  exact (congrArg₂ (matePastingLaw (G A) (R A)) hK hE).mp
-    (system_matePastingLaw (pullbackSystem A))
-
-attribute [-instance] CategoryTheory.catToReflQuiver in
-/-- The canonical square mates respect direct-image composition.
-Source: Stacks, Tag 07A7
-(blueprint: lem-cbc-strict-tower-direct-image-coherence).
-Proof: the full compositor and exchange family equalities transport formal mate pasting. -/
-theorem strictTowerMatePasting :
-    matePastingLaw (G B) (R B) (@rCompEq.{u} B _) (@exchange.{u} B _) :=
-  concrete_matePastingLaw B
-
-attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- The four canonical direct-image and square-mate normalization equations.
 Source: Stacks, Tags 0D6D and 07A7
 (blueprint: lem-cbc-strict-tower-direct-image-coherence). -/
@@ -1304,34 +1005,5 @@ def DirectImageCoherence : Prop :=
           (rCompEq B a bc abc hr).hom.app M) ∧
     mateIdentityLaw (G B) (R B) (rId B) (@exchange.{u} B _) ∧
     matePastingLaw (G B) (R B) (@rCompEq.{u} B _) (@exchange.{u} B _)
-
-attribute [-instance] CategoryTheory.catToReflQuiver in
-private theorem packedDirectImageCoherence_proof : DirectImageCoherence B := by
-  exact ⟨@rCompEq_left_unit.{u} B _, @rCompEq_coherence.{u} B _,
-    @concrete_mateIdentityLaw.{u} B _, @concrete_matePastingLaw.{u} B _⟩
-
-attribute [-instance] CategoryTheory.catToReflQuiver in
-/-- The canonical direct-image compositors are unital and associative, and the
-canonical proper-square mates preserve identity maps and pasting.
-Source: Stacks, Tags 0D6D and 07A7; the canonical composition and mate normalizations
-(blueprint: lem-cbc-strict-tower-direct-image-coherence).
-
-Proof: first check the module direct-image comparisons on sections. Their components
-are restriction along the canonical pullback composition and identity isomorphisms.
-Pullback pasting gives their triangle and pentagon equations. The uniqueness in
-moduleRComp_existsUnique and moduleRId_existsUnique identifies these section maps
-with the published choices. Conjugate through the module adjunctions to get the
-same equations for module pullback. Termwise whiskering to towers and complexes
-and exact localization preserve them, giving the equations for gComp and gId.
-Conjugate again through the derived adjunctions: conjugation respects composition,
-associators and unitors, giving the first two clauses of DirectImageCoherence for rComp and rId.
-For the last two equations expand squareG. The pullback triangle equation identifies
-the identity square with the two identity comparisons. The pentagon equation
-identifies the square of a pasted rectangle with the two pasted square comparisons.
-Take proper-adjunction mates. Mate pasting and the two conjugation equations for
-composite adjunctions give exactly the displayed identity and pasting equations.
-All these equalities hold before evaluation, on every derived strict tower. -/
-theorem strictTowerDirectImageCoherence : DirectImageCoherence B := by
-  exact packedDirectImageCoherence_proof B
 
 end AlgebraicGeometry.ProEtale.StrictTower

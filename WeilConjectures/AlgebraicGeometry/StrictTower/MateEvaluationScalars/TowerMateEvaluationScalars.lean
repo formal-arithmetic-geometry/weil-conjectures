@@ -159,25 +159,6 @@ private theorem exactNat_unique (t : F ⟶ G) (δ : F.mapDerivedCategory ⟶ G.m
 
 variable [HasDerivedCategory (ℕᵒᵖ ⥤ C)] [HasDerivedCategory (ℕᵒᵖ ⥤ D)]
 
-private theorem evalD_trans (t : F ⟶ G) (n : ℕ) :
-    Functor.whiskerRight
-        (exactNat ((Functor.whiskeringRight ℕᵒᵖ C D).map t))
-        (E D n).mapDerivedCategory ≫ (evalD G n).hom =
-      (evalD F n).hom ≫ Functor.whiskerLeft (E C n).mapDerivedCategory
-        (exactNat t) := by
-  have h₁ := exactNat_whiskerRight
-    ((Functor.whiskeringRight ℕᵒᵖ C D).map t) (E D n)
-  have h₂ := exactNat_whiskerLeft (E C n) t
-  have he : Functor.whiskerRight ((Functor.whiskeringRight ℕᵒᵖ C D).map t) (E D n) =
-      Functor.whiskerLeft (E C n) t := rfl
-  rw [he] at h₁
-  dsimp only [evalD, Iso.trans_hom, Iso.symm_hom]
-  rw [← cancel_epi (Functor.mapDerivedCategoryCompIso (W F) (E D n)).hom]
-  simp only [Category.assoc]
-  rw [← reassoc_of% h₁, Iso.hom_inv_id_assoc]
-  rw [Iso.hom_inv_id_assoc]
-  exact h₂
-
 private def exactSquare
     {A A' : Type*} [Category A] [Category A'] [Abelian A] [Abelian A']
     [HasDerivedCategory A] [HasDerivedCategory A']
@@ -191,41 +172,6 @@ private def exactSquare
       G₁.mapDerivedCategory ⋙ G₂.mapDerivedCategory :=
   (Functor.mapDerivedCategoryCompIso F₁ F₂).inv ≫ exactNat t ≫
     (Functor.mapDerivedCategoryCompIso G₁ G₂).hom
-
-private theorem evalD_square_trans
-    {A A' : Type*} [Category A] [Category A'] [Abelian A] [Abelian A']
-    [HasDerivedCategory A] [HasDerivedCategory A']
-    [HasDerivedCategory (ℕᵒᵖ ⥤ A)] [HasDerivedCategory (ℕᵒᵖ ⥤ A')]
-    (F₁ : C ⥤ A) (F₂ : A ⥤ D) (G₁ : C ⥤ A') (G₂ : A' ⥤ D)
-    [F₁.Additive] [PreservesFiniteLimits F₁] [PreservesFiniteColimits F₁]
-    [F₂.Additive] [PreservesFiniteLimits F₂] [PreservesFiniteColimits F₂]
-    [G₁.Additive] [PreservesFiniteLimits G₁] [PreservesFiniteColimits G₁]
-    [G₂.Additive] [PreservesFiniteLimits G₂] [PreservesFiniteColimits G₂]
-    (t : F₁ ⋙ F₂ ⟶ G₁ ⋙ G₂) (M : DerivedCategory (ℕᵒᵖ ⥤ C)) (n : ℕ) :
-    (E D n).mapDerivedCategory.map
-        ((exactSquare (W F₁) (W F₂) (W G₁) (W G₂)
-          (Functor.termwiseCompositeTransformation ℕᵒᵖ C A A' D F₁ F₂ G₁ G₂ t)).app M) ≫
-      (evalD G₂ n).hom.app ((W G₁).mapDerivedCategory.obj M) ≫
-      G₂.mapDerivedCategory.map ((evalD G₁ n).hom.app M) =
-    (evalD F₂ n).hom.app ((W F₁).mapDerivedCategory.obj M) ≫
-      F₂.mapDerivedCategory.map ((evalD F₁ n).hom.app M) ≫
-      (exactSquare F₁ F₂ G₁ G₂ t).app ((E C n).mapDerivedCategory.obj M) := by
-  have ht : Functor.termwiseCompositeTransformation ℕᵒᵖ C A A' D F₁ F₂ G₁ G₂ t =
-      (Functor.whiskeringRight ℕᵒᵖ C D).map t := by
-    ext L m
-    simp [Functor.termwiseCompositeTransformation, Functor.whiskeringRightObjCompIso]
-  rw [ht]
-  have hF := congrArg (fun z ↦ z.app M) (evalD_comp F₁ F₂ n)
-  have hG := congrArg (fun z ↦ z.app M) (evalD_comp G₁ G₂ n)
-  have he := congrArg (fun z ↦ z.app M) (evalD_trans t n)
-  dsimp only [exactSquare, NatTrans.comp_app] at *
-  simp only [Functor.whiskerLeft_app, Functor.whiskerRight_app] at hF hG he
-  rw [← cancel_epi ((E D n).mapDerivedCategory.map
-    ((Functor.mapDerivedCategoryCompIso (W F₁) (W F₂)).hom.app M))]
-  simp only [Functor.map_comp, Category.assoc]
-  rw [← Functor.map_comp_assoc, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id,
-    Category.id_comp, hG, reassoc_of% he, reassoc_of% hF]
-  simp only [Iso.hom_inv_id_app_assoc]
 
 omit [HasDerivedCategory (ℕᵒᵖ ⥤ C)] [HasDerivedCategory (ℕᵒᵖ ⥤ D)] in
 private theorem exactSquare_unique
@@ -440,64 +386,6 @@ def evaluationFactors (X : Scheme.{u}) (n : ℕ) :=
     (inferInstance : HasDerivedCategory (Modules B X))
     ((evaluation ℕᵒᵖ (Modules B X)).obj (op n)) inferInstance inferInstance inferInstance
 
-set_option backward.isDefEq.respectTransparency false in
-/-- Evaluation preserves the same alpha, including the specified clopen section projector.
-Source: Stacks 03DI, 03DJ, 07A7 (blueprint: lem-cbc-tower-mate-evaluation-scalars).
-Proof: evaluation commutes termwise with inverse image and extension by zero.
-The inverse cartesian beta is characterized by the pulled-back open unit. The clopen
-projector theorem identifies pi with the first-factor section projection and with
-unit followed by the inverse of openToR. Evaluation retains this projector and the
-unit-preserving compositors. Descend these exact identities and compose the factors. -/
-theorem evaluation_alpha {V W S T : Scheme.{u}} (k : V ⟶ W) (f : V ⟶ S)
-    (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
-    [QuasiCompact k] [QuasiCompact i] [IsProper f] [IsProper p]
-    (h : k ≫ p = f ≫ i) (n : ℕ) (M : Derived B S) :
-    (ev B W n).map ((alpha B k f p i h).app M) ≫
-        (evalJ B k n).hom.app ((G B f).obj M) ≫
-        (j B k).map ((evalG B f n).hom.app M) =
-      (evalG B p n).hom.app ((J B i).obj M) ≫
-        (g B p).map ((evalJ B i n).hom.app M) ≫
-        (singleDerivedAlpha B k f p i h).app ((ev B S n).obj M) := by
-  have hα := exactSquare_unique (towerJ B i) (towerPullback B p)
-    (towerPullback B f) (towerJ B k) (towerAlpha B k f p i h) (alpha B k f p i h)
-    (alpha_eq_localized_singleAlpha B k f p i h)
-  have he := evalD_square_trans (moduleJ B i) (modulePullback B p)
-    (modulePullback B f) (moduleJ B k) (singleAlpha B k f p i h) M n
-  rw [hα, evalJ_eq, evalJ_eq, evalG_eq, evalG_eq]
-  exact he
-
-/-- Evaluation carries the proper mate to the single-level mate of the same projector.
-Source: Stacks 07A7, 0D6E (blueprint: lem-cbc-tower-mate-evaluation-scalars).
-Proof: apply evaluation to the three factors in gamma_formula. Replace the evaluated
-unit and counit by their single-level versions using evaluation_transpose and the
-normalized direct-image comparison. Replace alpha using evaluation_alpha. Functoriality
-preserves their ordered composite, giving exactly the single-level mate formula. -/
-theorem evaluation_gamma {V W S T : Scheme.{u}} (k : V ⟶ W) (f : V ⟶ S)
-    (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
-    [QuasiCompact k] [QuasiCompact i] [IsProper f] [IsProper p]
-    (h : k ≫ p = f ≫ i) (n : ℕ) (M : Derived B V) :
-    (ev B T n).map ((gamma B k f p i h).app M) ≫
-        (evalR B p n).app ((J B k).obj M) ≫
-        (r B p).map ((evalJ B k n).hom.app M) =
-      (evalJ B i n).hom.app ((R B f).obj M) ≫
-        (j B i).map ((evalR B f n).app M) ≫
-        (singleDerivedGamma B k f p i h).app ((ev B V n).obj M) := by
-  apply exchangeMate_cube (adj B f) (adj B p) (dAdj B f) (dAdj B p)
-    (ev B S n) (ev B V n) (ev B T n) (ev B W n)
-    (evalG B f n) (evalJ B i n) (evalJ B k n) (evalG B p n)
-    (alpha B k f p i h) (singleDerivedAlpha B k f p i h) (fun X ↦ ?_) M
-  apply (cancel_epi ((g B p).map ((evalJ B i n).hom.app X))).1
-  simp only [← Functor.map_comp_assoc, Iso.hom_inv_id_app,
-    CategoryTheory.Functor.map_id, Category.id_comp]
-  apply (cancel_mono ((evalJ B k n).hom.app ((G B f).obj X) ≫
-    (j B k).map ((evalG B f n).hom.app X))).1
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc,
-    ← Functor.map_comp, Iso.inv_hom_id_app]
-  erw [(j B k).map_id, Category.comp_id]
-  apply (cancel_epi ((evalG B p n).hom.app ((J B i).obj X))).1
-  simp only [← Category.assoc, Iso.hom_inv_id_app, Category.id_comp]
-  simpa only [Category.assoc] using evaluation_alpha B k f p i h n X
-
 variable {B} {Λ : Type (u + 1)} [CommRing Λ]
 
 /-- Apply the existing constant-sheaf functor to the coefficient homomorphism.
@@ -672,75 +560,6 @@ def scalarJ (φ : B →+* Λ) {U X : Scheme.{u}} (f : U ⟶ X) [IsOpenImmersion 
   (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
     Functor.mapDerivedCategoryNatIso (scalarJModule φ f) ≪≫
     Functor.mapDerivedCategoryCompIso _ _
-
-set_option backward.isDefEq.respectTransparency false in
-/-- The scalar comparisons preserve the specified ordinary open unit and counit.
-These equations normalize the identity on extension-presheaf generators.
-Source: Stacks 03DI, 03DJ (blueprint: lem-cbc-tower-mate-evaluation-scalars).
-Proof: the slice scalar theorem identifies each generator with the same section in
-the same summand, and sends the open unit and counit to themselves. Transport
-through weakly-etale localization and uniqueness of the unit-preserving adjoint.
-These are exactly the two equations of RingedOpenScalar.Equations. -/
-theorem scalar_open_normalized (φ : B →+* Λ) {U X : Scheme.{u}} (f : U ⟶ X)
-    [IsOpenImmersion f] :
-    ((∀ N : Modules Λ U,
-      (moduleRes φ U).map ((moduleJAdj Λ f).unit.app N) ≫
-        (scalarGModule φ f).hom.app ((moduleJ Λ f).obj N) ≫
-        (modulePullback B f).map ((scalarJModule φ f).hom.app N) =
-      (moduleJAdj B f).unit.app ((moduleRes φ U).obj N)) ∧
-    (∀ Q : Modules Λ X,
-      (scalarJModule φ f).hom.app ((modulePullback Λ f).obj Q) ≫
-        (moduleJ B f).map ((scalarGModule φ f).hom.app Q) ≫
-        (moduleJAdj B f).counit.app ((moduleRes φ X).obj Q) =
-      (moduleRes φ X).map ((moduleJAdj Λ f).counit.app Q))) ∧
-    ((∀ N : DerivedCategory (Modules Λ U),
-      (Res φ U).map ((dJAdj Λ f).unit.app N) ≫
-        (scalarG φ f).hom.app ((j Λ f).obj N) ≫
-        (g B f).map ((scalarJ φ f).hom.app N) =
-      (dJAdj B f).unit.app ((Res φ U).obj N)) ∧
-    (∀ Q : DerivedCategory (Modules Λ X),
-      (scalarJ φ f).hom.app ((g Λ f).obj Q) ≫
-        (j B f).map ((scalarG φ f).hom.app Q) ≫
-        (dJAdj B f).counit.app ((Res φ X).obj Q) =
-      (Res φ X).map ((dJAdj Λ f).counit.app Q))) := by
-  have hm : ((mateEquiv (moduleJAdj Λ f) (moduleJAdj B f)).symm
-      (TwoSquare.mk _ _ _ _ (scalarGModule φ f).hom)).natTrans =
-      (scalarJModule φ f).inv := rfl
-  have he := SheafOfModules.RingedOpenScalar.equations_of_inverseMate
-    (scalarJModule φ f) (scalarGModule φ f).symm
-    (moduleJAdj Λ f) (moduleJAdj B f) hm
-  refine ⟨he, ?_⟩
-  have hu (K : DerivedCategory (Modules Λ U)) := exact_mate
-    (moduleJAdj Λ f) (moduleJAdj B f) (scalarGModule φ f) (scalarJModule φ f).symm
-    (dJAdj Λ f) (dJAdj B f)
-    (by intro L; simpa only [exactAdj, dJAdj] using exactAdj_unit (moduleJAdj Λ f) L)
-    (by intro L; simpa only [exactAdj, dJAdj] using exactAdj_unit (moduleJAdj B f) L)
-    (by
-      intro L
-      have hh := unit_mateEquiv_symm (moduleJAdj Λ f) (moduleJAdj B f)
-        (TwoSquare.mk _ _ _ _ (scalarGModule φ f).hom) L
-      change _ = _ ≫ (modulePullback B f).map
-        (((mateEquiv (moduleJAdj Λ f) (moduleJAdj B f)).symm
-          (TwoSquare.mk _ _ _ _ (scalarGModule φ f).hom)).natTrans.app L) at hh
-      rw [hm] at hh
-      exact hh.symm) K
-  apply SheafOfModules.RingedOpenScalar.equations_of_inverseMate
-    (scalarJ φ f) (scalarG φ f).symm (dJAdj Λ f) (dJAdj B f)
-  ext K
-  apply ((dJAdj B f).homEquiv _ _).injective
-  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
-  have hu' : (dJAdj B f).unit.app ((Res φ U).obj K) ≫
-      (g B f).map ((scalarJ φ f).inv.app K) =
-    (Res φ U).map ((dJAdj Λ f).unit.app K) ≫
-      (scalarG φ f).hom.app ((j Λ f).obj K) := by
-    have hG : scalarG φ f =
-        Functor.mapDerivedCategorySquareIso (scalarGModule φ f) := by rfl
-    rw [hG]
-    simpa only [scalarJ, Functor.mapDerivedCategorySquareIso, Iso.trans_inv,
-      Iso.trans_hom, Iso.symm_inv, Iso.symm_hom,
-      Functor.mapDerivedCategoryNatIso_symm, Category.assoc] using hu K
-  exact (unit_mateEquiv_symm (dJAdj Λ f) (dJAdj B f)
-    (TwoSquare.mk _ _ _ _ (scalarG φ f).hom) K).symm.trans hu'.symm
 
 section ScalarCalculations
 
