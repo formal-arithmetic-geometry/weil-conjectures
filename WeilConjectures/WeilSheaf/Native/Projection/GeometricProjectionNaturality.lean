@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.PoincareDuality.Abstract
-public import Mathlib.CategoryTheory.Currying
+public import Mathlib.CategoryTheory.Functor.Currying
 
 /-! # Projection morphisms as uncurried natural transformations -/
 
