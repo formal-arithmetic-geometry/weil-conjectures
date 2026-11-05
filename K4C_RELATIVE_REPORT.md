@@ -1,8 +1,21 @@
+# Archived relative proof experiment
+
+Superseded by Houyi PR #2147 under LEAD01:55. The independent build
+`K4c-20261106T010205.log` was canceled after verifying our exact tree, commit and process
+group. It is not a green relative build. The corrected draft and K4's adopted support are
+preserved on branch `u9/K4c-archive-relative`; this active branch retains only the original
+kernel-repair and adopted point payload. The selected replacement is reviewed in
+`K4C_PR2147_REVIEW.md`; K4/C9 own its integration.
+
 # Relative exceptional base change
 
-Status: proof drafted; remote validation is running at snapshot `cacdd5c338` in
+Status: corrected source is `51cc8c994`; remote validation is still running the earlier
+snapshot `cacdd5c338` in
 `/home/ubuntu/u9/logs/K4c-20261106T010205.log`. The generic adjunction helper has passed.
-The concrete chain and transitive axiom audit have not yet completed.
+K4 independently checked the identical concrete `RelativeUnitDual` and `PointDualizingIso`
+modules in 13 seconds each (log `K4-20261106T012105.log`). Its one statement-inference
+diagnostic in `RelativeUnitIso` is repaired by explicit source/target morphism arguments.
+The corrected proper criterion, final relative assembly, and axiom audit remain pending.
 
 The target is
 `AlgebraicGeometry.ProEtale.CondensedRing.isIso_smoothUnitBaseChange_geometricFiberLowerShriekBaseChangeRelative`.
@@ -51,3 +64,18 @@ Six new files under `WeilConjectures/WeilSheaf` contain the proof and audit:
 `SmoothPurityRelativeDualityIso`, `SmoothPurityRelativeUnitDual`,
 `SmoothPurityPointDualizingIso`, `SmoothPurityRelativeUnitIso`,
 `SmoothPurityUnitBaseChangeRelative`, and `SmoothPurityK4cRelativeAudit`.
+
+
+## Integration boundary
+
+`SmoothPurityRelativeOrientation.purity_nonempty_relative_shriekRightAdjoint_adicConstant_iso`
+provides the actual isomorphism in the Weil category as a `Nonempty` for any explicitly supplied
+right adjoint. Its companion
+`purity_exists_forget_relative_shriekRightAdjoint_adicConstant_iso` gives the Frobenius equation
+in the original geometric-forgetful form. On K4's branch, the original orientation leaf can
+specialize this theorem with `derivedLowerShriekUpperShriekAdjunction f`.
+
+The conditional adapter has its own name,
+`purity_nonempty_relativeRightAdjoint_unit_of_baseChange`, so it can coexist with K4's original
+conditional orientation module. The source uses the same native trace and Tate encoding;
+it introduces no proper-projection-formula or native tensor-swap hypothesis.
