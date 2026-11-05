@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.WeilSheaf.Native.Projection.OpenProjectionIso
+public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationCoherence
 public import WeilConjectures.WeilSheaf.Native.Projection.OpenProjectionForgetFormal
 public import WeilConjectures.WeilSheaf.Native.Projection.UncurriedComparison
 public import WeilConjectures.PoincareDuality.ProjectionFormula
