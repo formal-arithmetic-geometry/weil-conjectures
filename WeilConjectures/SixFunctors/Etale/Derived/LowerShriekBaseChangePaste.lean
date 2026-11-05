@@ -148,7 +148,9 @@ theorem rightDerivedLowerShriekBaseChangeMap_paste_horiz
         (leftDerivedUpperStarIsoMapDerivedCategory _ (w' ≫ v')).inv.app K := by
     rw [← cancel_epi ((leftDerivedUpperStarIsoMapDerivedCategory _ (w' ≫ v')).hom.app K ≫
       (unboundedEtaleUpperStarCompIso Λ w' v').hom.app K), ← hc']
-    simp [← Functor.map_comp_assoc]
+    simp only [Functor.comp_obj, NatTrans.naturality_assoc, Category.assoc,
+      ← Functor.map_comp_assoc, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id,
+      Category.id_comp, Iso.hom_inv_id_app_assoc]
     rw [reassoc_of% hc']
     simp
   simp only [Functor.map_comp, Category.assoc]
