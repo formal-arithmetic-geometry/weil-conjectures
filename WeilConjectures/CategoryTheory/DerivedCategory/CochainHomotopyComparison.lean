@@ -4,6 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+public import Mathlib.Algebra.Homology.Localization
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction

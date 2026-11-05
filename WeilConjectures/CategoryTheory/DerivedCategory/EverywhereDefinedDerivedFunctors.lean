@@ -98,8 +98,7 @@ private theorem rightDerived_defined_pointwiseKan
           rw [hz j, CostructuredArrow.w f]
         rw [hleg i a ha]
         dsimp [leg, a]
-        simp only [Functor.map_comp, Category.assoc, Category.comp_id]
-        rfl }
+        simp only [Functor.map_comp, Category.assoc, Category.comp_id] }
   have hden (t : W.Under ⊤ X) :
       ι.app (CostructuredArrow.mk (Localization.isoOfHom Q W t.hom t.prop).inv) =
         p.app t := by
