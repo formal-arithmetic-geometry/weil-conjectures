@@ -55,6 +55,7 @@ private noncomputable def regularSectionsIso
     (Mod.freeForgetAdjunction R).preadditiveCoyonedaObjIso (𝟙_ _) ≪≫
     Functor.isoWhiskerLeft (Mod.forget R) e
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Sections of internal Hom are the additive group of module morphisms, naturally
 in the second module.  No freeness or boundedness is required.
 Source: Stacks Project, Tag 08JJ, tensor-Hom adjunction and evaluation.
