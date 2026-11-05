@@ -229,3 +229,13 @@
 - Completion marker: `/home/ubuntu/u9/state/BZ740.DONE`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 - This final commit changes only progress documentation; Lean source matches the green build.
+
+# BZ824 in progress
+
+- Branch: u9/BZ824; starting commit 95c8987257f.
+- The user instructed continuation after the explicit upstream-restoration proposal.
+- Restoring the deleted predicate, transport, automorphism, and existence prerequisites
+  from Git history, with canonical Q/Qh transports for the pinned Mathlib API.
+- The target theorem and its direct caller remain present; no declaration deletion.
+- Baseline ucheck-bump is queued remotely. No local Lean/Lake execution.
+- Investigation and exact historical errors: /home/ubuntu/u9/bz/FIXES-BZ824.md.
