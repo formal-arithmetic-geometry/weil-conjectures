@@ -525,12 +525,14 @@ lemma leftDerivedTensorComparison_comp :
   erw [c]
   have cF := leftDerivedTensorComparison_app_app_comp_tensorHom F X₁ X₂
   have nG := G.leftDerivedFunctorCounit.naturality
+    (X := (F.mapHomotopyCategory _).obj (X₁ ⊗ X₂))
+    (Y := (F.mapHomotopyCategory _).obj X₁ ⊗ (F.mapHomotopyCategory _).obj X₂)
     (((mapHomotopyCategoryδNatTrans (.up ℤ) F).app X₁).app X₂)
   have ne := (F.leftDerivedFunctorCompIso G).hom.naturality (μ Qh X₁ X₂)
-  dsimp at nG ne
+  dsimp only [Functor.comp_obj, Functor.comp_map] at nG ne
   rw [← Functor.map_comp_assoc, ← Functor.map_comp_assoc, Category.assoc, cF,
-    Functor.map_comp, Functor.map_comp, Category.assoc, Category.assoc]
-  erw [reassoc_of% nG, ← reassoc_of% ne, leftDerivedFunctorCompIso_hom_app_comp_counit_assoc,
+    Functor.map_comp, Functor.map_comp, Category.assoc, Category.assoc, reassoc_of% nG,
+    ← reassoc_of% ne, leftDerivedFunctorCompIso_hom_app_comp_counit_assoc,
     mapHomotopyCategoryδNatTrans_comp, Qh.map_comp]
 
 /-- The componentwise form of `CategoryTheory.Functor.leftDerivedTensorComparison_comp`: the
