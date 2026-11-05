@@ -16,6 +16,8 @@ import WeilConjectures.Tactic.ExactModProofs
 
 @[expose] public noncomputable section
 set_option Elab.async false
+set_option trace.profiler true
+set_option trace.profiler.threshold 5000
 attribute [local instance 0] ModuleCat.isGrothendieckAbelian_of_commRing
 
 universe u
@@ -34,12 +36,6 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)]
   {Z Y : Scheme.{u}} [Z.Over (Spec (CommRingCat.of k₀))]
   [Y.Over (Spec (CommRingCat.of k₀))]
-  [LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀))]
-  [QuasiCompact (Z ↘ Spec (CommRingCat.of k₀))]
-  [IsSeparated (Z ↘ Spec (CommRingCat.of k₀))]
-  [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
-  [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
-  [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
   (g : Z ⟶ Y) [g.IsOver (Spec (CommRingCat.of k₀))]
 
 /-- Express the native total tensor square using the model maps required for localization. -/
