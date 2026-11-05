@@ -109,7 +109,7 @@ private theorem derivedTripleNatSingle
           (DerivedCategory.singleFunctor B 0).map (e.hom.app X) := by
   dsimp only
   change ((Functor.mapDerivedCategoryCompIso G K).hom.app _ ≫
-      (Functor.mapDerivedCategoryCompIso F (G ⋙ K)).inv.app _ ≫
+      (Functor.mapDerivedCategoryCompIso F (G ⋙ K)).hom.app _ ≫
         (Functor.mapDerivedCategoryNatIso e).hom.app _) ≫ _ = _
   simp only [Category.assoc]
   rw [derivedNatSingle (F ⋙ G ⋙ K) M e X]

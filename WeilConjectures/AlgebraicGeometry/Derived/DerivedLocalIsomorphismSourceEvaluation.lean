@@ -75,7 +75,7 @@ private theorem derived_path_coherence (K : DerivedCategory C₀) :
         (mapDerivedCategoryTriangleIso δ).hom.app K =
     Sv.mapDerivedCategory.map ((mapDerivedCategoryTriangleIso β).hom.app K) ≫
       (mapDerivedCategorySquareIso α).hom.app (Rw.mapDerivedCategory.obj K) ≫
-      L.mapDerivedCategory.map ((mapDerivedCategoryCompIso Rw Sw).inv.app K ≫
+      L.mapDerivedCategory.map ((mapDerivedCategoryCompIso Rw Sw).hom.app K ≫
         (mapDerivedCategoryNatIso ew).hom.app K) := by
   have hh : ev ≪≫ δ = isoWhiskerRight β Sv ≪≫
       isoWhiskerLeft Rw α ≪≫ isoWhiskerRight ew L := by
@@ -194,7 +194,7 @@ noncomputable def etaleDerivedSliceRestrictionIso (V : X.Etale) :
     derivedSliceRestriction X.smallEtaleTopology B V ⋙
       (etaleDerivedSliceEquivalence X B V).functor ≅
         localIsomorphismRestriction X B V :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso _ _) ≪≫
     Functor.mapDerivedCategoryNatIso (etaleSliceRestrictionIso X B V)
 
 noncomputable def etaleSourceToSliceIso
@@ -231,7 +231,7 @@ noncomputable def proetDerivedSliceRestrictionIso (U : X.ProEt) :
     derivedSliceRestriction (ProEt.topology X) B U ⋙
       (proetSliceEquivalence X B U).functor.mapDerivedCategory ≅
         (ProEtale.upperStar (ModuleCat.{u + 1} B) U.hom).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso _ _) ≪≫
     Functor.mapDerivedCategoryNatIso (proetSliceRestrictionIso X B U)
 
 set_option backward.isDefEq.respectTransparency false in
@@ -276,9 +276,9 @@ noncomputable def etaleDerivedSliceMapIso {V W : X.Etale} (f : V ⟶ W) :
       (etaleDerivedSliceEquivalence X B V).functor ≅
         (etaleDerivedSliceEquivalence X B W).functor ⋙
           (Etale.upperStar (ModuleCat.{u + 1} B) f.left).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso _ _) ≪≫
     Functor.mapDerivedCategoryNatIso (etaleSliceMapIso X B f) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
 
 set_option backward.isDefEq.respectTransparency false in
 noncomputable def etaleLocalizationCompIso {V W : X.Etale} (f : V ⟶ W) :
