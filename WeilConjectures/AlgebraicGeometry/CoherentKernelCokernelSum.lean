@@ -49,9 +49,7 @@ private theorem finiteType_of_iso
   refine ⟨⟨q', ?_⟩⟩
   constructor
   intro i
-  have := hq.isFiniteType i
-  dsimp [q']
-  infer_instance
+  exact ⟨(hq.isFiniteType i).finite⟩
 
 private theorem finiteType_free
     {C : Type v} [Category.{w} C] [HasBinaryProducts C]
