@@ -25,6 +25,9 @@ universe u
 open CategoryTheory Opposite
 namespace AlgebraicGeometry.Scheme
 
+local instance {R S : Type*} [Ring R] [Ring S] (f : R →+* S) (M : ModuleCat S) :
+    Module S ((ModuleCat.restrictScalars f).obj M) := M.isModule
+
 set_option backward.isDefEq.respectTransparency false in
 private theorem basicOpen_le_surjective_stalk {X : Scheme.{u}} {I : X.Modules}
     (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι]
