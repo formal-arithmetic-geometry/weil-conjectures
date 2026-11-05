@@ -360,7 +360,10 @@ theorem internal_oplax_resolving_components {X Y : Scheme.{u}} (f : X ⟶ Y) :
       (CondensedRing.upperStar Λ f).leftDerivedFunctorCounit.app
         ((HomotopyCategory.quotient _ (.up ℤ)).obj
           (𝟙_ (CochainComplex (internalModules Λ Y) ℤ))) ≫
-        DerivedCategory.Q.map (actualInternalTotalUnit Λ f) := by
+        DerivedCategory.Qh.map
+          (((CondensedRing.upperStar Λ f).mapHomotopyCategoryFactors (.up ℤ)).hom.app
+              (𝟙_ (CochainComplex (internalModules Λ Y) ℤ)) ≫
+            (HomotopyCategory.quotient _ (.up ℤ)).map (actualInternalTotalUnit Λ f)) := by
   constructor
   · have hδ : internalDelta Λ f =
         (CondensedRing.upperStar Λ f).leftDerivedTensorComparison := by
