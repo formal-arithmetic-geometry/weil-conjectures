@@ -173,4 +173,47 @@ noncomputable def derivedLowerStarNativeConstructibleTensorIso :
   ((objectProperty k₀ l Y).fullyFaithfulι.whiskeringRight _).preimageIso
     (rightDerivedLowerStarNativeDerivedTensorIso g)
 
+set_option maxHeartbeats 1000000 in
+-- the derived categories of the three models are slow to elaborate
+/-- The components of the inverse of
+`AlgebraicGeometry.WeilComplex.geometricFiberBoundedConstructibleFunctorLowerStarIso` on the
+ambient derived categories: the derived base change map of the condensed realization, up to the
+identifications `D(forget ⋙ Φ) ≅ D(forget) ⋙ D(Φ)`. -/
+lemma ι_map_geometricFiberBoundedConstructibleFunctorLowerStarIso_inv_app
+    (M : WeilComplex k₀ l Z) :
+    (ObjectProperty.ι _).map ((geometricFiberBoundedConstructibleFunctorLowerStarIso g).inv.app M) =
+      (Functor.mapDerivedCategoryCompIso (IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l Y))
+          (adicSheafEquivCondensedMod l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor).inv.app
+          ((ProEtaleWeilSheaf.lowerStar k₀ l g).rightDerivedFunctor.obj M.obj) ≫
+        (mateEquiv (ProEtaleWeilSheaf.derivedUpperStarLowerStarAdjunction k₀ l g)
+          (CondensedRing.derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj l)
+            (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))
+          (ProEtaleWeilSheaf.derivedCondensedRealizationUpperStarIso k₀ l g).hom).natTrans.app
+          M.obj ≫
+        (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l)
+            (Scheme.Hom.geometricFiberMap g
+              (comp_over g (Spec (CommRingCat.of k₀))))).rightDerivedFunctor.map
+          ((Functor.mapDerivedCategoryCompIso
+            (IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l Z))
+            (adicSheafEquivCondensedMod l
+              (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor).hom.app M.obj) := by
+  simp only [geometricFiberBoundedConstructibleFunctorLowerStarIso,
+    Functor.FullyFaithful.preimageIso_inv, Functor.FullyFaithful.whiskeringRight_preimage_app,
+    ObjectProperty.ι_map, ObjectProperty.homMk_hom, Iso.trans_inv, NatTrans.comp_app,
+    Iso.symm_inv, Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_inv,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
+    Functor.associator_inv_app, geometricFiberBoundedConstructibleFunctorCompιIso,
+    Functor.isoWhiskerLeft_hom, Iso.symm_hom, ObjectProperty.liftFullSubcategoryCompιIso,
+    Iso.refl_hom, Iso.refl_inv, NatTrans.id_app,
+    CondensedRing.boundedConstructibleLowerStarCompatibility, ObjectProperty.liftCompιIso,
+    asIso_hom, Category.id_comp, Category.comp_id, CategoryTheory.Functor.map_id]
+  dsimp only [Functor.comp_obj, ObjectProperty.ι_obj, ObjectProperty.lift_obj_obj,
+    geometricFiberBoundedConstructibleFunctor, WeilComplex.forget, derivedLowerStar,
+    ProEtaleWeilSheaf.derivedCondensedRealization, adicSheafDerivedEquivCondensedMod_functor,
+    CondensedRing.boundedConstructibleLowerStar, geometricFiberHom_left,
+    liftFullSubcategory_obj_obj_weilComplex]
+  simp only [Category.id_comp, Category.comp_id, CategoryTheory.Functor.map_id]
+  erw [Category.id_comp]
+  simp only [Category.assoc]
+
 end AlgebraicGeometry.WeilComplex
