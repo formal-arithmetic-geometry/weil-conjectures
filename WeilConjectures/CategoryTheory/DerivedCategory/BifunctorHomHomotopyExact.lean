@@ -312,12 +312,8 @@ private theorem oppositeCoconeBoundary_f {X Y : CochainComplex C ℤ}
     shiftFunctorAdd'_inv_app_f', shiftFunctorZero_hom_app_f]
   erw [unop_id, HomologicalComplex.id_f, Category.id_comp,
     unop_id, HomologicalComplex.id_f]
-  simp only [Category.assoc, Category.id_comp]
-  simp only [HomologicalComplex.XIsoOfEq_hom_comp_XIsoOfEq_hom,
-    HomologicalComplex.XIsoOfEq_rfl, Iso.refl_hom, Category.comp_id]
-  dsimp only [mappingCocone]
-  simp only [XIsoOfEq_shift]
-  simp only [HomologicalComplex.XIsoOfEq_hom_comp_XIsoOfEq_hom,
+  simp only [Category.assoc, Category.id_comp, mappingCocone, XIsoOfEq_shift,
+    HomologicalComplex.XIsoOfEq_hom_comp_XIsoOfEq_hom,
     HomologicalComplex.XIsoOfEq_rfl, Iso.refl_hom, Category.comp_id]
 
 private theorem coneTriangle_boundary_f {K L : CochainComplex A ℤ}
@@ -468,6 +464,10 @@ private theorem homotopyCone_distinguished {K L : CochainComplex A ℤ} (f : K �
       distTriang (DerivedCategory C)ᵒᵖ := by
   obtain ⟨e⟩ := ordinaryConeTriangle H I f
   let t := bifunctorHomMapLeft (H := H) (Y := I) f
+  have : NatTrans.CommShift (Functor.isoWhiskerLeft (ordinaryFunctor H I)
+      (NatIso.op (DerivedCategory.quotientCompQhIso C))).hom ℤ := by
+    dsimp only [Functor.isoWhiskerLeft_hom, NatIso.op_hom]
+    infer_instance
   let e' : (bifunctorHomHomotopyFunctor H I).mapTriangle.obj (mappingCone.triangleh f) ≅
       DerivedCategory.Q.op.mapTriangle.obj (oppositeCoconeTriangle t) :=
     (Functor.mapTriangleCompIso (HomotopyCategory.quotient A (ComplexShape.up ℤ))
