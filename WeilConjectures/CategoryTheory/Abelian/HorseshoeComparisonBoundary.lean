@@ -74,11 +74,9 @@ private theorem comparison_eq_unit
       Functor.map_preimage, Iso.trans_hom, Category.assoc]
     dsimp only [DerivedCategory.Plus.Q, Functor.comp_map, ObjectProperty.ι_map,
       HomotopyCategory.Plus.quotient, ObjectProperty.lift, g]
-    erw [← DerivedCategory.quotientCompQhIso_inv_naturality,
-      ← DerivedCategory.Q.map_comp_assoc]
-    simp only [ObjectProperty.homMk_hom, InjectiveResolution.Hom.ι'_comp_hom',
-      Functor.map_id, Category.id_comp, asIso_hom, Iso.symm_hom, Iso.app_hom]
-    rfl
+    simp only [ObjectProperty.homMk_hom, asIso_hom]
+    rw [← DerivedCategory.Q.map_comp]
+    simp [InjectiveResolution.Hom.ι'_comp_hom']
   have hu : inv (v.rightDerivedFunctorPlusUnith.app
         ((HomotopyCategory.Plus.quotient A).obj (resolutionPlus R))) ≫
       (DerivedCategory.Plus.Qh (C := B)).map ((HomotopyCategory.Plus.quotient B).map vg) =
@@ -102,7 +100,9 @@ private theorem comparison_eq_unit
       (v.rightDerivedFunctorPlus.map (resolutionAugmentationIso R).hom) ≫
       DerivedCategory.Plus.ι.map (inv (v.rightDerivedFunctorPlusUnith.app
         ((HomotopyCategory.Plus.quotient A).obj (resolutionPlus R)))) ≫
-      (DerivedCategory.quotientCompQhIso B).hom.app _ ≫
+      DerivedCategory.Plus.ι.map
+        ((DerivedCategory.Plus.quotientCompQhIso B).hom.app
+          (v.mapCochainComplexPlus.obj (resolutionPlus R))) ≫
       DerivedCategory.Q.map (R.cocomplex.mapExtendIso ComplexShape.embeddingUpNat v).hom ≫
       DerivedCategory.Q.map (HomologicalComplex.extendMap
         ((v.mapHomologicalComplex _).map φ.hom) ComplexShape.embeddingUpNat) = _
