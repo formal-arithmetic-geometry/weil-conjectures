@@ -94,8 +94,8 @@ private lemma comp_inv_Q
       G.mapDerivedCategoryFactors.hom.app
         ((F.mapHomologicalComplex (.up ℤ)).obj K) ≫
       (F ⋙ G).mapDerivedCategoryFactors.inv.app K := by
-  rw [← cancel_epi ((mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Q.obj K))]
-  simp only [Iso.hom_inv_id_app]
+  rw [← cancel_epi ((mapDerivedCategoryCompIso F G).inv.app (DerivedCategory.Q.obj K))]
+  simp only [Iso.inv_hom_id_app]
   rw [reassoc_of% (comp_fac F G K)]
   simp
 
