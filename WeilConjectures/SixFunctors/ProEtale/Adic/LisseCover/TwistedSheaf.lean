@@ -301,7 +301,7 @@ theorem isSheaf_twistedSectionsPresheaf {S : Type w} (c : ↥(pullback f f) → 
   rintro U R ⟨hsurj, _⟩
   obtain ⟨ι, Ui, π, rfl⟩ := R.exists_eq_ofArrows
   refine isSheafFor_ofArrows_twistedSectionsPresheaf f c _ _ fun u ↦ ?_
-  obtain ⟨_, _, ⟨⟨⟨i⟩⟩⟩, x, hx⟩ := hsurj u
+  obtain ⟨_, _, ⟨⟨⟨⟨i⟩⟩⟩⟩, x, hx⟩ := hsurj u
   exact ⟨i, x, hx⟩
 
 section Restrict
