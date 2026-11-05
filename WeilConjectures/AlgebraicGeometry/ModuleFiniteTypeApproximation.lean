@@ -9,6 +9,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import WeilConjectures.AlgebraicGeometry.Coherent
 import WeilConjectures.AlgebraicGeometry.ModuleFiniteTypeAffineEnlargement
+import Mathlib.Util.CountHeartbeats
 
 /-! # Finite-type approximation of a global quasi-coherent module
 
@@ -46,9 +47,14 @@ private theorem isIso_over_of_le (X : Scheme.{u}) {E H : X.Modules} (j : E ⟶ H
   change IsIso ((SheafOfModules.overMap X.ringCatSheaf (homOfLE h)).map (j.over W))
   infer_instance
 
+#count_heartbeats in
 set_option backward.isDefEq.respectTransparency false in
 private theorem finiteType_of_top (X : Scheme.{u}) (M : X.Modules)
     [(M.over (⊤ : X.Opens)).IsFiniteType] : M.IsFiniteType := by
+  have (V : X.Opens) : HasWeakSheafify ((Opens.grothendieckTopology X).over V)
+      AddCommGrpCat.{u} := inferInstance
+  have (V : X.Opens) : ((Opens.grothendieckTopology X).over V).WEqualsLocallyBijective
+      AddCommGrpCat.{u} := inferInstance
   obtain ⟨D, hD⟩ := IsFiniteType.exists_localGeneratorsData (M.over (⊤ : X.Opens))
   let q : M.LocalGeneratorsData :=
     { I := (_ : Unit) × D.I
@@ -63,11 +69,10 @@ private theorem finiteType_of_top (X : Scheme.{u}) (M : X.Modules)
           (by ext : 2; exact X.ringCatSheaf.1.map_id _)
           (by ext : 2; exact X.ringCatSheaf.1.map_id _)
         exact ((D.generators i.2).map e.inverse (.refl _)).ofEpi
-          (e.fullyFaithfulFunctor.preimageIso
-            (by exact e.counitIso.app ((M.over (⊤ : X.Opens)).over (D.X i.2)))).hom }
-  have : q.IsFiniteType :=
+          (e.unitIso.app (M.over (D.X i.2).left)).inv }
+  have hq : q.IsFiniteType :=
     { isFiniteType := fun i ↦ ⟨(hD.isFiniteType i.2).finite⟩ }
-  exact { exists_localGeneratorsData := ⟨q, inferInstance⟩ }
+  exact { exists_localGeneratorsData := ⟨q, hq⟩ }
 
 /-- A global quasi-coherent module which is finite type on a quasi-compact open
 contains a finite-type quasi-coherent submodule equal to it on that open.
