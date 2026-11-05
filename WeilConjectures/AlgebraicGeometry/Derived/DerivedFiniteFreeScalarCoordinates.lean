@@ -219,7 +219,7 @@ def scalarBasisCoordinate
 
 local instance (M : SheafOfModules.{u} (ringSheaf R)) (U : Cᵒᵖ) :
     SMul ((unit (ringSheaf R)).val.obj U) (M.val.obj U) :=
-  inferInstanceAs (SMul (R.obj.obj U) (M.val.obj U))
+  inferInstanceAs (SMul ((ringSheaf R).obj.obj U) (M.val.obj U))
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
