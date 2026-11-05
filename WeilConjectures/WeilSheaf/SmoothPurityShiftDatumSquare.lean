@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Mathlib.CategoryTheory.Shift.CommShift
+public import Mathlib.Algebra.Group.Int.Defs
 
 /-! # Shifting a compatible coefficient and geometric datum square -/
 
