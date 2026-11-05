@@ -105,6 +105,47 @@ def projectionCompactIso : nativeCompactProjectionLeft k₀ l f ≅ nativeCompac
     (projectionBoundedPullComp k₀ l f)
   exact e
 
+/-- The geometric pull compositor forgets to the derived compositor of the compactification
+(the library compatibility, with the morphism over the geometric point pinned). -/
+lemma projectionGeometricPullComp_hom_app_ι_map (N : WeilComplex k₀ l Y) :
+    (boundedConstructible _).ι.map
+        ((projectionGeometricPullComp k₀ l f).hom.app ((compactProjectionForget k₀ l Y).obj N)) =
+      (CondensedRing.leftDerivedUpperStarOverCompactificationIso (f := fb) Λ cb).inv.app
+        ((compactProjectionForget k₀ l Y).obj N).obj :=
+  CondensedRing.ι_map_eqToIso_trans_upperStarComp_inv_app_compactification (f := fb) l cb
+    ((compactProjectionForget k₀ l Y).obj N)
+
+/-- The geometric exceptional projection morphism of the compactification is the paste of the
+bounded proper and open projection morphisms along the geometric pull compositor. -/
+lemma homMk_exceptionalProjectionMorphismOfCompactification_eq_paste (M : WeilComplex k₀ l X)
+    (N : WeilComplex k₀ l Y) :
+    ObjectProperty.homMk
+        (X := (CondensedRing.boundedConstructibleLowerShriekOfCompactification l cb).obj
+          ((compactProjectionForget k₀ l X).obj M) ⊗ (compactProjectionForget k₀ l Y).obj N)
+        (Y := (CondensedRing.boundedConstructibleLowerShriekOfCompactification l cb).obj
+          ((compactProjectionForget k₀ l X).obj M ⊗
+            (CondensedRing.boundedConstructibleUpperStar Λ l fb).obj
+              ((compactProjectionForget k₀ l Y).obj N)))
+        (CondensedRing.exceptionalProjectionMorphismOfCompactification Λ cb
+          ((compactProjectionForget k₀ l X).obj M).obj
+          ((compactProjectionForget k₀ l Y).obj N).obj) =
+      (CondensedRing.boundedConstructibleUpperStarLowerStarAdjunction l (cb).overG).projectionMorphism
+          ((CondensedRing.boundedConstructibleOpenImmersionLowerShriek Λ l (cb).overI).obj
+            ((compactProjectionForget k₀ l X).obj M)) ((compactProjectionForget k₀ l Y).obj N) ≫
+        (CondensedRing.boundedConstructibleLowerStar l (cb).overG).map
+          (inv ((CondensedRing.boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ l
+              (cb).overI).projectionComparison ((compactProjectionForget k₀ l X).obj M)
+              ((CondensedRing.boundedConstructibleUpperStar Λ l (cb).overG).obj
+                ((compactProjectionForget k₀ l Y).obj N))) ≫
+            (CondensedRing.boundedConstructibleOpenImmersionLowerShriek Λ l (cb).overI).map
+              ((compactProjectionForget k₀ l X).obj M ◁
+                (projectionGeometricPullComp k₀ l f).hom.app
+                  ((compactProjectionForget k₀ l Y).obj N))) :=
+  CondensedRing.homMk_exceptionalProjectionMorphismOfCompactification_eq (f := fb) l cb
+    ((compactProjectionForget k₀ l X).obj M) ((compactProjectionForget k₀ l Y).obj N)
+    ((projectionGeometricPullComp k₀ l f).hom.app ((compactProjectionForget k₀ l Y).obj N))
+    (projectionGeometricPullComp_hom_app_ι_map k₀ l f N)
+
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- The compact projection isomorphism lies over the geometric projection map for the
@@ -130,13 +171,7 @@ theorem projectionCompactification_forget_square (M : WeilComplex k₀ l X)
           (CondensedRing.exceptionalProjectionMorphismOfCompactification Λ cb
             ((compactProjectionForget k₀ l X).obj M).obj
             ((compactProjectionForget k₀ l Y).obj N).obj) := by
-  -- the geometric exceptional projection morphism, as the pasted bounded projection morphisms
-  -- (stated with explicit objects: no rewriting in the concrete goal)
-  have hq := CondensedRing.homMk_exceptionalProjectionMorphismOfCompactification_eq (f := fb) l cb
-    ((compactProjectionForget k₀ l X).obj M) ((compactProjectionForget k₀ l Y).obj N)
-    ((projectionGeometricPullComp k₀ l f).hom.app ((compactProjectionForget k₀ l Y).obj N))
-    (CondensedRing.ι_map_eqToIso_trans_upperStarComp_inv_app_compactification (f := fb) l cb
-      ((compactProjectionForget k₀ l Y).obj N))
+  have hq := homMk_exceptionalProjectionMorphismOfCompactification_eq_paste k₀ l f M N
   -- the pasted square, with all spelling conversions done on abstract functors
   refine Eq.trans (projectionForgetSquare_paste_monoidal
     (projectionOpenForgetIso k₀ l (c).i) (projectionProperForgetIso k₀ l (c).g)
