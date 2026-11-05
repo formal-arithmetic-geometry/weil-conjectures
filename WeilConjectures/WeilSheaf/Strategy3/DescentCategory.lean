@@ -22,17 +22,27 @@ section
 variable {C₀ C : Type*} [Category C₀] [Category C] [Preadditive C]
   (P : C₀ ⥤ C) (Q : C ⥤ C) (M N : C₀) (T U : C)
 
-/-- At degree one the source objects retain the natural-transformation presentation. -/
-def value : ℕ × Label → C
-  | (0, .source) => P.obj M
-  | (0, .sourceUnit) => P.obj N
-  | (0, .target) => T
-  | (0, .targetUnit) => U
-  | (1, .source) => (P ⋙ Q).obj M
-  | (1, .sourceUnit) => (P ⋙ Q).obj N
-  | (1, .target) => Q.obj T
-  | (1, .targetUnit) => Q.obj U
-  | (n + 2, i) => Q.obj (value (n + 1, i))
+/-- Initial objects in their native presentations. -/
+def baseValue : Label → C
+  | .source => P.obj M
+  | .sourceUnit => P.obj N
+  | .target => T
+  | .targetUnit => U
+
+/-- Degree-one sources keep the natural-transformation component presentation. -/
+def firstValue : Label → C
+  | .source => (P ⋙ Q).obj M
+  | .sourceUnit => (P ⋙ Q).obj N
+  | .target => Q.obj T
+  | .targetUnit => Q.obj U
+
+/-- Further iterates only use ordinary geometric pullback. -/
+def valueAt : ℕ → Label → C
+  | 0 => baseValue P M N T U
+  | 1 => firstValue P Q M N T U
+  | n + 2 => fun i ↦ Q.obj (valueAt (n + 1) i)
+
+def value (i : ℕ × Label) : C := valueAt P Q M N T U i.1 i.2
 
 def shift (i : ℕ × Label) : ℕ × Label := (i.1 + 1, i.2)
 
@@ -40,8 +50,8 @@ def step (i : ℕ × Label) :
     Q.obj (value P Q M N T U i) ≅ value P Q M N T U (shift i) := by
   rcases i with ⟨n, i⟩
   cases n with
-  | zero => cases i <;> exact Iso.refl _
-  | succ n => exact Iso.refl _
+  | zero => cases i <;> exact Iso.refl (Q.obj _)
+  | succ n => exact Iso.refl (Q.obj (valueAt P Q M N T U (n + 1) i))
 
 /-- The scalar-law calculation takes place in its own category of labeled objects. -/
 abbrev DescentCategory := Object (value P Q M N T U)
