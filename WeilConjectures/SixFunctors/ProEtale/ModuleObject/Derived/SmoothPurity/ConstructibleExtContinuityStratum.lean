@@ -177,7 +177,6 @@ import all WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Ma
 import all WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.AdjunctionShift
 import all WeilConjectures.AlgebraicGeometry.CondensedClosedCostalkInjectiveContinuity
 import all WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
-import all WeilConjectures.AlgebraicGeometry.CondensedFiniteFreeHomContinuity
 import all Mathlib.Algebra.Homology.HomologicalComplexAbelian
 
 /-!
@@ -680,11 +679,14 @@ private theorem qcqsFiniteFreeHomContinuity
     rw [CochainComplex.isStrictlyGE_iff]
     intro r hr
     exact H.map_isZero (ha i r hr)
-  obtain ⟨hc⟩ : Nonempty (IsColimit (T.mapCocone (colimit.cocone M))) :=
-    isColimit_of_truncated_comparison M a hb T
-      (condensed_qcqs_globalSections_continuity Λ X M a (fun i r hr ↦ by
-        let : CochainComplex.IsStrictlyGE (M.obj i) a := hb i
-        exact CochainComplex.isZero_of_isGE _ a r hr) n)
+  have hT := condensed_qcqs_globalSections_continuity Λ X M a (fun i r hr ↦ by
+    let : CochainComplex.IsStrictlyGE (M.obj i) a := hb i
+    exact CochainComplex.isZero_of_isGE _ a r hr) n
+  have hc₀ := canonicalContinuityIsColimit M a hb
+  obtain ⟨ht⟩ := (colimit.isColimit _).nonempty_isColimit_iff_isIso_desc.2 hT
+  let hc : IsColimit (T.mapCocone (colimit.cocone M)) :=
+    ht.ofIsoColimit ((Cocone.functoriality M T).mapIso
+      (hc₀.uniqueUpToIso (colimit.isColimit M)))
   let : PreservesColimit M T :=
     preservesColimit_of_preserves_colimit_cocone (colimit.isColimit M) hc
   have hcomp : IsColimit ((Hc ⋙ T).mapCocone (colimit.cocone N)) :=
