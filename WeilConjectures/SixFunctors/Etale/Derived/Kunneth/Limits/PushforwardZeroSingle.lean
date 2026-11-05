@@ -177,7 +177,7 @@ lemma homology_map_transition_homologyZeroIso {α β : LimitStage B W} (φ : Hom
   rw [IsIso.hom_inv_id_assoc]
   erw [reassoc_of% hq]
   erw [reassoc_of% hn]
-  exact congrArg (_ ≫ ·) hr
+  exact congrArg (_ ≫ ·) (congrArg (_ ≫ ·) hr)
 
 
 /-- The underived transition maps compose. -/

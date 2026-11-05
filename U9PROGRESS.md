@@ -116,34 +116,46 @@
 - Fix patterns and baseline log: `/home/ubuntu/u9/bz/FIXES-BZ384.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ459 complete
+# BZ469 in progress
 
-- Branch: `u9/BZ459`; starting commit: `99a06bbbb46`.
-- Assigned module `WeilConjectures.AlgebraicGeometry.DerivedOpenGluingObjects` passed
-  `ucheck-bump`: rc=0, failed=0, 2927 jobs, on `poolb:43.157.132.198`.
-- Validated source commit: `841d33dd8504561794c58471ae53351e311c9f1d`.
-- The user instructed continuation after the explicit statement API migration proposal.
-  Two obsolete compositor `.symm` uses were removed to retain the original canonical maps.
-  All proof bodies, binders, hypotheses, docstrings, and options remain unchanged.
-- Direct importer `DerivedOpenGluing` was attempted but skipped because BZ361-owned
-  `SchemeDerivedHomGluing` fails. Its four-line repair is saved at
-  `/home/ubuntu/u9/bz/BZ459-downstream-deferred.patch`; committed importer source is unchanged.
-- Full green log: `/home/ubuntu/u9/bz/BUILD-BZ459-final-full.log`.
-- Fix patterns and dependency diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ459.md`.
-- Contract audit: `/home/ubuntu/u9/bz/BZ459-contract-audit.txt`.
+- Branch: `u9/BZ469`; starting commit: `99a06bbbb`.
+- The user instructed continuation after the exact two-site API proposal.
+  Applied `.symm` to both composition comparisons in
+  `injectiveSections_strictLocal_comparison`, preserving the original map directions
+  under Mathlib's reversed compositor.
+- Pinned API inspected at b63f6e8a; known quotient patterns do not match this module.
+- Next: remote validation, then up to four direct importers and a second downstream layer.
+- Fix patterns: `/home/ubuntu/u9/bz/FIXES-BZ469.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
+
+# BZ511 in progress
+
+- Branch: `u9/BZ511`; starting commit: `fa248eeed`.
+- The user instructed continuation after the exact two-private-helper API proposal.
+  The compositor inverse in `derivedCompSingle` and the direct compositor in
+  `derivedTripleNatSingle` are applied. The public theorem statement is unchanged.
+- Proofs now use Mathlib's single-object compositor lemma, hom naturality, and
+  hom/inv cancellation; the redundant `rfl` after `simp only` is removed.
+- Pinned Mathlib source was inspected at b63f6e8a. Patterns, occurrence counts,
+  and integration errors: `/home/ubuntu/u9/bz/FIXES-BZ511.md`.
+- Existing `ucheck-bump` invocation is queued; it reads the pushed branch after
+  acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
-- Completion marker: `/home/ubuntu/u9/state/BZ459.DONE`.
-- This final commit changes only progress documentation after the successful source build.
 
-# BZ531 in progress
+# BZ537 in progress
 
-- Branch: `u9/BZ531`; starting commit: `7c1e4f912`.
-- The user instructed continuation after the concrete two-formula compositor proposal.
-  Applied that exact patch to `DerivedCoordinateCompatibility` and `derivedCoordinateSquare`,
-  preserving the intended maps after Mathlib reversed its compositor.
-- Added a local scalar instance using the module's native ring sheaf and removed
-  the opaque compositor from the local irreducibility list.
-- Remote validation remains through `ucheck-bump` only; no local Lean/Lake execution.
-- Next: finish the assigned module, attempt its direct importer and a further layer,
-  then write `/home/ubuntu/u9/state/BZ531.DONE` with green modules and fix/error pairs.
-- Fix inventory and build logs: `/home/ubuntu/u9/bz/FIXES-BZ531.md`.
+- Branch: `u9/BZ537`; assigned module:
+  `WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Limits.PushforwardZeroSingle`.
+- The two quotient/Qh API repairs are applied; all seven declaration signatures and
+  existing docstrings are unchanged. Their remote validation is pending.
+- First remote check hit missing imports in unowned dependencies. Merged the
+  coordinator's `bump/v4.35` at `8af5cb32483`, which supplies those imports.
+- Second check (`128f9db601`, log `BZ537-20261106T031801.log`) is blocked in
+  BZ581-owned `Presheaf.InternalHom:375` before the assigned target is reached.
+- On user-requested continuation, reread the brief, progress file, and fix notes.
+  BZ581 has now started; wait for its dependency repair and merge it, then retry.
+- Once green, build direct importer `PushforwardZeroDescent`, then its importer
+  `PushforwardLimit`, following the brief's downstream ownership rule.
+- Fix patterns, whole-tree counts, and logs: `/home/ubuntu/u9/bz/FIXES-BZ537.md`.
+- No local Lean/Lake, proof placeholders, forbidden shortcuts, or heartbeat raises.
+- Do not write DONE until the assigned target passes `ucheck-bump`.
