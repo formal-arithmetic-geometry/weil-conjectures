@@ -7,6 +7,8 @@ module
 public import WeilConjectures.Algebra.Homology.DerivedChangeOfRingsCochainModel
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
 public import WeilConjectures.CategoryTheory.SiteCoveringAxioms
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import Mathlib.Algebra.Category.Ring.Colimits
 import Mathlib.Algebra.Category.Ring.FilteredColimits
 import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
@@ -386,6 +388,15 @@ private noncomputable abbrev scalarRes
 open scoped ChangeOfRings
 set_option backward.isDefEq.respectTransparency false
 
+private local instance tensorRestrictionTargetModule
+    {D : Type u} [Category.{v} D] {K : GrothendieckTopology D}
+    [K.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
+    {A : Sheaf K CommRingCat.{r}} (M : SheafOfModules.{r} (sr K A))
+    {X Y : Dᵒᵖ} (i : X ⟶ Y) :
+    Module (A.obj.obj Y)
+      ((ModuleCat.restrictScalars ((sr K A).obj.map i).hom).obj (M.val.obj Y)) :=
+  inferInstanceAs (Module (A.obj.obj Y) (M.val.obj Y))
+
 private theorem tensorRestriction_tmul
     {D : Type u} [Category.{v} D] {K : GrothendieckTopology D}
     [K.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
@@ -628,7 +639,6 @@ private noncomputable def pointwise_change_iso
   intro X
   dsimp [Functor.RightExtension.coneAt, Functor.RightExtension.mk, Φ, k]
   simp [Category.assoc]
-  rfl
 
 -- Bound unfolding while checking the denominator cone.
 private theorem exactRestriction_denominator_constancy
