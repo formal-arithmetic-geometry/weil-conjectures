@@ -146,6 +146,7 @@ private theorem pullback_eqToIso {A B : Scheme.{u}} {i j : A ⟶ B} (e : i = j) 
   funext V
   apply MorphismProperty.Over.Hom.ext
   simp [MorphismProperty.Over.pullbackCongr, proEtaleBaseChange]
+  rfl
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
