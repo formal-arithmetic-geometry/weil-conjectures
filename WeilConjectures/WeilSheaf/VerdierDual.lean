@@ -14,6 +14,7 @@ public import WeilConjectures.WeilSheaf.UpperShriek
 import WeilConjectures.WeilSheaf.Bidual
 import WeilConjectures.WeilSheaf.DerivedHomSingleResolution
 import WeilConjectures.WeilSheaf.SmoothPurity
+import WeilConjectures.WeilSheaf.SmoothPurityAbsolute
 import WeilConjectures.WeilSheaf.VerdierExchange
 import WeilConjectures.WeilSheaf.VerdierBiduality
 import WeilConjectures.WeilSheaf.VerdierDualUpperShriek
@@ -182,7 +183,8 @@ theorem nonempty_dualizingComplex_iso (d : ℕ)
     Nonempty (dualizingComplex k₀ l X ≅
       ((tateTwist k₀ l X d).obj
         (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)))⟦(2 * d : ℤ)⟧) :=
-  nonempty_rightAdjoint_obj_adicConstant_iso_of_smooth d (derivedLowerShriekUpperShriekAdjunction _)
+  purity_nonempty_shriekRightAdjoint_adicConstant_iso d
+    (derivedLowerShriekUpperShriekAdjunction _)
 
 end Smooth
 
