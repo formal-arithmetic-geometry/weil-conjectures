@@ -33,7 +33,7 @@ private theorem scalar_nonvanishing {X : Scheme.{u}} (f : Γ(X, ⊤))
       unitSectionsEquiv U (X.presheaf.map (homOfLE le_top).op f)) :
     (Hom.zeroLocus s).support.compl = X.basicOpen f := by
   have : SheafOfModules.IsInvertible.{u, u, u} (𝟙_ X.Modules) :=
-    inferInstanceAs (SheafOfModules.IsInvertible.{u, u, u} (SheafOfModules.unit X.ringCatSheaf))
+    SheafOfModules.instIsInvertibleUnit.{u, u, u}
   ext x
   obtain ⟨O, hO, hxV, -⟩ :=
     exists_isAffineOpen_mem_and_subset (X := X) (U := ⊤) (x := x) trivial
@@ -61,7 +61,7 @@ private theorem clear_scalar_section {X S : Scheme.{u}} (g : X ⟶ S)
       N.presheaf.map (homOfLE le_top).op v =
         X.presheaf.map (homOfLE (show X.basicOpen f ≤ ⊤ from le_top)).op f ^ m • t := by
   have : SheafOfModules.IsInvertible.{u, u, u} (𝟙_ X.Modules) :=
-    inferInstanceAs (SheafOfModules.IsInvertible.{u, u, u} (SheafOfModules.unit X.ringCatSheaf))
+    SheafOfModules.instIsInvertibleUnit.{u, u, u}
   let s : 𝟙_ X.Modules ⟶ 𝟙_ X.Modules := homOfGlobalSection (𝟙_ X.Modules) (unitSectionsEquiv ⊤ f)
   have hD : (Hom.zeroLocus s).support.compl = X.basicOpen f := by
     apply scalar_nonvanishing f s

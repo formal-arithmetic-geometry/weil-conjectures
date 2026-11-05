@@ -119,7 +119,7 @@ lemma mapDerivedCategoryNatIso_comp_hom_app_singleFunctor (F : C ⥤ D) (G : D �
     [PreservesFiniteLimits G] [PreservesFiniteColimits G] [PreservesFiniteLimits H]
     [PreservesFiniteColimits H] (e : H ≅ F ⋙ G) (X : C) :
     (mapDerivedCategoryNatIso e).hom.app ((DerivedCategory.singleFunctor C 0).obj X) ≫
-        (mapDerivedCategoryCompIso F G).hom.app _ ≫
+        (mapDerivedCategoryCompIso F G).inv.app _ ≫
           G.mapDerivedCategory.map ((F.mapDerivedCategorySingleFunctor 0).hom.app X) ≫
             (G.mapDerivedCategorySingleFunctor 0).hom.app (F.obj X) =
       (H.mapDerivedCategorySingleFunctor 0).hom.app X ≫

@@ -230,9 +230,9 @@ lemma Scheme.Modules.compl_support_zeroLocus_pullback (g : X ⟶ Y) {L : Y.Modul
       g ⁻¹ᵁ (Hom.zeroLocus s).support.compl := by
   have : SheafOfModules.IsInvertible.{u, u, u} ((pullback g).obj L) := .pullback inferInstance
   have : SheafOfModules.IsInvertible.{u, u, u} (𝟙_ Y.Modules) :=
-    inferInstanceAs (SheafOfModules.IsInvertible.{u, u, u} (SheafOfModules.unit Y.ringCatSheaf))
+    SheafOfModules.instIsInvertibleUnit.{u, u, u}
   have : SheafOfModules.IsInvertible.{u, u, u} (𝟙_ X.Modules) :=
-    inferInstanceAs (SheafOfModules.IsInvertible.{u, u, u} (SheafOfModules.unit X.ringCatSheaf))
+    SheafOfModules.instIsInvertibleUnit.{u, u, u}
   have : SheafOfModules.IsInvertible.{u, u, u} ((pullback g).obj (𝟙_ Y.Modules)) :=
     .pullback inferInstance
   have h := Hom.zeroLocus_eq_of_arrowIso ((pullbackObjUnitIso g).inv ≫ (pullback g).map s)

@@ -78,7 +78,7 @@ theorem mapExactFunctor_comp_mk₀_eq_sheaf
     let := comp_preservesFiniteLimits F G
     let := comp_preservesFiniteColimits F G
     have hc (A : C) :
-        (Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryCompIso F G).hom.app
+        (Functor.mapDerivedCategoryNatIso e ≪≫ (Functor.mapDerivedCategoryCompIso F G).symm).hom.app
             ((DerivedCategory.singleFunctor C 0).obj A) ≫
           G.mapDerivedCategory.map ((F.mapDerivedCategorySingleFunctor 0).hom.app A) ≫
           (G.mapDerivedCategorySingleFunctor 0).hom.app (F.obj A) =

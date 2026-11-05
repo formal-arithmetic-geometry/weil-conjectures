@@ -172,7 +172,7 @@ theorem composite_normalized
       (G.mapDerivedCategory.op.prod G.mapDerivedCategory) ⋙ derivedInternalHom.{u, w} N Z)
     (he : Normalized R S F a e) (hs : Normalized S Z G b s) :
     Normalized R Z V (composite (Functor.mapHomologicalComplexCompIso c (.up ℤ)) a b)
-      (composite ((Functor.mapDerivedCategoryCompIso F G).symm ≪≫
+      (composite ((Functor.mapDerivedCategoryCompIso F G) ≪≫
         Functor.mapDerivedCategoryNatIso c) e s) := by
   intro L I hI
   have : CochainComplex.IsKInjective

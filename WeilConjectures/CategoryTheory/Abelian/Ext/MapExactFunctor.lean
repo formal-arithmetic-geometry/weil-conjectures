@@ -163,7 +163,7 @@ lemma mapExactFunctor_comp_mk₀_eq (G₁ : C ⥤ D) [G₁.Additive]
     let := comp_preservesFiniteLimits G₁ G₂
     let := comp_preservesFiniteColimits G₁ G₂
     have hc (A : C) :
-        (Functor.mapDerivedCategoryNatIso τ ≪≫ Functor.mapDerivedCategoryCompIso G₁ G₂).hom.app
+        (Functor.mapDerivedCategoryNatIso τ ≪≫ (Functor.mapDerivedCategoryCompIso G₁ G₂).symm).hom.app
             ((DerivedCategory.singleFunctor C 0).obj A) ≫
           G₂.mapDerivedCategory.map ((G₁.mapDerivedCategorySingleFunctor 0).hom.app A) ≫
           (G₂.mapDerivedCategorySingleFunctor 0).hom.app (G₁.obj A) =

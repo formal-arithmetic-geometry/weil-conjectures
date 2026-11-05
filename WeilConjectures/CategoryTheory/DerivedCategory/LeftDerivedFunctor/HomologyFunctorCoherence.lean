@@ -48,7 +48,7 @@ lemma mapDerivedCategoryFactors_inv_app_comp_mapDerivedCategoryCompIso_hom_app
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G] (L : CochainComplex C ℤ) :
     (F ⋙ G).mapDerivedCategoryFactors.inv.app L ≫
-        (mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Q.obj L) =
+        (mapDerivedCategoryCompIso F G).inv.app (DerivedCategory.Q.obj L) =
       DerivedCategory.Q.map
           ((mapHomologicalComplexCompIso (Iso.refl (F ⋙ G)) (.up ℤ)).inv.app L) ≫
         G.mapDerivedCategoryFactors.inv.app ((F.mapHomologicalComplex (.up ℤ)).obj L) ≫
@@ -73,7 +73,7 @@ lemma mapDerivedCategoryHomologyFunctorIso_hom_app_comp_map_mapDerivedCategoryCo
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G] (n : ℤ) (K : DerivedCategory C) :
     ((F ⋙ G).mapDerivedCategoryHomologyFunctorIso n).hom.app K ≫
-        (DerivedCategory.homologyFunctor E n).map ((mapDerivedCategoryCompIso F G).hom.app K) =
+        (DerivedCategory.homologyFunctor E n).map ((mapDerivedCategoryCompIso F G).inv.app K) =
       G.map ((F.mapDerivedCategoryHomologyFunctorIso n).hom.app K) ≫
         (G.mapDerivedCategoryHomologyFunctorIso n).hom.app (F.mapDerivedCategory.obj K) := by
   have h := Localization.natTrans_ext DerivedCategory.Q

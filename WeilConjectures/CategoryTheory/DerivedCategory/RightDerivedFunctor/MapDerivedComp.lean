@@ -163,7 +163,7 @@ lemma mapDerivedCategoryFactorsh_inv_app_mapDerivedCategoryCompIso_hom_app (F : 
     [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     (X : HomotopyCategory C (ComplexShape.up ℤ)) :
     (F ⋙ G).mapDerivedCategoryFactorsh.inv.app X ≫
-        (mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Qh.obj X) =
+        (mapDerivedCategoryCompIso F G).inv.app (DerivedCategory.Qh.obj X) =
       DerivedCategory.Qh.map
           ((mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) (ComplexShape.up ℤ)).inv.app X) ≫
         G.mapDerivedCategoryFactorsh.inv.app ((F.mapHomotopyCategory (ComplexShape.up ℤ)).obj X) ≫
@@ -181,7 +181,7 @@ lemma mapDerivedCategoryFactorsh_inv_app_mapDerivedCategoryCompIso_inv_app (F : 
     (X : HomotopyCategory C (ComplexShape.up ℤ)) :
     G.mapDerivedCategoryFactorsh.inv.app ((F.mapHomotopyCategory (ComplexShape.up ℤ)).obj X) ≫
         G.mapDerivedCategory.map (F.mapDerivedCategoryFactorsh.inv.app X) ≫
-        (mapDerivedCategoryCompIso F G).inv.app (DerivedCategory.Qh.obj X) =
+        (mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Qh.obj X) =
       DerivedCategory.Qh.map
           ((mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) (ComplexShape.up ℤ)).hom.app X) ≫
         (F ⋙ G).mapDerivedCategoryFactorsh.inv.app X := by
@@ -221,7 +221,7 @@ lemma rightDerivedFunctorIsoMapDerivedCategoryComp_hom_app_comp (γ₁ : L₁ �
         (rightDerivedFunctorIsoMapDerivedCategoryComp γ₂).hom.app (L₁.mapDerivedCategory.obj K) =
       (rightDerivedFunctorIsoMapDerivedCategoryComp γ₁₂).hom.app K ≫
         Γ₃.rightDerivedFunctor.map ((mapDerivedCategoryNatIso ε.symm).hom.app K ≫
-          (mapDerivedCategoryCompIso L₁ L₂).hom.app K) := by
+          (mapDerivedCategoryCompIso L₁ L₂).inv.app K) := by
   suffices H : (rightDerivedFunctorIsoMapDerivedCategoryComp γ₁).hom ≫
       whiskerLeft L₁.mapDerivedCategory (rightDerivedFunctorIsoMapDerivedCategoryComp γ₂).hom =
       (rightDerivedFunctorIsoMapDerivedCategoryComp γ₁₂).hom ≫

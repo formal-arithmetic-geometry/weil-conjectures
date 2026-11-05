@@ -234,7 +234,7 @@ lemma rightDerivedPullback_comp (ε : P'' ≅ P ⋙ P') (α : F ⟶ P ⋙ F') (�
     (hα : α'' ≫ Functor.whiskerRight ε.hom F'' = α ≫ Functor.whiskerLeft P α')
     (M : DerivedCategory C) :
     (rightDerivedPullback P'' α'').app M ≫ F''.rightDerivedFunctor.map
-        ((mapDerivedCategoryNatIso ε ≪≫ mapDerivedCategoryCompIso P P').hom.app M) =
+        ((mapDerivedCategoryNatIso ε ≪≫ (mapDerivedCategoryCompIso P P').symm).hom.app M) =
       (rightDerivedPullback P α).app M ≫
         (rightDerivedPullback P' α').app (P.mapDerivedCategory.obj M) := by
   have := rightDerivedFunctor_hom_ext
