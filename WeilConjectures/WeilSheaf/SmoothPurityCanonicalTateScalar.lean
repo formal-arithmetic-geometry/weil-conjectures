@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.WeilSheaf.SmoothPurityScalarPullbackInterface
-public import WeilConjectures.WeilSheaf.SmoothPurityScalarDescentConjugation
+public import WeilConjectures.WeilSheaf.SmoothPurityK4NativeScalarNamed
+public import WeilConjectures.WeilSheaf.SmoothPurityScalarDatumNamed
 import WeilConjectures.Tactic.ExactModProofs
 
 /-! # The scalar Frobenius law for the canonical geometric Tate line -/
@@ -53,18 +53,16 @@ lemma purityCanonicalTateOneTrivialization_weil :
           (purityCanonicalTateOneTrivialization ℓ a hζ hζ').hom ≫
         (Functor.Monoidal.εIso
           (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricGaloisFrobenius.hom)).inv := by
-  have h := purity_scalarDatum_conjugate_descent
-    (M := (Mod.extendScalars (coefficientMap (Profinite.padicIntRingObjToPadicAlgCl ℓ) X)).obj
-      (tateModule X ℓ))
-    (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricFiberProj)
-    (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricGaloisFrobenius.hom)
-    (geometricFiberProjUpperStarFrobeniusIso (Profinite.padicAlgClRingObj ℓ) a)
+  have h := purity_scalarDatum_conjugate_named
+    (purityScalarFrobeniusPull ℓ a)
     (purityScalarTateCompare ℓ a) (purityScalarUnitCompare ℓ a)
+    (purityScalarSourceDatum ℓ a) (purityScalarSourceUnitDatum ℓ a)
     (purityScalarTargetDatum ℓ a) (purityScalarTargetUnitDatum ℓ a)
-    (purityScalarTateCompare_native_comm ℓ a) (purityScalarUnitCompare_native_comm ℓ a)
-    _ (purityScalarCanonicalTrivialization ℓ a hζ hζ')
-    (purityScalarCanonicalTrivialization_native_eq ℓ a hζ hζ') (Nat.card k : ℤ)
-    (purity_rationalRootTrivialization_weil a hζ hζ')
+    (purityScalarTateCompare_comm ℓ a) (purityScalarUnitCompare_comm ℓ a)
+    (purityScalarRootTrivialization ℓ a hζ hζ')
+    (purityScalarCanonicalTrivialization ℓ a hζ hζ')
+    (purityScalarCanonicalTrivialization_eq ℓ a hζ hζ') (Nat.card k : ℤ)
+    (K4Native.scalarRootTrivialization_weil a hζ hζ')
   have h' := purityScalarCanonicalEquation ℓ a hζ hζ' h
   dsimp only [purityCanonicalTateOneTrivialization]
   exact_mod_proofs h'

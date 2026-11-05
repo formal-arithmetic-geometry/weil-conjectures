@@ -32,7 +32,9 @@ variable {k : Type u} [Field k] [Finite k] {ℓ : ℕ} [Fact ℓ.Prime]
 /-- Coefficient change carries the root trivialization and its scalar Frobenius law. -/
 theorem purity_rationalRootTrivialization_weil :
     (Nat.card k : ℤ) •
-        ((scalarFrobeniusIso (Profinite.padicAlgClRingObj ℓ) a (tateTwistOne X ℓ)).hom ≫
+        ((scalarFrobeniusIso (Profinite.padicAlgClRingObj ℓ) a
+          ((Mod.extendScalars (coefficientMap (Profinite.padicIntRingObjToPadicAlgCl ℓ) X)).obj
+            (tateModule X ℓ))).hom ≫
           (purityChangeCoefficientTrivialization (Profinite.continuousMapRingObj ℤ_[ℓ])
             (Profinite.padicIntRingObjToPadicAlgCl ℓ) a.geometricFiberProj (tateModule X ℓ)
             (upperStarMapModTateModuleIsoUnit a.geometricFiberProj
@@ -55,7 +57,6 @@ theorem purity_rationalRootTrivialization_weil :
       have hr := purity_tateModule_rootTrivialization_frobenius a hζ hζ'
       dsimp only [Functor.comp_obj, Functor.comp_map] at hr ⊢
       exact_mod_proofs hr)
-  dsimp +instances only [Functor.comp_obj, Functor.comp_map, tateTwistOne] at h ⊢
   exact_mod_proofs h
 
 end AlgebraicGeometry.ProEtale.K4Native
