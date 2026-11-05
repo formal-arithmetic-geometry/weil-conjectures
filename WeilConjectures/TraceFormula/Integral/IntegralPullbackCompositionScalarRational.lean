@@ -270,7 +270,7 @@ private theorem compositor_transport
   simp only [eqToIso_refl, Iso.trans_hom, Iso.trans_inv, Iso.app_hom, Iso.app_inv,
     Iso.refl_hom, Iso.refl_inv, Iso.symm_hom, Iso.symm_inv, CategoryTheory.Functor.mapIso_hom,
     CategoryTheory.Functor.mapIso_inv, NatTrans.id_app, CategoryTheory.Functor.map_id,
-    Category.id_comp, Category.comp_id, CategoryTheory.Functor.map_comp, Category.assoc]
+    Category.id_comp, Category.comp_id, Category.assoc]
   erw [Category.id_comp]
   rw [← reassoc_of% R]
   erw [← CategoryTheory.Functor.map_comp_assoc, Iso.hom_inv_id_app,

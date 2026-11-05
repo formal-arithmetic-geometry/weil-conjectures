@@ -43,6 +43,7 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
+omit [Fact (Nat.Prime l)] in
 private theorem coefficientPrime_isUnit (W : Scheme.{u})
     [∀ w : W, Invertible (l : W.residueField w)] : IsUnit (l : Γ(W, ⊤)) := by
   set_option backward.isDefEq.respectTransparency false in
