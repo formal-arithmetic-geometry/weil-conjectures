@@ -796,3 +796,5 @@ Diagnostic195431 CLOSED rc1: nearest three parents are ProEt(X) vs ProEt(geometr
 234755 CLOSED rc1: FieldShriekTraceUniversality GREEN (both ambient and levelwise theorems). DescendedUnitBaseChange now only times out in statement e.hom elaboration: pullback unit iso had unspecified source/target Over objects, so specified Y and Over.mk Y.hom.geometricFiberToAlgebraicClosure explicitly as in C9 geometric-fiber fix. No mathematical statement change.
 
 234948 CLOSED rc1: statement/proof elaboration of geometric specialization still hits200k whnf at declaration start after explicit e Over objects. Next pins both πX/πY in the IsIso hypothesis and separates generic levelwise theorem application into typed-have; enabled profiler only to locate remaining inference cost (no limits raised).
+
+235249 CLOSED rc1, profiler isolates remaining200k to IsIso typeclass inference10s in levelwise theorem application (all other inference <1ms; apply4.6ms). The assumed IsIso uses named descendedShriekGeometricExchange while callee uses its body; unfold ONLY that comparison in named hbc before applying callee. Removed profiler after measurement.
