@@ -140,7 +140,6 @@ theorem grothendieckBottomEdge_singleUnit
     simp only [homOfLE_leOfHom, Fin.isValue, Functor.map_id, Functor.id_hcomp,
       Functor.whiskerLeft_app, Functor.hcomp_id, Functor.whiskerRight_app,
       Functor.map_comp, Functor.map_inv, IsIso.eq_inv_comp]
-    dsimp only [ComposableArrows.mk₁, ComposableArrows.Mk₁.obj]
     simp only [Triangulated.TStructure.eTruncGE_obj_bot, Functor.id_map,
       Triangulated.TStructure.eTruncLT_obj_coe]
     change _ ≫ inv ((DerivedCategory.Plus.homologyFunctor C n).map
