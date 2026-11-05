@@ -63,6 +63,45 @@ private def ordinaryUnit {Z : Scheme.{t}} {p : Presentations.{t, u} Z}
   ((n.ordinaryAdjunction (𝟙 R)).ofNatIsoRight (scalarRestrictionId R)).leftAdjointUniq
     Adjunction.id
 
+private theorem tensor_smul_one {Z : Scheme.{t}}
+    {R S : Sheaf (topology Z) CommRingCat.{max u (t + 1)}} {a : R ⟶ S}
+    (p : SheafOfModules.SuccessiveDerivedQuotient.Presentation.{t + 1, t,
+      max u (t + 1), max (u + 1) (t + 2)}
+      (C := Z.ProEt) (J := topology Z) (hD := derived.{t, u} Z) a)
+    (M : Mods.{t, u} R) (U : Z.ProEtᵒᵖ) (s : S.obj.obj U) (x : M.val.obj U) :
+    sectionTensor.{t + 1, t, max u (t + 1), max (u + 1) (t + 2)} p M U s x =
+      s • sectionTensor.{t + 1, t, max u (t + 1), max (u + 1) (t + 2)} p M U 1 x := by
+  let η := (PresheafOfModules.sheafificationAdjunction.{max u (t + 1), t, max u (t + 1), t + 1}
+    (𝟙 (derivedChangeRingIndependentCoefficients (topology Z) S).obj)).unit.app
+      (changeOfRingsPresheaf.{t, t + 1, max u (t + 1)}
+        (J := topology Z) a M)
+  change (eqToHom (p.obj_eq M).symm).val.app U
+      (η.app U (s ⊗ₜ[R.obj.obj U, (a.hom.app U).hom] x)) =
+    s • (eqToHom (p.obj_eq M).symm).val.app U
+      (η.app U ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (a.hom.app U).hom] x))
+  rw [← ((eqToHom (p.obj_eq M).symm).val.app U).hom.map_smul]
+  rw [← (η.app U).hom.map_smul]
+  congr 2
+  change s ⊗ₜ[R.obj.obj U, (a.hom.app U).hom] x =
+    (s * 1) ⊗ₜ[R.obj.obj U, (a.hom.app U).hom] x
+  rw [mul_one]
+
+private theorem ordinaryUnit_sections {Z : Scheme.{t}} {p : Presentations.{t, u} Z}
+    (n : Normalization.{t + 1, t, max u (t + 1), max (u + 1) (t + 2)}
+      (C := Z.ProEt) (J := topology Z) (hD := derived.{t, u} Z) @p)
+    (R : Sheaf (topology Z) CommRingCat.{max u (t + 1)})
+    (M : Mods.{t, u} R) (U : Z.ProEtᵒᵖ) (x : M.val.obj U) (s : R.obj.obj U) :
+    ((ordinaryUnit n R).hom.app M).val.app U
+      (sectionTensor.{t + 1, t, max u (t + 1), max (u + 1) (t + 2)} (p (𝟙 R)) M U s x) = s • x := by
+  have h := congrArg (fun f ↦ f.val.app U x)
+    (Adjunction.unit_leftAdjointUniq_hom_app
+      ((n.ordinaryAdjunction (𝟙 R)).ofNatIsoRight (scalarRestrictionId R))
+      Adjunction.id M)
+  change ((ordinaryUnit n R).hom.app M).val.app U
+    (((n.ordinaryAdjunction (𝟙 R)).unit.app M).val.app U x) = x at h
+  rw [n.ordinary_unit] at h
+  rw [tensor_smul_one, ((ordinaryUnit n R).hom.app M).val.app U |>.hom.map_smul, h]
+
 private def identityHomotopyIso {Z : Scheme.{t}} {p : Presentations.{t, u} Z}
     (n : Normalization.{t + 1, t, max u (t + 1), max (u + 1) (t + 2)}
       (C := Z.ProEt) (J := topology Z) (hD := derived.{t, u} Z) @p)
@@ -102,5 +141,84 @@ private def derivedUnit {Z : Scheme.{t}} {p : Presentations.{t, u} Z}
     (𝟭 (DerivedCategory (Mods.{t, u} R))) ε
   exact Functor.leftDerivedUnique (𝟭 _) (p (𝟙 R)).derived
     (p (𝟙 R)).counit ε.hom (HomotopyCategory.quasiIso _ (.up ℤ))
+
+private theorem derivedUnit_hom_app {Z : Scheme.{t}} {p : Presentations.{t, u} Z}
+    (n : Normalization.{t + 1, t, max u (t + 1), max (u + 1) (t + 2)}
+      (C := Z.ProEt) (J := topology Z) (hD := derived.{t, u} Z) @p)
+    (R : Sheaf (topology Z) CommRingCat.{max u (t + 1)})
+    (H : HomotopyCategory (Mods.{t, u} R) (.up ℤ)) :
+    (derivedUnit n R).hom.app (DerivedCategory.Qh.obj H) =
+      (p (𝟙 R)).counit.app H ≫ DerivedCategory.Qh.map
+        ((identityHomotopyIso n R).hom.app H) := by
+  let ε := unitFactors n R
+  let := (p (𝟙 R)).universal
+  let := Functor.isLeftDerivedFunctor_of_inverts
+    (HomotopyCategory.quasiIso (Mods.{t, u} R) (.up ℤ)) (𝟭 _) ε
+  have h := Functor.leftDerivedNatTrans_app (p (𝟙 R)).derived (𝟭 _)
+    (p (𝟙 R)).counit ε.hom (HomotopyCategory.quasiIso _ (.up ℤ)) (𝟙 _) H
+  change (derivedUnit n R).hom.app (DerivedCategory.Qh.obj H) ≫ ε.hom.app H =
+    (p (𝟙 R)).counit.app H ≫ 𝟙 _ at h
+  rw [Category.comp_id] at h
+  apply (cancel_mono (ε.hom.app H)).1
+  rw [h]
+  simp only [ε, unitFactors, Iso.trans_hom, NatTrans.comp_app,
+    CategoryTheory.Functor.rightUnitor_hom_app,
+    CategoryTheory.Functor.leftUnitor_inv_app, Iso.symm_hom,
+    CategoryTheory.Functor.isoWhiskerRight_inv,
+    CategoryTheory.Functor.whiskerRight_app]
+  dsimp only [CategoryTheory.Functor.id_obj, CategoryTheory.Functor.id_map]
+  simp only [Category.id_comp, Category.assoc]
+  erw [Category.id_comp]
+  rw [← CategoryTheory.Functor.map_comp, Iso.hom_inv_id_app,
+    CategoryTheory.Functor.map_id]
+  exact (Category.comp_id _).symm
+
+/-- Scalar identity extension has its canonical multiplication unit, and its derived
+unit is the image of multiplication through the universal computation counit.
+Source: Stacks Project, Tag 0D6D, identity case of derived pullback composition.
+(blueprint: lem-pur-clopen-scalar-unit-normalization).
+
+Proof: scalar restriction along the identity is naturally the identity, section by
+section. Uniqueness of left adjoints therefore identifies ordinary extension with
+the identity. The adjunction unit is 1 tensor x, so linearity gives s tensor x maps
+to sx. Pass multiplication to complexes and homotopy categories. Its inverse,
+followed by Qh, makes the identity derived functor a left derived functor. Uniqueness
+of left derived functors identifies the recorded presentation with this functor.
+The defining counit equation gives the asserted representative formula after
+conjugating by the canonical quotient-to-derived comparison. -/
+theorem clopen_scalar_unit_normalization {Z : Scheme.{t}} {p : Presentations.{t, u} Z}
+    (n : Normalization.{t + 1, t, max u (t + 1), max (u + 1) (t + 2)}
+      (C := Z.ProEt) (J := topology Z) (hD := derived.{t, u} Z) @p) :
+    Nonempty (Units.{t, u} @p) := by
+  refine ⟨{ ordinary := ordinaryUnit n
+            sections := ordinaryUnit_sections n
+            derived := derivedUnit n
+            representative := ?_ }⟩
+  intro R P hP hf
+  have hn := (derivedUnit n R).hom.naturality
+    ((DerivedCategory.quotientCompQhIso (Mods.{t, u} R)).hom.app P)
+  change (p (𝟙 R)).derived.map _ ≫ (derivedUnit n R).hom.app
+      (DerivedCategory.Q.obj P) = (derivedUnit n R).hom.app
+      (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj P)) ≫ _ at hn
+  rw [derivedUnit_hom_app] at hn
+  rw [← cancel_epi ((p (𝟙 R)).derived.map
+    ((DerivedCategory.quotientCompQhIso (Mods.{t, u} R)).hom.app P))]
+  rw [hn]
+  let f := (NatIso.mapHomologicalComplex (ordinaryUnit n R) (.up ℤ) ≪≫
+    Functor.mapHomologicalComplexIdIso (Mods.{t, u} R) (.up ℤ)).hom.app P
+  change (_ ≫ DerivedCategory.Qh.map
+      ((HomotopyCategory.quotient _ _).map f)) ≫ _ = _
+  dsimp only [CategoryTheory.Functor.id_map]
+  rw [Category.assoc]
+  erw [DerivedCategory.quotientCompQhIso_hom_naturality]
+  unfold computation
+  simp only [Category.assoc]
+  erw [← CategoryTheory.Functor.map_comp_assoc, Iso.hom_inv_id_app,
+    CategoryTheory.Functor.map_id, Category.id_comp]
+  have he : ((p (𝟙 R)).ordinary.mapHomotopyCategoryFactors (.up ℤ)).hom.app P = 𝟙 _ := rfl
+  rw [he]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp]
+  congr 1
+  exact (Category.id_comp _).symm
 
 end AlgebraicGeometry.Scheme.ProEt.ClopenScalar

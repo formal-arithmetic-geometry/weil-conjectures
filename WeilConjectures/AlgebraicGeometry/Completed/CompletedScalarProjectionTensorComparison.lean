@@ -12,6 +12,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 import WeilConjectures.AlgebraicGeometry.CompletedProjection.CompletedScalarMateCoefficientTransport
 import WeilConjectures.AlgebraicGeometry.Completed.CompletedTensorProjectionCoefficientTransport
 import WeilConjectures.Algebra.Homology.Ringed.RingedDerivedTensorNativeSupplement
+public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap
 
 /-!
 # Comparing scalar reduction with the tensor projection morphism
@@ -146,9 +147,26 @@ theorem completedScalarProjectionTensorComparison
   have r₀ : Q ≅ P := r
   obtain ⟨aX, s₁, t₁, hπ⟩ := completedTensorProjectionCoefficientTransport
     f d aY z K₀ Q P r₀
-  let π := proEtaleProjectionFormulaMate f (PerfectProjection.ring d Y)
-    (DerivedScalarMate.inverseRing f (PerfectProjection.ring d Y))
-    (Iso.refl _) aY z Kᵢ Q
+  -- Use the general ringed-topos construction of the restated projection-map node.
+  -- Its comparison is the canonical tensor/pullback comparison, not a chosen arrow.
+  let R := PerfectProjection.ring d Y
+  let S := DerivedScalarMate.inverseRing f R
+  let L := proEtaleRingDerivedPullback f R S (Iso.refl _)
+  let α := proEtaleCanonicalTensorComparison f R S (Iso.refl _) aY z
+  let π := (((proEtaleRingDerivedAdjunction f R S (Iso.refl _)).rightAdjointProjectionMap
+    (T_C := Functor.curry.obj z.tensor) (T_D := Functor.curry.obj aY.tensor)
+    (Functor.curry.map α.hom ≫ (Functor.curryObjProdComp L L z.tensor).hom)).app Kᵢ).app Q
+  let Lc := PerfectProjection.pullback d f
+  let αc := proEtaleCanonicalTensorComparison f R (PerfectProjection.ring d X)
+    (PerfectProjection.coefficients d f) aY aX
+  let πc := (((proEtaleRingDerivedAdjunction f R (PerfectProjection.ring d X)
+    (PerfectProjection.coefficients d f)).rightAdjointProjectionMap
+    (T_C := Functor.curry.obj aX.tensor) (T_D := Functor.curry.obj aY.tensor)
+    (Functor.curry.map αc.hom ≫
+      (Functor.curryObjProdComp Lc Lc aX.tensor).hom)).app K₀).app P
+  -- The imported transport square uses the previous notation for this same adjunct.
+  -- Definitional conversion checks both endpoints against the current construction.
+  change π ≫ t₁.hom = s₁.hom ≫ πc at hπ
   let β := (DerivedScalarMate.restriction χ).mapDerivedCategory.map
     ((DerivedScalarMate.beta f χ).app Kᵢ)
   have hn : s₀.inv ≫ β ≫ t₀.hom = π :=
@@ -166,5 +184,6 @@ theorem completedScalarProjectionTensorComparison
       rw [reassoc_of% hn']
     _ = _ := by
       rw [hπ]
+      rfl
 
 end AlgebraicGeometry.Scheme

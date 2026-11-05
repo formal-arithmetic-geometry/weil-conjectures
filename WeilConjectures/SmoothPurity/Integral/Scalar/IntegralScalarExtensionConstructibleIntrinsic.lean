@@ -11,6 +11,13 @@ public import WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarExtensi
 import WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarExtensionConstructible
 import WeilConjectures.SmoothPurity.Sf.SfDerivedCompleteLegacyComparison
 import Mathlib.Algebra.Field.ULift
+public import WeilConjectures.Algebra.Homology.DerivedChangeOfRingsCochainModel
+public import WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Bounded.ProEtaleBoundedConstructibleTriangulated
+public import WeilConjectures.SmoothPurity.Integral.IntegralConstructibleLinear
+public import WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarFiniteLevelBounds
+public import WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarTowerEffectivity
+public import WeilConjectures.TraceFormula.Supporting.FiniteFreeCompletedScalarComparison
 
 /-!
 # Integral scalar extension preserves intrinsic bounded constructibility
@@ -51,7 +58,7 @@ private theorem constructible_iff_legacy
     sfIntegralConstructible l E Y K ↔
       boundedConstructibleDerivedCompleteIntegral D l hl E Y K := by
   set_option backward.isDefEq.respectTransparency true in
-  set_option backward.isDefEq.respectTransparency.types true in
+  set_option backward.isDefEq.respectTransparency.types false in
     constructor
     · rintro ⟨hK, a, b, hab, h⟩
       refine ⟨(sfDerivedComplete_iff_legacy l E Y D hl K).mp hK, a, b, hab, ?_⟩
@@ -86,7 +93,7 @@ theorem sfIntegralScalarExtension_constructible
     sfIntegralConstructible l L Y
       ((integralScalarExtension l E L ι Y).obj K) := by
   set_option backward.isDefEq.respectTransparency true in
-  set_option backward.isDefEq.respectTransparency.types true in
+  set_option backward.isDefEq.respectTransparency.types false in
     obtain ⟨q, hq, hprime⟩ := Nat.exists_infinite_primes (l + 1)
     let D := scalarExtensionDatum.{u} q hprime
     have hlD : l ≠ D.p := by

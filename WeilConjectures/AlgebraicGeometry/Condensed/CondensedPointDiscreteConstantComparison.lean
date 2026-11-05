@@ -123,4 +123,8 @@ private noncomputable def constantToContinuous (A : Type u) [Ring A]
       map_add' _ _ := rfl }
   naturality _ _ _ := rfl
 
+private noncomputable abbrev constantToContinuousAb (A : Type u) [Ring A]
+    [TopologicalSpace A] [DiscreteTopology A] :=
+  Functor.whiskerRight (constantToContinuous A) (forget₂ RingCat.{u + 1} Ab.{u + 1})
+
 end AlgebraicGeometry.ProEtale

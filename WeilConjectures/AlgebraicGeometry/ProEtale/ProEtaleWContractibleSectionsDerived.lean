@@ -40,6 +40,16 @@ public import Mathlib.LinearAlgebra.Finsupp.LinearCombination
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.Algebra.Homology.SingleHomology
+public import Mathlib.Algebra.Category.Grp.Abelian
+public import Mathlib.Algebra.Category.Grp.EpiMono
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.CategoryTheory.Abelian.Exact
+public import Mathlib.CategoryTheory.Sites.EpiMono
+public import Mathlib.CategoryTheory.Sites.LeftExact
+public import Mathlib.CategoryTheory.Sites.LocallySurjective
+public import Mathlib.CategoryTheory.Sites.PreservesSheafification
+public import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+public import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
 
 /-!
 # Derived sections over a w-contractible affine pro-etale object
@@ -57,6 +67,9 @@ universe t u v wA wB
 
 open CategoryTheory CategoryTheory.Limits Opposite
 
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_proEtTopology
+
 namespace AlgebraicGeometry.Scheme.ProEt
 
 /-- Evaluation is the composite of the existing additive forgetful and presheaf
@@ -67,5 +80,18 @@ instance moduleEvaluation_additive (X : Scheme.{t})
     (SheafOfModules.evaluation.{max u v (t + 1)} R (op U)).Additive :=
   inferInstanceAs ((SheafOfModules.forget.{max u v (t + 1)} R ⋙
     PresheafOfModules.evaluation R.obj (op U)).Additive)
+
+/-- The K-injective resolution hypothesis for the recorded unbounded right derived
+functor, on the original pro-etale module category. This only forgets the additional
+monomorphism property of the existing K-injective resolution theorem.
+Source: Stacks Project, Tag 079P (blueprint: det-pe-wc-sections-derived). -/
+abbrev moduleQuasiIsoKInjectiveResolutions (X : Scheme.{t})
+    (R : Sheaf (topology X) RingCat.{u}) :
+    ∀ K : CochainComplex (ringedSiteModules.{max u v (t + 1)} R) ℤ,
+      ∃ (I : CochainComplex (ringedSiteModules.{max u v (t + 1)} R) ℤ) (s : K ⟶ I),
+        I.IsKInjective ∧ QuasiIso s :=
+  letI := SheafOfModules.isGrothendieckAbelianOfUniverses.{t + 1, t, u, v} (topology X) R
+  fun K ↦ (Abelian.HasKInjectiveResolutions.exists_isKInjective K).elim
+    (fun I hI ↦ hI.elim (fun hKI hs ↦ hs.elim (fun s hs ↦ ⟨I, s, hKI, hs.2⟩)))
 
 end AlgebraicGeometry.Scheme.ProEt

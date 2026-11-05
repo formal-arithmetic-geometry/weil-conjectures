@@ -27,6 +27,8 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 import WeilConjectures.CategoryTheory.RightDerivedPlusCube
 import WeilConjectures.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic
 import WeilConjectures.CategoryTheory.Sites.CohomologyRightDerivedSections
+public import WeilConjectures.CategoryTheory.Constant.ConstantLeftModuleInverseImageCoherence
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Derived evaluation and forgetting constant left-module scalars
 
@@ -92,6 +94,11 @@ def restriction {W W' : C} (f : W' ⟶ W) : G J Λ W ⟶ G J Λ W' :=
       Functor.whiskerLeft
         (PresheafOfModules.evaluation ((Functor.const Cᵒᵖ).obj (RingCat.of Λ)) (op W'))
         (ModuleCat.restrictScalarsId' (RingHom.id Λ) rfl).hom)
+
+/-- Restriction of evaluated abelian sections along the same site arrow.
+Source: Stacks, 03FD (blueprint: lem-pe-left-module-derived-evaluation-forget). -/
+abbrev restriction₀ {W W' : C} (f : W' ⟶ W) : G₀ J W ⟶ G₀ J W' :=
+  (sheafSections J AddCommGrpCat.{u}).map f.op
 
 /-- Additivity inherited from Mathlib's presheaf scalar restriction and evaluation.
 Source: Stacks, 03FD (blueprint: lem-pe-left-module-derived-evaluation-forget). -/

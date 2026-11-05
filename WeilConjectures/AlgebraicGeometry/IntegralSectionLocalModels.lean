@@ -11,6 +11,8 @@ import WeilConjectures.AlgebraicGeometry.IntegralSectionMemberModels
 import WeilConjectures.WeilObject.Sheaf.Stalk
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedConstantConstructibilitySupplement
 
 /-! # Finite scalar models under the normalized integral section comparison
 

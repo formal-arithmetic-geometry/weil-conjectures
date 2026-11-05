@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SmoothPurity.Compact.CompactSupportRepresentativeIndependence
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
 
 /-! # The existing compact-support realization predicate
 
@@ -20,6 +21,7 @@ set_option Elab.async false
 set_option synthInstance.maxSize 4096
 universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Scheme
+open scoped CategoryTheory.Obj
 namespace WeilConjectures
 
 attribute [local irreducible] HasDerivedCategory.standard
@@ -40,20 +42,24 @@ variable (l : ℕ) [Fact l.Prime]
   [f.IsOver (Spec (.of K₀))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
   (c : Compactification f)
 
-/-- The exact integral-functor predicate of the already recorded strict-tower realization.
-The predicate retains the chosen tower, derived limit and projection normalizations.
-Naming the predicate keeps the large proof-normalized realization out of later types.
-Source: blueprint order 1494, proof steps 1--4
+/-- A realization of compact support with condensed coefficients is a natural
+isomorphism to `Rp_* j_!` for the specified compactification. This definition applies
+in particular to discrete finite rings and to the condensed rings `O_E`, `E` and
+`Qbar_ell`. The ambient categories are categories of modules over `Λ_X = p_X^* Λ`.
+Compactification independence is asserted separately on the appropriate subcategories.
+
+Source: blueprint latest, part-six-operations/sec-six-functors/sec-n-change/
+sk-prop-qlbar-two-colimit/det-def-sf-operations.md, clause (iv)
 (blueprint: def-weil-compact-support-finite-realization-predicate). -/
 def SfCompactSupportFiniteRealizationSpec
-    (E : Type u) [Field E] [Algebra (Padic l) E]
-    [FiniteDimensional (Padic l) E] :
-    (sfIntegralConstructibleCategory l E X ⥤ sfIntegralConstructibleCategory l E Y) → Prop :=
-  (fun {P : (sfIntegralConstructibleCategory l E X ⥤
-      sfIntegralConstructibleCategory l E Y) → Prop} (_h : ∃ F, P F) ↦ P)
-    ((exists_compactSupportRepresentativeComparison l
-      E K₀ hl X Y f c).choose_spec.choose_spec.2.2.choose_spec.choose_spec
-        |>.2.2.choose_spec.2)
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
+    (F : DerivedCategory
+        (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (ProEtale.condensedRingObj Λ X)) ⥤
+      DerivedCategory
+        (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (ProEtale.condensedRingObj Λ Y))) :
+    Prop :=
+  Nonempty (F ≅ ProEtale.CondensedRing.rightDerivedLowerShriekOfCompactification Λ c)
 
 end FiniteAction
 end WeilConjectures

@@ -74,7 +74,7 @@ private theorem limitUnit_counit (W : Scheme.{t})
       [I.IsKInjective] : α.app I = β.app I := by
     let e := L.rightDerivedFunctorObjQIso I
     have hδ : δ.app I = e.inv := by
-      apply (cancel_mono e.hom).1
+      apply (Iso.cancel_iso_hom_right _ _ e).1
       change (DerivedCategory.Q.map (D.towerLimitComparison.hom.app I) ≫
         D.limitUnit.app I) ≫ e.hom = e.inv ≫ e.hom
       rw [Category.assoc, D.limitUnit_normalization, ← CategoryTheory.Functor.map_comp,

@@ -323,8 +323,12 @@ theorem normalization :
       Functor.mapIso_hom, Iso.prod_hom, Iso.refl_hom, Iso.app_hom,
       Category.assoc, IsIso.hom_inv_id, Category.comp_id] using hh
   have ht := transport_projection L V a.tensor b.tensor pi
-    (fun {_ _} q Q ↦ derivedProjectionFormulaMate_naturality
-      L V adj a.tensor b.tensor mu _ _ Q q)
+    (fun {_ _} q Q ↦ by
+      exact (congrArg (fun t ↦ t.app Q)
+        ((adj.rightAdjointProjectionMap (T_C := Functor.curry.obj b.tensor)
+          (T_D := Functor.curry.obj a.tensor)
+          (Functor.curry.map mu.hom ≫
+            (Functor.curryObjProdComp L L b.tensor).hom)).naturality q)).symm)
     (fun E {_ _} q ↦ by
       exact (((adj.rightAdjointProjectionMap
         (T_C := Functor.curry.obj b.tensor) (T_D := Functor.curry.obj a.tensor)

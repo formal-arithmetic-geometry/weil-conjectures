@@ -37,3 +37,13 @@ private local instance restriction_faithful
     exact congrArg (fun k ↦ k.val.app U x) h
 
 end AlgebraicGeometry.Scheme
+
+private theorem power_comp
+    {C : Type*} [Category* C] [Abelian C] {M N : C}
+    (f : End M) (t : End N) (p : M ⟶ N) (h : f ≫ p = p ≫ t) (n : ℕ) :
+    (f ^ n) ≫ p = p ≫ (t ^ n) := by
+  induction n with
+  | zero => simp
+  | succ n ih =>
+    simp only [pow_succ, End.mul_def, Category.assoc]
+    rw [ih, ← Category.assoc, h, Category.assoc]

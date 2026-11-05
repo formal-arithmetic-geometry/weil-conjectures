@@ -123,6 +123,18 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 open scoped CategoryTheory.Obj
 
+namespace AlgebraicGeometry.Scheme.AffineProEt
+
+/-- The henselian lift viewed over the original scheme through an affine open chart.
+Source: blueprint `det-sf-open-closed-pullback-limits`, clause (1), using the lift of
+`def-exc-closed-site-lift` (blueprint: det-sf-open-closed-pullback-limits). -/
+def closedSiteLiftOver {X : Scheme.{u}} (A : Type u) [CommRing A] (I : Ideal A)
+    (a : Spec (.of A) ⟶ X) [IsOpenImmersion a]
+    (V : (Spec (.of (A ⧸ I))).AffineProEt) : X.ProEt :=
+  ProEt.mk (((toProEt (Spec (.of A))).obj ((closedSiteLift A I).obj V)).hom ≫ a)
+
+end AlgebraicGeometry.Scheme.AffineProEt
+
 namespace AlgebraicGeometry.Scheme
 
 section Localization

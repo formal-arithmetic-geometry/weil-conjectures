@@ -10,6 +10,7 @@ public import WeilConjectures.SmoothPurity.IntegralScalarOperations.IntegralOper
 import all WeilConjectures.TraceFormula.Supporting.FiniteFreeCompletedScalarComparison
 import all WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarExtensionConstructible
 import WeilConjectures.SmoothPurity.Sf.SfDerivedCompleteLegacyComparison
+public import WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarExtensionConstructibleIntrinsic
 
 /-! # The normalized integral scalar-completion comparison
 

@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationMap
+public import WeilConjectures.AlgebraicGeometry.ContinuousIntegralLocalizationColimitTransport
+public import WeilConjectures.AlgebraicGeometry.IntegralConstructibleSequentialHom
 
 /-!
 

@@ -8,6 +8,10 @@ public import WeilConjectures.AlgebraicGeometry.IntegralConstantModelRealization
 public import WeilConjectures.AlgebraicGeometry.IntegralModelsStacksData
 import all WeilConjectures.AlgebraicGeometry.IntegralConstantModelHeartClosure
 import WeilConjectures.AlgebraicGeometry.IntegralSectionLocalModels
+public import WeilConjectures.AlgebraicGeometry.CompletedConstantConstructibility
+public import WeilConjectures.AlgebraicGeometry.Integral.Constant.IntegralConstantModelHeartClosureSupplement
+public import WeilConjectures.AlgebraicGeometry.Integral.Constant.IntegralConstantModelRealizationSupplement
+public import WeilConjectures.AlgebraicGeometry.IntegralCompletedConstantModelTransport
 
 /-! # Finite constant models under integral realization
 

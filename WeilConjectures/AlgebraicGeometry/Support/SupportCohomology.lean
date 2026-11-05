@@ -100,6 +100,26 @@ noncomputable abbrev supportSections :
   Sheaf.supportedSectionsFunctor X.smallEtaleTopology AddCommGrpCat.{u + 1}
     (supportRestrictionArrow i)
 
+/-- `H^q_Z(X,F) = R^q Γ_Z(X,-)(F)`, for any `q ≥ 0`, in particular for torsion `F`.
+Source: blueprint `sec-smooth-purity/sk-def-purity-conv`, injective-resolution formula
+(blueprint: def-pur-support-cohomology).
+Mathlib's `InjectiveResolution.isoRightDerivedObj` identifies this with the cohomology of
+supported sections applied termwise to any injective resolution of `F`. -/
+noncomputable def supportCohomologyValue (q : ℕ)
+    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) : AddCommGrpCat.{u + 1} :=
+  ((supportSections i).rightDerived q).obj F
+
+/-- The canonical computation using any injective resolution, rather than only the
+chosen resolution in `Functor.rightDerived`.
+Source: Stacks Project, Tag 09XP, and blueprint `sec-smooth-purity/sk-def-purity-conv`
+(blueprint: def-pur-support-cohomology). -/
+noncomputable def supportCohomologyIso (q : ℕ)
+    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (I : InjectiveResolution F) :
+    supportCohomologyValue i q F ≅
+      (HomologicalComplex.homologyFunctor AddCommGrpCat.{u + 1} (ComplexShape.up ℕ) q).obj
+        (((supportSections i).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex) :=
+  I.isoRightDerivedObj (supportSections i) q
+
 /-- `R Γ_Z` on the bounded-below derived category of abelian etale sheaves.
 Source: blueprint `sec-smooth-purity/sk-def-purity-conv`, derived-complex clause
 (blueprint: def-pur-support-cohomology). -/
@@ -141,6 +161,24 @@ noncomputable abbrev supportSections :
     Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ) ⥤ ModuleCat.{u + 1} Λ :=
   Sheaf.supportedSectionsFunctor (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)
     (supportRestrictionArrow i)
+
+/-- The natural-number derived functors of supported pro-etale sections.
+Source: blueprint `sec-smooth-purity/sk-def-purity-conv`, pro-etale clause
+(blueprint: def-pur-support-cohomology). The computation on any injective resolution is
+Mathlib's `InjectiveResolution.isoRightDerivedObj`. -/
+noncomputable def supportCohomologyValue (q : ℕ)
+    (F : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) : ModuleCat.{u + 1} Λ :=
+  ((supportSections i Λ).rightDerived q).obj F
+
+/-- The injective-resolution formula for supported cohomology with pro-etale coefficients.
+Source: blueprint `sec-smooth-purity/sk-def-purity-conv`, pro-etale clause
+(blueprint: def-pur-support-cohomology). -/
+noncomputable def supportCohomologyIso (q : ℕ)
+    (F : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) (I : InjectiveResolution F) :
+    supportCohomologyValue i Λ q F ≅
+      (HomologicalComplex.homologyFunctor (ModuleCat.{u + 1} Λ) (ComplexShape.up ℕ) q).obj
+        (((supportSections i Λ).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex) :=
+  I.isoRightDerivedObj (supportSections i Λ) q
 
 /-- Bounded-below right derived supported sections on the small pro-etale site.
 Source: blueprint `sec-smooth-purity/sk-def-purity-conv`, pro-etale clause

@@ -18,6 +18,11 @@ public import Mathlib.Algebra.Colimit.Module
 public import WeilConjectures.SmoothPurity.SfAlgebraicallyClosedCoefficients.SfCoefficientStageCore
 
 import WeilConjectures.CategoryTheory.StageSystem.Shift
+public import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
+public import WeilConjectures.SmoothPurity.Rational.RationalAssociatorShiftCompat
+public import WeilConjectures.SmoothPurity.Scalar.ScalarShiftNormalization
+public import WeilConjectures.SmoothPurity.Sf.SfIntegralConstructibleTriangulated
+public import WeilConjectures.SmoothPurity.Sf.SfRationalScalarExactOfIntegral
 
 /-! # Intrinsic algebraically closed coefficients without idempotent completion
 

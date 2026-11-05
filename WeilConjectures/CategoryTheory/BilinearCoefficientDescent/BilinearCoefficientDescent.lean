@@ -1141,6 +1141,46 @@ Source: blueprint coefficient definitions
 @[no_expose] def uniformizer (E : Padic.FiniteCoefficientFields l Ω) : Integers l Ω E :=
   ⟨(Padic.coefficientExtensionUniformizer l E.val : E.val), uniformizer_mem l Ω E⟩
 
+private theorem integerInclusion_absoluteValue
+    {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L) (x : E.val) :
+    Padic.coefficientExtensionAbsoluteValue l L.val (IntermediateField.inclusion h x) =
+      Padic.coefficientExtensionAbsoluteValue l E.val x := by
+  let ι := IntermediateField.inclusion h
+  let f : AbsoluteValue E.val ℝ :=
+    (Padic.coefficientExtensionAbsoluteValue l L.val).comp ι.toRingHom.injective
+  have hf : ∀ a : Padic l, f (algebraMap (Padic l) E.val a) = ‖a‖ := by
+    intro a
+    change Padic.coefficientExtensionAbsoluteValue l L.val
+      (ι (algebraMap (Padic l) E.val a)) = ‖a‖
+    rw [ι.commutes]
+    exact spectralNorm_extends a
+  exact spectralNorm_unique_field_norm_ext hf x
+
+/-- The field inclusion preserves the recorded valuation subrings.
+Source: spectral-norm uniqueness and the defining DVR membership formula
+(blueprint: lem-pur-bilinear-comparison-coefficient-descent).
+Proof: the absolute value on the larger field restricts to the unique extension
+of the p-adic absolute value on the smaller field. Integer-ring membership is
+absolute value at most one in both fields, so the restriction preserves it. -/
+theorem integerInclusion_mem {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L)
+    (x : Integers l Ω E) :
+    IntermediateField.inclusion h (x : E.val) ∈ Integers l Ω L := by
+  have hx : (x : E.val) ∈ Padic.coefficientExtensionIntegers l E.val :=
+    Integers_eq l Ω E ▸ x.property
+  rw [Padic.mem_coefficientExtensionIntegers,
+    ← integerInclusion_absoluteValue l Ω h (x : E.val)] at hx
+  rw [Integers_eq, Padic.mem_coefficientExtensionIntegers]
+  exact hx
+
+/-- The canonical integer-ring restriction of the given intermediate-field inclusion.
+Source: common-stage coefficient formula
+(blueprint: lem-pur-bilinear-comparison-coefficient-descent). -/
+@[no_expose] def integerInclusion {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L) :
+    Integers l Ω E →+* Integers l Ω L :=
+  ((IntermediateField.inclusion h).toRingHom.comp
+    (Integers l Ω E).subtype).codRestrict
+      (Integers l Ω L) (integerInclusion_mem l Ω h)
+
 set_option linter.unusedSectionVars false in
 attribute [local irreducible] Padic.finiteCoefficientCompositum uniformizer
 
