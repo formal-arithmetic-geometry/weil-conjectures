@@ -8,6 +8,7 @@ public import WeilConjectures.WeilSheaf.SmoothPurityFieldCompactificationExchang
 public import WeilConjectures.WeilSheaf.SmoothPurityOpenFieldBaseChange
 public import WeilConjectures.WeilSheaf.SmoothPurityUnitBaseChangeComp
 public import WeilConjectures.WeilSheaf.SmoothPurityChartBaseChange
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CoefficientChangeRefinement
 
 /-! # One geometric-fiber exchange for all compact-support morphisms
 
@@ -49,6 +50,7 @@ def purityGeometricFiberLowerShriekExchange :
     c (c.geometricFiber (Over.w f))
     (Scheme.Hom.isPullback_geometricFiberMap c.i (c.i_comp_g_comp (Over.w f)))
     (Scheme.Hom.isPullback_geometricFiberMap c.g rfl).flip
+
 
 /-- The exceptional mate of the global geometric-fiber exchange for an open immersion. -/
 theorem isIso_purityGeometricFiberLowerShriekExchange_mate_of_isOpenImmersion
