@@ -106,16 +106,21 @@
 - Completion marker: `/home/ubuntu/u9/state/BZ311.DONE`.
 - This final commit changes only progress documentation; Lean sources match the green build.
 
-# BZ395 in progress
+# BZ395 complete
 
-- Branch: `u9/BZ395`; baseline commit: `9bc0d70a6`.
-- Owned module: `WeilConjectures.AlgebraicGeometry.ProfinitePointPullback`.
-- Baseline remote build found five errors in three statement headers.
-- The user instructed continuation after the exact API-only statement patch proposal.
-  Applied that patch: use the reversed Mathlib compositor and repair two misplaced
-  `.symm` projections, preserving the intended maps.
-- Owned module passed `ucheck-bump`: rc=0, failed=0, 3949 jobs, at `ec3927a96a`.
-- Added explicit `Iso.symm_hom` / `Iso.symm_inv` normalization at eight restricted
-  simp sites after the header migration. Continuing with four direct importers.
-- Fix patterns, exact errors, and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ395.md`.
+- Branch: `u9/BZ395`; baseline: `9bc0d70a6`.
+- Owned module `WeilConjectures.AlgebraicGeometry.ProfinitePointPullback` passed
+  `ucheck-bump`: rc=0, failed=0, 3949 jobs, source `ec3927a96a`.
+- Five downstream modules also built green: `FiniteEtaleSplitHomDescent`,
+  `FiniteEtaleSheetSumCompatibility`, `ComponentRelativeProfiniteSite`,
+  `RelativeComponentLiftPullbackSpace`, and `ComponentLiftBaseChange`.
+- Final downstream batch: rc=0, failed=0, 4211 jobs; source `95f839c52e499e598b7ca3a36676450016985d60`.
+- Applied the exact three-header API patch after the user's continuation instruction.
+  Added explicit inverse-isomorphism simp rules and a local slice-coproduct instance.
+- Two downstream targets were skipped for foreign dependency errors owned by
+  BZ389/BZ390; BZ436 also failed in the exploratory batch. Their sources are untouched.
+- Fix patterns, exact errors, counts, and full log paths: `/home/ubuntu/u9/bz/FIXES-BZ395.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ395-contract-audit.txt`.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or limit increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ395.DONE`.
+- This final commit changes only progress documentation; Lean sources match the green builds.
