@@ -116,30 +116,23 @@
 - Fix patterns and baseline log: `/home/ubuntu/u9/bz/FIXES-BZ384.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ469 complete
+# BZ475 complete
 
-- Branch: `u9/BZ469`; starting commit: `99a06bbbb`.
-- Assigned module and downstream continuation pass `ucheck-bump`: rc=0, failed=0,
-  4250 jobs on `newsrv:/home/ubuntu/u9n/bumpw1`.
-- Validated source commit: `aa9e4bf9dd9d54aaf2c32a7536f56be00764afeb`.
-- Full log: `/home/ubuntu/u9/bz/BUILD-BZ469-final-full.log`.
-- The user instructed continuation after the explicit compositor API proposal.
-  Four approved statement sites use `.symm` for Mathlib's reversed compositor;
-  two proof-local q' annotations explicitly target quotient followed by Plus.Qh.
-- Green modules:
-- WeilConjectures.AlgebraicGeometry.EtaleInjectiveSectionsComparison
-- WeilConjectures.AlgebraicGeometry.Etale.EtaleInjectiveSectionsComparison
-- WeilConjectures.AlgebraicGeometry.StrictLocalInjectiveSourceComparison
-- WeilConjectures.AlgebraicGeometry.StrictLocalInjectiveSourceTransition
-- WeilConjectures.AlgebraicGeometry.Strict.Local.StrictLocalInjectiveSourceComparison
-- WeilConjectures.AlgebraicGeometry.SourceStageSectionsNaturality
-- WeilConjectures.AlgebraicGeometry.SourceDerivedSectionsNaturalityCore
-- WeilConjectures.AlgebraicGeometry.SourceDerivedSectionsNaturality
-- Skipped StrictLocalInjectiveSourceSections because unowned dependencies
-  InjectiveExchangeSourceTransport, InjectiveExchangeTargetTransport, and
-  SourceLocalizedCocycleHomology fail. Their source files are untouched.
-- Patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ469.md`.
-- Contract audit: `/home/ubuntu/u9/bz/BZ469-contract-audit.txt`.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
-- Completion marker: `/home/ubuntu/u9/state/BZ469.DONE`.
-- This final commit updates only progress documentation; Lean sources match the green build.
+- Branch: `u9/BZ475`; starting commit: `99a06bbbb`.
+- Assigned `WeilConjectures.CategoryTheory.Scalar.ScalarHomTensorCoherence` passed
+  `ucheck-bump`: rc=0, failed=0, 3802 jobs, source commit `8ef9af9b30`.
+- Direct importer `WeilConjectures.CategoryTheory.Scalar.ScalarInternalHomTowerCoherence`
+  also passed: rc=0, failed=0, 3807 jobs, source commit `05405452cd`.
+- The user instructed continuation after the exact private-helper statement proposal.
+  The compositor now uses `.symm` in that statement and its proof; `Iso.symm_inv`
+  completes the explicit simplification. Public statements and docstrings are unchanged.
+- The second-layer importer `ScalarTensorTowerComparison` was attempted at
+  `0c686edf56d1346176344872f658766fe004c0f9` and skipped under the brief's ownership rule:
+  unowned dependency `KFlatRingedToposPullback` fails instance synthesis and times out.
+- Full logs: `/home/ubuntu/u9/bz/BUILD-BZ475-{assigned,downstream1,downstream2}-full.log`.
+- Fix pattern, whole-tree counts, and exact error: `/home/ubuntu/u9/bz/FIXES-BZ475.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ475-contract-audit.txt`.
+- No local Lean/Lake execution, proof placeholders, forbidden trust escapes,
+  heartbeat increases, profiler probes, or unrelated source edits.
+- Completion marker: `/home/ubuntu/u9/state/BZ475.DONE`.
+- This final commit changes only progress documentation; Lean sources match both green builds.
