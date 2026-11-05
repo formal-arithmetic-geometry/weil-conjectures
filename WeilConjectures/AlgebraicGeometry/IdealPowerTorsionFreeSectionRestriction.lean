@@ -25,7 +25,7 @@ universe u
 open CategoryTheory Opposite
 namespace AlgebraicGeometry.Scheme
 
-local instance {X : Scheme.{u}} (F : X.Modules) {V W : X.Opens} (h : V ≤ W) :
+noncomputable local instance {X : Scheme.{u}} (F : X.Modules) {V W : X.Opens} (h : V ≤ W) :
     HSMul ((SheafOfModules.unit X.ringCatSheaf).val.obj (op V))
       ((ModuleCat.restrictScalars (X.ringCatSheaf.obj.map (homOfLE h).op).hom).obj
         (F.val.obj (op V))) (F.val.obj (op V)) where
