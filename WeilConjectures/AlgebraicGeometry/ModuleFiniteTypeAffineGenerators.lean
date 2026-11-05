@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Coherent
+public import Mathlib.AlgebraicGeometry.AffineScheme
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 import WeilConjectures.AlgebraicGeometry.ModuleGeneratingSectionsCompactSelection
 
