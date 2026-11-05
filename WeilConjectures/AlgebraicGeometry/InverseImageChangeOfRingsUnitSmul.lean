@@ -23,17 +23,11 @@ open scoped ChangeOfRings TensorProduct
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-local instance {X : TopCat.{u}} (A : X.Sheaf CommRingCat.{u})
-    (P : _root_.PresheafOfModules.{u}
-      ((sheafCompose (Opens.grothendieckTopology X)
-        (forget₂ CommRingCat.{u} RingCat.{u})).obj A).obj)
-    (V : (TopologicalSpace.Opens X)ᵒᵖ) :
-    Module (A.obj.obj V) (P.obj V) :=
-  (P.obj V).isModule
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 
-set_option backward.isDefEq.respectTransparency true
-set_option backward.isDefEq.respectTransparency.types true
-
+set_option maxHeartbeats 250000 in
+-- Measured 209286 heartbeats on Lean v4.35.0-rc3 with Mathlib b63f6e8a.
 /-- The additive inverse-image unit, followed by extension and sheafification, is
 semilinear for the ring inverse-image unit followed by the extension ring map.
 

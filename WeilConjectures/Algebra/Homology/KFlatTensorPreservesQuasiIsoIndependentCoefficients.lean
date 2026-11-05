@@ -53,6 +53,7 @@ private theorem tensorRight_additive_reconstruction (N : 𝒜) :
     refine ⟨?_⟩
     intro M M' f g
     ext U : 1
+    let : CommRing ((𝓞).obj.obj U) := inferInstanceAs (CommRing (R.obj.obj U))
     change (f.app U + g.app U) ▷ N.val.obj U =
       f.app U ▷ N.val.obj U + g.app U ▷ N.val.obj U
     simp

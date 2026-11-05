@@ -68,7 +68,8 @@ theorem exists_isIdempotentElem_notMem (P : Ideal C) [P.IsPrime]
   have hmax : ∀ Q : PrimeSpectrum (C ⧸ I), Q.asIdeal.IsMaximal := by
     intro Q
     have : (Q.asIdeal.comap (Ideal.Quotient.mk I)).IsMaximal :=
-      Ideal.isMaximal_of_isIntegral_of_isMaximal_under _ (by rw [hover Q]; infer_instance)
+      Ideal.isMaximal_of_isIntegral_of_isMaximal_under (R := R) _
+        (by rw [Ideal.under_def, hover Q]; infer_instance)
     rcases Ideal.map_eq_top_or_isMaximal_of_surjective _ hmk this with h | h
     · rw [Ideal.map_comap_of_surjective _ hmk] at h
       exact absurd h (Ideal.IsPrime.ne_top inferInstance)
@@ -220,7 +221,8 @@ theorem isStrictlyHenselianLocalRing_localization [IsStrictlyHenselianLocalRing 
       simpa using add_mem this (hKM (Ideal.subset_span rfl))
     exact hM.ne_top ((Ideal.eq_top_iff_one _).2 h1)
   have hPmax : P.IsMaximal :=
-    Ideal.isMaximal_of_isIntegral_of_isMaximal_under _ (by rw [hPm]; infer_instance)
+    Ideal.isMaximal_of_isIntegral_of_isMaximal_under (R := An) _
+      (by rw [Ideal.under_def, hPm]; infer_instance)
   have hmk : Function.Surjective (Ideal.Quotient.mk K) := Ideal.Quotient.mk_surjective
   set PD := P.map (Ideal.Quotient.mk K)
   have hmemPD : ∀ x : Bn, Ideal.Quotient.mk K x ∈ PD ↔ x ∈ P := fun x ↦

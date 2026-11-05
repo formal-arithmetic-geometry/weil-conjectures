@@ -12,6 +12,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.RingTheory.Flat.Basic
 import WeilConjectures.AlgebraicGeometry.IntrinsicFlatModuleStalkTensorPresentation
 import WeilConjectures.RingTheory.Flat.LocalizationPreservesFlatness
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Relative flatness on a single affine chart
 

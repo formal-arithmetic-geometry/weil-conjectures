@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
 public import WeilConjectures.AlgebraicGeometry.ChartOrdinaryMapRecovery
+public import Mathlib.AlgebraicGeometry.AffineScheme
 import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import WeilConjectures.AlgebraicGeometry.Modules.FaithfullyFlatDescent

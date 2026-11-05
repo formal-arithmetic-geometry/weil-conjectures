@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
+public import Mathlib.CategoryTheory.Monoidal.Closed.Braided
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
 import Mathlib.CategoryTheory.Monoidal.Rigid.Braided

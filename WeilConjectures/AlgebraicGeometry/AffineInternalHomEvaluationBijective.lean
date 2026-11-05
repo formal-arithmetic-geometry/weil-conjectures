@@ -8,6 +8,7 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 import WeilConjectures.AlgebraicGeometry.InternalHomAffineChartEvaluation
 public import Mathlib.AlgebraicGeometry.AffineScheme
