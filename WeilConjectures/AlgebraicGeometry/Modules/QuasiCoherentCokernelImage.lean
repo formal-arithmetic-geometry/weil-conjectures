@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Coherent
+public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.CategoryTheory.Abelian.Images
 public import Mathlib.LinearAlgebra.Quotient.Basic
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
