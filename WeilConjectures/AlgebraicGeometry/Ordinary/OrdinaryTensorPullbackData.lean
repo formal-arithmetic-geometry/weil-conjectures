@@ -142,42 +142,5 @@ variable {C D : Type c} [Category.{v} C] [Category.{v} D]
   (adj : F ⊣ SheafOfModules.pushforward.{r}
     ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map phi))
 
-/-- The scalar-generator formula and two-variable naturality.
-Source: Stacks 03EL (blueprint: def-sf-ordinary-tensor-pullback-data). -/
-def OrdinaryTensorNormalized
-    (e : ∀ M N : Mod.{c, v, r} J R,
-      F.obj ((SheafOfModules.monoidalCategory R).tensorObj M N) ≅
-        (SheafOfModules.monoidalCategory S).tensorObj (F.obj M) (F.obj N)) : Prop :=
-  (∀ (M N : Mod.{c, v, r} J R) (V : C) (W : D) (p : W ⟶ U.obj V)
-      (x : M.val.obj (op V)) (y : N.val.obj (op V)) (a : S.obj.obj (op W)),
-    (e M N).hom.val.app (op W)
-        (a • (F.obj ((SheafOfModules.monoidalCategory R).tensorObj M N)).val.map p.op
-          ((adj.unit.app ((SheafOfModules.monoidalCategory R).tensorObj M N)).val.app
-            (op V) (tensorSectionAtSize J R M N (op V) x y))) =
-      tensorSectionAtSize K S (F.obj M) (F.obj N) (op W)
-        (a • (F.obj M).val.map p.op ((adj.unit.app M).val.app (op V) x))
-        ((F.obj N).val.map p.op ((adj.unit.app N).val.app (op V) y))) ∧
-  ∀ (M M' N N' : Mod.{c, v, r} J R) (a : M ⟶ M') (b : N ⟶ N'),
-    F.map ((SheafOfModules.monoidalCategory R).tensorHom a b) ≫ (e M' N').hom =
-      (e M N).hom ≫ (SheafOfModules.monoidalCategory S).tensorHom (F.map a) (F.map b)
-
-/-- The ordinary tensor comparison and preservation of flat-term representatives.
-All remaining fields are propositions; normalization determines the ordinary isomorphisms.
-Source: Stacks 03EL and 0G7E (blueprint: def-sf-ordinary-tensor-pullback-data). -/
-structure OrdinaryTensorPullbackData where
-  /-- The comparison on ordinary sheaf modules. -/
-  ordinary : ∀ M N : Mod.{c, v, r} J R,
-    F.obj ((SheafOfModules.monoidalCategory R).tensorObj M N) ≅
-      (SheafOfModules.monoidalCategory S).tensorObj (F.obj M) (F.obj N)
-  /-- Generator normalization and naturality. -/
-  normalized : OrdinaryTensorNormalized J K U R S phi F adj ordinary
-  /-- Preservation of the simultaneous flat-term K-flat representative class. -/
-  flat : ∀ P : CochainComplex (Mod.{c, v, r} J R) ℤ,
-    P.IsKFlatIndependentCoefficients →
-      (∀ n : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := R) (P.X n)) →
-    CochainComplex.IsKFlatIndependentCoefficients
-        ((F.mapHomologicalComplex (.up ℤ)).obj P) ∧
-      ∀ n : ℤ, SheafOfModules.IsFlatOnSite (J := K) (R := S)
-        (((F.mapHomologicalComplex (.up ℤ)).obj P).X n)
 end Comparison
 end WeilConjectures.SemilinearSections
