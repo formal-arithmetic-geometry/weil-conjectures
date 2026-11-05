@@ -28,7 +28,6 @@ variable (A : Type (u + 1)) [CommRing A] [Finite A]
     (e : FiniteComparisons A o)
 
 set_option linter.unusedSectionVars false in
-set_option linter.style.haveILetI false in
 /-- The right half: the tensor model on `U`, the ringed tensor comparison and the open pin.
 (blueprint: lem-sf-finite-restriction-representative-square) -/
 theorem rightEq (P Q : CochainComplex (FiniteModules A X) ℤ)
@@ -38,7 +37,7 @@ theorem rightEq (P Q : CochainComplex (FiniteModules A X) ℤ)
       ((finiteComplexRealization e.realizeX).obj Q)) :
     RightEq A gU j' j g sq o e P Q hp hq := by
   constructor
-  letI : (restrict .ordinary j (finiteInput A gU j' j g sq).R).Additive :=
+  let : (restrict .ordinary j (finiteInput A gU j' j g sq).R).Additive :=
     (restriction_exact .ordinary j (finiteInput A gU j' j g sq).R).1
   have hpL := o.tensorComparison.preserves ((finiteComplexRealization e.realizeX).obj P) hp
   have hqL := o.tensorComparison.preserves ((finiteComplexRealization e.realizeX).obj Q) hq

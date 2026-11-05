@@ -349,7 +349,6 @@ private noncomputable def homObjSmall_kfi (A N : SheafOfModules.{r} 𝓡) :
   val := PresheafOfModules.homObjSmall_kfi A.val N.val
   isSheaf := PresheafOfModules.isSheaf_homObjSmall_kfi N.isSheaf
 
-set_option maxHeartbeats 1000000 in
 -- The tensor localization comparison has dependent sheafification instances.
 /-- The tensor comparison is natural in the second factor. -/
 private lemma whiskerLeft_tensorObjIsoSheafification_hom_kfi (A : SheafOfModules.{r} 𝓡)

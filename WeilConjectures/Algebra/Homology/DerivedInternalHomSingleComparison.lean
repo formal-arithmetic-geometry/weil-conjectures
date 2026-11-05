@@ -29,7 +29,6 @@ open CategoryTheory Opposite TopologicalSpace
 
 namespace CategoryTheory
 
-set_option maxHeartbeats 1000000 in
 -- The localization comparisons unfold the sheaf and curry carrier encodings.
 set_option backward.isDefEq.respectTransparency false in
 /-- A right derived functor of termwise internal Hom from a fixed module agrees with

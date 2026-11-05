@@ -114,7 +114,15 @@ variable {C D : Type*} [Category* C] [Category* D] {L : C ⥤ D} {R : D ⥤ C} (
   {α : C ⥤ C} {β : D ⥤ D} (e : L ⋙ β ≅ α ⋙ L)
 
 /-- The right adjoint exchange `R ⋙ α ⟶ β ⋙ R` of an isomorphism `e : L ⋙ β ≅ α ⋙ L` for an
-adjunction `L ⊣ R` is an isomorphism if `α` is an equivalence and `β` is fully faithful. -/
+adjunction `L ⊣ R` is an isomorphism if `α` is an equivalence and `β` is fully faithful.
+```
+   D ---R---> C
+   |          |
+   β    ⟹    α
+   v          v
+   D ---R---> C
+```
+-/
 lemma isIso_rightAdjointExchange_app [α.IsEquivalence] [β.Full] [β.Faithful] (d : D) :
     IsIso ((rightAdjointExchange adj adj e).app d) := by
   have hc : L.map ((rightAdjointExchange adj adj e).app d) ≫ adj.counit.app (β.obj d) =

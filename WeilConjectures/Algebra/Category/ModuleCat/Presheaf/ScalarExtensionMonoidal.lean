@@ -18,7 +18,6 @@ lemma-tensor-product-pullback, applied before sheafification.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.MonoidalCategory
 open scoped ChangeOfRings
@@ -245,10 +244,10 @@ theorem exists_pullback_monoidal_normalized
       ∀ (X : Cᵒᵖ) (r : R.obj X),
         ((pullbackPushforwardAdjunction φ).homEquiv _ _
           (Functor.OplaxMonoidal.η (pullback φ))).app X r = φ.app X r := by
-  letI := sectionMonoidal φ
+  let := sectionMonoidal φ
   let a := sectionAdjunction φ
   let b := pullbackPushforwardAdjunction φ
-  letI := Functor.Monoidal.transport (a.leftAdjointUniq b)
+  let := Functor.Monoidal.transport (a.leftAdjointUniq b)
   refine ⟨inferInstance, ?_⟩
   intro X r
   change ((b.homEquiv _ _) ((a.leftAdjointUniq b).inv.app _ ≫

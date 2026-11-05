@@ -27,7 +27,6 @@ local instance (X : Scheme.{u}) (L : X.Modules) :
     ((curriedTensor X.Modules).obj L).PreservesZeroMorphisms :=
   SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X.sheaf L
 
-set_option maxHeartbeats 800000 in
 -- The canonical coordinate comparison combines three homology squares.
 /-- The canonical chart coordinates commute with augmented semilinear tensor comparisons.
 

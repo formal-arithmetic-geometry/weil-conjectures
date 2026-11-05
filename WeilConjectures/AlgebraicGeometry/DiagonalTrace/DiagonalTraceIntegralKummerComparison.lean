@@ -212,14 +212,20 @@ private theorem mapSingleArrow_id {C : Type*} [Category C] [Abelian C]
   rw [← hβ, ← mapSingleArrow_ext, Ext.mapExactFunctor_id]
   rfl
 
-private theorem evaluatedLineBundleArrow (T : Scheme.{u}) (P : T.Pic) (n : ℕ) :
-    mapSingleArrow (abEvaluation T n) (1 : ℤ) (lineBundleClass T P) =
-      lineBundleEtaleClass T P := by
-  unfold lineBundleClass
+-- Stating the source as `Ab T` (as `lineBundleClass` does) keeps the kernel from unfolding
+-- both sides of `Quiver.Hom` to reconcile `Ab T` with its unfolding.
+private theorem mapSingleArrow_constant_evaluation (T : Scheme.{u}) (n : ℕ) {X Y : DiagonalAb T}
+    (f : (DerivedCategory.singleFunctor (DiagonalAb T) 0).obj X ⟶
+      ((DerivedCategory.singleFunctor (DiagonalAb T) 0).obj Y)⟦(1 : ℤ)⟧) :
+    mapSingleArrow (C := Ab T) (abEvaluation T n) (1 : ℤ)
+      (mapSingleArrow (constant T) (1 : ℤ) f) = f := by
   rw [mapSingleArrow_composite]
-  change mapSingleArrow (𝟭 (DiagonalAb T)) (1 : ℤ) _ = _
-  exact mapSingleArrow_id 1 _
+  exact mapSingleArrow_id 1 f
 
+private theorem evaluatedLineBundleArrow (T : Scheme.{u}) (P : T.Pic) (n : ℕ) :
+    mapSingleArrow (C := Ab T) (abEvaluation T n) (1 : ℤ) (lineBundleClass T P) =
+      lineBundleEtaleClass T P :=
+  mapSingleArrow_constant_evaluation T n (lineBundleEtaleClass T P)
 private theorem extClass_heq {C : Type*} [Category C] [Abelian C] [HasExt C]
     {S₁ S₂ : ShortComplex C} (h : S₁ = S₂)
     (h₁ : S₁.ShortExact) (h₂ : S₂.ShortExact) : HEq h₁.extClass h₂.extClass := by
@@ -230,7 +236,7 @@ set_option maxHeartbeats 1000000 in
 -- Compare the actual tower and finite Kummer short-complex presentations.
 private theorem evaluatedKummerExt (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
     (k : Kummer l T) (n : ℕ) (hn : IsUnit ((l ^ (n + 1) : ℕ) : Γ(T, ⊤))) :
-    k.exact.extClass.mapExactFunctor (abEvaluation T n) =
+    k.exact.extClass.mapExactFunctor (C := Ab T) (abEvaluation T n) =
       (cartierProKummer_exact T (l ^ (n + 1))
         (pow_pos (Fact.out : l.Prime).pos _) hn).extClass := by
   have hs : (ShortComplex.mk k.inclusion k.power k.zero).map (abEvaluation T n) =
@@ -264,7 +270,7 @@ private theorem extEndpointsHom
     ShiftedHom.mk₀_comp, ShiftedHom.comp_mk₀]
 
 private theorem evaluatedLineBundleExt (T : Scheme.{u}) (P : T.Pic) (n : ℕ) :
-    (Ext.homEquiv.symm (lineBundleClass T P)).mapExactFunctor (abEvaluation T n) =
+    (Ext.homEquiv.symm (lineBundleClass T P)).mapExactFunctor (C := Ab T) (abEvaluation T n) =
       Ext.mk₀CompMk₀ (integerComparison T).inv
         ((Scheme.Pic.toCohomologicalPicardGroup T P).mapExactFunctor
           (comparisonUpperStar AddCommGrpCat.{u + 1} T))

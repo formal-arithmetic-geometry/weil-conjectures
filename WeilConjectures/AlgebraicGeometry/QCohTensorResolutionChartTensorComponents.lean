@@ -29,7 +29,6 @@ local instance TensorResolutionChartTensorComponents_localInst4 (X : Scheme.{u})
     ((curriedTensor X.Modules).obj M).PreservesZeroMorphisms :=
   SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X.sheaf M
 
-set_option maxHeartbeats 800000 in
 -- Tensor-resolution comparisons require substantial definitional reduction.
 /-- Components of the inverse mapping/extension comparison. -/
 theorem tensorResolutionMapExtendIso_inv_f
@@ -51,7 +50,6 @@ theorem tensorResolutionMapExtendIso_inv_f
     ← Functor.map_comp, Iso.hom_inv_id, CategoryTheory.Functor.map_id]
   rfl
 
-set_option maxHeartbeats 800000 in
 -- Tensor-resolution comparisons require substantial definitional reduction.
 /-- The chart tensor comparison on an original degree of the projective resolution.
 
