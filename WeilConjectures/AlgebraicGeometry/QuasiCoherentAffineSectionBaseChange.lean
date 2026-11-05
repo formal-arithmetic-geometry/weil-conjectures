@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.Algebra.Category.Grp.Abelian
 import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Affine section base change for quasi-coherent modules
 

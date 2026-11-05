@@ -118,7 +118,7 @@ structure StrictLocalMateProjectionData
             ((strictLocalNeighbourhoodProjection f s).app i) ((Category.comp_id
         ((strictLocalNeighbourhoodProjection f s).app i)).symm.trans
         ((strictLocalNeighbourhoodProjection f s).naturality a).symm)) ≪≫
-          Functor.mapDerivedCategoryCompIso
+          (Functor.mapDerivedCategoryCompIso).symm
             (Etale.upperStar AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodProjection f s).app j))
             (Etale.upperStar AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodDiagram f s).map
         a))).inv.app K.obj) ≫

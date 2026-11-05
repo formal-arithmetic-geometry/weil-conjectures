@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.DerivedScalarExtensionRestrictionAdjunction
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Integral reduction towers without a finite-field datum
 

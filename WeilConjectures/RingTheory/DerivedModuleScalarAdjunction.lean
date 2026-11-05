@@ -142,7 +142,7 @@ theorem derivedRestrictScalars_isRightAdjoint
         (restrictScalars r).mapDerivedCategory :=
     Functor.mapDerivedCategoryNatIso e ≪≫
       (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
-      Functor.isoWhiskerRight (Functor.mapDerivedCategoryCompIso _ _) _
+      Functor.isoWhiskerRight (Functor.mapDerivedCategoryCompIso _ _).symm _
   exact Functor.isRightAdjoint_of_iso ed.symm
 
 end ModuleCat

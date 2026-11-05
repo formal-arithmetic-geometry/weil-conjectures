@@ -78,7 +78,7 @@ noncomputable def derivedRestrictScalarsCompIso {A'' : Type u} [CommRing A'']
     [HasDerivedCategory.{u} (ModuleCat.{u} A'')] {g : A' →+* A''} {gf : A →+* A''}
     (hgf : gf = g.comp f) :
     derivedRestrictScalars g ⋙ derivedRestrictScalars f ≅ derivedRestrictScalars gf :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso _ _) ≪≫
     Functor.mapDerivedCategoryNatIso (restrictScalarsComp' f g gf hgf).symm
 
 namespace IsDerivedBaseChange

@@ -182,7 +182,7 @@ noncomputable def normalizedDVRResCompletedComp {m n : ℕ} (h : n ≤ m) :
       (fun f : completedIntegralCoefficientSheaf l E X D hl ⟶
           integralCoefficientSheaf l E X n ↦
         SheafOfModules.restrictScalars.{max u (t + 1)} f) he)
-  (Functor.mapDerivedCategoryCompIso (normalizedDVRModuleRes l E X h)
+  ((Functor.mapDerivedCategoryCompIso (normalizedDVRModuleRes l E X h)).symm
     (completedIntegralRestrictScalars l E X D hl m)).symm ≪≫
       Functor.mapDerivedCategoryNatIso e
 

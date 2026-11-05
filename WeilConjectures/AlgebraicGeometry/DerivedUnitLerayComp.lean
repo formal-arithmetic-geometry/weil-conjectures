@@ -25,7 +25,7 @@ private theorem derivedUnit_comp {X Y Z : Scheme.{u}} (f : Y ⟶ X) (g : Z ⟶ Y
     (mapDerivedUpperStarLowerStarAdjunction A (g ≫ f)).unit.app K ≫
       (lowerStar A (g ≫ f)).rightDerivedFunctor.map
         ((Functor.mapDerivedCategoryNatIso (upperStarComp A g f) ≪≫
-          Functor.mapDerivedCategoryCompIso (upperStar A f)
+          (Functor.mapDerivedCategoryCompIso (upperStar A f)).symm
             (upperStar A g)).hom.app K) =
     (mapDerivedUpperStarLowerStarAdjunction A f).unit.app K ≫
       (lowerStar A f).rightDerivedFunctor.map
@@ -78,7 +78,7 @@ theorem derivedUnitLeray_comp {X Y Z : Scheme.{u}} (f : Y ⟶ X) (g : Z ⟶ Y)
       ((upperStar A (g ≫ f)).mapDerivedCategory.obj K) ≫
     (rightDerivedGlobalSections A Z).map
       ((Functor.mapDerivedCategoryNatIso (upperStarComp A g f) ≪≫
-        Functor.mapDerivedCategoryCompIso (upperStar A f)
+        (Functor.mapDerivedCategoryCompIso (upperStar A f)).symm
           (upperStar A g)).hom.app K) =
     (rightDerivedGlobalSections A X).map
       ((mapDerivedUpperStarLowerStarAdjunction A f).unit.app K) ≫

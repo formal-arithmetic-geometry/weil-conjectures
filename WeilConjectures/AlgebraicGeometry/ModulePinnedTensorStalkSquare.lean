@@ -97,7 +97,7 @@ theorem module_pinned_tensor_stalk_square {X Y : Scheme.{u}}
             (((Classical.choose (exists_tensorPullbackAdjunction f)).unit.app
               (M ⊗ N)).val.app (op (U ⊓ V)) (tmulSection s' t'))) =
           (1 : X.presheaf.stalk x) ⊗ₜ[_, (f.stalkMap x).hom]
-            ((TopCat.Presheaf.germ M.val.presheaf (U ⊓ V) (f x) hx s') ⊗ₜ
+            (TensorProduct.tmul (Y.presheaf.stalk (f x)) (M := SY.obj M) (N := SY.obj N) (TopCat.Presheaf.germ M.val.presheaf (U ⊓ V) (f x) hx s')
               (TopCat.Presheaf.germ N.val.presheaf (U ⊓ V) (f x) hx t')) := by
         change F.map (ty M N).hom ((p.hom.app (M ⊗ N)) _) = _
         rw [hl]

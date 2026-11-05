@@ -63,7 +63,7 @@ structure GlobalCohomologyContinuityPresentation
         ((Functor.mapDerivedCategoryNatIso
           (Etale.upperStarComp AddCommGrpCat.{v + 1} (D.map f) (t.app j)
             (t.app i) ((Category.comp_id (t.app i)).symm.trans (t.naturality f).symm)) ≪≫
-          Functor.mapDerivedCategoryCompIso
+          (Functor.mapDerivedCategoryCompIso).symm
             (Etale.upperStar AddCommGrpCat.{v + 1} (t.app j))
             (Etale.upperStar AddCommGrpCat.{v + 1} (D.map f))).inv.app K.obj) ≫
       (e i).inv

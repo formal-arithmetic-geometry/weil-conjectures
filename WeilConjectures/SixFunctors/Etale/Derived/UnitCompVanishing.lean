@@ -48,7 +48,7 @@ theorem mapDerivedUpperStarLowerStarAdjunction_unit_comp {X Y Z : Scheme.{u}} (f
     (mapDerivedUpperStarLowerStarAdjunction A (g ≫ f)).unit.app K ≫
       R((g ≫ f)_*[A]).map
         ((Functor.mapDerivedCategoryNatIso (Etale.upperStarComp A g f) ≪≫
-          Functor.mapDerivedCategoryCompIso ((f)^*[A]) ((g)^*[A])).hom.app K) =
+          (Functor.mapDerivedCategoryCompIso ((f)^*[A]) ((g)^*[A])).symm).hom.app K) =
     (mapDerivedUpperStarLowerStarAdjunction A f).unit.app K ≫
       R((f)_*[A]).map
         ((mapDerivedUpperStarLowerStarAdjunction A g).unit.app (D((f)^*[A]).obj K)) ≫
