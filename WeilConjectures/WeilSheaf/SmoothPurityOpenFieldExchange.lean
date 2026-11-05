@@ -93,6 +93,6 @@ theorem isIso_smoothUnitBaseChange_purityOpenFieldLowerShriekExchange
     (e : (boundedConstructibleUpperStarOfMap ℓ πY).obj (𝟙_ _) ⟶ 𝟙_ _) [IsIso e] :
     IsIso (smoothUnitBaseChange ℓ f f'
       (purityOpenFieldLowerShriekExchange ℓ f f' sq) e) :=
-  isIso_smoothUnitBaseChange_of_isOpenImmersion ℓ f f' sq.toCommSq _ e
+  isIso_smoothUnitBaseChange_of_isOpenImmersion ℓ f f' sq.w _ e
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.WeilSheaf.SmoothPurityDescendedTraceUniversal
+public import WeilConjectures.WeilSheaf.SmoothUnitBaseChangeOpenImmersion
 public import WeilConjectures.WeilSheaf.SmoothPurityFullyFaithfulBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenClosedComplement
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.GenericPoint
@@ -80,21 +80,5 @@ theorem isIso_smoothExceptionalMate_of_isOpenImmersion
   exact CategoryTheory.Adjunction.isIso_mate_of_isIso_units_of_rightIso
     (boundedConstructibleUpperShriekAdjunction ℓ f)
     (boundedConstructibleUpperShriekAdjunction ℓ f') θ bc N
-
-/-- Exceptional base change for an open immersion across arbitrary fields, in the
-exact interface consumed by the descended smooth trace. -/
-theorem isIso_smoothUnitBaseChange_of_isOpenImmersion
-    [IsOpenImmersion f.left] [IsOpenImmersion f'.left]
-    (sq : CommSq πX f'.left f.left πY)
-    (bc : boundedConstructibleLowerShriek ℓ f ⋙ boundedConstructibleUpperStarOfMap ℓ πY ≅
-      boundedConstructibleUpperStarOfMap ℓ πX ⋙ boundedConstructibleLowerShriek ℓ f')
-    (e : (boundedConstructibleUpperStarOfMap ℓ πY).obj (𝟙_ _) ⟶ 𝟙_ _) [IsIso e] :
-    IsIso (smoothUnitBaseChange ℓ f f' bc e) := by
-  have := isIso_smoothExceptionalMate_of_isOpenImmersion ℓ f f' sq bc (𝟙_ _)
-  change IsIso ((mateEquiv (boundedConstructibleUpperShriekAdjunction ℓ f)
-    (boundedConstructibleUpperShriekAdjunction ℓ f') (inv bc.hom)).app (𝟙_ _) ≫
-      (boundedConstructibleUpperShriek ℓ f').map e)
-  rw [IsIso.Iso.inv_hom]
-  infer_instance
 
 end AlgebraicGeometry.ProEtale.CondensedRing
