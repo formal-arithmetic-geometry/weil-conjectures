@@ -149,7 +149,7 @@ lemma mapDerivedCategoryTriangleIso_hom_app_Qh_obj (e : F₂ ≅ F₁ ⋙ G₁)
     rw [← hG]
     simp only [Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app]
     erw [CategoryTheory.Functor.map_id, Category.comp_id]
-  simp only [Iso.trans_hom, NatTrans.comp_app, Category.assoc]
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
   rw [hG', reassoc_of% he, Iso.inv_hom_id_app_assoc]
   simp only [Functor.map_comp]
 
