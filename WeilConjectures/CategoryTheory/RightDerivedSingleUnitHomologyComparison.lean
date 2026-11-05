@@ -114,8 +114,8 @@ theorem rightDerivedPlusSingleUnitHomology_comp_comparison (Y : B) :
     exact Category.comp_id _
   have hsingleUnit : G.rightDerivedPlusSingleUnit Y =
       DerivedCategory.Plus.Q.map s ≫ G.rightDerivedFunctorPlusUnit.app S := by
-    simp [rightDerivedPlusSingleUnit, hsource, htarget,
-      rightDerivedFunctorPlusUnit, quotientCompMapHomotopyCategoryPlusIso, Category.assoc] <;>
+    simp only [rightDerivedPlusSingleUnit, hsource, htarget]
+    simp [rightDerivedFunctorPlusUnit, quotientCompMapHomotopyCategoryPlusIso, Category.assoc] <;>
       (erw [Functor.map_id]; simp)
   have : ∀ n, Injective (L.obj.X n) := fun n ↦
     inferInstanceAs (Injective (R.cochainComplex.X n))
