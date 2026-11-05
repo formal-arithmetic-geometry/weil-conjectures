@@ -485,8 +485,8 @@ private theorem sliceQCoherence {U V : C} (f : V ⟶ U)
   erw [CategoryTheory.Functor.map_id, Category.comp_id] at he
   simp only [derivedSliceMapIso, Iso.trans_hom, NatTrans.comp_app, Category.assoc]
   rw [he]
-  change (F.mapDerivedCategoryCompIso G).inv.app _ ≫ _ = _
-  erw [← hc, Iso.inv_hom_id_app_assoc]
+  change (F.mapDerivedCategoryCompIso G).hom.app _ ≫ _ = _
+  erw [← hc, Iso.hom_inv_id_app_assoc]
 
 omit hsec in
 private noncomputable def localQMap
