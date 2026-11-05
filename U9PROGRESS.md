@@ -116,17 +116,14 @@
 - Fix patterns and baseline log: `/home/ubuntu/u9/bz/FIXES-BZ384.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ459 in progress
+# BZ469 in progress
 
-- Branch: `u9/BZ459`; starting commit: `99a06bbbb46`.
-- The user instructed continuation after the explicit six-line statement API migration proposal.
-- `DerivedOpenGluingObjects` rebuilt successfully at `9cba6ab4da` (28 seconds).
-  Its two obsolete compositor `.symm` uses are removed, preserving the original canonical maps.
-- The combined build could not check direct importer `DerivedOpenGluing` because the
-  BZ361-owned `SchemeDerivedHomGluing` has three type errors. Per the brief, skip this importer.
-  Its four-line repair is deferred at `/home/ubuntu/u9/bz/BZ459-downstream-deferred.patch`;
-  the committed downstream source is restored to the baseline.
-- Next: run the assigned module alone to obtain a clean rc=0, then complete the handoff.
-- Fix log: `/home/ubuntu/u9/bz/FIXES-BZ459.md`.
-- Build log: `/home/ubuntu/u9/bz/BUILD-BZ459-downstream-full.log`.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+- Branch: `u9/BZ469`; starting commit: `99a06bbbb`.
+- The user instructed continuation after the exact two-site API proposal.
+  Applied `.symm` to both composition comparisons in
+  `injectiveSections_strictLocal_comparison`, preserving the original map directions
+  under Mathlib's reversed compositor.
+- Pinned API inspected at b63f6e8a; known quotient patterns do not match this module.
+- Next: remote validation, then up to four direct importers and a second downstream layer.
+- Fix patterns: `/home/ubuntu/u9/bz/FIXES-BZ469.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
