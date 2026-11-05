@@ -93,7 +93,7 @@ lemma leftDerivedEtaleSheafExtendScalarsAdjunction_counit_app_Qh_obj (X : Scheme
     r.rightDerivedFunctorUnit K
   have h₃ := NatTrans.congr_app
     r.rightDerivedFunctorIsoMapDerivedCategory_hom_fac K
-  dsimp at h₁ h₃
+  dsimp only [NatTrans.comp_app, Functor.whiskerLeft_app] at h₃
   have h₃' : r.rightDerivedFunctorIsoMapDerivedCategory.inv.app
       (DerivedCategory.Qh.obj K) =
       r.mapDerivedCategoryFactorsh.hom.app K ≫
