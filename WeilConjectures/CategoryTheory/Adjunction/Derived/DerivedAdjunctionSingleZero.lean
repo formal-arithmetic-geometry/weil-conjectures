@@ -71,7 +71,7 @@ private theorem unit_single (M : C) :
   have hL : (L.mapDerivedCategoryPlusSingleFunctor 0).hom.app M =
       L.mapDerivedCategoryPlus.map
           ((DerivedCategory.Plus.quotientCompQhIso C).inv.app
-            ((HomotopyCategory.Plus.singleFunctor C 0).obj M)) ≫
+            ((HomotopyCategory.Plus.singleFunctor C 0).obj M).1.as) ≫
         L.mapDerivedCategoryPlusFactorsh.hom.app
           ((HomotopyCategory.Plus.singleFunctor C 0).obj M) ≫
         (L.mapHomotopyCategoryPlusSingleFunctorQhObjIso 0 M).hom := by
