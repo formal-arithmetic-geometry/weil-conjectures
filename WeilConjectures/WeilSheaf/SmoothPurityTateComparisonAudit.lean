@@ -6,6 +6,7 @@ module
 
 import WeilConjectures.WeilSheaf.SmoothPurityIntegralTateReductionPullback
 import WeilConjectures.WeilSheaf.SmoothPurityIntegralTateRationalShift
+import WeilConjectures.WeilSheaf.SmoothPurityRationalTrivializationScalar
 
 /-! # Axiom audit for the actual Tate coefficient and pullback comparisons
 
@@ -20,3 +21,5 @@ open AlgebraicGeometry.ProEtale
 #print axioms upperStarIntegralTateTwistDerivedIso_hom_comp_rationalization
 #print axioms upperStarShiftIntegralTateTwistDerivedIso_hom_comp_rationalization
 #print axioms CondensedRing.purity_commShift_derivedUpperStarExtendScalarsIso_hom
+
+#print axioms purityRationalTateTrivialization_comp_specGeometricFrobenius_hom

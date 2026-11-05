@@ -70,7 +70,8 @@ lemma upperStarIntegralTateTwistDerivedIso_hom_comp_rationalization
   simpa only [upperStarIntegralTateTwistDerivedIso, purityExtendScalarsIntegralTateIso,
     purityDerivedCoefficientExtension, purityDerivedPullback,
     purityExtendScalarsFlatSingleIso, purityPullbackSingleIso,
-    upperStarTateTwistDerivedIso, upperStarTateTwistIso, Iso.trans_hom, Iso.app_hom,
+    upperStarTateTwistDerivedIso, upperStarTateTwistIso, tateTwistDerived, tateTwist,
+    Iso.trans_hom, Iso.app_hom,
     Functor.mapIso_hom, Category.assoc] using h
 
 end AlgebraicGeometry.ProEtale
