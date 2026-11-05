@@ -9,6 +9,7 @@ public import WeilConjectures.WeilSheaf.Native.Projection.BoundedProperProjectio
 public import WeilConjectures.WeilSheaf.Native.Projection.MateAdjunctionChoice
 public import WeilConjectures.WeilSheaf.Native.Projection.TwoSquareComposite
 public import WeilConjectures.WeilSheaf.Native.Projection.ProjectionPastingMonoidal
+public import WeilConjectures.WeilSheaf.Native.Projection.GeometricCompactPullComparison
 
 /-! # The normalized compact-support projection and forget comparisons -/
 
@@ -54,17 +55,7 @@ def projectionGeometricPullComp :
     CondensedRing.boundedConstructibleUpperStar Λ l (cb).overG ⋙
         CondensedRing.boundedConstructibleUpperStar Λ l (cb).overI ≅
       CondensedRing.boundedConstructibleUpperStar Λ l fb :=
-  NatIso.ofComponents (fun N ↦ ObjectProperty.isoMk _
-    ((CondensedRing.leftDerivedUpperStarOverCompactificationIso (f := fb) Λ cb).symm.app N.obj))
-    (fun φ ↦ ObjectProperty.hom_ext _
-      ((CondensedRing.leftDerivedUpperStarOverCompactificationIso (f := fb) Λ cb).inv.naturality φ.hom))
-
-/-- The geometric pullback compositor has the canonical ambient component. -/
-lemma projectionGeometricPullComp_hom_app
-    (N : BoundedConstructible (condensedRingObj Λ
-      (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber)) :
-    ((projectionGeometricPullComp k₀ l f).hom.app N).hom =
-      (CondensedRing.leftDerivedUpperStarOverCompactificationIso (f := fb) Λ cb).inv.app N.obj := rfl
+  CondensedRing.compactProjectionGeometricPullIso Λ l cb
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
@@ -150,11 +141,8 @@ theorem projectionCompactification_forget_square (M : WeilComplex k₀ l X)
           (CondensedRing.exceptionalProjectionMorphismOfCompactification Λ cb
             ((compactProjectionForget k₀ l X).obj M).obj
             ((compactProjectionForget k₀ l Y).obj N).obj) := by
-  have hε := projectionGeometricPullComp_hom_app k₀ l f
-    ((compactProjectionForget k₀ l Y).obj N)
-  have hp := CondensedRing.homMk_exceptionalProjectionMorphismOfCompactification_eq (f := fb) l cb
+  have hp := CondensedRing.compactProjectionGeometricPullIso_projection_eq (f := fb) l cb
     ((compactProjectionForget k₀ l X).obj M) ((compactProjectionForget k₀ l Y).obj N)
-    ((projectionGeometricPullComp k₀ l f).hom.app ((compactProjectionForget k₀ l Y).obj N)) hε
   rw [hp]
   -- the pasted square, with all spelling conversions done on abstract functors
   have hpaste := projectionForgetSquare_paste_monoidal
