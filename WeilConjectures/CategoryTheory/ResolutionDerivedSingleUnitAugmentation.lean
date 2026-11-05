@@ -126,6 +126,7 @@ theorem resolutionDerivedSingleUnit_augmentation
   rw [Functor.mapHomotopyCategory_map]
   simp only [Category.assoc, ← DerivedCategory.quotientCompQhIso_inv_naturality_assoc,
     Iso.inv_hom_id_app_assoc]
+  erw [Iso.inv_hom_id_app_assoc]
   change DerivedCategory.Q.map _ ≫ DerivedCategory.Q.map _ ≫ DerivedCategory.Q.map _ =
     𝟙 _ ≫ DerivedCategory.Q.map J.ι' ≫
       DerivedCategory.Q.map (HomologicalComplex.extendMap φ ComplexShape.embeddingUpNat)

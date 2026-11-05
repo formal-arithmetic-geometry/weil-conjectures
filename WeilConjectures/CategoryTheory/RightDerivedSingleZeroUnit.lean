@@ -122,10 +122,11 @@ private theorem unit_zero_comparison {C D : Type*}
     have hq (K : CochainComplex D ℤ) :
         (DerivedCategory.quotientCompQhIso D).inv.app K = 𝟙 _ := by
       rfl
-    erw [hq, Category.comp_id]
     change _ = (HomologicalComplex.singleObjHomologySelfIso (.up ℤ) 0 (F.obj M)).inv ≫
       (DerivedCategory.homologyFunctorFactors D 0).inv.app _ ≫
-      (DerivedCategory.homologyFunctor D 0).map (DerivedCategory.Q.map t.inv)
+      (DerivedCategory.homologyFunctor D 0).map
+        (DerivedCategory.Q.map t.inv ≫ (DerivedCategory.quotientCompQhIso D).inv.app T)
+    rw [hq, Category.comp_id]
     have hn := (DerivedCategory.homologyFunctorFactors D 0).inv.naturality t.inv
     dsimp only [CategoryTheory.Functor.comp_map] at hn
     exact congrArg (_ ≫ ·) hn
