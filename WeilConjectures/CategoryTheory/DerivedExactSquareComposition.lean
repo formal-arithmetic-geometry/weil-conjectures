@@ -170,7 +170,7 @@ private theorem exactSquare_comp_inverse
         F₁₂.mapDerivedCategoryFactors.hom.app ((F₀₁.mapHomologicalComplex (.up ℤ)).obj X) =
       F₀₂.mapDerivedCategoryFactors.hom.app X ≫
         DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex cF.hom (.up ℤ)).app X) := by
-      dsimp only [dF, Iso.trans_hom, NatTrans.comp_app]
+      dsimp only [dF, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app]
       rw [Category.assoc, mapDerivedCategoryCompIso_hom_app_factors,
         mapDerivedCategoryNatIso_fac]
     have hdG : dG.hom.app (DerivedCategory.Q.obj
@@ -182,7 +182,7 @@ private theorem exactSquare_comp_inverse
       G₀₂.mapDerivedCategoryFactors.hom.app ((U₀.mapHomologicalComplex (.up ℤ)).obj X) ≫
         DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex cG.hom (.up ℤ)).app
           ((U₀.mapHomologicalComplex (.up ℤ)).obj X)) := by
-      dsimp only [dG, Iso.trans_hom, NatTrans.comp_app]
+      dsimp only [dG, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app]
       rw [Category.assoc, mapDerivedCategoryCompIso_hom_app_factors,
         mapDerivedCategoryNatIso_fac]
     -- Normalize the left pasted square using the factorization of q₀₂.
