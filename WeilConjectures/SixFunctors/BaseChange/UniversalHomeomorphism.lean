@@ -69,7 +69,8 @@ theorem isIso_derivedBaseChangeMapPlus_of_isUniversalHomeomorphism (sq : IsPullb
   let M := (InjectiveObject.ι _).mapCochainComplexPlus.obj L
   let P := (HomotopyCategory.Plus.quotient _).obj M
   suffices IsIso ((derivedBaseChangeMapPlus A sq.toCommSq).app (DerivedCategory.Plus.Qh.obj P)) by
-    rw [← NatTrans.isIso_app_iff_of_iso _ e]
+    rw [← NatTrans.isIso_app_iff_of_iso _
+      ((DerivedCategory.Plus.quotientCompQhIso _).app M ≪≫ e)]
     exact this
   have hM : ∀ m, (f')_*[A].rightAcyclic
       ((((g')^*[A]).mapCochainComplexPlus.obj M).obj.X m) := fun m ↦
