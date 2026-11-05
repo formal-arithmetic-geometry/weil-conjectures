@@ -184,5 +184,5 @@ theorem MvPolynomial.exists_ne_zero_forall_eval_eq_zero {k σ ι : Type*} [Field
     obtain ⟨a, rfl⟩ := isMaximal_iff_eq_vanishingIdeal_singleton.mp hm
     rw [height_vanishingIdeal_singleton a 0]
     exact WithBot.coe_le_coe.mpr (hheight.trans (by exact_mod_cast Finite.card_range_le f))
-  rw [ringKrullDim_of_isNoetherianRing, ringKrullDim_eq_zero_of_field, zero_add] at hdim
+  rw [ringKrullDim_of_isNoetherianRing_of_finite, ringKrullDim_eq_zero_of_field, zero_add] at hdim
   exact absurd hdim (by exact_mod_cast hcard.not_ge)
