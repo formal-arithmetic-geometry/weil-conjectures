@@ -106,24 +106,16 @@
 - Completion marker: `/home/ubuntu/u9/state/BZ311.DONE`.
 - This final commit changes only progress documentation; Lean sources match the green build.
 
-# BZ384 in progress
+# BZ395 in progress
 
-- Branch: `u9/BZ384`; starting commit: `98654719b`.
-- Baseline remote build confirmed five errors in compositor directions in declaration types.
-- The user instructed continuation after the explicit nine-direction patch proposal.
-  That patch is now applied, preserving the original equations under Mathlib's reversed compositor.
-- Next: remote validation of the assigned module, then its three direct importers.
-- Fix patterns and baseline log: `/home/ubuntu/u9/bz/FIXES-BZ384.md`.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
-
-# BZ469 in progress
-
-- Branch: `u9/BZ469`; starting commit: `99a06bbbb`.
-- The user instructed continuation after the exact two-site API proposal.
-  Applied `.symm` to both composition comparisons in
-  `injectiveSections_strictLocal_comparison`, preserving the original map directions
-  under Mathlib's reversed compositor.
-- Pinned API inspected at b63f6e8a; known quotient patterns do not match this module.
-- Next: remote validation, then up to four direct importers and a second downstream layer.
-- Fix patterns: `/home/ubuntu/u9/bz/FIXES-BZ469.md`.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
+- Branch: `u9/BZ395`; baseline commit: `9bc0d70a6`.
+- Owned module: `WeilConjectures.AlgebraicGeometry.ProfinitePointPullback`.
+- Baseline remote build found five errors in three statement headers.
+- The user instructed continuation after the exact API-only statement patch proposal.
+  Applied that patch: use the reversed Mathlib compositor and repair two misplaced
+  `.symm` projections, preserving the intended maps.
+- Owned module passed `ucheck-bump`: rc=0, failed=0, 3949 jobs, at `ec3927a96a`.
+- Added explicit `Iso.symm_hom` / `Iso.symm_inv` normalization at eight restricted
+  simp sites after the header migration. Continuing with four direct importers.
+- Fix patterns, exact errors, and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ395.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or limit increases.
