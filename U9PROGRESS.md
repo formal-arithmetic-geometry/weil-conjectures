@@ -168,3 +168,16 @@
 - No local Lean/Lake execution, sorries, proof shortcuts, heartbeat increases, or profiler probes.
 - Completion marker: `/home/ubuntu/u9/state/BZ585.DONE`.
 - Final documentation commit leaves Lean source identical to the green revision.
+
+# BZ605 in progress
+
+- Branch: `u9/BZ605`; baseline: `0d3c0ae938`.
+- Assigned module: `WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomPresheaf`.
+- The user instructed continuation after the exact `BZ605-public-api-proposal.patch`.
+  That patch is applied: the public chain-map hypothesis and homology comparison now
+  use direct `Q`, removing the obsolete identity quotient transport. All other
+  declaration headers remain unchanged.
+- Localization imports and proof-local identity normalization preserve both private
+  helper hypotheses. No local Lean/Lake, proof escapes, heartbeat changes, or profiler probes.
+- Next: remote validation of the unit and four direct importers, then one more downstream layer.
+- Fixes and build logs: `/home/ubuntu/u9/bz/FIXES-BZ605.md`.
