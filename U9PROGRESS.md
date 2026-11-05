@@ -141,3 +141,14 @@
 - Existing `ucheck-bump` invocation is queued; it reads the pushed branch after
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+# BZ566 in progress
+
+- Branch: `u9/BZ566`; starting commit: `8af5cb3248`.
+- The user instructed continuation after the explicit two-private-helper API proposal.
+  The compositor orientation edits and matching inverse cancellation are now applied.
+- Baseline `ucheck-bump` stopped before the target in `Presheaf.InternalHom`, assigned to BZ581.
+- Next: resolve the upstream build dependency, remotely validate the assigned module,
+  then build its two direct importers and the next layer.
+- Notes and logs: `/home/ubuntu/u9/bz/FIXES-BZ566.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
