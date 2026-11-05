@@ -356,6 +356,9 @@ theorem exists_pullback_adapted_flat_resolution
   have (K : Type w) : HasColimitsOfShape (Discrete K) (PresheafOfModules.{w}
       ((sheafCompose JD (forget₂ CommRingCat.{w} RingCat.{w})).obj S).obj) :=
     PresheafOfModules.hasColimitsOfShape _ _
+  have (K : Type w) : HasColimitsOfShape (Discrete K) A :=
+    SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf
+      _ _
   let := isMonoidal_W_independentCoefficients R
   let := monoidalCategory R
   let := symmetricCategory R
@@ -374,6 +377,10 @@ theorem exists_pullback_adapted_flat_resolution
       ((MonoidalCategory.curriedTensor A).flip.obj M) := inferInstance
   have : HasExactColimitsOfShape ℤ A := hasExactColimits_int_adapted R
   have := hasFunctorialFlatResolution_adapted R
+  have : HasFiniteBiproducts (ObjectProperty.flat (A := A)).FullSubcategory :=
+    HasFiniteBiproducts.of_hasFiniteProducts
+  have : HasFiniteCoproducts (ObjectProperty.flat (A := A)).FullSubcategory :=
+    hasFiniteCoproducts_of_hasFiniteBiproducts _
   let Λ := (Classical.arbitrary (Abelian.LeftResolution
     (ObjectProperty.flat.ι : _ ⥤ A))).reduced
   have hι : (ObjectProperty.flat.ι : _ ⥤ A).essImage ≤ ObjectProperty.flat :=
