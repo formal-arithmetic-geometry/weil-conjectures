@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import Mathlib.LinearAlgebra.TensorProduct.Map
+public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.Algebra.Category.Grp.Abelian
