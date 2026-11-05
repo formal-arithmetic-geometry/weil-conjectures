@@ -22,6 +22,10 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry.Scheme.Modules
 
+local instance (R : Type u) [Ring R] (J : Type*) [Small.{u} J] :
+    HasLimitsOfShape (Discrete J) (ModuleCat.{u} R) :=
+  ModuleCat.hasLimitsOfShape
+
 set_option backward.isDefEq.respectTransparency false in
 /-- The images of the local difference cocycle and the global horseshoe cycle agree
 in total homology. This is a calculation about alpha and beta, without a cohomology
