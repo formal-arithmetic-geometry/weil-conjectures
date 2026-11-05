@@ -181,7 +181,7 @@ theorem idempotent_lifting_iff_monic_simple_root_lifting
       · have hc := congrArg (fun p : (ResidueField R)[X] ↦ p.coeff 0) hgm
         simpa using congrArg Neg.neg hc
     · intro H B _ _ _ e₀ he₀
-      have : HenselianLocalRing R := ((HenselianLocalRing.TFAE R).out 1 0).mp H
+      have : HenselianLocalRing R := ((HenselianLocalRing.TFAE R).out 2 1).mp H
       exact Algebra.existsUnique_isIdempotentElem_of_henselianRing
         R (maximalIdeal R) B e₀ he₀
 

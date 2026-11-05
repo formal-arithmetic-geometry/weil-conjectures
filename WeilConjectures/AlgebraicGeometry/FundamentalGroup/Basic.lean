@@ -103,8 +103,8 @@ For connected `Y` the finite étale `Y`-schemes form a Galois category: a geomet
 `Spec κ(y)^alg ⟶ Y` at any point `y` gives a fibre functor. -/
 theorem galoisCategory [ConnectedSpace Y] : GaloisCategory Y.FiniteEtale := by
   obtain ⟨y⟩ := (inferInstance : Nonempty Y)
-  exact ⟨⟨_, ⟨fiberFunctor (Spec.map (CommRingCat.ofHom (algebraMap (Y.residueField y)
-    (AlgebraicClosure (Y.residueField y)))) ≫ Y.fromSpecResidueField y)⟩⟩⟩
+  exact ⟨⟨_, fiberFunctor (Spec.map (CommRingCat.ofHom (algebraMap (Y.residueField y)
+    (AlgebraicClosure (Y.residueField y)))) ≫ Y.fromSpecResidueField y)⟩⟩
 
 attribute [instance] galoisCategory
 

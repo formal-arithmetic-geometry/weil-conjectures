@@ -103,11 +103,11 @@ theorem etale_chart_residue_triples_equivalence_functor
   obtain ⟨H, δ, hδ⟩ := etale_chart_residue_triples_functor_construction
     Y Ω A i xU h
   have hfull := etale_chart_residue_triples_full Y Ω A i xU H δ hδ
-  let G := Q.ι ⋙ P.ι ⋙ CategoryOfElements.π (pointSmallEtale x).fiber ⋙
+  let G := Q.ι ⋙ P.ι ⋙ Functor.Elements.π (pointSmallEtale x).fiber ⋙
     Etale.forget Y ⋙ Over.forget Y
   have : G.Faithful := by dsimp [G]; infer_instance
   have : DU.Faithful := affine_global_sections_faithful G (fun c ↦ c.obj.property)
-  have hfaithful : H.Faithful := Functor.Faithful.of_comp_iso δ.symm
+  have hfaithful : H.Faithful := Functor.Faithful.of_comp_iso (H := DU) δ.symm
   have hess := etale_chart_residue_triples_essentially_surjective Y Ω A i xU H δ hδ
   let : H.IsEquivalence := ⟨hfaithful, hfull, hess⟩
   exact ⟨H.asEquivalence⟩
@@ -156,11 +156,11 @@ theorem etale_chart_residue_triples_equivalence
   obtain ⟨H, δ, hδ⟩ := etale_chart_residue_triples_functor_construction
     Y Ω A i xU h
   have hfull := etale_chart_residue_triples_full Y Ω A i xU H δ hδ
-  let G := Q.ι ⋙ P.ι ⋙ CategoryOfElements.π (pointSmallEtale x).fiber ⋙
+  let G := Q.ι ⋙ P.ι ⋙ Functor.Elements.π (pointSmallEtale x).fiber ⋙
     Etale.forget Y ⋙ Over.forget Y
   have : G.Faithful := by dsimp [G]; infer_instance
   have : DU.Faithful := affine_global_sections_faithful G (fun c ↦ c.obj.property)
-  have hfaithful : H.Faithful := Functor.Faithful.of_comp_iso δ.symm
+  have hfaithful : H.Faithful := Functor.Faithful.of_comp_iso (H := DU) δ.symm
   have hess := etale_chart_residue_triples_essentially_surjective Y Ω A i xU H δ hδ
   let : H.IsEquivalence := ⟨hfaithful, hfull, hess⟩
   exact ⟨H.asEquivalence, δ, hδ⟩
