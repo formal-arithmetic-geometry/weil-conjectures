@@ -31,7 +31,8 @@ namespace PowerSeries
 theorem expand_inv {K : Type*} [Field K] (p : ℕ) (hp : p ≠ 0) (f : K⟦X⟧) :
     expand p hp f⁻¹ = (expand p hp f)⁻¹ := by
   by_cases hf : constantCoeff f = 0
-  · rw [inv_eq_zero.2 hf, map_zero, inv_eq_zero.2 (by rwa [constantCoeff_expand])]
+  · rw [PowerSeries.inv_eq_zero.2 hf, map_zero,
+      PowerSeries.inv_eq_zero.2 (by rwa [constantCoeff_expand])]
   · rw [eq_inv_iff_mul_eq_one (by rwa [constantCoeff_expand]), ← map_mul,
       PowerSeries.inv_mul_cancel _ hf, map_one]
 
@@ -51,7 +52,7 @@ variable {R : Type*} [CommRing R]
 
 /-- The `n`-th coefficient of `X f'` is `n` times that of `f`. -/
 theorem coeff_X_mul_derivative (f : R⟦X⟧) (n : ℕ) :
-    coeff n (X * derivative R f) = n * coeff n f := by
+    coeff n (X * derivative (R := R) f) = n * coeff n f := by
   rcases n with _ | n
   · simp
   · rw [coeff_succ_X_mul, coeff_derivative, mul_comm]
@@ -61,7 +62,8 @@ theorem coeff_X_mul_derivative (f : R⟦X⟧) (n : ℕ) :
 /-- The Euler operator `X d/dX` and the expansion `X ↦ X ^ p`:
 `X (f (X ^ p))' = p (X f')(X ^ p)`. -/
 theorem X_mul_derivative_expand (p : ℕ) (hp : p ≠ 0) (f : R⟦X⟧) :
-    X * derivative R (expand p hp f) = C (p : R) * expand p hp (X * derivative R f) := by
+    X * derivative (R := R) (expand p hp f) =
+      C (p : R) * expand p hp (X * derivative (R := R) f) := by
   ext n
   rw [coeff_X_mul_derivative, coeff_C_mul, coeff_expand, coeff_expand]
   split_ifs with h
