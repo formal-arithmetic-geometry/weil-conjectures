@@ -56,6 +56,23 @@ private theorem map_quotientCompQhIso_inv {A E : Type*} [Category* A] [Abelian A
   change G.map (𝟙 (DerivedCategory.Q.obj K)) = _
   exact G.map_id _
 
+private theorem map_map_quotientCompQhIso_hom_comp {A E E' : Type*} [Category* A] [Abelian A]
+    [HasDerivedCategory A] [Category* E] [Category* E']
+    (G : DerivedCategory A ⥤ E) (H : E ⥤ E')
+    (K : CochainComplex A ℤ) {Z : E'}
+    (f : H.obj (G.obj (DerivedCategory.Q.obj K)) ⟶ Z) :
+    H.map (G.map ((DerivedCategory.quotientCompQhIso A).hom.app K)) ≫ f = f := by
+  change H.map (G.map (𝟙 (DerivedCategory.Q.obj K))) ≫ f = f
+  rw [G.map_id, H.map_id, Category.id_comp]
+
+private theorem map_quotientCompQhIso_inv_comp {A E : Type*} [Category* A] [Abelian A]
+    [HasDerivedCategory A] [Category* E] (G : DerivedCategory A ⥤ E)
+    (K : CochainComplex A ℤ) {Z : E}
+    (f : G.obj (DerivedCategory.Q.obj K) ⟶ Z) :
+    G.map ((DerivedCategory.quotientCompQhIso A).inv.app K) ≫ f = f := by
+  change G.map (𝟙 (DerivedCategory.Q.obj K)) ≫ f = f
+  rw [G.map_id, Category.id_comp]
+
 /-- Affine direct image is acyclic on quasi-coherent modules.
 Source: Stacks, Tags 01EO and 01XJ; the Čech dimension-shifting argument of
 WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism.
@@ -232,23 +249,9 @@ theorem exists_affineDerivedPushforwardSheafEdge
   have hepi : Epi ((F ⋙ S).map (M.sc i).homologyData.left.π) := by
     change Epi U.π
     infer_instance
-  have hhom {A' E E' : Type*} [Category* A'] [Abelian A']
-      [HasDerivedCategory A'] [Category* E] [Category* E']
-      (G : DerivedCategory A' ⥤ E) (H' : E ⥤ E')
-      (K' : CochainComplex A' ℤ) {Z : E'}
-      (g : H'.obj (G.obj (DerivedCategory.Q.obj K')) ⟶ Z) :
-      H'.map (G.map ((DerivedCategory.quotientCompQhIso A').hom.app K')) ≫ g = g := by
-    change H'.map (G.map (𝟙 (DerivedCategory.Q.obj K'))) ≫ g = g
-    rw [G.map_id, H'.map_id, Category.id_comp]
-  have hinv {A' E : Type*} [Category* A'] [Abelian A']
-      [HasDerivedCategory A'] [Category* E] (G : DerivedCategory A' ⥤ E)
-      (K' : CochainComplex A' ℤ) {Z : E}
-      (g : G.obj (DerivedCategory.Q.obj K') ⟶ Z) :
-      G.map ((DerivedCategory.quotientCompQhIso A').inv.app K') ≫ g = g := by
-    change G.map (𝟙 (DerivedCategory.Q.obj K')) ≫ g = g
-    rw [G.map_id, Category.id_comp]
   simp only [Functor.map_comp] at hn
-  simp only [Category.assoc, hhom, hinv] at hn
+  simp only [Category.assoc, map_map_quotientCompQhIso_hom_comp,
+    map_quotientCompQhIso_inv_comp] at hn
   apply (cancel_epi ((F ⋙ S).map (M.sc i).homologyData.left.π)).mp
   apply (cancel_mono (γ.app ⟨_, hM⟩ ≫ δ.hom.app (DerivedCategory.Q.obj K))).mp
   simpa only [ε, NatTrans.comp_app, Functor.isoWhiskerLeft_inv,
