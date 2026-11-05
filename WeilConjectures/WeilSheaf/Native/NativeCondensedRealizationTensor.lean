@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealization
+public import WeilConjectures.WeilSheaf.Native.NativeForgetTotalTensor
 public import WeilConjectures.WeilSheaf.SixFunctors.DerivedWeilTensorOperations
 public import WeilConjectures.WeilSheaf.Native.Weil.NativeWeilClosedModels
 public import WeilConjectures.CategoryTheory.Monoidal.KFlatBifunctorTransport
@@ -19,8 +20,6 @@ import all WeilConjectures.WeilSheaf.Native.Weil.NativeWeilUnderivedTensor
 /-!
 # The condensed realization and the native tensor product
 
-* `AlgebraicGeometry.ProEtaleWeilSheaf.ordinaryTensorBifunctorFlipIso`: the ordinary relative
-  tensor of `ℓ`-adic sheaves (a coequalizer) agrees with the monoidal tensor product.
 * `AlgebraicGeometry.ProEtaleWeilSheaf.nonempty_condensedTensorIso`: the condensed model
   `AdicSheaf ℓ ≌ Mod_{Λ}` carries the ordinary relative tensor to the tensor of module objects.
 * `AlgebraicGeometry.ProEtaleWeilSheaf.nonempty_condensedRealizationTensorIso`: the condensed
@@ -47,17 +46,6 @@ open ProEtale
 section Ordinary
 
 variable (l : ℕ) [Fact l.Prime] (S : Scheme.{u})
-
-/-- The ordinary relative tensor of `ℓ`-adic sheaves, flipped so that the left factor comes
-first, is the monoidal tensor product of module objects. -/
-noncomputable def ordinaryTensorBifunctorFlipIso :
-    (ordinaryTensorBifunctor l S).flip ≅ curriedTensor (AdicSheaf l S) :=
-  NatIso.ofComponents (fun M ↦ NatIso.ofComponents
-    (fun N ↦ (Mod.relativeTensorRightIso N).app M)
-    (fun g ↦ NatTrans.congr_app (Mod.tensorLeftMap_relativeTensorRightIso_hom g) M))
-    (fun f ↦ by
-      ext N : 2
-      exact (Mod.relativeTensorRightIso N).hom.naturality f)
 
 /-- The condensed model `AdicSheaf ℓ ≌ Mod_{Λ}` carries the ordinary relative tensor product of
 `ℓ`-adic sheaves to the tensor product of module objects over `Λ`. -/
