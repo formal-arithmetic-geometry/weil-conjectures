@@ -27,6 +27,13 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposi
 
 namespace AlgebraicGeometry.Scheme
 
+local instance (X : RingedSpace.{u}) (U : Opens X)
+    [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X).over U))] :
+    HasDerivedCategory.{w} (SheafOfModules.{u}
+      ((sheafCompose ((Opens.grothendieckTopology X).over U)
+        (forget₂ CommRingCat RingCat)).obj (X.sheaf.over U))) :=
+  inferInstanceAs (HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X).over U)))
+
 private theorem isIso_dependent_projection {A : Type*} [Category A]
     {B : A} {T : ℤ → A} {k : ℤ} (π : ∀ q, k = q → (B ⟶ T q))
     {q : ℤ} (hq : k = q) (h : IsIso (π k rfl)) : IsIso (π q hq) := by
