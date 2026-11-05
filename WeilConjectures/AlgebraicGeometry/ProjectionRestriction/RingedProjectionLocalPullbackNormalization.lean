@@ -64,7 +64,6 @@ private theorem rightComparison_eq (o : Operation F R S)
   simp only [Operation.rightComparison, derivedPushforwardComplexComparison, h,
     Functor.rightDerivedFunctorUnitQ, Operation.right]
   erw [Category.id_comp]
-  rfl
 
 private def rightComparisonNatTrans (o : Operation F R S) :
     o.pushforward.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶
