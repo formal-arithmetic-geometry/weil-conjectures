@@ -68,6 +68,13 @@ private def sectionExtension : PresheafOfModules.{u} (R ⋙ forget₂ CommRingCa
     ext1 X
     exact (ModuleCat.extendScalars (coeff φ X)).map_comp _ _
 
+local instance {M : PresheafOfModules.{u} (R ⋙ forget₂ CommRingCat.{u} RingCat.{u})}
+    {X Y : Cᵒᵖ} (f : X ⟶ Y) :
+    Module (R.obj Y)
+      ((ModuleCat.restrictScalars ((R ⋙ forget₂ CommRingCat RingCat).map f).hom).obj
+        (M.obj Y)) :=
+  inferInstanceAs (Module (R.obj Y) (M.obj Y))
+
 private theorem sectionExtension_map_tmul
     (M : PresheafOfModules.{u} (R ⋙ forget₂ CommRingCat.{u} RingCat.{u}))
     {X Y : Cᵒᵖ} (f : X ⟶ Y) (s : S.obj X) (m : M.obj X) :
@@ -169,7 +176,7 @@ private def sectionTensorIso
   intro X Y f
   apply ModuleCat.ExtendScalars.hom_ext
   intro z
-  induction z with
+  induction z using TensorProduct.inductionOn with
   | add z w hz hw => simp only [TensorProduct.tmul_add, map_add, hz, hw]
   | tmul m n =>
     change Functor.OplaxMonoidal.δ (ModuleCat.extendScalars (coeff φ Y))
