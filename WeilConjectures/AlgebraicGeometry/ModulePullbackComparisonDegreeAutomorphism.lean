@@ -47,18 +47,11 @@ def IsModulePullbackComparisonInDegree
     (derivedPullback a).IsLeftDerivedFunctor ε
         (HomotopyCategory.quasiIso
           (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ)) ∧
-      c = (derivedPullback a).map
-          ((DerivedCategory.quotientCompQhIso
-            (SheafOfModules.{u} (moduleRings Y.toRingedSpace))).inv.app
-              ((CochainComplex.singleFunctor
-                (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) n).obj G)) ≫
-        ε.app ((HomotopyCategory.singleFunctor
+      c = cast (by rfl) (ε.app ((HomotopyCategory.singleFunctor
             (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) n).obj G) ≫
         DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
           ((HomologicalComplex.singleMapHomologicalComplex
-            (Scheme.Modules.tensorPullback a) (ComplexShape.up ℤ) n).hom.app G)) ≫
-        (DerivedCategory.quotientCompQhIso
-          (SheafOfModules.{u} (moduleRings X.toRingedSpace))).hom.app _
+            (Scheme.Modules.tensorPullback a) (ComplexShape.up ℤ) n).hom.app G)))
 
 private theorem rightExact_homology_degree_isIso
     {A B : Type*} [Category* A] [Category* B] [Abelian A] [Abelian B]
