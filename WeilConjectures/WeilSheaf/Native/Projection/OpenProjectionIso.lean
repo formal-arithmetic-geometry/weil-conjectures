@@ -6,6 +6,7 @@ module
 
 public import WeilConjectures.WeilSheaf.Native.NativePullTensor
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap
+public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapCompat
 public import WeilConjectures.CategoryTheory.Functor.CurryComparison
 public import WeilConjectures.WeilSheaf.Native.Open.NativeOpenDerivedTensor
 public import WeilConjectures.WeilSheaf.ExtensionByZeroDerived
@@ -62,20 +63,28 @@ theorem isIso_nativeOpenProjectionMap
     (M : DerivedCategory (ProEtaleWeilSheaf k₀ l U))
     (N : DerivedCategory (ProEtaleWeilSheaf k₀ l Z)) :
     IsIso ((((derivedExtensionByZeroUpperStarAdjunction k₀ l j).projectionMap
-      (nativeOpenPull k₀ l j) (Functor.curry.obj (nativeDerivedTensor k₀ l U)) (Functor.curry.obj (nativeDerivedTensor k₀ l Z))
+      (nativeOpenPull k₀ l j) (Functor.curry.obj (nativeDerivedTensor k₀ l U))
+      (Functor.curry.obj (nativeDerivedTensor k₀ l Z))
       (Functor.curryCompIsoOfIso (nativePullTensor k₀ l j)).inv).app M).app N) := by
   obtain ⟨s, d, _, _⟩ := native_open_derived_tensor k₀ l j
-  exact (derivedExtensionByZeroUpperStarAdjunction k₀ l j).isIso_projectionMap_app_app_of_iso
-    (nativeOpenPull k₀ l j) (Functor.curry.obj (nativeDerivedTensor k₀ l U)) (Functor.curry.obj (nativeDerivedTensor k₀ l Z))
+  -- the essential-image witness, normalized without unfolding the derived tensor
+  have e := d.gamma.app (M, N)
+  dsimp only [nativeOpenDerivedLeft, nativeOpenDerivedRight, nativeOpenExtension, nativeOpenPull,
+    Functor.comp_obj, Functor.prod_obj, Functor.id_obj] at e
+  refine (derivedExtensionByZeroUpperStarAdjunction k₀ l j).isIso_projectionMap_app_app_of_iso
+    (nativeOpenPull k₀ l j) (Functor.curry.obj (nativeDerivedTensor k₀ l U))
+    (Functor.curry.obj (nativeDerivedTensor k₀ l Z))
     (Functor.curryCompIsoOfIso (nativePullTensor k₀ l j)).inv M N
-    ((nativeDerivedTensor k₀ l U).obj (M, (nativeOpenPull k₀ l j).obj N))
-    (d.gamma.app (M, N))
+    ((nativeDerivedTensor k₀ l U).obj (M, (nativeOpenPull k₀ l j).obj N)) ?_
+  dsimp only [Functor.curry_obj_obj_obj, nativeOpenExtension, nativeOpenPull]
+  exact e
 
 /-- Extension by zero satisfies the projection formula, with inverse given by the canonical
 unit transpose for the native pullback/tensor comparison. -/
 def nativeOpenProjectionIso : nativeOpenDerivedLeft k₀ l j ≅ nativeOpenDerivedRight k₀ l j := by
   let q := (derivedExtensionByZeroUpperStarAdjunction k₀ l j).projectionMap
-    (nativeOpenPull k₀ l j) (Functor.curry.obj (nativeDerivedTensor k₀ l U)) (Functor.curry.obj (nativeDerivedTensor k₀ l Z))
+    (nativeOpenPull k₀ l j) (Functor.curry.obj (nativeDerivedTensor k₀ l U))
+    (Functor.curry.obj (nativeDerivedTensor k₀ l Z))
     (Functor.curryCompIsoOfIso (nativePullTensor k₀ l j)).inv
   have h (MN : DerivedCategory (ProEtaleWeilSheaf k₀ l U) ×
       DerivedCategory (ProEtaleWeilSheaf k₀ l Z)) : IsIso ((q.app MN.1).app MN.2) :=
@@ -96,9 +105,14 @@ lemma nativeOpenProjectionIso_inverse_unit
         (nativePullTensor k₀ l j).inv.app ((nativeOpenExtension k₀ l j).obj M, N) := by
   change (derivedExtensionByZeroUpperStarAdjunction k₀ l j).homEquiv _ _
     ((((derivedExtensionByZeroUpperStarAdjunction k₀ l j).projectionMap
-      (nativeOpenPull k₀ l j) (Functor.curry.obj (nativeDerivedTensor k₀ l U)) (Functor.curry.obj (nativeDerivedTensor k₀ l Z))
+      (nativeOpenPull k₀ l j) (Functor.curry.obj (nativeDerivedTensor k₀ l U))
+      (Functor.curry.obj (nativeDerivedTensor k₀ l Z))
       (Functor.curryCompIsoOfIso (nativePullTensor k₀ l j)).inv).app M).app N) = _
-  rw [Adjunction.projectionMap_app_app, Equiv.apply_symm_apply]
-  simp [Adjunction.projectionMapTranspose, Functor.curryCompIsoOfIso]
+  rw [Adjunction.projectionMap_app_app, Equiv.apply_symm_apply,
+    Adjunction.projectionMapTranspose_app_app]
+  -- componentwise, without `simp` on the derived tensor
+  dsimp only [Functor.curry_obj_map_app, Functor.curryCompIsoOfIso, NatIso.ofComponents_inv_app,
+    Iso.app_inv, nativeOpenExtension, nativeOpenPull]
+  try rfl
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
