@@ -156,3 +156,9 @@
   then check up to four direct importers and one further downstream layer.
 - Notes and logs: `/home/ubuntu/u9/bz/FIXES-BZ539.md`.
 - No local Lean/Lake, proof placeholders, statement edits, or heartbeat raises.
+
+- The public import resolved the missing name, but the resumed build failed in
+  `InternalHom:375` because its proof mixed new and compatibility map APIs.
+- User continuation followed the explicit one-line dependency patch proposal;
+  that exact compatibility-namespace proof repair is now applied.
+- Retrying the assigned module; declarations and heartbeat settings unchanged.
