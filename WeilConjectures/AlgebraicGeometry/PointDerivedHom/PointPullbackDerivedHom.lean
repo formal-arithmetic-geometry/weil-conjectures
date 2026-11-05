@@ -258,7 +258,6 @@ its globalization over the w-contractible affine basis
 ## Main definitions and statements
 
 - `comparison`: the canonical evaluation-adjoint map.
-- `derivedRestrictionComparison`: canonical point-composition under restriction.
 - `point_pullback_derived_hom`: invertibility, both naturalities and restriction equality.
 -/
 
