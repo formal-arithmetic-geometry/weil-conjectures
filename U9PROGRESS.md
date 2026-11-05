@@ -142,21 +142,6 @@
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ543 complete
-
-- Branch: `u9/BZ543`; assigned module and six downstream modules passed together
-  through `ucheck-bump`: rc=0, failed=0, 4523 jobs.
-- Validated source commit: `a732a755a776bd6a4d43d64d629ef8638eb15798`.
-- Build tree: `poolb:43.166.81.121`; toolchain and Mathlib pins verified directly.
-- Full log: `/home/ubuntu/u9/bz/BUILD-BZ543-final-full.log`.
-- Fix patterns and all seven module names: `/home/ubuntu/u9/bz/FIXES-BZ543.md`.
-- The four edited BZ543 modules add only local instance proofs and scoped
-  elaboration options. Existing statements and heartbeat limits are unchanged.
-- Imported tested prerequisite repairs and coordinator integration through `cfcb63ad77e`.
-- No local Lean/Lake, sorries in target sources, proof escapes, or heartbeat increases.
-- Completion marker: `/home/ubuntu/u9/state/BZ543.DONE`.
-- This final commit changes only progress documentation after the successful build.
-
 # BZ557 in progress
 
 - Branch: `u9/BZ557`; starting commit: `8af5cb324`.
@@ -167,3 +152,20 @@
   and AffineOpenSectionsResolutionQuasiIso; fix any owned errors and write DONE when green.
 - Notes and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ557.md`.
 - No local Lean/Lake, statement changes, proof escapes, or heartbeat increases.
+
+# BZ546 complete
+
+- Branch: `u9/BZ546`; owned module: `WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.LowerStar`.
+- Owned module passed `ucheck-bump`: rc=0, failed=0, 4388 jobs on `poolb:43.166.81.121`.
+- Validated source commit: `5d0238f6bcce449df08636833344e61a32f53c55`.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ546-sweep29-full.log`.
+- Its compositor corrections were already integrated in `d30a09bfb`.
+- Imported existing BZ538/BZ549 dependency repairs, then merged coordinator sweep29 `cfcb63ad7`.
+- Four direct importers were attempted. All depend on the failing unowned
+  `CategoryTheory.Abelian.Ext.MapExactFunctor:230`; skipped them per the brief.
+- After checking all four dependency paths, stopped that blocked batch to release its tree.
+- Downstream log: `/home/ubuntu/u9/bz/BUILD-BZ546-downstream-full.log`.
+- Patterns, exact errors, and counts: `/home/ubuntu/u9/bz/FIXES-BZ546.md`.
+- No local Lean/Lake, statement changes, proof placeholders, trust escapes, or heartbeat increases.
+- The completion commit changes only progress documentation after the green source build.
+- Completion marker: `/home/ubuntu/u9/state/BZ546.DONE`.
