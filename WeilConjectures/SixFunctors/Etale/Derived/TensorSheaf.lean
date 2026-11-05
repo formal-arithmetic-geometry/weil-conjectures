@@ -231,7 +231,8 @@ instance isLeftDerivedFunctor_leftDerivedUpperStarTensorRight :
   have : IsIso ((g)^*[A].leftDerivedFunctorCounit.app
       ((HomotopyCategory.quasiIsoLocalizerMorphism (kFlatUpperStar A g)).functor.obj X)) :=
     NatIso.isIso_app_of_isIso _ _
-  dsimp [leftDerivedUpperStarTensorRightCounit]
+  dsimp only [leftDerivedUpperStarTensorRightCounit, NatTrans.comp_app,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app]
   infer_instance
 
 /-- The comparison `g^*(P ⊗ c_Y) ⟶ g^* P ⊗ c_Z` on homotopy categories. -/
