@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Noetherian
+import Mathlib.Util.CountHeartbeats
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 
@@ -126,6 +127,7 @@ private theorem isFinitePresentation_of_generators_kernel
       ⟨inferInstanceAs (Finite (r.generators j).I)⟩⟩⟩
   exact D.isFinitePresentation
 
+set_option diagnostics true in
 set_option maxHeartbeats 300000 in
 -- The two local-presentation constructions and slice-kernel transport need more elaboration
 -- heartbeats; the complete file still compiles within the unchanged 60-second wall limit.
@@ -157,7 +159,7 @@ theorem isCoherent_iff_isQuasicoherent_and_isFiniteType
     classical
     have : F.IsFiniteType := h.1
     obtain ⟨q, hq⟩ := SheafOfModules.IsFiniteType.exists_localGeneratorsData F
-    have hfp (i : q.I) : (F.over (q.X i)).IsFinitePresentation := by
+    #count_heartbeats have hfp (i : q.I) : (F.over (q.X i)).IsFinitePresentation := by
       have := hq.isFiniteType i
       let _ := Fintype.ofFinite (q.generators i).I
       let n := Fintype.card (q.generators i).I
@@ -171,7 +173,7 @@ theorem isCoherent_iff_isQuasicoherent_and_isFiniteType
         simpa only [G, SheafOfModules.GeneratingSections.ofEpiFree_π]
           using h.2 (q.X i) n f
       exact isFinitePresentation_of_generators_kernel.{u} (F.over (q.X i)) G
-    have : F.IsFinitePresentation := by
+    #count_heartbeats have : F.IsFinitePresentation := by
       exact @SheafOfModules.IsFinitePresentation.of_coversTop _ _ _ _ _ _ _ _
         F q.I q.X q.coversTop hfp
     exact ⟨inferInstance, h.1⟩
@@ -181,15 +183,18 @@ theorem isCoherent_iff_isQuasicoherent_and_isFiniteType
         F.over U), (Limits.kernel f).IsFiniteType
     refine ⟨ht, ?_⟩
     intro U n f
-    have : (F.over U).IsQuasicoherent := SheafOfModules.isQuasicoherent_over F U
+    #count_heartbeats have : (F.over U).IsQuasicoherent := SheafOfModules.isQuasicoherent_over F U
     let e := overEquiv (X := X) U
-    have hfree : (SheafOfModules.free
+    #count_heartbeats have hfree : (SheafOfModules.free
         (R := (Scheme.Opens.toScheme (X := X) U).ringCatSheaf)
         (ULift.{u} (Fin n))).IsFinitePresentation :=
       isFinitePresentation_free.{u} _
-    have : (e.functor.obj (F.over U)).IsQuasicoherent :=
+    #count_heartbeats have : (e.functor.obj (F.over U)).IsQuasicoherent :=
       isQuasicoherent_overEquiv X U (F.over U)
-    have := (SheafOfModules.isFinitePresentation
+    have : (e.functor.obj
+        (SheafOfModules.free (R := X.ringCatSheaf.over U)
+          (ULift.{u} (Fin n)))).IsFinitePresentation :=
+      (SheafOfModules.isFinitePresentation
         (Scheme.Opens.toScheme (X := X) U).ringCatSheaf).prop_of_iso
         (SheafOfModules.mapFreeIso e.functor (ULift.{u} (Fin n))
           (U.sheafOfModulesEquivOverUnit X.ringCatSheaf).symm) hfree
