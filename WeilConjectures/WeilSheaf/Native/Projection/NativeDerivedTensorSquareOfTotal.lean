@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.WeilSheaf.Native.Projection.DerivedSquareFromModelFamilies
+public import WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareFromNativeModels
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareOfRepresentatives
 public import WeilConjectures.WeilSheaf.Native.Projection.TotalSquareToModel
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeModelFamilyNormalization
@@ -73,55 +73,14 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
     let F := condensedRealization k₀ l Y
     let R := CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
       (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))
-    exact projection_derived_square_of_model_families L V F R
+    exact projection_derived_square_of_native_models k₀ l L V F R
       (condensedRealizationUpperStarIso k₀ l g).symm
-      (nativeDerivedTensor k₀ l Y) (nativeDerivedTensor k₀ l Z)
       (condensedRealizationTensor k₀ l Y) (condensedRealizationTensor k₀ l Z)
       (nativePullTensor k₀ l g)
-      (nativeTensorTotal k₀ l Y) (nativeTensorTotal k₀ l Z)
-      (NativeIsKFlat k₀ l Y) (NativeIsKFlat k₀ l Z)
       (nativeIsKFlat_mapHomologicalComplex_upperStar_obj k₀ l g)
-      (nativeOpenTensorModel k₀ l Y) (nativeOpenTensorModel k₀ l Z)
       (nativePullTotalTensor k₀ l g) (condensedRealizationTotalTensorIso k₀ l Y)
       (condensedRealizationTotalTensorIso k₀ l Z)
-      (by
-        have hn := projection_nativePullTensor_normalization k₀ l g
-        dsimp only [ProjectionRestrictionTensorNormalization] at hn
-        dsimp only [L, nativeOpenPull]
-        run_tac Lean.Elab.Tactic.withMainContext do
-          let pf ← Lean.Elab.Term.elabTerm (Lean.mkIdent `hn) none
-          let H ← Lean.instantiateMVars (← Lean.Meta.inferType pf)
-          let G ← Lean.instantiateMVars (← (← Lean.Elab.Tactic.getMainGoal).getType)
-          let mut pending := #[(H, G)]
-          let mut seen : Std.HashSet (Lean.Expr × Lean.Expr) := {}
-          let mut differences := 0
-          while !pending.isEmpty && differences < 20 do
-            let (a, b) := pending.back!
-            pending := pending.pop
-            let a := a.consumeMData
-            let b := b.consumeMData
-            if a == b || seen.contains (a, b) then continue
-            seen := seen.insert (a, b)
-            if !a.hasLooseBVars && (← Lean.Meta.isProof a) then continue
-            if a.isApp && b.isApp && a.getAppFn == b.getAppFn &&
-                a.getAppNumArgs == b.getAppNumArgs then
-              pending := pending ++ (a.getAppArgs.zip b.getAppArgs)
-            else
-              match a, b with
-              | .lam _ ta ba _, .lam _ tb bb _ =>
-                  pending := pending ++ #[(ta, tb), (ba, bb)]
-              | .forallE _ ta ba _, .forallE _ tb bb _ =>
-                  pending := pending ++ #[(ta, tb), (ba, bb)]
-              | .proj _ i sa, .proj _ j sb =>
-                  if i == j then pending := pending.push (sa, sb)
-                  else
-                    differences := differences + 1
-                    Lean.logInfo m!"K5 data difference heads: {a.getAppFn} / {b.getAppFn}"
-              | _, _ =>
-                  differences := differences + 1
-                  Lean.logInfo m!"K5 data difference heads: {a.getAppFn} / {b.getAppFn}"
-          (throwError "K5 diagnostic: {differences} non-proof differences" :
-            Lean.Elab.Tactic.TacticM Unit))
+      (by exact projection_nativePullTensor_normalization k₀ l g)
       (by exact projection_native_realization_model_normalization k₀ l Y)
       (by exact projection_native_realization_model_normalization k₀ l Z)
       (fun A B ↦ (R.mapCochainComplexμIso A B).symm)
