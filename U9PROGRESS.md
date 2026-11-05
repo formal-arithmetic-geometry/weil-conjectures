@@ -163,15 +163,18 @@
   that exact compatibility-namespace proof repair is now applied.
 - Retrying the assigned module; declarations and heartbeat settings unchanged.
 
-# BZ547 resumed
+# BZ547 in progress
 
-- Assigned module: `WeilConjectures.AlgebraicGeometry.Etale.EtaleInjectiveSectionsComparison`.
-- Re-read the brief and progress notes on user-requested continuation.
-- Integrated coordinator fixes through `8af5cb324`; the dependency build then
-  failed in `Presheaf.InternalHom:375` due to mixed tensor restriction APIs.
-- Reused BZ539's exact existing dependency repair from `2a96dae096e7`:
-  select `PresheafOfModules.Monoidal.tensorObj_map_tmul` in the proof.
-- Next: validate the assigned target with ucheck-bump, then its two direct importers
-  and up to four second-layer targets. No DONE marker until the assigned build is green.
-- Notes: `/home/ubuntu/u9/bz/FIXES-BZ547.md`.
+- Assigned module `WeilConjectures.AlgebraicGeometry.Etale.EtaleInjectiveSectionsComparison`
+  is GREEN and unchanged from the starting branch.
+- ucheck-bump: rc=0, built=19, failed=0, 4239 jobs, poolb:43.166.85.105.
+- Validated source commit: `44c93779b6a562139fbe1167b08eaa054d9af518`.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ547-assigned-green-full.log`.
+- Integrated coordinator fixes through `8af5cb324`, then reused BZ539's exact
+  dependency repair from `2a96dae096e7`: use the compatibility namespace
+  `PresheafOfModules.Monoidal.tensorObj_map_tmul` in InternalHom's proof.
+- Its previous rewrite/kernel-error blocker is resolved; no BLOCKED marker remains.
+- Direct-importer batch is running for Strict.Local.StrictLocalInjectiveSourceComparison
+  and Strict.Local.StrictLocalInjectiveSourceSections. Next: one more importer layer.
+- Notes and generic pattern/count: `/home/ubuntu/u9/bz/FIXES-BZ547.md`.
 - No local Lean/Lake execution, statement edits, proof placeholders, or limit raises.
