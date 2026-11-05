@@ -95,7 +95,7 @@ theorem changeOfRingsTransitionMap_tmul (X : Cᵒᵖ) (s : R₂.obj.obj X) (m : 
 
 variable [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasWeakSheafify J AddCommGrpCat.{u}]
 
-local instance changeOfRingsTransitionRestrictedModule {X Y : Cᵒᵖ} (f : X ⟶ Y) :
+local instance {X Y : Cᵒᵖ} (f : X ⟶ Y) :
     Module (R₁.obj.obj Y)
       ((ModuleCat.restrictScalars ((𝓡 R₁).obj.map f).hom).obj (M.val.obj Y)) :=
   inferInstanceAs (Module (R₁.obj.obj Y) (M.val.obj Y))
