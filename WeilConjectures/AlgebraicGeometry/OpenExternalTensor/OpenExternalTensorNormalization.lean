@@ -12,7 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.Picard.FiniteOpenProduct.FiniteO
 import WeilConjectures.Algebra.Homology.OpenTensorNormalization.OpenTensorNormalization
 import Mathlib.CategoryTheory.Adjunction.Mates
 import Mathlib.CategoryTheory.Adjunction.Unique
-import WeilConjectures.AlgebraicGeometry.Picard.SiteDerivedTensorDescentIndependentCoefficients
+import WeilConjectures.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 
 /-!
 # Normalized open external tensor comparison

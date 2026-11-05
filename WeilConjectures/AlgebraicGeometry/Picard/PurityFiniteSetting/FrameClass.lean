@@ -10,7 +10,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import WeilConjectures.AlgebraicGeometry.Abelian.AbelianEtaleProEtaleCohomologyComparison
 import WeilConjectures.CategoryTheory.LeftModuleDerivedEvaluation.LeftModuleDerivedEvaluationForget
 import WeilConjectures.CategoryTheory.RightDerivedUniversalDeltaFunctor
-import WeilConjectures.AlgebraicGeometry.Picard.SiteDerivedTensorDescentIndependentCoefficients
+import WeilConjectures.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 
 /-! # The finite class of an étale frame
 

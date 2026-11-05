@@ -22,7 +22,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Ope
 
 import Mathlib.CategoryTheory.Adjunction.Mates
 import WeilConjectures.SecSmoothPurity.CochainPullbackTensorCoherenceSupplement
-import WeilConjectures.AlgebraicGeometry.Picard.SiteDerivedTensorDescentIndependentCoefficients
+import WeilConjectures.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 
 /-! # Canonical finite open product operations
 
