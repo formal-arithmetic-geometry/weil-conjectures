@@ -43,9 +43,9 @@ private theorem regular_sequence_shorten_small {R : Type u} [CommRing R]
     (Submodule.top_ne_ideal_smul_of_le_jacobson_annihilator
       (maximalIdeal_le_jacobson (Module.annihilator R (QuotSMulTop x M)))).symm.lt_top
   have hvan := ((ModuleCat.exists_isRegular_tfae (maximalIdeal R) (n + 1)
-    (ModuleCat.of R M) hM).out 3 0 rfl rfl).mp ⟨rs, hlen, hmem, hrs⟩
+    (ModuleCat.of R M) hM).out 4 1 rfl rfl).mp ⟨rs, hlen, hmem, hrs⟩
   apply ((ModuleCat.exists_isRegular_tfae (maximalIdeal R) n
-    (ModuleCat.of R (QuotSMulTop x M)) hQ).out 0 3 rfl rfl).mp
+    (ModuleCat.of R (QuotSMulTop x M)) hQ).out 1 4 rfl rfl).mp
   intro N hN hNfin hsupp i hi
   let := hN
   let := hNfin
