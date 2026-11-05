@@ -39,49 +39,6 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- The inclusion of the quasi-coherent derived full subcategory on a qcqs scheme
-has a right adjoint. Its adjunction supplies the natural Hom bijection.
-Source: Stacks Project, Tag 0B6I, final proof paragraph, and
-`perfect-lemma-better-coherator` (blueprint: lem-pc-dq-coherator-adjunction).
-
-Proof: compact generation (`lem-pc-derived-qcoh-compact-generation`) and coproducts
-(`lem-pc-derived-qcoh-direct-sums`) hold for qcqs schemes. Ambient coproducts have
-cohomology given by direct sums (`lem-pc-derived-ambient-direct-sums`). Finite sums
-of quasi-coherent modules are quasi-coherent (`lem-weil-pbc-quasi-coherent-module-direct-sum`),
-and their directed colimit is quasi-coherent
-(`lem-weil-pbc-quasi-coherent-module-colimit-affine-sections`). Thus ambient coproducts
-lie in the full subcategory and are its coproducts, so inclusion preserves them.
-The inherited triangles make inclusion exact. Brown representability
-(`lem-pc-brown-representability-right-adjoint`) supplies the right adjoint. -/
-theorem exists_dqCoheratorAdjunction (Y : Scheme.{u}) [CompactSpace Y]
-    [QuasiSeparatedSpace Y]
-    [HasDerivedCategory.{w}
-      (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] :
-    ∃ DQ_Y : schemeDerivedCategory Y ⥤ schemeDerivedQCohCategory Y,
-      Nonempty (Adjunction (schemeDerivedQCohProperty Y).ι DQ_Y) := by
-  let C := SheafOfModules.{u} (moduleRings Y.toRingedSpace)
-  let : IsGrothendieckAbelian.{u} C :=
-    SheafOfModules.isGrothendieckAbelian (moduleRings Y.toRingedSpace)
-  obtain ⟨htri, hsums, hgen⟩ := schemeDerivedQCoh_compactlyGenerated Y
-  let := htri
-  let := hsums
-  let : CategoryTheory.Limits.HasCoproducts.{u} (schemeDerivedCategory Y) :=
-    derivedAmbientHasCoproducts Y
-  have hpres : ∀ T : Type u,
-      CategoryTheory.Limits.PreservesColimitsOfShape (Discrete T)
-        (schemeDerivedQCohProperty Y).ι := by
-    intro T
-    let := schemeDerivedQCohClosedUnderCoproducts Y T
-    infer_instance
-  have hAdj : (schemeDerivedQCohProperty Y).ι.IsLeftAdjoint := by
-    apply Functor.isLeftAdjoint_of_rightAdjointObjIsDefined_eq_top
-    funext E
-    apply propext
-    change ((schemeDerivedQCohProperty Y).ι.op ⋙ yoneda.obj E).IsRepresentable ↔ True
-    exact ⟨fun _ ↦ trivial, fun _ ↦
-      brownHomRepresentabilityLocallySmall (schemeDerivedQCohProperty Y).ι hgen hpres E⟩
-  exact ⟨_, ⟨Adjunction.ofIsLeftAdjoint (schemeDerivedQCohProperty Y).ι⟩⟩
-
 /-- Every shift O_Y[-i] is in the quasi-coherent full subcategory.
 Source: Stacks Project, Tag 0B6I, final proof paragraph
 (blueprint: lem-pc-dq-coherator-adjunction).
