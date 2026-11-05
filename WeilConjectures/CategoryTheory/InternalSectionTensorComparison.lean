@@ -587,7 +587,7 @@ private theorem comparison_totalIso_ι
   simp [comparison_totalIso, HomologicalComplex₂.mapTotalIso,
     CochainComplex.ιMapBifunctor, HomologicalComplex.ιMapBifunctor]
 
-private instance comparison_presheafCoproducts (I : Type u) :
+local instance comparison_presheafCoproducts (I : Type u) :
     HasColimitsOfShape (Discrete I) (PresheafOfModules.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj (sectionRingSheaf J R)).obj) :=
   PresheafOfModules.hasColimitsOfShape _ _

@@ -964,9 +964,12 @@ def representativeIso
     DerivedCategory.Q.obj (((totalTensor R).obj A).obj B) ≅
       (((derivedTensor R).obj (DerivedCategory.Q.obj A)).obj (DerivedCategory.Q.obj B)) := by
   unfold derivedTensor
-  exact (selectedTensorPresentation R).representativeIso A B
-    ((resolvingProperty_spec R _).2 ⟨hA, hAf⟩)
-    ((resolvingProperty_spec R _).2 ⟨hB, hBf⟩)
+  let e := DerivedCategory.quotientCompQhIso (Modules R)
+  exact (e.app _).symm ≪≫
+    (selectedTensorPresentation R).representativeIso A B
+      ((resolvingProperty_spec R _).2 ⟨hA, hAf⟩)
+      ((resolvingProperty_spec R _).2 ⟨hB, hBf⟩) ≪≫
+    (selectedTensorPresentation R).derivedTensor.mapIso (Iso.prod (e.app A) (e.app B))
 
 omit [HasDerivedCategory.{w} (Modules R)] in
 private def ordinaryBraiding : ordinaryTensor R ≅ (ordinaryTensor R).flip := by
@@ -1137,10 +1140,16 @@ theorem kFlat_fixed_tensor_triangulated :
     exact ⟨shift_kFlat R A hA n, fun i ↦ hAf (i + n)⟩
   · intro B hB hBf
     let hPB := (resolvingProperty_spec R (q.obj B)).2 ⟨hB, hBf⟩
-    exact hcL B hPB
+    apply Iso.ext
+    simpa [representativeIso, DerivedCategory.quotientCompQhIso,
+      HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift] using
+      congrArg Iso.hom (hcL B hPB)
   · intro B hB hBf
     let hPB := (resolvingProperty_spec R (q.obj B)).2 ⟨hB, hBf⟩
-    exact hcR B hPB
+    apply Iso.ext
+    simpa [representativeIso, DerivedCategory.quotientCompQhIso,
+      HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift] using
+      congrArg Iso.hom (hcR B hPB)
 
 end LocalTensorDefinitions
 
