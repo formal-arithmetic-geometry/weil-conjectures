@@ -204,6 +204,7 @@ private theorem profinite_cover_preserving :
   obtain ⟨a⟩ := hg
   exact ⟨S a, f a, 𝟙 _, hmem a, (Category.id_comp _).symm⟩
 
+set_option backward.isDefEq.respectTransparency true in
 /-- The relative profinite test functor is independent of finite-quotient presentation,
 preserves finite limits and finite disjoint unions, and takes finite jointly surjective
 families to fpqc coverings. Its restriction to finite sets is naturally the coproduct of

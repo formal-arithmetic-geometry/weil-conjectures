@@ -23,8 +23,9 @@ open scoped ChangeOfRings TensorProduct
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types false
+set_option diagnostics true
 
 /-- The additive inverse-image unit, followed by extension and sheafification, is
 semilinear for the ring inverse-image unit followed by the extension ring map.
