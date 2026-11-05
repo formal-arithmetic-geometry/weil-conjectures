@@ -26,9 +26,9 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 namespace AlgebraicGeometry
 
-private local instance ringPresheafHasProducts.{uC, vC, w}
-    {C : Type uC} [Category.{vC} C] : HasProducts.{w} (Cᵒᵖ ⥤ CommRingCat.{w}) :=
-  fun _ ↦ functorCategoryHasLimitsOfShape
+private local instance typeSheafHasBinaryProducts.{uC, vC, w}
+    {C : Type uC} [Category.{vC} C] (J : GrothendieckTopology C) :
+    HasBinaryProducts (Sheaf J (Type w)) := inferInstance
 
 private noncomputable def ringAdd.{uC, vC, w} {C : Type uC} [Category.{vC} C]
     (J : GrothendieckTopology C) [J.HasSheafCompose (forget CommRingCat.{w})]
