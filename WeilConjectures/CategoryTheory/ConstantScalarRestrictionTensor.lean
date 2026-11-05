@@ -1061,7 +1061,6 @@ def ordinary : Ordinary J B := (ordinary_exists J B).some
 Source: Stacks 0GMW (auxiliary; not a blueprint node). -/
 instance restrictionBraided : (restriction J B).Braided := (ordinary J B).braided
 
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The existing Grothendieck structure of module sheaves.
 Source: Stacks 03DA (auxiliary; not a blueprint node). -/
 instance ringGrothendieck : IsGrothendieckAbelian.{max u v} (Modules J B) :=
