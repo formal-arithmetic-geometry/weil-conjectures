@@ -35,6 +35,20 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CochainComplex
 
+section
+
+variable {C : Type u} [Category.{u} C] {J : GrothendieckTopology C} {R : Sheaf J CommRingCat.{u}}
+
+-- Shortcut instance: without it the coproduct `∐ E` in the statement below times out in
+-- instance search.
+local instance : HasColimitsOfShape (Discrete ℕ)
+    (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) :=
+  inferInstance
+
+local instance : HasColimitsOfShape (Discrete ℕ) (CochainComplex
+    (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ) :=
+  ⟨fun _ ↦ inferInstance⟩
+
 set_option maxHeartbeats 1400000 in
 -- Comparing the cone maps unfolds repeated dependent sheaf colimits and cochain components.
 /-- A canonical augmentation from the telescope of replacements of good truncations
@@ -60,8 +74,6 @@ extensionality theorem shows that this composite equals f. Thus f is a
 quasi-isomorphism. This argument also covers the zero complex and towers without
 split transition maps. -/
 theorem quasiIso_flat_truncation_telescope
-    {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
-    {R : Sheaf J CommRingCat.{u}}
     (G : CochainComplex
       (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ)
     (E : ℕ → CochainComplex
@@ -157,5 +169,7 @@ theorem quasiIso_flat_truncation_telescope
   have : QuasiIso m := hm
   have : QuasiIso g := hg
   infer_instance
+
+end
 
 end CochainComplex

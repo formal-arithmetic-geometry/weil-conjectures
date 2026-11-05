@@ -31,6 +31,17 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace SheafOfModules
 
+section
+
+variable {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
+  (O : Sheaf J CommRingCat.{u})
+
+-- Shortcut instance, as in `RingedSiteGrothendieckAbelian`: without it the coproduct below
+-- times out in instance search.
+local instance : HasColimitsOfShape (Discrete C)
+    (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) :=
+  inferInstance
+
 set_option synthInstance.maxHeartbeats 100000 in
 -- Coproduct inference reduces the repeated sheaf-compose expression in the summands.
 /-- The module category on a small commutative ringed site is Grothendieck abelian,
@@ -51,9 +62,7 @@ Proof:
    and injective terms. These realize `lem-pur-kinjective-degreewise-existence`
    without its separate statement module. Naturality of the transformation and
    the functor's action on chain maps give precisely the asserted functoriality. -/
-theorem grothendieckAbelian_and_functorial_kInjective_resolutions
-    {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
-    (O : Sheaf J CommRingCat.{u}) :
+theorem grothendieckAbelian_and_functorial_kInjective_resolutions :
     IsGrothendieckAbelian.{u}
         (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) ∧
       IsSeparator (∐ fun U : C ↦
@@ -81,5 +90,7 @@ theorem grothendieckAbelian_and_functorial_kInjective_resolutions
   intro M
   exact ⟨(CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} A M).2,
     inferInstance, fun n ↦ inferInstance⟩
+
+end
 
 end SheafOfModules
