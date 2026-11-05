@@ -74,6 +74,13 @@ lemma purity_finiteCoefficient_forget_map (X : Scheme.{u})
         (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} T)) Ab.{u + 1})).map
           ((finiteCoefficientModEquivalence X T).functor.map a) := rfl
 
+lemma purity_lowerStarFiniteCoefficient_forget_inv {X Y : Scheme.{u}} (g : X ⟶ Y)
+    (M : Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (Profinite.continuousMapRingObj T) X)) :
+    (sheafCompose (ProEt.topology Y)
+      (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} T)) Ab.{u + 1})).map
+        ((lowerStarFiniteCoefficientModEquivalenceIso g T).inv.app M) = 𝟙 _ := rfl
+
 /-- The actual finite coefficient pullback comparison respects the free-module
 comparisons. This is the coefficient-reading part of the finite Tate line square. -/
 lemma purity_upperStarFiniteCoefficient_free {X Y : Scheme.{u}} (g : X ⟶ Y)
@@ -103,8 +110,10 @@ lemma purity_upperStarFiniteCoefficient_free {X Y : Scheme.{u}} (g : X ⟶ Y)
     purity_finiteCoefficientInverseForget_inv_app]
   rw [purity_finiteCoefficient_forget_map]
   rw [Adjunction.functor_map_inverseCompIso_isoCompInverse_inv_app]
-  simp only [Functor.map_comp, ← Functor.map_comp_assoc, Iso.inv_hom_id_app,
-    CategoryTheory.Functor.map_id, Category.id_comp]
+  simp only [Functor.map_comp, Category.assoc, ← Functor.map_comp_assoc,
+    Equivalence.counitIso_inv_hom_id_app, CategoryTheory.Functor.map_id,
+    Category.id_comp, purity_lowerStarFiniteCoefficient_forget_inv,
+    Functor.comp_obj, Category.comp_id]
   rfl
 
 end AlgebraicGeometry.ProEtale

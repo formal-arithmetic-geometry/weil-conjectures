@@ -22,6 +22,9 @@ open Scheme
 
 attribute [local implicit_reducible] MorphismProperty Scheme.ProEt
 
+set_option trace.profiler true
+set_option trace.profiler.threshold 1000
+
 /-- The two section identifications of the kernel of the power map agree, because
 both identify a section with its image in the sheaf of units. -/
 lemma purity_proEtaleRootsOfUnitySections_eq (X : Scheme.{u}) (N : ℕ) (V : X.ProEtᵒᵖ) :
@@ -50,6 +53,15 @@ lemma purityRootsPresheafKernelIso_sections (X : Scheme.{u}) (N : ℕ) (V : X.Pr
     ((Scheme.ProEt.rootsOfUnitySheafSectionsEquiv X N V.unop).symm x.down) = x.down
   exact AddEquiv.apply_symm_apply _ _
 
+/-- The specified direct-image map has its defining projection formula. -/
+lemma purity_rootDirectImage_sections {X Y : Scheme.{u}} (g : X ⟶ Y) (N : ℕ)
+    (V : Y.ProEtᵒᵖ) (x : (proEtaleRootsOfUnitySheaf Y N).obj.obj V) :
+    proEtaleRootsOfUnitySections X N ((proEtaleBaseChange g).op.obj V)
+        ((proEtaleRootsOfUnityDirectImageMap g N).hom.app V x) =
+      Additive.ofMul (restrictRootsOfUnity (pullback.fst V.unop.hom g).appTop.hom N
+        (Additive.toMul (proEtaleRootsOfUnitySections Y N V x))) :=
+  (existsUnique_proEtaleRootsOfUnityDirectImageMap g N).exists.choose_spec V x
+
 /-- Both root models push a root forward by the same fibre-product projection. -/
 lemma purityRootsPresheafKernelIso_lowerStar {X Y : Scheme.{u}} (g : X ⟶ Y) (N : ℕ) :
     (purityRootsPresheafKernelIso Y N).hom ≫ proEtaleRootsOfUnityDirectImageMap g N =
@@ -63,7 +75,7 @@ lemma purityRootsPresheafKernelIso_lowerStar {X Y : Scheme.{u}} (g : X ⟶ Y) (N
     proEtaleRootsOfUnitySections X N _
       ((purityRootsPresheafKernelIso X N).hom.hom.app _
         ((rootsOfUnityToLowerStar g N).hom.app V x))
-  erw [(existsUnique_proEtaleRootsOfUnityDirectImageMap g N).exists.choose_spec,
+  rw [purity_rootDirectImage_sections,
     purityRootsPresheafKernelIso_sections, purityRootsPresheafKernelIso_sections]
   rfl
 
