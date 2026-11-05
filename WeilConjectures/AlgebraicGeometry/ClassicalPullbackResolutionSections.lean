@@ -121,7 +121,7 @@ private theorem resolution_baseChange_sections
   have hqJ : (DerivedCategory.quotientCompQhIso A').symm.app J.obj = Iso.refl _ := rfl
   have ha := Functor.resolution_pullback_augmentation L G φ hφ
   dsimp only at ha
-  erw [hqI, hqJ] at ha
+  erw [hqI, hqJ, Iso.trans_refl, Iso.trans_refl] at ha
   change L.mapDerivedCategoryPlus.map a.hom ≫
     L.mapDerivedCategoryPlusFactorsh.hom.app KI ≫ DerivedCategory.Plus.Q.map f =
     (L.mapDerivedCategoryPlusSingleFunctor 0).hom.app G ≫ a'.hom at ha
