@@ -230,31 +230,32 @@
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 - This final commit changes only progress documentation; Lean source matches the green build.
 
-# BZ798 in progress
+# BZ824 in progress
 
-- Branch: `u9/BZ798`; original baseline: `6a4b38f19`.
-- Resumed after rereading `/home/ubuntu/u9/briefs/BZ798.md` and the progress notes.
-- Merged the current integrated bump branch at `d9a3ea12c`. It already removes the
-  unused signed-projection comparison chain and its downstream callers. The earlier
-  referenced-caller blocker therefore no longer applies.
-- Deleted only the remaining unused `SignedProjectionResolution.totalInverse`;
-  whole-tree `git grep -w totalInverse -- WeilConjectures Comparator` found its sole
-  declaration and no callers. It is listed unused and absent from kept-decls.txt.
-- All surviving declaration text is unchanged from the integrated branch.
-- Next: validate the owned module, then its direct importers and downstream layers.
-- Previous diagnostic history is archived in FIXES-BZ798-preintegration.md.
+- Branch: u9/BZ824; starting commit 95c8987257f.
+- The user instructed continuation after the upstream-restoration proposal.
+- Restored four prerequisite modules. The comparison predicate uses verified PZ003
+  Localization imports and a reflexive cast; the transport proof is unchanged,
+  and target automorphism specializes the existing arbitrary-degree theorem to zero.
+- All six submitted modules passed ucheck-bump at 826d8e1a1fb: rc=0, failed=0, 4065 jobs.
+- Green: DerivedModuleBaseChangeMap, DerivedModulePullbackComparison,
+  ModulePullbackComparisonIsoTransport, ModulePullbackComparisonTargetAutomorphism,
+  CanonicalModuleBaseChangeIsoComparisonCompat, CanonicalModuleBaseChangeIsoComparison.
+- All restored declaration headers and original assigned/caller sources are unchanged.
+- Full log: /home/ubuntu/u9/bz/BUILD-BZ824-restored-full.log.
+- Next: build layer-two importer CanonicalModuleBaseChangeAffineChartComparison.
+- Notes: /home/ubuntu/u9/bz/FIXES-BZ824.md. No local Lean/Lake or proof shortcuts.
+
+# BZ857 in progress
+
+- Branch: `u9/BZ857`; initial baseline `2ab2b07a3`.
+- User instructed continuation after the explicit four-upstream-module restoration proposal.
+- Merged integrated bump commit `db406319f` before restoring the required proof chain.
+- Restoring projection-unit normalization, mixed projection mate, signed normalization,
+  and mate data. Assigned theorem statement remains unchanged.
+- Applying known scalar carrier and canonical Q/Qh comparison repairs.
+- First remote build at `9833fc9a1e` reached the restored unit proof; its remaining
+  input-scalar carrier error is now annotated. The Qh/Q repairs await downstream compilation.
+- Next: validate the leaf and attempt its two direct importers, then downstream layers.
+- Notes: `/home/ubuntu/u9/bz/FIXES-BZ857.md`.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
-
-# BZ851 complete
-
-- Branch `u9/BZ851`; validated Lean source commit `b609d6fadf`.
-- Assigned `CoefficientConstantTowerRoosComparisonSupplement` and restored
-  `CoefficientRingedSequenceSiteSupplement` both built in 16s through ucheck-bump.
-- Restored five projection API declarations required by surviving closure users;
-  added Localization visibility and ported only proof/definition bodies.
-- All five original statement headers and docstrings are unchanged.
-- Both direct importers were attempted and skipped because their external
-  prerequisites fail. The broader batch was stopped after collecting blockers.
-- Exact fix/error/rule triples: `/home/ubuntu/u9/bz/FIXES-BZ851.md`.
-- Evidence: `BUILD-BZ851-layer1-full.log`, `BZ851-downstream-blocker-paths.txt`.
-- No local Lean/Lake, placeholders, trust bypasses, profiler probes, or heartbeat changes.

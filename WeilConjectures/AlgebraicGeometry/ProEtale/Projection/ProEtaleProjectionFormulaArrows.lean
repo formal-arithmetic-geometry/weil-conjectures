@@ -252,7 +252,8 @@ theorem proEtaleProjectionUnit_existsUnique :
         proEtaleTensorPair_rightUnitor X S _ V m' (j.hom.val.app V r')
       _ = ((proEtaleRingDirectImageMap f R S c).hom.app (Opposite.op U) r) • m' :=
         congrArg (fun z ↦ z • m') hjr
-      _ = (adj.unit.app M).val.app (Opposite.op U) (r • m) :=
+      _ = (adj.unit.app M).val.app (Opposite.op U)
+          ((show R.obj.obj (Opposite.op U) from r) • m) :=
         ((adj.unit.app M).val.app (Opposite.op U)).hom.map_smul r m |>.symm
       _ = _ := congrArg (fun z ↦ (adj.unit.app M).val.app (Opposite.op U) z)
         (proEtaleTensorPair_rightUnitor Y R M (Opposite.op U) m r).symm
