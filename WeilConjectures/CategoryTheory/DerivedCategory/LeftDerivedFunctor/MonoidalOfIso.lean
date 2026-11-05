@@ -115,10 +115,13 @@ lemma map_leftDerivedTensorComparison_comp_tensorHom_of_counit
       have cG₁ := congrArg G₂.leftDerivedFunctor.map
         (leftDerivedTensorComparison_app_app_comp_tensorHom G₁ X₁ X₂)
       have nG := G₂.leftDerivedFunctorCounit.naturality
+        (X := (G₁.mapHomotopyCategory (.up ℤ)).obj (X₁ ⊗ X₂))
+        (Y := (G₁.mapHomotopyCategory (.up ℤ)).obj X₁ ⊗
+          (G₁.mapHomotopyCategory (.up ℤ)).obj X₂)
         (((mapHomotopyCategoryδNatTrans (.up ℤ) G₁).app X₁).app X₂)
       have nβ := β.naturality (μ Qh X₁ X₂)
       simp only [Functor.map_comp] at cG₁
-      dsimp at nG nβ
+      dsimp only [Functor.comp_obj, Functor.comp_map] at nG nβ
       rw [derivedTensorLeftDerivedCounit_app_app, ← tensorHom_def_assoc,
         tensorHom_comp_tensorHom_assoc, hβ, hβ, ← tensorHom_comp_tensorHom_assoc,
         ← tensorHom_comp_tensorHom_assoc, μ_natural,
