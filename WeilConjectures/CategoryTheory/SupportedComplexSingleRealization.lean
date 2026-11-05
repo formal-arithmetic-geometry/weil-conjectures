@@ -43,8 +43,7 @@ theorem supported_complex_single_realization
     let e : (DerivedCategory.Plus.singleFunctor B n).obj X ≅
         DerivedCategory.Plus.Q.obj S :=
       DerivedCategory.Plus.ι.preimageIso
-        ((DerivedCategory.singleFunctorIsoCompQ B n).app X ≪≫
-          (DerivedCategory.quotientCompQhIso B).symm.app _)
+        ((DerivedCategory.singleFunctorIsoCompQ B n).app X)
     ∀ (f : Q.obj L ⟶ (singleFunctor B n).obj X),
       (homologyFunctor B n).map f ≫
         (singleFunctorCompHomologyFunctorIso (C := B) n).hom.app X = 𝟙 X →
