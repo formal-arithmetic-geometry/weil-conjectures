@@ -54,10 +54,12 @@ def projectionGeometricPullComp :
     CondensedRing.boundedConstructibleUpperStar Λ l (cb).overG ⋙
         CondensedRing.boundedConstructibleUpperStar Λ l (cb).overI ≅
       CondensedRing.boundedConstructibleUpperStar Λ l fb :=
-  ((boundedConstructible _).fullyFaithfulι.whiskeringRight _).preimageIso
-    (Functor.isoWhiskerLeft (boundedConstructible _).ι
-      (CondensedRing.leftDerivedUpperStarOverCompactificationIso Λ cb).symm)
+  NatIso.ofComponents (fun N ↦ ObjectProperty.isoMk _
+    ((CondensedRing.leftDerivedUpperStarOverCompactificationIso Λ cb).symm.app N.obj))
+    (fun φ ↦ ObjectProperty.hom_ext _
+      ((CondensedRing.leftDerivedUpperStarOverCompactificationIso Λ cb).inv.naturality φ.hom))
 
+set_option diagnostics true in
 /-- The geometric pullback compositor has the canonical ambient component. -/
 lemma projectionGeometricPullComp_hom_app
     (N : BoundedConstructible (condensedRingObj Λ
