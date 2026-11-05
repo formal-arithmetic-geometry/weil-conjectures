@@ -37,7 +37,7 @@ set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 2048
 set_option backward.defeqAttrib.useBackward true
 
-universe c v w u
+universe c v w
 
 open CategoryTheory CategoryTheory.Limits Opposite
 
@@ -256,16 +256,6 @@ private theorem moduleSheaf_isIso_of_bijective {C : Type*} [Category* C]
   exact isIso_of_reflects_iso f (SheafOfModules.forget A)
 
 namespace SheafOfModules
-
-local instance restrictedUnitSectionSMul
-    {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
-    (A : Sheaf J CommRingCat.{u})
-    (T : SheafOfModules.{u}
-      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj A)) (U : Cᵒᵖ) :
-    SMul (((PresheafOfModules.restrictOver A.obj U.unop).obj
-      (unit ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj A)).val).obj
-        (op (Over.mk (𝟙 U.unop)))) (T.val.obj U) :=
-  (T.val.obj U).isModule.toSMul
 
 variable {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
   [HasSheafify J AddCommGrpCat.{max c v w}]
@@ -703,6 +693,12 @@ private lemma bidual_iso_hom_eval {n : ℕ} {T : SheafOfModules.{max c v w} 𝓡
   change ((evaluation_map T).val.app U t).app W φ = _
   unfold evaluation_map
   rfl
+
+local instance restrictedUnitSectionSMul
+    (T : SheafOfModules.{max c v w} 𝓡) (U : Cᵒᵖ) :
+    SMul (((PresheafOfModules.restrictOver R.obj U.unop).obj (unit 𝓡).val).obj
+      (op (Over.mk (𝟙 U.unop)))) (T.val.obj U) :=
+  (T.val.obj U).isModule.toSMul
 
 private lemma bidual_iso_inv_apply {n : ℕ} {T : SheafOfModules.{max c v w} 𝓡}
     (i : T ⟶ free (R := 𝓡) (ULift.{max c v w} (Fin n)))
