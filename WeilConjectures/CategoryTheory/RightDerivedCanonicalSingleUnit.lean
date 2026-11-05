@@ -66,4 +66,29 @@ theorem rightDerivedFunctorPlusUnit_canonical_single (X : B) (n : ℕ) :
     rightDerivedPlusSingleUnitHomology_comp_comparison,
     rightDerivedZeroIsoSelf_inv_hom_id_app, Category.comp_id]
 
+private theorem canonical_single_api_validation (X : B) (n : ℕ) :
+    let S : CochainComplex.Plus B :=
+      ⟨(CochainComplex.singleFunctor B (n : ℤ)).obj X, n, inferInstance⟩
+    let e : (DerivedCategory.Plus.singleFunctor B n).obj X ≅
+        DerivedCategory.Plus.Q.obj S :=
+      DerivedCategory.Plus.ι.preimageIso
+        ((DerivedCategory.singleFunctorIsoCompQ B n).app X)
+    let GS := G.mapCochainComplexPlus.obj S
+    GS.obj.homologyπ n ≫ (DerivedCategory.Plus.homologyFunctorObjQIso GS n).inv ≫
+      (DerivedCategory.Plus.homologyFunctor C n).map
+        (G.rightDerivedFunctorPlusUnit.app S) ≫
+      (DerivedCategory.Plus.homologyFunctor C n).map (G.rightDerivedFunctorPlus.map e.inv) ≫
+      (G.rightDerivedSingleDegreeComparison n).hom.app X =
+    GS.obj.iCycles n ≫
+      G.map (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) n X).hom := by
+  have h := G.rightDerivedFunctorPlusUnit_canonical_single_shift X n
+  dsimp only at h ⊢
+  dsimp only [rightDerivedSingleDegreeComparison, Iso.trans_hom, NatTrans.comp_app]
+  simp only [Iso.trans_hom, NatTrans.comp_app, ← Category.assoc] at h ⊢
+  rw [h]
+  simp only [Category.assoc]
+  rw [← Category.assoc (G.rightDerivedPlusSingleUnitHomology X),
+    rightDerivedPlusSingleUnitHomology_comp_comparison,
+    rightDerivedZeroIsoSelf_inv_hom_id_app, Category.comp_id]
+
 end CategoryTheory.Functor
