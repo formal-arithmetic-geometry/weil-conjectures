@@ -49,17 +49,6 @@ private noncomputable abbrev restriction
     {A S : Sheaf K CommRingCat.{u + 1}} (c : A ⟶ S) :=
   restrictScalars ((sheafCompose K (forget₂ CommRingCat RingCat)).map c)
 
-private theorem tensorRestriction_tmul
-    {D : Type (u + 1)} [Category.{u} D] {K : GrothendieckTopology D}
-    [K.HasSheafCompose (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})]
-    [HasWeakSheafify K AddCommGrpCat.{u + 1}]
-    [K.WEqualsLocallyBijective AddCommGrpCat.{u + 1}]
-    {A S : Sheaf K CommRingCat.{u + 1}} (c : A ⟶ S) (M : SheafOfModules.{u + 1} (ringSheaf A))
-    {X Y : Dᵒᵖ} (i : X ⟶ Y) (s : S.obj.obj X) (m : M.val.obj X) :
-    (changeOfRingsPresheaf.{u, u + 1, u + 1} c M).map i (s ⊗ₜ[A.obj.obj X, (c.hom.app X).hom] m) =
-      S.obj.map i s ⊗ₜ[A.obj.obj Y, (c.hom.app Y).hom] M.val.map i m :=
-  Classical.choose_spec (exists_changeOfRingsMap.{u, u + 1, u + 1} c M i) s m
-
 private noncomputable def tensorPresheafFunctor
     {D : Type (u + 1)} [Category.{u} D] {K : GrothendieckTopology D}
     [K.HasSheafCompose (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})]
@@ -90,150 +79,6 @@ private noncomputable def tensorFunctor
     {A S : Sheaf K CommRingCat.{u + 1}} (c : A ⟶ S) :
     SheafOfModules.{u + 1} (ringSheaf A) ⥤ SheafOfModules.{u + 1} (ringSheaf S) :=
   tensorPresheafFunctor c ⋙ PresheafOfModules.sheafification (𝟙 (ringSheaf S).obj)
-
-private noncomputable def tensorToRestriction
-    {D : Type (u + 1)} [Category.{u} D] {K : GrothendieckTopology D}
-    [K.HasSheafCompose (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})]
-    [HasWeakSheafify K AddCommGrpCat.{u + 1}]
-    [K.WEqualsLocallyBijective AddCommGrpCat.{u + 1}]
-    {A S : Sheaf K CommRingCat.{u + 1}} (c : A ⟶ S)
-    (M : SheafOfModules.{u + 1} (ringSheaf A)) (H : SheafOfModules.{u + 1} (ringSheaf S))
-    (f : changeOfRingsPresheaf.{u, u + 1, u + 1} c M ⟶ H.val) : M ⟶ (restriction c).obj H where
-  val :=
-    { app := fun W ↦
-        ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars.{u + 1, u + 1, u + 1}
-        (c.hom.app W).hom (f.app W)
-      naturality := by
-        intro X Y i
-        ext m
-        change f.app Y ((1 : S.obj.obj Y) ⊗ₜ[A.obj.obj Y, (c.hom.app Y).hom]
-          M.val.map i m) = H.val.map i (f.app X
-            ((1 : S.obj.obj X) ⊗ₜ[A.obj.obj X, (c.hom.app X).hom] m))
-        have h := PresheafOfModules.naturality_apply f i
-          ((1 : S.obj.obj X) ⊗ₜ[A.obj.obj X, (c.hom.app X).hom] m)
-        rw [tensorRestriction_tmul, map_one] at h
-        exact h }
-
-private noncomputable def restrictionToTensor
-    {D : Type (u + 1)} [Category.{u} D] {K : GrothendieckTopology D}
-    [K.HasSheafCompose (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})]
-    [HasWeakSheafify K AddCommGrpCat.{u + 1}]
-    [K.WEqualsLocallyBijective AddCommGrpCat.{u + 1}]
-    {A S : Sheaf K CommRingCat.{u + 1}} (c : A ⟶ S)
-    (M : SheafOfModules.{u + 1} (ringSheaf A)) (H : SheafOfModules.{u + 1} (ringSheaf S))
-    (g : M ⟶ (restriction c).obj H) : changeOfRingsPresheaf.{u, u + 1, u + 1} c M ⟶ H.val where
-  app W := ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars.{u + 1, u + 1, u + 1}
-    (c.hom.app W).hom (g.val.app W)
-  naturality := by
-    intro X Y i
-    apply ModuleCat.ExtendScalars.hom_ext
-    intro m
-    have h := PresheafOfModules.naturality_apply g.val i m
-    change ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars.{u + 1, u + 1, u + 1}
-      (c.hom.app Y).hom (g.val.app Y)
-        ((changeOfRingsPresheaf.{u, u + 1, u + 1} c M).map i
-          ((1 : S.obj.obj X) ⊗ₜ[A.obj.obj X, (c.hom.app X).hom] m)) =
-      H.val.map i
-        (ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars.{u + 1, u + 1, u + 1}
-        (c.hom.app X).hom (g.val.app X)
-          ((1 : S.obj.obj X) ⊗ₜ[A.obj.obj X, (c.hom.app X).hom] m))
-    rw [tensorRestriction_tmul, map_one]
-    have atOne (W : Dᵒᵖ) (n : M.val.obj W) :
-        ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars.{u + 1, u + 1, u + 1}
-          (c.hom.app W).hom (g.val.app W)
-            ((1 : S.obj.obj W) ⊗ₜ[A.obj.obj W, (c.hom.app W).hom] n) = g.val.app W n := by
-      exact congrArg (fun f : M.val.obj W ⟶
-        (ModuleCat.restrictScalars (c.hom.app W).hom).obj (H.val.obj W) ↦ f n)
-        ((ModuleCat.ExtendRestrictScalarsAdj.homEquiv.{u + 1, u + 1, u + 1}
-          (c.hom.app W).hom).apply_symm_apply (g.val.app W))
-    rw [atOne, atOne]
-    exact h
-
-private noncomputable def tensorPresheafHomEquiv
-    {D : Type (u + 1)} [Category.{u} D] {K : GrothendieckTopology D}
-    [K.HasSheafCompose (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})]
-    [HasWeakSheafify K AddCommGrpCat.{u + 1}]
-    [K.WEqualsLocallyBijective AddCommGrpCat.{u + 1}]
-    {A S : Sheaf K CommRingCat.{u + 1}} (c : A ⟶ S)
-    (M : SheafOfModules.{u + 1} (ringSheaf A)) (H : SheafOfModules.{u + 1} (ringSheaf S)) :
-    (changeOfRingsPresheaf.{u, u + 1, u + 1} c M ⟶ H.val) ≃ (M ⟶ (restriction c).obj H) where
-  toFun := tensorToRestriction c M H
-  invFun := restrictionToTensor c M H
-  left_inv f := by
-    ext W : 1
-    exact (ModuleCat.ExtendRestrictScalarsAdj.homEquiv.{u + 1, u + 1, u + 1}
-      (c.hom.app W).hom).symm_apply_apply (f.app W)
-  right_inv g := by
-    apply SheafOfModules.hom_ext
-    ext W : 1
-    exact (ModuleCat.ExtendRestrictScalarsAdj.homEquiv.{u + 1, u + 1, u + 1}
-      (c.hom.app W).hom).apply_symm_apply (g.val.app W)
-
-private noncomputable def tensorHomEquiv
-    {D : Type (u + 1)} [Category.{u} D] {K : GrothendieckTopology D}
-    [K.HasSheafCompose (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})]
-    [HasWeakSheafify K AddCommGrpCat.{u + 1}]
-    [K.WEqualsLocallyBijective AddCommGrpCat.{u + 1}]
-    {A S : Sheaf K CommRingCat.{u + 1}} (c : A ⟶ S)
-    (M : SheafOfModules.{u + 1} (ringSheaf A)) (H : SheafOfModules.{u + 1} (ringSheaf S)) :
-    ((tensorFunctor c).obj M ⟶ H) ≃ (M ⟶ (restriction c).obj H) :=
-  ((PresheafOfModules.sheafificationAdjunction (𝟙 (ringSheaf S).obj)).homEquiv _ _).trans
-    (tensorPresheafHomEquiv c M H)
-
-private theorem tensorHomEquiv_naturality_left
-    {D : Type (u + 1)} [Category.{u} D] {K : GrothendieckTopology D}
-    [K.HasSheafCompose (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})]
-    [HasWeakSheafify K AddCommGrpCat.{u + 1}]
-    [K.WEqualsLocallyBijective AddCommGrpCat.{u + 1}]
-    {A S : Sheaf K CommRingCat.{u + 1}} (c : A ⟶ S)
-    {M N : SheafOfModules.{u + 1} (ringSheaf A)} (a : M ⟶ N)
-    (H : SheafOfModules.{u + 1} (ringSheaf S)) (f : (tensorFunctor c).obj N ⟶ H) :
-    tensorHomEquiv c M H ((tensorFunctor c).map a ≫ f) =
-      a ≫ tensorHomEquiv c N H f := by
-  change tensorPresheafHomEquiv c M H
-      ((PresheafOfModules.sheafificationAdjunction (𝟙 (ringSheaf S).obj)).homEquiv _ _
-        ((PresheafOfModules.sheafification (𝟙 (ringSheaf S).obj)).map
-          ((tensorPresheafFunctor c).map a) ≫ f)) = _
-  rw [Adjunction.homEquiv_naturality_left]
-  ext W m
-  change ((PresheafOfModules.sheafificationAdjunction (𝟙 (ringSheaf S).obj)).homEquiv
-    (changeOfRingsPresheaf.{u, u + 1, u + 1} c N) H f).app W
-      ((ModuleCat.extendScalars.{u + 1, u + 1, u + 1} (c.hom.app W).hom).map (a.val.app W)
-        ((1 : S.obj.obj W) ⊗ₜ[A.obj.obj W, (c.hom.app W).hom] m)) = _
-  rw [ModuleCat.ExtendScalars.map_tmul]
-  rfl
-
-private theorem tensorHomEquiv_naturality_right
-    {D : Type (u + 1)} [Category.{u} D] {K : GrothendieckTopology D}
-    [K.HasSheafCompose (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})]
-    [HasWeakSheafify K AddCommGrpCat.{u + 1}]
-    [K.WEqualsLocallyBijective AddCommGrpCat.{u + 1}]
-    {A S : Sheaf K CommRingCat.{u + 1}} (c : A ⟶ S)
-    (M : SheafOfModules.{u + 1} (ringSheaf A))
-    {H H' : SheafOfModules.{u + 1} (ringSheaf S)}
-    (f : (tensorFunctor c).obj M ⟶ H) (b : H ⟶ H') :
-    tensorHomEquiv c M H' (f ≫ b) =
-      tensorHomEquiv c M H f ≫ (restriction c).map b := by
-  change tensorPresheafHomEquiv c M H'
-      ((PresheafOfModules.sheafificationAdjunction (𝟙 (ringSheaf S).obj)).homEquiv _ _
-        (f ≫ b)) = _
-  rw [Adjunction.homEquiv_naturality_right]
-  rfl
-
-private noncomputable def tensorAdjunction
-    {D : Type (u + 1)} [Category.{u} D] {K : GrothendieckTopology D}
-    [K.HasSheafCompose (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})]
-    [HasWeakSheafify K AddCommGrpCat.{u + 1}]
-    [K.WEqualsLocallyBijective AddCommGrpCat.{u + 1}]
-    {A S : Sheaf K CommRingCat.{u + 1}} (c : A ⟶ S) : tensorFunctor c ⊣ restriction c :=
-  Adjunction.mkOfHomEquiv
-    { homEquiv := tensorHomEquiv c
-      homEquiv_naturality_left_symm := by
-        intro M N H a g
-        apply (tensorHomEquiv c M H).injective
-        rw [Equiv.apply_symm_apply, tensorHomEquiv_naturality_left,
-          Equiv.apply_symm_apply]
-      homEquiv_naturality_right := fun f b ↦ tensorHomEquiv_naturality_right c _ f b }
 
 private noncomputable def overRingMap
     {C : Type (u + 1)} [Category.{u} C] {J : GrothendieckTopology C}
@@ -280,25 +125,6 @@ private noncomputable def overRestrictionIso
   · intro M N h
     ext U m
     rfl
-
-private noncomputable def overExtensionIso
-    {C : Type (u + 1)} [Category.{u} C] [HasBinaryProducts C]
-    {J : GrothendieckTopology C}
-    [J.HasSheafCompose (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})]
-    [HasWeakSheafify J AddCommGrpCat.{u + 1}]
-    [J.WEqualsLocallyBijective AddCommGrpCat.{u + 1}]
-    {A S : Sheaf J CommRingCat.{u + 1}} (a : A ⟶ S) (V : C)
-    [(J.over V).HasSheafCompose (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})]
-    [HasWeakSheafify (J.over V) AddCommGrpCat.{u + 1}]
-    [(J.over V).WEqualsLocallyBijective AddCommGrpCat.{u + 1}] :
-    tensorFunctor a ⋙ overFunctor (ringSheaf S) V ≅
-      overFunctor (ringSheaf A) V ⋙ tensorFunctor (overRingMap a V) :=
-  (conjugateIsoEquiv
-    ((SheafOfModules.overPushforwardOverAdj (R := ringSheaf A) V).comp
-      (tensorAdjunction (overRingMap a V)))
-    ((tensorAdjunction a).comp
-      (SheafOfModules.overPushforwardOverAdj (R := ringSheaf S) V))).symm
-      (overRestrictionIso a V).symm
 
 private def constantPresheaf
     {C : Type (u + 1)} [Category.{u} C] (B : Type (u + 1)) [CommRing B] :
@@ -424,11 +250,6 @@ private noncomputable def constantExtensionIso
           (constantAdjunction Y (ULift.{u + 1} k'))).ofNatIsoRight
             (restrictionSectionsIso Y f).symm)
 
-private noncomputable def pbcTensorIso
-    (Y : Scheme.{u}) {A S : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}}
-    (a : A ⟶ S) : pbcExtend a ≅ tensorFunctor a :=
-  (pbcScalarAdjunction a).leftAdjointUniq (tensorAdjunction a)
-
 end FiniteFieldTensor
 
 private noncomputable def inverseImageRestrictionIso
@@ -489,76 +310,5 @@ private noncomputable def inverseImageExtensionIso
       (pbcScalarAdjunction ((proEtaleSheafInverseImage g CommRingCat.{u + 1}).map a)))
     ((pbcScalarAdjunction a).comp (proEtaleModuleInverseImageAdjunction g S))).symm
       (inverseImageRestrictionIso g a).symm
-
-/-- Scalar extension carries any given localized inverse-image constant model to the
-constant tensor model, over the actual inverse-image target ring.
-Source: Stacks Project, Tags 03EL, 0GMW and 093V
-(blueprint: lem-sf-finite-field-local-tensor-model).
-
-Proof: extension of scalars is left adjoint to restriction. Naturality of the
-ring inverse-image adjunction unit identifies the two composites of restriction
-and module direct image. Conjugating this identity gives the scalar-extension /
-inverse-image comparison, over the actual inverse-image coefficient sheaves.
-On the slice at V, restriction of scalars similarly commutes with direct image
-along Over.star V: the scalar equation is naturality along the product projection.
-Conjugate this identity using the slice restriction/direct-image adjunction and
-the tensor adjunction. Apply the resulting slice scalar-extension functor to the
-given local isomorphism. Finally, the constant-module functor is left adjoint to
-constant-scalar sections at the terminal site object. Naturality of the constant
-ring sheafification unit identifies restriction followed by these sections with
-these sections followed by ordinary scalar restriction. Uniqueness of left
-adjoints gives extension of a constant module as the constant tensor module.
-Compose these comparisons before and after the supplied local isomorphism.
-The tensor adjunction used on the slice is constructed sectionwise from the
-ordinary tensor/restriction Hom equivalence and module sheafification. Thus all
-comparisons are linear for the full target ring sheaf, with the target action on
-the scalar factor. No finiteness, cover, immersion or inhabited-object assumption
-is used; zero modules and empty schemes or localizing objects are included. -/
-theorem finiteFieldScalarExtension_localModel
-    (Y : Scheme.{u}) {k k' : Type u} [Field k] [Field k'] (f : k →+* k') :
-    ∀ (X : Scheme.{u}) (g : X ⟶ Y)
-      (F : pbcModules Y (adicLisseConstantRing Y (ULift.{u + 1} k)))
-      (V : X.ProEt) (M : ModuleCat.{u + 1} (ULift.{u + 1} k)),
-      Nonempty ((SheafOfModules.overFunctor _ V).obj
-        ((proEtaleModuleInverseImage g
-          (adicLisseConstantRing Y (ULift.{u + 1} k))).obj F) ≅
-        (SheafOfModules.overFunctor _ V).obj
-          ((proEtaleModuleInverseImage g
-            (adicLisseConstantRing Y (ULift.{u + 1} k))).obj
-            ((adicLisseConstantModules Y (ULift.{u + 1} k)).obj M))) →
-      Nonempty ((SheafOfModules.overFunctor _ V).obj
-        ((proEtaleModuleInverseImage g
-          (adicLisseConstantRing Y (ULift.{u + 1} k'))).obj
-          ((pbcExtend ((constantSheaf (ProEt.topology Y) CommRingCat.{u + 1}).map
-            (CommRingCat.ofHom (RingHom.ulift.{u + 1, u + 1} f)))).obj F)) ≅
-        (SheafOfModules.overFunctor _ V).obj
-          ((proEtaleModuleInverseImage g
-            (adicLisseConstantRing Y (ULift.{u + 1} k'))).obj
-            ((adicLisseConstantModules Y (ULift.{u + 1} k')).obj
-              ((ModuleCat.extendScalars
-                (RingHom.ulift.{u + 1, u + 1} f)).obj M)))) := by
-  intro X g F V M h
-  obtain ⟨eM⟩ := h
-  let R := adicLisseConstantRing Y (ULift.{u + 1} k)
-  let S := adicLisseConstantRing Y (ULift.{u + 1} k')
-  let a := FiniteFieldTensor.fieldRingMap Y f
-  let ax := (proEtaleSheafInverseImage g CommRingCat.{u + 1}).map a
-  let LR := proEtaleModuleInverseImage g R
-  let LS := proEtaleModuleInverseImage g S
-  let OR := SheafOfModules.overFunctor.{u + 1}
-    ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
-      ((proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj R)) V
-  let OS := SheafOfModules.overFunctor.{u + 1}
-    ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
-      ((proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj S)) V
-  let E := FiniteFieldTensor.tensorFunctor (FiniteFieldTensor.overRingMap ax V)
-  let e : ∀ N : pbcModules Y R,
-      OS.obj (LS.obj ((pbcExtend a).obj N)) ≅ E.obj (OR.obj (LR.obj N)) :=
-    fun N ↦ OS.mapIso ((inverseImageExtensionIso g a).app N) ≪≫
-      OS.mapIso ((FiniteFieldTensor.pbcTensorIso X ax).app (LR.obj N)) ≪≫
-        (FiniteFieldTensor.overExtensionIso ax V).app (LR.obj N)
-  exact ⟨e F ≪≫ E.mapIso eM ≪≫
-    (e ((adicLisseConstantModules Y (ULift.{u + 1} k)).obj M)).symm ≪≫
-      OS.mapIso (LS.mapIso ((FiniteFieldTensor.constantExtensionIso Y f).app M))⟩
 
 end AlgebraicGeometry.Scheme
