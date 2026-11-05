@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.RingTheory.AdicCompletion.Functoriality
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 import WeilConjectures.AlgebraicGeometry.FormalCompletionAffineQuotients
 import WeilConjectures.Algebra.Module.AdicCompletionStableRanges
 import WeilConjectures.AlgebraicGeometry.CoherentFormalModulesAffine
