@@ -62,7 +62,10 @@ theorem nativeProperProjection_forgetSquare :
     (CondensedRing.derivedUpperStarLowerStarAdjunction Λ gb)
     (comparisonCompatible_derivedCondensedRealization k₀ l g) M N
   simpa only [nativeProperProjectionNatTrans, Functor.uncurryRightProjection,
-    nativeProperForgetIso, Adjunction.uncurriedProjectionMorphismNatTrans, asIso_hom, Iso.symm_hom, Functor.uncurry_obj_map,
+    nativeProperForgetIso, Adjunction.uncurriedProjectionMorphismNatTrans,
+    condensedRealizationCurriedTensor, Functor.curryCompIsoOfIso',
+    Functor.comp_obj, Functor.prod_obj, Functor.id_obj,
+    asIso_hom, Iso.symm_hom, Functor.uncurry_obj_map,
     curriedTensor_map_app, curriedTensor_obj_map, id_whiskerRight, whiskerLeft_id,
     Category.comp_id, Category.id_comp] using h
 
