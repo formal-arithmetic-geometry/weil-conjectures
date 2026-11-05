@@ -51,10 +51,8 @@ private instance stalk_additive : (RingedSpace.moduleStalkFunctor X x).Additive 
     rw [Functor.map_add, Functor.map_add]
     rfl
 
--- Elaborating the two total tensor constructions and their coproduct instances needs
--- more than the default heartbeat budget; the file still compiles within 60 seconds.
-set_option maxHeartbeats 1500000 in
--- Elaborating both total tensor coproducts exceeds the default heartbeat budget.
+set_option maxHeartbeats 800000 in
+-- The stalk tensor comparison exceeds the default elaboration heartbeat budget.
 /-- (blueprint: lem-pc-stalk-tensor-complex) Stacks Project, Cohomology, Lemma 06YB:
 there is an isomorphism from the stalk of the total tensor complex to the total tensor
 complex of the stalks, natural in both complexes. Both total complexes use direct sums

@@ -28,7 +28,6 @@ local instance TensorResolutionHomologyCoherence_localInst4 (X : Scheme.{u}) (M 
     ((curriedTensor X.Modules).obj M).PreservesZeroMorphisms :=
   SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X.sheaf M
 
-set_option maxHeartbeats 800000 in
 -- Tensor-resolution comparisons require substantial definitional reduction.
 /-- Normalized restriction of ordinary total tensor homology. -/
 noncomputable def tensorResolutionNormalizedRestrictHomologyIso {X Y : Scheme.{u}}
@@ -44,7 +43,7 @@ noncomputable def tensorResolutionNormalizedRestrictHomologyIso {X Y : Scheme.{u
   (HomologicalComplex.homologyFunctor X.Modules (.up ℤ) i).mapIso
     (tensorResolutionRestrictionTotalIso j E F)
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- Tensor-resolution comparisons require substantial definitional reduction.
 /-- Nested chart restriction is compatible with normalized tensor homology. -/
 theorem tensorResolutionNormalizedRestrictHomologyIso_naturality

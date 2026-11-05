@@ -35,7 +35,6 @@ variable (R : Type uR) (B : Type uB) [CommRing R] [CommRing B]
   [HasDerivedCategory.{w} (ModuleCat.{max uR uB v} R)]
   [HasDerivedCategory.{w} (ModuleCat.{max uR uB v} B)]
 
-set_option maxHeartbeats 800000 in
 -- Derived scalar extension is expressed in a common module universe.
 /-- Source: Stacks Project, Tag 06Y6, lemma-derived-base-change
 (blueprint: lem-pc-base-derived-extension-linear).

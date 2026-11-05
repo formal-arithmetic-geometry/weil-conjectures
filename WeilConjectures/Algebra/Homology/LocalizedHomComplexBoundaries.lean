@@ -58,7 +58,6 @@ private lemma localizedSectionEquiv_map
   rfl
 
 set_option backward.isDefEq.respectTransparency true in
-set_option maxHeartbeats 800000 in
 -- Evaluated product projections unfold composed functors and restriction wrappers.
 /-- A localized chain map represented by a cycle is null-homotopic exactly when
 that cycle is a boundary in the section complex.
