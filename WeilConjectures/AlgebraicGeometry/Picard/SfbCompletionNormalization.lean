@@ -100,7 +100,7 @@ import WeilConjectures.Algebra.Homology.ChangeOfRingsKFlatQuasiIso
 import WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
 import Mathlib.CategoryTheory.Adjunction.Additive
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
-import WeilConjectures.ProperBaseChange.LocalCoefficientTelescopeDual
+import WeilConjectures.Algebra.Homology.LocalCoefficientTelescopeDual
 import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
 import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Colim
 import Mathlib.CategoryTheory.Limits.Shapes.Biproducts
