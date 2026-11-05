@@ -9,6 +9,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
+public import Mathlib.CategoryTheory.Sites.Adjunction
 import WeilConjectures.Algebra.FinitelyGeneratedCyclicFunctorVanishing
 import WeilConjectures.AlgebraicGeometry.ConstantAbelianHigherDirectImageFilteredColimit
 import WeilConjectures.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageForgetComparison
