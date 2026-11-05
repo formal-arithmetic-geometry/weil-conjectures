@@ -43,17 +43,16 @@ lemma preimageIso_liftSquareWithComparisons_comp :
   apply NatTrans.ext
   funext K
   apply PC'.ι.map_injective
-  rw [show PC'.ι.map _ = _ from
-    preimageIso_liftSquareWithComparisons_hom_app_hom
-      (Adjunction.compForgetIso cF cG) (Adjunction.compForgetIso cF' cG')
-      hA hC (Adjunction.compForgetIso eF eG) K]
+  simp only [ObjectProperty.ι_map]
+  rw [preimageIso_liftSquareWithComparisons_hom_app_hom]
   simp only [Adjunction.compForgetIso, Iso.trans_hom, Iso.trans_inv,
     NatTrans.comp_app, Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
     Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_inv,
     Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app,
     Category.id_comp, Category.comp_id, Functor.map_comp, Functor.map_id,
-    Functor.comp_obj, Functor.comp_map, Category.assoc]
+    Functor.comp_obj, Functor.comp_map, Category.assoc, FullSubcategory.comp_hom,
+    FullSubcategory.id_hom]
   rw [preimageIso_liftSquareWithComparisons_hom_app_hom]
   rw [← cG'.hom.naturality_assoc]
   simp only [Functor.comp_map, Functor.comp_obj, Category.assoc,
@@ -61,7 +60,7 @@ lemma preimageIso_liftSquareWithComparisons_comp :
   rw [preimageIso_liftSquareWithComparisons_hom_app_hom]
   simp only [Functor.map_comp, Category.assoc]
   rw [← eG.hom.naturality_assoc]
-  simp only [Functor.comp_map, Functor.map_comp, Category.assoc,
+  simp only [Functor.comp_map, Category.assoc,
     ← G'.map_comp_assoc, Iso.inv_hom_id_app, Functor.map_id, Category.id_comp]
 
 end CategoryTheory.ObjectProperty
@@ -84,6 +83,11 @@ lemma compForgetIso_conjugate :
       Functor.isoWhiskerLeft (F ⋙ G) aC ≪≫ compForgetIso eF eG ≪≫
         Functor.isoWhiskerRight aA.symm (F' ⋙ G') := by
   ext K
-  simp [compForgetIso, Functor.map_comp, Category.assoc, ← Functor.map_comp_assoc]
+  simp only [compForgetIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app, Functor.associator_hom_app, Functor.associator_inv_app,
+    Category.id_comp, Category.comp_id, Functor.map_comp, Functor.map_id,
+    Functor.comp_obj, Functor.comp_map, Category.assoc]
+  simp only [← Functor.map_comp_assoc, Iso.inv_hom_id_app, Functor.map_id, Category.id_comp]
 
 end CategoryTheory.Adjunction
