@@ -51,6 +51,7 @@ theorem commonStagePullbackRationalComposition_localization
         ((constructibleIntegralPullback l K f).obj (M.toStage hM).obj)))
   apply (conj_eqToHom_iff_heq _ _ ha hb).mp
   unfold commonStagePullbackRationalComposition
-  simp only [integralPullbackCompositor_eq_choose]
+  simp only [integralPullbackCompositor_eq_choose, Iso.trans_hom, Functor.mapIso_hom,
+    Iso.app_hom, Iso.symm_hom, eqToIso.hom, eqToIso.inv]
 
 end WeilConjectures

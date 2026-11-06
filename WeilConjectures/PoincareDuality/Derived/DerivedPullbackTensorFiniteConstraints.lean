@@ -198,6 +198,8 @@ section CommonCompositionProof
 attribute [local irreducible] commonStagePullbackCompComponent
   commonStagePullbackRationalComposition ScalarLocalization.category
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Existence half of the normalized constraint; uniqueness is proved by the parent theorem.
 Source: Stacks 06YS, 07A4, 0941.
 (blueprint: lem-pur-derived-pullback-tensor-constraints-common-composition-existence). -/
@@ -238,6 +240,8 @@ theorem pullbackTensorCommonComposition_exists {X Y Z : Scheme.{u}}
   exact hs
 end CommonCompositionProof
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Common-stage composition, specified at every larger finite coefficient field.
 Source: Stacks 07A4, 0941; blueprint coefficient conventions
 (blueprint: lem-pur-derived-pullback-tensor-constraints). Proof: represent the rational

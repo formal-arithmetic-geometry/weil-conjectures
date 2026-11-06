@@ -519,6 +519,8 @@ theorem rationalScalarAssociatorSquare
 end ScalarAssociator
 
 section HigherCoherence
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 variable (l : ℕ) [Fact l.Prime]
 variable (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω]
   [IsAlgClosure (Padic l) Ω]
@@ -713,8 +715,8 @@ private theorem ca_hAS (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueFie
 
 set_option maxHeartbeats 400000 in
 -- assembling the common-stage associator unfolds long composites of stage comparisons
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 private theorem pullbackTensorCommonAssociator_exists_aux (W : Scheme.{u})
     [hW : ∀ w : W, Invertible (l : W.residueField w)]
     (M N P : generalAlgebraicallyClosedConstructibleCategory l Ω W) :
@@ -828,8 +830,8 @@ theorem pullbackTensorCommonAssociator_exists (W : Scheme.{u})
             ((@pullbackTensorCommonRight l _ Ω _ _ _ W hW) M N P L hT).inv)) := by
   exact pullbackTensorCommonAssociator_exists_aux l Ω W M N P
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The common-stage associator has its prescribed representative at every larger field.
 Source: Stacks 06YS, 07A4, 0941; blueprint coefficient conventions
 (blueprint: lem-pur-derived-pullback-tensor-constraints). Proof: Conjugate the rational associator
