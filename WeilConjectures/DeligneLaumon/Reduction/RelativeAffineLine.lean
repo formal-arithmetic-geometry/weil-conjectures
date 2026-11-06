@@ -324,62 +324,58 @@ theorem isReal_higherLowerShriek_of_isAffine_fiber (hfib : ∀ y, IsAffine (h.fi
   have hloc (x : X'.finitePoints) (n : ℕ) :
       (starRingEnd ℂ) (ι (LinearMap.trace _ _ ((E'.stalk x).frobeniusEnd ^ n))) =
         ι (LinearMap.trace _ _ ((E'.stalk x).frobeniusEnd ^ n)) := by
-    as_aux_lemma =>
-      rw [LinearMap.trace_pow_eq_of_charpoly_eq
-        (WeilSheaf.charpoly_frobeniusEnd_stalk_upperStar g E x), ← pow_mul]
-      exact LinearMap.conj_trace_pow_of_charpolyRev ι _ (hreal _) _
+    exact (FrobeniusModule.isReal_iff_forall_trace_pow ι (E'.stalk x)).1
+      (hreal.upperStar g x) n
   -- the trace formula: the alternating traces on the cohomology of the fibre are real
   have htr (m : ℕ) (hm : m ≠ 0) : (starRingEnd ℂ) (ι (LinearMap.trace _ _
       ((E'.compactlySupportedCohomology 2).frobeniusEnd ^ m) - LinearMap.trace _ _
       ((E'.compactlySupportedCohomology 1).frobeniusEnd ^ m))) = ι (LinearMap.trace _ _
       ((E'.compactlySupportedCohomology 2).frobeniusEnd ^ m) - LinearMap.trace _ _
       ((E'.compactlySupportedCohomology 1).frobeniusEnd ^ m)) := by
-    as_aux_lemma =>
-      have hGL := WeilSheaf.sum_trace_compactlySupportedCohomology E' hm
-      rw [finsum_eq_sum_of_support_subset (s := {1, 2}) _ ?_, Finset.sum_pair (by decide)] at hGL
-      · rw [Int.negOnePow_one, Int.negOnePow_even 2 even_two, Units.val_neg, Units.val_one,
-          neg_smul, one_smul, one_smul, ← sub_eq_neg_add] at hGL
-        rw [hGL]
-        refine RingHom.conj_map_finsum_of_forall ι _ fun x ↦ ?_
-        split_ifs
-        · rw [map_mul, map_mul, map_natCast, hloc]
-          simp
-        · simp
-      · intro r hr
-        rw [Function.mem_support] at hr
-        simp only [Finset.coe_insert, Finset.coe_singleton, Set.mem_insert_iff,
-          Set.mem_singleton_iff]
-        by_contra hr'
-        refine hr ?_
-        have : Subsingleton (E'.compactlySupportedCohomology r).carrier := by
-          rcases lt_trichotomy r 0 with hr0 | rfl | hr0
-          · exact WeilSheaf.subsingleton_compactlySupportedCohomology_of_isAffine E' (Or.inl hr0)
-          · exact h0
-          · exact WeilSheaf.subsingleton_compactlySupportedCohomology_of_isAffine E'
-              (Or.inr (by omega))
-        rw [Subsingleton.elim ((E'.compactlySupportedCohomology r).frobeniusEnd ^ m) 0, map_zero,
-          smul_zero]
+    have hGL := WeilSheaf.sum_trace_compactlySupportedCohomology E' hm
+    rw [finsum_eq_sum_of_support_subset (s := {1, 2}) _ ?_, Finset.sum_pair (by decide)] at hGL
+    · rw [Int.negOnePow_one, Int.negOnePow_even 2 even_two, Units.val_neg, Units.val_one,
+        neg_smul, one_smul, one_smul, ← sub_eq_neg_add] at hGL
+      rw [hGL]
+      refine RingHom.conj_map_finsum_of_forall ι _ fun x ↦ ?_
+      split_ifs
+      · rw [map_mul, map_mul, map_natCast, hloc]
+        simp
+      · simp
+    · intro r hr
+      rw [Function.mem_support] at hr
+      simp only [Finset.coe_insert, Finset.coe_singleton, Set.mem_insert_iff,
+        Set.mem_singleton_iff]
+      by_contra hr'
+      refine hr ?_
+      have : Subsingleton (E'.compactlySupportedCohomology r).carrier := by
+        rcases lt_trichotomy r 0 with hr0 | rfl | hr0
+        · exact WeilSheaf.subsingleton_compactlySupportedCohomology_of_isAffine E' (Or.inl hr0)
+        · exact h0
+        · exact WeilSheaf.subsingleton_compactlySupportedCohomology_of_isAffine E'
+            (Or.inr (by omega))
+      rw [Subsingleton.elim ((E'.compactlySupportedCohomology r).frobeniusEnd ^ m) 0, map_zero,
+        smul_zero]
   -- the factors `P₁, P₂` of the fibre `L`-function have disjoint root radii, hence are real
   have hq : (1 : ℝ) < Nat.card k₀ := by exact_mod_cast Finite.one_lt_card
   obtain ⟨hr1, hr2⟩ := LinearMap.map_charpolyRev_conj_eq_self_of_trace ι _ _
     (fun α hα ↦ h1 α hα) (fun α hα ↦ h2 α hα)
     (Real.rpow_lt_rpow_of_exponent_lt hq (by norm_num)) htr
   have hHi : (E'.compactlySupportedCohomology i).IsReal ι := by
-    as_aux_lemma =>
-      match i with
-      | 0 =>
-        rw [Nat.cast_zero]
-        exact FrobeniusModule.isReal_of_subsingleton ι _
-      | 1 =>
-        rw [Nat.cast_one]
-        exact (Polynomial.forall_coeff_fixed_iff_map_map ι (starRingEnd ℂ) _).2 hr1
-      | 2 =>
-        rw [Nat.cast_ofNat]
-        exact (Polynomial.forall_coeff_fixed_iff_map_map ι (starRingEnd ℂ) _).2 hr2
-      | n + 3 =>
-        have := WeilSheaf.subsingleton_compactlySupportedCohomology_of_isAffine E'
-          (r := ((n + 3 : ℕ) : ℤ)) (Or.inr (by omega))
-        exact FrobeniusModule.isReal_of_subsingleton ι _
+    match i with
+    | 0 =>
+      rw [Nat.cast_zero]
+      exact FrobeniusModule.isReal_of_subsingleton ι _
+    | 1 =>
+      rw [Nat.cast_one]
+      exact (Polynomial.forall_coeff_fixed_iff_map_map ι (starRingEnd ℂ) _).2 hr1
+    | 2 =>
+      rw [Nat.cast_ofNat]
+      exact (Polynomial.forall_coeff_fixed_iff_map_map ι (starRingEnd ℂ) _).2 hr2
+    | n + 3 =>
+      have := WeilSheaf.subsingleton_compactlySupportedCohomology_of_isAffine E'
+        (r := ((n + 3 : ℕ) : ℤ)) (Or.inr (by omega))
+      exact FrobeniusModule.isReal_of_subsingleton ι _
   -- back to the stalk at `y`
   have hd := Scheme.Hom.degreeOver_ne_zero (Y ↘ Spec (CommRingCat.of k₀)) y.2
   refine (Polynomial.forall_coeff_expand_fixed_iff ι (starRingEnd ℂ) hd _).1 ?_
