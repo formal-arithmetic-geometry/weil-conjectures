@@ -7,6 +7,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.RelativeMVMaps
 public import WeilConjectures.AlgebraicGeometry.MayerVietorisImageChainData
 public import WeilConjectures.AlgebraicGeometry.DirectImageSquareUnitTransport
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.DerivedDirectImageSquareMate
 /-! # Complex localization of the normalized direct-image square -/
 
