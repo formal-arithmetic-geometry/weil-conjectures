@@ -287,3 +287,17 @@
   modules up to the brief's limit of 30 extra modules.
 - Fix patterns: /home/ubuntu/u9/bz/FIXES-BZ908.md.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+
+# PZ030 resumed
+
+- Branch: u9/PZ030; previous checkpoint 91715259ff6d9dfbc36dc0b1eacab5b958ae746b.
+- Reread /home/ubuntu/u9/briefs/PZ030.md and refreshed Weil module notes.
+- The user instructed continuation after the exact two-cast proposal.
+- Applied PZ030-statement-casts-proposal.patch to representativeScalarTensorIso;
+  both reflexive casts preserve the original maps and endpoints.
+- ReductionNormalizationScalarMate already passed remote validation twice.
+- Next: validate both assigned modules together, then DerivedScalarMateData.
+- Reduction's two importers were attempted and skipped for foreign blockers;
+  see /home/ubuntu/u9/bz/FIXES-PZ030.md and PZ030-downstream-blockers.txt.
+- No local Lean/Lake, proof placeholders, trust bypasses, or limit increases.
