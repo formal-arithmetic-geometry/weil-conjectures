@@ -211,7 +211,7 @@ private theorem lineEval_of_inverse
       let a : R.obj (op W.left) := φ.app (op W) x
       change a = a * 1
       exact (mul_one a).symm
-    _ = _ := congrArg (φ.app (op W) x • ·) hn
+    _ = _ := congrArg ((show R.obj (op W.left) from φ.app (op W) x) • ·) hn
 
 end LineUnit
 
