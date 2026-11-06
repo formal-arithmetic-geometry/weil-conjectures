@@ -388,3 +388,16 @@
 - Patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ1027.md`.
 - Completion marker: `/home/ubuntu/u9/state/BZ1027.DONE`.
 - No local Lean/Lake execution, declaration changes, proof escapes, or limit increases.
+
+
+# BZ1034 in progress
+
+- Branch: u9/BZ1034; starting commit 604047e529f6b513e0c4b425b3bfbd62aa4cfd36.
+- The user instructed continuation after the concrete four-private-helper compositor proposal.
+  Applied BZ1034-compositor-proposal.patch, preserving the original comparison arrows
+  under Mathlib b63f6e8a. The public theorem statement is unchanged.
+- Attribute-only build at 89034d5807 removed two errors; the nine remaining diagnostics
+  concern those compositor expressions. Next: validate the patch with ucheck-bump.
+- Direct importer: UnboundedProperOpenInterchangeSupplement; continue downstream after green.
+- Fix records: /home/ubuntu/u9/bz/FIXES-BZ1034.md.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
