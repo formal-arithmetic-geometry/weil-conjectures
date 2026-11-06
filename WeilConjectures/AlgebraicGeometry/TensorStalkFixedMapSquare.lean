@@ -10,6 +10,8 @@ public import WeilConjectures.AlgebraicGeometry.SingleComplexBaseChangeStalkCond
 public import WeilConjectures.AlgebraicGeometry.CanonicalPullbackTensorComparison
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction
 public import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.StalkComparisonPullbackNaturality
 import WeilConjectures.Algebra.Homology.BaseDerivedTensorModelQuasiIsoComparison
 import WeilConjectures.AlgebraicGeometry.TensorStalkChainCoordinates
