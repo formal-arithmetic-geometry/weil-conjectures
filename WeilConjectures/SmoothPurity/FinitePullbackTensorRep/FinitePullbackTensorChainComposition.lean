@@ -255,7 +255,6 @@ attribute [local instance] modules_abelian ordinary_additive
 attribute [local implicit_reducible] modules_abelian
 attribute [local semireducible] pull
 attribute [local implicit_reducible] pull Functor.map₂HomologicalComplex
-  Functor.mapHomologicalComplex
 
 private theorem complexComp_f {X Y Z : Scheme.{u}} (f : X ⟶ Y) (h : Z ⟶ X)
     (n : ℕ) (P : CochainComplex (normalizedDVRModules l E Y n) ℤ) (i : ℤ) :
