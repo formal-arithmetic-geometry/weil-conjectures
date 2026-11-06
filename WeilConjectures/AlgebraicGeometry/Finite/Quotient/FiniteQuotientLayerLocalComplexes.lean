@@ -65,12 +65,10 @@ theorem finiteQuotient_layer_local_complexes
   obtain ⟨Q, hQa, hQb, hQfin, hQiso⟩ :=
     finiteQuotient_layer_local_complex_core X d φ hφ hcompat M a b n Z P
       hPa hPb hP ⟨e⟩
-  letI := hQa
-  letI := hQb
   refine ⟨Q, ?_, hQfin, hQiso⟩
   intro q hq
   rcases hq with hq | hq
-  · exact Q.isZero_of_isStrictlyGE a q hq
-  · exact Q.isZero_of_isStrictlyLE b q hq
+  · exact (Q.isStrictlyGE_iff a).1 hQa q hq
+  · exact (Q.isStrictlyLE_iff b).1 hQb q hq
 
 end AlgebraicGeometry.Scheme
