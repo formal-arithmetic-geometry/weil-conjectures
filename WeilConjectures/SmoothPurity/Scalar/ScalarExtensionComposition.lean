@@ -806,8 +806,9 @@ private theorem ordinary_derived_source_unit
     (integralOrdinaryDerivedScalarComp l E E (AlgHom.id (Padic l) E) Y L ι).hom.app K =
       (integralOrdinaryDerivedScalar l E L ι Y).map
         ((integralOrdinaryDerivedScalarUnit l E Y).hom.app K) := by
-  have derived_source_unit {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]
-    [HasDerivedCategory A] [HasDerivedCategory B]
+  let A := integralTowerModules.{u, u} l E Y
+  let B := integralTowerModules.{u, u} l L Y
+  have derived_source_unit
     (T : A ⥤ A) (F : A ⥤ B)
     [T.Additive] [F.Additive]
     [PreservesFiniteLimits T] [PreservesFiniteColimits T]
@@ -830,7 +831,7 @@ private theorem ordinary_derived_source_unit
       exact hx
     rw [ha']
     apply (cancel_mono (Functor.mapDerivedCategoryCompIso (𝟭 A) F).inv).mp
-    simp only [Iso.trans_hom, Iso.symm_hom, Category.assoc,
+    simp only [Iso.trans_hom, Category.assoc,
       Functor.whiskerRight_comp]
     rw [h]
     simp only [← Category.assoc, Iso.hom_inv_id, Category.id_comp]
@@ -840,12 +841,12 @@ private theorem ordinary_derived_source_unit
       rw [← Category.assoc, hu]
       exact (Category.id_comp _).trans (Category.comp_id _).symm
     rw [Category.assoc, hu', Category.comp_id]
-  exact congrArg (fun t ↦ t.app K)
-    (derived_source_unit
+  have h := derived_source_unit
       (integralOrdinaryScalar l E E (AlgHom.id (Padic l) E) Y)
       (integralOrdinaryScalar l E L ι Y) (integralOrdinaryScalarUnit l E Y)
       (integralOrdinaryScalarComp l E E (AlgHom.id (Padic l) E) Y L ι)
-      (ordinary_source_unit l E L ι Y))
+      (ordinary_source_unit l E L ι Y)
+  exact congrArg (fun t ↦ t.app K) h
 
 private theorem ordinary_derived_target_unit
     (l : ℕ) [Fact l.Prime]
@@ -856,8 +857,9 @@ private theorem ordinary_derived_target_unit
     (integralOrdinaryDerivedScalarComp l E L ι Y L (AlgHom.id (Padic l) L)).hom.app K =
       (integralOrdinaryDerivedScalarUnit l L Y).hom.app
         ((integralOrdinaryDerivedScalar l E L ι Y).obj K) := by
-  have derived_target_unit {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]
-    [HasDerivedCategory A] [HasDerivedCategory B]
+  let A := integralTowerModules.{u, u} l E Y
+  let B := integralTowerModules.{u, u} l L Y
+  have derived_target_unit
     (F : A ⥤ B) (T : B ⥤ B)
     [T.Additive] [F.Additive]
     [PreservesFiniteLimits T] [PreservesFiniteColimits T]
@@ -879,7 +881,7 @@ private theorem ordinary_derived_target_unit
       exact hx
     rw [ha']
     apply (cancel_mono (Functor.mapDerivedCategoryCompIso F (𝟭 B)).inv).mp
-    simp only [Iso.trans_hom, Iso.symm_hom, Category.assoc,
+    simp only [Iso.trans_hom, Category.assoc,
       Functor.whiskerLeft_comp]
     rw [h]
     simp only [← Category.assoc, Iso.hom_inv_id, Category.id_comp]
@@ -890,13 +892,13 @@ private theorem ordinary_derived_target_unit
       rw [← Category.assoc, hu]
       exact (Category.id_comp _).trans (Category.comp_id _).symm
     rw [Category.assoc, hu', Category.comp_id]
-  exact congrArg (fun t ↦ t.app K)
-    (derived_target_unit
+  have h := derived_target_unit
       (integralOrdinaryScalar l E L ι Y)
       (integralOrdinaryScalar l L L (AlgHom.id (Padic l) L) Y)
       (integralOrdinaryScalarUnit l L Y)
       (integralOrdinaryScalarComp l E L ι Y L (AlgHom.id (Padic l) L))
-      (ordinary_target_unit l E L ι Y))
+      (ordinary_target_unit l E L ι Y)
+  exact congrArg (fun t ↦ t.app K) h
 
 private theorem ordinary_derived_pentagon
     (l : ℕ) [Fact l.Prime]
