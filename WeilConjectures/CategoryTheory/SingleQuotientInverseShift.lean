@@ -71,8 +71,9 @@ theorem single_quotient_inverse_shift (X : B) (n : ℕ) :
   let E := DerivedCategory.singleFunctorsPostcompQhIso B
   have he (i : ℤ) : DerivedCategory.Plus.ι.map (e i).inv = (E.inv.hom i).app X := by
     simp only [e, Functor.preimageIso_inv, Functor.map_preimage, Iso.trans_inv]
-    simp only [ObjectProperty.ι_obj, comp_obj, Iso.app_inv, Iso.symm_inv,
-      SingleFunctors.postcomp_functor]
+    simp only [E, DerivedCategory.singleFunctorIsoCompQ,
+      DerivedCategory.singleFunctorsPostcompQhIso, ObjectProperty.ι_obj, comp_obj,
+      Iso.app_inv, Iso.symm_inv, SingleFunctors.postcomp_functor]
     erw [Category.comp_id, Category.id_comp]
   have hσD : DerivedCategory.Plus.ι.map
       (((DerivedCategory.Plus.singleFunctors B).shiftIso (-(n : ℤ)) n 0 (by simp)).inv.app X) ≫
