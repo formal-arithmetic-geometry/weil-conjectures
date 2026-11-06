@@ -3937,7 +3937,7 @@ private lemma comparison_complex_fac
     rw [Iso.hom_inv_id_app, Functor.mapHomotopyCategoryCompIso_refl_hom_app]
     exact (Category.comp_id _).symm
   rw [hc]
-  simp only [Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv]
+  simp only [Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv, Category.assoc]
   erw [DerivedCategory.Qh.map_id, Category.id_comp, DerivedCategory.Qh.map_id,
     Category.id_comp]
   have ha : (a.mapHomotopyCategory (.up ℤ)).app
