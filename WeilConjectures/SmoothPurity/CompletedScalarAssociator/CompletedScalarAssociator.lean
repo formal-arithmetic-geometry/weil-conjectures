@@ -105,15 +105,10 @@ private theorem completedScalarComposition :
       Presentation (J := AlgebraicGeometry.Scheme.ProEt.topology X) a :=
     fun {R S} a ↦ scalarPresentation (J := AlgebraicGeometry.Scheme.ProEt.topology X)
       (R := R) (S := S) a
-  obtain ⟨o, d, ho, hd, hu⟩ := presentation_associator_exists p
+  have h := scalarCompositionData p
     (completedCoefficientMap l E F ι X) (completedCoefficientMap l F G j X)
     (completedCoefficientMap l E G (j.comp ι) X)
     (completedCoefficientMap_comp l E X F ι G j)
-  have h : Nonempty (ScalarComposition (J := AlgebraicGeometry.Scheme.ProEt.topology X)
-      (p (completedCoefficientMap l E F ι X))
-      (p (completedCoefficientMap l F G j X))
-      (p (completedCoefficientMap l E G (j.comp ι) X))) :=
-    ⟨{ ordinary := o, derived := d, tensor := ho, representative := hd, unique := hu }⟩
   simpa only [p, scalarPresentation, canonicalPresentation, chosenPresentation,
     completedOrdinaryScalarExtension, completedDerivedScalarExtension] using h
 

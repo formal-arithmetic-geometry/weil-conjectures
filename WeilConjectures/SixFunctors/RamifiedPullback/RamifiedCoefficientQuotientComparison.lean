@@ -324,8 +324,8 @@ compatibility of j with every quotient transition; the limit equations give the
 same compatibility for pi(s). Their product is the coefficient transition formula.
 The construction uses only ideal equality and not a chosen relating unit. -/
 theorem coefficients_exists (e : ℕ) (he : 1 ≤ e)
-    (hideal : Ideal.span ({integralScalarIntegerInclusion l E L ι
-      (Padic.coefficientExtensionUniformizer l E)} :
+    (hideal : Ideal.span
+      ({integralScalarIntegerInclusion l E L ι (Padic.coefficientExtensionUniformizer l E)} :
         Set (Padic.coefficientExtensionIntegers l L)) =
       Ideal.span {Padic.coefficientExtensionUniformizer l L ^ e})
     (hexp : ∀ n : ℕ, index e n + 1 = e * (n + 1))
