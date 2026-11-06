@@ -33,10 +33,7 @@ def ordinary {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
         intro V W f
         ext x
         symm
-        change M.val.map f
-          (((toSheafify J ((Functor.const Cᵒᵖ).obj B)).app V b) • x) =
-          ((toSheafify J ((Functor.const Cᵒᵖ).obj B)).app W b) • M.val.map f x
-        rw [M.val.map_smul]
+        refine (M.val.map_smul f _ x).trans ?_
         congr 1
         exact CategoryTheory.congr_fun
           ((toSheafify J ((Functor.const Cᵒᵖ).obj B)).naturality f) b |>.symm } }
