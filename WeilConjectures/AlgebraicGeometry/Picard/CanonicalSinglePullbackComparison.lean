@@ -8,6 +8,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedPullbackComposition
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.FlatModuleCanonicalDerivedPullback
 
 /-! # The pinned derived pullback comparison on a single module
