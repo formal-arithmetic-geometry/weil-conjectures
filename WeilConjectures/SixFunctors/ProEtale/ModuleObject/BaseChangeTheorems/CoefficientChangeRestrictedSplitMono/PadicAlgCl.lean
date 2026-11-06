@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangeRestrictedSplitMono.Basic
+public import WeilConjectures.Tactic.FirstOrderApply
 
 /-!
 # Split restricted base change maps: from `E` to `ℚ̄_ℓ`
@@ -56,8 +57,7 @@ theorem isSplitMono_map_baseChangeMap_app_padicAlgCl_of_padicSubfield [QuasiComp
     (isIso_derivedPushHom_app_padicSubfieldRingObjToPadicAlgCl_of_isGE ℓ E p K n)
     (isIso_derivedPushHom_app_padicSubfieldRingObjToPadicAlgCl_of_isGE ℓ E p'
       ((g')^*⟦Profinite.continuousMapRingObj E.1⟧.leftDerivedFunctor.obj K) n)
-    (by exact_mod_proofs h)
-  exact_mod_proofs hA
+  fo_apply hA using h
 
 end Coefficients
 

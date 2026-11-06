@@ -72,7 +72,7 @@ theorem minpoly.map_algebraMap_of_isSeparable {F L E : Type*} [Field F] [Field L
   apply hL
   obtain ⟨s, hs⟩ := (lifts_iff_coeff_lifts _).mp hlifts n
   rw [coeff_map] at hs
-  apply IsSeparable.of_algHom (IsScalarTower.toAlgHom F L Ω)
+  apply IsSeparable.of_algHom F (IsScalarTower.toAlgHom F L Ω)
   rw [IsScalarTower.coe_toAlgHom', ← hs]
   exact mem_separableClosure_iff.mp s.2
 
