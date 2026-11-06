@@ -10,7 +10,6 @@ public import WeilConjectures.SmoothPurity.Rational.RationalTensorStageCoherence
 import all WeilConjectures.SixFunctors.GeneralAlgebraicallyClosedCoefficients.GeneralAlgebraicallyClosedCoefficientStages
 import all WeilConjectures.SmoothPurity.Rational.RationalTensorStageCoherence
 import all Mathlib.Logic.Small.Defs
-import Mathlib.Util.CountHeartbeats
 
 /-! # Tensor endpoint identification
 
@@ -67,7 +66,8 @@ attribute [local irreducible] rationalDerivedPullback rationalDerivedTensor
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-#count_heartbeats in
+set_option maxHeartbeats 400000 in
+-- Measured 381069 heartbeats for the transported tensor endpoint on Lean 4.35.
 /-- The normalized tensor comparison followed by input associators is the pair endpoint.
 
 Source: def-pur-section-invariant, common-stage subargument, steps 3–5.

@@ -101,6 +101,8 @@ theorem integralObjectPullbackLine (l : ℕ) [Fact l.Prime]
   classical
   let _ := hL
   let R := completedIntegralCommRingSheafUnrestricted l E X
+  let : HasDerivedCategory (SheafOfModules.LineUnbounded.Modules.{u, u} X R) :=
+    HasDerivedCategory.standard _
   let P := (CochainComplex.singleFunctor (integralTowerModules l E X) 0).obj L
   let Rm := (sheafCompose (AlgebraicGeometry.Scheme.ProEt.topology X)
     (forget₂ CommRingCat RingCat)).obj R
