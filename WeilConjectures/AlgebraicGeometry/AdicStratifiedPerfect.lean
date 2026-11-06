@@ -31,6 +31,7 @@ open scoped ZeroObject MonoidalClosed.FunctorCategory
 
 attribute [local instance] HasDerivedCategory.standard
 
+attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
 private theorem sfbCompleteModel_triangulated
     {C : Type (u + 1)} [SmallCategory C] {J : GrothendieckTopology C}
     {O S : Sheaf J CommRingCat.{u + 1}} (q : O ⟶ S) :
@@ -40,8 +41,7 @@ private theorem sfbCompleteModel_triangulated
   let P : ObjectProperty (ConstantCompletion.D O) := ConstantCompletion.IsComplete q
   let hRshift (U : C) : (ringedDerivedRestriction O U).CommShift ℤ := by
     unfold ringedDerivedRestriction
-    set_option trace.Meta.synthInstance true in
-      infer_instance
+    infer_instance
   let hRtri (U : C) : (ringedDerivedRestriction O U).IsTriangulated := by
     unfold ringedDerivedRestriction
     infer_instance
