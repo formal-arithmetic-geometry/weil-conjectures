@@ -323,3 +323,8 @@
 - Three other direct importers are blocked by unowned dependencies; exact diagnostics
   are in /home/ubuntu/u9/bz/BZ941-layer1-blockers.json.
 - Next: five comparison importers in the second layer.
+- Second layer exposed redundant reducibility attributes in SectionTensorRightComputation
+  (known BZ992 fixes) and a reversed compositor in the unused predicate
+  CoefficientScalarSectionRealization. Removed the attributes and deleted the predicate
+  with its docstring after whole-tree reference and prune-list checks.
+- Revalidating all five second-layer targets; exact errors/rules recorded in FIXES-BZ941.md.
