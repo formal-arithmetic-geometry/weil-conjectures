@@ -219,7 +219,8 @@ noncomputable def coefficientActualScalarDerivedPair (n : ℕ) :
         (eqToIso (hobj M)).inv_hom_id
       exact hi)
     (coefficientFiniteAdjunction l E W n)
-    (private_decl% (derivedScalarExtensionRestrictionAdjunction l E W n).choose_spec)
+    (private_decl% (by
+      exact (derivedScalarExtensionRestrictionAdjunction l E W n).choose_spec))
 
 /-- The constructed pair retains the prescribed ordinary extension.
 Source: Stacks 07A6 (blueprint: lem-coef-actual-scalar-derived-pair).

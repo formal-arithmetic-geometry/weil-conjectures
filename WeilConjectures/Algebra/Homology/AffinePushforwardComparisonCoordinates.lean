@@ -57,6 +57,12 @@ def affinePushforwardCohomologyMapOfComparison (A B : Type u) [CommRing A] [Comm
         ((schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φ))).obj
           (DerivedCategory.Q.obj
             (((affinePushforwardTilde A).mapHomologicalComplex (.up ℤ)).obj C))) := by
+  let : HasDerivedCategory.{w} (Spec (.of A)).Modules :=
+    inferInstanceAs (HasDerivedCategory.{w}
+      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)))
+  let : HasDerivedCategory.{w} (Spec (.of B)).Modules :=
+    inferInstanceAs (HasDerivedCategory.{w}
+      (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)))
   let T := affinePushforwardTilde A
   let F := ModuleCat.restrictScalars φ ⋙ affinePushforwardTilde B
   let P := Scheme.Modules.pushforward (Spec.map (CommRingCat.ofHom φ))
