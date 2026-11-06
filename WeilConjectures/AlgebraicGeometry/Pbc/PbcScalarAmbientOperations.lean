@@ -911,7 +911,8 @@ theorem pbcScalarRestrictionPullback_app
     (pbcScalarCoefficientMap l E F i X) (pbcCompletedCoefficientIso g dE)
     (pbcCompletedCoefficientIso g dF) (pbcScalarCoefficientInverseSquare l E F i g)
   simpa only [pbcScalarRestrictionPullback, proEtaleRingRestrictionDerivedPullback,
-    Functor.mapDerivedCategorySquareIso, Functor.mapDerivedCategoryNatIso_symm,
+    Functor.mapDerivedCategorySquareIso,
+    ← Functor.mapDerivedCategoryNatIso_symm ((asIso pb).symm), Iso.symm_symm,
     Iso.trans_inv, Iso.trans_hom, Iso.symm_inv, Iso.symm_hom, NatTrans.comp_app,
     Category.assoc] using Functor.exactSquare_fac (asIso pb) K
 
