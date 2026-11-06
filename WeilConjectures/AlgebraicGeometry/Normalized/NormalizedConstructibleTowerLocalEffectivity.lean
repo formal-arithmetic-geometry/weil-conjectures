@@ -41,15 +41,10 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-private local instance normalizedTowerCoefficientCategory
-    (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
-    (d : AdicCoefficientDatum A) (n : ℕ) :
-    letI : Finite (A ⧸ d.ideal ^ (n + 1)) := d.quotientFinite n
-    Category.{u + 2} (@DerivedCategory.{u + 2, u + 1, u + 2}
-      (pbcModules X (AdicCoefficients.coefficientRing X (A ⧸ d.ideal ^ (n + 1))))
-      _ _ (proEtaleRingModules_hasDerivedCategory X ((pbcAdicRings X d).obj (op n)))) :=
-  inferInstanceAs (Category.{u + 2}
-    (DerivedCategory (pbcModules X ((pbcAdicRings X d).obj (op n)))))
+private local instance normalizedDerivedCategoryOfLocalization
+    {C : Type*} [Category C] [Abelian C] {h : HasDerivedCategory C} :
+    Category (@DerivedCategory C _ _ h) :=
+  @instCategoryDerivedCategory C _ _ h
 
 /-- Bounded constructible etale origin of a level of the recorded adic tower. The witness
 C represents an object in the existing finite-coefficient bounded-constructible essential
