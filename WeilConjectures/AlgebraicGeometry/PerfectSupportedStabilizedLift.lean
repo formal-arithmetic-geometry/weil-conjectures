@@ -7,8 +7,6 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
-import WeilConjectures.AlgebraicGeometry.SupportedMapInitialAmbientLift
-import WeilConjectures.AlgebraicGeometry.SupportedMapAffineAttachment
 
 /-! # The finite stabilization construction for supported map lifting
 
