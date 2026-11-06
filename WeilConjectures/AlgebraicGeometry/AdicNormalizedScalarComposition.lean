@@ -30,7 +30,7 @@ attribute [local irreducible] derivedExtension
 attribute [local implicit_reducible] SheafOfModules.restrictScalars change
   PresheafOfModules.restrictScalars PresheafOfModules.restrictScalarsObj
   ModuleCat.restrictScalars ModuleCat.RestrictScalars.obj'
-  Functor.mapHomologicalComplex extend extendComparison
+  extend extendComparison
   SheafOfModules.unit PresheafOfModules.unit CategoryTheory.sheafCompose
 variable {C : Type w} [SmallCategory C] {T : GrothendieckTopology C}
   {R S V : Sheaf T CommRingCat.{w}}
