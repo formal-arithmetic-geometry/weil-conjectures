@@ -293,3 +293,14 @@
   success is recorded in BUILD-BZ908-leaf-green-full.log. Rechecking the runner.
 - Next batch uses two direct importers whose dependency closures cover all 19:
   SingleComplexInheritedTensorCondition and NormalizedInternalHomPullbackComparison.
+
+- The stable downstream run at 0997529457 rebuilt the assigned leaf (59s) and
+  CanonicalPullbackTensorMonoidalRealization (50s) successfully.
+- TensorCoordinateIdentifications needs the same Qh/Q reflexive casts plus an
+  explicit target sheaf category; the known BZ877 repair is applied for recheck.
+  The unused-list theorem has an external caller, so it is retained.
+- Unowned blockers found: StalkDerivedExtensionComparisonIsoCore (heartbeat
+  timeout) and OpenRestrictionDerivedMonoidal (reversed compositor).
+- Per-run ucheck-bump snapshot: /home/ubuntu/u9/bz/BZ908-bin/ucheck-bump. It preserves
+  the lead's locking and one-build-per-helper rules while avoiding shared-script
+  overwrite failures. No shared build scripts were edited.
