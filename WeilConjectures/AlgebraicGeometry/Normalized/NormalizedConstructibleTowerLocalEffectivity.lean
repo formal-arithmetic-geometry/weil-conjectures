@@ -41,8 +41,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-attribute [local reducible] AdicCoefficients.ringSystem
-
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Bounded constructible etale origin of a level of the recorded adic tower. The witness
 C represents an object in the existing finite-coefficient bounded-constructible essential
 image. Its coefficient transport is restriction along the canonical ring-sheaf comparison,
