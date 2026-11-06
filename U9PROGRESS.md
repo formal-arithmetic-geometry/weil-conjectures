@@ -2,8 +2,11 @@
 
 - Branch: `u9/PZ017`.
 - The user instructed continuation after the exact two-cast proposal for
-  `scalarPairWithAdjunction`; that patch is now applied.
-- The two casts use `rfl` and preserve the original counit and adjunction-unit morphisms.
+  `scalarPairWithAdjunction`; that patch is applied and the signature errors are gone.
+- Four newly exposed body errors require `Qh` reductions unavailable inside exposed
+  public data definitions. Their normalization and unit proofs now live in private
+  theorems, preserving every data field and the reviewed constructor signature.
+- The updated three-module build is queued at source commit `d1e50bc851`.
 - `SectionDerivedPushpullNormalization` and `ProperOpenClopenProjector` already passed
   remote validation; all three assigned modules are being rebuilt together.
 - Thirteen geometry direct importers were checked or traced to other units' failures.

@@ -72,7 +72,7 @@ theorem adjunctionTranspose_of_unit
       ((am.homEquiv P H).apply_symm_apply g)
   rw [hg]
 
-private theorem scalarPairWithAdjunction_normalization
+theorem scalarPairWithAdjunction_normalization
     (E : scalarModules J R ⥤ scalarModules J S) (hadd : E.Additive)
     (F : DerivedCategory (scalarModules J R) ⥤ DerivedCategory (scalarModules J S))
     (ε : DerivedCategory.Qh ⋙ F ⟶ scalarHomotopy E hadd ⋙ DerivedCategory.Qh)
@@ -210,7 +210,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExistence
   HasDerivedCategory.standard
 
-private theorem coefficientFiniteAdjunction_unit (n : ℕ) :
+theorem coefficientFiniteAdjunction_unit (n : ℕ) :
     ∀ (P : CochainComplex (scalarReductionSource l E W) ℤ),
       CochainComplex.IsKFlatIndependentCoefficients P →
       (coefficientFiniteAdjunction l E W n).unit.app (DerivedCategory.Q.obj P) ≫
