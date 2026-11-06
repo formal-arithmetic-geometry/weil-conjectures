@@ -6,6 +6,8 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.Algebra.Homology.AffineTildeTensorSourceComparison
 public import WeilConjectures.Algebra.Homology.AffineBaseChangeTildeRepresentative
 import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeUnitCompatibility
@@ -74,10 +76,10 @@ def affineTildeTensorOrdinaryTargetMap
   let a := affineTildePushforwardComplexMap D B ψ Cg
   exact DerivedCategory.Q.map ((T.mapHomologicalComplex (.up ℤ)).map k) ≫
     DerivedCategory.Q.map a ≫
-    (RingedSpace.moduleDirectImage
+    cast (by rfl) ((RingedSpace.moduleDirectImage
       (Spec.map (CommRingCat.ofHom ψ)).toLRSHom.toShHom).rightDerivedFunctorUnit.app
         ((HomotopyCategory.quotient _ (.up ℤ)).obj
-          (((affinePushforwardTilde D).mapHomologicalComplex (.up ℤ)).obj Cg))
+          (((affinePushforwardTilde D).mapHomologicalComplex (.up ℤ)).obj Cg)))
 
 /-- Ordinary exchange, in unit-normalized affine tensor coordinates, followed by
 its right-derived unit. This is independent of any derived tensor model or counit.
@@ -135,7 +137,8 @@ theorem affineTildeTensorOrdinaryExchange
           (((Scheme.Modules.tensorPullback p).mapHomotopyCategory (.up ℤ)).obj H) =
       affineTildeTensorOrdinaryTargetMap R A B D M φ ψ k ≫
         (schemeDerivedDirectImage f').map t.hom ≫
-        (schemeDerivedDirectImage f').map ((SingleComplexBaseChange.counit p).app H) := by
+        (schemeDerivedDirectImage f').map
+          (cast (by rfl) ((SingleComplexBaseChange.counit p).app H)) := by
   dsimp only
   have h := affineTildeTensorOrdinaryExchange_preNormalization R A B D M φ ψ hw k hk
   dsimp only at h
