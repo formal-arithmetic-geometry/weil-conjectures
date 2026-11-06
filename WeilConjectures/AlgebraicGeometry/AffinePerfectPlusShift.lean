@@ -12,6 +12,7 @@ import WeilConjectures.AlgebraicGeometry.AffinePerfectPlusLocallyFree
 import WeilConjectures.AlgebraicGeometry.PerfectTwoOutOfThree
 import WeilConjectures.AlgebraicGeometry.PerfectImpliesQCoh
 import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Triangulated
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Affine perfect extension after adjoining a shift
 
