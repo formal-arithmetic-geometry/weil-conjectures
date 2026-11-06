@@ -318,6 +318,7 @@ theorem canonicalFinitePullbackTensor_unit {X Y : Scheme.{u}}
   let F := finiteDerivedPullback l E n f
   let μ := finitePullbackTensorConstructionIso l E f n
   obtain ⟨ε, hε⟩ := finitePullbackTensor_unit_representatives_exists l E f n
+  set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
   have hL : unitLeftPath F μ ε =
       Functor.whiskerRight (MonoidalCategory.leftUnitorNatIso D).hom F :=
     natTrans_ext_resolving DerivedCategory.Q
@@ -325,6 +326,7 @@ theorem canonicalFinitePullbackTensor_unit {X Y : Scheme.{u}}
       (finiteTensor_flat_representatives l E Y n) _ _ (by
         intro P hP
         exact (hε P hP).1)
+  set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
   have hR : unitRightPath F μ ε =
       Functor.whiskerRight (MonoidalCategory.rightUnitorNatIso D).hom F :=
     natTrans_ext_resolving DerivedCategory.Q
