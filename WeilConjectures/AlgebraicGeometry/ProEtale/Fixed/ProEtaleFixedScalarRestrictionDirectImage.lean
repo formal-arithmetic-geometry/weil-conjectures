@@ -9,6 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Direct.ProEtaleDirectIm
 public import WeilConjectures.AlgebraicGeometry.ProperBaseChange.WitnessCompatibility
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictScalars
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import all WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAdjunctionSupplement
 import all WeilConjectures.AlgebraicGeometry.ProEtale.Finite.ProEtaleFiniteModulesSupplement
 import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantExact
@@ -214,9 +216,9 @@ private theorem simple_derived_mate_factors
       (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
         adj'.mapDerivedCategoryRightDerivedAdjunction
         (TwoSquare.mk _ _ _ _
-          ((Functor.mapDerivedCategoryCompIso G L').symm ≪≫
+          (Functor.mapDerivedCategoryCompIso G L' ≪≫
             Functor.mapDerivedCategoryNatIso s ≪≫
-            Functor.mapDerivedCategoryCompIso L H).hom)).app (DerivedCategory.Q.obj K) ≫
+            (Functor.mapDerivedCategoryCompIso L H).symm).hom)).app (DerivedCategory.Q.obj K) ≫
       R'.rightDerivedFunctor.map (H.mapDerivedCategoryFactors.hom.app K) =
     G.mapDerivedCategoryFactors.hom.app ((R.mapHomologicalComplex (.up ℤ)).obj K) ≫
       DerivedCategory.Q.map
