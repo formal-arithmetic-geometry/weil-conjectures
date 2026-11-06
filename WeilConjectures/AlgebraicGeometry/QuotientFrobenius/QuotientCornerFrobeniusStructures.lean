@@ -172,7 +172,10 @@ open WeilConjectures
 namespace AlgebraicGeometry.Scheme
 namespace QuotientFrobenius
 
-attribute [instance 2000] WeilConjectures.instEssentiallySmallProEt_weilConjectures
+/-- The original small pro-etale site keeps its actual object and morphism universes.
+Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+instance (priority := 2000) baseSmall (T : Scheme.{t}) : EssentiallySmall.{t + 1} T.ProEt :=
+  essentiallySmallSelf.{0} T.ProEt
 
 attribute [local instance 2100] WeilConjectures.sfAbSheafify
 

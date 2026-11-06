@@ -254,7 +254,13 @@ namespace AlgebraicGeometry.ProEtale
 
 variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
 
-attribute [instance] WeilConjectures.instEssentiallySmallProEt_weilConjectures
+/-- The standard size witness at the coefficient universe, used with explicit universes.
+This merely exposes Mathlib's existing small-category witness to instance search;
+it avoids selecting an unrelated instance with an unconstrained extra universe.
+Source: def-weil-size-convention and the small pro-etale site
+(blueprint: sk-def-sp-tate-twist). -/
+instance spProEtEssentiallySmall : EssentiallySmall.{u + 1} X.ProEt :=
+  essentiallySmallSelf.{0, u, u + 1} X.ProEt
 
 /-- The cofinal ell-power ideals in the ring of integers.
 Source: blueprint integral-twist formula (blueprint: sk-def-sp-tate-twist). -/

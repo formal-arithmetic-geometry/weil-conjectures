@@ -682,7 +682,11 @@ instance constantRingSheafify (X : Scheme.{u}) :
     HasSheafify (ProEt.topology X) CommRingCat.{u + 1} :=
   integralCoefficientRingSheafify.{u, u + 1} X
 
-attribute [instance] WeilConjectures.instEssentiallySmallProEt_weilConjectures
+/-- The original site is essentially small in the coefficient universe.
+Source: the small-site convention
+(blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/
+instance proEtSmall (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.ProEt :=
+  essentiallySmallSelf.{0, u, u + 1} _
 
 /-- The sequence site has the same fixed smallness universe.
 Source: Zheng 4.1 (blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/

@@ -198,7 +198,10 @@ private local instance evaluationContinuousFixed {C : Type (u + 1)} [Category.{u
 
 variable (R : ℕ → CommRingCat.{u + 1}) (φ : ∀ n : ℕ, R (n + 1) ⟶ R n)
 
-attribute [instance] WeilConjectures.instEssentiallySmallProEt_weilConjectures
+/-- The small pro-etale site fits the coefficient universe, retaining Hom universe u.
+Source: Stacks 098K (blueprint: def-sp-varying-ring-operations). -/
+instance siteSmall (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.ProEt :=
+  essentiallySmallSelf.{0, u, u + 1} _
 
 /-- The vertical sequence site has the same smallness bound.
 Source: Zheng 4.1 (blueprint: def-sp-varying-ring-operations). -/

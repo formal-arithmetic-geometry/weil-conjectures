@@ -98,7 +98,10 @@ namespace AlgebraicGeometry.ProEtale
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u})
 
-attribute [instance 4000] WeilConjectures.instEssentiallySmallProEt_weilConjectures
+/-- The small pro-etale site fits in the actual coefficient universe.
+Source: blueprint, coefficient setup (blueprint: def-sp-tower-reconstruction-data). -/
+instance (priority := 4000) spReconstructionSiteSmall : EssentiallySmall.{u + 1} T.ProEt :=
+  essentiallySmallSelf.{0, u, u + 1} _
 
 /-- The fixed-universe abelian structure used by the reconstruction interface.
 This specializes the ordinary module-sheaf structure without leaving the coefficient

@@ -76,7 +76,11 @@ Source: blueprint coefficient convention (blueprint: def-sp-tower-shriek-data). 
 def tau (T : Scheme.{u}) (n : ℕ) : B l E T (n + 1) ⟶ B l E T n :=
   (spCoefficientCommRings l E T).map (homOfLE (Nat.le_succ n)).op
 
-attribute [instance 2000] WeilConjectures.instEssentiallySmallProEt_weilConjectures
+/-- The original small pro-etale site fits in the coefficient universe, with its
+object and morphism universes unchanged. Source: blueprint size convention
+(blueprint: def-sp-tower-shriek-data). -/
+instance (priority := 2000) small (T : Scheme.{u}) :
+    EssentiallySmall.{u + 1} T.ProEt := essentiallySmallSelf.{0} _
 
 /-- The sequence site has the same coefficient-universe bound.
 Source: blueprint sequence-site model (blueprint: def-sp-tower-shriek-data). -/
