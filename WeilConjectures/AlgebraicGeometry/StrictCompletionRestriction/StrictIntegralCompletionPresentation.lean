@@ -71,6 +71,9 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 universe u
 namespace AlgebraicGeometry.ProEtale.StrictCompletionRestriction
+attribute [local instance] AdicCompletion.modulesNatProducts AdicCompletion.complexNatProducts
+  AdicCompletion.complexNatLimit
+
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
@@ -179,7 +182,8 @@ theorem strictIntegralCompletionPresentation (X : Scheme.{u}) :
     obtain ⟨p, rfl⟩ := (Equiv.addRight (1 : ℤ)).surjective q
     change (aug.app M).f (p + 1) ≫ (roosEval (tower.obj M) n).f (p + 1) = _
     rw [roosEval_f, ← Category.assoc, ← Category.assoc, haug, biprod.lift_snd]
-    erw [← HomologicalComplex.comp_f, Pi.lift_comp_π]
+    exact congrArg (fun f ↦ f.f (p + 1)) (Pi.lift_comp_π
+      (fun n : ℕ ↦ (data.j n).app M) n)
   have hcone (M : CochainComplex (AdicCompletion.Modules l E X) ℤ) (n : ℕ) :
       (tower.obj M).asFunctor.obj (op n) = CochainComplex.mappingCone
         ((NatTrans.mapHomologicalComplex (scalarEnd l E X data.d ^ (n + 1)) (.up ℤ)).app M) := by
