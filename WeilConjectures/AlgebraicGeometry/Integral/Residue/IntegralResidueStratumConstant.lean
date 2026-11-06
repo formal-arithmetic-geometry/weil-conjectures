@@ -206,8 +206,8 @@ theorem integralResidueStratum_constant
   obtain ⟨rightModel⟩ := completedDerivedModel S (completedAdicScalar S d) C hk
   let leftFactors : L.mapDerivedCategory ≅
       I.mapDerivedCategory ⋙ (G.mapDerivedCategory ⋙ H.mapDerivedCategory) :=
-    Functor.mapDerivedCategoryCompIso I (G ⋙ H) ≪≫
-      Functor.isoWhiskerLeft I.mapDerivedCategory (Functor.mapDerivedCategoryCompIso G H)
+    (Functor.mapDerivedCategoryCompIso I (G ⋙ H)).symm ≪≫
+      Functor.isoWhiskerLeft I.mapDerivedCategory (Functor.mapDerivedCategoryCompIso G H).symm
   let leftModel :
       (integralResidueStratumPull T l E S g d c).obj
           ((integralConstantDerived T (pbcIntegralDatum l E)).obj (DerivedCategory.Q.obj B')) ≅
