@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.SfIntegralReductionTower
 public import WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerExchangeMateNormalization
 public import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearDerivedSections
 public import WeilConjectures.ProperBaseChange.IntegralFinitePullbackComposition
@@ -171,26 +172,11 @@ open WeilConjectures
 namespace AlgebraicGeometry.Scheme
 namespace QuotientFrobenius
 
-/-- The original small pro-etale site keeps its actual object and morphism universes.
-Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
-instance (priority := 2000) baseSmall (T : Scheme.{t}) : EssentiallySmall.{t + 1} T.ProEt :=
-  essentiallySmallSelf.{0} T.ProEt
+attribute [instance 2000] WeilConjectures.instEssentiallySmallProEt_weilConjectures
 
-/-- Abelian sheafification in the original finite-coefficient universe.
-Source: blueprint paragraph 4
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
-instance (priority := 2100) baseSheafify (T : Scheme.{t}) :
-    HasSheafify (ProEt.topology T) AddCommGrpCat.{t + 1} :=
-  @SemilinearSections.abelianSheafify.{t + 1, t, t + 1} T.ProEt _
-    (essentiallySmallSelf.{0} _) _
+attribute [local instance 2100] WeilConjectures.sfAbSheafify
 
-/-- The locally bijective sheafification criterion in the same finite-coefficient universe.
-Source: blueprint paragraph 4
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
-instance (priority := 2100) baseLocallyBijective (T : Scheme.{t}) :
-    (ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{t + 1} :=
-  @SemilinearSections.locallyBijective.{t + 1, t, t + 1} T.ProEt _
-    (essentiallySmallSelf.{0} _) _
+attribute [local instance 2100] WeilConjectures.sfAbBijective
 
 /-- The vertical sequence site is small in the same coefficient universe.
 Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/

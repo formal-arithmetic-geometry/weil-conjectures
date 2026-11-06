@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.SfIntegralReductionTower
 public import WeilConjectures.SixFunctors.Supporting.AdjunctConjugateOpenFactor
 public import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearDerivedSections
 public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.OpenTensorNormalization
@@ -681,11 +682,7 @@ instance constantRingSheafify (X : Scheme.{u}) :
     HasSheafify (ProEt.topology X) CommRingCat.{u + 1} :=
   integralCoefficientRingSheafify.{u, u + 1} X
 
-/-- The original site is essentially small in the coefficient universe.
-Source: the small-site convention
-(blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/
-instance proEtSmall (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.ProEt :=
-  essentiallySmallSelf.{0, u, u + 1} _
+attribute [instance] WeilConjectures.instEssentiallySmallProEt_weilConjectures
 
 /-- The sequence site has the same fixed smallness universe.
 Source: Zheng 4.1 (blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/

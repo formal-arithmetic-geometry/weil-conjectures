@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+public import WeilConjectures.AlgebraicGeometry.SfIntegralReductionTower
 public import WeilConjectures.AlgebraicGeometry.ContinuousIntegralCoefficients
 import all WeilConjectures.AlgebraicGeometry.ConstructibleFiniteHeart
 import all WeilConjectures.AlgebraicGeometry.IntegralContinuousEncodingConstructible
@@ -25,9 +26,7 @@ set_option synthInstance.maxSize 2048
 universe u
 
 -- Pin the site universe before synthesizing the generic tensor structures.
-local instance (priority := 100000) boundedSiteSmall (T : AlgebraicGeometry.Scheme.{u}) :
-    CategoryTheory.EssentiallySmall.{u + 1} T.ProEt :=
-  CategoryTheory.essentiallySmallSelf.{0} _
+attribute [local instance 100000] WeilConjectures.instEssentiallySmallProEt_weilConjectures
 
 open CategoryTheory Limits MonoidalCategory
 open scoped CategoryTheory.Obj CategoryTheory.Functor

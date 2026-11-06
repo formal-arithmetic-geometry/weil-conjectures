@@ -57,7 +57,8 @@ theorem nativeFiniteTensor_mem_essImage
   let B := compactSupportSystemLevel l E n
   let R := ProEtale.StrictTower.coefficients B Z
   let W := ProEt.mk j
-  let : EssentiallySmall.{u + 1} Z.ProEt := ProEtale.VaryingRing.siteSmall Z
+  let : EssentiallySmall.{u + 1} Z.ProEt :=
+    WeilConjectures.instEssentiallySmallProEt_weilConjectures Z
   let := abelianSheafify.{u + 1, u, u + 1} (ProEt.topology Z)
   let := locallyBijective.{u + 1, u, u + 1} (ProEt.topology Z)
   let := abelianSheafify.{u + 1, u, u + 1} ((ProEt.topology Z).over W)

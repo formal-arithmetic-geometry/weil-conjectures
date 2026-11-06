@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.SfIntegralReductionTower
 public import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearDerivedSections
 public import WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerOpenExtension
 public import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
@@ -197,10 +198,7 @@ private local instance evaluationContinuousFixed {C : Type (u + 1)} [Category.{u
 
 variable (R : ℕ → CommRingCat.{u + 1}) (φ : ∀ n : ℕ, R (n + 1) ⟶ R n)
 
-/-- The small pro-etale site fits the coefficient universe, retaining Hom universe u.
-Source: Stacks 098K (blueprint: def-sp-varying-ring-operations). -/
-instance siteSmall (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.ProEt :=
-  essentiallySmallSelf.{0, u, u + 1} _
+attribute [instance] WeilConjectures.instEssentiallySmallProEt_weilConjectures
 
 /-- The vertical sequence site has the same smallness bound.
 Source: Zheng 4.1 (blueprint: def-sp-varying-ring-operations). -/

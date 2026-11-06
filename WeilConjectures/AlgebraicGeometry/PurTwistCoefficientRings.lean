@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+public import WeilConjectures.AlgebraicGeometry.SfIntegralReductionTower
 public import Mathlib.NumberTheory.Padics.RingHoms
 public import WeilConjectures.AlgebraicGeometry.CompletedIntegralCoefficients
 import WeilConjectures.AlgebraicGeometry.CompletedIntegralConstantMapOfUniverses
@@ -25,11 +26,7 @@ open scoped ChangeOfRings
 namespace AlgebraicGeometry.Scheme
 variable (S : Scheme.{t}) (l : ℕ) [Fact l.Prime]
 
-/-- The recorded small-model sheafification criterion at the actual coefficient size.
-Source: Stacks Tag 00W1 (auxiliary; not a blueprint node). -/
-noncomputable instance purTwistAbLocallyBijective :
-    (ProEt.topology S).WEqualsLocallyBijective AddCommGrpCat.{t + 1} :=
-  WeilConjectures.integralCoefficientAbLocallyBijective.{t, t} S
+attribute [local instance] WeilConjectures.sfAbBijective
 
 /-- Forget commutativity of a coefficient sheaf, without changing its sections.
 Source: Stacks Tag 03EK (auxiliary; not a blueprint node). -/

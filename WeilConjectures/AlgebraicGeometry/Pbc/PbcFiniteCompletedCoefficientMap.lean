@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.SfIntegralReductionTower
 public import WeilConjectures.AlgebraicGeometry.Bounded.BoundedConstructibleCompleteSupplement
 public import WeilConjectures.NumberTheory.Padics.FiniteCoefficientFields
 public import Mathlib.NumberTheory.Padics.PadicNumbers
@@ -34,12 +35,7 @@ universe u c
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
-/-- The existing locally bijective criterion in exactly the PBC coefficient size.
-Source: Stacks Tag 03DA
-(blueprint: def-weil-pbc-finite-completed-coefficient-map). -/
-instance (priority := 3000) pbcFiniteStageAbLocallyBijective (T : Scheme.{u}) :
-    (ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
-  WeilConjectures.integralCoefficientAbLocallyBijective.{u, u} T
+attribute [local instance 3000] WeilConjectures.sfAbBijective
 
 variable (l : ℕ) [Fact l.Prime] (Ω : Type c) [Field Ω] [Algebra (Padic l) Ω]
   [IsAlgClosure (Padic l) Ω]
