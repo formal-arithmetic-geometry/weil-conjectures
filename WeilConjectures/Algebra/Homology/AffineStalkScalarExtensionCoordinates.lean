@@ -185,7 +185,10 @@ theorem exists_affineStalkScalarExtensionCoordinates
       (RingHom.flat_algebraMap_iff.mpr
         (IsLocalization.flat ((Spec.structureSheaf A).presheaf.stalk p)
           p.asIdeal.primeCompl))
-  let : TB.Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+  let : TB.Additive := by
+    constructor
+    intro M N f g
+    exact tilde.map_add (R := .of A) f g
   let : TB.PreservesZeroMorphisms := ⟨fun _ _ ↦ tilde.map_zero⟩
   let : TB.PreservesHomology := tilde_preservesHomology A
   let : s.PreservesZeroMorphisms := inferInstance
