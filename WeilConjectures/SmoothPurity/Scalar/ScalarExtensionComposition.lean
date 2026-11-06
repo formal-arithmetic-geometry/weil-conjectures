@@ -824,7 +824,8 @@ private theorem ordinary_derived_source_unit
     have hu := Functor.mapDerivedCategoryCompIso_id_comp F
     have ha' : a = Functor.isoWhiskerRight u F := by
       apply Iso.ext
-      ext X
+      apply NatTrans.ext
+      funext X
       have hx := congrArg (fun e ↦ e.hom.app X) ha
       dsimp only [Iso.trans_hom, NatTrans.comp_app, Functor.leftUnitor_hom_app] at hx
       erw [Category.comp_id] at hx
@@ -874,7 +875,8 @@ private theorem ordinary_derived_target_unit
     have hu := Functor.mapDerivedCategoryCompIso_comp_id F
     have ha' : a = Functor.isoWhiskerLeft F u := by
       apply Iso.ext
-      ext X
+      apply NatTrans.ext
+      funext X
       have hx := congrArg (fun e ↦ e.hom.app X) ha
       dsimp only [Iso.trans_hom, NatTrans.comp_app, Functor.rightUnitor_hom_app] at hx
       erw [Category.comp_id] at hx
