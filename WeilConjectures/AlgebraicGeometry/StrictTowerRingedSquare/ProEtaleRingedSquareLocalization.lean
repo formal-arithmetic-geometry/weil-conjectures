@@ -93,7 +93,7 @@ theorem StrictTowerRingedSquare.ambientSquare_localization
   apply Iso.ext
   simp only [Functor.mapDerivedCategorySquareIso, StrictTowerRingedSquare.exchangeModuleSquare,
     Functor.mapDerivedCategoryNatIso_trans, Functor.mapDerivedCategoryNatIso_symm,
-    Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Category.assoc]
+    Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv, Category.assoc]
   have ht := localization_transport r.RY r.RX' r.exchangeCoefficients_eq
   rw [ht]
 
