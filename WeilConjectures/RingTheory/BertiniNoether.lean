@@ -5,7 +5,6 @@ Authors: Nailin Guan
 -/
 module
 
-public import Mathlib
 public import Mathlib.Algebra.MvPolynomial.Nilpotent
 public import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
