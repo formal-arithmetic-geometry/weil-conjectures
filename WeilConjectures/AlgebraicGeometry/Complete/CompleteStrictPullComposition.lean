@@ -13,6 +13,8 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Canonical.ProEtaleCanon
 public import WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 public import WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerExchangeMateNormalization
 public import WeilConjectures.AlgebraicGeometry.StrictTower.StrictConstantTowerOperationsSupplement
+import all WeilConjectures.AlgebraicGeometry.ProEtale.Canonical.ProEtaleCanonicalDerivedPullbackNormalization
+import all WeilConjectures.AlgebraicGeometry.ProEtale.Derived.ProEtaleDerivedPullbackCoherence
 
 /-!
 # Inverse-image compositors and restriction to constant coefficients
@@ -245,6 +247,44 @@ abbrev towerCompositor {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
   (Functor.whiskeringRight ℕᵒᵖ _ _).mapIso κ ≪≫
     (Functor.whiskeringRightObjCompIso _ _).symm
 
+/-- The completed derived pullback compositor is the localization of an ordinary module
+compositor whose conjugate is the fibre-product pasting map on sections.
+Source: Stacks Tag 0D6D (blueprint: thm-cbc-complete-proetale). -/
+theorem AdicCoefficientDatum.pullComp_eq_triangle {X Y Z : Scheme.{u}} (f : X ⟶ Y)
+    (g : Y ⟶ Z) :
+    ∃ κ : stratumModulePull d (f ≫ g) ≅ stratumModulePull d g ⋙ stratumModulePull d f,
+      d.pullComp f g = Functor.mapDerivedCategoryTriangleIso' κ ∧
+      ∀ (N : proEtaleRingModules X (d.completedRing X)) (U : Z.ProEt)
+        (m : ((proEtaleRingModuleDirectImage f (d.completedRing Y) (d.completedRing X)
+            (d.integralRingIso f) ⋙ proEtaleRingModuleDirectImage g (d.completedRing Z)
+              (d.completedRing Y) (d.integralRingIso g)).obj N).val.obj (Opposite.op U)),
+        ((conjugateEquiv ((proEtaleRingModuleAdjunction g (d.completedRing Z)
+              (d.completedRing Y) (d.integralRingIso g)).comp
+            (proEtaleRingModuleAdjunction f (d.completedRing Y) (d.completedRing X)
+              (d.integralRingIso f)))
+            (proEtaleRingModuleAdjunction (f ≫ g) (d.completedRing Z) (d.completedRing X)
+              (d.integralRingIso (f ≫ g))) κ.hom).app N).val.app (Opposite.op U) m =
+          N.val.map ((MorphismProperty.Over.pullbackComp f g).hom.app U).op m := by
+  let D := Classical.choice (ambientData_transport f g
+    (d.completedRing Z) (d.completedRing Y) (d.completedRing X) (d.integralRingIso g)
+    (d.integralRingIso f) (d.integralRingIso (f ≫ g)) (d.integralRingIso_comp f g).symm)
+  refine ⟨D.a, ?_, ?_⟩
+  · exact pullbackData_comparison f g (d.completedRing Z)
+      (d.completedRing Y) (d.completedRing X) (d.integralRingIso g) (d.integralRingIso f)
+      (d.integralRingIso (f ≫ g)) (d.integralRingIso_comp f g).symm _ D
+  · have hg := normalizedAdj_eq_actual g (d.completedRing Z) (d.completedRing Y)
+      (d.integralRingIso g) D.adjk D.nk
+    have hf := normalizedAdj_eq_actual f (d.completedRing Y) (d.completedRing X)
+      (d.integralRingIso f) D.adjh D.nh
+    have hfg := normalizedAdj_eq_actual (f ≫ g) (d.completedRing Z) (d.completedRing X)
+      (d.integralRingIso (f ≫ g)) D.adjc D.nc
+    have heq := congrArg₂ conjugateIsoEquiv (congrArg₂ Adjunction.comp hg hf) hfg
+    have ha := (congrArg (fun e ↦ e D.a) heq).symm.trans D.ha
+    intro N U m
+    change ((conjugateIsoEquiv _ _ D.a).hom.app N).val.app (Opposite.op U) m = _
+    rw [ha]
+    exact D.hd N U m
+
 /-- Restriction to constant coefficients respects the inverse-image compositors on modules.
 Source: Stacks, Modules on Sites, Tags 03D8 and 03D7 (blueprint: thm-cbc-complete-proetale).
 -/
@@ -303,6 +343,61 @@ theorem exchangeOrdinaryResPull_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y �
   rw [reassoc_of% h', Iso.inv_hom_id_app_assoc, ← Functor.map_comp, Iso.inv_hom_id_app]
   erw [CategoryTheory.Functor.map_id, Category.comp_id]
 
+attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits in
+/-- Restriction to constant coefficients respects the derived inverse-image compositors.
+Source: Stacks, Modules on Sites, Tags 03D8 and 03D7 (blueprint: thm-cbc-complete-proetale).
+-/
+theorem exchangeResPull_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    (κ : stratumModulePull d (f ≫ g) ≅ stratumModulePull d g ⋙ stratumModulePull d f)
+    (hκ : ∀ (N : proEtaleRingModules X (d.completedRing X)) (U : Z.ProEt)
+        (m : ((proEtaleRingModuleDirectImage f (d.completedRing Y) (d.completedRing X)
+            (d.integralRingIso f) ⋙ proEtaleRingModuleDirectImage g (d.completedRing Z)
+              (d.completedRing Y) (d.integralRingIso g)).obj N).val.obj (Opposite.op U)),
+        ((conjugateEquiv ((proEtaleRingModuleAdjunction g (d.completedRing Z)
+              (d.completedRing Y) (d.integralRingIso g)).comp
+            (proEtaleRingModuleAdjunction f (d.completedRing Y) (d.completedRing X)
+              (d.integralRingIso f)))
+            (proEtaleRingModuleAdjunction (f ≫ g) (d.completedRing Z) (d.completedRing X)
+              (d.integralRingIso (f ≫ g))) κ.hom).app N).val.app (Opposite.op U) m =
+          N.val.map ((MorphismProperty.Over.pullbackComp f g).hom.app U).op m)
+    (N : DerivedCategory (exchangeTowers Z (d.completedRing Z))) :
+    (exchangeTowerRes d X).map
+        ((Functor.mapDerivedCategoryTriangleIso' (towerCompositor d f g κ)).hom.app N) ≫
+      (exchangeResPull d f).hom.app ((d.towerPull g).obj N) ≫
+      (exchangeConstantPull (A := A) f).map ((exchangeResPull d g).hom.app N) =
+    (exchangeResPull d (f ≫ g)).hom.app N ≫
+      (ProEtale.StrictTower.gComp A f g).hom.app ((exchangeTowerRes d Z).obj N) := by
+  have hq : ∀ M, (exchangeTowerModuleRes d X).map ((towerCompositor d f g κ).hom.app M) ≫
+      (exchangeModuleResPull d f).hom.app ((d.towerModulePull g).obj M) ≫
+      (exchangeTowerModulePull f (exchangeConstantRing Y A) (exchangeConstantRing X A)
+        (exchangeConstantIso f A)).map ((exchangeModuleResPull d g).hom.app M) =
+      (exchangeModuleResPull d (f ≫ g)).hom.app M ≫
+        (ProEtale.StrictTower.towerGComp A f g).hom.app
+          ((exchangeTowerModuleRes d Z).obj M) := by
+    intro M
+    apply NatTrans.ext
+    funext n
+    have h := exchangeOrdinaryResPull_comp d f g κ hκ (M.obj n)
+    simp only [NatTrans.comp_app, towerCompositor, Iso.trans_hom, Functor.mapIso_hom,
+      Iso.symm_hom, Functor.whiskeringRight_map_app_app, Functor.whiskeringRightObjCompIso,
+      Iso.refl_inv, NatTrans.id_app, Functor.whiskeringRight_obj_map, Functor.whiskerRight_app,
+      exchangeModuleResPull, NatIso.ofComponents_hom_app, Functor.isoWhiskerLeft_hom,
+      Functor.whiskerLeft_app, ProEtale.StrictTower.towerGComp, Iso.refl_hom]
+    erw [Category.comp_id, Category.comp_id]
+    exact h
+  have H := Functor.mapDerivedCategorySquareIso_comp (d.towerModulePull g)
+    (d.towerModulePull f) (d.towerModulePull (f ≫ g))
+    (ProEtale.StrictTower.towerPullback A g) (ProEtale.StrictTower.towerPullback A f)
+    (ProEtale.StrictTower.towerPullback A (f ≫ g))
+    (exchangeTowerModuleRes d Z) (exchangeTowerModuleRes d Y) (exchangeTowerModuleRes d X)
+    (exchangeModuleResPull d g) (exchangeModuleResPull d f) (exchangeModuleResPull d (f ≫ g))
+    (towerCompositor d f g κ) (ProEtale.StrictTower.towerGComp A f g) hq
+  have H' := congrArg (fun e ↦ e.hom.app N) H
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+    Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Functor.associator_hom_app, Functor.associator_inv_app, Iso.symm_hom,
+    Category.id_comp, Category.comp_id] at H'
+  exact H'
 end ReductionComposition
 
 end AlgebraicGeometry.Scheme
