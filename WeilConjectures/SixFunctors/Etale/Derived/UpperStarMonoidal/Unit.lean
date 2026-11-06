@@ -82,7 +82,7 @@ lemma leftDerivedUpperStarUnitIso_hom_comp_ε :
     exact (Category.comp_id _).symm.trans (h.trans (Category.id_comp _))
   erw [Category.id_comp, h₆, h₆]
   rw [h₆]
-  rfl
+  simp only [Category.comp_id, Category.id_comp]
 
 variable [(g)^*[A].PreservesFlat]
 
