@@ -5,7 +5,14 @@ Authors: Nailin Guan
 -/
 module
 
-public import Mathlib
+public import Mathlib.Algebra.MvPolynomial.Nilpotent
+public import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.RingTheory.Jacobson.Ring
+public import Mathlib.RingTheory.Localization.Ideal
+public import Mathlib.RingTheory.MvPolynomial.Localization
+public import Mathlib.RingTheory.Spectrum.Prime.Chevalley
+public import Mathlib.Tactic
 public import Mathlib.Algebra.MvPolynomial.Basic
 
 /-!

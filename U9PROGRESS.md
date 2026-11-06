@@ -371,29 +371,21 @@
   StratumCompletionUnitRestriction, then continue downstream as the brief requires.
 - Fix log: /home/ubuntu/u9/bz/FIXES-BZ995.md. No local Lean/Lake or forbidden proof shortcuts.
 
+# BZ1021 in progress
 
-# BZ1020 in progress
+- Branch: u9/BZ1021; starting commit 203ea75a45628a5a18c524c66580a676a0da3d5c.
+- The user instructed continuation after the explicit BertiniNoether prerequisite-import proposal.
+  Applied that prepared import-only patch; DegreeZero's umbrella import is also removed.
+- The first remote build confirmed the Sheaf.H.δ collision through SlicingFlat and BertiniNoether.
+- All theorem statements, definitions, proofs, and docstrings are unchanged.
+- Next: validate BertiniNoether and DegreeZero with ucheck-bump, then direct importers.
+- Fix record: /home/ubuntu/u9/bz/FIXES-BZ1021.md; full first build log:
+  /home/ubuntu/u9/bz/BUILD-BZ1021-1-full.log.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
 
-- Branch: u9/BZ1020; initial base 203ea75a45628a5a18c524c66580a676a0da3d5c.
-- User instructed continuation after the concrete one-line dependency import proposal.
-- Removed the umbrella Mathlib import from Integral.Exact, retaining its specific imports.
-- This avoids the duplicate Sheaf.H.δ imported by Integral.BaseChange's two dependency paths.
-- No declaration statements or proofs changed. Next: ucheck-bump for both modules, then downstream.
-- Notes: /home/ubuntu/u9/bz/FIXES-BZ1020.md. No local Lean/Lake or proof shortcuts.
-
-- Assigned leaf and Integral.Exact passed ucheck-bump at b14423fd7ba099534d9dbfb1479f831571f6e624:
-  rc=0, built=25, failed=0, 7174 jobs. Leaf rebuilt in 4.6 seconds; source unchanged.
-- Leaf log: /home/ubuntu/u9/bz/BUILD-BZ1020-leaf-green-full.log.
-- Next: IntegralBaseChange and CurveTestDatum downstream; the latter gets the known
-  umbrella-import removal. No overlapping current owner found for either module.
-
-- IntegralBaseChange and CurveTestDatum are green at 05bc6f1469 (7732 jobs, rc=0).
-- Next: Vanishing, with the same known umbrella-import removal.
-- FieldBaseChange and Induction overlap live BZ1021's downstream plan and are deferred.
-
-- BZ1020 COMPLETE: assigned leaf, Integral.Exact, IntegralBaseChange, and CurveTestDatum
-  are green. Retained Lean sources match successful commit 05bc6f1469 exactly.
-- Vanishing was attempted and skipped for three unowned dependency errors; its
-  provisional import edit was reverted. FieldBaseChange and Induction overlap live BZ1021.
-- All remote checks have finished. Final records: /home/ubuntu/u9/bz/FIXES-BZ1020.md
-  and /home/ubuntu/u9/state/BZ1020.DONE. No statement/proof changes or trust escapes.
+- Assigned DegreeZero is now green and sorry-free at source b1c1890653a9221b928af7f85aac476908c7d89d.
+  ucheck-bump rc=0, failed=0, 7091 jobs; DegreeZero rebuilt in 62 seconds.
+- BertiniNoether's narrower imports exposed three missing imports in GenericIrreducibility;
+  added the defining Mathlib modules explicitly. Both prerequisites now build.
+- All Lean changes so far are imports only; all pre-existing proof/resource settings are unchanged.
+- Next: build all five direct importers, applying the known umbrella-import fix to Induction.
