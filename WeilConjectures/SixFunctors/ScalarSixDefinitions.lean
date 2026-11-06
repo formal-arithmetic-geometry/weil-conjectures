@@ -254,7 +254,7 @@ def scalarSixPullSection (G : ScalarSixGeometry.{u}) (Λ : ScalarSixRing.{u})
     scalarSixPull Λ f ⋙ scalarSixForward Λ X ≅ scalarSixForward Λ Y ⋙
       (proEtaleRingModulePullback f (scalarSixSectionRing Λ Y)
         (scalarSixSectionRing Λ X) (G.coefficient Λ f)).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso _ _) ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (G.pull Λ f) ≪≫
       (Functor.mapDerivedCategoryCompIso _ _).symm
 
@@ -370,9 +370,9 @@ def scalarSixOpenIso (O : ScalarSixOpenComparison E G k) (Λ : ScalarSixRing.{u}
   letI := E.finiteColimits (scalarSixImmersion G Λ j)
   let d : D(openImmersionLowerShriek Λ.X j.left) ⋙ scalarSixForward Λ X.left ≅
       scalarSixForward Λ S.left ⋙ E.derived (scalarSixImmersion G Λ j) :=
-    (Functor.mapDerivedCategoryCompIso
+    Functor.mapDerivedCategoryCompIso
       (openImmersionLowerShriek Λ.X j.left)
-      (ModuleRingedComparison.equivalence Λ.X X.left).functor) ≪≫
+      (ModuleRingedComparison.equivalence Λ.X X.left).functor ≪≫
         Functor.mapDerivedCategoryNatIso (O.comparison Λ j) ≪≫
           (Functor.mapDerivedCategoryCompIso
             (ModuleRingedComparison.equivalence Λ.X S.left).functor
