@@ -466,25 +466,43 @@
 - All ucheck invocations have finished. This completion commit changes documentation only.
 
 
-# PZ034 complete
+# BZ1098 complete
 
-- Both assigned modules, ProjectionFormula.Unit and CompletedDirectImageLimits, pass
-  together with ucheck-bump: rc=0, built=1, failed=0, 13500 jobs. Unit rebuilt in 43s.
-- Validated source commit: cef108af28a819d108a180469f2618d3ebe9436c.
-- Applied the proposed private-helper visibility change after the user's continuation;
-  singleFunctorObjUnitIso_inv retains its proposition, and its callers are all local.
-  Removed the obsolete Qh_obj_singleFunctors_obj simp entry and explicitly normalized
-  quotient comparison identities before the final reflexivity proof.
-- Thirty downstream modules were verified green in earlier batches, reaching the cap.
-  Remaining targets and their last errors are listed in the DONE record. The constant
-  reduction tower branch needs the upstream-deleted quotientProjection_isIso.
-- Preserved needed declarations and restored three helpers in their original modules.
-  Recorded 37 authorized unused-declaration deletions after caller/prune-list checks.
-- Merged origin/bump/v4.35 at 46766e3e2ce0eddba05845bd493e8a62dac45263.
-- Fix records: /home/ubuntu/u9/bz/FIXES-PZ034.md (28 PATTERN/ERROR/RULE triples).
-  All four continuation rules replay the exact Unit diff; all regexes compile.
-- Final log: /home/ubuntu/u9/bz/PZ034-batch19-full.log.
-- Completion marker: /home/ubuntu/u9/state/PZ034.DONE, superseding PZ034.BLOCKED.
-- Both assigned sources are free of sorry/admit/axiom/native_decide and trust bypasses.
-  No local Lean/Lake, heartbeat raises, or profiler probes. Every ucheck has finished.
-- This final commit changes documentation only; Lean sources match the green build.
+- Assigned AdicImmersionResidueComparisonEtale is GREEN and sorry-free.
+- Assigned ucheck-bump passed: rc=0, built=1, failed=0, 13186 jobs; target rebuilt in 12s
+  at 4e7639af1d. It rebuilt green again in the first downstream check.
+- The user instructed continuation after the one-line universe annotation proposal.
+  Retained localization universes and inferred Mathlib's reordered category universes.
+- Integrated completed BZ1099 prerequisite AdicImmersionResidueComparisonFixed.
+- Direct importer AdicImmersionResidueComparison received the same annotation migration
+  and rebuilt GREEN in 6.7s at d1c8dc1cbe. Existing proof bodies are unchanged.
+- Layer 2 AdicImmersionCompletedTransport was attempted but blocked by four errors in
+  AdicImmersionSliceComparison, owned by live unit BZ1101. No unowned blocker edited.
+  Further importer layers share that dependency, so they are deferred under the ownership rule.
+- Logs: BUILD-BZ1098-leaf-green-full.log, BUILD-BZ1098-downstream1-full.log, and
+  BUILD-BZ1098-downstream2-full.log in ~/u9/bz/.
+- Fix pattern, exact errors, occurrence counts, and replayable rule: ~/u9/bz/FIXES-BZ1098.md.
+- Completion marker: ~/u9/state/BZ1098.DONE. Contract audit: ~/u9/bz/BZ1098-contract-audit.txt.
+- No local Lean/Lake, proof placeholders, new declarations, deletions, trust bypasses,
+  profiler probes, or heartbeat increases. Rule replay and idempotence checks pass.
+- All ucheck invocations finished. This final commit changes progress documentation only.
+
+
+# BZ1099 complete
+
+- Assigned AdicImmersionResidueComparisonFixed is GREEN and sorry-free.
+- ucheck-bump passed: rc=0, built=6, failed=0, 13230 jobs; target rebuilt in 4.1s.
+- Green source commit: 92c739ce57c42b0543ecc04d2f0065bd8aa5412f.
+- Applied the proposed one-line universe-annotation migration after the user's
+  continuation instruction. Localization universes remain explicit; Mathlib's
+  reordered category universes are inferred. Proof and assumptions are unchanged.
+- The sole direct importer AdicImmersionResidueComparison was attempted and is
+  blocked by AdicImmersionResidueComparisonEtale, owned by live unit BZ1098.
+  Its first error is a statement type mismatch at 238:8. No unowned file was edited.
+- The assigned leaf also rebuilt successfully in the downstream batch.
+- Logs: BUILD-BZ1099-leaf-green-full.log and BUILD-BZ1099-downstream-full.log in ~/u9/bz/.
+- Fix pattern, exact error, replayable rule, and occurrence count: ~/u9/bz/FIXES-BZ1099.md.
+- Completion marker: ~/u9/state/BZ1099.DONE.
+- No local Lean/Lake, proof placeholders, new declarations, trust bypasses, profiler probes,
+  or heartbeat changes. Rule replay and idempotence checks pass; all ucheck invocations ended.
+- This final commit changes progress documentation only; Lean source matches the green build.
