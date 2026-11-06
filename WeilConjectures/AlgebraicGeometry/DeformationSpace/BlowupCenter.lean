@@ -47,6 +47,7 @@ lemma polynomialToQuotient_app_apply (U : X.AffineZariskiSiteᵒᵖ) (p) :
     (I.polynomialToQuotient.app U).hom p = Ideal.Quotient.mk (I.siteIdeal U.unop) (p.coeff 0) := by
   change Polynomial.eval 0 (Polynomial.map (Ideal.Quotient.mk (I.siteIdeal U.unop)) p) = _
   rw [Polynomial.eval_zero_map, ← Polynomial.coeff_zero_eq_eval_zero]
+  rfl
 
 lemma toPolynomialPresheaf_comp_polynomialToQuotient :
     X.toPolynomialPresheaf ≫ I.polynomialToQuotient = I.toQuotientAlgebra := by
