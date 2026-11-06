@@ -331,7 +331,7 @@ theorem native_weil_tensor_ringed_left_unit_representatives
       F.mapIso (nativeWeilRingedUnit b SB TB βB cB) ≪≫
         (Functor.mapDerivedCategorySingleFunctor
           (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)) 0).app
-            (adicConstant k₀ l X) ≪≫ Iso.refl _
+            (adicConstant k₀ l X) ≪≫ ((DerivedCategory.quotientCompQhIso _).app _).symm
     obtain ⟨ε, hε⟩ := exists_leftUnit_of_associative_tensor F t v (by
       intro Y Z N
       simpa only [rho, Iso.app_hom, tensor_obj, tensor_map, id_tensorHom,
