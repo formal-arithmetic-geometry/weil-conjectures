@@ -94,7 +94,7 @@ lemma liftTriangle_distinguished (T : Triangle C) (hT : T ∈ distTriang C) (h�
     (by simp [liftTriangle, Functor.mapTriangle]) (by simp [liftTriangle, Functor.mapTriangle])
     (by
       dsimp [liftTriangle, Functor.mapTriangle]
-      simp only [Triangle.mk_mor₃, ObjectProperty.homMk_hom, Category.assoc,
+      simp only [Category.assoc,
         CategoryTheory.Functor.map_id, Category.comp_id, Category.id_comp]
       erw [Iso.inv_hom_id_app, Category.comp_id]))
 
@@ -213,7 +213,7 @@ lemma HomotopyCategory.Plus.ι_map_singleFunctors_shiftIso_inv_app {A : Type*} [
   rw [SingleFunctors.map_lift_shiftIso_inv_app]
   simp only [HomotopyCategory.singleFunctors, ObjectProperty.ι_obj, Functor.comp_obj,
     ObjectProperty.lift_obj_obj, Iso.refl_hom, NatTrans.id_app,
-    SingleFunctors.postcomp_shiftIso_inv_app, HomotopyCategory.quotient_obj_singleFunctors_obj,
+    SingleFunctors.postcomp_shiftIso_inv_app,
     Iso.refl_inv, Category.assoc, Category.id_comp]
   erw [CategoryTheory.Functor.map_id, Category.id_comp]
   rfl
@@ -614,8 +614,7 @@ lemma stupidFiltrationAbutmentι_comp (K : CochainComplex.Plus A) (p n : ℤ) :
   rw [TriangleTower.coupleα_eq _ _ (-(p + 1)) (-p) n (by omega), ← Functor.map_comp,
     Category.assoc]
   congr 1
-  simp only [stupidFiltrationTower, TriangleTower.map_mor₁, ← Functor.map_comp,
-    CochainComplex.stupidTower_mor₁_comp_stupidFiltrationGEPlusι]
+  simp only [stupidFiltrationTower, TriangleTower.map_mor₁, ← Functor.map_comp]
   have h' := h =≫ v.rightDerivedFunctorPlus.map
     ((DerivedCategory.Plus.quotientCompQhIso A).hom.app K)
   simp only [Category.assoc, ← Functor.map_comp] at h'
