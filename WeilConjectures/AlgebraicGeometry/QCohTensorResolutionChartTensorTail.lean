@@ -113,7 +113,7 @@ theorem tensorResolutionChartTensor_tail {Y : Scheme.{u}}
       ((((tilde.functor Γ(Y, U.1)).mapHomologicalComplex (.up ℤ)).obj
         (P.complex.extend ComplexShape.embeddingDownNat)).X (-(j : ℤ)))).map_comp
     ((HomologicalComplex.singleObjXSelf (.up ℤ) 0 (tilde NA)).inv) (eN.f 0)
-  rw [← reassoc_of% hmap, heN]
+  erw [← reassoc_of% hmap, heN]
   have hs : (ComplexShape.up ℤ).σ (ComplexShape.up ℤ) (ComplexShape.up ℤ)
       (-(j : ℤ)) 0 = 1 := by simp [ComplexShape.σ]
   rw [hs, one_smul]
