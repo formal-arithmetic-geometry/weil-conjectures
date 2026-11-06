@@ -127,11 +127,11 @@ private theorem single_directImage_naturality
   erw [← hβ]
   erw [Functor.mapHomotopyCategory_map]
   erw [← Functor.map_comp_assoc, ← Functor.map_comp]
-  erw [← Functor.map_comp_assoc, ← Functor.map_comp]
+  erw [← Functor.map_comp_assoc]
+  simp only [DerivedCategory.Qh, HomologicalComplexUpToQuasiIso.Qh,
+    HomotopyCategory.quotient, Quotient.lift_map_functor_map]
   congr 1
-  congr 2
-  simp only [Functor.comp_map] at hc
-  exact hc.symm
+  simpa only [Functor.comp_map] using! congrArg DerivedCategory.Q.map hc.symm
 
 set_option maxHeartbeats 800000 in
 -- Naturality rewrites elaborate the selected derived functors and localization maps.
