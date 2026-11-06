@@ -425,21 +425,35 @@
 - All ucheck invocations finished. This final commit changes documentation only.
 
 
-# BZ1068 complete
+# BZ1068 in progress
 
 - Branch: u9/BZ1068; starting commit dfaed262b6fc1850faba3b46955a11d3225a1e86.
-- Assigned EtaleCompactSupportGraphGeometricBaseChange is GREEN and sorry-free:
-  ucheck-bump rc=0, built=1, failed=0, 11821 jobs; target rebuilt in 60s.
-- Green source commit: 6afc4fae13c7e090b915aa0e3d61980300964a3c.
-  Applied the proposed compositor statement migration after the user instructed continuation;
-  it preserves the intended comparison under Mathlib's reversed isomorphism.
-- Merged the completed BZ1059 normalization and finite-graph prerequisite repairs.
-- All four direct importers were attempted together. Each is blocked by the same four
-  unowned prerequisites; no importer is claimed green. The leaf rebuilt again in 63s.
-  No unblocked downstream branch remains; import paths and exact errors are recorded.
-- Fix patterns and replay-checked rules: /home/ubuntu/u9/bz/FIXES-BZ1068.md.
-- Logs: BUILD-BZ1068-leaf-full.log and BUILD-BZ1068-downstream1-full.log under ~/u9/bz/.
-- Completion marker: /home/ubuntu/u9/state/BZ1068.DONE.
-- No new declarations, deletions, local Lean/Lake, proof placeholders, trust bypasses,
-  profiler probes, or heartbeat changes. All ucheck invocations finished.
-- This completion commit changes documentation only; Lean sources match the green build.
+- The user instructed continuation after the concrete two-site compositor statement proposal.
+  Applied BZ1068-statement-only.patch; the statement and local hb proof now preserve the
+  original comparison using Mathlib's reversed derived compositor.
+- Merged BZ1059 prerequisite fixes; no duplicate declarations or declaration deletions.
+- Proof-only baseline cleared two errors; next: validate the complete leaf repair with
+  ucheck-bump, then build its four direct importers and continue through unblocked layers.
+- Patterns, exact errors, replay-checked rules: /home/ubuntu/u9/bz/FIXES-BZ1068.md.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
+
+- BZ1068 leaf is GREEN and sorry-free: ucheck-bump rc=0, built=1, failed=0 at
+  6afc4fae13c7e090b915aa0e3d61980300964a3c (poolb:43.157.189.27).
+  Next: validate all four direct importers; leaf log BUILD-BZ1068-leaf-full.log.
+
+
+# BZ1063 complete
+
+- Assigned ComparisonCounit is green and sorry-free; 14 downstream modules also verified.
+- Final ucheck-bump at ac61c07c5d7930627185049e26decc6e342452e1 completed 13032 jobs: rc=0, failed=0.
+- Ported derived-compositor directions in five files; pruned 22 audited unused failing
+  declarations and their unused dependents from StrictTowerProperOpenCalculus.
+- All six edited modules are covered by the final green dependency closure.
+- Fourteen rewrite rules and the prune plan exactly reconstruct the six source files.
+- Seven downstream targets are deferred after observed unowned prerequisite failures;
+  21 extra modules assessed, below cap 30. Full paths and exact errors are recorded.
+- Upstream was merged twice, preserving tested fixes and other units' progress notes.
+- Fixes, build manifest, green log, and audits: /home/ubuntu/u9/bz/FIXES-BZ1063.md.
+- Completion marker: /home/ubuntu/u9/state/BZ1063.DONE.
+- No local Lean/Lake, proof placeholders, trust bypasses, profiler probes, or limit raises.
+- All ucheck invocations finished. Final commit changes only progress documentation.
