@@ -124,14 +124,14 @@ private lemma exact_cell_counit
   simp only [Iso.trans_refl, Functor.isoWhiskerLeft_refl,
     Functor.isoWhiskerRight_refl, NatTrans.comp_app]
   rw [Localization.liftNatTrans_app, Functor.mapDerivedCategoryIdIso_hom_app_Q_obj]
-  change (Functor.mapDerivedCategoryCompIso R L).inv.app (DerivedCategory.Q.obj K) ≫
+  change (Functor.mapDerivedCategoryCompIso R L).hom.app (DerivedCategory.Q.obj K) ≫
       ((R ⋙ L).mapDerivedCategoryFactors.hom.app K ≫
         DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex adj.counit (.up ℤ)).app K) ≫
         (𝟭 (C j)).mapDerivedCategoryFactors.inv.app K) ≫
       (𝟭 (C j)).mapDerivedCategoryFactors.hom.app K = _
   simp only [Category.assoc, Iso.inv_hom_id_app]
   rw [← Functor.mapDerivedCategoryCompIso_hom_app_factors R L K,
-    Category.assoc, Iso.inv_hom_id_app_assoc]
+    Category.assoc, Iso.hom_inv_id_app_assoc]
   simp only [Adjunction.onDerivedCategory, Adjunction.localization_counit_app,
     Category.assoc]
   erw [Category.comp_id]
@@ -258,8 +258,7 @@ private lemma conjugate_horizontal
     conjugateEquiv (a₁.comp a₂) (b₁.comp b₂) (NatTrans.hcomp x y) =
       Functor.whiskerLeft R₂ (conjugateEquiv a₁ b₁ x) ≫
         Functor.whiskerRight (conjugateEquiv a₂ b₂ y) R₁' := by
-  change conjugateEquiv (a₁.comp a₂) (b₁.comp b₂)
-    (Functor.whiskerLeft L₁' y ≫ Functor.whiskerRight x L₂) = _
+  rw [Functor.NatTrans.hcomp_eq_whiskerLeft_comp_whiskerRight]
   rw [← conjugateEquiv_comp (a₁.comp a₂) (b₁.comp a₂) (b₁.comp b₂),
     conjugateEquiv_whiskerRight, conjugateEquiv_whiskerLeft]
 
