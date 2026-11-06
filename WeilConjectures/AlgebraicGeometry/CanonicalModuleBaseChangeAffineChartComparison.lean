@@ -62,6 +62,8 @@ private theorem pinned_comparison_isComparison
   exact Classical.choose (Classical.choose_spec
     (Classical.choose_spec exists_derivedPullbackComposition.{u, w})) k
 
+set_option maxHeartbeats 400000 in
+-- The replacement proof exhausted 200000 heartbeats in the remote check (12s).
 /-- Restriction and affine charts identify the canonical *arrow*, without asserting
 that it is invertible. Both the restricted scheme and its module are explicit.
 Source: Stacks Project, Tag 08IB, first paragraph of the proof; Tag 08HY and Tag 08FE.
@@ -126,15 +128,16 @@ theorem exists_canonicalModuleBaseChange_affineChart_comparison
       := by
   classical
   intro U fA gA H E E0 R T
-  obtain ⟨cV, hcV⟩ := exists_isDerivedModulePullbackComparison
+  dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
+  obtain ⟨cV, hcV⟩ := exists_isDerivedModulePullbackComparison.{u, w}
     (pullback.fst (f ∣_ V.1) (g.resLE V.1 W.1 hWV)) H
   let p := pullback.fst (f ∣_ V.1) (g.resLE V.1 W.1 hWV)
   let q := pullback.snd (f ∣_ V.1) (g.resLE V.1 W.1 hWV)
-  let c₁ := openPinnedSingleDegreeZeroCounit g' G
-  let c₂ := openPinnedSingleDegreeZeroCounit p H
-  obtain ⟨α, hα⟩ := modulePullbackComparison_target_automorphism
+  let c₁ := openPinnedSingleDegreeZeroCounit.{u, w} g' G
+  let c₂ := openPinnedSingleDegreeZeroCounit.{u, w} p H
+  obtain ⟨α, hα⟩ := modulePullbackComparison_target_automorphism.{u, w}
     g' G c₁ c (pinned_comparison_isComparison g' G) hc
-  obtain ⟨γ, hγ⟩ := modulePullbackComparison_target_automorphism
+  obtain ⟨γ, hγ⟩ := modulePullbackComparison_target_automorphism.{u, w}
     p H c₂ cV (pinned_comparison_isComparison p H) hcV
   obtain ⟨aP, bP, hP⟩ :=
     open_pinned_single_degree_zero_square.{u, w} f g g' f' sq V.1 W.1 hWV
