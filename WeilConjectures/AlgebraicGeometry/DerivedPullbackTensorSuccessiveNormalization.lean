@@ -7,6 +7,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.GlobalHomAdjunctionIso
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.PullbackTensorTotalCompositionLocalized
 import WeilConjectures.Algebra.Homology.KFlatPullback
 
@@ -141,7 +143,7 @@ theorem derivedPullback_tensor_successive_normalization
       (derivedPullback f).map ((SingleComplexBaseChange.counit g).app H) ≫
       (SingleComplexBaseChange.counit f).app
         (((Scheme.Modules.tensorPullback g).mapHomotopyCategory (.up ℤ)).obj H) ≫
-      DerivedCategory.Qh.map (β.hom.app H) ≫ DerivedCategory.Q.map φ.hom := by
+      DerivedCategory.Qh.map (β.hom.app H) ≫ DerivedCategory.Q.{w}.map φ.hom := by
   classical
   let c : ∀ {U V W : Scheme.{u}} (a : U ⟶ V) (b : V ⟶ W),
       derivedPullback b ⋙ derivedPullback a ≅ derivedPullback (a ≫ b) :=
