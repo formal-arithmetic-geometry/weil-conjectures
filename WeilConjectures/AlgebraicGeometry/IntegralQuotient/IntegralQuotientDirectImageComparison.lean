@@ -90,10 +90,10 @@ private theorem square_single
     [PreservesFiniteLimits L] [PreservesFiniteColimits L]
     [PreservesFiniteLimits S] [PreservesFiniteColimits S]
     (e : R ⋙ G ≅ L ⋙ S) (M : A) :
-    (mapDerivedCategoryCompIso R G).inv.app
+    (mapDerivedCategoryCompIso R G).hom.app
         ((DerivedCategory.singleFunctor A 0).obj M) ≫
       (mapDerivedCategoryNatIso e).hom.app _ ≫
-      (mapDerivedCategoryCompIso L S).hom.app _ ≫
+      (mapDerivedCategoryCompIso L S).inv.app _ ≫
       S.mapDerivedCategory.map ((L.mapDerivedCategorySingleFunctor 0).hom.app M) ≫
       (S.mapDerivedCategorySingleFunctor 0).hom.app (L.obj M) =
     G.mapDerivedCategory.map ((R.mapDerivedCategorySingleFunctor 0).hom.app M) ≫
@@ -102,7 +102,7 @@ private theorem square_single
   rw [mapDerivedCategoryCompIso_hom_app_singleFunctor,
     mapDerivedCategoryNatIso_hom_app_singleFunctor]
   rw [← mapDerivedCategoryCompIso_hom_app_singleFunctor R G M]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
 
 private theorem exact_computation
     {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
@@ -182,7 +182,7 @@ private theorem square_single_transport
     (M : A) (N : B') (φ : L.obj M ⟶ N) :
     LG.map ((R.mapDerivedCategorySingleFunctor 0).inv.app M) ≫
       eg.hom.app (R.mapDerivedCategory.obj ((DerivedCategory.singleFunctor A 0).obj M)) ≫
-      (mapDerivedCategoryCompIso R G).inv.app
+      (mapDerivedCategoryCompIso R G).hom.app
         ((DerivedCategory.singleFunctor A 0).obj M) ≫
       (mapDerivedCategoryNatIso e).inv.app ((DerivedCategory.singleFunctor A 0).obj M) ≫
       (mapDerivedCategoryCompIso L S).inv.app ((DerivedCategory.singleFunctor A 0).obj M) ≫
