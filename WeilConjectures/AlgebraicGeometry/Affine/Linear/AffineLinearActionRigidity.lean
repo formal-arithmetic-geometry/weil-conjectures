@@ -53,9 +53,7 @@ theorem linearAction_eq_id_of_identitySection
     (linearUniversalInvertible N S hS d) d)
   have hunit : DerivedCategory.isInvertible A (generalLinearOpen d S).toScheme
       (ordinaryFiniteUnit A (generalLinearOpen d S).toScheme) :=
-    DerivedCategory.isInvertible.of_iso
-      (singleFunctorObjUnitIso (ModuleCat.{u + 1} A) (generalLinearOpen d S).toScheme).symm
-      ⟨_, ⟨derivedTensorLeftUnitor _ _ _⟩, ⟨derivedTensorLeftUnitor _ _ _⟩⟩
+    ⟨_, ⟨derivedTensorLeftUnitor _ _ _⟩, ⟨derivedTensorLeftUnitor _ _ _⟩⟩
   exact eq_id_of_leftDerivedUpperStar_map_eq_id_of_isInvertible glOne
     exists_isPreconnected_glOne (DerivedCategory.isInvertible.of_iso e.symm hunit) r hr
 
