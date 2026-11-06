@@ -143,8 +143,8 @@ theorem constantAdicQuotient_realization_scalar_reduction
   -- Expand the exact realizations and compose the four mate isomorphisms.
   let fn := (Functor.mapDerivedCategoryCompIso Qn (Cn ⋙ Bn)).symm ≪≫
     Functor.isoWhiskerLeft Qn.mapDerivedCategory (Functor.mapDerivedCategoryCompIso Cn Bn).symm
-  let fp := Functor.mapDerivedCategoryCompIso Qp (Cp ⋙ Bp) ≪≫
-    Functor.isoWhiskerLeft Qp.mapDerivedCategory (Functor.mapDerivedCategoryCompIso Cp Bp)
+  let fp := (Functor.mapDerivedCategoryCompIso Qp (Cp ⋙ Bp)).symm ≪≫
+    Functor.isoWhiskerLeft Qp.mapDerivedCategory (Functor.mapDerivedCategoryCompIso Cp Bp).symm
   exact ⟨Pn.mapIso (fn.app ((ConstantScalarRealization.moduleDerivedExtension q).obj E')) ≪≫
     Pn.mapIso (Bn.mapDerivedCategory.mapIso
       (Cn.mapDerivedCategory.mapIso (m₁.symm.app E'))) ≪≫
