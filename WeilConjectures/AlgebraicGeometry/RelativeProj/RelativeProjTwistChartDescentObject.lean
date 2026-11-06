@@ -170,6 +170,7 @@ theorem exists_twist_chart_descent_object :
   choose θ hθ using fun (U V : S.affineOpens) (h : U ≤ V) ↦
     restriction_comparison A h
   let 𝒰 := A.relProjGluingData.cover
+  have : Quiver.IsThin 𝒰.I₀ := inferInstanceAs (Quiver.IsThin S.affineOpens)
   let M : ∀ U : 𝒰.I₀, (𝒰.X U).Modules := fun U ↦ Proj.twist (A.grading U) 1
   let t : ∀ {U V : S.affineOpens} (f : U ⟶ V),
       (tensorPullback (𝒰.trans f)).obj (M V) ≅ M U :=
