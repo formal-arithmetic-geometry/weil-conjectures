@@ -230,41 +230,35 @@
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 - This final commit changes only progress documentation; Lean source matches the green build.
 
-# BZ798 in progress
+# BZ824 in progress
 
-- Branch: `u9/BZ798`; original baseline: `6a4b38f19`.
-- Resumed after rereading `/home/ubuntu/u9/briefs/BZ798.md` and the progress notes.
-- Merged the current integrated bump branch at `d9a3ea12c`. It already removes the
-  unused signed-projection comparison chain and its downstream callers. The earlier
-  referenced-caller blocker therefore no longer applies.
-- Deleted only the remaining unused `SignedProjectionResolution.totalInverse`;
-  whole-tree `git grep -w totalInverse -- WeilConjectures Comparator` found its sole
-  declaration and no callers. It is listed unused and absent from kept-decls.txt.
-- All surviving declaration text is unchanged from the integrated branch.
-- Next: validate the owned module, then its direct importers and downstream layers.
-- Previous diagnostic history is archived in FIXES-BZ798-preintegration.md.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+- Branch: u9/BZ824; starting commit 95c8987257f.
+- The user instructed continuation after the upstream-restoration proposal.
+- Restored four prerequisite modules. The comparison predicate uses verified PZ003
+  Localization imports and a reflexive cast; the transport proof is unchanged,
+  and target automorphism specializes the existing arbitrary-degree theorem to zero.
+- All six submitted modules passed ucheck-bump at 826d8e1a1fb: rc=0, failed=0, 4065 jobs.
+- Green: DerivedModuleBaseChangeMap, DerivedModulePullbackComparison,
+  ModulePullbackComparisonIsoTransport, ModulePullbackComparisonTargetAutomorphism,
+  CanonicalModuleBaseChangeIsoComparisonCompat, CanonicalModuleBaseChangeIsoComparison.
+- All restored declaration headers and original assigned/caller sources are unchanged.
+- Full log: /home/ubuntu/u9/bz/BUILD-BZ824-restored-full.log.
+- Next: build layer-two importer CanonicalModuleBaseChangeAffineChartComparison.
+- Notes: /home/ubuntu/u9/bz/FIXES-BZ824.md. No local Lean/Lake or proof shortcuts.
 
-# BZ850 in progress
 
-- Branch: `u9/BZ850`; baseline: `2ab2b07a3`.
-- The user instructed continuation after the explicit three-declaration upstream restoration proposal.
-- Restored `derived_projection_exists`, `coefficientConstantTowerProjection_exists`, and
-  `coefficientConstantTowerProjection` in CoefficientRingedSequenceSiteSupplement with their
-  original statements and docstrings. Their surviving users prohibit pruning them.
-- Added Localization imports and explicit simplification of its hidden comparison components.
-- The assigned CoefficientConstantTowerRoos source is unchanged.
-- Next: remote ucheck-bump on the assigned module, then both direct importers.
+# BZ852 in progress
+
+- Branch: `u9/BZ852`; original baseline: `2ab2b07a323`; integrated baseline: `db406319f`.
+- Restored the original LineEvaluationInversePair proof chain and `signed_line_power_flat`
+  after the user instructed continuation of the concrete two-file proposal.
+- Existing theorem statements and docstrings are unchanged. Repairs expose scalar carriers
+  in `chart_basis` and provide a private local scalar instance for `cancellation_pure`.
+- Assigned SignedLineDerivedAction and direct importer SignedLineDerivedBaseChange are green.
+- `ucheck-bump` at `d8d95ad22f12eb0cad385f9490dc058517797953`: rc=0, failed=0, 4005 jobs.
+  Both restored prerequisites, SignedLineOrdinaryConstraints, and SignedLineLocalizedCoherence
+  also rebuilt successfully (six modules total).
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ852-restored2-full.log`.
+- Next: check layer 2, CartesianCoefficientTwistsSupplement, and continue while fixable.
+- Patterns and exact rewrite rules: `/home/ubuntu/u9/bz/FIXES-BZ852.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
-
-# BZ850 complete
-
-- Assigned leaf `WeilConjectures.SmoothPurity.Coefficient.CoefficientConstantTowerRoos`
-  is green through `ucheck-bump`: rc=0, failed=0, 5024 jobs.
-- Restored the three projection declarations deleted upstream but still referenced by
-  surviving callers; normalized hidden quotient comparison components with Localization imports.
-- Direct importer `CoefficientSequenceRoosModel` is owned by PZ027 and remains red at its
-  first compositor error. `PurNormalizedReconstructionAdjunctionCalculus` is blocked by it;
-  no outside source was edited.
-- Completion marker: `/home/ubuntu/u9/state/BZ850.DONE`.
-- Full evidence and machine rules: `/home/ubuntu/u9/bz/FIXES-BZ850.md`.
