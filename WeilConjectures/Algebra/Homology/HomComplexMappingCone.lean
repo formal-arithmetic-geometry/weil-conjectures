@@ -50,9 +50,8 @@ private lemma homObjMap_zero_right
   ext X φ
   rfl
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- The product comparison unfolds the chosen Hom-complex functor repeatedly.
--- A higher heartbeat limit is therefore needed.
 set_option backward.isDefEq.respectTransparency false in
 /-- Internal Hom in the second variable commutes with mapping cones.
 
@@ -145,7 +144,7 @@ theorem homComplex_mappingCone_iso
     rw [Category.assoc, hbg, ← Category.assoc, ha]
     simp only [Preadditive.add_comp, Category.assoc,
       SheafOfModules.homObjMap_comp_homObjMap, Category.id_comp]
-    dsimp [ig, ii, fg]
+    dsimp only [ig, ii, fg]
     simp only [HomologicalComplex.homotopyCofiber.inlX_fstX,
       HomologicalComplex.homotopyCofiber.inrX_fstX,
       SheafOfModules.homObjMap_id, homObjMap_zero_right,
@@ -157,7 +156,7 @@ theorem homComplex_mappingCone_iso
     rw [Category.assoc, hbi, ← Category.assoc, ha]
     simp only [Preadditive.add_comp, Category.assoc,
       SheafOfModules.homObjMap_comp_homObjMap, Category.id_comp]
-    dsimp [ig, ii, fi]
+    dsimp only [ig, ii, fi]
     simp only [HomologicalComplex.homotopyCofiber.inlX_sndX,
       HomologicalComplex.homotopyCofiber.inrX_sndX,
       SheafOfModules.homObjMap_id, homObjMap_zero_right,

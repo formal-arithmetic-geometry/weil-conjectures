@@ -28,7 +28,6 @@ local instance TensorResolutionComparisonNaturality_localInst4 (X : Scheme.{u}) 
     ((curriedTensor X.Modules).obj M).PreservesZeroMorphisms :=
   SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X.sheaf M
 
-set_option maxHeartbeats 800000 in
 -- Tensor-resolution comparisons require substantial definitional reduction.
 /-- Restrict a tensor complex and then apply the two specified chain maps. -/
 noncomputable def tensorResolutionRestrictionTensorMap {X Y : Scheme.{u}}

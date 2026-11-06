@@ -55,8 +55,6 @@ theorem module_overFunctor_preservesZero
   ext W x
   rfl
 
-set_option maxHeartbeats 400000 in
--- Explicit Hom-complex instances make the comparison require extra elaboration heartbeats.
 /-- Degree-zero cocycles of the sections of the sheaf Hom complex are precisely localized
 chain maps. The induced map on degree-zero cohomology sends a chain map to its image under
 localization and is bijective.

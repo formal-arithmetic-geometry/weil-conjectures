@@ -269,18 +269,42 @@ private theorem postcomparisonIso_hom
 
 attribute [local irreducible] postcomparisonIso
 
+private def commShiftApp {B C : Type*} [Category* B] [Category* C] [HasShift B ℤ]
+    [HasShift C ℤ] (F : B ⥤ C) [F.CommShift ℤ] (m : ℤ) (X : B) :
+    F.obj (X⟦m⟧) ⟶ (F.obj X)⟦m⟧ :=
+  (F.commShiftIso m).hom.app X
+
+private def natApp {B C : Type*} [Category* B] [Category* C] {F G : B ⥤ C} (α : F ⟶ G)
+    (X : B) : F.obj X ⟶ G.obj X :=
+  α.app X
+
+private def shiftMap {C : Type*} [Category* C] [HasShift C ℤ] (m : ℤ) {X Y : C}
+    (f : X ⟶ Y) : X⟦m⟧ ⟶ Y⟦m⟧ :=
+  f⟦m⟧'
+
+private def SquareEq {C : Type*} [Category* C] {X Y Z W : C} (a : X ⟶ Y) (b : Y ⟶ W)
+    (c : X ⟶ Z) (d : Z ⟶ W) : Prop :=
+  a ≫ b = c ≫ d
+
 private theorem commShift_of_localization
-    {A B C : Type*} [Category* A] [Category* B] [Category* C]
+    {A A' B C : Type*} [Category* A] [Category* A'] [Category* B] [Category* C]
     [HasShift B ℤ] [HasShift C ℤ]
-    (Q : A ⥤ B) (W : MorphismProperty A) [Q.IsLocalization W]
     (F G : B ⥤ C) [F.CommShift ℤ] [G.CommShift ℤ] (α : F ⟶ G)
+    (ι : A ⥤ A') (o : A → A') (hι : ∀ P, ι.obj P = o P) (Q₀ : A' ⥤ B)
+    (W : MorphismProperty A) [hQ : (ι ⋙ Q₀).IsLocalization W]
     (h : ∀ (P : A) (m : ℤ),
-      (F.commShiftIso m).hom.app (Q.obj P) ≫ (α.app (Q.obj P))⟦m⟧' =
-        α.app ((Q.obj P)⟦m⟧) ≫ (G.commShiftIso m).hom.app (Q.obj P)) :
+      SquareEq (commShiftApp F m (Q₀.obj (o P))) (shiftMap m (natApp α (Q₀.obj (o P))))
+        (natApp α ((Q₀.obj (o P))⟦m⟧)) (commShiftApp G m (Q₀.obj (o P)))) :
     NatTrans.CommShift α ℤ := by
   constructor
   intro m
-  exact Localization.natTrans_ext Q W (fun P ↦ h P m)
+  refine Localization.natTrans_ext (ι ⋙ Q₀) W (fun P ↦ ?_)
+  have key : ∀ X, X = Q₀.obj (o P) →
+      (F.commShiftIso m).hom.app X ≫ (α.app X)⟦m⟧' =
+        α.app (X⟦m⟧) ≫ (G.commShiftIso m).hom.app X := by
+    rintro X rfl
+    exact h P m
+  exact key _ (by rw [Functor.comp_obj, hι P])
 
 attribute [-instance] IntegralCompletedComparison.products
   IntegralCompletedComparison.complexProducts in
@@ -345,7 +369,6 @@ theorem integralComparisonPullbackRealization_commShift
   let := integralComparisonLimitShift l E X
   let := integralComparisonSequenceRoosShift l E X
   let := integralComparisonRoosBridge_commShift l E X ρ
-  let := integralOperationsGoodLocalization_isLocalization l E Y
   let A := integralComparisonSequencePullback l E f
   let D := integralComparisonDerivedSequencePullback l E f
   let L := coefficientSequenceLimit l E X
@@ -360,10 +383,17 @@ theorem integralComparisonPullbackRealization_commShift
     integralOperationsPullbackComplexFunctor l E f ⋙ DerivedCategory.Q
   let ψ := pullbackRoosComparison l E f ρ
   have : NatTrans.CommShift ψ.hom ℤ := pullbackRoosComparison_commShift l E f ρ
-  apply commShift_of_localization (integralOperationsGoodLocalization l E Y)
+  refine commShift_of_localization _ _ M.realization.hom (integralOperationsGoodComplex l E Y).ι
+    ObjectProperty.FullSubcategory.obj (fun _ ↦ rfl) DerivedCategory.Q
     ((HomologicalComplex.quasiIso (integralTowerModules l E Y) (.up ℤ)).inverseImage
       (integralOperationsGoodComplex l E Y).ι)
+    (hQ := integralOperationsGoodLocalization_isLocalization l E Y) ?_
   intro P m
+  change SquareEq
+    (commShiftApp (integralDerivedPullback l E f) m (DerivedCategory.Q.obj P.obj))
+    (shiftMap m (natApp M.realization.hom (DerivedCategory.Q.obj P.obj)))
+    (natApp M.realization.hom ((DerivedCategory.Q.obj P.obj)⟦m⟧))
+    (commShiftApp (SY.reduction ⋙ H) m (DerivedCategory.Q.obj P.obj))
   change ((integralDerivedPullback l E f).commShiftIso m).hom.app
       (DerivedCategory.Q.obj P.obj) ≫
         (M.realization.hom.app (DerivedCategory.Q.obj P.obj))⟦m⟧' =

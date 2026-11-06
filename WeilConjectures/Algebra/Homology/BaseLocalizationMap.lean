@@ -165,7 +165,6 @@ def IsBaseLocalizationMap (S : Submonoid R) [IsLocalization S Rp]
       (1 : D) ⊗ₜ[A ⊗[Rp] B,algebraMap (A ⊗[Rp] B) D]
         (baseLocalizationCohomologyMap R Rp B A D S Q L K i x)
 
-set_option linter.unusedSectionVars false in
 /-- Generator uniqueness, including the zero coefficient ring.
 Source: Stacks Project, Tag 06Y6 (blueprint: lem-pc-base-localization-map). -/
 theorem IsBaseLocalizationMap.ext (S : Submonoid R) [IsLocalization S Rp]

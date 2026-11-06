@@ -62,7 +62,6 @@ private theorem complex_universal
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option linter.unusedVariables false in
 -- The former arbitrary-isomorphism equation was STATEMENT-DISPUTED: replacing an
 -- isomorphism by its negative changes the left side alone. The corrected result
 -- constructs the comparison together with its counit equation.

@@ -10,6 +10,7 @@ import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Coefficient.DiagonalTrace
 import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Local.DiagonalLocalShiftedLimitProjection
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Finite.FiniteBoundaryExactTransport
 import all WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalSupportedCoefficientLimit
+import WeilConjectures.Tactic.TransportExact
 
 /-! # Finite integral coordinates for a strict Chern arrow -/
 
@@ -130,6 +131,52 @@ private def completed_forget_iso (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) :
     ⟨⟨𝟙 _⟩, ⟨𝟙 _⟩, by ext U x; rfl, by ext U x; rfl⟩)
     (by intros M N f; ext U x; rfl)
 
+/- The final step of `localChern_normalized_boundary_projection`, kept let-free and separate:
+the definitions spell the derived category of `DiagonalAb T` as `Sheaf ..` and carry their own
+abstracted proofs, so the identification is done by `transport_exact` (small congruence leaves)
+instead of a kernel conversion under `Functor.map` projections. -/
+private theorem completedIntegralProjection_eq_finiteConeChernClass
+    (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) [DiagonalTraceLocalizations l T]
+    (c : Chern l (ULift.{u} (Padic l)) T)
+    (r : Restriction l (ULift.{u} (Padic l)) T)
+    (k : Coefficients l (ULift.{u} (Padic l)) T c r)
+    (A : Type (u + 1)) [CommRing A] (n : ℕ)
+    (hA : ((l ^ (n + 1) : ℕ) : A) = 0)
+    (hN : IsUnit ((l ^ (n + 1) : ℕ) : Γ(T, ⊤)))
+    (theta : unit T (Arings l (ULift.{u} (Padic l)) T) ⟶
+      (line l (ULift.{u} (Padic l)) c)⟦(2 : ℤ)⟧)
+    (z : completedUnit l T ⟶ (completedLine l T)⟦(2 : ℤ)⟧)
+    (h : (DerivedCategory.singleFunctor (DiagonalAb T) 0).map
+          (DiagonalCoefficients.localCompletedGenerator l T) ≫
+        mapSingleArrow (DiagonalCoefficients.localCompletedForget l T) 2 z ≫
+        (shiftFunctor (DerivedCategory (DiagonalAb T)) (2 : ℤ)).map
+          ((DerivedCategory.singleFunctor (DiagonalAb T) 0).map
+            (DiagonalCoefficients.localCompletedRoots l T).hom) ≫
+        (shiftFunctor (DerivedCategory (DiagonalAb T)) (2 : ℤ)).map
+          ((DerivedCategory.singleFunctor (DiagonalAb T) 0).map
+            (limit.π (Scheme.proEtaleRootsOfUnityTower T l (Fact.out : l.Prime)) (op n))) ≫
+        (shiftFunctor (DerivedCategory (DiagonalAb T)) (2 : ℤ)).map
+          ((DerivedCategory.singleFunctor (DiagonalAb T) 0).map
+            (cartierProRootMap A (l ^ (n + 1)) hA T (pow_pos (Fact.out : l.Prime).pos _) hN)) =
+      (DerivedCategory.singleFunctor (DiagonalAb T) 0).map
+          (diagonalCoefficientIntegerMap T (Scheme.purTwistFiniteRing T l n)) ≫
+        (DerivedCategory.singleFunctor (DiagonalAb T) 0).map
+          (k.coefficientForget.inv.app (op n)) ≫
+        mapSingleArrow (r.F ⋙ (evaluation ℕᵒᵖ (DiagonalMod l T)).obj (op n) ⋙
+          diagonalForget l T) 2 theta ≫
+        (shiftFunctor (DerivedCategory (DiagonalAb T)) (2 : ℤ)).map
+          ((DerivedCategory.singleFunctor (DiagonalAb T) 0).map
+            (k.lineForget.hom.app (op n))) ≫
+        (shiftFunctor (DerivedCategory (DiagonalAb T)) (2 : ℤ)).map
+          ((DerivedCategory.singleFunctor (DiagonalAb T) 0).map
+            (cartierProRootMap A (l ^ (n + 1)) hA T (pow_pos (Fact.out : l.Prime).pos _) hN))) :
+    DiagonalCoefficients.completedIntegralProjection l T A n hA hN z =
+      finiteConeChernClass l T c r k A n hA hN theta := by
+  unfold DiagonalCoefficients.completedIntegralProjection finiteConeChernClass
+  apply congrArg Ext.homEquiv.symm
+  simp only [Functor.map_comp, Category.assoc]
+  transport_exact h
+
 /-- A whole-system normalization implies its integral finite coordinate equation.
 This holds for every strict arrow, independently of Chern or Kummer normalization.
 Source: diagonal tower trace proof (1), projection of the coefficient and root cones.
@@ -168,32 +215,34 @@ theorem localChern_normalized_boundary_projection
     DiagonalCoefficients.completedIntegralProjection l T A n hA hN z =
       finiteConeChernClass l T c r k A n hA hN theta := by
   classical
-  let U := diagonalCompletedRestriction l T
-  let W := diagonalForget l T
-  let F := DiagonalCoefficients.localCompletedForget l T
-  let S := DerivedCategory.singleFunctor (DiagonalAb T) 0
-  let e := completed_forget_iso l T
-  let M := SheafOfModules.unit (Scheme.purTwistRing T (Scheme.purTwistZlCompletion T l))
-  let P := Scheme.purTwistZlModule T l
-  let a := DiagonalCoefficients.localCompletedGenerator l T ≫ e.inv.app M
-  have hp := normalized_cone_projection U r.F L M P _ _
+  have hp := normalized_cone_projection (diagonalCompletedRestriction l T) r.F L
+    (SheafOfModules.unit (Scheme.purTwistRing T (Scheme.purTwistZlCompletion T l)))
+    (Scheme.purTwistZlModule T l) _ _
     k.coefficientProjection k.lineProjection z theta hz n
-  have hh := congrArg (mapSingleArrow W (2 : ℤ)) hp
+  have hh := congrArg (mapSingleArrow (diagonalForget l T) (2 : ℤ)) hp
   simp only [mapSingleArrow_precompose, mapSingleArrow_postcompose,
     mapSingleArrow_composite] at hh
-  have he := mapSingleArrow_natIso F (U ⋙ W) e.symm (2 : ℤ) z
-  have hq : e.inv.app P ≫ W.map (k.lineProjection.app (op n)) ≫
+  have he := mapSingleArrow_natIso (DiagonalCoefficients.localCompletedForget l T)
+    (diagonalCompletedRestriction l T ⋙ diagonalForget l T) (completed_forget_iso l T).symm
+    (2 : ℤ) z
+  have hq : (completed_forget_iso l T).inv.app (Scheme.purTwistZlModule T l) ≫
+      (diagonalForget l T).map (k.lineProjection.app (op n)) ≫
       k.lineForget.hom.app (op n) =
     (DiagonalCoefficients.localCompletedRoots l T).hom ≫
       limit.π (Scheme.proEtaleRootsOfUnityTower T l (Fact.out : l.Prime)) (op n) := by
     ext V x
     exact k.line_projection n V x
-  have hc : a ≫ W.map (k.coefficientProjection.app (op n)) =
+  have hc : (DiagonalCoefficients.localCompletedGenerator l T ≫
+        (completed_forget_iso l T).inv.app
+          (SheafOfModules.unit (Scheme.purTwistRing T (Scheme.purTwistZlCompletion T l)))) ≫
+        (diagonalForget l T).map (k.coefficientProjection.app (op n)) =
       diagonalCoefficientIntegerMap T (Scheme.purTwistFiniteRing T l n) ≫
         k.coefficientForget.inv.app (op n) := by
     apply (cancel_mono (k.coefficientForget.hom.app (op n))).mp
     simp only [Category.assoc, Iso.inv_hom_id_app]
-    have hc0 : e.inv.app M ≫ W.map (k.coefficientProjection.app (op n)) ≫
+    have hc0 : (completed_forget_iso l T).inv.app
+          (SheafOfModules.unit (Scheme.purTwistRing T (Scheme.purTwistZlCompletion T l))) ≫
+        (diagonalForget l T).map (k.coefficientProjection.app (op n)) ≫
         k.coefficientForget.hom.app (op n) =
       (sheafCompose (Scheme.ProEt.topology T)
         (forget₂ CommRingCat.{u + 1} RingCat.{u + 1} ⋙
@@ -201,25 +250,26 @@ theorem localChern_normalized_boundary_projection
             (Scheme.purTwistZlProjection T l n) := by
       ext V x
       exact k.coefficient_projection n V x
-    dsimp only [a]
-    rw [Category.assoc, hc0]
+    rw [hc0]
     exact integerMap_naturality T (Scheme.purTwistZlProjection T l n)
-  let t := cartierProRootMap A (l ^ (n + 1)) hA T
-    (pow_pos (Fact.out : l.Prime).pos _) hN
-  have hfinish := congrArg (fun f ↦ S.map a ≫ f ≫
-    (S.map (k.lineForget.hom.app (op n) ≫ t))⟦(2 : ℤ)⟧') hh
+  have hfinish := congrArg (fun f ↦
+    (DerivedCategory.singleFunctor (DiagonalAb T) 0).map
+      (DiagonalCoefficients.localCompletedGenerator l T ≫
+        (completed_forget_iso l T).inv.app
+          (SheafOfModules.unit (Scheme.purTwistRing T (Scheme.purTwistZlCompletion T l)))) ≫ f ≫
+    ((DerivedCategory.singleFunctor (DiagonalAb T) 0).map (k.lineForget.hom.app (op n) ≫
+      cartierProRootMap A (l ^ (n + 1)) hA T
+        (pow_pos (Fact.out : l.Prime).pos _) hN))⟦(2 : ℤ)⟧') hh
   simp only [Category.assoc] at hfinish
-  rw [← S.map_comp_assoc, hc] at hfinish
-  dsimp only [a] at hfinish
+  rw [← Functor.map_comp_assoc, hc] at hfinish
   simp only [Functor.map_comp, Category.assoc] at hfinish
   erw [reassoc_of% he] at hfinish
-  dsimp only [S] at hfinish
   simp only [← (shiftFunctor (DerivedCategory (DiagonalAb T)) (2 : ℤ)).map_comp,
     ← (DerivedCategory.singleFunctor (DiagonalAb T) 0).map_comp] at hfinish
   erw [reassoc_of% hq] at hfinish
-  unfold DiagonalCoefficients.completedIntegralProjection finiteConeChernClass
-  apply congrArg Ext.homEquiv.symm
-  simpa only [S, F, W, t, CategoryTheory.Functor.assoc, Functor.map_comp,
-    Category.assoc] using hfinish
+  refine completedIntegralProjection_eq_finiteConeChernClass l T c r k A n hA hN theta z ?_
+  simp only [CategoryTheory.Functor.assoc, Functor.map_comp] at hfinish
+  clear hp hh he hq hc
+  transport_exact hfinish
 
 end AlgebraicGeometry.ProEtale.DiagonalTrace

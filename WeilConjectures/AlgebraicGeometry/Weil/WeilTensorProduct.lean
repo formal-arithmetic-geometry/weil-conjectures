@@ -482,7 +482,6 @@ private theorem completionLinear :
       (b • ((wfCompletion X d r a ha).map f).hom)
     rw [Linear.comp_smul, wfCompletion_unit_map, wfCompletion_unit_map, Linear.smul_comp]
 
-set_option linter.style.haveILetI false in
 /-- Bilinear scalar extension is uniquely determined on pure tensors, including denominators.
 Source: blueprint order 2107 (blueprint: def-wf-tensor-product).
 Proof: sheaf tensor is linear in each variable. Its K-flat localization is linear by
@@ -498,38 +497,38 @@ theorem wfRationalTensorHom_exists (p : A)
         b (s ⊗ₜ[A] f) (t ⊗ₜ[A] g) =
           (s * t) ⊗ₜ[A] (wfIntegralTensor X d r a ha).map (Prod.mkHom f g) := by
   have hd := derivedBilinear X d
-  letI : ∀ P : PbcCompletedDerived X d,
+  let : ∀ P : PbcCompletedDerived X d,
       ((Functor.curry.obj (wfOrdinaryDerivedTensor X d)).obj P).Additive :=
     fun P ↦ (hd.1 P).1
-  letI : ∀ P : PbcCompletedDerived X d,
+  let : ∀ P : PbcCompletedDerived X d,
       ((Functor.curry.obj (wfOrdinaryDerivedTensor X d)).obj P).Linear A :=
     fun P ↦ (hd.1 P).2
-  letI : ∀ P : PbcCompletedDerived X d,
+  let : ∀ P : PbcCompletedDerived X d,
       ((Functor.curry.obj (wfOrdinaryDerivedTensor X d)).flip.obj P).Additive :=
     fun P ↦ (hd.2 P).1
-  letI : ∀ P : PbcCompletedDerived X d,
+  let : ∀ P : PbcCompletedDerived X d,
       ((Functor.curry.obj (wfOrdinaryDerivedTensor X d)).flip.obj P).Linear A :=
     fun P ↦ (hd.2 P).2
   have := (completionLinear X d r a ha).1
   have := (completionLinear X d r a ha).2
   let I := ObjectProperty.ι (WfIsComplete X d r a ha)
   let T := wfIntegralTensor X d r a ha
-  letI : ∀ P : WfCompleteCategory X d r a ha, ((Functor.curry.obj T).obj P).Additive := by
+  let : ∀ P : WfCompleteCategory X d r a ha, ((Functor.curry.obj T).obj P).Additive := by
     intro P
     change (I ⋙ (Functor.curry.obj (wfOrdinaryDerivedTensor X d)).obj P.obj ⋙
       wfCompletion X d r a ha).Additive
     infer_instance
-  letI : ∀ P : WfCompleteCategory X d r a ha, ((Functor.curry.obj T).obj P).Linear A := by
+  let : ∀ P : WfCompleteCategory X d r a ha, ((Functor.curry.obj T).obj P).Linear A := by
     intro P
     change (I ⋙ (Functor.curry.obj (wfOrdinaryDerivedTensor X d)).obj P.obj ⋙
       wfCompletion X d r a ha).Linear A
     infer_instance
-  letI : ∀ P : WfCompleteCategory X d r a ha, ((Functor.curry.obj T).flip.obj P).Additive := by
+  let : ∀ P : WfCompleteCategory X d r a ha, ((Functor.curry.obj T).flip.obj P).Additive := by
     intro P
     change (I ⋙ (Functor.curry.obj (wfOrdinaryDerivedTensor X d)).flip.obj P.obj ⋙
       wfCompletion X d r a ha).Additive
     infer_instance
-  letI : ∀ P : WfCompleteCategory X d r a ha, ((Functor.curry.obj T).flip.obj P).Linear A := by
+  let : ∀ P : WfCompleteCategory X d r a ha, ((Functor.curry.obj T).flip.obj P).Linear A := by
     intro P
     change (I ⋙ (Functor.curry.obj (wfOrdinaryDerivedTensor X d)).flip.obj P.obj ⋙
       wfCompletion X d r a ha).Linear A
@@ -637,7 +636,6 @@ private def wfPresentationBackEquiv :
 attribute [local irreducible] pbcCompletedComparison intrinsicPresentationRoundTrip wfRestrictId
 attribute [local semireducible] intrinsicCompletionComplex
 
-set_option linter.style.haveILetI false in
 set_option backward.isDefEq.respectTransparency false in
 private theorem wfComplete_of_presentation
     (M : PbcCompletedDerived X d) (s : ℕ) (b : Fin s → A)
@@ -655,7 +653,7 @@ private theorem wfComplete_of_presentation
   let GD := G.mapDerivedCategory
   have hBadd : B.Additive := pbcRestrict_additive _
   have hBD : BD.IsEquivalence := Functor.isEquivalence_mapDerivedCategory B
-  letI : BD.IsEquivalence := hBD
+  let : BD.IsEquivalence := hBD
   have : (pbcDerivedRestrict (pbcCompletedComparison X d).inv).IsEquivalence := by
     change BD.IsEquivalence
     exact hBD

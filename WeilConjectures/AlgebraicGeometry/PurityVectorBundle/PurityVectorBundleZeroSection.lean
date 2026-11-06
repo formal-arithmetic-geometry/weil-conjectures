@@ -70,5 +70,55 @@ def zeroSection (V : PurityVectorBundle P Z hZ c) : Z ⟶ V.E :=
   @VectorBundleZeroSection.zero Z (isNoetherian_of_locallyOfFiniteType hZ)
     c V.𝓔 V.locallyFree ≫ V.phi.inv
 
+/-- The zero section is a section of the projection and a closed immersion. On every affine
+open `U` its restriction, transported through `phi`, is the spectrum of the augmentation
+`Sym(𝓔(U)) → 𝒪(U)` fixing constants and killing all degree-one generators.
+Source: blueprint, `sk-def-purity-conv`, order 1895; Stacks Tags 01M2 and 01LX
+(blueprint: def-pur-vector-bundle-zero-section).
+
+Proof (the node's proof steps):
+1. Install the Noetherian instance `isNoetherian_of_locallyOfFiniteType hZ` (finite type over
+   the field `P.field.k`) and the locally-free instance `V.locallyFree`.
+2. `VectorBundleZeroSection.zero_spec Z c V.𝓔` gives `hsection : zero ≫ π = 𝟙 Z` and
+   `hclosed : IsClosedImmersion zero`: the augmentation is the unique algebra map killing the
+   generators (`lem-weil-pbc-quasi-coherent-symmetric-algebra-core`), on affine charts it is
+   `SymmetricAlgebra.algebraMapInv`, surjective since it fixes scalars, and the affine-cover
+   criterion (`lem-weil-pbc-closed-immersion-affine-cover-criterion`) gives closedness.
+3. Section identity: `rw [zeroSection, ← V.over_commutes]`; `Category.assoc` and
+   `Iso.inv_hom_id_assoc` cancel `phi.inv ≫ phi.hom`, and `hsection` concludes.
+4. Closedness: keep `hclosed` as a local instance; the composite of a closed immersion with
+   the isomorphism `phi.inv` is a closed immersion (`infer_instance`).
+5. Affine opens: take `zU := VectorBundleZeroSection.zeroRestricted Z c V.𝓔 U.1`; after
+   unfolding `zeroSection` and cancelling `phi.inv ≫ phi.hom`, the first equation is
+   `Scheme.Hom.resLE_comp_ι`, and the second is the chart equation of
+   `VectorBundleZeroSection.affineChart_spec Z c V.𝓔 U`. -/
+theorem zeroSection_spec (V : PurityVectorBundle P Z hZ c) :
+    V.zeroSection ≫ V.p = 𝟙 Z ∧ IsClosedImmersion V.zeroSection ∧
+    ∀ U : Z.affineOpens,
+      ∃ zU : U.1.toScheme ⟶
+          ((@VectorBundleZeroSection.π Z (isNoetherian_of_locallyOfFiniteType hZ)
+            c V.𝓔 V.locallyFree) ⁻¹ᵁ U.1).toScheme,
+        zU ≫ ((@VectorBundleZeroSection.π Z (isNoetherian_of_locallyOfFiniteType hZ)
+          c V.𝓔 V.locallyFree) ⁻¹ᵁ U.1).ι = U.1.ι ≫ V.zeroSection ≫ V.phi.hom ∧
+        zU ≫ @VectorBundleZeroSection.affineChart Z
+          (isNoetherian_of_locallyOfFiniteType hZ) c V.𝓔 V.locallyFree U =
+          U.2.isoSpec.hom ≫ Spec.map (CommRingCat.ofHom
+            (SymmetricAlgebra.algebraMapInv (R := Z.presheaf.obj (op U.1))
+              (M := V.𝓔.val.obj (op U.1))).toRingHom) := by
+  let : IsNoetherian Z := isNoetherian_of_locallyOfFiniteType hZ
+  let := V.locallyFree
+  obtain ⟨hsection, hclosed⟩ := VectorBundleZeroSection.zero_spec Z c V.𝓔
+  refine ⟨?_, ?_, ?_⟩
+  · rw [zeroSection, ← V.over_commutes]
+    simpa only [Category.assoc, Iso.inv_hom_id_assoc] using hsection
+  · let := hclosed
+    dsimp only [zeroSection]
+    infer_instance
+  · intro U
+    refine ⟨VectorBundleZeroSection.zeroRestricted Z c V.𝓔 U.1, ?_,
+      (VectorBundleZeroSection.affineChart_spec Z c V.𝓔 U).2.2⟩
+    simp only [zeroSection, Category.assoc, Iso.inv_hom_id, Category.comp_id]
+    exact Scheme.Hom.resLE_comp_ι _ _
+
 end PurityVectorBundle
 end AlgebraicGeometry

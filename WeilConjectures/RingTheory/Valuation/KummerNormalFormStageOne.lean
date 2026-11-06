@@ -414,7 +414,7 @@ lemma valuation_coeff_some_zero_lt (K L₂ : Subfield Ω) (hp : p.Prime) (hp1 : 
 /-- **One step of stage 1**: if `u = y ^ p` is congruent modulo `{v < v p}` to `1 + ∑ c j m j`
 with `μ = v (∑ c j m j) ≥ v p`, then dividing `u` by the `p`-th power of an explicit `1 + c₁ ∈ L₁`
 yields an element congruent to `1 + ∑ c' j m j` with all `v (c' j) < μ`. -/
-lemma kummer_stage1_step [DecidableEq ι] (K L₁ L₂ Kst : Subfield Ω)
+lemma kummer_stage1_step (K L₁ L₂ Kst : Subfield Ω)
     (hp : p.Prime) (hp1 : v (p : Ω) < 1) (hp0 : (p : Ω) ≠ 0)
     (hKL₁ : K ≤ L₁) (hL : L₁ ≤ L₂) (hKst : Kst ≤ K)
     (hroot : ∀ c ∈ K, ∃ d ∈ K, d ^ p = c)
@@ -433,6 +433,7 @@ lemma kummer_stage1_step [DecidableEq ι] (K L₁ L₂ Kst : Subfield Ω)
     ∃ g ∈ L₁, g ≠ 0 ∧ ∃ c' : Option (ι × ℕ) →₀ Ω, (∀ j, c' j ∈ Kst) ∧
       (∀ j, v (c' j) < v (frobeniusComb p w c)) ∧
       v (u / g ^ p - 1 - frobeniusComb p w c') < v (p : Ω) := by
+  classical
   classical
   have hp2 := hp.two_le
   have hvp : 0 < v (p : Ω) := v.pos_iff.2 hp0
@@ -582,7 +583,7 @@ lemma kummer_stage1_step [DecidableEq ι] (K L₁ L₂ Kst : Subfield Ω)
     field_simp
   rwa [h]
 /-- **Stage 1 of the Kummer normal form.** -/
-theorem exists_valuation_div_pow_sub_one_lt [DecidableEq ι] (K L₁ L₂ Kst : Subfield Ω)
+theorem exists_valuation_div_pow_sub_one_lt (K L₁ L₂ Kst : Subfield Ω)
     (hp : p.Prime) (hp1 : v (p : Ω) < 1) (hp0 : (p : Ω) ≠ 0)
     (hKL₁ : K ≤ L₁) (hL : L₁ ≤ L₂) (hKst : Kst ≤ K)
     (hroot : ∀ c ∈ K, ∃ d ∈ K, d ^ p = c)
@@ -600,6 +601,7 @@ theorem exists_valuation_div_pow_sub_one_lt [DecidableEq ι] (K L₁ L₂ Kst : 
     (hc1 : ∀ j, v (c j) < 1) (hu1 : v (u - 1 - frobeniusComb p w c) < v (p : Ω))
     (h₂ : ∃ y ∈ L₂, y ^ p = u) :
     ∃ g ∈ L₁, g ≠ 0 ∧ v (u / g ^ p - 1) < v (p : Ω) := by
+  classical
   classical
   obtain ⟨y, hyL, hyu⟩ := h₂
   have hvp : 0 < v (p : Ω) := v.pos_iff.2 hp0
@@ -684,14 +686,16 @@ lemma frobeniusComb_sum_single (s : Finset ι) (c : ι → Ω) :
     rw [sum_insert ha, sum_insert ha, frobeniusComb_add, ih, frobeniusComb_single]
     simp [frobeniusMonomial]
 
-lemma sum_single_some_apply [DecidableEq ι] (s : Finset ι) (c : ι → Ω) {i : ι} (hi : i ∈ s) :
+lemma sum_single_some_apply (s : Finset ι) (c : ι → Ω) {i : ι} (hi : i ∈ s) :
     (∑ i ∈ s, Finsupp.single (some (i, 0)) (c i)) (some (i, 0)) = c i := by
+  classical
   rw [Finsupp.finsetSum_apply, sum_eq_single i (fun b _ hb ↦ by simp [hb]) (fun h ↦ absurd hi h),
     Finsupp.single_eq_same]
 
-lemma sum_single_some_mem [DecidableEq ι] (S : Subfield Ω) (s : Finset ι) {c : ι → Ω}
+lemma sum_single_some_mem (S : Subfield Ω) (s : Finset ι) {c : ι → Ω}
     (hc : ∀ i ∈ s, c i ∈ S) (j : Option (ι × ℕ)) :
     (∑ i ∈ s, Finsupp.single (some (i, 0)) (c i)) j ∈ S := by
+  classical
   rw [Finsupp.finsetSum_apply]
   refine sum_mem fun i hi ↦ ?_
   rw [Finsupp.single_apply]
@@ -700,7 +704,7 @@ lemma sum_single_some_mem [DecidableEq ι] (S : Subfield Ω) (s : Finset ι) {c 
 /-- **Kummer normal form**: a `1`-unit of `L₁` (approximated by a combination of lifted
 Frobenius monomials with coefficients in a discrete subfield `K*`) which is a `p`-th power in `L₂`
 is a `p`-th power in `L₁`. -/
-theorem exists_pow_eq_of_kummer [DecidableEq ι] (K L₁c L₁ L₂ Kst : Subfield Ω)
+theorem exists_pow_eq_of_kummer (K L₁c L₁ L₂ Kst : Subfield Ω)
     (hp : p.Prime) (hp1 : v (p : Ω) < 1) (hp0 : (p : Ω) ≠ 0)
     (hKL₁ : K ≤ L₁c) (hL₁c : L₁c ≤ L₁) (hL : L₁ ≤ L₂) (hKst : Kst ≤ K)
     (hroot : ∀ c ∈ K, ∃ d ∈ K, d ^ p = c)
@@ -721,6 +725,7 @@ theorem exists_pow_eq_of_kummer [DecidableEq ι] (K L₁c L₁ L₂ Kst : Subfie
     (hc1 : ∀ j, v (c j) < 1) (hu1 : v (u - 1 - frobeniusComb p w c) < v (p : Ω))
     (h₂ : ∃ y ∈ L₂, y ^ p = u) :
     ∃ y ∈ L₁, y ^ p = u := by
+  classical
   classical
   have hp2 := hp.two_le
   have hvp : 0 < v (p : Ω) := v.pos_iff.2 hp0

@@ -46,7 +46,6 @@ namespace SheafOfModules
 set_option autoImplicit false
 -- Resolve the new vertices in Ore squares, roofs, and common refinements.
 set_option synthInstance.maxSize 2048 in
-set_option maxRecDepth 2048 in
 set_option backward.isDefEq.respectTransparency false in
 private theorem restriction_localization
     {A : Type u} [Category.{e} A] {D : Type w} [Category.{z} D]
@@ -171,7 +170,6 @@ private theorem tensorPreadditive
 
 -- K-flatness kills the tensor of an acyclic mapping cone.
 set_option synthInstance.maxSize 2048 in
-set_option maxRecDepth 2048 in
 set_option backward.isDefEq.respectTransparency false in
 private theorem tensor_right_quasiIso
     {A : Type*} [Category* A] [Abelian A] [MonoidalCategory A]
@@ -190,7 +188,6 @@ private theorem tensor_right_quasiIso
 
 -- The module braiding and signed total-complex flip give the other tensor order.
 set_option synthInstance.maxSize 2048 in
-set_option maxRecDepth 2048 in
 set_option backward.isDefEq.respectTransparency false in
 private theorem tensor_left_quasiIso
     {A : Type*} [Category* A] [Abelian A] [MonoidalCategory A] [SymmetricCategory A]
@@ -301,7 +298,6 @@ noncomputable def SiteDerivedTensorDescentSpec
 end TensorDescentPredicates
 
 set_option synthInstance.maxSize 4096
-set_option maxRecDepth 2048 in
 set_option backward.isDefEq.respectTransparency false in
 /-- K-flat complexes with flat terms present the derived category and its tensor bifunctor.
 The existential predicate `P` specifies the full subcategory by its precise membership

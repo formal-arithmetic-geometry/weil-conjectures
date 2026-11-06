@@ -34,12 +34,13 @@ namespace AlgebraicGeometry
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
+set_option linter.unusedSimpArgs false in
 omit [Finite k₀] in
 /-- The structure morphism of the affine line lies over `Spec k₀`, which lies over itself through
 `Spec` of the identity. -/
 instance affineLine.isOver_over :
     (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).IsOver (Spec (CommRingCat.of k₀)) :=
-  ⟨by simp⟩
+  ⟨by simp [specOverSpec_over, Algebra.algebraMap_self]⟩
 
 set_option hygiene false in
 /-- The structure morphism `p : 𝔸¹ ⟶ Spec k₀`. -/

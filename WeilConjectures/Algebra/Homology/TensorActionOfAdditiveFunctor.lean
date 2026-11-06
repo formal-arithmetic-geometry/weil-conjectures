@@ -28,8 +28,6 @@ open scoped TensorProduct
 
 namespace ModuleCat
 
-set_option maxHeartbeats 800000 in
--- Tensor algebra instances require additional elaboration fuel.
 private theorem action_of_endomorphisms
     (R : Type uR) (A : Type uA) (B : Type uB)
     [CommRing R] [CommRing A] [CommRing B] [Algebra R A] [Algebra R B]
@@ -76,7 +74,6 @@ private theorem action_of_endomorphisms
   change (ρ (Algebra.TensorProduct.includeLeft (S := R) a)) x = (φ a) x
   simp [ρ, Algebra.TensorProduct.includeLeft, Algebra.TensorProduct.lift_tmul, f]
 
-set_option maxHeartbeats 800000 in
 -- The coefficient actions use explicit module carriers.
 /-- Source: Stacks Project, Tag 06Y6, functorial coefficient actions
 (blueprint: lem-pc-tensor-action-additive-functor).

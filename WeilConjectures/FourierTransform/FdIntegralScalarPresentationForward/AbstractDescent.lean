@@ -123,7 +123,7 @@ theorem derived_unit
   erw [hft]
   rw [reassoc_of% key]
   erw [hXu (tE.obj P)]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Iso.inv_hom_id_app_assoc]
   rw [← RE.map_comp, hc P]
 
 end WeilConjectures.FdIntegralScalarForward

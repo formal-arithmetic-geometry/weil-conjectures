@@ -204,22 +204,24 @@ private noncomputable def derivedScalarComparison (m : ℤ) :
     (integralSheafTwist l E S m).mapDerivedCategory ⋙
         completedDerivedScalarExtension.{u, u} l E F ι S ≅
       completedDerivedScalarExtension.{u, u} l E F ι S ⋙
-        (integralSheafTwist l F S m).mapDerivedCategory := by
-  let TE := integralSheafTwist l E S m
-  let TF := integralSheafTwist l F S m
-  let CE := TE.mapHomologicalComplex (.up ℤ)
-  let CS := completedOrdinaryScalarComplex.{u, u} l E F ι S
-  let D := completedDerivedScalarExtension.{u, u} l E F ι S
-  let v := scalarCounitIso l E F ι S
-  let z : DerivedCategory.Q ⋙ TE.mapDerivedCategory ⋙ D ≅
-      DerivedCategory.Q ⋙ D ⋙ TF.mapDerivedCategory :=
-    Functor.isoWhiskerRight TE.mapDerivedCategoryFactors D ≪≫
-      Functor.isoWhiskerLeft CE v ≪≫
+        (integralSheafTwist l F S m).mapDerivedCategory :=
+  Localization.liftNatIso DerivedCategory.Q
+    (HomologicalComplex.quasiIso _ (.up ℤ)) _ _ _ _
+    ((Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (integralSheafTwist l E S m).mapDerivedCategoryFactors
+        (completedDerivedScalarExtension.{u, u} l E F ι S) ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft ((integralSheafTwist l E S m).mapHomologicalComplex (.up ℤ))
+        (scalarCounitIso l E F ι S) ≪≫
+      (Functor.associator _ _ _).symm ≪≫
       Functor.isoWhiskerRight (chainScalarComparison l E F ι S m) DerivedCategory.Q ≪≫
-      Functor.isoWhiskerLeft CS TF.mapDerivedCategoryFactors.symm ≪≫
-      Functor.isoWhiskerRight v.symm TF.mapDerivedCategory
-  exact Localization.liftNatIso DerivedCategory.Q
-    (HomologicalComplex.quasiIso _ (.up ℤ)) _ _ _ _ z
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft (completedOrdinaryScalarComplex.{u, u} l E F ι S)
+        (integralSheafTwist l F S m).mapDerivedCategoryFactors.symm ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (scalarCounitIso l E F ι S).symm
+        (integralSheafTwist l F S m).mapDerivedCategory ≪≫
+      Functor.associator _ _ _)
 
 private theorem derivedScalarComparison_spec (m : ℤ)
     (P : CochainComplex (integralTowerModules.{u, u} l E S) ℤ) :
@@ -255,11 +257,10 @@ private theorem derivedScalarComparison_spec (m : ℤ)
       Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
       Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
       Functor.whiskerLeft_app, Functor.whiskerRight_app,
+      Functor.associator_hom_app, Functor.associator_inv_app,
       Iso.app_inv, Functor.mapIso_inv, Functor.comp_obj,
       Category.id_comp, Category.comp_id, Category.assoc]
-  change a = (derivedScalarComparison l E F ι S m).hom.app (DerivedCategory.Q.obj P) ≫
-    c.hom ≫ b.hom
-  erw [h]
+  rw [h]
   exact conjugate_cancel a b c
 
 private theorem twist_mem (m : ℤ) (C : sfIntegralConstructibleCategory l E S) :
@@ -416,36 +417,39 @@ theorem integral_twist_derived_scalar (m : ℤ) :
       (completedScalarComparison.{u, u} l E F ι S)).app C) := hχ
   have : IsIso (Functor.whiskerLeft I (completedScalarComparison.{u, u} l E F ι S)) :=
     NatIso.isIso_of_isIso_app _
-  have : ∀ C, IsIso ((Functor.whiskerLeft (I ⋙ T)
-      (completedScalarComparison.{u, u} l E F ι S)).app C) := hχT
-  have : IsIso (Functor.whiskerLeft (I ⋙ T) (completedScalarComparison.{u, u} l E F ι S)) :=
+  have : ∀ C, IsIso ((Functor.whiskerLeft I
+      (Functor.whiskerLeft T (completedScalarComparison.{u, u} l E F ι S))).app C) := hχT
+  have : IsIso (Functor.whiskerLeft I
+      (Functor.whiskerLeft T (completedScalarComparison.{u, u} l E F ι S))) :=
     NatIso.isIso_of_isIso_app _
   let χ : I ⋙ D ≅ I ⋙ B :=
     asIso (Functor.whiskerLeft I (completedScalarComparison.{u, u} l E F ι S))
   let χT : I ⋙ T ⋙ D ≅ I ⋙ T ⋙ B :=
-    asIso (Functor.whiskerLeft (I ⋙ T) (completedScalarComparison.{u, u} l E F ι S))
+    asIso (Functor.whiskerLeft I
+      (Functor.whiskerLeft T (completedScalarComparison.{u, u} l E F ι S)))
   let β : I ⋙ T ⋙ B ≅ I ⋙ B ⋙ U :=
-    χT.symm ≪≫ α ≪≫ Functor.isoWhiskerRight χ U
+    χT.symm ≪≫ α ≪≫ (Functor.associator I D U).symm ≪≫ Functor.isoWhiskerRight χ U ≪≫
+      Functor.associator I B U
   refine ⟨α, β, ?_, ?_, ?_⟩
   · intro C P e
     refine ⟨(chainScalarComparison l E F ι S m).app P.obj, ?_, ?_⟩
     · intro i V b x y
       exact sheafScalarComparison_spec l E F ι S m (P.obj.X i) V b x y
-    · have hn := (derivedScalarComparison l E F ι S m).hom.naturality e.inv
-      have hs := derivedScalarComparison_spec l E F ι S m P.obj
-      dsimp only [Functor.comp_map] at hn
-      change D.map (T.map e.inv) ≫ _ = _
-      erw [hs]
+    · have hn : D.map (T.map e.inv) ≫ (derivedScalarComparison l E F ι S m).hom.app
+            (DerivedCategory.Q.obj P.obj) = α.hom.app C ≫ U.map (D.map e.inv) :=
+        (derivedScalarComparison l E F ι S m).hom.naturality e.inv
       have hh := congrArg (fun f ↦ f ≫
         U.map (completedScalarCounit.{u, u} l E F ι S P.obj) ≫
           (integralSheafTwist l F S m).mapDerivedCategoryFactors.hom.app
             ((completedOrdinaryScalarComplex.{u, u} l E F ι S).obj P.obj)) hn
       simp only [Category.assoc] at hh
-      exact hh
+      rw [← hh]
+      exact congrArg (D.map (T.map e.inv) ≫ ·) (derivedScalarComparison_spec l E F ι S m P.obj)
   · intro C
-    change χT.hom.app C ≫ (χT.inv.app C ≫ α.hom.app C ≫ U.map (χ.hom.app C)) =
-      α.hom.app C ≫ U.map (χ.hom.app C)
-    simp only [Iso.hom_inv_id_app_assoc]
+    change χT.hom.app C ≫ β.hom.app C = α.hom.app C ≫ U.map (χ.hom.app C)
+    simp only [β, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Iso.hom_inv_id_app_assoc,
+      Functor.associator_hom_app, Functor.associator_inv_app, Functor.isoWhiskerRight_hom,
+      Functor.whiskerRight_app, Category.id_comp, Category.comp_id]
   · intro C
     have scalar_mem (K : sfIntegralConstructibleCategory l E S) :
         sfIntegralConstructible l F S (B.obj K.obj) := by

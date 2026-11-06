@@ -27,7 +27,6 @@ noncomputable section
 namespace ModuleCat
 
 
-set_option linter.unusedSectionVars false in
 private theorem tensorAdditiveLift
     (R A B : Type u) [CommRing R] [CommRing A] [CommRing B]
     [Algebra R A] [Algebra R B]

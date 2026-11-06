@@ -29,7 +29,6 @@ open CategoryTheory Opposite
 
 namespace CategoryTheory
 
-set_option maxHeartbeats 800000 in
 -- Evaluated chosen products and their categorical morphisms require extra elaboration work.
 set_option backward.isDefEq.respectTransparency false in
 /-- The canonical cocycle equivalence descends to homology and homotopy classes.
