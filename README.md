@@ -32,10 +32,9 @@ derived from the main theorem.
 ## Status
 
 `master` contains the reviewed statements and the reviewed part of the library. The
-complete development lives on the integration branch `slopmaster2`. A build of the
-main theorems without `sorry` is on the branch `sheaf/weil-conjectures-sorry-free`;
-its `#print axioms` shows only `propext`, `Classical.choice` and `Quot.sound`. That
-build is still being independently verified. See
+complete development lives on the integration branch `slopmaster2`. The main theorems are proved without `sorry` on
+`slopmaster2` (commit `91ebbc09a7`); `#print axioms` shows only `propext`,
+`Classical.choice` and `Quot.sound`, independently verified. See
 [`formalization.yaml`](formalization.yaml) for the details of the process, the review
 status and the sources.
 

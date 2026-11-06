@@ -312,10 +312,9 @@ status:
     statements and the reviewed part of the library. The complete AI-assisted
     development lives on the integration branches `slopmaster2` and
     `sheaf/weil-conjectures-sorry-free` and is merged into `master` after review.
-  # On the sorry-free candidate commit 8c7f1719cf (branch
-  # `sheaf/weil-conjectures-sorry-free`), outside the dependency closure of the
-  # main theorems; none of these is used by the results below.
-  sorry_count: 259
+  # Files containing `sorry` on slopmaster2 91ebbc09a7, all outside the dependency
+  # closure of the main theorems (checked with `#print axioms`); none is used below.
+  sorry_count: 208
   sorry_in_definitions: 0
   axioms: ["propext", "Classical.choice", "Quot.sound"]
   main_results:
@@ -327,13 +326,13 @@ status:
       literature_dependencies: []
     - declaration: "AlgebraicGeometry.Scheme.weil_conjectures"
       file: "WeilConjectures/Statement.lean"
-      sorry_count: 0   # on commit 8c7f1719cf; independent re-verification in progress
+      sorry_count: 0   # verified on slopmaster2 91ebbc09a7
       axioms: ["propext", "Classical.choice", "Quot.sound"]
       comparator_config: "Comparator/config.json"
       literature_dependencies: []
     - declaration: "LeanEval.AlgebraicGeometry.WeilConjectures.weil_conjectures"
       file: "WeilConjectures/LeanEval/WeilConjectures.lean"
-      sorry_count: 0   # on commit 8c7f1719cf; independent re-verification in progress
+      sorry_count: 0   # verified on slopmaster2 91ebbc09a7
       axioms: ["propext", "Classical.choice", "Quot.sound"]
       literature_dependencies: []
 
@@ -388,10 +387,12 @@ review:
     blocking findings fixed before merging. Definitions on the main path were audited for
     degenerate or vacuous formulations. The proof bodies themselves have not been
     reviewed line by line by humans: correctness relies on the Lean kernel, the
-    Comparator check of the fixed challenge statements, and `#print axioms`. The
-    sorry-free candidate (commit 8c7f1719cf) was checked by its producing team and is
-    being independently rebuilt from scratch and audited before it is merged into
-    `master`.
+    Comparator check of the fixed challenge statements, and `#print axioms`. The sorry-free
+    development (slopmaster2 91ebbc09a7) was checked by its producing team (Bin Wu’s
+    cluster) and independently rebuilt and audited on our own infrastructure: `#print
+    axioms` of all main results shows only propext, Classical.choice and Quot.sound, no
+    `native_decide`/`implemented_by`/`extern`/`skipKernelTC` is used, and the lean-eval
+    statement is verbatim.
 
 alignment:
   namespace: "AlgebraicGeometry"
@@ -407,12 +408,12 @@ alignment:
       lean: "AlgebraicGeometry.Scheme.weil_conjectures"
       module: "WeilConjectures/Statement.lean"
       status: "proved"
-      note: "sorry-free on commit 8c7f1719cf; independent verification in progress"
+      note: "sorry-free; independently verified on slopmaster2 91ebbc09a7"
     - source: "lean-eval `weil_conjectures` (point counts and Frobenius eigenvalues)"
       lean: "LeanEval.AlgebraicGeometry.WeilConjectures.weil_conjectures"
       module: "WeilConjectures/LeanEval/WeilConjectures.lean"
       status: "proved"
-      note: "sorry-free on commit 8c7f1719cf; independent verification in progress"
+      note: "sorry-free; independently verified on slopmaster2 91ebbc09a7"
 
 acknowledgements: >-
   This project builds on Mathlib, and in particular on its foundational algebraic
