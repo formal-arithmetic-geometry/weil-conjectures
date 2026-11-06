@@ -585,3 +585,15 @@
 - Completion marker: ~/u9/state/BZ1441.DONE.
 - No local Lean/Lake, proof escapes, new/deleted declarations, profiler probes, or limit raises.
 - All ucheck calls finished. This completion commit changes progress documentation only.
+
+# BZ1439 complete
+
+- Latest LEAD 23:3x honored: preserve all CoefficientHeartFiltration imports and declarations; fix only its remaining errors.
+- Status: already green upstream after coordinator commit `0127400fa0483bf508c17193e9a937083699d54d` names four colliding local instances.
+- Rebased/fast-forwarded onto coordinator round116 head `83159a7506e10aebb001152d06dd643d5dd281af`; no helper Lean diff.
+- Required `ucheck-bump WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeartFiltration` passed at `c09bae7d9623283fdd0d70a594aed7a12f5fea82`: rc=0, failed=0, 16245 jobs; target rebuilt in 11s.
+- Assigned source is byte-for-byte unchanged from the start commit and has no proof placeholders or trust escapes.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ1439-final-green.log`.
+- Superseded root/import and downstream edits were archived outside the submission and removed from the branch. Earlier downstream validations are historical only; further work stopped per the new narrowed scope.
+- Records: `/home/ubuntu/u9/bz/FIXES-BZ1439.md`; completion: `/home/ubuntu/u9/state/BZ1439.DONE`.
+- This final commit changes progress documentation only. No local Lean/Lake execution or heartbeat increases.
