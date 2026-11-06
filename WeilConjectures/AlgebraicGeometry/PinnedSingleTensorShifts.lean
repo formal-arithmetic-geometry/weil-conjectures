@@ -179,58 +179,6 @@ end CategoryTheory.SingleFunctors
 namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- The tensor comparison is a morphism of single-functor families.
-Source: Stacks Project, Tag 08HY; the derived counit universal property and
-Mathlib's termwise mapped-single shift identity.
-(blueprint: lem-pc-pinned-single-tensor-shifts).
-Proof: whisker the pinned left-derived counit by each homotopy single functor,
-then compose with Qh applied to the termwise mapped-single comparison. Naturality
-follows from the naturality of these two factors. For the shift equation, expand
-the single shift using SingleFunctors.postcomp. Apply the counit's
-NatTrans.CommShift equation, then the termwise identity
-Functor.mapHomologicalComplex_map_singleFunctors_shiftIso_hom_app. Naturality of
-the quotient shift comparisons moves them through the mapped-single map.
-Functor.map_comp and associativity cancel inverse quotient comparisons. This
-proves the Hom.comm equation for every triple k+i=j, including zero and negative
-integers, without exactness or flatness of tensor pullback. -/
-theorem exists_pinned_single_tensor_shifts
-    [∀ Y : Scheme.{u},
-      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
-    [∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z), (Scheme.Modules.tensorPullback k).Additive]
-    {X X' : Scheme.{u}} (g' : X' ⟶ X) (s : (derivedPullback.{u, w} g').CommShift ℤ)
-    (hs : letI := s; NatTrans.CommShift (pinnedPullbackCounit.{u, w} g') ℤ) :
-    letI := s
-    ∃ τ : (DerivedCategory.singleFunctors
-        (SheafOfModules.{u} (moduleRings X.toRingedSpace))).postcomp
-          (derivedPullback.{u, w} g') ⟶
-      (DerivedCategory.singleFunctors
-        (SheafOfModules.{u} (moduleRings X'.toRingedSpace))).precomp
-          (Scheme.Modules.tensorPullback g'),
-      ∀ n G, (τ.hom n).app G = pinnedSingleTensorCounit.{u, w} g' n G := by
-  dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
-  let := s
-  have := hs
-  let F := HomotopyCategory.singleFunctors
-    (SheafOfModules.{u} (moduleRings X.toRingedSpace))
-  let T : SheafOfModules.{u} (moduleRings X.toRingedSpace) ⥤
-      SheafOfModules.{u} (moduleRings X'.toRingedSpace) := Scheme.Modules.tensorPullback g'
-  let c := (F.postcompPostcompIso DerivedCategory.Qh (derivedPullback g')).hom ≫
-    SingleFunctors.postcompNatTrans F (pinnedPullbackCounit g') ≫
-    (F.postcompPostcompIso (T.mapHomotopyCategory (ComplexShape.up ℤ))
-      DerivedCategory.Qh).inv ≫
-    SingleFunctors.postcompHom (SingleFunctors.mappedHomotopySingleIso T).hom
-      DerivedCategory.Qh ≫
-    (SingleFunctors.precompPostcompIso (HomotopyCategory.singleFunctors
-      (SheafOfModules.{u} (moduleRings X'.toRingedSpace))) T DerivedCategory.Qh).hom
-  refine ⟨c, ?_⟩
-  intro n G
-  change 𝟙 _ ≫ (pinnedPullbackCounit g').app ((F.functor n).obj G) ≫
-      𝟙 _ ≫ DerivedCategory.Qh.map
-        (((SingleFunctors.mappedHomotopySingleIso T).hom.hom n).app G) ≫ 𝟙 _ = _
-  rw [SingleFunctors.mappedHomotopySingleIso_hom_app]
-  simp only [Category.id_comp, Category.comp_id]
-  rfl
-
 /-- The selected counit followed by the actual termwise mapped-single comparison.
 Source: Stacks Project, Tag 08HY; Mathlib mapped-single comparison.
 (blueprint: lem-pc-pinned-single-tensor-shifts). -/

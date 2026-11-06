@@ -998,23 +998,6 @@ def exchange :=
 
 set_option linter.flexible false in
 set_option linter.flexible false in
-/-- The normalized target comparison, using exact pullback, mixed tensor and the
-K-injective right-derived unit. Source: blueprint order 1275
-(blueprint: lemma-weil-pbc-perfect-projection-formula). -/
-def Resolution.targetModel :=
-  ((directImage d f).mapIso
-    (aX.tensor.mapIso (Iso.prod (Iso.refl K) (quotientDerivedPullback d f n)))).symm ≪≫
-      SignedProjectionResolution.targetModel f (ring d Y) (ring d X) (coefficients d f)
-        aX K (quotient d Y n) r.injective r.isKInjective r.representsK
-        r.coefficient r.representsQuotient r.package r.bounded
-
-/-- The normalized source comparison, specified by the mixed representative squares.
-Source: blueprint order 1275 (blueprint: lemma-weil-pbc-perfect-projection-formula). -/
-def Resolution.sourceModel :=
-  SignedProjectionResolution.sourceModel f (ring d Y) (ring d X) (coefficients d f)
-    aY K (quotient d Y n) r.injective r.isKInjective r.representsK
-    r.coefficient r.representsQuotient r.package r.bounded
-
 attribute [local irreducible] proEtaleProjectionFormulaMate proEtaleAmbientRingedExchange
   proEtaleCanonicalTensorComparison
 

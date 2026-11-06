@@ -317,26 +317,6 @@ private theorem over_colimits [IsIso φ] (W : X.Etale) :
     preservesFiniteColimits_of_natIso (sliceCoordinatesSquare X B R φ W).symm
   exact preservesFiniteColimits_of_reflects_of_preserves O E
 
-private def restrictionCoordinatesIso [IsIso φ] (W : X.Etale)
-    (K : DerivedCategory (SheafOfModules.{t + 1} (moduleRing X R))) :
-    (sliceCoordinates X B R φ W).mapDerivedCategory.obj
-        (ringedSiteDerivedRestrictionOfUniverses (moduleRing X R) ((toProEt X).obj W) K) ≅
-      (finiteCoefficientSliceRestriction X B R φ W).mapDerivedCategory.obj K := by
-  have := (finiteCoefficientSliceRestriction_exact X B R φ W).1
-  have := (finiteCoefficientSliceRestriction_exact X B R φ W).2.1
-  have := (finiteCoefficientSliceRestriction_exact X B R φ W).2.2
-  have := over_limits X B R φ W
-  have := over_colimits X B R φ W
-  let O := SheafOfModules.overFunctor.{t + 1} (moduleRing X R) ((toProEt X).obj W)
-  let E := sliceCoordinates X B R φ W
-  let e : O.mapDerivedCategory.obj K ≅
-      ringedSiteDerivedRestrictionOfUniverses (moduleRing X R) ((toProEt X).obj W) K :=
-    (O.mapDerivedCategory.mapIso (DerivedCategory.Q.objObjPreimageIso K)).symm ≪≫
-      O.mapDerivedCategoryFactors.app (DerivedCategory.Q.objPreimage K)
-  exact E.mapDerivedCategory.mapIso e.symm ≪≫
-    ((Functor.mapDerivedCategoryCompIso O E).app K).symm ≪≫
-      (Functor.mapDerivedCategoryNatIso (sliceCoordinatesSquare X B R φ W)).app K
-
 private def globalScalarIso :
     SheafOfModules.restrictScalars.{t + 1}
         ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).map φ) ⋙
@@ -397,114 +377,8 @@ private def constantLocalizationIso (W : X.Etale) :
       (ModuleCat.{t + 1} (ULift.{t + 1} B))
         (ProEt.topology W.left) (ProEt.topology X)).symm
 
-private theorem constantModelIso [IsIso φ]
-    [(koszulConstantFunctor X B).PreservesZeroMorphisms]
-    (W : X.Etale) (P : CochainComplex (ModuleCat.{t} B) ℤ) :
-    Nonempty ((finiteCoefficientSliceRestriction X B R φ W).mapDerivedCategory.obj
-        ((completedAdicDerivedChange X φ).obj
-          (DerivedCategory.Q.obj (finiteModelConstantComplex X B P))) ≅
-      DerivedCategory.Q.obj
-        (((constantSheaf (ProEt.topology W.left)
-          (ModuleCat.{t + 1} (ULift.{t + 1} B))).mapHomologicalComplex (.up ℤ)).obj
-          (((ModuleCat.uliftFunctor.{t + 1, t} B ⋙
-            ModuleCat.restrictScalars.{t + 1}
-              (ULift.ringEquiv : ULift.{t + 1} B ≃+* B).toRingHom
-            ).mapHomologicalComplex (.up ℤ)).obj P))) := by
-  obtain ⟨eUnit⟩ := derivedScalarUnit X B R φ
-  let U := SheafOfModules.restrictScalars.{t + 1}
-    ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).map φ)
-  let H := proEtaleModuleRestriction X B
-  have := proEtaleModuleRestriction_isEquivalence X B
-  have : H.Additive := Functor.additive_of_preserves_binary_products H
-  let S := ProEtale.localizationRestriction
-    (ModuleCat.{t + 1} (ULift.{t + 1} B)) W.hom inferInstance
-  have : S.Additive := { map_add := by intros; rfl }
-  have : PreservesFiniteLimits S := by
-    dsimp only [S, ProEtale.localizationRestriction]
-    infer_instance
-  have := (ProEtale.localizationRestrictionLowerStarAdjunction
-    (ModuleCat.{t + 1} (ULift.{t + 1} B)) W.hom inferInstance).isLeftAdjoint
-  let Pu := ((ModuleCat.uliftFunctor.{t + 1, t} B ⋙
-    ModuleCat.restrictScalars.{t + 1}
-      (ULift.ringEquiv : ULift.{t + 1} B ≃+* B).toRingHom).mapHomologicalComplex (.up ℤ)).obj P
-  let e : koszulConstantFunctor X B ⋙ (H ⋙ S) ≅
-      constantSheaf (ProEt.topology W.left) (ModuleCat.{t + 1} (ULift.{t + 1} B)) :=
-    Functor.isoWhiskerRight (koszulConstantScalarIso X B) S ≪≫
-      constantLocalizationIso X B W
-  exact ⟨(Functor.mapDerivedCategoryCompIso U (H ⋙ S)).app _ ≪≫
-    (H ⋙ S).mapDerivedCategory.mapIso
-      ((eUnit.app (DerivedCategory.Q.obj (finiteModelConstantComplex X B P))).symm) ≪≫
-    (H ⋙ S).mapDerivedCategoryFactors.app (finiteModelConstantComplex X B P) ≪≫
-      DerivedCategory.Q.mapIso ((NatIso.mapHomologicalComplex e (.up ℤ)).app Pu)⟩
-
 end Coordinates
 
 end FiniteConstantSliceStalkProof
-
-theorem finiteConstantSlice_derivedStalk_comparison
-    (X : Scheme.{t}) (B : Type t) [CommRing B]
-    [HasDerivedCategory.{w} (ModuleCat.{t + 1} B)]
-    [(koszulConstantFunctor X B).PreservesZeroMorphisms]
-    (R : Sheaf (ProEt.topology X) CommRingCat.{t + 1})
-    (φ : adicConstantRing X B ⟶ R) (hφ : IsIso φ)
-    (W : X.Etale) {Ω : Type t} [Field Ω] [IsAlgClosed Ω]
-    (y : Spec (.of Ω) ⟶ W.left) :
-    ∃ F : DerivedCategory (SheafOfModules.{t + 1}
-        (((sheafCompose (ProEt.topology X)
-          (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj R).over
-            ((toProEt X).obj W))) ⥤ DerivedCategory (ModuleCat.{t + 1} B),
-      ∀ P : CochainComplex (ModuleCat.{t} B) ℤ,
-        Nonempty (F.obj
-          (ringedSiteDerivedRestrictionOfUniverses
-            ((sheafCompose (ProEt.topology X)
-              (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj R)
-            ((toProEt X).obj W) ((completedAdicDerivedChange X φ).obj
-              (DerivedCategory.Q.obj (finiteModelConstantComplex X B P)))) ≅
-          DerivedCategory.Q.obj
-            (((ModuleCat.uliftFunctor.{t + 1, t} B).mapHomologicalComplex (.up ℤ)).obj P)) :=
-  by
-  let := hφ
-  let A := ModuleCat.{t + 1} (ULift.{t + 1} B)
-  let Φ := AlgebraicGeometry.ProEtale.geometricPoint y
-  let S : Sheaf (ProEt.topology W.left) A ⥤ A := Φ.sheafFiber
-  have : S.Additive := Functor.additive_of_preserves_binary_products S
-  let scalarEquiv : ModuleCat.{t + 1} B ≌ A :=
-    ModuleCat.restrictScalarsEquivalenceOfRingEquiv
-      (ULift.ringEquiv : ULift.{t + 1} B ≃+* B)
-  let T := scalarEquiv.inverse
-  have : T.IsLeftAdjoint := scalarEquiv.symm.isLeftAdjoint_functor
-  have : T.IsRightAdjoint := scalarEquiv.isRightAdjoint_inverse
-  -- Pass from the ringed slice to fixed-scalar sheaves on the chart.
-  let E := FiniteConstantSliceStalkProof.sliceCoordinates X B R φ W
-  have : E.IsEquivalence :=
-    FiniteConstantSliceStalkProof.sliceCoordinates_equivalence X B R φ W
-  have : E.Additive := Functor.additive_of_preserves_binary_products E
-  refine ⟨E.mapDerivedCategory ⋙ S.mapDerivedCategory ⋙ T.mapDerivedCategory, ?_⟩
-  intro P
-  let Pu := ((ModuleCat.uliftFunctor.{t + 1, t} B ⋙
-    ModuleCat.restrictScalars.{t + 1}
-      (ULift.ringEquiv : ULift.{t + 1} B ≃+* B).toRingHom
-    ).mapHomologicalComplex (.up ℤ)).obj P
-  -- Cancel coefficient change and compute the resulting constant complex.
-  obtain ⟨eModel⟩ := FiniteConstantSliceStalkProof.constantModelIso X B R φ W P
-  let eSlice := FiniteConstantSliceStalkProof.restrictionCoordinatesIso X B R φ W
-    ((completedAdicDerivedChange X φ).obj
-      (DerivedCategory.Q.obj (finiteModelConstantComplex X B P)))
-  let eConstant : constantSheaf (ProEt.topology W.left) A ⋙ S ≅ 𝟭 A :=
-    Φ.constantSheafCompSheafFiberIso (ProEt.topology W.left) A
-  let eScalars : ModuleCat.restrictScalars.{t + 1}
-      (ULift.ringEquiv : ULift.{t + 1} B ≃+* B).toRingHom ⋙ T ≅
-        𝟭 (ModuleCat.{t + 1} B) :=
-    scalarEquiv.unitIso.symm
-  -- Exact localization, constant fibres, and the scalar-equivalence unit.
-  refine ⟨T.mapDerivedCategory.mapIso
-    (S.mapDerivedCategory.mapIso (eSlice ≪≫ eModel) ≪≫
-      S.mapDerivedCategoryFactors.app _ ≪≫
-      DerivedCategory.Q.mapIso ((NatIso.mapHomologicalComplex eConstant (.up ℤ)).app Pu)) ≪≫
-    T.mapDerivedCategoryFactors.app Pu ≪≫
-    DerivedCategory.Q.mapIso
-      ((NatIso.mapHomologicalComplex
-        (Functor.isoWhiskerLeft (ModuleCat.uliftFunctor.{t + 1, t} B) eScalars)
-          (.up ℤ)).app P)⟩
 
 end AlgebraicGeometry.Scheme

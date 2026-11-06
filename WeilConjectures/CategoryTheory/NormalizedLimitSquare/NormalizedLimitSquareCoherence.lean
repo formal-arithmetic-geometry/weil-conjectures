@@ -523,38 +523,6 @@ def Coherence (e : F ⋙ G ≅ H ⋙ K) :=
   ∃ d : SquareData F G H K L0 eta0 L1 eta1 L2 eta2 L3 eta3,
     SquareLaws F G H K L0 eta0 L1 eta1 L2 eta2 L3 eta3 d e
 
-private theorem tower_square_factors (e : F ⋙ G ≅ H ⋙ K)
-    (X : CochainComplex (ℕᵒᵖ ⥤ A0) ℤ) :
-    (towerSquare F G H K e).hom.app (DerivedCategory.Q.obj X) ≫
-        (towerDerived K).map ((towerFactors H).hom.app X) ≫
-        (towerFactors K).hom.app ((towerComplex H).obj X) =
-      (towerDerived G).map ((towerFactors F).hom.app X) ≫
-        (towerFactors G).hom.app ((towerComplex F).obj X) ≫
-        DerivedCategory.Q.map ((towerMap F G H K e.hom).app X) := by
-  let : PreservesFiniteLimits ((Functor.whiskeringRight ℕᵒᵖ A0 A1).obj F) :=
-    ⟨fun _ _ _ ↦ inferInstance⟩
-  let : PreservesFiniteColimits ((Functor.whiskeringRight ℕᵒᵖ A0 A1).obj F) :=
-    ⟨fun _ _ _ ↦ inferInstance⟩
-  let : PreservesFiniteLimits ((Functor.whiskeringRight ℕᵒᵖ A1 A3).obj G) :=
-    ⟨fun _ _ _ ↦ inferInstance⟩
-  let : PreservesFiniteColimits ((Functor.whiskeringRight ℕᵒᵖ A1 A3).obj G) :=
-    ⟨fun _ _ _ ↦ inferInstance⟩
-  let : PreservesFiniteLimits ((Functor.whiskeringRight ℕᵒᵖ A0 A2).obj H) :=
-    ⟨fun _ _ _ ↦ inferInstance⟩
-  let : PreservesFiniteColimits ((Functor.whiskeringRight ℕᵒᵖ A0 A2).obj H) :=
-    ⟨fun _ _ _ ↦ inferInstance⟩
-  let : PreservesFiniteLimits ((Functor.whiskeringRight ℕᵒᵖ A2 A3).obj K) :=
-    ⟨fun _ _ _ ↦ inferInstance⟩
-  let : PreservesFiniteColimits ((Functor.whiskeringRight ℕᵒᵖ A2 A3).obj K) :=
-    ⟨fun _ _ _ ↦ inferInstance⟩
-  delta towerMap
-  exact square_factors
-    ((Functor.whiskeringRight ℕᵒᵖ A0 A1).obj F)
-    ((Functor.whiskeringRight ℕᵒᵖ A1 A3).obj G)
-    ((Functor.whiskeringRight ℕᵒᵖ A0 A2).obj H)
-    ((Functor.whiskeringRight ℕᵒᵖ A2 A3).obj K)
-    ((Functor.whiskeringRight ℕᵒᵖ A0 A3).mapIso e) X
-
 private theorem normalized_square
     (a0 : Corner L0 eta0) (a1 : Corner L1 eta1)
     (a2 : Corner L2 eta2) (a3 : Corner L3 eta3)
