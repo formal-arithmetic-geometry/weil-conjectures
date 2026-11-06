@@ -246,19 +246,32 @@
 - Next: build layer-two importer CanonicalModuleBaseChangeAffineChartComparison.
 - Notes: /home/ubuntu/u9/bz/FIXES-BZ824.md. No local Lean/Lake or proof shortcuts.
 
-# BZ857 in progress
+# BZ857 complete
 
-- Branch: `u9/BZ857`; initial baseline `2ab2b07a3`, integrated baseline `db406319f`.
-- User instructed continuation after the explicit four-upstream-module restoration proposal.
-- Restored projection-unit normalization, mixed projection mate, signed normalization,
-  and mate data. The assigned theorem statement and proof remain byte-for-byte unchanged.
-- Applied scalar carrier annotations, public/implementation imports, and canonical Q/Qh
-  comparisons. The restored mixed-mate theorem's local eta uses the canonical cochain unit.
-- Arrows and MixedProjectionMate rebuilt green at `e70441fd70` (attempt 4).
-- Attempt 4 exposed a missing public ShortExactPullback import in signed normalization;
-  fixed it and queued attempt 5 at `949b84fad` through ucheck-bump.
-- Current remote waiter PID: 3369746. Local wrapper log: BUILD-BZ857-restoration5.log.
-- Next: validate the leaf and check PerfectProjectionFormula and ProjectionFormulaCompactified,
-  then their importers while fixable and within the 30-module downstream cap.
-- Full notes, exact errors, rules, and logs: `/home/ubuntu/u9/bz/FIXES-BZ857.md`.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+- Branch: `u9/BZ857`; original baseline `2ab2b07a3`, integrated baseline `db406319f`.
+- Assigned module and four restored prerequisites passed ucheck-bump at
+  `949b84fad60d507c833b99d25b183a26d049eab6`: rc=0, failed=0, 4716 jobs.
+- Final downstream check passed at `17f7d860184b088850ae1e23f07017be3037ce6f`:
+  rc=0, built=15, failed=0, 4813 jobs, including the assigned theorem, all four
+  restored prerequisites, ProjectionFormulaCompactified, and
+  ProjectionFormulaIdentityCompactification.
+- Full logs: `/home/ubuntu/u9/bz/BUILD-BZ857-unit-green-full.log` and
+  `/home/ubuntu/u9/bz/BUILD-BZ857-downstream2-full.log`.
+- The assigned theorem statement and proof are byte-for-byte unchanged.
+- The user instructed continuation after the four-upstream-module restoration proposal.
+  Restored required declarations and repaired scalar carriers, Q/Qh endpoint transports,
+  public imports, identity rewrites, and the downstream compositor orientation.
+- The restored mixed-mate theorem's local eta uses the canonical cochain unit to
+  transport its endpoints; other restored statement text is unchanged.
+- PerfectProjectionFormula was attempted and skipped for unowned dependencies.
+  First error: `error: WeilConjectures/CategoryTheory/RingedKFlatWord/RingedKFlatWordComparisonDescent.lean:171:41: Application type mismatch: The argument`.
+- Checked importers, including multiline imports: the assigned theorem's two direct
+  importers are PerfectProjectionFormula and ProjectionFormulaCompactified; the
+  latter leads only to ProjectionFormulaIdentityCompactification, which leads only
+  to the already-blocked PerfectProjectionFormula. Three downstream modules attempted.
+- Replay audit exactly reproduces all five changed Lean files from historical sources.
+- Fix patterns, exact errors, and replay rules: `/home/ubuntu/u9/bz/FIXES-BZ857.md`.
+- Completion handoff: `/home/ubuntu/u9/state/BZ857.DONE`.
+- No declarations deleted, local Lean/Lake execution, proof placeholders, trust bypasses,
+  profiler probes, or heartbeat increases. Historical mixed-mate limit retained.
+- This final commit changes only progress documentation; Lean source matches the green build.
