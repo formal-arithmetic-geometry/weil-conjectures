@@ -5,6 +5,7 @@ Authors: Nailin Guan
 -/
 module
 
+public import Mathlib
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Coefficients
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.DegreeZero
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Vanishing
