@@ -235,7 +235,7 @@ theorem commonStagePullbackCompComponent_stage_representation
         (P.toStage hP) := by
     unfold commonStagePullbackRationalComposition rationalPullbackCompositionIso
     simp only [integralPullbackCompositor_eq_choose]
-  rw [eR]
+  simp only [eR]
   unfold commonStagePullbackComparison
     operationStageTransitionIso GeneralAlgebraicallyClosedCoefficients.ofHom
   exact congrArg (StageSystem.PairCategory.mkHom (X := commonStagePullbackObject l Ω (f ≫ g) P)
