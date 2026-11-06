@@ -195,8 +195,6 @@ private def scalarAdd
             (x.hom.naturality f)
         · exact congrArg (fun g ↦ g t) (y.hom.naturality f) }
 
-set_option maxHeartbeats 800000 in
--- Comparing the two bundled scalar actions unfolds restriction of scalars and sheaf composition.
 end CategoryTheory
 
 namespace CategoryTheory.ConstantModuleDerivedProjection
