@@ -311,3 +311,6 @@
   downstream modules up to the brief's limit of 30 extra modules.
 - Notes and logs: /home/ubuntu/u9/bz/FIXES-BZ941.md.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+- First continuation build accepted the proposed unit-map cast and exposed the same
+  hidden-unit mismatch in the public theorem's identity constraint. Applied the same
+  reflexive transport to that identity, with tensorUnit Λ T explicit, and revalidating.
