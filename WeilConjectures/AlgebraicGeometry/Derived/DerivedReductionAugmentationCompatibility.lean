@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Derived.DerivedReductionComparisonFormula
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 import all WeilConjectures.CategoryTheory.StrictReduction.ReductionPullbackDerivedTower
 import all WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumSupplement
