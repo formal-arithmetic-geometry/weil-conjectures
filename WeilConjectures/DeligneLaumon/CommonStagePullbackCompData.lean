@@ -20,6 +20,10 @@ set_option synthInstance.maxSize 2048
 universe u v
 open CategoryTheory AlgebraicGeometry
 namespace WeilConjectures
+-- Match the transported field and module structures on the small coefficient models.
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
 variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
 
