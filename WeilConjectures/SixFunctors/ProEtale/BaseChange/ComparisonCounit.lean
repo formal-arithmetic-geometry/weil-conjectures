@@ -84,8 +84,8 @@ private theorem comparison_iso_restrict (σ : a ⋙ p ≅ l ⋙ b)
     (Z : DerivedCategory.Plus C) :
     let θ := (Functor.mapDerivedCategoryPlusCompIso a p).symm ≪≫
       Functor.mapDerivedCategoryPlusNatIso σ ≪≫ Functor.mapDerivedCategoryPlusCompIso l b
-    let θD := (Functor.mapDerivedCategoryCompIso a p).symm ≪≫
-      Functor.mapDerivedCategoryNatIso σ ≪≫ Functor.mapDerivedCategoryCompIso l b
+    let θD := Functor.mapDerivedCategoryCompIso a p ≪≫
+      Functor.mapDerivedCategoryNatIso σ ≪≫ (Functor.mapDerivedCategoryCompIso l b).symm
     DerivedCategory.Plus.ι.map (θ.inv.app Z) = θD.inv.app Z.obj := by
   dsimp only
   have hc : DerivedCategory.Plus.ι.mapIso
@@ -204,10 +204,10 @@ theorem comparison_counit {U V : Scheme.{u}} (f : U ⟶ V)
         (Etale.upperStar (ModuleCat.{u + 1} Λ) g).mapDerivedCategoryPlusCompatibility
         D(ν^*(U)[ModuleCat.{u + 1} Λ]) ≪≫
       Functor.isoWhiskerLeft DerivedCategory.Plus.ι
-        ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+        (Functor.mapDerivedCategoryCompIso _ _ ≪≫
           Functor.mapDerivedCategoryNatIso
             (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) g).symm ≪≫
-          Functor.mapDerivedCategoryCompIso _ _) ≪≫
+          (Functor.mapDerivedCategoryCompIso _ _).symm) ≪≫
       Functor.isoWhiskerLeft (DerivedCategory.Plus.ι ⋙ D(ν^*(V)[ModuleCat.{u + 1} Λ]))
         (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) g).symm
 ) f Λ).hom.app

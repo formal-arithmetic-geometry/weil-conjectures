@@ -423,3 +423,15 @@
 - No local Lean/Lake, proof placeholders, trust bypasses, declaration deletions,
   profiler probes, or heartbeat changes. Both rewrite rules replay the exact diff.
 - All ucheck invocations finished. This final commit changes documentation only.
+
+
+# BZ1063 in progress
+
+- Branch: u9/BZ1063; starting commit dfaed262b6fc1850faba3b46955a11d3225a1e86.
+- The user instructed continuation after the explicit two-statement compositor API proposal.
+  Applied BZ1063-statement-api.patch, preserving the original comparison maps under
+  Mathlib b63f6e8a. The Plus restriction proof uses the inverse unbounded compositor.
+- Proof-only baseline removed two of five errors; the remaining three were in those
+  statement expressions. Next: ucheck-bump on ComparisonCounit, then its importers.
+- Fix records and logs: /home/ubuntu/u9/bz/FIXES-BZ1063.md.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
