@@ -120,8 +120,8 @@ def constantAdicQuotientPullComparison {X Y : Scheme.{u}} (g : Y ⟶ X)
   let kD : R.mapDerivedCategory ⋙
       (adicLisseConstantModules X (AdicCompletion d.ideal A)).mapDerivedCategory ≅
       F.mapDerivedCategory ⋙ H.mapDerivedCategory :=
-    (Functor.mapDerivedCategoryCompIso R _).symm ≪≫
-      Functor.mapDerivedCategoryNatIso k ≪≫ Functor.mapDerivedCategoryCompIso F H
+    (Functor.mapDerivedCategoryCompIso R _) ≪≫
+      Functor.mapDerivedCategoryNatIso k ≪≫ (Functor.mapDerivedCategoryCompIso F H).symm
   let kp := proEtaleRingRestrictionDerivedPullback g
     (adicLisseConstantRing X (AdicCompletion d.ideal A))
     ((pbcAdicRings X d).obj (op n))

@@ -344,14 +344,14 @@ private theorem scalarDerivedSquare_comp {X Y : Scheme.{u}} (g : Y ⟶ X)
     (pbcRestrictComp ((adicTowerInverseImage g).map a)
       ((adicTowerInverseImage g).map b) ((adicTowerInverseImage g).map c) hi).symm ho M
   have hX : (Functor.mapDerivedCategoryNatIso (pbcRestrictComp a b c h).symm ≪≫
-      Functor.mapDerivedCategoryCompIso (pbcRestrict b) (pbcRestrict a)).hom =
+      (Functor.mapDerivedCategoryCompIso (pbcRestrict b) (pbcRestrict a)).symm).hom =
         (pbcDerivedRestrictComp a b c h).inv := by
     simp only [pbcDerivedRestrictComp, Functor.mapDerivedCategoryNatIso_symm,
       Iso.trans_hom, Iso.trans_inv, Iso.symm_inv]
   have hY : (Functor.mapDerivedCategoryNatIso
       (pbcRestrictComp ((adicTowerInverseImage g).map a)
         ((adicTowerInverseImage g).map b) ((adicTowerInverseImage g).map c) hi).symm ≪≫
-      Functor.mapDerivedCategoryCompIso
+      (Functor.mapDerivedCategoryCompIso).symm
         (pbcRestrict ((adicTowerInverseImage g).map b))
         (pbcRestrict ((adicTowerInverseImage g).map a))).hom =
       (pbcDerivedRestrictComp ((adicTowerInverseImage g).map a)

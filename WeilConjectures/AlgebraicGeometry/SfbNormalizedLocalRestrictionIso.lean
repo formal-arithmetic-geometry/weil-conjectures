@@ -251,7 +251,7 @@ theorem sfbNormalizedLocalRestriction_iso
   let eD : (TX.mapDerivedCategory ⋙ P₁.mapDerivedCategory) ⋙ P₂.mapDerivedCategory ≅
       (P.mapDerivedCategory ⋙ O.mapDerivedCategory) ⋙ G.mapDerivedCategory :=
     Functor.isoWhiskerRight (Functor.mapDerivedCategoryCompIso TX P₁) _ ≪≫
-      (Functor.mapDerivedCategoryCompIso (TX ⋙ P₁) P₂).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso (TX ⋙ P₁) P₂) ≪≫
       Functor.mapDerivedCategoryNatIso e ≪≫ (Functor.mapDerivedCategoryCompIso (P ⋙ O) G).symm ≪≫
       Functor.isoWhiskerRight (Functor.mapDerivedCategoryCompIso P O).symm _
   obtain ⟨d₁⟩ := pullDerivedIso F (SfbAdicRestriction.direct i)
