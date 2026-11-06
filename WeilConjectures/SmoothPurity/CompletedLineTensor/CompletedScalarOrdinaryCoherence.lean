@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SmoothPurity.CompletedLineTensor.CompletedLineTensorOrdinaryData
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import all WeilConjectures.SmoothPurity.CompletedScalarAssociator.CompletedScalarAssociator
 import WeilConjectures.SmoothPurity.CompletedLineTensor.CompletedScalarIdentityUnit
 import WeilConjectures.SixFunctors.Finite.FiniteFreeScalarCochainProperties
@@ -238,8 +240,9 @@ private theorem counit_naturality {P P' : CochainComplex (integralTowerModules l
         completedScalarCounit l E F ι X P' =
       completedScalarCounit l E F ι X P ≫
         DerivedCategory.Q.map ((completedOrdinaryScalarComplex l E F ι X).map f) := by
-  simpa only [completedScalarCounit, completedOrdinaryScalarComplex] using
-    homotopyCounit_naturality (completedOrdinaryScalarExtension l E F ι X)
+  dsimp only [completedScalarCounit, completedOrdinaryScalarComplex]
+  with_unfolding_all
+    exact homotopyCounit_naturality (completedOrdinaryScalarExtension l E F ι X)
       (completedDerivedScalarExtension l E F ι X)
       ((completedScalarChangeData l E F ι X).choose_spec.choose_spec.choose_spec
         |>.choose_spec.2.2.choose_spec.choose) f
