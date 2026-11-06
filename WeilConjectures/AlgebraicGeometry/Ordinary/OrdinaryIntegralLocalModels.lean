@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.Integral.IntegralStratifiedPerfectModelsSupplement
 public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.FourCornersSupplement
+import all WeilConjectures.AlgebraicGeometry.Integral.IntegralChartPullbackComparison
 import all WeilConjectures.AlgebraicGeometry.SmoothPurity.ExtensionZeroPerfectModelTransport
 import all WeilConjectures.AlgebraicGeometry.Perfect.PerfectChartTensorComparison
 import all WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSupplement
