@@ -64,7 +64,7 @@ theorem comparison_square_of_component
         (Etale.upperStar (ModuleCat.{u + 1} Λ) g).mapDerivedCategoryPlusCompatibility
         D(ν^*(U)[ModuleCat.{u + 1} Λ]) ≪≫
       Functor.isoWhiskerLeft DerivedCategory.Plus.ι
-        ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+        (Functor.mapDerivedCategoryCompIso _ _ ≪≫
           Functor.mapDerivedCategoryNatIso
             (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) g).symm ≪≫
           (Functor.mapDerivedCategoryCompIso _ _).symm) ≪≫
@@ -78,7 +78,7 @@ theorem comparison_square_of_component
         (Etale.upperStar (ModuleCat.{u + 1} Λ) g).mapDerivedCategoryPlusCompatibility
         D(ν^*(U)[ModuleCat.{u + 1} Λ]) ≪≫
       Functor.isoWhiskerLeft DerivedCategory.Plus.ι
-        ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+        (Functor.mapDerivedCategoryCompIso _ _ ≪≫
           Functor.mapDerivedCategoryNatIso
             (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) g).symm ≪≫
           (Functor.mapDerivedCategoryCompIso _ _).symm) ≪≫
@@ -90,7 +90,7 @@ theorem comparison_square_of_component
         (Etale.upperStar (ModuleCat.{u + 1} Λ) g).mapDerivedCategoryPlusCompatibility
         D(ν^*(U)[ModuleCat.{u + 1} Λ]) ≪≫
       Functor.isoWhiskerLeft DerivedCategory.Plus.ι
-        ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+        (Functor.mapDerivedCategoryCompIso _ _ ≪≫
           Functor.mapDerivedCategoryNatIso
             (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) g).symm ≪≫
           (Functor.mapDerivedCategoryCompIso _ _).symm) ≪≫
@@ -104,7 +104,7 @@ theorem comparison_square_of_component
         (Etale.upperStar (ModuleCat.{u + 1} Λ) g).mapDerivedCategoryPlusCompatibility
         D(ν^*(U)[ModuleCat.{u + 1} Λ]) ≪≫
       Functor.isoWhiskerLeft DerivedCategory.Plus.ι
-        ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+        (Functor.mapDerivedCategoryCompIso _ _ ≪≫
           Functor.mapDerivedCategoryNatIso
             (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) g).symm ≪≫
           (Functor.mapDerivedCategoryCompIso _ _).symm) ≪≫

@@ -442,18 +442,17 @@
   Next: validate all four direct importers; leaf log BUILD-BZ1068-leaf-full.log.
 
 
-# BZ1063 complete
+# BZ1077 in progress
 
-- Assigned ComparisonCounit is green and sorry-free; 14 downstream modules also verified.
-- Final ucheck-bump at ac61c07c5d7930627185049e26decc6e342452e1 completed 13032 jobs: rc=0, failed=0.
-- Ported derived-compositor directions in five files; pruned 22 audited unused failing
-  declarations and their unused dependents from StrictTowerProperOpenCalculus.
-- All six edited modules are covered by the final green dependency closure.
-- Fourteen rewrite rules and the prune plan exactly reconstruct the six source files.
-- Seven downstream targets are deferred after observed unowned prerequisite failures;
-  21 extra modules assessed, below cap 30. Full paths and exact errors are recorded.
-- Upstream was merged twice, preserving tested fixes and other units' progress notes.
-- Fixes, build manifest, green log, and audits: /home/ubuntu/u9/bz/FIXES-BZ1063.md.
-- Completion marker: /home/ubuntu/u9/state/BZ1063.DONE.
-- No local Lean/Lake, proof placeholders, trust bypasses, profiler probes, or limit raises.
-- All ucheck invocations finished. Final commit changes only progress documentation.
+- Branch: u9/BZ1077; start: d6df1ded8ce203469c3ccdde034e73d5ce4c644c.
+- The user instructed continuation after the exact compositor API proposal.
+- Applied the nine comparison-chain direction corrections across ComparisonSquareTransport,
+  ComparisonSquare, and SmoothBaseChange, preserving the intended comparison maps.
+- Declaration binders, hypotheses, proof bodies, and docstrings remain unchanged.
+- Next: remote ucheck-bump validation, then direct importers through the 30-module cap.
+- Fix patterns: /home/ubuntu/u9/bz/FIXES-BZ1077.md.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
+
+- The assigned leaf and both downstream layers are GREEN at
+  39a2abaca23e5021c1ed37cf83063de80bacbd73: ucheck-bump rc=0, failed=0, 11415 jobs.
+  Full log: BUILD-BZ1077-fix1-full.log. Next: check the eight SmoothBaseChange importers.
