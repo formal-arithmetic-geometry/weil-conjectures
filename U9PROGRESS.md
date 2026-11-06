@@ -423,3 +423,16 @@
 - No local Lean/Lake, proof placeholders, trust bypasses, declaration deletions,
   profiler probes, or heartbeat changes. Both rewrite rules replay the exact diff.
 - All ucheck invocations finished. This final commit changes documentation only.
+
+
+# BZ1068 in progress
+
+- Branch: u9/BZ1068; starting commit dfaed262b6fc1850faba3b46955a11d3225a1e86.
+- The user instructed continuation after the concrete two-site compositor statement proposal.
+  Applied BZ1068-statement-only.patch; the statement and local hb proof now preserve the
+  original comparison using Mathlib's reversed derived compositor.
+- Merged BZ1059 prerequisite fixes; no duplicate declarations or declaration deletions.
+- Proof-only baseline cleared two errors; next: validate the complete leaf repair with
+  ucheck-bump, then build its four direct importers and continue through unblocked layers.
+- Patterns, exact errors, replay-checked rules: /home/ubuntu/u9/bz/FIXES-BZ1068.md.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
