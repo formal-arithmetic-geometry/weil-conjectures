@@ -39,10 +39,11 @@ private theorem sfbCompleteModel_triangulated
   classical
   let P : ObjectProperty (ConstantCompletion.D O) := ConstantCompletion.IsComplete q
   let hRshift (U : C) : (ringedDerivedRestriction O U).CommShift ℤ := by
-    dsimp only [ringedDerivedRestriction]
-    infer_instance
+    unfold ringedDerivedRestriction
+    set_option trace.Meta.synthInstance true in
+      infer_instance
   let hRtri (U : C) : (ringedDerivedRestriction O U).IsTriangulated := by
-    dsimp only [ringedDerivedRestriction]
+    unfold ringedDerivedRestriction
     infer_instance
   let H (U : C) (f : O.obj.obj (op U)) :=
     (Functor.curry.obj (derivedInternalHom (J.over U) (O.over U))).obj
