@@ -794,10 +794,10 @@ private theorem stratumAdjointsComparison
   have : IsIso α := closedComparisonAlpha_isIso A c W.ι hij N hN L e
   let r := (Functor.mapDerivedCategoryCompIso
       (comparisonUpperStar (ModuleCat.{u + 1} A) X)
-      (upperStar (ModuleCat.{u + 1} A) v)).symm ≪≫
+      (upperStar (ModuleCat.{u + 1} A) v)) ≪≫
     Functor.mapDerivedCategoryNatIso
       (comparisonUpperStarUpperStarIso (ModuleCat.{u + 1} A) v) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
   exact ⟨DerivedCategory.TStructure.t.plus.prop_of_iso e.symm L.property,
     ⟨asIso α ≪≫ a.proetale.mapIso (r.symm.app M)⟩⟩
 
@@ -929,7 +929,7 @@ private theorem isIso_siteHom
         ((Q.mapDerivedCategorySingleFunctor 0).app L).symm ≪≫
         (Functor.mapDerivedCategoryCompIso
           (Etale.lowerStar (ModuleCat.{u + 1} Λ) c)
-          (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) v)).app _ ≪≫
+          (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) v)).symm.app _ ≪≫
         (StratumHomComparisonMate.Etale.extensionIso Λ c v).symm.app _
     exact P.prop_of_iso (e ≪≫ e').symm hb
   · obtain ⟨a, b, ht⟩ := hK.2
