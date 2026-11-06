@@ -320,8 +320,8 @@ private theorem normalizedDVRKFlatUnit (n : ℕ)
     Quotient.lift.isLift_inv, Quotient.lift.isLift_hom] at h' ⊢
   erw [(scalarReductionDerivedExtension l E X n).map_id, DerivedCategory.Qh.map_id,
     Category.id_comp, Category.comp_id]
-  erw [(scalarReductionRestriction l E X n).mapDerivedCategory.map_id,
-    DerivedCategory.Qh.map_id, Category.id_comp, Category.comp_id] at h'
+  erw [(scalarReductionDerivedRestriction l E X n).map_id,
+    DerivedCategory.Qh.map_id, Category.id_comp, Category.comp_id, Category.comp_id] at h'
   exact h'.trans (congrArg DerivedCategory.Q.map hg.symm)
 
 set_option backward.isDefEq.respectTransparency false in
