@@ -313,7 +313,8 @@ private theorem complete_cone
   let := hH
   let : (ringedDerivedRestriction R U).CommShift ℤ := by
     unfold ringedDerivedRestriction
-    infer_instance
+    set_option trace.Meta.synthInstance true in
+      infer_instance
   let : (ringedDerivedRestriction R U).IsTriangulated := by
     unfold ringedDerivedRestriction
     infer_instance
