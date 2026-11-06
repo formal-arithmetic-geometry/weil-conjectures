@@ -36,7 +36,7 @@ attribute [local irreducible] HasDerivedCategory.standard
   completedIntegralCommRingSheafUnrestricted unrestrictedIntegralTensorSection
 
 attribute [local implicit_reducible] integralOperationsPullbackTowerFunctor
-  integralOperationsPullbackLevel integralOperationsRestrict Functor.mapHomologicalComplex
+  integralOperationsPullbackLevel integralOperationsRestrict
   integralCoefficientCommRingSheaf integralCoefficientSheaf
   integralOperationsLevelPullback unrestrictedIntegralReductionFunctor
   integralComparisonSequencePullback integralComparisonSequenceDirectImage
