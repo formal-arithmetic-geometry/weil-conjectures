@@ -242,8 +242,7 @@ private def scalarSections (T : Scheme.{u}) (O : Type (u + 1)) [CommRing O]
      naturality := by
        intro U V f
        ext x
-       change (unit T (coefficient O t n)).app V a •
-         (show M.val.obj V from M.val.map f x) =
+       change (unit T (coefficient O t n)).app V a • M.val.map f x =
          M.val.map f ((unit T (coefficient O t n)).app U a •
            (show M.val.obj U from x))
        rw [M.val.map_smul]
@@ -306,8 +305,9 @@ private theorem inverseUnderlying_smul (O : Type (u + 1)) [CommRing O] (t : O)
   have h := (I.lift n).moduleSMul M S a' (𝟙 S) (scalarSections Z O t n a M) (by
     intro V y
     change (unit Z (coefficient O t n)).app V a • (show M.val.obj V from y) =
-      (coefficientConstantSection (J := Z.smallEtaleTopology) O t n a).hom.app V
-        (terminal.hom.app V y) • (show M.val.obj V from y)
+      (show (ring Z (coefficient O t n)).obj.obj V from
+        (coefficientConstantSection (J := Z.smallEtaleTopology) O t n a).hom.app V
+          (terminal.hom.app V y)) • (show M.val.obj V from y)
     rw [constantSection_apply]) U z
   have hc := congrArg (fun f ↦ f.hom.app U z) ha
   change (I.lift n).ringUnderlying.hom.hom.app U ((L.map a').hom.app U z) =
