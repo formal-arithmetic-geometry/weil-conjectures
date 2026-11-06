@@ -288,31 +288,55 @@
 - Fix patterns: /home/ubuntu/u9/bz/FIXES-BZ908.md.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
+- Assigned leaf compiled successfully (51s), all 3998 jobs green at 47eabae395f.
+  The shared remote wrapper hit a shell syntax error after compilation; full Lean
+  success is recorded in BUILD-BZ908-leaf-green-full.log. Rechecking the runner.
+- Next batch uses two direct importers whose dependency closures cover all 19:
+  SingleComplexInheritedTensorCondition and NormalizedInternalHomPullbackComparison.
 
-# BZ932 in progress
+- The stable downstream run at 0997529457 rebuilt the assigned leaf (59s) and
+  CanonicalPullbackTensorMonoidalRealization (50s) successfully.
+- TensorCoordinateIdentifications needs the same Qh/Q reflexive casts plus an
+  explicit target sheaf category; the known BZ877 repair is applied for recheck.
+  The unused-list theorem has an external caller, so it is retained.
+- Unowned blockers found: StalkDerivedExtensionComparisonIsoCore (heartbeat
+  timeout) and OpenRestrictionDerivedMonoidal (reversed compositor).
+- Per-run ucheck-bump snapshot: /home/ubuntu/u9/bz/BZ908-bin/ucheck-bump. It preserves
+  the lead's locking and one-build-per-helper rules while avoiding shared-script
+  overwrite failures. No shared build scripts were edited.
 
-- Branch: u9/BZ932; baseline 902c558126dff07f1b90673880f577206572e997.
-- The user instructed continuation after the concrete five-module upstream-restoration proposal.
-- Applied BZ932-proposed-upstream-restoration.patch, preserving restored statement/docstring text.
-- Explicit terminal-object preservation supplies GU.PreservesZeroMorphisms; removed the old
-  unmeasured maxHeartbeats override from the restored helper.
-- Next: ucheck-bump on the five prerequisites and SupportedKoszulRelativeDetector, then downstream.
-- Fix notes: /home/ubuntu/u9/bz/FIXES-BZ932.md. No local Lean/Lake or proof shortcuts.
 
-# BZ948 downstream check
+# BZ938 in progress
 
-- Branch: u9/BZ948; baseline c59b55069.
-- All five edited modules passed ucheck-bump together: rc=0, failed=0, 4517 jobs.
-- Validated source commit: 7d627e792ab821868b3c90b06434a254e740963e.
-- Green: AffineTildeTensorSourceComparisonHelpers, CorePreBase, CorePre, CoreFinal,
-  and AffineTildeTensorSourceComparison (all under WeilConjectures.Algebra.Homology).
-- Full log: /home/ubuntu/u9/bz/BUILD-BZ948-five-green-full.log.
-- The user instructed continuation after the reflexive-cast statement proposal.
-  The same definitionally equal endpoint repair was carried through direct callers.
-- Other repairs: named tilde additive proofs, quasicoherence instance synthesis,
-  Localization imports, cast normalization, and local scheme derived-category instances.
-- Nineteen recorded rewrite rules reproduce the edited source modulo formatting.
-- Next: test the four direct importers of AffineTildeTensorSourceComparison.
-  Their shared dependency AffineBaseChangeTildeRepresentative belongs to BZ949.
-- Fix notes: /home/ubuntu/u9/bz/FIXES-BZ948.md.
-- No local Lean/Lake, forbidden proof shortcuts, deletions, or heartbeat increases.
+- Branch: u9/BZ938; baseline before repairs: 1626b332e^.
+- The user instructed continuation after the exact four-projection private-helper proposal.
+  Applied BZ938-private-compositor-proposal.patch to descend_coherence.
+  The .hom → .inv migration preserves the original equation under Mathlib's reversed compositor.
+- Definition bodies and proof-local comparisons now use the correct compositor direction.
+- First remote build cleared five of eight diagnostics; remaining three shared the
+  private helper statement as their root. Next: validate the completed repair.
+- Then check the nine direct importers, continuing through unblocked layers up to
+  the brief's 30-extra-module limit.
+- Fix records: /home/ubuntu/u9/bz/FIXES-BZ938.md.
+- No local Lean/Lake, forbidden proof escapes, or heartbeat changes.
+
+
+# BZ978 complete
+
+- Branch: u9/BZ978; baseline 2390944b5.
+- Assigned CompletedReductionUnit is green and sorry-free. The authorized identity cast
+  and Localization imports preserve its normalization equation across hidden Qh endpoints.
+- Two direct importers are green: CompletedPullbackInterface and CompletedQuotientUnitNormalization.
+  The interface fixes Mathlib's reversed compositor in its construction; its type is unchanged.
+- Green source commit: 68722d6cc7ac77c7987137f65e895ed614607434, ucheck-bump rc=0,
+  failed=0, 6672 jobs. All three modules freshly rebuilt. Final Lean source is identical.
+- All seven direct importers and the next frontier were checked or traced to observed
+  unowned failures. ReductionAugmentationCompatibility is red because BZ704 removed
+  two prerequisite helpers; its own redundant reducibility attribute is also recorded.
+  Other blocked branches and exact diagnostics are in FIXES-BZ978.md.
+- No declaration deletions, local Lean/Lake execution, proof placeholders, trust bypasses,
+  profiler probes, or heartbeat changes. All four rewrite rules replay exactly.
+- Logs: BUILD-BZ978-leaf-green-full.log, BUILD-BZ978-downstream-green-full.log,
+  BUILD-BZ978-downstream1-full.log, and BUILD-BZ978-downstream2-full.log under ~/u9/bz/.
+- Final records: ~/u9/bz/FIXES-BZ978.md and ~/u9/state/BZ978.DONE.
+- This completion commit changes only progress documentation.
