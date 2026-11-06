@@ -311,7 +311,12 @@ private theorem normalizedDVRKFlatUnit (n : ℕ)
     exact ((integralTowerMaps_existUnique l E X D hl P).exists.choose_spec.1 n i U x).trans
       (unrestrictedTowerUnit_condition l E X P n i U x).symm
   have h' := h.trans hq
-  erw [Functor.mapDerivedCategoryFactorsh_hom_app] at h'
+  have hf := (scalarReductionRestriction l E X n).mapDerivedCategoryFactorsh_hom_app
+    (unrestrictedTowerFiniteComplex l E X n P)
+  change (scalarReductionRestriction l E X n).mapDerivedCategoryFactorsh.hom.app
+      (((scalarReductionExtension l E X n).mapHomotopyCategory (.up ℤ)).obj
+        ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) = _ at hf
+  rw [hf] at h'
   unfold normalizedDVRKFlatComparison normalizedDVRIntegralAdjunction
   simpa only [DerivedCategory.quotientCompQhIso,
     HomologicalComplexUpToQuasiIso.quotientCompQhIso, Functor.mapHomotopyCategoryFactors,
