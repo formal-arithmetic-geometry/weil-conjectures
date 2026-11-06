@@ -57,7 +57,7 @@ theorem exists_isClosedImmersion_restrict_of_fiber
   have hfinite : Module.Finite Γ(S, U) Γ(X, f ⁻¹ᵁ U) := f.finite_app U hU
   let := hfinite
   have hzero : Subsingleton (TensorProduct Γ(S, U) p.asIdeal.ResidueField Q) :=
-    subsingleton_fibreTensor_sectionCokernel f U hU ⟨s, hsU⟩ hf
+    IsFinite.subsingleton_residueField_tensor_cokernel f U hU ⟨s, hsU⟩ hf
   have hp : p ∉ Module.support Γ(S, U) Q := by
     rw [Module.mem_support_iff_nontrivial_residueField_tensorProduct]
     exact not_nontrivial_iff_subsingleton.mpr hzero

@@ -21,7 +21,6 @@ Source: Stacks Project, Tags 09XM and 03Q1.
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry TopologicalSpace
 
-set_option maxHeartbeats 800000 in
 -- The comap-stalk comparison across chosen pullbacks needs extra elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in

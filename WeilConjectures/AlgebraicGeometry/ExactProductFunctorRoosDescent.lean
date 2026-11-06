@@ -35,7 +35,6 @@ private theorem descendIso {A B E : Type*} [Category* A] [Category* B] [Category
   intro X
   exact congr_app (ff.map_preimage e.hom) X
 
-set_option maxHeartbeats 800000 in
 -- The statement contains simultaneous universe-polymorphic cone comparisons.
 /-- Descent of the normalized Roos comparison and its resolution formula.
 
