@@ -63,4 +63,5 @@ attribute [local irreducible] coefficientInternalScalarComplex
   coefficientSectionScalarTotal SheafOfModules.scalarPairComplexComparison
   internalScalarTensorComparison
 
+
 end AlgebraicGeometry.ProEtale.CondensedRing
