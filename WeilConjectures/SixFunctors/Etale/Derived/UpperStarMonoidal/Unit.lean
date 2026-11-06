@@ -83,6 +83,7 @@ lemma leftDerivedUpperStarUnitIso_hom_comp_ε :
   erw [Category.id_comp, h₆, h₆]
   rw [h₆]
   erw [Category.comp_id, Category.id_comp]
+  rfl
 
 variable [(g)^*[A].PreservesFlat]
 
