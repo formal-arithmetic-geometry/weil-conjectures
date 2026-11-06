@@ -408,6 +408,4 @@ theorem finiteQuotient_coefficient_layer_core
       exact ⟨ep ≪≫ DerivedCategory.Q.mapIso eu.symm⟩
   · exact previousModelIso X d M n C hC eC
 
-#print axioms finiteQuotient_coefficient_layer_core
-
 end AlgebraicGeometry.Scheme

@@ -289,7 +289,3 @@ representatives. Refinement transfers this equivalence to the full slice site. -
 
 end
 end AlgebraicGeometry.Scheme.Modules
-
-#print axioms AlgebraicGeometry.Scheme.Modules.smallEtaleModulePresheaf_isSheaf
-#print axioms AlgebraicGeometry.Scheme.Modules.smallEtaleModuleOverHasWeakSheafify
-#print axioms AlgebraicGeometry.Scheme.Modules.smallEtaleModuleOverWEqualsLocallyBijective

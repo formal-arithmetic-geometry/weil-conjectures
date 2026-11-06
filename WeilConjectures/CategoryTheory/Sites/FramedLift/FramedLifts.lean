@@ -258,4 +258,3 @@ theorem difference_of_equivariant_lifts (P : Torsor G)
 end CategoryTheory.Sheaf.Torsor
 
 -- Check the axioms of the completed construction.
-#print axioms CategoryTheory.Sheaf.Torsor.FramedLift.classEquiv

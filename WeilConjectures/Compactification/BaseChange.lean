@@ -241,16 +241,4 @@ instance HasCompactification.pullback_fst {X Y Z : Scheme.{u}} (f : X ⟶ Z) (g 
     [HasCompactification g] : HasCompactification (pullback.fst f g) :=
   .of_isPullback (IsPullback.of_hasPullback f g).flip
 
-/-! ### Axiom census
-
-The flat base change statement is unconditional; the check below is run by the build, so a
-`sorry` reappearing anywhere beneath it breaks compilation rather than going unnoticed. -/
-
-/--
-info: 'AlgebraicGeometry.Compactification.isSchemeTheoreticallyDominant_i_ofIsPullback' depends on
-  axioms: [propext, Classical.choice, Quot.sound]
--/
-#guard_msgs (whitespace := lax) in
-#print axioms AlgebraicGeometry.Compactification.isSchemeTheoreticallyDominant_i_ofIsPullback
-
 end AlgebraicGeometry
