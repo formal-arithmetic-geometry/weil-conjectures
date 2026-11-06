@@ -353,8 +353,9 @@ noncomputable def completedScalarCounit
     (P : CochainComplex (integralTowerModules l E Y) ℤ) :
     (completedDerivedScalarExtension l E L ι Y).obj (DerivedCategory.Q.obj P) ⟶
       DerivedCategory.Q.obj ((completedOrdinaryScalarComplex l E L ι Y).obj P) :=
-  (completedScalarChangeData l E L ι Y).choose_spec.choose_spec.choose_spec.choose_spec.2.2
-    |>.choose_spec.choose.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P)
+  cast (by rfl)
+    ((completedScalarChangeData l E L ι Y).choose_spec.choose_spec.choose_spec.choose_spec.2.2
+      |>.choose_spec.choose.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P))
 
 /-- Sheafified s tensor x in the ordinary extension, with the witness's canonical transport.
 Source: Stacks Tag 06YY (blueprint: lem-weil-finite-free-completed-scalar-comparison). -/
