@@ -506,10 +506,12 @@ theorem section_resolving_oplax_internal_conjugation {X Y : Scheme.{u}} (f : X �
       dsimp only [rightUnitPath, regularRight, Iso.refl_inv]
       erw [whiskerLeft_id, Category.id_comp, whiskerLeft_id, Category.id_comp]
       exact hlaws.2 (q.obj M)
-    simpa only [hs, ht, q, r, F, L, ε, μ', v', InternalUnits] using
-      units_from_edges_and_laws F L q r ε (fun P Q ↦ (δ.app P).app Q) w
+    have hu := units_from_edges_and_laws F L q r ε (fun P Q ↦ (δ.app P).app Q) w
         (Iso.refl _) (Iso.refl _) (fun P Q ↦ μ'.app (P, Q)) v'
         (Functor.LaxMonoidal.μ q) (Functor.LaxMonoidal.μ r) M he hl hr
+    with_unfolding_all
+      simp only [hs, ht, q, r, F, L, ε, μ', v', InternalUnits, cast_eq] at hu ⊢
+      exact hu
 
 end ResolvingOplaxConstraints
 end AlgebraicGeometry.ProEtale.ModuleRingedComparison
