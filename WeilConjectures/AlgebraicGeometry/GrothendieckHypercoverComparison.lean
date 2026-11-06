@@ -23,9 +23,7 @@ open CategoryTheory Limits Opposite
 
 namespace AlgebraicGeometry.FiniteSplitEtaleHypercover
 
-local instance (A : Type u') [Category.{u + 1} A] [Abelian A]
-    [IsGrothendieckAbelian.{u + 1} A] : HasColimitsOfSize.{u, u + 1} A :=
-  hasColimitsOfSizeShrink.{u, u + 1, u + 1, u + 1} A
+attribute [local instance] instHasColimitsOfSize
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A]
   [IsGrothendieckAbelian.{u + 1} A]
