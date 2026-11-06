@@ -54,12 +54,10 @@ set_option allowUnsafeReducibility true in
 attribute [local irreducible] ScalarLocalization.composition
   GeneralAlgebraicallyClosedCoefficients.ofHom StageSystem.PairCategory.mkHom
   rationalDerivedPullback commonStagePullbackComparison
+  rationalPullbackCompositionIso rationalPullbackScalarComparison
   commonStagePullbackRationalComposition HasDerivedCategory.standard integralCoefficientLinear
   completedIntegralCoefficientSheafUnrestricted scalarReductionExistence
   scalarReductionDerivedExistence Scheme.residueField
-
-set_option allowUnsafeReducibility true in
-attribute [local reducible] rationalDerivedPullback
 
 private theorem normalization_map_heq
     {C D : Type*} [Category* C] [Category* D] (F : C ⥤ D)
