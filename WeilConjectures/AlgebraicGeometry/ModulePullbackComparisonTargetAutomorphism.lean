@@ -7,6 +7,9 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedModuleBaseChangeMap
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
+import WeilConjectures.AlgebraicGeometry.ModulePullbackComparisonDegreeAutomorphism
 import WeilConjectures.Algebra.Homology.BoundedFlatReplacement
 import WeilConjectures.AlgebraicGeometry.FlatComplexDerivedPullback
 import WeilConjectures.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
@@ -190,28 +193,7 @@ theorem modulePullbackComparison_target_automorphism
         (Scheme.Modules.tensorPullback a).obj G,
       c = c₀ ≫ (DerivedCategory.singleFunctor
         (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).map α.hom := by
-  let C := SheafOfModules.{u} (moduleRings X.toRingedSpace)
-  let S := DerivedCategory.singleFunctor C 0
-  let H := DerivedCategory.homologyFunctor C 0
-  let M := (Scheme.Modules.tensorPullback a).obj G
-  have : IsIso (H.map c₀) := modulePullbackComparison_homology_zero_isIso a G c₀ hc₀
-  have : IsIso (H.map c) := modulePullbackComparison_homology_zero_isIso a G c hc
-  let e : H.obj (S.obj M) ≅ M :=
-    (DerivedCategory.singleFunctorCompHomologyFunctorIso C 0).app M
-  let α : M ≅ M := e.symm ≪≫ (asIso (H.map c₀)).symm ≪≫ asIso (H.map c) ≪≫ e
-  refine ⟨α, ?_⟩
-  have : ((derivedPullback a).obj ((DerivedCategory.singleFunctor
-      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj G)).IsLE 0 :=
-    modulePullback_single_isLE a G
-  apply (DerivedCategory.homologyFunctor_map_bijective_of_isLE_of_isGE 0).1
-  change H.map c = H.map (c₀ ≫ S.map α.hom)
-  rw [H.map_comp]
-  have hn := (DerivedCategory.singleFunctorCompHomologyFunctorIso C 0).hom.naturality
-    α.hom
-  change H.map (S.map α.hom) ≫ e.hom = e.hom ≫ α.hom at hn
-  apply (cancel_mono e.hom).1
-  rw [Category.assoc, hn]
-  simp [α, e]
+  exact modulePullbackComparison_degree_target_automorphism a G 0 c₀ c hc₀ hc
 
 
 end AlgebraicGeometry

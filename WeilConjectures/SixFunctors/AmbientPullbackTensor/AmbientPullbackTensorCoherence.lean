@@ -43,82 +43,6 @@ private theorem compositor_unit {X Y Z : Scheme.{t}}
     ((adjunction ell E g s).comp (adjunction ell E f s))
     (pushComp ell E f g s).hom M).symm
 
-private theorem compositor_generator {X Y Z : Scheme.{t}}
-    (f : X ⟶ Y) (g : Y ⟶ Z) (s : Option ℕ)
-    (M : Modules ell E Z s) (U : Site Z s) (V : Site Y s) (W : Site X s)
-    (p : V ⟶ (base g s).obj U) (q : W ⟶ (base f s).obj V)
-    (m : M.val.obj (op U)) (a : (coefficients ell E Y s).obj.obj (op V))
-    (b : (coefficients ell E X s).obj.obj (op W)) :
-    ((comp ell E f g s).hom.app M).val.app (op W)
-        (generator ell E f s ((pull ell E g s).obj M) V W q
-          (generator ell E g s M U V p m a) b) =
-      generator ell E (f ≫ g) s M U W
-        (q ≫ (base f s).map p ≫ (baseComp f g s).inv.app U) m
-        (scalar ell E f s V W q a * b) := by
-  let LgM := (pull ell E g s).obj M
-  let H := (pull ell E f s).obj LgM
-  let N := (pull ell E (f ≫ g) s).obj M
-  let c := (comp ell E f g s).hom.app M
-  let ef := (adjunction ell E f s).unit.app LgM
-  let eg := (adjunction ell E g s).unit.app M
-  let eh := (adjunction ell E (f ≫ g) s).unit.app M
-  have hu := congrArg (fun z ↦ z.val.app (op U) m) (compositor_unit ell E f g s M)
-  have he : c.val.app (op ((base f s).obj ((base g s).obj U)))
-      (ef.val.app (op ((base g s).obj U)) (eg.val.app (op U) m)) =
-      N.val.map ((baseComp f g s).inv.app U).op (eh.val.app (op U) m) := by
-    exact hu.trans ((pushComp_existsUnique ell E f g s).exists.choose_spec
-      N U (eh.val.app (op U) m))
-  let z : H.val.obj (op ((base f s).obj ((base g s).obj U))) :=
-    ef.val.app (op ((base g s).obj U)) (eg.val.app (op U) m)
-  let r := scalar ell E f s V W q a
-  have hs : ef.val.app (op V) (a • LgM.val.map p.op (eg.val.app (op U) m)) =
-      (ringComponent ell E f s (op V)).hom a •
-        H.val.map ((base f s).map p).op z := by
-    calc
-      _ = (ringComponent ell E f s (op V)).hom a •
-          (show H.val.obj (op ((base f s).obj V)) from
-            ef.val.app (op V) (LgM.val.map p.op (eg.val.app (op U) m))) :=
-        (ef.val.app (op V)).hom.map_smul a _
-      _ = _ := congrArg (fun y : H.val.obj (op ((base f s).obj V)) ↦
-          (ringComponent ell E f s (op V)).hom a • y)
-        (PresheafOfModules.naturality_apply ef.val p.op (eg.val.app (op U) m))
-  have ht : H.val.map q.op
-      ((ringComponent ell E f s (op V)).hom a • H.val.map ((base f s).map p).op z) =
-      r • H.val.map q.op (H.val.map ((base f s).map p).op z) :=
-    H.val.map_smul q.op ((ringComponent ell E f s (op V)).hom a) _
-  have hn : c.val.app (op W)
-      (H.val.map q.op (H.val.map ((base f s).map p).op z)) =
-      N.val.map q.op (N.val.map ((base f s).map p).op
-        (c.val.app (op ((base f s).obj ((base g s).obj U))) z)) := by
-    exact (PresheafOfModules.naturality_apply c.val q.op _).trans
-      (congrArg (fun y ↦ N.val.map q.op y)
-        (PresheafOfModules.naturality_apply c.val ((base f s).map p).op z))
-  change c.val.app (op W)
-      (b • H.val.map q.op
-        (ef.val.app (op V) (a • LgM.val.map p.op (eg.val.app (op U) m)))) =
-    (r * b) • N.val.map
-      (q ≫ (base f s).map p ≫ (baseComp f g s).inv.app U).op (eh.val.app (op U) m)
-  calc
-    _ = c.val.app (op W)
-        (b • H.val.map q.op ((ringComponent ell E f s (op V)).hom a •
-          H.val.map ((base f s).map p).op z)) :=
-      congrArg (fun y ↦ c.val.app (op W) (b • H.val.map q.op y)) hs
-    _ = c.val.app (op W)
-        (b • (r • H.val.map q.op (H.val.map ((base f s).map p).op z))) :=
-      congrArg (fun y ↦ c.val.app (op W) (b • y)) ht
-    _ = b • (r • c.val.app (op W)
-        (H.val.map q.op (H.val.map ((base f s).map p).op z))) :=
-      ((c.val.app (op W)).hom.map_smul b _).trans
-        (congrArg (fun y ↦ b • y) ((c.val.app (op W)).hom.map_smul r _))
-    _ = b • (r • N.val.map q.op (N.val.map ((base f s).map p).op
-        (N.val.map ((baseComp f g s).inv.app U).op (eh.val.app (op U) m)))) := by
-      rw [hn, he]
-    _ = _ := by
-      rw [smul_smul, mul_comm b]
-      congr 1
-      simp only [op_comp, PresheafOfModules.map_comp_apply]
-      rfl
-
 /-- Coherence of pullback composition with ordinary, chain and derived tensors.
 Source: Stacks 03D3, 03CB, 03EL, 07A4, 0G7E and 04VG
 (blueprint: lem-sf-ambient-pullback-tensor-coherence).
@@ -198,17 +122,101 @@ theorem ambientPullbackTensorCoherence
             ((derivedComp ell E f g s).hom.app G)) =
         (derivedComp ell E f g s).hom.app (A.tensor.obj (F, G)) ≫
           (tensorData ell E (f ≫ g) s A C TA TC).mu.hom.app (F, G) := by
+  have compositor_generator (M : Modules ell E Z s) (U : Site Z s) (V : Site Y s) (W : Site X s)
+      (p : V ⟶ (base g s).obj U) (q : W ⟶ (base f s).obj V)
+      (m : M.val.obj (op U)) (a : (coefficients ell E Y s).obj.obj (op V))
+      (b : (coefficients ell E X s).obj.obj (op W)) :
+      ((comp ell E f g s).hom.app M).val.app (op W)
+          (generator ell E f s ((pull ell E g s).obj M) V W q
+            (generator ell E g s M U V p m a) b) =
+        generator ell E (f ≫ g) s M U W
+          (q ≫ (base f s).map p ≫ (baseComp f g s).inv.app U) m
+          (scalar ell E f s V W q a * b) := by
+    let : ∀ (T : Scheme.{t}) (P : Modules ell E T s)
+        {U V : (Site T s)ᵒᵖ} (i : U ⟶ V),
+        MulAction ((coefficients ell E T s).obj.obj V)
+          ((ModuleCat.restrictScalars
+            ((ring (topology T s) (coefficients ell E T s)).obj.map i).hom).obj
+              (P.val.obj V)) :=
+      fun _ P {_ _} _ ↦ (P.val.obj _).isModule.toDistribMulAction.toMulAction
+    let LgM := (pull ell E g s).obj M
+    let H := (pull ell E f s).obj LgM
+    let N := (pull ell E (f ≫ g) s).obj M
+    let c := (comp ell E f g s).hom.app M
+    let ef := (adjunction ell E f s).unit.app LgM
+    let eg := (adjunction ell E g s).unit.app M
+    let eh := (adjunction ell E (f ≫ g) s).unit.app M
+    have hu := congrArg (fun z ↦ z.val.app (op U) m) (compositor_unit ell E f g s M)
+    have he : c.val.app (op ((base f s).obj ((base g s).obj U)))
+        (ef.val.app (op ((base g s).obj U)) (eg.val.app (op U) m)) =
+        N.val.map ((baseComp f g s).inv.app U).op (eh.val.app (op U) m) := by
+      exact hu.trans ((pushComp_existsUnique ell E f g s).exists.choose_spec
+        N U (eh.val.app (op U) m))
+    let z : H.val.obj (op ((base f s).obj ((base g s).obj U))) :=
+      ef.val.app (op ((base g s).obj U)) (eg.val.app (op U) m)
+    let r := scalar ell E f s V W q a
+    have hs : ef.val.app (op V) (a • LgM.val.map p.op (eg.val.app (op U) m)) =
+        (ringComponent ell E f s (op V)).hom a •
+          (show H.val.obj (op ((base f s).obj V)) from
+            H.val.map ((base f s).map p).op z) := by
+      calc
+        _ = (ringComponent ell E f s (op V)).hom a •
+            (show H.val.obj (op ((base f s).obj V)) from
+              ef.val.app (op V) (LgM.val.map p.op (eg.val.app (op U) m))) :=
+          (ef.val.app (op V)).hom.map_smul a _
+        _ = _ := congrArg (fun y : H.val.obj (op ((base f s).obj V)) ↦
+            (ringComponent ell E f s (op V)).hom a • y)
+          (PresheafOfModules.naturality_apply ef.val p.op (eg.val.app (op U) m))
+    have ht : H.val.map q.op
+        ((ringComponent ell E f s (op V)).hom a •
+          (show H.val.obj (op ((base f s).obj V)) from
+            H.val.map ((base f s).map p).op z)) =
+        r • H.val.map q.op (H.val.map ((base f s).map p).op z) :=
+      H.val.map_smul q.op ((ringComponent ell E f s (op V)).hom a) _
+    have hn : c.val.app (op W)
+        (H.val.map q.op (H.val.map ((base f s).map p).op z)) =
+        N.val.map q.op (N.val.map ((base f s).map p).op
+          (c.val.app (op ((base f s).obj ((base g s).obj U))) z)) := by
+      exact (PresheafOfModules.naturality_apply c.val q.op _).trans
+        (congrArg (fun y ↦ N.val.map q.op y)
+          (PresheafOfModules.naturality_apply c.val ((base f s).map p).op z))
+    change c.val.app (op W)
+        (b • H.val.map q.op
+          (ef.val.app (op V) (a • LgM.val.map p.op (eg.val.app (op U) m)))) =
+      (r * b) • N.val.map
+        (q ≫ (base f s).map p ≫ (baseComp f g s).inv.app U).op (eh.val.app (op U) m)
+    calc
+      _ = c.val.app (op W)
+          (b • H.val.map q.op ((ringComponent ell E f s (op V)).hom a •
+            (show H.val.obj (op ((base f s).obj V)) from
+              H.val.map ((base f s).map p).op z))) :=
+        congrArg (fun y ↦ c.val.app (op W) (b • H.val.map q.op y)) hs
+      _ = c.val.app (op W)
+          (b • (r • H.val.map q.op (H.val.map ((base f s).map p).op z))) :=
+        congrArg (fun y ↦ c.val.app (op W) (b • y)) ht
+      _ = b • (r • c.val.app (op W)
+          (H.val.map q.op (H.val.map ((base f s).map p).op z))) :=
+        ((c.val.app (op W)).hom.map_smul b _).trans
+          (congrArg (fun y ↦ b • y) ((c.val.app (op W)).hom.map_smul r _))
+      _ = b • (r • N.val.map q.op (N.val.map ((base f s).map p).op
+          (N.val.map ((baseComp f g s).inv.app U).op (eh.val.app (op U) m)))) := by
+        rw [hn, he]
+      _ = _ := by
+        rw [smul_smul, mul_comm b]
+        congr 1
+        simp only [op_comp, PresheafOfModules.map_comp_apply]
+        rfl
   have hf := (tensorData_existsUnique ell E f s B C TB TC).exists.choose_spec
   have hg := (tensorData_existsUnique ell E g s A B TA TB).exists.choose_spec
   have hfg := (tensorData_existsUnique ell E (f ≫ g) s A C TA TC).exists.choose_spec
   obtain ⟨ho, hc, hd⟩ := normalizedTensor_composition ell E f g s A B C TA TB TC
     (tensorData ell E f s B C TB TC) (tensorData ell E g s A B TA TB)
     (tensorData ell E (f ≫ g) s A C TA TC) hf hg hfg
-    (compositor_generator ell E f g s)
+    compositor_generator
   exact ⟨pullback_compositionLaws ell E _ s,
     ⟨coefficientPullback_isIso ell E f s, coefficientPullback_isIso ell E g s,
       coefficientPullback_isIso ell E (f ≫ g) s⟩,
     ringMap_composition ell E f g s, ⟨hf, hg, hfg⟩,
-    compositor_unit ell E f g s, compositor_generator ell E f g s, ho, hc, hd⟩
+    compositor_unit ell E f g s, compositor_generator, ho, hc, hd⟩
 
 end WeilConjectures.AmbientPullbackTensor

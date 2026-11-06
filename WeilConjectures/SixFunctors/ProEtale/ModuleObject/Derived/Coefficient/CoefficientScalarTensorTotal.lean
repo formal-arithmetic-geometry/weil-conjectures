@@ -32,6 +32,8 @@ attribute [local irreducible] DerivedCategory.monoidalClosed CategoryTheory.Mod.
   ModuleRingedComparison.qTensor
   Localization.Monoidal.tensorBifunctor
 
+-- Keep prolongation functors transparent during implicit object matching.
+
 variable {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S]
   (a : R ⟶ S) [IsMonHom a]

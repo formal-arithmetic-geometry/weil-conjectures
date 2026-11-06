@@ -514,7 +514,7 @@ private def exactComposition
     [Limits.PreservesFiniteLimits G] [Limits.PreservesFiniteColimits G]
     [Limits.PreservesFiniteLimits H] [Limits.PreservesFiniteColimits H]
     (e : F ⋙ G ≅ H) : F.mapDerivedCategory ⋙ G.mapDerivedCategory ≅ H.mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso F G).symm ≪≫ Functor.mapDerivedCategoryNatIso e
+  Functor.mapDerivedCategoryCompIso F G ≪≫ Functor.mapDerivedCategoryNatIso e
 
 private theorem exactComposition_fac
     {A B C : Type*} [Category A] [Category B] [Category C]
@@ -534,7 +534,7 @@ private theorem exactComposition_fac
   dsimp only [exactComposition, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app]
   rw [Category.assoc, Functor.mapDerivedCategoryNatIso_fac]
   rw [← Functor.mapDerivedCategoryCompIso_hom_app_factors F G]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
   rfl
 
 private theorem exactComposition_inv_fac

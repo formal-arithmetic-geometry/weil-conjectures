@@ -340,3 +340,14 @@
   BUILD-BZ978-downstream1-full.log, and BUILD-BZ978-downstream2-full.log under ~/u9/bz/.
 - Final records: ~/u9/bz/FIXES-BZ978.md and ~/u9/state/BZ978.DONE.
 - This completion commit changes only progress documentation.
+
+
+# BZ1001 in progress
+
+- Branch: u9/BZ1001; baseline b5510fe234428620f0e0c56150bc6fd58787e621.
+- The user instructed continuation after the explicit four-line compositor proposal.
+- Applied the two component direction updates in kept private exactSquareFactors
+  and the corresponding inverse cancellation proof. Other statements are unchanged.
+- Next: remote validation of the assigned leaf and its first two downstream layers.
+- Fix records and baseline log: /home/ubuntu/u9/bz/FIXES-BZ1001.md.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
