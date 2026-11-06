@@ -639,11 +639,11 @@ private theorem derive_chain
     (M : DerivedCategory A₂) :
     (Functor.mapDerivedCategorySquareIso e₀₂).hom.app M =
       Q₀.mapDerivedCategory.map
-        (((Functor.mapDerivedCategoryCompIso R₂₁ R₁₀).symm ≪≫
+        ((Functor.mapDerivedCategoryCompIso R₂₁ R₁₀ ≪≫
           Functor.mapDerivedCategoryNatIso r).inv.app M) ≫
       (Functor.mapDerivedCategorySquareIso e₀₁).hom.app (R₂₁.mapDerivedCategory.obj M) ≫
       U₁₀.mapDerivedCategory.map ((Functor.mapDerivedCategorySquareIso e₁₂).hom.app M) ≫
-      ((Functor.mapDerivedCategoryCompIso U₂₁ U₁₀).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso U₂₁ U₁₀ ≪≫
         Functor.mapDerivedCategoryNatIso t).hom.app (Q₂.mapDerivedCategory.obj M) := by
   have hi (N : A₂) : e₀₂.inv.app N ≫ Q₀.map (r.inv.app N) =
       t.inv.app (Q₂.obj N) ≫ U₁₀.map (e₁₂.inv.app N) ≫ e₀₁.inv.app (R₂₁.obj N) := by
@@ -1386,7 +1386,7 @@ private theorem conjugate_leftDerivedUpperStarComp_hom
       (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) (f ≫
         g)).mapDerivedCategoryRightDerivedAdjunction
       (Functor.mapDerivedCategoryNatIso (upperStarComp (ModuleCat.{u + 1} A) f g) ≪≫
-        Functor.mapDerivedCategoryCompIso _ _).hom := by
+        (Functor.mapDerivedCategoryCompIso _ _).symm).hom := by
   have := @cachedEtaleGroth.{u}
   have := @cachedEtaleSheafify.{u}
   rw [mapDerivedAdjunction_eq, mapDerivedAdjunction_eq, mapDerivedAdjunction_eq]
@@ -1747,7 +1747,7 @@ private theorem plus_square_hom
       (upperStar (ModuleCat.{u + 1} A) f)).app N)
     ((Functor.mapDerivedCategoryCompIso
       (Sheaf.restrictScalars X.smallEtaleTopology φ)
-      (upperStar (ModuleCat.{u + 1} A) f)).app N.obj) rfl rfl
+      (upperStar (ModuleCat.{u + 1} A) f)).symm.app N.obj) rfl rfl
     (by simpa using (Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app
       (Sheaf.restrictScalars X.smallEtaleTopology φ)
       (upperStar (ModuleCat.{u + 1} A) f) N))
