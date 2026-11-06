@@ -12,6 +12,7 @@ public import WeilConjectures.Algebra.Homology.Strict.StrictPerfectCoefficientPa
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Projection.ProEtaleProjectionFormulaArrows
 public import WeilConjectures.Algebra.Homology.RingedTensorCorner.ProjectionMateExact
 public import WeilConjectures.Algebra.Homology.FixedTensorLocalization.FixedTensorLocalizationComparison
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
 import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleMixedProjectionMate
 
 /-! # Normalized signed projection formula on chosen resolutions
