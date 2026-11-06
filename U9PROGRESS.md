@@ -299,18 +299,32 @@
 - Next: ucheck-bump on the five prerequisites and SupportedKoszulRelativeDetector, then downstream.
 - Fix notes: /home/ubuntu/u9/bz/FIXES-BZ932.md. No local Lean/Lake or proof shortcuts.
 
-# BZ941 in progress
+# BZ943 in progress
 
-- Branch: u9/BZ941; baseline c59b55069.
-- The user instructed continuation after the exact one-line public-statement proposal.
-- Applied BZ941-public-statement-proposal.patch: cast (by rfl) around the unit map
-  in section_derived_tensor_normalization. All other declaration headers are unchanged.
-- Six other failures were resolved by implementation imports, reflexive unitor
-  transports, and cast normalization in the unit proof.
-- Next: ucheck-bump for the assigned leaf, then its five direct importers and further
-  downstream modules up to the brief's limit of 30 extra modules.
-- Notes and logs: /home/ubuntu/u9/bz/FIXES-BZ941.md.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
-- First continuation build accepted the proposed unit-map cast and exposed the same
-  hidden-unit mismatch in the public theorem's identity constraint. Applied the same
-  reflexive transport to that identity, with tensorUnit Λ T explicit, and revalidating.
+- Branch: `u9/BZ943`; starting commit: `c59b55069`.
+- Baseline at `19d501377e` confirmed that the sole assigned error is a deleted
+  `finiteQuotient_layer_local_complexes` dependency.
+- The user instructed continuation after the six-module restoration proposal.
+  Restored nine historical declaration headers unchanged; all existing declarations
+  and the assigned theorem statement are preserved.
+- The two Mathlib compositor directions are ported. The remaining category synthesis
+  failure now uses the known local Category bridge across the two equivalent ring
+  presentations on the slice, plus an explicit slice category in `singleFunctor`.
+  Registering `HasDerivedCategory.standard` alone did not fix this case.
+- Assigned module and all six restored prerequisite modules are GREEN at `68a2db882848fd4f3e254310b71880a537fc0206`.
+  `ucheck-bump`: rc=0, failed=0, 7193 jobs, poolb:43.157.135.193.
+  Full log: `/home/ubuntu/u9/bz/BUILD-BZ943-restoration4-full.log`.
+- First downstream chain: `FiniteQuotientFiniteModuleCohomology`,
+  `FiniteQuotientFiniteModuleModels`, `FinitePerfectQuotientModels`.
+- Evidence, exact errors, patterns and whole-tree counts:
+  `/home/ubuntu/u9/bz/FIXES-BZ943.md`.
+- Statement audit: `/home/ubuntu/u9/bz/BZ943-final-statement-audit.json`.
+- No local Lean/Lake execution, proof placeholders, new axioms, trust bypasses,
+  profiler probes, or heartbeat increases.
+
+- Downstream layers 1–3 were attempted together and all are blocked by the unowned
+  `SingleComplexOpenPullbackCounitHomotopyFactorization` duplicate-declaration error
+  at line 53. Complete import paths are recorded in
+  `/home/ubuntu/u9/bz/BZ943-downstream-blocker-paths.json`.
+- Final assigned-module build is checking `#print axioms` for the filtration theorem;
+  the diagnostic command will be removed before final completion.
