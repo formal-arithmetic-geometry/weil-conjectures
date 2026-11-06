@@ -28,7 +28,59 @@ jobs:
 
     steps:
       - uses: actions/checkout@v5
+
+      # elan, the toolchain and the Mathlib cache; the build is the step below.
+      # No GitHub cache: the self-hosted runner's workspace survives between
+      # runs, and lean-action's GitHub cache tars the whole `.lake` on every
+      # run (keyed on the commit, so it never hits).
       - uses: leanprover/lean-action@v1
+        with:
+          build: false
+          test: false
+          lint: false
+          use-github-cache: false
+
+      # The project's own oleans from the cluster's Lake cache (Garage on the
+      # k3s cluster), which holds the builds of `slopmaster2`. A pull request
+      # from `slopmaster2` then compiles only what its merge commit changes,
+      # instead of every module of the project. Best effort: on a miss the
+      # build below simply compiles more.
+      - name: Fetch the project's build from the cluster's Lake cache
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          config="$RUNNER_TEMP/lake-config.toml"
+          cat > "$config" <<'TOML'
+          cache.defaultService = "garage"
+
+          [[cache.service]]
+          name = "garage"
+          kind = "s3"
+          artifactEndpoint = "http://13.140.132.28:3900/lake-cache/a"
+          revisionEndpoint = "http://13.140.132.28:3900/lake-cache/r"
+          TOML
+          echo "LAKE_CONFIG=$config" >> "$GITHUB_ENV"
+          echo "LAKE_CACHE_DIR=$HOME/.cache/lake" >> "$GITHUB_ENV"
+          export LAKE_CONFIG="$config" LAKE_CACHE_DIR="$HOME/.cache/lake"
+          # Downloads older than two weeks: what is still needed comes again.
+          find "$LAKE_CACHE_DIR" -type f -mtime +14 -delete 2>/dev/null || true
+          env -u ELAN_TOOLCHAIN "$(elan which lake)" cache get \
+            --repo formal-arithmetic-geometry/weil-conjectures --max-revs 30
+
+      # Four concurrent Lean processes: the algebraic-geometry files peak at
+      # about 5.5 GiB each, and the runner VM has 32 GiB. This Lake has no jobs
+      # flag; its scheduler runs on Lean's thread pool, which this sizes.
+      - name: Build
+        env:
+          LEAN_NUM_THREADS: "4"
+        run: lake build
+
+      # Lake writes a module's `.setup.json` (its import closure, as absolute
+      # paths, about 2 MB) just before compiling it and reads it only then.
+      # Thousands of them fill the runner's disk.
+      - name: Drop the compiler's setup files
+        if: always()
+        run: find .lake/build -name '*.setup.json' -delete 2>/dev/null || true
 
       # Same check as `.orchestra/validation.sh`: every tracked `.lean` file
       # under `WeilConjectures/` must be imported by `WeilConjectures.lean`,
