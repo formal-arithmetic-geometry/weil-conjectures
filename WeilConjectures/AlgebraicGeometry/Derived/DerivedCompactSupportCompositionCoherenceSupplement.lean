@@ -55,11 +55,11 @@ private lemma derived_triangle_assoc
       (Functor.mapDerivedCategoryTriangleIso eFG_H).hom ≫
         Functor.whiskerRight (Functor.mapDerivedCategoryTriangleIso eFG).hom
           H.mapDerivedCategory := by
-  simp only [Functor.mapDerivedCategoryTriangleIso, Iso.trans_hom,
+  simp only [Functor.mapDerivedCategoryTriangleIso, Iso.trans_hom, Iso.symm_hom,
     Functor.whiskerLeft_comp, Functor.whiskerRight_comp, Category.assoc]
-  rw [← Category.assoc (Functor.mapDerivedCategoryCompIso F GH).hom,
+  rw [← Category.assoc (Functor.mapDerivedCategoryCompIso F GH).inv,
     ← Functor.mapDerivedCategoryNatIso_isoWhiskerLeft,
-    Category.assoc, ← Category.assoc (Functor.mapDerivedCategoryCompIso FG H).hom,
+    Category.assoc, ← Category.assoc (Functor.mapDerivedCategoryCompIso FG H).inv,
     ← Functor.mapDerivedCategoryNatIso_isoWhiskerRight]
   simp only [← Category.assoc]
   rw [← Functor.mapDerivedCategoryNatIso_trans, h,
@@ -166,7 +166,7 @@ private lemma push_derived_assoc
   simpa only [eqToHom_refl, Category.comp_id, Category.assoc] using hm
 
 attribute [local irreducible] rightDerivedLowerStarComp
-  Functor.mapDerivedCategoryNatIso Functor.mapDerivedCategoryCompIso
+  Functor.mapDerivedCategoryNatIso
   openImmersionLowerShriekComp Functor.rightDerivedFunctor Functor.mapDerivedCategory
   lowerStar openImmersionLowerShriek
 

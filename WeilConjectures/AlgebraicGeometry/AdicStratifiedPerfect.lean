@@ -29,21 +29,21 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated Opposite
 open scoped ZeroObject MonoidalClosed.FunctorCategory
 
+attribute [local instance] HasDerivedCategory.standard
+
 private theorem sfbCompleteModel_triangulated
     {C : Type (u + 1)} [SmallCategory C] {J : GrothendieckTopology C}
     {O S : Sheaf J CommRingCat.{u + 1}} (q : O ⟶ S) :
     ObjectProperty.IsClosedUnderIsomorphisms (ConstantCompletion.IsComplete q) ∧
       ObjectProperty.IsTriangulated (ConstantCompletion.IsComplete q) := by
   classical
-  let := HasDerivedCategory.standard (ConstantCompletion.Mod O)
-  let := fun U : C ↦ HasDerivedCategory.standard (ConstantCompletion.Mod (O.over U))
   let P : ObjectProperty (ConstantCompletion.D O) := ConstantCompletion.IsComplete q
   let hRshift (U : C) : (ringedDerivedRestriction O U).CommShift ℤ := by
-    unfold ringedDerivedRestriction
-    infer_instance
+    exact inferInstanceAs ((SheafOfModules.overFunctor
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O) U).mapDerivedCategory.CommShift ℤ)
   let hRtri (U : C) : (ringedDerivedRestriction O U).IsTriangulated := by
-    unfold ringedDerivedRestriction
-    infer_instance
+    exact inferInstanceAs ((SheafOfModules.overFunctor
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O) U).mapDerivedCategory.IsTriangulated)
   let H (U : C) (f : O.obj.obj (op U)) :=
     (Functor.curry.obj (derivedInternalHom (J.over U) (O.over U))).obj
       (op ((DerivedCategory.singleFunctor _ 0).obj

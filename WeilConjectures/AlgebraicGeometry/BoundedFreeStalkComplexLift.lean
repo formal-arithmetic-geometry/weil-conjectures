@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
+public import Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 import WeilConjectures.AlgebraicGeometry.BoundedFreeStalkComplexLocalLift
 

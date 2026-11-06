@@ -12,6 +12,7 @@ public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.CategoryTheory.RingedSiteModules
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous
@@ -168,6 +169,7 @@ import Mathlib.Algebra.Category.Grp.Colimits
 import WeilConjectures.CategoryTheory.SitePullbackAbelianUnderlying
 import WeilConjectures.CategoryTheory.NatTransFromResolvingClass
 import Mathlib.Algebra.Homology.DerivedCategory.Fractions
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # Descent of a supplied scalar chain comparison along a scheme isomorphism
 
