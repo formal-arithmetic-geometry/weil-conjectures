@@ -254,9 +254,9 @@ private theorem openTensor_exact_square_fac (e : E ⋙ FB ≅ FA ⋙ E')
     NatTrans.comp_app, Category.assoc]
   rw [Functor.mapDerivedCategoryCompIso_hom_app_factors,
     Functor.mapDerivedCategoryNatIso_fac]
-  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso E FB).hom.app
+  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso E FB).inv.app
     (DerivedCategory.Q.obj K))).1
-  rw [Iso.hom_inv_id_app_assoc,
+  rw [Iso.inv_hom_id_app_assoc,
     Functor.mapDerivedCategoryCompIso_hom_app_factors_assoc]
   all_goals rfl
 
