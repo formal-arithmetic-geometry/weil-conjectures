@@ -73,4 +73,5 @@ variable {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [∀ Z : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules R Z)]
   [∀ Z : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules S Z)]
 
+
 end AlgebraicGeometry.ProEtale.CondensedRing

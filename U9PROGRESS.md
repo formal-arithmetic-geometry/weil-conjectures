@@ -344,13 +344,24 @@
 
 # BZ995 in progress
 
-- Branch: u9/BZ995; original base f6b78661b.
+- Branch: u9/BZ995; original base f6b78661b. Latest merged upstream: 600cbb22f6.
 - The user instructed continuation after the concrete deleted-helper restoration proposal.
-- Restored derivedReduction_augmentationOfCounits in its original file, preserving its
+- Restored derivedReduction_augmentationOfCounits in its original file, preserving
   assumptions and updating the two compositor directions for Mathlib b63f6e8a.
-- Reuses the existing Functor.exactSquare_fac through import all; no duplicate helper.
-- Assigned module statements are unchanged. The first ucheck-bump confirmed that the
-  opaque attribute removal and direct tower-unit normalization resolve two errors.
-- Next: ucheck-bump for the restored helper, assigned module, and direct importer
-  StratumCompletionUnitRestriction, then continue downstream as the brief requires.
-- Fix log: /home/ubuntu/u9/bz/FIXES-BZ995.md. No local Lean/Lake or forbidden proof shortcuts.
+- Reuses existing Functor.exactSquare_fac through import all; explicitly normalizes
+  the square abbreviation and local complex maps in its proof.
+- Assigned module statements unchanged. Opaque attribute removed; unit normalization
+  used directly in stratumUnit_formula.
+- Leaf and restored helper GREEN at 41813670bfe87e2d5b3bcaf1fd71cd54918a8c63:
+  rc=0, 6676 jobs, both targets freshly rebuilt. Log BUILD-BZ995-green-full.log.
+- First direct-importer attempt hit BZ994's foreign prerequisite failure. Upstream
+  repaired it; merged and retried. Current ucheck session targets the helper, leaf,
+  and StratumCompletionUnitRestriction; remote log BZ995-20261106T095318.log.
+- While that build runs, prepared the known compositor-direction body repair in
+  stratumTowerEvaluationIso. Its declared type is unchanged; it has external callers.
+- Fix log: /home/ubuntu/u9/bz/FIXES-BZ995.md. No local Lean/Lake or forbidden shortcuts.
+
+- Direct importer GREEN at 85044280a3cc2cf26d4502e6f6d613f58296a6c3: rc=0, 6854 jobs.
+  Helper, assigned module, and StratumCompletionUnitRestriction freshly rebuilt;
+  remote log BZ995-20261106T095815.log. Proceeding to four targets covering 13 direct
+  importers of StratumCompletionUnitRestriction.
