@@ -215,7 +215,8 @@ private lemma betaScalarCounit_eq {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ')
     (Z : Scheme.{u}) (C : CochainComplex (ModuleRingedComparison.internalModules Λ.X Z) ℤ) :
     scalarCounit a Z C = (Mod.KFlatScalarTower.computationCounit (betaMap a Z)).app C := by
   simp [scalarCounit, Mod.KFlatScalarTower.computationCounit,
-    Functor.mapHomotopyCategoryFactors_hom_app]
+    Functor.mapHomotopyCategoryFactors_hom_app, scalarSixChange, scalarSixAdjunctionLeft,
+    betaMap]
 
 private def betaScalarCounit {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ') (Z : Scheme.{u}) :
     DerivedCategory.Q ⋙ scalarSixChange a Z ⟶
