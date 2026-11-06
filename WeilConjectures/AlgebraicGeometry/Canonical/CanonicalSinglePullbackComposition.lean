@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Picard.CanonicalSinglePullbackComparison
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.Picard.HomotopySinglePullbackComposition
 import WeilConjectures.AlgebraicGeometry.PerfectHomCochainCounit
 
