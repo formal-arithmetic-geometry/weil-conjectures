@@ -423,3 +423,39 @@
 - No local Lean/Lake, proof placeholders, trust bypasses, declaration deletions,
   profiler probes, or heartbeat changes. Both rewrite rules replay the exact diff.
 - All ucheck invocations finished. This final commit changes documentation only.
+
+
+# BZ1036 downstream verification
+
+- Downstream validated repairs: CompletedExtensionZeroComparison (91s),
+  CompletedTowerDirectImageSupplement (40s), CompletedPullbackReducedUnit (6.7s).
+- FourArrows proof repair removes redundant identity rewrites and closes the resulting
+  definitional equalities with rfl; current remote run validates its final form.
+- Current build: source 5e101668aadf305d0c7ee345eff3caaa47a68b68,
+  /home/ubuntu/u9/logs/BZ1036-20261106T120156.log; one active ucheck-bump.
+  Targets: CompletedDirectImageLimits, CompletedOpenKFlat,
+  CompletedPullbackReductionArrowIsIso, RingedOpenStrictReduction,
+  PbcFinitePullbackConstructibility, PbcCompletedPullbackActualSupplement.
+- Upstream 9b2169990912 merged. ComparisonSquarePaths still has two compositor
+  mismatches after upstream's partial fix; FiniteQuotientTransitionCompatibility
+  still fails in a statement and a category instance. These are outside this unit.
+- Prepared open-exchange edits were reverted because that module depends on the
+  failing finite transition module; deferred patch is BZ1036-open-exchange-deferred.patch.
+- Active source changes are six files. Five non-restoration patches replay exactly
+  from BZ1036-rewrite-rules.json, BZ1036-downstream-rules.json, and
+  BZ1036-fourarrows-rules.json. Statement/docstring audit: BZ1036-contract-audit.json.
+
+- Build 120156 finished: FourArrows GREEN (41s), all six changed modules rebuilt
+  successfully. Twelve downstream modules are green in total. The mixed batch was
+  red only in ComparisonSquarePaths and CompletedDirectImageLimits.
+- CompletedDirectImageLimits first fails at 398:6 in the statement of
+  evaluationSquare_inverse. Its compositor has the old orientation. The same
+  problem affects evaluationComparison_mate; repairing these statement expressions
+  exceeds this unit's proof/import-only scope. The unused-list deletion alternative
+  is blocked by surviving callers (including constantEvaluationIso/factors in
+  CompletedPullbackFiniteMate). This file remains unchanged.
+- All remaining direct importers of the green frontier reach one of three blockers:
+  CompletedDirectImageLimits, FiniteQuotientTransitionCompatibility, or
+  ComparisonSquarePaths. Full paths: BZ1036-frontier-progress.json.
+- No ucheck is active. Next: merge the newly fetched upstream snapshot, run a clean
+  batch of the six changed modules, finalize FIXES and DONE, commit and push.
