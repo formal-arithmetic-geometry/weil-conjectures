@@ -51,13 +51,12 @@ theorem isSplitMono_map_baseChangeMap_app_padicSubfield_of_padicIntegers [QuasiC
         ((Mod.extendScalars (coefficientMap (padicIntegersRingObjToContinuousMapRingObj ℓ E)
           X)).leftDerivedFunctor.obj K₀))) := by
   have := isGE_leftDerivedUpperStar_obj (Profinite.padicIntegersRingObj ℓ E.1) g' K₀ n
-  have hE := isSplitMono_map_baseChangeMap_app_derivedExtendScalars
+  exact isSplitMono_map_baseChangeMap_app_derivedExtendScalars
     (padicIntegersRingObjToContinuousMapRingObj ℓ E) (derivedPullIsoCompCoherence _) sq i K₀
     (isIso_derivedPushHom_app_padicIntegers_of_isGE ℓ E p K₀ n)
     (isIso_derivedPushHom_app_padicIntegers_of_isGE ℓ E p'
       ((g')^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧.leftDerivedFunctor.obj K₀) n)
-    (by exact_mod_proofs h)
-  exact_mod_proofs hE
+    h
 
 end Coefficients
 

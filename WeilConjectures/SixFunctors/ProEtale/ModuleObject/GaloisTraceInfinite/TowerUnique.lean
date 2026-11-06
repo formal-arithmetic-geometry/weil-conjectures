@@ -215,10 +215,14 @@ lemma scal_comp_nsmul_of_ne (i : D.ι) (hi : i ≠ D.i₀) (n : ℤ) :
 
 /-- The coproduct `∐ᵢ M∞` of complexes, computed termwise. -/
 noncomputable def cofan : Cofan (fun _ : D.ι ↦ M∞) :=
+  let mkCofan {C : Type _} [Category* C] [HasZeroMorphisms C]
+      [HasColimitsOfShape (Discrete D.ι) C] (N : CochainComplex C ℤ) :
+      Cofan (fun _ : D.ι ↦ N) :=
+    HomologicalComplex.coconeOfHasColimitEval (Discrete.functor fun _ : D.ι ↦ N)
   haveI : HasColimitsOfShape (Discrete D.ι)
       (CategoryTheory.Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :=
     inferInstance
-  HomologicalComplex.coconeOfHasColimitEval (Discrete.functor fun _ : D.ι ↦ M∞)
+  mkCofan M∞
 
 /-- The cofan `MoebiusDecomposition.cofan` is a coproduct. -/
 noncomputable def isColimitCofan : IsColimit D.cofan :=

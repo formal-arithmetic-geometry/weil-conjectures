@@ -541,7 +541,9 @@ theorem trace_eq_trace_add_trace_of_distTriang [IsSepClosed k]
     ι.trace_eq_unitEndRingHom_trace v (ι.map v) (Iso.refl _) (by simp)
   have hinj : Function.Injective ι.unitEndRingHom := fun a b h ↦ by
     rw [Functor.unitEndRingHom_apply, Functor.unitEndRingHom_apply] at h
-    exact ι.map_injective ((cancel_mono _).1 (by simpa [ι] using h))
+    apply ι.map_injective
+    change 𝟙 _ ≫ ι.map a ≫ 𝟙 _ = 𝟙 _ ≫ ι.map b ≫ 𝟙 _ at h
+    simpa only [Category.id_comp, Category.comp_id] using h
   apply hinj
   rw [RingHom.map_add, ← key, ← key, ← key]
   exact trace_eq_trace_add_trace_of_distTriang_of_shiftDecomposition ℓ k

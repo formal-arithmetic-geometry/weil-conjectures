@@ -57,8 +57,11 @@ theorem isIso_map_baseChangeMap_app_padicAlgCl_of_padicSubfield [QuasiCompact p]
     (isIso_derivedPushHom_app_padicSubfieldRingObjToPadicAlgCl_of_isGE ℓ E p K n)
     (isIso_derivedPushHom_app_padicSubfieldRingObjToPadicAlgCl_of_isGE ℓ E p'
       ((g')^*⟦Profinite.continuousMapRingObj E.1⟧.leftDerivedFunctor.obj K) n)
-    (by exact_mod_proofs h)
-  exact_mod_proofs hA
+  -- Align the proofs of `Precoherent Profinite` before applying the coefficient-change theorem.
+  revert h hA
+  normalize_precoherent
+  intro h hA
+  exact hA h
 
 end Coefficients
 
