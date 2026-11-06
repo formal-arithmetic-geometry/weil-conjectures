@@ -102,7 +102,8 @@ private theorem plus_unit_resolution {C D : Type*} [Category C] [Category D] [Ab
     change 𝟙 _ ≫ DerivedCategory.Plus.Qh.map (𝟙 _) ≫
       F.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.singleFunctor C 0).obj M) ≫
       F.rightDerivedFunctorPlus.map (𝟙 _) = _
-    erw [Functor.map_id, Functor.map_id, Category.id_comp, Category.id_comp, Category.comp_id]
+    erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id, Category.id_comp,
+      Category.id_comp, Category.comp_id]
   rw [← hu, ← Category.assoc, ← h, Category.assoc, IsIso.hom_inv_id, Category.comp_id]
   rfl
 
@@ -142,6 +143,13 @@ private theorem unit_homology_resolution {C D : Type*}
   change (DerivedCategory.Plus.homologyFunctor D n).map
       (DerivedCategory.Plus.Q.map g) ≫ _ = _
   erw [reassoc_of% h]
+  dsimp only [DerivedCategory.Plus.homologyFunctorObjQIso, Iso.app_hom, Iso.trans_hom]
+  rw [DerivedCategory.homologyFunctorFactorsh_hom_app_quotient_obj]
+  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  erw [show (DerivedCategory.quotientCompQhIso D).hom.app
+      ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj
+        ((CochainComplex.singleFunctor C 0).obj M)) = 𝟙 _ from rfl,
+    CategoryTheory.Functor.map_id, Category.id_comp]
   rfl
 
 set_option backward.defeqAttrib.useBackward true in
@@ -297,15 +305,13 @@ theorem canonicalDirectImageH0Unit {X S : Scheme.{u}} (f : X ⟶ S)
   erw [reassoc_of% hn, reassoc_of% hn']
   erw [← HomologicalComplex.homologyMap_comp_assoc, reassoc_of% h']
   erw [Functor.rightDerivedZeroIsoSelf_inv_hom_id_app, Category.comp_id]
-  change _ = ((DerivedCategory.singleFunctorCompHomologyFunctorIso D 0).app (F.obj M)).hom
-  dsimp [DerivedCategory.singleFunctorCompHomologyFunctorIso]
-  simp only [DerivedCategory.singleFunctorsPostcompQIso_hom_hom]
-  simp only [NatTrans.id_app, Category.id_comp]
-  erw [CategoryTheory.Functor.map_id, Category.id_comp]
   erw [DerivedCategory.homologyFunctorFactorsh_hom_app_quotient_obj]
-  dsimp [DerivedCategory.quotientCompQhIso,
-    HomologicalComplexUpToQuasiIso.quotientCompQhIso]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
-  erw [CategoryTheory.Functor.map_id, Category.id_comp]
+  simp only [Category.assoc]
+  erw [Iso.inv_hom_id_app_assoc]
+  erw [show (DerivedCategory.quotientCompQhIso D).hom.app
+      ((HomologicalComplex.single D (ComplexShape.up ℤ) 0).obj (F.obj M)) = 𝟙 _ from rfl,
+    CategoryTheory.Functor.map_id, Category.id_comp]
+  dsimp [DerivedCategory.singleFunctorCompHomologyFunctorIso]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.id_comp]
 
 end AlgebraicGeometry.Scheme.Modules
