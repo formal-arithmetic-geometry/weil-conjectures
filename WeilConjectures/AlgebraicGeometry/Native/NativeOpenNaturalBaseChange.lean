@@ -239,9 +239,9 @@ private noncomputable def nativeOpenDerivedBaseChangeIso
     (ProEtaleWeilSheaf.upperStarLowerStarAdjunction k₀ l u)).ofNatIsoRight e
   let adj' := (ProEtaleWeilSheaf.upperStarLowerStarAdjunction k₀ l v).comp
     (nativeOpenAdjunction k₀ l j')
-  exact (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  exact Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (Adjunction.leftAdjointUniq adj adj') ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 attribute [local irreducible] nativeOpenDerivedBaseChangeIso
 
