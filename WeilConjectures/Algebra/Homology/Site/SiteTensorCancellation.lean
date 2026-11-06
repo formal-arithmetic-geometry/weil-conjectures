@@ -160,4 +160,32 @@ theorem siteTensorCancellation (P Q : LineEvaluation.Modules.{uC, vC, r} R)
   exact (hc' M U x p q).trans (hc M e U x p q).symm
 
 
+/-- A specified evaluation pairing gives the unique cancellation on pure site tensors.
+Source: Stacks 03EK and 0B8N
+(blueprint: lem-pur-site-tensor-cancellation).
+Proof: compare the explicit site tensor with the monoidal sheaf tensor. Transport
+reassociation, the specified pairing and the unitor through that comparison. Its
+formula follows on pure sections from the comparison formulas. The trilinear
+universal property shows that this formula determines every component uniquely. -/
+theorem siteTensorCancellation (P Q : LineEvaluation.Modules.{uC, vC, r} R)
+    (e : P ⊗ Q ≅ unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) :
+    ∃! c : siteSheafTensorRight P ⋙ siteSheafTensorRight Q ≅ 𝟭 _,
+      ∀ (M : LineEvaluation.Modules.{uC, vC, r} R) (U : Cᵒᵖ)
+        (x : M.val.obj U) (p : P.val.obj U) (q : Q.val.obj U),
+        (c.hom.app M).val.app U
+          (siteSheafTensorTmul _ Q U (siteSheafTensorTmul M P U x p) q) =
+          @SMul.smul _ _ (M.val.obj U).isModule.toSMul
+            (e.hom.val.app U (LineEvaluation.pureTensor R P Q U p q)) x := by
+  let c := siteCancel R P Q e
+  have hc := siteCancel_pure R P Q
+  refine ⟨c, fun M U x p q ↦ hc M e U x p q, ?_⟩
+  intro c' hc'
+  apply Iso.ext
+  apply NatTrans.ext
+  funext M
+  obtain ⟨_, _, _, hext⟩ := tensor_trilinear_universal R
+  apply (hext M P Q M (c'.hom.app M) (c.hom.app M)).2
+  intro U x p q
+  exact (hc' M U x p q).trans (hc M e U x p q).symm
+
 end SheafOfModules

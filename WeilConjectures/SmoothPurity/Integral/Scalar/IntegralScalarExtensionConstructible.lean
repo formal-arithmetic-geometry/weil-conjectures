@@ -215,7 +215,8 @@ theorem integralScalarExtension_constructible
         (completedIntegralCommRingSheafUnrestricted l E Y) (V.X i)).symm (hf i)
   let P : (integralOperationsGoodComplex l E Y).FullSubcategory := ⟨V, hgood⟩
   let : QuasiIso f := hq
-  let e : DerivedCategory.Q.obj P.obj ≅ K.obj := asIso (DerivedCategory.Q.map f) ≪≫ eX
+  let e : (DerivedCategory.Q.obj P.obj : DerivedCategory (integralTowerModules l E Y)) ≅
+      K.obj := asIso (DerivedCategory.Q.map f) ≪≫ eX
   have hP := (boundedConstructibleDerivedCompleteIntegral D l hl E Y).prop_of_iso
     e.symm K.property
   obtain ⟨_, r, s, hrs, hlevels⟩ := hP
