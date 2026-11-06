@@ -7,7 +7,6 @@ module
 public import Mathlib.Algebra.Homology.Localization
 import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.SfP1IntegralTransportData
-import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteConstantUnitComp
 import WeilConjectures.AlgebraicGeometry.ProperShriekCompSupports
 import WeilConjectures.CategoryTheory.DerivedSingleUnitExact
