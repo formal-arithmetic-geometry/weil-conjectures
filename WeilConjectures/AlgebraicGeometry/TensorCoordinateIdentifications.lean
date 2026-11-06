@@ -240,9 +240,13 @@ theorem exists_tensor_coordinate_identifications
       T.IsKFlatTensor ∧
       IsIso ((SingleComplexBaseChange.counit g').app
         ((HomotopyCategory.quotient _ (.up ℤ)).obj T)) ∧
-      cast (by rfl) ((SingleComplexBaseChange.counit g').app
-          ((HomotopyCategory.quotient _ (.up ℤ)).obj T)) ≫
-        DerivedCategory.Q.map d ≫ e'.hom =
+      (cast (by rfl) ((SingleComplexBaseChange.counit g').app
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj T)) :
+        (derivedPullback g').obj (DerivedCategory.Q.obj T) ⟶
+          (DerivedCategory.Q (C := SheafOfModules.{u} (moduleRings X'.toRingedSpace))).obj
+            (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj T)) ≫
+        (DerivedCategory.Q (C := SheafOfModules.{u} (moduleRings X'.toRingedSpace))).map d ≫
+          e'.hom =
       (derivedPullback g').map e.hom ≫ (τ E K ≫ ((derivedPullback g').obj E ◁ φ)) := by
   classical
   dsimp only
