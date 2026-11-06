@@ -7,6 +7,13 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Scalar.ScalarPullbackRepresentativeData
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
+public import Mathlib.Algebra.Homology.Localization
+public import Mathlib.CategoryTheory.Limits.HasLimits
+public import Mathlib.Logic.Small.Defs
+
+import all Mathlib.Algebra.Homology.Localization
+import all Mathlib.CategoryTheory.Limits.HasLimits
+import all Mathlib.Logic.Small.Defs
 
 /-!
 # The tensor counit square on cochain representatives
@@ -112,14 +119,21 @@ theorem upperStar_tensor_cochain_representative
       (F := (upperStar (ModuleCat.{u + 1} A) f).mapHomologicalComplex (.up ℤ))
       (leftDerivedUpperStarTensorComparison (ModuleCat.{u + 1} A) f)
       (scalarGeometricRepresentative A f) := by
-  exact cochain_tensor_counit_core (upperStar (ModuleCat.{u + 1} A) f)
+  refine cochain_tensor_counit_core (upperStar (ModuleCat.{u + 1} A) f)
     L(upperStar (ModuleCat.{u + 1} A) f)
     (leftDerivedUpperStarTensorComparison (ModuleCat.{u + 1} A) f)
     (upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctorCounit
-    (scalarGeometricRepresentative A f)
-    (representative_quotient (upperStar (ModuleCat.{u + 1} A) f)
-      L(upperStar (ModuleCat.{u + 1} A) f)
-      (upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctorCounit)
+    (scalarGeometricRepresentative A f) ?_
     (leftDerivedUpperStarTensorComparison_laxSquareHδ (ModuleCat.{u + 1} A) f)
+  intro P
+  have hq : (DerivedCategory.quotientCompQhIso _).inv.app P = 𝟙 _ := rfl
+  have hq' : (DerivedCategory.quotientCompQhIso _).hom.app
+      (((upperStar (ModuleCat.{u + 1} A) f).mapHomologicalComplex (.up ℤ)).obj P) = 𝟙 _ := rfl
+  dsimp only [scalarGeometricRepresentative]
+  rw [hq, hq']
+  erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+  exact representative_quotient (upperStar (ModuleCat.{u + 1} A) f)
+    L(upperStar (ModuleCat.{u + 1} A) f)
+    (upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctorCounit P
 
 end AlgebraicGeometry.Etale
