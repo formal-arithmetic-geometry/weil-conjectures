@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerExchangeMateNormalization
 public import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearDerivedSections
+public import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 public import WeilConjectures.ProperBaseChange.IntegralFinitePullbackComposition
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcActualRingedExchange
 public import WeilConjectures.CategoryTheory.Ringed.RingedTowerPushforwardLimitComparison
@@ -191,11 +192,6 @@ instance (priority := 2100) baseLocallyBijective (T : Scheme.{t}) :
     (ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{t + 1} :=
   @SemilinearSections.locallyBijective.{t + 1, t, t + 1} T.ProEt _
     (essentiallySmallSelf.{0} _) _
-
-/-- The vertical sequence site is small in the same coefficient universe.
-Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
-instance (priority := 2000) sequenceSiteSmall (T : Scheme.{t}) :
-    EssentiallySmall.{t + 1} (ℕ × T.ProEt) := essentiallySmallSelf.{0} _
 
 /-- Sheafification in the fixed coefficient universe of the quotient diagram site.
 Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
