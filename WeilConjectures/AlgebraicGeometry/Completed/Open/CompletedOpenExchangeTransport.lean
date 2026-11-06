@@ -775,8 +775,7 @@ theorem completedOpenExchangeComparison [QuasiCompact j]
       let N := (d.completedPull f).obj M
       let C := DerivedCategory.Q.objPreimage N
       let eN : DerivedCategory.Q.obj C ≅ N := DerivedCategory.Q.objObjPreimageIso N
-      let e : DerivedCategory.Q.obj C ≅ completedPullbackObject f d M :=
-        eN ≪≫ ((cbcDatumCompletedTransport d f).app M).symm
+      let e := eN ≪≫ ((cbcDatumCompletedTransport d f).app M).symm
       have hc := (completedPullback_reduction f d r a ha M
         (DerivedCategory.Q.objPreimage M) (DerivedCategory.Q.objObjPreimageIso M) hm).1 C e
       change IsIso (e.inv ≫ DerivedCategory.Q.map

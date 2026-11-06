@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.FinitePerfectQuotientModelData
+public import Mathlib.Algebra.Homology.HomologicalComplexLimits
+public import Mathlib.Algebra.Category.ModuleCat.Colimits
 import WeilConjectures.Algebra.Homology.LargeFilteredFreeResolution
 import WeilConjectures.Algebra.Homology.FilteredFreeKProjective
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KProjective

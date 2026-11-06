@@ -38,7 +38,6 @@ attribute [local irreducible] derivedExtension extend change
   AdicQuotientSections.step AdicPerfectModel.constantPresentationIso
 
 attribute [local implicit_reducible] sheafCompose Functor.sheafPushforwardContinuous
-  Over.forget
 
 private def associatorWhisker {D E F G : Type*} [Category* D] [Category* E]
     [Category* F] [Category* G] {L : E ⥤ F} {K : F ⥤ G} {N : E ⥤ G}

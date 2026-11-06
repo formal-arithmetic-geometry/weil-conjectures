@@ -464,3 +464,45 @@
 - Completion marker: /home/ubuntu/u9/state/BZ1077.DONE.
 - No local Lean/Lake, proof placeholders, trust bypasses, heartbeat raises, or profiler probes.
 - All ucheck invocations have finished. This completion commit changes documentation only.
+
+
+# BZ1098 complete
+
+- Assigned AdicImmersionResidueComparisonEtale is GREEN and sorry-free.
+- Assigned ucheck-bump passed: rc=0, built=1, failed=0, 13186 jobs; target rebuilt in 12s
+  at 4e7639af1d. It rebuilt green again in the first downstream check.
+- The user instructed continuation after the one-line universe annotation proposal.
+  Retained localization universes and inferred Mathlib's reordered category universes.
+- Integrated completed BZ1099 prerequisite AdicImmersionResidueComparisonFixed.
+- Direct importer AdicImmersionResidueComparison received the same annotation migration
+  and rebuilt GREEN in 6.7s at d1c8dc1cbe. Existing proof bodies are unchanged.
+- Layer 2 AdicImmersionCompletedTransport was attempted but blocked by four errors in
+  AdicImmersionSliceComparison, owned by live unit BZ1101. No unowned blocker edited.
+  Further importer layers share that dependency, so they are deferred under the ownership rule.
+- Logs: BUILD-BZ1098-leaf-green-full.log, BUILD-BZ1098-downstream1-full.log, and
+  BUILD-BZ1098-downstream2-full.log in ~/u9/bz/.
+- Fix pattern, exact errors, occurrence counts, and replayable rule: ~/u9/bz/FIXES-BZ1098.md.
+- Completion marker: ~/u9/state/BZ1098.DONE. Contract audit: ~/u9/bz/BZ1098-contract-audit.txt.
+- No local Lean/Lake, proof placeholders, new declarations, deletions, trust bypasses,
+  profiler probes, or heartbeat increases. Rule replay and idempotence checks pass.
+- All ucheck invocations finished. This final commit changes progress documentation only.
+
+
+# BZ1099 complete
+
+- Assigned AdicImmersionResidueComparisonFixed is GREEN and sorry-free.
+- ucheck-bump passed: rc=0, built=6, failed=0, 13230 jobs; target rebuilt in 4.1s.
+- Green source commit: 92c739ce57c42b0543ecc04d2f0065bd8aa5412f.
+- Applied the proposed one-line universe-annotation migration after the user's
+  continuation instruction. Localization universes remain explicit; Mathlib's
+  reordered category universes are inferred. Proof and assumptions are unchanged.
+- The sole direct importer AdicImmersionResidueComparison was attempted and is
+  blocked by AdicImmersionResidueComparisonEtale, owned by live unit BZ1098.
+  Its first error is a statement type mismatch at 238:8. No unowned file was edited.
+- The assigned leaf also rebuilt successfully in the downstream batch.
+- Logs: BUILD-BZ1099-leaf-green-full.log and BUILD-BZ1099-downstream-full.log in ~/u9/bz/.
+- Fix pattern, exact error, replayable rule, and occurrence count: ~/u9/bz/FIXES-BZ1099.md.
+- Completion marker: ~/u9/state/BZ1099.DONE.
+- No local Lean/Lake, proof placeholders, new declarations, trust bypasses, profiler probes,
+  or heartbeat changes. Rule replay and idempotence checks pass; all ucheck invocations ended.
+- This final commit changes progress documentation only; Lean source matches the green build.

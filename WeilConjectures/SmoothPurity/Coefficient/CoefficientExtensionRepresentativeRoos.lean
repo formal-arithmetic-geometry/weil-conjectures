@@ -155,7 +155,7 @@ private theorem derivedEvaluationFactors
             (Functor.mapHomologicalComplexCompIso (Iso.refl (F ⋙ R)) (.up ℤ)).symm).hom.app X) =
       ((Functor.mapDerivedCategoryCompIso U V).symm ≪≫
           Functor.mapDerivedCategoryNatIso a ≪≫
-          Functor.mapDerivedCategoryCompIso F R).hom.app (DerivedCategory.Q.obj X) ≫
+          (Functor.mapDerivedCategoryCompIso F R).symm).hom.app (DerivedCategory.Q.obj X) ≫
         R.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app X) ≫
         R.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj X) := by
   have h := Functor.mapDerivedCategoryNatIso_fac a X

@@ -126,8 +126,8 @@ theorem integral_residue_tor
       (HomologicalComplex.quasiIso C (.up ℤ))
     let L := (DerivedCategory.Q (C := C)).objPreimage
       ((scalarReductionDerivedExtension.{u, u} l E X n).obj K)
-    let e : DerivedCategory.Q.obj L ≅ (scalarReductionDerivedExtension.{u, u} l E X n).obj K :=
-      (DerivedCategory.Q (C := C)).objObjPreimageIso _
+    let e := (DerivedCategory.Q (C := C)).objObjPreimageIso
+      ((scalarReductionDerivedExtension.{u, u} l E X n).obj K)
     obtain ⟨P, f, hP, _, hf, _⟩ :=
       CochainComplex.exists_isKFlatResolutionIndependentCoefficients.{u + 1, u + 1, u}
         (R := R) L

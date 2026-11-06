@@ -12,6 +12,8 @@ import WeilConjectures.AlgebraicGeometry.Bounded.BoundedConstructibleTowerSupple
 import all WeilConjectures.CategoryTheory.ConstantScalarRealization.ConstantRealizationDerivedScalarExtensionSupplement
 import WeilConjectures.Algebra.Homology.Coefficient.CoefficientLiftKFlatResolution
 import WeilConjectures.Algebra.Homology.KFlatScalarExtensionCounit
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import Mathlib.LinearAlgebra.TensorProduct.Tower
 
 /-! # Derived scalar extension of the constant realization of an algebraic complex

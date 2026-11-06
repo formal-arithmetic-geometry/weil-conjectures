@@ -444,7 +444,7 @@ private theorem comp_hom
       (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) e))
     (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) (e ≫ p))
     (Functor.mapDerivedCategoryNatIso (upperStarComp (ModuleCat.{u + 1} A) e p) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _).hom = _
+      (Functor.mapDerivedCategoryCompIso _ _).symm).hom = _
   exact (conjugateEquiv_leftDerivedUpperStarComp_hom (ModuleCat.{u + 1} A)
     e p (e ≫ p) rfl).symm
 
