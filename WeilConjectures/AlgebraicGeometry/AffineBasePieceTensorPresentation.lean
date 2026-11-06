@@ -97,7 +97,7 @@ theorem exists_affine_base_piece_tensor_presentation
   let d := D.map (homOfLE hk).op
   have hWk : IsAffineOpen (d ⁻¹ᵁ W) := hW.preimage d
   obtain ⟨F, e0, hi, eL, hL⟩ :=
-    exists_affineOpen_directedRingSystem D c hc k (d ⁻¹ᵁ W) hWk
+    exists_affineOpen_ringSystem_of_isLimit D c hc k (d ⁻¹ᵁ W) hWk
   obtain ⟨B, C, aB, aC, φ, hφ, hcomp⟩ :=
     exists_affine_base_piece_tensor_comparison d X₀ Y₀ f₀ haffine V hV W hVW
       (F.obj ⟨k, le_rfl⟩) e0
