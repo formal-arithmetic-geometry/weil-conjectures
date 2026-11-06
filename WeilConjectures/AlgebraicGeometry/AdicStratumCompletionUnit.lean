@@ -524,6 +524,8 @@ private theorem koszul_unit_criterion [IsNoetherianRing A] (r : ℕ) (a : Fin r 
   letI := HasDerivedCategory.standard
     (ℕᵒᵖ ⥤ ConstantCompletion.Mod (ConstantCompletion.completed J A I))
   let O := ConstantCompletion.completed J A I
+  let : Category.{v + 1} (ringedSiteDerived O) :=
+    inferInstanceAs (Category.{v + 1} (ConstantCompletion.D O))
   let b := fun j ↦ ConstantCompletion.algebraSection
     (ConstantCompletion.baseMap J A I true) (a j)
   obtain ⟨e, he⟩ := exists_ringed_cech_koszul_hom_limit_comparison O r b P
