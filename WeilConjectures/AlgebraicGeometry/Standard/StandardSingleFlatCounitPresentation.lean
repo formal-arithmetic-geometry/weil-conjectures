@@ -23,6 +23,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 /-- A bounded flat sheaf-complex presentation of the canonical comparison before taking stalks.
 Source: Stacks Project, Tags 0A1D and 0DJ9, affine calculation and relative
 Mayer--Vietoris. This predicate records the base direct-image identification as well

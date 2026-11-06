@@ -86,7 +86,7 @@ private theorem directImage_leray_model
   erw [← reassoc_of% hn]
   erw [← R.map_comp_assoc r.inv r.hom, Iso.inv_hom_id, R.map_id, Category.id_comp]
   rw [← hu]
-  simpa only [localComplexUnit_app_eq] using directImage_complex_unit f I
+  simpa only [localComplexUnit_app_eq, cast_eq] using directImage_complex_unit f I
 
 /-- The derived direct-image local class is ordinary sheafification on a K-injective
 integer complex, with the specified resolution and Leray normalizations.

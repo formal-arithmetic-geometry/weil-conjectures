@@ -713,21 +713,6 @@ Source: Stacks 06YY (blueprint: lem-weil-point-sections-scalar-extension). -/
 noncomputable def pointOrdinaryDerivedComparison :=
   (pointOrdinaryDerivedComparison_existsUnique k l E L ι).exists.choose
 
-/-- The derived sections-tensor isomorphism, normalized by actual termwise tensors.
-Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension). -/
-noncomputable def pointDerivedSectionsTensor :
-    pointCompletedDerivedSections k l E ⋙ pointIntegralModuleDerivedTensor l E L ι ≅
-      completedDerivedScalarExtension.{u, u} l E L ι (Spec (.of k)) ⋙
-        pointCompletedDerivedSections k l L :=
-  (Functor.mapDerivedCategoryCompIso
-    (pointCompletedSections k l E) (pointIntegralModuleTensor l E L ι)).symm ≪≫
-    Functor.mapDerivedCategoryNatIso (pointSectionsTensor k l E L ι) ≪≫
-    Functor.mapDerivedCategoryCompIso
-      (completedOrdinaryScalarExtension.{u, u} l E L ι (Spec (.of k)))
-      (pointCompletedSections k l L) ≪≫
-    Functor.isoWhiskerRight (pointOrdinaryDerivedComparison k l E L ι).symm
-      (pointCompletedDerivedSections k l L)
-
 /-- Multiplication on ordinary sheaf tensor fixes the identity-extension identification.
 Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension).
 Proof: multiplication s tensor x to sx is balanced and inverse to x to 1 tensor x.
@@ -883,18 +868,6 @@ theorem pointTensorRationalization_existsUnique :
               algebraMap (Padic.coefficientExtensionIntegers l E) E] n) := by
   exact coefficientComplexBeta_existsUnique.{u, u + 1} l E L ι
 
-/-- The canonical localization-tensor associator on module derived categories.
-Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension). -/
-noncomputable def pointDerivedTensorRationalization :
-    pointIntegralModuleDerivedTensor l E L ι ⋙ pointModuleDerivedRationalization l L ≅
-      pointModuleDerivedRationalization l E ⋙ pointCoefficientFieldDerivedTensor l E L ι :=
-  (Functor.mapDerivedCategoryCompIso
-    (pointIntegralModuleTensor l E L ι) (pointModuleRationalization l L)).symm ≪≫
-      Functor.mapDerivedCategoryNatIso
-        (pointTensorRationalization_existsUnique l E L ι).exists.choose ≪≫
-      Functor.mapDerivedCategoryCompIso
-        (pointModuleRationalization l E) (ModuleCat.extendScalars.{u, u, u + 1} ι.toRingHom)
-
 set_option backward.isDefEq.respectTransparency true
 
 section Constructible
@@ -965,22 +938,6 @@ noncomputable def pointConstructibleCompletionIso
   asIso ((completedScalarComparison.{u, u} l E L ι
             (Spec (.of D.k))).app K)
 
-/-- Phi is precisely the inverse of sections of chi after the canonical sections-tensor map.
-Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension). -/
-noncomputable def pointSectionsScalarExtensionIso
-    (K : completedIntegralDerivedCategory l E
-            (Spec (.of D.k)) D hl)
-    (hK : boundedConstructibleDerivedCompleteIntegral D l hl E
-            (Spec (.of D.k)) K) :
-    (pointCompletedDerivedSections D.k l L).obj
-        ((integralScalarExtension.{u} l E L ι
-            (Spec (.of D.k))).obj K) ≅
-      (pointIntegralModuleDerivedTensor l E L ι).obj
-        ((pointCompletedDerivedSections D.k l E).obj K) :=
-  ((pointDerivedSectionsTensor D.k l E L ι).app K ≪≫
-    (pointCompletedDerivedSections D.k l L).mapIso
-      (pointConstructibleCompletionIso l E L ι D hl K hK)).symm
-
 /-- The integral identity identification is completeness inverted followed by multiplication.
 Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension). -/
 noncomputable def pointIntegralScalarUnit
@@ -993,25 +950,6 @@ noncomputable def pointIntegralScalarUnit
   (pointConstructibleCompletionIso l E E (AlgHom.id ℚ_[l] E) D hl K hK).symm ≪≫
     (pointDerivedTensorUnit D.k l E).app K
 
-/-- Rational phi is integral phi tensored with L, followed by the balanced localization map.
-Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension). -/
-noncomputable def pointRationalSectionsScalarExtensionIso
-    (K : completedIntegralDerivedCategory l E
-            (Spec (.of D.k)) D hl)
-    (hK : boundedConstructibleDerivedCompleteIntegral D l hl E
-            (Spec (.of D.k)) K) :
-    (pointModuleDerivedRationalization l L).obj
-        ((pointCompletedDerivedSections D.k l L).obj
-          ((integralScalarExtension.{u} l E L ι
-            (Spec (.of D.k))).obj K)) ≅
-      (pointCoefficientFieldDerivedTensor l E L ι).obj
-        ((pointModuleDerivedRationalization l E).obj
-          ((pointCompletedDerivedSections D.k l E).obj K)) :=
-  (pointModuleDerivedRationalization l L).mapIso
-    (pointSectionsScalarExtensionIso l E L ι D hl K hK) ≪≫
-      (pointDerivedTensorRationalization l E L ι).app
-        ((pointCompletedDerivedSections D.k l E).obj K)
-
 private theorem inverseSquare
     {C : Type a} [Category C] {A B X Y : C}
     (e : A ≅ B) (f : X ≅ Y) (u : A ⟶ X) (v : B ⟶ Y)
@@ -1020,58 +958,7 @@ private theorem inverseSquare
   simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
   rw [h, Iso.hom_inv_id_assoc]
 
-private theorem pointScalarSectionsNatural
-    (K J : completedIntegralDerivedCategory l E (Spec (.of D.k)) D hl)
-    (hK : boundedConstructibleDerivedCompleteIntegral D l hl E (Spec (.of D.k)) K)
-    (hJ : boundedConstructibleDerivedCompleteIntegral D l hl E (Spec (.of D.k)) J)
-    (f : K ⟶ J) :
-    (pointCompletedDerivedSections D.k l L).map
-        ((integralScalarExtension l E L ι (Spec (.of D.k))).map f) ≫
-      (pointSectionsScalarExtensionIso l E L ι D hl J hJ).hom =
-    (pointSectionsScalarExtensionIso l E L ι D hl K hK).hom ≫
-      (pointIntegralModuleDerivedTensor l E L ι).map
-        ((pointCompletedDerivedSections D.k l E).map f) := by
-  let ψ := (pointDerivedSectionsTensor D.k l E L ι).hom ≫
-    Functor.whiskerRight (completedScalarComparison l E L ι (Spec (.of D.k)))
-      (pointCompletedDerivedSections D.k l L)
-  have hn :
-      (pointIntegralModuleDerivedTensor l E L ι).map
-          ((pointCompletedDerivedSections D.k l E).map f) ≫
-        (pointSectionsScalarExtensionIso l E L ι D hl J hJ).inv =
-      (pointSectionsScalarExtensionIso l E L ι D hl K hK).inv ≫
-        (pointCompletedDerivedSections D.k l L).map
-          ((integralScalarExtension l E L ι (Spec (.of D.k))).map f) := by
-    simpa only [ψ, pointSectionsScalarExtensionIso,
-      pointConstructibleCompletionIso, Iso.symm_inv, Iso.trans_hom,
-      Iso.app_hom, Functor.mapIso_hom, NatTrans.comp_app,
-      Functor.whiskerRight_app, Functor.comp_map, asIso_hom, integralScalarExtension,
-      integralScalarExtensionOfUniverses] using ψ.naturality f
-  exact inverseSquare _ _ _ _ hn
-
-private theorem pointRationalSectionsNatural
-    (K J : completedIntegralDerivedCategory l E (Spec (.of D.k)) D hl)
-    (hK : boundedConstructibleDerivedCompleteIntegral D l hl E (Spec (.of D.k)) K)
-    (hJ : boundedConstructibleDerivedCompleteIntegral D l hl E (Spec (.of D.k)) J)
-    (f : K ⟶ J) :
-    (pointModuleDerivedRationalization l L).map
-        ((pointCompletedDerivedSections D.k l L).map
-          ((integralScalarExtension l E L ι (Spec (.of D.k))).map f)) ≫
-      (pointRationalSectionsScalarExtensionIso l E L ι D hl J hJ).hom =
-    (pointRationalSectionsScalarExtensionIso l E L ι D hl K hK).hom ≫
-      (pointCoefficientFieldDerivedTensor l E L ι).map
-        ((pointModuleDerivedRationalization l E).map
-          ((pointCompletedDerivedSections D.k l E).map f)) := by
-  simp only [pointRationalSectionsScalarExtensionIso, Iso.trans_hom,
-    Functor.mapIso_hom, Category.assoc]
-  rw [← Functor.map_comp_assoc, pointScalarSectionsNatural, Functor.map_comp_assoc]
-  exact congrArg (fun z ↦
-    (pointModuleDerivedRationalization l L).map
-      (pointSectionsScalarExtensionIso l E L ι D hl K hK).hom ≫ z)
-    ((pointDerivedTensorRationalization l E L ι).hom.naturality
-      ((pointCompletedDerivedSections D.k l E).map f))
-
-attribute [local irreducible] pointSectionsScalarExtensionIso pointIntegralScalarUnit
-  pointRationalSectionsScalarExtensionIso
+attribute [local irreducible] pointIntegralScalarUnit
 
 end Constructible
 
