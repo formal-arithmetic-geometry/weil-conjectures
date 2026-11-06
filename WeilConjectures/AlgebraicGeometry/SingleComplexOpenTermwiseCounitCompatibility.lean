@@ -91,8 +91,8 @@ private theorem termwise_homotopy_square_inv
   rw [Functor.mapHomotopyCategoryCompIso_refl_hom_app, Category.id_comp]
   rfl
 
-set_option maxHeartbeats 600000 in
--- Elaborating the exact restriction localization factors needs this budget.
+set_option maxHeartbeats 1200000 in
+-- After abstracting normalization, the canonical endpoint conversions timed out at 600000 in 38s.
 /-- The derived open coefficient on an actual restricted complex is compatible
 with ordinary tensor pullback and the pinned counits. This is an equality before
 stalks and cohomology; it needs neither a base-change square nor K-flatness.
