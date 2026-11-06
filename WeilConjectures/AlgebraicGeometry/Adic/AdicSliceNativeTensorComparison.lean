@@ -26,8 +26,9 @@ noncomputable def adicSliceNativeTensorIso {l : ℕ} [Fact l.Prime] {X : Scheme.
     have : PreservesColimitsOfShape WalkingParallelPair
         (Mod.mapModComap (adicUpperStarRingIso (l := l) U.hom)) :=
       inferInstanceAs (PreservesColimitsOfShape WalkingParallelPair (adicUpperStar l U.hom))
-    exact ((Mod.tensorLeftCompMapModComapIso (adicUpperStarRingIso (l := l) U.hom)
-      (fun _ _ ↦ Functor.LaxBraided.braided _ _) N).app M).symm
+    let e := Mod.tensorLeftCompMapModComapIso (adicUpperStarRingIso (l := l) U.hom)
+      (fun _ _ ↦ Functor.LaxBraided.braided _ _) N
+    exact (e.app M).symm
 
 /-- The native balanced tensor comparison is normalized before taking the quotient.
 Source: Stacks 03EL and `Mod.map_tensorπ_comp_tensorLeftCompMapModComapIso_hom`
@@ -53,10 +54,9 @@ theorem adicSliceNativeTensorIso_quotient {l : ℕ} [Fact l.Prime] {X : Scheme.{
       Functor.LaxMonoidal.μ (upperStar (WeilCoefficients.{u} l) U.hom) M.X N.X ≫
         (upperStar (WeilCoefficients.{u} l) U.hom).map (Mod.tensorπ M N) ≫
           (e.hom.app M).hom := by
-    erw [h, IsIso.hom_inv_id_assoc]
-    rfl
+    simpa only [h, IsIso.hom_inv_id_assoc]
   change _ ≫ (e.inv.app M).hom = _
-  erw [h', Category.assoc, Category.assoc, ← Mod.comp_hom', Iso.hom_inv_id_app,
+  simp only [h', Category.assoc, ← Mod.comp_hom', Iso.hom_inv_id_app,
     Mod.id_hom', Category.comp_id]
 
 end AlgebraicGeometry.ProEtale
