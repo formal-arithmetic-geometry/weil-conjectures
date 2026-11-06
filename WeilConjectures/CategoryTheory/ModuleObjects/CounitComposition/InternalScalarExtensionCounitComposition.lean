@@ -9,6 +9,9 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalarsC
 import WeilConjectures.CategoryTheory.DerivedCategory.CochainAdjunctionCompatibility
 import WeilConjectures.CategoryTheory.Exact.ExactRestrictionCompositionSupplement
 import all WeilConjectures.CategoryTheory.ModuleObjects.KFlatScalarTower.InternalKFlatScalarTowerRealizationSupplement
+import all Mathlib.Algebra.Homology.Localization
+import all Mathlib.Logic.Small.Defs
+import all Mathlib.CategoryTheory.Limits.HasLimits
 
 /-! # Derived scalar-extension counits and composition -/
 
@@ -108,6 +111,24 @@ private theorem restriction_inv_factor (Z : CochainComplex (Mod C T) ℤ) :
   exact hh
 
 
+omit [IsMonHom φ] in
+private theorem computationCounit_app_eq {R' S' : C} [MonObj R'] [MonObj S']
+    [IsCommMonObj R'] [IsCommMonObj S'] (φ' : R' ⟶ S') [IsMonHom φ']
+    (P : CochainComplex (Mod C R') ℤ) :
+    (computationCounit φ').app P = (Mod.extendScalars φ').leftDerivedFunctorCounit.app
+      ((HomotopyCategory.quotient _ (.up ℤ)).obj P) := by
+  dsimp only [computationCounit]
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Iso.trans_hom, Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
+    Functor.associator_hom_app, Functor.associator_inv_app, Iso.symm_hom,
+    Category.id_comp, Functor.mapHomotopyCategoryFactors_hom_app]
+  erw [show (DerivedCategory.quotientCompQhIso (Mod C R')).inv.app P = 𝟙 _ from rfl,
+    CategoryTheory.Functor.map_id, Category.id_comp]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp,
+    show (DerivedCategory.quotientCompQhIso (Mod C S')).hom.app
+      (((extendScalars φ').mapHomologicalComplex (ComplexShape.up ℤ)).obj P) = 𝟙 _ from rfl,
+    Category.comp_id]
+
 /-- The canonical derived association intertwines the three computation counits.
 Source: Stacks Tags 06YY and 0FND; the normalized transpose calculation in
 `lem-pe-internal-kflat-scalar-tower-realization`.
@@ -131,16 +152,20 @@ theorem derivedExtendScalars_comp_counit
     let α₀ := (Mod.extendScalarsComp φ ψ).symm ≪≫
       eqToIso (by congr 1 : Mod.extendScalars (φ ≫ ψ) = Mod.extendScalars χ)
     α.hom.app (DerivedCategory.Q.obj P) ≫
-      (Mod.extendScalars χ).leftDerivedFunctorCounit.app
-        ((HomotopyCategory.quotient _ (.up ℤ)).obj P) =
+      cast (by rfl) ((Mod.extendScalars χ).leftDerivedFunctorCounit.app
+        ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) =
       (Mod.extendScalars ψ).leftDerivedFunctor.map
-        ((Mod.extendScalars φ).leftDerivedFunctorCounit.app
-          ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫
-      (Mod.extendScalars ψ).leftDerivedFunctorCounit.app
+        (cast (by rfl) ((Mod.extendScalars φ).leftDerivedFunctorCounit.app
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) :
+            (Mod.extendScalars φ).leftDerivedFunctor.obj (DerivedCategory.Q.obj P) ⟶
+              DerivedCategory.Q.obj
+                (((Mod.extendScalars φ).mapHomologicalComplex (.up ℤ)).obj P)) ≫
+      cast (by rfl) ((Mod.extendScalars ψ).leftDerivedFunctorCounit.app
         ((HomotopyCategory.quotient _ (.up ℤ)).obj
-          (((Mod.extendScalars φ).mapHomologicalComplex (.up ℤ)).obj P)) ≫
+          (((Mod.extendScalars φ).mapHomologicalComplex (.up ℤ)).obj P))) ≫
       DerivedCategory.Q.map
         ((Functor.mapHomologicalComplexCompIso α₀ (.up ℤ)).hom.app P) := by
+  simp only [cast_eq]
   let a := Mod.derivedExtendMapDerivedCategoryAdjunction φ
   let b := Mod.derivedExtendMapDerivedCategoryAdjunction ψ
   let c := Mod.derivedExtendMapDerivedCategoryAdjunction χ
@@ -149,10 +174,12 @@ theorem derivedExtendScalars_comp_counit
   let Pχ := ((Mod.extendScalars χ).mapHomologicalComplex (.up ℤ)).obj P
   let t := (Functor.mapHomologicalComplexCompIso
     (ordinaryAssociation φ ψ χ h) (.up ℤ)).hom.app P
-  change (((a.comp b).ofNatIsoRight e).leftAdjointUniq c).hom.app
+  suffices key : (((a.comp b).ofNatIsoRight e).leftAdjointUniq c).hom.app
       (DerivedCategory.Q.obj P) ≫ (computationCounit χ).app P =
     (Mod.extendScalars ψ).leftDerivedFunctor.map ((computationCounit φ).app P) ≫
-      (computationCounit ψ).app Pφ ≫ DerivedCategory.Q.map t
+      (computationCounit ψ).app Pφ ≫ DerivedCategory.Q.map t by
+    simp only [computationCounit_app_eq] at key
+    exact key
   apply (b.homEquiv _ _).injective
   apply (a.homEquiv _ _).injective
   rw [association_transpose a b c e]

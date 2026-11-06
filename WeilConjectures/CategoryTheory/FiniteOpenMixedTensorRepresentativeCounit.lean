@@ -8,6 +8,7 @@ module
 public import
   WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategoryCounit
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
+import all Mathlib.Algebra.Homology.Localization
 
 /-!
 # Counit normalization for a derived functor representative
@@ -53,8 +54,8 @@ theorem leftDerivedFactors_eq_counit
     (Z : CochainComplex C ℤ) :
     L.leftDerivedFunctorIsoMapDerivedCategory.hom.app (DerivedCategory.Q.obj Z) ≫
         L.mapDerivedCategoryFactors.hom.app Z =
-      L.leftDerivedFunctorCounit.app
-        ((HomotopyCategory.quotient _ _).obj Z) := by
+      cast (by rfl) (L.leftDerivedFunctorCounit.app
+        ((HomotopyCategory.quotient _ _).obj Z)) := by
   have h := L.leftDerivedFunctorIsoMapDerivedCategory_hom_app_Qh
     ((HomotopyCategory.quotient _ _).obj Z)
   rw [CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app] at h
@@ -64,6 +65,7 @@ theorem leftDerivedFactors_eq_counit
     CategoryTheory.Functor.mapHomotopyCategoryFactors] at h
   erw [CategoryTheory.Functor.map_id, Category.id_comp,
     CategoryTheory.Functor.map_id, Category.comp_id, Category.comp_id] at h
+  rw [cast_eq]
   exact h
 
 end CategoryTheory.Functor
