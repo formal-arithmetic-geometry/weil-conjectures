@@ -1021,7 +1021,7 @@ private theorem dSquare_comp_reverse
   funext K
   simp only [NatTrans.comp_app, whiskerLeft_app, whiskerRight_app]
   rw [← cancel_mono (U₂.mapDerivedCategory.map
-    ((mapDerivedCategoryNatIso cF ≪≫ mapDerivedCategoryCompIso F₀₁ F₁₂).hom.app K))]
+    ((mapDerivedCategoryNatIso cF ≪≫ (mapDerivedCategoryCompIso F₀₁ F₁₂).symm).hom.app K))]
   simp only [Category.assoc, ← U₂.mapDerivedCategory.map_comp, Iso.inv_hom_id_app]
   erw [U₂.mapDerivedCategory.map_id, Category.comp_id]
   exact mapDerivedCategorySquareIso_hom_app_comp q₀₁ q₁₂ q₀₂ cG cF hq K
@@ -1050,7 +1050,7 @@ private theorem dSquare_comp_forward
     associator_inv_app, Category.id_comp, Category.comp_id] at ht
   simp only [NatTrans.comp_app, whiskerLeft_app, whiskerRight_app]
   rw [← cancel_mono ((mapDerivedCategoryNatIso cG ≪≫
-    mapDerivedCategoryCompIso G₀₁ G₁₂).hom.app (U₀.mapDerivedCategory.obj K))]
+    (mapDerivedCategoryCompIso G₀₁ G₁₂).symm).hom.app (U₀.mapDerivedCategory.obj K))]
   simp only [Category.assoc, Iso.inv_hom_id_app]
   erw [Category.comp_id]
   exact ht.symm

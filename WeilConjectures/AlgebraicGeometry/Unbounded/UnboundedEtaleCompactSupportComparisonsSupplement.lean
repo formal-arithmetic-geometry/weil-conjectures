@@ -358,9 +358,9 @@ private lemma derived_triangle_assoc
       (Functor.mapDerivedCategoryTriangleIso eFG_H).hom ≫
         Functor.whiskerRight (Functor.mapDerivedCategoryTriangleIso eFG).hom
           H.mapDerivedCategory := by
-  simp only [Functor.mapDerivedCategoryTriangleIso, Iso.trans_hom,
+  simp only [Functor.mapDerivedCategoryTriangleIso, Iso.trans_hom, Iso.symm_hom,
     Functor.whiskerLeft_comp, Functor.whiskerRight_comp, Category.assoc]
-  rw [← Category.assoc (Functor.mapDerivedCategoryCompIso F GH).hom,
+  rw [← Category.assoc (Functor.mapDerivedCategoryCompIso F GH).inv,
     ← Functor.mapDerivedCategoryNatIso_isoWhiskerLeft,
     Category.assoc, ← Category.assoc (Functor.mapDerivedCategoryCompIso FG H).hom,
     ← Functor.mapDerivedCategoryNatIso_isoWhiskerRight]
@@ -382,9 +382,9 @@ private lemma derived_unit_right
       Functor.whiskerLeft F.mapDerivedCategory
         (Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryIdIso D).hom =
       𝟙 _ := by
-  simp only [Functor.mapDerivedCategoryTriangleIso, Iso.trans_hom,
+  simp only [Functor.mapDerivedCategoryTriangleIso, Iso.trans_hom, Iso.symm_hom,
     Functor.whiskerLeft_comp, Category.assoc]
-  rw [← Category.assoc (Functor.mapDerivedCategoryCompIso F I).hom,
+  rw [← Category.assoc (Functor.mapDerivedCategoryCompIso F I).inv,
     ← Functor.mapDerivedCategoryNatIso_isoWhiskerLeft]
   simp only [← Category.assoc]
   rw [← Functor.mapDerivedCategoryNatIso_trans, h]
@@ -406,9 +406,9 @@ private lemma derived_unit_left
       Functor.whiskerRight
         (Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryIdIso C).hom
         F.mapDerivedCategory = 𝟙 _ := by
-  simp only [Functor.mapDerivedCategoryTriangleIso, Iso.trans_hom,
+  simp only [Functor.mapDerivedCategoryTriangleIso, Iso.trans_hom, Iso.symm_hom,
     Functor.whiskerRight_comp, Category.assoc]
-  rw [← Category.assoc (Functor.mapDerivedCategoryCompIso I F).hom,
+  rw [← Category.assoc (Functor.mapDerivedCategoryCompIso I F).inv,
     ← Functor.mapDerivedCategoryNatIso_isoWhiskerRight]
   simp only [← Category.assoc]
   rw [← Functor.mapDerivedCategoryNatIso_trans, h]
@@ -440,7 +440,7 @@ private lemma identity_tail_eq
 
 attribute [local irreducible] upperStar lowerStar openImmersionLowerShriek
   Functor.mapDerivedCategory Functor.rightDerivedFunctor
-  Functor.mapDerivedCategoryNatIso Functor.mapDerivedCategoryCompIso
+  Functor.mapDerivedCategoryNatIso
 
 private noncomputable def exact_pb_comp
     (A : Type (u + 1)) [CommRing A] {X Y Z : Scheme.{u}}
@@ -724,8 +724,8 @@ private lemma exact_adj_comp
     (a : L₁ ⊣ R₁) (b : L₂ ⊣ R₂) :
     (a.comp b).mapDerivedCategoryAdjunction =
       ((a.mapDerivedCategoryAdjunction.comp b.mapDerivedCategoryAdjunction
-        ).ofNatIsoLeft (Functor.mapDerivedCategoryCompIso L₁ L₂).symm
-          ).ofNatIsoRight (Functor.mapDerivedCategoryCompIso R₂ R₁).symm := by
+        ).ofNatIsoLeft (Functor.mapDerivedCategoryCompIso L₁ L₂)
+          ).ofNatIsoRight (Functor.mapDerivedCategoryCompIso R₂ R₁) := by
   apply Adjunction.ext
   apply exact_unit_ext (C := C)
   intro K
@@ -738,7 +738,7 @@ private lemma exact_adj_comp
       (R₂ ⋙ R₁).mapDerivedCategoryFactorsh.hom.app KL)]
   simp only [Category.assoc]
   rw [(a.comp b).mapDerivedCategoryAdjunction_unit_app_fac K]
-  have hL : (Functor.mapDerivedCategoryCompIso L₁ L₂).inv.app
+  have hL : (Functor.mapDerivedCategoryCompIso L₁ L₂).hom.app
       (DerivedCategory.Qh.obj K) ≫ (L₁ ⋙ L₂).mapDerivedCategoryFactorsh.hom.app K =
       L₂.mapDerivedCategory.map (L₁.mapDerivedCategoryFactorsh.hom.app K) ≫
         L₂.mapDerivedCategoryFactorsh.hom.app ((L₁.mapHomotopyCategory (.up ℤ)).obj K) := by
@@ -1509,7 +1509,7 @@ noncomputable def unboundedEtaleUpperStarCompIso
       (upperStar (ModuleCat.{u + 1} A) g).mapDerivedCategory ⋙
         (upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategory :=
   Functor.mapDerivedCategoryNatIso (upperStarComp (ModuleCat.{u + 1} A) f g) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The exact inverse-image identity is the sheaf identity descended termwise.
 Source: Stacks Project, Tags 0F7H and 0F7L
@@ -1525,7 +1525,7 @@ private lemma upperStar_comp_id_unit
     (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) :
     (Functor.mapDerivedCategoryNatIso
         (upperStarComp (ModuleCat.{u + 1} A) (𝟙 X) (𝟙 X) (𝟙 X) (by simp)) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _).hom ≫
+      (Functor.mapDerivedCategoryCompIso _ _).symm).hom ≫
         Functor.whiskerLeft (upperStar (ModuleCat.{u + 1} A) (𝟙 X)).mapDerivedCategory
           (unboundedEtaleUpperStarIdIso A X).hom = 𝟙 _ := by
   rw [upperStarComp_id_left]
@@ -1772,7 +1772,7 @@ section UnboundedBaseChange
 set_option backward.isDefEq.respectTransparency false
 attribute [local irreducible] upperStar lowerStar openImmersionLowerShriek
   Functor.mapDerivedCategory Functor.rightDerivedFunctor
-  Functor.mapDerivedCategoryNatIso Functor.mapDerivedCategoryCompIso
+  Functor.mapDerivedCategoryNatIso
 
 private lemma unbounded_shriek_base_change
     (A : Type (u + 1)) [CommRing A] [Finite A]
@@ -2111,11 +2111,11 @@ theorem unboundedEtaleCompactSupport_baseChange_id
     (unboundedEtaleUpperStarIdIso A X) (unboundedEtaleUpperStarIdIso A Y)
     (Functor.mapDerivedCategoryNatIso
       (upperStarComp (ModuleCat.{u + 1} A) (𝟙 X) (𝟙 X) (𝟙 X) (by simp)) ≪≫
-        Functor.mapDerivedCategoryCompIso _ _)
+        (Functor.mapDerivedCategoryCompIso _ _).symm)
     (Functor.mapDerivedCategoryNatIso
       (upperStarComp (ModuleCat.{u + 1} A) (𝟙 Y) (𝟙 Y) (𝟙 Y) (by simp)) ≪≫
-        Functor.mapDerivedCategoryCompIso _ _)
-    (upperStar_comp_id_unit A X) (upperStar_comp_id_unit A Y)
+        (Functor.mapDerivedCategoryCompIso _ _).symm)
+    (exact_pb_id_left A (𝟙 X)) (upperStar_comp_id_unit A Y)
   intro K
   have h := unboundedEtaleCompactSupport_baseChange_comp A sq sq
     (by simpa only [Category.id_comp] using sq)
@@ -2434,7 +2434,7 @@ private lemma exact_square_plus
       DerivedCategory.Plus.ι.mapIso
           ((upperStarCompDerivedPlus B a b ab hab).app K) =
         (Functor.mapDerivedCategoryNatIso (upperStarComp B a b ab hab) ≪≫
-          Functor.mapDerivedCategoryCompIso _ _).app (DerivedCategory.Plus.ι.obj K) := by
+          (Functor.mapDerivedCategoryCompIso _ _).symm).app (DerivedCategory.Plus.ι.obj K) := by
     apply Iso.ext
     simp only [Functor.mapIso_hom, Iso.app_hom, upperStarCompDerivedPlus,
       Iso.trans_hom, NatTrans.comp_app, Functor.map_comp,
@@ -2455,7 +2455,7 @@ private lemma exact_square_plus
     NatTrans.comp_app, Category.assoc]
 
 section ProperExchangeRestriction
-attribute [local irreducible] Functor.rightDerivedFunctor Functor.rightDerivedFunctorPlus
+attribute [local irreducible] Functor.rightDerivedFunctor
   Functor.mapDerivedCategory Functor.rightDerivedFunctorPlusCompatibility
 private lemma exact_unit_plus
     (B : Type*) [Category.{u + 1} B] [Abelian B] [IsGrothendieckAbelian.{u + 1} B]

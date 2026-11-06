@@ -212,7 +212,7 @@ theorem sfbImmersion_sliceComparisons
         eD.functor :=
     (Functor.mapDerivedCategoryCompIso N (T ⋙ L ⋙ e.functor)).symm ≪≫
       Functor.isoWhiskerLeft N.mapDerivedCategory
-        (Functor.mapDerivedCategoryCompIso T (L ⋙ e.functor)) ≪≫
+        (Functor.mapDerivedCategoryCompIso T (L ⋙ e.functor)).symm ≪≫
       Functor.isoWhiskerLeft N.mapDerivedCategory
         (Functor.isoWhiskerLeft T.mapDerivedCategory
           (Functor.mapDerivedCategoryCompIso L e.functor).symm)
