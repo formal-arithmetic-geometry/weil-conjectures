@@ -32,47 +32,8 @@ private lemma id_single {C : Type*} [Category C] [Abelian C] [HasDerivedCategory
       ((𝟭 C).mapDerivedCategoryPlusSingleFunctor 0).hom.app X := by
   apply DerivedCategory.Plus.ι.map_injective
   rw [ι_map_mapDerivedCategoryPlusIdIso_hom_app,
-    ι_map_mapDerivedCategoryPlusSingleFunctor_hom_app, AlgebraicGeometry.Etale.single_hom]
-  change (mapDerivedCategoryIdIso C).hom.app ((DerivedCategory.singleFunctor C 0).obj X) =
-    (𝟭 C).mapDerivedCategoryFactors.hom.app
-      ((HomologicalComplex.single C (.up ℤ) 0).obj X) ≫
-        DerivedCategory.Q.map
-          ((HomologicalComplex.singleMapHomologicalComplex (𝟭 C) (.up ℤ) 0).hom.app X)
-  have hi := congr_app (congr_arg Iso.hom (mapDerivedCategoryIdIso_factorsh C))
-    (((HomotopyCategory.singleFunctors C).functor 0).obj X)
-  simp only [Iso.trans_hom, NatTrans.comp_app, isoWhiskerLeft_hom,
-    whiskerLeft_app, rightUnitor_hom_app, isoWhiskerRight_hom, whiskerRight_app,
-    leftUnitor_hom_app, mapHomotopyCategoryIdIso_hom_app_eq_id] at hi
-  dsimp at hi
-  erw [CategoryTheory.Functor.map_id, Category.comp_id] at hi
-  rw [hi]
-  change (𝟭 C).mapDerivedCategoryFactorsh.hom.app
-      ((HomotopyCategory.quotient C (.up ℤ)).obj
-        ((HomologicalComplex.single C (.up ℤ) 0).obj X)) ≫ 𝟙 _ ≫ 𝟙 _ = _
-  simp only [Category.comp_id]
-  erw [mapDerivedCategoryFactorsh_hom_app]
-  simp only [Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv]
-  have hq (K : CochainComplex C ℤ) :
-      (DerivedCategory.quotientCompQhIso C).hom.app K = 𝟙 _ := by
-    exact Quotient.lift.isLift_hom _ _ _ K
-  have hq' (K : CochainComplex C ℤ) :
-      (DerivedCategory.quotientCompQhIso C).inv.app K = 𝟙 _ := by
-    exact Quotient.lift.isLift_inv _ _ _ K
-  rw [hq, hq']
-  erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id,
-    Category.id_comp, Category.comp_id, Category.comp_id]
-  have hs : (HomologicalComplex.singleMapHomologicalComplex (𝟭 C) (.up ℤ) 0).hom.app X =
-      𝟙 _ := by
-    change (HomologicalComplex.singleMapHomologicalComplex (𝟭 C) (.up ℤ) 0).hom.app X =
-      𝟙 ((HomologicalComplex.single C (.up ℤ) 0).obj X)
-    ext i
-    by_cases hi : i = 0
-    · subst i
-      simp only [HomologicalComplex.singleMapHomologicalComplex_hom_app_self,
-        Functor.id_map, Functor.id_obj, Iso.hom_inv_id, HomologicalComplex.id_f]
-    · exact (HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 X i hi).eq_of_src _ _
-  rw [hs]
-  erw [CategoryTheory.Functor.map_id, Category.comp_id]
+    ι_map_mapDerivedCategoryPlusSingleFunctor_hom_app]
+  exact mapDerivedCategoryIdIso_hom_app_singleFunctor_obj X
 
 set_option backward.isDefEq.respectTransparency false in
 private lemma identity_commShift {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
