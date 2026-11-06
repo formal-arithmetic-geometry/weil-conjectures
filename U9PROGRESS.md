@@ -1,20 +1,28 @@
-# BZ819 in progress
+# BZ819 complete
 
-- Branch: `u9/BZ819`; starting commit: `b3093d8fb32f9515a8a68790234b27f5de49f457`.
-- Reread the brief and progress notes on continuation; no new LEAD lines.
-- The user instructed continuation after the concrete prerequisite-restoration proposal.
-  Restored four declarations in `ScalarInternalHomAdjunction` and
-  `RingedFiniteFreeHomBaseChangeData`, preserving their original statements and docstrings.
-- The original root error was a missing `ringedFiniteFreeHomBaseChange_complex` caused
-  by deletion commits `2ecab1add` and `e0251c19d`; its callers require it to remain.
-- Added Localization imports for the private scalar-adjunction proof's Qh reductions.
-- Next: validate the restored dependencies and assigned leaf with `ucheck-bump`, repair
-  any remaining proof errors, then check downstream importers and write DONE.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
-- Assigned leaf and both restored prerequisite modules are GREEN at source commit
-  `e1270ad5484d1dd75a1a04cb32e2e4780ededcb9`: `ucheck-bump` rc=0, failed=0,
-  4122 jobs. Remote log: `/home/ubuntu/u9/logs/BZ819-20261106T081456.log`.
-- Checking the direct importer `IntegralOperationsScalarComparisons` next.
+- Branch: `u9/BZ819`; baseline: `b3093d8fb32f9515a8a68790234b27f5de49f457`.
+- Assigned leaf `RingedFiniteFreeHomBaseChangeTensor` and restored prerequisites
+  `ScalarInternalHomAdjunction` and `RingedFiniteFreeHomBaseChangeData` passed together:
+  `ucheck-bump` rc=0, failed=0, 4122 jobs at source commit
+  `e1270ad5484d1dd75a1a04cb32e2e4780ededcb9`.
+- Restored four previously deleted declarations required by live callers. Their original
+  statements and docstrings are unchanged; the user authorized continuation after the
+  concrete restoration proposal. Localization imports repair hidden Qh reductions in
+  the restored private proof. The assigned leaf source is unchanged.
+- Full green log: `/home/ubuntu/u9/bz/BUILD-BZ819-restored-full.log`.
+- Direct importer `IntegralOperationsScalarComparisons` was attempted at `4a9e30ece8`.
+  Its closure has 11 failing external modules, all outside BZ819 ownership.
+  Stopped this build after confirming those blockers; the stop made the wrapper report
+  rc=0 with failed=11, which is NOT a green downstream result.
+- No further importer layer was attempted because the sole direct importer is blocked.
+- Fixes, exact errors, occurrence counts and replayable rule:
+  `/home/ubuntu/u9/bz/FIXES-BZ819.md`.
+- Downstream log: `/home/ubuntu/u9/bz/BUILD-BZ819-downstream-full.log`.
+- Blocker errors and dependency paths: `/home/ubuntu/u9/bz/BZ819-downstream-blockers.json`.
+- Contract and rule-replay audit: `/home/ubuntu/u9/bz/BZ819-contract-audit.txt`.
+- No local Lean/Lake, statement changes, proof placeholders, trust bypasses, or heartbeat
+  increases. This final commit changes progress documentation only; Lean sources match
+  the green build. Completion marker: `/home/ubuntu/u9/state/BZ819.DONE`.
 
 # BZ133 complete
 
