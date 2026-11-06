@@ -463,4 +463,99 @@ private theorem tensor_transport (Z : Scheme.{u})
   exact (cancel_pair b.derived ((ModuleRingedComparison.tensorComparison R Z).app (M, N))
     (p.app (((derivedTensor R Z).obj M).obj N)) _).symm
 
+/-- Scalar extension, its adjunction and its tensorator realize the normalized section
+operations, including the signed flat-term K-flat representative square.
+
+Source: Stacks Project, Modules on Sites, Tags 03EK and 03EL; Cohomology on Sites,
+Tags 06YY, 07A4 and 07A6; steps 1--3 of
+`lem-sfb-coefficient-scalar-tensor-realization`.
+(blueprint: lem-sfb-coefficient-scalar-section-realization).
+
+Proof: apply internal_section_scalar_adjunction to the actual coefficient map.
+Its ordinary generator and Hom formulas give the recorded extension and restriction
+isomorphisms. Compare its universal internal derived functor with
+internalScalarExtension by uniqueness of left adjoints. The exact computation
+counit is leftDerivedFunctorIsoMapDerivedCategory followed by mapDerivedCategoryFactors.
+The normalization of the unit identifies the transported adjunction with
+Mod.derivedExtendMapDerivedCategoryAdjunction, and naturality transports the Hom formula.
+Construct the section scalar monoidal structure from scalarExtension_constraint_coherence
+on changeOfRings. Transport it through the object equalities of the normalized scalar
+pair; on generators its oplax map sends s tensor (x tensor y) to
+(s tensor x) tensor (1 tensor y). Transport the fixed internal derived tensor isomorphism
+through the product of the section equivalences to obtain t. Its identification equation
+is the defining transport square. For representative normalization, precompose both
+ordinary comparisons with the balanced tensor coprojection and scalar unit. The internal
+normalization and the preceding generator formula give equal maps on every generalized
+pure tensor. Totalization applies this equation in each bidegree with the same signs.
+Scalar extension preserves the direct sums, so the two total arrows agree. On internal
+flat-term K-flat representatives the fixed derived tensorator is the localization of
+this arrow. Substitute the scalar and tensor computation comparisons and cancel the
+adjacent isomorphisms. Section reconstruction preserves flatness and K-flatness; its
+inverse and the equivalence counit transport this equality to every section pair. These
+are precisely all clauses of the realization predicate. No boundedness is used. -/
+theorem coefficientScalarSectionRealization (Z : Scheme.{u}) :
+    CoefficientScalarSectionRealization a Z := by
+  obtain ⟨b, r, hr, o, ho, hh, F, ε, _, _, adj, hu, q, hq, p, hp, ha⟩ :=
+    InternalAbelianSheafModule.internal_section_scalar_adjunction.{u + 1, u + 1, u, u + 1}
+      (Scheme.ProEt.topology Z) (coefficientMap a Z)
+  let native := native_adj a Z
+  obtain ⟨e, he_compute, he_hom⟩ := adj_comparison native adj
+  have he (P : CochainComplex (ModuleRingedComparison.internalModules R Z) ℤ) :
+      e.hom.app (DerivedCategory.Q.obj P) ≫ ε.app P =
+        coefficientInternalScalarComplex a Z P := by
+    apply he_compute
+    apply (cancel_mono ((Mod.comap (coefficientMap a Z)).mapDerivedCategoryFactors.hom.app
+      (((Mod.extendScalars (coefficientMap a Z)).mapHomologicalComplex (.up ℤ)).obj P))).mp
+    simpa only [Category.assoc] using (hu P).trans (native_unit a Z P).symm
+  obtain ⟨p', hp'_hom, hp'_inv⟩ :=
+    transport_iso e (ModuleRingedComparison.derivedEquivalence S Z).functor p
+  have hgen : ∀ (M : ModuleRingedComparison.internalModules R Z) (V : Z.ProEtᵒᵖ)
+      (s : (condensedRingObj S Z).obj.obj V) (x : M.X.obj.obj V),
+      (o.hom.app M).val.app V
+        (InternalAbelianSheafModule.internalScalarGenerator.{u + 1, u + 1, u}
+          (Scheme.ProEt.topology Z) (coefficientMap a Z) M V s x) =
+      coefficientSectionScalarPure a Z b
+        ((ModuleRingedComparison.equivalence R Z).functor.obj M) V s x := by
+    intro M V s x
+    unfold coefficientSectionScalarPure
+    exact cast_section_eq (b.extension_obj _) V _ _ (ho M V s x)
+  have hrep : ∀ (P : CochainComplex (ModuleRingedComparison.internalModules R Z) ℤ),
+      CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}
+        (C := Z.ProEt) (J := Scheme.ProEt.topology Z)
+        (R := ModuleRingedComparison.ring R Z)
+        (((ModuleRingedComparison.equivalence R Z).functor.mapHomologicalComplex
+          (.up ℤ)).obj P) →
+      (∀ n : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1}
+        (C := Z.ProEt) (J := Scheme.ProEt.topology Z)
+        (R := ModuleRingedComparison.ring R Z)
+        ((ModuleRingedComparison.equivalence R Z).functor.obj (P.X n))) →
+      (ModuleRingedComparison.derivedEquivalence S Z).functor.map
+          (coefficientInternalScalarComplex a Z P) ≫
+        (ModuleRingedComparison.equivalence S Z).functor.mapDerivedCategoryFactors.hom.app
+          (((Mod.extendScalars (coefficientMap a Z)).mapHomologicalComplex (.up ℤ)).obj P) ≫
+        DerivedCategory.Q.map ((NatIso.mapHomologicalComplex o (.up ℤ)).hom.app P) =
+      p'.hom.app (DerivedCategory.Q.obj P) ≫
+        b.derived.map
+          ((ModuleRingedComparison.equivalence R Z).functor.mapDerivedCategoryFactors.hom.app P) ≫
+        SheafOfModules.scalarPairComplexComparison
+          (C := Z.ProEt) (J := Scheme.ProEt.topology Z)
+          (R := ModuleRingedComparison.ring R Z) (S := ModuleRingedComparison.ring S Z)
+          b.extension b.extension_additive b.derived b.counit
+          (((ModuleRingedComparison.equivalence R Z).functor.mapHomologicalComplex
+            (.up ℤ)).obj P) := by
+    intro P hP hflat
+    have h := map_computation
+      (ModuleRingedComparison.derivedEquivalence S Z).functor
+      (e.hom.app (DerivedCategory.Q.obj P)) (ε.app P)
+      (coefficientInternalScalarComplex a Z P) (he P) _ _ _ (hp P hP hflat)
+    simpa only [hp'_hom, Category.assoc] using h
+  obtain ⟨m, hm⟩ := ordinary_monoidal a Z b
+  obtain ⟨t, ht⟩ := tensor_transport a Z b p'
+  refine ⟨b, o, r, hgen, hr, hh, p', q, hq, hrep, ?_, m, hm, t, ?_, ht⟩
+  · exact transport_hom native adj b.adjunction
+      (ModuleRingedComparison.derivedEquivalence R Z).functor
+      (ModuleRingedComparison.derivedEquivalence S Z).functor e p p' q
+      he_hom hp'_inv ha
+  · exact coefficientScalarTensorRepresentative a Z b o p' m t hgen hrep hm ht
+
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -39,4 +39,30 @@ private theorem localization_transport
   apply Iso.ext
   exact Functor.mapDerivedCategoryNatIso_refl
 
+/-- The published ambient pullback square is the exact descent of the ordinary square.
+Source: Stacks Project, Tag 0D6D
+(blueprint: lem-weil-pbc-ringed-square-localization).
+Proof: the normalization theorem identifies each canonical derived compositor with
+exact localization of the ordinary compositor. Its right-adjoint conjugate has the
+same sectionwise fibre-product formula as exchangeModuleComposition, so uniqueness
+identifies the ordinary isomorphisms. Exact localization preserves inverse,
+composition and equality transport. Substitute these identities into the two
+compositors defining the square. -/
+theorem StrictTowerRingedSquare.ambientSquare_localization
+    {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
+    {f : X ⟶ Y} {g : Y' ⟶ Y} {sq : ChosenCartesianSquare g' f' f g}
+    (r : StrictTowerRingedSquare sq) :
+    proEtaleAmbientRingedPullbackComparison sq r.RX r.RY r.RX' r.RY'
+        r.cf r.cg r.cg' r.cf' r.coherent =
+      Functor.mapDerivedCategorySquareIso r.exchangeModuleSquare := by
+  unfold proEtaleAmbientRingedPullbackComparison
+  dsimp only
+  rw [composition_localization, composition_localization]
+  apply Iso.ext
+  simp only [Functor.mapDerivedCategorySquareIso, StrictTowerRingedSquare.exchangeModuleSquare,
+    Functor.mapDerivedCategoryNatIso_trans, Functor.mapDerivedCategoryNatIso_symm,
+    Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Category.assoc]
+  have ht := localization_transport r.RY r.RX' r.exchangeCoefficients_eq
+  rw [ht]
+
 end AlgebraicGeometry.Scheme

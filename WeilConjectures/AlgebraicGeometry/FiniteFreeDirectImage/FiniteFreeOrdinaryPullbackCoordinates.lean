@@ -249,4 +249,129 @@ private theorem presentedTensor_hom_ext (X : Scheme.{u}) (s : ScalarModel X)
   | tmul b m => exact h V b m
   | add x y hx hy => simp_all
 
+set_option maxHeartbeats 400000 in
+-- Elaborating the projected square expands both scalar and geometric adjunctions.
+private theorem ordinaryCoordinate_square {Z W : Scheme.{u}} {q : Z ⟶ W}
+    (sW : ScalarModel W) (sZ : ScalarModel Z)
+    (R S : Coefficients q) (a : CoefficientMap R S) (d : ℕ)
+    (θ : (∏ᶜ fun _ : Fin d ↦ SheafOfModules.unit ((sheafCompose (ProEt.topology W)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R.target)) ≅
+      (proEtaleRingRestrictScalars a.target).obj (SheafOfModules.unit ((sheafCompose
+        (ProEt.topology W) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S.target)))
+    (θZ : (∏ᶜ fun _ : Fin d ↦ SheafOfModules.unit ((sheafCompose (ProEt.topology Z)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R.source)) ≅
+      (proEtaleRingRestrictScalars a.source).obj (SheafOfModules.unit ((sheafCompose
+        (ProEt.topology Z) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S.source)))
+    (hcoord : ∀ (V : W.ProEtᵒᵖ) (b : S.target.obj.obj V) (i : Fin d),
+      (θZ.inv ≫ Pi.π _ i).val.app ((proEtaleBaseChange q).op.obj V)
+        ((proEtaleRingDirectImageMap q S.target S.source S.identification).hom.app V b) =
+      (proEtaleRingDirectImageMap q R.target R.source R.identification).hom.app V
+        ((θ.inv ≫ Pi.π _ i).val.app V b))
+    (φW : (sW.presentation a.target).ordinary ⋙ proEtaleRingRestrictScalars a.target ≅
+      Functor.const (Discrete (Fin d)) ⋙ lim)
+    (φZ : (sZ.presentation a.source).ordinary ⋙ proEtaleRingRestrictScalars a.source ≅
+      Functor.const (Discrete (Fin d)) ⋙ lim)
+    (hW : ∀ (M : proEtaleRingModules W R.target) (V : W.ProEtᵒᵖ)
+      (b : S.target.obj.obj V) (m : M.val.obj V) (i : Fin d),
+      (φW.hom.app M ≫ Pi.π (fun _ : Fin d ↦ M) i).val.app V
+        (sectionTensor (sW.presentation a.target) M V b m) =
+      (θ.inv ≫ Pi.π _ i).val.app V b • m)
+    (hZ : ∀ (M : proEtaleRingModules Z R.source) (V : Z.ProEtᵒᵖ)
+      (b : S.source.obj.obj V) (m : M.val.obj V) (i : Fin d),
+      (φZ.hom.app M ≫ Pi.π (fun _ : Fin d ↦ M) i).val.app V
+        (sectionTensor (sZ.presentation a.source) M V b m) =
+      (θZ.inv ≫ Pi.π _ i).val.app V b • m)
+    (M : proEtaleRingModules W R.target) :
+    (proEtaleRingModulePullback q R.target R.source R.identification).map (φW.hom.app M) ≫
+      (PreservesProduct.iso (proEtaleRingModulePullback q R.target R.source R.identification)
+        (fun _ : Fin d ↦ M)).hom =
+    (proEtaleRingRestrictionPullbackInv q R.target S.target R.source S.source
+      a.target a.source R.identification S.identification a.comm).app
+        ((sW.presentation a.target).ordinary.obj M) ≫
+      (proEtaleRingRestrictScalars a.source).map ((ordinaryBalancing sW sZ a).hom.app M) ≫
+      φZ.hom.app ((proEtaleRingModulePullback q R.target R.source R.identification).obj M) := by
+  let F := proEtaleRingModulePullback q R.target R.source R.identification
+  let adj := proEtaleRingModuleAdjunction q R.target R.source R.identification
+  apply limit.hom_ext
+  rintro ⟨i⟩
+  change (F.map (φW.hom.app M) ≫ (PreservesProduct.iso F (fun _ : Fin d ↦ M)).hom) ≫
+      Pi.π (fun _ : Fin d ↦ F.obj M) i = _
+  rw [Category.assoc, PreservesProduct.iso_hom, piComparison_comp_π, ← F.map_comp]
+  apply (adj.homEquiv _ _).injective
+  simp only [Adjunction.homEquiv_unit]
+  erw [← adj.unit.naturality (φW.hom.app M ≫ Pi.π (fun _ : Fin d ↦ M) i)]
+  apply presentedTensor_hom_ext W sW a.target d θ
+  intro V b m
+  change ((adj.unit.app M).val.app V)
+      ((φW.hom.app M ≫ Pi.π (fun _ : Fin d ↦ M) i).val.app V
+        (sectionTensor (sW.presentation a.target) M V b m)) =
+    (φZ.hom.app (F.obj M) ≫ Pi.π (fun _ : Fin d ↦ F.obj M) i).val.app
+      ((proEtaleBaseChange q).op.obj V)
+      (((ordinaryBalancing sW sZ a).hom.app M).val.app ((proEtaleBaseChange q).op.obj V)
+        (((proEtaleRingRestrictionPullbackInv q R.target S.target R.source S.source
+          a.target a.source R.identification S.identification a.comm).app
+            ((sW.presentation a.target).ordinary.obj M)).val.app
+              ((proEtaleBaseChange q).op.obj V)
+                ((adj.unit.app _).val.app V
+                  (sectionTensor (sW.presentation a.target) M V b m))))
+  erw [hW M V b m i]
+  erw [((adj.unit.app M).val.app V).hom.map_smul]
+  erw [restrictionPullback_unit R S a ((sW.presentation a.target).ordinary.obj M) V
+    (sectionTensor (sW.presentation a.target) M V b m)]
+  erw [ordinaryBalancing_pure sW sZ a M V b m]
+  erw [hZ (F.obj M) ((proEtaleBaseChange q).op.obj V)
+    ((proEtaleRingDirectImageMap q S.target S.source S.identification).hom.app V b)
+    ((adj.unit.app M).val.app V m) i, hcoord V b i]
+  rfl
+
+/-- A basis and its pullback give ordinary coordinate isomorphisms whose square
+commutes with the actual geometric and scalar comparisons.
+Source: Stacks Project, Tags 03EK, 03EL and 06YY.
+(blueprint: lem-sp-finite-free-ordinary-pullback-coordinates).
+
+Proof: transport the regular-module basis along exact inverse image and the regular
+module unit comparison. The tensor coordinates of these bases are natural. They
+make extension finite powers, and hence both universal derived counits invertible.
+Project the ordinary square to one coordinate and transpose through the geometric
+adjunction. On a local pure tensor its two sides are the pulled-back coordinate of
+the coefficient multiplied by the pulled-back module section. Naturality of the
+geometric unit identifies the coefficient coordinates, and conjugation identifies
+the ordinary balancing on pure tensors. Tensor generation and product
+extensionality finish the square. The argument includes the empty basis. -/
+theorem finiteFreeDirectImage_ordinaryPullbackCoordinates {Z W : Scheme.{u}} (q : Z ⟶ W)
+    (sW : ScalarModel W) (sZ : ScalarModel Z)
+    (R S : Coefficients q) (a : CoefficientMap R S) (d : ℕ)
+    (hfree : Nonempty ((proEtaleRingRestrictScalars a.target).obj
+      (SheafOfModules.unit ((sheafCompose (ProEt.topology W)
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S.target)) ≅
+      SheafOfModules.free (R := (sheafCompose (ProEt.topology W)
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R.target)
+        (ULift.{u + 1} (Fin d)))) :
+    ∃ (φW : (sW.presentation a.target).ordinary ⋙ proEtaleRingRestrictScalars a.target ≅
+        Functor.const (Discrete (Fin d)) ⋙ lim)
+      (φZ : (sZ.presentation a.source).ordinary ⋙ proEtaleRingRestrictScalars a.source ≅
+        Functor.const (Discrete (Fin d)) ⋙ lim),
+      (∀ H : HomotopyCategory (proEtaleRingModules W R.target) (.up ℤ),
+        IsIso ((sW.presentation a.target).counit.app H)) ∧
+      (∀ H : HomotopyCategory (proEtaleRingModules Z R.source) (.up ℤ),
+        IsIso ((sZ.presentation a.source).counit.app H)) ∧
+      ∀ M : proEtaleRingModules W R.target,
+        (proEtaleRingModulePullback q R.target R.source R.identification).map (φW.hom.app M) ≫
+          (PreservesProduct.iso
+            (proEtaleRingModulePullback q R.target R.source R.identification)
+            (fun _ : Fin d ↦ M)).hom =
+        (proEtaleRingRestrictionPullbackInv q R.target S.target R.source S.source
+          a.target a.source R.identification S.identification a.comm).app
+            ((sW.presentation a.target).ordinary.obj M) ≫
+          (proEtaleRingRestrictScalars a.source).map
+            ((ordinaryBalancing sW sZ a).hom.app M) ≫
+          φZ.hom.app ((proEtaleRingModulePullback q R.target R.source R.identification).obj M) := by
+  let θ := basisPowerIso W R.target d ≪≫ hfree.some.symm
+  obtain ⟨θZ, hcoord⟩ := finiteFreeDirectImage_coefficientPullback R S a d θ
+  obtain ⟨φW, _, _, hεW, hW⟩ :=
+    finiteFreeDirectImage_presentedScalarCoordinates W sW a.target d θ
+  obtain ⟨φZ, _, _, hεZ, hZ⟩ := finiteFreeDirectImage_presentedScalarCoordinates Z sZ a.source d
+    θZ
+  exact ⟨φW, φZ, hεW, hεZ, ordinaryCoordinate_square sW sZ R S a d θ θZ hcoord φW φZ hW hZ⟩
+
 end AlgebraicGeometry.Scheme.FiniteFreeDirectImage

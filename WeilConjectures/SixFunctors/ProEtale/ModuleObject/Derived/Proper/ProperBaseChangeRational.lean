@@ -172,6 +172,80 @@ private theorem push_iso
   dsimp [mateEquiv, TwoSquare.natTrans, TwoSquare.mk]
   infer_instance
 
+private theorem projection_isIso_of_coefficientIso
+    {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
+    [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S]
+    (a : R ⟶ S) [IsMonHom a] [IsIso a]
+    (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
+    [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+    {X Y : Over (Spec (.of k))}
+    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+    (f : X ⟶ Y)
+    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
+      (condensedRingObj R X.left)))
+    (M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y.left) Ab.{u + 1})
+      (condensedRingObj R Y.left)))
+    (h : IsIso (moduleObjectProjectionMap S f.left
+      ((internalScalarExtension a X.left).obj K)
+      ((internalScalarExtension a Y.left).obj M))) :
+    IsIso (moduleObjectProjectionMap R f.left K M) := by
+  let (Z : Scheme.{u}) : (Mod.comap (coefficientMap a Z)).IsEquivalence :=
+    (inferInstance : (Mod.comapEquivalenceOfIsIso (coefficientMap a Z)).functor.IsEquivalence)
+  let (Z : Scheme.{u}) : (Mod.comap (inv (coefficientMap a Z))).IsEquivalence :=
+    (inferInstance : (Mod.comapEquivalenceOfIsIso (inv (coefficientMap a Z))).functor.IsEquivalence)
+  let (Z : Scheme.{u}) : (Mod.extendScalars (coefficientMap a Z)).IsEquivalence :=
+    by
+      have : (Mod.comap (asIso (coefficientMap a Z)).inv).IsEquivalence :=
+        (inferInstance :
+          (Mod.comapEquivalenceOfIsIso (asIso (coefficientMap a Z)).inv).functor.IsEquivalence)
+      exact Functor.isEquivalence_of_iso
+        (Mod.extendScalarsIsoComapInv (coefficientMap a Z)).symm
+  let (Z : Scheme.{u}) : CategoryTheory.Limits.PreservesFiniteLimits
+      (Mod.extendScalars (coefficientMap a Z)) := inferInstance
+  have : IsIso (derivedPushHom a f.left) := by
+    unfold derivedPushHom
+    exact push_iso _ _ _
+  have (Z : Scheme.{u}) : IsIso (internalScalarTensorComparison a Z) := by
+    unfold internalScalarTensorComparison
+    infer_instance
+  have := h
+  have he := coefficientProjectionSquare ℓ k f a K M
+  have := isIso_of_square _ _ _ _ he
+  let : (internalScalarExtension a Y.left).IsEquivalence := by
+    unfold internalScalarExtension
+    infer_instance
+  exact isIso_of_reflects_iso _ (internalScalarExtension a Y.left)
+
+private theorem projection_scalars
+    {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
+    [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S]
+    (a : R ⟶ S) [IsMonHom a]
+    [∀ Z : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coefficientMap a Z))]
+    (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
+    [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+    {X Y : Over (Spec (.of k))}
+    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+    (f : X ⟶ Y)
+    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
+      (condensedRingObj R X.left)))
+    (M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y.left) Ab.{u + 1})
+      (condensedRingObj R Y.left)))
+    (hπ : IsIso (moduleObjectProjectionMap R f.left K M))
+    (hK : IsIso ((derivedPushHom a f.left).app K))
+    (hT : IsIso ((derivedPushHom a f.left).app
+      (((derivedTensor R X.left).obj K).obj
+        ((moduleObjectDerivedPullback R f.left).obj M)))) :
+    IsIso (moduleObjectProjectionMap S f.left
+      ((internalScalarExtension a X.left).obj K)
+      ((internalScalarExtension a Y.left).obj M)) := by
+  have (Z : Scheme.{u}) : IsIso (internalScalarTensorComparison a Z) := by
+    unfold internalScalarTensorComparison
+    infer_instance
+  exact isIso_of_six_sides _ _ _ _ _ _ (coefficientProjectionSquare ℓ k f a K M)
+
+-- Keep the bundled category and endpoints abstract after the generic comparison helpers.
 -- Keep the bundled category and endpoints abstract after the generic comparison helpers.
 attribute [local irreducible] moduleObjectProjectionData
 
@@ -232,5 +306,166 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (p : X ⟶ Y) [IsProper p.left]
+
+private theorem integral_projection (E : PadicAlgCl.FiniteIntermediateField ℓ)
+    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) X.left)))
+    (M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y.left) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) Y.left)))
+    (hK : boundedConstructible (condensedRingObj
+      (Profinite.padicIntegersRingObj ℓ E.val) X.left) K)
+    (hM : boundedConstructible (condensedRingObj
+      (Profinite.padicIntegersRingObj ℓ E.val) Y.left) M) :
+    IsIso (moduleObjectProjectionMap (Profinite.padicIntegersRingObj ℓ E.val) p.left K M) := by
+  let : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
+  let : IsLocallyNoetherian Y.left := LocallyOfFiniteType.isLocallyNoetherian Y.hom
+  let : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
+  let : CompactSpace Y.left := QuasiCompact.compactSpace_of_compactSpace Y.hom
+  let : X.left.Over (Spec (.of k)) := ⟨X.hom⟩
+  let : Y.left.Over (Spec (.of k)) := ⟨Y.hom⟩
+  let : p.left.IsOver (Spec (.of k)) := ⟨Over.w p⟩
+  let : LocallyOfFiniteType (X.left ↘ Spec (.of k)) :=
+    (inferInstance : LocallyOfFiniteType X.hom)
+  let : QuasiCompact (X.left ↘ Spec (.of k)) := (inferInstance : QuasiCompact X.hom)
+  let : IsSeparated (X.left ↘ Spec (.of k)) := (inferInstance : IsSeparated X.hom)
+  let : LocallyOfFiniteType (Y.left ↘ Spec (.of k)) :=
+    (inferInstance : LocallyOfFiniteType Y.hom)
+  let : QuasiCompact (Y.left ↘ Spec (.of k)) := (inferInstance : QuasiCompact Y.hom)
+  let : IsSeparated (Y.left ↘ Spec (.of k)) := (inferInstance : IsSeparated Y.hom)
+  let e := integerIso ℓ E
+  apply projection_isIso_of_coefficientIso e.hom.hom ℓ k p K M
+  exact (integralProperDirectImageAndFormulas ℓ (ULift.{u} E.val) k p.left).2.2.2 _ _
+    (integer_predicate ℓ E X.left _ (bounded_scalar e X.left K hK))
+    (integer_predicate ℓ E Y.left _ (bounded_scalar e Y.left M hM))
+
+private theorem rationalized_projection (E : PadicAlgCl.FiniteIntermediateField ℓ)
+    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) X.left)))
+    (M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y.left) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) Y.left)))
+    (hK : boundedConstructible (condensedRingObj
+      (Profinite.padicIntegersRingObj ℓ E.val) X.left) K)
+    (hM : boundedConstructible (condensedRingObj
+      (Profinite.padicIntegersRingObj ℓ E.val) Y.left) M) :
+    IsIso (moduleObjectProjectionMap (Profinite.continuousMapRingObj E) p.left
+      ((internalScalarExtension (padicIntegersRingObjToContinuousMapRingObj ℓ E)
+        X.left).obj K)
+      ((internalScalarExtension (padicIntegersRingObjToContinuousMapRingObj ℓ E)
+        Y.left).obj M)) := by
+  let a := padicIntegersRingObjToContinuousMapRingObj ℓ E
+  let : ∀ Z : Scheme.{u}, PreservesFiniteLimits
+      (Mod.extendScalars (coefficientMap a Z)) :=
+    fun Z ↦ (padicIntegers_invertEll Z ℓ E).choose_spec.2.choose_spec.2.2.choose_spec.2.2.2
+  have hI := integral_projection ℓ p E K M hK hM
+  have hP := boundedConstructible_leftDerivedUpperStar_obj
+    (Profinite.padicIntegersRingObj ℓ E.val) ℓ p ⟨M, hM⟩
+  have hT := PadicIntegersRingObj.boundedConstructible_tensor_closure ℓ E.val K _ hK hP
+  have hγK := isIso_rationalizationPushHom_boundedBelow ℓ p E K hK.1.1
+  have hγT := isIso_rationalizationPushHom_boundedBelow ℓ p E _ hT.1.1
+  unfold IsIsoRationalizationPushHomApp rationalizationPushHom at hγK hγT
+  change IsIso ((derivedPushHom a p.left).app K) at hγK
+  change IsIso ((derivedPushHom a p.left).app _) at hγT
+  exact projection_scalars a ℓ k p K M hI hγK hγT
+
+private theorem finite_projection (E : PadicAlgCl.FiniteIntermediateField ℓ)
+    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
+      (condensedRingObj (Profinite.continuousMapRingObj E) X.left)))
+    (M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y.left) Ab.{u + 1})
+      (condensedRingObj (Profinite.continuousMapRingObj E) Y.left)))
+    (hK : boundedConstructible (condensedRingObj
+      (Profinite.continuousMapRingObj E) X.left) K)
+    (hM : boundedConstructible (condensedRingObj
+      (Profinite.continuousMapRingObj E) Y.left) M) :
+    IsIso (moduleObjectProjectionMap (Profinite.continuousMapRingObj E) p.left K M) := by
+  let : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
+  let : IsLocallyNoetherian Y.left := LocallyOfFiniteType.isLocallyNoetherian Y.hom
+  let : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
+  let : CompactSpace Y.left := QuasiCompact.compactSpace_of_compactSpace Y.hom
+  let : IsNoetherian X.left := ⟨⟩
+  let : IsNoetherian Y.left := ⟨⟩
+  have hX := Localization.essSurj (boundedConstructibleExtendScalars X.left ℓ E)
+    (Rationalization.W (Submonoid.powers (ℓ : ℤ)) _)
+  have hY := Localization.essSurj (boundedConstructibleExtendScalars Y.left ℓ E)
+    (Rationalization.W (Submonoid.powers (ℓ : ℤ)) _)
+  obtain ⟨K₀, ⟨eK⟩⟩ := Functor.EssSurj.mem_essImage
+    (boundedConstructibleExtendScalars X.left ℓ E) ⟨K, hK⟩
+  obtain ⟨M₀, ⟨eM⟩⟩ := Functor.EssSurj.mem_essImage
+    (boundedConstructibleExtendScalars Y.left ℓ E) ⟨M, hM⟩
+  apply projection_iso (Profinite.continuousMapRingObj E) p.left
+    ((boundedConstructible _).ι.mapIso eK) ((boundedConstructible _).ι.mapIso eM)
+  exact rationalized_projection ℓ p E K₀.obj M₀.obj K₀.property M₀.property
+
+private theorem algcl_projection (F : PadicAlgCl.FiniteIntermediateField ℓ)
+    (KF : PadicSubfieldConstructible X.left ℓ F)
+    (MF : PadicSubfieldConstructible Y.left ℓ F) :
+    IsIso (moduleObjectProjectionMap (Profinite.padicAlgClRingObj ℓ) p.left
+      ((internalScalarExtension (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ F)
+        X.left).obj KF.obj)
+      ((internalScalarExtension (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ F)
+        Y.left).obj MF.obj)) := by
+  let a := Profinite.padicSubfieldRingObjToPadicAlgCl ℓ F
+  let : ∀ Z : Scheme.{u}, PreservesFiniteLimits
+      (Mod.extendScalars (coefficientMap a Z)) :=
+    fun Z ↦ preservesFiniteLimits_extendScalars_padicSubfieldRingObjToPadicAlgCl ℓ Z F
+  have hI := finite_projection ℓ p F KF.obj MF.obj KF.property MF.property
+  have hγK := isIso_algClCoefficientPushHom_boundedBelow ℓ p F KF.obj KF.property.1.1
+  have hP := boundedConstructible_leftDerivedUpperStar_obj
+    (Profinite.continuousMapRingObj F) ℓ p MF
+  have hT := ContinuousMapRingObj.boundedConstructible_tensor_closure ℓ F KF.obj _
+    KF.property hP
+  have hγT := isIso_algClCoefficientPushHom_boundedBelow ℓ p F _ hT.1.1
+  exact projection_scalars a ℓ k p KF.obj MF.obj hI hγK hγT
+
+/-- The specified proper projection formula is invertible on bounded constructible objects.
+Source: blueprint rational proper direct image, clause 3, projection formula
+(blueprint: det-thm-sfb-proper-base-change-rational).
+
+Proof: compare integral coefficient presentations by their canonical ring isomorphism,
+transport bounded constructibility, and apply the integral proper projection formula.
+For finite E, localization of bounded constructible complexes is essentially surjective,
+so choose integral models for K and M. Their derived tensor after pullback is again bounded
+constructible. The coefficient/projection square and the two proper rationalization
+comparisons transfer the integral projection isomorphism to E. Naturality transfers it
+along the model isomorphisms. For Qlbar, descend both objects to finite coefficient fields,
+pass to a common finite subextension, and apply the same square with the E-to-Qlbar proper
+push comparisons. This uses integral models of the actual objects, so no induction on
+lattice generators or triangulated two-out-of-three argument is needed.
+-/
+theorem isIso_properProjectionMap_boundedConstructible_rational
+    (Λ : Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}))
+    [IsCommMonObj Λ.X]
+    (_hΛ : (∃ E : PadicAlgCl.FiniteIntermediateField ℓ,
+      Λ = Mon.mk (Profinite.continuousMapRingObj E)) ∨
+      Λ = Mon.mk (Profinite.padicAlgClRingObj ℓ))
+    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
+      (condensedRingObj Λ.X X.left)))
+    (M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y.left) Ab.{u + 1})
+      (condensedRingObj Λ.X Y.left)))
+    (_hK : boundedConstructible (condensedRingObj Λ.X X.left) K)
+    (_hM : boundedConstructible (condensedRingObj Λ.X Y.left) M) :
+    IsIso (moduleObjectProjectionMap Λ.X p.left K M) := by
+  rcases _hΛ with ⟨E, hE⟩ | hQ
+  · subst Λ
+    exact finite_projection ℓ p E K M _hK _hM
+  · subst Λ
+    let : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
+    let : IsLocallyNoetherian Y.left := LocallyOfFiniteType.isLocallyNoetherian Y.hom
+    let : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
+    let : CompactSpace Y.left := QuasiCompact.compactSpace_of_compactSpace Y.hom
+    let : IsNoetherian X.left := ⟨⟩
+    let : IsNoetherian Y.left := ⟨⟩
+    obtain ⟨E, KE, ⟨eK⟩⟩ := finite_model X.left ℓ ⟨K, _hK⟩
+    obtain ⟨E', ME, ⟨eM⟩⟩ := finite_model Y.left ℓ ⟨M, _hM⟩
+    let F : PadicAlgCl.FiniteIntermediateField ℓ := ⟨E.val ⊔ E'.val, inferInstance⟩
+    have hEF : E ≤ F := show E.val ≤ E.val ⊔ E'.val from le_sup_left
+    have hE'F : E' ≤ F := show E'.val ≤ E.val ⊔ E'.val from le_sup_right
+    let KF := (constructibleExtendScalars X.left ℓ hEF).obj KE
+    let MF := (constructibleExtendScalars Y.left ℓ hE'F).obj ME
+    let eKF := (derivedExtendScalarsCompIso X.left ℓ hEF).app KE.obj ≪≫
+      (boundedConstructible _).ι.mapIso eK
+    let eMF := (derivedExtendScalarsCompIso Y.left ℓ hE'F).app ME.obj ≪≫
+      (boundedConstructible _).ι.mapIso eM
+    apply projection_iso (Profinite.padicAlgClRingObj ℓ) p.left eKF eMF
+    exact algcl_projection ℓ p F KF MF
 
 end AlgebraicGeometry.ProEtale.CondensedRing

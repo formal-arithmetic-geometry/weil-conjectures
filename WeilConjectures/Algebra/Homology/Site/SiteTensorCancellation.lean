@@ -92,6 +92,72 @@ private def siteCancel (P Q : LineEvaluation.Modules.{uC, vC, r} R)
       LineEvaluation.cancellation.{uC, vC, r}
         (R) P Q e
 
+private theorem siteCancel_pure (P Q M : LineEvaluation.Modules.{uC, vC, r} R)
+    (e : P ⊗ Q ≅ unit
+      ((sheafCompose (J)
+        (forget₂ CommRingCat RingCat)).obj (R)))
+    (U : Cᵒᵖ) (x : M.val.obj U) (p : P.val.obj U) (q : Q.val.obj U) :
+    ((siteCancel R P Q e).hom.app M).val.app U
+      (siteSheafTensorTmul.{uC, vC, max uC vC r, max uC vC r} _ Q U
+        (siteSheafTensorTmul.{uC, vC, max uC vC r, max uC vC r} M P U x p) q) =
+      @SMul.smul _ _ (M.val.obj U).isModule.toSMul
+        (e.hom.val.app U
+          (LineEvaluation.pureTensor.{uC, vC, r} _ P Q U p q)) x := by
+  change ((LineEvaluation.cancellation.{uC, vC, r}
+      (R) P Q e).hom.app M).val.app U
+    ((ScalarHomOrdinary.tensorIsoSite.{uC, vC, max uC vC r} _ (M ⊗ P) Q).inv.val.app U
+      (((siteSheafTensorRight.{vC, uC, max uC vC r, max uC vC r} Q).map
+        (ScalarHomOrdinary.tensorIsoSite.{uC, vC, max uC vC r} _ M P).inv).val.app U
+          (siteSheafTensorTmul.{uC, vC, max uC vC r, max uC vC r} _ Q U
+            (siteSheafTensorTmul.{uC, vC, max uC vC r, max uC vC r} M P U x p) q))) = _
+  have h₁ := map_tmul_first
+    (R)
+    (ScalarHomOrdinary.tensorIsoSite _ M P).inv U
+    (siteSheafTensorTmul M P U x p) q
+  have h₂ := ScalarHomOrdinary.tensorIsoSite_inv_pure
+    (R) (M ⊗ P) Q U
+    ((ScalarHomOrdinary.tensorIsoSite _ M P).inv.val.app U
+      (siteSheafTensorTmul M P U x p)) q
+  have h₃ := ScalarHomOrdinary.tensorIsoSite_inv_pure
+    (R) M P U x p
+  exact (congrArg (fun z ↦
+    ((LineEvaluation.cancellation.{uC, vC, r} _ P Q e).hom.app M).val.app U
+      ((ScalarHomOrdinary.tensorIsoSite _ (M ⊗ P) Q).inv.val.app U z))
+    h₁).trans ((congrArg
+      (((LineEvaluation.cancellation.{uC, vC, r} _ P Q e).hom.app M).val.app U)
+      h₂).trans ((congrArg (fun z ↦
+        ((LineEvaluation.cancellation.{uC, vC, r} _ P Q e).hom.app M).val.app U
+          (LineEvaluation.pureTensor.{uC, vC, r} _ (M ⊗ P) Q U z q)) h₃).trans
+            (LineEvaluation.cancellation_pure.{uC, vC, r} _ P Q M e U x p q)))
+
 attribute [local irreducible] tensorToSite siteCancel
+/-- A specified evaluation pairing gives the unique cancellation on pure site tensors.
+Source: Stacks 03EK and 0B8N
+(blueprint: lem-pur-site-tensor-cancellation).
+Proof: compare the explicit site tensor with the monoidal sheaf tensor. Transport
+reassociation, the specified pairing and the unitor through that comparison. Its
+formula follows on pure sections from the comparison formulas. The trilinear
+universal property shows that this formula determines every component uniquely. -/
+theorem siteTensorCancellation (P Q : LineEvaluation.Modules.{uC, vC, r} R)
+    (e : P ⊗ Q ≅ unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) :
+    ∃! c : siteSheafTensorRight P ⋙ siteSheafTensorRight Q ≅ 𝟭 _,
+      ∀ (M : LineEvaluation.Modules.{uC, vC, r} R) (U : Cᵒᵖ)
+        (x : M.val.obj U) (p : P.val.obj U) (q : Q.val.obj U),
+        (c.hom.app M).val.app U
+          (siteSheafTensorTmul _ Q U (siteSheafTensorTmul M P U x p) q) =
+          @SMul.smul _ _ (M.val.obj U).isModule.toSMul
+            (e.hom.val.app U (LineEvaluation.pureTensor R P Q U p q)) x := by
+  let c := siteCancel R P Q e
+  have hc := siteCancel_pure R P Q
+  refine ⟨c, fun M U x p q ↦ hc M e U x p q, ?_⟩
+  intro c' hc'
+  apply Iso.ext
+  apply NatTrans.ext
+  funext M
+  obtain ⟨_, _, _, hext⟩ := tensor_trilinear_universal R
+  apply (hext M P Q M (c'.hom.app M) (c.hom.app M)).2
+  intro U x p q
+  exact (hc' M U x p q).trans (hc M e U x p q).symm
+
 
 end SheafOfModules

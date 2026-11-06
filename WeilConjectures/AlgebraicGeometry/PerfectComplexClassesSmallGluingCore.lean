@@ -63,4 +63,51 @@ private theorem small_skeleton_of_triangle_terms
 
 namespace AlgebraicGeometry.Scheme
 
+/-- Core two-open gluing argument for a fixed open immersion.
+(blueprint: new-perfect-classes-small-gluing-core)
+Proof: transport the three smallness hypotheses to the inverse-image opens of `Y`.
+Use the derived Mayer--Vietoris triangle and replace restrictions by skeleton
+representatives. K-injective resolutions make the type of maps u-small; uniqueness
+of cocones up to isomorphism gives a surjection onto the perfect skeleton, and
+`small_of_surjective` concludes. Empty opens contribute only the zero class.
+Source: Step 2 of `lem-pc-perfect-complexes-compact-set`, using Stacks Project,
+Tags 08BV and 08DR (blueprint: lem-pc-perfect-classes-small-gluing).
+The proof transports the Mayer--Vietoris triangle to skeleton representatives;
+smallness of the resulting triples and maps follows from K-injective resolutions,
+and uniqueness of cocones follows from the morphism-of-triangles axiom. -/
+theorem perfectComplex_classesSmallOnOpen_union_core (X : Scheme.{u})
+    [QuasiSeparatedSpace X] (U V : X.Opens) (hU : IsCompact (U : Set X))
+    (hV : IsAffineOpen V)
+    (pU : PerfectComplexClassesSmallOnOpen.{u, w} X U)
+    (pV : PerfectComplexClassesSmallOnOpen.{u, w} X V)
+    (pUV : PerfectComplexClassesSmallOnOpen.{u, w} X (U ⊓ V))
+    (Y : Scheme.{u}) (f : Y ⟶ X) [IsOpenImmersion f]
+    (hr : f.opensRange = U ⊔ V)
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+    [∀ W : Y.Opens,
+      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over W))] :
+    Small.{u} (Skeleton (ObjectProperty.FullSubcategory
+      (fun E : schemeDerivedQCohCategory Y ↦ IsPerfect Y E.obj))) := by
+  have _ := hU
+  have _ := hV
+  let : IsGrothendieckAbelian.{u}
+      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) :=
+    (SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutions
+      (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf).1
+  let P := perfectGluingMiddleProperty Y (f ⁻¹ᵁ U) (f ⁻¹ᵁ V)
+  let Q := perfectGluingOverlapProperty Y (f ⁻¹ᵁ U) (f ⁻¹ᵁ V)
+  obtain ⟨hP, hQ⟩ := perfectGluing_endpoints_small X U V pU pV pUV Y f hr
+  let : Small.{u} (Skeleton P.FullSubcategory) := hP
+  let : Small.{u} (Skeleton Q.FullSubcategory) := hQ
+  let R : ObjectProperty (schemeDerivedQCohCategory Y) := fun E ↦ IsPerfect Y E.obj
+  let F := R.ι ⋙ (schemeDerivedQCohProperty Y).ι
+  have hcover : (f ⁻¹ᵁ U) ⊔ (f ⁻¹ᵁ V) = ⊤ := by
+    change f ⁻¹ᵁ (U ⊔ V) = ⊤
+    rw [← hr]
+    exact f.preimage_opensRange
+  apply small_skeleton_of_triangle_terms F P Q
+  intro E
+  exact perfectGluing_triangle_presentation Y (f ⁻¹ᵁ U) (f ⁻¹ᵁ V) hcover
+    E.obj E.property
+
 end AlgebraicGeometry.Scheme

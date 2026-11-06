@@ -114,4 +114,73 @@ private theorem ambientData_transport
   simpa only [eqToIso_refl, Iso.refl_trans] using
     ambientData_exists h k RV RW RZ ck ch
 
+/-- The specified derived composition is the localization of the conjugate
+of a section-normalized ordinary direct-image compositor.
+Source: Stacks Tag 0D6D (blueprint: lem-sp-canonical-derived-pullback-normalization).
+Proof: the ordinary unit normalization uniquely determines all three adjunctions.
+The formula on sections uniquely determines the direct-image compositor. Its
+conjugate therefore determines the ordinary pullback compositor, and the degree
+formula determines its cochain comparison. Localization with the canonical
+factorization isomorphisms satisfies the displayed K-flat normalization, so the
+uniqueness clause for canonical derived composition identifies the two maps. -/
+theorem proEtaleCanonicalDerivedPullback_normalization
+    {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V)
+    (RV : Sheaf (ProEt.topology V) CommRingCat.{u + 1})
+    (RW : Sheaf (ProEt.topology W) CommRingCat.{u + 1})
+    (RZ : Sheaf (ProEt.topology Z) CommRingCat.{u + 1})
+    (ck : (proEtaleSheafInverseImage k CommRingCat.{u + 1}).obj RV ≅ RW)
+    (ch : (proEtaleSheafInverseImage h CommRingCat.{u + 1}).obj RW ≅ RZ)
+    (c : (proEtaleSheafInverseImage (h ≫ k) CommRingCat.{u + 1}).obj RV ≅ RZ)
+    (hc : proEtaleRingCompositeCoefficients h k RV RW RZ ck ch = c)
+    (d : proEtaleRingModuleDirectImage h RW RZ ch ⋙
+      proEtaleRingModuleDirectImage k RV RW ck ≅
+        proEtaleRingModuleDirectImage (h ≫ k) RV RZ c)
+    (hd : ∀ (N : proEtaleRingModules Z RZ) (U : V.ProEt)
+      (m : ((proEtaleRingModuleDirectImage h RW RZ ch ⋙
+        proEtaleRingModuleDirectImage k RV RW ck).obj N).val.obj (Opposite.op U)),
+      (d.hom.app N).val.app (Opposite.op U) m =
+        N.val.map ((MorphismProperty.Over.pullbackComp
+          (P := @WeaklyEtale) (Q := ⊤) h k).hom.app U).op m) :
+    eqToIso (congrArg (proEtaleRingDerivedPullback (h ≫ k) RV RZ) hc.symm) ≪≫
+        proEtaleCanonicalDerivedPullbackComparison h k RV RW RZ ck ch =
+      Functor.mapDerivedCategoryNatIso
+        (Adjunction.leftAdjointCompIso (proEtaleRingModuleAdjunction k RV RW ck)
+          (proEtaleRingModuleAdjunction h RW RZ ch)
+          (proEtaleRingModuleAdjunction (h ≫ k) RV RZ c) d).symm ≪≫
+        Functor.mapDerivedCategoryCompIso (proEtaleRingModulePullback k RV RW ck)
+          (proEtaleRingModulePullback h RW RZ ch) := by
+  let D := Classical.choice (ambientData_transport h k RV RW RZ ck ch c hc)
+  have hk := normalizedAdj_eq_actual k RV RW ck D.adjk D.nk
+  have hh := normalizedAdj_eq_actual h RW RZ ch D.adjh D.nh
+  have hcomp := normalizedAdj_eq_actual (h ≫ k) RV RZ c D.adjc D.nc
+  have hD : D.d = d := by
+    apply Iso.ext
+    apply NatTrans.ext
+    funext N
+    apply SheafOfModules.hom_ext
+    apply PresheafOfModules.hom_ext
+    intro U
+    ext m
+    exact (D.hd N U.unop m).trans (hd N U.unop m).symm
+  have heq := congrArg₂ conjugateIsoEquiv
+    (congrArg₂ Adjunction.comp hk hh) hcomp
+  have ha := (congrArg (fun e ↦ e D.a) heq).symm.trans (D.ha.trans hD)
+  have hleft : D.a = (Adjunction.leftAdjointCompIso
+      (proEtaleRingModuleAdjunction k RV RW ck)
+      (proEtaleRingModuleAdjunction h RW RZ ch)
+      (proEtaleRingModuleAdjunction (h ≫ k) RV RZ c) d).symm := by
+    apply (conjugateIsoEquiv
+      ((proEtaleRingModuleAdjunction k RV RW ck).comp
+        (proEtaleRingModuleAdjunction h RW RZ ch))
+      (proEtaleRingModuleAdjunction (h ≫ k) RV RZ c)).injective
+    rw [ha]
+    exact ((conjugateIsoEquiv
+      ((proEtaleRingModuleAdjunction k RV RW ck).comp
+        (proEtaleRingModuleAdjunction h RW RZ ch))
+      (proEtaleRingModuleAdjunction (h ≫ k) RV RZ c)).apply_symm_apply d).symm
+  have e := pullbackData_comparison h k RV RW RZ ck ch c hc _ D
+  exact e.trans (congrArg (fun a ↦ Functor.mapDerivedCategoryNatIso a ≪≫
+    Functor.mapDerivedCategoryCompIso (proEtaleRingModulePullback k RV RW ck)
+      (proEtaleRingModulePullback h RW RZ ch)) hleft)
+
 end AlgebraicGeometry.Scheme

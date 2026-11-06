@@ -397,6 +397,87 @@ def ClopenProjectorDescent
 attribute [local instance] clopenTowerAbelian
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
+private theorem projector_factorsh
+    {A D : Type*} [Category A] [Category D] [Abelian A] [Abelian D]
+    [HasDerivedCategory A] [HasDerivedCategory D]
+    (F : A ⥤ D) [F.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    (K : CochainComplex A ℤ) :
+    F.mapDerivedCategoryFactorsh.hom.app ((HomotopyCategory.quotient A (.up ℤ)).obj K) =
+      F.mapDerivedCategoryFactors.hom.app K := by
+  rw [Functor.mapDerivedCategoryFactorsh_hom_app]
+  dsimp only [DerivedCategory.quotientCompQhIso,
+    HomologicalComplexUpToQuasiIso.quotientCompQhIso,
+    Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift, NatIso.ofComponents_hom_app,
+    NatIso.ofComponents_inv_app, Iso.refl_hom, Iso.refl_inv, Functor.comp_obj]
+  erw [F.mapDerivedCategory.map_id, Category.id_comp, DerivedCategory.Qh.map_id,
+    Category.comp_id, Category.comp_id]
+
+private theorem projector_unit_fac
+    {A D : Type*} [Category A] [Category D] [Abelian A] [Abelian D]
+    [HasDerivedCategory A] [HasDerivedCategory D] [Abelian.HasKInjectiveResolutions D]
+    {L : A ⥤ D} {R : D ⥤ A} [L.Additive] [R.Additive]
+    [PreservesFiniteLimits L] [PreservesFiniteColimits L]
+    [PreservesFiniteLimits R] [PreservesFiniteColimits R]
+    (a : L ⊣ R) (K : CochainComplex A ℤ) :
+    (exactAdj a).unit.app (DerivedCategory.Q.obj K) ≫
+        R.mapDerivedCategory.map (L.mapDerivedCategoryFactors.hom.app K) ≫
+        R.mapDerivedCategoryFactors.hom.app ((L.mapHomologicalComplex (.up ℤ)).obj K) =
+      DerivedCategory.Q.map ((a.mapHomologicalComplex (.up ℤ)).unit.app K) := by
+  have h := exactAdj_unit a ((HomotopyCategory.quotient A (.up ℤ)).obj K)
+  rw [projector_factorsh] at h
+  change (exactAdj a).unit.app (DerivedCategory.Q.obj K) ≫
+    R.mapDerivedCategory.map (L.mapDerivedCategoryFactors.hom.app K) ≫
+      R.mapDerivedCategoryFactorsh.hom.app
+        ((HomotopyCategory.quotient D (.up ℤ)).obj
+          ((L.mapHomologicalComplex (.up ℤ)).obj K)) = _ at h
+  rw [projector_factorsh, Adjunction.mapHomotopyCategory_unit_app_quotient] at h
+  exact h
+
+set_option backward.isDefEq.respectTransparency true in
+private theorem projector_restriction_descent
+    {A D : Type*} [Category A] [Category D] [Abelian A] [Abelian D]
+    [HasDerivedCategory A] [HasDerivedCategory D] [Abelian.HasKInjectiveResolutions A]
+    (F : A ⥤ D) (H : D ⥤ A) [F.Additive] [H.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+    (a : H ⊣ F) (p : 𝟭 A ⟶ F ⋙ H)
+    (d : 𝟭 (DerivedCategory A) ⟶ F.mapDerivedCategory ⋙ H.mapDerivedCategory)
+    (hp : ∀ M, F.map (p.app M) = a.unit.app (F.obj M))
+    (hd : ∀ K : CochainComplex A ℤ,
+      d.app (DerivedCategory.Q.obj K) ≫
+        H.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app K) ≫
+        H.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj K) =
+      DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex p (.up ℤ)).app K)) :
+    ∀ M, F.mapDerivedCategory.map (d.app M) =
+      (exactAdj a).unit.app (F.mapDerivedCategory.obj M) := by
+  have he : Functor.whiskerRight d F.mapDerivedCategory =
+      Functor.whiskerLeft F.mapDerivedCategory (exactAdj a).unit := by
+    apply Localization.natTrans_ext DerivedCategory.Q
+      (HomologicalComplex.quasiIso A (.up ℤ))
+    intro K
+    change F.mapDerivedCategory.map (d.app (DerivedCategory.Q.obj K)) =
+      (exactAdj a).unit.app (F.mapDerivedCategory.obj (DerivedCategory.Q.obj K))
+    apply (cancel_mono
+      (F.mapDerivedCategory.map
+        (H.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app K) ≫
+          H.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj K)) ≫
+        F.mapDerivedCategoryFactors.hom.app
+          ((H.mapHomologicalComplex (.up ℤ)).obj
+            ((F.mapHomologicalComplex (.up ℤ)).obj K)))).1
+    erw [← F.mapDerivedCategory.map_comp_assoc, hd,
+      Functor.mapDerivedCategoryFactors_hom_naturality]
+    simp only [Functor.map_comp, Category.assoc]
+    have hn := (exactAdj a).unit.naturality (F.mapDerivedCategoryFactors.hom.app K)
+    dsimp only [Functor.comp_map, Functor.id_map] at hn
+    erw [← reassoc_of% hn, projector_unit_fac]
+    congr 2
+    apply HomologicalComplex.hom_ext
+    intro n
+    exact hp (K.X n)
+  intro M
+  exact NatTrans.congr_app he M
+
 section ProjectorLocalization
 
 variable {A D : Type*} [Category A] [Category D] [Abelian A] [Abelian D]
@@ -428,7 +509,7 @@ private theorem projector_lift_fac (K : CochainComplex A ℤ) :
 @[irreducible] private def projector_map :
     𝟭 (DerivedCategory A) ⟶ F.mapDerivedCategory ⋙ H.mapDerivedCategory :=
   (Functor.mapDerivedCategoryIdIso A).inv ≫ projector_lift F H p ≫
-    (Functor.mapDerivedCategoryCompIso F H).inv
+    (Functor.mapDerivedCategoryCompIso F H).hom
 
 private theorem projector_map_fac (K : CochainComplex A ℤ) :
     (projector_map F H p).app (DerivedCategory.Q.obj K) ≫
@@ -449,6 +530,24 @@ private theorem projector_map_fac (K : CochainComplex A ℤ) :
       rw [projector_lift_fac, ← hi]
       exact Iso.inv_hom_id_app_assoc _ _ _
 
+private theorem projector_map_descent : ClopenProjectorDescent
+    (𝟭 A) (F ⋙ H) p ((Functor.mapDerivedCategoryIdIso A).hom ≫
+      projector_map F H p ≫ (Functor.mapDerivedCategoryCompIso F H).inv) := by
+  have h : (Functor.mapDerivedCategoryIdIso A).hom ≫ projector_map F H p ≫
+      (Functor.mapDerivedCategoryCompIso F H).inv = projector_lift F H p := by
+    rw [projector_map]
+    simp only [Category.assoc, Iso.hom_inv_id_assoc, Iso.hom_inv_id, Category.comp_id]
+  rw [h]
+  exact projector_lift_fac F H p
+
+private theorem projector_map_descent_eq
+    (e : 𝟭 (DerivedCategory A) ⟶ F.mapDerivedCategory ⋙ H.mapDerivedCategory)
+    (he : projector_map F H p = e) : ClopenProjectorDescent
+    (𝟭 A) (F ⋙ H) p ((Functor.mapDerivedCategoryIdIso A).hom ≫
+      e ≫ (Functor.mapDerivedCategoryCompIso F H).inv) := by
+  rw [← he]
+  exact projector_map_descent F H p
+
 end ProjectorLocalization
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
@@ -463,6 +562,40 @@ private theorem projector_unique
   apply (b.homEquiv M (G.obj M)).symm.injective
   simp only [Adjunction.homEquiv_counit, Functor.map_comp]
   rw [h]
+
+private theorem projector_descent_of_restriction
+    {A D : Type*} [Category A] [Category D] [Abelian A] [Abelian D]
+    [HasDerivedCategory A] [HasDerivedCategory D] [Abelian.HasKInjectiveResolutions A]
+    (F : A ⥤ D) (H : D ⥤ A) [F.Additive] [H.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+    (a : H ⊣ F) (R : DerivedCategory D ⥤ DerivedCategory A)
+    (b : F.mapDerivedCategory ⊣ R) (t : H.mapDerivedCategory ⟶ R) (ht : IsIso t)
+    (p : 𝟭 A ⟶ F ⋙ H)
+    (e : 𝟭 (DerivedCategory A) ⟶ F.mapDerivedCategory ⋙ H.mapDerivedCategory)
+    (hp : ∀ M, F.map (p.app M) = a.unit.app (F.obj M))
+    (he : ∀ M, F.mapDerivedCategory.map (e.app M) =
+      (exactAdj a).unit.app (F.mapDerivedCategory.obj M)) :
+    ClopenProjectorDescent (𝟭 A) (F ⋙ H) p
+      ((Functor.mapDerivedCategoryIdIso A).hom ≫ e ≫
+        (Functor.mapDerivedCategoryCompIso F H).inv) := by
+  have := ht
+  have hd := projector_restriction_descent F H a p (projector_map F H p) hp
+    (projector_map_fac F H p)
+  exact projector_map_descent_eq F H p e
+    (projector_unique b t _ e (fun M ↦ (hd M).trans (he M).symm))
+
+private theorem projector_complement_zero
+    {A D E : Type*} [Category A] [Category D] [Category E]
+    [Abelian A] [Abelian D] [Abelian E]
+    [HasDerivedCategory A] [HasDerivedCategory D] [HasDerivedCategory E]
+    (H : D ⥤ A) (F : A ⥤ E) [H.Additive] [F.Additive]
+    [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    (h : ∀ N, IsZero ((H ⋙ F).obj N)) (M : DerivedCategory D) :
+    IsZero (F.mapDerivedCategory.obj (H.mapDerivedCategory.obj M)) := by
+  have hz := (H ⋙ F).isZero_mapDerivedCategory_obj M (fun _ ↦ h _)
+  exact hz.of_iso ((Functor.mapDerivedCategoryCompIso H F).app M).symm
 
 private theorem intrinsic_projector_restriction {U X : Scheme.{u}}
     (s : U ⟶ X) [IsOpenImmersion s] [IsClosedImmersion s] (M : Derived B X) :
@@ -484,6 +617,67 @@ private theorem intrinsic_projector_normalization {U X : Scheme.{u}}
   dsimp only [pi]
   rw [Category.assoc, ← Functor.whiskerLeft_comp]
   simp only [IsIso.inv_hom_id, Functor.whiskerLeft_id', Category.comp_id]
+
+set_option backward.isDefEq.respectTransparency true in
+/-- Localization gives the specified intrinsic projector and preserves the normalized
+unit and both component equations as actual transformations on D(T_X).
+Source: Stacks 015F, 0DVC, 0FND and localization's universal property
+(blueprint: lem-cbc-proper-open-clopen-projector).
+Proof: the ordinary clopen identification makes termwise direct image exact.
+The exact-derived-functor theorem identifies its descent with total R_s. Use the
+cochain-derived-adjunction unit equation for both adjunctions, with all complexes
+as resolving class. Both comparisons are invertible, so the descended transpose
+is precisely openToR and the descended section projection is pi. Localization
+preserves the ordinary equations; its universal property identifies transformations
+agreeing after the localization functor. The complementary target is the image
+of a zero complex. No faithfulness of tower evaluations is used. -/
+theorem clopenDerived_section_projector {U X C : Scheme.{u}}
+    (s : U ⟶ X) (c : C ⟶ X) [IsOpenImmersion s] [IsClosedImmersion s]
+    [IsOpenImmersion c] (hc : Set.range c = (Set.range s)ᶜ) :
+    ClopenProjectorDescent (A := Towers B X) (D := Towers B X)
+      (aA := clopenTowerAbelian B X) (aD := clopenTowerAbelian B X)
+      (𝟭 (Towers B X)) (towerPullback B s ⋙ towerJ B s) (clopenTowerPi B s)
+      ((@Functor.mapDerivedCategoryIdIso (Towers B X) inferInstance
+        (clopenTowerAbelian B X) (towers_hasDerivedCategory B X)).hom ≫ pi B s ≫
+        (@Functor.mapDerivedCategoryCompIso (Towers B X) (Towers B U) (Towers B X)
+          inferInstance inferInstance inferInstance
+          (clopenTowerAbelian B X) (clopenTowerAbelian B U) (clopenTowerAbelian B X)
+          (towers_hasDerivedCategory B X) (towers_hasDerivedCategory B U)
+          (towers_hasDerivedCategory B X) (towerPullback B s) (towerJ B s)
+          inferInstance inferInstance inferInstance
+          inferInstance inferInstance inferInstance).inv) ∧
+    IsIso (openToR B s) ∧
+    pi B s ≫ Functor.whiskerLeft (G B s) (openToR B s) =
+      (adj B s).unit ∧
+    (∀ M : Derived B X,
+      (G B s).map ((pi B s).app M) =
+        (jAdj B s).unit.app ((G B s).obj M)) ∧
+    (∀ M : Derived B X,
+      IsZero ((G B c).obj ((J B s).obj ((G B s).obj M))) ∧
+      (G B c).map ((pi B s).app M) = 0) := by
+  have ht := openToR_isIso B s
+  have hpi := intrinsic_projector_restriction B s
+  have hz (M : Derived B X) :
+      IsZero ((G B c).obj ((J B s).obj ((G B s).obj M))) := by
+    let E := towerJ B s ⋙ towerPullback B c
+    have hmu := clopenModule_openUnit_isIso B s
+    have htu := tower_unit_iso ((moduleJAdj B s))
+    have hzE (N : Towers B U) : IsZero (E.obj N) := by
+      have hzero := ((clopenTower_section_projector B s c hc).2.1
+        ((towerJ B s).obj N)).1
+      let e := (towerPullback B c).mapIso ((towerJ B s).mapIso
+        ((asIso ((moduleJAdj B s).whiskerRight ℕᵒᵖ).unit).app N))
+      exact hzero.of_iso e
+    exact projector_complement_zero (towerJ B s) (towerPullback B c) hzE
+      ((G B s).obj M)
+  refine ⟨?_, ht, ?_, hpi, fun M ↦ ⟨hz M, (hz M).eq_zero_of_tgt _⟩⟩
+  · apply projector_descent_of_restriction (towerPullback B s) (towerJ B s)
+      ((moduleJAdj B s).whiskerRight ℕᵒᵖ) (R B s) (adj B s) (openToR B s) ht
+      (clopenTowerPi B s) (pi B s) (clopenTower_section_projector B s c hc).1
+    intro M
+    rw [exactAdj_jAdj]
+    exact hpi M
+  · exact intrinsic_projector_normalization B s
 
 private theorem projector_word_app
     {A D E F : Type*} [Category A] [Category D]
@@ -581,5 +775,91 @@ private theorem iso_projector_counit {U X : Scheme.{u}}
   rw [Functor.map_comp, intrinsic_projector_restriction]
   dsimp only [Functor.id_obj, Functor.comp_obj]
   exact ((jAdj B s).right_triangle_components M).trans ((G B s).map_id M).symm
+
+/-- Alpha is beta followed by the descended section projection and the specified
+open and inverse-image compositors. Cartesian squares recover beta; an identity
+left vertical map makes the lift the indicated clopen section.
+Source: Stacks 0F7B, with the arbitrary-ring strict-tower refinement
+(blueprint: lem-cbc-proper-open-clopen-projector).
+Proof: insert the section projection into the definition of alpha and use its
+identification with pi. The equations bs=k and qs=r give the displayed final
+compositors. In a cartesian square the canonical lift is the pullback isomorphism.
+Its inverse-image functor is faithful, by the inverse-map and identity compositors.
+The projector restriction and adjunction triangle then show that pi followed by
+the open counit is identity. Source factorization of betaInv inserts this counit;
+naturality and cancellation of the open and inverse-image compositors give beta.
+For V=S and r=identity the pullback equations give qs=identity, so the same
+projector selects the clopen section (k,identity). All equalities are equalities
+of natural transformations on the whole unbounded derived category. -/
+theorem properOpen_clopen_projector {V W S T : Scheme.{u}}
+    (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
+    [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]
+    [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i) :
+    (alpha B k r p i h =
+      (beta B (pullback.snd p i) (pullback.fst p i) i p
+        pullback.condition.symm (IsPullback.of_hasPullback p i).flip).hom ≫
+      Functor.whiskerRight (Functor.whiskerLeft (G B (pullback.snd p i))
+        (pi B (squareLift k r p i h))) (J B (pullback.fst p i)) ≫
+      Functor.whiskerRight
+        (Functor.associator (G B (pullback.snd p i)) (G B (squareLift k r p i h))
+          (J B (squareLift k r p i h))).inv (J B (pullback.fst p i)) ≫
+      (Functor.associator (G B (pullback.snd p i) ⋙ G B (squareLift k r p i h))
+        (J B (squareLift k r p i h)) (J B (pullback.fst p i))).hom ≫
+      Functor.whiskerLeft (G B (pullback.snd p i) ⋙ G B (squareLift k r p i h))
+        ((jComp B (squareLift k r p i h) (pullback.fst p i)).hom ≫
+          (jCongr B (pullback.lift_fst k r h)).hom) ≫
+      Functor.whiskerRight
+        ((gComp B (squareLift k r p i h) (pullback.snd p i)).inv ≫
+          (eqToIso (congrArg (G B) (pullback.lift_snd k r h))).hom) (J B k)) ∧
+    (∀ hsq : IsPullback k r p i,
+      IsIso (squareLift k r p i h) ∧
+      alpha B k r p i h = (beta B r k i p h.symm hsq.flip).hom) ∧
+    (∀ (k' : S ⟶ W) [IsOpenImmersion k'] [QuasiCompact k']
+        (h' : k' ≫ p = (𝟙 S) ≫ i),
+      squareLift k' (𝟙 S) p i h' ≫ pullback.snd p i = 𝟙 S ∧
+      ∀ (C : Scheme.{u}) (c : C ⟶ pullback p i) [IsOpenImmersion c],
+        Set.range c = (Set.range (squareLift k' (𝟙 S) p i h'))ᶜ →
+        ∀ M : Derived B (pullback p i),
+          (G B (squareLift k' (𝟙 S) p i h')).map
+              ((pi B (squareLift k' (𝟙 S) p i h')).app M) =
+            (jAdj B (squareLift k' (𝟙 S) p i h')).unit.app
+              ((G B (squareLift k' (𝟙 S) p i h')).obj M) ∧
+          (G B c).map ((pi B (squareLift k' (𝟙 S) p i h')).app M) = 0) := by
+  refine ⟨by unfold alpha; rfl, ?_, ?_⟩
+  · intro hsq
+    have hs : squareLift k r p i h = hsq.isoPullback.hom := by
+      apply pullback.hom_ext <;> simp [squareLift]
+    have hi : IsIso (squareLift k r p i h) := by rw [hs]; infer_instance
+    refine ⟨hi, ?_⟩
+    unfold alpha
+    apply projector_word_cancel (J B i ⋙ G B p) (G B (pullback.snd p i))
+      (G B (squareLift k r p i h)) (J B (squareLift k r p i h))
+      (J B (pullback.fst p i)) (J B k) (J B (squareLift k r p i h ≫ pullback.fst p i))
+      (G B r) (G B (squareLift k r p i h ≫ pullback.snd p i))
+      (beta B (pullback.snd p i) (pullback.fst p i) i p
+        pullback.condition.symm (IsPullback.of_hasPullback p i).flip)
+      (pi B (squareLift k r p i h)) (jAdj B (squareLift k r p i h)).counit
+      (jComp B (squareLift k r p i h) (pullback.fst p i))
+      (jCongr B (pullback.lift_fst k r h))
+      (gComp B (squareLift k r p i h) (pullback.snd p i))
+      (eqToIso (congrArg (G B) (pullback.lift_snd k r h)))
+      (beta B r k i p h.symm hsq.flip)
+    · intro M
+      exact iso_projector_counit B (squareLift k r p i h)
+        ((G B (pullback.snd p i)).obj M)
+    · intro M
+      rw [beta_inv_normalization B r k i p h.symm hsq.flip,
+        beta_inv_normalization B (pullback.snd p i) (pullback.fst p i) i p
+          pullback.condition.symm (IsPullback.of_hasPullback p i).flip]
+      exact betaInv_source_factorization B (squareLift k r p i h)
+        (pullback.fst p i) (pullback.snd p i) k r i p
+        (pullback.lift_fst k r h) (pullback.lift_snd k r h) h
+        pullback.condition.symm M
+  · intro k' _ _ h'
+    refine ⟨pullback.lift_snd k' (𝟙 S) h', ?_⟩
+    intro C c _ hc M
+    have hp := clopenDerived_section_projector B
+      (squareLift k' (𝟙 S) p i h') c hc
+    exact ⟨hp.2.2.2.1 M, (hp.2.2.2.2 M).2⟩
 
 end AlgebraicGeometry.ProEtale.StrictTower
