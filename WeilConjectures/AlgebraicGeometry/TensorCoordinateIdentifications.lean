@@ -288,7 +288,8 @@ theorem exists_tensor_coordinate_identifications
       (asIso (pullbackTensorModelMap X' (H.obj P) c.N)) (asIso εP)
       ((SingleComplexBaseChange.counit g').app
         ((HomotopyCategory.quotient _ (.up ℤ)).obj c.P))
-      (DerivedCategory.Q.map c.t) c.e' φ τ (by simpa only [cast_eq] using hχ)
+      (DerivedCategory.Q.map c.t) c.e' φ τ
+      (by simpa only [cast_eq, asIso_hom, εP, H] using hχ)
       (by convert hmodel using 1 <;> rfl) c.represents hnat'
 
 end AlgebraicGeometry
