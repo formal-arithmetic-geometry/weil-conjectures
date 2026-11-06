@@ -376,16 +376,16 @@ private def derivedConstantModel {X Z : Scheme.{u}} (g : Z ⟶ X)
   let P := proEtaleRingModulePullback g ((pbcAdicRings X d).obj (op n))
     ((adicTowerInverseImage g).obj ((pbcAdicRings X d).obj (op n))) (Iso.refl _)
   exact Functor.isoWhiskerLeft C.mapDerivedCategory (lisseTowerFixedRealizationIso g d n).symm ≪≫
-    (Functor.mapDerivedCategoryCompIso C F).symm ≪≫
+    Functor.mapDerivedCategoryCompIso C F ≪≫
     Functor.mapDerivedCategoryNatIso (ordinaryConstantModel g d n) ≪≫
-    Functor.mapDerivedCategoryCompIso (constantAdicQuotientModules X d n) P
+    (Functor.mapDerivedCategoryCompIso (constantAdicQuotientModules X d n) P).symm
 
 private def derivedFixedConstantPullIso {X Z : Scheme.{u}} (g : Z ⟶ X)
     (B : Type (u + 1)) [CommRing B] :
     normalizationConstant (ProEt.topology X) ⋙
         (ProEtale.upperStar (ModuleCat.{u + 1} B) g).mapDerivedCategory ≅
       normalizationConstant (ProEt.topology Z) :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (fixedProEtaleConstantIso g B)
 
 private def derivedComparisonConstantIso (S : Scheme.{u})
@@ -393,7 +393,7 @@ private def derivedComparisonConstantIso (S : Scheme.{u})
     normalizationConstant S.smallEtaleTopology ⋙
         (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} B) S).mapDerivedCategory ≅
       normalizationConstant (ProEt.topology S) :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso
       (ProEtale.constantSheafCompComparisonUpperStarIso (ModuleCat.{u + 1} B) S)
 
