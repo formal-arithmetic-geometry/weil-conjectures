@@ -1331,6 +1331,12 @@ private theorem sfRestriction {U' U Y' Y : Scheme.{u}}
   have := sfOpenUnit_isIso A j'
   have := sfOpenMate_isIso A gU j' j g sq
   unfold sfIntrinsicDerivedOpenUnit sfIntrinsicDerivedSquarePullback sfExchange sfMateIso
+  rw [show sfIntrinsicDeriveMap A (sfIntrinsicOpenAdjunction A j).unit =
+      (mapDerivedCategoryNatIso (asIso (sfIntrinsicOpenAdjunction A j).unit)).hom from
+        dMap_iso (asIso (sfIntrinsicOpenAdjunction A j).unit),
+    show sfIntrinsicDeriveMap A (sfIntrinsicOpenAdjunction A j').unit =
+      (mapDerivedCategoryNatIso (asIso (sfIntrinsicOpenAdjunction A j').unit)).hom from
+        dMap_iso (asIso (sfIntrinsicOpenAdjunction A j').unit)]
   apply dUnit_square_inverse (sfIntrinsicExtensionByZero j A) (sfIntrinsicPullback A j)
     (sfIntrinsicExtensionByZero j' A) (sfIntrinsicPullback A j')
     (sfIntrinsicPullback A gU) (sfIntrinsicPullback A g)
