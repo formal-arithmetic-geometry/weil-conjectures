@@ -65,7 +65,7 @@ variable {C D : Type*} [Category* C] [Category* D] [Abelian C] [Abelian D]
 
 private lemma plus_comparison_unit (F : D ⥤ C) [F.Additive]
     (K : HomotopyCategory.Plus D) :
-    DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnit.app K) ≫
+    DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnith.app K) ≫
         F.rightDerivedFunctorPlusCompatibility.hom.app (DerivedCategory.Plus.Qh.obj K) =
       F.rightDerivedFunctorUnit.app K.obj := by
   simpa only [Functor.comp_obj, ObjectProperty.ι_obj,
@@ -274,12 +274,12 @@ private theorem exact_exchange_plus
         (exactDerivedSquareUpperStarIso A sq).hom.app M.obj := by
     have hi : DerivedCategory.Plus.ι.map
         ((Functor.mapDerivedCategoryPlusCompIso (g)^*[A] (f')^*[A]).inv.app M) =
-        (Functor.mapDerivedCategoryCompIso (g)^*[A] (f')^*[A]).inv.app M.obj := by
+        (Functor.mapDerivedCategoryCompIso (g)^*[A] (f')^*[A]).hom.app M.obj := by
       apply (cancel_mono
-        ((Functor.mapDerivedCategoryCompIso (g)^*[A] (f')^*[A]).hom.app M.obj)).1
+        ((Functor.mapDerivedCategoryCompIso (g)^*[A] (f')^*[A]).inv.app M.obj)).1
       erw [← Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app,
         ← Functor.map_comp, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id,
-        Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app, Iso.inv_hom_id_app]
+        Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app, Iso.hom_inv_id_app]
       rfl
     simp only [θ, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.map_comp,
       Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app,
