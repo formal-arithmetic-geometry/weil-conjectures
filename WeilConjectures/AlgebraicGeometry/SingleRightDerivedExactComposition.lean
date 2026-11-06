@@ -98,7 +98,8 @@ theorem single_rightDerived_exact_composition (F : C ⥤ A) (T : A ⥤ B)
   erw [T.mapDerivedCategorySingleFunctor_inv_app_mapDerivedCategoryFactors_hom_app]
   rw [← DerivedCategory.Q.map_comp]
   apply congrArg DerivedCategory.Q.map
-  ext i
+  apply HomologicalComplex.hom_ext
+  intro i
   by_cases hi : i = 0
   · subst i
     simp [mapCochainComplexSingleFunctor]
