@@ -715,4 +715,94 @@ def cbcDatumCompletedExchange [QuasiCompact j]
           (cbcDerivedOpenShriek d j' sq.isOpenImmersion'))
 
 
+/-- Quasi-compact open extension preserves intrinsic completeness, and its canonical
+completed exchange is invertible and natural, with both sides intrinsically complete.
+Source: blueprint order 1587; Stacks 03DI, 09BP, 099N
+(blueprint: lem-cbc-completed-extension-zero-comparison).
+Proof:
+1. Use lem-weil-proetale-weakly-etale-localization and sectionwise module limits
+to identify completed rings on both slices by every finite projection.
+lem-pc-quasi-compact-base-change makes the second open quasi-compact.
+2. lem-pur-site-restriction-module-adjunction-exact gives exact sheafified
+extension and restriction; lem-sf-exact-functor-derived-triangulated descends
+them termwise. Scalar restriction leaves the direct-sum summands unchanged.
+3. lem-pc-kflat-resolution and lem-weil-pbc-ringed-slice-extension-tensor show
+that extension preserves K-flat complexes and identifies strict reductions,
+including every quotient transition, by the same pure tensor formula.
+4. lem-weil-pbc-proetale-ringed-open-closed expresses extension as a kernel of
+product-preserving functors. Closed inverse image preserves products by
+lem-weil-pbc-proetale-immersion-limit-preservation, including the empty product.
+5. Exact countable products and lem-weil-derived-limit-products-core give the
+functorial signed Roos fiber. prop-weil-pbc-rlim-functoriality and
+lem-weil-derived-limit-roos-complex identify it with the specified Rlim.
+Extension commutes with its two products and structure maps, as required by
+lem-cbc-exact-functor-rlim and the ringed strict tower homotopy-limit lemma.
+6. Apply that comparison to the finite-free Koszul tower and its unit from
+def-weil-pbc-intrinsic-completion to preserve completeness. Use
+lemma-weil-pbc-completed-pullback-reduction for completeness of pullback.
+7. prop-weil-pbc-proetale-constant-exact and
+lem-cbc-proetale-extension-zero-base-change give finite adjoint-mate exchanges.
+The summand and scalar-restriction formulas and site-morphism composition show
+they commute with quotient transitions. Constant/completed finite comparisons
+from lem-weil-pbc-constant-completion-equivalence retain those transitions.
+8. Apply functorial Rlim to that strict tower exchange and the inverse
+extension/Rlim comparison. This is the old canonical completed exchange.
+Transport it by cbcDatumCompletedTransport, which retains coefficients,
+transitions, resolving counits and quotient units. Its mate normalization is
+cbcDatumCompletedExchange_unit. Completeness is invariant under these
+isomorphisms; the two applications of step 6 give the displayed complete
+endpoints. All constituents are natural, so their composite is natural. -/
+theorem completedOpenExchangeComparison [QuasiCompact j]
+    (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) :
+    IsIso (cbcDatumCompletedExchange d sq r a ha) ∧
+      (∀ K : (cbcCompleteProperty d U r a ha).FullSubcategory,
+        cbcCompleteProperty d X r a ha
+            ((cbcDerivedOpenShriek d j sq.isOpenImmersion).obj K.obj) ∧
+          cbcCompleteProperty d X' r a ha
+            ((d.completedPull g).obj
+              ((cbcDerivedOpenShriek d j sq.isOpenImmersion).obj K.obj)) ∧
+          cbcCompleteProperty d X' r a ha
+            ((cbcDerivedOpenShriek d j' sq.isOpenImmersion').obj
+              ((d.completedPull gU).obj K.obj))) := by
+  have hold := completedExtensionZeroComparison d sq r a ha
+  have : IsIso (cbcCompletedExchange d sq r a ha) := hold.1
+  constructor
+  · unfold cbcDatumCompletedExchange
+    infer_instance
+  · have hpull {V W : Scheme.{t}} (f : V ⟶ W) (M : d.derived W)
+        (hm : cbcCompleteProperty d W r a ha M) :
+        cbcCompleteProperty d V r a ha ((d.completedPull f).obj M) := by
+      let N := (d.completedPull f).obj M
+      let C := DerivedCategory.Q.objPreimage N
+      let eN : DerivedCategory.Q.obj C ≅ N := DerivedCategory.Q.objObjPreimageIso N
+      let e : DerivedCategory.Q.obj C ≅ completedPullbackObject f d M :=
+        eN ≪≫ ((cbcDatumCompletedTransport d f).app M).symm
+      have hc := (completedPullback_reduction f d r a ha M
+        (DerivedCategory.Q.objPreimage M) (DerivedCategory.Q.objObjPreimageIso M) hm).1 C e
+      change IsIso (e.inv ≫ DerivedCategory.Q.map
+        (intrinsicCompletionComplexUnit V d r a C)) at hc
+      have : IsIso (DerivedCategory.Q.map
+          (intrinsicCompletionComplexUnit V d r a C)) :=
+        IsIso.of_isIso_comp_left e.inv _
+      change IsIso (eN.inv ≫ DerivedCategory.Q.map
+        (intrinsicCompletionComplexUnit V d r a C))
+      infer_instance
+    have hsq : IsPullback gU j' j g :=
+      IsPullback.of_iso_pullback sq.toCommSq sq.isoPullback sq.hom_fst sq.hom_snd
+    have : QuasiCompact j' := MorphismProperty.of_isPullback (P := @QuasiCompact)
+      hsq inferInstance
+    let hi := IsPullback.id_horiz j'
+    let sq' : AlgebraicGeometry.OpenImmersionSquare (𝟙 U') j' j' (𝟙 X') :=
+      { toCommSq := hi.toCommSq
+        isoPullback := hi.isoPullback
+        hom_fst := hi.isoPullback_hom_fst
+        hom_snd := hi.isoPullback_hom_snd
+        isOpenImmersion := sq.isOpenImmersion'
+        isOpenImmersion' := sq.isOpenImmersion' }
+    intro K
+    refine ⟨(hold.2 K).1, hpull g _ (hold.2 K).1, ?_⟩
+    exact ((completedExtensionZeroComparison d sq' r a ha).2
+      ⟨(d.completedPull gU).obj K.obj, hpull gU K.obj K.property⟩).1
+
+
 end AlgebraicGeometry.Scheme
