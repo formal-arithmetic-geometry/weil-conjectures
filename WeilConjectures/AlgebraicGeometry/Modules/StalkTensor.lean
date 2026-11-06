@@ -357,8 +357,9 @@ lemma stalk_tensor_induction {p : (M ⊗ N).presheaf.stalk x → Prop}
     (z : (M ⊗ N).presheaf.stalk x) (zero : p 0) (add : ∀ a b, p a → p b → p (a + b))
     (tmul : ∀ (U : X.Opens) (hx : x ∈ U) (m : Γ(M, U)) (n : Γ(N, U)),
       p ((M ⊗ N).presheaf.germ U x hx (tmulSection m n))) : p z := by
-  rcases eq_or_ne z 0 with rfl | _
+  rcases eq_or_ne z 0 with rfl | hz
   · exact zero
+  clear hz
   obtain ⟨w, rfl⟩ := (bijective_stalkFunctor_map_presheafTensorToTensor M N x).2 z
   obtain ⟨U, hx, y, rfl⟩ := (presheafTensor M N).exists_germ_eq w
   induction y using TensorProduct.inductionOn with
