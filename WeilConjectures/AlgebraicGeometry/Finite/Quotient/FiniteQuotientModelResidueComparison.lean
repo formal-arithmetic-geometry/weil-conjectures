@@ -195,4 +195,103 @@ private def residueRestrictionComparison (X : Scheme.{t})
   exact F.mapDerivedCategory.mapIso (DerivedCategory.Q.objObjPreimageIso M).symm ≪≫
     F.mapDerivedCategoryFactors.app (DerivedCategory.Q.objPreimage M)
 
+-- The existing signature retains hφ, although the comparison does not need it.
+set_option linter.unusedVariables false in
+/-- Reduction of a given constant quotient model is the constant realization of its
+algebraic derived residue, after the specified residue-ring identification. This is
+only a coefficient-change comparison: there is no local projective-model hypothesis
+and no boundedness or Tor-amplitude conclusion. It also holds on an empty chart.
+
+Source: Stacks Project, Tags 06YY and 07A6, and sites-cohomology.tex,
+Tag 094I, part (2), the derived residue computation.
+(blueprint: lem-weil-pbc-finite-quotient-model-residue-comparison).
+
+Proof: obtain composition of the actual derived scalar-extension functors from
+their existing adjunctions to exact restriction of scalars and uniqueness of left
+adjoints. The limit-projection equation identifies nth reduction followed by residue
+extension with zeroth reduction. Scalar compatibility identifies the finite coefficient
+square after precomposition with the constant quotient map from A. That map is an
+epimorphism, because its lifted ring map is surjective and constant sheafification is
+a left adjoint; cancellation gives the square itself. The separate constant-model
+comparison identifies algebraic derived residue, ring-equivalence transport and the
+canonical representative with constant coefficient extension. The separate slice
+comparison permits applying derived residue extension to the given local isomorphism.
+Compose these isomorphisms, using the exact derived restriction's comparison with the
+representative-based restriction in the statement. No boundedness, finiteness of P,
+projectivity, invertibility of phi, or geometric-stalk argument is used. -/
+theorem finiteQuotient_model_residueComparison
+    (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
+    [∀ n : ℕ, (koszulConstantFunctor X (A ⧸ d.ideal ^ (n + 1))).PreservesZeroMorphisms]
+    (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶
+      completedAdicFiniteCommRing X d n)
+    (hφ : ∀ n : ℕ, IsIso (φ n)) (hcompat : FinitePerfectModelsCompatible X d φ)
+    (M : DerivedCategory (CompletedAdicModules X d)) (n : ℕ) (W : X.Etale)
+    (P : CochainComplex (ModuleCat.{t} (A ⧸ d.ideal ^ (n + 1))) ℤ)
+    (e : Nonempty
+      (ringedSiteDerivedRestrictionOfUniverses (completedAdicFiniteRing X d n)
+          ((toProEt X).obj W) ((completedAdicQuotientReduction X d n).obj M) ≅
+        ringedSiteDerivedRestrictionOfUniverses (completedAdicFiniteRing X d n)
+          ((toProEt X).obj W) ((completedAdicDerivedChange X (φ n)).obj
+            (DerivedCategory.Q.obj (finiteModelConstantComplex X _ P)))))
+    (L : DerivedCategory (ModuleCat.{t} (A ⧸ d.ideal ^ (n + 1))) ⥤
+      DerivedCategory (ModuleCat.{t}
+        ((A ⧸ d.ideal ^ (n + 1)) ⧸ d.ideal.map
+          (Ideal.Quotient.mk (d.ideal ^ (n + 1))))))
+    (ε : DerivedCategory.Qh ⋙ L ⟶
+      @Functor.mapHomotopyCategory _ _ _ _ _ _ _
+        (ModuleCat.extendScalars
+          (Ideal.Quotient.mk (d.ideal.map (Ideal.Quotient.mk (d.ideal ^ (n + 1))))))
+        (ModuleCat.extendRestrictScalarsAdj _).left_adjoint_additive
+        (.up ℤ) ⋙ DerivedCategory.Qh)
+    (hL : L.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso _ (.up ℤ)))
+    (ρ : ((A ⧸ d.ideal ^ (n + 1)) ⧸ d.ideal.map
+      (Ideal.Quotient.mk (d.ideal ^ (n + 1)))) ≃+* (A ⧸ d.ideal ^ (0 + 1)))
+    (hρ : ρ.toRingHom.comp
+        (Ideal.Quotient.mk (d.ideal.map (Ideal.Quotient.mk (d.ideal ^ (n + 1))))) =
+      adicQuotientMap d.ideal (n + 1) (0 + 1) (Nat.succ_le_succ (Nat.zero_le n))) :
+    let C := ((ModuleCat.restrictScalars.{t} ρ.symm.toRingHom).mapHomologicalComplex
+      (.up ℤ)).obj (DerivedCategory.Q.objPreimage (L.obj (DerivedCategory.Q.obj P)))
+    Nonempty
+      (ringedSiteDerivedRestrictionOfUniverses (completedAdicFiniteRing X d 0)
+          ((toProEt X).obj W) ((completedAdicQuotientReduction X d 0).obj M) ≅
+        ringedSiteDerivedRestrictionOfUniverses (completedAdicFiniteRing X d 0)
+          ((toProEt X).obj W) ((completedAdicDerivedChange X (φ 0)).obj
+            (DerivedCategory.Q.obj (finiteModelConstantComplex X _ C)))) := by
+  clear hφ
+  let U := (toProEt X).obj W
+  let Rn := completedAdicFiniteRing X d n
+  let R₀ := completedAdicFiniteRing X d 0
+  let q := completedAdicQuotientCommMap X d n 0 (Nat.zero_le n)
+  let q₀ := adicQuotientMap d.ideal (n + 1) (0 + 1)
+    (Nat.succ_le_succ (Nat.zero_le n))
+  let B := A ⧸ d.ideal ^ (n + 1)
+  let J := d.ideal.map (Ideal.Quotient.mk (d.ideal ^ (n + 1)))
+  let F := completedAdicSliceDerivedChange X U q
+  let r₀ := ringedDerivedRestrictionGeneral R₀ U
+  let en := (residueRestrictionComparison X Rn U _ ≪≫ e.some ≪≫
+    (residueRestrictionComparison X Rn U _).symm)
+  let s := (completedAdic_slice_scalarComparison X U q).some
+  let mn := completedAdicCommProjection X d n
+  let m₀ := completedAdicCommProjection X d 0
+  have hm : mn ≫ q = m₀ := completedAdicCommProjection_comp X d n 0 (Nat.zero_le n)
+  let em : (completedAdicQuotientReduction X d n ⋙
+      completedAdicDerivedChange X q) ≅ completedAdicQuotientReduction X d 0 :=
+    residueChange_comp X mn q ≪≫ eqToIso (congrArg (completedAdicDerivedChange X) hm)
+  have hs : φ n ≫ q = adicConstantMap X q₀ ≫ φ 0 :=
+    (residueCoefficient_square X d φ hcompat n).symm
+  let ec : completedAdicDerivedChange X (φ n) ⋙ completedAdicDerivedChange X q ≅
+      completedAdicDerivedChange X (adicConstantMap X q₀) ⋙
+        completedAdicDerivedChange X (φ 0) :=
+    residueChange_comp X (φ n) q ≪≫
+      eqToIso (congrArg (completedAdicDerivedChange X) hs) ≪≫
+      (residueChange_comp X (adicConstantMap X q₀) (φ 0)).symm
+  obtain ⟨ea⟩ := finiteModel_derivedScalarComparison X (Ideal.Quotient.mk J) ρ P L ε hL
+  have he : ρ.toRingHom.comp (Ideal.Quotient.mk J) = q₀ := hρ
+  rw [he] at ea
+  exact ⟨(residueRestrictionComparison X R₀ U _).symm ≪≫
+    r₀.mapIso (em.app M).symm ≪≫ (s.app _).symm ≪≫ F.mapIso en ≪≫ s.app _ ≪≫
+    r₀.mapIso (ec.app (DerivedCategory.Q.obj (finiteModelConstantComplex X B P))) ≪≫
+    r₀.mapIso ((completedAdicDerivedChange X (φ 0)).mapIso ea) ≪≫
+    residueRestrictionComparison X R₀ U _⟩
+
 end AlgebraicGeometry.Scheme

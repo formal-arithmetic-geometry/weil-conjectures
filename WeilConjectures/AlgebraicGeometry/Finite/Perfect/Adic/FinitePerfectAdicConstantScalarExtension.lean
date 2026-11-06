@@ -88,7 +88,7 @@ private def constantFactorization (X : Scheme.{t}) (A : Type t) [CommRing A] :
       (ModuleCat.restrictScalars.{t + 1}
         (ULift.ringEquiv : ULift.{t + 1} A ≃+* A).toRingHom)
       (koszulConstantFunctor X A)).symm ≪≫
-    Functor.mapDerivedCategoryCompIso (coefficientLift A) (koszulConstantFunctor X A)
+    (Functor.mapDerivedCategoryCompIso (coefficientLift A) (koszulConstantFunctor X A)).symm
 
 /-- Constant realization, including its coefficient-universe lift, commutes with
 algebraic derived scalar extension on a perfect complex.
