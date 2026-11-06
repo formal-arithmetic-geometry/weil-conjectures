@@ -7,6 +7,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Standard.StandardSingleBaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.RelativeMVMaps
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
+import all WeilConjectures.AlgebraicGeometry.Picard.Termwise.PicardTermwiseSingleMapComposition
 import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeSourceIso
 import WeilConjectures.AlgebraicGeometry.Single.SingleOpenTensorCoefficientCoherence
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
@@ -42,10 +45,7 @@ private theorem single_normalize
       DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (.up ℤ)).map
         ((HomologicalComplex.singleMapHomologicalComplex
           (Scheme.Modules.tensorPullback f) (.up ℤ) 0).hom.app N)) := by
-  exact cancel_single_maps (DerivedCategory.singleFunctor
-    (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0) _ _
-    (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f)).leftAdjointUniq
-      (Scheme.Modules.pullbackPushforwardAdjunction f)).app N)
+  exact Scheme.single_map_normalize f N
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
