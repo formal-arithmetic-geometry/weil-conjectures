@@ -288,66 +288,57 @@
 - Fix patterns: /home/ubuntu/u9/bz/FIXES-BZ908.md.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-- Assigned leaf compiled successfully (51s), all 3998 jobs green at 47eabae395f.
-  The shared remote wrapper hit a shell syntax error after compilation; full Lean
-  success is recorded in BUILD-BZ908-leaf-green-full.log. Rechecking the runner.
-- Next batch uses two direct importers whose dependency closures cover all 19:
-  SingleComplexInheritedTensorCondition and NormalizedInternalHomPullbackComparison.
 
-- The stable downstream run at 0997529457 rebuilt the assigned leaf (59s) and
-  CanonicalPullbackTensorMonoidalRealization (50s) successfully.
-- TensorCoordinateIdentifications needs the same Qh/Q reflexive casts plus an
-  explicit target sheaf category; the known BZ877 repair is applied for recheck.
-  The unused-list theorem has an external caller, so it is retained.
-- Unowned blockers found: StalkDerivedExtensionComparisonIsoCore (heartbeat
-  timeout) and OpenRestrictionDerivedMonoidal (reversed compositor).
-- Per-run ucheck-bump snapshot: /home/ubuntu/u9/bz/BZ908-bin/ucheck-bump. It preserves
-  the lead's locking and one-build-per-helper rules while avoiding shared-script
-  overwrite failures. No shared build scripts were edited.
+# PZ030 resumed
 
+- Branch: u9/PZ030; previous checkpoint 91715259ff6d9dfbc36dc0b1eacab5b958ae746b.
+- Reread /home/ubuntu/u9/briefs/PZ030.md and refreshed Weil module notes.
+- The user instructed continuation after the exact two-cast proposal.
+- Applied PZ030-statement-casts-proposal.patch to representativeScalarTensorIso;
+  both reflexive casts preserve the original maps and endpoints.
+- ReductionNormalizationScalarMate already passed remote validation twice.
+- Next: validate both assigned modules together, then DerivedScalarMateData.
+- Reduction's two importers were attempted and skipped for foreign blockers;
+  see /home/ubuntu/u9/bz/FIXES-PZ030.md and PZ030-downstream-blockers.txt.
+- No local Lean/Lake, proof placeholders, trust bypasses, or limit increases.
 
-# BZ938 in progress
+- Both assigned modules GREEN at 0795abb04e0e176630129fbd17347398d825ca02: rc=0, built=2, failed=0.
+- Log: /home/ubuntu/u9/bz/BUILD-PZ030-assigned-green.log.
+- Continuing with direct importer DerivedScalarMateData.
 
-- Branch: u9/BZ938; baseline before repairs: 1626b332e^.
-- The user instructed continuation after the exact four-projection private-helper proposal.
-  Applied BZ938-private-compositor-proposal.patch to descend_coherence.
-  The .hom → .inv migration preserves the original equation under Mathlib's reversed compositor.
-- Definition bodies and proof-local comparisons now use the correct compositor direction.
-- First remote build cleared five of eight diagnostics; remaining three shared the
-  private helper statement as their root. Next: validate the completed repair.
-- Then check the nine direct importers, continuing through unblocked layers up to
-  the brief's 30-extra-module limit.
-- Fix records: /home/ubuntu/u9/bz/FIXES-BZ938.md.
-- No local Lean/Lake, forbidden proof escapes, or heartbeat changes.
+- DerivedScalarMateData GREEN at 585ecd62c6e9f7c32c374d4ff811aac4b2d77ed2: rc=0, built=8, failed=0.
+- Same Localization imports and reflexive transports; no declarations deleted.
+- Reference guard retained IsDerivedTensor and derivedTensorIso helper chain.
+- Next: eight direct importers in batches of at most six.
 
+- Both assigned modules plus eight downstream modules have compiled successfully.
+- Added explicit scalar-ring annotations in ScalarMateOrdinaryModuleRoute and
+  transported the unchanged tensorScalarCounit composite in ScalarTensorOrdinaryPullback.
+- Five pending scalar-mate targets are in remote validation after the final
+  ScalarTensorOneSidedPullback proof change (expose the uncast RHS before simp).
+- ConstantQuotientTensorComparison is skipped for foreign dependency failures.
+- Current frontier: /home/ubuntu/u9/bz/PZ030-frontier.json.
 
-# BZ978 complete
-
-- Branch: u9/BZ978; baseline 2390944b5.
-- Assigned CompletedReductionUnit is green and sorry-free. The authorized identity cast
-  and Localization imports preserve its normalization equation across hidden Qh endpoints.
-- Two direct importers are green: CompletedPullbackInterface and CompletedQuotientUnitNormalization.
-  The interface fixes Mathlib's reversed compositor in its construction; its type is unchanged.
-- Green source commit: 68722d6cc7ac77c7987137f65e895ed614607434, ucheck-bump rc=0,
-  failed=0, 6672 jobs. All three modules freshly rebuilt. Final Lean source is identical.
-- All seven direct importers and the next frontier were checked or traced to observed
-  unowned failures. ReductionAugmentationCompatibility is red because BZ704 removed
-  two prerequisite helpers; its own redundant reducibility attribute is also recorded.
-  Other blocked branches and exact diagnostics are in FIXES-BZ978.md.
-- No declaration deletions, local Lean/Lake execution, proof placeholders, trust bypasses,
-  profiler probes, or heartbeat changes. All four rewrite rules replay exactly.
-- Logs: BUILD-BZ978-leaf-green-full.log, BUILD-BZ978-downstream-green-full.log,
-  BUILD-BZ978-downstream1-full.log, and BUILD-BZ978-downstream2-full.log under ~/u9/bz/.
-- Final records: ~/u9/bz/FIXES-BZ978.md and ~/u9/state/BZ978.DONE.
-- This completion commit changes only progress documentation.
+- Entire local scalar-mate frontier GREEN at 7f68fb400fbe89dfd4bedf98d22770f5516a5de3: rc=0, failed=0, 6499 jobs.
+- Fifteen modules in the assigned closure are green; all seven edited Lean files passed.
+- Next four importers: CoefficientDirectImageRestrictionCube,
+  CompletedTensorProjectionCoefficientTransport, CompletedScalarMateCoefficientTransport,
+  NormalizedCoefficientDirectImageSquare.
+- Replay audit passes for all fifteen recorded rules; no proof shortcuts or limit raises.
 
 
-# BZ1001 in progress
+# PZ030 complete
 
-- Branch: u9/BZ1001; baseline b5510fe234428620f0e0c56150bc6fd58787e621.
-- The user instructed continuation after the explicit four-line compositor proposal.
-- Applied the two component direction updates in kept private exactSquareFactors
-  and the corresponding inverse cancellation proof. Other statements are unchanged.
-- Next: remote validation of the assigned leaf and its first two downstream layers.
-- Fix records and baseline log: /home/ubuntu/u9/bz/FIXES-BZ1001.md.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
+- Both assigned modules passed ucheck-bump together; rc=0, failed=0.
+- Continued downstream to 17 green modules total (15 extra), with five targets
+  skipped for foreign dependency errors. No unblocked direct importer remains.
+- Final successful scalar-mate batch: /home/ubuntu/u9/bz/BUILD-PZ030-layer2-green.log
+  (rc=0, built=14, failed=0, 6499 jobs).
+- Final importer batch additionally proved CoefficientDirectImageRestrictionCube
+  and NormalizedCoefficientDirectImageSquare; its failures are foreign blockers.
+- Fifteen PATTERN/ERROR/RULE triples and whole-tree match counts are recorded in
+  /home/ubuntu/u9/bz/FIXES-PZ030.md and /home/ubuntu/u9/state/PZ030.DONE.
+- All seven edited Lean files replay exactly from those rules and contain no
+  proof placeholders, native_decide, kernel bypass, or raised heartbeat limits.
+- No declarations deleted; referenced unused declarations retained. All remote
+  builds finished; no local Lean/Lake was executed.
