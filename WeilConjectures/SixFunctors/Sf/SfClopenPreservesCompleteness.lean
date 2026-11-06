@@ -489,7 +489,6 @@ private theorem roos_transport
     rw [← Category.assoc, ← ht]
     simp
   · simp
-    rfl
 
 private instance clopen_commShift
     {l : ℕ} [Fact l.Prime] {E : Type u} [Field E] [Algebra ℚ_[l] E]
@@ -558,7 +557,7 @@ theorem sf_clopen_preserves_completeness
   let Φ := sfClopenDerivedRestriction d
   let Ψ := sfClopenComplexRestriction d
   let : PreservesLimitsOfShape (Discrete ℕ) Φ := clopen_derived_products d
-  let eP : DerivedCategory.Q.obj P ≅ M :=
+  let eP :=
     integralTowerAugmentationIso l E T D hl q hq ≪≫ e
   let e' : DerivedCategory.Q.obj (Ψ.obj P) ≅ Φ.obj M :=
     (sfClopenLocalizationIso d P).symm ≪≫ Φ.mapIso eP

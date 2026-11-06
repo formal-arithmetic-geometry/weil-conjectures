@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.Finite.Scalar.FiniteScalarOrdinaryPullbackComparison
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategoryCounit
 import WeilConjectures.SixFunctors.Finite.Scalar.FiniteScalarPullbackRepresentativeFactorsFactorized
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # Representative factors of the scalar inverse mate
 
@@ -115,7 +116,7 @@ Source: Stacks Tags 07A6 and 0D6E.
 
 This is the concrete derived-category square obtained from the normalized inverse mate;
 it is the single mate calculation used by the wrapper theorem below. -/
-theorem finiteScalarPullback_representative_factors_core
+private theorem finiteScalarPullback_representative_factors_core
     (R : Type u) [CommRing R] [Finite R] {X Y : Scheme.{u}} (p : X ⟶ Y)
     (P : CochainComplex
       (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1} R))) ℤ) :

@@ -747,5 +747,104 @@ private theorem sheafComparison_equations :
     (adjunctionGenerators.{c, v, r} U R).1]
   exact sheafComparison_generator.{c, v, r} U a N (op W.unop.left) W.unop.hom x
 
+/-- The identity-induced scalar/slice-extension comparison, with the fixed units,
+counits, and all its termwise and localized tower identities.
+Source: Stacks 03DI, 03CY, 03DJ and 015F
+(blueprint: lem-cbc-ringed-open-scalar-adjunction).
+Proof: (1) The direct sums, reindexing maps and induced maps on sections coincide;
+the scalar action in either presentation is multiplication through a_V.
+(2) Extend the inverse presheaf comparison through module sheafification. Its
+underlying additive map is the sheafification of the inverse presheaf comparison,
+so it is invertible. Naturality follows from that presheaf comparison. The
+sheafification Hom equivalence proves the required generator normalization.
+(3) The direct-sum Hom correspondence gives the generator formulas for the fixed
+unit and counit, as in adjunctionGenerators.
+(4) Evaluate the unit equation on a section using the generator normalization.
+This unit equation identifies the inverse comparison with the inverse mate of
+the restriction square. The counit equation follows from the mate identities.
+(5) Restriction, extension and scalar restriction are additive and exact; kernels
+are sectionwise and cokernels are sheafified sectionwise quotients.
+(6) Apply the functors, isomorphisms and adjunctions levelwise to strict towers,
+and degreewise to cochain complexes. Naturality preserves transition and chain
+relations, and kernels and cokernels of towers are levelwise.
+(7) Exact functors preserve quasi-isomorphisms. The exact-localization inverse-mate
+theorem identifies the derived inverse mate with the localized comparison, using
+the specified composition identifications and exactDerivedAdjunction. The mate
+identities then give the derived unit and counit equations, for modules and
+strict towers alike. This uses neither flatness nor bounds. -/
+theorem comparison :
+    ∃ p : extensionByZeroPresheaf.{max c v r} (rings.{c, v, r} S) U ⋙
+        PresheafOfModules.restrictScalars
+          ((sheafCompose J
+            (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).map a).hom ≅
+      sliceScalars.{c, v, r} U a ⋙
+        extensionByZeroPresheaf.{max c v r} (rings.{c, v, r} R) U,
+    (∀ (N : SheafOfModules.{max c v r} ((rings.{c, v, r} S).over U))
+      (V : Cᵒᵖ) (x : extensionByZeroPresheafSection (rings.{c, v, r} S) U N V),
+      (p.hom.app N).app V x = x) ∧
+    ∃ e : localizedSystemExtension.{c, v, r} S U ⋙ scalars.{c, v, r} a ≅
+      sliceScalars.{c, v, r} U a ⋙ localizedSystemExtension.{c, v, r} R U,
+    (∀ (N : SheafOfModules.{max c v r} ((rings.{c, v, r} S).over U))
+      (V : Cᵒᵖ) (phi : V.unop ⟶ U) (x : N.val.obj (op (Over.mk phi))),
+      (e.hom.app N).val.app V (generator.{c, v, r} U S N V phi x) =
+        generator.{c, v, r} U R ((sliceScalars.{c, v, r} U a).obj N) V phi x) ∧
+    Equations e (restrictionIso.{c, v, r} U a)
+      (localizedSystemAdjunction.{c, v, r} S U)
+      (localizedSystemAdjunction.{c, v, r} R U) ∧
+    transportedEquations.{c, v, r, w} U a e := by
+  refine ⟨presheafComparison.{c, v, r} U a, ?_, sheafComparison.{c, v, r} U a,
+    ?_, sheafComparison_equations.{c, v, r} U a, ?_⟩
+  · exact presheafComparison_hom_apply.{c, v, r} U a
+  · intro N V phi x
+    exact sheafComparison_generator.{c, v, r} U a N V phi x
+  · let : Abelian (SheafOfModules.{max c v r} (rings.{c, v, r} R)) :=
+      ambientAbelian.{c, v, r} (rings.{c, v, r} R)
+    let : Abelian (SheafOfModules.{max c v r} ((rings.{c, v, r} R).over U)) :=
+      sliceAbelian.{c, v, r} U ((rings.{c, v, r} R).over U)
+    let : Abelian (SheafOfModules.{max c v r} (rings.{c, v, r} S)) :=
+      ambientAbelian.{c, v, r} (rings.{c, v, r} S)
+    let : Abelian (SheafOfModules.{max c v r} ((rings.{c, v, r} S).over U)) :=
+      sliceAbelian.{c, v, r} U ((rings.{c, v, r} S).over U)
+    let : Functor.Additive (localizedSystemExtension.{c, v, r} R U) :=
+      localizedSystemExtensionAdditive.{c, v, r} R U
+    let : PreservesFiniteLimits (localizedSystemExtension.{c, v, r} R U) :=
+      localizedSystemExtensionLimits.{c, v, r} R U
+    let : PreservesFiniteColimits (localizedSystemExtension.{c, v, r} R U) :=
+      localizedSystemExtensionColimits.{c, v, r} R U
+    let : Functor.Additive (localizedSystemRestriction.{c, v, r} R U) :=
+      localizedSystemRestrictionAdditive.{c, v, r} R U
+    let : PreservesFiniteLimits (localizedSystemRestriction.{c, v, r} R U) :=
+      localizedSystemRestrictionLimits.{c, v, r} R U
+    let : PreservesFiniteColimits (localizedSystemRestriction.{c, v, r} R U) :=
+      localizedSystemRestrictionColimits.{c, v, r} R U
+    let : Functor.Additive (localizedSystemExtension.{c, v, r} S U) :=
+      localizedSystemExtensionAdditive.{c, v, r} S U
+    let : PreservesFiniteLimits (localizedSystemExtension.{c, v, r} S U) :=
+      localizedSystemExtensionLimits.{c, v, r} S U
+    let : PreservesFiniteColimits (localizedSystemExtension.{c, v, r} S U) :=
+      localizedSystemExtensionColimits.{c, v, r} S U
+    let : Functor.Additive (localizedSystemRestriction.{c, v, r} S U) :=
+      localizedSystemRestrictionAdditive.{c, v, r} S U
+    let : PreservesFiniteLimits (localizedSystemRestriction.{c, v, r} S U) :=
+      localizedSystemRestrictionLimits.{c, v, r} S U
+    let : PreservesFiniteColimits (localizedSystemRestriction.{c, v, r} S U) :=
+      localizedSystemRestrictionColimits.{c, v, r} S U
+    let : PreservesFiniteLimits (scalars.{c, v, r} a) := scalarLimits.{c, v, r} a
+    let : PreservesFiniteColimits (scalars.{c, v, r} a) := scalarColimits.{c, v, r} a
+    let : PreservesFiniteLimits (sliceScalars.{c, v, r} U a) := sliceLimits.{c, v, r} U a
+    let : PreservesFiniteColimits (sliceScalars.{c, v, r} U a) := sliceColimits.{c, v, r} U a
+    dsimp only [transportedEquations]
+    intro _ _ _ _ _ _ _ _
+    exact transport_of_equations.{w, (max c v r) + 1, max c v r}
+      (JS := localizedSystemExtension.{c, v, r} S U)
+      (JR := localizedSystemExtension.{c, v, r} R U)
+      (rU := sliceScalars.{c, v, r} U a) (rT := scalars.{c, v, r} a)
+      (qS := localizedSystemRestriction.{c, v, r} S U)
+      (qR := localizedSystemRestriction.{c, v, r} R U)
+      (sheafComparison.{c, v, r} U a) (restrictionIso.{c, v, r} U a)
+      (localizedSystemAdjunction.{c, v, r} S U)
+      (localizedSystemAdjunction.{c, v, r} R U)
+      (sheafComparison_equations.{c, v, r} U a)
+
 end RingedOpenScalar
 end SheafOfModules
