@@ -85,8 +85,8 @@ def openPinnedHomotopyTensorRestrictionIso
     dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
     letI := schemeOpenRestriction_additive X U
     letI := schemeOpenRestriction_additive X' U'
-    let mapSquare {C D B E : Type*}
-        [Category C] [Category D] [Category B] [Category E]
+    let mapSquare {C D B E : Type (u + 1)}
+        [Category.{u} C] [Category.{u} D] [Category.{u} B] [Category.{u} E]
         [Preadditive C] [Preadditive D] [Preadditive B] [Preadditive E]
         {F : C ⥤ D} {G : D ⥤ E} {R : C ⥤ B} {J : B ⥤ E}
         [F.Additive] [G.Additive] [R.Additive] [J.Additive]
