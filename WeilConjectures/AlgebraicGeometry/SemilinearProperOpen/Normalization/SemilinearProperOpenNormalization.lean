@@ -333,7 +333,7 @@ private theorem system_projector_localized
     HEq ((Functor.mapDerivedCategoryIdIso (VaryingRing.Modules.{u} C τ X)).inv ≫
       localize (VaryingRing.modulePi.{u} C τ s) ≫
       (Functor.mapDerivedCategoryCompIso (VaryingRing.pull.{u} C τ s)
-        (VaryingRing.extension.{u} C τ s)).inv) (SemilinearProperOpen.pi.{u} C τ s) := by
+        (VaryingRing.extension.{u} C τ s)).hom) (SemilinearProperOpen.pi.{u} C τ s) := by
   have := SemilinearProperOpen.openPull_isRightAdjoint.{u} C τ s
   have := SemilinearProperOpen.pull_additive.{u} C τ s
   have := SemilinearProperOpen.pull_limits.{u} C τ s
@@ -437,8 +437,8 @@ private theorem system_open_comp_localized
     (C : ℕ → CommRingCat.{u + 1}) (τ : ∀ n, C (n + 1) ⟶ C n)
     {U V X : Scheme.{u}} (j : U ⟶ V) (b : V ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion b] :
-    HEq (Functor.mapDerivedCategoryCompIso (VaryingRing.extension.{u} C τ j)
-      (VaryingRing.extension.{u} C τ b) ≪≫
+    HEq ((Functor.mapDerivedCategoryCompIso (VaryingRing.extension.{u} C τ j)
+      (VaryingRing.extension.{u} C τ b)).symm ≪≫
       Functor.mapDerivedCategoryNatIso (VaryingRing.moduleJComp.{u} C τ j b))
       (SemilinearProperOpen.jComp.{u} C τ j b) := by
   have := SemilinearProperOpen.openPull_isRightAdjoint.{u} C τ j
@@ -492,7 +492,7 @@ private theorem system_open_comp_localized
   have hl := open_comp_localized (ordinaryOpenAdj C τ j) (ordinaryOpenAdj C τ b)
     (ordinaryOpenAdj C τ (j ≫ b)) (pullComp C τ j b).symm
   have ho : jComp C τ j b =
-      Functor.mapDerivedCategoryCompIso (extension C τ j) (extension C τ b) ≪≫
+      (Functor.mapDerivedCategoryCompIso (extension C τ j) (extension C τ b)).symm ≪≫
         Functor.mapDerivedCategoryNatIso o := by
     have hs : Functor.mapDerivedCategoryNatIso (pullComp C τ j b).symm =
         (Functor.mapDerivedCategoryNatIso (pullComp C τ j b)).symm :=
@@ -508,7 +508,7 @@ private theorem system_open_cell_localized
     {U V X : Scheme.{u}} (j : U ⟶ V) (b : V ⟶ X) (k : U ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion b] [IsOpenImmersion k] (h : j ≫ b = k) :
     HEq ((Functor.mapDerivedCategoryCompIso (VaryingRing.extension.{u} C τ j)
-      (VaryingRing.extension.{u} C τ b)).hom ≫ localize
+      (VaryingRing.extension.{u} C τ b)).inv ≫ localize
         ((VaryingRing.moduleJComp.{u} C τ j b).hom ≫ (VaryingRing.moduleJCongr.{u} C τ h).hom))
       ((SemilinearProperOpen.jComp.{u} C τ j b).hom ≫
         (SemilinearProperOpen.jCongr.{u} C τ h).hom) := by
@@ -537,7 +537,7 @@ private theorem system_pull_cell_localized
     {U V X : Scheme.{u}} (j : U ⟶ V) (b : V ⟶ X) (k : U ⟶ X)
     (h : j ≫ b = k) :
     HEq ((Functor.mapDerivedCategoryCompIso (VaryingRing.pull.{u} C τ b)
-      (VaryingRing.pull.{u} C τ j)).hom ≫ localize
+      (VaryingRing.pull.{u} C τ j)).inv ≫ localize
         ((VaryingRing.moduleGComp.{u} C τ j b).inv ≫
           (eqToIso (congrArg (VaryingRing.pull.{u} C τ) h)).hom))
       ((SemilinearProperOpen.pComp.{u} C τ j b).inv ≫
