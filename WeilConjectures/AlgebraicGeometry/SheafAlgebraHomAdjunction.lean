@@ -141,7 +141,8 @@ private noncomputable def curry
         intro b
         change B.right.obj.obj (Opposite.op W.unop.left) at b
         change φ.val.app _ (b • M.val.map W.unop.hom.op (M.val.map f m)) =
-          φ.val.app _ (b • M.val.map ((Over.map f.unop).obj W.unop).hom.op m)
+          φ.val.app _ (b • (show M.val.obj (Opposite.op W.unop.left) from
+            M.val.map ((Over.map f.unop).obj W.unop).hom.op m))
         congr 2
         rw [← M.val.map_comp_apply]
         exact M.val.congr_map_apply (Subsingleton.elim _ _) m }
