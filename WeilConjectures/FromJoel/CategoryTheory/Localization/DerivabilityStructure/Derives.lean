@@ -78,10 +78,6 @@ section
 variable {L₂ : C₂ ⥤ D₂} [L₂.IsLocalization W₂] {LF : D₂ ⥤ H} (α : L₂ ⋙ LF ⟶ F)
 
 include h in
-lemma isLeftDerivedFunctor_iff_isIso [Φ.IsLeftDerivabilityStructure] :
-    LF.IsLeftDerivedFunctor α W₂ ↔ ∀ (X₁ : C₁), IsIso (α.app (Φ.functor.obj X₁)) :=
-  ⟨fun _ _ ↦ h.isIso_of_isLeftDerivedFunctor α _, h.isLeftDerivedFunctor_of_isIso α⟩
-
 lemma isIso_of_isLeftDerivedFunctor
     [Φ.IsLeftDerivabilityStructure] (X₁ : C₁) [LF.IsLeftDerivedFunctor α W₂] :
     IsIso (α.app (Φ.functor.obj X₁)) := by
@@ -90,12 +86,6 @@ lemma isIso_of_isLeftDerivedFunctor
   rwa [← isIso_unop_iff] at this
 
 set_option backward.isDefEq.respectTransparency false in
-lemma isLeftDerivedFunctor_of_isIso [Φ.IsLeftDerivabilityStructure]
-    (hα : ∀ (X₁ : C₁), IsIso (α.app (Φ.functor.obj X₁))) :
-    LF.IsLeftDerivedFunctor α W₂ := by
-  rw [Functor.isLeftDerivedFunctor_iff_op]
-  exact h.op.isRightDerivedFunctor_of_isIso _ (fun _ ↦ by dsimp; infer_instance)
-
 lemma of_isIso_app_functor_obj' (hα : ∀ (X₁ : C₁), IsIso (α.app (Φ.functor.obj X₁))) :
     Φ.Derives F := by
   intro X₁ X₂ f hf

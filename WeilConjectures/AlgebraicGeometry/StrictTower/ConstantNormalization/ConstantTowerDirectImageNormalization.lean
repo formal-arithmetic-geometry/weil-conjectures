@@ -758,14 +758,6 @@ abbrev pull {X Y : Scheme.{u}} (f : X ⟶ Y) := (modulePullback A f).mapDerivedC
 Source: Stacks 0941 (blueprint: lem-sf-cbc-constant-tower-direct-image-normalization). -/
 abbrev L (X : Scheme.{u}) := completedRlim X (coefficients A X)
 
-/-- The canonical ordinary constant/inverse-image square, with identity components.
-Source: Stacks 00YV (blueprint: lem-sf-cbc-constant-tower-direct-image-normalization). -/
-def deltaPull {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    delta A Y ⋙ G A f ≅ pull A f ⋙ delta A X :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
-    Functor.mapDerivedCategoryNatIso (Functor.compConstIso ℕᵒᵖ (modulePullback A f)).symm ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
-
 /-- The exact diagonal preserves K-injectives because it is right adjoint to exact
 terminal-index evaluation. Source: Stacks 08BJ
 (blueprint: lem-sf-cbc-constant-tower-direct-image-normalization).
@@ -807,14 +799,6 @@ def chi {X Y : Scheme.{u}} (f : X ⟶ Y) :
   Functor.rightDerivedFunctorCompIso (Functor.const ℕᵒᵖ) (towerDirectImage A f) ≪≫
   Functor.isoWhiskerRight
     (Functor.rightDerivedFunctorIsoMapDerivedCategory (Functor.const ℕᵒᵖ)) (R A f)
-
-/-- Evaluation of a diagonal is canonically the identity.
-Source: Stacks 0941 (blueprint: lem-sf-cbc-constant-tower-direct-image-normalization). -/
-def deltaEval (X : Scheme.{u}) (n : ℕ) : delta A X ⋙ ev A X n ≅ 𝟭 _ :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
-    Functor.mapDerivedCategoryNatIso
-      (Functor.constCompEvaluationObj (D := Modules A X) (op n)) ≪≫
-      Functor.mapDerivedCategoryIdIso _
 
 private theorem scalar_obj (X : Scheme.{u})
     {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}} (φ : R ⟶ S)
@@ -1426,65 +1410,6 @@ private theorem quotientStep_direct_comm {X Y : Scheme.{u}} (f : X ⟶ Y) (n : �
   exact congrArg (fun a ↦ (a.hom.app (op U)) s) h
 
 set_option backward.isDefEq.respectTransparency false in
-private theorem chi_mate {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    (chi A f).hom = (mateEquiv
-      (proEtaleRingDerivedAdjunction f (coefficients A Y) (coefficients A X)
-        (constantRingIso A f)) (adj A f)
-      (TwoSquare.mk _ _ _ _ (deltaPull A f).hom)).natTrans := by
-  let a := proEtaleRingModuleAdjunction f (coefficients A Y) (coefficients A X)
-    (constantRingIso A f)
-  exact squareComparison_eq_mate (moduleDirectImage A f) (Functor.const ℕᵒᵖ)
-    (Functor.const ℕᵒᵖ) (towerDirectImage A f) (modulePullback A f) (towerPullback A f)
-    a (a.whiskerRight ℕᵒᵖ) (Functor.compConstIso ℕᵒᵖ (modulePullback A f)).symm
-    (Functor.compConstIso ℕᵒᵖ (moduleDirectImage A f)) (const_mate _ _ a)
-
-private theorem squareComparison_eq_mate
-    (F : C ⥤ D) [F.Additive] (P : C ⥤ T) [P.Additive]
-    [PreservesFiniteLimits P] [PreservesFiniteColimits P]
-    (Q : D ⥤ U) [Q.Additive] [PreservesFiniteLimits Q] [PreservesFiniteColimits Q]
-    (H : T ⥤ U) [H.Additive]
-    (LF : D ⥤ C) [LF.Additive] [PreservesFiniteLimits LF] [PreservesFiniteColimits LF]
-    (LH : U ⥤ T) [LH.Additive] [PreservesFiniteLimits LH] [PreservesFiniteColimits LH]
-    [Abelian.HasKInjectiveResolutions C] [Abelian.HasKInjectiveResolutions T]
-    [P.PreservesKInjectiveComplexes]
-    (a : LF ⊣ F) (b : LH ⊣ H) (s : Q ⋙ LH ≅ LF ⋙ P) (e : F ⋙ Q ≅ P ⋙ H)
-    (he : (mateEquiv a b (TwoSquare.mk _ _ _ _ s.hom)).natTrans = e.hom) :
-    ((Functor.rightDerivedFunctorCompMapDerivedCategoryIso F Q).symm ≪≫
-      Functor.rightDerivedFunctorNatIso e ≪≫
-      Functor.rightDerivedFunctorCompIso P H ≪≫
-      Functor.isoWhiskerRight P.rightDerivedFunctorIsoMapDerivedCategory
-        H.rightDerivedFunctor).hom =
-    (mateEquiv a.mapDerivedCategoryRightDerivedAdjunction
-      b.mapDerivedCategoryRightDerivedAdjunction
-      (TwoSquare.mk _ _ _ _
-        ((Functor.mapDerivedCategoryCompIso Q LH).symm ≪≫
-          Functor.mapDerivedCategoryNatIso s ≪≫
-            Functor.mapDerivedCategoryCompIso LF P).hom)).natTrans := by
-  apply Functor.rightDerived_ext (F.rightDerivedFunctor ⋙ Q.mapDerivedCategory)
-    (Functor.rightDerivedFunctorCompMapDerivedCategoryUnit F Q)
-    (HomotopyCategory.quasiIso C (.up ℤ))
-  apply NatTrans.ext
-  funext K
-  dsimp only [Functor.rightDerivedFunctorCompMapDerivedCategoryUnit,
-    NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
-    Functor.associator_hom_app, Functor.associator_inv_app]
-  simp only [homotopy_comp_inv_id, CategoryTheory.Functor.map_id, Category.id_comp]
-  repeat' first | erw [Category.id_comp] | erw [Category.comp_id]
-  apply (cancel_epi (Q.mapDerivedCategoryFactorsh.hom.app
-    ((F.mapHomotopyCategory (.up ℤ)).obj K))).mp
-  simp only [Category.assoc]
-  erw [Iso.hom_inv_id_app_assoc, Iso.hom_inv_id_app_assoc]
-  apply (cancel_mono (H.rightDerivedFunctor.map
-    (P.mapDerivedCategoryFactorsh.hom.app K))).mp
-  simp only [Category.assoc]
-  rw [squareComparison_unit]
-  have h := _root_.derived_mate_factorsh a b s K
-  rw [he] at h
-  simp only [Functor.mapHomotopyCategoryCompIso_refl_hom_app, homotopy_comp_inv_id,
-    Category.comp_id] at h
-  repeat' first | erw [Category.id_comp] at h | erw [Category.comp_id] at h
-  exact h.symm
-
 private theorem levelPull_step {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (M : Modules A Y) :
     (modulePullback A f).map (((step_existsUnique I Y n).exists.choose).app M) ≫

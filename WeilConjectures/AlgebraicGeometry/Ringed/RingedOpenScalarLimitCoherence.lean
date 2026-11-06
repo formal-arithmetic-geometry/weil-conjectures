@@ -407,29 +407,6 @@ private theorem cbcDerivedSquare_symm :
   simp only [cbcDerivedSquare, Iso.trans_hom, Iso.symm_hom, Iso.trans_inv,
     Functor.mapDerivedCategoryNatIso_symm, Iso.symm_inv, Category.assoc]
 
-private theorem equations_derived (he : CbcAdjunctionCompatible e d adjS adjR) :
-    CbcAdjunctionCompatible (cbcDerivedSquare JS rT rU JR e) (cbcDerivedSquare rT qR qS rU d)
-      (OpenTensorNormalization.exactDerivedAdjunction adjS)
-      (OpenTensorNormalization.exactDerivedAdjunction adjR) := by
-  have hm := inverseMate_of_unit e d adjS adjR he.1
-  have : IsIso
-      ((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.symm.hom)).natTrans := by
-    change IsIso ((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.inv)).natTrans
-    rw [hm]
-    infer_instance
-  have hiso : asIso
-      ((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.symm.hom)).natTrans = e.symm := by
-    apply Iso.ext
-    exact hm
-  have hd := (exact_localization_inverse_mate adjS adjR d.symm).2.1
-  rw [hiso] at hd
-  change ((mateEquiv (OpenTensorNormalization.exactDerivedAdjunction adjS)
-      (OpenTensorNormalization.exactDerivedAdjunction adjR)).symm
-      (TwoSquare.mk _ _ _ _ (cbcDerivedSquare qS rU rT qR d.symm).hom)).natTrans =
-        (cbcDerivedSquare rU JR JS rT e.symm).hom at hd
-  rw [cbcDerivedSquare_symm, cbcDerivedSquare_symm] at hd
-  exact equations_of_inverseMate _ _ _ _ hd
-
 end EquationCalculus
 
 section

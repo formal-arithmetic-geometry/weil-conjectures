@@ -25,49 +25,6 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-theorem singleComplexOpen_homotopy_tensor_counit
-    [∀ Y : Scheme.{u},
-      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
-    [∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z), (Scheme.Modules.tensorPullback k).Additive]
-    {X Y : Scheme.{u}} (f : X ⟶ Y) (V : Y.Opens)
-    (I : HomotopyCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)) :
-    let F := RingedSpace.moduleDirectImage f.toLRSHom.toShHom
-    let rX := schemeOpenRestriction X (f ⁻¹ᵁ V)
-    let b := Adjunction.mapHomotopyCategory (.up ℤ)
-      (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f))
-    let b₀ := Adjunction.mapHomotopyCategory (.up ℤ)
-      (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (f ∣_ V)))
-    (openPinnedHomotopyTensorRestrictionIso f V (f ⁻¹ᵁ V) (f ∣_ V)
-        (morphismRestrict_ι f V)).inv.app ((F.mapHomotopyCategory (.up ℤ)).obj I) ≫
-      (rX.mapHomotopyCategory (.up ℤ)).map (b.counit.app I) =
-    ((Scheme.Modules.tensorPullback (f ∣_ V)).mapHomotopyCategory (.up ℤ)).map
-        ((singleComplexOpenHomotopyDirectImageIso f V).hom.app I) ≫
-      b₀.counit.app ((rX.mapHomotopyCategory (.up ℤ)).obj I) := by
-  classical
-  dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
-  let := schemeOpenRestriction_additive Y V
-  let := schemeOpenRestriction_additive X (f ⁻¹ᵁ V)
-  apply map_homotopy_counit_square
-    (Scheme.Modules.tensorPullback f) (Scheme.Modules.pushforward f)
-    (Scheme.Modules.tensorPullback (f ∣_ V)) (Scheme.Modules.pushforward (f ∣_ V))
-    (schemeOpenRestriction Y V) (schemeOpenRestriction X (f ⁻¹ᵁ V))
-    (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f))
-    (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (f ∣_ V)))
-    (openPinnedTensorRestrictionIso f V (f ⁻¹ᵁ V) (f ∣_ V) (morphismRestrict_ι f V))
-    (singleComplexOpenUnderivedDirectImageIso f V)
-  intro M
-  have h := mateEquiv_counit
-    (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f))
-    (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (f ∣_ V)))
-    (TwoSquare.mk _ _ _ _
-      (openPinnedTensorRestrictionIso f V (f ⁻¹ᵁ V) (f ∣_ V)
-        (morphismRestrict_ι f V)).inv) M
-  have hm := singleComplexOpen_underived_tensor_mate f V
-  exact h.symm.trans (congrArg
-    (fun z ↦ (Scheme.Modules.tensorPullback (f ∣_ V)).map z ≫
-      (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (f ∣_ V))).counit.app
-        ((schemeOpenRestriction X (f ⁻¹ᵁ V)).obj M)) (congr_app hm M))
-
 private theorem map_homotopy_counit_square
     {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]
     [Abelian C] [Abelian D] [Abelian E] [Abelian F]

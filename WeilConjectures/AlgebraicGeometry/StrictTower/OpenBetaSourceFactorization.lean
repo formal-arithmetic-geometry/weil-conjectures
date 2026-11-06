@@ -38,17 +38,6 @@ private theorem source_square_aux {C : Type*} [Category C]
   rw [← Category.assoc, hd, Category.assoc, h₂]
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
-private theorem source_square {V P W S T : Scheme.{u}}
-    (s : V ⟶ P) (b : P ⟶ W) (q : P ⟶ S) (i : S ⟶ T) (p : W ⟶ T)
-    (h : (s ≫ b) ≫ p = (s ≫ q) ≫ i) (h₀ : q ≫ i = b ≫ p)
-    (N : Derived B T) :
-    (gComp B s q).hom.app ((G B i).obj N) ≫
-        (G B s).map ((squareG B q b i p h₀).inv.app N) =
-      (squareG B (s ≫ q) (s ≫ b) i p h.symm).inv.app N ≫
-        (gComp B s b).hom.app ((G B p).obj N) := by
-  simpa only [← gCompEq_refl, ← squareG_system] using
-    (system_source_square (pullbackSystem B) s b q i p h h₀ N)
-
 private theorem system_source_square
     {C : Scheme.{u} → Type*} [∀ X, Category.{u + 2} (C X)]
     {L : InverseImageFamily C} {R₀ : DirectImageFamily C}
@@ -88,72 +77,5 @@ private theorem transpose_conjugate
   simp only [Category.assoc]
   rw [← reassoc_of% (d.inv.naturality f)]
   simp only [Iso.inv_hom_id_app, Category.comp_id]
-
-/-- Factoring the source open through another open inserts precisely its open
-adjunction counit in the inverse comparison. This requires neither properness nor
-cartesianness and concerns the specified transformations on the full derived category.
-Source: Stacks 03DI, 07A7 and 0F7B, the open-factorization calculation
-(blueprint: lem-cbc-open-beta-source-factorization).
-Proof: transpose both sides under the open adjunction for k. The compositor
-jComp followed by jCongr is conjugate to the corresponding gComp and equality
-transport. The counit for s cancels the unit introduced by the composite open
-adjunction, by its triangle identity. Naturality moves the inverse-image
-compositor across the remaining open unit. Associativity of the inverse-image
-compositors identifies the remaining square with the square for r,k,i,p.
-The two transposes are therefore G_r of the open unit for i followed by that
-square's inverse. Injectivity of the adjunction Hom equivalence gives the equality.
-This proof uses no faithfulness of evaluations and remains valid for the empty open. -/
-theorem betaInv_source_factorization {V P W S T : Scheme.{u}}
-    (s : V ⟶ P) (b : P ⟶ W) (q : P ⟶ S)
-    (k : V ⟶ W) (r : V ⟶ S) (i : S ⟶ T) (p : W ⟶ T)
-    [IsOpenImmersion s] [IsOpenImmersion b] [IsOpenImmersion k] [IsOpenImmersion i]
-    (hk : s ≫ b = k) (hr : s ≫ q = r)
-    (h : k ≫ p = r ≫ i) (h₀ : q ≫ i = b ≫ p) (M : Derived B S) :
-    (betaInv B r k i p h.symm).app M =
-      ((jComp B s b ≪≫ jCongr B hk).inv.app ((G B r).obj M)) ≫
-      (J B b).map ((J B s).map
-        ((((eqToIso (congrArg (G B) hr)).symm) ≪≫ gComp B s q).hom.app M) ≫
-          (jAdj B s).counit.app ((G B q).obj M)) ≫
-      (betaInv B q b i p h₀).app M := by
-  subst k
-  subst r
-  let e := jComp B s b
-  have he : conjugateEquiv ((jAdj B s).comp (jAdj B b))
-      (jAdj B (s ≫ b)) e.inv = (gComp B s b).inv :=
-    Adjunction.conjugateEquiv_leftAdjointCompIso_inv _ _ _ _
-  apply ((jAdj B (s ≫ b)).homEquiv _ _).injective
-  apply (cancel_mono ((gComp B s b).hom.app ((G B p).obj ((J B i).obj M)))).1
-  change (jAdj B (s ≫ b)).homEquiv _ _
-      (betaInvApp B (s ≫ q) (s ≫ b) i p h.symm M) ≫ _ = _
-  rw [betaInvApp, Equiv.apply_symm_apply]
-  simp only [jCongr, eqToIso_refl, Iso.refl_symm, Iso.trans_refl, Iso.refl_trans,
-    Category.assoc]
-  let f := (J B b).map ((J B s).map ((gComp B s q).hom.app M) ≫
-    (jAdj B s).counit.app ((G B q).obj M)) ≫ (betaInv B q b i p h₀).app M
-  have ht := transpose_conjugate ((jAdj B s).comp (jAdj B b))
-    (jAdj B (s ≫ b)) e (gComp B s b) he f
-  apply Eq.trans ?_ ht.symm
-  dsimp only [f]
-  rw [Adjunction.comp_homEquiv]
-  change _ = (jAdj B s).homEquiv _ _ ((jAdj B b).homEquiv _ _
-    ((J B b).map ((J B s).map ((gComp B s q).hom.app M) ≫
-      (jAdj B s).counit.app ((G B q).obj M)) ≫
-        (betaInv B q b i p h₀).app M))
-  rw [Adjunction.homEquiv_naturality_left]
-  rw [Adjunction.homEquiv_naturality_right, Adjunction.homEquiv_naturality_left]
-  have hε : (jAdj B s).homEquiv ((G B s).obj ((G B q).obj M))
-      ((G B q).obj M) ((jAdj B s).counit.app ((G B q).obj M)) = 𝟙 _ := by
-    rw [← Adjunction.homEquiv_symm_id]
-    exact Equiv.apply_symm_apply _ _
-  dsimp only [Functor.comp_obj, Functor.id_obj]
-  rw [hε, Category.comp_id]
-  change _ = (gComp B s q).hom.app M ≫
-    (G B s).map ((jAdj B b).homEquiv _ _ (betaInvApp B q b i p h₀ M))
-  rw [betaInvApp, Equiv.apply_symm_apply, Functor.map_comp]
-  have hn := (gComp B s q).hom.naturality ((jAdj B i).unit.app M)
-  dsimp only [Functor.comp_map, Functor.id_obj] at hn
-  have hs := source_square B s b q i p h h₀ ((J B i).obj M)
-  dsimp only [Functor.comp_obj, Functor.id_obj] at hn hs ⊢
-  rw [← reassoc_of% hn, hs]
 
 end AlgebraicGeometry.ProEtale.StrictTower

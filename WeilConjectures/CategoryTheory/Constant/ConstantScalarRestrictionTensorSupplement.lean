@@ -516,25 +516,10 @@ private def rawLax : (rawRestriction J B).LaxMonoidal :=
 
 attribute [local instance] rawLax
 
-@[instance_reducible]
-private def rawBraided : (rawRestriction J B).LaxBraided :=
-  rawBraidedGeneric B (ring J B).obj (scalarUnit J B)
-
 private abbrev moduleInclusion : Modules J B ⥤
     PresheafOfModules.{max u v}
       ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj (ring J B)).obj :=
   SheafOfModules.forget _ ⋙ PresheafOfModules.restrictScalars (𝟙 _)
-
-@[instance_reducible]
-private def moduleInclusionLax : (moduleInclusion J B).LaxMonoidal :=
-  (PresheafOfModules.sheafificationAdjunction.{max u v}
-    (𝟙 ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj
-      (ring J B)).obj)).rightAdjointLaxMonoidal
-
-private def moduleInclusionBraided : (moduleInclusion J B).LaxBraided :=
-  (PresheafOfModules.sheafificationAdjunction.{max u v}
-    (𝟙 ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj
-      (ring J B)).obj)).rightAdjointLaxBraided
 
 set_option backward.isDefEq.respectTransparency true in
 private def restrictionPresheafIso :
@@ -561,28 +546,6 @@ private def restrictionPresheafIso :
           naturality _ _ _ := by ext x; rfl }
       hom_inv_id := by ext X x; rfl
       inv_hom_id := by ext X x; rfl }) (fun _ ↦ by ext X x; rfl)
-
-private def fixedSheafificationMonoidal :
-    (presheafToSheaf J (ModuleCat.{max u v} B)).Monoidal :=
-  (sfbSheafTensorStructure (A := ModuleCat.{max u v} B) J).sheafificationMonoidal
-
-private def fixedSheafificationBraided :
-    (presheafToSheaf J (ModuleCat.{max u v} B)).Braided :=
-  (sfbSheafTensorStructure (A := ModuleCat.{max u v} B) J).sheafificationBraided
-
-private def restrictionSheafifiedIso :
-    (moduleInclusion J B ⋙ rawRestriction J B) ⋙ presheafToSheaf J (ModuleCat.{max u v} B) ≅
-      restriction J B :=
-  Functor.isoWhiskerRight (restrictionPresheafIso J B) _ ≪≫
-    Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft _ (asIso (sheafificationAdjunction J (ModuleCat.{max u v} B)).counit) ≪≫
-    (restriction J B).rightUnitor
-
-private def ordinaryLax : (restriction J B).LaxMonoidal := by
-  letI := rawLax J B
-  letI := moduleInclusionLax J B
-  letI := fixedSheafificationMonoidal J B
-  exact Functor.LaxMonoidal.transport (restrictionSheafifiedIso J B)
 
 private theorem scalarUnit_surjective : Presheaf.IsLocallySurjective J (scalarUnit J B) := by
   unfold scalarUnit
@@ -710,90 +673,6 @@ private theorem rawRestriction_map_apply
     ((rawRestriction J B).map f).app U x = f.app U x := by rfl
 
 set_option backward.isDefEq.respectTransparency false in
-private theorem ordinary_μ_isIso (M N : Modules J B) :
-    IsIso (Functor.LaxMonoidal.μ (restriction J B) M N) := by
-  let F := restriction J B
-  let H := F.objPreimage (F.obj M ⊗ F.obj N)
-  let e : F.obj H ≅ F.obj M ⊗ F.obj N := F.objObjPreimageIso _
-  let b (U : Cᵒᵖ) :=
-    (fixedPairing J B (F.obj M) (F.obj N) U).compr₂ (e.inv.hom.app U).hom
-  have hb {X Y : Cᵒᵖ} (f : X ⟶ Y) (x : M.val.obj X) (y : N.val.obj X) :
-      b Y (M.val.map f x) (N.val.map f y) = H.val.map f (b X x y) := by
-    change e.inv.hom.app Y
-      (fixedPure J B (F.obj M) (F.obj N) Y (M.val.map f x) (N.val.map f y)) = _
-    erw [fixedPure_naturality]
-    exact ConcreteCategory.congr_hom (e.inv.hom.naturality f) _
-  let q := ringTensorLift J B M N H (upgradePairing J B M N H b hb) hb
-  have hq (U : Cᵒᵖ) (x : M.val.obj U) (y : N.val.obj U) :
-      q.val.app U (ringPure J B M N U x y) = b U x y :=
-    ringTensorLift_pure J B M N H _ hb U x y
-  let r := F.map q ≫ e.hom
-  have hr (U : Cᵒᵖ) (x : M.val.obj U) (y : N.val.obj U) :
-      r.hom.app U (ringPure J B M N U x y) =
-        fixedPure J B (F.obj M) (F.obj N) U x y := by
-    change e.hom.hom.app U (q.val.app U (ringPure J B M N U x y)) = _
-    rw [hq]
-    exact ConcreteCategory.congr_hom
-      (congr_app (congrArg (fun f ↦ f.hom) e.inv_hom_id) U) _
-  refine ⟨⟨r, ?_, ?_⟩⟩
-  · apply fixedTensor_ext J B
-    intro U x y
-    change r.hom.app U
-      ((Functor.LaxMonoidal.μ F M N).hom.app U (fixedPure J B _ _ U x y)) = _
-    rw [ordinary_μ_pure, hr]
-    rfl
-  · apply restrictionTensor_ext J B M N (M ⊗ N)
-    intro U x y
-    change (Functor.LaxMonoidal.μ F M N).hom.app U
-      (r.hom.app U (ringPure J B M N U x y)) = _
-    rw [hr, ordinary_μ_pure]
-    rfl
-
-private theorem ordinary_μ_pure (M N : Modules J B) (U : Cᵒᵖ)
-    (x : M.val.obj U) (y : N.val.obj U) :
-    (Functor.LaxMonoidal.μ (restriction J B) M N).hom.app U
-      (fixedPure J B ((restriction J B).obj M) ((restriction J B).obj N) U x y) =
-      ringPure J B M N U x y := by
-  have := restrictionPresheafIso_monoidal J B
-  have h := NatTrans.IsMonoidal.tensor (τ := (restrictionPresheafIso J B).hom) M N
-  have hh := congrArg (fun f ↦ f.app U (x ⊗ₜ[B] y)) h
-  change ((restrictionPresheafIso J B).hom.app (M ⊗ N)).app U
-    (((rawRestriction J B).map
-      (Functor.LaxMonoidal.μ (moduleInclusion J B) M N)).app U
-        ((rawTensor J B ((moduleInclusion J B).obj M)
-          ((moduleInclusion J B).obj N)).app U (x ⊗ₜ[B] y))) =
-    (Functor.LaxMonoidal.μ (restriction J B) M N).hom.app U
-      ((Functor.LaxMonoidal.μ (sheafToPresheaf J (ModuleCat.{max u v} B))
-        ((restriction J B).obj M) ((restriction J B).obj N)).app U
-          ((((restrictionPresheafIso J B).hom.app M).app U ⊗ₘ
-            ((restrictionPresheafIso J B).hom.app N).app U) (x ⊗ₜ[B] y))) at hh
-  rw [rawTensor_pure, rawRestriction_map_apply, isoTensor_pure,
-    restrictionPresheafIso_apply, ringPure_inclusion, fixedPure_inclusion] at hh
-  exact hh.symm
-
-private theorem restrictionPresheafIso_monoidal :
-    NatTrans.IsMonoidal (restrictionPresheafIso J B).hom := by
-  exact monoidalMate (moduleInclusion J B ⋙ rawRestriction J B) (restriction J B)
-    (presheafToSheaf J (ModuleCat.{max u v} B))
-    (sheafToPresheaf J (ModuleCat.{max u v} B))
-    (sheafificationAdjunction J (ModuleCat.{max u v} B)) (restrictionPresheafIso J B)
-
-private def rawBraidedGeneric
-    (R : Cᵒᵖ ⥤ CommRingCat.{max u v})
-    (ι : (Functor.const Cᵒᵖ).obj (RingCat.of B) ⟶ R ⋙ forget₂ CommRingCat RingCat) :
-    (rawRestrictionGeneric B R ι).LaxBraided where
-  braided M N := by
-    apply NatTrans.ext
-    funext X
-    change (𝟙 _ ≫ Functor.LaxMonoidal.μ
-        (ModuleCat.restrictScalars (ι.app X).hom) (M.obj X) (N.obj X)) ≫
-        (ModuleCat.restrictScalars (ι.app X).hom).map (β_ (M.obj X) (N.obj X)).hom =
-      (β_ _ _).hom ≫ (𝟙 _ ≫ Functor.LaxMonoidal.μ
-        (ModuleCat.restrictScalars (ι.app X).hom) (N.obj X) (M.obj X))
-    simpa only [Category.id_comp] using
-      Functor.LaxBraided.braided
-        (F := ModuleCat.restrictScalars (ι.app X).hom) (M.obj X) (N.obj X)
-
 private theorem rawTensor_pure
     (M N : PresheafOfModules.{max u v}
       ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj (ring J B)).obj)
@@ -812,111 +691,6 @@ private theorem isoTensor_pure (M N : Modules J B) (U : Cᵒᵖ)
 attribute [local semireducible] ringPure fixedPure restrictionPresheafIso
 
 set_option backward.isDefEq.respectTransparency true in
-private theorem ordinary_ε_scalar (U : Cᵒᵖ) (b : B) :
-    (Functor.LaxMonoidal.ε (restriction J B)).hom.app U (fixedUnitScalar J B U b) =
-      (toSheafify J ((Functor.const Cᵒᵖ).obj (CommRingCat.of B))).app U b := by
-  have := restrictionPresheafIso_monoidal J B
-  have h := NatTrans.IsMonoidal.unit (τ := (restrictionPresheafIso J B).hom)
-  have hh := congrArg (fun f ↦ f.app U b) h
-  have hc := toSheafify_naturality J
-    (Functor.constComp Cᵒᵖ (CommRingCat.of B) (forget₂ CommRingCat.{max u v} RingCat.{max u v})).inv
-  have hu : (scalarUnit J B).app U b =
-      (toSheafify J ((Functor.const Cᵒᵖ).obj (CommRingCat.of B))).app U b := by
-    change ((toSheafify J ((Functor.const Cᵒᵖ).obj (RingCat.of B)) ≫
-      sheafifyMap J
-        (Functor.constComp Cᵒᵖ (CommRingCat.of B)
-          (forget₂ CommRingCat.{max u v} RingCat.{max u v})).inv ≫
-      (sheafifyComposeIso J (forget₂ CommRingCat.{max u v} RingCat.{max u v})
-        ((Functor.const Cᵒᵖ).obj (CommRingCat.of B))).hom).app U) b = _
-    erw [← Category.assoc, ← hc, Category.assoc, sheafComposeIso_hom_fac]
-    rfl
-  change (Functor.LaxMonoidal.ε (rawRestriction J B) ≫
-      (rawRestriction J B).map (Functor.LaxMonoidal.ε (moduleInclusion J B)) ≫
-      (restrictionPresheafIso J B).hom.app (𝟙_ (Modules J B))).app U b =
-    (Functor.LaxMonoidal.ε (sheafToPresheaf J (ModuleCat.{max u v} B)) ≫
-      (sheafToPresheaf J (ModuleCat.{max u v} B)).map
-        (Functor.LaxMonoidal.ε (restriction J B))).app U b at hh
-  simp only [NatTrans.comp_app, ModuleCat.comp_apply] at hh
-  change (Functor.LaxMonoidal.ε (moduleInclusion J B)).app U
-      (Functor.LaxMonoidal.ε
-        (ModuleCat.restrictScalars (scalarMap J B U)) b) =
-    (Functor.LaxMonoidal.ε (restriction J B)).hom.app U
-      ((Functor.LaxMonoidal.ε (sheafToPresheaf J (ModuleCat.{max u v} B))).app U b) at hh
-  erw [@ModuleCat.restrictScalars_η B ((ring J B).obj.obj U) _ _
-    (scalarMap J B U)] at hh
-  have hm := (PresheafOfModules.sheafificationAdjunction.{max u v}
-    (𝟙 ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj
-      (ring J B)).obj)).right_triangle_components (𝟙_ (Modules J B))
-  have hmm := congrArg (fun f ↦ f.app U ((scalarMap J B U) b)) hm
-  change (Functor.LaxMonoidal.ε (moduleInclusion J B)).app U ((scalarMap J B U) b) =
-    (scalarMap J B U) b at hmm
-  rw [hmm] at hh
-  have hf : (Functor.LaxMonoidal.ε (sheafToPresheaf J (ModuleCat.{max u v} B))).app U b =
-      fixedUnitScalar J B U b := by rfl
-  rw [hf] at hh
-  exact hh.symm.trans hu
-
-@[instance_reducible]
-private def ordinaryMonoidal : (restriction J B).Monoidal := by
-  have := ordinary_ε_isIso J B
-  have := ordinary_μ_isIso J B
-  exact monoidalKeepingLax (restriction J B)
-
-private theorem ordinary_ε_isIso : IsIso (Functor.LaxMonoidal.ε (restriction J B)) := by
-  let F := restriction J B
-  let X := F.objPreimage (𝟙_ (Fixed J B))
-  let e := F.objObjPreimageIso (𝟙_ (Fixed J B))
-  have := ordinary_μ_isIso J B (𝟙_ (Modules J B)) X
-  have h : IsIso (Functor.LaxMonoidal.ε F ▷ F.obj X) := by
-    have hh : IsIso ((Functor.LaxMonoidal.ε F ▷ F.obj X) ≫
-        Functor.LaxMonoidal.μ F (𝟙_ _) X ≫ F.map (λ_ X).hom) := by
-      rw [← Functor.LaxMonoidal.left_unitality]
-      infer_instance
-    exact IsIso.of_isIso_comp_right (Functor.LaxMonoidal.ε F ▷ F.obj X)
-      (Functor.LaxMonoidal.μ F (𝟙_ _) X ≫ F.map (λ_ X).hom)
-  let i : tensorRight (F.obj X) ≅ 𝟭 (Fixed J B) :=
-    (tensoringRight (Fixed J B)).mapIso e ≪≫ rightUnitorNatIso (Fixed J B)
-  have : (tensorRight (F.obj X)).IsEquivalence := Functor.isEquivalence_of_iso i.symm
-  have : IsIso ((tensorRight (F.obj X)).map (Functor.LaxMonoidal.ε F)) := h
-  exact isIso_of_reflects_iso (Functor.LaxMonoidal.ε F) (tensorRight (F.obj X))
-
-private theorem fixedPure_naturality (M N : Fixed J B) {U V : Cᵒᵖ} (f : U ⟶ V)
-    (x : M.obj.obj U) (y : N.obj.obj U) :
-    fixedPure J B M N V (M.obj.map f x) (N.obj.map f y) =
-      (M ⊗ N).obj.map f (fixedPure J B M N U x y) := by
-  let q := toSheafify J (M.obj ⊗ N.obj) ≫ (sfbSheafTensor_comparison J M N).inv.hom
-  exact ConcreteCategory.congr_hom (q.naturality f) (x ⊗ₜ[B] y)
-
-private def fixedPairing (M N : Fixed J B) (U : Cᵒᵖ) :
-    M.obj.obj U →ₗ[B] N.obj.obj U →ₗ[B] (M ⊗ N).obj.obj U :=
-  (TensorProduct.mk B _ _).compr₂
-    (((sfbSheafTensor_comparison J M N).inv.hom.app U).hom.comp
-      ((toSheafify J (M.obj ⊗ N.obj)).app U).hom)
-
-private theorem fixedPure_inclusion (M N : Fixed J B) (U : Cᵒᵖ)
-    (x : M.obj.obj U) (y : N.obj.obj U) :
-    (Functor.LaxMonoidal.μ (sheafToPresheaf J (ModuleCat.{max u v} B)) M N).app U
-      (x ⊗ₜ[B] y) = fixedPure J B M N U x y := by
-  rfl
-
-private theorem ringPure_inclusion (M N : Modules J B) (U : Cᵒᵖ)
-    (x : M.val.obj U) (y : N.val.obj U) :
-    (Functor.LaxMonoidal.μ (moduleInclusion J B) M N).app U
-      (x ⊗ₜ[(ring J B).obj.obj U] y) = ringPure J B M N U x y := by
-  dsimp only [Functor.LaxMonoidal.μ, moduleInclusionLax]
-  rw [Adjunction.homEquiv_unit]
-  rfl
-
-private def ordinaryLaxBraided : (restriction J B).LaxBraided := by
-  letI := rawBraided J B
-  letI := moduleInclusionBraided J B
-  letI := Functor.LaxMonoidal.natTransIsMonoidal_of_transport
-    (restrictionSheafifiedIso J B)
-  exact Functor.LaxBraided.ofNatIso (restrictionSheafifiedIso J B)
-
-private def fixedInclusionLax : (sheafToPresheaf J (ModuleCat.{max u v} B)).LaxMonoidal :=
-  (sheafificationAdjunction J (ModuleCat.{max u v} B)).rightAdjointLaxMonoidal
-
 private theorem restrictionTensor_ext (M N H : Modules J B)
     (f g : (restriction J B).obj (M ⊗ N) ⟶ (restriction J B).obj H)
     (h : ∀ (U : Cᵒᵖ) (x : M.val.obj U) (y : N.val.obj U),
