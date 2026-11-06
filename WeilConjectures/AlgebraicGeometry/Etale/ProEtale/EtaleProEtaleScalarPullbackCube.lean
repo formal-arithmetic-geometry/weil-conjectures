@@ -19,6 +19,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Direct.ProEtaleDirectImageMateCompatibility
 public import WeilConjectures.AlgebraicGeometry.ComparisonPullbackCoherence
 public import WeilConjectures.AlgebraicGeometry.ProEtaleSiteComparison
@@ -73,6 +74,7 @@ public import WeilConjectures.CategoryTheory.RingedSiteModules
 public import Mathlib.CategoryTheory.Limits.Final
 public import WeilConjectures.CategoryTheory.RingedDerivedComparisons.RingedDerivedMonoidalComparisons
 import all WeilConjectures.AlgebraicGeometry.Etale.ProEtale.EtaleProEtaleScalarMateData
+import all Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 
 /-!
