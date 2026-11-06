@@ -297,6 +297,62 @@ private noncomputable def scalarExtensionIdIso
   change F.map (scalarExtensionPresheafIdIso R M).inv ≫ F.map a.val ≫ _ = _
   rw [← F.map_comp_assoc, hp', F.map_comp_assoc]
 
+set_option synthInstance.maxSize 256 in
+open MonoidalCategory in
+private theorem isKFlat_of_iso
+    {C : Type uC} [Category.{vC} C] [EssentiallySmall.{r} C] {J : GrothendieckTopology C}
+    {R : Sheaf J CommRingCat.{r}}
+    {P Q : CochainComplex (SheafOfModules.{r}
+      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ}
+    (e : P ≅ Q) (hP : P.IsKFlatIndependentCoefficients) : Q.IsKFlatIndependentCoefficients := by
+  let := isMonoidal_W_independentCoefficients R
+  let := monoidalCategory R
+  intro A hA n
+  have : ∀ (J₂ : Type r), HasColimitsOfShape (Discrete J₂) (PresheafOfModules.{r}
+      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R).obj) := fun J₂ ↦
+    PresheafOfModules.hasColimitsOfShape _ _
+  let F := (MonoidalCategory.curriedTensor (SheafOfModules.{r}
+    ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))).mapBifunctorHomologicalComplex
+      (ComplexShape.up ℤ) (ComplexShape.up ℤ)
+  let e' : CochainComplex.mapBifunctor A P (curriedTensor _) ≅
+      CochainComplex.mapBifunctor A Q (curriedTensor _) :=
+    HomologicalComplex₂.total.mapIso ((F.obj A).mapIso e) (ComplexShape.up ℤ)
+  exact ((HomologicalComplex.exactAt_iff_isZero_homology _ n).1 (hP A hA n)).of_iso
+    ((HomologicalComplex.homologyFunctor _ _ n).mapIso e').symm |>
+      (HomologicalComplex.exactAt_iff_isZero_homology _ n).2
+
+private theorem isKFlat_inverseImage
+    {C : Type uC} [Category.{vC} C] [EssentiallySmall.{r} C]
+    {D : Type uD} [Category.{vD} D] [EssentiallySmall.{r} D]
+    {JC : GrothendieckTopology C} {JD : GrothendieckTopology D}
+    {R : Sheaf JC CommRingCat.{r}} {RI : Sheaf JD CommRingCat.{r}}
+    (L : Sheaf JC (Type (r)) ⥤ Sheaf JD (Type (r)))
+    (V : Sheaf JD (Type (r)) ⥤ Sheaf JC (Type (r))) (adj : L ⊣ V)
+    [PreservesFiniteLimits L] (I : AlgebraicInverseImage L R RI) [I.modules.Additive]
+    (P : CochainComplex (SheafOfModules.{r}
+      ((sheafCompose JC (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ)
+    (hP : P.IsKFlatIndependentCoefficients)
+    (hf : ∀ n : ℤ, IsFlatOnSite (J := JC) (R := R) (P.X n)) :
+    CochainComplex.IsKFlatIndependentCoefficients
+      ((I.modules.mapHomologicalComplex (ComplexShape.up ℤ)).obj P) := by
+  have := algebraicInverseImage_finiteLimits L I
+  have : I.modules.Additive := Functor.additive_of_preserves_binary_products I.modules
+  have := scalarExtension_additive (𝟙 RI)
+  let U := I.modules ⋙ scalarExtension (𝟙 RI)
+  have hobj (M) : U.obj M = changeOfRings.{vD, uD, r} (𝟙 RI) (I.modules.obj M) := rfl
+  have hmap {M N} (a : M ⟶ N) : U.map a = eqToHom (hobj M) ≫
+      changeOfRingsHom.{vD, uD, r} (𝟙 RI) (I.modules.obj M) (I.modules.map a) ≫
+        eqToHom (hobj N).symm := by
+    simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
+    rfl
+  have hk := (isKFlat_ringedToposPullback L V adj I (𝟙 RI) U hobj hmap P
+    hP
+      hf).1
+  let e : U ≅ I.modules :=
+    Functor.isoWhiskerLeft I.modules (scalarExtensionIdIso RI) ≪≫ I.modules.rightUnitor
+  exact isKFlat_of_iso ((NatIso.mapHomologicalComplex e (ComplexShape.up ℤ)).app P)
+    hk
+
 open CategoryTheory.CochainPullback hiding Modules
 open SheafOfModules.KFlatFixedTensor
 
@@ -417,7 +473,13 @@ theorem pullback_resolving_computation
       eps.app (H.obj P)) := by rw [hfac]; infer_instance
   have hi'' := IsIso.of_isIso_comp_left
     (e.hom.app (DerivedCategory.Qh.obj (H.obj P))) (eps.app (H.obj P))
-  rw [← heps P]
-  exact hi''
+  rw [heps P] at hi''
+  have := IsIso.of_isIso_comp_left
+    (L.map ((DerivedCategory.quotientCompQhIso (Modules R)).hom.app P))
+    (epsilon.app P ≫ (DerivedCategory.quotientCompQhIso (Modules S)).inv.app
+      ((f.L.mapHomologicalComplex (.up ℤ)).obj P))
+  exact IsIso.of_isIso_comp_right (epsilon.app P)
+    ((DerivedCategory.quotientCompQhIso (Modules S)).inv.app
+      ((f.L.mapHomologicalComplex (.up ℤ)).obj P))
 
 end SheafOfModules.PullbackTensorResolving
