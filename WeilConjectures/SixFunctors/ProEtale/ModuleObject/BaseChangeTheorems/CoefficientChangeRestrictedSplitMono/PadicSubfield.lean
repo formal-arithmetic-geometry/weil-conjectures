@@ -32,6 +32,8 @@ section Coefficients
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ)
   {X Y X' Y' Z : Scheme.{u}} {p : X ⟶ Y} {g : Y' ⟶ Y} {p' : X' ⟶ Y'} {g' : X' ⟶ X}
 
+set_option maxHeartbeats 400000 in
+-- Kernel checking the concrete coefficient-change specialization times out at 200000 heartbeats.
 /-- **From `𝒪_E` to `E` for split restricted base change maps**, for quasi-compact
 quasi-separated vertical maps and a bounded below `K₀`. -/
 theorem isSplitMono_map_baseChangeMap_app_padicSubfield_of_padicIntegers [QuasiCompact p]
@@ -51,12 +53,13 @@ theorem isSplitMono_map_baseChangeMap_app_padicSubfield_of_padicIntegers [QuasiC
         ((Mod.extendScalars (coefficientMap (padicIntegersRingObjToContinuousMapRingObj ℓ E)
           X)).leftDerivedFunctor.obj K₀))) := by
   have := isGE_leftDerivedUpperStar_obj (Profinite.padicIntegersRingObj ℓ E.1) g' K₀ n
-  exact isSplitMono_map_baseChangeMap_app_derivedExtendScalars
+  have hE := isSplitMono_map_baseChangeMap_app_derivedExtendScalars
     (padicIntegersRingObjToContinuousMapRingObj ℓ E) (derivedPullIsoCompCoherence _) sq i K₀
     (isIso_derivedPushHom_app_padicIntegers_of_isGE ℓ E p K₀ n)
     (isIso_derivedPushHom_app_padicIntegers_of_isGE ℓ E p'
       ((g')^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧.leftDerivedFunctor.obj K₀) n)
-    h
+    (by exact_mod_proofs h)
+  exact_mod_proofs hE
 
 end Coefficients
 
