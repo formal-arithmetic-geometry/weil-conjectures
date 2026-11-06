@@ -37,7 +37,7 @@ theorem relativeDifferentials_affine_sections_map (f : X ⟶ S)
       (fun a b ↦ f.relativeDifferentialsDerivation.d_mul a b)
       (fun a ↦ by
         rw [Scheme.Hom.appLE_eq_pullbackPresheafToPresheaf_app]
-        exact PresheafOfModules.Derivation'.d_app _ _)
+        exact PresheafOfModulesOfCommRing.Derivation'.d_app _ _)
   exact ⟨D.desc.hom, fun a ↦ D.desc_d a⟩
 
 end AlgebraicGeometry
