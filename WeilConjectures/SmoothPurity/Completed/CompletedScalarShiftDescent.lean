@@ -115,6 +115,24 @@ private lemma good_shift (P : CochainComplex (integralTowerModules l E Y) ℤ)
   · intro i
     exact hP.2 (i + m)
 
+private lemma conj_naturality {D B : Type*} [Category D] [Category B] (F G : D ⥤ B)
+    {a b a' b' : D} (u : a ⟶ b) (v : a' ⟶ b') (ea : a ≅ a') (eb : b ≅ b')
+    (hq : u ≫ eb.hom = ea.hom ≫ v) (ta : F.obj a' ⟶ G.obj a') (tb : F.obj b' ⟶ G.obj b')
+    (h : F.map v ≫ tb = ta ≫ G.map v) :
+    F.map u ≫ F.map eb.hom ≫ tb ≫ G.map eb.inv =
+      (F.map ea.hom ≫ ta ≫ G.map ea.inv) ≫ G.map u := by
+  have hq' : ea.inv ≫ u = v ≫ eb.inv := by
+    rw [Iso.inv_comp_eq, ← Category.assoc, ← hq, Category.assoc, Iso.hom_inv_id,
+      Category.comp_id]
+  rw [← F.map_comp_assoc, hq, F.map_comp_assoc, reassoc_of% h, Category.assoc,
+    Category.assoc, ← G.map_comp, ← G.map_comp, hq']
+
+private lemma conj_app_eq {D B : Type*} [Category D] [Category B] {F G : D ⥤ B}
+    (p : F ⟶ G) {a a' : D} (e : a ≅ a') (t : F.obj a' ⟶ G.obj a')
+    (h : p.app a = F.map e.hom ≫ t ≫ G.map e.inv) : p.app a' = t := by
+  rw [← cancel_epi (F.map e.hom), p.naturality, h, Category.assoc, Category.assoc,
+    ← G.map_comp, Iso.inv_hom_id, G.map_id, Category.comp_id]
+
 private theorem good_whisker_full (Z : Type*) [Category Z] :
     ((Functor.whiskeringLeft _ _ Z).obj
       (integralOperationsGoodLocalization l E Y)).Full := by
@@ -133,34 +151,32 @@ private theorem good_whisker_full (Z : Type*) [Category Z] :
     exact Functor.IsLocalization.of_iso V eH
   refine ⟨?_⟩
   intro F G τ
+  let eX (X : P.FullSubcategory) : Lg.obj X ≅
+      (integralOperationsGoodLocalization l E Y).obj ⟨X.obj.as, (hP X.obj).mp X.property⟩ :=
+    (DerivedCategory.quotientCompQhIso A).app X.obj.as
   let τh : Lg ⋙ F ⟶ Lg ⋙ G :=
-    { app := fun X ↦ τ.app ⟨X.obj.as, (hP X.obj).mp X.property⟩
+    { app := fun X ↦ F.map (eX X).hom ≫ τ.app ⟨X.obj.as, (hP X.obj).mp X.property⟩ ≫
+        G.map (eX X).inv
       naturality := by
         intro X X' f
         have h := τ.naturality (ObjectProperty.homMk f.hom.out :
           (⟨X.obj.as, (hP X.obj).mp X.property⟩ :
             (integralOperationsGoodComplex l E Y).FullSubcategory) ⟶
           ⟨X'.obj.as, (hP X'.obj).mp X'.property⟩)
-        have hq : DerivedCategory.Q.map f.hom.out = DerivedCategory.Qh.map f.hom := by
+        have hq : Lg.map f ≫ (eX X').hom = (eX X).hom ≫ DerivedCategory.Q.map f.hom.out := by
           have hh := DerivedCategory.quotientCompQhIso_hom_naturality f.hom.out
-          simp only [DerivedCategory.quotientCompQhIso,
-            HomologicalComplexUpToQuasiIso.quotientCompQhIso,
-            CategoryTheory.Quotient.lift.isLift_hom,
-            HomotopyCategory.quotient_map_out] at hh
-          erw [Category.id_comp, Category.comp_id] at hh
-          exact hh.symm
+          rw [HomotopyCategory.quotient_map_out] at hh
+          exact hh
         change F.map (DerivedCategory.Q.map f.hom.out) ≫ _ =
           _ ≫ G.map (DerivedCategory.Q.map f.hom.out) at h
-        change F.map (DerivedCategory.Qh.map f.hom) ≫ _ =
-          _ ≫ G.map (DerivedCategory.Qh.map f.hom)
-        simpa only [hq] using h }
+        exact conj_naturality F G _ _ _ _ hq _ _ h }
   let ff := Localization.fullyFaithfulWhiskeringLeft Lg V Z
   refine ⟨ff.preimage τh, ?_⟩
   ext X
-  have h := congrArg (fun a ↦ a.app ⟨
-    (HomotopyCategory.quotient _ (.up ℤ)).obj X.obj,
-    (hP _).mpr X.property⟩) (ff.map_preimage τh)
-  exact h
+  let X₀ : P.FullSubcategory :=
+    ⟨(HomotopyCategory.quotient _ (.up ℤ)).obj X.obj, (hP _).mpr X.property⟩
+  have h := congrArg (fun a ↦ a.app X₀) (ff.map_preimage τh)
+  exact conj_app_eq (ff.preimage τh) (eX X₀) (τ.app X) h
 
 private theorem goodLocalization_essSurj :
     (integralOperationsGoodLocalization l E Y).EssSurj := by
@@ -181,7 +197,8 @@ private theorem goodLocalization_essSurj :
   constructor
   intro K
   obtain ⟨X, ⟨e⟩⟩ := Functor.EssSurj.mem_essImage Lg K
-  exact ⟨⟨X.obj.as, (hP X.obj).mp X.property⟩, ⟨e⟩⟩
+  exact ⟨⟨X.obj.as, (hP X.obj).mp X.property⟩,
+    ⟨((DerivedCategory.quotientCompQhIso A).app X.obj.as).symm ≪≫ e⟩⟩
 
 private theorem whiskeringLeft_faithful
     {C D B : Type*} [Category C] [Category D] [Category B]

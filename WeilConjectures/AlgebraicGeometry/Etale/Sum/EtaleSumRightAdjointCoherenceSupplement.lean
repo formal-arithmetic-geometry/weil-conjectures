@@ -167,7 +167,7 @@ private theorem pullback_unit_comp_eq
     {U X T : Scheme.{u}} (e : U ⟶ X) (v : X ⟶ T) (ev : U ⟶ T)
     (h : ev = e ≫ v) :
     (Functor.mapDerivedCategoryNatIso (upperStarComp (ModuleCat.{u + 1} A) e v ev h) ≪≫
-        Functor.mapDerivedCategoryCompIso _ _).hom.app (constantComplex A T) ≫
+        (Functor.mapDerivedCategoryCompIso _ _).symm).hom.app (constantComplex A T) ≫
       (upperStar (ModuleCat.{u + 1} A) e).mapDerivedCategory.map
         (etaleSumPullbackUnitIso A v).hom ≫ (etaleSumPullbackUnitIso A e).hom =
       (etaleSumPullbackUnitIso A ev).hom := by
@@ -189,7 +189,7 @@ private theorem pullback_unit_square
   have h₂ := pullback_unit_comp_eq A w' e (w' ≫ e) rfl
   have hh : exactDerivedSquareUpperStarIso (ModuleCat.{u + 1} A) sq =
       (Functor.mapDerivedCategoryNatIso (upperStarComp (ModuleCat.{u + 1} A)
-        e' w (w' ≫ e) sq.w) ≪≫ Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+        e' w (w' ≫ e) sq.w) ≪≫ (Functor.mapDerivedCategoryCompIso _ _).symm).symm ≪≫
       unboundedEtaleUpperStarCompIso A w' e := by
     ext K
     simp only [exactDerivedSquareUpperStarIso, squareUpperStarIso,

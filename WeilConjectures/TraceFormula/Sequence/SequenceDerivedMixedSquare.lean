@@ -81,7 +81,7 @@ private theorem exactComposition_fac
       (.up ℤ)).hom.app P = 𝟙 _ := rfl
   rw [hi] at hc
   erw [CategoryTheory.Functor.map_id, Category.comp_id] at hc
-  simp only [Iso.trans_hom, NatTrans.comp_app, Category.assoc]
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
   rw [hc]
   exact Functor.mapDerivedCategoryNatIso_fac c P
 

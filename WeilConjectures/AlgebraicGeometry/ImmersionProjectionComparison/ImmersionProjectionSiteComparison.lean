@@ -492,7 +492,7 @@ private theorem exactCounitIso
     IsIso (SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction a).counit := by
   let ad := SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction a
   let e : G.mapDerivedCategory ⋙ F.mapDerivedCategory ≅ 𝟭 _ :=
-    (Functor.mapDerivedCategoryCompIso G F).symm ≪≫
+    Functor.mapDerivedCategoryCompIso G F ≪≫
       Functor.mapDerivedCategoryNatIso (asIso a.counit) ≪≫
         Functor.mapDerivedCategoryIdIso D
   have hf := ad.fullyFaithfulROfCompIsoId e
@@ -834,9 +834,9 @@ private theorem derivedSquare_normalization (a : G₁ ⋙ G₂ ≅ F₁ ⋙ F₂
   rw [G₂.mapDerivedCategory.map_id, F₂.leftDerivedFunctor.map_id,
     Category.id_comp, Category.id_comp, Iso.inv_hom_id_app]
   simpa only [Category.assoc, Functor.comp_obj] using Category.comp_id
-    ((G₁.mapDerivedCategoryCompIso G₂).inv.app K ≫
+    ((G₁.mapDerivedCategoryCompIso G₂).hom.app K ≫
       (Functor.mapDerivedCategoryNatIso a).hom.app K ≫
-        (F₁.mapDerivedCategoryCompIso F₂).hom.app K)
+        (F₁.mapDerivedCategoryCompIso F₂).inv.app K)
 
 private theorem exactTensor_square (a : G₁ ⋙ G₂ ≅ F₁ ⋙ F₂)
     [NatTrans.IsMonoidal a.hom] :

@@ -49,7 +49,6 @@ attribute [local implicit_reducible] WeilConjectures.integralCoefficientSheaf
   WeilConjectures.integralOperationsPullbackLevel WeilConjectures.integralOperationsRestrict
   WeilConjectures.scalarReductionDerivedRestriction
   HomologicalComplex.complexOfFunctorsToFunctorToComplex HomologicalComplex.asFunctor
-  CategoryTheory.Functor.mapHomologicalComplex
   CategoryTheory.Functor.ofOpSequence CategoryTheory.Functor.ofSequence
   WeilConjectures.unrestrictedIntegralReductionFunctor
 universe u

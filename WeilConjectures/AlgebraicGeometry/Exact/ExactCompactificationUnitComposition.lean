@@ -146,7 +146,7 @@ theorem exactCompactificationUnit_composition
         ((rightDerivedLowerShriekIso A
           (HasCompactification.compactification e)).symm ≪≫
           ce (HasCompactification.compactification e)) ≪≫
-      (Functor.mapDerivedCategoryCompIso F G).symm ≪≫
+      Functor.mapDerivedCategoryCompIso F G ≪≫
       Functor.mapDerivedCategoryNatIso σ) := by
   let d := HasCompactification.compactification e
   let c := (HasCompactification.compactification (h ≫ e)).ofComp d
@@ -200,7 +200,7 @@ theorem exactCompactificationUnit_composition
     rw [uhe, self, Iso.refl_hom, Category.comp_id]
     exact hs.symm
   apply invert_unit_square α β γ (unboundedEtaleLowerShriekCompIso A h e)
-    ((Functor.mapDerivedCategoryCompIso F G).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso F G ≪≫
       Functor.mapDerivedCategoryNatIso σ)
   ext K
   simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
