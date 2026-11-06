@@ -114,13 +114,15 @@ the underlying group are only propositionally equal, so the instances are given 
 def discreteContinuousRepCounitIso (X : Rep.DiscreteContinuousRep.{0, u, max u w} ℤ G) :
     ((toDiscreteContinuousRep G).obj ((ofDiscreteContinuousRep G).obj X)).obj ≅ X.obj where
   hom := ConcreteCategory.ofHom (C := Rep ℤ G)
-    (@Representation.IntertwiningMap.mk ℤ G X.obj.V X.obj.V _ _ _ _ _ X.obj.hV2 _ _
-      ((AddEquiv.refl X.obj.V).toIntLinearEquiv (modM₂ := X.obj.hV2)).toLinearMap
-      fun _ ↦ rfl)
+    { toLinearMap :=
+        ((AddEquiv.refl X.obj.V).toIntLinearEquiv (modM₂ := X.obj.hV2)).toLinearMap
+      isIntertwining' _ := by ext; rfl }
   inv := ConcreteCategory.ofHom (C := Rep ℤ G)
-    (@Representation.IntertwiningMap.mk ℤ G X.obj.V X.obj.V _ _ _ _ X.obj.hV2 _ _ _
-      ((AddEquiv.refl X.obj.V).toIntLinearEquiv (modM := X.obj.hV2)).toLinearMap
-      fun _ ↦ rfl)
+    { toLinearMap :=
+        ((AddEquiv.refl X.obj.V).toIntLinearEquiv (modM := X.obj.hV2)).toLinearMap
+      isIntertwining' _ := by ext; rfl }
+  hom_inv_id := by ext; rfl
+  inv_hom_id := by ext; rfl
 
 @[simp]
 lemma discreteContinuousRepCounitIso_hom_hom_apply
