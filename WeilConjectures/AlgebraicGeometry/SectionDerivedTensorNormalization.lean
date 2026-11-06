@@ -986,7 +986,8 @@ theorem section_derived_tensor_normalization {X Y : Scheme.{u}} (f : X ⟶ Y) :
       (tensor Λ T) (𝟙_ (DerivedCategory (internalModules Λ T))) (tensorUnit Λ T)
       (fun M N P ↦ α_ M N P) (fun M ↦ λ_ M) (fun M ↦ ρ_ M)
       (normalizationDerivedAssociator Λ T) (normalizationDerivedLeftUnitor Λ T)
-      (normalizationDerivedRightUnitor Λ T) (tensorComparison Λ T).hom (𝟙 _)) ∧
+      (normalizationDerivedRightUnitor Λ T) (tensorComparison Λ T).hom
+        (cast (by rfl) (𝟙 (tensorUnit Λ T)))) ∧
     (∀ M N : DerivedCategory (internalModules Λ Y),
       (derivedEquivalence Λ X).functor.map (((internalDelta Λ f).app M).app N) ≫
           (tensorComparison Λ X).hom.app
@@ -1011,7 +1012,7 @@ theorem section_derived_tensor_normalization {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ((derivedEquivalence Λ X).functor.map
         (normalizationDerivedInternalUnit Λ f).hom =
       (derivedPullComparison Λ f).hom.app (𝟙_ (DerivedCategory (internalModules Λ Y))) ≫
-        normalizationDerivedSectionUnit Λ f) ∧
+        cast (by rfl) (normalizationDerivedSectionUnit Λ f)) ∧
     TensorConstraintCondition (derivedPullback Λ f) (tensor Λ Y) (tensor Λ X)
       (tensorUnit Λ Y) (tensorUnit Λ X)
       (normalizationDerivedAssociator Λ Y) (normalizationDerivedLeftUnitor Λ Y)

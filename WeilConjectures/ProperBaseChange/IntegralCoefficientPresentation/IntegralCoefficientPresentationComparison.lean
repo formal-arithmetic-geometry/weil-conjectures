@@ -95,9 +95,9 @@ def derivedSquare {T : Scheme.{u}}
     (r : pbcRestrict b.hom ⋙ pbcRestrict π ≅ pbcRestrict ρ ⋙ pbcRestrict e.hom) :
     pbcDerivedRestrict b.hom ⋙ pbcDerivedRestrict π ≅
       pbcDerivedRestrict ρ ⋙ pbcDerivedRestrict e.hom :=
-  (Functor.mapDerivedCategoryCompIso (pbcRestrict b.hom) (pbcRestrict π)).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso (pbcRestrict b.hom) (pbcRestrict π)) ≪≫
     Functor.mapDerivedCategoryNatIso r ≪≫
-      Functor.mapDerivedCategoryCompIso (pbcRestrict ρ) (pbcRestrict e.hom)
+      (Functor.mapDerivedCategoryCompIso (pbcRestrict ρ) (pbcRestrict e.hom)).symm
 
 /-- The finite comparison after restriction to the completed coefficient ring.
 Source: Bhatt--Scholze, Section 6.5; Stacks 06YY
@@ -849,10 +849,10 @@ theorem comparison :
       change (pbcRestrict e.hom).mapDerivedCategory.Additive
       infer_instance
     have di : pbcDerivedRestrict e.hom ⋙ pbcDerivedRestrict e.inv ≅ 𝟭 _ :=
-      (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso _ _) ≪≫
         Functor.mapDerivedCategoryNatIso i ≪≫ Functor.mapDerivedCategoryIdIso _
     have dj : pbcDerivedRestrict e.inv ⋙ pbcDerivedRestrict e.hom ≅ 𝟭 _ :=
-      (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso _ _) ≪≫
         Functor.mapDerivedCategoryNatIso j ≪≫ Functor.mapDerivedCategoryIdIso _
     refine ⟨hf, hg, inferInstance, inferInstance, inferInstance, inferInstance,
       ⟨i⟩, ⟨j⟩, inferInstance, inferInstance, ⟨di⟩, ⟨dj⟩, ?_, ?_, ?_⟩
