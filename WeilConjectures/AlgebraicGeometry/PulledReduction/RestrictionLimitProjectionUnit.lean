@@ -24,7 +24,7 @@ set_option synthInstance.maxSize 2048
 universe t
 open CategoryTheory CategoryTheory.Limits Opposite
 attribute [local irreducible] Functor.mapDerivedCategory Functor.rightDerivedFunctor
-  Functor.mapDerivedCategoryCompIso Functor.mapDerivedCategoryNatIso
+  Functor.mapDerivedCategoryNatIso
 private theorem normalized_mate
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     [Abelian A] [Abelian B] [Abelian C] [Abelian D]
