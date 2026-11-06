@@ -67,7 +67,7 @@ theorem comparison_square_of_component
         ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
           Functor.mapDerivedCategoryNatIso
             (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) g).symm ≪≫
-          Functor.mapDerivedCategoryCompIso _ _) ≪≫
+          (Functor.mapDerivedCategoryCompIso _ _).symm) ≪≫
       Functor.isoWhiskerLeft (DerivedCategory.Plus.ι ⋙ D(ν^*(V)[ModuleCat.{u + 1} Λ]))
         (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) g).symm
 ) g' Λ).hom.app
@@ -81,7 +81,7 @@ theorem comparison_square_of_component
         ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
           Functor.mapDerivedCategoryNatIso
             (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) g).symm ≪≫
-          Functor.mapDerivedCategoryCompIso _ _) ≪≫
+          (Functor.mapDerivedCategoryCompIso _ _).symm) ≪≫
       Functor.isoWhiskerLeft (DerivedCategory.Plus.ι ⋙ D(ν^*(V)[ModuleCat.{u + 1} Λ]))
         (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) g).symm
 ) f Λ).hom.app M) =
@@ -93,7 +93,7 @@ theorem comparison_square_of_component
         ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
           Functor.mapDerivedCategoryNatIso
             (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) g).symm ≪≫
-          Functor.mapDerivedCategoryCompIso _ _) ≪≫
+          (Functor.mapDerivedCategoryCompIso _ _).symm) ≪≫
       Functor.isoWhiskerLeft (DerivedCategory.Plus.ι ⋙ D(ν^*(V)[ModuleCat.{u + 1} Λ]))
         (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) g).symm
 ) f' Λ).hom.app
@@ -107,7 +107,7 @@ theorem comparison_square_of_component
         ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
           Functor.mapDerivedCategoryNatIso
             (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) g).symm ≪≫
-          Functor.mapDerivedCategoryCompIso _ _) ≪≫
+          (Functor.mapDerivedCategoryCompIso _ _).symm) ≪≫
       Functor.isoWhiskerLeft (DerivedCategory.Plus.ι ⋙ D(ν^*(V)[ModuleCat.{u + 1} Λ]))
         (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) g).symm
 ) g Λ).hom.app M) ≫
