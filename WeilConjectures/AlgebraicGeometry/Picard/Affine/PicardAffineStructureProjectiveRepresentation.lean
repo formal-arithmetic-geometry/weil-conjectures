@@ -231,9 +231,9 @@ theorem picard_affine_structure_projective_representation
   let O := SheafOfModules.unit Y.ringCatSheaf
   have : SheafOfModules.IsInvertible.{v, v, v} O := by
     dsimp [O]
-    infer_instance
-  have : SheafOfModules.IsFinitePresentation.{v, v, v} O :=
-    SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{v, v, v} O
+    exact SheafOfModules.instIsInvertibleUnit.{v, v, v}
+  have : O.IsFinitePresentation :=
+    SheafOfModules.IsFiniteLocallyFree.isFinitePresentation O
   let D := (schemeDerivedDirectImage p).obj
     ((DerivedCategory.singleFunctor (SheafOfModules.{v} (moduleRings Y.toRingedSpace)) 0).obj O)
   have hD : IsPerfect (Spec R) D :=
