@@ -566,7 +566,7 @@ private theorem pullComparison_mate_isIso {X Y : AlgebraicGeometry.Scheme.{u}} (
     Functor.whiskerLeft_id', Iso.symm_hom, Iso.refl_inv, Category.id_comp,
     NatTrans.comp_app, TwoSquare.vComp_app, Functor.whiskerRight_app,
     NatTrans.id_app, Category.assoc]
-  letI : Category.{u + 2} (DerivedCategory
+  let : Category.{u + 2} (DerivedCategory
       (pbcModules Y ((adicTowerInverseImage g).obj (constantAdicFiniteCone X d).pt))) :=
     inferInstanceAs (Category.{u + 2} (DerivedCategory
       (pbcModules Y ((adicTowerInverseImage g).obj

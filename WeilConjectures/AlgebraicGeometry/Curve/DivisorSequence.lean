@@ -720,11 +720,13 @@ theorem exists_shortExact_divisorSequence [IsAlgClosed k] (f : C ⟶ Spec (.of k
       simp only [Scheme.extendByZero_fromSpecResidueField_fst]
       change (if V.hom y' ∈ S then D y' else 0) = _
       by_cases hy' : V.hom y' ∈ S
-      · rw [ite_eq_left hy', Finset.sum_eq_single_of_mem (⟨_, hy'⟩ : S) (Finset.mem_univ _), ite_eq_left rfl]
+      · rw [ite_eq_left hy', Finset.sum_eq_single_of_mem (⟨_, hy'⟩ : S) (Finset.mem_univ _),
+          ite_eq_left rfl]
         intro P _ hP
         rw [ite_eq_right fun e ↦ hP (Subtype.ext e.symm)]
       · rw [ite_eq_right hy']
-        exact (Finset.sum_eq_zero fun P _ ↦ ite_eq_right fun (e : V.hom y' = P.1) ↦ hy' (e ▸ P.2)).symm
+        exact (Finset.sum_eq_zero fun P _ ↦
+          ite_eq_right fun (e : V.hom y' = P.1) ↦ hy' (e ▸ P.2)).symm
     refine ⟨∑ P : S, F.map (c.inj P) (Φ.toPresheafFiber V v (C.pointConstantInt P.1).obj
       ((C.pointFunctionSheafToPointConstantInt P.1).hom.app (op V) D)), ?_⟩
     have hterm (P : S) : F.map ψ (F.map (c.inj P) (Φ.toPresheafFiber V v
