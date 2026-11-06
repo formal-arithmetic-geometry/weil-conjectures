@@ -455,9 +455,11 @@ theorem algClRestriction_indConstructible
   have : HasColimitsOfShape I
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)) :=
     inferInstance
-  have : PreservesColimitsOfShape I (HomologicalComplex.eval
+  have hpres : PreservesColimitsOfShape I (HomologicalComplex.eval
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E))
       (.up ℤ) 0) := inferInstance
+  have : PreservesColimit (coefficientComplexDiagram X ℓ C H he hf)
+      (HomologicalComplex.eval _ (.up ℤ) 0) := hpres.preservesColimit
   have hc' : IsColimit c :=
     isColimitOfPreserves (HomologicalComplex.eval _ (.up ℤ) 0) hc
   have hC : IsConstructibleModuleObject (padicSubfieldRingObj X ℓ F) (C.X 0) :=
