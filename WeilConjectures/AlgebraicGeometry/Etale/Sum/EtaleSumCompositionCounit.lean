@@ -106,14 +106,14 @@ private lemma cell_counit
   simp only [Iso.trans_refl, Functor.isoWhiskerLeft_refl,
     Functor.isoWhiskerRight_refl, NatTrans.comp_app]
   rw [Localization.liftNatTrans_app, Functor.mapDerivedCategoryIdIso_hom_app_Q_obj]
-  change (Functor.mapDerivedCategoryCompIso R L).inv.app (DerivedCategory.Q.obj K) ≫
+  change (Functor.mapDerivedCategoryCompIso R L).hom.app (DerivedCategory.Q.obj K) ≫
       ((R ⋙ L).mapDerivedCategoryFactors.hom.app K ≫
         DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex adj.counit (.up ℤ)).app K) ≫
         (𝟭 (C j)).mapDerivedCategoryFactors.inv.app K) ≫
       (𝟭 (C j)).mapDerivedCategoryFactors.hom.app K = _
   simp only [Category.assoc, Iso.inv_hom_id_app]
   rw [← Functor.mapDerivedCategoryCompIso_hom_app_factors R L K,
-    Category.assoc, Iso.inv_hom_id_app_assoc]
+    Category.assoc, Iso.hom_inv_id_app_assoc]
   simp only [Adjunction.onDerivedCategory, Adjunction.localization_counit_app,
     Category.assoc]
   erw [Category.comp_id]
@@ -268,7 +268,7 @@ noncomputable def derivedEtaleSumCompIso
     (etaleLowerShriek (ModuleCat.{u + 1} A) e inferInstance).mapDerivedCategory ⋙
         (etaleLowerShriek (ModuleCat.{u + 1} A) v inferInstance).mapDerivedCategory ≅
       (etaleLowerShriek (ModuleCat.{u + 1} A) (e ≫ v) inferInstance).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (etaleSumSheafCompIso A e v)
 
 attribute [local irreducible] upperStar etaleLowerShriek Functor.mapDerivedCategory
