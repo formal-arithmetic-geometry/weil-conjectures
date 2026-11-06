@@ -337,3 +337,7 @@
   statement (old compositor direction); skip this BZ992 dependency and its two importers.
   Reverted temporary attribute edits in this blocked section-computation branch.
 - Next validation retains four second-layer targets on the unaffected coefficient branch.
+- Coefficient round 1 passed all earlier modules and failed only in
+  CoefficientScalarSectionRealization. Deleted three prune-listed private helpers
+  after checking all six short-name declaration/reference lines are local.
+- Revalidating the same four targets; no parallel build requests.
