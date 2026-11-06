@@ -166,7 +166,8 @@ theorem exactDerivedCube
       reassoc_of% (tripleComparison_left qH), tripleComparison_right d]
     simp only [pR, Functor.mapDerivedCategoryNatIso_trans, Category.assoc]
   have h := hL.trans ((congrArg (fun p ↦
-    (Functor.mapDerivedCategoryNatIso p).hom ≫ (tripleComparison G' I' R₃).hom) hp).trans hR.symm)
+    (Functor.mapDerivedCategoryNatIso p).hom ≫ (tripleComparison G' I' R₃).hom) hp).trans
+      hR.symm)
   have h' := (cancel_epi (tripleComparison R₀ J H).hom).1 h
   exact congr_app h' M
 

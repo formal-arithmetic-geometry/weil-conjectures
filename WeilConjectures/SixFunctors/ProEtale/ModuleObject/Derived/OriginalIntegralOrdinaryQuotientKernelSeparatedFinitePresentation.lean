@@ -11,6 +11,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.Free
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Mathlib.CategoryTheory.Abelian.Basic
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
+public import WeilConjectures.Topology.IntegralContinuousPresentationSeparated
 import Mathlib.Topology.ContinuousMap.Algebra
 import Mathlib.Topology.ExtremallyDisconnected
 import Mathlib.LinearAlgebra.Matrix.ToLin
@@ -221,13 +222,15 @@ private theorem unit_section_surjective (Y : Scheme.{u})
     { app U := AddCommGrpCat.ofHom ((zmultiplesHom _ (M.obj.map (hT.from U.unop).op s)).comp
         AddEquiv.ulift.toAddMonoidHom)
       naturality U V g := by
+        simp only [Monoidal.tensorUnit_obj, Monoidal.tensorUnit_map, Opposite.op_unop,
+          AddEquiv.toAddMonoidHom_eq_coe, Category.id_comp]
         ext n
-        simp only [AddCommGrpCat.hom_comp, AddCommGrpCat.hom_ofHom,
-          AddMonoidHom.coe_comp, Function.comp_apply, zmultiplesHom_apply,
-          AddEquiv.toAddMonoidHom_eq_coe, AddMonoidHom.coe_coe, map_zsmul]
-        change n.down • M.obj.map (hT.from V.unop).op s =
-          n.down • M.obj.map g (M.obj.map (hT.from U.unop).op s)
-        rw [← Functor.map_comp_apply, show (hT.from U.unop).op ≫ g =
+        erw [AddCommGrpCat.hom_comp]
+        simp only [AddCommGrpCat.hom_ofHom, AddMonoidHom.coe_comp, Function.comp_apply,
+          zmultiplesHom_apply, AddMonoidHom.coe_coe]
+        erw [map_zsmul]
+        congr 1
+        erw [← Functor.map_comp_apply, show (hT.from U.unop).op ≫ g =
           (hT.from V.unop).op from Quiver.Hom.unop_inj (hT.hom_ext _ _)] }
   let f := inv (Functor.OplaxMonoidal.η (presheafToSheaf J Ab.{u + 1})) ≫
     (adj.homEquiv _ _).symm a
@@ -281,8 +284,9 @@ private theorem terminal_component_zero
         (CategoryTheory.MonObj.one :
           MonoidalCategory.tensorUnit (Sheaf (ProEt.topology (Spec D)) Ab.{u + 1}) ⟶
           condensedRingObj (Profinite.padicIntegersRingObj ell E) (Spec D)) ≫ q.hom) hzero
-    simpa only [Mod.comp_hom', ← Category.assoc, Mod.one_comp_regularLift,
-      Mod.zero_hom, comp_zero] using h
+    simp only [Mod.comp_hom', Mod.zero_hom] at h
+    erw [← Category.assoc, Mod.one_comp_regularLift] at h
+    exact h
   have h := congrArg (fun q :
       MonoidalCategory.tensorUnit (Sheaf (ProEt.topology (Spec D)) Ab.{u + 1}) ⟶ N.X ↦
       Sheaf.unitHomEval.{u + 1, u, u + 1} (ProEt.mk (𝟙 (Spec D))) q) hh
@@ -328,11 +332,13 @@ theorem originalIntegralOrdinaryQuotientKernel_separated_finitePresentation
   have (i : ι) : IsWContractibleRing (D i) := hD i
   have (i : ι) : WeaklyEtale (g i) :=
     Scheme.proetalePrecoverage_le_precoverage_weaklyEtale _ hg ⟨i⟩
+  have : MorphismProperty.IsStableUnderComposition (@WeaklyEtale : MorphismProperty Scheme.{u}) :=
+    MorphismProperty.IsMultiplicative.toIsStableUnderComposition
   let w (i : ι) : Spec (D i) ⟶ Y := g i ≫ U.unop.hom
   have (i : ι) : WeaklyEtale (w i) := inferInstanceAs (WeaklyEtale (g i ≫ U.unop.hom))
-  let W (i : ι) : Y.ProEt :=
-    (MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale (w i))).obj
-      (ProEt.mk (𝟙 (Spec (D i))))
+  let Φ (i : ι) : (Spec (D i)).ProEt ⥤ Y.ProEt :=
+    MorphismProperty.Over.map ⊤ (inferInstance : @WeaklyEtale _ _ (w i))
+  let W (i : ι) : Y.ProEt := (Φ i).obj (ProEt.mk (𝟙 (Spec (D i))))
   let a (i : ι) : W i ⟶ U.unop := MorphismProperty.Over.homMk (g i) (by
     change g i ≫ U.unop.hom = 𝟙 _ ≫ (g i ≫ U.unop.hom)
     exact (Category.id_comp _).symm)
@@ -360,7 +366,9 @@ theorem originalIntegralOrdinaryQuotientKernel_separated_finitePresentation
         (e.hom.app N).hom.app (Opposite.op (ProEt.mk (𝟙 (Spec (D i))))) =
         (e.hom.app V).hom.app (Opposite.op (ProEt.mk (𝟙 (Spec (D i))))) ≫
         u.hom.hom.app (Opposite.op (W i)) at hn
-      exact hn.symm.trans (by rw [ht, zero_comp])
+      refine hn.symm.trans ?_
+      rw [ht]
+      exact zero_comp
     exact (cancel_epi ((e.hom.app V).hom.app
       (Opposite.op (ProEt.mk (𝟙 (Spec (D i))))))).mp (hh.trans comp_zero.symm)
   rw [← u.hom.hom.naturality, hz, comp_zero, zero_comp]

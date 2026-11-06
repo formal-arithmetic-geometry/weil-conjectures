@@ -105,6 +105,7 @@ theorem WeilComplex.nonempty_iso_derivedLowerShriek_tensorLisse_artinSchreierOf_
       (AffineSpace.zeroSection PUnit.{u + 1} (Spec (CommRingCat.of k₀))) h)
     [IsSeparated π] [LocallyOfFiniteType π] [QuasiCompact π]
     [IsSeparated i] [LocallyOfFiniteType i] [QuasiCompact i]
+    [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]
@@ -170,6 +171,9 @@ theorem WeilComplex.nonempty_iso_derivedLowerShriek_tensorLisse_artinSchreierOf_
   have : IsIso (Functor.whiskerLeft F η) := NatIso.isIso_of_isIso_app _
   -- over the zero locus `Z` the kernel is constant
   have : QuasiCompact (Z ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← comp_over i (Spec (CommRingCat.of k₀))]
+    infer_instance
+  have : IsSeparated (Z ↘ Spec (CommRingCat.of k₀)) := by
     rw [← comp_over i (Spec (CommRingCat.of k₀))]
     infer_instance
   have : QuasiSeparated (Z ↘ Spec (CommRingCat.of k₀)) := by

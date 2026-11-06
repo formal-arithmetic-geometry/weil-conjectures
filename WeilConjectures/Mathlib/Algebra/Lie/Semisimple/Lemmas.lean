@@ -176,25 +176,7 @@ theorem center_sup_derivedSeries_eq_top (k L : Type*) [Field k] [CharZero k]
     center k L ⊔ derivedSeries k L 1 = ⊤ := by
   set Q := L ⧸ center k L
   have := hasTrivialRadical_quotient_center k L
-  -- The quotient `Q` is perfect: the Killing complement of `⁅Q, Q⁆` is central, hence zero.
-  have hQ : derivedSeries k Q 1 = ⊤ := by
-    set I := derivedSeries k Q 1
-    have hc := I.isCompl_killingCompl
-    have hJ : I.killingCompl ≤ center k Q := fun z hz ↦ by
-      refine (mem_maxTrivSubmodule k Q Q z).mpr fun x ↦ ?_
-      have hI : ⁅x, z⁆ ∈ I := by
-        have hI : I = ⁅(⊤ : LieIdeal k Q), ⊤⁆ := by
-          simp only [I, derivedSeriesOfIdeal_succ, derivedSeriesOfIdeal_zero]
-        rw [hI]
-        exact LieSubmodule.lie_mem_lie (LieSubmodule.mem_top x) (LieSubmodule.mem_top z)
-      have h : ⁅x, z⁆ ∈ I ⊓ I.killingCompl := ⟨hI, lie_mem_right k Q _ x z hz⟩
-      rwa [hc.inf_eq_bot, LieSubmodule.mem_bot] at h
-    have hZ : center k Q = ⊥ := by
-      rw [eq_bot_iff, ← HasTrivialRadical.radical_eq_bot (R := k) (L := Q)]
-      exact center_le_radical k Q
-    have hJ : I.killingCompl = ⊥ := le_bot_iff.mp (hJ.trans hZ.le)
-    have := hc.sup_eq_top
-    rwa [hJ, sup_bot_eq] at this
+  have hQ : derivedSeries k Q 1 = ⊤ := HasTrivialRadical.derivedSeries_eq_top k Q
   rw [← LieIdeal.derivedSeries_map_eq 1 (mkCenter_surjective k L)] at hQ
   refine eq_top_iff.mpr fun x _ ↦ (LieSubmodule.mem_sup _ _ x).mpr ?_
   obtain ⟨⟨y, hy⟩, hxy⟩ :=

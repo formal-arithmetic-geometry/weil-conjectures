@@ -55,7 +55,7 @@ private theorem flat_biprod
   exact (exactFunctor _ _).prop_of_iso
     ((MonoidalCategory.curriedTensor _).flip.mapIso e) hk
 
-set_option maxHeartbeats 600000 in
+set_option maxHeartbeats 400000 in
 -- The explicit three-summand cone isomorphism requires many dependent-index checks.
 /-- A flat replacement of a mapping cone gives a relative flat replacement,
 strictly as chain maps.

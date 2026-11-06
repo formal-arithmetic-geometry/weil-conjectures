@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.Derived.DerivedTensorKoszulSymmetry
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CondensedPullbackTensorKoszul
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalBraided
 
 /-! # Canonical condensed derived pullback tensor constraints
 
@@ -99,6 +99,10 @@ theorem derivedPullbackTensorConstraints
       (Functor.OplaxMonoidal.left_unitality_hom L((f)^*⟦Λ⟧) K)
   · simpa only [hδ, hη] using
       (Functor.OplaxMonoidal.right_unitality_hom L((f)^*⟦Λ⟧) K)
-  · exact condensedPullbackTensorKoszul Λ f K N
+  · let := _root_.DerivedCategory.braidedCategory'
+      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))
+    let := _root_.DerivedCategory.braidedCategory'
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
+    exact (leftDerivedUpperStarTensor_braiding Λ f K N).symm
 
 end AlgebraicGeometry.ProEtale.CondensedRing

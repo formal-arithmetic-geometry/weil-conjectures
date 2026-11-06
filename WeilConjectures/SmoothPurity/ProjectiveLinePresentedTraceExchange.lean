@@ -147,7 +147,7 @@ public import Mathlib.CategoryTheory.Category.ULift
 public import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 public import Mathlib.CategoryTheory.Sites.Equivalence
 public import WeilConjectures.AlgebraicGeometry.ModuleSheafConstantRingEquivalence
-public import WeilConjectures.ProperBaseChange.GeometricModuleConstruction
+public import WeilConjectures.CategoryTheory.GeometricModuleConstruction
 public import WeilConjectures.CategoryTheory.ProperBaseChange.RestrictionRingedToposModuleDirectImageSupplement
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 public import WeilConjectures.AlgebraicGeometry.ModuleAbelianUnderivedExchange

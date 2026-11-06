@@ -25,7 +25,6 @@ universe u v
 open CategoryTheory Opposite
 namespace CategoryTheory
 
-set_option maxHeartbeats 800000 in
 -- Elaborating chosen products through section evaluation requires extra heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 /-- The canonical shifted section comparison, specified on cocycle representatives.

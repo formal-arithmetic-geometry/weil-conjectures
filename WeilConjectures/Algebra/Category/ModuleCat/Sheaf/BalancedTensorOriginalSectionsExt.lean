@@ -39,7 +39,6 @@ set_option hygiene false in
 local notation "𝓻" a =>
   (sheafCompose (Opens.grothendieckTopology Z) (forget₂ CommRingCat.{u} RingCat.{u})).map a
 
-set_option maxHeartbeats 400000 in
 -- Mixed scalar structures require additional definitional equality checks.
 /-- Original extension sections generate the restricted sheaf tensor for testing maps.
 Source: Stacks Project, Modules on Sites, Tag 0GMW; Cohomology, Tag 08DE, proof.

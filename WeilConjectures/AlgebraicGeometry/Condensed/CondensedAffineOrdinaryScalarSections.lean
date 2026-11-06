@@ -18,7 +18,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.RegularEndBijective
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.PadicAlgClGlobalSections
 public import WeilConjectures.CategoryTheory.Sites.PushforwardMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.CoefficientRingSections
-public import WeilConjectures.SmoothPurity.SheafRingCoefficientOrdinaryAdjunction
+public import WeilConjectures.Algebra.Homology.SheafRingCoefficientOrdinaryAdjunction
 import all WeilConjectures.AlgebraicGeometry.ConstantRealizationDerivedScalarExtension
 
 /-!

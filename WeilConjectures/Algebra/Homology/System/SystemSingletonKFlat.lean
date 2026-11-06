@@ -27,7 +27,6 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
 variable (S : SystemScalarAssignment (J := J)) (T : SystemTensorCoherence S)
   (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w})
 
-
 /-- Ordinary singleton extension preserves flat-term K-flat complexes on the whole
 ringed sequence site. Source: Zheng, Construction 4.1; Stacks, Cohomology on Sites,
 definition-K-flat (06YN), lemma-pullback-K-flat (0G7E), and the representative argument

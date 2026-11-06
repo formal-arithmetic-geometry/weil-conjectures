@@ -243,8 +243,6 @@ private theorem tensorLift_unit (A B N : Mod) (q : A.val ⊗ B.val ⟶ N.val) :
 
 set_option synthInstance.maxSize 256 in
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 800000 in
--- Elaborating the sheafification adjunction and nested localized Homs needs extra heartbeats.
 /-- Two sheaf evaluations factor through the tensor of their inputs.
 Source: Stacks Project, Modules on Sites, Lemma internal-hom-adjoint-tensor (Tag 03EO),
 and Cohomology on Sites, Lemma sites-cohomology-lemma-compose (Tag 0A90).
