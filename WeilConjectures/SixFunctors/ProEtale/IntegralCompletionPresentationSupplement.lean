@@ -55,24 +55,6 @@ abbrev RestrictionSquare (n : ℕ) (e : FiniteEncoding l E X n) :=
   Mod.comap (AdicCompletion.quotient l E X n) ⋙ A.modules.functor ≅
     e.ordinary.functor ⋙ scalarReductionRestriction.{u, u} l E X n
 
-/-- Localize the actual restriction square; both composition comparisons are Mathlib's
-canonical localization comparisons.
-Source: Stacks 05RU and 06YY
-(blueprint: lem-pe-integral-completion-presentation). -/
-def derivedSquare (n : ℕ) (e : FiniteEncoding l E X n)
-    (a : RestrictionSquare l E X A n e) :
-    letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
-    AdicCompletion.restrict l E X n ⋙ A.derived.functor ≅
-      e.ordinaryDerived.functor ⋙ scalarReductionDerivedRestriction.{u, u} l E X n :=
-  letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
-  letI := scalarReductionRestrictionLimits.{u, u} l E X n
-  letI := scalarReductionRestrictionColimits.{u, u} l E X n
-  ((Functor.mapDerivedCategoryCompIso).symm
-    (Mod.comap (AdicCompletion.quotient l E X n)) (A.modules.functor)).symm ≪≫
-    Functor.mapDerivedCategoryNatIso a ≪≫
-      (Functor.mapDerivedCategoryCompIso e.ordinary.functor).symm
-        (scalarReductionRestriction.{u, u} l E X n)
-
 /-- A comparison in D(R_n), retaining the finite coefficient action.
 Source: Stacks 06YY, derived tensor under an isomorphism of coefficients
 (blueprint: lem-pe-integral-completion-presentation). -/
@@ -81,19 +63,6 @@ abbrev FiniteComparison (n : ℕ) (e : FiniteEncoding l E X n) :=
   A.derived.functor ⋙
       scalarReductionDerivedExtension.{u, u} l E X n ≅
     AdicCompletion.derivedReduction l E X n ⋙ e.ordinaryDerived.functor
-
-/-- Restrict a finite comparison to the one completed integral derived category.
-Source: Stacks 06YY; blueprint integral-criterion comparison
-(blueprint: lem-pe-integral-completion-presentation). -/
-def restrictedComparison (n : ℕ) (e : FiniteEncoding l E X n)
-    (a : RestrictionSquare l E X A n e) (b : FiniteComparison l E X A n e)
-    (K : DerivedCategory (AdicCompletion.Modules l E X)) :
-    (sfDerivedReductionRestricted l E X n).obj
-        (A.derived.functor.obj K) ≅
-      A.derived.functor.obj
-        (AdicCompletion.integralLevel l E X K n) :=
-  (scalarReductionDerivedRestriction.{u, u} l E X n).mapIso (b.app K) ≪≫
-    ((derivedSquare l E X A n e a).app ((AdicCompletion.derivedReduction l E X n).obj K)).symm
 
 private theorem internal_roos_complete
     (K : DerivedCategory (AdicCompletion.Modules l E X))
