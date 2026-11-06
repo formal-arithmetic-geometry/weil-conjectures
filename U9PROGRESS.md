@@ -283,3 +283,21 @@
 - Assigned theorem remains intact: it has live callers and cannot be pruned.
 - Next: ucheck-bump assigned module, repair prerequisite errors, then downstream targets.
 - No local Lean/Lake execution; no proof placeholders, trust bypasses, or heartbeat raises.
+
+# BZ872 in progress
+
+- Branch: `u9/BZ872`; original baseline: `e167a50a4`.
+- Reread `/home/ubuntu/u9/briefs/BZ872.md` and this progress file on continuation;
+  the brief has no new LEAD lines after the original unit notes.
+- User instructed continuation after the explicit reflexive-cast statement proposal.
+  Applied that exact two-line patch to `comparisonIntoPullback_comp_counit`.
+- Restored prerequisites reuse BZ856's validated source, including its measured
+  historical heartbeat budgets; both prerequisite timeouts are resolved remotely.
+- Previous assigned error was the public Qh/Q endpoint conversion. Localization
+  imports enable proof-local reduction; the explicit `cast (by rfl)` handles the
+  public statement and `cast_eq` removes it during inverse cancellation.
+- Next: standalone `ucheck-bump` on the assigned module. Its sole direct importer,
+  `SingleComplexOpenTermwiseComparison`, was already attempted twice and is blocked
+  by the unowned BZ871 `SingleComplexOpenTermwiseCounitCompatibility` error.
+- Fixes and logs: `/home/ubuntu/u9/bz/FIXES-BZ872.md`.
+- No local Lean/Lake execution, proof placeholders, or trust bypasses.
