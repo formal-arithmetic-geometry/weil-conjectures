@@ -8,6 +8,7 @@ module
 
 public import Mathlib.Algebra.Homology.Localization
 import all Mathlib.Algebra.Homology.Localization
+
 public import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModel
 
 
@@ -62,13 +63,14 @@ def comparisonIntoPullback (z : X')
     (comparisonStalkHomologyIso X' z
       (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P) i).inv ≫
     (comparisonStalkCohomology X' z i).map
-      (show (DerivedCategory.Q (C := SheafOfModules.{u} (moduleRings X'.toRingedSpace))).obj
-          (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P) ⟶
-          (derivedPullback g').obj (DerivedCategory.Q.obj P) from
-        cast (by rfl) (inv ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))))
+      (cast (by rfl)
+        (inv ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) :
+        (DerivedCategory.Q (C := SheafOfModules.{u} (moduleRings X'.toRingedSpace))).obj
+            (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P) ⟶
+          (derivedPullback g').obj (DerivedCategory.Q.obj P))
 
 set_option maxHeartbeats 1600000 in
--- The default 200000 times out at whnf (9.8s); retain the pre-bump localization-comparison budget.
+-- The default 200000 timed out at whnf in 13s; BZ856 checked this historical limit in 17s.
 /-- The comparison into derived pullback is natural for derived isomorphisms of
 K-flat sheaf representatives, using any tensor-algebra lift of the specified
 underlying cohomology transport.
@@ -182,7 +184,5 @@ theorem comparisonIntoPullback_naturality (z : X')
   simp only [Category.assoc] at hn' ⊢
   rw [hkH] at hn'
   exact hn'
-
-
 
 end AlgebraicGeometry.SingleComplexBaseChange
