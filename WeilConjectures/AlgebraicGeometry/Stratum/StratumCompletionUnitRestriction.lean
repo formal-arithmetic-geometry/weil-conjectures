@@ -407,7 +407,7 @@ attribute [local irreducible] HasDerivedCategory.standard
 attribute [local irreducible] completedAdicChangeData completedReductionCoefficient
   completedReductionTower CategoryTheory.Functor.mapDerivedCategory
   CategoryTheory.Functor.mapDerivedCategoryFactors CategoryTheory.Functor.mapDerivedCategoryFactorsh
-  CategoryTheory.Functor.mapDerivedCategoryCompIso CategoryTheory.Functor.mapDerivedCategoryNatIso
+  CategoryTheory.Functor.mapDerivedCategoryNatIso
 
 /-- The representative equation for the comparison of entire derived strict towers.
 It uses actual universal counits and the ordinary strict comparison, so evaluations
