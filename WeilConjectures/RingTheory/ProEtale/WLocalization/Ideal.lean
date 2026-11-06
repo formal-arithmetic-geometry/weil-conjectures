@@ -92,7 +92,7 @@ theorem IsWLocalRing.zeroLocus_map_algebraMap_generalization_one_eq [IsWLocalRin
 theorem zeroLocus_map_algebraMap_subset_closedPoints [Algebra A B]
     (h : ∀ (m : Ideal A) (q : Ideal B) [q.LiesOver m] [m.IsMaximal] [q.IsPrime]
       [Algebra (Localization.AtPrime m) (Localization.AtPrime q)]
-      [Localization.AtPrime.IsLiesOverAlgebra m q],
+      [IsScalarTower A (Localization.AtPrime m) (Localization.AtPrime q)],
       Algebra.IsAlgebraic m.ResidueField q.ResidueField)
     (hI : zeroLocus I ⊆ closedPoints (PrimeSpectrum A)) :
     zeroLocus (I.map (algebraMap A B)) ⊆ closedPoints (PrimeSpectrum B) := by
@@ -288,7 +288,7 @@ theorem algebraMap_specComap_preimage_closedPoints_eq [IsWLocalRing A] [Algebra 
     (hI : zeroLocus I = closedPoints (PrimeSpectrum A)) (h : ∀ (m : Ideal A) (q : Ideal B)
     [q.LiesOver m] [m.IsMaximal] [q.IsPrime]
     [Algebra (Localization.AtPrime m) (Localization.AtPrime q)]
-    [Localization.AtPrime.IsLiesOverAlgebra m q],
+    [IsScalarTower A (Localization.AtPrime m) (Localization.AtPrime q)],
     Algebra.IsAlgebraic m.ResidueField q.ResidueField) :
     zeroLocus (I.map (algebraMap A (I.map (algebraMap A B)).WLocalization)) =
     closedPoints (PrimeSpectrum (I.map (algebraMap A B)).WLocalization) := by
@@ -304,7 +304,7 @@ theorem faithfullyFlat_map_algebraMap [IsWLocalRing A] [Algebra A B] [Module.Fai
     (hI : zeroLocus I = closedPoints (PrimeSpectrum A))
     (h : ∀ (m : Ideal A) (q : Ideal B) [q.LiesOver m] [m.IsMaximal] [q.IsPrime]
       [Algebra (Localization.AtPrime m) (Localization.AtPrime q)]
-      [Localization.AtPrime.IsLiesOverAlgebra m q],
+      [IsScalarTower A (Localization.AtPrime m) (Localization.AtPrime q)],
       Algebra.IsAlgebraic m.ResidueField q.ResidueField) :
     Module.FaithfullyFlat A (I.map (algebraMap A B)).WLocalization := by
   have : Module.Flat A (I.map (algebraMap A B)).WLocalization :=
