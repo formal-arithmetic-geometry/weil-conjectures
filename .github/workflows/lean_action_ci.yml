@@ -33,7 +33,12 @@ jobs:
     runs-on: self-hosted
 
     steps:
+      # `clean: false`: by default checkout runs `git clean -ffdx`, which deletes
+      # `.lake/` and made every run compile the whole project from scratch. Lake's
+      # traces decide what is stale, so keeping the build between runs is safe.
       - uses: actions/checkout@v5
+        with:
+          clean: false
 
       # elan, the toolchain and the Mathlib cache; the build is the step below.
       # No GitHub cache: the self-hosted runner's workspace survives between
