@@ -24,6 +24,8 @@ universe u v w
 open CategoryTheory CategoryTheory.Limits CategoryTheory.ConstantCompletion
 namespace AlgebraicGeometry.Scheme
 
+attribute [local instance] HasDerivedCategory.standard
+
 /-- The actual kernel of the successive quotient, as a module over the larger quotient.
 It is canonically J^(n+1)/J^(n+2), with no choice of a presentation or generators.
 Source: Stacks Tag 09BR (auxiliary; not a blueprint node). -/
