@@ -8,6 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.InternalPerfectReductionHomEquiv
 public import WeilConjectures.AlgebraicGeometry.InternalPerfectOrdinaryStepCounitChain
 public import WeilConjectures.AlgebraicGeometry.InternalPerfectReductionCounitCoherence
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # Actual derived reductions and ordinary homotopy endomorphisms -/
 
