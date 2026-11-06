@@ -265,7 +265,7 @@ theorem mapDerivedCategoryComposition_factors (F₁ : C ⥤ D) (F₂ : D ⥤ F) 
     (e : H ≅ F₁ ⋙ F₂) (K : CochainComplex C ℤ) :
     H.mapDerivedCategoryFactors.hom.app K ≫
         DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex e.hom (.up ℤ)).app K) =
-      (Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryCompIso F₁ F₂).hom.app
+      (Functor.mapDerivedCategoryNatIso e ≪≫ (Functor.mapDerivedCategoryCompIso F₁ F₂).symm).hom.app
           (DerivedCategory.Q.obj K) ≫
         F₂.mapDerivedCategory.map (F₁.mapDerivedCategoryFactors.hom.app K) ≫
         F₂.mapDerivedCategoryFactors.hom.app ((F₁.mapHomologicalComplex (.up ℤ)).obj K) := by
