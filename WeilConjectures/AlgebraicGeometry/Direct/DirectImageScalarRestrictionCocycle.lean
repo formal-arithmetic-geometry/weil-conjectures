@@ -131,6 +131,7 @@ private theorem derive_chain
     Iso.hom_inv_id_app]
   erw [CategoryTheory.Functor.map_id, Category.id_comp]
   simp only [Iso.inv_hom_id_app_assoc, Iso.inv_hom_id_app]
+  rfl
 
 /-- Transport coefficient pasting along three natural isomorphisms. Naturality moves
 the source associator past the first comparison; the intermediate inverses cancel.
