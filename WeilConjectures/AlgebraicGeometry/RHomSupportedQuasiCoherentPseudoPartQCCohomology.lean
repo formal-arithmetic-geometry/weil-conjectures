@@ -165,7 +165,7 @@ theorem rhom_supported_quasiCoherent_pseudo_part_qc_cohomology
   have hlocal (x : X) : (H.over (U x)).IsQuasicoherent := by
     let V := U x
     let D := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V)
-    letI : Category.{w} (@DerivedCategory (SheafOfModules.{u}
+    let : Category.{w} (@DerivedCategory (SheafOfModules.{u}
         ((sheafCompose ((Opens.grothendieckTopology X.toRingedSpace).over V)
           (forget₂ CommRingCat RingCat)).obj (X.toRingedSpace.sheaf.over V))) _ _
         (inferInstanceAs (HasDerivedCategory.{w} D))) :=

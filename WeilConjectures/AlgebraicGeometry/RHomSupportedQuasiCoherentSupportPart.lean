@@ -113,7 +113,7 @@ theorem rhom_supported_quasiCoherent_support_part
   let U : X.Opens := ⟨Tᶜ, hT.isOpen_compl⟩
   let C := SheafOfModules.{u} (moduleRings X.toRingedSpace)
   let D := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)
-  letI : Category.{w} (@DerivedCategory (SheafOfModules.{u}
+  let : Category.{w} (@DerivedCategory (SheafOfModules.{u}
       ((sheafCompose ((Opens.grothendieckTopology X.toRingedSpace).over U)
         (forget₂ CommRingCat RingCat)).obj (X.toRingedSpace.sheaf.over U))) _ _
       (inferInstanceAs (HasDerivedCategory.{w} D))) :=
