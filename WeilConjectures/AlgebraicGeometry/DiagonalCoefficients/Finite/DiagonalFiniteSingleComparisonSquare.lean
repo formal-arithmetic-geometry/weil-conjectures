@@ -50,11 +50,11 @@ variable {C D E V : Type*} [Category C] [Category D] [Category E] [Category V]
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 private theorem single_square (e : F ⋙ G ≅ H ⋙ I) (M : C) :
-    (Functor.mapDerivedCategoryCompIso F G).inv.app
+    (Functor.mapDerivedCategoryCompIso F G).hom.app
         ((DerivedCategory.singleFunctor C 0).obj M) ≫
       (Functor.mapDerivedCategoryNatIso e).hom.app
         ((DerivedCategory.singleFunctor C 0).obj M) ≫
-      (Functor.mapDerivedCategoryCompIso H I).hom.app
+      (Functor.mapDerivedCategoryCompIso H I).inv.app
         ((DerivedCategory.singleFunctor C 0).obj M) ≫
       I.mapDerivedCategory.map ((Functor.compIsoApp (H.mapDerivedCategorySingleFunctor 0) M).hom) ≫
       (Functor.compIsoApp (I.mapDerivedCategorySingleFunctor 0) (H.obj M)).hom =
@@ -62,9 +62,9 @@ private theorem single_square (e : F ⋙ G ≅ H ⋙ I) (M : C) :
       (Functor.compIsoApp (G.mapDerivedCategorySingleFunctor 0) (F.obj M)).hom ≫
       (DerivedCategory.singleFunctor V 0).map (e.hom.app M) := by
   simp only [Functor.compIsoApp, Iso.app_hom]
-  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso F G).hom.app
+  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso F G).inv.app
     ((DerivedCategory.singleFunctor C 0).obj M))).1
-  simp only [Iso.hom_inv_id_app_assoc]
+  simp only [Iso.inv_hom_id_app_assoc]
   rw [Functor.mapDerivedCategoryCompIso_hom_app_singleFunctor,
     Functor.mapDerivedCategoryNatIso_hom_app_singleFunctor]
   erw [reassoc_of% (Functor.mapDerivedCategoryCompIso_hom_app_singleFunctor F G M)]
@@ -77,11 +77,11 @@ private theorem single_square_transport (e : F ⋙ G ≅ H ⋙ I) (M : C)
     (t : H.obj M ⟶ T) (z : G.obj N ⟶ W)
     (ho : e.hom.app M ≫ I.map t ≫ d.hom = G.map c.hom ≫ z) :
     p.hom.app (F.mapDerivedCategory.obj ((DerivedCategory.singleFunctor C 0).obj M)) ≫
-      (Functor.mapDerivedCategoryCompIso F G).inv.app
+      (Functor.mapDerivedCategoryCompIso F G).hom.app
         ((DerivedCategory.singleFunctor C 0).obj M) ≫
       (Functor.mapDerivedCategoryNatIso e).hom.app
         ((DerivedCategory.singleFunctor C 0).obj M) ≫
-      (Functor.mapDerivedCategoryCompIso H I).hom.app
+      (Functor.mapDerivedCategoryCompIso H I).inv.app
         ((DerivedCategory.singleFunctor C 0).obj M) ≫
       I.mapDerivedCategory.map (q.inv.app ((DerivedCategory.singleFunctor C 0).obj M)) ≫
       I.mapDerivedCategory.map (q.hom.app ((DerivedCategory.singleFunctor C 0).obj M) ≫
@@ -127,9 +127,9 @@ private theorem single_square_transport_cached
     (t : H.obj M ⟶ T) (z : G.obj N ⟶ W)
     (ho : e.hom.app M ≫ I.map t ≫ d.hom = G.map c.hom ≫ z) :
     p.hom.app (F.mapDerivedCategory.obj (SC.obj M)) ≫
-      (Functor.mapDerivedCategoryCompIso F G).inv.app (SC.obj M) ≫
+      (Functor.mapDerivedCategoryCompIso F G).hom.app (SC.obj M) ≫
       (Functor.mapDerivedCategoryNatIso e).hom.app (SC.obj M) ≫
-      (Functor.mapDerivedCategoryCompIso H I).hom.app (SC.obj M) ≫
+      (Functor.mapDerivedCategoryCompIso H I).inv.app (SC.obj M) ≫
       I.mapDerivedCategory.map (q.inv.app (SC.obj M)) ≫
       I.mapDerivedCategory.map
         ((Functor.compIsoApp (Functor.isoWhiskerLeft SC q ≪≫ cH) M).hom ≫ SE.map t) ≫
@@ -177,11 +177,11 @@ theorem finite_single_comparison_square (A : Type (u + 1)) [CommRing A]
       ((comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory.obj
       ((Etale.ordinaryFiniteSingleFunctor A Y).obj M)) ≫
     (Functor.mapDerivedCategoryCompIso (comparisonUpperStar (ModuleCat.{u + 1} A) Y) (upperStar
-      (ModuleCat.{u + 1} A) f)).inv.app ((Etale.ordinaryFiniteSingleFunctor A Y).obj M) ≫
+      (ModuleCat.{u + 1} A) f)).hom.app ((Etale.ordinaryFiniteSingleFunctor A Y).obj M) ≫
     (Functor.mapDerivedCategoryNatIso (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} A)
       f)).hom.app ((Etale.ordinaryFiniteSingleFunctor A Y).obj M) ≫
     (Functor.mapDerivedCategoryCompIso (Etale.upperStar (ModuleCat.{u + 1} A) f)
-      (comparisonUpperStar (ModuleCat.{u + 1} A) X)).hom.app ((Etale.ordinaryFiniteSingleFunctor A
+      (comparisonUpperStar (ModuleCat.{u + 1} A) X)).inv.app ((Etale.ordinaryFiniteSingleFunctor A
       Y).obj M) ≫
     (comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory.map
       ((Etale.leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) f).inv.app
