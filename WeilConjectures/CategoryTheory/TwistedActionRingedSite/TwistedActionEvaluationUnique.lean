@@ -25,7 +25,7 @@ variable {D : Type u} [SmallCategory D] {K : GrothendieckTopology D}
 
 attribute [local irreducible] SheafOfModules.monoidalCategory
 
-private abbrev tensorAdj := PresheafOfModules.sheafificationAdjunction (𝟙 (ring S).obj)
+private abbrev tensorAdj := PresheafOfModules.sheafificationAdjunction.{u} (𝟙 (ring S).obj)
 
 private theorem evaluation_pure (M N : Modules S) (X : Dᵒᵖ)
     (x : M.val.obj X) (φ : (SheafOfModules.homObj (R := S) M N).val.obj X) :
