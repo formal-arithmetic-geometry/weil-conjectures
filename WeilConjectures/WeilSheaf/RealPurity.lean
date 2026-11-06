@@ -75,6 +75,12 @@ theorem charpoly_frobeniusEnd_eq_of_linearEquiv (M : FrobeniusModule K) {V : Typ
   rw [LinearMap.comp_apply, LinearMap.comp_apply, frobeniusEnd_apply,
     LinearEquiv.coe_toLinearMap, hf]
 
+private theorem localPolynomial_eq_of_linearEquiv (M : FrobeniusModule K) {V : Type*}
+    [AddCommGroup V] [Module K V] [FiniteDimensional K V] {T : Module.End K V}
+    (f : M.carrier ≃ₗ[K] V) (hf : ∀ v, f (M.frobenius v) = T (f v)) :
+    M.localPolynomial = T.charpolyRev :=
+  congrArg Polynomial.reverse (charpoly_frobeniusEnd_eq_of_linearEquiv M f hf)
+
 /-- If a Frobenius module `M` is identified with a space `V` with an endomorphism `T`,
 compatibly with the Frobenius, then the Frobenius of `M` and `T` have the same determinant. -/
 theorem det_frobeniusEnd_eq_of_linearEquiv (M : FrobeniusModule K) {V : Type*}
@@ -327,8 +333,7 @@ theorem IsReal.exists_isPunctuallyPureOfWeight_cokernel_detWeight
     as_aux_lemma =>
       obtain ⟨f, hf⟩ := hst G x
       have hpoly : (G.obj.stalk x).localPolynomial = W.localPolynomial l P.obj.ρ x :=
-        congrArg Polynomial.reverse
-          (FrobeniusModule.charpoly_frobeniusEnd_eq_of_linearEquiv _ f hf)
+        FrobeniusModule.localPolynomial_eq_of_linearEquiv _ f hf
       have hcoeff := congrArg (fun p : Polynomial (PadicAlgCl l) ↦ ι (p.coeff n)) hpoly
       exact (congrArg (starRingEnd ℂ) hcoeff).symm.trans ((hreal x n).trans hcoeff)
   -- purity of the constituent, transported back to the stalks
