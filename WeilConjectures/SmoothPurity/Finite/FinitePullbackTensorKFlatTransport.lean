@@ -49,7 +49,7 @@ attribute [local implicit_reducible] FinitePullbackTensorRep.modules_abelian
   FinitePullbackTensorRep.modules_derived
 attribute [local semireducible] FinitePullbackTensorRep.pull
 attribute [local implicit_reducible] FinitePullbackTensorRep.pull
-  coefficientFiniteInternalHom
+  coefficientFiniteInternalHom CategoryTheory.Functor.mapHomologicalComplex
 attribute [local irreducible] finiteIntrinsicClosed finiteIntrinsicTensorModels
 attribute [local implicit_reducible] finiteIntrinsicDerivedTensor coefficientTotalTensor
   FinitePullbackTensorRep.totalTensor
