@@ -140,9 +140,12 @@ theorem quotientScalarTriangle
         DerivedCategory.Q.obj
           (((Mod.extendScalars r).mapHomologicalComplex (.up ℤ)).obj P) := by
     have : IsIso ((Mod.KFlatScalarTower.computationCounit r).app P) := by
-      change IsIso ((Mod.extendScalars r).leftDerivedFunctorCounit.app
-        ((HomotopyCategory.quotient (Mod C R) (.up ℤ)).obj P))
-      exact (Mod.extendScalars r).isIso_leftDerivedFunctorCounit_app_of_kFlat P hP
+      have : IsIso ((Mod.extendScalars r).leftDerivedFunctorCounit.app
+          ((HomotopyCategory.quotient (Mod C R) (.up ℤ)).obj P)) :=
+        (Mod.extendScalars r).isIso_leftDerivedFunctorCounit_app_of_kFlat P hP
+      dsimp only [Mod.KFlatScalarTower.computationCounit, NatTrans.comp_app,
+        Functor.whiskerRight_app, Functor.whiskerLeft_app]
+      infer_instance
     exact (Mod.extendScalars r).leftDerivedFunctor.mapIso eK.symm ≪≫
       asIso ((Mod.KFlatScalarTower.computationCounit r).app P)
   refine ⟨Δ, DerivedCategory.triangleOfSES_distinguished hSab, ⟨?_⟩, ⟨(ec S q).symm⟩,

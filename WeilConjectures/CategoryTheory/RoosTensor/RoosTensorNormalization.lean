@@ -12,6 +12,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedComp
 import WeilConjectures.CategoryTheory.ExactDerivedSquare.DerivedExactSquareCoherence
 import all WeilConjectures.CategoryTheory.Strict.StrictRoosDerivedLimitComparisonSupplement
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # Tensor normalization of a unit-normalized Roos comparison
 
@@ -73,7 +74,7 @@ variable {A B : Type (u + 1)} [Category.{u} A] [Category.{u} B]
 
 attribute [local implicit_reducible] roosTowerAction HomologicalComplex.asFunctor
   HomologicalComplex.complexOfFunctorsToFunctorToComplex
-  Functor.mapHomologicalComplex NatTrans.mapHomologicalComplex
+  NatTrans.mapHomologicalComplex
   HomologicalComplex.coneOfHasLimitEval strictTowerLimitIso
 
 private abbrev complexF := F.mapHomologicalComplex (.up ℤ)

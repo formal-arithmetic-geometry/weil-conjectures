@@ -23,8 +23,6 @@ set_option backward.defeqAttrib.useBackward true
 
 universe u wA wB wAp wBp wApp wBpp wA2 wB2 wE
 open CategoryTheory CategoryTheory.Limits
--- Rewriting uses the definitional compatibility of prolongation with composition.
-attribute [local implicit_reducible] Functor.mapHomologicalComplex
 namespace CategoryTheory.IndependentDerivedCube
 section LocalizedSquare
 variable {A B C D : Type (u + 1)}
@@ -76,16 +74,13 @@ private theorem squareFactors
         DerivedCategory.Q.map
           ((NatIso.mapHomologicalComplex hF (.up ℤ)).hom.app K) := by
   rw [localizedSquare]
-  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso Fp r).hom.app
-    (DerivedCategory.Q.obj K))).mp
   dsimp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
     NatTrans.comp_app]
-  simp only [← Category.assoc]
   simp only [Category.assoc]
   erw [Functor.mapDerivedCategoryCompIso_hom_app_factors,
     Functor.mapDerivedCategoryNatIso_fac,
-    Functor.mapDerivedCategoryCompIso_hom_app_factors_assoc]
-  simp only [Iso.hom_inv_id_app_assoc]
+    ← Functor.mapDerivedCategoryCompIso_hom_app_factors_assoc]
+  erw [Iso.hom_inv_id_app_assoc]
   rfl
 
 private theorem derived_unit_ext_general
@@ -260,10 +255,10 @@ Source: Stacks Tag 0D6E, derived composition.
 private def compDerivedSquare :
     F.rightDerivedFunctor ⋙ (y ⋙ y').mapDerivedCategory ≅
       (x ⋙ x').mapDerivedCategory ⋙ H.rightDerivedFunctor :=
-  Functor.isoWhiskerLeft F.rightDerivedFunctor (Functor.mapDerivedCategoryCompIso y y') ≪≫
+  Functor.isoWhiskerLeft F.rightDerivedFunctor (Functor.mapDerivedCategoryCompIso y y').symm ≪≫
     Functor.isoWhiskerRight b y'.mapDerivedCategory ≪≫
       Functor.isoWhiskerLeft x.mapDerivedCategory b' ≪≫
-        Functor.isoWhiskerRight (Functor.mapDerivedCategoryCompIso x x').symm
+        Functor.isoWhiskerRight (Functor.mapDerivedCategoryCompIso x x')
           H.rightDerivedFunctor
 
 private theorem compDerivedSquare_normalized
@@ -284,20 +279,20 @@ private theorem compDerivedSquare_normalized
   simp only [Category.assoc]
   rw [← H.rightDerivedFunctor.map_comp]
   have hx := Functor.mapDerivedCategoryCompIso_hom_app_factors x x' I
-  have hx' : (Functor.mapDerivedCategoryCompIso x x').inv.app (DerivedCategory.Q.obj I) ≫
+  have hx' : (Functor.mapDerivedCategoryCompIso x x').hom.app (DerivedCategory.Q.obj I) ≫
       (x ⋙ x').mapDerivedCategoryFactors.hom.app I =
       x'.mapDerivedCategory.map (x.mapDerivedCategoryFactors.hom.app I) ≫
         x'.mapDerivedCategoryFactors.hom.app ((x.mapHomologicalComplex (.up ℤ)).obj I) := by
     calc
-      _ = (Functor.mapDerivedCategoryCompIso x x').inv.app (DerivedCategory.Q.obj I) ≫
-          ((Functor.mapDerivedCategoryCompIso x x').hom.app (DerivedCategory.Q.obj I) ≫
+      _ = (Functor.mapDerivedCategoryCompIso x x').hom.app (DerivedCategory.Q.obj I) ≫
+          ((Functor.mapDerivedCategoryCompIso x x').inv.app (DerivedCategory.Q.obj I) ≫
             x'.mapDerivedCategory.map (x.mapDerivedCategoryFactors.hom.app I) ≫
               x'.mapDerivedCategoryFactors.hom.app
                 ((x.mapHomologicalComplex (.up ℤ)).obj I)) := congrArg _ hx.symm
-      _ = _ := Iso.inv_hom_id_app_assoc _ _ _
+      _ = _ := Iso.hom_inv_id_app_assoc _ _ _
   rw [hx']
   erw [H.rightDerivedFunctor.map_comp]
-  rw [reassoc_of% (Functor.mapDerivedCategoryCompIso y y').hom.naturality
+  rw [reassoc_of% (Functor.mapDerivedCategoryCompIso y y').inv.naturality
     (F.rightDerivedFunctorUnitQ I)]
   have hn' :
       y'.mapDerivedCategory.map (y.mapDerivedCategory.map (F.rightDerivedFunctorUnitQ I)) ≫
@@ -548,9 +543,9 @@ comparison is compDerivedSquare, normalized by the two full-unit equations. Conj
 the horizontal functors by mapDerivedCategoryCompIso; naturality of X cancels the
 composition factors. This gives the cube with the two specified derived restrictions. -/
 theorem normalized_composite_cube :
-    let KU := Functor.isoWhiskerRight (Functor.mapDerivedCategoryCompIso sU tU).symm
+    let KU := Functor.isoWhiskerRight (Functor.mapDerivedCategoryCompIso sU tU)
       iU.mapDerivedCategory ≪≫ localizedSquare kU
-    let KV := Functor.isoWhiskerRight (Functor.mapDerivedCategoryCompIso sV tV).symm
+    let KV := Functor.isoWhiskerRight (Functor.mapDerivedCategoryCompIso sV tV)
       iV.mapDerivedCategory ≪≫ localizedSquare kV
     ∀ N,
       KV.hom.app (F0.rightDerivedFunctor.obj N) ≫
@@ -573,8 +568,8 @@ theorem normalized_composite_cube :
     (sU.mapDerivedCategory ⋙ tU.mapDerivedCategory) (sU ⋙ tU).mapDerivedCategory
     (sV.mapDerivedCategory ⋙ tV.mapDerivedCategory) (sV ⋙ tV).mapDerivedCategory
     F0.rightDerivedFunctor F2.rightDerivedFunctor
-    (Functor.mapDerivedCategoryCompIso sU tU).symm
-    (Functor.mapDerivedCategoryCompIso sV tV).symm
+    (Functor.mapDerivedCategoryCompIso sU tU)
+    (Functor.mapDerivedCategoryCompIso sV tV)
     (localizedSquare kU) (localizedSquare kV)
     X Y Dd (Functor.isoWhiskerRight B0d tV.mapDerivedCategory ≪≫
       Functor.isoWhiskerLeft sU.mapDerivedCategory B1d)

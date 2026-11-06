@@ -183,7 +183,7 @@ Naturality of the right-derived unit then moves the inverse tensor/tilde compari
 to the final direct image. This proves the displayed equation before cancellation
 against the invertible derived pullback counit; no such invertibility is assumed
 here. Zero complexes and zero rings use the same generator calculation. -/
-theorem affineTildeTensorOrdinaryExchange_preNormalization
+private theorem affineTildeTensorOrdinaryExchange_preNormalization
     (R A B D : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing D]
     [Algebra R A] [Algebra R B]
     (M : CochainComplex (ModuleCat.{u} A) ℤ)
