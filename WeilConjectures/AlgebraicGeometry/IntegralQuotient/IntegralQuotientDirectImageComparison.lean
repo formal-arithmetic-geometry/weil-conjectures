@@ -9,6 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.IntegralQuotient.IntegralQuotien
 public import WeilConjectures.AlgebraicGeometry.IntegralQuotient.IntegralQuotientCoefficients
 public import WeilConjectures.AlgebraicGeometry.QuotientChange.InternalDerivedScalarComparisons
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.SingleFunctor
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import WeilConjectures.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
@@ -126,11 +128,7 @@ private theorem exact_computation
   simp only [← Category.assoc, ← DerivedCategory.Qh.map_comp,
     Iso.inv_hom_id_app]
   erw [DerivedCategory.Qh.map_id]
-  simp only [DerivedCategory.quotientCompQhIso,
-    HomologicalComplexUpToQuasiIso.quotientCompQhIso,
-    Quotient.lift.isLift_inv, Quotient.lift.isLift_hom]
-  simp only [Category.assoc]
-  erw [Category.id_comp, Category.id_comp, Category.comp_id]
+  simp only [Category.assoc, Category.id_comp, Iso.inv_hom_id_app, Category.comp_id]
 
 private theorem exact_single
     {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
