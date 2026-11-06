@@ -793,9 +793,92 @@ private theorem ordinary_pentagon
 end OrdinaryCoherence
 
 attribute [local irreducible] integralOrdinaryScalarComp integralOrdinaryScalarUnit
-  Functor.mapDerivedCategoryNatIso Functor.mapDerivedCategory
+  Functor.mapDerivedCategoryNatIso
+  Functor.mapDerivedCategory
 
+section DerivedCoherence
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
+section
+variable {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]
+  [HasDerivedCategory A] [HasDerivedCategory B]
+  (T : A ⥤ A) (F : A ⥤ B)
+  [T.Additive] [F.Additive]
+  [PreservesFiniteLimits T] [PreservesFiniteColimits T]
+  [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+  (u : T ≅ 𝟭 A) (a : T ⋙ F ≅ F)
+  (ha : a = Functor.isoWhiskerRight u F ≪≫ Functor.leftUnitor F)
+include ha in
+private theorem derived_source_unit :
+    (Functor.mapDerivedCategoryCompIso T F ≪≫
+      Functor.mapDerivedCategoryNatIso a).hom =
+    Functor.whiskerRight
+      (Functor.mapDerivedCategoryNatIso u ≪≫ Functor.mapDerivedCategoryIdIso A).hom
+      F.mapDerivedCategory := by
+  have h := Functor.mapDerivedCategoryNatIso_isoWhiskerRight u F
+  have hu := Functor.mapDerivedCategoryCompIso_id_comp F
+  have ha' : a = Functor.isoWhiskerRight u F := by
+    apply Iso.ext
+    ext X
+    have hx := congrArg (fun e ↦ e.hom.app X) ha
+    dsimp only [Iso.trans_hom, NatTrans.comp_app, Functor.leftUnitor_hom_app] at hx
+    erw [Category.comp_id] at hx
+    exact hx
+  rw [ha']
+  apply (cancel_mono (Functor.mapDerivedCategoryCompIso (𝟭 A) F).inv).mp
+  simp only [Iso.trans_hom, Category.assoc,
+    Functor.whiskerRight_comp]
+  rw [h]
+  simp only [← Category.assoc, Iso.hom_inv_id, Category.id_comp]
+  have hu' : Functor.whiskerRight (Functor.mapDerivedCategoryIdIso A).hom
+      F.mapDerivedCategory ≫ (Functor.mapDerivedCategoryCompIso (𝟭 A) F).inv = 𝟙 _ := by
+    apply (cancel_epi (Functor.mapDerivedCategoryCompIso (𝟭 A) F).inv).mp
+    rw [← Category.assoc, hu]
+    exact (Category.id_comp _).trans (Category.comp_id _).symm
+  rw [Category.assoc, hu', Category.comp_id]
+
+end
+
+section
+variable {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]
+  [HasDerivedCategory A] [HasDerivedCategory B]
+  (F : A ⥤ B) (T : B ⥤ B)
+  [T.Additive] [F.Additive]
+  [PreservesFiniteLimits T] [PreservesFiniteColimits T]
+  [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+  (u : T ≅ 𝟭 B) (a : F ⋙ T ≅ F)
+  (ha : a = Functor.isoWhiskerLeft F u ≪≫ Functor.rightUnitor F)
+include ha in
+private theorem derived_target_unit :
+    (Functor.mapDerivedCategoryCompIso F T ≪≫
+      Functor.mapDerivedCategoryNatIso a).hom =
+    Functor.whiskerLeft F.mapDerivedCategory
+      (Functor.mapDerivedCategoryNatIso u ≪≫ Functor.mapDerivedCategoryIdIso B).hom := by
+  have h := Functor.mapDerivedCategoryNatIso_isoWhiskerLeft F u
+  have hu := Functor.mapDerivedCategoryCompIso_comp_id F
+  have ha' : a = Functor.isoWhiskerLeft F u := by
+    apply Iso.ext
+    ext X
+    have hx := congrArg (fun e ↦ e.hom.app X) ha
+    dsimp only [Iso.trans_hom, NatTrans.comp_app, Functor.rightUnitor_hom_app] at hx
+    erw [Category.comp_id] at hx
+    exact hx
+  rw [ha']
+  apply (cancel_mono (Functor.mapDerivedCategoryCompIso F (𝟭 B)).inv).mp
+  simp only [Iso.trans_hom, Category.assoc,
+    Functor.whiskerLeft_comp]
+  rw [h]
+  simp only [← Category.assoc, Iso.hom_inv_id, Category.id_comp]
+  have hu' : Functor.whiskerLeft F.mapDerivedCategory
+      (Functor.mapDerivedCategoryIdIso B).hom ≫
+      (Functor.mapDerivedCategoryCompIso F (𝟭 B)).inv = 𝟙 _ := by
+    apply (cancel_epi (Functor.mapDerivedCategoryCompIso F (𝟭 B)).inv).mp
+    rw [← Category.assoc, hu]
+    exact (Category.id_comp _).trans (Category.comp_id _).symm
+  rw [Category.assoc, hu', Category.comp_id]
+
+end
+
+end DerivedCoherence
 
 private theorem ordinary_derived_source_unit
     (l : ℕ) [Fact l.Prime]
@@ -806,47 +889,12 @@ private theorem ordinary_derived_source_unit
     (integralOrdinaryDerivedScalarComp l E E (AlgHom.id (Padic l) E) Y L ι).hom.app K =
       (integralOrdinaryDerivedScalar l E L ι Y).map
         ((integralOrdinaryDerivedScalarUnit l E Y).hom.app K) := by
-  let A := integralTowerModules.{u, u} l E Y
-  let B := integralTowerModules.{u, u} l L Y
-  have derived_source_unit
-    (T : A ⥤ A) (F : A ⥤ B)
-    [T.Additive] [F.Additive]
-    [PreservesFiniteLimits T] [PreservesFiniteColimits T]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    (u : T ≅ 𝟭 A) (a : T ⋙ F ≅ F)
-    (ha : a = Functor.isoWhiskerRight u F ≪≫ Functor.leftUnitor F) :
-      (Functor.mapDerivedCategoryCompIso T F ≪≫
-        Functor.mapDerivedCategoryNatIso a).hom =
-      Functor.whiskerRight
-        (Functor.mapDerivedCategoryNatIso u ≪≫ Functor.mapDerivedCategoryIdIso A).hom
-        F.mapDerivedCategory := by
-    have h := Functor.mapDerivedCategoryNatIso_isoWhiskerRight u F
-    have hu := Functor.mapDerivedCategoryCompIso_id_comp F
-    have ha' : a = Functor.isoWhiskerRight u F := by
-      apply Iso.ext
-      ext X
-      have hx := congrArg (fun e ↦ e.hom.app X) ha
-      dsimp only [Iso.trans_hom, NatTrans.comp_app, Functor.leftUnitor_hom_app] at hx
-      erw [Category.comp_id] at hx
-      exact hx
-    rw [ha']
-    apply (cancel_mono (Functor.mapDerivedCategoryCompIso (𝟭 A) F).inv).mp
-    simp only [Iso.trans_hom, Category.assoc,
-      Functor.whiskerRight_comp]
-    rw [h]
-    simp only [← Category.assoc, Iso.hom_inv_id, Category.id_comp]
-    have hu' : Functor.whiskerRight (Functor.mapDerivedCategoryIdIso A).hom
-        F.mapDerivedCategory ≫ (Functor.mapDerivedCategoryCompIso (𝟭 A) F).inv = 𝟙 _ := by
-      apply (cancel_epi (Functor.mapDerivedCategoryCompIso (𝟭 A) F).inv).mp
-      rw [← Category.assoc, hu]
-      exact (Category.id_comp _).trans (Category.comp_id _).symm
-    rw [Category.assoc, hu', Category.comp_id]
-  have h := derived_source_unit
+  exact congrArg (fun t ↦ t.app K)
+    (derived_source_unit
       (integralOrdinaryScalar l E E (AlgHom.id (Padic l) E) Y)
       (integralOrdinaryScalar l E L ι Y) (integralOrdinaryScalarUnit l E Y)
       (integralOrdinaryScalarComp l E E (AlgHom.id (Padic l) E) Y L ι)
-      (ordinary_source_unit l E L ι Y)
-  exact congrArg (fun t ↦ t.app K) h
+      (ordinary_source_unit l E L ι Y))
 
 private theorem ordinary_derived_target_unit
     (l : ℕ) [Fact l.Prime]
@@ -857,48 +905,43 @@ private theorem ordinary_derived_target_unit
     (integralOrdinaryDerivedScalarComp l E L ι Y L (AlgHom.id (Padic l) L)).hom.app K =
       (integralOrdinaryDerivedScalarUnit l L Y).hom.app
         ((integralOrdinaryDerivedScalar l E L ι Y).obj K) := by
-  let A := integralTowerModules.{u, u} l E Y
-  let B := integralTowerModules.{u, u} l L Y
-  have derived_target_unit
-    (F : A ⥤ B) (T : B ⥤ B)
-    [T.Additive] [F.Additive]
-    [PreservesFiniteLimits T] [PreservesFiniteColimits T]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    (u : T ≅ 𝟭 B) (a : F ⋙ T ≅ F)
-    (ha : a = Functor.isoWhiskerLeft F u ≪≫ Functor.rightUnitor F) :
-      (Functor.mapDerivedCategoryCompIso F T ≪≫
-        Functor.mapDerivedCategoryNatIso a).hom =
-      Functor.whiskerLeft F.mapDerivedCategory
-        (Functor.mapDerivedCategoryNatIso u ≪≫ Functor.mapDerivedCategoryIdIso B).hom := by
-    have h := Functor.mapDerivedCategoryNatIso_isoWhiskerLeft F u
-    have hu := Functor.mapDerivedCategoryCompIso_comp_id F
-    have ha' : a = Functor.isoWhiskerLeft F u := by
-      apply Iso.ext
-      ext X
-      have hx := congrArg (fun e ↦ e.hom.app X) ha
-      dsimp only [Iso.trans_hom, NatTrans.comp_app, Functor.rightUnitor_hom_app] at hx
-      erw [Category.comp_id] at hx
-      exact hx
-    rw [ha']
-    apply (cancel_mono (Functor.mapDerivedCategoryCompIso F (𝟭 B)).inv).mp
-    simp only [Iso.trans_hom, Category.assoc,
-      Functor.whiskerLeft_comp]
-    rw [h]
-    simp only [← Category.assoc, Iso.hom_inv_id, Category.id_comp]
-    have hu' : Functor.whiskerLeft F.mapDerivedCategory
-        (Functor.mapDerivedCategoryIdIso B).hom ≫
-        (Functor.mapDerivedCategoryCompIso F (𝟭 B)).inv = 𝟙 _ := by
-      apply (cancel_epi (Functor.mapDerivedCategoryCompIso F (𝟭 B)).inv).mp
-      rw [← Category.assoc, hu]
-      exact (Category.id_comp _).trans (Category.comp_id _).symm
-    rw [Category.assoc, hu', Category.comp_id]
-  have h := derived_target_unit
+  exact congrArg (fun t ↦ t.app K)
+    (derived_target_unit
       (integralOrdinaryScalar l E L ι Y)
       (integralOrdinaryScalar l L L (AlgHom.id (Padic l) L) Y)
       (integralOrdinaryScalarUnit l L Y)
       (integralOrdinaryScalarComp l E L ι Y L (AlgHom.id (Padic l) L))
-      (ordinary_target_unit l E L ι Y)
-  exact congrArg (fun t ↦ t.app K) h
+      (ordinary_target_unit l E L ι Y))
+
+private theorem derived_pentagon
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    [Abelian A] [Abelian B] [Abelian C] [Abelian D]
+    [HasDerivedCategory A] [HasDerivedCategory B] [HasDerivedCategory C]
+    [HasDerivedCategory D]
+    (F : A ⥤ B) (G : B ⥤ C) (H : C ⥤ D)
+    (FG : A ⥤ C) (GH : B ⥤ D) (FGH : A ⥤ D)
+    [F.Additive] [G.Additive] [H.Additive] [FG.Additive] [GH.Additive] [FGH.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+    [PreservesFiniteLimits FG] [PreservesFiniteColimits FG]
+    [PreservesFiniteLimits GH] [PreservesFiniteColimits GH]
+    [PreservesFiniteLimits FGH] [PreservesFiniteColimits FGH]
+    (a : F ⋙ G ≅ FG) (b : FG ⋙ H ≅ FGH)
+    (c : G ⋙ H ≅ GH) (d : F ⋙ GH ≅ FGH)
+    (h : Functor.isoWhiskerRight a H ≪≫ b = Functor.isoWhiskerLeft F c ≪≫ d)
+    (K : DerivedCategory A) :
+    H.mapDerivedCategory.map
+        ((Functor.mapDerivedCategoryCompIso F G ≪≫
+          Functor.mapDerivedCategoryNatIso a).hom.app K) ≫
+      (Functor.mapDerivedCategoryCompIso FG H ≪≫
+        Functor.mapDerivedCategoryNatIso b).hom.app K =
+    (Functor.mapDerivedCategoryCompIso G H ≪≫
+        Functor.mapDerivedCategoryNatIso c).hom.app (F.mapDerivedCategory.obj K) ≫
+      (Functor.mapDerivedCategoryCompIso F GH ≪≫
+        Functor.mapDerivedCategoryNatIso d).hom.app K :=
+  Functor.mapDerivedCategoryCompNatIso_cocycle a b c d
+    (fun X ↦ congrArg (fun e ↦ e.hom.app X) h) K
 
 private theorem ordinary_derived_pentagon
     (l : ℕ) [Fact l.Prime]
@@ -916,12 +959,18 @@ private theorem ordinary_derived_pentagon
     (integralOrdinaryDerivedScalarComp l L M j Y N k).hom.app
         ((integralOrdinaryDerivedScalar l E L ι Y).obj K) ≫
       (integralOrdinaryDerivedScalarComp l E L ι Y N (k.comp j)).hom.app K := by
-  exact Functor.mapDerivedCategoryCompNatIso_cocycle
+  exact derived_pentagon
+    (integralOrdinaryScalar l E L ι Y)
+    (integralOrdinaryScalar l L M j Y)
+    (integralOrdinaryScalar l M N k Y)
+    (integralOrdinaryScalar l E M (j.comp ι) Y)
+    (integralOrdinaryScalar l L N (k.comp j) Y)
+    (integralOrdinaryScalar l E N (k.comp (j.comp ι)) Y)
     (integralOrdinaryScalarComp l E L ι Y M j)
     (integralOrdinaryScalarComp l E M (j.comp ι) Y N k)
     (integralOrdinaryScalarComp l L M j Y N k)
     (integralOrdinaryScalarComp l E L ι Y N (k.comp j))
-    (fun X ↦ congrArg (fun e ↦ e.hom.app X) (ordinary_pentagon l E L ι Y M j N k)) K
+    (ordinary_pentagon l E L ι Y M j N k) K
 
 variable (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
 
