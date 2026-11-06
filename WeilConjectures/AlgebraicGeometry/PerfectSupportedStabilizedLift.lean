@@ -7,6 +7,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+import WeilConjectures.AlgebraicGeometry.SupportedMapInitialAmbientLift
+import WeilConjectures.AlgebraicGeometry.SupportedMapAffineAttachment
 
 /-! # The finite stabilization construction for supported map lifting
 
@@ -14,6 +16,18 @@ Source: Stacks Project, Tag 09IM, proof of Lemma 36.13.11.
 (blueprint: lem-sc-perfect-supported-stabilized-lift).
 -/
 
+@[expose] public section
+
+set_option autoImplicit false
+universe u w
+open CategoryTheory CategoryTheory.Limits
+namespace AlgebraicGeometry.Scheme
+attribute [local instance] Functor.additive_of_preserves_binary_products
+  comp_preservesFiniteLimits comp_preservesFiniteColimits
+
+set_option maxHeartbeats 800000 in
+-- Elaborating the iterated derived restriction and the biproduct map equation needs this budget.
+set_option backward.isDefEq.respectTransparency false in
 /-- The affine-cover construction extends one finite stabilization of the given map.
 This records the actual iterated object and its first-projection map.
 Source: Stacks Project, Tag 09IM, proof of Lemma 36.13.11 and Remark 36.13.12.
@@ -148,3 +162,5 @@ theorem exists_perfect_supported_stabilized_lift
   refine ⟨n, R, β, ?_, ?_, e, he⟩
   · exact fun x ↦ hR x trivial
   · exact fun i x hx ↦ hRT i x trivial hx
+
+end AlgebraicGeometry.Scheme

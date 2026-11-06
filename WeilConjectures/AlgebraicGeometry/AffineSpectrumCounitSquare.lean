@@ -26,6 +26,13 @@ noncomputable section
 namespace AlgebraicGeometry.SingleComplexBaseChange
 
 attribute [local instance_reducible] Scheme.Modules TopCat.Sheaf
+attribute [local implicit_reducible] DerivedCategory
+  Functor.mapHomologicalComplex HomotopyCategory Functor.mapHomotopyCategory
+  HomotopyCategory.quotient DerivedCategory.Q DerivedCategory.Qh
+  HomologicalComplexUpToQuasiIso.Qh
+
+set_option maxHeartbeats 1600000 in
+-- The quotient comparison normalization unfolds several derived-category factors.
 /-- The inverse pullback counits commute with the canonical affine coordinate comparison.
 This is an equation of derived morphisms, independent of f, g, z0 and stalk cohomology.
 
@@ -121,8 +128,5 @@ theorem affineSpectrum_counit_square
   simp only [Category.assoc, Iso.inv_hom_id_assoc]
   rw [← h]
   simp only [Iso.inv_hom_id_assoc, Iso.inv_hom_id, Category.comp_id]
-
-attribute [local implicit_reducible] DerivedCategory
-  HomotopyCategory DerivedCategory.Q DerivedCategory.Qh
 
 end AlgebraicGeometry.SingleComplexBaseChange

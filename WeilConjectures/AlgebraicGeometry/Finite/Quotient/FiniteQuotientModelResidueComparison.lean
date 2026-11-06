@@ -183,6 +183,20 @@ private theorem residueCoefficient_square (X : Scheme.{t})
         completedAdicQuotientCommMap X d n 0 (Nat.zero_le n) := by
       rw [← Category.assoc, hc.2 n, Category.assoc]
 
+private def residueRestrictionComparison (X : Scheme.{t})
+    (R : Sheaf (ProEt.topology X) RingCat.{t + 1}) (U : X.ProEt)
+    (M : DerivedCategory (SheafOfModules.{t + 1} R)) :
+    (ringedDerivedRestrictionGeneral R U).obj M ≅
+      ringedSiteDerivedRestrictionOfUniverses R U M := by
+  let F := SheafOfModules.overFunctor.{t + 1} R U
+  have := (ringedOverFunctor_exactGeneral R U).1
+  have := (ringedOverFunctor_exactGeneral R U).2.1
+  have := (ringedOverFunctor_exactGeneral R U).2.2
+  exact F.mapDerivedCategory.mapIso (DerivedCategory.Q.objObjPreimageIso M).symm ≪≫
+    F.mapDerivedCategoryFactors.app (DerivedCategory.Q.objPreimage M)
+
+-- The existing signature retains hφ, although the comparison does not need it.
+set_option linter.unusedVariables false in
 /-- Reduction of a given constant quotient model is the constant realization of its
 algebraic derived residue, after the specified residue-ring identification. This is
 only a coefficient-change comparison: there is no local projective-model hypothesis
@@ -279,17 +293,5 @@ theorem finiteQuotient_model_residueComparison
     r₀.mapIso (ec.app (DerivedCategory.Q.obj (finiteModelConstantComplex X B P))) ≪≫
     r₀.mapIso ((completedAdicDerivedChange X (φ 0)).mapIso ea) ≪≫
     residueRestrictionComparison X R₀ U _⟩
-
-private def residueRestrictionComparison (X : Scheme.{t})
-    (R : Sheaf (ProEt.topology X) RingCat.{t + 1}) (U : X.ProEt)
-    (M : DerivedCategory (SheafOfModules.{t + 1} R)) :
-    (ringedDerivedRestrictionGeneral R U).obj M ≅
-      ringedSiteDerivedRestrictionOfUniverses R U M := by
-  let F := SheafOfModules.overFunctor.{t + 1} R U
-  have := (ringedOverFunctor_exactGeneral R U).1
-  have := (ringedOverFunctor_exactGeneral R U).2.1
-  have := (ringedOverFunctor_exactGeneral R U).2.2
-  exact F.mapDerivedCategory.mapIso (DerivedCategory.Q.objObjPreimageIso M).symm ≪≫
-    F.mapDerivedCategoryFactors.app (DerivedCategory.Q.objPreimage M)
 
 end AlgebraicGeometry.Scheme

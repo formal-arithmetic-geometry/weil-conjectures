@@ -8,6 +8,8 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 public import Mathlib.CategoryTheory.Triangulated.Opposite.Pretriangulated
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.Algebra.Homology.SixFunctors.BifunctorHomHomotopyExactSupplement
 import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.ClosedTriangulated
 import Mathlib.CategoryTheory.Triangulated.Opposite.Functor

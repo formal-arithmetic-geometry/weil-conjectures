@@ -116,7 +116,7 @@ theorem affineTildePushforwardHomologyFactorization
         (DerivedCategory.homologyFunctorFactors _ i).inv.app
           ((T.mapHomologicalComplex (.up ℤ)).obj
             (((ModuleCat.restrictScalars ψ).mapHomologicalComplex (.up ℤ)).obj Cg)) ≫
-        H.map (DerivedCategory.Q.map a) ≫ H.map β =
+        H.map (DerivedCategory.Q.map a) ≫ cast (by rfl) (H.map β) =
     T.map v ≫ affineTildePushforwardCohomologyMap D B ψ Cg i := by
   let T := affinePushforwardTilde B
   let : T.Additive := by

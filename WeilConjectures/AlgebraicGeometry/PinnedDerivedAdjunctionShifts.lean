@@ -19,42 +19,6 @@ set_option autoImplicit false
 universe u w
 open CategoryTheory
 noncomputable section
-
--- Normalization identifies the left-derived counit with the inverse mate of the right unit.
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.defeqAttrib.useBackward true in
-open CategoryTheory.Functor CategoryTheory.Category CategoryTheory.Abelian in
-private theorem normalizedCounitShift
-    {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
-    [HasShift C ℤ] [HasShift D ℤ] [HasShift C' ℤ] [HasShift D' ℤ]
-    {F : C ⥤ D} {G : D ⥤ C} {LF : C' ⥤ D'} {RG : D' ⥤ C'}
-    [F.CommShift ℤ] [G.CommShift ℤ] [LF.CommShift ℤ] [RG.CommShift ℤ]
-    (adj : F ⊣ G) (dadj : LF ⊣ RG) [adj.CommShift ℤ] [dadj.CommShift ℤ]
-    (Q : C ⥤ C') (Q' : D ⥤ D') [Q.CommShift ℤ] [Q'.CommShift ℤ]
-    (ε : Q ⋙ LF ⟶ F ⋙ Q') (β : G ⋙ Q ⟶ Q' ⋙ RG) [NatTrans.CommShift β ℤ]
-    (h : ∀ (M : C) (K : D) (a : F.obj M ⟶ K),
-      dadj.homEquiv (Q.obj M) (Q'.obj K) (ε.app M ≫ Q'.map a) =
-        Q.map (adj.homEquiv M K a) ≫ β.app K) : NatTrans.CommShift ε ℤ := by
-  have hunit (M : C) : dadj.homEquiv (Q.obj M) (Q'.obj (F.obj M)) (ε.app M) =
-      Q.map (adj.unit.app M) ≫ β.app (F.obj M) := by
-    have hh := h M (F.obj M) (𝟙 _)
-    simp only [Adjunction.homEquiv_unit, CategoryTheory.Functor.map_id] at hh
-    erw [CategoryTheory.Category.comp_id, CategoryTheory.Category.comp_id] at hh
-    exact hh
-  let δ := ((CategoryTheory.mateEquiv adj dadj).symm
-    (TwoSquare.mk _ _ _ _ β)).natTrans
-  have hδ : ε = δ := by
-    ext M
-    apply (dadj.homEquiv _ _).injective
-    erw [hunit M]
-    exact CategoryTheory.unit_mateEquiv_symm adj dadj (TwoSquare.mk _ _ _ _ β) M
-  rw [hδ]
-  dsimp only [δ, CategoryTheory.mateEquiv, Equiv.symm, Equiv.coe_fn_mk,
-    TwoSquare.mk, TwoSquare.natTrans]
-  infer_instance
-
--- Shift equivalences preserve the Kan universal property, which detects each comparison.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
@@ -109,6 +73,46 @@ private theorem canonicalRightDerivedUnitShift
   infer_instance
 
 -- Normalization identifies the left-derived counit with the inverse mate of the right unit.
+
+-- Normalization identifies the left-derived counit with the inverse mate of the right unit.
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.defeqAttrib.useBackward true in
+open CategoryTheory.Functor CategoryTheory.Category CategoryTheory.Abelian in
+private theorem normalizedCounitShift
+    {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
+    [HasShift C ℤ] [HasShift D ℤ] [HasShift C' ℤ] [HasShift D' ℤ]
+    {F : C ⥤ D} {G : D ⥤ C} {LF : C' ⥤ D'} {RG : D' ⥤ C'}
+    [F.CommShift ℤ] [G.CommShift ℤ] [LF.CommShift ℤ] [RG.CommShift ℤ]
+    (adj : F ⊣ G) (dadj : LF ⊣ RG) [adj.CommShift ℤ] [dadj.CommShift ℤ]
+    (Q : C ⥤ C') (Q' : D ⥤ D') [Q.CommShift ℤ] [Q'.CommShift ℤ]
+    (ε : Q ⋙ LF ⟶ F ⋙ Q') (β : G ⋙ Q ⟶ Q' ⋙ RG) [NatTrans.CommShift β ℤ]
+    (h : ∀ (M : C) (K : D) (a : F.obj M ⟶ K),
+      dadj.homEquiv (Q.obj M) (Q'.obj K) (ε.app M ≫ Q'.map a) =
+        Q.map (adj.homEquiv M K a) ≫ β.app K) : NatTrans.CommShift ε ℤ := by
+  have hunit (M : C) : dadj.homEquiv (Q.obj M) (Q'.obj (F.obj M)) (ε.app M) =
+      Q.map (adj.unit.app M) ≫ β.app (F.obj M) := by
+    have hh := h M (F.obj M) (𝟙 _)
+    simp only [Adjunction.homEquiv_unit, CategoryTheory.Functor.map_id] at hh
+    erw [CategoryTheory.Category.comp_id, CategoryTheory.Category.comp_id] at hh
+    exact hh
+  let δ := ((CategoryTheory.mateEquiv adj dadj).symm
+    (TwoSquare.mk _ _ _ _ β)).natTrans
+  have hδ : ε = δ := by
+    ext M
+    apply (dadj.homEquiv _ _).injective
+    erw [hunit M]
+    exact CategoryTheory.unit_mateEquiv_symm adj dadj (TwoSquare.mk _ _ _ _ β) M
+  rw [hδ]
+  dsimp only [δ, CategoryTheory.mateEquiv, Equiv.symm, Equiv.coe_fn_mk,
+    TwoSquare.mk, TwoSquare.natTrans]
+  infer_instance
+
+-- Shift equivalences preserve the Kan universal property, which detects each comparison.
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.defeqAttrib.useBackward true in
+open CategoryTheory.Functor CategoryTheory.Category CategoryTheory.Abelian in
 private theorem rightKanShiftUnique
     {C D E : Type*} [Category C] [Category D] [Category E]
     [HasShift C ℤ] [HasShift D ℤ] [HasShift E ℤ]

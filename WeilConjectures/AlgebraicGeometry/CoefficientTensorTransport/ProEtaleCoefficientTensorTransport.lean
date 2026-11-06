@@ -16,6 +16,20 @@ Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 07A6, and Modules on 
 Tag 03EL. The comparison here concerns inverse image and tensor only.
 -/
 
+@[expose] public noncomputable section
+set_option autoImplicit false
+set_option synthInstance.maxSize 4096
+
+universe u
+open CategoryTheory CategoryTheory.Functor CategoryTheory.Limits
+
+namespace AlgebraicGeometry.Scheme.CoefficientTensorTransport
+
+variable {X Y : Scheme.{u}} (f : X ⟶ Y)
+  (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
+  (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
+  (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S)
+
 /-- A coefficient-ring isomorphism identifies derived tensor models compatibly with
 canonical geometric tensor pullback. This has no direct-image or projection-mate clause.
 
@@ -59,3 +73,5 @@ theorem tensorComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
           z.tensor.map (Prod.mkHom ((pullback f R S c).hom.app F)
             ((pullback f R S c).hom.app G)) := by
   exact tensorComparison_compatibility f R S c aY z aX
+
+end AlgebraicGeometry.Scheme.CoefficientTensorTransport

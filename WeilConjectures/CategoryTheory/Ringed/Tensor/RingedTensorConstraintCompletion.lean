@@ -56,6 +56,13 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   (R : Sheaf J CommRingCat.{max c v r})
 private abbrev Mod := RingedTensorModules.{c, v, r} J R
 
+noncomputable local instance ringedTensorUnitSMul
+    (M : SheafOfModules.{max c v r}
+      ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R))
+    (U : Cᵒᵖ) :
+    SMul (((ringedTensorUnitComplex.{c, v, r} J R).X 0).val.obj U) (M.val.obj U) :=
+  (M.val.obj U).isModule.toSMul
+
 private def pure (A B : Mod.{c, v, r} J R) (U : Cᵒᵖ)
     (x : A.val.obj U) (y : B.val.obj U) : (A ⊗ B).val.obj U :=
   (tensorObjIsoSheafification A B).inv.val.app U
@@ -284,6 +291,8 @@ private theorem model_symmetry
   exact ⟨β_ P Q, (RingedDerivedNative.complexConstraints.{c, v, r} J R).symmetry P Q,
     hs ▸ he⟩
 
+set_option maxHeartbeats 800000 in
+-- The dependent nested tensor comparisons require additional elaboration steps.
 private theorem model_associator
     (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, r, w} J R))
     (T : CoefficientTensorModels.{r, c, v, w} J R S)

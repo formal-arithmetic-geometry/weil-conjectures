@@ -80,6 +80,7 @@ theorem localized_range_quotient_extendScalars_aux
   · rintro _ ⟨z, rfl⟩
     induction z using TensorProduct.inductionOn with
     | tmul a x =>
+      change A at a
       have hx : e' (LocalizedModule.mk (f x) 1) ∈
           Submodule.span A (e'.toLinearMap ''
             (LocalizedModule.mkLinearMap 𝔭.primeCompl Y '' (f.hom.range : Set Y))) :=

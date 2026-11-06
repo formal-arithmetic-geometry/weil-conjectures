@@ -88,7 +88,7 @@ private lemma exact_hom_fac
     (DerivedCategory.Q.map ((a.mapHomologicalComplex (.up ℤ)).unit.app K) ≫ ·)
     (R.mapDerivedCategoryFactors.inv.naturality f).symm
 
-
+set_option backward.defeqAttrib.useBackward true in
 /-- Localization preserves the unit equation characterizing a pair of mates. -/
 private lemma mate_unit_Q
     {A : Type u₁} {B : Type u₂} {D : Type u₃} {F : Type u₄}
@@ -303,5 +303,6 @@ theorem exact_localization_inverse_mate
   refine ⟨?_, heq, exact_hom_fac a₁, exact_hom_fac a₂⟩
   rw [heq]
   infer_instance
+
 
 end CategoryTheory

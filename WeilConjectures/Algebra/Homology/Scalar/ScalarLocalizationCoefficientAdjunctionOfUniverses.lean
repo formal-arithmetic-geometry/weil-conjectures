@@ -41,14 +41,24 @@ private noncomputable abbrev restriction
     {A S : Sheaf K CommRingCat.{r}} (c : A ⟶ S) :=
   restrictScalars ((sheafCompose K (forget₂ CommRingCat RingCat)).map c)
 
+section
+
+private local instance scalarLocalizationRestrictedModule
+    {A : Sheaf K CommRingCat.{r}} (M : SheafOfModules.{r} (ringSheaf A))
+    {X Y : Dᵒᵖ} (i : X ⟶ Y) :
+    Module (A.obj.obj Y)
+      ((ModuleCat.restrictScalars ((ringSheaf A).obj.map i).hom).obj (M.val.obj Y)) :=
+  inferInstanceAs (Module (A.obj.obj Y) (M.val.obj Y))
+
 private theorem tensorRestriction_tmul
     {A S : Sheaf K CommRingCat.{r}} (c : A ⟶ S) (M : SheafOfModules.{r} (ringSheaf A))
     {X Y : Dᵒᵖ} (i : X ⟶ Y) (s : S.obj.obj X) (m : M.val.obj X) :
     (changeOfRingsPresheafOfUniverses.{b, a, r, r} c M).map i (s ⊗ₜ[A.obj.obj X, (c.hom.app X).hom]
       m) =
-      S.obj.map i s ⊗ₜ[A.obj.obj Y, (c.hom.app Y).hom]
-        PresheafOfModulesOfCommRing.map (R := A.obj) M.val i m :=
+      S.obj.map i s ⊗ₜ[A.obj.obj Y, (c.hom.app Y).hom] M.val.map i m :=
   changeOfRingsMap_tmulOfUniverses c M i s m
+
+end
 
 private noncomputable def tensorPresheafFunctor
     {A S : Sheaf K CommRingCat.{r}} (c : A ⟶ S) :

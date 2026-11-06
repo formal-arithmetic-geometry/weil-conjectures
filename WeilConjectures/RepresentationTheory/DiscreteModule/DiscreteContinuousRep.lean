@@ -114,15 +114,15 @@ the underlying group are only propositionally equal, so the instances are given 
 def discreteContinuousRepCounitIso (X : Rep.DiscreteContinuousRep.{0, u, max u w} ℤ G) :
     ((toDiscreteContinuousRep G).obj ((ofDiscreteContinuousRep G).obj X)).obj ≅ X.obj where
   hom := ConcreteCategory.ofHom (C := Rep ℤ G)
-    (@Representation.IntertwiningMap.mk ℤ G X.obj.V X.obj.V _ _ _ _ _ X.obj.hV2 _ _
-      (@LinearMap.mk ℤ ℤ _ _ (RingHom.id ℤ) X.obj.V X.obj.V _ _ _ X.obj.hV2
-        ⟨fun x ↦ x, fun _ _ ↦ rfl⟩ fun n x ↦ (int_smul_eq_zsmul X.obj.hV2 n x).symm)
-      fun _ ↦ rfl)
+    { toLinearMap :=
+        ((AddEquiv.refl X.obj.V).toIntLinearEquiv (modM₂ := X.obj.hV2)).toLinearMap
+      isIntertwining' _ := by ext; rfl }
   inv := ConcreteCategory.ofHom (C := Rep ℤ G)
-    (@Representation.IntertwiningMap.mk ℤ G X.obj.V X.obj.V _ _ _ _ X.obj.hV2 _ _ _
-      (@LinearMap.mk ℤ ℤ _ _ (RingHom.id ℤ) X.obj.V X.obj.V _ _ X.obj.hV2 _
-        ⟨fun x ↦ x, fun _ _ ↦ rfl⟩ fun n x ↦ int_smul_eq_zsmul X.obj.hV2 n x)
-      fun _ ↦ rfl)
+    { toLinearMap :=
+        ((AddEquiv.refl X.obj.V).toIntLinearEquiv (modM := X.obj.hV2)).toLinearMap
+      isIntertwining' _ := by ext; rfl }
+  hom_inv_id := by ext; rfl
+  inv_hom_id := by ext; rfl
 
 @[simp]
 lemma discreteContinuousRepCounitIso_hom_hom_apply

@@ -290,7 +290,6 @@ variable {C D H : Type*} [Category C] [Category D] [Category H]
   [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
   [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]
   [K.Additive] [PreservesFiniteLimits K] [PreservesFiniteColimits K]
-
 private noncomputable def evalD (n : ℕ) :
     (W F).mapDerivedCategory ⋙ (E D n).mapDerivedCategory ≅
       (E C n).mapDerivedCategory ⋙ F.mapDerivedCategory :=
@@ -337,6 +336,7 @@ private theorem evalD_comp (n : ℕ) :
   simp only [← Functor.whiskerRight_comp_assoc, Iso.hom_inv_id, Functor.whiskerRight_id',
     Category.id_comp]
   exact h₃.symm
+
 
 @[irreducible] private noncomputable def towerSquare
     {C A A' D : Type*} [Category C] [Category A] [Category A'] [Category D]
@@ -423,7 +423,6 @@ private theorem evalD_square
   simp only [Iso.hom_inv_id_app_assoc]
 
 end EvaluationCoherence
-
 private theorem exact_mate_tower
     {C₁ D₁ C₂ D₂ : Type*} [Category C₁] [Category D₁] [Category C₂] [Category D₂]
     [Abelian C₁] [Abelian D₁] [Abelian C₂] [Abelian D₂]
@@ -461,6 +460,7 @@ private theorem exact_mate_tower
     Functor.whiskerRight_app, Adjunction.whiskerRight_unit_app_app]
   rw [towerSquare_hom_app, towerSquare_hom_app]
   exact hβ (M.obj n)
+
 
 private theorem unit_iso_of_comparison
     {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
@@ -823,7 +823,6 @@ private theorem towerSquare_moduleSquareG {V W S T : Scheme.{u}}
     (modulePullback B p) (modulePullback B k) (modulePullback B (r ≫ i))
     (modulePullback B (k ≫ p)) (moduleGComp B r i) (moduleGComp B k p)
     (congrArg (modulePullback B) h.symm)
-
 private theorem squareG_lift {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) (h : k ≫ p = r ≫ i) :
     (squareG B k r p i h).hom =
@@ -844,6 +843,7 @@ private theorem squareG_lift {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
       (Functor.mapDerivedCategorySquareIso (F₁ := towerPullback B i)
         (F₂ := towerPullback B r) (G₁ := towerPullback B p) (G₂ := towerPullback B k)
         e).hom) (towerSquare_moduleSquareG B k r p i h).symm)
+
 
 @[irreducible] private noncomputable def derivedOpenSquare {U' U X' X : Scheme.{u}}
     (gU : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
@@ -892,50 +892,6 @@ noncomputable def beta {U' U X' X : Scheme.{u}}
     (betaInv_isIso B gU j' j g h hsq)).symm
 
 set_option backward.isDefEq.respectTransparency true in
-/-- Evaluation at finite constant coefficients gives exactly the dependency's
-unit-normalized open base change. Source: Stacks, Tag 09AE
-(blueprint: def-cbc-strict-tower-proper-open-arrows).
-Proof: transpose inverse comparisons under the open adjunction. Evaluation
-commutes with termwise G and J, and evaluates their units to the ordinary units.
-The two transposes are identical. Exact localization and the adjunction Hom
-bijection give equality of these particular comparisons. -/
-theorem beta_evaluation [Finite B] {U' U X' X : Scheme.{u}}
-    (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
-    [IsOpenImmersion j] [IsOpenImmersion j'] (h : a ≫ j = j' ≫ g)
-    (hsq : IsPullback a j' j g) (M : Derived B U) (n : ℕ) :
-    (ev B X' n).map ((beta B a j' j g h hsq).hom.app M) ≫
-        (evalJ B j' n).hom.app ((G B a).obj M) ≫
-        (moduleJ B j').mapDerivedCategory.map ((evalG B a n).hom.app M) =
-      (evalG B g n).hom.app ((J B j).obj M) ≫
-        (modulePullback B g).mapDerivedCategory.map ((evalJ B j n).hom.app M) ≫
-        (singleBeta B a j' j g h hsq).hom.app ((ev B U n).obj M) := by
-  let e := @asIso _ _ _ _ (singleBetaInv B a j' j g h)
-    (singleBetaInv_isIso B a j' j g h hsq)
-  let de := Functor.mapDerivedCategorySquareIso
-    (F₁ := towerPullback B a) (F₂ := towerJ B j')
-    (G₁ := towerJ B j) (G₂ := towerPullback B g)
-    (towerSquare (modulePullback B a) (moduleJ B j') (moduleJ B j)
-      (modulePullback B g) e)
-  have hb : beta B a j' j g h hsq = de.symm := by
-    apply Iso.ext_inv
-    exact betaInv_lift B a j' j g h hsq
-  have hs : Functor.mapDerivedCategorySquareIso
-      (F₁ := towerJ B j) (F₂ := towerPullback B g)
-      (G₁ := towerPullback B a) (G₂ := towerJ B j')
-      (towerSquare (moduleJ B j) (modulePullback B g) (modulePullback B a)
-        (moduleJ B j') e.symm) = de.symm := by
-    rw [towerSquare_symm]
-    apply Iso.ext
-    simp only [de, Functor.mapDerivedCategorySquareIso,
-      Functor.mapDerivedCategoryNatIso_symm, Iso.trans_hom, Iso.trans_inv,
-      Iso.symm_hom, Iso.symm_inv, Category.assoc]
-  have he := evalD_square (moduleJ B j) (modulePullback B g)
-    (modulePullback B a) (moduleJ B j') e.symm M n
-  rw [hs, ← hb] at he
-  rw [← evalJ_eq B j n, ← evalJ_eq B j' n, ← evalG_eq B a n, ← evalG_eq B g n] at he
-  rw [singleBeta_lift B a j' j g h hsq]
-  exact he
-
 private theorem betaInv_lift [Finite B] {U' U X' X : Scheme.{u}}
     (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : a ≫ j = j' ≫ g)
@@ -992,6 +948,7 @@ private theorem betaInv_lift [Finite B] {U' U X' X : Scheme.{u}}
     (u := modulePullback B a) (v := modulePullback B g)
     (moduleJAdj B j) (moduleJAdj B j') (moduleSquareG B a j' j g h).symm e hm M
 
+set_option backward.isDefEq.respectTransparency true in
 private theorem singleBeta_lift [Finite B] {U' U X' X : Scheme.{u}}
     (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : a ≫ j = j' ≫ g)
@@ -1001,7 +958,6 @@ private theorem singleBeta_lift [Finite B] {U' U X' X : Scheme.{u}}
       (G₁ := modulePullback B a) (G₂ := moduleJ B j')
       (@asIso _ _ _ _ (singleBetaInv B a j' j g h)
         (singleBetaInv_isIso B a j' j g h hsq)).symm := rfl
-
 private theorem evalJ_eq {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] (n : ℕ) : evalJ B j n = evalD (moduleJ B j) n := by
   apply Iso.ext
@@ -1019,6 +975,52 @@ private theorem evalG_eq {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     Functor.mapDerivedCategoryCompIso (E (Modules B Y) n) (modulePullback B f)).hom = _
   simp only [evalD, Functor.mapDerivedCategoryNatIso_refl, Iso.trans_hom,
     Iso.symm_hom, Category.id_comp]
+
+set_option backward.isDefEq.respectTransparency true in
+/-- Evaluation at finite constant coefficients gives exactly the dependency's
+unit-normalized open base change. Source: Stacks, Tag 09AE
+(blueprint: def-cbc-strict-tower-proper-open-arrows).
+Proof: transpose inverse comparisons under the open adjunction. Evaluation
+commutes with termwise G and J, and evaluates their units to the ordinary units.
+The two transposes are identical. Exact localization and the adjunction Hom
+bijection give equality of these particular comparisons. -/
+theorem beta_evaluation [Finite B] {U' U X' X : Scheme.{u}}
+    (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
+    [IsOpenImmersion j] [IsOpenImmersion j'] (h : a ≫ j = j' ≫ g)
+    (hsq : IsPullback a j' j g) (M : Derived B U) (n : ℕ) :
+    (ev B X' n).map ((beta B a j' j g h hsq).hom.app M) ≫
+        (evalJ B j' n).hom.app ((G B a).obj M) ≫
+        (moduleJ B j').mapDerivedCategory.map ((evalG B a n).hom.app M) =
+      (evalG B g n).hom.app ((J B j).obj M) ≫
+        (modulePullback B g).mapDerivedCategory.map ((evalJ B j n).hom.app M) ≫
+        (singleBeta B a j' j g h hsq).hom.app ((ev B U n).obj M) := by
+  let e := @asIso _ _ _ _ (singleBetaInv B a j' j g h)
+    (singleBetaInv_isIso B a j' j g h hsq)
+  let de := Functor.mapDerivedCategorySquareIso
+    (F₁ := towerPullback B a) (F₂ := towerJ B j')
+    (G₁ := towerJ B j) (G₂ := towerPullback B g)
+    (towerSquare (modulePullback B a) (moduleJ B j') (moduleJ B j)
+      (modulePullback B g) e)
+  have hb : beta B a j' j g h hsq = de.symm := by
+    apply Iso.ext_inv
+    exact betaInv_lift B a j' j g h hsq
+  have hs : Functor.mapDerivedCategorySquareIso
+      (F₁ := towerJ B j) (F₂ := towerPullback B g)
+      (G₁ := towerPullback B a) (G₂ := towerJ B j')
+      (towerSquare (moduleJ B j) (modulePullback B g) (modulePullback B a)
+        (moduleJ B j') e.symm) = de.symm := by
+    rw [towerSquare_symm]
+    apply Iso.ext
+    simp only [de, Functor.mapDerivedCategorySquareIso,
+      Functor.mapDerivedCategoryNatIso_symm, Iso.trans_hom, Iso.trans_inv,
+      Iso.symm_hom, Iso.symm_inv, Category.assoc]
+  have he := evalD_square (moduleJ B j) (modulePullback B g)
+    (modulePullback B a) (moduleJ B j') e.symm M n
+  rw [hs, ← hb] at he
+  rw [← evalJ_eq B j n, ← evalJ_eq B j' n, ← evalG_eq B a n, ← evalG_eq B g n] at he
+  rw [singleBeta_lift B a j' j g h hsq]
+  exact he
+
 
 /-- The map of a proper/open commutative square into its canonical fibre product.
 Source: Stacks, Tag 0F7B and blueprint, third proof step

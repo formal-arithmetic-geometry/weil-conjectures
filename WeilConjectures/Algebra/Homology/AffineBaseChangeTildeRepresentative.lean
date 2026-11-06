@@ -118,9 +118,9 @@ theorem affineBaseChangeTildeRepresentativeIso_counit
       (DerivedCategory.Q.obj
         (((affinePushforwardTilde A).mapHomologicalComplex (.up ℤ)).obj M)) M
       (Iso.refl _) hc).hom ≫
-      (SingleComplexBaseChange.counit (Spec.map (CommRingCat.ofHom φ))).app
+      cast (by rfl) ((SingleComplexBaseChange.counit (Spec.map (CommRingCat.ofHom φ))).app
         ((HomotopyCategory.quotient _ (.up ℤ)).obj
-          (((affinePushforwardTilde A).mapHomologicalComplex (.up ℤ)).obj M)) =
+          (((affinePushforwardTilde A).mapHomologicalComplex (.up ℤ)).obj M))) =
       DerivedCategory.Q.map (affineBaseChangeTildeComplexIso A D φ M).inv := by
   let p := Spec.map (CommRingCat.ofHom φ)
   let P := ((affinePushforwardTilde A).mapHomologicalComplex (.up ℤ)).obj M

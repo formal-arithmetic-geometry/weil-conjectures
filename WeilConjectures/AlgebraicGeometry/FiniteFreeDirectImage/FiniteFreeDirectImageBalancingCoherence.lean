@@ -456,36 +456,6 @@ private theorem resComp_inv_section {X : Scheme.{u}}
     ((resComp a b).inv.app M).val.app U x = x := rfl
 
 open SheafOfModules.SuccessiveDerivedQuotient in
-private theorem rightSquare_comp {Z W : Scheme.{u}} {q : Z ⟶ W}
-    {R S B : Coefficients q} (a : CoefficientMap R S) (b : CoefficientMap S B)
-    (K : DerivedCategory (proEtaleRingModules Z B.source)) :
-    (rightSquare (a.comp b)).hom.app K =
-    (rightComp a.target b.target).inv.app
-        ((proEtaleRingDerivedDirectImage q B.target B.source B.identification).obj K) ≫
-      (proEtaleRingRestrictScalars a.target).mapDerivedCategory.map
-        ((rightSquare b).hom.app K) ≫
-      (rightSquare a).hom.app ((proEtaleRingRestrictScalars b.source).mapDerivedCategory.obj K) ≫
-      (proEtaleRingDerivedDirectImage q R.target R.source R.identification).map
-        ((rightComp a.source b.source).hom.app K) := by
-  have h := rightTower
-    (proEtaleRingModuleDirectImage q R.target R.source R.identification)
-    (proEtaleRingModuleDirectImage q S.target S.source S.identification)
-    (proEtaleRingModuleDirectImage q B.target B.source B.identification)
-    (proEtaleRingRestrictScalars a.target) (proEtaleRingRestrictScalars b.target)
-    (proEtaleRingRestrictScalars (a.target ≫ b.target))
-    (proEtaleRingRestrictScalars a.source) (proEtaleRingRestrictScalars b.source)
-    (proEtaleRingRestrictScalars (a.source ≫ b.source))
-    (resComp a.target b.target) (resComp a.source b.source)
-    (rightSquare a) (rightSquare b) (rightSquare (a.comp b))
-    (ordinarySquare a) (ordinarySquare b) (ordinarySquare (a.comp b))
-    (rightSquare_fac a) (rightSquare_fac b) (rightSquare_fac (a.comp b))
-    (ordinarySquare_comp a b)
-  have hh := NatTrans.congr_app (congrArg Iso.hom h) K
-  simpa only [exactComposition, rightComp, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
-    isoWhiskerLeft_hom, isoWhiskerRight_hom, Functor.whiskerLeft_app,
-    Functor.whiskerRight_app, Functor.associator_hom_app, Functor.associator_inv_app,
-    Category.id_comp, Category.comp_id] using hh
-
 attribute [local semireducible] proEtaleRingModuleDirectImage in
 private theorem ordinarySquare_comp {Z W : Scheme.{u}} {q : Z ⟶ W}
     {R S B : Coefficients q} (a : CoefficientMap R S) (b : CoefficientMap S B)
@@ -688,6 +658,37 @@ private theorem rightTower
     exact ho (P.X i)
   simp only [Functor.comp_map, Category.assoc, ← DerivedCategory.Q.map_comp_assoc]
   erw [hco]
+
+open SheafOfModules.SuccessiveDerivedQuotient in
+private theorem rightSquare_comp {Z W : Scheme.{u}} {q : Z ⟶ W}
+    {R S B : Coefficients q} (a : CoefficientMap R S) (b : CoefficientMap S B)
+    (K : DerivedCategory (proEtaleRingModules Z B.source)) :
+    (rightSquare (a.comp b)).hom.app K =
+    (rightComp a.target b.target).inv.app
+        ((proEtaleRingDerivedDirectImage q B.target B.source B.identification).obj K) ≫
+      (proEtaleRingRestrictScalars a.target).mapDerivedCategory.map
+        ((rightSquare b).hom.app K) ≫
+      (rightSquare a).hom.app ((proEtaleRingRestrictScalars b.source).mapDerivedCategory.obj K) ≫
+      (proEtaleRingDerivedDirectImage q R.target R.source R.identification).map
+        ((rightComp a.source b.source).hom.app K) := by
+  have h := rightTower
+    (proEtaleRingModuleDirectImage q R.target R.source R.identification)
+    (proEtaleRingModuleDirectImage q S.target S.source S.identification)
+    (proEtaleRingModuleDirectImage q B.target B.source B.identification)
+    (proEtaleRingRestrictScalars a.target) (proEtaleRingRestrictScalars b.target)
+    (proEtaleRingRestrictScalars (a.target ≫ b.target))
+    (proEtaleRingRestrictScalars a.source) (proEtaleRingRestrictScalars b.source)
+    (proEtaleRingRestrictScalars (a.source ≫ b.source))
+    (resComp a.target b.target) (resComp a.source b.source)
+    (rightSquare a) (rightSquare b) (rightSquare (a.comp b))
+    (ordinarySquare a) (ordinarySquare b) (ordinarySquare (a.comp b))
+    (rightSquare_fac a) (rightSquare_fac b) (rightSquare_fac (a.comp b))
+    (ordinarySquare_comp a b)
+  have hh := NatTrans.congr_app (congrArg Iso.hom h) K
+  simpa only [exactComposition, rightComp, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    isoWhiskerLeft_hom, isoWhiskerRight_hom, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app, Functor.associator_hom_app, Functor.associator_inv_app,
+    Category.id_comp, Category.comp_id] using hh
 
 private theorem identity_fac {C : Type*} [Category C] [Abelian C]
     [HasDerivedCategory C] (P : CochainComplex C ℤ) :

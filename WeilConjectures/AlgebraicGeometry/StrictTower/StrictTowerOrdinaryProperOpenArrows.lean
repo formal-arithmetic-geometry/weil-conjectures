@@ -268,7 +268,6 @@ private theorem conjugate_hom_fac
   rw [← Category.assoc, ← h, Category.assoc]
   simpa only [Category.assoc] using
     congrArg (b.unit.app K ≫ ·) ((conjugateEquiv b a e.hom).naturality f).symm
-
 private theorem comp_iso_fac
     {L₁ : A ⥤ D} {R₁ : D ⥤ A} {L₂ : D ⥤ E} {R₂ : E ⥤ D}
     {L₃ : A ⥤ E} {R₃ : E ⥤ A}
@@ -423,6 +422,7 @@ private theorem compCompatible_of_eq
   intro K
   exact compNat_fac_of_eq t d hd K
 
+
 omit [Abelian A] [Abelian D] [Abelian E]
     [HasDerivedCategory A] [HasDerivedCategory D] [HasDerivedCategory E] in
 private theorem whisker_comp_hom
@@ -462,156 +462,6 @@ omit [Abelian A] [Abelian D] [Abelian E]
     [HasDerivedCategory A] [HasDerivedCategory D] [HasDerivedCategory E] in
 private abbrev tw {C D : Type*} [Category C] [Category D] (f : C ⥤ D) :=
   (Functor.whiskeringRight ℕᵒᵖ C D).obj f
-
-omit [Abelian A] [Abelian D] [Abelian E]
-    [HasDerivedCategory A] [HasDerivedCategory D] [HasDerivedCategory E] in
-private theorem projector_paste (G : A ⥤ D) (J : D ⥤ A) (H : A ⥤ E) (L : D ⥤ E)
-    (p : 𝟭 A ⟶ G ⋙ J) (a : J ⋙ H ⟶ L)
-    {x x' z : A} {y : D} {w v : E}
-    (f : x ⟶ x') (g : G.obj x' ⟶ y) (l : J.obj y ⟶ z)
-    (m : H.obj z ⟶ w) (n : w ⟶ v) (t : L.obj y ⟶ v)
-    (ha : a.app y ≫ t = H.map l ≫ m ≫ n)
-    (p' : x' ⟶ z) (hp : p.app x' ≫ J.map g ≫ l = p') :
-    H.map (p.app x) ≫ a.app (G.obj x) ≫ L.map (G.map f) ≫ L.map g ≫ t =
-      H.map f ≫ H.map p' ≫ m ≫ n := by
-  have hc : p.app x ≫ J.map (G.map f ≫ g) ≫ l = f ≫ p' := by
-    rw [J.map_comp]
-    rw [← Category.assoc, ← Category.assoc]
-    change ((p.app x ≫ (G ⋙ J).map f) ≫ J.map g) ≫ l = _
-    rw [← p.naturality f]
-    simpa only [Category.assoc, Functor.id_map, Functor.id_obj] using congrArg (f ≫ ·) hp
-  calc
-    _ = H.map (p.app x ≫ J.map (G.map f ≫ g) ≫ l) ≫ m ≫ n := by
-      rw [← L.map_comp_assoc, ← a.naturality_assoc]
-      change H.map (p.app x) ≫ H.map (J.map (G.map f ≫ g)) ≫ a.app y ≫ t = _
-      rw [ha]
-      simp only [Functor.map_comp, Category.assoc]
-    _ = _ := by rw [hc, H.map_comp]; simp only [Category.assoc]
-
-private def towerJTail {U V X : Scheme.{u}} (j : U ⟶ V) (k : V ⟶ X)
-    (l : U ⟶ X) [IsOpenImmersion j] [IsOpenImmersion k] [IsOpenImmersion l]
-    (h : j ≫ k = l) : towerJ B j ⋙ towerJ B k ⟶ towerJ B l :=
-  termwiseCompHom (moduleJ B j) (moduleJ B k) (moduleJ B l)
-    ((openBetaModuleJComp B j k).hom ≫ (singleJCongr B h).hom)
-
-private def towerGTail {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
-    (r : X ⟶ Z) (h : f ≫ g = r) :
-    towerPullback B g ⋙ towerPullback B f ⟶ towerPullback B r :=
-  termwiseCompHom (modulePullback B g) (modulePullback B f) (modulePullback B r)
-    ((moduleGComp B f g).inv ≫ (eqToIso (congrArg (modulePullback B) h)).hom)
-
-private theorem jTail_fac {U V X : Scheme.{u}} (j : U ⟶ V) (k : V ⟶ X)
-    (l : U ⟶ X) [IsOpenImmersion j] [IsOpenImmersion k] [IsOpenImmersion l]
-    (h : j ≫ k = l) :
-    compCompatible (aA := clopenTowerAbelian B U)
-      (aD := clopenTowerAbelian B V) (aE := clopenTowerAbelian B X)
-      (towerJ B j) (towerJ B k) (towerJ B l) (towerJTail B j k l h)
-      ((jComp B j k).hom ≫ (jCongr B h).hom) := by
-  subst l
-  simp only [jCongr, eqToIso_refl, Iso.refl_hom, Category.comp_id, towerJTail,
-    singleJCongr_refl]
-  exact jComp_fac B j k
-
-private theorem gTail_fac {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
-    (r : X ⟶ Z) (h : f ≫ g = r) :
-    compCompatible (aA := clopenTowerAbelian B Z)
-      (aD := clopenTowerAbelian B Y) (aE := clopenTowerAbelian B X)
-      (towerPullback B g) (towerPullback B f) (towerPullback B r)
-      (towerGTail B f g r h)
-      ((gComp B f g).inv ≫ (eqToIso (congrArg (G B) h)).hom) := by
-  subst r
-  simp only [eqToIso_refl, Iso.refl_hom, Category.comp_id, towerGTail, termwiseCompHom]
-  simpa only [towerGComp, Iso.trans_inv, Functor.mapIso_inv, Functor.map_comp,
-    Functor.map_id, Category.comp_id] using gComp_fac B f g
-
-omit [HasDerivedCategory A] [HasDerivedCategory D] [HasDerivedCategory E] in
-private theorem complex_four
-    {F₀ F₁ F₂ F₃ F₄ : A ⥤ E}
-    [F₀.Additive] [F₁.Additive] [F₂.Additive] [F₃.Additive] [F₄.Additive]
-    (a : F₀ ⟶ F₁) (b : F₁ ⟶ F₂) (c : F₂ ⟶ F₃) (d : F₃ ⟶ F₄)
-    (K : CochainComplex A ℤ) :
-    (NatTrans.mapHomologicalComplex (a ≫ b ≫ c ≫ d) (.up ℤ)).app K =
-      (NatTrans.mapHomologicalComplex a (.up ℤ)).app K ≫
-        (NatTrans.mapHomologicalComplex b (.up ℤ)).app K ≫
-        (NatTrans.mapHomologicalComplex c (.up ℤ)).app K ≫
-        (NatTrans.mapHomologicalComplex d (.up ℤ)).app K := by
-  simp only [NatTrans.mapHomologicalComplex_comp, NatTrans.comp_app]
-
-omit [HasDerivedCategory A] [HasDerivedCategory D] [HasDerivedCategory E] in
-private theorem complex_whiskerLeft
-    (F : A ⥤ D) {H L : D ⥤ E} [F.Additive] [H.Additive] [L.Additive]
-    (a : H ⟶ L) (K : CochainComplex A ℤ) :
-    (NatTrans.mapHomologicalComplex (Functor.whiskerLeft F a) (.up ℤ)).app K =
-      (NatTrans.mapHomologicalComplex a (.up ℤ)).app
-        ((F.mapHomologicalComplex (.up ℤ)).obj K) := by
-  ext n
-  rfl
-
-omit [HasDerivedCategory A] [HasDerivedCategory D] [HasDerivedCategory E] in
-private theorem module_localization_paste
-    {C T : Type*} [Category C] [Category T] [aC : Abelian C] [aT : Abelian T]
-    [hA : HasDerivedCategory (ℕᵒᵖ ⥤ A)] [hD : HasDerivedCategory (ℕᵒᵖ ⥤ D)]
-    [hE : HasDerivedCategory (ℕᵒᵖ ⥤ E)] [hC : HasDerivedCategory (ℕᵒᵖ ⥤ C)]
-    [hT : HasDerivedCategory (ℕᵒᵖ ⥤ T)]
-    (i : A ⥤ T) (p : T ⥤ E) (q : A ⥤ D) (s : D ⥤ C) (j : C ⥤ D)
-    (b : D ⥤ E) (k : C ⥤ E) (r : A ⥤ C)
-    [i.Additive] [p.Additive] [q.Additive] [s.Additive] [j.Additive]
-    [b.Additive] [k.Additive] [r.Additive]
-    [PreservesFiniteLimits i] [PreservesFiniteColimits i]
-    [PreservesFiniteLimits p] [PreservesFiniteColimits p]
-    [PreservesFiniteLimits q] [PreservesFiniteColimits q]
-    [PreservesFiniteLimits s] [PreservesFiniteColimits s]
-    [PreservesFiniteLimits j] [PreservesFiniteColimits j]
-    [PreservesFiniteLimits b] [PreservesFiniteColimits b]
-    [PreservesFiniteLimits k] [PreservesFiniteColimits k]
-    [PreservesFiniteLimits r] [PreservesFiniteColimits r]
-    (βt : i ⋙ p ⟶ q ⋙ b) (pt : 𝟭 D ⟶ s ⋙ j) (τj : j ⋙ b ⟶ k)
-    (et : q ⋙ s ⟶ r)
-    (β : (tw i).mapDerivedCategory ⋙ (tw p).mapDerivedCategory ⟶
-      (tw q).mapDerivedCategory ⋙ (tw b).mapDerivedCategory)
-    (π : 𝟭 (DerivedCategory (ℕᵒᵖ ⥤ D)) ⟶ (tw s).mapDerivedCategory ⋙ (tw j).mapDerivedCategory)
-    (a : (tw j).mapDerivedCategory ⋙ (tw b).mapDerivedCategory ⟶ (tw k).mapDerivedCategory)
-    (e : (tw q).mapDerivedCategory ⋙ (tw s).mapDerivedCategory ⟶ (tw r).mapDerivedCategory)
-    (hβ : squareCompatible (tw i) (tw p) (tw q) (tw b)
-      (Functor.termwiseCompositeTransformation ℕᵒᵖ A T D E i p q b βt) β)
-    (hπ : unitCompatible (tw s) (tw j)
-      ((Functor.whiskeringRight ℕᵒᵖ D D).map pt) π)
-    (ha : compCompatible (tw j) (tw b) (tw k) (termwiseCompHom j b k τj) a)
-    (he : compCompatible (tw q) (tw s) (tw r) (termwiseCompHom q s r et) e) :
-    ClopenProjectorDescent (tw i ⋙ tw p) (tw r ⋙ tw k)
-      (Functor.termwiseCompositeTransformation ℕᵒᵖ A T C E i p r k
-        (βt ≫ Functor.whiskerRight (Functor.whiskerLeft q pt) b ≫
-          Functor.whiskerRight (Functor.associator q s j).inv b ≫
-          (Functor.associator (q ⋙ s) j b).hom ≫
-          Functor.whiskerLeft (q ⋙ s) τj ≫ Functor.whiskerRight et k))
-      ((Functor.mapDerivedCategoryCompIso (tw i) (tw p)).hom ≫
-        (β ≫ Functor.whiskerRight (Functor.whiskerLeft (tw q).mapDerivedCategory π)
-          (tw b).mapDerivedCategory ≫
-        Functor.whiskerRight
-          (Functor.associator (tw q).mapDerivedCategory (tw s).mapDerivedCategory
-            (tw j).mapDerivedCategory).inv (tw b).mapDerivedCategory ≫
-        (Functor.associator ((tw q).mapDerivedCategory ⋙ (tw s).mapDerivedCategory)
-          (tw j).mapDerivedCategory (tw b).mapDerivedCategory).hom ≫
-        Functor.whiskerLeft ((tw q).mapDerivedCategory ⋙ (tw s).mapDerivedCategory) a ≫
-        Functor.whiskerRight e (tw k).mapDerivedCategory) ≫
-        (Functor.mapDerivedCategoryCompIso (tw r) (tw k)).inv) := by
-  unfold Functor.termwiseCompositeTransformation
-  rw [assoc_paste]
-  rw [whisker_paste]
-  rw [assoc_paste]
-  exact localization_paste
-    (tw i) (tw p) (tw q) (tw s) (tw j) (tw b) (tw k) (tw r)
-    ((Functor.whiskeringRightObjCompIso i p).hom ≫
-      (Functor.whiskeringRight ℕᵒᵖ A E).map βt ≫
-      (Functor.whiskeringRightObjCompIso q b).inv)
-    ((Functor.whiskeringRight ℕᵒᵖ D D).map pt)
-    ((Functor.whiskeringRightObjCompIso j b).inv ≫
-      (Functor.whiskeringRight ℕᵒᵖ C E).map τj)
-    ((Functor.whiskeringRightObjCompIso q s).inv ≫
-      (Functor.whiskeringRight ℕᵒᵖ A C).map et)
-    β π a e (by simpa only [Functor.termwiseCompositeTransformation] using hβ)
-    hπ (by simpa only [termwiseCompHom] using ha)
-    (by simpa only [termwiseCompHom] using he)
 
 private theorem whisker_exact_comp_fac
     [hA : HasDerivedCategory (ℕᵒᵖ ⥤ A)] [hD : HasDerivedCategory (ℕᵒᵖ ⥤ D)]
@@ -657,6 +507,7 @@ private theorem whisker_exact_comp_fac
   rw [whisker_comp_hom] at hf
   simpa only [termwiseCompHom, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom] using hf
 
+set_option backward.isDefEq.respectTransparency true in
 private theorem jComp_fac {U V X : Scheme.{u}} (j : U ⟶ V) (k : V ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion k]
     : compCompatible (aA := clopenTowerAbelian B U)
@@ -800,6 +651,91 @@ private theorem gComp_fac {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
   exact compCompatible_of_eq (towerPullback B g) (towerPullback B f)
     (towerPullback B (f ≫ g)) (towerGComp B f g).symm (gComp B f g).symm he
 
+omit [Abelian A] [Abelian D] [Abelian E]
+    [HasDerivedCategory A] [HasDerivedCategory D] [HasDerivedCategory E] in
+private theorem projector_paste (G : A ⥤ D) (J : D ⥤ A) (H : A ⥤ E) (L : D ⥤ E)
+    (p : 𝟭 A ⟶ G ⋙ J) (a : J ⋙ H ⟶ L)
+    {x x' z : A} {y : D} {w v : E}
+    (f : x ⟶ x') (g : G.obj x' ⟶ y) (l : J.obj y ⟶ z)
+    (m : H.obj z ⟶ w) (n : w ⟶ v) (t : L.obj y ⟶ v)
+    (ha : a.app y ≫ t = H.map l ≫ m ≫ n)
+    (p' : x' ⟶ z) (hp : p.app x' ≫ J.map g ≫ l = p') :
+    H.map (p.app x) ≫ a.app (G.obj x) ≫ L.map (G.map f) ≫ L.map g ≫ t =
+      H.map f ≫ H.map p' ≫ m ≫ n := by
+  have hc : p.app x ≫ J.map (G.map f ≫ g) ≫ l = f ≫ p' := by
+    rw [J.map_comp]
+    rw [← Category.assoc, ← Category.assoc]
+    change ((p.app x ≫ (G ⋙ J).map f) ≫ J.map g) ≫ l = _
+    rw [← p.naturality f]
+    simpa only [Category.assoc, Functor.id_map, Functor.id_obj] using congrArg (f ≫ ·) hp
+  calc
+    _ = H.map (p.app x ≫ J.map (G.map f ≫ g) ≫ l) ≫ m ≫ n := by
+      rw [← L.map_comp_assoc, ← a.naturality_assoc]
+      change H.map (p.app x) ≫ H.map (J.map (G.map f ≫ g)) ≫ a.app y ≫ t = _
+      rw [ha]
+      simp only [Functor.map_comp, Category.assoc]
+    _ = _ := by rw [hc, H.map_comp]; simp only [Category.assoc]
+
+private def towerJTail {U V X : Scheme.{u}} (j : U ⟶ V) (k : V ⟶ X)
+    (l : U ⟶ X) [IsOpenImmersion j] [IsOpenImmersion k] [IsOpenImmersion l]
+    (h : j ≫ k = l) : towerJ B j ⋙ towerJ B k ⟶ towerJ B l :=
+  termwiseCompHom (moduleJ B j) (moduleJ B k) (moduleJ B l)
+    ((openBetaModuleJComp B j k).hom ≫ (singleJCongr B h).hom)
+
+private def towerGTail {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    (r : X ⟶ Z) (h : f ≫ g = r) :
+    towerPullback B g ⋙ towerPullback B f ⟶ towerPullback B r :=
+  termwiseCompHom (modulePullback B g) (modulePullback B f) (modulePullback B r)
+    ((moduleGComp B f g).inv ≫ (eqToIso (congrArg (modulePullback B) h)).hom)
+
+private theorem jTail_fac {U V X : Scheme.{u}} (j : U ⟶ V) (k : V ⟶ X)
+    (l : U ⟶ X) [IsOpenImmersion j] [IsOpenImmersion k] [IsOpenImmersion l]
+    (h : j ≫ k = l) :
+    compCompatible (aA := clopenTowerAbelian B U)
+      (aD := clopenTowerAbelian B V) (aE := clopenTowerAbelian B X)
+      (towerJ B j) (towerJ B k) (towerJ B l) (towerJTail B j k l h)
+      ((jComp B j k).hom ≫ (jCongr B h).hom) := by
+  subst l
+  simp only [jCongr, eqToIso_refl, Iso.refl_hom, Category.comp_id, towerJTail,
+    singleJCongr_refl]
+  exact jComp_fac B j k
+
+private theorem gTail_fac {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    (r : X ⟶ Z) (h : f ≫ g = r) :
+    compCompatible (aA := clopenTowerAbelian B Z)
+      (aD := clopenTowerAbelian B Y) (aE := clopenTowerAbelian B X)
+      (towerPullback B g) (towerPullback B f) (towerPullback B r)
+      (towerGTail B f g r h)
+      ((gComp B f g).inv ≫ (eqToIso (congrArg (G B) h)).hom) := by
+  subst r
+  simp only [eqToIso_refl, Iso.refl_hom, Category.comp_id, towerGTail, termwiseCompHom]
+  simpa only [towerGComp, Iso.trans_inv, Functor.mapIso_inv, Functor.map_comp,
+    Functor.map_id, Category.comp_id] using gComp_fac B f g
+
+omit [HasDerivedCategory A] [HasDerivedCategory D] [HasDerivedCategory E] in
+private theorem complex_four
+    {F₀ F₁ F₂ F₃ F₄ : A ⥤ E}
+    [F₀.Additive] [F₁.Additive] [F₂.Additive] [F₃.Additive] [F₄.Additive]
+    (a : F₀ ⟶ F₁) (b : F₁ ⟶ F₂) (c : F₂ ⟶ F₃) (d : F₃ ⟶ F₄)
+    (K : CochainComplex A ℤ) :
+    (NatTrans.mapHomologicalComplex (a ≫ b ≫ c ≫ d) (.up ℤ)).app K =
+      (NatTrans.mapHomologicalComplex a (.up ℤ)).app K ≫
+        (NatTrans.mapHomologicalComplex b (.up ℤ)).app K ≫
+        (NatTrans.mapHomologicalComplex c (.up ℤ)).app K ≫
+        (NatTrans.mapHomologicalComplex d (.up ℤ)).app K := by
+  simp only [NatTrans.mapHomologicalComplex_comp, NatTrans.comp_app]
+
+omit [HasDerivedCategory A] [HasDerivedCategory D] [HasDerivedCategory E] in
+private theorem complex_whiskerLeft
+    (F : A ⥤ D) {H L : D ⥤ E} [F.Additive] [H.Additive] [L.Additive]
+    (a : H ⟶ L) (K : CochainComplex A ℤ) :
+    (NatTrans.mapHomologicalComplex (Functor.whiskerLeft F a) (.up ℤ)).app K =
+      (NatTrans.mapHomologicalComplex a (.up ℤ)).app
+        ((F.mapHomologicalComplex (.up ℤ)).obj K) := by
+  ext n
+  rfl
+
+omit [HasDerivedCategory A] [HasDerivedCategory D] [HasDerivedCategory E] in
 private theorem complex_whiskerRight
     {F G : A ⥤ D} (H : D ⥤ E) [F.Additive] [G.Additive] [H.Additive]
     (a : F ⟶ G) (K : CochainComplex A ℤ) :
@@ -807,8 +743,6 @@ private theorem complex_whiskerRight
       (H.mapHomologicalComplex (.up ℤ)).map
         ((NatTrans.mapHomologicalComplex a (.up ℤ)).app K) := by
   ext n
-  rfl
-
 private theorem localization_paste
     {C T : Type*} [Category C] [Category T] [aC : Abelian C] [aT : Abelian T]
     [HasDerivedCategory C] [HasDerivedCategory T]
@@ -879,6 +813,8 @@ private theorem localization_paste
     Functor.map_comp]
   rfl
 
+  rfl
+
 omit [Abelian A] [Abelian D] [Abelian E]
     [HasDerivedCategory A] [HasDerivedCategory D] [HasDerivedCategory E] in
 private theorem whisker_paste
@@ -937,8 +873,74 @@ private theorem assoc_paste
     Category.id_comp]
   rw [b.map_id, Category.id_comp]
 
-end DescentCalculus
+private theorem module_localization_paste
+    {C T : Type*} [Category C] [Category T] [aC : Abelian C] [aT : Abelian T]
+    [hA : HasDerivedCategory (ℕᵒᵖ ⥤ A)] [hD : HasDerivedCategory (ℕᵒᵖ ⥤ D)]
+    [hE : HasDerivedCategory (ℕᵒᵖ ⥤ E)] [hC : HasDerivedCategory (ℕᵒᵖ ⥤ C)]
+    [hT : HasDerivedCategory (ℕᵒᵖ ⥤ T)]
+    (i : A ⥤ T) (p : T ⥤ E) (q : A ⥤ D) (s : D ⥤ C) (j : C ⥤ D)
+    (b : D ⥤ E) (k : C ⥤ E) (r : A ⥤ C)
+    [i.Additive] [p.Additive] [q.Additive] [s.Additive] [j.Additive]
+    [b.Additive] [k.Additive] [r.Additive]
+    [PreservesFiniteLimits i] [PreservesFiniteColimits i]
+    [PreservesFiniteLimits p] [PreservesFiniteColimits p]
+    [PreservesFiniteLimits q] [PreservesFiniteColimits q]
+    [PreservesFiniteLimits s] [PreservesFiniteColimits s]
+    [PreservesFiniteLimits j] [PreservesFiniteColimits j]
+    [PreservesFiniteLimits b] [PreservesFiniteColimits b]
+    [PreservesFiniteLimits k] [PreservesFiniteColimits k]
+    [PreservesFiniteLimits r] [PreservesFiniteColimits r]
+    (βt : i ⋙ p ⟶ q ⋙ b) (pt : 𝟭 D ⟶ s ⋙ j) (τj : j ⋙ b ⟶ k)
+    (et : q ⋙ s ⟶ r)
+    (β : (tw i).mapDerivedCategory ⋙ (tw p).mapDerivedCategory ⟶
+      (tw q).mapDerivedCategory ⋙ (tw b).mapDerivedCategory)
+    (π : 𝟭 (DerivedCategory (ℕᵒᵖ ⥤ D)) ⟶ (tw s).mapDerivedCategory ⋙ (tw j).mapDerivedCategory)
+    (a : (tw j).mapDerivedCategory ⋙ (tw b).mapDerivedCategory ⟶ (tw k).mapDerivedCategory)
+    (e : (tw q).mapDerivedCategory ⋙ (tw s).mapDerivedCategory ⟶ (tw r).mapDerivedCategory)
+    (hβ : squareCompatible (tw i) (tw p) (tw q) (tw b)
+      (Functor.termwiseCompositeTransformation ℕᵒᵖ A T D E i p q b βt) β)
+    (hπ : unitCompatible (tw s) (tw j)
+      ((Functor.whiskeringRight ℕᵒᵖ D D).map pt) π)
+    (ha : compCompatible (tw j) (tw b) (tw k) (termwiseCompHom j b k τj) a)
+    (he : compCompatible (tw q) (tw s) (tw r) (termwiseCompHom q s r et) e) :
+    ClopenProjectorDescent (tw i ⋙ tw p) (tw r ⋙ tw k)
+      (Functor.termwiseCompositeTransformation ℕᵒᵖ A T C E i p r k
+        (βt ≫ Functor.whiskerRight (Functor.whiskerLeft q pt) b ≫
+          Functor.whiskerRight (Functor.associator q s j).inv b ≫
+          (Functor.associator (q ⋙ s) j b).hom ≫
+          Functor.whiskerLeft (q ⋙ s) τj ≫ Functor.whiskerRight et k))
+      ((Functor.mapDerivedCategoryCompIso (tw i) (tw p)).hom ≫
+        (β ≫ Functor.whiskerRight (Functor.whiskerLeft (tw q).mapDerivedCategory π)
+          (tw b).mapDerivedCategory ≫
+        Functor.whiskerRight
+          (Functor.associator (tw q).mapDerivedCategory (tw s).mapDerivedCategory
+            (tw j).mapDerivedCategory).inv (tw b).mapDerivedCategory ≫
+        (Functor.associator ((tw q).mapDerivedCategory ⋙ (tw s).mapDerivedCategory)
+          (tw j).mapDerivedCategory (tw b).mapDerivedCategory).hom ≫
+        Functor.whiskerLeft ((tw q).mapDerivedCategory ⋙ (tw s).mapDerivedCategory) a ≫
+        Functor.whiskerRight e (tw k).mapDerivedCategory) ≫
+        (Functor.mapDerivedCategoryCompIso (tw r) (tw k)).inv) := by
+  unfold Functor.termwiseCompositeTransformation
+  rw [assoc_paste]
+  rw [whisker_paste]
+  rw [assoc_paste]
+  exact localization_paste
+    (tw i) (tw p) (tw q) (tw s) (tw j) (tw b) (tw k) (tw r)
+    ((Functor.whiskeringRightObjCompIso i p).hom ≫
+      (Functor.whiskeringRight ℕᵒᵖ A E).map βt ≫
+      (Functor.whiskeringRightObjCompIso q b).inv)
+    ((Functor.whiskeringRight ℕᵒᵖ D D).map pt)
+    ((Functor.whiskeringRightObjCompIso j b).inv ≫
+      (Functor.whiskeringRight ℕᵒᵖ C E).map τj)
+    ((Functor.whiskeringRightObjCompIso q s).inv ≫
+      (Functor.whiskeringRight ℕᵒᵖ A C).map et)
+    β π a e (by simpa only [Functor.termwiseCompositeTransformation] using hβ)
+    hπ (by simpa only [termwiseCompHom] using ha)
+    (by simpa only [termwiseCompHom] using he)
 
+end DescentCalculus
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.defeqAttrib.useBackward true in
 /-- The recorded derived alpha is exactly the localization of the intrinsic ordinary arrow.
 Source: Stacks, Tag 0F7B
 (blueprint: def-cbc-strict-tower-ordinary-proper-open-arrows).
@@ -999,5 +1001,6 @@ theorem alpha_eq_localized_singleAlpha {V W S T : Scheme.{u}}
     (pi_fac B s c hc')
     (jTail_fac B s b k (pullback.lift_fst k r h))
     (gTail_fac B s q r (pullback.lift_snd k r h))
+
 
 end AlgebraicGeometry.ProEtale.StrictTower

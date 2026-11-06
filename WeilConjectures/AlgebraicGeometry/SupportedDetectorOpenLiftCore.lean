@@ -9,6 +9,10 @@ module
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Mathlib.Topology.QuasiSeparated
 public import Mathlib.AlgebraicGeometry.AffineScheme
+import WeilConjectures.AlgebraicGeometry.PerfectSupportedMapLift
+import WeilConjectures.AlgebraicGeometry.OpenDerivedRestrictionComparison
+import WeilConjectures.AlgebraicGeometry.PerfectPseudoCoherentLocallyFiniteTor
+import WeilConjectures.AlgebraicGeometry.PseudoCoherentQCoh
 
 /-! # The detector on the localized smaller open
 
@@ -16,6 +20,15 @@ Source: Stacks Project, Tag 0A9A, induction paragraphs.
 (blueprint: lem-pc-supported-detector-open-lift-core).
 -/
 
+@[expose] public section
+set_option autoImplicit false
+universe u w
+open CategoryTheory CategoryTheory.Limits
+open scoped ZeroObject
+namespace AlgebraicGeometry
+
+attribute [local instance] Functor.additive_of_preserves_binary_products
+  comp_preservesFiniteLimits comp_preservesFiniteColimits
 /-- A supported perfect global object whose derived restriction detects the supported
 quasi-coherent objects on the smaller open. No assertion of global detection is made.
 Source: Stacks Project, Tag 0A9A, induction paragraphs and retract argument.
@@ -199,3 +212,4 @@ theorem exists_supported_detector_open_lift_core
   have hbc : p' ≫ b = p' ≫ c := Subsingleton.elim _ _
   have := congrArg (fun k ↦ i' ≫ k) hbc
   simpa only [← Category.assoc, hi'p', Category.id_comp] using this
+end AlgebraicGeometry
