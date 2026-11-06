@@ -525,10 +525,10 @@ theorem etaleProperOpenHorizontalNormalization (A : Type (u + 1)) [CommRing A] [
     hΓ
     (Functor.mapDerivedCategoryNatIso
       (openImmersionLowerShriekComp (ModuleCat.{u + 1} A) k l) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _)
+      (Functor.mapDerivedCategoryCompIso _ _).symm)
     (Functor.mapDerivedCategoryNatIso
       (openImmersionLowerShriekComp (ModuleCat.{u + 1} A) i j) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _)
+      (Functor.mapDerivedCategoryCompIso _ _).symm)
     (fun X => derived_horizontal_factor _ _ _ _ X)
     (fun X => derived_horizontal_factor _ _ _ _ X) K
 
