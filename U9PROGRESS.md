@@ -425,42 +425,42 @@
 - All ucheck invocations finished. This final commit changes documentation only.
 
 
-# BZ1068 in progress
+# BZ1068 complete
 
 - Branch: u9/BZ1068; starting commit dfaed262b6fc1850faba3b46955a11d3225a1e86.
-- The user instructed continuation after the concrete two-site compositor statement proposal.
-  Applied BZ1068-statement-only.patch; the statement and local hb proof now preserve the
-  original comparison using Mathlib's reversed derived compositor.
-- Merged BZ1059 prerequisite fixes; no duplicate declarations or declaration deletions.
-- Proof-only baseline cleared two errors; next: validate the complete leaf repair with
-  ucheck-bump, then build its four direct importers and continue through unblocked layers.
-- Patterns, exact errors, replay-checked rules: /home/ubuntu/u9/bz/FIXES-BZ1068.md.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
+- Assigned EtaleCompactSupportGraphGeometricBaseChange is GREEN and sorry-free:
+  ucheck-bump rc=0, built=1, failed=0, 11821 jobs; target rebuilt in 60s.
+- Green source commit: 6afc4fae13c7e090b915aa0e3d61980300964a3c.
+  Applied the proposed compositor statement migration after the user instructed continuation;
+  it preserves the intended comparison under Mathlib's reversed isomorphism.
+- Merged the completed BZ1059 normalization and finite-graph prerequisite repairs.
+- All four direct importers were attempted together. Each is blocked by the same four
+  unowned prerequisites; no importer is claimed green. The leaf rebuilt again in 63s.
+  No unblocked downstream branch remains; import paths and exact errors are recorded.
+- Fix patterns and replay-checked rules: /home/ubuntu/u9/bz/FIXES-BZ1068.md.
+- Logs: BUILD-BZ1068-leaf-full.log and BUILD-BZ1068-downstream1-full.log under ~/u9/bz/.
+- Completion marker: /home/ubuntu/u9/state/BZ1068.DONE.
+- No new declarations, deletions, local Lean/Lake, proof placeholders, trust bypasses,
+  profiler probes, or heartbeat changes. All ucheck invocations finished.
+- This completion commit changes documentation only; Lean sources match the green build.
 
-- BZ1068 leaf is GREEN and sorry-free: ucheck-bump rc=0, built=1, failed=0 at
-  6afc4fae13c7e090b915aa0e3d61980300964a3c (poolb:43.157.189.27).
-  Next: validate all four direct importers; leaf log BUILD-BZ1068-leaf-full.log.
 
+# BZ1077 complete
 
-# BZ1079 complete
-
-- Branch: u9/BZ1079; starting commit d6df1ded8ce203469c3ccdde034e73d5ce4c644c.
-- Assigned InternalScalarTensorPullNormalization is green and sorry-free.
-- Four downstream modules are green: InternalScalarMateProjection,
-  NormalizedScalarRestrictionPush, QuotientChange.NormalizedScalarRestrictionPush,
-  and SixFunctors.ProEtale.IntegralDirectImageReductionCone.
-- Final ucheck-bump: rc=0, built=0, failed=0, 13213 jobs, all five targets;
-  validated source commit 7db67865f6e353a668e81fc206cafba20a734d38.
-  Every changed module was freshly rebuilt successfully in earlier calls.
-- The user instructed continuation after the exact two-site reflexive-cast proposal.
-  Applied those casts to vY/vX; the original theorem proof is unchanged.
-  Downstream changes are the same cast in a definition body and Localization imports.
-- All five machine rewrite rules replay exactly; existing docstrings, other declaration
-  types, options, and theorem bodies are unchanged. No declarations added or deleted.
-- Six extra modules attempted. The remaining frontier has three modules blocked by
-  observed unowned dependency failures; import paths and exact first errors are recorded.
-- Final log: /home/ubuntu/u9/bz/BUILD-BZ1079-final-green-full.log.
-- Fix record: /home/ubuntu/u9/bz/FIXES-BZ1079.md.
-- Completion marker: /home/ubuntu/u9/state/BZ1079.DONE.
-- No local Lean/Lake, proof placeholders, trust bypasses, profiler probes, or limit changes.
-- All ucheck invocations finished. This final commit changes only progress documentation.
+- Assigned ComparisonSquareTransport is GREEN and sorry-free; all five modified Lean
+  modules passed together with ucheck-bump: rc=0, built=9, failed=0, 12040 jobs.
+- Validated source commit: 776a981bb1ae634bed7c182e0c4d202abb3b5bae.
+- Applied the proposed compositor API corrections after the user's continuation;
+  preserved the intended maps, all hypotheses, and retained declaration types otherwise.
+- ComparisonSquare and SmoothBaseChange received the same correction. FiniteFieldStratifiedPerfectModels
+  needed matching definition/proof compositor corrections; its external caller requires retaining it.
+- Deleted the three unused LowerShriekBaseChange helper/caller declarations after whole-tree checks.
+- Checked 30 downstream targets, reaching the brief's cap. 30 modules were observed green
+  including the assigned leaf and rebuilt dependencies. Remaining failures/skipped paths are recorded.
+- Merged origin/bump/v4.35 at 75c16e0146, retaining the completed upstream progress notes.
+  Upstream repairs to three earlier blockers are distinguished from unverified target builds.
+- Full final log: /home/ubuntu/u9/bz/BUILD-BZ1077-final-full.log.
+- Fixes, exact errors, replayable rules, occurrence counts: /home/ubuntu/u9/bz/FIXES-BZ1077.md.
+- Completion marker: /home/ubuntu/u9/state/BZ1077.DONE.
+- No local Lean/Lake, proof placeholders, trust bypasses, heartbeat raises, or profiler probes.
+- All ucheck invocations have finished. This completion commit changes documentation only.
