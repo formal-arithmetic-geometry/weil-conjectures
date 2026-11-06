@@ -71,6 +71,24 @@ private def exactNat (t : F ⟶ G) : F.mapDerivedCategory ⟶ G.mapDerivedCatego
   simp only [exactNat, Localization.liftNatTrans_app, hF, hG, Category.assoc,
     Iso.inv_hom_id_app, Category.comp_id, Functor.whiskerRight_app]
 
+private theorem exactNat_comp (t : F ⟶ G) {J : C ⥤ D}
+    [J.Additive] [PreservesFiniteLimits J] [PreservesFiniteColimits J] (s : G ⟶ J) :
+    exactNat (t ≫ s) = exactNat t ≫ exactNat s := by
+  apply Localization.natTrans_ext DerivedCategory.Q
+    (HomologicalComplex.quasiIso C (.up ℤ))
+  intro K
+  apply (cancel_mono (J.mapDerivedCategoryFactors.hom.app K)).1
+  simp only [NatTrans.comp_app, Category.assoc, exactNat_fac,
+    exactNat_fac_assoc, NatTrans.mapHomologicalComplex_comp, Functor.map_comp]
+
+private theorem exactNat_iso (e : F ≅ G) :
+    exactNat e.hom = (Functor.mapDerivedCategoryNatIso e).hom := by
+  apply Localization.natTrans_ext DerivedCategory.Q
+    (HomologicalComplex.quasiIso C (.up ℤ))
+  intro K
+  apply (cancel_mono (G.mapDerivedCategoryFactors.hom.app K)).1
+  rw [exactNat_fac, Functor.mapDerivedCategoryNatIso_fac]
+
 private theorem exactNat_whiskerRight (t : F ⟶ G) (K : D ⥤ H)
     [K.Additive] [PreservesFiniteLimits K] [PreservesFiniteColimits K] :
     exactNat (Functor.whiskerRight t K) ≫ (Functor.mapDerivedCategoryCompIso G K).inv =
@@ -102,6 +120,33 @@ private theorem exactNat_whiskerLeft (K : H ⥤ C)
       (K.mapDerivedCategoryFactors.hom.app L)), exactNat_fac,
     Functor.mapDerivedCategoryCompIso_hom_app_factors_assoc]
   congr 2
+
+private theorem exactNat_square
+    {C' D' : Type*} [Category C'] [Category D'] [Abelian C'] [Abelian D']
+    [HasDerivedCategory C'] [HasDerivedCategory D']
+    {F' G' : C' ⥤ D'}
+    [F'.Additive] [PreservesFiniteLimits F'] [PreservesFiniteColimits F']
+    [G'.Additive] [PreservesFiniteLimits G'] [PreservesFiniteColimits G']
+    (u : C ⥤ C') (v : D ⥤ D')
+    [u.Additive] [PreservesFiniteLimits u] [PreservesFiniteColimits u]
+    [v.Additive] [PreservesFiniteLimits v] [PreservesFiniteColimits v]
+    (p : F ⋙ v ≅ u ⋙ F') (q : G ⋙ v ≅ u ⋙ G') (t : F ⟶ G) (t' : F' ⟶ G')
+    (h : Functor.whiskerRight t v ≫ q.hom = p.hom ≫ Functor.whiskerLeft u t') :
+    Functor.whiskerRight (exactNat t) v.mapDerivedCategory ≫
+        (Functor.mapDerivedCategorySquareIso q).hom =
+      (Functor.mapDerivedCategorySquareIso p).hom ≫
+        Functor.whiskerLeft u.mapDerivedCategory (exactNat t') := by
+  have hm : exactNat (Functor.whiskerRight t v) ≫
+      (Functor.mapDerivedCategoryNatIso q).hom =
+      (Functor.mapDerivedCategoryNatIso p).hom ≫
+        exactNat (Functor.whiskerLeft u t') := by
+    rw [← exactNat_iso, ← exactNat_iso, ← exactNat_comp, ← exactNat_comp, h]
+  have hR := exactNat_whiskerRight t v
+  have hL := exactNat_whiskerLeft u t'
+  dsimp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom]
+  rw [← cancel_epi (Functor.mapDerivedCategoryCompIso F v).inv]
+  simp only [Category.assoc, Iso.inv_hom_id_assoc]
+  rw [← reassoc_of% hR, Iso.inv_hom_id_assoc, reassoc_of% hm, hL]
 
 private theorem exactNat_unique (t : F ⟶ G) (δ : F.mapDerivedCategory ⟶ G.mapDerivedCategory)
     (h : ClopenProjectorDescent F G t δ) : δ = exactNat t := by
@@ -220,6 +265,98 @@ end ExactEvaluation
 
 section ExactScalarDescent
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
+
+private theorem exactSquare_scalar
+    {A B C D A' B' C' D' : Type*}
+    [Category A] [Category B] [Category C] [Category D]
+    [Category A'] [Category B'] [Category C'] [Category D']
+    [Abelian A] [Abelian B] [Abelian C] [Abelian D]
+    [Abelian A'] [Abelian B'] [Abelian C'] [Abelian D']
+    [HasDerivedCategory A] [HasDerivedCategory B]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    [HasDerivedCategory A'] [HasDerivedCategory B']
+    [HasDerivedCategory C'] [HasDerivedCategory D']
+    {F : A ⥤ B} {G : A ⥤ C} {H : B ⥤ D} {K : C ⥤ D}
+    {F' : A' ⥤ B'} {G' : A' ⥤ C'} {H' : B' ⥤ D'} {K' : C' ⥤ D'}
+    [F.Additive] [G.Additive] [H.Additive] [K.Additive]
+    [F'.Additive] [G'.Additive] [H'.Additive] [K'.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+    [PreservesFiniteLimits K] [PreservesFiniteColimits K]
+    [PreservesFiniteLimits F'] [PreservesFiniteColimits F']
+    [PreservesFiniteLimits G'] [PreservesFiniteColimits G']
+    [PreservesFiniteLimits H'] [PreservesFiniteColimits H']
+    [PreservesFiniteLimits K'] [PreservesFiniteColimits K']
+    (u₀ : A ⥤ A') (u₁ : B ⥤ B') (u₂ : C ⥤ C') (u₃ : D ⥤ D')
+    [u₀.Additive] [u₁.Additive] [u₂.Additive] [u₃.Additive]
+    [PreservesFiniteLimits u₀] [PreservesFiniteColimits u₀]
+    [PreservesFiniteLimits u₁] [PreservesFiniteColimits u₁]
+    [PreservesFiniteLimits u₂] [PreservesFiniteColimits u₂]
+    [PreservesFiniteLimits u₃] [PreservesFiniteColimits u₃]
+    (pF : F ⋙ u₁ ≅ u₀ ⋙ F') (pG : G ⋙ u₂ ≅ u₀ ⋙ G')
+    (pH : H ⋙ u₃ ≅ u₁ ⋙ H') (pK : K ⋙ u₃ ≅ u₂ ⋙ K')
+    (t : G ⋙ K ⟶ F ⋙ H) (t' : G' ⋙ K' ⟶ F' ⋙ H')
+    (h : ∀ L, u₃.map (t.app L) ≫ pH.hom.app (F.obj L) ≫ H'.map (pF.hom.app L) =
+      pK.hom.app (G.obj L) ≫ K'.map (pG.hom.app L) ≫ t'.app (u₀.obj L))
+    (M : DerivedCategory A) :
+    u₃.mapDerivedCategory.map ((exactSquare G K F H t).app M) ≫
+        (Functor.mapDerivedCategorySquareIso pH).hom.app (F.mapDerivedCategory.obj M) ≫
+        H'.mapDerivedCategory.map ((Functor.mapDerivedCategorySquareIso pF).hom.app M) =
+      (Functor.mapDerivedCategorySquareIso pK).hom.app (G.mapDerivedCategory.obj M) ≫
+        K'.mapDerivedCategory.map ((Functor.mapDerivedCategorySquareIso pG).hom.app M) ≫
+        (exactSquare G' K' F' H' t').app (u₀.mapDerivedCategory.obj M) := by
+  let a := Functor.associator G K u₃ ≪≫
+    Functor.isoWhiskerLeft G pK ≪≫
+    (Functor.associator G u₂ K').symm ≪≫
+    Functor.isoWhiskerRight pG K' ≪≫
+    Functor.associator u₀ G' K'
+  let b := Functor.associator F H u₃ ≪≫
+    Functor.isoWhiskerLeft F pH ≪≫
+    (Functor.associator F u₁ H').symm ≪≫
+    Functor.isoWhiskerRight pF H' ≪≫
+    Functor.associator u₀ F' H'
+  have hc : Functor.whiskerRight t u₃ ≫ b.hom =
+      a.hom ≫ Functor.whiskerLeft u₀ t' := by
+    apply NatTrans.ext
+    funext L
+    simpa only [a, b, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+      Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
+      Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
+      Functor.associator_inv_app, Category.id_comp, Category.comp_id, Category.assoc]
+      using h L
+  have hd := congrArg (fun z ↦ z.app M)
+    (exactNat_square u₀ u₃ a b
+      t t' hc)
+  have ha := Functor.exactSquare_comp_forward G K
+    (G ⋙ K) G' K'
+    (G' ⋙ K') u₀ u₂
+    u₃ pG pK a (Iso.refl _) (Iso.refl _)
+    (by intro L; simp [a]) M
+  have hb := Functor.exactSquare_comp_forward F H
+    (F ⋙ H) F' H'
+    (F' ⋙ H') u₀ u₁
+    u₃ pF pH b (Iso.refl _) (Iso.refl _)
+    (by intro L; simp [b]) M
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.mapDerivedCategoryNatIso_refl,
+    Category.id_comp] at ha hb
+  rw [← cancel_epi (u₃.mapDerivedCategory.map
+    ((Functor.mapDerivedCategoryCompIso G K).inv.app M))]
+  simp only [exactSquare, NatTrans.comp_app, Functor.map_comp, Category.assoc]
+  rw [← Functor.map_comp_assoc, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id, Category.id_comp]
+  simp only [Category.assoc, Iso.symm_hom] at ha hb
+  dsimp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app] at hd
+  simp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
+    NatTrans.comp_app, Category.assoc] at hd ⊢
+  rw [hb, reassoc_of% hd]
+  have he := congrArg (fun z ↦ z ≫
+    (Functor.mapDerivedCategoryCompIso G' K').hom.app
+      (u₀.mapDerivedCategory.obj M) ≫
+    (exactNat t').app (u₀.mapDerivedCategory.obj M) ≫
+    (Functor.mapDerivedCategoryCompIso F' H').inv.app
+      (u₀.mapDerivedCategory.obj M)) ha
+  simp only [Category.assoc, Iso.inv_hom_id_app_assoc] at he
+  exact he.symm
 
 end ExactScalarDescent
 
