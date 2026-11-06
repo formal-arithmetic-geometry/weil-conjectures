@@ -306,21 +306,26 @@
   overwrite failures. No shared build scripts were edited.
 
 
-# BZ938 in progress
+# BZ938 complete
 
-- Branch: u9/BZ938; baseline before repairs: 1626b332e^.
-- The user instructed continuation after the exact four-projection private-helper proposal.
-  Applied BZ938-private-compositor-proposal.patch to descend_coherence.
-  The .hom → .inv migration preserves the original equation under Mathlib's reversed compositor.
-- Definition bodies and proof-local comparisons now use the correct compositor direction.
-- First remote build cleared five of eight diagnostics; remaining three shared the
-  private helper statement as their root. Next: validate the completed repair.
-- Then check the nine direct importers, continuing through unblocked layers up to
-  the brief's 30-extra-module limit.
-- Fix records: /home/ubuntu/u9/bz/FIXES-BZ938.md.
-- No local Lean/Lake, forbidden proof escapes, or heartbeat changes.
-
-- Assigned leaf GREEN at 01d3d8d6e: ucheck-bump rc=0, failed=0, built=65,
-  on newsrv:/home/ubuntu/u9n/bumpw3. Full log BUILD-BZ938-leaf-green-full.log.
-- Next target IntegralPullbackCompositionScalarRational has all nine direct
-  importers in its dependency closure; downstream validation is starting.
+- Branch: u9/BZ938. Assigned module:
+  WeilConjectures.SmoothPurity.Finite.FiniteSystemPullbackCoherence.
+- Assigned leaf passed ucheck-bump at 01d3d8d6ecc4b094dca0b40ed20b28cffae2c545:
+  rc=0, failed=0, 5459 jobs; the leaf rebuilt in 22 seconds.
+- Full green log: /home/ubuntu/u9/bz/BUILD-BZ938-leaf-green-full.log.
+- Ported derived composition/evaluation comparisons to Mathlib's reversed
+  compositor and normalized symmetric projections in the associativity proof.
+- The user instructed continuation after the exact four-projection private
+  descend_coherence proposal. That patch preserves the original equation;
+  all other declaration signatures, existing docstrings, and limits are unchanged.
+- All six recorded regex rules exactly reproduce the Lean source from baseline.
+- All nine direct importers were attempted through their common downstream target.
+  Each is blocked by shared prerequisites outside this unit; fifteen such modules
+  failed. No downstream source was edited and no declaration was deleted.
+- Stopped the blocked downstream build after verifying its target and process ID;
+  the request exited and its tree was released. Its wrapper printed rc=0 despite
+  15 failed modules after termination, so that run is NOT recorded as green.
+- Downstream log: /home/ubuntu/u9/bz/BUILD-BZ938-downstream-full.log.
+- Handoff: /home/ubuntu/u9/bz/FIXES-BZ938.md and /home/ubuntu/u9/state/BZ938.DONE.
+- No local Lean/Lake execution, proof placeholders, trust escapes, or limit raises.
+- This final commit updates progress documentation only; Lean source matches the green build.
