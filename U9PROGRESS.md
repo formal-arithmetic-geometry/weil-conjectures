@@ -562,3 +562,26 @@
 - Rule replay exactly reproduces all four changes and is idempotent. No local Lean/Lake,
   declarations added/deleted, proof escapes, profiling options, or heartbeat increases.
 - Both ucheck calls finished. This completion commit changes progress documentation only.
+
+
+# BZ1441 complete
+
+- Assigned IntegralQuotientDirectImageComparison is GREEN and free of proof placeholders.
+- ucheck-bump passed: rc=0, built=1, failed=0, 16329 jobs; target rebuilt in 20 seconds.
+- Validated source commit: 68bef5f9189158dd06cf2d024a1c5bfdd1af0851.
+- Applied the proposed private compositor migration after the user's continuation instruction.
+  Merged upstream 5ba1873c2b, which already contained one of the four component swaps.
+  The public theorem statement, hypotheses, and docstrings are unchanged.
+- Localization visibility imports restore private Qh reductions; cast_eq normalizes the
+  upstream scalarCoefficientUnit identity cast. Five recorded rules reproduce the full diff.
+- Direct importer IntegralQuotientExchangeComparison rebuilt GREEN in 10 seconds.
+  The leaf rebuilt GREEN again in 22 seconds in the same downstream batch.
+- IntegralQuotientProjectionComparison is blocked by QuotientSectionTensorData, owned
+  by BZ1445. Its first error is a missing derived MonoidalCategory instance at 208:9.
+  Both next-layer importers share that blocker and are skipped under the ownership rule.
+- Full logs: BZ1441-build-leaf-green.log and BZ1441-build-downstream1.log in ~/u9/bz/.
+- Fixes, exact errors, replay rules, occurrence counts, and dependency paths:
+  ~/u9/bz/FIXES-BZ1441.md and ~/u9/bz/BZ1441-downstream-blockers.json.
+- Completion marker: ~/u9/state/BZ1441.DONE.
+- No local Lean/Lake, proof escapes, new/deleted declarations, profiler probes, or limit raises.
+- All ucheck calls finished. This completion commit changes progress documentation only.
