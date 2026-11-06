@@ -121,7 +121,7 @@ theorem constantCoeff_lFactor (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ 
 lₓ`, by the determinant-trace identity `LinearMap.X_mul_derivative_charpolyRev`. -/
 theorem X_mul_derivative_lFactor (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X)
     (x : X.finitePoints) :
-    PowerSeries.X * derivative ℂ (F.lFactor ι x) = F.lFactorLogDeriv ι x * F.lFactor ι x := by
+    PowerSeries.X * derivative (R := ℂ) (F.lFactor ι x) = F.lFactorLogDeriv ι x * F.lFactor ι x := by
   set d := (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1
   have hd : d ≠ 0 := (X ↘ Spec (CommRingCat.of k₀)).degreeOver_ne_zero x.2
   set P := locPoly ι F x
@@ -131,12 +131,12 @@ theorem X_mul_derivative_lFactor (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k�
   have hPP : P * P⁻¹ = 1 := PowerSeries.mul_inv_cancel _ (by rw [hP]; exact one_ne_zero)
   have hQQ : Q * Q⁻¹ = 1 := PowerSeries.mul_inv_cancel _ (by rw [hQ]; exact one_ne_zero)
   -- the determinant-trace identity for the stalk
-  have hT : traceGen ι F x = -(PowerSeries.X * derivative ℂ P) * P⁻¹ :=
+  have hT : traceGen ι F x = -(PowerSeries.X * derivative (R := ℂ) P) * P⁻¹ :=
     LinearMap.map_mk_trace_pow (F.stalk x).frobeniusEnd ι
-  have hP' : PowerSeries.X * derivative ℂ P = -traceGen ι F x * P := by
+  have hP' : PowerSeries.X * derivative (R := ℂ) P = -traceGen ι F x * P := by
     rw [hT]
-    linear_combination (-(PowerSeries.X * derivative ℂ P)) * hPP
-  have hQ' : PowerSeries.X * derivative ℂ Q = -F.lFactorLogDeriv ι x * Q := by
+    linear_combination (-(PowerSeries.X * derivative (R := ℂ) P)) * hPP
+  have hQ' : PowerSeries.X * derivative (R := ℂ) Q = -F.lFactorLogDeriv ι x * Q := by
     rw [X_mul_derivative_expand, hP', map_mul, map_neg, lFactorLogDeriv]
     ring
   rw [lFactor_eq, derivative_inv']
@@ -258,7 +258,7 @@ trace function over the rational points:
 `t L'(t) = (∑_{n ≥ 1} (∑_{y ∈ X₀(𝔽_{qⁿ})} ι t_{F,n}(y)) tⁿ) L(t)`, the Euler-product form of the
 point count. -/
 theorem X_mul_derivative_lSeries (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) :
-    PowerSeries.X * derivative ℂ (F.lSeries ι) =
+    PowerSeries.X * derivative (R := ℂ) (F.lSeries ι) =
       PowerSeries.mk (fun n ↦ if n = 0 then 0 else ∑ᶠ y, ι (F.traceFunction n y)) *
         F.lSeries ι := by
   classical
