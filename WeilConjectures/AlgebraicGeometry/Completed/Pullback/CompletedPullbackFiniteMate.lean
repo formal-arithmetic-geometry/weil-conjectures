@@ -261,7 +261,8 @@ private theorem towerAugmentation_computed
       completedReductionTowerCounit, coherenceReductionTowerCounit,
       completedReductionComplexTowerFunctor, DerivedCategory.quotientCompQhIso,
       HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift,
-      NatIso.ofComponents, Iso.refl] using
+      NatIso.ofComponents, Iso.refl, CategoryTheory.Functor.map_id,
+      Category.id_comp, Category.comp_id] using
       ((completedReductionTowerUnit_exists d T).exists.choose_spec P hP)
 
 private theorem pulledAugmentation_computed
