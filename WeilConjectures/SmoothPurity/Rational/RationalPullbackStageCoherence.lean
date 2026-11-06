@@ -81,6 +81,10 @@ private theorem transport_pair_coherent
   intro i j k h h' X
   simpa only [hc] using hb h h' X
 
+-- Match the transported structures on the small coefficient models.
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
 variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
 
