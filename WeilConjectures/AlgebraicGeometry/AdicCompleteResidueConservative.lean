@@ -23,6 +23,8 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated Opposit
 open AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry.Scheme
 
+attribute [local instance] HasDerivedCategory.standard
+
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The universal scalar extension inherits exactness from the cochain model. -/
 private theorem extension_exact
@@ -62,8 +64,6 @@ private theorem complete_cone
     (h₁ : ConstantCompletion.IsComplete q T.obj₁)
     (h₂ : ConstantCompletion.IsComplete q T.obj₂) :
     ConstantCompletion.IsComplete q T.obj₃ := by
-  let := HasDerivedCategory.standard (ConstantCompletion.Mod R)
-  let (U : C) := HasDerivedCategory.standard (ConstantCompletion.Mod (R.over U))
   intro U f hf
   let L := (DerivedCategory.singleFunctor _ 0).obj
     (ringedSectionLocalization (R.over U) (ringedSliceSection R U f))
