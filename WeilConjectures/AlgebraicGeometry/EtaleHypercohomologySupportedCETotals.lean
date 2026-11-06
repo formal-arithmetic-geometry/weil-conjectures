@@ -38,7 +38,6 @@ private theorem supported_complexStep_antitone
     Subobject.ofLE_arrow] using h
 
 set_option linter.unusedVariables false in
-set_option maxHeartbeats 1000000 in
 -- Elaborate the dependent presentation, support and stationary-page families together.
 /-- Construct support-controlled stationary comparisons for maps of augmented CE totals.
 The presentation, page maps and stationary comparisons are chosen simultaneously.

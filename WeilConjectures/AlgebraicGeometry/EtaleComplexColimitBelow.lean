@@ -24,7 +24,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 1000000 in
 -- Elaborate the dependent page and presentation families.
 /-- A colimit of uniformly lower bounded inverse-image complexes has the same lower bound.
 Source: Stacks Project, Tag 0EZM, proof of Lemma 59.52.1.
