@@ -250,6 +250,7 @@ theorem projection_ker_le (T : Scheme.{t}) (n : ℕ) (U : T.ProEtᵒᵖ)
   let J := Ideal.span (Set.range (fun a : ↥(d.ideal ^ (n + 1)) ↦
       (exchangeScalar d T).hom.app U ((adicLisseConstantUnit T A).app U (a : A))))
   have h := (CompletedConstantAlgebra.projection_surjective_and_kernel T d.ideal
+    (S := d.completedRing T)
     (pbcCompletedComparison T d) (exchangeScalar d T)
     (exchangeScalar_comp_projection d T) n (pbcLevelConstantComparison T d n)
     (d.projection T n) (projection_eq_comparison d T n) U).2
@@ -688,7 +689,7 @@ theorem _root_.AlgebraicGeometry.Scheme.DerivedReductionModelData.exists_iso_of_
     erw [hF', Category.comp_id] at hf'
     rw [← β.naturality_assoc]
     erw [reassoc_of% hf']
-    erw [Category.assoc, Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+    erw [Iso.inv_hom_id_app, Category.comp_id]
     rw [← G.map_comp_assoc, Iso.inv_hom_id_app, G.map_id, Category.id_comp]
   have hiso (Y : DerivedCategory B) : IsIso (β.app Y) := by
     obtain ⟨L, s, hL, hs⟩ := hres (DerivedCategory.Q.objPreimage Y)
@@ -868,7 +869,7 @@ theorem rho_exists_core (T : Scheme.{t}) :
     ((NatIso.mapHomologicalComplex (ordinaryRho d T).symm (.up ℤ)).hom.app P)
   simp only [Category.assoc] at key'
   erw [hρ, Category.comp_id] at key'
-  exact key'.trans (Category.assoc _ _ _)
+  exact key'
 
 theorem rho_unique_core (T : Scheme.{t})
     {e₁ e₂ : completedReductionTower T d ⋙ exchangeTowerRes d T ≅
