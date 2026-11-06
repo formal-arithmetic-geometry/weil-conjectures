@@ -885,7 +885,7 @@ private theorem constantRlimUnit_eq (V : Scheme.{u}) :
   simp only [DerivedCategory.quotientCompQhIso,
     HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift_hom,
     Quotient.lift.isLift_inv]
-  erw [Functor.map_id, Category.id_comp, Category.id_comp]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.id_comp]
   exact exactLeftDerivedUnit (completedTowerConstant d V) lim constLimAdj P
 
 private theorem pullbackDatumTowerModulePull_eq :
