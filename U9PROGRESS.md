@@ -324,3 +324,33 @@
   continue any green downstream path, and write BZ856.DONE. No DONE exists yet.
 - Contract audit passes for all six public theorem statements modulo reflexive
   casts/whitespace. No proof placeholders or trust bypasses; no local Lean/Lake.
+
+# BZ856 complete
+
+- Branch: `u9/BZ856`; validated source commit: `ad0a04059b15790d758f5ca7bbdaba945bfba8c3`.
+- Assigned module `WeilConjectures.AlgebraicGeometry.StalkComparisonCoordinateInvariance`
+  passed standalone `ucheck-bump`: rc=0, failed=0, 3993 jobs, on poolb:43.157.174.214.
+- All five restored prerequisites also built green at that source revision across the
+  standalone and affine batches: StalkComparisonPullbackNaturality and the four
+  StalkDerivedExtensionComparison{,Iso,IsoCore,IsIso} modules.
+- Restored the six required declarations, added Localization imports, repaired hidden
+  Qh endpoint conversions with reflexive casts, supplied the canonical category in
+  the comparison definition, and normalized casts before invertibility/cancellation.
+- The assigned theorem statement is unchanged. Four restored statements only add
+  reflexive endpoint casts; the naturality theorem statement is unchanged.
+- Historical local budgets (IsoCore 800000; naturality 1600000) were retained only
+  after default 200000 deterministically timed out at whnf. No higher budgets used.
+- Direct downstream AffineSpectrumStalkCondition is blocked in the unowned
+  AffineSpectrumComparisonSourceTransport:160 by missing
+  exists_affineSpectrum_canonicalComparison_square. Direct downstream
+  SingleComplexOpenRestrictionComparison is blocked in the unowned
+  OpenPinnedSingleDegreeZeroCounitIso:88 by Category instance synthesis.
+  Both branches were skipped per the brief; no further layer is unblocked.
+- The affine batch's Lean log completed with the above unowned failure. Its wrapper
+  then reported a shell EOF error; the separate owned-module ucheck returned rc=0.
+- Full green log: /home/ubuntu/u9/bz/BUILD-BZ856-assigned-green-full.log.
+- Fixes, exact diagnostics, counts, and eight idempotent rewrite rules:
+  /home/ubuntu/u9/bz/FIXES-BZ856.md. Audits: BZ856-contract-audit.txt, BZ856-rule-audit.txt.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or profiler probes.
+- Completion marker: /home/ubuntu/u9/state/BZ856.DONE.
+- This final commit changes only these progress notes; Lean sources match the green build.
