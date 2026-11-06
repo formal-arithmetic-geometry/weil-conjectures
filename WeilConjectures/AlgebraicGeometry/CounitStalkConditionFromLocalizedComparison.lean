@@ -6,6 +6,8 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 import WeilConjectures.Algebra.Homology.KFlatResolution
 import WeilConjectures.AlgebraicGeometry.LocalizedComparisonQuasiIsoSquare
@@ -89,13 +91,13 @@ theorem counit_stalkCondition_of_localizedComparison
     StalkCondition f f' g g' sq (DerivedCategory.Q.obj G)
       (DerivedCategory.Q.obj
         (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj G))
-      ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj G)) := by
+      (cast (by rfl) ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj G))) := by
   obtain ⟨P, s, hP, _, hs, _⟩ := CochainComplex.exists_isKFlatResolution
     (R := X.sheaf) G
   have : QuasiIso s := hs
   let E := (Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)
   let c : Coordinates g' (DerivedCategory.Q.obj G) (DerivedCategory.Q.obj (E.obj G))
-      ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj G)) :=
+      (cast (by rfl) ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj G))) :=
     { P := P
       N := E.obj G
       e := asIso (DerivedCategory.Q.map s)
@@ -104,7 +106,7 @@ theorem counit_stalkCondition_of_localizedComparison
       counit_isIso := resolution_counit_isIso g' P hP
       t := E.map s
       represents := by
-        simp only [Iso.refl_hom, Category.comp_id, asIso_hom]
+        simp only [Iso.refl_hom, Category.comp_id, asIso_hom, cast_eq]
         exact ((counit g').naturality
           ((HomotopyCategory.quotient _ (.up ℤ)).map s)).symm }
   intro d z i
