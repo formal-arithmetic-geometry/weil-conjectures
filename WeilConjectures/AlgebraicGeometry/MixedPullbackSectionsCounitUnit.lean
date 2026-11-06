@@ -8,6 +8,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.MixedAffineSectionsComplexUnit
 public import WeilConjectures.AlgebraicGeometry.GlobalHomAdjunctionIso
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # Sections of the pullback counit and the normalized Leray unit
 Source: Stacks Project, Tags 079W and 0D5T.

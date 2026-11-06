@@ -216,7 +216,7 @@ private theorem reconstructionRestrictionFactors
   rw [hi] at hc
   erw [DerivedCategory.Q.map_id, Category.comp_id] at hc
   rw [← hc]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
   rfl
 
 private def reconstructionOrdinaryTransition (M : pbcModules T R) :
