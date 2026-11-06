@@ -972,8 +972,12 @@ theorem sitePullbackTensorGenerators
       simp only [← sitePure_eq]
       rw [map_smul, PresheafOfModules.naturality_apply]
       erw [hu M N (op V) x y]
-      erw [SheafOfModules.CochainScalarConstruction.pure_restrict S]
-      exact sitePure_smul K S (F.obj M) (F.obj N) (op W) r _ _
+      exact (congrArg
+        (fun z : (siteTensor K S (F.obj M) (F.obj N)).val.obj (op W) ↦ r • z)
+        (SheafOfModules.CochainScalarConstruction.pure_restrict S (F.obj M) (F.obj N)
+          p.op ((adj.unit.app M).val.app (op V) x)
+          ((adj.unit.app N).val.app (op V) y))).trans
+        (sitePure_smul K S (F.obj M) (F.obj N) (op W) r _ _)
     · intro M M' N N' a b
       exact he a b
   let data : OrdinaryTensorPullbackData.{c, v, r} J K U R S φ F adj := ⟨e, hn, hf⟩
