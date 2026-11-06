@@ -182,15 +182,6 @@ variable (k : Type t) [Field k] (l : ℕ) [Fact l.Prime]
   (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L)
 
-local instance pointFiniteFreeUnitHSMul
-    (F : integralTowerModules l E (Spec (.of k))) (U : (Spec (.of k)).ProEtᵒᵖ) :
-    HSMul ((SheafOfModules.unit
-      (completedIntegralCoefficientSheafUnrestricted l E (Spec (.of k)))).val.obj U)
-      (F.val.obj U) (F.val.obj U) :=
-  inferInstanceAs (HSMul
-    ((completedIntegralCoefficientSheafUnrestricted l E (Spec (.of k))).obj.obj U)
-    (F.val.obj U) (F.val.obj U))
-
 set_option backward.isDefEq.respectTransparency false in
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
@@ -250,10 +241,11 @@ structure PointFiniteFreeSectionsTensorData where
     (Pi.π (fun _ : Fin (completedScalarRelativeDegree l E L ι) ↦ F) i).val.app U
       ((coordinates F).hom.val.app U
         (completedScalarTensorSection l E L ι (Spec (.of k)) F U a n)) =
-      ((Pi.π (fun _ : Fin (completedScalarRelativeDegree l E L ι) ↦
-        SheafOfModules.unit
-          (completedIntegralCoefficientSheafUnrestricted l E (Spec (.of k)))) i).val.app U
-            (sheafBasis.hom.val.app U a)) • n
+      (show (completedIntegralCoefficientSheafUnrestricted l E (Spec (.of k))).obj.obj U from
+        (Pi.π (fun _ : Fin (completedScalarRelativeDegree l E L ι) ↦
+          SheafOfModules.unit
+            (completedIntegralCoefficientSheafUnrestricted l E (Spec (.of k)))) i).val.app U
+              (sheafBasis.hom.val.app U a)) • n
   coordinates_inverse : ∀ (F : integralTowerModules l E (Spec (.of k))) U x,
     (coordinates F).inv.val.app U x = ∑ i,
       completedScalarTensorSection l E L ι (Spec (.of k)) F U
