@@ -68,6 +68,8 @@ import all WeilConjectures.TraceFormula.Ordinary.OrdinaryQuotientPullbackTowerCo
 import all WeilConjectures.TraceFormula.CompletionUnit.CompletionUnitOrdinaryAdjunction
 import all WeilConjectures.TraceFormula.CompletionUnit.CompletionUnitFixedCalculusModels
 import WeilConjectures.TraceFormula.CompletionUnit.CompletionUnitDerivedAdjunctionComparison
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # Coherent reduction and strict pullback tower core
 
@@ -1054,7 +1056,7 @@ attribute [local implicit_reducible] pullbackTensorOrdinaryModel pullbackTensorO
   pullbackTensorConstantLimit
   coefficientConstantTowerLimit coefficientSequenceLimit pullbackTensorOrdinaryReduction
   pullbackTensorOrdinaryAdjunction integralOperationsGoodLocalization
-  CategoryTheory.Functor.mapHomologicalComplex HomologicalComplex.asFunctor
+  HomologicalComplex.asFunctor
   HomologicalComplex.complexOfFunctorsToFunctorToComplex
 
 attribute [local irreducible] pullbackTensorCalculus
