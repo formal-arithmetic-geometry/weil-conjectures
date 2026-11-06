@@ -7,6 +7,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.CanonicalPullbackTensorComparison
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 
 import WeilConjectures.Algebra.Homology.KFlatTensorProduct
 import WeilConjectures.Algebra.Homology.KFlatPullback
@@ -217,11 +219,11 @@ theorem exists_tensor_coordinate_identifications
         (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P)
         (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj c.P))
     (hχ : (derivedPullback g').map (pullbackTensorModelMap X P c.P) ≫
-        (SingleComplexBaseChange.counit g').app
-          ((HomotopyCategory.quotient _ (.up ℤ)).obj (pullbackTensorTotal X P c.P)) ≫
+        cast (by rfl) ((SingleComplexBaseChange.counit g').app
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj (pullbackTensorTotal X P c.P))) ≫
         DerivedCategory.Q.map χ.hom =
       τ (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj c.P) ≫
-        ((SingleComplexBaseChange.counit g').app
+        cast (by rfl) ((SingleComplexBaseChange.counit g').app
             ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ⊗ₘ
           (SingleComplexBaseChange.counit g').app
             ((HomotopyCategory.quotient _ (.up ℤ)).obj c.P)) ≫
@@ -238,8 +240,8 @@ theorem exists_tensor_coordinate_identifications
       T.IsKFlatTensor ∧
       IsIso ((SingleComplexBaseChange.counit g').app
         ((HomotopyCategory.quotient _ (.up ℤ)).obj T)) ∧
-      (SingleComplexBaseChange.counit g').app
-          ((HomotopyCategory.quotient _ (.up ℤ)).obj T) ≫
+      cast (by rfl) ((SingleComplexBaseChange.counit g').app
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj T)) ≫
         DerivedCategory.Q.map d ≫ e'.hom =
       (derivedPullback g').map e.hom ≫ (τ E K ≫ ((derivedPullback g').obj E ◁ φ)) := by
   classical
@@ -269,7 +271,7 @@ theorem exists_tensor_coordinate_identifications
   dsimp only at hmodel
   erw [CategoryTheory.Functor.map_id] at hmodel
   have hnat' := hnat _ _ _ _ eP.hom c.e.hom
-  simpa only [e, e', Iso.trans_hom, Iso.symm_hom, asIso_hom, asIso_inv,
+  simpa only [cast_eq, e, e', Iso.trans_hom, Iso.symm_hom, asIso_hom, asIso_inv,
     tensorIso_hom, Functor.mapIso_hom, Functor.map_comp] using
     tensor_representation_algebra (derivedPullback g')
       (asIso (pullbackTensorModelMap X P c.P)) eP c.e
@@ -282,7 +284,7 @@ theorem exists_tensor_coordinate_identifications
       (asIso (pullbackTensorModelMap X' (H.obj P) c.N)) (asIso εP)
       ((SingleComplexBaseChange.counit g').app
         ((HomotopyCategory.quotient _ (.up ℤ)).obj c.P))
-      (DerivedCategory.Q.map c.t) c.e' φ τ hχ
+      (DerivedCategory.Q.map c.t) c.e' φ τ (by simpa only [cast_eq] using hχ)
       (by convert hmodel using 1 <;> rfl) c.represents hnat'
 
 end AlgebraicGeometry
