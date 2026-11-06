@@ -365,7 +365,7 @@ variable {A B C : Type*} [Category A] [Category B] [Category C]
 
 private noncomputable def exact_comp (e : F ⋙ G ≅ H) :
     F.mapDerivedCategory ⋙ G.mapDerivedCategory ≅ H.mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso F G).symm ≪≫
+  Functor.mapDerivedCategoryCompIso F G ≪≫
     Functor.mapDerivedCategoryNatIso e
 
 end ExactComposition
