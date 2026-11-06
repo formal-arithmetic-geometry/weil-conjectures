@@ -155,6 +155,7 @@ theorem finitePerfectAdic_quotient_coordinate_tower
   -- a K-flat representative of `M`
   obtain ⟨P, s, hP, -, hs, -⟩ := CochainComplex.exists_isKFlatResolutionGeneral
     (R := completedAdicCommRing X d) (DerivedCategory.Q.objPreimage M)
+  change CochainComplex (CompletedAdicModules X d) ℤ at P
   have hPi : CochainComplex.IsKFlatIndependentCoefficients (R := completedAdicCommRing X d) P :=
     (CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat P).mpr hP
   have : IsIso (DerivedCategory.Q.map s) := by
@@ -195,6 +196,9 @@ theorem finitePerfectAdic_quotient_coordinate_tower
   · obtain ⟨h⟩ := hδ n P hP
     exact StructuredArrow.IsUniversal.nonempty_iso_comp (εJ (n + 1)) _ (εJ n).symm h
   choose B hBsq using hB
+  have hτ (n : ℕ) : (completedAdicOrdinaryTower X d ⋙
+      (CategoryTheory.evaluation ℕᵒᵖ (CompletedAdicModules X d)).obj (op n)).Additive :=
+    inferInstance
   have hO₁ : ∀ W : X.ProEt, (SheafOfModules.overFunctor (completedAdicRing X d) W).Additive :=
     fun W ↦ (ringedOverFunctor_exactGeneral (completedAdicRing X d) W).1
   have hO₂ : ∀ W : X.ProEt,
