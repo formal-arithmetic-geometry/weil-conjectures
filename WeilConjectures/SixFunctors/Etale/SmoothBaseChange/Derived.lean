@@ -174,7 +174,8 @@ lemma Etale.isIso_baseChange_app_singleFunctor_obj_iff (sq : IsPullback e h g p)
   -- `instIsGrothendieckAbelianModuleCat`. The two are proofs of the same proposition, but
   -- identifying the derived categories built on them makes the kernel unfold huge terms.
   -- Rewriting the instance first keeps every later comparison syntactic.
-  have hS : ModuleCat.isGrothendieckAbelian_of_commRing Λ = instIsGrothendieckAbelianModuleCat Λ :=
+  have hS :
+      ModuleCat.isGrothendieckAbelian_of_commRing Λ = instIsGrothendieckAbelianModuleCat Λ :=
     proof_irrel _ _
   rw [hS]
   exact (DerivedCategory.Plus.isIso_iff _).trans
@@ -191,7 +192,8 @@ theorem Etale.isIso_baseChangeHomologyMap_iff' (sq : IsPullback e h g p) (q : �
       IsIso ((DerivedCategory.Plus.homologyFunctor _ q).map
         ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app
           ((DerivedCategory.Plus.singleFunctor _ 0).obj F))) := by
-  have hS : ModuleCat.isGrothendieckAbelian_of_commRing Λ = instIsGrothendieckAbelianModuleCat Λ :=
+  have hS :
+      ModuleCat.isGrothendieckAbelian_of_commRing Λ = instIsGrothendieckAbelianModuleCat Λ :=
     proof_irrel _ _
   rw [hS]
   exact Etale.isIso_baseChangeHomologyMap_iff Λ sq q F

@@ -11,10 +11,12 @@ so that only Mathlib's `instIsGrothendieckAbelianModuleCat` remains: a large dro
 means that the cost comes from identifying the two instances.
 
 Not imported by the library. Run from the repository root with
-`INSTANCE_MIX_SHARD=i/k lake lean scripts/instance_mix_kernel_time.lean`, which checks every
-`k`-th declaration starting from the `i`-th one and writes `scripts/instance_mix_kernel_time.i-k.txt`
+`INSTANCE_MIX_SHARD=i/k lake lean scripts/instance_mix_kernel_time.lean`, which checks
+every `k`-th declaration starting from the `i`-th one and writes
+`scripts/instance_mix_kernel_time.i-k.txt`
 (or `instance_mix_kernel_time_unfolded.i-k.txt`). The names can also be given in a file
-`INSTANCE_MIX_NAMES`, one per line.
+`INSTANCE_MIX_NAMES`, one per line. The committed output
+`scripts/instance_mix_kernel_time.0-1.txt` was generated on commit `55abf461d4`.
 -/
 
 open Lean

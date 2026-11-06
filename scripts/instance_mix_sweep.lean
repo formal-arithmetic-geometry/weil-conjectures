@@ -10,7 +10,8 @@ whose type or value mentions both the shortcut instance
 `instIsGrothendieckAbelianModuleCat`. Such proofs can make the kernel unfold derived-category
 constructions to identify the two instances (this stalled the lean-eval comparator).
 
-Not imported by the library. Run with `lake lean scripts/instance_mix_sweep.lean`.
+Not imported by the library. Run with `lake lean scripts/instance_mix_sweep.lean`. The
+committed output `scripts/instance_mix_sweep.txt` was generated on commit `55abf461d4`.
 
 For each hit it prints the name, the module, where the two instances occur (`type`/`value`),
 the number of distinct subterms of the value (sharing-aware DAG size), the tree size without
