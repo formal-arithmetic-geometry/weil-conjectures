@@ -1,3 +1,19 @@
+# PZ017 resumed
+
+- Branch: `u9/PZ017`.
+- The user instructed continuation after the exact two-cast proposal for
+  `scalarPairWithAdjunction`; that patch is applied and the signature errors are gone.
+- Four newly exposed body errors require `Qh` reductions unavailable inside exposed
+  public data definitions. Their normalization and unit proofs now live in private
+  theorems, preserving every data field and the reviewed constructor signature.
+- The updated three-module build is queued at source commit `d1e50bc851`.
+- `SectionDerivedPushpullNormalization` and `ProperOpenClopenProjector` already passed
+  remote validation; all three assigned modules are being rebuilt together.
+- Thirteen geometry direct importers were checked or traced to other units' failures.
+  The six scalar direct importers remain to be checked after the scalar module passes.
+- Fix records: `/home/ubuntu/u9/bz/FIXES-PZ017.md`.
+- No local Lean/Lake, forbidden proof shortcuts, or heartbeat increases.
+
 # BZ133 complete
 
 - Branch: `u9/BZ133`.
@@ -207,90 +223,34 @@
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
 - This final commit changes only progress documentation; Lean sources match the green build.
 
-# BZ740 complete
+# BZ740 in progress
 
 - Branch: `u9/BZ740`; starting commit: `f271bd088`.
-- Assigned module `WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorUnitNormalization`
-  passed `ucheck-bump`: rc=0, failed=0, 3927 jobs; target rebuilt in 48 seconds.
-- Validated source commit: `814682ae46`. The assigned target also rebuilt successfully
-  in the downstream batch at `28be0e52ca`.
+- Reread the brief and progress notes on continuation; no new LEAD lines.
+- The import-only remote build fixed both private-helper errors, leaving the public Qh/Q mismatch.
 - The user instructed continuation after the exact one-line identity-cast proposal.
-  That patch and two Localization imports are the only Lean changes.
-- All other statement text, proof bodies, docstrings, and heartbeat settings are unchanged.
-  Both recorded rewrite rules exactly reproduce the source from the baseline.
-- Direct importer `DerivedPullbackTensorUnitKFlat` was checked and fails in a kept
-  public theorem's hμ binder (line 359), requiring further statement-level Qh/Q conversions.
-  It and next-layer `DerivedPullbackTensorUnit` are deferred under the kept-statement rule.
-  Neither downstream file was edited.
-- Full logs: `/home/ubuntu/u9/bz/BUILD-BZ740-assigned-green-full.log` and
-  `/home/ubuntu/u9/bz/BUILD-BZ740-downstream1-full.log`.
-- Fix patterns, exact diagnostics, and occurrence counts: `/home/ubuntu/u9/bz/FIXES-BZ740.md`.
-- Contract audit: `/home/ubuntu/u9/bz/BZ740-contract-audit.txt`.
-- Completion marker: `/home/ubuntu/u9/state/BZ740.DONE`.
+  Applied `BZ740-statement-cast-proposal.patch`, preserving the original morphism.
+- Next: validate the assigned normalization module through `ucheck-bump`, then its direct importer.
+- Fix patterns and exact diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ740.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
-- This final commit changes only progress documentation; Lean source matches the green build.
+- Assigned normalization module is GREEN at `814682ae46`: `ucheck-bump` rc=0,
+  failed=0, 3927 jobs, target rebuilt in 48 seconds.
+- Remote log: `/home/ubuntu/u9/logs/BZ740-20261106T061103.log`.
+- Checking downstream `DerivedPullbackTensorUnitKFlat` and `DerivedPullbackTensorUnit`.
 
-# BZ798 in progress
 
-- Branch: `u9/BZ798`; original baseline: `6a4b38f19`.
-- Resumed after rereading `/home/ubuntu/u9/briefs/BZ798.md` and the progress notes.
-- Merged the current integrated bump branch at `d9a3ea12c`. It already removes the
-  unused signed-projection comparison chain and its downstream callers. The earlier
-  referenced-caller blocker therefore no longer applies.
-- Deleted only the remaining unused `SignedProjectionResolution.totalInverse`;
-  whole-tree `git grep -w totalInverse -- WeilConjectures Comparator` found its sole
-  declaration and no callers. It is listed unused and absent from kept-decls.txt.
-- All surviving declaration text is unchanged from the integrated branch.
-- Next: validate the owned module, then its direct importers and downstream layers.
-- Previous diagnostic history is archived in FIXES-BZ798-preintegration.md.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+# BZ800 in progress
 
-# BZ850 in progress
-
-- Branch: `u9/BZ850`; baseline: `2ab2b07a3`.
-- The user instructed continuation after the explicit three-declaration upstream restoration proposal.
-- Restored `derived_projection_exists`, `coefficientConstantTowerProjection_exists`, and
-  `coefficientConstantTowerProjection` in CoefficientRingedSequenceSiteSupplement with their
-  original statements and docstrings. Their surviving users prohibit pruning them.
-- Added Localization imports and explicit simplification of its hidden comparison components.
-- The assigned CoefficientConstantTowerRoos source is unchanged.
-- Next: remote ucheck-bump on the assigned module, then both direct importers.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
-# BZ824 in progress
-
-- Branch: u9/BZ824; starting commit 95c8987257f.
-- The user instructed continuation after the upstream-restoration proposal.
-- Restored four prerequisite modules. The comparison predicate uses verified PZ003
-  Localization imports and a reflexive cast; the transport proof is unchanged,
-  and target automorphism specializes the existing arbitrary-degree theorem to zero.
-- All six submitted modules passed ucheck-bump at 826d8e1a1fb: rc=0, failed=0, 4065 jobs.
-- Green: DerivedModuleBaseChangeMap, DerivedModulePullbackComparison,
-  ModulePullbackComparisonIsoTransport, ModulePullbackComparisonTargetAutomorphism,
-  CanonicalModuleBaseChangeIsoComparisonCompat, CanonicalModuleBaseChangeIsoComparison.
-- All restored declaration headers and original assigned/caller sources are unchanged.
-- Full log: /home/ubuntu/u9/bz/BUILD-BZ824-restored-full.log.
-- Next: build layer-two importer CanonicalModuleBaseChangeAffineChartComparison.
-- Notes: /home/ubuntu/u9/bz/FIXES-BZ824.md. No local Lean/Lake or proof shortcuts.
-
-# BZ856 in progress
-
-- Branch: `u9/BZ856`; original start: `2ab2b07a3`.
-- Reread the brief and prior notes on continuation; no new LEAD lines were present.
-- User instructed continuation after the explicit five-upstream-module restoration proposal.
-  The six deleted prerequisites are restored from the reviewed draft, retaining later
-  repairs to surviving helpers. They now need remote Lean 4.35 validation and porting.
-- Merged integrated bump branch `db406319f` before restoring the prerequisites.
-- Assigned theorem remains intact: it has live callers and cannot be pruned.
-- Next: ucheck-bump assigned module, repair prerequisite errors, then downstream targets.
-- No local Lean/Lake execution; no proof placeholders, trust bypasses, or heartbeat raises.
-
-# BZ889 in progress
-
-- Reread the brief and progress notes on continuation; no new LEAD lines were present.
-- The user instructed continuation after the exact one-line reflexive-cast proposal.
-- Applied that cast to RingedPullbackResolutionComparisons.normalization; all other
-  statement text, proof bodies and docstrings are unchanged.
-- Recorded the exact compiler error, contextual regex rule and whole-tree counts
-  in /home/ubuntu/u9/bz/FIXES-BZ889.md.
-- Next: ucheck-bump on the assigned module, then direct importers and downstream layers.
-- No local Lean/Lake, proof placeholders, trust bypasses or heartbeat changes.
+- Branch: `u9/BZ800`; starting commit: `fcbed6be3`.
+- Reread the brief and progress notes on continuation; no new LEAD lines.
+- Import-only remote build at `47f88332d4` resolved the private helper error,
+  leaving the public hypothesis's Qh/Q mismatch.
+- The user instructed continuation after the exact two-cast proposal and downstream request.
+  Applied `BZ800-statement-cast-proposal.patch` and the same identity casts to
+  direct importer `DerivedPullbackMonoidalDescent`, preserving the existing morphisms.
+- Leaf rebuilt successfully at `46f8f154b4`; the direct importer was blocked by
+  unowned `DerivedPullbackTensorUnitKFlat.lean:359:12: Type mismatch`.
+- Following the brief's skip rule, saved the unvalidated importer patch outside the repo
+  and restored its source. Next: leaf-only rc=0 validation, final audit, and DONE.
+- Fix patterns and diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ800.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
