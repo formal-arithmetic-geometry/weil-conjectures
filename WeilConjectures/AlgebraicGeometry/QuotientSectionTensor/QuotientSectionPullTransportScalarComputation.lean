@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionTensorData
 import WeilConjectures.SixFunctors.Supporting.ModCondensedCachedInstances
 
@@ -39,6 +41,8 @@ open scoped AlgebraicGeometry.ProEtale.CondensedRing.CachedModInstances
 namespace AlgebraicGeometry.ProEtale.QuotientSectionTensor
 
 open QuotientChange IntegralQuotient
+
+attribute [local instance] ModuleRingedComparison.sectionFunctorAdditive
 
 attribute [local semireducible] QuotientChange.L
 attribute [local implicit_reducible] QuotientChange.L
