@@ -239,6 +239,7 @@ lemma derivedCompQhComparison_comp_derivedHom_app (τ : f₁ ⋙ g₁ ⟶ f₂ �
     CategoryTheory.Functor.map_id, Category.id_comp]
   simp only [Category.id_comp, Iso.inv_hom_id_app_assoc, ← Functor.map_comp, Category.assoc,
     Iso.inv_hom_id_app, Category.comp_id]
+  rw [Functor.mapHomotopyCategoryCompIso_refl_hom_app, Category.id_comp]
 
 end Adjunction
 
