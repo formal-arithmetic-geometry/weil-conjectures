@@ -304,6 +304,8 @@ private theorem withSource_hom {C : Type*} [Category* C] {A A' B : C}
 variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The prescribed common-stage comparison preserves the coefficient-ring unit uniquely.
 
 Source: Stacks 07A4 and 0941, and the coefficient descent in the parent unit-coherence proof.
