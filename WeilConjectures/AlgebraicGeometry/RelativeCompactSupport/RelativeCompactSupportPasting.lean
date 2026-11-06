@@ -131,7 +131,7 @@ Source: Stacks, Tags 0E47 and 09AE (blueprint: lem-pur-relative-compact-support-
 noncomputable def ordinaryGComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     ordinaryG B (f ≫ g) ≅ ordinaryG B g ⋙ ordinaryG B f :=
   Functor.mapDerivedCategoryNatIso (moduleGComp B f g) ≪≫
-    Functor.mapDerivedCategoryCompIso (modulePullback B g) (modulePullback B f)
+    (Functor.mapDerivedCategoryCompIso (modulePullback B g) (modulePullback B f)).symm
 
 /-- The ordinary exchange is the unit--square--counit mate of the specified square.
 Source: Stacks, Tags 0E47 and 09AE (blueprint: lem-pur-relative-compact-support-pasting). -/
@@ -364,7 +364,7 @@ private theorem ordinaryGComp_coherence {X Y Z W : Scheme.{u}}
     (congrArg (modulePullback B) (Category.assoc j h k).symm)
     (congrArg (ordinaryG B) (Category.assoc j h k).symm)
   rw [he] at hd
-  simpa only [ordinaryGComp, Iso.trans_hom, NatTrans.comp_app,
+  simpa only [ordinaryGComp, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.map_comp, Category.assoc]
     using NatTrans.congr_app hd M
 

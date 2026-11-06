@@ -23,7 +23,7 @@ namespace AlgebraicGeometry.Etale
 
 attribute [local irreducible] upperStar lowerStar openImmersionLowerShriek
   Functor.mapDerivedCategory Functor.rightDerivedFunctor
-  Functor.mapDerivedCategoryNatIso Functor.mapDerivedCategoryCompIso
+  Functor.mapDerivedCategoryNatIso
   mapDerivedCategoryOpenImmersionLowerShriekComp
   mapDerivedCategoryOpenImmersionLowerShriekCongr
 
@@ -218,6 +218,7 @@ private lemma supportLeft_naturality
   rw [F.refinementComparison_eq_id _ _ rfl] at h
   ext K
   have hh := congr_app h K
+  simp only [NatTrans.comp_app, NatTrans.hcomp_app] at hh
   change (F.compIso (supportTriangleLeft sq d)).hom.app K ≫
       (F.refinementComparison (supportPrecompRefinement a r)
         (supportPrecompRefinement_cartesian a r hr)).app K =
@@ -250,6 +251,7 @@ private lemma supportRight_naturality
   rw [F.refinementComparison_eq_id _ _ rfl] at h
   ext K
   have hh := congr_app h K
+  simp only [NatTrans.comp_app, NatTrans.hcomp_app] at hh
   change (F.compIso (supportTriangleRight a d)).hom.app K ≫
       (F.refinementComparison (supportPrecompRefinement a r)
         (supportPrecompRefinement_cartesian a r hr)).app K =
