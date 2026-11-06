@@ -361,7 +361,7 @@ private theorem normalizedDVRKFlatUnit (n : ℕ)
   have hc := normalizedDVRComparison_hom (scalarReductionExtension l E X n)
     (scalarReductionRestriction l E X n) (scalarReductionDerivedExtension l E X n) P
     ((scalarReductionCounit l E X n).app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))
-  change normalizedDVRKFlatComparison l E X n P = _ at hc
+  unfold normalizedDVRKFlatComparison
   refine (congrArg (fun k ↦
     (normalizedDVRIntegralAdjunction l E X n).unit.app (DerivedCategory.Q.obj P) ≫ k) hc).trans ?_
   unfold normalizedDVRIntegralAdjunction
