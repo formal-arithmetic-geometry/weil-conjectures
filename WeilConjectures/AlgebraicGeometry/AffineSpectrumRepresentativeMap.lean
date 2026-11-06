@@ -12,7 +12,7 @@ import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.AffineSpectrumDerivedCoordinates
 public import WeilConjectures.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
-import WeilConjectures.AlgebraicGeometry.AffineSpectrumCompositionCounitSquare
+import all WeilConjectures.AlgebraicGeometry.AffineSpectrumCompositionCounitSquare
 
 /-! # Chain-map transport for affine spectrum representatives
 
@@ -114,7 +114,7 @@ empty schemes obey the same composition equations.
 Source: Stacks Project, Tag 0DJ8, affine reduction; Tag 0D5S, composition of
 pullbacks and compatibility of the derived counits.
 (blueprint: lem-pc-affine-spectrum-representative-map). -/
-theorem affineSpectrum_representative_map_eq
+private theorem affineSpectrum_representative_map_eq
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     {X X' : Scheme.{u}} [IsAffine X] [IsAffine X']

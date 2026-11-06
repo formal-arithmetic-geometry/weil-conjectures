@@ -213,7 +213,7 @@ the displayed equation. The quotient/localization comparison has identity compon
 its naturality identifies Qh of the termwise comparison with Q of that comparison.
 No inversion of a counit is used; zero complexes and empty schemes satisfy the same
 factorization equations. -/
-theorem affineSpectrum_composition_counit_square
+private theorem affineSpectrum_composition_counit_square
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     {X X' : Scheme.{u}} [IsAffine X] [IsAffine X']

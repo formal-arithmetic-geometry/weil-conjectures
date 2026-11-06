@@ -12,7 +12,7 @@ import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.AffineSpectrumDerivedCoordinates
 public import WeilConjectures.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 import WeilConjectures.AlgebraicGeometry.IsomorphismPullbackCounit
-import WeilConjectures.AlgebraicGeometry.AffineSpectrumRepresentativeMap
+import all WeilConjectures.AlgebraicGeometry.AffineSpectrumRepresentativeMap
 import WeilConjectures.Algebra.Homology.KFlatPullback
 
 /-! # Termwise representatives in affine spectrum coordinates
