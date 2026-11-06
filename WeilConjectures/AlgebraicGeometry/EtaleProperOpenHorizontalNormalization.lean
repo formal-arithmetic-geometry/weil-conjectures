@@ -61,7 +61,7 @@ private lemma derived_horizontal_factor
     [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     [PreservesFiniteLimits H] [PreservesFiniteColimits H]
     (e : H ≅ F ⋙ G) (X : HomotopyCategory C (.up ℤ)) :
-    (Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryCompIso F G).hom.app
+    (Functor.mapDerivedCategoryNatIso e ≪≫ (Functor.mapDerivedCategoryCompIso F G).symm).hom.app
         (DerivedCategory.Qh.obj X) ≫
       G.mapDerivedCategory.map (F.mapDerivedCategoryFactorsh.hom.app X) ≫
       G.mapDerivedCategoryFactorsh.hom.app ((F.mapHomotopyCategory (.up ℤ)).obj X) =
@@ -418,7 +418,6 @@ attribute [local irreducible] upperStar lowerStar openImmersionLowerShriek
   Functor.mapDerivedCategory Functor.mapDerivedCategoryFactors Functor.mapDerivedCategoryFactorsh
   Functor.rightDerivedFunctor Functor.rightDerivedFunctorUnit
   Functor.rightDerivedFunctorObjQIso Functor.mapDerivedCategoryNatIso
-  Functor.mapDerivedCategoryCompIso
 
 set_option backward.isDefEq.respectTransparency true in
 /-- Horizontal pasting for normalized unbounded proper/open comparison families.
@@ -492,14 +491,14 @@ theorem etaleProperOpenHorizontalNormalization (A : Type (u + 1)) [CommRing A] [
     Γ.hom.app K =
           (Functor.mapDerivedCategoryNatIso
               (openImmersionLowerShriekComp (ModuleCat.{u + 1} A) i j) ≪≫
-            Functor.mapDerivedCategoryCompIso _ _).hom.app
+            (Functor.mapDerivedCategoryCompIso _ _).symm).hom.app
               (R((r)_*[ModuleCat.{u + 1} A]).obj K) ≫
             D((j)_!open[ModuleCat.{u + 1} A]).map (Γ₁.hom.app K) ≫
             Γ₂.hom.app (D((k)_!open[ModuleCat.{u + 1} A]).obj K) ≫
             R((q)_*[ModuleCat.{u + 1} A]).map
               ((Functor.mapDerivedCategoryNatIso
                   (openImmersionLowerShriekComp (ModuleCat.{u + 1} A) k l) ≪≫
-                Functor.mapDerivedCategoryCompIso _ _).inv.app K) := by
+                (Functor.mapDerivedCategoryCompIso _ _).symm).inv.app K) := by
   have ho := ordinary_horizontal A k l r p q i j sq₁ sq₂ θ₁ θ₂ θ h₁ h₂ h
   exact generic_horizontal_pasting
     (A₀ := Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A))
@@ -525,10 +524,10 @@ theorem etaleProperOpenHorizontalNormalization (A : Type (u + 1)) [CommRing A] [
     hΓ
     (Functor.mapDerivedCategoryNatIso
       (openImmersionLowerShriekComp (ModuleCat.{u + 1} A) k l) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _)
+      (Functor.mapDerivedCategoryCompIso _ _).symm)
     (Functor.mapDerivedCategoryNatIso
       (openImmersionLowerShriekComp (ModuleCat.{u + 1} A) i j) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _)
+      (Functor.mapDerivedCategoryCompIso _ _).symm)
     (fun X => derived_horizontal_factor _ _ _ _ X)
     (fun X => derived_horizontal_factor _ _ _ _ X) K
 
