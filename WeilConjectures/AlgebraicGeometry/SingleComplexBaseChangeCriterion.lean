@@ -96,7 +96,8 @@ theorem singleComplexBaseChangeCriterion
               ((HomotopyCategory.quotient _ (.up ℤ)).obj G)) :
               (derivedPullback g').obj (DerivedCategory.Q.obj G) ⟶
                 DerivedCategory.Q.obj
-                  (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj G)))) := by
+                  (((Scheme.Modules.tensorPullback g').mapHomologicalComplex
+                    (.up ℤ)).obj G)))) := by
   classical
   have hG : schemeDerivedQCohProperty X (DerivedCategory.Q.obj G) :=
     complex_qcoh X G hG_qcoh
