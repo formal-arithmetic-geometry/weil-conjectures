@@ -1,16 +1,22 @@
-# PZ017 assigned modules green; downstream in progress
+# PZ017 complete
 
 - Branch: `u9/PZ017`; validated source: `a31ae424ec30a45a6681e3014c4a80bec24938e7`.
 - All three assigned modules passed `ucheck-bump` together: rc=0, built=10, failed=0,
   6218 jobs on `poolb:43.166.72.113`.
+- Green: `CoefficientActualScalarDerivedPair`, `SectionDerivedPushpullNormalization`,
+  and `StrictTower.ProperOpenClopenProjector`.
 - Full log: `/home/ubuntu/u9/bz/BUILD-PZ017-assigned-green-full.log`.
-- The reviewed two identity casts are applied. Normalization and unit proofs are
-  public theorems with opaque proofs, so exposed constructors can use their results.
-  The constructor's functor/adjunction fields and existing rfl equations are preserved.
-- Thirteen geometry direct importers were checked or traced to other units' failures.
-  The six scalar direct importers are the next build batch.
-- Fix records: `/home/ubuntu/u9/bz/FIXES-PZ017.md`.
-- No local Lean/Lake, forbidden proof shortcuts, or heartbeat increases.
+- Applied the reviewed identity casts, moved normalization/unit proofs into public
+  theorems with opaque proofs, and supplied explicit universe arguments at their call.
+  Original constructor data and rfl/HEq.rfl field equations are preserved.
+- Four unused projector helpers were deleted after whole-tree reference audits.
+- All 19 direct importers were checked or traced to other units' verified failures.
+  The six scalar importers share PZ019's `SystemRingedSequenceSite` blocker.
+  No green downstream frontier remains; no downstream source changes.
+- Ten PATTERN/ERROR/RULE records and every downstream error are in
+  `/home/ubuntu/u9/bz/FIXES-PZ017.md` and `/home/ubuntu/u9/state/PZ017.DONE`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+- This final commit changes only progress documentation after the green source build.
 
 # BZ133 complete
 
