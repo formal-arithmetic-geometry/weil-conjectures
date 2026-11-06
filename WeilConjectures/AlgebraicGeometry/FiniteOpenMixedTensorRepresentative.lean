@@ -143,5 +143,6 @@ theorem finiteOpenMixedTensorRepresentative
     CategoryTheory.Functor.mapHomotopyCategoryFactors]
   erw [CategoryTheory.Functor.map_id, Category.id_comp,
     CategoryTheory.Functor.map_id, Category.comp_id, Category.comp_id]
+  simp only [cast_eq]
 
 end AlgebraicGeometry.ProEtale
