@@ -57,8 +57,8 @@ theorem isIso_map_baseChangeMap_app_padicSubfield_of_padicIntegers [QuasiCompact
     (isIso_derivedPushHom_app_padicIntegers_of_isGE ℓ E p K₀ n)
     (isIso_derivedPushHom_app_padicIntegers_of_isGE ℓ E p'
       ((g')^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧.leftDerivedFunctor.obj K₀) n)
-    (by exact_mod_proofs h)
-  exact_mod_proofs hE
+    (by transport_mod_proofs h)
+  transport_mod_proofs hE
 
 end Coefficients
 
