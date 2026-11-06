@@ -311,7 +311,6 @@ theorem completedDerivedRestrictionDirectImageIso_exists (n : ℕ) :
     dsimp only [completedFiniteDirectImageComplexUnit, proEtaleRingDirectImageDerivedUnit]
     rw [hid]
     erw [CategoryTheory.Functor.map_id, Category.id_comp]
-    rfl
   refine ⟨e.symm, ?_, ?_⟩
   · intro C
     apply (hn e C).2
