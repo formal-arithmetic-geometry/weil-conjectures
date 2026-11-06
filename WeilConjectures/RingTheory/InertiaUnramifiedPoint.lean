@@ -83,7 +83,7 @@ theorem exists_etale_localization_away_of_inertia (hπ : π ≠ 0) (ψ₀ : A �
     refine (injective_iff_map_eq_zero ψ).2 fun x hx ↦ ?_
     have hker : RingHom.ker ψ.toRingHom = ⊥ := by
       refine Ideal.eq_bot_of_under_eq_bot (R := R') ?_
-      rw [RingHom.comap_ker, eq_bot_iff]
+      rw [Ideal.under_def, RingHom.comap_ker, eq_bot_iff]
       intro r' hr'
       obtain ⟨k, hk⟩ := hR'K ψ r'
       rw [RingHom.mem_ker] at hr'
