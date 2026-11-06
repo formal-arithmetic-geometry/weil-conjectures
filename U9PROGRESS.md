@@ -230,39 +230,93 @@
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 - This final commit changes only progress documentation; Lean source matches the green build.
 
-# BZ798 in progress
+# BZ824 in progress
 
-- Branch: `u9/BZ798`; original baseline: `6a4b38f19`.
-- Resumed after rereading `/home/ubuntu/u9/briefs/BZ798.md` and the progress notes.
-- Merged the current integrated bump branch at `d9a3ea12c`. It already removes the
-  unused signed-projection comparison chain and its downstream callers. The earlier
-  referenced-caller blocker therefore no longer applies.
-- Deleted only the remaining unused `SignedProjectionResolution.totalInverse`;
-  whole-tree `git grep -w totalInverse -- WeilConjectures Comparator` found its sole
-  declaration and no callers. It is listed unused and absent from kept-decls.txt.
-- All surviving declaration text is unchanged from the integrated branch.
-- Next: validate the owned module, then its direct importers and downstream layers.
-- Previous diagnostic history is archived in FIXES-BZ798-preintegration.md.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+- Branch: u9/BZ824; starting commit 95c8987257f.
+- The user instructed continuation after the upstream-restoration proposal.
+- Restored four prerequisite modules. The comparison predicate uses verified PZ003
+  Localization imports and a reflexive cast; the transport proof is unchanged,
+  and target automorphism specializes the existing arbitrary-degree theorem to zero.
+- All six submitted modules passed ucheck-bump at 826d8e1a1fb: rc=0, failed=0, 4065 jobs.
+- Green: DerivedModuleBaseChangeMap, DerivedModulePullbackComparison,
+  ModulePullbackComparisonIsoTransport, ModulePullbackComparisonTargetAutomorphism,
+  CanonicalModuleBaseChangeIsoComparisonCompat, CanonicalModuleBaseChangeIsoComparison.
+- All restored declaration headers and original assigned/caller sources are unchanged.
+- Full log: /home/ubuntu/u9/bz/BUILD-BZ824-restored-full.log.
+- Next: build layer-two importer CanonicalModuleBaseChangeAffineChartComparison.
+- Notes: /home/ubuntu/u9/bz/FIXES-BZ824.md. No local Lean/Lake or proof shortcuts.
 
-# BZ850 in progress
 
-- Branch: `u9/BZ850`; baseline: `2ab2b07a3`.
-- The user instructed continuation after the explicit three-declaration upstream restoration proposal.
-- Restored `derived_projection_exists`, `coefficientConstantTowerProjection_exists`, and
-  `coefficientConstantTowerProjection` in CoefficientRingedSequenceSiteSupplement with their
-  original statements and docstrings. Their surviving users prohibit pruning them.
-- Added Localization imports and explicit simplification of its hidden comparison components.
-- The assigned CoefficientConstantTowerRoos source is unchanged.
-- Next: remote ucheck-bump on the assigned module, then both direct importers.
+# BZ859 in progress
+
+- Branch: u9/BZ859; initial commit db406319f.
+- The user instructed continuation after the concrete upstream-restoration proposal.
+- Applied BZ859-proposed-restoration.patch: restores tilde_preservesHomology,
+  affinePushforwardCohomologyMapOfComparison, and affinePushforwardRepresentativeCohomologyIso
+  with their original signatures/docs; ports generated additive-instance references.
+- Assigned factorization uses Localization implementation imports and a reflexive cast
+  for the original homology map, following the supplied BZ457 pattern.
+- Remote ucheck-bump is queued and reads the pushed branch upon acquiring a build tree.
+- Next: validate the assigned module; build its sole direct importer
+  AffinePushforwardCohomologyEdgeIdentity, then continue downstream up to the brief's limit.
+- Fix log: /home/ubuntu/u9/bz/FIXES-BZ859.md. No local Lean/Lake, proof escapes, or limit raises.
+
+
+# BZ885 in progress
+
+- Branch: u9/BZ885; baseline checkpoint 691397bb53c1a609462baa9046b9add95fc8dfef.
+- The user instructed continuation after the exact two-site compositor API proposal.
+- Applied BZ885-proposed-compositor.patch in GeometricCoefficientPullback and
+  GeometryEvaluation.coefficientPullback_transpose in GeometricDerivedEvaluation.
+  This preserves the intended comparisons under Mathlib's reversed compositor.
+- Declaration binders, hypotheses, proof bodies, and docstrings remain unchanged.
+- Next: ucheck-bump on the assigned module and both direct importers, then downstream.
+- Fix patterns and whole-tree inventories: /home/ubuntu/u9/bz/FIXES-BZ885.md.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ864 completed
 
-- Branch `u9/BZ864`; baseline `e167a50a4`; final tested Lean source `d7c8c73c15`.
-- Final `ucheck-bump` build 21 returned rc=0, failed=0: assigned CanonicalModuleBaseChangeAffineChartComparison and direct importer CanonicalModuleBaseChangeAffineLocality are GREEN. Log: `/home/ubuntu/u9/logs/BZ864-20261106T093342.log` (poolb:43.157.187.72).
-- The assigned affine-chart source is unchanged from baseline. Restored its missing open-comparison helper with the original statement and a proof using the pinned degree-zero square, canonical restricted comparison, and one target automorphism. Separating the open proof from the affine context resolved elaboration timeouts.
-- Restored 24 still-referenced declarations. Validated 21 modules: assigned leaf, affine locality, and 19 edited prerequisites. Full-header audit: 63 unchanged types in edited files, three new helpers, no baseline deletion.
-- Downstream build 20 validated the replacement of a manual Qh comparison construction by exists_isDerivedModulePullbackComparison in RelativelyFlatCanonicalModuleBaseChange. The sole remaining error is `Unknown identifier canonicalModuleBaseChange_isIso_affine_of_isFlatOver` at line 123:6, from the unowned AffineRelativelyFlatCanonicalModuleBaseChange dependency pruned to imports. Its affine Cech factorization API is pruned too. Stopped at that external dependency per the ownership rule; the live caller was preserved. Log: `/home/ubuntu/u9/logs/BZ864-20261106T092703.log`.
-- No local Lean/Lake execution, proof placeholders, axioms, native_decide, trust bypasses, or remaining diagnostics/profiler probes. Two measured 400000-heartbeat scopes are below their original pre-prune 1000000 budgets.
-- Completion record: `/home/ubuntu/u9/state/BZ864.DONE`. Fix records: `/home/ubuntu/u9/bz/FIXES-BZ864.md` (26 PATTERN/ERROR/RULE entries). Module/restoration inventories and full-header audit are in `/home/ubuntu/u9/bz/BZ864-*.tsv` and `BZ864-green-modules.txt`.
+# BZ908 in progress
+
+- Branch: u9/BZ908; baseline 40e255942.
+- The user instructed continuation after the explicit two-cast proposal.
+- Applied the two `cast (by rfl)` wrappers in IsCanonicalPullbackTensorComparison,
+  preserving the existing maps while restoring hidden Qh/Q endpoint conversions.
+- Localization imports resolve the proof-local mismatch. The uniqueness proof uses
+  `erw` to rewrite through the reflexive casts and semireducible category aliases.
+- Next: remote validation, then the 19 direct importers and further downstream
+  modules up to the brief's limit of 30 extra modules.
+- Fix patterns: /home/ubuntu/u9/bz/FIXES-BZ908.md.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+
+# BZ932 in progress
+
+- Branch: u9/BZ932; baseline 902c558126dff07f1b90673880f577206572e997.
+- The user instructed continuation after the concrete five-module upstream-restoration proposal.
+- Applied BZ932-proposed-upstream-restoration.patch, preserving restored statement/docstring text.
+- Explicit terminal-object preservation supplies GU.PreservesZeroMorphisms; removed the old
+  unmeasured maxHeartbeats override from the restored helper.
+- Next: ucheck-bump on the five prerequisites and SupportedKoszulRelativeDetector, then downstream.
+- Fix notes: /home/ubuntu/u9/bz/FIXES-BZ932.md. No local Lean/Lake or proof shortcuts.
+
+# BZ948 complete
+
+- Branch: u9/BZ948; baseline c59b55069.
+- Assigned helper and four downstream modules passed ucheck-bump together:
+  rc=0, failed=0, 4517 jobs on poolb:43.166.81.121.
+- Validated source commit: 7d627e792ab821868b3c90b06434a254e740963e; later commits change documentation only.
+- Green: AffineTildeTensorSourceComparisonHelpers, AffineTildeTensorSourceComparisonCorePreBase,
+  AffineTildeTensorSourceComparisonCorePre, AffineTildeTensorSourceComparisonCoreFinal,
+  and AffineTildeTensorSourceComparison, all under WeilConjectures.Algebra.Homology.
+- Full green log: /home/ubuntu/u9/bz/BUILD-BZ948-five-green-full.log.
+- The user instructed continuation after the reflexive-cast statement proposal.
+  The same definitionally equal endpoint repair was carried through the direct callers.
+- Other repairs: named tilde additive proofs, quasicoherence instance synthesis,
+  Localization imports, cast normalization, and local scheme derived-category instances.
+- Nineteen replay rules reproduce all five source files modulo formatting/tactic separators.
+- The next four importers were attempted and are blocked by BZ949's external
+  AffineBaseChangeTildeRepresentative.lean:121:6 application type mismatch.
+  Those four importer sources and the external dependency were left untouched.
+- Full downstream log: /home/ubuntu/u9/bz/BUILD-BZ948-final-downstream-full.log.
+- Handoff: /home/ubuntu/u9/bz/FIXES-BZ948.md and /home/ubuntu/u9/state/BZ948.DONE.
+- No local Lean/Lake, proof placeholders, trust bypasses, deletions, or heartbeat changes.
