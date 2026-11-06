@@ -404,7 +404,6 @@ private lemma constructible_extend {X : Scheme.{u}}
     ((pullbackExtendScalarsComparison (U.immersion i) R S φ).app M).symm
     (lfp_extend (F.obj R) (F.obj S) (F.map φ) (hU i))
 
-set_option diagnostics true in
 /-- A constructible algebraic-closure coefficient sheaf becomes ind-constructible
 when restricted to any finite coefficient field.
 
@@ -426,7 +425,6 @@ theorem algClRestriction_indConstructible
     (hM : IsConstructibleModuleObject (padicAlgClRingObj X ℓ) M) :
     IsIndConstructibleModuleObject (padicSubfieldRingObj X ℓ E)
       ((Mod.comap (padicSubfieldRingObjToPadicAlgCl X ℓ E)).obj M) := by
-  trace "PF239: entered proof"
   classical
   let := PadicAlgCl.normedFieldOfAlgebra ℓ E.1
   obtain ⟨F, B, hB, ⟨eB⟩⟩ := exists_constructible_finiteCoefficient_model X ℓ M hM
@@ -441,14 +439,16 @@ theorem algClRestriction_indConstructible
     (leOfHom (IsFiltered.leftToMax E F)).trans (leOfHom (ULift.down i).hom)
   have hf (i : I) : F ≤ H.obj i :=
     (leOfHom (IsFiltered.rightToMax E F)).trans (leOfHom (ULift.down i).hom)
-  trace "PF239: coefficient index"
+  let : HasZeroMorphisms
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)) :=
+    inferInstance
+  let : HasZeroMorphisms
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ F)) :=
+    inferInstance
   let C := (HomologicalComplex.single _ (.up ℤ) 0).obj B
-  trace "PF239: single complex"
   let c := (HomologicalComplex.eval _ (.up ℤ) 0).mapCocone
     (coefficientComplexCocone X ℓ C H he hf)
-  trace "PF239: coefficient cocone"
   obtain ⟨hc⟩ := nonempty_isColimit_coefficientComplexCocone X ℓ C H he hf
-  trace "PF239: coefficient colimit"
   have : HasColimitsOfSize.{u + 1, u + 1}
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)) :=
     IsGrothendieckAbelian.hasColimits _
@@ -458,23 +458,18 @@ theorem algClRestriction_indConstructible
   have : PreservesColimitsOfShape I (HomologicalComplex.eval
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E))
       (.up ℤ) 0) := inferInstance
-  trace "PF239: evaluation preserves colimits"
   have hc' : IsColimit c := isColimitOfPreserves _ hc
-  trace "PF239: evaluated colimit"
   have hC : IsConstructibleModuleObject (padicSubfieldRingObj X ℓ F) (C.X 0) :=
     _root_.constructible_of_iso (HomologicalComplex.singleObjXSelf (.up ℤ) 0 B).symm hB
-  trace "PF239: single constructible"
   have hind : IsIndConstructibleModuleObject (padicSubfieldRingObj X ℓ E) c.pt := by
     refine ⟨I, inferInstance, inferInstance, ⟨_, c.ι, hc'⟩, ?_⟩
     intro i
     exact finiteCoefficientRestriction_constructible X ℓ (he i) _
       (constructible_extend _ _ (padicSubfieldRingObjMap X ℓ (hf i)) hC)
-  trace "PF239: ind constructible"
   let e : c.pt ≅ (Mod.comap (padicSubfieldRingObjToPadicAlgCl X ℓ E)).obj M :=
     (Mod.comap (padicSubfieldRingObjToPadicAlgCl X ℓ E)).mapIso
       ((Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ F)).mapIso
         (HomologicalComplex.singleObjXSelf (.up ℤ) 0 B) ≪≫ eB)
-  trace "PF239: transport"
   exact ObjectProperty.prop_of_iso
     (IsIndConstructibleModuleObject (padicSubfieldRingObj X ℓ E)) e hind
 
