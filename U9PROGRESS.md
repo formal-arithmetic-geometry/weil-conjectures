@@ -397,7 +397,9 @@
 - The user instructed continuation after the exact one-counit reflexive-cast proposal.
   Applied BZ1030-statement-proposal.patch; all other statement text is unchanged.
 - Localization imports and a reflexive cast in the target-map body eliminate its error,
-  as verified by the second ucheck-bump. The theorem cast now awaits validation.
+  as verified by the second ucheck-bump. The theorem uses the same reflexive transport
+  for its counit and Qh base-change map. The latter explicitly names universe w and
+  SheafOfModules to use the existing HasDerivedCategory assumption. Validation is running.
 - Next: validate AffineTildeTensorOrdinaryExchange, then its direct importer
   AffineTildeDerivedTensorMate and further unblocked downstream modules.
 - Fix records and full logs: /home/ubuntu/u9/bz/FIXES-BZ1030.md.
