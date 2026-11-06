@@ -127,7 +127,7 @@ theorem sfbAdicImmersion_completedTransport
     obtain ⟨eK⟩ := (sfbImmersion_residueComparisons i I).1 K
     obtain ⟨eC⟩ := (sfbImmersion_residueComparisons i I).2 C
     obtain ⟨e⟩ := hres
-    let F := Functor.mapDerivedCategory.{u + 1, u + 2, u + 1, u + 1, u + 2, u + 2}
+    let F := Functor.mapDerivedCategory.{u + 1, u + 2}
       (sfbFixedResiduePull i (A ⧸ I ^ (0 + 1)))
     exact ⟨eK ≪≫ F.mapIso e ≪≫ eC⟩
   · intro U
