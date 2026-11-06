@@ -268,7 +268,7 @@ private theorem raw_comparison_comp
     (DerivedCategory.singleFunctor C 0) (DerivedCategory.singleFunctor D 0)
     (DerivedCategory.singleFunctor E 0) F G H
     F.mapDerivedCategory G.mapDerivedCategory H.mapDerivedCategory e
-    (Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryCompIso F G)
+    (Functor.mapDerivedCategoryNatIso e ≪≫ (Functor.mapDerivedCategoryCompIso F G).symm)
     (F.mapDerivedCategorySingleFunctor 0) (G.mapDerivedCategorySingleFunctor 0)
     (H.mapDerivedCategorySingleFunctor 0) (raw_single_coherence F G H e) a b d h
 
@@ -352,7 +352,7 @@ private theorem exactLine_square (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (Functor.mapDerivedCategoryCompIso _ _).symm
   let c₂ := Functor.mapDerivedCategoryNatIso
       (upperStarComp (ModuleCat.{u + 1} A) g q) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
   have hs : exactDerivedSquareUpperStarIso (ModuleCat.{u + 1} A) sq = c₁.symm ≪≫ c₂ := by
     apply Iso.ext
     simp [exactDerivedSquareUpperStarIso, squareUpperStarIso, c₁, c₂,

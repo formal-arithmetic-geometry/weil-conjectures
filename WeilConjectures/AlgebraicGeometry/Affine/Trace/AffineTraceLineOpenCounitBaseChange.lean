@@ -484,7 +484,8 @@ theorem affineTraceLineExchange_openCounit (A : Type (u + 1)) [CommRing A] [Fini
   dsimp only [affineTraceLineCompactification, affineTraceLineLeft, affineTraceOpenLeft,
     ordinaryFinitePullback, ordinaryFinitePushforward, Iso.symm_hom] at hn ⊢
   simp only [Functor.comp_map, Category.assoc, ha]
-  rw [← Functor.map_comp, ← Functor.map_comp, ← hc, ← hn]
+  erw [← (ordinaryFinitePushforward A (ProjectiveLine S' ↘ S')).map_comp,
+    ← (ordinaryFinitePushforward A (ProjectiveLine S' ↘ S')).map_comp, ← hc, ← hn]
   rfl
 
 end AlgebraicGeometry.Etale
