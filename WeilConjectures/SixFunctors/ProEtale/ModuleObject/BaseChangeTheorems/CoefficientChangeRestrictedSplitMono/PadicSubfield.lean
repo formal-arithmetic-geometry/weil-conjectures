@@ -57,7 +57,11 @@ theorem isSplitMono_map_baseChangeMap_app_padicSubfield_of_padicIntegers [QuasiC
     (isIso_derivedPushHom_app_padicIntegers_of_isGE ℓ E p'
       ((g')^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧.leftDerivedFunctor.obj K₀) n)
   revert h
-  exact_mod_proofs hE
+  trace "BZ1562: coefficient change ready"
+  dsimp only [PadicAlgCl.valued, NormedField.toValued] at hE ⊢
+  trace "BZ1562: uniform spaces normalized"
+  transport_mod_proofs hE
+  trace "BZ1562: transport ready"
 
 end Coefficients
 
