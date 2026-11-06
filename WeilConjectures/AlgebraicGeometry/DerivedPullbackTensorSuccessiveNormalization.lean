@@ -140,7 +140,7 @@ theorem derivedPullback_tensor_successive_normalization
           (((Scheme.Modules.tensorPullback (f ≫ g)).mapHomologicalComplex (.up ℤ)).obj P)
           (((Scheme.Modules.tensorPullback (f ≫ g)).mapHomologicalComplex (.up ℤ)).obj N)) =
     (derivedPullback f).map ((derivedPullback g).map (pullbackTensorModelMap Z P N)) ≫
-      (derivedPullback f).map ((SingleComplexBaseChange.counit g).app H) ≫
+      (derivedPullback f).map (cast (by rfl) ((SingleComplexBaseChange.counit g).app H)) ≫
       (SingleComplexBaseChange.counit f).app
         (((Scheme.Modules.tensorPullback g).mapHomotopyCategory (.up ℤ)).obj H) ≫
       DerivedCategory.Qh.map (β.hom.app H) ≫
