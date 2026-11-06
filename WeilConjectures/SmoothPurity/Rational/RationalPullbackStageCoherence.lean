@@ -11,6 +11,7 @@ public import WeilConjectures.CategoryTheory.StageSystem.StageSystemFunctorDesce
 import WeilConjectures.SmoothPurity.Rational.RationalPullbackScalarTower
 import all WeilConjectures.SixFunctors.GeneralAlgebraicallyClosedCoefficients.GeneralAlgebraicallyClosedCoefficientStages
 import all Mathlib.Logic.Small.Defs
+import Mathlib.Util.CountHeartbeats
 
 /-! # Pullback comparisons on the normalized coefficient stages
 
@@ -160,6 +161,7 @@ private theorem scalar_tower_nat
   simpa only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app] using
     scalar_tower_with_endpoint l E L M ι j κ e f K
 
+set_option maxHeartbeats 400000 in
 private theorem canonical_natural {X Y : Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
@@ -177,15 +179,15 @@ private theorem canonical_natural {X Y : Scheme.{u}} (f : X ⟶ Y)
         (associator l Ω X E L M h k).hom ≫
       (rationalPullbackScalarComparison l (Coefficient.{u} l Ω E)
         (Coefficient.{u} l Ω M) (coefficientInclusion l Ω E M (h.trans k)) f).hom := by
-  rw [GeneralAlgebraicallyClosedCoefficients.associator_formula l Ω Y E L M h k,
-    GeneralAlgebraicallyClosedCoefficients.associator_formula l Ω X E L M h k]
-  delta GeneralAlgebraicallyClosedCoefficients.normalizedAssociator transition
-  dsimp (config := { instances := true }) only [stageCategory, Stage]
-  exact scalar_tower_nat l
-    (Coefficient.{u} l Ω E) (Coefficient.{u} l Ω L) (Coefficient.{u} l Ω M)
-    (coefficientInclusion l Ω E L h) (coefficientInclusion l Ω L M k)
-    (coefficientInclusion l Ω E M (h.trans k))
-    ((AlgebraicallyClosedCoefficients.coefficientInclusion_laws l Ω).2 E L M h k) f
+  #count_heartbeats
+    rw [GeneralAlgebraicallyClosedCoefficients.associator_formula l Ω Y E L M h k,
+      GeneralAlgebraicallyClosedCoefficients.associator_formula l Ω X E L M h k]
+    delta GeneralAlgebraicallyClosedCoefficients.normalizedAssociator transition
+    exact scalar_tower_nat l
+      (Coefficient.{u} l Ω E) (Coefficient.{u} l Ω L) (Coefficient.{u} l Ω M)
+      (coefficientInclusion l Ω E L h) (coefficientInclusion l Ω L M k)
+      (coefficientInclusion l Ω E M (h.trans k))
+      ((AlgebraicallyClosedCoefficients.coefficientInclusion_laws l Ω).2 E L M h k) f
 
 private theorem canonical_coherent {X Y : Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (l : X.residueField x)]
