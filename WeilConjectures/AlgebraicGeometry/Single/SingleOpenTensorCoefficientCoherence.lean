@@ -33,9 +33,7 @@ attribute [local irreducible] Scheme.Modules.tensorPullback
   Scheme.Modules.tensorPullbackCompositionIso Scheme.Modules.tensorPullbackObj
 attribute [local instance_reducible] Scheme.Modules TopCat.Sheaf
 attribute [local implicit_reducible] Scheme.Modules.Hom DerivedCategory
-  Functor.mapHomologicalComplex HomotopyCategory Functor.mapHomotopyCategory
-  HomotopyCategory.quotient DerivedCategory.Q DerivedCategory.Qh
-  HomologicalComplexUpToQuasiIso.Qh
+  HomotopyCategory DerivedCategory.Q DerivedCategory.Qh
   CochainComplex.singleFunctors DerivedCategory.singleFunctors
   HomotopyCategory.singleFunctors SingleFunctors.postcomp
 
