@@ -2,15 +2,13 @@ name: Lean Action CI
 
 on:
   # Only the default branch: a push to a branch with an open PR is already
-  # covered by the `pull_request` trigger, and building it twice ties up the
-  # shared self-hosted runner pool for no benefit.
+  # covered by the `pull_request` trigger.
   push:
     branches:
       - master
   # Only pull requests into `master`. Agent pull requests into the integration branch
   # `slopmaster2` are built in full with `--wfail` by the maintainer's merge pipeline before
-  # they land, so building every push to them here only queued the shared runner for hours
-  # in front of `master` pull requests.
+  # they land.
   pull_request:
     branches:
       - master
@@ -20,30 +18,39 @@ on:
 permissions:
   contents: read # Read access to repository contents
 
-# One in-flight build per PR (and one per branch for pushes): a superseded
-# build is cancelled instead of queueing ahead of everything else on the
-# shared runners. Keyed on the PR number when there is one; `github.ref`
-# covers `push` and `workflow_dispatch`.
+# One in-flight build per PR (and one per branch for pushes): a superseded build is cancelled.
 concurrency:
   group: ${{ github.repository }}-lean-ci-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
+# The project's build cache: the cluster's Lake artifact cache, served publicly at
+# https://cache.fuxi.merten.dev (nixos-config: kuafu/lake-cache.nix, fuxi/lake-cache.nix).
+# Reading needs no credentials; uploading is S3 with the `LAKE_CACHE_KEY` secret.
+env:
+  LAKE_CACHE_ENDPOINT: https://cache.fuxi.merten.dev/lake-cache
+  LAKE_CACHE_REPO: formal-arithmetic-geometry/weil-conjectures
+
 jobs:
   build:
-    runs-on: self-hosted
+    # GitHub-hosted: 4 cores, 16 GB RAM. What makes that enough is the cache: a pull request
+    # compiles only the modules its changes touch, master's build being in the cache.
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
 
     steps:
-      # `clean: false`: by default checkout runs `git clean -ffdx`, which deletes
-      # `.lake/` and made every run compile the whole project from scratch. Lake's
-      # traces decide what is stale, so keeping the build between runs is safe.
-      - uses: actions/checkout@v5
-        with:
-          clean: false
+      # A full build is ~19 GB of .olean files plus ~8 GB of packages. The hosted image has
+      # far less free disk than that until the preinstalled SDKs we never use are removed.
+      - name: Free disk space
+        run: |
+          df -h /
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL \
+            /usr/local/share/boost /usr/local/.ghcup /usr/share/swift /usr/local/share/powershell
+          sudo docker image prune --all --force >/dev/null 2>&1 || true
+          df -h /
 
-      # elan, the toolchain and the Mathlib cache; the build is the step below.
-      # No GitHub cache: the self-hosted runner's workspace survives between
-      # runs, and lean-action's GitHub cache tars the whole `.lake` on every
-      # run (keyed on the commit, so it never hits).
+      - uses: actions/checkout@v5
+
+      # elan, the toolchain and the Mathlib cache; the build is a step of its own below.
       - uses: leanprover/lean-action@v1
         with:
           build: false
@@ -51,52 +58,77 @@ jobs:
           lint: false
           use-github-cache: false
 
-      # The project's own oleans from the cluster's Lake cache (Garage on the
-      # k3s cluster), which holds the builds of `slopmaster2`. A pull request
-      # from `slopmaster2` then compiles only what its merge commit changes,
-      # instead of every module of the project. Best effort: on a miss the
-      # build below simply compiles more.
-      - name: Fetch the project's build from the cluster's Lake cache
+      # Lake's system configuration for the cache, and the project's own outputs from it: the
+      # mappings of HEAD's nearest uploaded ancestor (artifacts are fetched lazily, during the
+      # build). `lake cache` runs as the toolchain's own binary with ELAN_TOOLCHAIN unset, so that
+      # the revision scope is named after Lean's version ("leanprover--lean4---4.33.1") as the
+      # cluster's uploaders name it; through elan the two sides would never find each other's
+      # uploads. Best effort: on a miss the build simply compiles more.
+      - name: Fetch the project's build from the Lake cache
         continue-on-error: true
         run: |
           set -euo pipefail
           config="$RUNNER_TEMP/lake-config.toml"
-          cat > "$config" <<'TOML'
-          cache.defaultService = "garage"
+          cat > "$config" <<TOML
+          cache.defaultService = "fuxi"
+          cache.defaultUploadService = "fuxi"
 
           [[cache.service]]
-          name = "garage"
+          name = "fuxi"
           kind = "s3"
-          artifactEndpoint = "http://13.140.132.28:3900/lake-cache/a"
-          revisionEndpoint = "http://13.140.132.28:3900/lake-cache/r"
+          artifactEndpoint = "$LAKE_CACHE_ENDPOINT/a"
+          revisionEndpoint = "$LAKE_CACHE_ENDPOINT/r"
           TOML
-          echo "LAKE_CONFIG=$config" >> "$GITHUB_ENV"
-          echo "LAKE_CACHE_DIR=$HOME/.cache/lake" >> "$GITHUB_ENV"
-          export LAKE_CONFIG="$config" LAKE_CACHE_DIR="$HOME/.cache/lake"
-          # Downloads older than two weeks: what is still needed comes again.
-          find "$LAKE_CACHE_DIR" -type f -mtime +14 -delete 2>/dev/null || true
-          env -u ELAN_TOOLCHAIN "$(elan which lake)" cache get \
-            --repo formal-arithmetic-geometry/weil-conjectures --max-revs 30
+          {
+            echo "LAKE_CONFIG=$config"
+            echo "LAKE_CACHE_DIR=$HOME/.cache/lake"
+            echo "LAKE_ARTIFACT_CACHE=true"
+          } >> "$GITHUB_ENV"
+          export LAKE_CONFIG="$config" LAKE_CACHE_DIR="$HOME/.cache/lake" LAKE_ARTIFACT_CACHE=true
+          env -u ELAN_TOOLCHAIN "$(elan which lake)" cache get --mappings-only \
+            --repo "$LAKE_CACHE_REPO" --max-revs 30
 
-      # Four concurrent Lean processes: the algebraic-geometry files peak at
-      # about 5.5 GiB each, and the runner VM has 32 GiB. This Lake has no jobs
-      # flag; its scheduler runs on Lean's thread pool, which this sizes.
+      # Two concurrent Lean processes: the algebraic-geometry files peak at about 5.5 GiB each,
+      # and the runner has 16 GiB. This Lake has no jobs flag; its scheduler runs on Lean's
+      # thread pool, which LEAN_NUM_THREADS sizes. `--wfail`: modules compiled here must be
+      # warning-free (master's full from-scratch build is, and cached modules come from it).
+      # `-o` lists the build's outputs, for the upload below.
       - name: Build
         env:
-          LEAN_NUM_THREADS: "4"
-        run: lake build
+          LEAN_NUM_THREADS: "2"
+        run: lake build --wfail -o "$RUNNER_TEMP/lake-map.jsonl"
 
-      # Lake writes a module's `.setup.json` (its import closure, as absolute
-      # paths, about 2 MB) just before compiling it and reads it only then.
-      # Thousands of them fill the runner's disk.
+      # Lake writes a module's `.setup.json` (its import closure, ~2 MB) just before compiling it
+      # and never reads it again; thousands of them fill the runner's disk.
       - name: Drop the compiler's setup files
         if: always()
         run: find .lake/build -name '*.setup.json' -delete 2>/dev/null || true
 
-      # Same check as `.orchestra/validation.sh`: every tracked `.lean` file
-      # under `WeilConjectures/` must be imported by `WeilConjectures.lean`,
-      # otherwise it is silently never built. Runs after `lean-action` so that
-      # the toolchain and mathlib (which provides `mk_all`) are already in
-      # place; `--check` only reports, it does not rewrite the file.
+      # Same check as `.orchestra/validation.sh`: every tracked `.lean` file under
+      # `WeilConjectures/` must be imported by `WeilConjectures.lean`, otherwise it is silently
+      # never built. `--check` only reports, it does not rewrite the file.
       - name: Check all files are imported
         run: lake exe mk_all --lib WeilConjectures --git --check
+
+      # Upload the build, filed under this commit, so that the next pull request starts from it.
+      # Only for master (pushes and manual runs), whose commits are what later builds descend
+      # from; a pull request's merge commit is never an ancestor of anything. Mappings whose
+      # artifacts are not in the local store are dropped first: `lake cache put` aborts on the
+      # first missing one.
+      - name: Upload the build to the Lake cache
+        if: >-
+          success() && github.ref == 'refs/heads/master' &&
+          (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+        env:
+          LAKE_CACHE_KEY: ${{ secrets.LAKE_CACHE_KEY }}
+        run: |
+          set -euo pipefail
+          if [ -z "$LAKE_CACHE_KEY" ]; then
+            echo "::warning::LAKE_CACHE_KEY is not set; not uploading"; exit 0
+          fi
+          map="$RUNNER_TEMP/lake-map.jsonl"
+          perl -i -ne 'BEGIN{$d=shift} if($.==1 || !/\.ltar/){print; next}
+            my @a=/"([0-9a-f]+\.ltar)"/g; print unless grep { !-e "$d/artifacts/$_" } @a' \
+            "$LAKE_CACHE_DIR" "$map"
+          echo "uploading $(( $(grep -c . "$map") - 1 )) module mappings"
+          env -u ELAN_TOOLCHAIN "$(elan which lake)" cache put "$map" --repo "$LAKE_CACHE_REPO"
