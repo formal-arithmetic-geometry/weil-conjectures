@@ -371,27 +371,25 @@
   StratumCompletionUnitRestriction, then continue downstream as the brief requires.
 - Fix log: /home/ubuntu/u9/bz/FIXES-BZ995.md. No local Lean/Lake or forbidden proof shortcuts.
 
-# BZ1021 in progress
+# BZ1021 complete
 
-- Branch: u9/BZ1021; starting commit 203ea75a45628a5a18c524c66580a676a0da3d5c.
-- The user instructed continuation after the explicit BertiniNoether prerequisite-import proposal.
-  Applied that prepared import-only patch; DegreeZero's umbrella import is also removed.
-- The first remote build confirmed the Sheaf.H.δ collision through SlicingFlat and BertiniNoether.
-- All theorem statements, definitions, proofs, and docstrings are unchanged.
-- Next: validate BertiniNoether and DegreeZero with ucheck-bump, then direct importers.
-- Fix record: /home/ubuntu/u9/bz/FIXES-BZ1021.md; full first build log:
-  /home/ubuntu/u9/bz/BUILD-BZ1021-1-full.log.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
-
-- Assigned DegreeZero is now green and sorry-free at source b1c1890653a9221b928af7f85aac476908c7d89d.
-  ucheck-bump rc=0, failed=0, 7091 jobs; DegreeZero rebuilt in 62 seconds.
-- BertiniNoether's narrower imports exposed three missing imports in GenericIrreducibility;
-  added the defining Mathlib modules explicitly. Both prerequisites now build.
-- All Lean changes so far are imports only; all pre-existing proof/resource settings are unchanged.
-- Next: build all five direct importers, applying the known umbrella-import fix to Induction.
-
-- Downstream batch completed: DegreeZero, ConnectedFibresConstantDegreeZero, and
-  Derived.Exchange.Basic rebuilt green. Three other direct importers are blocked
-  by five unowned dependencies (BZ1017–BZ1020 and BZ1022); no fixes made in those files.
-- Reverted the unvalidated Induction import edit because its dependencies block it.
-- Next: the two direct importers of the newly green modules, then final verification.
+- Assigned DegreeZero is green and sorry-free on Lean v4.35.0-rc3 / Mathlib b63f6e8a.
+- Final ucheck-bump: rc=0, failed=0, 7133 jobs on poolb:43.157.184.90.
+  Validated source commit: 5105e1aa97f167d0ab5bb3ea955ab6af57e22c65.
+- Green modules: RingTheory.BertiniNoether, RingTheory.GenericIrreducibility,
+  SixFunctors.Etale.SmoothBaseChange.DegreeZero,
+  AlgebraicGeometry.ProperBaseChange.ConnectedFibresConstantDegreeZero,
+  and SixFunctors.Etale.Derived.Exchange.Basic (all under WeilConjectures).
+- The user instructed continuation after the concrete BertiniNoether import proposal.
+  Removed the colliding umbrella imports in DegreeZero and BertiniNoether; supplied
+  specific public Mathlib imports in BertiniNoether and GenericIrreducibility.
+- All Lean changes are imports only. Statements, definitions, proofs, docstrings,
+  and existing resource settings are unchanged; no declarations deleted.
+- All five direct importers and the next layer of the two green importers were checked.
+  Five downstream targets are blocked by dependencies owned by BZ1017–BZ1020 and BZ1022.
+  Their exact errors and import paths are recorded; no edits retained in blocked modules.
+- All five machine rewrite rules reproduce the final Lean files exactly from the baseline.
+- Full final log: /home/ubuntu/u9/bz/BUILD-BZ1021-final-green-full.log.
+- Records: /home/ubuntu/u9/bz/FIXES-BZ1021.md and /home/ubuntu/u9/state/BZ1021.DONE.
+- No local Lean/Lake, proof placeholders, custom axioms, trust bypasses, profiler probes,
+  or heartbeat increases. All ucheck calls finished. This commit changes documentation only.
