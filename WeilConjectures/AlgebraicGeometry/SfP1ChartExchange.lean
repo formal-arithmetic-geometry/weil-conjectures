@@ -397,7 +397,8 @@ private theorem raw_single_coherence
     [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     [PreservesFiniteLimits H] [PreservesFiniteColimits H] (e : H ≅ F ⋙ G) :
     Functor.whiskerLeft (DerivedCategory.singleFunctor C 0)
-        (Functor.mapDerivedCategoryNatIso e ≪≫ (Functor.mapDerivedCategoryCompIso F G).symm).hom ≫
+        (Functor.mapDerivedCategoryNatIso e ≪≫
+          (Functor.mapDerivedCategoryCompIso F G).symm).hom ≫
       Functor.whiskerRight (F.mapDerivedCategorySingleFunctor 0).hom G.mapDerivedCategory ≫
       Functor.whiskerLeft F (G.mapDerivedCategorySingleFunctor 0).hom =
       (H.mapDerivedCategorySingleFunctor 0).hom ≫
