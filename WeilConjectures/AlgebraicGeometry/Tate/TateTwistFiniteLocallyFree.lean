@@ -174,10 +174,10 @@ private theorem tateLineDerivedInverse (X : Scheme.{u})
   have b : G ⋙ F ≅ 𝟭 _ := by
     simpa only [neg_neg] using (signedLineTensor_equivalence.{u} X R L (-m)).2.some
   have da : F.mapDerivedCategory ⋙ G.mapDerivedCategory ≅ 𝟭 _ :=
-    (Functor.mapDerivedCategoryCompIso F G).symm ≪≫
+    Functor.mapDerivedCategoryCompIso F G ≪≫
       Functor.mapDerivedCategoryNatIso a ≪≫ Functor.mapDerivedCategoryIdIso _
   have db : G.mapDerivedCategory ⋙ F.mapDerivedCategory ≅ 𝟭 _ :=
-    (Functor.mapDerivedCategoryCompIso G F).symm ≪≫
+    Functor.mapDerivedCategoryCompIso G F ≪≫
       Functor.mapDerivedCategoryNatIso b ≪≫ Functor.mapDerivedCategoryIdIso _
   exact ⟨CategoryTheory.Equivalence.mk F.mapDerivedCategory G.mapDerivedCategory
     da.symm db, rfl, rfl⟩
