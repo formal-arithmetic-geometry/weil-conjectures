@@ -1251,7 +1251,7 @@ private theorem exact_of_componentwise
     (h : ∀ s : ShortComplex B, s.Exact ↔ ∀ n, (s.map (E n)).Exact)
     (e : ∀ n, F ⋙ E n ≅ T n ⋙ H n) :
     PreservesFiniteLimits F ∧ PreservesFiniteColimits F := by
-  apply ((Functor.exact_tfae F).out 1 3).mp
+  apply ((Functor.exact_tfae F).out 2 4).mp
   intro s hs
   apply (h (s.map F)).mpr
   intro n
@@ -1484,7 +1484,7 @@ Source: Stacks 0D6D (blueprint: def-sp-varying-ring-operations). -/
 def gComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     G R φ (f ≫ g) ≅ G R φ g ⋙ G R φ f :=
   Functor.mapDerivedCategoryNatIso (moduleGComp R φ f g) ≪≫
-    Functor.mapDerivedCategoryCompIso (pull R φ g) (pull R φ f)
+    (Functor.mapDerivedCategoryCompIso (pull R φ g) (pull R φ f)).symm
 
 /-- Proper direct-image composition is the conjugate of inverse-image composition.
 Source: Stacks 0D6D (blueprint: def-sp-varying-ring-operations). -/
@@ -2203,7 +2203,7 @@ def moduleJComp {U V X : Scheme.{u}} (i : U ⟶ V) (j : V ⟶ X)
 Source: Stacks 0F7D (blueprint: def-sp-varying-ring-operations). -/
 def jComp {U V X : Scheme.{u}} (i : U ⟶ V) (j : V ⟶ X)
     [IsOpenImmersion i] [IsOpenImmersion j] : J R φ i ⋙ J R φ j ≅ J R φ (i ≫ j) :=
-  (Functor.mapDerivedCategoryCompIso (extension R φ i) (extension R φ j)).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso (extension R φ i) (extension R φ j)) ≪≫
     Functor.mapDerivedCategoryNatIso (moduleJComp R φ i j)
 
 /-- Identity extension with its canonical adjoint normalization.
@@ -2227,9 +2227,9 @@ def evalG {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     StrictTower.modulePullback_finiteLimits (R n) f
   letI : PreservesFiniteColimits (StrictTower.modulePullback (R n) f) :=
     StrictTower.modulePullback_finiteColimits (R n) f
-  (Functor.mapDerivedCategoryCompIso (pull R φ f) (eval R φ X n)).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso (pull R φ f) (eval R φ X n)) ≪≫
     Functor.mapDerivedCategoryNatIso (moduleEvalG R φ f n) ≪≫
-      Functor.mapDerivedCategoryCompIso (eval R φ Y n)
+      (Functor.mapDerivedCategoryCompIso (eval R φ Y n)).symm
         (StrictTower.modulePullback (R n) f)
 
 /-- The ordinary exact-level adjunction, derived with its original unit.

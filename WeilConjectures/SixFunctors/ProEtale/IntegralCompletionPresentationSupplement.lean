@@ -67,10 +67,10 @@ def derivedSquare (n : ℕ) (e : FiniteEncoding l E X n)
   letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   letI := scalarReductionRestrictionLimits.{u, u} l E X n
   letI := scalarReductionRestrictionColimits.{u, u} l E X n
-  (Functor.mapDerivedCategoryCompIso
+  ((Functor.mapDerivedCategoryCompIso).symm
     (Mod.comap (AdicCompletion.quotient l E X n)) (A.modules.functor)).symm ≪≫
     Functor.mapDerivedCategoryNatIso a ≪≫
-      Functor.mapDerivedCategoryCompIso e.ordinary.functor
+      (Functor.mapDerivedCategoryCompIso e.ordinary.functor).symm
         (scalarReductionRestriction.{u, u} l E X n)
 
 /-- A comparison in D(R_n), retaining the finite coefficient action.

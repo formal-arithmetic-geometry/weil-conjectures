@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 import WeilConjectures.AlgebraicGeometry.FormalSystemsPushPullCore
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Comparison of a formal system with a proper pushforward
 
