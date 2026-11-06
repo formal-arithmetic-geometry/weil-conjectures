@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Derived.DerivedLocalClassEdgeMap
 public import WeilConjectures.AlgebraicGeometry.Derived.DerivedSingleAdjunctionTranspose
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.CategoryTheory.RightDerivedSingleZeroUnit
 import all WeilConjectures.AlgebraicGeometry.PinnedDerivedAdjunctionShifts
 
@@ -49,7 +51,7 @@ private theorem single_unit_iso
     have : IsIso (H₀.map (DerivedCategory.Q.map
         ((F.mapCochainComplexSingleFunctor 0).inv.app M)) ≫
       H₀.map (η.app ((HomotopyCategory.singleFunctor C 0).obj M))) := by
-      simpa only [Functor.rightDerivedSingleUnit, Functor.map_comp,
+      simpa only [Functor.rightDerivedSingleUnit, cast_eq, Functor.map_comp,
         Functor.comp_obj, HomotopyCategory.singleFunctor, HomotopyCategory.singleFunctors,
         CochainComplex.singleFunctor, CochainComplex.singleFunctors,
         SingleFunctors.postcomp] using hzero
@@ -86,6 +88,7 @@ theorem topEdgeSingleDirectImageMap_isIso_homology {T S : Scheme.{u}} (g : T ⟶
   let F := RingedSpace.moduleDirectImage g.toLRSHom.toShHom
   have h := single_unit_iso F M q
   unfold topEdgeSingleDirectImageMap
+  simp only [cast_eq]
   rw [Functor.map_comp]
   infer_instance
 

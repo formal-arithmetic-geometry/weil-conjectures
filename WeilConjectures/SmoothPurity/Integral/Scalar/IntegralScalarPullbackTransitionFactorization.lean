@@ -312,7 +312,6 @@ theorem integralScalarPullbackTransitionFactorization {X Y : AlgebraicGeometry.S
               (unrestrictedIntegralTensorSection l E Y m (P.X i) (op V) 1 x))))
     erw [hα, scalar_map_tensor, pullback_transition_generator, hd]
     dsimp only [unrestrictedIntegralFiniteComplex, Functor.mapHomologicalComplex_obj_X]
-    rfl
   · apply (cancel_epi d.hom).mp
     rw [← Category.assoc, d.hom_inv_id, Category.id_comp]
     apply scalar_level_hom_ext l E L ι f P
@@ -331,6 +330,5 @@ theorem integralScalarPullbackTransitionFactorization {X Y : AlgebraicGeometry.S
               (unrestrictedIntegralTensorSection l E Y n (P.X i) (op V) 1 x))))
     erw [hα, hd, pullback_transition_generator]
     dsimp only [unrestrictedIntegralFiniteComplex, Functor.mapHomologicalComplex_obj_X]
-    rfl
 
 end WeilConjectures

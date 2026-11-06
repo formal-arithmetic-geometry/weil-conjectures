@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.MixedRepForward.MixedRepresentationGeneral
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.MixedRepForward.ForwardTransportGeneral
 import WeilConjectures.CategoryTheory.FiniteOpenMixedTensorRepresentativeCounit
 
@@ -141,5 +143,6 @@ theorem finiteOpenMixedTensorRepresentative
     CategoryTheory.Functor.mapHomotopyCategoryFactors]
   erw [CategoryTheory.Functor.map_id, Category.id_comp,
     CategoryTheory.Functor.map_id, Category.comp_id, Category.comp_id]
+  simp only [cast_eq]
 
 end AlgebraicGeometry.ProEtale

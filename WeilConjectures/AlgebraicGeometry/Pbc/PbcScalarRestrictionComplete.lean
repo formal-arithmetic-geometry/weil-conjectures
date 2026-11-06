@@ -94,11 +94,11 @@ private def pbcScalarModelDerivedRestrictionIso (K : PbcCompletedDerived W (pbcI
       (pbcDerivedRestrict (WeilConjectures.completedCoefficientMap l E F i W)).obj
         ((pbcDerivedRestrict (WeilConjectures.purCoefficientIso l F W).inv).obj K) :=
   (Functor.mapDerivedCategoryCompIso (pbcRestrict (pbcScalarCoefficientMap l E F i W))
-      (pbcRestrict (WeilConjectures.purCoefficientIso l E W).inv)).symm.app K ≪≫
+      (pbcRestrict (WeilConjectures.purCoefficientIso l E W).inv)).app K ≪≫
     (Functor.mapDerivedCategoryNatIso (pbcScalarModelRestrictionIso l E F i W)).app K ≪≫
     (Functor.mapDerivedCategoryCompIso
       (pbcRestrict (WeilConjectures.purCoefficientIso l F W).inv)
-      (pbcRestrict (WeilConjectures.completedCoefficientMap l E F i W))).app K
+      (pbcRestrict (WeilConjectures.completedCoefficientMap l E F i W))).symm.app K
 
 
 private theorem scalarPrincipalMap

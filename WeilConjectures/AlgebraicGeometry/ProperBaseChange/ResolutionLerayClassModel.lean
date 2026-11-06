@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Derived.DerivedAdjunctionTopEdgeData
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import all WeilConjectures.AlgebraicGeometry.Local.LocalHypercohomologyClassUnit
 import all WeilConjectures.AlgebraicGeometry.Direct.DirectImageComplexUnit
 import WeilConjectures.AlgebraicGeometry.Direct.DirectImageResolutionNormalization
@@ -61,10 +63,10 @@ theorem resolutionLerayClassModel
     c.inv ≫ (RingedSpace.localLerayComparison f).app K ≫
         (RingedSpace.derivedLocalAbelianSections Y).map
           ((RingedSpace.topEdgeDirectImageComparison f K).hom ≫ e.hom) =
-      (F.rightDerivedFunctorOfQuasiIsoResolutionsUnit
+      cast (by rfl) ((F.rightDerivedFunctorOfQuasiIsoResolutionsUnit.{w}
         (RingedSpace.localSectionsEnoughKInjectives Y)).app
           ((HomotopyCategory.quotient _ (.up ℤ)).obj
-            ((D.mapHomologicalComplex (.up ℤ)).obj I)) := by
+            ((D.mapHomologicalComplex (.up ℤ)).obj I))) := by
   dsimp only
   let D := RingedSpace.moduleDirectImage f
   let : D.Additive := RingedSpace.moduleDirectImage_additive f
@@ -96,6 +98,6 @@ theorem resolutionLerayClassModel
   erw [← reassoc_of% hn]
   erw [← R.map_comp_assoc r.inv r.hom, Iso.inv_hom_id, R.map_id, Category.id_comp]
   rw [← hu]
-  simpa only [localComplexUnit_app_eq] using directImage_complex_unit f I
+  simpa only [localComplexUnit_app_eq, cast_eq] using directImage_complex_unit f I
 
 end AlgebraicGeometry
