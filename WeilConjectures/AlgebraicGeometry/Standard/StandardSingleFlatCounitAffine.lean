@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Standard.StandardSingleFlatCounitPresentation
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 import WeilConjectures.AlgebraicGeometry.AffineFlatModuleTensorFlat
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
@@ -119,9 +121,11 @@ private theorem affine_single_unit_iso
       (RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerivedFunctorUnit.app
         ((HomotopyCategory.quotient _ (.up ℤ)).obj
           ((CochainComplex.singleFunctor
-            (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj N))) := hi
+            (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj N))) := by
+    simpa only [cast_eq] using hi
   exact IsIso.of_isIso_comp_left (DerivedCategory.Q.map r) _
 
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 set_option maxHeartbeats 400000 in
 -- The scheme-module and ringed-space derived category instances need extra elaboration.
 /-- The single complex of the actual affine direct image realizes the pinned comparison.
