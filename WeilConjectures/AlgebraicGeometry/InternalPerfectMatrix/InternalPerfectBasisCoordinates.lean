@@ -5,8 +5,6 @@ Authors: Bin Wu
 -/
 module
 
-import all WeilConjectures.AlgebraicGeometry.AdmissibleScalarRealization.AdmissibleScalarRealizationExactSupplement
-
 public import WeilConjectures.AlgebraicGeometry.InternalPerfectMatrix.InternalPerfectOrdinaryMatrixData
 import WeilConjectures.CategoryTheory.FunctorFiniteMatrixCoordinates
 import WeilConjectures.AlgebraicGeometry.InternalPerfectMatrix.InternalPerfectRankOneCoordinates
@@ -125,11 +123,7 @@ theorem quotientIso_factor (W : Scheme.{u})
     (n : ℕ) (i : ℤ) :
     letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
     letI : (FiniteConstantModel.modelFunctor (A l E) W).Additive :=
-      by
-        have : IsPrincipalIdealRing (Padic.coefficientExtensionIntegers l E) :=
-          (Padic.coefficientExtensionIntegers_dvr l E).choose_spec.2.2.2.2.2.2.2.2.1
-        exact (AdmissibleScalarRealization.pid_scalar_assertions
-          (Padic.coefficientExtensionIntegers l E) W).2.1
+      (((AdmissibleScalarRealization.admissible_scalar_realization_exact l W).2.2.1 E).1.1).2.1
     let F := FiniteConstantModel.modelFunctor (A l E) W
     let G := Mod.extendScalars (AdicCompletion.quotient l E W n)
     let H := F ⋙ G
@@ -143,11 +137,7 @@ theorem quotientIso_factor (W : Scheme.{u})
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   let F := FiniteConstantModel.modelFunctor (A l E) W
   let : F.Additive :=
-    by
-      have : IsPrincipalIdealRing (Padic.coefficientExtensionIntegers l E) :=
-        (Padic.coefficientExtensionIntegers_dvr l E).choose_spec.2.2.2.2.2.2.2.2.1
-      exact (AdmissibleScalarRealization.pid_scalar_assertions
-        (Padic.coefficientExtensionIntegers l E) W).2.1
+    (((AdmissibleScalarRealization.admissible_scalar_realization_exact l W).2.2.1 E).1.1).2.1
   let G := Mod.extendScalars (AdicCompletion.quotient l E W n)
   let S := ModuleCat.of (A l E) (ULift.{u + 1} (A l E))
   let r := Module.finrank (A l E) (P.X i)
@@ -191,11 +181,7 @@ theorem quotientIso_map (W : Scheme.{u})
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   let F := FiniteConstantModel.modelFunctor (A l E) W
   let : F.Additive :=
-    by
-      have : IsPrincipalIdealRing (Padic.coefficientExtensionIntegers l E) :=
-        (Padic.coefficientExtensionIntegers_dvr l E).choose_spec.2.2.2.2.2.2.2.2.1
-      exact (AdmissibleScalarRealization.pid_scalar_assertions
-        (Padic.coefficientExtensionIntegers l E) W).2.1
+    (((AdmissibleScalarRealization.admissible_scalar_realization_exact l W).2.2.1 E).1.1).2.1
   let G := Mod.extendScalars (AdicCompletion.quotient l E W n)
   let H := F ⋙ G
   let U := ModuleCat.uliftFunctor.{u + 1, u} (A l E)
