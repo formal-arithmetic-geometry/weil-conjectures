@@ -50,9 +50,8 @@ lemma preimageIso_liftSquareWithComparisons_comp :
     Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_inv,
     Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app,
-    Category.id_comp, Category.comp_id, Functor.map_comp, Functor.map_id,
-    Functor.comp_obj, Functor.comp_map, Category.assoc, FullSubcategory.comp_hom,
-    FullSubcategory.id_hom]
+    Category.id_comp, Category.comp_id, Functor.map_comp,
+    Functor.comp_obj, Category.assoc, FullSubcategory.comp_hom]
   rw [preimageIso_liftSquareWithComparisons_hom_app_hom]
   simp only [Category.assoc]
   have hn := cG'.inv.naturality
@@ -92,7 +91,7 @@ lemma compForgetIso_conjugate :
   simp only [compForgetIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Functor.associator_hom_app, Functor.associator_inv_app,
-    Category.id_comp, Category.comp_id, Functor.map_comp, Functor.map_id,
+    Category.id_comp, Category.comp_id, Functor.map_comp,
     Functor.comp_obj, Functor.comp_map, Category.assoc]
   simp only [← Functor.map_comp_assoc, Iso.inv_hom_id_app_assoc]
 
@@ -109,6 +108,6 @@ lemma isoWhisker_conjugate_cancel (a : U ≅ V) (b : T ≅ S) (e : F ⋙ U ≅ T
         (isoWhiskerLeft F a.symm ≪≫ e ≪≫ isoWhiskerRight b F') ≪≫
         isoWhiskerRight b.symm F' = e := by
   ext K
-  simp [Category.assoc, ← F'.map_comp]
+  simp [← F'.map_comp]
 
 end CategoryTheory.Functor

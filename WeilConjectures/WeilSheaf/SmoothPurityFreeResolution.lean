@@ -33,6 +33,8 @@ variable {C : Type*} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C]
 
 /-- Bijectivity of `u ↦ RW u ≫ d` on morphisms out of `X` is invariant under isomorphisms
 `X' ≅ X`. -/
+omit [IsGrothendieckAbelian.{v} C] [HasDerivedCategory.{v} C] [RW.Additive] [RW.CommShift ℤ]
+  [RW.IsTriangulated] in
 lemma bijective_map_comp_of_iso {H : DerivedCategory (IsoAlgebra F)}
     {L' : DerivedCategory (IsoAlgebra G)} (d : RW.obj H ⟶ L')
     {X X' : DerivedCategory (IsoAlgebra F)} (i : X' ≅ X)

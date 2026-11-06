@@ -48,18 +48,33 @@ variable {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
   (eL : L ⋙ H ≅ G ⋙ L) (eR : R ⋙ G ≅ H ⋙ R)
 
 /-- The derived exchange is the square isomorphism of `MapDerivedCategoryMate`. -/
+omit [MonoidalPreadditive C] [HasCountableCoproducts C]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
+  [HasColimitsOfShape ℤ C] [HasExactColimitsOfShape ℤ C]
+  [∀ (X : C), PreservesColimitsOfShape ℤ ((curriedTensor C).obj X)]
+  [∀ (X : C), PreservesColimitsOfShape ℤ ((curriedTensor C).flip.obj X)]
+  [Abelian.HasFunctorialFlatResolution C] [Abelian.HasKInjectiveResolutions D] in
 lemma derivedExactCommIso_eq_mapDerivedCategorySquareIso :
     derivedExactCommIso eR = Functor.mapDerivedCategorySquareIso eR := by
   unfold derivedExactCommIso
   rw [Iso.trans_assoc]
 
 /-- The square isomorphism of the inverse exchange is the inverse of the derived exchange. -/
+omit [MonoidalPreadditive C] [HasCountableCoproducts C]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
+  [HasColimitsOfShape ℤ C] [HasExactColimitsOfShape ℤ C]
+  [∀ (X : C), PreservesColimitsOfShape ℤ ((curriedTensor C).obj X)]
+  [∀ (X : C), PreservesColimitsOfShape ℤ ((curriedTensor C).flip.obj X)]
+  [Abelian.HasFunctorialFlatResolution C] [Abelian.HasKInjectiveResolutions D] in
 lemma mapDerivedCategorySquareIso_symm_hom_app (c : DerivedCategory C) :
     (Functor.mapDerivedCategorySquareIso eL.symm).hom.app c =
       (derivedExactCommIso eL).inv.app c := by
   simp only [Functor.mapDerivedCategorySquareIso, derivedExactCommIso, Iso.trans_hom, Iso.trans_inv,
-    Iso.symm_hom, Iso.symm_inv, Functor.mapDerivedCategoryNatIso_symm, NatTrans.comp_app,
-    Category.assoc]
+    Iso.symm_hom, Iso.symm_inv, Functor.mapDerivedCategoryNatIso_symm, NatTrans.comp_app]
 
 /-- **Derived exchanges are mates**: if `eR` is the right adjoint exchange of `eL`, the derived
 exchange of `eR` is the right adjoint exchange of the derived exchange of `eL` for the levelwise
