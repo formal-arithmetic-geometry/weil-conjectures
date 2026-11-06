@@ -187,6 +187,7 @@ lemma leftDerivedUpperStar_map_singleFunctorObjUnitIso_inv_comp (g : X ⟶ Y) :
     HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift_hom,
     Quotient.lift.isLift_inv, NatTrans.id_app]
   erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+  rfl
 
 /-- The identification `Lg^* M_Y ≅ M_X` of constant complexes
 (`AlgebraicGeometry.Etale.leftDerivedUpperStarSingleConstantSheafIso`) is natural in `M`. -/
