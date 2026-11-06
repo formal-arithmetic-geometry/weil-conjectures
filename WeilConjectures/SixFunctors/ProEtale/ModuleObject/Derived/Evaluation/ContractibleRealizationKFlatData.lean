@@ -65,7 +65,7 @@ private theorem sectionExtension_map_tmul
     (M : PresheafOfModules.{u + 1} (R ⋙ forget₂ CommRingCat.{u + 1} RingCat.{u + 1}))
     {X Y : Cᵒᵖ} (f : X ⟶ Y) (s : S.obj X) (m : M.obj X) :
     ((sectionExtension φ).obj M).map f (s ⊗ₜ[R.obj X, (φ.app X).hom] m) =
-      S.map f s ⊗ₜ[R.obj Y, (φ.app Y).hom] M.map f m :=
+      S.map f s ⊗ₜ[R.obj Y, (φ.app Y).hom] (show M.obj Y from M.map f m) :=
   SheafOfModules.changeOfRingsMap_tmulOfUniverses.{u, u + 1, u + 1, u + 1} (J := ⊥)
     (bottomMap φ) (bottomModule M) f s m
 
