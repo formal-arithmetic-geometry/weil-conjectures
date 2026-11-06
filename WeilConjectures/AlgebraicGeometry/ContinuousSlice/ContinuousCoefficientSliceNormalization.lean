@@ -441,7 +441,7 @@ private theorem exactExtensionDerived {Y : Scheme.{u}}
   dsimp only [L, D]
   simp only [Category.assoc, ← NatTrans.naturality_assoc,
     ← Functor.map_comp_assoc, Iso.inv_hom_id_app]
-  erw [Functor.map_id, Functor.map_id]
+  erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id]
   simp only [Category.id_comp, Iso.inv_hom_id_app]
   exact congrArg (fun f ↦ d.hom.app (DerivedCategory.Q.obj P) ≫ f)
     (Category.comp_id (L.mapDerivedCategoryFactors.hom.app P))
