@@ -214,13 +214,13 @@ def etaleOriginOpenCoordinates {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion
       (ProEtale.openImmersionLowerShriek
         (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) j).mapDerivedCategory ⋙
           (sfIntrinsicDerivedEquivalence Y A).functor :=
-  (mapDerivedCategoryCompIso _ _).symm ≪≫
+  mapDerivedCategoryCompIso _ _ ≪≫
     mapDerivedCategoryNatIso
       ((sfIntrinsicModuleEquivalence X A).funInvIdAssoc
         (ProEtale.openImmersionLowerShriek
           (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) j ⋙
             (sfIntrinsicModuleEquivalence Y A).functor)) ≪≫
-    mapDerivedCategoryCompIso _ _
+    (mapDerivedCategoryCompIso _ _).symm
 
 /-- The termwise canonical open comparison in intrinsic constant coefficients.
 Source: Stacks Tag 09AF, retained blueprint Step 7
@@ -232,11 +232,11 @@ def etaleOriginOpenExtensionComparison {X Y : Scheme.{u}} (j : X ⟶ Y)
         etaleOriginOpenComparison A Y ≅
       etaleOriginOpenComparison A X ⋙ sfIntrinsicDerivedOpen A j :=
   isoWhiskerRight
-      ((mapDerivedCategoryCompIso _ _).symm ≪≫
+      (mapDerivedCategoryCompIso _ _ ≪≫
         mapDerivedCategoryNatIso
           (ProEtale.openImmersionLowerShriekComparisonUpperStarIso
             (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) j) ≪≫
-        mapDerivedCategoryCompIso _ _) (sfIntrinsicDerivedEquivalence Y A).functor ≪≫
+        (mapDerivedCategoryCompIso _ _).symm) (sfIntrinsicDerivedEquivalence Y A).functor ≪≫
     isoWhiskerLeft
       (ProEtale.comparisonUpperStar
         (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X).mapDerivedCategory
