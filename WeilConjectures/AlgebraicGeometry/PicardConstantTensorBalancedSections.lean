@@ -151,8 +151,9 @@ theorem picardConstantTensorBalancedSections_map
           ⊗ₜ[Γ(Y, U.unop)] t))
       rw [he]
       change s ⊗ₜ[k] (show scalarObj g G V from
-          (Y.presheaf.map i a) • G.val.map i t) =
-        s ⊗ₜ[k] (show scalarObj g G V from G.val.map i (a • t))
+          (Y.presheaf.map i a) • (show G.val.obj V from G.val.map i t)) =
+        s ⊗ₜ[k] (show scalarObj g G V from
+          G.val.map i ((show Γ(Y, U.unop) from a) • t))
       rw [G.val.map_smul]
       rfl
 
