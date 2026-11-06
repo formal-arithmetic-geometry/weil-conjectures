@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOrdinaryEvaluationComparisons
 import all WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 import all WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerProperOpenArrows
@@ -103,15 +105,15 @@ private theorem ordinaryOpenEvaluation_inverse (n : ℕ) {U X : Scheme.{u}}
     ordinaryOpenEvaluation R φ n j = (ordinaryOpenInverse R φ n j).symm := by
   unfold ordinaryOpenEvaluation
   rw [evalJ_inverse_localized]
-  have he : Functor.mapDerivedCategoryCompIso (extension R φ j) (eval R φ X n) ≪≫
+  have he : (Functor.mapDerivedCategoryCompIso (extension R φ j) (eval R φ X n)).symm ≪≫
       (Functor.mapDerivedCategorySquareIso (ordinaryOpenInverse R φ n j)).symm ≪≫
-      (Functor.mapDerivedCategoryCompIso (eval R φ U n)
-        (StrictTower.moduleJ (R n) j)).symm =
+      Functor.mapDerivedCategoryCompIso (eval R φ U n)
+        (StrictTower.moduleJ (R n) j) =
       Functor.mapDerivedCategoryNatIso (ordinaryOpenInverse R φ n j).symm := by
     apply Iso.ext
     simp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.trans_inv,
-      Iso.symm_hom, Iso.symm_inv, Category.assoc, Iso.hom_inv_id_assoc,
-      Iso.hom_inv_id, Category.comp_id]
+      Iso.symm_hom, Iso.symm_inv, Category.assoc, Iso.inv_hom_id_assoc,
+      Iso.inv_hom_id, Category.comp_id]
     exact (Functor.mapDerivedCategoryNatIso_symm (ordinaryOpenInverse R φ n j)).symm
   rw [he, recover_derived_iso]
 
@@ -179,7 +181,8 @@ private theorem single_unit_term
     DerivedCategory.Q.map _
   rw [← Functor.map_comp, ← Functor.map_comp]
   congr 1
-  ext n
+  apply HomologicalComplex.hom_ext
+  intro n
   by_cases hn : n = 0
   · subst n
     simp only [CochainComplex.singleFunctor, CochainComplex.singleFunctors, Functor.comp_obj,
