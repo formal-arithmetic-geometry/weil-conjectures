@@ -154,7 +154,8 @@ private theorem pcomp_heq
     (cG := @comp_preservesFiniteColimits _ _ _ _ _ _
       (VaryingRing.pull.{u} C τ g) (VaryingRing.pull.{u} C τ f)
       (VaryingRing.pullColimits.{u} C τ g) (VaryingRing.pullColimits.{u} C τ f)))
-    (by simp only [SemilinearProperOpen.P_eq]; rfl) hd hc
+    (by simp only [SemilinearProperOpen.P_eq]; rfl) hd
+    (symm_iso_heq _ _ (by simp only [pull_eq]; rfl) (by simp only [pull_eq]; rfl) hc)
 
 private theorem system_square_localization
     (C : ℕ → CommRingCat.{u + 1}) (τ : ∀ n : ℕ, C (n + 1) ⟶ C n)
@@ -167,7 +168,7 @@ private theorem system_square_localization
   apply Iso.ext
   simp only [Functor.mapDerivedCategorySquareIso, VaryingRing.gComp,
     Functor.mapDerivedCategoryNatIso_trans, Functor.mapDerivedCategoryNatIso_symm,
-    Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Category.assoc]
+    Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv, Category.assoc]
   rw [map_derived_transport (fun f : U ⟶ Z ↦ VaryingRing.pull.{u} C τ f) h.symm]
 
 private theorem system_square_heq
