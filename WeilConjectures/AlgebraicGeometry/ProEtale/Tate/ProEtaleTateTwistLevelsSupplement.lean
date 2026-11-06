@@ -123,7 +123,6 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 public import Mathlib.CategoryTheory.Localization.CalculusOfFractions
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
-import WeilConjectures.AlgebraicGeometry.Constant.ConstantZModScalarTensor
 import WeilConjectures.AlgebraicGeometry.FiniteDiscreteCondensedRing
 import WeilConjectures.AlgebraicGeometry.Finite.FiniteDiscreteSchemeRingSupplement
 import WeilConjectures.NumberTheory.Padics.IntegersModPow
@@ -249,35 +248,5 @@ The inclusion of the ideal generator gives N=0 in the quotient. These comparison
 commute with reduction of B and the root power maps, since each map applies to
 its indicated tensor factor. Thus the actual integral system has exactly the
 finite levels and transitions in the blueprint, with no replacement of the roots. -/
-theorem spIntegralTwistLevel_comparison (E : PadicAlgCl.FiniteIntermediateField ℓ) (n : ℕ) :
-    ∃ a : ZMod (ℓ ^ (n + 1)) →+* ULift.{u + 1} (spEllQuotient ℓ E n),
-      Nonempty ((spIntegralTwistLevel X ℓ E n).X ≅
-        (SheafOfModules.toSheaf _).obj
-          (Scheme.tateFiniteLine X ℓ (ULift.{u + 1} (spEllQuotient ℓ E n)) n a)) := by
-  let : CommRing (PadicAlgCl.integers ℓ E.1) := inferInstance
-  let B := spEllQuotient ℓ E n
-  let : CommRing B := Ideal.Quotient.commRing _
-  let : TopologicalSpace B := ⊥
-  let : DiscreteTopology B := ⟨rfl⟩
-  let : IsTopologicalRing B := DiscreteTopology.topologicalRing
-  let : Finite B := (spEllQuotient_finite_continuous ℓ E n).1
-  have hB : (ℓ ^ (n + 1) : B) = 0 := by
-    have h : (Ideal.Quotient.mk (spTateEllIdeal ℓ E n)) (ℓ ^ (n + 1)) = 0 :=
-      Ideal.Quotient.eq_zero_iff_mem.mpr (Ideal.subset_span (Set.mem_singleton _))
-    simpa only [map_pow, map_natCast] using h
-  have hB' : ((ℓ ^ (n + 1) : ℕ) : B) = 0 :=
-    (Nat.cast_pow ℓ (n + 1)).trans hB
-  let : CharP B (ringChar B) := ringChar.charP B
-  let b : ZMod (ℓ ^ (n + 1)) →+* B :=
-    ZMod.castHom (ringChar.dvd (R := B) hB') B
-  let a : ZMod (ℓ ^ (n + 1)) →+* ULift.{u + 1} B :=
-    ULift.ringEquiv.symm.toRingHom.comp b
-  obtain ⟨eR, heR⟩ := Profinite.finiteDiscreteCondensedRing_constant.{u} B
-  obtain ⟨eX, _⟩ := finiteDiscreteSchemeRing_constant.{u} B X eR heR
-  obtain ⟨eT⟩ := Scheme.constantZMod_scalarTensor X ℓ n (ULift.{u + 1} B) a
-    (Scheme.purTwistRootsModule X ℓ n)
-  refine ⟨a, ⟨?_⟩⟩
-  exact (eX.symm ⊗ᵢ
-    Iso.refl (Scheme.proEtaleRootsOfUnitySheaf X (ℓ ^ (n + 1)))) ≪≫ eT
 
 end AlgebraicGeometry.ProEtale

@@ -90,45 +90,5 @@ for each constructible homology sheaf, and transfer back along the same criterio
 The iso closure of the source sheaf property handles isomorphic homology models.
 No completeness, torsion-freeness, or finite Tor amplitude of K is used. The positive
 exponent includes n=0; zero objects and empty strata use the same truncation argument. -/
-theorem integralReduction_constantModelBoundedConstructible
-    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
-    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
-    (X : Scheme.{u}) [IsNoetherian X]
-    (K : DerivedCategory (AdicCompletion.Modules l E X))
-    (hK : constantModelBoundedConstructible (DerivedNakayama.integerRing l E) X K)
-    (n : ℕ) :
-    constantModelBoundedConstructible (DerivedNakayama.quotientRing l E (n + 1)) X
-      ((AdicCompletion.derivedReduction l E X n).obj K) := by
-  classical
-  let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
-  let A := Padic.coefficientExtensionRing l E (n + 1)
-  let : Finite A := Padic.finite_coefficientExtensionRing l E (n + 1) (by omega)
-  let : DiscreteTopology A := finiteTopology_discrete l E n
-  obtain ⟨e, _⟩ := FiniteDiscreteOrdinary.finiteCoefficientModelComparison A X
-  let adj := Mod.derivedExtendMapDerivedCategoryAdjunction (AdicCompletion.quotient l E X n)
-  let := adj.leftAdjointCommShift ℤ
-  have := adj.commShift_of_rightAdjoint ℤ
-  have : (AdicCompletion.derivedReduction l E X n).IsTriangulated :=
-    adj.isTriangulated_leftAdjoint
-  have : e.fixedDerived.functor.IsTriangulated := by
-    change (e.ordinary.functor ⋙ e.fixed.functor).mapDerivedCategory.IsTriangulated
-    infer_instance
-  let F := AdicCompletion.derivedReduction l E X n ⋙ e.fixedDerived.functor
-  let B := DerivedCategory.boundedConstructible
-    (ModuleCat.{u + 1} (ULift.{u + 1} A)) X
-  let Q := B.inverseImage F
-  let P := ObjectProperty.isoClosure
-    (IsConstantModelConstructible (DerivedNakayama.integerRing l E) X)
-  have hsingle (M : AdicCompletion.Modules l E X) (hM : P M) :
-      Q ((_root_.DerivedCategory.singleFunctor _ 0).obj M) := by
-    obtain ⟨M', hM', ⟨j⟩⟩ := hM
-    have h := (FiniteModelQuotient.finite_model_sheaf_quotient_constructible
-      l E X M' hM' n).choose_spec.2.2.1
-    have h' := (fixedCriterion A X e _).mp h
-    exact Q.prop_of_iso
-      ((_root_.DerivedCategory.singleFunctor _ 0).mapIso j).symm h'
-  have hQ : Q K := _root_.DerivedCategory.prop_of_bounded Q P hsingle K hK.1
-    (fun q ↦ ⟨_, hK.2 q, ⟨Iso.refl _⟩⟩)
-  exact (fixedCriterion A X e _).mpr hQ
 
 end AlgebraicGeometry.ProEtale

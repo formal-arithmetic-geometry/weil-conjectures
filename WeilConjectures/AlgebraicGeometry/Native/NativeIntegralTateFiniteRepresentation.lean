@@ -272,53 +272,5 @@ the derivative is ell^(n+1)*t^(ell^(n+1)-1), which is a unit on the root scheme
 because ell and t are units. Its indicated finite fibre power is finite etale
 and represents the finite product, since Yoneda preserves products.
 The construction works on arbitrary bases and on the empty base scheme. -/
-theorem spIntegralTwistLevel_finiteEtale_representation
-    (Y : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
-    [∀ y : Y, Invertible (ℓ : Y.residueField y)]
-    (E : PadicAlgCl.FiniteIntermediateField ℓ) (n : ℕ) :
-    ∃ V : Y.ProEt, IsFinite V.hom ∧ Etale V.hom ∧
-      Nonempty ((Scheme.ProEt.topology Y).uliftYoneda.{u + 1}.obj V ≅
-        (sheafCompose (Scheme.ProEt.topology Y) (forget AddCommGrpCat.{u + 1})).obj
-          (spIntegralTwistLevel Y ℓ E n).X) := by
-  classical
-  obtain ⟨a, ⟨e₀⟩⟩ := spIntegralTwistLevel_comparison Y ℓ E n
-  let A := ULift.{u + 1} (ZMod (ℓ ^ (n + 1)))
-  let B := ULift.{u + 1} (spEllQuotient ℓ E n)
-  let iAB : Algebra A B := (a.comp ULift.ringEquiv.toRingHom).toAlgebra
-  let : Module A B := iAB.toModule
-  obtain ⟨d, ⟨b⟩⟩ := quotient_basis ℓ E n a
-  let iFree : Module.Free A B := Module.Free.of_basis b
-  let iFin : Module.Finite A B := Module.Finite.of_basis b
-  let J := Scheme.ProEt.topology Y
-  obtain ⟨k, β, hβ⟩ := @constantFiniteFree_sectionBasis.{u + 1, u, 0}
-    Y.ProEt inferInstance J
-    (WeilConjectures.integralCoefficientRingSheafify.{u, 0} Y)
-    (inferInstanceAs (J.HasSheafCompose (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})))
-    (WeilConjectures.integralCoefficientAbSheafify.{u, 0} Y)
-    (WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} Y)
-    (CommRingCat.of A) (CommRingCat.of B) iAB iFree iFin
-  let M := Scheme.proEtaleRootsOfUnitySheaf Y (ℓ ^ (n + 1))
-  let U := sheafToPresheaf J AddCommGrpCat.{u + 1}
-  let e₁ : U.obj (spIntegralTwistLevel Y ℓ E n).X ≅
-      ∏ᶜ (fun _ : Fin k ↦ M.obj) :=
-    U.mapIso e₀ ≪≫ CategoryTheory.sheafifiedTensorIso
-      (Scheme.tateFiniteScalar Y ℓ B n a) k β hβ (Scheme.purTwistRootsModule Y ℓ n)
-  let e₂ : (spIntegralTwistLevel Y ℓ E n).X ≅ ∏ᶜ (fun _ : Fin k ↦ M) :=
-    U.preimageIso (e₁ ≪≫ (asIso (piComparison U (fun _ : Fin k ↦ M))).symm)
-  let F := sheafCompose J (forget AddCommGrpCat.{u + 1})
-  let : PreservesLimitsOfShape (Discrete (Fin k)) (F ⋙ sheafToPresheaf J _) :=
-    inferInstanceAs (PreservesLimitsOfShape (Discrete (Fin k))
-      (sheafToPresheaf J AddCommGrpCat.{u + 1} ⋙
-        (Functor.whiskeringRight _ _ _).obj (forget AddCommGrpCat.{u + 1})))
-  let : PreservesLimitsOfShape (Discrete (Fin k)) F :=
-    preservesLimitsOfShape_of_reflects_of_preserves F (sheafToPresheaf J _)
-  let e₃ : F.obj (spIntegralTwistLevel Y ℓ E n).X ≅
-      ∏ᶜ (fun _ : Fin k ↦ F.obj M) :=
-    F.mapIso e₂ ≪≫ asIso (piComparison F (fun _ : Fin k ↦ M))
-  have hp : 0 < ℓ ^ (n + 1) := pow_pos (Fact.out : ℓ.Prime).pos _
-  have hu : IsUnit ((ℓ ^ (n + 1) : ℕ) : Γ(Y, ⊤)) := by
-    simpa only [Nat.cast_pow] using (globalPrimeUnit Y ℓ).pow (n + 1)
-  obtain ⟨V, hfin, het, ⟨eV⟩⟩ := roots_power_representation Y _ hp hu k
-  exact ⟨V, hfin, het, ⟨eV ≪≫ e₃.symm⟩⟩
 
 end AlgebraicGeometry.ProEtale
