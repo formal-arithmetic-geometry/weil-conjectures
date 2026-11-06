@@ -210,7 +210,7 @@ theorem relativelyFlat_derivedBaseChange_complex
             ((HomotopyCategory.quotient _ (.up ℤ)).obj G) := by
     simp only [a, b, Iso.trans_hom, tensorIso_hom, Iso.symm_hom, Iso.refl_hom,
       Functor.mapIso_hom, Functor.map_comp, Category.assoc]
-    rw [reassoc_of% hab₀]
+    erw [reassoc_of% hab₀]
     rw [reassoc_of% (hτ.2 E (DerivedCategory.Q.obj P)
       (DerivedCategory.Q.obj G) (DerivedCategory.Q.obj G) e.inv (𝟙 _))]
     simp only [CategoryTheory.Functor.map_id]
@@ -218,7 +218,7 @@ theorem relativelyFlat_derivedBaseChange_complex
       (tensor_cancel_iso ((derivedPullback (pullback.fst f g)).mapIso e)
         ((SingleComplexBaseChange.counit (pullback.fst f g)).app
           ((HomotopyCategory.quotient _ (.up ℤ)).obj G)))
-  rw [← hab, Functor.map_comp, Functor.map_comp] at hi
+  erw [← hab, Functor.map_comp, Functor.map_comp] at hi
   have := hi
   have : IsIso (schemeDerivedBaseChangeMap f (pullback.snd f g) g
       (pullback.fst f g) pullback.condition (E ⊗ DerivedCategory.Q.obj G) ≫
