@@ -169,6 +169,8 @@ private theorem reduction_transition_eq
     unfold unrestrictedTowerTransition unrestrictedIntegralTransition integralTowerTensorSection
     exact ht
 
+attribute [-instance] WeilConjectures.integralCoefficientAbLocallyBijective
+  WeilConjectures.integralOperationsAbLocallyBijective in
 /-- A derived-complete complex has the same cohomological bounds as a Tor interval
 of its residue reduction, tested after restriction to every small-site object.
 
