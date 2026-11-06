@@ -261,25 +261,34 @@
   AffinePushforwardCohomologyEdgeIdentity, then continue downstream up to the brief's limit.
 - Fix log: /home/ubuntu/u9/bz/FIXES-BZ859.md. No local Lean/Lake, proof escapes, or limit raises.
 
-# BZ883 complete
 
-- Branch: u9/BZ883; initial commit bf8c8b11135566efd44c8f83beb127b346f97afc.
-- Final ucheck-bump passed: rc=0, built=9, failed=0, 4833 jobs.
-- Validated source commit: f9b5e19c0382df5c3d1c3678921264e2e3a186d7.
-- Green modules: SectionLocalizationUnitConstraints, SectionResolvingOplaxUnitModels,
-  SectionResolvingOplaxInternalConjugation, SectionResolvingOplaxConstraintDiagrams
-  (all under WeilConjectures.AlgebraicGeometry).
-- Added Localization imports for hidden Qh conversions in three modules. The user
-  instructed continuation after the exact two-cast statement proposal; those two
-  reflexive casts are applied. One downstream proof simplifies identity casts and
-  finishes with exact under with_unfolding_all. All other statements/docs are unchanged.
-- Two deeper modules were attempted: SectionDerivedRepresentativeSquare and
-  SectionDerivedTensorNormalization. Both are skipped because BZ867-owned prerequisite
-  SectionResolutionConjugationIdentities fails at 576:39 (Application type mismatch)
-  and 772:4 (Type mismatch: After simplification, term). No unowned source was changed.
-- Final log: /home/ubuntu/u9/bz/BUILD-BZ883-final-full.log.
-- Fix patterns and exact rewrite rules: /home/ubuntu/u9/bz/FIXES-BZ883.md.
-- Contract audit: /home/ubuntu/u9/bz/BZ883-contract-audit.txt; all rules replay exactly.
-- Completion marker: /home/ubuntu/u9/state/BZ883.DONE.
-- No local Lean/Lake, sorries, proof shortcuts, profiler probes, or heartbeat increases.
-- This final commit changes only progress documentation; Lean sources match the green build.
+# BZ885 in progress
+
+- Branch: u9/BZ885; baseline checkpoint 691397bb53c1a609462baa9046b9add95fc8dfef.
+- The user instructed continuation after the exact two-site compositor API proposal.
+- Applied BZ885-proposed-compositor.patch in GeometricCoefficientPullback and
+  GeometryEvaluation.coefficientPullback_transpose in GeometricDerivedEvaluation.
+  This preserves the intended comparisons under Mathlib's reversed compositor.
+- Declaration binders, hypotheses, proof bodies, and docstrings remain unchanged.
+- Next: ucheck-bump on the assigned module and both direct importers, then downstream.
+- Fix patterns and whole-tree inventories: /home/ubuntu/u9/bz/FIXES-BZ885.md.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+- Assigned module and both direct importers passed ucheck-bump at
+  5cca20eeb783db7ec41171a7a488693bd489e3aa: rc=0, failed=0, 5034 jobs.
+- All three rebuilt successfully on poolb:43.166.83.208 (20s, 16s, 10s).
+- Full log: /home/ubuntu/u9/bz/BZ885-build-1-full.log.
+- Continuing through GeometricOperationsBaseExistence, GeometricOperationsExistence,
+  SemilinearOperationsExistence, and SemilinearDerivedSections.
+
+# BZ885 complete
+
+- Assigned module and both direct importers are green at source commit 5cca20eeb783.
+- Six extra modules were attempted across five layers: two green, four blocked.
+- The next four modules are skipped under the brief's unowned-dependency rule:
+  SemilinearCartesianProjection, GeometricTensorEvaluation, and RingedSiteDualityMaps fail.
+- Full downstream log: /home/ubuntu/u9/bz/BZ885-build-2-full.log.
+- Exact first errors and dependency paths: /home/ubuntu/u9/bz/BZ885-downstream-blockers.json.
+- Final PATTERN/ERROR/RULE handoff: /home/ubuntu/u9/bz/FIXES-BZ885.md.
+- Completion marker: /home/ubuntu/u9/state/BZ885.DONE.
+- Final changes are documentation only; Lean sources match the successful build.
