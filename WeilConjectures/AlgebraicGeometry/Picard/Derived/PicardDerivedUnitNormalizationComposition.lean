@@ -12,6 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.SchemeDerivedMateEvaluation
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 public import WeilConjectures.Mathlib.Topology.Category.TopCat.Opens
 import WeilConjectures.AlgebraicGeometry.Canonical.CanonicalSinglePullbackComposition
+import all WeilConjectures.AlgebraicGeometry.Tensor.TensorSinglePullbackComposition
 
 /-! # Composition of derived structure-sheaf normalization
 
@@ -89,48 +90,7 @@ private theorem singlePullback_naturality
       canonicalSinglePullbackMap f N =
     canonicalSinglePullbackMap f M ≫
       (DerivedCategory.singleFunctor _ 0).map ((pullback f).map a) := by
-  set_option backward.isDefEq.respectTransparency false in
-  set_option backward.isDefEq.respectTransparency.types false in
-  set_option backward.defeqAttrib.useBackward true in
-    let := canonicalTensorPullbackAdditive f
-    let ε := (Classical.choose
-      (Classical.choose_spec exists_derivedPullbackComposition.{v, v + 1})) f
-    let t := (Classical.choose (exists_tensorPullbackAdjunction f)).leftAdjointUniq
-      (pullbackPushforwardAdjunction f)
-    let q := HomotopyCategory.quotient
-      (SheafOfModules.{v} (moduleRings X.toRingedSpace)) (ComplexShape.up ℤ)
-    let s := HomologicalComplex.singleMapHomologicalComplex (tensorPullback f)
-      (ComplexShape.up ℤ) 0
-    have hε := ε.naturality ((HomotopyCategory.singleFunctor _ 0).map a)
-    have hs := congrArg (fun k ↦ DerivedCategory.Qh.{v + 1}.map (q.map k)) (s.hom.naturality a)
-    have ht := congrArg (fun k ↦ (DerivedCategory.singleFunctor.{v + 1}
-      (SheafOfModules.{v} (moduleRings X.toRingedSpace)) 0).map k)
-      (t.hom.naturality a)
-    dsimp only [Functor.comp_map] at hε hs ht
-    simp only [canonicalSinglePullbackMap, cast_eq]
-    simp only [DerivedCategory.singleFunctor, DerivedCategory.singleFunctors,
-      HomotopyCategory.singleFunctor, HomotopyCategory.singleFunctors,
-      SingleFunctors.postcomp, Functor.comp_map, Scheme.Modules, Scheme.ringCatSheaf,
-      moduleRings, DerivedCategory.Qh, HomologicalComplexUpToQuasiIso.Qh,
-      HomotopyCategory.quotient, Quotient.lift_map_functor_map, DerivedCategory.Q] at hε hs ht ⊢
-    simp only [Functor.map_comp] at hs ht
-    simp only [Category.assoc]
-    rw [← Category.assoc]
-    rw [hε]
-    simp only [Category.assoc, CochainComplex.singleFunctors]
-    have hs' := congrArg (fun k ↦ ε.app
-      ((HomotopyCategory.singleFunctor _ 0).obj M) ≫ k ≫
-        (DerivedCategory.singleFunctor _ 0).map (t.hom.app N)) hs
-    have ht' := congrArg (fun k ↦ ε.app
-      ((HomotopyCategory.singleFunctor _ 0).obj M) ≫
-        DerivedCategory.Qh.map (q.map (s.hom.app M)) ≫ k) ht
-    simp only [Category.assoc] at hs' ht'
-    simpa only [ε, t, q, s, DerivedCategory.singleFunctor, DerivedCategory.singleFunctors,
-      HomotopyCategory.singleFunctor, HomotopyCategory.singleFunctors,
-      SingleFunctors.postcomp, Functor.comp_map, Category.assoc, Scheme.Modules,
-      Scheme.ringCatSheaf, moduleRings, DerivedCategory.Qh,
-      HomologicalComplexUpToQuasiIso.Qh, HomotopyCategory.quotient,
-      Quotient.lift_map_functor_map, DerivedCategory.Q] using hs'.trans ht'
+  exact AlgebraicGeometry.single_naturality f a
 
 end Modules
 
