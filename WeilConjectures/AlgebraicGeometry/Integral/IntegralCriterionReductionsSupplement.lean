@@ -516,9 +516,11 @@ private theorem finiteEncoding_ringIso_unique
     (A : Type u) [CommRing A] [TopologicalSpace A] [IsTopologicalRing A]
     (X : Scheme.{u}) (e f : FiniteDiscreteOrdinary.Encoding A X) :
     e.ringIso = f.ringIso := by
+  let : HasWeakSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
+    HasSheafify.isRightAdjoint
   apply Iso.ext
   apply Sheaf.hom_ext
-  apply sheafify_hom_ext.{u, u + 1, u + 1, u + 2} (Scheme.ProEt.topology X) _ _
+  apply sheafify_hom_ext (Scheme.ProEt.topology X) _ _
     (FiniteDiscreteOrdinary.sectionRing A X).property
   ext U a
   exact (e.normalization U a).trans (f.normalization U a).symm
