@@ -304,3 +304,18 @@
 - Per-run ucheck-bump snapshot: /home/ubuntu/u9/bz/BZ908-bin/ucheck-bump. It preserves
   the lead's locking and one-build-per-helper rules while avoiding shared-script
   overwrite failures. No shared build scripts were edited.
+
+
+# BZ938 in progress
+
+- Branch: u9/BZ938; baseline before repairs: 1626b332e^.
+- The user instructed continuation after the exact four-projection private-helper proposal.
+  Applied BZ938-private-compositor-proposal.patch to descend_coherence.
+  The .hom → .inv migration preserves the original equation under Mathlib's reversed compositor.
+- Definition bodies and proof-local comparisons now use the correct compositor direction.
+- First remote build cleared five of eight diagnostics; remaining three shared the
+  private helper statement as their root. Next: validate the completed repair.
+- Then check the nine direct importers, continuing through unblocked layers up to
+  the brief's 30-extra-module limit.
+- Fix records: /home/ubuntu/u9/bz/FIXES-BZ938.md.
+- No local Lean/Lake, forbidden proof escapes, or heartbeat changes.

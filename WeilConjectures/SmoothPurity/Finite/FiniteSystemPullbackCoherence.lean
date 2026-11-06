@@ -639,16 +639,16 @@ private theorem descend_coherence
     (ho : a0 ≪≫ Functor.isoWhiskerRight a02 H =
       e ≪≫ a1 ≪≫ Functor.isoWhiskerLeft F a13) :
     (Functor.mapDerivedCategoryNatIso a0).hom ≫
-        (Functor.mapDerivedCategoryCompIso F02 H).hom ≫
+        (Functor.mapDerivedCategoryCompIso F02 H).inv ≫
         Functor.whiskerRight (Functor.mapDerivedCategoryNatIso a02).hom
           H.mapDerivedCategory ≫
-        Functor.whiskerRight (Functor.mapDerivedCategoryCompIso F G).hom
+        Functor.whiskerRight (Functor.mapDerivedCategoryCompIso F G).inv
           H.mapDerivedCategory =
       (Functor.mapDerivedCategoryNatIso e).hom ≫
         (Functor.mapDerivedCategoryNatIso a1).hom ≫
-        (Functor.mapDerivedCategoryCompIso F F13).hom ≫
+        (Functor.mapDerivedCategoryCompIso F F13).inv ≫
         Functor.whiskerLeft F.mapDerivedCategory (Functor.mapDerivedCategoryNatIso a13).hom ≫
-        Functor.whiskerLeft F.mapDerivedCategory (Functor.mapDerivedCategoryCompIso G H).hom := by
+        Functor.whiskerLeft F.mapDerivedCategory (Functor.mapDerivedCategoryCompIso G H).inv := by
   have hd := congrArg (fun t ↦ (Functor.mapDerivedCategoryNatIso t).hom) ho
   simp only [Functor.mapDerivedCategoryNatIso_trans] at hd
   have hR := Functor.mapDerivedCategoryNatIso_isoWhiskerRight a02 H
