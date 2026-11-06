@@ -715,8 +715,8 @@ private theorem ca_hAS (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueFie
 
 set_option maxHeartbeats 400000 in
 -- assembling the common-stage associator unfolds long composites of stage comparisons
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 private theorem pullbackTensorCommonAssociator_exists_aux (W : Scheme.{u})
     [hW : ∀ w : W, Invertible (l : W.residueField w)]
     (M N P : generalAlgebraicallyClosedConstructibleCategory l Ω W) :
