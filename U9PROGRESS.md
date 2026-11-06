@@ -314,3 +314,7 @@
 - First continuation build accepted the proposed unit-map cast and exposed the same
   hidden-unit mismatch in the public theorem's identity constraint. Applied the same
   reflexive transport to that identity, with tensorUnit Λ T explicit, and revalidating.
+- Assigned leaf GREEN at d0d046a304a6ef9bd12942cdd26fd0765926f4d3:
+  ucheck-bump rc=0, failed=0, 5358 jobs; target freshly rebuilt in 25 seconds.
+- Full log: /home/ubuntu/u9/bz/BUILD-BZ941-leaf-green-full.log.
+- Continuing with all five direct importers; no DONE until downstream checking finishes.
