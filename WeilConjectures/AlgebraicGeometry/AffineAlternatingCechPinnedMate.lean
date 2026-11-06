@@ -12,6 +12,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import WeilConjectures.AlgebraicGeometry.AffineAlternatingCechExchangeResolution
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # The alternating Čech calculation for the pinned derived mate
 
@@ -125,7 +127,7 @@ The pinned composition comparisons are defined by the same derived counits, so
 the transposed equality descends to the displayed equality. There is no need to
 invert the counit on K and no flatness hypothesis. An empty cover forces X empty,
 and the same construction uses the zero complexes. -/
-theorem affineAlternatingCech_pinned_mate
+private theorem affineAlternatingCech_pinned_mate
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     {A B : CommRingCat.{u}} {X : Scheme.{u}} (f : X ⟶ Spec A)
