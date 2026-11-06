@@ -464,3 +464,15 @@
 - Completion marker: /home/ubuntu/u9/state/BZ1077.DONE.
 - No local Lean/Lake, proof placeholders, trust bypasses, heartbeat raises, or profiler probes.
 - All ucheck invocations have finished. This completion commit changes documentation only.
+
+
+# BZ1099 in progress
+
+- Branch: u9/BZ1099; starting commit 46766e3e2ce0eddba05845bd493e8a62dac45263.
+- The user instructed continuation after the concrete one-line universe-annotation proposal.
+  Applied BZ1099-statement-migration.patch, preserving the explicit localization universes
+  and inferring Mathlib's reordered category universes. Proof and assumptions are unchanged.
+- Baseline ucheck-bump confirmed the sole error in the annotation at line 112.
+- Next: validate the assigned module, then attempt its sole direct importer.
+- Live unit BZ1098 owns the sibling Etale prerequisite; do not edit it.
+- Fix log: /home/ubuntu/u9/bz/FIXES-BZ1099.md. No local Lean/Lake or proof shortcuts.
