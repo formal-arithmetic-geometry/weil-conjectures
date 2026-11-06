@@ -300,13 +300,15 @@
 - Fix notes: /home/ubuntu/u9/bz/FIXES-BZ932.md. No local Lean/Lake or proof shortcuts.
 
 
-# BZ949 in progress
+# BZ950 in progress
 
-- Branch: u9/BZ949; baseline: 86b635dfce798c1644c3ee4783f6871a55233370.
-- The user instructed continuation after the exact one-cast statement proposal.
-- Applied the reflexive cast around the existing counit, preserving its map and assumptions.
-- Baseline ucheck-bump confirmed this was the assigned module's only error.
-- AffineBaseChangeTildeRepresentative is green at 2a367a4402b820cd58b13538f43a02f3792baa2e: rc=0, failed=0.
-- Next: build all six direct importers and continue through fixable downstream errors.
-- Fix patterns, exact error, rule, and occurrence counts: /home/ubuntu/u9/bz/FIXES-BZ949.md.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
+- Branch: u9/BZ950; baseline bd35b30c08a8dd66e184f7c95d02625e6eb3431b.
+- User instructed continuation after the exact one-line reflexive statement-cast proposal.
+- Applied cast (by rfl) around H.map β in affineTildePushforwardHomologyFactorization; all other statement text and the proof are unchanged.
+- Next: ucheck-bump on the leaf, then its two direct importers and further downstream.
+- Fix records, baseline diagnostics, and prepared downstream patch: /home/ubuntu/u9/bz/FIXES-BZ950.md.
+- No local Lean/Lake, proof placeholders, trust bypasses, heartbeat changes, or profiler probes.
+
+- BZ950 leaf GREEN at d8b603572: ucheck-bump rc=0, failed=0, tree newsrv:/home/ubuntu/u9n/bumpw1.
+- Leaf log: /home/ubuntu/u9/logs/BZ950-20261106T090157.log; local BUILD-BZ950-leaf-green-full.log.
+- The exact approved cast resolved the error without changing the root proof. Continuing to both direct importers.
