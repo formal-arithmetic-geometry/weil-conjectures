@@ -236,17 +236,4 @@ private theorem spFreeTensor_linear
   exact Mod.hom_ext _ _ hg
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The finite-level twist is the displayed constant-ring scalar extension.
-Source: blueprint finite-level formula (blueprint: sk-def-sp-tate-twist).
-Proof: a finite discrete B has continuous-function condensed sheaf equal to its
-constant sheaf: a section is a finite clopen partition labelled by B. Pullback
-from the point preserves this description, including the ring operations.
-For an N-torsion abelian sheaf M, B tensor_Z M is B tensor_(Z/N) M whenever N*B=0:
-the integer balancing relations already imply the Z/N balancing relations.
-Apply this with N=ell^(n+1) and M=mu_N, using the recorded root module action.
-The inclusion of the ideal generator gives N=0 in the quotient. These comparisons
-commute with reduction of B and the root power maps, since each map applies to
-its indicated tensor factor. Thus the actual integral system has exactly the
-finite levels and transitions in the blueprint, with no replacement of the roots. -/
-
 end AlgebraicGeometry.ProEtale

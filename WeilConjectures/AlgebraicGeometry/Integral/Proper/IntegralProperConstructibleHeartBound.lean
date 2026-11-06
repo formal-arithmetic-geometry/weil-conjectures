@@ -78,19 +78,4 @@ Source: blueprint lem-sfb-integral-proper-constructible-heart-bound
 (blueprint: lem-sfb-integral-proper-constructible-heart-bound). -/
 
 set_option linter.unusedVariables false in
-/-- Proper direct image of a constructible integral sheaf vanishes above 2d+1.
-Source: blueprint main-20261015, det-prop-int-compactness-direct-sums, proof (1),
-constructible heart estimate (blueprint: lem-sfb-integral-proper-constructible-heart-bound).
-
-Proof: Transport the continuous integer coefficients to the completion convention.
-Proper integral preservation gives derived completeness of the image of N[0].
-The finite-reduction estimate with b=0 bounds every positive reduction of this image
-above by 2d. Its proof uses finite classical models and the geometric proper torsion
-bound. Unpack derived completeness to obtain the specified augmented Roos triangle
-and the invertible completion map. Exact countable products commute with cohomology,
-so both product vertices are bounded above by 2d. Inverse rotation and the triangle
-upper-bound lemma give 2d+1 for the completed image. The exact faithful coefficient
-transport reflects this upper bound. This includes torsion N, d=0, and empty schemes;
-no flatness of N is used. -/
-
 end AlgebraicGeometry.ProEtale

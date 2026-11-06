@@ -127,9 +127,4 @@ private theorem integralLevel_isLE (l : ℕ) [Fact l.Prime] (E : Type u) [Field 
     exact (adj.homEquiv K Z).injective (hz.trans hz0.symm)
   exact G.isLE_mapDerivedCategory_obj (F.obj K) b
 
-/-- The finite-reduction bound for proper integral direct image over a Noetherian source.
-Source: blueprint lem-sfb-integral-proper-reduction-bound; the base field of
-`integralProperReductionBound` only makes the source Noetherian
-(blueprint: lem-sfb-integral-proper-reduction-bound). -/
-
 end AlgebraicGeometry.ProEtale

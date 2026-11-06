@@ -310,22 +310,4 @@ attribute [local instance 20000] AlgebraicGeometry.ProEtale.sheafBraidedCategory
 
 set_option maxHeartbeats 2000000 in
 -- The derived coefficient equivalence compares large canonical single-functor constructions.
-/-- Uniform Ext bounds for valuation-ring coefficients over a field of finite
-ℓ-cohomological dimension.
-
-Source: blueprint latest, `sk-lem-int-ext.proof.md`, bound paragraph, and
-`sk-lem-brown-hypotheses.proof.md`, integral compactness.
-(blueprint: lem-sfb-brown-finite-cd-integral-ext).
-
-Proof: filter the first constructible sheaf by degree-zero extensions from finitely
-many locally closed strata. On a stratum use a finite presentation of its coefficient
-module. The finite reductions of the second sheaf are controlled by the closed-support
-triangle and the finite absolute and relative ℓ-cohomological dimensions of the stratum
-and boundary. Their bound is independent of the second sheaf and the reduction exponent.
-Recover the integral target by its derived inverse system of reductions. The Milnor
-triangle adds at most one to the bound; no immersion inverse image is commuted with
-this inverse limit. Take a maximum over the finitely many pieces of the filtration
-and apply Hom exactness along its triangles. The empty filtration gives the zero case.
-The cohomological-dimension assumption supplies all bounds by Stacks 0F10. -/
-
 end CategoryTheory

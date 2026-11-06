@@ -88,26 +88,4 @@ private theorem stratum_hom_zero
   let e := (((e₁.trans e₂).trans e₃).trans e₄).trans e₅
   exact e.injective (h.elim (e f) (e 0))
 
-/-- The integral stratum finite-reduction bound, uniform in the constructible target
-and in the positive quotient exponent. Both local scalar models allow torsion.
-
-Source: blueprint latest, `sk-prop-int-compactness/sk-lem-int-ext-bound.proof.md`,
-three finite-reduction bullets; the node makes their finite dimension bounds explicit.
-(blueprint: lem-sfb-integral-stratum-finite-cd-reductions).
-
-Proof: the length-one uniformizer resolution gives the reduction cohomology window
-`[-1,0]`, with classical locally ell-power torsion cohomology, without a flatness
-assumption on N. The supported-section fibre then has window `[-1,c+1]`; open
-restriction preserves this window and classical local torsion. The closed subscheme
-Z is Noetherian, as are its open subschemes, so this applies on S. For the dual
-D = RHom(L[0],A_S), the torsion-heart section estimate gives [0,s+1]. A K-flat
-representative for D and bounded-heart amplitude therefore place
-RΓ(S,D tensor^L K) in [-1,c+s+2]. The closed supported-section adjunction and
-open extension-by-zero adjunction identify the required Hom with Hom(L[0],K[r]).
-Their coefficient pullbacks are identified by composition from the condensed point.
-The finite scalar presentation of L makes L[0] dualizable, including its torsion
-summands. Tensor-dual adjunction and derived internal-Hom sections identify that
-Hom with H^r RΓ(S,D tensor^L K). It vanishes for r > c+s+2. The only bounds used
-are c, s and the degree-one dual bound, so the result is uniform in N and n. -/
-
 end CategoryTheory

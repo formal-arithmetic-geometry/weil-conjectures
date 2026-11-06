@@ -144,8 +144,4 @@ private theorem realization_directImage
       (GM.rightDerivedFunctor.obj L) ≪≫ NY.mapDerivedCategory.mapIso e ≪≫ f ≪≫
         GP.rightDerivedFunctor.mapIso ((Functor.mapDerivedCategoryCompIso SX NX).app L).symm⟩
 
-/-- The finite-reduction classical models over a Noetherian source; no base field is used.
-Source: blueprint lem-sfb-integral-proper-reduction-model, with the base field used only to
-make the source Noetherian (blueprint: lem-sfb-integral-proper-reduction-model). -/
-
 end AlgebraicGeometry.ProEtale

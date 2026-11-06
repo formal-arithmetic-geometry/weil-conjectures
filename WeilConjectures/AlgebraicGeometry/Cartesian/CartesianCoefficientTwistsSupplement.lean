@@ -2761,40 +2761,4 @@ attribute [local irreducible] InternalAbelianSheafModule.sectionModuleEquivalenc
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
-/-- Inverse image of all non-finite coefficient twists, including integral and rational
-Q_ell as the bottom finite subextension, and the algebraic-closure sheafified colimit.
-Together with spRoots_cartesian and spFiniteTwists_cartesian this states every
-coefficient case in the source. Source: blueprint Inverse image of Tate twists,
-Integral twist, Rational and algebraically closed coefficients, Powers and duals,
-and Derived consequence paragraphs
-(blueprint: det-prop-sfb-cartesian-coefficients-twists).
-Proof:
-1. The separate native integral tower lemma says that inverse image preserves its
-   displayed limiting cone. The finite component comparisons are isomorphisms by
-   the root comparison and alpha. Uniqueness of maps between limiting cones makes
-   the projection-normalized integral comparison invertible.
-2. The integral residue tensor square lifts that abelian comparison to the ordinary
-   coefficient-module pullback. Scalar extension to E preserves its invertibility.
-   Its quotient-map normalization is the required rational normalization.
-3. Conjugate each coefficient inclusion by alpha. Its normalized composite into the
-   field coefficients determines it uniquely, giving integral coefficient naturality.
-   The quotient normalizations then give finite coefficient naturality. Projection
-   extensionality and the scalar-extension quotient give integral and rational twist
-   naturality, respectively.
-4. Inverse image preserves the filtered colimit over finite subextensions. The
-   preceding rational naturality supplies its comparison isomorphism and fixes every
-   coprojection. To check semilinearity, test on a coefficient coprojection and a
-   module coprojection, choose a common upper finite field, and use the specified
-   finite-stage action there. This uses the finite-subextension condensed Qbar ring.
-5. Transport each ordinary internal-module isomorphism to sectionwise modules. The
-   coefficient and adjunction-unit normalizations identify its abelian adjunct
-   exactly, so the prescribed first comparison is retained.
-6. The common root cover makes each finite, integral, rational and Qbar line locally
-   free of rank one. The signed-line derived base-change theorem then gives all
-   signed degrees with their unit, tensor and evaluation normalizations. Uniqueness
-   of left adjoints transports its unit formulas to the actual pullback, and the
-   induced natural isomorphism on unbounded derived categories gives the derived
-   comparison. No boundedness or finite-Tor condition is needed.
-7. Naturality of the root inverse-image map gives the last transition formula. -/
-
 end AlgebraicGeometry.ProEtale

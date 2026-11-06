@@ -368,8 +368,4 @@ coefficient ring `𝒪_E` of a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`.
 (blueprint: lem-sfb-noetherian-proper-heart-uniform-bound) -/
 
 set_option linter.unusedVariables false in
-/-- The uniform proper heart bound of `properLowerStar_uniformBound_continuousMapRingObj`, for the
-coefficient ring `ℚ̄_ℓ`.
-(blueprint: lem-sfb-noetherian-proper-heart-uniform-bound) -/
-
 end AlgebraicGeometry.ProEtale.CondensedRing
