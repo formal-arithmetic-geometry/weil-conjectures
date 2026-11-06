@@ -258,7 +258,7 @@ private lemma conjugate_horizontal
     conjugateEquiv (a₁.comp a₂) (b₁.comp b₂) (NatTrans.hcomp x y) =
       Functor.whiskerLeft R₂ (conjugateEquiv a₁ b₁ x) ≫
         Functor.whiskerRight (conjugateEquiv a₂ b₂ y) R₁' := by
-  rw [NatTrans.hcomp_eq_whiskerLeft_comp_whiskerRight]
+  rw [Functor.NatTrans.hcomp_eq_whiskerLeft_comp_whiskerRight]
   rw [← conjugateEquiv_comp (a₁.comp a₂) (b₁.comp a₂) (b₁.comp b₂),
     conjugateEquiv_whiskerRight, conjugateEquiv_whiskerLeft]
 
