@@ -284,7 +284,7 @@ theorem lisse_tower_algebraic_derived_presentation
       (Ideal.Quotient.mk (J ^ (n + 1)))
       (Ideal.Quotient.factor_comp_mk _).symm)).inv.app (K n)
   let D := Functor.ofOpSequence (X := fun n : ℕ ↦ (R n).mapDerivedCategory.obj (K n)) s
-  obtain ⟨hP, _, _⟩ := derivedCategory_countableProducts_core.{0, u + 2, u + 1, u + 2}
+  obtain ⟨hP, _, _⟩ := derivedCategory_countableProducts_core.{0, u + 1, u + 1, u + 2}
     (ModuleCat.{u + 1} C)
   let _ := hP
   obtain ⟨E, p, δ, hE⟩ := Pretriangulated.distinguished_cocone_triangle₁
