@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.StrictTower.StrictConstantTowerO
 import all WeilConjectures.AlgebraicGeometry.CompletedConstantReduction.CompletedConstantSheafReductionSupplement
 import WeilConjectures.Algebra.Homology.DerivedCategory.ProjectiveHom
 import WeilConjectures.AlgebraicGeometry.ProEtale.Projection.ProEtaleProjectionFormulaArrows
+import WeilConjectures.AlgebraicGeometry.OrderedExchange.ConstantQuotientTensorComparison
 import WeilConjectures.AlgebraicGeometry.SignedProjectionResolution.SignedProjectionResolutionNormalization
 
 /-! # Perfect projection for one constant quotient
@@ -214,5 +215,60 @@ private theorem projection_transport
   rw [← Category.assoc, hs, Category.assoc]
   exact congrArg (fun z ↦ theta.hom.app (R.obj K) ≫ z)
     (eJ.hom.naturality (adj.counit.app K)).symm
+
+/-- The finite counit projection is invertible for a perfect quotient.
+Source: Stacks Tag 0944, lemma-projection-formula, and Tag 06YY
+(blueprint: lem-sp-constant-perfect-quotient-projection).
+Proof: choose a bounded finite-projective A-resolution of A/I^(n+1) using
+quotientPerfect. Its exact constant module realization, followed by the normalized
+finite constant-to-function comparison, represents the restricted quotient sheaf.
+For a flat K-flat complex, scalar tensor cancellation identifies quotientEvaluation
+of reduction with total tensor by this resolution; the universal reduction counit
+fixes that identification. The normalization of reductionPullIso identifies
+quotientTensorPull with inverse image of this same total tensor comparison.
+Choose a K-injective representative J of K. The bounded finite-projective tensor of
+J with the pulled-back resolution remains K-injective. The canonical derived
+adjunction counit factorization identifies quotientProjection with localization of
+tensorAdjunctionTotal between these representatives. Each coefficient term is a
+retract of a finite free module. The free projection is the finite-product
+comparison, hence invertible; its retraction inverse extends to the signed total
+complex because the resolution is bounded. Thus tensorAdjunctionTotal is an
+isomorphism, and its localization and the normalized representative comparisons
+prove the claim. No bound on J, completeness of K, or compatible choices at other
+quotient levels are required. Zero quotients and rank-zero terms are included. -/
+theorem quotientProjection_isIso (n : ℕᵒᵖ) (K : D (A := A) U) :
+    IsIso ((quotientProjection d f n).app K) := by
+  obtain ⟨F, lo, hi, q, hq, ⟨package⟩, hb, hF⟩ := constantResolution d V n.unop
+  obtain ⟨a, b, eV, eU, hs⟩ := constantQuotientTensorComparison d f n.unop F hF q hq
+  obtain ⟨I, hI, ⟨alpha⟩⟩ := DerivedCategory.exists_iso_Q_obj_of_isKInjective K
+  have hn := SignedProjectionResolution.normalization f (exchangeConstantRing V A)
+    (exchangeConstantRing U A) (exchangeConstantIso f A) a b K
+    (DerivedCategory.Q.obj F) I hI alpha F (Iso.refl _) package ⟨lo, hi, hb⟩
+  have hp : IsIso (derivedProjectionFormulaMate (pull (A := A) f) (push (A := A) f)
+      (proEtaleRingDerivedAdjunction f (exchangeConstantRing V A) (exchangeConstantRing U A)
+        (exchangeConstantIso f A)) a.tensor b.tensor
+      (proEtaleCanonicalTensorComparison f (exchangeConstantRing V A)
+        (exchangeConstantRing U A) (exchangeConstantIso f A) a b) K
+      (DerivedCategory.Q.obj F)) :=
+    ⟨⟨_, hn.2.1, hn.2.2⟩⟩
+  have ht := projection_transport (pull (A := A) f) (push (A := A) f)
+    (proEtaleRingDerivedAdjunction f (exchangeConstantRing V A) (exchangeConstantRing U A)
+      (exchangeConstantIso f A)) a.tensor b.tensor
+    (proEtaleCanonicalTensorComparison f (exchangeConstantRing V A)
+      (exchangeConstantRing U A) (exchangeConstantIso f A) a b)
+    (DerivedCategory.Q.obj F) (reduction d V ⋙ quotientEvaluation V n)
+    (reduction d U ⋙ quotientEvaluation U n) (quotientTensorPull d f n) eV eU
+    (fun M ↦ by
+      simpa only [quotientTensorPull, Iso.trans_hom, NatTrans.comp_app,
+        Functor.associator_hom_app, Functor.associator_inv_app, Iso.symm_hom,
+        Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
+        Functor.whiskerLeft_app, Functor.whiskerRight_app, Category.id_comp,
+        Category.comp_id, Category.assoc] using hs M) K
+  have : IsIso ((quotientProjection d f n).app K ≫
+      (push (A := A) f).map (eU.hom.app K)) := by
+    change IsIso (((mateEquiv _ _ (quotientTensorPull d f n).hom).app K) ≫ _)
+    rw [← ht]
+    infer_instance
+  exact IsIso.of_isIso_comp_right _ ((push (A := A) f).map (eU.hom.app K))
 
 end AlgebraicGeometry.Scheme.OrderedExchange

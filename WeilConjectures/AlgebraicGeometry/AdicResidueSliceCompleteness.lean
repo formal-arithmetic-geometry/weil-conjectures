@@ -136,7 +136,7 @@ private theorem sliceTest_isZero
   -- Descend the sectionwise identity to the derived categories.
   let eN : F.mapDerivedCategory.obj N ≅
       (adicResidueRestriction (O.over U) V).obj ((adicResidueRestriction O U).obj M) :=
-    (Functor.mapDerivedCategoryCompIso A F).symm.app M ≪≫
+    (Functor.mapDerivedCategoryCompIso A F).app M ≪≫
       (Functor.mapDerivedCategoryNatIso c).app M ≪≫
         (Functor.mapDerivedCategoryCompIso B D).app M
   let e' := e ≪≫ (derivedInternalHom ((T.over U).over V) ((O.over U).over V)).mapIso
