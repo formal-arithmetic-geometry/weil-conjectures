@@ -68,7 +68,8 @@ noncomputable def rightDerivedFunctorPlusObjSingleFunctorIsoOfRightAcyclic (M : 
           (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) 0 M).symm hM
       · exact F.rightAcyclic.prop_of_isZero
           (HomologicalComplex.isZero_single_obj_X (ComplexShape.up ℤ) 0 M n hn)
-  (asIso (F.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.quotient C).obj K))).symm ≪≫
+F.rightDerivedFunctorPlus.mapIso ((DerivedCategory.Plus.quotientCompQhIso C).app K).symm ≪≫
+    (asIso (F.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.quotient C).obj K))).symm ≪≫
     mapHomotopyCategoryPlusSingleFunctorQhObjIso F 0 M
 
 end CategoryTheory.Functor
