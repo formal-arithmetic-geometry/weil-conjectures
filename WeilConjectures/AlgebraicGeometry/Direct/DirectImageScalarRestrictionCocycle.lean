@@ -128,7 +128,9 @@ private theorem derive_chain
     Iso.inv_hom_id_app, Iso.inv_hom_id_app]
   rw [← Functor.map_comp_assoc]
   simp only [Category.assoc, Iso.hom_inv_id_app_assoc, Iso.inv_hom_id_app_assoc,
-    Iso.hom_inv_id_app, Iso.inv_hom_id_app, Functor.map_id, Category.id_comp]
+    Iso.hom_inv_id_app]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp]
+  simp only [Iso.inv_hom_id_app_assoc, Iso.inv_hom_id_app]
 
 /-- Transport coefficient pasting along three natural isomorphisms. Naturality moves
 the source associator past the first comparison; the intermediate inverses cancel.
