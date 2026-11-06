@@ -87,7 +87,7 @@ theorem single_rightDerived_exact_composition (F : C ⥤ A) (T : A ⥤ B)
     rw [Iso.hom_inv_id_app, ht, Iso.hom_inv_id_app]
     rfl
   erw [ht']
-  erw [Functor.map_id, Category.comp_id]
+  erw [Category.comp_id]
   apply (cancel_mono (T.mapDerivedCategoryFactors.hom.app
     ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj
       ((CochainComplex.singleFunctor C 0).obj M)))).mp
