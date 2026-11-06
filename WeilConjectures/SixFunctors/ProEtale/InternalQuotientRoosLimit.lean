@@ -272,7 +272,8 @@ private theorem sourceTower_u (P : CochainComplex (AdicCompletion.Modules l E X)
   congr 1
   funext n
   exact Functor.ofOpSequence_map_homOfLE_succ
-    (X := fun n ↦ (AdicCompletion.level l E X n).obj P) (AdicCompletion.levelStep l E X P) n
+    (X := fun n ↦ (AdicCompletion.level l E X n).obj P)
+    (AdicCompletion.levelStep l E X P) n
 
 private def sourceRoosIso (P : CochainComplex (AdicCompletion.Modules l E X) ℤ) :
     AdicCompletion.roos l E X P ≅ roosF.obj (sourceTower l E X P) :=
