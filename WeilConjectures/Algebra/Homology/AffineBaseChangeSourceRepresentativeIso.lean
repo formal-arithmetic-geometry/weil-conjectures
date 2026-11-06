@@ -63,6 +63,8 @@ private theorem exists_stalkCohomologyComparison (Y : Scheme.{u}) (p : Y) (i : â
     Category.id_comp]
   rfl
 
+-- The original 200000 budget times out at the final equivalence construction in 13s.
+set_option maxHeartbeats 400000 in
 /-- The source-only comparison is unchanged under K-flat representative change.
 Source: Stacks Project, Tags 06Y6, 08IB and perfect.tex, equation-bc before Tag 0DJ8.
 (blueprint: lem-pc-affine-base-change-source-representative-iso).
