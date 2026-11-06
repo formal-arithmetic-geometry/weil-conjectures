@@ -137,7 +137,8 @@ theorem affineTildeTensorOrdinaryExchange
           (((Scheme.Modules.tensorPullback p).mapHomotopyCategory (.up ℤ)).obj H) =
       affineTildeTensorOrdinaryTargetMap R A B D M φ ψ k ≫
         (schemeDerivedDirectImage f').map t.hom ≫
-        (schemeDerivedDirectImage f').map ((SingleComplexBaseChange.counit p).app H) := by
+        (schemeDerivedDirectImage f').map
+          (cast (by rfl) ((SingleComplexBaseChange.counit p).app H)) := by
   dsimp only
   have h := affineTildeTensorOrdinaryExchange_preNormalization R A B D M φ ψ hw k hk
   dsimp only at h

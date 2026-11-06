@@ -389,3 +389,16 @@
   added the defining Mathlib modules explicitly. Both prerequisites now build.
 - All Lean changes so far are imports only; all pre-existing proof/resource settings are unchanged.
 - Next: build all five direct importers, applying the known umbrella-import fix to Induction.
+
+
+# BZ1030 in progress
+
+- Branch: u9/BZ1030; starting commit 7ea4a948f63a4e02d11f7481d82e5d3d99bbfa69.
+- The user instructed continuation after the exact one-counit reflexive-cast proposal.
+  Applied BZ1030-statement-proposal.patch; all other statement text is unchanged.
+- Localization imports and a reflexive cast in the target-map body eliminate its error,
+  as verified by the second ucheck-bump. The theorem cast now awaits validation.
+- Next: validate AffineTildeTensorOrdinaryExchange, then its direct importer
+  AffineTildeDerivedTensorMate and further unblocked downstream modules.
+- Fix records and full logs: /home/ubuntu/u9/bz/FIXES-BZ1030.md.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
