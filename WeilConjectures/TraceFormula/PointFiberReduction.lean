@@ -241,10 +241,10 @@ noncomputable def pointDerivedSectionsComapIso :
           Etale.rightDerivedGlobalSections (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E.1 n))
             (point k).left ⋙
           (ModuleCat.restrictScalars (integersModPowCoeffHom ℓ E n)).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (pointSectionsComapIso ℓ k E n) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _ ≪≫
-    Functor.isoWhiskerLeft _ (Functor.mapDerivedCategoryCompIso _ _ ≪≫
+    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    Functor.isoWhiskerLeft _ ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
       Functor.isoWhiskerRight
         (Functor.mapDerivedCategoryNatIso
             (Sheaf.ΓNatIsoSheafSections _ _ (Scheme.ProEt.isTerminalMkId (point k).left)).symm ≪≫
