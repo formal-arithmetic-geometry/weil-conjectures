@@ -436,7 +436,8 @@ theorem IsCanonicalPullbackTensorComparison.unique {T X : Scheme.{uTC}} {g : T �
         pullbackTensorModelMap T
           (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj P)
           (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj N))).1
-    rw [← heq, ← heq', hhom]
+    have heq'' := heq.symm.trans (by simpa only [hhom] using heq')
+    simpa only [cast_eq] using heq''
   funext E K
   obtain ⟨c⟩ := SingleComplexBaseChange.nonempty_coordinates g E
     ((derivedPullback g).obj E) (𝟙 _)
