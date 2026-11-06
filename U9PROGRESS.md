@@ -305,3 +305,8 @@
 - Both assigned modules GREEN at 0795abb04e0e176630129fbd17347398d825ca02: rc=0, built=2, failed=0.
 - Log: /home/ubuntu/u9/bz/BUILD-PZ030-assigned-green.log.
 - Continuing with direct importer DerivedScalarMateData.
+
+- DerivedScalarMateData GREEN at 585ecd62c6e9f7c32c374d4ff811aac4b2d77ed2: rc=0, built=8, failed=0.
+- Same Localization imports and reflexive transports; no declarations deleted.
+- Reference guard retained IsDerivedTensor and derivedTensorIso helper chain.
+- Next: eight direct importers in batches of at most six.
