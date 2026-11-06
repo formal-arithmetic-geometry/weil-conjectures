@@ -11,6 +11,8 @@ public import WeilConjectures.AlgebraicGeometry.PullbackStalkTensorComparison
 public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorQCoh
 import WeilConjectures.AlgebraicGeometry.SingleComplexInheritedTensorCondition
 import WeilConjectures.AlgebraicGeometry.SingleComplexQcqsInduction
