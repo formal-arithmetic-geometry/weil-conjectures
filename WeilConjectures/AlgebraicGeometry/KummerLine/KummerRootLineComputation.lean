@@ -150,7 +150,11 @@ private lemma root_zero (k : Type u) [Field k] (m : ℕ) [NeZero m]
           ULift.up (Additive.ofMul (Units.map (scalar k b).toMonoidHom ζ)) := by
   let X := curve k b
   have : ConnectedSpace X := by
-    cases b <;> dsimp [X, curve] <;> infer_instance
+    cases b
+    · change ConnectedSpace (PrimeSpectrum (Polynomial k))
+      infer_instance
+    · change ConnectedSpace (PrimeSpectrum (LaurentPolynomial k))
+      infer_instance
   let a := Units.map (scalar k b).toMonoidHom ζ
   have ha : a ^ m = 1 := by
     change (Units.map (scalar k b).toMonoidHom ζ) ^ m = 1
