@@ -215,7 +215,9 @@ private theorem commShift_of_tensorLeft_fac_models (X : HomotopyCategory C (.up 
   have : NatTrans.CommShift c₁ ℤ := by dsimp only [c₁]; infer_instance
   have : NatTrans.CommShift c₂ ℤ := by dsimp only [c₂]; infer_instance
   have := OplaxMonoidal.commShift_mapHomotopyCategoryδNatTrans_app F X
-  have : NatTrans.CommShift δ₀ ℤ := by dsimp only [δ₀]; infer_instance
+  have : NatTrans.CommShift δ₀ ℤ :=
+    NatTrans.CommShift.whiskerRight (F₁ := (curriedTensor _).obj X ⋙ G)
+      (F₂ := G ⋙ (curriedTensor _).obj (G.obj X)) _ Qh ℤ
   apply commShift_of_fac τ Qh c₂ c₁ δ₀ fac P hres
   intro Y hY
   have := hc Y hY
@@ -267,7 +269,9 @@ private theorem commShift_of_tensorRight_fac_models (X : HomotopyCategory C (.up
   have : NatTrans.CommShift c₁ ℤ := by dsimp only [c₁]; infer_instance
   have : NatTrans.CommShift c₂ ℤ := by dsimp only [c₂]; infer_instance
   have := OplaxMonoidal.commShift_mapHomotopyCategoryδNatTrans_flipApp F X
-  have : NatTrans.CommShift δ₀ ℤ := by dsimp only [δ₀]; infer_instance
+  have : NatTrans.CommShift δ₀ ℤ :=
+    NatTrans.CommShift.whiskerRight (F₁ := (curriedTensor _).flip.obj X ⋙ G)
+      (F₂ := G ⋙ (curriedTensor _).flip.obj (G.obj X)) _ Qh ℤ
   apply commShift_of_fac τ Qh c₂ c₁ δ₀ fac P hres
   intro Y hY
   have := hc Y hY
