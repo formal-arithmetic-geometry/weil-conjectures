@@ -302,3 +302,25 @@
   SingleComplexOpenRestrictionComparison. Their next importers are
   SingleComplexAffineSpectrumCoordinates and SingleComplexTargetLocality.
 - Fix records: /home/ubuntu/u9/bz/FIXES-BZ856.md. No DONE marker yet.
+
+## BZ856 current checkpoint
+
+- Latest integration: d2d60c46e, merged while validation was queued.
+- An overlapping BZ862 merge dropped required comparisonIntoPullback_naturality.
+  Commit 5db8079bf restores it after that integration and retains our explicit
+  canonical category annotation. Other five BZ856 Lean files matched integration.
+- The resumed importer batch at 31033fc8ea completed: rc=1, failed=2.
+  Its log is BUILD-BZ856-downstream-resumed-full.log (remote BZ856-20261106T074824.log).
+- Default 200000 heartbeats exhausted in IsoCore at whnf (20 seconds). The original
+  800000 budget had already passed twice (40/42 seconds), so 9b46e2202 restores it
+  locally with the measured reason. Naturality still uses the default limit.
+- The unowned OpenPinnedSingleDegreeZeroCounitIso dependency fails at line 88 with
+  Category instance synthesis. Skip this open-restriction path under the brief.
+- The old restored3 leaf request was cancelled only after stopping it and verifying
+  no tree-lock descriptor; it never compiled. Replacement BUILD-BZ856-restored4.log
+  is queued (local session 21724), as is BUILD-BZ856-affine-retry.log (session 91602),
+  which requests the leaf plus AffineSpectrumStalkCondition after the core fix.
+- Next: read the first new remote log, fix any owned errors, obtain green ucheck,
+  continue any green downstream path, and write BZ856.DONE. No DONE exists yet.
+- Contract audit passes for all six public theorem statements modulo reflexive
+  casts/whitespace. No proof placeholders or trust bypasses; no local Lean/Lake.
