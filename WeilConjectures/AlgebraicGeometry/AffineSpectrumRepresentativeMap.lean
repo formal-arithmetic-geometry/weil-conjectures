@@ -114,7 +114,7 @@ empty schemes obey the same composition equations.
 Source: Stacks Project, Tag 0DJ8, affine reduction; Tag 0D5S, composition of
 pullbacks and compatibility of the derived counits.
 (blueprint: lem-pc-affine-spectrum-representative-map). -/
-private theorem affineSpectrum_representative_map_eq
+private theorem affineSpectrum_representative_map_eq_aux
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     {X X' : Scheme.{u}} [IsAffine X] [IsAffine X']
@@ -196,7 +196,7 @@ private theorem affineSpectrum_representative_map_eq
     (counit_naturality_complex X'.isoSpec.inv c.t).symm
 
 
-private theorem counit_naturality_complex
+private theorem counit_naturality_complex_restored
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     {Y Z : Scheme.{u}} (k : Y ⟶ Z)
@@ -291,13 +291,15 @@ theorem affineSpectrum_representative_map_eq
   change e.inv = (derivedPullback X.isoSpec.inv).map c.e.inv ≫
     (derivedPullback X.isoSpec.inv).map (𝟙 (DerivedCategory.Q.obj c.P)) ≫
     (counit X.isoSpec.inv).app ((HomotopyCategory.quotient _ (.up ℤ)).obj c.P) ≫
-    𝟙 (DerivedCategory.Q.obj
+    𝟙 ((DerivedCategory.Q.{w}
+      (C := SheafOfModules.{u} (moduleRings (Spec Γ(X, ⊤)).toRingedSpace))).obj
       (((Scheme.Modules.tensorPullback X.isoSpec.inv).mapHomologicalComplex (.up ℤ)).obj
         c.P)) at he
   change e'.inv = (derivedPullback X'.isoSpec.inv).map c.e'.inv ≫
     (derivedPullback X'.isoSpec.inv).map (𝟙 (DerivedCategory.Q.obj c.N)) ≫
     (counit X'.isoSpec.inv).app ((HomotopyCategory.quotient _ (.up ℤ)).obj c.N) ≫
-    𝟙 (DerivedCategory.Q.obj
+    𝟙 ((DerivedCategory.Q.{w}
+      (C := SheafOfModules.{u} (moduleRings (Spec Γ(X', ⊤)).toRingedSpace))).obj
       (((Scheme.Modules.tensorPullback X'.isoSpec.inv).mapHomologicalComplex (.up ℤ)).obj
         c.N)) at he'
   have he0 := he.trans (remove_comparison_identities _ _ _)

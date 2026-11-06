@@ -477,6 +477,8 @@ lemma isClosed_of_ord_ne_zero {f : C.functionField} {x : C} (hx : C.ord f x ≠ 
   rw [hx1, hy1] at h
   exact absurd h (by decide)
 
+variable (k) in
+include k in
 /-- **Principal divisors have degree zero** on a smooth proper integral curve over an
 algebraically closed field: `deg div(f) = ∑_P v_P(f) = 0`
 (`AlgebraicGeometry.Scheme.finsum_ord_eq_zero`).

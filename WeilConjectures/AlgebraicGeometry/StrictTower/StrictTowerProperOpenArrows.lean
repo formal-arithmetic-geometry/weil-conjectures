@@ -951,7 +951,7 @@ private theorem betaInv_lift [Finite B] {U' U X' X : Scheme.{u}}
     rw [he]
     simp only [Functor.mapDerivedCategorySquareIso,
       Functor.mapDerivedCategoryNatIso_symm, Iso.trans_hom, Iso.trans_inv,
-      Iso.symm_hom, Category.assoc]
+      Iso.symm_hom, Iso.symm_inv, Category.assoc]
   have hm (K : Modules B U) :
       (moduleJAdj B j').unit.app ((modulePullback B a).obj K) ≫
           (modulePullback B j').map (e.hom.app K) =
@@ -1046,7 +1046,7 @@ theorem beta_evaluation [Finite B] {U' U X' X : Scheme.{u}}
     apply Iso.ext
     simp only [de, Functor.mapDerivedCategorySquareIso,
       Functor.mapDerivedCategoryNatIso_symm, Iso.trans_hom, Iso.trans_inv,
-      Iso.symm_hom, Category.assoc]
+      Iso.symm_hom, Iso.symm_inv, Category.assoc]
   have he := evalD_square (moduleJ B j) (modulePullback B g)
     (modulePullback B a) (moduleJ B j') e.symm M n
   rw [hs, ← hb] at he
