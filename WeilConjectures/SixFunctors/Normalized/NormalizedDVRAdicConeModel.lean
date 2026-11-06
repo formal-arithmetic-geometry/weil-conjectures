@@ -126,7 +126,7 @@ private theorem scalar_tensor_unit
       (regularTensorIso N).inv ≫ (tensorRight N).map
         ((scalar R t).app (unit (derivedChangeRingIndependentCoefficients J R))) := by
   ext U x
-  change (regularTensorIso N).inv.val.app U (t.val U • x) =
+  change (regularTensorIso N).inv.val.app U ((show R.obj.obj U from t.val U) • x) =
     (((scalar R t).app (unit (derivedChangeRingIndependentCoefficients J R))) ▷ N).val.app U
       ((regularTensorIso N).inv.val.app U x)
   let μ := (scalar R t).app (unit (derivedChangeRingIndependentCoefficients J R))
@@ -134,15 +134,15 @@ private theorem scalar_tensor_unit
     (L := unit (derivedChangeRingIndependentCoefficients J R))
     (L' := unit (derivedChangeRingIndependentCoefficients J R)) μ N U
     (1 : R.obj.obj U) x
-  have hb : (1 : R.obj.obj U) ⊗ₜ[R.obj.obj U] (t.val U • x) =
+  have hb : (1 : R.obj.obj U) ⊗ₜ[R.obj.obj U] ((show R.obj.obj U from t.val U) • x) =
       ((show R.obj.obj U from t.val U) • (1 : R.obj.obj U)) ⊗ₜ[R.obj.obj U] x :=
     TensorProduct.tmul_smul (R := R.obj.obj U)
       (show R.obj.obj U from t.val U) (1 : R.obj.obj U) x
   calc
     _ = (tensorPresheafUnit (R := R)
         (unit (derivedChangeRingIndependentCoefficients J R)) N).app U
-        ((1 : R.obj.obj U) ⊗ₜ[R.obj.obj U] (t.val U • x)) :=
-      regularTensorIso_inv_apply (R := R) N U (t.val U • x)
+        ((1 : R.obj.obj U) ⊗ₜ[R.obj.obj U] ((show R.obj.obj U from t.val U) • x)) :=
+      regularTensorIso_inv_apply (R := R) N U ((show R.obj.obj U from t.val U) • x)
     _ = (tensorPresheafUnit (R := R)
         (unit (derivedChangeRingIndependentCoefficients J R)) N).app U
         (((show R.obj.obj U from t.val U) • (1 : R.obj.obj U)) ⊗ₜ[R.obj.obj U] x) :=
@@ -329,7 +329,7 @@ private theorem completedRestrictionComp_fac {m n : ℕ} (h : n ≤ m)
   let H := completedIntegralRestrictScalars l E X D hl n
   let e := completedRestrictionComp l E X D hl h
   have he : normalizedDVRResCompletedComp l E X D hl h =
-      (Functor.mapDerivedCategoryCompIso F G).symm ≪≫
+      Functor.mapDerivedCategoryCompIso F G ≪≫
         Functor.mapDerivedCategoryNatIso e := by
     rfl
   rw [he]
