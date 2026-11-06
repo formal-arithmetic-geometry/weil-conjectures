@@ -71,7 +71,6 @@ private theorem projectionTensor_eq (φ : R ⟶ S)
       (SheafOfModules.changeOfRingsPresheaf.{v, c, r} φ M)
   have h := (η.app U).hom.map_smul s
     ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x)
-  rw [TensorProduct.smul_tmul'] at h
   change (toSheafify J (SheafOfModules.changeOfRingsPresheaf.{v, c, r} φ M).presheaf).app U
       ((s * 1) ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x) =
     @SMul.smul (S.obj.obj U) ((SheafOfModules.changeOfRings.{v, c, r} φ M).val.obj U)
