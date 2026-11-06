@@ -65,8 +65,18 @@ open AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures.IntegralLineReduction
 open IntegralOnSlice
 
+attribute [local instance] HasDerivedCategory.standard
+
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})
+
+private local instance (M : scalarReductionSource.{u, u} l E X) (U : X.ProEtᵒᵖ) :
+    SMul ((SheafOfModules.unit
+      ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat RingCat)).obj
+        (completedIntegralCommRingSheafUnrestricted.{u, u} l E X))).val.obj U)
+      (M.val.obj U) :=
+  inferInstanceAs
+    (SMul ((completedIntegralCommRingSheafUnrestricted.{u, u} l E X).obj.obj U) (M.val.obj U))
 
 /-- The existing ordinary reduction of a line, at exponent n+1.
 Source: Stacks 03EK (blueprint: def-pur-integral-line-reduction-data). -/
