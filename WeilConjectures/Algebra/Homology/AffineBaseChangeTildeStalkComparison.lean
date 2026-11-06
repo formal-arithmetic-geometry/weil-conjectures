@@ -131,6 +131,6 @@ theorem affineBaseChangeTildeModuleMap_localized
   rw [hloc]
   rw [affineTensorPullbackHomologyStalkIso_coordinates A A' φg' K hL M e hc i p]
   rw [hlU]
-  rfl
+  simp only [affineBaseChangeIntoPullback, Category.assoc, Functor.map_comp] <;> rfl
 
 end AlgebraicGeometry
