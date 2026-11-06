@@ -64,24 +64,23 @@ private theorem complete_cone
     (h₁ : ConstantCompletion.IsComplete q T.obj₁)
     (h₂ : ConstantCompletion.IsComplete q T.obj₂) :
     ConstantCompletion.IsComplete q T.obj₃ := by
-  intro U f hf
-  let L := (DerivedCategory.singleFunctor _ 0).obj
-    (ringedSectionLocalization (R.over U) (ringedSliceSection R U f))
-  let H := (Functor.curry.obj (derivedInternalHom (S.over U) (R.over U))).obj (op L)
-  obtain ⟨s, hH⟩ := (ringedInternalHom_exact (S.over U) (R.over U)).1 L
-  let := s
-  let := hH
-  let : (ringedDerivedRestriction R U).CommShift ℤ := by
-    unfold ringedDerivedRestriction
-    set_option backward.isDefEq.respectTransparency true in
+  set_option backward.isDefEq.respectTransparency true in
+    intro U f hf
+    let L := (DerivedCategory.singleFunctor _ 0).obj
+      (ringedSectionLocalization (R.over U) (ringedSliceSection R U f))
+    let H := (Functor.curry.obj (derivedInternalHom (S.over U) (R.over U))).obj (op L)
+    obtain ⟨s, hH⟩ := (ringedInternalHom_exact (S.over U) (R.over U)).1 L
+    let := s
+    let := hH
+    let : (ringedDerivedRestriction R U).CommShift ℤ := by
+      unfold ringedDerivedRestriction
       infer_instance
-  let : (ringedDerivedRestriction R U).IsTriangulated := by
-    unfold ringedDerivedRestriction
-    set_option backward.isDefEq.respectTransparency true in
+    let : (ringedDerivedRestriction R U).IsTriangulated := by
+      unfold ringedDerivedRestriction
       infer_instance
-  let G := ringedDerivedRestriction R U ⋙ H
-  exact Pretriangulated.Triangle.isZero₃_of_isZero₁₂ _ (G.map_distinguished T hT)
-    (h₁ U f hf) (h₂ U f hf)
+    let G := ringedDerivedRestriction R U ⋙ H
+    exact Pretriangulated.Triangle.isZero₃_of_isZero₁₂ _ (G.map_distinguished T hT)
+      (h₁ U f hf) (h₂ U f hf)
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- Reconstruction from the quotient tower detects zero once all reductions vanish. -/
