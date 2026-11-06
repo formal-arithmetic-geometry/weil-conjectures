@@ -176,7 +176,7 @@ def finitePerfectAdicDerivedFactor
     [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     {J : DerivedCategory D ⥤ DerivedCategory E} (e : G.mapDerivedCategory ≅ J) :
     (F ⋙ G).mapDerivedCategory ≅ F.mapDerivedCategory ⋙ J :=
-  mapDerivedCategoryCompIso F G ≪≫ isoWhiskerLeft F.mapDerivedCategory e
+  (mapDerivedCategoryCompIso F G).symm ≪≫ isoWhiskerLeft F.mapDerivedCategory e
 
 /-- The source is the exact derived functor of its explicit ordinary composite.
 Source: Stacks Tag 05RU; exact derived functors commute with composition. -/
@@ -251,7 +251,7 @@ def finitePerfectAdicScalarModelCompletedFactors :
   have hε := h.choose_spec.choose_spec.1
   have : T.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso _ (.up ℤ)) := hε
   let e := finitePerfectAdicExactDerivedIso E T ε
-  exact mapDerivedCategoryCompIso (finitePerfectAdicConstant X A) E ≪≫
+  exact (mapDerivedCategoryCompIso (finitePerfectAdicConstant X A) E).symm ≪≫
     isoWhiskerLeft (finitePerfectAdicDerivedConstant X A) e
 
 /-- The completed ordinary target localizes to the model's specified local realization.
@@ -269,7 +269,7 @@ def finitePerfectAdicScalarModelTargetFactors :
   let R := ModuleCat.restrictScalars (Ideal.Quotient.mk (d.ideal ^ (n + 1)))
   let H := finitePerfectAdicScalarModelOrdinary X d
   let O := SheafOfModules.overFunctor (completedAdicRing X d) W
-  exact mapDerivedCategoryCompIso R (H ⋙ O) ≪≫
+  exact (mapDerivedCategoryCompIso R (H ⋙ O)).symm ≪≫
     isoWhiskerLeft R.mapDerivedCategory (mapDerivedCategoryCompIso H O) ≪≫
     isoWhiskerRight (isoWhiskerLeft R.mapDerivedCategory
       (finitePerfectAdicScalarModelCompletedFactors X d)) O.mapDerivedCategory
