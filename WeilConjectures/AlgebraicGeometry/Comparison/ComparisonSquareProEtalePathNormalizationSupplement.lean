@@ -55,22 +55,22 @@ variable {A B C P Q R S : Type*}
 -- Exact derivation respects this three-factor path, with both endpoints normalized.
 private theorem exact_path (e : b ⋙ k ≅ h ⋙ t) (c : a ⋙ h ≅ n ⋙ r)
     (s : r ⋙ t ≅ r' ⋙ t') (M : DerivedCategory A) :
-    k.mapDerivedCategory.map ((Functor.mapDerivedCategoryCompIso a b).inv.app M) ≫
-      (Functor.mapDerivedCategoryCompIso (a ⋙ b) k).inv.app M ≫
+    k.mapDerivedCategory.map ((Functor.mapDerivedCategoryCompIso a b).symm.inv.app M) ≫
+      (Functor.mapDerivedCategoryCompIso (a ⋙ b) k).symm.inv.app M ≫
       (Functor.mapDerivedCategoryNatIso
         (Functor.isoWhiskerLeft a e ≪≫ Functor.isoWhiskerRight c t ≪≫
           Functor.isoWhiskerLeft n s)).hom.app M ≫
-      (Functor.mapDerivedCategoryCompIso n (r' ⋙ t')).hom.app M ≫
-      (Functor.mapDerivedCategoryCompIso r' t').hom.app (n.mapDerivedCategory.obj M) =
-    ((Functor.mapDerivedCategoryCompIso b k).inv.app (a.mapDerivedCategory.obj M) ≫
+      (Functor.mapDerivedCategoryCompIso n (r' ⋙ t')).symm.hom.app M ≫
+      (Functor.mapDerivedCategoryCompIso r' t').symm.hom.app (n.mapDerivedCategory.obj M) =
+    ((Functor.mapDerivedCategoryCompIso b k).symm.inv.app (a.mapDerivedCategory.obj M) ≫
       (Functor.mapDerivedCategoryNatIso e).hom.app (a.mapDerivedCategory.obj M) ≫
-      (Functor.mapDerivedCategoryCompIso h t).hom.app (a.mapDerivedCategory.obj M)) ≫
-    t.mapDerivedCategory.map ((Functor.mapDerivedCategoryCompIso a h).inv.app M ≫
+      (Functor.mapDerivedCategoryCompIso h t).symm.hom.app (a.mapDerivedCategory.obj M)) ≫
+    t.mapDerivedCategory.map ((Functor.mapDerivedCategoryCompIso a h).symm.inv.app M ≫
       (Functor.mapDerivedCategoryNatIso c).hom.app M ≫
-      (Functor.mapDerivedCategoryCompIso n r).hom.app M) ≫
-    (Functor.mapDerivedCategoryCompIso r t).inv.app (n.mapDerivedCategory.obj M) ≫
+      (Functor.mapDerivedCategoryCompIso n r).symm.hom.app M) ≫
+    (Functor.mapDerivedCategoryCompIso r t).symm.inv.app (n.mapDerivedCategory.obj M) ≫
       (Functor.mapDerivedCategoryNatIso s).hom.app (n.mapDerivedCategory.obj M) ≫
-      (Functor.mapDerivedCategoryCompIso r' t').hom.app (n.mapDerivedCategory.obj M) := by
+      (Functor.mapDerivedCategoryCompIso r' t').symm.hom.app (n.mapDerivedCategory.obj M) := by
   simp only [Functor.mapDerivedCategoryNatIso_trans, NatTrans.comp_app,
     Functor.map_comp, Category.assoc]
   -- First expose the three whiskered factors and cancel their adjacent comparisons.
@@ -79,29 +79,29 @@ private theorem exact_path (e : b ⋙ k ≅ h ⋙ t) (c : a ⋙ h ≅ n ⋙ r)
       [PreservesFiniteLimits G] [PreservesFiniteColimits G]
       [PreservesFiniteLimits G'] [PreservesFiniteColimits G'] (z : G ≅ G') :
       (Functor.mapDerivedCategoryNatIso (Functor.isoWhiskerLeft F z)).hom.app M =
-        (Functor.mapDerivedCategoryCompIso F G).hom.app M ≫
+        (Functor.mapDerivedCategoryCompIso F G).symm.hom.app M ≫
           (Functor.mapDerivedCategoryNatIso z).hom.app (F.mapDerivedCategory.obj M) ≫
-          (Functor.mapDerivedCategoryCompIso F G').inv.app M := by
-    apply (cancel_mono ((Functor.mapDerivedCategoryCompIso F G').hom.app M)).1
+          (Functor.mapDerivedCategoryCompIso F G').symm.inv.app M := by
+    apply (cancel_mono ((Functor.mapDerivedCategoryCompIso F G').symm.hom.app M)).1
     simpa only [Functor.comp_obj, Category.assoc, Iso.inv_hom_id_app, Category.comp_id,
       NatTrans.comp_app, Functor.whiskerLeft_app] using
       congr_app (Functor.mapDerivedCategoryNatIso_isoWhiskerLeft F z) M
   have hR :
       (Functor.mapDerivedCategoryNatIso (Functor.isoWhiskerRight c t)).hom.app M =
-        (Functor.mapDerivedCategoryCompIso (a ⋙ h) t).hom.app M ≫
+        (Functor.mapDerivedCategoryCompIso (a ⋙ h) t).symm.hom.app M ≫
           t.mapDerivedCategory.map ((Functor.mapDerivedCategoryNatIso c).hom.app M) ≫
-          (Functor.mapDerivedCategoryCompIso (n ⋙ r) t).inv.app M := by
-    apply (cancel_mono ((Functor.mapDerivedCategoryCompIso (n ⋙ r) t).hom.app M)).1
+          (Functor.mapDerivedCategoryCompIso (n ⋙ r) t).symm.inv.app M := by
+    apply (cancel_mono ((Functor.mapDerivedCategoryCompIso (n ⋙ r) t).symm.hom.app M)).1
     simpa only [Functor.comp_obj, Category.assoc, Iso.inv_hom_id_app, Category.comp_id,
       NatTrans.comp_app, Functor.whiskerRight_app] using
       congr_app (Functor.mapDerivedCategoryNatIso_isoWhiskerRight c t) M
   rw [hL a e, hR]
   have hL' :
       (Functor.mapDerivedCategoryNatIso (Functor.isoWhiskerLeft n s)).hom.app M =
-        (Functor.mapDerivedCategoryCompIso n (r ⋙ t)).hom.app M ≫
+        (Functor.mapDerivedCategoryCompIso n (r ⋙ t)).symm.hom.app M ≫
           (Functor.mapDerivedCategoryNatIso s).hom.app (n.mapDerivedCategory.obj M) ≫
-          (Functor.mapDerivedCategoryCompIso n (r' ⋙ t')).inv.app M := by
-    apply (cancel_mono ((Functor.mapDerivedCategoryCompIso n (r' ⋙ t')).hom.app M)).1
+          (Functor.mapDerivedCategoryCompIso n (r' ⋙ t')).symm.inv.app M := by
+    apply (cancel_mono ((Functor.mapDerivedCategoryCompIso n (r' ⋙ t')).symm.hom.app M)).1
     simpa only [Functor.comp_obj, Category.assoc, Iso.inv_hom_id_app, Category.comp_id,
       NatTrans.comp_app, Functor.whiskerLeft_app] using
       congr_app (Functor.mapDerivedCategoryNatIso_isoWhiskerLeft n s) M
@@ -112,13 +112,13 @@ private theorem exact_path (e : b ⋙ k ≅ h ⋙ t) (c : a ⋙ h ≅ n ⋙ r)
       [F.Additive] [G.Additive] [H.Additive]
       [PreservesFiniteLimits F] [PreservesFiniteLimits G] [PreservesFiniteLimits H]
       [PreservesFiniteColimits F] [PreservesFiniteColimits G] [PreservesFiniteColimits H] :
-      (Functor.mapDerivedCategoryCompIso F (G ⋙ H)).inv.app M ≫
-        (Functor.mapDerivedCategoryCompIso (F ⋙ G) H).hom.app M =
-      (Functor.mapDerivedCategoryCompIso G H).hom.app (F.mapDerivedCategory.obj M) ≫
-        H.mapDerivedCategory.map ((Functor.mapDerivedCategoryCompIso F G).inv.app M) := by
+      (Functor.mapDerivedCategoryCompIso F (G ⋙ H)).symm.inv.app M ≫
+        (Functor.mapDerivedCategoryCompIso (F ⋙ G) H).symm.hom.app M =
+      (Functor.mapDerivedCategoryCompIso G H).symm.hom.app (F.mapDerivedCategory.obj M) ≫
+        H.mapDerivedCategory.map ((Functor.mapDerivedCategoryCompIso F G).symm.inv.app M) := by
     have hh := congr_app (Functor.mapDerivedCategoryCompIso_assoc F G H) M
     simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app] at hh
-    apply (cancel_epi ((Functor.mapDerivedCategoryCompIso F (G ⋙ H)).hom.app M)).1
+    apply (cancel_epi ((Functor.mapDerivedCategoryCompIso F (G ⋙ H)).symm.hom.app M)).1
     simp only [← Category.assoc, Iso.hom_inv_id_app, Category.id_comp]
     rw [hh]
     simp only [Functor.comp_obj, Category.assoc, ← Functor.map_comp,
@@ -127,11 +127,11 @@ private theorem exact_path (e : b ⋙ k ≅ h ⋙ t) (c : a ⋙ h ≅ n ⋙ r)
   have ha' := congr_app (Functor.mapDerivedCategoryCompIso_assoc a b k) M
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app] at ha'
   have hs :
-      k.mapDerivedCategory.map ((Functor.mapDerivedCategoryCompIso a b).inv.app M) ≫
-        (Functor.mapDerivedCategoryCompIso (a ⋙ b) k).inv.app M ≫
-        (Functor.mapDerivedCategoryCompIso a (b ⋙ k)).hom.app M =
-      (Functor.mapDerivedCategoryCompIso b k).inv.app (a.mapDerivedCategory.obj M) := by
-    apply (cancel_mono ((Functor.mapDerivedCategoryCompIso b k).hom.app
+      k.mapDerivedCategory.map ((Functor.mapDerivedCategoryCompIso a b).symm.inv.app M) ≫
+        (Functor.mapDerivedCategoryCompIso (a ⋙ b) k).symm.inv.app M ≫
+        (Functor.mapDerivedCategoryCompIso a (b ⋙ k)).symm.hom.app M =
+      (Functor.mapDerivedCategoryCompIso b k).symm.inv.app (a.mapDerivedCategory.obj M) := by
+    apply (cancel_mono ((Functor.mapDerivedCategoryCompIso b k).symm.hom.app
       (a.mapDerivedCategory.obj M))).1
     simp only [Category.assoc]
     rw [ha']
@@ -142,11 +142,11 @@ private theorem exact_path (e : b ⋙ k ≅ h ⋙ t) (c : a ⋙ h ≅ n ⋙ r)
   have hn := congr_app (Functor.mapDerivedCategoryCompIso_assoc n r t) M
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app] at hn
   have ht :
-      (Functor.mapDerivedCategoryCompIso (n ⋙ r) t).inv.app M ≫
-        (Functor.mapDerivedCategoryCompIso n (r ⋙ t)).hom.app M =
-      t.mapDerivedCategory.map ((Functor.mapDerivedCategoryCompIso n r).hom.app M) ≫
-        (Functor.mapDerivedCategoryCompIso r t).inv.app (n.mapDerivedCategory.obj M) := by
-    apply (cancel_mono ((Functor.mapDerivedCategoryCompIso r t).hom.app
+      (Functor.mapDerivedCategoryCompIso (n ⋙ r) t).symm.inv.app M ≫
+        (Functor.mapDerivedCategoryCompIso n (r ⋙ t)).symm.hom.app M =
+      t.mapDerivedCategory.map ((Functor.mapDerivedCategoryCompIso n r).symm.hom.app M) ≫
+        (Functor.mapDerivedCategoryCompIso r t).symm.inv.app (n.mapDerivedCategory.obj M) := by
+    apply (cancel_mono ((Functor.mapDerivedCategoryCompIso r t).symm.hom.app
       (n.mapDerivedCategory.obj M))).1
     simp only [Category.assoc]
     rw [hn]
@@ -186,13 +186,13 @@ private theorem square_exact
       D(upperStar (ModuleCat.{u + 1} Λ) f').map
         ((leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) g).hom.app N) ≫
       (Functor.mapDerivedCategoryCompIso (upperStar (ModuleCat.{u + 1} Λ) g)
-        (upperStar (ModuleCat.{u + 1} Λ) f')).inv.app N ≫
+        (upperStar (ModuleCat.{u + 1} Λ) f')).symm.inv.app N ≫
       (Functor.mapDerivedCategoryNatIso
         (F := upperStar (ModuleCat.{u + 1} Λ) g ⋙ upperStar (ModuleCat.{u + 1} Λ) f')
         (G := upperStar (ModuleCat.{u + 1} Λ) f ⋙ upperStar (ModuleCat.{u + 1} Λ) g')
         (proEtaleComparisonSquare (ModuleCat.{u + 1} Λ) cs)).hom.app N ≫
       (Functor.mapDerivedCategoryCompIso (upperStar (ModuleCat.{u + 1} Λ) f)
-        (upperStar (ModuleCat.{u + 1} Λ) g')).hom.app N ≫
+        (upperStar (ModuleCat.{u + 1} Λ) g')).symm.hom.app N ≫
       D(upperStar (ModuleCat.{u + 1} Λ) g').map
         ((leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) f).inv.app N) ≫
       (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) g').inv.app
@@ -225,11 +225,11 @@ private theorem normalized_path
     (M : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     D(ν^*(X')[ModuleCat.{u + 1} Λ]).map
         ((Functor.mapDerivedCategoryCompIso (Etale.upperStar (ModuleCat.{u + 1} Λ) g)
-          (Etale.upperStar (ModuleCat.{u + 1} Λ) f')).inv.app M.obj) ≫
+          (Etale.upperStar (ModuleCat.{u + 1} Λ) f')).symm.inv.app M.obj) ≫
       (Functor.mapDerivedCategoryCompIso
         (Etale.upperStar (ModuleCat.{u + 1} Λ) g ⋙
           Etale.upperStar (ModuleCat.{u + 1} Λ) f')
-        ν^*(X')[ModuleCat.{u + 1} Λ]).inv.app M.obj ≫
+        ν^*(X')[ModuleCat.{u + 1} Λ]).symm.inv.app M.obj ≫
       (Functor.mapDerivedCategoryNatIso
         (Functor.isoWhiskerLeft (Etale.upperStar (ModuleCat.{u + 1} Λ) g)
             (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) f').symm ≪≫
@@ -241,10 +241,10 @@ private theorem normalized_path
                 upperStar (ModuleCat.{u + 1} Λ) f ⋙ upperStar (ModuleCat.{u + 1} Λ) g' from
               proEtaleComparisonSquare (ModuleCat.{u + 1} Λ) cs))).hom.app M.obj ≫
       (Functor.mapDerivedCategoryCompIso ν^*(Y)[ModuleCat.{u + 1} Λ]
-        (upperStar (ModuleCat.{u + 1} Λ) f ⋙ upperStar (ModuleCat.{u + 1} Λ) g')).hom.app
+        (upperStar (ModuleCat.{u + 1} Λ) f ⋙ upperStar (ModuleCat.{u + 1} Λ) g')).symm.hom.app
           M.obj ≫
       (Functor.mapDerivedCategoryCompIso (upperStar (ModuleCat.{u + 1} Λ) f)
-        (upperStar (ModuleCat.{u + 1} Λ) g')).hom.app
+        (upperStar (ModuleCat.{u + 1} Λ) g')).symm.hom.app
           (D(ν^*(Y)[ModuleCat.{u + 1} Λ]).obj M.obj) ≫
       D(upperStar (ModuleCat.{u + 1} Λ) g').map
         ((leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) f).inv.app
