@@ -256,39 +256,48 @@
 - The assigned CoefficientConstantTowerRoos source is unchanged.
 - Next: remote ucheck-bump on the assigned module, then both direct importers.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+# BZ824 in progress
 
-# BZ864 in progress
+- Branch: u9/BZ824; starting commit 95c8987257f.
+- The user instructed continuation after the upstream-restoration proposal.
+- Restored four prerequisite modules. The comparison predicate uses verified PZ003
+  Localization imports and a reflexive cast; the transport proof is unchanged,
+  and target automorphism specializes the existing arbitrary-degree theorem to zero.
+- All six submitted modules passed ucheck-bump at 826d8e1a1fb: rc=0, failed=0, 4065 jobs.
+- Green: DerivedModuleBaseChangeMap, DerivedModulePullbackComparison,
+  ModulePullbackComparisonIsoTransport, ModulePullbackComparisonTargetAutomorphism,
+  CanonicalModuleBaseChangeIsoComparisonCompat, CanonicalModuleBaseChangeIsoComparison.
+- All restored declaration headers and original assigned/caller sources are unchanged.
+- Full log: /home/ubuntu/u9/bz/BUILD-BZ824-restored-full.log.
+- Next: build layer-two importer CanonicalModuleBaseChangeAffineChartComparison.
+- Notes: /home/ubuntu/u9/bz/FIXES-BZ824.md. No local Lean/Lake or proof shortcuts.
 
-- Branch: `u9/BZ864`; baseline `e167a50a4`.
-- The original missing open-comparison helper was pruned while its affine-chart caller remains.
-- First proof replacement exposed two upstream failures; user instructed continuation to green.
-- Restoring the referenced degree-zero open comparison chain with original signatures.
-- The assigned theorem now uses the degree-zero pinned square and target automorphisms.
-- No existing theorem statement changes, proof placeholders, or heartbeat increases.
-- All compilation is remote through `ucheck-bump`; build 7 is queued. Build 3 was cancelled while queued; builds 4 and 5 supplied concrete prerequisite diagnostics.
-- Fix records and restoration inventories: `/home/ubuntu/u9/bz/FIXES-BZ864.md`.
-- Next: repair errors reported by those builds, validate the leaf, then continue downstream.
+# BZ856 in progress
 
-- BZ864 update: 17 Lean modules changed, restoring 22 still-needed declarations and adding three helpers.
-- Pinned single-counit definitions now compile using explicit universe `w` and reflexive casts.
-- Remaining diagnosed repairs: abstract the homotopy-square isomorphism construction and
-  normalize casts in the pinned counit composition proof; submitted in build 6.
-- Build logs: `/home/ubuntu/u9/bz/BZ864-build-4-full.log` and `BZ864-build-5-full.log`.
-- No original statement changes, forbidden proof escapes, or heartbeat raises.
+- Branch: `u9/BZ856`; original start: `2ab2b07a3`.
+- Reread the brief and prior notes on continuation; no new LEAD lines were present.
+- User instructed continuation after the explicit five-upstream-module restoration proposal.
+  The six deleted prerequisites are restored from the reviewed draft, retaining later
+  repairs to surviving helpers. They now need remote Lean 4.35 validation and porting.
+- Merged integrated bump branch `db406319f` before restoring the prerequisites.
+- Assigned theorem remains intact: it has live callers and cannot be pruned.
+- Next: ucheck-bump assigned module, repair prerequisite errors, then downstream targets.
+- No local Lean/Lake execution; no proof placeholders, trust bypasses, or heartbeat raises.
 
-- Build 6: abstract homotopy helper elaborated, but exposed definition required its helper public. Fixed.
-- Build 6: counit simpa retained a Qh conversion mismatch; applied known BZ721 `simp at h ⊢; exact h` under full unfolding.
-- Build 7 submits both repairs; no other source changes pending.
+# BZ872 in progress
 
-- Build 7: homotopy iso, counit equation, target triangle, and zero apex now green.
-- Restriction factors: removed solved-goal rfl; its newly restored helper is private because the original type uses hidden Qh reduction. The sole caller now imports all of that helper module. No existing public statement changed.
-
-- Build 7 finished with two failing modules: restriction factors (prepared fix) and a further pruned homotopy tensor-counit helper. Restored that helper from a3a372af5 without its former heartbeat override. 18 Lean files changed, 23 restored declarations.
-- Build 8 validates these changes on the assigned module and affine locality.
-
-- Build 8: restriction factors and homotopy tensor counit green. Remaining failures: normalize reflexive casts before the degree-zero counit map-composition rewrite; reverse quotientCompQhIso when transporting a K-to-Q representative to Qh. Both fixes prepared for build 9.
-
-- Full-header audit now checks all let-bound type clauses: 62 unchanged existing/restored types and 3 new helpers across 19 Lean files; no baseline declaration deleted. See BZ864-full-header-audit.tsv.
-- Build 9 is running on poolb:43.157.135.193 at 6d626d27d5, rebuilding additional prerequisites. Build 8 compiler diagnostics are complete; its wrapper separately hit a transient EOF parse error after compilation. Current bbuild.sh passes bash -n.
-
-- Build 9: every prerequisite green through SingleComplexOpenBaseChangeCalculation. Only OpenPinnedSingleDegreeZeroTarget failed: 200000-heartbeat timeout at the broad source-factor rewrite (18s). Replaced it with targeted conv; also applied the established full-transparency cast normalization to the final equality. Default heartbeat limit retained. Build 10 next.
+- Branch: `u9/BZ872`; original baseline: `e167a50a4`.
+- Reread `/home/ubuntu/u9/briefs/BZ872.md` and this progress file on continuation;
+  the brief has no new LEAD lines after the original unit notes.
+- User instructed continuation after the explicit reflexive-cast statement proposal.
+  Applied that exact two-line patch to `comparisonIntoPullback_comp_counit`.
+- Restored prerequisites reuse BZ856's validated source, including its measured
+  historical heartbeat budgets; both prerequisite timeouts are resolved remotely.
+- Previous assigned error was the public Qh/Q endpoint conversion. Localization
+  imports enable proof-local reduction; the explicit `cast (by rfl)` handles the
+  public statement and `cast_eq` removes it during inverse cancellation.
+- Next: standalone `ucheck-bump` on the assigned module. Its sole direct importer,
+  `SingleComplexOpenTermwiseComparison`, was already attempted twice and is blocked
+  by the unowned BZ871 `SingleComplexOpenTermwiseCounitCompatibility` error.
+- Fixes and logs: `/home/ubuntu/u9/bz/FIXES-BZ872.md`.
+- No local Lean/Lake execution, proof placeholders, or trust bypasses.

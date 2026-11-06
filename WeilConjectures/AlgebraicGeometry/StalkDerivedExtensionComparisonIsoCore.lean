@@ -78,8 +78,8 @@ private theorem tensorStalkIso_naturality (z : X')
 -- Keep the original named proof binders, even though they do not occur in the conclusion.
 set_option linter.unusedVariables false in
 set_option synthInstance.maxSize 2048 in
--- BZ856 measured a timeout at 200000 (20s); this historical limit passed twice (40s, 42s).
 set_option maxHeartbeats 800000 in
+-- The default 200000 times out at whnf; this historical limit passed in 40 seconds remotely.
 /-- A natural comparison with the specified K-flat representative equation, without an
 invertibility assertion.
 
