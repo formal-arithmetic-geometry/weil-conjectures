@@ -46,7 +46,7 @@ def scalarTensorRestrictPullIso (a : Λ ⟶ Λ') [IsMonHom a]
 Source: Stacks 06YY (auxiliary; not a blueprint node). -/
 def scalarTensorRegularRestriction (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u}) :
     (V a T).obj (𝟙_ (DerivedCategory (Modules Λ' T))) ≅ B a T :=
-  (V₀ a T).mapDerivedCategoryFactors.app
+  cast (by rfl) <| (V₀ a T).mapDerivedCategoryFactors.app
       ((CochainComplex.singleFunctor (Modules Λ' T) 0).obj
         (Mod.regular (condensedRingObj Λ' T))) ≪≫
     DerivedCategory.Q.mapIso
