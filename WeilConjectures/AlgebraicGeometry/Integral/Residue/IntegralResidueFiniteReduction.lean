@@ -213,13 +213,13 @@ private def finiteFunctionDerivedPullback {T S : Scheme.{u}} (g : S ⟶ T)
     (FiniteCoefficientDerivedCategory T B)
   apply F.preimageIso
   exact Functor.isoWhiskerLeft RT.mapDerivedCategory a ≪≫
-    Functor.isoWhiskerRight ((Functor.mapDerivedCategoryCompIso RT
-      (pbcRestrict cT.hom)).symm ≪≫ Functor.mapDerivedCategoryNatIso iT) _ ≪≫
-    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
-    Functor.mapDerivedCategoryNatIso (finiteConstantPullbackEncoding g d n) ≪≫
+    Functor.isoWhiskerRight (Functor.mapDerivedCategoryCompIso RT
+      (pbcRestrict cT.hom) ≪≫ Functor.mapDerivedCategoryNatIso iT) _ ≪≫
     Functor.mapDerivedCategoryCompIso _ _ ≪≫
+    Functor.mapDerivedCategoryNatIso (finiteConstantPullbackEncoding g d n) ≪≫
+    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
     Functor.isoWhiskerLeft _ ((Functor.mapDerivedCategoryNatIso iS).symm ≪≫
-      Functor.mapDerivedCategoryCompIso RS (pbcRestrict cS.hom))
+      (Functor.mapDerivedCategoryCompIso RS (pbcRestrict cS.hom)).symm)
 
 private def liftRingIso (S : Scheme.{u})
     {R B : Sheaf (ProEt.topology S) CommRingCat.{u + 1}}
@@ -253,6 +253,8 @@ def integralResidueFiniteModel
   DerivedCategory.Q.obj
     (((SheafOfModules.restrictScalars e.inv).mapHomologicalComplex (.up ℤ)).obj
       (DerivedCategory.Q.objPreimage M))
+
+attribute [local instance] HasDerivedCategory.standard
 
 /-- Reduction commutes with the normalized integral coefficient comparison and inverse image.
 There is no completeness, perfectness or covering hypothesis.
@@ -360,7 +362,7 @@ theorem integralResidueFiniteReduction
     rw [hb']
     exact Iso.refl _
   let t' : RS.mapDerivedCategory ⋙ Rb ≅ F.mapDerivedCategory :=
-    (Functor.mapDerivedCategoryCompIso RS (pbcRestrict b.inv)).symm ≪≫
+    Functor.mapDerivedCategoryCompIso RS (pbcRestrict b.inv) ≪≫
       Functor.mapDerivedCategoryNatIso t
   obtain ⟨eC⟩ := eC
   let j : RT.mapDerivedCategory.obj (DerivedCategory.Q.obj C) ≅

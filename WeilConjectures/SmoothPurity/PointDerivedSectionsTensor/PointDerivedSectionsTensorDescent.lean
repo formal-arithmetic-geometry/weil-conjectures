@@ -15,6 +15,7 @@ public import WeilConjectures.SmoothPurity.Completed.CompletedIntegralCoefficien
 public import WeilConjectures.CategoryTheory.RingedSiteModules
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.Algebra.Homology.Localization
 public import Mathlib.Algebra.Homology.QuasiIso
 public import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
 public import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
@@ -53,6 +54,7 @@ public import Mathlib.CategoryTheory.Limits.Final
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import all Mathlib.Algebra.Homology.Localization
 import Mathlib.CategoryTheory.Localization.Predicate
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 import WeilConjectures.AlgebraicGeometry.ProperBaseChange.WContractibleAffineEvaluation
@@ -62,6 +64,7 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 import Mathlib.Algebra.Category.Grp.Abelian
 import Mathlib.Algebra.Category.Grp.EpiMono
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # Derived descent of the point sections-tensor comparison
 

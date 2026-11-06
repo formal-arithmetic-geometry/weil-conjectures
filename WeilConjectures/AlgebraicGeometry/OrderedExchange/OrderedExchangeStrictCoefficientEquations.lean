@@ -67,7 +67,7 @@ private theorem mapDerivedCategorySquareIso_hom_app_Q
   simp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
     NatTrans.comp_app, Category.assoc]
   rw [hG, hN, ← hF]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
 
 /-- The universal counit of a derived reduction model is natural in chain maps. -/
 private theorem complexCounit_naturality {B C : Type*} [Category B] [Abelian B]
