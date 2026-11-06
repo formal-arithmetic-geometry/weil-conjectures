@@ -223,7 +223,8 @@ theorem canonicalSingleBaseChangeComparison
     (ε_g.app ((HomotopyCategory.singleFunctor C_S 0).obj (F.obj M)))
     c (t_g.app (F.obj M)) k d
     (v.app ((HomotopyCategory.singleFunctor C_X' 0).obj ((pullback p).obj M))) hh
-  with_unfolding_all
+  set_option backward.isDefEq.respectTransparency false in
+  set_option backward.isDefEq.respectTransparency.types false in
     simpa only [canonicalSingleDirectImageMap, canonicalSinglePullbackMap, cast_eq,
       Category.assoc, C_X, C_S, C_X', C_S', E, Q_S, Q_X', Q_S', F, G, H, I,
       ε_g, ε_p, t_g, t_p, a, b₀, b₁, c, d, k, v, sf, Scheme.Modules,
