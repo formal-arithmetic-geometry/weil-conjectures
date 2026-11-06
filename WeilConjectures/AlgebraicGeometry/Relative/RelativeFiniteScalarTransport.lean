@@ -395,8 +395,8 @@ theorem relativeFiniteScalarTransport {X Y : Scheme.{u}} (g : Y ⟶ X)
   obtain ⟨sq⟩ := relativeFiniteScalarRestriction g f
   let := (siteRestrictScalars_exact ψ).1
   let := (siteRestrictScalars_exact ψ).2
-  let sqD := (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
-    Functor.mapDerivedCategoryNatIso sq ≪≫ Functor.mapDerivedCategoryCompIso _ _
+  let sqD := Functor.mapDerivedCategoryCompIso _ _ ≪≫
+    Functor.mapDerivedCategoryNatIso sq ≪≫ (Functor.mapDerivedCategoryCompIso _ _).symm
   obtain ⟨adj⟩ := smallScalarAdjunction ψ
   let E := (relativeFiniteModelModules g B).mapDerivedCategory.asEquivalence
   let F := (relativeFiniteModelModules g R).mapDerivedCategory.asEquivalence
