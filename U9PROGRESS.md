@@ -425,18 +425,21 @@
 - All ucheck invocations finished. This final commit changes documentation only.
 
 
-# BZ1068 in progress
+# BZ1068 complete
 
 - Branch: u9/BZ1068; starting commit dfaed262b6fc1850faba3b46955a11d3225a1e86.
-- The user instructed continuation after the concrete two-site compositor statement proposal.
-  Applied BZ1068-statement-only.patch; the statement and local hb proof now preserve the
-  original comparison using Mathlib's reversed derived compositor.
-- Merged BZ1059 prerequisite fixes; no duplicate declarations or declaration deletions.
-- Proof-only baseline cleared two errors; next: validate the complete leaf repair with
-  ucheck-bump, then build its four direct importers and continue through unblocked layers.
-- Patterns, exact errors, replay-checked rules: /home/ubuntu/u9/bz/FIXES-BZ1068.md.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
-
-- BZ1068 leaf is GREEN and sorry-free: ucheck-bump rc=0, built=1, failed=0 at
-  6afc4fae13c7e090b915aa0e3d61980300964a3c (poolb:43.157.189.27).
-  Next: validate all four direct importers; leaf log BUILD-BZ1068-leaf-full.log.
+- Assigned EtaleCompactSupportGraphGeometricBaseChange is GREEN and sorry-free:
+  ucheck-bump rc=0, built=1, failed=0, 11821 jobs; target rebuilt in 60s.
+- Green source commit: 6afc4fae13c7e090b915aa0e3d61980300964a3c.
+  Applied the proposed compositor statement migration after the user instructed continuation;
+  it preserves the intended comparison under Mathlib's reversed isomorphism.
+- Merged the completed BZ1059 normalization and finite-graph prerequisite repairs.
+- All four direct importers were attempted together. Each is blocked by the same four
+  unowned prerequisites; no importer is claimed green. The leaf rebuilt again in 63s.
+  No unblocked downstream branch remains; import paths and exact errors are recorded.
+- Fix patterns and replay-checked rules: /home/ubuntu/u9/bz/FIXES-BZ1068.md.
+- Logs: BUILD-BZ1068-leaf-full.log and BUILD-BZ1068-downstream1-full.log under ~/u9/bz/.
+- Completion marker: /home/ubuntu/u9/state/BZ1068.DONE.
+- No new declarations, deletions, local Lean/Lake, proof placeholders, trust bypasses,
+  profiler probes, or heartbeat changes. All ucheck invocations finished.
+- This completion commit changes documentation only; Lean sources match the green build.
