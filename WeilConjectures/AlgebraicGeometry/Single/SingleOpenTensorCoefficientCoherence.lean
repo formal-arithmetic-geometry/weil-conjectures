@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.RelativeMVMaps
 public import WeilConjectures.AlgebraicGeometry.Picard.Termwise.PicardTermwiseSingleMapComposition
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionAssociativity
 import WeilConjectures.AlgebraicGeometry.PerfectHomCochainCounit
 
@@ -34,8 +36,7 @@ attribute [local irreducible] Scheme.Modules.tensorPullback
 attribute [local instance_reducible] Scheme.Modules TopCat.Sheaf
 attribute [local implicit_reducible] Scheme.Modules.Hom DerivedCategory
   HomotopyCategory DerivedCategory.Q DerivedCategory.Qh
-  CochainComplex.singleFunctors DerivedCategory.singleFunctors
-  HomotopyCategory.singleFunctors SingleFunctors.postcomp
+  HomologicalComplexUpToQuasiIso.Qh HomotopyCategory.singleFunctors
 
 private theorem cancel_single_maps
     {C D : Type*} [Category C] [Category D] (S : C ⥤ D)
