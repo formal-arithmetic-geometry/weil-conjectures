@@ -128,7 +128,8 @@ theorem WeilSheaf.IsReal.higherLowerShriek_zero_of_quasiFinite {F : WeilSheaf k�
     (h : F.IsReal ι) : ((WeilSheaf.higherLowerShriek k₀ l f 0).obj F).IsReal ι := by
   intro y n
   obtain ⟨s, hs, hA⟩ := F.exists_charpolyRev_stalk_higherLowerShriek_zero f y
-  rw [FrobeniusModule.localPolynomial, hA]
+  refine (congrArg (fun P : Polynomial (PadicAlgCl l) ↦
+    (starRingEnd ℂ) (ι (P.coeff n)) = ι (P.coeff n)) hA).mpr ?_
   refine Polynomial.coeff_prod_fixed ι (starRingEnd ℂ) s _ (fun x hx ↦ ?_) n
   have hdvd := Scheme.Hom.degreeOver_dvd_of_isOver (k₀ := k₀) f x.2
   rw [(hs x).1 hx] at hdvd
