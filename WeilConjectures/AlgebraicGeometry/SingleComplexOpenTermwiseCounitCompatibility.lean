@@ -53,7 +53,25 @@ private theorem termwise_exact_factors
   change F.mapDerivedCategory.map (𝟙 _) ≫ F.mapDerivedCategoryFactors.hom.app P ≫
     𝟙 _ ≫ DerivedCategory.Qh.map (𝟙 _) = _
   erw [F.mapDerivedCategory.map_id, DerivedCategory.Qh.map_id]
-  simp only [Category.id_comp, Category.comp_id]
+  simp only [Category.id_comp]
+  exact Category.comp_id _
+
+private theorem termwise_counit_transport
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory.{w} C] [HasDerivedCategory.{w} D]
+    (F : C ⥤ D) [F.Additive] (L : DerivedCategory C ⥤ DerivedCategory D)
+    (ε : DerivedCategory.Qh ⋙ L ⟶ F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (P : CochainComplex C ℤ) :
+    L.map ((DerivedCategory.quotientCompQhIso C).inv.app P) ≫
+      ε.app ((HomotopyCategory.quotient C (.up ℤ)).obj P) ≫
+      DerivedCategory.Qh.map ((F.mapHomotopyCategoryFactors (.up ℤ)).hom.app P) ≫
+      (DerivedCategory.quotientCompQhIso D).hom.app
+        ((F.mapHomologicalComplex (.up ℤ)).obj P) =
+      ε.app ((HomotopyCategory.quotient C (.up ℤ)).obj P) := by
+  change L.map (𝟙 _) ≫ ε.app _ ≫ DerivedCategory.Qh.map (𝟙 _) ≫ 𝟙 _ = _
+  erw [L.map_id, DerivedCategory.Qh.map_id]
+  simp only [Category.id_comp]
+  exact Category.comp_id _
 
 private theorem termwise_homotopy_square_inv
     {C D B E : Type*} [Category C] [Category D] [Category B] [Category E]
@@ -141,12 +159,11 @@ theorem singleComplexOpen_termwise_counit_compatibility
     ((HomotopyCategory.quotient
         (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)).obj P)
   dsimp only [singleComplexOpenTensorRestrictionMap]
-  simp only [DerivedCategory.quotientCompQhIso,
-    HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift_hom,
-    Quotient.lift.isLift_inv, Functor.mapHomotopyCategoryFactors]
-  erw [(derivedPullback g').map_id, (derivedPullback j).map_id,
-    DerivedCategory.Qh.map_id, DerivedCategory.Qh.map_id]
-  simp only [Category.id_comp, Category.comp_id]
+  erw [termwise_counit_transport (Scheme.Modules.tensorPullback g')
+    (derivedPullback g') (counit g') P,
+    termwise_counit_transport (Scheme.Modules.tensorPullback j)
+      (derivedPullback j) (counit j)
+      (((schemeOpenRestriction X U).mapHomologicalComplex (.up ℤ)).obj P)]
   have hf : (schemeOpenRestriction X U).mapDerivedCategoryFactorsh.hom.app
       ((HomotopyCategory.quotient
         (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)).obj P) =
