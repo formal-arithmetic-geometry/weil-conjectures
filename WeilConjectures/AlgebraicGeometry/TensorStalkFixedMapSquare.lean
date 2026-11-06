@@ -33,7 +33,6 @@ namespace AlgebraicGeometry
 
 
 
-set_option maxHeartbeats 800000 in
 -- Elaborate nested localized stalk comparison maps.
 private theorem coordinates_comparison_normalize
     [∀ Y : Scheme.{u},
@@ -81,7 +80,6 @@ private theorem coordinates_comparison_normalize
       hn'.symm
 
 
-set_option maxHeartbeats 800000 in
 -- Elaborate nested localized stalk comparison maps.
 private theorem coordinates_comparison_transport
     [∀ Y : Scheme.{u},
