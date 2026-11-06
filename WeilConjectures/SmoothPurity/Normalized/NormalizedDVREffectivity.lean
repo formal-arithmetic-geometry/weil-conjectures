@@ -329,11 +329,7 @@ private theorem normalizedDVRKFlatUnit (n : ℕ)
   dsimp only [DerivedCategory.Qh, HomologicalComplexUpToQuasiIso.Qh,
     CategoryTheory.Quotient.lift] at h'
   simp only [HomotopyCategory.quotient_obj_as] at h'
-  set_option pp.proofs true in
-  set_option pp.explicit true in
-  set_option pp.universes true in
-    simpa only [DerivedCategory.Q, unrestrictedTowerFiniteComplex] using
-      h'.trans (congrArg DerivedCategory.Q.map hg.symm)
+  convert h'.trans (congrArg DerivedCategory.Q.map hg.symm) using 1 <;> rfl
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
