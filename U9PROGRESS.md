@@ -249,12 +249,21 @@
 # BZ861 in progress
 
 - Branch: `u9/BZ861`; starting commit: `db406319f`.
-- The user instructed continuation after the exact restoration and canonical-transport proposal.
+- Assigned module `AffineBaseChangeGlobalSectionsFactorization` is green at
+  `cb76f60241` and rebuilt green at `637611f777`, without sorries or new assumptions.
 - Restored `tilde_preservesHomology`, `affineBaseChangeTildeCohomologyIso`, and
-  `affineTensorPullbackHomologySheafIso` in their original two upstream modules.
-- Their external references were checked before restoration; the assigned theorem is still used.
-- Replaced obsolete generated additive instances using `tilde.map_add` and added the
-  proposed canonical Q/Qh transports around the inverse counit.
-- Next: remote validation, then the direct importer and further layers under the brief.
-- Fix records and baseline diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ861.md`.
-- No local Lean/Lake execution, forbidden proof shortcuts, or heartbeat changes.
+  `affineTensorPullbackHomologySheafIso` in their original two upstream modules;
+  both restored modules have repeatedly passed remote builds.
+- The user instructed continuation after the exact restoration and canonical-transport
+  proposal. The factorization now uses explicit Q/Qh transports, the derived universe w,
+  and a typed pullback functor with its existing additive instance.
+- Direct importer `AffineTensorPullbackStalkCoordinates` now uses the same transport;
+  the last pending proof fix unfolds the local composite before applying map_comp.
+- Applied the known generated-instance replacement at four sites in
+  `AffineOrdinaryTensorStalkCoordinates` and one in `AffineStalkScalarExtensionCoordinates`.
+  All affected public declarations have external callers and were retained.
+- The four-module downstream batch is queued through `ucheck-bump` on Weil.
+- Fix records: `/home/ubuntu/u9/bz/FIXES-BZ861.md`; logs use `BUILD-BZ861-*`.
+- The replay audit reproduces all six changed Lean files using 15 contextual rewrite rules.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+- DONE will be written after downstream validation and the final green check.
