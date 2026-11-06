@@ -168,9 +168,9 @@ theorem finiteTorAmplitude_of_affine_sheafification_of_open_tor (S : Scheme.{u})
           (tilde.functor (S.presheaf.obj (.op U))) ⟨fun _ _ ↦ tilde.map_zero⟩
           (ComplexShape.up ℤ)).obj P) := by
     exact RJ.mapDerivedCategory.mapIso eW ≪≫
-      ((Functor.mapDerivedCategoryCompIso RW RJ).symm.app K) ≪≫
+      (Functor.mapDerivedCategoryCompIso RW RJ).app K ≪≫
       (Functor.mapDerivedCategoryNatIso θ).app K ≪≫
-      (Functor.mapDerivedCategoryCompIso A B).app K ≪≫
+      (Functor.mapDerivedCategoryCompIso A B).symm.app K ≪≫
       B.mapDerivedCategory.mapIso eP ≪≫ B.mapDerivedCategoryFactors.app _ ≪≫
       DerivedCategory.Q.mapIso
         ((Functor.mapHomologicalComplexCompIso

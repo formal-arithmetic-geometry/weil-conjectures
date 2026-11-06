@@ -2014,6 +2014,16 @@ private theorem rightNormalizedShift_exists :
   refine ⟨((S₀ L).commShiftIso s).symm.app F, hform L F s, ?_⟩
   exact hS M L F eM s
 
+/-- Existence and uniqueness of the ordinary normalized right shift structure.
+Source: Stacks 08JA, 08JC
+(blueprint: lem-weil-pbc-ringed-internal-hom-exact-restriction).
+Proof: product projections define the unsigned reindexing chain isomorphism.
+The shifted Hom differential and Hom into the shifted target agree. Its naturality
+commutes with the fixed K-injective augmentation. Localize this identity; on
+K-injective targets the augmentation comparison is invertible. Essential
+surjectivity and the localization universal property give a unique natural shift
+structure on every derived object. The degreewise reindexings compose and are the
+identity at zero, so they satisfy the CommShift coherence identities. -/
 theorem rightShift_existsUnique :
     ∃! S : ∀ M : D.{c, v, r, w} J R, (hom.{c, v, r, w} J R M).CommShift ℤ,
       RightNormalization.{c, v, r, w} J R S := by

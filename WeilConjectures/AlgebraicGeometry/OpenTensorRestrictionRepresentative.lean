@@ -7,6 +7,9 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.SingleComplexOpenTensorRestrictionIso
+public import Mathlib.Algebra.Homology.Localization
+
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # The representative of ordinary open tensor restriction
 

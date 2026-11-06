@@ -401,6 +401,20 @@ private theorem isKFlat_of_iso
     {P Q : CochainComplex (SheafOfModules.{r}
       ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ}
     (e : P ≅ Q) (hP : P.IsKFlatIndependentCoefficients) : Q.IsKFlatIndependentCoefficients := by
+  let : ∀ (I₁ I₂ : Type r), HasColimitsOfShape (Discrete I₂)
+      (PresheafOfModules.{r}
+        ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R).obj) :=
+    fun _ _ ↦ PresheafOfModules.hasColimitsOfShape _ _
+  let : HasCoproducts.{0} (SheafOfModules.{r}
+      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) := fun I ↦ by
+    let : HasColimitsOfShape (Discrete I) (PresheafOfModules.{r}
+        ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R).obj) :=
+      PresheafOfModules.hasColimitsOfShape _ _
+    exact
+      SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
+  let : HasFiniteCoproducts (SheafOfModules.{r}
+      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) :=
+    hasFiniteCoproducts_of_hasCoproducts _
   let := isMonoidal_W_independentCoefficients R
   let := monoidalCategory R
   let := preservesZeroMorphisms_curriedTensor_independentCoefficients R
@@ -490,7 +504,9 @@ private theorem inverseImage_unit_iso :
     I.moduleUnderlying.app U ≪≫ I.ringUnderlying
   let g (W : Dᵒᵖ) (a : RI.obj.obj W) : (I.modules.obj U).val.obj W :=
     e.inv.hom.app W a
-  have hf (W : Dᵒᵖ) (a : RI.obj.obj W) : g W a = a • g W 1 := by
+  have hf (W : Dᵒᵖ) (a : RI.obj.obj W) : g W a =
+      (show ((sheafCompose JD (forget₂ CommRingCat.{r} RingCat.{r})).obj RI).obj.obj W
+        from a) • g W 1 := by
     let t := I.ringUnderlying.inv.hom.app W a
     have ht : I.ringUnderlying.hom.hom.app W t = a :=
       congrArg (fun f ↦ f.hom.app W a) I.ringUnderlying.inv_hom_id
@@ -503,7 +519,9 @@ private theorem inverseImage_unit_iso :
     rw [hc] at hi
     let m (x : (uInv.obj Z).obj.obj W) : (I.modules.obj U).val.obj W :=
       (I.moduleUnderlying.inv.app U).hom.app W x
-    have hm : m t = (I.ringUnderlying.hom.hom.app W t : RI.obj.obj W) •
+    have hm : m t =
+        (show ((sheafCompose JD (forget₂ CommRingCat.{r} RingCat.{r})).obj RI).obj.obj W
+          from I.ringUnderlying.hom.hom.app W t) •
         m ((uInv.map one).hom.app W t) := by
       have h := I.moduleSMul U Z (𝟙 Z) one (𝟙 Z)
         (fun W x ↦ (mul_one (show R.obj.obj W from x)).symm) W t
