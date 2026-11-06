@@ -124,7 +124,7 @@ private theorem scalarGeometricRepresentative_eq
       (((upperStar (ModuleCat.{u + 1} A) f).mapHomologicalComplex (.up ℤ)).obj P) = 𝟙 _ := rfl
   dsimp only [scalarGeometricRepresentative]
   rw [hq, hq']
-  erw [Functor.map_id, Category.id_comp, Category.comp_id]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
   exact h
 
 private theorem scalarGeometricRepresentative_exact
