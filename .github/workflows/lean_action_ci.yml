@@ -12,6 +12,10 @@ on:
   pull_request:
     branches:
       - master
+  # The merge queue on master (repository ruleset) requires the `build` check on the queue's
+  # merge-group commit; without this trigger that check never starts and every queue entry
+  # waits until the ruleset's check timeout removes it.
+  merge_group:
   workflow_dispatch:
 
 # Nothing here deploys; the upload to the Lake cache is the separate `publish-cache` job.
