@@ -104,6 +104,7 @@ noncomputable def purityFieldLowerShriekExchange :
       (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
         c' (compactificationOverField f'))
 
+omit [WeaklyEtale πY] in
 /-- Compact-support base change for an arbitrary cartesian cross-field square along
 weakly étale base change, with both lower-shriek functors chosen by Nagata. -/
 noncomputable def purityFieldLowerShriekBaseChange

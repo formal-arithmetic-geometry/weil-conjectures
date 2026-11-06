@@ -75,7 +75,8 @@ theorem purity_modularCyclotomicCharacter_geometricFrobenius_mul (N : ℕ) :
         (ZMod (l ^ N))ˣ) : ZMod (l ^ N)) * (Nat.card k₀ : ZMod (l ^ N)) = 1 := by
   have := purity_neZero_natCast_algebraicClosure k₀ l
   rw [← cyclotomicCharacter.toZModPow]
-  simpa using congrArg (PadicInt.toZModPow N) (purity_cyclotomicCharacter_geometricFrobenius_mul k₀ l)
+  simpa using congrArg (PadicInt.toZModPow N)
+    (purity_cyclotomicCharacter_geometricFrobenius_mul k₀ l)
 
 end Fintype
 

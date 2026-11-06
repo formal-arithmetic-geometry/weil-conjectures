@@ -139,8 +139,8 @@ theorem bijective_map_comp_geometricFiberWeilDirectTrace_of_isIso [IsIso γ]
       ((Endofunctor.IsoAlgebra.rightDerivedFunctorMapOfNatIsoCompForgetIso _
         (lowerStarGeometricFiberMapCompFrobeniusIso (Profinite.padicAlgClRingObj l)
           f.left (Over.w f))).inv.app
-            ((geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l) X.hom).mapDerivedCategory.obj
-              P.obj) ≫
+            ((geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l)
+              X.hom).mapDerivedCategory.obj P.obj) ≫
       (Endofunctor.IsoAlgebra.forget _).mapDerivedCategory.map
         (geometricFiberWeilDirectTrace (Profinite.padicAlgClRingObj l) hc
           (((boundedConstructibleLowerStar l f).map γ ≫
@@ -159,8 +159,8 @@ theorem bijective_map_comp_geometricFiberWeilDirectTrace [IsIso γ]
       ((Endofunctor.IsoAlgebra.rightDerivedFunctorMapOfNatIsoCompForgetIso _
         (lowerStarGeometricFiberMapCompFrobeniusIso (Profinite.padicAlgClRingObj l)
           f.left (Over.w f))).inv.app
-            ((geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l) X.hom).mapDerivedCategory.obj
-              P.obj) ≫
+            ((geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l)
+              X.hom).mapDerivedCategory.obj P.obj) ≫
       (Endofunctor.IsoAlgebra.forget _).mapDerivedCategory.map
         (geometricFiberWeilDirectTrace (Profinite.padicAlgClRingObj l) hc
           (((boundedConstructibleLowerStar l f).map γ ≫
