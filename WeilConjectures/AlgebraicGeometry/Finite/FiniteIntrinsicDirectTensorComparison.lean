@@ -301,7 +301,7 @@ private def comparison_tensor (A : Type u) [CommRing A] [Finite A] (T : Scheme.{
       (ProEtale.finiteCoefficientIntrinsicDerivedComparison T A).obj (K ⊗ L) := by
   let ν := ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) T
   let F := ProEtale.finiteCoefficientIntrinsicRealization T A
-  let e := Functor.mapDerivedCategoryCompIso ν F
+  let e := (Functor.mapDerivedCategoryCompIso ν F).symm
   let t := SheafOfModules.siteDerivedTensorIndependentCoefficients (Scheme.ProEt.topology T)
     (proEtaleConstantRing T A)
   exact t.mapIso (Iso.prod (e.app K) (e.app L)) ≪≫

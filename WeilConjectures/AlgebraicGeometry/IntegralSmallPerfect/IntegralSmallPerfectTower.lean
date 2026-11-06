@@ -84,7 +84,7 @@ private theorem perfect_derived_map_bijective
     have h' := h.comp (Iso.homCongr eHP (Iso.refl _)).bijective
     have h'' := (Iso.homCongr (DerivedCategory.Qh.mapIso eHP).symm
       (Iso.refl _)).bijective.comp h'
-    simpa [Function.comp_def, Iso.homCongr, ← Functor.map_comp, Category.assoc]
+    simpa [FH, qC, Function.comp_def, Iso.homCongr, ← Functor.map_comp, Category.assoc]
       using h''
   have hFH : Function.Bijective (FH.map : (qC.obj P ⟶ qC.obj L) → _) :=
     ⟨FH.map_injective, FH.map_surjective⟩

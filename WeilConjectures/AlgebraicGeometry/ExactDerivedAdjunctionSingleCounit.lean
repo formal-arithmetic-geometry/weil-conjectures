@@ -8,6 +8,9 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
+public import Mathlib.Algebra.Homology.Localization
+
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # The exact derived adjunction counit on a single complex
 
@@ -123,7 +126,8 @@ theorem exact_derivedAdjunction_single_counit {T : A ⥤ B} {H : B ⥤ A}
         ((CochainComplex.singleFunctor B 0).map (adj.counit.app L))
     rw [← Functor.map_comp, ← Functor.map_comp]
     congr 1
-    ext n
+    apply HomologicalComplex.hom_ext
+    intro n
     by_cases hn : n = 0
     · subst n
       simp only [CochainComplex.singleFunctor, CochainComplex.singleFunctors, Functor.comp_obj,

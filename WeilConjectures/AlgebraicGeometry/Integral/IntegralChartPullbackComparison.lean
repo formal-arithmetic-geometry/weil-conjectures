@@ -64,9 +64,9 @@ private def normalizedLocalIso {A : Type (u + 1)} [CommRing A]
     (SheafOfModules.restrictScalars
       (((ProEt.topology X).overPullback RingCat.{u + 1} V).mapIso c).hom).Additive
   let s : E.functor ⋙ F ≅ H ⋙ e.functor := scalarOverIso c V
-  let ds := (Functor.mapDerivedCategoryCompIso E.functor F).symm ≪≫
+  let ds := Functor.mapDerivedCategoryCompIso E.functor F ≪≫
     Functor.mapDerivedCategoryNatIso s ≪≫
-    Functor.mapDerivedCategoryCompIso H e.functor
+    (Functor.mapDerivedCategoryCompIso H e.functor).symm
   let p : proEtaleRingDerivedPullback g (pbcAdicCompletion Y d)
       (pbcAdicCompletion X d) (d.integralRingIso g) ⋙ E.functor.mapDerivedCategory ≅
         adicTowerPullback g (pbcAdicCompletion Y d) :=
