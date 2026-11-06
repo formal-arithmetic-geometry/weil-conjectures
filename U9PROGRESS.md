@@ -257,18 +257,22 @@
 - Next: remote ucheck-bump on the assigned module, then both direct importers.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ877 in progress
+# BZ877 complete
 
 - Branch: `u9/BZ877`; baseline: `e167a50a4`.
-- The assigned `DerivedPullbackTensorUnit` and first two importer layers passed ucheck-bump together at `60d782650a`, rc=0, 3944 jobs.
-- Canonical comparison, realization, and open-restriction repairs are green. Realization's final check at `e5eba6f4f2` returned rc=0, 3999 jobs.
-- The user instructed continuation after the reviewed reflexive-cast proposal; the same Qh endpoint repair is applied downstream. No morphisms or mathematical contracts are changed.
-- Current scope is the root plus 30 extra downstream modules: 21 green, 7 blocked by unowned `CanonicalTensorHomUncurryChainNaturality.lean:134:6: Type mismatch`, 3 pending.
-- Pending chain: TensorCoordinateIdentifications, TensorStalkChainCoordinates, TensorStalkFixedMapSquare.
-- TensorCoordinateIdentifications now has three counit casts, explicit localization category/endpoints, and cast/asIso/local-alias proof simplification. Last source repair: `b970dc98c`; `ucheck-bump TensorStalkFixedMapSquare` is queued.
-- The coordinate theorem is listed unused but has a live caller, so it was preserved.
-- Machine rules and audit: `/home/ubuntu/u9/bz/BZ877-fix-records.json`, `BZ877-contract-audit.txt`; exact logs and notes: `FIXES-BZ877.md`.
-- Status inventory: `/home/ubuntu/u9/bz/BZ877-build-status.json`; final scoped selection: `BZ877-layer4-selection.json`.
-- Shared bbuild.sh was hot-edited during some requests, producing shell errors; interrupted batch logs are distinguished from completed green builds. No infrastructure source was modified here.
-- No local Lean/Lake, proof placeholders, trust bypasses, deletions, or heartbeat changes.
-- Finish the last three-module chain, audit/replay all rules, commit/push, then write `/home/ubuntu/u9/state/BZ877.DONE` with every green module, dependency blocker, and PATTERN/ERROR/RULE triple.
+- Final combined `ucheck-bump` passed at `a7d71ec05f3522bb3d7875ddd3704d1e29de76de`: rc=0, failed=0, 4012 jobs.
+- Final targets: DerivedPullbackTensorUnit, CanonicalPullbackTensorMonoidalRealization, OpenRestrictionDerivedMonoidal, and TensorStalkChainCoordinates. Their closure covers all seven edited Lean files.
+- Toolchain: Lean v4.35.0-rc3; Mathlib b63f6e8a68d220e3b3bc4f3792bb53650d375f24.
+- Root plus 30 extra downstream modules checked: 23 green, 8 blocked by unowned prerequisites; the downstream cap is reached.
+- Seven targets are blocked by CanonicalTensorHomUncurryChainNaturality.lean:134:6: Type mismatch.
+- TensorStalkFixedMapSquare is blocked by missing comparisonIntoPullback/comparisonIntoPullback_naturality, pruned from the unowned StalkComparisonPullbackNaturality by 2353019b4.
+- The user instructed continuation after the reviewed reflexive-cast proposal; the same Qh endpoint repair is applied downstream. Casts and explicit category annotations preserve the original morphisms.
+- Other repairs: public/implementation Localization imports, the new compositor direction, and explicit cast/asIso normalization in proofs.
+- All 18 ordered replay rules exactly reproduce the seven edited Lean files. Existing docstrings are preserved; referenced declarations were retained despite their prune-list classification.
+- No local Lean/Lake, proof placeholders, trust bypasses, declarations deleted, or heartbeat changes.
+- Final log: `/home/ubuntu/u9/bz/BUILD-BZ877-final-green-full.log`.
+- Full module/evidence inventory: `/home/ubuntu/u9/bz/BZ877-build-status.json`.
+- Fix records and audit: `/home/ubuntu/u9/bz/FIXES-BZ877.md`, `BZ877-fix-records.json`, and `BZ877-contract-audit.txt`.
+- Completion marker: `/home/ubuntu/u9/state/BZ877.DONE` lists green modules, blockers, cap-deferred modules, and every PATTERN/ERROR/RULE triple.
+- Earlier interrupted broad runs are used only as evidence of individual completed targets; the final combined run completed successfully.
+- This completion commit changes only progress documentation; Lean source matches the final green build.
