@@ -83,15 +83,15 @@ def normalizationDerivedAssociator (T : Scheme.{u})
 Source: Stacks 06YU (auxiliary; not a blueprint node). -/
 def normalizationDerivedLeftUnitor (T : Scheme.{u}) (M : DerivedCategory (modules Λ T)) :
     (tensor Λ T).obj (tensorUnit Λ T, M) ≅ M :=
-  @MonoidalCategoryStruct.leftUnitor _ _
-    (Monoidal.transportStruct (derivedEquivalence Λ T)) M
+  cast (by rfl) (@MonoidalCategoryStruct.leftUnitor _ _
+    (Monoidal.transportStruct (derivedEquivalence Λ T)) M)
 
 /-- The right unitor of the existing conjugate tensor.
 Source: Stacks 06YU (auxiliary; not a blueprint node). -/
 def normalizationDerivedRightUnitor (T : Scheme.{u}) (M : DerivedCategory (modules Λ T)) :
     (tensor Λ T).obj (M, tensorUnit Λ T) ≅ M :=
-  @MonoidalCategoryStruct.rightUnitor _ _
-    (Monoidal.transportStruct (derivedEquivalence Λ T)) M
+  cast (by rfl) (@MonoidalCategoryStruct.rightUnitor _ _
+    (Monoidal.transportStruct (derivedEquivalence Λ T)) M)
 
 /-- The regular-module unit comparison, obtained from localization and the ordinary unit.
 Source: Stacks 06YU (auxiliary; not a blueprint node). -/
@@ -453,6 +453,8 @@ private theorem actualComparisonIso_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
   have hs := (DerivedRepresentativeSquare.section_derived_representative_square Λ f).1
     ⟨A.obj.as, hA⟩ ⟨B.obj.as, hB⟩
   have := hs.2.1
+  change (actualComparisonIso Λ f).hom.app (A, B) =
+    (tensorPullComparison Λ f).hom.app (A, B)
   apply (cancel_mono
     (DerivedRepresentativeSquare.output Λ f A.obj.as B.obj.as)).1
   change (actualComparisonIso Λ f).hom.app
@@ -472,7 +474,7 @@ private theorem unit_normalization {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (derivedEquivalence Λ X).functor.map
         (normalizationDerivedInternalUnit Λ f).hom =
       (derivedPullComparison Λ f).hom.app (𝟙_ (DerivedCategory (internalModules Λ Y))) ≫
-        normalizationDerivedSectionUnit Λ f := by
+        (cast (by rfl) (normalizationDerivedSectionUnit Λ f)) := by
   have h := (DerivedRepresentativeSquare.section_derived_representative_square Λ f).2.2.2.1
   have h' := congrArg (fun k ↦
     (derivedPullComparison Λ f).hom.app (𝟙_ (DerivedCategory (internalModules Λ Y))) ≫
@@ -895,7 +897,8 @@ private theorem pullback_constraints {X Y : Scheme.{u}} (f : X ⟶ Y)
         (tensorPullComparison Λ f).hom.app
           ((derivedEquivalence Λ Y).functor.obj M, (derivedEquivalence Λ Y).functor.obj N))
     (hunit : (derivedEquivalence Λ X).functor.map (normalizationDerivedInternalUnit Λ f).hom =
-      (derivedPullComparison Λ f).hom.app (𝟙_ _) ≫ normalizationDerivedSectionUnit Λ f) :
+      (derivedPullComparison Λ f).hom.app (𝟙_ _) ≫
+        (cast (by rfl) (normalizationDerivedSectionUnit Λ f))) :
     TensorConstraintCondition (derivedPullback Λ f) (tensor Λ Y) (tensor Λ X)
       (tensorUnit Λ Y) (tensorUnit Λ X)
       (normalizationDerivedAssociator Λ Y) (normalizationDerivedLeftUnitor Λ Y)
@@ -947,7 +950,8 @@ private theorem equivalence_constraints (T : Scheme.{u}) :
       (tensor Λ T) (𝟙_ (DerivedCategory (internalModules Λ T))) (tensorUnit Λ T)
       (fun M N P ↦ α_ M N P) (fun M ↦ λ_ M) (fun M ↦ ρ_ M)
       (normalizationDerivedAssociator Λ T) (normalizationDerivedLeftUnitor Λ T)
-      (normalizationDerivedRightUnitor Λ T) (tensorComparison Λ T).hom (𝟙 _) := by
+      (normalizationDerivedRightUnitor Λ T) (tensorComparison Λ T).hom
+      (cast (by rfl) (𝟙 _)) := by
   obtain ⟨e, he, o, hη, hδ⟩ :=
     (KFlatSectionComparison.section_kflat_tensor_comparison.{u, u + 2, u + 1} Λ T).2.2.2.2.2.2.2.2
   exact equivalenceConstraintsGeneric (derivedEquivalence Λ T) (tensorComparison Λ T) o hη hδ
@@ -1005,7 +1009,7 @@ theorem section_derived_tensor_normalization {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ((derivedEquivalence Λ X).functor.map
         (normalizationDerivedInternalUnit Λ f).hom =
       (derivedPullComparison Λ f).hom.app (𝟙_ (DerivedCategory (internalModules Λ Y))) ≫
-        normalizationDerivedSectionUnit Λ f) ∧
+        (cast (by rfl) (normalizationDerivedSectionUnit Λ f))) ∧
     TensorConstraintCondition (derivedPullback Λ f) (tensor Λ Y) (tensor Λ X)
       (tensorUnit Λ Y) (tensorUnit Λ X)
       (normalizationDerivedAssociator Λ Y) (normalizationDerivedLeftUnitor Λ Y)
