@@ -257,7 +257,6 @@ attribute [local implicit_reducible] tensorWith targetTower targetTowerMap
 
 attribute [local implicit_reducible] tensorMonoidal
   KFlatTotalTensorModel.tensor KFlatTotalTensorModel.monoidal
-  CategoryTheory.Functor.mapHomologicalComplex CochainComplex.singleFunctors
 
 omit
   [HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology W) AddCommGrpCat.{max u (t + 1)}]
