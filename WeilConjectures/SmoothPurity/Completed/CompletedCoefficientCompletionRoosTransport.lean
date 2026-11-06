@@ -346,8 +346,9 @@ private theorem sectionTransitionAdjoint
       DerivedCategory.Qh.map_id, Category.id_comp, Category.comp_id] at hfac
     dsimp only [DerivedCategory.Qh, HomologicalComplexUpToQuasiIso.Qh,
       Functor.mapHomotopyCategory, CategoryTheory.Quotient.lift, Functor.comp_obj] at hfac ⊢
-    simpa only [Category.comp_id] using congrArg
-      (fun f ↦ (scalarReductionDerivedRestriction l E X m).map
+    erw [Category.comp_id] at hfac
+    erw [Category.comp_id, cast_eq]
+    exact congrArg (fun f ↦ (scalarReductionDerivedRestriction l E X m).map
       ((scalarReductionCounit l E X m).app
         ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫ f) hfac.symm
   simpa only [hcmp] using
@@ -684,7 +685,7 @@ theorem completedCoefficientCompletionRoosTransport
   let : F.IsTriangulated := by dsimp only [F]; infer_instance
   let : F.Additive := by dsimp only [F]; infer_instance
   let round : H ⋙ F ≅ 𝟭 _ :=
-    Functor.mapDerivedCategoryCompIso (pbcRestrict c.inv) (pbcRestrict c.hom) ≪≫
+    (Functor.mapDerivedCategoryCompIso (pbcRestrict c.inv) (pbcRestrict c.hom)) ≪≫
       Functor.mapDerivedCategoryNatIso
         (pbcRestrictComp c.hom c.inv (𝟙 _) c.hom_inv_id ≪≫ restrictId _) ≪≫
       Functor.mapDerivedCategoryIdIso _
