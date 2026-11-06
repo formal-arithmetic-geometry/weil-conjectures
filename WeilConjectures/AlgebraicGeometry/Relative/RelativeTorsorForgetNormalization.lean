@@ -75,4 +75,3 @@ theorem relativeFrameClass_forget
 end AlgebraicGeometry.Etale
 
 -- Check the axioms of the completed construction.
-#print axioms AlgebraicGeometry.Etale.relativeFrameClass_forget

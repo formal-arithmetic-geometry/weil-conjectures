@@ -265,7 +265,6 @@ private lemma tensorComp_complex_fac
     CategoryTheory.Functor.mapHomologicalComplexCompIso, NatIso.mapHomologicalComplex,
     Iso.trans_hom, Iso.app_hom, CategoryTheory.Functor.map_comp, Category.assoc] using hh
 
-set_option pp.deepTerms.threshold 6 in
 /-- Exact localization preserves the coefficient tensor-comparison mate.
 
 Source: `Adjunction.mapDerivedCategoryAdjunction_unit_app_fac`,

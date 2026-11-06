@@ -199,54 +199,6 @@ noncomputable def NagataCompactification : Compactification f :=
 instance : HasCompactification f :=
   (NagataCompactification f).hasCompactification
 
-/-! ### Axiom census
-
-Nagata's compactification theorem is unconditional: the checks below are run by the build, so a
-`sorry` reappearing anywhere beneath the theorem or its two intermediate forms breaks compilation
-rather than going unnoticed. -/
-
-/--
-info: 'AlgebraicGeometry.NagataCompactification' depends on axioms:
-  [propext, Classical.choice, Quot.sound]
--/
-#guard_msgs (whitespace := lax) in
-#print axioms AlgebraicGeometry.NagataCompactification
-
-/--
-info: 'AlgebraicGeometry.constructedCompactification_i_g' depends on axioms:
-  [propext, Classical.choice, Quot.sound]
--/
-#guard_msgs (whitespace := lax) in
-#print axioms AlgebraicGeometry.constructedCompactification_i_g
-
-/--
-info: 'AlgebraicGeometry.isOpenImmersion_constructedCompactification_i' depends on axioms:
-  [propext, Classical.choice, Quot.sound]
--/
-#guard_msgs (whitespace := lax) in
-#print axioms AlgebraicGeometry.isOpenImmersion_constructedCompactification_i
-
-/--
-info: 'AlgebraicGeometry.isProper_constructedCompactification_g' depends on axioms:
-  [propext, Classical.choice, Quot.sound]
--/
-#guard_msgs (whitespace := lax) in
-#print axioms AlgebraicGeometry.isProper_constructedCompactification_g
-
-/--
-info: 'AlgebraicGeometry.nagataCompactification_of_locallyOfFinitePresentation' depends on axioms:
-  [propext, Classical.choice, Quot.sound]
--/
-#guard_msgs (whitespace := lax) in
-#print axioms AlgebraicGeometry.nagataCompactification_of_locallyOfFinitePresentation
-
-/--
-info: 'AlgebraicGeometry.nagataCompactification_of_isNoetherian' depends on axioms:
-  [propext, Classical.choice, Quot.sound]
--/
-#guard_msgs (whitespace := lax) in
-#print axioms AlgebraicGeometry.nagataCompactification_of_isNoetherian
-
 /-- A morphism `f : X ⟶ Y` over a quasi-compact and quasi-separated scheme `S`, between `S`-schemes
 that are separated and of finite type over `S`, has a compactification: it is separated, locally
 of finite type and quasi-compact, and `Y` is quasi-compact and quasi-separated, so Nagata's

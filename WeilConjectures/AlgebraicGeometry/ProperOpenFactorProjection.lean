@@ -476,6 +476,4 @@ theorem properOpenFactor_projection
     openImmersionLowerShriekLowerStarExchangeIso, asIso_hom]
   erw [Category.comp_id]
 
-#print axioms properOpenFactor_projection
-
 end AlgebraicGeometry.Etale

@@ -174,6 +174,7 @@ lemma upperStar_map_cokernelPowIsoRootsOfUnitySheaf_inv_comp (n : ℕ) :
     ← Category.assoc, upperStar_map_cokernelPowIsoRootsOfUnitySheaf_hom_of_comp_eq g₁ f f' hf ℓ
       hζ n, Category.assoc, Iso.hom_inv_id, Category.comp_id]
 
+omit [WeaklyEtale g₁] in
 include h hf in
 /-- The naturality of the trivialization under pullback, at level `n`: both sides of
 `AlgebraicGeometry.ProEtale.upperStar_map_upperStarMapModTateModuleIsoUnit_hom_hom` agree after
@@ -212,6 +213,7 @@ lemma upperStar_map_upperStarMapModTateModuleIsoUnit_hom_hom_comp_leg (n : ℕ) 
     (limit.π (tateModuleSystem X ℓ) (op n)).hom]
   try rfl
 
+omit [WeaklyEtale g₁] in
 include h hf in
 /-- **The trivialization of the Tate module is natural under weakly étale pullback**: on underlying
 sheaves, `g₁^*` of the trivialization `g^* ℤ_ℓ(1) ≅ g^* ℤ_ℓ,X` followed by the factorization

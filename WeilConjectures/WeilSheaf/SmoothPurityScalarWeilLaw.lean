@@ -86,7 +86,7 @@ theorem purityExtendPullbackIso_weil
     a.geometricGaloisFrobenius.hom a.geometricGaloisFrobenius_hom_comp_geometricFiberProj
     M₀ N₀ e₀ c₀ he
   simp only [CondensedRing.geometricFiberProjUpperStarFrobeniusIso,
-    purityModuleFactorIso, purityAbelianFrobeniusFactorIso] at h ⊢
+    purityModuleFactorIso] at h ⊢
   exact_mod_proofs h
 
 end FiniteBase

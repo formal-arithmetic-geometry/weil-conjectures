@@ -46,7 +46,8 @@ lemma purity_upperStarTateTwistOneIso_congr
 lemma purity_upperStarTateTwistOneIso_factor
     {X U : Scheme.{u}} (p : U ⟶ X) (s : U ⟶ U) (hs : s ≫ p = p)
     (a : X ⟶ Spec (.of k)) :
-    (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) s).map (upperStarTateTwistOneIso ℓ p a).hom ≫
+    (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) s).map
+        (upperStarTateTwistOneIso ℓ p a).hom ≫
         (upperStarTateTwistOneIso ℓ s (p ≫ a)).hom =
       (purityModuleFactorIso (Profinite.padicAlgClRingObj ℓ) p s hs).hom.app
           (tateTwistOne X ℓ) ≫ (upperStarTateTwistOneIso ℓ p a).hom := by
@@ -67,7 +68,8 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 
 /-- The unit comparison respects equality of the geometric pullback. -/
 lemma purity_upperStar_unit_congr {X Y : Scheme.{u}} {f g : X ⟶ Y} (h : f = g) :
-    (CondensedRing.upperStarCongr Λ h).hom.app (𝟙_ _) ≫ (Functor.Monoidal.εIso (CondensedRing.upperStar Λ g)).inv =
+    (CondensedRing.upperStarCongr Λ h).hom.app (𝟙_ _) ≫
+        (Functor.Monoidal.εIso (CondensedRing.upperStar Λ g)).inv =
       (Functor.Monoidal.εIso (CondensedRing.upperStar Λ f)).inv := by
   subst g
   simp [CondensedRing.upperStarCongr]

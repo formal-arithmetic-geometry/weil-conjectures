@@ -147,4 +147,3 @@ theorem extMk_firstCycles :
 end CategoryTheory.InjectiveResolution
 
 -- Check the axioms of the completed construction.
-#print axioms CategoryTheory.InjectiveResolution.extMk_firstCycles

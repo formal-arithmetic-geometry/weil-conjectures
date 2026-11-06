@@ -250,4 +250,3 @@ theorem relativeTorsorEquiv_transfer
 end AlgebraicGeometry.Etale
 
 -- Check the axioms of the completed construction.
-#print axioms AlgebraicGeometry.Etale.relativeTorsorEquiv_transfer

@@ -643,5 +643,3 @@ theorem exceptionalOriginAdjunctionEvaluation
   rfl
 
 end AlgebraicGeometry
-
-#print axioms AlgebraicGeometry.exceptionalOriginAdjunctionEvaluation

@@ -37,7 +37,7 @@ two factors.
 
 namespace CategoryTheory
 
-open Category Functor
+open Category CategoryTheory.Functor
 open Adjunction (leftWeilDatum rightWeilDatum)
 
 section Unique
@@ -326,8 +326,9 @@ lemma app_eq_of_unit {G : C ⥤ E} {H : D ⥤ D} (τ : R₁ ⋙ G ⟶ H ⋙ R₂
   rw [← hn, ← Functor.map_comp_assoc, ht, CategoryTheory.Functor.map_id, Category.id_comp]
 
 /-- **Uniqueness of the right adjoint exchange**: a natural transformation `R₁ ⋙ G ⟶ H ⋙ R₂`
-satisfying the unit equation of `CategoryTheory.Adjunction.map_unit_app_comp_rightAdjointExchange_app`
-is the right adjoint exchange. -/
+satisfying the unit equation of
+`CategoryTheory.Adjunction.map_unit_app_comp_rightAdjointExchange_app` is the right adjoint
+exchange. -/
 lemma Adjunction.rightAdjointExchange_eq_of_unit {G : C ⥤ E} {H : D ⥤ D}
     (e : L₁ ⋙ H ≅ G ⋙ L₂) {τ : R₁ ⋙ G ⟶ H ⋙ R₂}
     (hτ : ∀ c, G.map (adj₁.unit.app c) ≫ τ.app (L₁.obj c) =

@@ -11,23 +11,6 @@ import WeilConjectures.WeilSheaf.SmoothPurityDescendedTraceUniversal
 
 open AlgebraicGeometry AlgebraicGeometry.WeilComplex
 
-#print axioms exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso_of_descendedTrace
-#print axioms nonempty_upperShriek_obj_adicConstant_iso_of_descendedTrace
-#print axioms isIso_homEquiv_descendedSmoothTrace
-#print axioms descendedSmoothTrace
-#print axioms descendedTateSourceIso
-#print axioms descendedUnitTargetIso
-#print axioms ProEtale.CondensedRing.isIso_smoothUnitBaseChange_iff
-#print axioms ProEtale.CondensedRing.bijective_map_comp_baseChangedSmoothTrace
-#print axioms exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso
-#print axioms traceOfDescendedSmoothTrace
-#print axioms isIso_homEquiv_of_geometric_trace
-#print axioms finiteBaseNativeDescentTateIso
-#print axioms derivedLowerShriekUpperShriekAdjunction
-#print axioms ProEtale.CondensedRing.smoothTrace
-#print axioms ProEtale.CondensedRing.smoothOrientation
-#print axioms ProEtale.CondensedRing.homEquiv_baseChangedSmoothTrace
-
 /-! The statement of `exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso`, in the
 context of `WeilConjectures.WeilSheaf.SmoothPurity`, follows from the Tate encoding `α` and the
 universality of the descended trace, with no other input. -/

@@ -206,9 +206,4 @@ theorem derivedSourceComparison_injective
     Equiv.apply_symm_apply] at hh
   exact hh
 
-
 end CategoryTheory
-
-#print axioms CategoryTheory.sourceExtMap_comp
-#print axioms CategoryTheory.sourceExtMap_bijective
-#print axioms CategoryTheory.derivedSourceComparison_injective

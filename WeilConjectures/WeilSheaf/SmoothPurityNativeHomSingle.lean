@@ -31,6 +31,9 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 
+omit [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] in
 private lemma singleProjection_right (A : ProEtaleWeilSheaf k₀ l X)
     {I I' : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ} (g : I ⟶ I') :
     CochainComplex.bifunctorHomMapRight (H := ihomBifunctor k₀ l X)

@@ -910,4 +910,3 @@ theorem relativeFrameClass_map_eq
 end AlgebraicGeometry.Etale
 
 -- Check the axioms of the completed construction.
-#print axioms AlgebraicGeometry.Etale.relativeTorsorEquiv

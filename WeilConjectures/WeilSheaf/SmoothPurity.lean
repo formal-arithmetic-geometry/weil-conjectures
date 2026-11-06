@@ -118,8 +118,9 @@ Proof: the native Tate encoding `α` (A3,
 `AlgebraicGeometry.WeilSheaf.purity_nonempty_toCondensedTateDescentIso`: the Tate twist sheaf is
 the descent of the finite-base root-defined Tate sheaf) and the invertibility of the exceptional
 base change map at the unit along `k₀ ⟶ k̄₀` for every smooth `f` (A1',
-`AlgebraicGeometry.ProEtale.CondensedRing.isIso_smoothUnitBaseChange_descendedShriekGeometricExchange`,
-by Verdier duality) produce the orientation as an isomorphism of native Weil complexes
+`isIso_smoothUnitBaseChange_descendedShriekGeometricExchange` in
+`AlgebraicGeometry.ProEtale.CondensedRing`, by Verdier duality) produce the orientation as an
+isomorphism of native Weil complexes
 (`exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso_of_tateEncoding`), so it
 commutes with the Frobenius structures. -/
 theorem exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso (d : ℕ)

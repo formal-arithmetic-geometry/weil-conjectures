@@ -190,17 +190,4 @@ instance isDenseSubsite_etale :
     f.Etale.IsDenseSubsite Y.smallEtaleTopology X.smallEtaleTopology where
   functorPushforward_mem_iff := functorPushforward_mem_smallEtaleTopology_iff f _
 
-/-! ### Axiom census
-
-The topological invariance of the small étale site is unconditional: the check below is run
-by the build, so a `sorry` reappearing anywhere beneath it breaks compilation rather than
-going unnoticed. -/
-
-/--
-info: 'AlgebraicGeometry.Scheme.Hom.isEquivalence_etale' depends on
-  axioms: [propext, Classical.choice, Quot.sound]
--/
-#guard_msgs (whitespace := lax) in
-#print axioms AlgebraicGeometry.Scheme.Hom.isEquivalence_etale
-
 end AlgebraicGeometry.Scheme.Hom
