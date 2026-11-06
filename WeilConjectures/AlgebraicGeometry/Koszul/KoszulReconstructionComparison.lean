@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Koszul.KoszulReconstructionModels
+public import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 import all WeilConjectures.AlgebraicGeometry.Koszul.KoszulReconstructionModels
 import WeilConjectures.AlgebraicGeometry.Completed.Koszul.CompletedKoszulQuotientRoosAugmentation
 import WeilConjectures.AlgebraicGeometry.Koszul.KoszulReconstructionLocalizationAssembly
@@ -34,9 +35,7 @@ local instance w6AbSheafify (Y : Scheme.{t}) :
 local instance w6AbLocallyBijective (Y : Scheme.{t}) :
     (ProEt.topology Y).WEqualsLocallyBijective AddCommGrpCat.{t + 1} :=
   WeilConjectures.integralCoefficientAbLocallyBijective.{t, 0} Y
-local instance w6RingSheafify (Y : Scheme.{t}) :
-    HasSheafify (ProEt.topology Y) CommRingCat.{t + 1} :=
-  WeilConjectures.integralCoefficientRingSheafify.{t, 0} Y
+attribute [local instance] AlgebraicGeometry.ProEtale.VaryingRing.ringSheafify
 private theorem reconstructionUnitSquare {E : Type*} [Category E]
     {X Y Z U V R : E} (k : X ⟶ Y) (f : Y ⟶ Z) (b : X ⟶ Z)
     (a : Z ⟶ U) (v : X ⟶ V) (w : V ⟶ U) (e : U ⟶ R) (δ : V ⟶ R)

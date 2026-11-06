@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SixFunctors.Supporting.AdjunctConjugateOpenFactor
+public import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 public import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearDerivedSections
 public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.OpenTensorNormalization
 public import WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerProperOpenArrows
@@ -674,12 +675,6 @@ private theorem derived_constant_square_inverse (e : L ⋙ G ≅ F ⋙ l) :
 end DerivedConstantSquare
 
 namespace AlgebraicGeometry.ProEtale.SemilinearProperOpen
-
-/-- Ring sheafification in the fixed coefficient universe, using the recorded transport.
-Source: Stacks 00W1 (blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/
-instance constantRingSheafify (X : Scheme.{u}) :
-    HasSheafify (ProEt.topology X) CommRingCat.{u + 1} :=
-  integralCoefficientRingSheafify.{u, u + 1} X
 
 /-- The original site is essentially small in the coefficient universe.
 Source: the small-site convention

@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Finite.Tate.FiniteTateSiteDescentDefinitions
+public import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 public import WeilConjectures.AlgebraicGeometry.Finite.FiniteRootSiteComparison
 import all WeilConjectures.AlgebraicGeometry.Finite.FiniteRootSiteComparison
 
@@ -28,9 +29,7 @@ namespace AlgebraicGeometry.Scheme
 local instance (T : Scheme.{u}) :
     HasSheafify (ProEt.topology T) AddCommGrpCat.{u + 1} :=
   integralCoefficientAbSheafify.{u, u} T
-local instance (T : Scheme.{u}) :
-    HasSheafify (ProEt.topology T) CommRingCat.{u + 1} :=
-  integralCoefficientRingSheafify.{u, u} T
+attribute [local instance] AlgebraicGeometry.ProEtale.VaryingRing.ringSheafify
 local instance (T : Scheme.{u}) :
     (ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
   integralCoefficientAbLocallyBijective.{u, u} T

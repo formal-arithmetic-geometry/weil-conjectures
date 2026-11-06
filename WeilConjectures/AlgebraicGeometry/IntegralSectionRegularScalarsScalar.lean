@@ -36,7 +36,7 @@ attribute [local irreducible] upperStarFromPoint CondensedRing.upperStar
   Scheme.proEtaleModuleInverseImage Scheme.integralConstantModule
 
 open MonoidalCategory
-attribute [local instance] IntegralModelsStacks.projectionCommRingSheafify
+attribute [local instance] AlgebraicGeometry.ProEtale.VaryingRing.ringSheafify
   IntegralModelsStacks.projectionAbSheafify IntegralModelsStacks.projectionAbLocallyBijective
   IntegralModelsStacks.projectionSiteSmall
 
@@ -158,7 +158,7 @@ private theorem pulledRegularIso_coefficient (l : ℕ) [Fact l.Prime]
     let : HasSheafify (Scheme.ProEt.topology X) Ab.{u + 1} :=
       IntegralModelsStacks.projectionAbSheafify X
     let : HasSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
-      IntegralModelsStacks.projectionCommRingSheafify X
+      AlgebraicGeometry.ProEtale.VaryingRing.ringSheafify X
     let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
     let A : Type u := Padic.coefficientExtensionIntegers l E
     let L := continuousScalarFunctor A ⋙
@@ -172,7 +172,7 @@ private theorem pulledRegularIso_coefficient (l : ℕ) [Fact l.Prime]
   let : HasSheafify (Scheme.ProEt.topology X) Ab.{u + 1} :=
     IntegralModelsStacks.projectionAbSheafify X
   let : HasSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
-    IntegralModelsStacks.projectionCommRingSheafify X
+    AlgebraicGeometry.ProEtale.VaryingRing.ringSheafify X
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   let A : Type u := Padic.coefficientExtensionIntegers l E
   let P := upperStarFromPoint X
@@ -214,7 +214,7 @@ private theorem pulledRegularIso_scalar_one (l : ℕ) [Fact l.Prime]
     let : HasSheafify (Scheme.ProEt.topology X) Ab.{u + 1} :=
       IntegralModelsStacks.projectionAbSheafify X
     let : HasSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
-      IntegralModelsStacks.projectionCommRingSheafify X
+      AlgebraicGeometry.ProEtale.VaryingRing.ringSheafify X
     let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
     let A : Type u := Padic.coefficientExtensionIntegers l E
     let L := continuousScalarFunctor A ⋙
@@ -230,7 +230,7 @@ private theorem pulledRegularIso_scalar_one (l : ℕ) [Fact l.Prime]
   let : HasSheafify (Scheme.ProEt.topology X) Ab.{u + 1} :=
     IntegralModelsStacks.projectionAbSheafify X
   let : HasSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
-    IntegralModelsStacks.projectionCommRingSheafify X
+    AlgebraicGeometry.ProEtale.VaryingRing.ringSheafify X
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   let A : Type u := Padic.coefficientExtensionIntegers l E
   let J : GrothendieckTopology X.ProEt := Scheme.ProEt.topology X
@@ -543,7 +543,7 @@ private theorem coefficientRingCompatibility (l : ℕ) [Fact l.Prime]
     let : HasSheafify (Scheme.ProEt.topology X) Ab.{u + 1} :=
       IntegralModelsStacks.projectionAbSheafify X
     let : HasSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
-      IntegralModelsStacks.projectionCommRingSheafify X
+      AlgebraicGeometry.ProEtale.VaryingRing.ringSheafify X
     let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
     let dd : Scheme.ProEtaleAdicCoefficientDatum (Scheme.PbcIntegralRing l E) :=
       { toCompleteCoefficientDatum := (Scheme.pbcIntegralDatum l E).toCompleteCoefficientDatum
@@ -556,7 +556,7 @@ private theorem coefficientRingCompatibility (l : ℕ) [Fact l.Prime]
   let : HasSheafify (Scheme.ProEt.topology X) Ab.{u + 1} :=
     IntegralModelsStacks.projectionAbSheafify X
   let : HasSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
-    IntegralModelsStacks.projectionCommRingSheafify X
+    AlgebraicGeometry.ProEtale.VaryingRing.ringSheafify X
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   let A : Type u := Padic.coefficientExtensionIntegers l E
   let J : GrothendieckTopology X.ProEt := Scheme.ProEt.topology X

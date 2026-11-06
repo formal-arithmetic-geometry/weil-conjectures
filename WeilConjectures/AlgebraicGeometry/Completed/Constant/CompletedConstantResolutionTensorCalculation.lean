@@ -143,7 +143,6 @@ private def extensionCompIso (X : Scheme.{u})
   let ac := (completedAdjunction X (a ≫ b)).choose
   exact ((aa.comp ab).ofNatIsoRight (completedRestrictCompIso X a b).symm).leftAdjointUniq ac
 
-set_option maxHeartbeats 1000000 in
 -- Bundled sheaf and scalar-restriction conversions require extra elaboration.
 private def constantScalarChangeIso (X : Scheme.{u})
     {B D : Type (u + 1)} [CommRing B] [CommRing D] (q : B →+* D) :
@@ -252,7 +251,6 @@ private theorem scalarReductionMap_naturality
   | add x y hx hy => simp only [map_add, hx, hy]
   | tmul p x => rfl
 
-set_option maxHeartbeats 1000000 in
 -- Bundled sheaf and scalar-restriction conversions require extra elaboration.
 private def constantSemilinear (X : Scheme.{u})
     {B D : Type (u + 1)} [CommRing B] [CommRing D] (q : B →+* D)
@@ -307,7 +305,6 @@ private theorem constantSemilinear_generator (X : Scheme.{u})
     ((constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).map (CommRingCat.ofHom q))
     (Category.id_comp _) M N f U x
 
-set_option maxHeartbeats 1000000 in
 -- Bundled sheaf and scalar-restriction conversions require extra elaboration.
 private theorem constant_generator_hom_ext (X : Scheme.{u})
     {B : Type (u + 1)} [CommRing B]
@@ -365,7 +362,6 @@ private abbrev reductionModuleLevel (X : Scheme.{u})
         SheafOfModules.restrictScalars ((adicLisseForget X).map
           (β ≫ limit.π (adicLisseRingSystem X I) (op n)))
 
-set_option maxHeartbeats 1000000 in
 -- Bundled sheaf and scalar-restriction conversions require extra elaboration.
 private def reductionModuleIso (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A)
@@ -413,7 +409,6 @@ private def reductionModuleIso (X : Scheme.{u})
   exact a ≪≫ b ≪≫ Functor.isoWhiskerLeft C k ≪≫
     Functor.isoWhiskerLeft C l ≪≫ m ≪≫ o ≪≫ p ≪≫ r
 
-set_option maxHeartbeats 1000000 in
 -- Bundled sheaf and scalar-restriction conversions require extra elaboration.
 -- Comparing the several bundled scalar-restriction presentations is expensive.
 -- Bundled sheaf and scalar-restriction conversions require extra elaboration.
@@ -453,7 +448,6 @@ private theorem reduction_projection_step (X : Scheme.{u})
   rw [Functor.ofOpSequence_map_homOfLE_succ] at hw
   exact congrArg (β ≫ ·) hw
 
-set_option maxHeartbeats 1000000 in
 -- Bundled sheaf and scalar-restriction conversions require extra elaboration.
 private def reductionModuleStep (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] (I : Ideal A)
@@ -495,7 +489,6 @@ private theorem reductionModuleStep_generator (X : Scheme.{u})
     (reduction_projection_step X I R β n) _ _
     (scalarReductionMap _ _ _ (reduction_eval_step I n) M) U _
 
-set_option maxHeartbeats 1000000 in
 -- The comparison uses the regular scalar-extension isomorphism on its source.
 -- Bundled sheaf and scalar-restriction conversions require extra elaboration.
 -- Bundled sheaf and scalar-restriction conversions require extra elaboration.
@@ -517,7 +510,6 @@ private def reductionComplexDiagram (X : Scheme.{u})
     (X := fun n ↦ (reductionModuleLevel X I R β n).mapHomologicalComplex (.up ℤ))
     (fun n ↦ NatTrans.mapHomologicalComplex (reductionModuleStep X I R β n) (.up ℤ))
 
-set_option maxHeartbeats 1000000 in
 -- Bundled sheaf and scalar-restriction conversions require extra elaboration.
 private def reductionTower (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] (I : Ideal A)
@@ -544,9 +536,7 @@ private def reductionTower (X : Scheme.{u})
 
 attribute [local irreducible] reductionTower
 
-set_option maxHeartbeats 1000000 in
 -- Bundled sheaf and scalar-restriction conversions require extra elaboration.
-set_option maxHeartbeats 1000000 in
 -- Bundled sheaf and scalar-restriction conversions require extra elaboration.
 
 private def isoOfOpSequence {D : Type*} [Category* D] {F G : ℕᵒᵖ ⥤ D}
@@ -556,7 +546,6 @@ private def isoOfOpSequence {D : Type*} [Category* D] {F G : ℕᵒᵖ ⥤ D}
   NatIso.ofComponents (fun n ↦ e n.unop)
     (fun f ↦ (NatTrans.ofOpSequence (fun n ↦ (e n).hom) h).naturality f)
 
-set_option maxHeartbeats 1000000 in
 -- Name the normalized module comparison before lifting it to complexes.
 -- Check module transition compatibility independently of the cochain construction.
 -- Keep the level isomorphism as a named term for kernel checking.

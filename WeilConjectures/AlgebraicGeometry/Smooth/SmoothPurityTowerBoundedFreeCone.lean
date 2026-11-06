@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Smooth.SmoothPurityTowerReconstructionData
+public import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 public import WeilConjectures.Algebra.Homology.DerivedCategory.AdicTower
 import WeilConjectures.Algebra.Homology.LinearScalarCone.LinearScalarConeExactProducts
 import WeilConjectures.Algebra.Homology.RegularQuotientCone.RegularQuotientConeAdjoint
@@ -27,8 +28,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u})
   (D : SpCoefficientTowersAbelian l E T)
 
-local instance : HasSheafify (Scheme.ProEt.topology T) CommRingCat.{u + 1} :=
-  WeilConjectures.integralCoefficientRingSheafify.{u, u} T
+attribute [local instance] AlgebraicGeometry.ProEtale.VaryingRing.ringSheafify
 
 local instance : HasSheafify (Scheme.ProEt.topology T) AddCommGrpCat.{u + 1} :=
   WeilConjectures.integralCoefficientAbSheafify.{u, u} T

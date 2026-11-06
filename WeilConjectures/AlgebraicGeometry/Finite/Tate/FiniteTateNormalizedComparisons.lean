@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Finite.Tate.FiniteTateSiteDescentDefinitions
+public import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 
 import WeilConjectures.AlgebraicGeometry.Finite.Tate.FiniteTateRootTensorPresentation
 import WeilConjectures.CategoryTheory.Constant.ConstantScalarExplicitTensor
@@ -38,9 +39,7 @@ attribute [local instance] Sheaf.monoidalCategory
 local instance (priority := 4000) (T : Scheme.{u}) :
     HasSheafify (ProEt.topology T) AddCommGrpCat.{u + 1} :=
   integralCoefficientAbSheafify.{u, u} T
-local instance (priority := 4000) (T : Scheme.{u}) :
-    HasSheafify (ProEt.topology T) CommRingCat.{u + 1} :=
-  integralCoefficientRingSheafify.{u, u} T
+attribute [local instance 4000] AlgebraicGeometry.ProEtale.VaryingRing.ringSheafify
 local instance (priority := 4000) (T : Scheme.{u}) :
     (ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
   integralCoefficientAbLocallyBijective.{u, u} T
