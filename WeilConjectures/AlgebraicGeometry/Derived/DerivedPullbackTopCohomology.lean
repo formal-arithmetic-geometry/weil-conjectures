@@ -628,8 +628,7 @@ private theorem singleComparison_composition
       pinnedModulePullbackComparisonAt (f ≫ g) n M =
     (derivedPullback f).map (pinnedModulePullbackComparisonAt g n M) ≫
       pinnedModulePullbackComparisonAt f n ((Scheme.Modules.tensorPullback g).obj M) ≫
-      (DerivedCategory.singleFunctor.{w, u, u + 1}
-        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).map
+      (DerivedCategory.singleFunctor.{w, u, u + 1} _ n).map
         ((Scheme.Modules.tensorPullbackSectionComp f g).inv.app M) := by
   dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
   let := Scheme.Modules.canonicalTensorPullbackAdditive.{u, w} f
@@ -668,13 +667,17 @@ private theorem singleComparison_composition
   change _ ≫ (_ ≫ DerivedCategory.Qh.map (qX.map jfg)) =
     (derivedPullback f).map (_ ≫ DerivedCategory.Qh.map (qY.map jg)) ≫
       (_ ≫ DerivedCategory.Qh.map (qX.map jf)) ≫
-      (DerivedCategory.singleFunctor.{w, u, u + 1} _ n).map
+      (DerivedCategory.singleFunctor.{w, u, u + 1}
+        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).map
         ((perfectHomTensorComp f g).hom.app M) at h
   dsimp only [K, F, G, H, qX, qY, jf, jg, jfg] at h
   simpa only [pinnedModulePullbackComparisonAt, derivedSingleComparisonOfCounit,
     cast_eq, ← tensorComp_eq, Category.assoc, perfectHomComposition, pinnedPullbackComposition,
     perfectHomTensorCounit, pinnedPullbackCounit, DerivedCategory.singleFunctor,
-    DerivedCategory.singleFunctors, SingleFunctors.postcomp, Functor.comp_obj] using h
+    DerivedCategory.singleFunctors, HomotopyCategory.singleFunctor,
+    HomotopyCategory.singleFunctors, CochainComplex.singleFunctor,
+    SingleFunctors.postcomp, Functor.comp_obj, DerivedCategory.Qh,
+    HomologicalComplexUpToQuasiIso.Qh] using h
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

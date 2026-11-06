@@ -75,7 +75,7 @@ private theorem singleComparison_eq {X Y : Scheme.{u}} (f : X ⟶ Y) (M : Y.Modu
             ((HomologicalComplex.singleMapHomologicalComplex
               (tensorPullback f) (.up ℤ) 0).hom.app M) ≫
             (HomotopyCategory.singleFunctor _ 0).map (t.hom.app M)) := by
-  simp only [canonicalSinglePullbackMap, cast_eq]
+  simp only [canonicalSinglePullbackMap, cast_eq, Category.assoc]
   dsimp only [canonicalSinglePullbackMap, DerivedCategory.singleFunctor,
     DerivedCategory.singleFunctors, SingleFunctors.postcomp, Functor.comp_map]
   exact fuse (DerivedCategory.Qh.{w}

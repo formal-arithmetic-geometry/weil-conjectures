@@ -130,11 +130,9 @@ private theorem single_map_normalize {X Y : Scheme.{v}} (f : X ⟶ Y)
       DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (.up ℤ)).map
         ((HomologicalComplex.singleMapHomologicalComplex
           (Modules.tensorPullback f) (.up ℤ) 0).hom.app N)) := by
-  simp only [picardTermwiseSingleMap, Modules.canonicalSinglePullbackMap, cast_eq]
-  exact cancel_single_maps (DerivedCategory.singleFunctor
-    (SheafOfModules.{v} (moduleRings X.toRingedSpace)) 0) _ _
-    (((Classical.choose (Modules.exists_tensorPullbackAdjunction f)).leftAdjointUniq
-      (Modules.pullbackPushforwardAdjunction f)).app N)
+  simp only [picardTermwiseSingleMap, Modules.canonicalSinglePullbackMap, cast_eq,
+    Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app, Functor.map_id,
+    Category.comp_id, perfectHomTensorCounit]
 
 private theorem counit_normalize {X Y : Scheme.{v}} (f : X ⟶ Y)
     (K : CochainComplex Y.Modules ℤ) :
