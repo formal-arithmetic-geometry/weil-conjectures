@@ -134,11 +134,11 @@ theorem ambientPullbackTensorCoherence
           (scalar ell E f s V W q a * b) := by
     let : ∀ (T : Scheme.{t}) (P : Modules ell E T s)
         {U V : (Site T s)ᵒᵖ} (i : U ⟶ V),
-        SMul ((coefficients ell E T s).obj.obj V)
+        MulAction ((coefficients ell E T s).obj.obj V)
           ((ModuleCat.restrictScalars
             ((ring (topology T s) (coefficients ell E T s)).obj.map i).hom).obj
               (P.val.obj V)) :=
-      fun _ P {_ _} _ ↦ (P.val.obj _).isModule.toSMul
+      fun _ P {_ _} _ ↦ (P.val.obj _).isModule.toDistribMulAction.toMulAction
     let LgM := (pull ell E g s).obj M
     let H := (pull ell E f s).obj LgM
     let N := (pull ell E (f ≫ g) s).obj M
