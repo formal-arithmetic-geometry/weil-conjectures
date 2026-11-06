@@ -90,7 +90,7 @@ theorem localized_range_quotient_extendScalars_aux
         (t X a x) ∈ _
       rw [ExtendScalars.map_tmul]
       have hs := Submodule.smul_mem (R := A) _ (a : A) hx
-      have ha : (a : A) • (show A₀ from (1 : A)) = a := by
+      have ha : (show A from a) • (show A₀ from (1 : A)) = a := by
         exact @mul_one A _ a
       rw [TensorProduct.smul_tmul' (R' := A) (M := A₀), ha] at hs
       exact hs
