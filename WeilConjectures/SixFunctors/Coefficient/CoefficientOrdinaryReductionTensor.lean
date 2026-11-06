@@ -103,8 +103,7 @@ theorem presentation_degree_transition
   have hDm : (κD m).inv.f i ≫ (κD m).hom.f i = 𝟙 _ := by
     simpa only [HomologicalComplex.comp_f, HomologicalComplex.id_f] using
       congrArg (fun g ↦ g.f i) (κD m).inv_hom_id
-  erw [Category.assoc, Category.assoc, hDi, hCi, reassoc_of% hDm]
-  rfl
+  erw [hDi, hCi, reassoc_of% hDm]
 
 /-- The chain map between two compatible presentations of strict system complexes,
 assembled from the finite comparisons. Source: Stacks 03CZ, 0941. -/

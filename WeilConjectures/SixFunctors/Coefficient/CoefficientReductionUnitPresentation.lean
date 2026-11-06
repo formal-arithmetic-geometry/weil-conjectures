@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SmoothPurity.Coefficient.CoefficientSystemScalarCalculus
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # Strict quotient-unit presentations for reduction representatives
 
@@ -60,10 +62,11 @@ def CoefficientStrictReductionUnitPresentation
             (Iso.refl (coefficientSequenceRestriction l E W ⋙
               (lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤ scalarReductionSource l E W)))
             (.up ℤ)).inv.app C) ≫
-        (lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤ scalarReductionSource l E W
-          ).rightDerivedFunctorUnit.app
+        cast (by rfl)
+          ((lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤ scalarReductionSource l E W
+            ).rightDerivedFunctorUnit.app
             ((HomotopyCategory.quotient _ (.up ℤ)).obj
-              (((coefficientSequenceRestriction l E W).mapHomologicalComplex (.up ℤ)).obj C)) ≫
+              (((coefficientSequenceRestriction l E W).mapHomologicalComplex (.up ℤ)).obj C))) ≫
         (coefficientConstantTowerLimit l E W).map
           ((coefficientSequenceRestriction l E W).mapDerivedCategoryFactors.inv.app C) ∧
     ∀ n : ℕ,
