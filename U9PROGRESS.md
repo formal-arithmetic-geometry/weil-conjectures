@@ -300,18 +300,13 @@
 - Fix notes: /home/ubuntu/u9/bz/FIXES-BZ932.md. No local Lean/Lake or proof shortcuts.
 
 
-# BZ949 complete
+# BZ950 complete
 
-- Branch: u9/BZ949; baseline: 86b635dfce798c1644c3ee4783f6871a55233370.
-- AffineBaseChangeTildeRepresentative passed ucheck-bump at
-  2a367a4402b820cd58b13538f43a02f3792baa2e: rc=0, built=8, failed=0.
-- The leaf rebuilt green at 1df4a0684631be9028cd9e7fa62d1d2b10182adf in the downstream batch.
-- The user instructed continuation after the exact one-cast proposal. That cast is
-  the only Lean change; the original map, assumptions, proof and docstrings are preserved.
-- All six direct importers were attempted and skipped because two unowned dependencies
-  fail: AffineTildePushforwardHomologyFactorization and AffineTildeTensorSourceComparisonHelpers.
-- Prepared downstream edits were reverted; no unvalidated source changes remain.
-- Logs, pattern, exact error, machine rule, counts and audit: /home/ubuntu/u9/bz/FIXES-BZ949.md.
-- Completion marker: /home/ubuntu/u9/state/BZ949.DONE.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
-- This final commit changes only progress documentation; Lean source matches both green checks.
+- Branch: u9/BZ950; assigned leaf and direct importer AffineTildeCoefficientPushforwardHomologyCoordinates are GREEN.
+- Leaf standalone ucheck-bump returned rc=0, failed=0 at d8b603572; remote log /home/ubuntu/u9/logs/BZ950-20261106T090157.log.
+- Both final Lean sources built at 6e477c336e78dcebf2285a9a195ca314bdca454c. Downstream batch rc=1 only for the two unowned dependencies AffineTildeTensorSourceComparisonHelpers and AffineBaseChangeTildeRepresentative.
+- AffineTildeDerivedTensorHomologyCoordinates and its onward frontier are skipped under the ownership rule; its speculative edits were restored to baseline.
+- Applied the user-approved reflexive endpoint cast, the matching repeated caller formula, four explicit Additive proofs, and Localization imports. All other statements and all docstrings are unchanged.
+- Four PATTERN/ERROR/RULE records reproduce both final Lean files exactly. Records: /home/ubuntu/u9/bz/FIXES-BZ950.md; audit: BZ950-rule-audit.txt.
+- Completion marker: /home/ubuntu/u9/state/BZ950.DONE.
+- No local Lean/Lake, proof placeholders, trust bypasses, heartbeat changes, profiler probes, or deletions.
