@@ -149,9 +149,8 @@ theorem exists_affineBaseChangeIntoPullback_representativeIso
           (derivedPullback g').map eN.hom := by
       simp only [DerivedCategory.quotientCompQhIso,
         HomologicalComplexUpToQuasiIso.quotientCompQhIso,
-        Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_hom, Quotient.lift.isLift_inv]
+        Quotient.lift.isLift_hom, Quotient.lift.isLift_inv]
       repeat erw [Category.id_comp]
-      all_goals rfl
     dsimp only [affineBaseChangeIntoPullback]
     erw [htransport]
     simpa only [SingleComplexBaseChange.comparisonIntoPullback, F, G, T, cast_eq,
