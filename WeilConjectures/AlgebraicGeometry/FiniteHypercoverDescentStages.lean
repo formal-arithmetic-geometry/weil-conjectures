@@ -42,7 +42,7 @@ private theorem pullbackComp_inv_fst {X Y Z : Scheme.{w}}
       pullback.fst (pullback.snd W.hom g) f ≫ pullback.fst W.hom g := by
   have H := conjugateEquiv_counit ((Over.mapPullbackAdj f).comp (Over.mapPullbackAdj g))
     (Over.mapPullbackAdj (f ≫ g)) (Over.mapComp f g).hom W
-  simpa [Over.pullbackComp, Adjunction.comp_counit_app] using
+  simp [Over.pullbackComp, Adjunction.comp_counit_app] using
     congrArg (fun k ↦ k.left) H
 
 private theorem comparison_fst {X Y Z : Scheme.{w}}
