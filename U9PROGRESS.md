@@ -423,3 +423,17 @@
 - No local Lean/Lake, proof placeholders, trust bypasses, declaration deletions,
   profiler probes, or heartbeat changes. Both rewrite rules replay the exact diff.
 - All ucheck invocations finished. This final commit changes documentation only.
+
+
+# BZ1065 in progress
+
+- Branch: u9/BZ1065; initial commit dfaed262b6fc1850faba3b46955a11d3225a1e86.
+- The user instructed continuation after the concrete compositor statement-migration proposal.
+  Applied BZ1065-statement-migration-preview.patch and corresponding proof cancellations.
+  Original assumptions and intended comparison maps are preserved.
+- Previous proof-only remote build reduced 17 errors to 10; the remaining root errors
+  were the proposed API directions in kept statements.
+- Next: ucheck-bump on the assigned module, then its direct importer
+  ComparisonSquareTransport and further unblocked downstream modules.
+- Fix records: /home/ubuntu/u9/bz/FIXES-BZ1065.md.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
