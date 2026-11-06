@@ -71,7 +71,7 @@ private theorem termwise_exact_factors
   change L.map (𝟙 _) ≫ ε.app _ ≫ DerivedCategory.Qh.map (𝟙 _) ≫ 𝟙 _ = _
   erw [L.map_id, DerivedCategory.Qh.map_id]
   simp only [Category.id_comp]
-  exact Category.comp_id _
+  exact Category.comp_id (ε.app ((HomotopyCategory.quotient C (.up ℤ)).obj P))
 
 private theorem termwise_homotopy_square_inv
     {C D B E : Type*} [Category C] [Category D] [Category B] [Category E]
