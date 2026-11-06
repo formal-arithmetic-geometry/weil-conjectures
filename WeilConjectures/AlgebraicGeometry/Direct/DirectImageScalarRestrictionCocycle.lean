@@ -101,11 +101,11 @@ private theorem derive_chain
     (M : DerivedCategory A₂) :
     (Functor.mapDerivedCategorySquareIso e₀₂).hom.app M =
       Q₀.mapDerivedCategory.map
-        (((Functor.mapDerivedCategoryCompIso R₂₁ R₁₀).symm ≪≫
+        ((Functor.mapDerivedCategoryCompIso R₂₁ R₁₀ ≪≫
           Functor.mapDerivedCategoryNatIso r).inv.app M) ≫
       (Functor.mapDerivedCategorySquareIso e₀₁).hom.app (R₂₁.mapDerivedCategory.obj M) ≫
       U₁₀.mapDerivedCategory.map ((Functor.mapDerivedCategorySquareIso e₁₂).hom.app M) ≫
-      ((Functor.mapDerivedCategoryCompIso U₂₁ U₁₀).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso U₂₁ U₁₀ ≪≫
         Functor.mapDerivedCategoryNatIso t).hom.app (Q₂.mapDerivedCategory.obj M) := by
   have hi (N : A₂) : e₀₂.inv.app N ≫ Q₀.map (r.inv.app N) =
       t.inv.app (Q₂.obj N) ≫ U₁₀.map (e₁₂.inv.app N) ≫ e₀₁.inv.app (R₂₁.obj N) := by
