@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.CoefficientScalarTensorData
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Counit
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.InternalComplexLocalizationTensorComparison
 
 /-! # The scalar complex comparison is the derived counit
@@ -49,7 +51,7 @@ isomorphism between the exact derived functor and the total left derived functor
 The comparison between complex and homotopy localizations has identity components.
 Its images under the two functors are identities, so cancellation leaves the counit.
 (blueprint: lem-sfb-coefficient-scalar-complex-counit). -/
-theorem coefficientScalarTensor_complexCounit (Z : Scheme.{u})
+private theorem coefficientScalarTensor_complexCounit (Z : Scheme.{u})
     (K : CochainComplex (ModuleRingedComparison.internalModules R Z) ℤ) :
     coefficientInternalScalarComplex a Z K =
       (Mod.extendScalars (coefficientMap a Z)).leftDerivedFunctorCounit.app
