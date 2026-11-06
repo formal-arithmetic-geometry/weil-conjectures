@@ -301,3 +301,7 @@
   by the unowned BZ871 `SingleComplexOpenTermwiseCounitCompatibility` error.
 - Fixes and logs: `/home/ubuntu/u9/bz/FIXES-BZ872.md`.
 - No local Lean/Lake execution, proof placeholders, or trust bypasses.
+- Assigned module GREEN at `ca4ebdd277`: standalone `ucheck-bump` returned
+  rc=0, failed=0, 4041 jobs on poolb:43.135.211.170; the leaf rebuilt in 33 seconds.
+- Remote log: `/home/ubuntu/u9/logs/BZ872-20261106T083120.log`.
+- Running the required direct-importer check against the now-green leaf before DONE.
