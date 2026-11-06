@@ -133,12 +133,14 @@ theorem exists_affineBaseChangeTildeOrdinaryComparison
     simp only [affineTildeRepresentativeCohomologyIso,
       affinePushforwardRepresentativeCohomologyIso, affineBaseChangeTildeCohomologyIso,
       t, affineBaseChangeTildeRepresentativeIso, affineBaseChangeTildeComplexIso,
-      Iso.trans_hom, Iso.symm_hom, Iso.symm_inv, Iso.app_hom, Iso.app_inv,
+      Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv,
       Functor.mapIso_hom, Functor.mapIso_inv,
       DerivedCategory.quotientCompQhIso, HomologicalComplexUpToQuasiIso.quotientCompQhIso,
       Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_hom, Quotient.lift.isLift_inv,
-      cast_eq, Functor.map_comp, CategoryTheory.Functor.map_id,
+      cast_eq, Functor.map_comp,
       Category.assoc, Category.id_comp, Category.comp_id, Cg]
+    repeat erw [CategoryTheory.Functor.map_id]
+    simp only [Category.id_comp, Category.comp_id] <;> rfl
   rw [hb] at ht
   dsimp only at heC ⊢
   rw [heC]
