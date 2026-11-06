@@ -178,7 +178,7 @@ namespace AlgebraicGeometry.ProEtale.CoefficientCompatibility
 attribute [local irreducible] Functor.mapDerivedCategory Functor.rightDerivedFunctor
   sfIntrinsicModuleEquivalence directImagePresentation
 attribute [local implicit_reducible] proEtaleConstantRingMap scalarExtensionFunctor
-  sfIntrinsicDerivedEquivalence Equivalence.mapDerivedCategory Functor.mapHomologicalComplex
+  sfIntrinsicDerivedEquivalence Equivalence.mapDerivedCategory
 
 private def ordinaryPresentation (A : Type u) [CommRing A] [Finite A]
     {Z Y : Scheme.{u}} (g : Z ⟶ Y) :=
