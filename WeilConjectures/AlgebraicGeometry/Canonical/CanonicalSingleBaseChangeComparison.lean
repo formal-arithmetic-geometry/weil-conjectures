@@ -10,9 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Picard.CanonicalSingleDirectImag
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
 public import Mathlib.Algebra.Homology.Localization
-public import Mathlib.CategoryTheory.Limits.HasLimits
 import all Mathlib.Algebra.Homology.Localization
-import all Mathlib.CategoryTheory.Limits.HasLimits
 import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeUnitCompatibility
 import WeilConjectures.AlgebraicGeometry.HomotopySingleBaseChangeComparison
 
@@ -230,13 +228,6 @@ theorem canonicalSingleBaseChangeComparison
   set_option backward.isDefEq.respectTransparency.types false in
   with_unfolding_all
     simpa only [canonicalSingleDirectImageMap, canonicalSinglePullbackMap, cast_eq,
-      Category.assoc, C_X, C_S, C_X', C_S', E, Q_S, Q_X', Q_S', F, G, H, I,
-      ε_g, ε_p, t_g, t_p, a, b₀, b₁, c, d, k, v, sf, Scheme.Modules,
-      Scheme.ringCatSheaf, moduleRings, DerivedCategory.singleFunctor,
-      DerivedCategory.singleFunctors, HomotopyCategory.singleFunctor,
-      HomotopyCategory.singleFunctors, SingleFunctors.postcomp, Functor.comp_map, Functor.comp_obj,
-      DerivedCategory.Qh, HomologicalComplexUpToQuasiIso.Qh, HomotopyCategory.quotient,
-      Quotient.lift_map_functor_map, Quotient.lift_obj_functor_obj, DerivedCategory.Q,
-      Iso.app_hom, Iso.app_inv, pushforward, RingedSpace.moduleDirectImage] using hf
+      Category.assoc] using! hf
 
 end AlgebraicGeometry.Scheme.Modules
