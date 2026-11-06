@@ -318,3 +318,8 @@
   ucheck-bump rc=0, failed=0, 5358 jobs; target freshly rebuilt in 25 seconds.
 - Full log: /home/ubuntu/u9/bz/BUILD-BZ941-leaf-green-full.log.
 - Continuing with all five direct importers; no DONE until downstream checking finishes.
+- Both direct comparison importers are GREEN: ModuleRingedToposDerivedComparison and
+  ModuleRingedComparison.ModuleRingedToposDerivedComparison (5422 jobs, rc=0, failed=0).
+- Three other direct importers are blocked by unowned dependencies; exact diagnostics
+  are in /home/ubuntu/u9/bz/BZ941-layer1-blockers.json.
+- Next: five comparison importers in the second layer.
