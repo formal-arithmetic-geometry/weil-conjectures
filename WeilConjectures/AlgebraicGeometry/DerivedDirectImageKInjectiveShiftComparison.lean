@@ -81,7 +81,6 @@ private theorem canonical_unit_commShift
 
 
 
-set_option maxHeartbeats 800000 in
 -- Whiskered shift comparisons involve several localized functors.
 /-- The identity-resolution computation intertwines the actual derived shift comparison.
 Source: Stacks Project, Tag 079V, construction by the equivalence K(Inj) to D.

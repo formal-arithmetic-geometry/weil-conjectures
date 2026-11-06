@@ -56,7 +56,6 @@ private theorem derived_map_surjective
   apply (cancel_epi (e.hom.app I)).mp
   simpa only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id] using h.symm
 
-set_option maxHeartbeats 800000 in
 -- The transported functor comparisons require additional elaboration heartbeats.
 private theorem computation_naturality
     {A B : Type*} [Category A] [Abelian A] [Category B] [Abelian B]
@@ -86,7 +85,7 @@ private theorem computation_naturality
   simp only [Iso.app_hom]
   rw [DerivedCategory.quotientCompQhIso_hom_naturality]
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- The transported functor comparisons require additional elaboration heartbeats.
 private theorem open_comparison_naturality (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
@@ -119,7 +118,6 @@ private theorem open_comparison_naturality (X : Scheme.{u}) (U : X.Opens)
   exact (a.mapDerivedCategoryRightDerivedAdjunction.rightAdjointUniq adj).hom.naturality
     (L.mapDerivedCategory.map (DerivedCategory.Q.map f))
 
-set_option maxHeartbeats 800000 in
 -- The transported functor comparisons require additional elaboration heartbeats.
 private theorem concrete_map (X : Scheme.{u}) (U V : X.Opens)
     (I J : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
@@ -257,7 +255,6 @@ private def representativeBoundary (X : Scheme.{u}) (U V : X.Opens)
     DerivedCategory.triangleOfSESδ
       (schemeMayerVietorisComplex_shortExact X U V hcover I hI)
 
-set_option maxHeartbeats 800000 in
 -- Localized boundary transport needs extra elaboration heartbeats.
 private theorem representativeBoundary_naturality (X : Scheme.{u}) (U V : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
@@ -289,7 +286,6 @@ private theorem representativeBoundary_naturality (X : Scheme.{u}) (U V : X.Open
   simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
   rw [hc, Iso.inv_hom_id_assoc]
 
-set_option maxHeartbeats 800000 in
 -- The transported functor comparisons require additional elaboration heartbeats.
 private theorem representativeBoundary_distinguished (X : Scheme.{u}) (U V : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
@@ -383,7 +379,6 @@ private theorem transport_boundary_square
   rw [← S.map_comp, ht, S.map_comp, reassoc_of% ha]
   rw [← H.map_comp_assoc, ht', H.map_comp, Category.assoc]
 
-set_option maxHeartbeats 300000 in
 -- The transported functor comparisons require additional elaboration heartbeats.
 private theorem canonicalMV_spec
     (X : Scheme.{u}) (U V : X.Opens) (hcover : U ⊔ V = ⊤)
@@ -448,7 +443,6 @@ private theorem canonicalMV_spec
     simp only [δ, ← H.map_comp_assoc,
       Iso.hom_inv_id, H.map_id, Category.id_comp]
 
-set_option maxHeartbeats 300000 in
 -- The transported functor comparisons require additional elaboration heartbeats.
 /-- Mayer--Vietoris boundaries can be chosen simultaneously, naturally in the object.
 The adjunction units and the difference of restrictions are the first two maps.
@@ -571,7 +565,6 @@ private theorem boundary_square_identity
   exact ha
 
 set_option backward.isDefEq.respectTransparency true in
-set_option maxHeartbeats 60000 in
 -- Comparison transport needs additional elaboration heartbeats.
 /-- The image Mayer--Vietoris triangle is identified with the target one by
 composition and open-restriction comparison isomorphisms, with identity first component.

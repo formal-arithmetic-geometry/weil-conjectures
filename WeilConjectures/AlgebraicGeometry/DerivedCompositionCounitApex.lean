@@ -24,7 +24,6 @@ namespace AlgebraicGeometry
 variable [∀ S : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
 
-set_option maxHeartbeats 800000 in
 -- The selected scheme counits have large dependent types.
 /-- The explicit expression obtained by pasting the localized underived counits.
 This names a concrete morphism made from the already recorded choices of counits
@@ -52,7 +51,6 @@ noncomputable def derivedCompositionCounitApex
           ((b g).counit.app H)) ≫
         (ε f).app H ≫ DerivedCategory.Qh.map ((b f).counit.app K)
 
-set_option maxHeartbeats 800000 in
 -- The construction equation elaborates the same dependent counit types.
 /-- The construction equation for the explicit counit expression.
 Source: Stacks Project, Tags 079W and 0D5S.

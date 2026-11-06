@@ -29,9 +29,9 @@ private theorem restrictedResolutionSections_nonempty {X : Scheme.{uBC}} {F : X.
     Nonempty (RestrictedResolutionSections I U) := by
   let R := restrictFunctor U.ι
   let : PreservesFiniteLimits (SheafOfModules.overFunctor X.ringCatSheaf U) :=
-    moduleOverFunctor_limits_proof X.toRingedSpace U
+    moduleOverFunctor_limits X.toRingedSpace U
   let : PreservesFiniteColimits (SheafOfModules.overFunctor X.ringCatSheaf U) :=
-    moduleOverFunctor_colimits_proof X.toRingedSpace U
+    moduleOverFunctor_colimits X.toRingedSpace U
   let : PreservesFiniteLimits R := preservesFiniteLimits_of_natIso (overFunctorEquiv U)
   let : PreservesFiniteColimits R := preservesFiniteColimits_of_natIso (overFunctorEquiv U)
   let : R.Additive := Functor.additive_of_preserves_binary_products R
