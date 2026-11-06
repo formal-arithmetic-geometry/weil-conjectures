@@ -173,7 +173,7 @@ attribute [local irreducible] WeilConjectures.coefficientSequenceCommRingSheaf
 
 universe t u
 open CategoryTheory CategoryTheory.Limits Opposite
-attribute [-instance] SheafOfModules.TotalTensorSigns.coefficientCompose
+attribute [-instance] CategoryTheory.ringedToposCommRingForgetCompose
   CategoryTheory.ringedToposRingForgetCompose CategoryTheory.ringedToposAbelianForgetCompose
 
 namespace WeilConjectures.SequenceKInjectiveComparison
