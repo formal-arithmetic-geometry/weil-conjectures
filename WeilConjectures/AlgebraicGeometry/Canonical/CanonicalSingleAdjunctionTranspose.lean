@@ -8,6 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.Picard.CanonicalSinglePullbackComparison
 public import WeilConjectures.AlgebraicGeometry.Picard.CanonicalSingleDirectImageComparison
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # Single-module transposes for the pinned derived adjunction
 
