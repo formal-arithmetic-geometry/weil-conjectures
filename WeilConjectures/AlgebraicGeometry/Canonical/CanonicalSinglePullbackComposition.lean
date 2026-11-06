@@ -76,7 +76,8 @@ private theorem singleComparison_eq {X Y : Scheme.{u}} (f : X ⟶ Y) (M : Y.Modu
               (tensorPullback f) (.up ℤ) 0).hom.app M) ≫
             (HomotopyCategory.singleFunctor _ 0).map (t.hom.app M)) := by
   dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
-  simp only [canonicalSinglePullbackMap, cast_eq, DerivedCategory.singleFunctor,
+  simp only [canonicalSinglePullbackMap, cast_eq, Scheme.Modules, Scheme.ringCatSheaf,
+    moduleRings, DerivedCategory.singleFunctor,
     DerivedCategory.singleFunctors, HomotopyCategory.singleFunctor,
     HomotopyCategory.singleFunctors, SingleFunctors.postcomp, Functor.comp_map,
     Functor.map_comp, Category.assoc, DerivedCategory.Qh,
