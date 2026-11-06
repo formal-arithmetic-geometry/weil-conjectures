@@ -86,7 +86,8 @@ theorem Etale.isIso_derivedBaseChangeMapPlus_of_forall_isIso_baseChangeHomologyM
     let P := (HomotopyCategory.Plus.quotient _).obj M
     suffices IsIso ((Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app
         (DerivedCategory.Plus.Qh.obj P)) by
-rw [← NatTrans.isIso_app_iff_of_iso _ ((DerivedCategory.Plus.quotientCompQhIso _).app M ≪≫ i)]
+      rw [← NatTrans.isIso_app_iff_of_iso _
+        ((DerivedCategory.Plus.quotientCompQhIso _).app M ≪≫ i)]
       exact this
     have hM : ∀ m, (h)_*[ModuleCat.{u + 1} Λ].rightAcyclic
         ((((e)^*[ModuleCat.{u + 1} Λ]).mapCochainComplexPlus.obj M).obj.X m) := fun m ↦
