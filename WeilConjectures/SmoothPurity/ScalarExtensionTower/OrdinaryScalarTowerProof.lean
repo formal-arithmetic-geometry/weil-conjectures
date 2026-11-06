@@ -59,7 +59,7 @@ attribute [local irreducible] completedIntegralCommRingSheafUnrestricted
 attribute [local implicit_reducible] integralCoefficientCommRingSheaf
   SemilinearSections.systemRing
   coefficientSequenceCommRingSheaf coefficientSequenceCommRingPresheaf
-  Functor.mapHomologicalComplex HomologicalComplex.complexOfFunctorsToFunctorToComplex
+  HomologicalComplex.complexOfFunctorsToFunctorToComplex
 
 private theorem evaluation_section_heq {X : Scheme.{t}}
     (N : coefficientSequenceModules l E X) (n : ℕ) (U : X.ProEtᵒᵖ)
@@ -154,7 +154,7 @@ attribute [local irreducible] completedIntegralCommRingSheafUnrestricted
 attribute [local implicit_reducible] integralCoefficientCommRingSheaf
   SemilinearSections.systemRing
   coefficientSequenceCommRingSheaf coefficientSequenceCommRingPresheaf
-  Functor.mapHomologicalComplex HomologicalComplex.complexOfFunctorsToFunctorToComplex
+  HomologicalComplex.complexOfFunctorsToFunctorToComplex
 
 private theorem finiteUnit_eq (K : scalarReductionSource l E W)
     (n : ℕ) (U : W.ProEtᵒᵖ) (x : K.val.obj U) :
@@ -521,7 +521,7 @@ attribute [local irreducible] completedIntegralCommRingSheafUnrestricted
 attribute [local implicit_reducible] direct integralCoefficientCommRingSheaf
   SemilinearSections.systemRing
   coefficientSequenceCommRingSheaf coefficientSequenceCommRingPresheaf
-  Functor.mapHomologicalComplex HomologicalComplex.complexOfFunctorsToFunctorToComplex
+  HomologicalComplex.complexOfFunctorsToFunctorToComplex
 
 /-- The finite balanced comparison takes scalar multiples of quotient units to tensors.
 Source: Stacks 03D7 and 03EK, the normalized balanced associator.
