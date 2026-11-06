@@ -302,12 +302,19 @@
 # BZ943 in progress
 
 - Branch: `u9/BZ943`; starting commit: `c59b55069`.
-- Baseline build at `19d501377e` failed only because `finiteQuotient_layer_local_complexes`
-  and its upstream proof chain were deleted by prior prune units.
-- The user instructed continuation after the explicit six-module restoration proposal.
-  Applied that proposal, restoring nine historical declaration headers unchanged.
-- Candidate proof updates: new derived compositor orientation, explicit slice-module
-  category in `singleFunctor`, and strictly bounded complex vanishing.
-- Next: `ucheck-bump` on the assigned filtration triangle, then downstream importers.
-- Evidence and fix patterns: `/home/ubuntu/u9/bz/FIXES-BZ943.md`.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat raises.
+- Baseline at `19d501377e` confirmed that the sole assigned error is a deleted
+  `finiteQuotient_layer_local_complexes` dependency.
+- The user instructed continuation after the six-module restoration proposal.
+  Restored nine historical declaration headers unchanged; all existing declarations
+  and the assigned theorem statement are preserved.
+- The two Mathlib compositor directions are ported. The remaining category synthesis
+  failure now uses the known local `HasDerivedCategory.standard` registration.
+- Remote build `BUILD-BZ943-restoration3.log` is queued through `ucheck-bump`.
+  Never start another build while this one is active.
+- First downstream chain: `FiniteQuotientFiniteModuleCohomology`,
+  `FiniteQuotientFiniteModuleModels`, `FinitePerfectQuotientModels`.
+- Evidence, exact errors, patterns and whole-tree counts:
+  `/home/ubuntu/u9/bz/FIXES-BZ943.md`.
+- Statement audit: `/home/ubuntu/u9/bz/BZ943-final-statement-audit.json`.
+- No local Lean/Lake execution, proof placeholders, new axioms, trust bypasses,
+  profiler probes, or heartbeat increases.
