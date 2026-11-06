@@ -11,6 +11,10 @@
 - Next: validate the restored dependencies and assigned leaf with `ucheck-bump`, repair
   any remaining proof errors, then check downstream importers and write DONE.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+- Assigned leaf and both restored prerequisite modules are GREEN at source commit
+  `e1270ad5484d1dd75a1a04cb32e2e4780ededcb9`: `ucheck-bump` rc=0, failed=0,
+  4122 jobs. Remote log: `/home/ubuntu/u9/logs/BZ819-20261106T081456.log`.
+- Checking the direct importer `IntegralOperationsScalarComparisons` next.
 
 # BZ133 complete
 
