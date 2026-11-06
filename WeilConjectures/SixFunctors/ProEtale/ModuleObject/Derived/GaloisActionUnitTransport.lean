@@ -233,7 +233,9 @@ lemma derivedCompQhComparison_comp_derivedHom_app (τ : f₁ ⋙ g₁ ⟶ f₂ �
     Functor.mapDerivedCategoryNatTrans_fach τ K,
     ← Functor.mapDerivedCategoryCompIso_fach f₁ g₁ K,
     ← Functor.mapDerivedCategoryCompIso_fach f₂ g₂ K]
-  simp [Category.assoc, ← Functor.map_comp_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc, Iso.inv_hom_id_app_assoc,
+    ← Functor.map_comp_assoc, ← Functor.map_comp, Iso.inv_hom_id_app,
+    Functor.map_id, Category.id_comp, Category.comp_id]
 
 end Adjunction
 
