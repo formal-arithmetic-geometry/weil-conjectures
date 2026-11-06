@@ -299,6 +299,12 @@ private theorem complete_cone
   let := HasDerivedCategory.standard (ConstantCompletion.Mod R)
   let (U : C) := HasDerivedCategory.standard (ConstantCompletion.Mod (R.over U))
   intro U f hf
+  let F := SheafOfModules.overFunctor (siteModuleRings R) U
+  have : F.Additive := ringedOverFunctor_additive R U
+  have : PreservesFiniteLimits F := ringedOverFunctor_preservesFiniteLimits R U
+  have : PreservesFiniteColimits F := ringedOverFunctor_preservesFiniteColimits R U
+  let : HasDerivedCategory (SheafOfModules ((siteModuleRings R).over U)) :=
+    HasDerivedCategory.standard _
   let L := (DerivedCategory.singleFunctor _ 0).obj
     (ringedSectionLocalization (R.over U) (ringedSliceSection R U f))
   let H := (Functor.curry.obj (derivedInternalHom (S.over U) (R.over U))).obj (op L)
@@ -307,12 +313,10 @@ private theorem complete_cone
   let := hH
   let : (ringedDerivedRestriction R U).CommShift ℤ := by
     unfold ringedDerivedRestriction
-    set_option backward.isDefEq.respectTransparency false in
-      infer_instance
+    infer_instance
   let : (ringedDerivedRestriction R U).IsTriangulated := by
     unfold ringedDerivedRestriction
-    set_option backward.isDefEq.respectTransparency false in
-      infer_instance
+    infer_instance
   let G := ringedDerivedRestriction R U ⋙ H
   exact Pretriangulated.Triangle.isZero₃_of_isZero₁₂ _ (G.map_distinguished T hT)
     (h₁ U f hf) (h₂ U f hf)
