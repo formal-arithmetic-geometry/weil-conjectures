@@ -76,8 +76,8 @@ private theorem exact_path (e : F ⋙ G ≅ F' ⋙ G')
     exact hw
   simp only [Category.assoc] at hp ⊢
   rw [reassoc_of% hw', reassoc_of% hp]
-  simp only [Functor.isoWhiskerRight_hom, Functor.isoWhiskerRight_inv,
-    Iso.trans_hom, Iso.symm_hom, Functor.whiskerRight_comp, Category.assoc,
+  simp only [Functor.isoWhiskerRight_hom, Iso.trans_hom, Iso.symm_hom,
+    Functor.whiskerRight_comp, Category.assoc,
     Iso.hom_inv_id, Category.comp_id]
 
 private theorem exact_path_with_comparisons (e : F ⋙ G ≅ F' ⋙ G')
@@ -99,8 +99,8 @@ private theorem exact_path_with_comparisons (e : F ⋙ G ≅ F' ⋙ G')
       P₂'.map ((Functor.mapDerivedCategorySquareIso a).hom.app M ≫
         j₁.inv.app (D(K₀).obj M)) := by
   have hp := congr_app (exact_path F G F' G' K₀ K₁ K₂ P₁ P₂ e a b) M
-  simp only [NatTrans.comp_app, Functor.isoWhiskerLeft_inv, Functor.whiskerLeft_app,
-    Functor.isoWhiskerRight_hom, Functor.whiskerRight_app] at hp
+  simp only [NatTrans.comp_app, Functor.isoWhiskerLeft_hom, Functor.isoWhiskerLeft_inv,
+    Functor.whiskerLeft_app, Functor.isoWhiskerRight_hom, Functor.whiskerRight_app] at hp ⊢
   rw [reassoc_of% hp]
   simp only [Functor.map_comp, Category.assoc]
   rw [← j₂.inv.naturality_assoc]
