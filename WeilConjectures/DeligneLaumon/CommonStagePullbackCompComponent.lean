@@ -239,9 +239,10 @@ theorem commonStagePullbackCompComponent_stage_representation
   apply congrArg (StageSystem.PairCategory.mkHom
       (X := commonStagePullbackObject l Ω (f ≫ g) P)
       (Y := commonStagePullbackObject l Ω f (commonStagePullbackObject l Ω g P)) L hP hP)
+  dsimp only [commonStagePullbackComparison, operationStageTransitionIso,
+    commonStagePullbackObject, StageSystem.PairCategory.toStage]
   set_option backward.isDefEq.respectTransparency true in
   set_option backward.isDefEq.respectTransparency.types true in
-  simpa only [commonStagePullbackComparison, operationStageTransitionIso,
-    commonStagePullbackObject, StageSystem.PairCategory.toStage] using key
+  exact key
 
 end WeilConjectures
