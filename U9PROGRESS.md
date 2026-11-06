@@ -299,14 +299,14 @@
 - Next: ucheck-bump on the five prerequisites and SupportedKoszulRelativeDetector, then downstream.
 - Fix notes: /home/ubuntu/u9/bz/FIXES-BZ932.md. No local Lean/Lake or proof shortcuts.
 
-# BZ948 in progress
 
-- Branch: u9/BZ948; baseline c59b55069.
-- Re-read the unit brief on continuation; no new LEAD lines were appended.
-- The user instructed continuation after the concrete four-cast statement proposal.
-  Applied those reflexive casts to leftCounit_naturality and
-  leftDerived_comparison_on_resolution; the mathematical propositions are unchanged
-  up to definitional equality, with existing proofs and all binders preserved.
-- Prepared the known tilde Additive-instance repair in both direct importers.
-- Next: ucheck-bump on the assigned helper and both direct importers, then downstream.
-- Fix notes: /home/ubuntu/u9/bz/FIXES-BZ948.md. No local Lean/Lake or proof escapes.
+# BZ949 in progress
+
+- Branch: u9/BZ949; baseline: 86b635dfce798c1644c3ee4783f6871a55233370.
+- The user instructed continuation after the exact one-cast statement proposal.
+- Applied the reflexive cast around the existing counit, preserving its map and assumptions.
+- Baseline ucheck-bump confirmed this was the assigned module's only error.
+- AffineBaseChangeTildeRepresentative is green at 2a367a4402b820cd58b13538f43a02f3792baa2e: rc=0, failed=0.
+- Next: build all six direct importers and continue through fixable downstream errors.
+- Fix patterns, exact error, rule, and occurrence counts: /home/ubuntu/u9/bz/FIXES-BZ949.md.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
