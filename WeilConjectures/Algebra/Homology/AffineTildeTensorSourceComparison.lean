@@ -44,6 +44,11 @@ local instance sourceComparisonTildeColimits (C : Type u) [CommRing C] :
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
+local instance sourceComparisonHasDerivedCategory (Y : Scheme.{u}) :
+    HasDerivedCategory.{w} Y.Modules :=
+  (‹∀ Z : Scheme.{u},
+    HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))›) Y
+
 local instance sourceComparisonPullbackAdditive {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (Scheme.Modules.tensorPullback f).Additive :=
   SingleComplexBaseChange.tensorPullbackAdditive.{u, w} f
