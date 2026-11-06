@@ -174,6 +174,7 @@ lemma upperStar_map_cokernelPowIsoRootsOfUnitySheaf_inv_comp (n : ℕ) :
     ← Category.assoc, upperStar_map_cokernelPowIsoRootsOfUnitySheaf_hom_of_comp_eq g₁ f f' hf ℓ
       hζ n, Category.assoc, Iso.hom_inv_id, Category.comp_id]
 
+omit [WeaklyEtale g₁] in
 include h hf in
 /-- The naturality of the trivialization under pullback, at level `n`: both sides of
 `AlgebraicGeometry.ProEtale.upperStar_map_upperStarMapModTateModuleIsoUnit_hom_hom` agree after
