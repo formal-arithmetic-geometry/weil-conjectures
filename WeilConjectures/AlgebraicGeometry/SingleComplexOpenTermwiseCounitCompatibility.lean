@@ -26,6 +26,9 @@ set_option backward.isDefEq.respectTransparency.types false
 namespace AlgebraicGeometry
 open SingleComplexBaseChange
 set_option synthInstance.maxSize 2048
+attribute [local instance_reducible] Scheme.Modules TopCat.Sheaf
+attribute [local implicit_reducible] DerivedCategory HomotopyCategory
+  DerivedCategory.Q DerivedCategory.Qh
 
 private theorem cancel_counit_factors
     {C : Type*} [Category C] {A B D E F G : C}
@@ -36,7 +39,6 @@ private theorem cancel_counit_factors
   simpa only [Category.assoc, Iso.hom_inv_id_assoc, Iso.inv_hom_id_assoc,
     Iso.hom_inv_id, Category.id_comp, Category.comp_id] using h'
 
-
 private theorem termwise_exact_factors
     {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
     [HasDerivedCategory.{w} C] [HasDerivedCategory.{w} D]
@@ -45,7 +47,8 @@ private theorem termwise_exact_factors
     F.mapDerivedCategoryFactorsh.app ((HomotopyCategory.quotient C (.up ℤ)).obj P) =
       F.mapDerivedCategoryFactors.app P := by
   apply Iso.ext
-  change F.mapDerivedCategoryFactorsh.hom.app _ = F.mapDerivedCategoryFactors.hom.app P
+  change F.mapDerivedCategoryFactorsh.hom.app
+    ((HomotopyCategory.quotient C (.up ℤ)).obj P) = F.mapDerivedCategoryFactors.hom.app P
   rw [Functor.mapDerivedCategoryFactorsh_hom_app]
   change F.mapDerivedCategory.map (𝟙 _) ≫ F.mapDerivedCategoryFactors.hom.app P ≫
     𝟙 _ ≫ DerivedCategory.Qh.map (𝟙 _) = _
@@ -93,18 +96,24 @@ theorem singleComplexOpen_termwise_counit_compatibility
               (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)).obj P) ≫
             DerivedCategory.Qh.map
               (((Scheme.Modules.tensorPullback g').mapHomotopyCategoryFactors (.up ℤ)).hom.app P) ≫
-            (DerivedCategory.quotientCompQhIso _).hom.app
+            (DerivedCategory.quotientCompQhIso
+              (SheafOfModules.{u} (moduleRings X'.toRingedSpace))).hom.app
               (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P)) =
       (derivedPullback j).map ((DerivedCategory.quotientCompQhIso _).inv.app Q) ≫
         (counit j).app ((HomotopyCategory.quotient _ (.up ℤ)).obj Q) ≫
         DerivedCategory.Qh.map
           (((Scheme.Modules.tensorPullback j).mapHomotopyCategoryFactors (.up ℤ)).hom.app Q) ≫
-        (DerivedCategory.quotientCompQhIso _).hom.app
+        (DerivedCategory.quotientCompQhIso
+          (SheafOfModules.{u} (moduleRings U'.toScheme.toRingedSpace))).hom.app
           (((Scheme.Modules.tensorPullback j).mapHomologicalComplex (.up ℤ)).obj Q) ≫
         singleComplexOpenTensorRestrictionMap g' U U' j hj P := by
   dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
   have : ∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z),
       (Scheme.Modules.tensorPullback k).Additive := fun k => tensorPullbackAdditive k
+  letI : (schemeOpenRestriction X U ⋙ Scheme.Modules.tensorPullback j).PreservesZeroMorphisms :=
+    Functor.preservesZeroMorphisms_of_additive _
+  letI : (Scheme.Modules.tensorPullback g' ⋙ schemeOpenRestriction X' U').PreservesZeroMorphisms :=
+    Functor.preservesZeroMorphisms_of_additive _
   have h := open_pinned_counit_homotopy_restriction g' U U' j hj
     ((HomotopyCategory.quotient
         (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)).obj P)
