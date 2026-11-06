@@ -64,8 +64,11 @@ jobs:
           use-github-cache: false
 
       # Lake's system configuration for the cache, and the project's own outputs from it: the
-      # mappings of HEAD's nearest uploaded ancestor (artifacts are fetched lazily, during the
-      # build). `lake cache` runs as the toolchain's own binary with ELAN_TOOLCHAIN unset, so that
+      # build of HEAD's nearest uploaded ancestor, all artifacts up front. Not `--mappings-only`:
+      # that defers each module's download to the moment the build reaches it, one request at a
+      # time per build worker (two here), i.e. ~27k sequential round trips. The eager fetch hands
+      # every URL to a single parallel `curl -Z` (measured: ~900 MB, 18k files in 25 s through
+      # cache.fuxi.merten.dev). `lake cache` runs as the toolchain's own binary with ELAN_TOOLCHAIN unset, so that
       # the revision scope is named after Lean's version ("leanprover--lean4---4.33.1") as the
       # cluster's uploaders name it; through elan the two sides would never find each other's
       # uploads. Best effort: on a miss the build simply compiles more.
@@ -90,7 +93,7 @@ jobs:
             echo "LAKE_ARTIFACT_CACHE=true"
           } >> "$GITHUB_ENV"
           export LAKE_CONFIG="$config" LAKE_CACHE_DIR="$HOME/.cache/lake" LAKE_ARTIFACT_CACHE=true
-          env -u ELAN_TOOLCHAIN "$(elan which lake)" cache get --mappings-only \
+          env -u ELAN_TOOLCHAIN "$(elan which lake)" cache get \
             --repo "$LAKE_CACHE_REPO" --max-revs 30
 
       # Two concurrent Lean processes: the algebraic-geometry files peak at about 5.5 GiB each,
