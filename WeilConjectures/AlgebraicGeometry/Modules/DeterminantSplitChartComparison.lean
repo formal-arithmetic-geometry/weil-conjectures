@@ -180,6 +180,9 @@ private theorem evaluateSplit {X : Scheme.{v}} (S : ShortComplex X.Modules)
       (∀ z, (eW z).2 = S.g.val.app (op W) z) := by
   let E := SheafOfModules.evaluation.{v} (X.ringCatSheaf.over U)
     (op (Over.mk (homOfLE h)))
+  have : E.Additive := by
+    dsimp only [E, SheafOfModules.evaluation]
+    infer_instance
   have : PreservesBinaryBiproducts E :=
     preservesBinaryBiproducts_of_preservesBinaryProducts E
   obtain ⟨d, hfd, hgd⟩ := mappedSplit E
