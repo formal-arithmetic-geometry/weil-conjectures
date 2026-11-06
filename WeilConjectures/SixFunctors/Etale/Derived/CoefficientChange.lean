@@ -351,6 +351,42 @@ lemma rightDerivedFunctorNatIso_hom_app_comp_isoMapDerivedCategory_hom_app {F G 
   rw [Functor.rightDerivedNatTrans_app_assoc, hG]
   simp
 
+/-- For exact functors `F` and `G`, the composition isomorphism `R(F ⋙ G) ≅ RF ⋙ RG`
+corresponds to `D(F ⋙ G) ≅ D(F) ⋙ D(G)` under the identifications `R ≅ D`. -/
+lemma rightDerivedFunctorCompIso_hom_app_comp_isoMapDerivedCategory_hom_app (F : C ⥤ D)
+    (G : D ⥤ E) [F.Additive] [G.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G] [F.PreservesKInjectiveComplexes]
+    (K : DerivedCategory C) :
+    (Functor.rightDerivedFunctorCompIso F G).hom.app K ≫
+        G.rightDerivedFunctor.map (F.rightDerivedFunctorIsoMapDerivedCategory.hom.app K) ≫
+        G.rightDerivedFunctorIsoMapDerivedCategory.hom.app (F.mapDerivedCategory.obj K) =
+      (F ⋙ G).rightDerivedFunctorIsoMapDerivedCategory.hom.app K ≫
+        (Functor.mapDerivedCategoryCompIso F G).hom.app K := by
+  suffices H : (Functor.rightDerivedFunctorCompIso F G).hom ≫
+      Functor.whiskerRight F.rightDerivedFunctorIsoMapDerivedCategory.hom G.rightDerivedFunctor ≫
+      Functor.whiskerLeft F.mapDerivedCategory G.rightDerivedFunctorIsoMapDerivedCategory.hom =
+      (F ⋙ G).rightDerivedFunctorIsoMapDerivedCategory.hom ≫
+        (Functor.mapDerivedCategoryCompIso F G).hom by
+    simpa using NatTrans.congr_app H K
+  refine Functor.rightDerived_ext (F ⋙ G).rightDerivedFunctor (F ⋙ G).rightDerivedFunctorUnit
+    (HomotopyCategory.quasiIso C (ComplexShape.up ℤ)) _ _ _ ?_
+  ext X
+  have h₁ : (F ⋙ G).rightDerivedFunctorUnit.app X ≫
+      (Functor.rightDerivedFunctorCompIso F G).hom.app (DerivedCategory.Qh.obj X) =
+      (Functor.rightDerivedFunctorCompUnit F G).app X := by
+    simp [Functor.rightDerivedFunctorCompIso]
+  have hF := NatTrans.congr_app F.rightDerivedFunctorIsoMapDerivedCategory_hom_fac X
+  have hG := NatTrans.congr_app G.rightDerivedFunctorIsoMapDerivedCategory_hom_fac
+    ((F.mapHomotopyCategory (ComplexShape.up ℤ)).obj X)
+  have hFG := NatTrans.congr_app (F ⋙ G).rightDerivedFunctorIsoMapDerivedCategory_hom_fac X
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app] at hF hG hFG ⊢
+  rw [reassoc_of% h₁, reassoc_of% hFG,
+    Functor.mapDerivedCategoryFactorsh_inv_app_mapDerivedCategoryCompIso_hom_app]
+  simp only [Functor.rightDerivedFunctorCompUnit, NatTrans.comp_app, Functor.whiskerRight_app,
+    Functor.whiskerLeft_app, Functor.associator_hom_app, Functor.associator_inv_app,
+    Category.id_comp, Category.assoc, Functor.comp_obj]
+  rw [← Functor.map_comp_assoc, hF, NatTrans.naturality, reassoc_of% hG]
+
 end DerivedExact
 
 section Transport
@@ -368,6 +404,61 @@ variable {C E : Type*} [Category C] [Category E] [Abelian C] [Abelian E] [HasDer
 `S ≅ Γ ≅ F ⋙ Γ ≅ F ⋙ S ≅ H ⋙ S`. -/
 noncomputable def sectionsTransportIso (ι : H ≅ F) (γ : F ⋙ Γ ≅ Γ) (e : Γ ≅ S) : S ≅ H ⋙ S :=
   e.symm ≪≫ γ.symm ≪≫ Functor.isoWhiskerLeft F e ≪≫ Functor.isoWhiskerRight ι.symm S
+
+/-- The derived-category form of `sectionsTransportIso`, for exact functors. -/
+lemma mapDerivedCategoryCompIso_hom_app_comp_sectionsTransportIso (ι : H ≅ F)
+    (γ : F ⋙ Γ ≅ Γ) (e : Γ ≅ S) (K : DerivedCategory C) :
+    (Functor.mapDerivedCategoryCompIso F Γ).hom.app K ≫
+        (Functor.mapDerivedCategoryNatIso e).hom.app (F.mapDerivedCategory.obj K) ≫
+        S.mapDerivedCategory.map ((Functor.mapDerivedCategoryNatIso ι).inv.app K) =
+      (Functor.mapDerivedCategoryNatIso γ).hom.app K ≫
+        (Functor.mapDerivedCategoryNatIso e).hom.app K ≫
+        (Functor.mapDerivedCategoryTriangleIso (sectionsTransportIso ι γ e)).hom.app K := by
+  have h₁ : γ ≪≫ e ≪≫ sectionsTransportIso ι γ e =
+      Functor.isoWhiskerLeft F e ≪≫ Functor.isoWhiskerRight ι.symm S := by
+    ext X
+    simp [sectionsTransportIso]
+  have h₂ := congrArg (fun α ↦ NatTrans.app α K)
+    (congrArg (fun e ↦ (Functor.mapDerivedCategoryNatIso e).hom) h₁)
+  simp only [Functor.mapDerivedCategoryNatIso_trans, NatTrans.comp_app] at h₂
+  have hWL := NatTrans.congr_app (Functor.mapDerivedCategoryNatIso_isoWhiskerLeft F e) K
+  have hWR := NatTrans.congr_app (Functor.mapDerivedCategoryNatIso_isoWhiskerRight ι.symm S) K
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app] at hWL hWR
+  rw [Iso.trans_hom, NatTrans.comp_app, reassoc_of% h₂, hWR, reassoc_of% hWL,
+    Functor.mapDerivedCategoryNatIso_symm]
+
+variable [HasKInjectiveResolutions C] [F.PreservesKInjectiveComplexes]
+
+/-- The isomorphism `D(H) ⋙ RΓ ≅ RΓ` obtained from `ι : H ≅ F` and `γ : F ⋙ Γ ≅ Γ` corresponds,
+under identifications `RΓ ≅ D(S)` induced by `e : Γ ≅ S`, to `D(sectionsTransportIso ι γ e)`. -/
+lemma rightDerivedFunctorCompIso'_inv_app_comp_sectionsTransportIso (ι : H ≅ F)
+    (γ : F ⋙ Γ ≅ Γ) (e : Γ ≅ S) (K : DerivedCategory C) :
+    (Functor.isoWhiskerRight (H.rightDerivedFunctorIsoMapDerivedCategory.symm ≪≫
+        Functor.rightDerivedFunctorNatIso ι) Γ.rightDerivedFunctor ≪≫
+        Functor.rightDerivedFunctorCompIso' F Γ γ).inv.app K ≫
+        (Functor.rightDerivedFunctorNatIso e ≪≫ S.rightDerivedFunctorIsoMapDerivedCategory).hom.app
+          (H.mapDerivedCategory.obj K) =
+      (Functor.rightDerivedFunctorNatIso e ≪≫ S.rightDerivedFunctorIsoMapDerivedCategory).hom.app
+          K ≫ (Functor.mapDerivedCategoryTriangleIso (sectionsTransportIso ι γ e)).hom.app K := by
+  have hι : (Functor.rightDerivedFunctorNatIso ι).inv.app K ≫
+      H.rightDerivedFunctorIsoMapDerivedCategory.hom.app K =
+      F.rightDerivedFunctorIsoMapDerivedCategory.hom.app K ≫
+        (Functor.mapDerivedCategoryNatIso ι).inv.app K := by
+    rw [← cancel_epi ((Functor.rightDerivedFunctorNatIso ι).hom.app K), Iso.hom_inv_id_app_assoc,
+      rightDerivedFunctorNatIso_hom_app_comp_isoMapDerivedCategory_hom_app_assoc,
+      Iso.hom_inv_id_app, Category.comp_id]
+  have hγ := rightDerivedFunctorNatIso_hom_app_comp_isoMapDerivedCategory_hom_app γ K
+  have hFΓ := rightDerivedFunctorCompIso_hom_app_comp_isoMapDerivedCategory_hom_app F Γ K
+  have h₀ := mapDerivedCategoryCompIso_hom_app_comp_sectionsTransportIso ι γ e K
+  simp only [Iso.trans_hom, NatTrans.comp_app] at h₀
+  simp only [Iso.trans_inv, Iso.trans_hom, Iso.symm_inv, NatTrans.comp_app,
+    Functor.isoWhiskerRight_inv, Functor.whiskerRight_app, Category.assoc,
+    Functor.rightDerivedFunctorCompIso']
+  rw [rightDerivedFunctorNatIso_hom_app_comp_isoMapDerivedCategory_hom_app,
+    rightDerivedFunctorNatIso_hom_app_comp_isoMapDerivedCategory_hom_app_assoc, hι,
+    Functor.map_comp_assoc, NatTrans.naturality_assoc, reassoc_of% hFΓ,
+    (Functor.mapDerivedCategoryNatIso e).hom.naturality, h₀, ← reassoc_of% hγ,
+    Iso.inv_hom_id_app_assoc]
 
 end Transport
 
@@ -568,6 +659,38 @@ lemma sectionsPointTransportIso_comm (h : Spec (.of k) ⟶ Spec (.of k)) [IsIso 
 
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
+/-- Under `RΓ(Spec k, -) ≅ D(Γ(pt, -))`, the transport `globalSectionsTransport` is induced by
+the sheaf-level transport `AlgebraicGeometry.Etale.sectionsPointTransportIso`. -/
+lemma globalSectionsTransport_hom_app_comp_rightDerivedGlobalSectionsIsoOfIsSepClosed
+    (h : Spec (.of k) ⟶ Spec (.of k)) [IsIso h]
+    (M : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (globalSectionsTransport Λ h).hom.app M ≫
+        (rightDerivedGlobalSectionsIsoOfIsSepClosed Λ).hom.app
+          ((L((h)^*[ModuleCat.{u + 1} Λ])).obj M) =
+      (rightDerivedGlobalSectionsIsoOfIsSepClosed Λ).hom.app M ≫
+        (Functor.mapDerivedCategoryTriangleIso (sectionsPointTransportIso Λ h)).hom.app M ≫
+        ((sheafSections _ _).obj (op (etalePoint k))).mapDerivedCategory.map
+          ((leftDerivedUpperStarIsoMapDerivedCategory _ h).inv.app M) := by
+  have : PreservesFiniteLimits (Sheaf.Γ (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
+    preservesFiniteLimits_of_natIso (Sheaf.ΓNatIsoSheafSections _ _ isTerminalEtalePoint).symm
+  have : PreservesFiniteColimits
+      (Sheaf.Γ (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
+    preservesFiniteColimits_of_natIso (Sheaf.ΓNatIsoSheafSections _ _ isTerminalEtalePoint).symm
+  have h₁ := rightDerivedFunctorCompIso'_inv_app_comp_sectionsTransportIso
+    (upperStarInvIsoLowerStarHom (ModuleCat.{u + 1} Λ) (asIso h).symm)
+    (lowerStarCompGlobalSectionsIso (ModuleCat.{u + 1} Λ) (asIso h).symm.hom)
+    (Sheaf.ΓNatIsoSheafSections _ _ isTerminalEtalePoint) M
+  have h₂ := (reassoc_of% h₁) (((sheafSections _ _).obj (op (etalePoint k))).mapDerivedCategory.map
+    ((leftDerivedUpperStarIsoMapDerivedCategory _ h).inv.app M))
+  have e₁ : (globalSectionsTransport Λ h).hom.app M =
+      (upperStarCompRightDerivedGlobalSectionsIso _ (asIso h)).inv.app M ≫
+        (rightDerivedGlobalSections _ _).map
+          ((leftDerivedUpperStarIsoMapDerivedCategory _ h).inv.app M) := rfl
+  rw [e₁, Category.assoc]
+  exact (congrArg (fun x ↦ (upperStarCompRightDerivedGlobalSectionsIso _ (asIso h)).inv.app M ≫ x)
+    ((rightDerivedGlobalSectionsIsoOfIsSepClosed Λ).hom.naturality
+      ((leftDerivedUpperStarIsoMapDerivedCategory _ h).inv.app M))).trans h₂
+
 /-- The components of
 `AlgebraicGeometry.Etale.derivedRestrictScalarsCompRightDerivedGlobalSectionsIso`. -/
 lemma derivedRestrictScalarsCompRightDerivedGlobalSectionsIso_hom_app
@@ -585,6 +708,70 @@ lemma derivedRestrictScalarsCompRightDerivedGlobalSectionsIso_hom_app
         (ModuleCat.derivedRestrictScalars ρ).map
           ((rightDerivedGlobalSectionsIsoOfIsSepClosed Λ').inv.app M') := by
   simp [derivedRestrictScalarsCompRightDerivedGlobalSectionsIso]
+
+
+/-- The compatibility of the coefficient comparison of `RΓ(Spec k, -)` with the transport along
+an automorphism `h` of `Spec k` (part of the compatibility with pullback asserted by blueprint
+`lem-fix-compact-support-coefficient-change` and `thm-trf-finite-coefficient-map`). -/
+lemma derivedRestrictScalarsCompRightDerivedGlobalSectionsIso_hom_app_globalSectionsTransport
+    (h : Spec (.of k) ⟶ Spec (.of k)) [IsIso h]
+    (M' : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ'))) :
+    (derivedRestrictScalarsCompRightDerivedGlobalSectionsIso ρ).hom.app M' ≫
+        (ModuleCat.derivedRestrictScalars ρ).map ((globalSectionsTransport Λ' h).hom.app M') =
+      (globalSectionsTransport Λ h).hom.app
+          ((Sheaf.derivedRestrictScalars _ ρ).obj M') ≫
+        (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).map
+          ((leftDerivedUpperStarRestrictScalarsIso ρ h).hom.app M') ≫
+        (derivedRestrictScalarsCompRightDerivedGlobalSectionsIso ρ).hom.app
+          ((L((h)^*[ModuleCat.{u + 1} Λ'])).obj M') := by
+  have key := Functor.mapDerivedCategorySquareIso_hom_app_comp
+    (r₀ := Sheaf.restrictScalars (Spec (.of k)).smallEtaleTopology ρ)
+    (r₁ := Sheaf.restrictScalars (Spec (.of k)).smallEtaleTopology ρ)
+    (r₂ := ModuleCat.restrictScalars.{u + 1} ρ)
+    (p₁ := (sheafSections (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+      (op (etalePoint k)))
+    (p₁₂ := (sheafSections (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+      (op (etalePoint k)))
+    (P₁ := (sheafSections (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ')).obj
+      (op (etalePoint k)))
+    (P₁₂ := (sheafSections (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ')).obj
+      (op (etalePoint k)))
+    (upperStarRestrictScalarsIso ρ h) (Iso.refl _) (Iso.refl _)
+    (sectionsPointTransportIso Λ h) (sectionsPointTransportIso Λ' h)
+    (sectionsPointTransportIso_comm ρ h) M'
+  have hT' := globalSectionsTransport_hom_app_comp_rightDerivedGlobalSectionsIsoOfIsSepClosed
+    (Λ := Λ') h M'
+  have hT := globalSectionsTransport_hom_app_comp_rightDerivedGlobalSectionsIsoOfIsSepClosed
+    (Λ := Λ) h ((Sheaf.derivedRestrictScalars _ ρ).obj M')
+  have hI := (rightDerivedGlobalSectionsIsoOfIsSepClosed Λ).hom.naturality
+    ((leftDerivedUpperStarRestrictScalarsIso ρ h).hom.app M')
+  have hSq := (Functor.mapDerivedCategorySquareIso
+    (F₁ := Sheaf.restrictScalars (Spec (.of k)).smallEtaleTopology ρ)
+    (F₂ := (sheafSections (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+      (op (etalePoint k)))
+    (G₁ := (sheafSections (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ')).obj
+      (op (etalePoint k)))
+    (G₂ := ModuleCat.restrictScalars.{u + 1} ρ) (Iso.refl _)).hom.naturality
+      ((leftDerivedUpperStarIsoMapDerivedCategory _ h).inv.app M')
+  simp only [Functor.comp_map] at hSq
+  have hT'' : (rightDerivedGlobalSectionsIsoOfIsSepClosed Λ').inv.app M' ≫
+      (globalSectionsTransport Λ' h).hom.app M' =
+      (Functor.mapDerivedCategoryTriangleIso (sectionsPointTransportIso Λ' h)).hom.app M' ≫
+        ((sheafSections _ _).obj (op (etalePoint k))).mapDerivedCategory.map
+          ((leftDerivedUpperStarIsoMapDerivedCategory _ h).inv.app M') ≫
+        (rightDerivedGlobalSectionsIsoOfIsSepClosed Λ').inv.app
+          ((L((h)^*[ModuleCat.{u + 1} Λ'])).obj M') := by
+    rw [← cancel_mono ((rightDerivedGlobalSectionsIsoOfIsSepClosed Λ').hom.app
+        ((L((h)^*[ModuleCat.{u + 1} Λ'])).obj M')), Category.assoc, hT',
+      Iso.inv_hom_id_app_assoc, Category.assoc, Category.assoc, Iso.inv_hom_id_app,
+      Category.comp_id]
+  rw [derivedRestrictScalarsCompRightDerivedGlobalSectionsIso_hom_app,
+    derivedRestrictScalarsCompRightDerivedGlobalSectionsIso_hom_app, Category.assoc,
+    Category.assoc, ← Functor.map_comp, hT'', reassoc_of% hI, reassoc_of% hT,
+    leftDerivedUpperStarRestrictScalarsIso_hom_app, ← Functor.map_comp_assoc,
+    Iso.inv_hom_id_app_assoc]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [reassoc_of% hSq, ← reassoc_of% key]
 
 
 end Point
@@ -670,6 +857,28 @@ lemma stalkPullback_app {g : X ⟶ X} {h : Spec (.of k) ⟶ Spec (.of k)} (hx : 
           (((leftDerivedUpperStarComp _ h x (x ≫ g) hx.symm).inv ≫
             (leftDerivedUpperStarComp _ x g).hom).app K) := by
   simp [stalkPullback]
+
+/-- The coefficient comparison of geometric stalks is compatible with the stalk transport along
+every automorphism pair fixing the point. -/
+lemma isStalkPullbackCompatible_geometricStalkRestrictScalarsIso {g : X ⟶ X}
+    {h : Spec (.of k) ⟶ Spec (.of k)} (hx : h ≫ x = x ≫ g) [IsIso h] :
+    IsStalkPullbackCompatible ρ (geometricStalkRestrictScalarsIso ρ x) hx := by
+  intro K'
+  rw [stalkPullback_app, stalkPullback_app]
+  exact pasteTwoSquaresIso_hom_app_comp_map_of_comm
+    (α₁ := leftDerivedUpperStarRestrictScalarsIso ρ x)
+    (α₂ := derivedRestrictScalarsCompRightDerivedGlobalSectionsIso ρ)
+    (εg := leftDerivedUpperStarRestrictScalarsIso ρ g)
+    (εh := leftDerivedUpperStarRestrictScalarsIso ρ h)
+    (Ex := (leftDerivedUpperStarComp _ h x (x ≫ g) hx.symm).inv ≫
+      (leftDerivedUpperStarComp _ x g).hom)
+    (Ex' := (leftDerivedUpperStarComp _ h x (x ≫ g) hx.symm).inv ≫
+      (leftDerivedUpperStarComp _ x g).hom)
+    (T := (globalSectionsTransport Λ h).hom) (T' := (globalSectionsTransport Λ' h).hom)
+    (derivedRestrictScalarsCompRightDerivedGlobalSectionsIso_hom_app_globalSectionsTransport ρ h)
+    (exchange_comm_of_comm_aux _ _ _ _ _ _ (leftDerivedUpperStarRestrictScalarsIso ρ (x ≫ g)) _ _ _
+      (leftDerivedUpperStarRestrictScalarsIso_comp_hom_app' ρ h x (x ≫ g) hx.symm)
+      (leftDerivedUpperStarRestrictScalarsIso_comp_hom_app' ρ x g (x ≫ g) rfl)) K'
 
 end Stalk
 

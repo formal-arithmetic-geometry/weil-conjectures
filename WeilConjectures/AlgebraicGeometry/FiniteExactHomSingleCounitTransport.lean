@@ -257,9 +257,10 @@ theorem finite_exactHom_single_counit_transport
       DerivedCategory.Q.map
         ((HomologicalComplex.singleMapHomologicalComplex
           (RingedSpace.moduleDirectImage f.toLRSHom.toShHom) (ComplexShape.up ℤ) 0).inv.app M) ≫
-        (cast (by rfl) ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerivedFunctorUnit.app
-          ((HomotopyCategory.quotient _ _).obj ((CochainComplex.singleFunctor
-            (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M))) :
+        (cast (by rfl)
+          ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerivedFunctorUnit.app
+            ((HomotopyCategory.quotient _ _).obj ((CochainComplex.singleFunctor
+              (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M))) :
           _ ⟶ (schemeDerivedDirectImage f).obj ((DerivedCategory.singleFunctor
             (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M)) ≫
         γ.inv.app ((DerivedCategory.singleFunctor
@@ -287,6 +288,6 @@ theorem finite_exactHom_single_counit_transport
   have hf := affine_singlePushforward_unit_isIso f M hM
   have result := CategoryTheory.assembly_transport F T H
     (RingedSpace.moduleDirectImage f.toLRSHom.toShHom) adjH M L hFT hf γ hγ e
-  simpa only [eqToHom_refl, Category.id_comp] using result
+  simpa only [eqToHom_refl, Category.id_comp, cast_eq] using result
 
 end AlgebraicGeometry

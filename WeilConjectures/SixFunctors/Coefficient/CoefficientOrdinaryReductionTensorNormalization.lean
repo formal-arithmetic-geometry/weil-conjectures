@@ -159,6 +159,47 @@ theorem OrdinaryModel.limitComparison_termwise (M : OrdinaryModel l E W)
   erw [termwiseLimitComparison_projection l E W ((tower l E W).obj C) n.unop p]
   exact (Category.id_comp _).symm
 
+/-- The system limit unit is the canonical right-derived unit of inverse limit after
+exact restriction, as displayed in strict reduction presentations.
+Source: Stacks 0941, 07A6. -/
+theorem OrdinaryModel.systemLimitUnit_app (M : OrdinaryModel l E W)
+    (C : CochainComplex (coefficientSequenceModules l E W) ℤ) :
+    (systemLimitUnit l E W M (constantLimitUnit l E W)).app C =
+      DerivedCategory.Q.map
+          ((Functor.mapHomologicalComplexCompIso
+            (Iso.refl (coefficientSequenceRestriction l E W ⋙
+              (lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤ scalarReductionSource l E W)))
+            (.up ℤ)).inv.app C) ≫
+        (DerivedCategory.quotientCompQhIso (scalarReductionSource l E W)).inv.app
+          (((coefficientSequenceRestriction l E W).mapHomologicalComplex (.up ℤ) ⋙
+            (lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤
+              scalarReductionSource l E W).mapHomologicalComplex (.up ℤ)).obj C) ≫
+        (lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤ scalarReductionSource l E W
+          ).rightDerivedFunctorUnit.app
+            ((HomotopyCategory.quotient _ (.up ℤ)).obj
+              (((coefficientSequenceRestriction l E W).mapHomologicalComplex (.up ℤ)).obj C)) ≫
+        (coefficientConstantTowerLimit l E W).map
+          ((DerivedCategory.quotientCompQhIso (ℕᵒᵖ ⥤ scalarReductionSource l E W)).hom.app
+            (((coefficientSequenceRestriction l E W).mapHomologicalComplex (.up ℤ)).obj C)) ≫
+        (coefficientConstantTowerLimit l E W).map
+          ((coefficientSequenceRestriction l E W).mapDerivedCategoryFactors.inv.app C) := by
+  rw [← M.limitComparison_termwise l E W C, Functor.map_comp, Category.assoc]
+  have hqA : (DerivedCategory.quotientCompQhIso
+      (ℕᵒᵖ ⥤ scalarReductionSource l E W)).hom.app ((tower l E W).obj C) = 𝟙 _ := rfl
+  have hqiB (K : CochainComplex (scalarReductionSource l E W) ℤ) :
+      (DerivedCategory.quotientCompQhIso (scalarReductionSource l E W)).inv.app K = 𝟙 _ := rfl
+  have hf : ((lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤
+      scalarReductionSource l E W).mapHomotopyCategoryFactors (.up ℤ)).inv.app
+        ((tower l E W).obj C) = 𝟙 _ := rfl
+  dsimp only [systemLimitUnit, constantLimitUnit, NatTrans.comp_app, Functor.whiskerRight_app,
+    Functor.whiskerLeft_app, Iso.trans_hom, Iso.symm_hom]
+  simp only [Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom, Iso.symm_hom,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
+    Functor.associator_inv_app, Category.id_comp, Category.assoc]
+  erw [hqA, hqiB, hf]
+  erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id, Category.id_comp,
+    Category.id_comp, Category.id_comp]
+
 /-- A strict unit presentation of a left adjoint of the total limit is the universal
 comparison followed by the localized ordinary transpose of its unit map, whose finite
 evaluations are the normalized evaluation isomorphisms.

@@ -6,6 +6,7 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Mathlib.Topology.QuasiSeparated
 import WeilConjectures.AlgebraicGeometry.SupportedDetectorOpenLiftCore
