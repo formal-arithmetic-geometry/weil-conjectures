@@ -169,21 +169,31 @@ theorem finiteCoefficientDerivedUpperStarIso_compCoherence {X Y Z : Scheme.{u}} 
         (upperStarFiniteCoefficientModEquivalenceIso_compCoherence T p q)
   · intro M
     delta finiteCoefficientDerivedUpperStarIso
-    with_reducible exact isoWhiskerRight_trans_isoWhiskerLeft_hom_app _ _ _ _ _ M
+    simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+      Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+      Category.assoc, Iso.inv_hom_id_app_assoc]
   · intro M
     delta finiteCoefficientDerivedUpperStarIso
-    with_reducible exact isoWhiskerRight_trans_isoWhiskerLeft_hom_app _ _ _ _ _ M
+    simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+      Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+      Category.assoc, Iso.inv_hom_id_app_assoc]
   · intro M
     delta finiteCoefficientDerivedUpperStarIso
-    with_reducible exact isoWhiskerRight_trans_isoWhiskerLeft_hom_app _ _ _ _ _ M
+    simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+      Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+      Category.assoc, Iso.inv_hom_id_app_assoc]
   · intro M
     delta CondensedRing.leftDerivedUpperStarComp Functor.leftDerivedFunctorNatIso
       Functor.leftDerivedFunctorCompIso CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory
-    with_reducible exact trans_trans_isoWhiskerLeft_hom_app _ _ _ _ _ _ M
+    simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+      Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+      Category.assoc, Iso.inv_hom_id_app_assoc]
   · intro M
     delta ProEtale.leftDerivedUpperStarComp Functor.leftDerivedFunctorNatIso
       Functor.leftDerivedFunctorCompIso ProEtale.leftDerivedUpperStarIsoMapDerivedCategory
-    with_reducible exact trans_trans_isoWhiskerLeft_hom_app _ _ _ _ _ _ M
+    simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+      Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+      Category.assoc, Iso.inv_hom_id_app_assoc]
 
 /-- The isomorphisms `finiteCoefficientDerivedUpperStarIso` commute with the transports along an
 equality `u = v` of morphisms of schemes. -/
