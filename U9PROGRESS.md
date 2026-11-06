@@ -425,37 +425,33 @@
 - All ucheck invocations finished. This final commit changes documentation only.
 
 
-# BZ1036 downstream verification
+# BZ1036 complete
 
-- Downstream validated repairs: CompletedExtensionZeroComparison (91s),
-  CompletedTowerDirectImageSupplement (40s), CompletedPullbackReducedUnit (6.7s).
-- FourArrows proof repair removes redundant identity rewrites and closes the resulting
-  definitional equalities with rfl; current remote run validates its final form.
-- Current build: source 5e101668aadf305d0c7ee345eff3caaa47a68b68,
-  /home/ubuntu/u9/logs/BZ1036-20261106T120156.log; one active ucheck-bump.
-  Targets: CompletedDirectImageLimits, CompletedOpenKFlat,
-  CompletedPullbackReductionArrowIsIso, RingedOpenStrictReduction,
-  PbcFinitePullbackConstructibility, PbcCompletedPullbackActualSupplement.
-- Upstream 9b2169990912 merged. ComparisonSquarePaths still has two compositor
-  mismatches after upstream's partial fix; FiniteQuotientTransitionCompatibility
-  still fails in a statement and a category instance. These are outside this unit.
-- Prepared open-exchange edits were reverted because that module depends on the
-  failing finite transition module; deferred patch is BZ1036-open-exchange-deferred.patch.
-- Active source changes are six files. Five non-restoration patches replay exactly
-  from BZ1036-rewrite-rules.json, BZ1036-downstream-rules.json, and
-  BZ1036-fourarrows-rules.json. Statement/docstring audit: BZ1036-contract-audit.json.
-
-- Build 120156 finished: FourArrows GREEN (41s), all six changed modules rebuilt
-  successfully. Twelve downstream modules are green in total. The mixed batch was
-  red only in ComparisonSquarePaths and CompletedDirectImageLimits.
-- CompletedDirectImageLimits first fails at 398:6 in the statement of
-  evaluationSquare_inverse. Its compositor has the old orientation. The same
-  problem affects evaluationComparison_mate; repairing these statement expressions
-  exceeds this unit's proof/import-only scope. The unused-list deletion alternative
-  is blocked by surviving callers (including constantEvaluationIso/factors in
-  CompletedPullbackFiniteMate). This file remains unchanged.
-- All remaining direct importers of the green frontier reach one of three blockers:
-  CompletedDirectImageLimits, FiniteQuotientTransitionCompatibility, or
-  ComparisonSquarePaths. Full paths: BZ1036-frontier-progress.json.
-- No ucheck is active. Next: merge the newly fetched upstream snapshot, run a clean
-  batch of the six changed modules, finalize FIXES and DONE, commit and push.
+- Assigned CompletedTowerPullbackSupplement is green and contains no proof placeholders.
+- Restored completedConstantRlimUnit_exists and completedConstantRlimUnit in their
+  original CompletedTowerDerivedLimitFunctor module, with the previously proposed
+  six-line quotient transport adjustment after the user instructed continuation.
+  All assigned-module statements and docstrings are unchanged.
+- Four downstream proof repairs are green: CompletedExtensionZeroComparison,
+  CompletedTowerDirectImageSupplement, CompletedPullbackReducedUnit, and FourArrows.
+- Final ucheck-bump submitted all six changed modules together: rc=0, failed=0,
+  13383 jobs (cached), validated source 5b173ff84b22f119c26ef4439f5bbe6dd2c73c28.
+  Log: /home/ubuntu/u9/bz/BUILD-BZ1036-final-green-full.log.
+  Each changed module freshly rebuilt green in BUILD-BZ1036-downstream5-full.log.
+- Twelve downstream modules validated green. Twenty-one extra modules explicitly
+  targeted, plus three descendants through dependencies, within the thirty-module cap.
+- Remaining frontier reaches CompletedDirectImageLimits (ill-typed existing theorem
+  statements), FiniteQuotientTransitionCompatibility, or unowned ComparisonCounit /
+  ComparisonSquareProEtalePathNormalization / ComparisonSquareEtalePathNormalization.
+  ComparisonSquarePaths itself is green after merging upstream dfaed262b6fc.
+  No source edits remain in blocked modules; OpenExchangeTransport's proposal is
+  retained only in /home/ubuntu/u9/bz/BZ1036-open-exchange-deferred.patch.
+- Records: /home/ubuntu/u9/bz/FIXES-BZ1036.md (eleven PATTERN/ERROR/RULE triples),
+  BZ1036-frontier-progress.json (all green modules and blocked dependency paths),
+  BZ1036-contract-audit.json, and BZ1036-final-pattern-counts.json.
+  The seven contextual regex rules replay all five non-restoration files exactly.
+- Completion marker: /home/ubuntu/u9/state/BZ1036.DONE.
+- No local Lean/Lake, duplicate declarations, new placeholders, trust bypasses,
+  heartbeat increases, or profiler probes. Existing ExtensionZeroComparison sorry
+  proofs were unchanged; only the assigned leaf and restoration are claimed sorry-free.
+- No ucheck is active. The final commit changes documentation only.
