@@ -14,6 +14,7 @@ public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import WeilConjectures.AlgebraicGeometry.CompletedIntegralConstantMapOfUniverses
 public import WeilConjectures.SmoothPurity.Completed.CompletedIntegralCoefficientGerm
 public import WeilConjectures.CategoryTheory.RingedSiteModules
+public import WeilConjectures.CategoryTheory.RingedSiteGrothendieckCoefficientUniverse
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
@@ -275,7 +276,6 @@ universe c v r
 variable {C : Type c} [Category.{v} C] [EssentiallySmall.{r} C]
   {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{r})
 
-set_option synthInstance.maxHeartbeats 40000 in
 private theorem finiteRetract_flat
     (M : SheafOfModules.{r}
       ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))
@@ -285,6 +285,17 @@ private theorem finiteRetract_flat
       unit ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ⟶ M)
     (hip : i ≫ p = 𝟙 M) : IsFlatOnSite (J := J) (R := R) M := by
   let := isMonoidal_W_independentCoefficients R
+  have : HasCountableCoproducts (SheafOfModules.{r}
+      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) := by
+    have := isGrothendieckAbelian_coefficientUniverse
+      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)
+    have : HasColimitsOfSize.{r, r} (SheafOfModules.{r}
+      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) :=
+      IsGrothendieckAbelian.hasColimits _
+    have : HasColimitsOfSize.{0, 0} (SheafOfModules.{r}
+      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) :=
+      hasColimitsOfSizeShrink.{0, 0, r, r} _
+    exact ⟨fun J _ ↦ HasColimitsOfSize.has_colimits_of_shape (Discrete J)⟩
   let := monoidalCategory R
   let := symmetricCategory R
   let := tensorPreadditive R

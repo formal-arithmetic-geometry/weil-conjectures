@@ -203,10 +203,8 @@ private theorem square_factors
   rw [Category.assoc, Category.assoc,
     Functor.mapDerivedCategoryCompIso_hom_app_factors,
     Functor.mapDerivedCategoryNatIso_fac]
-  apply (cancel_epi
-    ((Functor.mapDerivedCategoryCompIso G L').hom.app (DerivedCategory.Q.obj P))).mp
-  rw [Iso.hom_inv_id_app_assoc,
-    Functor.mapDerivedCategoryCompIso_hom_app_factors_assoc]
+  rw [← Functor.mapDerivedCategoryCompIso_hom_app_factors G L' P]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
   rfl
 
 namespace WeilConjectures
