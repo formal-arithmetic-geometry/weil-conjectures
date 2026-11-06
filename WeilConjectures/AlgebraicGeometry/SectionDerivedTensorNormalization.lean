@@ -7,7 +7,9 @@ module
 public import WeilConjectures.AlgebraicGeometry.SectionDerivedPushpullNormalization
 public import WeilConjectures.AlgebraicGeometry.SectionTotalOplaxComparisonData
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
+public import Mathlib.Algebra.Homology.Localization
 import all WeilConjectures.AlgebraicGeometry.ProEtaleSectionModuleFunctors
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.SectionDerivedRepresentativeSquare
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalTensorCounit
 
