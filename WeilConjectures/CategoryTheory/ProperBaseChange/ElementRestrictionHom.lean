@@ -185,11 +185,6 @@ variable {C D : Type u} [SmallCategory C] [SmallCategory D]
 private abbrev restrictedCommRing :=
   (F.sheafPushforwardContinuous CommRingCat K J).obj R
 
-private abbrev restrictModules :
-    PresentationModules R ⥤ PresentationModules (restrictedCommRing (K := K) F R) :=
-  SheafOfModules.pushforward.{u} (F := F)
-    (𝟙 ((F.sheafPushforwardContinuous RingCat K J).obj (localCoefficientRings R)))
-
 private instance restrictModules_additive : (restrictModules (K := K) F R).Additive := by
   constructor
   intro M N f g
@@ -233,32 +228,6 @@ private theorem factor_naturality
     F.map_comp, Category.assoc, hb, ← Category.assoc, ← ha,
     Category.assoc, ← hg, ← Category.assoc]
 
-private theorem factor_differential
-    {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
-    (F : C ⥤ D) [F.Additive]
-    {Hn Hm A B E : C} {Kn Km A' B' E' : D}
-    (dH : Hn ⟶ Hm) (dK : Kn ⟶ Km)
-    (a : Hn ⟶ A) (b : Hn ⟶ B) (c : Hm ⟶ E)
-    (α : A ⟶ E) (β : B ⟶ E)
-    (a' : Kn ⟶ A') (b' : Kn ⟶ B') (c' : Km ⟶ E')
-    (α' : A' ⟶ E') (β' : B' ⟶ E')
-    (en : F.obj Hn ⟶ Kn) (em : F.obj Hm ⟶ Km)
-    (sa : F.obj A ⟶ A') (sb : F.obj B ⟶ B') (sc : F.obj E ⟶ E') (t : ℤ)
-    (hH : dH ≫ c = a ≫ α - t • (b ≫ β))
-    (hK : dK ≫ c' = a' ≫ α' - t • (b' ≫ β'))
-    (ha : en ≫ a' = F.map a ≫ sa) (hb : en ≫ b' = F.map b ≫ sb)
-    (hc : em ≫ c' = F.map c ≫ sc)
-    (hα : F.map α ≫ sc = sa ≫ α') (hβ : F.map β ≫ sc = sb ≫ β') :
-    (en ≫ dK) ≫ c' = (F.map dH ≫ em) ≫ c' := by
-  simp only [Category.assoc, hK, Preadditive.comp_sub,
-    Preadditive.comp_zsmul]
-  rw [← Category.assoc en a', ha, Category.assoc,
-    ← Category.assoc en b', hb, Category.assoc]
-  rw [hc, ← Category.assoc (F.map dH), ← F.map_comp, hH]
-  simp only [Functor.map_sub, Functor.map_zsmul, Functor.map_comp,
-    Preadditive.sub_comp, Preadditive.zsmul_comp, Category.assoc, hα, hβ]
-
--- Categorical comparisons elaborate several nested restriction and localization functors.
 set_option maxHeartbeats 800000 in
 -- The nested functor comparisons require additional elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency false in
@@ -865,15 +834,6 @@ private instance representableElementsDense
     (representableElements J U).IsDenseSubsite (J.over U)
       (elementTopology ((presheafToSheaf J (Type u)).obj (yoneda.obj U))) where
   functorPushforward_mem_iff := representableElements_cover_iff J U _
-
-private def inverseHomComparison
-    {A B : Type*} [Category A] [Category B] (E : A ≌ B)
-    (H : Aᵒᵖ × A ⥤ A) (K : Bᵒᵖ × B ⥤ B)
-    (a : H ⋙ E.functor ≅ (E.functor.op.prod E.functor) ⋙ K) :
-    K ⋙ E.inverse ≅ (E.inverse.op.prod E.inverse) ⋙ H :=
-  (Iso.isoCompInverse (H := E)
-    (Functor.associator _ _ _ ≪≫
-      Iso.inverseCompIso (G := E.op.prod E) a)).symm
 
 private def inverseEquivalenceCore
     {C D : Type u} [SmallCategory C] [SmallCategory D]

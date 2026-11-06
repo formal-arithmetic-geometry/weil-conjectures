@@ -380,7 +380,8 @@ private theorem sliceChangeMap_tmul {R S : Sheaf J CommRingCat.{u}}
     (c : R ⟶ S) (M : ringedSiteModules.{u} (localCoefficientRings R))
     {V W : Cᵒᵖ} (v : V ⟶ W) (r : S.obj.obj V) (m : M.val.obj V) :
     changeOfRingsMap c M v (r ⊗ₜ[R.obj.obj V, (c.hom.app V).hom] m) =
-      S.obj.map v r ⊗ₜ[R.obj.obj W, (c.hom.app W).hom] M.val.map v m :=
+      S.obj.map v r ⊗ₜ[R.obj.obj W, (c.hom.app W).hom]
+        PresheafOfModulesOfCommRing.map (R := R.obj) M.val v m :=
   Classical.choose_spec (exists_changeOfRingsMap.{u, u, u} c M v) r m
 
 private noncomputable def sliceScalarRaw
