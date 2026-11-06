@@ -72,7 +72,7 @@ theorem boundedConstructible_comap_iso_iff
     have h' := boundedConstructible_comap_iso_forward (inv φ) _ h
     let e : (Mod.comap φ).mapDerivedCategory ⋙ (Mod.comap (inv φ)).mapDerivedCategory ≅
         𝟭 _ :=
-      (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      Functor.mapDerivedCategoryCompIso _ _ ≪≫
         Functor.mapDerivedCategoryNatIso
           ((Mod.comapComp (inv φ) φ).symm ≪≫
             Mod.comapCongr (IsIso.inv_hom_id φ) ≪≫ Mod.comapId R) ≪≫

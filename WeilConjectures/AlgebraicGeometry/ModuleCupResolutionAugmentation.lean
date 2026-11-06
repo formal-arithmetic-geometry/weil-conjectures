@@ -74,7 +74,6 @@ private lemma singleTensor_component (F G : SheafOfModules.{u}
     HomologicalComplex.singleMapHomologicalComplex_hom_app_self]
   dsimp [HomologicalComplex.singleObjXSelf, HomologicalComplex.singleObjXIsoOfEq]
   simp only [whiskerLeft_id, id_whiskerRight, Category.comp_id, Category.id_comp, tensorHom_id]
-  exact Category.id_comp _
 
 set_option linter.unusedSectionVars false in
 /-- A realization respects the coefficient augmentations before localization.

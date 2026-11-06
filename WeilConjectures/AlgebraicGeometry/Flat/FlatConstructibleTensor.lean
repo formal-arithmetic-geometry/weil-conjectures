@@ -126,7 +126,6 @@ private theorem nativeCollapse_naturality {L L' : M} (g : L ⟶ L')
       change ((HomologicalComplex.single M (.up ℤ) 0).map g).f 0 ≫ _ = _
       simp [HomologicalComplex.single_map_f_self]
     simp [← Functor.map_comp, hg]
-    rfl
   · apply IsZero.eq_of_src
     exact Functor.map_isZero (T.obj _)
       (HomologicalComplex.isZero_single_obj_X _ _ _ _ hq)
