@@ -82,10 +82,16 @@ private theorem unit_single (M : C) :
     change _ = L.mapDerivedCategoryFactorsh.hom.app
       ((HomotopyCategory.quotient C (.up ℤ)).obj ((CochainComplex.singleFunctor C 0).obj M)) ≫ _
     rw [Functor.mapDerivedCategoryFactorsh_hom_app]
-    simp? [Functor.mapDerivedCategorySingleFunctor, DerivedCategory.singleFunctorIsoCompQ,
+    simp only [HomotopyCategory.quotient_obj_singleFunctors_obj, Functor.comp_obj,
+      Functor.mapDerivedCategorySingleFunctor, DerivedCategory.singleFunctorIsoCompQ,
+      Functor.isoWhiskerRight_refl, Functor.isoWhiskerLeft_refl, Iso.refl_symm, Iso.refl_trans,
+      Iso.trans_hom, Functor.isoWhiskerLeft_hom, Iso.symm_hom, Functor.isoWhiskerRight_hom,
+      Iso.refl_hom, NatTrans.comp_app, Functor.associator_hom_app, Functor.whiskerLeft_app,
+      Functor.associator_inv_app, DerivedCategory.Q_obj_single_obj, Functor.whiskerRight_app,
+      NatTrans.id_app, Category.comp_id, Category.id_comp, Functor.mapHomotopyCategory_obj,
       DerivedCategory.quotientCompQhIso, HomologicalComplexUpToQuasiIso.quotientCompQhIso,
-      Functor.mapHomotopyCategoryFactors,
-      Quotient.lift.isLift_hom, Quotient.lift.isLift_inv, Category.assoc]
+      Quotient.lift.isLift_hom, Quotient.lift.isLift_inv, Functor.mapHomotopyCategoryFactors,
+      Functor.map_id, ObjectProperty.ι_obj, Iso.app_hom, Functor.mapIso_hom, Category.assoc]
     erw [Functor.map_id, Category.id_comp, Category.id_comp, Category.id_comp, Category.id_comp]
   rw [hL, Functor.map_comp, ← Category.assoc]
   erw [h]

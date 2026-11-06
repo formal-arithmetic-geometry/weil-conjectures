@@ -114,8 +114,12 @@ theorem mapped_single_inverse_shift (G : B ⥤ C) [G.Additive] (X : B) (n : ℕ)
   have hs := singleFunctors_comm_inv
     (DerivedCategory.singleFunctorsPostcompQhIso C).inv
     (-(n : ℤ)) n 0 (by simp) (G.obj X)
-  simp? [DerivedCategory.singleFunctorsPostcompQhIso, DerivedCategory.singleFunctors,
-    SingleFunctors.postcomp_shiftIso_inv_app] at hs
+  simp only [SingleFunctors.postcomp_functor, comp_obj, DerivedCategory.singleFunctors,
+    DerivedCategory.Q_obj_single_obj, DerivedCategory.singleFunctorsPostcompQhIso, Iso.trans_inv,
+    Iso.symm_inv, SingleFunctors.comp_hom, NatTrans.comp_app,
+    SingleFunctors.postcompPostcompIso_hom_hom_app, SingleFunctors.postcompIsoOfIso_inv_hom_app,
+    SingleFunctors.postcomp_shiftIso_inv_app, CochainComplex.shiftFunctor_obj_X',
+    NatIso.ofComponents_inv_app, Category.assoc, map_comp] at hs
   erw [Category.id_comp, Functor.map_id, Category.id_comp] at hs
   simp only [Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Category.assoc]
   rw [← DerivedCategory.quotientCompQhIso_hom_naturality_assoc]
