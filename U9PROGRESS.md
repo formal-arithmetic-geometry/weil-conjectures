@@ -260,10 +260,15 @@
 # BZ877 in progress
 
 - Branch: `u9/BZ877`; baseline: `e167a50a4`.
-- The user instructed continuation after the explicit two-cast proposal in the public hμ assumption.
-- Applied exactly `BZ877-proposed-statement-casts.patch`, plus Localization public/implementation imports.
-- Reviewed pinned Mathlib b63f6e8a: Qh is no_expose; reflexive casts preserve the counit morphisms.
-- Current source commit: `7a6c2085b`; existing `ucheck-bump` is queued.
-- Next: validate DerivedPullbackTensorUnit, then DerivedPullbackMonoidalDescent and later importers.
-- Patterns and exact diagnostic: `/home/ubuntu/u9/bz/FIXES-BZ877.md`.
+- The assigned `DerivedPullbackTensorUnit` and first two importer layers passed ucheck-bump together at `60d782650a`, rc=0, 3944 jobs.
+- Canonical comparison, realization, and open-restriction repairs are green. Realization's final check at `e5eba6f4f2` returned rc=0, 3999 jobs.
+- The user instructed continuation after the reviewed reflexive-cast proposal; the same Qh endpoint repair is applied downstream. No morphisms or mathematical contracts are changed.
+- Current scope is the root plus 30 extra downstream modules: 21 green, 7 blocked by unowned `CanonicalTensorHomUncurryChainNaturality.lean:134:6: Type mismatch`, 3 pending.
+- Pending chain: TensorCoordinateIdentifications, TensorStalkChainCoordinates, TensorStalkFixedMapSquare.
+- TensorCoordinateIdentifications now has three counit casts, explicit localization category/endpoints, and cast/asIso/local-alias proof simplification. Last source repair: `b970dc98c`; `ucheck-bump TensorStalkFixedMapSquare` is queued.
+- The coordinate theorem is listed unused but has a live caller, so it was preserved.
+- Machine rules and audit: `/home/ubuntu/u9/bz/BZ877-fix-records.json`, `BZ877-contract-audit.txt`; exact logs and notes: `FIXES-BZ877.md`.
+- Status inventory: `/home/ubuntu/u9/bz/BZ877-build-status.json`; final scoped selection: `BZ877-layer4-selection.json`.
+- Shared bbuild.sh was hot-edited during some requests, producing shell errors; interrupted batch logs are distinguished from completed green builds. No infrastructure source was modified here.
 - No local Lean/Lake, proof placeholders, trust bypasses, deletions, or heartbeat changes.
+- Finish the last three-module chain, audit/replay all rules, commit/push, then write `/home/ubuntu/u9/state/BZ877.DONE` with every green module, dependency blocker, and PATTERN/ERROR/RULE triple.
