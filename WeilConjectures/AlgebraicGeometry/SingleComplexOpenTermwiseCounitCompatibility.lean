@@ -52,7 +52,26 @@ private theorem termwise_exact_factors
   rw [Functor.mapDerivedCategoryFactorsh_hom_app]
   change F.mapDerivedCategory.map (𝟙 _) ≫ F.mapDerivedCategoryFactors.hom.app P ≫
     𝟙 _ ≫ DerivedCategory.Qh.map (𝟙 _) = _
-  simp only [Functor.map_id, Category.id_comp, Category.comp_id]
+  erw [F.mapDerivedCategory.map_id, DerivedCategory.Qh.map_id]
+  simp only [Category.id_comp, Category.comp_id]
+
+private theorem termwise_homotopy_square_inv
+    {C D B E : Type*} [Category C] [Category D] [Category B] [Category E]
+    [Preadditive C] [Preadditive D] [Preadditive B] [Abelian E]
+    [HasDerivedCategory.{w} E]
+    {F : C ⥤ D} {G : D ⥤ E} {R : C ⥤ B} {J : B ⥤ E}
+    [F.Additive] [G.Additive] [R.Additive] [J.Additive]
+    (e : F ⋙ G ≅ R ⋙ J) (P : CochainComplex C ℤ) :
+    DerivedCategory.Qh.map
+      ((Functor.mapHomotopyCategoryCompIso e (.up ℤ) ≪≫
+        (Functor.mapHomotopyCategoryCompIso (Iso.refl (R ⋙ J)) (.up ℤ)).symm).inv.app
+          ((HomotopyCategory.quotient C (.up ℤ)).obj P)) =
+      DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex e.inv (.up ℤ)).app P) := by
+  change DerivedCategory.Qh.map
+    ((Functor.mapHomotopyCategoryCompIso (Iso.refl (R ⋙ J)) (.up ℤ)).hom.app _ ≫
+      (Functor.mapHomotopyCategoryCompIso e (.up ℤ)).inv.app _) = _
+  rw [Functor.mapHomotopyCategoryCompIso_refl_hom_app, Category.id_comp]
+  rfl
 
 set_option maxHeartbeats 600000 in
 -- Elaborating the exact restriction localization factors needs this budget.
@@ -110,6 +129,10 @@ theorem singleComplexOpen_termwise_counit_compatibility
   dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
   have : ∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z),
       (Scheme.Modules.tensorPullback k).Additive := fun k => tensorPullbackAdditive k
+  letI := schemeOpenRestriction_additive X U
+  letI := schemeOpenRestriction_additive X' U'
+  letI := tensorPullbackAdditive g'
+  letI := tensorPullbackAdditive j
   letI : (schemeOpenRestriction X U ⋙ Scheme.Modules.tensorPullback j).PreservesZeroMorphisms :=
     Functor.preservesZeroMorphisms_of_additive _
   letI : (Scheme.Modules.tensorPullback g' ⋙ schemeOpenRestriction X' U').PreservesZeroMorphisms :=
@@ -120,8 +143,10 @@ theorem singleComplexOpen_termwise_counit_compatibility
   dsimp only [singleComplexOpenTensorRestrictionMap]
   simp only [DerivedCategory.quotientCompQhIso,
     HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift_hom,
-    Quotient.lift.isLift_inv, Functor.mapHomotopyCategoryFactors, Functor.map_id,
-    Category.id_comp, Category.comp_id]
+    Quotient.lift.isLift_inv, Functor.mapHomotopyCategoryFactors]
+  erw [(derivedPullback g').map_id, (derivedPullback j).map_id,
+    DerivedCategory.Qh.map_id, DerivedCategory.Qh.map_id]
+  simp only [Category.id_comp, Category.comp_id]
   have hf : (schemeOpenRestriction X U).mapDerivedCategoryFactorsh.hom.app
       ((HomotopyCategory.quotient
         (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)).obj P) =
@@ -164,10 +189,9 @@ theorem singleComplexOpen_termwise_counit_compatibility
         ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) =
       DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
         (openPinnedTensorRestrictionIso g' U U' j hj).inv (.up ℤ)).app P) := by
-    simp only [openPinnedHomotopyTensorRestrictionIso, Iso.trans_inv, Iso.symm_inv,
-      NatTrans.comp_app, Functor.mapHomotopyCategoryCompIso_refl_hom_app, Category.id_comp]
-    rfl
-  simpa only [Functor.mapIso_inv, Iso.app_inv, Iso.symm_hom, Iso.app_hom,
-    htarget, hβ] using h'
+    exact termwise_homotopy_square_inv (openPinnedTensorRestrictionIso g' U U' j hj) P
+  simp only [Functor.mapIso_inv, Iso.app_inv, Iso.symm_hom, Iso.app_hom] at h'
+  erw [hβ, htarget] at h'
+  exact h'
 
 end AlgebraicGeometry
