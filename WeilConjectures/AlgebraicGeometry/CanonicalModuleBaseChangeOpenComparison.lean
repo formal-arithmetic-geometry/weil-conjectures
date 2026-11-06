@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.OpenPinnedSingleDegreeZeroSquare
 import WeilConjectures.AlgebraicGeometry.OpenPinnedSingleDegreeZeroCounit
 import WeilConjectures.AlgebraicGeometry.ModulePullbackComparisonTargetAutomorphism
 import all Mathlib.Algebra.Homology.Localization
-import Mathlib.Tactic.Trace
 
 /-! # Canonical module base change under open restriction
 
@@ -55,7 +54,6 @@ private theorem pinned_comparison_isComparison
   exact Classical.choose (Classical.choose_spec
     (Classical.choose_spec exists_derivedPullbackComposition.{u, w})) k
 
-set_option diagnostics true in
 set_option maxHeartbeats 400000 in
 -- The combined open/affine proof exhausted 400000; check the open argument separately.
 /-- Restriction identifies the module base-change arrow with the arrow of the
@@ -139,40 +137,32 @@ theorem exists_canonicalModuleBaseChange_open_comparison
   classical
   intro U fA gA H E E0 R
   dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
-  trace "BZ864: normalized open context"
   let p := pullback.fst (f ∣_ V) (g.resLE V W hWV)
   let q := pullback.snd (f ∣_ V) (g.resLE V W hWV)
   let c₁ := openPinnedSingleDegreeZeroCounit.{u, w} g' G
   let cV := openPinnedSingleDegreeZeroCounit.{u, w} p H
   have hcV : IsDerivedModulePullbackComparison p H cV :=
     pinned_comparison_isComparison.{u, w} p H
-  trace "BZ864: restricted comparison predicate"
   obtain ⟨α, hα⟩ := modulePullbackComparison_target_automorphism.{u, w}
     g' G c₁ c (pinned_comparison_isComparison.{u, w} g' G) hc
-  trace "BZ864: target automorphism"
   obtain ⟨aP, bP, hP⟩ :=
     open_pinned_single_degree_zero_square.{u, w} f g g' f' sq V W hWV
-  trace "BZ864: pinned open square"
   let A := R.mapIso ((schemeDerivedDirectImage f').mapIso
     ((DerivedCategory.singleFunctor
       (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) 0).mapIso α))
   let aV := aP.app G
   let bV := A.symm ≪≫ bP.app G
-  trace "BZ864: endpoint isomorphisms"
   have h := comparison_conjugate _ _ (aP.app G) (bP.app G) A (hP G)
-  trace "BZ864: conjugated square"
   change (R.map (schemeDerivedBaseChangeMap f f' g g' sq.w E ≫
     (schemeDerivedDirectImage f').map c₁) ≫ A.hom) ≫ bV.hom =
     aV.hom ≫ (schemeDerivedBaseChangeMap (f ∣_ V) q (g.resLE V W hWV) p
       pullback.condition E0 ≫ (schemeDerivedDirectImage q).map cV) at h
-  trace "BZ864: changed square type"
   have hV : R.map (schemeDerivedBaseChangeMap f f' g g' sq.w E ≫
       (schemeDerivedDirectImage f').map c) ≫ bV.hom =
       aV.hom ≫ (schemeDerivedBaseChangeMap (f ∣_ V) q (g.resLE V W hWV) p
         pullback.condition E0 ≫ (schemeDerivedDirectImage q).map cV) := by
     simpa only [hα, A, Functor.map_comp, Functor.mapIso_hom,
       Category.assoc] using h
-  trace "BZ864: transported square"
   exact ⟨cV, hcV, aV, bV, hV⟩
 
 end AlgebraicGeometry

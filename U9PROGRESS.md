@@ -271,3 +271,6 @@
 - No local Lean/Lake execution, placeholders, axioms, native_decide, trust bypasses, or profiler probes. All compilation uses ucheck-bump.
 - Fix records: `/home/ubuntu/u9/bz/FIXES-BZ864.md`; restoration inventory and provenance: `BZ864-restored-declarations.tsv`, `BZ864-restored-prerequisites.tsv`; audits: `BZ864-full-header-audit.tsv`, `BZ864-contract-audit.txt`.
 - Next: finish leaf/locality validation, build direct downstream importers (up to 30 extra modules), and write DONE only after the required checks.
+
+- Build 17: all prerequisites green; the assigned theorem still timed out at 400000 heartbeats in 20s. Build 18 restores the original open-comparison helper statement and proves the pinned square in that smaller context. The assigned affine-chart file is now identical to the baseline. Temporary ordinary trace/diagnostics probes identify stages if it still fails; remove them before final validation. No profiler probes.
+- Build 18 local session: 44077; wrapper log `/home/ubuntu/u9/bz/BZ864-build-18.log`.
