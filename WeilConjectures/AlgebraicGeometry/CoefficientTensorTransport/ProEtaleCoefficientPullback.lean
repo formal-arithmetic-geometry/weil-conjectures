@@ -133,7 +133,7 @@ private theorem exactPullback_factors
     (U.mapDerivedCategory.map (L.mapDerivedCategoryFactors.hom.app P) ≫
       U.mapDerivedCategoryFactors.hom.app ((L.mapHomologicalComplex (.up ℤ)).obj P)) ≫
         DerivedCategory.Q.map t) (complex_left_id_hom L U M e P))
-  simpa only [Category.assoc, Iso.app_hom, Iso.app_inv] using ht
+  simpa only [Category.assoc, Iso.app_hom, Iso.app_inv, Iso.symm_hom, Iso.symm_inv] using ht
 
 namespace AlgebraicGeometry.Scheme.CoefficientTensorChain
 
