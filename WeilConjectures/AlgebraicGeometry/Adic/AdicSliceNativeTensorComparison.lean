@@ -24,11 +24,10 @@ noncomputable def adicSliceNativeTensorIso {l : ℕ} [Fact l.Prime] {X : Scheme.
       (adicUpperStar l U.hom).obj ((Mod.tensorLeft N).obj M) :=
   by
     have : PreservesColimitsOfShape WalkingParallelPair
-        (Mod.mapModComap (adicUpperStarRingIso (l := l) U.hom)) :=
+        (Mod.mapModComap (adicUpperStarRingIso (l := l) (V := U.left) (X := X) U.hom)) :=
       inferInstanceAs (PreservesColimitsOfShape WalkingParallelPair (adicUpperStar l U.hom))
-    let e := Mod.tensorLeftCompMapModComapIso (adicUpperStarRingIso (l := l) U.hom)
-      (fun _ _ ↦ Functor.LaxBraided.braided _ _) N
-    exact (e.app M).symm
+    exact ((Mod.tensorLeftCompMapModComapIso (adicUpperStarRingIso (l := l) (V := U.left) (X := X) U.hom)
+      (fun _ _ ↦ Functor.LaxBraided.braided _ _) N).app M).symm
 
 /-- The native balanced tensor comparison is normalized before taking the quotient.
 Source: Stacks 03EL and `Mod.map_tensorπ_comp_tensorLeftCompMapModComapIso_hom`
@@ -43,7 +42,7 @@ theorem adicSliceNativeTensorIso_quotient {l : ℕ} [Fact l.Prime] {X : Scheme.{
         (adicSliceNativeTensorIso U M N).hom.hom =
       Functor.LaxMonoidal.μ (upperStar (WeilCoefficients.{u} l) U.hom) M.X N.X ≫
         (upperStar (WeilCoefficients.{u} l) U.hom).map (Mod.tensorπ M N) := by
-  let rho := adicUpperStarRingIso (l := l) U.hom
+  let rho := adicUpperStarRingIso (l := l) (V := U.left) (X := X) U.hom
   have : PreservesColimitsOfShape WalkingParallelPair (Mod.mapModComap rho) :=
     inferInstanceAs (PreservesColimitsOfShape WalkingParallelPair (adicUpperStar l U.hom))
   let e := Mod.tensorLeftCompMapModComapIso rho
@@ -54,9 +53,10 @@ theorem adicSliceNativeTensorIso_quotient {l : ℕ} [Fact l.Prime] {X : Scheme.{
       Functor.LaxMonoidal.μ (upperStar (WeilCoefficients.{u} l) U.hom) M.X N.X ≫
         (upperStar (WeilCoefficients.{u} l) U.hom).map (Mod.tensorπ M N) ≫
           (e.hom.app M).hom := by
-    simpa only [h, IsIso.hom_inv_id_assoc]
+    erw [h, IsIso.hom_inv_id_assoc]
+    rfl
   change _ ≫ (e.inv.app M).hom = _
-  simp only [h', Category.assoc, ← Mod.comp_hom', Iso.hom_inv_id_app,
+  erw [h', Category.assoc, Category.assoc, ← Mod.comp_hom', Iso.hom_inv_id_app,
     Mod.id_hom', Category.comp_id]
 
 end AlgebraicGeometry.ProEtale
