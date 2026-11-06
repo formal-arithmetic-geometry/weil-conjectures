@@ -109,7 +109,7 @@ private theorem restrict_model_local
   have : PreservesFiniteColimits (G ⋙ F) := comp_preservesFiniteColimits _ _
   exact ⟨(Functor.mapDerivedCategoryNatIso
     (SheafOfModules.overFunctorMap (moduleRings X.toRingedSpace) (homOfLE h))).symm.app E ≪≫
-      (Functor.mapDerivedCategoryCompIso G F).app E ≪≫ F.mapDerivedCategory.mapIso e ≪≫
+      (Functor.mapDerivedCategoryCompIso G F).symm.app E ≪≫ F.mapDerivedCategory.mapIso e ≪≫
         F.mapDerivedCategoryFactors.app K⟩
 
 /-- The common affine and strictly-perfect model data needed by the residue bridge.
