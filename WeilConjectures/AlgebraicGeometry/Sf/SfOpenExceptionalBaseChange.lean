@@ -87,9 +87,9 @@ noncomputable def sfIntrinsicCompactSupportComparison (A : Type u) [CommRing A] 
       sfFixedCompactSupport A c ⋙ (sfIntrinsicDerivedEquivalence Y A).functor :=
   (Functor.associator _ _ _).symm ≪≫
     Functor.isoWhiskerRight
-      ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso _ _ ≪≫
         Functor.mapDerivedCategoryNatIso (sfIntrinsicOpenExtensionComparison A c.i) ≪≫
-        Functor.mapDerivedCategoryCompIso _ _) _ ≪≫
+        (Functor.mapDerivedCategoryCompIso _ _).symm) _ ≪≫
     Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft _ (sfIntrinsicDerivedDirectImageComparison c.g A) ≪≫
     (Functor.associator _ _ _).symm
