@@ -370,3 +370,13 @@
 - Next: ucheck-bump for the restored helper, assigned module, and direct importer
   StratumCompletionUnitRestriction, then continue downstream as the brief requires.
 - Fix log: /home/ubuntu/u9/bz/FIXES-BZ995.md. No local Lean/Lake or forbidden proof shortcuts.
+
+
+# BZ1020 in progress
+
+- Branch: u9/BZ1020; initial base 203ea75a45628a5a18c524c66580a676a0da3d5c.
+- User instructed continuation after the concrete one-line dependency import proposal.
+- Removed the umbrella Mathlib import from Integral.Exact, retaining its specific imports.
+- This avoids the duplicate Sheaf.H.δ imported by Integral.BaseChange's two dependency paths.
+- No declaration statements or proofs changed. Next: ucheck-bump for both modules, then downstream.
+- Notes: /home/ubuntu/u9/bz/FIXES-BZ1020.md. No local Lean/Lake or proof shortcuts.
