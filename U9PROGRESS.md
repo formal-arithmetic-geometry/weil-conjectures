@@ -287,3 +287,8 @@
 - Build 8 validates these changes on the assigned module and affine locality.
 
 - Build 8: restriction factors and homotopy tensor counit green. Remaining failures: normalize reflexive casts before the degree-zero counit map-composition rewrite; reverse quotientCompQhIso when transporting a K-to-Q representative to Qh. Both fixes prepared for build 9.
+
+- Full-header audit now checks all let-bound type clauses: 62 unchanged existing/restored types and 3 new helpers across 19 Lean files; no baseline declaration deleted. See BZ864-full-header-audit.tsv.
+- Build 9 is running on poolb:43.157.135.193 at 6d626d27d5, rebuilding additional prerequisites. Build 8 compiler diagnostics are complete; its wrapper separately hit a transient EOF parse error after compilation. Current bbuild.sh passes bash -n.
+
+- Build 9: every prerequisite green through SingleComplexOpenBaseChangeCalculation. Only OpenPinnedSingleDegreeZeroTarget failed: 200000-heartbeat timeout at the broad source-factor rewrite (18s). Replaced it with targeted conv; also applied the established full-transparency cast normalization to the final equality. Default heartbeat limit retained. Build 10 next.
