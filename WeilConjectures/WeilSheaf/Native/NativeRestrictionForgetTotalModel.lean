@@ -66,7 +66,7 @@ variable {C D A B : Type*} [Category* C] [Category* D] [Category* A] [Category* 
   [PreservesFiniteLimits R] [PreservesFiniteColimits R]
 
 private theorem exact_forget_factors (e : L ⋙ V ≅ F ⋙ R) (P : CochainComplex C ℤ) :
-    ((Functor.mapDerivedCategoryCompIso L V).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso L V ≪≫
       Functor.mapDerivedCategoryNatIso e ≪≫ (Functor.mapDerivedCategoryCompIso F R).symm).hom.app
         (DerivedCategory.Q.obj P) ≫
       R.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app P) ≫
@@ -88,9 +88,9 @@ private theorem exact_forget_factors (e : L ⋙ V ≅ F ⋙ R) (P : CochainCompl
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
   rw [Functor.mapDerivedCategoryCompIso_hom_app_factors,
     Functor.mapDerivedCategoryNatIso_fac]
-  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso L V).hom.app
+  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso L V).inv.app
     (DerivedCategory.Q.obj P))).1
-  rw [Iso.hom_inv_id_app_assoc, Functor.mapDerivedCategoryCompIso_hom_app_factors_assoc]
+  rw [Iso.inv_hom_id_app_assoc, Functor.mapDerivedCategoryCompIso_hom_app_factors_assoc]
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app] at ha
   erw [← ha]
 
