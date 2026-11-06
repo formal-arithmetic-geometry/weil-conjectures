@@ -183,7 +183,7 @@ private def roos_comparison
       apply Limits.Pi.hom_ext
       intro n
       simp only [Category.assoc, Limits.Pi.map_π, inverseImageReductionProduct,
-        Limits.Pi.lift_π, Limits.Pi.lift_π_assoc]
+        Limits.Pi.lift_comp_π, Limits.Pi.lift_comp_π_assoc]
       exact reduction_theta_natural l E g n f
     exact zero_lift_naturality _ _ _ (integralOperationsRoos_square
       ((integralOperationsPullbackTowerFunctor l E g).map f)) _ _ _ _ _ hn

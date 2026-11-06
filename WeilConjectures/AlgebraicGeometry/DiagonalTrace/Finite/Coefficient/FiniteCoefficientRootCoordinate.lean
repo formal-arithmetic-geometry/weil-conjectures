@@ -47,11 +47,11 @@ theorem finiteScalarLineCoordinate_root (n : ℕ) [Finite (SpTowerShriek.R l E n
     (c : SpTowerP1.CoefficientCoordinates l E n T hT) :
     (comparisonUpperStar AddCommGrpCat.{u + 1} T).map
         (Etale.ordinaryFiniteRootMap (FiniteRing l E n) (l ^ (n + 1))
-          (ULift.ext _ _ (coefficient_annihilates l E n)) T) ≫
+          (ULift.ext (coefficient_annihilates l E n)) T) ≫
         finiteScalarLineCoordinate l E n T c =
       cartierRootsComparison T (l ^ (n + 1)) ≫ finiteRootMap l E T n := by
   let r := Etale.ordinaryFiniteRootMap (FiniteRing l E n) (l ^ (n + 1))
-    (ULift.ext _ _ (coefficient_annihilates l E n)) T
+    (ULift.ext (coefficient_annihilates l E n)) T
   apply ((comparisonAdjunction AddCommGrpCat.{u + 1} T).homEquiv _ _).injective
   rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
   apply Sheaf.hom_ext
@@ -72,7 +72,7 @@ theorem finiteScalarLineCoordinate_root (n : ℕ) [Finite (SpTowerShriek.R l E n
         (((comparisonAdjunction AddCommGrpCat.{u + 1} T).unit.app
           ((Etale.moduleAbelianForget (FiniteRing l E n) T).obj
             (Scheme.finiteEtaleTateLine T (l ^ (n + 1)) (FiniteRing l E n)
-              (ULift.ext _ _ (coefficient_annihilates l E n))))).hom.app U
+              (ULift.ext (coefficient_annihilates l E n))))).hom.app U
                 (r.hom.app U z)) := hnz.symm
   unfold finiteScalarLineCoordinate
   change c.line.hom.val.app ((Scheme.toProEt T).op.obj U)
@@ -89,7 +89,7 @@ theorem finiteScalarLineCoordinate_root (n : ℕ) [Finite (SpTowerShriek.R l E n
   rw [hnz', finiteScalarComparison_unit_section]
   have hgen : r.hom.app U z =
       Scheme.finiteEtaleTateOneGenerator (FiniteRing l E n) (l ^ (n + 1)) T
-        (ULift.ext _ _ (coefficient_annihilates l E n)) U 1 z := rfl
+        (ULift.ext (coefficient_annihilates l E n)) U 1 z := rfl
   have hroots : (cartierRootsIso T (l ^ (n + 1))
       (pow_pos (Fact.out : l.Prime).pos _) hT).hom =
         cartierRootsComparison T (l ^ (n + 1)) := by

@@ -151,9 +151,9 @@ private theorem constructible_iso {T : Scheme.{u}}
   classical
   unfold IsConstantModelConstructible at h ⊢
   split at h
-  · rw [if_pos ‹_›]
+  · rw [ite_eq_left ‹_›]
     exact stratified_iso i h
-  · rw [if_neg ‹_›]
+  · rw [ite_eq_right ‹_›]
     exact fun U hU ↦ stratified_iso
       ((CondensedRing.upperStar Λ U.ι).mapIso i) (h U hU)
 

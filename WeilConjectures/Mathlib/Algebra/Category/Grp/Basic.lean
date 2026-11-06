@@ -33,6 +33,6 @@ noncomputable def uliftIntToZMod :
 /-- The reduction `ℤ ⟶ ℤ/n` sends `1` to `1`. -/
 lemma uliftIntToZMod_apply_one :
     (uliftIntToZMod.{u} n).hom (ULift.up 1) = ULift.up ((1 : ℕ) : ZMod n) :=
-  ULift.ext _ _ ((map_one (ZMod.castHom (dvd_zero n) (ZMod n))).trans Nat.cast_one.symm)
+  ULift.ext ((map_one (ZMod.castHom (dvd_zero n) (ZMod n))).trans Nat.cast_one.symm)
 
 end AddCommGrpCat

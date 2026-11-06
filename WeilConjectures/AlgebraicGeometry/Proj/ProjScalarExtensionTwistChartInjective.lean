@@ -101,10 +101,7 @@ theorem scalarExtension_twistMap_chart_injective
   have hvalue (w : TensorProduct R S (twistChartFractionSubmodule 𝒜 n f j))
       (x : V) :
       evB x (L w) = ((η.app V (c w)).1 x).val := by
-    induction w using TensorProduct.induction_on with
-    | zero =>
-      simp only [map_zero]
-      rfl
+    induction w using TensorProduct.inductionOn with
     | tmul s z =>
       obtain ⟨t, ht, hct⟩ := hc z
       rw [hL, hct, Hom.app_smul, Hom.app_presheaf_map]

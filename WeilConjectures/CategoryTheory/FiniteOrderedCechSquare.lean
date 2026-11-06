@@ -98,7 +98,7 @@ theorem finiteOrderedCechCoface_comp (p : ℕ) (i : Fin (p + 2))
         (i.succ.succAboveOrderEmb.trans a)) k) :=
     le_iInf fun k ↦ iInf_le (fun l ↦ U (a l))
       (i.succ.succAbove ((j.castLT (lt_of_le_of_lt h i.is_lt)).succAbove k))
-  simpa only [Φ, dif_pos h₁, dif_pos h₂, ← op_comp, homOfLE_comp] using congrArg Φ he
+  simpa only [Φ, dite_eq_left h₁, dite_eq_left h₂, ← op_comp, homOfLE_comp] using congrArg Φ he
 
 /-- The signed ordered Cech differential squares to zero.
 Source: Stacks Project, Tag 01FJ. The preceding double-deletion identity gives the

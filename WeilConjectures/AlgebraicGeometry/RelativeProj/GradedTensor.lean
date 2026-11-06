@@ -105,8 +105,7 @@ noncomputable def baseChangeMap (ψ : T →ₐ[R] T') :
   map_mem {n x} hx := by
     obtain ⟨y, rfl⟩ := Submodule.toBaseChange_surjective' T (𝒜 n) hx
     clear hx
-    induction y using TensorProduct.induction_on with
-    | zero => simp
+    induction y using TensorProduct.inductionOn with
     | tmul t a =>
       simpa using Submodule.tmul_mem_baseChange_of_mem (ψ t) a.2
     | add y₁ y₂ h₁ h₂ =>

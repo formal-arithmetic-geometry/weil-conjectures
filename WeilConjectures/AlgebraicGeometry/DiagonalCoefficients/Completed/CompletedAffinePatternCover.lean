@@ -209,10 +209,10 @@ theorem completedAffine_pattern_cover (l : ℕ) [Fact l.Prime]
     by_cases h : r.r j i
     · have hh : W.left.fromSpecResidueField x ≫ (q j).down.left =
           W.left.fromSpecResidueField x ≫ (q i).down.left := h
-      simp only [if_pos h, if_pos hh]
+      simp only [ite_eq_left h, ite_eq_left hh]
     · have hh : W.left.fromSpecResidueField x ≫ (q j).down.left ≠
           W.left.fromSpecResidueField x ≫ (q i).down.left := h
-      simp only [if_neg h, if_neg hh, map_zero, ContinuousMap.zero_apply]
+      simp only [ite_eq_right h, ite_eq_right hh, map_zero, ContinuousMap.zero_apply]
   have : Finite (Setoid ι) :=
     Finite.of_injective (fun r : Setoid ι ↦ r.r) (fun r s h ↦ by
       apply Setoid.ext

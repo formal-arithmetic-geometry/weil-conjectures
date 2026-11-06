@@ -86,8 +86,7 @@ private theorem localizedHom_induction (p : R)
     (ha : ∀ q q', Q q → Q q' → Q (q + q')) : Q q := by
   cases hM
   cases hN
-  induction q using TensorProduct.induction_on with
-  | zero => exact hz
+  induction q using TensorProduct.inductionOn with
   | tmul a f => exact ht a f _ HEq.rfl
   | add q q' hq hq' => exact ha q q' hq hq'
 
@@ -126,8 +125,7 @@ private theorem localizedTranspose_naturality (p : R) (T : A × A ⥤ A)
     change (c * (a * 1)) ⊗ₜ[R] e₀ L'.obj (T.map (Prod.mkHom f (𝟙 _)) ≫ h₀) =
       ScalarLocalization.composition R A p _ _ _ (c ⊗ₜ[R] e₀ L.obj h₀) (a ⊗ₜ[R] f)
     rw [ScalarLocalization.composition_tmul, mul_one, hn]
-  induction f using TensorProduct.induction_on with
-  | zero => simp only [map_zero, LinearMap.zero_apply, zero_comp]
+  induction f using TensorProduct.inductionOn with
   | tmul a f =>
     apply localizedHom_induction p (F.obj (L, M)) N (T.obj (L.obj, M.obj)) N.obj
       (ho (L, M)) rfl _ h

@@ -101,16 +101,14 @@ theorem lisseIntegerInclusion_separability_tensor :
   have he (x y : L) : e (TensorProduct.tmul E x y) = TensorProduct.tmul R x y := rfl
   have hem (v : TensorProduct E L L) :
       Algebra.TensorProduct.lmul' R (e v) = Algebra.TensorProduct.lmul' E v := by
-    induction v using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction v using TensorProduct.inductionOn with
     | tmul x y => rw [he, Algebra.TensorProduct.lmul'_apply_tmul,
         Algebra.TensorProduct.lmul'_apply_tmul]
     | add x y hx hy => simp only [map_add, hx, hy]
   have hmul (v : TensorProduct R S S) :
       Algebra.TensorProduct.lmul' R (J v) =
         algebraMap S L (Algebra.TensorProduct.lmul' R v) := by
-    induction v using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction v using TensorProduct.inductionOn with
     | tmul x y =>
       simp only [J, Algebra.TensorProduct.map_tmul,
         Algebra.TensorProduct.lmul'_apply_tmul, map_mul]

@@ -220,7 +220,7 @@ lemma exists_of_pairDiff_eq_zero (x : T.pushforwardGm.obj.obj (op U)) (hx : m �
     · have := T.localUnits_pairDiff σ hσ a (0, 1) x
       rw [h₂, map_zero] at this
       exact sub_eq_zero.1 this.symm
-  refine ⟨ULift.up (F 0), ULift.ext _ _ ?_, T.localUnits_injective σ hσ fun a ↦ ?_⟩
+  refine ⟨ULift.up (F 0), ULift.ext ?_, T.localUnits_injective σ hσ fun a ↦ ?_⟩
   · change m • T.localUnits σ hσ 0 x = 0
     rw [← map_nsmul, hx, map_zero]
   · rw [localUnits_unit]
@@ -362,7 +362,7 @@ lemma isIso_pairUnit : IsIso T.pairUnit := by
         have h' := congrArg (T.localUnits (pullback.snd U.unop.hom T.π)
           (T.coverObj_section U.unop) 0) h
         rw [localUnits_unit, localUnits_unit] at h'
-        exact ULift.ext _ _ h'⟩
+        exact ULift.ext h'⟩
     exact Sheaf.mono_of_isLocallyInjective _
   have : Mono T.pairUnit := by
     have : Mono (T.pairUnit ≫ kernel.ι T.pairPhi ≫ kernel.ι (m • 𝟙 T.pushforwardGm)) := by

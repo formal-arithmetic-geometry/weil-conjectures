@@ -112,7 +112,7 @@ theorem sfDirectImageRoos_finiteReduction
           L.projection := by
         apply Pi.hom_ext
         intro k
-        simp only [Pi.lift_π]
+        simp only [Pi.lift_comp_π]
       rw [he]
       exact L.roos⟩
   let := hp
@@ -124,7 +124,7 @@ theorem sfDirectImageRoos_finiteReduction
   have heq : sfDirectImageReductionComparison l E f L' n =
       sfDirectImageReductionComparison l E f L n ≫ (b n).hom := by
     dsimp only [sfDirectImageReductionComparison, L']
-    rw [Pi.lift_π]
+    rw [Pi.lift_comp_π]
     dsimp only [q, c, b, Functor.mapIso_hom, asIso_hom]
     simpa only [b, Functor.mapIso_hom, asIso_hom, Category.assoc] using
       (derivedScalarExtensionRestrictionAdjunction l E Y n).choose

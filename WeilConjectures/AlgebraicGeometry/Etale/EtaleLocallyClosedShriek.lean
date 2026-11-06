@@ -327,7 +327,7 @@ private lemma directInverse_eq
     (φ : A →+* B) {Z X : Scheme.{u}} (g : Z ⟶ X) (N : DerivedCategoryModule A Z)
     [IsIso (finiteCoefficientDirectImageMap φ g N)] :
     etaleShriekDirectInverse φ g N = inv (finiteCoefficientDirectImageMap φ g N) := by
-  simp only [etaleShriekDirectInverse, dif_pos (inferInstance : IsIso _)]
+  simp only [etaleShriekDirectInverse, dite_eq_left (inferInstance : IsIso _)]
 
 private lemma closedCoefficient_counit
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]

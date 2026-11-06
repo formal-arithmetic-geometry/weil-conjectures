@@ -337,12 +337,12 @@ theorem proper_indConstructible_boundedBelow
     intro y n hn
     by_cases h : 0 ≤ d
     · have hdim := hd y
-      rw [if_pos h] at hdim
+      rw [ite_eq_left h] at hdim
       have hn' : (n : WithBot ℕ∞) ≤ (d.toNat : WithBot ℕ∞) := hn.trans hdim
       have hn'' : n ≤ d.toNat := by exact_mod_cast hn'
       omega
     · have hdim := hd y
-      rw [if_neg h] at hdim
+      rw [ite_eq_right h] at hdim
       have : ¬ ((n : WithBot ℕ∞) ≤ (⊥ : WithBot ℕ∞)) := by simp
       exact (this (hn.trans hdim)).elim
   have hheart := properHeartBound ℓ E k p₀ hp₀ hpℓ X Y p d hd'
@@ -446,12 +446,12 @@ theorem proper_indConstructible_boundedBelow_padicAlgCl
     intro y n hn
     by_cases h : 0 ≤ d
     · have hdim := hd y
-      rw [if_pos h] at hdim
+      rw [ite_eq_left h] at hdim
       have hn' : (n : WithBot ℕ∞) ≤ (d.toNat : WithBot ℕ∞) := hn.trans hdim
       have hn'' : n ≤ d.toNat := by exact_mod_cast hn'
       omega
     · have hdim := hd y
-      rw [if_neg h] at hdim
+      rw [ite_eq_right h] at hdim
       have : ¬ ((n : WithBot ℕ∞) ≤ (⊥ : WithBot ℕ∞)) := by simp
       exact (this (hn.trans hdim)).elim
   have hheart := properHeartBound_padicAlgCl ℓ k p₀ hp₀ hpℓ X Y p d hd'

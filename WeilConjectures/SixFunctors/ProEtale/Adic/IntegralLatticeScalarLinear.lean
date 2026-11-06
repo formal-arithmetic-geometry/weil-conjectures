@@ -31,7 +31,7 @@ variable (T) in
 lemma padicIntegersSheafMulOfLE_natCast (n : ℕ) :
     padicIntegersSheafMulOfLE T (le_refl E.1) (n : integers l E.1) = n • 𝟙 _ := by
   ext U f
-  refine ULift.ext _ _ (ContinuousMap.ext fun x ↦ ?_)
+  refine ULift.ext (ContinuousMap.ext fun x ↦ ?_)
   change (n : integers l E.1) * f.down x = n • f.down x
   exact (nsmul_eq_mul n _).symm
 

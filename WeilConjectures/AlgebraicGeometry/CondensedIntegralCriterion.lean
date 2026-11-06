@@ -111,7 +111,7 @@ private theorem constructible_of_stratified_point_complexes
   classical
   obtain ⟨S, hS⟩ := h
   intro q
-  rw [IsConstantModelConstructible, if_pos
+  rw [IsConstantModelConstructible, ite_eq_left
     (show CompactSpace X ∧ QuasiSeparatedSpace X from ⟨inferInstance, inferInstance⟩)]
   refine ⟨S, fun a ↦ ?_⟩
   obtain ⟨U, hU⟩ := hS a

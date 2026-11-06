@@ -143,7 +143,7 @@ private theorem factorization_localizing
     obtain ⟨V, hV, g, h, hgh⟩ := hRX i U hU f
     obtain ⟨j, ⟨iso⟩⟩ := hrep V hV
     refine ⟨g ≫ iso.hom ≫ Sigma.ι (Y i) ⟨j, iso.inv ≫ h⟩, ?_⟩
-    simp only [Category.assoc, e, Sigma.ι_desc]
+    simp only [Category.assoc, e, Sigma.ι_comp_desc]
     simpa using hgh
   let F : (Σ i, K i) → C := fun ik ↦ Y ik.1 ik.2
   let iso : (∐ fun i ↦ ∐ Y i) ≅ ∐ F := sigmaSigmaIso K Y

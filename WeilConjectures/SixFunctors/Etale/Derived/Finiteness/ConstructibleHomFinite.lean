@@ -92,7 +92,7 @@ theorem finite_hom_of_isConstructibleSheaf {X : Scheme.{u}} (p : X ⟶ Spec (.of
   refine Finite.of_injective (fun g (i : S) ↦ g.hom.app _ i.1.2) fun g g' hgg' ↦ ?_
   refine (cancel_epi (finsetSigmaDesc (sectionGenerator F) (sectionGeneratorHom F) S)).1 ?_
   refine Sigma.hom_ext _ _ fun i ↦ ?_
-  simp only [finsetSigmaDesc, Sigma.ι_desc_assoc, sectionGeneratorHom, Etale.sectionHom_comp]
+  simp only [finsetSigmaDesc, Sigma.ι_comp_desc_assoc, sectionGeneratorHom, Etale.sectionHom_comp]
   exact congrArg _ (congrFun hgg' i)
 
 end Etale

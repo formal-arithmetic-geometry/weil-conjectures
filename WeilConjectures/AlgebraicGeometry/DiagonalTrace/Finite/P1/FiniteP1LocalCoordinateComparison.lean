@@ -63,7 +63,7 @@ theorem finiteP1LocalCoordinateImage_ordinary (n : ℕ) [Finite (SpTowerShriek.R
     (c : SpTowerP1.CoefficientCoordinates l E n X hX)
     (b : Etale.ordinaryFiniteUnit (FiniteRing l E n) X ⟶
       (Etale.ordinaryFiniteLine (FiniteRing l E n) (l ^ (n + 1))
-        (ULift.ext _ _ (coefficient_annihilates l E n)) X)⟦(2 : ℤ)⟧) :
+        (ULift.ext (coefficient_annihilates l E n)) X)⟦(2 : ℤ)⟧) :
     HEq (finiteP1LocalCoordinateImage l E n X c b)
       (finiteOrdinaryCoordinateArrow l E n X c b) := by
   have h := finiteP1LocalCoordinateImage_composite l E n X c b

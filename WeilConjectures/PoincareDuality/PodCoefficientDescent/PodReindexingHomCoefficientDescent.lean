@@ -152,8 +152,7 @@ private theorem localizedLinearEquiv_existsUnique
   · intro e he
     apply LinearEquiv.ext
     intro q
-    induction q using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction q using TensorProduct.inductionOn with
     | tmul a f => exact eq_of_heq (he f a _ HEq.rfl)
     | add q q' hq hq' => simp only [map_add, hq, hq']
 

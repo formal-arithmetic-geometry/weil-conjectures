@@ -78,7 +78,7 @@ def sfSplitCell (a b : ℤ) (r : ℤ → ℕ) (q : ℤ) (hq : a ≤ q ∧ q ≤ 
         (SheafOfModules.free (R := sfSplitRings.{u, v} C) (ULift.{max (u + 1) v} (Fin (r q)))) ⟶
       sfSplitComplex C a b r :=
   HomologicalComplex.mkHomFromSingle
-    (eqToHom (by dsimp [sfSplitComplex]; rw [if_pos hq]))
+    (eqToHom (by dsimp [sfSplitComplex]; rw [ite_eq_left hq]))
     (fun _ _ ↦ by simp [sfSplitComplex])
 
 variable [HasDerivedCategory.{w} (ringedSiteModules.{max (u + 1) v} (sfSplitRings.{u, v} C))]
@@ -423,7 +423,7 @@ private theorem sfAssembledMap_cell (a b : ℤ) (r : ℤ → ℕ)
   apply HomologicalComplex.from_single_hom_ext
   change (sfSplitCell C a b r q hq).f q ≫ (sfAssembledMap C a b r Z t).f q = _
   dsimp only [sfAssembledMap]
-  rw [dif_pos hq]
+  rw [dite_eq_left hq]
   simp only [IsIso.hom_inv_id_assoc]
 
 private theorem sfFreeCohomologyQuasiIsoAt (q : ℤ) (r : ℕ)
@@ -546,7 +546,7 @@ theorem sf_projective_cohomology_split_model
       exact (quasiIsoAt_iff_comp_left (sfSplitCell C a b r q hq) v q).1 inferInstance
     · have hV : IsZero ((sfSplitComplex C a b r).X q) := by
         dsimp [sfSplitComplex]
-        rw [if_neg hq]
+        rw [ite_eq_right hq]
         exact isZero_zero _
       have hHZ : IsZero (Z.homology q) :=
         (hN q hq).of_iso

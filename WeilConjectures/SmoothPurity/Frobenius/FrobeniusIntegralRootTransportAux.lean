@@ -146,8 +146,7 @@ private theorem integralTransportScalar_of_tensors
       (op ((proEtaleBaseChange g).obj V)) :=
     (sfCompletedCoefficientMap l E g).hom.app (op V) a'
   change ψ (a' • e y) = c • ψ (e y)
-  induction y using TensorProduct.induction_on with
-  | zero => simp only [map_zero, smul_zero]
+  induction y using TensorProduct.inductionOn with
   | add y z h y' => simp only [map_add, smul_add, h, y']
   | tmul b x => exact hp V a' b x
 
@@ -260,8 +259,7 @@ theorem frobeniusIntegralRootTransport_additive
     change ψ (a • purTwistIntegralTensor Y l E (op V) b x) =
       σ a • ψ (purTwistIntegralTensor Y l E (op V) b x)
     obtain ⟨w, rfl⟩ := (purTwistCoefficientTensor Y l E (op V)).surjective a
-    induction w using TensorProduct.induction_on with
-    | zero => simp only [map_zero, zero_smul]
+    induction w using TensorProduct.inductionOn with
     | add y z hy hz => simp only [map_add, add_smul, hy, hz]
     | tmul s z =>
       change ψ ((d s * c z) • purTwistIntegralTensor Y l E (op V) b x) =

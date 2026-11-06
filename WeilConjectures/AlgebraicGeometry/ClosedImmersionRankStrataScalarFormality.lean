@@ -102,7 +102,7 @@ private theorem zeroDifferentialAssembly (Y : Scheme.{u})
         (ComplexShape.up ℤ) m.down (P.X m.down) n (by
           intro e
           apply hm
-          exact ULift.ext _ _ e.symm)).of_iso
+          exact ULift.ext e.symm)).of_iso
           ((DerivedCategory.homologyFunctorFactors C n).app (L m))
     have := coprojection_isIso_of_other_zero
       (fun m ↦ H.obj (DerivedCategory.Q.obj (L m))) ⟨n⟩ hzero

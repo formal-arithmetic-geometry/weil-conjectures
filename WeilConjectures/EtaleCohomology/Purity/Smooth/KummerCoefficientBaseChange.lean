@@ -71,8 +71,7 @@ theorem bijective_tensorMapOf (hψ : Function.Bijective ψ) {r : ℕ}
       map_add' a b := by simp [TensorProduct.tmul_add, Finset.sum_add_distrib] }
   have hGΞ : ∀ x, G (F.tensorMapOf ψ x) = x := by
     intro x
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | add x y hx hy => rw [_root_.map_add, _root_.map_add, hx, hy]
     | tmul c z =>
       rw [tensorMapOf_tmul]
@@ -258,8 +257,7 @@ lemma _root_.TensorProduct.liftSMulAddHom_tmul (R : Type*) [CommRing R] [Module 
 private lemma tensorAddHom_apply_eq_of_tmul {L M P : Type*} [AddCommGroup L] [AddCommGroup M]
     [AddCommGroup P] (f g : L ⊗[ℤ] M →+ P) (h : ∀ c x, f (c ⊗ₜ x) = g (c ⊗ₜ x))
     (y : L ⊗[ℤ] M) : f y = g y := by
-  induction y using TensorProduct.induction_on with
-  | zero => rw [map_zero, map_zero]
+  induction y using TensorProduct.inductionOn with
   | add a b ha hb => rw [map_add, map_add, ha, hb]
   | tmul c x => exact h c x
 

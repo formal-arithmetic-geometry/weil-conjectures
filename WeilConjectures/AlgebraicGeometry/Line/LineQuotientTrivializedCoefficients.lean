@@ -348,8 +348,7 @@ private theorem coefficient_irrelevant_top {S T : Scheme.{u}} (h : T ⟶ S)
   obtain ⟨c, hc, _, hp, _⟩ := exists_tensorPullback_affine_sections h V W hWV
   have ht (t : Γ(E, V.1) ⊗[Γ(S, V.1)] Γ(T, W.1)) :
       openSectionCoefficient L W.1 e (q.app W.1 (c E inferInstance t)) ∈ I := by
-    induction t using TensorProduct.induction_on with
-    | zero => simp only [map_zero]; exact I.zero_mem
+    induction t using TensorProduct.inductionOn with
     | tmul m r =>
       rw [hp, Hom.app_smul, openSectionCoefficient_smul]
       apply I.mul_mem_left

@@ -111,7 +111,7 @@ theorem Scheme.Hom.topologicalKrullDim_preimage_add_le_of_asIdeal_eq_bot {Z : Sc
   have hηr : topologicalKrullDim (closure {η} : Set (Spec (.of (MvPolynomial (Fin r) k)))) = r := by
     rw [PrimeSpectrum.topologicalKrullDim_closure_singleton, hη,
       ringKrullDim_eq_of_ringEquiv (RingEquiv.quotientBot _),
-      MvPolynomial.ringKrullDim_of_isNoetherianRing,
+      MvPolynomial.ringKrullDim_of_isNoetherianRing_of_finite,
       ringKrullDim_eq_zero_of_isField (Field.toIsField k)]
     simp
   refine WithBot.ENat.add_natCast_le_of_forall fun e he ↦ ?_

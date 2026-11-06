@@ -105,7 +105,7 @@ private theorem selection_nat {X Y : CochainComplex (ℕᵒᵖ ⥤ D) ℤ} (f : 
   simp only [Category.assoc]
   erw [Pi.map_π]
   unfold selection
-  erw [Pi.lift_π_assoc, Pi.lift_π, Pi.map_π]
+  erw [Pi.lift_comp_π_assoc, Pi.lift_comp_π, Pi.map_π]
   rfl
 
 private theorem block_nat {X Y : CochainComplex (ℕᵒᵖ ⥤ D) ℤ} (f : X ⟶ Y)
@@ -121,7 +121,7 @@ private theorem block_nat {X Y : CochainComplex (ℕᵒᵖ ⥤ D) ℤ} (f : X �
   simp only [Category.assoc]
   erw [Pi.map_π]
   unfold block
-  erw [Pi.lift_π_assoc, Pi.lift_π]
+  erw [Pi.lift_comp_π_assoc, Pi.lift_comp_π]
   simp only [Preadditive.comp_sum, Preadditive.sum_comp, Category.assoc]
   apply Finset.sum_congr rfl
   intro k hk
@@ -251,7 +251,7 @@ private theorem limit_selection [HasLimitsOfShape ℕᵒᵖ D]
           (fun n : ℕ ↦ limit.π (index e ⋙ I) (op n)) := by
   apply Pi.hom_ext
   intro n
-  simp only [selection, Category.assoc, Pi.lift_π, limit.pre_π]
+  simp only [selection, Category.assoc, Pi.lift_comp_π, limit.pre_π]
   rfl
 
 attribute [local irreducible] strictRoosComplex strictRoosCoordinates in

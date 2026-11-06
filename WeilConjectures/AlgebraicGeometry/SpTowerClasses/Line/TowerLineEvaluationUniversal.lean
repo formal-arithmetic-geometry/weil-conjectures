@@ -49,7 +49,7 @@ private def constantResidueHomEquiv (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) (n
     rintro V p ⟨b, hb⟩
     obtain ⟨z, hz⟩ := ZMod.intCast_surjective b.down
     have hb' : b = (z : ULift.{u + 1, 0} (ZMod (l ^ (n + 1)))) :=
-      ULift.ext _ _ hz.symm
+      ULift.ext hz.symm
     let qV : M.val.obj (op V) →+ N.val.obj (op V) := (q.hom.app (op V)).hom
     have hn (y : M.val.obj U) :
         qV (M.val.map p.op y) = N.val.map p.op (qU y) :=

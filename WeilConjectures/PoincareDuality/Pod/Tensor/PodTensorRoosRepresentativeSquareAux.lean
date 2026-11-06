@@ -211,7 +211,7 @@ theorem podTensorReindexAt_tower
         (((podGoodReindex l E g D).obj P).obj,((podGoodReindex l E g D).obj Q).obj)) :
     (podTensorReindexAt l E g D hD P Q τ).tower P Q = τ := by
   unfold podTensorReindexAt
-  exact dif_pos (And.intro (rfl : P = P) (rfl : Q = Q))
+  exact dite_eq_left (And.intro (rfl : P = P) (rfl : Q = Q))
 
 /-- The packaged tower comparison satisfies the generator formula when the prescribed one does.
 Source: blueprint lem-pod-tensor-roos-representative-square. -/
@@ -247,7 +247,7 @@ theorem podTensorReindexAt_generators
   · have ht : (podTensorReindexAt l E g D hD P Q τ).tower P' Q' =
         (podReindexingStrictTensorTowersGenerators l E g D hD).choose P' Q' := by
       unfold podTensorReindexAt
-      exact dif_neg h
+      exact dite_eq_right h
     rw [ht]
     exact (podReindexingStrictTensorTowersGenerators l E g D hD).choose_spec P' Q' n p q U x y
 set_option maxHeartbeats 2000000 in

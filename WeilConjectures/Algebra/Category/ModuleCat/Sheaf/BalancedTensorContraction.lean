@@ -123,12 +123,10 @@ private noncomputable def contractionPresheaf
   app W := contractionApp α M N W
   naturality {U V} i := by
     ext t
-    induction t using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction t using TensorProduct.inductionOn with
     | add x y hx hy => simp only [map_add, hx, hy]
     | tmul m z =>
-      induction z using TensorProduct.induction_on with
-      | zero => simp only [TensorProduct.tmul_zero, map_zero]
+      induction z using TensorProduct.inductionOn with
       | add x y hx hy => simp only [TensorProduct.tmul_add, map_add, hx, hy]
       | tmul b n =>
         change contractionApp α M N V

@@ -78,7 +78,7 @@ private theorem relation_from_zero {R : Type u} [CommRing R] {c : ℕ} (f : Fin 
       obtain ⟨p, hp, he, hc⟩ := hx
       obtain ⟨q, hq, hf, hd⟩ := hy
       exact ⟨p + q, hp.add hq, by rw [map_add, he, hf],
-        fun d ↦ by rw [MvPolynomial.coeff_add]; exact J.add_mem (hc d) (hd d)⟩
+        fun d ↦ by rw [AddMonoidAlgebra.coeff_add]; exact J.add_mem (hc d) (hd d)⟩
   obtain ⟨q, hq, he, hc⟩ := hrep _ hmem
   have hh := hz n (p - q) (hp.sub hq) (by rw [map_sub, he, sub_self])
   intro d
@@ -168,7 +168,7 @@ private theorem truncated_relation {R : Type u} [CommRing R] {c : ℕ}
     · subst e
       have hcoeff := hbc l (by omega) d
       simp only [b, Function.update_self] at hcoeff
-      rw [MvPolynomial.coeff_add, MvPolynomial.coeff_C_mul] at hcoeff
+      rw [AddMonoidAlgebra.coeff_add, MvPolynomial.coeff_C_mul] at hcoeff
       simpa only [add_sub_cancel_right] using
         J.sub_mem hcoeff (J.mul_mem_right (q.coeff d) ht)
     · simpa only [b, Function.update_of_ne h] using hbc e hel d

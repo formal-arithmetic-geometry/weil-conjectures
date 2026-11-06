@@ -298,13 +298,13 @@ private theorem localizing_large
       obtain ⟨i, hi⟩ := i
       change c.ι.app (Discrete.mk i) ≫ _ = _
       rw [hc.fac]
-      simp only [Cofan.mk_ι_app, dif_pos hi]
+      simp only [Cofan.mk_ι_app, dite_eq_left hi]
     · intro s m hm
       apply hc.hom_ext
       intro ⟨i⟩
       rw [hc.fac]
       by_cases hi : ¬ IsZero (K i)
-      · simpa only [r, cofan_mk_inj, Cofan.inj, Cofan.mk_ι_app, dif_pos hi]
+      · simpa only [r, cofan_mk_inj, Cofan.inj, Cofan.mk_ι_app, dite_eq_left hi]
           using hm ⟨i, hi⟩
       · exact (not_not.mp hi).eq_of_src _ _
   exact P.prop_of_isColimit (J := Discrete J) (c := r) hr (fun i ↦ h i.as.val)
@@ -468,7 +468,7 @@ private theorem generators_of_localFree
   have hm (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
       IsConstructibleModuleObject (condensedRingObj Λ X) M ↔
         IsConstantModelConstructible Λ X M := by
-    rw [IsConstantModelConstructible, if_pos ⟨inferInstance, inferInstance⟩]
+    rw [IsConstantModelConstructible, ite_eq_left ⟨inferInstance, inferInstance⟩]
     constructor
     · rintro ⟨S, hS⟩
       refine ⟨S, fun a ↦ ?_⟩
@@ -521,7 +521,7 @@ private theorem continuous_generators (ℓ : ℕ) [Fact ℓ.Prime]
       (condensedRingObj (Profinite.continuousMapRingObj F) X)) :
       IsConstructibleModuleObject (condensedRingObj (Profinite.continuousMapRingObj F) X) M ↔
         IsConstantModelConstructible (Profinite.continuousMapRingObj F) X M := by
-    rw [IsConstantModelConstructible, if_pos ⟨inferInstance, inferInstance⟩]
+    rw [IsConstantModelConstructible, ite_eq_left ⟨inferInstance, inferInstance⟩]
     constructor
     · rintro ⟨S, hS⟩
       refine ⟨S, fun a ↦ ?_⟩

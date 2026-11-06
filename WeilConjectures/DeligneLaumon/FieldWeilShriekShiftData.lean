@@ -561,8 +561,7 @@ private theorem fieldLocalizeIso
     fieldTransport_heq (hG ⟨K⟩) (hG ⟨N⟩) _ _ (mG K N a c)
   let c : F' ≅ G' := NatIso.ofComponents (fun K ↦ Q.mapIso (e.app K.obj)) (by
     intro K N a
-    induction a using TensorProduct.induction_on with
-    | zero => simp
+    induction a using TensorProduct.inductionOn with
     | tmul c a =>
       rw [hmF K.obj N.obj a c, hmG K.obj N.obj a c]
       change ScalarLocalization.composition _ _ _ _ _ _

@@ -138,8 +138,7 @@ theorem gradedRestriction_isGradedBaseChangeAlong {X : Scheme.{u}} (E : X.Module
   have hΦ : Function.Bijective Φ := by
     have heq : (fun t ↦ e t) = Φ := by
       funext t
-      induction t using TensorProduct.induction_on with
-      | zero => simp only [map_zero]
+      induction t using TensorProduct.inductionOn with
       | tmul r a => exact he r a
       | add t t' ht ht' => simp only [map_add, ht, ht']
     rw [← heq]

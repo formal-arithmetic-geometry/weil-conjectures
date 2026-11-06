@@ -63,7 +63,7 @@ theorem isIso_artinSchreier_sigmaDesc (hP : P = X ^ p - X - C f)
   let E (m : ULift.{u + 1} (ZMod p)) : Γ(W, ⊤) := FiniteField.lagrangeAt ψ d m.down
   have hι (m : ULift.{u + 1} (ZMod p)) : Sigma.ι F m ≫ D =
       pullback.lift (f := π) (g := π) (artinSchreierTranslation hP hchar m.down) (𝟙 _)
-        (by simp [π]) := Sigma.ι_desc _ _
+        (by simp [π]) := Sigma.ι_comp_desc _ _
   have key (m : ULift.{u + 1} (ZMod p)) :
       IsOpenImmersion (Sigma.ι F m ≫ D) ∧ Set.range (Sigma.ι F m ≫ D) = W.basicOpen (E m) := by
     refine isOpenImmersion_and_range_eq_of_section (pullback.snd π π) _
@@ -108,7 +108,7 @@ theorem isIso_artinSchreier_sigmaDesc (hP : P = X ^ p - X - C f)
   · intro a b hab
     simp only [Function.onFun, hR]
     rw [disjoint_iff, ← Scheme.basicOpen_mul,
-      FiniteField.lagrangeAt_mul_lagrangeAt ψ hd (fun h ↦ hab (ULift.ext _ _ h)),
+      FiniteField.lagrangeAt_mul_lagrangeAt ψ hd (fun h ↦ hab (ULift.ext h)),
       Scheme.basicOpen_zero]
 
 end AlgebraicGeometry

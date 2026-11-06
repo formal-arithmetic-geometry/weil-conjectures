@@ -216,7 +216,7 @@ private theorem ordinary_constructible_of_constant_model
     (hM : IsConstantModelConstructible Λ X M) :
     IsConstructibleModuleObject (condensedRingObj Λ X) M := by
   classical
-  rw [IsConstantModelConstructible, if_pos ⟨inferInstance, inferInstance⟩] at hM
+  rw [IsConstantModelConstructible, ite_eq_left ⟨inferInstance, inferInstance⟩] at hM
   obtain ⟨S, hS⟩ := hM
   refine ⟨S, fun a ↦ ?_⟩
   let φ := condensedPullbackHom Λ (S.immersion a)

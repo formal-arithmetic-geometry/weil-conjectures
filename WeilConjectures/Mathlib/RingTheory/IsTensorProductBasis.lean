@@ -59,8 +59,7 @@ theorem TensorProduct.bijective_sum_smul_of_bijective_sum_basis_smul
     { Θ with
       map_smul' := fun a z ↦ by
         simp only [ZeroHom.toFun_eq_coe, AddMonoidHom.toZeroHom_coe, RingHom.id_apply]
-        induction z using TensorProduct.induction_on with
-        | zero => rw [smul_zero, map_zero, smul_zero]
+        induction z using TensorProduct.inductionOn with
         | tmul a' x =>
           rw [TensorProduct.smul_tmul', hΘ, hΘ, smul_eq_mul,
             map_mul, TensorProduct.smul_tmul', _root_.Algebra.smul_def a]

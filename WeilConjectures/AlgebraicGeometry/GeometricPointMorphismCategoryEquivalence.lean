@@ -44,11 +44,11 @@ theorem geometricPointMorphism_category_equivalence
     let b : Over.mk s ⟶ Over.mk s' := Over.homMk a ha
     let α : (pointSmallEtale s').fiber ⟶ (pointSmallEtale s).fiber :=
       Functor.whiskerLeft (Etale.forget S) (coyoneda.map b.op)
-    (CategoryOfElements.map α).IsEquivalence := by
+    (NatTrans.mapElements α).IsEquivalence := by
   let b : Over.mk s ⟶ Over.mk s' := Over.homMk a ha
   let α : (pointSmallEtale s').fiber ⟶ (pointSmallEtale s).fiber :=
     Functor.whiskerLeft (Etale.forget S) (coyoneda.map b.op)
-  change (CategoryOfElements.map α).IsEquivalence
+  change (NatTrans.mapElements α).IsEquivalence
   obtain ⟨β, hβ⟩ := Spec.map_surjective a
   have hbij (U : S.Etale) : Function.Bijective (α.app U) := by
     constructor

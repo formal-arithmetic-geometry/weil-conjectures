@@ -81,8 +81,7 @@ private theorem tensorBalancingOfSectionPushouts (W : Scheme.{u})
     PresheafOfModules.isoMk eU (by
       intro U V v
       ext z
-      induction z using TensorProduct.induction_on with
-      | zero => simp only [map_zero]
+      induction z using TensorProduct.inductionOn with
       | add x y hx hy => simp only [map_add, hx, hy]
       | tmul b m =>
         change (eU V).hom (P.map v (b ⊗ₜ[A.obj.obj U, (f.hom.app U).hom] m)) =

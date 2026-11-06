@@ -228,8 +228,7 @@ private theorem tensorCast_ext
   apply Sheaf.hom_ext
   apply sheafify_hom_ext (ProEt.topology Y) _ _ N.isSheaf
   ext V z
-  induction z using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction z using TensorProduct.inductionOn with
   | tmul b x => exact h V b x
   | add z w hz hw =>
     simpa only [map_add] using congrArg₂ (· + ·) hz hw

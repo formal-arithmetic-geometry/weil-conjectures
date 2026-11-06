@@ -1325,7 +1325,7 @@ private theorem supportHomSquare
     simp only [supportHomEtaleTransport_closedIso_hom,
       supportHomProEtaleTransport_closedIso_hom, supportHomSiteTransport_closedIso_hom,
       Functor.map_comp, Category.assoc]
-    rw [Iso.map_inv_hom_id_assoc (supportHomProEtaleSupportedIso P i) LP]
+    rw [Iso.inv_hom_id_map_assoc (supportHomProEtaleSupportedIso P i) LP]
     have hh := congrArg (fun f => f ≫ (supportHomProEtaleSupportedIso P i').inv) hc
     simp only [Category.assoc] at hh
     exact hh

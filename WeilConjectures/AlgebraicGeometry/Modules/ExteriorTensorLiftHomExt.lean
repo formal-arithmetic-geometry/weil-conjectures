@@ -88,8 +88,7 @@ private theorem tensor_section_ext {X : Scheme.{v}} {M N D : X.Modules}
   apply ((PresheafOfModules.sheafificationAdjunction.{v}
     (𝟙 X.ringCatSheaf.obj)).homEquiv _ D).injective
   ext U z
-  induction z using TensorProduct.induction_on with
-  | zero => exact (map_zero _).trans (map_zero _).symm
+  induction z using TensorProduct.inductionOn with
   | tmul x y => exact h U.unop x y
   | add x y hx hy => simp only [map_add, hx, hy]
 

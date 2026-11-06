@@ -95,7 +95,7 @@ theorem exists_affine_perfect_open_stalk_degreewise_lift
   change S.map (g n) = eW.hom.app (P.X n) ≫ t n ≫ eW.inv.app (Q.X n)
   by_cases hn : n ∈ Finset.Icc a b
   · dsimp only [g]
-    rw [dif_pos hn, S.map_comp, hf ⟨n, hn⟩]
+    rw [dite_eq_left hn, S.map_comp, hf ⟨n, hn⟩]
     have hnat := eW.hom.naturality (ι n)
     change S.map (R.map (ι n)) ≫ eW.hom.app _ =
       eW.hom.app _ ≫ T.map (ι n) at hnat
@@ -114,7 +114,7 @@ theorem exists_affine_perfect_open_stalk_degreewise_lift
       exact hn)
     have ht : t n = 0 := (T.map_isZero hz).eq_of_src _ _
     dsimp only [g]
-    rw [dif_neg hn, S.map_zero, ht, zero_comp, comp_zero]
+    rw [dite_eq_right hn, S.map_zero, ht, zero_comp, comp_zero]
 
 end
 end AlgebraicGeometry.Scheme

@@ -93,7 +93,7 @@ private theorem hocolim_of_cofan
     apply Sigma.hom_ext
     intro n
     simp only [s, Preadditive.sub_comp, Category.id_comp, Preadditive.comp_sub,
-      ← Category.assoc, Sigma.ι_desc]
+      ← Category.assoc, Sigma.ι_comp_desc]
     simp only [Category.assoc, he]
     rw [← ht]
   refine ⟨e.hom ≫ g, h ≫ (shiftFunctor D (1 : ℤ)).map e.inv, ?_⟩

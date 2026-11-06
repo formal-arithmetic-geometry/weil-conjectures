@@ -68,7 +68,7 @@ private theorem cancel_endpoint_coordinates
       Functor.mapIso_symm, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom,
       Functor.mapIso_inv, Iso.app_hom, Category.assoc]
     rw [← reassoc_of% hn]
-    simp only [Iso.map_inv_hom_id_assoc]
+    simp only [Iso.inv_hom_id_map_assoc]
     rw [hb, reassoc_of% hh]
   rw [hc, hd] at h
   have hh := congrArg (fun t ↦ t ≪≫ (ad ≪≫ bd).symm) h

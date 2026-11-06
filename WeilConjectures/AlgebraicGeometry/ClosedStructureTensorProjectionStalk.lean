@@ -195,8 +195,7 @@ theorem closedStructure_projection_stalk_isIso
       -- Every pair of stalk elements has representatives on one common neighbourhood.
       have hv (t : TensorProduct (Y.presheaf.stalk (i.base z)) (S.obj M) (S.obj B)) :
           v t = q t := by
-        induction t using TensorProduct.induction_on with
-        | zero => exact (map_zero v).trans (map_zero q).symm
+        induction t using TensorProduct.inductionOn with
         | add t t' ht ht' => simp only [map_add, ht, ht']
         | tmul m r =>
           obtain ⟨U, hzU, m, rfl⟩ := TopCat.Presheaf.exists_germ_eq M.val.presheaf m

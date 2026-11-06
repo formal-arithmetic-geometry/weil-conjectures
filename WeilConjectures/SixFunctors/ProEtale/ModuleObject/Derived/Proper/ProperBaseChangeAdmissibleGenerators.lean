@@ -617,7 +617,7 @@ theorem properBaseChange_admissible_generators
       intro B _ _ _ _ _ ht
       obtain ⟨n, hn⟩ := ht
       have ht' : ∃ n : ℕ, (ℓ ^ n) • (1 : ULift.{u} B) = 0 :=
-        ⟨n, ULift.ext _ _ (hn 1)⟩
+        ⟨n, ULift.ext (hn 1)⟩
       have hh := finite_exchange_generator ℓ (ULift.{u} B) ht' k q v sq
       refine Eq.mp ?_ hh
       run_tac coefficientCongrGoal)

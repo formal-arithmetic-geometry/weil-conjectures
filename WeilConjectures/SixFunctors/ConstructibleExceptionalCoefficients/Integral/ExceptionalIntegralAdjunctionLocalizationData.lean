@@ -120,11 +120,9 @@ theorem rawTensorFunctorLaws
     change (1 : Localization.Away p) ⊗ₜ[R] F.map (𝟙 K) = _
     rw [F.map_id]
   · intro K L M a b
-    induction b using TensorProduct.induction_on with
-    | zero => simp
+    induction b using TensorProduct.inductionOn with
     | tmul b g =>
-      induction a using TensorProduct.induction_on with
-      | zero => simp
+      induction a using TensorProduct.inductionOn with
       | tmul a h =>
         rw [ScalarLocalization.composition_tmul]
         change (b * a) ⊗ₜ[R] F.map (h ≫ g) =

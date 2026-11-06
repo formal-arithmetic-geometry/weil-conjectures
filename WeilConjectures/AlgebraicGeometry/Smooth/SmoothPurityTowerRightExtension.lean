@@ -91,14 +91,14 @@ private def extensionTransition (n : ℕ)
         (extensionLevel B n J m) := by
   classical
   by_cases hm : n ≤ m
-  · simpa only [extensionLevel, dif_pos hm, dif_pos (hm.trans h)] using
+  · simpa only [extensionLevel, dite_eq_left hm, dite_eq_left (hm.trans h)] using
       restrictionStep B hm h J
   · exact 0
 
 private theorem extensionLevel_above (n r : ℕ) (h : n ≤ r)
     (J : systemLevel.{a, av, w} B n) :
     extensionLevel B n J r = (systemRestriction B h).obj J := by
-  exact dif_pos h
+  exact dite_eq_left h
 
 omit [S.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]
   [S.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify S AddCommGrpCat.{w}] in
@@ -119,7 +119,7 @@ private theorem extensionTransition_above (n : ℕ)
       (fun x : J.val.obj U ↦ x) := by
   have he : HEq (extensionTransition B n J h) (restrictionStep B hm h J) := by
     unfold extensionTransition
-    simp only [dif_pos hm]
+    simp only [dite_eq_left hm]
     exact cast_heq _ _
   have ht := module_fun_heq (extensionLevel_above B n r (hm.trans h) J)
     (congrArg ((systemRestriction B h).obj) (extensionLevel_above B n m hm J))
@@ -157,7 +157,7 @@ private def extensionObject (n : ℕ)
       have hi := id_fun_heq (carrier_above B n r h J U)
       exact congrFun (eq_of_heq (ht.trans hi.symm)) x
     · have hz : IsZero (extensionLevel B n J r) := by
-        simpa only [extensionLevel, dif_neg h] using
+        simpa only [extensionLevel, dite_eq_right h] using
           (isZero_zero (systemLevel.{a, av, w} B r))
       have hz' := (systemRestriction B (Nat.le_refl r)).map_isZero hz
       exact (ModuleCat.subsingleton_of_isZero
@@ -173,7 +173,7 @@ private def extensionObject (n : ℕ)
         (extensionTransition_above B n J h ha U)
         (extensionTransition_above B n J (h.trans k) ha U) x
     · have hz : IsZero (extensionLevel B n J a) := by
-        simpa only [extensionLevel, dif_neg ha] using
+        simpa only [extensionLevel, dite_eq_right ha] using
           (isZero_zero (systemLevel.{a, av, w} B a))
       have hz' := (systemRestriction B (h.trans k)).map_isZero hz
       exact (ModuleCat.subsingleton_of_isZero
@@ -182,7 +182,7 @@ private def extensionObject (n : ℕ)
 private theorem extensionLevel_below (n r : ℕ) (h : ¬ n ≤ r)
     (J : systemLevel.{a, av, w} B n) :
     IsZero (extensionLevel B n J r) := by
-  simpa only [extensionLevel, dif_neg h] using
+  simpa only [extensionLevel, dite_eq_right h] using
     (isZero_zero (systemLevel.{a, av, w}
       B r))
 
@@ -215,21 +215,21 @@ private def extensionMapLevel (n : ℕ)
     {J K : systemLevel.{a, av, w} B n} (f : J ⟶ K) (r : ℕ) :
     extensionLevel B n J r ⟶ extensionLevel B n K r := by
   by_cases h : n ≤ r
-  · simpa only [extensionLevel, dif_pos h] using (systemRestriction B h).map f
+  · simpa only [extensionLevel, dite_eq_left h] using (systemRestriction B h).map f
   · exact 0
 
 private theorem extensionMapLevel_above (n r : ℕ) (h : n ≤ r)
     {J K : systemLevel.{a, av, w} B n} (f : J ⟶ K) :
     HEq (extensionMapLevel B n f r) ((systemRestriction B h).map f) := by
   unfold extensionMapLevel
-  simp only [dif_pos h]
+  simp only [dite_eq_left h]
   exact cast_heq _ _
 
 private theorem extensionTransition_heq (n : ℕ)
     (J : systemLevel.{a, av, w} B n) {m r : ℕ} (h : m ≤ r) (hm : n ≤ m) :
     HEq (extensionTransition B n J h) (restrictionStep B hm h J) := by
   unfold extensionTransition
-  simp only [dif_pos hm]
+  simp only [dite_eq_left hm]
   exact cast_heq _ _
 
 private def extensionMap (n : ℕ)
@@ -363,7 +363,7 @@ private def restrictionIdentity (n : ℕ)
 
 private def extensionCounit (n : ℕ) (J : systemLevel.{a, av, w} B n) :
     (extensionObject B n J).level n ⟶ J := by
-  simpa only [extensionObject, extensionLevel, dif_pos (Nat.le_refl n)] using
+  simpa only [extensionObject, extensionLevel, dite_eq_left (Nat.le_refl n)] using
     (restrictionIdentity B n J).hom
 
 private theorem extensionCounit_heq (n : ℕ) (J : systemLevel.{a, av, w} B n) :
@@ -380,7 +380,7 @@ private def transposeLevel (n : ℕ)
     (M : StrictRingSystem.{a, av, w} B) (J : systemLevel.{a, av, w} B n)
     (f : M.level n ⟶ J) (r : ℕ) : M.level r ⟶ extensionLevel B n J r := by
   by_cases h : n ≤ r
-  · simpa only [extensionLevel, dif_pos h] using
+  · simpa only [extensionLevel, dite_eq_left h] using
       M.transition h ≫ (systemRestriction B h).map f
   · exact 0
 
@@ -390,7 +390,7 @@ private theorem transposeLevel_above (n : ℕ)
     HEq (transposeLevel B n M J f r)
       (M.transition h ≫ (systemRestriction B h).map f) := by
   unfold transposeLevel
-  simp only [dif_pos h]
+  simp only [dite_eq_left h]
   exact cast_heq _ _
 
 private def extensionTranspose (n : ℕ)

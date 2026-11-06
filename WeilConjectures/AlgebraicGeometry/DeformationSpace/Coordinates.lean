@@ -106,7 +106,7 @@ lemma exists_etale_coordinates_of_finite {D : Scheme.{u}} (P : D ⟶ 𝔸(ULift.
       σ ≫ c = AffineSpace.zeroSection (ULift.{u} (Fin d)) 𝔸(ULift.{u} (Fin 1); B') := by
   have hLv (i : ι) : AffineSpace.map (ULift.{u} (Fin 1)) (Sigma.ι B₀ i) ≫
       AffineSpace.map _ (Sigma.desc v₀) = AffineSpace.map _ (v₀ i) := by
-    rw [← AffineSpace.map_comp, Sigma.ι_desc]
+    rw [← AffineSpace.map_comp, Sigma.ι_comp_desc]
   -- the inclusion of the base change over `Bᵢ` into the base change over `∐ Bᵢ`
   let m (i : ι) : pullback P (AffineSpace.map (ULift.{u} (Fin 1)) (v₀ i)) ⟶
       pullback P (AffineSpace.map (ULift.{u} (Fin 1)) (Sigma.desc v₀)) :=
@@ -144,7 +144,7 @@ lemma exists_etale_coordinates_of_finite {D : Scheme.{u}} (P : D ⟶ 𝔸(ULift.
         AffineSpace.map (ULift.{u} (Fin d)) (AffineSpace.map (ULift.{u} (Fin 1)) (Sigma.ι B₀ i))) ≫
         𝔸(ULift.{u} (Fin d); 𝔸(ULift.{u} (Fin 1); ∐ B₀)) ↘ 𝔸(ULift.{u} (Fin 1); ∐ B₀) := by
     refine Sigma.hom_ext _ _ fun i ↦ ?_
-    rw [Sigma.ι_desc_assoc, Sigma.ι_desc_assoc, Category.assoc, pullback.lift_snd,
+    rw [Sigma.ι_comp_desc_assoc, Sigma.ι_comp_desc_assoc, Category.assoc, pullback.lift_snd,
       reassoc_of% h₁, Category.assoc, AffineSpace.map_over]
   have : IsSeparated (Sigma.desc v₀ ≫ B.toSpecΓ) := inferInstance
   have : QuasiCompact ((Sigma.desc fun i ↦ j₀ i ≫ m i) ≫ pullback.snd _ _) := by
@@ -158,10 +158,10 @@ lemma exists_etale_coordinates_of_finite {D : Scheme.{u}} (P : D ⟶ 𝔸(ULift.
     inferInstance, QuasiCompact.of_comp _ (pullback.snd _ _), inferInstance, inferInstance,
     inferInstance, hsnd, ?_, ?_⟩
   · refine Cofan.IsColimit.hom_ext hcolim _ _ fun i ↦ ?_
-    rw [Cofan.IsColimit.fac_assoc, cofan_mk_inj, Category.assoc, Sigma.ι_desc_assoc,
+    rw [Cofan.IsColimit.fac_assoc, cofan_mk_inj, Category.assoc, Sigma.ι_comp_desc_assoc,
       Category.assoc, pullback.lift_fst, h₂, reassoc_of% hLv]
   · refine Cofan.IsColimit.hom_ext hcolim _ _ fun i ↦ ?_
-    rw [Cofan.IsColimit.fac_assoc, cofan_mk_inj, Category.assoc, Sigma.ι_desc, reassoc_of% h₃,
+    rw [Cofan.IsColimit.fac_assoc, cofan_mk_inj, Category.assoc, Sigma.ι_comp_desc, reassoc_of% h₃,
       AffineSpace.zeroSection_comp_map]
 
 namespace Scheme.Hom

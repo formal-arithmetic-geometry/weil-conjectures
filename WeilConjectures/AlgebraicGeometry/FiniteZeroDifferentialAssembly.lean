@@ -80,7 +80,7 @@ theorem finiteZeroDifferentialAssembly
     if hn : n ∈ s then (hlift n hn).choose else 0
   have hf (n : ℤ) (hn : n ∈ s) : IsIso ((homologyFunctor C n).map (f n)) := by
     dsimp [f]
-    rw [dif_pos hn]
+    rw [dite_eq_left hn]
     exact (hlift n hn).choose_spec
   let g : Q.obj P ⟶ K := ∑ n ∈ s, Q.map (p n) ≫ f n
   have hg : IsIso g := (isIso_iff C g).mpr (by

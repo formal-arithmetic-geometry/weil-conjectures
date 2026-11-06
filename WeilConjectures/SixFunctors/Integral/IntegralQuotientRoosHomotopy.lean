@@ -357,7 +357,7 @@ private theorem roosAugmentation_compare
         CategoryTheory.Limits.Pi.map (fun n : ℕ ↦ a.app (op n)) := by
     apply Pi.hom_ext
     intro n
-    simpa only [Category.id_comp, Category.assoc, Pi.map_π, Pi.lift_π_assoc] using
+    simpa only [Category.id_comp, Category.assoc, Pi.map_π, Pi.lift_comp_π_assoc] using
       (ha n).symm
   unfold integralOperationsRoosMap
   rw [arrowConeMap A _ _ _ _ (integralOperationsRoos_square a)]
@@ -490,7 +490,7 @@ private theorem augmentation_comparison
     (AugmentedRoos.cone (moduleTower l E T) (moduleAugmentation l E T) P)
     (productAugmentation l E T none P) hδ (by
       intro n
-      simpa only [productAugmentation, Pi.lift_π] using ha n)
+      simpa only [productAugmentation, Pi.lift_comp_π] using ha n)
 
 end QuotientRoosProof
 

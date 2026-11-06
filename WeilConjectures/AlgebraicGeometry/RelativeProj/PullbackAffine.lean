@@ -79,8 +79,7 @@ noncomputable def pullbackOfIsAffine : X'.GradedAlgebraData where
   gradedAlgebra U' := GradedAlgebra.baseChange (S := PullbackRing g U') (A.grading (topAffine X))
   res {U' V'} h := GradedRingHom.baseChangeMap (A.grading (topAffine X)) (pullbackRingRes g h)
   res_id U' x := by
-    induction x using TensorProduct.induction_on with
-    | zero => exact map_zero _
+    induction x using TensorProduct.inductionOn with
     | tmul t a =>
       change pullbackRingRes g le_rfl t ⊗ₜ a = t ⊗ₜ a
       rw [pullbackRingRes_apply, show homOfLE (X := X'.Opens) (le_refl U'.1) = 𝟙 _ from
@@ -88,8 +87,7 @@ noncomputable def pullbackOfIsAffine : X'.GradedAlgebraData where
       rfl
     | add x y hx hy => exact (map_add _ _ _).trans (congrArg₂ _ hx hy)
   res_res {U' V' W'} h₁ h₂ x := by
-    induction x using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction x using TensorProduct.inductionOn with
     | tmul t a =>
       change pullbackRingRes g h₁ (pullbackRingRes g h₂ t) ⊗ₜ a =
         pullbackRingRes g (h₁.trans h₂) t ⊗ₜ a

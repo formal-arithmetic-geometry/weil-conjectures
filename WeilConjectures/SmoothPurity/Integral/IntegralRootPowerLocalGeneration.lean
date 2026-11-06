@@ -308,8 +308,7 @@ private theorem first_rootLocalSpan (U : X.ProEtᵒᵖ)
     infer_instance
   apply rootLocalSpan_descent l E X 1 P.presheaf φ _ U x
   intro V t
-  induction t using TensorProduct.induction_on with
-  | zero => simpa only [map_zero] using (rootLocalSpan l E X 1 V).zero_mem
+  induction t using TensorProduct.inductionOn with
   | add a b ha hb => simpa only [map_add] using Submodule.add_mem _ ha hb
   | tmul b z =>
     apply span_mem_rootLocalSpan
@@ -334,8 +333,7 @@ private theorem rootGen_locally_span (d : ℕ) (U : X.ProEtᵒᵖ)
       infer_instance
     apply rootLocalSpan_descent l E X (d + 2) P.presheaf φ _ U x
     intro V t
-    induction t using TensorProduct.induction_on with
-    | zero => simpa only [map_zero] using (rootLocalSpan l E X (d + 2) V).zero_mem
+    induction t using TensorProduct.inductionOn with
     | add a b ha hb => simpa only [map_add] using Submodule.add_mem _ ha hb
     | tmul a b =>
       apply rootTensor_mem_localSpan l E X d V a b (hd V a)

@@ -158,7 +158,7 @@ private lemma productModelIso_transition (I : CochainComplex (ℕᵒᵖ ⥤ A) �
   simp only [Category.assoc, productModelIso_π, ← Functor.map_comp, ht,
     Functor.map_sub]
   simp only [towerTransitionEndomorphism, towerProductShift, Preadditive.sub_comp,
-    Category.id_comp, Preadditive.comp_sub, Pi.lift_π, productModelIso_π]
+    Category.id_comp, Preadditive.comp_sub, Pi.lift_comp_π, productModelIso_π]
   rw [Functor.map_comp, ← Category.assoc, productModelIso_π]
 
 end RoosModels
@@ -250,7 +250,7 @@ private def coefficientRoosTriangle
     simp only [p, d, e, coefficientModelIso, Iso.trans_hom, Functor.mapIso_hom,
       Iso.app_hom, Category.assoc, productModelIso_π]
     simp only [InjectiveTowerRoos.projection, ← Functor.map_comp]
-    rw [Pi.lift_π, CategoryTheory.limitModel_hom_π]
+    rw [Pi.lift_comp_π, CategoryTheory.limitModel_hom_π]
 
 private lemma coefficientRoosTriangle_shift
     [HasCountableProducts (DerivedCategory (scalarReductionSource l E W))]

@@ -180,7 +180,7 @@ theorem isUniversalHomeomorphism_of_universallyInjective_comp {W : Scheme.{u}} [
     rw [Set.image_univ, f.denseRange.closure_range]
     exact genericPoint_spec X
   refine f.isUniversalHomeomorphism_of_isPurelyInseparable hX hf ?_
-  have htfae := (tfae_universallyInjective (t ≫ f)).out 0 2
+  have htfae := (tfae_universallyInjective (t ≫ f)).out 1 3
   have hres := (htfae.mp ‹_›).2 (genericPoint W)
   rw [Scheme.residueFieldMap_comp] at hres
   rw [← genericPoint_eq_of_isOpenImmersion t]

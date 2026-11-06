@@ -307,8 +307,8 @@ private lemma ordinaryRoosUnit_comparison (P : Cx l E T none) :
     simp only [← Category.assoc, ← Functor.map_comp, ordinaryRoosUnit_fst]
     apply Pi.hom_ext
     intro n
-    simp only [Category.assoc, productAugmentation, Pi.lift_π]
-    erw [Pi.map_π, piComparison_comp_π_assoc, ← Functor.map_comp_assoc, Pi.lift_π]
+    simp only [Category.assoc, productAugmentation, Pi.lift_comp_π]
+    erw [Pi.map_π, piComparison_comp_π_assoc, ← Functor.map_comp_assoc, Pi.lift_comp_π]
     exact haug P n
   · intro i
     simp only [HomologicalComplex.comp_f, Category.assoc, hsnd]

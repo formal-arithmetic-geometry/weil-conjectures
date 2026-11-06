@@ -175,7 +175,7 @@ theorem bounded_graded_map_compatibility
         by_cases hmn : m = n
         · subst m
           dsimp only [δ']
-          rw [dif_pos rfl]
+          rw [dite_eq_left rfl]
           have hp : B'.map ψ ≫ e.inv.app (G (n + 1)) =
               e.inv.app (G n) ≫ ψlim := by
             have h := congrArg (fun z ↦ e.inv.app (G n) ≫ z ≫
@@ -188,7 +188,7 @@ theorem bounded_graded_map_compatibility
           have h := congrArg (fun z ↦ z ≫ (t (n + 1)).hom) hp
           simpa [ψlim, Category.assoc] using h
         · dsimp only [δ']
-          rw [dif_neg hmn]
+          rw [dite_eq_right hmn]
           have hm' : m ∈ s := (Finset.mem_insert.mp hm).resolve_left hmn
           have he := e.inv.naturality (δ m)
           change B'.map (T.map (δ m)) ≫ e.inv.app (G (m + 1)) =

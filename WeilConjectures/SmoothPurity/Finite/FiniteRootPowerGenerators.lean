@@ -369,10 +369,7 @@ private theorem first_rootLocalSpan (U : X.ProEtᵒᵖ)
     infer_instance
   apply rootLocalSpan_descent l E X n 1 P.presheaf φ hφ _ U x
   intro V t
-  induction t using TensorProduct.induction_on with
-  | zero =>
-    exact (congrArg (fun z ↦ z ∈ rootLocalSpan l E X n 1 V)
-      (φ.app V).hom.map_zero).mpr (rootLocalSpan l E X n 1 V).zero_mem
+  induction t using TensorProduct.inductionOn with
   | add a b ha hb =>
     exact (congrArg (fun z ↦ z ∈ rootLocalSpan l E X n 1 V)
       ((φ.app V).hom.map_add a b)).mpr (Submodule.add_mem _ ha hb)
@@ -406,14 +403,7 @@ private theorem first_rootLocalSpan (U : X.ProEtᵒᵖ)
           (congrArg F hs.symm)
     apply (congrArg (fun z ↦ z ∈ rootLocalSpan l E X n 1 (op W)) hres).mpr
     clear hres hs
-    induction s using TensorProduct.induction_on with
-    | zero =>
-      have hz : F (η.app (op W) 0) = 0 :=
-        (congrArg F (η.app (op W)).hom.map_zero).trans
-          (scalarExtensionSection_zero (purTwistIntegralQuotient X l E n)
-            (purTwistIntegralOne X l E) (op W) c)
-      exact (congrArg (fun z ↦ z ∈ rootLocalSpan l E X n 1 (op W)) hz).mpr
-        (rootLocalSpan l E X n 1 (op W)).zero_mem
+    induction s using TensorProduct.inductionOn with
     | add b b' hb hb' =>
       have ha : F (η.app (op W) (b + b')) =
           F (η.app (op W) b) + F (η.app (op W) b') :=

@@ -81,7 +81,7 @@ private theorem complement_pairing (A : Type u) [CommRing A] (n : ℕ)
     simpa [b, Function.comp_def, Fin.succAboveOrderEmb] using
       exteriorPower.pairingDual_apply_apply_eq_one b b.coord
         (by intro i; simp) (by intro i j h; simp [h]) n i.succAboveOrderEmb
-  · rw [if_neg hij]
+  · rw [ite_eq_right hij]
     have he : i.succAboveOrderEmb ≠ j.succAboveOrderEmb := by
       intro h
       apply hij

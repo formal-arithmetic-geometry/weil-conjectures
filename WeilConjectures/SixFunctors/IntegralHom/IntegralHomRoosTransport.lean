@@ -42,14 +42,14 @@ private theorem homotopyLimit_of_roos
       Pi.lift (fun n : ℕ ↦ c.π.app (op n)) := by
     apply Pi.hom_ext
     intro n
-    exact (Fan.IsLimit.fac hP _ n).trans (Pi.lift_π (fun n : ℕ ↦ c.π.app (op n)) n).symm
+    exact (Fan.IsLimit.fac hP _ n).trans (Pi.lift_comp_π (fun n : ℕ ↦ c.π.app (op n)) n).symm
   have hshift : Pretriangulated.towerShift hP =
       towerProductShift (fun n : ℕ ↦ F.map (homOfLE n.le_succ).op) := by
     apply Pi.hom_ext
     intro n
     change Fan.IsLimit.lift hP _ ≫ (Fan.mk _ (Pi.π _)).proj n = _
     rw [Fan.IsLimit.fac]
-    exact (Pi.lift_π (fun n : ℕ ↦ Pi.π (fun n : ℕ ↦ F.obj (op n)) (n + 1) ≫
+    exact (Pi.lift_comp_π (fun n : ℕ ↦ Pi.π (fun n : ℕ ↦ F.obj (op n)) (n + 1) ≫
       F.map (homOfLE n.le_succ).op) n).symm
   refine ⟨Fan.mk _ (Pi.π _), hP, δ, ?_⟩
   rw [hfirst, hshift]
@@ -70,13 +70,13 @@ private theorem roos_of_homotopyLimit
       Pi.lift (fun n : ℕ ↦ c.π.app (op n)) := by
     apply Pi.hom_ext
     intro n
-    rw [Category.assoc, hψ, Fan.IsLimit.fac, Pi.lift_π]
+    rw [Category.assoc, hψ, Fan.IsLimit.fac, Pi.lift_comp_π]
   have ht : Pretriangulated.towerShift hP ≫ ψ.hom =
       ψ.hom ≫ towerProductShift (fun n : ℕ ↦ F.map (homOfLE n.le_succ).op) := by
     apply Pi.hom_ext
     intro n
     rw [Category.assoc, hψ, Pretriangulated.towerShift, Fan.IsLimit.fac]
-    simp only [Category.assoc, towerProductShift, Pi.lift_π]
+    simp only [Category.assoc, towerProductShift, Pi.lift_comp_π]
     rw [← Category.assoc, hψ]
   have htransition : (𝟙 P.pt - Pretriangulated.towerShift hP) ≫ ψ.hom =
       ψ.hom ≫ towerTransitionEndomorphism (fun n : ℕ ↦ F.map (homOfLE n.le_succ).op) := by

@@ -165,7 +165,7 @@ private theorem chain_projection {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
   erw [he]
   simp only [WeilConjectures.chainUnitCandidate,
     CochainComplex.mappingCocone.lift_fst_assoc, WeilConjectures.pullbackUnitProduct,
-    Pi.lift_π_assoc]
+    Pi.lift_comp_π_assoc]
   have hp := ConstantPullbackUnitQuasiIsomorphism.stalkPullbackLevelRegularIso_projection
     l E f n
   apply (cancel_mono ((HomologicalComplex.singleMapHomologicalComplex

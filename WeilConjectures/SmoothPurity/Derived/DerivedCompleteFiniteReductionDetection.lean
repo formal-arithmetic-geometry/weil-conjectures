@@ -44,12 +44,12 @@ private theorem reduction_cone_isHomotopyLimit
     apply Pi.hom_ext
     intro n
     exact (Fan.IsLimit.fac _ _ n).trans
-      (Pi.lift_π (fun n ↦ c.π.app (Opposite.op n)) n).symm
+      (Pi.lift_comp_π (fun n ↦ c.π.app (Opposite.op n)) n).symm
   have h₂ : towerShift (F := F) (productIsProduct (fun n ↦ F.obj (Opposite.op n))) =
       towerProductShift (fun n ↦ F.map (homOfLE n.le_succ).op) := by
     apply Pi.hom_ext
     intro n
-    simp only [towerShift, towerProductShift, Pi.lift_π]
+    simp only [towerShift, towerProductShift, Pi.lift_comp_π]
     exact Fan.IsLimit.fac _ _ n
   rw [h₁, h₂]
   exact h

@@ -83,10 +83,7 @@ private theorem tensorPullback_affine_sections_bijective_of_chart
   have h₀ := ConcreteCategory.bijective_of_isIso ((k₀.hom.app G).app U.1)
   have eqc (t : Γ(G, V.1) ⊗[Γ(Y, V.1)] Γ(X, U.1)) :
       ((k₀.hom.app G).app U.1) (c t) = eU (e₂ (e₁ (e₀' (e₀ t)))) := by
-    induction t using TensorProduct.induction_on with
-    | zero =>
-      rw [c.map_zero, (((k₀.hom.app G).app U.1).hom).map_zero,
-        e₀.map_zero, e₀'.map_zero, e₁.map_zero, e₂.map_zero, eU.map_zero]
+    induction t using TensorProduct.inductionOn with
     | tmul s b =>
       rw [hc, Hom.app_smul]
       change b • ((k₀.hom.app G).app U.1) _ =
@@ -218,8 +215,7 @@ theorem exists_locallyQuasicoherent_affine_pullback_sections
       map_add' := by intros; simp only [map_add]
       map_smul' := by
         intro b x
-        induction x using TensorProduct.induction_on with
-        | zero => simp
+        induction x using TensorProduct.inductionOn with
         | tmul d s =>
           simp only [TensorProduct.smul_tmul', TensorProduct.comm_tmul, hc,
             smul_eq_mul, mul_smul, RingHom.id_apply]

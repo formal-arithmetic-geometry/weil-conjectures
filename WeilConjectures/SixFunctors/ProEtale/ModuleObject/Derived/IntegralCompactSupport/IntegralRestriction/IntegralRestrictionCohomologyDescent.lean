@@ -272,7 +272,7 @@ private theorem cohomology_local_stratified
     ⟨inferInstance, inferInstance⟩
   have hi' : IsFiniteConstantStratified Λ U.toScheme
       ((DerivedCategory.homologyFunctor _ n).obj ((pull Λ U.ι).obj M)) := by
-    simpa only [IsConstantModelConstructible, if_pos hqc] using hi
+    simpa only [IsConstantModelConstructible, ite_eq_left hqc] using hi
   exact finiteStrat_of_iso Λ
     (((DerivedCategory.homologyFunctor _ n).mapIso he) ≪≫ eh.symm) hi'
 
@@ -383,7 +383,7 @@ theorem cohomology_finiteOpenDescent
       ((DerivedCategory.homologyFunctor _ n).obj M) := by
   intro n
   have hqc : CompactSpace X ∧ QuasiSeparatedSpace X := ⟨inferInstance, inferInstance⟩
-  simp only [IsConstantModelConstructible, if_pos hqc]
+  simp only [IsConstantModelConstructible, ite_eq_left hqc]
   exact finiteStrat_finite_index Λ X I U hcover _
     (fun a ↦ cohomology_local_stratified Λ X (U a) M n (hM a))
 

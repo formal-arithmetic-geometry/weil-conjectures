@@ -101,7 +101,7 @@ theorem isIso_lift_homology_rightDerivedLowerStar_of_mittagLeffler
   let t : (∏ᶜ fun n : ℕ ↦ F.obj (op n)) ⟶ ∏ᶜ fun n : ℕ ↦ F.obj (op n) :=
     Pi.lift fun n ↦ Pi.π _ (n + 1) ≫ F.map (homOfLE n.le_succ).op
   have ht (n : ℕ) : t ≫ Pi.π _ n = Pi.π _ (n + 1) ≫ F.map (homOfLE n.le_succ).op :=
-    Pi.lift_π _ _
+    Pi.lift_comp_π _ _
   exact isIso_lift_homologyFunctor_mapCone_of_isHomotopyLimit
     (isHomotopyLimit_rightDerivedLowerStar_mapCone _ f (isHomotopyLimit_mapCone_Q_of_epi hT hc))
     i j hij (productIsProduct _) t ht
@@ -135,7 +135,7 @@ theorem isIso_lift_homology_rightDerivedLowerStar_of_forall_mittagLeffler
   let t : (∏ᶜ fun n : ℕ ↦ F.obj (op n)) ⟶ ∏ᶜ fun n : ℕ ↦ F.obj (op n) :=
     Pi.lift fun n ↦ Pi.π _ (n + 1) ≫ F.map (homOfLE n.le_succ).op
   have ht (n : ℕ) : t ≫ Pi.π _ n = Pi.π _ (n + 1) ≫ F.map (homOfLE n.le_succ).op :=
-    Pi.lift_π _ _
+    Pi.lift_comp_π _ _
   exact isIso_lift_homologyFunctor_mapCone_of_isHomotopyLimit
     (isHomotopyLimit_rightDerivedLowerStar_mapCone _ f (isHomotopyLimit_mapCone_Q_of_epi hT hc))
     i j hij (productIsProduct _) t ht

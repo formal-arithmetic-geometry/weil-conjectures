@@ -124,8 +124,7 @@ theorem diagonalConormal_affine_ideal_class_q (f : X ⟶ S)
         Γ(X, U.1) ⊗[Γ(S, V.1)] Γ(X, U.1) →ₐ[Γ(S, V.1)] Γ(X, U.1)).toRingHom := by
     apply RingHom.ext
     intro t
-    induction t using TensorProduct.induction_on with
-    | zero => simp
+    induction t using TensorProduct.inductionOn with
     | add x y hx hy => simp only [map_add, hx, hy]
     | tmul a b =>
       change (pullback.diagonal f).appLE W U.1 hδ (r (a ⊗ₜ[Γ(S, V.1)] b)) = a * b

@@ -106,12 +106,10 @@ theorem balancedTensor_originalSections_hom_ext (α : R ⟶ B)
   apply (a.homEquiv (M.val ⊗ E).presheaf ((toSheaf (𝓡 R)).obj H)).injective
   rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
   ext W t
-  induction t using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction t using TensorProduct.inductionOn with
   | add t s ht hs => simp only [map_add, ht, hs]
   | tmul m z =>
-    induction z using TensorProduct.induction_on with
-    | zero => simp only [TensorProduct.tmul_zero, map_zero]
+    induction z using TensorProduct.inductionOn with
     | add x y hx hy => simp only [TensorProduct.tmul_add, map_add, hx, hy]
     | tmul b n =>
       have hn := adj.unit.naturality (M.val ◁ η)

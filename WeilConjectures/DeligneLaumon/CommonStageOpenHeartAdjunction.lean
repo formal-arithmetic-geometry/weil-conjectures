@@ -76,11 +76,9 @@ private def liftLinear (F : C ⥤ D) [F.Additive] [F.Linear R] :
       composition R D p _ _ _
         ((F.mapLinearMap R).baseChange (Localization.Away p) g)
         ((F.mapLinearMap R).baseChange (Localization.Away p) f)
-    induction g using TensorProduct.induction_on with
-    | zero => simp only [map_zero, LinearMap.zero_apply]
+    induction g using TensorProduct.inductionOn with
     | tmul b g =>
-      induction f using TensorProduct.induction_on with
-      | zero => simp only [map_zero]
+      induction f using TensorProduct.inductionOn with
       | tmul a f =>
         simp only [composition_tmul, LinearMap.baseChange_tmul,
           CategoryTheory.Functor.coe_mapLinearMap]
@@ -140,8 +138,7 @@ private def liftAdjunction (F : C ⥤ D) [F.Additive] [F.Linear R]
             ((G.mapLinearMap R).baseChange (Localization.Away p)
               ((F.mapLinearMap R).baseChange (Localization.Away p) f))
             (1 ⊗ₜ[R] adj.unit.app X.obj)
-        induction f using TensorProduct.induction_on with
-        | zero => simp only [map_zero, LinearMap.zero_apply]
+        induction f using TensorProduct.inductionOn with
         | tmul a f =>
           simp only [LinearMap.baseChange_tmul, CategoryTheory.Functor.coe_mapLinearMap,
             composition_tmul, one_mul, mul_one]
@@ -156,8 +153,7 @@ private def liftAdjunction (F : C ⥤ D) [F.Additive] [F.Linear R]
             ((F.mapLinearMap R).baseChange (Localization.Away p)
               ((G.mapLinearMap R).baseChange (Localization.Away p) f)) =
           composition R D p _ _ _ f (1 ⊗ₜ[R] adj.counit.app X.obj)
-        induction f using TensorProduct.induction_on with
-        | zero => simp only [map_zero, LinearMap.zero_apply]
+        induction f using TensorProduct.inductionOn with
         | tmul a f =>
           simp only [LinearMap.baseChange_tmul, CategoryTheory.Functor.coe_mapLinearMap,
             composition_tmul, one_mul, mul_one]

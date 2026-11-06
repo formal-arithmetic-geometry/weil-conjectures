@@ -134,7 +134,7 @@ theorem twist_degree_detection
         rw [hzero, ZeroMemClass.coe_zero, map_zero]
     refine ⟨r * b, (DirectSum.decompose 𝒜 a i : A), s, ?_, hsdeg, ?_⟩
     · change if 0 ≤ k + (r * b : ℕ) then _ else _
-      rw [if_pos hk]
+      rw [ite_eq_left hk]
       exact (DirectSum.decompose 𝒜 a i).prop
     · rw [← has]
       have heq : IsLocalization.mk' S (DirectSum.decompose 𝒜 a i : A) s =
@@ -158,7 +158,7 @@ theorem twist_degree_detection
         ((IsLocalization.map_eq_zero_iff (Submonoid.powers f) S a).mp ha)
     refine ⟨r * b, 0, s, ?_, hsdeg, ?_⟩
     · change if 0 ≤ k + (r * b : ℕ) then _ else _
-      rw [if_neg hk]
+      rw [ite_eq_right hk]
     · rw [LocalizedModule.zero_mk, hz0]
 
 end AlgebraicGeometry.Proj

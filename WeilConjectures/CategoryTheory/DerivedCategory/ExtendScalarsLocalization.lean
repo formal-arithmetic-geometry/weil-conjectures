@@ -65,8 +65,7 @@ lemma exists_eq_smul_one_tmul_one (v : (extendScalars.{u + 1, u + 1, u + 1} f).o
     ∃ c : S, v = c • ((1 : S) ⊗ₜ[R, f] (1 : R)) := by
   let : Module R S := Module.compHom S f
   change TensorProduct R S R at v
-  induction v using TensorProduct.induction_on with
-  | zero => exact ⟨0, by rw [zero_smul]⟩
+  induction v using TensorProduct.inductionOn with
   | tmul s r =>
     refine ⟨s * f r, ?_⟩
     rw [TensorProduct.smul_tmul', smul_eq_mul, mul_one]

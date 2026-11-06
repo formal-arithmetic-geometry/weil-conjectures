@@ -92,7 +92,7 @@ private theorem solutionSet_step
   have h := comp_distTriang_mor_zero₁₂ (Triangle.mk κ a δ) hT
   change κ ≫ a = 0 at h
   have hi := congrArg (fun z ↦ Sigma.ι F ⟨j, f, hf⟩ ≫ z) h
-  simpa only [κ, Sigma.ι_desc_assoc, comp_zero] using hi
+  simpa only [κ, Sigma.ι_comp_desc_assoc, comp_zero] using hi
 
 private theorem solutionSet_approximation
     (hshift : ∀ (j : J) (n : ℤ), ∃ k, Nonempty (S k ≅ (S j)⟦n⟧))

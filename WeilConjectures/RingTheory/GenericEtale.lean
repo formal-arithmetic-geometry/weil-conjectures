@@ -80,7 +80,7 @@ theorem exists_etale_isLocalizationAway_of_isIntegralClosure :
       (show (⟨⊥, Ideal.isPrime_bot⟩ : PrimeSpectrum S) ∈ etaleLocus R S from
         ‹IsEtaleAt R (⊥ : Ideal S)›) isOpen_etaleLocus
   have hf0 : f ≠ 0 := by simpa using hf
-  have hcomap := Ideal.comap_ne_bot_of_integral_mem hf0 (Ideal.mem_span_singleton_self f)
+  have hcomap := Ideal.under_ne_bot_of_integral_mem hf0 (Ideal.mem_span_singleton_self f)
     (Algebra.IsIntegral.isIntegral (R := R) f)
   obtain ⟨π, hπ, hπ0⟩ := Submodule.exists_mem_ne_zero_of_ne_bot hcomap
   obtain ⟨g, hg⟩ := Ideal.mem_span_singleton'.mp (Ideal.mem_comap.mp hπ)

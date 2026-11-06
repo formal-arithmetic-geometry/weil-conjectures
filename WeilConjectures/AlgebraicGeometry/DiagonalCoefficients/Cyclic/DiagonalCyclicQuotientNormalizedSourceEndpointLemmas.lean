@@ -239,7 +239,7 @@ private theorem cyclic_generator_epi (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (
     erw [AddCommGrpCat.epi_iff_surjective]
     intro x
     obtain ⟨a, ha⟩ := ZMod.intCast_surjective x.down
-    exact ⟨ULift.up a, ULift.ext _ _ ha⟩
+    exact ⟨ULift.up a, ULift.ext ha⟩
   have he : constantGenerator A X =
       (constantSheaf J Ab.{u + 1}).map f ≫ (finiteConstantAbComparison A X).inv := by
     apply Sheaf.hom_ext

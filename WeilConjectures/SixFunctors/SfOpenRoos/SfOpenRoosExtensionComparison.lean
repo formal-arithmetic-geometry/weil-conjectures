@@ -69,7 +69,7 @@ public import WeilConjectures.CategoryTheory.StrictRoosNormalization
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
 public import Mathlib.CategoryTheory.Limits.Constructions.LimitsOfProductsAndEqualizers
-public import Mathlib.Logic.Denumerable
+public import Mathlib.Basic.Denumerable
 public import WeilConjectures.AlgebraicGeometry.ExactProductFunctorRoosChainMaps
 public import WeilConjectures.AlgebraicGeometry.ExactProductFunctorRoosDescent
 public import WeilConjectures.AlgebraicGeometry.ExactProductFunctorRoosResolution
@@ -721,7 +721,7 @@ private theorem augmentation_resolution
       congr 1
       apply Pi.hom_ext
       intro n
-      simp only [Category.assoc, Pi.lift_π]
+      simp only [Category.assoc, Pi.lift_comp_π]
       exact (roosAugmentLimit_π γ hγ n).symm
     · simp only [Category.assoc, biprod.lift_snd, comp_zero]
   have : IsIso (η.app I) := limit_unit_iso L η I

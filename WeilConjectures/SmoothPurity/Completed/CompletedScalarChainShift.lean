@@ -177,8 +177,7 @@ private theorem scalarHom_ext (M : integralTowerModules l E Y)
   apply Sheaf.hom_ext
   apply CategoryTheory.sheafify_hom_ext _ _ _ N.isSheaf
   ext U z
-  induction z using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction z using TensorProduct.inductionOn with
   | tmul t x => exact h U t x
   | add z w hz hw => simpa only [map_add] using congrArg₂ (· + ·) hz hw
 attribute [local irreducible] completedOrdinaryScalarExtension completedScalarTensorSection

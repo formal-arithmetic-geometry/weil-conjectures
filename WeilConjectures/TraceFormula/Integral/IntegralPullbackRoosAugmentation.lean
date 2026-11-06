@@ -194,7 +194,7 @@ theorem inverseImageRoosComparisonComplex_eq_limitToRoos
         simpa only [Category.assoc] using
           congrArg (fun z ↦ a ≫ z ≫ q.hom.app (op n)) (hi.1 n)
       _ = _ := by
-        rw [inverseImageReductionProduct, Pi.lift_π]
+        rw [inverseImageReductionProduct, Pi.lift_comp_π]
         ext i U x
         let V := (proEtaleIsoPostcompose h).obj U.unop
         let t := unrestrictedIntegralTensorSection l E W n (P.X i) (op V) 1 x

@@ -108,7 +108,7 @@ theorem mem_range_fractionRingMap_of_isSeparable {π : R} (hπ : Irreducible π)
     rw [hβ]
     rfl
   -- the ramification index is one
-  have hu0 : (β u).order = 0 := PowerSeries.order_zero_of_unit (u.isUnit.map β)
+  have hu0 : (β u).order = 0 := PowerSeries.order_zero_of_isUnit (u.isUnit.map β)
   have hϖ0 : (β ϖ).order ≠ ⊤ := by
     rw [Ne, PowerSeries.order_eq_top, ← map_zero β]
     exact fun h ↦ hϖ.ne_zero (hβinj h)

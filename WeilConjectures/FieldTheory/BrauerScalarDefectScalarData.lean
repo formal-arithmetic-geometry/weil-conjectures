@@ -94,8 +94,7 @@ theorem exists_brauerScalarDefect_scalar_data (K : Type u) [Field K] (A : CSA.{u
         _ = _ := hdesc (g * h) a
     have hall (T : SeparableClosure K ⊗[K] A) :
         (D g h).val * e T = e T * (D g h).val := by
-      induction T using TensorProduct.induction_on with
-      | zero => simp
+      induction T using TensorProduct.inductionOn with
       | tmul s a =>
           have ht : s ⊗ₜ[K] a = s • (1 ⊗ₜ[K] a) := by
             simp [TensorProduct.smul_tmul']

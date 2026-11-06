@@ -134,7 +134,7 @@ lemma exists_padicIntegersSheafMapOfLE_comp_eq_smul {E F : IntermediateField ℚ
   obtain ⟨c, ρ, hρ, hρx⟩ := exists_continuous_retraction h hsurj
   refine ⟨c, continuousMapAbSheafAddMap X ρ hρ, ?_⟩
   ext U f
-  refine ULift.ext _ _ (ContinuousMap.ext fun x ↦ ?_)
+  refine ULift.ext (ContinuousMap.ext fun x ↦ ?_)
   change ρ (integersInclusion l h (f.down x)) = _
   rw [hρx]
   rfl

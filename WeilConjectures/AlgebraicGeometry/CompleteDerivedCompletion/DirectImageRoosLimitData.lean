@@ -285,7 +285,7 @@ theorem roos_triangle (T : Scheme.{u})
       Pi.lift (fun n : ℕ ↦ DerivedCategory.Q.map (c.π.app (Opposite.op n))) ≫ ep.hom := by
     apply Pi.hom_ext
     intro n
-    simp only [ep, Category.assoc, Pi.lift_π, Pi.mapIso_hom_π, Pi.lift_π_assoc]
+    simp only [ep, Category.assoc, Pi.lift_comp_π, Pi.mapIso_hom_π, Pi.lift_comp_π_assoc]
     dsimp only [eL, en, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom, asIso_hom,
       Iso.app_inv]
     erw [Category.assoc, (levelProjection l E T n).naturality]

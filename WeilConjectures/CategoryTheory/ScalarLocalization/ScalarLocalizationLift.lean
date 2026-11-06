@@ -39,8 +39,7 @@ with first factor one after multiplying by a power of `p`. -/
 theorem exists_pow_smul_eq_one_tmul {M : Type w} [AddCommGroup M] [Module R M]
     (z : Localization.Away p ⊗[R] M) :
     ∃ (n : ℕ) (m : M), p ^ n • z = (1 : Localization.Away p) ⊗ₜ[R] m := by
-  induction z using TensorProduct.induction_on with
-  | zero => exact ⟨0, 0, by simp⟩
+  induction z using TensorProduct.inductionOn with
   | tmul a m =>
     obtain ⟨⟨s, t⟩, rfl⟩ := IsLocalization.mk'_surjective (Submonoid.powers p) a
     obtain ⟨n, hn⟩ := t.2

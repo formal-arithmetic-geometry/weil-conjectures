@@ -77,7 +77,10 @@ import Mathlib.Topology.ContinuousMap.Algebra
 import Mathlib.Analysis.Normed.Field.WithAbs
 import Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.Defs
 import Mathlib.GroupTheory.Coset.Defs
-import Mathlib.Topology.Algebra.Module.Equiv
+import Mathlib.Topology.Algebra.Module.Equiv.Basic
+import Mathlib.Topology.Algebra.Module.Equiv.Pi
+import Mathlib.Topology.Algebra.Module.Equiv.Prod
+import Mathlib.Topology.Algebra.Module.Equiv.Submodule
 import Mathlib.Topology.CompactOpen
 import Mathlib.LinearAlgebra.Basis.Defs
 import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal

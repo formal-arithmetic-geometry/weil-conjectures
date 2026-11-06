@@ -148,7 +148,7 @@ lemma exists_isAffineOpen_surjective_etale {Y T : Scheme.{u}} (f : T ⟶ Y) [Eta
   let q : ∐ g ⟶ T := Sigma.desc fun i ↦ ((i.1.1 : T.affineOpens) : T.Opens).ι
   have : Etale q := IsZariskiLocalAtSource.sigmaDesc fun i ↦ inferInstance
   have hq (i : s) (a : g i) : q (Sigma.ι g i a) = a.1 := by
-    rw [← Scheme.Hom.comp_apply, Sigma.ι_desc]
+    rw [← Scheme.Hom.comp_apply, Sigma.ι_comp_desc]
     rfl
   have hr : Set.range (q ≫ f) ⊆ Set.range (Scheme.Opens.ι (X := Y) U) := by
     rintro _ ⟨w, rfl⟩

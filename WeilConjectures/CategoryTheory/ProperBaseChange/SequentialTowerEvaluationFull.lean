@@ -111,7 +111,7 @@ private theorem injective_tower_transition_split
       apply Sigma.hom_ext
       intro g
       simp only [i, r, colimit.ι_desc_assoc, Cofan.mk_ι_app,
-        dif_pos (show Nonempty (op n ⟶ m) from ⟨g⟩), colimit.ι_desc]
+        dite_eq_left (show Nonempty (op n ⟶ m) from ⟨g⟩), colimit.ι_desc]
       exact (congrArg (Sigma.ι (fun _ : op n ⟶ m ↦ M))
         (Subsingleton.elim _ g)).trans (Category.comp_id _).symm
     exact (IsSplitMono.mk' ⟨r, hr⟩).mono

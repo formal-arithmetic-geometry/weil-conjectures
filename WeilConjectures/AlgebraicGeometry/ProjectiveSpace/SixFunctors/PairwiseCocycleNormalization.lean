@@ -303,13 +303,13 @@ theorem exists_standardUnitCocycle_normalization_of_pairwise_laurent
   have ha (i j : I) (hij : i ≠ j) : a i * c i j = a j := by
     by_cases hib : i = b
     · subst i
-      simp only [a, if_pos rfl, if_neg hij.symm, one_mul]
+      simp only [a, ite_eq_left rfl, ite_eq_right hij.symm, one_mul]
       exact eq_inv_of_mul_eq_one_left (hinv b j hij)
     · by_cases hjb : j = b
       · subst j
         simp [a, hib]
       · have hc := (htriple i j b hij hib hjb).2.2
-        simp only [a, if_neg hib, if_neg hjb]
+        simp only [a, ite_eq_right hib, ite_eq_right hjb]
         apply mul_right_cancel (b := c j b)
         rw [mul_assoc, hc, inv_mul_cancel, inv_mul_cancel]
   refine ⟨e b q, fun i ↦ standardOpenConstUnit k r i (a i), ?_⟩

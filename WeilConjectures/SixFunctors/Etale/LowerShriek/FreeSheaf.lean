@@ -45,7 +45,7 @@ noncomputable def freePresheafTerminalIso (W : Scheme.{u}) :
     MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale W
   letI (V : W.Etaleᵒᵖ) : Unique (ULift.{u + 1} (V.unop ⟶ Scheme.Etale.mk (𝟙 W))) :=
     { default := ULift.up (hT.from V.unop)
-      uniq := fun _ ↦ ULift.ext _ _ (hT.hom_ext _ _) }
+      uniq := fun _ ↦ ULift.ext (hT.hom_ext _ _) }
   Functor.isoWhiskerRight (NatIso.ofComponents (fun _ ↦ Equiv.toIso (Equiv.ofUnique _ PUnit))
       (fun _ ↦ rfl) : uliftYoneda.{u + 1}.obj (Scheme.Etale.mk (𝟙 W)) ≅
         (Functor.const W.Etaleᵒᵖ).obj PUnit) (ModuleCat.free Λ) ≪≫

@@ -74,7 +74,7 @@ private theorem split_of_unit_minor
       ext i
       change bn.equivFun (bn.equivFun.symm a) (r i) = 0
       rw [bn.equivFun.apply_symm_apply]
-      exact dif_pos (Set.mem_range_self i)
+      exact dite_eq_left (Set.mem_range_self i)
     have hvy : v y = 0 := by
       change bm.equivFun.symm (B⁻¹.mulVec (t y)) = 0
       rw [hty, Matrix.mulVec_zero, map_zero]
@@ -83,7 +83,7 @@ private theorem split_of_unit_minor
     rw [hq, hvy, map_zero, map_zero]
     change bn.equivFun (bn.equivFun.symm a) j - 0 = z j
     rw [bn.equivFun.apply_symm_apply, sub_zero]
-    exact dif_neg j.2
+    exact dite_eq_right j.2
   let e := (Submodule.quotEquivOfEq _ _ hker).trans (q.quotKerEquivOfSurjective hsurj)
   have : Module.Finite S (C → S) := inferInstance
   have : Module.Free S (C → S) := inferInstance

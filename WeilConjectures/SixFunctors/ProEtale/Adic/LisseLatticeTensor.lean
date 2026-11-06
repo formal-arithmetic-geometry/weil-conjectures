@@ -73,7 +73,7 @@ noncomputable def tensorSections (U : X.ProEt) :
       rw [map_smul_of_semilinear F hι hιE ψ hψι]
       have h : (ULift.up (r • c) : ULift.{u + 1} (PadicAlgCl l)) =
           ULift.up c * ULift.up (algebraMap R (PadicAlgCl l) r) :=
-        ULift.ext _ _ ((Algebra.smul_def r c).trans (mul_comm _ _))
+        ULift.ext ((Algebra.smul_def r c).trans (mul_comm _ _))
       rw [h]
       exact mul_smul _ _ _
 
@@ -89,8 +89,7 @@ lemma exists_sum_of_surjective_tensorSections (U : X.ProEt)
     ∃ (n : ℕ) (a : Fin n → (adicConstantSheaf l X).obj.obj (op U)) (m : Fin n → C(U.left, M)),
       x = ∑ j, sectionAct F (a j) (ψ U (m j)) := by
   obtain ⟨τ, rfl⟩ := h x
-  induction τ using TensorProduct.induction_on with
-  | zero => exact ⟨0, Fin.elim0, Fin.elim0, by simp⟩
+  induction τ using TensorProduct.inductionOn with
   | tmul c m =>
     refine ⟨1, fun _ ↦ ULift.up (algebraMap _ _ c), fun _ ↦ m, ?_⟩
     rw [Fin.sum_univ_one, algebraMap_sectionAct F (ULift.up c)]
@@ -148,7 +147,7 @@ lemma exists_sectionAct_tensorSections (U : X.ProEt) [CompactSpace U.left]
     have ha' : a = ∑ k, (ULift.up (c k) : ULift.{u + 1} (PadicAlgCl l)) •
         (ULift.up (ringValuedFunction _ hι hιE (h k)) :
           (adicConstantSheaf l X).obj.obj (op U)) := by
-      refine ULift.ext _ _ (Subtype.ext (ContinuousMap.ext fun x ↦ ?_))
+      refine ULift.ext (Subtype.ext (ContinuousMap.ext fun x ↦ ?_))
       let ev : (adicConstantSheaf l X).obj.obj (op U) →+ PadicAlgCl l :=
         ⟨⟨fun b ↦ b.down.1 x, rfl⟩, fun _ _ ↦ rfl⟩
       change ev a = ev _
@@ -158,8 +157,7 @@ lemma exists_sectionAct_tensorSections (U : X.ProEt) [CompactSpace U.left]
     exact Finset.sum_congr rfl fun k _ ↦ smul_sectionAct F _ _ t
   refine ⟨AddMonoidHom.mk' (fun τ ↦ ∑ k, c k • B k τ) fun τ τ' ↦ by
     simp only [map_add, smul_add, Finset.sum_add_distrib], fun τ ↦ ?_, fun x τ ↦ ?_⟩
-  · induction τ using TensorProduct.induction_on with
-    | zero => simp [sectionAct_zero]
+  · induction τ using TensorProduct.inductionOn with
     | add τ τ' hτ hτ' => simp only [map_add, sectionAct_add, hτ, hτ']
     | tmul d m =>
       simp only [AddMonoidHom.mk'_apply, hB, TensorProduct.smul_tmul', map_sum,
@@ -169,11 +167,10 @@ lemma exists_sectionAct_tensorSections (U : X.ProEt) [CompactSpace U.left]
       rw [hψι]
       have e : (ULift.up (c k • d) : ULift.{u + 1} (PadicAlgCl l)) =
           ULift.up d * ULift.up (c k) :=
-        ULift.ext _ _ ((smul_eq_mul _ _).trans (mul_comm _ _))
+        ULift.ext ((smul_eq_mul _ _).trans (mul_comm _ _))
       rw [e]
       exact (mul_smul _ _ _).symm
-  · induction τ using TensorProduct.induction_on with
-    | zero => simp
+  · induction τ using TensorProduct.inductionOn with
     | add τ τ' hτ hτ' => simp only [map_add, hτ, hτ', smul_add]
     | tmul d m =>
       simp only [AddMonoidHom.mk'_apply, hB, map_sum, map_smul, tensorEval_tmul,

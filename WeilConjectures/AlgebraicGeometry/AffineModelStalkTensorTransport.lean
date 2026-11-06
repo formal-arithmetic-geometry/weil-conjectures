@@ -85,8 +85,7 @@ theorem exists_affine_model_stalk_tensor_transport
   have hn (t : R ⊗[A] M) :
       (γ G N eG).symm (d.hom.baseChange R t) =
         (c.stalkLinearMap (i z.1)).baseChange R ((γ F M eF).symm t) := by
-    induction t using TensorProduct.induction_on with
-    | zero => simp
+    induction t using TensorProduct.inductionOn with
     | add t₁ t₂ h₁ h₂ => simp [h₁, h₂]
     | tmul r m =>
       change r ⊗ₜ[S] (δ G N eG) (1 ⊗ₜ[A] d.hom m) =

@@ -65,15 +65,13 @@ private def avg (f : V →ₗ[R] W) (t : TensorProduct R S S)
   map_smul' s z := by
     have h₁ : avgRaw (S := S) f t (s • z) = avgRaw (S := S) f (((1 : S) ⊗ₜ[R] s) * t) z := by
       clear ht
-      induction t using TensorProduct.induction_on with
-      | zero => simp
+      induction t using TensorProduct.inductionOn with
       | tmul x y => simp only [Algebra.TensorProduct.tmul_mul_tmul, one_mul,
           avgRaw_tmul, mul_smul, smul_comm y s]
       | add t w ht hw => simp only [mul_add, avgRaw_add, LinearMap.add_apply, ht, hw]
     have h₂ : avgRaw (S := S) f ((s ⊗ₜ[R] (1 : S)) * t) z = s • avgRaw (S := S) f t z := by
       clear ht h₁
-      induction t using TensorProduct.induction_on with
-      | zero => simp
+      induction t using TensorProduct.inductionOn with
       | tmul x y => simp only [Algebra.TensorProduct.tmul_mul_tmul, one_mul,
           avgRaw_tmul, mul_smul]
       | add t w ht hw => simp only [mul_add, avgRaw_add, LinearMap.add_apply, smul_add, ht, hw]
@@ -87,8 +85,7 @@ private theorem avgRaw_naturality (f : V →ₗ[R] W) (f' : V' →ₗ[R] W')
     (a : V →ₗ[S] V') (b : W →ₗ[S] W') (h : ∀ z, b (f z) = f' (a z))
     (t : TensorProduct R S S) (z : V) :
     b (avgRaw (S := S) f t z) = avgRaw (S := S) f' t (a z) := by
-  induction t using TensorProduct.induction_on with
-  | zero => simp
+  induction t using TensorProduct.inductionOn with
   | tmul x y => simp only [avgRaw_tmul, map_smul, h]
   | add t u ht hu => simp only [avgRaw_add, LinearMap.add_apply, map_add, ht, hu]
 
@@ -96,8 +93,7 @@ omit [Module R V'] [IsScalarTower R S V'] in
 private theorem avgRaw_comp (f : V →ₗ[R] W) (b : W →ₗ[S] V') (a : V →ₗ[S] V')
     (h : ∀ z, b (f z) = a z) (t : TensorProduct R S S) (z : V) :
     b (avgRaw (S := S) f t z) = Algebra.TensorProduct.lmul' R t • a z := by
-  induction t using TensorProduct.induction_on with
-  | zero => simp
+  induction t using TensorProduct.inductionOn with
   | tmul x y => simp only [avgRaw_tmul, map_smul, h,
       Algebra.TensorProduct.lmul'_apply_tmul, mul_smul]
   | add t u ht hu => simp only [avgRaw_add, LinearMap.add_apply, map_add, ht, hu, add_smul]

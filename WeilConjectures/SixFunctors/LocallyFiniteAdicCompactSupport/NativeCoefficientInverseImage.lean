@@ -185,7 +185,7 @@ private def nativeDirectImageMap
      naturality := by
        intro W Z a
        ext s
-       refine ULift.ext _ _ (Subtype.ext (ContinuousMap.ext fun x ↦ ?_))
+       refine ULift.ext (Subtype.ext (ContinuousMap.ext fun x ↦ ?_))
        change s.down.1 (a.unop.left (pullback.fst _ g x)) =
          s.down.1 (pullback.fst _ g (((proEtaleBaseChange g).map a.unop).left x))
        have h : ((proEtaleBaseChange g).map a.unop).left ≫ pullback.fst _ g =

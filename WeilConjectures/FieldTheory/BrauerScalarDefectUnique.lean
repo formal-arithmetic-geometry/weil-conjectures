@@ -234,8 +234,7 @@ private theorem scalar_of_same_conj (K : Type u) [Field K]
     simpa [mul_assoc] using ht
   have hc (x : SeparableClosure K ⊗[K] A) :
       (V * U⁻¹).val * e x = e x * (V * U⁻¹).val := by
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul r a =>
       have he : e (r ⊗ₜ[K] a) = r • e (1 ⊗ₜ[K] a) := by
         rw [← map_smul]

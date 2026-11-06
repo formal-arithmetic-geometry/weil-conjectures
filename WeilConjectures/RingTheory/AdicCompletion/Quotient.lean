@@ -76,8 +76,7 @@ lemma map_subtype_mem_map_algebraMap [IsNoetherianRing A] (I J : Ideal A)
     map I J.subtype z ∈ J.map (algebraMap A (AdicCompletion I A)) := by
   obtain ⟨t, rfl⟩ := ofTensorProduct_surjective_of_finite I J z
   rw [← LinearMap.comp_apply, ofTensorProduct_naturality]
-  induction t using TensorProduct.induction_on with
-  | zero => simp
+  induction t using TensorProduct.inductionOn with
   | tmul r j =>
     rw [LinearMap.comp_apply, TensorProduct.AlgebraTensorModule.map_tmul, ofTensorProduct_tmul,
       LinearMap.id_apply, Submodule.subtype_apply, smul_eq_mul]

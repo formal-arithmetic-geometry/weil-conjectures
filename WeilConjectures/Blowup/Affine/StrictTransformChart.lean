@@ -108,8 +108,7 @@ include ha
 `a`. -/
 lemma exists_pow_mul_eq_algebraMap (z : BaseChangeChart B I a) :
     ∃ (N : ℕ) (w : B), algebraMap A _ a ^ N * z = algebraMap B _ w := by
-  induction z using TensorProduct.induction_on with
-  | zero => exact ⟨0, 0, by simp⟩
+  induction z using TensorProduct.inductionOn with
   | tmul y c =>
     obtain ⟨n, x, hx, hc⟩ := (mem_chartRing_iff I ha).mp c.2
     refine ⟨n, y * algebraMap A B x, ?_⟩
@@ -138,8 +137,7 @@ variable (a) in
 /-- The image of `C_a(A, B, I)` in `B_b` lies in the chart ring `B[IB/b]`. -/
 lemma baseChangeChartToAway_mem_chartRing (ha : a ∈ I) (z : BaseChangeChart B I a) :
     baseChangeChartToAway B I a z ∈ chartRing (I.map (algebraMap A B)) (algebraMap A B a) := by
-  induction z using TensorProduct.induction_on with
-  | zero => simp
+  induction z using TensorProduct.inductionOn with
   | tmul y c =>
     rw [baseChangeChartToAway_tmul]
     refine Subalgebra.mul_mem _ (Subalgebra.algebraMap_mem _ y) ?_
@@ -339,8 +337,7 @@ lemma BaseChangeChart.map_algebraMap (y : B) :
 lemma baseChangeChartToAway_map (z : BaseChangeChart B I a) :
     baseChangeChartToAway B' I a (BaseChangeChart.map I a φ z) =
       awayMapOfAlgHom a φ (baseChangeChartToAway B I a z) := by
-  induction z using TensorProduct.induction_on with
-  | zero => simp
+  induction z using TensorProduct.inductionOn with
   | tmul y c =>
     rw [BaseChangeChart.map_tmul, baseChangeChartToAway_tmul, baseChangeChartToAway_tmul, map_mul,
       awayMapOfAlgHom_algebraMap, awayMapOfAlgHom_awayBaseChange]
@@ -381,8 +378,7 @@ lemma StrictChart.map_id : StrictChart.map I a (AlgHom.id A B) = AlgHom.id A _ :
   obtain ⟨z, rfl⟩ := Ideal.Quotient.mk_surjective z
   rw [StrictChart.map_mk, AlgHom.id_apply]
   congr 1
-  induction z using TensorProduct.induction_on with
-  | zero => simp
+  induction z using TensorProduct.inductionOn with
   | tmul y c => rfl
   | add z z' hz hz' => rw [map_add, hz, hz']
 
@@ -396,8 +392,7 @@ lemma StrictChart.map_comp :
   obtain ⟨z, rfl⟩ := Ideal.Quotient.mk_surjective z
   rw [AlgHom.comp_apply, StrictChart.map_mk, StrictChart.map_mk, StrictChart.map_mk]
   congr 1
-  induction z using TensorProduct.induction_on with
-  | zero => simp
+  induction z using TensorProduct.inductionOn with
   | tmul y c => rfl
   | add z z' hz hz' => rw [map_add, hz, hz', map_add, map_add]
 
@@ -434,8 +429,7 @@ lemma exists_pow_mul_eq_map (z : BaseChangeChart (Localization.Away s) I a) :
     ∃ (n : ℕ) (w : BaseChangeChart B I a),
       algebraMap (Localization.Away s) _ (algebraMap B _ s) ^ n * z =
         BaseChangeChart.map I a (awayAlgHom s) w := by
-  induction z using TensorProduct.induction_on with
-  | zero => exact ⟨0, 0, by simp⟩
+  induction z using TensorProduct.inductionOn with
   | tmul y c =>
     obtain ⟨⟨y₀, t⟩, hy⟩ := IsLocalization.surj (Submonoid.powers s) y
     obtain ⟨n, hn⟩ := t.2

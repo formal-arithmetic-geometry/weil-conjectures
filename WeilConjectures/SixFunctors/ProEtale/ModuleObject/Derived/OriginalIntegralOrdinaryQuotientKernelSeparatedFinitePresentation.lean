@@ -227,7 +227,7 @@ private theorem unit_section_surjective (Y : Scheme.{u})
         ext n
         erw [AddCommGrpCat.hom_comp]
         simp only [AddCommGrpCat.hom_ofHom, AddMonoidHom.coe_comp, Function.comp_apply,
-          zmultiplesHom_apply, AddMonoidHom.coe_coe]
+          zmultiplesHom_apply, AddMonoidHom.coe_ofClass]
         erw [map_zsmul]
         congr 1
         erw [← Functor.map_comp_apply, show (hT.from U.unop).op ≫ g =

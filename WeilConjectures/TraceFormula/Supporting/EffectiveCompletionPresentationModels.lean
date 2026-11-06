@@ -139,7 +139,7 @@ theorem effectiveCompletionPresentationModels
       dsimp only [b, trfStrictQuotientConeAugmentation]
       rw [CochainComplex.mappingCocone.lift_fst]
       rw [Pi.map_π]
-      erw [← Category.assoc, Pi.lift_π]
+      erw [← Category.assoc, Pi.lift_comp_π]
     rw [hv]
     change ((a.inv.app (op n)).f i).val.app U
       ((((unrestrictedTowerUnit l E X P.obj n).f i).val.app U) x) = _

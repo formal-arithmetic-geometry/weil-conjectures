@@ -274,7 +274,7 @@ private theorem augmentation_roos_reindex
       ← Category.assoc (D.roos CY).hom, hf CY]
     apply Pi.hom_ext
     intro n
-    simp only [Category.assoc, Pi.map_π, Pi.lift_π_assoc, podReindexProduct]
+    simp only [Category.assoc, Pi.map_π, Pi.lift_comp_π_assoc, podReindexProduct]
     rw [← G.map_comp_assoc, ← G.map_comp_assoc]
     simp only [Category.assoc]
     rw [augmentation_fst l E Y MY P n, augmentation_fst l E X MX PX n]

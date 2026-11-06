@@ -115,7 +115,7 @@ private theorem chainAug_naturality {P Q : C} (f : P ⟶ Q) :
       (IntegralAmbient.roosMap_coordinates (T.map f)).1, ← Category.assoc, chainAug_fst]
     apply Pi.hom_ext
     intro n
-    simp only [productAug, Category.assoc, Pi.lift_π, Pi.map_π, Pi.lift_π_assoc]
+    simp only [productAug, Category.assoc, Pi.lift_comp_π, Pi.map_π, Pi.lift_comp_π_assoc]
     exact congrArg (fun t ↦ t.app (op n)) (a.naturality f)
   · intro i
     rw [HomologicalComplex.comp_f, Category.assoc, chainAug_snd, comp_zero,
@@ -130,7 +130,7 @@ private theorem chainAug_precomp (G : C ⥤ CochainComplex A ℤ) (b : G ⟶ F) 
   · rw [chainAug_fst, Category.assoc, chainAug_fst]
     apply Pi.hom_ext
     intro n
-    simp only [productAug, Category.assoc, Pi.lift_π]
+    simp only [productAug, Category.assoc, Pi.lift_comp_π]
     rfl
   · intro i
     rw [chainAug_snd, HomologicalComplex.comp_f, Category.assoc, chainAug_snd, comp_zero]

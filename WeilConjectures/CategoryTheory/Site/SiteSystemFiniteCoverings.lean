@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.FinitePrecoverage
 public import Mathlib.CategoryTheory.Sites.Finite
-import Mathlib.Data.Finite.Sigma
+import Mathlib.Basic.Finite.Sigma
 import WeilConjectures.AlgebraicGeometry.SiteCoveringIsomorphicFamily
 
 /-! # Finite coverings on the pair categories

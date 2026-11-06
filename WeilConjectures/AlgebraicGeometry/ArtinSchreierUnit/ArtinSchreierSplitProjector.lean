@@ -79,7 +79,7 @@ theorem splitProjector_π (d : G) :
     splitTranslation U c) ≫ Pi.π (fun _ : G ↦ U) d = _
   rw [CategoryTheory.Linear.smul_comp]
   exact congrArg (fun t ↦ (Ring.inverse (Fintype.card G : R) * χ (-c)) • t)
-    (Pi.lift_π (fun d ↦ Pi.π (fun _ : G ↦ U) (d + c)) d)
+    (Pi.lift_comp_π (fun d ↦ Pi.π (fun _ : G ↦ U) (d + c)) d)
 
 theorem splitProjector_eigen (d : G) :
     splitProjector U χ ≫ Pi.π (fun _ : G ↦ U) d =

@@ -70,8 +70,7 @@ private lemma tensorBijective_unitF :
     rw [← Rationalization.smul_id_conj e.symm, Iso.symm_inv, Iso.symm_hom, ← ha]
     simp
   have hpure (t : F' ⊗[F] (unitF F ⟶ unitF F)) : ∃ a : F', t = a ⊗ₜ 𝟙 _ := by
-    induction t using TensorProduct.induction_on with
-    | zero => exact ⟨0, by rw [TensorProduct.zero_tmul]⟩
+    induction t using TensorProduct.inductionOn with
     | tmul a f =>
       obtain ⟨c, rfl⟩ := exists_eq_smul_id_unitF f
       exact ⟨c • a, by rw [TensorProduct.tmul_smul, TensorProduct.smul_tmul']⟩

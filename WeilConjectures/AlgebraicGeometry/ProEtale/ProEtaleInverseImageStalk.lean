@@ -134,7 +134,7 @@ private noncomputable def inverseImagePointStalkIso
       (inverseImagePoint t).sheafFiber :=
   Functor.isoWhiskerLeft (sheafToPresheaf (ProEt.topology T) A)
     (Functor.isoWhiskerLeft
-      ((Functor.whiskeringLeft _ _ A).obj (CategoryOfElements.π
+      ((Functor.whiskeringLeft _ _ A).obj (Functor.Elements.π
         (inverseImagePoint t).fiber).op)
       (Functor.Final.colimIso (inverseImagePointElements t).functor.op))
 
@@ -149,7 +149,7 @@ private theorem inverseImagePointStalkIso_germ
         (inverseImagePointStalkIso t A).hom.app H =
       (inverseImagePoint t).toPresheafFiber U (ULift.up x) H.obj := by
   exact Functor.Final.ι_colimitIso_hom (inverseImagePointElements t).functor.op
-    ((CategoryOfElements.π (inverseImagePoint t).fiber).op ⋙ H.obj)
+    ((Functor.Elements.π (inverseImagePoint t).fiber).op ⋙ H.obj)
     (op (StructuredArrow.mk x))
 
 private noncomputable def inverseImagePointFiberIso

@@ -54,13 +54,13 @@ private theorem isLAdic_of_basis_model
   · let := spectralNorm.nontriviallyNormedField ℚ_[l] E
     let : TopologicalSpace (ι → E) := moduleTopology E (ι → E)
     let : TopologicalSpace W := moduleTopology E W
-    have : IsTopologicalAddGroup (ι → E) := IsModuleTopology.topologicalAddGroup E _
-    have : IsTopologicalAddGroup W := IsModuleTopology.topologicalAddGroup E _
+    have : IsTopologicalAddGroup (ι → E) := IsModuleTopology.isTopologicalAddGroup E _
+    have : IsTopologicalAddGroup W := IsModuleTopology.isTopologicalAddGroup E _
     have : ContinuousSMul E (ι → E) := IsModuleTopology.toContinuousSMul E _
     have : ContinuousSMul E W := IsModuleTopology.toContinuousSMul E _
     have : ContinuousAdd (ι → E) :=
-      (IsModuleTopology.topologicalAddGroup E (ι → E)).toContinuousAdd
-    have : ContinuousAdd W := (IsModuleTopology.topologicalAddGroup E W).toContinuousAdd
+      (IsModuleTopology.isTopologicalAddGroup E (ι → E)).toContinuousAdd
+    have : ContinuousAdd W := (IsModuleTopology.isTopologicalAddGroup E W).toContinuousAdd
     have hc' := IsModuleTopology.continuous_of_linearMap c.toLinearMap
     have hci := IsModuleTopology.continuous_of_linearMap c.symm.toLinearMap
     exact hc'.comp (hc.2.comp (continuous_fst.prodMk (hci.comp continuous_snd)))
@@ -120,12 +120,12 @@ private theorem isLAdic_of_matrix_model
     refine ⟨inferInstance, ?_⟩
     let := spectralNorm.nontriviallyNormedField ℚ_[l] E
     let : TopologicalSpace (ι → E) := moduleTopology E (ι → E)
-    have : IsTopologicalAddGroup (ι → E) := IsModuleTopology.topologicalAddGroup E _
+    have : IsTopologicalAddGroup (ι → E) := IsModuleTopology.isTopologicalAddGroup E _
     have : ContinuousSMul E (ι → E) := IsModuleTopology.toContinuousSMul E _
     have hcoord (j : ι) : Continuous (fun v : (ι → E) ↦ v j) :=
       IsModuleTopology.continuous_of_linearMap (LinearMap.proj j : (ι → E) →ₗ[E] E)
     have : ContinuousAdd (ι → E) :=
-      (IsModuleTopology.topologicalAddGroup E (ι → E)).toContinuousAdd
+      (IsModuleTopology.isTopologicalAddGroup E (ι → E)).toContinuousAdd
     have hsum : Continuous (fun p : G × (ι → E) ↦ M p.1 *ᵥ p.2) := by
       have hvec : Continuous (fun p : G × (ι → E) ↦
           ∑ i, (∑ j, M p.1 i j * p.2 j) • Pi.single i (1 : E)) :=
@@ -165,7 +165,7 @@ private theorem continuous_action_of_matrix
   classical
   let : Fintype ι := Fintype.ofFinite ι
   let : TopologicalSpace V := moduleTopology K V
-  have : IsTopologicalAddGroup V := IsModuleTopology.topologicalAddGroup K V
+  have : IsTopologicalAddGroup V := IsModuleTopology.isTopologicalAddGroup K V
   have : ContinuousSMul K V := IsModuleTopology.toContinuousSMul K V
   have hcoord (j : ι) : Continuous (fun v : V ↦ b.repr v j) :=
     IsModuleTopology.continuous_of_linearMap (b.coord j)
@@ -203,7 +203,7 @@ private theorem continuous_model_entries
     Continuous (fun g : G ↦ algebraMap E (PadicAlgCl l) (c.repr (τE g (c j)) i)) := by
   let := spectralNorm.nontriviallyNormedField ℚ_[l] E
   let : TopologicalSpace W := moduleTopology E W
-  have : IsTopologicalAddGroup W := IsModuleTopology.topologicalAddGroup E W
+  have : IsTopologicalAddGroup W := IsModuleTopology.isTopologicalAddGroup E W
   have : ContinuousSMul E W := IsModuleTopology.toContinuousSMul E W
   have hc : Continuous (fun g : G ↦ c.repr (τE g (c j)) i) :=
     (IsModuleTopology.continuous_of_linearMap (c.coord i)).comp
@@ -278,7 +278,7 @@ theorem isLAdic_iff_continuous
     have hc (i j) : Continuous (fun g ↦ φ g i j) := by
       let : TopologicalSpace V := moduleTopology (PadicAlgCl l) V
       have : IsTopologicalAddGroup V :=
-        IsModuleTopology.topologicalAddGroup (PadicAlgCl l) V
+        IsModuleTopology.isTopologicalAddGroup (PadicAlgCl l) V
       have : ContinuousSMul (PadicAlgCl l) V :=
         IsModuleTopology.toContinuousSMul (PadicAlgCl l) V
       exact (IsModuleTopology.continuous_of_linearMap (b.coord i)).comp

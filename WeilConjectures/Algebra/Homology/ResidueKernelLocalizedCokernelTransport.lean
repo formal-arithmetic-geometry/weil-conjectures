@@ -78,8 +78,7 @@ theorem localized_range_quotient_extendScalars_aux
     change t Y 1 (f x) = e' (LocalizedModule.mk (f x) 1)
     exact (he (f x)).symm
   · rintro _ ⟨z, rfl⟩
-    induction z using TensorProduct.induction_on with
-    | zero => simp
+    induction z using TensorProduct.inductionOn with
     | tmul a x =>
       have hx : e' (LocalizedModule.mk (f x) 1) ∈
           Submodule.span A (e'.toLinearMap ''

@@ -5,7 +5,7 @@ Authors: Bin Wu
 -/
 module
 
-public import Mathlib.CategoryTheory.Limits.Shapes.BinaryProducts
+public import Mathlib.CategoryTheory.Limits.Shapes.BinaryProducts.ProdComparison
 public import Mathlib.CategoryTheory.Limits.Shapes.Terminal
 public import Mathlib.Algebra.Module.Basic
 public import Mathlib.CategoryTheory.Limits.Shapes.FiniteProducts

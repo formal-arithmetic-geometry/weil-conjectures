@@ -77,7 +77,7 @@ lemma _root_.IsDiscreteValuationRing.of_maximalIdeal_mem_minimalPrimes_span_sing
     exact_mod_cast Ideal.height_le_one_of_isPrincipal_of_mem_minimalPrimes _ _ hm
   have : Ring.DimensionLEOne R := ⟨fun hp hpr ↦ hpr.isMaximal_of_ne_bot hp⟩
   have : IsDedekindDomain R := {}
-  exact ((IsDiscreteValuationRing.TFAE R hnf).out 0 2).2 this
+  exact ((IsDiscreteValuationRing.TFAE R hnf).out 1 3).2 this
 
 /-- At a generic point `ζ` of the zero locus of a nonzero global function `h` on a locally
 noetherian normal scheme, the local ring is a discrete valuation ring (Krull's principal ideal

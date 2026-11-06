@@ -74,8 +74,7 @@ theorem exists_tensorQuotientSpanEquiv {R S : Type*} [CommRing R] [CommRing S] [
       (K.subtype.restrictScalars R))).map e₂.toLinearMap = L := by
     apply le_antisymm
     · rintro _ ⟨x, ⟨y, rfl⟩, rfl⟩
-      induction y using TensorProduct.induction_on with
-      | zero => simp
+      induction y using TensorProduct.inductionOn with
       | tmul s k =>
         obtain ⟨k, hk⟩ := k
         have := L.smul_mem s (hK k hk)
@@ -124,8 +123,7 @@ theorem bijective_one_tmul_of_bijective_algebraMap {B R P : Type*} [CommRing B] 
   let g : R ⊗[B] P →ₗ[B] P := TensorProduct.lift ((LinearMap.lsmul B P).comp e.toLinearMap)
   have hg (x : P) : g ((1 : R) ⊗ₜ x) = x := by simp [g]
   refine ⟨fun x y hxy ↦ by simpa [hg] using congrArg g hxy, fun z ↦ ?_⟩
-  induction z using TensorProduct.induction_on with
-  | zero => exact ⟨0, by simp⟩
+  induction z using TensorProduct.inductionOn with
   | tmul r p =>
     obtain ⟨b, rfl⟩ := h.2 r
     refine ⟨b • p, ?_⟩

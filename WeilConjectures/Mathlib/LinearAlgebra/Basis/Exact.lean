@@ -117,6 +117,6 @@ theorem det_cons_of_exact (hfg : Function.Exact f g) (b₁ : Basis (Fin 1) R L)
       hrepr]
   · intro i _
     simp only [toMatrix_apply, Fin.cons_zero, hl, map_smul, repr_self, Finsupp.smul_apply,
-      Finsupp.single_apply, (Fin.succ_ne_zero i).symm, if_false, smul_zero, mul_zero, zero_mul]
+      Finsupp.single_apply, (Fin.succ_ne_zero i).symm, ite_false, smul_zero, mul_zero, zero_mul]
 
 end Module.Basis

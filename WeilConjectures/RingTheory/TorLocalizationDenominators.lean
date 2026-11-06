@@ -52,8 +52,7 @@ private theorem tensor_coefficient_fractions
   have hmap (y : ↑(M ⊗ (restrictScalars φ).obj (of B B) : ModuleCat A)) :
       (TensorProduct.comm A M C) ((𝟙 M ⊗ₘ f) y) =
         g ((TensorProduct.comm A M B) y) := by
-    induction y using TensorProduct.induction_on with
-    | zero => simp
+    induction y using TensorProduct.inductionOn with
     | tmul m b => simp [g, hf]
     | add x y hx hy => simp only [map_add, hx, hy]
   have hmulC (s : B)
@@ -62,16 +61,14 @@ private theorem tensor_coefficient_fractions
         ((𝟙 M ⊗ₘ (restrictScalars ((algebraMap B C).comp φ)).map
           (ofHom (LinearMap.mulLeft C (algebraMap B C s)))) x) =
         s • (TensorProduct.comm A M C) x := by
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul m c => simp [TensorProduct.smul_tmul', Algebra.smul_def]
     | add x y hx hy => simp only [map_add, hx, hy, smul_add]
   have hmulB (s : B) (y : ↑(M ⊗ (restrictScalars φ).obj (of B B) : ModuleCat A)) :
       (TensorProduct.comm A M B)
         ((𝟙 M ⊗ₘ (restrictScalars φ).map (ofHom (LinearMap.mulLeft B (s : B)))) y) =
         s • (TensorProduct.comm A M B) y := by
-    induction y using TensorProduct.induction_on with
-    | zero => simp
+    induction y using TensorProduct.inductionOn with
     | tmul m b => simp [TensorProduct.smul_tmul', smul_eq_mul]
     | add x y hx hy => simp only [map_add, hx, hy, smul_add]
   constructor

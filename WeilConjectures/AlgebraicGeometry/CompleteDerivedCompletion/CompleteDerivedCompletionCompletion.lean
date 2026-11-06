@@ -503,7 +503,7 @@ private theorem strictProductUnit_difference (T : Scheme.{u})
   simp only [strictProductUnit, towerTransitionEndomorphism,
     towerProductShift, Preadditive.comp_sub, Preadditive.sub_comp, Category.comp_id,
     Category.assoc,
-    Pi.lift_π, Pi.lift_π_assoc, sub_eq_zero, zero_comp]
+    Pi.lift_comp_π, Pi.lift_comp_π_assoc, sub_eq_zero, zero_comp]
   apply HomologicalComplex.Hom.ext
   funext j
   have h := (((strictAugmentation l E T).app P).f j).naturality
@@ -551,7 +551,7 @@ private theorem principalPositiveRoos (T : Scheme.{u})
     intro n
     simp only [towerTransitionEndomorphism, towerProductShift, Preadditive.comp_sub,
       Preadditive.sub_comp,
-      Category.comp_id, Category.assoc, Pi.lift_π, Pi.lift_π_assoc, hs, sub_self, zero_comp]
+      Category.comp_id, Category.assoc, Pi.lift_comp_π, Pi.lift_comp_π_assoc, hs, sub_self, zero_comp]
   obtain ⟨b, hb, hu⟩ := strictPrincipalLevels l E T P
   apply AdicCompletion.quotientTowerComparison μ (fun n ↦ X.obj (op n)) t u hz
     (fun n ↦ (b n).inv) (fun _ ↦ inferInstance)
@@ -616,12 +616,12 @@ private theorem adjointRoosAugmentation (T : Scheme.{u})
     intro n
     have hπ : strictProductUnit l E T P ≫
         Pi.π (fun n : ℕ ↦ X.asFunctor.obj (op n)) n =
-          ((ev l E T n).mapHomologicalComplex (.up ℤ)).map α := Pi.lift_π _ n
+          ((ev l E T n).mapHomologicalComplex (.up ℤ)).map α := Pi.lift_comp_π _ n
     rw [hπ]
     change (h ≫ (Pi.lift (f := fun n : ℕ ↦ X.asFunctor.obj (op n))
       (fun n : ℕ ↦ (NatTrans.mapHomologicalComplex (lim.π (op n)) (.up ℤ)).app X))) ≫
         Pi.π (fun n : ℕ ↦ X.asFunctor.obj (op n)) n = _
-    rw [Category.assoc, Pi.lift_π]
+    rw [Category.assoc, Pi.lift_comp_π]
     apply HomologicalComplex.Hom.ext
     funext j
     have he := (a.homEquiv P X).symm_apply_apply α
@@ -922,10 +922,10 @@ private theorem scalarSource_reduction_zero (T : Scheme.{u})
     apply Pi.hom_ext
     intro n
     simp only [towerTransitionEndomorphism, towerProductShift,
-      Preadditive.sub_comp, Category.id_comp, Category.assoc, Pi.lift_π, ht]
+      Preadditive.sub_comp, Category.id_comp, Category.assoc, Pi.lift_comp_π, ht]
     change Pi.π (fun _ : ℕ ↦ P) n - Pi.π (fun _ : ℕ ↦ P) (n + 1) ≫ (r • 𝟙 P) =
       𝟙 V ≫ Pi.π (fun _ : ℕ ↦ P) n - b ≫ a ≫ Pi.π (fun _ : ℕ ↦ P) n
-    simp only [Category.id_comp, a, b, Pi.map_π, Pi.lift_π_assoc]
+    simp only [Category.id_comp, a, b, Pi.map_π, Pi.lift_comp_π_assoc]
   have hq : QuasiIso
       (DerivedNakayama.scalarOnComplex l E T (uniformizer l E)
         (ExactProductsRoos.fibre.obj X)) := by

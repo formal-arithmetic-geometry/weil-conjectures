@@ -61,13 +61,13 @@ theorem finiteScalarNormalizedClassRoute_eq (n : ℕ) [Finite (SpTowerShriek.R l
     (c : SpTowerP1.CoefficientCoordinates l E n T hT)
     (a : Etale.ordinaryFiniteUnit (FiniteRing l E n) T ⟶
       (Etale.ordinaryFiniteLine (FiniteRing l E n) (l ^ (n + 1))
-        (ULift.ext _ _ (coefficient_annihilates l E n)) T)⟦(2 : ℤ)⟧) :
+        (ULift.ext (coefficient_annihilates l E n)) T)⟦(2 : ℤ)⟧) :
     @Eq (FiniteScalarBoundaryArrow l E n T)
       (finiteScalarNormalizedAbelianRoute l E n T c a)
       (finiteScalarNormalizedClassRoute l E n T c a) := by
   exact ordinaryFiniteClass_exact_image_prepost (FiniteRing l E n) T
     (Scheme.finiteEtaleTateLine T (l ^ (n + 1)) (FiniteRing l E n)
-      (ULift.ext _ _ (coefficient_annihilates l E n)))
+      (ULift.ext (coefficient_annihilates l E n)))
     (comparisonUpperStar AddCommGrpCat.{u + 1} T) a
     ((DerivedCategory.singleFunctor (DiagonalAb T) 0).map (integerComparison T).inv)
     (((DerivedCategory.singleFunctor (DiagonalAb T) 0).map

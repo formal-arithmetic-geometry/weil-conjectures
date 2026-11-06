@@ -79,7 +79,7 @@ theorem scalarExtension_twistMap_chart_surjective
           (fun k : ℕ ↦ {a : A | if 0 ≤ j + k then a ∈ 𝒜 (j + k).toNat
             else a = 0}) (Submonoid.powers f) := by
         refine ⟨m * n, a, ⟨f ^ m, ⟨m, rfl⟩⟩, ?_, ?_, rfl⟩
-        · simpa only [Set.mem_ofPred_eq, if_pos hj, SetLike.mem_coe] using ha
+        · simpa only [Set.mem_ofPred_eq, ite_eq_left hj, SetLike.mem_coe] using ha
         · simpa using SetLike.pow_mem_graded m hf
       obtain ⟨s, hs⟩ := twist_fraction_realization 𝒜 j f z hz
       refine ⟨tensorPullbackSection (map ψ hψ) (twist 𝒜 j) (basicOpen 𝒜 f) s, ?_⟩
@@ -153,14 +153,14 @@ theorem scalarExtension_twistMap_chart_surjective
       hden
     subst d
     by_cases hj : 0 ≤ j + (m * n : ℕ)
-    · obtain ⟨t, ht⟩ := lift m hj b (by simpa only [Set.mem_ofPred_eq, if_pos hj] using hb)
+    · obtain ⟨t, ht⟩ := lift m hj b (by simpa only [Set.mem_ofPred_eq, ite_eq_left hj] using hb)
       refine ⟨t, Subtype.ext (funext fun x ↦ Subtype.ext ?_)⟩
       rw [ht]
       have he := hs x
       change IsLocalization.map _ (RingHom.id B) _ (Localization.mk b den) = _ at he
       rw [← he]
       simp only [Localization.mk_eq_mk', IsLocalization.map_mk', RingHom.id_apply, q, hm]
-    · have hb0 : b = 0 := by simpa only [Set.mem_ofPred_eq, if_neg hj] using hb
+    · have hb0 : b = 0 := by simpa only [Set.mem_ofPred_eq, ite_eq_right hj] using hb
       refine ⟨0, Subtype.ext (funext fun x ↦ Subtype.ext ?_)⟩
       rw [map_zero]
       change (0 : Localization.AtPrime x.1.asHomogeneousIdeal.toIdeal) = _

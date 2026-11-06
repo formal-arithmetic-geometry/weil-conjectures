@@ -65,7 +65,7 @@ theorem condensedBoundedOpenOperations
     intro n
     have hU : CompactSpace U ∧ QuasiSeparatedSpace U := ⟨inferInstance, inferInstance⟩
     have hH := K.property.2 n
-    rw [IsConstantModelConstructible, if_pos hU] at hH
+    rw [IsConstantModelConstructible, ite_eq_left hU] at hH
     obtain ⟨S, hcon, hS⟩ := finiteStratification_of_models
       (fun T f ↦ HasFiniteConstantLocalModel Λ T
         ((CondensedRing.upperStar Λ f).obj

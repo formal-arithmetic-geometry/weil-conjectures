@@ -51,8 +51,8 @@ private theorem roosUnit_natural (W : Scheme.{u})
             (op n)) := by
     apply Limits.Pi.hom_ext
     intro n
-    simp only [pullbackTensorRoosAugmentation, Category.assoc, Pi.lift_π, Limits.Pi.map_π,
-      Pi.lift_π_assoc]
+    simp only [pullbackTensorRoosAugmentation, Category.assoc, Pi.lift_comp_π, Limits.Pi.map_π,
+      Pi.lift_comp_π_assoc]
     exact (NatTrans.mapHomologicalComplex (lim.π (op n)) (.up ℤ)).naturality a
   dsimp only [pullbackTensorRoosUnit, integralOperationsRoosMap]
   rw [arrowConeMap]
@@ -239,7 +239,7 @@ private theorem ordinary_roos
     apply Limits.Pi.hom_ext
     intro n
     simp only [Category.assoc, pullbackTensorRoosAugmentation,
-      IntegralOnSlice.productAugmentation, Limits.Pi.map_π, Pi.lift_π_assoc]
+      IntegralOnSlice.productAugmentation, Limits.Pi.map_π, Pi.lift_comp_π_assoc]
     exact pullQuotientOrdinaryProjection l E a f p P n
   have hz : pullbackTensorRoosAugmentation l E X Z ≫
       towerTransitionEndomorphism

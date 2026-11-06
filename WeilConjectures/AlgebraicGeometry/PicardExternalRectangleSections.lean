@@ -182,8 +182,7 @@ theorem picardExternalRectangleSectionsMap_bijective
   obtain ⟨e, he⟩ := exists_affine_rectangle_projection_sections_tensor k X Y f g U V hU hV F G
   have hc (z : scalarObj f F (op U) ⊗[k] scalarObj g G (op V)) :
       tensorSectionsMap P Q W (e z) = picardExternalRectangleSectionsMap f g U V F G z := by
-    induction z using TensorProduct.induction_on with
-    | zero => simp
+    induction z using TensorProduct.inductionOn with
     | tmul s t =>
       rw [he, tensorSectionsMap_tmul]
       rfl

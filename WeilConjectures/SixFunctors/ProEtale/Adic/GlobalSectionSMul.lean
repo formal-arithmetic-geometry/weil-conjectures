@@ -162,7 +162,7 @@ lemma sectionSheafHom_pullbackGlobalSection :
   change (adicConstantSheafToLowerStar l g).hom.app V (sectionAct (unit l Y) a _) =
     sectionAct (unit l Z) ((adicConstantSheafToLowerStar l g).hom.app V a) _
   rw [sectionAct_unit, sectionAct_unit]
-  refine ULift.ext _ _ (Subtype.ext (ContinuousMap.ext fun z ↦ ?_))
+  refine ULift.ext (Subtype.ext (ContinuousMap.ext fun z ↦ ?_))
   change a.down.1 _ * f.down.1 _ = a.down.1 _ * f.down.1 _
   congr 2
   change (pullback.fst V.unop.hom g ≫ V.unop.hom).base z = (pullback.snd V.unop.hom g ≫ g).base z

@@ -219,19 +219,19 @@ theorem finiteP1_ordinary_kummer_boundary_of_class
     {hX : IsUnit ((l ^ (n + 1) : ℕ) : Γ(X, ⊤))}
     (c : SpTowerP1.CoefficientCoordinates l E n X hX)
     (hclass : Etale.ordinaryFiniteP1ChernSpec (FiniteRing l E n) (l ^ (n + 1))
-      (ULift.ext _ _ (coefficient_annihilates l E n)) S
+      (ULift.ext (coefficient_annihilates l E n)) S
       (finiteP1_unitOnPullback (l ^ (n + 1)) (ProjectiveLine S ↘ S)
         (by simpa only [Nat.cast_pow] using hS.pow (n + 1)))
       (geoP1EtaleChern (FiniteRing l E n) (l ^ (n + 1))
         (pow_pos (Fact.out : l.Prime).pos _)
-        (ULift.ext _ _ (coefficient_annihilates l E n)) S
+        (ULift.ext (coefficient_annihilates l E n)) S
         (by simpa only [Nat.cast_pow] using hS.pow (n + 1)))) :
     FiniteKummerBoundary l E X n k
       (Scheme.Pic.mapHom e.hom (hyperplanePic S))
       (finiteP1OrdinaryKummerArrow l E n e hS c) := by
   let A := FiniteRing l E n
   let N := l ^ (n + 1)
-  let hA : (N : A) = 0 := ULift.ext _ _ (coefficient_annihilates l E n)
+  let hA : (N : A) = 0 := ULift.ext (coefficient_annihilates l E n)
   let hP := finiteP1_unitOnPullback N (ProjectiveLine S ↘ S)
     (by simpa only [N, Nat.cast_pow] using hS.pow (n + 1))
   let a := geoP1EtaleChern A N (pow_pos (Fact.out : l.Prime).pos _) hA S

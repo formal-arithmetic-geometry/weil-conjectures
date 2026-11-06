@@ -129,7 +129,7 @@ private theorem constant_kernel (W : Scheme.{u}) {A B : CommRingCat.{u + 1}}
     Ideal.mem_span_range_iff_exists_fun.mp (hg'.symm ▸ ha)
   let c : A → Fin d → A := fun a ↦ if ha : a ∈ K then (hex a ha).choose else 0
   have hc (a : A) (ha : a ∈ K) : ∑ i, c a i * g i = a := by
-    simpa only [c, dif_pos ha] using (hex a ha).choose_spec
+    simpa only [c, dite_eq_left ha] using (hex a ha).choose_spec
   let t (i : Fin d) := constantFunction W A (fun a ↦ c a i)
   have htn (i : Fin d) {V V' : W.ProEtᵒᵖ} (k : V ⟶ V') (y : R.obj V) :
       R.map k ((t i).app V y) = (t i).app V' (R.map k y) :=
@@ -274,7 +274,7 @@ private theorem lifted_quotient_kernel {A : Type u} [CommRing A] (I : Ideal A) :
   ext x
   change (Ideal.Quotient.mk I).ulift x = 0 ↔ x.down ∈ I
   exact ⟨fun h ↦ Ideal.Quotient.eq_zero_iff_mem.mp (congrArg ULift.down h),
-    fun h ↦ ULift.ext _ _ (Ideal.Quotient.eq_zero_iff_mem.mpr h)⟩
+    fun h ↦ ULift.ext (Ideal.Quotient.eq_zero_iff_mem.mpr h)⟩
 
 private theorem lifted_coefficient_kernel_fg (m : ℕ) :
     (RingHom.ker (Ideal.Quotient.mk
@@ -356,10 +356,10 @@ theorem ramifiedQuotient_sectionPushout (W : Scheme.{u}) (e : ℕ)
     rfl
   · intro x
     obtain ⟨a, ha⟩ := Ideal.Quotient.mk_surjective x.down
-    exact ⟨ULift.up a, ULift.ext _ _ ha⟩
+    exact ⟨ULift.up a, ULift.ext ha⟩
   · intro x
     obtain ⟨a, ha⟩ := Ideal.Quotient.mk_surjective x.down
-    exact ⟨ULift.up a, ULift.ext _ _ ha⟩
+    exact ⟨ULift.up a, ULift.ext ha⟩
   · simp only [CommRingCat.hom_ofHom]
     rw [lifted_quotient_kernel, lifted_quotient_kernel, Ideal.map_map]
     have he' := he

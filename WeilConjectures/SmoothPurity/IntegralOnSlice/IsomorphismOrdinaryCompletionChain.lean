@@ -171,13 +171,13 @@ theorem isomorphismOrdinaryCompletionChain
           Pi.π (fun n : ℕ ↦ T.obj (op n)) n =
         ((augmentation l E Y none).app P).app (op n) := by
       rw [← Category.assoc, IntegralAmbient.roosUnit_fst]
-      exact Pi.lift_π _ _
+      exact Pi.lift_comp_π _ _
     have hθ : ordinaryCompletionChain l E g P ≫
         CochainComplex.mappingCocone.fst (scalarRoosBoundary
           ((integralOperationsPullbackTowerFunctor l E g).obj P)) ≫ Pi.π _ n =
         ((ordinaryQuotientAugmentation l E g).app P).app (op n) := by
       rw [← Category.assoc, ordinaryCompletionChain, CochainComplex.mappingCocone.lift_fst]
-      exact Pi.lift_π _ _
+      exact Pi.lift_comp_π _ _
     rw [hγ, hθ]
     apply HomologicalComplex.hom_ext
     intro i

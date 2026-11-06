@@ -111,8 +111,7 @@ lemma tensorSections_stageTensorMap_ofIdentification (F' : FiniteIntermediateFie
             τ)) =
       (upperStarRightDerivedSections g q i W).map (adicConstantSheafLeg T l F'.1 n)
         (stageMap _ E (integralLatticeSectionsEquiv g q i E θ W hθW) hθ F' τ) := by
-  induction τ using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction τ using TensorProduct.inductionOn with
   | add τ τ' hτ hτ' => simp only [map_add, hτ, hτ']
   | tmul o m =>
     rw [Subalgebra.stageTensorMap_tmul, AdicSheaf.tensorSections_tmul,

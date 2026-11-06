@@ -75,7 +75,7 @@ lemma map_smul_of_locally_natCast {U : X.ProEt} (g : C(U.left, R))
       (ULift.up (ringValuedFunction ι hι hιE g)) =
         ULift.up (algebraMap _ _ ((ULift.up (n x : PadicAlgCl l) :
           ULift.{u + 1} (PadicAlgCl l))).down) := by
-    refine ULift.ext _ _ (Subtype.ext (ContinuousMap.ext fun y ↦ ?_))
+    refine ULift.ext (Subtype.ext (ContinuousMap.ext fun y ↦ ?_))
     change ι (g (f.left.base y)) = (n x : PadicAlgCl l)
     rw [show g (f.left.base y) = n x from hn x _ y.2, map_natCast]
   rw [h2, algebraMap_sectionAct]

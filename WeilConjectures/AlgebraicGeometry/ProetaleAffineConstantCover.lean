@@ -110,7 +110,7 @@ theorem exists_affine_constant_cover (X : Scheme.{u})
   have hpq : QuasiCompact p := inferInstance
   let W := Scheme.ProEt.mk p
   let inc (i : 𝒱.I₀) : V i ⟶ W :=
-    MorphismProperty.Over.homMk (Sigma.ι (fun i ↦ (V i).left) i) (Sigma.ι_desc _ _)
+    MorphismProperty.Over.homMk (Sigma.ι (fun i ↦ (V i).left) i) (Sigma.ι_comp_desc _ _)
   have hd : Presieve.IsDisjointFamily inc J := by
     constructor
     · intro i

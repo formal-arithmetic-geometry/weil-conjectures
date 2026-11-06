@@ -120,7 +120,7 @@ noncomputable def couplef (i j : ℤ × ℤ) :
 /-- The map `α : Hⁿ(X (q - 1)) ⟶ Hⁿ(X q)` is induced by the map of the tower. -/
 lemma coupleα_self (q n : ℤ) :
     P.coupleα H (q - 1, n) (q, n) = (H.shift n).map (P.mor₁ q) := by
-  rw [coupleα, dif_pos ⟨rfl, rfl⟩, eqToHom_refl, Category.id_comp]
+  rw [coupleα, dite_eq_left ⟨rfl, rfl⟩, eqToHom_refl, Category.id_comp]
 
 /-- The map `α : Hⁿ(X q) ⟶ Hⁿ(X q')` for `q = q' - 1`. -/
 lemma coupleα_eq (q q' n : ℤ) (h : q = q' - 1) :
@@ -132,30 +132,30 @@ lemma coupleα_eq (q q' n : ℤ) (h : q = q' - 1) :
 /-- The map `g : Hⁿ(X q) ⟶ Hⁿ(Y q)` is induced by the map of the triangle. -/
 lemma coupleg_self (q n : ℤ) :
     P.coupleg H (q, n) (q, n) = (H.shift n).map (P.mor₂ q) := by
-  rw [coupleg, dif_pos rfl, eqToHom_refl, Category.comp_id]
+  rw [coupleg, dite_eq_left rfl, eqToHom_refl, Category.comp_id]
 
 /-- The map `f : Hⁿ(Y q) ⟶ Hⁿ⁺¹(X (q - 1))` is the connecting homomorphism. -/
 lemma couplef_self (q n n' : ℤ) (h : n + 1 = n') :
     P.couplef H (q, n) (q - 1, n') = P.δ H q n n' h := by
-  rw [couplef, dif_pos ⟨rfl, h⟩, eqToHom_refl, Category.comp_id]
+  rw [couplef, dite_eq_left ⟨rfl, h⟩, eqToHom_refl, Category.comp_id]
 
 /-- The maps `α` vanish off degree `(1, 0)`. -/
 lemma coupleα_eq_zero (i j : ℤ × ℤ) (h : i + ((1, 0) : ℤ × ℤ) ≠ j) :
     P.coupleα H i j = 0 := by
-  rw [coupleα, dif_neg]
+  rw [coupleα, dite_eq_right]
   rintro ⟨h₁, h₂⟩
   exact h (Prod.ext (by simp; omega) (by simp [h₂]))
 
 /-- The maps `f` vanish off degree `(-1, 1)`. -/
 lemma couplef_eq_zero (i j : ℤ × ℤ) (h : i + ((-1, 1) : ℤ × ℤ) ≠ j) :
     P.couplef H i j = 0 := by
-  rw [couplef, dif_neg]
+  rw [couplef, dite_eq_right]
   rintro ⟨h₁, h₂⟩
   exact h (Prod.ext (by simp; omega) (by simp; omega))
 
 /-- The maps `g` vanish off degree `0`. -/
 lemma coupleg_eq_zero (i j : ℤ × ℤ) (h : i + 0 ≠ j) : P.coupleg H i j = 0 := by
-  rw [coupleg, dif_neg]
+  rw [coupleg, dite_eq_right]
   rintro rfl
   exact h (add_zero _)
 

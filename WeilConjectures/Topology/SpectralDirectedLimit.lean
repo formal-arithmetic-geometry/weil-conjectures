@@ -99,7 +99,7 @@ theorem spectralSpace_directedLimit
       dsimp only [Z] at *
       split_ifs with hij
       · have hik := le_trans hij h
-        rw [dif_pos hik] at hy
+        rw [dite_eq_left hik] at hy
         change f i j hij (f j k h y) ∈ U
         rwa [hcomp]
       · exact mem_univ _

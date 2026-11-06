@@ -413,8 +413,7 @@ def coordTensorApp (q : B →ₗ[A] A) (M : modules (constantRing J A)) (U : C�
         ((coord J A B q).val.app U).hom) t
       map_add' := _root_.map_add _
       map_smul' := fun r t ↦ by
-        induction t using TensorProduct.induction_on with
-        | zero => simp
+        induction t using TensorProduct.inductionOn with
         | tmul s m =>
           erw [ModuleCat.ExtendScalars.smul_tmul]
           rw [TensorProduct.lift.tmul, TensorProduct.lift.tmul, LinearMap.comp_apply,
@@ -441,8 +440,7 @@ def coordTensor (q : B →ₗ[A] A) (M : modules (constantRing J A)) :
   app U := coordTensorApp J A B q M U
   naturality {U V} f := by
     ext t
-    induction t using TensorProduct.induction_on with
-    | zero => rw [_root_.map_zero, _root_.map_zero]
+    induction t using TensorProduct.inductionOn with
     | tmul s m =>
       change coordTensorApp J A B q M V
           ((SheafOfModules.changeOfRingsPresheaf (constAlgebraMap J A B) M).map f
@@ -564,7 +562,7 @@ theorem incl_proj_self {I : Type*} (b : Module.Basis I A B) (c : I)
   classical
   ext U x
   change (proj J A B (b.coord c) M).val.app U ((incl J A B (b c) M).val.app U x) = x
-  rw [incl_apply, proj_apply, coord_basis, if_pos rfl, one_smul]
+  rw [incl_apply, proj_apply, coord_basis, ite_eq_left rfl, one_smul]
 
 theorem incl_proj_of_ne {I : Type*} (b : Module.Basis I A B) {c d : I} (h : c ≠ d)
     (M : modules (constantRing J A)) :
@@ -572,7 +570,7 @@ theorem incl_proj_of_ne {I : Type*} (b : Module.Basis I A B) {c d : I} (h : c �
   classical
   ext U x
   change (proj J A B (b.coord d) M).val.app U ((incl J A B (b c) M).val.app U x) = 0
-  rw [incl_apply, proj_apply, coord_basis, if_neg h, zero_smul]
+  rw [incl_apply, proj_apply, coord_basis, ite_eq_right h, zero_smul]
 
 theorem sum_proj_incl {I : Type*} [Fintype I] (b : Module.Basis I A B)
     (M : modules (constantRing J A)) :
@@ -580,9 +578,7 @@ theorem sum_proj_incl {I : Type*} [Fintype I] (b : Module.Basis I A B)
   apply restrictSheafify_hom_ext
   intro U t
   rw [SheafOfModules.sum_val_app]
-  induction t using TensorProduct.induction_on with
-  | zero =>
-    simp only [_root_.map_zero, Finset.sum_const_zero]
+  induction t using TensorProduct.inductionOn with
   | tmul s m =>
     let : Module ((constantRing J A).obj.obj U) ((constantRing J B).obj.obj U) :=
       Module.compHom _ ((constAlgebraMap J A B).hom.app U).hom
@@ -629,8 +625,7 @@ theorem proj_extendScalars_map (q : B →ₗ[A] A) {M N : modules (constantRing 
       ((ModuleCat.extendScalars ((constAlgebraMap J A B).hom.app U).hom).map (f.val.app U) t)) =
     f.val.app U ((proj J A B q M).val.app U ((toSheafify J
         (SheafOfModules.changeOfRingsPresheaf (constAlgebraMap J A B) M).presheaf).app U t)) := by
-  induction t using TensorProduct.induction_on with
-  | zero => simp
+  induction t using TensorProduct.inductionOn with
   | tmul s m =>
     erw [ModuleCat.ExtendScalars.map_tmul]
     rw [proj_apply, proj_apply]

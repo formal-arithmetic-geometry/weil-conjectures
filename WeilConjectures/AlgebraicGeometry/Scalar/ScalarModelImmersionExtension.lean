@@ -321,22 +321,22 @@ private theorem immersion_assertions
   refine ⟨inferInstance, inferInstance, inferInstance, hcol, ?_, ?_, ?_, ?_⟩
   · intro F hF
     obtain ⟨S, hS⟩ := (show IsFiniteConstantStratified Λ U F from by
-      simpa only [IsConstantModelConstructible, if_pos
+      simpa only [IsConstantModelConstructible, ite_eq_left
         (show CompactSpace U ∧ QuasiSeparatedSpace U from ⟨inferInstance, inferInstance⟩)]
         using hF)
     obtain ⟨⟨R, e, _, hR⟩, _, _⟩ := hopen F S hS
     exact (by
-      simpa only [IsConstantModelConstructible, if_pos
+      simpa only [IsConstantModelConstructible, ite_eq_left
         (show CompactSpace T ∧ QuasiSeparatedSpace T from ⟨inferInstance, inferInstance⟩)]
         using (show IsFiniteConstantStratified Λ T _ from ⟨R, hR⟩))
   · intro G hG
     obtain ⟨S, hS⟩ := (show IsFiniteConstantStratified Λ Z G from by
-      simpa only [IsConstantModelConstructible, if_pos
+      simpa only [IsConstantModelConstructible, ite_eq_left
         (show CompactSpace Z ∧ QuasiSeparatedSpace Z from ⟨inferInstance, inferInstance⟩)]
         using hG)
     obtain ⟨⟨R, e, _, hR⟩, _, _⟩ := hclosed G S hS
     exact (by
-      simpa only [IsConstantModelConstructible, if_pos
+      simpa only [IsConstantModelConstructible, ite_eq_left
         (show CompactSpace T ∧ QuasiSeparatedSpace T from ⟨inferInstance, inferInstance⟩)]
         using (show IsFiniteConstantStratified Λ T _ from ⟨R, hR⟩))
   · intro F S hS

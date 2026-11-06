@@ -63,7 +63,7 @@ theorem finiteP1_ordinary_kummer_boundary
   apply finiteP1_ordinary_kummer_boundary_of_class l E e k hS n c
   exact (Etale.projectiveLineTraceDatum (l ^ (n + 1))
     (pow_pos (Fact.out : l.Prime).pos _) (FiniteRing l E n)
-    (ULift.ext _ _ (coefficient_annihilates l E n)) S
+    (ULift.ext (coefficient_annihilates l E n)) S
     (by simpa only [Nat.cast_pow] using hS.pow (n + 1))).chern_spec
 
 end AlgebraicGeometry.ProEtale.DiagonalTrace

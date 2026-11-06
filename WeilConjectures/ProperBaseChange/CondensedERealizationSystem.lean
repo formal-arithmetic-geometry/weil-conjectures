@@ -179,8 +179,7 @@ private def tensorAdjunction (F : C ⥤ D) [F.Additive] [F.Linear R]
             ((G.mapLinearMap R).baseChange (Localization.Away p)
               ((F.mapLinearMap R).baseChange (Localization.Away p) f))
             (1 ⊗ₜ[R] adj.unit.app X.obj)
-        induction f using TensorProduct.induction_on with
-        | zero => simp only [map_zero, LinearMap.zero_apply]
+        induction f using TensorProduct.inductionOn with
         | tmul a f =>
           simp only [LinearMap.baseChange_tmul, Functor.coe_mapLinearMap,
             ScalarLocalization.composition_tmul, one_mul, mul_one]
@@ -196,8 +195,7 @@ private def tensorAdjunction (F : C ⥤ D) [F.Additive] [F.Linear R]
             ((F.mapLinearMap R).baseChange (Localization.Away p)
               ((G.mapLinearMap R).baseChange (Localization.Away p) f)) =
           ScalarLocalization.composition R D p _ _ _ f (1 ⊗ₜ[R] adj.counit.app X.obj)
-        induction f using TensorProduct.induction_on with
-        | zero => simp only [map_zero, LinearMap.zero_apply]
+        induction f using TensorProduct.inductionOn with
         | tmul a f =>
           simp only [LinearMap.baseChange_tmul, Functor.coe_mapLinearMap,
             ScalarLocalization.composition_tmul, one_mul, mul_one]

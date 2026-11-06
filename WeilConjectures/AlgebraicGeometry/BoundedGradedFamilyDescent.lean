@@ -160,7 +160,7 @@ theorem bounded_graded_family_descent
   · intro n hn
     have hs : n ∉ s := by simp only [s, Finset.mem_Icc]; omega
     dsimp only [F]
-    rw [dif_neg hs]
+    rw [dite_eq_right hs]
     exact zeroFree_isZero _
   · intro n
     have := hFfp n

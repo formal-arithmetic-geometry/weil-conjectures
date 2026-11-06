@@ -49,6 +49,6 @@ private theorem completion_unit_isIso (X : Scheme.{u})
   let : L.EssSurj := Localization.essSurj L W
   let P := L.objPreimage K
   let e : DerivedCategory.Q.obj P.obj ≅ K := L.objObjPreimageIso K
-  exact ((roosIntrinsicCompletenessEquivalence p l (by omega) E X d hd K P e).out 0 4).mp hK
+  exact ((roosIntrinsicCompletenessEquivalence p l (by omega) E X d hd K P e).out 1 5).mp hK
 
 end WeilConjectures.GeneratorReduction

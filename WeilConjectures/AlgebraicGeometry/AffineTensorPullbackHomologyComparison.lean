@@ -128,8 +128,7 @@ theorem affine_tensor_pullback_homology_comparison (S : Scheme.{u}) [IsAffine S]
     HomologicalComplex.Hom.isoOfComponents e₀ (by
       intro i j hij
       ext x
-      induction x using TensorProduct.induction_on with
-      | zero => simp only [map_zero]
+      induction x using TensorProduct.inductionOn with
       | tmul x b => rfl
       | add x y hx hy =>
         simp only [ModuleCat.comp_apply, map_add] at hx hy ⊢

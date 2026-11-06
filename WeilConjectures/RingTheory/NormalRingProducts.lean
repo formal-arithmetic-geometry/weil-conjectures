@@ -87,7 +87,7 @@ theorem isIntegral_iff {I : Type w} [Finite I] {R : I → Type u} {S : I → Typ
         _ = D := Nat.sub_add_cancel (hd i)
     have hqcoeff (i : I) : (q i).coeff D = 1 := by
       simp only [q, Polynomial.coeff_X_pow_mul']
-      rw [if_pos (Nat.sub_le _ _), Nat.sub_sub_self (hd i)]
+      rw [ite_eq_left (Nat.sub_le _ _), Nat.sub_sub_self (hd i)]
       exact (hp i).coeff_natDegree
     let Q := (Polynomial.piEquiv R).symm q
     have hmap (i : I) : Q.map (Pi.evalRingHom R i) = q i :=

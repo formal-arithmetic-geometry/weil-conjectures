@@ -50,7 +50,7 @@ private theorem product_projection {A : Type*} [Category A]
     {F G : ℕ → A} [HasProduct F] [HasProduct G] {X : A}
     (a : ∀ n, X ⟶ F n) (b : ∀ n, F n ⟶ G n) (n : ℕ) :
     (Pi.lift a ≫ Limits.Pi.map b) ≫ Pi.π G n = a n ≫ b n := by
-  simp only [Category.assoc, Pi.map_π, Pi.lift_π_assoc]
+  simp only [Category.assoc, Pi.map_π, Pi.lift_comp_π_assoc]
 
 /-- The product coordinates are the tensors of quotient units, and the second coordinate
 is zero. Source: Stacks 03EL, 07A4 and 0941

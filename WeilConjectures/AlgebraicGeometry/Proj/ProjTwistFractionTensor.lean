@@ -129,10 +129,7 @@ private lemma tensor_representative {S : Type u} [CommRing S] [Algebra R S]
     (x : S ⊗[R] twistChartFractionSubmodule 𝒜 n f j) :
     ∃ (m i : ℕ) (hi : (i : ℤ) = j + (m : ℤ) * n) (c : S ⊗[R] 𝒜 i),
       (fractionMap 𝒜 (f := f) j m i hi).baseChange S c = x := by
-  induction x using TensorProduct.induction_on with
-  | zero =>
-    refine ⟨j.natAbs, (j + (j.natAbs : ℤ) * n).toNat,
-      Int.toNat_of_nonneg (nonnegative_offset hn j), 0, map_zero _⟩
+  induction x using TensorProduct.inductionOn with
   | tmul s z =>
     obtain ⟨m, i, a, hi, ha, hz⟩ := twistChartFraction_representative 𝒜 hf hn j z
     refine ⟨m, i, hi, s ⊗ₜ[R] ⟨a, ha⟩, ?_⟩
@@ -151,8 +148,7 @@ private lemma tensor_representative {S : Type u} [CommRing S] [Algebra R S]
         (fractionMap 𝒜 (f := f) j (m + k) (i + k * n) (degree_add j m i k hi)).baseChange S
           ((transition 𝒜 hf i k).baseChange S c) =
         (fractionMap 𝒜 (f := f) j m i hi).baseChange S c := by
-      induction c using TensorProduct.induction_on with
-      | zero => simp only [map_zero]
+      induction c using TensorProduct.inductionOn with
       | tmul s a =>
         simp only [LinearMap.baseChange_tmul]
         exact congrArg (fun z ↦ s ⊗ₜ[R] z) (fraction_transition 𝒜 hf j m i k hi a)
@@ -234,8 +230,7 @@ theorem exists_twistChartFraction_tensor_embedding
   have hnum (m i : ℕ) (hi : (i : ℤ) = j + (m : ℤ) * n) (c : S ⊗[R] 𝒜 i) :
       L ((fractionMap 𝒜 (f := f) j m i hi).baseChange S c) =
         num m (β (((𝒜 i).toBaseChange S c : (𝒜 i).baseChange S) : S ⊗[R] A)) := by
-    induction c using TensorProduct.induction_on with
-    | zero => simp only [map_zero, ZeroMemClass.coe_zero]
+    induction c using TensorProduct.inductionOn with
     | tmul s a =>
       rw [LinearMap.baseChange_tmul, hfrac]
       change num m (s • ψ (a : A)) = num m (β (s ⊗ₜ[R] (a : A)))
@@ -258,8 +253,7 @@ theorem exists_twistChartFraction_tensor_embedding
       (((𝒜 i).toBaseChange S c : (𝒜 i).baseChange S) : S ⊗[R] A) *
         (1 ⊗ₜ[R] f) ^ k := by
     clear hk
-    induction c using TensorProduct.induction_on with
-    | zero => simp only [map_zero, ZeroMemClass.coe_zero, zero_mul]
+    induction c using TensorProduct.inductionOn with
     | tmul s a =>
       change s ⊗ₜ[R] ((a : A) * f ^ k) = (s ⊗ₜ[R] (a : A)) * (1 ⊗ₜ[R] f) ^ k
       rw [Algebra.TensorProduct.tmul_pow, Algebra.TensorProduct.tmul_mul_tmul]
@@ -277,8 +271,7 @@ theorem exists_twistChartFraction_tensor_embedding
         ((transition 𝒜 hf i k).baseChange S c) =
       (fractionMap 𝒜 (f := f) j m i hi).baseChange S c := by
     clear hk ht hz
-    induction c using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction c using TensorProduct.inductionOn with
     | tmul s a =>
       simp only [LinearMap.baseChange_tmul]
       exact congrArg (fun z ↦ s ⊗ₜ[R] z) (fraction_transition 𝒜 hf j m i k hi a)

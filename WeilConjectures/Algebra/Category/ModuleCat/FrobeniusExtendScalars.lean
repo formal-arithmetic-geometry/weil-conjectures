@@ -151,10 +151,7 @@ def counitApp (M : ModuleCat.{u} A) :
     { toFun z := TensorProduct.lift (D.traceSMul M) z
       map_add' z z' := map_add _ _ _
       map_smul' r z := by
-        induction z using TensorProduct.induction_on with
-        | zero =>
-          have h0 : r • (0 : (restrictScalars f).obj ((extendScalars f).obj M)) = 0 := smul_zero r
-          erw [h0, map_zero, smul_zero]
+        induction z using TensorProduct.inductionOn with
         | add z z' hz hz' =>
           erw [smul_add, map_add, map_add, hz, hz', smul_add]
         | tmul s m => exact (congrArg (· • m) (D.trace_mul r s)).trans (mul_smul _ _ _) }
@@ -192,8 +189,7 @@ def adjunction : restrictScalars.{u} f ⊣ extendScalars.{u, u, u} f :=
           naturality M M' h := by
             ext z
             change D.counitApp M' ((extendScalars f).map h z) = h (D.counitApp M z)
-            induction z using TensorProduct.induction_on with
-            | zero => erw [map_zero, map_zero]
+            induction z using TensorProduct.inductionOn with
             | add z z' hz hz' => erw [map_add, map_add, hz, hz', map_add, map_add]
             | tmul s m => exact (h.hom.map_smul _ m).symm }
       left_triangle := by

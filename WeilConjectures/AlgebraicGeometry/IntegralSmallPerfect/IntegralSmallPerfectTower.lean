@@ -114,7 +114,7 @@ private theorem perfect_derived_map_bijective
     (F.mapDerivedCategory.mapIso eL)).bijective.comp h'
   simpa only [Function.comp_def, Iso.homCongr_apply, Functor.map_comp, Functor.mapIso_hom,
     Functor.mapIso_inv, Iso.symm_hom, Iso.symm_inv, Category.assoc,
-    Iso.map_inv_hom_id_assoc, Iso.map_inv_hom_id, Category.comp_id] using h''
+    Iso.inv_hom_id_map_assoc, Iso.inv_hom_id_map, Category.comp_id] using h''
 
 
 private theorem shrink_finite_projective_complex

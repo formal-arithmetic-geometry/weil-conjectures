@@ -247,8 +247,7 @@ theorem rationalScalarAmbientLocalizationTransport
       G.map f = eqToHom (hobj M) ≫
         (Φ M N f : (⟨Ext.obj M.obj⟩ : sfRationalConstructibleCategory l F W) ⟶
           ⟨Ext.obj N.obj⟩) ≫ eqToHom (hobj N).symm := by
-    induction f using TensorProduct.induction_on with
-    | zero => simp
+    induction f using TensorProduct.inductionOn with
     | tmul a g =>
       refine (conj_eqToHom_iff_heq _ _ (hobj M) (hobj N)).2 ?_
       refine (sfRationalScalarExtension_map_tmul l E W 0 hl F ι M.obj N.obj g a).trans
@@ -269,11 +268,9 @@ theorem rationalScalarAmbientLocalizationTransport
         (h₀ : (rationalScalarDerivedRestriction l E F ι W).obj K ⟶ N.obj.obj) :
         ψ N (a ⊗ₜ h₀) = c a ⊗ₜ e₀ N.obj h₀ :=
       Localization.Away.semilinearTensorMap_tmul c hc _ (he₀_smul _) a h₀
-    induction f using TensorProduct.induction_on with
-    | zero => simp
+    induction f using TensorProduct.inductionOn with
     | tmul a g =>
-      induction h using TensorProduct.induction_on with
-      | zero => simp
+      induction h using TensorProduct.inductionOn with
       | tmul a' h₀ =>
         have h1 : (a' ⊗ₜ h₀ : ScalarLocalization.mk
             ((rationalScalarDerivedRestriction l E F ι W).obj K) ⟶ ιE.obj M) ≫ ιE.map (a ⊗ₜ g) =

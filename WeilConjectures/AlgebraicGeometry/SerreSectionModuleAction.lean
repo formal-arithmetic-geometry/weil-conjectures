@@ -326,7 +326,7 @@ private theorem homogeneous_unit (z : ℤ) (s : serreSectionPiece k G z) :
   apply piece_heq k G (by omega)
   intro hz hw
   have h : 0 ≤ z := hw.down
-  simp only [serreSectionHomogeneous, dif_pos h]
+  simp only [serreSectionHomogeneous, dite_eq_left h]
   exact serreTwistedSectionsUnit k G z (s ⟨h⟩)
 
 private theorem section_zero_heq {z w : ℤ} (h : z = w) :
@@ -348,9 +348,9 @@ private theorem homogeneous_mul (e f : ℕ) (z : ℤ)
   intro hz hw
   by_cases h : 0 ≤ z
   · have hf : 0 ≤ z + f := by omega
-    simp only [serreSectionHomogeneous, dif_pos h, dif_pos hf]
+    simp only [serreSectionHomogeneous, dite_eq_left h, dite_eq_left hf]
     exact serreTwistedSectionsMul k G e f z a b ha hb (s ⟨h⟩)
-  · simp only [serreSectionHomogeneous, dif_neg h]
+  · simp only [serreSectionHomogeneous, dite_eq_right h]
     split_ifs <;> (try simp only [map_zero]) <;>
       exact section_zero_heq k G (by omega)
 

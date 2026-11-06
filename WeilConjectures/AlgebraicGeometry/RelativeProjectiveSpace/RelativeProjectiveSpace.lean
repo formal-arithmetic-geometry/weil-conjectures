@@ -173,12 +173,12 @@ private def freeSectionEquiv (I : Type u) [Fintype I] [DecidableEq I] (U : X.Ope
     rw [map_sum, Finset.sum_eq_single j _ (by simp)]
     · have h := congrArg (fun f ↦ f.val.app (op U) (c j))
         (Scheme.Modules.ιFree_freeπ (X := X) j j)
-      rw [if_pos rfl] at h
+      rw [ite_eq_left rfl] at h
       exact h
     · intro i _ hij
       have h := congrArg (fun f ↦ f.val.app (op U) (c i))
         (Scheme.Modules.ιFree_freeπ (X := X) i j)
-      rw [if_neg hij] at h
+      rw [ite_eq_right hij] at h
       exact h
 
 set_option backward.isDefEq.respectTransparency.types false in
@@ -317,7 +317,7 @@ private theorem monomialMap_basis (n : ℕ) (U : X.Opens)
       monomial X r n a U := by
   rw [monomialSectionBasis_apply]
   have h := congrArg (fun t ↦ t.val.app (op U) (1 : X.ringCatSheaf.obj.obj (op U)))
-    (Sigma.ι_desc (fun a ↦ monomialUnit X r n a) a)
+    (Sigma.ι_comp_desc (fun a ↦ monomialUnit X r n a) a)
   change (monomialMap X r n).val.app (op U)
       ((SheafOfModules.ιFree (R := X.ringCatSheaf) a).val.app (op U)
         (1 : X.ringCatSheaf.obj.obj (op U))) =
@@ -625,7 +625,7 @@ private theorem monomialUnit_eq (U : X.Opens) (a : Γ(X, U)) :
     (monomialMap X r 0).val.app (op U) ((monomialUnitMap X r).val.app (op U) a) =
       (SymmetricAlgebraSheaf.algebra (freeModule X r)).hom.hom.app (op U) a := by
   have h := congrArg (fun t ↦ t.val.app (op U) a)
-    (Sigma.ι_desc (fun a ↦ monomialUnit X r 0 a) (zeroMonomial r))
+    (Sigma.ι_comp_desc (fun a ↦ monomialUnit X r 0 a) (zeroMonomial r))
   change (monomialMap X r 0).val.app (op U) ((monomialUnitMap X r).val.app (op U) a) =
     (monomialUnit X r 0 (zeroMonomial r)).val.app (op U) a at h
   rw [h]
@@ -869,7 +869,7 @@ private theorem homogeneous_range_aux
   apply congrArg Set.range
   funext a
   have h := congrArg (fun t ↦ t.val.app (op U) (1 : X.ringCatSheaf.obj.obj (op U)))
-    (Sigma.ι_desc (fun a ↦ monomialUnit X r n a) a)
+    (Sigma.ι_comp_desc (fun a ↦ monomialUnit X r n a) a)
   change (monomialMap X r n).val.app (op U)
       ((SheafOfModules.ιFree (R := X.ringCatSheaf) a).val.app (op U)
         (1 : X.ringCatSheaf.obj.obj (op U))) =

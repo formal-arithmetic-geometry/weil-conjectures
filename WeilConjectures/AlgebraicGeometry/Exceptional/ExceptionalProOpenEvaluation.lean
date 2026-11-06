@@ -195,7 +195,7 @@ private theorem coextension_zero (T : Scheme.{u}) (O : Type (u + 1)) [CommRing O
   change IsZero (SequenceCoinduced.rightLevel.{u + 1, u, u + 1}
     (coefficientRings (J := Scheme.ProEt.topology T) (O := O) (ell := ell)) n M k)
   dsimp only [SequenceCoinduced.rightLevel]
-  rw [dif_neg h]
+  rw [dite_eq_right h]
   exact isZero_zero _
 
 private theorem coextension_counit (T : Scheme.{u}) (O : Type (u + 1)) [CommRing O]

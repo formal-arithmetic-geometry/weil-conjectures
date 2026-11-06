@@ -51,7 +51,7 @@ private theorem roosUnit_coordinate (X : Scheme.{u})
       ((IntegralOnSlice.augmentation l E X none).app P).app (op n) := by
   rw [IntegralOnSlice.roosUnit_eq, ← Category.assoc,
     CochainComplex.mappingCocone.lift_fst]
-  exact Pi.lift_π _ _
+  exact Pi.lift_comp_π _ _
 
 private theorem roosUnit_projection (X : Scheme.{u})
     (P : CochainComplex (scalarReductionSource l E X) ℤ) (n : ℕ) :

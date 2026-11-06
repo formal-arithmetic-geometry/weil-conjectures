@@ -131,21 +131,21 @@ theorem exists_splitting_of_isUnit_entry
     · subst j
       have hS : S i = LinearMap.ker α := by simp [S]
       let g' := (g i).trans (LinearEquiv.ofEq _ _ hS)
-      simpa only [n', if_true] using Nonempty.intro (bi.map g'.symm)
+      simpa only [n', ite_true] using Nonempty.intro (bi.map g'.symm)
     · by_cases hj : j = i - 1
       · subst j
         have hS : S (i - 1) = LinearMap.ker β := by simp [S, hii]
         let g' := (g (i - 1)).trans (LinearEquiv.ofEq _ _ hS)
-        simpa only [n', if_neg hii, if_true] using Nonempty.intro (bj.map g'.symm)
+        simpa only [n', ite_eq_right hii, ite_true] using Nonempty.intro (bj.map g'.symm)
       · have hS : S j = ⊤ := by simp [S, hi, hj]
         let g' := (g j).trans (LinearEquiv.ofEq _ _ hS)
         let e' := g'.trans (Submodule.topEquiv : _ ≃ₗ[R] _)
-        simpa only [n', if_neg hi, if_neg hj] using Nonempty.intro ((b j).map e'.symm)
+        simpa only [n', ite_eq_right hi, ite_eq_right hj] using Nonempty.intro ((b j).map e'.symm)
   · have hp := p.isLt
-    simp only [n', if_true]
+    simp only [n', ite_true]
     omega
   · have hq := q.isLt
-    simp only [n', if_neg hii, if_true]
+    simp only [n', ite_eq_right hii, ite_true]
     omega
   · intro j hi hj
     simp [n', hi, hj]

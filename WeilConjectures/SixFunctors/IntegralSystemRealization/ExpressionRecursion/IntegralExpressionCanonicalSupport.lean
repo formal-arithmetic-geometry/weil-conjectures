@@ -33,6 +33,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 private theorem inverseOrZero_eq_inv {C : Type*} [Category C] [HasZeroMorphisms C]
     {X Y : C} (f : X ⟶ Y) [IsIso f] : GeneratorReduction.inverseOrZero f = inv f := by
-  simp only [GeneratorReduction.inverseOrZero, dif_pos (inferInstance : IsIso f)]
+  simp only [GeneratorReduction.inverseOrZero, dite_eq_left (inferInstance : IsIso f)]
 
 end WeilConjectures.IntegralSystemRealization.ExpressionRecursion

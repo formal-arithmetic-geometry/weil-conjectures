@@ -49,11 +49,9 @@ noncomputable def fullSubcategoryInclusion : ScalarLocalization R P.FullSubcateg
         (composition R P.FullSubcategory p K.obj M.obj N.obj g f) =
       composition R C p K.obj.obj M.obj.obj N.obj.obj
         (TensorProduct.congr _ _ g) (TensorProduct.congr _ _ f)
-    induction g using TensorProduct.induction_on with
-    | zero => simp
+    induction g using TensorProduct.inductionOn with
     | tmul b g =>
-      induction f using TensorProduct.induction_on with
-      | zero => simp
+      induction f using TensorProduct.inductionOn with
       | tmul a f =>
         simp only [composition_tmul, TensorProduct.congr_tmul]
         rfl

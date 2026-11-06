@@ -48,7 +48,7 @@ private theorem faithful_pullback_cover {X : Scheme.{u}} (C : X.OpenCover) :
   let e : Modules.restrictFunctor (C.f i) ≅
       Modules.pullback (Sigma.desc C.f) ⋙ Modules.pullback (Sigma.ι C.X i) :=
     Modules.restrictFunctorIsoPullback (C.f i) ≪≫
-      Modules.pullbackCongr (Sigma.ι_desc C.f i).symm ≪≫
+      Modules.pullbackCongr (Sigma.ι_comp_desc C.f i).symm ≪≫
       (Modules.pullbackComp (Sigma.ι C.X i) (Sigma.desc C.f)).symm
   apply (cancel_epi (e.inv.app P)).mp
   apply (cancel_mono (e.hom.app Q)).mp

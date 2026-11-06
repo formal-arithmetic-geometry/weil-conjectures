@@ -51,11 +51,9 @@ private noncomputable def tensorMatrixAlgEquiv (K : Type u) [Field K]
       simp [Matrix.one_apply, TensorProduct.tmul_ite, ← Algebra.TensorProduct.one_def])
     (by
       intro x y
-      induction x using TensorProduct.induction_on with
-      | zero => simp
+      induction x using TensorProduct.inductionOn with
       | tmul s a =>
-        induction y using TensorProduct.induction_on with
-        | zero => simp
+        induction y using TensorProduct.inductionOn with
         | tmul t b =>
           rw [Algebra.TensorProduct.tmul_mul_tmul]
           simp only [tensorMatrixLinear_tmul]
@@ -115,7 +113,7 @@ private theorem amplify_scalar (K : Type u) [Field K] (n d : ℕ)
     have hpair : ¬ ((finProdFinEquiv.symm i).1 = (finProdFinEquiv.symm j).1 ∧
         (finProdFinEquiv.symm i).2 = (finProdFinEquiv.symm j).2) :=
       fun heq ↦ hp (Prod.ext heq.1 heq.2)
-    simp only [hij, if_false]
+    simp only [hij, ite_false]
     split_ifs <;> simp_all
 
 /-- A positive matrix amplification realizes the original scalar-defect class.

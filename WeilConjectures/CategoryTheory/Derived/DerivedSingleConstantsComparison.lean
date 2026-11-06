@@ -54,7 +54,7 @@ private theorem single_comp {C D E : Type*} [Category C] [Category D] [Category 
   apply HomologicalComplex.to_single_hom_ext
   simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
     HomologicalComplex.singleMapHomologicalComplex_hom_app_self, Functor.map_comp,
-    Category.assoc, Iso.map_inv_hom_id_assoc,
+    Category.assoc, Iso.inv_hom_id_map_assoc,
     Functor.mapHomologicalComplexCompIso_hom_app_f, Iso.refl_hom, NatTrans.id_app,
     Functor.comp_obj, Functor.comp_map]
   erw [CategoryTheory.Functor.map_id, Category.id_comp]

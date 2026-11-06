@@ -548,7 +548,7 @@ private theorem canonicalAugmentation_spec (l : ℕ) [Fact l.Prime] (E : Type u)
           (((unrestrictedIntegralFiniteComplex l E Y n).obj C).X i) V
           (unrestrictedIntegralTensorSection l E Y n (C.X i) (op V) 1 x) := by
     rw [← Category.assoc, hf]
-    simp only [productAug, Pi.lift_π]
+    simp only [productAug, Pi.lift_comp_π]
     exact augmentationTower_formula l E g C n i V x
   exact ⟨hformula, hs⟩
 

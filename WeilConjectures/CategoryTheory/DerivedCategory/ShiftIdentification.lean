@@ -142,6 +142,6 @@ theorem isZero_rightDerived_shift_identification [PreservesFiniteLimits F]
         ((RF.commShiftIso (-q)).app L) ≪≫
         ((DerivedCategory.Plus.homologyFunctor D 0).shiftIso (-q) (p + q) p
           (by omega)).app (RF.obj L))
-  · simpa only [if_pos hp] using (isZero_zero D)
+  · simpa only [ite_eq_left hp] using (isZero_zero D)
 
 end CategoryTheory.Functor

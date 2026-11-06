@@ -108,7 +108,7 @@ theorem exists_galois_genericEmb_finset {W : C.Opens} (hW : IsAffineOpen W) [Non
   -- the maps `Γ(C, W) ⊗_{k₀} F ⟶ Ω` are injective
   have hinj (ν : Γ(C, W) ⊗[K] F →ₐ[Γ(C, W)] Ω) : Function.Injective ν := by
     have hker : RingHom.ker ν.toRingHom = ⊥ := by
-      refine Ideal.eq_bot_of_comap_eq_bot (R := Γ(C, W)) ?_
+      refine Ideal.eq_bot_of_under_eq_bot (R := Γ(C, W)) ?_
       ext r
       rw [Ideal.mem_comap, RingHom.mem_ker, AlgHom.toRingHom_eq_coe, RingHom.coe_coe,
         AlgHom.commutes, Ideal.mem_bot]

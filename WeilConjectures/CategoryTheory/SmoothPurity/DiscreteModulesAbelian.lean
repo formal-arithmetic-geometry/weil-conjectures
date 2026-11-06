@@ -12,7 +12,7 @@ public import Mathlib.Topology.Connected.TotallyDisconnected
 public import Mathlib.Topology.Separation.Hausdorff
 public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
 import Mathlib.Algebra.Category.ModuleCat.EnoughInjectives
-import Mathlib.Data.Countable.Small
+import Mathlib.Basic.Countable.Small
 import WeilConjectures.RepresentationTheory.OpenStabilizerAdjunction
 import WeilConjectures.RepresentationTheory.RepresentationLiftedGroupAlgebraEquivalence
 import WeilConjectures.RepresentationTheory.SmoothPurity.DiscreteRep

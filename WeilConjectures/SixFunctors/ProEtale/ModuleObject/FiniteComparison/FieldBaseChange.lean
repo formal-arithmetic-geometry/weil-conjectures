@@ -117,7 +117,7 @@ theorem isIso_baseChangeMap_app_of_field_finiteCoefficient [LocallyOfFiniteType 
     (hA : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} (ULift.{u + 1} T)) X
       ((finiteCoefficientDerivedEquivalence X T).functor.obj A)) :
     IsIso ((baseChangeMap (Profinite.continuousMapRingObj T) (CommSq.mk sq.w)).app A) := by
-  have hΛ : (n : ULift.{u + 1} T) = 0 := ULift.ext _ _ hT
+  have hΛ : (n : ULift.{u + 1} T) = 0 := ULift.ext hT
   have h := isIso_derivedBaseChangeMap_app_of_field (ULift.{u + 1} T) sq n hn hΛ _ hA
   have h2 := (isIso_baseChangeMap_app_finiteCoefficient_iff sq.toCommSq A).2 h
   exact_mod_proofs h2

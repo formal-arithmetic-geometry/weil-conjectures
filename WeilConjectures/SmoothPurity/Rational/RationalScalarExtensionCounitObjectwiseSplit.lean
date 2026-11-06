@@ -175,7 +175,7 @@ private theorem integral_restriction_retract
   refine ⟨eP.inv ≫ DerivedCategory.Q.map (Pi.lift (fun _ : Fin d ↦ 𝟙 P)) ≫ e.inv,
     e.hom ≫ DerivedCategory.Q.map (Pi.π (fun _ : Fin d ↦ P) j) ≫ eP.hom, ?_⟩
   simp only [Category.assoc, Iso.inv_hom_id_assoc, ← CategoryTheory.Functor.map_comp_assoc,
-    Pi.lift_π]
+    Pi.lift_comp_π]
   erw [CategoryTheory.Functor.map_id]
   simp only [Category.id_comp, Iso.inv_hom_id]
 

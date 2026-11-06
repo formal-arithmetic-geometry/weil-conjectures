@@ -891,7 +891,7 @@ private theorem pbcCompleteRaw_factor (h : E ≤ F) (hne : E ≠ F) :
   have he : pbcAmbientCompleteRawTransition l Ω W h =
       (pbcAmbientCompleteRaw_exists l Ω W h).exists.choose := by
     delta pbcAmbientCompleteRawTransition
-    exact dif_neg hne
+    exact dite_eq_right hne
   exact (congrArg (pbcAmbientCompleteLocalization l Ω W E ⋙ ·) he).trans
     (pbcAmbientCompleteRaw_exists l Ω W h).exists.choose_spec
 
@@ -902,7 +902,7 @@ private theorem pbcConstructibleRaw_factor (h : E ≤ F) (hne : E ≠ F) :
   have he : pbcScalarExtension l Ω W hDim.out hInv.out h =
       (pbcRationalScalarExtension_exists l Ω W hDim.out hInv.out h).exists.choose := by
     delta pbcScalarExtension
-    exact dif_neg hne
+    exact dite_eq_right hne
   exact (congrArg (pbcStageLocalization l Ω W E ⋙ ·) he).trans
     (pbcRationalScalarExtension_exists l Ω W hDim.out hInv.out h).exists.choose_spec
 
@@ -914,7 +914,7 @@ private theorem pbcCompleteRawIntegralComparison_id (h : E ≤ F) (hne : E ≠ F
   have he : pbcAmbientCompleteRawTransition l Ω W h =
       (pbcAmbientCompleteRaw_exists l Ω W h).exists.choose := by
     delta pbcAmbientCompleteRawTransition
-    exact dif_neg hne
+    exact dite_eq_right hne
   exact coefficientIso_hom_app_id
     (congrArg (pbcAmbientCompleteLocalization l Ω W E ⋙ ·) he) rfl
     (pbcAmbientCompleteIntegralComparison l Ω W h)
@@ -930,7 +930,7 @@ private theorem pbcConstructibleRawIntegralComparison_id (h : E ≤ F) (hne : E 
   have he : pbcScalarExtension l Ω W hDim.out hInv.out h =
       (pbcRationalScalarExtension_exists l Ω W hDim.out hInv.out h).exists.choose := by
     delta pbcScalarExtension
-    exact dif_neg hne
+    exact dite_eq_right hne
   exact coefficientIso_hom_app_id (congrArg (pbcStageLocalization l Ω W E ⋙ ·) he) rfl
     (pbcScalarIntegralComparison l Ω W hDim.out hInv.out h)
     (pbcRationalScalarExtension_exists l Ω W hDim.out hInv.out h).exists.choose_spec
