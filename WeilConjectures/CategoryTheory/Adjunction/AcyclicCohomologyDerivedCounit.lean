@@ -276,14 +276,16 @@ private theorem injective_counit [HasDerivedCategory C] [HasDerivedCategory D] [
   have : IsIso (DerivedCategory.Plus.Qh.map
       (adj.mapHomotopyCategoryPlus.counit.app K)) :=
     Localization.inverts DerivedCategory.Plus.Qh (HomotopyCategory.Plus.quasiIso D) _ hmem
-  have : IsIso (R.rightDerivedFunctorPlusUnit.app K) := inferInstance
-  have : IsIso (F.mapDerivedCategoryPlus.map (R.rightDerivedFunctorPlusUnit.app K) ≫
+  have : IsIso (R.rightDerivedFunctorPlusUnith.app K) := inferInstance
+  have : IsIso (F.mapDerivedCategoryPlus.map (R.rightDerivedFunctorPlusUnith.app K) ≫
       adj.derivedPlus.counit.app (DerivedCategory.Plus.Qh.obj K)) := by
     rw [adj.derivedPlus_counit_app_fac]
     infer_instance
-  change IsIso (adj.derivedPlus.counit.app (DerivedCategory.Plus.Qh.obj K))
-  exact IsIso.of_isIso_comp_left
-    (F.mapDerivedCategoryPlus.map (R.rightDerivedFunctorPlusUnit.app K)) _
+  have : IsIso (adj.derivedPlus.counit.app (DerivedCategory.Plus.Qh.obj K)) :=
+    IsIso.of_isIso_comp_left
+      (F.mapDerivedCategoryPlus.map (R.rightDerivedFunctorPlusUnith.app K)) _
+  exact (NatTrans.isIso_app_iff_of_iso adj.derivedPlus.counit
+    ((DerivedCategory.Plus.quotientCompQhIso D).app I)).mp this
 
 namespace CategoryTheory.Adjunction
 
@@ -331,7 +333,9 @@ theorem acyclic_cohomology_counit [HasDerivedCategory C] [HasDerivedCategory D] 
     Localization.inverts DerivedCategory.Plus.Qh (HomotopyCategory.Plus.quasiIso D) _
       ((HomotopyCategory.quotient_map_mem_quasiIso_iff _).mpr hi)
   let e : DerivedCategory.Plus.Q.obj I ≅ L :=
-    (asIso (DerivedCategory.Plus.Qh.map ((HomotopyCategory.Plus.quotient D).map i))).symm ≪≫ eK
+    ((DerivedCategory.Plus.quotientCompQhIso D).app I).symm ≪≫
+      (asIso (DerivedCategory.Plus.Qh.map ((HomotopyCategory.Plus.quotient D).map i))).symm ≪≫
+        eK
   let eH (q : ℤ) : I.obj.homology q ≅
       (DerivedCategory.Plus.homologyFunctor D q).obj L :=
     (DerivedCategory.Plus.homologyFunctorObjQIso I q).symm ≪≫
