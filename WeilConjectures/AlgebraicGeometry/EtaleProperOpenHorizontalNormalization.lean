@@ -418,7 +418,6 @@ attribute [local irreducible] upperStar lowerStar openImmersionLowerShriek
   Functor.mapDerivedCategory Functor.mapDerivedCategoryFactors Functor.mapDerivedCategoryFactorsh
   Functor.rightDerivedFunctor Functor.rightDerivedFunctorUnit
   Functor.rightDerivedFunctorObjQIso Functor.mapDerivedCategoryNatIso
-  Functor.mapDerivedCategoryCompIso
 
 set_option backward.isDefEq.respectTransparency true in
 /-- Horizontal pasting for normalized unbounded proper/open comparison families.
