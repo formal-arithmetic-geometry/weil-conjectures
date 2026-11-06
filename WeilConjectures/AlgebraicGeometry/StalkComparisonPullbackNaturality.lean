@@ -67,6 +67,8 @@ def comparisonIntoPullback (z : X')
           (derivedPullback g').obj (DerivedCategory.Q.obj P) from
         cast (by rfl) (inv ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))))
 
+set_option maxHeartbeats 1600000 in
+-- The default 200000 times out at whnf (9.8s); retain the pre-bump localization-comparison budget.
 /-- The comparison into derived pullback is natural for derived isomorphisms of
 K-flat sheaf representatives, using any tensor-algebra lift of the specified
 underlying cohomology transport.
