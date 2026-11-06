@@ -154,6 +154,44 @@ private theorem commonStagePullbackRationalComposition_eq_scalar
   unfold commonStagePullbackRationalComposition rationalPullbackCompositionIso
   simp only [integralPullbackCompositor_eq_choose]
 
+/-- Identify one comparison without expanding the surrounding compositor square. -/
+private theorem commonStagePullbackComparison_eq_transport
+    {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [∀ x : X, Invertible (l : X.residueField x)]
+    [∀ y : Y, Invertible (l : Y.residueField y)]
+    (P : generalAlgebraicallyClosedConstructibleCategory l Ω Y)
+    (L : AlgebraicallyClosedCoefficients.Index l Ω) (hP : P.stage ≤ L)
+    (eX : (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω X).T hP =
+      GeneralAlgebraicallyClosedCoefficients.transition l Ω X P.stage L hP)
+    (eY : (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω Y).T hP =
+      GeneralAlgebraicallyClosedCoefficients.transition l Ω Y P.stage L hP) :
+    commonStagePullbackComparison l Ω f P L hP =
+      (eqToIso eX).app
+          ((rationalDerivedPullback l
+            (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) f).obj P.obj) ≪≫
+        (rationalPullbackScalarComparison l
+          (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage)
+          (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L)
+          (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω P.stage L hP) f).app P.obj ≪≫
+        (rationalDerivedPullback l
+          (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f).mapIso
+          ((eqToIso eY).app P.obj).symm := by
+  unfold commonStagePullbackComparison
+  rfl
+
+/-- Substitute the three comparisons while keeping the compositor itself opaque. -/
+private theorem stage_transport_of_comparisons
+    {C D : Type*} [Category* C] [Category* D] (F : C ⥤ D)
+    {A B W : D} {U V : C} (x : A ⟶ W) (b : B ≅ F.obj U)
+    {a a' : A ≅ B} {c c' : V ≅ U} {d d' : W ≅ F.obj V}
+    (ha : a = a') (hc : c = c') (hd : d = d')
+    (h : x = a'.hom ≫ b.hom ≫ F.map c'.inv ≫ d'.inv) :
+    x = a.hom ≫ b.hom ≫ F.map c.inv ≫ d.inv := by
+  cases ha
+  cases hc
+  cases hd
+  exact h
+
 /-- Transport the rational compositor through the recorded coefficient-stage transitions. -/
 private theorem commonStagePullbackCompComponent_stage_transport
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
@@ -191,12 +229,6 @@ private theorem commonStagePullbackCompComponent_stage_transport
     simpa only [GeneralAlgebraicallyClosedCoefficients.stageSystem] using
       (GeneralAlgebraicallyClosedCoefficients.stageSystem_existsUnique l Ω Z).exists.choose_spec.1
         P.stage L hP
-  have hX : operationStageTransitionIso l Ω X P.stage L hP = eqToIso eX := by
-    rfl
-  have hY : operationStageTransitionIso l Ω Y P.stage L hP = eqToIso eY := by
-    rfl
-  have hZ : operationStageTransitionIso l Ω Z P.stage L hP = eqToIso eZ := by
-    rfl
   have key := rationalPullbackComposition_scalar_transport l
     (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage)
     (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L)
@@ -209,12 +241,14 @@ private theorem commonStagePullbackCompComponent_stage_transport
   apply congrArg (StageSystem.PairCategory.mkHom
       (X := commonStagePullbackObject l Ω (f ≫ g) P)
       (Y := commonStagePullbackObject l Ω f (commonStagePullbackObject l Ω g P)) L hP hP)
-  unfold commonStagePullbackComparison
-  dsimp only [commonStagePullbackObject, StageSystem.PairCategory.toStage]
-  set_option backward.isDefEq.respectTransparency true in
-  set_option backward.isDefEq.respectTransparency.types true in
-    rw [hX, hY, hZ]
-    exact key
+  have hfg := commonStagePullbackComparison_eq_transport l Ω (f ≫ g) P L hP eX eZ
+  have hg := commonStagePullbackComparison_eq_transport l Ω g P L hP eY eZ
+  have hf := commonStagePullbackComparison_eq_transport l Ω f
+    (commonStagePullbackObject l Ω g P) L hP eX eY
+  have h := stage_transport_of_comparisons
+    (rationalDerivedPullback l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f)
+    _ _ hfg hg hf key
+  exact h
 
 
 /-- The selected common-stage component is represented at every larger coefficient stage.
