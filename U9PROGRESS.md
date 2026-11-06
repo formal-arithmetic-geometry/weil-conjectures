@@ -425,20 +425,18 @@
 - All ucheck invocations finished. This final commit changes documentation only.
 
 
-# BZ1067 complete
+# BZ1068 in progress
 
-- Assigned EtaleProperOpenCartesianNormalization is proved and sorry-free.
-- ucheck-bump returned rc=0, failed=0, 11814 jobs; leaf rebuilt in 4.2 seconds.
-  Green source commit: e67539561bf5b8b8b63d3e8ad56c628868e865d1.
-- Applied the exact two-line private-statement API proposal after the user's
-  continuation instruction. The public theorem statement is unchanged.
-- The compositor proof and opaque reducibility attribute are fixed; a direct
-  exchange import avoids the unowned LowerShriekComposition dependency.
-- The sole direct importer EtaleProperOpenExchangeCube was attempted and remains
-  blocked by BZ1057's LowerShriekComposition.lean:113:4 type mismatch, reached via
-  CompactificationProjectionComposition. No unowned source was edited.
-- Four machine rewrite rules replay the exact source diff and are idempotent.
-- Records: /home/ubuntu/u9/bz/FIXES-BZ1067.md and /home/ubuntu/u9/state/BZ1067.DONE.
-- Full logs: BUILD-BZ1067-leaf-full.log and BUILD-BZ1067-downstream1-full.log in ~/u9/bz/.
-- All ucheck invocations finished. This final commit changes progress documentation only.
-- No local Lean/Lake, proof placeholders, trust bypasses, deletions, or heartbeat changes.
+- Branch: u9/BZ1068; starting commit dfaed262b6fc1850faba3b46955a11d3225a1e86.
+- The user instructed continuation after the concrete two-site compositor statement proposal.
+  Applied BZ1068-statement-only.patch; the statement and local hb proof now preserve the
+  original comparison using Mathlib's reversed derived compositor.
+- Merged BZ1059 prerequisite fixes; no duplicate declarations or declaration deletions.
+- Proof-only baseline cleared two errors; next: validate the complete leaf repair with
+  ucheck-bump, then build its four direct importers and continue through unblocked layers.
+- Patterns, exact errors, replay-checked rules: /home/ubuntu/u9/bz/FIXES-BZ1068.md.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
+
+- BZ1068 leaf is GREEN and sorry-free: ucheck-bump rc=0, built=1, failed=0 at
+  6afc4fae13c7e090b915aa0e3d61980300964a3c (poolb:43.157.189.27).
+  Next: validate all four direct importers; leaf log BUILD-BZ1068-leaf-full.log.
