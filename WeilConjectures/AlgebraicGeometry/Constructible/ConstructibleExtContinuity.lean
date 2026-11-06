@@ -42,7 +42,6 @@ import all WeilConjectures.AlgebraicGeometry.CondensedLocalPieceCostalkModel
 import WeilConjectures.AlgebraicGeometry.CondensedFiniteFreeHomContinuity
 import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
 import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SmoothPurity.ConstructibleExtContinuityStratum
 
 /-!
 # Continuity of Ext from constructible complexes
