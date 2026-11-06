@@ -166,9 +166,8 @@ private def sectionScalar (a : (O.obj ⋙ forget CommRingCat).sections)
     (M : ConstantCompletion.Mod O) : End M :=
   ⟨PresheafOfModules.sectionsSMul M.val ⟨a.val, a.property⟩⟩
 
-private local instance scalarUnitSectionsSMul (M : ConstantCompletion.Mod O) (U : Cᵒᵖ) :
-    SMul ((SheafOfModules.unit (siteModuleRings O)).val.obj U) (M.val.obj U) :=
-  inferInstanceAs (SMul (O.obj.obj U) (M.val.obj U))
+attribute [local implicit_reducible] SheafOfModules.unit PresheafOfModules.unit
+  CategoryTheory.sheafCompose
 
 private theorem unit_action_apply (M : ConstantCompletion.Mod O)
     (s : End (SheafOfModules.unit (siteModuleRings O))) (U : Cᵒᵖ) (x : M.val.obj U) :
