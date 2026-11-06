@@ -308,3 +308,7 @@
 - Next: ucheck-bump on the leaf, then its two direct importers and further downstream.
 - Fix records, baseline diagnostics, and prepared downstream patch: /home/ubuntu/u9/bz/FIXES-BZ950.md.
 - No local Lean/Lake, proof placeholders, trust bypasses, heartbeat changes, or profiler probes.
+
+- BZ950 leaf GREEN at d8b603572: ucheck-bump rc=0, failed=0, tree newsrv:/home/ubuntu/u9n/bumpw1.
+- Leaf log: /home/ubuntu/u9/logs/BZ950-20261106T090157.log; local BUILD-BZ950-leaf-green-full.log.
+- The exact approved cast resolved the error without changing the root proof. Continuing to both direct importers.
