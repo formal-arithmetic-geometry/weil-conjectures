@@ -30,6 +30,10 @@ universe u w
 open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry
 
+attribute [local implicit_reducible] Scheme.Modules Scheme.Modules.Hom TopCat.Sheaf
+  DerivedCategory HomotopyCategory
+attribute [local irreducible] Scheme.Modules.tensorPullback
+
 /-- Composing two commuting squares composes their endpoint isomorphisms. -/
 private theorem comparison_comp
     {C : Type*} [Category C] {A B A' B' A'' B'' : C}
