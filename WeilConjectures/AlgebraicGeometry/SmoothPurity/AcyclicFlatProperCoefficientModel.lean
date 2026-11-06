@@ -12,6 +12,12 @@ public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 public import WeilConjectures.Algebra.Homology.CanonicalTensorPullbackOfUniverses.RingedTopoiCanonicalTensorPullbackOfUniverses
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.Algebra.Homology.Localization
+public import Mathlib.CategoryTheory.Limits.HasLimits
+public import Mathlib.Logic.Small.Defs
+import all Mathlib.Algebra.Homology.Localization
+import all Mathlib.CategoryTheory.Limits.HasLimits
+import all Mathlib.Logic.Small.Defs
 import all WeilConjectures.AlgebraicGeometry.ProperBaseChange.WitnessCompatibility
 
 /-!
@@ -79,10 +85,14 @@ def properAcyclicComparison
     DerivedCategory.Q.obj
         (((lowerStar (ModuleCat.{u + 1} A) r).mapHomologicalComplex (.up ℤ)).obj C) ⟶
       (rightDerivedLowerStar (ModuleCat.{u + 1} A) r).obj (DerivedCategory.Q.obj C) :=
-  DerivedCategory.Qh.map
+  (DerivedCategory.quotientCompQhIso _).inv.app
+      (((lowerStar (ModuleCat.{u + 1} A) r).mapHomologicalComplex (.up ℤ)).obj C) ≫
+    DerivedCategory.Qh.map
       (((lowerStar (ModuleCat.{u + 1} A) r).mapHomotopyCategoryFactors (.up ℤ)).inv.app C) ≫
     (lowerStar (ModuleCat.{u + 1} A) r).rightDerivedFunctorUnit.app
-      ((HomotopyCategory.quotient _ (.up ℤ)).obj C)
+      ((HomotopyCategory.quotient _ (.up ℤ)).obj C) ≫
+    (rightDerivedLowerStar (ModuleCat.{u + 1} A) r).map
+      ((DerivedCategory.quotientCompQhIso _).hom.app C)
 
 /-- The ordinary B-linear projection map: the mate of scalar extension of the A-counit
 through the ordinary scalar/pullback isomorphism. Its degreewise adjunct is precisely
@@ -168,8 +178,11 @@ private def acyclicComparisonTransformation
     (F : D ⥤ E) [F.Additive] :
     F.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶
       DerivedCategory.Q ⋙ F.rightDerivedFunctor :=
-  Functor.whiskerRight (F.mapHomotopyCategoryFactors (.up ℤ)).inv DerivedCategory.Qh ≫
-    Functor.whiskerLeft (HomotopyCategory.quotient D (.up ℤ)) F.rightDerivedFunctorUnit
+  Functor.whiskerLeft (F.mapHomologicalComplex (.up ℤ))
+      (DerivedCategory.quotientCompQhIso E).inv ≫
+    Functor.whiskerRight (F.mapHomotopyCategoryFactors (.up ℤ)).inv DerivedCategory.Qh ≫
+    Functor.whiskerLeft (HomotopyCategory.quotient D (.up ℤ)) F.rightDerivedFunctorUnit ≫
+    Functor.whiskerRight (DerivedCategory.quotientCompQhIso D).hom F.rightDerivedFunctor
 
 private def leftComparisonTransformation
     {D E : Type*} [Category D] [Category E] [Abelian D] [Abelian E]
@@ -177,8 +190,11 @@ private def leftComparisonTransformation
     (F : D ⥤ E) [F.Additive] {L : DerivedCategory D ⥤ DerivedCategory E}
     (α : DerivedCategory.Qh ⋙ L ⟶ F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh) :
     DerivedCategory.Q ⋙ L ⟶ F.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q :=
-  Functor.whiskerLeft (HomotopyCategory.quotient _ (.up ℤ)) α ≫
-    Functor.whiskerRight (F.mapHomotopyCategoryFactors (.up ℤ)).hom DerivedCategory.Qh
+  Functor.whiskerRight (DerivedCategory.quotientCompQhIso D).inv L ≫
+    Functor.whiskerLeft (HomotopyCategory.quotient _ (.up ℤ)) α ≫
+    Functor.whiskerRight (F.mapHomotopyCategoryFactors (.up ℤ)).hom DerivedCategory.Qh ≫
+    Functor.whiskerLeft (F.mapHomologicalComplex (.up ℤ))
+      (DerivedCategory.quotientCompQhIso E).hom
 
 section DerivedComparison
 variable {D E : Type*} [Category D] [Category E] [Abelian D] [Abelian E]
@@ -205,9 +221,12 @@ private lemma derived_counit_normalization (adj : F ⊣ G) (C : CochainComplex E
   rw [Adjunction.mapHomotopyCategory_counit_app_quotient] at h
   dsimp only [acyclicComparisonTransformation, leftComparisonTransformation,
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_hom, Quotient.lift.isLift_inv]
-  erw [CategoryTheory.Functor.map_id, Category.id_comp,
-    CategoryTheory.Functor.map_id, Category.comp_id]
+    Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_hom, Quotient.lift.isLift_inv,
+    DerivedCategory.quotientCompQhIso, HomologicalComplexUpToQuasiIso.quotientCompQhIso]
+  repeat' first
+    | erw [CategoryTheory.Functor.map_id]
+    | erw [Category.id_comp]
+    | erw [Category.comp_id]
   exact h
 
 private lemma derived_unit_normalization (adj : F ⊣ G) (C : CochainComplex D ℤ) :
@@ -223,9 +242,12 @@ private lemma derived_unit_normalization (adj : F ⊣ G) (C : CochainComplex D �
   rw [Adjunction.mapHomotopyCategory_unit_app_quotient] at h
   dsimp only [acyclicComparisonTransformation, leftComparisonTransformation,
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_hom, Quotient.lift.isLift_inv]
-  erw [CategoryTheory.Functor.map_id, Category.comp_id,
-    CategoryTheory.Functor.map_id, Category.id_comp]
+    Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_hom, Quotient.lift.isLift_inv,
+    DerivedCategory.quotientCompQhIso, HomologicalComplexUpToQuasiIso.quotientCompQhIso]
+  repeat' first
+    | erw [CategoryTheory.Functor.map_id]
+    | erw [Category.id_comp]
+    | erw [Category.comp_id]
   exact h
 end DerivedComparison
 
