@@ -238,7 +238,11 @@ theorem commonStagePullbackCompComponent_stage_representation
   simp only [eR]
   unfold commonStagePullbackComparison
     operationStageTransitionIso GeneralAlgebraicallyClosedCoefficients.ofHom
-  exact congrArg (StageSystem.PairCategory.mkHom (X := commonStagePullbackObject l Ω (f ≫ g) P)
+  have hkey := congrArg (StageSystem.PairCategory.mkHom
+      (X := commonStagePullbackObject l Ω (f ≫ g) P)
       (Y := commonStagePullbackObject l Ω f (commonStagePullbackObject l Ω g P)) L hP hP) key
+  set_option backward.isDefEq.respectTransparency true in
+  set_option backward.isDefEq.respectTransparency.types true in
+  exact hkey
 
 end WeilConjectures
