@@ -174,7 +174,7 @@ theorem relativeMV_direct_image_square_localization
     NatTrans.id_app, Functor.comp_obj,
     Iso.trans_hom, Iso.symm_hom, Iso.app_hom, NatTrans.comp_app,
     NatIso.mapHomologicalComplex, NatTrans.mapHomotopyCategory,
-    Quotient.natTransLift, DerivedCategory.Qh, DerivedCategory.Q,
+    Quotient.natTransLift, Functor.whiskerRight_app, DerivedCategory.Qh, DerivedCategory.Q,
     DerivedCategory, instCategoryDerivedCategory, Functor.map_comp,
     Functor.map_id, Category.comp_id] using hn
 

@@ -364,7 +364,7 @@ private theorem ordinaryGComp_coherence {X Y Z W : Scheme.{u}}
     (congrArg (modulePullback B) (Category.assoc j h k).symm)
     (congrArg (ordinaryG B) (Category.assoc j h k).symm)
   rw [he] at hd
-  simpa only [ordinaryGComp, Iso.trans_hom, NatTrans.comp_app,
+  simpa only [ordinaryGComp, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.map_comp, Category.assoc]
     using NatTrans.congr_app hd M
 

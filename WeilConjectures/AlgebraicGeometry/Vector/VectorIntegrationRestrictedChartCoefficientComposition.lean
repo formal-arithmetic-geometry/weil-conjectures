@@ -106,8 +106,8 @@ private lemma open_comp_eq (A : Type (u + 1)) [CommRing A] (X : Scheme.{u})
       (Functor.mapDerivedCategoryNatIso
         (upperStarComp (ModuleCat.{u + 1} A) (X.homOfLE h) V.ι U.ι
           (Scheme.homOfLE_ι X h).symm) ≪≫
-        Functor.mapDerivedCategoryCompIso (upperStar (ModuleCat.{u + 1} A) V.ι)
-          (upperStar (ModuleCat.{u + 1} A) (X.homOfLE h))).symm := by
+        (Functor.mapDerivedCategoryCompIso (upperStar (ModuleCat.{u + 1} A) V.ι)
+          (upperStar (ModuleCat.{u + 1} A) (X.homOfLE h))).symm).symm := by
   unfold DegreeZeroMapGluing.openComp
   rw [upperStar_comp_transport A (X.homOfLE h) V.ι U.ι
     (X.homOfLE_ι h).symm, Iso.trans_symm]
@@ -137,7 +137,7 @@ private lemma base_coefficient_comp (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) U.ι)
     (Functor.mapDerivedCategoryNatIso
       (upperStarComp (ModuleCat.{u + 1} A) (S.homOfLE hUV) V.ι U.ι
-        (S.homOfLE_ι hUV).symm) ≪≫ Functor.mapDerivedCategoryCompIso _ _)
+        (S.homOfLE_ι hUV).symm) ≪≫ (Functor.mapDerivedCategoryCompIso _ _).symm)
     (vectorIntegrationBaseCoefficientPullback A N hA t V.ι hS d).hom
     (vectorIntegrationBaseCoefficientPullback A N hA t (S.homOfLE hUV)
       (affineTracePullbackInvertible N V.ι hS) d).hom

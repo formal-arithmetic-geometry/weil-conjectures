@@ -54,7 +54,7 @@ attribute [local implicit_reducible] Scheme.Modules Scheme.Modules.Hom
   Scheme.Hom.toRingCatSheafHom SheafOfModules.pushforward SheafOfModules.forget
   SheafOfModules.toSheaf PresheafOfModules.toPresheaf HomologicalComplex.homology
   HomologicalComplex.shortComplexFunctor HomologicalComplex.shortComplexFunctor'
-  ShortComplex.map PresheafOfModules.pushforward PresheafOfModules.pushforward₀
+  PresheafOfModules.pushforward PresheafOfModules.pushforward₀
   PresheafOfModules.pushforward₀Obj PresheafOfModules.restrictScalars
   PresheafOfModules.restrictScalarsObj ModuleCat.restrictScalars
 
@@ -284,6 +284,7 @@ private theorem sections_unitAt {X S : Scheme.{u}} (f : X ⟶ S) (q : ℤ)
 
 set_option maxHeartbeats 2400000 in
 -- Checking the common cochain carriers requires the larger heartbeat budget.
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 private theorem inverseOpen_unit {X S : Scheme.{u}} (f : X ⟶ S) (q : ℤ)
     (B : CochainComplex X.Modules ℤ) (K : schemeDerivedCategory X)
     (a : DerivedCategory.Q.obj B ⟶ K) :
@@ -350,6 +351,7 @@ private theorem inverseOpen_unit {X S : Scheme.{u}} (f : X ⟶ S) (q : ℤ)
 
 set_option maxHeartbeats 800000 in
 -- Elaborating the comparison carriers requires the larger heartbeat budget.
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 private theorem sections_to_inverse {X S : Scheme.{u}} (f : X ⟶ S) (q : ℤ)
     (B : CochainComplex X.Modules ℤ) (K : schemeDerivedCategory X)
     (a : DerivedCategory.Q.obj B ⟶ K) :
@@ -396,6 +398,7 @@ private theorem sections_to_inverse {X S : Scheme.{u}} (f : X ⟶ S) (q : ℤ)
 
 set_option maxHeartbeats 800000 in
 -- Elaborating the comparison carriers requires the larger heartbeat budget.
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 private theorem sections_to_inverseAt {X S : Scheme.{u}} (f : X ⟶ S) (q : ℤ)
     (V : S.Opens) (B : CochainComplex X.Modules ℤ) (K : schemeDerivedCategory X)
     (a : DerivedCategory.Q.obj B ⟶ K) :
@@ -451,6 +454,7 @@ private theorem cochainLocalSectionUnitAt_naturality (S : Scheme.{u}) (q : ℤ)
       ((((F.mapHomologicalComplex (.up ℤ)).obj K).sc q).mapHomologyIso E).hom ≫ t) h₂').trans
         (Category.assoc _ _ _).symm))
 
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 private theorem square_unitQ_map {X S Z T : Scheme.{u}}
     (f : X ⟶ S) (k : Z ⟶ T) (g : T ⟶ S) (v : Z ⟶ X) (h : v ≫ f = k ≫ g)
     (I : CochainComplex Z.Modules ℤ) (A : schemeDerivedCategory Z)
