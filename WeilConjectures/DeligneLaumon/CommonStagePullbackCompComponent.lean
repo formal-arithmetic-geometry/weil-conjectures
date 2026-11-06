@@ -214,6 +214,7 @@ private theorem commonStagePullbackCompComponent_stage_transport
             ((commonStagePullbackComparison l Ω g P L hP).inv) ≫
           (commonStagePullbackComparison l Ω f
             (commonStagePullbackObject l Ω g P) L hP).inv)) := by
+  run_tac Lean.logInfo m!"PF532 transport start: {← IO.getNumHeartbeats}"
   have eX : (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω X).T hP =
       GeneralAlgebraicallyClosedCoefficients.transition l Ω X P.stage L hP := by
     simpa only [GeneralAlgebraicallyClosedCoefficients.stageSystem] using
@@ -229,11 +230,13 @@ private theorem commonStagePullbackCompComponent_stage_transport
     simpa only [GeneralAlgebraicallyClosedCoefficients.stageSystem] using
       (GeneralAlgebraicallyClosedCoefficients.stageSystem_existsUnique l Ω Z).exists.choose_spec.1
         P.stage L hP
+  run_tac Lean.logInfo m!"PF532 transition equalities: {← IO.getNumHeartbeats}"
   have key := rationalPullbackComposition_scalar_transport l
     (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage)
     (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L)
     (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω P.stage L hP) f g
     _ _ _ eX eY eZ P.obj
+  run_tac Lean.logInfo m!"PF532 scalar key: {← IO.getNumHeartbeats}"
   refine (StageSystem.ι_map_eq hP _).trans ?_
   have eR := commonStagePullbackRationalComposition_eq_scalar l Ω f g P L hP
   simp only [eR]
@@ -247,7 +250,10 @@ private theorem commonStagePullbackCompComponent_stage_transport
     (commonStagePullbackObject l Ω g P) L hP eX eY
   set_option backward.isDefEq.respectTransparency true in
   set_option backward.isDefEq.respectTransparency.types true in
-    exact stage_transport_of_comparisons _ _ _ hfg hg hf key
+    refine stage_transport_of_comparisons _ _ _ hfg hg hf ?_
+    run_tac Lean.logInfo m!"PF532 final comparison: {← IO.getNumHeartbeats}"
+    trace_state
+    with_reducible exact key
 
 
 /-- The selected common-stage component is represented at every larger coefficient stage.
