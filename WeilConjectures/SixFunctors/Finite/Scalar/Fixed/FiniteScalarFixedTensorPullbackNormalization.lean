@@ -12,6 +12,7 @@ public import WeilConjectures.SixFunctors.Finite.Scalar.FiniteScalarComplexTenso
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Monoidal
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarProjComparison
 import all WeilConjectures.AlgebraicGeometry.SectionDerivedRepresentativeSquare
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # Fixed-scalar tensor pullback on complexes
 
@@ -173,8 +174,14 @@ theorem finiteScalarTensorPullback_normalizationForCoefficients
     (hT : ∀ Z, T Z → (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat Z)
     (f : DerivedCategory.Q ⋙ (ProEtale.upperStar B p).leftDerivedFunctor ≅
       (ProEtale.upperStar B p).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)
-    (hf : ∀ Z, f.hom.app Z = (ProEtale.upperStar B p).leftDerivedFunctorCounit.app
-      ((HomotopyCategory.quotient _ _).obj Z))
+    (hf : ∀ Z, f.hom.app Z =
+      (ProEtale.upperStar B p).leftDerivedFunctor.map
+          ((DerivedCategory.quotientCompQhIso _).inv.app Z) ≫
+        (ProEtale.upperStar B p).leftDerivedFunctorCounit.app
+          ((HomotopyCategory.quotient _ _).obj Z) ≫
+        DerivedCategory.Qh.map
+          (((ProEtale.upperStar B p).mapHomotopyCategoryFactors _).hom.app Z) ≫
+        (DerivedCategory.quotientCompQhIso _).hom.app _)
     (P Q : CochainComplex (Sheaf (ProEt.topology Y) B) ℤ) (hp : S P) (hq : S Q)
     (hp' : T (((ProEtale.upperStar B p).mapHomologicalComplex (.up ℤ)).obj P))
     (hq' : T (((ProEtale.upperStar B p).mapHomologicalComplex (.up ℤ)).obj Q)) :
@@ -195,7 +202,17 @@ theorem finiteScalarTensorPullback_normalizationForCoefficients
   simp only [finiteScalarRepresentativeTensorIso_hom_app]
   rw [ProEtale.leftDerivedUpperStarTensorComparison_eq_leftDerivedTensorComparison]
   unfold finiteScalarFixedTensorRepresentativeForCoefficients
-  exact representative_normalization S hS T hT (ProEtale.upperStar B p) f hf P Q hp hq hp' hq'
+  have h₁ (K : CochainComplex (Sheaf (ProEt.topology Y) B) ℤ) :
+      (DerivedCategory.quotientCompQhIso _).inv.app K = 𝟙 _ := rfl
+  have h₂ (K : CochainComplex (Sheaf (ProEt.topology X) B) ℤ) :
+      (DerivedCategory.quotientCompQhIso _).hom.app K = 𝟙 _ := rfl
+  have hf₀ (Z : CochainComplex (Sheaf (ProEt.topology Y) B) ℤ) :
+      f.hom.app Z = (ProEtale.upperStar B p).leftDerivedFunctorCounit.app
+        ((HomotopyCategory.quotient _ _).obj Z) := by
+    rw [hf Z, h₁, h₂, Functor.mapHomotopyCategoryFactors_hom_app]
+    erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id,
+      CategoryTheory.Functor.map_id, Category.comp_id]
+  exact representative_normalization S hS T hT (ProEtale.upperStar B p) f hf₀ P Q hp hq hp' hq'
 
 /-- The exact fixed-scalar pullback factors are the left-derived counit on complexes.
 Source: the exact-functor left-derived counit formula, Stacks Tag 07A4.
@@ -205,8 +222,23 @@ theorem finiteScalarFixedPullbackFactors_eq_counit
     (Z : CochainComplex
       (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1} R))) ℤ) :
     (finiteScalarFixedPullbackFactors R p).hom.app Z =
-      (ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} R)) p).leftDerivedFunctorCounit.app
-        ((HomotopyCategory.quotient _ _).obj Z) := by
+      (ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} R)) p).leftDerivedFunctor.map
+          ((DerivedCategory.quotientCompQhIso _).inv.app Z) ≫
+        (ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} R)) p).leftDerivedFunctorCounit.app
+          ((HomotopyCategory.quotient _ _).obj Z) ≫
+        DerivedCategory.Qh.map
+          (((ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} R)) p).mapHomotopyCategoryFactors
+            _).hom.app Z) ≫
+        (DerivedCategory.quotientCompQhIso _).hom.app _ := by
+  have h₁ (K : CochainComplex
+      (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1} R))) ℤ) :
+      (DerivedCategory.quotientCompQhIso _).inv.app K = 𝟙 _ := rfl
+  have h₂ (K : CochainComplex
+      (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1} R))) ℤ) :
+      (DerivedCategory.quotientCompQhIso _).hom.app K = 𝟙 _ := rfl
+  rw [h₁, h₂, Functor.mapHomotopyCategoryFactors_hom_app]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id,
+    CategoryTheory.Functor.map_id, Category.comp_id]
   simpa only [finiteScalarFixedPullbackFactors, Iso.trans_hom, NatTrans.comp_app,
     isoWhiskerLeft_hom, whiskerLeft_app] using exact_factors_eq_counit
       (ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} R)) p) Z
