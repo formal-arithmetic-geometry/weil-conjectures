@@ -37,8 +37,8 @@ noncomputable def supportFirstCoefficientProjectionIso (A : Type (u + 1)) [CommR
     (supportedFirstCoefficients A f g b).mapDerivedCategory ≅
       (supportedCoefficients A b).mapDerivedCategory ⋙
         (upperStar (ModuleCat.{u + 1} A) (pullback.fst f g)).leftDerivedFunctor :=
-  Functor.mapDerivedCategoryCompIso (supportedCoefficients A b)
-      (upperStar (ModuleCat.{u + 1} A) (pullback.fst f g)) ≪≫
+  (Functor.mapDerivedCategoryCompIso (supportedCoefficients A b)
+      (upperStar (ModuleCat.{u + 1} A) (pullback.fst f g))).symm ≪≫
     Functor.isoWhiskerLeft (supportedCoefficients A b).mapDerivedCategory
       (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A)
         (pullback.fst f g)).symm
@@ -51,8 +51,8 @@ noncomputable def supportSecondCoefficientProjectionIso (A : Type (u + 1)) [Comm
     (supportedSecondCoefficients A f g d).mapDerivedCategory ≅
       (supportedCoefficients A d).mapDerivedCategory ⋙
         (upperStar (ModuleCat.{u + 1} A) (pullback.snd f g)).leftDerivedFunctor :=
-  Functor.mapDerivedCategoryCompIso (supportedCoefficients A d)
-      (upperStar (ModuleCat.{u + 1} A) (pullback.snd f g)) ≪≫
+  (Functor.mapDerivedCategoryCompIso (supportedCoefficients A d)
+      (upperStar (ModuleCat.{u + 1} A) (pullback.snd f g))).symm ≪≫
     Functor.isoWhiskerLeft (supportedCoefficients A d).mapDerivedCategory
       (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A)
         (pullback.snd f g)).symm

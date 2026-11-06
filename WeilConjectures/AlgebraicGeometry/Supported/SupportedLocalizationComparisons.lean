@@ -113,8 +113,7 @@ noncomputable def supportExactPullbackCompIso
     (upperStar E c).mapDerivedCategory ≅
       (upperStar E b).mapDerivedCategory ⋙ (upperStar E a).mapDerivedCategory :=
   Functor.mapDerivedCategoryNatIso (upperStarComp E a b c hc) ≪≫
-    Functor.mapDerivedCategoryCompIso (upperStar E b)
-      (upperStar E a)
+    (Functor.mapDerivedCategoryCompIso (upperStar E b) (upperStar E a)).symm
 
 /-- Pullback comparison for a commuting projection square.
 Source: Tag 0F1E (blueprint: def-pur-supported-localization-comparisons). -/
