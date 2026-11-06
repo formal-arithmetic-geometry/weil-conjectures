@@ -250,10 +250,10 @@ theorem sfbNormalizedLocalRestriction_iso
       Functor.isoWhiskerLeft P e₂ ≪≫ (Functor.associator P O G).symm
   let eD : (TX.mapDerivedCategory ⋙ P₁.mapDerivedCategory) ⋙ P₂.mapDerivedCategory ≅
       (P.mapDerivedCategory ⋙ O.mapDerivedCategory) ⋙ G.mapDerivedCategory :=
-    Functor.isoWhiskerRight (Functor.mapDerivedCategoryCompIso TX P₁).symm _ ≪≫
+    Functor.isoWhiskerRight (Functor.mapDerivedCategoryCompIso TX P₁) _ ≪≫
       (Functor.mapDerivedCategoryCompIso (TX ⋙ P₁) P₂).symm ≪≫
-      Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryCompIso (P ⋙ O) G ≪≫
-      Functor.isoWhiskerRight (Functor.mapDerivedCategoryCompIso P O) _
+      Functor.mapDerivedCategoryNatIso e ≪≫ (Functor.mapDerivedCategoryCompIso (P ⋙ O) G).symm ≪≫
+      Functor.isoWhiskerRight (Functor.mapDerivedCategoryCompIso P O).symm _
   obtain ⟨d₁⟩ := pullDerivedIso F (SfbAdicRestriction.direct i)
     (SfbAdicRestriction.adjunction i) cX
   obtain ⟨d₂⟩ := pullDerivedIso FS VS aS cS

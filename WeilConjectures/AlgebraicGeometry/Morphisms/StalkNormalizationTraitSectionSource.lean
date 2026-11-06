@@ -56,7 +56,7 @@ private theorem stalk_dvr {S : Scheme.{u}} [IsNoetherian S] [IsIntegral S]
   let : Ring.DimensionLEOne (S.presheaf.stalk s) :=
     ⟨fun hp hprime ↦ hprime.isMaximal_of_ne_bot hp⟩
   let : IsDedekindDomain (S.presheaf.stalk s) := {}
-  exact ((IsDiscreteValuationRing.TFAE (S.presheaf.stalk s) hfield).out 2 0).mp
+  exact ((IsDiscreteValuationRing.TFAE (S.presheaf.stalk s) hfield).out 3 1).mp
     (show IsDedekindDomain (S.presheaf.stalk s) from inferInstance)
 
 /-- Every point of the finite local normalization above the closed section point
