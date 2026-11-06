@@ -356,7 +356,7 @@ theorem finite_constructible_derivedHom_proEtale
     let N : Q.FullSubcategory := ⟨M₀, hM₀⟩
     let N' := eqv.inverse.obj N
     refine ⟨N'.obj, N'.property, ⟨?_⟩⟩
-    exact (Functor.mapDerivedCategoryCompIso F G).app N'.obj ≪≫
+    exact (Functor.mapDerivedCategoryCompIso F G).symm.app N'.obj ≪≫
       R.mapIso ((eqvIso.app N').symm ≪≫ Q.ι.mapIso (eqv.counitIso.app N)) ≪≫ e₀
   obtain ⟨K', hK', ⟨eK⟩⟩ := origin K _hK
   obtain ⟨L', hL', ⟨eL⟩⟩ := origin L _hL
@@ -395,12 +395,12 @@ theorem finite_constructible_derivedHom_proEtale
     hHom K' L' hK' hL'.1
   obtain ⟨et⟩ := ProEtale.intrinsicSiteHom_transport X A
     (F.mapDerivedCategory.obj K') (F.mapDerivedCategory.obj L')
-  let ecompK := (Functor.mapDerivedCategoryCompIso F G).app K'
-  let ecompL := (Functor.mapDerivedCategoryCompIso F G).app L'
+  let ecompK := (Functor.mapDerivedCategoryCompIso F G).symm.app K'
+  let ecompL := (Functor.mapDerivedCategoryCompIso F G).symm.app L'
   let homIso := (derivedInternalHomOfUniverses.{u + 1, u, u}
     (ProEt.topology X) (proEtaleConstantRing X A)).mapIso
       ((ecompK.symm ≪≫ eK).symm.op.prod (ecompL.symm ≪≫ eL))
-  let eH := (Functor.mapDerivedCategoryCompIso F G).app H ≪≫
+  let eH := (Functor.mapDerivedCategoryCompIso F G).symm.app H ≪≫
     R.mapIso (asIso (ProEtale.siteComparisonEvaluationHom
       (ModuleCat.{u + 1} Λ) X K' L')) ≪≫ et ≪≫ homIso
   have ht := torAmplitude_iso X A eH _ _ hp.2
