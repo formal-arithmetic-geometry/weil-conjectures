@@ -39,11 +39,11 @@ private theorem homOfDerivation_add_of_coefficients {S : Scheme.{u}} (X : Over S
         (PresheafOfModulesOfCommRing.DifferentialsConstruction.isUniversal' _).desc D₂ := by
     apply (PresheafOfModulesOfCommRing.DifferentialsConstruction.isUniversal' _).postcomp_injective
     ext V a
-    have h₁ := PresheafOfModules.Derivation.congr_d
+    have h₁ := PresheafOfModulesOfCommRing.Derivation.congr_d
       ((PresheafOfModulesOfCommRing.DifferentialsConstruction.isUniversal' _).fac D₁) a
-    have h₂ := PresheafOfModules.Derivation.congr_d
+    have h₂ := PresheafOfModulesOfCommRing.Derivation.congr_d
       ((PresheafOfModulesOfCommRing.DifferentialsConstruction.isUniversal' _).fac D₂) a
-    have h₃ := PresheafOfModules.Derivation.congr_d
+    have h₃ := PresheafOfModulesOfCommRing.Derivation.congr_d
       ((PresheafOfModulesOfCommRing.DifferentialsConstruction.isUniversal' _).fac D₃) a
     exact h₃.trans ((h a).trans (congrArg₂ (· + ·) h₁.symm h₂.symm))
   let sh := PresheafOfModules.sheafificationAdjunction (𝟙 X.left.ringCatSheaf.obj)

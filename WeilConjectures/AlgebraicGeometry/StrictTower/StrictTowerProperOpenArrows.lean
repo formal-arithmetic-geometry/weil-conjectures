@@ -83,36 +83,6 @@ private theorem exactAdj_unit
   exact Category.comp_id _
 
 -- Exact localization preserves mate equations for the specified unit normalization.
-section ExactMates
-
-variable {C₁ D₁ C₂ D₂ : Type*} [Category C₁] [Category D₁] [Category C₂] [Category D₂]
-  [Abelian C₁] [Abelian D₁] [Abelian C₂] [Abelian D₂]
-  [HasDerivedCategory C₁] [HasDerivedCategory D₁] [HasDerivedCategory C₂]
-  [HasDerivedCategory D₂]
-  {f₁ : C₁ ⥤ D₁} {g₁ : D₁ ⥤ C₁} (adj₁ : f₁ ⊣ g₁)
-  {f₂ : C₂ ⥤ D₂} {g₂ : D₂ ⥤ C₂} (adj₂ : f₂ ⊣ g₂)
-  {u : C₁ ⥤ C₂} {v : D₁ ⥤ D₂}
-  [f₁.Additive] [PreservesFiniteLimits f₁] [PreservesFiniteColimits f₁]
-  [g₁.Additive] [PreservesFiniteLimits g₁] [PreservesFiniteColimits g₁]
-  [f₂.Additive] [PreservesFiniteLimits f₂] [PreservesFiniteColimits f₂]
-  [g₂.Additive] [PreservesFiniteLimits g₂] [PreservesFiniteColimits g₂]
-  [u.Additive] [PreservesFiniteLimits u] [PreservesFiniteColimits u]
-  [v.Additive] [PreservesFiniteLimits v] [PreservesFiniteColimits v]
-  (τ : g₁ ⋙ u ≅ v ⋙ g₂) (β : u ⋙ f₂ ≅ f₁ ⋙ v)
-  (d₁ : f₁.mapDerivedCategory ⊣ g₁.mapDerivedCategory)
-  (d₂ : f₂.mapDerivedCategory ⊣ g₂.mapDerivedCategory)
-  (hu₁ : ∀ X : HomotopyCategory C₁ (.up ℤ),
-    d₁.unit.app (DerivedCategory.Qh.obj X) ≫
-        g₁.mapDerivedCategory.map (f₁.mapDerivedCategoryFactorsh.hom.app X) ≫
-        g₁.mapDerivedCategoryFactorsh.hom.app ((f₁.mapHomotopyCategory (.up ℤ)).obj X) =
-      DerivedCategory.Qh.map ((adj₁.mapHomotopyCategory (.up ℤ)).unit.app X))
-  (hu₂ : ∀ X : HomotopyCategory C₂ (.up ℤ),
-    d₂.unit.app (DerivedCategory.Qh.obj X) ≫
-        g₂.mapDerivedCategory.map (f₂.mapDerivedCategoryFactorsh.hom.app X) ≫
-        g₂.mapDerivedCategoryFactorsh.hom.app ((f₂.mapHomotopyCategory (.up ℤ)).obj X) =
-      DerivedCategory.Qh.map ((adj₂.mapHomotopyCategory (.up ℤ)).unit.app X))
-
-include hu₁ hu₂ in
 private theorem exact_mate_Qh
     (hβ : ∀ K, adj₂.unit.app (u.obj K) ≫ g₂.map (β.hom.app K) =
       u.map (adj₁.unit.app K) ≫ τ.hom.app (f₁.obj K))
@@ -258,7 +228,6 @@ private theorem exact_mate_Qh
   simp only [Functor.map_comp] at this ⊢
   exact this
 
-include hu₁ hu₂ in
 private theorem exact_mate
     (hβ : ∀ K, adj₂.unit.app (u.obj K) ≫ g₂.map (β.hom.app K) =
       u.map (adj₁.unit.app K) ≫ τ.hom.app (f₁.obj K))
@@ -294,8 +263,6 @@ private theorem exact_mate
     Functor.map_comp, Category.assoc, h₄,
     reassoc_of% (exact_mate_Qh adj₁ adj₂ τ β d₁ d₂ hu₁ hu₂ hβ _)]
 
-end ExactMates
-
 section EvaluationCoherence
 
 private abbrev W {C D : Type*} [Category C] [Category D] (F : C ⥤ D) :=
@@ -323,7 +290,6 @@ variable {C D H : Type*} [Category C] [Category D] [Category H]
   [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
   [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]
   [K.Additive] [PreservesFiniteLimits K] [PreservesFiniteColimits K]
-
 private noncomputable def evalD (n : ℕ) :
     (W F).mapDerivedCategory ⋙ (E D n).mapDerivedCategory ≅
       (E C n).mapDerivedCategory ⋙ F.mapDerivedCategory :=
@@ -370,6 +336,7 @@ private theorem evalD_comp (n : ℕ) :
   simp only [← Functor.whiskerRight_comp_assoc, Iso.hom_inv_id, Functor.whiskerRight_id',
     Category.id_comp]
   exact h₃.symm
+
 
 @[irreducible] private noncomputable def towerSquare
     {C A A' D : Type*} [Category C] [Category A] [Category A'] [Category D]
@@ -456,7 +423,6 @@ private theorem evalD_square
   simp only [Iso.hom_inv_id_app_assoc]
 
 end EvaluationCoherence
-
 private theorem exact_mate_tower
     {C₁ D₁ C₂ D₂ : Type*} [Category C₁] [Category D₁] [Category C₂] [Category D₂]
     [Abelian C₁] [Abelian D₁] [Abelian C₂] [Abelian D₂]
@@ -495,6 +461,7 @@ private theorem exact_mate_tower
   rw [towerSquare_hom_app, towerSquare_hom_app]
   exact hβ (M.obj n)
 
+
 private theorem unit_iso_of_comparison
     {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
     {L : C ⥤ D} {R : D ⥤ C} (a : L ⊣ R)
@@ -522,7 +489,7 @@ private theorem exact_unit_iso
     [PreservesFiniteLimits R] [PreservesFiniteColimits R]
     (a : L ⊣ R) [IsIso a.unit] (d : L.mapDerivedCategory ⊣ R.mapDerivedCategory) :
     IsIso d.unit :=
-  d.isIso_unit_of_iso ((Functor.mapDerivedCategoryCompIso L R).symm ≪≫
+  d.isIso_unit_of_iso (Functor.mapDerivedCategoryCompIso L R ≪≫
     Functor.mapDerivedCategoryNatIso (asIso a.unit).symm ≪≫
     Functor.mapDerivedCategoryIdIso C)
 
@@ -856,7 +823,6 @@ private theorem towerSquare_moduleSquareG {V W S T : Scheme.{u}}
     (modulePullback B p) (modulePullback B k) (modulePullback B (r ≫ i))
     (modulePullback B (k ≫ p)) (moduleGComp B r i) (moduleGComp B k p)
     (congrArg (modulePullback B) h.symm)
-
 private theorem squareG_lift {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) (h : k ≫ p = r ≫ i) :
     (squareG B k r p i h).hom =
@@ -877,6 +843,7 @@ private theorem squareG_lift {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
       (Functor.mapDerivedCategorySquareIso (F₁ := towerPullback B i)
         (F₂ := towerPullback B r) (G₁ := towerPullback B p) (G₂ := towerPullback B k)
         e).hom) (towerSquare_moduleSquareG B k r p i h).symm)
+
 
 @[irreducible] private noncomputable def derivedOpenSquare {U' U X' X : Scheme.{u}}
     (gU : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
@@ -981,6 +948,7 @@ private theorem betaInv_lift [Finite B] {U' U X' X : Scheme.{u}}
     (u := modulePullback B a) (v := modulePullback B g)
     (moduleJAdj B j) (moduleJAdj B j') (moduleSquareG B a j' j g h).symm e hm M
 
+set_option backward.isDefEq.respectTransparency true in
 private theorem singleBeta_lift [Finite B] {U' U X' X : Scheme.{u}}
     (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : a ≫ j = j' ≫ g)
@@ -990,7 +958,6 @@ private theorem singleBeta_lift [Finite B] {U' U X' X : Scheme.{u}}
       (G₁ := modulePullback B a) (G₂ := moduleJ B j')
       (@asIso _ _ _ _ (singleBetaInv B a j' j g h)
         (singleBetaInv_isIso B a j' j g h hsq)).symm := rfl
-
 private theorem evalJ_eq {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] (n : ℕ) : evalJ B j n = evalD (moduleJ B j) n := by
   apply Iso.ext
@@ -1053,6 +1020,7 @@ theorem beta_evaluation [Finite B] {U' U X' X : Scheme.{u}}
   rw [← evalJ_eq B j n, ← evalJ_eq B j' n, ← evalG_eq B a n, ← evalG_eq B g n] at he
   rw [singleBeta_lift B a j' j g h hsq]
   exact he
+
 
 /-- The map of a proper/open commutative square into its canonical fibre product.
 Source: Stacks, Tag 0F7B and blueprint, third proof step

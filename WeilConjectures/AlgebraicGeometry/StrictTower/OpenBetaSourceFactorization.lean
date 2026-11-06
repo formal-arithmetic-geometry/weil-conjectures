@@ -63,6 +63,7 @@ private theorem system_source_square
   simpa only [systemSquare, Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app,
     Functor.map_comp, ← Functor.map_inv, NatIso.inv_hom_app, Category.assoc] using hh
 
+attribute [-instance] CategoryTheory.catToReflQuiver in
 private theorem source_square {V P W S T : Scheme.{u}}
     (s : V ⟶ P) (b : P ⟶ W) (q : P ⟶ S) (i : S ⟶ T) (p : W ⟶ T)
     (h : (s ≫ b) ≫ p = (s ≫ q) ≫ i) (h₀ : q ≫ i = b ≫ p)

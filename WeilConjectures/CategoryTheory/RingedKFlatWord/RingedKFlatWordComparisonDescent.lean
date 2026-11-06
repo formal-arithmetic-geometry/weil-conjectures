@@ -413,6 +413,7 @@ private theorem resolving_resolution (X : Site.{u, v, r, d})
 
 end
 
+set_option linter.style.haveILetI false in
 /-- Every resolving model, not just the chosen replacement, computes every word.
 Source: Stacks 0G7E, 06YY, 0D6D; DAG proof steps 1--2
 (blueprint: lem-trf-ringed-kflat-word-comparison-descent).
@@ -563,6 +564,7 @@ theorem descent_existsUnique [Finite I] {i j : I} {w v : Word E i j}
     (fun P hP ↦ (word_computation S E A v P hP).2)
     (Functor.whiskerRight (NatTrans.mapHomologicalComplex t (.up ℤ)) DerivedCategory.Q)
 
+set_option linter.style.haveILetI false in
 /-- The uniquely specified descent; choice extracts a uniquely determined object.
 Source: DAG proof step 4, Stacks 06YY
 (blueprint: lem-trf-ringed-kflat-word-comparison-descent). -/

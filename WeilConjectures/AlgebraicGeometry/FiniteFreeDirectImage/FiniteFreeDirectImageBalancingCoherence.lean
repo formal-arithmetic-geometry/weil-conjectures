@@ -659,6 +659,7 @@ private theorem rightTower
   simp only [Functor.comp_map, Category.assoc, ← DerivedCategory.Q.map_comp_assoc]
   erw [hco]
 
+open SheafOfModules.SuccessiveDerivedQuotient in
 private theorem rightSquare_comp {Z W : Scheme.{u}} {q : Z ⟶ W}
     {R S B : Coefficients q} (a : CoefficientMap R S) (b : CoefficientMap S B)
     (K : DerivedCategory (proEtaleRingModules Z B.source)) :

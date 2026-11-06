@@ -574,6 +574,8 @@ def schemeGlobalHomAdjunctionMap {X Y : Scheme.{u}}
   schemeGlobalHomDirectImageMap f P.obj (a.obj K).obj ≫
     (schemeGlobalDerivedHom Y).map ((𝟙 _).op, (adj.counit.app K).hom)
 
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
 /-- The counit-induced global Hom adjunction is invertible, naturally in P and K.
 Source: Stacks, Tag 0B6I (blueprint: lem-pc-global-hom-adjunction).
 Proof:

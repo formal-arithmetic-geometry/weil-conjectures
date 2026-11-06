@@ -172,6 +172,8 @@ private theorem push_iso
   dsimp [mateEquiv, TwoSquare.natTrans, TwoSquare.mk]
   infer_instance
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 private theorem projection_isIso_of_coefficientIso
     {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S]
@@ -217,6 +219,8 @@ private theorem projection_isIso_of_coefficientIso
     infer_instance
   exact isIso_of_reflects_iso _ (internalScalarExtension a Y.left)
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 private theorem projection_scalars
     {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S]
@@ -307,6 +311,8 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (p : X ⟶ Y) [IsProper p.left]
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 private theorem integral_projection (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) X.left)))
@@ -338,6 +344,8 @@ private theorem integral_projection (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (integer_predicate ℓ E X.left _ (bounded_scalar e X.left K hK))
     (integer_predicate ℓ E Y.left _ (bounded_scalar e Y.left M hM))
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 private theorem rationalized_projection (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) X.left)))
@@ -367,6 +375,8 @@ private theorem rationalized_projection (E : PadicAlgCl.FiniteIntermediateField 
   change IsIso ((derivedPushHom a p.left).app _) at hγT
   exact projection_scalars a ℓ k p K M hI hγK hγT
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 private theorem finite_projection (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
       (condensedRingObj (Profinite.continuousMapRingObj E) X.left)))
@@ -395,6 +405,8 @@ private theorem finite_projection (E : PadicAlgCl.FiniteIntermediateField ℓ)
     ((boundedConstructible _).ι.mapIso eK) ((boundedConstructible _).ι.mapIso eM)
   exact rationalized_projection ℓ p E K₀.obj M₀.obj K₀.property M₀.property
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 private theorem algcl_projection (F : PadicAlgCl.FiniteIntermediateField ℓ)
     (KF : PadicSubfieldConstructible X.left ℓ F)
     (MF : PadicSubfieldConstructible Y.left ℓ F) :
@@ -416,6 +428,8 @@ private theorem algcl_projection (F : PadicAlgCl.FiniteIntermediateField ℓ)
   have hγT := isIso_algClCoefficientPushHom_boundedBelow ℓ p F _ hT.1.1
   exact projection_scalars a ℓ k p KF.obj MF.obj hI hγK hγT
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The specified proper projection formula is invertible on bounded constructible objects.
 Source: blueprint rational proper direct image, clause 3, projection formula
 (blueprint: det-thm-sfb-proper-base-change-rational).

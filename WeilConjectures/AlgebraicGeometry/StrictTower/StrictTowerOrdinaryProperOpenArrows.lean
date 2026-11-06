@@ -268,7 +268,6 @@ private theorem conjugate_hom_fac
   rw [← Category.assoc, ← h, Category.assoc]
   simpa only [Category.assoc] using
     congrArg (b.unit.app K ≫ ·) ((conjugateEquiv b a e.hom).naturality f).symm
-
 private theorem comp_iso_fac
     {L₁ : A ⥤ D} {R₁ : D ⥤ A} {L₂ : D ⥤ E} {R₂ : E ⥤ D}
     {L₃ : A ⥤ E} {R₃ : E ⥤ A}
@@ -359,30 +358,6 @@ private theorem compNat_fac
   rw [← ht]
   simp only [← Category.assoc, Iso.inv_hom_id_app, Category.id_comp]
 
-private theorem square_fac
-    {F : A ⥤ D} {H : D ⥤ E} {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
-    {G : A ⥤ C} {L : C ⥤ E}
-    [F.Additive] [H.Additive] [G.Additive] [L.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    [PreservesFiniteLimits H] [PreservesFiniteColimits H]
-    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
-    [PreservesFiniteLimits L] [PreservesFiniteColimits L]
-    (e : F ⋙ H ≅ G ⋙ L) (K : CochainComplex A ℤ) :
-    (Functor.mapDerivedCategorySquareIso e).hom.app (DerivedCategory.Q.obj K) ≫
-        L.mapDerivedCategory.map (G.mapDerivedCategoryFactors.hom.app K) ≫
-        L.mapDerivedCategoryFactors.hom.app ((G.mapHomologicalComplex (.up ℤ)).obj K) =
-      H.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app K) ≫
-        H.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj K) ≫
-        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex e.hom (.up ℤ)).app K) := by
-  simp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
-    NatTrans.comp_app, Category.assoc]
-  rw [Functor.mapDerivedCategoryCompIso_hom_app_factors,
-    Functor.mapDerivedCategoryNatIso_fac]
-  rw [← Category.assoc]
-  have ht := Functor.mapDerivedCategoryCompIso_hom_app_factors F H K
-  rw [← ht]
-  simp only [← Category.assoc, Iso.inv_hom_id_app, Category.id_comp]
-
 private theorem compNat_fac_of_eq
     {F : A ⥤ D} {H : D ⥤ E} {L : A ⥤ E}
     [F.Additive] [H.Additive] [L.Additive]
@@ -447,6 +422,7 @@ private theorem compCompatible_of_eq
   intro K
   exact compNat_fac_of_eq t d hd K
 
+
 omit [Abelian A] [Abelian D] [Abelian E]
     [HasDerivedCategory A] [HasDerivedCategory D] [HasDerivedCategory E] in
 private theorem whisker_comp_hom
@@ -487,7 +463,6 @@ omit [Abelian A] [Abelian D] [Abelian E]
 private abbrev tw {C D : Type*} [Category C] [Category D] (f : C ⥤ D) :=
   (Functor.whiskeringRight ℕᵒᵖ C D).obj f
 
-omit [HasDerivedCategory A] [HasDerivedCategory D] [HasDerivedCategory E] in
 private theorem whisker_exact_comp_fac
     [hA : HasDerivedCategory (ℕᵒᵖ ⥤ A)] [hD : HasDerivedCategory (ℕᵒᵖ ⥤ D)]
     [hE : HasDerivedCategory (ℕᵒᵖ ⥤ E)]
@@ -768,8 +743,6 @@ private theorem complex_whiskerRight
       (H.mapHomologicalComplex (.up ℤ)).map
         ((NatTrans.mapHomologicalComplex a (.up ℤ)).app K) := by
   ext n
-  rfl
-
 private theorem localization_paste
     {C T : Type*} [Category C] [Category T] [aC : Abelian C] [aT : Abelian T]
     [HasDerivedCategory C] [HasDerivedCategory T]
@@ -840,6 +813,8 @@ private theorem localization_paste
     Functor.map_comp]
   rfl
 
+  rfl
+
 omit [Abelian A] [Abelian D] [Abelian E]
     [HasDerivedCategory A] [HasDerivedCategory D] [HasDerivedCategory E] in
 private theorem whisker_paste
@@ -898,7 +873,6 @@ private theorem assoc_paste
     Category.id_comp]
   rw [b.map_id, Category.id_comp]
 
-omit [HasDerivedCategory A] [HasDerivedCategory D] [HasDerivedCategory E] in
 private theorem module_localization_paste
     {C T : Type*} [Category C] [Category T] [aC : Abelian C] [aT : Abelian T]
     [hA : HasDerivedCategory (ℕᵒᵖ ⥤ A)] [hD : HasDerivedCategory (ℕᵒᵖ ⥤ D)]
@@ -965,7 +939,6 @@ private theorem module_localization_paste
     (by simpa only [termwiseCompHom] using he)
 
 end DescentCalculus
-
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- The recorded derived alpha is exactly the localization of the intrinsic ordinary arrow.
@@ -1028,5 +1001,6 @@ theorem alpha_eq_localized_singleAlpha {V W S T : Scheme.{u}}
     (pi_fac B s c hc')
     (jTail_fac B s b k (pullback.lift_fst k r h))
     (gTail_fac B s q r (pullback.lift_snd k r h))
+
 
 end AlgebraicGeometry.ProEtale.StrictTower

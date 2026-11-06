@@ -1512,6 +1512,7 @@ private theorem hasKInjectiveResolutions :
       (ringedSiteHomAugmentation.{c, v, r} J R).app K,
       CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{max c v r} _ K⟩⟩
 
+set_option backward.isDefEq.respectTransparency true in
 private theorem kInjectiveQ_full
     {A : Type*} [Category A] [Abelian A] [HasDerivedCategory A]
     [Abelian.HasKInjectiveResolutions A] :
@@ -1519,6 +1520,7 @@ private theorem kInjectiveQ_full
   inferInstanceAs ((CochainComplex.KInjectives.toHomotopyCategory (C := A) ⋙
     HomotopyCategory.KInjectives.Qh).Full)
 
+set_option backward.isDefEq.respectTransparency true in
 private theorem kInjectiveQ_essSurj
     {A : Type*} [Category A] [Abelian A] [HasDerivedCategory A]
     [Abelian.HasKInjectiveResolutions A] :
@@ -1918,6 +1920,7 @@ private theorem rightNormalization_iff_aux
   simp only [RightNormalization, RightNormalizationAux, ordinaryComparison_app,
     hom, complexHom, homComplex, Functor.comp_obj]
 
+set_option backward.isDefEq.respectTransparency true in
 private theorem rightNormalization_unique
     (S T : ∀ M : D.{c, v, r, w} J R, (hom.{c, v, r, w} J R M).CommShift ℤ)
     (hS : RightNormalization.{c, v, r, w} J R S)
@@ -1942,6 +1945,7 @@ private theorem rightNormalization_unique
   · exact (rightNormalization_iff_aux.{c, v, r, w} J R S).mp hS
   · exact (rightNormalization_iff_aux.{c, v, r, w} J R T).mp hT
 
+set_option backward.isDefEq.respectTransparency true in
 private theorem rightNormalizedShift_exists :
     ∃ S : ∀ M : D.{c, v, r, w} J R,
       (hom.{c, v, r, w} J R M).CommShift ℤ,

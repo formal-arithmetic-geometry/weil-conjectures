@@ -19,6 +19,10 @@ set_option autoImplicit false
 universe u w
 open CategoryTheory
 noncomputable section
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.defeqAttrib.useBackward true in
+open CategoryTheory.Functor CategoryTheory.Category CategoryTheory.Abelian in
 private theorem canonicalRightDerivedUnitShift
     {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
     [HasDerivedCategory C] [HasDerivedCategory D] [HasKInjectiveResolutions C]

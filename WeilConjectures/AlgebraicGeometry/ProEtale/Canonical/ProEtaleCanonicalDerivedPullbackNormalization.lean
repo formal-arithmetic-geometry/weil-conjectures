@@ -114,6 +114,8 @@ private theorem ambientData_transport
   simpa only [eqToIso_refl, Iso.refl_trans] using
     ambientData_exists h k RV RW RZ ck ch
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The specified derived composition is the localization of the conjugate
 of a section-normalized ordinary direct-image compositor.
 Source: Stacks Tag 0D6D (blueprint: lem-sp-canonical-derived-pullback-normalization).
