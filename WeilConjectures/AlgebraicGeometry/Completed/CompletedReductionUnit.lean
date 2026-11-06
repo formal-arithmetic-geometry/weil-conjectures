@@ -254,10 +254,9 @@ theorem completedReductionTowerUnit_exists (T : Scheme.{u}) :
     (completedReductionTower_properties T d).2.2 hrep
   refine ⟨τ, ?_, ?_⟩
   · intro P hP
-    change τ.app (DerivedCategory.Q.obj P) ≫ (completedReductionTower T d).map (𝟙 _) ≫
-      (completedReductionTowerCounit d T).app
-        ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ≫
-      DerivedCategory.Qh.map (𝟙 _) ≫ 𝟙 _ = _
+    dsimp only [HasCompletedReductionTowerUnitNormalization, DerivedCategory.quotientCompQhIso,
+      HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift,
+      Functor.mapHomotopyCategoryFactors, NatIso.ofComponents, Iso.refl]
     erw [CategoryTheory.Functor.map_id, Category.id_comp,
       CategoryTheory.Functor.map_id, Category.comp_id, Category.comp_id]
     exact hτ P hP
@@ -265,10 +264,9 @@ theorem completedReductionTowerUnit_exists (T : Scheme.{u}) :
     apply huniq τ'
     intro P hP
     have h := hτ' P hP
-    change τ'.app (DerivedCategory.Q.obj P) ≫ (completedReductionTower T d).map (𝟙 _) ≫
-      (completedReductionTowerCounit d T).app
-        ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ≫
-      DerivedCategory.Qh.map (𝟙 _) ≫ 𝟙 _ = _ at h
+    dsimp only [HasCompletedReductionTowerUnitNormalization, DerivedCategory.quotientCompQhIso,
+      HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift,
+      Functor.mapHomotopyCategoryFactors, NatIso.ofComponents, Iso.refl] at h
     erw [CategoryTheory.Functor.map_id, Category.id_comp,
       CategoryTheory.Functor.map_id, Category.comp_id, Category.comp_id] at h
     exact h
