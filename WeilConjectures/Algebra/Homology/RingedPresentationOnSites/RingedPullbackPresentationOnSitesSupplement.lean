@@ -110,6 +110,12 @@ private local instance sheafBinaryProducts
 
 attribute [local instance] SheafOfModules.sheafHasBinaryProduct
 
+private local instance sheafBinaryProducts
+    {C : Type uC} [Category.{vC} C] (J : GrothendieckTopology C) :
+    HasBinaryProducts (Sheaf J (Type u)) := Sheaf.instHasLimitsOfShape
+
+attribute [local instance] SheafOfModules.sheafHasBinaryProduct
+
 private theorem reflect_binary
     {C D : Type*} [Category C] [Category D] [HasBinaryProducts C] [HasBinaryProducts D]
     (F : C ⥤ D) [PreservesFiniteProducts F]
