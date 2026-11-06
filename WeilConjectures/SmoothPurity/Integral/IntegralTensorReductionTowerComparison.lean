@@ -170,10 +170,9 @@ private theorem scalarTensorTotal
           ((1 : S.obj.obj V) ⊗ₜ[R.obj.obj V, (a.hom.app V).hom] x) := by
     have hh := hUnit M (F.obj M) (eqToHom (hF M).symm) V x
     simp only [eqToHom_trans, eqToHom_refl, am.homEquiv_id] at hh
-    refine (congrArg ((eqToHom (hF M)).val.app V) hh).trans ?_
-    change ((eqToHom (hF M).symm ≫ eqToHom (hF M)).val.app V) _ = _
-    simp only [eqToHom_trans, eqToHom_refl]
-    rfl
+    exact (congrArg ((eqToHom (hF M)).val.app V) hh).trans
+      (ConcreteCategory.congr_hom
+        (congrArg (fun k ↦ k.val.app V) (eqToHom_trans (hF M).symm (hF M))) _)
   let eF (M : A) := eqToIso (hF M) ≪≫
     SheafOfModules.ScalarHomOrdinary.extensionIso a M
   have eF_unit (M : A) (V : Cᵒᵖ) (x : M.val.obj V) :
