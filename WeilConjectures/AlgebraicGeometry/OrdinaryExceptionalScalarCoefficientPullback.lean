@@ -43,7 +43,7 @@ theorem mapDerivedCategorySingleFunctor_constant_pullback_square
     L.map ((DerivedCategory.singleFunctor D₁ 0).mapIso α₁ ≪≫
         ((c₁.mapDerivedCategorySingleFunctor 0).app N).symm).hom ≫
       ((isoWhiskerLeft c₁.mapDerivedCategory lam ≪≫
-        (mapDerivedCategoryCompIso c₁ P).symm ≪≫
+        mapDerivedCategoryCompIso c₁ P ≪≫
         mapDerivedCategoryNatIso σ).app ((DerivedCategory.singleFunctor C 0).obj N)).hom =
       (lam.app _ ≪≫ (P.mapDerivedCategorySingleFunctor 0).app X₁ ≪≫
         (DerivedCategory.singleFunctor D₂ 0).mapIso β).hom ≫
@@ -58,12 +58,12 @@ theorem mapDerivedCategorySingleFunctor_constant_pullback_square
           (c₂.mapDerivedCategorySingleFunctor 0).inv.app N := by
     rw [← reassoc_of% h2, Iso.hom_inv_id_app]
     exact (Category.comp_id _).symm
-  have h1' : (mapDerivedCategoryCompIso c₁ P).inv.app
+  have h1' : (mapDerivedCategoryCompIso c₁ P).hom.app
         ((DerivedCategory.singleFunctor C 0).obj N) ≫
       ((c₁ ⋙ P).mapDerivedCategorySingleFunctor 0).hom.app N =
       P.mapDerivedCategory.map ((c₁.mapDerivedCategorySingleFunctor 0).hom.app N) ≫
         (P.mapDerivedCategorySingleFunctor 0).hom.app (c₁.obj N) := by
-    rw [← h1, Iso.inv_hom_id_app_assoc]
+    rw [← h1, Iso.hom_inv_id_app_assoc]
   simp only [Iso.trans_hom, Iso.symm_hom, mapIso_hom, Iso.app_hom, isoWhiskerLeft_hom,
     NatTrans.comp_app, whiskerLeft_app, Functor.map_comp, Category.assoc, Iso.app_inv]
   erw [lam.hom.naturality_assoc, lam.hom.naturality_assoc]
