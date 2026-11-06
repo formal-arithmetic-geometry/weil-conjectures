@@ -78,8 +78,8 @@ lemma globalSectionsEvaluation_comp {X : Scheme.{u}}
         (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ Λ))
           (ψ.hom.app _ s)) ≫ globalSectionsEvaluation Λ X F := by
   refine Sigma.hom_ext _ _ fun s ↦ ?_
-  rw [globalSectionsEvaluation, Sigma.ι_comp_desc_assoc, Sigma.ι_comp_desc_assoc, globalSectionsEvaluation,
-    Sigma.ι_comp_desc, ← Adjunction.homEquiv_naturality_right_symm]
+  rw [globalSectionsEvaluation, Sigma.ι_comp_desc_assoc, Sigma.ι_comp_desc_assoc,
+    globalSectionsEvaluation, Sigma.ι_comp_desc, ← Adjunction.homEquiv_naturality_right_symm]
   congr 1
   ext
   simp

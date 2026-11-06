@@ -160,7 +160,8 @@ lemma Etale.derivedBaseChangeMapPlus_paste_horiz (sq₁ : CommSq g' f' f g)
         ((NatTrans.mapHomotopyCategoryPlus (Etale.upperStarComp A g'' g').hom).app K)) ≫
       (f'')_*[A].rightDerivedFunctorPlusUnith.app
         (((g'')^*[A]).mapHomotopyCategoryPlus.obj (((g')^*[A]).mapHomotopyCategoryPlus.obj K)) =
-      (f'')_*[A].rightDerivedFunctorPlusUnith.app (((g'' ≫ g')^*[A]).mapHomotopyCategoryPlus.obj K) ≫
+      (f'')_*[A].rightDerivedFunctorPlusUnith.app
+        (((g'' ≫ g')^*[A]).mapHomotopyCategoryPlus.obj K) ≫
       (f'')_*[A].rightDerivedFunctorPlus.map (DerivedCategory.Plus.Qh.map
         ((NatTrans.mapHomotopyCategoryPlus (Etale.upperStarComp A g'' g').hom).app K)) :=
     (f'')_*[A].rightDerivedFunctorPlusUnith.naturality
