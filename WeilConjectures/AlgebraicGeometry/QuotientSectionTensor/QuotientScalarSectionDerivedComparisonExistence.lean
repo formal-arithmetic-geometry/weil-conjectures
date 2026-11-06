@@ -188,6 +188,7 @@ theorem scalar_section_derived_comparison_exists (T : Scheme.{u})
     Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerLeft_hom,
     Functor.isoWhiskerRight_hom, Functor.map_comp, Category.id_comp, Functor.comp_obj,
     sectionLocalizationComparison, Iso.app_hom, hc, Category.assoc] at h ⊢
+  set_option pp.all true in
   set_option backward.isDefEq.respectTransparency false in
     simpa only [Category.id_comp, Category.comp_id] using h
 
