@@ -21,6 +21,12 @@ namespace AlgebraicGeometry.Scheme
 
 open CategoryTheory.Pretriangulated Opposite
 
+private local instance {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
+    (R : Sheaf J CommRingCat.{u}) : ∀ n : ℤ, (shiftFunctor (D R) n).Additive := by
+  let := HasDerivedCategory.standard (Mod R)
+  intro n
+  infer_instance
+
 private theorem transportDerivedLimit
     {C : Type*} [Category C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
