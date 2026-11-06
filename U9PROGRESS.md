@@ -230,6 +230,32 @@
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 - This final commit changes only progress documentation; Lean source matches the green build.
 
+# BZ798 in progress
+
+- Branch: `u9/BZ798`; original baseline: `6a4b38f19`.
+- Resumed after rereading `/home/ubuntu/u9/briefs/BZ798.md` and the progress notes.
+- Merged the current integrated bump branch at `d9a3ea12c`. It already removes the
+  unused signed-projection comparison chain and its downstream callers. The earlier
+  referenced-caller blocker therefore no longer applies.
+- Deleted only the remaining unused `SignedProjectionResolution.totalInverse`;
+  whole-tree `git grep -w totalInverse -- WeilConjectures Comparator` found its sole
+  declaration and no callers. It is listed unused and absent from kept-decls.txt.
+- All surviving declaration text is unchanged from the integrated branch.
+- Next: validate the owned module, then its direct importers and downstream layers.
+- Previous diagnostic history is archived in FIXES-BZ798-preintegration.md.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+
+# BZ850 in progress
+
+- Branch: `u9/BZ850`; baseline: `2ab2b07a3`.
+- The user instructed continuation after the explicit three-declaration upstream restoration proposal.
+- Restored `derived_projection_exists`, `coefficientConstantTowerProjection_exists`, and
+  `coefficientConstantTowerProjection` in CoefficientRingedSequenceSiteSupplement with their
+  original statements and docstrings. Their surviving users prohibit pruning them.
+- Added Localization imports and explicit simplification of its hidden comparison components.
+- The assigned CoefficientConstantTowerRoos source is unchanged.
+- Next: remote ucheck-bump on the assigned module, then both direct importers.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 # BZ824 in progress
 
 - Branch: u9/BZ824; starting commit 95c8987257f.
@@ -246,37 +272,39 @@
 - Next: build layer-two importer CanonicalModuleBaseChangeAffineChartComparison.
 - Notes: /home/ubuntu/u9/bz/FIXES-BZ824.md. No local Lean/Lake or proof shortcuts.
 
+# BZ856 in progress
 
-# BZ859 in progress
+- Branch: `u9/BZ856`; original start: `2ab2b07a3`.
+- Reread the brief and prior notes on continuation; no new LEAD lines were present.
+- User instructed continuation after the explicit five-upstream-module restoration proposal.
+  The six deleted prerequisites are restored from the reviewed draft, retaining later
+  repairs to surviving helpers. They now need remote Lean 4.35 validation and porting.
+- Merged integrated bump branch `db406319f` before restoring the prerequisites.
+- Assigned theorem remains intact: it has live callers and cannot be pruned.
+- Next: ucheck-bump assigned module, repair prerequisite errors, then downstream targets.
+- No local Lean/Lake execution; no proof placeholders, trust bypasses, or heartbeat raises.
 
-- Branch: u9/BZ859; initial commit db406319f.
-- The user instructed continuation after the concrete upstream-restoration proposal.
-- Applied BZ859-proposed-restoration.patch: restores tilde_preservesHomology,
-  affinePushforwardCohomologyMapOfComparison, and affinePushforwardRepresentativeCohomologyIso
-  with their original signatures/docs; ports generated additive-instance references.
-- Assigned factorization uses Localization implementation imports and a reflexive cast
-  for the original homology map, following the supplied BZ457 pattern.
-- Remote ucheck-bump is queued and reads the pushed branch upon acquiring a build tree.
-- Next: validate the assigned module; build its sole direct importer
-  AffinePushforwardCohomologyEdgeIdentity, then continue downstream up to the brief's limit.
-- Fix log: /home/ubuntu/u9/bz/FIXES-BZ859.md. No local Lean/Lake, proof escapes, or limit raises.
+# BZ889 complete
 
-
-# BZ885 in progress
-
-- Branch: u9/BZ885; baseline checkpoint 691397bb53c1a609462baa9046b9add95fc8dfef.
-- The user instructed continuation after the exact two-site compositor API proposal.
-- Applied BZ885-proposed-compositor.patch in GeometricCoefficientPullback and
-  GeometryEvaluation.coefficientPullback_transpose in GeometricDerivedEvaluation.
-  This preserves the intended comparisons under Mathlib's reversed compositor.
-- Declaration binders, hypotheses, proof bodies, and docstrings remain unchanged.
-- Next: ucheck-bump on the assigned module and both direct importers, then downstream.
-- Fix patterns and whole-tree inventories: /home/ubuntu/u9/bz/FIXES-BZ885.md.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
-
-- Assigned module and both direct importers passed ucheck-bump at
-  5cca20eeb783db7ec41171a7a488693bd489e3aa: rc=0, failed=0, 5034 jobs.
-- All three rebuilt successfully on poolb:43.166.83.208 (20s, 16s, 10s).
-- Full log: /home/ubuntu/u9/bz/BZ885-build-1-full.log.
-- Continuing through GeometricOperationsBaseExistence, GeometricOperationsExistence,
-  SemilinearOperationsExistence, and SemilinearDerivedSections.
+- Branch: `u9/BZ889`; starting commit: `d2d60c46e`.
+- Assigned `RingedTopoiDerivedPullbackIndependentSupplement` passed `ucheck-bump`:
+  rc=0, failed=0, 4961 jobs at source commit `6b98a7eeef407af1bf4d3de67c6547de6c8af623`.
+- Direct importers `RingedPullbackCochainPresentation` and
+  `KFlatScalarComparisonNormalization` both rebuilt green at `d341322f8b`.
+- The user instructed continuation after the exact one-line reflexive-cast proposal.
+  That normalization-field cast is the only Lean source change; all other statement
+  text, proof bodies and docstrings are unchanged. No declarations deleted.
+- All three direct importers and both accessible next-layer importers were checked.
+  `FinitePerfectAdicConstantModelsReduction` is blocked by
+  `OpenPinnedSingleDegreeZeroCounitIso`; `DerivedScalarMateData` by
+  `ProEtaleProjectionFormulaArrows`; `IntegralAmbientOperationModels` by
+  `IntegralTensorReductionTowerComparison` and `RingedPullbackPresentationOnSitesSupplement`.
+  These unowned prerequisites were skipped
+  under the brief's ownership rule; their exact first errors are in the handoff record.
+- Fix pattern, contextual regex and occurrence counts: `/home/ubuntu/u9/bz/FIXES-BZ889.md`.
+- Full build logs: `BUILD-BZ889-assigned-full.log`, `BUILD-BZ889-downstream1-full.log`,
+  and `BUILD-BZ889-downstream-focused-full.log` under `/home/ubuntu/u9/bz/`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ889-contract-audit.txt`.
+- No local Lean/Lake, proof placeholders, trust bypasses, profiler probes or heartbeat changes.
+- Completion marker: `/home/ubuntu/u9/state/BZ889.DONE`.
+- This final commit changes only progress documentation; Lean source matches the green builds.
