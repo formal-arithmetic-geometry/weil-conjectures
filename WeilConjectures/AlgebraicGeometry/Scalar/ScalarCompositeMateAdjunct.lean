@@ -182,7 +182,7 @@ private theorem compositor_counit
           (lowerStarComp (ModuleCat.{u + 1} A) r s)).hom.app M) ≫
       (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) (r ≫ s)).counit.app M =
     (Functor.mapDerivedCategoryNatIso (upperStarComp (ModuleCat.{u + 1} A) r s) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _).hom.app
+      (Functor.mapDerivedCategoryCompIso _ _).symm).hom.app
         (R(lowerStar (ModuleCat.{u + 1} A) s).obj
           (R(lowerStar (ModuleCat.{u + 1} A) r).obj M)) ≫
       ((mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) s).comp
@@ -294,9 +294,9 @@ theorem scalarMate_comp_homEquiv_symm
   let ac := mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) (r ≫ s)
   let bc := mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} B) (r ≫ s)
   let cA := Functor.mapDerivedCategoryNatIso
-    (upperStarComp (ModuleCat.{u + 1} A) r s) ≪≫ Functor.mapDerivedCategoryCompIso _ _
+    (upperStarComp (ModuleCat.{u + 1} A) r s) ≪≫ (Functor.mapDerivedCategoryCompIso _ _).symm
   let cB := Functor.mapDerivedCategoryNatIso
-    (upperStarComp (ModuleCat.{u + 1} B) r s) ≪≫ Functor.mapDerivedCategoryCompIso _ _
+    (upperStarComp (ModuleCat.{u + 1} B) r s) ≪≫ (Functor.mapDerivedCategoryCompIso _ _).symm
   let kA := Functor.rightDerivedFunctorCompIso'
     (lowerStar (ModuleCat.{u + 1} A) r) (lowerStar (ModuleCat.{u + 1} A) s)
     (lowerStarComp (ModuleCat.{u + 1} A) r s)
