@@ -558,10 +558,17 @@ private theorem finiteEvaluation_fac_comp {X Y : Scheme.{u}} (f : X ⟶ Y)
       (coefficientSequenceEvaluation l E Y n).mapDerivedCategory ⋙ BD :=
     finiteSystemDerivedPullbackEvaluation (integralSystemRings l E)
       (integralSystemTransition l E) f n
+  have hfac := Functor.exactSquare_fac (finiteEvaluation l E f n) C
+  have hβ : finiteSystemDerivedPullbackEvaluation (integralSystemRings l E)
+      (integralSystemTransition l E) f n =
+      Functor.mapDerivedCategorySquareIso (finiteEvaluation l E f n) := by
+    unfold finiteSystemDerivedPullbackEvaluation finiteEvaluation
+    rfl
+  erw [← hβ] at hfac
   dsimp only [BD, proEtaleConstantRingDerivedPullback]
   simp only [Functor.map_comp, Category.assoc]
   erw [B.mapDerivedCategoryFactors.hom.naturality k]
-  erw [reassoc_of% (Functor.exactSquare_fac (finiteEvaluation l E f n) C)]
+  erw [reassoc_of% hfac]
   dsimp only [Functor.comp_map]
   erw [Category.assoc, Category.assoc]
   change VD.map (F.mapDerivedCategoryFactors.inv.app C) ≫
