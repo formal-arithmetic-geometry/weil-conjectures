@@ -41,8 +41,10 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-attribute [local instance 2000] reductionModulesHasDerivedCategory
-  reductionRingModulesHasDerivedCategory
+set_option pp.all true in
+#check @AdicTower.level
+
+set_option pp.all true in
 
 /-- Bounded constructible etale origin of a level of the recorded adic tower. The witness
 C represents an object in the existing finite-coefficient bounded-constructible essential
