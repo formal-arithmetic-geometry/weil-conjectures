@@ -138,7 +138,7 @@ private theorem sliceTest_isZero
       (adicResidueRestriction (O.over U) V).obj ((adicResidueRestriction O U).obj M) :=
     (Functor.mapDerivedCategoryCompIso A F).app M ≪≫
       (Functor.mapDerivedCategoryNatIso c).app M ≪≫
-        (Functor.mapDerivedCategoryCompIso B D).app M
+        (Functor.mapDerivedCategoryCompIso B D).symm.app M
   let e' := e ≪≫ (derivedInternalHom ((T.over U).over V) ((O.over U).over V)).mapIso
     (eL.symm.op.prod eN)
   exact (F.mapDerivedCategory.map_isZero hz).of_iso e'.symm

@@ -328,7 +328,7 @@ def finitePerfectAdicScalarCoherence
   have := (finitePerfectAdicScalarModules_exact X d V U W f n).1
   have := (finitePerfectAdicScalarModules_exact X d V U W f n).2.1
   have := (finitePerfectAdicScalarModules_exact X d V U W f n).2.2
-  exact (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  exact Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (finitePerfectAdicScalarModulesCoherence X d V U W f n)
 
 end AlgebraicGeometry.Scheme
