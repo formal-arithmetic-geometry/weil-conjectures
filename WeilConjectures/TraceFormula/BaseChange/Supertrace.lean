@@ -135,9 +135,7 @@ theorem trace_eq_homologyUnitEndRingHom_superTrace (Ω : Type u) [Field Ω] [IsS
     @HasRightDual.mk _ _ _ _ (I.obj (Pᘁ)) (ExactPairing.map I P (Pᘁ))
   have hinj : Function.Injective I.unitEndRingHom := fun a b h ↦ by
     rw [Functor.unitEndRingHom_apply, Functor.unitEndRingHom_apply] at h
-    apply I.map_injective
-    change 𝟙 _ ≫ I.map a ≫ 𝟙 _ = 𝟙 _ ≫ I.map b ≫ 𝟙 _ at h
-    simpa only [Category.id_comp, Category.comp_id] using h
+    exact I.map_injective ((cancel_mono _).1 (by simpa [I] using h))
   have hY (i : ℤ) : IsDualizable ((DerivedCategory.homologyFunctor A i).obj (I.obj P)) := by
     obtain ⟨n, ⟨e⟩⟩ := isFiniteFree_upperStar_homology ℓ (Field.toIsField Ω)
       IsField.isSepClosed_toField P i (𝟙 _)
