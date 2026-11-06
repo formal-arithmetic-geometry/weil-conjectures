@@ -341,3 +341,19 @@
   CoefficientScalarSectionRealization. Deleted three prune-listed private helpers
   after checking all six short-name declaration/reference lines are local.
 - Revalidating the same four targets; no parallel build requests.
+
+# BZ941 complete
+
+- Source commit: c10fb12fbe2cd4532b13a0dfff0ced05b2c76a81; branch u9/BZ941.
+- Final ucheck-bump GREEN: rc=0, failed=0, 7000 jobs; assigned leaf and 24 downstream
+  modules validated. All 12 changed Lean source files belong to this green closure.
+- Six other modules are blocked by unowned dependencies. The complete 30-module
+  downstream scope and first errors are recorded in /home/ubuntu/u9/bz/BZ941-all-blockers.json.
+- Nine failing unused declarations deleted after prune-list and whole-tree reference checks.
+- Seven rewrite rules replay the corresponding changes; surviving declaration headers
+  are unchanged except the two already authorized reflexive transports in the leaf.
+- Full log: /home/ubuntu/u9/bz/BUILD-BZ941-final-green-full.log.
+- Fix records: /home/ubuntu/u9/bz/FIXES-BZ941.md; audit: BZ941-contract-audit.txt.
+- Completion marker: /home/ubuntu/u9/state/BZ941.DONE.
+- No local Lean/Lake, forbidden proof terms, profiler probes, or heartbeat increases.
+- This final checkpoint changes documentation only; Lean source matches the green build.
