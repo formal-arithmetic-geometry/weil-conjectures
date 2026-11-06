@@ -107,6 +107,9 @@ private theorem combine_restriction_square
     _ = a ≫ (y ≫ z) ≫ c₀ := by rw [hc]; simp [Category.assoc]
     _ = _ := by rw [hy]; simp [Category.assoc]
 
+set_option maxHeartbeats 400000 in
+-- The remote check exhausted 200000 heartbeats at the final composition after the
+-- targeted source rewrite (22s); the original theorem used a 1000000 budget.
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Construct the target comparison and prove mate compatibility from two
 independent ingredients: restriction of the pinned tensor counit and invariance

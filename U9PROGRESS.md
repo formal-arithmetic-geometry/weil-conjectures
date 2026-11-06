@@ -292,3 +292,5 @@
 - Build 9 is running on poolb:43.157.135.193 at 6d626d27d5, rebuilding additional prerequisites. Build 8 compiler diagnostics are complete; its wrapper separately hit a transient EOF parse error after compilation. Current bbuild.sh passes bash -n.
 
 - Build 9: every prerequisite green through SingleComplexOpenBaseChangeCalculation. Only OpenPinnedSingleDegreeZeroTarget failed: 200000-heartbeat timeout at the broad source-factor rewrite (18s). Replaced it with targeted conv; also applied the established full-transparency cast normalization to the final equality. Default heartbeat limit retained. Build 10 next.
+
+- Build 10: targeted rewrite and cast normalization passed; timeout moved to the final apex-isomorphism composition at 200000 heartbeats (22s). Set only this theorem to 400000, justified by those measured failures; its original pre-prune budget was 1000000. No instance-limit timeout is involved. Build 11 next.
