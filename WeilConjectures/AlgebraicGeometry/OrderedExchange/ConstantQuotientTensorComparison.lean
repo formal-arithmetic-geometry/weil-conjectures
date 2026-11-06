@@ -98,8 +98,8 @@ private theorem exactSquareFactors
     [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     [PreservesFiniteLimits H] [PreservesFiniteColimits H]
     (s : G ⋙ L' ≅ L ⋙ H) (K : CochainComplex A ℤ) :
-    ((Functor.mapDerivedCategoryCompIso G L').symm ≪≫
-        Functor.mapDerivedCategoryNatIso s ≪≫ Functor.mapDerivedCategoryCompIso L H).hom.app
+    (Functor.mapDerivedCategoryCompIso G L' ≪≫
+        Functor.mapDerivedCategoryNatIso s ≪≫ (Functor.mapDerivedCategoryCompIso L H).symm).hom.app
           (DerivedCategory.Q.obj K) ≫
         H.mapDerivedCategory.map (L.mapDerivedCategoryFactors.hom.app K) ≫
         H.mapDerivedCategoryFactors.hom.app ((L.mapHomologicalComplex (.up ℤ)).obj K) =
@@ -116,10 +116,10 @@ private theorem exactSquareFactors
   erw [hL, DerivedCategory.Q.map_id, Category.comp_id] at h₁
   erw [hG, DerivedCategory.Q.map_id, Category.comp_id] at h₂
   apply (cancel_epi
-    ((Functor.mapDerivedCategoryCompIso G L').hom.app (DerivedCategory.Q.obj K))).1
+    ((Functor.mapDerivedCategoryCompIso G L').inv.app (DerivedCategory.Q.obj K))).1
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc,
-    Iso.hom_inv_id_app_assoc]
-  rw [h₁, h₃, ← reassoc_of% h₂]
+    Iso.inv_hom_id_app_assoc]
+  erw [h₁, h₃, ← reassoc_of% h₂]
 
 private theorem tensorTotalExists {W : Scheme.{t}}
     (R : Sheaf (ProEt.topology W) CommRingCat.{t + 1})
@@ -307,7 +307,6 @@ private theorem tensorOnePullback_single_f
   rfl
 
 attribute [local implicit_reducible] proEtaleRingExtension level reductionRestrict
-  Functor.mapHomologicalComplex CochainComplex.singleFunctors
   proEtaleRingModuleDirectImage SheafOfModules.pushforward PresheafOfModules.pushforward
   PresheafOfModules.pushforward₀ PresheafOfModules.pushforward₀Obj
   PresheafOfModules.restrictScalars PresheafOfModules.restrictScalarsObj ModuleCat.restrictScalars
