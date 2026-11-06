@@ -17,5 +17,6 @@ formerly duplicated here (`WeilConjectures.CoefficientClosedStructure.curryYoned
 `AlgebraicGeometry.ProEtaleWeilSheaf.nativeDerivedTensorCurryYonedaIso`,
 `AlgebraicGeometry.WeilComplex.nativeConstructibleTensorCurryYonedaIso`,
 `AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_op_comp_iso_of_adjunction`); the copies
-were removed because a module importing both saw every declaration twice (lean-eval bump dedup, 2026-11-07).
+were removed because a module importing both saw every declaration twice (lean-eval bump dedup,
+2026-11-07).
 -/
