@@ -51,6 +51,11 @@ private theorem pure_natural {A B : Sheaf J CommRingCat.{r}} (a : A ⟶ B) (M : 
     {U V : Cᵒᵖ} (f : U ⟶ V) (s : B.obj.obj U) (x : M.val.obj U) :
     (ext a M).val.map f (pure a M U s x) =
       pure a M V (B.obj.map f s) (M.val.map f x) := by
+  let : Module (A.obj.obj V)
+      ((ModuleCat.restrictScalars
+        (((sheafCompose J (forget₂ CommRingCat RingCat)).obj A).obj.map f).hom).obj
+          (M.val.obj V)) :=
+    inferInstanceAs (Module (A.obj.obj V) (M.val.obj V))
   have h := PresheafOfModules.naturality_apply (eta a M) f
     (s ⊗ₜ[A.obj.obj U, (a.hom.app U).hom] x)
   change (eta a M).app V ((raw a M).map f
@@ -159,7 +164,8 @@ private theorem kernel_all {R S B T : Sheaf J CommRingCat.{r}}
   rintro V f ⟨t, ht⟩
   change (ext c P).val.map f.op (z • y) = (ext c P).val.map f.op 0
   rw [PresheafOfModules.map_smul, map_zero]
-  change S.obj.map f.op z • (ext c P).val.map f.op y = 0
+  change S.obj.map f.op z •
+    (show (ext c P).val.obj (op V) from (ext c P).val.map f.op y) = 0
   change (eta c P).app (op V) t = (ext c P).val.map f.op y at ht
   rw [← ht]
   have hz' : q.hom.app (op V) (S.obj.map f.op z) = 0 := by

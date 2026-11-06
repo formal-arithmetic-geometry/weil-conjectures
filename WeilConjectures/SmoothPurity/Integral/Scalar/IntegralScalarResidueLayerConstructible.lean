@@ -13,6 +13,8 @@ import WeilConjectures.AlgebraicGeometry.Finite.Field.FiniteFieldLocalTensorMode
 import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantModuleConstructibility
 import all WeilConjectures.AlgebraicGeometry.Constructible.ConstructibleCoefficientHomologyTriangulated
 import all WeilConjectures.AlgebraicGeometry.Constructible.ConstructibleCoefficientSerre
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import Mathlib.Algebra.Category.ModuleCat.Descent
 import Mathlib.CategoryTheory.Sites.Adjunction
 import Mathlib.CategoryTheory.Adjunction.Mates
