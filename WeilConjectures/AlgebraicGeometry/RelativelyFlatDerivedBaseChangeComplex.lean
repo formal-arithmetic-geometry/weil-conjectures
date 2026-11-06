@@ -16,6 +16,8 @@ public import WeilConjectures.AlgebraicGeometry.SingleComplexBaseChangeStalkCond
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.DerivedPullbackTorIndependentFlatComplex
 import WeilConjectures.AlgebraicGeometry.SingleComplexBaseChangeCriterion
 import WeilConjectures.AlgebraicGeometry.CounitStalkConditionFromLocalizedComparison
@@ -158,9 +160,16 @@ theorem relativelyFlat_derivedBaseChange_complex
         pullback.condition (DerivedCategory.Q.obj (CochainComplex.mapBifunctor P G
           (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf)))) ≫
       (schemeDerivedDirectImage (pullback.snd f g)).map
-        ((SingleComplexBaseChange.counit (pullback.fst f g)).app
+        (cast (by rfl) ((SingleComplexBaseChange.counit (pullback.fst f g)).app
           ((HomotopyCategory.quotient _ (.up ℤ)).obj (CochainComplex.mapBifunctor P G
-            (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf)))))) := by
+            (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf))))) :
+          (derivedPullback (pullback.fst f g)).obj
+              (DerivedCategory.Q.obj (CochainComplex.mapBifunctor P G
+                (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf)))) ⟶
+            DerivedCategory.Q.obj
+              (((Scheme.Modules.tensorPullback (pullback.fst f g)).mapHomologicalComplex
+                (.up ℤ)).obj (CochainComplex.mapBifunctor P G
+                  (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf))))))) := by
   classical
   let sq : IsPullback (pullback.fst f g) (pullback.snd f g) f g :=
     IsPullback.of_hasPullback f g
