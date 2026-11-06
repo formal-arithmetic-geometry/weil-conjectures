@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SmoothPurity.CompletedLineTensor.CompletedScalarOrdinaryCoherence
 public import WeilConjectures.SmoothPurity.Integral.IntegralOperationsScalarComparisons
+import all WeilConjectures.SmoothPurity.CompletedLineTensor.CompletedScalarOrdinaryCoherence
 import all Mathlib.CategoryTheory.Limits.HasLimits
 import WeilConjectures.TraceFormula.Integral.IntegralScalarOrdinaryModelComparison
 import all WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarExtensionConstructible
@@ -352,12 +353,7 @@ private theorem scalarModelComparison_associator
       completedScalarCounit.{u, u} l L M j X ((Fa.mapHomologicalComplex (.up ℤ)).obj P.obj) ≫
         DerivedCategory.Q.map
           ((completedOrdinaryScalarComplex.{u, u} l L M j X).map (ta.hom.app P.obj)) := by
-    simpa only [Cb, completedScalarCounit, completedOrdinaryScalarComplex, cast_eq] using
-      homotopyCounit_naturality
-        (completedOrdinaryScalarExtension.{u, u} l L M j X)
-        (completedDerivedScalarExtension.{u, u} l L M j X)
-        ((completedScalarChangeData.{u, u} l L M j X).choose_spec.choose_spec.choose_spec
-          |>.choose_spec.2.2.choose_spec.choose) (ta.hom.app P.obj)
+    exact CompletedLineTensor.counit_naturality l L X M j (ta.hom.app P.obj)
   change Cb.map (completedScalarCounit.{u, u} l E L ι X P.obj) ≫
     completedScalarCounit.{u, u} l L M j X
       ((completedOrdinaryScalarComplex.{u, u} l E L ι X).obj P.obj) ≫
