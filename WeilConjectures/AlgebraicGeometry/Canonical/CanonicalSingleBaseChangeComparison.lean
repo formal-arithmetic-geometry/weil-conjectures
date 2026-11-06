@@ -130,6 +130,7 @@ theorem canonicalSingleBaseChangeComparison
             (((Classical.choose (exists_tensorPullbackAdjunction p)).leftAdjointUniq
               (pullbackPushforwardAdjunction p)).hom.app M)) ≫
       canonicalSingleDirectImageMap f' ((pullback p).obj M) := by
+  dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
   let C_X := SheafOfModules.{u} (moduleRings X.toRingedSpace)
   let C_S := SheafOfModules.{u} (moduleRings S.toRingedSpace)
   let C_X' := SheafOfModules.{u} (moduleRings X'.toRingedSpace)
@@ -228,6 +229,10 @@ theorem canonicalSingleBaseChangeComparison
     simpa only [canonicalSingleDirectImageMap, canonicalSinglePullbackMap, cast_eq,
       Category.assoc, C_X, C_S, C_X', C_S', E, Q_S, Q_X', Q_S', F, G, H, I,
       ε_g, ε_p, t_g, t_p, a, b₀, b₁, c, d, k, v, sf, Scheme.Modules,
-      Scheme.ringCatSheaf, moduleRings] using hf
+      Scheme.ringCatSheaf, moduleRings, DerivedCategory.singleFunctor,
+      DerivedCategory.singleFunctors, HomotopyCategory.singleFunctor,
+      HomotopyCategory.singleFunctors, SingleFunctors.postcomp, Functor.comp_map,
+      DerivedCategory.Qh, HomologicalComplexUpToQuasiIso.Qh, HomotopyCategory.quotient,
+      Quotient.lift_map_functor_map, DerivedCategory.Q] using hf
 
 end AlgebraicGeometry.Scheme.Modules
