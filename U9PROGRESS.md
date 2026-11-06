@@ -298,3 +298,14 @@
   unmeasured maxHeartbeats override from the restored helper.
 - Next: ucheck-bump on the five prerequisites and SupportedKoszulRelativeDetector, then downstream.
 - Fix notes: /home/ubuntu/u9/bz/FIXES-BZ932.md. No local Lean/Lake or proof shortcuts.
+
+
+# BZ949 in progress
+
+- Branch: u9/BZ949; baseline: 86b635dfce798c1644c3ee4783f6871a55233370.
+- The user instructed continuation after the exact one-cast statement proposal.
+- Applied the reflexive cast around the existing counit, preserving its map and assumptions.
+- Baseline ucheck-bump confirmed this was the assigned module's only error.
+- Next: validate AffineBaseChangeTildeRepresentative, then its six direct importers.
+- Fix patterns, exact error, rule, and occurrence counts: /home/ubuntu/u9/bz/FIXES-BZ949.md.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
