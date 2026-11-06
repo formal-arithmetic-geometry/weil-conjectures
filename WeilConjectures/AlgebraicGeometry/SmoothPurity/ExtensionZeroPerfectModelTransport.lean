@@ -224,6 +224,19 @@ private def integralConstantPullIso {A : Type (u + 1)} [CommRing A]
   exact adj.leftAdjointUniq (integralAdj X d ((proEtaleBaseChange f).obj T)
     (hT.isTerminalObj (proEtaleBaseChange f)))
 
+private def integralConstantDerivedPullIso {A : Type (u + 1)} [CommRing A]
+    (d : AdicCoefficientDatum A) {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    integralConstantDerived Y d ⋙ d.pull f ≅ integralConstantDerived X d := by
+  let := HasDerivedCategory.standard (ModuleCat.{u + 1} A)
+  let : (integralConstantModule X d).Additive := integralConstantModule_additive X d
+  let : (integralConstantModule Y d).Additive := integralConstantModule_additive Y d
+  let := (integralConstantModule_exact Y d).1
+  let := (integralConstantModule_exact Y d).2
+  let := (integralConstantModule_exact X d).1
+  let := (integralConstantModule_exact X d).2
+  exact Functor.mapDerivedCategoryCompIso _ _ ≪≫
+    Functor.mapDerivedCategoryNatIso (integralConstantPullIso d f)
+
 end AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry.Scheme
