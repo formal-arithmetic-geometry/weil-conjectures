@@ -180,7 +180,7 @@ private theorem square_single_transport
     (M : A) (N : B') (φ : L.obj M ⟶ N) :
     LG.map ((R.mapDerivedCategorySingleFunctor 0).inv.app M) ≫
       eg.hom.app (R.mapDerivedCategory.obj ((DerivedCategory.singleFunctor A 0).obj M)) ≫
-      (mapDerivedCategoryCompIso R G).inv.app
+      (mapDerivedCategoryCompIso R G).hom.app
         ((DerivedCategory.singleFunctor A 0).obj M) ≫
       (mapDerivedCategoryNatIso e).inv.app ((DerivedCategory.singleFunctor A 0).obj M) ≫
       (mapDerivedCategoryCompIso L S).inv.app ((DerivedCategory.singleFunctor A 0).obj M) ≫
