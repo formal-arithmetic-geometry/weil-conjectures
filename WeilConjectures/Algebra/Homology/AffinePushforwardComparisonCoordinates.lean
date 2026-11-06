@@ -76,7 +76,8 @@ def affinePushforwardCohomologyMapOfComparison (A B : Type u) [CommRing A] [Comm
     constructor
     intro M N f g
     exact tilde.map_add (R := .of A) f g
-  let : P.Additive := inferInstance
+  let : P.Additive := RingedSpace.moduleDirectImage_additive_proof
+    (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom
   let D := (T.mapHomologicalComplex (.up ℤ)).obj C
   let a : (F.mapHomologicalComplex (.up ℤ)).obj C ⟶
       (P.mapHomologicalComplex (.up ℤ)).obj D :=
