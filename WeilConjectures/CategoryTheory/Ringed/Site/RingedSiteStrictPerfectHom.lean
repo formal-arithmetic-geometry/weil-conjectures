@@ -71,7 +71,7 @@ set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option linter.unusedSectionVars false
-universe c v r w
+universe c v r w u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace PresheafOfModules
 variable {C : Type c} [Category.{v} C]
@@ -79,12 +79,14 @@ variable {C : Type c} [Category.{v} C]
   (N : PresheafOfModules.{max c v r} (R ⋙ forget₂ _ _))
 
 noncomputable local instance sp_restrictedUnitSMul
-    (B : PresheafOfModules.{max c v r} (R ⋙ forget₂ _ _))
+    (S : Cᵒᵖ ⥤ CommRingCat.{u})
+    (B : PresheafOfModules.{u} (S ⋙ forget₂ CommRingCat.{u} RingCat.{u}))
     (U : Cᵒᵖ) (W : (Over U.unop)ᵒᵖ) :
-    SMul (((restrictOver R U.unop).obj (unit (R ⋙ forget₂ _ _))).obj W)
+    SMul (((restrictOver S U.unop).obj
+      (unit (S ⋙ forget₂ CommRingCat.{u} RingCat.{u}))).obj W)
       ((ModuleCat.restrictScalars
-        ((R ⋙ forget₂ CommRingCat.{max c v r} RingCat.{max c v r}).map
-          W.unop.hom.op).hom).obj (B.obj (op W.unop.left))) :=
+        ((S ⋙ forget₂ CommRingCat.{u} RingCat.{u}).map W.unop.hom.op).hom).obj
+          (B.obj (op W.unop.left))) :=
   (B.obj (op W.unop.left)).isModule.toSMul
 
 private lemma sp_homObjUnitIsoApp_hom_apply (X : Cᵒᵖ) (φ : (homObj (unit _) N).obj X) :
