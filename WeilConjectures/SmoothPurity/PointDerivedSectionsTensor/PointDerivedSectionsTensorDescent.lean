@@ -54,6 +54,7 @@ public import Mathlib.CategoryTheory.Limits.Final
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import all Mathlib.Algebra.Homology.Localization
 import Mathlib.CategoryTheory.Localization.Predicate
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 import WeilConjectures.AlgebraicGeometry.ProperBaseChange.WContractibleAffineEvaluation

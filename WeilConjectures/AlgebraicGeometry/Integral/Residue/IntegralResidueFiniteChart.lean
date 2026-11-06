@@ -193,9 +193,9 @@ private def finiteConstantModelIso
   (finiteCoefficientRealization S Λ).mapDerivedCategory.mapIso
       (((constantSheaf (ProEt.topology S)
         (ModuleCat.{u + 1} Λ)).mapDerivedCategoryFactors).app P).symm ≪≫
-    ((Functor.mapDerivedCategoryCompIso
+    (Functor.mapDerivedCategoryCompIso
       (constantSheaf (ProEt.topology S) (ModuleCat.{u + 1} Λ))
-      (finiteCoefficientRealization S Λ)).app (DerivedCategory.Q.obj P)).symm
+      (finiteCoefficientRealization S Λ)).app (DerivedCategory.Q.obj P)
 
 private def finiteConstantDerivedPullback
     (S V : Scheme.{u}) (h : V ⟶ S)
@@ -205,8 +205,8 @@ private def finiteConstantDerivedPullback
     (finiteCoefficientDerivedPullback S Λ h).obj
         ((finiteConstant S Λ).mapDerivedCategory.obj (DerivedCategory.Q.obj P)) ≅
       (finiteConstant V Λ).mapDerivedCategory.obj (DerivedCategory.Q.obj P) :=
-  ((Functor.mapDerivedCategoryCompIso (finiteConstant S Λ)
-    (finiteCoefficientPullback S Λ h)).app (DerivedCategory.Q.obj P)).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso (finiteConstant S Λ)
+    (finiteCoefficientPullback S Λ h)).app (DerivedCategory.Q.obj P) ≪≫
     (Functor.mapDerivedCategoryNatIso (finiteConstantPullback S V h Λ)).app
       (DerivedCategory.Q.obj P)
 
@@ -300,8 +300,8 @@ theorem integralResidueFiniteChart
       (((constantSheaf (ProEt.topology S)
         (ModuleCat.{u + 1} Λ)).mapHomologicalComplex (.up ℤ)).obj B'))
   let comp := Functor.mapDerivedCategoryNatIso (finitePullbackComp T S Y.left g Y.hom Λ) ≪≫
-    Functor.mapDerivedCategoryCompIso (finiteCoefficientPullback T Λ g)
-      (finiteCoefficientPullback S Λ Y.hom)
+    (Functor.mapDerivedCategoryCompIso (finiteCoefficientPullback T Λ g)
+      (finiteCoefficientPullback S Λ Y.hom)).symm
   obtain ⟨ec⟩ := eP
   let eMN : (finiteCoefficientDerivedPullback S Λ Y.hom).obj M ≅
       (finiteCoefficientDerivedPullback S Λ Y.hom).obj N :=
