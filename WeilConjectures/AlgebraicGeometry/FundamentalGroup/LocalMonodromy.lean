@@ -100,7 +100,7 @@ theorem natCast_sub_one_mul_monodromy_eq_zero
   have : IsAlgClosed c.ideal.ResidueField := by
     have := Scheme.isAlgClosed_residueField_of_isClosed p z hzc
     let e₁ : Γ(C, c.W) ⧸ c.ideal ≃+* C.residueField z :=
-      IsLocalization.AtPrime.equivQuotMaximalIdeal c.ideal (C.presheaf.stalk z)
+      (IsLocalization.AtPrime.equivQuotMaximalIdeal c.ideal (C.presheaf.stalk z)).toRingEquiv
     let e₀ : Γ(C, c.W) ⧸ c.ideal ≃+* c.ideal.ResidueField :=
       RingEquiv.ofBijective _ (Ideal.bijective_algebraMap_quotient_residueField c.ideal)
     exact IsAlgClosed.of_ringEquiv _ _ (e₁.symm.trans e₀)
