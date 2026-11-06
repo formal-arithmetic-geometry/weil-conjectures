@@ -110,7 +110,8 @@ theorem derived_pullback_compositionLaws (K : Scheme.{t}) (s : Option ℕ) :
       (Functor.mapDerivedCategoryCompNatIso c).hom.app M ≫
           (Functor.mapDerivedCategoryNatIso q).hom.app M =
         F.mapDerivedCategory.map
-          ((Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryIdIso (Modules ell E Y s)).hom.app M) := by
+          ((Functor.mapDerivedCategoryNatIso e ≪≫
+            Functor.mapDerivedCategoryIdIso (Modules ell E Y s)).hom.app M) := by
     have hi : c ≪≫ q = Functor.isoWhiskerRight e F := by
       apply Iso.ext
       apply NatTrans.ext
@@ -141,7 +142,8 @@ theorem derived_pullback_compositionLaws (K : Scheme.{t}) (s : Option ℕ) :
       (M : Derived ell E Y s) :
       (Functor.mapDerivedCategoryCompNatIso c).hom.app M ≫
           (Functor.mapDerivedCategoryNatIso q).hom.app M =
-        (Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryIdIso (Modules ell E X s)).hom.app
+        (Functor.mapDerivedCategoryNatIso e ≪≫
+          Functor.mapDerivedCategoryIdIso (Modules ell E X s)).hom.app
           (F.mapDerivedCategory.obj M) := by
     have hi : c ≪≫ q = Functor.isoWhiskerLeft F e := by
       apply Iso.ext

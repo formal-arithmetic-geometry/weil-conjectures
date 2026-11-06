@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Bounded.BoundedConstructibleTowerSupplement
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Tensor.ProEtaleTensorPullbackModels
+import WeilConjectures.CategoryTheory.Exact.ExactRestrictionCompositionSupplement
 
 /-! # Normalization of exact derived coefficient pullback
 
