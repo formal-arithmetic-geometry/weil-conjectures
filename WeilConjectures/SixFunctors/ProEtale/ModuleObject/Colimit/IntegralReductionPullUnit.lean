@@ -220,6 +220,11 @@ lemma upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app_Qh
   have l1 := (derivedComapLeftDerivedUpperStarIso a f).hom.naturality
     ((Mod.extendScalars (coefficientMap a Y)).leftDerivedFunctorCounit.app K)
   have l2 := (Mod.comap (coefficientMap a X)).mapDerivedCategoryFactorsh.hom.naturality
+    (X := (((f)^*⟦Λ'⟧).mapHomotopyCategory (ComplexShape.up ℤ)).obj
+      (((Mod.extendScalars (coefficientMap a Y)).mapHomotopyCategory
+        (ComplexShape.up ℤ)).obj K))
+    (Y := ((Mod.extendScalars (coefficientMap a Y) ⋙ (f)^*⟦Λ'⟧).mapHomotopyCategory
+      (ComplexShape.up ℤ)).obj K)
     ((Functor.mapHomotopyCategoryCompIso
       (Iso.refl (Mod.extendScalars (coefficientMap a Y) ⋙ (f)^*⟦Λ'⟧))
         (ComplexShape.up ℤ)).hom.app K)
