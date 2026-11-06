@@ -10,6 +10,7 @@ public import WeilConjectures.Algebra.Homology.AffineTildeTensorSourceComparison
 public import WeilConjectures.Algebra.Homology.AffineBaseChangeTildeRepresentative
 import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeUnitCompatibility
 public import WeilConjectures.Algebra.Homology.AffineTildeTensorOrdinaryExchangePreNormalization
+import all WeilConjectures.Algebra.Homology.AffineTildeTensorOrdinaryExchangePreNormalization
 
 /-! # Ordinary affine exchange in tensor coordinates
 
