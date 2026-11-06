@@ -299,32 +299,20 @@
 - Next: ucheck-bump on the five prerequisites and SupportedKoszulRelativeDetector, then downstream.
 - Fix notes: /home/ubuntu/u9/bz/FIXES-BZ932.md. No local Lean/Lake or proof shortcuts.
 
-# BZ941 in progress
+# BZ948 downstream check
 
-- Branch: u9/BZ941; baseline c59b55069.
-- The user instructed continuation after the exact one-line public-statement proposal.
-- Applied BZ941-public-statement-proposal.patch: cast (by rfl) around the unit map
-  in section_derived_tensor_normalization. All other declaration headers are unchanged.
-- Six other failures were resolved by implementation imports, reflexive unitor
-  transports, and cast normalization in the unit proof.
-- Next: ucheck-bump for the assigned leaf, then its five direct importers and further
-  downstream modules up to the brief's limit of 30 extra modules.
-- Notes and logs: /home/ubuntu/u9/bz/FIXES-BZ941.md.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
-- First continuation build accepted the proposed unit-map cast and exposed the same
-  hidden-unit mismatch in the public theorem's identity constraint. Applied the same
-  reflexive transport to that identity, with tensorUnit Λ T explicit, and revalidating.
-- Assigned leaf GREEN at d0d046a304a6ef9bd12942cdd26fd0765926f4d3:
-  ucheck-bump rc=0, failed=0, 5358 jobs; target freshly rebuilt in 25 seconds.
-- Full log: /home/ubuntu/u9/bz/BUILD-BZ941-leaf-green-full.log.
-- Continuing with all five direct importers; no DONE until downstream checking finishes.
-- Both direct comparison importers are GREEN: ModuleRingedToposDerivedComparison and
-  ModuleRingedComparison.ModuleRingedToposDerivedComparison (5422 jobs, rc=0, failed=0).
-- Three other direct importers are blocked by unowned dependencies; exact diagnostics
-  are in /home/ubuntu/u9/bz/BZ941-layer1-blockers.json.
-- Next: five comparison importers in the second layer.
-- Second layer exposed redundant reducibility attributes in SectionTensorRightComputation
-  (known BZ992 fixes) and a reversed compositor in the unused predicate
-  CoefficientScalarSectionRealization. Removed the attributes and deleted the predicate
-  with its docstring after whole-tree reference and prune-list checks.
-- Revalidating all five second-layer targets; exact errors/rules recorded in FIXES-BZ941.md.
+- Branch: u9/BZ948; baseline c59b55069.
+- All five edited modules passed ucheck-bump together: rc=0, failed=0, 4517 jobs.
+- Validated source commit: 7d627e792ab821868b3c90b06434a254e740963e.
+- Green: AffineTildeTensorSourceComparisonHelpers, CorePreBase, CorePre, CoreFinal,
+  and AffineTildeTensorSourceComparison (all under WeilConjectures.Algebra.Homology).
+- Full log: /home/ubuntu/u9/bz/BUILD-BZ948-five-green-full.log.
+- The user instructed continuation after the reflexive-cast statement proposal.
+  The same definitionally equal endpoint repair was carried through direct callers.
+- Other repairs: named tilde additive proofs, quasicoherence instance synthesis,
+  Localization imports, cast normalization, and local scheme derived-category instances.
+- Nineteen recorded rewrite rules reproduce the edited source modulo formatting.
+- Next: test the four direct importers of AffineTildeTensorSourceComparison.
+  Their shared dependency AffineBaseChangeTildeRepresentative belongs to BZ949.
+- Fix notes: /home/ubuntu/u9/bz/FIXES-BZ948.md.
+- No local Lean/Lake, forbidden proof shortcuts, deletions, or heartbeat increases.
