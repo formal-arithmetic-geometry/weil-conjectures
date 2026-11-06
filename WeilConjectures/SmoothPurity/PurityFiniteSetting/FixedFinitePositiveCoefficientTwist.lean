@@ -76,8 +76,8 @@ theorem diagonalExponent_annihilates (P : PurityFiniteSetting.{u}) :
       (algebraMap (Padic P.coefficients.l) P.extension P.coefficients.l) < 1
     rw [spectralNorm_extends]
     exact Padic.norm_p_lt_one
-  have hgen : Ideal.span {Padic.coefficientExtensionUniformizer
-      P.coefficients.l P.extension} =
+  have hgen : Ideal.span {(Padic.coefficientExtensionUniformizer
+      P.coefficients.l P.extension)} =
       Padic.coefficientExtensionMaximalIdeal P.coefficients.l P.extension :=
     h.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
   apply ULift.down_injective
@@ -89,7 +89,7 @@ theorem diagonalExponent_annihilates (P : PurityFiniteSetting.{u}) :
     Ideal.Quotient.eq_zero_iff_mem, Nat.cast_pow]
   change (P.coefficients.l : Padic.coefficientExtensionIntegers
     P.coefficients.l P.extension) ^ P.level ∈
-      Ideal.span {Padic.coefficientExtensionUniformizer P.coefficients.l P.extension} ^
+      Ideal.span {(Padic.coefficientExtensionUniformizer P.coefficients.l P.extension)} ^
         P.level
   rw [hgen]
   exact Ideal.pow_mem_pow hmem P.level
