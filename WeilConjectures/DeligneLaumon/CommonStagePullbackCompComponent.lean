@@ -175,6 +175,7 @@ theorem commonStagePullbackCompComponent_stage_representation
           (commonStagePullbackComparison l Ω f
             (commonStagePullbackObject l Ω g P) L hP).inv)) := by
   have h0 := commonStagePullbackCompComponent_heq l Ω f g P
+  run_tac Lean.logInfo m!"PF519 heartbeat start: {← IO.getNumHeartbeats}"
   rw [integralPullbackCompositor_eq_choose] at h0
   have hw := rationalPullbackCompositionIso_heq l
     (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) f g P.obj
@@ -240,6 +241,8 @@ theorem commonStagePullbackCompComponent_stage_representation
   have hkey := congrArg (StageSystem.PairCategory.mkHom
       (X := commonStagePullbackObject l Ω (f ≫ g) P)
       (Y := commonStagePullbackObject l Ω f (commonStagePullbackObject l Ω g P)) L hP hP) key
+  run_tac Lean.logInfo m!"PF519 heartbeat before final check: {← IO.getNumHeartbeats}"
+  trace_state
   set_option backward.isDefEq.respectTransparency true in
   set_option backward.isDefEq.respectTransparency.types true in
   with_reducible exact hkey
