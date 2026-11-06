@@ -159,7 +159,8 @@ private theorem kernel_all {R S B T : Sheaf J CommRingCat.{r}}
   rintro V f ⟨t, ht⟩
   change (ext c P).val.map f.op (z • y) = (ext c P).val.map f.op 0
   rw [PresheafOfModules.map_smul, map_zero]
-  change S.obj.map f.op z • (ext c P).val.map f.op y = 0
+change S.obj.map f.op z •
+    (show (ext c P).val.obj (op V) from (ext c P).val.map f.op y) = 0
   change (eta c P).app (op V) t = (ext c P).val.map f.op y at ht
   rw [← ht]
   have hz' : q.hom.app (op V) (S.obj.map f.op z) = 0 := by

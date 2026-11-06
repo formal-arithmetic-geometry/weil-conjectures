@@ -270,7 +270,7 @@ def finitePerfectAdicScalarModelTargetFactors :
   let H := finitePerfectAdicScalarModelOrdinary X d
   let O := SheafOfModules.overFunctor (completedAdicRing X d) W
   exact (mapDerivedCategoryCompIso R (H ⋙ O)).symm ≪≫
-    isoWhiskerLeft R.mapDerivedCategory (mapDerivedCategoryCompIso H O) ≪≫
+    isoWhiskerLeft R.mapDerivedCategory (mapDerivedCategoryCompIso H O).symm ≪≫
     isoWhiskerRight (isoWhiskerLeft R.mapDerivedCategory
       (finitePerfectAdicScalarModelCompletedFactors X d)) O.mapDerivedCategory
 
