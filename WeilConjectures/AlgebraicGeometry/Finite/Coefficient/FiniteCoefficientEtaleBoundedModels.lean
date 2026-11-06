@@ -239,7 +239,7 @@ theorem finiteCoefficient_etale_bounded_models
     let F := AlgebraicGeometry.Etale.upperStar C h.left
     exact (Functor.mapDerivedCategoryNatIso
         (AlgebraicGeometry.Etale.upperStarComp C h.left (𝒰.f i))).app L ≪≫
-      (Functor.mapDerivedCategoryCompIso _ _).app L ≪≫
+      (Functor.mapDerivedCategoryCompIso _ _).symm.app L ≪≫
       F.mapDerivedCategory.mapIso eP ≪≫ F.mapDerivedCategoryFactors.app _ ≪≫
       DerivedCategory.Q.mapIso
         ((Functor.mapHomologicalComplexCompIso
