@@ -181,7 +181,8 @@ private theorem single_unit_term
     DerivedCategory.Q.map _
   rw [← Functor.map_comp, ← Functor.map_comp]
   congr 1
-  ext n
+  apply HomologicalComplex.hom_ext
+  intro n
   by_cases hn : n = 0
   · subst n
     simp only [CochainComplex.singleFunctor, CochainComplex.singleFunctors, Functor.comp_obj,
