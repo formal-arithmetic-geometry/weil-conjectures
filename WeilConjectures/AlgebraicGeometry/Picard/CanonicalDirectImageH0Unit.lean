@@ -9,6 +9,10 @@ module
 public import WeilConjectures.AlgebraicGeometry.Picard.CanonicalSingleDirectImageComparison
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+public import Mathlib.Algebra.Homology.Localization
+public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+import all Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 
 /-! # Degree-zero normalization of the canonical direct-image unit
@@ -35,7 +39,7 @@ private theorem unit_plus {C D : Type*} [Category C] [Category D] [Abelian C] [A
     F.rightDerivedFunctorUnit.app ((HomotopyCategory.singleFunctor C 0).obj M) ≫
       (F.rightDerivedFunctorPlusCompatibility.app
         ((DerivedCategory.Plus.singleFunctor C 0).obj M)).inv =
-    DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnit.app
+    DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnith.app
       ((HomotopyCategory.Plus.singleFunctor C 0).obj M)) := by
   apply (Iso.comp_inv_eq _).2
   have h := (Functor.rightDerivedNatTrans_app
@@ -47,7 +51,7 @@ private theorem unit_plus {C D : Type*} [Category C] [Category D] [Abelian C] [A
   simp only [NatTrans.id_app, Category.id_comp] at h
   change F.rightDerivedFunctorUnit.app
       ((HomotopyCategory.Plus.singleFunctor C 0).obj M).obj =
-    DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnit.app
+    DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnith.app
       ((HomotopyCategory.Plus.singleFunctor C 0).obj M)) ≫
     (F.rightDerivedFunctorPlusCompatibility.app
       (DerivedCategory.Plus.Qh.obj
@@ -62,7 +66,7 @@ private theorem plus_unit_resolution {C D : Type*} [Category C] [Category D] [Ab
     [HasDerivedCategory C] [HasDerivedCategory D]
     [EnoughInjectives C]
     (F : C ⥤ D) [F.Additive] (M : C) :
-    F.rightDerivedFunctorPlusUnit.app
+    F.rightDerivedFunctorPlusUnith.app
         ((HomotopyCategory.Plus.singleFunctor C 0).obj M) ≫
       (F.rightDerivedFunctorPlusObjSingleFunctorIsoQ M).hom =
     DerivedCategory.Plus.Q.map (ObjectProperty.homMk
@@ -75,35 +79,31 @@ private theorem plus_unit_resolution {C D : Type*} [Category C] [Category D] [Ab
     ⟨(CochainComplex.singleFunctor C 0).obj M, 0, inferInstance⟩
   let L : CochainComplex.Plus C := ⟨R.cochainComplex, 0, inferInstance⟩
   let g : K ⟶ L := ObjectProperty.homMk R.ι'
-  have h := F.rightDerivedFunctorPlusUnit.naturality
-    ((HomotopyCategory.Plus.quotient C).map g)
+  have h := F.rightDerivedFunctorPlusUnit.naturality g
   dsimp only [Functor.comp_map] at h
   unfold Functor.rightDerivedFunctorPlusObjSingleFunctorIsoQ
   simp only [Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, asIso_inv]
   have he : (DerivedCategory.Plus.ι.preimageIso
       (X := (DerivedCategory.Plus.singleFunctor C 0).obj M)
-      (Y := DerivedCategory.Plus.Qh.obj ((HomotopyCategory.Plus.quotient C).obj L))
+      (Y := DerivedCategory.Plus.Q.obj L)
       ((DerivedCategory.singleFunctorIsoCompQ C 0).app M ≪≫
-        asIso (DerivedCategory.Q.map R.ι') ≪≫
-        (DerivedCategory.quotientCompQhIso C).symm.app _)).hom =
-      DerivedCategory.Plus.Qh.map ((HomotopyCategory.Plus.quotient C).map g) := by
+        asIso (DerivedCategory.Q.map R.ι'))).hom =
+      DerivedCategory.Plus.Q.map g := by
     apply DerivedCategory.Plus.ι.map_injective
     simp only [Functor.preimageIso_hom, Functor.map_preimage, Iso.trans_hom]
     dsimp [DerivedCategory.singleFunctorIsoCompQ, DerivedCategory.quotientCompQhIso,
       HomologicalComplexUpToQuasiIso.quotientCompQhIso]
-    erw [Category.id_comp, Category.comp_id]
+    erw [Category.id_comp]
     rfl
   rw [he]
-  change _ ≫ _ ≫ inv (F.rightDerivedFunctorPlusUnit.app
-    ((HomotopyCategory.Plus.quotient C).obj L)) = _
-  have h' : F.rightDerivedFunctorPlusUnit.app
-      ((HomotopyCategory.Plus.singleFunctor C 0).obj M) ≫
-      F.rightDerivedFunctorPlus.map
-        (DerivedCategory.Plus.Qh.map ((HomotopyCategory.Plus.quotient C).map g)) =
-    DerivedCategory.Plus.Qh.map (F.mapHomotopyCategoryPlus.map
-      ((HomotopyCategory.Plus.quotient C).map g)) ≫
-      F.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient C).obj L) := h.symm
-  rw [← Category.assoc, h', Category.assoc, IsIso.hom_inv_id, Category.comp_id]
+  have hu : F.rightDerivedFunctorPlusUnit.app K =
+      F.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.singleFunctor C 0).obj M) := by
+    erw [Functor.rightDerivedFunctorPlusUnit_app]
+    change 𝟙 _ ≫ DerivedCategory.Plus.Qh.map (𝟙 _) ≫
+      F.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.singleFunctor C 0).obj M) ≫
+      F.rightDerivedFunctorPlus.map (𝟙 _) = _
+    erw [Functor.map_id, Functor.map_id, Category.id_comp, Category.id_comp, Category.comp_id]
+  rw [← hu, ← Category.assoc, ← h, Category.assoc, IsIso.hom_inv_id, Category.comp_id]
   rfl
 
 set_option backward.defeqAttrib.useBackward true in
@@ -135,7 +135,7 @@ private theorem unit_homology_resolution {C D : Type*}
     Iso.symm_hom, Functor.mapIso_hom, Category.assoc]
   rw [← Functor.map_comp_assoc, unit_plus]
   change (DerivedCategory.Plus.homologyFunctor D n).map
-      (F.rightDerivedFunctorPlusUnit.app
+      (F.rightDerivedFunctorPlusUnith.app
         ((HomotopyCategory.Plus.singleFunctor C 0).obj M)) ≫ _ = _
   rw [← Functor.map_comp_assoc, plus_unit_resolution]
   have h := DerivedCategory.Plus.homologyFunctorObjQIso_hom_naturality g n
@@ -282,6 +282,7 @@ theorem canonicalDirectImageH0Unit {X S : Scheme.{u}} (f : X ⟶ S)
     (ComplexShape.up ℤ) 0).inv.app M
   have h := unit_homology_resolution F M 0
   have h' := augmentation_homology F M
+  simp only [canonicalSingleDirectImageMap, cast_eq]
   change H.map (DerivedCategory.Q.map a ≫
       F.rightDerivedFunctorUnit.app ((HomotopyCategory.singleFunctor C 0).obj M)) ≫
       (F.homologyRightDerivedFunctorObjSingleFunctorIso M 0 ≪≫
