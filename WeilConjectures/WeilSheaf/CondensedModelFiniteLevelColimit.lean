@@ -578,7 +578,7 @@ def isColimitCondensedRingObjMapCoconeFiniteLevelProEtCone [CompactSpace X₀]
         f.exists_locallyFiniteFunctionsComp_geometricFiberToFiniteLevel_eq l x.down
       exact ⟨Opposite.op (Opposite.op K), ULift.up s', ULift.ext hs'.symm⟩
     · refine ⟨i, 𝟙 i, ?_⟩
-      obtain rfl : x = y := ULift.ext _ _
+      obtain rfl : x = y := ULift.ext
         (f.locallyFiniteFunctionsComp_geometricFiberToFiniteLevel_injective l i.unop.unop
           (congrArg ULift.down h))
       rfl
