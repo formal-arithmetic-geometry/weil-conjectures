@@ -300,13 +300,18 @@
 - Fix notes: /home/ubuntu/u9/bz/FIXES-BZ932.md. No local Lean/Lake or proof shortcuts.
 
 
-# BZ949 in progress
+# BZ949 complete
 
 - Branch: u9/BZ949; baseline: 86b635dfce798c1644c3ee4783f6871a55233370.
-- The user instructed continuation after the exact one-cast statement proposal.
-- Applied the reflexive cast around the existing counit, preserving its map and assumptions.
-- Baseline ucheck-bump confirmed this was the assigned module's only error.
-- AffineBaseChangeTildeRepresentative is green at 2a367a4402b820cd58b13538f43a02f3792baa2e: rc=0, failed=0.
-- Next: build all six direct importers and continue through fixable downstream errors.
-- Fix patterns, exact error, rule, and occurrence counts: /home/ubuntu/u9/bz/FIXES-BZ949.md.
+- AffineBaseChangeTildeRepresentative passed ucheck-bump at
+  2a367a4402b820cd58b13538f43a02f3792baa2e: rc=0, built=8, failed=0.
+- The leaf rebuilt green at 1df4a0684631be9028cd9e7fa62d1d2b10182adf in the downstream batch.
+- The user instructed continuation after the exact one-cast proposal. That cast is
+  the only Lean change; the original map, assumptions, proof and docstrings are preserved.
+- All six direct importers were attempted and skipped because two unowned dependencies
+  fail: AffineTildePushforwardHomologyFactorization and AffineTildeTensorSourceComparisonHelpers.
+- Prepared downstream edits were reverted; no unvalidated source changes remain.
+- Logs, pattern, exact error, machine rule, counts and audit: /home/ubuntu/u9/bz/FIXES-BZ949.md.
+- Completion marker: /home/ubuntu/u9/state/BZ949.DONE.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
+- This final commit changes only progress documentation; Lean source matches both green checks.
