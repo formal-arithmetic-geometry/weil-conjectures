@@ -7,7 +7,6 @@ module
 
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
