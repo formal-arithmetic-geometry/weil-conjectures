@@ -66,8 +66,9 @@ private theorem pinned_comparison_isComparison
   exact Classical.choose (Classical.choose_spec
     (Classical.choose_spec exists_derivedPullbackComposition.{u, w})) k
 
-set_option maxHeartbeats 400000 in
--- The remote check exhausted 200000 heartbeats in this comparison proof (13s).
+set_option maxHeartbeats 800000 in
+-- After simplifying the restricted comparison and alias inference, the remote check
+-- still exhausted 400000 heartbeats in 20s; keep the increased budget local to this proof.
 /-- Restriction and affine charts identify the canonical *arrow*, without asserting
 that it is invertible. Both the restricted scheme and its module are explicit.
 Source: Stacks Project, Tag 08IB, first paragraph of the proof; Tag 08HY and Tag 08FE.
