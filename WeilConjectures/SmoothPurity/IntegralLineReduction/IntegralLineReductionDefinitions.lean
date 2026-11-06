@@ -65,18 +65,8 @@ open AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures.IntegralLineReduction
 open IntegralOnSlice
 
-attribute [local instance] HasDerivedCategory.standard
-
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})
-
-private local instance (M : scalarReductionSource.{u, u} l E X) (U : X.ProEtᵒᵖ) :
-    SMul ((SheafOfModules.unit
-      ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat RingCat)).obj
-        (completedIntegralCommRingSheafUnrestricted.{u, u} l E X))).val.obj U)
-      (M.val.obj U) :=
-  inferInstanceAs
-    (SMul ((completedIntegralCommRingSheafUnrestricted.{u, u} l E X).obj.obj U) (M.val.obj U))
 
 /-- The existing ordinary reduction of a line, at exponent n+1.
 Source: Stacks 03EK (blueprint: def-pur-integral-line-reduction-data). -/
@@ -152,6 +142,7 @@ def finiteModel (n : ℕ) :
   Classical.choice (ringedSiteDualityMaps_exists
     (ProEt.topology X) (integralCoefficientCommRingSheaf.{u, u} l E X n))
 
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 /-- Ordinary finite derived tensor with the finite signed line in degree zero.
 Source: Stacks 06YU (blueprint: def-pur-integral-line-reduction-data). -/
 def finiteOrdinary (L : scalarReductionSource.{u, u} l E X) (n : ℕ) (m : ℤ) :
@@ -248,6 +239,7 @@ def finiteTensorComplex (P : Cx.{u, u} l E X none) (L : scalarReductionSource.{u
       ((reduceComplex l E X n).obj P,
         (HomologicalComplex.single _ (.up ℤ) 0).obj (finitePower l E X L n m))
 
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 /-- K-flat computation of finite tensor and the actual derived-reduction counit.
 Source: Stacks 06YN, 06YY (blueprint: def-pur-integral-line-reduction-data). -/
 def finiteRepresentativeIso (P : Cx.{u, u} l E X none) (L : scalarReductionSource.{u, u} l E X)
@@ -415,6 +407,7 @@ def DerivedFormula (L : scalarReductionSource.{u, u} l E X) (b : PowerComparison
                 (integralLineComplex.{u, u} l E X P.obj (power l E X L m)) ≫
               (restrictComplex l E X n).map (a n).hom
 
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 /-- Normalization of an ordinary derived opposite-line evaluation by the actual
 ordinary sheaf evaluation, on all K-flat flat-term representatives.
 Source: blueprint proof (3) (blueprint: def-pur-integral-line-reduction-data). -/
