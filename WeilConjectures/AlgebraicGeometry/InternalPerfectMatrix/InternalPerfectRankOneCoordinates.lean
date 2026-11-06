@@ -5,8 +5,6 @@ Authors: Bin Wu
 -/
 module
 
-import all WeilConjectures.AlgebraicGeometry.AdmissibleScalarRealization.AdmissibleScalarRealizationExactSupplement
-
 public import WeilConjectures.AlgebraicGeometry.InternalPerfectMatrix.InternalPerfectOrdinaryMatrixData
 import WeilConjectures.CategoryTheory.FunctorFiniteMatrixCoordinates
 public import WeilConjectures.AlgebraicGeometry.Proper.Heart.ProperHeartBoundTorsion
@@ -97,11 +95,7 @@ theorem quotientFreeMatrix_scalar (W : Scheme.{u}) (n a b : ℕ)
     (v : Fin a → Fin b → A l E) :
     letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
     letI : (FiniteConstantModel.modelFunctor (A l E) W).Additive :=
-      by
-        have : IsPrincipalIdealRing (Padic.coefficientExtensionIntegers l E) :=
-          (Padic.coefficientExtensionIntegers_dvr l E).choose_spec.2.2.2.2.2.2.2.2.1
-        exact (AdmissibleScalarRealization.pid_scalar_assertions
-          (Padic.coefficientExtensionIntegers l E) W).2.1
+      (((AdmissibleScalarRealization.admissible_scalar_realization_exact l W).2.2.1 E).1.1).2.1
     let F := FiniteConstantModel.modelFunctor (A l E) W
     let G := Mod.extendScalars (AdicCompletion.quotient l E W n)
     let H := F ⋙ G
@@ -120,11 +114,7 @@ theorem quotientFreeMatrix_scalar (W : Scheme.{u}) (n a b : ℕ)
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   let F := FiniteConstantModel.modelFunctor (A l E) W
   let : F.Additive :=
-    by
-      have : IsPrincipalIdealRing (Padic.coefficientExtensionIntegers l E) :=
-        (Padic.coefficientExtensionIntegers_dvr l E).choose_spec.2.2.2.2.2.2.2.2.1
-      exact (AdmissibleScalarRealization.pid_scalar_assertions
-        (Padic.coefficientExtensionIntegers l E) W).2.1
+    (((AdmissibleScalarRealization.admissible_scalar_realization_exact l W).2.2.1 E).1.1).2.1
   let G := Mod.extendScalars (AdicCompletion.quotient l E W n)
   let H := F ⋙ G
   let S := ModuleCat.of (A l E) (ULift.{u + 1} (A l E))
