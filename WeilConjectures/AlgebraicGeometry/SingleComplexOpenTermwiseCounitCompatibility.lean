@@ -280,9 +280,19 @@ theorem singleComplexOpen_termwise_counit_compatibility
       U U' j hj
     (derivedPullback j).map a.hom ≫ θ ≫
         (schemeOpenRestriction X' U').mapDerivedCategory.map
-          ((counit g').app ((HomotopyCategory.quotient
-        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)).obj P)) =
-      (counit j).app ((HomotopyCategory.quotient _ (.up ℤ)).obj Q) ≫
+          ((derivedPullback g').map ((DerivedCategory.quotientCompQhIso _).inv.app P) ≫
+            (counit g').app ((HomotopyCategory.quotient
+              (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)).obj P) ≫
+            DerivedCategory.Qh.map
+              (((Scheme.Modules.tensorPullback g').mapHomotopyCategoryFactors (.up ℤ)).hom.app P) ≫
+            (DerivedCategory.quotientCompQhIso _).hom.app
+              (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P)) =
+      (derivedPullback j).map ((DerivedCategory.quotientCompQhIso _).inv.app Q) ≫
+        (counit j).app ((HomotopyCategory.quotient _ (.up ℤ)).obj Q) ≫
+        DerivedCategory.Qh.map
+          (((Scheme.Modules.tensorPullback j).mapHomotopyCategoryFactors (.up ℤ)).hom.app Q) ≫
+        (DerivedCategory.quotientCompQhIso _).hom.app
+          (((Scheme.Modules.tensorPullback j).mapHomologicalComplex (.up ℤ)).obj Q) ≫
         singleComplexOpenTensorRestrictionMap g' U U' j hj P := by
   dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
   have : ∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z),
