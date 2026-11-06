@@ -122,9 +122,9 @@ lemma maximalIdeal_localization_ker_sliceTraitPointRingHom [IsDomain R₁]
     [IsDiscreteValuationRing R₁] (hb₁ : RingHom.ker b₁ = maximalIdeal R₁) {π : R₁}
     (hπ : Irreducible π) :
     maximalIdeal (Localization.AtPrime (RingHom.ker (sliceTraitPointRingHom b₁))) =
-      Ideal.span {algebraMap (MvPolynomial (ULift.{u} (Fin 1)) R₁)
+      Ideal.span {(algebraMap (MvPolynomial (ULift.{u} (Fin 1)) R₁)
         (Localization.AtPrime (RingHom.ker (sliceTraitPointRingHom b₁)))
-        (MvPolynomial.C π)} := by
+        (MvPolynomial.C π))} := by
   rw [← IsLocalization.AtPrime.map_eq_maximalIdeal (RingHom.ker (sliceTraitPointRingHom b₁)),
     ← Set.image_singleton, ← Ideal.map_span]
   exact congrArg _ (ker_sliceTraitPointRingHom_eq_span b₁ hb₁ hπ)
