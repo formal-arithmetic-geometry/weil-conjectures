@@ -157,7 +157,7 @@ attribute [instance] Chart.hU₁ Chart.hU₂ Chart.hU₃ Chart.hA₁ Chart.hA₂
 
 variable (f : X ⟶ Y)
 
-omit [Fact (ringChar k).Prime]
+omit [Finite k] [Fact (ringChar k).Prime]
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] in
 /-- The base change of a chart: `j̄ ≫ f̄ = ḡ ≫ j̄A ≫ p̄ ≫ j̄V`. -/

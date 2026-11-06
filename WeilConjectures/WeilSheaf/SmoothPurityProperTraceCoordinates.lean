@@ -96,6 +96,7 @@ variable {P : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj l⟧}
   {N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj l⟧}
   (γ : P ⟶ (boundedConstructibleUpperShriek l f).obj N)
 
+omit [IsProper f'.left] in
 /-- Convert the ordinary trace to the levelwise pullback coordinates used by descent. -/
 lemma baseChangedProperTrace_levelwise :
     (rightDerivedLowerStarBaseChangeIso (Profinite.padicAlgClRingObj l) sq).inv.app P.obj ≫
