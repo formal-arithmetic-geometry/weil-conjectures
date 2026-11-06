@@ -401,8 +401,7 @@ private theorem evaluationSquare_inverse
     (Functor.mapDerivedCategoryCompIso ((Functor.whiskeringRight ℕᵒᵖ C B).obj P)
       ((CategoryTheory.evaluation ℕᵒᵖ B).obj n) ≪≫
       Functor.mapDerivedCategoryNatIso (Iso.refl _) ≪≫
-      (Functor.mapDerivedCategoryCompIso
-        ((CategoryTheory.evaluation ℕᵒᵖ C).obj n) P).symm).inv := by
+      (Functor.mapDerivedCategoryCompIso ((CategoryTheory.evaluation ℕᵒᵖ C).obj n) P).symm).inv := by
   simp only [Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv,
     ← Functor.mapDerivedCategoryNatIso_symm, Iso.refl_symm,
     Functor.mapDerivedCategoryNatIso_refl, Category.id_comp, Category.comp_id]
