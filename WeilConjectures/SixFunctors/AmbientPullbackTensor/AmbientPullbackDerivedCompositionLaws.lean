@@ -81,7 +81,7 @@ private theorem derivedInnerUnit
   simp only [NatTrans.comp_app, Functor.whiskerRight_app] at hw
   have hu := NatTrans.congr_app (Functor.mapDerivedCategoryCompIso_id_comp F) M
   simp only [NatTrans.comp_app, Functor.whiskerRight_app, NatTrans.id_app] at hu
-  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso I F).hom.app M)).mp
+  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso I F).inv.app M)).mp
   simp only [Functor.mapDerivedCategoryCompNatIso, Iso.trans_hom, Iso.symm_hom,
     NatTrans.comp_app, ← Category.assoc, Iso.hom_inv_id_app, Category.id_comp]
   rw [hd, Functor.map_comp]
@@ -114,7 +114,7 @@ private theorem derivedOuterUnit
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app] at hw
   have hu := NatTrans.congr_app (Functor.mapDerivedCategoryCompIso_comp_id F) M
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, NatTrans.id_app] at hu
-  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso F I).hom.app M)).mp
+  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso F I).inv.app M)).mp
   simp only [Functor.mapDerivedCategoryCompNatIso, Iso.trans_hom, Iso.symm_hom,
     NatTrans.comp_app, ← Category.assoc, Iso.hom_inv_id_app, Category.id_comp]
   rw [hd, ← hw, Category.assoc, hu]
