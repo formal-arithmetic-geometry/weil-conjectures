@@ -30,13 +30,6 @@ variable {A : Type uA} [Category.{vA} A] [Abelian A] [HasDerivedCategory.{w} A]
   (T : A ⥤ B) [T.Additive] (E : DerivedCategory A ⥤ DerivedCategory B)
   (ε : DerivedCategory.Qh ⋙ E ⟶ T.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
 
-private def cochainCounit : DerivedCategory.Q ⋙ E ⟶
-    T.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q where
-  app K := ε.app ((HomotopyCategory.quotient A (.up ℤ)).obj K)
-  naturality := by
-    intro X Y f
-    exact ε.naturality ((HomotopyCategory.quotient A (.up ℤ)).map f)
-
 private instance [IsIso ε] : IsIso (cochainCounit T E ε) := by
   have (K : CochainComplex A ℤ) : IsIso ((cochainCounit T E ε).app K) :=
     inferInstanceAs (IsIso (ε.app ((HomotopyCategory.quotient A (.up ℤ)).obj K)))

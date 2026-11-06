@@ -155,44 +155,6 @@ private theorem modulePullbackComparison_homology_zero_isIso
   infer_instance
 
 
-private theorem modulePullback_single_isLE
-    [∀ Y : Scheme.{u},
-      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
-    {X Y : Scheme.{u}} (a : X ⟶ Y) (G : Y.Modules) :
-    ((derivedPullback a).obj ((DerivedCategory.singleFunctor
-      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj G)).IsLE 0 := by
-  let A := SheafOfModules.{u} (moduleRings Y.toRingedSpace)
-  let K := (CochainComplex.singleFunctor A 0).obj G
-  let B : ObjectProperty (CochainComplex A ℤ) :=
-    fun F ↦ ∀ i : ℤ, 0 < i → IsZero (F.X i)
-  let K' : B.FullSubcategory := ⟨K, fun i hi ↦ K.isZero_of_isStrictlyLE 0 i hi⟩
-  obtain ⟨R, ε, hR⟩ := CochainComplex.exists_functorial_boundedAbove_flat_replacement
-    (Opens.grothendieckTopology Y) Y.sheaf 0
-  obtain ⟨hflat, hbound, _, hq⟩ := hR K'
-  let P := R.obj K'
-  let s : P ⟶ K := ε.app K'
-  have : QuasiIso s := hq
-  have : IsIso (DerivedCategory.Q.map s) :=
-    by
-    rw [DerivedCategory.isIso_Q_map_iff_quasiIso]
-    infer_instance
-  obtain ⟨F, _, _, hAdd, _, _, e, _⟩ :=
-    flatComplexDerivedPullback a P ⟨0, hbound⟩ hflat
-  have : F.Additive := hAdd
-  have : P.IsStrictlyLE 0 := (CochainComplex.isStrictlyLE_iff P 0).2 hbound
-  let e' := e ≪≫ (derivedPullback a).mapIso (asIso (DerivedCategory.Q.map s))
-  have : CochainComplex.IsStrictlyLE
-      ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj P) 0 :=
-    inferInstance
-  have hLE : (DerivedCategory.Q.obj
-      ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj P)).IsLE 0 := inferInstance
-  let eF := (DerivedCategory.quotientCompQhIso
-      (SheafOfModules.{u} (moduleRings X.toRingedSpace))).symm.app
-        ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj P) ≪≫
-    DerivedCategory.Qh.mapIso ((F.mapHomotopyCategoryFactors
-      (ComplexShape.up ℤ)).symm.app P)
-  exact DerivedCategory.TStructure.t.isLE_of_iso (eF ≪≫ e') 0
-
 /-- Two left-derived counits on a single module differ by an automorphism of its
 ordinary pullback. There is no cover, direct image or base-change square in this lemma.
 Source: Stacks Project, Tags 06YJ and 08HY; Step 4 of the affine alternating model
