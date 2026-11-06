@@ -210,7 +210,10 @@ private theorem actualRightDerivedUnitShift
   have := hi
   refine ⟨HomotopyCategory.KInjectives.mk I,
     (HomotopyCategory.quotient C (.up ℤ)).map i, ?_⟩
-  change IsIso (F.rightDerivedFunctor.map (DerivedCategory.Q.map i))
+  change IsIso (F.rightDerivedFunctor.map
+    (DerivedCategory.Qh.map ((HomotopyCategory.quotient C (.up ℤ)).map i)))
+  have : IsIso (DerivedCategory.Qh.map ((HomotopyCategory.quotient C (.up ℤ)).map i)) :=
+    (NatIso.isIso_map_iff (DerivedCategory.quotientCompQhIso C) i).2 (by infer_instance)
   infer_instance
 
 namespace AlgebraicGeometry.Scheme
@@ -704,9 +707,8 @@ private theorem wfPresentation_of_complete (M : PbcCompletedDerived X d)
   let ej := E.symm.mapDerivedCategory.toAdjunction
   let j : G.mapDerivedCategory ≅ pbcDerivedExtend (pbcCompletedComparison X d).inv :=
     Adjunction.leftAdjointUniq ej adj
-  let eC : DerivedCategory.Q.obj C' ≅
-      (pbcDerivedExtend (pbcCompletedComparison X d).inv).obj M :=
-    (G.mapDerivedCategoryFactors.app C).symm ≪≫ G.mapDerivedCategory.mapIso real ≪≫ j.app M
+  let eC := (G.mapDerivedCategoryFactors.app C).symm ≪≫
+    G.mapDerivedCategory.mapIso real ≪≫ j.app M
   have hu : IsIso (DerivedCategory.Q.map (intrinsicCompletionComplexUnit X d r a C)) := by
     have : IsIso (real.inv ≫ DerivedCategory.Q.map
       (intrinsicCompletionComplexUnit X d r a C)) := by
