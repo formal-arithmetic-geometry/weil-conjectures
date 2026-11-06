@@ -131,7 +131,7 @@ Source: Stacks, Tags 0E47 and 09AE (blueprint: lem-pur-relative-compact-support-
 noncomputable def ordinaryGComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     ordinaryG B (f ≫ g) ≅ ordinaryG B g ⋙ ordinaryG B f :=
   Functor.mapDerivedCategoryNatIso (moduleGComp B f g) ≪≫
-    Functor.mapDerivedCategoryCompIso (modulePullback B g) (modulePullback B f)
+    (Functor.mapDerivedCategoryCompIso (modulePullback B g) (modulePullback B f)).symm
 
 /-- The ordinary exchange is the unit--square--counit mate of the specified square.
 Source: Stacks, Tags 0E47 and 09AE (blueprint: lem-pur-relative-compact-support-pasting). -/
