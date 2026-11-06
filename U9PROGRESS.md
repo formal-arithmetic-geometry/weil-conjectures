@@ -230,83 +230,47 @@
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 - This final commit changes only progress documentation; Lean source matches the green build.
 
-# BZ824 in progress
+# BZ798 in progress
 
-- Branch: u9/BZ824; starting commit 95c8987257f.
-- The user instructed continuation after the upstream-restoration proposal.
-- Restored four prerequisite modules. The comparison predicate uses verified PZ003
-  Localization imports and a reflexive cast; the transport proof is unchanged,
-  and target automorphism specializes the existing arbitrary-degree theorem to zero.
-- All six submitted modules passed ucheck-bump at 826d8e1a1fb: rc=0, failed=0, 4065 jobs.
-- Green: DerivedModuleBaseChangeMap, DerivedModulePullbackComparison,
-  ModulePullbackComparisonIsoTransport, ModulePullbackComparisonTargetAutomorphism,
-  CanonicalModuleBaseChangeIsoComparisonCompat, CanonicalModuleBaseChangeIsoComparison.
-- All restored declaration headers and original assigned/caller sources are unchanged.
-- Full log: /home/ubuntu/u9/bz/BUILD-BZ824-restored-full.log.
-- Next: build layer-two importer CanonicalModuleBaseChangeAffineChartComparison.
-- Notes: /home/ubuntu/u9/bz/FIXES-BZ824.md. No local Lean/Lake or proof shortcuts.
+- Branch: `u9/BZ798`; original baseline: `6a4b38f19`.
+- Resumed after rereading `/home/ubuntu/u9/briefs/BZ798.md` and the progress notes.
+- Merged the current integrated bump branch at `d9a3ea12c`. It already removes the
+  unused signed-projection comparison chain and its downstream callers. The earlier
+  referenced-caller blocker therefore no longer applies.
+- Deleted only the remaining unused `SignedProjectionResolution.totalInverse`;
+  whole-tree `git grep -w totalInverse -- WeilConjectures Comparator` found its sole
+  declaration and no callers. It is listed unused and absent from kept-decls.txt.
+- All surviving declaration text is unchanged from the integrated branch.
+- Next: validate the owned module, then its direct importers and downstream layers.
+- Previous diagnostic history is archived in FIXES-BZ798-preintegration.md.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
 
+# BZ850 in progress
 
-# BZ859 in progress
-
-- Branch: u9/BZ859; initial commit db406319f.
-- The user instructed continuation after the concrete upstream-restoration proposal.
-- Applied BZ859-proposed-restoration.patch: restores tilde_preservesHomology,
-  affinePushforwardCohomologyMapOfComparison, and affinePushforwardRepresentativeCohomologyIso
-  with their original signatures/docs; ports generated additive-instance references.
-- Assigned factorization uses Localization implementation imports and a reflexive cast
-  for the original homology map, following the supplied BZ457 pattern.
-- Remote ucheck-bump is queued and reads the pushed branch upon acquiring a build tree.
-- Next: validate the assigned module; build its sole direct importer
-  AffinePushforwardCohomologyEdgeIdentity, then continue downstream up to the brief's limit.
-- Fix log: /home/ubuntu/u9/bz/FIXES-BZ859.md. No local Lean/Lake, proof escapes, or limit raises.
-
-
-# BZ885 in progress
-
-- Branch: u9/BZ885; baseline checkpoint 691397bb53c1a609462baa9046b9add95fc8dfef.
-- The user instructed continuation after the exact two-site compositor API proposal.
-- Applied BZ885-proposed-compositor.patch in GeometricCoefficientPullback and
-  GeometryEvaluation.coefficientPullback_transpose in GeometricDerivedEvaluation.
-  This preserves the intended comparisons under Mathlib's reversed compositor.
-- Declaration binders, hypotheses, proof bodies, and docstrings remain unchanged.
-- Next: ucheck-bump on the assigned module and both direct importers, then downstream.
-- Fix patterns and whole-tree inventories: /home/ubuntu/u9/bz/FIXES-BZ885.md.
+- Branch: `u9/BZ850`; baseline: `2ab2b07a3`.
+- The user instructed continuation after the explicit three-declaration upstream restoration proposal.
+- Restored `derived_projection_exists`, `coefficientConstantTowerProjection_exists`, and
+  `coefficientConstantTowerProjection` in CoefficientRingedSequenceSiteSupplement with their
+  original statements and docstrings. Their surviving users prohibit pruning them.
+- Added Localization imports and explicit simplification of its hidden comparison components.
+- The assigned CoefficientConstantTowerRoos source is unchanged.
+- Next: remote ucheck-bump on the assigned module, then both direct importers.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
+# BZ864 in progress
 
-# BZ908 in progress
+- Branch `u9/BZ864`, baseline `e167a50a4`; assigned module: CanonicalModuleBaseChangeAffineChartComparison.
+- The original open-comparison helper was pruned despite its surviving affine-chart caller. The replacement uses the pinned degree-zero open square, one target automorphism, and the existing coordinate comparison.
+- Restored 23 still-referenced declarations in its prerequisite chain, retaining their original types. The full-header audit checks 62 unchanged types and three new helpers across 19 changed Lean files.
+- All prerequisites through OpenPinnedSingleDegreeZeroTarget and OpenPinnedSingleDegreeZeroSquare compiled in builds 11, 13 and 14.
+- Build 14 diagnostics localized the assigned theorem's 400000-heartbeat timeout to comparison setup. The current proof chooses the canonical restricted comparison directly, supplies explicit universes, and uses the neighboring category-alias/tensorPullback elaboration hints.
+- Build 15 was superseded by build 16 under a newly updated one-build-per-helper wrapper. Build 16 failed before Lean started because its transient service was occupied. Do not submit overlapping checks for this helper.
+- Current build 17: source `551febd0e`, remote log `/home/ubuntu/u9/logs/BZ864-20261106T090913.log`, local session 95453. It checks the assigned module and CanonicalModuleBaseChangeAffineLocality. Prerequisite rebuild is progressing without new errors.
+- Local uncommitted cleanup restores the assigned theorem's original docstring. No type or proof changes after the build-17 snapshot.
+- Two scoped 400000-heartbeat budgets are supported by measured 200000-heartbeat failures: target comparison (22s after narrowing its rewrite) and the leaf (12s). No sheaf-limit instance failure was reported, and no further budget increases are planned.
+- No local Lean/Lake execution, placeholders, axioms, native_decide, trust bypasses, or profiler probes. All compilation uses ucheck-bump.
+- Fix records: `/home/ubuntu/u9/bz/FIXES-BZ864.md`; restoration inventory and provenance: `BZ864-restored-declarations.tsv`, `BZ864-restored-prerequisites.tsv`; audits: `BZ864-full-header-audit.tsv`, `BZ864-contract-audit.txt`.
+- Next: finish leaf/locality validation, build direct downstream importers (up to 30 extra modules), and write DONE only after the required checks.
 
-- Branch: u9/BZ908; baseline 40e255942.
-- The user instructed continuation after the explicit two-cast proposal.
-- Applied the two `cast (by rfl)` wrappers in IsCanonicalPullbackTensorComparison,
-  preserving the existing maps while restoring hidden Qh/Q endpoint conversions.
-- Localization imports resolve the proof-local mismatch. The uniqueness proof uses
-  `erw` to rewrite through the reflexive casts and semireducible category aliases.
-- Next: remote validation, then the 19 direct importers and further downstream
-  modules up to the brief's limit of 30 extra modules.
-- Fix patterns: /home/ubuntu/u9/bz/FIXES-BZ908.md.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
-
-
-# PZ030 resumed
-
-- Branch: u9/PZ030; previous checkpoint 91715259ff6d9dfbc36dc0b1eacab5b958ae746b.
-- Reread /home/ubuntu/u9/briefs/PZ030.md and refreshed Weil module notes.
-- The user instructed continuation after the exact two-cast proposal.
-- Applied PZ030-statement-casts-proposal.patch to representativeScalarTensorIso;
-  both reflexive casts preserve the original maps and endpoints.
-- ReductionNormalizationScalarMate already passed remote validation twice.
-- Next: validate both assigned modules together, then DerivedScalarMateData.
-- Reduction's two importers were attempted and skipped for foreign blockers;
-  see /home/ubuntu/u9/bz/FIXES-PZ030.md and PZ030-downstream-blockers.txt.
-- No local Lean/Lake, proof placeholders, trust bypasses, or limit increases.
-
-- Both assigned modules GREEN at 0795abb04e0e176630129fbd17347398d825ca02: rc=0, built=2, failed=0.
-- Log: /home/ubuntu/u9/bz/BUILD-PZ030-assigned-green.log.
-- Continuing with direct importer DerivedScalarMateData.
-
-- DerivedScalarMateData GREEN at 585ecd62c6e9f7c32c374d4ff811aac4b2d77ed2: rc=0, built=8, failed=0.
-- Same Localization imports and reflexive transports; no declarations deleted.
-- Reference guard retained IsDerivedTensor and derivedTensorIso helper chain.
-- Next: eight direct importers in batches of at most six.
+- Build 17: all prerequisites green; the assigned theorem still timed out at 400000 heartbeats in 20s. Build 18 restores the original open-comparison helper statement and proves the pinned square in that smaller context. The assigned affine-chart file is now identical to the baseline. Temporary ordinary trace/diagnostics probes identify stages if it still fails; remove them before final validation. No profiler probes.
+- Build 18 local session: 44077; wrapper log `/home/ubuntu/u9/bz/BZ864-build-18.log`.
