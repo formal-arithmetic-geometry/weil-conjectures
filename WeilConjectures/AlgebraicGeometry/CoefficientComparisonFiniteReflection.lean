@@ -20,22 +20,7 @@ universe u v w
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
 
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-/-- Explicit module sheafification on a small site, using filtered-colimit preservation.
-Source: Stacks Tag 00W1; the plus-plus sheafification construction. -/
-local instance (priority := 20000) reflectionModuleSheafify
-    {C : Type w} [SmallCategory C] (J : GrothendieckTopology C)
-    (A : Type w) [CommRing A] : HasSheafify J (ModuleCat.{w} A) := by
-  let : PreservesFilteredColimitsOfSize.{w, w} (forget (ModuleCat.{w} A)) :=
-    ModuleCat.FilteredColimits.forget_preservesFilteredColimits (R := A)
-  infer_instance
-
-/-- Use the explicit sheafification adjunction before general right-adjoint search.
-Source: Stacks Tag 00W1. -/
-local instance (priority := 20000) reflectionWeakModuleSheafify
-    {C : Type w} [SmallCategory C] (J : GrothendieckTopology C)
-    (A : Type w) [CommRing A] : HasWeakSheafify J (ModuleCat.{w} A) :=
-  (reflectionModuleSheafify J A).isRightAdjoint
+attribute [local instance 20000] chartModuleSheafify chartWeakModuleSheafify
 
 private theorem comparison_coversTop_reflect (X : Scheme.{u})
     {I : Type (max v (u + 1))}
