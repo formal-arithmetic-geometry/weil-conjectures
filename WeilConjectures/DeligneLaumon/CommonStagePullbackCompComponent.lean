@@ -245,11 +245,10 @@ private theorem commonStagePullbackCompComponent_stage_transport
   have hg := commonStagePullbackComparison_eq_transport l Ω g P L hP eY eZ
   have hf := commonStagePullbackComparison_eq_transport l Ω f
     (commonStagePullbackObject l Ω g P) L hP eX eY
-  set_option backward.isDefEq.respectTransparency true in
-  set_option backward.isDefEq.respectTransparency.types true in
-    exact stage_transport_of_comparisons
-      (rationalDerivedPullback l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f)
-      _ _ hfg hg hf key
+  have h := stage_transport_of_comparisons
+    (rationalDerivedPullback l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f)
+    _ _ hfg hg hf key
+  exact h
 
 
 /-- The selected common-stage component is represented at every larger coefficient stage.
