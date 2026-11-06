@@ -673,7 +673,7 @@ private theorem gComp_fac {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
       (Functor.mapDerivedCategoryCompIso (towerPullback B g) (towerPullback B f)) ≪≫
         Functor.mapDerivedCategoryNatIso (towerGComp B f g).symm := by
     apply Iso.ext
-    simp only [gComp, Iso.trans_inv, Iso.trans_hom, Iso.symm_hom,
+    simp only [gComp, Iso.trans_inv, Iso.trans_hom, Iso.symm_hom, Iso.symm_inv,
       Functor.mapDerivedCategoryNatIso_symm]
   exact compCompatible_of_eq (towerPullback B g) (towerPullback B f)
     (towerPullback B (f ≫ g)) (towerGComp B f g).symm (gComp B f g).symm he
@@ -840,8 +840,6 @@ private theorem localization_paste
   erw [reassoc_of% hβ K]
   simp only [complex_four, complex_whiskerLeft, complex_whiskerRight,
     Functor.map_comp]
-  rfl
-
   rfl
 
 omit [Abelian A] [Abelian D] [Abelian E]
