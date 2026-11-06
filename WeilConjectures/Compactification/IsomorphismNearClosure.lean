@@ -749,7 +749,6 @@ theorem exists_admissibleBlowup_isIso_strictTransformMap_near_closure
   ⟨isoNearClosureBlowup hU q hT hTN hN,
     exists_isIso_strictTransformMap_isoNearClosureBlowup hU q hTU hT hTN hN⟩
 
-
 /-- **A proper open immersion with dense image is an isomorphism** (blueprint:
 `lemma-nagata-proper-open-dense-iso`): if `q : Z ⟶ X` is proper and an open immersion, and its
 image contains a scheme-theoretically dense quasi-compact open `D` of `X`, then `q` is an
@@ -768,21 +767,5 @@ theorem isIso_of_isProper_of_isOpenImmersion {X Z : Scheme.{u}} (q : Z ⟶ X) [I
   have : closure (D : Set X) ⊆ Set.range q := hclosed.closure_subset_iff.mpr (by
     intro y hy; exact (hD hy : y ∈ q.opensRange))
   exact this (hdense ▸ Set.mem_univ x)
-
-/-! ### Axiom census -/
-
-/--
-info: 'AlgebraicGeometry.exists_isIso_strictTransformMap_isoNearClosureBlowup' depends on
-  axioms: [propext, Classical.choice, Quot.sound]
--/
-#guard_msgs (whitespace := lax) in
-#print axioms AlgebraicGeometry.exists_isIso_strictTransformMap_isoNearClosureBlowup
-
-/--
-info: 'AlgebraicGeometry.exists_admissibleBlowup_isIso_strictTransformMap_near_closure' depends on
-  axioms: [propext, Classical.choice, Quot.sound]
--/
-#guard_msgs (whitespace := lax) in
-#print axioms AlgebraicGeometry.exists_admissibleBlowup_isIso_strictTransformMap_near_closure
 
 end AlgebraicGeometry

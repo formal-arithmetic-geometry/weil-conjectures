@@ -1062,5 +1062,3 @@ theorem purTwistIntegralLocalModels
   exact ⟨⟨en⟩, ⟨I, U, f, hc, hn⟩, finiteLocalModel_nonzero S l E n U f hc hn⟩
 
 end AlgebraicGeometry.Scheme
-
-#print axioms AlgebraicGeometry.Scheme.purTwistIntegralLocalModels

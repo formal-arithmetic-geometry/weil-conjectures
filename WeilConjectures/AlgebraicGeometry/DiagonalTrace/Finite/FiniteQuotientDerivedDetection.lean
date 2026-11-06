@@ -135,5 +135,3 @@ theorem finiteQuotient_detects_derived_arrows (T : Scheme.{u}) (n : ℕ)
     (finiteQuotient_hom_bijective l E T n) hacyc 2 M
 
 end AlgebraicGeometry.ProEtale.DiagonalTrace
-
-#print axioms AlgebraicGeometry.ProEtale.DiagonalTrace.finiteQuotient_detects_derived_arrows

@@ -233,5 +233,3 @@ theorem scalarMatrix_inverseImage {m n : ℕ}
   exact cokernel.π_desc _ _ _
 
 end AlgebraicGeometry.ProEtale
-
-#print axioms AlgebraicGeometry.ProEtale.scalarMatrix_inverseImage

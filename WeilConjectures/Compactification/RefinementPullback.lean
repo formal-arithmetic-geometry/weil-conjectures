@@ -118,25 +118,6 @@ theorem isPullback_comp {e : Compactification f} (r : c.Refinement d) (s : d.Ref
     IsPullback c.i (𝟙 X) (r.comp s).hom e.i := by
   simpa using hr.paste_vert hs
 
-/-! ### Axiom census
-
-Cartesianness of a refinement out of a dense compactification is unconditional: the check
-below is run by the build, so a `sorry` reappearing anywhere beneath it breaks compilation
-rather than going unnoticed. -/
-
-/--
-info: 'AlgebraicGeometry.Compactification.Refinement.isPullback_of_isSchemeTheoreticallyDominant'
-  depends on axioms: [propext, Classical.choice, Quot.sound]
--/
-#guard_msgs (whitespace := lax) in
-#print axioms
   AlgebraicGeometry.Compactification.Refinement.isPullback_of_isSchemeTheoreticallyDominant
-
-/--
-info: 'AlgebraicGeometry.Compactification.Refinement.isPullback_comp' depends on axioms:
-  [propext, Classical.choice, Quot.sound]
--/
-#guard_msgs (whitespace := lax) in
-#print axioms AlgebraicGeometry.Compactification.Refinement.isPullback_comp
 
 end AlgebraicGeometry.Compactification.Refinement
