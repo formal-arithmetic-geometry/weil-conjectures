@@ -410,3 +410,10 @@
 - Final proof normalizes the reflexive casts with cast_eq. All binders, hypotheses,
   mathematical maps, and existing docstrings are unchanged.
 - Next: direct importer AffineTildeDerivedTensorMate, then further unblocked layers.
+
+- First three downstream modules are green: AffineTildeDerivedTensorMate,
+  AffineTildeDerivedTensorHomologyCoordinates, AffineBaseChangeTildeMateIdentityFactorization.
+- Latest green batch: 029ace21dcd8166371e219da0c7bd9eec5074b8f, rc=0, failed=0, 4532 jobs.
+- Downstream edits are Localization imports and cast_eq proof normalization only;
+  all downstream statements and existing heartbeat settings are unchanged.
+- Continuing through the next six modules in the affine-comparison import chain.
