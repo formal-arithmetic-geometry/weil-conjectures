@@ -384,7 +384,6 @@ private lemma generator_map
     CochainPullback.moduleTmul_map (R := R)] at he'
   simp only [generator_eq]
   convert he' using 0
-  rfl
 
 private lemma generator_restrict
   [HasLimitsOfSize.{0, 0} (RingedTensorModules.{c, v, u} J R)]
