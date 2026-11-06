@@ -157,7 +157,8 @@ theorem ambientPullbackTensorCoherence
     let r := scalar ell E f s V W q a
     have hs : ef.val.app (op V) (a • LgM.val.map p.op (eg.val.app (op U) m)) =
         (ringComponent ell E f s (op V)).hom a •
-          H.val.map ((base f s).map p).op z := by
+          (show H.val.obj (op ((base f s).obj V)) from
+            H.val.map ((base f s).map p).op z) := by
       calc
         _ = (ringComponent ell E f s (op V)).hom a •
             (show H.val.obj (op ((base f s).obj V)) from
@@ -167,7 +168,9 @@ theorem ambientPullbackTensorCoherence
             (ringComponent ell E f s (op V)).hom a • y)
           (PresheafOfModules.naturality_apply ef.val p.op (eg.val.app (op U) m))
     have ht : H.val.map q.op
-        ((ringComponent ell E f s (op V)).hom a • H.val.map ((base f s).map p).op z) =
+        ((ringComponent ell E f s (op V)).hom a •
+          (show H.val.obj (op ((base f s).obj V)) from
+            H.val.map ((base f s).map p).op z)) =
         r • H.val.map q.op (H.val.map ((base f s).map p).op z) :=
       H.val.map_smul q.op ((ringComponent ell E f s (op V)).hom a) _
     have hn : c.val.app (op W)
@@ -185,7 +188,8 @@ theorem ambientPullbackTensorCoherence
     calc
       _ = c.val.app (op W)
           (b • H.val.map q.op ((ringComponent ell E f s (op V)).hom a •
-            H.val.map ((base f s).map p).op z)) :=
+            (show H.val.obj (op ((base f s).obj V)) from
+              H.val.map ((base f s).map p).op z))) :=
         congrArg (fun y ↦ c.val.app (op W) (b • H.val.map q.op y)) hs
       _ = c.val.app (op W)
           (b • (r • H.val.map q.op (H.val.map ((base f s).map p).op z))) :=
