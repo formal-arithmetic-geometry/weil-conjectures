@@ -228,9 +228,9 @@ private lemma derived_triangle_assoc
       (Functor.mapDerivedCategoryTriangleIso eFG_H).hom ≫
         Functor.whiskerRight (Functor.mapDerivedCategoryTriangleIso eFG).hom
           H.mapDerivedCategory := by
-  simp only [Functor.mapDerivedCategoryTriangleIso, Iso.trans_hom,
+  simp only [Functor.mapDerivedCategoryTriangleIso, Iso.trans_hom, Iso.symm_hom,
     Functor.whiskerLeft_comp, Functor.whiskerRight_comp, Category.assoc]
-  rw [← Category.assoc (Functor.mapDerivedCategoryCompIso F GH).hom,
+  rw [← Category.assoc (Functor.mapDerivedCategoryCompIso F GH).inv,
     ← Functor.mapDerivedCategoryNatIso_isoWhiskerLeft,
     Category.assoc, ← Category.assoc (Functor.mapDerivedCategoryCompIso FG H).hom,
     ← Functor.mapDerivedCategoryNatIso_isoWhiskerRight]
@@ -252,9 +252,9 @@ private lemma derived_unit_right
       Functor.whiskerLeft F.mapDerivedCategory
         (Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryIdIso D).hom =
       𝟙 _ := by
-  simp only [Functor.mapDerivedCategoryTriangleIso, Iso.trans_hom,
+  simp only [Functor.mapDerivedCategoryTriangleIso, Iso.trans_hom, Iso.symm_hom,
     Functor.whiskerLeft_comp, Category.assoc]
-  rw [← Category.assoc (Functor.mapDerivedCategoryCompIso F I).hom,
+  rw [← Category.assoc (Functor.mapDerivedCategoryCompIso F I).inv,
     ← Functor.mapDerivedCategoryNatIso_isoWhiskerLeft]
   simp only [← Category.assoc]
   rw [← Functor.mapDerivedCategoryNatIso_trans, h]
@@ -276,9 +276,9 @@ private lemma derived_unit_left
       Functor.whiskerRight
         (Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryIdIso C).hom
         F.mapDerivedCategory = 𝟙 _ := by
-  simp only [Functor.mapDerivedCategoryTriangleIso, Iso.trans_hom,
+  simp only [Functor.mapDerivedCategoryTriangleIso, Iso.trans_hom, Iso.symm_hom,
     Functor.whiskerRight_comp, Category.assoc]
-  rw [← Category.assoc (Functor.mapDerivedCategoryCompIso I F).hom,
+  rw [← Category.assoc (Functor.mapDerivedCategoryCompIso I F).inv,
     ← Functor.mapDerivedCategoryNatIso_isoWhiskerRight]
   simp only [← Category.assoc]
   rw [← Functor.mapDerivedCategoryNatIso_trans, h]
@@ -566,7 +566,7 @@ private lemma exact_adj_comp
     (a.comp b).mapDerivedCategoryAdjunction =
       ((a.mapDerivedCategoryAdjunction.comp b.mapDerivedCategoryAdjunction
         ).ofNatIsoLeft (Functor.mapDerivedCategoryCompIso L₁ L₂)
-          ).ofNatIsoRight (Functor.mapDerivedCategoryCompIso R₂ R₁).symm := by
+          ).ofNatIsoRight (Functor.mapDerivedCategoryCompIso R₂ R₁) := by
   apply Adjunction.ext
   apply exact_unit_ext (C := C)
   intro K
@@ -579,7 +579,7 @@ private lemma exact_adj_comp
       (R₂ ⋙ R₁).mapDerivedCategoryFactorsh.hom.app KL)]
   simp only [Category.assoc]
   rw [(a.comp b).mapDerivedCategoryAdjunction_unit_app_fac K]
-  have hL : (Functor.mapDerivedCategoryCompIso L₁ L₂).inv.app
+  have hL : (Functor.mapDerivedCategoryCompIso L₁ L₂).hom.app
       (DerivedCategory.Qh.obj K) ≫ (L₁ ⋙ L₂).mapDerivedCategoryFactorsh.hom.app K =
       L₂.mapDerivedCategory.map (L₁.mapDerivedCategoryFactorsh.hom.app K) ≫
         L₂.mapDerivedCategoryFactorsh.hom.app ((L₁.mapHomotopyCategory (.up ℤ)).obj K) := by

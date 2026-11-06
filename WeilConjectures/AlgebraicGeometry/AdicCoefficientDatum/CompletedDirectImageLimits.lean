@@ -518,7 +518,7 @@ private def constantEvaluationIso
     [HasDerivedCategory.{w} B] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ B)] (n : ℕᵒᵖ) :
     (Functor.const ℕᵒᵖ : B ⥤ _).mapDerivedCategory ⋙
         ((CategoryTheory.evaluation ℕᵒᵖ B).obj n).mapDerivedCategory ≅ 𝟭 _ :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso _ _) ≪≫
     Functor.mapDerivedCategoryNatIso (Functor.constCompEvaluationObj (D := B) n) ≪≫
       Functor.mapDerivedCategoryIdIso _
 
@@ -533,7 +533,7 @@ private theorem constantEvaluation_factors
         (((Functor.const ℕᵒᵖ : B ⥤ _).mapHomologicalComplex (.up ℤ)).obj J) := by
   let D := (Functor.const ℕᵒᵖ : B ⥤ (ℕᵒᵖ ⥤ B))
   let E := (CategoryTheory.evaluation ℕᵒᵖ B).obj n
-  change (Functor.mapDerivedCategoryCompIso D E).inv.app (DerivedCategory.Q.obj J) ≫
+  change (Functor.mapDerivedCategoryCompIso D E).hom.app (DerivedCategory.Q.obj J) ≫
     (Functor.mapDerivedCategoryNatIso (Iso.refl (𝟭 B))).hom.app (DerivedCategory.Q.obj J) ≫
       (Functor.mapDerivedCategoryIdIso B).hom.app (DerivedCategory.Q.obj J) = _
   rw [Functor.mapDerivedCategoryNatIso_refl]

@@ -60,7 +60,7 @@ private theorem exact_path (e : F ⋙ G ≅ F' ⋙ G')
         (G₁ := K₀) (G₂ := P₁ ⋙ P₂)
         (Functor.isoWhiskerRight e K₂ ≪≫
           Functor.isoWhiskerLeft F' b ≪≫ Functor.isoWhiskerRight a P₂)).hom ≫
-      (Functor.isoWhiskerLeft D(K₀) (Functor.mapDerivedCategoryCompIso P₁ P₂)).hom =
+      (Functor.isoWhiskerLeft D(K₀) (Functor.mapDerivedCategoryCompIso P₁ P₂)).inv =
     (Functor.isoWhiskerRight (Functor.mapDerivedCategorySquareIso e) D(K₂)).hom ≫
       (Functor.isoWhiskerLeft D(F') (Functor.mapDerivedCategorySquareIso b)).hom ≫
       (Functor.isoWhiskerRight (Functor.mapDerivedCategorySquareIso a) D(P₂)).hom := by
@@ -116,7 +116,7 @@ private noncomputable def exactOrdinaryPath
 private noncomputable def exactSourceIso :
     D((F ⋙ G) ⋙ K₂) ≅ D(F) ⋙ D(G) ⋙ D(K₂) :=
   (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
-    Functor.isoWhiskerRight (Functor.mapDerivedCategoryCompIso _ _) _
+    Functor.isoWhiskerRight (Functor.mapDerivedCategoryCompIso _ _).symm _
 
 private noncomputable def exactTargetIso
     (P₁' : DerivedCategory P ⥤ DerivedCategory Q)
@@ -124,7 +124,7 @@ private noncomputable def exactTargetIso
     (j₁ : P₁' ≅ D(P₁)) (j₂ : P₂' ≅ D(P₂)) :
     D(K₀ ⋙ (P₁ ⋙ P₂)) ≅ D(K₀) ⋙ P₁' ⋙ P₂' :=
   (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
-    Functor.isoWhiskerLeft _ (Functor.mapDerivedCategoryCompIso _ _) ≪≫
+    Functor.isoWhiskerLeft _ (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
     Functor.isoWhiskerLeft _
       (Functor.isoWhiskerRight j₁.symm _ ≪≫ Functor.isoWhiskerLeft _ j₂.symm)
 

@@ -180,8 +180,8 @@ private theorem square_exact
         (F := upperStar (ModuleCat.{u + 1} Λ) g ⋙ upperStar (ModuleCat.{u + 1} Λ) f')
         (G := upperStar (ModuleCat.{u + 1} Λ) f ⋙ upperStar (ModuleCat.{u + 1} Λ) g')
         (proEtaleComparisonSquare (ModuleCat.{u + 1} Λ) cs)).hom.app N ≫
-      ((Functor.mapDerivedCategoryCompIso (upperStar (ModuleCat.{u + 1} Λ) f)).symm
-        (upperStar (ModuleCat.{u + 1} Λ) g')).hom.app N ≫
+      (Functor.mapDerivedCategoryCompIso (upperStar (ModuleCat.{u + 1} Λ) f)
+        (upperStar (ModuleCat.{u + 1} Λ) g')).inv.app N ≫
       D(upperStar (ModuleCat.{u + 1} Λ) g').map
         ((leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) f).inv.app N) ≫
       (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) g').inv.app
