@@ -144,7 +144,8 @@ theorem derivedPullback_tensor_successive_normalization
       (SingleComplexBaseChange.counit f).app
         (((Scheme.Modules.tensorPullback g).mapHomotopyCategory (.up ℤ)).obj H) ≫
       DerivedCategory.Qh.map (β.hom.app H) ≫
-      cast (by rfl) (DerivedCategory.Q.{w}.map φ.hom) := by
+      cast (by rfl) ((DerivedCategory.Q.{w}
+        (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))).map φ.hom) := by
   classical
   let c : ∀ {U V W : Scheme.{u}} (a : U ⟶ V) (b : V ⟶ W),
       derivedPullback b ⋙ derivedPullback a ≅ derivedPullback (a ≫ b) :=
