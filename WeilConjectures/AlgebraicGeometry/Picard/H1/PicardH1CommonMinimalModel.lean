@@ -92,7 +92,7 @@ private theorem refine_residue_model
     (Functor.mapDerivedCategoryNatIso
       (SheafOfModules.overFunctorMap.{v} (moduleRings W.toRingedSpace)
         (homOfLE hU'U))).symm.app E ≪≫
-      (Functor.mapDerivedCategoryCompIso G F).app E ≪≫
+      (Functor.mapDerivedCategoryCompIso G F).symm.app E ≪≫
       F.mapDerivedCategory.mapIso he.some ≪≫ F.mapDerivedCategoryFactors.app K
   refine ⟨U', hwU', hU'aff, hsub.trans inf_le_right, K', ?_, ?_, ⟨e'⟩⟩
   · obtain ⟨a, b, hab⟩ := hb
