@@ -1774,7 +1774,9 @@ def Morphism.pushUnit {V U : Site.{u}} (f : Morphism V U)
     (A : Type u) [CommRing A] (P : CochainComplex (U.modules A) ℤ) :
     (ConstantCompletion.Q (V.ring A)).obj (((f.modulePush A).mapHomologicalComplex (.up ℤ)).obj P) ⟶
       (f.push A).obj ((ConstantCompletion.Q (U.ring A)).obj P) :=
-  (f.modulePush A).rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)
+  cast (by rfl)
+    ((f.modulePush A).rightDerivedFunctorUnit.app
+      ((HomotopyCategory.quotient _ (.up ℤ)).obj P))
 
 /-- The same universal unit for derived termwise direct image of strict towers.
 Source: Stacks 0941 (blueprint: lem-sp-completion-mate-comparison). -/
@@ -1783,8 +1785,9 @@ def Morphism.towerPushUnit {V U : Site.{u}} (f : Morphism V U)
     (ConstantCompletion.TQ (V.ring A)).obj
         (((f.towerModulePush A).mapHomologicalComplex (.up ℤ)).obj P) ⟶
       (f.towerPush A).obj ((ConstantCompletion.TQ (U.ring A)).obj P) :=
-  (f.towerModulePush A).rightDerivedFunctorUnit.app
-    ((HomotopyCategory.quotient _ (.up ℤ)).obj P)
+  cast (by rfl)
+    ((f.towerModulePush A).rightDerivedFunctorUnit.app
+      ((HomotopyCategory.quotient _ (.up ℤ)).obj P))
 
 /-- The specified representative or unit normalization for this comparison.
 Source: Stacks 099M, 099N, 0941 and 0E48
