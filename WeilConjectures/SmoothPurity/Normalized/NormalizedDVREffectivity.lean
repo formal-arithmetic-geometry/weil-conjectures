@@ -288,6 +288,10 @@ private theorem normalizedDVRTower_tau (T : NormalizedDVRTower l E X D hl)
         (normalizedDVRResCompletedComp l E X D hl h).hom.app (T.M n) := by
   exact T.tower_tau h
 
+section
+
+attribute [local irreducible] Functor.mapDerivedCategory scalarReductionCounit
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 private theorem normalizedDVRKFlatUnit (n : ℕ)
@@ -339,6 +343,8 @@ private theorem normalizedDVRKFlatUnit (n : ℕ)
   dsimp only [DerivedCategory.Qh, HomologicalComplexUpToQuasiIso.Qh,
     Functor.mapHomotopyCategory, CategoryTheory.Quotient.lift, Functor.comp_obj] at h' ⊢
   exact h'.trans (congrArg DerivedCategory.Q.map hg.symm)
+
+end
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
