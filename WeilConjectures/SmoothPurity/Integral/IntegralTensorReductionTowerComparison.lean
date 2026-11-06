@@ -120,11 +120,11 @@ private def scalarSection
     ((toSheafify J (SheafOfModules.changeOfRingsPresheaf a M).presheaf).app V
       (s ⊗ₜ[R.obj.obj V, (a.hom.app V).hom] x))
 
+set_option maxHeartbeats 500000 in
+-- Elaborate the simultaneous scalar-extension and total-tensor comparisons.
 attribute [local implicit_reducible] SheafOfModules.restrictScalars
   PresheafOfModules.restrictScalars PresheafOfModules.restrictScalarsObj
   PresheafOfModules.presheaf ModuleCat.restrictScalars ModuleCat.RestrictScalars.obj' in
-set_option maxHeartbeats 500000 in
--- Elaborate the simultaneous scalar-extension and total-tensor comparisons.
 private theorem scalarTensorTotal
     (F : ScalarMod.{c, v, r} R ⥤ ScalarMod.{c, v, r} S)
     (hF : ∀ M, F.obj M = SheafOfModules.changeOfRings a M)

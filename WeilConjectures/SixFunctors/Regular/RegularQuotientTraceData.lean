@@ -46,6 +46,14 @@ attribute [local instance] scalarReductionRestrictionLimits scalarReductionRestr
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
   [FiniteDimensional (Padic l) E] (T : Scheme.{u}) (n : ℕ)
 
+/-- The derived-category structure recorded by the cone augmentation on the finite
+reduction target (auxiliary; not a blueprint node). -/
+abbrev regularQuotientTraceTargetDerived :
+    HasDerivedCategory (scalarReductionTarget.{u, u} l E T n) :=
+  Scheme.reductionModulesHasDerivedCategory T (integralCoefficientCommRingSheaf l E T n)
+
+attribute [local instance high] regularQuotientTraceTargetDerived
+
 /-- The positive uniformizer power, as a section of the actual completed unit module.
 Source: Stacks Tags 06YP, 06YY, 07A6 and 093M; the actual principal Koszul short exact sequence
 and the universal derived adjunction.

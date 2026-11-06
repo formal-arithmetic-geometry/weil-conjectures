@@ -92,12 +92,12 @@ private theorem derived_homology_comp (F : C ⥤ D) (G : D ⥤ E)
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G] (K : DerivedCategory C) (n : ℤ) :
     ((F ⋙ G).mapDerivedCategoryHomologyFunctorIso n).hom.app K ≫
-        (homologyFunctor E n).map ((CategoryTheory.Functor.mapDerivedCategoryCompIso F G).hom.app K)
+        (homologyFunctor E n).map ((CategoryTheory.Functor.mapDerivedCategoryCompIso F G).inv.app K)
             =
       G.map ((F.mapDerivedCategoryHomologyFunctorIso n).hom.app K) ≫
         (G.mapDerivedCategoryHomologyFunctorIso n).hom.app (F.mapDerivedCategory.obj K) := by
   let τ₁ := ((F ⋙ G).mapDerivedCategoryHomologyFunctorIso n).hom ≫
-    CategoryTheory.Functor.whiskerRight (CategoryTheory.Functor.mapDerivedCategoryCompIso F G).hom
+    CategoryTheory.Functor.whiskerRight (CategoryTheory.Functor.mapDerivedCategoryCompIso F G).inv
         (homologyFunctor E n)
   let τ₂ := CategoryTheory.Functor.whiskerRight (F.mapDerivedCategoryHomologyFunctorIso n).hom G ≫
     CategoryTheory.Functor.whiskerLeft F.mapDerivedCategory (G.mapDerivedCategoryHomologyFunctorIso
@@ -173,10 +173,10 @@ theorem native_homology (K : WeilComplex k₀ l X) (n : ℤ) :
     (IsoAlgebra.strNatIso F).hom.app
         ((DerivedCategory.homologyFunctor _ n).obj K.obj) ≫ χ.hom.app K.obj
   have ht : (theta k₀ l X).hom.app K =
-      (Functor.mapDerivedCategoryCompIso U F).inv.app K.obj ≫
+      (Functor.mapDerivedCategoryCompIso U F).hom.app K.obj ≫
         (Functor.mapDerivedCategoryNatIso (IsoAlgebra.strNatIso F)).hom.app K.obj := by
     simp only [theta, Iso.trans_hom, NatTrans.comp_app, Functor.associator_hom_app,
-      Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Iso.symm_hom]
+      Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app]
     erw [Category.id_comp]
     rfl
   rw [ht]
@@ -185,7 +185,7 @@ theorem native_homology (K : WeilComplex k₀ l X) (n : ℤ) :
     (IsoAlgebra.strNatIso F) n K.obj
   erw [H.map_comp, ← Category.assoc, ← Category.assoc, ← hc]
   dsimp only [H]
-  simp only [Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app_assoc]
+  simp only [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app_assoc]
   exact hn.symm
 
 end WeilConjectures.NativePairCohomology

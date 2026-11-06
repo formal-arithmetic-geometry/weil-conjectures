@@ -91,7 +91,7 @@ theorem isSplitMono_derivedUpperStarLowerStarAdjunction_unit_app_of_retract
     (g)_*⟦Λ⟧.rightDerivedFunctorIsoMapDerivedCategory.app _ ≪≫
       (g)_*⟦Λ⟧.mapDerivedCategory.mapIso
         ((leftDerivedUpperStarIsoMapDerivedCategory Λ g).app G) ≪≫
-      ((Functor.mapDerivedCategoryCompIso (g)^*⟦Λ⟧ (g)_*⟦Λ⟧).app G).symm
+      (Functor.mapDerivedCategoryCompIso (g)^*⟦Λ⟧ (g)_*⟦Λ⟧).app G
   let i := (Functor.mapDerivedCategoryIdIso _).app G
   let adj := derivedUpperStarLowerStarAdjunction Λ g
   let s' := i.inv ≫ (Functor.mapDerivedCategoryNatTrans s).app G ≫ e.inv

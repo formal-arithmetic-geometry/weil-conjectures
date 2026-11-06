@@ -31,7 +31,7 @@ attribute [local implicit_reducible] completedIntegralCommRingSheafUnrestricted
   IntegralOnSlice.topology IntegralOnSlice.restrict IntegralOnSlice.ring IntegralOnSlice.finite
   IntegralOnSlice.projection SheafOfModules.restrictScalars
   completedIntegralCommRingProjectionUnrestricted integralCoefficientSheaf
-  integralCoefficientCommRingSheaf CategoryTheory.Functor.mapHomologicalComplex
+  integralCoefficientCommRingSheaf
 
 /-- The slice augmentation at the empty slice datum is the recorded scalar unit.
 

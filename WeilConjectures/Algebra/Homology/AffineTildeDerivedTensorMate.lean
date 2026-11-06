@@ -6,6 +6,8 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.Algebra.Homology.AffineBaseChangeTildeRepresentative
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
@@ -287,6 +289,6 @@ theorem exists_affineTildeDerivedTensorMate
   have hresult := hsource.trans (by simpa only [Category.assoc] using hexchange)
   have : IsIso ((schemeDerivedDirectImage f').map c) := inferInstance
   apply (cancel_mono ((schemeDerivedDirectImage f').map c)).mp
-  simpa only [σ, Category.assoc, hr] using hresult
+  simpa only [σ, cast_eq, Category.assoc, hr] using hresult
 
 end AlgebraicGeometry

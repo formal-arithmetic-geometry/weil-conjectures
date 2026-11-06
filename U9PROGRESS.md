@@ -401,3 +401,42 @@
 - Direct importer: UnboundedProperOpenInterchangeSupplement; continue downstream after green.
 - Fix records: /home/ubuntu/u9/bz/FIXES-BZ1034.md.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
+
+
+# BZ1040 complete
+
+- Branch: u9/BZ1040; initial commit fdc7e6fe1516a32d43b896df96395140eb603eb9.
+- Assigned LisseTowerCompatibleStalkMarkings is green and sorry-free: ucheck-bump
+  rc=0, failed=0, 7578 jobs; target rebuilt in 14 seconds.
+- Validated source: 1c185e6784afc16c6aad35206a05e1190909c07e.
+- Applied the explicitly proposed compositor orientation changes after the user's
+  continuation instruction; the compatibility-square proof uses Iso.symm_inv and
+  unfolds its local aliases. Other statement text and all docstrings are unchanged.
+- Four successive downstream modules received the same orientation correction and
+  were attempted, but are NOT claimed green: their outside-owned prerequisites
+  SmoothBaseChange.Vanishing and CompletedTowerPullbackSupplement fail.
+  Further layers share the same blockers and are skipped under the ownership rule.
+- Fix patterns, exact errors, rules, occurrence counts, and import paths:
+  /home/ubuntu/u9/bz/FIXES-BZ1040.md.
+- Final log: /home/ubuntu/u9/bz/BZ1040-build-3-full.log.
+- Completion marker: /home/ubuntu/u9/state/BZ1040.DONE.
+- No local Lean/Lake, proof placeholders, trust bypasses, declaration deletions,
+  profiler probes, or heartbeat changes. Both rewrite rules replay the exact diff.
+- All ucheck invocations finished. This final commit changes documentation only.
+
+
+# BZ1068 in progress
+
+- Branch: u9/BZ1068; starting commit dfaed262b6fc1850faba3b46955a11d3225a1e86.
+- The user instructed continuation after the concrete two-site compositor statement proposal.
+  Applied BZ1068-statement-only.patch; the statement and local hb proof now preserve the
+  original comparison using Mathlib's reversed derived compositor.
+- Merged BZ1059 prerequisite fixes; no duplicate declarations or declaration deletions.
+- Proof-only baseline cleared two errors; next: validate the complete leaf repair with
+  ucheck-bump, then build its four direct importers and continue through unblocked layers.
+- Patterns, exact errors, replay-checked rules: /home/ubuntu/u9/bz/FIXES-BZ1068.md.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
+
+- BZ1068 leaf is GREEN and sorry-free: ucheck-bump rc=0, built=1, failed=0 at
+  6afc4fae13c7e090b915aa0e3d61980300964a3c (poolb:43.157.189.27).
+  Next: validate all four direct importers; leaf log BUILD-BZ1068-leaf-full.log.
