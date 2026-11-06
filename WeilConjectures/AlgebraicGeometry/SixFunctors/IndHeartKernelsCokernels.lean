@@ -169,12 +169,12 @@ private theorem square_isColimit {C : Type u} [Category.{v} C]
     have hc : IsColimit c := hB.some
     have h := (Functor.Final.isColimitWhiskerEquiv (indHeartSquareSource ι f) c).symm hc
     exact h.ofIsoColimit (Cocone.ext (Iso.refl _) (by intro j; simp
-      [c, indHeartSquareCocone, indHeartSquareSource]; rfl))
+      [c, indHeartSquareCocone, indHeartSquareSource]))
   · let c := (Functor.LeftExtension.mk (𝟭 M) ι.rightUnitor.inv).coconeAt B'
     have hc : IsColimit c := hB'.some
     have h := (Functor.Final.isColimitWhiskerEquiv (indHeartSquareTarget ι f) c).symm hc
     exact h.ofIsoColimit (Cocone.ext (Iso.refl _) (by intro j; simp
-      [c, indHeartSquareCocone, indHeartSquareTarget]; rfl))
+      [c, indHeartSquareCocone, indHeartSquareTarget]))
 
 /-- All clauses for a fixed coefficient ring: P_f is essentially small and filtered,
 its two projections are final, its canonical arrow cocone has colimit f, and applying
