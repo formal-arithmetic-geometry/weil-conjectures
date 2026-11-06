@@ -109,9 +109,9 @@ Source: Stacks 0941 (blueprint: lem-sp-completion-mate-comparison). -/
 def diagonalPullIso :
     diagonal (A := A) V ⋙ exchangeConstantPull (A := A) f ≅
       pull (A := A) f ⋙ diagonal (A := A) U :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (ordinaryDiagonalPullIso (A := A) f) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
 
 attribute [local irreducible] diagonalPullIso
 
