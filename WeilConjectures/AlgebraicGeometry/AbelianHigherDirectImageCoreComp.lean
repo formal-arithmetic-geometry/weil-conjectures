@@ -50,7 +50,6 @@ private lemma single_hom {C D : Type*} [Category C] [Category D]
     Functor.associator_inv_app, DerivedCategory.Q_obj_single_obj,
     Functor.whiskerRight_app, NatTrans.id_app, Category.comp_id, Category.id_comp]
   erw [Category.id_comp]
-  rfl
 
 private lemma complex_single_comp {C D E : Type*} [Category C] [Category D] [Category E]
     [Abelian C] [Abelian D] [Abelian E] (G : C ⥤ D) (H : D ⥤ E) [G.Additive] [H.Additive]
@@ -71,7 +70,7 @@ private lemma derived_single_comp {C D E : Type*} [Category C] [Category D] [Cat
     (G : C ⥤ D) (H : D ⥤ E) [G.Additive] [H.Additive]
     [Limits.PreservesFiniteLimits G] [Limits.PreservesFiniteColimits G]
     [Limits.PreservesFiniteLimits H] [Limits.PreservesFiniteColimits H] (n : ℤ) (X : C) :
-    (CategoryTheory.Functor.mapDerivedCategoryCompIso G H).hom.app
+    (CategoryTheory.Functor.mapDerivedCategoryCompIso G H).inv.app
         ((DerivedCategory.singleFunctor C n).obj X) ≫
       H.mapDerivedCategory.map ((G.mapDerivedCategorySingleFunctor n).hom.app X) ≫
       (H.mapDerivedCategorySingleFunctor n).hom.app (G.obj X) =

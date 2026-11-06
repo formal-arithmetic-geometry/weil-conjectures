@@ -268,7 +268,7 @@ def tensor (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1] (m :
 Source: Stacks 06YY (blueprint: lem-pur-completed-line-ordinary-data). -/
 def epsilon (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1] (m : ℤ) :
     tensor l E X L m ⋙ tensor l E X L (-m) ≅ 𝟭 _ :=
-  (Functor.mapDerivedCategoryCompIso (sheaf l E X L m) (sheaf l E X L (-m))).symm ≪≫
+  Functor.mapDerivedCategoryCompIso (sheaf l E X L m) (sheaf l E X L (-m)) ≪≫
     Functor.mapDerivedCategoryNatIso (evaluation l E X L m) ≪≫
       Functor.mapDerivedCategoryIdIso _
 

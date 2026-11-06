@@ -101,7 +101,7 @@ Source: assertion (1), Milnor-cone projections.
 (blueprint: prop-weil-pbc-direct-image-limits-roos-data) -/
 def constantEvaluationIso (T : Scheme.{u}) (n : ℕ) :
     dconstant l E T ⋙ dev l E T n ≅ 𝟭 _ :=
-  (Functor.mapDerivedCategoryCompIso (constant l E T) (ev l E T n)).symm ≪≫
+  Functor.mapDerivedCategoryCompIso (constant l E T) (ev l E T n) ≪≫
     Functor.mapDerivedCategoryNatIso
       (Functor.constCompEvaluationObj (C := ℕᵒᵖ) (D := AdicCompletion.Modules l E T)
         (Opposite.op n)) ≪≫
@@ -144,7 +144,7 @@ private theorem constantEvaluation_factors (T : Scheme.{u}) (n : ℕ)
         (((constant l E T).mapHomologicalComplex (.up ℤ)).obj J) := by
   let D := constant l E T
   let F := ev l E T n
-  change (Functor.mapDerivedCategoryCompIso D F).inv.app (DerivedCategory.Q.obj J) ≫
+  change (Functor.mapDerivedCategoryCompIso D F).hom.app (DerivedCategory.Q.obj J) ≫
     (Functor.mapDerivedCategoryNatIso (Iso.refl _)).hom.app (DerivedCategory.Q.obj J) ≫
       (Functor.mapDerivedCategoryIdIso _).hom.app (DerivedCategory.Q.obj J) = _
   rw [Functor.mapDerivedCategoryNatIso_refl]
@@ -156,9 +156,9 @@ private theorem constantEvaluation_factors (T : Scheme.{u}) (n : ℕ)
   rw [hi]
   erw [factorsh_hom']
   have h := Functor.mapDerivedCategoryCompIso_hom_app_factors D F J
-  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso D F).hom.app
+  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso D F).inv.app
     (DerivedCategory.Q.obj J))).mp
-  simp only [Iso.hom_inv_id_app_assoc]
+  simp only [Iso.inv_hom_id_app_assoc]
   erw [Category.id_comp]
   exact h.symm
 
@@ -337,10 +337,10 @@ private theorem towerInterchange_fac'
   let EA := (evaluation ℕᵒᵖ A).obj n
   let EB := (evaluation ℕᵒᵖ B).obj n
   apply (cancel_epi
-    ((Functor.mapDerivedCategoryCompIso FT EA).hom.app (DerivedCategory.Q.obj K))).mp
+    ((Functor.mapDerivedCategoryCompIso FT EA).inv.app (DerivedCategory.Q.obj K))).mp
   dsimp only [FT, EA, EB]
   simp only [towerDerivedEvaluationInterchange, Iso.trans_hom, NatTrans.comp_app,
-    Iso.symm_hom, Category.assoc, Iso.hom_inv_id_app_assoc]
+    Iso.symm_hom, Category.assoc, Iso.inv_hom_id_app_assoc]
   exact (Functor.mapDerivedCategoryCompIso_hom_app_factors EB F K).trans
     (Functor.mapDerivedCategoryCompIso_hom_app_factors FT EA K).symm
 
@@ -381,17 +381,17 @@ private theorem constantInterchange_fac (J : CochainComplex (AdicCompletion.Modu
     Functor.mapDerivedCategoryNatIso_fac _ J
   simp only [constantInterchange, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     Category.assoc]
-  have e1 := congrArg (fun x ↦ (Functor.mapDerivedCategoryCompIso U (constant l E X)).inv.app
+  have e1 := congrArg (fun x ↦ (Functor.mapDerivedCategoryCompIso U (constant l E X)).hom.app
     (DerivedCategory.Q.obj J) ≫ (Functor.mapDerivedCategoryNatIso
       (Functor.compConstIso ℕᵒᵖ U)).hom.app (DerivedCategory.Q.obj J) ≫ x) h1
-  have e2 := congrArg (fun x ↦ (Functor.mapDerivedCategoryCompIso U (constant l E X)).inv.app
+  have e2 := congrArg (fun x ↦ (Functor.mapDerivedCategoryCompIso U (constant l E X)).hom.app
     (DerivedCategory.Q.obj J) ≫ x) h3
-  have e3 : (Functor.mapDerivedCategoryCompIso U (constant l E X)).inv.app
+  have e3 : (Functor.mapDerivedCategoryCompIso U (constant l E X)).hom.app
       (DerivedCategory.Q.obj J) ≫ (U ⋙ constant l E X).mapDerivedCategoryFactors.hom.app J =
       (constant l E X).mapDerivedCategory.map (U.mapDerivedCategoryFactors.hom.app J) ≫
         (constant l E X).mapDerivedCategoryFactors.hom.app
           ((U.mapHomologicalComplex (.up ℤ)).obj J) := by
-    rw [← h2, Iso.inv_hom_id_app_assoc]
+    rw [← h2, Iso.hom_inv_id_app_assoc]
   exact (e1.trans e2).trans ((reassoc_of% e3) _)
 
 set_option backward.isDefEq.respectTransparency false in

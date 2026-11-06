@@ -144,7 +144,7 @@ private theorem derived_unit_comp
       (Functor.mapDerivedCategoryIdIso C).hom.app K = 𝟙 K := by
   have h : η ≫
       Functor.whiskerLeft L.mapDerivedCategory (Functor.mapDerivedCategoryNatIso g.symm).hom ≫
-      (Functor.mapDerivedCategoryCompIso L V).inv ≫
+      (Functor.mapDerivedCategoryCompIso L V).hom ≫
       (Functor.mapDerivedCategoryNatIso c).hom ≫
       (Functor.mapDerivedCategoryIdIso _).hom = 𝟙 _ := by
     apply Localization.natTrans_ext DerivedCategory.Qh
@@ -161,13 +161,13 @@ private theorem derived_unit_comp
     erw [Category.comp_id, Category.comp_id] at hid
     rw [hid, Functor.mapDerivedCategoryNatIso_fach_assoc]
     have hc := Functor.mapDerivedCategoryCompIso_fach L V M
-    have hc' : (Functor.mapDerivedCategoryCompIso L V).inv.app
+    have hc' : (Functor.mapDerivedCategoryCompIso L V).hom.app
         (DerivedCategory.Qh.obj M) ≫ (L ⋙ V).mapDerivedCategoryFactorsh.hom.app M =
       V.mapDerivedCategory.map (L.mapDerivedCategoryFactorsh.hom.app M) ≫
         V.mapDerivedCategoryFactorsh.hom.app ((L.mapHomotopyCategory (.up ℤ)).obj M) ≫
         DerivedCategory.Qh.map ((Functor.mapHomotopyCategoryCompIso
           (Iso.refl (L ⋙ V)) (.up ℤ)).hom.app M) := by
-      rw [← hc, Iso.inv_hom_id_app_assoc]
+      rw [← hc, Iso.hom_inv_id_app_assoc]
     rw [reassoc_of% hc', ← (Functor.mapDerivedCategoryNatIso g.symm).hom.naturality_assoc,
       Functor.mapDerivedCategoryNatIso_fach_assoc,
       reassoc_of% (hη M)]

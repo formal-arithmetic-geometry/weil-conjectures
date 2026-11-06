@@ -82,6 +82,12 @@ private theorem zeroDifferentialAssembly (Y : Scheme.{u})
     Nonempty (DerivedCategory.Q.obj P ≅ K) := by
   classical
   let C := SheafOfModules.{u} (moduleRings Y.toRingedSpace)
+  have : HasColimitsOfShape (Discrete (ULift.{u} ℤ)) C := inferInstance
+  have : HasColimitsOfShape (Discrete (ULift.{u} ℤ)) (CochainComplex C ℤ) := by
+    refine ⟨fun F ↦ ?_⟩
+    have (n : ℤ) : HasColimit (F ⋙ HomologicalComplex.eval C (.up ℤ) n) :=
+      HasColimitsOfShape.has_colimit _
+    exact ⟨⟨⟨_, HomologicalComplex.isColimitCoconeOfHasColimitEval F⟩⟩⟩
   let L (n : ULift.{u} ℤ) : CochainComplex C ℤ :=
     (HomologicalComplex.single C (ComplexShape.up ℤ) n.down).obj (P.X n.down)
   let j (n : ULift.{u} ℤ) : L n ⟶ P := HomologicalComplex.mkHomFromSingle (𝟙 (P.X n.down))

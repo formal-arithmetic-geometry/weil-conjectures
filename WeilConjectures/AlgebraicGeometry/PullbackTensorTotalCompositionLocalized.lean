@@ -7,6 +7,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.CanonicalPullbackTensorComparison
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.FiniteStructureTensorComparisonComposition
 
 /-! # Ordinary tensor pullback composition after localization

@@ -305,8 +305,9 @@ private theorem inverseUnderlying_smul (O : Type (u + 1)) [CommRing O] (t : O)
   have h := (I.lift n).moduleSMul M S a' (𝟙 S) (scalarSections Z O t n a M) (by
     intro V y
     change (unit Z (coefficient O t n)).app V a • (show M.val.obj V from y) =
-      (coefficientConstantSection (J := Z.smallEtaleTopology) O t n a).hom.app V
-        (terminal.hom.app V y) • (show M.val.obj V from y)
+      (show (ring Z (coefficient O t n)).obj.obj V from
+        (coefficientConstantSection (J := Z.smallEtaleTopology) O t n a).hom.app V
+          (terminal.hom.app V y)) • (show M.val.obj V from y)
     rw [constantSection_apply]) U z
   have hc := congrArg (fun f ↦ f.hom.app U z) ha
   change (I.lift n).ringUnderlying.hom.hom.app U ((L.map a').hom.app U z) =

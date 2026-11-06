@@ -226,7 +226,7 @@ private theorem strictPerfect_openTensor_comparison
       U.toScheme.toRingedSpace P hPbounded hPflat
   obtain ⟨t⟩ := derivedTensor_openRestriction_iso_universes X U E (DerivedCategory.Q.obj G)
   let dL : (R ⋙ A).mapDerivedCategory.obj E ≅ DerivedCategory.Q.obj P :=
-    (Functor.mapDerivedCategoryCompIso R A).app E ≪≫
+    (Functor.mapDerivedCategoryCompIso R A).symm.app E ≪≫
       A.mapDerivedCategory.mapIso eL ≪≫ A.mapDerivedCategoryFactors.app L
   let dG : (R ⋙ A).mapDerivedCategory.obj (DerivedCategory.Q.obj G) ≅
       DerivedCategory.Q.obj N := (R ⋙ A).mapDerivedCategoryFactors.app G

@@ -113,7 +113,7 @@ noncomputable def restrictedAffineConeIsLimit {S : Scheme.{v}} {I : Type v}
       apply pullback.hom_ext <;>
         simp [P, restrictedAffineDiagram, rawAffineRestrictedMap, Category.assoc])
   have : PreservesLimitsOfShape Iᵒᵖ P := by
-    dsimp [P]
+    dsimp only [P]
     infer_instance
   have h := isLimitOfPreserves P (isLimitOfReflects (Over.forget S) hc)
   apply ((IsLimit.postcomposeHomEquiv e (P.mapCone c)).symm h).ofIsoLimit

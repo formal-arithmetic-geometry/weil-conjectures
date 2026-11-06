@@ -43,6 +43,10 @@ set_option backward.isDefEq.respectTransparency.types false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures
+local instance dvrOpen_commRingSheafify (T : Scheme.{u}) :
+    HasWeakSheafify (ProEt.topology T) CommRingCat.{u + 1} :=
+  (integralCoefficientRingSheafify.{u, u} T).isRightAdjoint
+
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
@@ -262,7 +266,7 @@ private theorem dvrOpen_complete
   have hlocal := integralLocallyComplete_iso.{u, u} l E X _ a.symm hcomplete
   let b : DerivedCategory.Q.obj (G.obj P) ≅ O.jShriek.obj K :=
     (H.mapDerivedCategoryFactors.app P).symm ≪≫ H.mapDerivedCategory.mapIso e ≪≫
-      (Functor.mapDerivedCategoryCompIso O.modules.functor O.extension.ordinary).app K
+      ((Functor.mapDerivedCategoryCompIso O.modules.functor O.extension.ordinary).app K).symm
   exact (complete_iff_local.{u, u} p l hne E X _).mpr
     (integralLocallyComplete_iso.{u, u} l E X _ b hlocal)
 

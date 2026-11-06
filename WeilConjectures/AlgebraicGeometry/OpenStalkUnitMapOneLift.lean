@@ -68,7 +68,9 @@ theorem exists_open_stalk_unit_map_one_lift
   let q := D.preimage t
   have : (E.obj F).IsFiniteLocallyFree := by
     change (SheafOfModules.unit U.toScheme.ringCatSheaf).IsFiniteLocallyFree
-    infer_instance
+    have : (SheafOfModules.unit U.toScheme.ringCatSheaf).IsInvertible :=
+      SheafOfModules.instIsInvertibleUnit.{u, u, u}
+    exact SheafOfModules.IsInvertible.isFiniteLocallyFree.{u, u, u} _
   obtain ⟨A, hxA, f, hf⟩ := Modules.exists_restrict_stalk_hom_lift
     (E.obj F) (E.obj N) ⟨x, hxU⟩ q
   obtain ⟨V, hxV, hVU, a, k, hk⟩ :=

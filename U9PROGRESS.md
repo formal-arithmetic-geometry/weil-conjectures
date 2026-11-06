@@ -506,3 +506,22 @@
 - No local Lean/Lake, proof placeholders, new declarations, trust bypasses, profiler probes,
   or heartbeat changes. Rule replay and idempotence checks pass; all ucheck invocations ended.
 - This final commit changes progress documentation only; Lean source matches the green build.
+
+
+# BZ1116 complete
+
+- Assigned SfIsoPushPullUnitNormalization is green and sorry-free, with 30 downstream modules green.
+- Final ucheck-bump passed: rc=0, failed=0, 13208 jobs; validated source 5befaf1f528b3cbdd6cd395dcf23eb4ed6c3f40b.
+- Applied the proposed private compositor API changes after the user's continuation instruction.
+  The public theorem, hypotheses, and docstrings are unchanged; proofs use matching cancellation.
+- Generation and GenericPerfect needed only Localization imports for hidden Qh comparisons.
+  All five recorded rewrite rules replay the edits exactly and are idempotent.
+- Merged completed prerequisite fixes from PZ037 and BZ1117, then current bump/v4.35.
+- Reached the 30-extra-module limit. SmoothBaseChange was previously blocked by Generation;
+  that dependency is now green, but SmoothBaseChange itself was not retested after the repair.
+  The remaining importer frontier is recorded without claiming it green or red.
+- Full final log: /home/ubuntu/u9/bz/BUILD-BZ1116-final-green-full.log.
+- Fixes and completion record: /home/ubuntu/u9/bz/FIXES-BZ1116.md and
+  /home/ubuntu/u9/state/BZ1116.DONE.
+- No local Lean/Lake, proof placeholders, trust bypasses, declarations deleted, or heartbeat changes.
+- All ucheck calls finished. This final commit changes progress documentation only.

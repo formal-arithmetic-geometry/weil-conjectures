@@ -58,7 +58,7 @@ theorem perfectOverlapCanonicalSiteTriangleU
       (moduleRings X.toRingedSpace) (P ⊓ Q)).mapDerivedCategory
     let SP := (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) i).mapDerivedCategory
     let LU := (overlapSiteInverse P).mapDerivedCategory
-    let τ : RU ⋙ SP ≅ RW := (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    let τ : RU ⋙ SP ≅ RW := Functor.mapDerivedCategoryCompIso _ _ ≪≫
       Functor.mapDerivedCategoryNatIso
         (SheafOfModules.overFunctorMap.{u} (moduleRings X.toRingedSpace) i)
     let eW : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over (P ⊓ Q)) ≌
@@ -119,7 +119,7 @@ theorem perfectOverlapCanonicalSiteTriangleV
       (moduleRings X.toRingedSpace) (P ⊓ Q)).mapDerivedCategory
     let SQ := (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) i).mapDerivedCategory
     let LV := (overlapSiteInverse Q).mapDerivedCategory
-    let τ : RV ⋙ SQ ≅ RW := (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    let τ : RV ⋙ SQ ≅ RW := Functor.mapDerivedCategoryCompIso _ _ ≪≫
       Functor.mapDerivedCategoryNatIso
         (SheafOfModules.overFunctorMap.{u} (moduleRings X.toRingedSpace) i)
     let eW : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over (P ⊓ Q)) ≌

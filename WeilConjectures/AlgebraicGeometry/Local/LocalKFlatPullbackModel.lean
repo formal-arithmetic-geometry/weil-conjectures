@@ -116,7 +116,7 @@ theorem derivedPullback_local_kFlat_model {T X : Scheme.{u}} (f : T ⟶ X)
   let P := (V.mapHomologicalComplex (.up ℤ)).obj K
   obtain ⟨m⟩ := hmodel
   let eP : (RX ⋙ V).mapDerivedCategory.obj E ≅ DerivedCategory.Q.obj P :=
-    (Functor.mapDerivedCategoryCompIso RX V).app E ≪≫
+    (Functor.mapDerivedCategoryCompIso RX V).symm.app E ≪≫
       V.mapDerivedCategory.mapIso m ≪≫ V.mapDerivedCategoryFactors.app K
   obtain ⟨θ⟩ := derivedPullback_openRestriction_iso_universes f W U hUV
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,

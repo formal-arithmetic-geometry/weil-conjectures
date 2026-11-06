@@ -63,6 +63,9 @@ attribute [local instance] AdicCompletion.ringMonoidalObject AdicCompletion.ring
 
 namespace CompleteDerivedCompletion
 
+attribute [local instance] AdicCompletion.modulesNatProducts AdicCompletion.complexNatProducts
+  AdicCompletion.complexNatLimit
+
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
@@ -105,7 +108,7 @@ theorem constantLimitUnit_isIso (T : Scheme.{u})
     (AdicCompletion.Modules l E T)).mapDerivedCategoryRightDerivedAdjunction
     |>.ofNatIsoRight (constant l E T).rightDerivedFunctorIsoMapDerivedCategory
   let e : dconstant l E T ⋙ dev l E T 0 ≅ 𝟭 _ :=
-    (Functor.mapDerivedCategoryCompIso (constant l E T) (ev l E T 0)).symm ≪≫
+    Functor.mapDerivedCategoryCompIso (constant l E T) (ev l E T 0) ≪≫
       Functor.mapDerivedCategoryNatIso
         (Functor.constCompEvaluationObj (C := ℕᵒᵖ)
           (D := AdicCompletion.Modules l E T) (op 0)) ≪≫
