@@ -252,18 +252,18 @@ theorem cbcStrictReductionLevel_originIso (V : Scheme.{t}) (K : d.derived V) (n 
   let resA := proEtaleRingRestrictScalars (exchangeScalar d V)
   let ev := (CategoryTheory.evaluation ℕᵒᵖ
     (proEtaleRingModules V (d.completedRing V))).obj (op n)
-  let i₁ := (Functor.mapDerivedCategoryCompIso real RF).symm.app X
+  let i₁ := (Functor.mapDerivedCategoryCompIso real RF).app X
   let i₂ := (Functor.mapDerivedCategoryNatIso b).app X
-  let i₃ := (Functor.mapDerivedCategoryCompIso pbcR (resN ⋙ resA)).app X
+  let i₃ := (Functor.mapDerivedCategoryCompIso pbcR (resN ⋙ resA)).symm.app X
   let i₄ := (resN ⋙ resA).mapDerivedCategory.mapIso e
-  let i₅ := (Functor.mapDerivedCategoryCompIso resN resA).app
+  let i₅ := (Functor.mapDerivedCategoryCompIso resN resA).symm.app
     ((pbcCompletedReduction V d n).obj K)
   let i₆ := resA.mapDerivedCategory.mapIso
     ((asIso (completedReductionEvaluation V d n)).symm.app K)
-  let i₇ := (Functor.mapDerivedCategoryCompIso ev resA).symm.app
+  let i₇ := (Functor.mapDerivedCategoryCompIso ev resA).app
     ((completedReductionTower V d).obj K)
   let i₈ := (Functor.mapDerivedCategoryCompIso (exchangeTowerModuleRes d V)
-    ((CategoryTheory.evaluation ℕᵒᵖ (ProEtale.StrictTower.Modules A V)).obj (op n))).app
+    ((CategoryTheory.evaluation ℕᵒᵖ (ProEtale.StrictTower.Modules A V)).obj (op n))).symm.app
       ((completedReductionTower V d).obj K)
   exact ⟨i₁ ≪≫ i₂ ≪≫ i₃ ≪≫ i₄ ≪≫ i₅ ≪≫ i₆ ≪≫ i₇ ≪≫ i₈⟩
 
