@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SmoothPurity.CompletedQuotient.CompletedComparisonQuotientRealizationDefs
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.SmoothPurity.Pur.PurSequenceOrdinaryFactorization
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
@@ -60,8 +62,6 @@ attribute [local implicit_reducible]
   integralCoefficientSheaf integralCoefficientCommRingSheaf
   integralOperationsGoodLocalization
 attribute [local implicit_reducible] DerivedCategory.Q DerivedCategory.Qh
-  HomologicalComplexUpToQuasiIso.Qh HomotopyCategory.quotient
-  CategoryTheory.Functor.mapHomotopyCategory
 
 private theorem reductionEvaluation_eq (Y : Scheme.{u})
     (O : PurSequenceOrdinaryAdjoints l E Y) (n : ℕ) :
@@ -151,7 +151,7 @@ private theorem square_factors
   simp only [Category.assoc]
   rw [hG, Functor.mapDerivedCategoryNatIso_fac]
   rw [← hF]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc, ← Functor.map_comp_assoc,
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc, ← Functor.map_comp_assoc,
     Iso.inv_hom_id_app]
   erw [F₂.mapDerivedCategory.map_id, Category.id_comp, Iso.inv_hom_id_app_assoc]
 
