@@ -119,7 +119,7 @@ noncomputable def exceptionalConstantPullbackIso (C : Type (u + 1)) [CommRing C]
       (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} C)).mapDerivedCategory :=
   Functor.isoWhiskerLeft _ (leftDerivedUpperStarIsoMapDerivedCategory
       (ModuleCat.{u + 1} C) f) ≪≫
-    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (Scheme.upperStarConstantSheafIso
       (ModuleCat.{u + 1} C) f)
 
