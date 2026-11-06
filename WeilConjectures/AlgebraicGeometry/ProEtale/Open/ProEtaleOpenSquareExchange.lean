@@ -123,10 +123,10 @@ noncomputable def sfIntrinsicDerivedOpenMate {U' U Y' Y : Scheme.{u}}
     sfIntrinsicDerivedPullback A gU ⋙ sfIntrinsicDerivedOpen A j' ⟶
       sfIntrinsicDerivedOpen A j ⋙ sfIntrinsicDerivedPullback A g :=
   (mapDerivedCategoryCompIso (sfIntrinsicPullback A gU)
-    (sfIntrinsicExtensionByZero j' A)).inv ≫
+    (sfIntrinsicExtensionByZero j' A)).hom ≫
   sfIntrinsicDeriveMap A (sfIntrinsicOpenMate A gU j' j g w) ≫
   (mapDerivedCategoryCompIso (sfIntrinsicExtensionByZero j A)
-    (sfIntrinsicPullback A g)).hom
+    (sfIntrinsicPullback A g)).inv
 
 /-- The derived open unit, with the localization identity and composition comparisons.
 Source: Stacks, Tag 05RU (blueprint: lem-trf-open-square-exchange). -/
@@ -136,7 +136,7 @@ noncomputable def sfIntrinsicDerivedOpenUnit {U Y : Scheme.{u}} (j : U ⟶ Y)
   (mapDerivedCategoryIdIso _).inv ≫
     sfIntrinsicDeriveMap A (sfIntrinsicOpenAdjunction A j).unit ≫
     (mapDerivedCategoryCompIso (sfIntrinsicExtensionByZero j A)
-      (sfIntrinsicPullback A j)).hom
+      (sfIntrinsicPullback A j)).inv
 
 /-- Pullback composition on unbounded derived categories.
 Source: Stacks, Section 0735 (blueprint: lem-trf-open-square-exchange). -/
@@ -145,7 +145,7 @@ noncomputable def sfIntrinsicDerivedPullbackComp {X Y Z : Scheme.{u}}
     sfIntrinsicDerivedPullback A (f ≫ g) ≅
       sfIntrinsicDerivedPullback A g ⋙ sfIntrinsicDerivedPullback A f :=
   mapDerivedCategoryNatIso (sfIntrinsicPullbackComp A f g) ≪≫
-    mapDerivedCategoryCompIso (sfIntrinsicPullback A g) (sfIntrinsicPullback A f)
+    (mapDerivedCategoryCompIso (sfIntrinsicPullback A g) (sfIntrinsicPullback A f)).symm
 
 /-- Open-extension composition on unbounded derived categories.
 Source: blueprint order 2367 (blueprint: lem-trf-open-square-exchange). -/
@@ -153,7 +153,7 @@ noncomputable def sfIntrinsicDerivedOpenComp {V U Y : Scheme.{u}} (i : V ⟶ U) 
     [IsOpenImmersion i] [IsOpenImmersion j] :
     sfIntrinsicDerivedOpen A (i ≫ j) ≅ sfIntrinsicDerivedOpen A i ⋙ sfIntrinsicDerivedOpen A j :=
   mapDerivedCategoryNatIso (sfIntrinsicOpenComp A i j) ≪≫
-    mapDerivedCategoryCompIso (sfIntrinsicExtensionByZero i A) (sfIntrinsicExtensionByZero j A)
+    (mapDerivedCategoryCompIso (sfIntrinsicExtensionByZero i A) (sfIntrinsicExtensionByZero j A)).symm
 
 /-- Identity pullback on the unbounded derived category.
 Source: Stacks, Section 0735 (blueprint: lem-trf-open-square-exchange). -/
@@ -174,9 +174,9 @@ noncomputable def sfIntrinsicDerivedSquarePullback {U' U Y' Y : Scheme.{u}}
     (w : gU ≫ j = j' ≫ g) :
     sfIntrinsicDerivedPullback A j ⋙ sfIntrinsicDerivedPullback A gU ≅
       sfIntrinsicDerivedPullback A g ⋙ sfIntrinsicDerivedPullback A j' :=
-  (mapDerivedCategoryCompIso (sfIntrinsicPullback A j) (sfIntrinsicPullback A gU)).symm ≪≫
+  (mapDerivedCategoryCompIso (sfIntrinsicPullback A j) (sfIntrinsicPullback A gU)) ≪≫
     mapDerivedCategoryNatIso (sfIntrinsicSquarePullback A gU j' j g w) ≪≫
-    mapDerivedCategoryCompIso (sfIntrinsicPullback A g) (sfIntrinsicPullback A j')
+    (mapDerivedCategoryCompIso (sfIntrinsicPullback A g) (sfIntrinsicPullback A j')).symm
 
 /-- A coherent family of the canonical exchange isomorphisms. The `canonical` field fixes
 its inverse to the specified mate, so none of its isomorphisms is arbitrary. The restriction
@@ -735,7 +735,7 @@ private noncomputable def dUnit (L : C₁ ⥤ D₁) (R : D₁ ⥤ C₁)
     [PreservesFiniteLimits R] [PreservesFiniteColimits R]
     (η : 𝟭 C₁ ≅ L ⋙ R) : 𝟭 (DerivedCategory C₁) ≅ L.mapDerivedCategory ⋙ R.mapDerivedCategory :=
   (mapDerivedCategoryIdIso C₁).symm ≪≫ mapDerivedCategoryNatIso η ≪≫
-    mapDerivedCategoryCompIso L R
+    (mapDerivedCategoryCompIso L R).symm
 
 private theorem dUnit_fac (L : C₁ ⥤ D₁) (R : D₁ ⥤ C₁)
     [L.Additive] [R.Additive]
@@ -898,7 +898,7 @@ private theorem dMate_restriction
       (mapDerivedCategorySquareIso q).hom.app (L₁.mapDerivedCategory.obj K) ≫
       R₂.mapDerivedCategory.map ((mapDerivedCategorySquareIso b).inv.app K) =
     ((mapDerivedCategoryIdIso C₂).inv ≫ dMap adj₂.unit ≫
-      (mapDerivedCategoryCompIso L₂ R₂).hom).app (G.mapDerivedCategory.obj K) := by
+      (mapDerivedCategoryCompIso L₂ R₂).inv).app (G.mapDerivedCategory.obj K) := by
   rw [← asIso_hom adj₁.unit, ← asIso_hom adj₂.unit, dMap_iso, dMap_iso]
   apply dUnit_square_inverse L₁ R₁ L₂ R₂ G H (asIso adj₁.unit) (asIso adj₂.unit) q b
   intro X
@@ -1012,11 +1012,11 @@ private theorem dSquare_comp_reverse
       cG.hom.app (U₀.obj X) ≫ G₁₂.map (q₀₁.hom.app X) ≫ q₁₂.hom.app (F₀₁.obj X)) :
     (mapDerivedCategorySquareIso q₀₂).hom =
       whiskerLeft U₀.mapDerivedCategory
-        (mapDerivedCategoryNatIso cG ≪≫ mapDerivedCategoryCompIso G₀₁ G₁₂).hom ≫
+        (mapDerivedCategoryNatIso cG ≪≫ (mapDerivedCategoryCompIso G₀₁ G₁₂).symm).hom ≫
       whiskerRight (mapDerivedCategorySquareIso q₀₁).hom G₁₂.mapDerivedCategory ≫
       whiskerLeft F₀₁.mapDerivedCategory (mapDerivedCategorySquareIso q₁₂).hom ≫
       whiskerRight (mapDerivedCategoryNatIso cF ≪≫
-        mapDerivedCategoryCompIso F₀₁ F₁₂).inv U₂.mapDerivedCategory := by
+        (mapDerivedCategoryCompIso F₀₁ F₁₂).symm).inv U₂.mapDerivedCategory := by
   apply NatTrans.ext
   funext K
   simp only [NatTrans.comp_app, whiskerLeft_app, whiskerRight_app]
@@ -1035,11 +1035,11 @@ private theorem dSquare_comp_forward
       G₁₂.map (q₀₁.hom.app X) = q₀₂.hom.app X ≫ cG.hom.app (U₀.obj X)) :
     (mapDerivedCategorySquareIso q₀₂).hom =
       whiskerRight (mapDerivedCategoryNatIso cF ≪≫
-        mapDerivedCategoryCompIso F₀₁ F₁₂).hom U₂.mapDerivedCategory ≫
+        (mapDerivedCategoryCompIso F₀₁ F₁₂).symm).hom U₂.mapDerivedCategory ≫
       whiskerLeft F₀₁.mapDerivedCategory (mapDerivedCategorySquareIso q₁₂).hom ≫
       whiskerRight (mapDerivedCategorySquareIso q₀₁).hom G₁₂.mapDerivedCategory ≫
       whiskerLeft U₀.mapDerivedCategory
-        (mapDerivedCategoryNatIso cG ≪≫ mapDerivedCategoryCompIso G₀₁ G₁₂).inv := by
+        (mapDerivedCategoryNatIso cG ≪≫ (mapDerivedCategoryCompIso G₀₁ G₁₂).symm).inv := by
   have h := mapDerivedCategorySquareIso_comp F₀₁ F₁₂ F₀₂ G₀₁ G₁₂ G₀₂ U₀ U₁ U₂
     q₀₁ q₁₂ q₀₂ cF cG hq
   apply NatTrans.ext

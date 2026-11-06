@@ -1142,8 +1142,10 @@ private theorem tensorSection_restrict (X : Scheme.{u})
     _ = ((reductionChange X φ).obj M).val.map f
         (s • reductionTensorSection X φ M U 1 x) :=
       congrArg (((reductionChange X φ).obj M).val.map f) hs.symm
-    _ = S.obj.map f s • ((reductionChange X φ).obj M).val.map f
-        (reductionTensorSection X φ M U 1 x) :=
+    _ = S.obj.map f s •
+        (show ((reductionChange X φ).obj M).val.obj V from
+          ((reductionChange X φ).obj M).val.map f
+            (reductionTensorSection X φ M U 1 x)) :=
       ((reductionChange X φ).obj M).val.map_smul f s _
     _ = S.obj.map f s • reductionTensorSection X φ M V 1 (M.val.map f x) :=
       congrArg (fun z ↦ S.obj.map f s • z) hu.symm

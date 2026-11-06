@@ -95,8 +95,8 @@ theorem isIso_globalSectionsRestriction_of_isStrictlyHenselianLocalRing
   have hsC : IsZero (((s ≫ f)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategory.obj C) :=
     IsZero.of_iso ((((s)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategory).map_isZero hC)
       ((Functor.mapDerivedCategoryNatIso (upperStarComp (ModuleCat.{u + 1} Λ) s f) ≪≫
-        Functor.mapDerivedCategoryCompIso (upperStar (ModuleCat.{u + 1} Λ) f)
-          (upperStar (ModuleCat.{u + 1} Λ) s)).app C)
+        (Functor.mapDerivedCategoryCompIso (upperStar (ModuleCat.{u + 1} Λ) f)
+          (upperStar (ModuleCat.{u + 1} Λ) s)).symm).app C)
   have : IsIso ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) T).map (adj.unit.app K)) :=
     (Triangle.isZero₃_iff_isIso₁ _
       ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) T).map_distinguished _ hT)).1

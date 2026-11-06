@@ -5,6 +5,10 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+import all Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.CupProductCoherence
 public import WeilConjectures.SixFunctors.Etale.Derived.CupProductWeil
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Reduction
@@ -144,7 +148,7 @@ lemma upperStarConstantSheafIso_hom_app_tensorUnit (g : X ⟶ Y) :
 
 /-- The identification of the unit of `D(X_ét)` with the unit sheaf placed in degree zero
 (`AlgebraicGeometry.Etale.singleFunctorObjUnitIso`) is the identity. -/
-lemma singleFunctorObjUnitIso_inv (X : Scheme.{u}) :
+private lemma singleFunctorObjUnitIso_inv (X : Scheme.{u}) :
     (singleFunctorObjUnitIso A X).inv = 𝟙 _ := by
   have h₁ : ε (DerivedCategory.Qh (C := Sheaf X.smallEtaleTopology A)) = 𝟙 _ := rfl
   have h₂ : ε (HomotopyCategory.quotient (Sheaf X.smallEtaleTopology A) (.up ℤ)) = 𝟙 _ := rfl
@@ -153,7 +157,7 @@ lemma singleFunctorObjUnitIso_inv (X : Scheme.{u}) :
   simp only [singleFunctorObjUnitIso, singleFunctorObjIsoQh, Iso.trans_inv, Iso.symm_inv,
     Functor.mapIso_inv, asIso_hom, Functor.Monoidal.εIso_hom, Iso.app_inv, h₁, h₂, h₃]
   simp only [CategoryTheory.Functor.map_id, Category.comp_id, Functor.comp_obj,
-    HomotopyCategory.quotient_obj_singleFunctors_obj, DerivedCategory.Qh_obj_singleFunctors_obj,
+    HomotopyCategory.quotient_obj_singleFunctors_obj,
     DerivedCategory.singleFunctorIsoCompQ, Iso.refl_inv, NatTrans.id_app, Category.id_comp]
   exact Category.comp_id _
 
@@ -181,6 +185,15 @@ lemma leftDerivedUpperStar_map_singleFunctorObjUnitIso_inv_comp (g : X ⟶ Y) :
     Functor.whiskerRight_app, NatTrans.id_app, Category.comp_id, Category.id_comp, Category.assoc,
     Functor.Monoidal.εIso_inv, Functor.map_comp]
   refine (Category.id_comp _).trans ?_
+  have hY : ∀ K, (DerivedCategory.quotientCompQhIso (Sheaf Y.smallEtaleTopology A)).hom.app K =
+      𝟙 _ := fun _ ↦ rfl
+  have hX : ∀ K, (DerivedCategory.quotientCompQhIso (Sheaf X.smallEtaleTopology A)).inv.app K =
+      𝟙 _ := fun _ ↦ rfl
+  simp only [Iso.app_inv, hY, hX]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+  have hη : (DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology A) 0).map (η (g)^*[A]) =
+      DerivedCategory.Q.map ((HomologicalComplex.single _ (.up ℤ) 0).map (η (g)^*[A])) := rfl
+  rw [hη]
   rfl
 
 /-- The identification `Lg^* M_Y ≅ M_X` of constant complexes

@@ -171,9 +171,9 @@ private theorem finite_etale_origin_realization
     intro i
     obtain ⟨S, hS⟩ := hL.1 i
     exact ⟨S, S.isConstructible_stratum, hS⟩
-  · exact (Functor.mapDerivedCategoryCompIso
+  · exact ((Functor.mapDerivedCategoryCompIso
       (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} B) X)
-      (ProEtale.finiteCoefficientRealization X B)).app L
+      (ProEtale.finiteCoefficientRealization X B)).app L).symm
 
 /-- A single finite-ring complex with bounded intrinsically constructible cohomology
 has a bounded constructible etale presentation in the recorded coefficient universe.
@@ -257,6 +257,6 @@ theorem finiteCoefficient_constructibleDerived_origin_presentation
       ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} B) X).mapDerivedCategory.obj L))
     (finite_etale_origin_realization X B L hLP)
   exact ⟨S.mapDerivedCategory.mapIso (R.mapDerivedCategory.mapIso eL) ≪≫
-    ((Functor.mapDerivedCategoryCompIso R S).app J).symm ≪≫ eJ⟩
+    (Functor.mapDerivedCategoryCompIso R S).app J ≪≫ eJ⟩
 
 end AlgebraicGeometry.Scheme
