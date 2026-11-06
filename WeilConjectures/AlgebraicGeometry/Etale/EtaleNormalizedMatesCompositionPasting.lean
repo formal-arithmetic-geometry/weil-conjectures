@@ -180,7 +180,7 @@ private lemma support_compositor_global
       (d.comp (k.ofComp d)) k (HasCompactification.compactification (e ≫ v)))
   have hg := NatTrans.congr_app (unboundedEtaleLowerShriekCompIso_tower A e v d
     (k.ofComp d)) M
-  simp only [NatTrans.comp_app, NatTrans.hcomp] at hg
+  simp only [NatTrans.comp_app, NatTrans.hcomp_app] at hg
   rw [hg, ← Category.assoc, ← (rightDerivedLowerShriekIso A d).hom.naturality]
   simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
   have htM := NatTrans.congr_app ht M

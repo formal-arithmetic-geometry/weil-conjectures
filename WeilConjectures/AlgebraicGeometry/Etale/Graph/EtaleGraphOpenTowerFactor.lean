@@ -113,11 +113,11 @@ private lemma exact_square_triangle
     (sq : CommSq v j' j b) :
     (Functor.mapDerivedCategoryNatIso
         (upperStarComp (ModuleCat.{u + 1} A) j' b (v ≫ j) sq.w) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _) ≪≫
+      (Functor.mapDerivedCategoryCompIso _ _).symm) ≪≫
       (exactDerivedSquareUpperStarIso (ModuleCat.{u + 1} A) sq.flip).symm =
     Functor.mapDerivedCategoryNatIso
         (upperStarComp (ModuleCat.{u + 1} A) v j (v ≫ j) rfl) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _ := by
+      (Functor.mapDerivedCategoryCompIso _ _).symm := by
   have hh : squareUpperStarIso (ModuleCat.{u + 1} A) sq.flip =
       (upperStarComp (ModuleCat.{u + 1} A) v j (v ≫ j) rfl).symm ≪≫
         upperStarComp (ModuleCat.{u + 1} A) j' b (v ≫ j) sq.w := by
@@ -234,7 +234,7 @@ theorem etaleGraph_open_tower_factor
       (j'a.comp ba)).symm
       (Functor.mapDerivedCategoryNatIso
         (upperStarComp (ModuleCat.{u + 1} A) j' b r osq.w) ≪≫
-        Functor.mapDerivedCategoryCompIso _ _)
+        (Functor.mapDerivedCategoryCompIso _ _).symm)
     let dv' := (rightDerivedLowerShriekIso A
       (HasCompactification.compactification v')).symm ≪≫
       canonicalEtaleCompactSupportComparison A v' (HasCompactification.compactification v')
@@ -266,7 +266,7 @@ theorem etaleGraph_open_tower_factor
     (exactDerivedSquareUpperStarIso (ModuleCat.{u + 1} A) osq.flip)
     (Functor.mapDerivedCategoryNatIso
       (upperStarComp (ModuleCat.{u + 1} A) j' b (v' ≫ c.i) osq.w) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _)
+      (Functor.mapDerivedCategoryCompIso _ _).symm)
   rw [exact_square_triangle A osq] at hm
   let : IsLocallyNoetherian c.Z := LocallyOfFiniteType.isLocallyNoetherian c.g
   let : CompactSpace c.Z := QuasiCompact.compactSpace_of_compactSpace c.g
@@ -275,7 +275,7 @@ theorem etaleGraph_open_tower_factor
   let s₀ := (conjugateIsoEquiv ra (va.comp ja)).symm
     (Functor.mapDerivedCategoryNatIso
       (upperStarComp (ModuleCat.{u + 1} A) v' c.i (v' ≫ c.i) rfl) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _)
+      (Functor.mapDerivedCategoryCompIso _ _).symm)
   let dr := (rightDerivedLowerShriekIso A e).symm ≪≫
     canonicalEtaleCompactSupportComparison A (v' ≫ c.i) e
   let w : v' ≫ f = (v' ≫ c.i) ≫ c.g :=
