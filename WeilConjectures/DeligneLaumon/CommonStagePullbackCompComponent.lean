@@ -176,7 +176,21 @@ private theorem commonStagePullbackComparison_eq_transport
         (rationalDerivedPullback l
           (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f).mapIso
           ((eqToIso eY).app P.obj).symm := by
+  unfold commonStagePullbackComparison
   rfl
+
+/-- Substitute the three comparisons while keeping the compositor itself opaque. -/
+private theorem stage_transport_of_comparisons
+    {C D : Type*} [Category* C] [Category* D] (F : C ⥤ D)
+    {A B W : D} {U V : C} (x : A ⟶ W) (b : B ≅ F.obj U)
+    {a a' : A ≅ B} {c c' : V ≅ U} {d d' : W ≅ F.obj V}
+    (ha : a = a') (hc : c = c') (hd : d = d')
+    (h : x = a'.hom ≫ b.hom ≫ F.map c'.inv ≫ d'.inv) :
+    x = a.hom ≫ b.hom ≫ F.map c.inv ≫ d.inv := by
+  cases ha
+  cases hc
+  cases hd
+  exact h
 
 /-- Transport the rational compositor through the recorded coefficient-stage transitions. -/
 private theorem commonStagePullbackCompComponent_stage_transport
@@ -233,8 +247,7 @@ private theorem commonStagePullbackCompComponent_stage_transport
     (commonStagePullbackObject l Ω g P) L hP eX eY
   set_option backward.isDefEq.respectTransparency true in
   set_option backward.isDefEq.respectTransparency.types true in
-    simp only [← hfg, ← hg, ← hf] at key
-    exact key
+    exact stage_transport_of_comparisons _ _ _ hfg hg hf key
 
 
 /-- The selected common-stage component is represented at every larger coefficient stage.
