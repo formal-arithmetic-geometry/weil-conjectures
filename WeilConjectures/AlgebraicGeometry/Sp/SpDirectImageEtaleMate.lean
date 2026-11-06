@@ -230,17 +230,17 @@ private theorem sp_comparison_hom
   have hpull : DerivedCategory.Plus.ι.map
       ((fixedComparisonPullbackPlus A f).hom.app
         ((Etale.rightDerivedLowerStarPlus C f).obj J)) =
-      ((Functor.mapDerivedCategoryCompIso E (comparisonUpperStar C X)).inv ≫
+      ((Functor.mapDerivedCategoryCompIso E (comparisonUpperStar C X)).hom ≫
         (Functor.mapDerivedCategoryNatIso
           (comparisonUpperStarCompUpperStarIso C f).symm).hom ≫
-        (Functor.mapDerivedCategoryCompIso (comparisonUpperStar C Y) P).hom).app
+        (Functor.mapDerivedCategoryCompIso (comparisonUpperStar C Y) P).inv).app
           (((Etale.lowerStar C f).rightDerivedFunctorPlus.obj J).obj) := by
     simp only [fixedComparisonPullbackPlus, Iso.trans_hom, Iso.symm_hom,
       NatTrans.comp_app, Functor.map_comp]
     have he : DerivedCategory.Plus.ι.mapIso
         ((Functor.mapDerivedCategoryPlusCompIso E (comparisonUpperStar C X)).app
           ((Etale.rightDerivedLowerStarPlus C f).obj J)) =
-        (Functor.mapDerivedCategoryCompIso E (comparisonUpperStar C X)).app
+        (Functor.mapDerivedCategoryCompIso E (comparisonUpperStar C X)).symm.app
           (((Etale.rightDerivedLowerStarPlus C f).obj J).obj) :=
       Iso.ext (Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app _ _ _)
     have hi := congrArg Iso.inv he
@@ -266,9 +266,9 @@ private theorem sp_comparison_hom
     Iso.symm_hom, Iso.symm_inv, Iso.app_hom, Iso.app_inv, asIso_hom,
     Functor.mapDerivedCategoryPlusCompatibility, Iso.refl_hom, Iso.refl_inv,
     NatTrans.id_app]
-  let q := (Functor.mapDerivedCategoryCompIso E (comparisonUpperStar C X)).symm ≪≫
+  let q := Functor.mapDerivedCategoryCompIso E (comparisonUpperStar C X) ≪≫
     Functor.mapDerivedCategoryNatIso (comparisonUpperStarCompUpperStarIso C f).symm ≪≫
-    Functor.mapDerivedCategoryCompIso (comparisonUpperStar C Y) P
+    (Functor.mapDerivedCategoryCompIso (comparisonUpperStar C Y) P).symm
   let r := (Etale.lowerStar C f).rightDerivedFunctorPlusCompatibility.app J
   let b := DerivedCategory.Plus.ι.map ((fixedComparisonDirectImageMatePlus A f).app J)
   let c := (lowerStar C f).rightDerivedFunctorPlusCompatibility.hom.app
