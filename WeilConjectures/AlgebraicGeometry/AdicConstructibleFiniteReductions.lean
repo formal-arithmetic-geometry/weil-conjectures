@@ -4,7 +4,6 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import WeilConjectures.AlgebraicGeometry.AdicFiniteReductionData
 import WeilConjectures.AlgebraicGeometry.AdicFiniteCompletionBounds
 import WeilConjectures.AlgebraicGeometry.AdicFiniteEtaleOrigins
@@ -22,6 +21,8 @@ universe u v
 open CategoryTheory CategoryTheory.Limits
 open CategoryTheory.ConstantCompletion
 namespace AlgebraicGeometry.Scheme
+
+attribute [local instance] HasDerivedCategory.standard
 
 /-- Finite reductions with the given Tor interval and the prescribed residue marking.
 Source: Stacks Project, proetale.tex, Tag 09C2 (1)-(4), and Tag 09AL.
