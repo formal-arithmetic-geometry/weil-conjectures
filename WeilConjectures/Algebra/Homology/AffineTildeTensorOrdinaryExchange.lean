@@ -76,10 +76,10 @@ def affineTildeTensorOrdinaryTargetMap
   let a := affineTildePushforwardComplexMap D B ψ Cg
   exact DerivedCategory.Q.map ((T.mapHomologicalComplex (.up ℤ)).map k) ≫
     DerivedCategory.Q.map a ≫
-    (RingedSpace.moduleDirectImage
+    cast (by rfl) ((RingedSpace.moduleDirectImage
       (Spec.map (CommRingCat.ofHom ψ)).toLRSHom.toShHom).rightDerivedFunctorUnit.app
         ((HomotopyCategory.quotient _ (.up ℤ)).obj
-          (((affinePushforwardTilde D).mapHomologicalComplex (.up ℤ)).obj Cg))
+          (((affinePushforwardTilde D).mapHomologicalComplex (.up ℤ)).obj Cg)))
 
 /-- Ordinary exchange, in unit-normalized affine tensor coordinates, followed by
 its right-derived unit. This is independent of any derived tensor model or counit.
