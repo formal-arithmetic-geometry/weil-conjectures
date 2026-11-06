@@ -13,6 +13,8 @@ import WeilConjectures.Algebra.Homology.BoundedFlatReplacement
 import WeilConjectures.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 import WeilConjectures.AlgebraicGeometry.PerfectHomCochainCounit
 public import WeilConjectures.AlgebraicGeometry.Picard.CanonicalSinglePullbackComparison
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # Canonical top cohomology of derived module pullback
 
@@ -93,9 +95,9 @@ def derivedSingleComparisonOfCounit
     (n : ℤ) (M : A) :
     LF.obj ((DerivedCategory.singleFunctor A n).obj M) ⟶
       (DerivedCategory.singleFunctor B n).obj (F.obj M) :=
-  ε.app ((HomotopyCategory.singleFunctor A n).obj M) ≫
+  cast (by rfl) (ε.app ((HomotopyCategory.singleFunctor A n).obj M) ≫
     DerivedCategory.Qh.map ((HomotopyCategory.quotient B (ComplexShape.up ℤ)).map
-      ((HomologicalComplex.singleMapHomologicalComplex F (ComplexShape.up ℤ) n).hom.app M))
+      ((HomologicalComplex.singleMapHomologicalComplex F (ComplexShape.up ℤ) n).hom.app M)))
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -227,6 +229,7 @@ private theorem singleComparison_naturality
       derivedSingleComparisonOfCounit F LF ε n M ≫
         (DerivedCategory.singleFunctor B n).map (F.map a) := by
   unfold derivedSingleComparisonOfCounit
+  simp only [cast_eq]
   rw [← Category.assoc]
   have hn := ε.naturality ((HomotopyCategory.singleFunctor A n).map a)
   change LF.map ((DerivedCategory.singleFunctor A n).map a) ≫ _ = _ at hn
@@ -504,6 +507,7 @@ private theorem singleComparison_homology_isIso {T S : Scheme.{u}} (g : T ⟶ S)
       ((HomotopyCategory.quotient _ (.up ℤ)).map j.hom))) :=
     inferInstanceAs (IsIso (H.mapIso (DerivedCategory.Qh.mapIso
       ((HomotopyCategory.quotient _ (.up ℤ)).mapIso j))).hom)
+  simp only [pinnedModulePullbackComparisonAt, derivedSingleComparisonOfCounit, cast_eq]
   change IsIso (H.map ((perfectHomTensorCounit g).app
       ((HomotopyCategory.singleFunctor _ n).obj M) ≫ DerivedCategory.Qh.map
         ((HomotopyCategory.quotient _ (.up ℤ)).map j.hom)))
@@ -663,13 +667,18 @@ private theorem singleComparison_composition
   change _ ≫ (_ ≫ DerivedCategory.Qh.map (qX.map jfg)) =
     (derivedPullback f).map (_ ≫ DerivedCategory.Qh.map (qY.map jg)) ≫
       (_ ≫ DerivedCategory.Qh.map (qX.map jf)) ≫
-      (DerivedCategory.singleFunctor.{w, u, u + 1} _ n).map
+      (DerivedCategory.singleFunctor.{w, u, u + 1}
+        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).map
         ((perfectHomTensorComp f g).hom.app M) at h
   dsimp only [K, F, G, H, qX, qY, jf, jg, jfg] at h
   simpa only [pinnedModulePullbackComparisonAt, derivedSingleComparisonOfCounit,
-    ← tensorComp_eq, Category.assoc, perfectHomComposition, pinnedPullbackComposition,
+    cast_eq, ← tensorComp_eq, Category.assoc, perfectHomComposition, pinnedPullbackComposition,
     perfectHomTensorCounit, pinnedPullbackCounit, DerivedCategory.singleFunctor,
-    DerivedCategory.singleFunctors, SingleFunctors.postcomp, Functor.comp_obj] using h
+    DerivedCategory.singleFunctors, HomotopyCategory.singleFunctor,
+    HomotopyCategory.singleFunctors, CochainComplex.singleFunctor,
+    SingleFunctors.postcomp, Functor.comp_obj, DerivedCategory.Qh,
+    HomologicalComplexUpToQuasiIso.Qh, HomotopyCategory.quotient,
+    Quotient.lift_obj_functor_obj, Quotient.lift_map_functor_map, DerivedCategory.Q] using h
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
