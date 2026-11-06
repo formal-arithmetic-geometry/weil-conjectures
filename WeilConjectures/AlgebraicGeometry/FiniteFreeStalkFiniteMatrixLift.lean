@@ -61,7 +61,7 @@ private lemma unit_hom_ext_top {X : Scheme.{u}}
   have hf := Hom.app_smul f (U := U) a (1 : Γ(X, U))
   have hg := Hom.app_smul g (U := U) a (1 : Γ(X, U))
   simpa only [smul_eq_mul, mul_one] using
-    hf.trans ((congrArg ((a : Γ(X, U)) • ·) hU).trans hg.symm)
+    hf.trans (by rw [hU]; exact hg.symm)
 
 private noncomputable def matrixHom {X : Scheme.{u}} {I J : Type u} [Fintype J]
     (A : Matrix J I Γ(X, ⊤)) :
