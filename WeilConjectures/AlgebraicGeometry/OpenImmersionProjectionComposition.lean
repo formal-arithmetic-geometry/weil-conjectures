@@ -295,7 +295,7 @@ private theorem derived_open_companion
   have hu := congr_app (Functor.mapDerivedCategoryCompIso_id_comp S) K
   simp only [NatTrans.comp_app, Functor.whiskerRight_app, NatTrans.id_app] at hu
   have hi : (Functor.mapDerivedCategoryCompIso
-      (𝟭 (Sheaf Y.smallEtaleTopology B)) S).hom.app K =
+      (𝟭 (Sheaf Y.smallEtaleTopology B)) S).inv.app K =
       S.mapDerivedCategory.map
         ((Functor.mapDerivedCategoryIdIso (Sheaf Y.smallEtaleTopology B)).inv.app K) := by
     let e := S.mapDerivedCategory.mapIso
