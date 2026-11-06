@@ -391,11 +391,11 @@ theorem finiteCoefficientTensorPullbackEncoding
   have : NatTrans.IsMonoidal τ.hom := hm
   let α := Functor.leftDerivedFunctorCompNatIso F NX NY G τ
   let d : NX.leftDerivedFunctor ≅ coefficientEncoding A e X (E X) :=
-    NX.leftDerivedFunctorIsoMapDerivedCategory ≪≫ Functor.mapDerivedCategoryCompIso
+    NX.leftDerivedFunctorIsoMapDerivedCategory ≪≫ (Functor.mapDerivedCategoryCompIso).symm
       (Mod.comap (coefficientMap e.inv.hom X))
       ((E X).ordinary.functor ⋙ (E X).fixed.functor)
   let c : NY.leftDerivedFunctor ≅ coefficientEncoding A e Y (E Y) :=
-    NY.leftDerivedFunctorIsoMapDerivedCategory ≪≫ Functor.mapDerivedCategoryCompIso
+    NY.leftDerivedFunctorIsoMapDerivedCategory ≪≫ (Functor.mapDerivedCategoryCompIso).symm
       (Mod.comap (coefficientMap e.inv.hom Y))
       ((E Y).ordinary.functor ⋙ (E Y).fixed.functor)
   let tx := asIso NX.leftDerivedTensorComparison

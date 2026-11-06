@@ -885,9 +885,9 @@ def derivedSquare {f : Morphism Y X} {g : Morphism Y Y'}
     {h : Morphism X X'} {k : Morphism Y' X'}
     (sq : Square f g h k) (A : Type u) [CommRing A] :
     g.pull A ⋙ k.pull A ≅ f.pull A ⋙ h.pull A :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso _ _) ≪≫
     Functor.mapDerivedCategoryNatIso (moduleSquare sq A) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The strict module square is the pointwise extension of the original module square.
 Source: Stacks 0941, 0E48 (blueprint: lem-sp-completion-mate-comparison). -/
@@ -910,9 +910,9 @@ def towerSquare {f : Morphism Y X} {g : Morphism Y Y'}
     {h : Morphism X X'} {k : Morphism Y' X'}
     (sq : Square f g h k) (A : Type u) [CommRing A] :
     g.towerPull A ⋙ k.towerPull A ≅ f.towerPull A ⋙ h.towerPull A :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso _ _) ≪≫
     Functor.mapDerivedCategoryNatIso (towerModuleSquare sq A) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The strict tower exchange, using Mathlib's mate equivalence.
 Source: Stacks 0941, 0E48 (blueprint: lem-sp-completion-mate-comparison). -/
@@ -1086,9 +1086,9 @@ Source: Stacks 0941 (blueprint: lem-sp-completion-mate-comparison). -/
 def Morphism.constantPullIso {V U : Site.{u}} (f : Morphism V U)
     (A : Type u) [CommRing A] :
     V.delta A ⋙ f.towerPull A ≅ f.pull A ⋙ U.delta A :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso _ _) ≪≫
     Functor.mapDerivedCategoryNatIso (f.constantModulePullIso A) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The canonical direct-image/derived-limit comparison. It is the adjunction
 conjugate of the identity-component constant/inverse-image comparison.
@@ -1761,9 +1761,9 @@ Source: Stacks 0941 (blueprint: lem-sp-completion-mate-comparison). -/
 def Morphism.evaluatePullIso {V U : Site.{u}} (f : Morphism V U)
     (A : Type u) [CommRing A] (n : ℕ) :
     f.towerPull A ⋙ U.evaluate A n ≅ V.evaluate A n ⋙ f.pull A :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso _ _) ≪≫
     Functor.mapDerivedCategoryNatIso (f.evaluateModulePullIso A n) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The complex-level universal derived-direct-image unit, from the existing K-injective
 right-derived functor, with no new choice.
@@ -2290,9 +2290,9 @@ def Morphism.finiteRestrictionPullIso {V U : Site.{u}} (f : Morphism V U)
   letI := (siteRestrictScalars_exact (ConstantCompletion.quotient V.topology A I n)).2
   letI := (siteRestrictScalars_exact (ConstantCompletion.quotient U.topology A I n)).1
   letI := (siteRestrictScalars_exact (ConstantCompletion.quotient U.topology A I n)).2
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso _ _) ≪≫
     Functor.mapDerivedCategoryNatIso (f.finiteModuleRestrictionPullIso A I n) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The canonical finite-coefficient realization of the evaluated source B.
 It uses evaluation of direct image, quotient evaluation, and the actual finite

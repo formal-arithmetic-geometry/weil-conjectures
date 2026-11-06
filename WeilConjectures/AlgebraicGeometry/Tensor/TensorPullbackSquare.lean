@@ -107,12 +107,12 @@ variable {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]
 private noncomputable abbrev tripleComparison :
     (L ⋙ M ⋙ N).mapDerivedCategory ≅
       L.mapDerivedCategory ⋙ M.mapDerivedCategory ⋙ N.mapDerivedCategory :=
-  Functor.mapDerivedCategoryCompIso (L ⋙ M) N ≪≫
+  (Functor.mapDerivedCategoryCompIso (L ⋙ M) N).symm ≪≫
     isoWhiskerRight (Functor.mapDerivedCategoryCompIso L M) N.mapDerivedCategory
 
 private lemma tripleComparison_hom :
     (tripleComparison L M N).hom =
-      (Functor.mapDerivedCategoryCompIso L (M ⋙ N)).hom ≫
+      (Functor.mapDerivedCategoryCompIso L (M ⋙ N)).inv ≫
         Functor.whiskerLeft L.mapDerivedCategory (Functor.mapDerivedCategoryCompIso M N).hom :=
   (Functor.mapDerivedCategoryCompIso_assoc L M N).symm
 

@@ -179,7 +179,7 @@ Source: strict normalization, paragraph 2; Stacks 07A7
 def StrictTowerRingedSquare.exchangeTowerSquare (r : StrictTowerRingedSquare sq) :
     exchangeTowerPull g r.RY r.RY' r.cg ⋙ exchangeTowerPull f' r.RY' r.RX' r.cf' ≅
       exchangeTowerPull f r.RY r.RX r.cf ⋙ exchangeTowerPull g' r.RX r.RX' r.cg' :=
-  (Functor.mapDerivedCategoryCompIso
+  ((Functor.mapDerivedCategoryCompIso).symm
     (exchangeTowerModulePull g r.RY r.RY' r.cg)
     (exchangeTowerModulePull f' r.RY' r.RX' r.cf')).symm ≪≫
   Functor.mapDerivedCategoryNatIso
@@ -188,7 +188,7 @@ def StrictTowerRingedSquare.exchangeTowerSquare (r : StrictTowerRingedSquare sq)
     (G := exchangeTowerModulePull f r.RY r.RX r.cf ⋙
       exchangeTowerModulePull g' r.RX r.RX' r.cg')
     ((Functor.whiskeringRight ℕᵒᵖ _ _).mapIso r.exchangeModuleSquare) ≪≫
-  Functor.mapDerivedCategoryCompIso
+  (Functor.mapDerivedCategoryCompIso).symm
     (exchangeTowerModulePull f r.RY r.RX r.cf)
     (exchangeTowerModulePull g' r.RX r.RX' r.cg')
 
