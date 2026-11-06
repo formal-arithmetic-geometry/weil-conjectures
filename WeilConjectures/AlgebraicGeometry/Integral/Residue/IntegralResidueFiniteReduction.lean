@@ -259,6 +259,7 @@ private local instance integralResidueFiniteCategory (T : Scheme.{u})
     [HasDerivedCategory.{u + 2} (SheafOfModules.{u + 1} R)] :
     Category.{u + 2} (DerivedCategory (SheafOfModules.{u + 1} R)) := inferInstance
 
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 /-- Reduction commutes with the normalized integral coefficient comparison and inverse image.
 There is no completeness, perfectness or covering hypothesis.
 Source: Bhatt--Scholze, Definition 6.5.1 and Lemma 6.5.8(1)

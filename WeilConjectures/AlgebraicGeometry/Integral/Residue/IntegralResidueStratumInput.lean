@@ -93,6 +93,7 @@ def integralResidueStratumPull
   adicTowerPullback g (pbcAdicCompletion T (pbcIntegralDatum l E)) ⋙
     pbcDerivedRestrict (integralResidueStratumCoefficient T l E S g d c).inv
 
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 /-- Normalized coefficient transport supplies the two inputs of residue perfect lifting.
 It asserts neither the existence of integral perfect models nor any covering refinement.
 Source: Bhatt--Scholze, Lemmas 6.5.8(1),(2), 6.6.8 and Proposition 6.6.11.
