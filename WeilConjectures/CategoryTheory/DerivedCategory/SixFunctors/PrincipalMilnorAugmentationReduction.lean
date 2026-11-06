@@ -91,7 +91,7 @@ private theorem isIso_map_of_milnor
           change _ = TM.map (𝟙 PK.pt - towerShift (F := F) hPK)
           rw [Functor.map_sub, CategoryTheory.Functor.map_id, htK]
           rfl)
-        (by simp; rfl))
+        (by simp))
   have hTYM : Triangle.mk (TM.map cY) (𝟙 _ - towerShift (F := G ⋙ TM) hPGM)
       (TM.map δY ≫ (TM.commShiftIso (1 : ℤ)).hom.app Y) ∈ distTriang _ :=
     isomorphic_distinguished _ (TM.map_distinguished _ hTY) _
@@ -101,7 +101,7 @@ private theorem isIso_map_of_milnor
           change _ = TM.map (𝟙 PG.pt - towerShift (F := G) hPG)
           rw [Functor.map_sub, CategoryTheory.Functor.map_id, htG]
           rfl)
-        (by simp; rfl))
+        (by simp))
   let aM := Functor.whiskerRight a TM
   have hm : productTowerMap (PF := PKM) hPGM aM = TM.map m :=
     Fan.IsLimit.hom_ext hPGM _ _ fun n ↦ by
