@@ -86,10 +86,12 @@ private theorem exact_path (e : F ⋙ G ≅ F' ⋙ G')
         (Functor.mapDerivedCategoryCompIso (F' ⋙ G') K₂).symm.inv := by
     rw [Iso.inv_comp_eq, ← Category.assoc, Iso.eq_comp_inv]
     exact hw
+  simp only [Iso.symm_inv] at hw'
   simp only [Category.assoc] at hp ⊢
   rw [reassoc_of% hw', reassoc_of% hp]
   simp only [Functor.isoWhiskerRight_hom, Functor.isoWhiskerRight_inv,
-    Iso.trans_hom, Iso.symm_hom, Functor.whiskerRight_comp, Category.assoc,
+    Functor.isoWhiskerLeft_symm,
+    Iso.trans_hom, Iso.symm_hom, Iso.symm_inv, Functor.whiskerRight_comp, Category.assoc,
     Iso.inv_hom_id, Iso.hom_inv_id, Category.comp_id]
 
 private theorem exact_path_with_comparisons (e : F ⋙ G ≅ F' ⋙ G')
