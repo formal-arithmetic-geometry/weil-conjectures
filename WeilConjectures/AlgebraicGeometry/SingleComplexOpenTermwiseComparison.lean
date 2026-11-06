@@ -185,9 +185,14 @@ theorem exists_singleComplexOpen_termwise_comparison
           F₀.map (H₀.map
             ((schemeOpenRestriction X' (f' ⁻¹ᵁ V')).mapDerivedCategory.map ε)) =
         F₀.map (H₀.map ε₀) ≫ F₀.map (H₀.map β) := by
-    erw [termwise_counit_transport (Scheme.Modules.tensorPullback g')
-      (derivedPullback g') (counit g') P,
-      termwise_counit_transport_assoc (Scheme.Modules.tensorPullback j)
+    erw [termwise_counit_transport
+      (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))
+      (D := SheafOfModules.{u} (moduleRings X'.toRingedSpace))
+      (Scheme.Modules.tensorPullback g') (derivedPullback g') (counit g') P,
+      termwise_counit_transport_assoc
+        (C := SheafOfModules.{u} (moduleRings (f ⁻¹ᵁ V).toScheme.toRingedSpace))
+        (D := SheafOfModules.{u} (moduleRings (f' ⁻¹ᵁ V').toScheme.toRingedSpace))
+        (Scheme.Modules.tensorPullback j)
         (derivedPullback j) (counit j) Q] at hcompat
     simpa only [Functor.map_comp, Category.assoc] using
       congrArg (fun t => F₀.map (H₀.map t)) hcompat
