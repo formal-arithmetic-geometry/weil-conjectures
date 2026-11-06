@@ -6,7 +6,6 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.SemilinearSystemModels
 public import WeilConjectures.CategoryTheory.RingedToposMorphism
-public import WeilConjectures.Algebra.Homology.TotalTensorSigns.TotalTensorHomotopyConeSigns
 import Mathlib.Order.Category.Preord
 import WeilConjectures.Algebra.Homology.KFlatResolution
 import WeilConjectures.Algebra.Homology.SheafRingCoefficientOrdinaryAdjunction
@@ -89,7 +88,17 @@ instance (priority := 1100) ringedToposAbelianForgetCompose
 attribute [-instance] ringedToposAbelianForgetCompose
 scoped[CategoryTheory] attribute [instance 1100] ringedToposAbelianForgetCompose
 
-scoped[CategoryTheory] attribute [instance 1100] SheafOfModules.TotalTensorSigns.coefficientCompose
+/-- Forgetting commutativity preserves sheaves in the selected coefficient universe.
+Source: Stacks 03CZ (auxiliary; not a blueprint node). -/
+instance (priority := 1100) ringedToposCommRingForgetCompose
+    {C : Type c} [Category.{v} C] [EssentiallySmall.{r} C]
+    (J : GrothendieckTopology C) :
+    J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r}) :=
+  (equivSmallModel.{r} C).hasSheafCompose J
+    ((equivSmallModel.{r} C).inverse.inducedTopology J) (forget₂ CommRingCat.{r} RingCat.{r})
+
+attribute [-instance] ringedToposCommRingForgetCompose
+scoped[CategoryTheory] attribute [instance 1100] ringedToposCommRingForgetCompose
 
 /-- A geometric morphism with a structural ring map and the induced direct image on modules.
 
@@ -191,7 +200,7 @@ variable {C : Type c} [Category.{v} C] [EssentiallySmall.{r} C]
   (B : ℕ → Sheaf J CommRingCat.{r}) (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)
 
 attribute [local instance 30000] CategoryTheory.ringedToposRingForgetCompose
-  CategoryTheory.ringedToposAbelianForgetCompose SheafOfModules.TotalTensorSigns.coefficientCompose
+  CategoryTheory.ringedToposAbelianForgetCompose CategoryTheory.ringedToposCommRingForgetCompose
 
 private instance seqSetHasLimit (F : ℕᵒᵖ ⥤ Sheaf J (Type r)) : HasLimit F :=
   inferInstance

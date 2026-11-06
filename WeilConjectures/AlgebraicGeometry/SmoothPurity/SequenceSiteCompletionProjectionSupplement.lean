@@ -165,8 +165,8 @@ scoped[CategoryTheory] attribute [instance 1100] ringedToposRingForgetCompose
 attribute [-instance] ringedToposAbelianForgetCompose
 scoped[CategoryTheory] attribute [instance 1100] ringedToposAbelianForgetCompose
 
-attribute [-instance] SheafOfModules.TotalTensorSigns.coefficientCompose
-scoped[CategoryTheory] attribute [instance 1100] SheafOfModules.TotalTensorSigns.coefficientCompose
+attribute [-instance] ringedToposCommRingForgetCompose
+scoped[CategoryTheory] attribute [instance 1100] ringedToposCommRingForgetCompose
 
 attribute [instance] RingedToposMorphismOfUniverses.additive
 
@@ -251,7 +251,7 @@ structure SequenceSetProjection (b : Cone (rings.{c, v, r} J B τ)) where
 
 
 attribute [local instance 30000] CategoryTheory.ringedToposRingForgetCompose
-  CategoryTheory.ringedToposAbelianForgetCompose SheafOfModules.TotalTensorSigns.coefficientCompose
+  CategoryTheory.ringedToposAbelianForgetCompose CategoryTheory.ringedToposCommRingForgetCompose
 
 private instance seqSetHasLimit (F : ℕᵒᵖ ⥤ Sheaf J (Type r)) : HasLimit F :=
   inferInstance
