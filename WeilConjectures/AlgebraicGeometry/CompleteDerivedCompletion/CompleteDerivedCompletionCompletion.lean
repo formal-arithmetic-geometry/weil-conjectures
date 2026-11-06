@@ -63,6 +63,9 @@ attribute [local instance] AdicCompletion.ringMonoidalObject AdicCompletion.ring
 
 namespace CompleteDerivedCompletion
 
+attribute [local instance] AdicCompletion.modulesNatProducts AdicCompletion.complexNatProducts
+  AdicCompletion.complexNatLimit
+
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]

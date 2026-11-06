@@ -95,7 +95,7 @@ Source: Tag 09T5 (blueprint: lem-sfb-closed-test-derived-exchange-model). -/
 def pullComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     pull Λ (f ≫ g) ≅ pull Λ g ⋙ pull Λ f :=
   Functor.mapDerivedCategoryNatIso (CondensedRing.upperStarComp Λ f g) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The canonical pullback comparison of a commutative square.
 Source: Tag 09BL, specified mate (blueprint: lem-sfb-closed-test-derived-exchange-model). -/

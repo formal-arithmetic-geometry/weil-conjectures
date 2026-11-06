@@ -182,7 +182,7 @@ variable (k : Type t) [Field k] (l : ℕ) [Fact l.Prime]
   (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L)
 
-private local instance pointFiniteFreeUnitHSMul
+local instance pointFiniteFreeUnitHSMul
     (F : integralTowerModules l E (Spec (.of k))) (U : (Spec (.of k)).ProEtᵒᵖ) :
     HSMul ((SheafOfModules.unit
       (completedIntegralCoefficientSheafUnrestricted l E (Spec (.of k)))).val.obj U)
