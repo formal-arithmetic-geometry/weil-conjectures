@@ -214,7 +214,7 @@ private theorem commonStagePullbackCompComponent_stage_transport
   set_option backward.isDefEq.respectTransparency true in
   set_option backward.isDefEq.respectTransparency.types true in
     simp only [hX, hY, hZ]
-    exact key
+    with_reducible exact key
 
 
 /-- The selected common-stage component is represented at every larger coefficient stage.
