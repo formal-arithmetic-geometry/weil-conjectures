@@ -332,7 +332,8 @@ private theorem counit_naturality {K K' : CochainComplex (integralTowerModules l
         completedScalarCounit l E F ι X K' =
       completedScalarCounit l E F ι X K ≫
         DerivedCategory.Q.map ((completedOrdinaryScalarComplex l E F ι X).map g) := by
-  simpa only [completedScalarCounit, completedOrdinaryScalarComplex] using
+  dsimp only [completedScalarCounit, completedOrdinaryScalarComplex]
+  with_unfolding_all exact
     homotopyCounit_naturality (completedOrdinaryScalarExtension l E F ι X)
       (completedDerivedScalarExtension l E F ι X)
       ((completedScalarChangeData l E F ι X).choose_spec.choose_spec.choose_spec
