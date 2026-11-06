@@ -40,7 +40,7 @@ def theta :
       WeilComplex.forget :=
   Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft (ObjectProperty.ι (WeilComplex.objectProperty k₀ l X))
-      ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso _ _ ≪≫
         Functor.mapDerivedCategoryNatIso
           (IsoAlgebra.strNatIso (WeilSheaf.frobeniusPullback k₀ l X)))
 
