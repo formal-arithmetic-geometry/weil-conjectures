@@ -118,7 +118,7 @@ private theorem derivedTriangle_fac (e : F₀ ≅ F₁ ⋙ F₂) (K : CochainCom
         F₂.mapDerivedCategoryFactors.hom.app ((F₁.mapHomologicalComplex (.up ℤ)).obj K) =
       F₀.mapDerivedCategoryFactors.hom.app K ≫
         DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex e.hom (.up ℤ)).app K) := by
-  dsimp only [Iso.trans_hom, NatTrans.comp_app]
+  dsimp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app]
   rw [Category.assoc, Functor.mapDerivedCategoryCompIso_hom_app_factors,
     Functor.mapDerivedCategoryNatIso_fac]
 
