@@ -299,20 +299,24 @@
 - Next: ucheck-bump on the five prerequisites and SupportedKoszulRelativeDetector, then downstream.
 - Fix notes: /home/ubuntu/u9/bz/FIXES-BZ932.md. No local Lean/Lake or proof shortcuts.
 
-# BZ948 downstream check
+# BZ948 complete
 
 - Branch: u9/BZ948; baseline c59b55069.
-- All five edited modules passed ucheck-bump together: rc=0, failed=0, 4517 jobs.
-- Validated source commit: 7d627e792ab821868b3c90b06434a254e740963e.
-- Green: AffineTildeTensorSourceComparisonHelpers, CorePreBase, CorePre, CoreFinal,
-  and AffineTildeTensorSourceComparison (all under WeilConjectures.Algebra.Homology).
-- Full log: /home/ubuntu/u9/bz/BUILD-BZ948-five-green-full.log.
+- Assigned helper and four downstream modules passed ucheck-bump together:
+  rc=0, failed=0, 4517 jobs on poolb:43.166.81.121.
+- Validated source commit: 7d627e792ab821868b3c90b06434a254e740963e; later commits change documentation only.
+- Green: AffineTildeTensorSourceComparisonHelpers, AffineTildeTensorSourceComparisonCorePreBase,
+  AffineTildeTensorSourceComparisonCorePre, AffineTildeTensorSourceComparisonCoreFinal,
+  and AffineTildeTensorSourceComparison, all under WeilConjectures.Algebra.Homology.
+- Full green log: /home/ubuntu/u9/bz/BUILD-BZ948-five-green-full.log.
 - The user instructed continuation after the reflexive-cast statement proposal.
-  The same definitionally equal endpoint repair was carried through direct callers.
+  The same definitionally equal endpoint repair was carried through the direct callers.
 - Other repairs: named tilde additive proofs, quasicoherence instance synthesis,
   Localization imports, cast normalization, and local scheme derived-category instances.
-- Nineteen recorded rewrite rules reproduce the edited source modulo formatting.
-- Next: test the four direct importers of AffineTildeTensorSourceComparison.
-  Their shared dependency AffineBaseChangeTildeRepresentative belongs to BZ949.
-- Fix notes: /home/ubuntu/u9/bz/FIXES-BZ948.md.
-- No local Lean/Lake, forbidden proof shortcuts, deletions, or heartbeat increases.
+- Nineteen replay rules reproduce all five source files modulo formatting/tactic separators.
+- The next four importers were attempted and are blocked by BZ949's external
+  AffineBaseChangeTildeRepresentative.lean:121:6 application type mismatch.
+  Those four importer sources and the external dependency were left untouched.
+- Full downstream log: /home/ubuntu/u9/bz/BUILD-BZ948-final-downstream-full.log.
+- Handoff: /home/ubuntu/u9/bz/FIXES-BZ948.md and /home/ubuntu/u9/state/BZ948.DONE.
+- No local Lean/Lake, proof placeholders, trust bypasses, deletions, or heartbeat changes.
