@@ -321,3 +321,10 @@
 - Statement audit: `/home/ubuntu/u9/bz/BZ943-final-statement-audit.json`.
 - No local Lean/Lake execution, proof placeholders, new axioms, trust bypasses,
   profiler probes, or heartbeat increases.
+
+- Downstream layers 1–3 were attempted together and all are blocked by the unowned
+  `SingleComplexOpenPullbackCounitHomotopyFactorization` duplicate-declaration error
+  at line 53. Complete import paths are recorded in
+  `/home/ubuntu/u9/bz/BZ943-downstream-blocker-paths.json`.
+- Final assigned-module build is checking `#print axioms` for the filtration theorem;
+  the diagnostic command will be removed before final completion.
