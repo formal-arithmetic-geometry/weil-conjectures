@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.RelativeMVMaps
 public import WeilConjectures.AlgebraicGeometry.Picard.Termwise.PicardTermwiseSingleMapComposition
+import all WeilConjectures.AlgebraicGeometry.Picard.Termwise.PicardTermwiseSingleMapComposition
 public import Mathlib.Algebra.Homology.Localization
 import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionAssociativity
@@ -141,10 +142,7 @@ private theorem tensor_single_normalize {X Y : Scheme.{u}} (f : X ⟶ Y)
       DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (.up ℤ)).map
         ((HomologicalComplex.singleMapHomologicalComplex
           (Scheme.Modules.tensorPullback f) (.up ℤ) 0).hom.app M)) := by
-  exact cancel_single_maps (DerivedCategory.singleFunctor
-    (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0) _ _
-    (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f)).leftAdjointUniq
-      (Scheme.Modules.pullbackPushforwardAdjunction f)).app M)
+  exact Scheme.single_map_normalize f M
 
 private theorem tensor_single_counit {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M : Y.Modules) :
