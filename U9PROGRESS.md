@@ -273,3 +273,16 @@
 - Next: ucheck-bump on the assigned module and both direct importers, then downstream.
 - Fix patterns and whole-tree inventories: /home/ubuntu/u9/bz/FIXES-BZ885.md.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+# BZ871 in progress
+
+- Branch: u9/BZ871; original baseline e167a50a4.
+- Resumed after rereading the unit brief and progress notes. The user instructed
+  continuation after the explicit canonical endpoint-transport proposal; that patch is applied.
+- Merged integrated bump commit 40e255942. Its restored upstream counit comparison
+  lemmas replace this unit's earlier duplicate private reconstruction.
+- The owned proof now normalizes the explicit quotient transports and compares
+  homotopy localization factors with their cochain counterparts.
+- Next: remote ucheck-bump validation, then the direct importer chain.
+- Previous blockers and diagnostic history: /home/ubuntu/u9/bz/FIXES-BZ871.md.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
