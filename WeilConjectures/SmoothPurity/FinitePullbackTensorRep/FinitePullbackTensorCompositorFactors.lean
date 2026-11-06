@@ -168,7 +168,8 @@ theorem compositor_fac {X Y Z : Scheme.{u}}
       (mapDerivedCategoryCompIso OF OH).symm).hom
     (by
       dsimp only [rF, rH, rK, OF, OH, OK, IF, IH, IK, moduleComp, realization] at hd ⊢
-      simpa only [Iso.trans_hom, Category.assoc, sfIntrinsicDerivedPullbackComp] using hd)
+      simpa only [Iso.trans_hom, Iso.symm_hom, Category.assoc,
+        sfIntrinsicDerivedPullbackComp] using hd)
     (DerivedCategory.Q.obj P)
     (DerivedCategory.Q.obj ((pull l E f n).obj P))
     (DerivedCategory.Q.obj ((pull l E (h ≫ f) n).obj P))
