@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.CategoryTheory.Limits.HasLimits
+import all Mathlib.CategoryTheory.Limits.HasLimits
 public import Mathlib.Algebra.Homology.Localization
 import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.Completed.Pullback.CompletedPullbackReductionData
@@ -253,20 +255,11 @@ private theorem towerAugmentation_computed
         DerivedCategory.Q.map
           ((NatTrans.mapHomologicalComplex (completedReductionModuleUnit d T) (.up ℤ)).app P) := by
   let := completedReductionModuleTowerFunctor_additive T d
-  have h := (completedReductionTowerUnit_exists d T).exists.choose_spec P hP
-  have hi : (DerivedCategory.quotientCompQhIso (pbcModules T (pbcAdicCompletion T d))).inv.app
-      P = 𝟙 _ := rfl
-  have hh : (DerivedCategory.quotientCompQhIso
-      (reductionTowerCategory T (reductionModuleRing T (completedReductionCoefficient T d)))).hom.app
-      (((completedReductionModuleTowerFunctor T d).mapHomologicalComplex (.up ℤ)).obj P) =
-      𝟙 _ := rfl
-  have hid : ((completedReductionModuleTowerFunctor T d).mapHomotopyCategoryFactors (.up ℤ)).hom.app
-      P = 𝟙 _ := rfl
-  erw [hi, hh, hid] at h
-  erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id] at h
-  simp only [Category.id_comp, Category.comp_id] at h
-  exact comp_counitOnComplex_eq (completedReductionModuleTowerFunctor T d)
-    (completedReductionTower T d) (coherenceReductionTowerCounit T d) P _ _ h
+  simpa only [HasCompletedReductionTowerUnitNormalization, completedReductionTowerUnit,
+    completedReductionTowerComplexCounit, reductionComplexCounit,
+    completedReductionTowerCounit, coherenceReductionTowerCounit,
+    completedReductionComplexTowerFunctor] using
+    ((completedReductionTowerUnit_exists d T).exists.choose_spec P hP)
 
 private theorem pulledAugmentation_computed
     (P : CochainComplex (pbcModules Y (pbcAdicCompletion Y d)) ℤ)
