@@ -180,6 +180,7 @@ private theorem ringPresentation (A : Type u) [CommRing A] :
 
 end ConstantPresentation
 
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 private theorem comparisonLeftAdjoint (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A] :
     (constructibleComparisonPullback X A).IsLeftAdjoint :=
