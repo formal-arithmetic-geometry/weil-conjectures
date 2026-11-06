@@ -232,6 +232,9 @@ theorem native_two_injective_hom_model
   have : U.PreservesKInjectiveComplexes := forgetKInjective
   have : HasLimitsOfShape (Discrete ℤ)
       (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) := inferInstance
+  have : HasLimitsOfShape (Discrete ℤ)
+      (Endofunctor.Algebra (WeilSheaf.frobeniusPullback k₀ l X)) :=
+    hasLimitsOfShape_of_hasLimitsOfShape_createsLimitsOfShape (Endofunctor.Algebra.forget _)
   have : PreservesLimitsOfShape (Discrete ℤ) U :=
     inferInstanceAs (PreservesLimitsOfShape (Discrete ℤ)
       ((Endofunctor.Algebra.IsIsoStr (WeilSheaf.frobeniusPullback k₀ l X)).ι ⋙
