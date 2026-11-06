@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.GlobalTensorPullbackMatesIsIso
 public import WeilConjectures.Algebra.Homology.KFlat
 import WeilConjectures.AlgebraicGeometry.LocalizedOpenKFlatTensorRestriction
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
@@ -60,9 +61,7 @@ local instance sptc_localTensorObjZero (X : Scheme.{u}) (U : X.Opens)
           (SheafOfModules.monoidalCategory (X.sheaf.over U))).obj M).PreservesZeroMorphisms :=
   SheafOfModules.preservesZeroMorphisms_curriedTensor_obj (X.sheaf.over U) M
 
-local instance sptc_globalColimits (X : Scheme.{u}) :
-    CategoryTheory.Limits.HasColimitsOfSize.{0, 0}
-      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) := inferInstance
+attribute [local instance] Scheme.Modules.globalPullbackMatesColimits
 
 local instance sptc_localColimits (X : Scheme.{u}) (U : X.Opens) :
     CategoryTheory.Limits.HasColimitsOfSize.{0, 0}
