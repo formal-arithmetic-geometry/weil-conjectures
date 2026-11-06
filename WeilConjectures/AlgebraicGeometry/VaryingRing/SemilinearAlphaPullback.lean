@@ -128,7 +128,7 @@ private theorem cell_pair
   simp only [ExactDerivedPasting.Word.cell, ExactDerivedPasting.Word.comparison,
     ExactDerivedPasting.Word.ordinary, ExactDerivedPasting.Word.derived,
     localizedArrow, Functor.isoWhiskerLeft_refl, Functor.isoWhiskerRight_refl,
-    Iso.trans_refl]
+    Iso.trans_refl, Iso.symm_hom, Iso.symm_inv]
 
 -- Localize the entire ordinary equality as a finite pasting of exact functors.
 private theorem localize_cube
