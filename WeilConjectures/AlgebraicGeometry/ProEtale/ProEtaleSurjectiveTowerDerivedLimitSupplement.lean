@@ -169,7 +169,8 @@ private theorem roos_zero {A : Type*} [Category A] [Preadditive A]
   have hn := limit.w (Functor.ofOpSequence t) (homOfLE (Nat.le_succ n)).op
   simp only [Functor.ofOpSequence_map_homOfLE_succ] at hn
   simp only [towerTransitionEndomorphism, towerProductShift, Preadditive.comp_sub,
-    Preadditive.sub_comp, Category.comp_id, Category.assoc, Pi.lift_comp_π, Pi.lift_comp_π_assoc, zero_comp]
+    Preadditive.sub_comp, Category.comp_id, Category.assoc, Pi.lift_comp_π,
+    Pi.lift_comp_π_assoc, zero_comp]
   exact sub_eq_zero.mpr hn.symm
 
 set_option backward.isDefEq.respectTransparency false in
