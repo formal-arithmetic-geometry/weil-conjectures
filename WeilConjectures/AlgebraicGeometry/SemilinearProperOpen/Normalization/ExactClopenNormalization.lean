@@ -447,11 +447,9 @@ theorem open_comp_localized
         ext i
         rfl
       rw [hv]
-      have hfac := Functor.exactDerivedRestrictionComposition_inv_factors Q P T η L
-      simp only [Functor.comp_obj, η,
-        Functor.exactDerivedRestrictionComposition] at hfac
-      convert hfac using 1
-      rfl) K
+      simpa only [Functor.comp_obj, η, Functor.exactDerivedRestrictionComposition,
+        Category.assoc] using
+        (Functor.exactDerivedRestrictionComposition_inv_factors Q P T η L)) K
   apply Iso.ext
   apply Localization.natTrans_ext DerivedCategory.Q
     (HomologicalComplex.quasiIso A (.up ℤ))
