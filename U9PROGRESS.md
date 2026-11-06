@@ -306,6 +306,7 @@
 - The user instructed continuation after the exact one-cast statement proposal.
 - Applied the reflexive cast around the existing counit, preserving its map and assumptions.
 - Baseline ucheck-bump confirmed this was the assigned module's only error.
-- Next: validate AffineBaseChangeTildeRepresentative, then its six direct importers.
+- AffineBaseChangeTildeRepresentative is green at 2a367a4402b820cd58b13538f43a02f3792baa2e: rc=0, failed=0.
+- Next: build all six direct importers and continue through fixable downstream errors.
 - Fix patterns, exact error, rule, and occurrence counts: /home/ubuntu/u9/bz/FIXES-BZ949.md.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
