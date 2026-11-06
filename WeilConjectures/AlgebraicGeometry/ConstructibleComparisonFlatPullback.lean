@@ -36,6 +36,7 @@ private theorem flat_zero {C : Type w} [SmallCategory C]
     Classical.choice (SheafOfModules.tensorClosed R).1
   exact (ObjectProperty.flat_of_isZero hM).2
 
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The canonical comparison inverse image preserves flat module sheaves.
 Source: Stacks Project, Tag 05VD, lemma-pullback-flat; blueprint finite-Tor comparison,
 paragraph Flatness is preserved (auxiliary; not a blueprint node).
@@ -98,6 +99,7 @@ theorem constructibleComparisonPullback_flat (X : Scheme.{u})
     G.mapIso (HomologicalComplex.singleObjXSelf (.up ℤ) 0 M) ≪≫ e.app M
   exact flat_iso S es ht
 
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- Termwise comparison carries K-flat complexes with flat terms to K-flat complexes.
 Source: Stacks Project, Tag 0G7E
 (auxiliary; not a blueprint node).
