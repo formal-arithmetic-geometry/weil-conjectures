@@ -148,7 +148,7 @@ private theorem bounded_comap_iff {T : Scheme.{u}}
       Mod.comapComp (asIso a).inv a
   let e := (CategoryTheory.Functor.mapDerivedCategoryIdIso _).symm ≪≫
     CategoryTheory.Functor.mapDerivedCategoryNatIso i ≪≫
-      CategoryTheory.Functor.mapDerivedCategoryCompIso _ _
+      (CategoryTheory.Functor.mapDerivedCategoryCompIso _ _).symm
   have hK := bounded_comap (asIso a).inv _ h
   exact ⟨DerivedCategory.TStructure.t.bounded.prop_of_iso (e.app K).symm hK.1,
     fun n ↦ constructible_of_iso

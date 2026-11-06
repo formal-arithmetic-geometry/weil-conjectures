@@ -51,7 +51,7 @@ Tags 0149, 0152 and 070I.
 def cyclicDerivedStructure :
     (forget F).mapDerivedCategory ⋙ F.mapDerivedCategory ≅
       (forget F).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso (forget F) F).symm ≪≫
+  Functor.mapDerivedCategoryCompIso (forget F) F ≪≫
     Functor.mapDerivedCategoryNatIso
       (NatIso.ofComponents (fun K ↦ K.str) (fun f ↦ f.hom.h))
 
@@ -298,9 +298,9 @@ Tags 0149, 0152 and 070I.
 def cyclicDerivedExactForgetComparison [PreservesFiniteLimits L] [PreservesFiniteColimits L] :
     (mapOfNatIso e).mapDerivedCategory ⋙ (forget G).mapDerivedCategory ≅
       (forget F).mapDerivedCategory ⋙ L.mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso (mapOfNatIso e) (forget G)).symm ≪≫
+  Functor.mapDerivedCategoryCompIso (mapOfNatIso e) (forget G) ≪≫
     Functor.mapDerivedCategoryNatIso (mapOfNatIsoCompForgetIso e) ≪≫
-      Functor.mapDerivedCategoryCompIso (forget F) L
+      (Functor.mapDerivedCategoryCompIso (forget F) L).symm
 
 /-- The unique comparison supplied by lem-sf-fixed-pair-derived-forget-comparison. Its derived-unit
 equation fixes the comparison to the identity on the common K-injective computation H(UI). This

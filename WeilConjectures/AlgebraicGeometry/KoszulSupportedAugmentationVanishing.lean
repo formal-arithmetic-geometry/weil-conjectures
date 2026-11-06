@@ -27,7 +27,6 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 400000 in
 -- Transporting the comparison across three chosen localization categories needs extra elaboration.
 set_option backward.isDefEq.respectTransparency false in
 /-- The unshifted Hom diagram of Koszul tails into a supported quasi-coherent
@@ -101,7 +100,12 @@ private theorem supported_hom_colimit
     (SheafOfModules.isQuasicoherent
       (moduleRings (Spec (.of A)).toRingedSpace)).prop_of_iso
       ((DerivedCategory.homologyFunctorFactors S n).app K).symm (hK n)⟩
-  let GU := (Localization.uniq QwU QsU (HomologicalComplex.quasiIso T (.up ℤ))).functor
+  let eU := Localization.uniq QwU QsU (HomologicalComplex.quasiIso T (.up ℤ))
+  let GU := eU.functor
+  let : PreservesLimit (Functor.empty _) GU :=
+    eU.symm.toAdjunction.rightAdjoint_preservesLimits.preservesLimitsOfShape.preservesLimit
+  let : GU.PreservesZeroMorphisms :=
+    Functor.preservesZeroMorphisms_of_preserves_terminal_object
   have hzCs : IsZero (QsU.obj C) := (GU.map_isZero hzCw).of_iso
     ((Localization.compUniqFunctor QwU QsU
       (HomologicalComplex.quasiIso T (.up ℤ))).app C).symm

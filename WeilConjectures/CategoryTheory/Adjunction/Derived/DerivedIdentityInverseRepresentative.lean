@@ -39,12 +39,26 @@ theorem mapDerivedCategoryNatIso_trans_idIso_inv_app_Q_obj {D : Type*} [Category
   apply (Iso.eq_comp_inv ((Functor.mapDerivedCategoryFactors (C₁ := D) (C₂ := D) R).app P)).2
   have hh := Adjunction.mapDerivedCategoryNatIso_trans_idIso_inv_app_Qh_obj (C := D) (F := R) r
     ((HomotopyCategory.quotient _ (.up ℤ)).obj P)
-  simp only [Functor.mapDerivedCategoryFactorsh_hom_app,
-    NatTrans.mapHomotopyCategory_app, DerivedCategory.quotientCompQhIso,
-    HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift_hom,
-    Quotient.lift.isLift_inv, Functor.mapHomotopyCategoryFactors] at hh
-  erw [R.mapDerivedCategory.map_id, DerivedCategory.Qh.map_id,
-    Category.id_comp, Category.comp_id, Category.comp_id] at hh
-  exact hh
+  rw [Functor.mapDerivedCategoryFactorsh_hom_app] at hh
+  erw [DerivedCategory.Qh.map_id, Category.comp_id] at hh
+  have hh' : (Functor.mapDerivedCategoryNatIso (C := D) (D := D) (F := R) (G := 𝟭 D) r ≪≫
+      Functor.mapDerivedCategoryIdIso D).inv.app
+        (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫
+      R.mapDerivedCategory.map ((DerivedCategory.quotientCompQhIso D).hom.app P) ≫
+        (Functor.mapDerivedCategoryFactors (C₁ := D) (C₂ := D) R).hom.app P =
+      DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (.up ℤ)).map
+        ((NatTrans.mapHomologicalComplex r.inv (.up ℤ)).app P)) ≫
+        (DerivedCategory.quotientCompQhIso D).hom.app _ := by
+    have h := hh =≫ (DerivedCategory.quotientCompQhIso D).hom.app
+      ((R.mapHomologicalComplex (.up ℤ)).obj P)
+    simp only [Category.assoc, Iso.inv_hom_id_app] at h
+    erw [Category.comp_id] at h
+    exact h
+  have hn := (Functor.mapDerivedCategoryNatIso (C := D) (D := D) (F := R) (G := 𝟭 D) r ≪≫
+      Functor.mapDerivedCategoryIdIso D).inv.naturality
+    ((DerivedCategory.quotientCompQhIso D).hom.app P)
+  rw [← cancel_epi ((DerivedCategory.quotientCompQhIso D).hom.app P)]
+  erw [reassoc_of% hn, hh', DerivedCategory.quotientCompQhIso_hom_naturality]
+  rfl
 
 end CategoryTheory.Adjunction

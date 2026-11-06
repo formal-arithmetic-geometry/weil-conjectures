@@ -40,4 +40,5 @@ attribute [local irreducible] DerivedCategory.monoidalClosed CategoryTheory.Mod.
   ModuleRingedComparison.totalComparison ModuleRingedComparison.ordinaryTensorComparison
   Localization.Monoidal.tensorBifunctor
 
+
 end AlgebraicGeometry.ProEtale.CondensedRing
