@@ -136,7 +136,7 @@ theorem isIso_derivedPlus_unit_app_openImmersionLowerShriek {c d : Compactificat
     refine hι _ (IsZero.of_iso ?_
       ((Functor.mapDerivedCategoryNatIso (Etale.upperStarComp _
         (pullback.fst r.hom d.i.closedComplement) r.hom) ≪≫
-        Functor.mapDerivedCategoryCompIso _ _).app _).symm)
+        (Functor.mapDerivedCategoryCompIso _ _).symm).app _).symm)
     refine isZero_mapDerivedCategoryUpperStar_obj_openImmersionLowerShriek_of_disjoint_range _
       d.i _ (hdisj.mono_left ?_) _
     rw [pullback.condition, Scheme.Hom.comp_base, TopCat.coe_comp]
