@@ -10,6 +10,8 @@ public import WeilConjectures.AlgebraicGeometry.Etale.Sum.EtaleSumRightAdjointCo
 public import WeilConjectures.CategoryTheory.Monoidal.EtaleDerivedTensorSymmetrySupplement
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 public import Mathlib.CategoryTheory.Adjunction.Mates
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.Etale.EtaleNormalizationComparisonCoherence
 import WeilConjectures.AlgebraicGeometry.Etale.Compact.EtaleCompactSupportGraphCoherence
 import WeilConjectures.AlgebraicGeometry.Etale.Compact.EtaleCompactSupportGraphTensor
