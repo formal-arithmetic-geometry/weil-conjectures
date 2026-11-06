@@ -138,7 +138,7 @@ instance commShift_leftDerivedUpperStarComp_hom {T S R : Scheme.{u}}
   have e : (leftDerivedUpperStarComp A g₁ g₂ g₁₂ hg₁₂).hom =
       (g₁₂)^*[A].leftDerivedFunctorIsoMapDerivedCategory.hom ≫
         (Functor.mapDerivedCategoryNatIso (upperStarComp A g₁ g₂ g₁₂ hg₁₂)).hom ≫
-        ((g₂)^*[A](.mapDerivedCategoryCompIso (g₁)).symm^*[A]).inv ≫
+        ((g₂)^*[A].mapDerivedCategoryCompIso (g₁)^*[A]).inv ≫
         Functor.whiskerRight (g₂)^*[A].leftDerivedFunctorIsoMapDerivedCategory.inv D((g₁)^*[A]) ≫
         Functor.whiskerLeft L((g₂)^*[A]) (g₁)^*[A].leftDerivedFunctorIsoMapDerivedCategory.inv := by
     simp [leftDerivedUpperStarComp, Functor.leftDerivedFunctorNatIso,
