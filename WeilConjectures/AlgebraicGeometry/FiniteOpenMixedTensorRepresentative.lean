@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.MixedRepForward.MixedRepresentationGeneral
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.MixedRepForward.ForwardTransportGeneral
 import WeilConjectures.CategoryTheory.FiniteOpenMixedTensorRepresentativeCounit
 
