@@ -88,8 +88,8 @@ lemma isZero_leftDerivedUpperStar_openComplement_obj_openImmersionLowerShriek (e
       ((e)_!open[A].mapDerivedCategoryCompIso (jV)^*[A]).app T ≪≫
       (Functor.mapDerivedCategoryNatIso
         (asIso (openImmersionLowerShriekBaseChangeMap A hsq.toCommSq)).symm).app T ≪≫
-      ((((pullback.fst e jV)^*[A]).mapDerivedCategoryCompIso).symm
-        (pullback.snd e jV)_!open[A]).app T)
+      (((pullback.fst e jV)^*[A]).mapDerivedCategoryCompIso
+        (pullback.snd e jV)_!open[A]).symm.app T)
 
 /-- The restriction of supports along an open immersion `e : U ⟶ X`,
 `ψ : Le^* (Ri_! Ri^! L) ⟶ Ri'_! Ri'^! L'` (`AlgebraicGeometry.Etale.supportedRestriction`), is an
