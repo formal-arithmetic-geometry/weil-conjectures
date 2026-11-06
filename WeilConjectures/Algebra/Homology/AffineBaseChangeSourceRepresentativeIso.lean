@@ -63,8 +63,8 @@ private theorem exists_stalkCohomologyComparison (Y : Scheme.{u}) (p : Y) (i : �
     Category.id_comp]
   rfl
 
--- The original 200000 budget times out at the final equivalence construction in 13s.
 set_option maxHeartbeats 400000 in
+-- The original 200000 budget times out at the final equivalence construction in 13s.
 /-- The source-only comparison is unchanged under K-flat representative change.
 Source: Stacks Project, Tags 06Y6, 08IB and perfect.tex, equation-bc before Tag 0DJ8.
 (blueprint: lem-pc-affine-base-change-source-representative-iso).
@@ -137,7 +137,7 @@ theorem exists_affineBaseChangeIntoPullback_representativeIso
     have hd' := congrArg (fun b ↦
       (SingleComplexBaseChange.comparisonStalkHomologyIso X' p T i).inv ≫ b) hd
     simp only [Functor.map_comp, Category.assoc, Iso.inv_hom_id_assoc] at hd'
-    letI : HasDerivedCategory.{w} X'.Modules :=
+    let : HasDerivedCategory.{w} X'.Modules :=
       inferInstanceAs (HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X'.toRingedSpace)))
     have htransport :
         (DerivedCategory.quotientCompQhIso.{w} _).inv.app T ≫
