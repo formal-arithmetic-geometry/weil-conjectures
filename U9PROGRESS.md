@@ -442,23 +442,18 @@
   Next: validate all four direct importers; leaf log BUILD-BZ1068-leaf-full.log.
 
 
-# BZ1063 in progress
+# BZ1063 complete
 
-- Branch: u9/BZ1063; start dfaed262b6fc1850faba3b46955a11d3225a1e86.
-- User continuation authorized the proposed two-statement compositor API translation.
-- Assigned ComparisonCounit is green and sorry-free. Four changed Lean files validated
-  in the repair batch at f3812efd01: rc=0, failed=0, 12626 jobs, ten fresh module builds.
-- Other changed sources: UnboundedDirectImageBoundedBelow (same restriction proof fix),
-  ScalarSixDefinitions (four comparison constructors), StrictTowerProperOpenCalculus
-  (22 audited unused failing declarations and their unused dependents deleted).
-- Ten exact rewrite rules and the prune plan reconstruct all four files from the baseline.
-  No kept declarations deleted; no outside public callers/private imports to the pruned names.
-- Merged origin/bump/v4.35 round 73 at ebf1a42c66, retaining the tested leaf in the sole conflict.
-- Latest build (session 83569) is running from 1f8642605d: four next-layer importers plus
-  ComparisonUnit and SmoothBaseChange. Remote log BZ1063-20261106T122341.log.
-- 17 distinct extra modules have been attempted so far; limit 30. Earlier finite-type
-  direct-image modules failed on unowned prerequisites. Comparison-square blockers are
-  still owned by BZ1064/BZ1065 and remain red in the latest log.
-- Full logs, patterns, occurrence counts, and audit: /home/ubuntu/u9/bz/FIXES-BZ1063.md
-  and BZ1063-contract-audit.txt, BZ1063-strict-tower-prune-plan.json.
+- Assigned ComparisonCounit is green and sorry-free; 14 downstream modules also verified.
+- Final ucheck-bump at ac61c07c5d7930627185049e26decc6e342452e1 completed 13032 jobs: rc=0, failed=0.
+- Ported derived-compositor directions in five files; pruned 22 audited unused failing
+  declarations and their unused dependents from StrictTowerProperOpenCalculus.
+- All six edited modules are covered by the final green dependency closure.
+- Fourteen rewrite rules and the prune plan exactly reconstruct the six source files.
+- Seven downstream targets are deferred after observed unowned prerequisite failures;
+  21 extra modules assessed, below cap 30. Full paths and exact errors are recorded.
+- Upstream was merged twice, preserving tested fixes and other units' progress notes.
+- Fixes, build manifest, green log, and audits: /home/ubuntu/u9/bz/FIXES-BZ1063.md.
+- Completion marker: /home/ubuntu/u9/state/BZ1063.DONE.
 - No local Lean/Lake, proof placeholders, trust bypasses, profiler probes, or limit raises.
+- All ucheck invocations finished. Final commit changes only progress documentation.
