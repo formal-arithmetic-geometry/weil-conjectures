@@ -115,9 +115,9 @@ theorem point_sections_finiteness_finiteTorsion (D : FiniteFieldDatum.{u})
     ((@point_proEtale_sections_exact.{u, u + 1, u + 1} D.k).2 A).2.1
   let F := pointFiniteSections D.k B
   letI : PreservesFiniteLimits F := inferInstanceAs (PreservesFiniteLimits
-    (pointModuleSections D.k A ⋙ ModuleCat.restrictScalars (pointConstantSectionMap D.k B)))
+    (pointModuleSections D.k A ⋙ ModuleCat.restrictScalars.{u + 1} (pointConstantSectionMap D.k B)))
   letI : PreservesFiniteColimits F := inferInstanceAs (PreservesFiniteColimits
-    (pointModuleSections D.k A ⋙ ModuleCat.restrictScalars (pointConstantSectionMap D.k B)))
+    (pointModuleSections D.k A ⋙ ModuleCat.restrictScalars.{u + 1} (pointConstantSectionMap D.k B)))
   let iso (i : ℤ) :
       (DerivedCategory.homologyFunctor _ i).obj
           (DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj C)) ≅
