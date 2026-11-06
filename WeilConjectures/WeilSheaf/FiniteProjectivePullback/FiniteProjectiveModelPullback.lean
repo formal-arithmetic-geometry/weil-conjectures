@@ -294,7 +294,8 @@ private theorem tensorRestriction_tmul
     {X Y : Dᵒᵖ} (i : X ⟶ Y) (s : S.obj.obj X) (m : M.val.obj X) :
     (changeOfRingsPresheafOfUniverses.{b, a, r, r} c M).map i
         (s ⊗ₜ[A.obj.obj X, (c.hom.app X).hom] m) =
-      S.obj.map i s ⊗ₜ[A.obj.obj Y, (c.hom.app Y).hom] M.val.map i m :=
+      S.obj.map i s ⊗ₜ[A.obj.obj Y, (c.hom.app Y).hom]
+        (show M.val.obj Y from M.val.map i m) :=
   changeOfRingsMap_tmulOfUniverses c M i s m
 
 private noncomputable def tensorPresheafFunctor
