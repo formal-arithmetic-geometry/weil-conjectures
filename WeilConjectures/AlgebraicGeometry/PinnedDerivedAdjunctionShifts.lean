@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.PinnedPullbackCounitShifts
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 public import Mathlib.CategoryTheory.Shift.Adjunction
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryAdjunctionShift
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.UnitShift
 
 /-! # Shift compatibility of the selected derived adjunction
 Source: Stacks Project, Tags 08HY and 0D5S. -/

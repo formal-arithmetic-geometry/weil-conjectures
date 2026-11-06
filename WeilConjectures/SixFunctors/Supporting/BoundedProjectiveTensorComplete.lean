@@ -275,6 +275,7 @@ universe c v r
 variable {C : Type c} [Category.{v} C] [EssentiallySmall.{r} C]
   {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{r})
 
+set_option synthInstance.maxHeartbeats 40000 in
 private theorem finiteRetract_flat
     (M : SheafOfModules.{r}
       ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))

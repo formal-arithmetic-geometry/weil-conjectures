@@ -31,6 +31,7 @@ namespace CategoryTheory.ConstantModuleScalar
 
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false
 set_option backward.defeqAttrib.useBackward true
 
 /-- Sections of a finite sum of morphisms of sheaves of modules. -/

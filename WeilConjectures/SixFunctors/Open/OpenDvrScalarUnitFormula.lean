@@ -119,7 +119,7 @@ theorem openDvrScalarUnitFormula (T : Scheme.{u})
     S.adjunction.unit.app (DerivedCategory.Q.obj Q) ≫
         (coefficientConstantTowerLimit.{u, u} l E T).map
           ((coefficientSequenceDerivedRestriction.{u, u} l E T).map f ≫
-            (Functor.mapDerivedCategoryFactors.{u+2, u+2, u+1, u+1, u+2, u+2}
+            (Functor.mapDerivedCategoryFactors
               (coefficientSequenceRestriction.{u, u} l E T)).hom.app
                 ((M.quotient l E T).obj Q)) =
       DerivedCategory.Q.map

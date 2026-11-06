@@ -276,8 +276,8 @@ theorem finiteFreeDirectImage_pullbackCoordinates {Z W : Scheme.{u}} (q : Z ⟶ 
   let Φ := SheafOfModules.RingedTensor.coordinateDescent T U d E ε φW
   let Φ' := SheafOfModules.RingedTensor.coordinateDescent T' U' d E' ε' φZ
   let β := SheafOfModules.RingedTensor.scalarComparisonDescent T F G T' E ε E' ε' χ
-  let ρD := (Functor.mapDerivedCategoryCompIso U F).symm ≪≫
-    Functor.mapDerivedCategoryNatIso ρ ≪≫ Functor.mapDerivedCategoryCompIso G U'
+  let ρD := Functor.mapDerivedCategoryCompIso U F ≪≫
+    Functor.mapDerivedCategoryNatIso ρ ≪≫ (Functor.mapDerivedCategoryCompIso G U').symm
   let τ := Functor.whiskerLeft E ρD.hom ≫
     Functor.whiskerRight β.hom U'.mapDerivedCategory
   have hρD : ρD.hom = (proEtaleRingRestrictionDerivedPullback q R.target S.target
