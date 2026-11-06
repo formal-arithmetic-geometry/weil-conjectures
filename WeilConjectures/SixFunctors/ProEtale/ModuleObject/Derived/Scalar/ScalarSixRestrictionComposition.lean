@@ -556,7 +556,8 @@ private theorem derived_forward_comp
       (Functor.mapDerivedCategorySquareIso q₀₁) (Functor.mapDerivedCategorySquareIso q₁₂)
       (Functor.mapDerivedCategorySquareIso q₀₂)
       (Functor.mapDerivedCategoryNatIso cF ≪≫ (Functor.mapDerivedCategoryCompIso F₀₁ F₁₂).symm)
-      (Functor.mapDerivedCategoryNatIso cG ≪≫ (Functor.mapDerivedCategoryCompIso G₀₁ G₁₂).symm) := by
+      (Functor.mapDerivedCategoryNatIso cG ≪≫
+        (Functor.mapDerivedCategoryCompIso G₀₁ G₁₂).symm) := by
   intro K
   exact Functor.exactSquare_comp_forward F₀₁ F₁₂ F₀₂ G₀₁ G₁₂ G₀₂ U₀ U₁ U₂
     q₀₁ q₁₂ q₀₂ cF cG hq K
