@@ -184,7 +184,7 @@ lemma whiskerLeft_Q_derivedCondensedRealizationUpperStarIso_hom :
         (condensedRealizationUpperStarIso k₀ l g) (.up ℤ)).hom DerivedCategory.Q ≫
       (upperStar k₀ l g ⋙ condensedRealization k₀ l Z).mapDerivedCategoryFactors.inv ≫
       Functor.whiskerLeft DerivedCategory.Q
-        (Functor.mapDerivedCategoryCompIso (upperStar k₀ l g) (condensedRealization k₀ l Z)).hom :=
+        (Functor.mapDerivedCategoryCompIso (upperStar k₀ l g) (condensedRealization k₀ l Z)).inv :=
   Functor.whiskerLeft_Q_leftDerivedFunctorSquareIso_hom _
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
