@@ -401,3 +401,16 @@
 - Direct importer: UnboundedProperOpenInterchangeSupplement; continue downstream after green.
 - Fix records: /home/ubuntu/u9/bz/FIXES-BZ1034.md.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
+
+
+# BZ1040 in progress
+
+- Branch: u9/BZ1040; initial commit fdc7e6fe1516a32d43b896df96395140eb603eb9.
+- The user instructed continuation after the concrete compositor-orientation proposal.
+  Applied the .inv.app -> .hom.app correction in the assigned statement and proof,
+  plus the identical correction in its next four downstream layers.
+- The correction preserves the intended mathematical map under pinned Mathlib b63f6e8a.
+  No other declaration-header changes, added declarations, deletions, or docstring changes.
+- Next: ucheck-bump for all five modules, then continue to the next importer layer.
+- Fix records and occurrence counts: /home/ubuntu/u9/bz/FIXES-BZ1040.md.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
