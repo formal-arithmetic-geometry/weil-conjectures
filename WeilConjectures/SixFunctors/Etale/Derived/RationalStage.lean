@@ -8,18 +8,21 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralIdempotentComplete
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalizationHom
 public import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationRecollement
+public import WeilConjectures.CategoryTheory.Triangulated.TStructure.Karoubian
 public import WeilConjectures.SixFunctors.ClosedImmersionStages
+public import WeilConjectures.SixFunctors.Etale.Derived.LocalizationIntegral
 
 /-!
 # The rational coefficient stage `Dᵇc(X, E)`
 
 This file formalises *rationalization and coefficient-field extension*:
 `Dᵇc(X, E) = Dᵇc(X, 𝒪_E)[1/ϖ]` has the same objects as the integral category and morphisms
-`Hom_{𝒪_E}(-, -) ⊗_{𝒪_E} E`; it is idempotent complete, so that the canonical functor to its Karoubi
-envelope is an equivalence; `𝒪_E`-linear triangulated functors and natural transformations between
-integral categories transport to the rational ones; every object of `Dᵇc(X, E)` is the
-rationalization of an integral object (a lattice), and every morphism is `ϖ⁻ᴺ u` for an integral
-morphism `u`.
+`Hom_{𝒪_E}(-, -) ⊗_{𝒪_E} E`; it is a triangulated subcategory of `D_comp(X_ét, E)`; for `X`
+separated and of finite type over a field it is idempotent complete, so that the canonical functor
+to its Karoubi envelope is an equivalence; `𝒪_E`-linear triangulated functors and natural
+transformations between integral categories transport to the rational ones; every object of
+`Dᵇc(X, E)` is the rationalization of an integral object (a lattice), and every morphism is `ϖ⁻ᴺ u`
+for an integral morphism `u`.
 
 ## Modelling choices
 
@@ -42,8 +45,14 @@ morphism `u`.
   rationalization (`CategoryTheory.Rationalization.tensorHomEquiv`,
   `CategoryTheory.Rationalization.exists_eq_inv_pow_smul_map`), using that `𝒪_E` is a discrete
   valuation ring (`PadicAlgCl.isDiscreteValuationRing_integers`).
-* Idempotent completeness belongs to another part of the blueprint and is only stated here
-  (`AlgebraicGeometry.Etale.DerivedCategory.isIdempotentComplete_boundedConstructibleRational`).
+* Idempotent completeness, for `X` separated and of finite type over a field, follows from
+  Ekedahl's bounded t-structure on `Dᵇc(X, E)`, an input from the theory of `ℓ`-adic sheaves
+  which is only stated here
+  (`Etale.DerivedCategory.exists_tStructure_bounded_boundedConstructibleRational`);
+  a triangulated category with a bounded t-structure is idempotent complete
+  (`CategoryTheory.Triangulated.TStructure.isIdempotentComplete_of_bounded`). The lattice lemma
+  (`AlgebraicGeometry.Etale.DerivedCategory.exists_boundedConstructibleIntegral_idempotent`)
+  follows by splitting an idempotent and its complement.
   The Karoubi envelope carries no triangulated structure in this repository, so the equivalence
   with the Karoubi envelope is stated as an equivalence of categories.
 
@@ -55,6 +64,8 @@ morphism `u`.
   object of `Dᵇc(X, E)` is the rationalization of an object of `Dᵇc(X, 𝒪_E)`.
 - `AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleRational_exists_eq_inv_pow_smul` :
   every morphism of `Dᵇc(X, E)` is `ϖ⁻ᴺ u` for an integral morphism `u`.
+- `AlgebraicGeometry.Etale.DerivedCategory.isTriangulated_boundedConstructibleRational` :
+  `Dᵇc(X, E)` is a triangulated subcategory of `D_comp(X_ét, E)`.
 - `AlgebraicGeometry.Etale.DerivedCategory.isEquivalence_toKaroubi_boundedConstructibleRational` :
   `Dᵇc(X, E)` is equivalent to its Karoubi envelope.
 - `AlgebraicGeometry.Etale.DerivedCategory.rationalization_transport` : `𝒪_E`-linear triangulated
@@ -65,7 +76,7 @@ morphism `u`.
 
 universe w u
 
-open CategoryTheory Limits TensorProduct
+open CategoryTheory Limits Pretriangulated TensorProduct
 
 /-- In a discrete valuation ring every nonzero element divides a power of a uniformizer. -/
 lemma IsDiscreteValuationRing.exists_mul_eq_pow {R : Type*} [CommRing R] [IsDomain R]
@@ -187,31 +198,124 @@ instance isStableUnderRetracts_boundedConstructibleIntegral :
       e hc, a, b, fun n ↦ ⟨(boundedConstructible _ X).prop_of_retract (e.map _) (h n).1,
       (torAmplitudeIn _ X a b).prop_of_retract (e.map _) (h n).2⟩⟩
 
-/-- Over a field `A`, if `a ≠ 0` and `a⁻ᴺ • a⁻ᴺ • x = a⁻ᴺ • y`, then `x = aᴺ • y`. -/
-private lemma eq_pow_smul_of_inv_pow_smul {A V : Type*} [Field A] [AddCommGroup V] [Module A V]
-    {a : A} (ha : a ≠ 0) (N : ℕ) {x y : V} (h : a⁻¹ ^ N • a⁻¹ ^ N • x = a⁻¹ ^ N • y) :
-    x = a ^ N • y := by
-  have h' := congrArg (fun z ↦ a ^ N • a ^ N • z) h
-  simp only [smul_smul, ← mul_pow, mul_inv_cancel₀ ha, one_pow] at h'
-  simpa [← mul_assoc, ← mul_pow, mul_inv_cancel₀ ha] using h'
+/-- The lattices: the objects of `D_comp(X_ét, 𝒪_E)` lying in `Dᵇc(X, 𝒪_E)`. They form a
+triangulated subcategory. -/
+lemma isTriangulated_boundedConstructibleIntegral_inverseImage :
+    ((boundedConstructibleIntegral (PadicAlgCl.maximalIdealShrink l E) X).inverseImage
+      (DerivedCategoryDerivedCompleteIntegral.ι X.smallEtaleTopology l E)).IsTriangulated := by
+  obtain ⟨ϖ, hϖ, hI⟩ := PadicAlgCl.exists_mem_nonZeroDivisors_maximalIdealShrink_eq_span.{w, u} l E
+  have : Finite (Shrink.{u + 1} (PadicAlgCl.integers l E) ⧸ PadicAlgCl.maximalIdealShrink l E) :=
+    have : Finite (PadicAlgCl.integers l E ⧸ IsLocalRing.maximalIdeal (PadicAlgCl.integers l E)) :=
+      inferInstanceAs (Finite (IsLocalRing.ResidueField (PadicAlgCl.integers l E)))
+    Finite.of_equiv _ (Ideal.quotientEquiv _ _ (PadicAlgCl.shrinkRingEquiv l E) rfl).toEquiv
+  have := DerivedCategory.isTriangulated_boundedConstructibleIntegral_of_eq_span (X := X) hϖ hI
+  infer_instance
 
-/-- **The lattice lemma** (the non-formal input to idempotent completeness). Let `L ∈ Dᵇc(X, 𝒪_E)`
+/-- A distinguished triangle of `D_comp(X_ét, E)` whose first and third vertices are
+rationalizations of lattices has a middle vertex isomorphic to the rationalization of a lattice:
+the third morphism is `c • Q v` for a nonzero `c ∈ E` and an integral `v`, and the cone of `v`
+is a lattice. -/
+lemma boundedConstructibleRational_obj₂ (T : Triangle (DerivedCategoryDerivedCompleteRational
+      X.smallEtaleTopology l E)) (hT : T ∈ distTriang _)
+    (h₁ : boundedConstructibleRational l E X T.obj₁)
+    (h₃ : boundedConstructibleRational l E X T.obj₃) :
+    boundedConstructibleRational l E X T.obj₂ := by
+  have := isTriangulated_boundedConstructibleIntegral_inverseImage l E X
+  set Q := DerivedCategoryDerivedCompleteRational.fromIntegral X.smallEtaleTopology l E
+  obtain ⟨L₁, hL₁, ⟨e₁⟩⟩ := h₁
+  obtain ⟨L₃, hL₃, ⟨e₃⟩⟩ := h₃
+  obtain ⟨ϖ, hϖ⟩ :=
+    IsDiscreteValuationRing.exists_irreducible (Shrink.{u + 1} (PadicAlgCl.integers l E))
+  have hϖM := mem_nonZeroDivisors_of_ne_zero hϖ.ne_zero
+  have ha : algebraMap _ E ϖ ≠ 0 := (IsLocalization.map_units E ⟨ϖ, hϖM⟩).ne_zero
+  obtain ⟨N, v, hv⟩ := Rationalization.exists_eq_inv_pow_smul_map E hϖM
+    (fun m hm ↦ IsDiscreteValuationRing.exists_mul_eq_pow (nonZeroDivisors.ne_zero hm) hϖ)
+    (e₃.hom ≫ T.mor₃ ≫ e₁.inv⟦(1 : ℤ)⟧' ≫ (Q.commShiftIso (1 : ℤ)).inv.app L₁)
+  obtain ⟨M, f, g, hM⟩ := distinguished_cocone_triangle₂ v
+  have hM' : boundedConstructibleIntegral (PadicAlgCl.maximalIdealShrink l E) X
+      ((DerivedCategoryDerivedCompleteIntegral.ι _ l E).obj M) :=
+    ((boundedConstructibleIntegral (PadicAlgCl.maximalIdealShrink l E) X).inverseImage
+      (DerivedCategoryDerivedCompleteIntegral.ι _ l E)).ext_of_isTriangulatedClosed₂ _ hM hL₁ hL₃
+  set c : E := (algebraMap _ E ϖ)⁻¹ ^ N
+  have hc : c ≠ 0 := pow_ne_zero _ (inv_ne_zero ha)
+  let e₃' : Q.obj L₃ ≅ T.obj₃ :=
+    { hom := c⁻¹ • e₃.hom
+      inv := c • e₃.inv
+      hom_inv_id := by simp [smul_smul, mul_inv_cancel₀ hc]
+      inv_hom_id := by simp [smul_smul, inv_mul_cancel₀ hc] }
+  have hQ : Triangle.mk (Q.map f) (Q.map g) (Q.map v ≫ (Q.commShiftIso (1 : ℤ)).hom.app L₁) ∈
+      distTriang _ := Q.map_distinguished _ hM
+  have hv' : Q.map v = c⁻¹ • (e₃.hom ≫ T.mor₃ ≫ e₁.inv⟦(1 : ℤ)⟧' ≫
+      (Q.commShiftIso (1 : ℤ)).inv.app L₁) := by
+    rw [hv, smul_smul, inv_mul_cancel₀ hc, one_smul]
+  have hcomm : (Q.map v ≫ (Q.commShiftIso (1 : ℤ)).hom.app L₁) ≫ e₁.hom⟦(1 : ℤ)⟧' =
+      e₃'.hom ≫ T.mor₃ := by
+    rw [hv']
+    simp only [e₃', Linear.smul_comp, Category.assoc, Iso.inv_hom_id_app_assoc]
+    rw [← Functor.map_comp, e₁.inv_hom_id, CategoryTheory.Functor.map_id, Category.comp_id]
+  exact ⟨M, hM', ⟨Triangle.π₂.mapIso (isoTriangleOfIso₁₃ _ _ hQ hT e₁ e₃' hcomm)⟩⟩
+
+instance isClosedUnderIsomorphisms_boundedConstructibleRational :
+    (boundedConstructibleRational l E X).IsClosedUnderIsomorphisms where
+  of_iso e := fun ⟨L, hL, ⟨e'⟩⟩ ↦ ⟨L, hL, ⟨e' ≪≫ e⟩⟩
+
+/-- `Dᵇc(X, E)` is a triangulated subcategory of `D_comp(X_ét, E)`: it contains `0`, it is stable
+under shifts, as `Dᵇc(X, 𝒪_E)` is, and it is closed under extensions
+(`AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleRational_obj₂`). -/
+instance isTriangulated_boundedConstructibleRational :
+    (boundedConstructibleRational l E X).IsTriangulated := by
+  have := isTriangulated_boundedConstructibleIntegral_inverseImage l E X
+  set Q := DerivedCategoryDerivedCompleteRational.fromIntegral X.smallEtaleTopology l E
+  have : (boundedConstructibleRational l E X).ContainsZero := by
+    obtain ⟨Z, hZ, hPZ⟩ := ((boundedConstructibleIntegral (PadicAlgCl.maximalIdealShrink l E)
+      X).inverseImage (DerivedCategoryDerivedCompleteIntegral.ι _ l E)).exists_prop_of_containsZero
+    exact ⟨⟨Q.obj Z, Q.map_isZero hZ, Z, hPZ, ⟨Iso.refl _⟩⟩⟩
+  have : (boundedConstructibleRational l E X).IsStableUnderShift ℤ :=
+    ⟨fun n ↦ ⟨fun K ⟨L, hL, ⟨e⟩⟩ ↦ ⟨L⟦n⟧, ((boundedConstructibleIntegral
+      (PadicAlgCl.maximalIdealShrink l E) X).inverseImage
+        (DerivedCategoryDerivedCompleteIntegral.ι _ l E)).le_shift n _ hL,
+      ⟨(Q.commShiftIso n).app L ≪≫ (shiftFunctor _ n).mapIso e⟩⟩⟩⟩
+  have : (boundedConstructibleRational l E X).IsTriangulatedClosed₂ :=
+    .mk' fun T hT h₁ h₃ ↦ boundedConstructibleRational_obj₂ l E X T hT h₁ h₃
+  exact {}
+
+/-- **Ekedahl's theorem** (input from the theory of `ℓ`-adic sheaves). For `X` separated and of
+finite type over a field `k`, the rational stage `Dᵇc(X, E)` carries a bounded t-structure.
+Ekedahl's standard t-structure, whose heart is the category of constructible `E`-sheaves, is one;
+the statement only asserts that some bounded t-structure exists.
+
+References: T. Ekedahl, *On the adic formalism*; B. Bhatt, P. Scholze, *The pro-étale topology
+for schemes*, §6. The blueprint works only with the pro-étale model of `Dᵇc(X, E)` and has no node
+for the étale model `AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleRational`; the
+comparison of the two models is not available in this repository. -/
+theorem exists_tStructure_bounded_boundedConstructibleRational {k : Type u} [Field k]
+    (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [IsSeparated aX] :
+    ∃ t : Triangulated.TStructure (boundedConstructibleRational l E X).FullSubcategory,
+      ∀ K, t.bounded K :=
+  sorry
+
+/-- For `X` separated and of finite type over a field, the rationalization `Dᵇc(X, E)` of
+`Dᵇc(X, 𝒪_E)` is idempotent complete: it is a triangulated category with a bounded t-structure
+(`AlgebraicGeometry.Etale.DerivedCategory.exists_tStructure_bounded_boundedConstructibleRational`),
+and such a category is idempotent complete
+(`CategoryTheory.Triangulated.TStructure.isIdempotentComplete_of_bounded`). -/
+theorem isIdempotentComplete_boundedConstructibleRational {k : Type u} [Field k]
+    (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [IsSeparated aX] :
+    IsIdempotentComplete (boundedConstructibleRational l E X).FullSubcategory := by
+  obtain ⟨t, ht⟩ := exists_tStructure_bounded_boundedConstructibleRational l E X aX
+  exact t.isIdempotentComplete_of_bounded ht
+
+/-- **The lattice lemma.** Let `X` be separated and of finite type over a field, `L ∈ Dᵇc(X, 𝒪_E)`
 and `u : L ⟶ L` with `u ≫ u = ϖᴺ • u`, so that `ϖ⁻ᴺ u` is an idempotent of the rationalization of
 `L`. Then there is another lattice `L'` of the rationalization of `L` in `Dᵇc(X, 𝒪_E)` on which this
 idempotent is integral: an idempotent `ε` of `L'` corresponding to `ϖ⁻ᴺ u`.
 
-In the theory of `ℓ`-adic sheaves this follows from the existence of the rationalized standard
-`t`-structure on `Dᵇc(X, E)` (Ekedahl): the image of `ϖ⁻ᴺ u` has a lattice, and so does its
-complement.
-
-The lemma is equivalent to
-`AlgebraicGeometry.Etale.DerivedCategory.isIdempotentComplete_boundedConstructibleRational` and is
-not formal. Over `R_N = 𝒪_E[u]/(u² - ϖᴺu)` the perfect complexes have all the structure used in
-this file, but the idempotent `(1, 0)` of `R_N[1/ϖ] = E × E` has no lattice. Cones and clearing
-denominators only produce lattices of `A ⊕ A⟦n⟧` (`n ≥ 1`) for the image `A` of `ϖ⁻ᴺ u`. A proof
-needs truncations or images on the étale integral stage for an arbitrary scheme `X`, or a comparison
-with the pro-étale model; neither is available here. -/
-theorem exists_boundedConstructibleIntegral_idempotent
+`Dᵇc(X, E)` is idempotent complete
+(`AlgebraicGeometry.Etale.DerivedCategory.isIdempotentComplete_boundedConstructibleRational`), so
+`ϖ⁻ᴺ u` and its complement split, with images the rationalizations of lattices `L_A` and `L_B`;
+then `L' = L_A ⊞ L_B` and `ε` is the projection onto `L_A`. -/
+theorem exists_boundedConstructibleIntegral_idempotent {k : Type u} [Field k]
+    (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [IsSeparated aX]
     {ϖ : Shrink.{u + 1} (PadicAlgCl.integers l E)} (hϖ : Irreducible ϖ)
     {L : DerivedCategoryDerivedCompleteIntegral X.smallEtaleTopology l E}
     (hL : boundedConstructibleIntegral (PadicAlgCl.maximalIdealShrink l E) X
@@ -224,80 +328,89 @@ theorem exists_boundedConstructibleIntegral_idempotent
         ((DerivedCategoryDerivedCompleteIntegral.ι _ l E).obj L') ∧ ε ≫ ε = ε ∧
       (DerivedCategoryDerivedCompleteRational.fromIntegral _ l E).map ε ≫ i.hom =
         i.hom ≫ ((algebraMap _ E ϖ)⁻¹ ^ N •
-          (DerivedCategoryDerivedCompleteRational.fromIntegral _ l E).map u) :=
-  sorry
-
-/-- The rationalization `Dᵇc(X, E)` of `Dᵇc(X, 𝒪_E)` is idempotent complete.
-
-An idempotent `p` of `K ∈ Dᵇc(X, E)` is `ϖ⁻ᴺ u` for an integral `u` on a lattice `L` of `K`, and
-after multiplying `u` by a power of `ϖ`, `u ≫ u = ϖᴺ • u` holds integrally. By the lattice lemma
-(`AlgebraicGeometry.Etale.DerivedCategory.exists_boundedConstructibleIntegral_idempotent`), `p`
-comes from an idempotent `ε` of another lattice `L'`, which splits in the idempotent complete
-category `D_comp(X_ét, 𝒪_E)`; its image is a retract of `L'`, hence lies in `Dᵇc(X, 𝒪_E)`, and its
-rationalization is an image of `p`. -/
-theorem isIdempotentComplete_boundedConstructibleRational :
-    IsIdempotentComplete (boundedConstructibleRational l E X).FullSubcategory := by
-  obtain ⟨ϖ, hϖ⟩ :=
-    IsDiscreteValuationRing.exists_irreducible (Shrink.{u + 1} (PadicAlgCl.integers l E))
-  have hϖM := mem_nonZeroDivisors_of_ne_zero hϖ.ne_zero
-  have hdiv : ∀ m ∈ nonZeroDivisors (Shrink.{u + 1} (PadicAlgCl.integers l E)),
-      ∃ (N : ℕ) (a : Shrink.{u + 1} (PadicAlgCl.integers l E)), m * a = ϖ ^ N :=
-    fun m hm ↦ IsDiscreteValuationRing.exists_mul_eq_pow (nonZeroDivisors.ne_zero hm) hϖ
+          (DerivedCategoryDerivedCompleteRational.fromIntegral _ l E).map u) := by
+  have H := isIdempotentComplete_boundedConstructibleRational l E X aX
   set Q := DerivedCategoryDerivedCompleteRational.fromIntegral X.smallEtaleTopology l E
+  have hϖM := mem_nonZeroDivisors_of_ne_zero hϖ.ne_zero
   have ha : algebraMap _ E ϖ ≠ 0 := (IsLocalization.map_units E ⟨ϖ, hϖM⟩).ne_zero
-  refine ⟨fun K p hp ↦ ?_⟩
-  obtain ⟨L, hL, ⟨e⟩⟩ := K.property
-  -- `p` is `ϖ⁻ᴺ u` on the lattice `L`
-  obtain ⟨N, u, hφ⟩ := Rationalization.exists_eq_inv_pow_smul_map E hϖM hdiv
-    (e.hom ≫ p.hom ≫ e.inv)
-  have hφφ : (e.hom ≫ p.hom ≫ e.inv) ≫ (e.hom ≫ p.hom ≫ e.inv) = e.hom ≫ p.hom ≫ e.inv := by
-    have hp' : p.hom ≫ p.hom = p.hom := congrArg (fun f ↦ f.hom) hp
-    simp [reassoc_of% hp']
-  -- integrally, `u ≫ u = ϖᴺ • u` up to torsion
-  have hQ : Q.map (u ≫ u) = Q.map (ϖ ^ N • u) := by
-    rw [hφ, Linear.smul_comp, Linear.comp_smul] at hφφ
-    rw [Functor.map_comp, Functor.map_smul,
-      eq_pow_smul_of_inv_pow_smul ha N hφφ, ← map_pow, algebraMap_smul]
-  obtain ⟨m, hm, hm'⟩ := (Rationalization.map_eq_map_iff _ _).1 hQ
-  obtain ⟨K₀, b, hb⟩ := hdiv m hm
-  let u' := ϖ ^ K₀ • u
-  have hu' : u' ≫ u' = ϖ ^ (N + K₀) • u' := by
-    have h₁ : (ϖ ^ K₀ * ϖ ^ K₀) • (u ≫ u) = (ϖ ^ K₀ * ϖ ^ K₀ * ϖ ^ N) • u := by
-      rw [← hb, mul_comm m b, ← mul_assoc, mul_smul, hm', ← mul_smul, ← mul_smul, mul_assoc,
-        mul_assoc, mul_assoc]
-    simp only [u', Linear.smul_comp, Linear.comp_smul, smul_smul, pow_add] at h₁ ⊢
-    rw [h₁]
-    congr 1
-    ring
-  have hφ' : e.hom ≫ p.hom ≫ e.inv = (algebraMap _ E ϖ)⁻¹ ^ (N + K₀) • Q.map u' := by
-    rw [hφ, Functor.map_smul, ← algebraMap_smul E (ϖ ^ K₀), smul_smul, map_pow, pow_add,
-      mul_assoc, ← mul_pow, inv_mul_cancel₀ ha, one_pow, mul_one]
-  -- the lattice lemma, and the splitting in `D_comp(X_ét, 𝒪_E)`
-  obtain ⟨L', ε, i, hL', hε, hεi⟩ :=
-    exists_boundedConstructibleIntegral_idempotent l E X hϖ hL (N + K₀) u' hu'
-  obtain ⟨A, r, hr⟩ := retract_of_isIdempotentComplete L' ε hε
-  have hA : boundedConstructibleIntegral (PadicAlgCl.maximalIdealShrink l E) X
-      ((DerivedCategoryDerivedCompleteIntegral.ι _ l E).obj A) :=
-    (boundedConstructibleIntegral _ X).prop_of_retract (r.map _) hL'
-  refine ⟨⟨Q.obj A, boundedConstructibleRational_obj l E X hA⟩,
-    ObjectProperty.homMk (Q.map r.i ≫ i.hom ≫ e.hom),
-    ObjectProperty.homMk (e.inv ≫ i.inv ≫ Q.map r.r), ?_, ?_⟩
-  · ext
-    simp [← Functor.map_comp]
-  · ext
-    have : Q.map r.r ≫ Q.map r.i ≫ i.hom = i.hom ≫ (e.hom ≫ p.hom ≫ e.inv) := by
-      rw [← Functor.map_comp_assoc, hr, hεi, hφ']
-    simp only [ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.homMk_hom,
-      Category.assoc]
-    rw [reassoc_of% this]
-    simp
+  -- the idempotent `p = ϖ⁻ᴺ u` of the rationalization of `L` and its complement split
+  let K : (boundedConstructibleRational l E X).FullSubcategory :=
+    ⟨Q.obj L, boundedConstructibleRational_obj l E X hL⟩
+  let p : K ⟶ K := ObjectProperty.homMk ((algebraMap _ E ϖ)⁻¹ ^ N • Q.map u)
+  have hp : p ≫ p = p := by
+    ext
+    simp only [p, ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.homMk_hom,
+      Linear.smul_comp, Linear.comp_smul, ← Functor.map_comp, hu, Functor.map_smul,
+      smul_smul]
+    rw [← algebraMap_smul E (ϖ ^ N), smul_smul, map_pow, ← mul_pow, ← mul_pow,
+      mul_assoc, inv_mul_cancel₀ ha, mul_one]
+  obtain ⟨A, iA, eA, hA₁, hA₂⟩ := (Idempotents.isIdempotentComplete_iff_isSplit.1 H) K p hp
+  have hq : (𝟙 K - p) ≫ (𝟙 K - p) = 𝟙 K - p := by
+    simp [Preadditive.sub_comp, Preadditive.comp_sub, hp]
+  obtain ⟨B, iB, eB, hB₁, hB₂⟩ := (Idempotents.isIdempotentComplete_iff_isSplit.1 H) K _ hq
+  -- lattices `LA`, `LB` of the image and of the complement; `LA ⊞ LB` is a lattice of `K`
+  obtain ⟨LA, hLA, ⟨fA⟩⟩ := A.property
+  obtain ⟨LB, hLB, ⟨fB⟩⟩ := B.property
+  have hIA : iA ≫ eB = 0 := by
+    have h1 : iA ≫ p = iA := by rw [← hA₂, ← Category.assoc, hA₁, Category.id_comp]
+    have : iA ≫ eB = iA ≫ (eB ≫ iB) ≫ eB := by rw [Category.assoc, hB₁, Category.comp_id]
+    rw [this, hB₂, Preadditive.sub_comp, Preadditive.comp_sub, Category.id_comp,
+      ← Category.assoc, h1, sub_self]
+  have hIB : iB ≫ eA = 0 := by
+    have h1 : iB ≫ p = 0 := by
+      have : iB ≫ (𝟙 K - p) = iB := by rw [← hB₂, ← Category.assoc, hB₁, Category.id_comp]
+      rw [Preadditive.comp_sub, Category.comp_id] at this
+      simpa using this
+    have : iB ≫ eA = iB ≫ (eA ≫ iA) ≫ eA := by rw [Category.assoc, hA₁, Category.comp_id]
+    rw [this, hA₂, ← Category.assoc, h1, Limits.zero_comp]
+  have := isTriangulated_boundedConstructibleIntegral_inverseImage l E X
+  have hL' : ((boundedConstructibleIntegral (PadicAlgCl.maximalIdealShrink l E) X).inverseImage
+      (DerivedCategoryDerivedCompleteIntegral.ι _ l E)) (LA ⊞ LB) :=
+    ObjectProperty.ext_of_isTriangulatedClosed₂ _ _
+      (Pretriangulated.binaryBiproductTriangle_distinguished LA LB) hLA hLB
+  have : PreservesBinaryBiproducts Q := preservesBinaryBiproducts_of_preservesBiproducts Q
+  let eK : A.obj ⊞ B.obj ≅ K.obj :=
+    { hom := biprod.desc iA.hom iB.hom
+      inv := biprod.lift eA.hom eB.hom
+      hom_inv_id := by
+        ext <;> simp [← ObjectProperty.FullSubcategory.comp_hom, hA₁, hB₁, hIA, hIB]
+      inv_hom_id := by
+        have hsum : eA ≫ iA + eB ≫ iB = 𝟙 K := by rw [hA₂, hB₂]; abel
+        rw [biprod.lift_desc]
+        exact congrArg (fun f ↦ f.hom) hsum }
+  let i : Q.obj (LA ⊞ LB) ≅ Q.obj L := Q.mapBiprod LA LB ≪≫ biprod.mapIso fA fB ≪≫ eK
+  refine ⟨LA ⊞ LB, biprod.fst ≫ biprod.inl, i, hL', by simp, ?_⟩
+  -- the idempotent `ε` projecting onto `LA` corresponds to `p`
+  have hpA : ((algebraMap _ E ϖ)⁻¹ ^ N • Q.map u) = eA.hom ≫ iA.hom := by
+    rw [← ObjectProperty.FullSubcategory.comp_hom, hA₂]; rfl
+  have hinl : Q.map (biprod.inl (X := LA) (Y := LB)) ≫
+      biprod.lift (Q.map biprod.fst) (Q.map biprod.snd) = biprod.inl := by
+    apply biprod.hom_ext <;> simp [← Functor.map_comp]
+  have hinr : Q.map (biprod.inr (X := LA) (Y := LB)) ≫
+      biprod.lift (Q.map biprod.fst) (Q.map biprod.snd) = biprod.inr := by
+    apply biprod.hom_ext <;> simp [← Functor.map_comp]
+  have hA₁' : iA.hom ≫ eA.hom = 𝟙 _ := congrArg (fun f ↦ f.hom) hA₁
+  have hIB' : iB.hom ≫ eA.hom = 0 := congrArg (fun f ↦ f.hom) hIB
+  rw [hpA, ← cancel_epi (Q.mapBiprod LA LB).inv]
+  apply biprod.hom_ext'
+  · dsimp only [i, eK, Iso.trans_hom, biprod.mapIso_hom]
+    simp only [Functor.mapBiprod_inv, Functor.mapBiprod_hom, biprod.inl_desc_assoc,
+      ← Functor.map_comp_assoc, biprod.inl_fst_assoc, Category.assoc, biprod.mapIso_hom]
+    rw [reassoc_of% hinl, reassoc_of% hinl]
+    simp [reassoc_of% hA₁']
+  · dsimp only [i, eK, Iso.trans_hom, biprod.mapIso_hom]
+    simp only [Functor.mapBiprod_inv, Functor.mapBiprod_hom, biprod.inr_desc_assoc,
+      ← Functor.map_comp_assoc, biprod.inr_fst_assoc, Category.assoc, biprod.mapIso_hom]
+    rw [reassoc_of% hinr]
+    simp [reassoc_of% hIB']
 
 /-- Idempotent completeness: `Dᵇc(X, E)` is idempotent complete, so that the canonical functor to
 its Karoubi envelope `AlgebraicGeometry.Etale.DerivedCategoryBoundedConstructibleRational` is an
-equivalence. -/
-theorem isEquivalence_toKaroubi_boundedConstructibleRational :
+equivalence, for `X` separated and of finite type over a field. -/
+theorem isEquivalence_toKaroubi_boundedConstructibleRational {k : Type u} [Field k]
+    (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [IsSeparated aX] :
     (Idempotents.toKaroubi (boundedConstructibleRational l E X).FullSubcategory).IsEquivalence :=
-  have := isIdempotentComplete_boundedConstructibleRational l E X
+  have := isIdempotentComplete_boundedConstructibleRational l E X aX
   Rationalization.isEquivalence_toKaroubi _
 
 /-- Transport of functors and natural transformations: an `𝒪_E`-linear triangulated functor `F`
