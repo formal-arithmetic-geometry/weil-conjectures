@@ -325,8 +325,17 @@ private theorem normalizedDVRKFlatUnit (n : ℕ)
   unfold normalizedDVRKFlatComparison normalizedDVRIntegralAdjunction
   simp only [DerivedCategory.quotientCompQhIso,
     HomologicalComplexUpToQuasiIso.quotientCompQhIso, Functor.mapHomotopyCategoryFactors,
-    Quotient.lift.isLift_hom, Quotient.lift.isLift_inv, CategoryTheory.Functor.map_id,
-    Category.id_comp, Category.comp_id, Category.assoc] at h' ⊢
+    Quotient.lift.isLift_hom, Quotient.lift.isLift_inv] at h' ⊢
+  repeat first
+    | erw [(scalarReductionRestriction l E X n).mapDerivedCategory.map_id] at h'
+    | erw [(DerivedCategory.Qh (C := scalarReductionSource l E X)).map_id] at h'
+    | erw [Category.id_comp] at h'
+    | erw [Category.comp_id] at h'
+  repeat first
+    | erw [(scalarReductionDerivedExtension l E X n).map_id]
+    | erw [(DerivedCategory.Qh (C := scalarReductionTarget l E X n)).map_id]
+    | erw [Category.id_comp]
+    | erw [Category.comp_id]
   dsimp only [DerivedCategory.Qh, HomologicalComplexUpToQuasiIso.Qh,
     Functor.mapHomotopyCategory, CategoryTheory.Quotient.lift, Functor.comp_obj] at h' ⊢
   exact h'.trans (congrArg DerivedCategory.Q.map hg.symm)
