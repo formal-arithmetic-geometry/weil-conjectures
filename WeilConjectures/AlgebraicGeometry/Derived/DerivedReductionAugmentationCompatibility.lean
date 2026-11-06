@@ -83,15 +83,15 @@ theorem derivedReduction_augmentationOfCounits
     (hOrd : ∀ M, G.map (uX.app M) ≫ e.hom.app M = c.hom.app M ≫ uY.app (F.obj M)) :
     ∀ K : DerivedCategory B,
       G.mapDerivedCategory.map (iX.app K) ≫ τ.hom.app K =
-        ((Functor.mapDerivedCategoryCompIso CX G).symm ≪≫
+        (Functor.mapDerivedCategoryCompIso CX G ≪≫
           Functor.mapDerivedCategoryNatIso c ≪≫
-            Functor.mapDerivedCategoryCompIso F CY).hom.app K ≫
+            (Functor.mapDerivedCategoryCompIso F CY).symm).hom.app K ≫
           iY.app (F.mapDerivedCategory.obj K) := by
   have heq :
     Functor.whiskerRight iX G.mapDerivedCategory ≫ τ.hom =
-      ((Functor.mapDerivedCategoryCompIso CX G).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso CX G ≪≫
         Functor.mapDerivedCategoryNatIso c ≪≫
-          Functor.mapDerivedCategoryCompIso F CY).hom ≫
+          (Functor.mapDerivedCategoryCompIso F CY).symm).hom ≫
         Functor.whiskerLeft F.mapDerivedCategory iY := by
     let ff := cochainRepresentativeWhiskering good res (DerivedCategory E)
     apply ff.map_injective
@@ -147,22 +147,23 @@ theorem derivedReduction_augmentationOfCounits
           G.mapDerivedCategoryFactors.hom.app
             ((CX.mapHomologicalComplex (.up ℤ)).obj P) ≫
           DerivedCategory.Q.map (cc ≫ ax) := by rw [hOrd']
-      _ = ((Functor.mapDerivedCategoryCompIso CX G).symm ≪≫
+      _ = (Functor.mapDerivedCategoryCompIso CX G ≪≫
             Functor.mapDerivedCategoryNatIso c ≪≫
-              Functor.mapDerivedCategoryCompIso F CY).hom.app (DerivedCategory.Q.obj P) ≫
+              (Functor.mapDerivedCategoryCompIso F CY).symm).hom.app (DerivedCategory.Q.obj P) ≫
           CY.mapDerivedCategory.map s ≫ CY.mapDerivedCategoryFactors.hom.app (Fc.obj P) ≫
             DerivedCategory.Q.map ax := by
-        simpa only [Category.assoc, DerivedCategory.Q.map_comp] using
+        simpa only [FT, Fc, s, cc, NatIso.mapHomologicalComplex,
+          Functor.mapDerivedCategorySquareIso, Category.assoc, DerivedCategory.Q.map_comp] using
           congrArg (fun z ↦ z ≫ DerivedCategory.Q.map ax)
-            (exactSquare_fac F G CX CY c P).symm
-      _ = ((Functor.mapDerivedCategoryCompIso CX G).symm ≪≫
+            (Functor.exactSquare_fac c P).symm
+      _ = (Functor.mapDerivedCategoryCompIso CX G ≪≫
             Functor.mapDerivedCategoryNatIso c ≪≫
-              Functor.mapDerivedCategoryCompIso F CY).hom.app (DerivedCategory.Q.obj P) ≫
+              (Functor.mapDerivedCategoryCompIso F CY).symm).hom.app (DerivedCategory.Q.obj P) ≫
           CY.mapDerivedCategory.map s ≫ iY.app (DerivedCategory.Q.obj (Fc.obj P)) ≫ cx := by
         simpa only [Category.assoc] using congrArg (fun z ↦
-          ((Functor.mapDerivedCategoryCompIso CX G).symm ≪≫
+          (Functor.mapDerivedCategoryCompIso CX G ≪≫
             Functor.mapDerivedCategoryNatIso c ≪≫
-              Functor.mapDerivedCategoryCompIso F CY).hom.app (DerivedCategory.Q.obj P) ≫
+              (Functor.mapDerivedCategoryCompIso F CY).symm).hom.app (DerivedCategory.Q.obj P) ≫
                 CY.mapDerivedCategory.map s ≫ z) (hY P hP).symm
       _ = _ := by
         erw [← Category.assoc (CY.mapDerivedCategory.map s), iY.naturality s]
@@ -181,7 +182,7 @@ private theorem unitCounit_onComplex
     (ε : DerivedCategory.Qh ⋙ L ⟶ R.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
     (i : C.mapDerivedCategory ⟶ L) (u : C ⟶ R) (P : CochainComplex B ℤ)
     (h : i.app (DerivedCategory.Q.obj P) ≫
-        ε.app ((HomotopyCategory.quotient B (.up ℤ)).obj P) =
+        cast (by rfl) (ε.app ((HomotopyCategory.quotient B (.up ℤ)).obj P)) =
       C.mapDerivedCategoryFactors.hom.app P ≫
         DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex u (.up ℤ)).app P)) :
     i.app (DerivedCategory.Q.obj P) ≫ reductionComplexCounit R L ε P =
