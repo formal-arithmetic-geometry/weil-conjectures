@@ -203,7 +203,7 @@ theorem finiteCoefficient_comparison_reflects_torAmplitude
       (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} A))) :=
     ⟨K', _hPlus⟩
   apply (ProEtale.comparison_torAmplitudeIn_iff A T a b _hTor.1 Kplus).mpr
-  have ecomp := (Functor.mapDerivedCategoryCompIso F G).app K'
+  have ecomp := (Functor.mapDerivedCategoryCompIso F G).symm.app K'
   have e : K ≅ G.mapDerivedCategory.obj (F.mapDerivedCategory.obj K') :=
     _e ≪≫ ecomp
   refine ⟨_hTor.1, ?_⟩
