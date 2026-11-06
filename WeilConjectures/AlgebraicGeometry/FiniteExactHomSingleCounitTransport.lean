@@ -257,9 +257,10 @@ theorem finite_exactHom_single_counit_transport
       DerivedCategory.Q.map
         ((HomologicalComplex.singleMapHomologicalComplex
           (RingedSpace.moduleDirectImage f.toLRSHom.toShHom) (ComplexShape.up ℤ) 0).inv.app M) ≫
-        (cast (by rfl) ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerivedFunctorUnit.app
-          ((HomotopyCategory.quotient _ _).obj ((CochainComplex.singleFunctor
-            (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M))) :
+        (cast (by rfl)
+          ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerivedFunctorUnit.app
+            ((HomotopyCategory.quotient _ _).obj ((CochainComplex.singleFunctor
+              (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M))) :
           _ ⟶ (schemeDerivedDirectImage f).obj ((DerivedCategory.singleFunctor
             (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M)) ≫
         γ.inv.app ((DerivedCategory.singleFunctor
