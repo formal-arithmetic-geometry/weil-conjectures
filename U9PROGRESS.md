@@ -464,3 +464,15 @@
 - Completion marker: /home/ubuntu/u9/state/BZ1077.DONE.
 - No local Lean/Lake, proof placeholders, trust bypasses, heartbeat raises, or profiler probes.
 - All ucheck invocations have finished. This completion commit changes documentation only.
+
+
+# BZ1098 in progress
+
+- Branch: u9/BZ1098; starting commit 46766e3e2ce0eddba05845bd493e8a62dac45263.
+- The user instructed continuation after the explicit one-line universe-annotation proposal.
+  Applied that patch to sfbImmersion_residueComparison_etale; the localization universes
+  remain fixed and the reordered category universes are inferred.
+- The initial ucheck-bump confirmed a statement-level type mismatch caused by Mathlib's
+  new mapDerivedCategory universe order. Pinned API and whole-tree inventory are recorded.
+- Next: remote validation of the assigned leaf, then direct importers as the brief requires.
+- Fix record: /home/ubuntu/u9/bz/FIXES-BZ1098.md. No local Lean/Lake or proof escapes.
