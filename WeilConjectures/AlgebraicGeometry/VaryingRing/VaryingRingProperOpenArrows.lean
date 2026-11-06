@@ -162,7 +162,7 @@ theorem moduleJAdj_unit_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion 
   have := derived_open_unit_iso R φ j
   let F := extension R φ j ⋙ pull R φ j
   let e : F.mapDerivedCategory ≅ 𝟭 (Derived R φ U) :=
-    Functor.mapDerivedCategoryCompIso _ _ ≪≫ (asIso (jAdj R φ j).unit).symm
+    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫ (asIso (jAdj R φ j).unit).symm
   let h := DerivedCategory.homologyFunctor (Modules R φ U) 0
   let t : F ≅ 𝟭 (Modules R φ U) :=
     (Functor.rightUnitor F).symm ≪≫
@@ -469,7 +469,7 @@ def alpha {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
     (h : k ≫ p = r ≫ i) : J R φ i ⋙ G R φ p ⟶ G R φ r ⋙ J R φ k :=
-  (Functor.mapDerivedCategoryCompIso _ _).inv ≫
+  (Functor.mapDerivedCategoryCompIso _ _).hom ≫
     Localization.liftNatTrans DerivedCategory.Q
       (HomologicalComplex.quasiIso (Modules R φ S) (.up ℤ)) _ _
       (extension R φ i ⋙ pull R φ p).mapDerivedCategory
@@ -477,7 +477,7 @@ def alpha {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
       (Functor.whiskerRight
         (NatTrans.mapHomologicalComplex (moduleAlpha R φ k r p i h) (.up ℤ))
           DerivedCategory.Q) ≫
-      (Functor.mapDerivedCategoryCompIso _ _).hom
+      (Functor.mapDerivedCategoryCompIso _ _).inv
 
 /-- The normalized proper/open map is exactly the unit-square-counit mate.
 Source: Stacks 0F7B, 07A7
