@@ -10,6 +10,8 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.Symmetric
 public import WeilConjectures.TraceFormula.Main
 public import WeilConjectures.TraceFormula.PointTrace
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.TraceSupertrace
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 
 /-!
 
@@ -135,7 +137,8 @@ theorem trace_eq_homologyUnitEndRingHom_superTrace (Ω : Type u) [Field Ω] [IsS
     @HasRightDual.mk _ _ _ _ (I.obj (Pᘁ)) (ExactPairing.map I P (Pᘁ))
   have hinj : Function.Injective I.unitEndRingHom := fun a b h ↦ by
     rw [Functor.unitEndRingHom_apply, Functor.unitEndRingHom_apply] at h
-    exact I.map_injective ((cancel_mono _).1 (by simpa [I] using h))
+    change 𝟙 _ ≫ I.map a ≫ 𝟙 _ = 𝟙 _ ≫ I.map b ≫ 𝟙 _ at h
+    exact I.map_injective (by simpa only [Category.id_comp, Category.comp_id] using h)
   have hY (i : ℤ) : IsDualizable ((DerivedCategory.homologyFunctor A i).obj (I.obj P)) := by
     obtain ⟨n, ⟨e⟩⟩ := isFiniteFree_upperStar_homology ℓ (Field.toIsField Ω)
       IsField.isSepClosed_toField P i (𝟙 _)
