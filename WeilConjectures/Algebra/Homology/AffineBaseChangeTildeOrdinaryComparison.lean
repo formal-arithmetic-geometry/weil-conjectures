@@ -142,7 +142,8 @@ theorem exists_affineBaseChangeTildeOrdinaryComparison
       cast_eq, Functor.map_comp,
       Category.assoc, Category.id_comp, Category.comp_id, Cg]
     erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id]
-    simp only [Category.id_comp, Category.comp_id] <;> rfl
+    repeat erw [Category.id_comp]
+    all_goals rfl
   rw [hb] at ht
   dsimp only at heC ⊢
   rw [heC]
