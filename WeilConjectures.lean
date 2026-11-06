@@ -26652,6 +26652,7 @@ public import WeilConjectures.WeilSheaf.VerdierDualFinite
 public import WeilConjectures.WeilSheaf.VerdierDualLocalization
 public import WeilConjectures.WeilSheaf.VerdierExchange
 public import WeilConjectures.WeilSheaf.VerdierExchangeNatural
+public import WeilConjectures.WeilSheaf.VerdierExchangeYoneda
 public import WeilConjectures.WeilSheaf.WeilAffineSpaceBundleTrace
 public import WeilConjectures.WeilSheaf.WeilAffineSpaceTrace
 public import WeilConjectures.WeilSheaf.WeilDescent
