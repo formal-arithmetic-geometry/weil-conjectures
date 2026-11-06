@@ -168,6 +168,33 @@ lemma mapDerivedCategoryNatIso_fach {F G : C ⥤ D} [F.Additive] [G.Additive]
   rw [← DerivedCategory.Qh.map_comp, ← DerivedCategory.Qh.map_comp]
   simp
 
+/-- The composition isomorphism
+`(F ⋙ G).mapDerivedCategory ≅ F.mapDerivedCategory ⋙ G.mapDerivedCategory` for exact
+functors between abelian categories: both sides are induced by
+`(F ⋙ G).mapHomologicalComplex` on the localizations. -/
+noncomputable def mapDerivedCategoryCompIso (F : C ⥤ D) (G : D ⥤ E)
+    [F.Additive] [G.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G] :
+    (F ⋙ G).mapDerivedCategory ≅ F.mapDerivedCategory ⋙ G.mapDerivedCategory :=
+  letI : Localization.Lifting DerivedCategory.Q
+      (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))
+      ((F ⋙ G).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q)
+      (F.mapDerivedCategory ⋙ G.mapDerivedCategory) :=
+    ⟨(Functor.associator _ _ _).symm ≪≫
+      isoWhiskerRight F.mapDerivedCategoryFactors G.mapDerivedCategory ≪≫
+      Functor.associator _ _ _ ≪≫
+      isoWhiskerLeft (F.mapHomologicalComplex (ComplexShape.up ℤ))
+        G.mapDerivedCategoryFactors ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      isoWhiskerRight (Functor.mapHomologicalComplexCompIso (Iso.refl (F ⋙ G))
+        (ComplexShape.up ℤ)) DerivedCategory.Q⟩
+  Localization.liftNatIso DerivedCategory.Q (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))
+    ((F ⋙ G).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q)
+    ((F ⋙ G).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q)
+    (F ⋙ G).mapDerivedCategory (F.mapDerivedCategory ⋙ G.mapDerivedCategory)
+    (Iso.refl _)
+
 /-- The composition isomorphism `Functor.mapDerivedCategoryCompIso` is characterized by its
 compatibility with the factorizations `Functor.mapDerivedCategoryFactors` through the
 localization functors `DerivedCategory.Q`. -/
@@ -1185,6 +1212,18 @@ end Plus
 section Identity
 
 variable (C)
+
+/-- The functor induced on derived categories by the identity functor is isomorphic to the
+identity functor: the derived category counterpart of
+`CategoryTheory.Functor.mapHomologicalComplexIdIso`. -/
+noncomputable def mapDerivedCategoryIdIso :
+    (𝟭 C).mapDerivedCategory ≅ 𝟭 (DerivedCategory C) :=
+  Localization.liftNatIso DerivedCategory.Qh
+    (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))
+    ((𝟭 C).mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh) DerivedCategory.Qh
+    (𝟭 C).mapDerivedCategory (𝟭 (DerivedCategory C))
+    (isoWhiskerRight (mapHomotopyCategoryIdIso C (ComplexShape.up ℤ)) DerivedCategory.Qh ≪≫
+      DerivedCategory.Qh.leftUnitor)
 
 /-- The characterization of `Functor.mapDerivedCategoryIdIso` at the level of the homotopy
 category: the isomorphism `DerivedCategory.Qh ⋙ (𝟭 C).mapDerivedCategory ≅ DerivedCategory.Qh`

@@ -53,6 +53,116 @@ def Equations {A B C D : Type t} [Category.{h} A] [Category.{h} B]
   (∀ Q : C, e.hom.app (qS.obj Q) ≫ JR.map (d.inv.app Q) ≫
     adjR.counit.app (rT.obj Q) = rT.map (adjS.counit.app Q))
 
+/-- The canonical exact-derived square, retaining the standard composition factors.
+Source: Stacks 015F (blueprint: lem-cbc-ringed-open-scalar-adjunction). -/
+def derivedSquare {A B C D : Type t} [Category.{h} A] [Category.{h} B]
+    [Category.{h} C] [Category.{h} D] [Abelian A] [Abelian B] [Abelian C] [Abelian D]
+    [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} B]
+    [HasDerivedCategory.{w} C] [HasDerivedCategory.{w} D]
+    (F : A ⥤ B) (G : B ⥤ D) (H : A ⥤ C) (K : C ⥤ D)
+    [F.Additive] [G.Additive] [H.Additive] [K.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+    [PreservesFiniteLimits K] [PreservesFiniteColimits K] (e : F ⋙ G ≅ H ⋙ K) :
+    F.mapDerivedCategory ⋙ G.mapDerivedCategory ≅
+      H.mapDerivedCategory ⋙ K.mapDerivedCategory :=
+  (Functor.mapDerivedCategoryCompIso F G).symm ≪≫
+    Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryCompIso H K
+
+/-- All termwise and localized forms of the two equations for the same square.
+The tower index 0 denotes the original index 1.
+Source: Stacks 03DI, 03DJ, 015F
+(blueprint: lem-cbc-ringed-open-scalar-adjunction). -/
+def Transport {A B C D : Type t} [Category.{h} A] [Category.{h} B]
+    [Category.{h} C] [Category.{h} D] [Abelian A] [Abelian B] [Abelian C] [Abelian D]
+    [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} B]
+    [HasDerivedCategory.{w} C] [HasDerivedCategory.{w} D]
+    [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ A)] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ B)]
+    [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ C)] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ D)]
+    {JS : A ⥤ C} {JR : B ⥤ D} {rU : A ⥤ B} {rT : C ⥤ D}
+    {qS : C ⥤ A} {qR : D ⥤ B}
+    [JS.Additive] [JR.Additive] [rU.Additive] [rT.Additive] [qS.Additive] [qR.Additive]
+    [PreservesFiniteLimits JS] [PreservesFiniteColimits JS]
+    [PreservesFiniteLimits JR] [PreservesFiniteColimits JR]
+    [PreservesFiniteLimits rU] [PreservesFiniteColimits rU]
+    [PreservesFiniteLimits rT] [PreservesFiniteColimits rT]
+    [PreservesFiniteLimits qS] [PreservesFiniteColimits qS]
+    [PreservesFiniteLimits qR] [PreservesFiniteColimits qR]
+    (e : JS ⋙ rT ≅ rU ⋙ JR) (d : rT ⋙ qR ≅ qS ⋙ rU)
+    (adjS : JS ⊣ qS) (adjR : JR ⊣ qR) : Prop := by
+  letI : PreservesFiniteLimits ((Functor.whiskeringRight ℕᵒᵖ A C).obj JS) :=
+    ⟨fun _ _ _ ↦ inferInstance⟩
+  letI : PreservesFiniteColimits ((Functor.whiskeringRight ℕᵒᵖ A C).obj JS) :=
+    ⟨fun _ _ _ ↦ inferInstance⟩
+  letI : PreservesFiniteLimits ((Functor.whiskeringRight ℕᵒᵖ B D).obj JR) :=
+    ⟨fun _ _ _ ↦ inferInstance⟩
+  letI : PreservesFiniteColimits ((Functor.whiskeringRight ℕᵒᵖ B D).obj JR) :=
+    ⟨fun _ _ _ ↦ inferInstance⟩
+  letI : PreservesFiniteLimits ((Functor.whiskeringRight ℕᵒᵖ A B).obj rU) :=
+    ⟨fun _ _ _ ↦ inferInstance⟩
+  letI : PreservesFiniteColimits ((Functor.whiskeringRight ℕᵒᵖ A B).obj rU) :=
+    ⟨fun _ _ _ ↦ inferInstance⟩
+  letI : PreservesFiniteLimits ((Functor.whiskeringRight ℕᵒᵖ C D).obj rT) :=
+    ⟨fun _ _ _ ↦ inferInstance⟩
+  letI : PreservesFiniteColimits ((Functor.whiskeringRight ℕᵒᵖ C D).obj rT) :=
+    ⟨fun _ _ _ ↦ inferInstance⟩
+  letI : PreservesFiniteLimits ((Functor.whiskeringRight ℕᵒᵖ C A).obj qS) :=
+    ⟨fun _ _ _ ↦ inferInstance⟩
+  letI : PreservesFiniteColimits ((Functor.whiskeringRight ℕᵒᵖ C A).obj qS) :=
+    ⟨fun _ _ _ ↦ inferInstance⟩
+  letI : PreservesFiniteLimits ((Functor.whiskeringRight ℕᵒᵖ D B).obj qR) :=
+    ⟨fun _ _ _ ↦ inferInstance⟩
+  letI : PreservesFiniteColimits ((Functor.whiskeringRight ℕᵒᵖ D B).obj qR) :=
+    ⟨fun _ _ _ ↦ inferInstance⟩
+  exact
+    Equations e d adjS adjR ∧
+    Equations
+      (JS := JS.mapHomologicalComplex (.up ℤ))
+      (JR := JR.mapHomologicalComplex (.up ℤ))
+      (rU := rU.mapHomologicalComplex (.up ℤ))
+      (rT := rT.mapHomologicalComplex (.up ℤ))
+      (qS := qS.mapHomologicalComplex (.up ℤ))
+      (qR := qR.mapHomologicalComplex (.up ℤ))
+      (NatIso.mapHomologicalComplex e (.up ℤ))
+      (NatIso.mapHomologicalComplex d (.up ℤ))
+      (adjS.mapHomologicalComplex (.up ℤ)) (adjR.mapHomologicalComplex (.up ℤ)) ∧
+    Equations (derivedSquare JS rT rU JR e) (derivedSquare rT qR qS rU d)
+      (OpenTensorNormalization.exactDerivedAdjunction adjS)
+      (OpenTensorNormalization.exactDerivedAdjunction adjR) ∧
+    Equations
+      (JS := (Functor.whiskeringRight ℕᵒᵖ A C).obj JS)
+      (JR := (Functor.whiskeringRight ℕᵒᵖ B D).obj JR)
+      (rU := (Functor.whiskeringRight ℕᵒᵖ A B).obj rU)
+      (rT := (Functor.whiskeringRight ℕᵒᵖ C D).obj rT)
+      (qS := (Functor.whiskeringRight ℕᵒᵖ C A).obj qS)
+      (qR := (Functor.whiskeringRight ℕᵒᵖ D B).obj qR)
+      ((Functor.whiskeringRight ℕᵒᵖ _ _).mapIso e)
+      ((Functor.whiskeringRight ℕᵒᵖ _ _).mapIso d)
+      (adjS.whiskerRight ℕᵒᵖ) (adjR.whiskerRight ℕᵒᵖ) ∧
+    Equations
+      (JS := ((Functor.whiskeringRight ℕᵒᵖ A C).obj JS).mapHomologicalComplex (.up ℤ))
+      (JR := ((Functor.whiskeringRight ℕᵒᵖ B D).obj JR).mapHomologicalComplex (.up ℤ))
+      (rU := ((Functor.whiskeringRight ℕᵒᵖ A B).obj rU).mapHomologicalComplex (.up ℤ))
+      (rT := ((Functor.whiskeringRight ℕᵒᵖ C D).obj rT).mapHomologicalComplex (.up ℤ))
+      (qS := ((Functor.whiskeringRight ℕᵒᵖ C A).obj qS).mapHomologicalComplex (.up ℤ))
+      (qR := ((Functor.whiskeringRight ℕᵒᵖ D B).obj qR).mapHomologicalComplex (.up ℤ))
+      (NatIso.mapHomologicalComplex ((Functor.whiskeringRight ℕᵒᵖ _ _).mapIso e) (.up ℤ))
+      (NatIso.mapHomologicalComplex ((Functor.whiskeringRight ℕᵒᵖ _ _).mapIso d) (.up ℤ))
+      ((adjS.whiskerRight ℕᵒᵖ).mapHomologicalComplex (.up ℤ))
+      ((adjR.whiskerRight ℕᵒᵖ).mapHomologicalComplex (.up ℤ)) ∧
+    Equations
+      (derivedSquare ((Functor.whiskeringRight ℕᵒᵖ _ _).obj JS)
+        ((Functor.whiskeringRight ℕᵒᵖ _ _).obj rT)
+        ((Functor.whiskeringRight ℕᵒᵖ _ _).obj rU) ((Functor.whiskeringRight ℕᵒᵖ _ _).obj JR)
+        ((Functor.whiskeringRight ℕᵒᵖ _ _).mapIso e))
+      (derivedSquare ((Functor.whiskeringRight ℕᵒᵖ _ _).obj rT)
+        ((Functor.whiskeringRight ℕᵒᵖ _ _).obj qR)
+        ((Functor.whiskeringRight ℕᵒᵖ _ _).obj qS) ((Functor.whiskeringRight ℕᵒᵖ _ _).obj rU)
+        ((Functor.whiskeringRight ℕᵒᵖ _ _).mapIso d))
+      (OpenTensorNormalization.exactDerivedAdjunction (adjS.whiskerRight ℕᵒᵖ))
+      (OpenTensorNormalization.exactDerivedAdjunction (adjR.whiskerRight ℕᵒᵖ))
+
 section EquationCalculus
 
 variable {A B C D : Type t} [Category.{h} A] [Category.{h} B]
@@ -160,7 +270,83 @@ variable [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} B]
   [PreservesFiniteLimits qS] [PreservesFiniteColimits qS]
   [PreservesFiniteLimits qR] [PreservesFiniteColimits qR]
 
+private theorem derivedSquare_symm :
+    derivedSquare rU JR JS rT e.symm = (derivedSquare JS rT rU JR e).symm := by
+  apply Iso.ext
+  simp only [derivedSquare, Iso.trans_hom, Iso.symm_hom, Iso.trans_inv,
+    Functor.mapDerivedCategoryNatIso_symm, Iso.symm_inv, Category.assoc]
+
+private theorem equations_derived (he : Equations e d adjS adjR) :
+    Equations (derivedSquare JS rT rU JR e) (derivedSquare rT qR qS rU d)
+      (OpenTensorNormalization.exactDerivedAdjunction adjS)
+      (OpenTensorNormalization.exactDerivedAdjunction adjR) := by
+  have hm := inverseMate_of_unit e d adjS adjR he.1
+  have : IsIso
+      ((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.symm.hom)).natTrans := by
+    change IsIso ((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.inv)).natTrans
+    rw [hm]
+    infer_instance
+  have hiso : asIso
+      ((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.symm.hom)).natTrans = e.symm := by
+    apply Iso.ext
+    exact hm
+  have hd := (exact_localization_inverse_mate adjS adjR d.symm).2.1
+  rw [hiso] at hd
+  change ((mateEquiv (OpenTensorNormalization.exactDerivedAdjunction adjS)
+      (OpenTensorNormalization.exactDerivedAdjunction adjR)).symm
+      (TwoSquare.mk _ _ _ _ (derivedSquare qS rU rT qR d.symm).hom)).natTrans =
+        (derivedSquare rU JR JS rT e.symm).hom at hd
+  rw [derivedSquare_symm, derivedSquare_symm] at hd
+  exact equations_of_inverseMate _ _ _ _ hd
+
 end EquationCalculus
+
+private theorem transport_of_equations {A B C D : Type t} [Category.{h} A] [Category.{h} B]
+    [Category.{h} C] [Category.{h} D] [Abelian A] [Abelian B] [Abelian C] [Abelian D]
+    [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} B]
+    [HasDerivedCategory.{w} C] [HasDerivedCategory.{w} D]
+    [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ A)] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ B)]
+    [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ C)] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ D)]
+    {JS : A ⥤ C} {JR : B ⥤ D} {rU : A ⥤ B} {rT : C ⥤ D}
+    {qS : C ⥤ A} {qR : D ⥤ B}
+    [JS.Additive] [JR.Additive] [rU.Additive] [rT.Additive] [qS.Additive] [qR.Additive]
+    [PreservesFiniteLimits JS] [PreservesFiniteColimits JS]
+    [PreservesFiniteLimits JR] [PreservesFiniteColimits JR]
+    [PreservesFiniteLimits rU] [PreservesFiniteColimits rU]
+    [PreservesFiniteLimits rT] [PreservesFiniteColimits rT]
+    [PreservesFiniteLimits qS] [PreservesFiniteColimits qS]
+    [PreservesFiniteLimits qR] [PreservesFiniteColimits qR]
+    (e : JS ⋙ rT ≅ rU ⋙ JR) (d : rT ⋙ qR ≅ qS ⋙ rU)
+    (adjS : JS ⊣ qS) (adjR : JR ⊣ qR)
+    (he : Equations e d adjS adjR) : Transport.{w} e d adjS adjR := by
+  let : PreservesFiniteLimits ((Functor.whiskeringRight ℕᵒᵖ A C).obj JS) :=
+    ⟨fun _ _ _ ↦ inferInstance⟩
+  let : PreservesFiniteColimits ((Functor.whiskeringRight ℕᵒᵖ A C).obj JS) :=
+    ⟨fun _ _ _ ↦ inferInstance⟩
+  let : PreservesFiniteLimits ((Functor.whiskeringRight ℕᵒᵖ B D).obj JR) :=
+    ⟨fun _ _ _ ↦ inferInstance⟩
+  let : PreservesFiniteColimits ((Functor.whiskeringRight ℕᵒᵖ B D).obj JR) :=
+    ⟨fun _ _ _ ↦ inferInstance⟩
+  let : PreservesFiniteLimits ((Functor.whiskeringRight ℕᵒᵖ A B).obj rU) :=
+    ⟨fun _ _ _ ↦ inferInstance⟩
+  let : PreservesFiniteColimits ((Functor.whiskeringRight ℕᵒᵖ A B).obj rU) :=
+    ⟨fun _ _ _ ↦ inferInstance⟩
+  let : PreservesFiniteLimits ((Functor.whiskeringRight ℕᵒᵖ C D).obj rT) :=
+    ⟨fun _ _ _ ↦ inferInstance⟩
+  let : PreservesFiniteColimits ((Functor.whiskeringRight ℕᵒᵖ C D).obj rT) :=
+    ⟨fun _ _ _ ↦ inferInstance⟩
+  let : PreservesFiniteLimits ((Functor.whiskeringRight ℕᵒᵖ C A).obj qS) :=
+    ⟨fun _ _ _ ↦ inferInstance⟩
+  let : PreservesFiniteColimits ((Functor.whiskeringRight ℕᵒᵖ C A).obj qS) :=
+    ⟨fun _ _ _ ↦ inferInstance⟩
+  let : PreservesFiniteLimits ((Functor.whiskeringRight ℕᵒᵖ D B).obj qR) :=
+    ⟨fun _ _ _ ↦ inferInstance⟩
+  let : PreservesFiniteColimits ((Functor.whiskeringRight ℕᵒᵖ D B).obj qR) :=
+    ⟨fun _ _ _ ↦ inferInstance⟩
+  exact ⟨he, equations_complex e d adjS adjR he,
+    equations_derived e d adjS adjR he, equations_tower e d adjS adjR he,
+    equations_complex _ _ _ _ (equations_tower e d adjS adjR he),
+    equations_derived _ _ _ _ (equations_tower e d adjS adjR he)⟩
 
 variable {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
   [HasSheafify J AddCommGrpCat.{max c v r}]
@@ -327,6 +513,68 @@ abbrev sliceAbelian (B : Sheaf (J.over U) RingCat.{max c v r}) :
   @SheafOfModules.instAbelian.{max c v r, v, max c v r, max c v}
     (Over U) _ (J.over U) B (sliceSheafify.{c, v, r} U)
       (sliceLocallyBijective.{c, v, r} U)
+
+/-- The concrete transported equations, with the recorded exactness instances explicit.
+Source: Stacks 03DI, 03DJ, 015F
+(blueprint: lem-cbc-ringed-open-scalar-adjunction). -/
+def transportedEquations
+    (e : localizedSystemExtension.{c, v, r} S U ⋙ scalars.{c, v, r} a ≅
+      sliceScalars.{c, v, r} U a ⋙ localizedSystemExtension.{c, v, r} R U) : Prop := by
+  letI : Abelian (SheafOfModules.{max c v r} (rings.{c, v, r} R)) :=
+    ambientAbelian.{c, v, r} (rings.{c, v, r} R)
+  letI : Abelian (SheafOfModules.{max c v r} ((rings.{c, v, r} R).over U)) :=
+    sliceAbelian.{c, v, r} U ((rings.{c, v, r} R).over U)
+  letI : Abelian (SheafOfModules.{max c v r} (rings.{c, v, r} S)) :=
+    ambientAbelian.{c, v, r} (rings.{c, v, r} S)
+  letI : Abelian (SheafOfModules.{max c v r} ((rings.{c, v, r} S).over U)) :=
+    sliceAbelian.{c, v, r} U ((rings.{c, v, r} S).over U)
+  letI : Functor.Additive (localizedSystemExtension.{c, v, r} R U) :=
+    localizedSystemExtensionAdditive.{c, v, r} R U
+  letI : PreservesFiniteLimits (localizedSystemExtension.{c, v, r} R U) :=
+    localizedSystemExtensionLimits.{c, v, r} R U
+  letI : PreservesFiniteColimits (localizedSystemExtension.{c, v, r} R U) :=
+    localizedSystemExtensionColimits.{c, v, r} R U
+  letI : Functor.Additive (localizedSystemRestriction.{c, v, r} R U) :=
+    localizedSystemRestrictionAdditive.{c, v, r} R U
+  letI : PreservesFiniteLimits (localizedSystemRestriction.{c, v, r} R U) :=
+    localizedSystemRestrictionLimits.{c, v, r} R U
+  letI : PreservesFiniteColimits (localizedSystemRestriction.{c, v, r} R U) :=
+    localizedSystemRestrictionColimits.{c, v, r} R U
+  letI : Functor.Additive (localizedSystemExtension.{c, v, r} S U) :=
+    localizedSystemExtensionAdditive.{c, v, r} S U
+  letI : PreservesFiniteLimits (localizedSystemExtension.{c, v, r} S U) :=
+    localizedSystemExtensionLimits.{c, v, r} S U
+  letI : PreservesFiniteColimits (localizedSystemExtension.{c, v, r} S U) :=
+    localizedSystemExtensionColimits.{c, v, r} S U
+  letI : Functor.Additive (localizedSystemRestriction.{c, v, r} S U) :=
+    localizedSystemRestrictionAdditive.{c, v, r} S U
+  letI : PreservesFiniteLimits (localizedSystemRestriction.{c, v, r} S U) :=
+    localizedSystemRestrictionLimits.{c, v, r} S U
+  letI : PreservesFiniteColimits (localizedSystemRestriction.{c, v, r} S U) :=
+    localizedSystemRestrictionColimits.{c, v, r} S U
+  letI : PreservesFiniteLimits (scalars.{c, v, r} a) := scalarLimits.{c, v, r} a
+  letI : PreservesFiniteColimits (scalars.{c, v, r} a) := scalarColimits.{c, v, r} a
+  letI : PreservesFiniteLimits (sliceScalars.{c, v, r} U a) := sliceLimits.{c, v, r} U a
+  letI : PreservesFiniteColimits (sliceScalars.{c, v, r} U a) := sliceColimits.{c, v, r} U a
+  exact ∀ [HasDerivedCategory.{w, max c v r, (max c v r) + 1}
+        (SheafOfModules.{max c v r} (rings.{c, v, r} R))]
+    [HasDerivedCategory.{w, max c v r, (max c v r) + 1}
+        (SheafOfModules.{max c v r} (rings.{c, v, r} S))]
+    [HasDerivedCategory.{w, max c v r, (max c v r) + 1}
+    (SheafOfModules.{max c v r} ((rings.{c, v, r} R).over U))]
+    [HasDerivedCategory.{w, max c v r, (max c v r) + 1}
+    (SheafOfModules.{max c v r} ((rings.{c, v, r} S).over U))]
+    [HasDerivedCategory.{w, max c v r, (max c v r) + 1}
+        (ℕᵒᵖ ⥤ SheafOfModules.{max c v r} (rings.{c, v, r} R))]
+    [HasDerivedCategory.{w, max c v r, (max c v r) + 1}
+        (ℕᵒᵖ ⥤ SheafOfModules.{max c v r} (rings.{c, v, r} S))]
+    [HasDerivedCategory.{w, max c v r, (max c v r) + 1}
+    (ℕᵒᵖ ⥤ SheafOfModules.{max c v r} ((rings.{c, v, r} R).over U))]
+    [HasDerivedCategory.{w, max c v r, (max c v r) + 1}
+    (ℕᵒᵖ ⥤ SheafOfModules.{max c v r} ((rings.{c, v, r} S).over U))],
+    Transport.{w, (max c v r) + 1, max c v r} e (restrictionIso.{c, v, r} U a)
+    (localizedSystemAdjunction.{c, v, r} S U)
+    (localizedSystemAdjunction.{c, v, r} R U)
 
 @[irreducible] private def presheafComparison :
     extensionByZeroPresheaf.{max c v r} (rings.{c, v, r} S) U ⋙
@@ -498,6 +746,105 @@ private theorem sheafComparison_equations :
   rw [(adjunctionGenerators.{c, v, r} U S).1,
     (adjunctionGenerators.{c, v, r} U R).1]
   exact sheafComparison_generator.{c, v, r} U a N (op W.unop.left) W.unop.hom x
+
+/-- The identity-induced scalar/slice-extension comparison, with the fixed units,
+counits, and all its termwise and localized tower identities.
+Source: Stacks 03DI, 03CY, 03DJ and 015F
+(blueprint: lem-cbc-ringed-open-scalar-adjunction).
+Proof: (1) The direct sums, reindexing maps and induced maps on sections coincide;
+the scalar action in either presentation is multiplication through a_V.
+(2) Extend the inverse presheaf comparison through module sheafification. Its
+underlying additive map is the sheafification of the inverse presheaf comparison,
+so it is invertible. Naturality follows from that presheaf comparison. The
+sheafification Hom equivalence proves the required generator normalization.
+(3) The direct-sum Hom correspondence gives the generator formulas for the fixed
+unit and counit, as in adjunctionGenerators.
+(4) Evaluate the unit equation on a section using the generator normalization.
+This unit equation identifies the inverse comparison with the inverse mate of
+the restriction square. The counit equation follows from the mate identities.
+(5) Restriction, extension and scalar restriction are additive and exact; kernels
+are sectionwise and cokernels are sheafified sectionwise quotients.
+(6) Apply the functors, isomorphisms and adjunctions levelwise to strict towers,
+and degreewise to cochain complexes. Naturality preserves transition and chain
+relations, and kernels and cokernels of towers are levelwise.
+(7) Exact functors preserve quasi-isomorphisms. The exact-localization inverse-mate
+theorem identifies the derived inverse mate with the localized comparison, using
+the specified composition identifications and exactDerivedAdjunction. The mate
+identities then give the derived unit and counit equations, for modules and
+strict towers alike. This uses neither flatness nor bounds. -/
+theorem comparison :
+    ∃ p : extensionByZeroPresheaf.{max c v r} (rings.{c, v, r} S) U ⋙
+        PresheafOfModules.restrictScalars
+          ((sheafCompose J
+            (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).map a).hom ≅
+      sliceScalars.{c, v, r} U a ⋙
+        extensionByZeroPresheaf.{max c v r} (rings.{c, v, r} R) U,
+    (∀ (N : SheafOfModules.{max c v r} ((rings.{c, v, r} S).over U))
+      (V : Cᵒᵖ) (x : extensionByZeroPresheafSection (rings.{c, v, r} S) U N V),
+      (p.hom.app N).app V x = x) ∧
+    ∃ e : localizedSystemExtension.{c, v, r} S U ⋙ scalars.{c, v, r} a ≅
+      sliceScalars.{c, v, r} U a ⋙ localizedSystemExtension.{c, v, r} R U,
+    (∀ (N : SheafOfModules.{max c v r} ((rings.{c, v, r} S).over U))
+      (V : Cᵒᵖ) (phi : V.unop ⟶ U) (x : N.val.obj (op (Over.mk phi))),
+      (e.hom.app N).val.app V (generator.{c, v, r} U S N V phi x) =
+        generator.{c, v, r} U R ((sliceScalars.{c, v, r} U a).obj N) V phi x) ∧
+    Equations e (restrictionIso.{c, v, r} U a)
+      (localizedSystemAdjunction.{c, v, r} S U)
+      (localizedSystemAdjunction.{c, v, r} R U) ∧
+    transportedEquations.{c, v, r, w} U a e := by
+  refine ⟨presheafComparison.{c, v, r} U a, ?_, sheafComparison.{c, v, r} U a,
+    ?_, sheafComparison_equations.{c, v, r} U a, ?_⟩
+  · exact presheafComparison_hom_apply.{c, v, r} U a
+  · intro N V phi x
+    exact sheafComparison_generator.{c, v, r} U a N V phi x
+  · let : Abelian (SheafOfModules.{max c v r} (rings.{c, v, r} R)) :=
+      ambientAbelian.{c, v, r} (rings.{c, v, r} R)
+    let : Abelian (SheafOfModules.{max c v r} ((rings.{c, v, r} R).over U)) :=
+      sliceAbelian.{c, v, r} U ((rings.{c, v, r} R).over U)
+    let : Abelian (SheafOfModules.{max c v r} (rings.{c, v, r} S)) :=
+      ambientAbelian.{c, v, r} (rings.{c, v, r} S)
+    let : Abelian (SheafOfModules.{max c v r} ((rings.{c, v, r} S).over U)) :=
+      sliceAbelian.{c, v, r} U ((rings.{c, v, r} S).over U)
+    let : Functor.Additive (localizedSystemExtension.{c, v, r} R U) :=
+      localizedSystemExtensionAdditive.{c, v, r} R U
+    let : PreservesFiniteLimits (localizedSystemExtension.{c, v, r} R U) :=
+      localizedSystemExtensionLimits.{c, v, r} R U
+    let : PreservesFiniteColimits (localizedSystemExtension.{c, v, r} R U) :=
+      localizedSystemExtensionColimits.{c, v, r} R U
+    let : Functor.Additive (localizedSystemRestriction.{c, v, r} R U) :=
+      localizedSystemRestrictionAdditive.{c, v, r} R U
+    let : PreservesFiniteLimits (localizedSystemRestriction.{c, v, r} R U) :=
+      localizedSystemRestrictionLimits.{c, v, r} R U
+    let : PreservesFiniteColimits (localizedSystemRestriction.{c, v, r} R U) :=
+      localizedSystemRestrictionColimits.{c, v, r} R U
+    let : Functor.Additive (localizedSystemExtension.{c, v, r} S U) :=
+      localizedSystemExtensionAdditive.{c, v, r} S U
+    let : PreservesFiniteLimits (localizedSystemExtension.{c, v, r} S U) :=
+      localizedSystemExtensionLimits.{c, v, r} S U
+    let : PreservesFiniteColimits (localizedSystemExtension.{c, v, r} S U) :=
+      localizedSystemExtensionColimits.{c, v, r} S U
+    let : Functor.Additive (localizedSystemRestriction.{c, v, r} S U) :=
+      localizedSystemRestrictionAdditive.{c, v, r} S U
+    let : PreservesFiniteLimits (localizedSystemRestriction.{c, v, r} S U) :=
+      localizedSystemRestrictionLimits.{c, v, r} S U
+    let : PreservesFiniteColimits (localizedSystemRestriction.{c, v, r} S U) :=
+      localizedSystemRestrictionColimits.{c, v, r} S U
+    let : PreservesFiniteLimits (scalars.{c, v, r} a) := scalarLimits.{c, v, r} a
+    let : PreservesFiniteColimits (scalars.{c, v, r} a) := scalarColimits.{c, v, r} a
+    let : PreservesFiniteLimits (sliceScalars.{c, v, r} U a) := sliceLimits.{c, v, r} U a
+    let : PreservesFiniteColimits (sliceScalars.{c, v, r} U a) := sliceColimits.{c, v, r} U a
+    dsimp only [transportedEquations]
+    intro _ _ _ _ _ _ _ _
+    exact transport_of_equations.{w, (max c v r) + 1, max c v r}
+      (JS := localizedSystemExtension.{c, v, r} S U)
+      (JR := localizedSystemExtension.{c, v, r} R U)
+      (rU := sliceScalars.{c, v, r} U a) (rT := scalars.{c, v, r} a)
+      (qS := localizedSystemRestriction.{c, v, r} S U)
+      (qR := localizedSystemRestriction.{c, v, r} R U)
+      (sheafComparison.{c, v, r} U a) (restrictionIso.{c, v, r} U a)
+      (localizedSystemAdjunction.{c, v, r} S U)
+      (localizedSystemAdjunction.{c, v, r} R U)
+      (sheafComparison_equations.{c, v, r} U a)
 
 end RingedOpenScalar
 end SheafOfModules

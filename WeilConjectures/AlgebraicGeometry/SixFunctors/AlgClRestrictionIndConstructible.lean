@@ -404,4 +404,67 @@ private lemma constructible_extend {X : Scheme.{u}}
     ((pullbackExtendScalarsComparison (U.immersion i) R S φ).app M).symm
     (lfp_extend (F.obj R) (F.obj S) (F.map φ) (hU i))
 
+/-- A constructible algebraic-closure coefficient sheaf becomes ind-constructible
+when restricted to any finite coefficient field.
+
+Source: blueprint latest, uniform constructible Ext, algebraic-closure coefficient
+argument. (blueprint: lem-sfb-algcl-restriction-ind-constructible).
+
+Proof: descend the sheaf to a constructible sheaf B over a finite field F. The finite
+fields containing E and F form a filtered final subsystem of all finite coefficient
+fields. The canonical coefficient cocone expresses Res_E(Omega tensor_F B) as the
+filtered colimit of Res_E(G tensor_F B). Scalar extension preserves finite presentations
+on each stratum, and finite-field restriction preserves constructibility by a finite
+basis. Evaluating the coefficient complex cocone in degree zero proves the claimed
+ordinary sheaf colimit. Transport across the descended model isomorphism. This argument
+also applies to the zero sheaf and the empty scheme. -/
+theorem algClRestriction_indConstructible
+    (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
+    (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (padicAlgClRingObj X ℓ))
+    (hM : IsConstructibleModuleObject (padicAlgClRingObj X ℓ) M) :
+    IsIndConstructibleModuleObject (padicSubfieldRingObj X ℓ E)
+      ((Mod.comap (padicSubfieldRingObjToPadicAlgCl X ℓ E)).obj M) := by
+  classical
+  let := PadicAlgCl.normedFieldOfAlgebra ℓ E.1
+  obtain ⟨F, B, hB, ⟨eB⟩⟩ := exists_constructible_finiteCoefficient_model X ℓ M hM
+  let := PadicAlgCl.normedFieldOfAlgebra ℓ F.1
+  let G := IsFiltered.max E F
+  let I := AsSmall.{u + 1} (Under G)
+  let H : I ⥤ PadicAlgCl.FiniteIntermediateField ℓ :=
+    (AsSmall.equiv (C := Under G)).inverse ⋙ Under.forget G
+  have : IsFiltered I := IsFiltered.of_equivalence (AsSmall.equiv (C := Under G))
+  have : H.Final := by dsimp [H]; infer_instance
+  have he (i : I) : E ≤ H.obj i :=
+    (leOfHom (IsFiltered.leftToMax E F)).trans (leOfHom (ULift.down i).hom)
+  have hf (i : I) : F ≤ H.obj i :=
+    (leOfHom (IsFiltered.rightToMax E F)).trans (leOfHom (ULift.down i).hom)
+  let C := (HomologicalComplex.single _ (.up ℤ) 0).obj B
+  let c := (HomologicalComplex.eval _ (.up ℤ) 0).mapCocone
+    (coefficientComplexCocone X ℓ C H he hf)
+  obtain ⟨hc⟩ := nonempty_isColimit_coefficientComplexCocone X ℓ C H he hf
+  have : HasColimitsOfSize.{u + 1, u + 1}
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)) :=
+    IsGrothendieckAbelian.hasColimits _
+  have : HasColimitsOfShape I
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)) :=
+    inferInstance
+  have : PreservesColimitsOfShape I (HomologicalComplex.eval
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E))
+      (.up ℤ) 0) := inferInstance
+  have hc' : IsColimit c := isColimitOfPreserves _ hc
+  have hC : IsConstructibleModuleObject (padicSubfieldRingObj X ℓ F) (C.X 0) :=
+    _root_.constructible_of_iso (HomologicalComplex.singleObjXSelf (.up ℤ) 0 B).symm hB
+  have hind : IsIndConstructibleModuleObject (padicSubfieldRingObj X ℓ E) c.pt := by
+    refine ⟨I, inferInstance, inferInstance, ⟨_, c.ι, hc'⟩, ?_⟩
+    intro i
+    exact finiteCoefficientRestriction_constructible X ℓ (he i) _
+      (constructible_extend _ _ (padicSubfieldRingObjMap X ℓ (hf i)) hC)
+  let e : c.pt ≅ (Mod.comap (padicSubfieldRingObjToPadicAlgCl X ℓ E)).obj M :=
+    (Mod.comap (padicSubfieldRingObjToPadicAlgCl X ℓ E)).mapIso
+      ((Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ F)).mapIso
+        (HomologicalComplex.singleObjXSelf (.up ℤ) 0 B) ≪≫ eB)
+  exact ObjectProperty.prop_of_iso
+    (IsIndConstructibleModuleObject (padicSubfieldRingObj X ℓ E)) e hind
+
 end AlgebraicGeometry.ProEtale

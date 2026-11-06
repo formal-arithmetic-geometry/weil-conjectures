@@ -28,6 +28,15 @@ universe u v
 
 namespace Algebra
 
+/-- A field extension `K/k` is separably generated if there is a transcendence basis whose
+generated intermediate field has a separable algebraic extension to `K`.
+Source: Stacks Project, Algebra, Definition 10.42.1 (1), Tag 030O
+(blueprint: def-weil-pbc-separable-field-extension). -/
+def IsSeparablyGenerated (k : Type u) (K : Type v) [Field k] [Field K] [Algebra k K] :
+    Prop :=
+  ∃ s : Set K, IsTranscendenceBasis k ((↑) : s → K) ∧
+    Algebra.IsSeparable (IntermediateField.adjoin k s) K
+
 /-- A field extension `K/k` is separable if every intermediate field finitely generated as a
 field over `k` is separably generated over `k`.
 Source: Stacks Project, Algebra, Definition 10.42.1 (2), Tag 030O

@@ -22,6 +22,57 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.FiniteFreeDirectImage
 
+private def cochainCounit : DerivedCategory.Q ⋙ E ⟶
+    T.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q where
+  app K := ε.app ((HomotopyCategory.quotient A (.up ℤ)).obj K)
+  naturality := by
+    intro X Y f
+    exact ε.naturality ((HomotopyCategory.quotient A (.up ℤ)).map f)
+
+private theorem factorsh_eq (F : A ⥤ B) [F.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F] (K : CochainComplex A ℤ) :
+    F.mapDerivedCategoryFactorsh.hom.app ((HomotopyCategory.quotient A (.up ℤ)).obj K) =
+      F.mapDerivedCategoryFactors.hom.app K := by
+  rw [F.mapDerivedCategoryFactorsh_hom_app]
+  change F.mapDerivedCategory.map (𝟙 _) ≫ F.mapDerivedCategoryFactors.hom.app K ≫
+    𝟙 _ ≫ DerivedCategory.Qh.map (𝟙 _) = _
+  erw [F.mapDerivedCategory.map_id, DerivedCategory.Qh.map_id]
+  simp only [Category.id_comp]
+  exact Category.comp_id _
+
+private theorem scalarComparisonDescent_homotopy_normalized (H : HomotopyCategory A (.up ℤ)) :
+    (SheafOfModules.RingedTensor.scalarComparisonDescent T F G T' E
+      (cochainCounit T E ε) E' (cochainCounit T' E' ε') χ).hom.app
+      (DerivedCategory.Qh.obj H) ≫
+      E'.map (F.mapDerivedCategoryFactorsh.hom.app H) ≫
+      ε'.app ((F.mapHomotopyCategory (.up ℤ)).obj H) =
+    G.mapDerivedCategory.map (ε.app H) ≫
+      G.mapDerivedCategoryFactorsh.hom.app ((T.mapHomotopyCategory (.up ℤ)).obj H) ≫
+      DerivedCategory.Qh.map
+        ((Functor.mapHomotopyCategoryCompIso (Iso.refl (T ⋙ G)) (.up ℤ)).hom.app H ≫
+          (χ.hom.mapHomotopyCategory (.up ℤ)).app H ≫
+          (Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ T')) (.up ℤ)).inv.app H) := by
+  obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective H
+  rw [factorsh_eq]
+  erw [factorsh_eq]
+  have h := SheafOfModules.RingedTensor.scalarComparisonDescent_normalized T F G T'
+    E (cochainCounit T E ε) E' (cochainCounit T' E' ε') χ K
+  have hh : DerivedCategory.Qh.map
+      ((Functor.mapHomotopyCategoryCompIso (Iso.refl (T ⋙ G)) (.up ℤ)).hom.app
+          ((HomotopyCategory.quotient A (.up ℤ)).obj K) ≫
+        (χ.hom.mapHomotopyCategory (.up ℤ)).app
+          ((HomotopyCategory.quotient A (.up ℤ)).obj K) ≫
+        (Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ T')) (.up ℤ)).inv.app
+          ((HomotopyCategory.quotient A (.up ℤ)).obj K)) =
+      DerivedCategory.Q.map
+        ((Functor.mapHomologicalComplexCompIso (Iso.refl (T ⋙ G)) (.up ℤ)).hom.app K ≫
+          (χ.hom.mapHomologicalComplex (.up ℤ)).app K ≫
+          (Functor.mapHomologicalComplexCompIso (Iso.refl (F ⋙ T')) (.up ℤ)).inv.app K) := by
+    simp only [Functor.map_comp]
+    rfl
+  rw [hh]
+  exact h
+
 section CoordinateColumns
 
 universe uA1 vA1 uB1 vB1
@@ -107,5 +158,136 @@ private theorem coordinateInjection_square (F : A ⥤ B) [F.Additive]
   exact powerInjection_map d F X i
 
 end CoordinateColumns
+
+/-- The finite-basis tensor coordinates commute with termwise scalar pullback.
+This concerns inverse image and the computed comparison, before the comparison
+is identified with the conjugate of the derived direct-image square.
+Source: Stacks Project, Tags 03EL, 06YY and 0944.
+(blueprint: lem-sp-finite-free-direct-image-pullback-coordinates).
+
+Proof: choose the given basis of S_W over R_W. Pull it back by the exact module
+inverse image, identify the pulled-back regular module with the regular module
+of S_Z, and use the restriction/pullback comparison to obtain a basis of S_Z
+of the same rank. The maps from tuples to sums of basis tensors and from tensors
+to their coordinate tuples are inverse by the tensor relations. They are natural
+in the module. In these coordinates scalar extension is a finite power, hence
+is exact, including in rank zero. Its universal derived counit is therefore
+invertible on every complex. Apply the coordinates degreewise and descend through
+localization, obtaining the two displayed families of isomorphisms and their
+naturality. Apply ordinary balancing degreewise and conjugate by the two
+invertible universal scalar counits to obtain beta and its computed equation.
+For the last equation first project to each basis coordinate. The ordinary
+restriction/pullback map identifies the coefficient actions, and ordinary
+balancing sends each pulled-back basis tensor to the same tensor with its
+pulled-back coefficient. Thus the coordinate projections agree on all pure
+tensors; tensor extensionality proves the ordinary square. Passing to complexes
+and localization proves the stated equation. -/
+theorem finiteFreeDirectImage_pullbackCoordinates {Z W : Scheme.{u}} (q : Z ⟶ W)
+    (sW : ScalarModel W) (sZ : ScalarModel Z)
+    (R S : Coefficients q) (a : CoefficientMap R S) (d : ℕ)
+    (hfree : Nonempty ((proEtaleRingRestrictScalars a.target).obj
+            (SheafOfModules.unit ((sheafCompose (ProEt.topology W)
+              (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S.target)) ≅
+          SheafOfModules.free (R := (sheafCompose (ProEt.topology W)
+            (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R.target)
+            (ULift.{u + 1} (Fin d)))) :
+    ∃ (eW : ∀ X : DerivedCategory (proEtaleRingModules W R.target),
+        (⨁ fun _ : Fin d ↦ X) ≅
+          (proEtaleRingRestrictScalars a.target).mapDerivedCategory.obj
+            ((sW.presentation a.target).derived.obj X))
+      (eZ : ∀ X : DerivedCategory (proEtaleRingModules Z R.source),
+        (⨁ fun _ : Fin d ↦ X) ≅
+          (proEtaleRingRestrictScalars a.source).mapDerivedCategory.obj
+            ((sZ.presentation a.source).derived.obj X))
+      (β : (sW.presentation a.target).derived ⋙
+          proEtaleRingDerivedPullback q S.target S.source S.identification ≅
+        proEtaleRingDerivedPullback q R.target R.source R.identification ⋙
+          (sZ.presentation a.source).derived),
+      (∀ H : HomotopyCategory (proEtaleRingModules Z R.source) (.up ℤ),
+        IsIso ((sZ.presentation a.source).counit.app H)) ∧
+      BalancingComputed sW sZ a β ∧
+      (∀ {X Y : DerivedCategory (proEtaleRingModules Z R.source)} (f : X ⟶ Y)
+        (i : Fin d), biproduct.ι (fun _ : Fin d ↦ X) i ≫ (eZ X).hom ≫
+          (proEtaleRingRestrictScalars a.source).mapDerivedCategory.map
+            ((sZ.presentation a.source).derived.map f) =
+          f ≫ biproduct.ι (fun _ : Fin d ↦ Y) i ≫ (eZ Y).hom) ∧
+      ∀ (X : DerivedCategory (proEtaleRingModules W R.target)) (i : Fin d),
+        (proEtaleRingDerivedPullback q R.target R.source R.identification).map
+            (biproduct.ι _ i ≫ (eW X).hom) ≫
+          (proEtaleRingRestrictionDerivedPullback q R.target S.target R.source S.source
+            a.target a.source R.identification S.identification a.comm).inv.app
+              ((sW.presentation a.target).derived.obj X) ≫
+          (proEtaleRingRestrictScalars a.source).mapDerivedCategory.map (β.hom.app X) =
+        biproduct.ι _ i ≫
+          (eZ ((proEtaleRingDerivedPullback q R.target R.source R.identification).obj X)).hom := by
+  obtain ⟨φW, φZ, hεW, hεZ, hordinary⟩ :=
+    finiteFreeDirectImage_ordinaryPullbackCoordinates q sW sZ R S a d hfree
+  let T := (sW.presentation a.target).ordinary
+  let T' := (sZ.presentation a.source).ordinary
+  let U := proEtaleRingRestrictScalars a.target
+  let U' := proEtaleRingRestrictScalars a.source
+  let F := proEtaleRingModulePullback q R.target R.source R.identification
+  let G := proEtaleRingModulePullback q S.target S.source S.identification
+  let E := (sW.presentation a.target).derived
+  let E' := (sZ.presentation a.source).derived
+  let εh := (sW.presentation a.target).counit
+  let εh' := (sZ.presentation a.source).counit
+  let (H : HomotopyCategory (proEtaleRingModules W R.target) (.up ℤ)) :
+      IsIso (εh.app H) := hεW H
+  let : IsIso εh := NatIso.isIso_of_isIso_app _
+  let (H : HomotopyCategory (proEtaleRingModules Z R.source) (.up ℤ)) :
+      IsIso (εh'.app H) := hεZ H
+  let : IsIso εh' := NatIso.isIso_of_isIso_app _
+  let ε := cochainCounit T E εh
+  let ε' := cochainCounit T' E' εh'
+  let χ := ordinaryBalancing sW sZ a
+  let := proEtaleRingRestrictionPullbackInv_isIso q R.target S.target R.source S.source
+    a.target a.source R.identification S.identification a.comm
+  let ρ := asIso (proEtaleRingRestrictionPullbackInv q R.target S.target R.source S.source
+    a.target a.source R.identification S.identification a.comm)
+  let Φ := SheafOfModules.RingedTensor.coordinateDescent T U d E ε φW
+  let Φ' := SheafOfModules.RingedTensor.coordinateDescent T' U' d E' ε' φZ
+  let β := SheafOfModules.RingedTensor.scalarComparisonDescent T F G T' E ε E' ε' χ
+  let ρD := (Functor.mapDerivedCategoryCompIso U F).symm ≪≫
+    Functor.mapDerivedCategoryNatIso ρ ≪≫ Functor.mapDerivedCategoryCompIso G U'
+  let τ := Functor.whiskerLeft E ρD.hom ≫
+    Functor.whiskerRight β.hom U'.mapDerivedCategory
+  have hρD : ρD.hom = (proEtaleRingRestrictionDerivedPullback q R.target S.target
+      R.source S.source a.target a.source R.identification S.identification a.comm).inv := by
+    simp only [ρD, proEtaleRingRestrictionDerivedPullback,
+      Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv, Category.assoc]
+    rw [← Functor.mapDerivedCategoryNatIso_symm, Iso.symm_symm_eq]
+  have hsquare (M : proEtaleRingModules W R.target) :
+      F.map (φW.hom.app M) ≫ (SheafOfModules.RingedTensor.powerComparison F d).hom.app M =
+        ρ.hom.app (T.obj M) ≫ U'.map (χ.hom.app M) ≫ φZ.hom.app (F.obj M) := by
+    unfold SheafOfModules.RingedTensor.powerComparison
+    exact hordinary M
+  have hτ (X : DerivedCategory (proEtaleRingModules W R.target)) :
+      F.mapDerivedCategory.map (Φ.hom.app X) ≫
+        (SheafOfModules.RingedTensor.powerComparison F.mapDerivedCategory d).hom.app X =
+      τ.app X ≫ Φ'.hom.app (F.mapDerivedCategory.obj X) := by
+    simpa only [τ, NatTrans.comp_app, Functor.whiskerLeft_app,
+      Functor.whiskerRight_app, Category.assoc] using
+      SheafOfModules.RingedTensor.derivedCoordinateSquare T U d F G T' U' E ε E' ε' χ
+      ρ φW φZ hsquare Φ Φ'
+      (SheafOfModules.RingedTensor.coordinateDescent_normalized T U d E ε φW)
+      (SheafOfModules.RingedTensor.coordinateDescent_normalized T' U' d E' ε' φZ) X
+  let eW (X : DerivedCategory (proEtaleRingModules W R.target)) :=
+    biproduct.isoProduct (fun _ : Fin d ↦ X) ≪≫ (Φ.app X).symm
+  let eZ (X : DerivedCategory (proEtaleRingModules Z R.source)) :=
+    biproduct.isoProduct (fun _ : Fin d ↦ X) ≪≫ (Φ'.app X).symm
+  refine ⟨eW, eZ, β, hεZ, ?_, ?_, ?_⟩
+  · intro H
+    exact scalarComparisonDescent_homotopy_normalized T E εh F G T' E' εh' χ H
+  · intro X Y f i
+    simpa only [eZ, Iso.trans_hom, Iso.symm_hom, Iso.app_inv,
+      Functor.comp_map, Category.assoc] using
+      coordinateInjection_naturality d (E' ⋙ U'.mapDerivedCategory) Φ' f i
+  · intro X i
+    have h := coordinateInjection_square d F.mapDerivedCategory
+      (E ⋙ U.mapDerivedCategory) (E' ⋙ U'.mapDerivedCategory) Φ Φ' τ hτ X i
+    simpa only [τ, eW, eZ, Iso.trans_hom, Iso.symm_hom, Iso.app_inv,
+      NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+      Category.assoc, hρD] using h
 
 end AlgebraicGeometry.Scheme.FiniteFreeDirectImage

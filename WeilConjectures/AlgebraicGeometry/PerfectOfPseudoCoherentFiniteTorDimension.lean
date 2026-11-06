@@ -140,4 +140,78 @@ private theorem affine_projective_strictlyPerfect (S : Scheme.{uP}) (U : S.Opens
     simp only [Category.assoc, Iso.hom_inv_id_assoc, ← F.map_comp]
     rw [hsplit, F.map_id]
 
+/-- A pseudo-coherent derived object of finite Tor dimension is perfect.
+Source: Stacks Project, Cohomology of Sheaves, Lemma 20.49.5 (08CQ)
+(blueprint: lem-pc-pseudo-coherent-finite-tor-perfect).
+
+Proof:
+1. Choose global Tor bounds `[a,b]`. Perfectness is local (`def-pc-perfect-complex`).
+   Pseudo-coherence (`def-pur-pseudo-coherent-complex`) gives local bounded-above
+   finite free representatives; refine to affine opens. Restriction of derived tensor
+   (`lem-pc-affine-derived-pullback-tensor-tilde`, part 1), testing with the pushforward
+   of any module on an open, preserves the same Tor bounds.
+2. On an affine open `Spec R`, sections of the structure sheaf are `R`
+   (`lem-weil-pbc-spec-module-tilde-sections`). The finite free terms and their matrix
+   differentials therefore come from a bounded-above finite free R-module complex P.
+   The tilde functor is exact and faithful by its localization description and recovery
+   of modules by global sections. The tensor comparison
+   (`lem-pc-affine-derived-pullback-tensor-tilde`, part 3) transfers the Tor bounds to P.
+   The ring criterion (`lem-pc-ring-pseudo-coherent-finite-tor-perfect`) gives a bounded
+   finite projective complex isomorphic to P in D(R).
+3. Exact tilde carries the quasi-isomorphisms in this derived isomorphism to
+   quasi-isomorphisms of sheaf complexes. Finite projective terms sheafify to direct
+   summands of finite free sheaves. Thus the resulting complex is strictly perfect,
+   and the local characterization (`def-pc-perfect-complex`) proves perfectness. -/
+theorem isPerfect_of_isPseudoCoherent_of_hasFiniteTorDimension (S : Scheme.{uP})
+    [HasDerivedCategory.{wP} (SheafOfModules.{uP} (moduleRings S.toRingedSpace))]
+    [∀ U : S.Opens,
+      HasDerivedCategory.{wP} (SheafOfModules.{uP} ((moduleRings S.toRingedSpace).over U))]
+    (K : schemeDerivedCategory S) (hK : IsPseudoCoherent S K)
+    (hTor : HasFiniteTorDimension S K) : IsPerfect S K := by
+  intro x
+  obtain ⟨U, hxU, P, hb, hf, ⟨eP⟩⟩ := hK x
+  obtain ⟨V, hV, hxV, hVU⟩ := exists_isAffineOpen_mem_and_subset (U := U) hxU
+  let F := SheafOfModules.overMap.{uP} (moduleRings S.toRingedSpace) (homOfLE hVU)
+  let G := SheafOfModules.overFunctor.{uP} (moduleRings S.toRingedSpace) U
+  let PV := (F.mapHomologicalComplex (.up ℤ)).obj P
+  have hbV : ∃ N : ℤ, ∀ i : ℤ, N < i → Limits.IsZero (PV.X i) := by
+    obtain ⟨N, hN⟩ := hb
+    exact ⟨N, fun i hi ↦ F.map_isZero (hN i hi)⟩
+  have hfV (i : ℤ) : ∃ r : ℕ, Nonempty (PV.X i ≅ SheafOfModules.free
+      (R := (moduleRings S.toRingedSpace).over V) (ULift.{uP} (Fin r))) := by
+    obtain ⟨r, ⟨e⟩⟩ := hf i
+    let ef : F.obj (SheafOfModules.free
+        (R := (moduleRings S.toRingedSpace).over U) (ULift.{uP} (Fin r))) ≅
+        SheafOfModules.free
+          (R := (moduleRings S.toRingedSpace).over V) (ULift.{uP} (Fin r)) :=
+      (asIso (Limits.sigmaComparison F (fun _ : ULift.{uP} (Fin r) ↦
+        SheafOfModules.unit ((moduleRings S.toRingedSpace).over U)))).symm ≪≫
+          Limits.Sigma.mapIso (fun _ ↦ SheafOfModules.overMapUnitIso
+            (R := moduleRings S.toRingedSpace) (homOfLE hVU))
+    exact ⟨r, ⟨F.mapIso e ≪≫ ef⟩⟩
+  have : Limits.PreservesFiniteLimits (G ⋙ F) := Limits.comp_preservesFiniteLimits _ _
+  have : Limits.PreservesFiniteColimits (G ⋙ F) := Limits.comp_preservesFiniteColimits _ _
+  let eV : (SheafOfModules.overFunctor.{uP}
+      (moduleRings S.toRingedSpace) V).mapDerivedCategory.obj K ≅
+        DerivedCategory.Q.obj PV :=
+    (Functor.mapDerivedCategoryNatIso
+      (SheafOfModules.overFunctorMap.{uP}
+        (moduleRings S.toRingedSpace) (homOfLE hVU))).symm.app K ≪≫
+      (Functor.mapDerivedCategoryCompIso G F).app K ≪≫ F.mapDerivedCategory.mapIso eP ≪≫
+        F.mapDerivedCategoryFactors.app P
+  obtain ⟨M, b, hMb, hMf, ⟨eM⟩⟩ := affine_finiteFree_model S V hV PV hbV hfV
+  let R := S.presheaf.obj (.op V)
+  let : HasDerivedCategory (ModuleCat.{uP} R) := HasDerivedCategory.standard _
+  have hMpc : DerivedCategory.IsPseudoCoherent (DerivedCategory.Q.obj M) :=
+    ⟨M, b, hMb, hMf, ⟨Iso.refl _⟩⟩
+  let eKM := eV ≪≫ (DerivedCategory.Q.mapIso eM).symm
+  have hMtor := finiteTorAmplitude_of_affine_sheafification S V hV K M ⟨eKM⟩ hTor
+  obtain ⟨E, hEb, hEf, hEp, ⟨eE⟩⟩ :=
+    DerivedCategory.isPerfect_of_pseudoCoherent_finiteTorAmplitude
+      (DerivedCategory.Q.obj M) hMpc hMtor
+  let T := (affinePerfectSheafification S V hV).mapHomologicalComplex (.up ℤ)
+  obtain ⟨D, _, ⟨c⟩⟩ := affine_localized_derived_sheafification S V hV
+  refine ⟨V, hxV, T.obj E, affine_projective_strictlyPerfect S V hV E hEb hEf hEp, ?_⟩
+  exact ⟨eKM ≪≫ (c.app M).symm ≪≫ D.mapIso eE.symm ≪≫ c.app E⟩
+
 end AlgebraicGeometry.Scheme

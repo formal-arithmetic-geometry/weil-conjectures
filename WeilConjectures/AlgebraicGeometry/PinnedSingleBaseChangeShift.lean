@@ -50,6 +50,65 @@ def singleDegreeBaseChangeTarget
   ((Scheme.Modules.tensorPullback g' ⋙ DerivedCategory.singleFunctor
     (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) n) ⋙ schemeDerivedDirectImage.{u, w, w} f')
 
+theorem pinned_single_base_change_shift
+    [∀ Y : Scheme.{u},
+      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+    [∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z), (Scheme.Modules.tensorPullback k).Additive]
+    {X S X' S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S)
+    (g' : X' ⟶ X) (f' : X' ⟶ S') (h : g' ≫ f = f' ≫ g)
+    {D : Type*} [Category D] [HasShift D ℤ]
+    (H : schemeDerivedCategory.{u, w} S' ⥤ D) [H.CommShift ℤ] (n : ℤ) :
+    ∃ a : singleDegreeBaseChangeSource.{u, w} f g n ⋙ H ≅
+        (singleDegreeBaseChangeSource.{u, w} f g 0 ⋙ H) ⋙ shiftFunctor D (-n),
+    ∃ b : singleDegreeBaseChangeTarget.{u, w} g' f' n ⋙ H ≅
+        (singleDegreeBaseChangeTarget.{u, w} g' f' 0 ⋙ H) ⋙ shiftFunctor D (-n),
+    ∀ G : X.Modules,
+      H.map (singleDegreeBaseChangeComposite.{u, w} f g g' f' h n G) ≫ b.hom.app G =
+        a.hom.app G ≫ (shiftFunctor D (-n)).map
+          (H.map (singleDegreeBaseChangeComposite.{u, w} f g g' f' h 0 G)) := by
+  set_option backward.defeqAttrib.useBackward true in
+    dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
+    obtain ⟨s, hs⟩ := exists_pinned_pullback_counit_shifts.{u, w}
+    let := s g
+    let := s g'
+    obtain ⟨τ, hτ, hτshift⟩ :=
+      exists_pinned_base_change_mate_shifts.{u, w} s hs f g g' f' h
+    have := hτshift
+    obtain ⟨c, hc⟩ := exists_pinned_single_tensor_shifts.{u, w} g' (s g') (hs g')
+    let F := DerivedCategory.singleFunctors
+      (SheafOfModules.{u} (moduleRings X.toRingedSpace))
+    let T := (DerivedCategory.singleFunctors
+      (SheafOfModules.{u} (moduleRings X'.toRingedSpace))).precomp
+        (Scheme.Modules.tensorPullback g')
+    let β : F.postcomp (schemeDerivedDirectImage f ⋙ derivedPullback g) ⟶
+        T.postcomp (schemeDerivedDirectImage f') :=
+      SingleFunctors.postcompNatTrans F τ ≫
+        (F.postcompPostcompIso (derivedPullback g') (schemeDerivedDirectImage f')).inv ≫
+        SingleFunctors.postcompHom c (schemeDerivedDirectImage f')
+    let βH := SingleFunctors.postcompHom β H
+    let a := ((F.postcomp (schemeDerivedDirectImage f ⋙ derivedPullback g)).postcomp H).shiftIso
+      (-n) n 0 (by omega) |>.symm
+    let b := ((T.postcomp (schemeDerivedDirectImage f')).postcomp H).shiftIso
+      (-n) n 0 (by omega) |>.symm
+    refine ⟨a, b, ?_⟩
+    intro G
+    have hb := congr_app (βH.comm (-n) n 0 (by omega)) G
+    simp only [NatTrans.comp_app, Functor.whiskerRight_app] at hb
+    have hβ (i : ℤ) : (βH.hom i).app G =
+        H.map (singleDegreeBaseChangeComposite.{u, w} f g g' f' h i G) := by
+      change H.map (τ.app ((F.functor i).obj G) ≫ 𝟙 _ ≫
+        (schemeDerivedDirectImage f').map ((c.hom i).app G)) = _
+      simp only [Category.id_comp]
+      rw [hτ, hc]
+      rfl
+    rw [hβ n, hβ 0] at hb
+    apply (cancel_epi
+      ((((F.postcomp (schemeDerivedDirectImage f ⋙ derivedPullback g)).postcomp H).shiftIso
+        (-n) n 0 (by omega)).hom.app G)).1
+    dsimp only [a, b, Iso.symm_hom]
+    simp only [Iso.hom_inv_id_app_assoc]
+    rw [← Category.assoc, hb, Category.assoc, Iso.hom_inv_id_app, Category.comp_id]
+
 /-- The base-change comparison followed by the composition-pinned tensor counit.
 This uses the same composition-pinned left-derived counit as the original comparison.
 Source: Stacks Project, Tag 08HY (blueprint: lem-pc-pinned-single-base-change-shift). -/

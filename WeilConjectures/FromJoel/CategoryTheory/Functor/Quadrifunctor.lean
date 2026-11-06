@@ -231,4 +231,12 @@ lemma uncurry₄_map_app {F G : C₁ ⥤ C₂ ⥤ C₃ ⥤ C₄ ⥤ E} (f : F �
     (uncurry₄.map f).app X = (((f.app X.1).app X.2.1).app X.2.2.1).app X.2.2.2 := by
   rfl
 
+/-- The "postcomposition" with a functor `E ⥤ E'` gives a functor
+`(E ⥤ E') ⥤ (C₁ ⥤ C₂ ⥤ C₃ ⥤ C₄ ⥤ E) ⥤ C₁ ⥤ C₂ ⥤ C₃ ⥤ C₄ ⥤ E'`. -/
+@[simps!]
+def Functor.postcompose₄ {E' : Type*} [Category E'] :
+    (E ⥤ E') ⥤ (C₁ ⥤ C₂ ⥤ C₃ ⥤ C₄ ⥤ E) ⥤ C₁ ⥤ C₂ ⥤ C₃ ⥤ C₄ ⥤ E' :=
+  whiskeringRight C₄ _ _ ⋙ whiskeringRight C₃ _ _ ⋙ whiskeringRight C₂ _ _ ⋙
+    whiskeringRight C₁ _ _
+
 end CategoryTheory
