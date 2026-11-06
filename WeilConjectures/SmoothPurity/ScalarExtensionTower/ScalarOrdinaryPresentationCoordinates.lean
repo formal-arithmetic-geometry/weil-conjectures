@@ -87,7 +87,7 @@ attribute [local irreducible] completedIntegralCommRingSheafUnrestricted
   unrestrictedIntegralTensorSection integralOrdinaryTensorSection integralScalarTensorSection
 
 attribute [local implicit_reducible] integralCoefficientCommRingSheaf integralCoefficientSheaf
-  unrestrictedIntegralReductionFunctor Functor.mapHomologicalComplex
+  unrestrictedIntegralReductionFunctor
   SemilinearSections.systemRing coefficientSequenceCommRingSheaf coefficientSequenceCommRingPresheaf
 
 private theorem finiteReductionUnit (Y : Scheme.{u})
