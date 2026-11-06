@@ -4,6 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.InternalDerivedScalarComparisons
 public import WeilConjectures.AlgebraicGeometry.ModuleObjectProjectionMap
 import WeilConjectures.AlgebraicGeometry.InternalScalarPullRouteModel
@@ -78,13 +80,15 @@ theorem scalar_tensor_pull_normalization (a : Λ ⟶ Λ') [IsMonHom a]
     CondensedRing.derivedComapUpperStarIso a f ≪≫
     Functor.isoWhiskerLeft (V a Y)
       (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ f).symm
-  let vY := (V₀ a Y).mapDerivedCategoryFactors.app
+  let vY : (V a Y).obj (𝟙_ (DerivedCategory (Modules Λ' Y))) ≅ B a Y :=
+    cast (by rfl) <| (V₀ a Y).mapDerivedCategoryFactors.app
       ((CochainComplex.singleFunctor (Modules Λ' Y) 0).obj
         (Mod.regular (condensedRingObj Λ' Y))) ≪≫
     DerivedCategory.Q.mapIso
       ((HomologicalComplex.singleMapHomologicalComplex (V₀ a Y) (.up ℤ) 0).app
         (Mod.regular (condensedRingObj Λ' Y)))
-  let vX := (V₀ a X).mapDerivedCategoryFactors.app
+  let vX : (V a X).obj (𝟙_ (DerivedCategory (Modules Λ' X))) ≅ B a X :=
+    cast (by rfl) <| (V₀ a X).mapDerivedCategoryFactors.app
       ((CochainComplex.singleFunctor (Modules Λ' X) 0).obj
         (Mod.regular (condensedRingObj Λ' X))) ≪≫
     DerivedCategory.Q.mapIso

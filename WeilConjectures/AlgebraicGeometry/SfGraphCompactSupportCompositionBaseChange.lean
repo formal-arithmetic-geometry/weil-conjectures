@@ -40,7 +40,7 @@ namespace AlgebraicGeometry.Etale
 attribute [local irreducible] Functor.rightDerivedFunctor Functor.mapDerivedCategory
   sfGraphCompactSupportCompIso
   upperStar lowerStar openImmersionLowerShriek Functor.leftDerivedFunctor
-  Functor.mapDerivedCategoryNatIso Functor.mapDerivedCategoryCompIso
+  Functor.mapDerivedCategoryNatIso
   rightDerivedLowerStarComp etaleGraphNormalizedProperOpenExchange
   rightDerivedLowerStarCompOpenImmersionLowerShriekIso
   exactDerivedBaseChangeMap mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso

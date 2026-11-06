@@ -73,29 +73,6 @@ namespace AlgebraicGeometry.ProEtale
 
 open Scheme
 
-section EtaleOrigin
-
-variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-
-variable {A} in
-/-- The extension by zero along an open immersion of a complex bounded below of étale origin is
-bounded below of étale origin: `j_! ν_U^* L ≅ ν_X^* j_!^{ét} L`
-(`AlgebraicGeometry.ProEtale.openImmersionLowerShriekComparisonUpperStarIso`, blueprint
-`lem-cbc-proetale-extension-zero-comparison`), and `j_!^{ét}` is exact. -/
-lemma plusEtaleOrigin_mapDerivedCategory_openImmersionLowerShriek {U X : Scheme.{u}}
-    (j : U ⟶ X) [IsOpenImmersion j]
-    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology U) A)}
-    (hK : DerivedCategory.plusEtaleOrigin A U K) :
-    DerivedCategory.plusEtaleOrigin A X (D((j)_!open[A]).obj K) := by
-  obtain ⟨L, ⟨n, hn⟩, ⟨e⟩⟩ := hK
-  refine ⟨D(Etale.openImmersionLowerShriek A j).obj L,
-    ⟨n, (Etale.openImmersionLowerShriek A j).isGE_mapDerivedCategory_obj L n⟩,
-    ⟨((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
-      Functor.mapDerivedCategoryNatIso (openImmersionLowerShriekComparisonUpperStarIso A j) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _).app L ≪≫ D((j)_!open[A]).mapIso e⟩⟩
-
-end EtaleOrigin
-
 variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
 
 section Proper
@@ -247,52 +224,6 @@ lemma _root_.CategoryTheory.NatTrans.isIso_app_comp_whiskerLeft_comp {C D E : Ty
     IsIso ((a ≫ Functor.whiskerLeft F β ≫ b).app K) := by
   rw [NatTrans.comp_app, NatTrans.comp_app, Functor.whiskerLeft_app]
   infer_instance
-
-variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
-
-omit [Finite Λ] in
-lemma isIso_derivedBaseChangeMap_app_openImmersionLowerShriek_of_compactification [Finite Λ]
-    (sq : IsPullback g' f' f g) (c : Compactification f)
-    (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)))
-    (hK : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X K) :
-    IsIso ((ProEtale.derivedBaseChangeMap (ModuleCat.{u + 1} Λ)
-      (c.isPullback_g_ofIsPullback sq).flip.toCommSq).app
-        (D((c.i)_!open[ModuleCat.{u + 1} Λ]).obj K)) :=
-  isIso_derivedBaseChangeMap_app_of_isProper Λ (c.isPullback_g_ofIsPullback sq).flip _
-    (plusEtaleOrigin_mapDerivedCategory_openImmersionLowerShriek c.i hK)
-
-/-- Blueprint `thm-cbc-finite-level-proetale`: Finite-level pro-etale compact-support base
-change.
-
-For a finite coefficient ring `Λ`, a cartesian square
-```
-X' --g'--> X
-|f'        |f
-Y' --g---> Y
-```
-with `g` arbitrary, a compactification `c` of `f` (`f` separated of finite type) with base change
-`c ×_Y Y'` (blueprint `def-cbc-compact-support-square`), and a complex `K` of pro-étale sheaves on
-`X` bounded below of étale origin (`K ≅ ν_X^* L` with `L ∈ D⁺(X_ét, Λ)`, an étale-origin
-witness
-of blueprint `def-weil-pbc-etale-origin-witness`), the pro-étale exchange map
-`Ex_!(c) : Lg^* Rf_!(c) K ⟶ Rf'_!(c ×_Y Y') Lg'^* K` of
-`AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactificationBaseChangeMap` is an
-isomorphism. As the statement concerns a component of a natural transformation, it is
-independent of the witness.
-
-Its first factor is the pro-étale proper base change map of `c.g` at `(c.i)_! K`, which is again
-of étale origin
-(`AlgebraicGeometry.ProEtale.plusEtaleOrigin_mapDerivedCategory_openImmersionLowerShriek`),
-an isomorphism by `AlgebraicGeometry.ProEtale.isIso_derivedBaseChangeMap_app_of_isProper`; the
-other factors are isomorphisms. -/
-theorem isIso_rightDerivedLowerShriekOfCompactificationBaseChangeMap_app
-    (sq : IsPullback g' f' f g) (c : Compactification f)
-    (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)))
-    (hK : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X K) :
-    IsIso ((rightDerivedLowerShriekOfCompactificationBaseChangeMap (ModuleCat.{u + 1} Λ) sq
-      c).app K) := by
-  have := isIso_derivedBaseChangeMap_app_openImmersionLowerShriek_of_compactification Λ sq c K hK
-  exact NatTrans.isIso_app_comp_whiskerLeft_comp _ _ _ K
 
 end Finite
 
