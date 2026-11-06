@@ -935,9 +935,6 @@ private theorem dSquare_id_inverse (R : C₁ ⥤ C₂) (P : C₁ ⥤ C₁) (p : 
 
 end ExactLocalizationCalculus
 
--- Apply the existing exact-square pasting theorems in both orientations.
-
-
 private theorem sfPullback_congr {X Y : Scheme.{u}} {f g : X ⟶ Y} (h : f = g) :
     eqToIso (congrArg (sfIntrinsicPullback A) h) =
       sfIntrinsicTransportIso A
@@ -1318,8 +1315,7 @@ attribute [local irreducible] sfMateIso sfExchange sfIntrinsicDerivedOpenMate
   sfIntrinsicDerivedPullbackComp sfIntrinsicDerivedOpenComp
   sfIntrinsicDerivedPullbackId sfIntrinsicDerivedOpenId
 
--- Kernel checking the concrete unit transport exceeds 200000 heartbeats (101 seconds).
-set_option maxHeartbeats 400000 in
+attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits in
 private theorem sfRestriction {U' U Y' Y : Scheme.{u}}
     (gU : U' ⟶ U) (j' : U' ⟶ Y') (j : U ⟶ Y) (g : Y' ⟶ Y)
     [IsOpenImmersion j] [IsOpenImmersion j'] (sq : IsPullback gU j' j g)
@@ -1329,23 +1325,47 @@ private theorem sfRestriction {U' U Y' Y : Scheme.{u}}
         ((sfIntrinsicDerivedOpen A j).obj K) ≫
       (sfIntrinsicDerivedPullback A j').map ((sfExchange A gU j' j g sq).hom.app K) =
         (sfIntrinsicDerivedOpenUnit A j').app ((sfIntrinsicDerivedPullback A gU).obj K) := by
+  have hmate {C₁ C₂ D₁ D₂ : Type*}
+      [Category C₁] [Category C₂] [Category D₁] [Category D₂]
+      [Abelian C₁] [Abelian C₂] [Abelian D₁] [Abelian D₂]
+      [HasDerivedCategory C₁] [HasDerivedCategory C₂]
+      [HasDerivedCategory D₁] [HasDerivedCategory D₂]
+      (L₁ : C₁ ⥤ D₁) (R₁ : D₁ ⥤ C₁) (L₂ : C₂ ⥤ D₂) (R₂ : D₂ ⥤ C₂)
+      (G : C₁ ⥤ C₂) (H : D₁ ⥤ D₂)
+      [L₁.Additive] [R₁.Additive] [L₂.Additive] [R₂.Additive] [G.Additive] [H.Additive]
+      [PreservesFiniteLimits L₁] [PreservesFiniteColimits L₁]
+      [PreservesFiniteLimits R₁] [PreservesFiniteColimits R₁]
+      [PreservesFiniteLimits L₂] [PreservesFiniteColimits L₂]
+      [PreservesFiniteLimits R₂] [PreservesFiniteColimits R₂]
+      [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+      [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+      (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)
+      [IsIso adj₁.unit] [IsIso adj₂.unit]
+      (q : R₁ ⋙ G ≅ H ⋙ R₂) (b : G ⋙ L₂ ≅ L₁ ⋙ H)
+      (hb : mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ b.hom) =
+        TwoSquare.mk _ _ _ _ q.hom) (K : DerivedCategory C₁) :
+      G.mapDerivedCategory.map (((mapDerivedCategoryIdIso C₁).inv ≫ dMap adj₁.unit ≫
+        (mapDerivedCategoryCompIso L₁ R₁).inv).app K) ≫
+        (mapDerivedCategorySquareIso q).hom.app (L₁.mapDerivedCategory.obj K) ≫
+        R₂.mapDerivedCategory.map ((mapDerivedCategorySquareIso b).inv.app K) =
+      ((mapDerivedCategoryIdIso C₂).inv ≫ dMap adj₂.unit ≫
+        (mapDerivedCategoryCompIso L₂ R₂).inv).app (G.mapDerivedCategory.obj K) := by
+    rw [← asIso_hom adj₁.unit, ← asIso_hom adj₂.unit, dMap_iso, dMap_iso]
+    apply dUnit_square_inverse L₁ R₁ L₂ R₂ G H (asIso adj₁.unit) (asIso adj₂.unit) q b
+    intro X
+    have h := unit_mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ b.hom) X
+    rw [hb] at h
+    exact h
   have := sfOpenUnit_isIso A j
   have := sfOpenUnit_isIso A j'
   have := sfOpenMate_isIso A gU j' j g sq
   unfold sfIntrinsicDerivedOpenUnit sfIntrinsicDerivedSquarePullback sfExchange sfMateIso
-  apply dUnit_square_inverse (sfIntrinsicExtensionByZero j A) (sfIntrinsicPullback A j)
+  exact hmate (sfIntrinsicExtensionByZero j A) (sfIntrinsicPullback A j)
     (sfIntrinsicExtensionByZero j' A) (sfIntrinsicPullback A j')
     (sfIntrinsicPullback A gU) (sfIntrinsicPullback A g)
-    (asIso (sfIntrinsicOpenAdjunction A j).unit)
-    (asIso (sfIntrinsicOpenAdjunction A j').unit)
+    (sfIntrinsicOpenAdjunction A j) (sfIntrinsicOpenAdjunction A j')
     (sfIntrinsicSquarePullback A gU j' j g sq.w)
-    (asIso (sfIntrinsicOpenMate A gU j' j g sq.w)) _ K
-  intro X
-  have h := unit_mateEquiv (sfIntrinsicOpenAdjunction A j)
-    (sfIntrinsicOpenAdjunction A j')
-    (TwoSquare.mk _ _ _ _ (sfIntrinsicOpenMate A gU j' j g sq.w)) X
-  rw [sfOpenMate_mate A gU j' j g sq.w] at h
-  exact h
+    (asIso (sfIntrinsicOpenMate A gU j' j g sq.w)) (sfOpenMate_mate A gU j' j g sq.w) K
 
 private theorem sfDerivedMate_horizontal {U'' U' U Y'' Y' Y : Scheme.{u}}
     (gU : U' ⟶ U) (hU : U'' ⟶ U') (j : U ⟶ Y) (j' : U' ⟶ Y')
