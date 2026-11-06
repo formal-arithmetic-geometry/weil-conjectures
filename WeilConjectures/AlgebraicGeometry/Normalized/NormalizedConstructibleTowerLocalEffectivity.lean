@@ -41,12 +41,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-private local instance normalizedTowerLevelCategory
-    (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
-    (d : AdicCoefficientDatum A) (n : ℕ) :
-    Category.{u + 2} (DerivedCategory (pbcModules X ((pbcAdicRings X d).obj (op n)))) :=
-  inferInstance
-
+set_option trace.Meta.synthInstance true in
 /-- Bounded constructible etale origin of a level of the recorded adic tower. The witness
 C represents an object in the existing finite-coefficient bounded-constructible essential
 image. Its coefficient transport is restriction along the canonical ring-sheaf comparison,
