@@ -54,12 +54,12 @@ def pullSquare (sq : CommSq v p' p g) :
         (ProEtaleWeilSheaf.upperStar k₀ l p').mapDerivedCategory ≅
       (ProEtaleWeilSheaf.upperStar k₀ l p).mapDerivedCategory ⋙
         (ProEtaleWeilSheaf.upperStar k₀ l v).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso
       ((ProEtaleWeilSheaf.upperStarCompIso k₀ l p' g).symm ≪≫
         ProEtaleWeilSheaf.upperStarCongrIso k₀ l sq.w.symm ≪≫
         ProEtaleWeilSheaf.upperStarCompIso k₀ l v p) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 @[irreducible] private def abelianPullSquare (sq : CommSq v p' p g) :
     ProEtaleWeilSheaf.upperStar k₀ l g ⋙ ProEtaleWeilSheaf.upperStar k₀ l p' ≅
