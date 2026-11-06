@@ -226,13 +226,14 @@ theorem canonicalSingleBaseChangeComparison
     (v.app ((HomotopyCategory.singleFunctor C_X' 0).obj ((pullback p).obj M))) hh
   set_option backward.isDefEq.respectTransparency false in
   set_option backward.isDefEq.respectTransparency.types false in
+  with_unfolding_all
     simpa only [canonicalSingleDirectImageMap, canonicalSinglePullbackMap, cast_eq,
       Category.assoc, C_X, C_S, C_X', C_S', E, Q_S, Q_X', Q_S', F, G, H, I,
       ε_g, ε_p, t_g, t_p, a, b₀, b₁, c, d, k, v, sf, Scheme.Modules,
       Scheme.ringCatSheaf, moduleRings, DerivedCategory.singleFunctor,
       DerivedCategory.singleFunctors, HomotopyCategory.singleFunctor,
-      HomotopyCategory.singleFunctors, SingleFunctors.postcomp, Functor.comp_map,
+      HomotopyCategory.singleFunctors, SingleFunctors.postcomp, Functor.comp_map, Functor.comp_obj,
       DerivedCategory.Qh, HomologicalComplexUpToQuasiIso.Qh, HomotopyCategory.quotient,
-      Quotient.lift_map_functor_map, DerivedCategory.Q] using hf
+      Quotient.lift_map_functor_map, Quotient.lift_obj_functor_obj, DerivedCategory.Q] using hf
 
 end AlgebraicGeometry.Scheme.Modules
