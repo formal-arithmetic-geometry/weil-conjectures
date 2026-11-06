@@ -180,13 +180,12 @@ private theorem canonical_natural {X Y : Scheme.{u}} (f : X ⟶ Y)
   rw [GeneralAlgebraicallyClosedCoefficients.associator_formula l Ω Y E L M h k,
     GeneralAlgebraicallyClosedCoefficients.associator_formula l Ω X E L M h k]
   delta GeneralAlgebraicallyClosedCoefficients.normalizedAssociator transition
-  ext K
-  simpa only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app] using
-    scalar_tower_with_endpoint l
-      (Coefficient.{u} l Ω E) (Coefficient.{u} l Ω L) (Coefficient.{u} l Ω M)
-      (coefficientInclusion l Ω E L h) (coefficientInclusion l Ω L M k)
-      (coefficientInclusion l Ω E M (h.trans k))
-      ((AlgebraicallyClosedCoefficients.coefficientInclusion_laws l Ω).2 E L M h k) f K
+  dsimp (config := { instances := true }) only [stageCategory, Stage]
+  exact scalar_tower_nat l
+    (Coefficient.{u} l Ω E) (Coefficient.{u} l Ω L) (Coefficient.{u} l Ω M)
+    (coefficientInclusion l Ω E L h) (coefficientInclusion l Ω L M k)
+    (coefficientInclusion l Ω E M (h.trans k))
+    ((AlgebraicallyClosedCoefficients.coefficientInclusion_laws l Ω).2 E L M h k) f
 
 private theorem canonical_coherent {X Y : Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (l : X.residueField x)]
