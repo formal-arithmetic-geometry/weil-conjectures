@@ -6,13 +6,13 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SixFunctors.Normalized.NormalizedDVRTower
-public import Mathlib.Algebra.Homology.Localization
-import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.SmoothPurity.Derived.DerivedComplete
 public import WeilConjectures.SmoothPurity.Derived.DerivedScalarExtensionRestrictionAdjunctionSupplement
 import WeilConjectures.SixFunctors.Normalized.NormalizedDVRRoosFiniteReduction
 import WeilConjectures.SixFunctors.Normalized.NormalizedDVRKFlatReductionModel
 import Mathlib.Algebra.Homology.Functor
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # Effectivity of normalized DVR towers
 
@@ -288,6 +288,42 @@ private theorem normalizedDVRTower_tau (T : NormalizedDVRTower l E X D hl)
         (normalizedDVRResCompletedComp l E X D hl h).hom.app (T.M n) := by
   exact T.tower_tau h
 
+private theorem normalizedDVRFactorsh_hom
+    {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]
+    [HasDerivedCategory A] [HasDerivedCategory B]
+    (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    (K : CochainComplex A ℤ) :
+    F.mapDerivedCategoryFactorsh.hom.app ((HomotopyCategory.quotient _ (.up ℤ)).obj K) =
+      F.mapDerivedCategoryFactors.hom.app K := by
+  rw [F.mapDerivedCategoryFactorsh_hom_app]
+  simp only [DerivedCategory.quotientCompQhIso,
+    HomologicalComplexUpToQuasiIso.quotientCompQhIso, Functor.mapHomotopyCategoryFactors,
+    Quotient.lift.isLift_hom, Quotient.lift.isLift_inv]
+  erw [F.mapDerivedCategory.map_id, (DerivedCategory.Qh (C := B)).map_id,
+    Category.id_comp, Category.comp_id, Category.comp_id]
+
+private theorem normalizedDVRComparison_hom
+    {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]
+    [HasDerivedCategory A] [HasDerivedCategory B]
+    (L : A ⥤ B) [L.Additive] (R : B ⥤ A) [R.Additive]
+    [PreservesFiniteLimits R] [PreservesFiniteColimits R]
+    (F : DerivedCategory A ⥤ DerivedCategory B) (K : CochainComplex A ℤ)
+    (e : F.obj (DerivedCategory.Q.obj K) ⟶
+      DerivedCategory.Q.obj ((L.mapHomologicalComplex (.up ℤ)).obj K)) :
+    R.mapDerivedCategory.map
+        (F.map ((DerivedCategory.quotientCompQhIso A).inv.app K) ≫ e ≫
+          DerivedCategory.Qh.map ((L.mapHomotopyCategoryFactors (.up ℤ)).hom.app K) ≫
+          (DerivedCategory.quotientCompQhIso B).hom.app
+            ((L.mapHomologicalComplex (.up ℤ)).obj K)) ≫
+        R.mapDerivedCategoryFactors.hom.app ((L.mapHomologicalComplex (.up ℤ)).obj K) =
+      R.mapDerivedCategory.map e ≫
+        R.mapDerivedCategoryFactors.hom.app ((L.mapHomologicalComplex (.up ℤ)).obj K) := by
+  simp only [DerivedCategory.quotientCompQhIso,
+    HomologicalComplexUpToQuasiIso.quotientCompQhIso, Functor.mapHomotopyCategoryFactors,
+    Quotient.lift.isLift_hom, Quotient.lift.isLift_inv]
+  erw [F.map_id, (DerivedCategory.Qh (C := B)).map_id,
+    Category.id_comp, Category.comp_id, Category.comp_id]
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 private theorem normalizedDVRKFlatUnit (n : ℕ)
@@ -311,25 +347,27 @@ private theorem normalizedDVRKFlatUnit (n : ℕ)
     exact ((integralTowerMaps_existUnique l E X D hl P).exists.choose_spec.1 n i U x).trans
       (unrestrictedTowerUnit_condition l E X P n i U x).symm
   have h' := h.trans hq
-  unfold normalizedDVRKFlatComparison normalizedDVRIntegralAdjunction
-  dsimp only [Functor.mapHomotopyCategory, CategoryTheory.Quotient.lift,
-    Functor.comp_obj] at h'
-  simp only [Functor.mapDerivedCategoryFactorsh_hom_app,
-    Functor.mapHomotopyCategoryFactors, DerivedCategory.quotientCompQhIso,
-    HomologicalComplexUpToQuasiIso.quotientCompQhIso,
-    Quotient.lift.isLift_inv, Quotient.lift.isLift_hom] at h' ⊢
-  erw [(scalarReductionDerivedExtension l E X n).map_id, DerivedCategory.Qh.map_id,
-    Category.id_comp, Category.comp_id]
-  conv at h' =>
-    lhs
-    rhs
-    rhs
-    erw [(scalarReductionDerivedRestriction l E X n).map_id,
-      DerivedCategory.Qh.map_id, Category.id_comp, Category.comp_id]
+  have hf := normalizedDVRFactorsh_hom (scalarReductionRestriction l E X n)
+    (unrestrictedTowerFiniteComplex l E X n P)
+  change (scalarReductionRestriction l E X n).mapDerivedCategoryFactorsh.hom.app
+      (((scalarReductionExtension l E X n).mapHomotopyCategory (.up ℤ)).obj
+        ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) = _ at hf
+  have h' := (congrArg (fun k ↦
+    (derivedScalarExtensionRestrictionAdjunction l E X n).choose.unit.app
+        (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫
+      (scalarReductionDerivedRestriction l E X n).map
+        ((scalarReductionCounit l E X n).app
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫ k) hf).symm.trans h'
+  have hc := normalizedDVRComparison_hom (scalarReductionExtension l E X n)
+    (scalarReductionRestriction l E X n) (scalarReductionDerivedExtension l E X n) P
+    ((scalarReductionCounit l E X n).app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))
+  unfold normalizedDVRKFlatComparison
+  refine (congrArg (fun k ↦
+    (normalizedDVRIntegralAdjunction l E X n).unit.app (DerivedCategory.Q.obj P) ≫ k) hc).trans ?_
+  unfold normalizedDVRIntegralAdjunction
   dsimp only [DerivedCategory.Qh, HomologicalComplexUpToQuasiIso.Qh,
-    CategoryTheory.Quotient.lift] at h'
-  simp only [HomotopyCategory.quotient_obj_as] at h'
-  convert h'.trans (congrArg DerivedCategory.Q.map hg.symm) using 1 <;> rfl
+    Functor.mapHomotopyCategory, CategoryTheory.Quotient.lift, Functor.comp_obj] at h' ⊢
+  exact h'.trans (congrArg DerivedCategory.Q.map hg.symm)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
