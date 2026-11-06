@@ -222,8 +222,7 @@ private theorem perfect_intrinsicComplete (T : Scheme.{u}) [IsNoetherian T]
     exact (Category.comp_id ((H i).f j).left).symm.trans hh
   set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
   have hlocal (f : ((H i).X j).left ⟶ s.domain i)
-      (eC : (DerivedCategory.Q.obj C : d.derived ((H i).X j).left) ≅
-        (d.pull (f ≫ s.immersion i)).obj K)
+      (eC : DerivedCategory.Q.obj C ≅ (d.pull (f ≫ s.immersion i)).obj K)
       (hf : f = ((H i).X j).hom) :
       IsDerivedCompleteIntrinsic ((H i).X j).left d r a ha
         ((d.pull (f ≫ s.immersion i)).obj K) C eC := by
