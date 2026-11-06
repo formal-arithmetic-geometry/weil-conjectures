@@ -285,3 +285,5 @@
 
 - Build 7 finished with two failing modules: restriction factors (prepared fix) and a further pruned homotopy tensor-counit helper. Restored that helper from a3a372af5 without its former heartbeat override. 18 Lean files changed, 23 restored declarations.
 - Build 8 validates these changes on the assigned module and affine locality.
+
+- Build 8: restriction factors and homotopy tensor counit green. Remaining failures: normalize reflexive casts before the degree-zero counit map-composition rewrite; reverse quotientCompQhIso when transporting a K-to-Q representative to Qh. Both fixes prepared for build 9.
