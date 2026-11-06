@@ -288,9 +288,9 @@ noncomputable def mapDerivedCategoryConstantTwistCompExtensionByZeroIso (j : U �
     [IsOpenImmersion j] [j.IsOver (Spec (CommRingCat.of k₀))] :
     (constantTwist k₀ l U b).mapDerivedCategory ⋙ (extensionByZero k₀ l j).mapDerivedCategory ≅
       (extensionByZero k₀ l j).mapDerivedCategory ⋙ (constantTwist k₀ l X b).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (constantTwistCompExtensionByZeroIso k₀ l b j) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 variable (k₀ l) in
 /-- The direct image with compact support of pro-étale Weil sheaves commutes with constant
