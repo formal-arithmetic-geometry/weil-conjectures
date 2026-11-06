@@ -223,7 +223,7 @@ private theorem openProjection_isIso
   let de := e.mapDerivedCategory
   let L := (SheafOfModules.localizedModuleExtension R (ProEt.mk j)).mapDerivedCategory
   let hder : proEtaleRingDerivedOpenExtension j R S c ≅ de.functor ⋙ L :=
-    Functor.mapDerivedCategoryNatIso he ≪≫ Functor.mapDerivedCategoryCompIso _ _
+    Functor.mapDerivedCategoryNatIso he ≪≫ (Functor.mapDerivedCategoryCompIso _ _).symm
   let adjL := SheafOfModules.localizedModuleDerivedAdjunction R (ProEt.mk j)
   have : IsIso adjL.unit := SheafOfModules.localizedDerivedUnit_isIso j R
   have : L.Full := adjL.fullyFaithfulLOfIsIsoUnit.full
