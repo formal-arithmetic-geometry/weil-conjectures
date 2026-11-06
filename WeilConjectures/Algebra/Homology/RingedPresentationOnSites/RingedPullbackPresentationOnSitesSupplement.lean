@@ -108,6 +108,11 @@ private local instance {C : Type uC} [Category.{vC} C] (I : Type u) :
     HasLimitsOfShape (Discrete I) (Cᵒᵖ ⥤ RingCat.{u}) :=
   functorCategoryHasLimitsOfShape
 
+private local instance {C : Type uC} [Category.{vC} C]
+    (J : GrothendieckTopology C) (I : Type u) :
+    HasLimitsOfShape (Discrete I) (Sheaf J RingCat.{u}) :=
+  hasLimitsOfShape_of_hasLimitsOfShape_createsLimitsOfShape (sheafToPresheaf J RingCat.{u})
+
 private theorem reflect_binary
     {C D : Type*} [Category C] [Category D] [HasBinaryProducts C] [HasBinaryProducts D]
     (F : C ⥤ D) [PreservesFiniteProducts F]
