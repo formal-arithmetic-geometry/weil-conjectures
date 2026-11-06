@@ -146,7 +146,7 @@ lemma upperStarConstantSheafIso_hom_app_tensorUnit (g : X ⟶ Y) :
 
 /-- The identification of the unit of `D(X_ét)` with the unit sheaf placed in degree zero
 (`AlgebraicGeometry.Etale.singleFunctorObjUnitIso`) is the identity. -/
-lemma singleFunctorObjUnitIso_inv (X : Scheme.{u}) :
+private lemma singleFunctorObjUnitIso_inv (X : Scheme.{u}) :
     (singleFunctorObjUnitIso A X).inv = 𝟙 _ := by
   have h₁ : ε (DerivedCategory.Qh (C := Sheaf X.smallEtaleTopology A)) = 𝟙 _ := rfl
   have h₂ : ε (HomotopyCategory.quotient (Sheaf X.smallEtaleTopology A) (.up ℤ)) = 𝟙 _ := rfl
