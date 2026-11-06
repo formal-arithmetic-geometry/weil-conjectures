@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.SquareTransport
+import Mathlib.Tactic.IrreducibleDef
 
 /-!
 
@@ -187,6 +188,8 @@ lemma Etale.baseChangeCounitStep_app (K : DerivedCategory.Plus (Sheaf X.smallEta
         ((derivedUpperStarLowerStarAdjunctionPlus A f).counit.app K)) := by
   simp [baseChangeCounitStep]
 
+-- Private-environment replay can unfold `no_expose` definitions. Use a checked opaque
+-- wrapper to prevent projections from expanding the whole derived construction.
 variable {f g f' g'} in
 /-- The *derived base-change morphism* `BC_sq : Lg^* ∘ Rf_* ⟶ Rf'_* ∘ Lg'^*` of a
 commutative square `g' ≫ f = f' ≫ g` of schemes on the bounded below derived
@@ -196,8 +199,7 @@ the counit contraction.
 Proper base change and smooth base change assert that this single morphism is an
 isomorphism under two different sets of geometric hypotheses; no such hypothesis is
 built into the definition. (blueprint: `sk-def-exchange`) -/
-@[no_expose]
-noncomputable def Etale.baseChange (sq : CommSq g' f' f g) :
+noncomputable irreducible_def Etale.baseChange (sq : CommSq g' f' f g) :
     R+((f)_*[A]) ⋙ D+((g)^*[A]) ⟶ D+((g')^*[A]) ⋙ R+((f')_*[A]) :=
   (Etale.baseChangeUnitStep A f g f') ≫ (Etale.baseChangeSquareStep A sq).hom ≫
     (Etale.baseChangeCounitStep A f f' g')
@@ -206,7 +208,7 @@ lemma Etale.baseChange_app (sq : CommSq g' f' f g)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology A)) :
     (Etale.baseChange A sq).app K = (baseChangeUnitStep A f g f').app K ≫
       (baseChangeSquareStep A sq).hom.app K ≫ (baseChangeCounitStep A f f' g').app K := by
-  simp [Etale.baseChange]
+  simp [Etale.baseChange_def]
 
 /-- Blueprint `sbc-lem-bc-naturality`: the derived base-change map is natural in the complex:
 for `u : K ⟶ K'` the square formed by `BC_sq(K)`, `BC_sq(K')`, `g^* Rf_*(u)` and
