@@ -39,11 +39,13 @@ private theorem sfbCompleteModel_triangulated
   classical
   let P : ObjectProperty (ConstantCompletion.D O) := ConstantCompletion.IsComplete q
   let hRshift (U : C) : (ringedDerivedRestriction O U).CommShift ℤ := by
-    exact inferInstanceAs ((SheafOfModules.overFunctor
-      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O) U).mapDerivedCategory.CommShift ℤ)
+    let F := SheafOfModules.overFunctor.{u + 1}
+      ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj O) U
+    exact inferInstanceAs (F.mapDerivedCategory.CommShift ℤ)
   let hRtri (U : C) : (ringedDerivedRestriction O U).IsTriangulated := by
-    exact inferInstanceAs ((SheafOfModules.overFunctor
-      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O) U).mapDerivedCategory.IsTriangulated)
+    let F := SheafOfModules.overFunctor.{u + 1}
+      ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj O) U
+    exact inferInstanceAs (F.mapDerivedCategory.IsTriangulated)
   let H (U : C) (f : O.obj.obj (op U)) :=
     (Functor.curry.obj (derivedInternalHom (J.over U) (O.over U))).obj
       (op ((DerivedCategory.singleFunctor _ 0).obj
