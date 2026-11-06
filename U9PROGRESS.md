@@ -299,22 +299,28 @@
 - Next: ucheck-bump on the five prerequisites and SupportedKoszulRelativeDetector, then downstream.
 - Fix notes: /home/ubuntu/u9/bz/FIXES-BZ932.md. No local Lean/Lake or proof shortcuts.
 
-# BZ941 in progress
+# BZ943 complete
 
-- Branch: u9/BZ941; baseline c59b55069.
-- The user instructed continuation after the exact one-line public-statement proposal.
-- Applied BZ941-public-statement-proposal.patch: cast (by rfl) around the unit map
-  in section_derived_tensor_normalization. All other declaration headers are unchanged.
-- Six other failures were resolved by implementation imports, reflexive unitor
-  transports, and cast normalization in the unit proof.
-- Next: ucheck-bump for the assigned leaf, then its five direct importers and further
-  downstream modules up to the brief's limit of 30 extra modules.
-- Notes and logs: /home/ubuntu/u9/bz/FIXES-BZ941.md.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
-- First continuation build accepted the proposed unit-map cast and exposed the same
-  hidden-unit mismatch in the public theorem's identity constraint. Applied the same
-  reflexive transport to that identity, with tensorUnit Λ T explicit, and revalidating.
-- Assigned leaf GREEN at d0d046a304a6ef9bd12942cdd26fd0765926f4d3:
-  ucheck-bump rc=0, failed=0, 5358 jobs; target freshly rebuilt in 25 seconds.
-- Full log: /home/ubuntu/u9/bz/BUILD-BZ941-leaf-green-full.log.
-- Continuing with all five direct importers; no DONE until downstream checking finishes.
+- Branch: `u9/BZ943`; starting commit: `c59b55069`.
+- The assigned filtration-triangle module and all six restored prerequisite modules
+  passed `ucheck-bump`: rc=0, failed=0, 7193 jobs.
+- Verified source commit: `68a2db882848fd4f3e254310b71880a537fc0206`.
+- Final axiom-check build also passed at `93b25727ab3982a986cc9fc51d4c45bc85d91b9f`.
+  The assigned theorem depends only on `propext`, `Classical.choice`, and `Quot.sound`.
+  The temporary `#print axioms` command was removed; final Lean sources equal the
+  already green source commit above.
+- Restored nine deleted declarations with their historical headers unchanged, under
+  the user's continuation instruction after the six-module restoration proposal.
+- Proof ports: derived-compositor directions, explicit slice module category for
+  `singleFunctor`, and a local Category bridge preserving the existing localization.
+- Downstream layers 1–3 were attempted; all are blocked by the unowned
+  `SingleComplexOpenPullbackCounitHomotopyFactorization` duplicate declarations
+  (first error at line 53). The explicit dependency-skip rule applies to the sole
+  direct importer and therefore the entire next path.
+- Completion and replay records: `/home/ubuntu/u9/state/BZ943.DONE` and
+  `/home/ubuntu/u9/bz/FIXES-BZ943.md`.
+- Full successful logs: `BUILD-BZ943-restoration4-full.log`, `BUILD-BZ943-axioms-full.log`.
+  Downstream evidence: `BUILD-BZ943-downstream123-full.log` and
+  `BZ943-downstream-blocker-paths.json`, all under `/home/ubuntu/u9/bz/`.
+- No local Lean/Lake, statement changes, proof placeholders, new axioms, trust bypasses,
+  profiler probes, or heartbeat increases.
