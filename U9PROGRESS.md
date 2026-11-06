@@ -246,24 +246,30 @@
 - Next: build layer-two importer CanonicalModuleBaseChangeAffineChartComparison.
 - Notes: /home/ubuntu/u9/bz/FIXES-BZ824.md. No local Lean/Lake or proof shortcuts.
 
-# BZ861 in progress
+# BZ861 final validation
 
 - Branch: `u9/BZ861`; starting commit: `db406319f`.
-- Assigned module `AffineBaseChangeGlobalSectionsFactorization` is green at
-  `cb76f60241` and rebuilt green at `637611f777`, without sorries or new assumptions.
+- Assigned module `AffineBaseChangeGlobalSectionsFactorization` and all six edited
+  Lean files passed the remote build at `1b026e579672269a72965a179ef957ea61d3bb89`.
 - Restored `tilde_preservesHomology`, `affineBaseChangeTildeCohomologyIso`, and
   `affineTensorPullbackHomologySheafIso` in their original two upstream modules;
-  both restored modules have repeatedly passed remote builds.
+  their original declaration types and docstrings are unchanged.
 - The user instructed continuation after the exact restoration and canonical-transport
-  proposal. The factorization now uses explicit Q/Qh transports, the derived universe w,
-  and a typed pullback functor with its existing additive instance.
-- Direct importer `AffineTensorPullbackStalkCoordinates` now uses the same transport;
-  the last pending proof fix unfolds the local composite before applying map_comp.
-- Applied the known generated-instance replacement at four sites in
-  `AffineOrdinaryTensorStalkCoordinates` and one in `AffineStalkScalarExtensionCoordinates`.
-  All affected public declarations have external callers and were retained.
-- The four-module downstream batch is queued through `ucheck-bump` on Weil.
+  proposal. The factorization and its direct importer now use explicit Q/Qh transports,
+  the derived universe w, and a typed pullback functor with its existing additive instance.
+- Replaced ten references to the renamed generated additive instance using tilde.map_add
+  with the appropriate coefficient ring. Retained all externally referenced declarations.
+- Eight downstream modules are green: AffineTensorPullbackStalkCoordinates,
+  AffineOrdinaryTensorStalkCoordinates, AffineStalkScalarExtensionCoordinates,
+  AffineDirectLocalizedTensorSquareCore, AffineDirectLocalizedTensorSquare,
+  AffineScalarLocalizedTensorSquare, AffineLocalizedTensorStalkSquare,
+  and AffineBaseChangeOrdinaryStalkComparison.
+- Remaining frontier: AffineBaseChangeTildeStalkComparison line 93 reports
+  `Unknown identifier `affineBaseChangeIntoPullback``. That upstream module contains
+  no declarations after an earlier prune and is outside this unit; defer per brief.
+  All other direct importers of the green downstream modules passed.
+- Downstream log: `/home/ubuntu/u9/bz/BUILD-BZ861-downstream3-full.log`.
+- Final green check of the repaired chain is pending; DONE follows its successful return.
 - Fix records: `/home/ubuntu/u9/bz/FIXES-BZ861.md`; logs use `BUILD-BZ861-*`.
 - The replay audit reproduces all six changed Lean files using 15 contextual rewrite rules.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
-- DONE will be written after downstream validation and the final green check.
