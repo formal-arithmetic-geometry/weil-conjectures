@@ -5,9 +5,12 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.OplaxMonoidalUnit
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Unit
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Shift
+
+import all Mathlib.Algebra.Homology.Localization
 
 /-!
 # Left unitality of the tensor comparison of the derived pullback
