@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorHom
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+public import WeilConjectures.Algebra.Homology.LineEvaluation.LineEvaluationInversePair
+public import WeilConjectures.Algebra.Homology.FlatSingleDerivedNormalization.FlatSingleDerivedNormalization
 import WeilConjectures.Algebra.Homology.LineUnbounded.LineUnboundedDerivedTensor
 import WeilConjectures.SmoothPurity.ConstantScalarUnitQuasiIsomorphism.ConstantScalarUnitQuasiIsomorphism
 import WeilConjectures.SmoothPurity.Integral.IntegralObjectPullbackQuotientBasis
@@ -99,9 +101,31 @@ theorem integralObjectPullbackLine (l : ℕ) [Fact l.Prime]
   classical
   let _ := hL
   let R := completedIntegralCommRingSheafUnrestricted l E X
+  let : HasDerivedCategory (SheafOfModules.LineUnbounded.Modules.{u, u} X R) :=
+    HasDerivedCategory.standard _
   let P := (CochainComplex.singleFunctor (integralTowerModules l E X) 0).obj L
-  obtain ⟨_, _, hP, _, hf, _⟩ :=
-    SheafOfModules.LineUnbounded.line_unbounded_derived_tensor.{u, u} X R L
+  let Rm : Sheaf (ProEt.topology X) RingCat.{u + 1} :=
+    (sheafCompose (ProEt.topology X)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R
+  have hcover : ∀ U : X.ProEt, ∃ s : Sieve U,
+      s ∈ AlgebraicGeometry.Scheme.ProEt.topology X U ∧
+      ∀ (V : X.ProEt) (f : V ⟶ U), s f →
+        Nonempty (L.over V ≅ SheafOfModules.unit (Rm.over V)) := by
+    obtain ⟨I, V, hV, h⟩ :=
+      (SheafOfModules.isFiniteLocallyFreeOfRank_iff_exists_over_iso_free
+        (M := L) (r := 1)).mp inferInstance
+    intro U
+    refine ⟨Sieve.ofObjects V U, hV U, ?_⟩
+    rintro Z f ⟨i, ⟨g⟩⟩
+    let e : L.over (V i) ≅ SheafOfModules.unit (Rm.over (V i)) :=
+      (h i).some ≪≫ SheafOfModules.freeUniqueIso (ULift (Fin 1))
+    exact ⟨((SheafOfModules.overFunctorMap Rm g).app L).symm ≪≫
+      (SheafOfModules.overMap Rm g).mapIso e ≪≫
+        SheafOfModules.overMapUnitIso (R := Rm) g⟩
+  obtain ⟨_, _, _, _, _, _, _, hflat, _⟩ :=
+    SheafOfModules.LineEvaluation.evaluation_inverse_pair.{u + 1, u, u + 1} R L hcover
+  obtain ⟨hP, hf, _⟩ :=
+    SheafOfModules.FlatSingleDerivedNormalization.flat_single_derived_normalization R L hflat
   let Pg : (integralOperationsGoodComplex l E X).FullSubcategory := ⟨P, hP, hf⟩
   let F := (integralOperationsPullbackTowerFunctor l E W.hom).obj P
   let O := ConstantScalarStrictUnit.regularComplex l E W.left

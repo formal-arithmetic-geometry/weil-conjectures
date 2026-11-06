@@ -218,10 +218,10 @@ noncomputable def supportDerivedCoefficientPullbackIso
   let e : Etale.upperStar D f ⋙ comparisonUpperStar D X ≅
       comparisonUpperStar D Y ⋙ upperStar D f :=
     supportSiteComparisonCoefficientPullbackIso D f
-  Functor.mapDerivedCategoryCompIso (Etale.upperStar D f)
-    (comparisonUpperStar D X) ≪≫
+  (Functor.mapDerivedCategoryCompIso (Etale.upperStar D f)
+    (comparisonUpperStar D X)).symm ≪≫
   Functor.mapDerivedCategoryNatIso e ≪≫
-  (Functor.mapDerivedCategoryCompIso (comparisonUpperStar D Y) (upperStar D f)).symm
+  Functor.mapDerivedCategoryCompIso (comparisonUpperStar D Y) (upperStar D f)
 
 open MonoidalCategory
 
