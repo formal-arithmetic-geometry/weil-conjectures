@@ -190,7 +190,7 @@ end RingedProduct
 -- Forget scalars before comparing the composite direct-image normalization.
 set_option backward.isDefEq.respectTransparency false in
 attribute [local irreducible] Functor.mapDerivedCategory
-  Functor.mapDerivedCategoryNatIso Functor.mapDerivedCategoryCompIso
+  Functor.mapDerivedCategoryNatIso
   Functor.mapDerivedCategoryIdIso
 
 end AlgebraicGeometry.Scheme
