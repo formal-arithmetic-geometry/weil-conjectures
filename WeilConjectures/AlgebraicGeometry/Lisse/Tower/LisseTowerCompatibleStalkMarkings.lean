@@ -104,7 +104,7 @@ theorem lisse_tower_compatible_stalk_markings
       (Functor.mapDerivedCategoryCompIso
         (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} (Ideal.Quotient.factor
           (Ideal.pow_le_pow_right (I := J) (Nat.le_succ (n + 1)))))
-        (R (n + 1))).hom.app (K n) ≫
+        (R (n + 1))).symm.inv.app (K n) ≫
       (Functor.mapDerivedCategoryNatIso (ModuleCat.restrictScalarsComp'.{u + 1}
         (Ideal.Quotient.mk (J ^ (n + 2)))
         (Ideal.Quotient.factor
@@ -144,7 +144,7 @@ theorem lisse_tower_compatible_stalk_markings
     (Functor.mapDerivedCategoryCompIso
       (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} (Ideal.Quotient.factor
         (Ideal.pow_le_pow_right (I := J) (Nat.le_succ (n + 1)))))
-      (R (n + 1))).hom.app (K n) ≫
+      (R (n + 1))).symm.inv.app (K n) ≫
     (Functor.mapDerivedCategoryNatIso (ModuleCat.restrictScalarsComp'.{u + 1}
       (Ideal.Quotient.mk (J ^ (n + 2)))
       (Ideal.Quotient.factor (Ideal.pow_le_pow_right (I := J) (Nat.le_succ (n + 1))))
@@ -178,7 +178,7 @@ theorem lisse_tower_compatible_stalk_markings
       rw [hv i n] at h
       simpa only [F, N, Functor.comp_map, Functor.ofOpSequence_map_homOfLE_succ,
         constantAdicRestrictedTower, constantAdicRestrictedStep, b, z,
-        s, R, J, C, Iso.symm_inv, Category.assoc] using h.symm)
+        Category.assoc] using h.symm)
     intro m n h
     have hn := α.naturality (homOfLE h).op
     change _ ≫ z n = z m ≫ N.map (homOfLE h).op at hn
