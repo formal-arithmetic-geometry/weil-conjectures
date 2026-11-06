@@ -31,4 +31,23 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
 
+/-- The termwise derived sum-extension/restriction adjunction on whole unbounded categories.
+Source: blueprint sec-smooth-purity/sk-prop-sf-cbc/lem-amb-etale-adjoint-locality.md,
+first assertion (blueprint: lem-amb-etale-adjoint-locality).
+Both sheaf functors are exact; the degreewise unit and counit descend through localization,
+and their triangle identities descend as well. The construction uses the existing sheaf
+adjunction and the general exact-functor derived-adjunction construction. -/
+noncomputable def etaleAmbientLeftComparison
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    (N : EtaleCompactSupportNormalization A)
+    {U X S : Scheme.{u}} (u : U ⟶ X) (f : X ⟶ S)
+    [Etale u] [IsSeparated u] [IsNoetherian U] [IsNoetherian X] [IsNoetherian S]
+    (c : Compactification f) (d : Compactification (u ≫ f)) :
+    (etaleLowerShriek (ModuleCat.{u + 1} A) u inferInstance).mapDerivedCategory ⋙
+        rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c ≅
+      rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) d :=
+  Functor.isoWhiskerRight (N.comparison u (d.ofComp c).restrict).symm _ ≪≫
+    rightDerivedLowerShriekOfCompactificationCompIso A c (d.ofComp c) ≪≫
+    rightDerivedLowerShriekOfCompactificationIso A (c.comp (d.ofComp c)) d
+
 end AlgebraicGeometry.Etale

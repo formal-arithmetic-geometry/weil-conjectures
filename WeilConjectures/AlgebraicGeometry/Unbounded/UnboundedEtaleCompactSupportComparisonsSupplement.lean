@@ -158,6 +158,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CompCo
 import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarAdjunctionCompat
 public import WeilConjectures.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
 import all WeilConjectures.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
+import all WeilConjectures.AlgebraicGeometry.Exact.ExactCompactificationUnitTower
 
 /-!
 # Unbounded ordinary etale compact-support comparisons
@@ -3670,5 +3671,716 @@ theorem unboundedEtaleCompactSupport_composition_plus
 end CompositionPlus
 
 end BoundedBelowRestriction
+
+open CategoryTheory.Abelian
+@[irreducible]
+private noncomputable def right_derived_identity_iso
+    {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
+    [HasKInjectiveResolutions C]
+    (T : C ⥤ C) [T.Additive]
+    [PreservesFiniteLimits T] [PreservesFiniteColimits T] (e : T ≅ 𝟭 C) :
+    T.rightDerivedFunctor ≅ 𝟭 (DerivedCategory C) :=
+  T.rightDerivedFunctorIsoMapDerivedCategory ≪≫
+    Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryIdIso C
+
+private lemma right_derived_identity_iso_eq
+    {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
+    [HasKInjectiveResolutions C]
+    (T : C ⥤ C) [T.Additive]
+    [PreservesFiniteLimits T] [PreservesFiniteColimits T] (e : T ≅ 𝟭 C) :
+    right_derived_identity_iso T e =
+      T.rightDerivedFunctorIsoMapDerivedCategory ≪≫
+        Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryIdIso C := by
+  unfold right_derived_identity_iso
+  rfl
+
+section NormalizationModels
+universe w₁ w₂ v₁ v₂ u₁ u₂
+variable {C : Type u₁} [Category.{v₁} C] [Abelian C] [HasDerivedCategory.{w₁} C]
+  {D : Type u₂} [Category.{v₂} D] [Abelian D] [HasDerivedCategory.{w₂} D]
+  [HasKInjectiveResolutions C]
+private noncomputable def right_unit_Q (F : C ⥤ D) [F.Additive]
+    (J : CochainComplex C ℤ) :
+    DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj J) ⟶
+      F.rightDerivedFunctor.obj (DerivedCategory.Q.obj J) :=
+  (DerivedCategory.quotientCompQhIso D).inv.app _ ≫
+    F.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient C (.up ℤ)).obj J) ≫
+    F.rightDerivedFunctor.map ((DerivedCategory.quotientCompQhIso C).hom.app J)
+private lemma right_unit_Q_obj_iso (F : C ⥤ D) [F.Additive]
+    (J : CochainComplex C ℤ) [J.IsKInjective] :
+    right_unit_Q F J ≫ (F.rightDerivedFunctorObjQIso J).hom = 𝟙 _ := by
+  simp [right_unit_Q, Functor.rightDerivedFunctorObjQIso,
+    Category.assoc]
+private lemma right_unit_Q_naturality (F : C ⥤ D) [F.Additive]
+    {J I : CochainComplex C ℤ} (ρ : J ⟶ I) :
+    DerivedCategory.Q.map ((F.mapHomologicalComplex (.up ℤ)).map ρ) ≫ right_unit_Q F I =
+      right_unit_Q F J ≫ F.rightDerivedFunctor.map (DerivedCategory.Q.map ρ) := by
+  have h := F.rightDerivedFunctorUnit.naturality
+    ((HomotopyCategory.quotient C (.up ℤ)).map ρ)
+  simp only [Functor.comp_map] at h
+  simp only [right_unit_Q, Category.assoc]
+  rw [DerivedCategory.quotientCompQhIso_inv_naturality_assoc]
+  have hf : ((F.mapHomotopyCategory (.up ℤ)).map
+      ((HomotopyCategory.quotient C (.up ℤ)).map ρ)) =
+    (HomotopyCategory.quotient D (.up ℤ)).map
+      ((F.mapHomologicalComplex (.up ℤ)).map ρ) := rfl
+  rw [← hf, reassoc_of% h, ← Functor.map_comp]
+  rw [DerivedCategory.quotientCompQhIso_hom_naturality]
+  rw [Functor.map_comp]
+omit [HasKInjectiveResolutions C] in
+private lemma exact_factor_Q (F : C ⥤ D) [F.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    (J : CochainComplex C ℤ) :
+    F.mapDerivedCategoryFactorsh.inv.app ((HomotopyCategory.quotient C (.up ℤ)).obj J) ≫
+      F.mapDerivedCategory.map ((DerivedCategory.quotientCompQhIso C).hom.app J) ≫
+      F.mapDerivedCategoryFactors.hom.app J =
+    (DerivedCategory.quotientCompQhIso D).hom.app
+      ((F.mapHomologicalComplex (.up ℤ)).obj J) := by
+  have he : F.mapDerivedCategoryFactorsh.app
+      ((HomotopyCategory.quotient C (.up ℤ)).obj J) =
+    F.mapDerivedCategory.mapIso ((DerivedCategory.quotientCompQhIso C).app J) ≪≫
+      F.mapDerivedCategoryFactors.app J ≪≫
+        ((DerivedCategory.quotientCompQhIso D).app
+          ((F.mapHomologicalComplex (.up ℤ)).obj J)).symm := by
+    apply Iso.ext
+    simp only [Iso.app_hom, Functor.mapIso_hom, Iso.trans_hom, Iso.symm_hom,
+      Functor.mapDerivedCategoryFactorsh_hom_app, Functor.mapHomotopyCategoryFactors,
+      Quotient.lift.isLift_inv]
+    erw [DerivedCategory.Qh.map_id, Category.comp_id]
+    rfl
+  have hi := congrArg Iso.inv he
+  change F.mapDerivedCategoryFactorsh.inv.app _ = _ at hi
+  rw [hi]
+  simp only [Iso.trans_inv, Iso.symm_inv, Functor.mapIso_inv, Iso.app_inv,
+    Iso.app_hom, Category.assoc, ]
+  rw [← F.mapDerivedCategory.map_comp_assoc, Iso.inv_hom_id_app, F.mapDerivedCategory.map_id,
+    Category.id_comp, Iso.inv_hom_id_app, Category.comp_id]
+private lemma right_unit_Q_exact_fac (F : C ⥤ D) [F.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    (J : CochainComplex C ℤ) :
+    right_unit_Q F J ≫ F.rightDerivedFunctorIsoMapDerivedCategory.hom.app
+        (DerivedCategory.Q.obj J) ≫ F.mapDerivedCategoryFactors.hom.app J = 𝟙 _ := by
+  have hn := F.rightDerivedFunctorIsoMapDerivedCategory.hom.naturality
+    ((DerivedCategory.quotientCompQhIso C).hom.app J)
+  simp only [right_unit_Q, Category.assoc]
+  rw [reassoc_of% hn]
+  have hF := NatTrans.congr_app F.rightDerivedFunctorIsoMapDerivedCategory_hom_fac
+    ((HomotopyCategory.quotient C (.up ℤ)).obj J)
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app] at hF
+  rw [← Category.assoc _ _ (F.mapDerivedCategory.map
+    ((DerivedCategory.quotientCompQhIso C).hom.app J) ≫
+      F.mapDerivedCategoryFactors.hom.app J), hF]
+  rw [exact_factor_Q F J, Iso.inv_hom_id_app]
+
+private lemma exact_iso_obj_model (F : C ⥤ D) [F.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    (J : CochainComplex C ℤ) [J.IsKInjective] :
+    F.rightDerivedFunctorIsoMapDerivedCategory.inv.app (DerivedCategory.Q.obj J) ≫
+      (F.rightDerivedFunctorObjQIso J).hom = F.mapDerivedCategoryFactors.hom.app J := by
+  have : IsIso (right_unit_Q F J) := by
+    dsimp only [right_unit_Q]
+    infer_instance
+  rw [← cancel_epi (right_unit_Q F J ≫
+    F.rightDerivedFunctorIsoMapDerivedCategory.hom.app (DerivedCategory.Q.obj J))]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
+  rw [right_unit_Q_obj_iso, right_unit_Q_exact_fac]
+omit [HasKInjectiveResolutions C] in
+private lemma derived_id_Q_fac (J : CochainComplex C ℤ) :
+    (Functor.mapDerivedCategoryIdIso C).hom.app (DerivedCategory.Q.obj J) =
+      (𝟭 C).mapDerivedCategoryFactors.hom.app J := by
+  let q := DerivedCategory.quotientCompQhIso C
+  have hn := (Functor.mapDerivedCategoryIdIso C).hom.naturality (q.hom.app J)
+  simp only [Functor.id_map] at hn
+  rw [← cancel_epi ((𝟭 C).mapDerivedCategory.map (q.hom.app J))]
+  erw [hn, Functor.mapDerivedCategoryIdIso_hom_app_Qh_obj]
+  rw [Functor.mapDerivedCategoryFactorsh_hom_app]
+  simp only [Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv,
+    Category.assoc]
+  erw [DerivedCategory.Qh.map_id, Category.id_comp]
+  change _ ≫ _ ≫ (q.inv.app J ≫ q.hom.app J) = _
+  rw [Iso.inv_hom_id_app, Category.comp_id]
+
+private lemma identity_derived_obj_model (F : C ⥤ C) [F.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F] (e : F ≅ 𝟭 C)
+    (J : CochainComplex C ℤ) [J.IsKInjective] :
+    (F.rightDerivedFunctorIsoMapDerivedCategory ≪≫
+      Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryIdIso C
+      ).inv.app (DerivedCategory.Q.obj J) ≫ (F.rightDerivedFunctorObjQIso J).hom =
+      DerivedCategory.Q.map ((e.inv.mapHomologicalComplex (.up ℤ)).app J) := by
+  simp only [Iso.trans_inv, NatTrans.comp_app, Category.assoc]
+  rw [exact_iso_obj_model F J]
+  have he := Functor.mapDerivedCategoryNatIso_fac e.symm J
+  simp only [Functor.mapDerivedCategoryNatIso_symm, Iso.symm_hom] at he
+  rw [he, ← derived_id_Q_fac J]
+  simp only [Iso.inv_hom_id_app_assoc]
+universe w₃ v₃ u₃
+variable {E : Type u₃} [Category.{v₃} E] [Abelian E] [HasDerivedCategory.{w₃} E]
+
+private lemma natTrans_ext_kInjective
+    {F G : DerivedCategory C ⥤ DerivedCategory E} (α β : F ⟶ G)
+    (h : ∀ (M : CochainComplex C ℤ) [M.IsKInjective],
+      α.app (DerivedCategory.Q.obj M) = β.app (DerivedCategory.Q.obj M)) : α = β := by
+  apply NatTrans.ext
+  funext K
+  obtain ⟨M, hM, ⟨e⟩⟩ := DerivedCategory.exists_iso_Q_obj_of_isKInjective K
+  let := hM
+  apply (cancel_mono (G.map e.hom)).1
+  rw [← α.naturality, ← β.naturality, h M]
+
+private lemma comparison_model_on_injective
+    [HasKInjectiveResolutions D]
+    (S : C ⥤ E) (O : C ⥤ D) (R : D ⥤ E) (T : C ⥤ C)
+    [S.Additive] [O.Additive] [R.Additive] [T.Additive]
+    [PreservesFiniteLimits S] [PreservesFiniteColimits S]
+    [PreservesFiniteLimits O] [PreservesFiniteColimits O]
+    [PreservesFiniteLimits T] [PreservesFiniteColimits T]
+    (e : T ≅ 𝟭 C) (θ : T ⋙ S ⟶ O ⋙ R) (a : S ⟶ O ⋙ R)
+    (σ : S.mapDerivedCategory ⟶ O.mapDerivedCategory ⋙ R.rightDerivedFunctor)
+    (Γ : T.rightDerivedFunctor ⋙ S.mapDerivedCategory ⟶
+      O.mapDerivedCategory ⋙ R.rightDerivedFunctor)
+    (hσ : ∀ M : CochainComplex C ℤ,
+      σ.app (DerivedCategory.Q.obj M) ≫
+        R.rightDerivedFunctor.map (O.mapDerivedCategoryFactors.hom.app M) =
+      S.mapDerivedCategoryFactors.hom.app M ≫
+        DerivedCategory.Q.map ((a.mapHomologicalComplex (.up ℤ)).app M) ≫
+        right_unit_Q R ((O.mapHomologicalComplex (.up ℤ)).obj M))
+    (ha : ∀ M : CochainComplex C ℤ,
+      (a.mapHomologicalComplex (.up ℤ)).app M =
+        (S.mapHomologicalComplex (.up ℤ)).map
+          ((e.inv.mapHomologicalComplex (.up ℤ)).app M) ≫
+        (θ.mapHomologicalComplex (.up ℤ)).app M)
+    (hΓ : ∀ (M : CochainComplex C ℤ) [M.IsKInjective]
+      (N : CochainComplex D ℤ) [N.IsKInjective]
+      (ρ : (O.mapHomologicalComplex (.up ℤ)).obj M ⟶ N) [QuasiIso ρ],
+      S.mapDerivedCategory.map ((T.rightDerivedFunctorObjQIso M).hom) ≫
+        S.mapDerivedCategoryFactors.hom.app ((T.mapHomologicalComplex (.up ℤ)).obj M) ≫
+        DerivedCategory.Q.map ((θ.mapHomologicalComplex (.up ℤ)).app M) ≫
+        DerivedCategory.Q.map ((R.mapHomologicalComplex (.up ℤ)).map ρ) =
+      Γ.app (DerivedCategory.Q.obj M) ≫
+        R.rightDerivedFunctor.map (O.mapDerivedCategoryFactors.hom.app M ≫
+          DerivedCategory.Q.map ρ) ≫ (R.rightDerivedFunctorObjQIso N).hom)
+    (M : CochainComplex C ℤ) [M.IsKInjective] :
+    σ.app (DerivedCategory.Q.obj M) =
+      S.mapDerivedCategory.map
+        ((right_derived_identity_iso T e).inv.app (DerivedCategory.Q.obj M)) ≫
+        Γ.app (DerivedCategory.Q.obj M) := by
+  unfold right_derived_identity_iso
+  obtain ⟨N, hN, ρ, hρ, _⟩ := HasKInjectiveResolutions.exists_isKInjective
+    ((O.mapHomologicalComplex (.up ℤ)).obj M)
+  let := hN
+  let := hρ
+  let t := R.rightDerivedFunctor.map (O.mapDerivedCategoryFactors.hom.app M ≫
+    DerivedCategory.Q.map ρ) ≫ (R.rightDerivedFunctorObjQIso N).hom
+  have : IsIso t := by dsimp only [t]; infer_instance
+  apply (cancel_mono t).1
+  let z := S.mapDerivedCategoryFactors.hom.app M ≫
+    DerivedCategory.Q.map ((a.mapHomologicalComplex (.up ℤ)).app M) ≫
+    DerivedCategory.Q.map ((R.mapHomologicalComplex (.up ℤ)).map ρ)
+  have hleft : σ.app (DerivedCategory.Q.obj M) ≫ t = z := by
+    dsimp only [t, z]
+    simp only [Functor.map_comp, Category.assoc]
+    rw [reassoc_of% (hσ M)]
+    rw [← reassoc_of% (right_unit_Q_naturality R ρ)]
+    rw [right_unit_Q_obj_iso, Category.comp_id]
+  have hright : S.mapDerivedCategory.map
+      ((T.rightDerivedFunctorIsoMapDerivedCategory ≪≫
+        Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryIdIso C
+        ).inv.app (DerivedCategory.Q.obj M)) ≫
+      Γ.app (DerivedCategory.Q.obj M) ≫ t = z := by
+    dsimp only [t, z]
+    rw [← hΓ M N ρ]
+    rw [← S.mapDerivedCategory.map_comp_assoc, identity_derived_obj_model T e M]
+    have hn := S.mapDerivedCategoryFactors.hom.naturality
+      ((e.inv.mapHomologicalComplex (.up ℤ)).app M)
+    simp only [Functor.comp_map] at hn
+    rw [reassoc_of% hn]
+    rw [← DerivedCategory.Q.map_comp_assoc, ← ha M]
+    rfl
+  simpa only [Category.assoc] using hleft.trans hright.symm
+omit [HasKInjectiveResolutions C] in
+private lemma comparison_complex_fac
+    [HasKInjectiveResolutions D]
+    (S : C ⥤ E) (O : C ⥤ D) (R : D ⥤ E)
+    [S.Additive] [O.Additive] [R.Additive]
+    [PreservesFiniteLimits S] [PreservesFiniteColimits S]
+    [PreservesFiniteLimits O] [PreservesFiniteColimits O]
+    (a : S ⟶ O ⋙ R)
+    (σ : S.mapDerivedCategory ⟶ O.mapDerivedCategory ⋙ R.rightDerivedFunctor)
+    (hσ : ∀ K : HomotopyCategory C (.up ℤ),
+      σ.app (DerivedCategory.Qh.obj K) =
+        S.mapDerivedCategoryFactorsh.hom.app K ≫
+        DerivedCategory.Qh.map ((a.mapHomotopyCategory (.up ℤ)).app K) ≫
+        DerivedCategory.Qh.map
+          ((Functor.mapHomotopyCategoryCompIso (Iso.refl (O ⋙ R)) (.up ℤ)).inv.app K) ≫
+        R.rightDerivedFunctorUnit.app ((O.mapHomotopyCategory (.up ℤ)).obj K) ≫
+        R.rightDerivedFunctor.map (O.mapDerivedCategoryFactorsh.inv.app K))
+    (J : CochainComplex C ℤ) :
+    σ.app (DerivedCategory.Q.obj J) ≫
+        R.rightDerivedFunctor.map (O.mapDerivedCategoryFactors.hom.app J) =
+      S.mapDerivedCategoryFactors.hom.app J ≫
+        DerivedCategory.Q.map ((a.mapHomologicalComplex (.up ℤ)).app J) ≫
+        right_unit_Q R ((O.mapHomologicalComplex (.up ℤ)).obj J) := by
+  let q := DerivedCategory.quotientCompQhIso C
+  have hn := σ.naturality (q.hom.app J)
+  simp only [Functor.comp_map] at hn
+  rw [← cancel_epi (S.mapDerivedCategory.map (q.hom.app J))]
+  rw [reassoc_of% hn, hσ]
+  simp only [Category.assoc]
+  slice_lhs 5 7 =>
+    rw [← R.rightDerivedFunctor.map_comp_assoc, ← R.rightDerivedFunctor.map_comp,
+      Category.assoc, exact_factor_Q O J]
+  rw [Functor.mapDerivedCategoryFactorsh_hom_app]
+  have hc : (Functor.mapHomotopyCategoryCompIso (Iso.refl (O ⋙ R)) (.up ℤ)
+      ).inv.app ((HomotopyCategory.quotient _ (.up ℤ)).obj J) = 𝟙 _ := by
+    rw [← cancel_epi ((Functor.mapHomotopyCategoryCompIso (Iso.refl (O ⋙ R)) (.up ℤ)
+      ).hom.app ((HomotopyCategory.quotient _ (.up ℤ)).obj J))]
+    rw [Iso.hom_inv_id_app, Functor.mapHomotopyCategoryCompIso_refl_hom_app]
+    exact (Category.comp_id _).symm
+  rw [hc]
+  simp only [Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv]
+  erw [DerivedCategory.Qh.map_id, Category.id_comp, DerivedCategory.Qh.map_id,
+    Category.id_comp]
+  have ha : (a.mapHomotopyCategory (.up ℤ)).app
+      ((HomotopyCategory.quotient _ (.up ℤ)).obj J) =
+    (HomotopyCategory.quotient _ (.up ℤ)).map
+      ((a.mapHomologicalComplex (.up ℤ)).app J) := rfl
+  erw [ha, DerivedCategory.quotientCompQhIso_inv_naturality_assoc]
+  simp only [Category.assoc]
+  rfl
+
+private lemma theta_normalization
+    (B : Type*) [Category.{u + 1} B] [Abelian B] [IsGrothendieckAbelian.{u + 1} B]
+    [HasSmallSiteSheafify B]
+    {X C D : Scheme.{u}} (j : X ⟶ C) (q : C ⟶ D) (k : X ⟶ D)
+    [IsOpenImmersion j] [IsOpenImmersion k] (hk : j ≫ q = k)
+    (θ : lowerStar B (𝟙 X) ⋙ openImmersionLowerShriek B k ≅
+      openImmersionLowerShriek B j ⋙ lowerStar B q)
+    (hθ : ∀ M, θ.hom.app M ≫
+      (lowerStar B q).map ((openImmersionLowerShriekToLowerStar B j).app M) ≫
+      (lowerStarComp B j q).hom.app M =
+        (openImmersionLowerShriekToLowerStar B k).app ((lowerStar B (𝟙 X)).obj M) ≫
+        (lowerStarComp B (𝟙 X) k (j ≫ q) (by simp [hk])).hom.app M)
+    (M : Sheaf X.smallEtaleTopology B) :
+    (openImmersionLowerShriek B k).map ((lowerStarId B X).inv.app M) ≫
+      θ.hom.app M ≫
+      (lowerStar B q).map ((openImmersionLowerShriekToLowerStar B j).app M) ≫
+      (lowerStarComp B j q k hk.symm).hom.app M =
+        (openImmersionLowerShriekToLowerStar B k).app M := by
+  subst k
+  rw [hθ, lowerStarComp_id_left]
+  simp only [Iso.trans_hom, Functor.isoWhiskerRight_hom, NatTrans.comp_app,
+    Functor.whiskerRight_app, Functor.leftUnitor_hom_app]
+  rw [← (openImmersionLowerShriekToLowerStar B (j ≫ q)).naturality_assoc,
+    ← Functor.map_comp_assoc, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id,
+    Category.id_comp]
+  dsimp only [Functor.id_obj]
+  erw [Category.comp_id]
+
+private lemma open_sheaf_comparison
+    (B : Type*) [Category.{u + 1} B] [Abelian B]
+    [IsGrothendieckAbelian.{u + 1} B] [HasSmallSiteSheafify B]
+    {U Z : Scheme.{u}} (k : U ⟶ Z) [IsOpenImmersion k]
+    (M : Sheaf U.smallEtaleTopology B) :
+    etaleLowerShriekToLowerStar B k M =
+      (openImmersionLowerShriekToLowerStar B k).app M := by
+  have he : (lowerStarUnit B k).app M =
+      inv ((openImmersionRestrictionLowerStarAdjunction B k).counit.app M) := by
+    apply (cancel_mono ((openImmersionRestrictionLowerStarAdjunction B k).counit.app M)).1
+    rw [IsIso.inv_hom_id]
+    exact congr_app (lowerStarUnit_comp_counit B k) M
+  rw [etaleLowerShriekToLowerStar, etaleLowerShriekRestrictionAdjunction,
+    etaleLowerShriekUpperStarAdjunction]
+  rw [Adjunction.homEquiv_ofNatIsoRight_symm_apply,
+    Adjunction.homEquiv_ofNatIsoRight_symm_apply]
+  simp only [Iso.symm_inv, Category.assoc, ]
+  rw [he, Adjunction.homEquiv_counit]
+  rw [openImmersionLowerShriekToLowerStar_app]
+  simp only [ Iso.inv_hom_id_app, Category.comp_id,
+    NatIso.isIso_inv_app]
+  rfl
+
+private lemma identity_prepend_app
+    {C D : Type*} [Category C] [Category D]
+    (F : C ⥤ D) {R : C ⥤ C} {G : C ⥤ D}
+    (e : R ≅ 𝟭 C) (γ : R ⋙ F ≅ G) (M : C) :
+    ((Functor.leftUnitor F).symm ≪≫ Functor.isoWhiskerRight e.symm F ≪≫ γ).hom.app M =
+      F.map (e.inv.app M) ≫ γ.hom.app M := by
+  simp only [Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerRight_hom,
+    NatTrans.comp_app, Functor.whiskerRight_app, Functor.leftUnitor_inv_app,
+    Category.id_comp]
+
+private lemma prepend_complex_fac
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    [Preadditive C] [Preadditive D] [Preadditive E]
+    (T : C ⥤ C) (S : C ⥤ E) (O : C ⥤ D) (R : D ⥤ E)
+    [T.Additive] [S.Additive] [O.Additive] [R.Additive]
+    (e : T ≅ 𝟭 C) (θ : T ⋙ S ⟶ O ⋙ R) (J : CochainComplex C ℤ) :
+    (((Functor.leftUnitor S).inv ≫ Functor.whiskerRight e.inv S ≫ θ
+      ).mapHomologicalComplex (.up ℤ)).app J =
+      (S.mapHomologicalComplex (.up ℤ)).map
+          ((e.inv.mapHomologicalComplex (.up ℤ)).app J) ≫
+        (θ.mapHomologicalComplex (.up ℤ)).app J := by
+  ext n : 1
+  simp only [NatTrans.mapHomologicalComplex_app_f, HomologicalComplex.comp_f,
+    Functor.mapHomologicalComplex_map_f, NatTrans.comp_app,
+    Functor.whiskerRight_app, Functor.leftUnitor_inv_app, Category.id_comp]
+
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+attribute [local irreducible] upperStar lowerStar
+  Functor.mapDerivedCategory Functor.rightDerivedFunctor
+set_option maxRecDepth 2048 in
+private lemma normalization_open_interchange
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {U Z : Scheme.{u}} [IsNoetherian U] [IsNoetherian Z]
+    (k : U ⟶ Z) [IsOpenImmersion k] (c : Compactification k) [IsNoetherian c.Z]
+    (N : EtaleCompactSupportNormalization A)
+    (θ : lowerStar (ModuleCat.{u + 1} A) (𝟙 U) ⋙
+      openImmersionLowerShriek (ModuleCat.{u + 1} A) k ≅
+      openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i ⋙
+        lowerStar (ModuleCat.{u + 1} A) c.g)
+    (Γ : (lowerStar (ModuleCat.{u + 1} A) (𝟙 U)).rightDerivedFunctor ⋙
+      (openImmersionLowerShriek (ModuleCat.{u + 1} A) k).mapDerivedCategory ≅
+      (openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i).mapDerivedCategory ⋙
+        (lowerStar (ModuleCat.{u + 1} A) c.g).rightDerivedFunctor)
+    (hθ : ∀ M, θ.hom.app M ≫
+      (lowerStar (ModuleCat.{u + 1} A) c.g).map
+        ((openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} A) c.i).app M) ≫
+      (lowerStarComp (ModuleCat.{u + 1} A) c.i c.g).hom.app M =
+      (openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} A) k).app
+        ((lowerStar (ModuleCat.{u + 1} A) (𝟙 U)).obj M) ≫
+      (lowerStarComp (ModuleCat.{u + 1} A) (𝟙 U) k (c.i ≫ c.g)
+        (by simpa using c.comm.symm)).hom.app M)
+    (hΓ : ∀ (M : CochainComplex (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ)
+      [M.IsKInjective]
+      (I : CochainComplex (Sheaf c.Z.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ)
+      [I.IsKInjective]
+      (ρ : ((openImmersionLowerShriek
+        (ModuleCat.{u + 1} A) c.i).mapHomologicalComplex (.up ℤ)).obj M ⟶ I) [QuasiIso ρ],
+      (openImmersionLowerShriek (ModuleCat.{u + 1} A) k).mapDerivedCategory.map
+          (((lowerStar (ModuleCat.{u + 1} A) (𝟙 U)).rightDerivedFunctorObjQIso M).hom) ≫
+        (openImmersionLowerShriek
+          (ModuleCat.{u + 1} A) k).mapDerivedCategoryFactors.hom.app
+          (((lowerStar (ModuleCat.{u + 1} A) (𝟙 U)).mapHomologicalComplex (.up ℤ)).obj M) ≫
+        DerivedCategory.Q.map ((θ.hom.mapHomologicalComplex (.up ℤ)).app M) ≫
+        DerivedCategory.Q.map
+          (((lowerStar (ModuleCat.{u + 1} A) c.g).mapHomologicalComplex (.up ℤ)).map ρ) =
+      Γ.hom.app (DerivedCategory.Q.obj M) ≫
+        (lowerStar (ModuleCat.{u + 1} A) c.g).rightDerivedFunctor.map
+          ((openImmersionLowerShriek
+            (ModuleCat.{u + 1} A) c.i).mapDerivedCategoryFactors.hom.app M ≫
+            DerivedCategory.Q.map ρ) ≫
+        ((lowerStar (ModuleCat.{u + 1} A) c.g).rightDerivedFunctorObjQIso I).hom) :
+    (N.comparison k c).inv =
+      ((Functor.leftUnitor _).symm ≪≫ Functor.isoWhiskerRight
+        ((right_derived_identity_iso
+          (lowerStar (ModuleCat.{u + 1} A) (𝟙 U))
+          (lowerStarId (ModuleCat.{u + 1} A) U)).symm) _ ≪≫ Γ).hom := by
+  let : IsLocallyNoetherian c.Z := LocallyOfFiniteType.isLocallyNoetherian c.g
+  let : CompactSpace c.Z := QuasiCompact.compactSpace_of_compactSpace c.g
+  let : IsNoetherian c.Z := ⟨⟩
+  let a : (openImmersionLowerShriek (ModuleCat.{u + 1} A) k) ⟶ (openImmersionLowerShriek
+      (ModuleCat.{u + 1} A) c.i) ⋙ (lowerStar (ModuleCat.{u + 1} A) c.g) :=
+    (Functor.leftUnitor (openImmersionLowerShriek (ModuleCat.{u + 1} A) k)).inv ≫
+        Functor.whiskerRight (lowerStarId (ModuleCat.{u + 1} A) U).inv (openImmersionLowerShriek
+        (ModuleCat.{u + 1} A) k) ≫ θ.hom
+  have hs : N.sheafComparison k c = a := by
+    apply NatTrans.ext
+    funext M
+    have := compactification_comparison_mono A c M
+    apply (cancel_mono ((compactificationSheafToDirectImage A c).app M)).1
+    rw [N.sheaf_normalization]
+    have he := theta_normalization (ModuleCat.{u + 1} A) c.i c.g k c.comm.symm θ hθ M
+    rw [open_sheaf_comparison]
+    simp only [a, NatTrans.comp_app, Functor.whiskerRight_app,
+      Functor.leftUnitor_inv_app, compactificationSheafToDirectImage,
+       Category.assoc]
+    erw [Category.id_comp]
+    convert! he.symm using 1
+  let σ := compactSupportDerivedComparison A k c a
+  have hσ : (N.comparison k c).inv = σ := by
+    apply (Localization.fullyFaithfulWhiskeringLeft DerivedCategory.Qh
+      (HomotopyCategory.quasiIso (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) (.up ℤ)) _
+      ).faithful.map_injective
+    apply NatTrans.ext
+    funext M
+    change (N.comparison k c).inv.app (DerivedCategory.Qh.obj M) =
+      σ.app (DerivedCategory.Qh.obj M)
+    rw [N.derived_normalization, compactSupportDerivedComparison_app, hs]
+  have hfac (J : CochainComplex (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) :
+      σ.app (DerivedCategory.Q.obj J) ≫
+          (lowerStar (ModuleCat.{u + 1} A) c.g).rightDerivedFunctor.map ((openImmersionLowerShriek
+              (ModuleCat.{u + 1} A) c.i).mapDerivedCategoryFactors.hom.app J) =
+        (openImmersionLowerShriek (ModuleCat.{u + 1} A) k).mapDerivedCategoryFactors.hom.app J ≫
+          DerivedCategory.Q.map ((a.mapHomologicalComplex (.up ℤ)).app J) ≫
+          right_unit_Q (lowerStar (ModuleCat.{u + 1} A) c.g) (((openImmersionLowerShriek
+              (ModuleCat.{u + 1} A) c.i).mapHomologicalComplex (.up ℤ)).obj J) :=
+    comparison_complex_fac
+      (C := Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) (D := Sheaf c.Z.smallEtaleTopology
+          (ModuleCat.{u + 1} A))
+      (E := Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} A)) (openImmersionLowerShriek
+          (ModuleCat.{u + 1} A) k) (openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i) (lowerStar
+          (ModuleCat.{u + 1} A) c.g) a σ
+      (compactSupportDerivedComparison_app A k c a) J
+  have ha (J : CochainComplex (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) :
+      (a.mapHomologicalComplex (.up ℤ)).app J =
+        ((openImmersionLowerShriek (ModuleCat.{u + 1} A) k).mapHomologicalComplex (.up ℤ)).map
+            (((lowerStarId (ModuleCat.{u + 1} A) U).inv.mapHomologicalComplex (.up ℤ)).app J) ≫
+          (θ.hom.mapHomologicalComplex (.up ℤ)).app J :=
+    prepend_complex_fac (lowerStar (ModuleCat.{u + 1} A) (𝟙 U)) (openImmersionLowerShriek
+        (ModuleCat.{u + 1} A) k) (openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i) (lowerStar
+        (ModuleCat.{u + 1} A) c.g) (lowerStarId (ModuleCat.{u + 1} A) U) θ.hom J
+  clear_value σ a
+  rw [hσ]
+  apply natTrans_ext_kInjective
+    (C := Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) (E := Sheaf Z.smallEtaleTopology
+        (ModuleCat.{u + 1} A))
+  intro M hM
+  let := hM
+  have hh := comparison_model_on_injective
+    (C := Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) (D := Sheaf c.Z.smallEtaleTopology
+        (ModuleCat.{u + 1} A))
+    (E := Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} A)) (openImmersionLowerShriek
+        (ModuleCat.{u + 1} A) k) (openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i) (lowerStar
+        (ModuleCat.{u + 1} A) c.g) (lowerStar (ModuleCat.{u + 1} A) (𝟙 U)) (lowerStarId
+        (ModuleCat.{u + 1} A) U) θ.hom a σ Γ.hom
+    hfac ha hΓ M
+  have hc := identity_prepend_app (openImmersionLowerShriek (ModuleCat.{u + 1} A)
+      k).mapDerivedCategory (right_derived_identity_iso (lowerStar (ModuleCat.{u + 1} A) (𝟙 U))
+      (lowerStarId (ModuleCat.{u + 1} A) U)) Γ
+    (DerivedCategory.Q.obj M)
+  exact hh.trans hc.symm
+end NormalizationModels
+section NormalizationRefinements
+attribute [local irreducible] upperStar lowerStar
+  Functor.mapDerivedCategory Functor.rightDerivedFunctor
+
+private lemma adjunct_eq_inverse
+    {C D : Type*} [Category C] [Category D] {L : C ⥤ D} {R : D ⥤ C}
+    (adj : L ⊣ R) {X : C} {Y : D} (φ : L.obj X ⟶ Y)
+    (e : R.obj Y ≅ X) (hφ : adj.homEquiv _ _ φ ≫ e.hom = 𝟙 X) :
+    φ = L.map e.inv ≫ adj.counit.app Y := by
+  apply (adj.homEquiv _ _).injective
+  have hs := adj.homEquiv_counit (g := e.inv)
+  have hh : adj.homEquiv X Y (L.map e.inv ≫ adj.counit.app Y) = e.inv := by
+    rw [← hs]
+    exact Equiv.apply_symm_apply _ _
+  rw [hh]
+  apply (cancel_mono e.hom).1
+  rw [hφ, e.inv_hom_id]
+
+private noncomputable def refinement_transport
+    (F : CompactSupportFormalism.{_, _, u})
+    {X Y : Scheme.{u}} {f : X ⟶ Y} {c d : Compactification f}
+    (r : c.Refinement d) (β : F.sh d.i ⟶ F.sh c.i ⋙ F.pf r.hom) :
+    F.shriek d ⟶ F.shriek c :=
+  Functor.whiskerRight β (F.pf d.g) ≫ (Functor.associator _ _ _).hom ≫
+    Functor.whiskerLeft (F.sh c.i) (F.pfComp' r.hom d.g c.g r.hom_g).inv
+private lemma refinement_transport_app
+    (F : CompactSupportFormalism.{_, _, u})
+    {X Y : Scheme.{u}} {f : X ⟶ Y} {c d : Compactification f}
+    (r : c.Refinement d) (β : F.sh d.i ⟶ F.sh c.i ⋙ F.pf r.hom) (K : F.obj X) :
+    (refinement_transport F r β).app K =
+      (F.pf d.g).map (β.app K) ≫
+        (F.pfComp' r.hom d.g c.g r.hom_g).inv.app ((F.sh c.i).obj K) := by
+  simp only [refinement_transport, NatTrans.comp_app, Functor.whiskerRight_app,
+    Functor.whiskerLeft_app, Functor.associator_hom_app, Category.id_comp]
+private lemma refinement_transport_comp
+    (F : CompactSupportFormalism.{_, _, u})
+    {X Y : Scheme.{u}} {f : X ⟶ Y} {c d e : Compactification f}
+    (r : c.Refinement d) (s : d.Refinement e)
+    (βr : F.sh d.i ⟶ F.sh c.i ⋙ F.pf r.hom)
+    (βs : F.sh e.i ⟶ F.sh d.i ⋙ F.pf s.hom)
+    (βrs : F.sh e.i ⟶ F.sh c.i ⋙ F.pf (r.comp s).hom)
+    (hβ : ∀ K, βrs.app K = βs.app K ≫ (F.pf s.hom).map (βr.app K) ≫
+      (F.pfComp' r.hom s.hom (r.comp s).hom
+        (Compactification.Refinement.comp_hom r s).symm).inv.app ((F.sh c.i).obj K)) :
+    refinement_transport F s βs ≫ refinement_transport F r βr =
+      refinement_transport F (r.comp s) βrs := by
+  apply NatTrans.ext
+  funext K
+  simp only [NatTrans.comp_app, refinement_transport_app, Category.assoc]
+  have hn := (F.pfComp' s.hom e.g d.g s.hom_g).inv.naturality (βr.app K)
+  simp only [Functor.comp_map] at hn
+  rw [← reassoc_of% hn]
+  rw [F.pfComp'_assoc_inv_app r.hom s.hom e.g (r.comp s).hom d.g c.g
+    (Compactification.Refinement.comp_hom r s).symm s.hom_g (r.comp s).hom_g r.hom_g]
+  rw [← (F.pf e.g).map_comp_assoc, ← (F.pf e.g).map_comp_assoc]
+  simp only [Category.assoc]
+  rw [← hβ]
+
+private lemma normalization_cartesian
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
+    {f : X ⟶ Y} {c d : Compactification f} (r : c.Refinement d)
+    (hr : IsPullback c.i (𝟙 X) r.hom d.i)
+    (N : EtaleCompactSupportNormalization A) :
+    refinement_transport (unboundedFormalism A) r
+      (unboundedEtaleRefinementOpenComparison A r N).hom =
+        (unboundedFormalism A).refinementComparison r hr := by
+  let : IsLocallyNoetherian d.Z := LocallyOfFiniteType.isLocallyNoetherian d.g
+  let : CompactSpace d.Z := QuasiCompact.compactSpace_of_compactSpace d.g
+  let hcL : IsLocallyNoetherian c.Z := LocallyOfFiniteType.isLocallyNoetherian c.g
+  let hcC : CompactSpace c.Z := QuasiCompact.compactSpace_of_compactSpace c.g
+  let : IsLocallyNoetherian (refinementOpenCompactification r).Z := hcL
+  let : CompactSpace (refinementOpenCompactification r).Z := hcC
+  let : IsNoetherian c.Z := ⟨⟩
+  let : IsNoetherian d.Z := ⟨⟩
+  let : IsNoetherian (refinementOpenCompactification r).Z := ⟨⟩
+  let sq : CommSq c.i (𝟙 X) r.hom d.i := hr.toCommSq
+  obtain ⟨θ, Γ, hθ, hΓ, hcart, _⟩ := unboundedProperOpenInterchange A
+  let θ₀ := θ c.i (𝟙 X) r.hom d.i sq
+  let Γ₀ := Γ c.i (𝟙 X) r.hom d.i sq
+  have hβ := normalization_open_interchange A d.i (refinementOpenCompactification r)
+    N θ₀ Γ₀ (hθ c.i (𝟙 X) r.hom d.i sq) (hΓ c.i (𝟙 X) r.hom d.i sq)
+  obtain ⟨lam, hlam, hcartΓ⟩ := hcart c.i (𝟙 X) r.hom d.i hr
+  have he : Γ₀.hom =
+      openImmersionLowerShriekLowerStarExchange (ModuleCat.{u + 1} A) hr.flip := by
+    apply NatTrans.ext
+    funext K
+    change (Γ c.i (𝟙 X) r.hom d.i hr.toCommSq).hom.app K = _
+    rw [hcartΓ K]
+    symm
+    apply adjunct_eq_inverse
+      (derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) d.i)
+      _ (lam.app K)
+    have ht := unboundedEtaleCompactSupport_tower_adjunct A hr K
+    change _ ≫ lam.hom.app K = _
+    rw [hlam K]
+    simp only [unboundedEtaleProperOpenRestriction, rightDerivedLowerStar, asIso_inv,
+      NatIso.isIso_inv_app] at ht
+    exact ht
+  apply NatTrans.ext
+  funext K
+  rw [refinement_transport_app, CompactSupportFormalism.refinementComparison_app]
+  have hβ' : (unboundedEtaleRefinementOpenComparison A r N).hom = _ := hβ
+  rw [hβ', identity_prepend_app]
+  rw [unbounded_pf_id, ← right_derived_identity_iso_eq
+    (lowerStar (ModuleCat.{u + 1} A) (𝟙 X)) (lowerStarId (ModuleCat.{u + 1} A) X)]
+  rw [unbounded_open_exchange A hr.flip]
+  rw [he]
+  rfl
+private lemma comparison_inverse
+    {C : Type*} [Category C] {X Y Z : C}
+    (e : Y ≅ Z) (f : X ≅ Z) (t : X ⟶ Y) (h : t ≫ e.hom = f.hom) :
+    e.inv = f.inv ≫ t := by
+  apply (cancel_mono e.hom).1
+  rw [Iso.inv_hom_id, Category.assoc, h, Iso.inv_hom_id]
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private lemma normalization_refinement_comp
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
+    {f : X ⟶ Y} {c d e : Compactification f}
+    (r : c.Refinement d) (s : d.Refinement e) (N : EtaleCompactSupportNormalization A)
+    (K : DerivedCategoryModule A X) :
+    (unboundedEtaleRefinementOpenComparison A (r.comp s) N).hom.app K =
+      (unboundedEtaleRefinementOpenComparison A s N).hom.app K ≫
+        (lowerStar (ModuleCat.{u + 1} A) s.hom).rightDerivedFunctor.map
+          ((unboundedEtaleRefinementOpenComparison A r N).hom.app K) ≫
+        (Functor.rightDerivedFunctorCompIso'
+          (lowerStar (ModuleCat.{u + 1} A) r.hom)
+          (lowerStar (ModuleCat.{u + 1} A) s.hom)
+          (lowerStarComp (ModuleCat.{u + 1} A) r.hom s.hom (r.comp s).hom rfl)).hom.app
+            ((openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i).mapDerivedCategory.obj K) := by
+  let : IsLocallyNoetherian e.Z := LocallyOfFiniteType.isLocallyNoetherian e.g
+  let : CompactSpace e.Z := QuasiCompact.compactSpace_of_compactSpace e.g
+  let hdL : IsLocallyNoetherian d.Z := LocallyOfFiniteType.isLocallyNoetherian d.g
+  let hdC : CompactSpace d.Z := QuasiCompact.compactSpace_of_compactSpace d.g
+  let : IsLocallyNoetherian (refinementOpenCompactification s).Z := hdL
+  let : CompactSpace (refinementOpenCompactification s).Z := hdC
+  let ρ : (refinementOpenCompactification (r.comp s)).Refinement
+      (refinementOpenCompactification s) :=
+    { hom := r.hom, i_hom := r.i_hom, hom_g := rfl }
+  have h := N.refinement e.i (refinementOpenCompactification (r.comp s))
+    (refinementOpenCompactification s) ρ
+  rw [← Category.assoc, ← Category.assoc] at h
+  have hi := comparison_inverse
+    (N.comparison e.i (refinementOpenCompactification (r.comp s)))
+    (N.comparison e.i (refinementOpenCompactification s)) _ h
+  have hK := congr_app hi K
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app,
+    Functor.whiskerLeft_app, Functor.associator_hom_app,
+    Category.id_comp,  Category.assoc] at hK
+  exact hK
+private lemma normalization_transport_eq
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
+    {f : X ⟶ Y} [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    {c d : Compactification f} (r : c.Refinement d)
+    (N : EtaleCompactSupportNormalization A) :
+    refinement_transport (unboundedFormalism A) r
+      (unboundedEtaleRefinementOpenComparison A r N).hom =
+        ((unboundedFormalism A).shriekIso d c).hom := by
+  let F := unboundedFormalism A
+  let q : c.denseRefinement.Refinement c :=
+    { hom := c.i.imageι
+      i_hom := Scheme.Hom.toImage_imageι c.i
+      hom_g := rfl }
+  have hq := Compactification.Refinement.isPullback_denseRefinement c q
+  have hqr := Compactification.Refinement.isPullback_denseRefinement c (q.comp r)
+  have hcanq : F.refinementComparison q hq = (F.shriekIso c c.denseRefinement).hom := by
+    rw [← F.shriekIso_symm c.denseRefinement c, F.shriekIso_eq_symm q hq]
+    rfl
+  have hcanqr : F.refinementComparison (q.comp r) hqr =
+      (F.shriekIso d c.denseRefinement).hom := by
+    rw [← F.shriekIso_symm c.denseRefinement d, F.shriekIso_eq_symm (q.comp r) hqr]
+    rfl
+  have htq := (normalization_cartesian A q hq N).trans hcanq
+  have htqr := (normalization_cartesian A (q.comp r) hqr N).trans hcanqr
+  have hcomp := refinement_transport_comp F q r
+    (unboundedEtaleRefinementOpenComparison A q N).hom
+    (unboundedEtaleRefinementOpenComparison A r N).hom
+    (unboundedEtaleRefinementOpenComparison A (q.comp r) N).hom (fun K ↦ by
+      rw [unbounded_pf_comp_inv]
+      exact normalization_refinement_comp A q r N K)
+  apply (cancel_mono (F.shriekIso c c.denseRefinement).hom).1
+  calc
+    refinement_transport F r (unboundedEtaleRefinementOpenComparison A r N).hom ≫
+        (F.shriekIso c c.denseRefinement).hom =
+      refinement_transport F r (unboundedEtaleRefinementOpenComparison A r N).hom ≫
+        refinement_transport F q (unboundedEtaleRefinementOpenComparison A q N).hom := by
+          rw [htq]
+    _ = refinement_transport F (q.comp r)
+        (unboundedEtaleRefinementOpenComparison A (q.comp r) N).hom := hcomp
+    _ = (F.shriekIso d c.denseRefinement).hom := htqr
+    _ = (F.shriekIso d c).hom ≫ (F.shriekIso c c.denseRefinement).hom :=
+      (congrArg Iso.hom (F.shriekIso_trans d c c.denseRefinement)).symm
+
+end NormalizationRefinements
+
+/-- Every proper refinement, including a noncartesian one, gives the comparison normalized
+as the identity on the source open. The graph-normalized open comparison is the identity
+there; applying the ambient direct image and composing direct images gives this formula.
+Source: Stacks Project, Tags 0F7I and 0F7B
+(blueprint: lem-amb-unbounded-compact-support-comparisons).
+Proof: sheaf normalization determines the comparison because its map to direct image is
+monic. The prescribed injective model then identifies its derived map with proper/open
+interchange. For a cartesian refinement, the specified adjunct identifies this with the
+formalism comparison. Apply the normalization family's refinement law to the coarser open
+to obtain composition for arbitrary refinements. The concrete dense refinement of the
+source maps cartesianly to both compactifications. Composition and cancellation of its
+isomorphism give the result for the original refinement. -/
+theorem unboundedEtaleCompactSupport_refinement_normalization
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
+    (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    {c d : Compactification f} (r : c.Refinement d)
+    (N : EtaleCompactSupportNormalization A) :
+    (rightDerivedLowerShriekOfCompactificationIso A d c).hom =
+      Functor.whiskerRight (unboundedEtaleRefinementOpenComparison A r N).hom
+        (lowerStar (ModuleCat.{u + 1} A) d.g).rightDerivedFunctor ≫
+      (Functor.associator _ _ _).hom ≫
+      Functor.whiskerLeft
+        (openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i).mapDerivedCategory
+        (Functor.rightDerivedFunctorCompIso'
+          (lowerStar (ModuleCat.{u + 1} A) r.hom)
+          (lowerStar (ModuleCat.{u + 1} A) d.g)
+          (lowerStarComp (ModuleCat.{u + 1} A) r.hom d.g c.g r.hom_g.symm)).hom := by
+  have h := normalization_transport_eq A r N
+  rw [unbounded_shriek_iso] at h
+  rw [refinement_transport, unbounded_pf_comp_inv] at h
+  exact h.symm
 
 end AlgebraicGeometry.Etale
