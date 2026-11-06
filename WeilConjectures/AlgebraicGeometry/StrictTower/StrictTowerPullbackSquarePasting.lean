@@ -42,6 +42,7 @@ private theorem squareG_eq {V W S T : Scheme.{u}}
   unfold squareG gCompEq
   exact normalizeIsoSquare (gComp B r i) (gComp B k p) (congrArg (G B) w.symm)
 
+attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- The inverse-image comparisons of successive commutative squares paste.
 Source: Stacks, Tag 07A7, and pullback-composition coherence
 (blueprint: lem-cbc-strict-tower-pullback-square-pasting).

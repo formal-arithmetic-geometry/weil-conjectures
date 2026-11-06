@@ -188,8 +188,6 @@ private theorem tensorGenerator_ext₃
   exact (congrArg (fun a ↦ (φ.f k).val.app U (j.val.app U a)) hm).trans
     (hh.trans (congrArg (fun a ↦ (ψ.f k).val.app U (j.val.app U a)) hm).symm)
 
-variable [HasDerivedCategory.{w} (RingedTensorModules.{c, v, r} J R)]
-
 /-- The scalar unit, reassociation and signed interchange on simultaneous K-flat models.
 Source: Stacks Tag 0FPT
 (blueprint: lem-sfb-ringed-tensor-constraint-completion). -/

@@ -58,6 +58,8 @@ private theorem hasDerivedCategory_of_equivalence {C D : Type (u + 1)}
         Functor.isoWhiskerRight eC.counitIso _ ≪≫ Functor.leftUnitor _
   exact ⟨{ D := DerivedCategory D, L := L }⟩
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Smallness on an open bounds the restriction classes of perfect objects on a larger open.
 Source: Step 2 of lem-pc-perfect-complexes-compact-set; Stacks Project, Tag 08DR
 (blueprint: lem-perfect-restriction-classes-small).

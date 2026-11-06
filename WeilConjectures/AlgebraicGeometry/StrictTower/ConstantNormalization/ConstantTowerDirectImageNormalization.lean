@@ -369,6 +369,7 @@ private theorem homotopy_comp_inv_id (F : C ⥤ D) [F.Additive]
     (Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ Q)) (.up ℤ)) K
   rw [Functor.mapHomotopyCategoryCompIso_refl_hom_app, Category.id_comp] at h
   exact h
+set_option backward.isDefEq.respectTransparency false in
 private theorem squareComparison_eq_mate
     (F : C ⥤ D) [F.Additive] (P : C ⥤ T) [P.Additive]
     [PreservesFiniteLimits P] [PreservesFiniteColimits P]
@@ -862,6 +863,7 @@ def deltaEval (X : Scheme.{u}) (n : ℕ) : delta A X ⋙ ev A X n ≅ 𝟭 _ :=
       (Functor.constCompEvaluationObj (D := Modules A X) (op n)) ≪≫
       Functor.mapDerivedCategoryIdIso _
 
+set_option backward.isDefEq.respectTransparency false in
 private theorem chi_mate {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (chi A f).hom = (mateEquiv
       (proEtaleRingDerivedAdjunction f (coefficients A Y) (coefficients A X)

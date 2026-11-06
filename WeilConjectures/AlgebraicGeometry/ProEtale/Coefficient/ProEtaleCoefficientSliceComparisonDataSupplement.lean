@@ -341,6 +341,7 @@ def Data.tensorData (d : Data U O B c delta S SR SB T TR TB) :
   scalarUnit := d.scalarUnit
   pullbackUnit := d.pullbackUnit
 
+set_option backward.isDefEq.respectTransparency true in
 /-- Section and representative equations for the monoidal portion alone.
 Source: Stacks 03CE, 07A4, 0FPT
 (blueprint: def-zl-proetale-slice-comparison-data). -/
