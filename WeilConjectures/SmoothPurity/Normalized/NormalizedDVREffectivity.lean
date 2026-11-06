@@ -316,7 +316,11 @@ private theorem normalizedDVRKFlatUnit (n : ℕ)
   change (scalarReductionRestriction l E X n).mapDerivedCategoryFactorsh.hom.app
       (((scalarReductionExtension l E X n).mapHomotopyCategory (.up ℤ)).obj
         ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) = _ at hf
-  rw [hf] at h'
+  have h' := (congrArg (fun k ↦
+    (normalizedDVRIntegralAdjunction l E X n).unit.app (DerivedCategory.Q.obj P) ≫
+      (scalarReductionDerivedRestriction l E X n).map
+        ((scalarReductionCounit l E X n).app
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫ k) hf).symm.trans h'
   unfold normalizedDVRKFlatComparison normalizedDVRIntegralAdjunction
   simpa only [DerivedCategory.quotientCompQhIso,
     HomologicalComplexUpToQuasiIso.quotientCompQhIso, Functor.mapHomotopyCategoryFactors,
