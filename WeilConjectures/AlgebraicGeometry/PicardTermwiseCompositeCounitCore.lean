@@ -63,7 +63,9 @@ private theorem invert_factorization_map_transport
       (N.map eX.inv ≫ h ≫ eR.hom) ≫ k' := by
   simp only [Functor.map_comp, Category.assoc]
   rw [← M.map_comp_assoc eY.hom eY.inv, eY.hom_inv_id, M.map_id, Category.id_comp]
-  rw [← c.inv.naturality_assoc eX.inv, reassoc_of% hf, hk]
+  have hn := c.inv.naturality eX.inv
+  dsimp only [Functor.comp_map] at hn
+  rw [← reassoc_of% hn, reassoc_of% hf, hk]
 
 private theorem pushforwardCongr_refl {X Y : Scheme.{v}} (f : X ⟶ Y) :
     Modules.pushforwardCongr (rfl : f = f) = Iso.refl _ := by
