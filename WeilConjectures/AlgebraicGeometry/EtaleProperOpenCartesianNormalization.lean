@@ -37,6 +37,7 @@ attribute [local irreducible] upperStar lowerStar openImmersionLowerShriek
   Functor.mapDerivedCategory Functor.mapDerivedCategoryFactors Functor.mapDerivedCategoryFactorsh
   Functor.rightDerivedFunctor Functor.rightDerivedFunctorUnit
   Functor.rightDerivedFunctorObjQIso Functor.mapDerivedCategoryNatIso
+  Functor.mapDerivedCategoryCompIso
 
 private theorem ordinary_cartesian_support
     (A : Type (u + 1)) [CommRing A]
