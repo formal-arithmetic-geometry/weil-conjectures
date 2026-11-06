@@ -167,8 +167,9 @@ def locallyClosedEtaleSupportIso (A : Type (u + 1)) [CommRing A] [Finite A]
     [IsClosedImmersion c] [IsOpenImmersion v] [IsNoetherian T] [QuasiCompact (c ≫ v)] :
     locallyClosedEtaleExtension A c v ≅
       Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A)
-        (locallyClosedImageCompactification (c ≫ v)) :=
-  Functor.isoWhiskerRight
+        (locallyClosedImageCompactification (c ≫ v)) := by
+  dsimp only [Etale.rightDerivedLowerShriekOfCompactification, locallyClosedImageCompactification]
+  exact Functor.isoWhiskerRight
       (Etale.lowerStar (ModuleCat.{u + 1} A) c).rightDerivedFunctorIsoMapDerivedCategory _ ≪≫
     Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (locallyClosedEtaleSheafIso A c v) ≪≫

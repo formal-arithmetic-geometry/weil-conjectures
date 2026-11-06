@@ -28,7 +28,7 @@ attribute [local irreducible] lowerStar upperStar etaleLowerShriek openImmersion
   Functor.mapDerivedCategory Functor.rightDerivedFunctor canonicalEtaleCompactSupportComparison
   rightDerivedLowerShriekIso unboundedEtaleLowerShriekCompIso
   Functor.mapDerivedCategoryFactorsh Functor.rightDerivedFunctorUnit
-  Functor.mapDerivedCategoryNatIso Functor.mapDerivedCategoryCompIso
+  Functor.mapDerivedCategoryNatIso
   Functor.mapDerivedCategoryCompRightDerivedFunctorUnit
   lowerStarComp openImmersionLowerShriekComp compactificationSheafToDirectImage
   NatTrans.mapHomotopyCategory etaleCompactificationGraphMap pasteDerivedTower

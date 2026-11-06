@@ -40,8 +40,6 @@ attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
   Functor.mapDerivedCategoryFactors Functor.mapDerivedCategory DerivedCategory.Q
   integralOperationsRoosMap
 
-attribute [local implicit_reducible] CategoryTheory.Equivalence.mk
-
 -- The existing exactness proof constructs this equivalence internally; retain it here
 -- so that the general projection-normalized Roos comparison can be applied.
 private theorem quotientModuleEquivalence {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]

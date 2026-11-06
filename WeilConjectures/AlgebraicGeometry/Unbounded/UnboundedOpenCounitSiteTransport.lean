@@ -97,7 +97,7 @@ private lemma normalized_identity_compat {C : Type*} [Category* C] [Abelian C]
     apply rightDerived_ext (F.rightDerivedFunctorPlus ⋙ _root_.DerivedCategory.Plus.ι)
       F.rightDerivedFunctorPlusιUnit (HomotopyCategory.Plus.quasiIso C)
     ext M
-    have hc : _root_.DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnit.app M) ≫
+    have hc : _root_.DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnith.app M) ≫
         F.rightDerivedFunctorPlusCompatibility.hom.app
           (_root_.DerivedCategory.Plus.Qh.obj M) =
         F.rightDerivedFunctorUnit.app M.obj := by

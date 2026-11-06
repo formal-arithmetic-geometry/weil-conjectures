@@ -344,7 +344,7 @@ private lemma exactUnit_eq_nunit
 
 attribute [local irreducible] Functor.mapDerivedCategory Functor.mapDerivedCategoryFactorsh
   Functor.rightDerivedFunctor Functor.rightDerivedFunctorUnit
-  Functor.mapDerivedCategoryNatIso Functor.mapDerivedCategoryCompIso
+  Functor.mapDerivedCategoryNatIso
 
 private lemma normalized_sheaf_tower
     (A : Type (u + 1)) [CommRing A] [Finite A]
@@ -506,7 +506,7 @@ theorem exactCompactificationUnit_tower
         (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c.restrict)
         (exactCompactificationUnit A d G ae) ≫
       (rightDerivedLowerShriekOfCompactificationCompIso A d c).hom =
-    (Functor.mapDerivedCategoryCompIso F G).inv ≫
+    (Functor.mapDerivedCategoryCompIso F G).hom ≫
       exactCompactificationUnit A (d.comp c) (F ⋙ G) a := by
   let K := ModuleCat.{u + 1} A
   let J := openImmersionLowerShriek K c.restrict.i
@@ -554,7 +554,7 @@ theorem exactCompactificationUnit_tower
   change Functor.whiskerRight (nunit F J R ah.hom) G.mapDerivedCategory ≫
     Functor.whiskerLeft (J.mapDerivedCategory ⋙ R.rightDerivedFunctor) (nunit G I S ae.hom) ≫
       (rightDerivedLowerShriekOfCompactificationCompIso A d c).hom =
-    (Functor.mapDerivedCategoryCompIso F G).inv ≫ nunit (F ⋙ G) H W a.hom
+    (Functor.mapDerivedCategoryCompIso F G).hom ≫ nunit (F ⋙ G) H W a.hom
   rw [← ha, hd]
   exact normalizedDerivedUnitPasting J R I O P S H W F G ah.hom ae.hom χ Γ
     (fun L ↦ hn L) eo ep

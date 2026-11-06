@@ -219,6 +219,7 @@ private noncomputable def derivedLineIso
   exact asIso ((reduceCounit l E X n).app _) ≪≫
     DerivedCategory.Q.mapIso (lineComplexIso l E X L b m n)
 
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 private noncomputable def derivedIso
     (L : scalarReductionSource.{u, u} l E X) [L.IsFiniteLocallyFreeOfRank 1]
     (b : PowerComparisons l E X L) (m : ℤ) (n : ℕ) :
@@ -284,6 +285,7 @@ private theorem representative_pasting
 set_option maxHeartbeats 1600000 in
 -- Normalize the specified scalar and tensor model transports in the representative square.
 attribute [local irreducible] SheafOfModules.monoidalCategory in
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 private theorem representative_formula
     (L : scalarReductionSource.{u, u} l E X) [L.IsFiniteLocallyFreeOfRank 1]
     (b : PowerComparisons l E X L) (m : ℤ)

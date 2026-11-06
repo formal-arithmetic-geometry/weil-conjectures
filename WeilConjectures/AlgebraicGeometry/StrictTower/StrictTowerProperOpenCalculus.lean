@@ -424,6 +424,67 @@ private theorem towerGComp_id_right {U X : Scheme.{u}} (j : U ⟶ X) :
   rw [towerGComp_app, towerPull_map_app, towerGId_app,
     towerG_transport B (Category.comp_id j)]
   exact congr_app (moduleGComp_id_right B j) (N.obj n)
+private theorem derived_unit_left
+    {C D : Type*} [Category* C] [Category* D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    (F H : C ⥤ D) (I : D ⥤ D)
+    [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [H.Additive] [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+    [I.Additive] [PreservesFiniteLimits I] [PreservesFiniteColimits I]
+    (a : H ≅ F ⋙ I) (e : I ≅ 𝟭 D) (b : H ≅ F)
+    (ha : a.hom ≫ Functor.whiskerLeft F e.hom = b.hom) :
+    (Functor.mapDerivedCategoryNatIso a).hom ≫
+        (Functor.mapDerivedCategoryCompIso F I).inv ≫
+        Functor.whiskerLeft F.mapDerivedCategory
+          ((Functor.mapDerivedCategoryNatIso e).hom ≫
+            (Functor.mapDerivedCategoryIdIso D).hom) =
+      (Functor.mapDerivedCategoryNatIso b).hom := by
+  have he : a ≪≫ Functor.isoWhiskerLeft F e = b := Iso.ext ha
+  have h := congrArg (fun c ↦ (Functor.mapDerivedCategoryNatIso c).hom) he
+  rw [Functor.mapDerivedCategoryNatIso_trans] at h
+  have hn := Functor.mapDerivedCategoryNatIso_isoWhiskerLeft F e
+  have hu := Functor.mapDerivedCategoryCompIso_comp_id F
+  apply NatTrans.ext
+  funext N
+  have hN := congr_app h N
+  have hnN := congr_app hn N
+  have huN := congr_app hu N
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, NatTrans.id_app] at *
+  rw [← reassoc_of% hnN, huN]
+  erw [Category.comp_id]
+  exact hN
+
+private theorem derived_unit_right
+    {C D : Type*} [Category* C] [Category* D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    (F H : C ⥤ D) (I : C ⥤ C)
+    [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [H.Additive] [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+    [I.Additive] [PreservesFiniteLimits I] [PreservesFiniteColimits I]
+    (a : H ≅ I ⋙ F) (e : I ≅ 𝟭 C) (b : H ≅ F)
+    (ha : a.hom ≫ Functor.whiskerRight e.hom F = b.hom) :
+    (Functor.mapDerivedCategoryNatIso a).hom ≫
+        (Functor.mapDerivedCategoryCompIso I F).inv ≫
+        Functor.whiskerRight
+          ((Functor.mapDerivedCategoryNatIso e).hom ≫
+            (Functor.mapDerivedCategoryIdIso C).hom) F.mapDerivedCategory =
+      (Functor.mapDerivedCategoryNatIso b).hom := by
+  have he : a ≪≫ Functor.isoWhiskerRight e F = b := Iso.ext ha
+  have h := congrArg (fun c ↦ (Functor.mapDerivedCategoryNatIso c).hom) he
+  rw [Functor.mapDerivedCategoryNatIso_trans] at h
+  have hn := Functor.mapDerivedCategoryNatIso_isoWhiskerRight e F
+  have hu := Functor.mapDerivedCategoryCompIso_id_comp F
+  apply NatTrans.ext
+  funext N
+  have hN := congr_app h N
+  have hnN := congr_app hn N
+  have huN := congr_app hu N
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, NatTrans.id_app,
+    Functor.map_comp] at *
+  rw [← reassoc_of% hnN, huN]
+  erw [Category.comp_id]
+  exact hN
+
 private theorem derived_transport {X Y : Scheme.{u}} {f g : X ⟶ Y} (e : f = g) :
     (Functor.mapDerivedCategoryNatIso
       (eqToIso (congrArg (towerPullback B) e))).hom =

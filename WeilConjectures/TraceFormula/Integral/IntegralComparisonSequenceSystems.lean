@@ -519,8 +519,8 @@ def integralComparisonSystemComposition {V W Z : Scheme.{t}}
       integralComparisonDerivedSequencePullback l E k ⋙
         integralComparisonDerivedSequencePullback l E h :=
   Functor.mapDerivedCategoryNatIso (integralComparisonSequenceComposition l E h k) ≪≫
-    Functor.mapDerivedCategoryCompIso (integralComparisonSequencePullback l E k)
-      (integralComparisonSequencePullback l E h)
+    (Functor.mapDerivedCategoryCompIso (integralComparisonSequencePullback l E k)
+      (integralComparisonSequencePullback l E h)).symm
 
 /-- An actual scalar-unit section in sequence-site change of rings.
 Source: Stacks 06YY (blueprint: def-trf-integral-comparison-sequence-systems). -/

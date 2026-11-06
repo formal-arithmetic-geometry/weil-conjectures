@@ -108,7 +108,7 @@ private theorem openBeta_unit {U' U X' X : Scheme.{u}}
 
 private def coefficientComp (n : ℕ) {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :=
   Functor.mapDerivedCategoryNatIso (StrictTower.moduleGComp (R n) f g) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 private def composedEvalG (n : ℕ) {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     (G R φ g ⋙ G R φ f) ⋙ ev R φ X n ≅

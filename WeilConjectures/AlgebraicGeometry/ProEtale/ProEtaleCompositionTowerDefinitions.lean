@@ -69,12 +69,12 @@ Source: Construction, unit--square--counit exchange
 def towerPullSquare {H T V S : Scheme.{u}} (b : H ⟶ T) (i : V ⟶ S)
     (r : H ⟶ V) (p : T ⟶ S) (w : b ≫ p = r ≫ i) :
     towerPull Λ i ⋙ towerPull Λ r ≅ towerPull Λ p ⋙ towerPull Λ b :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso
       ((upperStarComp (ModuleCat.{u + 1} Λ) r i).symm ≪≫
         eqToIso (congrArg (upperStar (ModuleCat.{u + 1} Λ)) w.symm) ≪≫
         upperStarComp (ModuleCat.{u + 1} Λ) b p) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The actual ambient exchange Ex^p: unit for r, square, counit for p.
 Source: Construction, exchange normalization
@@ -96,7 +96,7 @@ def towerOpenUnit {X Y : Scheme.{u}} (b : X ⟶ Y) [IsOpenImmersion b] :
   (Functor.mapDerivedCategoryIdIso _).symm ≪≫
     Functor.mapDerivedCategoryNatIso
       (asIso (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) b).unit) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- Lambda is Ex^p on J_b N followed by P_r of inverse eta_b.
 Source: Construction, displayed lambda

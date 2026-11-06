@@ -285,7 +285,7 @@ theorem quasifiniteCompactSupportExact
             ((rightDerivedLowerShriekIso A
                 (HasCompactification.compactification e)).symm ≪≫
               c_e (HasCompactification.compactification e)) ≪≫
-          (Functor.mapDerivedCategoryCompIso (L h) (L e)).symm ≪≫
+          Functor.mapDerivedCategoryCompIso (L h) (L e) ≪≫
           Functor.mapDerivedCategoryNatIso σ)) ∧
         (∀ [Etale h] [Etale e]
           (F : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} A)) (W : V.Etale),
