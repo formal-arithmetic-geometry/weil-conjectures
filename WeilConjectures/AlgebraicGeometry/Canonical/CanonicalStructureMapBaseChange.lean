@@ -131,7 +131,8 @@ private theorem single_directImage_naturality
   simp only [DerivedCategory.Qh, HomologicalComplexUpToQuasiIso.Qh,
     HomotopyCategory.quotient, Quotient.lift_map_functor_map]
   congr 1
-  simpa only [Functor.comp_map] using! congrArg DerivedCategory.Q.map hc.symm
+  simpa only [Functor.comp_map] using! congrArg
+    (DerivedCategory.Q.{w} (C := SheafOfModules.{u} (moduleRings B.toRingedSpace))).map hc.symm
 
 set_option maxHeartbeats 800000 in
 -- Naturality rewrites elaborate the selected derived functors and localization maps.
