@@ -289,12 +289,24 @@
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
 
-# BZ932 in progress
+# BZ932 complete
 
 - Branch: u9/BZ932; baseline 902c558126dff07f1b90673880f577206572e997.
-- The user instructed continuation after the concrete five-module upstream-restoration proposal.
-- Applied BZ932-proposed-upstream-restoration.patch, preserving restored statement/docstring text.
-- Explicit terminal-object preservation supplies GU.PreservesZeroMorphisms; removed the old
-  unmeasured maxHeartbeats override from the restored helper.
-- Next: ucheck-bump on the five prerequisites and SupportedKoszulRelativeDetector, then downstream.
-- Fix notes: /home/ubuntu/u9/bz/FIXES-BZ932.md. No local Lean/Lake or proof shortcuts.
+- Final validated source commit: f242a4dd6467eea184650cb5334bcdae759796c0.
+- Final ucheck-bump: rc=0, built=7, failed=0, 5769 jobs, on poolb:43.166.82.34.
+- Green: SupportedKoszulRelativeDetector, five restored prerequisites, and SupportedKoszulUnitSummand.
+- Restored nine prerequisite declarations after the user's continuation instruction.
+  Their original statement headers/docstrings remain unchanged. Exact terminal-limit
+  preservation resolves the localization instance timeout at default heartbeat limits.
+- The assigned detector changes only one compositor direction in its proof.
+- Pruned the unused, unreferenced exists_supported_koszul_unit_summand declaration
+  after checking both declaration lists and whole-tree references; module imports remain.
+- SupportedPerfectFactorization was attempted and skipped: unowned dependency
+  CanonicalTensorHomUncurryChainNaturality.lean:134 reports Type mismatch.
+  The green summand module has no importers; no further unblocked downstream layer remains.
+- Full logs: /home/ubuntu/u9/bz/BUILD-BZ932-final-full.log and BUILD-BZ932-downstream-full.log.
+- Fix patterns, exact diagnostics, rewrite rules, counts: /home/ubuntu/u9/bz/FIXES-BZ932.md.
+- Contract audit: /home/ubuntu/u9/bz/BZ932-contract-audit.txt.
+- Completion marker: /home/ubuntu/u9/state/BZ932.DONE.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+- This completion commit changes only progress documentation after the successful source build.
