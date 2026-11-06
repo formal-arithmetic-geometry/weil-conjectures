@@ -100,7 +100,7 @@ noncomputable def comparisonSquareSourceIso (g : Y' ⟶ Y) (f' : X' ⟶ Y') :
       D(Etale.upperStar (ModuleCat.{u + 1} Λ) g) ⋙
         D(Etale.upperStar (ModuleCat.{u + 1} Λ) f') ⋙ D(ν^*(X')[ModuleCat.{u + 1} Λ]) :=
   (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
-    Functor.isoWhiskerRight (Functor.mapDerivedCategoryCompIso _ _) _
+    Functor.isoWhiskerRight (Functor.mapDerivedCategoryCompIso _ _).symm _
 
 /-- The common target comparison to the two total left derived pullbacks.
 Source: exact-functor composition comparisons. -/
@@ -110,7 +110,7 @@ noncomputable def comparisonSquareTargetIso (g' : X' ⟶ X) (f : X ⟶ Y) :
       D(ν^*(Y)[ModuleCat.{u + 1} Λ]) ⋙
         L(upperStar (ModuleCat.{u + 1} Λ) f) ⋙ L(upperStar (ModuleCat.{u + 1} Λ) g') :=
   (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
-    Functor.isoWhiskerLeft _ (Functor.mapDerivedCategoryCompIso _ _) ≪≫
+    Functor.isoWhiskerLeft _ (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
     Functor.isoWhiskerLeft _
       (Functor.isoWhiskerRight
           (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) f).symm _ ≪≫
