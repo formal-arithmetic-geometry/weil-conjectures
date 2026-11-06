@@ -128,7 +128,7 @@ end Transport
 attribute [local irreducible] Functor.mapDerivedCategory Functor.rightDerivedFunctor
   sfIntrinsicModuleEquivalence
 attribute [local implicit_reducible] Equivalence.mapDerivedCategory
-  sfIntrinsicDerivedEquivalence Functor.mapHomologicalComplex
+  sfIntrinsicDerivedEquivalence
 
 private theorem derived_realization_mate
     (A : Type u) [CommRing A] [Finite A]
