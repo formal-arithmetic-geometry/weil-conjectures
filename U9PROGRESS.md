@@ -288,25 +288,39 @@
 - Fix patterns: /home/ubuntu/u9/bz/FIXES-BZ908.md.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
+- Assigned leaf compiled successfully (51s), all 3998 jobs green at 47eabae395f.
+  The shared remote wrapper hit a shell syntax error after compilation; full Lean
+  success is recorded in BUILD-BZ908-leaf-green-full.log. Rechecking the runner.
+- Next batch uses two direct importers whose dependency closures cover all 19:
+  SingleComplexInheritedTensorCondition and NormalizedInternalHomPullbackComparison.
 
-# BZ932 complete
+- The stable downstream run at 0997529457 rebuilt the assigned leaf (59s) and
+  CanonicalPullbackTensorMonoidalRealization (50s) successfully.
+- TensorCoordinateIdentifications needs the same Qh/Q reflexive casts plus an
+  explicit target sheaf category; the known BZ877 repair is applied for recheck.
+  The unused-list theorem has an external caller, so it is retained.
+- Unowned blockers found: StalkDerivedExtensionComparisonIsoCore (heartbeat
+  timeout) and OpenRestrictionDerivedMonoidal (reversed compositor).
+- Per-run ucheck-bump snapshot: /home/ubuntu/u9/bz/BZ908-bin/ucheck-bump. It preserves
+  the lead's locking and one-build-per-helper rules while avoiding shared-script
+  overwrite failures. No shared build scripts were edited.
 
-- Branch: u9/BZ932; baseline 902c558126dff07f1b90673880f577206572e997.
-- Final validated source commit: f242a4dd6467eea184650cb5334bcdae759796c0.
-- Final ucheck-bump: rc=0, built=7, failed=0, 5769 jobs, on poolb:43.166.82.34.
-- Green: SupportedKoszulRelativeDetector, five restored prerequisites, and SupportedKoszulUnitSummand.
-- Restored nine prerequisite declarations after the user's continuation instruction.
-  Their original statement headers/docstrings remain unchanged. Exact terminal-limit
-  preservation resolves the localization instance timeout at default heartbeat limits.
-- The assigned detector changes only one compositor direction in its proof.
-- Pruned the unused, unreferenced exists_supported_koszul_unit_summand declaration
-  after checking both declaration lists and whole-tree references; module imports remain.
-- SupportedPerfectFactorization was attempted and skipped: unowned dependency
-  CanonicalTensorHomUncurryChainNaturality.lean:134 reports Type mismatch.
-  The green summand module has no importers; no further unblocked downstream layer remains.
-- Full logs: /home/ubuntu/u9/bz/BUILD-BZ932-final-full.log and BUILD-BZ932-downstream-full.log.
-- Fix patterns, exact diagnostics, rewrite rules, counts: /home/ubuntu/u9/bz/FIXES-BZ932.md.
-- Contract audit: /home/ubuntu/u9/bz/BZ932-contract-audit.txt.
-- Completion marker: /home/ubuntu/u9/state/BZ932.DONE.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
-- This completion commit changes only progress documentation after the successful source build.
+
+# BZ938 in progress
+
+- Branch: u9/BZ938; baseline before repairs: 1626b332e^.
+- The user instructed continuation after the exact four-projection private-helper proposal.
+  Applied BZ938-private-compositor-proposal.patch to descend_coherence.
+  The .hom → .inv migration preserves the original equation under Mathlib's reversed compositor.
+- Definition bodies and proof-local comparisons now use the correct compositor direction.
+- First remote build cleared five of eight diagnostics; remaining three shared the
+  private helper statement as their root. Next: validate the completed repair.
+- Then check the nine direct importers, continuing through unblocked layers up to
+  the brief's 30-extra-module limit.
+- Fix records: /home/ubuntu/u9/bz/FIXES-BZ938.md.
+- No local Lean/Lake, forbidden proof escapes, or heartbeat changes.
+
+- Assigned leaf GREEN at 01d3d8d6e: ucheck-bump rc=0, failed=0, built=65,
+  on newsrv:/home/ubuntu/u9n/bumpw3. Full log BUILD-BZ938-leaf-green-full.log.
+- Next target IntegralPullbackCompositionScalarRational has all nine direct
+  importers in its dependency closure; downstream validation is starting.
