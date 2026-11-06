@@ -140,8 +140,8 @@ def HasCompletedReductionTowerUnitNormalization (T : Scheme.{u})
         CochainComplex.IsKFlatIndependentCoefficients
           (R := pbcAdicCompletion T d) P →
         τ.app (DerivedCategory.Q.obj P) ≫
-            (completedReductionTowerCounit d T).app
-              ((HomotopyCategory.quotient _ (.up ℤ)).obj P) =
+            cast (by rfl) ((completedReductionTowerCounit d T).app
+              ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) =
           ((completedTowerConstant d T).mapDerivedCategoryFactors).hom.app P ≫
             DerivedCategory.Q.map
               ((NatTrans.mapHomologicalComplex (completedReductionModuleUnit d T)

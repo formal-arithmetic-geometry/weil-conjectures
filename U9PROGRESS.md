@@ -319,3 +319,16 @@
   the brief's 30-extra-module limit.
 - Fix records: /home/ubuntu/u9/bz/FIXES-BZ938.md.
 - No local Lean/Lake, forbidden proof escapes, or heartbeat changes.
+
+
+# BZ978 in progress
+
+- Branch: u9/BZ978; baseline: 2390944b5.
+- The user instructed continuation after the exact identity-cast proposal.
+  Applied BZ978-public-cast-proposal.patch in HasCompletedReductionTowerUnitNormalization.
+  The reflexive type conversion preserves the existing counit morphism and assumptions.
+- Localization imports already repaired the private exactAugmentation_existsUnique helper.
+- Next: validate the assigned module with ucheck-bump, then its seven direct importers
+  and unblocked downstream layers, up to the brief's limit.
+- Fix patterns and build evidence: /home/ubuntu/u9/bz/FIXES-BZ978.md.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
