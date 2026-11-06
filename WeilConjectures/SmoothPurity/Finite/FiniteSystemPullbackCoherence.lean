@@ -203,8 +203,8 @@ def finiteSystemDerivedComposition [∀ n, Finite (A n)]
     finiteSystemDerivedPullback.{u} A τ (h ≫ k) ≅
       finiteSystemDerivedPullback.{u} A τ k ⋙ finiteSystemDerivedPullback.{u} A τ h :=
   Functor.mapDerivedCategoryNatIso (finiteSystemComposition.{u} A τ h k) ≪≫
-    Functor.mapDerivedCategoryCompIso (finiteSystemPullback.{u} A τ k)
-      (finiteSystemPullback.{u} A τ h)
+    (Functor.mapDerivedCategoryCompIso (finiteSystemPullback.{u} A τ k)
+      (finiteSystemPullback.{u} A τ h)).symm
 
 /-- Exact evaluation on the ordinary derived system category.
 Source: Stacks 0941 (blueprint: lem-pod-finite-system-pullback-coherence). -/
@@ -383,9 +383,9 @@ def finiteSystemDerivedPullbackEvaluation [∀ n, Finite (A n)]
     proEtaleRingModules_hasDerivedCategory.{u} X (proEtaleConstantRing.{u} X (A n))
   letI : HasDerivedCategory (proEtaleRingModules.{u} Y (proEtaleConstantRing.{u} Y (A n))) :=
     proEtaleRingModules_hasDerivedCategory.{u} Y (proEtaleConstantRing.{u} Y (A n))
-  exact (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  exact Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (finiteSystemPullbackEvaluation.{u} A τ f n) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The existing canonical module comparison, fixed by its fibre-product conjugate.
 The property in the published existence theorem determines its map uniquely:
@@ -1083,9 +1083,9 @@ private theorem systemDerivedEvaluationComposition
     with_unfolding_all rfl
   have hc : (proEtaleConstantRingPullbackComposition h k (A n)).symm =
       (Functor.mapDerivedCategoryNatIso (finiteSystemModuleComposition.{u} A h k n) ≪≫
-        Functor.mapDerivedCategoryCompIso
+        (Functor.mapDerivedCategoryCompIso
           (proEtaleConstantRingPullback (A n) k)
-          (proEtaleConstantRingPullback (A n) h)) := by
+          (proEtaleConstantRingPullback (A n) h)).symm) := by
     simpa only [finiteSystemModuleComposition] using
       proEtaleConstantRingPullbackComposition_eq_mapModuleComparison h k (A n)
   simp only [hi] at hd
