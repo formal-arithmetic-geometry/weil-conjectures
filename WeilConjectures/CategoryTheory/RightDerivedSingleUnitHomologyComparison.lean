@@ -95,7 +95,8 @@ theorem rightDerivedPlusSingleUnitHomology_comp_comparison (Y : B) :
         (DerivedCategory.Plus.quotientCompQhIso C).inv.app
           (G.mapCochainComplexPlus.obj S) := by
     apply DerivedCategory.Plus.ι.map_injective
-    simp only [ObjectProperty.ι_obj, ObjectProperty.ι_map, comp_obj, NatTrans.naturality, comp_map,
+    simp only [mapHomotopyCategoryPlusSingleFunctorQhObjIso, DerivedCategory.Plus.quotientCompQhIso,
+      s, S, SC, ObjectProperty.ι_obj, ObjectProperty.ι_map, comp_obj, NatTrans.naturality, comp_map,
       ObjectProperty.FullSubcategory.comp_hom, DerivedCategory.Plus.quotientCompQhIso_inv_app_hom]
     change DerivedCategory.Plus.ι.map (DerivedCategory.Plus.ι.preimage _) = _
     rw [Functor.map_preimage]
@@ -108,15 +109,17 @@ theorem rightDerivedPlusSingleUnitHomology_comp_comparison (Y : B) :
           (DerivedCategory.quotientCompQhIso B).symm.app _)).inv =
       (DerivedCategory.Plus.quotientCompQhIso B).hom.app S := by
     apply DerivedCategory.Plus.ι.map_injective
-    simp only [ObjectProperty.ι_obj, comp_obj, preimageIso_inv, Iso.trans_inv, Iso.app_inv,
-      Iso.symm_inv, ObjectProperty.ι_map, DerivedCategory.Plus.quotientCompQhIso_hom_app_hom]
+    simp only [DerivedCategory.Plus.quotientCompQhIso, DerivedCategory.singleFunctorIsoCompQ, S,
+      ObjectProperty.ι_obj, comp_obj, preimageIso_inv, Iso.trans_inv, Iso.app_inv, Iso.symm_inv,
+      ObjectProperty.ι_map, DerivedCategory.Plus.quotientCompQhIso_hom_app_hom]
     change DerivedCategory.Plus.ι.map (DerivedCategory.Plus.ι.preimage _) = _
     rw [Functor.map_preimage]
     exact Category.comp_id _
   have hsingleUnit : G.rightDerivedPlusSingleUnit Y =
       DerivedCategory.Plus.Q.map s ≫ G.rightDerivedFunctorPlusUnit.app S := by
     simp only [rightDerivedPlusSingleUnit, hsource, htarget]
-    simp only [comp_obj, NatTrans.naturality, comp_map, Category.assoc]
+    simp only [rightDerivedFunctorPlusUnit, quotientCompMapHomotopyCategoryPlusIso, Category.assoc,
+      comp_obj, NatTrans.naturality, comp_map]
     erw [Functor.map_id]
     simp
     rfl
@@ -133,7 +136,8 @@ theorem rightDerivedPlusSingleUnitHomology_comp_comparison (Y : B) :
   have hresolution : (G.rightDerivedFunctorPlusObjSingleFunctorIsoQ Y).hom =
       G.rightDerivedFunctorPlus.map (DerivedCategory.Plus.Q.map g) ≫
         CategoryTheory.inv (G.rightDerivedFunctorPlusUnit.app L) := by
-    simp only [comp_obj, IsIso.eq_comp_inv]
+    simp only [rightDerivedFunctorPlusObjSingleFunctorIsoQ, DerivedCategory.singleFunctorIsoCompQ,
+      g, R, L, comp_obj, IsIso.eq_comp_inv]
     congr 1
     apply DerivedCategory.Plus.ι.map_injective
     rw [Functor.map_preimage]
