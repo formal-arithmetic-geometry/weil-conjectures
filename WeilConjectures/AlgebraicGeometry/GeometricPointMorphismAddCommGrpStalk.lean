@@ -54,7 +54,7 @@ theorem geometricPointMorphism_addCommGrp_stalk
   have hf : ∀ U t, (pointSmallEtale s').toPresheafFiber U t F.obj ≫ f =
       (pointSmallEtale s).toPresheafFiber U (α.app U t) F.obj := by
     intro U t
-    exact colimit.ι_pre D (NatTrans.mapElements α).op (op ⟨U, t⟩)
+    exact colimit.ι_pre D (NatTrans.mapElements α).op (op (Functor.elementsMk _ U t))
   have hi : IsIso f := by dsimp [f]; infer_instance
   have hu : ∀ g, (∀ U t, (pointSmallEtale s').toPresheafFiber U t F.obj ≫ g =
       (pointSmallEtale s).toPresheafFiber U (α.app U t) F.obj) → g = f := by
