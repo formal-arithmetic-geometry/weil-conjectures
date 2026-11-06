@@ -972,7 +972,7 @@ theorem sitePullbackTensorGenerators
       simp only [← sitePure_eq]
       rw [map_smul, PresheafOfModules.naturality_apply]
       erw [hu M N (op V) x y]
-      rw [SheafOfModules.CochainScalarConstruction.pure_restrict S]
+      erw [SheafOfModules.CochainScalarConstruction.pure_restrict S]
       exact sitePure_smul K S (F.obj M) (F.obj N) (op W) r _ _
     · intro M M' N N' a b
       exact he a b
