@@ -128,8 +128,10 @@ private def sheafAverage
   apply ModuleCat.hom_ext
   apply LinearMap.ext
   intro z
-  change avgRaw (V := M.obj.obj V) (W := H.obj.obj V) (S := S) (η.hom.app V).hom t (M.obj.map w z) =
-    H.obj.map w (avgRaw (V := M.obj.obj U) (W := H.obj.obj U) (S := S) (η.hom.app U).hom t z)
+  change (avgRaw (V := M.obj.obj V) (W := H.obj.obj V) (S := S)
+    (η.hom.app V).hom t).toFun (M.obj.map w z) =
+    H.obj.map w ((avgRaw (V := M.obj.obj U) (W := H.obj.obj U) (S := S)
+      (η.hom.app U).hom t).toFun z)
   symm
   apply avgRaw_naturality (a := (M.obj.map w).hom) (b := (H.obj.map w).hom)
   intro z
@@ -174,9 +176,10 @@ private theorem sheafAverage_square
   apply ModuleCat.hom_ext
   apply LinearMap.ext
   intro z
-  change avgRaw (V := M'.obj.obj U) (W := H'.obj.obj U) (S := S)
-    (η'.hom.app U).hom t (a.hom.app U z) =
-    b.hom.app U (avgRaw (V := M.obj.obj U) (W := H.obj.obj U) (S := S) (η.hom.app U).hom t z)
+  change (avgRaw (V := M'.obj.obj U) (W := H'.obj.obj U) (S := S)
+    (η'.hom.app U).hom t).toFun (a.hom.app U z) =
+    b.hom.app U ((avgRaw (V := M.obj.obj U) (W := H.obj.obj U) (S := S)
+      (η.hom.app U).hom t).toFun z)
   symm
   apply avgRaw_naturality
   intro z
@@ -214,7 +217,8 @@ private theorem sheafAverage_comp
   apply ModuleCat.hom_ext
   apply LinearMap.ext
   intro z
-  change b.hom.app U (avgRaw (V := M.obj.obj U) (W := H.obj.obj U) (S := S) (η.hom.app U).hom t z) =
+  change b.hom.app U ((avgRaw (V := M.obj.obj U) (W := H.obj.obj U) (S := S)
+    (η.hom.app U).hom t).toFun z) =
     Algebra.TensorProduct.lmul' R t • a.hom.app U z
   apply avgRaw_comp
   intro z
