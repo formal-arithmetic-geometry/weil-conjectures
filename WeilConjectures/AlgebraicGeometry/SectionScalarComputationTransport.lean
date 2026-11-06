@@ -196,7 +196,7 @@ private theorem exactSquareFactors
     G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app P) ≫
       G.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj P) ≫
       DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex r.hom (.up ℤ)).app P) =
-    ((Functor.mapDerivedCategoryCompIso F G).inv.app (DerivedCategory.Q.obj P) ≫
+    ((Functor.mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Q.obj P) ≫
       (Functor.mapDerivedCategoryNatIso r).hom.app (DerivedCategory.Q.obj P) ≫
       (Functor.mapDerivedCategoryCompIso F' G').hom.app (DerivedCategory.Q.obj P)) ≫
       G'.mapDerivedCategory.map (F'.mapDerivedCategoryFactors.hom.app P) ≫
