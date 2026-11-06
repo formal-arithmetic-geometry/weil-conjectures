@@ -60,7 +60,7 @@ composite open immersion with the smaller open's immersion. Source: Stacks 04IX 
 def openComp (T : Scheme.{u}) {U V : T.Opens} (h : U ≤ V) :
     (r V.ι).mapDerivedCategory ⋙ (r (T.homOfLE h)).mapDerivedCategory ≅
       (r U.ι).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso (r V.ι) (r (T.homOfLE h))).symm ≪≫
+  Functor.mapDerivedCategoryCompIso (r V.ι) (r (T.homOfLE h)) ≪≫
     Functor.mapDerivedCategoryNatIso
       ((c (T.homOfLE h) V.ι).symm ≪≫
         eqToIso (congrArg (fun f ↦ r f) (Scheme.homOfLE_ι T h)))
