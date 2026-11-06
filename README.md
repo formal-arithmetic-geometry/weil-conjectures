@@ -50,8 +50,7 @@ lake build
 ## Blueprint
 
 The informal blueprint lives in
-[formal-arithmetic-geometry/weil-conjectures-blueprint](https://github.com/formal-arithmetic-geometry/weil-conjectures-blueprint),
-included here as the submodule `blueprint/`. It is published at
+[formal-arithmetic-geometry/weil-conjectures-blueprint](https://github.com/formal-arithmetic-geometry/weil-conjectures-blueprint). It is published at
 [weil-conjectures.merten.dev](https://weil-conjectures.merten.dev).
 
 ## Authors
