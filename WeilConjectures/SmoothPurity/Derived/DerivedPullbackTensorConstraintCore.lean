@@ -68,6 +68,8 @@ attribute [local irreducible] Scheme.residueField Padic ScalarLocalization.compo
   operationStageTransitionIso commonStageDerivedTensor commonStageDerivedPullback
 
 section HigherCoherence
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 variable (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω]
@@ -409,8 +411,8 @@ theorem pullbackTensorCommonBraiding_exists (W : Scheme.{u})
                 hS)) (N.toStage (((Padic.finiteCoefficientFields_properties l Ω).1 M.stage
                 N.stage).2.trans hS))).hom ≫
             (commonStageTensorComparison l Ω W N M L hT).inv)) := by
-  set_option backward.isDefEq.respectTransparency true in
-  set_option backward.isDefEq.respectTransparency.types true in
+  set_option backward.isDefEq.respectTransparency false in
+  set_option backward.isDefEq.respectTransparency.types false in
     let S := stageSystem l Ω W
     let U : BilinearCoefficientDescent.Family S S S :=
       ⟨fun F ↦ rationalDerivedTensor l
@@ -491,8 +493,8 @@ theorem pullbackTensorCommonBraiding_exists (W : Scheme.{u})
 
 end CommonBraidingDescent
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The common-stage braiding has its prescribed representative at every larger field.
 Source: Stacks 06YS, 07A4, 0941; blueprint coefficient conventions
 (blueprint: lem-pur-derived-pullback-tensor-constraints). Proof: Conjugate the rational braiding
