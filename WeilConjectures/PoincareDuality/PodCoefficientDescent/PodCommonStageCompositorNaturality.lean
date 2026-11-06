@@ -160,6 +160,8 @@ private theorem pod_ofHom_square
     StageSystem.PairCategory.mkHom_comp_mkHom] using
       congrArg (StageSystem.PairCategory.mkHom L hP hS) e
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The prescribed common-stage pullback compositor is natural in every arrow.
 Source: blueprint dual-Tate compatibility, Step 5: rational and common-stage descent.
 (blueprint: lem-pod-common-stage-compositor-naturality).

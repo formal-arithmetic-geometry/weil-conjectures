@@ -199,6 +199,8 @@ attribute [local irreducible] Padic.coefficientExtensionIntegers
 attribute [local irreducible] commonStageDerivedTensor rationalDerivedTensor
   pullbackTensorCommonUnitStage pullbackTensorRationalRightUnitor
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Naturality of the canonical right unitor for the reconstructed common-stage unit.
 
 Source: Stacks Project, Tags 07A4 and 0941; coefficient operations blueprint.

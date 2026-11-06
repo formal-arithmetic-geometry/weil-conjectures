@@ -269,6 +269,8 @@ private theorem chosen_spec {A : Sort*} {p : A → Prop} (h : ∃! a, p a)
     (a : A) (ha : a = h.exists.choose) : p a :=
   ha.symm ▸ h.exists.choose_spec
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The prescribed common-stage associator and unitors satisfy the triangle identity.
 
 Source: Stacks Project, Tags 07A4 and 0941; the normalized coefficient tensor

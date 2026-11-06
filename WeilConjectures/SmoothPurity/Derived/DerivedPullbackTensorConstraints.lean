@@ -1335,6 +1335,9 @@ def pullbackTensorRationalScalarUnit
     [hW : ∀ w : W, Invertible (l : W.residueField w)] :=
   (@pullbackTensorRationalScalarUnit_existsUnique l _ E _ _ _ L _ _ _ ι W hW).exists.choose
 
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
 /-- The common-stage unit represented over the least finite coefficient field.
 Source: Stacks 03EL, 07A4, 0941; blueprint coefficient conventions
 (blueprint: lem-pur-derived-pullback-tensor-constraints). -/
@@ -1610,8 +1613,8 @@ private theorem cu_cocycle (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residu
     (cuUn l Ω W) (fun h ↦ commonScalarUnit l Ω W h) (cu_tower l Ω W) (culu l Ω W)
     (curu l Ω W) (cu_hlu l Ω W) (cu_hru l Ω W) (cu_hR l Ω W) h h'
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 private theorem pullbackTensorCommonLeftUnitor_existsUnique_aux (W : Scheme.{u})
     [hW : ∀ w : W, Invertible (l : W.residueField w)]
     (M : generalAlgebraicallyClosedConstructibleCategory l Ω W) :
@@ -1666,8 +1669,8 @@ private theorem pullbackTensorCommonLeftUnitor_existsUnique_aux (W : Scheme.{u})
   · intro y₁ y₂ h₁ h₂
     exact Iso.ext (eq_of_heq ((h₁ _ le_rfl).trans (h₂ _ le_rfl).symm))
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 private theorem pullbackTensorCommonRightUnitor_existsUnique_aux (W : Scheme.{u})
     [hW : ∀ w : W, Invertible (l : W.residueField w)]
     (M : generalAlgebraicallyClosedConstructibleCategory l Ω W) :
@@ -1724,8 +1727,8 @@ end CommonUnitorTransport
 
 attribute [local irreducible] pullbackTensorCommonUnitStage pullbackTensorCommonUnit
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The common-stage left unitor has the canonical representative at every larger field.
 Source: Stacks 03EL, 07A4, 0941; blueprint coefficient conventions
 (blueprint: lem-pur-derived-pullback-tensor-constraints). Proof: Represent at the finite
@@ -1771,8 +1774,8 @@ def pullbackTensorCommonLeftUnitor (W : Scheme.{u})
     (M : generalAlgebraicallyClosedConstructibleCategory l Ω W) :=
   ((@pullbackTensorCommonLeftUnitor_existsUnique l _ Ω _ _ _ W hW) M).exists.choose
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The common-stage right unitor has the canonical representative at every larger field.
 Source: Stacks 03EL, 07A4, 0941; blueprint coefficient conventions
 (blueprint: lem-pur-derived-pullback-tensor-constraints). Proof: Represent at the finite
@@ -1815,6 +1818,9 @@ def pullbackTensorCommonRightUnitor (W : Scheme.{u})
     [hW : ∀ w : W, Invertible (l : W.residueField w)]
     (M : generalAlgebraicallyClosedConstructibleCategory l Ω W) :=
   ((@pullbackTensorCommonRightUnitor_existsUnique l _ Ω _ _ _ W hW) M).exists.choose
+
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
 
 /-- Both unit equations for the actual canonical integral comparison.
 Source: Stacks 03EL, 07A4, 0941; blueprint coefficient conventions
