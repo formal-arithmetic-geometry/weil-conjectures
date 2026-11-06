@@ -122,7 +122,10 @@ private theorem affine_single_unit_iso
         ((HomotopyCategory.quotient _ (.up ℤ)).obj
           ((CochainComplex.singleFunctor
             (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj N))) := by
-    simpa only [cast_eq] using hi
+    simpa only [r, cast_eq, Scheme.Modules, Scheme.ringCatSheaf,
+      DerivedCategory.singleFunctor, DerivedCategory.singleFunctors,
+      HomotopyCategory.singleFunctor, HomotopyCategory.singleFunctors,
+      SingleFunctors.postcomp, Functor.comp_obj] using hi
   exact IsIso.of_isIso_comp_left
     (DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (.up ℤ)).map r)) _
 
@@ -256,7 +259,9 @@ private theorem affine_single_counit_comparison
       εp.app D ≫ DerivedCategory.Qh.{u + 1}.map σ.hom := by
     dsimp only [Scheme.picardTermwiseSingleMap, Scheme.Modules.canonicalSinglePullbackMap]
     simp only [cast_eq, Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app,
-      CategoryTheory.Functor.map_id, Category.comp_id]
+      CategoryTheory.Functor.map_id, Category.comp_id, εp, SingleComplexBaseChange.counit,
+      D, C, σ, P, HomotopyCategory.singleFunctor, HomotopyCategory.singleFunctors,
+      SingleFunctors.postcomp, Functor.comp_obj, Functor.mapIso_hom, NatIso.app_hom]
   have hc := derivedBaseChange_unit_compatibility.{u, u + 1} f f' g p pullback.condition D
   let εg := SingleComplexBaseChange.counit g
   have heq : (derivedPullback.{u, u + 1} g).map e.inv ≫ standardSingleBaseChangeMap f N g =
