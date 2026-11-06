@@ -246,7 +246,7 @@
 - Next: build layer-two importer CanonicalModuleBaseChangeAffineChartComparison.
 - Notes: /home/ubuntu/u9/bz/FIXES-BZ824.md. No local Lean/Lake or proof shortcuts.
 
-# BZ861 final validation
+# BZ861 complete
 
 - Branch: `u9/BZ861`; starting commit: `db406319f`.
 - Assigned module `AffineBaseChangeGlobalSectionsFactorization` and all six edited
@@ -265,11 +265,17 @@
   AffineScalarLocalizedTensorSquare, AffineLocalizedTensorStalkSquare,
   and AffineBaseChangeOrdinaryStalkComparison.
 - Remaining frontier: AffineBaseChangeTildeStalkComparison line 93 reports
-  `Unknown identifier `affineBaseChangeIntoPullback``. That upstream module contains
+  Unknown identifier `affineBaseChangeIntoPullback`. That upstream module contains
   no declarations after an earlier prune and is outside this unit; defer per brief.
   All other direct importers of the green downstream modules passed.
 - Downstream log: `/home/ubuntu/u9/bz/BUILD-BZ861-downstream3-full.log`.
-- Final green check of the repaired chain is pending; DONE follows its successful return.
+- Final `ucheck-bump` passed at `2578f775d544205321b84e3c7e3a3d045dec5a53`:
+  rc=0, failed=0, 4061 jobs, on newsrv:/home/ubuntu/u9n/bumpw3.
+  Explicit targets: AffineBaseChangeGlobalSectionsFactorization and
+  AffineBaseChangeOrdinaryStalkComparison; their dependencies cover all six edited files.
+- Final green log: `/home/ubuntu/u9/bz/BUILD-BZ861-final-green-full.log`.
+- Completion marker: `/home/ubuntu/u9/state/BZ861.DONE`.
 - Fix records: `/home/ubuntu/u9/bz/FIXES-BZ861.md`; logs use `BUILD-BZ861-*`.
 - The replay audit reproduces all six changed Lean files using 15 contextual rewrite rules.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+- This final commit changes only progress documentation; Lean sources match the green build.
