@@ -348,7 +348,7 @@ private theorem exactLine_square (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (Functor.mapDerivedCategoryCompIso _ _).symm
   let c₂ := Functor.mapDerivedCategoryNatIso
       (upperStarComp (ModuleCat.{u + 1} A) g q) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
   have hs : exactDerivedSquareUpperStarIso (ModuleCat.{u + 1} A) sq = c₁.symm ≪≫ c₂ := by
     apply Iso.ext
     simp [exactDerivedSquareUpperStarIso, squareUpperStarIso, c₁, c₂,
