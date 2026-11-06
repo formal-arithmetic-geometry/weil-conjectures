@@ -4,10 +4,6 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import Mathlib.Algebra.Homology.Localization
-import all Mathlib.Algebra.Homology.Localization
-import all Mathlib.CategoryTheory.Limits.HasLimits
-import all Mathlib.Logic.Small.Defs
 public import WeilConjectures.AlgebraicGeometry.SectionDerivedPushpullNormalization
 public import WeilConjectures.AlgebraicGeometry.SectionTotalOplaxComparisonData
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
@@ -87,15 +83,15 @@ def normalizationDerivedAssociator (T : Scheme.{u})
 Source: Stacks 06YU (auxiliary; not a blueprint node). -/
 def normalizationDerivedLeftUnitor (T : Scheme.{u}) (M : DerivedCategory (modules Λ T)) :
     (tensor Λ T).obj (tensorUnit Λ T, M) ≅ M :=
-  cast (by rfl) (@MonoidalCategoryStruct.leftUnitor _ _
-    (Monoidal.transportStruct (derivedEquivalence Λ T)) M)
+  @MonoidalCategoryStruct.leftUnitor _ _
+    (Monoidal.transportStruct (derivedEquivalence Λ T)) M
 
 /-- The right unitor of the existing conjugate tensor.
 Source: Stacks 06YU (auxiliary; not a blueprint node). -/
 def normalizationDerivedRightUnitor (T : Scheme.{u}) (M : DerivedCategory (modules Λ T)) :
     (tensor Λ T).obj (M, tensorUnit Λ T) ≅ M :=
-  cast (by rfl) (@MonoidalCategoryStruct.rightUnitor _ _
-    (Monoidal.transportStruct (derivedEquivalence Λ T)) M)
+  @MonoidalCategoryStruct.rightUnitor _ _
+    (Monoidal.transportStruct (derivedEquivalence Λ T)) M
 
 /-- The regular-module unit comparison, obtained from localization and the ordinary unit.
 Source: Stacks 06YU (auxiliary; not a blueprint node). -/
