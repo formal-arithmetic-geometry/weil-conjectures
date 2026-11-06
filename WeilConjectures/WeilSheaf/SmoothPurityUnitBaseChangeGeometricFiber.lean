@@ -181,7 +181,7 @@ theorem isIso_smoothUnitBaseChange_geometricFiber_of_charts {ι : Type u} (c : �
       [QuasiCompact A'.hom] [IsSeparated A'.hom] [LocallyOfFiniteType B'.hom]
       [QuasiCompact B'.hom] [IsSeparated B'.hom] (h : A ⟶ B) (h' : A' ⟶ B')
       {πA : A'.left ⟶ A.left} {πB : B'.left ⟶ B.left}
-      (sq : IsPullback πA h'.left h.left πB),
+      (_sq : IsPullback πA h'.left h.left πB),
       boundedConstructibleLowerShriek l h ⋙ boundedConstructibleUpperStarOfMap l πB ≅
         boundedConstructibleUpperStarOfMap l πA ⋙ boundedConstructibleLowerShriek l h')
     (hEx : ∀ {A B C : Over (Spec (.of k))} [LocallyOfFiniteType A.hom] [QuasiCompact A.hom]

@@ -134,7 +134,8 @@ theorem isIso_smoothUnitBaseChange_of_isIso_upperShriekBaseChangeOfMap
 set_option linter.style.longLine false in
 /-- **The proper smooth piece along a weakly étale base change**: for `f` smooth proper of pure
 relative dimension `d` and `πP` weakly étale, the exceptional base change map at the unit is
-invertible (`ProEtale.CondensedRing.isIso_upperShriekBaseChangeOfMap_app_of_smooth_of_weaklyEtale`). -/
+invertible
+(`ProEtale.CondensedRing.isIso_upperShriekBaseChangeOfMap_app_of_smooth_of_weaklyEtale`). -/
 theorem isIso_smoothUnitBaseChange_of_smooth_of_weaklyEtale (d : ℕ)
     [SmoothOfRelativeDimension d f.left] [WeaklyEtale πP] [IsIso e] :
     IsIso (smoothUnitBaseChange l f f' (properLowerShriekBaseChangeOfMap l f f' sqf) e) :=
