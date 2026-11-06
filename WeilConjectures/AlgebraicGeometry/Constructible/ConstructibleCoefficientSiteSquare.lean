@@ -288,7 +288,7 @@ theorem constructibleSiteComparison
           (Scheme.toProEt (S.domain k)).obj (d.cover.etalePrecoverageToEtale i))
         (fun i : d.cover.I₀ ↦ MorphismProperty.Over.homMk
           (B := Scheme.ProEt.mk (𝟙 (S.domain k)))
-          (d.cover.f i) (Category.comp_id _)) ∈
+          (d.cover.f i) (Category.comp_id _) (MorphismProperty.top_apply _)) ∈
             (Scheme.ProEt.precoverage (S.domain k)).coverings (Scheme.ProEt.mk (𝟙 _)) ∧
       ∀ (i : d.cover.I₀) (M : ModuleCat.{u + 1} R), Finite M →
       Nonempty
@@ -310,7 +310,7 @@ theorem constructibleSiteComparison
             ((ProEtale.upperStar (ModuleCat.{u + 1} R) (S'.immersion k)).obj
               ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} R) X).obj F) ≅
               (constantSheaf (Scheme.ProEt.topology (S'.domain k))
-                (ModuleCat.{u + 1} R)).obj (ModuleCat.of R (ULift.{u + 1} PUnit)))) := by
+                (ModuleCat.{u + 1} R)).obj (ModuleCat.of R (ULift.{u + 1} PUnit.{1})))) := by
   have h := (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf F).mp _hF
   refine ⟨fixedConstructible_of_models X R _
     (ProEtale.isConstructible_comparisonUpperStar_obj F), ?_, ?_⟩
@@ -355,7 +355,7 @@ theorem constructibleSiteComparison
     have := hX
     refine ⟨hX, identityStratification X, rfl, fun k ↦ ⟨hX, ?_⟩⟩
     let Z := (constantSheaf (Scheme.ProEt.topology X)
-      (ModuleCat.{u + 1} R)).obj (ModuleCat.of R (ULift.{u + 1} PUnit))
+      (ModuleCat.{u + 1} R)).obj (ModuleCat.of R (ULift.{u + 1} PUnit.{1}))
     exact ⟨(emptyProEtale_isZero X R _).isoZero ≪≫
       (emptyProEtale_isZero X R Z).isoZero.symm⟩
 
