@@ -61,8 +61,8 @@ noncomputable def traceDescentComparison (β : L₀ ⋙ S ≅ T ⋙ mapOfNatIso 
     (Functor.rightDerivedFunctorNatIso β).symm ≪≫
     Functor.rightDerivedFunctorCompMapDerivedCategoryIso L₀ S
 
-/-- Normalization of the derived descent square by the two derived units. -/
 omit [Abelian.HasKInjectiveResolutions B] in
+/-- Normalization of the derived descent square by the two derived units. -/
 lemma traceDescentComparison_inv_fac (β : L₀ ⋙ S ≅ T ⋙ mapOfNatIso e)
     (K : HomotopyCategory A (.up ℤ)) :
     (Functor.rightDerivedFunctorCompMapDerivedCategoryUnit L₀ S).app K ≫

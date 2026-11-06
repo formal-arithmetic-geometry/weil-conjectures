@@ -47,8 +47,7 @@ variable {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
   {G : C ⥤ C} [G.Additive] [G.IsEquivalence] {H : D ⥤ D} [H.Additive] [H.IsEquivalence]
   (eL : L ⋙ H ≅ G ⋙ L) (eR : R ⋙ G ≅ H ⋙ R)
 
-/-- The derived exchange is the square isomorphism of `MapDerivedCategoryMate`. -/
-omit [MonoidalPreadditive C] [HasCountableCoproducts C]
+omit [MonoidalCategory C] [MonoidalPreadditive C] [HasCountableCoproducts C]
   [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
@@ -56,13 +55,13 @@ omit [MonoidalPreadditive C] [HasCountableCoproducts C]
   [∀ (X : C), PreservesColimitsOfShape ℤ ((curriedTensor C).obj X)]
   [∀ (X : C), PreservesColimitsOfShape ℤ ((curriedTensor C).flip.obj X)]
   [Abelian.HasFunctorialFlatResolution C] [Abelian.HasKInjectiveResolutions D] in
+/-- The derived exchange is the square isomorphism of `MapDerivedCategoryMate`. -/
 lemma derivedExactCommIso_eq_mapDerivedCategorySquareIso :
     derivedExactCommIso eR = Functor.mapDerivedCategorySquareIso eR := by
   unfold derivedExactCommIso
   rw [Iso.trans_assoc]
 
-/-- The square isomorphism of the inverse exchange is the inverse of the derived exchange. -/
-omit [MonoidalPreadditive C] [HasCountableCoproducts C]
+omit [MonoidalCategory C] [MonoidalPreadditive C] [HasCountableCoproducts C]
   [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
@@ -70,6 +69,7 @@ omit [MonoidalPreadditive C] [HasCountableCoproducts C]
   [∀ (X : C), PreservesColimitsOfShape ℤ ((curriedTensor C).obj X)]
   [∀ (X : C), PreservesColimitsOfShape ℤ ((curriedTensor C).flip.obj X)]
   [Abelian.HasFunctorialFlatResolution C] [Abelian.HasKInjectiveResolutions D] in
+/-- The square isomorphism of the inverse exchange is the inverse of the derived exchange. -/
 lemma mapDerivedCategorySquareIso_symm_hom_app (c : DerivedCategory C) :
     (Functor.mapDerivedCategorySquareIso eL.symm).hom.app c =
       (derivedExactCommIso eL).inv.app c := by
