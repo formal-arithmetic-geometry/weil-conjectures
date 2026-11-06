@@ -367,19 +367,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [Fact (ringChar k ≠ ℓ)] {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom]
   [QuasiCompact X.hom] [IsSeparated X.hom]
 
-omit [IsSeparated X.hom] in
-/-- The `0`-th homology of the action of an endomorphism `t` of `Λ_X` on the unit of
-`Dᵇc(X)⟦ℚ̲̄_ℓ⟧` (`homologyUnitEndRingHom`) is `t`, under the identification `H⁰(Λ_X[0]) ≅ Λ_X`. -/
-lemma homologyFunctor_map_homologyUnitEndRingHom
-    (t : End (𝟙_ (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)))) :
-    (DerivedCategory.homologyFunctor _ 0).map
-        ((boundedConstructible _).ι.map (homologyUnitEndRingHom ℓ X t)) ≫
-      (DerivedCategory.homologyFunctorZeroQhSingleIso _ (𝟙_ _)).hom =
-      (DerivedCategory.homologyFunctorZeroQhSingleIso _ (𝟙_ _)).hom ≫ t := by
-  rw [ι_map_homologyUnitEndRingHom]
-  exact DerivedCategory.homologyFunctorZeroQhSingleIso_hom_naturality t
-
 /-- The automorphism of the unit `ℚ̲̄_ℓ,X` of `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` given by the action of a unit `c` of
 `ℚ̄_ℓ`, placed in degree `0`. -/
 noncomputable def boundedConstructibleScalarAut (c : (_root_.PadicAlgCl ℓ)ˣ) :
@@ -432,29 +419,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [Fact (ringChar k ≠ ℓ)] {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom]
   [QuasiCompact X.hom] [IsSeparated X.hom] (e : X ≅ X)
 
-/-- The structure isomorphism `e^* H⁰ ≅ H⁰` of the `0`-th homology sheaf of the twisted Weil unit
-is, under the identification `H⁰(ℚ̲̄_ℓ[0]) ≅ ℚ̲̄_ℓ`, the inverse of the unit comparison of `e^*`
-followed by the multiplication by `c`. -/
-lemma homologyFunctor_obj_weilScalarUnit_str_hom_comp (c : (_root_.PadicAlgCl ℓ)ˣ) :
-    ((WeilBoundedConstructible.homologyFunctor ℓ e 0).obj (weilScalarUnit ℓ e c)).str.hom ≫
-      (DerivedCategory.homologyFunctorZeroQhSingleIso _ (𝟙_ _)).hom =
-    (e.hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧.map
-        (DerivedCategory.homologyFunctorZeroQhSingleIso _ (𝟙_ _)).hom ≫
-      (Functor.Monoidal.εIso (e.hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).inv ≫
-        scalarEndRingHom ℓ X.left c := by
-  have h := WeilBoundedConstructible.homologyFunctor_obj_unit_str_hom_comp ℓ e
-  rw [WeilBoundedConstructible.homologyFunctor_obj_str] at h
-  rw [WeilBoundedConstructible.homologyFunctor_obj_str, weilScalarUnit_str, ← Category.assoc]
-  exact Iso.trans_mapIso_trans_hom_comp_eq _ _ _ _ _ _ h
-    (homologyFunctor_map_homologyUnitEndRingHom ℓ _)
-
-/-- `H⁰` of the twisted Weil unit is the twisted unit Weil sheaf. -/
-noncomputable def homologyFunctorZeroWeilScalarUnitIso (c : (_root_.PadicAlgCl ℓ)ˣ) :
-    (WeilBoundedConstructible.homologyFunctor ℓ e 0).obj (weilScalarUnit ℓ e c) ≅
-      WeilSheaf.scalarUnit ℓ e c :=
-  IsoAlgebra.isoMk (DerivedCategory.homologyFunctorZeroQhSingleIso _ (𝟙_ _))
-    (homologyFunctor_obj_weilScalarUnit_str_hom_comp ℓ e c).symm
-
 section Trace
 
 variable [Finite k]
@@ -475,58 +439,7 @@ lemma weilStalkTraceAlternatingSum_weilScalarUnit_eq_weilSheafStalkTrace
     exact Functor.map_isZero _ (isZero_homologyFunctor_unit_carrier ℓ e hj)
   · rw [Int.negOnePow_zero, Units.val_one, one_smul]
 
-/-- **The local traces of the twisted Weil unit.** At every point of degree `n + 1`, the local
-trace of the canonical Weil unit twisted by a unit `c` of `ℚ̄_ℓ` is `c^{n+1}`, as an endomorphism
-of the unit of `Mod_{Spec k̄}`. -/
-theorem weilStalkTraceAlternatingSum_weilScalarUnit (c : (_root_.PadicAlgCl ℓ)ˣ) (n : ℕ)
-    (x : Spec (.of (AlgebraicClosure k)) ⟶ X.left)
-    (hx : x ≫ (e.pow (n + 1)).hom.left = ((geometricFrobeniusField k).pow (n + 1)).hom ≫ x) :
-    weilStalkTraceAlternatingSum ℓ (n + 1) x hx (weilScalarUnit ℓ e c) =
-      scalarEndRingHom ℓ (Spec (.of (AlgebraicClosure k)))
-        ((c : _root_.PadicAlgCl ℓ) ^ (n + 1)) := by
-  rw [weilStalkTraceAlternatingSum_weilScalarUnit_eq_weilSheafStalkTrace,
-    weilSheafStalkTrace_congr ℓ (n + 1) x hx (homologyFunctorZeroWeilScalarUnitIso ℓ e c)]
-  exact weilSheafStalkTrace_scalarUnit ℓ e c n x hx
-
-/-- **The local traces of the twisted Weil unit**, as elements of `ℚ̄_ℓ`: at every point of degree
-`n + 1`, the local trace of the canonical Weil unit twisted by a unit `c` of `ℚ̄_ℓ` is `c^{n+1}`. -/
-theorem endTensorUnitRingEquiv_weilStalkTraceAlternatingSum_weilScalarUnit
-    (c : (_root_.PadicAlgCl ℓ)ˣ) (n : ℕ) (x : Spec (.of (AlgebraicClosure k)) ⟶ X.left)
-    (hx : x ≫ (e.pow (n + 1)).hom.left = ((geometricFrobeniusField k).pow (n + 1)).hom ≫ x) :
-    endTensorUnitRingEquiv ℓ (AlgebraicClosure k)
-        (weilStalkTraceAlternatingSum ℓ (n + 1) x hx (weilScalarUnit ℓ e c)) =
-      (c : _root_.PadicAlgCl ℓ) ^ (n + 1) := by
-  rw [weilStalkTraceAlternatingSum_weilScalarUnit]
-  exact endTensorUnitRingEquiv_scalarEndRingHom ℓ _ _
-
 attribute [local instance] fintypeFrobeniusFixedPoints
-
-/-- **The global traces of the twisted Weil unit.** For `e` of finite order, the global trace in
-degree `n + 1` of the canonical Weil unit twisted by `c` is `c^{n+1}` times the number of points
-of degree `n + 1`, by the trace formula `weilTraceFormula`. -/
-theorem weilStalkTraceAlternatingSum_weilCompactSupportCohomology_weilScalarUnit
-    (he : ∃ m > 0, e.pow m = Iso.refl X) (c : (_root_.PadicAlgCl ℓ)ˣ) (n : ℕ) :
-    weilStalkTraceAlternatingSum ℓ (n + 1) (specAlgebraicClosure k)
-        (specAlgebraicClosure_comp_pow (n + 1))
-        ((weilCompactSupportCohomology ℓ e).obj (weilScalarUnit ℓ e c)) =
-      Nat.card (frobeniusFixedPoints e (n + 1)) •
-        scalarEndRingHom ℓ (Spec (.of (AlgebraicClosure k)))
-          ((c : _root_.PadicAlgCl ℓ) ^ (n + 1)) := by
-  rw [weilTraceFormula ℓ e he]
-  simp only [weilStalkTraceAlternatingSum_weilScalarUnit]
-  rw [Finset.sum_const, Finset.card_univ, ← Nat.card_eq_fintype_card]
-
-/-- **The global traces of the twisted Weil unit**, as elements of `ℚ̄_ℓ`: for `e` of finite
-order, `∑ᵢ (-1)ⁱ Tr(Fr_{c,n+1} | Hⁱ_c(X_k̄, U_c)) = c^{n+1} · #X(𝔽_{q^{n+1}})`. -/
-theorem endTensorUnitRingEquiv_weilCompactSupportCohomology_weilScalarUnit
-    (he : ∃ m > 0, e.pow m = Iso.refl X) (c : (_root_.PadicAlgCl ℓ)ˣ) (n : ℕ) :
-    endTensorUnitRingEquiv ℓ (AlgebraicClosure k)
-        (weilStalkTraceAlternatingSum ℓ (n + 1) (specAlgebraicClosure k)
-          (specAlgebraicClosure_comp_pow (n + 1))
-          ((weilCompactSupportCohomology ℓ e).obj (weilScalarUnit ℓ e c))) =
-      (c : _root_.PadicAlgCl ℓ) ^ (n + 1) * Nat.card (frobeniusFixedPoints e (n + 1)) := by
-  rw [weilStalkTraceAlternatingSum_weilCompactSupportCohomology_weilScalarUnit ℓ e he, map_nsmul,
-    endTensorUnitRingEquiv_scalarEndRingHom, nsmul_eq_mul, mul_comm]
 
 end Trace
 
@@ -535,29 +448,6 @@ end Trace
 section Point
 
 variable {k : Type u} [Field k] [Finite k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
-
-/-- The local trace of the twisted Weil unit of the base `Spec k` at its geometric point `s` in
-degree `n + 1` is `c^{n+1}`. -/
-theorem endTensorUnitRingEquiv_weilStalkTraceAlternatingSum_weilScalarUnit_point
-    (c : (_root_.PadicAlgCl ℓ)ˣ) (n : ℕ) :
-    endTensorUnitRingEquiv ℓ (AlgebraicClosure k)
-        (weilStalkTraceAlternatingSum ℓ (n + 1) (specAlgebraicClosure k)
-          (specAlgebraicClosure_comp_pow (n + 1)) (weilScalarUnit ℓ (Iso.refl (point k)) c)) =
-      (c : _root_.PadicAlgCl ℓ) ^ (n + 1) :=
-  endTensorUnitRingEquiv_weilStalkTraceAlternatingSum_weilScalarUnit ℓ _ c n _ _
-
-/-- The global trace of the twisted Weil unit of the base `Spec k` in degree `n + 1` is
-`c^{n+1}`: the base has a single point of each degree. -/
-theorem endTensorUnitRingEquiv_weilCompactSupportCohomology_weilScalarUnit_point
-    (c : (_root_.PadicAlgCl ℓ)ˣ) (n : ℕ) :
-    endTensorUnitRingEquiv ℓ (AlgebraicClosure k)
-        (weilStalkTraceAlternatingSum ℓ (n + 1) (specAlgebraicClosure k)
-          (specAlgebraicClosure_comp_pow (n + 1))
-          ((weilCompactSupportCohomology ℓ (Iso.refl (point k))).obj
-            (weilScalarUnit ℓ (Iso.refl (point k)) c))) =
-      (c : _root_.PadicAlgCl ℓ) ^ (n + 1) := by
-  rw [endTensorUnitRingEquiv_weilCompactSupportCohomology_weilScalarUnit
-    ℓ _ ⟨1, Nat.one_pos, Iso.pow_refl 1⟩, Nat.card_unique, Nat.cast_one, mul_one]
 
 end Point
 

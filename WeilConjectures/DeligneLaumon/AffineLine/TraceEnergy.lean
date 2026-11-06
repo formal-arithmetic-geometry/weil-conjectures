@@ -558,7 +558,7 @@ theorem traceFunction_tensorObj_and_l2Series_mul_lSeries (ι : PadicAlgCl l →+
         (FiniteField.galoisExtension k₀ n)),
       ι ((F.tensorObj F' hlisse).traceFunction n y) = ((‖ι (F.traceFunction n y)‖ ^ 2 : ℝ) : ℂ)) ∧
     PowerSeries.mk (fun m ↦ (F.traceEnergy ι (m + 1) : ℂ)) * (F.tensorObj F' hlisse).lSeries ι =
-      PowerSeries.derivative ℂ ((F.tensorObj F' hlisse).lSeries ι) := by
+      PowerSeries.derivative (R := ℂ) ((F.tensorObj F' hlisse).lSeries ι) := by
   have : QuasiCompact (V ↘ Spec (CommRingCat.of k₀)) := inferInstance
   have hy (n : ℕ) (y : (V ↘ Spec (CommRingCat.of k₀)).fieldPoints
       (FiniteField.galoisExtension k₀ n)) :
