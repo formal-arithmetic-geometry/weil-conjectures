@@ -306,4 +306,116 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{r} C]
   {R : Sheaf J CommRingCat.{r}} {S : Sheaf K CommRingCat.{r}}
   [HasDerivedCategory.{wR} (Modules R)] [HasDerivedCategory.{wS} (Modules S)]
 
+/-- The prescribed complex-level derived-pullback counit is invertible on every
+flat-term K-flat complex, with independent site and coefficient universes.
+Source: Stacks 06YY and 0G7E
+(blueprint: lem-weil-pbc-pullback-resolving-computation).
+
+Proof: inverse image preserves finite limits and epimorphisms, hence homology.
+Use identity scalar extension to see that it preserves the resolving K-flat class.
+Derived scalar extension then inverts the quasi-isomorphisms between these images.
+Every homotopy object has a flat-term K-flat resolution. Apply the resolving-class
+left-derived-functor theorem, whose counit is invertible on that class. The
+universal property identifies this pair with the prescribed pair. Descend the
+prescribed comparison through the homotopy quotient, and use its unchanged
+components to transport invertibility back to complexes. -/
+theorem pullback_resolving_computation
+    (f : RingedPullback.{r, uC, vC, uD, vD} R S)
+    (L : DerivedCategory (Modules R) ⥤ DerivedCategory (Modules S))
+    (epsilon : DerivedCategory.Q ⋙ L ⟶ pull.{r, uC, vC, uD, vD} f ⋙ DerivedCategory.Q)
+    (hL : L.IsLeftDerivedFunctor epsilon
+      (HomologicalComplex.quasiIso (Modules R) (.up ℤ)))
+    (P : CochainComplex (Modules R) ℤ) (hp : P.IsKFlatIndependentCoefficients)
+    (hf : ∀ n : ℤ, IsFlatOnSite (J := J) (R := R) (P.X n)) :
+    IsIso (epsilon.app P) := by
+  classical
+  let := f.finiteLimits
+  obtain ⟨eps, hLF, heps⟩ :=
+    CategoryTheory.exists_homotopy_leftDerived_comparison f.L L epsilon hL
+  let A := Modules R
+  let B := Modules S
+  let T := f.L.mapHomologicalComplex (.up ℤ)
+  let H := HomotopyCategory.quotient A (.up ℤ)
+  let F := f.L.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh
+  have hpres : ∀ {P Q : CochainComplex A ℤ} (a : P ⟶ Q),
+      P.IsKFlatIndependentCoefficients →
+      (∀ n : ℤ, IsFlatOnSite (J := J) (R := R) (P.X n)) →
+      Q.IsKFlatIndependentCoefficients →
+      (∀ n : ℤ, IsFlatOnSite (J := J) (R := R) (Q.X n)) →
+      QuasiIso a → QuasiIso (T.map a) := by
+    have := algebraicInverseImage_finiteLimits f.uInv f.I
+    have : f.I.modules.Additive := Functor.additive_of_preserves_binary_products f.I.modules
+    have := algebraicInverseImage_epi f.uInv f.uPush f.adj f.I
+    have : f.I.modules.PreservesHomology :=
+      Functor.preservesHomology_of_preservesEpis_and_kernels f.I.modules
+    let A' := SheafOfModules.{r}
+      ((sheafCompose K (forget₂ CommRingCat.{r} RingCat.{r})).obj f.RI)
+    let := HasDerivedCategory.standard A'
+    let := HasDerivedCategory.standard B
+    obtain ⟨E, heobj, hemap, headd, hepres, _⟩ :=
+      derivedChangeOfRingsIndependentCoefficients f.coefficient
+    have := headd
+    intro P Q a hp hf hq hqf ha
+    have := ha
+    have hkP := isKFlat_inverseImage f.uInv f.uPush f.adj f.I P hp hf
+    have hkQ := isKFlat_inverseImage f.uInv f.uPush f.adj f.I Q hq hqf
+    have ht := hepres ((f.I.modules.mapHomologicalComplex (.up ℤ)).map a) hkP hkQ
+      (by infer_instance)
+    let e : f.L ≅ f.I.modules ⋙ E := NatIso.ofComponents
+      (fun M ↦ eqToIso ((f.hobj M).trans (heobj (f.I.modules.obj M)).symm)) (by
+        intro M N a
+        simp only [Functor.comp_map]
+        rw [f.hmap, hemap]
+        simp only [eqToIso.hom, Category.assoc, eqToHom_trans, eqToHom_trans_assoc])
+    let e' : T ≅ f.I.modules.mapHomologicalComplex (.up ℤ) ⋙
+        E.mapHomologicalComplex (.up ℤ) :=
+      NatIso.mapHomologicalComplex e (.up ℤ) ≪≫
+        (Functor.mapHomologicalComplexCompIso (Iso.refl (f.I.modules ⋙ E)) (.up ℤ)).symm
+    exact (quasiIso_iff_of_arrow_mk_iso _ _
+      (Arrow.isoMk (e'.app P) (e'.app Q) (e'.hom.naturality a).symm)).2 ht
+  let K : Set (HomotopyCategory A (.up ℤ)) :=
+    {X | ∃ P : CochainComplex A ℤ, H.obj P = X ∧
+      P.IsKFlatIndependentCoefficients ∧ ∀ n : ℤ, IsFlatOnSite (J := J) (R := R) (P.X n)}
+  have hres : ∀ X : HomotopyCategory A (.up ℤ),
+      ∃ (X' : HomotopyCategory A (.up ℤ)) (a : X' ⟶ X),
+        X' ∈ K ∧ HomotopyCategory.quasiIso A (.up ℤ) a := by
+    intro X
+    obtain ⟨G, rfl⟩ := HomotopyCategory.quotient_obj_surjective X
+    obtain ⟨P, a, hp, hf, hq, _⟩ :=
+      CochainComplex.exists_isKFlatResolutionIndependentCoefficients G
+    have hflat : ∀ n, IsFlatOnSite (J := J) (R := R) (P.X n) := fun n ↦
+      (exactFunctor _ _).prop_of_iso (siteSheafTensorRightIso R (P.X n)).symm (hf n)
+    exact ⟨H.obj P, H.map a, ⟨P, rfl, hp, hflat⟩,
+      (HomotopyCategory.quotient_map_mem_quasiIso_iff a).2 hq⟩
+  have hinv : ∀ (X X' : HomotopyCategory A (.up ℤ)) (a : X ⟶ X'),
+      X ∈ K → X' ∈ K → HomotopyCategory.quasiIso A (.up ℤ) a →
+        IsIso (F.map a) := by
+    intro X X' a hX hX' ha
+    obtain ⟨P, rfl, hp, hf⟩ := hX
+    obtain ⟨P', rfl, hp', hf'⟩ := hX'
+    obtain ⟨a, rfl⟩ := H.map_surjective a
+    have ht := hpres a hp hf hp' hf'
+      ((HomotopyCategory.quotient_map_mem_quasiIso_iff a).1 ha)
+    change IsIso (DerivedCategory.Qh.map
+      ((f.L.mapHomotopyCategory (.up ℤ)).map (H.map a)))
+    rw [Functor.mapHomotopyCategory_map]
+    exact Localization.inverts DerivedCategory.Qh (HomotopyCategory.quasiIso B (.up ℤ)) _
+      ((HomotopyCategory.quotient_map_mem_quasiIso_iff (T.map a)).2 ht)
+  obtain ⟨_, L', ε', hLF', _, hε'⟩ :=
+    Functor.leftDerived_from_resolvingClass A (DerivedCategory B) F K hres hinv
+  have := hLF
+  have := hLF'
+  let e := Functor.leftDerivedNatIso L' L ε' eps
+    (HomotopyCategory.quasiIso A (.up ℤ)) (Iso.refl F)
+  have hi : IsIso (ε'.app (H.obj P)) := hε' (H.obj P) ⟨P, rfl, hp, hf⟩
+  have hfac : e.hom.app (DerivedCategory.Qh.obj (H.obj P)) ≫
+      eps.app (H.obj P) = ε'.app (H.obj P) := by
+    simp [e, Functor.leftDerivedNatIso, Functor.leftDerivedNatTrans_app]
+  have hi' : IsIso (e.hom.app (DerivedCategory.Qh.obj (H.obj P)) ≫
+      eps.app (H.obj P)) := by rw [hfac]; infer_instance
+  have hi'' := IsIso.of_isIso_comp_left
+    (e.hom.app (DerivedCategory.Qh.obj (H.obj P))) (eps.app (H.obj P))
+  rw [← heps P]
+  exact hi''
+
 end SheafOfModules.PullbackTensorResolving

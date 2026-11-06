@@ -328,6 +328,79 @@ noncomputable def coefficientComplexIntegralAssoc :
   eqToIso (congrArg (ModuleCat.extendScalars.{u, u, max u v})
     (coefficientComplexIntegerComp l E L ι M κ))
 
+private theorem deriveCoefficientTower
+    {C₀ C₁ C₂ D₀ D₁ D₂ : Type*}
+    [Category C₀] [Category C₁] [Category C₂] [Category D₀] [Category D₁] [Category D₂]
+    [Abelian C₀] [Abelian C₁] [Abelian C₂] [Abelian D₀] [Abelian D₁] [Abelian D₂]
+    [HasDerivedCategory C₀] [HasDerivedCategory C₁] [HasDerivedCategory C₂]
+    [HasDerivedCategory D₀] [HasDerivedCategory D₁] [HasDerivedCategory D₂]
+    (F : C₀ ⥤ C₁) (G : C₁ ⥤ C₂) (H : C₂ ⥤ D₂)
+    (Q : C₀ ⥤ D₀) (R : C₁ ⥤ D₁) (V : D₀ ⥤ D₁) (W : D₁ ⥤ D₂)
+    (I : C₀ ⥤ C₂) (J : D₀ ⥤ D₂)
+    [F.Additive] [G.Additive] [H.Additive] [Q.Additive] [R.Additive]
+    [V.Additive] [W.Additive] [I.Additive] [J.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+    [PreservesFiniteLimits Q] [PreservesFiniteColimits Q]
+    [PreservesFiniteLimits R] [PreservesFiniteColimits R]
+    [PreservesFiniteLimits V] [PreservesFiniteColimits V]
+    [PreservesFiniteLimits W] [PreservesFiniteColimits W]
+    [PreservesFiniteLimits I] [PreservesFiniteColimits I]
+    [PreservesFiniteLimits J] [PreservesFiniteColimits J]
+    (a : F ⋙ G ≅ I) (b : I ⋙ H ≅ Q ⋙ J) (c : G ⋙ H ≅ R ⋙ W)
+    (d : F ⋙ R ≅ Q ⋙ V) (e : V ⋙ W ≅ J)
+    (h : Functor.isoWhiskerRight a H ≪≫ b =
+      Functor.isoWhiskerLeft F c ≪≫ Functor.isoWhiskerRight d W ≪≫
+        Functor.isoWhiskerLeft Q e) (K : DerivedCategory C₀) :
+    H.mapDerivedCategory.map
+        (((Functor.mapDerivedCategoryCompIso F G).symm ≪≫
+          Functor.mapDerivedCategoryNatIso a).hom.app K) ≫
+        (Functor.mapDerivedCategorySquareIso b).hom.app K =
+      (Functor.mapDerivedCategorySquareIso c).hom.app (F.mapDerivedCategory.obj K) ≫
+        W.mapDerivedCategory.map ((Functor.mapDerivedCategorySquareIso d).hom.app K) ≫
+        ((Functor.mapDerivedCategoryCompIso V W).symm ≪≫
+          Functor.mapDerivedCategoryNatIso e).hom.app (Q.mapDerivedCategory.obj K) := by
+  have hm := congrArg (fun z ↦ (Functor.mapDerivedCategoryNatIso z).hom) h
+  simp only [Functor.mapDerivedCategoryNatIso_trans] at hm
+  have ha := Functor.mapDerivedCategoryNatIso_isoWhiskerRight a H
+  have hc := Functor.mapDerivedCategoryNatIso_isoWhiskerLeft F c
+  have hd := Functor.mapDerivedCategoryNatIso_isoWhiskerRight d W
+  have he := Functor.mapDerivedCategoryNatIso_isoWhiskerLeft Q e
+  have hF := Functor.mapDerivedCategoryCompIso_assoc F G H
+  have hR := Functor.mapDerivedCategoryCompIso_assoc F R W
+  have hQ := Functor.mapDerivedCategoryCompIso_assoc Q V W
+  have ht :
+      Functor.whiskerRight
+        ((Functor.mapDerivedCategoryCompIso F G).symm ≪≫
+          Functor.mapDerivedCategoryNatIso a).hom H.mapDerivedCategory ≫
+        (Functor.mapDerivedCategorySquareIso b).hom =
+      Functor.whiskerLeft F.mapDerivedCategory
+        (Functor.mapDerivedCategorySquareIso c).hom ≫
+        Functor.whiskerRight (Functor.mapDerivedCategorySquareIso d).hom
+          W.mapDerivedCategory ≫
+        Functor.whiskerLeft Q.mapDerivedCategory
+          ((Functor.mapDerivedCategoryCompIso V W).symm ≪≫
+            Functor.mapDerivedCategoryNatIso e).hom := by
+    apply (cancel_epi ((Functor.mapDerivedCategoryCompIso (F ⋙ G) H).hom ≫
+      Functor.whiskerRight (Functor.mapDerivedCategoryCompIso F G).hom
+        H.mapDerivedCategory)).mp
+    simp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
+      Functor.whiskerRight_comp, Functor.whiskerLeft_comp, Category.assoc]
+    simp only [← Functor.whiskerRight_comp_assoc, Iso.hom_inv_id_assoc]
+    rw [← reassoc_of% ha, Iso.hom_inv_id_assoc]
+    rw [← reassoc_of% hF]
+    simp only [← Functor.whiskerLeft_comp_assoc, Iso.hom_inv_id_assoc]
+    simp only [Functor.whiskerLeft_comp, Functor.whiskerRight_comp, Category.assoc]
+    rw [← reassoc_of% hc, reassoc_of% hR]
+    simp only [← Functor.whiskerRight_comp_assoc, Iso.hom_inv_id_assoc]
+    simp only [Functor.whiskerRight_comp, Category.assoc]
+    rw [← reassoc_of% hd, ← reassoc_of% hQ]
+    simp only [← Functor.whiskerLeft_comp_assoc, Iso.hom_inv_id,
+      Functor.whiskerLeft_id', Category.id_comp]
+    rw [← he, reassoc_of% hm]
+  exact congr_app ht K
+
 end WeilConjectures
 
 namespace WeilConjectures

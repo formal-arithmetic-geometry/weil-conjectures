@@ -95,4 +95,116 @@ private theorem ordinaryPullback_Q_iso {T X : Scheme.{u}} (g : T ⟶ X)
     DerivedCategory.Q.mapIso ((NatIso.mapHomologicalComplex η (.up ℤ)).app P)⟩
 
 
+theorem localizedPullback_perfectModel_iso {T X : Scheme.{u}} (g : T ⟶ X)
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
+    [∀ U : X.Opens, HasDerivedCategory.{w}
+      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings T.toRingedSpace))]
+    [∀ V : T.Opens, HasDerivedCategory.{w}
+      (SheafOfModules.{u} ((moduleRings T.toRingedSpace).over V))]
+    (U : X.Opens) (E : schemeDerivedCategory X)
+    (K : CochainComplex (SheafOfModules.{u}
+      ((moduleRings X.toRingedSpace).over U)) ℤ)
+    (hK : Scheme.IsStrictlyPerfect X U K)
+    (e : (SheafOfModules.overFunctor.{u}
+      (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj E ≅ DerivedCategory.Q.obj K) :
+    Nonempty ((SheafOfModules.overFunctor.{u}
+      (moduleRings T.toRingedSpace) (g ⁻¹ᵁ U)).mapDerivedCategory.obj
+        ((derivedPullback g).obj E) ≅
+      DerivedCategory.Q.obj
+        (((Scheme.Modules.localizedPullback g U).mapHomologicalComplex (.up ℤ)).obj K)) := by
+  let V := g ⁻¹ᵁ U
+  let f := g.resLE U V le_rfl
+  let := HasDerivedCategory.standard
+    (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
+  let := HasDerivedCategory.standard
+    (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))
+  let A : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U) ⥤
+      SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace) :=
+    (Scheme.Modules.overEquiv U).functor
+  let C : SheafOfModules.{u} ((moduleRings T.toRingedSpace).over V) ⥤
+      SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace) :=
+    (Scheme.Modules.overEquiv V).functor
+  let B : SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace) ⥤
+      SheafOfModules.{u} ((moduleRings T.toRingedSpace).over V) :=
+    (Scheme.Modules.overEquiv V).inverse
+  let RX := SheafOfModules.overFunctor.{u} (moduleRings T.toRingedSpace) V
+  let RY := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U
+  let F := Scheme.Modules.localizedPullback g U
+  have : A.Additive := Functor.additive_of_preserves_binary_products _
+  have : B.PreservesZeroMorphisms :=
+    Functor.preservesZeroMorphisms_of_isLeftAdjoint B
+  have : B.PreservesZeroMorphisms :=
+    Functor.preservesZeroMorphisms_of_isLeftAdjoint B
+  have : B.PreservesZeroMorphisms :=
+    Functor.preservesZeroMorphisms_of_isLeftAdjoint B
+  have : B.PreservesZeroMorphisms :=
+    Functor.preservesZeroMorphisms_of_isLeftAdjoint B
+  have : B.PreservesZeroMorphisms :=
+    Functor.preservesZeroMorphisms_of_isLeftAdjoint B
+  have : B.PreservesZeroMorphisms :=
+    Functor.preservesZeroMorphisms_of_isLeftAdjoint B
+  have : B.PreservesZeroMorphisms :=
+    Functor.preservesZeroMorphisms_of_isLeftAdjoint B
+  have : B.PreservesZeroMorphisms :=
+    Functor.preservesZeroMorphisms_of_isLeftAdjoint B
+  have : B.PreservesZeroMorphisms :=
+    Functor.preservesZeroMorphisms_of_isLeftAdjoint B
+  have : B.PreservesZeroMorphisms :=
+    Functor.preservesZeroMorphisms_of_isLeftAdjoint B
+  have : B.Additive := Functor.additive_of_preserves_binary_products _
+  have : C.Additive := Functor.additive_of_preserves_binary_products _
+  have : (Scheme.Modules.pullback f).Additive := Scheme.Modules.instAdditivePullback f
+  have : (A ⋙ Scheme.Modules.pullback f).Additive := inferInstance
+  have : PreservesFiniteLimits (RX ⋙ C) := comp_preservesFiniteLimits _ _
+  have : PreservesFiniteColimits (RX ⋙ C) := comp_preservesFiniteColimits _ _
+  have : PreservesFiniteLimits (RY ⋙ A) := comp_preservesFiniteLimits _ _
+  have : PreservesFiniteColimits (RY ⋙ A) := comp_preservesFiniteColimits _ _
+  let P := (A.mapHomologicalComplex (.up ℤ)).obj K
+  obtain ⟨⟨a, b, hb⟩, hp⟩ := hK
+  have hPbounded : ∃ b : ℤ, ∀ n : ℤ, b < n → IsZero (P.X n) :=
+    ⟨b, fun n hn ↦ A.map_isZero (hb n (Or.inr hn))⟩
+  have hPflat : ∀ n : ℤ, SheafOfModules.IsFlat (P.X n) := by
+    intro n
+    obtain ⟨m, i, r, hir⟩ := hp n
+    let ei : A.obj (SheafOfModules.free
+        (R := (moduleRings X.toRingedSpace).over U) (ULift.{u} (Fin m))) ≅
+        SheafOfModules.free (R := moduleRings U.toScheme.toRingedSpace)
+          (ULift.{u} (Fin m)) :=
+      (asIso (sigmaComparison A (fun _ : ULift.{u} (Fin m) ↦
+        SheafOfModules.unit ((moduleRings X.toRingedSpace).over U)))).symm ≪≫
+      Sigma.mapIso (fun _ ↦ U.sheafOfModulesEquivOverUnit (moduleRings X.toRingedSpace))
+    apply flat_retract U.toScheme (P.X n) m (A.map i ≫ ei.hom) (ei.inv ≫ A.map r)
+    change (A.map i ≫ ei.hom) ≫ ei.inv ≫ A.map r = 𝟙 (A.obj (K.X n))
+    simp only [Category.assoc, Iso.hom_inv_id_assoc, ← Functor.map_comp, hir]
+    exact A.map_id _
+  obtain ⟨θ⟩ := derivedPullback_openRestriction_iso_universes g V U le_rfl
+  obtain ⟨q⟩ := ordinaryPullback_Q_iso f P hPbounded hPflat
+  let eP : A.mapDerivedCategory.obj (RY.mapDerivedCategory.obj E) ≅
+      DerivedCategory.Q.obj P :=
+    A.mapDerivedCategory.mapIso e ≪≫ A.mapDerivedCategoryFactors.app K
+  let left : C.mapDerivedCategory.obj
+      (RX.mapDerivedCategory.obj ((derivedPullback g).obj E)) ≅
+      DerivedCategory.Q.obj
+        (((Scheme.Modules.pullback f).mapHomologicalComplex (.up ℤ)).obj P) :=
+    ((Functor.mapDerivedCategoryCompIso RX C).app _).symm ≪≫ θ.app E ≪≫
+      (derivedPullback f).mapIso ((Functor.mapDerivedCategoryCompIso RY A).app E ≪≫ eP) ≪≫ q
+  let δ : F ⋙ C ≅ A ⋙ Scheme.Modules.pullback f :=
+    Functor.associator A (Scheme.Modules.pullback f ⋙ B) C ≪≫
+      Functor.isoWhiskerLeft A (Functor.associator (Scheme.Modules.pullback f) B C) ≪≫
+      Functor.isoWhiskerLeft A
+        (Functor.isoWhiskerLeft (Scheme.Modules.pullback f)
+          (Scheme.Modules.overEquiv V).counitIso) ≪≫
+      Functor.isoWhiskerLeft A (Functor.rightUnitor (Scheme.Modules.pullback f))
+  let FK := (F.mapHomologicalComplex (.up ℤ)).obj K
+  let right : C.mapDerivedCategory.obj (DerivedCategory.Q.obj FK) ≅
+      DerivedCategory.Q.obj
+        (((Scheme.Modules.pullback f).mapHomologicalComplex (.up ℤ)).obj P) :=
+    C.mapDerivedCategoryFactors.app FK ≪≫ DerivedCategory.Q.mapIso
+      (((Functor.mapHomologicalComplexCompIso (Iso.refl (F ⋙ C)) (.up ℤ)).app K).symm ≪≫
+        (NatIso.mapHomologicalComplex δ (.up ℤ)).app K ≪≫
+        (Functor.mapHomologicalComplexCompIso (Iso.refl (A ⋙ Scheme.Modules.pullback f))
+          (.up ℤ)).app K)
+  exact ⟨C.mapDerivedCategory.preimageIso (left ≪≫ right.symm)⟩
+
 end AlgebraicGeometry

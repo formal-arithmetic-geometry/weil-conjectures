@@ -135,4 +135,66 @@ def completedConstantLimitUnit (T : Scheme.{u}) :
       completedTowerConstant d T ⋙ lim :=
   (constLimAdj : completedTowerConstant d T ⊣ lim).unit
 
+/-- The derived unit is uniquely determined by the ordinary unit and the universal
+right-derived comparison, on every representative, rather than by a cone choice.
+Source: blueprint order 1242 (blueprint: prop-weil-pbc-rlim-functoriality).
+Proof: apply the right-derived unit to the constant tower of each complex after the
+ordinary constant-limit unit. Naturality holds on chain maps and homotopies. Since
+constant towers preserve quasi-isomorphisms, localization gives the displayed unit.
+Essential surjectivity of localization and naturality give its uniqueness. -/
+theorem completedConstantRlimUnit_exists (T : Scheme.{u}) :
+    ∃! η : 𝟭 (DerivedCategory (pbcModules T (pbcAdicCompletion T d))) ⟶
+        completedDerivedConstant d T ⋙ completedTowerRlim d T,
+      ∀ C : CochainComplex (pbcModules T (pbcAdicCompletion T d)) ℤ,
+        η.app (DerivedCategory.Q.obj C) =
+          DerivedCategory.Q.map
+            ((NatTrans.mapHomologicalComplex (completedConstantLimitUnit d T)
+              (.up ℤ)).app C) ≫
+          (lim : pbcTowers T (pbcAdicCompletion T d) ⥤
+            pbcModules T (pbcAdicCompletion T d)).rightDerivedFunctorUnit.app
+              ((HomotopyCategory.quotient _ (.up ℤ)).obj
+                (((completedTowerConstant d T).mapHomologicalComplex (.up ℤ)).obj C)) ≫
+          (completedTowerRlim d T).map
+            (((completedTowerConstant d T).mapDerivedCategoryFactors).inv.app C) := by
+  let : HasSheafify (ProEt.topology T) AddCommGrpCat.{u + 1} :=
+    WeilConjectures.integralCoefficientAbSheafify.{u, 0} T
+  let : (ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
+    WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} T
+  let Δ := completedTowerConstant d T
+  let L : pbcTowers T (pbcAdicCompletion T d) ⥤
+      pbcModules T (pbcAdicCompletion T d) := lim
+  let Q : CochainComplex (pbcModules T (pbcAdicCompletion T d)) ℤ ⥤
+      DerivedCategory (pbcModules T (pbcAdicCompletion T d)) := DerivedCategory.Q
+  let τ : Q ⟶ Q ⋙ (completedDerivedConstant d T ⋙ completedTowerRlim d T) :=
+    Functor.whiskerRight
+        (NatTrans.mapHomologicalComplex (completedConstantLimitUnit d T) (.up ℤ))
+        DerivedCategory.Q ≫
+      Functor.whiskerLeft (Δ.mapHomologicalComplex (.up ℤ))
+        (Functor.whiskerLeft (HomotopyCategory.quotient _ (.up ℤ))
+          L.rightDerivedFunctorUnit) ≫
+      Functor.whiskerRight Δ.mapDerivedCategoryFactors.inv (completedTowerRlim d T)
+  let ff := Localization.fullyFaithfulWhiskeringLeft Q
+    (HomologicalComplex.quasiIso (pbcModules T (pbcAdicCompletion T d)) (.up ℤ))
+    (DerivedCategory (pbcModules T (pbcAdicCompletion T d)))
+  let η : 𝟭 (DerivedCategory (pbcModules T (pbcAdicCompletion T d))) ⟶
+      completedDerivedConstant d T ⋙ completedTowerRlim d T :=
+    ff.preimage (X := 𝟭 _) (Y := completedDerivedConstant d T ⋙ completedTowerRlim d T) τ
+  have hη : Functor.whiskerLeft Q η = τ := ff.map_preimage (X := 𝟭 _)
+      (Y := completedDerivedConstant d T ⋙ completedTowerRlim d T) τ
+  refine ⟨η, ?_, ?_⟩
+  · intro C
+    exact NatTrans.congr_app hη C
+  · intro η' hη'
+    apply Localization.natTrans_ext Q
+      (HomologicalComplex.quasiIso (pbcModules T (pbcAdicCompletion T d)) (.up ℤ))
+    intro C
+    exact (hη' C).trans (NatTrans.congr_app hη C).symm
+
+/-- The canonical map K → Rlim ΔK, defined by its unique representative normalization.
+Source: blueprint order 1242 (blueprint: prop-weil-pbc-rlim-functoriality). -/
+def completedConstantRlimUnit (T : Scheme.{u}) :
+    𝟭 (DerivedCategory (pbcModules T (pbcAdicCompletion T d))) ⟶
+      completedDerivedConstant d T ⋙ completedTowerRlim d T :=
+  (completedConstantRlimUnit_exists d T).exists.choose
+
 end AlgebraicGeometry.Scheme

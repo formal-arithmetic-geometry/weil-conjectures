@@ -521,6 +521,35 @@ variable {C D E V : Type*} [Category C] [Category D] [Category E] [Category V]
   [GH.Additive] [PreservesFiniteLimits GH] [PreservesFiniteColimits GH]
   [FGH.Additive] [PreservesFiniteLimits FGH] [PreservesFiniteColimits FGH]
 
+private lemma derivedComp_assoc (a : F ⋙ G ≅ FG) (b : FG ⋙ H ≅ FGH)
+    (c : G ⋙ H ≅ GH) (d : F ⋙ GH ≅ FGH)
+    (h : isoWhiskerRight a H ≪≫ b = isoWhiskerLeft F c ≪≫ d) :
+    isoWhiskerRight (derivedComp a) H.mapDerivedCategory ≪≫ derivedComp b =
+      isoWhiskerLeft F.mapDerivedCategory (derivedComp c) ≪≫ derivedComp d := by
+  have hm : (mapDerivedCategoryNatIso (isoWhiskerRight a H)).hom ≫
+      (mapDerivedCategoryNatIso b).hom =
+      (mapDerivedCategoryNatIso (isoWhiskerLeft F c)).hom ≫
+        (mapDerivedCategoryNatIso d).hom := by
+    rw [← mapDerivedCategoryNatIso_trans, ← mapDerivedCategoryNatIso_trans, h]
+  apply Iso.ext
+  apply NatTrans.ext
+  funext K
+  have ha := congr_app (mapDerivedCategoryNatIso_isoWhiskerRight a H) K
+  have hc := congr_app (mapDerivedCategoryNatIso_isoWhiskerLeft F c) K
+  have hassoc := congr_app (mapDerivedCategoryCompIso_assoc F G H) K
+  have hm' := congr_app hm K
+  simp only [NatTrans.comp_app, whiskerRight_app, whiskerLeft_app] at ha hc hassoc hm'
+  simp only [derivedComp, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    isoWhiskerRight_hom, whiskerRight_app, isoWhiskerLeft_hom, whiskerLeft_app,
+    Functor.map_comp, Category.assoc]
+  rw [← cancel_epi (H.mapDerivedCategory.map ((mapDerivedCategoryCompIso F G).hom.app K))]
+  simp only [← map_comp_assoc, Iso.hom_inv_id_app_assoc]
+  rw [← cancel_epi ((mapDerivedCategoryCompIso (F ⋙ G) H).hom.app K)]
+  rw [← reassoc_of% ha, Iso.hom_inv_id_app_assoc]
+  rw [← reassoc_of% hassoc]
+  simp only [Iso.hom_inv_id_app_assoc]
+  rw [← reassoc_of% hc, Iso.hom_inv_id_app_assoc]
+  exact hm'
 end DerivedComposition
 end CategoryTheory.Functor
 
@@ -575,6 +604,45 @@ variable {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
 private noncomputable abbrev derivedUnit (e : A ≅ 𝟭 C) : A.mapDerivedCategory ≅ 𝟭 _ :=
   mapDerivedCategoryNatIso e ≪≫ mapDerivedCategoryIdIso C
 
+private lemma derivedComp_id_comp (e : A ≅ 𝟭 C) (a : A ⋙ F ≅ F)
+    (h : a = isoWhiskerRight e F ≪≫ leftUnitor F) :
+    derivedComp a = isoWhiskerRight (derivedUnit e) F.mapDerivedCategory ≪≫
+      leftUnitor F.mapDerivedCategory := by
+  rw [h]
+  have he : (mapDerivedCategoryNatIso (leftUnitor F)).hom = 𝟙 _ :=
+    mapDerivedCategoryNatIso_refl
+  apply Iso.ext
+  apply NatTrans.ext
+  funext K
+  have hn := congr_app (mapDerivedCategoryNatIso_isoWhiskerRight e F) K
+  have hu := congr_app (mapDerivedCategoryCompIso_id_comp F) K
+  simp only [NatTrans.comp_app, whiskerRight_app, NatTrans.id_app] at hn hu
+  simp only [derivedComp, derivedUnit, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    isoWhiskerRight_hom, whiskerRight_app, map_comp, leftUnitor_hom_app,
+    mapDerivedCategoryNatIso_trans, he, Category.comp_id, Category.assoc]
+  rw [← cancel_epi ((mapDerivedCategoryCompIso A F).hom.app K),
+    Iso.hom_inv_id_app_assoc, ← reassoc_of% hn, reassoc_of% hu, Category.comp_id]
+  exact (Category.comp_id _).symm
+
+private lemma derivedComp_comp_id (e : B ≅ 𝟭 D) (a : F ⋙ B ≅ F)
+    (h : a = isoWhiskerLeft F e ≪≫ rightUnitor F) :
+    derivedComp a = isoWhiskerLeft F.mapDerivedCategory (derivedUnit e) ≪≫
+      rightUnitor F.mapDerivedCategory := by
+  rw [h]
+  have he : (mapDerivedCategoryNatIso (rightUnitor F)).hom = 𝟙 _ :=
+    mapDerivedCategoryNatIso_refl
+  apply Iso.ext
+  apply NatTrans.ext
+  funext K
+  have hn := congr_app (mapDerivedCategoryNatIso_isoWhiskerLeft F e) K
+  have hu := congr_app (mapDerivedCategoryCompIso_comp_id F) K
+  simp only [NatTrans.comp_app, whiskerLeft_app, NatTrans.id_app] at hn hu
+  simp only [derivedComp, derivedUnit, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    isoWhiskerLeft_hom, whiskerLeft_app, rightUnitor_hom_app,
+    mapDerivedCategoryNatIso_trans, he, Category.comp_id, Category.assoc]
+  rw [← cancel_epi ((mapDerivedCategoryCompIso F B).hom.app K),
+    Iso.hom_inv_id_app_assoc, ← reassoc_of% hn, reassoc_of% hu, Category.comp_id]
+  exact (Category.comp_id _).symm
 end DerivedUnit
 end CategoryTheory.Functor
 
@@ -656,6 +724,27 @@ variable [MonoidalCategory E] [MonoidalPreadditive E]
   [∀ (X : E), PreservesColimitsOfShape ℤ ((curriedTensor E).flip.obj X)]
   [Abelian.HasFunctorialFlatResolution E]
   {V : Type*} [Category V] [Abelian V] [HasDerivedCategory V]
+
+private lemma leftComp_assoc
+    (G : D ⥤ E) [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    (H : E ⥤ V) [H.Additive] [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+    {FG : C ⥤ E} [FG.Additive] [PreservesFiniteLimits FG] [PreservesFiniteColimits FG]
+    {GH : D ⥤ V} [GH.Additive] [PreservesFiniteLimits GH] [PreservesFiniteColimits GH]
+    {FGH : C ⥤ V} [FGH.Additive] [PreservesFiniteLimits FGH] [PreservesFiniteColimits FGH]
+    (a : F ⋙ G ≅ FG) (b : FG ⋙ H ≅ FGH) (c : G ⋙ H ≅ GH) (d : F ⋙ GH ≅ FGH)
+    (h : isoWhiskerRight a H ≪≫ b = associator F G H ≪≫ isoWhiskerLeft F c ≪≫ d) :
+    isoWhiskerRight
+        ((F.leftDerivedFunctorCompIso G).symm ≪≫ (F ⋙ G).leftDerivedFunctorNatIso a)
+        H.leftDerivedFunctor ≪≫
+      (FG.leftDerivedFunctorCompIso H).symm ≪≫ (FG ⋙ H).leftDerivedFunctorNatIso b =
+    associator F.leftDerivedFunctor G.leftDerivedFunctor H.leftDerivedFunctor ≪≫
+      isoWhiskerLeft F.leftDerivedFunctor
+        ((G.leftDerivedFunctorCompIso H).symm ≪≫ (G ⋙ H).leftDerivedFunctorNatIso c) ≪≫
+      (F.leftDerivedFunctorCompIso GH).symm ≪≫ (F ⋙ GH).leftDerivedFunctorNatIso d := by
+  simp only [leftComp_transport, associator_trans_eq]
+  apply transportComp_assoc
+  apply derivedComp_assoc
+  simpa only [associator_trans_eq] using h
 
 end LeftTransport
 end CategoryTheory.Functor
@@ -834,6 +923,56 @@ private noncomputable abbrev scalarDerivedUnit
     (𝟭 (Mod C R)).leftDerivedFunctorIsoMapDerivedCategory ≪≫
       Functor.mapDerivedCategoryIdIso (Mod C R)
 
+private lemma scalarDerivedComp_assoc
+    (f : R ⟶ S) [IsMonHom f] (g : S ⟶ U) [IsMonHom g] (j : U ⟶ V) [IsMonHom j]
+    (fg : R ⟶ U) [IsMonHom fg] (gj : S ⟶ V) [IsMonHom gj]
+    (fgj : R ⟶ V) [IsMonHom fgj]
+    (hfg : f ≫ g = fg) (hgj : g ≫ j = gj) (hfgj : f ≫ gj = fgj) (hfgj' : fg ≫ j = fgj)
+    [PreservesFiniteLimits (Mod.extendScalars f)]
+    [PreservesFiniteLimits (Mod.extendScalars g)]
+    [PreservesFiniteLimits (Mod.extendScalars j)]
+    [PreservesFiniteLimits (Mod.extendScalars fg)]
+    [PreservesFiniteLimits (Mod.extendScalars gj)]
+    [PreservesFiniteLimits (Mod.extendScalars fgj)] :
+    Functor.isoWhiskerRight (scalarDerivedComp f g fg hfg)
+        (Mod.extendScalars j).leftDerivedFunctor ≪≫ scalarDerivedComp fg j fgj hfgj' =
+      Functor.associator _ _ _ ≪≫
+        Functor.isoWhiskerLeft (Mod.extendScalars f).leftDerivedFunctor
+          (scalarDerivedComp g j gj hgj) ≪≫ scalarDerivedComp f gj fgj hfgj := by
+  unfold scalarDerivedComp
+  apply Functor.leftComp_assoc
+  exact scalarComp_assoc f g j fg gj fgj hfg hgj hfgj hfgj'
+
+private lemma scalarDerivedComp_id_comp
+    (a : R ⟶ R) [IsMonHom a] (ha : a = 𝟙 R)
+    (f : R ⟶ S) [IsMonHom f] (h : a ≫ f = f)
+    [PreservesFiniteLimits (Mod.extendScalars a)]
+    [PreservesFiniteLimits (Mod.extendScalars f)] :
+    scalarDerivedComp a f f h =
+      Functor.isoWhiskerRight (scalarDerivedUnit a ha) (Mod.extendScalars f).leftDerivedFunctor ≪≫
+        Functor.leftUnitor _ := by
+  simp only [scalarDerivedComp, Functor.leftComp_transport]
+  simp only [scalarDerivedUnit, Functor.leftDerivedFunctorNatIso,
+    Iso.trans_assoc, Iso.symm_self_id_assoc]
+  apply Functor.transportComp_id_comp
+  apply Functor.derivedComp_id_comp
+  exact scalarComp_id_comp a ha f h
+
+private lemma scalarDerivedComp_comp_id
+    (a : S ⟶ S) [IsMonHom a] (ha : a = 𝟙 S)
+    (f : R ⟶ S) [IsMonHom f] (h : f ≫ a = f)
+    [PreservesFiniteLimits (Mod.extendScalars a)]
+    [PreservesFiniteLimits (Mod.extendScalars f)] :
+    scalarDerivedComp f a f h =
+      Functor.isoWhiskerLeft (Mod.extendScalars f).leftDerivedFunctor (scalarDerivedUnit a ha) ≪≫
+        Functor.rightUnitor _ := by
+  simp only [scalarDerivedComp, Functor.leftComp_transport]
+  simp only [scalarDerivedUnit, Functor.leftDerivedFunctorNatIso,
+    Iso.trans_assoc, Iso.symm_self_id_assoc]
+  apply Functor.transportComp_comp_id
+  apply Functor.derivedComp_comp_id
+  exact scalarComp_comp_id a ha f h
+
 private lemma scalarDerivedComp_shift
     (f : R ⟶ S) [IsMonHom f] (g : S ⟶ U) [IsMonHom g]
     (fg : R ⟶ U) [IsMonHom fg] (h : f ≫ g = fg)
@@ -963,6 +1102,111 @@ theorem condensedFiniteCoefficientCalculus
   let := scalarMonoidal (C := Sheaf (ProEt.topology T) Ab.{u + 1})
   let := scalarHasDerived (C := Sheaf (ProEt.topology T) Ab.{u + 1})
   exact ⟨scheme_finiteFree T ℓ h, scalarCalculus (padicSubfieldRingObjMap T ℓ h)⟩
+
+/-- Coherence of the canonical multiplication and unit comparisons.
+Source: TwoColimit.lean, ExtendScalars; sheaf tensor coherence and localization
+(blueprint: lem-weil-pbc-condensed-flat-coefficient-calculus).
+Proof: multiplication and its inverse are balanced and natural before sheafification.
+The two associativity paths send `d ⊗ (c ⊗ (b ⊗ p))` to `dcb ⊗ p`.
+Together with associativity of functor composition this gives the five-ring pentagon:
+every path sends `h ⊗ (d ⊗ (c ⊗ (b ⊗ p)))` to `hdcb ⊗ p`.
+The unit sends `a ⊗ p` to `ap`; either insertion of it in a multiplication comparison
+has the same value. The same calculations hold with the last ring the closure.
+These are equalities of maps from presheaf tensors and pass through the universal
+property of sheafification, without asserting that global sections are pure tensors.
+Apply these comparisons termwise. Shifts introduce the same differential sign on both
+sides, and all coefficient factors have degree zero. Localization descends these
+transformations and detects their equalities, proving the unit, associativity,
+pentagon and shift compatibility laws. -/
+theorem condensedCoefficientCoherence
+    (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T] (ℓ : ℕ) [Fact ℓ.Prime] :
+    (∀ (E F G H : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ))
+      (h : E ≤ F) (k : F ≤ G) (l : G ≤ H),
+      Functor.isoWhiskerRight (condensedCoefficientCompIso T ℓ h k) (derivedExtendScalarsSubfield T
+        ℓ l) ≪≫
+          (condensedCoefficientCompIso T ℓ (h.trans k) l) =
+        Functor.associator (derivedExtendScalarsSubfield T ℓ h) (derivedExtendScalarsSubfield T ℓ k)
+          (derivedExtendScalarsSubfield T ℓ l) ≪≫
+          Functor.isoWhiskerLeft (derivedExtendScalarsSubfield T ℓ h) (condensedCoefficientCompIso T
+            ℓ k l)
+            ≪≫
+          (condensedCoefficientCompIso T ℓ h (k.trans l))) ∧
+    (∀ (E F G : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)) (h : E ≤ F) (k : F ≤ G),
+      Functor.isoWhiskerRight (condensedCoefficientCompIso T ℓ h k)
+        (derivedExtendScalarsToPadicAlgCl T ℓ G)
+        ≪≫ (derivedExtendScalarsCompIso T ℓ (h.trans k)) =
+        Functor.associator (derivedExtendScalarsSubfield T ℓ h) (derivedExtendScalarsSubfield T ℓ k)
+          (derivedExtendScalarsToPadicAlgCl T ℓ G) ≪≫
+          Functor.isoWhiskerLeft (derivedExtendScalarsSubfield T ℓ h) (derivedExtendScalarsCompIso T
+            ℓ k) ≪≫
+            (derivedExtendScalarsCompIso T ℓ h)) ∧
+    (∀ (E F : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)) (h : E ≤ F),
+      (condensedCoefficientCompIso T ℓ (le_refl E) h) =
+        Functor.isoWhiskerRight (condensedCoefficientUnitIso T ℓ E) (derivedExtendScalarsSubfield T
+          ℓ h) ≪≫
+          Functor.leftUnitor (derivedExtendScalarsSubfield T ℓ h)) ∧
+    (∀ (E F : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)) (h : E ≤ F),
+      (condensedCoefficientCompIso T ℓ h (le_refl F)) =
+        Functor.isoWhiskerLeft (derivedExtendScalarsSubfield T ℓ h) (condensedCoefficientUnitIso T ℓ
+          F) ≪≫
+          Functor.rightUnitor (derivedExtendScalarsSubfield T ℓ h)) ∧
+    (∀ E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ),
+      (derivedExtendScalarsCompIso T ℓ (le_refl E)) =
+        Functor.isoWhiskerRight (condensedCoefficientUnitIso T ℓ E)
+          (derivedExtendScalarsToPadicAlgCl T ℓ E)
+          ≪≫ Functor.leftUnitor (derivedExtendScalarsToPadicAlgCl T ℓ E)) ∧
+    (∀ (E F G : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)) (h : E ≤ F) (k : F ≤ G),
+      NatTrans.CommShift (condensedCoefficientCompIso T ℓ h k).hom ℤ) ∧
+    (∀ (E F : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)) (h : E ≤ F),
+      NatTrans.CommShift (derivedExtendScalarsCompIso T ℓ h).hom ℤ) ∧
+    (∀ E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ), NatTrans.CommShift
+      (condensedCoefficientUnitIso T ℓ E).hom ℤ) := by
+  let := scalarAbelian (C := Sheaf (ProEt.topology T) Ab.{u + 1})
+  let := scalarMonoidal (C := Sheaf (ProEt.topology T) Ab.{u + 1})
+  let := scalarHasDerived (C := Sheaf (ProEt.topology T) Ab.{u + 1})
+  refine ⟨?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
+  · intro E F G H h k l
+    exact scalarDerivedComp_assoc
+      (padicSubfieldRingObjMap T ℓ h) (padicSubfieldRingObjMap T ℓ k)
+      (padicSubfieldRingObjMap T ℓ l) (padicSubfieldRingObjMap T ℓ (h.trans k))
+      (padicSubfieldRingObjMap T ℓ (k.trans l))
+      (padicSubfieldRingObjMap T ℓ ((h.trans k).trans l))
+      (condensedCoefficientMap_comp T ℓ h k) (condensedCoefficientMap_comp T ℓ k l)
+      (condensedCoefficientMap_comp T ℓ h (k.trans l))
+      (condensedCoefficientMap_comp T ℓ (h.trans k) l)
+  · intro E F G h k
+    exact scalarDerivedComp_assoc
+      (padicSubfieldRingObjMap T ℓ h) (padicSubfieldRingObjMap T ℓ k)
+      (padicSubfieldRingObjToPadicAlgCl T ℓ G)
+      (padicSubfieldRingObjMap T ℓ (h.trans k))
+      (padicSubfieldRingObjToPadicAlgCl T ℓ F) (padicSubfieldRingObjToPadicAlgCl T ℓ E)
+      (condensedCoefficientMap_comp T ℓ h k)
+      (padicSubfieldRingObjMap_comp_toPadicAlgCl T ℓ k)
+      (padicSubfieldRingObjMap_comp_toPadicAlgCl T ℓ h)
+      (padicSubfieldRingObjMap_comp_toPadicAlgCl T ℓ (h.trans k))
+  · intro E F h
+    exact scalarDerivedComp_id_comp (padicSubfieldRingObjMap T ℓ (le_refl E))
+      (condensedCoefficientMap_id T ℓ E) (padicSubfieldRingObjMap T ℓ h)
+      (condensedCoefficientMap_comp T ℓ (le_refl E) h)
+  · intro E F h
+    exact scalarDerivedComp_comp_id (padicSubfieldRingObjMap T ℓ (le_refl F))
+      (condensedCoefficientMap_id T ℓ F) (padicSubfieldRingObjMap T ℓ h)
+      (condensedCoefficientMap_comp T ℓ h (le_refl F))
+  · intro E
+    exact scalarDerivedComp_id_comp (padicSubfieldRingObjMap T ℓ (le_refl E))
+      (condensedCoefficientMap_id T ℓ E) (padicSubfieldRingObjToPadicAlgCl T ℓ E)
+      (padicSubfieldRingObjMap_comp_toPadicAlgCl T ℓ (le_refl E))
+  · intro E F G h k
+    exact scalarDerivedComp_shift (padicSubfieldRingObjMap T ℓ h)
+      (padicSubfieldRingObjMap T ℓ k) (padicSubfieldRingObjMap T ℓ (h.trans k))
+      (condensedCoefficientMap_comp T ℓ h k)
+  · intro E F h
+    exact scalarDerivedComp_shift (padicSubfieldRingObjMap T ℓ h)
+      (padicSubfieldRingObjToPadicAlgCl T ℓ F) (padicSubfieldRingObjToPadicAlgCl T ℓ E)
+      (padicSubfieldRingObjMap_comp_toPadicAlgCl T ℓ h)
+  · intro E
+    exact scalarDerivedUnit_shift (padicSubfieldRingObjMap T ℓ (le_refl E))
+      (condensedCoefficientMap_id T ℓ E)
 
 /-- Source: Compatibility.lean, A0.2 and Flat; ordinary module tensor adjunction;
 TwoColimit.lean, ExtendScalars

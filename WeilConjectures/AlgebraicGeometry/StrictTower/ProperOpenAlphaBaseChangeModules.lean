@@ -532,6 +532,146 @@ private theorem nativeCubeDerivedExternal {Xv Xs Xw Xt Xv₁ Xs₁ Xw₁ Xt₁ :
         (eq_of_heq ciFac) (eq_of_heq cpFac)
         (eq_of_heq crFac) law
 
+private theorem cube_derived {V W S T V₁ W₁ S₁ T₁ : Scheme.{u}}
+    (k : V ⟶ W) (i : S ⟶ T) (r : V ⟶ S) (p : W ⟶ T)
+    (k₁ : V₁ ⟶ W₁) (i₁ : S₁ ⟶ T₁) (r₁ : V₁ ⟶ S₁) (p₁ : W₁ ⟶ T₁)
+    (a : W₁ ⟶ W) (b : T₁ ⟶ T) (c : S₁ ⟶ S) (d : V₁ ⟶ V)
+    [IsOpenImmersion k] [IsOpenImmersion i]
+    [IsOpenImmersion k₁] [IsOpenImmersion i₁]
+    [QuasiCompact k] [QuasiCompact i] [QuasiCompact k₁] [QuasiCompact i₁]
+    [IsProper r] [IsProper p] [IsProper r₁] [IsProper p₁]
+    (h : k ≫ p = r ≫ i) (h₁ : k₁ ≫ p₁ = r₁ ≫ i₁)
+    (wk : d ≫ k = k₁ ≫ a) (wi : c ≫ i = i₁ ≫ b)
+    (wp : a ≫ p = p₁ ≫ b) (wr : d ≫ r = r₁ ≫ c)
+    (sk : IsPullback d k₁ k a) (si : IsPullback c i₁ i b)
+    (hp : IsPullback a p₁ p b) (hr : IsPullback d r₁ r c) :
+    ∀ N : Derived B S,
+      (squareG B a p₁ p b wp).hom.app ((J B i).obj N) ≫
+          (G B a).map ((alpha B k r p i h).app N) ≫
+          (beta B d k₁ k a wk sk).hom.app ((G B r).obj N) ≫
+          (J B k₁).map ((squareG B d r₁ r c wr).inv.app N) =
+        (G B p₁).map ((beta B c i₁ i b wi si).hom.app N) ≫
+          (alpha B k₁ r₁ p₁ i₁ h₁).app ((G B c).obj N) := by
+  exact @nativeCubeDerivedExternal B _ V S W T V₁ S₁ W₁ T₁
+    (ExactFunctor.of (towerJ B k))
+    (ExactFunctor.of (towerJ B i))
+    (ExactFunctor.of (towerPullback B r))
+    (ExactFunctor.of (towerPullback B p))
+    (ExactFunctor.of (towerJ B k₁))
+    (ExactFunctor.of (towerJ B i₁))
+    (ExactFunctor.of (towerPullback B r₁))
+    (ExactFunctor.of (towerPullback B p₁))
+    (ExactFunctor.of (towerPullback B a))
+    (ExactFunctor.of (towerPullback B b))
+    (ExactFunctor.of (towerPullback B c))
+    (ExactFunctor.of (towerPullback B d))
+    (by
+      with_unfolding_all
+        exact J B k)
+    (by
+      with_unfolding_all
+        exact J B i)
+    (by
+      with_unfolding_all
+        exact G B r)
+    (by
+      with_unfolding_all
+        exact G B p)
+    (by
+      with_unfolding_all
+        exact J B k₁)
+    (by
+      with_unfolding_all
+        exact J B i₁)
+    (by
+      with_unfolding_all
+        exact G B r₁)
+    (by
+      with_unfolding_all
+        exact G B p₁)
+    (by
+      with_unfolding_all
+        exact G B a)
+    (by
+      with_unfolding_all
+        exact G B b)
+    (by
+      with_unfolding_all
+        exact G B c)
+    (by
+      with_unfolding_all
+        exact G B d)
+    (by
+      with_unfolding_all rfl)
+    (by
+      with_unfolding_all rfl)
+    (by
+      with_unfolding_all rfl)
+    (by
+      with_unfolding_all rfl)
+    (by
+      with_unfolding_all rfl)
+    (by
+      with_unfolding_all rfl)
+    (by
+      with_unfolding_all rfl)
+    (by
+      with_unfolding_all rfl)
+    (by
+      with_unfolding_all rfl)
+    (by
+      with_unfolding_all rfl)
+    (by
+      with_unfolding_all rfl)
+    (by
+      with_unfolding_all rfl)
+    (towerAlpha B k r p i h)
+    (towerAlpha B k₁ r₁ p₁ i₁ h₁)
+    ((openBetaTower B d k₁ k a wk sk).hom)
+    ((openBetaTower B c i₁ i b wi si).hom)
+    ((towerSquare (modulePullback B b) (modulePullback B p₁) (modulePullback B p)
+        (modulePullback B a) (moduleSquareG B a p₁ p b wp)).hom)
+    ((towerSquare (modulePullback B c) (modulePullback B r₁) (modulePullback B r)
+        (modulePullback B d) (moduleSquareG B d r₁ r c wr)).inv)
+    (by
+      with_unfolding_all
+        exact alpha B k r p i h)
+    (by
+      with_unfolding_all
+        exact alpha B k₁ r₁ p₁ i₁ h₁)
+    (by
+      with_unfolding_all
+        exact (beta B d k₁ k a wk sk).hom)
+    (by
+      with_unfolding_all
+        exact (beta B c i₁ i b wi si).hom)
+    (by
+      with_unfolding_all
+        exact (squareG B a p₁ p b wp).hom)
+    (by
+      with_unfolding_all
+        exact (squareG B d r₁ r c wr).inv)
+    (by
+      with_unfolding_all
+        exact heq_of_eq (pastingAlpha B k r p i h))
+    (by
+      with_unfolding_all
+        exact heq_of_eq (pastingAlpha B k₁ r₁ p₁ i₁ h₁))
+    (by
+      with_unfolding_all
+        exact heq_of_eq (pastingBeta B d k₁ k a wk sk))
+    (by
+      with_unfolding_all
+        exact heq_of_eq (pastingBeta B c i₁ i b wi si))
+    (by
+      with_unfolding_all
+        exact heq_of_eq (pastingSquare B a p₁ p b wp))
+    (by
+      with_unfolding_all
+        exact heq_of_eq (pastingSquareInv B d r₁ r c wr))
+    (by
+      exact towerAlpha_baseChange B k i r p k₁ i₁ r₁ p₁ a b c d h h₁ wk wi wp wr sk si hp hr)
+
 end DerivedTransport
 
 end AlgebraicGeometry.ProEtale.StrictTower

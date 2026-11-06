@@ -25,4 +25,14 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
 
+theorem perfectComplex_classesSmallOnOpen_union (X : Scheme.{u})
+    [QuasiSeparatedSpace X] (U V : X.Opens) (hU : IsCompact (U : Set X))
+    (hV : IsAffineOpen V)
+    (pU : PerfectComplexClassesSmallOnOpen.{u, w} X U)
+    (pV : PerfectComplexClassesSmallOnOpen.{u, w} X V)
+    (pUV : PerfectComplexClassesSmallOnOpen.{u, w} X (U ⊓ V)) :
+    PerfectComplexClassesSmallOnOpen.{u, w} X (U ⊔ V) := by
+  intro Y f inst hr _ _
+  exact perfectComplex_classesSmallOnOpen_union_core X U V hU hV pU pV pUV Y f hr
+
 end AlgebraicGeometry.Scheme

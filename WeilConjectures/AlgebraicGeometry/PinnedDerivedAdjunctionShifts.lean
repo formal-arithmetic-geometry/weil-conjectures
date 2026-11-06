@@ -59,6 +59,56 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 open CategoryTheory.Functor CategoryTheory.Category CategoryTheory.Abelian in
+private theorem canonicalRightDerivedUnitShift
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D] [HasKInjectiveResolutions C]
+    (F : C ⥤ D) [F.Additive] : NatTrans.CommShift F.rightDerivedFunctorUnit ℤ := by
+  let inj := ObjectProperty.ι (HomotopyCategory.subcategoryAcyclic C).rightOrthogonal
+  let E := HomotopyCategory.KInjectives.equivalence C
+  let G := inj ⋙ F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh
+  have hI : NatTrans.CommShift F.rightDerivedFunctorIsoKInjectives.inv ℤ :=
+    Functor.CommShift.ofIso_compatibility F.rightDerivedFunctorIsoKInjectives.symm ℤ
+  have hinv (Y : DerivedCategory C) :
+      F.rightDerivedFunctorIsoKInjectives.inv.app Y =
+        F.rightDerivedFunctorUnit.app (inj.obj (E.inverse.obj Y)) ≫
+          F.rightDerivedFunctor.map (E.counit.app Y) := by
+    simp [Functor.rightDerivedFunctorIsoKInjectives, inj, E]
+  have hE : E.CommShift ℤ := by infer_instance
+  have hU : NatTrans.CommShift E.unitIso.hom ℤ := by infer_instance
+  have heq : whiskerLeft inj F.rightDerivedFunctorUnit =
+      (leftUnitor G).inv ≫ whiskerRight E.unitIso.hom G ≫
+        (associator E.functor E.inverse G).hom ≫
+        whiskerLeft E.functor F.rightDerivedFunctorIsoKInjectives.inv ≫
+        (associator inj DerivedCategory.Qh F.rightDerivedFunctor).hom := by
+    ext X
+    simp only [NatTrans.comp_app, whiskerLeft_app, whiskerRight_app,
+      associator_hom_app, leftUnitor_inv_app, Category.id_comp, hinv]
+    simp only [Category.assoc]
+    erw [Category.id_comp, Category.comp_id]
+    have h := F.rightDerivedFunctorUnit.naturality (inj.map (E.unit.app X))
+    dsimp only [Functor.comp_map, Functor.comp_obj] at h
+    change _ = (F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh).map
+      (inj.map (E.unit.app X)) ≫ _
+    erw [reassoc_of% h]
+    rw [← CategoryTheory.Functor.map_comp]
+    change _ = _ ≫ F.rightDerivedFunctor.map
+      (E.functor.map (E.unit.app X) ≫ E.counit.app (E.functor.obj X))
+    erw [E.functor_unit_comp]
+    rw [CategoryTheory.Functor.map_id, Category.comp_id]
+  have : NatTrans.CommShift (whiskerLeft inj F.rightDerivedFunctorUnit) ℤ := by
+    rw [heq]
+    infer_instance
+  refine NatTrans.CommShift.of_whiskerLeft _ inj (fun K ↦ ?_)
+  obtain ⟨P, rfl⟩ := HomotopyCategory.quotient_obj_surjective K
+  obtain ⟨I, hI, i, hi, _⟩ := HasKInjectiveResolutions.exists_isKInjective P
+  have := hI
+  have := hi
+  refine ⟨HomotopyCategory.KInjectives.mk I,
+    (HomotopyCategory.quotient C (.up ℤ)).map i, ?_⟩
+  change IsIso (F.rightDerivedFunctor.map (DerivedCategory.Q.map i))
+  infer_instance
+
+-- Normalization identifies the left-derived counit with the inverse mate of the right unit.
 private theorem rightKanShiftUnique
     {C D E : Type*} [Category C] [Category D] [Category E]
     [HasShift C ℤ] [HasShift D ℤ] [HasShift E ℤ]
@@ -123,5 +173,60 @@ abbrev pinnedDerivedAdjunction
     (pinnedPullbackCounit.{u, w} f)
     ((Classical.choose (Classical.choose_spec
       (Classical.choose_spec exists_derivedPullbackComposition.{u, w}))) f))
+
+/-- The selected derived adjunction respects the counit-compatible pullback shifts
+and the recorded right-derived direct-image shifts.
+Source: Stacks Project, Tag 08HY, canonical derived adjunction; Tag 079W.
+(blueprint: lem-pc-pinned-derived-adjunction-shifts).
+Proof: the normalization equation of exists_schemeDerivedAdjunction identifies
+its Hom equivalence on localized representatives with the termwise tensor-pullback
+adjunction, the selected left-derived counit and the right-derived unit. The
+termwise adjunction commutes with shifts. On K-injective representatives the
+right-derived unit commutes with the shift structure transported from the
+K-injective equivalence. Combine this with the assumed shift equation for the
+selected left-derived counit to obtain the shifted Hom-equivalence equation.
+K-flat and K-injective resolutions represent every object, so naturality extends
+this equation to arbitrary derived objects. Apply it to identity morphisms to
+obtain the shift equations for the derived unit and counit, precisely the two
+fields of Adjunction.CommShift. This concerns one morphism, independently of
+any base-change square or pullback composition comparison. -/
+theorem pinnedDerivedAdjunction_commShift
+    [∀ Y : Scheme.{u},
+      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+    [∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z), (Scheme.Modules.tensorPullback k).Additive]
+    (s : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y), (derivedPullback.{u, w} f).CommShift ℤ)
+    (hs : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y),
+      letI := s f
+      NatTrans.CommShift (pinnedPullbackCounit.{u, w} f) ℤ)
+    {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    letI := s f
+    (pinnedDerivedAdjunction.{u, w} f).CommShift ℤ := by
+  classical
+  dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
+  let adj := pinnedDerivedAdjunction.{u, w} f
+  -- Keep the recorded right-derived shifts fixed and compare the two left shift structures.
+  let t := adj.leftAdjointCommShift ℤ
+  let := t
+  have hadj : adj.CommShift ℤ := adj.commShift_of_rightAdjoint ℤ
+  let a := (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f))
+    |>.mapHomotopyCategory (.up ℤ)
+  have ha : a.CommShift ℤ := Adjunction.CommShift.mk' a ℤ inferInstance
+  let β := (RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerivedFunctorUnit
+  have hβ : NatTrans.CommShift β ℤ := canonicalRightDerivedUnitShift _
+  have ht : NatTrans.CommShift (pinnedPullbackCounit.{u, w} f) ℤ := by
+    apply normalizedCounitShift a adj _ _
+      (pinnedPullbackCounit.{u, w} f) β
+    exact Classical.choose_spec (exists_schemeDerivedAdjunction.{u, w} f
+      (hAdd := (Classical.choose exists_derivedPullbackComposition.{u, w}) f)
+      (pinnedPullbackCounit.{u, w} f)
+      ((Classical.choose (Classical.choose_spec
+        (Classical.choose_spec exists_derivedPullbackComposition.{u, w}))) f))
+  have hL := (Classical.choose (Classical.choose_spec
+    (Classical.choose_spec exists_derivedPullbackComposition.{u, w}))) f
+  have := hL.isRightKanExtension
+  have heq : s f = t := rightKanShiftUnique DerivedCategory.Qh _
+    (derivedPullback.{u, w} f) (pinnedPullbackCounit.{u, w} f) (s f) t (hs f) ht
+  have hfinal : letI := t; (pinnedDerivedAdjunction.{u, w} f).CommShift ℤ := hadj
+  exact heq.symm ▸ hfinal
 
 end AlgebraicGeometry
