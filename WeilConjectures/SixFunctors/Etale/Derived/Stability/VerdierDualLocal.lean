@@ -362,7 +362,7 @@ theorem exists_boundedConstructible_and_torAmplitudeIn_verdierDual {k : Type u} 
     exact fun q hq ↦ ((g)^*[ModuleCat.{u + 1} Λ]).map_isZero (hP.1 q (.inr hq))
   let eN : (L((p)^*[ModuleCat.{u + 1} Λ])).obj N ≅ (_root_.DerivedCategory.Q).obj P' :=
     (leftDerivedUpperStarIsoMapDerivedCategory _ p).app N ≪≫
-      ((Functor.mapDerivedCategoryCompIso _ _).app _).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso _ _).app _ ≪≫
       (Functor.mapDerivedCategoryNatIso (Etale.upperStarComp _ p O'.ι _ rfl).symm).app _ ≪≫
       ((g)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryFactors.app P
   have : P.IsStrictlyGE a := by

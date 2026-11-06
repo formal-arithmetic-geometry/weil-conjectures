@@ -197,7 +197,7 @@ theorem completedReductionAugmentation_complexCounit (T : Scheme.{t})
     HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift,
     Functor.mapHomotopyCategoryFactors, NatIso.ofComponents, Iso.refl] at h
   erw [CategoryTheory.Functor.map_id, Category.id_comp,
-    CategoryTheory.Functor.map_id, Category.comp_id] at h
+    CategoryTheory.Functor.map_id, Category.comp_id, Category.comp_id] at h
   unfold completedReductionTowerComplexCounit Scheme.reductionComplexCounit
   change _ ≫ ((completedReductionTower T d).map (𝟙 _) ≫
     (coherenceReductionTowerCounit T d).app ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ≫
