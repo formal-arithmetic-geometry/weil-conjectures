@@ -152,7 +152,10 @@ private theorem ordinary_exchange_transport
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 local instance preNormTildeAdditive (A : Type u) [CommRing A] :
-    (affinePushforwardTilde A).Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+    (affinePushforwardTilde A).Additive := by
+  constructor
+  intro M N f g
+  exact tilde.map_add (R := .of A) f g
 local instance preNormPushforwardAdditive {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (Scheme.Modules.pushforward f).Additive := ⟨fun {_ _} {_ _} ↦ rfl⟩
 local instance preNormPullbackAdditive {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -218,9 +221,9 @@ theorem affineTildeTensorOrdinaryExchange_preNormalization
     let : (ModuleCat.extendScalars.{u, u, u} φ).Additive :=
       ModuleCat.baseDerivedTensor_extendScalars_additive _
     let : (affinePushforwardTilde A).Additive :=
-      instAdditiveModuleCatCarrierModulesSpecOfFunctor
+      by constructor; intro M N f g; exact tilde.map_add (R := .of A) f g
     let : (affinePushforwardTilde D).Additive :=
-      instAdditiveModuleCatCarrierModulesSpecOfFunctor
+      by constructor; intro M N f g; exact tilde.map_add (R := .of D) f g
     let : (E ⋙ F').PreservesZeroMorphisms :=
       ⟨fun _ _ ↦ by
         rw [Functor.comp_map, E.map_zero]

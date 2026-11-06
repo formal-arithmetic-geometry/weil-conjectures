@@ -72,7 +72,7 @@ theorem locallyConstantCochains_invariants_zero
         (E.functor.obj M).obj.ρ (g 0) (e M 0 x z) - e M 0 x z := by
     rw [hd]
     simp only [Fin.sum_univ_succ, Fin.sum_univ_zero, Fin.val_zero, zero_add, pow_one,
-      neg_smul, one_smul, add_zero, sub_eq_add_neg]
+      neg_one_zsmul, add_zero, sub_eq_add_neg]
     congr 1
     · exact congrArg (fun t ↦ (E.functor.obj M).obj.ρ (g 0) (e M 0 x t))
         (Subsingleton.elim _ _)

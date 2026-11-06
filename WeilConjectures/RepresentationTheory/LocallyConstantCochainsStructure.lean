@@ -70,10 +70,10 @@ private noncomputable def lcD
     exact Finset.induction_on Finset.univ (IsLocallyConstant.const 0)
       (fun k t hk ht ↦ by
         simpa only [Finset.sum_insert hk] using (h k).comp₂ ht (· + ·))⟩
-  map_zero' := by ext g; simp
+  map_zero' := by ext g; simp [zsmul_zero]
   map_add' c d := by
     ext g
-    simp [Finset.sum_add_distrib, add_add_add_comm]
+    simp [Finset.sum_add_distrib, add_add_add_comm, zsmul_add]
 
 private theorem lcD_sq
     {G : Type u} [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
@@ -90,6 +90,8 @@ private theorem lcD_sq
         ext x
         change M.obj.ρ (g * h) x = M.obj.ρ g (M.obj.ρ h x)
         simp [map_mul] }
+  have : @ContinuousSMul ℤ M.obj.V M.obj.hV2.toSMul _ _ :=
+    @ContinuousSMul.mk _ _ M.obj.hV2.toSMul _ _ continuous_of_discreteTopology
   let N : TopRep.{max u s} ℤ G := TopRep.of ρ
   obtain ⟨e, he⟩ := exists_homogeneousCochains_inhomogeneous_coordinates G N M.property
   have hd : ∀ n x, e (n + 1) (((TopRep.homogeneousCochains N).d n (n + 1)).hom x) =

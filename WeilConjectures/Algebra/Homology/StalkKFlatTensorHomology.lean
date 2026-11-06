@@ -52,7 +52,7 @@ private theorem stalk_additive (Z : RingedSpace.{u}) (x : Z) :
 private theorem stalk_preservesHomology (Z : RingedSpace.{u}) (x : Z) :
     (RingedSpace.moduleStalkFunctor Z x).PreservesHomology := by
   let := stalk_additive Z x
-  apply ((RingedSpace.moduleStalkFunctor Z x).exact_tfae.out 1 2).mp
+  apply ((RingedSpace.moduleStalkFunctor Z x).exact_tfae.out 2 3).mp
   intro C hC
   exact ((RingedSpace.module_stalk_exact Z C.f).2.2.2.2
     C.X₃ C.f C.g C.zero).mp hC x
