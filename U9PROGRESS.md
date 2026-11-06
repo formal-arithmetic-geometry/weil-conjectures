@@ -466,17 +466,26 @@
 - All ucheck invocations have finished. This completion commit changes documentation only.
 
 
-# BZ1098 in progress
+# BZ1098 complete
 
-- Branch: u9/BZ1098; starting commit 46766e3e2ce0eddba05845bd493e8a62dac45263.
-- The user instructed continuation after the explicit one-line universe-annotation proposal.
-  Applied that patch to sfbImmersion_residueComparison_etale; the localization universes
-  remain fixed and the reordered category universes are inferred.
-- The initial ucheck-bump confirmed a statement-level type mismatch caused by Mathlib's
-  new mapDerivedCategory universe order. Pinned API and whole-tree inventory are recorded.
-- Assigned leaf GREEN: ucheck-bump rc=0, failed=0, 13186 jobs; 12s rebuild at 4e7639af1d.
-- Merged the completed BZ1099 prerequisite; next: check the shared direct importer.
-- Fix record: /home/ubuntu/u9/bz/FIXES-BZ1098.md. No local Lean/Lake or proof escapes.
+- Assigned AdicImmersionResidueComparisonEtale is GREEN and sorry-free.
+- Assigned ucheck-bump passed: rc=0, built=1, failed=0, 13186 jobs; target rebuilt in 12s
+  at 4e7639af1d. It rebuilt green again in the first downstream check.
+- The user instructed continuation after the one-line universe annotation proposal.
+  Retained localization universes and inferred Mathlib's reordered category universes.
+- Integrated completed BZ1099 prerequisite AdicImmersionResidueComparisonFixed.
+- Direct importer AdicImmersionResidueComparison received the same annotation migration
+  and rebuilt GREEN in 6.7s at d1c8dc1cbe. Existing proof bodies are unchanged.
+- Layer 2 AdicImmersionCompletedTransport was attempted but blocked by four errors in
+  AdicImmersionSliceComparison, owned by live unit BZ1101. No unowned blocker edited.
+  Further importer layers share that dependency, so they are deferred under the ownership rule.
+- Logs: BUILD-BZ1098-leaf-green-full.log, BUILD-BZ1098-downstream1-full.log, and
+  BUILD-BZ1098-downstream2-full.log in ~/u9/bz/.
+- Fix pattern, exact errors, occurrence counts, and replayable rule: ~/u9/bz/FIXES-BZ1098.md.
+- Completion marker: ~/u9/state/BZ1098.DONE. Contract audit: ~/u9/bz/BZ1098-contract-audit.txt.
+- No local Lean/Lake, proof placeholders, new declarations, deletions, trust bypasses,
+  profiler probes, or heartbeat increases. Rule replay and idempotence checks pass.
+- All ucheck invocations finished. This final commit changes progress documentation only.
 
 
 # BZ1099 complete
