@@ -507,47 +507,6 @@ def purScalarModelComplexIso (W : Scheme.{u}) :
       (F := purOrdinaryCoefficientModel l E W)
       (G := integralOrdinaryScalar l E L ι W) (Iso.refl _) (.up ℤ)).symm
 
-private theorem derivedSquare_factors
-    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
-    [Abelian A] [Abelian B] [Abelian C] [Abelian D]
-    [HasDerivedCategory A] [HasDerivedCategory B]
-    [HasDerivedCategory C] [HasDerivedCategory D]
-    {F : A ⥤ B} {H : B ⥤ D} {G : A ⥤ C} {I : C ⥤ D}
-    [F.Additive] [H.Additive] [G.Additive] [I.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    [PreservesFiniteLimits H] [PreservesFiniteColimits H]
-    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
-    [PreservesFiniteLimits I] [PreservesFiniteColimits I]
-    (e : F ⋙ H ≅ G ⋙ I) (P : CochainComplex A ℤ) :
-    (Functor.mapDerivedCategorySquareIso e).hom.app (DerivedCategory.Q.obj P) ≫
-        I.mapDerivedCategory.map (G.mapDerivedCategoryFactors.hom.app P) ≫
-        I.mapDerivedCategoryFactors.hom.app ((G.mapHomologicalComplex (.up ℤ)).obj P) =
-      H.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app P) ≫
-        H.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj P) ≫
-        DerivedCategory.Q.map ((Functor.mapHomologicalComplexCompIso e (.up ℤ)).hom.app P ≫
-          (Functor.mapHomologicalComplexCompIso
-            (Iso.refl (G ⋙ I)) (.up ℤ)).inv.app P) := by
-  have hi : (Functor.mapDerivedCategoryCompIso F H).inv.app (DerivedCategory.Q.obj P) ≫
-      (F ⋙ H).mapDerivedCategoryFactors.hom.app P =
-    H.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app P) ≫
-      H.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj P) := by
-    apply (cancel_epi
-      ((Functor.mapDerivedCategoryCompIso F H).hom.app (DerivedCategory.Q.obj P))).mp
-    rw [Iso.hom_inv_id_app_assoc]
-    exact (Functor.mapDerivedCategoryCompIso_hom_app_factors F H P).symm
-  simp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
-    NatTrans.comp_app, Category.assoc]
-  rw [Functor.mapDerivedCategoryCompIso_hom_app_factors,
-    Functor.mapDerivedCategoryNatIso_fac]
-  rw [← Category.assoc, hi, Category.assoc]
-  congr 2
-  apply congrArg DerivedCategory.Q.map
-  ext i
-  simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplexCompIso_hom_app_f,
-    Functor.mapHomologicalComplexCompIso_inv_app_f, NatTrans.mapHomologicalComplex_app_f,
-    Iso.refl_inv, NatTrans.id_app]
-  exact (Category.comp_id _).symm
-
 private theorem scalarExtension_exact (W : Scheme.{u}) :
     PreservesFiniteLimits (pbcExtend (pbcScalarCoefficientMap l E L ι W)) ∧
       PreservesFiniteColimits (pbcExtend (pbcScalarCoefficientMap l E L ι W)) := by
@@ -603,73 +562,5 @@ private theorem scalarDerivedComparison (W : Scheme.{u})
   simp only [Category.id_comp, Iso.inv_hom_id_app]
   exact congrArg (fun f ↦ e.hom.app (DerivedCategory.Q.obj P) ≫ f)
     (Category.comp_id (F.mapDerivedCategoryFactors.hom.app P)).symm
-
-/-- Derived transport of the same scalar comparison, retaining the ordinary comparison
-on every complex (finite-free scalar extension is exact).
-Source: Stacks 06YY, 099N (blueprint: def-pur-completed-coefficient-presentation-transport).
-Proof: the model functors are exact identity-on-sections restrictions. Finite-free
-scalar tensor is exact. On resolving complexes the universal derived tensor counit
-is invertible, and the displayed conjugation of the ordinary tensor comparison
-therefore gives the comparison. It descends through resolving quasi-isomorphisms.
-Every object has a complex representative, so the result is invertible and unique. -/
-theorem purScalarModel_existsUnique (W : Scheme.{u}) :
-    ∃! e : pbcEmbeddingAmbientTensor l E L ι W ⋙ (purCoefficientModel l L W).functor ≅
-        (purCoefficientModel l E W).functor ⋙ integralOrdinaryDerivedScalar l E L ι W,
-      ∀ P : CochainComplex (pbcModules W (pbcAdicCompletion W (pbcIntegralDatum l E))) ℤ,
-        e.hom.app (DerivedCategory.Q.obj P) ≫
-          (integralOrdinaryDerivedScalar l E L ι W).map
-            ((purOrdinaryCoefficientModel l E W).mapDerivedCategoryFactors.hom.app P) ≫
-          (integralOrdinaryScalar l E L ι W).mapDerivedCategoryFactors.hom.app
-            (((purOrdinaryCoefficientModel l E W).mapHomologicalComplex (.up ℤ)).obj P) =
-        (purCoefficientModel l L W).functor.map
-            (pbcComplexCounit (pbcScalarCoefficientMap l E L ι W) P) ≫
-          (purOrdinaryCoefficientModel l L W).mapDerivedCategoryFactors.hom.app
-            (((pbcExtend (pbcScalarCoefficientMap l E L ι W)).mapHomologicalComplex
-              (.up ℤ)).obj P) ≫
-          DerivedCategory.Q.map ((purScalarModelComplexIso l E L ι W).hom.app P) := by
-  have := (scalarExtension_exact l E L ι W).1
-  have := (scalarExtension_exact l E L ι W).2
-  obtain ⟨d, hd⟩ := scalarDerivedComparison l E L ι W
-  let H := purOrdinaryCoefficientModel l L W
-  let e := Functor.isoWhiskerRight d H.mapDerivedCategory ≪≫
-    Functor.mapDerivedCategorySquareIso (purOrdinaryScalarModel l E L ι W)
-  have hNorm (P : CochainComplex
-      (pbcModules W (pbcAdicCompletion W (pbcIntegralDatum l E))) ℤ) :
-      e.hom.app (DerivedCategory.Q.obj P) ≫
-        (integralOrdinaryScalar l E L ι W).mapDerivedCategory.map
-          ((purOrdinaryCoefficientModel l E W).mapDerivedCategoryFactors.hom.app P) ≫
-        (integralOrdinaryScalar l E L ι W).mapDerivedCategoryFactors.hom.app
-          (((purOrdinaryCoefficientModel l E W).mapHomologicalComplex (.up ℤ)).obj P) =
-      H.mapDerivedCategory.map (pbcComplexCounit (pbcScalarCoefficientMap l E L ι W) P) ≫
-        H.mapDerivedCategoryFactors.hom.app
-          (((pbcExtend (pbcScalarCoefficientMap l E L ι W)).mapHomologicalComplex
-            (.up ℤ)).obj P) ≫
-        DerivedCategory.Q.map ((purScalarModelComplexIso l E L ι W).hom.app P) := by
-    change (H.mapDerivedCategory.map (d.hom.app (DerivedCategory.Q.obj P)) ≫
-      (Functor.mapDerivedCategorySquareIso
-        (purOrdinaryScalarModel l E L ι W)).hom.app (DerivedCategory.Q.obj P)) ≫ _ = _
-    rw [Category.assoc]
-    have h := congrArg
-      (fun f ↦ H.mapDerivedCategory.map (d.hom.app (DerivedCategory.Q.obj P)) ≫ f)
-      (derivedSquare_factors (purOrdinaryScalarModel l E L ι W) P)
-    refine h.trans ?_
-    rw [← Category.assoc, ← H.mapDerivedCategory.map_comp, hd]
-    rfl
-  refine ⟨e, hNorm, ?_⟩
-  intro e' he'
-  apply Iso.ext
-  apply Localization.natTrans_ext DerivedCategory.Q
-    (HomologicalComplex.quasiIso
-      (pbcModules W (pbcAdicCompletion W (pbcIntegralDatum l E))) (.up ℤ))
-  intro P
-  exact (cancel_mono ((integralOrdinaryDerivedScalar l E L ι W).map
-    ((purOrdinaryCoefficientModel l E W).mapDerivedCategoryFactors.hom.app P) ≫
-    (integralOrdinaryScalar l E L ι W).mapDerivedCategoryFactors.hom.app
-      (((purOrdinaryCoefficientModel l E W).mapHomologicalComplex (.up ℤ)).obj P))).mp
-        ((he' P).trans (hNorm P).symm)
-
-/-- The actual derived balanced-tensor comparison between the coefficient models.
-Source: Stacks 06YY (blueprint: def-pur-completed-coefficient-presentation-transport). -/
-def purScalarModel (W : Scheme.{u}) := (purScalarModel_existsUnique l E L ι W).exists.choose
 
 end WeilConjectures
