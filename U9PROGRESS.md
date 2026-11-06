@@ -217,30 +217,44 @@
 - Next: validate the assigned normalization module through `ucheck-bump`, then its direct importer.
 - Fix patterns and exact diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ740.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+- Assigned normalization module is GREEN at `814682ae46`: `ucheck-bump` rc=0,
+  failed=0, 3927 jobs, target rebuilt in 48 seconds.
+- Remote log: `/home/ubuntu/u9/logs/BZ740-20261106T061103.log`.
+- Checking downstream `DerivedPullbackTensorUnitKFlat` and `DerivedPullbackTensorUnit`.
 
-# BZ780 complete
 
-- Branch: `u9/BZ780`; baseline: `8027d88a3`.
-- Assigned `DerivedPullbackTensorUnitKFlat` is sorry-free and green, with 13 downstream
-  modules green through `QCqsSheafRHomAdjunction`. Inventory: `BZ780-validation.json`.
-- Validated Lean source: `19f7a3b3d4`. Both complete remote batches returned rc=0, failed=0:
-  3957 jobs for the repair batch and 5684 jobs for the projection-mate batch.
-- Full logs: `/home/ubuntu/u9/bz/BUILD-BZ780-downstream3-green-full.log` and
-  `/home/ubuntu/u9/bz/BUILD-BZ780-downstream5-green-full.log`.
-- The user authorized the concrete two-identity-cast proposal for the leaf. Added
-  Localization imports and proof normalization, preserving its original morphisms.
-- Applied the same casts/imports inside the monoidal-model proposition body; its
-  signature and theorem statements are unchanged. The old No goals error disappeared.
-- Deleted unused `AlgebraicGeometry.exists_openRestriction_derivedMonoidal` with its
-  docstring after the compositor-direction error. Its unused caller remains in the
-  already-blocked OpenRestrictionClosedMonoidal module.
-- Seven downstream targets were skipped for unowned SingleComplexBaseChangeStalkCondition.
-  Six were attempted in remote builds. GlobalHomAdjunctionIso has the confirmed same
-  dependency path; its queued request was cancelled before tree acquisition under the
-  skip rule. No build is claimed for that final target. 20 extra modules reached (limit 30).
-- Seven machine rules exactly replay all three changed Lean files and are idempotent.
-  Whole-tree counts, exact errors, deletion eligibility, forbidden-proof scan,
-  unchanged heartbeat settings, and git diff --check all passed.
-- Fix records and audit are copied to Weil. Completion marker: `/home/ubuntu/u9/state/BZ780.DONE`.
-- This final commit changes only progress documentation; Lean sources match the green builds.
-- No local Lean/Lake, proof placeholders, trust bypasses, profiler probes, or heartbeat changes.
+# BZ800 in progress
+
+- Branch: `u9/BZ800`; starting commit: `fcbed6be3`.
+- Reread the brief and progress notes on continuation; no new LEAD lines.
+- Import-only remote build at `47f88332d4` resolved the private helper error,
+  leaving the public hypothesis's Qh/Q mismatch.
+- The user instructed continuation after the exact two-cast proposal and downstream request.
+  Applied `BZ800-statement-cast-proposal.patch` and the same identity casts to
+  direct importer `DerivedPullbackMonoidalDescent`, preserving the existing morphisms.
+- Leaf rebuilt successfully at `46f8f154b4`; the direct importer was blocked by
+  unowned `DerivedPullbackTensorUnitKFlat.lean:359:12: Type mismatch`.
+- Following the brief's skip rule, saved the unvalidated importer patch outside the repo
+  and restored its source. Next: leaf-only rc=0 validation, final audit, and DONE.
+- Fix patterns and diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ800.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
+
+
+# BZ845 complete
+
+- Branch: `u9/BZ845`; baseline: `c3b522379`.
+- Assigned `RingedTopoiDerivedPullbackIndependentSupplement` and direct importers
+  `RingedPullbackCochainPresentation` and `KFlatScalarComparisonNormalization` are GREEN.
+- Final `ucheck-bump`: rc=0, failed=0, 5017 jobs, at source commit
+  `b52a2697bcc54d3d4233d108afa4a53d73bad7dc`; all three targets rebuilt successfully.
+- Log: `/home/ubuntu/u9/bz/BUILD-BZ845-final-full.log`.
+- Added the proof-local coproduct cache and Localization imports. The user instructed
+  continuation after the exact one-line reflexive-cast proposal; that cast is applied
+  to the public normalization field. All other statements and docstrings are unchanged.
+- Both direct importers passed unchanged. The finite-adic importer and all second-layer
+  importers are skipped for verified outside-unit dependency failures; paths and first
+  errors are recorded in `/home/ubuntu/u9/bz/BZ845-downstream-blockers.json`.
+- Fix patterns, exact errors, and replayable rules: `/home/ubuntu/u9/bz/FIXES-BZ845.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, deletions, or heartbeat increases.
+- This completion commit changes only progress documentation after the green build.
+- Completion marker: `/home/ubuntu/u9/state/BZ845.DONE`.
