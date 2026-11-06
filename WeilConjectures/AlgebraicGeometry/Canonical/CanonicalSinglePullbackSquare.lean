@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Picard.CanonicalSinglePullbackComparison
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.Canonical.CanonicalSinglePullbackComposition
 
 /-! # Pullback composition compatibility on single modules
@@ -48,7 +50,7 @@ private theorem singlePullback_naturality
       (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).map k)
       (t.hom.naturality a)
     dsimp only [Functor.comp_map] at hε hs ht
-    dsimp only [canonicalSinglePullbackMap]
+    simp only [canonicalSinglePullbackMap, cast_eq]
     simp only [DerivedCategory.singleFunctor, DerivedCategory.singleFunctors,
       HomotopyCategory.singleFunctor, HomotopyCategory.singleFunctors,
       SingleFunctors.postcomp, Functor.comp_map] at hε hs ht ⊢
