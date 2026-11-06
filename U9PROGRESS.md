@@ -425,22 +425,13 @@
 - All ucheck invocations finished. This final commit changes documentation only.
 
 
-# BZ1065 complete
+# BZ1066 in progress
 
-- Branch: u9/BZ1065; original base dfaed262b6fc1850faba3b46955a11d3225a1e86.
-- Assigned ComparisonSquareEtalePathNormalization is green and sorry-free:
-  ucheck-bump rc=0, failed=0, 11406 jobs; module rebuilt in 12 seconds.
-- Validated source commit: 947722052fbc157ff48817bcbc506a08a4ce02c5.
-- Applied the explicitly proposed compositor statement-direction patch after the user
-  instructed continuation. The proof reverses its cancellation steps and normalizes
-  whiskered maps in both the hypothesis and goal. Assumptions/docstrings preserved.
-- The sole direct importer ComparisonSquareTransport was attempted and skipped:
-  its unowned prerequisite ComparisonSquareProEtalePathNormalization (BZ1064) fails
-  at line 54 with Type mismatch. Further layers share that blocked import path.
-- Logs: BUILD-BZ1065-leaf-green-full.log and BUILD-BZ1065-downstream-full.log in ~/u9/bz/.
-- All ten contextual rewrite rules replay the full Lean patch exactly and are idempotent.
-  Contract audit verifies that statement changes exactly match the proposed patch.
-- Final records: ~/u9/bz/FIXES-BZ1065.md and ~/u9/state/BZ1065.DONE.
-- No local Lean/Lake, proof placeholders, trust bypasses, new declarations/deletions,
-  profiler probes, or heartbeat changes. All ucheck invocations finished.
-- This final commit changes only progress documentation; Lean source matches the green build.
+- Branch: u9/BZ1066; starting commit dfaed262b6fc1850faba3b46955a11d3225a1e86.
+- The user instructed continuation after the exact one-statement compositor proposal.
+  Applied BZ1066-statement-migration.patch to derived_open_unit; its original comparison
+  direction is preserved under Mathlib b63f6e8a. The proof-local unit comparison uses .inv.
+- Merged owner BZ1057's prerequisite fixes at 872c0baf9bc.
+- Next: ucheck-bump on OpenImmersionProjectionComposition, then its four direct importers.
+- Fix records: /home/ubuntu/u9/bz/FIXES-BZ1066.md.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
