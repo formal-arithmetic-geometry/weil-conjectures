@@ -91,8 +91,12 @@ theorem singleComplexBaseChangeCriterion
     IsIso (schemeDerivedBaseChangeMap f f' g g' sq.w (E ⊗ DerivedCategory.Q.obj G) ≫
       (schemeDerivedDirectImage f').map
         (τ E (DerivedCategory.Q.obj G) ≫
-          (derivedPullback g').obj E ◁ cast (by rfl) ((SingleComplexBaseChange.counit g').app
-            ((HomotopyCategory.quotient _ (.up ℤ)).obj G)))) := by
+          (derivedPullback g').obj E ◁
+            (cast (by rfl) ((SingleComplexBaseChange.counit g').app
+              ((HomotopyCategory.quotient _ (.up ℤ)).obj G)) :
+              (derivedPullback g').obj (DerivedCategory.Q.obj G) ⟶
+                DerivedCategory.Q.obj
+                  (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj G)))) := by
   classical
   have hG : schemeDerivedQCohProperty X (DerivedCategory.Q.obj G) :=
     complex_qcoh X G hG_qcoh
