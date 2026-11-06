@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarComposition
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.CategoryTheory.RightKanExtensionCoherentShift
 import all WeilConjectures.CategoryTheory.SmoothPurity.CanonicalRightDerivedAdjunctionShift
 import all WeilConjectures.SmoothPurity.Derived.DerivedScalarExtensionRestrictionAdjunctionSupplement
@@ -176,7 +178,12 @@ private theorem scalarAdjunction_complexUnit
     Quotient.lift.isLift_hom, Quotient.lift.isLift_inv,
     Functor.mapHomotopyCategoryFactors, Functor.map_id,
     Category.id_comp, Category.comp_id] at hp ⊢
-  simpa only [Functor.map_id, Category.comp_id, Category.id_comp] using hp
+  erw [LD.map_id, DerivedCategory.Qh.map_id, Category.comp_id, Category.id_comp]
+  erw [R.mapDerivedCategory.map_id, DerivedCategory.Qh.map_id, Category.comp_id,
+    Category.comp_id] at hp
+  erw [Category.comp_id]
+  erw [Category.id_comp] at hp
+  exact hp
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
