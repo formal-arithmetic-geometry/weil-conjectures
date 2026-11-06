@@ -188,8 +188,8 @@ theorem Divisor.degree_pullback_single
   have := SmoothOfRelativeDimension.smooth 1 (Y ↘ Spec (.of k))
   -- a uniformizer at `y`, as a section `t` on an open `V ∋ y`
   obtain ⟨_, hdvr⟩ := isDiscreteValuationRing_stalk_of_isClosed (Y ↘ Spec (.of k)) hyc
-  have hε : maximalIdeal (Y.presheaf.stalk y) = Ideal.span {Classical.epsilon fun t ↦
-      maximalIdeal (Y.presheaf.stalk y) = Ideal.span {t}} := by
+  have hε : maximalIdeal (Y.presheaf.stalk y) = Ideal.span
+      {Classical.epsilon fun t ↦ maximalIdeal (Y.presheaf.stalk y) = Ideal.span {t}} := by
     refine Classical.epsilon_spec (p := fun t ↦ maximalIdeal (Y.presheaf.stalk y) =
       Ideal.span {t}) ?_
     obtain ⟨t, ht⟩ := (IsPrincipalIdealRing.principal (maximalIdeal (Y.presheaf.stalk y))).1
