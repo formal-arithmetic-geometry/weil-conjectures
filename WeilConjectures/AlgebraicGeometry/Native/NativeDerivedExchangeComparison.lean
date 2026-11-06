@@ -206,7 +206,7 @@ attribute [local irreducible] upperStarFromPoint Mod.monoidalClosed
   Mod.monoidalCategoryStruct DerivedCategory HasDerivedCategory.standard
   Functor.rightDerivedFunctor Functor.mapDerivedCategory
   Functor.leftDerivedFunctor Mod.monoidalCategory
-  Functor.mapDerivedCategoryNatIso Functor.mapDerivedCategoryCompIso
+  Functor.mapDerivedCategoryNatIso
 
 private theorem ordinary_mate (l : ℕ) [Fact l.Prime]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
