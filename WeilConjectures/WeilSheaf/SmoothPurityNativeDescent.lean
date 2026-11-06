@@ -44,7 +44,7 @@ theorem boundedConstructible_geometricFiberWeilLowerStar
   exact (boundedConstructible _).prop_of_iso
     ((Functor.mapDerivedCategoryCompIso
       (geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l) s)
-      (Endofunctor.IsoAlgebra.forget _)).app P.obj) h'
+      (Endofunctor.IsoAlgebra.forget _)).symm.app P.obj) h'
 
 end AlgebraicGeometry.ProEtale.CondensedRing
 

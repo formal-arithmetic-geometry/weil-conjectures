@@ -397,8 +397,8 @@ theorem exists_finite_isIso_upperStar_map_kunnethMap_of_boundedConstructible
             AffineSpace.reindex (fun _ ↦ a) (Spec (.of k')) by
         rw [← specialCoordinate_comp_reindex hNW cW hcW]
         exact specialCoordinate_comp_hom hNW ψ₂ hPU hpbU.w _ _, Scheme.Hom.comp_apply] at this
-    have hx' := (M.i ⁻¹ᵁ V).ι.closePoints_subset_preimage_closedPoints hx
-    have hy' := (N.i ⁻¹ᵁ W).ι.closePoints_subset_preimage_closedPoints hy
+    have hx' := (M.i ⁻¹ᵁ V).ι.closedPoints_subset_preimage_closedPoints hx
+    have hy' := (N.i ⁻¹ᵁ W).ι.closedPoints_subset_preimage_closedPoints hy
     have hx'' : IsClosed {f₁' ((P.i ⁻¹ᵁ U).ι v)} := by
       have h : φ₁.restrictOpenSpecial U V inf_le_left ≫ (M.i ⁻¹ᵁ V).ι = (P.i ⁻¹ᵁ U).ι ≫ f₁' :=
         Scheme.Hom.resLE_comp_ι _ _
