@@ -68,8 +68,6 @@ import all WeilConjectures.TraceFormula.Ordinary.OrdinaryQuotientPullbackTowerCo
 import all WeilConjectures.TraceFormula.CompletionUnit.CompletionUnitOrdinaryAdjunction
 import all WeilConjectures.TraceFormula.CompletionUnit.CompletionUnitFixedCalculusModels
 import WeilConjectures.TraceFormula.CompletionUnit.CompletionUnitDerivedAdjunctionComparison
-public import Mathlib.Algebra.Homology.Localization
-import all Mathlib.Algebra.Homology.Localization
 
 /-! # Coherent reduction and strict pullback tower core
 
@@ -580,9 +578,8 @@ def pullbackTensorLimitUnit (W : Scheme.{u})
       (Iso.refl (coefficientSequenceRestriction l E W ⋙
         (pullbackTensorConstantLimit l E W)))
       (.up ℤ)).inv.app C) ≫
-  (pullbackTensorConstantLimit l E W).rightDerivedFunctorUnit.app
-      ((HomotopyCategory.quotient _ (.up ℤ)).obj
-        (((coefficientSequenceRestriction l E W).mapHomologicalComplex (.up ℤ)).obj C)) ≫
+  (pullbackTensorConstantLimit l E W).rightDerivedFunctorUnitQ
+      (((coefficientSequenceRestriction l E W).mapHomologicalComplex (.up ℤ)).obj C) ≫
   (coefficientConstantTowerLimit l E W).map
     ((coefficientSequenceRestriction l E W).mapDerivedCategoryFactors.inv.app C)
 
@@ -1123,17 +1120,8 @@ theorem pullbackTensorReductionModel_existsUnique (W : Scheme.{u}) :
     have hcomp : (Functor.mapHomologicalComplexCompIso
         (Iso.refl (coefficientSequenceRestriction l E W ⋙
           pullbackTensorConstantLimit l E W)) (.up ℤ)).inv.app C = 𝟙 _ := rfl
-    have hq₁ (K : CochainComplex (scalarReductionSource l E W) ℤ) :
-        (DerivedCategory.quotientCompQhIso (scalarReductionSource l E W)).inv.app K =
-          𝟙 _ := rfl
-    have hq₂ (K : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ) :
-        (DerivedCategory.quotientCompQhIso (ℕᵒᵖ ⥤ scalarReductionSource l E W)).hom.app K =
-          𝟙 _ := rfl
-    simp only [Functor.rightDerivedFunctorUnitQ, pullbackTensorLimitUnit,
-      hcomp, hq₁, hq₂]
-    erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id,
-      CategoryTheory.Functor.map_id, Category.id_comp]
-    rfl
+    simp only [pullbackTensorLimitUnit, hcomp, CategoryTheory.Functor.map_id,
+      Category.id_comp]
   obtain ⟨_, ε, _, hε, _, hhom⟩ :=
     CompletionUnit.fixedDerivedComparison l E W (pullbackTensorCalculus l E W) M c
       (CompletionUnit.termwiseLimitComparison_projection l E W) η hη
