@@ -1325,11 +1325,12 @@ private theorem sfRestriction {U' U Y' Y : Scheme.{u}}
         ((sfIntrinsicDerivedOpen A j).obj K) ≫
       (sfIntrinsicDerivedPullback A j').map ((sfExchange A gU j' j g sq).hom.app K) =
         (sfIntrinsicDerivedOpenUnit A j').app ((sfIntrinsicDerivedPullback A gU).obj K) := by
-  have hmate {C₁ C₂ D₁ D₂ : Type*}
-      [Category C₁] [Category C₂] [Category D₁] [Category D₂]
+  have hmate {C₁ C₂ D₁ D₂ : Type (u + 2)}
+      [Category.{u + 1} C₁] [Category.{u + 1} C₂]
+      [Category.{u + 1} D₁] [Category.{u + 1} D₂]
       [Abelian C₁] [Abelian C₂] [Abelian D₁] [Abelian D₂]
-      [HasDerivedCategory C₁] [HasDerivedCategory C₂]
-      [HasDerivedCategory D₁] [HasDerivedCategory D₂]
+      [HasDerivedCategory.{u + 2} C₁] [HasDerivedCategory.{u + 2} C₂]
+      [HasDerivedCategory.{u + 2} D₁] [HasDerivedCategory.{u + 2} D₂]
       (L₁ : C₁ ⥤ D₁) (R₁ : D₁ ⥤ C₁) (L₂ : C₂ ⥤ D₂) (R₂ : D₂ ⥤ C₂)
       (G : C₁ ⥤ C₂) (H : D₁ ⥤ D₂)
       [L₁.Additive] [R₁.Additive] [L₂.Additive] [R₂.Additive] [G.Additive] [H.Additive]
