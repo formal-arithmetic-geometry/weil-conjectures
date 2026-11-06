@@ -46,7 +46,6 @@ private theorem compose_scalar_modulus
     ← Ext.comp_assoc_of_third_deg_zero, h,
     Ext.comp_assoc_of_third_deg_zero, Ext.mk₀_comp_mk₀]
 
-set_option maxHeartbeats 1600000 in
 -- Elaborating the fixed scalar/support maps requires a larger finite budget.
 /-- Changing coefficients and then the Kummer modulus preserves the normalized
 supported boundary, with its sectionwise coefficient and root maps.

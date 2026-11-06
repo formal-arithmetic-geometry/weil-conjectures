@@ -55,7 +55,7 @@ private lemma augmentedHomotopy {C : Type*} [Category C] [Abelian C]
     refine ⟨(I.exact_succ (n + 1)).descToInjective _ hz, ?_⟩
     rw [(I.exact_succ (n + 1)).comp_descToInjective, add_sub_cancel]
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 600000 in
 -- Comparing the nested module-sheaf functors and four homology transports needs this budget.
 /-- Resolution comparison and homotopy invariance of the flat base-change morphism.
 Source: Stacks, Cohomology, Tag 02N7 and Derived Categories, Tags 013P, 013S.

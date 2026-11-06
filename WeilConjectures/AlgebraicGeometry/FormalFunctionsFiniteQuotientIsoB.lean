@@ -56,7 +56,6 @@ private theorem finite_scalar {X Y : Scheme.{u}} (f : X ⟶ Y) (y : Y)
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 400000 in
 -- Scalar restriction and the two cohomology functors require extra elaboration steps.
 /-- Finite quotient-system isomorphism and quotient-unit factorization.
 Source: Stacks Project, Tag 02OD and Tag 089W.

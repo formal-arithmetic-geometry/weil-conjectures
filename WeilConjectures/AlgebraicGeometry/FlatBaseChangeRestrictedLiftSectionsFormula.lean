@@ -29,7 +29,7 @@ private theorem openSections_map {Y : Scheme.{uBC}} {M N : Y.Modules}
     (φ : M ⟶ N) (U : Y.Opens) :
     (RingedSpace.openModuleSections Y.toRingedSpace U).map φ = Hom.app φ U := rfl
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- Elaborating the nested restriction-adjunction lift needs additional fuel.
 /-- The section identity for the explicit restriction-adjunction lift.
 Source: Stacks Project, Cohomology, Tags 01FB and 01E4.
