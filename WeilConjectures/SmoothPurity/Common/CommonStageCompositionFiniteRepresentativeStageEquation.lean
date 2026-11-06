@@ -118,6 +118,8 @@ attribute [local irreducible] Scheme.residueField Padic ScalarLocalization.compo
 variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /--
 At a fixed common coefficient stage, the rational composition square identifies
 the representative of the right route with any representative of the left route.
