@@ -229,10 +229,10 @@ abbrev directImage : StrictRingSystem B ⥤ Modules A := restrictionFunctor A B 
 /-- Additivity of inverse limit, obtained from preservation of finite products.
 Source: Stacks 0940 (blueprint: lem-coef-restricted-tower-resolution-acyclicity). -/
 instance limitAdditive : (lim : (ℕᵒᵖ ⥤ Modules A) ⥤ Modules A).Additive := by
-  let : HasLimitsOfShape (Discrete WalkingPair) (Modules A) :=
+  have : HasLimitsOfShape (Discrete WalkingPair) (Modules A) :=
     SheafOfModules.hasLimitsOfShape _ _
-  let : HasLimitsOfShape (Discrete WalkingPair) (ℕᵒᵖ ⥤ Modules A) :=
-    CategoryTheory.Limits.functorCategoryHasLimitsOfShape
+  have : HasLimitsOfShape (Discrete WalkingPair) (ℕᵒᵖ ⥤ Modules A) :=
+    functorCategoryHasLimitsOfShape
   exact Functor.additive_of_preserves_binary_products _
 
 /-- The existing degreewise inverse-limit functor on complexes.
