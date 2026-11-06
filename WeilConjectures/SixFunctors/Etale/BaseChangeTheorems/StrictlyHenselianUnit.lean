@@ -390,7 +390,7 @@ lemma Etale.projective_upperStar_freeSheaf_etaleTerminal :
       ((t)^*[ModuleCat.{u + 1} Λ]).mapIso
         (Etale.freeSheafObjIsoOfIsTerminal Λ (Scheme.isTerminalEtaleTerminal R)).symm)
     ((constantSheafAdj _ _ isTerminalEtalePoint).map_projective _
-      (ModuleCat.projective_of_categoryTheory_projective ((ModuleCat.free Λ).obj PUnit)))
+      (ModuleCat.projective_of_free (Module.Basis.singleton PUnit Λ)))
 
 /-- Positive and negative degrees: for `L ≅ N[0]` in `D⁺(Spec Ω)`, the sheaf `R^q t_* L` on
 `Spec R` has no nonzero sections over `Spec R` when `q ≠ 0`. These sections are those of the
