@@ -240,16 +240,21 @@
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
 
 
-# BZ845 in progress
+# BZ845 complete
 
 - Branch: `u9/BZ845`; baseline: `c3b522379`.
-- Reread the brief and progress notes on continuation; no new LEAD lines.
-- Proof/import repairs removed the five original proof-local diagnostics remotely.
-- The user instructed continuation after the exact one-line reflexive-cast proposal.
-  Applied `BZ845-statement-cast-proposal.patch` to the public normalization field.
-- Next: `ucheck-bump` on the leaf and three direct importers, then further unblocked layers.
-- Fix patterns and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ845.md`.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
-- Assigned leaf is GREEN at `09b5612398`: rebuilt successfully in 59 seconds.
-- Remote log: `/home/ubuntu/u9/logs/BZ845-20261106T075214.log`,
-  tree `poolb:43.166.81.121`. Direct-importer checks are still running.
+- Assigned `RingedTopoiDerivedPullbackIndependentSupplement` and direct importers
+  `RingedPullbackCochainPresentation` and `KFlatScalarComparisonNormalization` are GREEN.
+- Final `ucheck-bump`: rc=0, failed=0, 5017 jobs, at source commit
+  `b52a2697bcc54d3d4233d108afa4a53d73bad7dc`; all three targets rebuilt successfully.
+- Log: `/home/ubuntu/u9/bz/BUILD-BZ845-final-full.log`.
+- Added the proof-local coproduct cache and Localization imports. The user instructed
+  continuation after the exact one-line reflexive-cast proposal; that cast is applied
+  to the public normalization field. All other statements and docstrings are unchanged.
+- Both direct importers passed unchanged. The finite-adic importer and all second-layer
+  importers are skipped for verified outside-unit dependency failures; paths and first
+  errors are recorded in `/home/ubuntu/u9/bz/BZ845-downstream-blockers.json`.
+- Fix patterns, exact errors, and replayable rules: `/home/ubuntu/u9/bz/FIXES-BZ845.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, deletions, or heartbeat increases.
+- This completion commit changes only progress documentation after the green build.
+- Completion marker: `/home/ubuntu/u9/state/BZ845.DONE`.
