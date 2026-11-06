@@ -9,8 +9,8 @@ public import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerived
 public import WeilConjectures.SixFunctors.Coefficient.CoefficientOrdinaryQuotientModel
 public import WeilConjectures.SixFunctors.Coefficient.CoefficientOrdinaryReductionComparison
 public import Mathlib.Algebra.Homology.Localization
-import all WeilConjectures.SixFunctors.Coefficient.CoefficientOrdinaryReductionComparison
 import all Mathlib.Algebra.Homology.Localization
+import all WeilConjectures.SixFunctors.Coefficient.CoefficientOrdinaryReductionComparison
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
 
 /-! # Strict quotient-system presentations of coefficient reduction
@@ -107,6 +107,7 @@ theorem strictReductionTensorPresentation (M : OrdinaryModel l E W)
       rw [reassoc_of% hcancel]
       dsimp only [Functor.rightDerivedFunctorUnitQ, coefficientConstantTowerLimit]
       erw [CategoryTheory.Functor.map_id, Category.comp_id, Category.id_comp]
+      rfl
     · intro n
       have hu := ordinary_unit l E W M P n
       have hcπ : (termwiseLimitComparison l E W).inv.app I ≫
