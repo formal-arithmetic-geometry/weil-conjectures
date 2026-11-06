@@ -5,6 +5,8 @@ Authors: Nailin Guan
 -/
 module
 
+public import Mathlib.FieldTheory.SeparablyGenerated
+public import Mathlib.RingTheory.Flat.Equalizer
 public import WeilConjectures.RingTheory.BertiniNoether
 public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.FreeLocus
 
