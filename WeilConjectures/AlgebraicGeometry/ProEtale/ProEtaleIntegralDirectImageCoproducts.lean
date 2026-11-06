@@ -101,6 +101,11 @@ theorem proEtaleIntegralDirectImage_preservesCoproduct
   classical
   let C := proEtaleRingModules T S
   let D := proEtaleRingModules U R
+  have : ∀ (J₁ J₂ : Type u),
+      HasColimitsOfShape (Discrete J₂) (CochainComplex C ℤ) := by
+    intro J₁ J₂
+    have : HasColimitsOfShape (Discrete J₂) C := inferInstance
+    infer_instance
   let F := proEtaleRingModuleDirectImage h R S c
   have : EnoughInjectives C := moduleEnoughInjectives T S
   let adj := (proEtaleRingModuleOperations_properties h R S c).2.2.2.2.some
