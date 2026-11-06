@@ -52,6 +52,9 @@ attribute [local irreducible] tensorPullback
 
 namespace AlgebraicGeometry.ConormalGradedAlgebra
 
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
 private local instance conormalRestrictionSMul {Y : Scheme.{u}} (M : Y.Modules)
     {U V : Y.Opens} (j : U ⟶ V) :
     SMul Γ(Y, U)
@@ -110,9 +113,6 @@ def IsBaseChangeMap (A : Presentation i) (A' : Presentation i')
         tensorPullbackObjUnitToUnit f) ∧
     d 1 = Classical.choose ((Classical.choose_spec
       (closedImmersion_conormal_functorial i i' g f h).2).2)
-
-set_option backward.isDefEq.respectTransparency false
-set_option backward.isDefEq.respectTransparency.types false
 
 omit [IsClosedImmersion i] in
 private theorem baseChangeIdeal (hc : IsLimit (PullbackCone.mk i f h)) :
