@@ -352,7 +352,7 @@ private theorem scalarModelComparison_associator
       completedScalarCounit.{u, u} l L M j X ((Fa.mapHomologicalComplex (.up ℤ)).obj P.obj) ≫
         DerivedCategory.Q.map
           ((completedOrdinaryScalarComplex.{u, u} l L M j X).map (ta.hom.app P.obj)) := by
-    simpa only [Cb, completedScalarCounit, completedOrdinaryScalarComplex] using
+    simpa only [Cb, completedScalarCounit, completedOrdinaryScalarComplex, cast_eq] using
       homotopyCounit_naturality
         (completedOrdinaryScalarExtension.{u, u} l L M j X)
         (completedDerivedScalarExtension.{u, u} l L M j X)
