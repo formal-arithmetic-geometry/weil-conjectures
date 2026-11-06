@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicCoefficientLimit
 public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicQuotientDiagram
-import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicFlatTensorComparison
+public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicFlatTensorComparison
 import Mathlib.RingTheory.Finiteness.Projective
 
 /-! # The canonical quotient diagram as an explicit coefficient complex
