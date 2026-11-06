@@ -1,22 +1,28 @@
-# PZ017 complete
+# BZ819 complete
 
-- Branch: `u9/PZ017`; validated source: `a31ae424ec30a45a6681e3014c4a80bec24938e7`.
-- All three assigned modules passed `ucheck-bump` together: rc=0, built=10, failed=0,
-  6218 jobs on `poolb:43.166.72.113`.
-- Green: `CoefficientActualScalarDerivedPair`, `SectionDerivedPushpullNormalization`,
-  and `StrictTower.ProperOpenClopenProjector`.
-- Full log: `/home/ubuntu/u9/bz/BUILD-PZ017-assigned-green-full.log`.
-- Applied the reviewed identity casts, moved normalization/unit proofs into public
-  theorems with opaque proofs, and supplied explicit universe arguments at their call.
-  Original constructor data and rfl/HEq.rfl field equations are preserved.
-- Four unused projector helpers were deleted after whole-tree reference audits.
-- All 19 direct importers were checked or traced to other units' verified failures.
-  The six scalar importers share PZ019's `SystemRingedSequenceSite` blocker.
-  No green downstream frontier remains; no downstream source changes.
-- Ten PATTERN/ERROR/RULE records and every downstream error are in
-  `/home/ubuntu/u9/bz/FIXES-PZ017.md` and `/home/ubuntu/u9/state/PZ017.DONE`.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
-- This final commit changes only progress documentation after the green source build.
+- Branch: `u9/BZ819`; baseline: `b3093d8fb32f9515a8a68790234b27f5de49f457`.
+- Assigned leaf `RingedFiniteFreeHomBaseChangeTensor` and restored prerequisites
+  `ScalarInternalHomAdjunction` and `RingedFiniteFreeHomBaseChangeData` passed together:
+  `ucheck-bump` rc=0, failed=0, 4122 jobs at source commit
+  `e1270ad5484d1dd75a1a04cb32e2e4780ededcb9`.
+- Restored four previously deleted declarations required by live callers. Their original
+  statements and docstrings are unchanged; the user authorized continuation after the
+  concrete restoration proposal. Localization imports repair hidden Qh reductions in
+  the restored private proof. The assigned leaf source is unchanged.
+- Full green log: `/home/ubuntu/u9/bz/BUILD-BZ819-restored-full.log`.
+- Direct importer `IntegralOperationsScalarComparisons` was attempted at `4a9e30ece8`.
+  Its closure has 11 failing external modules, all outside BZ819 ownership.
+  Stopped this build after confirming those blockers; the stop made the wrapper report
+  rc=0 with failed=11, which is NOT a green downstream result.
+- No further importer layer was attempted because the sole direct importer is blocked.
+- Fixes, exact errors, occurrence counts and replayable rule:
+  `/home/ubuntu/u9/bz/FIXES-BZ819.md`.
+- Downstream log: `/home/ubuntu/u9/bz/BUILD-BZ819-downstream-full.log`.
+- Blocker errors and dependency paths: `/home/ubuntu/u9/bz/BZ819-downstream-blockers.json`.
+- Contract and rule-replay audit: `/home/ubuntu/u9/bz/BZ819-contract-audit.txt`.
+- No local Lean/Lake, statement changes, proof placeholders, trust bypasses, or heartbeat
+  increases. This final commit changes progress documentation only; Lean sources match
+  the green build. Completion marker: `/home/ubuntu/u9/state/BZ819.DONE`.
 
 # BZ133 complete
 
@@ -241,20 +247,3 @@
   failed=0, 3927 jobs, target rebuilt in 48 seconds.
 - Remote log: `/home/ubuntu/u9/logs/BZ740-20261106T061103.log`.
 - Checking downstream `DerivedPullbackTensorUnitKFlat` and `DerivedPullbackTensorUnit`.
-
-
-# BZ800 in progress
-
-- Branch: `u9/BZ800`; starting commit: `fcbed6be3`.
-- Reread the brief and progress notes on continuation; no new LEAD lines.
-- Import-only remote build at `47f88332d4` resolved the private helper error,
-  leaving the public hypothesis's Qh/Q mismatch.
-- The user instructed continuation after the exact two-cast proposal and downstream request.
-  Applied `BZ800-statement-cast-proposal.patch` and the same identity casts to
-  direct importer `DerivedPullbackMonoidalDescent`, preserving the existing morphisms.
-- Leaf rebuilt successfully at `46f8f154b4`; the direct importer was blocked by
-  unowned `DerivedPullbackTensorUnitKFlat.lean:359:12: Type mismatch`.
-- Following the brief's skip rule, saved the unvalidated importer patch outside the repo
-  and restored its source. Next: leaf-only rc=0 validation, final audit, and DONE.
-- Fix patterns and diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ800.md`.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
