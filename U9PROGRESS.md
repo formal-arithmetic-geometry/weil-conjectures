@@ -298,3 +298,15 @@
   unmeasured maxHeartbeats override from the restored helper.
 - Next: ucheck-bump on the five prerequisites and SupportedKoszulRelativeDetector, then downstream.
 - Fix notes: /home/ubuntu/u9/bz/FIXES-BZ932.md. No local Lean/Lake or proof shortcuts.
+
+# BZ948 in progress
+
+- Branch: u9/BZ948; baseline c59b55069.
+- Re-read the unit brief on continuation; no new LEAD lines were appended.
+- The user instructed continuation after the concrete four-cast statement proposal.
+  Applied those reflexive casts to leftCounit_naturality and
+  leftDerived_comparison_on_resolution; the mathematical propositions are unchanged
+  up to definitional equality, with existing proofs and all binders preserved.
+- Prepared the known tilde Additive-instance repair in both direct importers.
+- Next: ucheck-bump on the assigned helper and both direct importers, then downstream.
+- Fix notes: /home/ubuntu/u9/bz/FIXES-BZ948.md. No local Lean/Lake or proof escapes.

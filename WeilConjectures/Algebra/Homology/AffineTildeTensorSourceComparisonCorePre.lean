@@ -32,7 +32,10 @@ local instance preSourceCoordinatesPreadditive (Y : Scheme.{u}) :
 local instance preSourceCoordinatesAbelian (Y : Scheme.{u}) :
     Abelian Y.Modules := inferInstanceAs (Abelian (SheafOfModules.{u} Y.ringCatSheaf))
 local instance preTildeAdditive (C : Type u) [CommRing C] :
-    (affinePushforwardTilde C).Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+    (affinePushforwardTilde C).Additive := by
+  constructor
+  intro M N f g
+  exact tilde.map_add (R := .of C) f g
 local instance preTildeHomology (C : Type u) [CommRing C] :
     (affinePushforwardTilde C).PreservesHomology := tilde_preservesHomology C
 local instance preTildeLimits (C : Type u) [CommRing C] :

@@ -96,8 +96,8 @@ theorem leftCounit_naturality
     (ε : DerivedCategory.Qh ⋙ L ⟶ F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
     {P N : CochainComplex C ℤ} (s : P ⟶ N) :
     L.map (DerivedCategory.Q.map s) ≫
-        ε.app ((HomotopyCategory.quotient _ _).obj N) =
-      ε.app ((HomotopyCategory.quotient _ _).obj P) ≫
+        cast (by rfl) (ε.app ((HomotopyCategory.quotient _ _).obj N)) =
+      cast (by rfl) (ε.app ((HomotopyCategory.quotient _ _).obj P)) ≫
         DerivedCategory.Q.map ((F.mapHomologicalComplex (.up ℤ)).map s) := by
   calc
     _ = L.map (DerivedCategory.Qh.map ((HomotopyCategory.quotient _ _).map s)) ≫
@@ -151,10 +151,11 @@ theorem leftDerived_comparison_on_resolution
     ∃ e : T.mapDerivedCategory.obj
         (L.obj (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj N))) ≅
       Lg.obj (DerivedCategory.Q.obj ((TR.mapHomologicalComplex (.up ℤ)).obj N)),
-      e.hom ≫ εg.app
-          ((HomotopyCategory.quotient _ _).obj ((TR.mapHomologicalComplex (.up ℤ)).obj N)) ≫
+      e.hom ≫ cast (by rfl) (εg.app
+          ((HomotopyCategory.quotient _ _).obj ((TR.mapHomologicalComplex (.up ℤ)).obj N))) ≫
         DerivedCategory.Q.map δ.hom =
-      T.mapDerivedCategory.map (ε.app ((HomotopyCategory.quotient _ _).obj N)) ≫
+      T.mapDerivedCategory.map (cast (by rfl)
+        (ε.app ((HomotopyCategory.quotient _ _).obj N))) ≫
         (T.mapDerivedCategoryFactors.app ((E.mapHomologicalComplex (.up ℤ)).obj N)).hom := by
   dsimp only
   let EC := E.mapHomologicalComplex (.up ℤ)

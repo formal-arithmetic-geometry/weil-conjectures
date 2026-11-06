@@ -51,7 +51,10 @@ local instance (priority := 2000) prebaseSourceCoordinatesAbelian (Y : Scheme.{u
 
 
 local instance prebaseSourceComparisonTildeAdditive (C : Type u) [CommRing C] :
-    (affinePushforwardTilde C).Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+    (affinePushforwardTilde C).Additive := by
+  constructor
+  intro M N f g
+  exact tilde.map_add (R := .of C) f g
 local instance prebaseSourceComparisonTildeHomology (C : Type u) [CommRing C] :
     (affinePushforwardTilde C).PreservesHomology := tilde_preservesHomology C
 local instance prebaseSourceComparisonTildeLimits (C : Type u) [CommRing C] :
@@ -93,10 +96,14 @@ def affineTildeTensorOrdinarySourceIso
     SingleComplexBaseChange.tensorPullbackAdditive.{u, w} g
   let N := ((ModuleCat.restrictScalars (algebraMap R A)).mapHomologicalComplex
     (.up ℤ)).obj M
-  let : (affinePushforwardTilde R).Additive :=
-    instAdditiveModuleCatCarrierModulesSpecOfFunctor
-  let : (affinePushforwardTilde B).Additive :=
-    instAdditiveModuleCatCarrierModulesSpecOfFunctor
+  let : (affinePushforwardTilde R).Additive := by
+    constructor
+    intro M N f g
+    exact tilde.map_add (R := .of R) f g
+  let : (affinePushforwardTilde B).Additive := by
+    constructor
+    intro M N f g
+    exact tilde.map_add (R := .of B) f g
   let : (ModuleCat.extendScalars.{u, u, u} (algebraMap R B)).Additive :=
     ModuleCat.baseDerivedTensor_extendScalars_additive _
   let θ : affinePushforwardTilde R ⋙ Scheme.Modules.tensorPullback g ≅
@@ -105,8 +112,10 @@ def affineTildeTensorOrdinarySourceIso
       (CommRingCat.ofHom (algebraMap R B)))
   let δ := (Functor.mapHomologicalComplexCompIso θ (.up ℤ)).app N
   let P := Scheme.Modules.pushforward (Spec.map (CommRingCat.ofHom (algebraMap R A)))
-  let : (affinePushforwardTilde A).Additive :=
-    instAdditiveModuleCatCarrierModulesSpecOfFunctor
+  let : (affinePushforwardTilde A).Additive := by
+    constructor
+    intro M N f g
+    exact tilde.map_add (R := .of A) f g
   let : P.Additive := inferInstance
   let : (affinePushforwardTilde A ⋙ P).Additive := inferInstance
   let : (affinePushforwardTilde A ⋙ P).PreservesZeroMorphisms :=
