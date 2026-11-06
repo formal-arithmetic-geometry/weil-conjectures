@@ -68,7 +68,7 @@ private theorem monoidal_restriction_mate_equation
   simpa only [Category.comp_id] using congrArg
     (fun f ↦ (Functor.Monoidal.μIso R A K).hom ≫ R.map f) h.symm
 
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 900000 in
 -- The canonical-family predicate unfolds the recorded sheaf tensor instances.
 set_option linter.style.haveILetI false in
 /-- Exact restriction carries compatible strong tensor and internal-Hom comparisons.

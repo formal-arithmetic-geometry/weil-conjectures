@@ -105,7 +105,7 @@ private theorem combine_restriction_square
     _ = a ≫ (y ≫ z) ≫ c₀ := by rw [hc]; simp [Category.assoc]
     _ = _ := by rw [hy]; simp [Category.assoc]
 
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 600000 in
 -- Explicit mate and single-restriction comparisons require extra elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Construct the target comparison and prove mate compatibility from two

@@ -93,7 +93,7 @@ private theorem restriction_pushforward_transport
   apply congrArg Q.presheaf.map
   exact Subsingleton.elim _ _
 
-set_option maxHeartbeats 600000 in
+set_option maxHeartbeats 400000 in
 -- Section transport uses the restriction API rather than unfolding its sheaf data.
 -- Work with abstract left adjoints when taking section components of the mate identity.
 private theorem unit_sections_of_conjugate
@@ -165,7 +165,6 @@ private theorem unit_sections_of_conjugate
   conv_lhs => arg 2; erw [← hv']
 
 
-set_option maxHeartbeats 800000 in
 -- Normalizing four adjunction comparisons requires extra elaboration heartbeats.
 set_option maxRecDepth 2048 in
 private theorem section_unit
@@ -310,7 +309,6 @@ private theorem stalk_unit_of_sections
   exact hs.symm
 
 
-set_option maxHeartbeats 800000 in
 -- Germ conversion across the slice equivalence needs extra elaboration heartbeats.
 set_option maxRecDepth 2048 in
 /-- The pinned tensor restriction comparison preserves the pullback unit on stalks.
