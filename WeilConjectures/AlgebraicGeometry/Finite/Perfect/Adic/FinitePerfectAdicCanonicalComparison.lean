@@ -24,6 +24,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectAdicAlgebraDerived
 attribute [local instance] finitePerfectModelsAbLocallyBijective
+attribute [local instance] finitePerfectAdicFlatTensorCategory
 
 local instance finitePerfectAdicCanonicalComparisonCategory
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A) :
