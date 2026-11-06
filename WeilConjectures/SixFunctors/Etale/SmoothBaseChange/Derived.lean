@@ -161,15 +161,34 @@ noncomputable def Etale.smoothBaseChangeHomologyIso {X S S' X' : Scheme.{u}}
 
 variable {X S T Y : Scheme.{u}} {p : X ⟶ S} {g : T ⟶ S} {e : Y ⟶ T} {h : Y ⟶ X}
 
+/-- The degree-`q` homology of the derived base-change map at a sheaf `F` placed in degree `0` is
+an isomorphism if and only if the degree-`q` base-change map at `F` is. -/
+lemma Etale.isIso_homologyFunctor_map_baseChange_app_singleFunctor_obj_iff
+    (sq : IsPullback e h g p) (q : ℤ) (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    IsIso ((DerivedCategory.Plus.homologyFunctor _ q).map
+        ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app
+          ((DerivedCategory.Plus.singleFunctor _ 0).obj F))) ↔
+      IsIso (Etale.baseChangeHomologyMap Λ sq q F) := by
+  -- `Etale.isIso_baseChangeHomologyMap_iff` is stated with the Mathlib instance
+  -- `IsGrothendieckAbelian (ModuleCat Λ)`, this file with the shortcut
+  -- `ModuleCat.isGrothendieckAbelian_of_commRing`. Comparing the two statements directly makes the
+  -- kernel unfold the derived categories, so both instances are generalized first.
+  have h := (Etale.isIso_baseChangeHomologyMap_iff Λ sq q F).symm
+  revert h
+  generalize instIsGrothendieckAbelianModuleCat Λ = j
+  generalize ModuleCat.isGrothendieckAbelian_of_commRing Λ = i
+  obtain rfl := Subsingleton.elim i j
+  exact id
+
 /-- The derived base-change map is an isomorphism at a sheaf `F` placed in degree `0` if and only
 if all the degreewise base-change maps at `F` are isomorphisms. -/
 lemma Etale.isIso_baseChange_app_singleFunctor_obj_iff (sq : IsPullback e h g p)
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app
         ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) ↔
-      ∀ q, IsIso (Etale.baseChangeHomologyMap Λ sq q F) := by
-  rw [DerivedCategory.Plus.isIso_iff]
-  simp only [Etale.isIso_baseChangeHomologyMap_iff]
+      ∀ q, IsIso (Etale.baseChangeHomologyMap Λ sq q F) :=
+  (DerivedCategory.Plus.isIso_iff _).trans (forall_congr' fun q ↦
+    Etale.isIso_homologyFunctor_map_baseChange_app_singleFunctor_obj_iff Λ sq q F)
 
 /-- The source `p^* ∘ Rg_*` of the derived base-change map does not lower the cohomological
 degree. -/
