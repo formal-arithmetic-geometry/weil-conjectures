@@ -50,7 +50,7 @@ theorem derived_comp_factors
     (e₀ : F ⋙ G ≅ H₀) (hH : H₀ = H) (e : F ⋙ G ≅ H) (he : e = e₀ ≪≫ eqToIso hH)
     (oc : oh ⋙ ok ≅ ohk) (hoc : oc ≍ Functor.mapHomologicalComplexCompIso e (.up ℤ))
     (hd : H₀.mapDerivedCategory = Ohk) (Oc : Oh ⋙ Ok ≅ Ohk)
-    (hOc : Oc ≍ ((F.mapDerivedCategoryCompIso G).symm ≪≫
+    (hOc : Oc ≍ (F.mapDerivedCategoryCompIso G ≪≫
       Functor.mapDerivedCategoryNatIso e₀) ≪≫ eqToIso hd)
     (P : CochainComplex C₁ ℤ) :
     Oc.hom.app (DerivedCategory.Q.obj P) ≫ fohk.hom.app P =
@@ -66,7 +66,7 @@ theorem derived_comp_factors
   simp only [eqToIso_refl, Iso.trans_refl]
   rw [Iso.trans_hom, NatTrans.comp_app, Category.assoc, Functor.mapDerivedCategoryNatIso_fac]
   have hc := Functor.mapDerivedCategoryCompIso_hom_app_factors F G P
-  rw [Iso.symm_hom, ← Category.assoc, ← hc, Iso.inv_hom_id_app_assoc]
+  rw [← Category.assoc, ← hc, Iso.hom_inv_id_app_assoc]
   simp only [Category.assoc]
   rfl
 
