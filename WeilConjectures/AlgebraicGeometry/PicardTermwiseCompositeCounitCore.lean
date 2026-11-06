@@ -31,9 +31,7 @@ attribute [local irreducible] picardTermwiseCounit Modules.tensorPullbackComposi
   Modules.tensorPullback Modules.tensorPullbackObj
 attribute [local instance_reducible] Scheme.Modules TopCat.Sheaf
 attribute [local implicit_reducible] Modules.Hom DerivedCategory
-  Functor.mapHomologicalComplex HomotopyCategory Functor.mapHomotopyCategory
-  HomotopyCategory.quotient DerivedCategory.Q DerivedCategory.Qh
-  HomologicalComplexUpToQuasiIso.Qh
+  HomotopyCategory DerivedCategory.Q DerivedCategory.Qh
 
 private theorem invert_factorization_map
     {C D : Type*} [Category C] [Category D] (Q : C ⥤ D)
@@ -165,9 +163,7 @@ theorem picard_termwise_counit_composition
     Functor.isoWhiskerLeft_hom, Iso.symm_hom, Functor.whiskerRight_app,
     Functor.whiskerLeft_app, Functor.associator_hom_app, Functor.associator_inv_app,
     Category.id_comp]
-  simp only [DerivedCategory.quotientCompQhIso,
-    HomologicalComplexUpToQuasiIso.quotientCompQhIso,
-    Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_hom,
+  simp only [Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_hom,
     Quotient.lift.isLift_inv]
   let PS := ((Modules.tensorPullback s).mapHomologicalComplex (.up ℤ)).obj P
   let qT := HomotopyCategory.quotient T.Modules (.up ℤ)
