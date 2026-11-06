@@ -9,7 +9,6 @@ public import Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.OplaxMonoidalUnit
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Unit
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Shift
-import Mathlib.Algebra.Homology.Localization
 import all Mathlib.Algebra.Homology.Localization
 
 import all Mathlib.Algebra.Homology.Localization
