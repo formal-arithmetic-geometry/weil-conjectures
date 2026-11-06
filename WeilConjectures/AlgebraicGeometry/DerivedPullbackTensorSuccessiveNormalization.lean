@@ -7,6 +7,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.GlobalHomAdjunctionIso
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.PullbackTensorTotalCompositionLocalized
 import WeilConjectures.Algebra.Homology.KFlatPullback
 
