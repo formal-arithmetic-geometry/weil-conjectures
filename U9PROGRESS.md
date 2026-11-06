@@ -257,18 +257,12 @@
 - Next: remote ucheck-bump on the assigned module, then both direct importers.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ864 in progress
+# BZ864 completed
 
-- Branch `u9/BZ864`, baseline `e167a50a4`.
-- Build 18 is GREEN: CanonicalModuleBaseChangeOpenComparison (17s), assigned CanonicalModuleBaseChangeAffineChartComparison (7.7s), and CanonicalModuleBaseChangeAffineLocality. Remote log `/home/ubuntu/u9/logs/BZ864-20261106T091914.log`; source `04c8261096`.
-- The assigned affine-chart file is unchanged from baseline. Restored its missing open-comparison helper with the original statement and a proof using the pinned degree-zero square, its canonical restricted comparison, and one target automorphism. Splitting this argument out of the affine context resolved the 400000-heartbeat timeout.
-- Restored 24 still-referenced declarations. Full-header audit: 61 unchanged types in changed files, three new helpers, no baseline deletion; the assigned file's two declarations remain unchanged too.
-- All temporary trace/diagnostics imports/options/probes are removed. Build 19 validates this cleaned source (`6b5417c713`) and checks the next downstream module RelativelyFlatCanonicalModuleBaseChange.
-- Build 19: newsrv:/home/ubuntu/u9n/bumpw4; remote log `/home/ubuntu/u9/logs/BZ864-20261106T092023.log`; local session 46335; wrapper log `/home/ubuntu/u9/bz/BZ864-build-19.log`. Prerequisites are rebuilding without errors.
-- Source inspection: RelativelyFlatCanonicalModuleBaseChange still calls the pruned external theorem canonicalModuleBaseChange_isIso_affine_of_isFlatOver. Its affine Cech factorization dependency is also pruned. Do not delete: HigherDirectImageDerivedModel still calls the relatively-flat theorem.
-- Two scoped 400000-heartbeat budgets have measured failures recorded in FIXES and are below the original pre-prune 1000000 budgets. No local Lean/Lake, placeholders, axioms, native_decide, trust bypasses, or profiler probes.
-- Records: `/home/ubuntu/u9/bz/FIXES-BZ864.md`, `BZ864-restored-declarations.tsv`, `BZ864-restored-prerequisites.tsv`, `BZ864-full-header-audit.tsv`, `BZ864-contract-audit.txt`.
-- Next: finish cleaned-source/downstream validation, fix local errors if any, record any unowned dependency blocker, and write DONE.
-
-- Build 19: cleaned open comparison, assigned leaf, and affine locality all green. RelativelyFlatCanonicalModuleBaseChange failed at line 119 because its manually constructed c has hidden Qh endpoints. Replaced that entire construction with the already-compiled exists_isDerivedModulePullbackComparison helper and its import; no statement change.
-- Build 20: source `72c9186137`, newsrv:/home/ubuntu/u9n/bumpw1, remote log `/home/ubuntu/u9/logs/BZ864-20261106T092703.log`, local session 35946. Checks leaf, locality, and the downstream fix.
+- Branch `u9/BZ864`; baseline `e167a50a4`; final tested Lean source `d7c8c73c15`.
+- Final `ucheck-bump` build 21 returned rc=0, failed=0: assigned CanonicalModuleBaseChangeAffineChartComparison and direct importer CanonicalModuleBaseChangeAffineLocality are GREEN. Log: `/home/ubuntu/u9/logs/BZ864-20261106T093342.log` (poolb:43.157.187.72).
+- The assigned affine-chart source is unchanged from baseline. Restored its missing open-comparison helper with the original statement and a proof using the pinned degree-zero square, canonical restricted comparison, and one target automorphism. Separating the open proof from the affine context resolved elaboration timeouts.
+- Restored 24 still-referenced declarations. Validated 21 modules: assigned leaf, affine locality, and 19 edited prerequisites. Full-header audit: 63 unchanged types in edited files, three new helpers, no baseline deletion.
+- Downstream build 20 validated the replacement of a manual Qh comparison construction by exists_isDerivedModulePullbackComparison in RelativelyFlatCanonicalModuleBaseChange. The sole remaining error is `Unknown identifier canonicalModuleBaseChange_isIso_affine_of_isFlatOver` at line 123:6, from the unowned AffineRelativelyFlatCanonicalModuleBaseChange dependency pruned to imports. Its affine Cech factorization API is pruned too. Stopped at that external dependency per the ownership rule; the live caller was preserved. Log: `/home/ubuntu/u9/logs/BZ864-20261106T092703.log`.
+- No local Lean/Lake execution, proof placeholders, axioms, native_decide, trust bypasses, or remaining diagnostics/profiler probes. Two measured 400000-heartbeat scopes are below their original pre-prune 1000000 budgets.
+- Completion record: `/home/ubuntu/u9/state/BZ864.DONE`. Fix records: `/home/ubuntu/u9/bz/FIXES-BZ864.md` (26 PATTERN/ERROR/RULE entries). Module/restoration inventories and full-header audit are in `/home/ubuntu/u9/bz/BZ864-*.tsv` and `BZ864-green-modules.txt`.
