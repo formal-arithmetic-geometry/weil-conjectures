@@ -559,7 +559,7 @@ private theorem pastingAlpha {V W S T : Scheme.{u}}
       (towerAlpha B k r p i h) = alpha B k r p i h := by
   apply pastingCell_of_descent B (X := S) (Y := W)
   simpa only [Word.comparison, Word.ordinary, Word.derived, ExactFunctor.of_fst, Iso.trans_hom,
-    Iso.trans_inv,
+    Iso.trans_inv, Iso.symm_hom, Iso.symm_inv,
     Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
     Functor.isoWhiskerRight_inv, Functor.isoWhiskerLeft_inv,
     Iso.refl_hom, Iso.refl_inv, Functor.whiskerLeft_id', Functor.whiskerRight_id',
