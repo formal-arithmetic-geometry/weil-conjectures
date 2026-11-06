@@ -248,14 +248,17 @@
 
 # BZ857 in progress
 
-- Branch: `u9/BZ857`; initial baseline `2ab2b07a3`.
+- Branch: `u9/BZ857`; initial baseline `2ab2b07a3`, integrated baseline `db406319f`.
 - User instructed continuation after the explicit four-upstream-module restoration proposal.
-- Merged integrated bump commit `db406319f` before restoring the required proof chain.
-- Restoring projection-unit normalization, mixed projection mate, signed normalization,
-  and mate data. Assigned theorem statement remains unchanged.
-- Applying known scalar carrier and canonical Q/Qh comparison repairs.
-- First remote build at `9833fc9a1e` reached the restored unit proof; its remaining
-  input-scalar carrier error is now annotated. The Qh/Q repairs await downstream compilation.
-- Next: validate the leaf and attempt its two direct importers, then downstream layers.
-- Notes: `/home/ubuntu/u9/bz/FIXES-BZ857.md`.
+- Restored projection-unit normalization, mixed projection mate, signed normalization,
+  and mate data. The assigned theorem statement and proof remain byte-for-byte unchanged.
+- Applied scalar carrier annotations, public/implementation imports, and canonical Q/Qh
+  comparisons. The restored mixed-mate theorem's local eta uses the canonical cochain unit.
+- Arrows and MixedProjectionMate rebuilt green at `e70441fd70` (attempt 4).
+- Attempt 4 exposed a missing public ShortExactPullback import in signed normalization;
+  fixed it and queued attempt 5 at `949b84fad` through ucheck-bump.
+- Current remote waiter PID: 3369746. Local wrapper log: BUILD-BZ857-restoration5.log.
+- Next: validate the leaf and check PerfectProjectionFormula and ProjectionFormulaCompactified,
+  then their importers while fixable and within the 30-module downstream cap.
+- Full notes, exact errors, rules, and logs: `/home/ubuntu/u9/bz/FIXES-BZ857.md`.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
