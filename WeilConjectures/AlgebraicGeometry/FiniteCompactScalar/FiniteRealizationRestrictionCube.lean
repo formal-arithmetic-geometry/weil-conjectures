@@ -31,7 +31,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Functor.leftAdjoint
   Functor.rightDerivedFunctor AlgebraicGeometry.Scheme.sfIntrinsicModuleEquivalence
 attribute [local implicit_reducible] CategoryTheory.Equivalence.mk
   CategoryTheory.Equivalence.mapDerivedCategory
-  AlgebraicGeometry.Scheme.sfIntrinsicDerivedEquivalence Functor.mapHomologicalComplex
+  AlgebraicGeometry.Scheme.sfIntrinsicDerivedEquivalence
 open CategoryTheory.Limits
 
 namespace MixedDerivedCube

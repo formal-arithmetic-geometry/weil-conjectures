@@ -99,7 +99,7 @@ theorem reductionTensorStrength_isIso
   have hK : ∃ P, CochainComplex.IsKFlatIndependentCoefficients
       (J := AlgebraicGeometry.Scheme.ProEt.topology Y)
       (R := completedIntegralCommRingSheaf l E Y D hl) P ∧
-      Nonempty (DerivedCategory.Q.obj P ≅ K) := by
+      Nonempty ((DerivedCategory.Q.obj P : completedIntegralDerivedCategory l E Y D hl) ≅ K) := by
     exact exists_reduction_kflat_representative
       (C := AlgebraicGeometry.Scheme.ProEt Y)
       (J := AlgebraicGeometry.Scheme.ProEt.topology Y)
@@ -108,7 +108,7 @@ theorem reductionTensorStrength_isIso
   have hV : ∃ Q, CochainComplex.IsKFlatIndependentCoefficients
       (J := AlgebraicGeometry.Scheme.ProEt.topology Y)
       (R := completedIntegralCommRingSheaf l E Y D hl) Q ∧
-      Nonempty (DerivedCategory.Q.obj Q ≅ V) := by
+      Nonempty ((DerivedCategory.Q.obj Q : completedIntegralDerivedCategory l E Y D hl) ≅ V) := by
     exact exists_reduction_kflat_representative
       (C := AlgebraicGeometry.Scheme.ProEt Y)
       (J := AlgebraicGeometry.Scheme.ProEt.topology Y)
@@ -119,7 +119,9 @@ theorem reductionTensorStrength_isIso
     dsimp only [τ]
     rw [scalarTensorStrength_app]
     exact scalarTensorStrength_on_kflat_representatives l E Y D hl a n m P Q hP hQ
-  let e : (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ⟶ (K, V) :=
+  let e : ((DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) :
+      completedIntegralDerivedCategory l E Y D hl × completedIntegralDerivedCategory l E Y D hl) ⟶
+      (K, V) :=
     Prod.mkHom eP.hom eQ.hom
   have : IsIso e := by
     dsimp [e]

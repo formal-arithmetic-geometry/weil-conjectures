@@ -86,7 +86,7 @@ theorem schemeDerivedOpen_unit_isIso (X : Scheme.{u}) (U : X.Opens)
   let : PreservesFiniteLimits (G ⋙ F) := comp_preservesFiniteLimits _ _
   let : PreservesFiniteColimits (G ⋙ F) := comp_preservesFiniteColimits _ _
   let eD : G.mapDerivedCategory ⋙ F.mapDerivedCategory ≅ 𝟭 (DerivedCategory A) :=
-    (Functor.mapDerivedCategoryCompIso G F).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso G F) ≪≫
       Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryIdIso A
   let ff := adjD.fullyFaithfulLOfCompIsoId eD
   let ffR := (Adjunction.Triple.fullyFaithfulEquiv ⟨adjD, adj⟩) ff

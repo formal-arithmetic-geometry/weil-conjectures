@@ -1517,16 +1517,22 @@ private theorem kInjectiveQ_full
     {A : Type*} [Category A] [Abelian A] [HasDerivedCategory A]
     [Abelian.HasKInjectiveResolutions A] :
     (CochainComplex.KInjectives.ι (C := A) ⋙ DerivedCategory.Q).Full :=
-  inferInstanceAs ((CochainComplex.KInjectives.toHomotopyCategory (C := A) ⋙
-    HomotopyCategory.KInjectives.Qh).Full)
+  letI : (CochainComplex.KInjectives.toHomotopyCategory (C := A) ⋙
+      HomotopyCategory.KInjectives.Qh).Full := inferInstance
+  Functor.Full.of_iso (F := CochainComplex.KInjectives.toHomotopyCategory (C := A) ⋙
+      HomotopyCategory.KInjectives.Qh) (Functor.isoWhiskerLeft CochainComplex.KInjectives.ι
+    (DerivedCategory.quotientCompQhIso A))
 
 set_option backward.isDefEq.respectTransparency true in
 private theorem kInjectiveQ_essSurj
     {A : Type*} [Category A] [Abelian A] [HasDerivedCategory A]
     [Abelian.HasKInjectiveResolutions A] :
     (CochainComplex.KInjectives.ι (C := A) ⋙ DerivedCategory.Q).EssSurj :=
-  inferInstanceAs ((CochainComplex.KInjectives.toHomotopyCategory (C := A) ⋙
-    HomotopyCategory.KInjectives.Qh).EssSurj)
+  letI : (CochainComplex.KInjectives.toHomotopyCategory (C := A) ⋙
+      HomotopyCategory.KInjectives.Qh).EssSurj := inferInstance
+  Functor.essSurj_of_iso (F := CochainComplex.KInjectives.toHomotopyCategory (C := A) ⋙
+      HomotopyCategory.KInjectives.Qh) (Functor.isoWhiskerLeft CochainComplex.KInjectives.ι
+    (DerivedCategory.quotientCompQhIso A))
 
 private theorem ordinaryRightShiftsAux
     {A : Type*} [Category A] [Preadditive A] [HasBinaryBiproducts A]

@@ -264,7 +264,8 @@ theorem exists_pinned_single_tensor_shifts
         (((SingleFunctors.mappedHomotopySingleIso T).hom.hom n).app G) ≫ 𝟙 _) ≫
       (𝟙 _ ≫ 𝟙 _) = _
   rw [SingleFunctors.mappedHomotopySingleIso_hom_app]
-  simp only [Category.id_comp, Category.comp_id, Functor.map_id]
+  simp only [Category.id_comp, Category.comp_id]
+  erw [Functor.map_id, Category.id_comp]
   rfl
 
 end AlgebraicGeometry

@@ -68,7 +68,7 @@ theorem derivedExtUnit_comp {F : C} {G : B} {H : A} (n : ℕ)
   unfold DerivedExtUnit
   intro K
   have hb := (hη (U.mapDerivedCategory.obj K)).comp (hshift K)
-  let z := (mapDerivedCategoryCompIso U V).app K
+  let z := (mapDerivedCategoryCompIso U V).symm.app K
   have he (f : (sA.obj H)⟦(n : ℤ)⟧ ⟶ K) :
       e.hom ≫ ((V.mapDerivedCategorySingleFunctor 0).inv.app G)⟦(n : ℤ)⟧' ≫
         (V.mapDerivedCategory.commShiftIso (n : ℤ)).inv.app (sB.obj G) ≫
@@ -83,14 +83,14 @@ theorem derivedExtUnit_comp {F : C} {G : B} {H : A} (n : ℕ)
     have hci : (V.mapDerivedCategorySingleFunctor 0).inv.app (U.obj H) ≫
         V.mapDerivedCategory.map ((U.mapDerivedCategorySingleFunctor 0).inv.app H) =
       ((U ⋙ V).mapDerivedCategorySingleFunctor 0).inv.app H ≫
-        (mapDerivedCategoryCompIso U V).hom.app (sA.obj H) := by
+        (mapDerivedCategoryCompIso U V).inv.app (sA.obj H) := by
       let a := (V.mapDerivedCategorySingleFunctor 0).app (U.obj H)
       let b := V.mapDerivedCategory.mapIso ((U.mapDerivedCategorySingleFunctor 0).app H)
       apply (cancel_mono (b.hom ≫ a.hom)).1
       change (a.inv ≫ b.inv) ≫ (b.hom ≫ a.hom) = _
       simp only [Category.assoc, Iso.inv_hom_id_assoc, Iso.inv_hom_id]
       change 𝟙 _ = ((U ⋙ V).mapDerivedCategorySingleFunctor 0).inv.app H ≫
-        ((mapDerivedCategoryCompIso U V).hom.app (sA.obj H) ≫
+        ((mapDerivedCategoryCompIso U V).inv.app (sA.obj H) ≫
           V.mapDerivedCategory.map ((U.mapDerivedCategorySingleFunctor 0).hom.app H) ≫
             (V.mapDerivedCategorySingleFunctor 0).hom.app (U.obj H))
       rw [hc]
@@ -113,9 +113,9 @@ theorem derivedExtUnit_comp {F : C} {G : B} {H : A} (n : ℕ)
           ((U.mapDerivedCategory.commShiftIso (n : ℤ)).inv.app (sA.obj H)) := by
       simp only [Functor.commShiftIso_comp_inv_app]
     erw [← reassoc_of% hco]
-    rw [NatTrans.shift_app_assoc (mapDerivedCategoryCompIso U V).hom]
+    rw [NatTrans.shift_app_assoc (mapDerivedCategoryCompIso U V).inv]
     simp only [Iso.hom_inv_id_app_assoc]
-    erw [← (mapDerivedCategoryCompIso U V).hom.naturality f]
+    erw [← (mapDerivedCategoryCompIso U V).inv.naturality f]
     rfl
   have hb' : Function.Bijective (fun f : (sA.obj H)⟦(n : ℤ)⟧ ⟶ K ↦
       ((e.comp (Ext.mk₀ (V.map θ)) (add_zero n)).hom ≫

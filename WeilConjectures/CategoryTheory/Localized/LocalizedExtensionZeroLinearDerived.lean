@@ -54,8 +54,8 @@ private def sectionScalar {D : Type (u + 1)} [Category.{u} D] {K : GrothendieckT
         change sigma W b • f.val.app W (M.val.map g x) =
           N.val.map g (sigma V b • f.val.app V x)
         rw [PresheafOfModules.naturality_apply, N.val.map_smul]
-        change sigma W b • N.val.map g (f.val.app V x) =
-          S.obj.map g (sigma V b) • N.val.map g (f.val.app V x)
+        change sigma W b • (show N.val.obj W from N.val.map g (f.val.app V x)) =
+          S.obj.map g (sigma V b) • (show N.val.obj W from N.val.map g (f.val.app V x))
         rw [hsigma] }
 
 @[instance_reducible] private def sectionModule {D : Type (u + 1)} [Category.{u} D]
