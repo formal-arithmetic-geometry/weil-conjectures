@@ -28,7 +28,7 @@ namespace AlgebraicGeometry
 open Scheme.Modules
 
 attribute [local implicit_reducible] HomologicalComplex.homologyFunctor
-  Functor.mapHomologicalComplex ComplexShape.embeddingUpNat
+  ComplexShape.embeddingUpNat
 
 private theorem inverse_naturality {C : Type*} [Category C] {A B D E : C}
     (eK : A ≅ B) (eL : D ≅ E) (f : B ⟶ E) (g : A ⟶ D)

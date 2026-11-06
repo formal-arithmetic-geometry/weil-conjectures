@@ -137,6 +137,8 @@ Source: Stacks Project, Tags 01E4 and 0D5X
     RingedSpace.localAbelianSections Y.toRingedSpace
   letI : I.cochainComplex.IsKInjective :=
     CochainComplex.isKInjective_of_injective I.cochainComplex 0
+  have : QuasiIso I.ι' := inferInstance
+  have : IsIso ((DerivedCategory.Q.{w} (C := X.Modules)).map I.ι') := inferInstance
   let r : (DerivedCategory.singleFunctor
       (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj F ≅
       DerivedCategory.Q.obj I.cochainComplex :=
