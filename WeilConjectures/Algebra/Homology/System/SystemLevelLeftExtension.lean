@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.Algebra.Homology.System.SystemLevelLeftExtensionBasic
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 import WeilConjectures.Algebra.Homology.System.SystemCoproducts
 import WeilConjectures.Algebra.Homology.System.SystemGrothendieck
 import WeilConjectures.Algebra.Homology.System.SystemDerivedEvaluation
@@ -128,7 +129,14 @@ theorem systemLevelLeftExtensionTheory : Nonempty (SystemLevelLeftExtensionTheor
             coproducts := fun B ↦ inferInstance
             derivedCoproducts := strictRingSystem_derivedCoproducts
             levelDerivedCoproducts := systemLevel_derivedCoproducts
-            evaluationCoproducts := fun B n I ↦ systemEvaluation_colimitsOfShape B (Discrete I) n
+            evaluationCoproducts := fun B n I ↦ by
+              have (n : ℕ) : HasColimitsOfShape (Discrete I) (PresheafOfModules.{w}
+                  (derivedChangeRingIndependentCoefficients J (B.obj (op n))).obj) :=
+                PresheafOfModules.hasColimitsOfShape _ _
+              have (n : ℕ) : HasColimitsOfShape (Discrete I) (systemLevel B n) :=
+                SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf
+                  _ _
+              exact systemEvaluation_colimitsOfShape B (Discrete I) n
             derivedEvaluationCoproducts := derivedSystemEvaluation_coproducts
             cohomology := systemDerivedCohomology
             detectsIso := systemDerivedEvaluation_isIso_iff
