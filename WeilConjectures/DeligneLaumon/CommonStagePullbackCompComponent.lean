@@ -182,8 +182,8 @@ theorem commonStagePullbackCompComponent_stage_representation
       (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) X).obj
         ((constructibleIntegralPullback l _ (f ≫ g)).obj P.obj.obj) =
       (rationalDerivedPullback l
-        (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) (f ≫ g)).obj P.obj :=
-    ((rationalDerivedPullback_existsUnique l
+        (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) (f ≫ g)).obj P.obj := by
+    simpa only [rationalDerivedPullback] using ((rationalDerivedPullback_existsUnique l
       (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) (f ≫ g)).exists.choose_spec.2.1
         P.obj).symm
   have eB : (sfRationalConstructibleLocalization l
@@ -193,9 +193,10 @@ theorem commonStagePullbackCompComponent_stage_representation
       (rationalDerivedPullback l
         (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) f).obj
           ((rationalDerivedPullback l
-            (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) g).obj P.obj) :=
-    ((congrArg (rationalDerivedPullback l
-        (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) f).obj
+            (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) g).obj P.obj) := by
+    simpa only [rationalDerivedPullback] using
+      ((congrArg (rationalDerivedPullback_existsUnique l
+        (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) f).exists.choose.obj
       ((rationalDerivedPullback_existsUnique l
         (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) g).exists.choose_spec.2.1
           P.obj)).trans
