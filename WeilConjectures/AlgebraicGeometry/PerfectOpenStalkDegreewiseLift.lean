@@ -9,6 +9,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
 public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkRestrictionComparison
+public import Mathlib.AlgebraicGeometry.AffineScheme
 import WeilConjectures.AlgebraicGeometry.OpenStalkFreeMapLocalLift
 import Mathlib.Data.Int.Interval
 
