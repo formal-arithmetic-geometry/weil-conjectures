@@ -95,9 +95,9 @@ theorem integralResidueFiniteSlice
   let scalar : H ⋙ V ≅ W ⋙ J := Iso.refl _
   let swap : H.mapDerivedCategory ⋙ V.mapDerivedCategory ≅
       W.mapDerivedCategory ⋙ J.mapDerivedCategory :=
-    (Functor.mapDerivedCategoryCompIso H V).symm ≪≫
+    Functor.mapDerivedCategoryCompIso H V ≪≫
       Functor.mapDerivedCategoryNatIso scalar ≪≫
-      Functor.mapDerivedCategoryCompIso W J
+      (Functor.mapDerivedCategoryCompIso W J).symm
   let p := finiteFunctionDerivedPullback Y.hom D n
   obtain ⟨e⟩ := e
   let h : (D.finitePull Y.hom n).obj (T.mapDerivedCategory.obj M) ≅
@@ -124,7 +124,7 @@ theorem integralResidueFiniteSlice
     let f : F ≅ T ⋙ H := Iso.refl _
     exact (F.mapDerivedCategoryFactors.app (DerivedCategory.Q.objPreimage K)).symm ≪≫
       F.mapDerivedCategory.mapIso (DerivedCategory.Q.objObjPreimageIso K) ≪≫
-      (Functor.mapDerivedCategoryNatIso f ≪≫ Functor.mapDerivedCategoryCompIso T H).app K
+      (Functor.mapDerivedCategoryNatIso f ≪≫ (Functor.mapDerivedCategoryCompIso T H).symm).app K
   have slice (K : DerivedCategory (SheafOfModules.{u + 1}
       (completedAdicFiniteRing S d n))) :
       ringedSiteDerivedRestrictionOfUniverses (completedAdicFiniteRing S d n) U K ≅
