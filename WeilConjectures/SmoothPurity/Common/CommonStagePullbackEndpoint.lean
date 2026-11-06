@@ -61,6 +61,10 @@ attribute [local irreducible] rationalDerivedPullback rationalDerivedTensor
   rationalPullbackScalarComparison rationalTensorScalarComparison
   commonStagePullbackComparison commonStageTensorComparison operationStageTransitionIso
 
+-- Match the transported structures on the small coefficient models.
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
 /-- The normalized pullback comparison is the prescribed pair endpoint comparison.
 
 Source: def-pur-section-invariant, common-stage subargument, steps 3–5.

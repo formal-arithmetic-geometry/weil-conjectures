@@ -31,7 +31,7 @@ attribute [local irreducible] pullbackTensorSequenceInverse pullbackTensorSequen
   pullbackTensorSequenceCochain pullbackTensorSequenceRing Functor.leftAdjoint
   SheafOfModules.monoidalCategory HasDerivedCategory.standard
   HomologicalComplex₂.total CategoryTheory.Functor.mapBifunctorHomologicalComplex
-attribute [local implicit_reducible] pullbackTensorSequenceDirect Functor.mapHomologicalComplex
+attribute [local implicit_reducible] pullbackTensorSequenceDirect 
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

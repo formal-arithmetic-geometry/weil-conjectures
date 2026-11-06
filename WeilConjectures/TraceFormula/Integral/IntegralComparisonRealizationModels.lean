@@ -650,8 +650,7 @@ private theorem integralComparisonDerivedCounit
     erw [DerivedCategory.quotientCompQhIso_hom_naturality]
     dsimp only [Functor.comp_obj]
     erw [CategoryTheory.Functor.map_id]
-    erw [CategoryTheory.Functor.map_id DerivedCategory.Qh]
-    repeat' erw [Category.id_comp]
+    erw [Category.id_comp, Iso.inv_hom_id_app_assoc]
     rfl
   calc
     d.counit.app (DerivedCategory.Q.obj I) =
