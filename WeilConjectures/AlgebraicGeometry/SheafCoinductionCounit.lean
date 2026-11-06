@@ -309,7 +309,8 @@ private lemma coinductionTranspose_eval
     (ψ.val.app (op W.unop.left) (G.val.map W.unop.hom.op m)) =
       PresheafOfModules.restrictOverMap W.unop.hom (q.val.app U m) at hn
   change ((i.hom.app F).val.app (op W.unop.left)
-    (ψ.val.app (op W.unop.left) (b • G.val.map W.unop.hom.op m))).app
+    (ψ.val.app (op W.unop.left)
+      (b • (show G.val.obj (op W.unop.left) from G.val.map W.unop.hom.op m)))).app
       (op (Over.mk (𝟙 W.unop.left))) (1 : S.obj.obj (op W.unop.left)) =
         (q.val.app U m).app W b
   calc
