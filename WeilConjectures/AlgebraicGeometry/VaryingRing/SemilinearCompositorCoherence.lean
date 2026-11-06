@@ -183,7 +183,8 @@ private theorem g_coherence {X Y Z T : Scheme.{u}}
   have hm := NatTrans.congr_app hh M
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app] at hm
   rw [congrArg (fun t ↦ t.app M) (derived_transport R φ (Category.assoc f g h).symm)] at hm
-  simpa only [gComp, Iso.trans_hom, NatTrans.comp_app, Functor.map_comp, Category.assoc]
+  simpa only [gComp, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.map_comp,
+    Category.assoc]
     using hm
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
@@ -325,7 +326,8 @@ private theorem g_left_unit {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (eqToIso (congrArg (pull R φ) (Category.id_comp f).symm))
     (moduleGComp R φ (𝟙 X) f) (moduleGId R φ X) ho
   rw [derived_transport R φ (Category.id_comp f).symm] at hh
-  simpa only [gComp, gId, moduleGId, Iso.trans_hom, NatTrans.comp_app, Category.assoc]
+  simpa only [gComp, gId, moduleGId, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    Category.assoc]
     using hh
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
@@ -348,7 +350,8 @@ private theorem g_right_unit {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (eqToIso (congrArg (pull R φ) (Category.comp_id f).symm))
     (moduleGComp R φ f (𝟙 Y)) (moduleGId R φ Y) ho
   rw [derived_transport R φ (Category.comp_id f).symm] at hh
-  simpa only [gComp, gId, moduleGId, Iso.trans_hom, NatTrans.comp_app, Category.assoc]
+  simpa only [gComp, gId, moduleGId, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    Category.assoc]
     using hh
 
 -- Conjugation transfers the inverse-image equations to derived direct image.
