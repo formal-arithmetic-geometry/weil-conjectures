@@ -115,7 +115,7 @@ private theorem ordinary_comp_commShift :
     (integralOrdinaryScalarComp l E L i Y M j)
   change NatTrans.CommShift
     ((Functor.mapDerivedCategoryCompIso (integralOrdinaryScalar l E L i Y)
-      (integralOrdinaryScalar l L M j Y)).inv ≫
+      (integralOrdinaryScalar l L M j Y)).hom ≫
       (Functor.mapDerivedCategoryNatIso (integralOrdinaryScalarComp l E L i Y M j)).hom) ℤ
   infer_instance
 
@@ -432,6 +432,10 @@ private theorem localized_comp_core_with_Q
     simpa only [ScalarLocalization.localization] using hAs X.obj
 
 end LocalizationSquare
+
+-- Match the transported structures on the small coefficient models.
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 
 /-- The actual intrinsic tensor associator preserves the uniquely integral-image-normalized
 coherent integer shifts. The composite functor has the composite shift comparison.

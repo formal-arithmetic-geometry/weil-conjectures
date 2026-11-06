@@ -357,4 +357,140 @@ private theorem constructibleOfIso (X : Scheme.{u}) (A : Type u)
       (proEtaleConstantRing (S.domain i) A)).mapIso ei.symm
     exact Finite.of_injective ey.toLinearEquiv ey.toLinearEquiv.injective
 
+/-- Finite scalar restriction is exact, preserves constructible sheaves and bounded
+constructibility, commutes naturally with every cohomology functor, and preserves and
+reflects cohomology vanishing in every degree.
+Source: current Weil blueprint, integral-criterion reductions, second proof paragraph,
+last sentence; Stacks Tags 03DA, 03D2, 093I, 093Q, 09AJ, 010N and 015F
+(blueprint: lem-pe-finite-scalar-restriction-constructible).
+Proof:
+1. Restriction leaves the underlying abelian sheaf and maps unchanged. The kernel and
+sheafified cokernel constructions of lem-weil-pbc-module-sheaves-colimits-forgetful
+therefore commute with it. It is additive, exact and reflects zero objects.
+2. On every stratum, the canonical inverse-image identifications of the two constant
+rings commute with the coefficient map, since both composites agree on constant sections
+(prop-weil-pbc-proetale-constant-ring-map). Inverse image of the restricted action is
+thus the restricted inverse-image action. Extension along the coefficient identifications
+only transports this action. Restriction to a covering object also commutes sectionwise.
+3. The constant module presheaf has the same underlying abelian presheaf after scalar
+restriction. Its abelian sheafification is unchanged (lem-cbc-sieve-module-sheafification),
+and the restricted scalar actions agree on constant sections. Thus the same strata and
+covers trivialize the restricted sheaf, with the scalar-restricted constant modules.
+4. Geometric stalks retain their underlying sets. A finitely generated module over finite
+B is a quotient of a finite power of B, hence finite. Its restriction is generated over A
+by the finite list of all its elements. This proves constructibility without surjectivity.
+5. Exact descent (lem-weil-pbc-exact-functor-derived-factorization) gives the existing
+termwise mapDerivedCategory on unbounded complexes. The exact-functor homology comparison
+(lem-weil-pbc-exact-functor-complex-cohomology) descends naturally through localization,
+giving the displayed natural isomorphisms in every degree, without a resolution bound.
+6. Combine that comparison with reflection of zero objects. Each vanishing degree is
+preserved and reflected; thus the same lower and upper bounds work. Constructibility of
+all cohomology sheaves follows from steps 2--4. This proves bounded constructibility. -/
+theorem proEtaleFiniteScalarRestriction_constructible
+    (X : Scheme.{u}) [IsNoetherian X]
+    (A B : Type u) [CommRing A] [CommRing B] [Finite A] [Finite B] (a : A →+* B) :
+    PreservesFiniteLimits (proEtaleRingRestrictScalars
+          ((constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).map
+            (CommRingCat.ofHom a.ulift.{u + 1, u + 1}))) ∧
+    PreservesFiniteColimits (proEtaleRingRestrictScalars
+          ((constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).map
+            (CommRingCat.ofHom a.ulift.{u + 1, u + 1}))) ∧
+    (∀ F : proEtaleRingModules X (proEtaleConstantRing X B),
+      IsConstructibleProEtaleModuleSheaf X B F →
+      IsConstructibleProEtaleModuleSheaf X A
+        ((proEtaleRingRestrictScalars
+          ((constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).map
+            (CommRingCat.ofHom a.ulift.{u + 1, u + 1}))).obj F)) ∧
+    (∀ q : ℤ, Nonempty
+      ((@Functor.mapDerivedCategory _ _ _ _ _ _ _ _
+          (proEtaleRingRestrictScalars
+            ((constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).map
+              (CommRingCat.ofHom a.ulift.{u + 1, u + 1}))) _
+          (proEtaleRingRestrictScalars_preservesFiniteLimits _)
+          (proEtaleRingRestrictScalars_preservesFiniteColimits _)) ⋙
+          DerivedCategory.homologyFunctor (proEtaleRingModules X (proEtaleConstantRing X A)) q ≅
+        DerivedCategory.homologyFunctor (proEtaleRingModules X (proEtaleConstantRing X B)) q ⋙
+          proEtaleRingRestrictScalars
+          ((constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).map
+            (CommRingCat.ofHom a.ulift.{u + 1, u + 1})))) ∧
+    (∀ (L : DerivedCategory (proEtaleRingModules X (proEtaleConstantRing X B))) (q : ℤ),
+      IsZero ((DerivedCategory.homologyFunctor
+        (proEtaleRingModules X (proEtaleConstantRing X A)) q).obj
+          ((@Functor.mapDerivedCategory _ _ _ _ _ _ _ _
+          (proEtaleRingRestrictScalars
+            ((constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).map
+              (CommRingCat.ofHom a.ulift.{u + 1, u + 1}))) _
+          (proEtaleRingRestrictScalars_preservesFiniteLimits _)
+          (proEtaleRingRestrictScalars_preservesFiniteColimits _)).obj L)) ↔
+      IsZero ((DerivedCategory.homologyFunctor
+        (proEtaleRingModules X (proEtaleConstantRing X B)) q).obj L)) ∧
+    (∀ L : DerivedCategory (proEtaleRingModules X (proEtaleConstantRing X B)),
+      DerivedCategory.TStructure.t.bounded L →
+      (∀ q : ℤ, IsConstructibleProEtaleModuleSheaf X B
+        ((DerivedCategory.homologyFunctor
+          (proEtaleRingModules X (proEtaleConstantRing X B)) q).obj L)) →
+      DerivedCategory.TStructure.t.bounded
+        ((@Functor.mapDerivedCategory _ _ _ _ _ _ _ _
+          (proEtaleRingRestrictScalars
+            ((constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).map
+              (CommRingCat.ofHom a.ulift.{u + 1, u + 1}))) _
+          (proEtaleRingRestrictScalars_preservesFiniteLimits _)
+          (proEtaleRingRestrictScalars_preservesFiniteColimits _)).obj L) ∧
+      ∀ q : ℤ, IsConstructibleProEtaleModuleSheaf X A
+        ((DerivedCategory.homologyFunctor
+          (proEtaleRingModules X (proEtaleConstantRing X A)) q).obj
+            ((@Functor.mapDerivedCategory _ _ _ _ _ _ _ _
+          (proEtaleRingRestrictScalars
+            ((constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).map
+              (CommRingCat.ofHom a.ulift.{u + 1, u + 1}))) _
+          (proEtaleRingRestrictScalars_preservesFiniteLimits _)
+          (proEtaleRingRestrictScalars_preservesFiniteColimits _)).obj L))) := by
+  let aX := (constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).map
+    (CommRingCat.ofHom a.ulift.{u + 1, u + 1})
+  let R := proEtaleRingRestrictScalars aX
+  let : PreservesFiniteLimits R := proEtaleRingRestrictScalars_preservesFiniteLimits aX
+  let : PreservesFiniteColimits R := proEtaleRingRestrictScalars_preservesFiniteColimits aX
+  let forgetA := SheafOfModules.toSheaf.{u + 1}
+    ((sheafCompose (ProEt.topology X)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (proEtaleConstantRing X A))
+  let : (R ⋙ forgetA).Faithful := inferInstanceAs (SheafOfModules.toSheaf.{u + 1}
+    ((sheafCompose (ProEt.topology X)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+        (proEtaleConstantRing X B))).Faithful
+  let : R.Faithful := Functor.Faithful.of_comp R forgetA
+  have hc (F : proEtaleRingModules X (proEtaleConstantRing X B))
+      (hF : IsConstructibleProEtaleModuleSheaf X B F) :
+      IsConstructibleProEtaleModuleSheaf X A (R.obj F) := by
+    obtain ⟨S, hn, hS⟩ := hF
+    exact ⟨S, hn, proEtaleFiniteScalarRestriction_sameStratification X A B a F S hS⟩
+  let D := R.mapDerivedCategory.{u + 2, u + 2}
+  let e (q : ℤ) : DerivedCategory.homologyFunctor
+      (proEtaleRingModules X (proEtaleConstantRing X B)) q ⋙ R ≅
+      D ⋙ DerivedCategory.homologyFunctor
+        (proEtaleRingModules X (proEtaleConstantRing X A)) q :=
+    R.mapDerivedCategoryHomologyFunctorIso.{u + 2, u + 2} q
+  have hz (L : DerivedCategory (proEtaleRingModules X (proEtaleConstantRing X B))) (q : ℤ) :
+      IsZero ((DerivedCategory.homologyFunctor
+        (proEtaleRingModules X (proEtaleConstantRing X A)) q).obj (D.obj L)) ↔
+      IsZero ((DerivedCategory.homologyFunctor
+        (proEtaleRingModules X (proEtaleConstantRing X B)) q).obj L) := by
+    constructor
+    · intro h
+      have h' := h.of_iso ((e q).app L)
+      rw [IsZero.iff_id_eq_zero] at h' ⊢
+      exact R.map_injective (by simpa using h')
+    · intro h
+      exact (R.map_isZero h).of_iso ((e q).symm.app L)
+  refine ⟨proEtaleRingRestrictScalars_preservesFiniteLimits aX,
+    proEtaleRingRestrictScalars_preservesFiniteColimits aX, hc,
+    fun q ↦ ⟨(e q).symm⟩, hz, ?_⟩
+  intro L hL hC
+  refine ⟨?_, fun q ↦ constructibleOfIso X A ((e q).app L) (hc _ (hC q))⟩
+  obtain ⟨⟨l, hl⟩, ⟨r, hr⟩⟩ := hL
+  constructor
+  · refine ⟨l, (DerivedCategory.isGE_iff _ l).2 fun q hq ↦ ?_⟩
+    exact (hz L q).2 ((DerivedCategory.isGE_iff L l).1 hl q hq)
+  · refine ⟨r, (DerivedCategory.isLE_iff _ r).2 fun q hq ↦ ?_⟩
+    exact (hz L q).2 ((DerivedCategory.isLE_iff L r).1 hr q hq)
+
 end AlgebraicGeometry.Scheme

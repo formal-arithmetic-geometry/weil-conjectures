@@ -96,12 +96,12 @@ private theorem exactSquare_fac
       G.mapDerivedCategoryFactors.hom.app ((R.mapHomologicalComplex (.up ℤ)).obj K) ≫
       DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex e.hom (.up ℤ)).app K) := by
   have hc := mapDerivedCategoryCompIso_hom_app_factors R G K
-  have hi : (mapDerivedCategoryCompIso R G).inv.app (DerivedCategory.Q.obj K) ≫
+  have hi : (mapDerivedCategoryCompIso R G).hom.app (DerivedCategory.Q.obj K) ≫
       (R ⋙ G).mapDerivedCategoryFactors.hom.app K =
     G.mapDerivedCategory.map (R.mapDerivedCategoryFactors.hom.app K) ≫
       G.mapDerivedCategoryFactors.hom.app ((R.mapHomologicalComplex (.up ℤ)).obj K) := by
-    apply (cancel_epi ((mapDerivedCategoryCompIso R G).hom.app (DerivedCategory.Q.obj K))).mp
-    rw [Iso.hom_inv_id_app_assoc]
+    apply (cancel_epi ((mapDerivedCategoryCompIso R G).inv.app (DerivedCategory.Q.obj K))).mp
+    rw [Iso.inv_hom_id_app_assoc]
     exact hc.symm
   simp only [mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
     NatTrans.comp_app, Category.assoc]
@@ -192,9 +192,9 @@ def derivedImmersionOpenPullbackComparison (A : Type (u + 1)) [CommRing A] [Fini
         (comparisonUpperStar (ModuleCat.{u + 1} A) U).mapDerivedCategory ≅
       (comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory ⋙
         (openImmersionRestriction (ModuleCat.{u + 1} A) j).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (openComparisonRestrictionIso A j) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- Termwise descent of the specified canonical open extension comparison.
 Source: Stacks Tags 09AF and 015F
@@ -205,10 +205,10 @@ def derivedImmersionOpenExtensionComparison (A : Type (u + 1)) [CommRing A] [Fin
         (comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory ≅
       (comparisonUpperStar (ModuleCat.{u + 1} A) U).mapDerivedCategory ⋙
         (openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso
       (openImmersionLowerShriekComparisonUpperStarIso (ModuleCat.{u + 1} A) j) ≪≫
-        Functor.mapDerivedCategoryCompIso _ _
+        (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- Etale closed direct image is exact; left exactness is already supplied by its
 right-adjoint structure. Source: Stacks Tags 04CA and 08M3

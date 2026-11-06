@@ -398,10 +398,10 @@ private theorem constantRlimUnit_eq (V : Scheme.{t}) :
   apply (completedConstantRlimUnit_exists d V).unique
     (completedConstantRlimUnit_exists d V).exists.choose_spec
   intro P
-  simp only [DerivedCategory.quotientCompQhIso,
+  simp only [Functor.rightDerivedFunctorUnitQ, DerivedCategory.quotientCompQhIso,
     HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift_hom,
     Quotient.lift.isLift_inv]
-  erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.id_comp]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
   exact exactLeftDerivedUnit (completedTowerConstant d V) lim constLimAdj P
 
 private instance cbcOrdinaryUniversal :
