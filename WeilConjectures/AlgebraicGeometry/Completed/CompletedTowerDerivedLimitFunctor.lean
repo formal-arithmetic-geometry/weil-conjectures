@@ -187,21 +187,12 @@ theorem completedConstantRlimUnit_exists (T : Scheme.{u}) :
       (Y := completedDerivedConstant d T ⋙ completedTowerRlim d T) τ
   refine ⟨η, ?_, ?_⟩
   · intro C
-    simp only [DerivedCategory.quotientCompQhIso,
-      HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift_hom,
-      Quotient.lift.isLift_inv]
-    erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.id_comp]
     exact NatTrans.congr_app hη C
   · intro η' hη'
     apply Localization.natTrans_ext Q
       (HomologicalComplex.quasiIso (pbcModules T (pbcAdicCompletion T d)) (.up ℤ))
     intro C
-    have hC := hη' C
-    simp only [DerivedCategory.quotientCompQhIso,
-      HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift_hom,
-      Quotient.lift.isLift_inv] at hC
-    erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.id_comp] at hC
-    exact hC.trans (NatTrans.congr_app hη C).symm
+    exact (hη' C).trans (NatTrans.congr_app hη C).symm
 
 /-- The canonical map K → Rlim ΔK, defined by its unique representative normalization.
 Source: blueprint order 1242 (blueprint: prop-weil-pbc-rlim-functoriality). -/
