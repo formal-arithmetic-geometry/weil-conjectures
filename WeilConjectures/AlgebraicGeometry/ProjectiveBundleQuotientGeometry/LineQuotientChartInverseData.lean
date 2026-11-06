@@ -40,6 +40,13 @@ namespace AlgebraicGeometry.ProjectiveBundleQuotientGeometry
 
 open Scheme.Modules
 
+local instance instModuleRestrictedSections (T : Scheme.{u}) (L : T.Modules)
+    {U V : T.Opens} (h : V ≤ U) :
+    Module Γ(T, V)
+      ((ModuleCat.restrictScalars (T.ringCatSheaf.obj.map (homOfLE h).op).hom).obj
+        (L.val.obj (op V))) :=
+  inferInstanceAs (Module Γ(T, V) (L.val.obj (op V)))
+
 /-- Pull back the quotient using the section-normalized composite-pullback comparison.
 Source: Stacks, Constructions, Tag 01OA
 (blueprint: def-trf-line-quotient-chart-inverse-data). -/

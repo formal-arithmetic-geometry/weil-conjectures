@@ -88,7 +88,7 @@ private def derivedPullbackScalarIso {X Y : Scheme.{u}} (f : X ⟶ Y)
   let H := proEtaleRingModulePullback f R
     ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R) (Iso.refl _)
   let ei : F ⋙ G ≅ H := pullbackScalarIso f R S c ≪≫ (rawPullbackIso f R).symm
-  exact (Functor.mapDerivedCategoryCompIso F G).symm ≪≫
+  exact Functor.mapDerivedCategoryCompIso F G ≪≫
     Functor.mapDerivedCategoryNatIso ei
 
 

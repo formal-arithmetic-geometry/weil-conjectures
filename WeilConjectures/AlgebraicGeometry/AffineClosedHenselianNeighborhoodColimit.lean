@@ -6,6 +6,7 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 import WeilConjectures.AlgebraicGeometry.AffineClosedHenselianRingPresentation

@@ -252,7 +252,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
 import Mathlib.CategoryTheory.Triangulated.Yoneda
 import Mathlib.CategoryTheory.Abelian.DiagramLemmas.Four
 import Mathlib.Algebra.Homology.HomologicalComplexLimits
-import WeilConjectures.AlgebraicGeometry.CondensedLfpHomContinuity
 import WeilConjectures.AlgebraicGeometry.CondensedFiniteFreeDerivedHom
 import WeilConjectures.AlgebraicGeometry.Condensed.CondensedQcqsPushforwardContinuitySupplement
 import WeilConjectures.AlgebraicGeometry.CondensedFiniteFreeInternalHomColimits
@@ -290,7 +289,6 @@ import Mathlib.CategoryTheory.Abelian.Basic
 import WeilConjectures.Algebra.Homology.FunctorialObjectResolution
 import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 import Mathlib.Algebra.Homology.SingleHomology
-import WeilConjectures.AlgebraicGeometry.CondensedClosedCostalkDerivedContinuity
 import WeilConjectures.AlgebraicGeometry.CondensedOpenClosedRecollement
 import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TriangleShift
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHomology
@@ -441,6 +439,12 @@ theorem algClRestriction_indConstructible
     (leOfHom (IsFiltered.leftToMax E F)).trans (leOfHom (ULift.down i).hom)
   have hf (i : I) : F ≤ H.obj i :=
     (leOfHom (IsFiltered.rightToMax E F)).trans (leOfHom (ULift.down i).hom)
+  let : HasZeroMorphisms
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)) :=
+    inferInstance
+  let : HasZeroMorphisms
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ F)) :=
+    inferInstance
   let C := (HomologicalComplex.single _ (.up ℤ) 0).obj B
   let c := (HomologicalComplex.eval _ (.up ℤ) 0).mapCocone
     (coefficientComplexCocone X ℓ C H he hf)
