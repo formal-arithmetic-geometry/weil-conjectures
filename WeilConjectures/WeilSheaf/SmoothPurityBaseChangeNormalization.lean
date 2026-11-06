@@ -145,7 +145,7 @@ lemma geometricFiberWeilRightDerivedLowerStarIso_forget
     (rightDerivedLowerStarBaseChangeIso Λ
       (Scheme.Hom.isPullback_geometricFiberMap f h).flip).hom.app K =
       (Functor.mapDerivedCategoryCompIso (geometricFiberWeilLowerStar Λ t)
-        (Endofunctor.IsoAlgebra.forget _)).hom.app ((lowerStar Λ f).rightDerivedFunctor.obj K) ≫
+        (Endofunctor.IsoAlgebra.forget _)).inv.app ((lowerStar Λ f).rightDerivedFunctor.obj K) ≫
       (Endofunctor.IsoAlgebra.forget _).mapDerivedCategory.map
         ((geometricFiberWeilRightDerivedLowerStarIso hc).inv.app K) ≫
       (Endofunctor.IsoAlgebra.rightDerivedFunctorMapOfNatIsoCompForgetIso _
@@ -153,7 +153,7 @@ lemma geometricFiberWeilRightDerivedLowerStarIso_forget
           ((geometricFiberWeilLowerStar Λ s).mapDerivedCategory.obj K) ≫
       (lowerStar Λ (Scheme.Hom.geometricFiberMap f h)).rightDerivedFunctor.map
         ((Functor.mapDerivedCategoryCompIso (geometricFiberWeilLowerStar Λ s)
-          (Endofunctor.IsoAlgebra.forget _)).inv.app K) := by
+          (Endofunctor.IsoAlgebra.forget _)).hom.app K) := by
   rw [rightDerivedLowerStarBaseChangeIso_hom_app_eq_derivedBaseChange,
     derivedBaseChange_eq_rightDerivedFunctorCommIso Λ
       (Scheme.Hom.isPullback_geometricFiberMap f h).flip]
