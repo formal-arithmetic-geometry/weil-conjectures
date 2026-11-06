@@ -172,11 +172,21 @@ jobs:
       # scheduler runs on Lean's thread pool, which LEAN_NUM_THREADS sizes. `--wfail`: modules compiled here must be
       # warning-free (master's full from-scratch build is, and cached modules come from it).
       # LAKE_NO_CACHE: the build only uses what the fetch step brought; `-o` lists its outputs.
+      # Artifact cache only when the build is uploaded (master): with it on, Lake files every
+      # bulk-restored module's outputs into the cache again (~23 GB of copies; 17 min on
+      # big-server), which `-o` needs and nothing else does. Off, it only checks the restored
+      # traces: on kuafu 128 s, nothing compiled.
       - name: Build
         env:
           LEAN_NUM_THREADS: ${{ needs.pick-runner.outputs.threads }}
           LAKE_NO_CACHE: "true"
-        run: lake build --wfail -o "$RUNNER_TEMP/lake-map.jsonl"
+          UPLOAD: ${{ github.ref == 'refs/heads/master' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch') }}
+        run: |
+          if [ "$UPLOAD" = true ]; then
+            lake build --wfail -o "$RUNNER_TEMP/lake-map.jsonl"
+          else
+            LAKE_ARTIFACT_CACHE=false lake build --wfail
+          fi
 
       # Same check as `.orchestra/validation.sh`: every tracked `.lean` file under
       # `WeilConjectures/` must be imported by `WeilConjectures.lean`, otherwise it is silently
