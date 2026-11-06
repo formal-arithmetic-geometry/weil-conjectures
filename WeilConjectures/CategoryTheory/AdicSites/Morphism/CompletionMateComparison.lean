@@ -19,6 +19,8 @@ public import WeilConjectures.CategoryTheory.RingedStrictTowerHomotopyLimit
 public import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import Mathlib.CategoryTheory.Triangulated.Functor
 public import Mathlib.Algebra.Homology.Functor
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
