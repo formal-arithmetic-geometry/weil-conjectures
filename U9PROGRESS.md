@@ -380,3 +380,9 @@
 - This avoids the duplicate Sheaf.H.δ imported by Integral.BaseChange's two dependency paths.
 - No declaration statements or proofs changed. Next: ucheck-bump for both modules, then downstream.
 - Notes: /home/ubuntu/u9/bz/FIXES-BZ1020.md. No local Lean/Lake or proof shortcuts.
+
+- Assigned leaf and Integral.Exact passed ucheck-bump at b14423fd7ba099534d9dbfb1479f831571f6e624:
+  rc=0, built=25, failed=0, 7174 jobs. Leaf rebuilt in 4.6 seconds; source unchanged.
+- Leaf log: /home/ubuntu/u9/bz/BUILD-BZ1020-leaf-green-full.log.
+- Next: IntegralBaseChange and CurveTestDatum downstream; the latter gets the known
+  umbrella-import removal. No overlapping current owner found for either module.
