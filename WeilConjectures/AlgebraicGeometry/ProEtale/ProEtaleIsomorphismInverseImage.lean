@@ -143,17 +143,31 @@ theorem existsUnique_proEtaleIsoInverseImageIdentification {X Y : Scheme.{u}}
   let e := Functor.isoWhiskerRight (a.leftAdjointUniq b) (sheafToPresheaf (ProEt.topology X) D)
   refine ⟨e, ?_, ?_⟩
   · intro F U
-    simp? [e, Adjunction.leftAdjointUniq, b, isoSheafAdjunction,
-      proEtaleIsoCommaArrow, a, Adjunction.sheafPushforwardContinuous,
-      Adjunction.whiskerLeft, Adjunction.op]
+    simp only [Functor.comp_obj, ObjectProperty.ι_obj, Functor.whiskeringLeft_obj_obj,
+      Functor.op_obj, Adjunction.leftAdjointUniq, isoSheafAdjunction,
+      Adjunction.sheafPushforwardContinuous, Functor.id_obj, Adjunction.whiskerLeft, Adjunction.op,
+      Functor.isoWhiskerRight_inv, Iso.symm_inv, conjugateIsoEquiv_symm_apply_hom, Iso.refl_hom,
+      Functor.whiskerRight_app, conjugateEquiv_symm_apply_app, NatTrans.id_app,
+      CategoryTheory.Functor.map_id, Category.id_comp, ObjectProperty.ι_map,
+      ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
+      Functor.sheafPushforwardContinuous_map_hom_app, Functor.associator_inv_app, NatTrans.op_app,
+      MorphismProperty.Over.mapPullbackAdj_unit_app, Functor.leftUnitor_hom_app, Category.comp_id,
+      proEtaleIsoCommaArrow, e, a, b]
     erw [Category.id_comp]
   · intro e' h
     apply Iso.ext_inv
     ext F U
     exact (h F U.unop).trans (by
-      simp? [e, Adjunction.leftAdjointUniq, b, isoSheafAdjunction,
-        proEtaleIsoCommaArrow, a, Adjunction.sheafPushforwardContinuous,
-        Adjunction.whiskerLeft, Adjunction.op]
+      simp only [Functor.comp_obj, ObjectProperty.ι_obj, Functor.whiskeringLeft_obj_obj, op_unop,
+        Functor.op_obj, Functor.id_obj, proEtaleIsoCommaArrow,
+        MorphismProperty.Over.mapPullbackAdj_unit_app, Adjunction.leftAdjointUniq,
+        isoSheafAdjunction, Adjunction.sheafPushforwardContinuous, Adjunction.whiskerLeft,
+        Adjunction.op, Functor.isoWhiskerRight_inv, Iso.symm_inv, conjugateIsoEquiv_symm_apply_hom,
+        Iso.refl_hom, Functor.whiskerRight_app, conjugateEquiv_symm_apply_app, NatTrans.id_app,
+        CategoryTheory.Functor.map_id, Category.id_comp, ObjectProperty.ι_map,
+        ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
+        Functor.sheafPushforwardContinuous_map_hom_app, Functor.associator_inv_app, NatTrans.op_app,
+        Functor.leftUnitor_hom_app, Category.comp_id, e, a, b]
       erw [Category.id_comp])
 
 /-- The canonical section identification, natural both in the sheaf and in the site object.
