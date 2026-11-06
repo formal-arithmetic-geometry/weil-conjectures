@@ -544,7 +544,8 @@ private theorem pullComparison_mate_isIso {X Y : AlgebraicGeometry.Scheme.{u}} (
   have := CompletedConstantReduction.constant_additive X (AdicCompletion d.ideal A)
   have := (constantAdicFinite_constant_exact X (AdicCompletion d.ideal A)).1
   have := (constantAdicFinite_constant_exact X (AdicCompletion d.ideal A)).2
-  let c := (constantAdicFiniteCone X d).π.app (op n)
+  let c : adicLisseConstantRing X (AdicCompletion d.ideal A) ⟶
+      (pbcAdicRings X d).obj (op n) := (constantAdicFiniteCone X d).π.app (op n)
   let kD := Functor.mapDerivedCategorySquareIso (ordinaryComparison X d n)
   let kp := proEtaleRingRestrictionDerivedPullback g
     (adicLisseConstantRing X (AdicCompletion d.ideal A))
