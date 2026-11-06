@@ -53,7 +53,7 @@ private lemma exact_adj_comp
     (a : L₁ ⊣ R₁) (b : L₂ ⊣ R₂) :
     (a.comp b).mapDerivedCategoryAdjunction =
       ((a.mapDerivedCategoryAdjunction.comp b.mapDerivedCategoryAdjunction
-        ).ofNatIsoLeft (Functor.mapDerivedCategoryCompIso L₁ L₂).symm
+        ).ofNatIsoLeft (Functor.mapDerivedCategoryCompIso L₁ L₂)
           ).ofNatIsoRight (Functor.mapDerivedCategoryCompIso R₂ R₁).symm := by
   apply Adjunction.ext
   apply exact_unit_ext (C := C)
@@ -67,7 +67,7 @@ private lemma exact_adj_comp
       (R₂ ⋙ R₁).mapDerivedCategoryFactorsh.hom.app KL)]
   simp only [Category.assoc]
   rw [(a.comp b).mapDerivedCategoryAdjunction_unit_app_fac K]
-  have hL : (Functor.mapDerivedCategoryCompIso L₁ L₂).inv.app
+  have hL : (Functor.mapDerivedCategoryCompIso L₁ L₂).hom.app
       (DerivedCategory.Qh.obj K) ≫ (L₁ ⋙ L₂).mapDerivedCategoryFactorsh.hom.app K =
       L₂.mapDerivedCategory.map (L₁.mapDerivedCategoryFactorsh.hom.app K) ≫
         L₂.mapDerivedCategoryFactorsh.hom.app ((L₁.mapHomotopyCategory (.up ℤ)).obj K) := by
@@ -232,7 +232,7 @@ private lemma open_compare_comp
   let b := derivedOpenImmersionLowerShriekUpperStarAdjunction B i
   let c := derivedOpenImmersionLowerShriekUpperStarAdjunction B (k ≫ i)
   let r := Functor.mapDerivedCategoryNatIso (upperStarComp B k i) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
   let e := mapDerivedCategoryOpenImmersionLowerShriekComp B k i
   have hu := unit_conjugateEquiv (a.comp b) c e.hom F
   have he := derived_open_comp_conjugate B k i

@@ -545,7 +545,7 @@ private theorem constantEvaluation_factors
   rw [hi]
   erw [AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.factorsh_hom]
   have h := Functor.mapDerivedCategoryCompIso_hom_app_factors D E J
-  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso D E).hom.app
+  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso D E).inv.app
     (DerivedCategory.Q.obj J))).mp
   simp only [Iso.hom_inv_id_app_assoc]
   erw [Category.id_comp]
