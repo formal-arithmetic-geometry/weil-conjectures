@@ -291,7 +291,8 @@ theorem lisse_tower_algebraic_derived_presentation
     (towerTransitionEndomorphism (K := fun n : ℕ ↦ (R n).mapDerivedCategory.obj (K n)) s)
   have hT : IsDerivedLimitTriangle
       (K := fun n : ℕ ↦ (R n).mapDerivedCategory.obj (K n)) s E p δ := hE
-  have hrec := DerivedCategory.pseudoCoherent_normalizedAlgebraTower J K t hnorm s
+  have hrec := DerivedCategory.pseudoCoherent_normalizedAlgebraTower.{u + 1, 0, u + 1}
+    J K t hnorm s
     (fun _ ↦ rfl) E p δ hT ⟨b, fun i hi ↦ hbK 0 i (hbounded 0 i (Or.inr hi))⟩ (hfK 0)
   have hfin : ∀ (n : ℕᵒᵖ) (i : ℤ),
       Finite ((DerivedCategory.homologyFunctor (ModuleCat.{u + 1} C) i).obj (D.obj n)) := by
