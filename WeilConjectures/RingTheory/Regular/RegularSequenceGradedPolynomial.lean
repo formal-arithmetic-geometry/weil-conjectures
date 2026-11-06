@@ -162,7 +162,7 @@ private theorem homogeneous_lift {R : Type u} [CommRing R] {c : ℕ} (f : Fin c 
   ext d
   rw [MvPolynomial.coeff_map, MvPolynomial.coeff_homogeneousComponent]
   split_ifs with h
-  · simpa only [MvPolynomial.coeff_map] using congrArg (MvPolynomial.coeff d) hq
+  · simpa only [MvPolynomial.coeff_map] using congrArg (fun p ↦ p.coeff d) hq
   · rw [map_zero]
     exact (hp.coeff_eq_zero h).symm
 
@@ -229,8 +229,8 @@ private theorem homogeneous_kernel {R : Type u} [CommRing R] {c : ℕ} (f : Fin 
         (Ideal.span (Set.range f) ^ (n + 1)))).mp hzero
   rw [← hqp]
   ext d
-  simpa only [MvPolynomial.coeff_map, AddMonoidAlgebra.coeff_zero] using
-    Ideal.Quotient.eq_zero_iff_mem.mpr (hrel n q hq hmem d)
+  rw [MvPolynomial.coeff_map]
+  exact Ideal.Quotient.eq_zero_iff_mem.mpr (hrel n q hq hmem d)
 
 set_option backward.isDefEq.respectTransparency false in
 private theorem bijective_of_relation {R : Type u} [CommRing R] {c : ℕ} (f : Fin c → R)
@@ -342,7 +342,7 @@ private theorem basis_of_bijective {R : Type u} [CommRing R] {c : ℕ} (f : Fin 
       rw [← expansion_map, ← expansion_map, hb']
       rw [expansion_map, ha, hp]
     ext d
-    simpa only [expansion_coeff] using congrArg (MvPolynomial.coeff d.val) he
+    simpa only [expansion_coeff] using congrArg (fun p ↦ p.coeff d.val) he
 
 set_option backward.isDefEq.respectTransparency false in
 private theorem relation_of_zero_relation {R : Type u} [CommRing R] {c : ℕ} (f : Fin c → R)
@@ -374,7 +374,7 @@ private theorem relation_of_zero_relation {R : Type u} [CommRing R] {c : ℕ} (f
   have hh := hz n (p - q) (hp.sub hq) (by rw [map_sub, he, sub_self])
   intro d
   have hd : p.coeff d - q.coeff d ∈ J := by
-    simpa only [MvPolynomial.coeff_sub] using hh d
+    simpa only [AddMonoidAlgebra.coeff_sub, Finsupp.sub_apply] using hh d
   simpa only [sub_add_cancel] using J.add_mem hd (hc d)
 
 /-- A regular sequence has polynomial associated graded algebra, including the formula
