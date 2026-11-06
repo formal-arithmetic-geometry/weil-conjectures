@@ -142,7 +142,7 @@ private theorem sections_exact (X : Scheme.{u})
   let S := ShortComplex.moduleCatMk f.hom g.hom hfg.linearMap_comp_eq_zero
   have hS : S.Exact := ModuleCat.shortComplex_exact S hfg
   have : Epi S.g := (ModuleCat.epi_iff_surjective _).2 hg
-  have h := ((Functor.preservesFiniteColimits_tfae (sections X A U)).out 3 1 rfl rfl).1
+  have h := ((Functor.preservesFiniteColimits_tfae (sections X A U)).out 4 2 rfl rfl).1
     inferInstance S ⟨hS, inferInstance⟩
   exact (ShortComplex.ShortExact.moduleCat_exact_iff_function_exact _).1 h.1
 
@@ -337,7 +337,7 @@ private theorem sections_exact_all (X : Scheme.{u})
     Function.Exact ((sections X A U).map f) ((sections X A U).map g) := by
   let S := ShortComplex.moduleCatMk f.hom g.hom hfg.linearMap_comp_eq_zero
   have hS : S.Exact := ModuleCat.shortComplex_exact S hfg
-  have h := ((Functor.exact_tfae (sections X A U)).out 3 1 rfl rfl).1
+  have h := ((Functor.exact_tfae (sections X A U)).out 4 2 rfl rfl).1
     ⟨inferInstance, inferInstance⟩ S hS
   exact (ShortComplex.ShortExact.moduleCat_exact_iff_function_exact _).1 h
 
