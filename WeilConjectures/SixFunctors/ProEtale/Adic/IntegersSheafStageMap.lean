@@ -64,8 +64,8 @@ noncomputable def stageBiadd (F : FiniteIntermediateFieldOver l E.1) :
   AddMonoidHom.mk' (fun o ↦ (Φ.map (padicIntegersSheafMulOfLE T (E := E) (F := F.1) F.2
       (integersSubalgebraFamilyEquiv E F o))).hom.comp θ.toAddMonoidHom) fun o o' ↦ by
     ext a
-    simp only [map_add, padicIntegersSheafMulOfLE_add, Functor.map_add, AddCommGrpCat.hom_add,
-      AddMonoidHom.add_apply, AddMonoidHom.coe_comp, Function.comp_apply]
+    simp only [RingEquiv.map_add, padicIntegersSheafMulOfLE_add, Functor.map_add,
+      AddCommGrpCat.hom_add, AddMonoidHom.add_apply, AddMonoidHom.coe_comp, Function.comp_apply]
 
 include hθ in
 lemma stageBiadd_balanced (F : FiniteIntermediateFieldOver l E.1) (r : integers l E.1)
