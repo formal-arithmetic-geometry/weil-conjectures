@@ -689,6 +689,7 @@ private theorem qcqsFiniteFreeHomContinuity
     condensed_qcqs_globalSections_continuity Λ X M a (fun i r hr ↦ by
       let : CochainComplex.IsStrictlyGE (M.obj i) a := hb i
       exact CochainComplex.isZero_of_isGE _ a r hr) n
+  change IsIso (colimit.desc (M ⋙ T) (T.mapCocone (condensedContinuityCocone M a))) at hT
   have hdesc : IsIso (colimit.desc (M ⋙ T) (T.mapCocone (colimit.cocone M))) :=
     comparison_of_colimitCocone M (condensedContinuityCocone M a) (colimit.cocone M)
       (canonicalContinuityIsColimit M a hb) (colimit.isColimit M) T
@@ -745,6 +746,9 @@ private theorem lisseRawCover
 end AlgebraicGeometry.ProEtale
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+attribute [local instance] constructibleExtContinuityStratumHasZeroMorphisms
+attribute [local instance 2000] moduleColimits complexColimits
 
 set_option linter.unusedVariables false in
 -- The preserved statement includes admissibility; the proof works for every coefficient ring.
