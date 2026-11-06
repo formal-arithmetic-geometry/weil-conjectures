@@ -306,12 +306,10 @@ status:
     Rationality of the zeta function (`zetaSeries_rational`) and the full Weil
     conjectures (`weil_conjectures`: factorisation, functional equation, integrality,
     Riemann hypothesis), plus the lean-eval formulation in terms of point counts and
-    multisets of Frobenius eigenvalues. The `master` branch holds the reviewed
-    statements and the reviewed part of the library. The complete AI-assisted
-    development lives on the integration branches `slopmaster2` and
-    `sheaf/weil-conjectures-sorry-free` and is merged into `master` after review.
-  # Files containing `sorry` on slopmaster2 91ebbc09a7, all outside the dependency
-  # closure of the main theorems (checked with `#print axioms`); none is used below.
+    multisets of Frobenius eigenvalues. The complete development is on `master`; its
+    Lean code is identical to the independently verified commit 91ebbc09a7.
+  # Files containing `sorry`, all outside the dependency closure of the main theorems
+  # (checked with `#print axioms`); none is used below.
   sorry_count: 208
   sorry_in_definitions: 0
   axioms: ["propext", "Classical.choice", "Quot.sound"]
@@ -324,13 +322,13 @@ status:
       literature_dependencies: []
     - declaration: "AlgebraicGeometry.Scheme.weil_conjectures"
       file: "WeilConjectures/Statement.lean"
-      sorry_count: 0   # verified on slopmaster2 91ebbc09a7
+      sorry_count: 0   # verified on 91ebbc09a7
       axioms: ["propext", "Classical.choice", "Quot.sound"]
       comparator_config: "Comparator/config.json"
       literature_dependencies: []
     - declaration: "LeanEval.AlgebraicGeometry.WeilConjectures.weil_conjectures"
       file: "WeilConjectures/LeanEval/WeilConjectures.lean"
-      sorry_count: 0   # verified on slopmaster2 91ebbc09a7
+      sorry_count: 0   # verified on 91ebbc09a7
       axioms: ["propext", "Classical.choice", "Quot.sound"]
       literature_dependencies: []
 
@@ -358,9 +356,9 @@ automation:
   spend_usd: "approximately 80,000 USD"
   notes: >-
     Development started in July 2026. The repository history records over 12,000
-    commits, most authored by AI agents. All work landed through pull requests to the
-    integration branch `slopmaster2`, each built with `--wfail` and reviewed by an AI
-    review agent before merging.
+    commits, most authored by AI agents. All work landed through pull requests to an
+    integration branch, each built with `--wfail` and reviewed by an AI review agent
+    before merging. The integration branch was merged into `master` on 2026-11-06.
 
 fidelity:
   divergences: >-
@@ -386,11 +384,19 @@ review:
     degenerate or vacuous formulations. The proof bodies themselves have not been
     reviewed line by line by humans: correctness relies on the Lean kernel, the
     Comparator check of the fixed challenge statements, and `#print axioms`. The sorry-free
-    development (slopmaster2 91ebbc09a7) was checked by its producing team (Bin Wu’s
-    cluster) and independently rebuilt and audited on our own infrastructure: `#print
-    axioms` of all main results shows only propext, Classical.choice and Quot.sound, no
+    development (commit 91ebbc09a7, whose Lean code `master` contains unchanged) was
+    built by its producing team (Bin Wu’s cluster) and independently rebuilt from scratch
+    and audited on our own infrastructure: `#print axioms` of all main results shows only
+    propext, Classical.choice and Quot.sound, no
     `native_decide`/`implemented_by`/`extern`/`skipKernelTC` is used, and the lean-eval
     statement is verbatim.
+    External kernel check: con-ron (`con-ron --verified`, from Lean v4.35.0-rc3) accepted
+    all 301418 declarations of the lean4export 3.1.0 export of
+    `WeilConjectures.zetaSeries_rational` and `WeilConjectures.weil_conjectures`, run on
+    two commits: 8c7f1719cfd4ba1e2e5f3876e86910362faf61e8 (branch
+    `sheaf/final-candidate`) and its declaration-pruned variant 8a9124e026
+    (`sheaf/final-candidate-pruned`). 8c7f1719cf is an earlier release candidate and an
+    ancestor of 91ebbc09a7; con-ron has not been run on 91ebbc09a7 itself.
 
 alignment:
   namespace: "AlgebraicGeometry"
@@ -406,16 +412,18 @@ alignment:
       lean: "AlgebraicGeometry.Scheme.weil_conjectures"
       module: "WeilConjectures/Statement.lean"
       status: "proved"
-      note: "sorry-free; independently verified on slopmaster2 91ebbc09a7"
+      note: "sorry-free; independently verified on 91ebbc09a7 (Lean code identical to master)"
     - source: "lean-eval `weil_conjectures` (point counts and Frobenius eigenvalues)"
       lean: "LeanEval.AlgebraicGeometry.WeilConjectures.weil_conjectures"
       module: "WeilConjectures/LeanEval/WeilConjectures.lean"
       status: "proved"
-      note: "sorry-free; independently verified on slopmaster2 91ebbc09a7"
+      note: "sorry-free; independently verified on 91ebbc09a7 (Lean code identical to master)"
 
 acknowledgements: >-
   This project builds on Mathlib, and in particular on its foundational algebraic
   geometry, developed largely by Andrew Yang together with many other Mathlib
-  contributors. Material on localization and derived categories was taken from Joël
-  Riou's Mathlib branch `jriou_localization`, with attribution in the file headers.
+  contributors. Material on localization, derived categories and derived functors was taken from
+  Joël Riou's branch `jriou_localization`
+  (https://github.com/joelriou/mathlib4/tree/jriou_localization), with attribution in
+  the file headers; it lives in `WeilConjectures/FromJoel` (see its README.md).
   We thank the Lean community and the lean-eval maintainers.
