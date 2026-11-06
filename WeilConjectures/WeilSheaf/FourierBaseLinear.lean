@@ -34,6 +34,7 @@ namespace AlgebraicGeometry
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
+set_option linter.unusedSimpArgs false in
 omit [Finite k₀] in
 /-- The structure morphism of the affine line lies over `Spec k₀`, which lies over itself through
 `Spec` of the identity. -/

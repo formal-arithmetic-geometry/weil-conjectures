@@ -71,7 +71,6 @@ private theorem tensorLinearLift
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-set_option maxHeartbeats 200000 in
 -- The comparison uses the exact restriction-of-scalars homology isomorphism.
 /-- Source: Stacks Project, Tags 06Y6 and 08IB, canonical tensor comparison
 (blueprint: lem-pc-base-derived-tensor-counit-linear).

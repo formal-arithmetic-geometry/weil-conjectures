@@ -13,6 +13,8 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import WeilConjectures.CategoryTheory.Exact.NormalizedTensorAdjunctionInsertion
 import WeilConjectures.AlgebraicGeometry.EtaleSingleTensoratorFactorization
+import WeilConjectures.AlgebraicGeometry.EtaleSingleTensoratorAdjunctionInsertion
+import WeilConjectures.Tactic.TransportExact
 
 /-! # Tensor of normalized scalar-adjunction insertions
 
@@ -28,32 +30,17 @@ set_option autoImplicit false
 set_option relaxedAutoImplicit false
 set_option backward.defeqAttrib.useBackward true
 set_option synthInstance.maxSize 4096
+-- Elaborate sheaf and derived tensor products along the instance paths of `derivedTensor` and
+-- `singleFunctorObjTensorIso`, and check declarations one at a time, to bound kernel memory.
+attribute [local instance 10000] CategoryTheory.SymmetricCategory.toBraidedCategory
+attribute [local instance 20000] AlgebraicGeometry.Etale.sheafBraidedCategory
+set_option Elab.async false
 
 universe u
 
 open CategoryTheory CategoryTheory.MonoidalCategory
 
 namespace AlgebraicGeometry.Etale
-
-private theorem flat_single_comparison
-    {B : Type (u + 1)} [CommRing B] (T : Scheme.{u})
-    (L M : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} B))
-    (hL : ObjectProperty.flat L) :
-    (singleFunctorObjTensorIso L M hL).hom =
-      Functor.LaxMonoidal.μ DerivedCategory.Q
-        ((CochainComplex.singleFunctor _ 0).obj L)
-        ((CochainComplex.singleFunctor _ 0).obj M) ≫
-        DerivedCategory.Q.map (singleCochainTensorIso L M).hom := by
-  rw [singleFunctorObjTensorIso_factorization]
-  simp only [singleFunctorObjIsoQh, DerivedCategory.singleFunctorIsoCompQ,
-    Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv, Iso.app_hom, Iso.app_inv,
-    Iso.refl_hom, Iso.refl_inv, NatTrans.id_app]
-  simp only [Functor.LaxMonoidal.transport_μ, Functor.LaxMonoidal.comp_μ,
-    Category.assoc]
-  rw [← DerivedCategory.quotientCompQhIso_hom_naturality]
-  simp only [Category.id_comp, Functor.comp_map]
-  erw [Category.comp_id]
-  rfl
 
 private theorem mapComplex_unit_formula
     {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
@@ -70,10 +57,56 @@ private theorem mapComplex_unit_formula
     Iso.refl_inv, NatTrans.id_app, Category.id_comp]
   exact (Category.comp_id _).symm
 
-set_option maxHeartbeats 2000000 in
--- The kernel re-check of the final instantiation of the generic normalized tensor lemma
--- (scalarAdjointInsertion's derived adjunction against `E ⊣ U.mapDerivedCategory`) exceeds
--- the default budget; elaboration itself is within it.
+/-- The scalar extension–restriction adjunction of étale sheaves is monoidal for the ordinary
+sheafified scalar balancing map. -/
+private theorem etaleSheafExtendScalarsAdjunction_isMonoidal
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) (T : Scheme.{u}) :
+    (ProEtale.etaleSheafExtendScalarsAdjunction φ T).IsMonoidal :=
+  isMonoidal_sheafAdjunction T.smallEtaleTopology
+    (ModuleCat.extendRestrictScalarsAdj.{u + 1} φ)
+
+/-- The canonical scalar representative is the transpose of the localized ordinary unit. -/
+private theorem scalarExtensionRepresentative_eq_homEquiv_symm
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) (T : Scheme.{u})
+    (P : CochainComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) :
+    scalarExtensionRepresentative φ T P =
+      ((Adjunction.ofIsRightAdjoint
+        (Sheaf.restrictScalars T.smallEtaleTopology φ).mapDerivedCategory).homEquiv _ _).symm
+      (DerivedCategory.Q.map
+        (((ProEtale.etaleSheafExtendScalarsAdjunction φ T).mapHomologicalComplex
+          (.up ℤ)).unit.app P) ≫
+        (Sheaf.restrictScalars T.smallEtaleTopology φ).mapDerivedCategoryFactors.inv.app
+          (((ProEtale.etaleSheafExtendScalars φ T).mapHomologicalComplex (.up ℤ)).obj P)) := by
+  unfold scalarExtensionRepresentative
+  rw [mapComplex_unit_formula (ProEtale.etaleSheafExtendScalarsAdjunction φ T) P]
+  rfl
+
+/-- The published scalar tensor comparison is normalized on representatives. -/
+private theorem tensorIso_tensorNormalization
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    (φ : A →+* B) (T : Scheme.{u}) :
+    ExceptionalCoefficients.TensorNormalization φ T (ExceptionalCoefficients.tensorIso φ T) := by
+  have he : ExceptionalCoefficients.tensorIso φ T =
+      (ExceptionalCoefficients.tensorIso_existsUnique φ T).choose :=
+    eq_of_heq (ExceptionalCoefficients.siteTensorIso_existsUnique φ T).choose_spec.1
+  rw [he]
+  exact (ExceptionalCoefficients.tensorIso_existsUnique φ T).choose_spec.1
+
+/-- The scalar insertion is the exact-single insertion for the derived scalar adjunction. -/
+private theorem scalarAdjointInsertion_eq_adjointInsertion
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) (T : Scheme.{u})
+    {M : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)}
+    {P : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} B)}
+    (f : M ⟶ (Sheaf.restrictScalars T.smallEtaleTopology φ).obj P) :
+    SheafExactDegreeZero.scalarAdjointInsertion T.smallEtaleTopology φ f =
+      SheafExactDegreeZero.adjointInsertion (Sheaf.restrictScalars T.smallEtaleTopology φ)
+        (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars T.smallEtaleTopology φ)) f := by
+  unfold SheafExactDegreeZero.scalarAdjointInsertion
+  rfl
+
+-- The proof instantiates a general-coefficient lemma by first-order matching and transports it
+-- along small congruence proofs (`fo_apply`): a direct `exact` makes the kernel unfold the
+-- derived tensor structures and runs out of memory.
 /-- Tensoring the two normalized scalar insertions agrees with inserting their ordinary
 semilinear tensor product, under the published scalar tensorator and flat-single comparisons.
 The ordinary restriction tensorator is `Functor.LaxMonoidal.μ` of exact scalar restriction.
@@ -125,37 +158,25 @@ theorem tateTensor_scalarAdjointInsertion
       SheafExactDegreeZero.scalarAdjointInsertion T.smallEtaleTopology φ
         ((η₁ ⊗ₘ η₂) ≫
           Functor.LaxMonoidal.μ (Sheaf.restrictScalars T.smallEtaleTopology φ) P₁ P₂) := by
-  let F := ProEtale.etaleSheafExtendScalars φ T
-  let U := Sheaf.restrictScalars T.smallEtaleTopology φ
-  let a : F ⊣ U := ProEtale.etaleSheafExtendScalarsAdjunction φ T
-  let : F.IsLeftAdjoint := a.isLeftAdjoint
-  let : F.OplaxMonoidal := composeAndSheafifyOplaxMonoidal T.smallEtaleTopology
-    (ModuleCat.extendRestrictScalarsAdj.{u + 1} φ)
-  let E := scalarExtension φ T
-  let ad : E ⊣ U.mapDerivedCategory := Adjunction.ofIsRightAdjoint _
-  have : a.IsMonoidal := by
-    exact isMonoidal_sheafAdjunction T.smallEtaleTopology
-      (ModuleCat.extendRestrictScalarsAdj.{u + 1} φ)
-  have hrep (P : CochainComplex
-      (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) :
-      scalarExtensionRepresentative φ T P = (ad.homEquiv _ _).symm
-        (DerivedCategory.Q.map ((a.mapHomologicalComplex (.up ℤ)).unit.app P) ≫
-          U.mapDerivedCategoryFactors.inv.app
-            ((F.mapHomologicalComplex (.up ℤ)).obj P)) := by
-    unfold scalarExtensionRepresentative
-    rw [mapComplex_unit_formula a P]
-    rfl
-  have hn : ExceptionalCoefficients.TensorNormalization φ T
-      (ExceptionalCoefficients.tensorIso φ T) := by
-    have he : ExceptionalCoefficients.tensorIso φ T =
-        (ExceptionalCoefficients.tensorIso_existsUnique φ T).choose :=
-      eq_of_heq (ExceptionalCoefficients.siteTensorIso_existsUnique φ T).choose_spec.1
-    rw [he]
-    exact (ExceptionalCoefficients.tensorIso_existsUnique φ T).choose_spec.1
-  rw [flat_single_comparison T P₁ P₂ hP₁, flat_single_comparison T L₁ L₂ hL₁]
-  unfold SheafExactDegreeZero.scalarAdjointInsertion
-  exact SheafExactDegreeZero.normalizedTensor_adjointInsertion F U a E ad
-    (scalarExtensionRepresentative φ T) hrep (ExceptionalCoefficients.tensorIso φ T)
-    hn L₁ L₂ P₁ P₂ η₁ η₂
+  have := etaleSheafExtendScalarsAdjunction_isMonoidal φ T
+  -- The normalization hypothesis is left as a goal, so that `fo_apply` does not seal the whole
+  -- proof as an auxiliary theorem, which would make the kernel check the statement twice.
+  fo_apply siteNormalizedTensor_adjointInsertion using
+    (ProEtale.etaleSheafExtendScalars φ T), (Sheaf.restrictScalars T.smallEtaleTopology φ),
+    (ProEtale.etaleSheafExtendScalarsAdjunction φ T), (scalarExtension φ T),
+    (Adjunction.ofIsRightAdjoint
+      (Sheaf.restrictScalars T.smallEtaleTopology φ).mapDerivedCategory),
+    (scalarExtensionRepresentative φ T), (scalarExtensionRepresentative_eq_homEquiv_symm φ T),
+    (ExceptionalCoefficients.tensorIso φ T), _, hL₁, hP₁,
+    η₁, η₂,
+    (SheafExactDegreeZero.scalarAdjointInsertion T.smallEtaleTopology φ η₁),
+    (scalarAdjointInsertion_eq_adjointInsertion φ T η₁),
+    (SheafExactDegreeZero.scalarAdjointInsertion T.smallEtaleTopology φ η₂),
+    (scalarAdjointInsertion_eq_adjointInsertion φ T η₂),
+    (SheafExactDegreeZero.scalarAdjointInsertion T.smallEtaleTopology φ
+      ((η₁ ⊗ₘ η₂) ≫
+        Functor.LaxMonoidal.μ (Sheaf.restrictScalars T.smallEtaleTopology φ) P₁ P₂)),
+    (scalarAdjointInsertion_eq_adjointInsertion φ T _)
+  transport_exact tensorIso_tensorNormalization φ T
 
 end AlgebraicGeometry.Etale

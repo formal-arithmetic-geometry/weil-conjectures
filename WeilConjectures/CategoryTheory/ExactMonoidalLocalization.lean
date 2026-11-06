@@ -5,7 +5,6 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategoryMonoidal
-set_option linter.all false
 
 /-! # Exact monoidal localization for specified derived-category models
 
@@ -163,7 +162,8 @@ instance specifiedModel_isIso_leftDerivedTensorComparison :
   dsimp only [specifiedModel_leftDerivedTensorComparison]
   infer_instance
 
-
+/-- `specifiedModel_leftDerivedTensorComparison` on objects of `K(C)`, through the factorization
+isomorphisms `D(F) ∘ Qh ≅ Qh ∘ K(F)`. -/
 lemma specifiedModel_comparison_fac (K M : HomotopyCategory C (.up ℤ)) :
     (F.specifiedModel_leftDerivedTensorComparison.app (Qh.obj K)).app (Qh.obj M) ≫
         (F.mapDerivedCategoryFactorsh.hom.app K ⊗ₘ
@@ -178,6 +178,9 @@ lemma specifiedModel_comparison_fac (K M : HomotopyCategory C (.up ℤ)) :
     specifiedModel_leftDerivedDerivedTensorCounit,
     tensorHom_def, Category.assoc, Functor.mapHomotopyCategory_δ] using h
 
+omit [HasFunctorialFlatResolution D] [HasDerivedCategory D] [PreservesFiniteLimits F]
+  [PreservesFiniteColimits F] [F.Monoidal] in
+/-- Every object of `D(C)` is isomorphic to `Qh P` for a complex `P` with `F P` K-flat. -/
 lemma specifiedModel_exists_kFlatMap_iso (X : DerivedCategory C) :
     ∃ P, F.kFlatMap P ∧ Nonempty (Qh.obj P ≅ X) := by
   have := Localization.essSurj (Qh (C := C)) (HomotopyCategory.quasiIso _ (.up ℤ))
@@ -186,6 +189,8 @@ lemma specifiedModel_exists_kFlatMap_iso (X : DerivedCategory C) :
   have : IsIso (Qh.map R.w) := Localization.inverts Qh (HomotopyCategory.quasiIso _ _) _ R.hw
   exact ⟨R.X₁.obj, R.X₁.property, ⟨asIso (Qh.map R.w) ≪≫ Qh.objObjPreimageIso X⟩⟩
 
+/-- The oplax monoidal structure on `D(F)` whose comonoidal structure is
+`specifiedModel_leftDerivedTensorComparison`. -/
 @[instance_reducible]
 def specifiedModel_oplax : F.mapDerivedCategory.OplaxMonoidal :=
   haveI := DerivedCategory.isIso_ε_Qh D
@@ -195,6 +200,7 @@ def specifiedModel_oplax : F.mapDerivedCategory.OplaxMonoidal :=
     F.specifiedModel_comparison_fac F.kFlatMap F.specifiedModel_exists_kFlatMap_iso
     (fun x _ hb ↦ specifiedModel_isIso_μNatTrans_Qh_app_app_of_kFlat x _ hb)
 
+/-- The counit of `specifiedModel_oplax` is an isomorphism. -/
 lemma specifiedModel_unit_iso :
     letI := F.specifiedModel_oplax
     IsIso (OplaxMonoidal.η F.mapDerivedCategory) := by
@@ -208,6 +214,8 @@ lemma specifiedModel_unit_iso :
     Qh.map (OplaxMonoidal.η (F.mapHomotopyCategory (.up ℤ))) ≫
       CategoryTheory.inv (LaxMonoidal.ε Qh)))
 
+/-- The functor `D(F)` induced on the specified derived categories by an exact monoidal
+left adjoint `F` preserving flat objects, as a strong monoidal functor. -/
 @[instance_reducible]
 def specifiedModel_monoidal : F.mapDerivedCategory.Monoidal := by
   letI := F.specifiedModel_oplax
@@ -218,11 +226,8 @@ def specifiedModel_monoidal : F.mapDerivedCategory.Monoidal := by
   exact Functor.Monoidal.ofOplaxMonoidal _
 
 attribute [local instance] DerivedCategory.braidedCategory'
-lemma specifiedModel_braiding_localization (K M : HomotopyCategory C (.up ℤ)) :
-    (β_ (Qh.obj K) (Qh.obj M)).hom ≫ LaxMonoidal.μ Qh M K =
-      LaxMonoidal.μ Qh K M ≫ Qh.map (β_ K M).hom :=
-  DerivedMonoidal.braiding_hom_μ Qh (HomotopyCategory.quasiIso C (.up ℤ)) K M
 
+/-- `specifiedModel_braid` on objects `Qh P`, `Qh Q` with `F P` K-flat. -/
 lemma specifiedModel_braid_Qh
     (hF : ∀ X Y : C, F.map (β_ X Y).hom ≫ OplaxMonoidal.δ F Y X =
       OplaxMonoidal.δ F X Y ≫ (β_ (F.obj X) (F.obj Y)).hom)
@@ -233,7 +238,7 @@ lemma specifiedModel_braid_Qh
       OplaxMonoidal.δ F.mapDerivedCategory (Qh.obj P) (Qh.obj Q) ≫
         (β_ (F.mapDerivedCategory.obj (Qh.obj P))
           (F.mapDerivedCategory.obj (Qh.obj Q))).hom := by
-  letI := F.specifiedModel_monoidal
+  let := F.specifiedModel_monoidal
   have : IsIso (LaxMonoidal.μ Qh ((F.mapHomotopyCategory (.up ℤ)).obj Q)
       ((F.mapHomotopyCategory (.up ℤ)).obj P)) :=
     specifiedModel_isIso_μNatTrans_Qh_app_app_of_kFlat _ _ hP
@@ -254,14 +259,19 @@ lemma specifiedModel_braid_Qh
       Qh.map (β_ ((F.mapHomotopyCategory (.up ℤ)).obj P)
         ((F.mapHomotopyCategory (.up ℤ)).obj Q)).hom :=
     DerivedMonoidal.braiding_hom_μ Qh (HomotopyCategory.quasiIso D (.up ℤ)) _ _
+  have hloc : (β_ (Qh.obj P) (Qh.obj Q)).hom ≫ LaxMonoidal.μ Qh Q P =
+      LaxMonoidal.μ Qh P Q ≫ Qh.map (β_ P Q).hom :=
+    DerivedMonoidal.braiding_hom_μ Qh (HomotopyCategory.quasiIso C (.up ℤ)) P Q
   rw [specifiedModel_comparison_fac, ← BraidedCategory.braiding_naturality_assoc, hβ,
     reassoc_of% specifiedModel_comparison_fac,
-    ← Functor.map_comp_assoc, specifiedModel_braiding_localization P Q, Functor.map_comp_assoc]
+    ← Functor.map_comp_assoc, hloc, Functor.map_comp_assoc]
   have hn := F.mapDerivedCategoryFactorsh.hom.naturality (β_ P Q).hom
   rw [reassoc_of% hn, ← Qh.map_comp, ← Qh.map_comp]
   congr 3
   exact mapHomotopyCategory_map_braiding_hom_comp_δ _ hF P Q
 
+/-- The comonoidal structure of `specifiedModel_monoidal` is compatible with the derived
+braidings, provided the comonoidal structure of `F` is compatible with the braidings. -/
 lemma specifiedModel_braid
     (hF : ∀ X Y : C, F.map (β_ X Y).hom ≫ OplaxMonoidal.δ F Y X =
       OplaxMonoidal.δ F X Y ≫ (β_ (F.obj X) (F.obj Y)).hom)
@@ -270,12 +280,15 @@ lemma specifiedModel_braid
     F.mapDerivedCategory.map (β_ K M).hom ≫ OplaxMonoidal.δ F.mapDerivedCategory M K =
       OplaxMonoidal.δ F.mapDerivedCategory K M ≫
         (β_ (F.mapDerivedCategory.obj K) (F.mapDerivedCategory.obj M)).hom := by
-  letI := F.specifiedModel_monoidal
+  let := F.specifiedModel_monoidal
   obtain ⟨P, hP, ⟨eP⟩⟩ := F.specifiedModel_exists_kFlatMap_iso K
   obtain ⟨Q, hQ, ⟨eQ⟩⟩ := F.specifiedModel_exists_kFlatMap_iso M
   exact OplaxMonoidal.map_braiding_hom_comp_δ_of_iso _ eP eQ
     (F.specifiedModel_braid_Qh hF P Q hP)
 
+
+/-- On cochain complexes, the monoidal structure of `Q` is that of `Qh` on their images in
+`K(C)`. -/
 lemma specifiedModel_Q_mu (P Q : CochainComplex C ℤ) :
     LaxMonoidal.μ DerivedCategory.Q P Q =
       LaxMonoidal.μ DerivedCategory.Qh
@@ -284,10 +297,17 @@ lemma specifiedModel_Q_mu (P Q : CochainComplex C ℤ) :
   change (𝟙 _ ⊗ₘ 𝟙 _) ≫
     (LaxMonoidal.μ DerivedCategory.Qh _ _ ≫ DerivedCategory.Qh.map (𝟙 _)) ≫ 𝟙 _ = _
   rw [DerivedCategory.Qh.map_id, MonoidalCategory.tensorHom_id]
-  simp only [Category.id_comp, Category.comp_id]
+  simp only [Category.comp_id]
   rw [MonoidalCategory.id_whiskerRight, Category.id_comp]
   rfl
 
+omit [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]
+  [MonoidalClosed C] [BraidedCategory C] [HasFunctorialFlatResolution C]
+  [IsGrothendieckAbelian.{u + 1} D] [MonoidalCategory D] [MonoidalPreadditive D] [MonoidalClosed D]
+  [BraidedCategory D] [HasFunctorialFlatResolution D] [F.PreservesFlat] [F.IsLeftAdjoint]
+  [F.Monoidal] in
+/-- The factorization `D(F) ∘ Qh ≅ Qh ∘ K(F)` on a cochain complex is the factorization
+`D(F) ∘ Q ≅ Q ∘ C(F)`. -/
 lemma specifiedModel_factorsh_cochain (P : CochainComplex C ℤ) :
     F.mapDerivedCategoryFactorsh.hom.app ((HomotopyCategory.quotient _ _).obj P) =
       F.mapDerivedCategoryFactors.hom.app P := by
@@ -298,6 +318,8 @@ lemma specifiedModel_factorsh_cochain (P : CochainComplex C ℤ) :
   simp only [Category.id_comp]
   exact Category.comp_id _
 
+/-- `specifiedModel_comparison_fac` stated on cochain complexes, through the factorization
+isomorphisms `D(F) ∘ Q ≅ Q ∘ C(F)`. -/
 lemma specifiedModel_comparison_cochain (P Q : CochainComplex C ℤ) :
     letI := F.specifiedModel_monoidal
     F.mapDerivedCategory.map (LaxMonoidal.μ DerivedCategory.Q P Q) ≫
@@ -311,7 +333,7 @@ lemma specifiedModel_comparison_cochain (P Q : CochainComplex C ℤ) :
         LaxMonoidal.μ DerivedCategory.Q
           ((F.mapHomologicalComplex (.up ℤ)).obj P)
           ((F.mapHomologicalComplex (.up ℤ)).obj Q) := by
-  letI := F.specifiedModel_monoidal
+  let := F.specifiedModel_monoidal
   have h := F.specifiedModel_comparison_fac
     ((HomotopyCategory.quotient _ _).obj P)
     ((HomotopyCategory.quotient _ _).obj Q)
@@ -323,7 +345,6 @@ lemma specifiedModel_comparison_cochain (P Q : CochainComplex C ℤ) :
   rw [F.specifiedModel_factorsh_cochain P, F.specifiedModel_factorsh_cochain Q, hT] at h
   rw [specifiedModel_Q_mu P Q, specifiedModel_Q_mu]
   exact h.symm
-
 
 end Comparison
 end CategoryTheory.Functor

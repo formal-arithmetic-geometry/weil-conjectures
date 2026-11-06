@@ -95,7 +95,6 @@ private theorem transport_from_unit
   rw [hβ, hγ'] at h
   exact h.symm
 
-set_option maxHeartbeats 400000 in
 -- The functors are abstracted so the kernel never unfolds the concrete sheaf functors.
 /-- `finite_base_change_restriction_mate_transport` with all functors, adjunctions and
 comparison isomorphisms abstracted; the hypotheses copy the shapes of the pinned records. -/
@@ -150,7 +149,6 @@ private theorem mate_transport_abstract
     e.realizeU.equivalence e.realizeU'.equivalence adj adj' adjb adjb' r r' jj jj' hj hj'
     P Q Pb Qb p q β.hom θ.inv bb.hom hγ h N
 
-set_option maxHeartbeats 400000 in
 -- The concrete finite specialization elaborates through four equivalence records.
 /-- Transport the right-adjoint square through the four finite comparison pins.
 Source: third step of `lem-sf-finite-base-change-restriction-ordinary-pin-mate`.

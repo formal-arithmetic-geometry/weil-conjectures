@@ -21,6 +21,7 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineSmooth
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.DegreeZero
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 import Mathlib.CategoryTheory.Adjunction.FullyFaithful
+import WeilConjectures.Tactic.TransportExact
 
 /-! # Finite etale diagonal classes detect ordinary roots-line maps
 
@@ -255,6 +256,62 @@ private theorem projectiveLine_connected (S : Scheme.{u}) :
 
 
 
+section
+
+-- Elaborate with the proposition instances stored in the ordinary derived category, so that
+-- both sides of the transport below carry the same instance proofs.
+set_option linter.auxLemma false in
+attribute [local instance 100000] DerivedCategoryModule._proof_1 DerivedCategoryModule._proof_2
+
+/-- The final step of `finiteEtaleDiagonalClass_postcomp_injective`, stated without local
+definitions: the normalized diagonal integral is the integral hypothesis of
+`class_detects_from_integral_and_unit_action`. The two sides differ in spelling
+(`DerivedCategoryModule` against `DerivedCategory`, named objects against their values), and
+`transport_exact` compares them along their common structure. -/
+private theorem diagonal_class_detects
+    (Y : Scheme.{u}) (N : ℕ) (hN : 0 < N)
+    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
+    (hI : (pullback.diagonal (ProjectiveLine Y ↘ Y)).ker.IsInvertible)
+    (hW : IsUnit (N : Γ(pullback (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y), ⊤)))
+    (hY : IsUnit (N : Γ(Y, ⊤)))
+    [IsIso (MonoidalClosed.id (Scheme.finiteEtaleTateLine
+      (pullback (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y)) N A hA))]
+    (t : OrdinaryFiniteTwistTransport A N hA)
+    (d : ∀ (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤))),
+      ArbitraryBaseFiniteP1Splitting A N hA t S hS)
+    (ht : ordinaryFiniteP1DiagonalSupportedMap A N hA Y false
+        (geoCartierEtaleClass A N hN hA (pullback.diagonal (ProjectiveLine Y ↘ Y)) hI hW) ≫
+      arbitraryBaseFiniteP1DiagonalTrace A N hA t d Y hY false =
+        𝟙 (ordinaryFiniteUnit A (ProjectiveLine Y)))
+    (hunit : Function.Injective (fun a : End (𝟙_ (Sheaf
+        (pullback (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y)).smallEtaleTopology
+          (ModuleCat.{u + 1} A))) ↦
+      (ordinaryFinitePushforward A (projectiveLineDiagonalProjection Y false)).map
+        ((DerivedCategory.singleFunctor _ 0).map (unitEndAction
+          ((lowerStar (ModuleCat.{u + 1} A) (pullback.diagonal (ProjectiveLine Y ↘ Y))).obj
+            (ordinaryFiniteConstant A (ProjectiveLine Y))) a)))) :
+    Function.Injective (fun f : Scheme.finiteEtaleTateLine
+        (pullback (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y)) N A hA ⟶
+        Scheme.finiteEtaleTateLine
+          (pullback (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y)) N A hA ↦
+      (geoCartierEtaleClass A N hN hA (pullback.diagonal (ProjectiveLine Y ↘ Y))
+        hI hW).comp (Ext.mk₀ f) (add_zero 2)) := by
+  have := isIso_projectiveLineDiagonalAlpha A Y false
+  apply CategoryTheory.class_detects_from_integral_and_unit_action
+    (ordinaryFinitePushforward A (projectiveLineDiagonalProjection Y false)) _
+    (asIso (projectiveLineDiagonalAlpha A Y false) ≪≫
+      (ordinaryFinitePushforward A (projectiveLineDiagonalProjection Y false)).mapIso
+        ((lowerStar (ModuleCat.{u + 1} A)
+          (pullback.diagonal (ProjectiveLine Y ↘ Y))).singleFunctorCompRightDerivedFunctorIso.app
+            (ordinaryFiniteConstant A (ProjectiveLine Y))))
+    (arbitraryBaseFiniteP1DiagonalTrace A N hA t d Y hY false) _ hunit
+  simp only [ordinaryFiniteP1DiagonalSupportedMap, ordinaryFiniteSupportedRealization,
+    supportedExactDerivedMap, Functor.map_comp, Category.assoc] at ht
+  simp only [Iso.trans_hom, Functor.mapIso_hom, asIso_hom, Category.assoc]
+  transport_exact ht
+
+end
+
 set_option maxHeartbeats 2000000 in
 -- The scalar and derived normalization calculations need extra elaboration.
 /-- The supported Kummer class of the relative projective-line diagonal detects
@@ -306,7 +363,7 @@ theorem finiteEtaleDiagonalClass_postcomp_injective
   let adjH := upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) i
   let L := Scheme.finiteEtaleTateLine W N A hA
   let S := K.obj (ordinaryFiniteConstant A P)
-  let R := G.rightDerivedFunctor
+  let R := ordinaryFinitePushforward A (projectiveLineDiagonalProjection Y false)
   have hY : IsUnit (N : Γ(Y, ⊤)) := by
     simpa only [map_natCast] using hW.map
       ((ProjectiveLine.infinity Y ≫ i).appTop.hom)
@@ -336,21 +393,10 @@ theorem finiteEtaleDiagonalClass_postcomp_injective
       R.map ((DerivedCategory.singleFunctor _ 0).map (unitEndAction S a))) := by
     intro a b hab
     apply hunit₀
+    have hR : R = G.rightDerivedFunctor := rfl
+    rw [hR] at hab
     exact CategoryTheory.map_eq_of_derived_single_map_eq G _ _ hab
-  let δ := geoCartierEtaleClass A N hN hA i hI hW
   obtain ⟨t, d, ht⟩ := canonical_diagonal_integral N hN A hA Y hY
-  have hIα : IsIso (projectiveLineDiagonalAlpha A Y false) :=
-    isIso_projectiveLineDiagonalAlpha A Y false
-  let β := (K.singleFunctorCompRightDerivedFunctorIso.app
-    (ordinaryFiniteConstant A P))
-  let s := asIso (projectiveLineDiagonalAlpha A Y false) ≪≫ R.mapIso β
-  apply CategoryTheory.class_detects_from_integral_and_unit_action R δ s
-    (arbitraryBaseFiniteP1DiagonalTrace A N hA t d Y hY false) _ hunit
-  simpa only [ordinaryFiniteP1DiagonalSupportedMap, ordinaryFiniteSupportedRealization,
-    supportedExactDerivedMap, s, β, R, δ, G, K, i, p, P, q, W,
-    ordinaryFinitePushforward, projectiveLineDiagonalProjection,
-    Iso.trans_hom, Functor.mapIso_hom, asIso_hom,
-    Functor.map_comp, Category.assoc] using ht false
-
+  exact diagonal_class_detects Y N hN A hA hI hW hY t d (ht false) hunit
 
 end AlgebraicGeometry.Etale

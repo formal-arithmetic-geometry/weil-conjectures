@@ -8,7 +8,7 @@ module
 public import Mathlib.CategoryTheory.Yoneda
 
 /-!
-# Uniqueness of representing objects
+# Uniqueness of representing objects, and the Yoneda embedding of a fully faithful functor
 
 Mathlib's `CategoryTheory.Functor.RepresentableBy.uniqueUpToIso` constructs an isomorphism between
 two representing objects of the same functor. Here we record that it is the *unique* isomorphism
@@ -23,6 +23,8 @@ compatible with the two representations.
   naturality (blueprint `lem-pc-yoneda`).
 - `CategoryTheory.Functor.isRepresentable_iff_exists_nonempty_iso`: a presheaf is representable
   iff it is isomorphic to a functor of points (blueprint `def-pc-representable-functor`).
+- `CategoryTheory.Functor.FullyFaithful.opCompYonedaObjIso`: for a fully faithful `F`,
+  `Hom(F -, F A) ≅ Hom(-, A)`.
 -/
 
 @[expose] public section
@@ -118,3 +120,17 @@ theorem isRepresentable_iff_exists_nonempty_iso {C : Type u} [Category.{v} C]
   ⟨fun _ ↦ ⟨F.reprX, ⟨F.reprW⟩⟩, fun ⟨_, ⟨e⟩⟩ ↦ IsRepresentable.mk' e⟩
 
 end CategoryTheory.Functor
+
+namespace CategoryTheory.Functor.FullyFaithful
+
+variable {C : Type u} {D : Type w} [Category.{v} C] [Category.{v} D] {F : C ⥤ D}
+
+/-- For a fully faithful functor `F`, the functor `T ↦ Hom(F T, F A)` is `T ↦ Hom(T, A)`. This is
+the same-universe variant of `CategoryTheory.Functor.FullyFaithful.homNatIso`, which is stated
+with `uliftYoneda`. -/
+noncomputable def opCompYonedaObjIso (hF : F.FullyFaithful) (A : C) :
+    F.op ⋙ yoneda.obj (F.obj A) ≅ yoneda.obj A :=
+  NatIso.ofComponents (fun _ ↦ hF.homEquiv.symm.toIso)
+    (fun g ↦ by ext x; exact hF.map_injective (by simp))
+
+end CategoryTheory.Functor.FullyFaithful

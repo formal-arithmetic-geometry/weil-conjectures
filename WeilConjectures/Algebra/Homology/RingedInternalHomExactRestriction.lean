@@ -175,7 +175,6 @@ theorem ringedSite_overMap_colimits
 
 attribute [local irreducible] derivedInternalHom homComplexFunctor
 
-set_option linter.style.haveILetI false in
 /-- Derived internal Hom commutes naturally with slice restriction, compatibly
 with successive restrictions. The comparison for V to U, followed by transport
 along the canonical derived overFunctorMap, equals direct restriction to V.
@@ -250,22 +249,22 @@ theorem ringedInternalHom_restriction
     let G (U V : C) (f : V ⟶ U) : RingedHomRestriction.Modules (R.over U) ⥤
         RingedHomRestriction.Modules (R.over V) :=
       SheafOfModules.overMap.{u} (RingedHomRestriction.Rings R) f
-    letI (U : C) : HasDerivedCategory.{w} (RingedHomRestriction.Modules (R.over U)) := hDCU U
-    letI (U : C) : (F U).Additive :=
+    let (U : C) : HasDerivedCategory.{w} (RingedHomRestriction.Modules (R.over U)) := hDCU U
+    let (U : C) : (F U).Additive :=
       ringedSite_overFunctor_additive J R U
-    letI (U V : C) (f : V ⟶ U) :
+    let (U V : C) (f : V ⟶ U) :
         (G U V f).Additive :=
       ringedSite_overMap_additive J R f
-    letI (U : C) : PreservesFiniteLimits
+    let (U : C) : PreservesFiniteLimits
         (F U) :=
       ringedSite_overFunctor_limits J R U
-    letI (U : C) : PreservesFiniteColimits
+    let (U : C) : PreservesFiniteColimits
         (F U) :=
       ringedSite_overFunctor_colimits J R U
-    letI (U V : C) (f : V ⟶ U) : PreservesFiniteLimits
+    let (U V : C) (f : V ⟶ U) : PreservesFiniteLimits
         (G U V f) :=
       ringedSite_overMap_limits J R f
-    letI (U V : C) (f : V ⟶ U) : PreservesFiniteColimits
+    let (U V : C) (f : V ⟶ U) : PreservesFiniteColimits
         (G U V f) :=
       ringedSite_overMap_colimits J R f
     obtain ⟨a, b, hab⟩ := RingedHomRestriction.ordinary_comparisons J R
@@ -279,7 +278,7 @@ theorem ringedInternalHom_restriction
         CochainComplex.IsKInjective
           ((Functor.mapHomologicalComplex
             (G U V f) (.up ℤ)).obj I) := by
-      letI : (G U V f).PreservesKInjectiveComplexes :=
+      let : (G U V f).PreservesKInjectiveComplexes :=
         SheafOfModules.overMap_preservesKInjectiveComplexes_ofUniverses.{u, u, u}
           (RingedHomRestriction.Rings R) f
       exact Functor.PreservesKInjectiveComplexes.isKInjective_map I

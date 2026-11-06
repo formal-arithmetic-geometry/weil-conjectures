@@ -116,6 +116,21 @@ Source: Zheng 4.1 (blueprint: def-pur-system-singleton-scalar-comparisons). -/
 instance singletonSequenceInverseAdditive :
     (strictSystemSequenceEquivalence B).inverse.Additive := sequenceToStrictSystemAdditive B
 
+/-- Sequence-site evaluation is the inverse equivalence followed by exact evaluation,
+so it preserves finite limits. Source: Zheng 4.1
+(blueprint: def-pur-system-singleton-scalar-comparisons). -/
+instance singletonSequenceEvaluationLimits (n : ℕ) :
+    PreservesFiniteLimits (systemSequenceEvaluation B n) :=
+  inferInstanceAs (PreservesFiniteLimits
+    ((strictSystemSequenceEquivalence B).inverse ⋙ systemEvaluation B n))
+
+/-- Sequence-site evaluation preserves finite colimits, for the same reason.
+Source: Zheng 4.1 (blueprint: def-pur-system-singleton-scalar-comparisons). -/
+instance singletonSequenceEvaluationColimits (n : ℕ) :
+    PreservesFiniteColimits (systemSequenceEvaluation B n) :=
+  inferInstanceAs (PreservesFiniteColimits
+    ((strictSystemSequenceEquivalence B).inverse ⋙ systemEvaluation B n))
+
 /-- The existing ordinary singleton, realized on its ringed sequence site.
 Source: Zheng 4.1 (blueprint: def-pur-system-singleton-scalar-comparisons). -/
 abbrev singletonSequenceOrdinary (n : ℕ) :=
@@ -132,22 +147,6 @@ Source: Stacks 06XN (blueprint: def-pur-system-singleton-scalar-comparisons). -/
 abbrev singletonSequenceDerived (n : ℕ) :=
   (systemSingleDerivedExtension B n S T).derived ⋙
     (strictSystemSequenceEquivalence B).functor.mapDerivedCategory
-
-/-- Vertical evaluation is left exact: it is reassembly inverse followed by evaluation.
-Source: Zheng 4.1 (blueprint: def-pur-system-singleton-scalar-comparisons). -/
-instance singletonSequenceEvaluationLimits (n : ℕ) :
-    PreservesFiniteLimits (systemSequenceEvaluation B n) :=
-  preservesFiniteLimits_of_natIso
-    (F := (strictSystemSequenceEquivalence B).inverse ⋙ systemEvaluation B n)
-    (NatIso.ofComponents (fun _ ↦ Iso.refl _) (by intros; rfl))
-
-/-- Vertical evaluation is right exact: it is reassembly inverse followed by evaluation.
-Source: Zheng 4.1 (blueprint: def-pur-system-singleton-scalar-comparisons). -/
-instance singletonSequenceEvaluationColimits (n : ℕ) :
-    PreservesFiniteColimits (systemSequenceEvaluation B n) :=
-  preservesFiniteColimits_of_natIso
-    (F := (strictSystemSequenceEquivalence B).inverse ⋙ systemEvaluation B n)
-    (NatIso.ofComponents (fun _ ↦ Iso.refl _) (by intros; rfl))
 
 /-- Its actual derived adjunction, transported along the exact-functor compositor.
 Source: Stacks 0FND (blueprint: def-pur-system-singleton-scalar-comparisons). -/

@@ -136,8 +136,6 @@ noncomputable def tensorRightPresheafToSheafObjIso (P : Cᵒᵖ ⥤ ModuleCat.{u
     Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft (sheafToPresheaf J _) (presheafToSheafCompTensorRightIso P)
 
-set_option synthInstance.maxHeartbeats 400000 in
--- `HasWeakSheafify` for sheaves of modules over the two rings is slow to synthesize
 /-- **Extension of scalars and tensor products.** For sheaves `M` of `S`-modules and `N` of
 `R`-modules, the sheaf `M ⊗ (S ⊗_R N)` with scalars restricted to `R` is `M ⊗ N`, naturally in
 `M`. -/
