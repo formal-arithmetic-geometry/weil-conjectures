@@ -15,7 +15,6 @@ public import Mathlib.CategoryTheory.Limits.Types.Filtered
 public import WeilConjectures.AlgebraicGeometry.FiniteFieldDescent.FiniteEtaleConstructibleObjectDescent
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
-import Mathlib.Util.CountHeartbeats
 
 /-! # Finite-stage descent and Hom continuity for constructible finite-coefficient complexes
 
@@ -73,9 +72,8 @@ instance finiteStageIndexSemilatticeSup {L : Type u} [Field L] [Algebra K L]
     let _ := hy.2
     exact ⟨hx.1.trans le_sup_left, inferInstance⟩)
 
-#count_heartbeats in
-set_option maxHeartbeats 800000 in
--- Measure the repeated 200000-heartbeat elaboration timeout with a bounded budget.
+set_option maxHeartbeats 400000 in
+-- Lean 4.35 elaboration uses 308464 heartbeats for the concrete finite-stage pullbacks.
 /-- The canonical transition on finite-stage Hom sets.
 Source: Stacks Lemma 09YU (3), blueprint `lem-sfb-finite-etale-constructible-hom-descent`. -/
 noncomputable def finiteStageHomTransition {L : Type u} [Field L] [Algebra K L]
@@ -192,9 +190,8 @@ theorem finiteEtaleConstructibleHomContinuity
     ∃ (H : FiniteStageHomSystem f Λ P₀ Q₀), Nonempty (IsColimit H.c) := by
   sorry
 
-#count_heartbeats in
 set_option maxHeartbeats 800000 in
--- Measure the repeated 200000-heartbeat elaboration timeout with a bounded budget.
+-- Lean 4.35 elaboration uses 531439 heartbeats for the four descent clauses.
 /-- Finite-stage descent and Hom continuity. The first three clauses are essential surjectivity,
 descent of morphisms, and eventual equality; the last is the filtered-colimit Hom comparison.
 Proof steps: (1) finite intermediate fields give a filtered affine finite-etale system; (2) bounded
