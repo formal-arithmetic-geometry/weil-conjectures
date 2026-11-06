@@ -118,6 +118,17 @@ def completedModule (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (I : Ideal 
   (SheafOfModules.restrictScalars ((adicLisseForget T).map (base T I))).obj
     (SheafOfModules.unit ((adicLisseForget T).obj (adicLisseCompletedRing T I)))
 
+section
+
+private local instance completedConstantReductionSupplementRestrictedModule (T : Scheme.{u})
+    {A : Sheaf (ProEt.topology T) CommRingCat.{u + 1}}
+    (M : SheafOfModules.{u + 1} ((adicLisseForget T).obj A))
+    {X Y : T.ProEtᵒᵖ} (i : X ⟶ Y) :
+    Module (A.obj.obj Y)
+      ((ModuleCat.restrictScalars (((adicLisseForget T).obj A).obj.map i).hom).obj
+        (M.val.obj Y)) :=
+  inferInstanceAs (Module (A.obj.obj Y) (M.val.obj Y))
+
 private theorem tensorRestriction_tmul
     (T : Scheme.{u})
     {A S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (c : A ⟶ S) (M : SheafOfModules.{u + 1}
@@ -127,6 +138,8 @@ private theorem tensorRestriction_tmul
       (s ⊗ₜ[A.obj.obj X, (c.hom.app X).hom] m) =
       S.obj.map i s ⊗ₜ[A.obj.obj Y, (c.hom.app Y).hom] M.val.map i m :=
   Classical.choose_spec (SheafOfModules.exists_changeOfRingsMap.{u, u + 1, u + 1} c M i) s m
+
+end
 
 private noncomputable def tensorToRestriction
     (T : Scheme.{u})
