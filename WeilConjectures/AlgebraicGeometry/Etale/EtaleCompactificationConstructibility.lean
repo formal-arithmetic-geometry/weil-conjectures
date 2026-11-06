@@ -477,7 +477,7 @@ private lemma constructible_of_affine_restrictions
     have : IsAffine W.toScheme := hW
     have :=
       (Scheme.constructible_etale_module_qcqs_affine_local
-        ((upperStar (ModuleCat.{u + 1} Λ) W.ι).obj G)).out 2 0 |>.mp (hG W hW)
+        ((upperStar (ModuleCat.{u + 1} Λ) W.ι).obj G)).out 3 1 |>.mp (hG W hW)
     obtain ⟨S, hS, hr, hf⟩ := this U hU
     refine ⟨S, hS, hr, fun k ↦ ?_⟩
     have := hf k
