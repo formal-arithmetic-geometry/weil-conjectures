@@ -255,8 +255,11 @@ private def derivedCochainCounit
     (F : C ⥤ D) [F.Additive] [F.PreservesKFlatQuasiIso] :
     _root_.DerivedCategory.Q ⋙ F.leftDerivedFunctor ⟶
       F.mapHomologicalComplex (.up ℤ) ⋙ _root_.DerivedCategory.Q :=
-  Functor.whiskerLeft (HomotopyCategory.quotient _ (.up ℤ)) F.leftDerivedFunctorCounit ≫
-    Functor.whiskerRight (F.mapHomotopyCategoryFactors (.up ℤ)).hom _root_.DerivedCategory.Qh
+  Functor.whiskerRight (_root_.DerivedCategory.quotientCompQhIso _).inv F.leftDerivedFunctor ≫
+    Functor.whiskerLeft (HomotopyCategory.quotient _ (.up ℤ)) F.leftDerivedFunctorCounit ≫
+    Functor.whiskerRight (F.mapHomotopyCategoryFactors (.up ℤ)).hom _root_.DerivedCategory.Qh ≫
+    Functor.whiskerLeft (F.mapHomologicalComplex (.up ℤ))
+      (_root_.DerivedCategory.quotientCompQhIso _).hom
 
 private theorem derivedCochainCounit_isIso
     {C : Type v} [Category.{u + 1} C] [Abelian C]
