@@ -371,6 +371,44 @@
   StratumCompletionUnitRestriction, then continue downstream as the brief requires.
 - Fix log: /home/ubuntu/u9/bz/FIXES-BZ995.md. No local Lean/Lake or forbidden proof shortcuts.
 
+# BZ1027 complete
+
+- Branch: `u9/BZ1027`; start: `c42746d5e58cc55d63dd9ef190dd34bc4130ed3c`.
+- Replayed the final BZ1020 import repairs missing from its early upstream integration:
+  use `Mathlib.CategoryTheory.Sites.EpiMono` in `Integral.Exact` and remove the umbrella
+  `Mathlib` import from `SmoothBaseChange.CurveTestDatum`.
+- Assigned `Integral.BaseChange` and downstream `SmoothBaseChange.IntegralBaseChange`
+  and `SmoothBaseChange.CurveTestDatum` pass `ucheck-bump`: rc=0, built=12, failed=0.
+- Validated source commit: `fefcc97aeb`; remote log:
+  `/home/ubuntu/u9/logs/BZ1027-20261106T105011.log`.
+- All non-import source content is unchanged; machine rewrite rules replay the exact diff.
+- Further downstream work is deferred to live owners: BZ1021 (`FieldBaseChange`,
+  `Induction`) and BZ1028 (the `AlgClosedExtension` / `Vanishing` frontier).
+  No additional downstream modules were tested or claimed green.
+- Patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ1027.md`.
+- Completion marker: `/home/ubuntu/u9/state/BZ1027.DONE`.
+- No local Lean/Lake execution, declaration changes, proof escapes, or limit increases.
+
+
+# BZ1034 complete
+
+- Branch: u9/BZ1034; starting commit 604047e529f6b513e0c4b425b3bfbd62aa4cfd36.
+- Assigned UnboundedProperOpenBaseChange is green and sorry-free. ucheck-bump returned
+  rc=0, built=1, failed=0, with all 7240 jobs successful at source d455f0edc9b02a1747757092a837ad7bc358f2f1.
+- Applied the explicitly proposed four-private-helper compositor migration after the user
+  instructed continuation. Removed redundant/opaque reducibility attributes and corrected
+  the matching inverse cancellation. The public theorem statement is byte-identical.
+- Merged upstream through 7c0ae1ea8b, preserving the validated source. No assigned-leaf
+  prerequisites changed in its 4009-module source import closure.
+- Direct importer UnboundedProperOpenInterchangeSupplement was attempted twice. The final
+  attempt is blocked by SmoothBaseChange.Vanishing (owner BZ1035), whose imports collide
+  on CategoryTheory.Sheaf.H.δ. No downstream source was edited; second layer is deferred.
+- Full logs, patterns, exact diagnostics, and audit: /home/ubuntu/u9/bz/FIXES-BZ1034.md.
+- Completion marker: /home/ubuntu/u9/state/BZ1034.DONE.
+- No local Lean/Lake, new/deleted declarations, proof placeholders, trust bypasses,
+  profiler probes, or heartbeat changes. All ucheck-bump invocations have finished.
+- This final commit changes progress documentation only; Lean source matches the green build.
+
 # BZ1021 in progress
 
 - Branch: u9/BZ1021; starting commit 203ea75a45628a5a18c524c66580a676a0da3d5c.
@@ -397,16 +435,8 @@
 - The user instructed continuation after the exact one-counit reflexive-cast proposal.
   Applied BZ1030-statement-proposal.patch; all other statement text is unchanged.
 - Localization imports and a reflexive cast in the target-map body eliminate its error,
-  as verified by the second ucheck-bump. The theorem uses the same reflexive transport
-  for its counit and Qh base-change map. The latter explicitly names universe w and
-  SheafOfModules to use the existing HasDerivedCategory assumption. Validation is running.
+  as verified by the second ucheck-bump. The theorem cast now awaits validation.
 - Next: validate AffineTildeTensorOrdinaryExchange, then its direct importer
   AffineTildeDerivedTensorMate and further unblocked downstream modules.
 - Fix records and full logs: /home/ubuntu/u9/bz/FIXES-BZ1030.md.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
-
-- Assigned leaf passed ucheck-bump at 260ba33353123f4c60259e2dc5e74f6d8011faf4:
-  rc=0, failed=0, 4521 jobs; target freshly rebuilt in 79 seconds.
-- Final proof normalizes the reflexive casts with cast_eq. All binders, hypotheses,
-  mathematical maps, and existing docstrings are unchanged.
-- Next: direct importer AffineTildeDerivedTensorMate, then further unblocked layers.
