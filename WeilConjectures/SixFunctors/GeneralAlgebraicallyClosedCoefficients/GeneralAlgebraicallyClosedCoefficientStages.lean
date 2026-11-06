@@ -624,13 +624,8 @@ private theorem scalarAssociator_pentagon
     Category.comp_id]
   have hp := (sfRationalScalar_coherence l E L i Y 0
     (Nat.Prime.ne_zero (Fact.out : l.Prime)) M j).2.2 N k K
-  exact hp.trans (congrArg
-    (fun f ↦ (sfRationalScalarComp l L M j Y 0
-      (Nat.Prime.ne_zero (Fact.out : l.Prime)) N k).hom.app
-        ((sfRationalScalarExtension l E Y 0
-          (Nat.Prime.ne_zero (Fact.out : l.Prime)) L i).obj K) ≫ f)
-    (Category.comp_id ((sfRationalScalarComp l E L i Y 0
-      (Nat.Prime.ne_zero (Fact.out : l.Prime)) N (k.comp j)).hom.app K))).symm
+  erw [Category.comp_id]
+  exact hp
 
 private theorem scalarAssociator_pentagon_nat
     (l : ℕ) [Fact l.Prime]
