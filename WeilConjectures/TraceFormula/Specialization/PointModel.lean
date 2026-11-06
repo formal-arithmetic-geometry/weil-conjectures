@@ -74,8 +74,11 @@ theorem NearbyCyclesModel.isIso_unit_of_upperStarInvertsLowerStarUnit {X X' : Sc
   have hη := (upperStarLowerStarAdjunction Λ M.j)
     |>.isIso_mapDerivedCategory_map_derivedAdjunction_unit_app (M.i)^*⟦Λ⟧ (𝟙_ _) h.1 h.2
   have hL : IsIso (L((M.i)^*⟦Λ⟧).map
-      ((derivedUpperStarLowerStarAdjunction Λ M.j).unit.app (𝟙_ _))) :=
-    (NatIso.isIso_map_iff (leftDerivedUpperStarIsoMapDerivedCategory Λ M.i) _).2 hη
+      ((derivedUpperStarLowerStarAdjunction Λ M.j).unit.app (𝟙_ _))) := by
+    apply (NatIso.isIso_map_iff (leftDerivedUpperStarIsoMapDerivedCategory Λ M.i) _).2
+    exact (NatTrans.isIso_app_iff_of_iso
+      (Functor.whiskerRight (derivedUpperStarLowerStarAdjunction Λ M.j).unit D((M.i)^*⟦Λ⟧))
+      (DerivedCategory.singleFunctorObjUnitIso _)).1 hη
   rw [NearbyCyclesModel.unit, Functor.map_comp]
   infer_instance
 

@@ -100,7 +100,7 @@ lemma geometricFiberWeilExtensionByZeroMapDerivedCategoryIso_forget
     (openImmersionLowerShriekMapDerivedCategoryBaseChangeIso Λ
       (Scheme.Hom.isPullback_geometricFiberMap j h)).hom.app K =
       (Functor.mapDerivedCategoryCompIso (geometricFiberWeilLowerStar Λ t)
-        (Endofunctor.IsoAlgebra.forget _)).hom.app
+        (Endofunctor.IsoAlgebra.forget _)).inv.app
           ((openImmersionLowerShriek Λ j).mapDerivedCategory.obj K) ≫
       (Endofunctor.IsoAlgebra.forget _).mapDerivedCategory.map
         ((geometricFiberWeilExtensionByZeroMapDerivedCategoryIso hc).inv.app K) ≫
@@ -109,7 +109,7 @@ lemma geometricFiberWeilExtensionByZeroMapDerivedCategoryIso_forget
           ((geometricFiberWeilLowerStar Λ s).mapDerivedCategory.obj K) ≫
       (openImmersionLowerShriek Λ (Scheme.Hom.geometricFiberMap j h)).mapDerivedCategory.map
         ((Functor.mapDerivedCategoryCompIso (geometricFiberWeilLowerStar Λ s)
-          (Endofunctor.IsoAlgebra.forget _)).inv.app K) := by
+          (Endofunctor.IsoAlgebra.forget _)).hom.app K) := by
   apply Functor.exactDescentComparison_forget
     (openImmersionLowerShriek Λ j) (geometricFiberWeilLowerStar Λ s)
     (geometricFiberWeilLowerStar Λ t) (Endofunctor.IsoAlgebra.forget _)
