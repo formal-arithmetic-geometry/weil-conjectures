@@ -90,7 +90,7 @@ private theorem comparison_iso_restrict (σ : a ⋙ p ≅ l ⋙ b)
   dsimp only
   have hc : DerivedCategory.Plus.ι.mapIso
       ((Functor.mapDerivedCategoryPlusCompIso l b).app Z) =
-      (Functor.mapDerivedCategoryCompIso l b).app Z.obj :=
+      (Functor.mapDerivedCategoryCompIso l b).symm.app Z.obj :=
     Iso.ext (Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app _ _ Z)
   have hn : DerivedCategory.Plus.ι.mapIso
       ((Functor.mapDerivedCategoryPlusNatIso σ).app Z) =
@@ -99,7 +99,7 @@ private theorem comparison_iso_restrict (σ : a ⋙ p ≅ l ⋙ b)
   simp only [Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app, Functor.map_comp]
   rw [show DerivedCategory.Plus.ι.map
       ((Functor.mapDerivedCategoryPlusCompIso l b).inv.app Z) =
-      (Functor.mapDerivedCategoryCompIso l b).inv.app Z.obj from congrArg Iso.inv hc]
+      (Functor.mapDerivedCategoryCompIso l b).hom.app Z.obj from congrArg Iso.inv hc]
   rw [show DerivedCategory.Plus.ι.map
       ((Functor.mapDerivedCategoryPlusNatIso σ).inv.app Z) =
       (Functor.mapDerivedCategoryNatIso σ).inv.app Z.obj from congrArg Iso.inv hn]
