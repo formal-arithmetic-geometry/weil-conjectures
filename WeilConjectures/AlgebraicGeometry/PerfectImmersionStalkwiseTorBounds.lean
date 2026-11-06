@@ -106,7 +106,7 @@ theorem perfectImmersion_stalkwiseTorBounds
     infer_instance
   let eunit : 𝟙_ (schemeDerivedCategory Z) ≅
       (DerivedCategory.singleFunctor _ 0).obj (SheafOfModules.unit Z.ringCatSheaf) :=
-    Iso.refl _
+    (DerivedCategory.quotientCompQhIso _).app _
   let epush := (schemeDerivedDirectImage i).mapIso eunit ≪≫
     F.singleFunctorCompRightDerivedFunctorIso.app (SheafOfModules.unit Z.ringCatSheaf)
   have hres (x : Z) : ∃ (P : ProjectiveResolution

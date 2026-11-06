@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.CategoryTheory.Sites.Point.IsMonoidalW
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars
 public import WeilConjectures.CategoryTheory.DerivedCategory.StrictSquareArrowUniversal
 

@@ -52,7 +52,7 @@ attribute [local irreducible] tensorPullback
 
 namespace AlgebraicGeometry.ConormalGradedAlgebra
 
-private local instance conormalRestrictionSMul {Y : Scheme.{u}} (M : Y.Modules)
+local instance conormalRestrictionSMul {Y : Scheme.{u}} (M : Y.Modules)
     {U V : Y.Opens} (j : U ⟶ V) :
     SMul Γ(Y, U)
       ((ModuleCat.restrictScalars (Y.ringCatSheaf.obj.map j.op).hom).obj

@@ -72,7 +72,7 @@ theorem open_injective_coefficient_lower_comparison
         exact Injective.of_iso (HomologicalComplex.singleObjXSelf (.up ℤ) 0 J).symm
           inferInstance
       · exact (HomologicalComplex.isZero_single_obj_X _ _ _ _ hk).injective
-    have : IsIso (G.rightDerivedFunctorPlusUnit.app M) := inferInstance
+    have : IsIso (G.rightDerivedFunctorPlusUnith.app M) := inferInstance
     dsimp [Functor.rightDerivedPlusSingleUnit]
     infer_instance
   have hb := hbc j eV a sq J

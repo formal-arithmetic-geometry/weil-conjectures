@@ -127,8 +127,11 @@ theorem exists_generic_torsion_finite_stalk_colimit
     apply le_antisymm
     · rw [htop, ← hcover]
       refine iSup_le fun b ↦ ?_
-      simpa [D, j, e] using
-        (le_iSup (fun i ↦ Subobject.mk (D.obj i).obj.hom) (e.functor.obj b))
+      have hb : e.inverse.obj (e.functor.obj b) = b :=
+        (orderIsoShrink.{u + 1} B).symm_apply_apply b
+      have h := le_iSup (fun i ↦ Subobject.mk (D.obj i).obj.hom) (e.functor.obj b)
+      change Subobject.mk ((e.inverse.obj (e.functor.obj b)).val.arrow) ≤ _ at h
+      simpa only [Subobject.mk_arrow, hb] using h
     · rw [htop]
       exact le_top
   let hc := IsGrothendieckAbelian.isColimitMapCoconeOfSubobjectMkEqISup D c hsup

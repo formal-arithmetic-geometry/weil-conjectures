@@ -12,6 +12,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import WeilConjectures.AlgebraicGeometry.AffineAlternatingCechPinnedMate
 import WeilConjectures.AlgebraicGeometry.ModulePullbackComparisonTargetAutomorphism
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # Identification of the canonical map on the explicit alternating Čech model
 
