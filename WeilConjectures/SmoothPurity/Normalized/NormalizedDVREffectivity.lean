@@ -311,10 +311,13 @@ private theorem normalizedDVRKFlatUnit (n : ℕ)
     exact ((integralTowerMaps_existUnique l E X D hl P).exists.choose_spec.1 n i U x).trans
       (unrestrictedTowerUnit_condition l E X P n i U x).symm
   have h' := h.trans hq
+  erw [Functor.mapDerivedCategoryFactorsh_hom_app] at h'
   unfold normalizedDVRKFlatComparison normalizedDVRIntegralAdjunction
-  dsimp only [DerivedCategory.Qh, HomologicalComplexUpToQuasiIso.Qh,
-    Functor.mapHomotopyCategory, CategoryTheory.Quotient.lift, Functor.comp_obj] at h' ⊢
-  exact h'.trans (congrArg DerivedCategory.Q.map hg.symm)
+  simpa only [DerivedCategory.quotientCompQhIso,
+    HomologicalComplexUpToQuasiIso.quotientCompQhIso, Functor.mapHomotopyCategoryFactors,
+    Quotient.lift.isLift_hom, Quotient.lift.isLift_inv, CategoryTheory.Functor.map_id,
+    Category.id_comp, Category.comp_id, Category.assoc] using
+      h'.trans (congrArg DerivedCategory.Q.map hg.symm)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
