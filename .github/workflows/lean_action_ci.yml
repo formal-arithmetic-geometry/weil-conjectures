@@ -48,7 +48,12 @@ jobs:
           sudo docker image prune --all --force >/dev/null 2>&1 || true
           df -h /
 
+      # History, not the default depth-1 clone: `lake cache get` walks back from HEAD to the
+      # nearest commit with an uploaded build (master's tip, for a pull request's merge commit),
+      # and in a shallow clone there is nothing to walk. 50 covers `--max-revs 30` below.
       - uses: actions/checkout@v5
+        with:
+          fetch-depth: 50
 
       # elan, the toolchain and the Mathlib cache; the build is a step of its own below.
       - uses: leanprover/lean-action@v1
