@@ -147,7 +147,10 @@ instance : (pointFiberFunctor ℓ k).Additive := by
 noncomputable def pointFiberFunctorUnitIso :
     (pointFiberFunctor ℓ k).obj (𝟙_ _) ≅
       (DerivedCategory.singleFunctor _ 0).obj (ModuleCat.of _ (ULift.{u + 1} (PadicAlgCl ℓ))) :=
-  ((pointSections ℓ k).mapDerivedCategorySingleFunctor 0).app (𝟙_ (PointMod ℓ k)) ≪≫
+  (pointSections ℓ k).mapDerivedCategory.mapIso
+      ((DerivedCategory.quotientCompQhIso (PointMod ℓ k)).app
+        (𝟙_ (CochainComplex (PointMod ℓ k) ℤ))) ≪≫
+    ((pointSections ℓ k).mapDerivedCategorySingleFunctor 0).app (𝟙_ (PointMod ℓ k)) ≪≫
     (DerivedCategory.singleFunctor _ 0).mapIso (pointSectionsUnitIso ℓ k).symm
 
 /-- An object of `Mod_{ℚ̲̄_ℓ,s}` is *finite free* if it is a finite direct sum of copies of the
