@@ -71,23 +71,22 @@ set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option linter.unusedSectionVars false
-universe c v r w u
+universe c v r w
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace PresheafOfModules
+
+private noncomputable local instance spRestrictedSMul
+    {D : Type c} [Category.{v} D] {S : Dᵒᵖ ⥤ CommRingCat.{r}}
+    (M : PresheafOfModules.{r} (S ⋙ forget₂ _ _)) (U : Dᵒᵖ) (W : (Over U.unop)ᵒᵖ) :
+    SMul (((restrictOver S U.unop).obj (unit (S ⋙ forget₂ _ _))).obj W)
+      ((ModuleCat.restrictScalars
+        ((S ⋙ forget₂ CommRingCat RingCat).map W.unop.hom.op).hom).obj
+          (M.obj (op W.unop.left))) :=
+  (M.obj (op W.unop.left)).isModule.toSMul
+
 variable {C : Type c} [Category.{v} C]
   {R : Cᵒᵖ ⥤ CommRingCat.{max c v r}}
   (N : PresheafOfModules.{max c v r} (R ⋙ forget₂ _ _))
-
-noncomputable local instance sp_restrictedUnitSMul
-    (S : Cᵒᵖ ⥤ CommRingCat.{u})
-    (B : PresheafOfModules.{u} (S ⋙ forget₂ CommRingCat.{u} RingCat.{u}))
-    (U : Cᵒᵖ) (W : (Over U.unop)ᵒᵖ) :
-    SMul (((restrictOver S U.unop).obj
-      (unit (S ⋙ forget₂ CommRingCat.{u} RingCat.{u}))).obj W)
-      ((ModuleCat.restrictScalars
-        ((S ⋙ forget₂ CommRingCat.{u} RingCat.{u}).map W.unop.hom.op).hom).obj
-          (B.obj (op W.unop.left))) :=
-  (B.obj (op W.unop.left)).isModule.toSMul
 
 private lemma sp_homObjUnitIsoApp_hom_apply (X : Cᵒᵖ) (φ : (homObj (unit _) N).obj X) :
     (chart_homObjUnitIsoApp.{c, v, r} (R := R) N X).hom φ = φ.app (op (Over.mk (𝟙 X.unop))) (1 :
@@ -162,12 +161,11 @@ private noncomputable def sp_scalarEvaluation
     apply ModuleCat.hom_ext
     apply LinearMap.ext
     intro x
-    change (show R.obj (op W.unop.left) from
-        (φ.app (op ((Over.map f.unop).obj W.unop))).hom x) •
-      (show B.obj (op W.unop.left) from B.map W.unop.hom.op (B.map f y)) =
-        (show R.obj (op W.unop.left) from
-          (φ.app (op ((Over.map f.unop).obj W.unop))).hom x) •
-          (show B.obj (op W.unop.left) from B.map (W.unop.hom ≫ f.unop).op y)
+    let s : R.obj (op W.unop.left) :=
+      (φ.app (op ((Over.map f.unop).obj W.unop))).hom x
+    change s • (show B.obj (op W.unop.left) from
+      B.map W.unop.hom.op (B.map f y)) =
+        s • (show B.obj (op W.unop.left) from B.map (W.unop.hom ≫ f.unop).op y)
     rw [← map_comp_apply]
     rfl
 
@@ -202,13 +200,12 @@ private theorem sp_scalarEvaluation_unit_isIso
     apply ModuleCat.hom_ext
     apply LinearMap.ext
     intro x
-    change ((show R.obj (op W.unop.left) from x) •
-        (show R.obj (op W.unop.left) from O.map W.unop.hom.op _)) •
-        (show B.obj (op W.unop.left) from B.map W.unop.hom.op y) =
-      (show R.obj (op W.unop.left) from x) •
-        (show B.obj (op W.unop.left) from B.map W.unop.hom.op
-          ((show R.obj U from (chart_homObjUnitIsoApp.{c, v, r} (R := R) O U).hom
-            (chart_homObjUnitInvApp.{c, v, r} (R := R) O _)) • y))
+    change R.obj (op W.unop.left) at x
+    change (x * (show R.obj (op W.unop.left) from O.map W.unop.hom.op _)) •
+      (show B.obj (op W.unop.left) from B.map W.unop.hom.op y) =
+      x • (show B.obj (op W.unop.left) from B.map W.unop.hom.op
+        ((show R.obj U from (chart_homObjUnitIsoApp.{c, v, r} (R := R) O U).hom
+          (chart_homObjUnitInvApp.{c, v, r} (R := R) O _)) • y))
     simp only [sp_homObjUnitIsoApp_hom_apply.{c, v, r} (R := R), chart_homObjUnitInvApp_app_one.{c,
       v, r} (R := R)]
     rw [B.map_smul]
@@ -227,6 +224,19 @@ attribute [local irreducible] SheafOfModules.monoidalCategory homComplexFunctor 
   ringedSiteOrdinaryEvaluation ringedSiteOrdinaryBidual
 
 noncomputable section Private
+
+private local instance spSheafRestrictedSMul
+    {D : Type c} [Category.{v} D] {K : GrothendieckTopology D}
+    [K.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
+    {S : Sheaf K CommRingCat.{r}}
+    (M : SheafOfModules.{r} ((sheafCompose K (forget₂ CommRingCat RingCat)).obj S))
+    (U : Dᵒᵖ) (W : (Over U.unop)ᵒᵖ) :
+    SMul (((PresheafOfModules.restrictOver S.obj U.unop).obj
+      (SheafOfModules.unit ((sheafCompose K (forget₂ CommRingCat RingCat)).obj S)).val).obj W)
+      ((ModuleCat.restrictScalars
+        (((sheafCompose K (forget₂ CommRingCat RingCat)).obj S).obj.map W.unop.hom.op).hom).obj
+          (M.val.obj (op W.unop.left))) :=
+  (M.val.obj (op W.unop.left)).isModule.toSMul
 
 variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   [J.HasSheafCompose (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})]
@@ -514,16 +524,6 @@ private noncomputable def moduleScalarEvaluation (A B : 𝓜) :
   tensorLift.{c, v, r} J R _ _ _
     (PresheafOfModules.sp_scalarEvaluation.{c, v, r} (R := R.obj) A.val B.val)
 
-private local instance sp_sheafRestrictedUnitSMul
-    (B : 𝓜) (U : Cᵒᵖ) (W : (Over U.unop)ᵒᵖ) :
-    SMul (((PresheafOfModules.restrictOver R.obj U.unop).obj
-      (SheafOfModules.unit ((sheafCompose J
-        (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)).val).obj W)
-      ((ModuleCat.restrictScalars
-        (((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R).obj.map
-          W.unop.hom.op).hom).obj (B.val.obj (op W.unop.left))) :=
-  (B.val.obj (op W.unop.left)).isModule.toSMul
-
 private lemma moduleScalarEvaluation_apply (A B : 𝓜) (U : Cᵒᵖ)
     (y : B.val.obj U)
     (φ : (SheafOfModules.homObj.{max c v r, v, c, max c v r} (R := R) A (SheafOfModules.unit
@@ -697,8 +697,8 @@ private theorem ordinaryEvaluation_isIso_assembly
       have hρ := dualProjectionUnit_apply.{c, v, r} J R E q i hiq U φ W x
       simp only [WeilConjectures.coefficientHomComponent_eq_homComplexπ]
       with_unfolding_all
-        exact h.trans (congrArg (fun z : R.obj.obj (op W.unop.left) ↦ z •
-          (show (F.X (i + n)).val.obj (op W.unop.left) from
+        exact h.trans (congrArg (fun z : R.obj.obj (op W.unop.left) ↦
+          z • (show (F.X (i + n)).val.obj (op W.unop.left) from
             (F.X (i + n)).val.map W.unop.hom.op y)) hρ)
     · intro p q n i t hpq hit hiq U y φ
       have h := hneg p q n i t hpq hit hiq
