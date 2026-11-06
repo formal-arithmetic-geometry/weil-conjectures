@@ -25,6 +25,17 @@ namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
   diagonalCompletedSource diagonalSingleLimitComparison diagonalShiftedSingleLimitComparison
 
+/-- The `Ext` structure on strict systems over the diagonal surface, as a constant applied to
+variables. Instance search through the class projection `DiagonalTraceLocalizations.ext` at
+`diagonalSurface Y` produces an auxiliary proof whose statement the kernel only matches against
+`HasExt` by unfolding derived categories, in every declaration generated for the structure. -/
+abbrev diagonalSurfaceSystemsHasExt (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
+    [i : DiagonalTraceLocalizations l (diagonalSurface Y)] :
+    HasExt.{u + 1} (DiagonalSystems l (diagonalSurface Y)) :=
+  i.ext
+
+attribute [local instance high] diagonalSurfaceSystemsHasExt
+
 /-- Named fields for the whole-system data of the diagonal limit. This structure
 chooses no witnesses and imposes no new property on the completed class.
 
@@ -77,79 +88,5 @@ structure ClassLimitPresentation (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
           (diagonalCompletedRestriction l (diagonalSurface Y)) L
           (diagonalCompletedSource l Y) _ _ s₀ a ≫
         L.R.map (D.T.map (diagonalIntegralBoundary Y).hom)
-
-/-- The normalized source map of the entire derived limit.
-Source: `IsDiagonalLimit` (blueprint: def-diagonal-class-limit-presentation). -/
-def ClassLimitPresentation.sourceMap {l : ℕ} [Fact l.Prime] {Y : Scheme.{u}}
-    [DiagonalTraceLocalizations l (diagonalSurface Y)]
-    {hY : IsUnit (l : Γ(Y, ⊤))}
-    {D : DiagonalDerivedReduction l (diagonalScalarExtension l (diagonalSurface Y))}
-    (d : ClassLimitPresentation l Y hY D) :=
-  diagonalSingleLimitComparison (diagonalCompletedRestriction l (diagonalSurface Y))
-    d.L (diagonalCompletedSource l Y) _ _ d.s₀ d.a
-
-/-- The normalized target map of the entire derived limit.
-Source: `IsDiagonalLimit` (blueprint: def-diagonal-class-limit-presentation). -/
-def ClassLimitPresentation.targetMap {l : ℕ} [Fact l.Prime] {Y : Scheme.{u}}
-    [DiagonalTraceLocalizations l (diagonalSurface Y)]
-    {hY : IsUnit (l : Γ(Y, ⊤))}
-    {D : DiagonalDerivedReduction l (diagonalScalarExtension l (diagonalSurface Y))}
-    (d : ClassLimitPresentation l Y hY D) :=
-  diagonalShiftedSingleLimitComparison (diagonalCompletedRestriction l (diagonalSurface Y))
-    d.L (Scheme.purTwistZlModule (diagonalSurface Y) l) _ _ d.t₀ d.b
-
-/-- A normalized completed class supplies the named whole-system presentation.
-
-Source: the definition of `IsDiagonalLimit`.
-(blueprint: def-diagonal-class-limit-presentation).
-
-Proof: unpack its witnesses, retain the ordinary endpoint normalizations, and
-retain the isomorphism and uniqueness parts of its compatibility assertion.
-The defining whole-system arrow equation is unchanged. -/
-theorem classLimitPresentation_exists (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
-    [DiagonalTraceLocalizations l (diagonalSurface Y)]
-    (hY : IsUnit (l : Γ(Y, ⊤)))
-    (D : DiagonalDerivedReduction l (diagonalScalarExtension l (diagonalSurface Y)))
-    (δ : diagonalCompletedDomain l Y ⟶ diagonalCompletedCodomain l Y)
-    (hδ : IsDiagonalLimit l Y hY D δ) :
-    ∃ d : ClassLimitPresentation l Y hY D,
-      (diagonalCompletedUnderlying l (diagonalSurface Y)).map δ ≫
-          diagonalShiftedSingleLimitComparison
-            (diagonalCompletedRestriction l (diagonalSurface Y)) d.L
-            (Scheme.purTwistZlModule (diagonalSurface Y) l) _ _ d.t₀ d.b =
-        diagonalSingleLimitComparison
-            (diagonalCompletedRestriction l (diagonalSurface Y)) d.L
-            (diagonalCompletedSource l Y) _ _ d.s₀ d.a ≫
-          d.L.R.map (D.T.map (diagonalIntegralBoundary Y).hom) := by
-  rcases hδ with ⟨H, roots, a, b, c, ha, hc, hfinite, L, M, s₀, t₀,
-    ⟨hs, ht, hcompat⟩, hwhole⟩
-  refine ⟨⟨H, roots, a, b, c, ha, hc, hfinite, L, s₀, t₀, hs, ht,
-    hcompat.1, hcompat.2.1, hcompat.2.2.2.2.1⟩, hwhole⟩
-
-/-- Uniqueness in the full limit equation identifies a proposed completed class.
-
-Source: the uniqueness clause of `IsDiagonalLimit`.
-(blueprint: def-diagonal-class-limit-presentation).
-
-Proof: the asserted equality after restriction gives the defining whole-system
-equation for the proposed arrow. Apply uniqueness to the two solutions. -/
-theorem ClassLimitPresentation.eq_of_map_eq (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
-    [DiagonalTraceLocalizations l (diagonalSurface Y)]
-    (hY : IsUnit (l : Γ(Y, ⊤)))
-    (D : DiagonalDerivedReduction l (diagonalScalarExtension l (diagonalSurface Y)))
-    (d : ClassLimitPresentation l Y hY D)
-    (δ : diagonalCompletedDomain l Y ⟶ diagonalCompletedCodomain l Y)
-    (hδ : (diagonalCompletedUnderlying l (diagonalSurface Y)).map δ ≫
-          diagonalShiftedSingleLimitComparison
-            (diagonalCompletedRestriction l (diagonalSurface Y)) d.L
-            (Scheme.purTwistZlModule (diagonalSurface Y) l) _ _ d.t₀ d.b =
-        diagonalSingleLimitComparison
-            (diagonalCompletedRestriction l (diagonalSurface Y)) d.L
-            (diagonalCompletedSource l Y) _ _ d.s₀ d.a ≫
-          d.L.R.map (D.T.map (diagonalIntegralBoundary Y).hom))
-    (δ' : diagonalCompletedDomain l Y ⟶ diagonalCompletedCodomain l Y)
-    (h : (diagonalCompletedUnderlying l (diagonalSurface Y)).map δ' =
-      (diagonalCompletedUnderlying l (diagonalSurface Y)).map δ) : δ' = δ := by
-  exact d.unique.unique (by rw [h]; exact hδ) hδ
 
 end AlgebraicGeometry.ProEtale.DiagonalTrace
