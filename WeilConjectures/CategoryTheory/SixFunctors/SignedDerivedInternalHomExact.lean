@@ -253,9 +253,9 @@ private theorem oppositeConeBoundary_f {E G : CochainComplex A ℤ}
     HomologicalComplex.XIsoOfEq_hom_comp_XIsoOfEq_hom,
     SignedDoubleHomCone.Calculation.fstX_reindex]
   change 𝟙 _ ≫ (-HomologicalComplex.homotopyCofiber.fstX f
-    (p + -1) (p + -1 + 1) rfl ≫ 𝟙 _ ≫
-      (E.XIsoOfEq (show p + -1 + 1 = p by omega)).hom) = _
-  simp only [Category.id_comp, Category.assoc, Preadditive.neg_comp,
+    (p + -1) (p + -1 + 1) rfl ≫ 𝟙 _ ≫ 𝟙 _ ≫
+      (E.XIsoOfEq (show p + -1 + 1 = p by omega)).hom ≫ 𝟙 _) = _
+  simp only [Category.id_comp, Category.comp_id, Category.assoc, Preadditive.neg_comp,
     SignedDoubleHomCone.Calculation.fstX_reindex]
 
 end CategoryTheory.SignedDoubleHomCone.Calculation
