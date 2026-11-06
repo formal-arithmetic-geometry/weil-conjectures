@@ -155,7 +155,7 @@ lemma isZero_relativeDifferentials_of_surjective
   ext U x
   obtain ⟨a, rfl⟩ := h U x
   simp only [relativeDifferentialsHomEquiv_apply, PresheafOfModulesOfCommRing.Derivation.postcomp_d_apply]
-  erw [Derivation'.d_app]
+  erw [PresheafOfModulesOfCommRing.Derivation'.d_app]
   simp
 
 /-- The sheaf of relative differentials of an open immersion vanishes. -/
