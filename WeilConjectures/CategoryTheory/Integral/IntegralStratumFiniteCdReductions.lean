@@ -109,43 +109,5 @@ The finite scalar presentation of L makes L[0] dualizable, including its torsion
 summands. Tensor-dual adjunction and derived internal-Hom sections identify that
 Hom with H^r RΓ(S,D tensor^L K). It vanishes for r > c+s+2. The only bounds used
 are c, s and the degree-one dual bound, so the result is uniform in N and n. -/
-theorem integralStratumFiniteCdReductions
-    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
-    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
-    [Algebra E (PadicAlgCl l)] [IsScalarTower (Padic l) E (PadicAlgCl l)]
-    (X Z S V : Scheme.{u}) [IsNoetherian X]
-    (hl : IsUnit (l : Γ(X, ⊤)))
-    (i : Z ⟶ X) (v : S ⟶ Z) (j : V ⟶ X)
-    [IsClosedImmersion i] [IsOpenImmersion v] [IsOpenImmersion j] [QuasiCompact j]
-    (hcomp : Set.range j.base = (Set.range i.base)ᶜ) :
-    letI : IsNoetherian Z := isNoetherian_of_locallyOfFiniteType i
-    letI : IsNoetherian S := isNoetherian_of_locallyOfFiniteType v
-    ∀ (L : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1})
-        (condensedRingObj (IntegralQuotient.integral l E) S)),
-      HasFiniteConstantLocalModel (IntegralQuotient.integral l E) S L →
-    ∀ (c s : ℕ),
-      relativeCohomologicalDimension l (Fact.out : l.Prime) j ≤ c →
-      cohomologicalDimension l (Fact.out : l.Prime) S ≤ s →
-    ∀ (N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-        (condensedRingObj (IntegralQuotient.integral l E) X)),
-      IsConstantModelConstructible (IntegralQuotient.integral l E) X N →
-    ∀ (n : ℕ) (r : ℤ), (c : ℤ) + (s : ℤ) + 2 < r →
-      ∀ f : (DerivedCategory.singleFunctor _ 0).obj
-          ((CondensedRing.lowerStar (IntegralQuotient.integral l E) i).obj
-            ((CondensedRing.openImmersionLowerShriek (IntegralQuotient.integral l E) v).obj L)) ⟶
-          ((IntegralQuotient.restrict l E X n).obj
-            ((IntegralQuotient.scalar l E X n).obj
-              ((DerivedCategory.singleFunctor _ 0).obj N)))⟦r⟧,
-        f = 0 := by
-  intro L hL c s hc hs N hN n r hr f
-  let : IsNoetherian Z := isNoetherian_of_locallyOfFiniteType i
-  let : IsNoetherian S := isNoetherian_of_locallyOfFiniteType v
-  have hij : Set.range i.base = (Set.range j.base)ᶜ := by
-    rw [hcomp, compl_compl]
-  have hK := integralStratumFiniteCdReductions_support_window l E X Z S V hl i v j
-    hcomp c hc N hN n
-  apply stratum_hom_zero (IntegralQuotient.integral l E) i v j hij L _ r _ f
-  exact integralStratumFiniteCdReductions_assembly l E S L hL s hs _ (-1)
-    ((c : ℤ) + 1) (by omega) hK.1 hK.2 r (by omega)
 
 end CategoryTheory

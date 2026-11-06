@@ -169,8 +169,8 @@ private theorem derivedCompositor_heq {C C' : Type w₁} {D D' : Type w₂} {E' 
     [H'.Additive] [Limits.PreservesFiniteLimits H'] [Limits.PreservesFiniteColimits H']
     (eF : HEq F F') (eG : HEq G G') (eH : HEq H H')
     (a : H ≅ F ⋙ G) (a' : H' ≅ F' ⋙ G') (ha : HEq a a') :
-    HEq (Functor.mapDerivedCategoryNatIso a ≪≫ Functor.mapDerivedCategoryCompIso F G)
-      (Functor.mapDerivedCategoryNatIso a' ≪≫ Functor.mapDerivedCategoryCompIso F' G') := by
+    HEq (Functor.mapDerivedCategoryNatIso a ≪≫ (Functor.mapDerivedCategoryCompIso F G).symm)
+      (Functor.mapDerivedCategoryNatIso a' ≪≫ (Functor.mapDerivedCategoryCompIso F' G').symm) := by
   subst hC hD hE
   obtain rfl := eq_of_heq hiC
   obtain rfl := eq_of_heq hiD

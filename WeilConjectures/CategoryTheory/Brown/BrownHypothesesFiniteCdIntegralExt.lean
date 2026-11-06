@@ -275,26 +275,6 @@ private theorem reductionArrow_eq
 
 set_option maxHeartbeats 2000000 in
 -- Kernel checking unfolds both scalar-change functors in the coefficient-arrow transport.
-private theorem finite_reduction_bound
-    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
-    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
-    [Algebra E (PadicAlgCl l)] [IsScalarTower (Padic l) E (PadicAlgCl l)]
-    (X Z S V : Scheme.{u}) [IsNoetherian X] [CompactSpace S] [QuasiSeparatedSpace S]
-    (hl : IsUnit (l : Γ(X, ⊤)))
-    (i : Z ⟶ X) (v : S ⟶ Z) (j : V ⟶ X)
-    [IsClosedImmersion i] [IsOpenImmersion v] [IsOpenImmersion j] [QuasiCompact j]
-    (hcomp : Set.range j.base = (Set.range i.base)ᶜ)
-    (c s : ℕ)
-    (hc : relativeCohomologicalDimension l (Fact.out : l.Prime) j ≤ c)
-    (hs : cohomologicalDimension l (Fact.out : l.Prime) S ≤ s)
-    (n : ℕ) (r : ℤ) (hr : (c : ℤ) + (s : ℤ) + 2 < r) :
-    reductionBound X Z S i v r (coefficientArrow (DerivedNakayama.reductionRing l E (n + 1))) := by
-  have hb : reductionBound X Z S i v r
-      (coefficientArrow (IntegralQuotient.reduction l E n)) := by
-    intro L hL N hN f
-    exact integralStratumFiniteCdReductions l E X Z S V hl i v j hcomp
-      L hL c s hc hs N hN n r hr f
-  exact (congrArg (reductionBound X Z S i v r) (reductionArrow_eq l E n)).mp hb
 
 attribute [local instance 40000] AdicCompletion.ringMonoidalObject
   AdicCompletion.finiteRingMonoidalObject AdicCompletion.modulesDerived
@@ -302,33 +282,6 @@ attribute [local instance 40000] AdicCompletion.ringMonoidalObject
 
 set_option maxHeartbeats 2000000 in
 -- Compare the finite-bound presentation with the native completion-level API once.
-private theorem completion_reduction_bound
-    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
-    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
-    [Algebra E (PadicAlgCl l)] [IsScalarTower (Padic l) E (PadicAlgCl l)]
-    (X Z S V : Scheme.{u}) [IsNoetherian X] [CompactSpace S] [QuasiSeparatedSpace S]
-    (hl : IsUnit (l : Γ(X, ⊤)))
-    (i : Z ⟶ X) (v : S ⟶ Z) (j : V ⟶ X)
-    [IsClosedImmersion i] [IsOpenImmersion v] [IsOpenImmersion j] [QuasiCompact j]
-    (hcomp : Set.range j.base = (Set.range i.base)ᶜ)
-    (c s : ℕ)
-    (hc : relativeCohomologicalDimension l (Fact.out : l.Prime) j ≤ c)
-    (hs : cohomologicalDimension l (Fact.out : l.Prime) S ≤ s)
-    (n : ℕ) (r : ℤ) (hr : (c : ℤ) + (s : ℤ) + 2 < r) :
-    letI : EssentiallySmall.{u + 1} X.ProEt := essentiallySmallSelf.{0} X.ProEt
-    ∀ L : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1})
-        (condensedRingObj (DerivedNakayama.integerRing l E) S),
-      HasFiniteConstantLocalModel (DerivedNakayama.integerRing l E) S L →
-    ∀ N : AdicCompletion.Modules l E X,
-      IsConstantModelConstructible (DerivedNakayama.integerRing l E) X N →
-    Subsingleton ((DerivedCategory.singleFunctor _ 0).obj
-        ((CondensedRing.lowerStar (DerivedNakayama.integerRing l E) i).obj
-          ((CondensedRing.openImmersionLowerShriek (DerivedNakayama.integerRing l E) v).obj L)) ⟶
-        (AdicCompletion.integralLevel l E X
-          ((DerivedCategory.singleFunctor _ 0).obj N) n)⟦r⟧) := by
-  intro L hL N hN
-  have hf := finite_reduction_bound l E X Z S V hl i v j hcomp c s hc hs n r hr
-  exact subsingleton_of_all_eq _ (hf L hL N hN)
 
 private theorem hom_roos_iso_zero
     {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
@@ -346,116 +299,6 @@ private theorem hom_roos_iso_zero
 
 set_option maxHeartbeats 2000000 in
 -- Comparing the native Roos levels with the scalar-change bounds unfolds large functors.
-private theorem model_uniform_bound
-    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
-    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
-    [Algebra E (PadicAlgCl l)] [IsScalarTower (Padic l) E (PadicAlgCl l)]
-    {k : Type u} [Field k] [Fact (ringChar k ≠ l)]
-    (hcd : cohomologicalDimension l (Fact.out : l.Prime) (Spec (.of k)) < ⊤)
-    {X : Scheme.{u}} (aX : X ⟶ Spec (.of k))
-    [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX]
-    (M : AdicCompletion.Modules l E X)
-    (hM : IsConstantModelConstructible (DerivedNakayama.integerRing l E) X M) :
-    ∃ d : ℕ, ∀ N : AdicCompletion.Modules l E X,
-      IsConstantModelConstructible (DerivedNakayama.integerRing l E) X N →
-      ∀ r : ℤ, (d : ℤ) < r →
-        Subsingleton ((DerivedCategory.singleFunctor _ 0).obj M ⟶
-          ((DerivedCategory.singleFunctor _ 0).obj N)⟦r⟧) := by
-  classical
-  let : X.Over (Spec (.of k)) := ⟨aX⟩
-  have : LocallyOfFiniteType (X ↘ Spec (.of k)) :=
-    inferInstanceAs (LocallyOfFiniteType aX)
-  have : QuasiCompact (X ↘ Spec (.of k)) := inferInstanceAs (QuasiCompact aX)
-  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian aX
-  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace aX
-  have : IsNoetherian X := ⟨⟩
-  have hl : IsUnit (l : Γ(X, ⊤)) := by
-    have hn : (l : k) ≠ 0 := CharP.cast_ne_zero_of_ne_of_prime k
-      (Fact.out : l.Prime) (Fact.out : ringChar k ≠ l)
-    simpa using hn.isUnit.map ((Scheme.ΓSpecIso (.of k)).inv ≫ aX.appTop).hom
-  let P : DerivedCategory (AdicCompletion.Modules l E X) → Prop := fun K ↦
-    ∃ N, IsConstantModelConstructible (DerivedNakayama.integerRing l E) X N ∧
-      K = (DerivedCategory.singleFunctor _ 0).obj N
-  let Q : ObjectProperty (DerivedCategory (AdicCompletion.Modules l E X)) :=
-    UniformHomBound P
-  have : Q.IsClosedUnderIsomorphisms :=
-    ⟨fun e h ↦ uniformHomBound_iso P e h⟩
-  obtain ⟨R, _, ⟨Z, i, v, hi, hv, hr⟩, hmodels, _⟩ :=
-    CondensedRing.finiteConstantModels_commonReducedStratification
-      (DerivedNakayama.integerRing l E) X 1
-      (fun _ ↦ M) (fun _ ↦ hM)
-  have hQ : Q ((DerivedCategory.singleFunctor _ 0).obj M) := by
-    apply CondensedRing.finiteConstantModel_fixedStrata_generation
-      (DerivedNakayama.integerRing l E) X R Z i v hi hv hr Q
-      (fun _ hz ↦ uniformHomBound_zero P hz)
-      (fun T hT h₁ h₃ ↦ uniformHomBound_extension P T hT h₁ h₃) M
-    intro a
-    have : IsClosedImmersion (i a.castSucc) := (hi a.castSucc).1
-    have : IsOpenImmersion (v a) := (hv a).1
-    have : TopologicalSpace.NoetherianSpace (Z a.castSucc) :=
-      (i a.castSucc).isClosedEmbedding.isEmbedding.isInducing.noetherianSpace
-    have : TopologicalSpace.NoetherianSpace (R.domain a) :=
-      (v a).isOpenEmbedding.isEmbedding.isInducing.noetherianSpace
-    let U : X.Opens := ⟨(Set.range (i a.castSucc))ᶜ,
-      (i a.castSucc).isClosedEmbedding.isClosed_range.isOpen_compl⟩
-    have : TopologicalSpace.NoetherianSpace U.toScheme :=
-      U.ι.isOpenEmbedding.isEmbedding.isInducing.noetherianSpace
-    have : QuasiCompact U.ι := inferInstance
-    have : QuasiCompact (v a) := inferInstance
-    let : (Z a.castSucc).Over (Spec (.of k)) := ⟨i a.castSucc ≫ aX⟩
-    let : (R.domain a).Over (Spec (.of k)) := ⟨v a ≫ i a.castSucc ≫ aX⟩
-    let : U.toScheme.Over (Spec (.of k)) := ⟨U.ι ≫ aX⟩
-    have : LocallyOfFiniteType ((Z a.castSucc) ↘ Spec (.of k)) :=
-      inferInstanceAs (LocallyOfFiniteType (i a.castSucc ≫ aX))
-    have : QuasiCompact ((Z a.castSucc) ↘ Spec (.of k)) :=
-      inferInstanceAs (QuasiCompact (i a.castSucc ≫ aX))
-    have : LocallyOfFiniteType ((R.domain a) ↘ Spec (.of k)) :=
-      inferInstanceAs (LocallyOfFiniteType (v a ≫ i a.castSucc ≫ aX))
-    have : QuasiCompact ((R.domain a) ↘ Spec (.of k)) :=
-      inferInstanceAs (QuasiCompact (v a ≫ i a.castSucc ≫ aX))
-    have : LocallyOfFiniteType (U.toScheme ↘ Spec (.of k)) :=
-      inferInstanceAs (LocallyOfFiniteType (U.ι ≫ aX))
-    have : QuasiCompact (U.toScheme ↘ Spec (.of k)) :=
-      inferInstanceAs (QuasiCompact (U.ι ≫ aX))
-    have : U.ι.IsOver (Spec (.of k)) := ⟨rfl⟩
-    obtain ⟨c, hc⟩ := WithTop.ne_top_iff_exists.mp
-      (ne_of_lt (relativeCohomologicalDimension_lt_top_of_finiteType l Fact.out hcd U.ι))
-    obtain ⟨s, hs⟩ := WithTop.ne_top_iff_exists.mp
-      (ne_of_lt (cohomologicalDimension_lt_top_of_finiteType l Fact.out hcd
-        (X := R.domain a)))
-    refine ⟨c + s + 3, ?_⟩
-    rintro K ⟨N, hN, rfl⟩ r hdeg
-    obtain ⟨B, hB, ⟨eB⟩, hη⟩ := complete_sheaf l E X N hN
-    let := AdicCompletion.modules_countableAB4Star l E X
-    let := derivedCategory_hasCountableProducts (AdicCompletion.Modules l E X)
-    obtain ⟨p, δ, htri, _⟩ := AdicCompletion.roos_isDerivedLimit l E X
-      ((DerivedCategory.singleFunctor _ 0).obj N) B hB eB
-    have : IsIso (AdicCompletion.completionMap l E X
-        ((DerivedCategory.singleFunctor _ 0).obj N) B eB) := by
-      dsimp only [AdicCompletion.completionMap]
-      infer_instance
-    let e := asIso (AdicCompletion.completionMap l E X
-      ((DerivedCategory.singleFunctor _ 0).obj N) B eB)
-    apply hom_roos_iso_zero ((DerivedCategory.singleFunctor _ 0).obj
-      ((CondensedRing.lowerStar (DerivedNakayama.integerRing l E) (i a.castSucc)).obj
-        ((CondensedRing.openImmersionLowerShriek (DerivedNakayama.integerRing l E) (v a)).obj
-          ((CondensedRing.upperStar (DerivedNakayama.integerRing l E) (R.immersion a)).obj M))))
-      ((DerivedCategory.singleFunctor _ 0).obj N)
-      (DerivedCategory.Q.obj (AdicCompletion.roos l E X B))
-      (AdicCompletion.integralLevel l E X ((DerivedCategory.singleFunctor _ 0).obj N))
-      (AdicCompletion.integralStep l E X ((DerivedCategory.singleFunctor _ 0).obj N)) p δ htri e r
-    · intro n
-      have hf := completion_reduction_bound l E X (Z a.castSucc) (R.domain a) U.toScheme
-        hl (i a.castSucc) (v a) U.ι (by exact U.range_ι) c s (le_of_eq hc.symm)
-        (le_of_eq hs.symm) n (r - 1) (by push_cast at hdeg; omega)
-      exact hf _ (hmodels 0 a) N hN
-    · intro n
-      have hf := completion_reduction_bound l E X (Z a.castSucc) (R.domain a) U.toScheme
-        hl (i a.castSucc) (v a) U.ι (by exact U.range_ι) c s (le_of_eq hc.symm)
-        (le_of_eq hs.symm) n r (by push_cast at hdeg; omega)
-      exact hf _ (hmodels 0 a) N hN
-  obtain ⟨d, hd⟩ := hQ
-  exact ⟨d, fun N hN r hr ↦ hd _ ⟨N, hN, rfl⟩ r hr⟩
 
 end
 
@@ -484,52 +327,5 @@ triangle adds at most one to the bound; no immersion inverse image is commuted w
 this inverse limit. Take a maximum over the finitely many pieces of the filtration
 and apply Hom exactness along its triangles. The empty filtration gives the zero case.
 The cohomological-dimension assumption supplies all bounds by Stacks 0F10. -/
-theorem brownHypotheses_integral_uniformExtBound_of_finite_cd
-    (ℓ : ℕ) [Fact ℓ.Prime]
-    {k : Type u} [Field k] [Fact (ringChar k ≠ ℓ)]
-    (hcd : cohomologicalDimension ℓ (Fact.out : ℓ.Prime) (Spec (.of k)) < ⊤)
-    {X : Scheme.{u}} (aX : X ⟶ Spec (.of k))
-    [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX] :
-    ∀ E : PadicAlgCl.FiniteIntermediateField ℓ,
-      HasUniformConstructibleExtBound
-        (condensedRingObj (Profinite.padicIntegersRingObj.{u} ℓ E) X) := by
-  classical
-  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian aX
-  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace aX
-  have : IsNoetherian X := ⟨⟩
-  let : EssentiallySmall.{u + 1} X.ProEt := essentiallySmallSelf.{0} X.ProEt
-  intro E
-  let F := ULift.{u} E.val
-  let : Algebra F (PadicAlgCl ℓ) :=
-    (E.val.val.toRingHom.comp ULift.ringEquiv.toRingHom).toAlgebra
-  let : IsScalarTower ℚ_[ℓ] F (PadicAlgCl ℓ) :=
-    IsScalarTower.of_algebraMap_eq (fun _ ↦ rfl)
-  let eR := integerRingSheafIso.{u} ℓ ⟨E.val, E.property⟩
-  let e := (sheafCompose (coherentTopology Profinite.{u})
-    (forget₂ RingCat.{u + 1} Ab.{u + 1})).mapIso eR
-  have : IsMonHom e.inv := Sheaf.isMonHom_sheafCompose_map _ eR.inv
-  let G := Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-    (coefficientMap e.inv X)
-  have : G.IsEquivalence :=
-    (Mod.comapEquivalenceOfIsIso (coefficientMap e.inv X)).isEquivalence_functor
-  have : G.mapDerivedCategory.IsEquivalence := Functor.isEquivalence_mapDerivedCategory G
-  intro M hM
-  have hMG := integral_internal_constant_models ℓ F X (G.obj M)
-    (constructible_comap (coefficientMap e.inv X) hM)
-  obtain ⟨d, hd⟩ := model_uniform_bound ℓ F hcd aX (G.obj M) hMG
-  refine ⟨-(d : ℤ) - 1, ?_⟩
-  intro N hN n hn f
-  have hNG := integral_internal_constant_models ℓ F X (G.obj N)
-    (constructible_comap (coefficientMap e.inv X) hN)
-  let a := (G.mapDerivedCategorySingleFunctor 0).app M
-  let b := (G.mapDerivedCategorySingleFunctor n).app N
-  let c := ((DerivedCategory.singleFunctors _).shiftIso (-n) n 0 (by omega)).app (G.obj N)
-  have hv := hd (G.obj N) hNG (-n) (by omega)
-  have hz : a.inv ≫ G.mapDerivedCategory.map f ≫ b.hom ≫ c.inv = 0 := hv.elim _ _
-  apply G.mapDerivedCategory.map_injective
-  rw [Functor.map_zero]
-  apply (cancel_epi a.inv).mp
-  apply (cancel_mono (b.hom ≫ c.inv)).mp
-  simpa only [Category.assoc, comp_zero, zero_comp] using hz
 
 end CategoryTheory

@@ -147,43 +147,5 @@ private theorem realization_directImage
 /-- The finite-reduction classical models over a Noetherian source; no base field is used.
 Source: blueprint lem-sfb-integral-proper-reduction-model, with the base field used only to
 make the source Noetherian (blueprint: lem-sfb-integral-proper-reduction-model). -/
-theorem integralProperReductionModel_of_isNoetherian
-    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
-    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
-    {X Y : Scheme.{u}} [IsNoetherian X] (p : X ⟶ Y) [IsProper p]
-    (K : DerivedCategory (AdicCompletion.Modules l E X))
-    (hK : constantModelBoundedConstructible (DerivedNakayama.integerRing l E) X K)
-    (n : ℕ) :
-    let R := ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))
-    let W (Z : Scheme.{u}) := sheafCompose Z.smallEtaleTopology
-      (forget₂ (ModuleCat.{u + 1} R) Ab.{u + 1}) ⋙ comparisonUpperStar Ab.{u + 1} Z
-    ∃ L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)),
-      Nonempty ((Mod.forget (AdicCompletion.ring l E X)).mapDerivedCategory.obj
-        (AdicCompletion.integralLevel l E X K n) ≅ (W X).mapDerivedCategory.obj L) ∧
-      Nonempty ((Mod.forget (AdicCompletion.ring l E Y)).mapDerivedCategory.obj
-        (AdicCompletion.integralLevel l E Y
-          ((CondensedRing.moduleObjectDerivedPushforward
-            (DerivedNakayama.integerRing l E) p).obj K) n) ≅
-        (W Y).mapDerivedCategory.obj
-          ((Etale.lowerStar (ModuleCat.{u + 1} R) p).rightDerivedFunctor.obj L)) := by
-  classical
-  let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
-  let A := Padic.coefficientExtensionRing l E (n + 1)
-  let : Finite A := Padic.finite_coefficientExtensionRing l E (n + 1) (by omega)
-  let : DiscreteTopology A := finiteTopology_discrete l E n
-  let Q := (AdicCompletion.derivedReduction l E X n).obj K
-  have hQ := integralReduction_constantModelBoundedConstructible l E X K hK n
-  obtain ⟨L, hL, ⟨eL⟩⟩ := finiteConstantModel_etale_origin A X Q hQ
-  let d : (Mod.forget (AdicCompletion.ring l E X)).mapDerivedCategory.obj
-      (AdicCompletion.integralLevel l E X K n) ≅
-      (Mod.forget (AdicCompletion.finiteRing l E X n)).mapDerivedCategory.obj Q :=
-    ((Functor.mapDerivedCategoryCompIso
-      (Mod.comap (AdicCompletion.quotient l E X n))
-      (Mod.forget (AdicCompletion.ring l E X))).app Q).symm
-  let e := d ≪≫ eL
-  refine ⟨L, ⟨e⟩, ?_⟩
-  obtain ⟨r⟩ := integralReduction_underlying_directImage l E p K hK.1 n
-  obtain ⟨c⟩ := realization_directImage (ULift.{u + 1} A) p L hL
-  exact ⟨r ≪≫ (ProEtale.lowerStar Ab.{u + 1} p).rightDerivedFunctor.mapIso e ≪≫ c.symm⟩
 
 end AlgebraicGeometry.ProEtale

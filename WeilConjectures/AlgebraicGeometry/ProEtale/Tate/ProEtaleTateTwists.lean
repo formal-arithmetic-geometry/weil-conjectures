@@ -6,7 +6,6 @@ Authors: Bin Wu
 module
 
 public import Mathlib.AlgebraicGeometry.Sites.ElladicCohomology
-public import WeilConjectures.AlgebraicGeometry.Tate.TateTwistLocallyFree
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension
 public import WeilConjectures.CategoryTheory.InternalAbelianSheafModuleEquivalence
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf

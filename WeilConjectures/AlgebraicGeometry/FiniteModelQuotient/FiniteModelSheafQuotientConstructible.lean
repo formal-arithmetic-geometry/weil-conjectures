@@ -144,27 +144,6 @@ private def ordinary_homology_cokernel (T : Scheme.{u}) (n a b : ℕ)
     (K.sc 0).mapHomologyIso F ≪≫
     F.mapIso (double_homology_cokernel (differential l E n a b v))
 
-private theorem local_calculation (V : Scheme.{u}) (M : AdicCompletion.Modules l E V)
-    (n : ℕ) [Finite (R l E n)] (enc : ∀ T : Scheme.{u}, Encoding l E n T) :
-    LocalCalculation l E V M n enc := by
-  let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
-  constructor
-  intro S C i j P hP eP a b v w hinj hexact hsurj
-  obtain ⟨e⟩ := chart_comparison l E V ((C i).X j) ((C i).f j ≫ S.immersion i)
-    M n (enc _) P eP a b v w hinj hexact hsurj
-  let h := (derivedEncoding l E n ((C i).X j) (enc ((C i).X j))).functor.mapIso e ≪≫
-    (derivedEncoding l E n ((C i).X j) (enc ((C i).X j))).counitIso.app
-      (ordinaryComplex l E _ n a b v)
-  obtain ⟨hk, hc⟩ := differential_finite l E n a b v
-  let := hk
-  let := hc
-  refine ⟨⟨e⟩, ⟨(ordinaryHomology l E n ((C i).X j) (-1)).mapIso h ≪≫
-    ordinary_homology_kernel l E _ n a b v⟩,
-    ⟨(ordinaryHomology l E n ((C i).X j) 0).mapIso h ≪≫
-      ordinary_homology_cokernel l E _ n a b v⟩, hk, hc, ?_, ?_⟩
-  · exact Module.finitePresentation_of_finite _ _
-  · exact Module.finitePresentation_of_finite _ _
-
 private theorem bounded_from_vanishing
     {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
     (K : DerivedCategory C)
@@ -225,31 +204,5 @@ lem-pe-finite-discrete-encoding-pullback-fixed. They are ordinary locally consta
 sheaves with finite stalks by lem-weil-pbc-proetale-finite-model-stalks. The two recorded
 constructibility definitions give both bounded constructibility conclusions. Empty
 strata have only the zero sheaf. No completion property of M is used. -/
-theorem finite_model_sheaf_quotient_constructible
-    (V : Scheme.{u}) [CompactSpace V] [QuasiSeparatedSpace V]
-    (M : AdicCompletion.Modules l E V)
-    (hM : IsConstantModelConstructible (DerivedNakayama.integerRing l E) V M) :
-    ∀ n : ℕ, ∃ hf : Finite (R l E n),
-      @DiscreteTopology (R l E n) (AdicCompletion.finiteTopology l E (n + 1)) ∧
-      (∀ q : ℤ, q ≠ -1 → q ≠ 0 →
-        IsZero ((DerivedCategory.homologyFunctor _ q).obj (reduction l E V M n))) ∧
-      constantModelBoundedConstructible (DerivedNakayama.quotientRing l E (n + 1)) V
-        (reduction l E V M n) ∧
-      (∃ enc : ∀ T : Scheme.{u}, Encoding l E n T,
-        OrdinaryConclusion l E V M n hf (enc V) ∧ LocalCalculation l E V M n enc) := by
-  classical
-  intro n
-  let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
-  let : Finite (R l E n) := Padic.finite_coefficientExtensionRing l E (n + 1) (by omega)
-  have hd := finiteTopology_discrete l E n
-  let := hd
-  let enc : ∀ T : Scheme.{u}, Encoding l E n T := fun T ↦
-    (FiniteDiscreteOrdinary.encoding_exists (R l E n) T).some
-  have hcalc := local_calculation l E V M n enc
-  obtain ⟨hv, hc, ho⟩ := cohomology_descent l E V M hM n inferInstance hd enc hcalc
-  have hb := bounded_from_vanishing (reduction l E V M n) hv
-  refine ⟨inferInstance, hd, hv, ⟨hb, hc⟩, enc, ?_, hcalc⟩
-  let F := (enc V).ordinary.functor ⋙ (enc V).fixed.functor
-  exact ⟨F.bounded_mapDerivedCategory_obj hb, ho⟩
 
 end AlgebraicGeometry.ProEtale.FiniteModelQuotient
