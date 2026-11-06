@@ -164,10 +164,6 @@ theorem completedConstantRlimUnit_exists (T : Scheme.{u}) :
                 (((completedTowerConstant d T).mapHomologicalComplex (.up ℤ)).obj C)) ≫
           (completedTowerRlim d T).map
             (((completedTowerConstant d T).mapDerivedCategoryFactors).inv.app C) := by
-  simp only [DerivedCategory.quotientCompQhIso,
-    HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift_hom,
-    Quotient.lift.isLift_inv]
-  erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.id_comp]
   let : HasSheafify (ProEt.topology T) AddCommGrpCat.{u + 1} :=
     WeilConjectures.integralCoefficientAbSheafify.{u, 0} T
   let : (ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
@@ -195,12 +191,21 @@ theorem completedConstantRlimUnit_exists (T : Scheme.{u}) :
       (Y := completedDerivedConstant d T ⋙ completedTowerRlim d T) τ
   refine ⟨η, ?_, ?_⟩
   · intro C
+    simp only [DerivedCategory.quotientCompQhIso,
+      HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift_hom,
+      Quotient.lift.isLift_inv]
+    erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.id_comp]
     exact NatTrans.congr_app hη C
   · intro η' hη'
     apply Localization.natTrans_ext Q
       (HomologicalComplex.quasiIso (pbcModules T (pbcAdicCompletion T d)) (.up ℤ))
     intro C
-    exact (hη' C).trans (NatTrans.congr_app hη C).symm
+    have hC := hη' C
+    simp only [DerivedCategory.quotientCompQhIso,
+      HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift_hom,
+      Quotient.lift.isLift_inv] at hC
+    erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.id_comp] at hC
+    exact hC.trans (NatTrans.congr_app hη C).symm
 
 /-- The canonical map K → Rlim ΔK, defined by its unique representative normalization.
 Source: blueprint order 1242 (blueprint: prop-weil-pbc-rlim-functoriality). -/
