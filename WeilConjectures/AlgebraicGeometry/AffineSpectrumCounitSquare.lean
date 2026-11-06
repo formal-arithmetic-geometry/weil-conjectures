@@ -6,6 +6,9 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
+
 public import WeilConjectures.AlgebraicGeometry.AffineSpectrumDerivedCoordinates
 public import WeilConjectures.AlgebraicGeometry.AffineSpectrumOrdinaryComparisonSquare
 import WeilConjectures.AlgebraicGeometry.AffineSpectrumCompositionCounitSquare
@@ -27,9 +30,7 @@ namespace AlgebraicGeometry.SingleComplexBaseChange
 
 attribute [local instance_reducible] Scheme.Modules TopCat.Sheaf
 attribute [local implicit_reducible] DerivedCategory
-  Functor.mapHomologicalComplex HomotopyCategory Functor.mapHomotopyCategory
-  HomotopyCategory.quotient DerivedCategory.Q DerivedCategory.Qh
-  HomologicalComplexUpToQuasiIso.Qh
+  HomotopyCategory DerivedCategory.Q DerivedCategory.Qh
 
 set_option maxHeartbeats 1600000 in
 -- The quotient comparison normalization unfolds several derived-category factors.

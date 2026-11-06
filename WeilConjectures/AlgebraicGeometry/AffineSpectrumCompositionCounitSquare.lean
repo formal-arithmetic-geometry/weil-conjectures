@@ -213,7 +213,7 @@ the displayed equation. The quotient/localization comparison has identity compon
 its naturality identifies Qh of the termwise comparison with Q of that comparison.
 No inversion of a counit is used; zero complexes and empty schemes satisfy the same
 factorization equations. -/
-private theorem affineSpectrum_composition_counit_square
+private theorem affineSpectrum_composition_counit_square_aux
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     {X X' : Scheme.{u}} [IsAffine X] [IsAffine X']
@@ -302,46 +302,27 @@ theorem affineSpectrum_composition_counit_square
       Scheme.Modules.tensorPullbackCompositionIso X'.isoSpec.inv g'
         ((Spec.map g'.appTop) ≫ X.isoSpec.inv) (Scheme.isoSpec_inv_naturality g').symm
     (derivedPullback (Spec.map g'.appTop)).map
-        ((counit X.isoSpec.inv).app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫
-      (counit (Spec.map g'.appTop)).app
+        (cast (by rfl)
+          ((counit X.isoSpec.inv).app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) :
+          (derivedPullback X.isoSpec.inv).obj (DerivedCategory.Q.obj P) ⟶
+            DerivedCategory.Q.obj
+              (((Scheme.Modules.tensorPullback X.isoSpec.inv).mapHomologicalComplex
+                (.up ℤ)).obj P)) ≫
+      cast (by rfl) ((counit (Spec.map g'.appTop)).app
         ((HomotopyCategory.quotient _ (.up ℤ)).obj
           (((Scheme.Modules.tensorPullback X.isoSpec.inv).mapHomologicalComplex
-            (.up ℤ)).obj P)) ≫
+            (.up ℤ)).obj P))) ≫
       DerivedCategory.Q.map ((NatIso.mapHomologicalComplex a (.up ℤ)).hom.app P) =
     (affineSpectrumDerivedPullbackIso g').hom.app (DerivedCategory.Q.obj P) ≫
       (derivedPullback X'.isoSpec.inv).map
-        ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫
-      (counit X'.isoSpec.inv).app
+        (cast (by rfl) ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) :
+          (derivedPullback g').obj (DerivedCategory.Q.obj P) ⟶
+            DerivedCategory.Q.obj
+              (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P)) ≫
+      cast (by rfl) ((counit X'.isoSpec.inv).app
         ((HomotopyCategory.quotient _ (.up ℤ)).obj
-          (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P)) := by
-  let b₁ := Scheme.Modules.tensorPullbackCompositionIso
-    (Spec.map g'.appTop) X.isoSpec.inv ((Spec.map g'.appTop) ≫ X.isoSpec.inv) rfl
-  let b₂ := Scheme.Modules.tensorPullbackCompositionIso
-    X'.isoSpec.inv g' ((Spec.map g'.appTop) ≫ X.isoSpec.inv)
-    (Scheme.isoSpec_inv_naturality g').symm
-  let c₁ := selectedComposition.{u, w} (Spec.map g'.appTop) X.isoSpec.inv
-  let c₂ := selectedComposition.{u, w} X'.isoSpec.inv g' ≪≫
-    (eqToIso (congrArg (fun k ↦ derivedPullback.{u, w} k)
-      (Scheme.isoSpec_inv_naturality g'))).symm
-  have h₁ := composition_factorization (Spec.map g'.appTop) X.isoSpec.inv P
-  have h₂ := composition_factorization_transport X'.isoSpec.inv g'
-    ((Spec.map g'.appTop) ≫ X.isoSpec.inv) (Scheme.isoSpec_inv_naturality g').symm P
-  erw [eqToIso_congr_symm (fun k ↦ derivedPullback.{u, w} k)
-    (Scheme.isoSpec_inv_naturality g')] at h₂
-  have h := compare_counit_factorizations
-    (c₁.app (DerivedCategory.Q.obj P)) (c₂.app (DerivedCategory.Q.obj P))
-    (DerivedCategory.Q.mapIso ((NatIso.mapHomologicalComplex b₁ (.up ℤ)).app P))
-    (DerivedCategory.Q.mapIso ((NatIso.mapHomologicalComplex b₂ (.up ℤ)).app P))
-    ((counit ((Spec.map g'.appTop) ≫ X.isoSpec.inv)).app
-      ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) _ _ h₁ h₂
-  dsimp only
-  have he : affineSpectrumDerivedPullbackIso g' = c₁ ≪≫ c₂.symm := by
-    dsimp only [affineSpectrumDerivedPullbackIso, c₁, c₂, selectedComposition]
-    simp only [Iso.trans_symm, Iso.symm_symm_eq]
-  conv_rhs => rw [he]
-  simpa only [Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv,
-    NatIso.mapHomologicalComplex,
-    NatTrans.mapHomologicalComplex_comp, NatTrans.comp_app, Functor.map_comp,
-    Functor.mapIso_hom, Functor.mapIso_inv, Category.assoc] using h
+          (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P))) := by
+  with_unfolding_all
+    exact affineSpectrum_composition_counit_square_aux g' P
 
 end AlgebraicGeometry.SingleComplexBaseChange
