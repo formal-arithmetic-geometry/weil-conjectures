@@ -101,7 +101,7 @@ theorem lisse_tower_compatible_stalk_markings
     let R (n : ℕ) := ModuleCat.restrictScalars.{u + 1, u + 1, u + 1}
       (Ideal.Quotient.mk (J ^ (n + 1)))
     let s (n : ℕ) := (R (n + 1)).mapDerivedCategory.map (t n) ≫
-      ((Functor.mapDerivedCategoryCompIso).symm
+      (Functor.mapDerivedCategoryCompIso
         (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} (Ideal.Quotient.factor
           (Ideal.pow_le_pow_right (I := J) (Nat.le_succ (n + 1)))))
         (R (n + 1))).inv.app (K n) ≫
@@ -141,7 +141,7 @@ theorem lisse_tower_compatible_stalk_markings
   let R (n : ℕ) := ModuleCat.restrictScalars.{u + 1, u + 1, u + 1}
     (Ideal.Quotient.mk (J ^ (n + 1)))
   let s (n : ℕ) := (R (n + 1)).mapDerivedCategory.map (t n) ≫
-    (Functor.mapDerivedCategoryCompIso
+    ((Functor.mapDerivedCategoryCompIso).symm
       (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} (Ideal.Quotient.factor
         (Ideal.pow_le_pow_right (I := J) (Nat.le_succ (n + 1)))))
       (R (n + 1))).inv.app (K n) ≫
