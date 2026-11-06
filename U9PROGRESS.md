@@ -425,33 +425,13 @@
 - All ucheck invocations finished. This final commit changes documentation only.
 
 
-# BZ1036 complete
+# BZ1063 in progress
 
-- Assigned CompletedTowerPullbackSupplement is green and contains no proof placeholders.
-- Restored completedConstantRlimUnit_exists and completedConstantRlimUnit in their
-  original CompletedTowerDerivedLimitFunctor module, with the previously proposed
-  six-line quotient transport adjustment after the user instructed continuation.
-  All assigned-module statements and docstrings are unchanged.
-- Four downstream proof repairs are green: CompletedExtensionZeroComparison,
-  CompletedTowerDirectImageSupplement, CompletedPullbackReducedUnit, and FourArrows.
-- Final ucheck-bump submitted all six changed modules together: rc=0, failed=0,
-  13383 jobs (cached), validated source 5b173ff84b22f119c26ef4439f5bbe6dd2c73c28.
-  Log: /home/ubuntu/u9/bz/BUILD-BZ1036-final-green-full.log.
-  Each changed module freshly rebuilt green in BUILD-BZ1036-downstream5-full.log.
-- Twelve downstream modules validated green. Twenty-one extra modules explicitly
-  targeted, plus three descendants through dependencies, within the thirty-module cap.
-- Remaining frontier reaches CompletedDirectImageLimits (ill-typed existing theorem
-  statements), FiniteQuotientTransitionCompatibility, or unowned ComparisonCounit /
-  ComparisonSquareProEtalePathNormalization / ComparisonSquareEtalePathNormalization.
-  ComparisonSquarePaths itself is green after merging upstream dfaed262b6fc.
-  No source edits remain in blocked modules; OpenExchangeTransport's proposal is
-  retained only in /home/ubuntu/u9/bz/BZ1036-open-exchange-deferred.patch.
-- Records: /home/ubuntu/u9/bz/FIXES-BZ1036.md (eleven PATTERN/ERROR/RULE triples),
-  BZ1036-frontier-progress.json (all green modules and blocked dependency paths),
-  BZ1036-contract-audit.json, and BZ1036-final-pattern-counts.json.
-  The seven contextual regex rules replay all five non-restoration files exactly.
-- Completion marker: /home/ubuntu/u9/state/BZ1036.DONE.
-- No local Lean/Lake, duplicate declarations, new placeholders, trust bypasses,
-  heartbeat increases, or profiler probes. Existing ExtensionZeroComparison sorry
-  proofs were unchanged; only the assigned leaf and restoration are claimed sorry-free.
-- No ucheck is active. The final commit changes documentation only.
+- Branch: u9/BZ1063; starting commit dfaed262b6fc1850faba3b46955a11d3225a1e86.
+- The user instructed continuation after the explicit two-statement compositor API proposal.
+  Applied BZ1063-statement-api.patch, preserving the original comparison maps under
+  Mathlib b63f6e8a. The Plus restriction proof uses the inverse unbounded compositor.
+- Proof-only baseline removed two of five errors; the remaining three were in those
+  statement expressions. Next: ucheck-bump on ComparisonCounit, then its importers.
+- Fix records and logs: /home/ubuntu/u9/bz/FIXES-BZ1063.md.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
