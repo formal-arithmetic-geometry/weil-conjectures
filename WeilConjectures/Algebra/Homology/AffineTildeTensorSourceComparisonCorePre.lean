@@ -7,6 +7,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.Algebra.Homology.AffinePushforwardComparisonCoordinates
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 
 
 public import WeilConjectures.Algebra.Homology.AffineTildePushforwardCohomologyNormalization
@@ -81,9 +83,9 @@ theorem affineTildeTensorSourcePrecomparison
       (derivedPullback g).obj (DerivedCategory.Q.obj
         (((Scheme.Modules.pushforward f).mapHomologicalComplex (.up ℤ)).obj
           (((affinePushforwardTilde A).mapHomologicalComplex (.up ℤ)).obj M))),
-      χpre.hom ≫ (SingleComplexBaseChange.counit g).app
+      χpre.hom ≫ cast (by rfl) ((SingleComplexBaseChange.counit g).app
           (qs.obj (((Scheme.Modules.pushforward f).mapHomologicalComplex (.up ℤ)).obj
-              (((affinePushforwardTilde A).mapHomologicalComplex (.up ℤ)).obj M))) =
+              (((affinePushforwardTilde A).mapHomologicalComplex (.up ℤ)).obj M)))) =
         affineTildeTensorDerivedCounit R A B D M m
           (affinePushforwardTilde B).mapDerivedCategory rfl ≫
           DerivedCategory.Q.map (affineTildeTensorOrdinarySourceIso R A B M).hom := by
