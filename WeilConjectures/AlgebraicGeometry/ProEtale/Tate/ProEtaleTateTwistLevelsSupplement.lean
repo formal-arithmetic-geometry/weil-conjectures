@@ -235,5 +235,4 @@ private theorem spFreeTensor_linear
   intro g hg
   exact Mod.hom_ext _ _ hg
 
-set_option backward.isDefEq.respectTransparency false in
 end AlgebraicGeometry.ProEtale

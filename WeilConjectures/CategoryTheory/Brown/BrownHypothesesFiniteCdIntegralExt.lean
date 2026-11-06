@@ -297,7 +297,6 @@ private theorem hom_roos_iso_zero
     apply (cancel_mono ((shiftFunctor _ r).mapIso e).hom).mp
     exact hQ.elim _ _⟩
 
-set_option maxHeartbeats 2000000 in
 -- Comparing the native Roos levels with the scalar-change bounds unfolds large functors.
 
 end
@@ -308,6 +307,5 @@ attribute [local instance 30000] brownHypothesesCondensedMonoidal
   brownHypothesesModuleMonoidalClosed
 attribute [local instance 20000] AlgebraicGeometry.ProEtale.sheafBraidedCategory
 
-set_option maxHeartbeats 2000000 in
 -- The derived coefficient equivalence compares large canonical single-functor constructions.
 end CategoryTheory

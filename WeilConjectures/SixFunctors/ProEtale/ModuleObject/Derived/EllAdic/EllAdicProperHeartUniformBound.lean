@@ -367,5 +367,4 @@ set_option linter.unusedVariables false in
 coefficient ring `𝒪_E` of a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`.
 (blueprint: lem-sfb-noetherian-proper-heart-uniform-bound) -/
 
-set_option linter.unusedVariables false in
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -95,6 +95,5 @@ private theorem reductionArrow_eq (l : ℕ) [Fact l.Prime] (E : Type u) [Field E
 
 set_option synthInstance.maxHeartbeats 200000 in
 -- The generalized coefficient arrow needs the exact module-derived functor instances.
-set_option maxHeartbeats 1600000 in
 -- Generalizing the coefficient arrow requires the module-derived category instances.
 end CategoryTheory
