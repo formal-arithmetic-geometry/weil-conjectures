@@ -371,55 +371,66 @@
   StratumCompletionUnitRestriction, then continue downstream as the brief requires.
 - Fix log: /home/ubuntu/u9/bz/FIXES-BZ995.md. No local Lean/Lake or forbidden proof shortcuts.
 
-# BZ1027 complete
+# BZ1021 in progress
 
-- Branch: `u9/BZ1027`; start: `c42746d5e58cc55d63dd9ef190dd34bc4130ed3c`.
-- Replayed the final BZ1020 import repairs missing from its early upstream integration:
-  use `Mathlib.CategoryTheory.Sites.EpiMono` in `Integral.Exact` and remove the umbrella
-  `Mathlib` import from `SmoothBaseChange.CurveTestDatum`.
-- Assigned `Integral.BaseChange` and downstream `SmoothBaseChange.IntegralBaseChange`
-  and `SmoothBaseChange.CurveTestDatum` pass `ucheck-bump`: rc=0, built=12, failed=0.
-- Validated source commit: `fefcc97aeb`; remote log:
-  `/home/ubuntu/u9/logs/BZ1027-20261106T105011.log`.
-- All non-import source content is unchanged; machine rewrite rules replay the exact diff.
-- Further downstream work is deferred to live owners: BZ1021 (`FieldBaseChange`,
-  `Induction`) and BZ1028 (the `AlgClosedExtension` / `Vanishing` frontier).
-  No additional downstream modules were tested or claimed green.
-- Patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ1027.md`.
-- Completion marker: `/home/ubuntu/u9/state/BZ1027.DONE`.
-- No local Lean/Lake execution, declaration changes, proof escapes, or limit increases.
-
-
-# BZ1034 in progress
-
-- Branch: u9/BZ1034; starting commit 604047e529f6b513e0c4b425b3bfbd62aa4cfd36.
-- The user instructed continuation after the concrete four-private-helper compositor proposal.
-  Applied BZ1034-compositor-proposal.patch, preserving the original comparison arrows
-  under Mathlib b63f6e8a. The public theorem statement is unchanged.
-- Attribute-only build at 89034d5807 removed two errors; the nine remaining diagnostics
-  concern those compositor expressions. Next: validate the patch with ucheck-bump.
-- Direct importer: UnboundedProperOpenInterchangeSupplement; continue downstream after green.
-- Fix records: /home/ubuntu/u9/bz/FIXES-BZ1034.md.
+- Branch: u9/BZ1021; starting commit 203ea75a45628a5a18c524c66580a676a0da3d5c.
+- The user instructed continuation after the explicit BertiniNoether prerequisite-import proposal.
+  Applied that prepared import-only patch; DegreeZero's umbrella import is also removed.
+- The first remote build confirmed the Sheaf.H.δ collision through SlicingFlat and BertiniNoether.
+- All theorem statements, definitions, proofs, and docstrings are unchanged.
+- Next: validate BertiniNoether and DegreeZero with ucheck-bump, then direct importers.
+- Fix record: /home/ubuntu/u9/bz/FIXES-BZ1021.md; full first build log:
+  /home/ubuntu/u9/bz/BUILD-BZ1021-1-full.log.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
 
+- Assigned DegreeZero is now green and sorry-free at source b1c1890653a9221b928af7f85aac476908c7d89d.
+  ucheck-bump rc=0, failed=0, 7091 jobs; DegreeZero rebuilt in 62 seconds.
+- BertiniNoether's narrower imports exposed three missing imports in GenericIrreducibility;
+  added the defining Mathlib modules explicitly. Both prerequisites now build.
+- All Lean changes so far are imports only; all pre-existing proof/resource settings are unchanged.
+- Next: build all five direct importers, applying the known umbrella-import fix to Induction.
 
-# BZ1040 complete
 
-- Branch: u9/BZ1040; initial commit fdc7e6fe1516a32d43b896df96395140eb603eb9.
-- Assigned LisseTowerCompatibleStalkMarkings is green and sorry-free: ucheck-bump
-  rc=0, failed=0, 7578 jobs; target rebuilt in 14 seconds.
-- Validated source: 1c185e6784afc16c6aad35206a05e1190909c07e.
-- Applied the explicitly proposed compositor orientation changes after the user's
-  continuation instruction; the compatibility-square proof uses Iso.symm_inv and
-  unfolds its local aliases. Other statement text and all docstrings are unchanged.
-- Four successive downstream modules received the same orientation correction and
-  were attempted, but are NOT claimed green: their outside-owned prerequisites
-  SmoothBaseChange.Vanishing and CompletedTowerPullbackSupplement fail.
-  Further layers share the same blockers and are skipped under the ownership rule.
-- Fix patterns, exact errors, rules, occurrence counts, and import paths:
-  /home/ubuntu/u9/bz/FIXES-BZ1040.md.
-- Final log: /home/ubuntu/u9/bz/BZ1040-build-3-full.log.
-- Completion marker: /home/ubuntu/u9/state/BZ1040.DONE.
-- No local Lean/Lake, proof placeholders, trust bypasses, declaration deletions,
-  profiler probes, or heartbeat changes. Both rewrite rules replay the exact diff.
-- All ucheck invocations finished. This final commit changes documentation only.
+# BZ1030 in progress
+
+- Branch: u9/BZ1030; starting commit 7ea4a948f63a4e02d11f7481d82e5d3d99bbfa69.
+- The user instructed continuation after the exact one-counit reflexive-cast proposal.
+  Applied BZ1030-statement-proposal.patch; all other statement text is unchanged.
+- Localization imports and a reflexive cast in the target-map body eliminate its error,
+  as verified by the second ucheck-bump. The theorem uses the same reflexive transport
+  for its counit and Qh base-change map. The latter explicitly names universe w and
+  SheafOfModules to use the existing HasDerivedCategory assumption. Validation is running.
+- Next: validate AffineTildeTensorOrdinaryExchange, then its direct importer
+  AffineTildeDerivedTensorMate and further unblocked downstream modules.
+- Fix records and full logs: /home/ubuntu/u9/bz/FIXES-BZ1030.md.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+- Assigned leaf passed ucheck-bump at 260ba33353123f4c60259e2dc5e74f6d8011faf4:
+  rc=0, failed=0, 4521 jobs; target freshly rebuilt in 79 seconds.
+- Final proof normalizes the reflexive casts with cast_eq. All binders, hypotheses,
+  mathematical maps, and existing docstrings are unchanged.
+- Next: direct importer AffineTildeDerivedTensorMate, then further unblocked layers.
+
+- First three downstream modules are green: AffineTildeDerivedTensorMate,
+  AffineTildeDerivedTensorHomologyCoordinates, AffineBaseChangeTildeMateIdentityFactorization.
+- Latest green batch: 029ace21dcd8166371e219da0c7bd9eec5074b8f, rc=0, failed=0, 4532 jobs.
+- Downstream edits are Localization imports and cast_eq proof normalization only;
+  all downstream statements and existing heartbeat settings are unchanged.
+- Continuing through the next six modules in the affine-comparison import chain.
+
+- Eight downstream modules are now green, through AffineBaseChangeTildeSourceModel.
+  The ordinary-comparison proof cancels shared context before normalizing canonical
+  transports, avoiding the measured 200000-heartbeat timeout without raising limits.
+- Next blocker was a deleted helper still called by AffineBaseChangeSourceModel.
+  Restored exists_affineBaseChangeIntoPullback_representativeIso in its original file
+  from 8984c01d58^, preserving its signature and docstring. Its Qh/Q comparison proof
+  is being ported using the same Localization visibility and identity-transport fixes.
+- Latest completed chain source: 33812e754d43c4c8b79d43b7811fc081d01e2a23;
+  log BUILD-BZ1030-chain-green-source-red-full.log. Current ucheck tests restoration
+  plus AffineBaseChangeSourceModel and AffineBaseChangeCohomologyModel.
+
+- Restored theorem transport proof now elaborates. A remaining measured timeout
+  reaches the final additive-equivalence construction at 200000 heartbeats in 13s;
+  testing scoped maxHeartbeats 400000 for this theorem only. This is not a limit-
+  instance timeout. The assigned leaf and other four edited modules keep all
+  original resource settings. Log BUILD-BZ1030-restoration-timeout-full.log.
