@@ -86,9 +86,9 @@ theorem exists_artinSchreier_root_of_transcendental {p : ℕ} [Fact p.Prime] [Ch
       rw [h]
       refine lt_of_le_of_lt (v.map_add _ _) (max_lt ?_ ?_)
       · rw [map_mul]
-        exact mul_lt_one_of_nonneg_of_lt_one_right hS zero_le ih
+        exact (mul_le_of_le_one_left zero_le hS).trans_lt ih
       · rw [map_mul, map_pow]
-        exact mul_lt_one_of_nonneg_of_lt_one_right (pow_le_one' hT _) zero_le hST
+        exact (mul_le_of_le_one_left zero_le (pow_le_one' hT _)).trans_lt hST
   have hres : ∀ z ∈ L₂, v z ≤ 1 → ∀ (s : Finset ι) (c : ι → Ω), (∀ i ∈ s, c i ∈ K) →
       (∀ i ∈ s, v (c i) ≤ 1) → v (z ^ p - ∑ i ∈ s, c i * w i) < 1 →
         ∀ i ∈ s, v (c i) < 1 := by
@@ -123,7 +123,7 @@ theorem exists_artinSchreier_root_of_transcendental {p : ℕ} [Fact p.Prime] [Ch
       rw [hZp, ← Finset.sum_sub_distrib]
       refine v.map_sum_lt one_ne_zero fun k _ ↦ ?_
       rw [← mul_sub, map_mul, map_pow]
-      refine mul_lt_one_of_nonneg_of_lt_one_right (pow_le_one' (hy k).2 _) zero_le ?_
+      refine (mul_le_of_le_one_left zero_le (pow_le_one' (hy k).2 _)).trans_lt ?_
       refine hpowcong S (z ^ p) hS1 hzp1 ?_ k
       rw [← v.map_neg, neg_sub]
       exact hlt
