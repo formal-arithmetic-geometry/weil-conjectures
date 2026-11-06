@@ -28,7 +28,7 @@ attribute [local irreducible] upperStarFromPoint
 attribute [local irreducible] DerivedCategory HasDerivedCategory.standard
   Functor.rightDerivedFunctor Functor.mapDerivedCategory
   Functor.leftDerivedFunctor Mod.monoidalCategory
-  Functor.mapDerivedCategoryNatIso Functor.mapDerivedCategoryCompIso
+  Functor.mapDerivedCategoryNatIso
   CondensedRing.upperStar CondensedRing.lowerStar
 /-- The exchange mate formed from exact condensed pullback on the derived category.
 Source: blueprint rational proper-base-change proof, exact derived factorization.
