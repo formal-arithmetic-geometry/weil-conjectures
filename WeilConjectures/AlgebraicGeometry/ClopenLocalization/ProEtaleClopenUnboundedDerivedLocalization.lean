@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Clopen.ProEtaleClopenRingedModuleGluing
+public import WeilConjectures.AlgebraicGeometry.ProEtaleSurjectiveTowerDerivedLimit
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.CategoryTheory.PUnit
@@ -50,28 +51,12 @@ Source: Stacks 05RU (blueprint: lem-pur-clopen-unbounded-derived-localization). 
 abbrev Modules {X : Scheme.{t}} (R : Sheaf (topology X) RingCat.{u}) :=
   ringedSiteModules.{max v w (t + 1)} R
 
-/-- Sheafification on a small model of the recorded site.
-Source: Stacks 05RU (blueprint: lem-pur-clopen-unbounded-derived-localization). -/
-instance sheafify (X : Scheme.{t}) :
-    HasSheafify (topology X) AddCommGrpCat.{max v (t + 1)} := by
-  have : EssentiallySmall.{max v (t + 1)} X.ProEt := essentiallySmallSelf.{v} _
-  exact hasSheafifyEssentiallySmallSite.{t, max v (t + 1), t + 1,
-    max v (t + 1) + 1, max v (t + 1)} _ _
-
-/-- Local bijectivity on that small model is the sheafification equivalence relation.
-Source: Stacks 05RU (blueprint: lem-pur-clopen-unbounded-derived-localization). -/
-instance locallyBijective (X : Scheme.{t}) :
-    (topology X).WEqualsLocallyBijective AddCommGrpCat.{max v (t + 1)} := by
-  have : EssentiallySmall.{max v (t + 1)} X.ProEt := essentiallySmallSelf.{v} _
-  exact GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall.{t,
-    max v (t + 1), t + 1, max v (t + 1) + 1, max v (t + 1)} _
-
 /-- The existing Mathlib abelian structure, with both site-size witnesses explicit.
 Source: Stacks 05RU (blueprint: lem-pur-clopen-unbounded-derived-localization). -/
 instance modulesAbelian {X : Scheme.{t}} (R : Sheaf (topology X) RingCat.{u}) :
     Abelian (Modules.{t, u, v, w} R) := by
-  letI := sheafify.{t, max v w} X
-  letI := locallyBijective.{t, max v w} X
+  letI := AlgebraicGeometry.ProEtale.surjectiveTower_hasSheafify.{t, max v w} X
+  letI := AlgebraicGeometry.ProEtale.surjectiveTower_wEqualsLocallyBijective.{t, max v w} X
   exact SheafOfModules.instAbelian R
 
 /-- The standard unbounded localization, with its full morphism universe.
