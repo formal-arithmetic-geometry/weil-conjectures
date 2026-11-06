@@ -15,6 +15,7 @@ import WeilConjectures.AlgebraicGeometry.FiniteFreeDirectImage.FiniteFreeRestric
 import Mathlib.CategoryTheory.Preadditive.Biproducts
 import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsComapBiproduct
 import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
+import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategorySquareIsoSymm
 
 /-! # Ambient operation comparisons for finite scalar extension
 
@@ -910,11 +911,10 @@ theorem pbcScalarRestrictionPullback_app
     (pbcAdicCompletion X dF) (pbcScalarCoefficientMap l E F i Y)
     (pbcScalarCoefficientMap l E F i X) (pbcCompletedCoefficientIso g dE)
     (pbcCompletedCoefficientIso g dF) (pbcScalarCoefficientInverseSquare l E F i g)
-  simpa only [pbcScalarRestrictionPullback, proEtaleRingRestrictionDerivedPullback,
-    Functor.mapDerivedCategorySquareIso,
-    ← Functor.mapDerivedCategoryNatIso_symm ((asIso pb).symm), Iso.symm_symm,
-    Iso.trans_inv, Iso.trans_hom, Iso.symm_inv, Iso.symm_hom, NatTrans.comp_app,
-    Category.assoc] using Functor.exactSquare_fac (asIso pb) K
+  change (Functor.mapDerivedCategorySquareIso (asIso pb).symm).inv.app
+    (DerivedCategory.Q.obj K) ≫ _ = _
+  rw [Functor.mapDerivedCategorySquareIso_symm]
+  exact Functor.exactSquare_fac (asIso pb) K
 
 -- The final diagram chase, over an abstract category.
 private theorem scalarPullMate_chase {C : Type*} [Category C]
