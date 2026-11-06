@@ -518,8 +518,9 @@ private theorem finiteEncoding_ringIso_unique
     e.ringIso = f.ringIso := by
   apply Iso.ext
   apply Sheaf.hom_ext
-  apply sheafify_hom_ext (D := CommRingCat.{u + 1}) (Scheme.ProEt.topology X) _ _
-    (FiniteDiscreteOrdinary.sectionRing A X).property
+  apply sheafify_hom_ext (Scheme.ProEt.topology X)
+    (P := (Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1, u} A)))
+    e.ringIso.hom.hom f.ringIso.hom.hom (FiniteDiscreteOrdinary.sectionRing A X).property
   ext U a
   exact (e.normalization U a).trans (f.normalization U a).symm
 
