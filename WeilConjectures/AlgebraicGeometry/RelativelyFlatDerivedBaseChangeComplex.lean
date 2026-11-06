@@ -169,7 +169,7 @@ theorem relativelyFlat_derivedBaseChange_complex
             DerivedCategory.Q.obj
               (((Scheme.Modules.tensorPullback (pullback.fst f g)).mapHomologicalComplex
                 (.up ℤ)).obj (CochainComplex.mapBifunctor P G
-                  (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf))))))) := by
+                  (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf)))))) := by
   classical
   let sq : IsPullback (pullback.fst f g) (pullback.snd f g) f g :=
     IsPullback.of_hasPullback f g
