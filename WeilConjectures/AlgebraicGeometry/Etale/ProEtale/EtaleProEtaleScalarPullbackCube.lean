@@ -19,7 +19,6 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
-public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Direct.ProEtaleDirectImageMateCompatibility
 public import WeilConjectures.AlgebraicGeometry.ComparisonPullbackCoherence
 public import WeilConjectures.AlgebraicGeometry.ProEtaleSiteComparison
@@ -74,7 +73,6 @@ public import WeilConjectures.CategoryTheory.RingedSiteModules
 public import Mathlib.CategoryTheory.Limits.Final
 public import WeilConjectures.CategoryTheory.RingedDerivedComparisons.RingedDerivedMonoidalComparisons
 import all WeilConjectures.AlgebraicGeometry.Etale.ProEtale.EtaleProEtaleScalarMateData
-import all Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 
 /-!
@@ -243,7 +241,8 @@ private theorem exact_restriction_cube
   simp only [NatTrans.comp_app, Functor.map_comp, ← Category.assoc] at h₂
   erw [h₁] at h₂
   have h := (cancel_epi ((Functor.mapDerivedCategoryCompIso cA pA).inv.app
-    (r₀.mapDerivedCategory.obj N))).1 (by simpa only [Category.assoc] using h₂)
+    (r₀.mapDerivedCategory.obj N))).1
+      (by simpa only [Category.assoc, Iso.symm_hom, cA, pA, r₀] using h₂)
   simpa only [Functor.mapDerivedCategorySquareIso, Functor.mapDerivedCategoryNatIso_symm,
     Iso.symm_hom, Iso.trans_hom, Iso.trans_inv, NatTrans.comp_app,
     pbcDerivedComparisonRestrict, Iso.symm_inv, Sheaf.derivedRestrictScalars,
