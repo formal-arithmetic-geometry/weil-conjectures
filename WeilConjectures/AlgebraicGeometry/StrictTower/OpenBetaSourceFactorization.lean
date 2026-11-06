@@ -38,17 +38,6 @@ private theorem source_square_aux {C : Type*} [Category C]
   rw [← Category.assoc, hd, Category.assoc, h₂]
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
-private theorem source_square {V P W S T : Scheme.{u}}
-    (s : V ⟶ P) (b : P ⟶ W) (q : P ⟶ S) (i : S ⟶ T) (p : W ⟶ T)
-    (h : (s ≫ b) ≫ p = (s ≫ q) ≫ i) (h₀ : q ≫ i = b ≫ p)
-    (N : Derived B T) :
-    (gComp B s q).hom.app ((G B i).obj N) ≫
-        (G B s).map ((squareG B q b i p h₀).inv.app N) =
-      (squareG B (s ≫ q) (s ≫ b) i p h.symm).inv.app N ≫
-        (gComp B s b).hom.app ((G B p).obj N) := by
-  simpa only [← gCompEq_refl, ← squareG_system] using
-    (system_source_square (pullbackSystem B) s b q i p h h₀ N)
-
 private theorem system_source_square
     {C : Scheme.{u} → Type*} [∀ X, Category.{u + 2} (C X)]
     {L : InverseImageFamily C} {R₀ : DirectImageFamily C}
@@ -73,6 +62,17 @@ private theorem system_source_square
   have hh := source_square_aux _ _ _ _ _ _ _ ha hb
   simpa only [systemSquare, Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app,
     Functor.map_comp, ← Functor.map_inv, NatIso.inv_hom_app, Category.assoc] using hh
+
+private theorem source_square {V P W S T : Scheme.{u}}
+    (s : V ⟶ P) (b : P ⟶ W) (q : P ⟶ S) (i : S ⟶ T) (p : W ⟶ T)
+    (h : (s ≫ b) ≫ p = (s ≫ q) ≫ i) (h₀ : q ≫ i = b ≫ p)
+    (N : Derived B T) :
+    (gComp B s q).hom.app ((G B i).obj N) ≫
+        (G B s).map ((squareG B q b i p h₀).inv.app N) =
+      (squareG B (s ≫ q) (s ≫ b) i p h.symm).inv.app N ≫
+        (gComp B s b).hom.app ((G B p).obj N) := by
+  simpa only [← gCompEq_refl, ← squareG_system] using
+    (system_source_square (pullbackSystem B) s b q i p h h₀ N)
 
 private theorem transpose_conjugate
     {C D : Type*} [Category C] [Category D]

@@ -1512,6 +1512,20 @@ private theorem hasKInjectiveResolutions :
       (ringedSiteHomAugmentation.{c, v, r} J R).app K,
       CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{max c v r} _ K⟩⟩
 
+private theorem kInjectiveQ_full
+    {A : Type*} [Category A] [Abelian A] [HasDerivedCategory A]
+    [Abelian.HasKInjectiveResolutions A] :
+    (CochainComplex.KInjectives.ι (C := A) ⋙ DerivedCategory.Q).Full :=
+  inferInstanceAs ((CochainComplex.KInjectives.toHomotopyCategory (C := A) ⋙
+    HomotopyCategory.KInjectives.Qh).Full)
+
+private theorem kInjectiveQ_essSurj
+    {A : Type*} [Category A] [Abelian A] [HasDerivedCategory A]
+    [Abelian.HasKInjectiveResolutions A] :
+    (CochainComplex.KInjectives.ι (C := A) ⋙ DerivedCategory.Q).EssSurj :=
+  inferInstanceAs ((CochainComplex.KInjectives.toHomotopyCategory (C := A) ⋙
+    HomotopyCategory.KInjectives.Qh).EssSurj)
+
 private theorem ordinaryRightShiftsAux
     {A : Type*} [Category A] [Preadditive A] [HasBinaryBiproducts A]
     (Hobj : A → A → A)
@@ -1893,6 +1907,41 @@ private theorem rightFormula_unique (L F : Complex.{c, v, r} J R) (s : ℤ)
   exact (he k p q hpq).trans (he' k p q hpq).symm
 
 set_option backward.isDefEq.respectTransparency true in
+private theorem rightNormalization_iff_aux
+    (S : ∀ M : D.{c, v, r, w} J R, (hom.{c, v, r, w} J R M).CommShift ℤ) :
+    RightNormalization.{c, v, r, w} J R S ↔
+      RightNormalizationAux (DerivedCategory.Q (C := Modules.{c, v, r} J R))
+        (homComplexFunctor.{c, v, max c v r, max c v r} (R := R))
+        (derivedInternalHomOfUniverses.{c, v, r, w} J R)
+        (ordinaryComparison.{c, v, r, w} J R)
+        (fun L F s e ↦ RightFormula.{c, v, r} J R L F s e) S := by
+  simp only [RightNormalization, RightNormalizationAux, ordinaryComparison_app,
+    hom, complexHom, homComplex, Functor.comp_obj]
+
+private theorem rightNormalization_unique
+    (S T : ∀ M : D.{c, v, r, w} J R, (hom.{c, v, r, w} J R M).CommShift ℤ)
+    (hS : RightNormalization.{c, v, r, w} J R S)
+    (hT : RightNormalization.{c, v, r, w} J R T) : S = T := by
+  let A := Modules.{c, v, r} J R
+  let Q : Complex.{c, v, r} J R ⥤ D.{c, v, r, w} J R := DerivedCategory.Q
+  let ι : CochainComplex.KInjectives A ⥤ Complex.{c, v, r} J R :=
+    CochainComplex.KInjectives.ι
+  let : Abelian.HasKInjectiveResolutions A := hasKInjectiveResolutions.{c, v, r} J R
+  let : (ι ⋙ Q).EssSurj := kInjectiveQ_essSurj
+  let U := homComplexFunctor.{c, v, max c v r, max c v r} (R := R)
+  let H := derivedInternalHomOfUniverses.{c, v, r, w} J R
+  let α := ordinaryComparison.{c, v, r, w} J R
+  let P := fun L F s e ↦ RightFormula.{c, v, r} J R L F s e
+  apply rightNormalization_uniqueAux Q ι U H α P
+    (fun L F s e e' ↦ rightFormula_unique.{c, v, r} J R L F s e e')
+    (fun L F s ↦ by
+      have : F.obj.IsKInjective := F.property
+      change IsIso ((ordinaryComparison.{c, v, r, w} J R).app (op L, F.obj⟦s⟧))
+      rw [ordinaryComparison_app]
+      exact comparison_isIso_of_kInjective.{c, v, r, w} J R L (F.obj⟦s⟧)) S T
+  · exact (rightNormalization_iff_aux.{c, v, r, w} J R S).mp hS
+  · exact (rightNormalization_iff_aux.{c, v, r, w} J R T).mp hT
+
 private theorem rightNormalizedShift_exists :
     ∃ S : ∀ M : D.{c, v, r, w} J R,
       (hom.{c, v, r, w} J R M).CommShift ℤ,
@@ -1971,55 +2020,6 @@ theorem rightShift_existsUnique :
 Source: Stacks 08JC (blueprint: lem-weil-pbc-ringed-internal-hom-exact-restriction). -/
 instance homCommShift (M : D.{c, v, r, w} J R) : (hom.{c, v, r, w} J R M).CommShift ℤ :=
   (rightShift_existsUnique.{c, v, r, w} J R).exists.choose M
-
-private theorem rightNormalization_unique
-    (S T : ∀ M : D.{c, v, r, w} J R, (hom.{c, v, r, w} J R M).CommShift ℤ)
-    (hS : RightNormalization.{c, v, r, w} J R S)
-    (hT : RightNormalization.{c, v, r, w} J R T) : S = T := by
-  let A := Modules.{c, v, r} J R
-  let Q : Complex.{c, v, r} J R ⥤ D.{c, v, r, w} J R := DerivedCategory.Q
-  let ι : CochainComplex.KInjectives A ⥤ Complex.{c, v, r} J R :=
-    CochainComplex.KInjectives.ι
-  let : Abelian.HasKInjectiveResolutions A := hasKInjectiveResolutions.{c, v, r} J R
-  let : (ι ⋙ Q).EssSurj := kInjectiveQ_essSurj
-  let U := homComplexFunctor.{c, v, max c v r, max c v r} (R := R)
-  let H := derivedInternalHomOfUniverses.{c, v, r, w} J R
-  let α := ordinaryComparison.{c, v, r, w} J R
-  let P := fun L F s e ↦ RightFormula.{c, v, r} J R L F s e
-  apply rightNormalization_uniqueAux Q ι U H α P
-    (fun L F s e e' ↦ rightFormula_unique.{c, v, r} J R L F s e e')
-    (fun L F s ↦ by
-      have : F.obj.IsKInjective := F.property
-      change IsIso ((ordinaryComparison.{c, v, r, w} J R).app (op L, F.obj⟦s⟧))
-      rw [ordinaryComparison_app]
-      exact comparison_isIso_of_kInjective.{c, v, r, w} J R L (F.obj⟦s⟧)) S T
-  · exact (rightNormalization_iff_aux.{c, v, r, w} J R S).mp hS
-  · exact (rightNormalization_iff_aux.{c, v, r, w} J R T).mp hT
-
-private theorem kInjectiveQ_essSurj
-    {A : Type*} [Category A] [Abelian A] [HasDerivedCategory A]
-    [Abelian.HasKInjectiveResolutions A] :
-    (CochainComplex.KInjectives.ι (C := A) ⋙ DerivedCategory.Q).EssSurj :=
-  inferInstanceAs ((CochainComplex.KInjectives.toHomotopyCategory (C := A) ⋙
-    HomotopyCategory.KInjectives.Qh).EssSurj)
-
-private theorem kInjectiveQ_full
-    {A : Type*} [Category A] [Abelian A] [HasDerivedCategory A]
-    [Abelian.HasKInjectiveResolutions A] :
-    (CochainComplex.KInjectives.ι (C := A) ⋙ DerivedCategory.Q).Full :=
-  inferInstanceAs ((CochainComplex.KInjectives.toHomotopyCategory (C := A) ⋙
-    HomotopyCategory.KInjectives.Qh).Full)
-
-private theorem rightNormalization_iff_aux
-    (S : ∀ M : D.{c, v, r, w} J R, (hom.{c, v, r, w} J R M).CommShift ℤ) :
-    RightNormalization.{c, v, r, w} J R S ↔
-      RightNormalizationAux (DerivedCategory.Q (C := Modules.{c, v, r} J R))
-        (homComplexFunctor.{c, v, max c v r, max c v r} (R := R))
-        (derivedInternalHomOfUniverses.{c, v, r, w} J R)
-        (ordinaryComparison.{c, v, r, w} J R)
-        (fun L F s e ↦ RightFormula.{c, v, r} J R L F s e) S := by
-  simp only [RightNormalization, RightNormalizationAux, ordinaryComparison_app,
-    hom, complexHom, homComplex, Functor.comp_obj]
 
 /-- Normalization of the signed source-shift family against the fixed
 ordinary-to-derived Hom comparison.

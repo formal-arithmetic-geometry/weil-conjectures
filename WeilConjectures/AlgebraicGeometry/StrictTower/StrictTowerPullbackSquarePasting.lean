@@ -34,6 +34,14 @@ private theorem gCompEq_refl {V W S : Scheme.{u}} (f : V ⟶ W) (k : W ⟶ S) :
   exact (Iso.refl_trans _).symm
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
+private theorem squareG_eq {V W S T : Scheme.{u}}
+    (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
+    (w : k ≫ p = r ≫ i) :
+    squareG B k r p i w =
+      (gCompEq B r i (k ≫ p) w.symm).symm ≪≫ gCompEq B k p (k ≫ p) rfl := by
+  unfold squareG gCompEq
+  exact normalizeIsoSquare (gComp B r i) (gComp B k p) (congrArg (G B) w.symm)
+
 /-- The inverse-image comparisons of successive commutative squares paste.
 Source: Stacks, Tag 07A7, and pullback-composition coherence
 (blueprint: lem-cbc-strict-tower-pullback-square-pasting).
@@ -83,13 +91,5 @@ theorem squareG_pasting_inv {U U₁ U₂ X X₁ X₂ : Scheme.{u}}
   simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
     Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app, Functor.whiskerLeft_app] at key
   rw [← key]
-
-private theorem squareG_eq {V W S T : Scheme.{u}}
-    (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
-    (w : k ≫ p = r ≫ i) :
-    squareG B k r p i w =
-      (gCompEq B r i (k ≫ p) w.symm).symm ≪≫ gCompEq B k p (k ≫ p) rfl := by
-  unfold squareG gCompEq
-  exact normalizeIsoSquare (gComp B r i) (gComp B k p) (congrArg (G B) w.symm)
 
 end AlgebraicGeometry.ProEtale.StrictTower

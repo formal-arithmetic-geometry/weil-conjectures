@@ -455,6 +455,28 @@ variable [IsIntegral C] [IsNoetherian C]
 
 variable (k) in
 include k in
+omit [IsAlgClosed k] [IsProper (C ↘ Spec (.of k))] in
+/-- On a smooth curve, a rational function has nonzero order only at closed points: a
+point of codimension one which is not closed specializes to a closed point, which would then
+have codimension at least two, while the local rings at closed points have dimension one. -/
+lemma isClosed_of_ord_ne_zero {f : C.functionField} {x : C} (hx : C.ord f x ≠ 0) :
+    IsClosed {x} := by
+  have hx1 : Order.coheight x = 1 := by
+    by_contra h
+    exact hx (ord_eq_zero_of_coheight_neq_one h _)
+  by_contra hnc
+  obtain ⟨y, hy, hyc⟩ :=
+    isClosed_closure.exists_closed_singleton (S := closure {x}) ⟨x, subset_closure rfl⟩
+  have hne : y ≠ x := fun h ↦ hnc (h ▸ hyc)
+  have h := Order.coheight_add_one_le
+    (lt_of_specializes_of_ne C (specializes_iff_mem_closure.2 hy) hne)
+  have hy1 : (Order.coheight y : WithBot ℕ∞) = 1 := by
+    rw [← ringKrullDim_stalk_eq_coheight,
+      ringKrullDim_stalk_eq_one_of_isClosed (C ↘ Spec (.of k)) hyc]
+  have hy1 : Order.coheight y = 1 := by exact_mod_cast hy1
+  rw [hx1, hy1] at h
+  exact absurd h (by decide)
+
 /-- **Principal divisors have degree zero** on a smooth proper integral curve over an
 algebraically closed field: `deg div(f) = ∑_P v_P(f) = 0`
 (`AlgebraicGeometry.Scheme.finsum_ord_eq_zero`).
@@ -501,28 +523,6 @@ theorem nonempty_equiv_H_one_and_surjective_picDegreeHom :
   exact ⟨⟨(nonempty_equiv_H_one_unitsSheaf C).1, (nonempty_equiv_H_one_unitsSheaf C).2,
     exists_divisorClassGroup_addEquiv_pic⟩, degree_div_eq_zero k, picDegreeHom_toPic,
     surjective_picDegreeHom⟩
-
-omit [IsAlgClosed k] [IsProper (C ↘ Spec (.of k))] in
-/-- On a smooth curve, a rational function has nonzero order only at closed points: a
-point of codimension one which is not closed specializes to a closed point, which would then
-have codimension at least two, while the local rings at closed points have dimension one. -/
-lemma isClosed_of_ord_ne_zero {f : C.functionField} {x : C} (hx : C.ord f x ≠ 0) :
-    IsClosed {x} := by
-  have hx1 : Order.coheight x = 1 := by
-    by_contra h
-    exact hx (ord_eq_zero_of_coheight_neq_one h _)
-  by_contra hnc
-  obtain ⟨y, hy, hyc⟩ :=
-    isClosed_closure.exists_closed_singleton (S := closure {x}) ⟨x, subset_closure rfl⟩
-  have hne : y ≠ x := fun h ↦ hnc (h ▸ hyc)
-  have h := Order.coheight_add_one_le
-    (lt_of_specializes_of_ne C (specializes_iff_mem_closure.2 hy) hne)
-  have hy1 : (Order.coheight y : WithBot ℕ∞) = 1 := by
-    rw [← ringKrullDim_stalk_eq_coheight,
-      ringKrullDim_stalk_eq_one_of_isClosed (C ↘ Spec (.of k)) hyc]
-  have hy1 : Order.coheight y = 1 := by exact_mod_cast hy1
-  rw [hx1, hy1] at h
-  exact absurd h (by decide)
 
 end AlgClosed
 

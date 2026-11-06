@@ -188,6 +188,8 @@ private theorem tensorGenerator_ext₃
   exact (congrArg (fun a ↦ (φ.f k).val.app U (j.val.app U a)) hm).trans
     (hh.trans (congrArg (fun a ↦ (ψ.f k).val.app U (j.val.app U a)) hm).symm)
 
+variable [HasDerivedCategory.{w} (RingedTensorModules.{c, v, r} J R)]
+
 /-- The scalar unit, reassociation and signed interchange on simultaneous K-flat models.
 Source: Stacks Tag 0FPT
 (blueprint: lem-sfb-ringed-tensor-constraint-completion). -/
@@ -284,6 +286,8 @@ private theorem model_symmetry
   exact ⟨β_ P Q, (RingedDerivedNative.complexConstraints.{c, v, r} J R).symmetry P Q,
     hs ▸ he⟩
 
+set_option maxHeartbeats 800000 in
+-- The dependent nested tensor comparisons require additional elaboration steps.
 private theorem model_associator
     (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, r, w} J R))
     (T : CoefficientTensorModels.{r, c, v, w} J R S)

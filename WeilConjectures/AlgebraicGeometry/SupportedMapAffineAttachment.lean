@@ -9,12 +9,24 @@ module
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+import WeilConjectures.AlgebraicGeometry.SupportedMapAffineUnionGluing
+import WeilConjectures.AlgebraicGeometry.SupportedMapInitialAmbientLift
+import WeilConjectures.AlgebraicGeometry.OpenDerivedLocalizationData
 
 /-! # One affine attachment for supported stabilized maps
 
 Source: Stacks Project, Tag 09IM.
 (blueprint: lem-sc-supported-map-affine-attachment).
 -/
+
+@[expose] public section
+
+set_option autoImplicit false
+universe u w
+open CategoryTheory CategoryTheory.Limits
+namespace AlgebraicGeometry.Scheme
+attribute [local instance] Functor.additive_of_preserves_binary_products
+  comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 private theorem restrict_map_comparison
     {C D B : Type*} [Category C] [Category D] [Category B]
@@ -36,6 +48,10 @@ private theorem restrict_map_comparison
       simp only [Iso.trans_hom, Iso.app_hom, Iso.symm_hom,
         Functor.mapIso_hom, Category.assoc]
 
+set_option synthInstance.maxSize 2048 in
+set_option maxHeartbeats 1600000 in
+-- The three-fold exact restriction comparison needs a larger elaboration budget.
+set_option backward.isDefEq.respectTransparency false in
 /-- Attaching a single affine open extends the source plus its shift.
 The input source need only be perfect and supported on the old open; its behaviour
 elsewhere in X is immaterial.
@@ -174,3 +190,5 @@ theorem exists_supported_map_affine_attachment
       biprod.fst ≫ J.mapDerivedCategory.map β
   exact restrict_map_comparison L.mapDerivedCategory H.mapDerivedCategory
     J.mapDerivedCategory c β' α d e (biprod.fst ≫ J.mapDerivedCategory.map β) hd he
+
+end AlgebraicGeometry.Scheme

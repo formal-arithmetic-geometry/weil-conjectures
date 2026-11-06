@@ -98,6 +98,22 @@ private theorem normalizedAdj_eq_actual
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+private theorem ambientData_transport
+    {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V)
+    (RV : Sheaf (ProEt.topology V) CommRingCat.{u + 1})
+    (RW : Sheaf (ProEt.topology W) CommRingCat.{u + 1})
+    (RZ : Sheaf (ProEt.topology Z) CommRingCat.{u + 1})
+    (ck : (proEtaleSheafInverseImage k CommRingCat.{u + 1}).obj RV ≅ RW)
+    (ch : (proEtaleSheafInverseImage h CommRingCat.{u + 1}).obj RW ≅ RZ)
+    (c : (proEtaleSheafInverseImage (h ≫ k) CommRingCat.{u + 1}).obj RV ≅ RZ)
+    (hc : proEtaleRingCompositeCoefficients h k RV RW RZ ck ch = c) :
+    Nonempty (PullbackData h k RV RW RZ ck ch c hc
+      (eqToIso (congrArg (proEtaleRingDerivedPullback (h ≫ k) RV RZ) hc.symm) ≪≫
+        proEtaleCanonicalDerivedPullbackComparison h k RV RW RZ ck ch)) := by
+  subst c
+  simpa only [eqToIso_refl, Iso.refl_trans] using
+    ambientData_exists h k RV RW RZ ck ch
+
 /-- The specified derived composition is the localization of the conjugate
 of a section-normalized ordinary direct-image compositor.
 Source: Stacks Tag 0D6D (blueprint: lem-sp-canonical-derived-pullback-normalization).
@@ -166,21 +182,5 @@ theorem proEtaleCanonicalDerivedPullback_normalization
   exact e.trans (congrArg (fun a ↦ Functor.mapDerivedCategoryNatIso a ≪≫
     Functor.mapDerivedCategoryCompIso (proEtaleRingModulePullback k RV RW ck)
       (proEtaleRingModulePullback h RW RZ ch)) hleft)
-
-private theorem ambientData_transport
-    {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V)
-    (RV : Sheaf (ProEt.topology V) CommRingCat.{u + 1})
-    (RW : Sheaf (ProEt.topology W) CommRingCat.{u + 1})
-    (RZ : Sheaf (ProEt.topology Z) CommRingCat.{u + 1})
-    (ck : (proEtaleSheafInverseImage k CommRingCat.{u + 1}).obj RV ≅ RW)
-    (ch : (proEtaleSheafInverseImage h CommRingCat.{u + 1}).obj RW ≅ RZ)
-    (c : (proEtaleSheafInverseImage (h ≫ k) CommRingCat.{u + 1}).obj RV ≅ RZ)
-    (hc : proEtaleRingCompositeCoefficients h k RV RW RZ ck ch = c) :
-    Nonempty (PullbackData h k RV RW RZ ck ch c hc
-      (eqToIso (congrArg (proEtaleRingDerivedPullback (h ≫ k) RV RZ) hc.symm) ≪≫
-        proEtaleCanonicalDerivedPullbackComparison h k RV RW RZ ck ch)) := by
-  subst c
-  simpa only [eqToIso_refl, Iso.refl_trans] using
-    ambientData_exists h k RV RW RZ ck ch
 
 end AlgebraicGeometry.Scheme

@@ -9,12 +9,20 @@ module
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Mathlib.Topology.QuasiSeparated
 public import Mathlib.AlgebraicGeometry.AffineScheme
+import WeilConjectures.AlgebraicGeometry.SupportedDetectorOpenLift
+import WeilConjectures.AlgebraicGeometry.SupportedKoszulUnitSummand
 
 /-! # Gluing supported perfect zero detectors
 
 Source: Stacks Project, Tag 0A9A, induction step.
 (blueprint: lem-pc-supported-perfect-detector-gluing).
 -/
+
+@[expose] public section
+
+universe u w
+open CategoryTheory CategoryTheory.Limits
+namespace AlgebraicGeometry
 
 /-- The supported Koszul gluing step for a finite affine cover with at least two members.
 The hypothesis supplies zero detectors only for schemes with strictly smaller covers.
@@ -96,3 +104,5 @@ theorem supported_perfect_detector_gluing
   have hfg : rn.r ≫ f = rn.r ≫ g := (hHom n).elim _ _
   have h := congrArg (fun k ↦ rn.i ≫ k) hfg
   simpa only [← Category.assoc, rn.retract, Category.id_comp] using h
+
+end AlgebraicGeometry

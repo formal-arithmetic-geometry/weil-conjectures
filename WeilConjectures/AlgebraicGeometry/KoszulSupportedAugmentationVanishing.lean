@@ -17,6 +17,19 @@ Source: Stacks Project, Tags 08DC, 08DD and 09IR.
 (blueprint: lem-pc-koszul-supported-augmentation-vanishing).
 -/
 
+@[expose] public section
+
+set_option autoImplicit false
+
+universe u w
+
+open CategoryTheory CategoryTheory.Limits
+
+namespace AlgebraicGeometry
+
+set_option maxHeartbeats 400000 in
+-- Transporting the comparison across three chosen localization categories needs extra elaboration.
+set_option backward.isDefEq.respectTransparency false in
 /-- The unshifted Hom diagram of Koszul tails into a supported quasi-coherent
 object has a singleton colimit, independently of the chosen localization universes.
 Source: Stacks Project, Equation 36.9.4.1 (Tag 08DC) and Proposition 36.9.5 (Tag 08DD).
@@ -158,6 +171,7 @@ private theorem supported_hom_colimit
 
 -- Obtain augmentation compatibility in the standard localization, then use naturality
 -- of the localization comparison to identify the two composites in the chosen category.
+set_option backward.isDefEq.respectTransparency false in
 private theorem augmentation_compatibility
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     [HasDerivedCategory.{w}
@@ -207,6 +221,7 @@ private theorem augmentation_compatibility
   simpa only [Category.assoc, Iso.inv_hom_id_app_assoc, Iso.inv_hom_id_app,
     Category.comp_id] using ht'
 
+set_option backward.isDefEq.respectTransparency false in
 /-- A map from a shifted structure object into an object supported on the complement
 of the finite principal open is killed by an augmentation in the Koszul power system.
 No orthogonality hypothesis is made.
@@ -273,3 +288,5 @@ theorem koszul_supported_augmentation_eventually_zero
       adj.homEquiv_naturality_left (koszulOpenUnit A r f b) φ
     _ = 0 := hb
     _ = adj.homEquiv _ _ 0 := by simp [Adjunction.homEquiv_apply]
+
+end AlgebraicGeometry
