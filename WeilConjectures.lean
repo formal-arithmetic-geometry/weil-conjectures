@@ -19376,6 +19376,7 @@ public import WeilConjectures.RingTheory.GRingCompletionRegular
 public import WeilConjectures.RingTheory.GRingEquiv
 public import WeilConjectures.RingTheory.GRingMaximalIdealComparison
 public import WeilConjectures.RingTheory.GRingMaximalIdealCriterion
+public import WeilConjectures.RingTheory.GRingNagata
 public import WeilConjectures.RingTheory.GRingPairsBackward
 public import WeilConjectures.RingTheory.GRingPairsForward
 public import WeilConjectures.RingTheory.GRingPairsOfPrimes
