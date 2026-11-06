@@ -196,7 +196,7 @@ noncomputable def scalarPairWithAdjunction
     dsimp only [scalarPairComplexComparison]
     infer_instance
   · exact hu
-  · exact scalarPairWithAdjunction_normalization a E hadd F ε am d hd
+  · exact scalarPairWithAdjunction_normalization.{c, v, r, w} a E hadd F ε am d hd
 
 end CategoryTheory.ScalarHomTensor
 
