@@ -44,7 +44,4 @@ attribute [local irreducible] DerivedCategory.monoidalClosed CategoryTheory.Mod.
   ModuleRingedComparison.totalComparison ModuleRingedComparison.ordinaryTensorComparison
   Localization.Monoidal.tensorBifunctor
 
--- Keep prolongation functors transparent during implicit object matching.
-attribute [local implicit_reducible] Functor.mapHomologicalComplex
-
 end AlgebraicGeometry.ProEtale.CondensedRing
