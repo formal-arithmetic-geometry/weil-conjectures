@@ -440,3 +440,15 @@
 - BZ1068 leaf is GREEN and sorry-free: ucheck-bump rc=0, built=1, failed=0 at
   6afc4fae13c7e090b915aa0e3d61980300964a3c (poolb:43.157.189.27).
   Next: validate all four direct importers; leaf log BUILD-BZ1068-leaf-full.log.
+
+
+# BZ1077 in progress
+
+- Branch: u9/BZ1077; start: d6df1ded8ce203469c3ccdde034e73d5ce4c644c.
+- The user instructed continuation after the exact compositor API proposal.
+- Applied the nine comparison-chain direction corrections across ComparisonSquareTransport,
+  ComparisonSquare, and SmoothBaseChange, preserving the intended comparison maps.
+- Declaration binders, hypotheses, proof bodies, and docstrings remain unchanged.
+- Next: remote ucheck-bump validation, then direct importers through the 30-module cap.
+- Fix patterns: /home/ubuntu/u9/bz/FIXES-BZ1077.md.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
