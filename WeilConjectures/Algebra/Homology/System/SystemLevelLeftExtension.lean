@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.Algebra.Homology.System.SystemLevelLeftExtensionBasic
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 import WeilConjectures.Algebra.Homology.System.SystemCoproducts
 import WeilConjectures.Algebra.Homology.System.SystemGrothendieck
 import WeilConjectures.Algebra.Homology.System.SystemDerivedEvaluation
@@ -129,12 +130,12 @@ theorem systemLevelLeftExtensionTheory : Nonempty (SystemLevelLeftExtensionTheor
             derivedCoproducts := strictRingSystem_derivedCoproducts
             levelDerivedCoproducts := systemLevel_derivedCoproducts
             evaluationCoproducts := fun B n I ↦ by
-              have (m : ℕ) : HasColimitsOfShape (Discrete I) (systemLevel B m) := by
-                have : HasColimitsOfShape (Discrete I) (PresheafOfModules.{w}
-                    (derivedChangeRingIndependentCoefficients J (B.obj (op m))).obj) :=
-                  PresheafOfModules.hasColimitsOfShape _ _
-                exact
-                  instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
+              have (n : ℕ) : HasColimitsOfShape (Discrete I) (PresheafOfModules.{w}
+                  (derivedChangeRingIndependentCoefficients J (B.obj (op n))).obj) :=
+                PresheafOfModules.hasColimitsOfShape _ _
+              have (n : ℕ) : HasColimitsOfShape (Discrete I) (systemLevel B n) :=
+                instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf
+                  _ _
               exact systemEvaluation_colimitsOfShape B (Discrete I) n
             derivedEvaluationCoproducts := derivedSystemEvaluation_coproducts
             cohomology := systemDerivedCohomology
