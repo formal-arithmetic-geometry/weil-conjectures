@@ -58,7 +58,7 @@ private theorem stalkCondition_of_comparison
   have ht : IsIso ((DerivedCategory.Q (C := SheafOfModules.{uPT}
       (moduleRings (pullback f g).toRingedSpace))).map c.t) := by
     have hh := c.represents
-    simp only [Category.comp_id] at hh
+    simp only [cast_eq, Category.comp_id] at hh
     have hiso : IsIso ((SingleComplexBaseChange.counit (pullback.fst f g)).app
         ((HomotopyCategory.quotient _ (.up ℤ)).obj c.P) ≫
       (DerivedCategory.Q (C := SheafOfModules.{uPT}
