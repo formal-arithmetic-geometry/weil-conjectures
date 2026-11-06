@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SixFunctors.Coefficient.CoefficientOrdinaryReductionComparison
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import all WeilConjectures.SixFunctors.Coefficient.CoefficientOrdinaryReductionComparison
 import all WeilConjectures.CategoryTheory.Scalar.ScalarHomTensorCoherence
 

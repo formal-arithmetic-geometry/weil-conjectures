@@ -7,12 +7,26 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+import WeilConjectures.AlgebraicGeometry.PerfectSupportedStabilizedLift
 
 /-! # Lifting maps from perfect complexes with support
 
 Source: Stacks Project, Derived Categories of Schemes, Tag 09IM, Lemma 36.13.11
 (blueprint: lem-sc-perfect-support-map-lift).
 -/
+
+@[expose] public section
+
+set_option autoImplicit false
+
+universe u w
+
+open CategoryTheory CategoryTheory.Limits
+
+namespace AlgebraicGeometry.Scheme
+
+attribute [local instance] Functor.additive_of_preserves_binary_products
+  comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 private theorem stabilization_split
     {C : Type*} [Category C] [HasZeroMorphisms C] [HasBinaryBiproducts C]
@@ -35,6 +49,7 @@ private theorem stabilization_split
     · rw [ha]
       simpa only [Category.assoc, Iso.inv_hom_id_assoc, biprod.inl_fst_assoc] using hia
 
+set_option backward.isDefEq.respectTransparency false in
 /-- A map from a perfect complex on a quasi-compact open extends as a direct summand
 of a map from a global perfect complex with the prescribed closed support.
 Support is expressed by vanishing of every cohomology stalk off the closed subset.
@@ -116,3 +131,5 @@ theorem exists_perfect_supported_map_lift
     · change (i ≫ e.inv) ≫ F.map β = α
       rw [he]
       simpa only [Category.assoc, Iso.inv_hom_id_assoc] using hia
+
+end AlgebraicGeometry.Scheme

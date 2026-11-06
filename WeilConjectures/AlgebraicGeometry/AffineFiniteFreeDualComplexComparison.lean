@@ -183,7 +183,10 @@ theorem affine_finite_free_dual_complex_comparison
         (ModuleCat.signedDualCochainComplex K)) := by
   classical
   let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom
-  have : (tilde.functor Γ(Y, U.1)).Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+  have : (tilde.functor Γ(Y, U.1)).Additive := by
+    constructor
+    intro M N f g
+    exact tilde.map_add (R := Γ(Y, U.1)) f g
   have : (Scheme.Modules.restrictFunctor U.2.isoSpec.hom).Additive := ⟨by intros; rfl⟩
   have hT : T.Additive := inferInstanceAs
     (tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom).Additive

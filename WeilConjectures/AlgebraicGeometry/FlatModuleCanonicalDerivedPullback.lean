@@ -8,11 +8,20 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedModuleBaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
+import WeilConjectures.AlgebraicGeometry.FlatModuleCanonicalDerivedPullbackAux
+import WeilConjectures.AlgebraicGeometry.IntrinsicFlatModuleTensorFlat
 
 /-! # The canonical derived pullback comparison at a flat module
 
 Source: Stacks Project, Tags 06YD and 06YJ.
 -/
+
+@[expose] public section
+
+set_option autoImplicit false
+universe u w
+open CategoryTheory Limits
+namespace AlgebraicGeometry
 
 /-- A canonical derived-to-ordinary pullback comparison at a quasi-coherent module
 flat over its own scheme is invertible. The affine-local IsFlatOver predicate at the
@@ -52,3 +61,5 @@ theorem isIso_modulePullbackComparison_of_isFlatOver_identity
   have := isIso_flat_single_derived_counit a G
     (isFlat_of_isFlatOver_identity G hflat) ε hε
   infer_instance
+
+end AlgebraicGeometry

@@ -15,7 +15,6 @@ import Mathlib.CategoryTheory.Preadditive.LeftExact
 import WeilConjectures.AlgebraicGeometry.AffineOpenPerfectSourceModel
 import WeilConjectures.AlgebraicGeometry.AffineOpenSupportedTargetModel
 import WeilConjectures.AlgebraicGeometry.AffineOpenRealizationScalar
-public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Affine module models with supported cohomology
 
@@ -55,6 +54,9 @@ private theorem affineSheafification_preservesFiniteLimits
   unfold affinePerfectSheafification
   exact comp_preservesFiniteLimits _ _
 
+set_option maxHeartbeats 800000 in
+-- Elaborating the two derived localization comparisons and the model witnesses needs this limit.
+set_option linter.unusedVariables false in
 /-- Affine restriction admits a bounded finite-projective source model and a target
 whose cohomology is elementwise power torsion. The comparison is full and additive
 and intertwines the scalar identity of the source with restriction of global scalars.

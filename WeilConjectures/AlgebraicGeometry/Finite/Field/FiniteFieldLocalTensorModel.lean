@@ -90,7 +90,6 @@ private noncomputable def tensorFunctor
     {A S : Sheaf K CommRingCat.{u + 1}} (c : A ⟶ S) :
     SheafOfModules.{u + 1} (ringSheaf A) ⥤ SheafOfModules.{u + 1} (ringSheaf S) :=
   tensorPresheafFunctor c ⋙ PresheafOfModules.sheafification (𝟙 (ringSheaf S).obj)
-
 private noncomputable def tensorToRestriction
     {D : Type (u + 1)} [Category.{u} D] {K : GrothendieckTopology D}
     [K.HasSheafCompose (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})]
@@ -235,6 +234,7 @@ private noncomputable def tensorAdjunction
           Equiv.apply_symm_apply]
       homEquiv_naturality_right := fun f b ↦ tensorHomEquiv_naturality_right c _ f b }
 
+
 private noncomputable def overRingMap
     {C : Type (u + 1)} [Category.{u} C] {J : GrothendieckTopology C}
     {A S : Sheaf J CommRingCat.{u + 1}} (a : A ⟶ S) (V : C) :
@@ -280,7 +280,6 @@ private noncomputable def overRestrictionIso
   · intro M N h
     ext U m
     rfl
-
 private noncomputable def overExtensionIso
     {C : Type (u + 1)} [Category.{u} C] [HasBinaryProducts C]
     {J : GrothendieckTopology C}
@@ -299,6 +298,7 @@ private noncomputable def overExtensionIso
     ((tensorAdjunction a).comp
       (SheafOfModules.overPushforwardOverAdj (R := ringSheaf S) V))).symm
       (overRestrictionIso a V).symm
+
 
 private def constantPresheaf
     {C : Type (u + 1)} [Category.{u} C] (B : Type (u + 1)) [CommRing B] :

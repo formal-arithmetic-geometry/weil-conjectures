@@ -6,6 +6,7 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.AlgebraicGeometry.ModuleMapIsoLocus
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine

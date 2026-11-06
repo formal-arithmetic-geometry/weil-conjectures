@@ -22,6 +22,26 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.FiniteFreeDirectImage
 
+section DerivedBridge
+
+universe w uA vA uB vB
+variable {A : Type uA} [Category.{vA} A] [Abelian A] [HasDerivedCategory.{w} A]
+  {B : Type uB} [Category.{vB} B] [Abelian B] [HasDerivedCategory.{w} B]
+  (T : A ⥤ B) [T.Additive] (E : DerivedCategory A ⥤ DerivedCategory B)
+  (ε : DerivedCategory.Qh ⋙ E ⟶ T.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+
+private def cochainCounit : DerivedCategory.Q ⋙ E ⟶
+    T.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q where
+  app K := ε.app ((HomotopyCategory.quotient A (.up ℤ)).obj K)
+  naturality := by
+    intro X Y f
+    exact ε.naturality ((HomotopyCategory.quotient A (.up ℤ)).map f)
+
+private instance [IsIso ε] : IsIso (cochainCounit T E ε) := by
+  have (K : CochainComplex A ℤ) : IsIso ((cochainCounit T E ε).app K) :=
+    inferInstanceAs (IsIso (ε.app ((HomotopyCategory.quotient A (.up ℤ)).obj K)))
+  exact NatIso.isIso_of_isIso_app _
+
 private theorem factorsh_eq (F : A ⥤ B) [F.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F] (K : CochainComplex A ℤ) :
     F.mapDerivedCategoryFactorsh.hom.app ((HomotopyCategory.quotient A (.up ℤ)).obj K) =
@@ -32,6 +52,17 @@ private theorem factorsh_eq (F : A ⥤ B) [F.Additive]
   erw [F.mapDerivedCategory.map_id, DerivedCategory.Qh.map_id]
   simp only [Category.id_comp]
   exact Category.comp_id _
+
+universe uC vC uD vD
+variable {C : Type uC} [Category.{vC} C] [Abelian C] [HasDerivedCategory.{w} C]
+  {D : Type uD} [Category.{vD} D] [Abelian D] [HasDerivedCategory.{w} D]
+  (F : A ⥤ C) (G : B ⥤ D) (T' : C ⥤ D) [F.Additive] [G.Additive] [T'.Additive]
+  [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+  [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+  (E' : DerivedCategory C ⥤ DerivedCategory D)
+  (ε' : DerivedCategory.Qh ⋙ E' ⟶ T'.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+  [IsIso ε] [IsIso ε']
+  (χ : T ⋙ G ≅ F ⋙ T')
 
 private theorem scalarComparisonDescent_homotopy_normalized (H : HomotopyCategory A (.up ℤ)) :
     (SheafOfModules.RingedTensor.scalarComparisonDescent T F G T' E
@@ -65,6 +96,8 @@ private theorem scalarComparisonDescent_homotopy_normalized (H : HomotopyCategor
     rfl
   rw [hh]
   exact h
+
+end DerivedBridge
 
 section CoordinateColumns
 

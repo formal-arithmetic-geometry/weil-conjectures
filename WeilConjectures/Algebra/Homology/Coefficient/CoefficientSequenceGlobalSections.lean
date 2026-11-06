@@ -280,6 +280,13 @@ structure SequenceSectionsComparisons
     (finite S).functor ≅
       (sequenceCoefficientRestriction f).mapDerivedCategory ⋙ (finite R).functor
 
+/-- G is a composite of actual functors on ordinary derived categories.
+Source: Stacks 0941, 0D6E (blueprint: lem-coef-sequence-global-sections-evaluation). -/
+def SequenceSectionsComparisons.global
+    {B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}} {A : Sheaf J CommRingCat.{w}}
+    {α : (Functor.const ℕᵒᵖ).obj A ⟶ B} (d : SequenceSectionsComparisons B A α) :
+    DerivedCategory (StrictRingSystem B) ⥤ DerivedCategory (ℕᵒᵖ ⥤ AddCommGrpCat.{w}) :=
+  d.restriction.functor.mapDerivedCategory ⋙ d.tower.functor
 /-- The first comparison: restrict scalars exactly, then evaluate the same tower resolution.
 Source: Stacks 0941 (blueprint: lem-coef-sequence-global-sections-evaluation). -/
 def SequenceSectionsComparisons.restrictedEvaluation
@@ -351,13 +358,6 @@ structure SequenceSectionsComparisons.Normalized
         (d.scalar (B.map (homOfLE h).op)).inv.app ((derivedSystemEvaluation B m).obj M)
 
 -- Keep localization constructions behind their factorization API in the proof.
-/-- G is a composite of actual functors on ordinary derived categories.
-Source: Stacks 0941, 0D6E (blueprint: lem-coef-sequence-global-sections-evaluation). -/
-def SequenceSectionsComparisons.global
-    {B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}} {A : Sheaf J CommRingCat.{w}}
-    {α : (Functor.const ℕᵒᵖ).obj A ⟶ B} (d : SequenceSectionsComparisons B A α) :
-    DerivedCategory (StrictRingSystem B) ⥤ DerivedCategory (ℕᵒᵖ ⥤ AddCommGrpCat.{w}) :=
-  d.restriction.functor.mapDerivedCategory ⋙ d.tower.functor
 
 -- Keep localization constructions behind their factorization API in the proof.
 attribute [local irreducible] Functor.mapDerivedCategory

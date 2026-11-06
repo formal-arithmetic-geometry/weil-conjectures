@@ -15,7 +15,24 @@ import WeilConjectures.AlgebraicGeometry.CoefficientTensorTransport.ProEtaleTens
 
 (blueprint: lem-pbc-coefficient-restriction-tensor-representative-square)
 -/
+@[expose] public noncomputable section
+set_option autoImplicit false
+set_option synthInstance.maxSize 4096
+universe u
+open CategoryTheory CategoryTheory.Functor CategoryTheory.Limits
+namespace AlgebraicGeometry.Scheme.CoefficientTensorTransport
 
+attribute [local implicit_reducible] pbcDerivedRestrict
+  Functor.map₂HomologicalComplex Functor.mapHomologicalComplex
+  SheafOfModules.restrictScalars
+
+attribute [local irreducible] Functor.mapDerivedCategory
+  proEtaleRingDerivedPullbackFactors CoefficientTensorChain.complexPullback
+  pullback SheafOfModules.monoidalCategory proEtaleCanonicalTensorComparison
+  proEtaleTensorPullbackTotalIso
+
+set_option maxHeartbeats 800000 in
+-- Conversion between the specified tensor totalizations uses a large elaboration budget.
 /-- Compatibility for a flat K-flat pair, given the normalized restriction comparison.
 
 Source: Stacks Tags 03EL, 07A4 and 07A6.
@@ -183,3 +200,5 @@ theorem representative_square {X Y : Scheme.{u}} (f : X ⟶ Y)
   apply (cancel_epi (UD.map (CD.map r))).1
   apply (cancel_mono (z.tensor.map di)).1
   simpa only [Category.assoc] using hleft.trans hright.symm
+
+end AlgebraicGeometry.Scheme.CoefficientTensorTransport

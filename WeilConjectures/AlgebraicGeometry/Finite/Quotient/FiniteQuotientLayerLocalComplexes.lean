@@ -22,6 +22,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated Opposit
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
+set_option linter.unusedVariables false in
 /-- The residue complex computes the coefficient layer after ordinary tensor.
 
 Source: Stacks Project, sites-cohomology.tex, Tags 0942, 094H and 094I.

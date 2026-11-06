@@ -9,6 +9,9 @@ module
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Mathlib.AlgebraicGeometry.AffineScheme
+import WeilConjectures.AlgebraicGeometry.DerivedOpenLocalization
+import WeilConjectures.AlgebraicGeometry.DerivedPullbackPerfect
+import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 
 
 /-! # Supported perfect restriction in a compact-open overlap model
@@ -28,6 +31,77 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+/-- Transport a chosen localization along an exact equivalence of abelian categories.
+This is the localization construction in `SchemeIsoDerivedLocalizations`, specialized
+to the module-sheaf universe; its helper there is private. -/
+private theorem hasDerivedCategory_of_equivalence {C D : Type (u + 1)}
+    [Category.{u} C] [Category.{u} D] [Abelian C] [Abelian D]
+    (e : C ≌ D) [HasDerivedCategory.{w} D] : Nonempty (HasDerivedCategory.{w} C) := by
+  have : e.functor.Additive := Functor.additive_of_preserves_binary_products _
+  have : e.inverse.Additive := Functor.additive_of_preserves_binary_products _
+  let eC := e.mapHomologicalComplex (ComplexShape.up ℤ)
+  let L := eC.functor ⋙ (DerivedCategory.Q (C := D))
+  have : L.IsLocalization (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) := by
+    refine Functor.IsLocalization.of_equivalence_source
+      (DerivedCategory.Q (C := D)) (HomologicalComplex.quasiIso D (ComplexShape.up ℤ))
+      L (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) eC.symm ?_ ?_ ?_
+    · intro K M f hf
+      have : QuasiIso f := hf
+      exact (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)).le_isoClosure _
+        (show QuasiIso (eC.inverse.map f) from
+          (show QuasiIso ((e.inverse.mapHomologicalComplex (ComplexShape.up ℤ)).map f)
+            from inferInstance))
+    · intro K M f hf
+      have : QuasiIso f := hf
+      have : QuasiIso (eC.functor.map f) :=
+        (show QuasiIso ((e.functor.mapHomologicalComplex (ComplexShape.up ℤ)).map f)
+          from inferInstance)
+      exact inferInstanceAs (IsIso (DerivedCategory.Q.map (eC.functor.map f)))
+    · exact (Functor.associator _ _ _).symm ≪≫
+        Functor.isoWhiskerRight eC.counitIso _ ≪≫ Functor.leftUnitor _
+  exact ⟨{ D := DerivedCategory D, L := L }⟩
+
+
+set_option backward.isDefEq.respectTransparency false in
+private noncomputable def moduleIsoEquivalence {S T : Scheme.{u}} (s : S ≅ T) :
+    SheafOfModules.{u} (moduleRings S.toRingedSpace) ≌
+      SheafOfModules.{u} (moduleRings T.toRingedSpace) :=
+  CategoryTheory.Equivalence.mk (SheafOfModules.pushforward s.hom.toRingCatSheafHom)
+    (SheafOfModules.pushforward s.inv.toRingCatSheafHom)
+    ((Modules.pushforwardComp s.hom s.inv ≪≫
+      Modules.pushforwardCongr s.hom_inv_id ≪≫ Modules.pushforwardId S).symm)
+    (Modules.pushforwardComp s.inv s.hom ≪≫
+      Modules.pushforwardCongr s.inv_hom_id ≪≫ Modules.pushforwardId T)
+
+
+set_option maxHeartbeats 1000000 in
+-- Derived composition comparisons involve three transported module categories.
+set_option synthInstance.maxSize 2048 in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+/-- Express restriction of a supported perfect complex to the overlap on a compact
+open of V. This is restriction data only; no extension to V is asserted.
+Source: Stacks Project, Tag 09IM, the overlap input to Tag 08EK.
+(blueprint: lem-sc-supported-overlap-restriction-data).
+
+Proof: Set U to the open range of the inclusion of W intersect V into V. The intersection
+is compact by quasi-separatedness and compactness of W and affine V, so U is compact.
+The inverse image of T in V is closed. Its complement identifies through the open
+embedding with V intersect the compact open complement of T, hence is compact by the
+same intersection criterion. The inclusion U.toScheme into W is an open immersion.
+Define G by exact restriction of F along that inclusion. At each point of U, pull back
+a strictly perfect neighbourhood model of F, preserving the degree bounds, finite free
+modules and retract equations. These give perfectness of G. Exact homology and the
+restriction-stalk comparison identify each stalk of G with the corresponding stalk of F,
+so support restricts as stated. The scheme isomorphism from the ambient overlap to U
+supplies the exact module equivalence and the derived equivalence e. Transport the
+chosen derived localization along it, and transport the localized-site localizations
+through the corresponding equivalences on each open of U to supply hO. The natural
+restriction composition comparisons identify ordinary restriction from V followed by e
+with SV, and identify e(G) with SW(F). Both comparisons arise by deriving the underived
+restriction comparisons, so commute with shifts and biproducts. Apply those comparisons
+to G plus G[1] to obtain the last isomorphism. Empty opens and empty support need no
+separate case: the same scheme isomorphism, exact restrictions and zero stalks apply. -/
 theorem exists_supported_overlap_restriction_data
     (X : Scheme.{u}) [QuasiSeparatedSpace X]
     (W V : X.Opens) (hW : IsCompact (W : Set X)) (hV : IsAffineOpen V)
@@ -195,48 +269,5 @@ theorem exists_supported_overlap_restriction_data
       R.mapDerivedCategory.mapBiprod F (F⟦(1 : ℤ)⟧) ≪≫
         biprod.mapIso (Iso.refl _) ((R.mapDerivedCategory.commShiftIso (1 : ℤ)).app F)
     exact e.functor.mapIso b.symm ≪≫ dW.app (F ⊞ F⟦(1 : ℤ)⟧)
-
-/-- Transport a chosen localization along an exact equivalence of abelian categories.
-This is the localization construction in `SchemeIsoDerivedLocalizations`, specialized
-to the module-sheaf universe; its helper there is private. -/
-private theorem hasDerivedCategory_of_equivalence {C D : Type (u + 1)}
-    [Category.{u} C] [Category.{u} D] [Abelian C] [Abelian D]
-    (e : C ≌ D) [HasDerivedCategory.{w} D] : Nonempty (HasDerivedCategory.{w} C) := by
-  have : e.functor.Additive := Functor.additive_of_preserves_binary_products _
-  have : e.inverse.Additive := Functor.additive_of_preserves_binary_products _
-  let eC := e.mapHomologicalComplex (ComplexShape.up ℤ)
-  let L := eC.functor ⋙ (DerivedCategory.Q (C := D))
-  have : L.IsLocalization (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) := by
-    refine Functor.IsLocalization.of_equivalence_source
-      (DerivedCategory.Q (C := D)) (HomologicalComplex.quasiIso D (ComplexShape.up ℤ))
-      L (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) eC.symm ?_ ?_ ?_
-    · intro K M f hf
-      have : QuasiIso f := hf
-      exact (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)).le_isoClosure _
-        (show QuasiIso (eC.inverse.map f) from
-          (show QuasiIso ((e.inverse.mapHomologicalComplex (ComplexShape.up ℤ)).map f)
-            from inferInstance))
-    · intro K M f hf
-      have : QuasiIso f := hf
-      have : QuasiIso (eC.functor.map f) :=
-        (show QuasiIso ((e.functor.mapHomologicalComplex (ComplexShape.up ℤ)).map f)
-          from inferInstance)
-      exact inferInstanceAs (IsIso (DerivedCategory.Q.map (eC.functor.map f)))
-    · exact (Functor.associator _ _ _).symm ≪≫
-        Functor.isoWhiskerRight eC.counitIso _ ≪≫ Functor.leftUnitor _
-  exact ⟨{ D := DerivedCategory D, L := L }⟩
-
-
-set_option backward.isDefEq.respectTransparency false in
-private noncomputable def moduleIsoEquivalence {S T : Scheme.{u}} (s : S ≅ T) :
-    SheafOfModules.{u} (moduleRings S.toRingedSpace) ≌
-      SheafOfModules.{u} (moduleRings T.toRingedSpace) :=
-  CategoryTheory.Equivalence.mk (SheafOfModules.pushforward s.hom.toRingCatSheafHom)
-    (SheafOfModules.pushforward s.inv.toRingCatSheafHom)
-    ((Modules.pushforwardComp s.hom s.inv ≪≫
-      Modules.pushforwardCongr s.hom_inv_id ≪≫ Modules.pushforwardId S).symm)
-    (Modules.pushforwardComp s.inv s.hom ≪≫
-      Modules.pushforwardCongr s.inv_hom_id ≪≫ Modules.pushforwardId T)
-
 
 end AlgebraicGeometry.Scheme
