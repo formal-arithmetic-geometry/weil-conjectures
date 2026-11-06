@@ -328,3 +328,12 @@
   CoefficientScalarSectionRealization. Removed the attributes and deleted the predicate
   with its docstring after whole-tree reference and prune-list checks.
 - Revalidating all five second-layer targets; exact errors/rules recorded in FIXES-BZ941.md.
+- Dependency graph expands the second-layer batch to 27 leaf descendants; with three
+  blocked direct importers, this reaches the 30-module downstream limit.
+- Prepared all remaining instances of the known reducibility fixes in this closure.
+- Reused BZ993 prune repairs for five unused declarations in HomotopyComplex,
+  RepresentativeTotalPath, and RepresentativeTransport after independent reference checks.
+- SectionScalarComputationTransport additionally fails in its kept exactSquareFactors
+  statement (old compositor direction); skip this BZ992 dependency and its two importers.
+  Reverted temporary attribute edits in this blocked section-computation branch.
+- Next validation retains four second-layer targets on the unaffected coefficient branch.

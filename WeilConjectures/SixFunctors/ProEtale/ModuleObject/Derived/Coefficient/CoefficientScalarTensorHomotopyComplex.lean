@@ -40,37 +40,5 @@ attribute [local irreducible] DerivedCategory.monoidalClosed CategoryTheory.Mod.
   ModuleRingedComparison.totalComparison ModuleRingedComparison.ordinaryTensorComparison
   Localization.Monoidal.tensorBifunctor
 
-set_option maxHeartbeats 800000 in
--- Compare the homotopy and complex presentations of the same tensor counit face.
-/-- The general derived tensor counit equation on internal complex representatives.
-Source: Stacks Project, Cohomology on Sites, Tag 07A4, derived tensor compatibility.
-Apply Functor.leftDerivedTensorComparison_app_app_comp_tensorHom to the two
-homotopy quotient objects. The quotient tensorator is an identity, so its tensor
-object is the quotient of the complex tensor. Prolongation to the homotopy
-category sends a quotient complex to the quotient of its prolongation. The
-homotopy oplax tensor map is the quotient of the complex oplax tensor map.
-These identifications give exactly the displayed complex formula.
-(blueprint: lem-sfb-coefficient-scalar-tensor-homotopy-complex). -/
-theorem coefficientScalarTensor_homotopyComplex (Z : Scheme.{u})
-    (P Q : CochainComplex (ModuleRingedComparison.internalModules R Z) ℤ) :
-    let := internalScalarMonoidal a Z
-    let F := Mod.extendScalars (coefficientMap a Z)
-    let qR := HomotopyCategory.quotient (ModuleRingedComparison.internalModules R Z) (.up ℤ)
-    let qS := HomotopyCategory.quotient (ModuleRingedComparison.internalModules S Z) (.up ℤ)
-    let Fc := F.mapHomologicalComplex (.up ℤ)
-    F.leftDerivedFunctor.map (Functor.LaxMonoidal.μ DerivedCategory.Qh (qR.obj P) (qR.obj Q)) ≫
-        F.leftDerivedFunctorCounit.app (qR.obj (P ⊗ Q)) ≫
-        DerivedCategory.Q.map
-          (((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans (.up ℤ) F).app P).app Q) =
-      ((F.leftDerivedTensorComparison.app (DerivedCategory.Q.obj P)).app
-          (DerivedCategory.Q.obj Q)) ≫
-        (F.leftDerivedFunctorCounit.app (qR.obj P) ⊗ₘ
-          F.leftDerivedFunctorCounit.app (qR.obj Q)) ≫
-        Functor.LaxMonoidal.μ DerivedCategory.Qh (qS.obj (Fc.obj P)) (qS.obj (Fc.obj Q)) := by
-  let := internalScalarMonoidal a Z
-  exact (Functor.leftDerivedTensorComparison_app_app_comp_tensorHom
-    (Mod.extendScalars (coefficientMap a Z))
-    ((HomotopyCategory.quotient _ (.up ℤ)).obj P)
-    ((HomotopyCategory.quotient _ (.up ℤ)).obj Q)).symm
 
 end AlgebraicGeometry.ProEtale.CondensedRing
