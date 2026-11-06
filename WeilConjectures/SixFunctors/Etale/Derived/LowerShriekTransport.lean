@@ -99,39 +99,6 @@ noncomputable def rightDerivedLowerStarCompMapDerivedUpperStarIso :
 
 end LowerStar
 
-variable {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'} (eX : X ≅ X') (eY : Y ≅ Y')
-  (w : f ≫ eY.hom = eX.hom ≫ f') (c : Compactification f)
-
-/-- The derived lower shriek attached to the transported compactification `c.transport` of
-`f'` is intertwined with the one attached to `c` by the pullbacks along `eX` and `eY`:
-```
-D(X') --Rf'_!(c.transport)--> D(Y')
-  |                             |
-D(eX^*)                       D(eY^*)
-  v                             v
-D(X)  ---------Rf_!(c)------> D(Y)
-```
--/
-noncomputable def rightDerivedLowerShriekOfCompactificationTransportIso :
-    Rf_!(c.transport eX eY w)[A] ⋙ D((eY.hom)^*[A]) ≅ D((eX.hom)^*[A]) ⋙ Rf_!(c)[A] :=
-  -- `(eX⁻¹ ≫ i)_! ≅ (eX⁻¹)_! ⋙ i_! ≅ eX^* ⋙ i_!`, `R((g ≫ eY)_*) ≅ R(g_*) ⋙ R(eY_*)` and
-  -- `R(eY_*) ⋙ D(eY^*) ≅ 𝟭`
-  Functor.isoWhiskerRight
-      (Functor.isoWhiskerRight
-          (Functor.mapDerivedCategoryNatIso
-              (openImmersionLowerShriekComp A eX.inv c.i ≪≫
-                Functor.isoWhiskerRight (upperStarIsoOpenImmersionLowerShriekInv A eX).symm _) ≪≫
-            Functor.mapDerivedCategoryCompIso _ _) R((c.g ≫ eY.hom)_*[A]) ≪≫
-        Functor.isoWhiskerLeft _
-          (Functor.rightDerivedFunctorCompIso' (c.g)_*[A] (eY.hom)_*[A]
-            (Etale.lowerStarComp A c.g eY.hom)).symm) D((eY.hom)^*[A]) ≪≫
-    Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft _ (Functor.associator _ _ _) ≪≫
-    Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft _ (Functor.isoWhiskerLeft _
-      (Functor.isoWhiskerLeft _ (rightDerivedLowerStarCompMapDerivedUpperStarIso A eY) ≪≫
-        Functor.rightUnitor _))
-
 end Etale
 
 end AlgebraicGeometry
