@@ -518,18 +518,18 @@ private theorem localizeTowerSquare_eq
       (G₁ := (Functor.whiskeringRight ℕᵒᵖ _ _).obj H)
       (G₂ := (Functor.whiskeringRight ℕᵒᵖ _ _).obj I)
       (termwiseSquareIso e) =
-    (Functor.mapDerivedCategoryCompIso
+    Functor.mapDerivedCategoryCompIso
       ((Functor.whiskeringRight ℕᵒᵖ _ _).obj F)
-      ((Functor.whiskeringRight ℕᵒᵖ _ _).obj G)).symm ≪≫
+      ((Functor.whiskeringRight ℕᵒᵖ _ _).obj G) ≪≫
     Functor.mapDerivedCategoryNatIso
       (F := (Functor.whiskeringRight ℕᵒᵖ _ _).obj F ⋙
         (Functor.whiskeringRight ℕᵒᵖ _ _).obj G)
       (G := (Functor.whiskeringRight ℕᵒᵖ _ _).obj H ⋙
         (Functor.whiskeringRight ℕᵒᵖ _ _).obj I)
       ((Functor.whiskeringRight ℕᵒᵖ _ _).mapIso e) ≪≫
-    Functor.mapDerivedCategoryCompIso
+    (Functor.mapDerivedCategoryCompIso
       ((Functor.whiskeringRight ℕᵒᵖ _ _).obj H)
-      ((Functor.whiskeringRight ℕᵒᵖ _ _).obj I) := rfl
+      ((Functor.whiskeringRight ℕᵒᵖ _ _).obj I)).symm := rfl
 
 private theorem towerSquare_localization (r : StrictTowerRingedSquare sq) :
     Functor.mapDerivedCategorySquareIso
@@ -689,7 +689,6 @@ end AlgebraicGeometry.Scheme
 -- Keep localized comparison constructions folded while elaborating their equations.
 attribute [local irreducible] HasDerivedCategory.standard
   Functor.mapDerivedCategory Functor.rightDerivedFunctor
-  Functor.mapDerivedCategoryCompIso
   Functor.mapDerivedCategoryNatIso
 namespace AlgebraicGeometry.Scheme.CompletedOpenFiniteTranspose
 
