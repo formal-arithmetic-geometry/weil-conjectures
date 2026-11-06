@@ -274,31 +274,28 @@
 - Fix patterns and whole-tree inventories: /home/ubuntu/u9/bz/FIXES-BZ885.md.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ871 in progress
+# BZ871 complete
 
-- Branch: u9/BZ871; original baseline e167a50a4.
-- Resumed after rereading the unit brief and progress notes. The user instructed
-  continuation after the explicit canonical endpoint-transport proposal; that patch is applied.
-- Merged integrated bump commit 40e255942. Its restored upstream counit comparison
-  lemmas replace this unit's earlier duplicate private reconstruction.
-- The owned proof now normalizes the explicit quotient transports and compares
-  homotopy localization factors with their cochain counterparts.
-- Next: remote ucheck-bump validation, then the direct importer chain.
-- Previous blockers and diagnostic history: /home/ubuntu/u9/bz/FIXES-BZ871.md.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
-
-## BZ871 validation checkpoint
-
-- Current source: e2d5e842232e947ec70e76a8173168c4f17ec9c3; remote root-only ucheck-bump running.
-- The prerequisite OpenPinnedSingleDegreeZeroCounitIso now passes with a local
-  abstract square helper at explicit Type (u + 1) / Category.{u} universes.
-- The owned public statement now elaborates with the canonical endpoint transports
-  and explicit canonical target categories. Its original hypotheses/docstring are unchanged.
-- The homotopy-square inverse normalization and exact-factor helper have compiled.
-- Latest correction normalizes both trailing identities in the endpoint helper
-  and uses congrArg₂ rather than a large concrete rewrite in the final proof.
-- Previous full diagnostics: BUILD-BZ871-resume1-full.log through resume7-full.log
-  under /home/ubuntu/u9/bz. The latest prior run hit the existing 600000 heartbeat
-  budget in the final concrete rewrite; no limit was increased.
-- FIXES-BZ871.md has chronological fix records; consolidate after the green run.
-- Remaining: green root, mandatory downstream batch, final fix records and DONE.
+- Branch: u9/BZ871; original baseline e167a50a4; integrated checkpoint 40e255942.
+- Assigned SingleComplexOpenTermwiseCounitCompatibility is sorry-free and passed
+  ucheck-bump at a50954bafd9ce23d38475d21493509ac10169cd5: rc=0, failed=0,
+  3994 jobs; target built in 94 seconds.
+- The assigned target passed again in the downstream batch at
+  f64a936ab3e425671e7d5657db0db59ae13a9d64 in 74 seconds.
+- Applied the proposed canonical endpoint transports after the user instructed
+  continuation; specified their two target categories explicitly. Original binders,
+  hypotheses, and docstrings remain unchanged.
+- Reused the integrated upstream counit comparison lemmas and removed earlier
+  duplicate private reconstruction. The prerequisite homotopy tensor square now
+  uses a local abstract helper; its public signature is unchanged.
+- Proof normalization uses generic endpoint, factor, and square lemmas. The sole
+  resource change is the owned theorem's maxHeartbeats 600000 -> 1200000 after a
+  measured 38-second whnf timeout with all helpers passing; the full run then passed.
+- Checked five downstream modules. All are deferred because of unowned errors:
+  StalkDerivedExtensionComparisonIsoCore timeout (BZ910) and duplicate declarations
+  in SingleComplexOpenPullbackCounitHomotopyFactorization (BZ878).
+- Full logs, exact PATTERN/ERROR/RULE records, occurrence inventories, dependency
+  paths, and source contract audit are under /home/ubuntu/u9/bz for BZ871.
+- Completion marker: /home/ubuntu/u9/state/BZ871.DONE.
+- No local Lean/Lake, proof placeholders, axioms, kernel bypasses, or profiler probes.
+- Final documentation commit changes no Lean source from the successful builds.
