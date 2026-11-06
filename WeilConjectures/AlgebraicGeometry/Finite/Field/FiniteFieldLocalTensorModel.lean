@@ -49,6 +49,17 @@ private noncomputable abbrev restriction
     {A S : Sheaf K CommRingCat.{u + 1}} (c : A ⟶ S) :=
   restrictScalars ((sheafCompose K (forget₂ CommRingCat RingCat)).map c)
 
+section
+
+private local instance finiteFieldTensorRestrictedModule
+    {D : Type (u + 1)} [Category.{u} D] {K : GrothendieckTopology D}
+    [K.HasSheafCompose (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})]
+    {A : Sheaf K CommRingCat.{u + 1}} (M : SheafOfModules.{u + 1} (ringSheaf A))
+    {X Y : Dᵒᵖ} (i : X ⟶ Y) :
+    Module (A.obj.obj Y)
+      ((ModuleCat.restrictScalars ((ringSheaf A).obj.map i).hom).obj (M.val.obj Y)) :=
+  inferInstanceAs (Module (A.obj.obj Y) (M.val.obj Y))
+
 private theorem tensorRestriction_tmul
     {D : Type (u + 1)} [Category.{u} D] {K : GrothendieckTopology D}
     [K.HasSheafCompose (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})]
@@ -59,6 +70,8 @@ private theorem tensorRestriction_tmul
     (changeOfRingsPresheaf.{u, u + 1, u + 1} c M).map i (s ⊗ₜ[A.obj.obj X, (c.hom.app X).hom] m) =
       S.obj.map i s ⊗ₜ[A.obj.obj Y, (c.hom.app Y).hom] M.val.map i m :=
   Classical.choose_spec (exists_changeOfRingsMap.{u, u + 1, u + 1} c M i) s m
+
+end
 
 private noncomputable def tensorPresheafFunctor
     {D : Type (u + 1)} [Category.{u} D] {K : GrothendieckTopology D}
