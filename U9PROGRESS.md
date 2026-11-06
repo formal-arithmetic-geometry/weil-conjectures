@@ -288,72 +288,66 @@
 - Fix patterns: /home/ubuntu/u9/bz/FIXES-BZ908.md.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
+- Assigned leaf compiled successfully (51s), all 3998 jobs green at 47eabae395f.
+  The shared remote wrapper hit a shell syntax error after compilation; full Lean
+  success is recorded in BUILD-BZ908-leaf-green-full.log. Rechecking the runner.
+- Next batch uses two direct importers whose dependency closures cover all 19:
+  SingleComplexInheritedTensorCondition and NormalizedInternalHomPullbackComparison.
 
-# BZ932 in progress
+- The stable downstream run at 0997529457 rebuilt the assigned leaf (59s) and
+  CanonicalPullbackTensorMonoidalRealization (50s) successfully.
+- TensorCoordinateIdentifications needs the same Qh/Q reflexive casts plus an
+  explicit target sheaf category; the known BZ877 repair is applied for recheck.
+  The unused-list theorem has an external caller, so it is retained.
+- Unowned blockers found: StalkDerivedExtensionComparisonIsoCore (heartbeat
+  timeout) and OpenRestrictionDerivedMonoidal (reversed compositor).
+- Per-run ucheck-bump snapshot: /home/ubuntu/u9/bz/BZ908-bin/ucheck-bump. It preserves
+  the lead's locking and one-build-per-helper rules while avoiding shared-script
+  overwrite failures. No shared build scripts were edited.
 
-- Branch: u9/BZ932; baseline 902c558126dff07f1b90673880f577206572e997.
-- The user instructed continuation after the concrete five-module upstream-restoration proposal.
-- Applied BZ932-proposed-upstream-restoration.patch, preserving restored statement/docstring text.
-- Explicit terminal-object preservation supplies GU.PreservesZeroMorphisms; removed the old
-  unmeasured maxHeartbeats override from the restored helper.
-- Next: ucheck-bump on the five prerequisites and SupportedKoszulRelativeDetector, then downstream.
-- Fix notes: /home/ubuntu/u9/bz/FIXES-BZ932.md. No local Lean/Lake or proof shortcuts.
 
-# BZ941 in progress
+# BZ938 in progress
 
-- Branch: u9/BZ941; baseline c59b55069.
-- The user instructed continuation after the exact one-line public-statement proposal.
-- Applied BZ941-public-statement-proposal.patch: cast (by rfl) around the unit map
-  in section_derived_tensor_normalization. All other declaration headers are unchanged.
-- Six other failures were resolved by implementation imports, reflexive unitor
-  transports, and cast normalization in the unit proof.
-- Next: ucheck-bump for the assigned leaf, then its five direct importers and further
-  downstream modules up to the brief's limit of 30 extra modules.
-- Notes and logs: /home/ubuntu/u9/bz/FIXES-BZ941.md.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
-- First continuation build accepted the proposed unit-map cast and exposed the same
-  hidden-unit mismatch in the public theorem's identity constraint. Applied the same
-  reflexive transport to that identity, with tensorUnit Λ T explicit, and revalidating.
-- Assigned leaf GREEN at d0d046a304a6ef9bd12942cdd26fd0765926f4d3:
-  ucheck-bump rc=0, failed=0, 5358 jobs; target freshly rebuilt in 25 seconds.
-- Full log: /home/ubuntu/u9/bz/BUILD-BZ941-leaf-green-full.log.
-- Continuing with all five direct importers; no DONE until downstream checking finishes.
-- Both direct comparison importers are GREEN: ModuleRingedToposDerivedComparison and
-  ModuleRingedComparison.ModuleRingedToposDerivedComparison (5422 jobs, rc=0, failed=0).
-- Three other direct importers are blocked by unowned dependencies; exact diagnostics
-  are in /home/ubuntu/u9/bz/BZ941-layer1-blockers.json.
-- Next: five comparison importers in the second layer.
-- Second layer exposed redundant reducibility attributes in SectionTensorRightComputation
-  (known BZ992 fixes) and a reversed compositor in the unused predicate
-  CoefficientScalarSectionRealization. Removed the attributes and deleted the predicate
-  with its docstring after whole-tree reference and prune-list checks.
-- Revalidating all five second-layer targets; exact errors/rules recorded in FIXES-BZ941.md.
-- Dependency graph expands the second-layer batch to 27 leaf descendants; with three
-  blocked direct importers, this reaches the 30-module downstream limit.
-- Prepared all remaining instances of the known reducibility fixes in this closure.
-- Reused BZ993 prune repairs for five unused declarations in HomotopyComplex,
-  RepresentativeTotalPath, and RepresentativeTransport after independent reference checks.
-- SectionScalarComputationTransport additionally fails in its kept exactSquareFactors
-  statement (old compositor direction); skip this BZ992 dependency and its two importers.
-  Reverted temporary attribute edits in this blocked section-computation branch.
-- Next validation retains four second-layer targets on the unaffected coefficient branch.
-- Coefficient round 1 passed all earlier modules and failed only in
-  CoefficientScalarSectionRealization. Deleted three prune-listed private helpers
-  after checking all six short-name declaration/reference lines are local.
-- Revalidating the same four targets; no parallel build requests.
+- Branch: u9/BZ938; baseline before repairs: 1626b332e^.
+- The user instructed continuation after the exact four-projection private-helper proposal.
+  Applied BZ938-private-compositor-proposal.patch to descend_coherence.
+  The .hom → .inv migration preserves the original equation under Mathlib's reversed compositor.
+- Definition bodies and proof-local comparisons now use the correct compositor direction.
+- First remote build cleared five of eight diagnostics; remaining three shared the
+  private helper statement as their root. Next: validate the completed repair.
+- Then check the nine direct importers, continuing through unblocked layers up to
+  the brief's 30-extra-module limit.
+- Fix records: /home/ubuntu/u9/bz/FIXES-BZ938.md.
+- No local Lean/Lake, forbidden proof escapes, or heartbeat changes.
 
-# BZ941 complete
 
-- Source commit: c10fb12fbe2cd4532b13a0dfff0ced05b2c76a81; branch u9/BZ941.
-- Final ucheck-bump GREEN: rc=0, failed=0, 7000 jobs; assigned leaf and 24 downstream
-  modules validated. All 12 changed Lean source files belong to this green closure.
-- Six other modules are blocked by unowned dependencies. The complete 30-module
-  downstream scope and first errors are recorded in /home/ubuntu/u9/bz/BZ941-all-blockers.json.
-- Nine failing unused declarations deleted after prune-list and whole-tree reference checks.
-- Seven rewrite rules replay the corresponding changes; surviving declaration headers
-  are unchanged except the two already authorized reflexive transports in the leaf.
-- Full log: /home/ubuntu/u9/bz/BUILD-BZ941-final-green-full.log.
-- Fix records: /home/ubuntu/u9/bz/FIXES-BZ941.md; audit: BZ941-contract-audit.txt.
-- Completion marker: /home/ubuntu/u9/state/BZ941.DONE.
-- No local Lean/Lake, forbidden proof terms, profiler probes, or heartbeat increases.
-- This final checkpoint changes documentation only; Lean source matches the green build.
+# BZ978 complete
+
+- Branch: u9/BZ978; baseline 2390944b5.
+- Assigned CompletedReductionUnit is green and sorry-free. The authorized identity cast
+  and Localization imports preserve its normalization equation across hidden Qh endpoints.
+- Two direct importers are green: CompletedPullbackInterface and CompletedQuotientUnitNormalization.
+  The interface fixes Mathlib's reversed compositor in its construction; its type is unchanged.
+- Green source commit: 68722d6cc7ac77c7987137f65e895ed614607434, ucheck-bump rc=0,
+  failed=0, 6672 jobs. All three modules freshly rebuilt. Final Lean source is identical.
+- All seven direct importers and the next frontier were checked or traced to observed
+  unowned failures. ReductionAugmentationCompatibility is red because BZ704 removed
+  two prerequisite helpers; its own redundant reducibility attribute is also recorded.
+  Other blocked branches and exact diagnostics are in FIXES-BZ978.md.
+- No declaration deletions, local Lean/Lake execution, proof placeholders, trust bypasses,
+  profiler probes, or heartbeat changes. All four rewrite rules replay exactly.
+- Logs: BUILD-BZ978-leaf-green-full.log, BUILD-BZ978-downstream-green-full.log,
+  BUILD-BZ978-downstream1-full.log, and BUILD-BZ978-downstream2-full.log under ~/u9/bz/.
+- Final records: ~/u9/bz/FIXES-BZ978.md and ~/u9/state/BZ978.DONE.
+- This completion commit changes only progress documentation.
+
+
+# BZ1001 in progress
+
+- Branch: u9/BZ1001; baseline b5510fe234428620f0e0c56150bc6fd58787e621.
+- The user instructed continuation after the explicit four-line compositor proposal.
+- Applied the two component direction updates in kept private exactSquareFactors
+  and the corresponding inverse cancellation proof. Other statements are unchanged.
+- Next: remote validation of the assigned leaf and its first two downstream layers.
+- Fix records and baseline log: /home/ubuntu/u9/bz/FIXES-BZ1001.md.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
