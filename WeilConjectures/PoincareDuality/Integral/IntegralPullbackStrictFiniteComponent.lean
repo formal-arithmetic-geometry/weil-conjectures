@@ -113,7 +113,7 @@ private theorem exactSquare_fac
     [PreservesFiniteLimits R] [PreservesFiniteColimits R]
     (e : U ⋙ F ≅ G ⋙ R) (K : CochainComplex A₀ ℤ) :
     (((Functor.mapDerivedCategoryCompIso U F).symm ≪≫
-        Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryCompIso G R).hom.app
+        Functor.mapDerivedCategoryNatIso e ≪≫ (Functor.mapDerivedCategoryCompIso G R).symm).hom.app
           (DerivedCategory.Q.obj K)) ≫
         R.mapDerivedCategory.map (G.mapDerivedCategoryFactors.hom.app K) ≫
         R.mapDerivedCategoryFactors.hom.app ((G.mapHomologicalComplex (.up ℤ)).obj K) =
