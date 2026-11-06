@@ -82,7 +82,7 @@ def residue (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (I : Ideal A) (n : 
 
 section
 
-private local instance completedConstantAlgebraRestrictedModule (T : Scheme.{u})
+private local instance completedConstantReductionRestrictedModule (T : Scheme.{u})
     {A : Sheaf (ProEt.topology T) CommRingCat.{u + 1}}
     (M : SheafOfModules.{u + 1} ((adicLisseForget T).obj A))
     {X Y : T.ProEtᵒᵖ} (i : X ⟶ Y) :
