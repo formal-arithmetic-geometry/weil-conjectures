@@ -197,10 +197,8 @@ theorem spIntegers_eq (E : PadicAlgCl.FiniteIntermediateField ℓ) :
   simpa only [NNReal.coe_one, coe_nnnorm] using
     (NNReal.coe_le_coe (r₁ := ‖algebraMap E.1 (PadicAlgCl ℓ) x‖₊) (r₂ := 1))
 
-set_option backward.isDefEq.respectTransparency false in
 attribute [local irreducible] spEllPointReduction
 
-set_option backward.isDefEq.respectTransparency false in
 attribute [local irreducible] spEllPointTransition
 
 set_option backward.isDefEq.respectTransparency false in
@@ -235,5 +233,4 @@ private theorem spFreeTensor_linear
   intro g hg
   exact Mod.hom_ext _ _ hg
 
-set_option backward.isDefEq.respectTransparency false in
 end AlgebraicGeometry.ProEtale
