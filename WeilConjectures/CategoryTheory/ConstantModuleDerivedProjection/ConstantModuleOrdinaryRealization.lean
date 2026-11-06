@@ -45,18 +45,11 @@ variable {C D : Type u} [Category.{v} C] [Category.{v} D]
   {A : Type (max u v)} [CommRing A]
 
 -- Cache the standard sheafification properties before the repeated section calculations.
-private instance cachedAdd (J : GrothendieckTopology C) :
-    HasWeakSheafify J AddCommGrpCat.{max u v} := inferInstance
-
 private instance cachedWeakComm (J : GrothendieckTopology C) :
     HasWeakSheafify J CommRingCat.{max u v} := inferInstance
 
 private instance cachedWeakRing (J : GrothendieckTopology C) :
     HasWeakSheafify J RingCat.{max u v} := inferInstance
-
-private instance cachedWeakFixed (J : GrothendieckTopology C)
-    (A : Type (max u v)) [CommRing A] : HasWeakSheafify J (ModuleCat.{max u v} A) :=
-  inferInstance
 
 private instance cachedForgetRing (J : GrothendieckTopology C) :
     J.PreservesSheafification (forget₂ CommRingCat.{max u v} RingCat.{max u v}) :=
