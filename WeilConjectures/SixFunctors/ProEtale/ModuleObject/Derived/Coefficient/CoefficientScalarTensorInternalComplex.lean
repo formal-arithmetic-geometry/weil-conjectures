@@ -6,7 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.CoefficientScalarTensorData
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.InternalComplexLocalizationTensorComparison
+import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.InternalComplexLocalizationTensorComparison
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.CoefficientScalarComplexCounit
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.CoefficientScalarTensorHomotopyComplex
 
