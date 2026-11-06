@@ -43,7 +43,7 @@ private theorem total_plus_unit
     (F : C ⥤ D) [F.Additive] (L : HomotopyCategory.Plus C) :
     F.rightDerivedFunctorUnit.app L.obj ≫
         (F.rightDerivedFunctorPlusCompatibility.app (DerivedCategory.Plus.Qh.obj L)).inv =
-      DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnit.app L) := by
+      DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnith.app L) := by
   apply (Iso.comp_inv_eq _).2
   have h := (Functor.rightDerivedNatTrans_app
     (F.rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.ι)
@@ -52,7 +52,7 @@ private theorem total_plus_unit
     (HomotopyCategory.Plus.quasiIso C) (𝟙 _) L).symm
   simp only [NatTrans.id_app, Category.id_comp] at h
   change F.rightDerivedFunctorUnit.app L.obj =
-    DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnit.app L) ≫
+    DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnith.app L) ≫
       (F.rightDerivedFunctorPlusCompatibility.app
         (DerivedCategory.Plus.Qh.obj L)).hom at h
   exact h
@@ -84,7 +84,7 @@ private theorem total_classical_chosen
   let v := DerivedCategory.Plus.ι.preimageIso
     (X := (DerivedCategory.Plus.singleFunctor C 0).obj M)
     (Y := DerivedCategory.Plus.Qh.obj ((HomotopyCategory.Plus.quotient C).obj L)) t
-  let ηp := F.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient C).obj L)
+  let ηp := F.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.quotient C).obj L)
   let η := F.rightDerivedFunctorUnit.app
     ((HomotopyCategory.quotient C (ComplexShape.up ℤ)).obj R.cochainComplex)
   have hp : (F.rightDerivedFunctorPlusCompatibility.app
