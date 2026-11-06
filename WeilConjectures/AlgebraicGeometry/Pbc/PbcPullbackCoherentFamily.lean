@@ -491,9 +491,7 @@ private theorem integralPullComparisonShift (f : X ⟶ Y)
       (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight eI AF ≪≫
       Functor.associator _ _ _
   have : NatTrans.CommShift e3.hom ℤ := by
-    dsimp only [e3, Iso.trans_hom, Iso.symm_hom,
-      Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom]
-    infer_instance
+    exact (pbcAssocWhiskerShift eI eBF).1
   have : NatTrans.CommShift bA.hom ℤ := ambientPullComparisonShift l Ω f h
   apply ScalarLocalization.cscAssocShift eBE eJ e3 b.hom bA.hom
   ext K
@@ -558,9 +556,10 @@ private theorem rationalPullComparisonShift (f : X ⟶ Y)
       Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft I eF ≪≫
       (Functor.associator _ _ _).symm
   have : NatTrans.CommShift e3.hom ℤ := by
-    dsimp only [e3, Iso.trans_hom, Iso.symm_hom,
-      Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom]
-    infer_instance
+    simpa only [e3, Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv,
+      Functor.isoWhiskerLeft_hom, Functor.isoWhiskerLeft_inv,
+      Functor.isoWhiskerRight_hom, Functor.isoWhiskerRight_inv, Category.assoc] using
+      (pbcAssocWhiskerShift eY.symm eF.symm).2
   apply ScalarLocalization.cscAssocShiftOfWhiskerLeft eE eX e3 bI.hom b.hom
   · intro K
     have : ∀ E, (A.Φ E).Additive := fun E ↦
