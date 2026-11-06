@@ -237,6 +237,12 @@ theorem commonStagePullbackCompComponent_stage_representation
     simpa only [GeneralAlgebraicallyClosedCoefficients.stageSystem] using
       (GeneralAlgebraicallyClosedCoefficients.stageSystem_existsUnique l Ω Z).exists.choose_spec.1
         P.stage L hP
+  have hX : operationStageTransitionIso l Ω X P.stage L hP = eqToIso eX := by
+    rfl
+  have hY : operationStageTransitionIso l Ω Y P.stage L hP = eqToIso eY := by
+    rfl
+  have hZ : operationStageTransitionIso l Ω Z P.stage L hP = eqToIso eZ := by
+    rfl
   have key := rationalPullbackComposition_scalar_transport l
     (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage)
     (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L)
@@ -249,8 +255,9 @@ theorem commonStagePullbackCompComponent_stage_representation
   apply congrArg (StageSystem.PairCategory.mkHom
       (X := commonStagePullbackObject l Ω (f ≫ g) P)
       (Y := commonStagePullbackObject l Ω f (commonStagePullbackObject l Ω g P)) L hP hP)
-  unfold commonStagePullbackComparison operationStageTransitionIso
+  unfold commonStagePullbackComparison
   dsimp only [commonStagePullbackObject, StageSystem.PairCategory.toStage]
+  rw [hX, hY, hZ]
   set_option backward.isDefEq.respectTransparency true in
   set_option backward.isDefEq.respectTransparency.types true in
   exact key
