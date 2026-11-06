@@ -247,10 +247,10 @@
 - Notes: /home/ubuntu/u9/bz/FIXES-BZ824.md. No local Lean/Lake or proof shortcuts.
 
 
-# BZ852 in progress
+# BZ852 complete
 
 - Branch: `u9/BZ852`; original baseline: `2ab2b07a323`; integrated baseline: `db406319f`.
-- Restored the original LineEvaluationInversePair proof chain and `signed_line_power_flat`
+- Restored ten original declarations across LineEvaluationInversePair and SignedLinePowerFlat
   after the user instructed continuation of the concrete two-file proposal.
 - Existing theorem statements and docstrings are unchanged. Repairs expose scalar carriers
   in `chart_basis` and provide a private local scalar instance for `cancellation_pure`.
@@ -258,7 +258,12 @@
 - `ucheck-bump` at `d8d95ad22f12eb0cad385f9490dc058517797953`: rc=0, failed=0, 4005 jobs.
   Both restored prerequisites, SignedLineOrdinaryConstraints, and SignedLineLocalizedCoherence
   also rebuilt successfully (six modules total).
-- Full log: `/home/ubuntu/u9/bz/BUILD-BZ852-restored2-full.log`.
-- Next: check layer 2, CartesianCoefficientTwistsSupplement, and continue while fixable.
-- Patterns and exact rewrite rules: `/home/ubuntu/u9/bz/FIXES-BZ852.md`.
+- Full successful log: `/home/ubuntu/u9/bz/BUILD-BZ852-restored2-full.log`.
+- Layer 2 CartesianCoefficientTwistsSupplement was attempted and skipped because external
+  dependencies CanonicalModuleBaseChangeAffineChartComparison (BZ864) and
+  RingedKFlatWordComparisonDescent (BZ843) fail. Their first errors and import paths are recorded.
+  The build was stopped after these blockers were confirmed; no downstream source was changed.
+- No Lean source differences after the successful checkpoint; final changes are documentation only.
+- Fixes/rules: `/home/ubuntu/u9/bz/FIXES-BZ852.md`; audit: `BZ852-contract-audit.txt`.
+- Completion marker: `/home/ubuntu/u9/state/BZ852.DONE`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
