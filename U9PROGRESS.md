@@ -265,13 +265,23 @@
 - Restoring the referenced degree-zero open comparison chain with original signatures.
 - The assigned theorem now uses the degree-zero pinned square and target automorphisms.
 - No existing theorem statement changes, proof placeholders, or heartbeat increases.
-- All compilation is remote through `ucheck-bump`; build 6 is queued. Build 3 was cancelled while queued; builds 4 and 5 supplied concrete prerequisite diagnostics.
+- All compilation is remote through `ucheck-bump`; build 7 is queued. Build 3 was cancelled while queued; builds 4 and 5 supplied concrete prerequisite diagnostics.
 - Fix records and restoration inventories: `/home/ubuntu/u9/bz/FIXES-BZ864.md`.
 - Next: repair errors reported by those builds, validate the leaf, then continue downstream.
 
-- BZ864 update: 17 Lean modules changed, primarily restoring 24 still-needed declarations.
+- BZ864 update: 17 Lean modules changed, restoring 22 still-needed declarations and adding three helpers.
 - Pinned single-counit definitions now compile using explicit universe `w` and reflexive casts.
 - Remaining diagnosed repairs: abstract the homotopy-square isomorphism construction and
   normalize casts in the pinned counit composition proof; submitted in build 6.
 - Build logs: `/home/ubuntu/u9/bz/BZ864-build-4-full.log` and `BZ864-build-5-full.log`.
 - No original statement changes, forbidden proof escapes, or heartbeat raises.
+
+- Build 6: abstract homotopy helper elaborated, but exposed definition required its helper public. Fixed.
+- Build 6: counit simpa retained a Qh conversion mismatch; applied known BZ721 `simp at h ⊢; exact h` under full unfolding.
+- Build 7 submits both repairs; no other source changes pending.
+
+- Build 7: homotopy iso, counit equation, target triangle, and zero apex now green.
+- Restriction factors: removed solved-goal rfl; its newly restored helper is private because the original type uses hidden Qh reduction. The sole caller now imports all of that helper module. No existing public statement changed.
+
+- Build 7 finished with two failing modules: restriction factors (prepared fix) and a further pruned homotopy tensor-counit helper. Restored that helper from a3a372af5 without its former heartbeat override. 18 Lean files changed, 23 restored declarations.
+- Build 8 validates these changes on the assigned module and affine locality.
