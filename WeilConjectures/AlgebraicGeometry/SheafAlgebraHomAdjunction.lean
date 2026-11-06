@@ -32,6 +32,14 @@ private abbrev BMod (Y : Scheme.{u}) (B : Y.CommAlgebraSheaf) : Type (u + 1) :=
   SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology Y)
     (forget₂ CommRingCat RingCat)).obj B.right)
 
+private noncomputable local instance sheafAlgebraHomRestrictedTargetSMul
+    {Y : Scheme.{u}} {B : Y.CommAlgebraSheaf} (M : BMod Y B)
+    {U V : (Opens Y)ᵒᵖ} (f : U ⟶ V) :
+    SMul (B.right.obj.obj V)
+      ((ModuleCat.restrictScalars (((sheafCompose (Opens.grothendieckTopology Y)
+        (forget₂ CommRingCat RingCat)).obj B.right).obj.map f).hom).obj (M.val.obj V)) :=
+  (M.val.obj V).isModule.toSMul
+
 /-- Scalar restriction along the structure map of B. -/
 private noncomputable abbrev res (Y : Scheme.{u}) (B : Y.CommAlgebraSheaf) :
     BMod Y B ⥤ OMod Y :=
