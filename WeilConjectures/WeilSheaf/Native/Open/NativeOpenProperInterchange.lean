@@ -406,7 +406,7 @@ private noncomputable def nativeOpenProperRestrictionIso
   let eb : (ProEtaleWeilSheaf.extensionByZero k₀ l j').mapDerivedCategory ⋙
       (ProEtaleWeilSheaf.upperStar k₀ l b).mapDerivedCategory ≅
         (ProEtaleWeilSheaf.extensionByZero k₀ l s).mapDerivedCategory :=
-    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    Functor.mapDerivedCategoryCompIso _ _ ≪≫
       Functor.mapDerivedCategoryNatIso (nativeOpenFactorRestrictionIso k₀ l s b j' hsb)
   exact Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft _ (nativeDerivedOpenBaseChangeIso k₀ l q b j p
