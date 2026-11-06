@@ -237,8 +237,9 @@ private theorem pull_section_smul {R : Sheaf J CommRingCat.{v}}
     simp only [Functor.map_id] at hsm
     change (AI.moduleUnderlying.inv.app M).hom.app U
         ((L.map ((underlying R).map μ)).hom.app U x) =
-      AI.ringUnderlying.hom.hom.app U
-          ((L.map (sectionMap R a ((underlying R).obj M))).hom.app U x) •
+      (show (F.rings.obj R).obj.obj U from
+        AI.ringUnderlying.hom.hom.app U
+          ((L.map (sectionMap R a ((underlying R).obj M))).hom.app U x)) •
         (show (AI.modules.obj M).val.obj U from
           (AI.moduleUnderlying.inv.app M).hom.app U x) at hsm
     rw [hx] at hsm
