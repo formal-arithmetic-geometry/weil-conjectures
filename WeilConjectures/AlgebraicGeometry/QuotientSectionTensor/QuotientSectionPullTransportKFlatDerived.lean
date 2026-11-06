@@ -39,12 +39,13 @@ namespace AlgebraicGeometry.ProEtale.QuotientSectionTensor
 open QuotientChange IntegralQuotient
 open ModuleRingedComparison
 
+attribute [local instance] ModuleRingedComparison.sectionFunctorAdditive
+
 attribute [local semireducible] QuotientChange.L
 attribute [local implicit_reducible] QuotientChange.L
   InternalAbelianSheafModule.sectionRingSheaf
   DerivedCategory.Q DerivedCategory.Qh
-  HomologicalComplexUpToQuasiIso.Qh HomotopyCategory.quotient
-  CategoryTheory.Functor.mapHomologicalComplex CategoryTheory.Functor.mapHomotopyCategory
+  HomologicalComplexUpToQuasiIso.Qh
   CategoryTheory.catToReflQuiver
   GrothendieckTopology.monoidalCategory_sheaf_of_essentiallySmall
   GrothendieckTopology.braidedCategory_sheaf_of_essentiallySmall
