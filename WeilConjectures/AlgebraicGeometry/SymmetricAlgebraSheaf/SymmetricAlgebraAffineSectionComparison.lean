@@ -188,6 +188,8 @@ private theorem section_induction {X : Scheme.{u}} (F : X.Modules) [F.IsQuasicoh
     (hadd : ∀ x y, P x → P y → P (x + y))
     (hgen : ∀ (r : Γ(X, U)) (a : sections F (op W)),
       P (r • restriction F (homOfLE hUW).op a)) : ∀ x, P x := by
+  -- Tensor-product induction now derives the zero case from the pure-tensor case.
+  clear hzero
   let : Algebra Γ(X, W) Γ(X, U) :=
     (X.presheaf.map (homOfLE hUW).op).hom.toAlgebra
   obtain ⟨e, he⟩ := exists_sectionTensorEquiv F hU hW hUW
