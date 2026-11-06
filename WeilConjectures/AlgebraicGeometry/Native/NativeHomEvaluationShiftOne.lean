@@ -134,8 +134,8 @@ private lemma nativeHom_comparison_transport
   change (𝟙 _ ≫ DerivedCategory.qhInternalHomToIhom P I ≫
     (ihom (DerivedCategory.Q.obj P)).map (𝟙 (DerivedCategory.Q.obj I)) ≫
     (MonoidalClosed.pre (𝟙 (DerivedCategory.Q.obj P))).app (DerivedCategory.Q.obj I)) = _
-  simp only [CategoryTheory.Functor.map_id, MonoidalClosed.pre_id, NatTrans.id_app,
-    Category.id_comp, Category.comp_id]
+  simp only [MonoidalClosed.pre_id, NatTrans.id_app, Category.id_comp, Category.comp_id]
+  erw [(ihom (DerivedCategory.Q.obj P)).map_id, Category.comp_id]
 
 private lemma localize_evaluation_shift
     {E : Type*} {D : Type*} [Category E] [Category D]
