@@ -71,7 +71,7 @@ instance : Presheaf.IsLocallyInjective (ProEt.topology S) (constToContinuousShea
     · subst hab
       exact (ProEt.topology S).superset_covering (fun _ _ _ ↦ rfl)
         ((ProEt.topology S).top_mem _)
-    · have : IsEmpty U.unop.left := ⟨fun x ↦ hab (ULift.ext _ _
+    · have : IsEmpty U.unop.left := ⟨fun x ↦ hab (ULift.ext
         (congr_arg (fun f : ULift.{u + 1} C(U.unop.left, A) ↦ f.down x) h))⟩
       exact (ProEt.topology S).superset_covering bot_le (ProEt.bot_mem_topology _)
 

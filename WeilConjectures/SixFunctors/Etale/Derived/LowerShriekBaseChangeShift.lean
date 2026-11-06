@@ -153,6 +153,8 @@ instance commShift_leftDerivedUpperStarComp_hom {T S R : Scheme.{u}}
     NatTrans.CommShift.of_iso_inv _ ℤ
   have : NatTrans.CommShift (g₂)^*[A].leftDerivedFunctorIsoMapDerivedCategory.inv ℤ :=
     NatTrans.CommShift.of_iso_inv _ ℤ
+  have : NatTrans.CommShift ((g₂)^*[A].mapDerivedCategoryCompIso (g₁)^*[A]).inv ℤ :=
+    NatTrans.CommShift.of_iso_inv _ ℤ
   rw [e]
   infer_instance
 
