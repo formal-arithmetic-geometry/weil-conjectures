@@ -179,7 +179,7 @@ private theorem exact_single_identity
   · subst n
     simp [K, Functor.mapCochainComplexSingleFunctor,
       HomologicalComplex.singleMapHomologicalComplex,
-      CochainComplex.singleFunctor, CochainComplex.singleFunctors, HomologicalComplex.single]
+      CochainComplex.singleFunctor, HomologicalComplex.single]
   · apply (HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 M n hn).eq_of_tgt
 
 private theorem right_single_identity
