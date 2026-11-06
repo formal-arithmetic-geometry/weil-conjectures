@@ -49,7 +49,7 @@ local instance squareSectionUnitForwardHasDerivedCategory (Y : Scheme.{u}) :
 attribute [local implicit_reducible] Scheme.Modules Scheme.Modules.Hom
   Scheme.Modules.instCategory Scheme.Modules.instAbelian TopCat.Sheaf
   Scheme.Modules.pushforward RingedSpace.moduleDirectImage
-  Functor.mapHomologicalComplex HomologicalComplex.homologyFunctor
+  HomologicalComplex.homologyFunctor
   RingedSpace.openModuleSections HomologicalComplex.homologyMap
   Scheme.Hom.toRingCatSheafHom SheafOfModules.pushforward SheafOfModules.forget
   SheafOfModules.toSheaf PresheafOfModules.toPresheaf HomologicalComplex.homology

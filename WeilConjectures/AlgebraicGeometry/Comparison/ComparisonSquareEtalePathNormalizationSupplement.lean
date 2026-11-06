@@ -67,12 +67,12 @@ variable {A B B' C P Q R : Type*}
 
 private theorem exact_path (e : F ⋙ G ≅ F' ⋙ G')
     (a : F' ⋙ K₁ ≅ K₀ ⋙ P₁) (b : G' ⋙ K₂ ≅ K₁ ⋙ P₂) :
-    (Functor.isoWhiskerRight (Functor.mapDerivedCategoryCompIso F G) D(K₂)).inv ≫
+    (Functor.isoWhiskerRight (Functor.mapDerivedCategoryCompIso F G).symm D(K₂)).inv ≫
       (Functor.mapDerivedCategorySquareIso (F₁ := F ⋙ G) (F₂ := K₂)
         (G₁ := K₀) (G₂ := P₁ ⋙ P₂)
         (Functor.isoWhiskerRight e K₂ ≪≫
           Functor.isoWhiskerLeft F' b ≪≫ Functor.isoWhiskerRight a P₂)).hom ≫
-      (Functor.isoWhiskerLeft D(K₀) (Functor.mapDerivedCategoryCompIso P₁ P₂)).hom =
+      (Functor.isoWhiskerLeft D(K₀) (Functor.mapDerivedCategoryCompIso P₁ P₂).symm).hom =
     (Functor.isoWhiskerRight (Functor.mapDerivedCategorySquareIso e) D(K₂)).hom ≫
       (Functor.isoWhiskerLeft D(F') (Functor.mapDerivedCategorySquareIso b)).hom ≫
       (Functor.isoWhiskerRight (Functor.mapDerivedCategorySquareIso a) D(P₂)).hom := by
@@ -80,29 +80,31 @@ private theorem exact_path (e : F ⋙ G ≅ F' ⋙ G')
   have hp := Functor.mapDerivedCategorySquareIso_paste F' G' P₁ P₂ K₀ K₁ K₂ a b
   simp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
     Functor.mapDerivedCategoryNatIso_trans] at hp ⊢
-  have hw' : (Functor.mapDerivedCategoryCompIso (F ⋙ G) K₂).inv ≫
+  have hw' : (Functor.mapDerivedCategoryCompIso (F ⋙ G) K₂).symm.inv ≫
       (Functor.mapDerivedCategoryNatIso (Functor.isoWhiskerRight e K₂)).hom =
       Functor.whiskerRight (Functor.mapDerivedCategoryNatIso e).hom D(K₂) ≫
-        (Functor.mapDerivedCategoryCompIso (F' ⋙ G') K₂).inv := by
+        (Functor.mapDerivedCategoryCompIso (F' ⋙ G') K₂).symm.inv := by
     rw [Iso.inv_comp_eq, ← Category.assoc, Iso.eq_comp_inv]
     exact hw
+  simp only [Iso.symm_inv] at hw'
   simp only [Category.assoc] at hp ⊢
   rw [reassoc_of% hw', reassoc_of% hp]
   simp only [Functor.isoWhiskerRight_hom, Functor.isoWhiskerRight_inv,
-    Iso.trans_hom, Iso.symm_hom, Functor.whiskerRight_comp, Category.assoc,
-    Iso.inv_hom_id, Category.comp_id]
+    ← Functor.isoWhiskerLeft_symm,
+    Iso.trans_hom, Iso.symm_hom, Iso.symm_inv, Functor.whiskerRight_comp, Category.assoc,
+    Iso.hom_inv_id, Category.comp_id]
 
 private theorem exact_path_with_comparisons (e : F ⋙ G ≅ F' ⋙ G')
     (a : F' ⋙ K₁ ≅ K₀ ⋙ P₁) (b : G' ⋙ K₂ ≅ K₁ ⋙ P₂)
     (P₁' : DerivedCategory P ⥤ DerivedCategory Q)
     (P₂' : DerivedCategory Q ⥤ DerivedCategory R)
     (j₁ : P₁' ≅ D(P₁)) (j₂ : P₂' ≅ D(P₂)) (M : DerivedCategory A) :
-    (Functor.isoWhiskerRight (Functor.mapDerivedCategoryCompIso F G) D(K₂)).inv.app M ≫
+    (Functor.isoWhiskerRight (Functor.mapDerivedCategoryCompIso F G).symm D(K₂)).inv.app M ≫
       (Functor.mapDerivedCategorySquareIso (F₁ := F ⋙ G) (F₂ := K₂)
         (G₁ := K₀) (G₂ := P₁ ⋙ P₂)
         (Functor.isoWhiskerRight e K₂ ≪≫
           Functor.isoWhiskerLeft F' b ≪≫ Functor.isoWhiskerRight a P₂)).hom.app M ≫
-      (Functor.mapDerivedCategoryCompIso P₁ P₂).hom.app (D(K₀).obj M) ≫
+      (Functor.mapDerivedCategoryCompIso P₁ P₂).symm.hom.app (D(K₀).obj M) ≫
       D(P₂).map (j₁.inv.app (D(K₀).obj M)) ≫
       j₂.inv.app (P₁'.obj (D(K₀).obj M)) =
     D(K₂).map ((Functor.mapDerivedCategorySquareIso e).hom.app M) ≫
@@ -127,16 +129,16 @@ private noncomputable def exactOrdinaryPath
 
 private noncomputable def exactSourceIso :
     D((F ⋙ G) ⋙ K₂) ≅ D(F) ⋙ D(G) ⋙ D(K₂) :=
-  Functor.mapDerivedCategoryCompIso _ _ ≪≫
-    Functor.isoWhiskerRight (Functor.mapDerivedCategoryCompIso _ _) _
+  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    Functor.isoWhiskerRight (Functor.mapDerivedCategoryCompIso _ _).symm _
 
 private noncomputable def exactTargetIso
     (P₁' : DerivedCategory P ⥤ DerivedCategory Q)
     (P₂' : DerivedCategory Q ⥤ DerivedCategory R)
     (j₁ : P₁' ≅ D(P₁)) (j₂ : P₂' ≅ D(P₂)) :
     D(K₀ ⋙ (P₁ ⋙ P₂)) ≅ D(K₀) ⋙ P₁' ⋙ P₂' :=
-  Functor.mapDerivedCategoryCompIso _ _ ≪≫
-    Functor.isoWhiskerLeft _ (Functor.mapDerivedCategoryCompIso _ _) ≪≫
+  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    Functor.isoWhiskerLeft _ (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
     Functor.isoWhiskerLeft _
       (Functor.isoWhiskerRight j₁.symm _ ≪≫ Functor.isoWhiskerLeft _ j₂.symm)
 
@@ -195,7 +197,7 @@ private theorem restriction_path
       ((Functor.mapDerivedCategoryPlusNatIso e₁ ≪≫
         Functor.mapDerivedCategoryPlusCompIso F G).app M) =
       (Functor.mapDerivedCategoryNatIso e₁ ≪≫
-        Functor.mapDerivedCategoryCompIso F G).app M.obj := by
+        (Functor.mapDerivedCategoryCompIso F G).symm).app M.obj := by
     apply Iso.ext
     simp only [Functor.mapIso_hom, Iso.app_hom, Iso.trans_hom, NatTrans.comp_app,
       Functor.map_comp, Functor.ι_map_mapDerivedCategoryPlusNatIso_hom_app,
@@ -205,7 +207,7 @@ private theorem restriction_path
       ((Functor.mapDerivedCategoryPlusNatIso e₁ ≪≫
         Functor.mapDerivedCategoryPlusCompIso F G).inv.app M) =
       (Functor.mapDerivedCategoryNatIso e₁ ≪≫
-        Functor.mapDerivedCategoryCompIso F G).inv.app M.obj := congrArg Iso.inv hcomp
+        (Functor.mapDerivedCategoryCompIso F G).symm).inv.app M.obj := congrArg Iso.inv hcomp
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.map_comp]
   rw [hi, ht, Functor.ι_map_mapDerivedCategoryPlusNatIso_hom_app,
     Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app]

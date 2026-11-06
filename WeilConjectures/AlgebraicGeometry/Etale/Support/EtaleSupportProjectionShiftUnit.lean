@@ -533,7 +533,7 @@ private theorem constantPullback_derived_unit_of_unit
     (Functor.isoWhiskerLeft (constantSheaf Y.smallEtaleTopology A).mapDerivedCategory
         (leftDerivedUpperStarIsoMapDerivedCategory A f) ≪≫
       (Functor.mapDerivedCategoryCompIso (constantSheaf Y.smallEtaleTopology A)
-        (f)^*[A]).symm ≪≫ Functor.mapDerivedCategoryNatIso e).hom.app
+        (f)^*[A]) ≪≫ Functor.mapDerivedCategoryNatIso e).hom.app
           ((_root_.DerivedCategory.singleFunctor A 0).obj (𝟙_ A)) ≫
       (supportConstantUnitIso A X).hom =
     L((f)^*[A]).map (supportConstantUnitIso A Y).hom ≫

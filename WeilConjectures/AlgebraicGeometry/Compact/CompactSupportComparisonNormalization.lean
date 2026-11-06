@@ -52,15 +52,15 @@ theorem compactSupportComparisonNormalization
   let L' := openImmersionLowerShriek C c.i
   let G := lowerStar C c.g
   let e := openImmersionLowerShriekComparisonUpperStarIso C c.i
-  let d := (Functor.mapDerivedCategoryCompIso T L').symm ≪≫
-    Functor.mapDerivedCategoryNatIso e.symm ≪≫ Functor.mapDerivedCategoryCompIso L U
+  let d := Functor.mapDerivedCategoryCompIso T L' ≪≫
+    Functor.mapDerivedCategoryNatIso e.symm ≪≫ (Functor.mapDerivedCategoryCompIso L U).symm
   let dplus := properOpenSiteExtensionIso R c.i
   have hc : _root_.DerivedCategory.Plus.ι.map
       ((Functor.mapDerivedCategoryPlusCompIso T L').inv.app K) =
-      (Functor.mapDerivedCategoryCompIso T L').inv.app K.obj := by
+      (Functor.mapDerivedCategoryCompIso T L').hom.app K.obj := by
     have h : _root_.DerivedCategory.Plus.ι.mapIso
         ((Functor.mapDerivedCategoryPlusCompIso T L').app K) =
-        (Functor.mapDerivedCategoryCompIso T L').app K.obj :=
+        (Functor.mapDerivedCategoryCompIso T L').symm.app K.obj :=
       Iso.ext (Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app T L' K)
     exact congrArg Iso.inv h
   have hn : _root_.DerivedCategory.Plus.ι.map
