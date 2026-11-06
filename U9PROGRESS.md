@@ -303,3 +303,6 @@
 - Build 12: alias normalization before intro erased the theorem lets; moved normalization after intro. Build 13 (ac16def6c9) is running on poolb:43.157.187.72; log /home/ubuntu/u9/logs/BZ864-20261106T084431.log; local session 99560. All prerequisites through counit compatibility are green so far.
 
 - Build 14 diagnostics: proof reaches introductions, alias normalization, and the arbitrary restricted-comparison choice; it times out before finishing the automorphism setup. Removed all diagnostic options/traces. Build 15 uses the canonical pinned restricted comparison directly, removing γ and its endpoint isomorphism; private comparison proofs now have explicit universes.
+
+- Build 15 acquired poolb:43.135.211.170 at b6ebcc44d7 before the alias-hint commit was pushed; log /home/ubuntu/u9/logs/BZ864-20261106T090631.log, session 66438. It tests the simplified canonical-choice proof.
+- Added local implicit_reducible category aliases and local irreducible tensorPullback using the neighboring cancellation strategy (diagnostics show 1462 repeated category-instance operations). Commit 22f2d058f9. Build 16 separately validates these hints; do not confuse its source with build 15.
