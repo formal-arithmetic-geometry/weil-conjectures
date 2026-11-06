@@ -346,7 +346,8 @@ private theorem sectionTransitionAdjoint
       DerivedCategory.Qh.map_id, Category.id_comp, Category.comp_id] at hfac
     dsimp only [DerivedCategory.Qh, HomologicalComplexUpToQuasiIso.Qh,
       Functor.mapHomotopyCategory, CategoryTheory.Quotient.lift, Functor.comp_obj] at hfac ⊢
-    exact congrArg (fun f ↦ (scalarReductionDerivedRestriction l E X m).map
+    simpa only [Category.comp_id] using congrArg
+      (fun f ↦ (scalarReductionDerivedRestriction l E X m).map
       ((scalarReductionCounit l E X m).app
         ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫ f) hfac.symm
   simpa only [hcmp] using
