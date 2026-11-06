@@ -248,6 +248,10 @@ private theorem realization_complete (T : Scheme.{u})
     DerivedCategory.Q.mapIso c
   have hc := cech_model_complete T d.ideal D (fun q ↦ ⟨(hterms q).2, (hterms q).1⟩)
   intro U f hf
+  let : HasDerivedCategory.{u + 2} (SheafOfModules ((sheafCompose
+      ((completedCechTopology T).over U) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+        ((ConstantCompletion.completed (completedCechTopology T) A d.ideal).over U))) :=
+    HasDerivedCategory.standard _
   exact (hc U f hf).of_iso
     ((derivedInternalHom.{u + 1, u + 2} ((completedCechTopology T).over U)
       ((ConstantCompletion.completed (completedCechTopology T) A d.ideal).over U)).mapIso
