@@ -242,13 +242,29 @@ theorem exists_pinned_single_tensor_shifts
       DerivedCategory.Qh ≫
     (SingleFunctors.precompPostcompIso (HomotopyCategory.singleFunctors
       (SheafOfModules.{u} (moduleRings X'.toRingedSpace))) T DerivedCategory.Qh).hom
-  refine ⟨c, ?_⟩
+  let e := DerivedCategory.singleFunctorsPostcompQhIso
+    (SheafOfModules.{u} (moduleRings X'.toRingedSpace))
+  let d : ((HomotopyCategory.singleFunctors
+      (SheafOfModules.{u} (moduleRings X'.toRingedSpace))).postcomp
+        DerivedCategory.Qh).precomp T ⟶
+      (DerivedCategory.singleFunctors
+        (SheafOfModules.{u} (moduleRings X'.toRingedSpace))).precomp T :=
+    { hom := fun n ↦ Functor.whiskerLeft T (e.inv.hom n)
+      comm := fun k i j h ↦ by
+        ext G
+        simpa [SingleFunctors.precomp] using congr_app (e.inv.comm k i j h) (T.obj G) }
+  refine ⟨SingleFunctors.postcompHom
+    (DerivedCategory.singleFunctorsPostcompQhIso
+      (SheafOfModules.{u} (moduleRings X.toRingedSpace))).hom (derivedPullback g') ≫
+      c ≫ d, ?_⟩
   intro n G
-  change 𝟙 _ ≫ (pinnedPullbackCounit g').app ((F.functor n).obj G) ≫
+  change (derivedPullback g').map (𝟙 _ ≫ 𝟙 _) ≫
+    (𝟙 _ ≫ (pinnedPullbackCounit g').app ((F.functor n).obj G) ≫
       𝟙 _ ≫ DerivedCategory.Qh.map
-        (((SingleFunctors.mappedHomotopySingleIso T).hom.hom n).app G) ≫ 𝟙 _ = _
+        (((SingleFunctors.mappedHomotopySingleIso T).hom.hom n).app G) ≫ 𝟙 _) ≫
+      (𝟙 _ ≫ 𝟙 _) = _
   rw [SingleFunctors.mappedHomotopySingleIso_hom_app]
-  simp only [Category.id_comp, Category.comp_id]
+  simp only [Category.id_comp, Category.comp_id, Functor.map_id]
   rfl
 
 end AlgebraicGeometry
