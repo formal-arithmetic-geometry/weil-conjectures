@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Completed.CompletedTowerPullbackSupplement
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
 import WeilConjectures.AlgebraicGeometry.Completed.Pullback.CompletedPullbackReductionData
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # Strict representative normalization of completed pullback
 
@@ -55,10 +56,6 @@ private theorem constantRlim_lift
   have hn' := congrArg
     (fun f ↦ f ≫ (L.rightDerivedFunctorObjQIso I).hom) hn
   simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id] at hn'
-  simp only [Functor.rightDerivedFunctorUnitQ, DerivedCategory.quotientCompQhIso,
-    HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift,
-    NatIso.ofComponents_hom_app, NatIso.ofComponents_inv_app, Iso.refl_hom, Iso.refl_inv] at hn'
-  erw [Category.id_comp, CategoryTheory.Functor.map_id, Category.comp_id] at hn'
   erw [← hn']
   rw [← DerivedCategory.Q.map_comp]
   rfl
@@ -109,7 +106,15 @@ private theorem reductionUnit_onComplex
     reductionCounitOnComplex_eq (completedReductionModuleTowerFunctor T d)
       (completedReductionTower T d) (coherenceReductionTowerCounit T d) K
   rw [hec]
-  exact (completedReductionTowerUnit_exists d T).exists.choose_spec K hK
+  have h₁ : (DerivedCategory.quotientCompQhIso _).inv.app K = 𝟙 _ := rfl
+  have h₂ : (DerivedCategory.quotientCompQhIso _).hom.app
+      (((completedReductionModuleTowerFunctor T d).mapHomologicalComplex (.up ℤ)).obj K) =
+        𝟙 _ := rfl
+  have h₃ := (completedReductionTowerUnit_exists d T).exists.choose_spec K hK
+  rw [h₁, h₂, Functor.mapHomotopyCategoryFactors_hom_app] at h₃
+  erw [CategoryTheory.Functor.map_id, Category.id_comp, CategoryTheory.Functor.map_id,
+    Category.id_comp, Category.comp_id] at h₃
+  exact h₃
 
 private theorem constantPullback_onComplex
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
