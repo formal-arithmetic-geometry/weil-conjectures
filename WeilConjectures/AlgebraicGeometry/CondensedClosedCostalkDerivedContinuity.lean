@@ -245,7 +245,7 @@ private theorem comparison_of_colimitCocone
 attribute [local irreducible] CategoryTheory.Mod.monoidalClosed
   AlgebraicGeometry.ProEtale.upperStarFromPoint
 
-noncomputable local instance
+noncomputable local instance hasZeroMorphisms_condensedRingObj_condensedClosedCostalkDerived
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] (X : Scheme.{u}) :
     HasZeroMorphisms (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
