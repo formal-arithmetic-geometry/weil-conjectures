@@ -522,8 +522,8 @@ theorem finrank_zeroLocus_directImageCounit
     have : SheafOfModules.IsFiniteLocallyFree.{u, u, u}
         (SheafOfModules.unit (Limits.pullback (X ↘ Spec (.of k)) T₀.hom).ringCatSheaf) :=
       SheafOfModules.IsInvertible.isFiniteLocallyFree.{u, u, u} _
-    have : SheafOfModules.IsFinitePresentation.{u, u, u}
-        (SheafOfModules.unit (Limits.pullback (X ↘ Spec (.of k)) T₀.hom).ringCatSheaf) :=
+    have : (SheafOfModules.unit
+        (Limits.pullback (X ↘ Spec (.of k)) T₀.hom).ringCatSheaf).IsFinitePresentation :=
       SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
     rw [Modules.eulerChar_congr κ (Modules.pullbackObjUnitIso ι).symm,
       Modules.eulerChar_congr κ ((Modules.pullback ι).mapIso
@@ -929,6 +929,8 @@ theorem exists_representableBy_invertibleDirectImageToHilbert [IsSepClosed k]
   let M := P ⊗ (Modules.pullback (Limits.pullback.snd (X ↘ Spec (.of k)) H.hom)).obj Aᵛ
   have : SheafOfModules.IsInvertible.{u, u, u} M :=
     Modules.IsInvertible.sheafOfModules_isInvertible M
+  have : SheafOfModules.IsInvertible.{u, u, u} (SheafOfModules.unit H.left.ringCatSheaf) :=
+    SheafOfModules.instIsInvertibleUnit.{u, u, u}
   have hM : Pic.map (sectionBaseChange _ σ hσ H) (Pic.mk M) =
       Pic.mk (SheafOfModules.unit H.left.ringCatSheaf) := by
     obtain ⟨t⟩ := Modules.nonempty_pullback_tensorObj_iso (sectionBaseChange _ σ hσ H) P
