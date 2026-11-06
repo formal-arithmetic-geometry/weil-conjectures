@@ -5,6 +5,8 @@ Authors: Nailin Guan
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHomology
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import WeilConjectures.SixFunctors.BaseChange.Derived
