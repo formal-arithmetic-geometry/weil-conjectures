@@ -284,24 +284,28 @@
 - Next: ucheck-bump assigned module, repair prerequisite errors, then downstream targets.
 - No local Lean/Lake execution; no proof placeholders, trust bypasses, or heartbeat raises.
 
-# BZ872 in progress
+# BZ872 complete
 
 - Branch: `u9/BZ872`; original baseline: `e167a50a4`.
-- Reread `/home/ubuntu/u9/briefs/BZ872.md` and this progress file on continuation;
-  the brief has no new LEAD lines after the original unit notes.
-- User instructed continuation after the explicit reflexive-cast statement proposal.
-  Applied that exact two-line patch to `comparisonIntoPullback_comp_counit`.
-- Restored prerequisites reuse BZ856's validated source, including its measured
-  historical heartbeat budgets; both prerequisite timeouts are resolved remotely.
-- Previous assigned error was the public Qh/Q endpoint conversion. Localization
-  imports enable proof-local reduction; the explicit `cast (by rfl)` handles the
-  public statement and `cast_eq` removes it during inverse cancellation.
-- Next: standalone `ucheck-bump` on the assigned module. Its sole direct importer,
-  `SingleComplexOpenTermwiseComparison`, was already attempted twice and is blocked
-  by the unowned BZ871 `SingleComplexOpenTermwiseCounitCompatibility` error.
-- Fixes and logs: `/home/ubuntu/u9/bz/FIXES-BZ872.md`.
-- No local Lean/Lake execution, proof placeholders, or trust bypasses.
-- Assigned module GREEN at `ca4ebdd277`: standalone `ucheck-bump` returned
-  rc=0, failed=0, 4041 jobs on poolb:43.135.211.170; the leaf rebuilt in 33 seconds.
-- Remote log: `/home/ubuntu/u9/logs/BZ872-20261106T083120.log`.
-- Running the required direct-importer check against the now-green leaf before DONE.
+- Assigned module: `WeilConjectures.AlgebraicGeometry.SingleComplexOpenOrdinaryComparison`.
+- Standalone `ucheck-bump`: rc=0, failed=0, 4041 jobs on poolb:43.135.211.170.
+  The leaf rebuilt in 33 seconds at source commit `ca4ebdd2771a9b683bba92e99ac892d9e18c892d`.
+- The user instructed continuation after the exact reflexive-cast proposal. Applied
+  that statement cast and the proof's `cast_eq` normalization. The only other leaf
+  changes are the Localization imports; binders, assumptions, other statements,
+  docstrings, and existing heartbeat settings are unchanged.
+- Required prerequisites reuse BZ856's validated restoration and measured historical
+  heartbeat limits; no independent upstream proof changes were introduced.
+- Direct importer `SingleComplexOpenTermwiseComparison` was checked after leaf success
+  at `3df1d5be63e95e3a4e7ec837f581574914ddb59e`. The leaf passed again in 32 seconds.
+  The batch failed only in the unowned BZ871 `SingleComplexOpenTermwiseCounitCompatibility`
+  at line 76: `Type mismatch`. Skipped this path under the brief's ownership rule.
+- The next layer, `SingleComplexOpenCoordinateStalkTransportData`, inherits that blocker.
+  One extra module attempted; no further unblocked importer remains.
+- Logs: `/home/ubuntu/u9/bz/BUILD-BZ872-cast-unit-full.log` and
+  `/home/ubuntu/u9/bz/BUILD-BZ872-downstream-after-green-full.log`.
+- Fixes: `/home/ubuntu/u9/bz/FIXES-BZ872.md`; contract audit:
+  `/home/ubuntu/u9/bz/BZ872-contract-audit.txt`.
+- No declarations deleted; no local Lean/Lake, proof placeholders, trust bypasses,
+  profiler probes, or unmeasured heartbeat increases.
+- This completion commit changes only progress documentation after validation.
