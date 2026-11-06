@@ -25,6 +25,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 import WeilConjectures.CategoryTheory.DerivedCategory.ProperBaseChange.PseudoCoherentNormalizedAlgebraTowerSupplement
 import WeilConjectures.CategoryTheory.Finite.FiniteMittagLeffler
+import WeilConjectures.CategoryTheory.Triangulated.DerivedCountableProductsExistence
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
 import WeilConjectures.CategoryTheory.DerivedLimitRoosAbelianGroups
 import Mathlib.Algebra.Category.ModuleCat.Limits
@@ -284,10 +285,8 @@ theorem lisse_tower_algebraic_derived_presentation
       (Ideal.Quotient.mk (J ^ (n + 1)))
       (Ideal.Quotient.factor_comp_mk _).symm)).inv.app (K n)
   let D := Functor.ofOpSequence (X := fun n : ℕ ↦ (R n).mapDerivedCategory.obj (K n)) s
-  set_option trace.Meta.synthInstance true in
-  obtain ⟨hP, _, _⟩ := derivedCategory_countableProducts_core.{0, u + 1, u + 1, u + 2}
-    (ModuleCat.{u + 1} C)
-  let _ := hP
+  let : HasCountableProducts (DerivedCategory (ModuleCat.{u + 1} C)) :=
+    derivedCategory_hasCountableProducts (ModuleCat.{u + 1} C)
   obtain ⟨E, p, δ, hE⟩ := Pretriangulated.distinguished_cocone_triangle₁
     (towerTransitionEndomorphism (K := fun n : ℕ ↦ (R n).mapDerivedCategory.obj (K n)) s)
   have hT : IsDerivedLimitTriangle
