@@ -13,8 +13,6 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Canonical.ProEtaleCanon
 public import WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 public import WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerExchangeMateNormalization
 public import WeilConjectures.AlgebraicGeometry.StrictTower.StrictConstantTowerOperationsSupplement
-import all WeilConjectures.AlgebraicGeometry.ProEtale.Canonical.ProEtaleCanonicalDerivedPullbackNormalization
-import all WeilConjectures.AlgebraicGeometry.ProEtale.Derived.ProEtaleDerivedPullbackCoherence
 
 /-!
 # Inverse-image compositors and restriction to constant coefficients
@@ -265,25 +263,22 @@ theorem AdicCoefficientDatum.pullComp_eq_triangle {X Y Z : Scheme.{u}} (f : X �
             (proEtaleRingModuleAdjunction (f ≫ g) (d.completedRing Z) (d.completedRing X)
               (d.integralRingIso (f ≫ g))) κ.hom).app N).val.app (Opposite.op U) m =
           N.val.map ((MorphismProperty.Over.pullbackComp f g).hom.app U).op m := by
-  let D := Classical.choice (ambientData_transport f g
+  obtain ⟨_, _, _, _, _, _, dS, hdS, _⟩ := proEtaleRingDerivedPullbackComposition f g
     (d.completedRing Z) (d.completedRing Y) (d.completedRing X) (d.integralRingIso g)
-    (d.integralRingIso f) (d.integralRingIso (f ≫ g)) (d.integralRingIso_comp f g).symm)
-  refine ⟨D.a, ?_, ?_⟩
-  · exact pullbackData_comparison f g (d.completedRing Z)
+    (d.integralRingIso f) (d.integralRingIso (f ≫ g)) (d.integralRingIso_comp f g)
+  refine ⟨(Adjunction.leftAdjointCompIso
+    (proEtaleRingModuleAdjunction g (d.completedRing Z) (d.completedRing Y)
+      (d.integralRingIso g))
+    (proEtaleRingModuleAdjunction f (d.completedRing Y) (d.completedRing X)
+      (d.integralRingIso f))
+    (proEtaleRingModuleAdjunction (f ≫ g) (d.completedRing Z) (d.completedRing X)
+      (d.integralRingIso (f ≫ g))) dS).symm, ?_, ?_⟩
+  · exact proEtaleCanonicalDerivedPullback_normalization f g (d.completedRing Z)
       (d.completedRing Y) (d.completedRing X) (d.integralRingIso g) (d.integralRingIso f)
-      (d.integralRingIso (f ≫ g)) (d.integralRingIso_comp f g).symm _ D
-  · have hg := normalizedAdj_eq_actual g (d.completedRing Z) (d.completedRing Y)
-      (d.integralRingIso g) D.adjk D.nk
-    have hf := normalizedAdj_eq_actual f (d.completedRing Y) (d.completedRing X)
-      (d.integralRingIso f) D.adjh D.nh
-    have hfg := normalizedAdj_eq_actual (f ≫ g) (d.completedRing Z) (d.completedRing X)
-      (d.integralRingIso (f ≫ g)) D.adjc D.nc
-    have heq := congrArg₂ conjugateIsoEquiv (congrArg₂ Adjunction.comp hg hf) hfg
-    have ha := (congrArg (fun e ↦ e D.a) heq).symm.trans D.ha
-    intro N U m
-    change ((conjugateIsoEquiv _ _ D.a).hom.app N).val.app (Opposite.op U) m = _
-    rw [ha]
-    exact D.hd N U m
+      (d.integralRingIso (f ≫ g)) (d.integralRingIso_comp f g).symm dS hdS
+  · intro N U m
+    rw [Iso.symm_hom, Adjunction.conjugateEquiv_leftAdjointCompIso_inv]
+    exact hdS N U m
 
 /-- Restriction to constant coefficients respects the inverse-image compositors on modules.
 Source: Stacks, Modules on Sites, Tags 03D8 and 03D7 (blueprint: thm-cbc-complete-proetale).
