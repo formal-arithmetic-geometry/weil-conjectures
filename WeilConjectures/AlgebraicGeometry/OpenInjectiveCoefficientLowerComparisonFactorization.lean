@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 
 module
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.BaseChangeStalkTransition
 public import WeilConjectures.CategoryTheory.RightDerivedSingleUnitHomologyComparison
 import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
@@ -66,7 +68,7 @@ private theorem single_counit
   erw [hqi, Category.comp_id]
   change L.mapDerivedCategory.map
       (DerivedCategory.Q.map
-        ((HomologicalComplex.singleMapHomologicalComplex R (.up ℤ) 0).inv.app J)) ≫
+        ((HomologicalComplex.singleMapHomologicalComplex R (.up ℤ) 0).inv.app J) ≫ 𝟙 _) ≫
       L.mapDerivedCategoryFactors.hom.app
         ((R.mapHomologicalComplex (.up ℤ)).obj ((CochainComplex.singleFunctor D 0).obj J)) ≫
       DerivedCategory.Q.map
@@ -74,6 +76,7 @@ private theorem single_counit
           ((CochainComplex.singleFunctor D 0).obj J)) =
     (L.mapDerivedCategorySingleFunctor 0).hom.app (R.obj J) ≫
       (DerivedCategory.singleFunctor D 0).map (adj.counit.app J)
+  rw [Category.comp_id]
   erw [Functor.mapDerivedCategoryFactors_hom_naturality_assoc]
   rw [← cancel_epi (L.mapDerivedCategoryFactors.inv.app
     ((CochainComplex.singleFunctor C 0).obj (R.obj J)))]
@@ -84,7 +87,8 @@ private theorem single_counit
       ((CochainComplex.singleFunctor D 0).map (adj.counit.app J))
   rw [← Functor.map_comp, ← Functor.map_comp]
   congr 1
-  ext n
+  apply HomologicalComplex.hom_ext
+  intro n
   by_cases hn : n = 0
   · subst n
     simp only [CochainComplex.singleFunctor, CochainComplex.singleFunctors, Functor.comp_obj,
