@@ -3945,7 +3945,6 @@ private lemma comparison_complex_fac
     (HomotopyCategory.quotient _ (.up ℤ)).map
       ((a.mapHomologicalComplex (.up ℤ)).app J) := rfl
   erw [ha, DerivedCategory.quotientCompQhIso_inv_naturality_assoc]
-  simp only [Category.assoc]
   rfl
 
 private lemma theta_normalization
