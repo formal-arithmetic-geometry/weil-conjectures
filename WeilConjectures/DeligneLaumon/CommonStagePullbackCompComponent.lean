@@ -235,13 +235,13 @@ theorem commonStagePullbackCompComponent_stage_representation
     unfold commonStagePullbackRationalComposition rationalPullbackCompositionIso
     simp only [integralPullbackCompositor_eq_choose]
   simp only [eR]
-  unfold commonStagePullbackComparison
-    operationStageTransitionIso GeneralAlgebraicallyClosedCoefficients.ofHom
-  have hkey := congrArg (StageSystem.PairCategory.mkHom
+  unfold GeneralAlgebraicallyClosedCoefficients.ofHom
+  apply congrArg (StageSystem.PairCategory.mkHom
       (X := commonStagePullbackObject l Ω (f ≫ g) P)
-      (Y := commonStagePullbackObject l Ω f (commonStagePullbackObject l Ω g P)) L hP hP) key
+      (Y := commonStagePullbackObject l Ω f (commonStagePullbackObject l Ω g P)) L hP hP)
   set_option backward.isDefEq.respectTransparency true in
   set_option backward.isDefEq.respectTransparency.types true in
-  simpa only [commonStagePullbackObject, StageSystem.PairCategory.toStage] using hkey
+  simpa only [commonStagePullbackComparison, operationStageTransitionIso,
+    commonStagePullbackObject, StageSystem.PairCategory.toStage] using key
 
 end WeilConjectures
