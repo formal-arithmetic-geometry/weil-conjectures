@@ -37,9 +37,9 @@ private theorem deriveOrdinarySquare
     (h : ∀ N, e₁.hom.app (R.obj N) ≫ z.hom.app N =
       s.hom.app N ≫ e₀.hom.app N) :
     whiskerLeft R.mapDerivedCategory (mapDerivedCategoryNatIso e₁).hom ≫
-        (mapDerivedCategoryCompIso R G₁).inv ≫
+        (mapDerivedCategoryCompIso R G₁).hom ≫
         (mapDerivedCategoryNatIso z).hom =
-      (mapDerivedCategoryCompIso R F₁).inv ≫
+      (mapDerivedCategoryCompIso R F₁).hom ≫
         (mapDerivedCategoryNatIso s).hom ≫ (mapDerivedCategoryNatIso e₀).hom := by
   have he : isoWhiskerLeft R e₁ ≪≫ z = s ≪≫ e₀ := by
     apply Iso.ext
@@ -47,14 +47,14 @@ private theorem deriveOrdinarySquare
   have hd := congrArg (fun e ↦ (mapDerivedCategoryNatIso e).hom) he
   simp only [mapDerivedCategoryNatIso_trans] at hd
   have hw := mapDerivedCategoryNatIso_isoWhiskerLeft R e₁
-  apply (cancel_epi (mapDerivedCategoryCompIso R F₁).hom).mp
+  apply (cancel_epi (mapDerivedCategoryCompIso R F₁).inv).mp
   calc
     _ = (mapDerivedCategoryNatIso (isoWhiskerLeft R e₁)).hom ≫
         (mapDerivedCategoryNatIso z).hom := by
       rw [← Category.assoc, ← hw]
-      simp only [Category.assoc, Iso.hom_inv_id_assoc]
+      simp only [Category.assoc, Iso.inv_hom_id_assoc]
     _ = (mapDerivedCategoryNatIso s).hom ≫ (mapDerivedCategoryNatIso e₀).hom := hd
-    _ = _ := by simp only [Iso.hom_inv_id_assoc]
+    _ = _ := by simp only [Iso.inv_hom_id_assoc]
 
 private theorem deriveTargetStep
     {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]
@@ -69,35 +69,36 @@ private theorem deriveTargetStep
     [PreservesFiniteLimits H] [PreservesFiniteColimits H]
     (c : T ≅ R ⋙ S) (J : DerivedCategory E ⥤ DerivedCategory F)
     (g : H.mapDerivedCategory ≅ J) :
-    let k₀ := mapDerivedCategoryCompIso T H ≪≫ isoWhiskerLeft T.mapDerivedCategory g
-    let k₁ := mapDerivedCategoryCompIso S H ≪≫ isoWhiskerLeft S.mapDerivedCategory g
-    (mapDerivedCategoryCompIso R (S ⋙ H)).inv ≫
+    let k₀ := (mapDerivedCategoryCompIso T H).symm ≪≫ isoWhiskerLeft T.mapDerivedCategory g
+    let k₁ := (mapDerivedCategoryCompIso S H).symm ≪≫ isoWhiskerLeft S.mapDerivedCategory g
+    (mapDerivedCategoryCompIso R (S ⋙ H)).hom ≫
         (mapDerivedCategoryNatIso (isoWhiskerRight c.symm H)).hom ≫ k₀.hom =
       whiskerLeft R.mapDerivedCategory k₁.hom ≫
-        whiskerRight (mapDerivedCategoryNatIso c ≪≫ mapDerivedCategoryCompIso R S).inv J := by
+        whiskerRight (mapDerivedCategoryNatIso c ≪≫
+          (mapDerivedCategoryCompIso R S).symm).inv J := by
   dsimp only
   have hw := mapDerivedCategoryNatIso_isoWhiskerRight c.symm H
   rw [mapDerivedCategoryNatIso_symm] at hw
   have ha := mapDerivedCategoryCompIso_assoc R S H
-  have hr : (mapDerivedCategoryCompIso R (S ⋙ H)).inv ≫
-      (mapDerivedCategoryCompIso (R ⋙ S) H).hom =
-    whiskerLeft R.mapDerivedCategory (mapDerivedCategoryCompIso S H).hom ≫
-      whiskerRight (mapDerivedCategoryCompIso R S).inv H.mapDerivedCategory := by
+  have hr : (mapDerivedCategoryCompIso R (S ⋙ H)).hom ≫
+      (mapDerivedCategoryCompIso (R ⋙ S) H).inv =
+    whiskerLeft R.mapDerivedCategory (mapDerivedCategoryCompIso S H).inv ≫
+      whiskerRight (mapDerivedCategoryCompIso R S).hom H.mapDerivedCategory := by
     apply NatTrans.ext
     funext K
     have hk := NatTrans.congr_app ha K
     simp only [NatTrans.comp_app, whiskerLeft_app, whiskerRight_app] at hk ⊢
     apply (cancel_epi
-      ((mapDerivedCategoryCompIso R (S ⋙ H)).hom.app K)).mp
+      ((mapDerivedCategoryCompIso R (S ⋙ H)).inv.app K)).mp
     apply (cancel_mono
-      (H.mapDerivedCategory.map ((mapDerivedCategoryCompIso R S).hom.app K))).mp
-    simp only [Category.assoc, Iso.hom_inv_id_app_assoc, ← Functor.map_comp,
-      Iso.inv_hom_id_app]
+      (H.mapDerivedCategory.map ((mapDerivedCategoryCompIso R S).inv.app K))).mp
+    simp only [Category.assoc, Iso.inv_hom_id_app_assoc, ← Functor.map_comp,
+      Iso.hom_inv_id_app]
     simp only [H.mapDerivedCategory.map_id]
     simp only [Functor.comp_obj] at hk ⊢
     rw [Category.comp_id]
     exact hk.symm
-  simp only [Iso.trans_hom, Iso.trans_inv, isoWhiskerLeft_hom]
+  simp only [Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv, isoWhiskerLeft_hom]
   apply NatTrans.ext
   funext K
   simp only [NatTrans.comp_app, whiskerLeft_app, whiskerRight_app]
@@ -107,9 +108,9 @@ private theorem deriveTargetStep
   simp only [Category.assoc]
   rw [reassoc_of% hwK, reassoc_of% hrK]
   simpa only [Functor.comp_obj, Functor.map_comp, Category.assoc] using
-    congrArg (fun z ↦ (mapDerivedCategoryCompIso S H).hom.app
+    congrArg (fun z ↦ (mapDerivedCategoryCompIso S H).inv.app
     (R.mapDerivedCategory.obj K) ≫ z)
-    (g.hom.naturality ((mapDerivedCategoryCompIso R S).inv.app K ≫
+    (g.hom.naturality ((mapDerivedCategoryCompIso R S).hom.app K ≫
       (mapDerivedCategoryNatIso c).inv.app K))
 
 namespace AlgebraicGeometry.Scheme
@@ -197,8 +198,8 @@ theorem finitePerfectAdicScalar_model
     have := (ringedOverFunctor_exactGeneral (completedAdicRing X d) W).2.1
     have := (ringedOverFunctor_exactGeneral (completedAdicRing X d) W).2.2
     let g : H.mapDerivedCategory ≅ J :=
-      mapDerivedCategoryCompIso (finitePerfectAdicScalarModelOrdinary X d)
-        (SheafOfModules.overFunctor (completedAdicRing X d) W) ≪≫
+      (mapDerivedCategoryCompIso (finitePerfectAdicScalarModelOrdinary X d)
+        (SheafOfModules.overFunctor (completedAdicRing X d) W)).symm ≪≫
       isoWhiskerRight (finitePerfectAdicScalarModelCompletedFactors X d)
         (ringedDerivedRestrictionGeneral (completedAdicRing X d) W)
     have hd := deriveOrdinarySquare R
@@ -213,16 +214,16 @@ theorem finitePerfectAdicScalar_model
     dsimp only at hsrc
     have hs := congrArg (fun z ↦
       (mapDerivedCategoryCompIso R
-        (finitePerfectAdicOrdinaryScalarSource X d V U W f (n + 1))).inv ≫ z)
+        (finitePerfectAdicOrdinaryScalarSource X d V U W f (n + 1))).hom ≫ z)
       hsrc
-    simp only [R, Iso.inv_hom_id_assoc] at hs
+    simp only [R, Iso.hom_inv_id_assoc] at hs
     have ht := deriveTargetStep R S T₀ H c J g
     have htK := NatTrans.congr_app ht K
     have hsK := NatTrans.congr_app hs K
     have hdK := NatTrans.congr_app hd K
     simp only [NatTrans.comp_app, whiskerLeft_app, whiskerRight_app] at hsK hdK htK
     change (mapDerivedCategoryCompIso R
-        (finitePerfectAdicOrdinaryScalarTarget X d W (n + 1))).inv.app K ≫
+        (finitePerfectAdicOrdinaryScalarTarget X d W (n + 1))).hom.app K ≫
       (mapDerivedCategoryNatIso
         (finitePerfectAdicOrdinaryScalarTargetStep X d W n)).hom.app K ≫
       (finitePerfectAdicScalarModelTargetFactors X d W n).hom.app K =

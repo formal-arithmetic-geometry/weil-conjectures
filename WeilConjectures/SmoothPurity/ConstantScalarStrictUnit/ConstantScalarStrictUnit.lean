@@ -454,7 +454,6 @@ private theorem finiteComplexIso_zero (n : ℕ) :
   simp only [finiteComplexIso, Iso.trans_hom, Iso.app_hom, CochainComplex.singleFunctor,
     HomologicalComplex.comp_f, HomologicalComplex.singleMapHomologicalComplex_hom_app_self,
     Functor.mapIso_hom]
-  dsimp only [CochainComplex.singleFunctors]
   rw [HomologicalComplex.single_map_f_self]
   simp only [Category.assoc, finiteZeroIso, regularZeroIso, Iso.inv_hom_id,
     Category.comp_id, Iso.inv_hom_id_assoc]
@@ -573,7 +572,6 @@ private theorem reductionComplexIso_zero (n : ℕ) :
   simp only [reductionComplexIso, Iso.trans_hom, Iso.app_hom, CochainComplex.singleFunctor,
     HomologicalComplex.comp_f, HomologicalComplex.singleMapHomologicalComplex_hom_app_self,
     Functor.mapIso_hom]
-  dsimp only [CochainComplex.singleFunctors]
   rw [HomologicalComplex.single_map_f_self]
   simp only [Category.assoc, finiteZeroIso, regularZeroIso, Iso.inv_hom_id,
     Category.comp_id, Iso.inv_hom_id_assoc]
@@ -629,7 +627,6 @@ private theorem projectionComplex_zero (n : ℕ) :
   simp only [projectionComplex, HomologicalComplex.comp_f,
     HomologicalComplex.singleMapHomologicalComplex_inv_app_self,
     CochainComplex.singleFunctor]
-  dsimp only [CochainComplex.singleFunctors]
   rw [HomologicalComplex.single_map_f_self]
   simp only [Category.assoc, regularZeroIso, finiteZeroIso, Iso.inv_hom_id_assoc,
     ← Functor.map_comp, Iso.inv_hom_id]

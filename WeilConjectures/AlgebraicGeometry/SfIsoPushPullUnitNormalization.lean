@@ -139,7 +139,7 @@ private theorem derived_unit_comp
     (K : DerivedCategory C) :
     η.app K ≫ (Functor.mapDerivedCategoryNatIso g.symm).hom.app
         (L.mapDerivedCategory.obj K) ≫
-      (Functor.mapDerivedCategoryCompIso L V).inv.app K ≫
+      (Functor.mapDerivedCategoryCompIso L V).hom.app K ≫
       (Functor.mapDerivedCategoryNatIso c).hom.app K ≫
       (Functor.mapDerivedCategoryIdIso C).hom.app K = 𝟙 K := by
   have h : η ≫
@@ -189,7 +189,7 @@ private theorem exact_unit_comp
         (upperStarInvIsoLowerStarHom (ModuleCat.{u + 1} A) i).symm).hom.app
           ((upperStar (ModuleCat.{u + 1} A) i.hom).mapDerivedCategory.obj K) ≫
       (Functor.mapDerivedCategoryCompIso (upperStar (ModuleCat.{u + 1} A) i.hom)
-        (upperStar (ModuleCat.{u + 1} A) i.inv)).inv.app K ≫
+        (upperStar (ModuleCat.{u + 1} A) i.inv)).hom.app K ≫
       (Functor.mapDerivedCategoryNatIso
         ((upperStarComp (ModuleCat.{u + 1} A) i.inv i.hom (𝟙 S) (by simp)).symm ≪≫
           upperStarId (ModuleCat.{u + 1} A) S)).hom.app K ≫
