@@ -301,7 +301,7 @@ attribute [local instance 2000] Mod.monoidalCategory Mod.monoidalClosed
 attribute [local irreducible] Mod.monoidalCategoryStruct Mod.monoidalCategory Mod.monoidalClosed
   Functor.leftDerivedFunctor Functor.leftDerivedFunctorCounit Functor.mapDerivedCategory
   DerivedCategory.Qh Functor.leftDerivedFunctorCompNatIso
-  Functor.leftDerivedFunctorIsoMapDerivedCategory Functor.mapDerivedCategoryCompIso
+  Functor.leftDerivedFunctorIsoMapDerivedCategory
   CondensedRing.leftDerivedUpperStarTensor
   ProEtale.leftDerivedUpperStarTensorComparison Functor.leftDerivedTensorComparison
 
@@ -391,13 +391,13 @@ theorem finiteCoefficientTensorPullbackEncoding
   have : NatTrans.IsMonoidal τ.hom := hm
   let α := Functor.leftDerivedFunctorCompNatIso F NX NY G τ
   let d : NX.leftDerivedFunctor ≅ coefficientEncoding A e X (E X) :=
-    NX.leftDerivedFunctorIsoMapDerivedCategory ≪≫ Functor.mapDerivedCategoryCompIso
+    NX.leftDerivedFunctorIsoMapDerivedCategory ≪≫ (Functor.mapDerivedCategoryCompIso
       (Mod.comap (coefficientMap e.inv.hom X))
-      ((E X).ordinary.functor ⋙ (E X).fixed.functor)
+      ((E X).ordinary.functor ⋙ (E X).fixed.functor)).symm
   let c : NY.leftDerivedFunctor ≅ coefficientEncoding A e Y (E Y) :=
-    NY.leftDerivedFunctorIsoMapDerivedCategory ≪≫ Functor.mapDerivedCategoryCompIso
+    NY.leftDerivedFunctorIsoMapDerivedCategory ≪≫ (Functor.mapDerivedCategoryCompIso
       (Mod.comap (coefficientMap e.inv.hom Y))
-      ((E Y).ordinary.functor ⋙ (E Y).fixed.functor)
+      ((E Y).ordinary.functor ⋙ (E Y).fixed.functor)).symm
   let tx := asIso NX.leftDerivedTensorComparison
   let ty := asIso NY.leftDerivedTensorComparison
   have h : Adjunction.ComparisonCompatible α F.leftDerivedTensorComparison
