@@ -48,6 +48,12 @@ variable {C : Type c} [Category.{v} C] [EssentiallySmall.{u} C]
 abbrev Coeff := SheafOfModules.{u}
   ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj O)
 
+/-- Countable coproducts of coefficient sheaves, via the existing small-colimits instance
+(a direct path avoiding a typeclass-search timeout). -/
+instance coeffHasCountableCoproducts : HasCountableCoproducts (Coeff O) :=
+  haveI : HasColimitsOfSize.{0, 0} (Coeff O) := inferInstance
+  ⟨fun _ _ ↦ HasColimitsOfSize.has_colimits_of_shape _⟩
+
 /-- Unbounded integer cochain complexes with their signed direct-sum tensor.
 Source: Stacks 0FRF (blueprint: def-sfb-ringed-site-dg-modules). -/
 abbrev Complex := CochainComplex (Coeff O) ℤ
