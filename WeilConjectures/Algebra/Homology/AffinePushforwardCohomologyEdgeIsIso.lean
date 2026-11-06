@@ -103,25 +103,27 @@ theorem affinePushforwardCohomologyEdge_isIso
       infer_instance
     have hPs : QuasiIso ((P.mapHomologicalComplex (.up ℤ)).map s) :=
       affinePushforward_resolution_quasiIso _ D J hD s
-    have hs : IsIso (DerivedCategory.Qh.map (q.map s)) := by
+    have hs : IsIso (DerivedCategory.Qh.{w}.map (q.map s)) := by
       apply (DerivedCategory.isIso_Qh_map_iff _).mpr
       exact (HomotopyCategory.quotient_map_mem_quasiIso_iff _).mpr hsi
-    have hPs' : IsIso (DerivedCategory.Qh.map
+    have hPs' : IsIso (DerivedCategory.Qh.{w}.map
         ((P.mapHomotopyCategory (.up ℤ)).map (q.map s))) := by
       apply (DerivedCategory.isIso_Qh_map_iff _).mpr
       exact (HomotopyCategory.quotient_map_mem_quasiIso_iff _).mpr hPs
-    have : IsIso ((DerivedCategory.Qh ⋙ P.rightDerivedFunctor).map (q.map s)) := by
-      change IsIso (P.rightDerivedFunctor.map (DerivedCategory.Qh.map (q.map s)))
+    have : IsIso ((DerivedCategory.Qh.{w} ⋙
+        P.rightDerivedFunctor.{_, _, _, _, w, w}).map (q.map s)) := by
+      change IsIso (P.rightDerivedFunctor.{_, _, _, _, w, w}.map
+        (DerivedCategory.Qh.{w}.map (q.map s)))
       infer_instance
-    have hu : IsIso (P.rightDerivedFunctorUnit.app (q.obj D)) := by
-      have hn := P.rightDerivedFunctorUnit.naturality (q.map s)
-      have : IsIso (P.rightDerivedFunctorUnit.app (q.obj D) ≫
-          (DerivedCategory.Qh ⋙ P.rightDerivedFunctor).map (q.map s)) := by
+    have hu : IsIso (P.rightDerivedFunctorUnit.{_, _, _, _, w, w}.app (q.obj D)) := by
+      have hn := P.rightDerivedFunctorUnit.{_, _, _, _, w, w}.naturality (q.map s)
+      have : IsIso (P.rightDerivedFunctorUnit.{_, _, _, _, w, w}.app (q.obj D) ≫
+          (DerivedCategory.Qh.{w} ⋙ P.rightDerivedFunctor.{_, _, _, _, w, w}).map (q.map s)) := by
         rw [← hn]
         dsimp only [Functor.comp_map]
         infer_instance
       exact IsIso.of_isIso_comp_right _
-        ((DerivedCategory.Qh ⋙ P.rightDerivedFunctor).map (q.map s))
+        ((DerivedCategory.Qh.{w} ⋙ P.rightDerivedFunctor.{_, _, _, _, w, w}).map (q.map s))
     let : (affinePushforwardTilde B).Additive := by
       constructor
       intro M N f g

@@ -57,7 +57,6 @@ private lemma exact_single_hom
   erw [Category.comp_id, Category.id_comp] at h
   rw [h]
   erw [Category.id_comp]
-  rfl
 
 private lemma complex_single_square
     {C D B E : Type*} [Category C] [Category D] [Category B] [Category E]
@@ -189,7 +188,7 @@ composition identify the rest. In degree zero both paths are the same tensor
 restriction map; in every other degree the maps are between zero objects.
 Apply the homotopy quotient and Qh and reassociate. The identities use only
 additive tensor pullback and exact restriction, without any derived counit. -/
-theorem open_pinned_single_tensor_restriction_factors
+private theorem open_pinned_single_tensor_restriction_factors
     [∀ Y : Scheme.{u}, HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     [∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z), (Scheme.Modules.tensorPullback k).Additive]

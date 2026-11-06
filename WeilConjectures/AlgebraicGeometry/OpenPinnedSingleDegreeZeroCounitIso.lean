@@ -67,17 +67,6 @@ def openPinnedSingleTargetRestrictionIso
     Functor.isoWhiskerRight (openPinnedTensorRestrictionIso k U U' j hj) _ ≪≫
     Functor.associator _ _ _
 
-private def mapHomotopyCategorySquareIso
-    {C D B E : Type*} [Category C] [Category D] [Category B] [Category E]
-    [Preadditive C] [Preadditive D] [Preadditive B] [Preadditive E]
-    (F : C ⥤ D) (G : D ⥤ E) (R : C ⥤ B) (J : B ⥤ E)
-    [F.Additive] [G.Additive] [R.Additive] [J.Additive]
-    (e : F ⋙ G ≅ R ⋙ J) :
-    F.mapHomotopyCategory (.up ℤ) ⋙ G.mapHomotopyCategory (.up ℤ) ≅
-      R.mapHomotopyCategory (.up ℤ) ⋙ J.mapHomotopyCategory (.up ℤ) :=
-  Functor.mapHomotopyCategoryCompIso e (.up ℤ) ≪≫
-    (Functor.mapHomotopyCategoryCompIso (Iso.refl (R ⋙ J)) (.up ℤ)).symm
-
 /-- Termwise tensor restriction comparison on the homotopy categories.
 Source: Stacks Project, Tags 08DW and 08HY.
 (blueprint: def-pc-open-pinned-single-tensor-restriction-iso). -/
@@ -96,8 +85,16 @@ def openPinnedHomotopyTensorRestrictionIso
     dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
     letI := schemeOpenRestriction_additive X U
     letI := schemeOpenRestriction_additive X' U'
-    exact mapHomotopyCategorySquareIso (Scheme.Modules.tensorPullback k)
-      (schemeOpenRestriction X' U') (schemeOpenRestriction X U) (Scheme.Modules.tensorPullback j)
-      (openPinnedTensorRestrictionIso k U U' j hj)
+    let mapSquare {C D B E : Type*}
+        [Category C] [Category D] [Category B] [Category E]
+        [Preadditive C] [Preadditive D] [Preadditive B] [Preadditive E]
+        {F : C ⥤ D} {G : D ⥤ E} {R : C ⥤ B} {J : B ⥤ E}
+        [F.Additive] [G.Additive] [R.Additive] [J.Additive]
+        (e : F ⋙ G ≅ R ⋙ J) :
+        F.mapHomotopyCategory (.up ℤ) ⋙ G.mapHomotopyCategory (.up ℤ) ≅
+          R.mapHomotopyCategory (.up ℤ) ⋙ J.mapHomotopyCategory (.up ℤ) :=
+      Functor.mapHomotopyCategoryCompIso e (.up ℤ) ≪≫
+        (Functor.mapHomotopyCategoryCompIso (Iso.refl (R ⋙ J)) (.up ℤ)).symm
+    exact mapSquare (openPinnedTensorRestrictionIso k U U' j hj)
 
 end AlgebraicGeometry

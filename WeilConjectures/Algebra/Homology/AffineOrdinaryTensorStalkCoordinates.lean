@@ -89,7 +89,10 @@ def affineTildeHomologyLocalization
       ((s.mapHomologicalComplex (.up ℤ)).obj N).homology i := by
   let TB : ModuleCat.{u} D ⥤
       SheafOfModules.{u} (moduleRings (Spec (.of D)).toRingedSpace) := tilde.functor (.of D)
-  let : TB.Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+  let : TB.Additive := by
+    constructor
+    intro M N f g
+    exact tilde.map_add (R := .of D) f g
   let : TB.PreservesZeroMorphisms := ⟨fun _ _ ↦ tilde.map_zero⟩
   let : TB.PreservesHomology := tilde_preservesHomology D
   let N := (TB.mapHomologicalComplex (.up ℤ)).obj C
@@ -114,7 +117,10 @@ private theorem affineTildeHomologyLocalization_apply
     (p : PrimeSpectrum D) (i : ℤ) (y : LocalizedModule p.asIdeal.primeCompl (C.homology i)) :
     let TB : ModuleCat.{u} D ⥤
         SheafOfModules.{u} (moduleRings (Spec (.of D)).toRingedSpace) := tilde.functor (.of D)
-    letI : TB.Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+    letI : TB.Additive := by
+      constructor
+      intro M N f g
+      exact tilde.map_add (R := .of D) f g
     letI : TB.PreservesZeroMorphisms := ⟨fun _ _ ↦ tilde.map_zero⟩
     letI : TB.PreservesHomology := tilde_preservesHomology D
     let N := (TB.mapHomologicalComplex (.up ℤ)).obj C
@@ -208,8 +214,14 @@ theorem exists_affineOrdinaryTensorStalkCoordinates
       SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace) := tilde.functor (.of A)
   let TB : ModuleCat.{u} A' ⥤
       SheafOfModules.{u} (moduleRings (Spec (.of A')).toRingedSpace) := tilde.functor (.of A')
-  let : TA.Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
-  let : TB.Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+  let : TA.Additive := by
+    constructor
+    intro M N f g
+    exact tilde.map_add (R := .of A) f g
+  let : TB.Additive := by
+    constructor
+    intro M N f g
+    exact tilde.map_add (R := .of A') f g
   let : TA.PreservesZeroMorphisms := ⟨fun _ _ ↦ tilde.map_zero⟩
   let : TB.PreservesZeroMorphisms := ⟨fun _ _ ↦ tilde.map_zero⟩
   let : TB.PreservesHomology := tilde_preservesHomology A'

@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Homology.Localization
 import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.SingleComplexOpenRestrictionData
 import WeilConjectures.AlgebraicGeometry.OpenPinnedCounitHomotopyRestriction
-import WeilConjectures.AlgebraicGeometry.OpenPinnedSingleTensorRestrictionFactors
+import all WeilConjectures.AlgebraicGeometry.OpenPinnedSingleTensorRestrictionFactors
 
 /-! # Restriction of the pinned single tensor counit
 Source: Stacks Project, Tags 08DW, 08IB and 08HY.
