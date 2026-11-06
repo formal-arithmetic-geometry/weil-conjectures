@@ -225,6 +225,8 @@ theorem canonicalSingleBaseChangeComparison
     (v.app ((HomotopyCategory.singleFunctor C_X' 0).obj ((pullback p).obj M))) hh
   with_unfolding_all
     simpa only [canonicalSingleDirectImageMap, canonicalSinglePullbackMap, cast_eq,
-      Category.assoc] using hf
+      Category.assoc, C_X, C_S, C_X', C_S', E, Q_S, Q_X', Q_S', F, G, H, I,
+      ε_g, ε_p, t_g, t_p, a, b₀, b₁, c, d, k, v, sf, Scheme.Modules,
+      Scheme.ringCatSheaf, moduleRings] using hf
 
 end AlgebraicGeometry.Scheme.Modules
