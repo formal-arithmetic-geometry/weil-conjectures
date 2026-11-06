@@ -1,7 +1,8 @@
 # FromJoel
 
-The files in this directory were written by **Joël Riou**. We took them from his Mathlib branch
-[`jriou_localization`](https://github.com/leanprover-community/mathlib4/tree/jriou_localization),
+The files in this directory were written by **Joël Riou**. We took them from the branch
+[`jriou_localization`](https://github.com/joelriou/mathlib4/tree/jriou_localization) of his Mathlib fork
+(<https://github.com/joelriou/mathlib4/tree/jriou_localization>),
 which had not yet been merged into Mathlib.
 
 They cover:
