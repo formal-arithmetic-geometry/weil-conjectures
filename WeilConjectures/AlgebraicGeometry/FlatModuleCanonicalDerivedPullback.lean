@@ -8,6 +8,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedModuleBaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.FlatModuleCanonicalDerivedPullbackAux
 import WeilConjectures.AlgebraicGeometry.IntrinsicFlatModuleTensorFlat
 
