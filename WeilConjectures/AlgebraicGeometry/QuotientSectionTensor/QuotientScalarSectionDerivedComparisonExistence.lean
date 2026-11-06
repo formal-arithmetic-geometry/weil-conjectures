@@ -15,7 +15,7 @@ import all Mathlib.Algebra.Homology.Localization
 set_option autoImplicit false
 set_option backward.defeqAttrib.useBackward true
 set_option synthInstance.maxSize 2048
-set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types false
 
 universe u
@@ -188,6 +188,6 @@ theorem scalar_section_derived_comparison_exists (T : Scheme.{u})
     Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerLeft_hom,
     Functor.isoWhiskerRight_hom, Functor.map_comp, Category.id_comp, Functor.comp_obj,
     sectionLocalizationComparison, Iso.app_hom, hc, Category.assoc] at h ⊢
-  exact h
+  with_unfolding_all simpa only [Category.id_comp, Category.comp_id] using h
 
 end AlgebraicGeometry.ProEtale.QuotientSectionTensor
