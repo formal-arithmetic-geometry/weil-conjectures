@@ -48,9 +48,9 @@ theorem geometricFiberWeilShriekTrace_universal
   exact Functor.bijective_map_comp_of_trace_coordinates
     (rightDerivedLowerShriekOfCompactification Λ (c.geometricFiber h))
     ((Functor.mapDerivedCategoryCompIso (geometricFiberWeilLowerStar Λ s)
-      (Endofunctor.IsoAlgebra.forget _)).symm.app P)
+      (Endofunctor.IsoAlgebra.forget _)).app P)
     ((Functor.mapDerivedCategoryCompIso (geometricFiberWeilLowerStar Λ t)
-      (Endofunctor.IsoAlgebra.forget _)).app N)
+      (Endofunctor.IsoAlgebra.forget _)).symm.app N)
     ((rightDerivedLowerShriekGeometricFiberIso Λ c h).inv.app P)
     ((upperStar Λ t.geometricFiberProj).mapDerivedCategory.map ε) _
     (geometricFiberWeilShriekTrace_forget Λ c h hi hg ε) hε
