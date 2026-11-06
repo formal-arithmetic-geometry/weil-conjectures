@@ -10,6 +10,8 @@ public import WeilConjectures.AlgebraicGeometry.SingleComplexOpenRestrictionData
 public import WeilConjectures.AlgebraicGeometry.StalkComparisonPullbackNaturality
 public import Mathlib.CategoryTheory.Comma.Arrow
 public import WeilConjectures.AlgebraicGeometry.OpenDerivedAdditiveStalkIso
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.OpenRestrictionKFlatModel
 import WeilConjectures.AlgebraicGeometry.IsomorphismPullbackCounit
 import WeilConjectures.AlgebraicGeometry.SingleComplexOpenOrdinaryComparison
@@ -166,8 +168,13 @@ theorem exists_singleComplexOpen_termwise_comparison
           F₀.map (H₀.map
             ((schemeOpenRestriction X' (f' ⁻¹ᵁ V')).mapDerivedCategory.map ε)) =
         F₀.map (H₀.map ε₀) ≫ F₀.map (H₀.map β) := by
-    simpa only [Functor.map_comp, Category.assoc] using
-      congrArg (fun t => F₀.map (H₀.map t)) hcompat
+    with_unfolding_all
+      simpa only [DerivedCategory.quotientCompQhIso,
+        HomologicalComplexUpToQuasiIso.quotientCompQhIso,
+        Quotient.lift.isLift_hom, Quotient.lift.isLift_inv,
+        Functor.mapHomotopyCategoryFactors_hom_app, Functor.map_id,
+        Category.id_comp, Category.comp_id, Functor.map_comp, Category.assoc] using
+        congrArg (fun t => F₀.map (H₀.map t)) hcompat
   have hν := ν.hom.naturality ε
   have hP₀ := congrArg F₀.map (comparisonIntoPullback_comp_counit
     (f ∣_ V) (f' ∣_ V') (g.resLE V V' hV') j sq₀ z Q hcQ i)
@@ -194,8 +201,8 @@ theorem exists_singleComplexOpen_termwise_comparison
     (F₀.map (comparisonIntoTensorPullback (f ∣_ V) (f' ∣_ V')
       (g.resLE V V' hV') j sq₀ z Q i))
     (F.map (comparisonIntoTensorPullback f f' g g' sq z.val P i))
-    (by simpa only [Functor.map_comp] using hP₀)
-    (by simpa only [Functor.map_comp] using hP') hl
+    (by simpa only [cast_eq, Functor.map_comp] using hP₀)
+    (by simpa only [cast_eq, Functor.map_comp] using hP') hl
   simpa only [Functor.map_comp, Category.assoc] using hh
 
 end AlgebraicGeometry

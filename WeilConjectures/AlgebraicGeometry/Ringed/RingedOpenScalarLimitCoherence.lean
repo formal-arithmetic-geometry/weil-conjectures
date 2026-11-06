@@ -691,7 +691,8 @@ variable [HasDerivedCategory.{wA} (ringedSiteModules.{u + 1} (proEtaleModuleCoef
 
 attribute [local irreducible] localizedSystemAdjunction
   SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction
-attribute [local irreducible] Functor.mapDerivedCategoryNatIso cbcDerivedSquare
+attribute [local irreducible] Functor.mapDerivedCategoryNatIso Functor.mapDerivedCategoryCompIso
+  RingedOpenScalar.derivedSquare cbcDerivedSquare
 
 attribute [-instance] WeilConjectures.integralCoefficientAbSheafify
   WeilConjectures.integralCoefficientAbLocallyBijective

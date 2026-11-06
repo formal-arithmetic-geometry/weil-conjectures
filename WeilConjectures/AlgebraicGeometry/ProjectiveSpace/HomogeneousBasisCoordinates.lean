@@ -118,7 +118,7 @@ theorem homogeneous_basis_coordinates (k : Type u) [Field k]
       intro m
       by_cases hm : m.degree = (d a + j).toNat
       · simp [coeff_homogeneousComponent, hm]
-      · have h := congrArg (MvPolynomial.coeff m) (hc m.degree (by
+      · have h := congrArg (fun p ↦ AddMonoidAlgebra.coeff p m) (hc m.degree (by
           have hcast := Int.toNat_of_nonneg ha
           omega))
         simpa [coeff_homogeneousComponent, hm] using h

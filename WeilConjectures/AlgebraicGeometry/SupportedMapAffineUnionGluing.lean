@@ -9,6 +9,9 @@ module
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+import WeilConjectures.AlgebraicGeometry.SupportedAffineOverlapMap
+import WeilConjectures.AlgebraicGeometry.SupportedRelativeOpenGluing
+import WeilConjectures.AlgebraicGeometry.OpenDerivedLocalizationData
 
 /-! # Supported perfect gluing on the union with an affine open
 
@@ -16,6 +19,17 @@ Source: Stacks Project, Tag 09IM, two-open construction before ambient extension
 (blueprint: lem-sc-supported-map-affine-union-gluing).
 -/
 
+@[expose] public section
+
+set_option autoImplicit false
+universe u w
+open CategoryTheory CategoryTheory.Limits
+namespace AlgebraicGeometry.Scheme
+attribute [local instance] Functor.additive_of_preserves_binary_products
+  comp_preservesFiniteLimits comp_preservesFiniteColimits
+
+set_option synthInstance.maxSize 2048 in
+set_option backward.isDefEq.respectTransparency false in
 private noncomputable def relative_restriction_comp_iso
     (X : Scheme.{u}) (U W Y : X.Opens) (hUW : U ≤ W) (hWY : W ≤ Y) :
     schemeOpenOverlapRestriction X (homOfLE hWY) ⋙
@@ -82,6 +96,24 @@ private theorem stabilized_map_restriction
       simp only [e, Iso.trans_hom, biprod.mapIso_hom, Category.assoc,
         biprod.map_fst_assoc, Iso.app_hom]
 
+set_option synthInstance.maxSize 2048 in
+set_option backward.isDefEq.respectTransparency false in
+set_option maxHeartbeats 600000 in
+-- Derived composition comparisons and their additivity instances require this budget.
+/-- The affine construction produces a perfect supported source on the union itself.
+There is no ambient extension in this statement. The supplied natural comparison `c`
+identifies iterated restriction through the union with direct restriction to `U`.
+Source: Stacks Project, Tag 09IM, proof assuming a two-open cover, using Tags 08EK,
+08EH, and 08DG.
+(blueprint: lem-sc-supported-map-affine-union-gluing).
+
+Proof: Restrict the source R to W. Intersect each strictly perfect neighbourhood
+with W and transport its bounded finite-free retract model through Modules.overEquiv;
+this proves perfectness on W. Exact restriction identifies the cohomology stalks,
+so the source is supported on T intersect W. Restrict E to the union and its two
+opens; exact restriction preserves quasi-coherent cohomology. Quasi-separatedness
+makes W intersect V compact, since both W and V are compact opens. It also makes
+V intersect the open complement of T compact. Thus the affine supported extension
 theorem exists_supported_map_affine_union_gluing
     (X : Scheme.{u}) [QuasiSeparatedSpace X]
     (U W V : X.Opens) (hUW : U ≤ W) (hW : IsCompact (W : Set X))
@@ -187,3 +219,5 @@ theorem exists_supported_map_affine_union_gluing
   obtain ⟨e, he⟩ := stabilized_map_restriction L H J JW P Q d kW kU c
     E.obj R β F α iW hα
   exact ⟨F, α, hF, hFT, e, he⟩
+
+end AlgebraicGeometry.Scheme

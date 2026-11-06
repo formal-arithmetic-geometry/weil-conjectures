@@ -11,6 +11,25 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 
+import WeilConjectures.AlgebraicGeometry.FlatComplexDerivedPullback
+import WeilConjectures.AlgebraicGeometry.AffineAlternatingCechModelFlat
+import WeilConjectures.AlgebraicGeometry.AffineAlternatingCechBaseChangeFactorization
+
+/-! # Affine computation of relatively flat canonical module base change
+
+Source: blueprint `lem-pc-rf-base-change-flat-module`, Steps 2--5;
+Stacks Project, Tag 0A1D, specializing to a module in degree zero.
+-/
+
+@[expose] public section
+
+set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+universe u w
+open CategoryTheory Limits
+namespace AlgebraicGeometry
+
 private theorem affineAlternatingCechModel_bounded
     {A : CommRingCat.{u}} {X : Scheme.{u}} (f : X ⟶ Spec A)
     {r : ℕ} (U : Fin r → X.Opens) (G : X.Modules) :
@@ -119,3 +138,5 @@ theorem canonicalModuleBaseChange_isIso_affine_of_isFlatOver
     infer_instance
   rw [hfactor]
   infer_instance
+
+end AlgebraicGeometry

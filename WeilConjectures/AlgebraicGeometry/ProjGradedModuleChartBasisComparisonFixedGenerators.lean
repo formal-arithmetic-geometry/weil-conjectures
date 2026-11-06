@@ -46,6 +46,13 @@ local notation "N[" f "]" => LocalizedModule.Away (f).val.1 M
 local notation "D[" f "]" => basicOpen 𝒜 (f).val.1
 local notation "ModX" => (Proj 𝒜).Modules
 
+private noncomputable local instance restrictedSectionModule {X : Scheme.{u}}
+    (F : X.Modules) {U V : X.Opens} (i : U ⟶ V) :
+    Module Γ(X, U)
+      ((ModuleCat.restrictScalars (X.ringCatSheaf.obj.map i.op).hom).obj
+        (F.val.obj (op U))) :=
+  inferInstanceAs (Module Γ(X, U) (F.val.obj (op U)))
+
 private theorem restriction_generators {X Y : Scheme.{u}} (F : Y.Modules)
     (j : X ⟶ Y) [IsOpenImmersion j] (V : X.Opens)
     (h : ∀ s : F.val.obj (op (j ''ᵁ V)),

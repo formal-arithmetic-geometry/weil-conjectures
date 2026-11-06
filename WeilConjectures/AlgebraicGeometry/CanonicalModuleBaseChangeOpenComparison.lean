@@ -9,6 +9,26 @@ module
 public import WeilConjectures.AlgebraicGeometry.DerivedModuleBaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 
+import WeilConjectures.AlgebraicGeometry.DerivedModulePullbackComparison
+import WeilConjectures.AlgebraicGeometry.CanonicalModuleBaseChangeOpenComparisonCompat
+
+/-! # Canonical module base change under open restriction
+
+Source: Stacks Project, Tags 08FE and 08HY; the local reduction in Tag 08IB.
+(blueprint: lem-pc-canonical-module-base-change-open-comparison).
+-/
+
+@[expose] public section
+
+set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+universe u w
+open CategoryTheory Limits Opposite
+namespace AlgebraicGeometry
+
+set_option maxHeartbeats 1000000 in
+-- The categorical composition below needs additional elaboration heartbeats.
 /-- Restriction identifies the module base-change arrow with the arrow of the
 chosen pullback of the restricted maps. No affine chart is used.
 Source: Stacks Project, Tag 08FE, proof; Tag 08HY, counit construction;
@@ -92,3 +112,5 @@ theorem exists_canonicalModuleBaseChange_open_comparison
     (pullback.fst (f ∣_ V) (g.resLE V W hWV)) ((schemeOpenRestriction X (f ⁻¹ᵁ V)).obj G)
   obtain h := restricted_base_change_compatibility f g g' f' sq G c hc V W hWV c0 hc0
   exact ⟨c0, hc0, h⟩
+
+end AlgebraicGeometry

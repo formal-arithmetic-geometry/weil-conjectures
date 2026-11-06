@@ -7,12 +7,23 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectLocalizingClosure
+import WeilConjectures.AlgebraicGeometry.DerivedQCohDirectSumsAux
+import WeilConjectures.AlgebraicGeometry.SupportedDerivedGeneratedPerfect
+import WeilConjectures.AlgebraicGeometry.SupportedPerfectGenerator
 
 /-! # Perfect complexes generate the quasi-coherent derived category
 
 Source: literature/stacks-project/derived-categories-of-schemes.tex, Theorem
 perfect-theorem-bondal-van-den-Bergh (blueprint: lem-pc-derived-qcoh-perfect-generation).
 -/
+
+@[expose] public section
+
+universe u1 w1
+
+open CategoryTheory CategoryTheory.Limits
+
+namespace AlgebraicGeometry
 
 /-- For every quasi-compact and quasi-separated scheme, the localizing closure of all perfect
 complexes is the whole quasi-coherent derived category
@@ -124,3 +135,5 @@ theorem derivedQCohPerfectGeneration (X : Scheme.{u1}) [CompactSpace X] [QuasiSe
   have hS' : IsColimit S' := (Cofan.isColimitEquivOfEquiv Equiv.ulift S) hS
   have hRS : R S.pt := hRsum (ULift.{u1} ℕ) _ S' hS' (fun n ↦ hK n.down)
   exact (R.ext_of_isTriangulatedClosed₃ _ hT hRS hRS).choose_spec
+
+end AlgebraicGeometry

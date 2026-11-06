@@ -124,7 +124,7 @@ theorem IsIdempotentElem.range_projective_and_baseChange {R : Type*} [CommRing R
   · let ψ := (piScalarRight R S S (Fin n)).toLinearMap
     have hcomm : Matrix.toLin' ((toMatrix' p).map (algebraMap R S)) ∘ₗ ψ =
         ψ ∘ₗ p.baseChange S := by
-      refine LinearMap.ext fun x ↦ x.induction_on (by simp) (fun s v ↦ ?_) (fun a b ha hb ↦ by
+      refine LinearMap.ext fun x ↦ x.inductionOn (fun s v ↦ ?_) (fun a b ha hb ↦ by
         rw [map_add, map_add, ha, hb])
       conv_rhs => rw [← Matrix.toLin'_toMatrix' p]
       ext i
