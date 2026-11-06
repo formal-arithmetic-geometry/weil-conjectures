@@ -436,3 +436,7 @@
   ucheck-bump, then build its four direct importers and continue through unblocked layers.
 - Patterns, exact errors, replay-checked rules: /home/ubuntu/u9/bz/FIXES-BZ1068.md.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
+
+- BZ1068 leaf is GREEN and sorry-free: ucheck-bump rc=0, built=1, failed=0 at
+  6afc4fae13c7e090b915aa0e3d61980300964a3c (poolb:43.157.189.27).
+  Next: validate all four direct importers; leaf log BUILD-BZ1068-leaf-full.log.
