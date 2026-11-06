@@ -155,13 +155,12 @@ theorem finitePerfectAdic_quotient_coordinate_tower
   -- a K-flat representative of `M`
   obtain ⟨P, s, hP, -, hs, -⟩ := CochainComplex.exists_isKFlatResolutionGeneral
     (R := completedAdicCommRing X d) (DerivedCategory.Q.objPreimage M)
-  change CochainComplex (CompletedAdicModules X d) ℤ at P
   have hPi : CochainComplex.IsKFlatIndependentCoefficients (R := completedAdicCommRing X d) P :=
     (CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat P).mpr hP
   have : IsIso (DerivedCategory.Q.map s) := by
     rw [DerivedCategory.isIso_Q_map_iff_quasiIso]
     exact hs
-  let eP : DerivedCategory.Q.obj P ≅ M :=
+  let eP : (DerivedCategory.Q (C := CompletedAdicModules X d)).obj P ≅ M :=
     asIso (DerivedCategory.Q.map s) ≪≫ DerivedCategory.Q.objObjPreimageIso M
   -- the quotient coordinates are computed by the strict coordinates of `P`
   have hJ (n : ℕ) : Nonempty (finitePerfectAdicQuotientCoordinates X d φ M V n ≅

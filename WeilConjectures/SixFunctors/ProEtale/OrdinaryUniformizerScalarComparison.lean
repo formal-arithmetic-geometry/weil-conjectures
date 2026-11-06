@@ -482,6 +482,16 @@ private theorem uniformizer_section
     (fun k ↦ Functor.LaxMonoidal.ε (upperStarFromPoint X) ≫
       (upperStarFromPoint X).map k) (point_uniformizer_section l E d hd)
 
+private local instance smallModulesSectionSMul
+    (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R)
+    (U : (Scheme.coefficientProEtaleSiteModel.{u, u} X)ᵒᵖ) :
+    SMul (R.obj.obj
+      ((AsSmall.down : Scheme.coefficientProEtaleSiteModel.{u, u} X ⥤ X.ProEt).op.obj U))
+      (((smallModules X R).obj N).val.obj U) :=
+  inferInstanceAs (SMul ((smallRing X R).obj.obj U)
+    (((smallModules X R).obj N).val.obj U))
+
 private theorem smallModules_scalar_map
     (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) (f : End N)
@@ -490,10 +500,11 @@ private theorem smallModules_scalar_map
     (U : (Scheme.coefficientProEtaleSiteModel.{u, u} X)ᵒᵖ)
     (m : ((smallModules X R).obj N).val.obj U) :
     ((smallModules X R).map f).val.app U m =
-      ((Functor.LaxMonoidal.ε (sheafToPresheaf (Scheme.ProEt.topology X) Ab.{u + 1}) ≫
-        c.hom).app
-          ((AsSmall.down : Scheme.coefficientProEtaleSiteModel.{u, u} X ⥤ X.ProEt).op.obj U))
-            (ULift.up 1) • m := by
+      (show (smallRing X R).obj.obj U from
+        ((Functor.LaxMonoidal.ε (sheafToPresheaf (Scheme.ProEt.topology X) Ab.{u + 1}) ≫
+          c.hom).app
+            ((AsSmall.down : Scheme.coefficientProEtaleSiteModel.{u, u} X ⥤ X.ProEt).op.obj U))
+              (ULift.up 1)) • m := by
   change f.hom.hom.app _ m = _
   rw [hf]
   exact internal_action_sections (Scheme.ProEt.topology X) R c N _ m
@@ -511,10 +522,11 @@ private theorem restricted_scalar_sections
     (U : (Scheme.coefficientProEtaleSiteModel.{u, u} X)ᵒᵖ)
     (m : ((Mod.comap ψ ⋙ Mod.comap φ ⋙ smallModules X R).obj M).val.obj U) :
     ((Mod.comap ψ ⋙ Mod.comap φ ⋙ smallModules X R).map f).val.app U m =
-      ((Functor.LaxMonoidal.ε (sheafToPresheaf (Scheme.ProEt.topology X) Ab.{u + 1}) ≫
-        c.hom).app
-          ((AsSmall.down : Scheme.coefficientProEtaleSiteModel.{u, u} X ⥤ X.ProEt).op.obj U))
-            (ULift.up 1) • m := by
+      (show (smallRing X R).obj.obj U from
+        ((Functor.LaxMonoidal.ε (sheafToPresheaf (Scheme.ProEt.topology X) Ab.{u + 1}) ≫
+          c.hom).app
+            ((AsSmall.down : Scheme.coefficientProEtaleSiteModel.{u, u} X ⥤ X.ProEt).op.obj U))
+              (ULift.up 1)) • m := by
   let N := (Mod.comap φ).obj ((Mod.comap ψ).obj M)
   exact smallModules_scalar_map X R N ((Mod.comap ψ ⋙ Mod.comap φ).map f) c
     (hf.trans (restricted_action φ ψ c b h M)) U m
