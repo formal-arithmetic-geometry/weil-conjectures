@@ -81,7 +81,7 @@ private theorem directImage_evaluation {S T : Scheme.{u}} (h : T ⟶ S)
       schemeDerivedCategory T := derivedInternalHom (Opens.grothendieckTopology T) T.sheaf
   let adj := schemeHomPullbackAdjunction h
   let E : schemeDerivedCategory T := H.obj (op P, Q)
-  have hc := (Classical.choose_spec (exists_mixedHomDirectImageComparison h))
+  have hc := (Classical.choose_spec (exists_schemeHomDirectImageComparison h))
     P Q ((schemeDerivedDirectImage h).obj E) (𝟙 _)
   simp only [Category.id_comp] at hc
   dsimp only [mixedHomDirectImageComparison]
