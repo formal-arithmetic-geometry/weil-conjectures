@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.Completed.Pullback.CompletedPullbackReductionData
 import all WeilConjectures.AlgebraicGeometry.Completed.CompletedTowerPullbackSupplement
 import all WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedDirectImageLimits
@@ -251,9 +253,14 @@ private theorem towerAugmentation_computed
         DerivedCategory.Q.map
           ((NatTrans.mapHomologicalComplex (completedReductionModuleUnit d T) (.up ℤ)).app P) := by
   let := completedReductionModuleTowerFunctor_additive T d
-  simpa only [completedReductionTowerComplexCounit, reductionComplexCounit,
-    completedReductionTowerUnit, completedReductionTowerCounit, coherenceReductionTowerCounit] using
-    ((completedReductionTowerUnit_exists d T).exists.choose_spec P hP)
+  have h := (completedReductionTowerUnit_exists d T).exists.choose_spec P hP
+  dsimp only [DerivedCategory.quotientCompQhIso,
+    HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift,
+    Functor.mapHomotopyCategoryFactors, NatIso.ofComponents, Iso.refl] at h
+  erw [CategoryTheory.Functor.map_id, Category.id_comp,
+    CategoryTheory.Functor.map_id, Category.comp_id] at h
+  exact comp_counitOnComplex_eq (completedReductionModuleTowerFunctor T d)
+    (completedReductionTower T d) (coherenceReductionTowerCounit T d) P _ _ h
 
 private theorem pulledAugmentation_computed
     (P : CochainComplex (pbcModules Y (pbcAdicCompletion Y d)) ℤ)
@@ -732,9 +739,15 @@ private theorem finiteCanonicalTranspose (T : Scheme.{u})
     (complexCounitNat (reductionChange T a) (reductionDerivedChange T a)
       (reductionDerivedCounit T a)) (reductionDerivedCounit T a)
     (fun P ↦ by
-      simpa only [complexCounitNat_app] using
-        (finiteCounit_eq (reductionChange T a) (reductionDerivedChange T a)
-          (reductionDerivedCounit T a) P).symm) ad had
+      simp only [complexCounitNat_app]
+      have hi : (DerivedCategory.quotientCompQhIso (reductionModules T R)).hom.app P =
+          𝟙 _ := rfl
+      have hh : (DerivedCategory.quotientCompQhIso (reductionModules T S)).hom.app
+          (((reductionChange T a).mapHomologicalComplex (.up ℤ)).obj P) = 𝟙 _ := rfl
+      rw [hi, hh]
+      erw [Functor.map_id, Category.comp_id, Category.id_comp]
+      exact (finiteCounit_eq (reductionChange T a) (reductionDerivedChange T a)
+        (reductionDerivedCounit T a) P).symm) ad had
   have he : ad = pbcDerivedScalarAdjunction a := by
     unfold pbcDerivedScalarAdjunction
     with_unfolding_all
