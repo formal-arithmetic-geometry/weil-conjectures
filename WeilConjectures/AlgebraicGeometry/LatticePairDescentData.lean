@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.LatticeClassPresheaf
+public import WeilConjectures.AlgebraicGeometry.LatticePairRestriction
 public import WeilConjectures.CategoryTheory.SiteModuleCompatibleTuples
 import Mathlib.CategoryTheory.Sites.CoverPreserving
 import Mathlib.CategoryTheory.Sites.CoversTop.Over
@@ -70,38 +71,9 @@ end SheafOfModules
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- Cache the existing strong additive sheafification instance on a slice.
-Source: Mathlib, sheafification on small sites.
-(auxiliary; not a blueprint node).
-Proof: specialize the existing instance. -/
-local instance latticeStrongSheafifyOver (X : Scheme.{u}) (U : X.ProEt) :
-    HasSheafify ((Scheme.ProEt.topology X).over U) AddCommGrpCat.{u + 1} := by
-  infer_instance
+attribute [local instance] restrictionStrongSheafifyOver restrictionWeakSheafifyOverOver
+  restrictionWEqualsOverOver restrictionStrongSheafifyOverOver
 
-/-- Cache additive sheafification on an iterated slice.
-Source: Mathlib, sheafification on small sites.
-(auxiliary; not a blueprint node).
-Proof: specialize the existing instance. -/
-local instance latticeWeakSheafifyOverOver (X : Scheme.{u}) (U : X.ProEt) (T : Over U) :
-    HasWeakSheafify (((Scheme.ProEt.topology X).over U).over T) AddCommGrpCat.{u + 1} := by
-  infer_instance
-
-/-- Cache the local bijectivity criterion on an iterated slice.
-Source: Mathlib, sheafification on small sites.
-(auxiliary; not a blueprint node).
-Proof: specialize the existing instance. -/
-local instance latticeWEqualsOverOver (X : Scheme.{u}) (U : X.ProEt) (T : Over U) :
-    (((Scheme.ProEt.topology X).over U).over T).WEqualsLocallyBijective
-      AddCommGrpCat.{u + 1} := by
-  infer_instance
-
-/-- Cache strong additive sheafification on an iterated slice.
-Source: Mathlib, sheafification on small sites.
-(auxiliary; not a blueprint node).
-Proof: specialize the existing instance. -/
-local instance latticeStrongSheafifyOverOver (X : Scheme.{u}) (U : X.ProEt) (T : Over U) :
-    HasSheafify (((Scheme.ProEt.topology X).over U).over T) AddCommGrpCat.{u + 1} := by
-  infer_instance
 set_option backward.isDefEq.respectTransparency false
 
 section

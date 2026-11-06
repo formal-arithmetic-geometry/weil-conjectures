@@ -26,7 +26,6 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 2048
 
-set_option maxHeartbeats 1000000 in
 -- The natural comparison specializes the unbounded total-tensor bifunctor.
 /-- The localization comparison is a natural isomorphism for a fixed K-flat
 first complex and arbitrary second complexes.
