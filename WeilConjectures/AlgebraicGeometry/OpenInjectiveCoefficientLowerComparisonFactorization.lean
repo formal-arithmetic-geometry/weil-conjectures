@@ -68,7 +68,7 @@ private theorem single_counit
   erw [hqi, Category.comp_id]
   change L.mapDerivedCategory.map
       (DerivedCategory.Q.map
-        ((HomologicalComplex.singleMapHomologicalComplex R (.up ℤ) 0).inv.app J)) ≫
+        ((HomologicalComplex.singleMapHomologicalComplex R (.up ℤ) 0).inv.app J) ≫ 𝟙 _) ≫
       L.mapDerivedCategoryFactors.hom.app
         ((R.mapHomologicalComplex (.up ℤ)).obj ((CochainComplex.singleFunctor D 0).obj J)) ≫
       DerivedCategory.Q.map
@@ -76,6 +76,7 @@ private theorem single_counit
           ((CochainComplex.singleFunctor D 0).obj J)) =
     (L.mapDerivedCategorySingleFunctor 0).hom.app (R.obj J) ≫
       (DerivedCategory.singleFunctor D 0).map (adj.counit.app J)
+  rw [Category.comp_id]
   erw [Functor.mapDerivedCategoryFactors_hom_naturality_assoc]
   rw [← cancel_epi (L.mapDerivedCategoryFactors.inv.app
     ((CochainComplex.singleFunctor C 0).obj (R.obj J)))]
