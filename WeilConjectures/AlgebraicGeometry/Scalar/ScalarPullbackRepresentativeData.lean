@@ -92,10 +92,14 @@ def scalarGeometricRepresentative
     L(upperStar (ModuleCat.{u + 1} A) f).obj (_root_.DerivedCategory.Q.obj P) ⟶
       _root_.DerivedCategory.Q.obj
         (((upperStar (ModuleCat.{u + 1} A) f).mapHomologicalComplex (.up ℤ)).obj P) :=
-  (upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctorCounit.app
+  L(upperStar (ModuleCat.{u + 1} A) f).map
+      ((DerivedCategory.quotientCompQhIso _).inv.app P) ≫
+    (upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctorCounit.app
       ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ≫
     _root_.DerivedCategory.Qh.map
-      (((upperStar (ModuleCat.{u + 1} A) f).mapHomotopyCategoryFactors (.up ℤ)).hom.app P)
+      (((upperStar (ModuleCat.{u + 1} A) f).mapHomotopyCategoryFactors (.up ℤ)).hom.app P) ≫
+    (DerivedCategory.quotientCompQhIso _).hom.app
+      (((upperStar (ModuleCat.{u + 1} A) f).mapHomologicalComplex (.up ℤ)).obj P)
 
 /-- The exact geometric representative through the canonical derived comparison.
 Source: Stacks 07A4 (blueprint: def-pur-scalar-pullback-representative-data).
@@ -108,11 +112,16 @@ private theorem scalarGeometricRepresentative_eq
       (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) f).hom.app
         (DerivedCategory.Q.obj P) ≫
       (upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategoryFactors.hom.app P := by
-  exact representative_eq (upperStar (ModuleCat.{u + 1} A) f)
+  have h := representative_eq (upperStar (ModuleCat.{u + 1} A) f)
     L(upperStar (ModuleCat.{u + 1} A) f)
     (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) f)
     (upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctorCounit
     (upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctorIsoMapDerivedCategory_hom_fac P
+  have hq : (DerivedCategory.quotientCompQhIso _).inv.app P = 𝟙 _ := rfl
+  have hq' : (DerivedCategory.quotientCompQhIso _).hom.app
+      (((upperStar (ModuleCat.{u + 1} A) f).mapHomologicalComplex (.up ℤ)).obj P) = 𝟙 _ := rfl
+  simpa only [scalarGeometricRepresentative, hq, hq', Functor.map_id,
+    Category.id_comp, Category.comp_id] using h
 
 private theorem scalarGeometricRepresentative_exact
     (A : Type (u + 1)) [CommRing A] {T X : Scheme.{u}} (f : T ⟶ X)
