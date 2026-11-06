@@ -689,10 +689,10 @@ def stratumTowerEvaluationIso (n : ℕ) :
         (reductionModuleRing Y (d.completedRing Y)) n ≅
       reductionTowerDerivedEvaluation X (reductionModuleRing X (d.completedRing X)) n ⋙
         d.pull f :=
-  (Functor.mapDerivedCategoryCompIso (d.towerModulePull f)
+  ((Functor.mapDerivedCategoryCompIso (d.towerModulePull f)).symm
     (reductionTowerEvaluation Y (reductionModuleRing Y (d.completedRing Y)) n)).symm ≪≫
     Functor.mapDerivedCategoryNatIso (Iso.refl _) ≪≫
-    Functor.mapDerivedCategoryCompIso
+    (Functor.mapDerivedCategoryCompIso).symm
       (reductionTowerEvaluation X (reductionModuleRing X (d.completedRing X)) n)
       (stratumModulePull d f)
 
