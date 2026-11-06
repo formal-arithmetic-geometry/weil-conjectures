@@ -20,7 +20,6 @@ set_option autoImplicit false
 noncomputable section
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 1500000 in
 -- Elaborating the two total tensor constructions needs additional heartbeats.
 /-- Pinned stalk tensor comparison for complexes.
 

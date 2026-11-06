@@ -27,7 +27,6 @@ namespace AlgebraicGeometry.Scheme.ProEt
 variable (X : Scheme.{u})
   (W : X.ProEt) (U : SimplicialObject (Over W))
 
-set_option maxHeartbeats 800000 in
 -- The comparison expands the evaluation, single-complex and section functors.
 set_option backward.isDefEq.respectTransparency false in
 /-- Exact augmented section rows imply descent for a bounded-below complex.

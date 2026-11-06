@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.CompMonoidal
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.AlgebraicGeometry.ProEtaleInverseImage
 
@@ -877,24 +878,6 @@ theorem profinitePoint_isMonoidal_upperStarComp
   have : NatTrans.IsMonoidal (upperStarComp Ab.{u + 1} f g).symm.hom :=
     isMonoidal_conjugateEquiv_symm _ _ (lowerStarComp Ab.{u + 1} f g).inv
   exact inferInstanceAs (NatTrans.IsMonoidal (upperStarComp Ab.{u + 1} f g).symm.inv)
-
-/-- Monoidality of the canonical identity comparison of abelian inverse images.
-Source: RefactorInstruction, Section 5, eq:triangle and thm:alpha
-(auxiliary; not a blueprint node).
-
-Proof: (3) Compare the inverse-image identity adjunction with the identity adjunction.
-The unit equation uniquely specifies upperStarId; the monoidal identity clause of the
-site inverse-image tensor theorem says this same comparison is monoidal. -/
-@[instance]
-theorem profinitePoint_isMonoidal_upperStarId (X : Scheme.{u}) :
-    NatTrans.IsMonoidal (upperStarId Ab.{u + 1} X).hom := by
-  have : NatTrans.IsMonoidal (lowerStarId Ab.{u + 1} X).hom :=
-    Functor.isMonoidal_sheafPushforwardContinuousId' _ _
-  have h : @Adjunction.IsMonoidal _ _ _ _ _ _ _ _
-      (upperStarLowerStarAdjunction Ab.{u + 1} (𝟙 X))
-      Functor.Monoidal.toOplaxMonoidal _ :=
-    isMonoidal_upperStarLowerStarAdjunction _ _
-  exact isMonoidal_conjugateEquiv_symm _ _ (lowerStarId Ab.{u + 1} X).inv
 
 /-- The canonical ring-object composition comparison, obtained by lifting the abelian or
 linear comparison through the existing functor on algebraic structures or localization.

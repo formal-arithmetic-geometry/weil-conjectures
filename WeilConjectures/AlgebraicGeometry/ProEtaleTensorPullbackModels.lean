@@ -54,7 +54,6 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
 -- Compare the full generalized pairing with the sectionwise adjunction formula.
 attribute [local semireducible] SheafOfModules.monoidalCategory
 
