@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.EtaleProperOpenHorizontalNormalization
 public import WeilConjectures.AlgebraicGeometry.ExactUnboundedExchange
+public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekLowerStarExchange
 import all WeilConjectures.AlgebraicGeometry.DerivedExchangeModuleTermwise
 import all WeilConjectures.AlgebraicGeometry.UnboundedProperOpenComposition
 
