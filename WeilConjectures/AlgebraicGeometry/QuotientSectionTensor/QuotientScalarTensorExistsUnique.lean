@@ -44,7 +44,7 @@ private theorem natTrans_ext_flat
 
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
-set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 attribute [local irreducible] CategoryTheory.Functor.leftDerivedFunctor
