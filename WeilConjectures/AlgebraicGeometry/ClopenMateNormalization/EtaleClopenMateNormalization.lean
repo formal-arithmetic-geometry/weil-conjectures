@@ -130,7 +130,6 @@ set_option autoImplicit false
 
 attribute [local irreducible] CategoryTheory.Functor.leftAdjoint
   CategoryTheory.Functor.mapDerivedCategory CategoryTheory.Functor.rightDerivedFunctor
-  CategoryTheory.Functor.rightDerivedFunctorPlus
 
 universe u
 open CategoryTheory CategoryTheory.Limits
@@ -165,11 +164,11 @@ composition comparisons. Source: Stacks Tags 015F and 070K
 @[no_expose, irreducible] def clopenLocalizedSquare (σ : G ⋙ L' ⟶ L ⋙ G') :
     G.mapDerivedCategory ⋙ L'.mapDerivedCategory ⟶
       L.mapDerivedCategory ⋙ G'.mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso G L').inv ≫
+  (Functor.mapDerivedCategoryCompIso G L').hom ≫
     Localization.liftNatTrans DerivedCategory.Q
       (HomologicalComplex.quasiIso C₂ (.up ℤ)) _ _ _ _
       (Functor.whiskerRight (NatTrans.mapHomologicalComplex σ (.up ℤ)) DerivedCategory.Q) ≫
-    (Functor.mapDerivedCategoryCompIso L G').hom
+    (Functor.mapDerivedCategoryCompIso L G').inv
 
 omit [HasKInjectiveResolutions C₁] [HasKInjectiveResolutions C₃] in
 private theorem clopenLocalizedSquare_fac (σ : G ⋙ L' ⟶ L ⋙ G')
@@ -192,7 +191,7 @@ private theorem clopenLocalizedSquare_fac (σ : G ⋙ L' ⟶ L ⋙ G')
     Functor.whiskerRight_app, Category.assoc]
   change _ ≫ ((G ⋙ L').mapDerivedCategoryFactors.hom.app K ≫ _) = _
   erw [← reassoc_of% h₁]
-  simp only [Iso.inv_hom_id_app_assoc, Iso.inv_hom_id_app, Category.comp_id]
+  simp only [Iso.hom_inv_id_app_assoc, Iso.inv_hom_id_app, Category.comp_id]
 
 omit [HasKInjectiveResolutions C₁] [HasKInjectiveResolutions C₃] in
 private theorem clopenLocalizedSquare_fach (σ : G ⋙ L' ⟶ L ⋙ G')
