@@ -10,6 +10,8 @@ public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.RelativelyFlatDerivedBaseChangeComplex
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 /-! # Derived base change for proper flat morphisms
@@ -180,6 +182,7 @@ theorem proper_flat_rightAdjoint_baseChange_hβ
       c.e.symm ≪≫ DerivedCategory.Q.mapIso d.symm
   have hi := relativelyFlat_derivedBaseChange_complex f g E.obj E.property
     G hb hqc hf P c.isKFlat c.e α
+  simp only [cast_eq] at hi
   -- Naturality transports counit invertibility from P to its tensor with the unit.
   have hc : IsIso ((SingleComplexBaseChange.counit (pullback.fst f g)).app
       ((HomotopyCategory.quotient C (.up ℤ)).obj H)) := by
