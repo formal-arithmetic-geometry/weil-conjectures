@@ -154,6 +154,50 @@ theorem boundedConstructible_nearbyCycles_affineSpace_of_lisse_generic (n : ℕ)
 
 omit [Fact (ringChar k').Prime] in
 
+/-- **Deligne's finiteness theorem for nearby cycles on an affine space** (SGA 4½,
+[Th. finitude], Thm. 3.2; for `ℚ̄_ℓ`-coefficients, Bhatt–Scholze §6.8): over the strictly
+henselian trait `S = Spec k'⟦t⟧` (`k'` separably closed, `ℓ ≠ char k'`), the geometric nearby
+cycles of the standard model of `𝔸ⁿ_S` preserve bounded constructible complexes.
+
+Deligne's induction on `n`, for all separably closed fields `k'` at once (the slices live over
+the different field `K = k'(x)^alg`): for `n = 0`,
+`𝔸⁰_S ⟶ S` is an isomorphism and the nearby cycles of the trait are computed directly
+(`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpaceModel_zero`). For `n + 1`, by
+`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_of_slices` it suffices that the
+restrictions `Lhᵢ,ₛ^* Ψ B` to the coordinate generic slices of the special fibre are bounded
+constructible; they are retracts
+(`NearbyCyclesModel.nonempty_retract_upperStar_nearbyCycles_affineSpaceSlice`) of the nearby
+cycles over the trait `Spec K⟦t⟧` of the pullbacks `Lhᵢ^* B` to `𝔸ⁿ_{K⟦t⟧}`, which are bounded
+constructible by induction. -/
+theorem boundedConstructible_nearbyCycles_affineSpace_obj (n : ℕ)
+    {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology (affineSpaceModel k' n).total)
+      Ab.{u + 1}) (condensedRingObj (Profinite.padicAlgClRingObj ℓ) (affineSpaceModel k' n).total))}
+    (hB : boundedConstructible _ B) :
+    boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
+      (traitStdSpecialFibre (𝔸(ULift.{u} (Fin n); trait k') ↘ trait k')).left)
+      (((affineSpaceModel k' n).geometric.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj
+        B) := by
+  induction n generalizing k' with
+  | zero => exact boundedConstructible_nearbyCycles_affineSpaceModel_zero hB
+  | succ n ih =>
+    have : Fact (ringChar (traitSliceField k')).Prime :=
+      ⟨by rw [ringChar_traitSliceField]; exact Fact.out⟩
+    have : Fact (ringChar (traitSliceField k') ≠ ℓ) :=
+      ⟨by rw [ringChar_traitSliceField]; exact Fact.out⟩
+    have : IsNoetherian (traitStdSpecialFibre (𝔸(ULift.{u} (Fin n);
+        trait (traitSliceField k')) ↘ trait (traitSliceField k'))).left :=
+      isNoetherian_of_isTraitModel (isTraitModel_affineSpaceModel n)
+    refine boundedConstructible_nearbyCycles_affineSpace_of_slices n (fun i B' hB' ↦ ?_) hB
+    obtain ⟨e⟩ := nonempty_retract_upperStar_nearbyCycles_affineSpaceSlice n i hB'
+    exact ProEtale.boundedConstructible_of_retract_padicAlgClRingObj ℓ e
+      (ih (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ _ hB'))
+
+/-- **Reduction to affine spaces**: for a model `M` of finite type over the trait with affine
+total space `𝒳`, the geometric nearby cycles preserve bounded constructible complexes. Choose a
+closed immersion `c : 𝒳 ⟶ 𝔸ⁿ_S` over the trait; then
+`Ψ_𝒳 B ≅ Lc_s^* Rc_{s*} Ψ_𝒳 B ≅ Lc_s^* Ψ_{𝔸ⁿ} (Rc_* B)` by the full faithfulness of `Rc_{s*}` and
+the proper exchange, and `Rc_* B` is bounded constructible. -/
+
 /-- **Reduction to affine spaces**: for a model `M` of finite type over the trait with affine
 total space `𝒳`, the geometric nearby cycles preserve bounded constructible complexes. Choose a
 closed immersion `c : 𝒳 ⟶ 𝔸ⁿ_S` over the trait; then
