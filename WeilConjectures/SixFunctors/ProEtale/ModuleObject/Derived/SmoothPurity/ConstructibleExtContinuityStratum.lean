@@ -177,7 +177,6 @@ import all WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Ma
 import all WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.AdjunctionShift
 import all WeilConjectures.AlgebraicGeometry.CondensedClosedCostalkInjectiveContinuity
 import all WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
-import all WeilConjectures.AlgebraicGeometry.CondensedFiniteFreeHomContinuity
 import all Mathlib.Algebra.Homology.HomologicalComplexAbelian
 
 /-!
@@ -205,6 +204,12 @@ open scoped CategoryTheory.Obj
 open CategoryTheory.Pretriangulated
 
 namespace AlgebraicGeometry.ProEtale
+
+noncomputable local instance constructibleExtContinuityStratumHasZeroMorphisms
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] (X : Scheme.{u}) :
+    HasZeroMorphisms (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)) := inferInstance
 
 private theorem moduleColimits
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -302,7 +307,7 @@ private theorem qcqsCostalkContinuity
   let F := DerivedCategory.homologyFunctor A 0
   let eQ : CochainComplex.Plus.ι A ⋙ DerivedCategory.Q ≅
       DerivedCategory.Plus.Q ⋙ DerivedCategory.Plus.ι :=
-    Functor.isoWhiskerLeft (CochainComplex.Plus.ι A) (DerivedCategory.quotientCompQhIso A)
+    (DerivedCategory.Plus.QCompιIso A).symm
   have hid (r : ℤ) : IsIso (triangleComparison TT tc F r Triangle.π₂) := by
     let C := HomologicalComplex.homologyFunctor A (.up ℤ) r
     have hb : IsIso (colimit.desc (D ⋙ C) (C.mapCocone d)) := by
@@ -680,11 +685,15 @@ private theorem qcqsFiniteFreeHomContinuity
     rw [CochainComplex.isStrictlyGE_iff]
     intro r hr
     exact H.map_isZero (ha i r hr)
-  obtain ⟨hc⟩ : Nonempty (IsColimit (T.mapCocone (colimit.cocone M))) :=
-    isColimit_of_truncated_comparison M a hb T
-      (condensed_qcqs_globalSections_continuity Λ X M a (fun i r hr ↦ by
-        let : CochainComplex.IsStrictlyGE (M.obj i) a := hb i
-        exact CochainComplex.isZero_of_isGE _ a r hr) n)
+  have hT : IsIso (condensedContinuityComparison M a T) :=
+    condensed_qcqs_globalSections_continuity Λ X M a (fun i r hr ↦ by
+      let : CochainComplex.IsStrictlyGE (M.obj i) a := hb i
+      exact CochainComplex.isZero_of_isGE _ a r hr) n
+  change IsIso (colimit.desc (M ⋙ T) (T.mapCocone (condensedContinuityCocone M a))) at hT
+  have hdesc : IsIso (colimit.desc (M ⋙ T) (T.mapCocone (colimit.cocone M))) :=
+    comparison_of_colimitCocone M (condensedContinuityCocone M a) (colimit.cocone M)
+      (canonicalContinuityIsColimit M a hb) (colimit.isColimit M) T
+  obtain ⟨hc⟩ := (colimit.isColimit (M ⋙ T)).nonempty_isColimit_iff_isIso_desc.2 hdesc
   let : PreservesColimit M T :=
     preservesColimit_of_preserves_colimit_cocone (colimit.isColimit M) hc
   have hcomp : IsColimit ((Hc ⋙ T).mapCocone (colimit.cocone N)) :=
@@ -737,6 +746,9 @@ private theorem lisseRawCover
 end AlgebraicGeometry.ProEtale
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+attribute [local instance] constructibleExtContinuityStratumHasZeroMorphisms
+attribute [local instance 2000] moduleColimits complexColimits
 
 set_option linter.unusedVariables false in
 -- The preserved statement includes admissibility; the proof works for every coefficient ring.
