@@ -8,6 +8,10 @@ module
 public import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.CompleteDerivedCompletion
 public import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.DirectImageRoosLimitData
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
+import WeilConjectures.CategoryTheory.ModuleObjects.SequentialLimitEpi
+import WeilConjectures.AlgebraicGeometry.ProEtale.RepleteAddCommGrp
+import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
 
 /-! Canonical derived-limit projection normalization. -/
 
@@ -39,6 +43,10 @@ theorem directImage_roos_projection_data (T : Scheme.{u}) :
       ∀ M : DTow l E T,
         ∃ δ, IsDerivedLimitTriangle (fun n : ℕ ↦ (transition l E T n).app M) _
           (Pi.lift fun n : ℕ ↦ (levelProjection l E T n).app M) δ := by
-  sorry
+  let A := AdicCompletion.Modules l E T
+  have : CountableAB4Star A :=
+    .of_epi_π_app_zero (Mod.epiπAppZeroOfEpi Scheme.ProEt.epi_π_app_zero_of_epi_addCommGrpCat)
+  obtain ⟨hP, -⟩ := derivedCategory_countableProducts_and_towerLimit.{0} A
+  exact ⟨hP, roos_triangle l E T⟩
 
 end AlgebraicGeometry.ProEtale.CompleteDerivedCompletion
