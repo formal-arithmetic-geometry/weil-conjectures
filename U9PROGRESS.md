@@ -452,3 +452,7 @@
 - Next: remote ucheck-bump validation, then direct importers through the 30-module cap.
 - Fix patterns: /home/ubuntu/u9/bz/FIXES-BZ1077.md.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
+
+- The assigned leaf and both downstream layers are GREEN at
+  39a2abaca23e5021c1ed37cf83063de80bacbd73: ucheck-bump rc=0, failed=0, 11415 jobs.
+  Full log: BUILD-BZ1077-fix1-full.log. Next: check the eight SmoothBaseChange importers.
