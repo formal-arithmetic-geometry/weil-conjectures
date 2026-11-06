@@ -316,12 +316,13 @@ attribute [local irreducible] ScalarLocalization.category sfRationalTriangulatio
 open AlgebraicallyClosedCoefficients (Index Coefficient coefficientInclusion
   coefficientInclusion_laws)
 
+-- Match the transported field and module structures on the small coefficient models.
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
 variable (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
   (Y : AlgebraicGeometry.Scheme.{u})
-
-local instance (E : Index l Ω) : FiniteDimensional (Padic l) (Coefficient.{u} l Ω E) :=
-  AlgebraicallyClosedCoefficients.coefficientFinite l Ω E
 
 /-- The specified raw rational stage, using its equivalent small coefficient model.
 Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/

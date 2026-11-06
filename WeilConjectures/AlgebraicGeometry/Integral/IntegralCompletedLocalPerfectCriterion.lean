@@ -220,6 +220,7 @@ private theorem perfect_intrinsicComplete (T : Scheme.{u}) [IsNoetherian T]
     change ((H i).f j).left ≫ 𝟙 (s.domain i) = ((H i).X j).hom at hh
     change ((H i).f j).left = ((H i).X j).hom
     exact (Category.comp_id ((H i).f j).left).symm.trans hh
+  set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
   have hlocal (f : ((H i).X j).left ⟶ s.domain i)
       (eC : DerivedCategory.Q.obj C ≅ (d.pull (f ≫ s.immersion i)).obj K)
       (hf : f = ((H i).X j).hom) :
