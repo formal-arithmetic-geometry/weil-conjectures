@@ -10,8 +10,10 @@ public import WeilConjectures.CategoryTheory.Etale.EtaleUnboundedRestrictionComp
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
 public import WeilConjectures.SixFunctors.BaseChange.RestrictScalars
 public import Mathlib.Algebra.Homology.Localization
+public import Mathlib.Logic.Small.Defs
 
 import all Mathlib.Algebra.Homology.Localization
+import all Mathlib.Logic.Small.Defs
 
 /-!
 # Specified scalar/pullback representative data
