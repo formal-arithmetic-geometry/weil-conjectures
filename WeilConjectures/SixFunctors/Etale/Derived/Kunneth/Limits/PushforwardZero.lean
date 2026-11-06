@@ -107,7 +107,7 @@ noncomputable def homotopyUnit (α : LimitStage B W)
       (((α.g)_*[ModuleCat.{u + 1} Λ]).mapHomotopyCategoryPlus.obj
         (((α.w)^*[ModuleCat.{u + 1} Λ]).mapHomotopyCategoryPlus.obj K)) ≫
     D+((α.π)^*[ModuleCat.{u + 1} Λ]).map
-      (((α.g)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnit.app
+      (((α.g)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnith.app
           (((α.w)^*[ModuleCat.{u + 1} Λ]).mapHomotopyCategoryPlus.obj K) ≫
         R+((α.g)_*[ModuleCat.{u + 1} Λ]).map
           (((α.w)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusFactorsh.inv.app K))
@@ -212,7 +212,7 @@ lemma homotopyUnit_comp_transition {α β : LimitStage B W} (φ : Hom α β)
   simp only [Iso.app_inv] at hπ
   -- naturality of the composition isomorphism of the bases
   have n1 := (upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) α.π φ.s β.π φ.wπ.symm).hom.naturality
-    (((β.g)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnit.app
+    (((β.g)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnith.app
         (((β.w)^*[ModuleCat.{u + 1} Λ]).mapHomotopyCategoryPlus.obj K) ≫
       R+((β.g)_*[ModuleCat.{u + 1} Λ]).map
         (((β.w)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusFactorsh.inv.app K))
@@ -226,7 +226,7 @@ lemma homotopyUnit_comp_transition {α β : LimitStage B W} (φ : Hom α β)
       (((β.w)^*[ModuleCat.{u + 1} Λ]).mapHomotopyCategoryPlus.obj K))
   -- naturality of the unit of `R+(α.g)_*`
   have n3 := congrArg D+((α.π)^*[ModuleCat.{u + 1} Λ]).map
-    (((α.g)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnit.naturality
+    (((α.g)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnith.naturality
       ((NatTrans.mapHomotopyCategoryPlus
         (Etale.upperStarComp (ModuleCat.{u + 1} Λ) φ.t β.w α.w φ.ww.symm).inv).app K))
   have hw' := congrArg (fun x ↦ D+((α.π)^*[ModuleCat.{u + 1} Λ]).map

@@ -113,22 +113,22 @@ lemma Etale.derivedBaseChangeMapPlus_paste_vert (sq₁ : CommSq g' f' f g)
   simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
     Functor.associator_hom_app, Functor.associator_inv_app, Functor.comp_obj, id_comp]
   -- the unit of `R(f ≫ e)_*` through the composition isomorphism
-  have hCI1 : (f ≫ e)_*[A].rightDerivedFunctorPlusUnit.app K ≫
+  have hCI1 : (f ≫ e)_*[A].rightDerivedFunctorPlusUnith.app K ≫
       (Functor.rightDerivedFunctorPlusCompIso' (f)_*[A] (e)_*[A]
         (Etale.lowerStarComp A f e)).inv.app (DerivedCategory.Plus.Qh.obj K) =
       DerivedCategory.Plus.Qh.map
           ((NatTrans.mapHomotopyCategoryPlus (Etale.lowerStarComp A f e).inv).app K) ≫
-        (e)_*[A].rightDerivedFunctorPlusUnit.app ((f)_*[A].mapHomotopyCategoryPlus.obj K) ≫
-        (e)_*[A].rightDerivedFunctorPlus.map ((f)_*[A].rightDerivedFunctorPlusUnit.app K) := by
+        (e)_*[A].rightDerivedFunctorPlusUnith.app ((f)_*[A].mapHomotopyCategoryPlus.obj K) ≫
+        (e)_*[A].rightDerivedFunctorPlus.map ((f)_*[A].rightDerivedFunctorPlusUnith.app K) := by
     have h := NatTrans.congr_app (Functor.rightDerivedFunctorPlusCompIso'_fac (f)_*[A] (e)_*[A]
       (Etale.lowerStarComp A f e)) K
     simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
       Functor.comp_obj, Functor.rightDerivedFunctorPlusCompUnit_app, Category.assoc] at h
-    have h' : (f ≫ e)_*[A].rightDerivedFunctorPlusUnit.app K =
+    have h' : (f ≫ e)_*[A].rightDerivedFunctorPlusUnith.app K =
         DerivedCategory.Plus.Qh.map
             ((NatTrans.mapHomotopyCategoryPlus (Etale.lowerStarComp A f e).inv).app K) ≫
-          (e)_*[A].rightDerivedFunctorPlusUnit.app ((f)_*[A].mapHomotopyCategoryPlus.obj K) ≫
-          (e)_*[A].rightDerivedFunctorPlus.map ((f)_*[A].rightDerivedFunctorPlusUnit.app K) ≫
+          (e)_*[A].rightDerivedFunctorPlusUnith.app ((f)_*[A].mapHomotopyCategoryPlus.obj K) ≫
+          (e)_*[A].rightDerivedFunctorPlus.map ((f)_*[A].rightDerivedFunctorPlusUnith.app K) ≫
           (Functor.rightDerivedFunctorPlusCompIso' (f)_*[A] (e)_*[A]
             (Etale.lowerStarComp A f e)).hom.app (DerivedCategory.Plus.Qh.obj K) := by
       rw [h, ← Category.assoc, ← DerivedCategory.Plus.Qh.map_comp, ← NatTrans.comp_app,
@@ -139,20 +139,20 @@ lemma Etale.derivedBaseChangeMapPlus_paste_vert (sq₁ : CommSq g' f' f g)
     simp only [Category.assoc, Iso.hom_inv_id_app, Functor.comp_obj, Category.comp_id]
   -- naturality of the derived base change map of the lower square along the unit of `Rf_*`
   have hnat₂ := (Etale.derivedBaseChangeMapPlus A sq₂).naturality
-    ((f)_*[A].rightDerivedFunctorPlusUnit.app K)
+    ((f)_*[A].rightDerivedFunctorPlusUnith.app K)
   simp only [Functor.comp_obj, Functor.comp_map] at hnat₂
   have hfac₂ := Etale.derivedBaseChangeMapPlus_fac_app A sq₂
     ((f)_*[A].mapHomotopyCategoryPlus.obj K)
   have hfac₁ := Etale.derivedBaseChangeMapPlus_fac_app A sq₁ K
   have hnatη : DerivedCategory.Plus.Qh.map (((e')_*[A]).mapHomotopyCategoryPlus.map
         ((NatTrans.mapHomotopyCategoryPlus (Etale.baseChangeMap A sq₁)).app K)) ≫
-      (e')_*[A].rightDerivedFunctorPlusUnit.app
+      (e')_*[A].rightDerivedFunctorPlusUnith.app
         ((f')_*[A].mapHomotopyCategoryPlus.obj (((g')^*[A]).mapHomotopyCategoryPlus.obj K)) =
-      (e')_*[A].rightDerivedFunctorPlusUnit.app
+      (e')_*[A].rightDerivedFunctorPlusUnith.app
         (((g)^*[A]).mapHomotopyCategoryPlus.obj ((f)_*[A].mapHomotopyCategoryPlus.obj K)) ≫
       (e')_*[A].rightDerivedFunctorPlus.map (DerivedCategory.Plus.Qh.map
         ((NatTrans.mapHomotopyCategoryPlus (Etale.baseChangeMap A sq₁)).app K)) :=
-    (e')_*[A].rightDerivedFunctorPlusUnit.naturality
+    (e')_*[A].rightDerivedFunctorPlusUnith.naturality
       ((NatTrans.mapHomotopyCategoryPlus (Etale.baseChangeMap A sq₁)).app K)
   have hCI2 := NatTrans.congr_app (Functor.rightDerivedFunctorPlusCompIso'_fac (f')_*[A]
     (e')_*[A] (Etale.lowerStarComp A f' e')) (((g')^*[A]).mapHomotopyCategoryPlus.obj K)

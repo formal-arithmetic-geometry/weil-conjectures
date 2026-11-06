@@ -151,7 +151,7 @@ private theorem map_transition
   intro n
   rw [Category.assoc, piComparison_comp_π, ← E.map_comp]
   simp only [towerTransitionEndomorphism, towerProductShift, Preadditive.sub_comp,
-    Category.id_comp, Pi.lift_π, E.map_sub, E.map_comp, Preadditive.comp_sub,
+    Category.id_comp, Pi.lift_comp_π, E.map_sub, E.map_comp, Preadditive.comp_sub,
     Category.assoc, piComparison_comp_π, piComparison_comp_π_assoc]
 
 private theorem sheaf_tower_epi
@@ -384,7 +384,7 @@ theorem milnor_epimorphic
           E.map (limit.π M (op n))
         dsimp only [milnorLimitProjection, F, E, C, Scheme.ProEt.milnorSingleTower,
           Functor.comp_obj]
-        exact Pi.lift_π _ n)
+        exact Pi.lift_comp_π _ n)
       (fun n ↦ (towerTransitionEndomorphism_eq_iff _ _).1 rfl n)
     let S := ShortComplex.mk (milnorLimitProjection M) g hz
     have : Mono S.f := mono_of_isLimit_fork hkernel

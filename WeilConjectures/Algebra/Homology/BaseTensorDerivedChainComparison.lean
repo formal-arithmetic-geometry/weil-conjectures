@@ -8,7 +8,9 @@ module
 
 public import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModel
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import Mathlib.Algebra.Homology.Localization
 
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.Algebra.Homology.BaseTensorCoefficientNaturalMap
 import WeilConjectures.Algebra.Homology.ScalarExtensionDerivedRestriction
 
@@ -132,8 +134,7 @@ theorem exists_baseTensorDerivedChainComparison
   intro P β hβ
   have hb : β = γ.app P := by
     ext j x
-    induction x using TensorProduct.induction_on with
-    | zero => exact (β.f j).hom.map_zero.trans ((γ.app P).f j).hom.map_zero.symm
+    induction x using TensorProduct.inductionOn with
     | tmul b p => exact (hβ j b p).trans (hγ P j b p).symm
     | add x y hx hy => simp only [map_add, hx, hy]
   subst β

@@ -136,7 +136,7 @@ private theorem duality (O : Sheaf J CommRingCat.{u}) (r : ℕ)
               (N m) (MonoidalCategory.curriedTensor _) i (0 - i) 0 (by omega)
         simp only [ringedNegativeKoszulBasis, Finset.preimage_empty]
         change q (if (0 : Fin (r + 1)) ∈ (∅ : Finset _) then -1 else 0) = q 0
-        exact congrArg q (if_neg (Finset.notMem_empty (0 : Fin (r + 1))))
+        exact congrArg q (ite_eq_right (Finset.notMem_empty (0 : Fin (r + 1))))
       change _ ≫ (((T.obj (ringedNegativeKoszulFactor O (b 0) m)).map (e m).hom).f 0 ≫
         (a m (P.obj m)).hom.f 0) = _
       rw [hb, ← Category.assoc]

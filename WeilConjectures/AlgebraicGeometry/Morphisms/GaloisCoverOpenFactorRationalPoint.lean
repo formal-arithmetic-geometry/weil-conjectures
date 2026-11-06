@@ -78,7 +78,7 @@ theorem GaloisCover.open_factor_rational_point
       V.ι ≫ χ = (V.ι ≫ κ) ≫ d := by simp [κ, Category.assoc]
       _ = (k ≫ i) ≫ d := by rw [hl]
       _ = pullback.lift (k ≫ Z.smul m) k (by simp [Z.smul_π]) := by
-        simp only [i, d, Category.assoc, Sigma.ι_desc]
+        simp only [i, d, Category.assoc, Sigma.ι_comp_desc]
         apply pullback.hom_ext <;> simp
   have h₁ := congrArg (· ≫ pullback.fst Z.π Z.π) hk
   have h₂ := congrArg (· ≫ pullback.snd Z.π Z.π) hk

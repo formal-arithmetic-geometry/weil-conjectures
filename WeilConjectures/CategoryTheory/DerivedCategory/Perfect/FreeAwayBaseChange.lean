@@ -37,12 +37,10 @@ noncomputable def baseChangeCompIso : baseChange A A' ⋙ baseChange A' B ≅ ba
       intro M N f
       ext : 1
       refine LinearMap.ext fun x ↦ ?_
-      induction x using TensorProduct.induction_on with
-      | zero => simp
+      induction x using TensorProduct.inductionOn with
       | add x y hx hy => simp only [map_add] at hx hy ⊢; rw [hx, hy]
       | tmul b y =>
-        induction y using TensorProduct.induction_on with
-        | zero => simp
+        induction y using TensorProduct.inductionOn with
         | add y y' hy hy' =>
           simp only [tmul_add, map_add] at hy hy' ⊢
           rw [hy, hy']

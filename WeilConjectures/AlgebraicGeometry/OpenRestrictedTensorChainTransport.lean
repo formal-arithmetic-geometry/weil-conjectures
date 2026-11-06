@@ -109,8 +109,7 @@ theorem openRestricted_tensor_chain_transport
   dsimp only
   intro eA eD q t heD hq ht k
   ext x
-  induction x using TensorProduct.induction_on with
-  | zero => simp
+  induction x using TensorProduct.inductionOn with
   | tmul d x =>
     have h := openRestricted_tensor_chain_transport_pure f f' g g' sq U sq0 z0 P k d x
     dsimp only at h

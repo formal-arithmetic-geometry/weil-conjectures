@@ -39,7 +39,7 @@ private theorem regular_element_of_depth_one
   have ht : (maximalIdeal R) • (⊤ : Submodule R M) ≠ ⊤ :=
     (Submodule.top_ne_ideal_smul_of_le_jacobson_annihilator
       (maximalIdeal_le_jacobson (Module.annihilator R M))).symm
-  rw [depth, Ideal.depth, if_neg ht] at h
+  rw [depth, Ideal.depth, ite_eq_right ht] at h
   by_contra hn
   have hz : sSup {n : ℕ∞ | ∃ rs : List R, RingTheory.Sequence.IsRegular M rs ∧
       (∀ x ∈ rs, x ∈ maximalIdeal R) ∧ n = (rs.length : ℕ∞)} ≤ 0 := by

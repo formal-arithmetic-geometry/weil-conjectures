@@ -30,8 +30,6 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)]
 
-attribute [local implicit_reducible] Equivalence.mapHomologicalComplex
-
 attribute [local implicit_reducible] tensor
   ResolvingOplaxConstraints.TensorFunctorTransport.tensorFunctor
   GrothendieckTopology.monoidalCategory_sheaf_of_essentiallySmall

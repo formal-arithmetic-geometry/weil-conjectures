@@ -65,7 +65,7 @@ private theorem sections_exact_bridge {S : Scheme.{v}}
       Functor.ιRightDerivedFunctorUnit, Functor.whiskerLeft_app, G,
       HomotopyCategory.Plus.ι, ObjectProperty.ι_obj] using hc
   · change G.rightDerivedFunctorUnit.app N.obj =
-      DerivedCategory.Plus.ι.map (G.rightDerivedFunctorPlusUnit.app N) ≫
+      DerivedCategory.Plus.ι.map (G.rightDerivedFunctorPlusUnith.app N) ≫
         DerivedCategory.Plus.ι.map
           (G.rightDerivedFunctorPlusIsoMapDerivedCategoryPlus.hom.app
             (DerivedCategory.Plus.Qh.obj N)) ≫

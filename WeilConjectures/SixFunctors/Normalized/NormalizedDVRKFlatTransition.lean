@@ -11,6 +11,8 @@ public import WeilConjectures.SixFunctors.Integral.IntegralReductionTower
 import all WeilConjectures.SmoothPurity.Integral.Reduction.IntegralReductionTowerUnrestrictedSupplement
 import all WeilConjectures.SixFunctors.Integral.IntegralReductionTowerWellDefined
 public import WeilConjectures.AlgebraicGeometry.NormalizedDVRKFlatTransition
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # Quotient transitions on K-flat representatives -/
 
@@ -207,18 +209,18 @@ variable {A : Type a} {B : Type b} {C : Type c}
   (i : H ⋙ R ≅ S)
 
 private theorem exactComp_fac (K : CochainComplex A ℤ) :
-    ((Functor.mapDerivedCategoryCompIso H R).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso H R ≪≫
         Functor.mapDerivedCategoryNatIso i).hom.app (DerivedCategory.Q.obj K) ≫
       S.mapDerivedCategoryFactors.hom.app K =
     R.mapDerivedCategory.map (H.mapDerivedCategoryFactors.hom.app K) ≫
       R.mapDerivedCategoryFactors.hom.app
         ((H.mapHomologicalComplex (.up ℤ)).obj K) ≫
       DerivedCategory.Q.map ((Functor.mapHomologicalComplexCompIso i (.up ℤ)).hom.app K) := by
-  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc,
+  simp only [Iso.trans_hom, NatTrans.comp_app, Category.assoc,
     Functor.mapDerivedCategoryNatIso_fac]
   have h := Functor.mapDerivedCategoryCompIso_fac H R K
   rw [← h]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
   rw [← CategoryTheory.Functor.map_comp]
   congr 1
   congr 1
@@ -233,7 +235,7 @@ private theorem exactComp_map (K : CochainComplex A ℤ) (L : CochainComplex B �
     (f : L ⟶ (H.mapHomologicalComplex (.up ℤ)).obj K) :
     R.mapDerivedCategory.map
         (DerivedCategory.Q.map f ≫ H.mapDerivedCategoryFactors.inv.app K) ≫
-      ((Functor.mapDerivedCategoryCompIso H R).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso H R ≪≫
         Functor.mapDerivedCategoryNatIso i).hom.app (DerivedCategory.Q.obj K) ≫
       S.mapDerivedCategoryFactors.hom.app K =
     R.mapDerivedCategoryFactors.hom.app L ≫
@@ -377,8 +379,8 @@ private theorem completedRestriction_eq (n : ℕ) :
 
 private theorem completedComp_eq (n : ℕ) :
     normalizedDVRResCompletedComp l E X D hl n.le_succ =
-      (Functor.mapDerivedCategoryCompIso (normalizedDVRModuleRes l E X n.le_succ)
-        (scalarReductionRestriction l E X (n + 1))).symm ≪≫
+      Functor.mapDerivedCategoryCompIso (normalizedDVRModuleRes l E X n.le_succ)
+        (scalarReductionRestriction l E X (n + 1)) ≪≫
       Functor.mapDerivedCategoryNatIso (moduleRestrictionComp l E X n) := by
   unfold normalizedDVRResCompletedComp moduleRestrictionComp tensorRestrictionComp
   congr 2
@@ -483,16 +485,14 @@ private theorem comparison_eq (n : ℕ)
       (scalarReductionRestriction l E X n).mapDerivedCategoryFactors.hom.app
         (unrestrictedTowerFiniteComplex l E X n P) := by
   unfold normalizedDVRKFlatComparison
-  congr 1
-  change (scalarReductionRestriction l E X n).mapDerivedCategoryFactorsh.hom.app
-      ((HomotopyCategory.quotient _ (.up ℤ)).obj
-        (unrestrictedTowerFiniteComplex l E X n P)) = _
-  rw [Functor.mapDerivedCategoryFactorsh_hom_app]
   simp only [Functor.mapHomotopyCategoryFactors, DerivedCategory.quotientCompQhIso,
     HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift_inv,
     Quotient.lift.isLift_hom]
-  erw [(scalarReductionRestriction l E X n).mapDerivedCategory.map_id,
-    DerivedCategory.Qh.map_id, Category.id_comp, Category.comp_id]
+  erw [(scalarReductionDerivedExtension l E X n).map_id, DerivedCategory.Qh.map_id,
+    Category.id_comp, Category.comp_id]
+
+local instance : Category.{max (t + 2) (u + 1)}
+    (DerivedCategory (scalarReductionSource l E X)) := inferInstance
 
 set_option linter.unusedVariables false in
 /-- The canonical quotient chain map is the restriction of the adjoint reduction

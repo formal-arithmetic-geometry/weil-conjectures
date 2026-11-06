@@ -94,8 +94,7 @@ noncomputable def cochainHypercohomologyLeftEdge (K : CochainComplex B ℕ) (n :
     ⟨K.extend ComplexShape.embeddingUpNat, 0, inferInstance⟩
   have : DerivedCategory.Plus.TStructure.t.IsGE (DerivedCategory.Plus.Q.obj L) 0 := by
     apply (DerivedCategory.Plus.isGE_ι_obj_iff _ 0).mp
-    exact DerivedCategory.TStructure.t.isGE_of_iso
-      ((DerivedCategory.quotientCompQhIso B).app L.obj).symm 0
+    exact inferInstanceAs ((DerivedCategory.Q.obj L.obj).IsGE 0)
   let GL := G.mapCochainComplexPlus.obj L
   let e := HomologicalComplex.mapExtendIso K ComplexShape.embeddingUpNat G
   exact (((G.mapHomologicalComplex (ComplexShape.up ℕ)).obj K).extendHomologyIso
@@ -103,7 +102,7 @@ noncomputable def cochainHypercohomologyLeftEdge (K : CochainComplex B ℕ) (n :
     HomologicalComplex.homologyMap e.inv (n : ℤ) ≫
     (DerivedCategory.Plus.homologyFunctorObjQIso GL n).inv ≫
     (DerivedCategory.Plus.homologyFunctor C n).map
-      (G.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient B).obj L)) ≫
+      (G.rightDerivedFunctorPlusUnit.app L) ≫
     (G.hypercohomologySpectralObjectFunctor.obj (DerivedCategory.Plus.Q.obj L)).leftEdge n ≫
     (G.hypercohomologyLeftEdgeTargetIso n).hom.app (DerivedCategory.Plus.Q.obj L) ≫
     G.map ((DerivedCategory.Plus.homologyFunctorObjQIso L n).hom ≫

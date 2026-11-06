@@ -66,7 +66,7 @@ lemma continuousMapRestrictRingHom_apply (V : X.ProEtᵒᵖ) (f : C(X, T)) :
 lemma continuousMapRestrictRingHom_naturality {V V' : X.ProEtᵒᵖ} (k : V ⟶ V') (f : C(X, T)) :
     (continuousMapRingSheaf.{0} X T).obj.map k (continuousMapRestrictRingHom X T V f) =
       continuousMapRestrictRingHom X T V' f := by
-  refine ULift.ext _ _ (ContinuousMap.ext fun x ↦ ?_)
+  refine ULift.ext (ContinuousMap.ext fun x ↦ ?_)
   change f (V.unop.hom.base (k.unop.left.base x)) = f (V'.unop.hom.base x)
   have h := congrArg (fun φ : _ ⟶ X ↦ φ.base x) (MorphismProperty.Over.w k.unop)
   simp only [Scheme.Hom.comp_base, TopCat.comp_app] at h
@@ -94,7 +94,7 @@ lemma continuousMapSectionRingHom_bijective :
     (continuousMapRingSheaf.{0} X T) (ProEt.isTerminalMkId X) _ _ ?_
   refine ⟨fun f f' h ↦ ContinuousMap.ext fun x ↦ ?_, fun f ↦ ⟨f.down, ?_⟩⟩
   · exact congrArg (fun a : ULift.{u + 1} C(X, T) ↦ a.down x) h
-  · exact ULift.ext _ _ (ContinuousMap.ext fun x ↦ rfl)
+  · exact ULift.ext (ContinuousMap.ext fun x ↦ rfl)
 
 variable {X} {X' : Scheme.{u}} (g : X' ⟶ X)
 
@@ -141,7 +141,7 @@ lemma Γ_map_continuousMapPullbackHom_mapFunctor (f : C(X, T)) :
     (continuousMapSectionRingHom X' T (f.comp g.base.hom)).hom).symm
   rw [unitHomEval_continuousMapSectionRingHom, unitHomEval_continuousMapSectionRingHom]
   erw [continuousMapRestrictRingHom_naturality]
-  refine ULift.ext _ _ (ContinuousMap.ext fun x ↦ ?_)
+  refine ULift.ext (ContinuousMap.ext fun x ↦ ?_)
   change f ((𝟙 X : X ⟶ X).base ((pullback.fst (𝟙 X) g).base x)) =
     f (g.base ((pullback.snd (𝟙 X) g).base x))
   have h := congrArg (fun k ↦ k.base x) (pullback.condition (f := 𝟙 X) (g := g))

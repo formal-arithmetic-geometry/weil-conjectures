@@ -89,7 +89,7 @@ private lemma bidegree_pi
         ((additiveCechOpenInclusion X).op ⋙ (I.cocomplex.X q).obj) p y ≫
       (Etale.resolutionSectionTransfer g I.cocomplex J.cocomplex α _ _
         (additiveCechTuplePullback g U V hinter p y)).f q := by
-  exact Pi.lift_π _ y
+  exact Pi.lift_comp_π _ y
 
 private lemma tuple_square
     {X Y : Scheme.{u}} (g : Y ⟶ X)
@@ -264,10 +264,10 @@ theorem exists_additiveCech_pullback_total_map
     intro y
     change (Pi.lift _) ≫ additiveCechPullbackBidegree g U V hinter I J α 0 n ≫
       Pi.π _ y = _
-    simp only [additiveCechPullbackBidegree, Category.assoc, Pi.lift_π]
+    simp only [additiveCechPullbackBidegree, Category.assoc, Pi.lift_comp_π]
     rw [← Category.assoc]
-    erw [Pi.lift_π]
-    erw [Pi.lift_π]
+    erw [Pi.lift_comp_π]
+    erw [Pi.lift_comp_π]
     exact congrArg (fun t ↦ t.f n)
       (Etale.resolutionSectionTransfer_naturality g I.cocomplex J.cocomplex α
         (MorphismProperty.Over.homMk (∏ᶜ fun l ↦ U (y l)).ι (Category.comp_id _))

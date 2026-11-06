@@ -55,7 +55,7 @@ theorem traceForm_nondegenerate_iff_etale
     have : IsArtinianRing A := .of_finite K A
     let e := (IsArtinianRing.equivPi A).restrictScalars K
     have hsep (i : MaximalSpectrum A) : Algebra.IsSeparable K (A ⧸ i.asIdeal) := by
-      apply ((traceForm_nondegenerate_tfae K (A ⧸ i.asIdeal)).out 1 0).mp
+      apply ((traceForm_nondegenerate_tfae K (A ⧸ i.asIdeal)).out 2 1).mp
       intro hz
       have hezero := hn.1 (e.symm (Pi.single i 1)) fun b ↦ by
         rw [traceForm_apply, ← trace_eq_of_algEquiv e]

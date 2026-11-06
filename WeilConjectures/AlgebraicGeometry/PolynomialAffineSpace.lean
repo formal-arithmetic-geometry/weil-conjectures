@@ -77,7 +77,7 @@ lemma polyAffineProjRingHom_eq (N : ℕ) :
     exact ((MvPolynomial.finSuccEquiv k N).commutes r).symm
   · simp only [polyAffineProjRingHom, AlgHom.toRingHom_eq_coe, RingHom.coe_coe,
       MvPolynomial.rename_X, RingHom.coe_comp, Function.comp_apply]
-    rw [eq_comm, RingEquiv.toRingHom_eq_coe, RingEquiv.coe_toRingHom, AlgEquiv.coe_ringEquiv,
+    rw [eq_comm, RingEquiv.toRingHom_eq_coe, RingEquiv.coe_toRingHom, AlgEquiv.coe_toRingEquiv,
       AlgEquiv.symm_apply_eq, MvPolynomial.finSuccEquiv_X_succ]
 
 lemma isStandardSmoothOfRelativeDimension_polynomial (R : Type u) [CommRing R] :

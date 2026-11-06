@@ -140,7 +140,7 @@ lemma isIso_piLift_unit_of_isColimit (hS : IsColimit (Cofan.mk S f))
     infer_instance
   have hg : IsIso (Pi.lift g) := by
     refine ⟨Pi.π _ j ≫ inv (g j), ?_, ?_⟩
-    · rw [Pi.lift_π_assoc, IsIso.hom_inv_id]
+    · rw [Pi.lift_comp_π_assoc, IsIso.hom_inv_id]
     · refine Pi.hom_ext _ _ fun i ↦ ?_
       by_cases hij : i = j
       · subst hij

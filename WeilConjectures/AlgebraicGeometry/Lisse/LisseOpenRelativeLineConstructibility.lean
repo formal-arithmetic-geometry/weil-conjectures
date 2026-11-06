@@ -142,7 +142,7 @@ theorem lisse_trace_degree
     apply (cancel_mono (Limits.Pi.lift ρ)).mp
     apply Limits.Pi.hom_ext
     intro t
-    simp only [Category.assoc, Limits.Pi.lift_π]
+    simp only [Category.assoc, Limits.Pi.lift_comp_π]
     erw [Preadditive.sum_comp, Category.id_comp]
     simp only [Category.assoc]
     change ∑ a, ρ a ≫ (j a ≫ ρ t) = ρ t

@@ -52,8 +52,7 @@ private def tensorDegreeIso
     { __ := T.toAddEquiv
       map_smul' := by
         intro b z
-        induction z using TensorProduct.induction_on with
-        | zero => simp
+        induction z using TensorProduct.inductionOn with
         | tmul b' m =>
           change D at b'
           change T ((b * b') ⊗ₜ[A] m) = eD b • T (b' ⊗ₜ[A] m)
@@ -103,8 +102,7 @@ private theorem exists_tensorComplexIso
   · intro k l _
     ext x
     symm
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | add x y hx hy => simp only [map_add, hx, hy]
     | tmul d x =>
       change (e l).hom ((ModuleCat.extendScalars φ).map (Q.d k l) (d ⊗ₜ[A, φ] x)) =

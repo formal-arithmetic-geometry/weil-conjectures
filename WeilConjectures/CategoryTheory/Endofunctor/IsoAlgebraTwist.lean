@@ -197,8 +197,8 @@ noncomputable def mapDerivedCategoryTwistCompMapDerivedCategoryIso
   have := IsoAlgebra.preservesFiniteColimits_mapOfNatIso (F.leftUnitor ≪≫ α ≪≫ F.rightUnitor.symm)
   have := IsoAlgebra.preservesFiniteLimits_mapOfNatIso (G.leftUnitor ≪≫ β ≪≫ G.rightUnitor.symm)
   have := IsoAlgebra.preservesFiniteColimits_mapOfNatIso (G.leftUnitor ≪≫ β ≪≫ G.rightUnitor.symm)
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫ Functor.mapDerivedCategoryNatIso e ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫ Functor.mapDerivedCategoryNatIso e ≪≫
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- **Right derived transports commute with twists.** If automorphisms `α` of `F` and `β` of
 `G` correspond under `e : L ⋙ G ≅ F ⋙ L`, the total right derived functor of the transport

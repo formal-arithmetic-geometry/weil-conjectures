@@ -50,7 +50,8 @@ private theorem isIso_isoSquare (B : Type (u + 2)) [Category.{u + 1} B]
     let P := (HomotopyCategory.Plus.quotient _).obj M
     suffices IsIso ((derivedBaseChangeMapPlus B sq).app
         (DerivedCategory.Plus.Qh.obj P)) by
-      rw [← NatTrans.isIso_app_iff_of_iso _ e]
+      rw [← NatTrans.isIso_app_iff_of_iso _
+        ((DerivedCategory.Plus.quotientCompQhIso _).app M ≪≫ e)]
       exact this
     have hM : ∀ m, (f')_*[B].rightAcyclic
         ((((g')^*[B]).mapCochainComplexPlus.obj M).obj.X m) := fun m ↦ by
@@ -58,16 +59,16 @@ private theorem isIso_isoSquare (B : Type (u + 2)) [Category.{u + 1} B]
       have hInst4 : Injective ((((g')^*[B]).mapCochainComplexPlus.obj M).obj.X m) :=
         Functor.injective_obj (g')^*[B] (M.obj.X m)
       exact (f')_*[B].rightAcyclic_of_injective _
-    have hInst5 : IsIso ((f')_*[B].rightDerivedFunctorPlusUnit.app
+    have hInst5 : IsIso ((f')_*[B].rightDerivedFunctorPlusUnith.app
         (((g')^*[B]).mapHomotopyCategoryPlus.obj P)) :=
       (f')_*[B].isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic
         (((g')^*[B]).mapCochainComplexPlus.obj M) hM
-    have hInst6 : IsIso ((f)_*[B].rightDerivedFunctorPlusUnit.app P) := by
+    have hInst6 : IsIso ((f)_*[B].rightDerivedFunctorPlusUnith.app P) := by
       dsimp only [P, M]
       infer_instance
     have hfac := derivedBaseChangeMapPlus_fac_app B sq P
     have hInst7 : IsIso (((g)^*[B]).mapDerivedCategoryPlus.map
-        ((f)_*[B].rightDerivedFunctorPlusUnit.app P) ≫
+        ((f)_*[B].rightDerivedFunctorPlusUnith.app P) ≫
         (derivedBaseChangeMapPlus B sq).app (DerivedCategory.Plus.Qh.obj P)) := by
       rw [hfac]
       have hInst8 : IsIso (baseChangeMap B sq) := inferInstance
@@ -77,14 +78,14 @@ private theorem isIso_isoSquare (B : Type (u + 2)) [Category.{u + 1} B]
           ((f)_*[B].mapHomotopyCategoryPlus.obj P)) := inferInstance
       have hInst11 : IsIso (DerivedCategory.Plus.Qh.map
           ((NatTrans.mapHomotopyCategoryPlus (baseChangeMap B sq)).app P)) := inferInstance
-      have hInst12 : IsIso ((f')_*[B].rightDerivedFunctorPlusUnit.app
+      have hInst12 : IsIso ((f')_*[B].rightDerivedFunctorPlusUnith.app
           (((g')^*[B]).mapHomotopyCategoryPlus.obj P)) := inferInstance
       have hInst13 : IsIso ((f')_*[B].rightDerivedFunctorPlus.map
           (((g')^*[B]).mapDerivedCategoryPlusFactorsh.inv.app P)) := inferInstance
       exact IsIso.comp_isIso' hInst10
         (IsIso.comp_isIso' hInst11 (IsIso.comp_isIso' hInst12 hInst13))
     exact IsIso.of_isIso_comp_left
-      (((g)^*[B]).mapDerivedCategoryPlus.map ((f)_*[B].rightDerivedFunctorPlusUnit.app P)) _
+      (((g)^*[B]).mapDerivedCategoryPlus.map ((f)_*[B].rightDerivedFunctorPlusUnith.app P)) _
   exact NatIso.isIso_of_isIso_app _
 
 set_option backward.isDefEq.respectTransparency true in

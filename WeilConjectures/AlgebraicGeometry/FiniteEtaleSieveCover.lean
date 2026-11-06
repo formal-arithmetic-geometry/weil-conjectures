@@ -79,7 +79,7 @@ theorem exists_finite_etale_sieve_cover
       exact hy
     refine ⟨(Sigma.ι W i).left z, ?_⟩
     have hw : (Sigma.ι W i).left ≫ (ν ≫ e).left = (τ i ≫ e).left :=
-      congrArg (fun f ↦ f.left) (Sigma.ι_desc_assoc τ i e)
+      congrArg (fun f ↦ f.left) (Sigma.ι_comp_desc_assoc τ i e)
     change ((Sigma.ι W i).left ≫ (ν ≫ e).left) z = x
     rw [hw]
     change e.left (C.f (a i) ((hV i).fromSpec z)) = x
@@ -97,7 +97,7 @@ theorem exists_finite_etale_sieve_cover
       @quasiCompact_of_compactSpace _ X _ hc inferInstance,
       @QuasiSeparated.of_quasiSeparatedSpace _ _ _ hq⟩
   · intro i
-    rw [Sigma.ι_desc]
+    rw [Sigma.ι_comp_desc]
     let f : (C.X (a i)).asOverProp X (hC (a i)) ⟶ E := (C.f (a i)).asOverProp X
     let t : W i ⟶ (C.X (a i)).asOverProp X (hC (a i)) :=
       MorphismProperty.Over.homMk (hV i).fromSpec rfl trivial

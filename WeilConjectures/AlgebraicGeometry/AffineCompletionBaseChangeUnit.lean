@@ -49,8 +49,7 @@ private theorem tensor_ideal_range {A S T : Type u} [CommRing A]
   · apply Submodule.smul_le.mpr
     intro a ha z hz
     clear hz
-    induction z using TensorProduct.induction_on with
-    | zero => simp
+    induction z using TensorProduct.inductionOn with
     | tmul s t =>
       rw [TensorProduct.smul_tmul']
       exact Submodule.apply_mem_map₂ _

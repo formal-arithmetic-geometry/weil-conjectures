@@ -130,9 +130,9 @@ private theorem exact_map_roos
     intro n
     simp only [Category.assoc, he, towerTransitionEndomorphism, towerProductShift,
       Preadditive.comp_sub, Preadditive.sub_comp, Category.comp_id,
-      Pi.lift_π, Functor.map_sub]
+      Pi.lift_comp_π, Functor.map_sub]
     rw [← Category.assoc, he, ← Functor.map_comp]
-    rw [← Functor.map_comp, Pi.lift_π, Category.id_comp, Functor.map_comp]
+    rw [← Functor.map_comp, Pi.lift_comp_π, Category.id_comp, Functor.map_comp]
   refine ⟨Φ.map p ≫ e.hom,
     e.inv ≫ Φ.map δ ≫ (Φ.commShiftIso (1 : ℤ)).hom.app M, ?_⟩
   exact CategoryTheory.Pretriangulated.isomorphic_distinguished _

@@ -462,14 +462,14 @@ lemma exists_finite_partition [CompactSpace T] {ι : Type*} [Finite ι]
   refine ⟨_, χ, t, fun i ↦ ?_, fun j j' ↦ ?_, ?_⟩
   · ext t'
     simp only [sum_apply, smul_apply, hχ, smul_eq_mul, mul_ite, mul_one, mul_zero,
-      Finset.sum_ite_eq', Finset.mem_univ, if_true]
+      Finset.sum_ite_eq', Finset.mem_univ, ite_true]
     exact (congrFun ((ht _).trans ((hj₀ t' _).2 rfl).symm) i).symm
   · ext t'
     by_cases h : j = j'
     · subst h
-      simp only [if_true, coe_mul, Pi.mul_apply, hχ]
+      simp only [ite_true, coe_mul, Pi.mul_apply, hχ]
       split_ifs <;> simp
-    · simp only [h, if_false, coe_mul, Pi.mul_apply, hχ, coe_zero, Pi.zero_apply]
+    · simp only [h, ite_false, coe_mul, Pi.mul_apply, hχ, coe_zero, Pi.zero_apply]
       split_ifs with h₁ h₂
       · exact absurd (h₁.trans h₂.symm) h
       all_goals simp

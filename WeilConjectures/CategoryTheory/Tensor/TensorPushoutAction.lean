@@ -158,8 +158,7 @@ private theorem rawAction_left (e : ∀ U : Cᵒᵖ,
   let := rawAction a b M e U
   change (d.hom.app U s) • x = s • x
   dsimp only [sheafCompose] at *
-  induction x using TensorProduct.induction_on with
-  | zero => simp only [smul_zero]
+  induction x using TensorProduct.inductionOn with
   | add x y hx hy => simp only [smul_add, hx, hy]
   | tmul t m =>
     have h := rawAction_tmul a b c d M e he U s t 1 m
@@ -192,8 +191,7 @@ private theorem rawAction_restriction (e : ∀ U : Cᵒᵖ,
     T.obj.map f z • (show (rawTensor a b M).obj V from (rawTensor a b M).map f x)
   dsimp only [sheafCompose] at *
   obtain ⟨w, rfl⟩ := (e U).surjective z
-  induction w using TensorProduct.induction_on with
-  | zero => simp only [map_zero, zero_smul]
+  induction w using TensorProduct.inductionOn with
   | add w w' hw hw' => simp only [map_add, add_smul, hw, hw']
   | tmul s r =>
     rw [he U]
@@ -204,8 +202,7 @@ private theorem rawAction_restriction (e : ∀ U : Cᵒᵖ,
         T.obj.map f (d.hom.app U s) = d.hom.app V (B.obj.map f s) :=
       ConcreteCategory.congr_hom (d.hom.naturality f).symm s
     rw [map_mul, hd, hc]
-    induction x using TensorProduct.induction_on with
-    | zero => simp only [smul_zero, map_zero]
+    induction x using TensorProduct.inductionOn with
     | add x y hx hy => simp only [smul_add, map_add, hx, hy]
     | tmul t m =>
       change B.obj.obj U at t
@@ -327,13 +324,11 @@ theorem tensorPushoutAction_existsUnique (e : ∀ U : Cᵒᵖ,
       change z • φ.app U y = φ.app U (z • y)
       dsimp only [sheafCompose] at *
       obtain ⟨w, rfl⟩ := (e U).surjective z
-      induction w using TensorProduct.induction_on with
-      | zero => simp only [map_zero, zero_smul]
+      induction w using TensorProduct.inductionOn with
       | add w w' hw hw' => simp only [map_add, add_smul, hw, hw']
       | tmul s r =>
         rw [he U]
-        induction y using TensorProduct.induction_on with
-        | zero => simp only [map_zero, smul_zero]
+        induction y using TensorProduct.inductionOn with
         | add y y' hy hy' => simp only [map_add, smul_add, hy, hy']
         | tmul t x =>
           change B.obj.obj U at t

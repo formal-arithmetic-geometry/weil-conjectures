@@ -201,6 +201,7 @@ private def comparisonFixedRight (X : Scheme.{u})
     ext U x
     rfl
 
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 private def comparisonFixedLeft (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A] :
     constructibleComparisonPullback.{u, v} X A ⋙

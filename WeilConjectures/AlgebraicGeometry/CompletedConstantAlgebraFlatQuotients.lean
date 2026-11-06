@@ -443,6 +443,17 @@ private theorem flat_presented_completion (T : Scheme.{u}) {A : Type (u + 1)}
       (α.hom.hom.app (op (AsSmall.up.obj U)) (x i)) = x i at hinv
     exact (hn.trans (congrArg ((adicLisseConstantRing T A).obj.map f.op) hinv)).symm
 
+section
+
+private local instance completedConstantAlgebraRestrictedModule (T : Scheme.{u})
+    {A : Sheaf (ProEt.topology T) CommRingCat.{u + 1}}
+    (M : SheafOfModules.{u + 1} ((adicLisseForget T).obj A))
+    {X Y : T.ProEtᵒᵖ} (i : X ⟶ Y) :
+    Module (A.obj.obj Y)
+      ((ModuleCat.restrictScalars (((adicLisseForget T).obj A).obj.map i).hom).obj
+        (M.val.obj Y)) :=
+  inferInstanceAs (Module (A.obj.obj Y) (M.val.obj Y))
+
 private theorem tensorRestriction_tmul
     (T : Scheme.{u})
     {A S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (c : A ⟶ S) (M : SheafOfModules.{u + 1}
@@ -452,6 +463,8 @@ private theorem tensorRestriction_tmul
       (s ⊗ₜ[A.obj.obj X, (c.hom.app X).hom] m) =
       S.obj.map i s ⊗ₜ[A.obj.obj Y, (c.hom.app Y).hom] M.val.map i m :=
   Classical.choose_spec (SheafOfModules.exists_changeOfRingsMap.{u, u + 1, u + 1} c M i) s m
+
+end
 
 private noncomputable def tensorToRestriction
     (T : Scheme.{u})
@@ -583,10 +596,13 @@ private noncomputable def scalarTensorSectionIso (T : Scheme.{u})
     intro U V f
     apply AddCommGrpCat.hom_ext
     ext z
-    induction z using TensorProduct.induction_on with
-    | zero => simp
+    induction z using TensorProduct.inductionOn with
     | add x y hx hy => simp only [map_add, hx, hy]
     | tmul b m =>
+      let : Module (R.obj.obj V)
+          ((ModuleCat.restrictScalars (((adicLisseForget T).obj R).obj.map f).hom).obj
+            (M.val.obj V)) :=
+        inferInstanceAs (Module (R.obj.obj V) (M.val.obj V))
       change (TensorProduct.comm (R.obj.obj V) (S.obj.obj V) (M.val.obj V))
           ((SheafOfModules.changeOfRingsPresheaf.{u, u + 1, u + 1} c M).map f
             (b ⊗ₜ[R.obj.obj U, (c.hom.app U).hom] m)) =
@@ -638,8 +654,7 @@ private noncomputable def scalarTensorRawIso (T : Scheme.{u})
     funext U
     apply AddCommGrpCat.hom_ext
     ext z
-    induction z using TensorProduct.induction_on with
-    | zero => simp
+    induction z using TensorProduct.inductionOn with
     | add x y hx hy => simp only [map_add, hx, hy]
     | tmul b m =>
       unfold scalarTensorSectionIso

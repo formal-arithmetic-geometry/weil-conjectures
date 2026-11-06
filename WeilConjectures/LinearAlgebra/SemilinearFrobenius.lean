@@ -101,9 +101,9 @@ private theorem isAlgebraic_of_pow_pow_mem (W : Submodule k K) [FiniteDimensiona
     have := congrArg (coeff · (p ^ (i : ℕ))) h0
     simp only [finsetSum_coeff, coeff_C_mul_X_pow, coeff_zero] at this
     rwa [Finset.sum_eq_single i (fun j _ hj ↦ by
-        rw [if_neg]; exact fun e ↦ hj (Fin.ext
+        rw [ite_eq_right]; exact fun e ↦ hj (Fin.ext
           (Nat.pow_right_injective (Fact.out : p.Prime).two_le e).symm))
-      (by simp), if_pos rfl] at this
+      (by simp), ite_eq_left rfl] at this
   simpa [d] using hli.fintype_card_le_finrank
 
 /-- Over an algebraically closed field `k`, every element algebraic over `k` lies in `k`. -/
@@ -404,14 +404,12 @@ theorem existsUnique_baseChange (F : V →ₚ[k, p] V) :
   have hG (a : k') (v : V) : G (a ⊗ₜ[k] v) = (a ^ p) ⊗ₜ[k] F v := rfl
   refine ⟨{ toFun := G, map_add' := G.map_add, map_smul' := fun c x ↦ ?_ }, fun v ↦ ?_,
     fun F'' hF'' ↦ ?_⟩
-  · induction x using TensorProduct.induction_on with
-    | zero => simp
+  · induction x using TensorProduct.inductionOn with
     | tmul a v => simp [TensorProduct.smul_tmul', hG, mul_pow, _root_.frobenius_def]
     | add x y hx hy => simp only [smul_add, map_add] at hx hy ⊢; rw [hx, hy]
   · simp [hG]
   · ext x
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul a v =>
       rw [show a ⊗ₜ[k] v = a • (1 ⊗ₜ[k] v) by simp [TensorProduct.smul_tmul'], map_smulₛₗ,
         hF'']

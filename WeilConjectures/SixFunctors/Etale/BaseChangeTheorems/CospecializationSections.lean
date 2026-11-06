@@ -312,24 +312,26 @@ theorem bijective_cospecializationMap_of_isIso_globalSectionsUpperStarMap {Y : S
     infer_instance
   have hcosp : cospecializationMap s t (ModuleCat.{u + 1} Λ) G = inv a ≫ b := by
     refine (pointSmallEtale s).presheafFiber_hom_ext (P := G.obj) fun X x ↦ ?_
-    let leg := (strictLocalizationConeAll s).π.app ⟨X, x⟩
+    let leg := (strictLocalizationConeAll s).π.app (Functor.elementsMk _ X x)
     have hleg : leg ≫ X.hom = N.hom ≫ g :=
-      (strictLocalizationConeAll_π_app_hom s ⟨X, x⟩).trans (Category.id_comp g).symm
+      (strictLocalizationConeAll_π_app_hom s (Functor.elementsMk _ X x)).trans
+        (Category.id_comp g).symm
     have hA : ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g).unit.app G).hom.app
         (op X) ≫ G'.obj.map (Etale.homToPullback g leg hleg).op ≫ a =
           (pointSmallEtale s).toPresheafFiber X x G.obj := by
       rw [ha, Etale.unit_app_map_toPresheafFiber_upperStarCompSheafFiberIso_hom_assoc, he₀]
       exact congrArg (fun u ↦ (pointSmallEtale s).toPresheafFiber X u G.obj)
         (CategoryTheory.Over.OverMorphism.ext
-          (spec_map_strictHenselizationEval_comp_strictLocalizationConeAll_π_app s ⟨X, x⟩))
+          (spec_map_strictHenselizationEval_comp_strictLocalizationConeAll_π_app s
+            (Functor.elementsMk _ X x)))
     have hB : ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g).unit.app G).hom.app
         (op X) ≫ G'.obj.map (Etale.homToPullback g leg hleg).op ≫ b =
           (pointSmallEtale (t ≫ g)).toPresheafFiber X
-            ((cospecializationNeighborhoodFunctor s t).obj ⟨X, x⟩).2 G.obj := by
+            ((cospecializationNeighborhoodFunctor s t).obj (Functor.elementsMk _ X x)).2 G.obj := by
       rw [hb, Etale.unit_app_map_toPresheafFiber_upperStarCompSheafFiberIso_hom]
       rfl
-    rw [toPresheafFiber_cospecializationMap s t _ G ⟨X, x⟩, ← hA, Category.assoc, Category.assoc,
-      IsIso.hom_inv_id_assoc, hB]
+    rw [toPresheafFiber_cospecializationMap s t _ G (Functor.elementsMk _ X x), ← hA,
+      Category.assoc, Category.assoc, IsIso.hom_inv_id_assoc, hB]
   have : IsIso (cospecializationMap s t (ModuleCat.{u + 1} Λ) G) := by
     rw [hcosp]
     infer_instance

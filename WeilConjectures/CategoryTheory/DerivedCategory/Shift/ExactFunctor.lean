@@ -52,22 +52,6 @@ instance commShift_mapDerivedCategoryCompIso_hom (F : C ⥤ D) (G : D ⥤ E)
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G] :
     NatTrans.CommShift (mapDerivedCategoryCompIso F G).hom ℤ := by
-  have eq : whiskerLeft DerivedCategory.Qh (mapDerivedCategoryCompIso F G).hom =
-      (F ⋙ G).mapDerivedCategoryFactorsh.hom ≫
-        whiskerRight (Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G))
-          (ComplexShape.up ℤ)).inv DerivedCategory.Qh ≫
-        (Functor.associator _ _ _).hom ≫
-        whiskerLeft (F.mapHomotopyCategory (ComplexShape.up ℤ))
-          G.mapDerivedCategoryFactorsh.inv ≫
-        (Functor.associator _ _ _).inv ≫
-        whiskerRight F.mapDerivedCategoryFactorsh.inv G.mapDerivedCategory ≫
-        (Functor.associator _ _ _).hom := by
-    ext K
-    simp [← mapDerivedCategoryCompIso_fach (F := F) (G := G) K]
-  have : NatTrans.CommShift (whiskerLeft DerivedCategory.Qh
-      (mapDerivedCategoryCompIso F G).hom) ℤ := by
-    rw [eq]; infer_instance
-  exact NatTrans.CommShift.of_whiskerLeft _ DerivedCategory.Qh
-    (fun X ↦ ⟨_, (DerivedCategory.Qh.objObjPreimageIso X).inv, inferInstance⟩)
+  infer_instance
 
 end CategoryTheory.Functor

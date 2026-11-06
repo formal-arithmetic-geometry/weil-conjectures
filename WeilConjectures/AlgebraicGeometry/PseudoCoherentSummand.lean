@@ -185,7 +185,7 @@ theorem pseudoCoherent_of_isIso_biproduct (X : Scheme.{u})
       (Functor.mapDerivedCategoryNatIso
         (SheafOfModules.overFunctorMap.{u}
           (moduleRings X.toRingedSpace) (homOfLE hVU))).symm.app K ≪≫
-        (Functor.mapDerivedCategoryCompIso H F).app K ≪≫ F.mapDerivedCategory.mapIso eP ≪≫
+        (Functor.mapDerivedCategoryCompIso H F).symm.app K ≪≫ F.mapDerivedCategory.mapIso eP ≪≫
           F.mapDerivedCategoryFactors.app P
     obtain ⟨A, b, hAb, hAf, ⟨eA⟩⟩ :=
       summand_affine_finiteFree_model X V hV PV hbV hfV

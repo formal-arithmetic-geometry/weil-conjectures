@@ -241,9 +241,10 @@ private noncomputable def rawScalarMap (i : CoeffIndex.{u} ℓ E) :
     (padicSubfieldRingObjMap T ℓ (coeffIndex_le ℓ E i)))
 
 private instance rawScalarMapHom (i : CoeffIndex.{u} ℓ E) :
-    IsMonHom (rawScalarMap T X f ℓ E Y g i) := by
-  dsimp only [rawScalarMap]
-  infer_instance
+    IsMonHom (rawScalarMap T X f ℓ E Y g i) :=
+  inferInstanceAs (IsMonHom ((upperStar Ab.{u + 1} g).map
+    ((upperStar Ab.{u + 1} f).map
+      (padicSubfieldRingObjMap T ℓ (coeffIndex_le ℓ E i)))))
 
 private lemma rawScalarMap_naturality {i j : CoeffIndex.{u} ℓ E} (a : i ⟶ j) :
     rawScalarMap T X f ℓ E Y g i ≫ (rawRingDiagram T X f ℓ E Y g).map a =
@@ -276,8 +277,13 @@ private noncomputable def rawScalarDiagram :=
   scalarDiagram (rawRingDiagram T X f ℓ E Y g) (rawScalarMap T X f ℓ E Y g)
     (fun {_ _} a ↦ rawScalarMap_naturality T X f ℓ E Y g a) P
 
-private noncomputable def rawScalarCocone : Cocone (rawScalarDiagram T X f ℓ E Y g P) :=
-  scalarCocone (rawRingDiagram T X f ℓ E Y g) (rawRingCocone T X f ℓ E Y g)
+private noncomputable def rawScalarCocone : Cocone (rawScalarDiagram T X f ℓ E Y g P) := by
+  have : IsMonHom (show _ ⟶ (rawRingCocone T X f ℓ E Y g).pt from
+      (upperStar Ab.{u + 1} g).map ((upperStar Ab.{u + 1} f).map
+        (padicSubfieldRingObjToPadicAlgCl T ℓ E))) :=
+    inferInstanceAs (IsMonHom ((upperStar Ab.{u + 1} g).map
+      ((upperStar Ab.{u + 1} f).map (padicSubfieldRingObjToPadicAlgCl T ℓ E))))
+  exact scalarCocone (rawRingDiagram T X f ℓ E Y g) (rawRingCocone T X f ℓ E Y g)
     (rawScalarMap T X f ℓ E Y g)
     ((upperStar Ab.{u + 1} g).map ((upperStar Ab.{u + 1} f).map
       (padicSubfieldRingObjToPadicAlgCl T ℓ E)))
@@ -285,8 +291,13 @@ private noncomputable def rawScalarCocone : Cocone (rawScalarDiagram T X f ℓ E
     (rawScalarMap_toAlgCl T X f ℓ E Y g) P
 
 private noncomputable def rawScalarCocone_isColimit :
-    IsColimit (rawScalarCocone T X f ℓ E Y g P) :=
-  scalarCocone_isColimit _ _ _ _ _ _ P (rawRingCocone_isColimit T X f ℓ E Y g)
+    IsColimit (rawScalarCocone T X f ℓ E Y g P) := by
+  have : IsMonHom (show _ ⟶ (rawRingCocone T X f ℓ E Y g).pt from
+      (upperStar Ab.{u + 1} g).map ((upperStar Ab.{u + 1} f).map
+        (padicSubfieldRingObjToPadicAlgCl T ℓ E))) :=
+    inferInstanceAs (IsMonHom ((upperStar Ab.{u + 1} g).map
+      ((upperStar Ab.{u + 1} f).map (padicSubfieldRingObjToPadicAlgCl T ℓ E))))
+  exact scalarCocone_isColimit _ _ _ _ _ _ P (rawRingCocone_isColimit T X f ℓ E Y g)
 
 end RawCoefficients
 

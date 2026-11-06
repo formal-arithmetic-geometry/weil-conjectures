@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import all WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-!
 # A finite test for vanishing after pullback from an affine open
@@ -82,8 +83,7 @@ theorem exists_affine_finiteType_pullback_zero_test
     obtain ⟨t, rfl⟩ := (hc F hF_qc).2 y
     rw [hn F G hF_qc hG_qc δ t]
     change c G hG_qc (TensorProduct.map (δ.val.app (op V)).hom LinearMap.id t) = 0
-    induction t using TensorProduct.induction_on with
-    | zero => simp
+    induction t using TensorProduct.inductionOn with
     | tmul x b =>
       rw [TensorProduct.map_tmul, LinearMap.id_apply, hpure]
       have hx : (adj.unit.app G).val.app (op V) (δ.app V x) = 0 := he x

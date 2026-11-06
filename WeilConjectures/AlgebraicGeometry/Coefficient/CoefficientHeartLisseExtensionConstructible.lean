@@ -409,7 +409,7 @@ theorem coefficientHeart_lisse_extension_constructible (ℓ : ℕ) [Fact ℓ.Pri
   have hcpt : CompactSpace X := inferInstance
   have hqs : QuasiSeparatedSpace X := inferInstance
   change IsConstantModelConstructible (coefficientHeartRingObj Λ) X _
-  rw [IsConstantModelConstructible, if_pos (And.intro hcpt hqs)]
+  rw [IsConstantModelConstructible, ite_eq_left (And.intro hcpt hqs)]
   exact hi
 
 end AlgebraicGeometry.ProEtale

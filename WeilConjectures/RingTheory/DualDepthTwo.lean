@@ -72,7 +72,7 @@ private theorem regular_pair_of_depth {R : Type u} [CommRing R] [IsLocalRing R]
       (∀ r ∈ rs, r ∈ maximalIdeal R) ∧ 2 ≤ rs.length := by
     by_contra! h
     have hle : depth (R := R) R ≤ (1 : ℕ∞) := by
-      simp only [depth, Ideal.depth, if_neg hm]
+      simp only [depth, Ideal.depth, ite_eq_right hm]
       apply sSup_le
       rintro n ⟨rs, hreg, hmem, rfl⟩
       have hlen : rs.length ≤ 1 := by have := h rs hreg hmem; omega
@@ -120,7 +120,7 @@ theorem dual_depth_ge_two (R : Type u) [CommRing R] [IsNoetherianRing R]
       rw [Subsingleton.elim f 0]
       exact Submodule.zero_mem _
     unfold depth Ideal.depth
-    rw [if_pos hm]
+    rw [ite_eq_left hm]
     exact le_top
   · have : Nontrivial (Module.Dual R N) := not_subsingleton_iff_nontrivial.mp hzero
     obtain ⟨x, y, hxmem, hymem, hx, hy⟩ := regular_pair_of_depth hR
@@ -138,7 +138,7 @@ theorem dual_depth_ge_two (R : Type u) [CommRing R] [IsNoetherianRing R]
     have hm : maximalIdeal R • (⊤ : Submodule R (Module.Dual R N)) ≠ ⊤ :=
       (Submodule.top_ne_ideal_smul_of_le_jacobson_annihilator
         (maximalIdeal_le_jacobson (Module.annihilator R (Module.Dual R N)))).symm
-    simp only [depth, Ideal.depth, if_neg hm]
+    simp only [depth, Ideal.depth, ite_eq_right hm]
     exact le_sSup ⟨[x, y], hreg, hmem, by simp⟩
 
 end IsLocalRing

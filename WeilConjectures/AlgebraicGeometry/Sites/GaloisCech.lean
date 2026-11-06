@@ -85,7 +85,7 @@ noncomputable def nerveSection {k : ℕ} (y : Fin (k + 1) → Fin 1) (g : Fin (k
 lemma nerveSection_π {k : ℕ} (y : Fin (k + 1) → Fin 1) (g : Fin (k + 1) → Gal(M/K))
     (l : Fin (k + 1)) :
     nerveSection y g ≫ Pi.π (fun l ↦ family K M (y l)) l = coverMap (g l).toAlgHom :=
-  Pi.lift_π _ _
+  Pi.lift_comp_π _ _
 
 lemma coverMap_nerveSection {k : ℕ} (y : Fin (k + 1) → Fin 1) (g : Fin (k + 1) → Gal(M/K))
     (h : Gal(M/K)) :
@@ -99,7 +99,7 @@ lemma nerveSection_cechNerveMap {k m : ℕ} (y : Fin (m + 1) → Fin 1)
     nerveSection y g ≫ cechNerveMap (family K M) y θ = nerveSection (y ∘ θ) (g ∘ θ) :=
   Pi.hom_ext _ _ fun l ↦ by
     rw [Category.assoc]
-    erw [Pi.lift_π, nerveSection_π, nerveSection_π]
+    erw [Pi.lift_comp_π, nerveSection_π, nerveSection_π]
     rfl
 
 section Covering

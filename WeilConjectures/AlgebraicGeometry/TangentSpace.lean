@@ -178,12 +178,12 @@ noncomputable def pullbackPresheafHom :
 /-- The presheaf of relative differentials of `f : X ⟶ S`: over `U` the Kähler differentials of
 `𝒪_X(U)` relative to `(f⁻¹𝒪_S)(U)`. (blueprint: `def-wf-lie-algebra-derivation`) -/
 noncomputable def cotangentPresheaf : X.PresheafOfModules :=
-  PresheafOfModules.DifferentialsConstruction.relativeDifferentials' f.pullbackPresheafHom
+  PresheafOfModulesOfCommRing.DifferentialsConstruction.relativeDifferentials' f.pullbackPresheafHom
 
 /-- The universal relative derivation `d : 𝒪_X → Ω` into the presheaf of relative differentials. -/
 noncomputable def cotangentPresheafDerivation :
     f.cotangentPresheaf.Derivation' f.pullbackPresheafHom :=
-  PresheafOfModules.DifferentialsConstruction.derivation' f.pullbackPresheafHom
+  PresheafOfModulesOfCommRing.DifferentialsConstruction.derivation' f.pullbackPresheafHom
 
 /-- The sheaf `Ω¹_{X/S}` of relative differentials of `f : X ⟶ S`: the sheafification of the
 presheaf of relative Kähler differentials. (blueprint: `def-wf-lie-algebra-derivation`) -/

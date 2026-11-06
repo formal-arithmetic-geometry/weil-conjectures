@@ -104,8 +104,8 @@ private theorem localizationFactor_kflat (O : Sheaf J CommRingCat.{u})
   apply CochainComplex.isKFlat_of_boundedAbove_flat
   · refine ⟨1, fun n hn ↦ ?_⟩
     change IsZero (ringedLocalizationTwoTermX O s n)
-    simp only [ringedLocalizationTwoTermX, if_neg (show n ≠ 0 by omega),
-      if_neg (show n ≠ 1 by omega)]
+    simp only [ringedLocalizationTwoTermX, ite_eq_right (show n ≠ 0 by omega),
+      ite_eq_right (show n ≠ 1 by omega)]
     exact isZero_zero _
   · intro n
     change SheafOfModules.IsFlat (ringedLocalizationTwoTermX O s n)
@@ -118,7 +118,7 @@ private theorem localizationFactor_kflat (O : Sheaf J CommRingCat.{u})
       · subst n
         rw [ringedLocalizationTwoTermX_one]
         exact localization_isFlat (C := C) (J := J) O s
-      · simp only [ringedLocalizationTwoTermX, if_neg hn, if_neg hn']
+      · simp only [ringedLocalizationTwoTermX, ite_eq_right hn, ite_eq_right hn']
         let := SheafOfModules.monoidalCategory O
         exact (ObjectProperty.flat_of_isZero (isZero_zero _)).tensorRight
 

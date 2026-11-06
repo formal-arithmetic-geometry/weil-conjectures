@@ -88,7 +88,7 @@ theorem derivedGlobalGerm_exchange
       (Functor.associator L R.rightDerivedFunctorPlus HR).hom ≫
       Functor.whiskerLeft L e.hom ≫ Functor.whiskerLeft L (derivedGlobalGerm f' t)
   have h : δ = ε := by
-    apply Functor.rightDerived_ext HR H.rightDerivedFunctorPlusUnit
+    apply Functor.rightDerived_ext HR H.rightDerivedFunctorPlusUnith
       (HomotopyCategory.Plus.quasiIso _) _ δ ε
     ext M : 2
     have ha := derivedPulledGlobalGerm_fac f f' g g' sq.toCommSq t M

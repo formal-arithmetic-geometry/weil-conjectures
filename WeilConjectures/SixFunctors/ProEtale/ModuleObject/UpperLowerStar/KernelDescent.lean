@@ -137,7 +137,7 @@ lemma comp_upperStar_map_kernelDescentMap_π_eq_zero_iff [∀ k, WeaklyEtale (f 
   have e₁ : v ≫ (f j)^*⟦Λ⟧.map (kernelDescentMap Λ f M π) ≫ (f j)^*⟦Λ⟧.map (Pi.π _ k) =
       v ≫ (f j)^*⟦Λ⟧.map ((upperStarLowerStarAdjunction Λ (f k)).unit.app M ≫
         (f k)_*⟦Λ⟧.map (π k)) := by
-    rw [← Functor.map_comp, kernelDescentMap, Pi.lift_π]
+    rw [← Functor.map_comp, kernelDescentMap, Pi.lift_comp_π]
   have e₂ : (p₁ j k)^*⟦Λ⟧.map (v ≫ π j) ≫ (ψ j k).hom =
       (p₁ j k)^*⟦Λ⟧.map v ≫ (upperStarSquareComparison Λ (hP j k).flip.toCommSq).hom.app M ≫
         (p₂ j k)^*⟦Λ⟧.map (π k) := by

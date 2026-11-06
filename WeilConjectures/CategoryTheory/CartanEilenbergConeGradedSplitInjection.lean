@@ -136,15 +136,15 @@ private theorem cartanEilenberg_cone_retained_lift
     else 0
   have hjL : imageSubobject jL ≤ F.complexStep p m := by
     by_cases hmp : m + 1 = p
-    · simp only [jL, dif_pos hmp]
-      rw [hF, if_pos (by omega : p ≤ m + 1)]
+    · simp only [jL, dite_eq_left hmp]
+      rw [hF, ite_eq_left (by omega : p ≤ m + 1)]
       apply le_trans _ le_sup_left
       simpa only [← Category.assoc] using imageSubobject_comp_le
         ((HomologicalComplex.extendXIso ((CochainComplex.single₀ A).obj (K.X p))
           ComplexShape.embeddingUpNat (i := 0) (i' := m - p + 1)
           (by change (0 : ℤ) = m - p + 1; omega)).hom ≫ (K.XIsoOfEq hmp.symm).hom)
         ((CochainComplex.mappingCone.inl aug).v (m + 1) m (by omega))
-    · simp only [jL, dif_neg hmp, imageSubobject_zero]
+    · simp only [jL, dite_eq_right hmp, imageSubobject_zero]
       exact bot_le
   have hjL' : imageSubobject jL ≤ Subobject.mk ((F.step p).arrow.f m) := by
     have h : imageSubobject jL ≤ imageSubobject ((F.step p).arrow.f m) := hjL
@@ -276,7 +276,7 @@ private theorem cartanEilenberg_cone_retained_projection
         · apply kill
           rw [hs]
           dsimp [s]
-          rw [dif_neg (by omega)]
+          rw [dite_eq_right (by omega)]
         · exact bot_le
       · apply Finset.sup_le
         intro j hj
@@ -286,7 +286,7 @@ private theorem cartanEilenberg_cone_retained_projection
         rw [HomologicalComplex₂.ιTotalOrZero_eq _ _ _ _ _ (by
           change (m - j) + j = m; omega)]
         dsimp [r]
-        rw [HomologicalComplex₂.ι_totalDesc, dif_neg (by
+        rw [HomologicalComplex₂.ι_totalDesc, dite_eq_right (by
           have := (Finset.mem_Icc.mp hj).1
           omega)]
     have hqarrow : Q.arrow ≫ t = 0 := by
@@ -312,7 +312,7 @@ private theorem cartanEilenberg_cone_retained_projection
   · intro hmp
     rw [Category.assoc, hs]
     dsimp [s]
-    rw [dif_pos hmp]
+    rw [dite_eq_left hmp]
     simp [c]
 
 /-- The retained cone summands give a normalized map into the quotient with a left inverse.

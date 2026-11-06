@@ -332,8 +332,7 @@ def torOneBaseChange :
   let g := TensorProduct.liftAddHom f hf
   refine { g with map_smul' := ?_ }
   intro b x
-  induction x using TensorProduct.induction_on with
-  | zero => simp
+  induction x using TensorProduct.inductionOn with
   | tmul t c =>
     change g ((TensorProduct.comm A B (TorOne R M A))
       (b • (TensorProduct.comm A (TorOne R M A) B) (t ⊗ₜ[A] c))) = _

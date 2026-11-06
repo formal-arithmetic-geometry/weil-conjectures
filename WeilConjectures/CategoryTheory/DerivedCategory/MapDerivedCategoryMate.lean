@@ -69,8 +69,8 @@ variable {A B B' E : Type*} [Category A] [Category B] [Category B'] [Category E]
 noncomputable abbrev mapDerivedCategorySquareIso (e : F₁ ⋙ F₂ ≅ G₁ ⋙ G₂) :
     F₁.mapDerivedCategory ⋙ F₂.mapDerivedCategory ≅
       G₁.mapDerivedCategory ⋙ G₂.mapDerivedCategory :=
-  (mapDerivedCategoryCompIso F₁ F₂).symm ≪≫ mapDerivedCategoryNatIso e ≪≫
-    mapDerivedCategoryCompIso G₁ G₂
+  mapDerivedCategoryCompIso F₁ F₂ ≪≫ mapDerivedCategoryNatIso e ≪≫
+    (mapDerivedCategoryCompIso G₁ G₂).symm
 
 /-- On the image `Qh X` of an object of the homotopy category, the isomorphism
 `D(F₁) ⋙ D(F₂) ≅ D(G₁) ⋙ D(G₂)` induced by `e : F₁ ⋙ F₂ ≅ G₁ ⋙ G₂` is the image of the
@@ -89,7 +89,7 @@ lemma mapDerivedCategorySquareIso_hom_app_Qh_obj (e : F₁ ⋙ F₂ ≅ G₁ ⋙
   have hF := mapDerivedCategoryCompIso_fach F₁ F₂ X
   have hG := mapDerivedCategoryCompIso_fach G₁ G₂ X
   have he := mapDerivedCategoryNatIso_fach e X
-  have hG' : (mapDerivedCategoryCompIso G₁ G₂).hom.app (DerivedCategory.Qh.obj X) ≫
+  have hG' : (mapDerivedCategoryCompIso G₁ G₂).inv.app (DerivedCategory.Qh.obj X) ≫
       G₂.mapDerivedCategory.map (G₁.mapDerivedCategoryFactorsh.hom.app X) ≫
       G₂.mapDerivedCategoryFactorsh.hom.app ((G₁.mapHomotopyCategory (.up ℤ)).obj X) =
       (G₁ ⋙ G₂).mapDerivedCategoryFactorsh.hom.app X ≫ DerivedCategory.Qh.map
@@ -99,13 +99,13 @@ lemma mapDerivedCategorySquareIso_hom_app_Qh_obj (e : F₁ ⋙ F₂ ≅ G₁ ⋙
     erw [CategoryTheory.Functor.map_id, Category.comp_id]
   have hF' : F₂.mapDerivedCategoryFactorsh.inv.app ((F₁.mapHomotopyCategory (.up ℤ)).obj X) ≫
       F₂.mapDerivedCategory.map (F₁.mapDerivedCategoryFactorsh.inv.app X) ≫
-      (mapDerivedCategoryCompIso F₁ F₂).inv.app (DerivedCategory.Qh.obj X) =
+      (mapDerivedCategoryCompIso F₁ F₂).hom.app (DerivedCategory.Qh.obj X) =
       DerivedCategory.Qh.map
         ((mapHomotopyCategoryCompIso (Iso.refl (F₁ ⋙ F₂)) (.up ℤ)).hom.app X) ≫
         (F₁ ⋙ F₂).mapDerivedCategoryFactorsh.inv.app X := by
     rw [← cancel_mono ((F₁ ⋙ F₂).mapDerivedCategoryFactorsh.hom.app X)]
     simp only [Category.assoc, Iso.inv_hom_id_app]
-    rw [← hF, Iso.inv_hom_id_app_assoc, ← Functor.map_comp_assoc, Iso.inv_hom_id_app]
+    rw [← hF, Iso.hom_inv_id_app_assoc, ← Functor.map_comp_assoc, Iso.inv_hom_id_app]
     erw [CategoryTheory.Functor.map_id, Category.id_comp, Iso.inv_hom_id_app_assoc]
     exact (Category.comp_id _).symm
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
@@ -125,7 +125,7 @@ variable {A B E : Type*} [Category A] [Category B] [Category E] [Abelian A] [Abe
 /-- The isomorphism `D(F₂) ≅ D(F₁) ⋙ D(G₁)` induced by `e : F₂ ≅ F₁ ⋙ G₁`. -/
 noncomputable abbrev mapDerivedCategoryTriangleIso (e : F₂ ≅ F₁ ⋙ G₁) :
     F₂.mapDerivedCategory ≅ F₁.mapDerivedCategory ⋙ G₁.mapDerivedCategory :=
-  mapDerivedCategoryNatIso e ≪≫ mapDerivedCategoryCompIso F₁ G₁
+  mapDerivedCategoryNatIso e ≪≫ (mapDerivedCategoryCompIso F₁ G₁).symm
 
 /-- On the image `Qh X` of an object of the homotopy category, the isomorphism
 `D(F₂) ≅ D(F₁) ⋙ D(G₁)` induced by `e : F₂ ≅ F₁ ⋙ G₁` is the image of the isomorphism induced
@@ -141,7 +141,7 @@ lemma mapDerivedCategoryTriangleIso_hom_app_Qh_obj (e : F₂ ≅ F₁ ⋙ G₁)
           (mapHomotopyCategoryCompIso (Iso.refl (F₁ ⋙ G₁)) (.up ℤ)).inv.app X) := by
   have hG := mapDerivedCategoryCompIso_fach F₁ G₁ X
   have he := mapDerivedCategoryNatIso_fach e X
-  have hG' : (mapDerivedCategoryCompIso F₁ G₁).hom.app (DerivedCategory.Qh.obj X) ≫
+  have hG' : (mapDerivedCategoryCompIso F₁ G₁).inv.app (DerivedCategory.Qh.obj X) ≫
       G₁.mapDerivedCategory.map (F₁.mapDerivedCategoryFactorsh.hom.app X) ≫
       G₁.mapDerivedCategoryFactorsh.hom.app ((F₁.mapHomotopyCategory (.up ℤ)).obj X) =
       (F₁ ⋙ G₁).mapDerivedCategoryFactorsh.hom.app X ≫ DerivedCategory.Qh.map
@@ -149,7 +149,7 @@ lemma mapDerivedCategoryTriangleIso_hom_app_Qh_obj (e : F₂ ≅ F₁ ⋙ G₁)
     rw [← hG]
     simp only [Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app]
     erw [CategoryTheory.Functor.map_id, Category.comp_id]
-  simp only [Iso.trans_hom, NatTrans.comp_app, Category.assoc]
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
   rw [hG', reassoc_of% he, Iso.inv_hom_id_app_assoc]
   simp only [Functor.map_comp]
 
@@ -219,7 +219,7 @@ lemma mapDerivedCategoryAdjunction_mate_Qh_obj
     ((Functor.mapHomotopyCategoryCompIso (Iso.refl (u ⋙ f₂)) (.up ℤ)).hom.app X ≫
       (NatTrans.mapHomotopyCategory β.hom (.up ℤ)).app X ≫
       (Functor.mapHomotopyCategoryCompIso (Iso.refl (f₁ ⋙ v)) (.up ℤ)).inv.app X)
-  dsimp at h₁ h₄
+  dsimp only [Functor.comp_obj, Functor.comp_map, Functor.id_obj, Functor.id_map] at h₁ h₄
   have h₂' : adj₂.mapDerivedCategoryAdjunction.unit.app
       (DerivedCategory.Qh.obj ((u.mapHomotopyCategory (.up ℤ)).obj X)) =
       DerivedCategory.Qh.map ((adj₂.mapHomotopyCategory (.up ℤ)).unit.app
@@ -275,7 +275,7 @@ lemma mapDerivedCategoryAdjunction_mate_Qh_obj
     (Functor.mapDerivedCategorySquareIso τ).hom.naturality _
   have k₄ := Functor.mapDerivedCategorySquareIso_hom_app_Qh_obj τ
     ((f₁.mapHomotopyCategory (.up ℤ)).obj X)
-  dsimp at k₂
+  dsimp only [Functor.comp_obj, Functor.comp_map] at k₂
   have hR : u.mapDerivedCategoryFactorsh.inv.app X ≫
       u.mapDerivedCategory.map
         (adj₁.mapDerivedCategoryAdjunction.unit.app (DerivedCategory.Qh.obj X)) ≫
@@ -425,7 +425,7 @@ lemma mapDerivedCategoryAdjunction_mate_Qh_obj'
   have h₄ := g₂.mapDerivedCategoryFactorsh.hom.naturality
     ((NatTrans.mapHomotopyCategory β.hom (.up ℤ)).app X ≫
       (Functor.mapHomotopyCategoryCompIso (Iso.refl (f₁ ⋙ v)) (.up ℤ)).inv.app X)
-  dsimp at h₄
+  dsimp only [Functor.comp_obj, Functor.comp_map] at h₄
   have h₂' : adj₂.mapDerivedCategoryAdjunction.unit.app (DerivedCategory.Qh.obj X) =
       DerivedCategory.Qh.map ((adj₂.mapHomotopyCategory (.up ℤ)).unit.app X) ≫
         g₂.mapDerivedCategoryFactorsh.inv.app _ ≫
@@ -611,7 +611,6 @@ lemma mapHomologicalComplexCompIso_refl_hom_app {ι : Type*} (c : ComplexShape �
     (mapHomologicalComplexCompIso (Iso.refl (F ⋙ G)) c).hom.app K = 𝟙 _ := by
   ext n
   simp
-  rfl
 
 variable [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
   [PreservesFiniteLimits F] [PreservesFiniteColimits F]
@@ -621,7 +620,7 @@ variable [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
 `Functor.mapHomologicalComplexCompIso`, an identity, has been cancelled. -/
 @[reassoc]
 lemma mapDerivedCategoryCompIso_hom_app_factors (K : CochainComplex C ℤ) :
-    (mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Q.obj K) ≫
+    (mapDerivedCategoryCompIso F G).inv.app (DerivedCategory.Q.obj K) ≫
       G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app K) ≫
       G.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj K) =
     (F ⋙ G).mapDerivedCategoryFactors.hom.app K := by
@@ -633,7 +632,7 @@ lemma mapDerivedCategoryCompIso_hom_app_factors (K : CochainComplex C ℤ) :
 @[reassoc]
 lemma mapDerivedCategoryCompIso_hom_app_factorsh
     (K : HomotopyCategory C (ComplexShape.up ℤ)) :
-    (mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Qh.obj K) ≫
+    (mapDerivedCategoryCompIso F G).inv.app (DerivedCategory.Qh.obj K) ≫
       G.mapDerivedCategory.map (F.mapDerivedCategoryFactorsh.hom.app K) ≫
       G.mapDerivedCategoryFactorsh.hom.app ((F.mapHomotopyCategory (ComplexShape.up ℤ)).obj K) =
     (F ⋙ G).mapDerivedCategoryFactorsh.hom.app K := by
@@ -672,7 +671,7 @@ variable (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteCo
 
 /-- The left unit law for `Functor.mapDerivedCategoryCompIso`. -/
 lemma mapDerivedCategoryCompIso_id_comp :
-    (mapDerivedCategoryCompIso (𝟭 C) F).hom ≫
+    (mapDerivedCategoryCompIso (𝟭 C) F).inv ≫
         Functor.whiskerRight (mapDerivedCategoryIdIso C).hom F.mapDerivedCategory =
       𝟙 F.mapDerivedCategory := by
   refine Localization.natTrans_ext DerivedCategory.Qh
@@ -685,7 +684,7 @@ lemma mapDerivedCategoryCompIso_id_comp :
 
 /-- The right unit law for `Functor.mapDerivedCategoryCompIso`. -/
 lemma mapDerivedCategoryCompIso_comp_id :
-    (mapDerivedCategoryCompIso F (𝟭 D)).hom ≫
+    (mapDerivedCategoryCompIso F (𝟭 D)).inv ≫
         Functor.whiskerLeft F.mapDerivedCategory (mapDerivedCategoryIdIso D).hom =
       𝟙 F.mapDerivedCategory := by
   refine Localization.natTrans_ext DerivedCategory.Qh
@@ -710,21 +709,21 @@ variable (G : D ⥤ E) (H : E ⥤ E') [G.Additive] [H.Additive]
 /-- The associativity law for `Functor.mapDerivedCategoryCompIso`: the two ways of comparing
 `D(F ⋙ G ⋙ H)` with `D(F) ⋙ D(G) ⋙ D(H)` agree. -/
 lemma mapDerivedCategoryCompIso_assoc :
-    (mapDerivedCategoryCompIso F (G ⋙ H)).hom ≫
-        Functor.whiskerLeft F.mapDerivedCategory (mapDerivedCategoryCompIso G H).hom =
-      (mapDerivedCategoryCompIso (F ⋙ G) H).hom ≫
-        Functor.whiskerRight (mapDerivedCategoryCompIso F G).hom H.mapDerivedCategory := by
+    (mapDerivedCategoryCompIso F (G ⋙ H)).inv ≫
+        Functor.whiskerLeft F.mapDerivedCategory (mapDerivedCategoryCompIso G H).inv =
+      (mapDerivedCategoryCompIso (F ⋙ G) H).inv ≫
+        Functor.whiskerRight (mapDerivedCategoryCompIso F G).inv H.mapDerivedCategory := by
   refine Localization.natTrans_ext DerivedCategory.Q
     (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) (fun K => ?_)
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app]
-  have hnat : (mapDerivedCategoryCompIso G H).hom.app
+  have hnat : (mapDerivedCategoryCompIso G H).inv.app
         (F.mapDerivedCategory.obj (DerivedCategory.Q.obj K)) ≫
       H.mapDerivedCategory.map (G.mapDerivedCategory.map
         (F.mapDerivedCategoryFactors.hom.app K)) =
       (G ⋙ H).mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app K) ≫
-        (mapDerivedCategoryCompIso G H).hom.app
+        (mapDerivedCategoryCompIso G H).inv.app
           (DerivedCategory.Q.obj ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj K)) :=
-    ((mapDerivedCategoryCompIso G H).hom.naturality _).symm
+    ((mapDerivedCategoryCompIso G H).inv.naturality _).symm
   rw [← cancel_mono (H.mapDerivedCategory.map (G.mapDerivedCategory.map
       (F.mapDerivedCategoryFactors.hom.app K)) ≫
     H.mapDerivedCategory.map (G.mapDerivedCategoryFactors.hom.app
@@ -756,8 +755,8 @@ lemma mapDerivedCategoryNatIso_isoWhiskerRight {F F' : C ⥤ D} [F.Additive] [F'
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     [PreservesFiniteLimits F'] [PreservesFiniteColimits F'] (e : F ≅ F') (G : D ⥤ E)
     [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G] :
-    (mapDerivedCategoryNatIso (isoWhiskerRight e G)).hom ≫ (mapDerivedCategoryCompIso F' G).hom =
-      (mapDerivedCategoryCompIso F G).hom ≫
+    (mapDerivedCategoryNatIso (isoWhiskerRight e G)).hom ≫ (mapDerivedCategoryCompIso F' G).inv =
+      (mapDerivedCategoryCompIso F G).inv ≫
         Functor.whiskerRight (mapDerivedCategoryNatIso e).hom G.mapDerivedCategory := by
   refine Localization.natTrans_ext DerivedCategory.Q
     (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) (fun K => ?_)
@@ -775,8 +774,8 @@ lemma mapDerivedCategoryNatIso_isoWhiskerLeft (F : C ⥤ D) [F.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F] {G G' : D ⥤ E} [G.Additive]
     [G'.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     [PreservesFiniteLimits G'] [PreservesFiniteColimits G'] (e : G ≅ G') :
-    (mapDerivedCategoryNatIso (isoWhiskerLeft F e)).hom ≫ (mapDerivedCategoryCompIso F G').hom =
-      (mapDerivedCategoryCompIso F G).hom ≫
+    (mapDerivedCategoryNatIso (isoWhiskerLeft F e)).hom ≫ (mapDerivedCategoryCompIso F G').inv =
+      (mapDerivedCategoryCompIso F G).inv ≫
         Functor.whiskerLeft F.mapDerivedCategory (mapDerivedCategoryNatIso e).hom := by
   refine Localization.natTrans_ext DerivedCategory.Q
     (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) (fun K => ?_)

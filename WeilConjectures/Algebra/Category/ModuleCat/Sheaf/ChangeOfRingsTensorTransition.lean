@@ -161,8 +161,7 @@ theorem changeOfRingsTensorIso_inv_transition {R₁ R₂ R₃ : Sheaf J CommRing
         ((toSheafify J (changeOfRingsPresheaf α M).presheaf).app V p))) =
       (changeOfRingsTensorIso γ M).inv.val.app V ((changeOfRingsTransition α β γ h M).val.app V
         ((toSheafify J (changeOfRingsPresheaf α M).presheaf).app V p))
-    induction p using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction p using TensorProduct.inductionOn with
     | add x y hx hy => simp only [map_add, hx, hy]
     | tmul s m =>
       rw [changeOfRingsTensorIso_inv_tmul, changeOfRingsTransition_tmul,
@@ -196,8 +195,7 @@ theorem changeOfRingsTensorIso_inv_naturality (φ : R ⟶ S)
         ((toSheafify J (changeOfRingsPresheaf φ M).presheaf).app V p))) =
       (changeOfRingsTensorIso φ N).inv.val.app V ((changeOfRingsHom φ M a).val.app V
         ((toSheafify J (changeOfRingsPresheaf φ M).presheaf).app V p))
-    induction p using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction p using TensorProduct.inductionOn with
     | add x y hx hy => simp only [map_add, hx, hy]
     | tmul s m =>
       rw [changeOfRingsTensorIso_inv_tmul, changeOfRingsHom_toSheafify]

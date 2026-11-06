@@ -166,7 +166,7 @@ theorem artinian_lifting_smooth_on_open_reverse
       change algebraMap C₀ A s' ∉ q
       exact hs' ▸ s.2
     refine ⟨IsLocalization.mk' C a' ⟨s', hs'Q⟩, ?_⟩
-    rw [Localization.AtPrime.IsLiesOverAlgebra.algebraMap_eq, Localization.localRingHom_mk']
+    rw [Localization.AtPrime.algebraMap_eq, Localization.localRingHom_mk']
     congr 1
     exact Subtype.ext hs'
   let P : Algebra.Extension R S :=

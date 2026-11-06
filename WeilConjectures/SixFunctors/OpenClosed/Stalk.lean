@@ -68,7 +68,7 @@ noncomputable def Etale.lowerStarCompPresheafFiberIso :
       (pointSmallEtale s).presheafFiber :=
   have := Scheme.initial_pointSmallEtaleElementsBaseChange i s
   Functor.isoWhiskerLeft
-    ((Functor.whiskeringLeft _ _ A).obj (CategoryOfElements.π (pointSmallEtale s).fiber).op)
+    ((Functor.whiskeringLeft _ _ A).obj (Functor.Elements.π (pointSmallEtale s).fiber).op)
     (Functor.Final.colimIso (pointSmallEtaleElementsBaseChange i s).op)
 
 omit [HasSmallSiteSheafify A] in
@@ -95,7 +95,8 @@ lemma Etale.toPresheafFiber_lowerStarCompPresheafFiberIso_hom_app (P : Z.Etale�
         ((pointSmallEtaleFiberEtaleIso i s).inv.app V y) P :=
   have := Scheme.initial_pointSmallEtaleElementsBaseChange i s
   Functor.Final.ι_colimitIso_hom (pointSmallEtaleElementsBaseChange i s).op
-    ((CategoryOfElements.π (pointSmallEtale s).fiber).op ⋙ P) (op ⟨V, y⟩)
+    ((Functor.Elements.π (pointSmallEtale s).fiber).op ⋙ P)
+    (op (Functor.elementsMk _ V y))
 
 /-- Blueprint `lemma-openclosed-stalk-lowerstar`: **The stalk of a pushforward along a closed
 immersion.** For a closed immersion

@@ -102,7 +102,11 @@ theorem picardPresheafDegree_map [IsProper f] [LocallyOfFinitePresentation f] {T
       picardPresheafDegree f L (g.left t) := by
   have := Modules.isGrothendieckAbelian (pullback f T.hom)
   have := Pic.isInvertible (Y := pullback f T.hom) L
-  have : (SheafOfModules.unit (pullback f T.hom).ringCatSheaf).IsFinitePresentation :=
+  have : SheafOfModules.IsInvertible.{u, u, u}
+      (SheafOfModules.unit (pullback f T.hom).ringCatSheaf) :=
+    SheafOfModules.instIsInvertibleUnit.{u, u, u}
+  have : SheafOfModules.IsFinitePresentation.{u, u, u}
+      (SheafOfModules.unit (pullback f T.hom).ringCatSheaf) :=
     SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
   have hsq := isPullback_baseChangeMap f g
   simp only [picardPresheafDegree]
@@ -125,7 +129,11 @@ theorem picardPresheafDegree_pic_map_of_isPullback [IsProper f] [LocallyOfFinite
     picardPresheafDegree f' (Pic.map e L) t = picardPresheafDegree f L (φ t) := by
   have := Modules.isGrothendieckAbelian (pullback f T.hom)
   have := Pic.isInvertible (Y := pullback f T.hom) L
-  have : (SheafOfModules.unit (pullback f T.hom).ringCatSheaf).IsFinitePresentation :=
+  have : SheafOfModules.IsInvertible.{u, u, u}
+      (SheafOfModules.unit (pullback f T.hom).ringCatSheaf) :=
+    SheafOfModules.instIsInvertibleUnit.{u, u, u}
+  have : SheafOfModules.IsFinitePresentation.{u, u, u}
+      (SheafOfModules.unit (pullback f T.hom).ringCatSheaf) :=
     SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
   simp only [picardPresheafDegree]
   rw [← Modules.eulerCharFiber_pullback_of_isPullback _ _ _ _ _ sq,
@@ -145,7 +153,11 @@ theorem isLocallyConstant_picardPresheafDegree [IsProper f] [LocallyOfFinitePres
     IsLocallyConstant (picardPresheafDegree f L) := by
   have := Modules.isGrothendieckAbelian (pullback f T.hom)
   have := Pic.isInvertible (Y := pullback f T.hom) L
-  have : (SheafOfModules.unit (pullback f T.hom).ringCatSheaf).IsFinitePresentation :=
+  have : SheafOfModules.IsInvertible.{u, u, u}
+      (SheafOfModules.unit (pullback f T.hom).ringCatSheaf) :=
+    SheafOfModules.instIsInvertibleUnit.{u, u, u}
+  have : SheafOfModules.IsFinitePresentation.{u, u, u}
+      (SheafOfModules.unit (pullback f T.hom).ringCatSheaf) :=
     SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
   exact (Modules.isLocallyConstant_eulerCharFiber _ _
     (Modules.isFlatOver_of_isInvertible _ _)).sub
@@ -324,7 +336,9 @@ theorem Scheme.Modules.degree_pullback_of_isPullback {C C' : Scheme.{u}} {K K' :
   have := Modules.IsInvertible.sheafOfModules_isInvertible L
   have : L.IsFinitePresentation :=
     SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
-  have : (SheafOfModules.unit C.ringCatSheaf).IsFinitePresentation :=
+  have : SheafOfModules.IsInvertible.{u, u, u} (SheafOfModules.unit C.ringCatSheaf) :=
+    SheafOfModules.instIsInvertibleUnit.{u, u, u}
+  have : SheafOfModules.IsFinitePresentation.{u, u, u} (SheafOfModules.unit C.ringCatSheaf) :=
     SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
   have := SheafOfModules.isQuasicoherent_unit (R := C.ringCatSheaf)
   have := SheafOfModules.isQuasicoherent_unit (R := C'.ringCatSheaf)

@@ -81,9 +81,9 @@ theorem popescu_partial_chart_polynomial (R : Type a) (Cbar : Type c)
     change ren.symm (ren _) ∈ J
     rw [ren.symm_apply_apply]
     by_cases hl : l ∈ d.E k
-    · simp only [if_pos hl]
+    · simp only [ite_eq_left hl]
       exact Ideal.subset_span ⟨.inl l, rfl⟩
-    · simp only [if_neg hl]
+    · simp only [ite_eq_right hl]
       exact Ideal.subset_span ⟨.inr l, rfl⟩
   let ψ : MvPolynomial (Fin (d.n + d.m)) R →ₐ[R] Dk :=
     (ULift.algEquiv (R := R)).symm.toAlgHom.comp
@@ -130,7 +130,7 @@ theorem popescu_partial_chart_polynomial (R : Type a) (Cbar : Type c)
     rw [hq, map_zero, map_zero]
   have hselected (l : Fin d.m) (hl : l ∈ d.E k) : ex (d.f l) = 0 := by
     have hh := hpartial l
-    rw [if_pos hl, hu l] at hh
+    rw [ite_eq_left hl, hu l] at hh
     exact hh
   have ha : IsUnit (ex (d.a k)) := by
     exact IsLocalization.Away.algebraMap_isUnit (S := L) t
@@ -159,7 +159,7 @@ theorem popescu_partial_chart_polynomial (R : Type a) (Cbar : Type c)
           simp [PopescuLiftPresentation.equation, hd.normalized_g k l hl,
             hd.normalized_h k l hl, apply_ite, hl]
         rw [hz, map_zero]
-      · simpa only [if_neg hl] using hpartial l
+      · simpa only [ite_eq_right hl] using hpartial l
   let f : A →ₐ[B] B ⊗[R] Dk := Algebra.TensorProduct.map (AlgHom.id B B) φ
   have hf : Function.Surjective f :=
     Algebra.TensorProduct.map_surjective (AlgHom.id B B) φ Function.surjective_id hφ

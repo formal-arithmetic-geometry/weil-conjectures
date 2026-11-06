@@ -108,7 +108,7 @@ theorem proEtaleFiniteConstantComparison_isIso (U : Scheme.{u}) (E : Type u) [Fi
     · subst b
       exact (ProEt.topology U).superset_covering (fun _ _ _ => rfl)
         ((ProEt.topology U).top_mem _)
-    · have hne : a.down ≠ b.down := fun h' => h (ULift.ext a b h')
+    · have hne : a.down ≠ b.down := fun h' => h (ULift.ext h')
       have heq : W.unop.hom ≫ Sigma.ι (fun _ : E => U) a.down =
           W.unop.hom ≫ Sigma.ι (fun _ : E => U) b.down :=
         congrArg (fun t => t.down.left) hab

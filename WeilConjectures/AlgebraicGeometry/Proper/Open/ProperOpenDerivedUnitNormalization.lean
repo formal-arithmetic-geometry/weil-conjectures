@@ -165,7 +165,7 @@ private theorem localized_triangle
       R.rightDerivedFunctorPlus.map (J₁.mapDerivedCategoryPlusFactorsh.hom.app K) =
         J₂.mapDerivedCategoryPlusFactorsh.hom.app K ≫
           DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus g).app K) ≫
-          R.rightDerivedFunctorPlusUnit.app (J₁.mapHomotopyCategoryPlus.obj K))
+          R.rightDerivedFunctorPlusUnith.app (J₁.mapHomotopyCategoryPlus.obj K))
     (hs : ∀ K, s.app (DerivedCategory.Plus.Qh.obj K) ≫
       U₁.mapDerivedCategoryPlus.map (L.mapDerivedCategoryPlusFactorsh.hom.app K) ≫
       U₁.mapDerivedCategoryPlusFactorsh.hom.app (L.mapHomotopyCategoryPlus.obj K) =
@@ -206,7 +206,7 @@ private theorem localized_triangle
     rw [← reassoc_of% sn, ← Functor.map_comp_assoc, hd]
     simp only [Functor.map_comp, Category.assoc]
     have su := s.naturality
-      (R.rightDerivedFunctorPlusUnit.app (J₁.mapHomotopyCategoryPlus.obj N))
+      (R.rightDerivedFunctorPlusUnith.app (J₁.mapHomotopyCategoryPlus.obj N))
     simp only [Functor.comp_obj, Functor.comp_map] at su
     rw [reassoc_of% su, ← U₁.mapDerivedCategoryPlus.map_comp_assoc,
       a.derivedPlus_counit_app_fac]
@@ -237,7 +237,7 @@ private theorem normalized_lift_fac
     (hi : ∀ N : HomotopyCategory.Plus C,
       i.inv.app (DerivedCategory.Plus.Qh.obj N) =
         DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus e.inv).app N) ≫
-          G.rightDerivedFunctorPlusUnit.app N)
+          G.rightDerivedFunctorPlusUnith.app N)
     (δ : G ⋙ J₂ ⟶ J₁ ⋙ R) (N : HomotopyCategory.Plus C) :
     (J₂.mapDerivedCategoryPlus.map (i.inv.app (DerivedCategory.Plus.Qh.obj N)) ≫
       (Functor.rightDerivedFunctorPlusBaseChange δ).app (DerivedCategory.Plus.Qh.obj N)) ≫
@@ -245,7 +245,7 @@ private theorem normalized_lift_fac
     J₂.mapDerivedCategoryPlusFactorsh.hom.app N ≫
       DerivedCategory.Plus.Qh.map
         ((NatTrans.mapHomotopyCategoryPlus (Functor.whiskerRight e.inv J₂ ≫ δ)).app N) ≫
-      R.rightDerivedFunctorPlusUnit.app (J₁.mapHomotopyCategoryPlus.obj N) := by
+      R.rightDerivedFunctorPlusUnith.app (J₁.mapHomotopyCategoryPlus.obj N) := by
   rw [Category.assoc, hi, Functor.map_comp]
   simp only [Category.assoc]
   rw [Functor.rightDerivedFunctorPlusBaseChange_fac_app_assoc,
@@ -399,7 +399,7 @@ private theorem coefficient_unit_normalization
         R.rightDerivedFunctorPlus.map (J₁.mapDerivedCategoryPlusFactorsh.hom.app N) =
       J₂.mapDerivedCategoryPlusFactorsh.hom.app N ≫
         DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus g).app N) ≫
-        R.rightDerivedFunctorPlusUnit.app (J₁.mapHomotopyCategoryPlus.obj N) := by
+        R.rightDerivedFunctorPlusUnith.app (J₁.mapHomotopyCategoryPlus.obj N) := by
     exact normalized_lift_fac (lowerStar A (𝟙 X)) J₁ J₂ R (lowerStarId A X)
       (lowerStarIdDerivedPlus A X) (lowerStarIdDerivedPlus_inv_app A X) δ N
   apply localized_triangle J₁ U₁ J₂ U₂ L R a a₁.unit a₂.unit

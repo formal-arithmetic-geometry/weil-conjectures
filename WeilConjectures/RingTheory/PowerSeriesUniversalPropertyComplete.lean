@@ -127,7 +127,7 @@ theorem exists_ringHom_of_isAdicComplete
     rw [hΦ]
     have hX : truncTotal m (X i : MvPowerSeries (Fin n) Λ) =
         if 1 < m then MvPolynomial.X i else 0 := by
-      by_cases hm : 1 < m <;> simp only [hm, if_true, if_false]
+      by_cases hm : 1 < m <;> simp only [hm, ite_true, ite_false]
       · ext d
         by_cases hd : d = Finsupp.single i 1
         · subst d

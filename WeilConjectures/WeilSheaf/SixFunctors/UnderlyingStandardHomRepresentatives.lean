@@ -86,7 +86,7 @@ private lemma tensorComponent_π (M N : Mod C R) :
   have h := congrArg Mod.Hom.hom
     (show colimit.ι ((Mod.tensorLeftDiagram R N).flip.obj M) WalkingParallelPair.one ≫
         (tensorComponent M N).hom = relativeTensorπ M N by
-      simp [tensorComponent, HasColimit.isoOfNatIso_ι_hom_assoc, relativeTensorCofork])
+      simp [tensorComponent, HasColimit.ι_isoOfNatIso_hom_assoc, relativeTensorCofork])
   exact h
 
 private noncomputable def tensorIso (N : Mod C R) :

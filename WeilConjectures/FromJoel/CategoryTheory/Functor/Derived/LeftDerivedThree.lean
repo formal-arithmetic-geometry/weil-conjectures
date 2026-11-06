@@ -91,11 +91,11 @@ noncomputable def leftDerivedCounit₃ :
 set_option backward.isDefEq.respectTransparency false in
 instance : (leftDerived₃ F L₁ L₂ L₃ W₁ W₂ W₃).IsLeftDerivedFunctor₃
     (leftDerivedCounit₃ F L₁ L₂ L₃ W₁ W₂ W₃) W₁ W₂ W₃ := by
-  refine (isLeftDerivedFunctor_iff_of_iso _ _
-    ((uncurry₃.obj F).totalLeftDerivedCounit (L₁.prod (L₂.prod L₃)) (W₁.prod (W₂.prod W₃))) _ _
-    (currying₃.counitIso.symm.app
+  refine (isLeftDerivedFunctor_iff_of_iso _
+    ((uncurry₃.obj F).totalLeftDerivedCounit (L₁.prod (L₂.prod L₃)) (W₁.prod (W₂.prod W₃))) _
+    (currying₃.counitIso.app
       (((uncurry₃.obj F).totalLeftDerived
-      (L₁.prod (L₂.prod L₃)) (W₁.prod (W₂.prod W₃))))) ?_).1 inferInstance
+      (L₁.prod (L₂.prod L₃)) (W₁.prod (W₂.prod W₃))))) ?_).2 inferInstance
   ext
   simp [leftDerivedCounit₃]
 

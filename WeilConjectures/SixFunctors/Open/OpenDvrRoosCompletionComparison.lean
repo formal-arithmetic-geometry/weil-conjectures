@@ -283,8 +283,8 @@ private theorem dvrRoosRepresentativeComparison
     have hprod : (a ≫ limIso.hom.app B) ≫ z = v ≫ m := by
       apply Pi.hom_ext
       intro n
-      simp only [z, v, m, Category.assoc, Pi.map_π, Pi.lift_π,
-        Pi.lift_π_assoc, IntegralOnSlice.productAugmentation]
+      simp only [z, v, m, Category.assoc, Pi.map_π, Pi.lift_comp_π,
+        Pi.lift_comp_π_assoc, IntegralOnSlice.productAugmentation]
       apply (cancel_mono (e.hom.app (op n))).1
       simpa only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id] using haug n
     unfold integralOperationsRoosMap

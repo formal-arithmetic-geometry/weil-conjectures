@@ -55,7 +55,7 @@ lemma natCast_zsmul_id_continuousMapRingObj_eq_zero {T : Type} [TopologicalSpace
     ((sheafToPresheaf (coherentTopology Profinite.{u}) Ab.{u + 1} ⋙
       (evaluation _ _).obj S).map_zsmul (f := 𝟙 _) (r := ((m : ℕ) : ℤ))).trans (by simp)
   rw [h]
-  refine ULift.ext _ _ (ContinuousMap.ext fun s ↦ ?_)
+  refine ULift.ext (ContinuousMap.ext fun s ↦ ?_)
   simp [hd, nsmul_eq_mul, hm]
 
 /-- `ℓⁿ = 0` in the condensed ring `(𝒪_E ⧸ ℓⁿ)̲`. -/

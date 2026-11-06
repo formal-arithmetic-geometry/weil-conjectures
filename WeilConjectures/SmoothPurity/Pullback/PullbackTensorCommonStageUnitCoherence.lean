@@ -161,10 +161,7 @@ private theorem left_rational_naturality {M N : sfRationalConstructibleCategory 
     (pullbackTensorRationalLeftUnitor l E X N)
     (by unfold pullbackTensorRationalLeftUnitor; rfl)
   change T.map (Prod.mkHom (𝟙 U) f) ≫ _ = _
-  induction f using TensorProduct.induction_on with
-  | zero =>
-    rw [hb]
-    simp
+  induction f using TensorProduct.inductionOn with
   | tmul c f =>
     have hm : HEq (T.map (Prod.mkHom
         (𝟙 U) (c ⊗ₜ[Padic.coefficientExtensionIntegers l E] f)))

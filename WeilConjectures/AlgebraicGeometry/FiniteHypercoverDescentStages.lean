@@ -895,7 +895,7 @@ private theorem finite_cofan_stage
       calc
         _ = B.map (ι r a.as) := hp.fac _ a
         _ = B.map (Sigma.ι (V r) a.as) ≫ B.map (q r) :=
-          (congrArg B.map (Sigma.ι_desc (ι r) a.as)).symm.trans
+          (congrArg B.map (Sigma.ι_comp_desc (ι r) a.as)).symm.trans
             (B.map_comp (Sigma.ι (V r) a.as) (q r))
     have hiso : IsIso (B.map (q r)) := by
       rw [← hdesc]
@@ -917,7 +917,7 @@ private theorem finite_cofan_stage
     calc
       _ = B.map (ι r a.as) := hp.fac _ a
       _ = B.map (Sigma.ι (V r) a.as) ≫ B.map (q r) :=
-        (congrArg B.map (Sigma.ι_desc (ι r) a.as)).symm.trans
+        (congrArg B.map (Sigma.ι_comp_desc (ι r) a.as)).symm.trans
           (B.map_comp (Sigma.ι (V r) a.as) (q r))
   rw [hdesc]
   infer_instance

@@ -107,7 +107,7 @@ private theorem baseChange_fac (e : G ⋙ Q ⟶ P ⋙ H) (K : HomotopyCategory.P
     Functor.associator_hom_app, Category.comp_id] at hg hh he
   have hgi : G.rightDerivedFunctorPlusIsoMapDerivedCategoryPlus.inv.app
         (DerivedCategory.Plus.Qh.obj K) =
-      G.mapDerivedCategoryPlusFactorsh.hom.app K ≫ G.rightDerivedFunctorPlusUnit.app K := by
+      G.mapDerivedCategoryPlusFactorsh.hom.app K ≫ G.rightDerivedFunctorPlusUnith.app K := by
     rw [← cancel_mono (G.rightDerivedFunctorPlusIsoMapDerivedCategoryPlus.hom.app _)]
     simp only [Category.assoc, hg, Iso.inv_hom_id_app, Iso.hom_inv_id_app]
     rfl

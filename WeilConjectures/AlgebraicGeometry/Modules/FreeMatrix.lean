@@ -93,7 +93,7 @@ lemma freeMatrix_id {I : Type u} [DecidableEq I] :
   rw [freeMatrix_apply, Category.id_comp, ιFree_freeπ, Matrix.one_apply]
   by_cases h : i = j
   · subst h
-    rw [if_pos rfl, if_pos rfl]
+    rw [ite_eq_left rfl, ite_eq_left rfl]
     exact unitValue_id
   · simp [h, Ne.symm h]
 
@@ -136,15 +136,15 @@ lemma freeMatrix_freeHomOfMatrix {I J : Type u} [Fintype I] [DecidableEq I] [Fin
   rw [freeMatrix_apply, freeHomOfMatrix]
   simp_rw [Preadditive.sum_comp, Preadditive.comp_sum, Category.assoc]
   rw [unitValue_sum, Finset.sum_eq_single i, unitValue_sum, Finset.sum_eq_single j]
-  · rw [ιFree_freeπ_assoc, if_pos rfl, Category.id_comp, ιFree_freeπ, if_pos rfl,
+  · rw [ιFree_freeπ_assoc, ite_eq_left rfl, Category.id_comp, ιFree_freeπ, ite_eq_left rfl,
       Category.comp_id, unitValue_smulHom]
   · intro j' _ hj
-    rw [ιFree_freeπ, if_neg hj, comp_zero, comp_zero, comp_zero, unitValue_zero]
+    rw [ιFree_freeπ, ite_eq_right hj, comp_zero, comp_zero, comp_zero, unitValue_zero]
   · simp
   · intro i' _ hi
     rw [unitValue_sum]
     refine Finset.sum_eq_zero fun j' _ ↦ ?_
-    rw [ιFree_freeπ_assoc, if_neg (Ne.symm hi), zero_comp, unitValue_zero]
+    rw [ιFree_freeπ_assoc, ite_eq_right (Ne.symm hi), zero_comp, unitValue_zero]
   · simp
 
 /-- Every morphism of free modules of finite rank is the morphism of its matrix. -/

@@ -85,8 +85,7 @@ theorem exists_semilinearTensorComplexIso
     (fun n => (et n).toAddEquiv.toAddCommGrpIso) (by
       intro i j hij
       ext x
-      induction x using TensorProduct.induction_on with
-      | zero => simp
+      induction x using TensorProduct.inductionOn with
       | tmul c q =>
         change eC c ⊗ₜ[A₁,f₁] (K₁.d i j (show K₁.X i from α.hom.f i q)) =
             eC c ⊗ₜ[A₁,f₁] (show K₁.X j from α.hom.f j (K₀.d i j q))

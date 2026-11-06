@@ -139,7 +139,7 @@ theorem derivedCategory_towerLimit_triangle
   have hE (n : ℕ) : E.hom ≫ Pi.π K₀ n = DerivedCategory.Q.map (P.proj n) :=
     hQFan.conePointUniqueUpToIso_hom_comp (productIsProduct K₀) ⟨n⟩
   have hπ (n : ℕ) : p ≫ Pi.π K₀ n = DerivedCategory.Q.map (c.π.app (Opposite.op n)) :=
-    Pi.lift_π _ _
+    Pi.lift_comp_π _ _
   have hi : DerivedCategory.Q.map iota ≫ E.hom = p := by
     apply Pi.hom_ext
     intro n
@@ -150,7 +150,7 @@ theorem derivedCategory_towerLimit_triangle
     intro n
     simp only [Category.assoc, hE, ← Functor.map_comp, ht, Functor.map_sub]
     simp only [towerTransitionEndomorphism, towerProductShift, Preadditive.sub_comp,
-      Category.id_comp, Preadditive.comp_sub, Pi.lift_π, hE, f₀]
+      Category.id_comp, Preadditive.comp_sub, Pi.lift_comp_π, hE, f₀]
     rw [Functor.map_comp, ← Category.assoc, hE]
   refine ⟨E.inv ≫ δ, ?_⟩
   exact (Pretriangulated.distinguished_iff_of_iso

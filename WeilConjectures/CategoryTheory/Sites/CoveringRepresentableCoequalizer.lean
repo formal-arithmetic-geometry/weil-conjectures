@@ -64,7 +64,7 @@ private theorem exists_coveringRepresentable_epi
   intro G f g hfg
   have heq (j : I) : a j ≫ f = a j ≫ g := by
     have hh := congrArg (fun k ↦ Sigma.ι F j ≫ k) hfg
-    simpa only [q, ← Category.assoc, Sigma.ι_desc] using hh
+    simpa only [q, ← Category.assoc, Sigma.ι_comp_desc] using hh
   have hsections (W : E) (t : H.obj.obj (Opposite.op W.val)) :
       f.hom.app (Opposite.op W.val) t = g.hom.app (Opposite.op W.val) t := by
     have hh := congrArg

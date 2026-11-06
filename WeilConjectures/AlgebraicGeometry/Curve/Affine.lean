@@ -381,7 +381,7 @@ theorem exists_addEquiv_pic_quotient (f : C ⟶ Spec (.of k)) [IsConnectedCurve 
   have hext (D : C.Divisor) : Scheme.Divisor.comap c.i (ext D) = D := by
     ext P
     rw [Scheme.Divisor.comap_apply]
-    exact Finsupp.mapDomain_apply c.i.closedPointsMap_injective D P
+    exact Finsupp.mapDomain_apply_of_injective c.i.closedPointsMap_injective D P
   have hΘext (D : c.Z.Divisor) : Θ (ext (Scheme.Divisor.comap c.i D)) = Θ D := by
     rw [← sub_eq_zero, ← map_sub]
     exact hΘS _ (by rw [map_sub, hext, sub_self])

@@ -48,14 +48,15 @@ private theorem coefficientIso_naturality₁ {R A : Type u} [CommRing R] [CommRi
   let := Module.compHom N f
   let : IsScalarTower R A N := SMul.comp.isScalarTower f
   ext x
-  induction x using TensorProduct.induction_on with
-  | zero => simp
-  | add x y hx hy => simp_all
-  | tmul n t =>
-    induction t using TensorProduct.induction_on with
-    | zero => simp
-    | add x y hx hy => simp_all [TensorProduct.tmul_add]
-    | tmul b e => rfl
+  refine TensorProduct.inductionOn x ?_ ?_
+  · intro n t
+    refine TensorProduct.inductionOn t ?_ ?_
+    · intro b e
+      rfl
+    · intro x y hx hy
+      simp_all [TensorProduct.tmul_add]
+  · intro x y hx hy
+    simp_all
 
 private theorem coefficientIso_naturality₂ {R A : Type u} [CommRing R] [CommRing A]
     (f : R →+* A) (E : ModuleCat.{u} R) {N N' : ModuleCat.{u} A} (a : N ⟶ N') :
@@ -68,16 +69,17 @@ private theorem coefficientIso_naturality₂ {R A : Type u} [CommRing R] [CommRi
   let : IsScalarTower R A N := SMul.comp.isScalarTower f
   let : IsScalarTower R A N' := SMul.comp.isScalarTower f
   ext x
-  induction x using TensorProduct.induction_on with
-  | zero => simp
-  | add x y hx hy => simp_all
-  | tmul n t =>
-    induction t using TensorProduct.induction_on with
-    | zero => simp
-    | add x y hx hy => simp_all [TensorProduct.tmul_add]
-    | tmul b e => 
+  refine TensorProduct.inductionOn x ?_ ?_
+  · intro n t
+    refine TensorProduct.inductionOn t ?_ ?_
+    · intro b e
+      change A at b
       change e ⊗ₜ[R] (b • a n) = e ⊗ₜ[R] a (b • n)
       rw [map_smul]
+    · intro x y hx hy
+      simp_all [TensorProduct.tmul_add]
+  · intro x y hx hy
+    simp_all
 
 private noncomputable def bicomplexIso {R A : Type u} [CommRing R] [CommRing A]
     (f : R →+* A) (E : CochainComplex (ModuleCat.{u} R) ℤ)

@@ -373,7 +373,7 @@ private theorem kernel_forward
     (siteTensorPresheaf Q M.val).map g.op 0 at hg
   rw [map_zero] at hg
   change (quotientMap q g.op (1 : R.obj.obj U ⧸ K q U)) ⊗ₜ[R.obj.obj (op V)]
-    M.val.map g.op x = 0 at hg
+    M.val.restrictₛₗ g.op x = 0 at hg
   have h1 : quotientMap q g.op (1 : R.obj.obj U ⧸ K q U) =
       (1 : R.obj.obj (op V) ⧸ K q (op V)) := by
     change Submodule.Quotient.mk (R.obj.map g.op 1) = Submodule.Quotient.mk 1
@@ -382,7 +382,7 @@ private theorem kernel_forward
   have hquot := congrArg
     (TensorProduct.quotTensorEquivQuotSMul (M.val.obj (op V)) (K q (op V))) hg
   rw [TensorProduct.quotTensorEquivQuotSMul_mk_one_tmul, map_zero] at hquot
-  have hmem : M.val.map g.op x ∈ K q (op V) • (⊤ : Submodule _ (M.val.obj (op V))) :=
+  have hmem : M.val.restrictₛₗ g.op x ∈ K q (op V) • (⊤ : Submodule _ (M.val.obj (op V))) :=
     (Submodule.Quotient.mk_eq_zero _).mp hquot
   have hle : K q (op V) • (⊤ : Submodule _ (M.val.obj (op V))) ≤
       Submodule.span (R.obj.obj (op V))
@@ -403,13 +403,7 @@ private theorem quotientPresheafUnit_locallySurjective
   let η := commonQuotientPresheafUnit q M
   constructor
   intro U t
-  induction t using TensorProduct.induction_on with
-  | zero =>
-    apply J.superset_covering (S := ⊤) ?_ (J.top_mem U)
-    intro V f _
-    refine ⟨0, ?_⟩
-    change (η.app _).hom 0 = (changeOfRingsPresheaf q M).map f.op 0
-    rw [map_zero, map_zero]
+  induction t using TensorProduct.inductionOn with
   | tmul r m =>
     apply J.superset_covering ?_ (Presheaf.imageSieve_mem J q.hom r)
     rintro V f ⟨r', hr'⟩
@@ -419,7 +413,7 @@ private theorem quotientPresheafUnit_locallySurjective
     rw [(η.app _).hom.map_smul]
     rw [show changeOfRingsMap q M f.op
         (r ⊗ₜ[R.obj.obj _, (q.hom.app _).hom] m) =
-        S.obj.map f.op r ⊗ₜ[R.obj.obj _, (q.hom.app _).hom] M.val.map f.op m from
+        S.obj.map f.op r ⊗ₜ[R.obj.obj _, (q.hom.app _).hom] M.val.restrictₛₗ f.op m from
       Classical.choose_spec (exists_changeOfRingsMap q M f.op) r m]
     change (q.hom.app (op V) r') •
       ((1 : S.obj.obj (op V)) ⊗ₜ[R.obj.obj (op V), (q.hom.app (op V)).hom]
@@ -643,8 +637,7 @@ private noncomputable def tensorRingEmbedding
         (pushout φ.hom (φ ≫ b).hom).map f ((ringTensorIso φ (φ ≫ b) U).hom z)
     let := (φ.hom.app U).hom.toAlgebra
     let := ((φ ≫ b).hom.app U).hom.toAlgebra
-    induction z using TensorProduct.induction_on with
-    | zero => rw [map_zero, map_zero, map_zero, map_zero]
+    induction z using TensorProduct.inductionOn with
     | add x y hx hy =>
       change (ringTensorIso φ (φ ≫ b) V).hom
         ((changeOfRingsPresheaf φ _).map f (x + y)) =
@@ -685,9 +678,7 @@ private theorem multiplicationRaw_locallyInjective
       (multiplicationRaw φ b).app U z
     let := (φ.hom.app U).hom.toAlgebra
     let := ((φ ≫ b).hom.app U).hom.toAlgebra
-    induction z using TensorProduct.induction_on with
-    | zero => change μ.app U ((ringTensorIso φ (φ ≫ b) U).hom 0) =
-        (multiplicationRaw φ b).app U 0; rw [map_zero, map_zero, map_zero]
+    induction z using TensorProduct.inductionOn with
     | add x y hx hy =>
       change μ.app U ((ringTensorIso φ (φ ≫ b) U).hom (x + y)) =
         (multiplicationRaw φ b).app U (x + y)

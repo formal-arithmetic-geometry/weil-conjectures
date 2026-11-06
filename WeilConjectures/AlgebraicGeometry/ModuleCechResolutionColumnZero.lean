@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.ModuleCechComparison
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 
 @[expose] public section
 
@@ -34,14 +35,14 @@ private theorem pi_kernel {C : Type*} [Category C] [HasZeroMorphisms C]
   · intro W k hk
     apply Pi.hom_ext
     intro j
-    simp only [Category.assoc, Limits.Pi.map_π, Pi.lift_π_assoc]
+    simp only [Category.assoc, Limits.Pi.map_π, Pi.lift_comp_π_assoc]
     exact (H j).fac _ WalkingParallelPair.zero
   · intro W k hk m hm
     apply Pi.hom_ext
     intro j
     apply Fork.IsLimit.hom_ext (H j)
     have := congrArg (fun q ↦ q ≫ Pi.π B j) hm
-    simp only [Pi.lift_π]
+    simp only [Pi.lift_comp_π]
     rw [Fork.IsLimit.lift_ι]
     simpa only [Category.assoc, Limits.Pi.map_π, KernelFork.ι_ofι]
       using this

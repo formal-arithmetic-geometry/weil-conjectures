@@ -393,7 +393,7 @@ theorem exists_finitePresentation_chain_stage
   have hνw : ν ≫ w₂ none = Sigma.desc (fun k ↦ w₂ (some (.inl k))) := by
     apply Sigma.hom_ext
     intro k
-    simp only [ν, Sigma.ι_desc_assoc, Sigma.ι_desc]
+    simp only [ν, Sigma.ι_comp_desc_assoc, Sigma.ι_comp_desc]
     exact hgw (.inr (.inr k))
   have hw₂fp : ∀ k, LocallyOfFinitePresentation (w₂ k) := by
     intro k
@@ -445,7 +445,7 @@ theorem exists_finitePresentation_chain_stage
       Limits.Sigma.map hA₂ ≫ ν := by
     apply Sigma.hom_ext
     intro k
-    simp only [ν, Sigma.ι_map_assoc, Sigma.ι_desc]
+    simp only [ν, Sigma.ι_map_assoc, Sigma.ι_comp_desc]
     exact (hg (.inr (.inr k))).symm
   have hjlim (k : κ) : IsOpenImmersion
       ((Over.pullback (c.π.app i₂)).map (FJ k)).left := by
@@ -593,8 +593,7 @@ theorem exists_finitePresentation_chain_stage
     exact pullback.condition.symm
   let q₃ : (∐ Y₃) ⟶ D.obj (op l) := Sigma.desc (fun k ↦ w₃ (some (.inl k)))
   have Hσ₃ : IsPullback
-      (Limits.Sigma.map (f := Y₃) (g := Y)
-        (fun k ↦ pullback.fst (w₂ (some (.inl k))) (D.map d)))
+      (Limits.Sigma.map (fun k ↦ pullback.fst (w₂ (some (.inl k))) (D.map d)))
       q₃ qY (D.map d) :=
     isPullback_sigmaDesc _ _ _ _ (fun k ↦ IsPullback.of_hasPullback _ _)
   let ν₃ : (∐ Y₃) ⟶ W₃ none :=
@@ -657,7 +656,7 @@ theorem exists_finitePresentation_chain_stage
           isPullbackLift_snd]
         apply Sigma.hom_ext
         intro k
-        simp only [q₃, Sigma.ι_map_assoc, Sigma.ι_desc]
+        simp only [q₃, Sigma.ι_map_assoc, Sigma.ι_comp_desc]
         change isPullbackLift D c d (H₂ (some (.inl k))) ≫
           pullback.snd (w₂ (some (.inl k))) (D.map d) = _
         rw [isPullbackLift_snd]
@@ -686,7 +685,7 @@ theorem exists_finitePresentation_chain_stage
     calc
       Sigma.ι Y₃ k ≫ νfinal ≫ pullback.snd _ _ = Sigma.ι Y₃ k ≫ q₃ :=
         congrArg (fun m ↦ Sigma.ι Y₃ k ≫ m) hνfinalw
-      _ = w₃ (some (.inl k)) := Sigma.ι_desc _ _
+      _ = w₃ (some (.inl k)) := Sigma.ι_comp_desc _ _
       _ = j₃ k ≫ p₃ k ≫ t₃ k := (hchain k).symm
   · intro k
     exact ⟨by simpa only [hchain] using H₃ (some (.inl k)),

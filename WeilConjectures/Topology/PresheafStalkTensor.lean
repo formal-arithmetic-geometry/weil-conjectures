@@ -6,8 +6,9 @@ Authors: Bin Wu
 
 module
 
-public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.MonoidalCompat
 public import Mathlib.Algebra.Category.ModuleCat.Stalk
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal
 
 /-!
 # Tensor products of presheaf module stalks
@@ -104,11 +105,10 @@ theorem exists_stalk_tensor_iso {X : TopCat.{u}} (R : X.Presheaf CommRingCat.{u}
             intro z
             change p₀ j.unop.1 j.unop.2 (P.map ((OpenNhds.inclusion x).op.map f) z) =
               p₀ i.unop.1 i.unop.2 z
-            induction z using TensorProduct.induction_on with
-            | zero => simp only [map_zero]
+            induction z using TensorProduct.inductionOn with
             | add a b ha hb => simpa only [map_add] using congrArg₂ (· + ·) ha hb
             | tmul s t =>
-              erw [PresheafOfModules.Monoidal.tensorObj_map_tmul, hp₀, hp₀]
+              erw [Monoidal.tensorObj_map_tmul, hp₀, hp₀]
               congr 1
               · exact TopCat.Presheaf.germ_res_apply' F.presheaf _ x _ s
               · exact TopCat.Presheaf.germ_res_apply' G.presheaf _ x _ t } }
@@ -231,14 +231,12 @@ theorem exists_stalk_tensor_iso {X : TopCat.{u}} (R : X.Presheaf CommRingCat.{u}
   have hqp : Function.LeftInverse q p := by
     intro z
     obtain ⟨U, hx, z, rfl⟩ := TopCat.Presheaf.exists_germ_eq P.presheaf z
-    induction z using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction z using TensorProduct.inductionOn with
     | add a b ha hb => simpa only [map_add] using congrArg₂ (· + ·) ha hb
     | tmul s t => erw [hp]; exact hβ U hx s t
   have hpq : Function.LeftInverse p q := by
     intro z
-    induction z using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction z using TensorProduct.inductionOn with
     | add a b ha hb => simpa only [map_add] using congrArg₂ (· + ·) ha hb
     | tmul m n =>
       obtain ⟨U, hxU, s, rfl⟩ := TopCat.Presheaf.exists_germ_eq F.presheaf m

@@ -203,7 +203,7 @@ private theorem component_algHom_bijective
     have hcomap (p : PrimeSpectrum C) :
         p.asIdeal.comap f₁.toRingHom = p.asIdeal.comap f₂.toRingHom :=
       congrArg PrimeSpectrum.asIdeal (DFunLike.congr_fun heq p)
-    apply AlgHom.coe_ringHom_injective
+    apply AlgHom.toRingHom_injective
     apply RingHom.ext
     intro b
     refine eq_of_localizationAtPrime_eq fun p ↦ ?_
@@ -842,7 +842,7 @@ private theorem component_coverPreserving (T : Scheme.{u}) [IsAffine T] :
   let E₀ : I → Over (componentProfinite T) := fun i ↦ Over.mk (f i ≫ E.hom)
   let a : ∀ i, E₀ i ⟶ E := fun i ↦ Over.homMk (f i) rfl
   have hjs : ∀ e : E.left, ∃ i x, (a i).left x = e :=
-    ((Profinite.effectiveEpiFamily_tfae V f).out 0 2).mp hf
+    ((Profinite.effectiveEpiFamily_tfae V f).out 1 3).mp hf
   have hc := component_cover E₀ E a hjs
   apply (topology T).superset_covering ?_ (Precoverage.generate_mem_toGrothendieck hc)
   apply (Sieve.generate_le_iff _ _).mpr
@@ -1040,7 +1040,7 @@ private theorem component_finite_products (X : Scheme.{u}) [IsAffine X]
       (b : ∀ i S, (U i ⟶ L.obj S) ≃ (T i ⟶ S)) (S : Over (componentProfinite X))
       (f : c.pt ⟶ L.obj S) (i : I) :
       Sigma.ι T i ≫ coproductMapEquiv L U c hc T b S f = b i S (c.inj i ≫ f) := by
-    exact Sigma.ι_desc _ _
+    exact Sigma.ι_comp_desc _ _
   have coproductMapEquiv_natural
       (L : Over (componentProfinite X) ⥤ X.ProEt)
       {I : Type u} (U : I → X.ProEt) (c : Cofan U) (hc : IsColimit c)
@@ -1053,7 +1053,7 @@ private theorem component_finite_products (X : Scheme.{u}) [IsAffine X]
         coproductMapEquiv L U c hc T b S f ≫ g := by
     apply Sigma.hom_ext
     intro i
-    simp only [coproductMapEquiv, Equiv.coe_fn_mk, Sigma.ι_desc, Sigma.ι_desc_assoc]
+    simp only [coproductMapEquiv, Equiv.coe_fn_mk, Sigma.ι_comp_desc, Sigma.ι_comp_desc_assoc]
     rw [← Category.assoc, hb]
   -- Construct the coproduct in the slice using descent on the scheme coproduct.
   let f : (∐ fun i ↦ (U i).left) ⟶ X := Sigma.desc (fun i ↦ (U i).hom)
@@ -1073,7 +1073,7 @@ private theorem component_finite_products (X : Scheme.{u}) [IsAffine X]
       simp [f, ← Category.assoc]
     · intro t i
       apply MorphismProperty.Over.Hom.ext
-      exact Sigma.ι_desc _ _
+      exact Sigma.ι_comp_desc _ _
     · intro t m hm
       apply MorphismProperty.Over.Hom.ext
       apply Sigma.hom_ext

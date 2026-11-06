@@ -120,7 +120,7 @@ private theorem smallFromRestrictions {C : Type u} [Category.{v} C]
   refine ⟨j, t, detect t fun i ↦ ?_⟩
   have fac : (L i).map t ≫
       ((L i).map (Pi.π _ i) ≫ (adj i).counit.app _) = (iso i).hom := by
-    rw [← Category.assoc, ← Functor.map_comp, Pi.lift_π]
+    rw [← Category.assoc, ← Functor.map_comp, Pi.lift_comp_π]
     exact ((adj i).homEquiv_symm_apply _ _ _).symm.trans
       (((adj i).homEquiv _ _).symm_apply_apply (iso i).hom)
   exact mono_of_mono_fac fac
@@ -326,7 +326,7 @@ theorem coefficientHeart_essentiallySmall (ℓ : ℕ) [Fact ℓ.Prime]
       (IsConstantModelConstructible A X) := by
     rw [show IsConstantModelConstructible A X = IsFiniteConstantStratified A X by
       funext M
-      exact if_pos ⟨inferInstance, inferInstance⟩]
+      exact ite_eq_left ⟨inferInstance, inferInstance⟩]
     exact hsmall
   let : ObjectProperty.EssentiallySmall.{u + 1}
       (IsConstantModelConstructible A X) := hprop

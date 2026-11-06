@@ -81,7 +81,8 @@ theorem local_perfect_of_openRestriction_iso
     ((Modules.restrictFunctorComp s.inv s.hom).symm ≪≫
       Modules.restrictFunctorCongr s.inv_hom_id ≪≫ Modules.restrictFunctorId)
   let A := (EV.trans ES).trans EO.symm
-  have : A.functor.Additive := inferInstance
+  have : A.functor.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_full _
+  have : A.functor.Additive := Functor.additive_of_preserves_binary_products _
   let K' := (A.functor.mapHomologicalComplex (.up ℤ)).obj K
   have unitIso : A.functor.obj
       (SheafOfModules.unit ((moduleRings U.toScheme.toRingedSpace).over V)) ≅
@@ -116,6 +117,14 @@ theorem local_perfect_of_openRestriction_iso
       (Modules.overEquiv U).functor
     let H := SheafOfModules.overFunctor.{u} (moduleRings U.toScheme.toRingedSpace) V
     let L := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) O
+    have : (Modules.overEquiv U).functor.PreservesZeroMorphisms :=
+      Functor.preservesZeroMorphisms_of_full _
+    have : G.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_comp
+      (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U)
+      (Modules.overEquiv U).functor
+    have : PreservesFiniteLimits G := comp_preservesFiniteLimits _ _
+    have : PreservesFiniteColimits G := comp_preservesFiniteColimits _ _
+    have : G.Additive := Functor.additive_of_preserves_binary_products _
     have fac : s.inv ≫ V.ι ≫ U.ι = O.ι := by
       rw [← Category.assoc, U.isoImage_ι_inv_ι V]
       exact X.homOfLE_ι _
@@ -132,11 +141,13 @@ theorem local_perfect_of_openRestriction_iso
       (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight c0 EO.inverse ≪≫
         Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft L EO.unitIso.symm ≪≫
         Functor.rightUnitor L
+    set_option backward.isDefEq.respectTransparency true in
+    let model : (G ⋙ H).mapDerivedCategory.obj R ≅ DerivedCategory.Q.obj K :=
+      (Functor.mapDerivedCategoryCompIso G H).symm.app R ≪≫
+        H.mapDerivedCategory.mapIso e ≪≫ hmodel
+    set_option backward.isDefEq.respectTransparency true in
     exact ⟨(Functor.mapDerivedCategoryNatIso c).symm.app R ≪≫
-      (Functor.mapDerivedCategoryCompIso (G ⋙ H) A.functor).app R ≪≫
-      A.functor.mapDerivedCategory.mapIso
-        ((Functor.mapDerivedCategoryCompIso G H).app R ≪≫
-          H.mapDerivedCategory.mapIso e ≪≫ hmodel) ≪≫
-      A.functor.mapDerivedCategoryFactors.app K⟩
+      (Functor.mapDerivedCategoryCompIso (G ⋙ H) A.functor).symm.app R ≪≫
+      A.functor.mapDerivedCategory.mapIso model ≪≫ A.functor.mapDerivedCategoryFactors.app K⟩
 
 end AlgebraicGeometry.Scheme

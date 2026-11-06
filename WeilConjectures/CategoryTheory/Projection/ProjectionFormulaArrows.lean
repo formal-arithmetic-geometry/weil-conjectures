@@ -210,7 +210,7 @@ private noncomputable def restrictCofanIsColimit
       (fun j ↦ if hj : s j then t.inj ⟨j, hj⟩ else 0)) ?_ ?_
   · intro t j
     change c.inj j.val ≫ _ = t.inj j
-    simpa only [dif_pos j.property] using
+    simpa only [dite_eq_left j.property] using
       Cofan.IsColimit.fac hc
         (fun j ↦ if hj : s j then t.inj ⟨j, hj⟩ else 0) j.val
   · intro t m hm
@@ -218,7 +218,7 @@ private noncomputable def restrictCofanIsColimit
     intro j
     rw [Cofan.IsColimit.fac]
     by_cases hj : s j
-    · rw [dif_pos hj]
+    · rw [dite_eq_left hj]
       exact hm ⟨j, hj⟩
     · exact (hz j hj).eq_of_src _ _
 

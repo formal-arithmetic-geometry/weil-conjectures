@@ -507,7 +507,7 @@ private lemma betaHom_tmul (s : ℕ) (U : Cᵒᵖ)
         b * σ.hom.app U (coordinate J _ s U ((alpha J R s).hom.val.app U x) i) := by
   have h := congrArg (fun f ↦ f.val.app U
     (SheafOfModules.scalarExtensionRingIsoTmul σ _ U x b))
-      (Pi.lift_π (fun i : Fin s ↦ SheafOfModules.scalarExtensionLift σ _ _
+      (Pi.lift_comp_π (fun i : Fin s ↦ SheafOfModules.scalarExtensionLift σ _ _
         ((alpha J R s).hom ≫ Pi.π _ i ≫ scalarToUnit J R B σ)) i)
   exact h.trans (SheafOfModules.scalarExtensionLift_tmul σ _ _ _ U b x)
 
@@ -670,16 +670,15 @@ private def rawFlatIso : scalarPresheafFunctor J R B σ ⋙
     (by
       intro U V f
       ext z
-      induction z using TensorProduct.induction_on with
-      | zero => simp only [map_zero]
+      induction z using TensorProduct.inductionOn with
       | add z w hz hw => simp only [map_add, hz, hw]
       | tmul b x =>
         change (TensorProduct.comm ((baseRing J R).obj.obj V)
             ((restrictedB J R B σ).val.obj V) (M.val.obj V))
             (SheafOfModules.changeOfRingsMapOfUniverses σ M f
               (b ⊗ₜ[((baseRing J R).obj.obj U), (σ.hom.app U).hom] x)) =
-          M.val.map f x ⊗ₜ[(baseRing J R).obj.obj V]
-            ((restrictedB J R B σ).val.map f b)
+          M.val.restrictₛₗ f x ⊗ₜ[(baseRing J R).obj.obj V]
+            ((restrictedB J R B σ).val.restrictₛₗ f b)
         exact congrArg (fun z ↦
           (TensorProduct.comm ((baseRing J R).obj.obj V)
             ((restrictedB J R B σ).val.obj V) (M.val.obj V)) z)
@@ -688,8 +687,7 @@ private def rawFlatIso : scalarPresheafFunctor J R B σ ⋙
     (by
       intro M N f
       ext U z
-      induction z using TensorProduct.induction_on with
-      | zero => simp only [map_zero]
+      induction z using TensorProduct.inductionOn with
       | add z w hz hw => simp only [map_add, hz, hw]
       | tmul b x => rfl)
 

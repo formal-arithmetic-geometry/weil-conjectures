@@ -85,8 +85,8 @@ theorem Scheme.exists_finite_surjective_refinement_of_etale {U T : Scheme.{u}} (
   let ι : ∐ g ⟶ U := Limits.Sigma.desc fun (i : s) ↦ ((i : U.affineOpens) : U.Opens).ι
   have hι : ι ≫ u = Limits.Sigma.desc fun (i : s) ↦ ((i : U.affineOpens) : U.Opens).ι ≫ u := by
     ext i : 1
-    simp only [ι, Limits.Sigma.ι_desc_assoc]
-    exact (Limits.Sigma.ι_desc (fun (i : s) ↦ ((i : U.affineOpens) : U.Opens).ι ≫ u) i).symm
+    simp only [ι, Limits.Sigma.ι_comp_desc_assoc]
+    exact (Limits.Sigma.ι_comp_desc (fun (i : s) ↦ ((i : U.affineOpens) : U.Opens).ι ≫ u) i).symm
   have : Etale (ι ≫ u) := by
     rw [hι]
     exact IsZariskiLocalAtSource.sigmaDesc fun i ↦ inferInstance

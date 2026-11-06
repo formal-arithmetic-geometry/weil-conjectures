@@ -94,7 +94,7 @@ noncomputable instance openModuleFamilyAddCommGroup (V : Opens X) :
 
 noncomputable instance openModuleFamilyModule (V : Opens X) :
     Module ((moduleRings X).obj.obj (op V)) (OpenModuleFamily X I U Fi V) :=
-  (openModuleFamilyEquiv X I U Fi V).module _
+  (openModuleFamilyEquiv X I U Fi V).addEquiv.module _
 
 /-- The explicit submodule cut out by all restriction and overlap equations. -/
 noncomputable def coherentOpenModuleSubmodule (V : Opens X) :

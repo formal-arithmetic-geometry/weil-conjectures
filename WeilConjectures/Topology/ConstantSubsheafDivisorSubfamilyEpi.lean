@@ -90,7 +90,7 @@ theorem constantSubsheaf_divisor_subfamily_epi
             (op ((Opens.map (A (q k)).inclusion').obj (A (q k)))) (ULift.up 1))) =
         s (q k) := by
     intro k
-    simpa only [f, Sigma.ι_desc] using hsection (q k)
+    simpa only [f, Sigma.ι_comp_desc] using hsection (q k)
   have hg' : Sigma.desc (fun i ↦ if True then Sigma.ι D i ≫ g else 0) = g := by
     apply Sigma.hom_ext
     intro i

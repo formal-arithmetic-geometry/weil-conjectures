@@ -8,9 +8,11 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModulesAbelian
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 import Mathlib.Algebra.Homology.ShortComplex.Abelian
 import WeilConjectures.AlgebraicGeometry.CoherentFormalModulesRestrictionLimits
 import WeilConjectures.AlgebraicGeometry.CoherentFormalModuleIsomorphismLocal
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Restriction and local exactness of coherent formal modules
 

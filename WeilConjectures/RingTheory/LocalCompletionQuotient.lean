@@ -175,8 +175,7 @@ theorem exists_local_completion_quotient
       obtain ⟨t, ht⟩ := ofTensorProduct_surjective_of_finite m J y
       rw [← hy, ← ht]
       clear ht hy hx he hfi
-      induction t using TensorProduct.induction_on with
-      | zero => simp
+      induction t using TensorProduct.inductionOn with
       | tmul a j =>
         rw [ofTensorProduct_tmul, map_smul, map_of]
         change a * c j ∈ J.map c

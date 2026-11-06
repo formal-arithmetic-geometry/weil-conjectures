@@ -138,7 +138,7 @@ lemma mapDerivedCategoryNatIso_forgetCompIsoOfIso_hom_app_rightDerivedFunctor_ob
       (rightDerivedFunctorMapOfNatIsoCompForgetCompIso ε γL).hom.app N ≫
         (rightDerivedFunctorIsoMapDerivedCategoryComp γF).hom.app
           ((forget F).mapDerivedCategory.obj N) ≫
-        ΓC.rightDerivedFunctor.map ((mapDerivedCategoryCompIso (forget F) F).inv.app N ≫
+        ΓC.rightDerivedFunctor.map ((mapDerivedCategoryCompIso (forget F) F).hom.app N ≫
           (mapDerivedCategoryNatIso (strNatIso F)).hom.app N) := by
   suffices H : whiskerLeft (mapOfNatIso ε).rightDerivedFunctor
         (mapDerivedCategoryNatIso (forgetCompIsoOfIso γG)).hom ≫
@@ -146,7 +146,7 @@ lemma mapDerivedCategoryNatIso_forgetCompIsoOfIso_hom_app_rightDerivedFunctor_ob
       (rightDerivedFunctorMapOfNatIsoCompForgetCompIso ε γL).hom ≫
         whiskerLeft (forget F).mapDerivedCategory
           (rightDerivedFunctorIsoMapDerivedCategoryComp γF).hom ≫
-        whiskerRight ((mapDerivedCategoryCompIso (forget F) F).inv ≫
+        whiskerRight ((mapDerivedCategoryCompIso (forget F) F).hom ≫
           (mapDerivedCategoryNatIso (strNatIso F)).hom) ΓC.rightDerivedFunctor from congr_app H N
   refine rightDerived_ext _ (rightDerivedFunctorCompMapDerivedCategoryUnit _ _)
     (HomotopyCategory.quasiIso (IsoAlgebra F) (ComplexShape.up ℤ)) _ _ _ ?_

@@ -185,13 +185,13 @@ private lemma filtration_telescope_shortExact (R : Type u) [CommRing R]
         (step n.down).f k ≫ (Sigma.ι K ⟨n.down + 1⟩).f k := by
     simpa only [HomologicalComplex.comp_f, HomologicalComplex.sub_f_apply] using
       congrArg (fun f ↦ f.f k)
-      (Sigma.ι_desc (fun n ↦ Sigma.ι K n -
+      (Sigma.ι_comp_desc (fun n ↦ Sigma.ι K n -
         step n.down ≫ Sigma.ι K ⟨n.down + 1⟩) n)
   have hbi (n : ULift.{max u v} ℕ) :
       (Sigma.ι K n).f k ≫ b.f k = (ι n.down).f k := by
     simpa only [HomologicalComplex.comp_f] using
       congrArg (fun f ↦ f.f k)
-      (Sigma.ι_desc (fun n ↦ ι n.down) n)
+      (Sigma.ι_comp_desc (fun n ↦ ι n.down) n)
   have ha : a.f k ≫ e.hom = e.hom ≫ ModuleCat.ofHom A := by
     apply hc.hom_ext
     intro ⟨n⟩

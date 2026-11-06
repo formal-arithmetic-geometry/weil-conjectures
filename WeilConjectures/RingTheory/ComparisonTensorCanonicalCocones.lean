@@ -163,8 +163,7 @@ theorem exists_comparison_tensor_canonical_cocones
       change μs k (β z) = μs j z
       rw [hk, hb, hj]
       clear hk hj hb
-      induction z with
-      | zero => simp
+      induction z using TensorProduct.inductionOn with
       | tmul a b =>
           simp only [Algebra.TensorProduct.map_tmul, AlgHom.id_apply, AlgHom.coe_mk]
           congr 1
@@ -194,8 +193,7 @@ theorem exists_comparison_tensor_canonical_cocones
       Algebra.TensorProduct.map (αlim j) (AlgHom.id (F.obj i₀) C₀) (c j z)
     rw [hz]
     generalize c j z = t
-    induction t with
-    | zero => simp
+    induction t using TensorProduct.inductionOn with
     | tmul a b =>
         simp only [Algebra.TensorProduct.map_tmul, AlgHom.id_apply, AlgHom.coe_mk]
         congr 1

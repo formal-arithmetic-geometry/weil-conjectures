@@ -256,7 +256,11 @@ theorem ringComplexOrderedCech_sections_coordinates (A : CommRingCat.{u}) (I : I
       ((∑ j : Fin (q + 2), (-1 : ℤ) ^ j.val •
         ((sectionPresheaf A I).map (homOfLE (alternatingCechIntersection_face_le
           (ringComplexPrincipalCover A I f) q t j)).op).hom.comp
-          (LinearMap.proj ((Fin.succAboveOrderEmb j).trans t))) (J q x)) = _
+          (LinearMap.proj ((Fin.succAboveOrderEmb j).trans t)))
+            (show ∀ s : Fin (q + 1) ↪o Fin r,
+              (sectionPresheaf A I).obj
+                (op (alternatingCechIntersection (ringComplexPrincipalCover A I f) s))
+              from J q x)) = _
     simp only [LinearMap.sum_apply, LinearMap.smul_apply, LinearMap.comp_apply]
     rw [map_sum]
     apply Finset.sum_congr rfl

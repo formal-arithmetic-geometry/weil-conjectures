@@ -104,7 +104,7 @@ private theorem transport_tensor_counit
       τ' ≫ ((L.map a.inv ≫ εP ≫ e.hom) ⊗ₘ (L.map b.inv ≫ εQ ≫ f.hom)) ≫
         ((e.inv ⊗ₘ f.inv) ≫ t' ≫ g.hom) := by
   rw [← tensorHom_comp_tensorHom (L.map a.inv) (L.map b.inv)]
-  simp only [Functor.map_comp, Category.assoc, Iso.map_hom_inv_id_assoc,
+  simp only [Functor.map_comp, Category.assoc, Iso.hom_inv_id_map_assoc,
     tensorHom_comp_tensorHom_assoc, Iso.hom_inv_id, Category.comp_id]
   rw [← tensorHom_comp_tensorHom (L.map a.inv) (L.map b.inv)]
   rw [Category.assoc, ← reassoc_of% hn, reassoc_of% hc, hδ]

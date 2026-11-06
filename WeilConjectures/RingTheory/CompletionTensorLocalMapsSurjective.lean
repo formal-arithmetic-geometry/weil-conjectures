@@ -173,8 +173,7 @@ theorem completion_tensor_localMaps_surjective
     rw [AlgHom.comp_apply, AlgHom.restrictScalars_apply, ha]
     rfl
   have hfg (x : C ⊗[R] S) : f x = g (t x) := by
-    induction x using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction x using TensorProduct.inductionOn with
     | add x y hx hy => simp only [map_add, hx, hy]
     | tmul a s =>
       have hbase : f (a ⊗ₜ[R] (1 : S)) = g (t (a ⊗ₜ[R] (1 : S))) := by

@@ -40,11 +40,11 @@ theorem inv_one_sub_X_pow_eq_mk {e : ℕ} (he : e ≠ 0) :
     rw [mul_sub, mul_one, map_sub, coeff_mul_X_pow', coeff_mk, coeff_one]
     rcases Nat.eq_zero_or_pos n with rfl | hn
     · simp [he]
-    rw [if_neg hn.ne']
+    rw [ite_eq_right hn.ne']
     by_cases hen : e ≤ n
-    · rw [if_pos hen, coeff_mk, sub_eq_zero]
+    · rw [ite_eq_left hen, coeff_mk, sub_eq_zero]
       exact if_congr (Nat.dvd_sub_iff_left hen dvd_rfl).symm rfl rfl
-    · rw [if_neg hen, if_neg fun h ↦ hen (Nat.le_of_dvd hn h), sub_zero]
+    · rw [ite_eq_right hen, ite_eq_right fun h ↦ hen (Nat.le_of_dvd hn h), sub_zero]
   · simp [he]
 
 /-- The power series whose coefficients vanish outside the multiples of `f`. -/
@@ -59,7 +59,7 @@ def dvdSupportSubmonoid (f : ℕ) : Submonoid R⟦X⟧ where
       rw [hH _ h₂, mul_zero]
     · rw [hG _ h₁, zero_mul]
   one_mem' n hn := by
-    rw [coeff_one, if_neg]
+    rw [coeff_one, ite_eq_right]
     rintro rfl
     exact hn (dvd_zero f)
 
@@ -70,7 +70,7 @@ theorem mem_dvdSupportSubmonoid_iff {f : ℕ} {G : R⟦X⟧} :
 theorem inv_one_sub_X_pow_mem_dvdSupportSubmonoid {e f : ℕ} (he : e ≠ 0) (hfe : f ∣ e) :
     ((1 : R⟦X⟧) - X ^ e)⁻¹ ∈ dvdSupportSubmonoid f := by
   intro n hn
-  rw [inv_one_sub_X_pow_eq_mk he, coeff_mk, if_neg fun h ↦ hn (hfe.trans h)]
+  rw [inv_one_sub_X_pow_eq_mk he, coeff_mk, ite_eq_right fun h ↦ hn (hfe.trans h)]
 
 /-- A power series supported on the multiples of `f` is invariant under the rescaling `X ↦ ζ X`
 by an `f`-th root of unity `ζ`. -/

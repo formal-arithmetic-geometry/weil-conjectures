@@ -10,6 +10,7 @@ public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.Algebra.Polynomial.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
+public import Mathlib.RingTheory.AdjoinRoot
 
 /-!
 # Base change of a simple degree-p field presentation
@@ -44,7 +45,7 @@ theorem nonempty_quotient_X_pow_sub_C_ringEquiv_tensorProduct
     (a : M) (ha : z ^ p = (a : L)) (hdeg : Module.finrank M L = p) :
     Nonempty ((Polynomial (TensorProduct K M F) ⧸
       Ideal.span ({Polynomial.X ^ p - Polynomial.C
-        (Algebra.TensorProduct.includeLeftRingHom a)} :
+                    (Algebra.TensorProduct.includeLeftRingHom a)} :
           Set (Polynomial (TensorProduct K M F)))) ≃+* TensorProduct K L F) := by
   classical
   have hp : p ≠ 0 := (Fact.out : p.Prime).ne_zero

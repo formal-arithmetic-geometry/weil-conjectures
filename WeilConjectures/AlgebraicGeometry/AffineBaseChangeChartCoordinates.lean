@@ -167,8 +167,7 @@ private theorem exists_affineBaseChange_target_chart_unit_comparison {X S X' S' 
       Γ((pushforward f').obj ((tensorPullback g').obj F), W) :=
     j.toLinearEquiv (by
       intro r x
-      induction x using TensorProduct.induction_on with
-      | zero => simp only [smul_zero, map_zero]
+      induction x using TensorProduct.inductionOn with
       | add x y hx hy => simp only [smul_add, map_add, hx, hy]
       | tmul d m =>
         change a₁.symm (e (r • d) ⊗ₜ[B] m) = r • a₁.symm (e d ⊗ₜ[B] m)

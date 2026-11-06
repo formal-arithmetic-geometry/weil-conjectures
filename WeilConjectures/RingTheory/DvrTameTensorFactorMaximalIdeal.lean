@@ -110,8 +110,8 @@ theorem dvr_tame_tensor_factor_map_maximalIdeal
         (R := B) (A := E) (B := A)) b).symm
   have hinj : Function.Injective alpha := by
     apply (RingHom.injective_iff_ker_eq_bot alpha).mpr
-    apply Ideal.eq_bot_of_comap_eq_bot (R := B)
-    rw [RingHom.comap_ker, hcomp]
+    apply Ideal.eq_bot_of_under_eq_bot (R := B)
+    rw [Ideal.under_def, RingHom.comap_ker, hcomp]
     apply (RingHom.injective_iff_ker_eq_bot _).mp
     exact beta.injective.comp ((algebraMap (FractionRing B) E).injective.comp
       (IsFractionRing.injective B (FractionRing B)))
@@ -122,7 +122,9 @@ theorem dvr_tame_tensor_factor_map_maximalIdeal
   have hle := dvr_tame_tensor_factor_ramificationIdx_le B n hnpos n hnpos hn A
     hindex E hE hC hbounds P hP hinj hfinite Q hQ hclosed
   have hone : Q.ramificationIdx A = 1 := by
-    have hpos := Ideal.ramificationIdx_pos Q A
+    have : IsNoetherianRing (integralClosure A F) :=
+      IsNoetherianRing.of_finite A (integralClosure A F)
+    have hpos := Ideal.ramificationIdx_pos A Q
     simp only [Nat.gcd_self, Nat.div_self hnpos] at hle
     omega
   rw [Ideal.ramificationIdx_def, ENat.toNat_eq_iff_eq_natCast, Nat.cast_one,

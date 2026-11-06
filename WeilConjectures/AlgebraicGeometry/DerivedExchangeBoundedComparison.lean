@@ -81,10 +81,10 @@ lemma derivedExchangeBoundedComparison
       s.hom ≫ DerivedCategory.Qh.map h.1 = ρ →
       t ≫ DerivedCategory.Qh.map h.2 = ρ' →
       let χ := DerivedCategory.Qh.map ((F.mapHomotopyCategory (.up ℤ)).map h.1) ≫
-        DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnit.app P ≫
+        DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnith.app P ≫
           F.rightDerivedFunctorPlus.map (E.counitIso.hom.app K))
       let χ' := DerivedCategory.Qh.map ((F'.mapHomotopyCategory (.up ℤ)).map h.2) ≫
-        DerivedCategory.Plus.ι.map (F'.rightDerivedFunctorPlusUnit.app P' ≫
+        DerivedCategory.Plus.ι.map (F'.rightDerivedFunctorPlusUnith.app P' ≫
           F'.rightDerivedFunctorPlus.map (E'.counitIso.hom.app K'))
       let σsrc := G.mapDerivedCategoryFactorsh.inv.app
         ((F.mapHomotopyCategory (.up ℤ)).obj (q.obj I)) ≫ G.mapDerivedCategory.map χ
@@ -127,12 +127,12 @@ lemma derivedExchangeBoundedComparison
       s.hom ≫ DerivedCategory.Plus.ι.map a.inv
     rw [hai, ← Functor.map_comp]
     simp
-  have hc₁ := F.rightDerivedFunctorPlusUnit.naturality h₁
+  have hc₁ := F.rightDerivedFunctorPlusUnith.naturality h₁
   dsimp only [Functor.comp_map] at hc₁
   have hc₁' : DerivedCategory.Qh.map ((F.mapHomotopyCategory (.up ℤ)).map h.1) ≫
-      DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnit.app P ≫
+      DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnith.app P ≫
         F.rightDerivedFunctorPlus.map (E.counitIso.hom.app K)) =
-      DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnit.app H ≫
+      DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnith.app H ≫
         F.rightDerivedFunctorPlus.map a.inv) := by
     rw [DerivedCategory.Plus.ι.map_comp, ← Category.assoc]
     change (DerivedCategory.Plus.ι.map
@@ -167,15 +167,15 @@ lemma derivedExchangeBoundedComparison
       ← G'.mapDerivedCategoryPlus.map_comp, Iso.hom_inv_id]
     rw [G'.mapDerivedCategoryPlus.map_id]
     rfl
-  have hc₂ := F'.rightDerivedFunctorPlusUnit.naturality h₂
+  have hc₂ := F'.rightDerivedFunctorPlusUnith.naturality h₂
   dsimp only [Functor.comp_map] at hc₂
   have hc₂' :
       DerivedCategory.Qh.map ((F'.mapHomotopyCategory (.up ℤ)).map
         ((HomotopyCategory.quotient _ _).map j)) ≫
         (DerivedCategory.Qh.map ((F'.mapHomotopyCategory (.up ℤ)).map h.2) ≫
-          DerivedCategory.Plus.ι.map (F'.rightDerivedFunctorPlusUnit.app P' ≫
+          DerivedCategory.Plus.ι.map (F'.rightDerivedFunctorPlusUnith.app P' ≫
             F'.rightDerivedFunctorPlus.map (E'.counitIso.hom.app K'))) =
-      DerivedCategory.Plus.ι.map (F'.rightDerivedFunctorPlusUnit.app
+      DerivedCategory.Plus.ι.map (F'.rightDerivedFunctorPlusUnith.app
         (G'.mapHomotopyCategoryPlus.obj H) ≫
         F'.rightDerivedFunctorPlus.map (G'.mapDerivedCategoryPlusFactorsh.inv.app H ≫
           G'.mapDerivedCategoryPlus.map a.inv)) := by
@@ -195,24 +195,24 @@ lemma derivedExchangeBoundedComparison
       (DerivedCategory.Plus.Qh.obj H) ≫
       F'.rightDerivedFunctorPlus.map (G'.mapDerivedCategoryPlus.map a.inv) at hn
   have hf :
-      G.mapDerivedCategoryPlus.map (F.rightDerivedFunctorPlusUnit.app H) ≫
+      G.mapDerivedCategoryPlus.map (F.rightDerivedFunctorPlusUnith.app H) ≫
         (Etale.derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq).app
           (DerivedCategory.Plus.Qh.obj H) =
       G.mapDerivedCategoryPlusFactorsh.hom.app (F.mapHomotopyCategoryPlus.obj H) ≫
         DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus
           (Etale.baseChangeMap AddCommGrpCat.{u + 1} sq.toCommSq)).app H) ≫
-        F'.rightDerivedFunctorPlusUnit.app (G'.mapHomotopyCategoryPlus.obj H) ≫
+        F'.rightDerivedFunctorPlusUnith.app (G'.mapHomotopyCategoryPlus.obj H) ≫
         F'.rightDerivedFunctorPlus.map (G'.mapDerivedCategoryPlusFactorsh.inv.app H) :=
     Etale.derivedBaseChangeMapPlus_fac_app AddCommGrpCat.{u + 1} sq.toCommSq H
   have hm :
       (G.mapDerivedCategoryPlusFactorsh.inv.app (F.mapHomotopyCategoryPlus.obj H) ≫
-        G.mapDerivedCategoryPlus.map (F.rightDerivedFunctorPlusUnit.app H ≫
+        G.mapDerivedCategoryPlus.map (F.rightDerivedFunctorPlusUnith.app H ≫
           F.rightDerivedFunctorPlus.map a.inv)) ≫
         (Etale.derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq).app K =
       DerivedCategory.Plus.Qh.map
         ((NatTrans.mapHomotopyCategoryPlus
           (Etale.baseChangeMap AddCommGrpCat.{u + 1} sq.toCommSq)).app H) ≫
-        (F'.rightDerivedFunctorPlusUnit.app (G'.mapHomotopyCategoryPlus.obj H) ≫
+        (F'.rightDerivedFunctorPlusUnith.app (G'.mapHomotopyCategoryPlus.obj H) ≫
           F'.rightDerivedFunctorPlus.map
             (G'.mapDerivedCategoryPlusFactorsh.inv.app H ≫
               G'.mapDerivedCategoryPlus.map a.inv)) := by
@@ -249,9 +249,9 @@ lemma derivedExchangeBoundedComparison
   simp only [Category.assoc]
   erw [hc₂']
   have hGmap₁ : DerivedCategory.Plus.ι.map
-      (G.mapDerivedCategoryPlus.map (F.rightDerivedFunctorPlusUnit.app H)) =
+      (G.mapDerivedCategoryPlus.map (F.rightDerivedFunctorPlusUnith.app H)) =
       G.mapDerivedCategory.map
-        (DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnit.app H)) := rfl
+        (DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnith.app H)) := rfl
   have hGmap₂ : DerivedCategory.Plus.ι.map
       (G.mapDerivedCategoryPlus.map (F.rightDerivedFunctorPlus.map a.inv)) =
       G.mapDerivedCategory.map

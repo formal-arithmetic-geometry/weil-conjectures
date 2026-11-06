@@ -50,10 +50,10 @@ variable {q r : ℕ}
 numerator `A` for odd `w`, the denominator `B` for even `w`. -/
 def parityPart (A B : ℚ[X]) (w : ℕ) : ℚ[X] := if Odd w then A else B
 
-theorem parityPart_of_odd {A B : ℚ[X]} {w : ℕ} (hw : Odd w) : parityPart A B w = A := if_pos hw
+theorem parityPart_of_odd {A B : ℚ[X]} {w : ℕ} (hw : Odd w) : parityPart A B w = A := ite_eq_left hw
 
 theorem parityPart_of_even {A B : ℚ[X]} {w : ℕ} (hw : Even w) : parityPart A B w = B :=
-  if_neg (Nat.not_odd_iff_even.2 hw)
+  ite_eq_right (Nat.not_odd_iff_even.2 hw)
 
 /-- **Recovery of an individual factor.** If the parity products of a family of universally pure
 polynomials of distinct weights cross-multiply against a coprime normalized rational fraction

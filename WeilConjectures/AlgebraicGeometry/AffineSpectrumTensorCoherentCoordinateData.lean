@@ -27,8 +27,7 @@ private theorem tensor_additive_smul
     (hg : ∀ d x, h (d ⊗ₜ[A₁,a] x) = e d ⊗ₜ[A₂,a₀] p x)
     (r : D₁) (v : (ModuleCat.extendScalars a).obj M) :
     h (r • v) = e r • (show (ModuleCat.extendScalars a₀).obj M₀ from h v) := by
-  induction v using TensorProduct.induction_on with
-  | zero => simp only [smul_zero, map_zero]
+  induction v using TensorProduct.inductionOn with
   | tmul d x =>
     rw [ModuleCat.ExtendScalars.smul_tmul, hg, hg, map_mul]
     rfl
@@ -230,7 +229,7 @@ theorem exists_affineSpectrum_tensor_coherent_coordinate_data
     rw [← Category.assoc, ht]
     simp only [H, affineSpectrumTensorAdditiveIso, ordinaryIsoPullbackStalkComplexIso,
       Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, Category.assoc,
-      Iso.map_inv_hom_id, Category.comp_id]
+      Iso.inv_hom_id_map, Category.comp_id]
 
 
 

@@ -62,8 +62,7 @@ theorem generic_tensor_nilpotence_of_annihilator
   let m0 := Algebra.TensorProduct.map (AlgHom.id A B) (IsScalarTower.toAlgHom A R0 F)
   let d : B ⊗[A] R := (1 : B) ⊗ₜ[A] (algebraMap R0 R s)
   have hden (z : B ⊗[A] R) : ∃ n : ℕ, ∃ y : B ⊗[A] R0, z * d ^ n = l y := by
-    induction z with
-    | zero => exact ⟨0, 0, by simp⟩
+    induction z using TensorProduct.inductionOn with
     | tmul b c =>
       obtain ⟨n, a, ha⟩ := IsLocalization.Away.surj s c
       refine ⟨n, b ⊗ₜ[A] a, ?_⟩
@@ -78,8 +77,7 @@ theorem generic_tensor_nilpotence_of_annihilator
       rw [map_add, map_mul, map_mul, map_pow, map_pow, hd, ← hy, ← hv, pow_add]
       ring
   have hcomp (y : B ⊗[A] R0) : m (l y) = m0 y := by
-    induction y with
-    | zero => simp
+    induction y using TensorProduct.inductionOn with
     | add y z hy hz => simp [hy, hz]
     | tmul b c =>
       simp only [l, m, m0, Algebra.TensorProduct.map_tmul, AlgHom.id_apply]

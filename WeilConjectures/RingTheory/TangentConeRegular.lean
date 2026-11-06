@@ -99,13 +99,15 @@ theorem HasOrder.mul {f g : R} {d e : ℕ} (hf : HasOrder f d) (hg : HasOrder g 
     refine hnot ?_
     rw [pow_succ']
     refine hH.eval_mem_mul_pow fun m => ?_
-    have := congrArg (MvPolynomial.coeff m) h0
-    rwa [MvPolynomial.coeff_map, MvPolynomial.coeff_zero, residue_eq_zero_iff, ← hspan]
+    have := congrArg (fun p : MvPolynomial (Fin n) (ResidueField R) ↦ p.coeff m) h0
+    rwa [MvPolynomial.coeff_map, AddMonoidAlgebra.coeff_zero, Finsupp.zero_apply,
+      residue_eq_zero_iff, ← hspan]
       at this
   have hmul := mul_ne_zero (key hF hf2) (key hG hg2)
   rw [← map_mul] at hmul
   refine hmul (MvPolynomial.ext _ _ fun m => ?_)
-  rw [MvPolynomial.coeff_map, MvPolynomial.coeff_zero, residue_eq_zero_iff, ← hspan]
+  rw [MvPolynomial.coeff_map, AddMonoidAlgebra.coeff_zero, Finsupp.zero_apply,
+    residue_eq_zero_iff, ← hspan]
   exact MvPolynomial.coeff_mem_of_eval_mem_pow_succ ha _ (hF.mul hG) (by rwa [map_mul]) m
 
 /-- In a regular local ring, if `f` has order `d`, `d ≤ n` and `f a ∈ 𝔪^n`, then

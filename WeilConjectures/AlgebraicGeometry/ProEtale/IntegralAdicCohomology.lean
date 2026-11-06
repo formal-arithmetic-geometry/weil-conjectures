@@ -230,7 +230,7 @@ lemma shortExact_bocksteinShortComplex (m : ℕ) : (bocksteinShortComplex S p m)
     pow_ne_zero _ (by exact_mod_cast (Fact.out : p.Prime).ne_zero)
   have hinj (V : (Scheme.ProEt S)ᵒᵖ) :
       Function.Injective ((bocksteinShortComplex S p m).f.hom.app V) := fun x y h ↦
-    ULift.ext _ _ (ContinuousMap.ext fun t ↦ mul_left_cancel₀ hp (congrArg
+    ULift.ext (ContinuousMap.ext fun t ↦ mul_left_cancel₀ hp (congrArg
       (fun z : ULift.{u + 1} C(V.unop.left, ℤ_[p]) ↦ z.down t) h))
   refine .mk' (Sheaf.exact_of_injective_of_exact_sections hinj fun V y hy ↦ ?_) ?_ ?_
   · let y' : ULift.{u + 1} C(V.unop.left, ℤ_[p]) := y
@@ -238,7 +238,7 @@ lemma shortExact_bocksteinShortComplex (m : ℕ) : (bocksteinShortComplex S p m)
       (QuotientAddGroup.eq_zero_iff _).1 (congrArg (fun z : ULift.{u + 1}
         C(V.unop.left, ℤ_[p] ⧸ (powOpenAddSubgroup p m : AddSubgroup ℤ_[p])) ↦ z.down t) hy)
     exact ⟨ULift.up ⟨fun t ↦ divPow p _ (hy' t), continuous_divPow p y'.down hy'⟩,
-      ULift.ext _ _ (ContinuousMap.ext fun t ↦ pow_mul_divPow p _ (hy' t))⟩
+      ULift.ext (ContinuousMap.ext fun t ↦ pow_mul_divPow p _ (hy' t))⟩
   · have (V : (Scheme.ProEt S)ᵒᵖ) :
         Mono (((sheafToPresheaf _ _).map (bocksteinShortComplex S p m).f).app V) :=
       (AddCommGrpCat.mono_iff_injective _).2 (hinj V)
@@ -252,7 +252,7 @@ lemma shortExact_bocksteinShortComplex (m : ℕ) : (bocksteinShortComplex S p m)
       s
     refine ⟨ULift.up ((⟨fun q ↦ q.out, continuous_of_discreteTopology⟩ :
       C(ℤ_[p] ⧸ (powOpenAddSubgroup p m : AddSubgroup ℤ_[p]), ℤ_[p])).comp s'.down), ?_⟩
-    exact ULift.ext _ _ (ContinuousMap.ext fun t ↦ QuotientAddGroup.out_eq' _)
+    exact ULift.ext (ContinuousMap.ext fun t ↦ QuotientAddGroup.out_eq' _)
 
 /-- **Bockstein, first part.** The kernel of `ρₘ : Hⁿ(S, ℤ_p) ⟶ Hⁿ(S, ℤ/pᵐ)` is
 `pᵐ Hⁿ(S, ℤ_p)`. -/

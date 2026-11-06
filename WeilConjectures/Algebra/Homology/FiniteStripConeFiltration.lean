@@ -74,12 +74,12 @@ private theorem stripStep_bot
     (b : A ⟶ K.total (ComplexShape.up ℤ)) (n : ℤ) :
     stripStep K r A b (n + 2) n = ⊥ := by
   unfold stripStep
-  rw [if_neg (by omega), bot_sup_eq]
+  rw [ite_eq_right (by omega), bot_sup_eq]
   apply le_antisymm _ bot_le
   apply Finset.sup_le
   intro i hi
   have hi' := Finset.mem_Ico.mp hi
-  rw [if_neg (by omega)]
+  rw [ite_eq_right (by omega)]
 
 /-- A generating map factors through every subobject containing its image. -/
 private theorem factors_image
@@ -116,7 +116,7 @@ private theorem stripStep_top
   have hsrc : imageSubobject
       ((CochainComplex.mappingCone.inl b).v (n + 1) n (by omega)) ≤ S := by
     dsimp [S, stripStep]
-    rw [if_pos (by omega)]
+    rw [ite_eq_left (by omega)]
     exact le_sup_left
   have htgt (i : ℤ) (hi : i ∈ Finset.Ico (0 : ℤ) (r : ℤ)) : imageSubobject
       (K.ιTotalOrZero (ComplexShape.up ℤ) i (n - i) n ≫
@@ -127,7 +127,7 @@ private theorem stripStep_top
       if n - (r : ℤ) ≤ n - i then imageSubobject
         (K.ιTotalOrZero (ComplexShape.up ℤ) i (n - i) n ≫
           (CochainComplex.mappingCone.inr b).f n) else ⊥) hi)
-    rw [if_pos (by omega)]
+    rw [ite_eq_left (by omega)]
   have : Epi S.arrow := CategoryTheory.Preadditive.epi_of_cancel_zero S.arrow (by
     intro Y g hg
     apply CochainComplex.mappingCone.ext_from _ (n + 1) n rfl
@@ -167,7 +167,7 @@ private theorem stripStep_source_factors
       ((CochainComplex.mappingCone.inl b).v (n + 1) n (by omega)) := by
   apply factors_image
   unfold stripStep
-  rw [if_pos hp]
+  rw [ite_eq_left hp]
   exact le_sup_left
 
 /-- Every supported target generator above the cutoff lies in the step. -/
@@ -190,7 +190,7 @@ private theorem stripStep_target_factors
       if p ≤ n - i then imageSubobject
         (K.ιTotalOrZero (ComplexShape.up ℤ) i (n - i) n ≫
           (CochainComplex.mappingCone.inr b).f n) else ⊥) hi)
-    rw [if_pos hp]
+    rw [ite_eq_left hp]
   · have hz := strip_row_isZero K r hsupport i j (by
       simp only [Finset.mem_Ico, not_and_or, not_le, not_lt] at hi
       exact hi)

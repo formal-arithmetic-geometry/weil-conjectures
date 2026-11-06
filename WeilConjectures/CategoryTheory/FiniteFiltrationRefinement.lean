@@ -73,8 +73,8 @@ private theorem subobject_filtration_of_closure
     let d : Fin (n + 2) → Subobject B := fun j ↦
       if h : j.val < n + 1 then (Subobject.map i).obj (c ⟨j.val, h⟩) else ⊤
     have hdval (j : ℕ) (hj : j < n + 1) :
-        d ⟨j, by omega⟩ = (Subobject.map i).obj (c ⟨j, hj⟩) := dif_pos hj
-    have hdlast : d (Fin.last (n + 1)) = ⊤ := dif_neg (by simp)
+        d ⟨j, by omega⟩ = (Subobject.map i).obj (c ⟨j, hj⟩) := dite_eq_left hj
+    have hdlast : d (Fin.last (n + 1)) = ⊤ := dite_eq_right (by simp)
     have hd : Monotone d := by
       intro a b hab
       dsimp only [d]

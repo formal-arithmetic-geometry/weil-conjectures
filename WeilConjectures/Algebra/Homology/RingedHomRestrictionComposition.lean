@@ -172,12 +172,12 @@ theorem composite_normalized
       (G.mapDerivedCategory.op.prod G.mapDerivedCategory) ⋙ derivedInternalHom.{u, w} N Z)
     (he : Normalized R S F a e) (hs : Normalized S Z G b s) :
     Normalized R Z V (composite (Functor.mapHomologicalComplexCompIso c (.up ℤ)) a b)
-      (composite ((Functor.mapDerivedCategoryCompIso F G).symm ≪≫
+      (composite (Functor.mapDerivedCategoryCompIso F G ≪≫
         Functor.mapDerivedCategoryNatIso c) e s) := by
   intro L I hI
   have : CochainComplex.IsKInjective
       ((F.mapHomologicalComplex (.up ℤ)).obj I) := hF I hI
-  let d := (Functor.mapDerivedCategoryCompIso F G).symm ≪≫
+  let d := Functor.mapDerivedCategoryCompIso F G ≪≫
     Functor.mapDerivedCategoryNatIso c
   have hz (X : Complex R) :
       d.hom.app (DerivedCategory.Q.obj X) ≫ V.mapDerivedCategoryFactors.hom.app X =
@@ -189,10 +189,10 @@ theorem composite_normalized
     have hc : (Functor.mapHomologicalComplexCompIso (Iso.refl (F ⋙ G))
         (.up ℤ)).hom.app X = 𝟙 _ := rfl
     erw [hc, DerivedCategory.Q.map_id, Category.comp_id] at h
-    apply (cancel_epi ((Functor.mapDerivedCategoryCompIso F G).hom.app
+    apply (cancel_epi ((Functor.mapDerivedCategoryCompIso F G).inv.app
       (DerivedCategory.Q.obj X))).1
     dsimp only [d, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app]
-    simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
+    simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
     rw [Functor.mapDerivedCategoryNatIso_fac, ← h]
     simp only [Category.assoc]
     rfl

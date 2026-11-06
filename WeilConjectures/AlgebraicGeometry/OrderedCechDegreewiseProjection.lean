@@ -158,7 +158,7 @@ theorem orderedCech_degreewise_projection_exists {X' : Scheme.{u}}
         orderedCechNaturalCoordinate M W₀ D e p B y (φ.app (op B) s) =
           orderedCechNaturalProjectionValue M W₀ D e p B y s := by
       change (((c ≫ (e p).inv) ≫ (e p).hom ≫ Pi.π F y).app (op B)) s = _
-      simp only [Category.assoc, Iso.inv_hom_id_assoc, c, Pi.lift_π]
+      simp only [Category.assoc, Iso.inv_hom_id_assoc, c, Pi.lift_comp_π]
       simp only [NatTrans.app_sum, orderedCechNaturalProjectionValue]
       simp only [ModuleCat.hom_sum, LinearMap.sum_apply]
       apply Finset.sum_congr rfl

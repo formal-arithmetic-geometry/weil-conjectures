@@ -331,10 +331,10 @@ noncomputable def toSheafTorsorContinuousMap (t : EtaleTorsor M Y) :
     Sheaf.Torsor (Etale.continuousMapSheaf Y M) where
   sheaf := Y.smallEtaleTopology.uliftYoneda.{u + 1}.obj t.toEtale
   vadd U f φ := ⟨t.smulHom f φ.down⟩
-  zero_vadd U φ := ULift.ext _ _ (etaleHom_ext
+  zero_vadd U φ := ULift.ext (etaleHom_ext
     ((t.smulHom_const 0 φ.down).trans (by rw [t.zero_vadd]; exact Category.comp_id _)))
-  add_vadd U f g φ := ULift.ext _ _ (t.smulHom_add f g φ.down)
-  map_vadd h f φ := ULift.ext _ _ (t.comp_smulHom h.unop f φ.down)
+  add_vadd U f g φ := ULift.ext (t.smulHom_add f g φ.down)
+  map_vadd h f φ := ULift.ext (t.comp_smulHom h.unop f φ.down)
   bijective_vadd U φ := by
     refine (Equiv.ulift.symm.bijective).comp (t.bijective_smulHom φ.down)
   nonemptySieve_mem U := by
@@ -360,7 +360,7 @@ lemma toSheafTorsorContinuousMap_equiv_of_isIsomorphic {t₁ t₂ : EtaleTorsor 
     (h : t₁.IsIsomorphic t₂) : t₁.toSheafTorsorContinuousMap ≈ t₂.toSheafTorsorContinuousMap := by
   obtain ⟨φ, hπ, hv⟩ := h
   let Φ : t₁.toEtale ≅ t₂.toEtale := MorphismProperty.Over.isoMk φ hπ
-  refine ⟨⟨Y.smallEtaleTopology.uliftYoneda.{u + 1}.mapIso Φ, fun U f x ↦ ULift.ext _ _ ?_⟩⟩
+  refine ⟨⟨Y.smallEtaleTopology.uliftYoneda.{u + 1}.mapIso Φ, fun U f x ↦ ULift.ext ?_⟩⟩
   exact t₁.smulHom_comp t₂ f x.down Φ.hom hv
 
 /-- Torsors with isomorphic sheaf torsors are isomorphic: by the Yoneda lemma, an isomorphism of
@@ -375,7 +375,7 @@ lemma isIsomorphic_of_toSheafTorsorContinuousMap_equiv {t₁ t₂ : EtaleTorsor 
     rw [ConcreteCategory.comp_apply, ConcreteCategory.comp_apply] at h
     have e₁ : (⟨x⟩ : ULift.{u + 1} (U ⟶ t₁.toEtale)) =
         (Y.smallEtaleTopology.uliftYoneda.{u + 1}.obj t₁.toEtale).obj.map x.op ⟨𝟙 _⟩ :=
-      ULift.ext _ _ (Category.comp_id x).symm
+      ULift.ext (Category.comp_id x).symm
     rw [e₁]
     exact h
   have hΨ {U : Y.Etale} (x : U ⟶ t₂.toEtale) : e.iso.inv.hom.app (op U) ⟨x⟩ = ⟨x ≫ Ψ⟩ := by
@@ -383,7 +383,7 @@ lemma isIsomorphic_of_toSheafTorsorContinuousMap_equiv {t₁ t₂ : EtaleTorsor 
     rw [ConcreteCategory.comp_apply, ConcreteCategory.comp_apply] at h
     have e₁ : (⟨x⟩ : ULift.{u + 1} (U ⟶ t₂.toEtale)) =
         (Y.smallEtaleTopology.uliftYoneda.{u + 1}.obj t₂.toEtale).obj.map x.op ⟨𝟙 _⟩ :=
-      ULift.ext _ _ (Category.comp_id x).symm
+      ULift.ext (Category.comp_id x).symm
     rw [e₁]
     exact h
   have hΦΨ : Φ ≫ Ψ = 𝟙 _ := by

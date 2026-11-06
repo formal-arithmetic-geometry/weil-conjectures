@@ -78,7 +78,7 @@ lemma coe_reesMonomial {n : ℕ} (a : A) (ha : a ∈ I ^ n) :
 
 lemma reesMonomial_mem {n : ℕ} (a : A) (ha : a ∈ I ^ n) :
     reesMonomial I a ha ∈ reesGrading I n := fun k hk => by
-  rw [coe_reesMonomial, Polynomial.coeff_monomial, if_neg hk.symm]
+  rw [coe_reesMonomial, Polynomial.coeff_monomial, ite_eq_right hk.symm]
 
 @[simp]
 lemma reesMonomial_mul {m n : ℕ} (a b : A) (ha : a ∈ I ^ m) (hb : b ∈ I ^ n) :
@@ -104,14 +104,14 @@ lemma mem_reesGrading_iff_exists {n : ℕ} {F : reesAlgebra I} :
     refine Subtype.ext (Polynomial.ext fun k => ?_)
     rw [coe_reesMonomial, Polynomial.coeff_monomial]
     by_cases h : n = k
-    · rw [if_pos h, h]
-    · rw [if_neg h, hF k fun hk => h hk.symm]
+    · rw [ite_eq_left h, h]
+    · rw [ite_eq_right h, hF k fun hk => h hk.symm]
   · rintro ⟨a, ha, rfl⟩
     exact reesMonomial_mem I a ha
 
 instance reesGrading.instGradedMonoid : SetLike.GradedMonoid (reesGrading I) where
   one_mem k hk := by
-    rw [OneMemClass.coe_one, Polynomial.coeff_one, if_neg hk]
+    rw [OneMemClass.coe_one, Polynomial.coeff_one, ite_eq_right hk]
   mul_mem {m n F G} hF hG := by
     obtain ⟨a, ha, rfl⟩ := (mem_reesGrading_iff_exists I).mp hF
     obtain ⟨b, hb, rfl⟩ := (mem_reesGrading_iff_exists I).mp hG

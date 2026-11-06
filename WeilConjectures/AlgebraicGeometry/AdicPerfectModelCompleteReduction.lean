@@ -388,8 +388,7 @@ private def extensionUniverseIso {R S : Sheaf J CommRingCat.{w}} (φ : R ⟶ S)
     intro V W i
     apply ModuleCat.hom_ext
     ext t
-    induction t using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction t using TensorProduct.inductionOn with
     | add z z' hz hz' => simp only [map_add, hz, hz']
     | tmul s x =>
       change SheafOfModules.changeOfRingsMap.{w, w, w} φ M i
@@ -498,8 +497,7 @@ private def changeOverPresheafIso {R S : Sheaf J CommRingCat.{w}} (φ : R ⟶ S)
     intro V W i
     apply ModuleCat.hom_ext
     ext t
-    induction t using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction t using TensorProduct.inductionOn with
     | add z z' hz hz' => simp only [map_add, hz, hz']
     | tmul s x =>
       exact (Classical.choose_spec (SheafOfModules.exists_changeOfRingsMap.{w, w, w}

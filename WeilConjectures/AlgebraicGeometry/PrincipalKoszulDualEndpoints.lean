@@ -224,7 +224,7 @@ private theorem dualZeroTerm_step (m : ℕ) :
   let f := ringedKoszulFactorStep R ⟨a.val, a.property⟩ m
   let e := SheafOfModules.homObjUnitIso (R := R) U
   have hf : s0.inv ≫ f.f 0 = s1.inv := by
-    simp only [f, ringedKoszulFactorStep, ringedKoszulFactorStepF, dif_pos rfl,
+    simp only [f, ringedKoszulFactorStep, ringedKoszulFactorStepF, dite_eq_left rfl,
       eqToHom_refl, Category.id_comp]
     change s0.inv ≫ (s0.hom ≫ s1.inv) = s1.inv
     exact s0.inv_hom_id_assoc _
@@ -252,7 +252,7 @@ private theorem dualNegOneTerm_step (m : ℕ) :
   let e := SheafOfModules.homObjUnitIso (R := R) U
   have hf : s0.inv ≫ f.f 1 = c ≫ s1.inv := by
     simp only [f, ringedKoszulFactorStep, ringedKoszulFactorStepF,
-      dif_neg (show (1 : ℤ) ≠ 0 by decide), dif_pos rfl, eqToHom_refl,
+      dite_eq_right (show (1 : ℤ) ≠ 0 by decide), dite_eq_left rfl, eqToHom_refl,
       Category.id_comp]
     change s0.inv ≫ (s0.hom ≫ c ≫ s1.inv) = c ≫ s1.inv
     exact s0.inv_hom_id_assoc _
@@ -493,7 +493,7 @@ private theorem dualZeroTerm_unit (m : ℕ) :
   let e := SheafOfModules.homObjUnitIso (R := R) O
   have hp : d.inv ≫ p.f 0 = s.inv := by
     simp only [p, ringedKoszulFactorProjection, ringedKoszulFactorProjectionF,
-      dif_pos rfl, eqToHom_refl, Category.id_comp, Category.comp_id]
+      dite_eq_left rfl, eqToHom_refl, Category.id_comp, Category.comp_id]
     change d.inv ≫ (d.hom ≫ s.inv) = s.inv
     exact d.inv_hom_id_assoc s.inv
   have hr : ringedKoszulDualUnit R 1 (fun _ ↦ ⟨a.val, a.property⟩) m ≫ ψ.hom =

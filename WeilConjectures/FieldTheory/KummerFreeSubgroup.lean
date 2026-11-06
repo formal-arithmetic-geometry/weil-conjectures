@@ -140,8 +140,7 @@ theorem exists_monoidHom_finsupp [CompactSpace G] [T2Space G] {ι : Type*}
   choose τ hτC hτ using fun j : ULift.{w} ℕ ↦
     (χ i₀).exists_mem_closure_zpowers_toAdd_eq σ (t ^ j.down)
   let C := (Subgroup.zpowers σ).topologicalClosure
-  let _ : CommGroup C := (Subgroup.zpowers σ).commGroupTopologicalClosure fun x y ↦
-    (IsMulCommutative.is_comm (M := Subgroup.zpowers σ)).comm x y
+  let _ : CommGroup C := { (inferInstance : Group C) with mul_comm := mul_comm' }
   let ψ : (ULift.{w} ℕ →₀ ℤ) →+ Additive C :=
     Finsupp.liftAddHom fun j ↦ zmultiplesHom (Additive C) (Additive.ofMul ⟨τ j, hτC j⟩)
   let φ : Multiplicative (ULift.{w} ℕ →₀ ℤ) →* G :=

@@ -46,7 +46,6 @@ private theorem targetHomotopyComparison
   ext n
   simp [Functor.mapHomologicalComplexCompIso, NatIso.mapHomologicalComplex,
     NatTrans.mapHomologicalComplex]
-  rfl
 
 private theorem targetOpenFactor
     {C : Type*} [Category C] {A B D E : C}
@@ -97,12 +96,9 @@ attribute [local irreducible] Scheme.Modules.tensorPullbackCompositionIso
   Scheme.Modules.tensorPullback Scheme.Modules.tensorPullbackObj
 attribute [local instance_reducible] Scheme.Modules TopCat.Sheaf
 attribute [local implicit_reducible] DerivedCategory
-  Functor.mapHomologicalComplex HomotopyCategory Functor.mapHomotopyCategory
-  HomotopyCategory.quotient DerivedCategory.Q DerivedCategory.Qh
-  HomologicalComplexUpToQuasiIso.Qh
+  HomotopyCategory DerivedCategory.Q DerivedCategory.Qh
 attribute [local irreducible] singleComplexOpenPullbackIso openPinnedTensorOpenIso
 
-set_option maxHeartbeats 400000 in
 -- The four factorization equations compare several selected localization functors.
 /-- The target-open leg of the derived counit composition calculation.
 Source: Stacks Project, Tags 08DW and 0D5S.

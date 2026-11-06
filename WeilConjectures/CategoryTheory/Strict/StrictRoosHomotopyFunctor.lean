@@ -195,7 +195,7 @@ private theorem cone_d_χ (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (i : ℤ) :
             biprod.snd := by
       obtain rfl := (ComplexShape.up ℤ).next_eq' hr
       dsimp only [HomologicalComplex.homotopyCofiber.sndX]
-      rw [dif_pos hr]
+      rw [dite_eq_left hr]
     simpa only [Category.assoc, biprod.lift_snd, Preadditive.comp_add, cχ,
       HomologicalComplex.homotopyCofiber.fstX, hs i (i + 1) rfl,
       hs (i + 1) (i + 1 + 1) rfl] using

@@ -155,8 +155,7 @@ theorem ringCechCoordinates_tensor_step (A : CommRingCat.{u}) (r : ℕ)
   have ht (q : ℕ) (y : S ⊗[A] M q) :
       T (q + 1) (TensorProduct.map (LinearMap.id : S →ₗ[A] S) (D q) y) =
         TensorProduct.map (LinearMap.id : S →ₗ[A] S) (d q) (T q y) := by
-    induction y using TensorProduct.induction_on with
-    | zero => simp
+    induction y using TensorProduct.inductionOn with
     | tmul s x =>
       simpa only [T, TensorProduct.map_tmul, TensorProduct.congr_tmul,
         LinearEquiv.refl_apply, LinearMap.id_apply] using

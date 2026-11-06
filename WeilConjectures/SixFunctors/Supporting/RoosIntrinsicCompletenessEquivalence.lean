@@ -501,7 +501,7 @@ private theorem integralStrictRoosTriangle {A : Type*} [Category* A] [Abelian A]
     simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
     apply Pi.hom_ext
     intro n
-    simp only [Category.assoc, he, Pi.lift_π, Functor.map_comp]
+    simp only [Category.assoc, he, Pi.lift_comp_π, Functor.map_comp]
   · change towerTransitionEndomorphism (fun n ↦ Q.map (integralOperationsTowerStep C n)) ≫
       e.inv = e.inv ≫ Q.map t
     apply (cancel_mono e.hom).1
@@ -635,7 +635,7 @@ private theorem integralRoosUnit_projection
           Pi.π (fun k ↦ ((IntegralOnSlice.tower l E T none).obj P).obj (op k)) n) =
       ((IntegralOnSlice.augmentation l E T none).app P).app (op n) := by
   simp only [IntegralOnSlice.roosUnit, CochainComplex.mappingCocone.lift_fst_assoc,
-    IntegralOnSlice.productAugmentation, Pi.lift_π]
+    IntegralOnSlice.productAugmentation, Pi.lift_comp_π]
 
 private theorem invMapId_comp {A B : Type*} [Category* A] [Category* B]
     (F : A ⥤ B) (P : A) {X Y : B} (a : X ⟶ F.obj P) (b : F.obj P ⟶ Y) :
@@ -648,7 +648,7 @@ private theorem productLift_transport {A : Type*} [Category* A]
     (h : ∀ n, a n = κ ≫ b n) : Pi.lift a = κ ≫ Pi.lift b := by
   apply Pi.hom_ext
   intro n
-  simp only [Category.assoc, Pi.lift_π]
+  simp only [Category.assoc, Pi.lift_comp_π]
   exact h n
 
 private theorem integralLegacyIdentityLeg

@@ -105,7 +105,7 @@ private theorem coordinate_square
   have hm : F.map mY.inv ≫ v =
       c.hom.app (A, B) ≫ TX.map (Prod.mkHom qA qB) ≫ mX.inv := by
     rw [← cancel_epi (F.map mY.hom)]
-    simpa only [Iso.map_hom_inv_id_assoc, Category.assoc,
+    simpa only [Iso.hom_inv_id_map_assoc, Category.assoc,
       Iso.hom_inv_id_assoc, Iso.hom_inv_id, Category.comp_id] using (congrArg (· ≫ mX.inv) hv).symm
   simp only [Category.assoc]
   rw [hm]
@@ -226,7 +226,7 @@ private theorem strict_comparison_square
       ObjectProperty.ι_map, ObjectProperty.ι_obj, Functor.comp_obj,
       Functor.prod_obj, Iso.app_hom, T] using hn
   rw [← hn']
-  have he := Iso.map_hom_inv_id_assoc
+  have he := Iso.hom_inv_id_map_assoc
     ((pullBridge l E f).app (StrictQuotient.total l E A B)) DerivedCategory.Q
     (DerivedCategory.Q.map ((pullbackTensorSequenceCochain l E f).hom.app (A, B)) ≫
       DerivedCategory.Q.map ((coefficientTotalTensor.{u, u+1, u}

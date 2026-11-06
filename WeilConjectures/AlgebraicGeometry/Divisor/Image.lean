@@ -146,7 +146,7 @@ theorem Ideal.exists_notMem_mul_mem_span_singleton_of_isIntegral {A B : Type*} [
       obtain ⟨hqp, hq⟩ := (hmem q).mp hq
       obtain ⟨hq'p, hq'⟩ := (hmem q').mp hq'
       by_contra hne
-      exact (Ideal.IsIntegral.comap_lt_comap (R := A) (lt_of_le_of_ne hle hne)).ne
+      exact (Ideal.IsIntegral.under_lt_under (R := A) (lt_of_le_of_ne hle hne)).ne
         (hq'.trans hq.symm)) I
     fun q hq ↦ hI q ((hmem q).mp hq).1 ((hmem q).mp hq).2
   have hle : ¬((Ideal.span {h}).colon (I : Set B)).comap (algebraMap A B) ≤ p := by
@@ -154,7 +154,7 @@ theorem Ideal.exists_notMem_mul_mem_span_singleton_of_isIntegral {A B : Type*} [
     obtain ⟨Q, hQ, hQp, hQ'⟩ := Ideal.exists_ideal_over_prime_of_isIntegral p _ hle
     obtain ⟨u, hu, hui⟩ := hh Q ((hmem Q).mpr ⟨hQp, hQ'⟩)
     exact hu (hQ (Submodule.mem_colon.mpr fun i hi ↦ hui i hi))
-  obtain ⟨g, hg, hgp⟩ := SetLike.not_le_iff_exists.mp hle
+  obtain ⟨g, hg, hgp⟩ := IsConcreteLE.not_le_iff_exists.mp hle
   exact ⟨g, hgp, h, hhI, fun i hi ↦ Submodule.mem_colon.mp hg i hi⟩
 
 /-- If `M` becomes free after inverting `r`, then it is free over every localization of `R` away

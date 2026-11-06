@@ -219,7 +219,7 @@ theorem etaleResidueTriples_colimit_isStrictHenselization
       exact h.trans (congrArg (fun f ↦ f.hom x) (k.w g)).symm
     · intro k m hm
       apply CommAlgCat.hom_ext
-      apply AlgHom.coe_ringHom_injective
+      apply AlgHom.toRingHom_injective
       change m.hom.toRingHom = (hc.desc (k' k)).hom
       suffices h : CommRingCat.ofHom m.hom.toRingHom = hc.desc (k' k) from
         congrArg CommRingCat.Hom.hom h

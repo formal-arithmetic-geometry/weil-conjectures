@@ -100,8 +100,7 @@ private theorem modelUniverseComparison
     kB.hom.hom.map_smul b x
   have hlinear (r : A ⊗[R] B) (x : (@ModuleCat.BaseDerivedTensorCohomologyModel.cohomology
         R A B _ _ _ _ _ hR hB Q D _ _ m i)) : v (r • x) = r • v x := by
-    induction r using TensorProduct.induction_on with
-    | zero => simp
+    induction r using TensorProduct.inductionOn with
     | tmul a b =>
       have ht : (a ⊗ₜ[R] b : A ⊗[R] B) =
           (Algebra.TensorProduct.includeLeft (S := R) a : A ⊗[R] B) *

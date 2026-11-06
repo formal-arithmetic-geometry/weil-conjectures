@@ -117,8 +117,7 @@ theorem idealPowersReesMultiplication_component {A : Type v} [CommRing A]
     · rintro _ ⟨s, rfl⟩
       obtain ⟨z, rfl⟩ :=
         (Modules.quasiCoherent_tensor_product_affine_sections J M).2 U.1 U.2 |>.2 s
-      induction z using TensorProduct.induction_on with
-      | zero => simp only [map_zero]; exact H.zero_mem
+      induction z using TensorProduct.inductionOn with
       | tmul a t =>
         rw [Modules.tensorSectionsMap_tmul, ht]
         exact AddSubgroup.subset_closure ⟨a, t, rfl⟩

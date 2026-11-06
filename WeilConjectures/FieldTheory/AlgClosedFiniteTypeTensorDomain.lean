@@ -60,8 +60,7 @@ theorem IsAlgClosed.isDomain_tensorProduct_of_finiteType
   have hnat (C : Type _) [CommRing C] [Algebra k C]
       (π : S →ₐ[k] C) (i) (x : R ⊗[k] S) :
       π (Φ S i x) = Φ C i (Algebra.TensorProduct.map (AlgHom.id k R) π x) := by
-    induction x with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | add x y hx hy => simp [hx, hy]
     | tmul a c => simp [Φ, Algebra.TensorProduct.basis_repr_tmul]
   have hzero (x y : R ⊗[k] S) (hxy : x * y = 0) : x = 0 ∨ y = 0 := by

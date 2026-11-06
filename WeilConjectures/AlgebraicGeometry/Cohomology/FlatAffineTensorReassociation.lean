@@ -40,8 +40,7 @@ private theorem tensor_reassociation_of_ringEquiv
   have hE (b : S) (n : N) : E (b ⊗ₜ[R] n) = β b ⊗ₜ[A] n := by
     simp [E, he]
   have hsmul (c : S) (x : S ⊗[R] N) : E (c • x) = c • E x := by
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul b n =>
       rw [TensorProduct.smul_tmul', hE, hE]
       change β (c * b) ⊗ₜ[A] n = β c • (β b ⊗ₜ[A] n)

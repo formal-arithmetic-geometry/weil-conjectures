@@ -27,38 +27,6 @@ attribute [local irreducible] Functor.mapDerivedCategory Functor.rightDerivedFun
   proEtaleRingModulePullback proEtaleRingModuleAdjunction proEtaleRingCompositeCoefficients
   proEtaleCanonicalDerivedPullbackComparison
 
-private theorem composition_localization {V W Z : Scheme.{t}} (h : Z ⟶ W) (k : W ⟶ V)
-    (RV : Sheaf (ProEt.topology V) CommRingCat.{t + 1})
-    (RW : Sheaf (ProEt.topology W) CommRingCat.{t + 1})
-    (RZ : Sheaf (ProEt.topology Z) CommRingCat.{t + 1})
-    (ck : (proEtaleSheafInverseImage k CommRingCat.{t + 1}).obj RV ≅ RW)
-    (ch : (proEtaleSheafInverseImage h CommRingCat.{t + 1}).obj RW ≅ RZ) :
-    proEtaleCanonicalDerivedPullbackComparison h k RV RW RZ ck ch =
-      Functor.mapDerivedCategoryNatIso (exchangeModuleComposition h k RV RW RZ ck ch) ≪≫
-        Functor.mapDerivedCategoryCompIso (proEtaleRingModulePullback k RV RW ck)
-          (proEtaleRingModulePullback h RW RZ ch) := by
-  let a := exchangeModuleComposition h k RV RW RZ ck ch
-  let ak := proEtaleRingModuleAdjunction k RV RW ck
-  let ah := proEtaleRingModuleAdjunction h RW RZ ch
-  let ac := proEtaleRingModuleAdjunction (h ≫ k) RV RZ
-    (proEtaleRingCompositeCoefficients h k RV RW RZ ck ch)
-  let e := conjugateIsoEquiv (ak.comp ah) ac a
-  have he : (Adjunction.leftAdjointCompIso ak ah ac e).symm = a := by
-    apply Iso.ext
-    apply (conjugateEquiv (ak.comp ah) ac).injective
-    exact Adjunction.conjugateEquiv_leftAdjointCompIso_inv ak ah ac e
-  have hn : ExchangeModuleCompositionNormalized h k RV RW RZ ck ch a :=
-    (exchangeModuleComposition_existsUnique h k RV RW RZ ck ch).choose_spec.1
-  have H := proEtaleCanonicalDerivedPullback_normalization h k RV RW RZ ck ch
-    (proEtaleRingCompositeCoefficients h k RV RW RZ ck ch) rfl e hn
-  simp only [eqToIso_refl, Iso.refl_trans] at H
-  change proEtaleCanonicalDerivedPullbackComparison h k RV RW RZ ck ch =
-    Functor.mapDerivedCategoryNatIso (Adjunction.leftAdjointCompIso ak ah ac e).symm ≪≫
-      Functor.mapDerivedCategoryCompIso (proEtaleRingModulePullback k RV RW ck)
-        (proEtaleRingModulePullback h RW RZ ch) at H
-  rw [he] at H
-  exact H
-
 private theorem localization_transport
     {U V : Scheme.{t}} (R : Sheaf (ProEt.topology V) CommRingCat.{t + 1})
     (S : Sheaf (ProEt.topology U) CommRingCat.{t + 1})
@@ -70,31 +38,5 @@ private theorem localization_transport
   cases h
   apply Iso.ext
   exact Functor.mapDerivedCategoryNatIso_refl
-
-/-- The published ambient pullback square is the exact descent of the ordinary square.
-Source: Stacks Project, Tag 0D6D
-(blueprint: lem-weil-pbc-ringed-square-localization).
-Proof: the normalization theorem identifies each canonical derived compositor with
-exact localization of the ordinary compositor. Its right-adjoint conjugate has the
-same sectionwise fibre-product formula as exchangeModuleComposition, so uniqueness
-identifies the ordinary isomorphisms. Exact localization preserves inverse,
-composition and equality transport. Substitute these identities into the two
-compositors defining the square. -/
-theorem StrictTowerRingedSquare.ambientSquare_localization
-    {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
-    {f : X ⟶ Y} {g : Y' ⟶ Y} {sq : ChosenCartesianSquare g' f' f g}
-    (r : StrictTowerRingedSquare sq) :
-    proEtaleAmbientRingedPullbackComparison sq r.RX r.RY r.RX' r.RY'
-        r.cf r.cg r.cg' r.cf' r.coherent =
-      Functor.mapDerivedCategorySquareIso r.exchangeModuleSquare := by
-  unfold proEtaleAmbientRingedPullbackComparison
-  dsimp only
-  rw [composition_localization, composition_localization]
-  apply Iso.ext
-  simp only [Functor.mapDerivedCategorySquareIso, StrictTowerRingedSquare.exchangeModuleSquare,
-    Functor.mapDerivedCategoryNatIso_trans, Functor.mapDerivedCategoryNatIso_symm,
-    Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Category.assoc]
-  have ht := localization_transport r.RY r.RX' r.exchangeCoefficients_eq
-  rw [ht]
 
 end AlgebraicGeometry.Scheme

@@ -82,8 +82,7 @@ theorem RingHom.finite_coefficient_tensor_kernel_closed_fiber
     refine ⟨r, (IsLocalRing.residue_eq_zero_iff _).mp ?_⟩
     rw [map_sub, ← IsLocalRing.ResidueField.map_residue α, hrbar, sub_self]
   have hnormal (x : D) : ∃ c : C, x - j c ∈ L := by
-    induction x using TensorProduct.induction_on with
-    | zero => exact ⟨0, by simp⟩
+    induction x using TensorProduct.inductionOn with
     | tmul c a =>
       obtain ⟨r, hr⟩ := happrox a
       refine ⟨c * γ r, ?_⟩

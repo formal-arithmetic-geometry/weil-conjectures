@@ -57,7 +57,7 @@ private theorem normalized_iso_all_degrees
       have hIcc : Finset.Icc (max b p) m = ∅ := by
         apply Finset.Icc_eq_empty
         omega
-      simp only [if_neg hpm, hIcc, Finset.sup_empty, bot_sup_eq]
+      simp only [ite_eq_right hpm, hIcc, Finset.sup_empty, bot_sup_eq]
     have hzstep : IsZero ((F.step p : CochainComplex A ℤ).X m) := by
       apply IsZero.of_mono_eq_zero ((F.step p).arrow.f m)
       rw [← imageSubobject_arrow_comp ((F.step p).arrow.f m)]

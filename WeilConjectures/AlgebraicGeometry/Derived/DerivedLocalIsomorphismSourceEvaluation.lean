@@ -70,12 +70,12 @@ variable {C₀ : Type u₀} {C₁ : Type u₁} {C₂ : Type u₂} {C₃ : Type u
 include h in
 set_option backward.isDefEq.respectTransparency false in
 private theorem derived_path_coherence (K : DerivedCategory C₀) :
-    ((mapDerivedCategoryCompIso Rv Sv).inv.app K ≫
+    ((mapDerivedCategoryCompIso Rv Sv).hom.app K ≫
       (mapDerivedCategoryNatIso ev).hom.app K) ≫
         (mapDerivedCategoryTriangleIso δ).hom.app K =
     Sv.mapDerivedCategory.map ((mapDerivedCategoryTriangleIso β).hom.app K) ≫
       (mapDerivedCategorySquareIso α).hom.app (Rw.mapDerivedCategory.obj K) ≫
-      L.mapDerivedCategory.map ((mapDerivedCategoryCompIso Rw Sw).inv.app K ≫
+      L.mapDerivedCategory.map ((mapDerivedCategoryCompIso Rw Sw).hom.app K ≫
         (mapDerivedCategoryNatIso ew).hom.app K) := by
   have hh : ev ≪≫ δ = isoWhiskerRight β Sv ≪≫
       isoWhiskerLeft Rw α ≪≫ isoWhiskerRight ew L := by
@@ -93,28 +93,28 @@ private theorem derived_path_coherence (K : DerivedCategory C₀) :
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app]
     at hβ hα hew ha₁ ha₂
   have ha₁' :
-      Sv.mapDerivedCategory.map ((mapDerivedCategoryCompIso Rw M).hom.app K) ≫
-        (mapDerivedCategoryCompIso M Sv).inv.app (Rw.mapDerivedCategory.obj K) =
-      (mapDerivedCategoryCompIso (Rw ⋙ M) Sv).inv.app K ≫
-        (mapDerivedCategoryCompIso Rw (M ⋙ Sv)).hom.app K := by
-    apply (cancel_epi ((mapDerivedCategoryCompIso (Rw ⋙ M) Sv).hom.app K)).mp
-    simp only [Iso.hom_inv_id_app_assoc]
+      Sv.mapDerivedCategory.map ((mapDerivedCategoryCompIso Rw M).inv.app K) ≫
+        (mapDerivedCategoryCompIso M Sv).hom.app (Rw.mapDerivedCategory.obj K) =
+      (mapDerivedCategoryCompIso (Rw ⋙ M) Sv).hom.app K ≫
+        (mapDerivedCategoryCompIso Rw (M ⋙ Sv)).inv.app K := by
+    apply (cancel_epi ((mapDerivedCategoryCompIso (Rw ⋙ M) Sv).inv.app K)).mp
+    simp only [Iso.inv_hom_id_app_assoc]
     rw [← reassoc_of% ha₁]
     simp
   have hβ' :
       Sv.mapDerivedCategory.map ((mapDerivedCategoryNatIso β).hom.app K) ≫
-        (mapDerivedCategoryCompIso (Rw ⋙ M) Sv).inv.app K =
-      (mapDerivedCategoryCompIso Rv Sv).inv.app K ≫
+        (mapDerivedCategoryCompIso (Rw ⋙ M) Sv).hom.app K =
+      (mapDerivedCategoryCompIso Rv Sv).hom.app K ≫
         (mapDerivedCategoryNatIso (isoWhiskerRight β Sv)).hom.app K := by
-    apply (cancel_epi ((mapDerivedCategoryCompIso Rv Sv).hom.app K)).mp
-    simp only [Iso.hom_inv_id_app_assoc]
+    apply (cancel_epi ((mapDerivedCategoryCompIso Rv Sv).inv.app K)).mp
+    simp only [Iso.inv_hom_id_app_assoc]
     rw [← reassoc_of% hβ]
     simp
   have ha₂' :
-      (mapDerivedCategoryCompIso Rw (Sw ⋙ L)).hom.app K ≫
-        (mapDerivedCategoryCompIso Sw L).hom.app (Rw.mapDerivedCategory.obj K) ≫
-        L.mapDerivedCategory.map ((mapDerivedCategoryCompIso Rw Sw).inv.app K) =
-      (mapDerivedCategoryCompIso (Rw ⋙ Sw) L).hom.app K := by
+      (mapDerivedCategoryCompIso Rw (Sw ⋙ L)).inv.app K ≫
+        (mapDerivedCategoryCompIso Sw L).inv.app (Rw.mapDerivedCategory.obj K) ≫
+        L.mapDerivedCategory.map ((mapDerivedCategoryCompIso Rw Sw).hom.app K) =
+      (mapDerivedCategoryCompIso (Rw ⋙ Sw) L).inv.app K := by
     rw [← Category.assoc, ha₂, Category.assoc, ← Functor.map_comp]
     simp
   simp only [mapDerivedCategoryTriangleIso, mapDerivedCategorySquareIso,
@@ -194,7 +194,7 @@ noncomputable def etaleDerivedSliceRestrictionIso (V : X.Etale) :
     derivedSliceRestriction X.smallEtaleTopology B V ⋙
       (etaleDerivedSliceEquivalence X B V).functor ≅
         localIsomorphismRestriction X B V :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (etaleSliceRestrictionIso X B V)
 
 noncomputable def etaleSourceToSliceIso
@@ -231,7 +231,7 @@ noncomputable def proetDerivedSliceRestrictionIso (U : X.ProEt) :
     derivedSliceRestriction (ProEt.topology X) B U ⋙
       (proetSliceEquivalence X B U).functor.mapDerivedCategory ≅
         (ProEtale.upperStar (ModuleCat.{u + 1} B) U.hom).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (proetSliceRestrictionIso X B U)
 
 set_option backward.isDefEq.respectTransparency false in
@@ -276,9 +276,9 @@ noncomputable def etaleDerivedSliceMapIso {V W : X.Etale} (f : V ⟶ W) :
       (etaleDerivedSliceEquivalence X B V).functor ≅
         (etaleDerivedSliceEquivalence X B W).functor ⋙
           (Etale.upperStar (ModuleCat.{u + 1} B) f.left).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (etaleSliceMapIso X B f) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
 
 set_option backward.isDefEq.respectTransparency false in
 noncomputable def etaleLocalizationCompIso {V W : X.Etale} (f : V ⟶ W) :

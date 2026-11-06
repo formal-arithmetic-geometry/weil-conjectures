@@ -26,6 +26,12 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
+private local instance sheafTypesHasBinaryProduct.{uC, vC, w}
+    {C : Type uC} [Category.{vC} C] (J : GrothendieckTopology C)
+    (X Y : Sheaf J (Type w)) : HasBinaryProduct X Y :=
+  have : HasBinaryProducts (Sheaf J (Type w)) := Sheaf.instHasLimitsOfShape
+  HasLimitsOfShape.has_limit _
+
 private noncomputable def ringAdd.{uC, vC, w} {C : Type uC} [Category.{vC} C]
     (J : GrothendieckTopology C) [J.HasSheafCompose (forget CommRingCat.{w})]
     (G : Sheaf J CommRingCat.{w}) :

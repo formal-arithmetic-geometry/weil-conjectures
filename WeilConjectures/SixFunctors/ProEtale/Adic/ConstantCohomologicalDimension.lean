@@ -186,7 +186,7 @@ instance (Λ : CompactLattice l) : Mono (compactLatticeToAdicConstantSheaf l S �
     refine (AddCommGrpCat.mono_iff_injective _).2 fun x y h ↦ ?_
     have h' := congrArg (fun z : ULift.{u + 1} (locallyFiniteFunctions l V.unop.left) ↦
       (z.down : C(V.unop.left, PadicAlgCl l))) h
-    exact ULift.ext _ _ (ContinuousMap.ext fun t ↦ Subtype.ext (DFunLike.congr_fun h' t))
+    exact ULift.ext (ContinuousMap.ext fun t ↦ Subtype.ext (DFunLike.congr_fun h' t))
   have : Mono ((sheafToPresheaf _ _).map (compactLatticeToAdicConstantSheaf l S Λ)) :=
     NatTrans.mono_of_mono_app _
   exact (sheafToPresheaf _ _).mono_of_mono_map this
@@ -254,7 +254,7 @@ theorem subsingleton_H_adicConstantSheafAb_of_two_mul_lt {K : Type u} [Field K] 
 
 instance : IsAddTorsionFree (ULift.{u + 1} (PadicAlgCl l)) where
   nsmul_right_injective _ hn _ _ h :=
-    ULift.ext _ _ (nsmul_right_injective hn (congrArg ULift.down h))
+    ULift.ext (nsmul_right_injective hn (congrArg ULift.down h))
 
 /-- **Cohomological dimension of `ℚ̄_ℓ`.** For a scheme `S` of finite type and of dimension at
 most `d` over a separably closed field, `Hᵠ(S_proét, ℚ̄_ℓ) = 0` for `q > 2d`, cohomology being

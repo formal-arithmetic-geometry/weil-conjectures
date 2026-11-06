@@ -44,17 +44,17 @@ lemma exists_zsmul_eq_of_injective (A : AddCommGrpCat.{v}) [Injective A] (a : A)
     (hn : n ≠ 0) : ∃ b : A, n • b = a := by
   let f : AddCommGrpCat.of (ULift.{v} ℤ) ⟶ AddCommGrpCat.of (ULift.{v} ℤ) :=
     AddCommGrpCat.ofHom (AddMonoidHom.mk' (fun x ↦ ULift.up (n * x.down))
-      (fun x y ↦ ULift.ext _ _ (by simp [mul_add])))
+      (fun x y ↦ ULift.ext (by simp [mul_add])))
   have : Mono f := by
     rw [AddCommGrpCat.mono_iff_injective]
     intro x y h
     have h' : n * x.down = n * y.down := congrArg ULift.down h
-    exact ULift.ext _ _ (mul_left_cancel₀ hn h')
+    exact ULift.ext (mul_left_cancel₀ hn h')
   let g : AddCommGrpCat.of (ULift.{v} ℤ) ⟶ A :=
     AddCommGrpCat.ofHom (AddMonoidHom.mk' (fun x ↦ x.down • a) (fun x y ↦ by simp [add_smul]))
   refine ⟨Injective.factorThru g f (ULift.up 1), ?_⟩
   have h := ConcreteCategory.congr_hom (Injective.comp_factorThru g f) (ULift.up 1)
-  have e : f (ULift.up 1) = n • ULift.up 1 := ULift.ext _ _ (by simp [f])
+  have e : f (ULift.up 1) = n • ULift.up 1 := ULift.ext (by simp [f])
   have e' : g (ULift.up 1) = a := by simp [g]
   rw [ConcreteCategory.comp_apply, e, map_zsmul, e'] at h
   exact h
@@ -66,10 +66,10 @@ noncomputable def divisibleByULiftOfInjective (A : AddCommGrpCat.{v}) [Injective
   classical exact
   { div a n := if hn : n = 0 then 0 else
       ULift.up (exists_zsmul_eq_of_injective A a.down hn).choose
-    div_zero a := dif_pos rfl
+    div_zero a := dite_eq_left rfl
     div_cancel {n} a hn := by
-      rw [dif_neg hn]
-      exact ULift.ext _ _ (exists_zsmul_eq_of_injective A a.down hn).choose_spec }
+      rw [dite_eq_right hn]
+      exact ULift.ext (exists_zsmul_eq_of_injective A a.down hn).choose_spec }
 
 /-- The universe lift of an injective abelian group is injective. -/
 instance injective_uliftFunctor_obj (A : AddCommGrpCat.{v}) [Injective A] :
@@ -120,7 +120,7 @@ theorem injective_comp_uliftFunctor [EssentiallySmall.{v} C] (P : Cᵒᵖ ⥤ Ad
     have : IsIso g := by dsimp [g]; infer_instance
     have h : φ.app T ≫ (Pi.π (fun s ↦ (R s).obj (J s)) s₀).app T ≫ Pi.π _ g =
         P.map g ≫ Injective.ι (P.obj (c s₀)) := by
-      rw [← Category.assoc, ← NatTrans.comp_app, Pi.lift_π, Adjunction.homEquiv_unit]
+      rw [← Category.assoc, ← NatTrans.comp_app, Pi.lift_comp_π, Adjunction.homEquiv_unit]
       simp [R, adj]
     have : Mono (φ.app T ≫ (Pi.π (fun s ↦ (R s).obj (J s)) s₀).app T ≫ Pi.π _ g) := by
       rw [h]

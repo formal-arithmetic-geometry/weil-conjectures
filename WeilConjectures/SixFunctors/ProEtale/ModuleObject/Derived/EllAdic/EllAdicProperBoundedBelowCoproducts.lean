@@ -84,6 +84,81 @@ private theorem preservesCoproduct_of_finitePartialSums
     erw [colimit.ι_desc]
     exact hm a.1.as
 
+private theorem isStrictlyGE_finitePartialSums
+    {C : Type*} [Category* C] [Abelian C]
+    {I : Type*} (E : I → CochainComplex C ℤ) (N : ℤ)
+    (hE : ∀ i, (E i).IsStrictlyGE N) (s : Finset (Discrete I)) :
+    ((liftToFinsetObj (Discrete.functor E)).obj s).IsStrictlyGE N := by
+  have : ∀ i, (E i).IsStrictlyGE N := hE
+  rw [CochainComplex.isStrictlyGE_iff]
+  intro n hn
+  exact (isColimitOfPreserves (HomologicalComplex.eval C (.up ℤ) n)
+    (coproductIsCoproduct (fun x : s ↦ E x.1.as))).isZero_pt
+      (Functor.isZero _ fun x ↦ (E x.as.1.as).isZero_of_isStrictlyGE N n hn)
+
+private theorem hasColimitsOfShape_cochainComplex
+    {C J : Type*} [Category* C] [Category* J] [HasZeroMorphisms C]
+    [HasColimitsOfShape J C] : HasColimitsOfShape J (CochainComplex C ℤ) := by
+  refine ⟨fun E ↦ ?_⟩
+  have (n : ℤ) : HasColimit (E ⋙ HomologicalComplex.eval C (.up ℤ) n) :=
+    HasColimitsOfShape.has_colimit _
+  exact ⟨⟨⟨_, HomologicalComplex.isColimitCoconeOfHasColimitEval E⟩⟩⟩
+
+private theorem preservesCoproduct_of_boundedBelow_continuity
+    {C D : Type*} [Category* C] [Category* D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    [Abelian.HasKInjectiveResolutions C] [Abelian.HasKInjectiveResolutions D]
+    {I : Type*} [HasColimitsOfShape (Discrete I) C]
+    [HasColimitsOfShape (Discrete I) D] [HasExactColimitsOfShape (Discrete I) D]
+    [HasColimitsOfShape (Finset (Discrete I)) C]
+    (F : DerivedCategory C ⥤ DerivedCategory D) [F.Additive]
+    (N : ℤ) (K : I → DerivedCategory C) (hN : ∀ i, (K i).IsGE N)
+    (hcont : ∀ E : Finset (Discrete I) ⥤ CochainComplex C ℤ,
+      (∀ s, (E.obj s).IsStrictlyGE N) → ∀ q : ℤ,
+      PreservesColimit E (DerivedCategory.Q ⋙ F ⋙ DerivedCategory.homologyFunctor D q)) :
+    PreservesColimit (Discrete.functor K) F := by
+  classical
+  have : HasColimitsOfShape (Discrete I) (CochainComplex C ℤ) :=
+    hasColimitsOfShape_cochainComplex
+  have : HasColimitsOfShape (Finset (Discrete I)) (CochainComplex C ℤ) :=
+    hasColimitsOfShape_cochainComplex
+  have : HasColimitsOfShape (Discrete I) (DerivedCategory C) :=
+    DerivedCategory.hasColimitsOfShape_discrete I
+  have : HasColimitsOfShape (Discrete I) (DerivedCategory D) :=
+    DerivedCategory.hasColimitsOfShape_discrete I
+  have representatives (i : I) : ∃ E : CochainComplex C ℤ,
+      E.IsStrictlyGE N ∧ Nonempty (DerivedCategory.Q.obj E ≅ K i) := by
+    have : (K i).IsGE N := hN i
+    obtain ⟨E, hE, ⟨e⟩⟩ := DerivedCategory.exists_iso_Q_obj_of_isGE (K i) N
+    exact ⟨E, hE, ⟨e.symm⟩⟩
+  choose E hE he using representatives
+  let S := CoproductsFromFiniteFiltered.liftToFinsetObj (Discrete.functor E)
+  have hS (s : Finset (Discrete I)) : (S.obj s).IsStrictlyGE N :=
+    isStrictlyGE_finitePartialSums E N hE s
+  have hT (q : ℤ) : PreservesColimit (Discrete.functor E)
+      (DerivedCategory.Q ⋙ F ⋙ DerivedCategory.homologyFunctor D q) := by
+    have : PreservesColimit S
+        (DerivedCategory.Q ⋙ F ⋙ DerivedCategory.homologyFunctor D q) := hcont S hS q
+    exact preservesCoproduct_of_finitePartialSums E _
+  let T := DerivedCategory.Q ⋙ F
+  have hcomp : IsIso (sigmaComparison T E) := by
+    apply (DerivedCategory.isIso_sigmaComparison_iff T E).2
+    intro q
+    have : PreservesColimit (Discrete.functor E)
+        (T ⋙ DerivedCategory.homologyFunctor D q) := hT q
+    infer_instance
+  have : PreservesColimit (Discrete.functor E) T :=
+    PreservesCoproduct.of_iso_comparison T E
+  have : PreservesColimit (Discrete.functor (fun i ↦ DerivedCategory.Q.obj (E i))) F := by
+    refine preservesColimit_of_preserves_colimit_cocone
+      (DerivedCategory.isColimitCofanMkQObj (coproductIsCoproduct E)) ?_
+    exact (isColimitMapCoconeCofanMkEquiv F _ _).2
+      ((isColimitMapCoconeCofanMkEquiv T _ _).1
+        (isColimitOfPreserves T (coproductIsCoproduct E)))
+  exact preservesColimit_of_iso_diagram F
+    (Discrete.natIso (fun i ↦ (he i.as).some) :
+      Discrete.functor (fun i ↦ DerivedCategory.Q.obj (E i)) ≅ Discrete.functor K)
+
 end CategoryTheory.Limits
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
@@ -146,58 +221,18 @@ theorem condensed_boundedBelow_preservesCoproduct
   classical
   let C := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)
   let D := Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)
-  let F : DerivedCategory C ⥤ DerivedCategory D := R((f)_*⟦Λ⟧)
   have : HasColimitsOfSize.{u + 1, u + 1} C := IsGrothendieckAbelian.hasColimits C
   have : HasColimitsOfSize.{u + 1, u + 1} D := IsGrothendieckAbelian.hasColimits D
-  have : HasCoproducts.{u + 1} C := fun J ↦
-    HasColimitsOfSize.has_colimits_of_shape (Discrete J)
   have : HasCoproducts.{u + 1} D := fun J ↦
     HasColimitsOfSize.has_colimits_of_shape (Discrete J)
-  have : HasCoproducts.{u + 1} (DerivedCategory C) := derived_hasCoproducts
-  have : HasCoproducts.{u + 1} (DerivedCategory D) := derived_hasCoproducts
-  have representatives (i : I) : ∃ E : CochainComplex C ℤ,
-      E.IsStrictlyGE N ∧ Nonempty (DerivedCategory.Q.obj E ≅ K i) := by
-    have : (K i).IsGE N := hN i
-    obtain ⟨E, hE, ⟨e⟩⟩ := DerivedCategory.exists_iso_Q_obj_of_isGE (K i) N
-    exact ⟨E, hE, ⟨e.symm⟩⟩
-  choose E hE he using representatives
-  have : ∀ i, (E i).IsStrictlyGE N := hE
-  let S := CoproductsFromFiniteFiltered.liftToFinsetObj (Discrete.functor E)
-  have hS (s : Finset (Discrete I)) : (S.obj s).IsStrictlyGE N := by
-    rw [CochainComplex.isStrictlyGE_iff]
-    intro n hn
-    exact (isColimitOfPreserves (HomologicalComplex.eval C (.up ℤ) n)
-      (coproductIsCoproduct (fun x : s ↦ E x.1.as))).isZero_pt
-        (Functor.isZero _ fun x ↦ (E x.as.1.as).isZero_of_isStrictlyGE N n hn)
-  have hT (q : ℤ) : PreservesColimit (Discrete.functor E)
-      (DerivedCategory.Q ⋙ F ⋙ DerivedCategory.homologyFunctor D q) := by
-    have : PreservesColimit S
-        (DerivedCategory.Q ⋙ F ⋙ DerivedCategory.homologyFunctor D q) :=
-      continuity_preserves_strictlyGE Λ f S N q hS
-    exact preservesCoproduct_of_finitePartialSums E _
-  let T := DerivedCategory.Q ⋙ F
-  have hcomp : IsIso (sigmaComparison T E) := by
-    apply (DerivedCategory.isIso_iff D _).2
-    intro q
-    let H := DerivedCategory.homologyFunctor D q
-    have : PreservesColimit (Discrete.functor E) (T ⋙ H) := hT q
-    have heq : sigmaComparison (T ⋙ H) E =
-        sigmaComparison H (fun i ↦ T.obj (E i)) ≫ H.map (sigmaComparison T E) := by
-      exact (sigmaComparison_map_desc H (fun i ↦ T.obj (E i)) _
-        (fun i ↦ T.map (Sigma.ι E i))).symm
-    have : IsIso (sigmaComparison H (fun i ↦ T.obj (E i)) ≫
-        H.map (sigmaComparison T E)) := by rw [← heq]; infer_instance
-    exact IsIso.of_isIso_comp_left (sigmaComparison H (fun i ↦ T.obj (E i))) _
-  have : PreservesColimit (Discrete.functor E) T :=
-    PreservesCoproduct.of_iso_comparison T E
-  have : PreservesColimit (Discrete.functor (fun i ↦ DerivedCategory.Q.obj (E i))) F := by
-    refine preservesColimit_of_preserves_colimit_cocone
-      (DerivedCategory.isColimitCofanMkQObj (coproductIsCoproduct E)) ?_
-    exact (isColimitMapCoconeCofanMkEquiv F _ _).2
-      ((isColimitMapCoconeCofanMkEquiv T _ _).1
-        (isColimitOfPreserves T (coproductIsCoproduct E)))
-  exact preservesColimit_of_iso_diagram F
-    (Discrete.natIso (fun i ↦ (he i.as).some) :
-      Discrete.functor (fun i ↦ DerivedCategory.Q.obj (E i)) ≅ Discrete.functor K)
+  have : HasColimitsOfShape (Discrete I) C :=
+    HasColimitsOfSize.has_colimits_of_shape _
+  have : HasColimitsOfShape (Discrete I) D :=
+    HasColimitsOfSize.has_colimits_of_shape _
+  have : HasColimitsOfShape (Finset (Discrete I)) C :=
+    HasColimitsOfSize.has_colimits_of_shape _
+  have : HasExactColimitsOfShape (Discrete I) D := inferInstance
+  exact preservesCoproduct_of_boundedBelow_continuity R((f)_*⟦Λ⟧) N K hN
+    (fun E hE q ↦ continuity_preserves_strictlyGE Λ f E N q hE)
 
 end AlgebraicGeometry.ProEtale.CondensedRing

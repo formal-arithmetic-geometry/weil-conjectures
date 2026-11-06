@@ -746,7 +746,7 @@ noncomputable def invertibleDirectImageToHilbert
     ⟨_, (isInvertible_zeroLocus_directImageCounit σ hσ T.unop ℒ).2⟩
   naturality T T' i := by
     ext ℒ
-    exact ULift.ext _ _ (Subtype.ext (comap_zeroLocus_directImageCounit σ hσ i.unop ℒ).symm)
+    exact ULift.ext (Subtype.ext (comap_zeroLocus_directImageCounit σ hσ i.unop ℒ).symm)
 
 /-- The point of `Hilb^g_{X/k}(T)` attached to `ℒ ∈ F(T)` by the zero-scheme dictionary is the
 zero scheme of the adjunction morphism of `ℒ`. -/
@@ -1018,7 +1018,7 @@ theorem exists_representableBy_invertibleDirectImageToHilbert [IsSepClosed k]
     change G.map ((c ≫ b) ≫ ι).op LH = G.map c.op (G.map (b ≫ ι).op LH)
     rw [Category.assoc, op_comp, Functor.map_comp]
     rfl
-  · exact ULift.ext _ _ (Subtype.ext (hA _ (hι a)))
+  · exact ULift.ext (Subtype.ext (hA _ (hι a)))
 
 /-- **`F` is representable** by an open subscheme of `Hilb^g_{X/k}`: given a `k`-scheme `H`
 representing `Hilb^g_{X/k}`, there are a scheme `W` and an open immersion `j : W ⟶ H` such that

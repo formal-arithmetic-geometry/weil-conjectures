@@ -202,8 +202,7 @@ theorem restrictScalars_mu_bijective (R S : Type r) [CommRing R] [CommRing S]
   have hh : (Functor.LaxMonoidal.μ (ModuleCat.restrictScalars e.toRingHom) M N :
       _ → _) = TensorProduct.congr em en := by
     funext z
-    induction z using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction z using TensorProduct.inductionOn with
     | tmul x y => exact ModuleCat.restrictScalars_μ_tmul e.toRingHom M N x y
     | add x y hx hy => simp only [map_add, hx, hy]
   rw [hh]

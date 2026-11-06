@@ -57,9 +57,9 @@ private theorem nerve_iso_reindex
   apply over_pi_ext (fun a ↦ Y (t (g a)))
   intro a
   have hY := congrArg Over.Hom.left
-    (Pi.lift_π (fun a ↦ Pi.π (fun a ↦ Y (t a)) (g a)) a)
+    (Pi.lift_comp_π (fun a ↦ Pi.π (fun a ↦ Y (t a)) (g a)) a)
   have hX := congrArg Over.Hom.left
-    (Pi.lift_π (fun a ↦ Pi.π (fun a ↦ X (t a)) (g a)) a)
+    (Pi.lift_comp_π (fun a ↦ Pi.π (fun a ↦ X (t a)) (g a)) a)
   dsimp only [Over.comp_left] at hY hX
   simp only [Category.assoc]
   erw [hY, he n t (g a), he r (t ∘ g) a, ← Category.assoc, ← B.map_comp, hX]
@@ -177,10 +177,10 @@ private theorem cech_map_of_transport
     dsimp [EP, EQ, Limits.FormalCoproduct.cosimplicialObjectFunctor,
       Limits.FormalCoproduct.evalOp, Limits.FormalCoproduct.cech,
       Limits.FormalCoproduct.mapPower, Limits.FormalCoproduct.power]
-    simp only [Category.assoc, Pi.lift_π_assoc]
+    simp only [Category.assoc, Pi.lift_comp_π_assoc]
     erw [hm r.len t]
     simp only [← Category.assoc]
-    erw [Pi.lift_π]
+    erw [Pi.lift_comp_π]
     simp only [Category.assoc]
     erw [← Q.map_comp]
     erw [← op_comp, he r.len n.len g.toOrderHom.toFun t]

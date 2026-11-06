@@ -142,7 +142,7 @@ theorem perfect_hypercohomology_gap (X : Scheme.{uG})
   let := DerivedCategory.commShiftTensorLeftQhObj S' hS'
   have := DerivedCategory.isTriangulated_tensorLeftQhObj S' hS'
   let eS' : DerivedCategory.Qh.obj S' ≅ P :=
-    (DerivedCategory.quotientCompQhIso C).symm.app S ≪≫ eS
+    (DerivedCategory.quotientCompQhIso C).app S ≪≫ eS
   let eF := (MonoidalCategory.curriedTensor (schemeDerivedCategory X)).mapIso eS'
   let := Functor.CommShift.ofIso eF ℤ
   have := Functor.CommShift.ofIso_compatibility eF ℤ

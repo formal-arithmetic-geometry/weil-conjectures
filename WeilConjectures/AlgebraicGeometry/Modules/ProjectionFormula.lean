@@ -233,8 +233,7 @@ noncomputable def projectionPresheafHom :
   naturality {U U'} i := by
     ext1
     refine LinearMap.ext fun t ↦ ?_
-    induction t using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction t using TensorProduct.inductionOn with
     | tmul x n =>
       have := PresheafOfModules.Monoidal.tensorObj_map_tmul (R := Y.presheaf) i x n
       refine (congrArg (TensorProduct.lift (projectionSectionsMap g F N U'.unop)) this).trans ?_

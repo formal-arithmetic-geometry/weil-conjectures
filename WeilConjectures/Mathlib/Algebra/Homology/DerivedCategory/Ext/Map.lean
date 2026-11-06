@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughInjectives
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
+public import Mathlib.CategoryTheory.Abelian.Exact
 
 /-!
 # Vanishing of `Ext¹`-classes pushed along an exact functor

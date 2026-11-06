@@ -760,6 +760,9 @@ theorem component_relative_profinite_site (T : Scheme.{u}) [IsAffine T] :
     have : PreservesFiniteLimits G := inferInstance
     let et : G.obj component_point ≅ Over.mk (𝟙 T) :=
       (Profinite.isTerminalPUnit.isTerminalObj G _).uniqueUpToIso Over.mkIdTerminal
+    have (A : Type u) : HasColimitsOfShape (Discrete A) (Over T) := by
+      have : HasColimitsOfShape (Discrete A) Scheme.{u} := inferInstance
+      exact ⟨fun D ↦ Over.hasColimit_of_hasColimit_comp_forget D⟩
     let eG : FintypeCat.toProfinite ⋙ G ≅
         forget FintypeCat.{u} ⋙ sigmaConst.obj (Over.mk (𝟙 T)) :=
       (component_finiteIso G hcop).some ≪≫

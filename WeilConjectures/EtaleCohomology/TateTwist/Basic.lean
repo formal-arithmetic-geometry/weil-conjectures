@@ -144,7 +144,7 @@ noncomputable def tateTwistObject (X : Scheme.{u}) (m : ℤ) :
 lemma tateTwistObject_eq (X : Scheme.{u}) [HasInvertibleExponent Λ X] :
     tateTwistObject Λ X = (pullbackIntTensorFamily (ModuleCat.{u + 1} Λ) (tateIntTensorFamily Λ)
       (toInvertibleExponentBase (Λ := Λ) X)).obj :=
-  funext fun _ ↦ dif_pos _
+  funext fun _ ↦ dite_eq_left _
 
 /-- The coherent family of the Tate twists `Λ_X(m)` on a scheme `X` on which the characteristic
 of `Λ` is invertible. -/

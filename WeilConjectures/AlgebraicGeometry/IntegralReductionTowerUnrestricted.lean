@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.DerivedScalarExtensionRestrictionAdjunction
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Integral reduction towers without a finite-field datum
 
@@ -69,8 +70,7 @@ private noncomputable def sectionMap (U : Cᵒᵖ) :
     { toFun := TensorProduct.map h (LinearMap.id : M.val.obj U →ₗ[R.obj.obj U] M.val.obj U)
       map_add' := map_add _
       map_smul' := fun s z ↦ by
-        induction z using TensorProduct.induction_on with
-        | zero => simp only [smul_zero, map_zero]
+        induction z using TensorProduct.inductionOn with
         | tmul t x =>
           change S.obj.obj U at t
           change q.hom.app U (s * t) ⊗ₜ[R.obj.obj U,(g.hom.app U).hom] x =
@@ -87,7 +87,8 @@ private theorem restriction_tmul {A B : Sheaf J CommRingCat.{r}} (c : A ⟶ B)
     (N : SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A))
     {U V : Cᵒᵖ} (i : U ⟶ V) (s : B.obj.obj U) (x : N.val.obj U) :
     (changeOfRingsPresheaf c N).map i (s ⊗ₜ[A.obj.obj U,(c.hom.app U).hom] x) =
-      B.obj.map i s ⊗ₜ[A.obj.obj V,(c.hom.app V).hom] N.val.map i x :=
+      @TensorProduct.tmul (A.obj.obj V) _ (B.obj.obj V) (N.val.obj V) _ _
+        (Module.compHom _ (c.hom.app V).hom) _ (B.obj.map i s) (N.val.map i x) :=
   Classical.choose_spec (exists_changeOfRingsMap c N i) s x
 
 private noncomputable def presheafMap :
@@ -175,8 +176,7 @@ private theorem restricted_hom_ext
   apply Sheaf.hom_ext
   apply CategoryTheory.sheafify_hom_ext _ _ _ N.isSheaf
   ext U z
-  induction z using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction z using TensorProduct.inductionOn with
   | tmul s x => exact h U s x
   | add z w hz hw => simpa only [map_add] using congrArg₂ (· + ·) hz hw
 

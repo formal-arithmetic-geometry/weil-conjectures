@@ -140,7 +140,7 @@ theorem exists_qcqsStrictLocalModuleComparison
     (Functor.Final.isColimitWhiskerEquiv N.op _).symm
       ((Scheme.pointSmallEtale s).isColimitPresheafFiberCocone P)
   let r := qcqsStrictLocalSectionRestriction Λ f s F
-  let c : Cocone (N.op ⋙ (CategoryOfElements.π (Scheme.pointSmallEtale s).fiber).op ⋙ P) :=
+  let c : Cocone (N.op ⋙ (Functor.Elements.π (Scheme.pointSmallEtale s).fiber).op ⋙ P) :=
     { pt := _
       ι := { app := fun j ↦ r j.unop
              naturality := fun j k a ↦ by

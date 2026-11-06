@@ -78,7 +78,7 @@ noncomputable def derivedRestrictScalarsCompIso {A'' : Type u} [CommRing A'']
     [HasDerivedCategory.{u} (ModuleCat.{u} A'')] {g : A' →+* A''} {gf : A →+* A''}
     (hgf : gf = g.comp f) :
     derivedRestrictScalars g ⋙ derivedRestrictScalars f ≅ derivedRestrictScalars gf :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (restrictScalarsComp' f g gf hgf).symm
 
 namespace IsDerivedBaseChange
@@ -159,8 +159,7 @@ noncomputable def restrictScalarsObjExtendScalarsObjIso (M : ModuleCat.{u} A) :
     (M₂ := ↑((restrictScalars.{u} f).obj (of A' A') ⊗ M))
     (AddEquiv.refl _)
     (fun r x ↦ by
-      induction x using TensorProduct.induction_on with
-      | zero => simp
+      induction x using TensorProduct.inductionOn with
       | tmul q m => rfl
       | add x y hx hy => simp_all)).toModuleIso
 
@@ -172,8 +171,7 @@ noncomputable def extendScalarsCompRestrictScalarsIso :
   NatIso.ofComponents (fun M ↦ restrictScalarsObjExtendScalarsObjIso f M ≪≫ β_ _ M)
     (fun {M N} φ ↦ by
       ext x
-      induction x using TensorProduct.induction_on with
-      | zero => simp
+      induction x using TensorProduct.inductionOn with
       | tmul q m => rfl
       | add x y hx hy => simp_all)
 
@@ -365,11 +363,11 @@ lemma Q_map_restrictScalars_comp (hgf : gf = g.comp f) {K : CochainComplex (Modu
         (restrictScalars.{u} f).mapDerivedCategoryFactors.hom.app
           (((restrictScalars.{u} g).mapHomologicalComplex _).obj L) ≫
         DerivedCategory.Q.map (restrictScalarsCompComplexMap hgf L) := by
-    simp only [derivedRestrictScalarsCompIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    simp only [derivedRestrictScalarsCompIso, Iso.trans_hom, NatTrans.comp_app,
       Category.assoc]
     rw [Functor.mapDerivedCategoryNatIso_fac,
       ← Functor.mapDerivedCategoryCompIso_fac (restrictScalars g) (restrictScalars f) L]
-    simp only [Functor.comp_obj, Iso.symm_hom, Category.assoc, Iso.inv_hom_id_app_assoc]
+    simp only [Functor.comp_obj, Iso.symm_hom, Category.assoc, Iso.hom_inv_id_app_assoc]
     have h₂ : (Functor.mapHomologicalComplexCompIso
         (Iso.refl (restrictScalars.{u} g ⋙ restrictScalars.{u} f)) (.up ℤ)).hom.app L ≫
           (NatTrans.mapHomologicalComplex (restrictScalarsComp' f g gf hgf).inv (.up ℤ)).app L =

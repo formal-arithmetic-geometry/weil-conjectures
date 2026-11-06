@@ -125,7 +125,7 @@ theorem IsWeaklyRegular.exists_mulVec_isUnit_det {R : Type*} [CommRing R] {n : �
       rw [← hN i]; exact Finset.sum_congr rfl fun k _ ↦ by rw [hM k]
     simp only [Matrix.sub_apply, Matrix.mul_apply, Matrix.of_apply, Matrix.one_apply, sub_mul,
       Finset.sum_sub_distrib, Finset.sum_mul, ite_mul, one_mul, zero_mul, Finset.sum_ite_eq,
-      Finset.mem_univ, if_true]
+      Finset.mem_univ, ite_true]
     rw [sub_eq_zero, this, Finset.sum_comm]
     refine Finset.sum_congr rfl fun k _ ↦ ?_
     rw [Finset.mul_sum]

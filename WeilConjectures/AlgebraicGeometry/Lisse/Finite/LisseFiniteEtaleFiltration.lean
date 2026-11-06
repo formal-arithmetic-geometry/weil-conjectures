@@ -243,7 +243,7 @@ private theorem balanced_coproduct_fiber
   let g : (∐ Y) ⟶ X := Sigma.desc fun a ↦ v a.1 ≫ (U a.1).ι
   let f : Fin (c j) × (v j).GeometricFiber s → g.GeometricFiber (s ≫ (U j).ι) :=
     fun a ↦ ⟨a.2.val ≫ Sigma.ι Y ⟨j, a.1⟩, by
-      simp only [Category.assoc, g, Sigma.ι_desc]
+      simp only [Category.assoc, g, Sigma.ι_comp_desc]
       rw [← Category.assoc, a.2.property]⟩
   have hinj : Function.Injective f := by
     rintro ⟨b, x⟩ ⟨b', x'⟩ h
@@ -260,7 +260,7 @@ private theorem balanced_coproduct_fiber
     obtain ⟨⟨i, b⟩, t, ht⟩ := exists_comp_sigmaι_eq_of_subsingleton a.val
     have hcomp : t ≫ v i ≫ (U i).ι = s ≫ (U j).ι := by
       rw [← a.property, ← ht, Category.assoc]
-      simp only [g, Sigma.ι_desc]
+      simp only [g, Sigma.ι_comp_desc]
     have hij : i = j := by
       by_contra hij
       have hp := congrArg (fun t ↦ t default) hcomp
@@ -323,7 +323,7 @@ private theorem assemble_component_covers
     obtain ⟨y, hy⟩ := (show Surjective (v i) from inferInstance).surj ⟨x, hxi⟩
     refine ⟨Sigma.ι Y ⟨i, ⟨0, hcpos i⟩⟩ y, ?_⟩
     change (Sigma.ι Y ⟨i, ⟨0, hcpos i⟩⟩ ≫ g) y = x
-    simp only [g, Sigma.ι_desc, Scheme.Hom.comp_apply]
+    simp only [g, Sigma.ι_comp_desc, Scheme.Hom.comp_apply]
     exact congrArg Subtype.val hy
   have hgfiber (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ X) :
       Nat.card (g.GeometricFiber s) = D := by
@@ -378,7 +378,7 @@ private theorem assemble_component_covers
       IsOpenImmersion.isoOfRangeEq (O b).ι (Sigma.ι Y b)
         (by rw [Scheme.Opens.range_ι]; rfl)
     refine ⟨b.1, e, ?_⟩
-    rw [← Sigma.ι_desc (fun a : I ↦ v a.1 ≫ (U a.1).ι) b,
+    rw [← Sigma.ι_comp_desc (fun a : I ↦ v a.1 ≫ (U a.1).ι) b,
       ← Category.assoc, IsOpenImmersion.isoOfRangeEq_hom_fac]
 
 private theorem representation_stalks_of_torsor_pullback

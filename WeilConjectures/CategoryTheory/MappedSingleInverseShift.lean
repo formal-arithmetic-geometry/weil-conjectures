@@ -35,6 +35,18 @@ private theorem map_lift_single_shift_inv
   simp [SingleFunctors.lift, SingleFunctors.lift.shiftIso,
     Functor.FullyFaithful.whiskeringRight, Functor.FullyFaithful.ofFullyFaithful]
 
+private theorem singleFunctors_comm_inv
+    {A D : Type*} [Category A] [Category D] [HasShift D ℤ]
+    {F F' : SingleFunctors A D ℤ} (α : F ⟶ F')
+    (k i j : ℤ) (h : k + i = j) (X : A) :
+    (α.hom i).app X ≫ (F'.shiftIso k i j h).inv.app X =
+      (F.shiftIso k i j h).inv.app X ≫ ((α.hom j).app X)⟦k⟧' := by
+  apply (cancel_epi ((F.shiftIso k i j h).hom.app X)).1
+  have hα := congr_app (α.comm k i j h) X
+  simp only [NatTrans.comp_app, whiskerRight_app] at hα
+  rw [← Category.assoc, hα]
+  simp
+
 variable {B : Type uB} [Category.{vB} B] [Abelian B]
   {C : Type uC} [Category.{vC} C] [Abelian C]
   [HasDerivedCategory C]
@@ -99,8 +111,22 @@ theorem mapped_single_inverse_shift (G : B ⥤ C) [G.Additive] (X : B) (n : ℕ)
   erw [Functor.map_id, Category.id_comp]
   simp only [Category.assoc]
   erw [Iso.inv_hom_id_app_assoc]
-  change DerivedCategory.Q.map
-      ((HomologicalComplex.singleMapHomologicalComplex G (.up ℤ) n).app X).hom ≫
+  have hs := singleFunctors_comm_inv
+    (DerivedCategory.singleFunctorsPostcompQhIso C).inv
+    (-(n : ℤ)) n 0 (by simp) (G.obj X)
+  simp [DerivedCategory.singleFunctorsPostcompQhIso, DerivedCategory.singleFunctors,
+    SingleFunctors.postcomp_shiftIso_inv_app] at hs
+  erw [Category.id_comp, Functor.map_id, Category.id_comp] at hs
+  simp only [Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Category.assoc]
+  rw [← DerivedCategory.quotientCompQhIso_hom_naturality_assoc]
+  erw [hs]
+  erw [← DerivedCategory.quotientCompQhIso_hom_naturality]
+  simp only [Functor.map_comp, ← Category.assoc]
+  apply (cancel_mono (((DerivedCategory.quotientCompQhIso C).hom.app
+    ((CochainComplex.singleFunctor C 0).obj (G.obj X)))⟦-(n : ℤ)⟧')).2
+  simp only [Category.assoc]
+  change DerivedCategory.Qh.map ((HomotopyCategory.quotient C (.up ℤ)).map
+      ((HomologicalComplex.singleMapHomologicalComplex G (.up ℤ) n).app X).hom) ≫
     DerivedCategory.Qh.map
       (((HomotopyCategory.singleFunctors C).shiftIso (-(n : ℤ)) n 0 (by simp)).inv.app
         (G.obj X)) ≫ (DerivedCategory.Qh.commShiftIso (-(n : ℤ))).hom.app _ =
@@ -111,8 +137,8 @@ theorem mapped_single_inverse_shift (G : B ⥤ C) [G.Additive] (X : B) (n : ℕ)
     DerivedCategory.Qh.map (((HomotopyCategory.Plus.ι C).commShiftIso
       (-(n : ℤ))).hom.app (G.mapHomotopyCategoryPlus.obj K₀)) ≫
     (DerivedCategory.Qh.commShiftIso (-(n : ℤ))).hom.app _ ≫
-    (DerivedCategory.Q.map
-      ((HomologicalComplex.singleMapHomologicalComplex G (.up ℤ) 0).app X).hom)⟦-(n : ℤ)⟧'
+    (DerivedCategory.Qh.map ((HomotopyCategory.quotient C (.up ℤ)).map
+      ((HomologicalComplex.singleMapHomologicalComplex G (.up ℤ) 0).app X).hom))⟦-(n : ℤ)⟧'
   have hg := Functor.CommShift.OfComp.map_iso_hom_app
     ((HomotopyCategory.plus C).liftCompιIso
       (HomotopyCategory.Plus.ι B ⋙ G.mapHomotopyCategory (.up ℤ))
@@ -131,12 +157,6 @@ theorem mapped_single_inverse_shift (G : B ⥤ C) [G.Additive] (X : B) (n : ℕ)
   simp only [Functor.map_comp, Category.assoc]
   simp only [← Functor.map_comp_assoc]
   erw [Iso.inv_hom_id_app, Category.comp_id]
-  have hp (i : ℤ) : DerivedCategory.Q.map
-      ((HomologicalComplex.singleMapHomologicalComplex G (.up ℤ) i).app X).hom =
-      DerivedCategory.Qh.map ((HomotopyCategory.quotient C (.up ℤ)).map
-        ((HomologicalComplex.singleMapHomologicalComplex G (.up ℤ) i).app X).hom) := by
-    rfl
-  rw [hp, hp]
   erw [← DerivedCategory.Qh.commShiftIso_hom_naturality]
   simp only [← Functor.map_comp_assoc]
   apply (cancel_mono ((DerivedCategory.Qh.commShiftIso (-(n : ℤ))).hom.app

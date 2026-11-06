@@ -173,7 +173,7 @@ theorem finite_coproduct_of_unramified_decomposition
   · apply nonempty_isColimit_cofanMk_of
     · simpa using hPcover
     · intro a b hab
-      simpa using hPdisj (show a.down ≠ b.down from fun he ↦ hab (ULift.ext _ _ he))
+      simpa using hPdisj (show a.down ≠ b.down from fun he ↦ hab (congrArg ULift.up he))
   · intro a
     exact ⟨inferInstance, hPimm a.down⟩
   · intro a

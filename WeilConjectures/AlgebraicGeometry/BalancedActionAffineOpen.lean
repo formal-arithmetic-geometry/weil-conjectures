@@ -94,7 +94,8 @@ theorem balancedAction_affine_open
       exact ((rho b).val.app (op U.val)).hom.map_smul e n
     · rw [← map_mul, ← map_mul, mul_comm]
   let S := Subring.closure (Set.range dact ∪ Set.range bact)
-  have : IsMulCommutative S := Subring.isMulCommutative_closure hcomm
+  have : IsMulCommutative S :=
+    Subring.isMulCommutative_closure fun x hx y hy _ ↦ hcomm x hx y hy
   let : CommRing S := inferInstance
   let left : D ⟶ CommRingCat.of S := CommRingCat.ofHom
     (dact.codRestrict S fun d ↦ Subring.subset_closure (Or.inl ⟨d, rfl⟩))

@@ -66,7 +66,7 @@ theorem purelyInseparable_integral_prime_unique
       rw [hc, ← map_pow]
       exact (IsIntegral.of_finite A (b ^ e ^ n)).map (IsScalarTower.toAlgHom A B L)
     have hintK : IsIntegral A c :=
-      (isIntegral_algebraMap_iff (algebraMap K L).injective).mp hintL
+      (isIntegral_algebraMap_iff (R := A) (A := K) (B := L)).mp hintL
     obtain ⟨a, ha⟩ := IsIntegrallyClosed.isIntegral_iff.mp hintK
     refine ⟨e ^ n, expChar_pow_pos K e n, a, ?_⟩
     apply IsFractionRing.injective B L
@@ -75,6 +75,7 @@ theorem purelyInseparable_integral_prime_unique
   obtain ⟨q, hq, hqp⟩ :=
     Ideal.exists_ideal_over_prime_of_isIntegral_of_isDomain (S := B) p
       (by rw [(RingHom.injective_iff_ker_eq_bot _).mp hAB]; exact bot_le)
+  change q.comap (algebraMap A B) = p at hqp
   refine ⟨q, ⟨hq, hqp⟩, ?_⟩
   intro q' hq'
   apply le_antisymm

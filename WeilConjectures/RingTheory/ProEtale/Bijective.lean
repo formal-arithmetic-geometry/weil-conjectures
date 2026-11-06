@@ -93,8 +93,7 @@ lemma bijective_comap_lmul'_of_bijective_of_bijective
   have hχ : ∀ x : S ⊗[R] S, algebraMap (S ⊗[R] S) P.asIdeal.ResidueField x =
       algebraMap (S ⊗[R] S) P.asIdeal.ResidueField (ι₁ (μ x)) := by
     intro x
-    induction x with
-    | zero => simp only [map_zero]
+    induction x using TensorProduct.inductionOn with
     | tmul s t =>
       calc algebraMap (S ⊗[R] S) P.asIdeal.ResidueField (s ⊗ₜ[R] t)
           = algebraMap (S ⊗[R] S) P.asIdeal.ResidueField (ι₁ s) *

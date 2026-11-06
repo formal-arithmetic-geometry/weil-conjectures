@@ -48,7 +48,7 @@ noncomputable def isLimitHomologyFunctorMapConeOfIsHomotopyLimit (hC : EpiπAppZ
   let t : ∏ᶜ (fun n : ℕ ↦ G.obj (op n)) ⟶ ∏ᶜ (fun n : ℕ ↦ G.obj (op n)) :=
     Pi.lift fun n ↦ Pi.π _ (n + 1) ≫ G.map (homOfLE n.le_succ).op
   have ht (n : ℕ) : t ≫ Pi.π _ n = Pi.π _ (n + 1) ≫ G.map (homOfLE n.le_succ).op :=
-    Pi.lift_π _ _
+    Pi.lift_comp_π _ _
   have := isIso_lift_homologyFunctor_mapCone_of_isHomotopyLimit hc (i - 1) i (by lia)
     (productIsProduct _) t ht
     (epi_one_sub_of_epiπAppZeroOfEpi hC (F := G) hepi (productIsProduct _) t ht)

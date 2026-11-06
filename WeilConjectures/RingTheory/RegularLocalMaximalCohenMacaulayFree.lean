@@ -82,7 +82,7 @@ theorem free_of_depth_eq_ringKrullDim
         have ht : IsLocalRing.depth (R := R) M = ⊤ := by
           have hm : IsLocalRing.maximalIdeal R • (⊤ : Submodule R M) = ⊤ :=
             Subsingleton.elim _ _
-          simp only [IsLocalRing.depth, Ideal.depth, hm, if_pos]
+          simp only [IsLocalRing.depth, Ideal.depth, hm, ite_eq_left]
         rw [hdepth] at ht
         exact ENat.natCast_ne_top _ ht
       have hCM : (IsLocalRing.depth (R := R) M : WithBot ℕ∞) =

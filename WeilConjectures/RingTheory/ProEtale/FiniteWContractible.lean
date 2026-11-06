@@ -155,7 +155,7 @@ lemma exists_isPrime_comap_eq (q₁ q₂ : Ideal B) [q₁.IsMaximal] [q₂.IsMax
     ∃ r : Ideal (B ⊗[A] B), r.IsPrime ∧ r.comap (inl (A := A)) = q₁ ∧
       r.comap (inr (A := A)) = q₂ := by
   set e := q₁.comap (algebraMap A B)
-  have : e.IsMaximal := Ideal.isMaximal_comap_of_isIntegral_of_isMaximal q₁
+  have : e.IsMaximal := Ideal.isMaximal_under_of_isIntegral_of_isMaximal q₁
   have : q₁.LiesOver e := ⟨rfl⟩
   have : q₂.LiesOver e := ⟨h⟩
   let := Ideal.Quotient.field e
@@ -184,12 +184,12 @@ lemma tmul_one_sub_one_tmul_mem (r : Ideal (B ⊗[A] B)) [r.IsPrime] (q : Ideal 
     [IsStrictlyHenselianLocalRing (Localization.AtPrime (q.comap (algebraMap A B)))] (b : B) :
     b ⊗ₜ[A] (1 : B) - 1 ⊗ₜ b ∈ r := by
   set e := q.comap (algebraMap A B)
-  have : e.IsMaximal := Ideal.isMaximal_comap_of_isIntegral_of_isMaximal q
+  have : e.IsMaximal := Ideal.isMaximal_under_of_isIntegral_of_isMaximal q
   have : q.LiesOver e := ⟨rfl⟩
   let := Ideal.Quotient.field e
   have : IsSepClosed (A ⧸ e) :=
     IsSepClosed.of_ringEquiv (k := IsLocalRing.ResidueField (Localization.AtPrime e))
-    (IsLocalization.AtPrime.equivQuotMaximalIdeal e (Localization.AtPrime e)).symm
+    (IsLocalization.AtPrime.equivQuotMaximalIdeal e (Localization.AtPrime e)).symm.toRingEquiv
   have hrl : r.LiesOver e := ⟨by
     rw [Ideal.under_def, algebraMap_eq_inl_comp, ← Ideal.comap_comap, hl]⟩
   set p := ringExpChar (A ⧸ e)
@@ -238,8 +238,8 @@ theorem IsWContractibleRing.of_finite [IsWContractibleRing A] [Module.Finite A B
   have hφE : ∀ y : PrimeSpectrum B, y ∈ closedPoints (PrimeSpectrum B) ↔
       φ y ∈ closedPoints (PrimeSpectrum A) := fun y ↦ by
     simp only [mem_closedPoints_iff, PrimeSpectrum.isClosed_singleton_iff_isMaximal]
-    exact ⟨fun _ ↦ Ideal.isMaximal_comap_of_isIntegral_of_isMaximal y.asIdeal,
-      fun h ↦ Ideal.isMaximal_of_isIntegral_of_isMaximal_comap y.asIdeal h⟩
+    exact ⟨fun _ ↦ Ideal.isMaximal_under_of_isIntegral_of_isMaximal y.asIdeal,
+      fun h ↦ Ideal.isMaximal_of_isIntegral_of_isMaximal_under y.asIdeal h⟩
   let p : closedPoints (PrimeSpectrum B) → closedPoints (PrimeSpectrum A) :=
     fun y ↦ ⟨φ y.1, (hφE y.1).1 y.2⟩
   have hp : Continuous p :=

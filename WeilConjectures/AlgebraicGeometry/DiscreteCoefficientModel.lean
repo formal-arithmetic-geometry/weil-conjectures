@@ -318,7 +318,7 @@ theorem discrete_coefficient_model (X : Scheme.{u}) [IsNoetherian X]
   · intro N
     delta discreteCoefficientModel
     have hqc : CompactSpace X ∧ QuasiSeparatedSpace X := ⟨inferInstance, inferInstance⟩
-    rw [IsConstantModelConstructible, if_pos hqc]
+    rw [IsConstantModelConstructible, ite_eq_left hqc]
     rw [Scheme.proEtale_noetherian_global_constructibility.{u, u} X k]
     constructor
     · rintro ⟨S, hS⟩

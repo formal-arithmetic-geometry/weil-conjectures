@@ -81,7 +81,7 @@ theorem constant_quotient_kernel (J : GrothendieckTopology C) (A : Type u)
     Ideal.mem_span_range_iff_exists_fun.mp (hg'.symm ▸ ha)
   let c : A → Fin d → A := fun a ↦ if ha : a ∈ K then (hex a ha).choose else 0
   have hc (a : A) (ha : a ∈ K) : ∑ i, c a i * g i = a := by
-    simpa only [c, dif_pos ha] using (hex a ha).choose_spec
+    simpa only [c, dite_eq_left ha] using (hex a ha).choose_spec
   let t (i : Fin d) := constantFunction J (fun a ↦ c a i)
   have htn (i : Fin d) {V W : Cᵒᵖ} (f : V ⟶ W) (y : B.obj V) :
       B.map f ((t i).app V y) = (t i).app W (B.map f y) :=

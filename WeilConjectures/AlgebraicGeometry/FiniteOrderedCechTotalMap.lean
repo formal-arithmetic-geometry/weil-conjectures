@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 public import WeilConjectures.AlgebraicGeometry.AlternatingCechTotalComplex
 import all WeilConjectures.AlgebraicGeometry.QCohAlternatingCechResolutionQuasiIso
 
@@ -80,8 +81,8 @@ private theorem alternatingCechColumn_quasiIso
         Limits.Pi.lift (alternatingCechColumnProjection U F k) ≫ Limits.Pi.map a := by
     apply Limits.Pi.hom_ext
     intro t
-    simp only [Category.assoc, Limits.Pi.lift_π]
-    erw [Limits.Pi.map_π, Limits.Pi.lift_π_assoc]
+    simp only [Category.assoc, Limits.Pi.lift_comp_π]
+    erw [Limits.Pi.map_π, Limits.Pi.lift_comp_π_assoc]
     apply HomologicalComplex.hom_ext
     intro n
     change (HomologicalComplex.extendMap

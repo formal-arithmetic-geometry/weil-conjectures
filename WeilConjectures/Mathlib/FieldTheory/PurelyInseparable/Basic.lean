@@ -66,8 +66,7 @@ theorem eq_zero_or_eq_one_of_isIdempotentElem_tensorProduct_of_finiteType
     simpa using this
   have hnat (C : Type _) [CommRing C] [Algebra k C] (π : B →ₐ[k] C) (i) (x : A ⊗[k] B) :
       π (Φ B i x) = Φ C i (Algebra.TensorProduct.map (AlgHom.id k A) π x) := by
-    induction x with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | add x y hx hy => simp [hx, hy]
     | tmul a c =>
       simp [Φ, Algebra.TensorProduct.basis_repr_tmul]

@@ -218,8 +218,7 @@ private theorem formalGlueing_powerFamily_descent
     exact (Submodule.mem_annihilator_span_singleton ξ (a : R)).mp (he a.2)
   let E := TensorProduct.piRight R R S (fun _ : Fin t ↦ M)
   have hδ (z : S ⊗[R] M) (i : Fin t) : E (δ.lTensor S z) i = (f i) ^ n • z := by
-    induction z using TensorProduct.induction_on with
-    | zero => simp
+    induction z using TensorProduct.inductionOn with
     | tmul a m =>
       simp [E, δ, TensorProduct.piRightHom_tmul, TensorProduct.tmul_smul]
     | add z₁ z₂ hz₁ hz₂ => simp [hz₁, hz₂, smul_add]

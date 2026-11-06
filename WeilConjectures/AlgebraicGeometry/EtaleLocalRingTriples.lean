@@ -102,7 +102,7 @@ private theorem compatible_colimits
   · intro c
     dsimp [r, t]
     simp only [Functor.Final.ι_colimitIso_inv_assoc,
-      HasColimit.isoOfNatIso_ι_hom_assoc, Functor.Final.ι_colimitIso_hom]
+      HasColimit.ι_isoOfNatIso_hom_assoc, Functor.Final.ι_colimitIso_hom]
 
 /-- Stacks, Tags 03PQ, 04HT and 04HX
 (blueprint: lem-weil-pbc-etale-local-ring-triples).
@@ -162,7 +162,7 @@ theorem etale_local_ring_triples
     let N := P.FullSubcategory
     let Q : ObjectProperty N := fun c => ∃ g : c.obj.1.left ⟶ Spec A, g ≫ i = c.obj.1.hom
     let NU := Q.FullSubcategory
-    let D := (P.ι ⋙ CategoryOfElements.π (pointSmallEtale x).fiber ⋙
+    let D := (P.ι ⋙ Functor.Elements.π (pointSmallEtale x).fiber ⋙
       Etale.forget Y ⋙ Over.forget Y).op ⋙ Scheme.Γ
     let DU := Q.ι.op ⋙ D
     let T := EtaleResidueTriples A p K χ
@@ -245,10 +245,10 @@ theorem etale_local_ring_triples
     Functor.initial_of_exists_of_isCofiltered_of_fullyFaithful P.ι hP
   have := hPinitial
   have := hinitial
-  let Dall := (CategoryOfElements.π (pointSmallEtale x).fiber ⋙
+  let Dall := (Functor.Elements.π (pointSmallEtale x).fiber ⋙
     Etale.forget Y ⋙ Over.forget Y).op ⋙ Scheme.Γ
   have : HasColimit Dall := inferInstance
-  have : HasColimit ((P.ι ⋙ CategoryOfElements.π (pointSmallEtale x).fiber ⋙
+  have : HasColimit ((P.ι ⋙ Functor.Elements.π (pointSmallEtale x).fiber ⋙
       Etale.forget Y ⋙ Over.forget Y).op ⋙ Scheme.Γ) := by
     change HasColimit (P.ι.op ⋙ Dall)
     infer_instance

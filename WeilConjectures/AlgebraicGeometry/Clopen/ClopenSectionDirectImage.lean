@@ -47,18 +47,18 @@ private theorem exact_derived_counit_isIso
     have : R.Full := adj.fullyFaithfulROfIsIsoCounit.full
     have : R.Faithful := adj.fullyFaithfulROfIsIsoCounit.faithful
     have : IsIso adj.mapHomotopyCategoryPlus.counit := inferInstance
-    have : IsIso R.rightDerivedFunctorPlusUnit :=
+    have : IsIso R.rightDerivedFunctorPlusUnith :=
       Functor.isIso_rightDerivedFunctorPlusUnit R
-    have : IsIso (R.rightDerivedFunctorPlusUnit.app N) :=
-      NatIso.isIso_app_of_isIso R.rightDerivedFunctorPlusUnit N
-    have : IsIso (L.mapDerivedCategoryPlus.map (R.rightDerivedFunctorPlusUnit.app N)) :=
+    have : IsIso (R.rightDerivedFunctorPlusUnith.app N) :=
+      NatIso.isIso_app_of_isIso R.rightDerivedFunctorPlusUnith N
+    have : IsIso (L.mapDerivedCategoryPlus.map (R.rightDerivedFunctorPlusUnith.app N)) :=
       Functor.map_isIso _ _
-    have : IsIso (L.mapDerivedCategoryPlus.map (R.rightDerivedFunctorPlusUnit.app N) ≫
+    have : IsIso (L.mapDerivedCategoryPlus.map (R.rightDerivedFunctorPlusUnith.app N) ≫
         adj.derivedPlus.counit.app (DerivedCategory.Plus.Qh.obj N)) := by
       rw [adj.derivedPlus_counit_app_fac]
       infer_instance
     exact IsIso.of_isIso_comp_left
-      (L.mapDerivedCategoryPlus.map (R.rightDerivedFunctorPlusUnit.app N)) _
+      (L.mapDerivedCategoryPlus.map (R.rightDerivedFunctorPlusUnith.app N)) _
   have : ∀ K, IsIso (adj.derivedPlus.counit.app K) := by
     intro K
     have := hc (DerivedCategory.Plus.Qh.objPreimage K)

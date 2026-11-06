@@ -76,7 +76,7 @@ variable {C D : Type*} [Category* C] [Category* D] [Abelian C] [Abelian D]
 
 /-- For a left exact functor `F`, `H⁰` of the unit `F(X[0]) ⟶ R⁺F(X[0])` is an isomorphism. -/
 lemma isIso_homologyFunctor_zero_map_rightDerivedFunctorPlusUnit_app (X : C) :
-    IsIso ((DerivedCategory.Plus.homologyFunctor D 0).map (F.rightDerivedFunctorPlusUnit.app
+    IsIso ((DerivedCategory.Plus.homologyFunctor D 0).map (F.rightDerivedFunctorPlusUnith.app
       ((HomotopyCategory.Plus.quotient C).obj
         ⟨(HomologicalComplex.single C (.up ℤ) 0).obj X, 0, inferInstance⟩))) := by
   let R := injectiveResolution X
@@ -84,8 +84,8 @@ lemma isIso_homologyFunctor_zero_map_rightDerivedFunctorPlusUnit_app (X : C) :
   have : ∀ n, Injective (L.obj.X n) := fun n ↦ inferInstanceAs (Injective (R.cochainComplex.X n))
   let f : (⟨(HomologicalComplex.single C (.up ℤ) 0).obj X, 0, inferInstance⟩ :
       CochainComplex.Plus C) ⟶ L := ObjectProperty.homMk R.ι'
-  have hn := F.rightDerivedFunctorPlusUnit.naturality ((HomotopyCategory.Plus.quotient C).map f)
-  have hL : IsIso (F.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient C).obj L)) :=
+  have hn := F.rightDerivedFunctorPlusUnith.naturality ((HomotopyCategory.Plus.quotient C).map f)
+  have hL : IsIso (F.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.quotient C).obj L)) :=
     inferInstance
   have hq : IsIso (DerivedCategory.Plus.Qh.map ((HomotopyCategory.Plus.quotient C).map f)) :=
     Localization.inverts _ (HomotopyCategory.Plus.quasiIso C) _
@@ -103,7 +103,10 @@ lemma isIso_homologyFunctor_zero_map_rightDerivedFunctorPlusUnit_app (X : C) :
     rw [h]
     infer_instance
   have hF' : IsIso ((DerivedCategory.Plus.homologyFunctor D 0).map (DerivedCategory.Plus.Qh.map
-      (F.mapHomotopyCategoryPlus.map ((HomotopyCategory.Plus.quotient C).map f)))) := hF
+      (F.mapHomotopyCategoryPlus.map ((HomotopyCategory.Plus.quotient C).map f)))) := by
+    exact (NatIso.isIso_map_iff
+      (isoWhiskerRight (DerivedCategory.Plus.quotientCompQhIso D)
+        (DerivedCategory.Plus.homologyFunctor D 0)) (F.mapCochainComplexPlus.map f)).mpr hF
   have h := congrArg (DerivedCategory.Plus.homologyFunctor D 0).map hn
   simp only [Functor.comp_map, Functor.map_comp] at h
   rw [← IsIso.comp_inv_eq] at h

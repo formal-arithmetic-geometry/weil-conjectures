@@ -71,11 +71,11 @@ noncomputable def commonQuotientPresheafUnit
   naturality {U V} f := by
     apply ModuleCat.hom_ext
     ext x
-    change (1 : S.obj.obj V) ⊗ₜ[R.obj.obj V, (q.hom.app V).hom] M.val.map f x =
+    change (1 : S.obj.obj V) ⊗ₜ[R.obj.obj V, (q.hom.app V).hom] M.val.restrictₛₗ f x =
       changeOfRingsMap q M f ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (q.hom.app U).hom] x)
     rw [show changeOfRingsMap q M f
         ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (q.hom.app U).hom] x) =
-        S.obj.map f 1 ⊗ₜ[R.obj.obj V, (q.hom.app V).hom] M.val.map f x from
+        S.obj.map f 1 ⊗ₜ[R.obj.obj V, (q.hom.app V).hom] M.val.restrictₛₗ f x from
       Classical.choose_spec (exists_changeOfRingsMap q M f) 1 x, map_one]
 
 /-- The actual sheaf quotient unit constructed from the sheafification adjunction.
@@ -297,8 +297,7 @@ private noncomputable def tensorRingEmbedding
         (pushout φ.hom (φ ≫ b).hom).map f ((ringTensorIso φ (φ ≫ b) U).hom z)
     let := (φ.hom.app U).hom.toAlgebra
     let := ((φ ≫ b).hom.app U).hom.toAlgebra
-    induction z using TensorProduct.induction_on with
-    | zero => rw [map_zero, map_zero, map_zero, map_zero]
+    induction z using TensorProduct.inductionOn with
     | add x y hx hy =>
       change (ringTensorIso φ (φ ≫ b) V).hom
         ((changeOfRingsPresheaf φ _).map f (x + y)) =
@@ -339,9 +338,7 @@ private theorem multiplicationRaw_locallyInjective
       (multiplicationRaw φ b).app U z
     let := (φ.hom.app U).hom.toAlgebra
     let := ((φ ≫ b).hom.app U).hom.toAlgebra
-    induction z using TensorProduct.induction_on with
-    | zero => change μ.app U ((ringTensorIso φ (φ ≫ b) U).hom 0) =
-        (multiplicationRaw φ b).app U 0; rw [map_zero, map_zero, map_zero]
+    induction z using TensorProduct.inductionOn with
     | add x y hx hy =>
       change μ.app U ((ringTensorIso φ (φ ≫ b) U).hom (x + y)) =
         (multiplicationRaw φ b).app U (x + y)

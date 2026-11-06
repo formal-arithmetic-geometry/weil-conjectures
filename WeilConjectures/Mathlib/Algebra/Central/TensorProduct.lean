@@ -39,8 +39,7 @@ variable {K F A ι : Type*} [CommRing K] [Ring F] [Algebra K F] [Ring A] [Algebr
 a basis `b` by left multiplication by `a`. -/
 lemma equivFinsuppOfBasisLeft_one_tmul_mul (b : Module.Basis ι K F) (a : A) (x : F ⊗[K] A)
     (j : ι) : equivFinsuppOfBasisLeft b ((1 ⊗ₜ a) * x) j = a * equivFinsuppOfBasisLeft b x j := by
-  induction x using TensorProduct.induction_on with
-  | zero => simp
+  induction x using TensorProduct.inductionOn with
   | tmul f a' => simp
   | add x y hx hy => simp [mul_add, hx, hy]
 
@@ -48,8 +47,7 @@ lemma equivFinsuppOfBasisLeft_one_tmul_mul (b : Module.Basis ι K F) (a : A) (x 
 a basis `b` by right multiplication by `a`. -/
 lemma equivFinsuppOfBasisLeft_mul_one_tmul (b : Module.Basis ι K F) (a : A) (x : F ⊗[K] A)
     (j : ι) : equivFinsuppOfBasisLeft b (x * (1 ⊗ₜ a)) j = equivFinsuppOfBasisLeft b x j * a := by
-  induction x using TensorProduct.induction_on with
-  | zero => simp
+  induction x using TensorProduct.inductionOn with
   | tmul f a' => simp
   | add x y hx hy => simp [add_mul, hx, hy]
 

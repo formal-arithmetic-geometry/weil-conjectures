@@ -83,15 +83,14 @@ theorem exists_unit_retraction (m : ℕ) (N₀ : ModuleCat.{u + 1} A)
   let T := TensorProduct.lift L'
   let E := (ModuleCat.extendScalars.{u + 1, u + 1, u + 1} f).obj N₀
   have key (s : A ⧸ I ^ m) (t : E) : T (s • t) = L s (T t) := by
-    induction t using TensorProduct.induction_on with
-    | zero => rw [smul_zero, map_zero, map_zero]
-    | tmul s' x =>
+    refine TensorProduct.inductionOn t ?_ ?_
+    · intro s' x
       rw [TensorProduct.smul_tmul']
       simp only [T, TensorProduct.lift.tmul]
       change L (s * (show A ⧸ I ^ m from s')) x = L s (L s' x)
       rw [map_mul]
       rfl
-    | add t₁ t₂ h₁ h₂ =>
+    · intro t₁ t₂ h₁ h₂
       rw [smul_add, map_add, map_add, h₁, h₂, map_add]
   refine ⟨ModuleCat.ofHom (X := (ModuleCat.restrictScalars f).obj E) (Y := N₀)
     { toFun := fun t ↦ T t
@@ -194,7 +193,7 @@ theorem exists_homology_reduction_retraction [IsDomain A] [IsPrincipalIdealRing 
     simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
       HomologicalComplex.mkHomToSingle_f, Functor.map_comp,
       HomologicalComplex.singleMapHomologicalComplex_hom_app_self, Category.assoc,
-      Iso.map_inv_hom_id_assoc, Functor.comp_obj, u, g', g]
+      Iso.inv_hom_id_map_assoc, Functor.comp_obj, u, g', g]
     exact adj.unit_naturality_assoc ψ _
   have hπ : HomologicalComplex.homologyMap (u ≫ g') q ≫
       (HomologicalComplex.singleObjHomologySelfIso _ q _).hom =
@@ -219,9 +218,8 @@ variable {R S : Type (u + 1)} [CommRing R] [CommRing S] (f : R →+* S)
 theorem exists_extendRestrictScalarsAdj_unit_app_eq (hf : Function.Surjective f)
     {N : ModuleCat.{u + 1} R} (t : (extendScalars.{u + 1, u + 1, u + 1} f).obj N) :
     ∃ m : N, (extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} f).unit.app N m = t := by
-  induction t using TensorProduct.induction_on with
-  | zero => exact ⟨0, map_zero _⟩
-  | tmul s m =>
+  refine TensorProduct.inductionOn t ?_ ?_
+  · intro s m
     obtain ⟨a, ha⟩ := hf (show S from s)
     refine ⟨a • m, ?_⟩
     change (show (restrictScalars.{u + 1} f).obj (of S S) from (1 : S)) ⊗ₜ[R] (a • m) = s ⊗ₜ[R] m
@@ -229,7 +227,7 @@ theorem exists_extendRestrictScalarsAdj_unit_app_eq (hf : Function.Surjective f)
     congr 1
     change f a * 1 = (show S from s)
     rw [mul_one, ha]
-  | add t₁ t₂ h₁ h₂ =>
+  · intro t₁ t₂ h₁ h₂
     obtain ⟨m₁, rfl⟩ := h₁
     obtain ⟨m₂, rfl⟩ := h₂
     exact ⟨m₁ + m₂, map_add _ _ _⟩

@@ -233,8 +233,7 @@ theorem pair_henselization_fiber_projection
     rfl
   let Q := Algebra.TensorProduct.comm B C q.ResidueField
   have hcoord (z : p.asIdeal.Fiber C) : Q (T z q₀) = φ z := by
-    induction z using TensorProduct.induction_on with
-    | zero => simp
+    induction z using TensorProduct.inductionOn with
     | tmul x y => rw [hT]; exact (hφ x y).symm
     | add x y hx hy => simp [map_add, hx, hy]
   let ε : (r : F) → C ⊗[B] r.1.asIdeal.ResidueField := Pi.single q₀ 1

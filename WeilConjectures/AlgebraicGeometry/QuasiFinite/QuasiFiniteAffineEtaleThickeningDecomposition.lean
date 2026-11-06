@@ -189,7 +189,7 @@ private theorem exists_surjective_affine_finite_baseChange
       simpa only [S.range_immersion] using hi
     obtain ⟨k, ⟨z, hz⟩, _⟩ := hcover i y
     refine ⟨Sigma.ι B ⟨i, k⟩ z, ?_⟩
-    rw [← Scheme.Hom.comp_apply, Sigma.ι_desc]
+    rw [← Scheme.Hom.comp_apply, Sigma.ι_comp_desc]
     change S.immersion i (j i k z) = x
     rw [hz, hy]⟩
   have hft (i : I) : LocallyOfFiniteType (b i) := by
@@ -210,7 +210,7 @@ private theorem exists_surjective_affine_finite_baseChange
     change IsFinite (pullback.snd (pullback.snd h a) (Sigma.ι B i))
     have hp := (IsPullback.of_hasPullback (pullback.snd h a) (Sigma.ι B i)).paste_horiz
       (IsPullback.of_hasPullback h a)
-    have hi : Sigma.ι B i ≫ a = b i := Sigma.ι_desc b i
+    have hi : Sigma.ι B i ≫ a = b i := Sigma.ι_comp_desc b i
     rw [hi] at hp
     have := hfin i
     rw [← hp.isoPullback_hom_snd]
@@ -232,7 +232,7 @@ private theorem closedImmersion_sigmaDesc
     change (Sigma.desc f) (Sigma.ι X i x) = (Sigma.desc f) (Sigma.ι X j y) at hxy
     change Sigma.ι X i x = Sigma.ι X j y
     have hf : f i x = f j y := by
-      simpa only [← Scheme.Hom.comp_apply, Sigma.ι_desc] using hxy
+      simpa only [← Scheme.Hom.comp_apply, Sigma.ι_comp_desc] using hxy
     by_cases hij : i = j
     · subst j
       exact congrArg (Sigma.ι X i) ((f i).isClosedEmbedding.injective hf)
@@ -246,11 +246,11 @@ private theorem closedImmersion_sigmaDesc
         obtain ⟨i, z, rfl⟩ := (sigmaOpenCover X).exists_eq x
         refine Set.mem_iUnion.mpr ⟨i, z, hx, ?_⟩
         change f i z = (Sigma.desc f) (Sigma.ι X i z)
-        simp only [← Scheme.Hom.comp_apply, Sigma.ι_desc]
+        simp only [← Scheme.Hom.comp_apply, Sigma.ι_comp_desc]
       · rintro hy
         obtain ⟨i, z, hz, rfl⟩ := Set.mem_iUnion.mp hy
         refine ⟨Sigma.ι X i z, hz, ?_⟩
-        simp only [← Scheme.Hom.comp_apply, Sigma.ι_desc]
+        simp only [← Scheme.Hom.comp_apply, Sigma.ι_comp_desc]
     rw [heq]
     exact isClosed_iUnion_of_finite fun i ↦ (f i).isClosedEmbedding.isClosedMap _
       (hA.preimage (Sigma.ι X i).continuous)
@@ -295,7 +295,7 @@ private theorem assemble_section_partition
   have ha : Surjective a := ⟨by
     intro x
     obtain ⟨k, z, hz⟩ := hcover x
-    exact ⟨Sigma.ι R k z, by simpa only [← Scheme.Hom.comp_apply, a, Sigma.ι_desc] using hz⟩⟩
+    exact ⟨Sigma.ι R k z, by simpa only [← Scheme.Hom.comp_apply, a, Sigma.ι_comp_desc] using hz⟩⟩
   choose q t ht hd hc using hsections
   let P := pullback h a
   let v (k : Fin m) : pullback h (r k) ⟶ P :=
@@ -304,7 +304,7 @@ private theorem assemble_section_partition
   have hv (k : Fin m) : IsPullback (v k) (pullback.snd h (r k))
       (pullback.snd h a) (Sigma.ι R k) := by
     apply IsPullback.of_right _ (by simp [v]) (IsPullback.of_hasPullback h a)
-    simpa only [v, pullback.lift_fst, a, Sigma.ι_desc] using
+    simpa only [v, pullback.lift_fst, a, Sigma.ι_comp_desc] using
       (IsPullback.of_hasPullback h (r k))
   have hvclosed (k : Fin m) : IsClosedImmersion (v k) := by
     have := closedImmersion_sigmaι R k
@@ -348,14 +348,14 @@ private theorem assemble_section_partition
       z x hx.symm
     obtain ⟨l, w, hw⟩ := hc k y
     refine ⟨Sigma.ι E ⟨k, l⟩ w, ?_⟩
-    rw [← Scheme.Hom.comp_apply, Sigma.ι_desc]
+    rw [← Scheme.Hom.comp_apply, Sigma.ι_comp_desc]
     change v k (t k l w) = z
     rw [hw, hy]⟩
   have het : Etale (i ≫ pullback.snd h a) := by
     apply IsZariskiLocalAtSource.of_openCover (P := @Etale) (sigmaOpenCover E)
     intro x
     change Etale (Sigma.ι E x ≫ i ≫ pullback.snd h a)
-    rw [← Category.assoc, show Sigma.ι E x ≫ i = f x from Sigma.ι_desc f x]
+    rw [← Category.assoc, show Sigma.ι E x ≫ i = f x from Sigma.ι_comp_desc f x]
     have : IsIso (t x.1 x.2 ≫ pullback.snd h (r x.1)) := (ht x.1 x.2).2
     change Etale ((t x.1 x.2 ≫ v x.1) ≫ pullback.snd h a)
     rw [Category.assoc, (hv x.1).w, ← Category.assoc]

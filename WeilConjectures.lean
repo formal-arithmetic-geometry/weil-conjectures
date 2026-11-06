@@ -10056,7 +10056,6 @@ public import WeilConjectures.AlgebraicGeometry.PicardBaseChangeStalkFinrankEq
 public import WeilConjectures.AlgebraicGeometry.PicardBaseChangeStalkRanks
 public import WeilConjectures.AlgebraicGeometry.PicardCanonicalBaseChange
 public import WeilConjectures.AlgebraicGeometry.PicardConstantScalarExtensionSections
-public import WeilConjectures.AlgebraicGeometry.PicardConstantSectionsTensor
 public import WeilConjectures.AlgebraicGeometry.PicardConstantTensorBalancedSections
 public import WeilConjectures.AlgebraicGeometry.PicardCounitEqualRanks
 public import WeilConjectures.AlgebraicGeometry.PicardCupPairingBaseChange
@@ -14137,6 +14136,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.MateCompCoherence
 public import WeilConjectures.CategoryTheory.Adjunction.MateCompConjugate
 public import WeilConjectures.CategoryTheory.Adjunction.MateComparisonTransport
 public import WeilConjectures.CategoryTheory.Adjunction.MateCompose
+public import WeilConjectures.CategoryTheory.Adjunction.MateCoprojection
 public import WeilConjectures.CategoryTheory.Adjunction.MateCounitIsIso
 public import WeilConjectures.CategoryTheory.Adjunction.MateCube
 public import WeilConjectures.CategoryTheory.Adjunction.MateFixedSquare
@@ -17585,6 +17585,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Change
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Generator
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.MonoidalCompat
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.PushforwardZeroMonoidal
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
@@ -18991,7 +18992,6 @@ public import WeilConjectures.RingTheory.ConormalPolynomialInverse
 public import WeilConjectures.RingTheory.ConormalSpanClearing
 public import WeilConjectures.RingTheory.ConstantField
 public import WeilConjectures.RingTheory.CoverModuleExact
-public import WeilConjectures.RingTheory.CurveBranches
 public import WeilConjectures.RingTheory.CyclicExtensionFlatDescent
 public import WeilConjectures.RingTheory.CyclicGlobalDimension
 public import WeilConjectures.RingTheory.DVRCompletionGenericFiber
@@ -19374,7 +19374,6 @@ public import WeilConjectures.RingTheory.GRingCompletionRegular
 public import WeilConjectures.RingTheory.GRingEquiv
 public import WeilConjectures.RingTheory.GRingMaximalIdealComparison
 public import WeilConjectures.RingTheory.GRingMaximalIdealCriterion
-public import WeilConjectures.RingTheory.GRingNagata
 public import WeilConjectures.RingTheory.GRingPairsBackward
 public import WeilConjectures.RingTheory.GRingPairsForward
 public import WeilConjectures.RingTheory.GRingPairsOfPrimes

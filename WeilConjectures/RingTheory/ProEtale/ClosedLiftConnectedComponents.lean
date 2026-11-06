@@ -135,8 +135,7 @@ theorem TensorProduct.exists_includeLeft_eq_of_isIdempotentElem
   let M := AddSubmonoid.closure {x : R ⊗[A] Ω | ∃ e : R, IsIdempotentElem e ∧ ∃ ω : Ω,
     x = e ⊗ₜ ω}
   have hM (x : R ⊗[A] Ω) : x ∈ M := by
-    induction x using TensorProduct.induction_on with
-    | zero => exact M.zero_mem
+    induction x using TensorProduct.inductionOn with
     | add x y hx hy => exact M.add_mem hx hy
     | tmul r ω =>
       induction hR r using Submodule.span_induction generalizing ω with
@@ -185,9 +184,9 @@ theorem LocallyConstant.mem_closure_isIdempotentElem {S : Type*} [TopologicalSpa
   have hχ (v : ℤ) (x : S) : χ v x = if f x = v then 1 else 0 := by
     dsimp only [χ]
     by_cases hx : f x = v
-    · rw [if_pos hx]
+    · rw [ite_eq_left hx]
       exact (LocallyConstant.charFn_eq_one (Y := ℤ) x _).2 hx
-    · rw [if_neg hx]
+    · rw [ite_eq_right hx]
       exact (LocallyConstant.charFn_eq_zero (Y := ℤ) x _).2 hx
   have hf : f = ∑ v ∈ f.range_finite.toFinset, v • χ v := by
     ext x
@@ -197,7 +196,7 @@ theorem LocallyConstant.mem_closure_isIdempotentElem {S : Type*} [TopologicalSpa
     rw [h, Finset.sum_apply]
     simp only [LocallyConstant.coeFnAddMonoidHom_apply, LocallyConstant.coe_smul, Pi.smul_apply,
       smul_eq_mul, hχ, mul_ite, mul_one, mul_zero]
-    rw [Finset.sum_ite_eq, if_pos (by simp)]
+    rw [Finset.sum_ite_eq, ite_eq_left (by simp)]
   rw [hf]
   refine AddSubgroup.sum_mem _ fun v _ ↦ AddSubgroup.zsmul_mem _ (AddSubgroup.subset_closure ?_) v
   ext x

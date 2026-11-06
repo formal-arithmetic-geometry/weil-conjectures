@@ -76,7 +76,7 @@ private theorem open_right_adjoint (A : Type u) [CommRing A]
   let d := e.mapDerivedCategory
   let da : r.mapDerivedCategory ⋙ d.functor ⊣ G.rightDerivedFunctor :=
     a.mapDerivedCategoryRightDerivedAdjunction.ofNatIsoLeft
-      (Functor.mapDerivedCategoryCompIso r e.functor)
+      (Functor.mapDerivedCategoryCompIso r e.functor).symm
   let ra : r.mapDerivedCategory ⊣ d.functor ⋙ G.rightDerivedFunctor :=
     (da.comp d.symm.toAdjunction).ofNatIsoLeft
       (Functor.associator _ _ _ ≪≫
@@ -100,7 +100,7 @@ private theorem open_right_adjoint (A : Type u) [CommRing A]
     exact (SheafOfModules.isQuasicoherent (moduleRings X.toRingedSpace)).prop_of_iso
       ((DerivedCategory.homologyFunctor _ n).mapIso
         (G.rightDerivedFunctor.mapIso
-          ((Functor.mapDerivedCategoryCompIso r e.functor).app E))) (hpush n)
+          ((Functor.mapDerivedCategoryCompIso r e.functor).symm.app E))) (hpush n)
   intro n
   exact (SheafOfModules.isQuasicoherent (moduleRings X.toRingedSpace)).prop_of_iso
     ((DerivedCategory.homologyFunctor _ n).mapIso (α.app _)) (hpush' n)

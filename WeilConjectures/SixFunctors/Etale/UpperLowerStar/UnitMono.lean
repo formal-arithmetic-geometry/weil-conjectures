@@ -103,7 +103,7 @@ lemma mono_piLift_unit {Y : Scheme.{u}} {ι : Type u} {X : ι → Scheme.{u}} (f
         (pointSmallEtale (Y.algClosurePoint y)).sheafFiber.map
           ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) (f i)).unit.app G) := by
       rw [← Functor.map_comp]
-      exact congrArg _ (Pi.lift_π _ _)
+      exact congrArg _ (Pi.lift_comp_π _ _)
     exact mono_of_mono_fac h
   let e := (pointSmallEtale (Y.algClosurePoint y)).uliftSheafFiberIso.{u + 1}
     (ModuleCat.{u + 1} Λ)

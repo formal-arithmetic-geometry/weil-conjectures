@@ -89,8 +89,7 @@ private theorem tensor_annihilated {X : Scheme.{u}} (J : X.IdealSheafData)
         ((M ⊗ N).presheaf.map (homOfLE W.2).op x)
     rw [← ht]
     clear ht
-    induction t using TensorProduct.induction_on with
-    | zero => simp only [map_zero, smul_zero]
+    induction t using TensorProduct.inductionOn with
     | tmul m n =>
       rw [tensorSectionsMap_tmul, ← smul_tmulSection, hM _ _ haW, zero_tmulSection]
     | add t s ht hs => simp only [map_add, smul_add, ht, hs, add_zero]

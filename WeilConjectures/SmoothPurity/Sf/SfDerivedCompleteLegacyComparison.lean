@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.SmoothPurity.Sf.SfDerivedComplete
 public import WeilConjectures.SmoothPurity.Derived.DerivedComplete
 
@@ -65,7 +67,7 @@ private theorem roos_transport {C : Type*} [Category C] [HasZeroObject C]
   · change Pi.lift q ≫ A.inv = e.inv ≫ Pi.lift p
     apply Pi.hom_ext
     intro n
-    simp only [A, Category.assoc, Limits.Pi.map_π, Pi.lift_π_assoc, Pi.lift_π]
+    simp only [A, Category.assoc, Limits.Pi.map_π, Pi.lift_comp_π_assoc, Pi.lift_comp_π]
     apply (cancel_mono (a n).hom).1
     simpa only [Category.assoc, Iso.inv_hom_id, Category.comp_id,
       Iso.inv_hom_id_assoc] using (congrArg (fun k ↦ e.inv ≫ k) (hp n)).symm

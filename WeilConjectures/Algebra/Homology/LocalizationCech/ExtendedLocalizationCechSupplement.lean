@@ -159,7 +159,7 @@ private theorem doubleTerm_cancel (R : Sheaf J CommRingCat.{u}) (r : ℕ)
   have hi : doubleIndex s j k hj hkj = doubleIndex s k j hk hjk := by
     apply Subtype.ext
     exact Finset.insert_comm k j s.val
-  simp only [doubleTerm, dif_pos hj, dif_pos hk, dif_pos hkj, dif_pos hjk, hi]
+  simp only [doubleTerm, dite_eq_left hj, dite_eq_left hk, dite_eq_left hkj, dite_eq_left hjk, hi]
   rw [← Category.assoc, scalar_powers_comm R (f j) (f k) (n + 1), Category.assoc,
     ← add_smul, insertion_signs_cancel s.val j k hj hk he, zero_smul]
 
@@ -192,20 +192,20 @@ theorem differential_sq (R : Sheaf J CommRingCat.{u}) (r : ℕ)
   have hexpand : Sigma.ι (fun _ : Indices r q ↦ unit (rings R)) s ≫
       differential R r f n q ≫ differential R r f n (q + 1) =
         ∑ j, ∑ k, doubleTerm R r f n q s j k := by
-    simp only [differential, Sigma.ι_desc_assoc, Preadditive.sum_comp]
+    simp only [differential, Sigma.ι_comp_desc_assoc, Preadditive.sum_comp]
     apply Finset.sum_congr rfl
     intro j _
     split_ifs with hj
     · simp only [zero_comp]
       simp [doubleTerm, hj]
-    · simp only [Preadditive.zsmul_comp, Category.assoc, Sigma.ι_desc,
+    · simp only [Preadditive.zsmul_comp, Category.assoc, Sigma.ι_comp_desc,
         Preadditive.comp_sum, Finset.smul_sum]
       apply Finset.sum_congr rfl
       intro k _
       split_ifs with hk
       · simp [doubleTerm, hj, hk]
       · simp only [Preadditive.comp_zsmul, smul_smul,
-          doubleTerm, dif_pos hj, dif_pos hk]
+          doubleTerm, dite_eq_left hj, dite_eq_left hk]
         rfl
   rw [hexpand, hsum, comp_zero]
 
@@ -283,14 +283,14 @@ theorem transition_comm (R : Sheaf J CommRingCat.{u}) (r : ℕ)
     differential R r f n q ≫ transitionTerm R r f (q + 1)
   apply Sigma.hom_ext
   intro s
-  simp only [transitionTerm, differential, Category.assoc, Sigma.ι_desc_assoc,
-    Sigma.ι_desc, Preadditive.comp_sum, Preadditive.sum_comp]
+  simp only [transitionTerm, differential, Category.assoc, Sigma.ι_comp_desc_assoc,
+    Sigma.ι_comp_desc, Preadditive.comp_sum, Preadditive.sum_comp]
   apply Finset.sum_congr rfl
   intro j _
   split_ifs with h
   · simp only [comp_zero, zero_comp]
   · simp only [Preadditive.comp_zsmul, Preadditive.zsmul_comp,
-      Category.assoc, Sigma.ι_desc]
+      Category.assoc, Sigma.ι_comp_desc]
     rw [← Category.assoc, hc s.val j h, Category.assoc]
 
 /-- Koszul transition as a chain map. Source: Tag 0913
@@ -394,10 +394,10 @@ private theorem transitionTerm_comparison {R B : Sheaf J CommRingCat.{u}} (φ : 
         (transitionTerm B r (mapSection φ ∘ f) q) := by
   apply Sigma.hom_ext
   intro s
-  simp only [transitionTerm, comparisonTerm, Category.assoc, Sigma.ι_desc_assoc,
-    Sigma.ι_desc]
+  simp only [transitionTerm, comparisonTerm, Category.assoc, Sigma.ι_comp_desc_assoc,
+    Sigma.ι_comp_desc]
   rw [← Category.assoc, subsetScalar_unitMap, Category.assoc]
-  simp only [← Functor.map_comp, Sigma.ι_desc]
+  simp only [← Functor.map_comp, Sigma.ι_comp_desc]
 
 /-- The coefficient comparison commutes with the Koszul differential. Source: Tag 099H
 (blueprint: def-weil-pbc-extended-localization-cech).
@@ -418,15 +418,15 @@ theorem comparison_comm {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B)
     differential R r f n q ≫ comparisonTerm φ r (q + 1)
   apply Sigma.hom_ext
   intro s
-  simp only [comparisonTerm, differential, Category.assoc, Sigma.ι_desc_assoc,
-    ← Functor.map_comp, Sigma.ι_desc, Functor.map_sum,
+  simp only [comparisonTerm, differential, Category.assoc, Sigma.ι_comp_desc_assoc,
+    ← Functor.map_comp, Sigma.ι_comp_desc, Functor.map_sum,
     Preadditive.comp_sum, Preadditive.sum_comp]
   apply Finset.sum_congr rfl
   intro j _
   split_ifs with h
   · simp only [Functor.map_zero, comp_zero, zero_comp]
   · simp only [Functor.map_zsmul, Preadditive.comp_zsmul, Preadditive.zsmul_comp,
-      Functor.map_comp, Category.assoc, Sigma.ι_desc, Function.comp_apply]
+      Functor.map_comp, Category.assoc, Sigma.ι_comp_desc, Function.comp_apply]
     rw [← Category.assoc, ← scalar_unitMap, Category.assoc]
 
 /-- The termwise coefficient map of Koszul complexes. Source: Tag 099H
@@ -497,10 +497,10 @@ theorem idealRow_comparison_zero {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B)
         0 := by
   classical
   have hi : ∀ j, Sigma.ι (fun _ : Fin r ↦ unit (rings R)) j ≫ idealRow R r f =
-      scalar R (f j) := fun j ↦ Sigma.ι_desc _ _
+      scalar R (f j) := fun j ↦ Sigma.ι_comp_desc _ _
   have hb : ∀ j, Sigma.ι (fun _ : Fin r ↦ unit (rings B)) j ≫
       idealRow B r (mapSection φ ∘ f) = scalar B (mapSection φ (f j)) :=
-    fun j ↦ Sigma.ι_desc _ _
+    fun j ↦ Sigma.ι_comp_desc _ _
   apply Sigma.hom_ext
   intro j
   rw [← Category.assoc, hi]

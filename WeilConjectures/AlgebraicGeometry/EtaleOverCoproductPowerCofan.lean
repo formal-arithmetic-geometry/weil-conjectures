@@ -81,7 +81,7 @@ theorem etale_over_coproduct_power_isColimit
   have hk' : k ≫ g.left = Sigma.desc (fun i ↦ (f i).left) := by
     apply Sigma.hom_ext
     intro i
-    simp only [k, Sigma.ι_desc_assoc, Sigma.ι_desc]
+    simp only [k, Sigma.ι_comp_desc_assoc, Sigma.ι_comp_desc]
     exact congrArg (fun a ↦ a.left) (hw i)
   let b : B₀ ≅ F.obj B := Over.isoMk (asIso k) hk'
   obtain ⟨e, he, _⟩ :=
@@ -99,7 +99,7 @@ theorem etale_over_coproduct_power_isColimit
     apply Pi.hom_ext
     intro r
     dsimp [q, d']
-    simp only [Category.assoc, Sigma.ι_desc, Pi.map_π]
+    simp only [Category.assoc, Sigma.ι_comp_desc, Pi.map_π]
     change _ = Sigma.ι P t ≫ (e n).hom ≫ Limits.Pi.map (fun _ ↦ b.hom) ≫ _
     rw [Pi.map_π]
     have h := congrArg (fun z ↦ z ≫ b.hom) (he n t r)
@@ -107,7 +107,7 @@ theorem etale_over_coproduct_power_isColimit
     rw [h]
     congr 1
     apply Over.OverMorphism.ext
-    exact (Sigma.ι_desc (fun i ↦ (c i).left) (t r)).symm
+    exact (Sigma.ι_comp_desc (fun i ↦ (c i).left) (t r)).symm
   have hi : IsIso (Sigma.desc d') := by rw [hd']; infer_instance
   have hcol : IsColimit (Cofan.mk Q d') :=
     ((Cofan.nonempty_isColimit_iff_isIso_sigmaDesc _).mpr hi).some

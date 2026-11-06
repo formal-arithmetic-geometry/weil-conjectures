@@ -65,8 +65,10 @@ theorem finiteEtale_open_integralClosure_finite {X : Scheme.{u}} [IsNoetherian X
   | inl h =>
     have hV0 : V = ⊥ := SetLike.ext' h
     subst V
-    simp only [Scheme.Hom.preimage_bot]
-    infer_instance
+    have : Subsingleton Γ(P.obj.left, f ⁻¹ᵁ (⊥ : X.Opens)) := by
+      rw [Scheme.Hom.preimage_bot]
+      infer_instance
+    exact Module.Finite.of_finite
   | inr h =>
     have : Nonempty V := by simpa using h
     let A : Type u := Γ(X, V)

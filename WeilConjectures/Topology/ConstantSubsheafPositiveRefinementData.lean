@@ -257,7 +257,7 @@ theorem positive_refinement_data
   let A (j : Fin n) := B (p j) (a j)
   have ha (j : Fin n) : (a j).down ≠ 0 := by
     intro h
-    exact (r j).2.2.2 (ULift.ext _ _ h)
+    exact (r j).2.2.2 (ULift.ext h)
   have hrestrict (i : Fin m) (b : ULift.{u} ℤ) :
       q.hom.app (op (B i b)) (K.obj.map (homOfLE (hBU i b)).op (s i)) =
         η.app (op (B i b)) b := by

@@ -99,7 +99,7 @@ lemma epi_one_sub_of_mittagLeffler {F : ℕᵒᵖ ⥤ ModuleCat.{u} R}
   intro a
   let ψ (k n : ℕ) : F.obj (op n) := if h : n ≤ k then φ h ((P.proj k).hom a) else 0
   have hψ (k n : ℕ) (h : n + 1 ≤ k) : φ n.le_succ (ψ k (n + 1)) = ψ k n := by
-    simp only [ψ, dif_pos h, dif_pos (n.le_succ.trans h), hφcomp]
+    simp only [ψ, dite_eq_left h, dite_eq_left (n.le_succ.trans h), hφcomp]
   let y (n : ℕ) : F.obj (op n) := ∑ k ∈ Finset.Ico n (M n), ψ k n
   -- the correction `b = a - (1 - t) y` lies in the stable images
   let b (n : ℕ) : F.obj (op n) := (P.proj n).hom a - y n + φ n.le_succ (y (n + 1))
@@ -110,14 +110,14 @@ lemma epi_one_sub_of_mittagLeffler {F : ℕᵒᵖ ⥤ ModuleCat.{u} R}
         ∑ k ∈ Finset.Ico (M n) (M (n + 1)), ψ k n := by
       rw [map_sum, Finset.sum_Ico_consecutive _ (hMN n).2 (hMsucc n)]
       exact Finset.sum_congr rfl fun k hk ↦ hψ k n (Finset.mem_Ico.1 hk).1
-    have hψn : ψ n n = (P.proj n).hom a := by simp only [ψ, dif_pos le_rfl, hφid]
+    have hψn : ψ n n = (P.proj n).hom a := by simp only [ψ, dite_eq_left le_rfl, hφid]
     have hb' : b n = ∑ k ∈ Finset.Ico (M n) (M (n + 1)), ψ k n := by
       simp only [b, h₁, h₂, hψn]
       abel
     rw [hb']
     refine Submodule.sum_mem _ fun k hk ↦ ?_
     have hk' : N n ≤ k := ((hMN n).1.le).trans (Finset.mem_Ico.1 hk).1
-    simp only [ψ, dif_pos ((hN n).trans hk')]
+    simp only [ψ, dite_eq_left ((hN n).trans hk')]
     exact hI n k hk' _
   -- solve `x - t x = b` inside the stable images
   let x : ∀ n : ℕ, I n := fun n ↦ Nat.rec (motive := fun n ↦ I n) 0
@@ -285,7 +285,7 @@ lemma epi_one_sub_of_shortExact (hC : EpiπAppZeroOfEpi C) {G' G G'' : ℕᵒᵖ
     exact fun n ↦ (hS n.as).exact
   have hSP := hSF.map_of_exact (lim : (Discrete ℕ ⥤ C) ⥤ C)
   let ht₀ (H : ℕᵒᵖ ⥤ C) (n : ℕ) : piTowerShift H ≫ Pi.π _ n =
-      Pi.π _ (n + 1) ≫ H.map (homOfLE n.le_succ).op := Pi.lift_π _ _
+      Pi.π _ (n + 1) ≫ H.map (homOfLE n.le_succ).op := Pi.lift_comp_π _ _
   have e' : Epi (𝟙 _ - piTowerShift G') :=
     epi_one_sub_of_epiπAppZeroOfEpi hC h' (productIsProduct _) _ (ht₀ G')
   have e'' : Epi (𝟙 _ - piTowerShift G'') :=
@@ -299,13 +299,13 @@ lemma epi_one_sub_of_shortExact (hC : EpiπAppZeroOfEpi C) {G' G G'' : ℕᵒᵖ
         change ((𝟙 _ - piTowerShift G') ≫ Pi.map fun n ↦ ι.app (op n)) ≫ Pi.π _ n =
           ((Pi.map fun n ↦ ι.app (op n)) ≫ (𝟙 _ - piTowerShift G)) ≫ Pi.π _ n
         simp only [assoc, Pi.map_π, Preadditive.sub_comp, Preadditive.comp_sub, id_comp,
-          comp_id, Pi.lift_π_assoc, Pi.lift_π, Pi.map_π_assoc, NatTrans.naturality]
+          comp_id, Pi.lift_comp_π_assoc, Pi.lift_comp_π, Pi.map_π_assoc, NatTrans.naturality]
       comm₂₃ := by
         refine Pi.hom_ext _ _ fun n ↦ ?_
         change ((𝟙 _ - piTowerShift G) ≫ Pi.map fun n ↦ π.app (op n)) ≫ Pi.π _ n =
           ((Pi.map fun n ↦ π.app (op n)) ≫ (𝟙 _ - piTowerShift G'')) ≫ Pi.π _ n
         simp only [assoc, Pi.map_π, Preadditive.sub_comp, Preadditive.comp_sub, id_comp,
-          comp_id, Pi.lift_π_assoc, Pi.lift_π, Pi.map_π_assoc, NatTrans.naturality] }
+          comp_id, Pi.lift_comp_π_assoc, Pi.lift_comp_π, Pi.map_π_assoc, NatTrans.naturality] }
   have : Epi (SF.map lim).g := hSP.epi_g
   have : Epi φ.τ₁ := e'
   have : Epi φ.τ₃ := e''
@@ -341,7 +341,7 @@ noncomputable def isLimitHomologyFunctorMapConeOfIsHomotopyLimitOfMittagLeffler
     IsLimit ((homologyFunctor C i).mapCone c) :=
   have ht (n : ℕ) : piTowerShift (F ⋙ homologyFunctor C (i - 1)) ≫ Pi.π _ n =
       Pi.π _ (n + 1) ≫ (F ⋙ homologyFunctor C (i - 1)).map (homOfLE n.le_succ).op :=
-    Pi.lift_π _ _
+    Pi.lift_comp_π _ _
   have := isIso_lift_homologyFunctor_mapCone_of_isHomotopyLimit hc (i - 1) i (by lia)
     (productIsProduct _) _ ht (epi_one_sub_of_shortExact hC ι π hιπ hS h' h''
       (productIsProduct _) _ ht)

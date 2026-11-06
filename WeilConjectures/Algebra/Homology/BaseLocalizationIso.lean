@@ -94,8 +94,7 @@ theorem exists_baseLocalization_iso (S : Submonoid R) [IsLocalization S Rp] (i :
         map_smul' := by
           intro z x
           change f (z • x) = φ z • f x
-          induction z using TensorProduct.induction_on with
-          | zero => simp only [zero_smul, map_zero]
+          induction z using TensorProduct.inductionOn with
           | tmul a b =>
             have hsplit : a ⊗ₜ[R] b =
                 (a ⊗ₜ[R] (1 : B)) * ((1 : A) ⊗ₜ[R] b) := by
@@ -123,8 +122,7 @@ theorem exists_baseLocalization_iso (S : Submonoid R) [IsLocalization S Rp] (i :
         algebraMap (A ⊗[R] B) D := by
       apply RingHom.ext
       intro z
-      induction z using TensorProduct.induction_on with
-      | zero => simp
+      induction z using TensorProduct.inductionOn with
       | tmul a b =>
         change algebraMap (A ⊗[Rp] B) D (φ (a ⊗ₜ[R] b)) = _
         rw [hφ]

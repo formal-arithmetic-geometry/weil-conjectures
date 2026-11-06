@@ -32,8 +32,7 @@ noncomputable def resolutionAugmentationIso
       DerivedCategory.Plus.Q.obj ⟨I.cochainComplex, 0, inferInstance⟩ :=
   DerivedCategory.Plus.ι.preimageIso
     ((DerivedCategory.singleFunctorIsoCompQ A 0).app X ≪≫
-      asIso (DerivedCategory.Q.map I.ι') ≪≫
-      (DerivedCategory.quotientCompQhIso A).symm.app _)
+      asIso (DerivedCategory.Q.map I.ι'))
 
 /-- Apply the derived functor to the augmentation and invert its unit on injectives.
 Source: Stacks Project, Tag 015M.
@@ -50,8 +49,10 @@ noncomputable def resolutionDerivedIso
   have : ∀ n, Injective (L.obj.X n) := fun n ↦
     inferInstanceAs (Injective (I.cochainComplex.X n))
   F.rightDerivedFunctorPlus.mapIso (resolutionAugmentationIso I) ≪≫
-    (asIso (F.rightDerivedFunctorPlusUnit.app
-      ((HomotopyCategory.Plus.quotient A).obj L))).symm
+    F.rightDerivedFunctorPlus.mapIso ((DerivedCategory.Plus.quotientCompQhIso A).app L).symm ≪≫
+    (asIso (F.rightDerivedFunctorPlusUnith.app
+      ((HomotopyCategory.Plus.quotient A).obj L))).symm ≪≫
+    (DerivedCategory.Plus.quotientCompQhIso B).app (F.mapCochainComplexPlus.obj L)
 
 /-- Canonical comparison with the extension of the natural-number-indexed complex F(I).
 It is constructed from the augmentation, the inverse derived unit on injectives, and the

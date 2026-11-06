@@ -44,17 +44,17 @@ composition isomorphism `D(F ⋙ G) ≅ D(F) ⋙ D(G)`. -/
 @[reassoc]
 lemma mapDerivedCategoryHomologyFunctorIso_comp (n : ℤ) (K : DerivedCategory C) :
     ((F ⋙ G).mapDerivedCategoryHomologyFunctorIso n).hom.app K ≫
-        (DerivedCategory.homologyFunctor E n).map ((mapDerivedCategoryCompIso F G).hom.app K) =
+        (DerivedCategory.homologyFunctor E n).map ((mapDerivedCategoryCompIso F G).inv.app K) =
       G.map ((F.mapDerivedCategoryHomologyFunctorIso n).hom.app K) ≫
         (G.mapDerivedCategoryHomologyFunctorIso n).hom.app (F.mapDerivedCategory.obj K) := by
   have h : ((F ⋙ G).mapDerivedCategoryHomologyFunctorIso n).hom ≫
-      whiskerRight (mapDerivedCategoryCompIso F G).hom (DerivedCategory.homologyFunctor E n) =
+      whiskerRight (mapDerivedCategoryCompIso F G).inv (DerivedCategory.homologyFunctor E n) =
       whiskerRight (F.mapDerivedCategoryHomologyFunctorIso n).hom G ≫
         whiskerLeft F.mapDerivedCategory (G.mapDerivedCategoryHomologyFunctorIso n).hom := by
     refine Localization.natTrans_ext DerivedCategory.Q
       (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) (fun L => ?_)
     have hfac : (F ⋙ G).mapDerivedCategoryFactors.inv.app L ≫
-        (mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Q.obj L) =
+        (mapDerivedCategoryCompIso F G).inv.app (DerivedCategory.Q.obj L) =
         G.mapDerivedCategoryFactors.inv.app ((F.mapHomologicalComplex (.up ℤ)).obj L) ≫
           G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.inv.app L) := by
       rw [← cancel_epi ((F ⋙ G).mapDerivedCategoryFactors.hom.app L), Iso.hom_inv_id_app_assoc,

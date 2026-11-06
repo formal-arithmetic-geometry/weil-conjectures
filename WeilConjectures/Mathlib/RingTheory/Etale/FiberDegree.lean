@@ -8,6 +8,7 @@ module
 public import Mathlib.RingTheory.Etale.StandardEtale
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Mathlib.RingTheory.LocalRing.ResidueField.Instances
+public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.RingTheory.Artinian.Ring
 public import Mathlib.RingTheory.Unramified.Finite
 public import Mathlib.RingTheory.TensorProduct.Pi
@@ -82,7 +83,7 @@ section BaseChange
 
 variable {R' : Type*} [CommRing R'] [Algebra R R'] (q : Ideal R') [q.IsPrime] [q.LiesOver p]
   [Algebra (Localization.AtPrime p) (Localization.AtPrime q)]
-  [Localization.AtPrime.IsLiesOverAlgebra p q]
+  [IsScalarTower R (Localization.AtPrime p) (Localization.AtPrime q)]
 
 /-- Fibre degrees are invariant under base change: the fibre degree of `R' ⊗[R] S` at a prime
 `q` of `R'` lying over `p` is the fibre degree of `S` at `p`. -/

@@ -102,7 +102,7 @@ theorem exists_unit_map_eq_conj {K L A ι : Type*} [Field K] [Field L] [Algebra 
     ((Algebra.TensorProduct.congr τ.symm AlgEquiv.refl).toRingEquiv.trans
       (φ.toRingEquiv.trans (τ.mapMatrix (m := ι)).toRingEquiv))
   let ψ : Matrix ι ι L ≃ₐ[L] Matrix ι ι L := AlgEquiv.ofRingEquiv (f := f) fun c => by
-    simp only [f, RingEquiv.trans_apply, AlgEquiv.coe_ringEquiv, AlgEquiv.commutes,
+    simp only [f, RingEquiv.trans_apply, AlgEquiv.coe_toRingEquiv, AlgEquiv.commutes,
       Algebra.TensorProduct.algebraMap_apply, Algebra.TensorProduct.congr_apply,
       Algebra.TensorProduct.map_tmul, Algebra.algebraMap_self_apply, AlgEquiv.coe_toAlgHom,
       AlgEquiv.coe_refl, id_eq]

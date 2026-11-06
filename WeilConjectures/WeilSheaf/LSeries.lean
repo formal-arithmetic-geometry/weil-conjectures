@@ -170,7 +170,7 @@ theorem X_pow_dvd_lFactorLogDeriv (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k
     {x : X.finitePoints} {n : ℕ} (hx : n < (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1) :
     PowerSeries.X ^ (n + 1) ∣ F.lFactorLogDeriv ι x :=
   ((pow_dvd_pow _ hx).trans (X_pow_dvd_expand (by
-    rw [traceGen, <- coeff_zero_eq_constantCoeff_apply, coeff_map, coeff_mk, if_pos rfl,
+    rw [traceGen, <- coeff_zero_eq_constantCoeff_apply, coeff_map, coeff_mk, ite_eq_left rfl,
       map_zero]) _)).mul_left _
 
 /-- The coefficients of the logarithmic derivative of a local factor:
@@ -186,13 +186,13 @@ theorem coeff_lFactorLogDeriv (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ 
   have hd := (X ↘ Spec (CommRingCat.of k₀)).degreeOver_ne_zero x.2
   rw [lFactorLogDeriv, coeff_C_mul, coeff_expand]
   by_cases h₁ : (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1 ∣ n
-  · rw [if_pos h₁]
+  · rw [ite_eq_left h₁]
     rcases eq_or_ne n 0 with rfl | hn
     · simp
     · have hnd : n / (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1 ≠ 0 :=
         (Nat.div_ne_zero_iff_of_dvd h₁).2 ⟨hn, hd⟩
-      rw [if_pos ⟨h₁, hn⟩, traceGen, coeff_map, coeff_mk, if_neg hnd]
-  · rw [if_neg h₁, if_neg fun h ↦ h₁ h.1, mul_zero]
+      rw [ite_eq_left ⟨h₁, hn⟩, traceGen, coeff_map, coeff_mk, ite_eq_right hnd]
+  · rw [ite_eq_right h₁, ite_eq_right fun h ↦ h₁ h.1, mul_zero]
 
 variable [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
@@ -282,7 +282,7 @@ theorem X_mul_derivative_lSeries (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k�
   have hsum := F.sum_traceFunction_eq_sum hn (T := (hfin n).toFinset)
     fun x hx ↦ (hfin n).mem_toFinset.2 (Nat.le_of_dvd (Nat.pos_of_ne_zero hn) hx)
   rw [finsum_eq_sum_of_fintype] at hsum
-  rw [if_neg hn, finsum_eq_sum_of_fintype, ← map_sum, hsum, map_sum, Finset.sum_filter]
+  rw [ite_eq_right hn, finsum_eq_sum_of_fintype, ← map_sum, hsum, map_sum, Finset.sum_filter]
   refine Finset.sum_congr rfl fun x _ ↦ ?_
   simp only [hn, ne_eq, not_false_eq_true, and_true, map_mul, map_natCast]
 

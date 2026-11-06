@@ -62,7 +62,7 @@ instance surjective_iterateFrobenius : Surjective (X.iterateFrobenius hp hX n) :
 field extensions `a ↦ a ^ p ^ n` are purely inseparable. -/
 instance universallyInjective_iterateFrobenius :
     UniversallyInjective (X.iterateFrobenius hp hX n) := by
-  refine ((tfae_universallyInjective (X.iterateFrobenius hp hX n)).out 0 2).2 ?_
+  refine ((tfae_universallyInjective (X.iterateFrobenius hp hX n)).out 1 3).2 ?_
   refine ⟨fun x y h ↦ h, fun x ↦ ?_⟩
   have hκ : (p : X.residueField x) = 0 := by
     rw [← map_natCast (X.residue x).hom, ← map_natCast (X.presheaf.germ ⊤ x trivial).hom, hX,

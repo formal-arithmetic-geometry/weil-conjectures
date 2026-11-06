@@ -86,7 +86,7 @@ def orbitLattice (ρ : W →* (M ≃ₗ[ℚ_[ℓ]] M)) (c : κ → M →ₗ[ℚ_
   zero_mem' w i := by simp
   smul_mem' a x hx w i := by
     rw [← algebraMap_smul ℚ_[ℓ] a x, map_smul, (c i).map_smul, smul_eq_mul, norm_mul,
-      PadicInt.algebraMap_apply, PadicInt.padic_norm_e_of_padicInt]
+      PadicInt.algebraMap_apply, PadicInt.norm_coe]
     exact mul_le_one₀ a.norm_le_one (norm_nonneg _) (hx w i)
 
 theorem mem_orbitLattice {ρ : W →* (M ≃ₗ[ℚ_[ℓ]] M)} {c : κ → M →ₗ[ℚ_[ℓ]] ℚ_[ℓ]} {x : M} :
@@ -130,7 +130,6 @@ noncomputable def orbitLatticeCoord (ρ : W →* (M ≃ₗ[ℚ_[ℓ]] M)) (c : �
   map_add' x y := by
     ext i
     simp
-    rfl
   map_smul' a x := by
     ext i
     simp [← algebraMap_smul ℚ_[ℓ] a (x : M)]

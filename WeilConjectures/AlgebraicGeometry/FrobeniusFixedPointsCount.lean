@@ -179,14 +179,14 @@ theorem Hom.natCard_fixedFieldPoints_fiber {m : ℕ} (hm : m ≠ 0) (ψ : Ω →
   have : Finite (FiniteField.galoisExtension k m) := Module.finite_of_finite k
   rw [← Nat.card_congr e]
   by_cases hdvd : f.degreeOver y ∣ m
-  · rw [if_pos hdvd]
+  · rw [ite_eq_left hdvd]
     have hdvd' : Module.finrank k (X.residueField y) ∣
         Module.finrank k (FiniteField.galoisExtension k m) := by
       rw [FiniteField.finrank_galoisExtension k m hm]
       exact hdvd
     rw [FiniteField.natCard_algHom_of_finrank_dvd hdvd']
     rfl
-  · rw [if_neg hdvd]
+  · rw [ite_eq_right hdvd]
     have : IsEmpty (X.residueField y →ₐ[k] FiniteField.galoisExtension k m) := by
       rw [← not_nonempty_iff, FiniteField.nonempty_algHom_iff_finrank_dvd,
         FiniteField.finrank_galoisExtension k m hm]
@@ -247,6 +247,6 @@ theorem Hom.sum_fixedFieldPoints {m : ℕ} (hm : m ≠ 0) (ψ : Ω →+* Ω)
     (Finset.mem_filter.1 hg).2), Finset.sum_const, ← Fintype.card_subtype,
     ← Nat.card_eq_fintype_card,
     Nat.card_congr (Equiv.subtypeEquivRight fun g ↦ Subtype.ext_iff),
-    f.natCard_fixedFieldPoints_fiber hm ψ hψ, if_pos (Finset.mem_filter.1 hy).2]
+    f.natCard_fixedFieldPoints_fiber hm ψ hψ, ite_eq_left (Finset.mem_filter.1 hy).2]
 
 end AlgebraicGeometry.Scheme

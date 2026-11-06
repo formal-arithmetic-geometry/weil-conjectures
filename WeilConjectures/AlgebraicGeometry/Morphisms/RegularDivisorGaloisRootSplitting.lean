@@ -86,9 +86,9 @@ private theorem split_of_section
     have hr := Sigma.ι_reindex_hom (f := fun _ : G ↦ W.P) e j
     dsimp only [Function.comp_def] at hr
     apply pullback.hom_ext <;>
-      simp only [D, Category.assoc, Sigma.ι_desc, pullback.lift_fst,
+      simp only [D, Category.assoc, Sigma.ι_comp_desc, pullback.lift_fst,
         pullback.lift_snd, pullbackSymmetry_hom_comp_fst, pullbackSymmetry_hom_comp_snd]
-    all_goals rw [← Category.assoc, ← Category.assoc, hr, Sigma.ι_desc]
+    all_goals rw [← Category.assoc, ← Category.assoc, hr, Sigma.ι_comp_desc]
     all_goals simp [σ]
   have : IsIso D := by
     rw [hD]

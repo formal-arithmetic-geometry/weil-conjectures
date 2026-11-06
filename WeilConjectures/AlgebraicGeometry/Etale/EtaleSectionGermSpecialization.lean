@@ -34,7 +34,7 @@ private noncomputable def affinePointedInclusion
 private noncomputable def pointedSchemeDiagram
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) :=
-  CategoryOfElements.π (pointSmallEtale s).fiber ⋙ Etale.forget S ⋙ Over.forget S
+  Functor.Elements.π (pointSmallEtale s).fiber ⋙ Etale.forget S ⋙ Over.forget S
 
 private noncomputable def affineSchemeCone
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
@@ -128,9 +128,9 @@ private noncomputable def specializationPointHom
     pointSmallEtale (t ≫ strictHenselizationStructuralMap s) ⟶ pointSmallEtale s where
   hom :=
     { app := fun U ↦ TypeCat.ofHom fun a ↦
-        Over.homMk (t ≫ (allSchemeCone s).π.app ⟨U, a⟩)
+        Over.homMk (t ≫ (allSchemeCone s).π.app (Functor.elementsMk _ U a))
           (by
-            change (t ≫ (allSchemeCone s).π.app ⟨U, a⟩) ≫ U.hom =
+            change (t ≫ (allSchemeCone s).π.app (Functor.elementsMk _ U a)) ≫ U.hom =
               t ≫ strictHenselizationStructuralMap s
             rw [Category.assoc, allSchemeCone_over])
       naturality := by
@@ -138,8 +138,8 @@ private noncomputable def specializationPointHom
         ext a
         apply Over.OverMorphism.ext
         symm
-        change (t ≫ (allSchemeCone s).π.app ⟨U, a⟩) ≫ f.left =
-          t ≫ (allSchemeCone s).π.app ⟨V, (pointSmallEtale s).fiber.map f a⟩
+        change (t ≫ (allSchemeCone s).π.app (Functor.elementsMk _ U a)) ≫ f.left =
+          t ≫ (allSchemeCone s).π.app (Functor.elementsMk _ V ((pointSmallEtale s).fiber.map f a))
         rw [Category.assoc]
         congr 1
         let k : (pointSmallEtale s).fiber.elementsMk U a ⟶
@@ -156,9 +156,9 @@ private theorem specializationPointHom_germ
     (pointSmallEtale s).toPresheafFiber U a G.obj ≫
         (specializationPointHom s t).sheafFiber.app G =
       (pointSmallEtale (t ≫ strictHenselizationStructuralMap s)).toPresheafFiber U
-        (Over.homMk (t ≫ (allSchemeCone s).π.app ⟨U, a⟩)
+        (Over.homMk (t ≫ (allSchemeCone s).π.app (Functor.elementsMk _ U a))
           (by
-            change (t ≫ (allSchemeCone s).π.app ⟨U, a⟩) ≫ U.hom =
+            change (t ≫ (allSchemeCone s).π.app (Functor.elementsMk _ U a)) ≫ U.hom =
               t ≫ strictHenselizationStructuralMap s
             rw [Category.assoc, allSchemeCone_over])) G.obj := by
   simp only [GrothendieckTopology.Point.Hom.sheafFiber, Functor.whiskerLeft_app,
@@ -186,8 +186,8 @@ private noncomputable def pullbackPointedFunctor
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (b : Spec (.of Ω) ⟶ U.left) :
     (pointSmallEtale (b ≫ U.hom)).fiber.Elements ⥤ (pointSmallEtale b).fiber.Elements where
   obj n :=
-    ⟨(MorphismProperty.Over.pullback @Etale ⊤ U.hom).obj n.1,
-      Over.homMk (pullback.lift n.2.left b n.2.w) (pullback.lift_snd _ _ _)⟩
+    Functor.elementsMk _ ((MorphismProperty.Over.pullback @Etale ⊤ U.hom).obj n.1)
+      (Over.homMk (pullback.lift n.2.left b n.2.w) (pullback.lift_snd _ _ _))
   map {n m} f :=
     ⟨(MorphismProperty.Over.pullback @Etale ⊤ U.hom).map f.1, by
       apply Over.OverMorphism.ext
@@ -235,15 +235,15 @@ private theorem strictLocalRelativeMap_fst
     {S : Scheme.{u}} (U : S.Etale)
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (b : Spec (.of Ω) ⟶ U.left) :
     strictLocalRelativeMap U b ≫
-      (allSchemeCone (b ≫ U.hom)).π.app ⟨U, Over.homMk b rfl⟩ =
+      (allSchemeCone (b ≫ U.hom)).π.app (Functor.elementsMk _ U (Over.homMk b rfl)) =
         strictHenselizationStructuralMap b := by
   rw [show strictLocalRelativeMap U b ≫
-      (allSchemeCone (b ≫ U.hom)).π.app ⟨U, Over.homMk b rfl⟩ =
-      (strictLocalRelativeCone U b).π.app ⟨U, Over.homMk b rfl⟩ from
+      (allSchemeCone (b ≫ U.hom)).π.app (Functor.elementsMk _ U (Over.homMk b rfl)) =
+      (strictLocalRelativeCone U b).π.app (Functor.elementsMk _ U (Over.homMk b rfl)) from
     (allSchemeCone_isLimit (b ≫ U.hom)).fac (strictLocalRelativeCone U b) _]
   let T : U.left.Etale := Etale.mk (𝟙 U.left)
-  let n : (pointSmallEtale b).fiber.Elements := ⟨T, Over.homMk b (Category.comp_id b)⟩
-  let m := (pullbackPointedFunctor U b).obj ⟨U, Over.homMk b rfl⟩
+  let n := (pointSmallEtale b).fiber.elementsMk T (Over.homMk b (Category.comp_id b))
+  let m := (pullbackPointedFunctor U b).obj (Functor.elementsMk _ U (Over.homMk b rfl))
   let δ : n ⟶ m :=
     ⟨MorphismProperty.Over.homMk (pullback.lift (𝟙 U.left) (𝟙 U.left) rfl)
       (pullback.lift_snd _ _ _), by
@@ -311,14 +311,14 @@ theorem etale_section_germ_bijective_specializes_iff
     (a (IsLocalRing.closedPoint Ω)) (b (IsLocalRing.closedPoint Ξ)) h a b rfl rfl
   let s := b ≫ U.hom
   let t := tU ≫ strictLocalRelativeMap U b
-  have ht : t ≫ (allSchemeCone s).π.app ⟨U, Over.homMk b rfl⟩ = a := by
+  have ht : t ≫ (allSchemeCone s).π.app (Functor.elementsMk _ U (Over.homMk b rfl)) = a := by
     dsimp only [t, s]
     rw [Category.assoc, strictLocalRelativeMap_fst]
     exact htU
   let v : (pointSmallEtale (t ≫ strictHenselizationStructuralMap s)).fiber.obj U :=
-    Over.homMk (t ≫ (allSchemeCone s).π.app ⟨U, Over.homMk b rfl⟩)
+    Over.homMk (t ≫ (allSchemeCone s).π.app (Functor.elementsMk _ U (Over.homMk b rfl)))
       (by
-        change (t ≫ (allSchemeCone s).π.app ⟨U, Over.homMk b rfl⟩) ≫ U.hom =
+        change (t ≫ (allSchemeCone s).π.app (Functor.elementsMk _ U (Over.homMk b rfl))) ≫ U.hom =
           t ≫ strictHenselizationStructuralMap s
         rw [Category.assoc, allSchemeCone_over])
   have hg := specializationPointHom_germ s t G U (Over.homMk b rfl)

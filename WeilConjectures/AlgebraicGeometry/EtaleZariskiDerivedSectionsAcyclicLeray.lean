@@ -67,9 +67,11 @@ private noncomputable def mapResolution
           simp [HomologicalComplex.shortComplexFunctor'])).2
       apply (ShortComplex.exact_and_mono_f_iff_f_is_kernel _).2
       constructor
-      convert KernelFork.mapIsLimit _ I.isLimitKernelFork T using 1 <;>
+      refine IsLimit.ofIsoLimit (KernelFork.mapIsLimit _ I.isLimitKernelFork T) ?_
+      exact Fork.ext (Iso.refl _) (by
         simp [InjectiveResolution.kernelFork, KernelFork.map,
           HomologicalComplex.shortComplexFunctor']
+        exact CochainComplex.fromSingle₀Equiv_symm_apply_f_zero _ _)
     | succ n =>
       rw [quasiIsoAt_iff_exactAt]
       · rw [HomologicalComplex.exactAt_iff_isZero_homology]

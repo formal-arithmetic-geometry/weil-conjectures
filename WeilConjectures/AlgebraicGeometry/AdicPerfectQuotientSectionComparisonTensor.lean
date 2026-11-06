@@ -140,8 +140,7 @@ theorem adicPerfectTensorQuotient_naturality
         (((ModuleCat.extendScalars (Ideal.Quotient.mk (I ^ n))).map f).hom x) =
       ((AdicCohomology.quotient I n).map f)
         (TensorProduct.quotTensorEquivQuotSMul M (I ^ n) x) := by
-  induction x using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction x using TensorProduct.inductionOn with
   | add x y hx hy => simp only [_root_.map_add, hx, hy]
   | tmul a x =>
     obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective a

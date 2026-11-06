@@ -143,36 +143,36 @@ theorem exists_eventually_compatible_module_equiv
     intro j
     apply RingHom.ext
     intro z
-    induction z using TensorProduct.induction_on with
-    | zero => simp
-    | tmul a b =>
+    refine TensorProduct.inductionOn z ?_ ?_
+    · intro a b
       change F.map (homOfLE (le_refl j.val)) a ⊗ₜ[F.obj i] b = a ⊗ₜ[F.obj i] b
       simp
-    | add z z' hz hz' => simpa only [map_add] using congrArg₂ (· + ·) hz hz'
+    · intro z z' hz hz'
+      simpa only [map_add] using congrArg₂ (· + ·) hz hz'
   have hcomp : ∀ j l m (hjl : j ≤ l) (hlm : l ≤ m),
       (f l m hlm).comp (f j l hjl) = f j m (hjl.trans hlm) := by
     intro j l m hjl hlm
     apply RingHom.ext
     intro z
-    induction z using TensorProduct.induction_on with
-    | zero => simp
-    | tmul a b =>
+    refine TensorProduct.inductionOn z ?_ ?_
+    · intro a b
       change F.map (homOfLE hlm) (F.map (homOfLE hjl) a) ⊗ₜ[F.obj i] b =
         F.map (homOfLE (hjl.trans hlm)) a ⊗ₜ[F.obj i] b
       exact congrArg (fun x ↦ x ⊗ₜ[F.obj i] b)
         (ConcreteCategory.congr_hom (F.map_comp (homOfLE hjl) (homOfLE hlm)) a).symm
-    | add z z' hz hz' => simpa only [map_add] using congrArg₂ (· + ·) hz hz'
+    · intro z z' hz hz'
+      simpa only [map_add] using congrArg₂ (· + ·) hz hz'
   have hg : ∀ j l (hjl : j ≤ l), (g l).comp (f j l hjl) = g j := by
     intro j l hjl
     apply RingHom.ext
     intro z
-    induction z using TensorProduct.induction_on with
-    | zero => simp
-    | tmul a b =>
+    refine TensorProduct.inductionOn z ?_ ?_
+    · intro a b
       simp only [f, g, RingHom.comp_apply, AlgHom.toRingHom_eq_coe]
       exact congrArg (fun x : c.pt ↦ x ⊗ₜ[F.obj i] b)
         (ConcreteCategory.congr_hom (c.w (homOfLE hjl)) a)
-    | add z z' hz hz' => simpa only [map_add] using congrArg₂ (· + ·) hz hz'
+    · intro z z' hz hz'
+      simpa only [map_add] using congrArg₂ (· + ·) hz hz'
   obtain ⟨hs, hz⟩ := TensorProduct.tensorTailColimitElementwise F c hc i B k hik
   have hsurj : ∀ y : Y, ∃ j a, g j a = y := by
     intro y

@@ -96,7 +96,7 @@ private theorem torsor_card_geometricFiber
     obtain ⟨g, l, hl⟩ := exists_comp_sigmaι_eq_of_subsingleton (z ≫ inv D)
     have h : l ≫ pullback.lift (f := t.π) (g := t.π) (t.smul g) (𝟙 t.P)
         (by simp [t.smul_π]) = z := by
-      rw [← Sigma.ι_desc (fun g : G ↦
+      rw [← Sigma.ι_comp_desc (fun g : G ↦
         pullback.lift (f := t.π) (g := t.π) (t.smul g) (𝟙 t.P)
           (by simp [t.smul_π])) g, ← Category.assoc, hl]
       simp [D]
@@ -229,7 +229,7 @@ theorem Scheme.GaloisCover.exists_connected_subgroup_quotient
     intro k hk
     have hk' : x.left ≫ c.smul ⟨k.down.val⟩ = y.left :=
       congrArg (fun q ↦ q.left) hk
-    exact ULift.ext _ _ (Subtype.ext (congrArg ULift.down
+    exact ULift.ext (Subtype.ext (congrArg ULift.down
       (torsor_action_injective c x.left (hk'.trans hh'.symm))))
   have hiso := Scheme.FiniteEtale.isIso_sigmaDesc_of_existsUnique t PV α huniq
   let cH : Scheme.GaloisCover (ULift.{u + 1} H) V :=

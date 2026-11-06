@@ -118,10 +118,7 @@ theorem coefficientTarget_section_generators
       (by simp [← Hom.comp_app])
   rw [← hy]
   clear ht' hy y
-  induction t using TensorProduct.induction_on with
-  | zero =>
-    refine ⟨0, Fin.elim0, Fin.elim0, ?_⟩
-    simp
+  induction t using TensorProduct.inductionOn with
   | tmul s a =>
     refine ⟨1, fun _ ↦ a, fun _ ↦ er.inv s, ?_⟩
     simpa using hgen s a

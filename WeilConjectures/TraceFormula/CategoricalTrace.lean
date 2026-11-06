@@ -155,7 +155,7 @@ noncomputable def superTrace (V : ℤ → C) (T : ∀ i, V i ⟶ V i) : End (�
 theorem traceOrZero_eq_categoricalTrace {V : C} [d : HasRightDual V] (T : V ⟶ V) :
     traceOrZero T = categoricalTrace T := by
   have h : Nonempty (HasRightDual V) := ⟨d⟩
-  rw [traceOrZero, dif_pos h]
+  rw [traceOrZero, dite_eq_left h]
   exact categoricalTrace_congr _ _ _
 
 /-- For any right dual of `V`, `traceOrZero` is the trace computed with that dual. -/
@@ -173,7 +173,7 @@ theorem traceOrZero_conj {V W : C} (e : V ≅ W) (T : V ⟶ V) :
     exact categoricalTrace_conj e T
   · have hW : ¬ Nonempty (HasRightDual W) := fun ⟨dW⟩ ↦
       hV ⟨@HasRightDual.mk _ _ _ _ Wᘁ (exactPairingCongrLeft e)⟩
-    rw [traceOrZero, traceOrZero, dif_neg hV, dif_neg hW]
+    rw [traceOrZero, traceOrZero, dite_eq_right hV, dite_eq_right hW]
 
 /-- The identity of the monoidal unit has trace `1`. -/
 theorem traceOrZero_id_tensorUnit : traceOrZero (𝟙 (𝟙_ C)) = 1 := by

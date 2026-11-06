@@ -236,7 +236,7 @@ theorem frobeniusEnd_rescale_apply {M : FrobeniusModule.{u, v} K} {c : K} (hc : 
     (x : M.carrier) : (M.rescale c).frobeniusEnd x = c • M.frobeniusEnd x := by
   classical
   change (LinearEquiv.smulOfNeZero K M.carrier (if c = 0 then 1 else c) _) (M.frobenius x) = _
-  simp [frobeniusEnd, if_neg hc]
+  simp [frobeniusEnd, ite_eq_right hc]
 
 /-- The eigenvalues of a rescaled Frobenius are those of the Frobenius, scaled. -/
 theorem hasEigenvalue_frobeniusEnd_rescale_iff {M : FrobeniusModule.{u, v} K} {c : K}

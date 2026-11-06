@@ -75,9 +75,9 @@ instance preservesFiniteColimits_Γ_of_isStrictlyHenselianLocalRing :
     PreservesFiniteColimits
       (Sheaf.Γ (Spec (.of R)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) := by
   have h := (Functor.preservesFiniteLimits_tfae
-    (Sheaf.Γ (Spec (.of R)).smallEtaleTopology (ModuleCat.{u + 1} Λ))).out 3 0
+    (Sheaf.Γ (Spec (.of R)).smallEtaleTopology (ModuleCat.{u + 1} Λ))).out 4 1
   have h' := (Functor.preservesFiniteColimits_tfae
-    (Sheaf.Γ (Spec (.of R)).smallEtaleTopology (ModuleCat.{u + 1} Λ))).out 0 3
+    (Sheaf.Γ (Spec (.of R)).smallEtaleTopology (ModuleCat.{u + 1} Λ))).out 1 4
   exact h'.1 fun S hS ↦ ⟨(h.1 inferInstance S hS).1, by have := hS.epi_g; infer_instance⟩
 
 /-- The closed geometric point `Spec κ ⟶ Spec R` of a local ring is a closed immersion. -/

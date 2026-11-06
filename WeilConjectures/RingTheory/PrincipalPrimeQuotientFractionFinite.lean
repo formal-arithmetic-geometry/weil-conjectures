@@ -87,7 +87,7 @@ theorem principal_prime_quotient_fraction_finite
         apply (isAlgebraic_algebraMap_iff (IsFractionRing.injective S L)).mp
         exact (IsFractionRing.isAlgebraic_iff R K L).mpr
           (Algebra.IsAlgebraic.isAlgebraic _)
-      exact (Q.comap_ne_bot_of_algebraic_mem hs0 hs halg) hp
+      exact (Q.under_ne_bot_of_algebraic_mem hs0 hs halg) hp
     subst Q
     let A := R ⧸ p
     let B := S ⧸ (⊥ : Ideal S)

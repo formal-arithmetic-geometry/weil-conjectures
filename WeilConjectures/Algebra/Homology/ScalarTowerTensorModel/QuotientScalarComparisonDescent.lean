@@ -172,7 +172,6 @@ private noncomputable def pointwise_change_iso
   intro X
   dsimp [Functor.RightExtension.coneAt, Functor.RightExtension.mk, Φ, k]
   simp [Category.assoc]
-  rfl
 
 namespace SheafOfModules.ScalarComparisonProof
 
@@ -215,8 +214,7 @@ private noncomputable def sectionMap (U : Cᵒᵖ) :
     { toFun := TensorProduct.map h (LinearMap.id : M.val.obj U →ₗ[R.obj.obj U] M.val.obj U)
       map_add' := map_add _
       map_smul' := fun s z ↦ by
-        induction z using TensorProduct.induction_on with
-        | zero => simp only [smul_zero, map_zero]
+        induction z using TensorProduct.inductionOn with
         | tmul t x =>
           change S.obj.obj U at t
           change q.hom.app U (s * t) ⊗ₜ[R.obj.obj U,(g.hom.app U).hom] x =
@@ -229,12 +227,25 @@ private theorem sectionMap_tmul (U : Cᵒᵖ) (s : S.obj.obj U) (x : M.val.obj U
       (show (changeOfRingsPresheaf g M).obj U from
         q.hom.app U s ⊗ₜ[R.obj.obj U,(g.hom.app U).hom] x) := rfl
 
+section
+
+local instance {A : Sheaf J CommRingCat.{u}}
+    (N : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A))
+    {U V : Cᵒᵖ} (i : U ⟶ V) :
+    Module (A.obj.obj V)
+      ((ModuleCat.restrictScalars
+        (((sheafCompose J (forget₂ CommRingCat RingCat)).obj A).obj.map i).hom).obj
+          (N.val.obj V)) :=
+  inferInstanceAs (Module (A.obj.obj V) (N.val.obj V))
+
 private theorem restriction_tmul {A B : Sheaf J CommRingCat.{u}} (c : A ⟶ B)
     (N : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A))
     {U V : Cᵒᵖ} (i : U ⟶ V) (s : B.obj.obj U) (x : N.val.obj U) :
     (changeOfRingsPresheaf c N).map i (s ⊗ₜ[A.obj.obj U,(c.hom.app U).hom] x) =
       B.obj.map i s ⊗ₜ[A.obj.obj V,(c.hom.app V).hom] N.val.map i x :=
   Classical.choose_spec (exists_changeOfRingsMap c N i) s x
+
+end
 
 private noncomputable def presheafMap :
     changeOfRingsPresheaf f M ⟶

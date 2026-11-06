@@ -37,7 +37,7 @@ private theorem depth_eq_zero_of_maximal_associated
   have hM : maximalIdeal R • (⊤ : Submodule R M) ≠ ⊤ :=
     (Submodule.top_ne_ideal_smul_of_le_jacobson_annihilator
       (maximalIdeal_le_jacobson (Module.annihilator R M))).symm
-  rw [depth, Ideal.depth, if_neg hM]
+  rw [depth, Ideal.depth, ite_eq_right hM]
   apply le_antisymm _ zero_le
   apply sSup_le
   rintro n ⟨rs, hrs, hmem, rfl⟩

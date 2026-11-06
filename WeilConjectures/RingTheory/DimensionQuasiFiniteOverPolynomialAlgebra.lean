@@ -71,7 +71,7 @@ theorem topologicalKrullDim_spec_le_of_quasiFinite_over_mvPolynomial
   have hsource :=
     (Q.comap (algebraMap (MvPolynomial (Fin n) k) T)).asIdeal.height_le_ringKrullDim_of_isPrime
   have hdim : ringKrullDim (MvPolynomial (Fin n) k) = (n : WithBot ℕ∞) := by
-    rw [MvPolynomial.ringKrullDim_of_isNoetherianRing,
+    rw [MvPolynomial.ringKrullDim_of_isNoetherianRing_of_finite,
       ringKrullDimZero_iff_ringKrullDim_eq_zero.mp inferInstance]
     simp
   exact hlocal.trans (hsource.trans hdim.le)

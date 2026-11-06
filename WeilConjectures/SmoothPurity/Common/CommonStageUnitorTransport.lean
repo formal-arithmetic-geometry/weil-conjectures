@@ -463,7 +463,7 @@ theorem stageAssociatorRep_tr (tower : StageTensorTower S T c)
   rw [← cancel_epi ((S.assoc hS k).hom.app _), Iso.hom_inv_id_app_assoc]
   rw [← cancel_mono (stageRightNested S T c f₂ f₃ f₁ e₁ x y z (hT.trans k)).hom]
   simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
-  rw [← RT, Iso.map_inv_hom_id_assoc,
+  rw [← RT, Iso.inv_hom_id_map_assoc,
     reassoc_of% hA, ← hn, reassoc_of% LT]
 
 theorem stageEndpoint_hom_eq {p q s : I} (hp : p ≤ s) (hq : q ≤ s) (x : C p) (y : C q) {L : I}

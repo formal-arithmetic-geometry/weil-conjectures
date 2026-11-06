@@ -85,8 +85,7 @@ theorem limit_flat_of_flat_quotients
       ((limit.π F (op m)).hom.lTensor J y) =
       (limit.π F (op m)).hom.lTensor A (J.subtype.rTensor (limit F : ModuleCat.{v} A) y) := by
     clear hy
-    induction y using TensorProduct.induction_on with
-    | zero => simp
+    induction y using TensorProduct.inductionOn with
     | tmul j t => rfl
     | add x y hx hy => simp only [map_add, hx, hy]
   have hz := hm ((limit.π F (op m)).hom.lTensor J y) (by rw [hnat, hy, map_zero])

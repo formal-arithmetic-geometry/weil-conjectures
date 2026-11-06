@@ -84,8 +84,7 @@ private theorem tail_rep_zero
     have he : αl.toLinearMap.rTensor M₀ (αjl.toLinearMap.rTensor M₀ t) =
         αj.toLinearMap.rTensor M₀ t := by
       clear ht
-      induction t using TensorProduct.induction_on with
-      | zero => simp
+      induction t using TensorProduct.inductionOn with
       | tmul a m =>
         simp only [LinearMap.rTensor_tmul]
         exact congrArg (fun a ↦ a ⊗ₜ[F.obj i₀] m)
@@ -163,8 +162,7 @@ private theorem tensor_rep_zero
   have e_of (j : J) (t : A j ⊗[R] N) :
       e (Module.DirectLimit.of R J (fun j ↦ A j ⊗[R] N) ft j t) =
         (μ j).rTensor N t := by
-    induction t using TensorProduct.induction_on with
-    | zero => simp
+    induction t using TensorProduct.inductionOn with
     | tmul a n =>
       dsimp only [e, ft]
       rw [LinearEquiv.trans_apply, TensorProduct.directLimitLeft_symm_of_tmul,
@@ -350,8 +348,7 @@ theorem isColimit_directed_tensor_cocones
         intro j t
         change β j j le_rfl t = t
         rw [β_eq]
-        induction t using TensorProduct.induction_on with
-        | zero => simp
+        induction t using TensorProduct.inductionOn with
         | tmul a b =>
           change (F.map (homOfLE (le_refl j.val))).hom a ⊗ₜ[S] b = a ⊗ₜ[S] b
           simp
@@ -360,8 +357,7 @@ theorem isColimit_directed_tensor_cocones
         intro l k j hjk hkl t
         change β k l hkl (β j k hjk t) = β j l (hjk.trans hkl) t
         simp only [β_eq]
-        induction t using TensorProduct.induction_on with
-        | zero => simp
+        induction t using TensorProduct.inductionOn with
         | tmul a b =>
           change (F.map (homOfLE hkl)).hom ((F.map (homOfLE hjk)).hom a) ⊗ₜ[S] b =
             (F.map (homOfLE (hjk.trans hkl))).hom a ⊗ₜ[S] b
@@ -372,8 +368,7 @@ theorem isColimit_directed_tensor_cocones
       μs k (f j k h t) = μs j t := by
     change μs k (β j k h t) = μs j t
     simp only [μ_eq, β_eq]
-    induction t using TensorProduct.induction_on with
-    | zero => simp
+    induction t using TensorProduct.inductionOn with
     | tmul a b =>
       change (colimit.ι F k.val).hom ((F.map (homOfLE h)).hom a) ⊗ₜ[S] b =
         (colimit.ι F j.val).hom a ⊗ₜ[S] b

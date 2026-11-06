@@ -40,7 +40,7 @@ variable {C D E : Type*} [Category C] [Category D] [Category E]
   Localization.liftNatTrans DerivedCategory.Q (HomologicalComplex.quasiIso C (.up ℤ))
     _ _ F.mapDerivedCategory (G ⋙ R).mapDerivedCategory
     (Functor.whiskerRight (NatTrans.mapHomologicalComplex τ (.up ℤ)) DerivedCategory.Q) ≫
-    (Functor.mapDerivedCategoryCompIso G R).hom
+    (Functor.mapDerivedCategoryCompIso G R).inv
 
 @[reassoc] private theorem derivedTransition_fac (τ : F ⟶ G ⋙ R)
     (K : CochainComplex C ℤ) :
@@ -60,16 +60,11 @@ variable {C D E : Type*} [Category C] [Category D] [Category E]
 private theorem idDerived_fac (K : CochainComplex D ℤ) :
     (Functor.mapDerivedCategoryIdIso D).hom.app (DerivedCategory.Q.obj K) =
       (𝟭 D).mapDerivedCategoryFactors.hom.app K := by
-  have h := Functor.mapDerivedCategoryIdIso_hom_app_Qh_obj D
-    ((HomotopyCategory.quotient D (.up ℤ)).obj K)
-  rw [Functor.mapDerivedCategoryFactorsh_hom_app] at h
-  have hq₁ : (DerivedCategory.quotientCompQhIso D).hom.app K = 𝟙 _ := rfl
-  have hq₂ (J : CochainComplex D ℤ) :
-      (DerivedCategory.quotientCompQhIso D).inv.app J = 𝟙 _ := rfl
-  have hf : ((𝟭 D).mapHomotopyCategoryFactors (.up ℤ)).inv.app K = 𝟙 _ := rfl
-  simp only [hq₁, hq₂, hf, CategoryTheory.Functor.map_id, Category.id_comp] at h
-  erw [DerivedCategory.Qh.map_id, Category.id_comp, Category.comp_id] at h
-  exact h
+  rw [Functor.mapDerivedCategoryIdIso_hom_app]
+  have hi : (Functor.mapHomologicalComplexIdIso D (.up ℤ)).hom.app K = 𝟙 K := by
+    ext i
+    simp
+  erw [hi, DerivedCategory.Q.map_id, Category.comp_id]
 
 private theorem unitDerived_fac (S : D ⥤ D) [S.Additive]
     [PreservesFiniteLimits S] [PreservesFiniteColimits S] (e : S ≅ 𝟭 D)
@@ -226,8 +221,8 @@ variable (U : C ⥤ A) (F : A ⥤ B) (G : C ⥤ D) (R : D ⥤ B)
 
 @[irreducible] private def derivedEvaluationIso (e : U ⋙ F ≅ G ⋙ R) :
     U.mapDerivedCategory ⋙ F.mapDerivedCategory ≅ G.mapDerivedCategory ⋙ R.mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso U F).symm ≪≫ Functor.mapDerivedCategoryNatIso e ≪≫
-    Functor.mapDerivedCategoryCompIso G R
+  Functor.mapDerivedCategoryCompIso U F ≪≫ Functor.mapDerivedCategoryNatIso e ≪≫
+    (Functor.mapDerivedCategoryCompIso G R).symm
 
 @[reassoc] private theorem derivedEvaluationIso_fac (e : U ⋙ F ≅ G ⋙ R)
     (K : CochainComplex C ℤ) :
@@ -242,7 +237,7 @@ variable (U : C ⥤ A) (F : A ⥤ B) (G : C ⥤ D) (R : D ⥤ B)
   rw [Functor.mapDerivedCategoryCompIso_hom_app_factors,
     Functor.mapDerivedCategoryNatIso_fac]
   rw [← Functor.mapDerivedCategoryCompIso_hom_app_factors U F K]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
 
 private theorem derivedSquare
     (F' : A ⥤ B) [F'.Additive] [PreservesFiniteLimits F'] [PreservesFiniteColimits F']
@@ -765,8 +760,8 @@ theorem coefficientSequence_roosModel
       Pi.lift (fun n : ℕ ↦ (coefficientConstantTowerProjection l E W n).app T.tower) := by
     apply Pi.hom_ext
     intro n
-    simp only [Pi.lift_π]
-    erw [Pi.lift_π]
+    simp only [Pi.lift_comp_π]
+    erw [Pi.lift_comp_π]
     change (coefficientSequenceProjection l E W n).app N ≫ _ ≫ _ = _
     unfold coefficientSequenceProjection
     dsimp only [NatTrans.comp_app, Functor.whiskerLeft_app, Iso.refl_inv]

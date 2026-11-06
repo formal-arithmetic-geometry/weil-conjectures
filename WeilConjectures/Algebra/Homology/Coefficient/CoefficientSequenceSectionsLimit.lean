@@ -252,7 +252,7 @@ private theorem sectionsSplitRoos
     change t ≫ Pi.π K n = Pi.π K n - Pi.π K (n + 1) ≫ _
     simp [t, K, towerTransitionEndomorphism, towerProductShift]
   obtain ⟨h, ⟨hk⟩⟩ := CategoryTheory.tower_kernel I.asFunctor c hc P
-    (limit.isLimit _) p t (fun n ↦ Pi.lift_π _ n) ht
+    (limit.isLimit _) p t (fun n ↦ Pi.lift_comp_π _ n) ht
   refine ⟨h, HomologicalComplex.shortExact_of_degreewise_shortExact _ ?_⟩
   intro r
   let ev := HomologicalComplex.eval A (ComplexShape.up ℤ) r

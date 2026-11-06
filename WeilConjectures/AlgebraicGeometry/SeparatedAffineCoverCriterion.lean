@@ -66,8 +66,7 @@ theorem separated_of_affine_open_cover
           (Set.range ⇑(V.homOfLE (inf_le_left : Vₐ a ⊓ Vₐ b ≤ Vₐ a)).appTop.hom ∪
             Set.range ⇑(V.homOfLE (inf_le_right : Vₐ a ⊓ Vₐ b ≤ Vₐ b)).appTop.hom) := by
       intro t
-      induction t using TensorProduct.induction_on with
-      | zero => simp only [map_zero]; exact Subring.zero_mem _
+      induction t using TensorProduct.inductionOn with
       | tmul x y =>
         rw [htmul, map_mul]
         apply Subring.mul_mem

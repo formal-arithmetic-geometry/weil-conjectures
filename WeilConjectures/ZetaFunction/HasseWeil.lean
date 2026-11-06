@@ -123,7 +123,7 @@ theorem Hom.pointCount_eq_sum_roots (f : X.Hom (Spec (.of k))) {q d : ℕ}
     rw [hfac, hO] at hL
     exact (hunit.mul_left_cancel (by rw [mul_comm, hL, mul_comm])).symm
   have hc := congrArg (PowerSeries.coeff n) hkey
-  simp only [map_add, map_sum, hNS, hT, PowerSeries.coeff_mk, map_neg, if_neg hn,
+  simp only [map_add, map_sum, hNS, hT, PowerSeries.coeff_mk, map_neg, ite_eq_right hn,
     Finset.sum_neg_distrib, hse, hso, Finset.sum_filter, apply_ite (PowerSeries.coeff n),
     map_zero] at hc
   have halt : ∀ c : Fin (2 * d + 1) → ℂ, ∑ i : Fin (2 * d + 1), (-1) ^ i.1 * c i =
@@ -132,8 +132,8 @@ theorem Hom.pointCount_eq_sum_roots (f : X.Hom (Spec (.of k))) {q d : ℕ}
     rw [← Finset.sum_sub_distrib]
     refine Finset.sum_congr rfl fun i _ ↦ ?_
     rcases Nat.even_or_odd i.1 with h | h
-    · rw [if_pos h, if_neg (by simpa using h), h.neg_one_pow, one_mul, sub_zero]
-    · rw [if_neg (by simpa using h), if_pos h, h.neg_one_pow, neg_one_mul, zero_sub]
+    · rw [ite_eq_left h, ite_eq_right (by simpa using h), h.neg_one_pow, one_mul, sub_zero]
+    · rw [ite_eq_right (by simpa using h), ite_eq_left h, h.neg_one_pow, neg_one_mul, zero_sub]
   rw [halt]
   linear_combination hc
 

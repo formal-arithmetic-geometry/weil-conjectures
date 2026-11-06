@@ -531,7 +531,7 @@ private def splitting_top {X : Scheme.{u}} {n : ℕ}
   | some a =>
     have hlow : term U a.1 =
         attachmentTerm U V ⟨a.1.val, Nat.lt_succ_of_lt a.1.isLt⟩ := by
-      simp only [attachmentTerm, dif_pos a.1.isLt]
+      simp only [attachmentTerm, dite_eq_left a.1.isLt]
     have hA : A a.1.castSucc =
         (⟨U.N a.1, U.inclusion a.1 ≫ eqToHom hlow⟩ :
             NondegDegree S a.1.castSucc) := Fin.lastCases_castSucc a.1

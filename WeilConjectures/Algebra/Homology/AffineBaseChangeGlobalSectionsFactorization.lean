@@ -7,6 +7,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.Algebra.Homology.AffineTensorPullbackHomologySheafIso
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # Sheaf-level affine ordinary tensor homology coordinates
 
@@ -62,9 +64,19 @@ theorem affineBaseChangeTildeCohomologyIso_globalSections_factorization
     let H := DerivedCategory.homologyFunctor
       (SheafOfModules.{u} (moduleRings (Spec (.of A')).toRingedSpace)) i
     let d := affineTensorPullbackHomologySheafIso A A' φg' M i
-    let c := inv ((SingleComplexBaseChange.counit
-      (Spec.map (CommRingCat.ofHom φg'))).app
-        ((HomotopyCategory.quotient _ (.up ℤ)).obj P))
+    let E : SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace) ⥤
+        SheafOfModules.{u} (moduleRings (Spec (.of A')).toRingedSpace) :=
+      Scheme.Modules.tensorPullback (Spec.map (CommRingCat.ofHom φg'))
+    letI : E.Additive := SingleComplexBaseChange.tensorPullbackAdditive.{u, w}
+      (Spec.map (CommRingCat.ofHom φg'))
+    let c :=
+      (DerivedCategory.quotientCompQhIso.{w} _).inv.app
+        ((E.mapHomologicalComplex (.up ℤ)).obj P) ≫
+      DerivedCategory.Qh.map ((E.mapHomotopyCategoryFactors (.up ℤ)).inv.app P) ≫
+      inv ((SingleComplexBaseChange.counit (Spec.map (CommRingCat.ofHom φg'))).app
+        ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫
+      (derivedPullback (Spec.map (CommRingCat.ofHom φg'))).map
+        ((DerivedCategory.quotientCompQhIso _).hom.app P)
     (affineBaseChangeTildeCohomologyIso A A' φg' K M e hc i).hom =
       (tilde.isoTop (R := .of A') (C.homology i)).hom ≫
         (moduleSpecΓFunctor (R := .of A')).map

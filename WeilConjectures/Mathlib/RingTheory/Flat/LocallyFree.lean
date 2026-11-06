@@ -49,8 +49,7 @@ lemma surjective_baseChange_of_smul_mem_range {N : Type*} [AddCommGroup N] [Modu
     Function.Surjective (φ.baseChange k) := by
   rw [← LinearMap.range_eq_top, eq_top_iff]
   rintro x -
-  induction x using TensorProduct.induction_on with
-  | zero => exact zero_mem _
+  induction x using TensorProduct.inductionOn with
   | add x y hx hy => exact add_mem hx hy
   | tmul s m =>
     obtain ⟨c, hc⟩ := ha m
@@ -72,8 +71,7 @@ theorem exists_smul_mem_range_linearCombination [Module.Finite R M] (p : Ideal R
   have hS : Submodule.span k S = ⊤ := by
     rw [eq_top_iff]
     rintro x -
-    induction x using TensorProduct.induction_on with
-    | zero => exact zero_mem _
+    induction x using TensorProduct.inductionOn with
     | add x y hx hy => exact add_mem hx hy
     | tmul s m =>
       rw [show s ⊗ₜ[R] m = s • ((1 : k) ⊗ₜ[R] m) by rw [smul_tmul', smul_eq_mul, mul_one]]

@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
@@ -18,6 +19,7 @@ import WeilConjectures.AlgebraicGeometry.TensorPullbackUnitRestrictionIso
 import WeilConjectures.AlgebraicGeometry.CompletedAffineCoherentIsoLift
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # The completed affine comparison is invertible off the exceptional ideal
 

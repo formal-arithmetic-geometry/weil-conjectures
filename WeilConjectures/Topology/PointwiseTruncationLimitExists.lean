@@ -69,6 +69,6 @@ theorem pointwise_truncation_limit_exists (X : RingedSpace.{u})
   refine ⟨c, ?_⟩
   intro n
   rw [← Category.assoc, ← hc]
-  exact Pi.lift_π _ n
+  exact Pi.lift_comp_π _ n
 
 end AlgebraicGeometry.RingedSpace

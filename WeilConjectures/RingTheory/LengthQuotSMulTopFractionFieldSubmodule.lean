@@ -41,7 +41,7 @@ private theorem length_quotSMulTop_le_of_fg
   have hw (i : Fin p.length) :
       ∃ m : V, (Submodule.Quotient.mk m : QuotSMulTop x V) ∈ p i.succ ∧
         (Submodule.Quotient.mk m : QuotSMulTop x V) ∉ p (Fin.castSucc i) := by
-    obtain ⟨q, hq, hq'⟩ := SetLike.exists_of_lt
+    obtain ⟨q, hq, hq'⟩ := IsConcreteLE.exists_of_lt
       (show p (Fin.castSucc i) < p i.succ from p.step i)
     obtain ⟨m, rfl⟩ := Submodule.Quotient.mk_surjective _ q
     exact ⟨m, hq, hq'⟩

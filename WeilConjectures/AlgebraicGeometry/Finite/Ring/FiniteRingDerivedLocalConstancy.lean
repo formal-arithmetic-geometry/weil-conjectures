@@ -163,10 +163,10 @@ private theorem finite_locally_constant_of_finite_values
   let forgetLift := neighbourhoods.functor ⋙ Over.forget (Φ.fiber.elementsMk U lift)
   have : forgetLift.Initial := inferInstance
   have eStalk : Ψ.sheafFiber.obj (F.over U) ≅ Φ.sheafFiber.obj F := by
-    change colimit ((CategoryOfElements.π Ψ.fiber).op ⋙ (F.over U).obj) ≅
-      colimit ((CategoryOfElements.π Φ.fiber).op ⋙ F.obj)
-    have h : (CategoryOfElements.π Ψ.fiber).op ⋙ (F.over U).obj =
-        forgetLift.op ⋙ (CategoryOfElements.π Φ.fiber).op ⋙ F.obj := rfl
+    change colimit ((Functor.Elements.π Ψ.fiber).op ⋙ (F.over U).obj) ≅
+      colimit ((Functor.Elements.π Φ.fiber).op ⋙ F.obj)
+    have h : (Functor.Elements.π Ψ.fiber).op ⋙ (F.over U).obj =
+        forgetLift.op ⋙ (Functor.Elements.π Φ.fiber).op ⋙ F.obj := rfl
     rw [h]
     exact Functor.Final.colimitIso forgetLift.op _
   let eValue : Φ.sheafFiber.obj F ≅ S i :=
@@ -191,7 +191,7 @@ private noncomputable def constantDerivedFiberIso
   have : F ⋙ 𝟭 (ModuleCat.{u + 1} B) = F := rfl
   have hc : c ⋙ F ≅ 𝟭 (ModuleCat.{u + 1} B) :=
     ((pointSmallEtale x).ulift.{u + 1}).constantSheafCompSheafFiberIso _ _
-  exact ((Functor.mapDerivedCategoryCompIso c F).app E).symm ≪≫
+  exact (Functor.mapDerivedCategoryCompIso c F).app E ≪≫
     (Functor.mapDerivedCategoryNatIso hc).app E ≪≫
     (Functor.mapDerivedCategoryIdIso (ModuleCat.{u + 1} B)).app E
 
@@ -213,7 +213,7 @@ private noncomputable def localModelFiberIso
   have : G.Additive := Functor.additive_of_preserves_binary_products _
   exact ((Functor.mapDerivedCategoryNatIso
     (upperStarCompUliftSheafFiberIso (ModuleCat.{u + 1} B) f x)).app K).symm ≪≫
-    (Functor.mapDerivedCategoryCompIso (upperStar (ModuleCat.{u + 1} B) f) F).app K ≪≫
+    ((Functor.mapDerivedCategoryCompIso (upperStar (ModuleCat.{u + 1} B) f) F).app K).symm ≪≫
     F.mapDerivedCategory.mapIso e ≪≫ constantDerivedFiberIso U B x E
 
 private theorem models_iso_on_overlap
@@ -342,7 +342,7 @@ private theorem restrictDerivedMap_map
       (upperStar (ModuleCat.{u + 1} B) U.hom).mapDerivedCategory.map a := by
   let r := Functor.mapDerivedCategoryNatIso
     (upperStarComp (ModuleCat.{u + 1} B) g.left V.hom U.hom g.w.symm) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
   have hn := r.hom.naturality a
   change _ ≫ _ = _ ≫ _ at hn
   change (r.app K).hom ≫ _ ≫ (r.app L).inv = _
@@ -411,9 +411,9 @@ private noncomputable def pullbackConstantModel
       (constantSheaf W.smallEtaleTopology (ModuleCat.{u + 1} B)).mapDerivedCategory.obj E :=
   ((Functor.mapDerivedCategoryNatIso
     (upperStarComp (ModuleCat.{u + 1} B) g f h hg.symm)).app K) ≪≫
-    (Functor.mapDerivedCategoryCompIso _ _).app K ≪≫
+    ((Functor.mapDerivedCategoryCompIso _ _).app K).symm ≪≫
     (upperStar (ModuleCat.{u + 1} B) g).mapDerivedCategory.mapIso e ≪≫
-    ((Functor.mapDerivedCategoryCompIso _ _).app E).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso _ _).app E ≪≫
     (Functor.mapDerivedCategoryNatIso
       (upperStarConstantSheafIso (ModuleCat.{u + 1} B) g)).app E
 

@@ -166,8 +166,7 @@ theorem canonical_map_surjective {R : Type u} {S : Type v}
     apply LinearMap.ext
     intro x
     change TensorProduct R S M at x
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul s m =>
       change TensorProduct.tmul R s (h m) = p (TensorProduct.tmul R s m)
       rw [show TensorProduct.tmul R s (h m) = s • (TensorProduct.tmul R (1 : S) (value m)) by

@@ -165,6 +165,13 @@ def systemSequenceModulePresheaf (M : StrictRingSystem B) :
       map_add' := by intros; exact map_add _ _ _
       map_smul' := by
         intro c x
+        let : Module ((B.obj (op Y.unop.1)).obj.obj (op Y.unop.2))
+            ((ModuleCat.restrictScalars
+              ((derivedChangeRingIndependentCoefficients J (B.obj (op Y.unop.1))).obj.map
+                f.unop.2.op).hom).obj
+              ((M.level Y.unop.1).val.obj (op Y.unop.2))) :=
+          inferInstanceAs (Module ((B.obj (op Y.unop.1)).obj.obj (op Y.unop.2))
+            ((M.level Y.unop.1).val.obj (op Y.unop.2)))
         change (M.level Y.unop.1).val.map f.unop.2.op
           ((M.transition (leOfHom f.unop.1)).val.app (op X.unop.2) (c • x)) = _
         rw [map_smul]

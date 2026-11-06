@@ -102,7 +102,7 @@ lemma finiteDimensional_globalSections_adicConstantSheaf (K : Type u) [Field K] 
     { toFun x := (ULift.down x).1 (IsLocalRing.closedPoint K)
       map_add' _ _ := rfl
       map_smul' _ _ := rfl }
-  have hφ : Function.Injective φ := fun x y h ↦ ULift.ext _ _ <| Subtype.ext <|
+  have hφ : Function.Injective φ := fun x y h ↦ ULift.ext <| Subtype.ext <|
     ContinuousMap.ext fun p ↦ by
       obtain rfl : p = IsLocalRing.closedPoint K := Subsingleton.elim _ _
       exact h

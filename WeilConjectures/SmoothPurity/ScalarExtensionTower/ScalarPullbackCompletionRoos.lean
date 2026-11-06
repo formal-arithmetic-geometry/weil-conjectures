@@ -47,7 +47,7 @@ attribute [local implicit_reducible] integralScalarExtension integralScalarExten
   integralComparisonDerivedSequenceScalar completedOrdinaryScalarComplex
   integralScalarComplexFunctor integralOperationsGoodLocalization
   integralOperationsRoosFunctor integralOperationsPullbackComplexFunctor
-  NatIso.mapHomologicalComplex Functor.mapHomologicalComplex
+  NatIso.mapHomologicalComplex
   integralOperationsPullbackOnGood integralComparisonSequencePullback
   integralComparisonDerivedSequencePullback HomologicalComplex.asFunctor
   HomologicalComplex.complexOfFunctorsToFunctorToComplex

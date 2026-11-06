@@ -14,6 +14,7 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 public import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
 import Mathlib.Algebra.DirectSum.Finsupp
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.MonoidalCompat
 
 /-!
 # Sheaves of modules on a small ringed site
@@ -76,8 +77,8 @@ private noncomputable def freeYonedaExtensionIso (U : C) :
     rw [((R).obj.map a).hom.map_one]
 
 
-set_option synthInstance.maxHeartbeats 100000 in
--- Inferring the coproduct reduces the repeated sheaf-compose expression in the summands.
+local instance : HasColimitsOfShape (Discrete C) (SheafOfModules.{u} R) := inferInstance
+
 /-- Sheaves of modules over a sheaf of commutative rings on a small site form a
 Grothendieck abelian category. A specific generator is the coproduct, over all
 objects `U`, of the sheafifications of the extension-by-zero presheaves of

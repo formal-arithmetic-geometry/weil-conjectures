@@ -74,7 +74,7 @@ private theorem dual_telescope_shift
     op_sub, T.map_sub, Preadditive.sub_comp, op_comp, T.map_comp, Category.assoc]
   simp only [towerTransitionEndomorphism, towerProductShift,
     Preadditive.comp_sub, Preadditive.sub_comp, Category.assoc,
-    Category.id_comp, Pi.lift_π]
+    Category.id_comp, Pi.lift_comp_π]
   rw [ ← Category.assoc b, hb, hb, Category.assoc,
     ← e.hom.naturality (homOfLE (Nat.le_succ n)).op]
   rfl
@@ -331,6 +331,16 @@ end TelescopeHomRoosProof
 
 variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
 
+private local instance (O : Sheaf J CommRingCat.{u}) :
+    HasColimitsOfShape (Discrete ℕ) (ringedSiteComplex O) := by
+  let A := SheafOfModules.{u}
+    ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj O)
+  have : HasColimitsOfShape (Discrete ℕ) A := inferInstance
+  refine ⟨fun F ↦ ?_⟩
+  have (n : ℤ) : HasColimit (F ⋙ HomologicalComplex.eval A (.up ℤ) n) :=
+    HasColimitsOfShape.has_colimit _
+  exact ⟨⟨⟨_, HomologicalComplex.isColimitCoconeOfHasColimitEval F⟩⟩⟩
+
 namespace TelescopeHomRoosProof
 
 open SignedDoubleHomCone.Calculation
@@ -482,15 +492,15 @@ theorem telescopeHom_roos_arrow_iso
       (productIsProduct (fun n ↦ X.asFunctor.obj (op n))) ⟨n⟩
   have hu : T.map u.op ≫ b.hom = b.hom ≫ δ :=
     TelescopeHomRoosProof.dual_telescope_shift E T X.asFunctor e S
-      (Sigma.ι (fun n ↦ E.obj n)) u (fun n ↦ Sigma.ι_desc _ n) b.hom hb
+      (Sigma.ι (fun n ↦ E.obj n)) u (fun n ↦ Sigma.ι_comp_desc _ n) b.hom hb
   have hq : T.map q.op ≫ b.hom = a.hom ≫ ExactProductsRoos.inclusion.app X := by
     apply Pi.hom_ext
     intro n
     rw [Category.assoc, hb, ← Category.assoc, ← T.map_comp, ← op_comp]
-    rw [show Sigma.ι (fun n ↦ E.obj n) n ≫ q = colimit.ι E n from Sigma.ι_desc _ n]
+    rw [show Sigma.ι (fun n ↦ E.obj n) n ≫ q = colimit.ι E n from Sigma.ι_comp_desc _ n]
     change _ = a.hom ≫ (Pi.lift (fun n : ℕ ↦
       (TelescopeHomRoosProof.ordinaryCone O X).π.app (op n))) ≫ _
-    rw [Pi.lift_π]
+    rw [Pi.lift_comp_π]
     exact (ha (op n)).symm
   let v : Arrow.mk (-T.map u.op) ≅ Arrow.mk (-δ) :=
     Arrow.isoMk b b (by

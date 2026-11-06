@@ -134,7 +134,7 @@ lemma lift_internalHomπ {Z : C} {Q : CochainComplex C ℤ} {n : ℤ}
     (φ : ∀ T : HomComplex.Triplet n, Z ⟶ (ihom (Q.X T.p)).obj (Y.X T.q)) (p q : ℤ)
     (h : p + n = q) :
     Pi.lift φ ≫ internalHomπ Q Y n p q h = φ ⟨p, q, h⟩ :=
-  Pi.lift_π _ _
+  Pi.lift_comp_π _ _
 
 omit [HasZeroObject C] [∀ (X₁ X₂ : GradedObject ℤ C), X₁.HasTensor X₂]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
@@ -155,7 +155,7 @@ lemma internalHomPreX_π {Q Q' : CochainComplex C ℤ} (u : ∀ p, Q.X p ⟶ Q'.
     (n p q : ℤ) (h : p + n = q) :
     internalHomPreX Y u n ≫ internalHomπ Q Y n p q h =
       internalHomπ Q' Y n p q h ≫ (pre (u p)).app (Y.X q) :=
-  Pi.lift_π _ _
+  Pi.lift_comp_π _ _
 
 /-- The degreewise splitting of `iHom(S.X₃, Y) ⟶ iHom(S.X₂, Y) ⟶ iHom(S.X₁, Y)` induced by
 degreewise sections `s` of `S.g` and retractions `r` of `S.f` with `r ≫ S.f + S.g ≫ s = 𝟙`. -/

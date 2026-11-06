@@ -130,8 +130,7 @@ lemma bijective_mulAlgHom {U : X.Opens} {V : Y.Opens} (hU : IsAffineOpen U)
   have h : ⇑(mulAlgHom (K := K) U V) =
       ⇑(Algebra.IsPushout.equiv Γ(Spec (.of K), ⊤) Γ(X, U) Γ(Y, V) Γ(prod K X Y, O)) := by
     funext x
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | add x y hx hy => simp only [map_add, hx, hy]
     | tmul a b => rw [Algebra.IsPushout.equiv_tmul, mulAlgHom_tmul]; rfl
   rw [h]
@@ -181,8 +180,7 @@ lemma range_mulIdeal {U : X.Opens} {V : Y.Opens} (hU : IsAffineOpen U) (hV : IsA
   ext c
   constructor
   · rintro ⟨w, rfl⟩
-    induction w using TensorProduct.induction_on with
-    | zero => simp
+    induction w using TensorProduct.inductionOn with
     | add x y hx hy => rw [map_add]; exact Submodule.add_mem _ hx hy
     | tmul a b =>
       rw [mulIdeal_tmul]
@@ -221,8 +219,7 @@ lemma map_mulIdeal {U U' : X.Opens} {V V' : Y.Opens} (hU : U' ≤ U) (hV : V' �
       ((prodSnd K X Y).preimage_mono hV))).op (mulIdeal I I' U V w) =
       mulIdeal I I' U' V'
         (TensorProduct.map (resIdeal (K := K) I hU) (resIdeal (K := K) I' hV) w) := by
-  induction w using TensorProduct.induction_on with
-  | zero => simp
+  induction w using TensorProduct.inductionOn with
   | add x y hx hy => simp only [map_add, hx, hy]
   | tmul a b =>
     rw [TensorProduct.map_tmul, mulIdeal_tmul, mulIdeal_tmul, map_mul, resIdeal_apply_coe,

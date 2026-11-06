@@ -105,8 +105,7 @@ private theorem finite_top_of_local
       map_smul' := by
         intro a x
         change eT (a • x) = a • eT x
-        induction x using TensorProduct.induction_on with
-        | zero => simp
+        induction x using TensorProduct.inductionOn with
         | tmul s y => rfl
         | add x y hx hy => simp only [smul_add, map_add, hx, hy] }
   have : Module.Finite (Localization.Away (f i))

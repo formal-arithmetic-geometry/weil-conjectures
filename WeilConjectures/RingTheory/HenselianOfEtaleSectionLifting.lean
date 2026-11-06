@@ -101,7 +101,7 @@ theorem etale_section_lifting_idempotents (A : Type u) [CommRing A] (I : Ideal A
     rintro M ⟨-, hM⟩
     let : M.IsMaximal := hM
     have hcom : (M.comap (algebraMap A B)).IsMaximal :=
-      Ideal.isMaximal_comap_of_isIntegral_of_isMaximal M
+      Ideal.isMaximal_under_of_isIntegral_of_isMaximal (R := A) M
     apply Ideal.map_le_iff_le_comap.mpr
     exact hJ.trans (sInf_le ⟨bot_le, hcom⟩)
   obtain ⟨C, g, hg⟩ := AlgebraicGeometry.exists_etale_lift_isIdempotentElem I e₀ he₀

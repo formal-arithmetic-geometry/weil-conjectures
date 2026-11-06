@@ -76,7 +76,7 @@ theorem module_finite_of_finite_quotient (ρ : ∀ m, A →ₗ[ℤ_[p]] E m)
     set t := g (ρ 1 a)
     have ht : ρ 1 t = ρ 1 a := by
       have h : ∃ b, ρ 1 b = ρ 1 a := ⟨a, rfl⟩
-      simp only [t, g, dif_pos h]
+      simp only [t, g, dite_eq_left h]
       exact h.choose_spec
     obtain ⟨a', ha'⟩ := hker 1 (a - t) (by rw [map_sub, ht, sub_self])
     refine ⟨t, Finset.mem_image.2 ⟨_, hy, rfl⟩, a', ?_⟩
@@ -92,7 +92,7 @@ theorem module_finite_of_finite_quotient (ρ : ∀ m, A →ₗ[ℤ_[p]] E m)
       refine ⟨c + Pi.single ⟨t, ht⟩ ((p : ℤ_[p]) ^ m), b', ?_⟩
       rw [hb, smul_add, smul_smul, ← pow_succ]
       simp only [Pi.add_apply, add_smul, Finset.sum_add_distrib, Pi.single_apply, ite_smul,
-        zero_smul, Finset.sum_ite_eq', Finset.mem_univ, if_true]
+        zero_smul, Finset.sum_ite_eq', Finset.mem_univ, ite_true]
       abel
   have hρ (m : ℕ) (b : A) : ρ m ((p : ℤ_[p]) ^ m • b) = 0 := by rw [map_smul, hE]
   refine ⟨⟨s, top_unique fun a _ ↦ ?_⟩⟩

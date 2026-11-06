@@ -178,7 +178,7 @@ theorem Scheme.hasTorsionCohomologicalDimensionLE_affineLine_mvPolynomial {K : T
   have hK0 := hasTorsionCohomologicalDimensionLE_zero_of_isSepClosed K
   have hdimB : topologicalKrullDim B ≤ (c : WithBot ℕ∞) := by
     refine (PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim A).trans_le ?_
-    rw [MvPolynomial.ringKrullDim_of_isNoetherianRing, ringKrullDim_eq_zero_of_field]
+    rw [MvPolynomial.ringKrullDim_of_isNoetherianRing_of_finite, ringKrullDim_eq_zero_of_field]
     simp
   have hcdB : B.HasTorsionCohomologicalDimensionLE c := by
     simpa using IH c (by omega) K 0 hK0 B b hb inferInstance hdimB

@@ -179,12 +179,12 @@ theorem isFiltered_and_isColimit_finitelyPresentedAlgebras
         .of R (MvPolynomial (ULift.{v} (Fin 1)) R)
       have hA : Algebra.FinitePresentation R A := inferInstance
       obtain ⟨B, ⟨e⟩⟩ := hrep A hA
-      let α : A ⟶ Λ := ofHom (MvPolynomial.eval₂AlgHom R (fun _ ↦ x))
+      let α : A ⟶ Λ := ofHom (MvPolynomial.aeval (R := R) (fun _ ↦ x))
       let j : I := CostructuredArrow.mk (Y := B) (e.inv ≫ α)
       refine ⟨j, e.hom (MvPolynomial.X ⟨0⟩), ?_⟩
       change x = α (e.inv (e.hom (MvPolynomial.X ⟨0⟩)))
       rw [CommAlgCat.inv_hom_apply]
-      exact (MvPolynomial.eval₂AlgHom_X (R := R) (fun _ ↦ x)
+      exact (MvPolynomial.aeval_X (R := R) (fun _ ↦ x)
         (ULift.up (0 : Fin 1))).symm
     have hinj : ∀ (i : I) (a b : i.left.obj), i.hom a = i.hom b →
         ∃ (j : I) (q : i ⟶ j), q.left.hom a = q.left.hom b := by

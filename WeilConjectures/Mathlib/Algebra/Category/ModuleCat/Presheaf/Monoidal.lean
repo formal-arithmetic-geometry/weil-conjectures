@@ -5,8 +5,10 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.MonoidalCompat
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Generator
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.MonoidalCompat
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal
 
 /-!
 # Tensor products of presheaves of modules: free presheaves, and sections
@@ -33,6 +35,8 @@ resp. over `V`, is free of rank one over `U ⨯ V`.
 -/
 
 @[expose] public section
+
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false
 
 universe u u₁
 

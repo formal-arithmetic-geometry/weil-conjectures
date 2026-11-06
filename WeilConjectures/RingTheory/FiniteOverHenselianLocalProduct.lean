@@ -146,9 +146,9 @@ theorem finite_over_henselian_exists_algEquiv_pi
     exact finite_local_henselian R (A i)
   have localMaps (i : Fin r) : IsLocalHom (algebraMap R (A i)) := by
     haveI := hFinite i
-    apply ((IsLocalRing.local_hom_TFAE (algebraMap R (A i))).out 4 0).mp
+    apply ((IsLocalRing.local_hom_TFAE (algebraMap R (A i))).out 5 1).mp
     exact IsLocalRing.eq_maximalIdeal
-      (Ideal.isMaximal_comap_of_isIntegral_of_isMaximal (IsLocalRing.maximalIdeal (A i)))
+      (Ideal.isMaximal_under_of_isIntegral_of_isMaximal (IsLocalRing.maximalIdeal (A i)))
   letI := henselian
   letI := localMaps
   refine ⟨r, A, rings, algebras, henselian, localMaps, ⟨e⟩, hFinite, ?_⟩

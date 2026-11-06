@@ -120,8 +120,10 @@ theorem noetherian_extensionByZero_reduction
       IsZero (CategoryTheory.Sheaf.H' (L i) q (⊤ : Opens X)) := by
     induction i using Fin.induction with
     | zero =>
-      change IsZero ((Abelian.extFunctorObj _ q).obj (L 0))
-      exact Functor.map_isZero _ hzero
+      rw [AddCommGrpCat.isZero_iff_subsingleton]
+      refine subsingleton_of_forall_eq 0 fun x ↦ ?_
+      rw [← Abelian.Ext.comp_mk₀_id x, hzero.eq_of_src (𝟙 (L 0)) 0,
+        Abelian.Ext.mk₀_zero, Abelian.Ext.comp_zero]
     | succ i ih =>
       have : Mono (f i) := hf i
       let T := ShortComplex.mk (f i) (cokernel.π (f i)) (cokernel.condition (f i))

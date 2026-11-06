@@ -88,7 +88,7 @@ lemma nonempty_isTerminal_costructuredArrow_of_isIso (V : X.ProEtᵒᵖ)
       erw [hL.map_preimage]
       simp))
     (fun s m ↦ ?_)⟩
-  ext
+  apply CostructuredArrow.hom_ext
   apply hL.map_injective
   erw [hL.map_preimage]
   simp [← CostructuredArrow.w m]

@@ -69,12 +69,12 @@ private theorem skyscraper_abelian_isSheaf (X : TopCat.{u}) (x : X)
     Presheaf.IsSheaf (skyscraperPresheaf x A) := by
   classical
   let Q := skyscraperPresheaf x A
-  have hi (U : Opens X) (hx : x ∈ U) : Q.obj (op U) = A := if_pos hx
-  have ht (U : Opens X) (hx : x ∉ U) : Q.obj (op U) = Limits.terminal _ := if_neg hx
+  have hi (U : Opens X) (hx : x ∈ U) : Q.obj (op U) = A := ite_eq_left hx
+  have ht (U : Opens X) (hx : x ∉ U) : Q.obj (op U) = Limits.terminal _ := ite_eq_right hx
   have hmap (U V : Opens X) (hVU : V ≤ U) (hx : x ∈ V) :
       Q.map (homOfLE hVU).op = eqToHom ((hi U (hVU hx)).trans (hi V hx).symm) := by
     dsimp [Q, skyscraperPresheaf]
-    rw [dif_pos hx]
+    rw [dite_eq_left hx]
   have hsub (U : Opens X) (hx : x ∉ U) : Subsingleton (Q.obj (op U)) := by
     rw [ht U hx]
     exact (AddCommGrpCat.subsingleton_of_isZero
@@ -128,15 +128,15 @@ private theorem unit_inj (X : TopCat.{u})
   let Q := skyscraperPresheaf x.1 (AddCommGrpCat.of A)
   have hQ := skyscraper_abelian_isSheaf X x.1 (AddCommGrpCat.of A)
   let c : P ⟶ Q :=
-    { app := fun V ↦ if h : x.1 ∈ V.unop then eqToHom (if_pos h).symm
-        else Limits.terminal.from _ ≫ eqToHom (if_neg h).symm
+    { app := fun V ↦ if h : x.1 ∈ V.unop then eqToHom (ite_eq_left h).symm
+        else Limits.terminal.from _ ≫ eqToHom (ite_eq_right h).symm
       naturality := by
         intro V W i
         by_cases hw : x.1 ∈ W.unop
         · have hv : x.1 ∈ V.unop := i.unop.le hw
           simp [P, Q, skyscraperPresheaf, hw, hv]
         · have ht : Limits.IsTerminal (Q.obj W) :=
-            Limits.IsTerminal.ofIso Limits.terminalIsTerminal (eqToIso (if_neg hw)).symm
+            Limits.IsTerminal.ofIso Limits.terminalIsTerminal (eqToIso (ite_eq_right hw)).symm
           exact ht.hom_ext _ _ }
   let l := sheafifyLift (Opens.grothendieckTopology X) c hQ
   have hfac := ConcreteCategory.congr_hom
@@ -151,7 +151,7 @@ private theorem unit_inj (X : TopCat.{u})
   have hc : c.app (op U) a = c.app (op U) b := ha.symm.trans (heq.trans hb)
   have hi : IsIso (c.app (op U)) := by
     dsimp [c]
-    rw [dif_pos x.2]
+    rw [dite_eq_left x.2]
     infer_instance
   exact (ConcreteCategory.bijective_of_isIso (c.app (op U))).injective hc
 

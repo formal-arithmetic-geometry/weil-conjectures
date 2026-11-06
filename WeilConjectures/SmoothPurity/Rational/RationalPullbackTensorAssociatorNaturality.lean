@@ -213,25 +213,17 @@ theorem rationalAssociator_natural
       (pullbackTensorRationalAssociator l E X K' L' M').hom =
     (pullbackTensorRationalAssociator l E X K L M).hom ≫
       F.map (Prod.mkHom f (F.map (Prod.mkHom g h)))
-  induction f using TensorProduct.induction_on with
-  | zero =>
-    simp only [hb, map_zero, LinearMap.zero_apply, Limits.zero_comp,
-      Limits.comp_zero]
+  induction f using TensorProduct.inductionOn with
   | add f f' hf hf' =>
     simpa only [hb, map_add, LinearMap.add_apply, Preadditive.add_comp,
       Preadditive.comp_add] using congrArg₂ (· + ·) hf hf'
   | tmul a f =>
-    induction g using TensorProduct.induction_on with
-    | zero =>
-      simp only [hb, map_zero, LinearMap.zero_apply, Limits.zero_comp,
-        Limits.comp_zero]
+    induction g using TensorProduct.inductionOn with
     | add g g' hg hg' =>
       simpa only [hb, map_add, LinearMap.add_apply, Preadditive.add_comp,
         Preadditive.comp_add] using congrArg₂ (· + ·) hg hg'
     | tmul c g =>
-      induction h using TensorProduct.induction_on with
-      | zero =>
-        simp only [hb, map_zero, Limits.zero_comp, Limits.comp_zero]
+      induction h using TensorProduct.inductionOn with
       | add h h' hh hh' =>
         simpa only [hb, map_add, LinearMap.add_apply, Preadditive.add_comp,
           Preadditive.comp_add] using congrArg₂ (· + ·) hh hh'

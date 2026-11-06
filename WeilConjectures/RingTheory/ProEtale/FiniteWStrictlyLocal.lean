@@ -68,7 +68,8 @@ theorem exists_isIdempotentElem_notMem (P : Ideal C) [P.IsPrime]
   have hmax : ∀ Q : PrimeSpectrum (C ⧸ I), Q.asIdeal.IsMaximal := by
     intro Q
     have : (Q.asIdeal.comap (Ideal.Quotient.mk I)).IsMaximal :=
-      Ideal.isMaximal_of_isIntegral_of_isMaximal_comap _ (by rw [hover Q]; infer_instance)
+      Ideal.isMaximal_of_isIntegral_of_isMaximal_under (R := R) _
+        (by rw [Ideal.under_def, hover Q]; infer_instance)
     rcases Ideal.map_eq_top_or_isMaximal_of_surjective _ hmk this with h | h
     · rw [Ideal.map_comap_of_surjective _ hmk] at h
       exact absurd h (Ideal.IsPrime.ne_top inferInstance)
@@ -213,14 +214,15 @@ theorem isStrictlyHenselianLocalRing_localization [IsStrictlyHenselianLocalRing 
   have hmaxP : ∀ M : Ideal Bn, M.IsMaximal → K ≤ M → M = P := by
     intro M hM hKM
     have hMm : M.comap (algebraMap An Bn) = maximalIdeal An :=
-      IsLocalRing.eq_maximalIdeal (Ideal.isMaximal_comap_of_isIntegral_of_isMaximal M)
+      IsLocalRing.eq_maximalIdeal (Ideal.isMaximal_under_of_isIntegral_of_isMaximal M)
     by_contra hne
     have := hεother M hM.isPrime hMm hne
     have h1 : (1 : Bn) ∈ M := by
       simpa using add_mem this (hKM (Ideal.subset_span rfl))
     exact hM.ne_top ((Ideal.eq_top_iff_one _).2 h1)
   have hPmax : P.IsMaximal :=
-    Ideal.isMaximal_of_isIntegral_of_isMaximal_comap _ (by rw [hPm]; infer_instance)
+    Ideal.isMaximal_of_isIntegral_of_isMaximal_under (R := An) _
+      (by rw [Ideal.under_def, hPm]; infer_instance)
   have hmk : Function.Surjective (Ideal.Quotient.mk K) := Ideal.Quotient.mk_surjective
   set PD := P.map (Ideal.Quotient.mk K)
   have hmemPD : ∀ x : Bn, Ideal.Quotient.mk K x ∈ PD ↔ x ∈ P := fun x ↦
@@ -322,8 +324,8 @@ to a unique closed point, and the local rings of `B` at maximal ideals are stric
 theorem IsWStrictlyLocalRing.of_finite [IsWStrictlyLocalRing A] : IsWStrictlyLocalRing B := by
   have hmax : ∀ c : PrimeSpectrum B,
       (c.asIdeal.IsMaximal ↔ (c.asIdeal.comap (algebraMap A B)).IsMaximal) := fun c ↦
-    ⟨fun _ ↦ Ideal.isMaximal_comap_of_isIntegral_of_isMaximal c.asIdeal,
-      fun h ↦ Ideal.isMaximal_of_isIntegral_of_isMaximal_comap c.asIdeal h⟩
+    ⟨fun _ ↦ Ideal.isMaximal_under_of_isIntegral_of_isMaximal c.asIdeal,
+      fun h ↦ Ideal.isMaximal_of_isIntegral_of_isMaximal_under c.asIdeal h⟩
   have hcl : closedPoints (PrimeSpectrum B) =
       PrimeSpectrum.comap (algebraMap A B) ⁻¹' closedPoints (PrimeSpectrum A) := by
     ext x
@@ -357,7 +359,7 @@ theorem IsWStrictlyLocalRing.of_finite [IsWStrictlyLocalRing A] : IsWStrictlyLoc
         exact WLocalSpace.isClosed_closedPoints.preimage (PrimeSpectrum.continuous_comap _) }
   refine { wLocalSpace_primeSepectrum := hw, isStrictlyHenselianLocalRing_localization := ?_ }
   intro m hm
-  have : (m.comap (algebraMap A B)).IsMaximal := Ideal.isMaximal_comap_of_isIntegral_of_isMaximal m
+  have : (m.comap (algebraMap A B)).IsMaximal := Ideal.isMaximal_under_of_isIntegral_of_isMaximal m
   have := IsWStrictlyLocalRing.isStrictlyHenselianLocalRing_localization (R := A)
     (m.comap (algebraMap A B))
   exact FiniteWStrictlyLocal.isStrictlyHenselianLocalRing_localization

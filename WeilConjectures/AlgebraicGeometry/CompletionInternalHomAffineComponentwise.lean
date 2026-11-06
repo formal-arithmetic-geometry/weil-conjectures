@@ -214,8 +214,7 @@ theorem completion_internal_hom_affine_componentwise {X : Scheme.{u}} [IsNoether
         ((formalModuleQuotientπ I (n.unop + 1) Hobj).val.app (op U.val) h)) (pN n x) =
       pM n (AdicCompletion.map J (K h) x) := by
     obtain ⟨z, rfl⟩ := AdicCompletion.ofTensorProduct_surjective_of_finite J N x
-    induction z using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction z using TensorProduct.inductionOn with
     | tmul b y =>
       obtain ⟨a, ha⟩ := Ideal.Quotient.mk_surjective
         (AdicCompletion.evalₐ J (n.unop + 1) b)
@@ -227,8 +226,7 @@ theorem completion_internal_hom_affine_componentwise {X : Scheme.{u}} [IsNoether
       κ n ((e n).val.app (op U.val) (pH n z)) (pN n x) =
         pM n (E (AdicCompletion.congr J K z) x) := by
     obtain ⟨w, rfl⟩ := AdicCompletion.ofTensorProduct_surjective_of_finite J Hs z
-    induction w using TensorProduct.induction_on with
-    | zero => simp only [map_zero, LinearMap.zero_apply]
+    induction w using TensorProduct.inductionOn with
     | tmul b h =>
       obtain ⟨a, ha⟩ := Ideal.Quotient.mk_surjective
         (AdicCompletion.evalₐ J (n.unop + 1) b)

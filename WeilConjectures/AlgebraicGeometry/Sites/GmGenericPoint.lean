@@ -319,7 +319,7 @@ lemma injective_stalkComparison_gmSheafToLowerStarGmSheaf :
         homOfLE N.ι_image_top.le ≫ homOfLE (le_top : N ≤ ⊤) := rfl
     rw [this, op_comp, Functor.map_comp, CommRingCat.comp_apply, hres, map_zero]
   have hδ : X.gmSheaf.obj.map (Scheme.Etale.ofOpensι V N).op δ = 0 := by
-    refine ULift.ext _ _ (congrArg Additive.ofMul (Units.ext ?_))
+    refine ULift.ext (congrArg Additive.ofMul (Units.ext ?_))
     change N.ι.appTop δu.val = 1
     rw [map_sub, map_one, sub_eq_zero] at hres'
     exact hres'
@@ -479,7 +479,7 @@ lemma surjective_stalkComparison_gmSheafToLowerStarGmSheaf :
   rw [← hk, ← hu']
   refine ((pointSmallEtale s).toPresheafFiber_w_apply k u' _ _).symm.trans
     (Eq.trans ?_ ((pointSmallEtale s).toPresheafFiber_w_apply (Scheme.Etale.ofOpensι U D) u' _ _))
-  refine congrArg _ (ULift.ext _ _ (congrArg Additive.ofMul (Units.ext ?_)))
+  refine congrArg _ (ULift.ext (congrArg Additive.ofMul (Units.ext ?_)))
   change k.left.appTop ((pullback.fst V.hom i).appTop ((Scheme.ΓSpecIso (.of T)).inv δ.val)) =
     D.ι.appTop γu.val
   have hkf : k.left ≫ pullback.fst V.hom i = h := pullback.lift_fst _ _ _

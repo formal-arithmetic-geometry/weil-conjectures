@@ -8,6 +8,7 @@ module
 public import Mathlib.LinearAlgebra.Dual.Lemmas
 public import Mathlib.RepresentationTheory.Irreducible
 public import Mathlib.RepresentationTheory.Subrepresentation
+public import Mathlib.RingTheory.Artinian.Module
 public import WeilConjectures.Mathlib.RepresentationTheory.Basic
 
 /-!
@@ -164,7 +165,7 @@ instance : IsModularLattice (Subrepresentation ρ) :=
 instance [IsNoetherian A V] : IsCompactlyGenerated (Subrepresentation ρ) :=
   have : WellFoundedGT (Subrepresentation ρ) :=
     StrictMono.wellFoundedGT (f := toSubmodule (ρ := ρ)) fun _ _ h ↦ h
-  CompleteLattice.isCompactlyGenerated_of_wellFoundedGT
+  IsCompactlyGenerated.of_wellFoundedGT
 
 end Ring
 
@@ -666,7 +667,7 @@ theorem exists_lt_isIrreducible_subquotient [FiniteDimensional k V] {A : Subrepr
     ⟨⊥, bot_lt_iff_ne_bot.2 hA⟩
   replace hBA : B < A := hBA
   refine ⟨B, hBA, ?_⟩
-  obtain ⟨x, hxA, hxB⟩ := SetLike.exists_of_lt hBA
+  obtain ⟨x, hxA, hxB⟩ := IsConcreteLE.exists_of_lt hBA
   have hx : (Submodule.Quotient.mk ⟨x, hxA⟩ :
       A.toSubmodule ⧸ B.toSubmodule.comap A.toSubmodule.subtype) ≠ 0 := by
     rwa [Ne, Submodule.Quotient.mk_eq_zero]
@@ -721,8 +722,7 @@ theorem exists_subquotient_tprod_equiv_of_subrepresentation [FiniteDimensional k
   · -- `A ⊗ σ` is zero, so it has no irreducible subquotient
     subst hA
     have h0 (z : (⊥ : Subrepresentation ρ).toSubmodule ⊗[k] V') : z = 0 := by
-      induction z using TensorProduct.induction_on with
-      | zero => rfl
+      induction z using TensorProduct.inductionOn with
       | tmul a b =>
         rw [show a = 0 from Subtype.ext ((Submodule.mem_bot k).1 a.2), TensorProduct.zero_tmul]
       | add a b ha hb => rw [ha, hb, add_zero]

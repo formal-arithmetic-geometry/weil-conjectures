@@ -58,7 +58,7 @@ private theorem depth_subsingleton {R : Type u} [CommRing R] [IsLocalRing R]
     depth (R := R) A = ⊤ := by
   unfold depth Ideal.depth
   have ht : maximalIdeal R • (⊤ : Submodule R A) = ⊤ := Subsingleton.elim _ _
-  rw [if_pos ht]
+  rw [ite_eq_left ht]
 
 private theorem depth_free_ge {R : Type u} [CommRing R] [IsLocalRing R]
     (A : Type*) [AddCommGroup A] [Module R A] [Module.Finite R A] [Module.Free R A] :
@@ -78,7 +78,7 @@ private theorem depth_free_ge {R : Type u} [CommRing R] [IsLocalRing R]
       (Submodule.top_ne_ideal_smul_of_le_jacobson_annihilator
         (maximalIdeal_le_jacobson (Module.annihilator R R))).symm
     unfold depth Ideal.depth
-    rw [if_neg ht]
+    rw [ite_eq_right ht]
     split_ifs with hP
     · exact le_top
     · apply sSup_le

@@ -385,6 +385,8 @@ instance (X Y : DerivedCategory C) :
 
 variable {C}
 
+set_option maxHeartbeats 400000 in
+-- Measured 204289 heartbeats on Lean v4.35.0-rc3 for this shift associativity proof.
 lemma shiftTensorShiftIso_assoc_aux (K L M : DerivedCategory C) (b c : ℤ) :
     (((curriedTensor (DerivedCategory C)).obj K).commShiftIso b).hom.app L ▷ M⟦c⟧ ≫
       (((curriedTensor (DerivedCategory C)).flip.obj (M⟦c⟧)).commShiftIso b).hom.app (K ⊗ L) ≫

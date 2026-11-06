@@ -127,7 +127,7 @@ lemma upperStarSectionHom_toPresheafFiber_upperStarCompSheafFiberIso_hom
     (left_comp_comp_hom_eq t hφ v)
   have hv : v.left ≫ V.hom = s := CategoryTheory.Over.w v
   have e : (pointSmallEtale s).fiber.map (homToPullback t φ hφ) v =
-      ((Etale.baseChangeNbhd t (s ≫ t) ⟨s, rfl⟩).obj ⟨U, u⟩).2 := by
+      ((Etale.baseChangeNbhd t (s ≫ t) ⟨s, rfl⟩).obj (Functor.elementsMk _ U u)).2 := by
     refine CategoryTheory.Over.OverMorphism.ext (pullback.hom_ext ?_ ?_)
     · change (v.left ≫ (homToPullback t φ hφ).left) ≫ _ = _
       simp [u, Scheme.Hom.basePt]
@@ -135,7 +135,8 @@ lemma upperStarSectionHom_toPresheafFiber_upperStarCompSheafFiberIso_hom
       simp [u, Scheme.Hom.basePt, hv]
   rw [upperStarSectionHom, Category.assoc,
     GrothendieckTopology.Point.toPresheafFiber_w_assoc, e]
-  erw [← Etale.toPresheafFiber_stalkRestrict_assoc A t (s ≫ t) ⟨s, rfl⟩ ((t)^*[A].obj G) ⟨U, u⟩]
+  erw [← Etale.toPresheafFiber_stalkRestrict_assoc A t (s ≫ t) ⟨s, rfl⟩ ((t)^*[A].obj G)
+    (Functor.elementsMk _ U u)]
   erw [← GrothendieckTopology.Point.toPresheafFiber_naturality_assoc]
   erw [sheafFiber_map_unit_stalkRestrict_upperStarCompSheafFiberIso_hom A t G s]
   exact Category.comp_id _

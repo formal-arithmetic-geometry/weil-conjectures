@@ -113,7 +113,7 @@ private theorem ordinaryEvaluation_component_postcomposition (X : Scheme.{u}) (U
     simp only [Category.assoc, SheafOfModules.homObjMap_comp_homObjMap,
       Category.id_comp]
     rw [HomologicalComplex.XIsoOfEq_hom_naturality]
-  · simp only [localEvaluationComponent, dif_neg hr, comp_zero,
+  · simp only [localEvaluationComponent, dite_eq_right hr, comp_zero,
       zero_comp]
 
 /-- Ordinary evaluation is natural in the coefficient complex.

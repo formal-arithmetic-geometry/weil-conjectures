@@ -38,8 +38,7 @@ theorem TensorProduct.eq_zero_of_forall_rTensor_eq_zero {R M N : Type*} [CommRin
   let e := equivFinsuppOfBasisRight (M := M) (Module.Free.chooseBasis R N)
   let e' (i : ι) := equivFinsuppOfBasisRight (M := P i) (Module.Free.chooseBasis R N)
   have key (i : ι) (j) (t : M ⊗[R] N) : e' i ((f i).rTensor N t) j = f i (e t j) := by
-    induction t using TensorProduct.induction_on with
-    | zero => simp
+    induction t using TensorProduct.inductionOn with
     | tmul m n => simp [e, e']
     | add x y hx hy => simp [hx, hy]
   apply e.injective

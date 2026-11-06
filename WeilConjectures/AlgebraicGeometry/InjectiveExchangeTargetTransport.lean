@@ -8,6 +8,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.StrictLocalInjectiveSourceComparison
 public import WeilConjectures.SixFunctors.BaseChange.Square
+public import Mathlib.Algebra.Homology.Localization
+
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # Target localization and derived-unit transport
 
@@ -131,7 +134,7 @@ private theorem target_unit_representative_transport
     let D := (P.mapHomologicalComplex (.up ℤ)).obj M.obj
     let T := P.mapDerivedCategoryPlus.obj K
     DerivedCategory.Plus.ι.map
-      (F.rightDerivedFunctorPlusUnit.app (P.mapHomotopyCategoryPlus.obj H) ≫
+      (F.rightDerivedFunctorPlusUnith.app (P.mapHomotopyCategoryPlus.obj H) ≫
         F.rightDerivedFunctorPlus.map
           (P.mapDerivedCategoryPlusFactorsh.inv.app H ≫
             P.mapDerivedCategoryPlus.map q'.inv)) =
@@ -146,7 +149,7 @@ private theorem target_unit_representative_transport
       (q ≪≫ (DerivedCategory.quotientCompQhIso _).symm.app M.obj)
   let N := P.mapHomotopyCategoryPlus.obj H
   let g := P.mapDerivedCategoryPlusFactorsh.inv.app H ≫ P.mapDerivedCategoryPlus.map q'.inv
-  have hc : DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnit.app N) ≫
+  have hc : DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnith.app N) ≫
       F.rightDerivedFunctorPlusCompatibility.hom.app (DerivedCategory.Plus.Qh.obj N) =
       F.rightDerivedFunctorUnit.app N.obj := by
     with_unfolding_all
@@ -157,7 +160,7 @@ private theorem target_unit_representative_transport
           F.rightDerivedFunctorPlusCompatibility.hom.app (DerivedCategory.Plus.Qh.obj N) =
           F.ιRightDerivedFunctorUnit.app N from by
         simp [Functor.rightDerivedFunctorPlusCompatibility])
-  have hu : DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnit.app N) =
+  have hu : DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnith.app N) =
       F.rightDerivedFunctorUnit.app N.obj ≫
         F.rightDerivedFunctorPlusCompatibility.inv.app (DerivedCategory.Plus.Qh.obj N) := by
     erw [← hc, Category.assoc, Iso.hom_inv_id_app, Category.comp_id]
@@ -177,7 +180,7 @@ private theorem target_unit_representative_transport
     rfl
   dsimp only
   change DerivedCategory.Plus.ι.map
-    (F.rightDerivedFunctorPlusUnit.app N ≫ F.rightDerivedFunctorPlus.map g) = _
+    (F.rightDerivedFunctorPlusUnith.app N ≫ F.rightDerivedFunctorPlus.map g) = _
   rw [Functor.map_comp, hu, Category.assoc]
   erw [← hn]
   have hph : P.mapDerivedCategoryFactorsh.hom.app H.obj =
@@ -249,7 +252,7 @@ theorem injectiveExchange_target_transport {X S : Scheme.{v}} (f : X ⟶ S)
       ⟨M₁, ((InjectiveObject.ι _).mapCochainComplexPlus.obj J).property⟩
     let H := (HomotopyCategory.Plus.quotient _).obj M
     let q' : K ≅ DerivedCategory.Plus.Qh.obj H :=
-      DerivedCategory.Plus.ι.preimageIso (Y := DerivedCategory.Plus.Q.obj M)
+      DerivedCategory.Plus.ι.preimageIso (Y := DerivedCategory.Plus.Qh.obj H)
         (q ≪≫ (DerivedCategory.quotientCompQhIso _).symm.app M.obj)
     let R := lowerStar AddCommGrpCat.{v + 1} f
     let U := upperStar AddCommGrpCat.{v + 1} (Scheme.strictLocalizationToBase s)
@@ -269,12 +272,13 @@ theorem injectiveExchange_target_transport {X S : Scheme.{v}} (f : X ⟶ S)
       (baseChangeMap AddCommGrpCat.{v + 1} sq) (.up ℤ)).app M₀
     U.mapDerivedCategoryFactors.inv.app
       ((R.mapHomologicalComplex (.up ℤ)).obj M.obj) ≫
+      U.mapDerivedCategory.map ((DerivedCategory.quotientCompQhIso _).inv.app L) ≫
       DerivedCategory.Plus.ι.map
         (U.mapDerivedCategoryPlusFactorsh.hom.app (R.mapHomotopyCategoryPlus.obj H) ≫
           DerivedCategory.Plus.Qh.map
             ((NatTrans.mapHomotopyCategoryPlus
               (baseChangeMap AddCommGrpCat.{v + 1} sq)).app H) ≫
-          F.rightDerivedFunctorPlusUnit.app (P.mapHomotopyCategoryPlus.obj H) ≫
+          F.rightDerivedFunctorPlusUnith.app (P.mapHomotopyCategoryPlus.obj H) ≫
           F.rightDerivedFunctorPlus.map
             (P.mapDerivedCategoryPlusFactorsh.inv.app H ≫
               P.mapDerivedCategoryPlus.map q'.inv)) =
@@ -305,6 +309,9 @@ theorem injectiveExchange_target_transport {X S : Scheme.{v}} (f : X ⟶ S)
     (Scheme.strictLocalizationToBase s)).toCommSq
   let a := (NatTrans.mapHomologicalComplex (baseChangeMap AddCommGrpCat.{v + 1} sq)
     (.up ℤ)).app M.obj
+  change U.mapDerivedCategoryFactors.inv.app L ≫
+    U.mapDerivedCategory.map (𝟙 _) ≫ _ = _
+  erw [CategoryTheory.Functor.map_id, Category.id_comp]
   have hp := exchange_localization_prefix R U P F
     (baseChangeMap AddCommGrpCat.{v + 1} sq) M
   have ht := target_unit_representative_transport P F K M q
@@ -314,7 +321,7 @@ theorem injectiveExchange_target_transport {X S : Scheme.{v}} (f : X ⟶ S)
     (U.mapDerivedCategoryPlusFactorsh.hom.app (R.mapHomotopyCategoryPlus.obj H))
     (DerivedCategory.Plus.Qh.map
       ((NatTrans.mapHomotopyCategoryPlus (baseChangeMap AddCommGrpCat.{v + 1} sq)).app H))
-    (F.rightDerivedFunctorPlusUnit.app (P.mapHomotopyCategoryPlus.obj H))
+    (F.rightDerivedFunctorPlusUnith.app (P.mapHomotopyCategoryPlus.obj H))
     (F.rightDerivedFunctorPlus.map
       (P.mapDerivedCategoryPlusFactorsh.inv.app H ≫ P.mapDerivedCategoryPlus.map q'.inv))
     (DerivedCategory.Q.map a)

@@ -8,6 +8,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
@@ -115,8 +117,7 @@ private theorem multiplication_range {X : Scheme.{u}} {K : X.Modules}
     apply le_antisymm
     · rintro _ ⟨z, rfl⟩
       obtain ⟨w, rfl⟩ := ht.2 z
-      induction w using TensorProduct.induction_on with
-      | zero => simp only [map_zero]; exact Submodule.zero_mem _
+      induction w using TensorProduct.inductionOn with
       | tmul s t =>
         change a.app U.1 (Modules.tensorSectionsMap K M U.1 (s ⊗ₜ t)) ∈ I • ⊤
         rw [hp]

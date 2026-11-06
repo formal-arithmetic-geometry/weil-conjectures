@@ -99,8 +99,8 @@ lemma traceDerivForm_scalar_right [DecidableEq m] (X : Matrix m m R) (c : R) :
     traceDerivForm D X (Matrix.scalar m c) = X.trace • D c := by
   simp only [traceDerivForm, scalar_apply, diagonal_apply, Matrix.trace, diag, Finset.sum_smul]
   refine Finset.sum_congr rfl fun i _ ↦ ?_
-  rw [Finset.sum_eq_single i (fun j _ hj ↦ by rw [if_neg hj, D.map_zero, smul_zero])
-    (fun h ↦ (h (Finset.mem_univ _)).elim), if_pos rfl]
+  rw [Finset.sum_eq_single i (fun j _ hj ↦ by rw [ite_eq_right hj, D.map_zero, smul_zero])
+    (fun h ↦ (h (Finset.mem_univ _)).elim), ite_eq_left rfl]
 
 /-- Conjugation invariance of `traceDerivForm` on commuting matrices: if `P Q = 1` and
 `A C = C A`, then `Tr(QCP · D(QAP)) = Tr(C · D(A))`. -/

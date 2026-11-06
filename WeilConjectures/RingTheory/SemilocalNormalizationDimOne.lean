@@ -41,7 +41,7 @@ private theorem normalization_same_universe
   let f := AlgebraicGeometry.Spec.map (CommRingCat.ofHom (algebraMap B C))
   let g : MaximalSpectrum C → MaximalSpectrum B := fun x =>
     ⟨x.asIdeal.comap (algebraMap B C),
-      Ideal.isMaximal_comap_of_isIntegral_of_isMaximal x.asIdeal⟩
+      Ideal.isMaximal_under_of_isIntegral_of_isMaximal x.asIdeal⟩
   have hfinite (y : MaximalSpectrum B) : Finite (f ⁻¹' {y.toPrimeSpectrum}) :=
     hfib y.toPrimeSpectrum
   let j : MaximalSpectrum C → Σ y : MaximalSpectrum B, f ⁻¹' {y.toPrimeSpectrum} :=

@@ -126,7 +126,7 @@ noncomputable def tensorQuotPowTriangleMap
   comm₃ := by
     have h := NatTrans.shift_app_comm ((curriedTensor (DerivedCategory
       (Sheaf J (ModuleCat.{u + 1} R)))).map f) (1 : ℤ) (quotPowTriangle J hϖ hI n).obj₁
-    dsimp at h
+    simp only [curriedTensor_map_app] at h
     change (Y ◁ (quotPowTriangle J hϖ hI n).mor₃ ≫ (Functor.commShiftIso ((curriedTensor
       (DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)))).obj Y) (1 : ℤ)).hom.app
         (quotPowTriangle J hϖ hI n).obj₁) ≫ (f ▷ (quotPowTriangle J hϖ hI n).obj₁)⟦(1 : ℤ)⟧' =
@@ -171,7 +171,7 @@ noncomputable def isLimit_fan_whiskerRight_quot
   refine IsLimit.ofIsoLimit (productIsProduct _) (Fan.ext (asIso ψ.hom₃).symm fun j ↦ ?_)
   rw [Iso.symm_hom, asIso_inv, IsIso.eq_inv_comp]
   simp only [ψ, productTriangle.lift_hom₃, tensorQuotPowTriangleMap, Fan.mk_pt]
-  exact Pi.lift_π _ _
+  exact Pi.lift_comp_π _ _
 
 end Products
 

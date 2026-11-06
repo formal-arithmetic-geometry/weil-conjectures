@@ -433,7 +433,7 @@ theorem finitePresentation_sections_top_of_pullback_of_iUnion_range_eq_univ
     refine isFinitePresentation_of_isOpenImmersion _ (Sigma.ι W)
       (sigmaOpenCover W).iSup_opensRange fun j ↦ ?_
     have := h j
-    exact isFinitePresentation_of_iso (pullbackCompOfEq _ _ _ (Sigma.ι_desc f j) P).symm
+    exact isFinitePresentation_of_iso (pullbackCompOfEq _ _ _ (Sigma.ι_comp_desc f j) P).symm
   exact finitePresentation_sections_top_of_pullback_of_isAffine (Sigma.desc f) P
 
 /-- Descent of flatness along a finite jointly surjective family of flat morphisms
@@ -450,7 +450,7 @@ theorem flat_sections_top_of_pullback_of_iUnion_range_eq_univ
     refine isFiniteLocallyFree_of_isOpenImmersion _ (Sigma.ι W)
       (sigmaOpenCover W).iSup_opensRange fun j ↦ ?_
     have := h j
-    exact isFiniteLocallyFree_of_iso (pullbackCompOfEq _ _ _ (Sigma.ι_desc f j) P).symm
+    exact isFiniteLocallyFree_of_iso (pullbackCompOfEq _ _ _ (Sigma.ι_comp_desc f j) P).symm
   exact flat_sections_top_of_pullback_of_isAffine (Sigma.desc f) P
 
 end AlgebraicGeometry.Scheme.Modules

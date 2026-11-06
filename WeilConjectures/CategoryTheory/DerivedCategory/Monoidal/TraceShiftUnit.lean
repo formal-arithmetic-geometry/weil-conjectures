@@ -6,6 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Trace
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 
 /-!
 # The trace of an endomorphism of a shifted unit
@@ -65,7 +67,9 @@ theorem trace_shiftFunctor_map_singleFunctor_map (n : ℤ) (r : 𝟙_ A ⟶ 𝟙
     [HasRightDual ((shiftFunctor (DerivedCategory A) n).obj ((singleFunctor A 0).obj (𝟙_ A)))] :
     letI := braidedCategory' A
     trace ((shiftFunctor (DerivedCategory A) n).map ((singleFunctor A 0).map r)) =
-      (n.negOnePow : ℤ) • (singleFunctor A 0).map r := by
+      (quotientCompQhIso A).hom.app (𝟙_ (CochainComplex A ℤ)) ≫
+        ((n.negOnePow : ℤ) • (singleFunctor A 0).map r) ≫
+          (quotientCompQhIso A).inv.app (𝟙_ (CochainComplex A ℤ)) := by
   let := braidedCategory' A
   let P := (HomologicalComplex.single A (.up ℤ) (-n)).obj (𝟙_ A)
   let eX : (shiftFunctor (DerivedCategory A) n).obj ((singleFunctor A 0).obj (𝟙_ A)) ≅
@@ -85,6 +89,6 @@ theorem trace_shiftFunctor_map_singleFunctor_map (n : ℤ) (r : 𝟙_ A ⟶ 𝟙
   have hε : ε (Qh (C := A)) = 𝟙 _ := rfl
   simp only [hε, IsIso.inv_id, Category.id_comp]
   erw [Category.comp_id]
-  rfl
+  erw [Category.id_comp]
 
 end DerivedCategory

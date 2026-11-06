@@ -109,7 +109,7 @@ lemma smul_traceDerivation_eq {F : R[X]} {a : B} (hF : aeval a F = 0) :
 omit [Module.Free R B] in
 /-- `Hom_R(B, R)` is a torsion-free `B`-module. -/
 lemma eq_zero_of_smul_eq_zero {x : B} (hx : x ≠ 0) {φ : B →ₗ[R] R} (h : x • φ = 0) : φ = 0 := by
-  have hne := Ideal.comap_ne_bot_of_integral_mem hx (Ideal.mem_span_singleton_self x)
+  have hne := Ideal.under_ne_bot_of_integral_mem hx (Ideal.mem_span_singleton_self x)
     (Algebra.IsIntegral.isIntegral (R := R) x)
   obtain ⟨r, hr, hr0⟩ := Submodule.exists_mem_ne_zero_of_ne_bot hne
   obtain ⟨y, hy⟩ := Ideal.mem_span_singleton'.mp (Ideal.mem_comap.mp hr)
@@ -289,7 +289,7 @@ lemma exists_mem_adjoin_mul_mem_adjoin [IsDedekindDomain B] (q : Ideal B) [q.IsM
     ∃ a s : B, s ∈ Algebra.adjoin R {a} ∧ s ∉ q ∧ ∀ b, s * b ∈ Algebra.adjoin R {a} := by
   classical
   set p := q.under R
-  have hp0 : p ≠ ⊥ := fun h ↦ hq (Ideal.eq_bot_of_comap_eq_bot h)
+  have hp0 : p ≠ ⊥ := fun h ↦ hq (Ideal.eq_bot_of_under_eq_bot h)
   -- a primitive element of the residue field extension
   obtain ⟨α, hα⟩ := Field.exists_primitive_element (R ⧸ p) (B ⧸ q)
   set g := minpoly (R ⧸ p) α
@@ -304,7 +304,7 @@ lemma exists_mem_adjoin_mul_mem_adjoin [IsDedekindDomain B] (q : Ideal B) [q.IsM
   have hg0 (b : B) (hb : Ideal.Quotient.mk q b = α) : aeval b gR ∈ q := by
     rw [← Ideal.Quotient.eq_zero_iff_mem, hmk, hb, hgR, minpoly.aeval]
   obtain ⟨α₀, hα₀⟩ := Ideal.Quotient.mk_surjective α
-  obtain ⟨π, hπq, hπq2⟩ := SetLike.exists_of_lt (Ideal.pow_succ_lt_pow hq 1)
+  obtain ⟨π, hπq, hπq2⟩ := IsConcreteLE.exists_of_lt (Ideal.pow_succ_lt_pow hq 1)
   rw [pow_one] at hπq
   rw [show 1 + 1 = 2 from rfl] at hπq2
   have hrad : (q ^ 2).radical = q := by

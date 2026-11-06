@@ -8,7 +8,7 @@ module
 public import Mathlib.Algebra.BigOperators.Field
 public import Mathlib.Analysis.Complex.Basic
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
-public import Mathlib.Data.Real.Basic
+public import Mathlib.Basic.Real.Basic
 public import Mathlib.GroupTheory.Archimedean
 public import Mathlib.RepresentationTheory.Irreducible
 public import WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Monodromy
@@ -302,7 +302,7 @@ theorem detWeight_eq_of_isPositiveCentralPair (D : RepresentedDegreeDatum W n k)
   rw [map_pow, toAdd_pow, map_mul, map_mul, toAdd_mul,
     Q.toAdd_apply_detCharacter_eq_zero hdet χ u.2, zero_add, map_pow, map_pow, toAdd_pow,
     nsmul_eq_mul, nsmul_eq_mul] at h₃
-  obtain ⟨x, hxS, hxU⟩ := SetLike.exists_of_lt hUS
+  obtain ⟨x, hxS, hxU⟩ := IsConcreteLE.exists_of_lt hUS
   have : Nontrivial (S.toSubmodule ⧸ U.toSubmodule.comap S.toSubmodule.subtype) :=
     ⟨Submodule.Quotient.mk ⟨x, hxS⟩, 0, by rwa [Ne, Submodule.Quotient.mk_eq_zero]⟩
   have hr := Module.finrank_pos (R := k)
@@ -331,7 +331,7 @@ theorem exists_detWeight_eq_of_isPositiveCentralPair_of_isIrreducible [IsAlgClos
     (fun x hx ↦ D.mulVec_mem_of_mem_zeroLocus_arithmeticMonodromy hzG S hx)
   have hc0 : c ≠ 0 := by
     rintro rfl
-    obtain ⟨x, hxS, hxU⟩ := SetLike.exists_of_lt hUS
+    obtain ⟨x, hxS, hxU⟩ := IsConcreteLE.exists_of_lt hUS
     refine hxU ?_
     have := D.mulVec_mem_of_mem_zeroLocus_arithmeticMonodromy (inv_mem hzG) U
       (by simpa using hc x hxS)
@@ -551,7 +551,7 @@ theorem DegreeDatum.exists_multiset_le_and_detWeight_eq_sum_of_exteriorPower
     have hbot : ⊥ < Vs j := (Subrepresentation.isAtom_of_isIrreducible (hsimpleVs j)).bot_lt
     have hc0 : c ≠ 0 := by
       rintro rfl
-      obtain ⟨x, hx, hx0⟩ := SetLike.exists_of_lt hbot
+      obtain ⟨x, hx, hx0⟩ := IsConcreteLE.exists_of_lt hbot
       refine hx0 ((Submodule.mem_bot k).2 ?_)
       have h0 : Z x = 0 := by rw [hc' x hx, zero_smul]
       rw [Matrix.toLin_apply_eq_equivFun_symm, LinearEquiv.map_eq_zero_iff] at h0
@@ -688,7 +688,7 @@ theorem DegreeDatum.exists_detWeight_eq_sum_of_exteriorPower
     have hbot : ⊥ < Vs j := (Subrepresentation.isAtom_of_isIrreducible (hsimpleVs j)).bot_lt
     have hc0 : c ≠ 0 := by
       rintro rfl
-      obtain ⟨x, hx, hx0⟩ := SetLike.exists_of_lt hbot
+      obtain ⟨x, hx, hx0⟩ := IsConcreteLE.exists_of_lt hbot
       refine hx0 ((Submodule.mem_bot k).2 ?_)
       have h0 : Z x = 0 := by rw [hc' x hx, zero_smul]
       rw [Matrix.toLin_apply_eq_equivFun_symm, LinearEquiv.map_eq_zero_iff] at h0
@@ -841,8 +841,7 @@ theorem DegreeDatum.detWeight_subquotient_tprod_eq_add
       p (Matrix.toLin B B (r z : Matrix _ _ k) x) = ((c * d : kˣ) : k) • p x := by
     change p (Matrix.toLin B B ((z : Matrix n n k) ⊗ₖ (z : Matrix n n k)) x) = _
     rw [Matrix.toLin_kronecker]
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul x y =>
       simp only [TensorProduct.map_tmul, p, Representation.IntertwiningMap.tensor_apply, hc, hd,
         TensorProduct.smul_tmul_smul, Units.val_mul]
@@ -851,7 +850,7 @@ theorem DegreeDatum.detWeight_subquotient_tprod_eq_add
   let e := Subrepresentation.subquotientComapEquiv p hp U S
   have hUS' : Subrepresentation.comap p U < Subrepresentation.comap p S := by
     refine lt_of_le_of_ne (fun x hx ↦ hUS.le hx) fun h ↦ ?_
-    obtain ⟨y, hyS, hyU⟩ := SetLike.exists_of_lt hUS
+    obtain ⟨y, hyS, hyU⟩ := IsConcreteLE.exists_of_lt hUS
     obtain ⟨x, rfl⟩ := hp y
     have hx : x ∈ Subrepresentation.comap p S := hyS
     rw [← h] at hx
@@ -916,7 +915,7 @@ theorem exists_multiset_le_and_detWeight_eq_sum_of_exteriorPower [IsAlgClosed k]
         Fintype.card_sigma]
       simp
     have hs : s ≤ Module.finrank k V := by
-      obtain ⟨x, hxS, hxU⟩ := SetLike.exists_of_lt hUS
+      obtain ⟨x, hxS, hxU⟩ := IsConcreteLE.exists_of_lt hUS
       have hx0 : x ≠ 0 := fun h ↦ hxU (h ▸ Submodule.zero_mem _)
       have hpos : 0 < Module.finrank k (⋀[k]^s V) :=
         Module.finrank_pos_iff_exists_ne_zero.2 ⟨x, hx0⟩

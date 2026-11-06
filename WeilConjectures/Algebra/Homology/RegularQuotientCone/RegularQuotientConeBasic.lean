@@ -88,13 +88,12 @@ noncomputable def scalar (R : Sheaf J CommRingCat.{r})
     naturality := by
       intro U V f
       ext x
-      change t.val V • M.val.map f x = M.val.map f (t.val U • x)
-      rw [M.val.map_smul]
-      congr 1
-      exact (t.property f).symm } }
+      have h := M.val.map_smul f (t.val U) x
+      rw [show (derivedChangeRingIndependentCoefficients J R).obj.map f (t.val U) =
+        t.val V from t.property f] at h
+      exact h.symm } }
   naturality {M N} f := by
     ext U x
-    change t.val U • f.val.app U x = f.val.app U (t.val U • x)
     exact ((f.val.app U).hom.map_smul (t.val U) x).symm
 
 /-- The map of unit modules induced by the ring-sheaf map.

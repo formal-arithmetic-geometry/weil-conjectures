@@ -152,7 +152,7 @@ instance Proj.epi_sigmaUnitToTwist (R : Type u) [CommRing R] (d : ℕ) :
   have : IsIso ((Scheme.Modules.restrictFunctor
       (Proj.basicOpen _ (MvPolynomial.X j ^ d)).ι).map
         (SheafOfModules.ιFree j ≫ Proj.sigmaUnitToTwist n R d)) := by
-    rw [Proj.sigmaUnitToTwist, SheafOfModules.ιFree, Limits.Sigma.ι_desc, Functor.map_comp,
+    rw [Proj.sigmaUnitToTwist, SheafOfModules.ιFree, Limits.Sigma.ι_comp_desc, Functor.map_comp,
       Functor.map_comp]
     have : IsIso ((Scheme.Modules.restrictFunctor
         (Proj.basicOpen _ (MvPolynomial.X j ^ d)).ι).map

@@ -137,18 +137,18 @@ lemma mapDerivedCategory_compCoherence (Cm : mfg ≅ mg ⋙ mf) (Cs : sfg ≅ sg
     (ig : mg ⋙ G₂ ≅ G₃ ⋙ sg) (iF : mf ⋙ G₁ ≅ G₂ ⋙ sf) (ifg : mfg ⋙ G₁ ≅ G₃ ⋙ sfg)
     (H : CompCoherence Cm Cs ig iF ifg)
     (M : DerivedCategory C₃) :
-    (mapDerivedCategoryCompIso mfg G₁).inv.app M ≫ (mapDerivedCategoryNatIso ifg).hom.app M ≫
-        (mapDerivedCategoryCompIso G₃ sfg).hom.app M ≫
+    (mapDerivedCategoryCompIso mfg G₁).hom.app M ≫ (mapDerivedCategoryNatIso ifg).hom.app M ≫
+        (mapDerivedCategoryCompIso G₃ sfg).inv.app M ≫
         (mapDerivedCategoryNatIso Cs).hom.app (G₃.mapDerivedCategory.obj M) ≫
-        (mapDerivedCategoryCompIso sg sf).hom.app (G₃.mapDerivedCategory.obj M) =
+        (mapDerivedCategoryCompIso sg sf).inv.app (G₃.mapDerivedCategory.obj M) =
       G₁.mapDerivedCategory.map ((mapDerivedCategoryNatIso Cm).hom.app M ≫
-          (mapDerivedCategoryCompIso mg mf).hom.app M) ≫
-        (mapDerivedCategoryCompIso mf G₁).inv.app (mg.mapDerivedCategory.obj M) ≫
+          (mapDerivedCategoryCompIso mg mf).inv.app M) ≫
+        (mapDerivedCategoryCompIso mf G₁).hom.app (mg.mapDerivedCategory.obj M) ≫
         (mapDerivedCategoryNatIso iF).hom.app (mg.mapDerivedCategory.obj M) ≫
-        (mapDerivedCategoryCompIso G₂ sf).hom.app (mg.mapDerivedCategory.obj M) ≫
-        sf.mapDerivedCategory.map ((mapDerivedCategoryCompIso mg G₂).inv.app M ≫
+        (mapDerivedCategoryCompIso G₂ sf).inv.app (mg.mapDerivedCategory.obj M) ≫
+        sf.mapDerivedCategory.map ((mapDerivedCategoryCompIso mg G₂).hom.app M ≫
           (mapDerivedCategoryNatIso ig).hom.app M ≫
-          (mapDerivedCategoryCompIso G₃ sg).hom.app M) := by
+          (mapDerivedCategoryCompIso G₃ sg).inv.app M) := by
   have hiso : ifg ≪≫ isoWhiskerLeft G₃ Cs = isoWhiskerRight Cm G₁ ≪≫ Functor.associator _ _ _ ≪≫
       isoWhiskerLeft mg iF ≪≫ (Functor.associator _ _ _).symm ≪≫ isoWhiskerRight ig sf ≪≫
       Functor.associator _ _ _ := by
@@ -167,32 +167,32 @@ lemma mapDerivedCategory_compCoherence (Cm : mfg ≅ mg ⋙ mf) (Cs : sfg ≅ sg
   have a₃ := NatTrans.congr_app (mapDerivedCategoryCompIso_assoc G₃ sg sf) M
   simp only [NatTrans.comp_app, whiskerLeft_app, whiskerRight_app] at h₁ h₂ h₃ h₄ a₁ a₂ a₃
   have h₂' : (mapDerivedCategoryNatIso (isoWhiskerRight Cm G₁)).hom.app M =
-      (mapDerivedCategoryCompIso mfg G₁).hom.app M ≫
+      (mapDerivedCategoryCompIso mfg G₁).inv.app M ≫
         G₁.mapDerivedCategory.map ((mapDerivedCategoryNatIso Cm).hom.app M) ≫
-        (mapDerivedCategoryCompIso (mg ⋙ mf) G₁).inv.app M := by
-    rw [← reassoc_of% h₂, Iso.hom_inv_id_app, Category.comp_id]
+        (mapDerivedCategoryCompIso (mg ⋙ mf) G₁).hom.app M := by
+    rw [← reassoc_of% h₂, Iso.inv_hom_id_app, Category.comp_id]
   have h₃' : (mapDerivedCategoryNatIso (isoWhiskerLeft mg iF)).hom.app M =
-      (mapDerivedCategoryCompIso mg (mf ⋙ G₁)).hom.app M ≫
+      (mapDerivedCategoryCompIso mg (mf ⋙ G₁)).inv.app M ≫
         (mapDerivedCategoryNatIso iF).hom.app (mg.mapDerivedCategory.obj M) ≫
-        (mapDerivedCategoryCompIso mg (G₂ ⋙ sf)).inv.app M := by
-    rw [← reassoc_of% h₃, Iso.hom_inv_id_app, Category.comp_id]
-  have a₁' : (mapDerivedCategoryCompIso (mg ⋙ mf) G₁).inv.app M ≫
-      (mapDerivedCategoryCompIso mg (mf ⋙ G₁)).hom.app M =
-      G₁.mapDerivedCategory.map ((mapDerivedCategoryCompIso mg mf).hom.app M) ≫
-        (mapDerivedCategoryCompIso mf G₁).inv.app (mg.mapDerivedCategory.obj M) := by
-    rw [← cancel_mono ((mapDerivedCategoryCompIso mf G₁).hom.app _), Category.assoc,
+        (mapDerivedCategoryCompIso mg (G₂ ⋙ sf)).hom.app M := by
+    rw [← reassoc_of% h₃, Iso.inv_hom_id_app, Category.comp_id]
+  have a₁' : (mapDerivedCategoryCompIso (mg ⋙ mf) G₁).hom.app M ≫
+      (mapDerivedCategoryCompIso mg (mf ⋙ G₁)).inv.app M =
+      G₁.mapDerivedCategory.map ((mapDerivedCategoryCompIso mg mf).inv.app M) ≫
+        (mapDerivedCategoryCompIso mf G₁).hom.app (mg.mapDerivedCategory.obj M) := by
+    rw [← cancel_mono ((mapDerivedCategoryCompIso mf G₁).inv.app _), Category.assoc,
       Category.assoc, a₁]
     simp
-  have a₂' : (mapDerivedCategoryCompIso mg (G₂ ⋙ sf)).inv.app M ≫
-      (mapDerivedCategoryCompIso (mg ⋙ G₂) sf).hom.app M =
-      (mapDerivedCategoryCompIso G₂ sf).hom.app (mg.mapDerivedCategory.obj M) ≫
-        sf.mapDerivedCategory.map ((mapDerivedCategoryCompIso mg G₂).inv.app M) := by
-    rw [← cancel_mono (sf.mapDerivedCategory.map ((mapDerivedCategoryCompIso mg G₂).hom.app M)),
+  have a₂' : (mapDerivedCategoryCompIso mg (G₂ ⋙ sf)).hom.app M ≫
+      (mapDerivedCategoryCompIso (mg ⋙ G₂) sf).inv.app M =
+      (mapDerivedCategoryCompIso G₂ sf).inv.app (mg.mapDerivedCategory.obj M) ≫
+        sf.mapDerivedCategory.map ((mapDerivedCategoryCompIso mg G₂).hom.app M) := by
+    rw [← cancel_mono (sf.mapDerivedCategory.map ((mapDerivedCategoryCompIso mg G₂).inv.app M)),
       Category.assoc, Category.assoc, ← a₂]
     simp [← Functor.map_comp]
   rw [← reassoc_of% h₁, a₃, reassoc_of% hD, mapDerivedCategoryNatIso_associator_inv_app,
     Category.id_comp, reassoc_of% h₄, h₂', h₃']
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc, Functor.map_comp]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc, Functor.map_comp]
   rw [reassoc_of% a₁', reassoc_of% a₂']
 
 /-- `CategoryTheory.Functor.mapDerivedCategory_compCoherence`, stated with the components of the
@@ -200,16 +200,16 @@ composite natural transformations. -/
 lemma mapDerivedCategory_compCoherence' (Cm : mfg ≅ mg ⋙ mf) (Cs : sfg ≅ sg ⋙ sf)
     (ig : mg ⋙ G₂ ≅ G₃ ⋙ sg) (iF : mf ⋙ G₁ ≅ G₂ ⋙ sf) (ifg : mfg ⋙ G₁ ≅ G₃ ⋙ sfg)
     (H : CompCoherence Cm Cs ig iF ifg) (M : DerivedCategory C₃) :
-    ((mapDerivedCategoryCompIso mfg G₁).inv ≫ (mapDerivedCategoryNatIso ifg).hom ≫
-        (mapDerivedCategoryCompIso G₃ sfg).hom).app M ≫
-        ((mapDerivedCategoryNatIso Cs).hom ≫ (mapDerivedCategoryCompIso sg sf).hom).app
+    ((mapDerivedCategoryCompIso mfg G₁).hom ≫ (mapDerivedCategoryNatIso ifg).hom ≫
+        (mapDerivedCategoryCompIso G₃ sfg).inv).app M ≫
+        ((mapDerivedCategoryNatIso Cs).hom ≫ (mapDerivedCategoryCompIso sg sf).inv).app
           (G₃.mapDerivedCategory.obj M) =
       G₁.mapDerivedCategory.map
-          (((mapDerivedCategoryNatIso Cm).hom ≫ (mapDerivedCategoryCompIso mg mf).hom).app M) ≫
-        ((mapDerivedCategoryCompIso mf G₁).inv ≫ (mapDerivedCategoryNatIso iF).hom ≫
-          (mapDerivedCategoryCompIso G₂ sf).hom).app (mg.mapDerivedCategory.obj M) ≫
-        sf.mapDerivedCategory.map (((mapDerivedCategoryCompIso mg G₂).inv ≫
-          (mapDerivedCategoryNatIso ig).hom ≫ (mapDerivedCategoryCompIso G₃ sg).hom).app M) := by
+          (((mapDerivedCategoryNatIso Cm).hom ≫ (mapDerivedCategoryCompIso mg mf).inv).app M) ≫
+        ((mapDerivedCategoryCompIso mf G₁).hom ≫ (mapDerivedCategoryNatIso iF).hom ≫
+          (mapDerivedCategoryCompIso G₂ sf).inv).app (mg.mapDerivedCategory.obj M) ≫
+        sf.mapDerivedCategory.map (((mapDerivedCategoryCompIso mg G₂).hom ≫
+          (mapDerivedCategoryNatIso ig).hom ≫ (mapDerivedCategoryCompIso G₃ sg).inv).app M) := by
   simpa only [NatTrans.comp_app, Category.assoc] using
     mapDerivedCategory_compCoherence Cm Cs ig iF ifg H M
 

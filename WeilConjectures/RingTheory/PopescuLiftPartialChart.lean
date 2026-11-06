@@ -119,12 +119,12 @@ theorem chart_original_equation_eq_zero [Algebra R Cbar]
       ((ULift.algEquiv (R := R)).symm (Ideal.Quotient.mk _ (d.chartEquation k j))) = 0
     rw [hq, map_zero, map_zero]
   have hu (j : Fin d.m) (hj : j ∈ d.E k) : ev (d.equation (.inl j)) = 0 := by
-    simpa only [chartEquation, if_pos hj] using hchart j
+    simpa only [chartEquation, ite_eq_left hj] using hchart j
   change ev (d.equation (.inl l)) = 0
   by_cases hl : l ∈ d.E k
   · exact hu l hl
   have hp : ev (d.equation (.inr (k, l))) = 0 := by
-    simpa only [chartEquation, if_neg hl] using hchart l
+    simpa only [chartEquation, ite_eq_right hl] using hchart l
   have hid := congrArg ev (d.equation_key_identity hd k l)
   simp only [map_mul, map_add, map_neg, map_sum] at hid
   have hsum : (∑ j ∈ d.E k, ev (d.includeX (d.h k l j)) *

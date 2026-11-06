@@ -95,8 +95,7 @@ theorem exists_generic_product_kernel_bound
     simp [ψ]
   have hcompat (x : B ⊗[A] R) :
       f (Ideal.Quotient.mk _ x) = e (Ideal.Quotient.mk _ (ψ (m x))) := by
-    induction x with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | add x y hx hy => simp [map_add, hx, hy]
     | tmul b c =>
       have hc : f (Ideal.Quotient.mk _ ((1 : B) ⊗ₜ[A] c)) =

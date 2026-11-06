@@ -42,6 +42,12 @@ universe u
 
 open CategoryTheory Opposite TopologicalSpace
 
+namespace PresheafOfModules
+
+export PresheafOfModulesOfCommRing (Derivation')
+
+end PresheafOfModules
+
 namespace AlgebraicGeometry.Scheme.Modules
 
 variable {X : Scheme.{u}} (M : X.Modules)

@@ -98,8 +98,7 @@ private theorem product_zero_on_affine_cover {X : Scheme.{u}} {J : X.Modules}
   have ha (i : Fin r) : a.app (V i).1 = 0 := by
     ext x
     obtain ⟨y, rfl⟩ := (ht.2 (V i).1 (V i).2).2 x
-    induction y using TensorProduct.induction_on with
-    | zero => simp
+    induction y using TensorProduct.inductionOn with
     | tmul j s =>
       change a.app (V i).1 (Scheme.Modules.tmulSection j s) = 0
       dsimp only [a]

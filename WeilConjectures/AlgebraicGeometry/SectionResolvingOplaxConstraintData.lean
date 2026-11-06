@@ -4,6 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.SectionDerivedPushpullNormalization
 public import WeilConjectures.AlgebraicGeometry.SectionKFlatTensorComparison
 public import WeilConjectures.AlgebraicGeometry.SectionOplaxTotalComparison
@@ -401,7 +403,8 @@ def SectionUnits {X Y : Scheme.{u}} (f : X ⟶ Y)
     (totalSectionPull Λ f) (derivedPullback Λ f) DerivedCategory.Q DerivedCategory.Q
     (modelTensor Λ Y) (modelTensor Λ X) (pullback Λ f).mapDerivedCategoryFactors.hom
       (sectionTotalIso Λ f · · |>.hom) (sectionTotalUnit Λ f)
-    (regular Λ Y) (regular Λ X) (fun M N => μ.app (M, N)) v
+    (cast (by rfl) (regular Λ Y)) (cast (by rfl) (regular Λ X))
+      (fun M N => μ.app (M, N)) v
 
 /-- The unit edge squares specialized to the fixed section models.
 Source: Stacks 07A4, resolving-model unit calculation
@@ -418,7 +421,8 @@ def SectionUnitEdges {X Y : Scheme.{u}} (f : X ⟶ Y)
     (totalSectionPull Λ f) (derivedPullback Λ f) DerivedCategory.Q DerivedCategory.Q
     (modelTensor Λ Y) (modelTensor Λ X) (pullback Λ f).mapDerivedCategoryFactors.hom
       (sectionTotalIso Λ f · · |>.hom) (sectionTotalUnit Λ f)
-    (regular Λ Y) (regular Λ X) (fun M N => μ.app (M, N)) v
+    (cast (by rfl) (regular Λ Y)) (cast (by rfl) (regular Λ X))
+      (fun M N => μ.app (M, N)) v
 
 /-- The inverse fixed tensor comparison, retaining the transported tensor types.
 Source: Stacks 07A4, fixed gamma/theta/e conjugation
@@ -458,8 +462,8 @@ def Conjugation {X Y : Scheme.{u}} (f : X ⟶ Y) (μ : SectionTensorArrow Λ f)
     (internalDerivedPullback Λ f) (derivedPullback Λ f)
     (derivedEquivalence Λ Y).functor (derivedEquivalence Λ X).functor
     (internalModelTensor Λ Y) (internalModelTensor Λ X) (derivedPullComparison Λ f).inv (fun M
-      N => (δ.app M).app N) w (fun M N => μ.app (M, N)) ((derivedPullback Λ f).map (regular Λ
-      Y).hom ≫ v ≫ (regular Λ X).inv) ⊤
+      N => (δ.app M).app N) w (fun M N => μ.app (M, N)) ((derivedPullback Λ f).map
+      (cast (by rfl) (regular Λ Y).hom) ≫ v ≫ (cast (by rfl) (regular Λ X).inv)) ⊤
 
 /-- The EdgeIdentification formula for the internal and section diagrams, with gamma/theta/e.
 Source: Stacks 07A4, fixed gamma/theta/e conjugation
@@ -496,7 +500,8 @@ def InternalUnits {X Y : Scheme.{u}} (f : X ⟶ Y) (μ : SectionTensorArrow Λ f
     (derivedEquivalence Λ Y).functor (derivedEquivalence Λ X).functor
     (internalModelTensor Λ Y) (internalModelTensor Λ X) (derivedPullComparison Λ f).inv (fun M
       N => (δ.app M).app N) w (Iso.refl _) (Iso.refl _) (fun M N => μ.app (M, N))
-      ((derivedPullback Λ f).map (regular Λ Y).hom ≫ v ≫ (regular Λ X).inv)
+      ((derivedPullback Λ f).map (cast (by rfl) (regular Λ Y).hom) ≫
+        v ≫ (cast (by rfl) (regular Λ X).inv))
 
 end ResolvingOplaxConstraints
 end AlgebraicGeometry.ProEtale.ModuleRingedComparison

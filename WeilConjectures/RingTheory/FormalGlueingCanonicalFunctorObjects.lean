@@ -156,9 +156,9 @@ private theorem extend_bijective {R : Type u} {S : Type v}
   have heq : (fun x : restrict φ (extend φ M) ↦ r • x) =
       (E.baseChange R S : TensorProduct R S M → TensorProduct R S M) := by
     funext x
+    change TensorProduct R S M at x
     change (φ r) • (x : TensorProduct R S M) = (E.baseChange R S) x
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul s m =>
       simp only [LinearEquiv.baseChange_tmul]
       change (φ r) • (TensorProduct.tmul R s m) = TensorProduct.tmul R s (r • m)
@@ -216,8 +216,7 @@ private theorem canonical_square {R : Type u} {S : Type v}
     apply local_ext (restrict φ (extend φ M)) e he
     intro y
     change TensorProduct R S M at y
-    induction y using TensorProduct.induction_on with
-    | zero => simp
+    induction y using TensorProduct.inductionOn with
     | tmul s m =>
       simp only [LinearMap.comp_apply, LocalizedModule.mkLinearMap_apply]
       rw [local_map_one d (compare φ e M), compare_tensor_one φ e M,

@@ -20,6 +20,12 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
+noncomputable local instance closedCostalkInjectiveContinuityHasZeroMorphisms
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] (X : Scheme.{u}) :
+    HasZeroMorphisms (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)) := inferInstance
+
 /-- The K-injective comparison for a right derived functor is natural.
 Source: the right-derived unit and quotient comparison isomorphisms in
 `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective`.

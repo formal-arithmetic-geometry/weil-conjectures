@@ -12,6 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Finite section homology from cokernel and homology acyclicity
 

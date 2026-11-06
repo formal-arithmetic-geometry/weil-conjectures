@@ -242,20 +242,20 @@ private theorem series_exists_root (p : ℕ) [Fact p.Prime]
 private theorem polynomial_exists_root (p : ℕ) [Fact p.Prime]
     {k : Type u} [Field k] [CharP k p] (n m : ℕ)
     (f : MvPolynomial (Fin m) (MvPowerSeries (Fin n) k))
-    (hr : ∀ a g, ∃ x : k, x ^ p = MvPowerSeries.coeff a (MvPolynomial.coeff g f))
-    (hd : ∀ a g, MvPowerSeries.coeff a (MvPolynomial.coeff g f) ≠ 0 →
+    (hr : ∀ a g, ∃ x : k, x ^ p = MvPowerSeries.coeff a (AddMonoidAlgebra.coeff f g))
+    (hd : ∀ a g, MvPowerSeries.coeff a (AddMonoidAlgebra.coeff f g) ≠ 0 →
       (∀ i, p ∣ a i) ∧ (∀ j, p ∣ g j)) :
     ∃ h, h ^ p = f := by
   classical
   have hmon : ∀ g, ∃ h : MvPolynomial (Fin m) (MvPowerSeries (Fin n) k),
-      h ^ p = MvPolynomial.monomial g (MvPolynomial.coeff g f) := by
+      h ^ p = MvPolynomial.monomial g (AddMonoidAlgebra.coeff f g) := by
     intro g
-    by_cases hg : MvPolynomial.coeff g f = 0
+    by_cases hg : AddMonoidAlgebra.coeff f g = 0
     · exact ⟨0, by simp [hg, (Fact.out : p.Prime).ne_zero]⟩
-    obtain ⟨c, hc⟩ := series_exists_root p (MvPolynomial.coeff g f)
+    obtain ⟨c, hc⟩ := series_exists_root p (AddMonoidAlgebra.coeff f g)
       (fun a ↦ hr a g) (fun a ha ↦ (hd a g ha).1)
-    have hcg : MvPolynomial.coeff g f ≠ 0 := hg
-    have ha : ∃ a, MvPowerSeries.coeff a (MvPolynomial.coeff g f) ≠ 0 := by
+    have hcg : AddMonoidAlgebra.coeff f g ≠ 0 := hg
+    have ha : ∃ a, MvPowerSeries.coeff a (AddMonoidAlgebra.coeff f g) ≠ 0 := by
       by_contra! h
       apply hcg
       exact MvPowerSeries.ext fun a ↦ by simpa using h a
@@ -273,11 +273,11 @@ private theorem polynomial_power_coeff (p : ℕ) [Fact p.Prime]
     {k : Type u} [Field k] [CharP k p] (n m : ℕ)
     (h : MvPolynomial (Fin m) (MvPowerSeries (Fin n) k))
     (a : Fin n →₀ ℕ) (g : Fin m →₀ ℕ) :
-    (∃ x : k, x ^ p = MvPowerSeries.coeff a (MvPolynomial.coeff g (h ^ p))) ∧
-    (MvPowerSeries.coeff a (MvPolynomial.coeff g (h ^ p)) ≠ 0 →
+    (∃ x : k, x ^ p = MvPowerSeries.coeff a (AddMonoidAlgebra.coeff (h ^ p) g)) ∧
+    (MvPowerSeries.coeff a (AddMonoidAlgebra.coeff (h ^ p) g) ≠ 0 →
       (∀ i, p ∣ a i) ∧ (∀ j, p ∣ g j)) := by
   classical
-  by_cases hc : MvPowerSeries.coeff a (MvPolynomial.coeff g (h ^ p)) = 0
+  by_cases hc : MvPowerSeries.coeff a (AddMonoidAlgebra.coeff (h ^ p) g) = 0
   · exact ⟨⟨0, by simp [hc, (Fact.out : p.Prime).ne_zero]⟩, fun hn ↦ (hn hc).elim⟩
   have hg : ∀ j, p ∣ g j := by
     intro j
@@ -286,7 +286,7 @@ private theorem polynomial_power_coeff (p : ℕ) [Fact p.Prime]
     rw [← MvPolynomial.map_frobenius_expand p, MvPolynomial.coeff_map,
       MvPolynomial.coeff_expand_of_not_dvd h hj, map_zero, map_zero]
   obtain ⟨b, hb⟩ := exponent_eq_smul p g hg
-  have hcb : MvPolynomial.coeff g (h ^ p) = (MvPolynomial.coeff b h) ^ p := by
+  have hcb : AddMonoidAlgebra.coeff (h ^ p) g = (AddMonoidAlgebra.coeff h b) ^ p := by
     rw [← MvPolynomial.map_frobenius_expand p, MvPolynomial.coeff_map, hb,
       MvPolynomial.coeff_expand_smul p (Fact.out : p.Prime).ne_zero, frobenius_def]
   have ha : ∀ i, p ∣ a i := by
@@ -295,7 +295,7 @@ private theorem polynomial_power_coeff (p : ℕ) [Fact p.Prime]
     apply hc
     rw [hcb, series_coeff_pow_zero p _ a i hi]
   obtain ⟨d, hd⟩ := exponent_eq_smul p a ha
-  refine ⟨⟨MvPowerSeries.coeff d (MvPolynomial.coeff b h), ?_⟩, fun _ ↦ ⟨ha, hg⟩⟩
+  refine ⟨⟨MvPowerSeries.coeff d (AddMonoidAlgebra.coeff h b), ?_⟩, fun _ ↦ ⟨ha, hg⟩⟩
   rw [hcb, hd, series_coeff_pow_smul p]
 
 /-- The intersection of the coefficient subrings is precisely the pth powers in A.
@@ -338,8 +338,8 @@ theorem powerSeriesSubringIntersection
     (AJ : Finset I → Subring (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k)))
     (hAJ : ∀ J f, f ∈ AJ J ↔
       ∀ (a : Fin n →₀ ℕ) (g : Fin m →₀ ℕ),
-        MvPowerSeries.coeff a (MvPolynomial.coeff g f) ∈ kJ J ∧
-        (MvPowerSeries.coeff a (MvPolynomial.coeff g f) ≠ 0 →
+        MvPowerSeries.coeff a (AddMonoidAlgebra.coeff f g) ∈ kJ J ∧
+        (MvPowerSeries.coeff a (AddMonoidAlgebra.coeff f g) ≠ 0 →
           (∀ i, p ∣ a i) ∧ (∀ j, p ∣ g j))) :
     ∀ f : MvPolynomial (Fin m) (MvPowerSeries (Fin n) k),
       (∀ J, f ∈ AJ J) ↔ ∃ h, h ^ p = f := by

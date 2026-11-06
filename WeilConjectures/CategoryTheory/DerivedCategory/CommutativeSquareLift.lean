@@ -98,15 +98,19 @@ private theorem derived_homotopy_square_lift
     simp only [Functor.map_comp, Category.assoc, hb, hg', reassoc_of% hg,
       reassoc_of% ha, h]
   let q := HomotopyCategory.quotient C (ComplexShape.up ℤ)
-  change DerivedCategory.Qh.map (q.map (g ≫ r)) =
-    DerivedCategory.Qh.map (q.map (s ≫ g')) at heq
+  have heqh : DerivedCategory.Qh.map (q.map (g ≫ r)) =
+      DerivedCategory.Qh.map (q.map (s ≫ g')) := by
+    apply (cancel_mono ((DerivedCategory.quotientCompQhIso C).hom.app L₀)).mp
+    simpa only [q, DerivedCategory.quotientCompQhIso_hom_naturality] using
+      congrArg (fun f ↦ (DerivedCategory.quotientCompQhIso C).hom.app K ≫ f) heq
   obtain ⟨P, d₀, hd₀, hcomp⟩ :=
     (MorphismProperty.map_eq_iff_precomp DerivedCategory.Qh
-      (HomotopyCategory.quasiIso C (ComplexShape.up ℤ)) _ _).mp heq
+      (HomotopyCategory.quasiIso C (ComplexShape.up ℤ)) _ _).mp heqh
   obtain ⟨P, rfl⟩ := HomotopyCategory.quotient_obj_surjective P
   obtain ⟨d₀, rfl⟩ := q.map_surjective d₀
-  have hd₀' : IsIso (DerivedCategory.Q.map d₀) :=
-    (DerivedCategory.isIso_Qh_map_iff _).mpr hd₀
+  have hd₀' : IsIso (DerivedCategory.Q.map d₀) := by
+    apply (NatIso.isIso_map_iff (DerivedCategory.quotientCompQhIso C) d₀).mp
+    exact (DerivedCategory.isIso_Qh_map_iff _).mpr hd₀
   have := hd₀'
   have H : Homotopy ((d₀ ≫ g) ≫ r) ((d₀ ≫ s) ≫ g') :=
     HomotopyCategory.homotopyOfEq _ _ (by

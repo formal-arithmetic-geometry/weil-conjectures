@@ -81,11 +81,9 @@ theorem transport_laws :
   · intro K
     simp [transportHom]
   · intro K L M f g
-    induction g using TensorProduct.induction_on with
-    | zero => simp
+    induction g using TensorProduct.inductionOn with
     | tmul b g =>
-      induction f using TensorProduct.induction_on with
-      | zero => simp
+      induction f using TensorProduct.inductionOn with
       | tmul a f => simp [transportHom, composition_tmul]
       | add f f' hf hf' => simp [map_add, hf, hf']
     | add g g' hg hg' => simp [map_add, hg, hg']
@@ -133,10 +131,7 @@ theorem transport_unique (H : ScalarLocalization R C p ⥤ ScalarLocalization R 
           ((1 : Localization.Away p) ⊗ₜ[R] F.map g) ≫ eqToHom (hobj L.obj).symm := by
     exact (conj_eqToHom_iff_heq _ _ (hobj K.obj) (hobj L.obj)).mpr
       (hmap K.obj L.obj g)
-  induction f using TensorProduct.induction_on with
-  | zero =>
-    change H.map (0 : K ⟶ L) = _
-    simp only [Functor.map_zero, map_zero, Limits.zero_comp, Limits.comp_zero]
+  induction f using TensorProduct.inductionOn with
   | tmul a f =>
     calc
       H.map (a ⊗ₜ[R] f : K ⟶ L) =
@@ -172,8 +167,7 @@ theorem transportNat_naturality (η : F ⟶ G) (K L : ScalarLocalization R C p)
       (transportHom R p F _ _ f) =
     composition R D p _ _ _ (transportHom R p G _ _ f)
       ((1 : Localization.Away p) ⊗ₜ[R] η.app K.obj)
-  induction f using TensorProduct.induction_on with
-  | zero => simp
+  induction f using TensorProduct.inductionOn with
   | tmul a f => simp [transportHom, composition_tmul, η.naturality]
   | add f g hf hg => simp [map_add, hf, hg]
 

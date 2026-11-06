@@ -164,7 +164,6 @@ lemma exists_pow_smul_eq_zero_of_isAffineOpen {W : X.Opens} (hW : IsAffineOpen W
     dsimp only [t']
     rw [restrictAppIso_inv_map_apply, ← Functor.map_comp_apply]
     convert this using 4
-    exact congrArg _ (Subsingleton.elim _ _)
   have := isLocalizing_restrict_fromSpec M hW f
   have hz := (IsLocalizedModule.eq_zero_iff (.powers f)
     ((modulesSpecToSheaf.obj (M.restrict hW.fromSpec)).obj.map
@@ -579,7 +578,7 @@ lemma smul_top_eq (M : (Spec R).Modules) (r : R) (x : Γ(M, ⊤)) :
 theorem finrank_eq_of_coe_eq (M : (Spec R).Modules) (p : Submodule R Γ(M, ⊤))
     (p' : Submodule Γ(Spec R, ⊤) Γ(M, ⊤)) (h : (p : Set Γ(M, ⊤)) = p') :
     Module.finrank R p = Module.finrank Γ(Spec R, ⊤) p' := by
-  let j : p ≃+ p' := { Equiv.setCongr h with map_add' _ _ := rfl }
+  let j : p ≃+ p' := { Set.equivOfEq h with map_add' _ _ := rfl }
   have hi : Function.Bijective (Scheme.ΓSpecIso R).inv :=
     ConcreteCategory.bijective_of_isIso (Scheme.ΓSpecIso R).inv
   exact congrArg Cardinal.toNat

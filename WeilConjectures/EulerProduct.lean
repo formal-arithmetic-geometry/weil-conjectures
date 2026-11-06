@@ -68,7 +68,7 @@ theorem Hom.zetaSeries_eq_tprod [Finite k] (f : X ⟶ Spec (.of k))
   · intro i hi
     rcases eq_or_ne i 0 with rfl | hi0
     · simp
-    · rw [PowerSeries.coeff_mk, if_neg hi0, map_sum]
+    · rw [PowerSeries.coeff_mk, ite_eq_right hi0, map_sum]
       simp only [PowerSeries.coeff_mk]
       rw [f.pointCount_eq_sum hi0 (T := T)
         fun x hx ↦ hT x ((Nat.le_of_dvd (Nat.pos_of_ne_zero hi0) hx).trans hi)]

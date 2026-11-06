@@ -41,7 +41,7 @@ private noncomputable def coefficientSubring
   classical
   let c := fun (f : MvPolynomial (Fin m) (MvPowerSeries (Fin n) k))
     (a : Fin n →₀ ℕ) (g : Fin m →₀ ℕ) =>
-    MvPowerSeries.coeff a (MvPolynomial.coeff g f)
+    MvPowerSeries.coeff a (AddMonoidAlgebra.coeff f g)
   let good := fun (a : Fin n →₀ ℕ) (g : Fin m →₀ ℕ) =>
     (∀ i, p ∣ a i) ∧ (∀ j, p ∣ g j)
   let pred := fun f => ∀ a g, c f a g ∈ S ∧ (c f a g ≠ 0 → good a g)
@@ -161,8 +161,8 @@ theorem exists_powerSeries_finite_subfield_family
   let BJ : Finset I → Subring P := fun J => coefficientSubring p k n m (kJ J)
   have hBJ : ∀ J f, f ∈ BJ J ↔
       ∀ (a : Fin n →₀ ℕ) (g : Fin m →₀ ℕ),
-        MvPowerSeries.coeff a (MvPolynomial.coeff g f) ∈ kJ J ∧
-        (MvPowerSeries.coeff a (MvPolynomial.coeff g f) ≠ 0 →
+        MvPowerSeries.coeff a (AddMonoidAlgebra.coeff f g) ∈ kJ J ∧
+        (MvPowerSeries.coeff a (AddMonoidAlgebra.coeff f g) ≠ 0 →
           (∀ i, p ∣ a i) ∧ (∀ j, p ∣ g j)) := by
     intro J f
     rfl

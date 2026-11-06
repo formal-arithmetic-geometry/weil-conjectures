@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.MonoidalCompat
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Localization
 public import Mathlib.CategoryTheory.Localization.Monoidal.Braided
 public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHom

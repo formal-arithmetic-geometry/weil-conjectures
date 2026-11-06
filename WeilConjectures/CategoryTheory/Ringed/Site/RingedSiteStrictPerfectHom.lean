@@ -78,6 +78,15 @@ variable {C : Type c} [Category.{v} C]
   {R : Cᵒᵖ ⥤ CommRingCat.{max c v r}}
   (N : PresheafOfModules.{max c v r} (R ⋙ forget₂ _ _))
 
+noncomputable local instance sp_restrictedUnitSMul
+    (B : PresheafOfModules.{max c v r} (R ⋙ forget₂ _ _))
+    (U : Cᵒᵖ) (W : (Over U.unop)ᵒᵖ) :
+    SMul (((restrictOver R U.unop).obj (unit (R ⋙ forget₂ _ _))).obj W)
+      ((ModuleCat.restrictScalars
+        ((R ⋙ forget₂ CommRingCat.{max c v r} RingCat.{max c v r}).map
+          W.unop.hom.op).hom).obj (B.obj (op W.unop.left))) :=
+  (B.obj (op W.unop.left)).isModule.toSMul
+
 private lemma sp_homObjUnitIsoApp_hom_apply (X : Cᵒᵖ) (φ : (homObj (unit _) N).obj X) :
     (chart_homObjUnitIsoApp.{c, v, r} (R := R) N X).hom φ = φ.app (op (Over.mk (𝟙 X.unop))) (1 :
       R.obj X) :=
@@ -151,10 +160,12 @@ private noncomputable def sp_scalarEvaluation
     apply ModuleCat.hom_ext
     apply LinearMap.ext
     intro x
-    change (φ.app (op ((Over.map f.unop).obj W.unop))).hom x •
-      B.map W.unop.hom.op (B.map f y) =
-        (φ.app (op ((Over.map f.unop).obj W.unop))).hom x •
-          B.map (W.unop.hom ≫ f.unop).op y
+    change (show R.obj (op W.unop.left) from
+        (φ.app (op ((Over.map f.unop).obj W.unop))).hom x) •
+      (show B.obj (op W.unop.left) from B.map W.unop.hom.op (B.map f y)) =
+        (show R.obj (op W.unop.left) from
+          (φ.app (op ((Over.map f.unop).obj W.unop))).hom x) •
+          (show B.obj (op W.unop.left) from B.map (W.unop.hom ≫ f.unop).op y)
     rw [← map_comp_apply]
     rfl
 
@@ -189,10 +200,13 @@ private theorem sp_scalarEvaluation_unit_isIso
     apply ModuleCat.hom_ext
     apply LinearMap.ext
     intro x
-    change (x • O.map W.unop.hom.op _) • B.map W.unop.hom.op y =
-      x • B.map W.unop.hom.op
-        ((chart_homObjUnitIsoApp.{c, v, r} (R := R) O U).hom
-          (chart_homObjUnitInvApp.{c, v, r} (R := R) O _) • y)
+    change ((show R.obj (op W.unop.left) from x) •
+        (show R.obj (op W.unop.left) from O.map W.unop.hom.op _)) •
+        (show B.obj (op W.unop.left) from B.map W.unop.hom.op y) =
+      (show R.obj (op W.unop.left) from x) •
+        (show B.obj (op W.unop.left) from B.map W.unop.hom.op
+          ((show R.obj U from (chart_homObjUnitIsoApp.{c, v, r} (R := R) O U).hom
+            (chart_homObjUnitInvApp.{c, v, r} (R := R) O _)) • y))
     simp only [sp_homObjUnitIsoApp_hom_apply.{c, v, r} (R := R), chart_homObjUnitInvApp_app_one.{c,
       v, r} (R := R)]
     rw [B.map_smul]
@@ -498,6 +512,16 @@ private noncomputable def moduleScalarEvaluation (A B : 𝓜) :
   tensorLift.{c, v, r} J R _ _ _
     (PresheafOfModules.sp_scalarEvaluation.{c, v, r} (R := R.obj) A.val B.val)
 
+private local instance sp_sheafRestrictedUnitSMul
+    (B : 𝓜) (U : Cᵒᵖ) (W : (Over U.unop)ᵒᵖ) :
+    SMul (((PresheafOfModules.restrictOver R.obj U.unop).obj
+      (SheafOfModules.unit ((sheafCompose J
+        (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)).val).obj W)
+      ((ModuleCat.restrictScalars
+        (((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R).obj.map
+          W.unop.hom.op).hom).obj (B.val.obj (op W.unop.left))) :=
+  (B.val.obj (op W.unop.left)).isModule.toSMul
+
 private lemma moduleScalarEvaluation_apply (A B : 𝓜) (U : Cᵒᵖ)
     (y : B.val.obj U)
     (φ : (SheafOfModules.homObj.{max c v r, v, c, max c v r} (R := R) A (SheafOfModules.unit
@@ -671,7 +695,9 @@ private theorem ordinaryEvaluation_isIso_assembly
       have hρ := dualProjectionUnit_apply.{c, v, r} J R E q i hiq U φ W x
       simp only [WeilConjectures.coefficientHomComponent_eq_homComplexπ]
       with_unfolding_all
-        exact h.trans (congrArg (fun z ↦ z • (F.X (i + n)).val.map W.unop.hom.op y) hρ)
+        exact h.trans (congrArg (fun z : R.obj.obj (op W.unop.left) ↦ z •
+          (show (F.X (i + n)).val.obj (op W.unop.left) from
+            (F.X (i + n)).val.map W.unop.hom.op y)) hρ)
     · intro p q n i t hpq hit hiq U y φ
       have h := hneg p q n i t hpq hit hiq
       have h' := congrArg (fun k ↦ k.val.app U

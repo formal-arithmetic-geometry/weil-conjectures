@@ -121,7 +121,7 @@ lemma _root_.CommRingCat.eq_of_comp_eq_of_finite {R S : CommRingCat.{u}} [IsLoca
       rw [← CommRingCat.comp_apply, hσ, CommRingCat.id_apply]⟩
   have hχker : RingHom.ker χ.hom = maximalIdeal S := by
     refine IsLocalRing.eq_maximalIdeal
-      (Ideal.isMaximal_of_isIntegral_of_isMaximal_comap' φ.hom hφ.to_isIntegral _ ?_)
+      (Ideal.isMaximal_of_isIntegral_of_isMaximal_comap φ.hom hφ.to_isIntegral _ ?_)
     rw [RingHom.comap_ker, ← CommRingCat.hom_comp, hχ]
     exact hmax
   have key (χ' : S ⟶ CommRingCat.of K) (h : φ ≫ χ' = evR) (t : K) : χ' (φ (σ t)) = t := by

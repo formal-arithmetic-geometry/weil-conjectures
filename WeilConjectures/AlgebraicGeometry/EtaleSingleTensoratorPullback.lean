@@ -73,7 +73,7 @@ private lemma tensor_comparison_transport
     reassoc_of% (tensor_comparison_natural F δ ea.hom eb.hom),
     Functor.LaxMonoidal.μ_natural_assoc, reassoc_of% hs]
   simp only [Functor.map_comp, Category.assoc]
-  rw [hp, Iso.map_inv_hom_id_assoc]
+  rw [hp, Iso.inv_hom_id_map_assoc]
   have hn : F.map (Q₁.map t) ≫ ε.app p =
       ε.app (a ⊗ b) ≫ Q₂.map (H.map t) := ε.naturality t
   rw [reassoc_of% hn]

@@ -427,7 +427,7 @@ theorem trace_eq_pointScalar_sum {Y : DerivedCategory (PointMod ℓ k)} [HasRigh
     trace_gradedHomHom_shiftedUnitEquiv, linearMapTrace_gradedHom_map_shiftedUnitEquiv,
     Finset.smul_sum, smul_ite, smul_zero]
   rw [Finset.sum_comm]
-  simp only [Finset.sum_ite_eq', hs, if_true]
+  simp only [Finset.sum_ite_eq', hs, ite_true]
   rw [map_sum]
   simp only [map_zsmul]
 

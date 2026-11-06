@@ -52,14 +52,12 @@ private noncomputable def tensorExtendEquiv (R : Type u) (S : Type u) [CommRing 
             ((TensorProduct.mk R S N).map_smul r (show S from s)) }
   have h₁ : ∀ x, invFun (toFun x) = x := by
     intro x
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul s n => rfl
     | add x y hx hy => simp only [map_add, hx, hy]
   have h₂ : ∀ x, toFun (invFun x) = x := by
     intro x
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul s n => rfl
     | add x y hx hy => simp only [map_add, hx, hy]
   exact
@@ -67,8 +65,7 @@ private noncomputable def tensorExtendEquiv (R : Type u) (S : Type u) [CommRing 
       invFun := invFun
       map_add' := toFun.map_add
       map_smul' s x := by
-        induction x using TensorProduct.induction_on with
-        | zero => exact (map_zero toFun).trans (show (0 : T) = s • (0 : T) from (smul_zero s).symm)
+        induction x using TensorProduct.inductionOn with
         | tmul s' n => rfl
         | add x y hx hy =>
           rw [smul_add, map_add, hx, hy, map_add]
@@ -180,15 +177,15 @@ private theorem local_pair_contraction
       rw [h]
       exact hX
     by_cases h₂ : j = 0
-    · have h : T j = Y := by simp only [T, if_neg h₁, if_pos h₂]
+    · have h : T j = Y := by simp only [T, ite_eq_right h₁, ite_eq_left h₂]
       rw [h]
       exact hY
     by_cases h₃ : j = 1
-    · have h : T j = Z := by simp only [T, if_neg h₁, if_neg h₂, if_pos h₃]
+    · have h : T j = Z := by simp only [T, ite_eq_right h₁, ite_eq_right h₂, ite_eq_left h₃]
       rw [h]
       exact hZ
     have h : T j = ModuleCat.of R PUnit.{max u v + 1} := by
-      simp only [T, if_neg h₁, if_neg h₂, if_neg h₃]
+      simp only [T, ite_eq_right h₁, ite_eq_right h₂, ite_eq_right h₃]
     rw [h]
     infer_instance
   have hfinite (j : ℤ) : Module.Finite R (P.X j) := by
@@ -198,15 +195,15 @@ private theorem local_pair_contraction
       rw [h]
       exact hfX
     by_cases h₂ : j = 0
-    · have h : T j = Y := by simp only [T, if_neg h₁, if_pos h₂]
+    · have h : T j = Y := by simp only [T, ite_eq_right h₁, ite_eq_left h₂]
       rw [h]
       exact hfY
     by_cases h₃ : j = 1
-    · have h : T j = Z := by simp only [T, if_neg h₁, if_neg h₂, if_pos h₃]
+    · have h : T j = Z := by simp only [T, ite_eq_right h₁, ite_eq_right h₂, ite_eq_left h₃]
       rw [h]
       exact hfZ
     have h : T j = ModuleCat.of R PUnit.{max u v + 1} := by
-      simp only [T, if_neg h₁, if_neg h₂, if_neg h₃]
+      simp only [T, ite_eq_right h₁, ite_eq_right h₂, ite_eq_right h₃]
     rw [h]
     infer_instance
   have hlow : P.IsStrictlyGE (-1) := by
@@ -316,8 +313,7 @@ private theorem changeFieldEquiv_naturality
     (x : (ModuleCat.extendScalars (algebraMap R K)).obj X) :
     changeFieldEquiv e Y (((ModuleCat.extendScalars (algebraMap R K)).map a).hom x) =
       ((ModuleCat.extendScalars (algebraMap R K')).map a).hom (changeFieldEquiv e X x) := by
-  induction x using TensorProduct.induction_on with
-  | zero => simp
+  induction x using TensorProduct.inductionOn with
   | tmul c x => rfl
   | add x y hx hy => simp only [map_add, hx, hy]
 

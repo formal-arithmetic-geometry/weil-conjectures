@@ -67,7 +67,7 @@ theorem rightDerivedFunctorPlusUnit_single_degree
       a ≫ T.homologyπ n ≫
           (DerivedCategory.Plus.homologyFunctorObjQIso GL n).inv ≫
           (DerivedCategory.Plus.homologyFunctor C n).map
-            (G.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient B).obj L)) ≫
+            (G.rightDerivedFunctorPlusUnit.app L) ≫
           (DerivedCategory.Plus.homologyFunctor C n).map (G.rightDerivedFunctorPlus.map f) ≫
           (G.rightDerivedSingleDegreeComparison n).hom.app X =
         G.map (L.obj.homologyπ n ≫
@@ -91,8 +91,7 @@ theorem rightDerivedFunctorPlusUnit_single_degree
     simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
     rw [DerivedCategory.Plus.homologyFunctorObjQIso_hom_naturality]
     simp only [← Category.assoc, Iso.inv_hom_id, Category.id_comp]
-  have hu := G.rightDerivedFunctorPlusUnit.naturality
-    ((HomotopyCategory.Plus.quotient B).map t)
+  have hu := G.rightDerivedFunctorPlusUnit.naturality t
   have hu' := congrArg H.map hu
   simp only [Functor.map_comp] at hu'
   have hs := G.rightDerivedFunctorPlusUnit_canonical_single X n

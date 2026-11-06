@@ -388,11 +388,7 @@ private noncomputable def tensorPresheafLiftIso
   apply AddMonoidHom.ext
   intro x
   rcases x with ⟨x⟩
-  induction x using TensorProduct.induction_on with
-  | zero =>
-      have hz : (ULift.up (0 : TensorProduct (R.obj.obj U) (M.val.obj U)
-        (N.val.obj U)) : ULift.{max r w} _) = 0 := rfl
-      simp only [hz, map_zero]
+  induction x using TensorProduct.inductionOn with
   | tmul x y => rfl
   | add x y hx hy =>
       have ha : (ULift.up (x + y) : ULift.{max r w} _) = ULift.up x + ULift.up y := rfl
@@ -411,11 +407,7 @@ private theorem tensorDown_factor
       AddCommGrpCat.uliftFunctor.{max r w, m} := by
   ext U x
   rcases x with ⟨x⟩
-  induction x using TensorProduct.induction_on with
-  | zero =>
-      have hz : (ULift.up (0 : TensorProduct (R.obj.obj U) (M.val.obj U)
-        (N.val.obj U)) : ULift.{max r w} _) = 0 := rfl
-      simp only [hz, map_zero]
+  induction x using TensorProduct.inductionOn with
   | tmul x y => rfl
   | add x y hx hy =>
       have ha : (ULift.up (x + y) : ULift.{max r w} _) = ULift.up x + ULift.up y := rfl

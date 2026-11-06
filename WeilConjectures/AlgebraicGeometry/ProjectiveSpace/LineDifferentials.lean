@@ -208,7 +208,7 @@ lemma sum_eq_add_of_ne {M : Type*} [AddCommMonoid M] (f : ULift.{u} (Fin 2) → 
 def coordExp : laurentExponents ({i} : Set (ULift.{u} (Fin 2))) 0 :=
   ⟨Pi.single j 1 - Pi.single i 1, by simp [Finset.sum_sub_distrib], fun l hl ↦ by
     rw [Set.mem_singleton_iff] at hl
-    simp only [Pi.sub_apply, Pi.single_apply, if_neg hl, sub_zero]
+    simp only [Pi.sub_apply, Pi.single_apply, ite_eq_right hl, sub_zero]
     split_ifs <;> norm_num⟩
 
 /-- The affine coordinate `xⱼ / xᵢ` on `D₊(xᵢ)`. -/

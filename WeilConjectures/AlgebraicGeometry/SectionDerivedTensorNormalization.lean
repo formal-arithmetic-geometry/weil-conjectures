@@ -643,7 +643,7 @@ private theorem square_for_lax {C₁ C₂ D₁ D₂ : Type*}
     γ.inv.app (a ⊗ b) ≫ k ≫ (γ.inv.app a ⊗ₘ γ.inv.app b)) (h a b)
   simp only [Category.assoc, tensorHom_comp_tensorHom, Iso.hom_inv_id_app,
     id_tensorHom_id, Category.comp_id, Iso.inv_hom_id_app_assoc,
-    Functor.Monoidal.map_μ_δ_assoc] at hh
+    Functor.Monoidal.μ_δ_map_assoc] at hh
   dsimp only [Functor.comp_obj] at hh
   change (d.app (Q₁.obj a)).app (Q₁.obj b) ≫ (γ.inv.app a ⊗ₘ γ.inv.app b) ≫ 𝟙 _ = _
   erw [Category.comp_id]

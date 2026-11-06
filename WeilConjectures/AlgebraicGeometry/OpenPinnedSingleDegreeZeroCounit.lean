@@ -6,6 +6,8 @@ Authors: Bin Wu
 
 module
 public import WeilConjectures.AlgebraicGeometry.PinnedSingleBaseChangeShift
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.SingleComplexOpenRestrictionData
 import WeilConjectures.AlgebraicGeometry.OpenPinnedCounitHomotopyRestriction
 import WeilConjectures.AlgebraicGeometry.OpenPinnedSingleTensorRestrictionFactors
@@ -33,10 +35,10 @@ def openPinnedSingleDegreeZeroCounit
       (DerivedCategory.singleFunctor.{w} _ 0).obj ((Scheme.Modules.tensorPullback k).obj M) :=
   let ε := (Classical.choose
     (Classical.choose_spec exists_derivedPullbackComposition.{u, w})) k
-  ε.app ((HomotopyCategory.singleFunctor _ 0).obj M) ≫
-    DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
+  cast (by rfl) (ε.app ((HomotopyCategory.singleFunctor _ 0).obj M) ≫
+    DerivedCategory.Qh.{w}.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
       ((HomologicalComplex.singleMapHomologicalComplex
-        (Scheme.Modules.tensorPullback k) (ComplexShape.up ℤ) 0).hom.app M))
+        (Scheme.Modules.tensorPullback k) (ComplexShape.up ℤ) 0).hom.app M)))
 
 private theorem assembleCounitSquare
     {C : Type*} [Category C] {A B C₀ D E F G H I J : C}
@@ -55,7 +57,6 @@ private theorem assembleCounitSquare
     _ = i ≫ k ≫ l ≫ h := by rw [← Category.assoc j, ← hn, Category.assoc]
     _ = s ≫ l ≫ h := by rw [← Category.assoc i, hR]
 
-set_option maxHeartbeats 800000 in
 -- Nested derived and homotopy comparisons require additional typeclass reduction.
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Restriction of the pinned counit, before applying any direct image.

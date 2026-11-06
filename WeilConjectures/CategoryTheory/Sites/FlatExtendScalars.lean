@@ -107,7 +107,7 @@ lemma ModuleCat.ExtendScalars.isIso_biproductDesc_unit_comp_map_smul (M : Module
             change b.repr (r • b k) = _
             rw [map_smul, Module.Basis.repr_self]
           simp only [e, Finsupp.smul_apply, Finsupp.single_apply, smul_eq_mul, mul_ite, mul_one,
-            mul_zero, ite_smul, zero_smul, Finset.sum_ite_eq', Finset.mem_univ, if_true,
+            mul_zero, ite_smul, zero_smul, Finset.sum_ite_eq', Finset.mem_univ, ite_true,
             RingHom.id_apply] }
   refine ⟨biproduct.lift coord, ?_, ?_⟩
   · apply biproduct.hom_ext'
@@ -197,7 +197,7 @@ theorem HasLocallyTrivialRelations.comp_extendScalars {P : Cᵒᵖ ⥤ ModuleCat
         TensorProduct.equivFinsuppOfBasisLeft_apply_tmul_apply b _ _ k'
     trans ∑ p, B (j, k') p • z p
     · simp only [Module.Basis.repr_self, Finsupp.single_apply, ite_smul, one_smul, zero_smul,
-        Finset.sum_ite_eq', Finset.mem_univ, if_true]
+        Finset.sum_ite_eq', Finset.mem_univ, ite_true]
       exact hz (j, k')
     · refine Finset.sum_congr rfl fun p _ ↦ ?_
       have h₁ := TensorProduct.equivFinsuppOfBasisLeft_apply_tmul_apply b

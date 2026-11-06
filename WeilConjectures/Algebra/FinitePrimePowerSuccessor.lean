@@ -94,13 +94,13 @@ theorem finite_torsion_prime_power_successor
   let i : ULift.{u + 1} (ZMod a) →ₗ[ULift.{u + 1} ℤ]
       ULift.{u + 1} (ZMod (a * r)) :=
     { toFun := fun x ↦ ⟨i₀ x.down⟩
-      map_add' := by intro x y; exact ULift.ext _ _ (i₀.map_add x.down y.down)
-      map_smul' := by intro z x; exact ULift.ext _ _ (i₀.map_zsmul z.down x.down) }
+      map_add' := by intro x y; exact ULift.ext (i₀.map_add x.down y.down)
+      map_smul' := by intro z x; exact ULift.ext (i₀.map_zsmul z.down x.down) }
   let q : ULift.{u + 1} (ZMod (a * r)) →ₗ[ULift.{u + 1} ℤ]
       ULift.{u + 1} (ZMod r) :=
     { toFun := fun y ↦ ⟨q₀ y.down⟩
-      map_add' := by intro x y; exact ULift.ext _ _ (q₀.map_add x.down y.down)
-      map_smul' := by intro z x; exact ULift.ext _ _ (q₀.map_zsmul z.down x.down) }
+      map_add' := by intro x y; exact ULift.ext (q₀.map_add x.down y.down)
+      map_smul' := by intro z x; exact ULift.ext (q₀.map_zsmul z.down x.down) }
   have hiq : q.comp i = 0 := by
     ext x
     exact hcomp x.down
@@ -112,14 +112,14 @@ theorem finite_torsion_prime_power_successor
       constructor
       · intro hy
         obtain ⟨x, hx⟩ := (hexact y.down).mp (congrArg ULift.down hy)
-        exact ⟨⟨x⟩, ULift.ext _ _ hx⟩
+        exact ⟨⟨x⟩, ULift.ext hx⟩
       · rintro ⟨x, rfl⟩
-        exact ULift.ext _ _ (hcomp x.down)
+        exact ULift.ext (hcomp x.down)
     · intro x y h
-      exact ULift.ext _ _ (hi (congrArg ULift.down h))
+      exact ULift.ext (hi (congrArg ULift.down h))
     · intro y
       obtain ⟨x, hx⟩ := hq y.down
-      exact ⟨⟨x⟩, ULift.ext _ _ hx⟩
+      exact ⟨⟨x⟩, ULift.ext hx⟩
   have hmiddle := hext S hS hind hprime
   rw [pow_succ]
   exact hiso (Iso.refl _) hmiddle

@@ -56,7 +56,7 @@ private theorem evaluation_isRightAdjoint (n : ℕ) :
       rw [ObjectProperty.eqToHom_hom, eqToHom_app]
       rfl)
   let β := (Functor.mapDerivedCategoryCompIso E.inverse
-      (SheafOfModules.systemEvaluation R n)).symm ≪≫
+      (SheafOfModules.systemEvaluation R n)) ≪≫
     Functor.mapDerivedCategoryNatIso η
   exact ((d.adjunction.comp E.mapDerivedCategory.toAdjunction).ofNatIsoRight β).isRightAdjoint
 

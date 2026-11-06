@@ -113,15 +113,13 @@ lemma liftBaseChange_lTensor_apply {σ₁ : P →ₗ[R] S ⊗[R] Q} {σ₂ : P' 
     {f : P →ₗ[R] P'} {g : Q →ₗ[R] Q'} (h : ∀ p, σ₂ (f p) = g.lTensor S (σ₁ p))
     (x : S ⊗[R] P) :
     σ₂.liftBaseChange S (f.lTensor S x) = g.lTensor S (σ₁.liftBaseChange S x) := by
-  induction x using TensorProduct.induction_on with
-  | zero => simp
+  induction x using TensorProduct.inductionOn with
   | tmul a p => rw [lTensor_tmul, liftBaseChange_tmul, liftBaseChange_tmul, h, lTensor_smul_apply]
   | add x y hx hy => rw [map_add, map_add, hx, hy, map_add, map_add]
 
 lemma liftBaseChange_mk_one_apply (x : S ⊗[R] Q) :
     (TensorProduct.mk R S Q 1).liftBaseChange S x = x := by
-  induction x using TensorProduct.induction_on with
-  | zero => simp
+  induction x using TensorProduct.inductionOn with
   | tmul a q => rw [liftBaseChange_tmul, mk_apply, smul_tmul', smul_eq_mul, mul_one]
   | add x y hx hy => rw [map_add, hx, hy]
 
@@ -256,7 +254,6 @@ lemma amitsurCosimplicialObject_δ_hom {n : ℕ} (i : Fin (n + 2)) :
     ((amitsurCosimplicialObject A B M).δ i).hom =
       (amitsurMap A B i.succAbove).toLinearMap.lTensor M := by
   simp [CosimplicialObject.δ, amitsurCosimplicialObject, SimplexCategory.δ]
-  rfl
 
 /-- The algebra homomorphism `B^{⊗ (n + 2)} → B ⊗[A] B^{⊗ (n + 1)}` sending
 `b₀ ⊗ b₁ ⊗ ⋯ ⊗ bₙ₊₁` to `b₀ ⊗ (b₁ ⊗ ⋯ ⊗ bₙ₊₁)`. -/
@@ -346,8 +343,7 @@ lemma amitsurCodegeneracy_δ_zero (n : ℕ)
     LinearMap.liftBaseChange_mk_one_apply]
   intro p
   rw [LinearMap.lTensor_id, LinearMap.id_apply, mk_apply]
-  induction p using TensorProduct.induction_on with
-  | zero => simp
+  induction p using TensorProduct.inductionOn with
   | tmul m t =>
     rw [LinearMap.lTensor_tmul, amitsurSplitFirstAux_tmul, AlgHom.toLinearMap_apply,
       ← AlgHom.comp_apply, amitsurSplitFirst_comp_amitsurMap_succAbove_zero, includeRight_apply,
@@ -363,14 +359,12 @@ lemma amitsurCodegeneracy_δ_succ (n : ℕ) (i : Fin (n + 2))
   rw [amitsurCodegeneracy, amitsurCodegeneracy, LinearMap.restrictScalars_apply,
     LinearMap.restrictScalars_apply]
   refine LinearMap.liftBaseChange_lTensor_apply (fun p ↦ ?_) x
-  induction p using TensorProduct.induction_on with
-  | zero => simp
+  induction p using TensorProduct.inductionOn with
   | tmul m t =>
     rw [LinearMap.lTensor_tmul, amitsurSplitFirstAux_tmul, amitsurSplitFirstAux_tmul,
       AlgHom.toLinearMap_apply, ← AlgHom.comp_apply,
       amitsurSplitFirst_comp_amitsurMap_succAbove_succ, AlgHom.comp_apply]
-    induction amitsurSplitFirst A B n t using TensorProduct.induction_on with
-    | zero => simp
+    induction amitsurSplitFirst A B n t using TensorProduct.inductionOn with
     | tmul b t' =>
       rw [map_tmul, _root_.TensorProduct.leftComm_tmul, _root_.TensorProduct.leftComm_tmul,
         LinearMap.lTensor_tmul, LinearMap.lTensor_tmul, AlgHom.id_apply,
@@ -385,8 +379,7 @@ lemma amitsurCodegeneracy_δ_one (x : B ⊗[A] (M ⊗[A] (⨂[A] _ : Fin 1, B)))
   rw [amitsurCodegeneracy, amitsurCodegeneracyAugmentation, LinearMap.restrictScalars_apply,
     LinearMap.restrictScalars_apply]
   refine LinearMap.liftBaseChange_lTensor_apply (fun p ↦ ?_) x
-  induction p using TensorProduct.induction_on with
-  | zero => simp
+  induction p using TensorProduct.inductionOn with
   | tmul m t =>
     rw [LinearMap.lTensor_tmul, amitsurSplitFirstAux_tmul, AlgHom.toLinearMap_apply,
       ← AlgHom.comp_apply, amitsurSplitFirst_comp_amitsurMap_succAbove_one, AlgHom.comp_apply,

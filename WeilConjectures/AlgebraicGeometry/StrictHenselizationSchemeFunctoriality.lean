@@ -30,7 +30,7 @@ set_option backward.isDefEq.respectTransparency false
 private theorem fullStrictHenselizationCone
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) :
-    let D := CategoryOfElements.π (pointSmallEtale s).fiber ⋙
+    let D := Functor.Elements.π (pointSmallEtale s).fiber ⋙
       Etale.forget S ⋙ Over.forget S
     ∃ π : (Functor.const _).obj (strictLocalization s) ⟶ D,
       Nonempty (IsLimit (Cone.mk _ π)) ∧
@@ -38,7 +38,7 @@ private theorem fullStrictHenselizationCone
   classical
   let N := (equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse
   let Q := N ⋙ Functor.Elements.precomp (AffineEtale.Spec S) (pointSmallEtale s).fiber
-  let D := CategoryOfElements.π (pointSmallEtale s).fiber ⋙
+  let D := Functor.Elements.π (pointSmallEtale s).fiber ⋙
     Etale.forget S ⋙ Over.forget S
   have : Q.Initial := (strictHenselizationAffineProperties s).1
   let A := Q ⋙ D
@@ -136,7 +136,7 @@ theorem exists_strictHenselizationSchemeMap
   obtain ⟨πs, ⟨hs⟩, hqs⟩ := fullStrictHenselizationCone s
   obtain ⟨πt, _, hqt⟩ := fullStrictHenselizationCone t
   let PB := pointedPullback hst
-  let D := CategoryOfElements.π (pointSmallEtale s).fiber ⋙
+  let D := Functor.Elements.π (pointSmallEtale s).fiber ⋙
     Etale.forget S ⋙ Over.forget S
   let π : (Functor.const _).obj (strictLocalization t) ⟶ D :=
     { app := fun j ↦ πt.app (PB.obj j) ≫ pullback.fst j.1.hom g

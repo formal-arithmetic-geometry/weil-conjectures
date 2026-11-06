@@ -130,7 +130,7 @@ theorem exists_etale_iso_cover_of_proetale_local_iso_section
     ProEtale.supportSiteComparisonCoefficientPullbackIso (ModuleCat.{u + 1} B) V.hom
   let d : T.mapDerivedCategory ≅ R.mapDerivedCategory ⋙ P.mapDerivedCategory :=
     Functor.mapDerivedCategoryNatIso (restrictionComparisonIso X V B) ≪≫
-      Functor.mapDerivedCategoryCompIso R P
+      (Functor.mapDerivedCategoryCompIso R P).symm
   let e := Functor.mapDerivedCategorySquareIso c
   let s' := P.mapDerivedCategory.mapIso s
   let t : H.mapDerivedCategory.obj (G.mapDerivedCategory.obj A) ≅

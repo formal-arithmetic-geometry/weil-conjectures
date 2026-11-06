@@ -110,8 +110,7 @@ theorem quasiCoherent_algebra_changeOfRings (Y : Scheme.{u})
     (SheafOfModules.changeOfRingsPresheaf.{u, u, u} φ.right P)).app (op W)
   have hcomp : ∀ z, e.hom.val.app (op W) (η z) = l z := by
     intro z
-    induction z using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction z using TensorProduct.inductionOn with
     | tmul c p => exact (he W c p).trans (hl c p).symm
     | add x y hx hy => simp only [map_add, hx, hy]
   have hbij : Function.Bijective (fun z ↦ e.hom.val.app (op W) (η z)) := by

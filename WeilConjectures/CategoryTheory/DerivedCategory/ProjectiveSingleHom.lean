@@ -59,7 +59,6 @@ lemma singleFunctorCompHomologyFunctorIso_inv_app_zero (A : C) :
       SingleFunctors.evaluation_map, singleFunctorsPostcompQIso_hom_hom, NatTrans.id_app,
       Functor.associator_hom_app, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app]
     erw [CategoryTheory.Functor.map_id, id_comp, id_comp]
-    rfl
   rw [← cancel_mono ((singleFunctorCompHomologyFunctorIso C 0).hom.app A), Iso.inv_hom_id_app,
     this]
   simp

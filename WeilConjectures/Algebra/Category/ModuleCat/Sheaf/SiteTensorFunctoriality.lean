@@ -82,9 +82,8 @@ theorem siteTensorSecondMap_naturality
   apply ModuleCat.hom_ext
   apply TensorProduct.ext'
   intro x y
-  change M.map f x ⊗ₜ[A.obj.obj V] (g.app V) (N.map f y) =
-    M.map f x ⊗ₜ[A.obj.obj V] N'.map f (g.app U y)
-  rw [PresheafOfModules.naturality_apply]
+  exact congrArg (fun z : N'.obj V ↦ M.restrictₛₗ f x ⊗ₜ[A.obj.obj V] z)
+    (PresheafOfModules.naturality_apply g f y)
 
 /-- Tensor a presheaf morphism in the second variable, sectionwise `id ⊗ g`.
 Source: Stacks, Section 03EK (blueprint: def-pur-sheaf-tensor-product). -/

@@ -6,6 +6,7 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Field.ULift
 public import Mathlib.Algebra.Group.Finsupp
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
@@ -46,7 +47,7 @@ private noncomputable def coproduct_preserved_of_finite_subcoproducts
             change F.map (Sigma.ι _ i.as) ≫ F.map _ ≫ _ =
               F.map (Sigma.ι _ i.as) ≫ _ ≫ 𝟙 _
             rw [Category.comp_id, ← F.map_comp_assoc]
-            simp only [CoproductsFromFiniteFiltered.liftToFinsetObj_map, Sigma.ι_desc]
+            simp only [CoproductsFromFiniteFiltered.liftToFinsetObj_map, Sigma.ι_comp_desc]
             have h₁ := (fin t').fac (Cofan.mk s.pt (fun i ↦ s.ι.app i.val))
               ⟨⟨i.as.val, f.down.down i.as.property⟩⟩
             have h₂ := (fin t).fac (Cofan.mk s.pt (fun i ↦ s.ι.app i.val)) i
@@ -78,7 +79,7 @@ private noncomputable def coproduct_preserved_of_finite_subcoproducts
       F.map (Sigma.ι _ i.as) ≫ F.map _ ≫ hc.desc (lift s)
     rw [← F.map_comp_assoc, ← F.map_comp_assoc]
     simp only [CoproductsFromFiniteFiltered.finiteSubcoproductsCocone_ι_app,
-      Sigma.ι_desc]
+      Sigma.ι_comp_desc]
     have hh := hc.fac (lift s) t
     have hh' := congrArg (fun k ↦ F.map (Sigma.ι (fun x : t ↦ a x.val.as) i.as) ≫ k) hh
     have hfac := (fin t).fac (Cofan.mk s.pt (fun i ↦ s.ι.app i.val)) i
@@ -86,7 +87,7 @@ private noncomputable def coproduct_preserved_of_finite_subcoproducts
     change F.map (Sigma.ι (fun x : t ↦ a x.val.as) i.as) ≫
       F.map (Sigma.desc (fun x : t ↦ Sigma.ι a x.val.as)) ≫
         hc.desc (lift s) = s.ι.app i.as.val at hright
-    simp only [← F.map_comp_assoc, Sigma.ι_desc] at hright
+    simp only [← F.map_comp_assoc, Sigma.ι_comp_desc] at hright
     exact (hm i.as.val).trans hright.symm
 
 open CategoryTheory.Limits in

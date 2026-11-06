@@ -74,15 +74,14 @@ private theorem tensor_polynomial_coeff
   intro p
   apply MvPolynomial.ext
   intro d
-  change MvPolynomial.coeff d (MvPolynomial.rTensorAlgEquiv (1 ⊗ₜ[S] p)) = _
+  change AddMonoidAlgebra.coeff (MvPolynomial.rTensorAlgEquiv (1 ⊗ₜ[S] p)) d = _
   simp [MvPolynomial.coeff_rTensorAlgEquiv_tmul, MvPolynomial.coeff_map]
 
 private theorem tensor_map_linear
     {S A B P : Type*} [CommRing S] [CommRing A] [CommRing B] [CommRing P]
     [Algebra S A] [Algebra S B] [Algebra S P] (f : A →ₐ[S] B) (x : A ⊗[S] P) :
     Algebra.TensorProduct.map f (AlgHom.id S P) x = f.toLinearMap.rTensor P x := by
-  induction x using TensorProduct.induction_on with
-  | zero => simp
+  induction x using TensorProduct.inductionOn with
   | tmul a p => rfl
   | add x y hx hy => simp [hx, hy]
 
@@ -152,8 +151,7 @@ theorem exists_stage_tensorPolynomialEquations
   let s (i : J) : P →+* A i ⊗[S] P := Algebra.TensorProduct.includeRight.toRingHom
   let r : P →+* R ⊗[S] P := Algebra.TensorProduct.includeRight.toRingHom
   have ta (i j : J) (h : i ≤ j) (x : A i ⊗[S] P) : ar j (t i j h x) = ar i x := by
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul x p =>
       change ((colimit.ι F j.val) (F.map (homOfLE h) x)) ⊗ₜ[S] p =
         (colimit.ι F i.val x) ⊗ₜ[S] p
@@ -172,8 +170,7 @@ theorem exists_stage_tensorPolynomialEquations
     simp
   have tt (i j k : J) (hij : i ≤ j) (hjk : j ≤ k) (x : A i ⊗[S] P) :
       t j k hjk (t i j hij x) = t i k (hij.trans hjk) x := by
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul x p =>
       change (F.map (homOfLE hjk) (F.map (homOfLE hij) x)) ⊗ₜ[S] p =
         (F.map (homOfLE (hij.trans hjk)) x) ⊗ₜ[S] p

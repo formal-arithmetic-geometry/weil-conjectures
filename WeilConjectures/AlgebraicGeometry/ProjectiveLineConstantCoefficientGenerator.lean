@@ -98,7 +98,7 @@ private theorem p1_generator_cyclic
             rw [h2, nsmul_eq_mul, mul_one]
            _ = e (c₀ • (c • (η.app _).hom r)) := by rw [← map_nsmul, smul_comm]
            _ = 0 := by rw [hφ0, smul_zero, map_zero]
-    refine AddCommGrpCat.hom_ext (AddMonoidHom.ext fun ⟨a⟩ ↦ ULift.ext _ _ ?_)
+    refine AddCommGrpCat.hom_ext (AddMonoidHom.ext fun ⟨a⟩ ↦ ULift.ext ?_)
     change c • (ZMod.castHom hm (ZMod m) a) = (0 : ZMod m)
     rw [nsmul_eq_mul, h1, zero_mul]
   · intro y

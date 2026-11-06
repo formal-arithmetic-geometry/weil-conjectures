@@ -51,7 +51,7 @@ noncomputable def algEquivOfTranscendenceBasis [IsAlgClosed K] [IsAlgClosed L] (
     (hv.1.aevalEquiv.symm.trans (MvPolynomial.renameEquiv R e)).trans hw.1.aevalEquiv
   AlgEquiv.ofRingEquiv (f := IsAlgClosure.equivOfEquiv K L eS.toRingEquiv) fun r ↦ by
     rw [IsScalarTower.algebraMap_apply R (Algebra.adjoin R (Set.range v)) K,
-      IsAlgClosure.equivOfEquiv_algebraMap, AlgEquiv.coe_ringEquiv, AlgEquiv.commutes,
+      IsAlgClosure.equivOfEquiv_algebraMap, AlgEquiv.coe_toRingEquiv, AlgEquiv.commutes,
       ← IsScalarTower.algebraMap_apply]
 
 end Classification

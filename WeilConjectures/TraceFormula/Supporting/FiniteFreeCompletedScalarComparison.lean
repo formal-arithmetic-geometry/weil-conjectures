@@ -611,8 +611,8 @@ private theorem towerZeroLift_exists
     apply Pi.hom_ext
     intro n
     simp only [α, φ, towerTransitionEndomorphism, towerProductShift, comp_sub,
-      Category.comp_id, Category.assoc, Pi.lift_π, sub_comp, zero_comp]
-    rw [← Category.assoc, Pi.lift_π]
+      Category.comp_id, Category.assoc, Pi.lift_comp_π, sub_comp, zero_comp]
+    rw [← Category.assoc, Pi.lift_comp_π]
     exact sub_eq_zero.mpr (ha P n).symm
   let β P := CochainComplex.mappingCocone.lift (φ P) (α P) 0 (by simp [hα])
   have hβ P i : (β P).f i =
@@ -626,7 +626,7 @@ private theorem towerZeroLift_exists
             Limits.Pi.map (fun n ↦ (G.map f).app (op n)) := by
           apply Pi.hom_ext
           intro n
-          simp only [α, Category.assoc, Pi.lift_π, Pi.map_π, Pi.lift_π_assoc]
+          simp only [α, Category.assoc, Pi.lift_comp_π, Pi.map_π, Pi.lift_comp_π_assoc]
           exact (a n).naturality f
         ext i : 1
         change (F.map f).f i ≫ (β Q).f i =
@@ -710,7 +710,7 @@ theorem completedScalarChainComparison_existsUnique :
           (completedScalarRoosEndomorphism l E L ι Y P)).f i = _ at hh
       rw [← Category.assoc, hh]
       have hp := congrArg (fun f ↦ (f.f i).val.app U)
-        (Pi.lift_π (fun n ↦ (a n).app P) n)
+        (Pi.lift_comp_π (fun n ↦ (a n).app P) n)
       exact (ConcreteCategory.congr_hom hp _).trans
         (completedScalarModuleArrow_tensor l E L ι Y (P.X i) n U s x)
     · exact hs

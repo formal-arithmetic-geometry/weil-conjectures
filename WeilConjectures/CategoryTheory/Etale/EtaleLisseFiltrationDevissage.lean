@@ -10,6 +10,7 @@ public import Mathlib.CategoryTheory.ObjectProperty.Kernels
 public import Mathlib.CategoryTheory.ObjectProperty.Extensions
 import WeilConjectures.CategoryTheory.SmoothBaseChange.CohomologyInWeakSerreSubcategory
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
+public import Mathlib.CategoryTheory.Abelian.Exact
 
 /-!
 # Finite-filtration devissage through a triangulated derived functor

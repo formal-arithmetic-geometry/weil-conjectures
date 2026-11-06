@@ -209,7 +209,7 @@ theorem additiveCechCoefficientMap_column_quasiIso
       (coefficient_sections_iso X U n).hom ≫ E.map (I.ι.f 0) := by
     apply Pi.hom_ext
     intro y
-    erw [additiveCechCoefficientMap, Pi.lift_π]
+    erw [additiveCechCoefficientMap, Pi.lift_comp_π]
     apply AddCommGrpCat.ext
     intro x
     exact (coefficient_sections_coordinate X U I n y x).symm

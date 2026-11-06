@@ -188,11 +188,11 @@ lemma forget₂_map_rightDerivedFunctorPlusUnit_app (f : X ⟶ Y)
     (M : HomotopyCategory.Plus (Sheaf X.smallEtaleTopology
       (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)))) :
     (Φ Y).mapDerivedCategoryPlus.map
-        (((f)_*[ModuleCat.{u + 1} (ULift.{u + 1} ℤ)]).rightDerivedFunctorPlusUnit.app M) ≫
+        (((f)_*[ModuleCat.{u + 1} (ULift.{u + 1} ℤ)]).rightDerivedFunctorPlusUnith.app M) ≫
       (rightDerivedLowerStarForget₂ f).app (DerivedCategory.Plus.Qh.obj M) =
     (Φ Y).mapDerivedCategoryPlusFactorsh.hom.app
         (((f)_*[ModuleCat.{u + 1} (ULift.{u + 1} ℤ)]).mapHomotopyCategoryPlus.obj M) ≫
-      ((f)_*[AddCommGrpCat.{u + 1}]).rightDerivedFunctorPlusUnit.app
+      ((f)_*[AddCommGrpCat.{u + 1}]).rightDerivedFunctorPlusUnith.app
         ((Φ X).mapHomotopyCategoryPlus.obj M) ≫
       ((f)_*[AddCommGrpCat.{u + 1}]).rightDerivedFunctorPlus.map
         ((Φ X).mapDerivedCategoryPlusFactorsh.inv.app M) := by
@@ -242,17 +242,17 @@ lemma isIso_comp_rightDerivedFunctorPlusUnit_forget₂_iff (sq : CommSq g' f' f 
     IsIso (DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus
           (baseChangeMap AddCommGrpCat.{u + 1} sq)).app
           ((Φ X).mapHomotopyCategoryPlus.obj K)) ≫
-        (f')_*[AddCommGrpCat.{u + 1}].rightDerivedFunctorPlusUnit.app
+        (f')_*[AddCommGrpCat.{u + 1}].rightDerivedFunctorPlusUnith.app
           (((g')^*[AddCommGrpCat.{u + 1}]).mapHomotopyCategoryPlus.obj
             ((Φ X).mapHomotopyCategoryPlus.obj K))) ↔
       IsIso (DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus
           (baseChangeMap (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) sq)).app K) ≫
-        (f')_*[ModuleCat.{u + 1} (ULift.{u + 1} ℤ)].rightDerivedFunctorPlusUnit.app
+        (f')_*[ModuleCat.{u + 1} (ULift.{u + 1} ℤ)].rightDerivedFunctorPlusUnith.app
           (((g')^*[ModuleCat.{u + 1} (ULift.{u + 1} ℤ)]).mapHomotopyCategoryPlus.obj K)) := by
   have h₁ := (Φ Y').mapDerivedCategoryPlusFactorsh.hom.naturality
     ((NatTrans.mapHomotopyCategoryPlus
       (baseChangeMap (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) sq)).app K)
-  have h₃ := ((f')_*[AddCommGrpCat.{u + 1}]).rightDerivedFunctorPlusUnit.naturality
+  have h₃ := ((f')_*[AddCommGrpCat.{u + 1}]).rightDerivedFunctorPlusUnith.naturality
     ((NatTrans.mapHomotopyCategoryPlus (upperStarForget₂ (ULift.{u + 1} ℤ) g').natTrans).app K)
   exact isIso_map_comp_iff_of_reflectsIsomorphisms _ isIso_forget₂_mapDerivedCategoryPlus_map_iff
     _ _ _ _ _ _ _ _ _ (forget₂_map_rightDerivedFunctorPlusUnit_app f' _) _ _ h₁ _ _

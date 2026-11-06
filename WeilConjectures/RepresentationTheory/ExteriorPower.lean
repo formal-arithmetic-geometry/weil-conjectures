@@ -182,8 +182,7 @@ theorem card_le_filter_append {j l : ℕ} (u : Fin j → P) (x : Fin l → V) :
 theorem wedgeSection_mem_countSpan {j l : ℕ} (h : j + l = n)
     (t : ⋀[k]^j P ⊗[k] ⋀[k]^l (V ⧸ P)) : wedgeSection n s h t ∈ countSpan P n j := by
   subst h
-  induction t using TensorProduct.induction_on with
-  | zero => simp
+  induction t using TensorProduct.inductionOn with
   | add x y hx hy => simpa using add_mem hx hy
   | tmul x y =>
     have hx : x ∈ Submodule.span k (Set.range (ιMulti k j)) := by
@@ -236,8 +235,8 @@ theorem toGraded_surjective (hs : ∀ x, P.mkQ (s x) = x) {j l : ℕ} (h : j + l
       exact ιMulti_mem_countSpan P _ v hlt
     -- the wedge `v'` with the entries outside `J` replaced by the sections of their classes
     set v' : Fin (j + l) → V := fun i ↦ if i ∈ J then v i else s (P.mkQ (v i))
-    have hv'J (i) (hi : i ∈ J) : v' i = v i := if_pos hi
-    have hv'Jc (i) (hi : i ∉ J) : v' i = s (P.mkQ (v i)) := if_neg hi
+    have hv'J (i) (hi : i ∈ J) : v' i = v i := ite_eq_left hi
+    have hv'Jc (i) (hi : i ∉ J) : v' i = s (P.mkQ (v i)) := ite_eq_right hi
     have hJmem (i) (hi : i ∈ J) : v i ∈ P := (Finset.mem_filter.1 hi).2
     have hdiff : ιMulti k (j + l) (v' + (v - v')) - ιMulti k (j + l) v' ∈
         countSpan P (j + l) (j + 1) := by

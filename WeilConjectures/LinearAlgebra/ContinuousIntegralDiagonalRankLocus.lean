@@ -97,18 +97,18 @@ private theorem clear_extra_columns
     have hGq : (G * q) i j = G i j := by
       rw [Matrix.mul_apply, Finset.sum_eq_single k]
       · have hk : k.val < r := hi
-        rw [hc i k hk, hD, dif_pos (by exact ⟨rfl, hi⟩)]
+        rw [hc i k hk, hD, dite_eq_left (by exact ⟨rfl, hi⟩)]
         have hh := hq k j
-        rw [dif_pos hk, dif_pos (by exact ⟨hk, by omega⟩)] at hh
+        rw [dite_eq_left hk, dite_eq_left (by exact ⟨hk, by omega⟩)] at hh
         simpa only [k, Fin.castLE, Fin.eta] using hh
       · intro b _ hbk
         by_cases hb : b.val < r
-        · rw [hc i b hb, hD, dif_neg, zero_mul]
+        · rw [hc i b hb, hD, dite_eq_right, zero_mul]
           intro h
           exact hbk (Fin.ext h.1.symm)
         · rw [hz b j (by omega), mul_zero]
       · simp
-    rw [hGq, sub_self, hD, dif_neg]
+    rw [hGq, sub_self, hD, dite_eq_right]
     intro h
     omega
 
@@ -145,7 +145,7 @@ private theorem diagonal_corner_eq {A : Type u} [CommRing A] [IsDomain A]
   have hi : r ≤ i.val := by omega
   have hj : r ≤ j.val := by omega
   have hDz : D i j = 0 := by
-    rw [hD, dif_neg]
+    rw [hD, dite_eq_right]
     omega
   rw [hDz]
   by_contra hn
@@ -166,7 +166,7 @@ private theorem diagonal_corner_eq {A : Type u} [CommRing A] [IsDomain A]
       simp only [Matrix.submatrix_apply, a, b, Fin.lastCases_last,
         Fin.lastCases_castSucc]
       change G i (Fin.castLE hrm y) = 0
-      rw [hcorner _ _ (Or.inr y.isLt), hD, dif_neg]
+      rw [hcorner _ _ (Or.inr y.isLt), hD, dite_eq_right]
       simp only [Fin.val_castLE]
       omega
     · have hxy : x.castSucc ≠ Fin.last r := by
@@ -178,7 +178,7 @@ private theorem diagonal_corner_eq {A : Type u} [CommRing A] [IsDomain A]
       simp only [Matrix.submatrix_apply, a, b, Fin.lastCases_last,
         Fin.lastCases_castSucc]
       change G (Fin.castLE hrn x) j = 0
-      rw [hcorner _ _ (Or.inl x.isLt), hD, dif_neg]
+      rw [hcorner _ _ (Or.inl x.isLt), hD, dite_eq_right]
       simp only [Fin.val_castLE]
       omega
     · simp only [Matrix.submatrix_apply, a, b, Fin.lastCases_castSucc]
@@ -312,11 +312,11 @@ private theorem diagonal_rank_locus_generic
   have hMD (t : V) (i : Fin n) (j : Fin m) (hj : j.val < r) :
       (M t * D) i j = F t.val i j := by
     rw [Matrix.mul_apply, Finset.sum_eq_single (Fin.castLE hrn ⟨j.val, hj⟩)]
-    · rw [hD, dif_pos ⟨rfl, hj⟩]
+    · rw [hD, dite_eq_left ⟨rfl, hj⟩]
       change (1 + B t) i (Fin.castLE hrn ⟨j.val, hj⟩) * π ^ e ⟨j.val, hj⟩ = _
       rw [Matrix.add_apply, add_mul, Matrix.one_apply]
       dsimp only [B, Fin.val_castLE]
-      rw [dif_pos hj]
+      rw [dite_eq_left hj]
       have hh : F t.val i j - D i j =
           π ^ e ⟨j.val, hj⟩ * Q t i ⟨j.val, hj⟩ := hQ t i ⟨j.val, hj⟩
       rw [hD] at hh
@@ -324,16 +324,16 @@ private theorem diagonal_rank_locus_generic
       · have hi : i = Fin.castLE hrn ⟨j.val, hj⟩ := Fin.ext hij
         subst i
         dsimp only [Fin.val_castLE] at hh ⊢
-        rw [dif_pos ⟨rfl, hj⟩] at hh
-        rw [if_pos rfl, one_mul]
+        rw [dite_eq_left ⟨rfl, hj⟩] at hh
+        rw [ite_eq_left rfl, one_mul]
         linear_combination -hh
       · have hi : i ≠ Fin.castLE hrn ⟨j.val, hj⟩ := fun h ↦ hij (congrArg Fin.val h)
-        rw [if_neg hi, zero_mul, zero_add]
-        rw [dif_neg (by intro h; exact hij h.1), sub_zero] at hh
+        rw [ite_eq_right hi, zero_mul, zero_add]
+        rw [dite_eq_right (by intro h; exact hij h.1), sub_zero] at hh
         rw [mul_comm]
         exact hh.symm
     · intro b _ hb
-      rw [hD, dif_neg, mul_zero]
+      rw [hD, dite_eq_right, mul_zero]
       intro h
       exact hb (Fin.ext h.1)
     · simp
@@ -359,7 +359,7 @@ private theorem diagonal_rank_locus_generic
     apply Finset.dvd_sum
     intro b _
     apply dvd_mul_of_dvd_right
-    have hDj : D b j = 0 := by rw [hD, dif_neg]; omega
+    have hDj : D b j = 0 := by rw [hD, dite_eq_right]; omega
     simpa only [hDj, sub_zero] using hdiv t.val b j k
   choose C hC using fun (t : U₀) (i : Fin r) (j : Fin m) (hj : r ≤ j.val) ↦
     hGdiv t (Fin.castLE hrn i) j hj i
@@ -383,11 +383,11 @@ private theorem diagonal_rank_locus_generic
     apply clear_extra_columns hr (fun k ↦ π ^ e k) D (G t) hD (hGcol t) (q t)
     · intro i j
       by_cases h : i.val < r ∧ r ≤ j.val
-      · simp only [q, dif_pos h, dif_pos h.1]
+      · simp only [q, dite_eq_left h, dite_eq_left h.1]
         exact (hC t ⟨i.val, h.1⟩ j h.2).symm
-      · simp only [q, dif_neg h, mul_zero]
+      · simp only [q, dite_eq_right h, mul_zero]
     · intro i j h
-      exact dif_neg h
+      exact dite_eq_right h
   choose R hR hRi hred using hq
   let U : TopologicalSpace.Opens T :=
     ⟨Subtype.val '' (U₀ : Set V), V.isOpen.isOpenMap_subtype_val _ U₀.isOpen⟩

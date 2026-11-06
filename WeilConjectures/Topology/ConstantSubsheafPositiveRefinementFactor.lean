@@ -145,7 +145,7 @@ theorem positive_refinement_factor
           (op (d.A j.1)) (one (d.A j.1))) = _
       rw [map_zsmul]
       have he := congrArg (fun f : E (d.A j.1) ⟶ K ↦
-        f.hom.app (op (d.A j.1)) (one (d.A j.1))) (Sigma.ι_desc d.f j.1)
+        f.hom.app (op (d.A j.1)) (one (d.A j.1))) (Sigma.ι_comp_desc d.f j.1)
       change (Sigma.desc d.f).hom.app (op (d.A j.1))
         ((Sigma.ι (fun j ↦ E (d.A j)) j.1).hom.app
           (op (d.A j.1)) (one (d.A j.1))) = _ at he
@@ -157,7 +157,7 @@ theorem positive_refinement_factor
   refine ⟨Sigma.desc li, ?_⟩
   apply Sigma.hom_ext
   intro i
-  rw [← Category.assoc, Sigma.ι_desc]
+  rw [← Category.assoc, Sigma.ι_comp_desc]
   exact hli i
 
 end TopCat.Sheaf

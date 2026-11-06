@@ -88,7 +88,7 @@ private theorem punctured_torsion_section_zero
     apply hp
     apply PrimeSpectrum.ext
     exact le_antisymm (IsLocalRing.le_maximalIdeal p.isPrime.ne_top) h
-  obtain ⟨a, ha, hpa⟩ := SetLike.not_le_iff_exists.mp hm
+  obtain ⟨a, ha, hpa⟩ := IsConcreteLE.not_le_iff_exists.mp hm
   let t : Γ(Y, ⊤) :=
     ((ΓSpecIso (.of A)).inv ≫ (q ≫ U.ι).appTop).hom a
   have ht : y ∈ Y.basicOpen t := by

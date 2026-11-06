@@ -7,11 +7,14 @@ Authors: Bin Wu
 module
 
 public import Mathlib.Algebra.Category.ModuleCat.Limits
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 import WeilConjectures.AlgebraicGeometry.CoherentFormalModuleAffineSpecTransport
 import WeilConjectures.AlgebraicGeometry.CoherentFormalModulesAffine
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Affine section comparisons for coherent formal modules
 

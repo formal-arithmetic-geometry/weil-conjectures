@@ -122,8 +122,7 @@ attribute [local irreducible] HasDerivedCategory.standard integralOrdinaryScalar
   integralComparisonSequenceScalarModel coefficientSequenceRestriction
   completedIntegralCommRingSheafUnrestricted integralOperationsTensorTowerFunctor
   integralOrdinaryTensorSection unrestrictedIntegralTensorSection comparisons
-attribute [local implicit_reducible] Functor.mapHomologicalComplex
-  integralOperationsRoosFunctor NatIso.mapHomologicalComplex
+attribute [local implicit_reducible] integralOperationsRoosFunctor NatIso.mapHomologicalComplex
 
 attribute [-instance] WeilConjectures.scalarReductionSourceDerived
   WeilConjectures.scalarReductionTargetDerived WeilConjectures.integralOperationsSiteSmall

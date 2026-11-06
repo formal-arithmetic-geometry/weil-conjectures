@@ -51,18 +51,18 @@ lemma isIso_restrictScalars_map_comp_rightDerivedFunctorPlusUnit_iff (sq : CommS
     IsIso (DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus
           (baseChangeMap (ModuleCat.{u + 1} Λ) sq)).app
           ((Sheaf.restrictScalars X.smallEtaleTopology φ).mapHomotopyCategoryPlus.obj K)) ≫
-        (f')_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnit.app
+        (f')_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnith.app
           (((g')^*[ModuleCat.{u + 1} Λ]).mapHomotopyCategoryPlus.obj
             ((Sheaf.restrictScalars X.smallEtaleTopology φ).mapHomotopyCategoryPlus.obj K))) ↔
       IsIso (DerivedCategory.Plus.Qh.map
           ((Sheaf.restrictScalars Y'.smallEtaleTopology φ).mapHomotopyCategoryPlus.map
             ((NatTrans.mapHomotopyCategoryPlus (baseChangeMap (ModuleCat.{u + 1} Λ') sq)).app K)) ≫
-        (f')_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnit.app
+        (f')_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnith.app
           ((Sheaf.restrictScalars X'.smallEtaleTopology φ).mapHomotopyCategoryPlus.obj
             (((g')^*[ModuleCat.{u + 1} Λ']).mapHomotopyCategoryPlus.obj K))) :=
   isIso_map_comp_iff_isIso_map_comp _ _ _ _ _ _ _
     (mapHomotopyCategoryPlus_baseChangeMap_restrictScalars φ sq K) _
-    (((f')_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnit.naturality
+    (((f')_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnith.naturality
       ((NatTrans.mapHomotopyCategoryPlus (upperStarRestrictScalars φ g').natTrans).app K))
 
 /-- The restriction of scalars of the base change map over `Λ'` at `K`, followed by the unit of
@@ -74,12 +74,12 @@ lemma isIso_map_restrictScalars_comp_rightDerivedFunctorPlusUnit_iff (sq : CommS
     IsIso (DerivedCategory.Plus.Qh.map
           ((Sheaf.restrictScalars Y'.smallEtaleTopology φ).mapHomotopyCategoryPlus.map
             ((NatTrans.mapHomotopyCategoryPlus (baseChangeMap (ModuleCat.{u + 1} Λ') sq)).app K)) ≫
-        (f')_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnit.app
+        (f')_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnith.app
           ((Sheaf.restrictScalars X'.smallEtaleTopology φ).mapHomotopyCategoryPlus.obj
             (((g')^*[ModuleCat.{u + 1} Λ']).mapHomotopyCategoryPlus.obj K))) ↔
       IsIso (DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus
           (baseChangeMap (ModuleCat.{u + 1} Λ') sq)).app K) ≫
-        (f')_*[ModuleCat.{u + 1} Λ'].rightDerivedFunctorPlusUnit.app
+        (f')_*[ModuleCat.{u + 1} Λ'].rightDerivedFunctorPlusUnith.app
           (((g')^*[ModuleCat.{u + 1} Λ']).mapHomotopyCategoryPlus.obj K)) := by
   -- Elaborating `hu` and `hp` first fixes the objects of the diagram chase; inferring them from
   -- the goal instead makes the elaborator unfold the concrete functors.
@@ -98,12 +98,12 @@ lemma isIso_comp_rightDerivedFunctorPlusUnit_restrictScalars_iff (sq : CommSq g'
     IsIso (DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus
           (baseChangeMap (ModuleCat.{u + 1} Λ) sq)).app
           ((Sheaf.restrictScalars X.smallEtaleTopology φ).mapHomotopyCategoryPlus.obj K)) ≫
-        (f')_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnit.app
+        (f')_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnith.app
           (((g')^*[ModuleCat.{u + 1} Λ]).mapHomotopyCategoryPlus.obj
             ((Sheaf.restrictScalars X.smallEtaleTopology φ).mapHomotopyCategoryPlus.obj K))) ↔
       IsIso (DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus
           (baseChangeMap (ModuleCat.{u + 1} Λ') sq)).app K) ≫
-        (f')_*[ModuleCat.{u + 1} Λ'].rightDerivedFunctorPlusUnit.app
+        (f')_*[ModuleCat.{u + 1} Λ'].rightDerivedFunctorPlusUnith.app
           (((g')^*[ModuleCat.{u + 1} Λ']).mapHomotopyCategoryPlus.obj K)) :=
   (isIso_restrictScalars_map_comp_rightDerivedFunctorPlusUnit_iff φ sq K).trans
     (isIso_map_restrictScalars_comp_rightDerivedFunctorPlusUnit_iff φ sq K)

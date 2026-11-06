@@ -37,7 +37,7 @@ theorem span_pair_pow_le_span_monomials {R : Type*} [CommSemiring R] (x y : R) (
     exact subset_span ⟨0, 0, rfl, by simp⟩
   | succ N ih =>
     refine (mul_mono_left ih).trans ?_
-    rw [span_mul_span']
+    rw [span_mul_span]
     refine span_mono ?_
     rintro _ ⟨_, ⟨i, j, rfl, rfl⟩, w, hw, rfl⟩
     rcases hw with rfl | rfl

@@ -44,7 +44,7 @@ private theorem exists_projector_triangle (Y : Scheme.{u})
   have hzero (j : J) (hj : j ≠ j₀) : IsZero (Z j) := by
     apply (T j).isZero₃_of_isIso₁ (hT j)
     dsimp [T, a]
-    rw [if_neg hj]
+    rw [ite_eq_right hj]
     change IsIso (𝟙 (H j))
     infer_instance
   let eZ : ∏ᶜ Z ≅ Z j₀ :=

@@ -65,7 +65,7 @@ noncomputable def strictLocalSectionCone :
     let N := (equivSmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)).inverse ⋙
       Scheme.strictHenselizationAffineInclusion s ⋙ ObjectProperty.ι
         (fun n : (Scheme.pointSmallEtale s).fiber.Elements ↦ IsAffine n.1.left)
-    let t := (CategoryOfElements.π (Scheme.pointSmallEtale s).fiber).map (N.map a)
+    let t := (Functor.Elements.π (Scheme.pointSmallEtale s).fiber).map (N.map a)
     change strictLocalNeighbourhoodSection s i ≫
       (Scheme.strictHenselizationStructuralMap s).Etale.map t =
         strictLocalNeighbourhoodSection s j
@@ -79,12 +79,12 @@ noncomputable def strictLocalSectionCone :
       simp only [Category.assoc, pullback.lift_fst, pullback.lift_fst_assoc]
       erw [pullback.lift_fst]
       have : IsAffine
-          ((CategoryOfElements.π (Scheme.pointSmallEtale s).fiber).obj
+          ((Functor.Elements.π (Scheme.pointSmallEtale s).fiber).obj
             (N.obj i)).left := by
         change IsAffine (Spec _)
         infer_instance
       have : IsAffine
-          ((CategoryOfElements.π (Scheme.pointSmallEtale s).fiber).obj
+          ((Functor.Elements.π (Scheme.pointSmallEtale s).fiber).obj
             (N.obj j)).left := by
         change IsAffine (Spec _)
         infer_instance

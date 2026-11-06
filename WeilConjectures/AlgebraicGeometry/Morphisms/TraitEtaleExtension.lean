@@ -83,7 +83,7 @@ private theorem trait_isDVR (A : Type u) [CommRing A] [IsLocalRing A]
     (hA : ¬ IsField A) (hdim : ringKrullDim A ≤ (1 : WithBot ℕ∞)) :
     IsDiscreteValuationRing A := by
   have : Ring.KrullDimLE 1 A := Ring.krullDimLE_iff.mpr hdim
-  apply ((IsDiscreteValuationRing.TFAE A hA).out 0 2).mpr
+  apply ((IsDiscreteValuationRing.TFAE A hA).out 1 3).mpr
   have : Ring.DimensionLEOne A := ⟨fun hp hprime ↦ hprime.isMaximal_of_ne_bot hp⟩
   exact { (inferInstance : IsDomain A), (inferInstance : IsNoetherianRing A),
     (inferInstance : Ring.DimensionLEOne A), (inferInstance : IsIntegrallyClosed A) with }

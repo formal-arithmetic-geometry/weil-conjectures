@@ -127,8 +127,7 @@ theorem sectionsBaseChange_bijective (H : IsPullback g iY iX f) (hV : IsAffineOp
   have key : ⇑(sectionsBaseChange H.w hfV ℱ hWV hf hW) ∘ ⇑(ψ.lTensor Γ(T, ⊤)) =
       (fun s : Γ(Y, g ⁻¹ᵁ W) ↦ s • pullbackSection g e) ∘ ⇑ε := by
     funext z
-    induction z using TensorProduct.induction_on with
-    | zero => simp
+    induction z using TensorProduct.inductionOn with
     | tmul b r =>
       simp only [Function.comp_apply, LinearMap.lTensor_tmul, sectionsBaseChange_tmul]
       rw [IsPushout.tensorEquiv_tmul]
@@ -264,8 +263,7 @@ theorem cechBaseChange_d (k : ℕ) (z : Γ(T, ⊤) ⊗[Γ(S, V)] CechCochain U �
         ((cechDifferential ℱ U hUV hU k).lTensor Γ(T, ⊤) z) =
       ((cechComplex (fun i ↦ g ⁻¹ᵁ U i)).obj ((pullback g).obj ℱ).presheaf).d k (k + 1)
         (cechBaseChange hfV ℱ U hUV hf hU w k z) := by
-  induction z using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction z using TensorProduct.inductionOn with
   | add z z' hz hz' => simp only [map_add, hz, hz']
   | tmul b c =>
     funext y

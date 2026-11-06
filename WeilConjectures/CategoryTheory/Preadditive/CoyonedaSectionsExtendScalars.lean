@@ -106,8 +106,7 @@ lemma isIso_coyonedaSectionsExtendScalarsComparison_app_self
     (1 : B) ⊗ₜ[A, f] (𝟙 X₁ : (coyonedaSections c₁).obj X₁)
   have hgen (z : (ModuleCat.extendScalars f).obj ((coyonedaSections c₁).obj X₁)) :
       ∃ b : B, z = b • one := by
-    induction z using TensorProduct.induction_on with
-    | zero => exact ⟨0, (zero_smul _ _).symm⟩
+    induction z using TensorProduct.inductionOn with
     | tmul b m =>
       obtain ⟨a, ha⟩ := hc₁ m
       let i : (coyonedaSections c₁).obj X₁ := 𝟙 X₁

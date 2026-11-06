@@ -91,7 +91,7 @@ private lemma homDiff_proj (L : CochainComplex A ℤ)
         hMap H (L.d p p') (𝟙 _)) := by
   subst q q'
   obtain rfl : p' = p + m - n := by omega
-  exact Pi.lift_π _ _
+  exact Pi.lift_comp_π _ _
 
 private lemma homDiff_shape (L : CochainComplex A ℤ)
     (M : CochainComplex B ℤ) (n m : ℤ) (h : ¬ n + 1 =
@@ -151,7 +151,7 @@ private lemma homTermMap_proj {L L' : CochainComplex A ℤ} {M M' : CochainCompl
     homTermMap H f g n ≫ homProj H L' M' n p q hpq =
       homProj H L M n p q hpq ≫ hMap H (f.f p) (g.f q) := by
   subst q
-  exact Pi.lift_π _ _
+  exact Pi.lift_comp_π _ _
 
 omit [H.Additive] [∀ a, (H.obj a).Additive] in
 private lemma homTermMap_comm {L L' : CochainComplex A ℤ} {M M' : CochainComplex B ℤ}

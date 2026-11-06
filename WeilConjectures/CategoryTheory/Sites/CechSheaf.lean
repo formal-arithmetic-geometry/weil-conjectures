@@ -156,7 +156,7 @@ theorem exact_cechAugmentation_of_isSheaf :
         erw [cechNerveMap_π_assoc]
         exact (cechNerveCons_π_of_eq_zero V ai _ (Fin.succAbove (1 : Fin 2) (0 : Fin 1))
           (by decide) _).trans
-          (Pi.lift_π (fun _ : Fin 1 ↦ ai) 0).symm
+          (Pi.lift_comp_π (fun _ : Fin 1 ↦ ai) 0).symm
     have fi : (Pi.lift fun _ ↦ ai : W ⟶ cechNerveObj V (fun _ : Fin 1 ↦ i)) =
         ai ≫ cechDiag V i := Pi.hom_ext _ _ fun _ ↦ by simp
     have fj : (Pi.lift fun _ ↦ aj : W ⟶ cechNerveObj V (fun _ : Fin 1 ↦ j)) =

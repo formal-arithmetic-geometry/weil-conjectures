@@ -90,7 +90,7 @@ theorem cartanEilenberg_cone_filtration_properties
           by_cases hb : b ≤ n + 1
           · apply comp_zero_of_image_le _ S g ?_ hg
             dsimp only [S]
-            rw [hF, if_pos hb]
+            rw [hF, ite_eq_left hb]
             exact le_sup_left
           · exact (hKbelow (n + 1) (by omega)).eq_zero_of_src _
         · rw [comp_zero]
@@ -115,7 +115,7 @@ theorem cartanEilenberg_cone_filtration_properties
           · exact (hJzero r s (by omega)).eq_zero_of_src _)
       have : IsIso S.arrow := isIso_of_mono_of_epi S.arrow
       exact Subobject.eq_top_of_isIso_arrow S
-    · rw [hF, if_neg (by omega)]
+    · rw [hF, ite_eq_right (by omega)]
       have he : Finset.Icc (max b (n + 2)) n = ∅ := by
         apply Finset.eq_empty_iff_forall_notMem.mpr
         intro s hs

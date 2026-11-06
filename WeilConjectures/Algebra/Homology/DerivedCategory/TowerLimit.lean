@@ -248,7 +248,7 @@ theorem isHomotopyLimit_mapCone_Q_of_epi {T : ℕᵒᵖ ⥤ CochainComplex (Modu
   let hP : IsLimit P := productIsProduct K
   let t : P.pt ⟶ P.pt := Pi.lift fun n ↦ Pi.π K (n + 1) ≫ T.map (homOfLE n.le_succ).op
   have ht (n : ℕ) : t ≫ P.proj n = P.proj (n + 1) ≫ T.map (homOfLE n.le_succ).op :=
-    Pi.lift_π _ _
+    Pi.lift_comp_π _ _
   let S := ShortComplex.mk _ _ (Fan.IsLimit.lift_π_comp_one_sub_eq_zero hP t ht c)
   have hk := Fan.IsLimit.isLimitKernelForkOneSub hP t ht hc
   have hS : S.ShortExact := by

@@ -291,6 +291,7 @@ private theorem presentationVertexProAffineEtale {X : Scheme.{u}}
   exact proAffineEtale.comp_mem _ _ hπ
     (proAffineEtale.of_isAffine (X := (P.diagram.obj i).left) (P.diagram.obj i).hom)
 
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- Sheafification of the coefficient-sized comparison Kan extension changes
 neither the vertex nor the stages of an affine etale presentation.
 

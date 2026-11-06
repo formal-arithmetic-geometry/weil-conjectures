@@ -85,13 +85,13 @@ alternating determinant, `e ≠ 0`, is the generating series
 `∑_{e ∣ m} e (∑_i (-1)^i tr (F_i^{m / e})) T^m` of the alternating traces. -/
 theorem X_mul_derivative_inv_alternatingCharpolyRevProd (s : Finset ℤ)
     (F : ∀ i, Module.End K (W i)) {e : ℕ} (he : e ≠ 0) :
-    X * derivative K (alternatingCharpolyRevProd s F e)⁻¹ =
+    X * derivative (R := K) (alternatingCharpolyRevProd s F e)⁻¹ =
       (PowerSeries.mk fun m ↦ if m ≠ 0 ∧ e ∣ m then
         (e : K) * ∑ i ∈ s, (i.negOnePow : ℤ) • trace K (W i) (F i ^ (m / e)) else 0) *
         (alternatingCharpolyRevProd s F e)⁻¹ := by
   set B : ℤ → K⟦X⟧ := fun i ↦ PowerSeries.mk fun m ↦
     if m ≠ 0 ∧ e ∣ m then (e : K) * trace K (W i) (F i ^ (m / e)) else 0 with hB
-  have hP (i : ℤ) : X * derivative K (((F i).charpolyRev.comp (Polynomial.X ^ e) :
+  have hP (i : ℤ) : X * derivative (R := K) (((F i).charpolyRev.comp (Polynomial.X ^ e) :
       Polynomial K) : K⟦X⟧) = -B i * (((F i).charpolyRev.comp (Polynomial.X ^ e) :
       Polynomial K) : K⟦X⟧) := by
     rw [← Polynomial.expand_eq_comp_X_pow, coe_expand e he]
@@ -101,7 +101,7 @@ theorem X_mul_derivative_inv_alternatingCharpolyRevProd (s : Finset ℤ)
     rw [Polynomial.constantCoeff_coe, Polynomial.coeff_zero_eq_eval_zero, Polynomial.eval_comp,
       Polynomial.eval_pow, Polynomial.eval_X, zero_pow he, eval_charpolyRev]
     exact one_ne_zero
-  have hfac : ∀ i ∈ s, X * derivative K (if Even i then
+  have hfac : ∀ i ∈ s, X * derivative (R := K) (if Even i then
       (((F i).charpolyRev.comp (Polynomial.X ^ e) : Polynomial K) : K⟦X⟧) else
       (((F i).charpolyRev.comp (Polynomial.X ^ e) : Polynomial K) : K⟦X⟧)⁻¹) =
       (-((i.negOnePow : ℤ) • B i)) * (if Even i then
@@ -174,12 +174,12 @@ theorem hasProd_inv_alternatingCharpolyRevProd_of_sum_trace_eq [CharZero K]
     simp only [PowerSeries.coeff_mk]
     rcases eq_or_ne m 0 with rfl | hm0
     · simp
-    · rw [if_pos ⟨hm0, one_dvd m⟩, Nat.cast_one, one_mul, Nat.div_one,
+    · rw [ite_eq_left ⟨hm0, one_dvd m⟩, Nat.cast_one, one_mul, Nat.div_one,
         htr m (Nat.one_le_iff_ne_zero.2 hm0) (S n) fun j hj ↦
           hmem ((Nat.le_of_dvd (Nat.pos_of_ne_zero hm0) hj).trans hm), Finset.sum_filter]
       refine Finset.sum_congr rfl fun j _ ↦ ?_
       by_cases hj : e j ∣ m
-      · rw [if_pos ⟨hm0, hj⟩, if_pos hj, nsmul_eq_mul]
-      · rw [if_neg fun h ↦ hj h.2, if_neg hj]
+      · rw [ite_eq_left ⟨hm0, hj⟩, ite_eq_left hj, nsmul_eq_mul]
+      · rw [ite_eq_right fun h ↦ hj h.2, ite_eq_right hj]
 
 end LinearMap

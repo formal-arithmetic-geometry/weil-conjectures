@@ -231,7 +231,7 @@ instance Adjunction.isIso_mapDerivedCategoryAdjunction_unit {f : C ⥤ D} {g : D
   -- `f.mapDerivedCategory ⋙ g.mapDerivedCategory ≅ (f ⋙ g).mapDerivedCategory ≅ 𝟭`, so
   -- `f.mapDerivedCategory` is fully faithful.
   have h := adj.mapDerivedCategoryAdjunction.fullyFaithfulLOfCompIsoId
-    ((Functor.mapDerivedCategoryCompIso f g).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso f g ≪≫
       Functor.mapDerivedCategoryNatIso (asIso adj.unit).symm ≪≫
         Functor.mapDerivedCategoryIdIso C)
   have := h.full
@@ -248,7 +248,7 @@ instance Adjunction.isIso_mapDerivedCategoryAdjunction_counit {f : C ⥤ D} {g :
   -- `g.mapDerivedCategory ⋙ f.mapDerivedCategory ≅ (g ⋙ f).mapDerivedCategory ≅ 𝟭`, so
   -- `g.mapDerivedCategory` is fully faithful.
   have h := adj.mapDerivedCategoryAdjunction.fullyFaithfulROfCompIsoId
-    ((Functor.mapDerivedCategoryCompIso g f).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso g f ≪≫
       Functor.mapDerivedCategoryNatIso (asIso adj.counit) ≪≫
         Functor.mapDerivedCategoryIdIso D)
   have := h.full
@@ -347,7 +347,7 @@ theorem Adjunction.derivedAdjunctionPlus_unit_app_fac {f : C ⥤ D} {g : D ⥤ C
     adj.derivedAdjunctionPlus.unit.app (DerivedCategory.Plus.Qh.obj K) ≫
         g.rightDerivedFunctorPlus.map (f.mapDerivedCategoryPlusFactorsh.hom.app K) =
       DerivedCategory.Plus.Qh.map (adj.mapHomotopyCategoryPlus.unit.app K) ≫
-        g.rightDerivedFunctorPlusUnit.app (f.mapHomotopyCategoryPlus.obj K) := by
+        g.rightDerivedFunctorPlusUnith.app (f.mapHomotopyCategoryPlus.obj K) := by
   apply DerivedCategory.Plus.ι.map_injective
   simp only [Functor.map_comp, Adjunction.derivedAdjunctionPlus,
     Adjunction.map_restrictFullyFaithful_unit_app, Adjunction.ofNatIsoLeft_unit]
@@ -362,7 +362,7 @@ theorem Adjunction.derivedAdjunctionPlus_unit_app_fac {f : C ⥤ D} {g : D ⥤ C
       g.ιRightDerivedFunctorUnit.app (f.mapHomotopyCategoryPlus.obj K) := by
     simp [Functor.rightDerivedFunctorPlusCompatibility]
   have h₄ : DerivedCategory.Plus.ι.map
-      (g.rightDerivedFunctorPlusUnit.app (f.mapHomotopyCategoryPlus.obj K)) =
+      (g.rightDerivedFunctorPlusUnith.app (f.mapHomotopyCategoryPlus.obj K)) =
       g.ιRightDerivedFunctorUnit.app (f.mapHomotopyCategoryPlus.obj K) ≫
         g.rightDerivedFunctorPlusCompatibility.inv.app
           (DerivedCategory.Plus.Qh.obj (f.mapHomotopyCategoryPlus.obj K)) := by

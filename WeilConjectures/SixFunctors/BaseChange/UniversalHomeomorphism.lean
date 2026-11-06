@@ -69,7 +69,8 @@ theorem isIso_derivedBaseChangeMapPlus_of_isUniversalHomeomorphism (sq : IsPullb
   let M := (InjectiveObject.ι _).mapCochainComplexPlus.obj L
   let P := (HomotopyCategory.Plus.quotient _).obj M
   suffices IsIso ((derivedBaseChangeMapPlus A sq.toCommSq).app (DerivedCategory.Plus.Qh.obj P)) by
-    rw [← NatTrans.isIso_app_iff_of_iso _ e]
+    rw [← NatTrans.isIso_app_iff_of_iso _
+      ((DerivedCategory.Plus.quotientCompQhIso _).app M ≪≫ e)]
     exact this
   have hM : ∀ m, (f')_*[A].rightAcyclic
       ((((g')^*[A]).mapCochainComplexPlus.obj M).obj.X m) := fun m ↦
@@ -77,21 +78,21 @@ theorem isIso_derivedBaseChangeMapPlus_of_isUniversalHomeomorphism (sq : IsPullb
     have : Injective (((g')^*[A]).obj (M.obj.X m)) :=
       ((g')^*[A]).injective_obj_of_injective inferInstance
     (f')_*[A].rightAcyclic_of_injective (((g')^*[A]).obj (M.obj.X m))
-  have h₁ : IsIso ((f')_*[A].rightDerivedFunctorPlusUnit.app
+  have h₁ : IsIso ((f')_*[A].rightDerivedFunctorPlusUnith.app
       (((g')^*[A]).mapHomotopyCategoryPlus.obj P)) :=
     (f')_*[A].isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic
       (((g')^*[A]).mapCochainComplexPlus.obj M) hM
-  have h₂ : IsIso ((f)_*[A].rightDerivedFunctorPlusUnit.app P) := by
+  have h₂ : IsIso ((f)_*[A].rightDerivedFunctorPlusUnith.app P) := by
     dsimp only [P, M]
     infer_instance
   have hfac := derivedBaseChangeMapPlus_fac_app A sq.toCommSq P
   have : IsIso (((g)^*[A]).mapDerivedCategoryPlus.map
-      ((f)_*[A].rightDerivedFunctorPlusUnit.app P) ≫
+      ((f)_*[A].rightDerivedFunctorPlusUnith.app P) ≫
       (derivedBaseChangeMapPlus A sq.toCommSq).app (DerivedCategory.Plus.Qh.obj P)) := by
     rw [hfac]
     infer_instance
   exact IsIso.of_isIso_comp_left (((g)^*[A]).mapDerivedCategoryPlus.map
-      ((f)_*[A].rightDerivedFunctorPlusUnit.app P)) _
+      ((f)_*[A].rightDerivedFunctorPlusUnith.app P)) _
 
 end Etale
 

@@ -278,9 +278,9 @@ Source: Stacks 0A07
 def evaluationComparison (φ : R ⟶ B) (m : ℕᵒᵖ) :
     restrictTowerDerived φ ⋙ evaluateDerived R m ≅
       evaluateDerived B m ⋙ restrictDerived φ :=
-  (Functor.mapDerivedCategoryCompIso (restrictTower φ)
-    ((evaluation ℕᵒᵖ (Modules R)).obj m)).symm ≪≫
-      Functor.mapDerivedCategoryCompIso ((evaluation ℕᵒᵖ (Modules B)).obj m) (restriction φ)
+  Functor.mapDerivedCategoryCompIso (restrictTower φ)
+    ((evaluation ℕᵒᵖ (Modules R)).obj m) ≪≫
+      (Functor.mapDerivedCategoryCompIso ((evaluation ℕᵒᵖ (Modules B)).obj m) (restriction φ)).symm
 
 private theorem inverseUnitComparison
     {A' B' : Type*} [Category A'] [Category B']
@@ -532,8 +532,8 @@ private theorem evaluationComparison_normalized (φ : R ⟶ B)
   let F := restriction φ
   exact cancelSquareFactors
     (ER.mapDerivedCategory.mapIso (Ft.mapDerivedCategoryFactors.app X))
-    ((Ft.mapDerivedCategoryCompIso ER).app (DerivedCategory.Q.obj X))
-    ((EB.mapDerivedCategoryCompIso F).app (DerivedCategory.Q.obj X))
+    ((Ft.mapDerivedCategoryCompIso ER).symm.app (DerivedCategory.Q.obj X))
+    ((EB.mapDerivedCategoryCompIso F).symm.app (DerivedCategory.Q.obj X))
     (F.mapDerivedCategory.mapIso (EB.mapDerivedCategoryFactors.app X))
     (F.mapDerivedCategoryFactors.app ((EB.mapHomologicalComplex (.up ℤ)).obj X))
     (ER.mapDerivedCategoryFactors.app ((Ft.mapHomologicalComplex (.up ℤ)).obj X))

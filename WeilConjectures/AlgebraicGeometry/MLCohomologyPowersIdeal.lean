@@ -7,12 +7,14 @@ Authors: Bin Wu
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.CategoryTheory.CofilteredSystem
 public import Mathlib.RingTheory.Ideal.Operations
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 import WeilConjectures.AlgebraicGeometry.MLCohomologyPowersIdealKernelBound
 import WeilConjectures.AlgebraicGeometry.MLCohomologyPowersIdealImageStabilization
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Mittag-Leffler and Artin-Rees bounds for cohomology of ideal-power quotients
 

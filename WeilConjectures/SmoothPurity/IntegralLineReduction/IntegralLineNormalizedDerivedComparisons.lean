@@ -512,7 +512,7 @@ private theorem conjugate_square
     F.map (a.hom ≫ e.hom) ≫ (F.map e.inv ≫ t ≫ G.map d.hom) =
       s ≫ G.map (b.hom ≫ d.hom) := by
   simp only [Functor.map_comp, Category.assoc]
-  rw [Iso.map_hom_inv_id_assoc]
+  rw [Iso.hom_inv_id_map_assoc]
   exact (Category.assoc _ _ _).symm.trans
     ((congrArg (fun z ↦ z ≫ G.map d.hom) h.symm).trans (Category.assoc _ _ _))
 

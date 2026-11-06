@@ -66,8 +66,8 @@ theorem exists_pieceFunctor_map_comp_eq (t : GeometricFiber f y) (s : SplitNbhd 
     rw [ha, hb, MorphismProperty.Over.w, MorphismProperty.Over.w]
   -- the two morphisms agree at the point `(u, t)`
   have hv : (s.piecePt t).left ≫ a = (s.piecePt t).left ≫ b := by
-    have h₁ : (s.piecePt t) ≫ (Etale.forget X).map g.val = d.2 := g.property
-    have h₂ : (s.piecePt t) ≫ (Etale.forget X).map g'.val = d.2 := g'.property
+    have h₁ : (s.piecePt t) ≫ (Etale.forget X).map g.val = d.2 := g.map_val
+    have h₂ : (s.piecePt t) ≫ (Etale.forget X).map g'.val = d.2 := g'.map_val
     exact congrArg CategoryTheory.Over.Hom.left (h₁.trans h₂.symm)
   -- the open locus of the piece where they agree
   set E := FormallyUnramified.eqLocus V.hom a b hab with hE
@@ -92,7 +92,7 @@ theorem exists_pieceFunctor_map_comp_eq (t : GeometricFiber f y) (s : SplitNbhd 
     · exact s.basePt_notMem_piece htt h₁
   obtain ⟨c', k, hk⟩ := exists_hom_preimage_eq_bot f s.obj C hCc hnot
   refine ⟨s.pullbackDec k, s.pullbackDecHom k, ?_⟩
-  apply CategoryOfElements.ext
+  apply Functor.Elements.hom_ext
   apply MorphismProperty.Over.Hom.ext
   change (pieceMap (s.pullbackDecHom k) t).left ≫ a = (pieceMap (s.pullbackDecHom k) t).left ≫ b
   -- the piece of the smaller neighbourhood maps into the agreement locus

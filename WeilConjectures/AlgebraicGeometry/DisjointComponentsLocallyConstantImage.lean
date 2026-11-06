@@ -113,11 +113,11 @@ private theorem component_source_product {X : Scheme.{u}}
       apply Pi.hom_ext
       intro i
       rw [Category.assoc, PreservesProduct.iso_hom, piComparison_comp_π,
-        ← ev.map_comp, Pi.lift_π]
+        ← ev.map_comp, Pi.lift_comp_π]
       change E.obj.map (β i).op =
         (Pi.lift (fun j ↦ E.obj.map (β j).op)) ≫
           Pi.π (fun j ↦ E.obj.obj (op (componentTest (W j) V.unop))) i
-      rw [Pi.lift_π]
+      rw [Pi.lift_comp_π]
     have : IsIso (ev.map φ ≫ (PreservesProduct.iso ev R).hom) := by
       rw [hw]
       exact hiso
@@ -139,6 +139,11 @@ private theorem constant_product {C : Type*} [Category* C]
     (n : ℕ) (F : Fin n → Sheaf J (Type (u + 1)))
     (hF : ∀ i, (F i).IsConstant J) : (∏ᶜ F).IsConstant J := by
   classical
+  have : HasProductsOfShape (Fin n) (Cᵒᵖ ⥤ Type (u + 1)) :=
+    functorCategoryHasLimitsOfShape
+  have : HasProductsOfShape (Fin n) (Sheaf J (Type (u + 1))) :=
+    hasLimitsOfShape_of_hasLimitsOfShape_createsLimitsOfShape
+      (sheafToPresheaf J (Type (u + 1)))
   have he (i : Fin n) := @Sheaf.mem_essImage_of_isConstant _ _ J _ _ _ (F i) (hF i)
   choose A e using he
   exact Sheaf.isConstant_of_iso J

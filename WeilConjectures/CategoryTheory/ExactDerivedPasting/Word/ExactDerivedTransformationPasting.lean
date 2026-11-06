@@ -77,7 +77,7 @@ def Word.comparison {i j : I} (P : Word C i j) :
   | .nil i => Functor.mapDerivedCategoryIdIso (C i)
   | .edge _ => Iso.refl _
   | .comp P R =>
-      Functor.mapDerivedCategoryCompIso P.ordinary.obj R.ordinary.obj ≪≫
+      (Functor.mapDerivedCategoryCompIso P.ordinary.obj R.ordinary.obj).symm ≪≫
         Functor.isoWhiskerRight P.comparison R.ordinary.obj.mapDerivedCategory ≪≫
         Functor.isoWhiskerLeft P.derived R.comparison
 
@@ -177,7 +177,7 @@ private lemma wordFactors_comp {i j k : I} (P : Word C i j) (R : Word C j k)
     Functor.whiskerLeft_app, Functor.whiskerRight_app]
   simp only [Category.assoc]
   rw [← Functor.mapDerivedCategoryCompIso_hom_app_factors P.ordinary.obj R.ordinary.obj K]
-  simp only [Iso.inv_hom_id_app_assoc]
+  erw [Iso.hom_inv_id_app_assoc]
   rw [← NatTrans.naturality_assoc, ← NatTrans.naturality_assoc]
   simp only [Functor.map_comp, Category.assoc]
   rfl

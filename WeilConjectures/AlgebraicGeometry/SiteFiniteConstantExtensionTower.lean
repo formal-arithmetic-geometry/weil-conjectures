@@ -204,9 +204,9 @@ private theorem local_tower_on_slice
       (δ i) (j i) (hT i) (hLW i t)
     let e := (Functor.mapDerivedCategoryNatIso
       (J.toGrothendieck.overMapPullbackComp (ModuleCat.{u} B) (g i t) (f i)).symm ≪≫
-        Functor.mapDerivedCategoryCompIso
+        (Functor.mapDerivedCategoryCompIso
           (J.toGrothendieck.overMapPullback (ModuleCat.{u} B) (f i))
-          (J.toGrothendieck.overMapPullback (ModuleCat.{u} B) (g i t))).app K
+          (J.toGrothendieck.overMapPullback (ModuleCat.{u} B) (g i t))).symm).app K
     exact tower_of_iso _ _ e ht
 
 omit [∀ U : C, HasDerivedCategory.{w}
@@ -231,7 +231,7 @@ private noncomputable def restrictionMapIso
     {U V : C} (f : V ⟶ U) :
     (J.toGrothendieck.overPullback (ModuleCat.{u} B) U).mapDerivedCategory ⋙ sliceMap J B f ≅
       (J.toGrothendieck.overPullback (ModuleCat.{u} B) V).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso
       (NatIso.ofComponents (fun F ↦ F.pushforwardOverMapIso f) (by intros; ext; rfl))
 

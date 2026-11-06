@@ -8,6 +8,7 @@ public import Mathlib.LinearAlgebra.Matrix.Rank
 public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 import Mathlib.Data.Fin.Tuple.Sort
 import Mathlib.LinearAlgebra.FreeModule.PID
+public import Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.Defs
 
 /-! # Scalar Smith matrices with uniformizer powers -/
 
@@ -87,7 +88,7 @@ theorem exists_smith_pow {A : Type u} [CommRing A] [IsDomain A]
   have hbT (i : Fin r) :
       bT (Fin.castLE hrn i) = (u (σ i) : A) • snf.bM (snf.f (σ i)) := by
     simp only [bT, Module.Basis.unitsSMul_apply, Module.Basis.reindex_apply,
-      Equiv.symm_symm, hρ, w, Fin.val_castLE, dif_pos i.isLt]
+      Equiv.symm_symm, hρ, w, Fin.val_castLE, dite_eq_left i.isLt]
     rfl
   have himage (i : Fin r) :
       (bN i : Fin n → A) = π ^ es i • bT (Fin.castLE hrn i) := by
@@ -153,13 +154,13 @@ theorem exists_smith_pow {A : Type u} [CommRing A] [IsDomain A]
     simp only [Finsupp.smul_apply, Finsupp.single_apply, smul_eq_mul]
     by_cases hi : i.val = j.val
     · have hij : Fin.castLE hrn ⟨j.val, hj⟩ = i := Fin.ext hi.symm
-      rw [if_pos hij, mul_one, dif_pos ⟨hi, by omega⟩]
+      rw [ite_eq_left hij, mul_one, dite_eq_left ⟨hi, by omega⟩]
       congr 2
       exact Fin.ext hi.symm
     · have hij : Fin.castLE hrn ⟨j.val, hj⟩ ≠ i := by
         intro h
         exact hi (congrArg Fin.val h).symm
-      rw [if_neg hij, mul_zero, dif_neg (fun h ↦ hi h.1)]
+      rw [ite_eq_right hij, mul_zero, dite_eq_right (fun h ↦ hi h.1)]
   · obtain ⟨a, ha⟩ : ∃ a : Fin k, j = Fin.cast hsize' (Fin.natAdd r a) := by
       refine ⟨⟨j.val - r, by omega⟩, ?_⟩
       apply Fin.ext

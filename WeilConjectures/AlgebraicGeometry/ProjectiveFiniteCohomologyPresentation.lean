@@ -185,7 +185,7 @@ private theorem exists_epi_sigma_twist_affine
       ⟨i, ⟨a⟩⟩).app _ (w ⟨i, ⟨a⟩⟩), ?_⟩
     simp only [map_sum, Hom.app_smul]
     refine Finset.sum_congr rfl fun a _ ↦ ?_
-    rw [← ConcreteCategory.comp_apply, ← Hom.comp_app, Sigma.ι_desc, hw]
+    rw [← ConcreteCategory.comp_apply, ← Hom.comp_app, Sigma.ι_comp_desc, hw]
   · have := isQuasicoherent_sigma
       (fun a ↦ ProjectiveSpace.twist n T (-(m a : ℤ)))
     exact isQuasicoherent_kernel _
@@ -227,8 +227,8 @@ private theorem finite_H_sigma {X T : Scheme.{u}} (g : X ⟶ T)
         rw [← H.map_sum_apply, biproduct.total, H.map_id_apply]
       right_inv := fun y ↦ funext fun j ↦ by
         simp only [map_sum, ← H.map_comp_apply, biproduct.ι_π]
-        rw [Finset.sum_eq_single j (fun i _ hij ↦ by rw [dif_neg hij, H.map_zero_apply])
-          (by simp), dif_pos rfl, eqToHom_refl, H.map_id_apply] }
+        rw [Finset.sum_eq_single j (fun i _ hij ↦ by rw [dite_eq_right hij, H.map_zero_apply])
+          (by simp), dite_eq_left rfl, eqToHom_refl, H.map_id_apply] }
   have : Module.Finite Γ(T, ⊤) ((⨁ G).H q) := Module.Finite.equiv E.symm
   let E' : (⨁ G).H q ≃ₗ[Γ(T, ⊤)] (∐ G).H q :=
     { H.mapLinearEquiv (biproduct.isoCoproduct G) q with

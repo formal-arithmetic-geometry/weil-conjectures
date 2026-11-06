@@ -42,7 +42,7 @@ set_option backward.isDefEq.respectTransparency false in
 lemma ιStupidTruncf_eq [e.IsRelIff] (i : ι) :
     K.ιStupidTruncf e (e.f i) = ((K.restriction e).extendXIso e rfl).hom := by
   dsimp [ιStupidTruncf]
-  rw [dif_pos ⟨i, rfl⟩]
+  rw [dite_eq_left ⟨i, rfl⟩]
   simp [extendXIso, extend.XIso, stupidTruncXIso]
 
 set_option backward.defeqAttrib.useBackward true in
@@ -141,7 +141,7 @@ set_option backward.isDefEq.respectTransparency false in
 lemma πStupidTruncf_eq [e.IsRelIff] (i : ι) :
     K.πStupidTruncf e (e.f i) = ((K.restriction e).extendXIso e rfl).inv := by
   dsimp [πStupidTruncf]
-  rw [dif_pos ⟨i, rfl⟩]
+  rw [dite_eq_left ⟨i, rfl⟩]
   simp [extendXIso, extend.XIso, stupidTruncXIso]
 
 set_option backward.defeqAttrib.useBackward true in

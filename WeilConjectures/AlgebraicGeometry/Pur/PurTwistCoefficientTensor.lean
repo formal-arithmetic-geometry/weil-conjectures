@@ -425,7 +425,7 @@ private theorem continuous_principal_quotient {X R T : Type*} [TopologicalSpace 
       let g : R → R := fun r ↦ if h : f r = 0 then (hdiv r h).choose else 0
       have hg (r : R) (hr : f r = 0) : a * g r = r := by
         dsimp only [g]
-        rw [dif_pos hr]
+        rw [dite_eq_left hr]
         exact (hdiv r hr).choose_spec
       refine ⟨⟨g ∘ s, continuous_of_discreteTopology.comp s.continuous⟩, ?_⟩
       ext x
@@ -712,7 +712,7 @@ private theorem lifted_power_kernel {R T : Type v} [CommRing R] [CommRing T]
     rw [hh, Ideal.mem_span_singleton, Ideal.mem_span_singleton]
     constructor
     · rintro ⟨y, hy⟩
-      exact ⟨ULift.up y, ULift.ext _ _ hy⟩
+      exact ⟨ULift.up y, ULift.ext hy⟩
     · rintro ⟨y, hy⟩
       exact ⟨y.down, congrArg ULift.down hy⟩
 
@@ -1043,8 +1043,7 @@ private theorem tensor_completion_comparison
     exact hright.symm
   have hfg : (f : B ⊗[A] R → T) = g := by
     funext x
-    induction x using TensorProduct.induction_on with
-    | zero => simp [g]
+    induction x using TensorProduct.inductionOn with
     | tmul b r => exact hmap b r
     | add x y hx hy => simp only [map_add, hx, hy, g]
   exact hfg ▸ hg

@@ -2346,7 +2346,7 @@ private theorem colimitComparison_exists
   intro i
   dsimp only [c]
   rw [Iso.trans_hom, ← Category.assoc, ι_preservesColimitIso_hom,
-    HasColimit.isoOfNatIso_ι_hom]
+    HasColimit.ι_isoOfNatIso_hom]
 
 private def ordinaryToSemilinear
     {C : Type*} [Category C] [MonoidalCategory C]

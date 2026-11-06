@@ -116,7 +116,7 @@ theorem triangularFieldModel_localized_normal_form
     intro q
     rfl
   have hcomp : ev.comp psi = phi := by
-    apply AlgHom.coe_ringHom_injective
+    apply AlgHom.toRingHom_injective
     apply IsLocalization.ringHom_ext (Submonoid.powers h)
     apply RingHom.ext
     intro r

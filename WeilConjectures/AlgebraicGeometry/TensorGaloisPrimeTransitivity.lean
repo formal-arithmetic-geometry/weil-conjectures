@@ -66,8 +66,7 @@ theorem exists_comap_eq_of_galois
         ext z
         change map (AlgHom.id k A) (σ * τ).toAlgHom z =
           map (AlgHom.id k A) σ.toAlgHom (map (AlgHom.id k A) τ.toAlgHom z)
-        induction z using TensorProduct.induction_on with
-        | zero => simp
+        induction z using TensorProduct.inductionOn with
         | tmul a t => simp
         | add z w hz hw => simp [hz, hw] }
   let : MulSemiringAction (K ≃ₐ[k] K) B := MulSemiringAction.compHom B ρ
@@ -76,13 +75,7 @@ theorem exists_comap_eq_of_galois
   let : TopologicalSpace B := ⊥
   have : DiscreteTopology B := ⟨rfl⟩
   have hopen (z : B) : IsOpen (MulAction.stabilizer (K ≃ₐ[k] K) z : Set (K ≃ₐ[k] K)) := by
-    induction z using TensorProduct.induction_on with
-    | zero =>
-      have h : MulAction.stabilizer (K ≃ₐ[k] K) (0 : B) = ⊤ := by
-        ext σ
-        simp
-      rw [h]
-      exact isOpen_univ
+    induction z using TensorProduct.inductionOn with
     | tmul a t =>
       apply Subgroup.isOpen_mono ?_ (stabilizer_isOpen_of_isIntegral t)
       intro σ hσ
@@ -104,8 +97,7 @@ theorem exists_comap_eq_of_galois
     intro σ a z
     change map (AlgHom.id k A) σ.toAlgHom (a • z) =
       a • map (AlgHom.id k A) σ.toAlgHom z
-    induction z using TensorProduct.induction_on with
-    | zero => simp
+    induction z using TensorProduct.inductionOn with
     | tmul a' t =>
       change map (AlgHom.id k A) σ.toAlgHom ((a * a') ⊗ₜ[k] t) =
         (a * a') ⊗ₜ[k] σ t

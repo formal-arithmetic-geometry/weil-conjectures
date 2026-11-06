@@ -18,6 +18,7 @@ import Mathlib.Topology.Sheaves.Abelian
 import Mathlib.Algebra.Category.Grp.Zero
 import WeilConjectures.AlgebraicGeometry.SupportedDerivedRestrictionZero
 import WeilConjectures.AlgebraicGeometry.DerivedRestrictionIsIsoOpenCover
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # A supported Koszul relative detector
 

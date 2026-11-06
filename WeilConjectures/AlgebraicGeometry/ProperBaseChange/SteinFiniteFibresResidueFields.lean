@@ -100,7 +100,7 @@ theorem Scheme.Hom.steinFactorizationBase_finite_fibres_residueFields
       (PrimeSpectrum.le_iff_specializes _ _).mpr
         (hbc.map continuous_subtype_val)
     by_contra hne
-    have hlt := Ideal.IsIntegral.comap_lt_comap (R := A) (lt_of_le_of_ne hle hne)
+    have hlt := Ideal.IsIntegral.under_lt_under (R := A) (lt_of_le_of_ne hle hne)
     apply (ne_of_lt hlt)
     exact congrArg PrimeSpectrum.asIdeal (b.property.trans c.property.symm)
   let Y := f.fiber s

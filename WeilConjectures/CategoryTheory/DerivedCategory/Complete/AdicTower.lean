@@ -110,7 +110,7 @@ noncomputable def isLimit_fan_whiskerRight_quotPow (n : ℕ)
   refine IsLimit.ofIsoLimit (productIsProduct _) (Fan.ext (asIso ψ.hom₃).symm fun j ↦ ?_)
   rw [Iso.symm_hom, asIso_inv, IsIso.eq_inv_comp]
   simp only [ψ, productTriangle.lift_hom₃, tensorQuotPowTriangleMap, Fan.mk_pt]
-  exact Pi.lift_π _ _
+  exact Pi.lift_comp_π _ _
 
 variable (J I) in
 /-- The reduction functor `- ⊗ᴸ R/Iⁿ` on `D(J, R)`. -/

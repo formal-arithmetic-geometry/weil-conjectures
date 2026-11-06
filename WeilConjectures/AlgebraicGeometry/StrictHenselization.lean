@@ -69,15 +69,15 @@ theorem strictHenselizationAffineInclusion_isEquivalence
   let G := (pointSmallEtale s).fiber
   have : (Functor.Elements.precomp F G).Faithful := ⟨by
     intro X Y f g h
-    apply Subtype.ext
-    exact F.map_injective (congrArg Subtype.val h)⟩
+    apply Functor.Elements.hom_ext
+    exact F.map_injective (congrArg Functor.Elements.Hom.hom h)⟩
   have : (Functor.Elements.precomp F G).Full := ⟨fun {X Y} f ↦
-    ⟨⟨F.preimage f.val, by
-      change G.map (F.map (F.preimage f.val)) X.snd = Y.snd
+    ⟨⟨F.preimage f.hom, by
+      change G.map (F.map (F.preimage f.hom)) X.val = Y.val
       rw [F.map_preimage]
-      exact f.property⟩, by
-      apply Subtype.ext
-      exact F.map_preimage f.val⟩⟩
+      exact f.map_val⟩, by
+      apply Functor.Elements.hom_ext
+      exact F.map_preimage f.hom⟩⟩
   have : (strictHenselizationAffineInclusion s).Faithful := by
     unfold strictHenselizationAffineInclusion
     infer_instance
@@ -86,19 +86,19 @@ theorem strictHenselizationAffineInclusion_isEquivalence
     infer_instance
   have : (strictHenselizationAffineInclusion s).EssSurj := by
     refine ⟨fun X ↦ ?_⟩
-    let V := X.obj.fst
+    let V := X.obj.obj
     have : IsAffine V.left := X.property
     let e := V.left.isoSpec
     let A : AffineEtale S := AffineEtale.mk (e.inv ≫ V.hom)
-    let y : G.obj (F.obj A) := Over.homMk (X.obj.snd.left ≫ e.hom) (by
-      change (X.obj.snd.left ≫ e.hom) ≫ (e.inv ≫ V.hom) = s
-      simpa using Over.w X.obj.snd)
+    let y : G.obj (F.obj A) := Over.homMk (X.obj.val.left ≫ e.hom) (by
+      change (X.obj.val.left ≫ e.hom) ≫ (e.inv ≫ V.hom) = s
+      simpa [V] using Over.w X.obj.val)
     refine ⟨(F ⋙ G).elementsMk A y, ⟨?_⟩⟩
     apply ObjectProperty.isoMk
     let i : F.obj A ≅ V := MorphismProperty.Over.isoMk e.symm rfl
-    refine CategoryOfElements.isoMk _ _ i ?_
+    refine Functor.Elements.isoMk i ?_
     apply Over.OverMorphism.ext
-    change (X.obj.snd.left ≫ e.hom) ≫ e.inv = X.obj.snd.left
+    change (X.obj.val.left ≫ e.hom) ≫ e.inv = X.obj.val.left
     simp
   exact { }
 
@@ -109,7 +109,7 @@ henselization (blueprint: def-weil-pbc-strict-henselization-limit). -/
 noncomputable def strictHenselizationCoordinateRings
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) : (strictHenselizationNeighbourhoods s)ᵒᵖ ⥤ CommRingCat.{u} :=
-  (CategoryOfElements.π _ ⋙ AffineEtale.Spec S ⋙ Etale.forget S ⋙ Over.forget S).op ⋙ Γ
+  (Functor.Elements.π _ ⋙ AffineEtale.Spec S ⋙ Etale.forget S ⋙ Over.forget S).op ⋙ Γ
 
 /-- The ring diagram on the chosen small representative category.
 Source: blueprint `sec-curve-estimates/lem-sc-second-kummer-divisors`, definition of strict

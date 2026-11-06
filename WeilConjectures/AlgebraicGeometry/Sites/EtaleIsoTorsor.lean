@@ -85,9 +85,9 @@ noncomputable def etaleIsoTorsor [SheafOfModules.IsInvertible.{u, u, u} (L : X.M
     refine ⟨fun a b h ↦ ?_, fun s ↦ ?_⟩
     · have h' := congrArg (fun x ↦ x.down.1) h
       have := @smulMor_comp_injective _ _ _ hA t.down.1 t.down.2 _ _ h'
-      exact ULift.ext _ _ (Additive.toMul.injective (Units.ext this))
+      exact ULift.ext (Additive.toMul.injective (Units.ext this))
     · obtain ⟨a, ha⟩ := @exists_smulMor_comp_eq _ _ _ hA t.down.1 s.down.1 t.down.2 s.down.2
-      exact ⟨ULift.up (Additive.ofMul a), ULift.ext _ _ (Subtype.ext ha)⟩
+      exact ⟨ULift.up (Additive.ofMul a), ULift.ext (Subtype.ext ha)⟩
   nonemptySieve_mem V := by
     have (w : V.left) := exists_isFreeGenerator (L : X.Modules) (W := ⊤) (x := V.hom w) trivial
     choose U hwU hUle s hs using this

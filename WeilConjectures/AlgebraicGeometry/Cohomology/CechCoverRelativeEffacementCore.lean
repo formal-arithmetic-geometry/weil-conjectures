@@ -61,7 +61,7 @@ private theorem cechCoverProductMap_localSplit {X : Scheme.{u}} {ι : Type u}
     A.counit.app ((U i).sheafRestrict.obj F), ?_⟩
   rw [← Functor.map_comp_assoc]
   change (U i).sheafRestrict.map (Pi.lift _ ≫ Pi.π _ i) ≫ _ = _
-  rw [Pi.lift_π]
+  rw [Pi.lift_comp_π]
   exact A.left_triangle_components F
 
 /-- Inserting the factor index contracts its Čech complex. -/

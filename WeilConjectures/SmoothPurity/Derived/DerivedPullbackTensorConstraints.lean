@@ -305,7 +305,7 @@ private theorem representative_braiding
       S.map (Prod.mkHom p.inv q.inv) ≫ x.inv) ≫
       (x.hom ≫ (γ P Q).hom ≫ y.inv) := by
   simp only [Functor.map_comp, Category.assoc, Iso.inv_hom_id_assoc,
-    Iso.map_inv_hom_id_assoc]
+    Iso.inv_hom_id_map_assoc]
   rw [reassoc_of% (hc M N), ← reassoc_of% (hn _ _ _ _ p.inv q.inv)]
 
 private theorem localizedBraiding_natural
@@ -350,13 +350,9 @@ private theorem localizedBraiding_natural
         (1 ⊗ₜ[R] (bi M.obj N.obj).hom)
     rw [ScalarLocalization.composition_tmul, ScalarLocalization.composition_tmul,
       one_mul, mul_one, mul_comm c a, hn]
-  induction f using TensorProduct.induction_on with
-  | zero => simp only [map_zero, LinearMap.zero_apply, Limits.zero_comp,
-      Limits.comp_zero]
+  induction f using TensorProduct.inductionOn with
   | tmul a f =>
-    induction g using TensorProduct.induction_on with
-    | zero => simp only [map_zero, LinearMap.zero_apply, Limits.zero_comp,
-        Limits.comp_zero]
+    induction g using TensorProduct.inductionOn with
     | tmul c g => exact ht a f c g
     | add g g' hg hg' =>
       simp only [map_add, LinearMap.add_apply, Preadditive.add_comp,
@@ -1018,8 +1014,7 @@ private theorem scalarUnit_rationalLeftUnitor_natural (W : Scheme.{u})
   obtain ⟨b, hb, hp⟩ := spec.2 U U M N
   change T.map (Prod.mkHom (𝟙 U) f) ≫ _ = _
   rw [hb]
-  induction f using TensorProduct.induction_on with
-  | zero => simp only [map_zero, Limits.zero_comp, Limits.comp_zero]
+  induction f using TensorProduct.inductionOn with
   | add f g hf hg =>
     change (b (𝟙 U)) (f + g) ≫ _ = _ ≫ (f + g)
     rw [map_add, Preadditive.add_comp]
@@ -1267,8 +1262,7 @@ private theorem scalarUnit_rationalRightUnitor_natural (W : Scheme.{u})
   obtain ⟨b, hb, hp⟩ := spec.2 M N U U
   change T.map (Prod.mkHom f (𝟙 U)) ≫ _ = _
   rw [hb]
-  induction f using TensorProduct.induction_on with
-  | zero => simp only [map_zero, LinearMap.zero_apply, Limits.zero_comp, Limits.comp_zero]
+  induction f using TensorProduct.inductionOn with
   | add f g hf hg =>
     change (b (f + g)) (𝟙 U) ≫ _ = _ ≫ (f + g)
     rw [map_add, LinearMap.add_apply, Preadditive.add_comp]

@@ -72,9 +72,9 @@ theorem rightDerivedFunctor_isDerivedLimitTriangle (X : Scheme.{u})
     intro n
     simp only [Category.assoc, he, towerTransitionEndomorphism, towerProductShift,
       Preadditive.comp_sub, Preadditive.sub_comp, Category.comp_id,
-      Pi.lift_π, Functor.map_sub]
+      Pi.lift_comp_π, Functor.map_sub]
     rw [← Category.assoc, he, ← Functor.map_comp]
-    rw [← Functor.map_comp, Pi.lift_π, Category.id_comp, Functor.map_comp]
+    rw [← Functor.map_comp, Pi.lift_comp_π, Category.id_comp, Functor.map_comp]
   exact Pretriangulated.isomorphic_distinguished _ (Φ.map_distinguished _ h) _
     (Pretriangulated.Triangle.isoMk _ _ (Iso.refl _) e.symm e.symm
       (by change (Φ.map p ≫ e.hom) ≫ e.inv = 𝟙 _ ≫ Φ.map p; simp)

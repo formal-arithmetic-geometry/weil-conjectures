@@ -91,7 +91,7 @@ theorem localHom_zero_iff_multiplicationTower_zero
       E.map (homOfLE (Nat.le_succ n)) ≫ Sigma.ι _ (n + 1)
     rw [show E.map (homOfLE (Nat.le_succ n)) = localSectionMultiplication R U f _ from
       Functor.ofSequence_map_homOfLE_succ _ n]
-    exact Sigma.ι_desc _ n
+    exact Sigma.ι_comp_desc _ n
   have : IsGrothendieckAbelian.{u} A := SheafOfModules.isGrothendieckAbelian _
   have : AB5OfSize.{0, 0} A := AB5OfSize_shrink _
   have : Mono d := sequentialTelescope_mono E B hB d hd

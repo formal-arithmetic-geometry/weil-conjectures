@@ -247,7 +247,7 @@ theorem exists_distinguished_derivedComplete (K : DerivedCategory (Sheaf J (Modu
       (𝟙 _ - towerShift hPKM) (TM.map δK ≫ (TM.commShiftIso (1 : ℤ)).hom.app K) ∈
         distTriang _ :=
     isomorphic_distinguished _ (TM.map_distinguished _ hTK) _
-      (Triangle.isoMk _ _ (Iso.refl _) (Iso.refl _) (Iso.refl _) (by simp; rfl)
+      (Triangle.isoMk _ _ (Iso.refl _) (Iso.refl _) (Iso.refl _) (by simp)
         (by
           simp only [Triangle.mk_mor₂, Iso.refl_hom, comp_id, id_comp]
           change _ = TM.map (𝟙 PK.pt - towerShift hPK)
@@ -257,13 +257,13 @@ theorem exists_distinguished_derivedComplete (K : DerivedCategory (Sheaf J (Modu
   have hTFM : Triangle.mk (TM.map ι) (𝟙 _ - towerShift hPM)
       (TM.map ε ≫ (TM.commShiftIso (1 : ℤ)).hom.app F) ∈ distTriang _ :=
     isomorphic_distinguished _ (TM.map_distinguished _ hT) _
-      (Triangle.isoMk _ _ (Iso.refl _) (Iso.refl _) (Iso.refl _) (by simp; rfl)
+      (Triangle.isoMk _ _ (Iso.refl _) (Iso.refl _) (Iso.refl _) (by simp)
         (by
           simp only [Triangle.mk_mor₂, Iso.refl_hom, comp_id, id_comp]
           change _ = TM.map (𝟙 P.pt - towerShift hP)
           rw [Functor.map_sub, CategoryTheory.Functor.map_id, ht]
           rfl)
-        (by simp; rfl))
+        (by simp))
   let a : F' ⟶ G' := Functor.whiskerRight c.π TM
   have hb := exists_lift_whiskerRight_derivedCompletionCone hϖ hI K
   choose b hb₁ hb₂ using hb

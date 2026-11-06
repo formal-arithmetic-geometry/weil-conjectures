@@ -9,12 +9,14 @@ module
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
+public import Mathlib.CategoryTheory.Sites.Adjunction
 import WeilConjectures.Algebra.FinitelyGeneratedCyclicFunctorVanishing
 import WeilConjectures.AlgebraicGeometry.ConstantAbelianHigherDirectImageFilteredColimit
 import WeilConjectures.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageForgetComparison
 import Mathlib.Algebra.Colimit.Finiteness
 import Mathlib.Algebra.Category.ModuleCat.Limits
 import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
+public import Mathlib.CategoryTheory.Sites.Adjunction
 
 /-!
 # Reduction of constant module coefficients to cyclic abelian coefficients
@@ -86,6 +88,10 @@ theorem isZero_constantModHigherDirectImage_of_cyclic
     have : (ModuleCat.restrictScalars.{u + 1} (Int.castRingHom Λ)).IsLeftAdjoint :=
       (ModuleCat.restrictCoextendScalarsAdj.{u + 1} (Int.castRingHom Λ)).isLeftAdjoint
     infer_instance
+  have : Y.smallEtaleTopology.PreservesSheafification
+      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}) :=
+    Sheaf.preservesSheafification_of_adjunction _
+      (Adjunction.ofIsLeftAdjoint (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}))
   let UΛ := sheafCompose X.smallEtaleTopology
     (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})
   have : UΛ.PreservesZeroMorphisms := ⟨fun _ _ ↦ by rfl⟩

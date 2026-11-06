@@ -173,8 +173,7 @@ private theorem reduction_ext {R S : Sheaf J CommRingCat.{r}} (q : R ⟶ S)
   apply (PresheafOfModules.homEquivOfIsLocallyBijective
     (preUnit q M) N.isSheaf).injective
   ext U x
-  induction x using TensorProduct.induction_on with
-  | zero => simp
+  induction x using TensorProduct.inductionOn with
   | tmul s m => exact h U s m
   | add x y hx hy => simpa only [map_add] using congrArg₂ (· + ·) hx hy
 
@@ -274,7 +273,8 @@ private def oneTensor {R S : Sheaf J CommRingCat.{r}} (q : R ⟶ S) (M : Mod R) 
   naturality := by
     intro U V i
     ext m
-    change (1 : S.obj.obj V) ⊗ₜ[R.obj.obj V, (q.hom.app V).hom] M.val.map i m =
+    change (1 : S.obj.obj V) ⊗ₜ[R.obj.obj V, (q.hom.app V).hom]
+        (show M.val.obj V from M.val.map i m) =
       changeOfRingsMap q M i ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (q.hom.app U).hom] m)
     rw [show changeOfRingsMap q M i _ = _ from
       Classical.choose_spec (exists_changeOfRingsMap q M i) 1 m, map_one]

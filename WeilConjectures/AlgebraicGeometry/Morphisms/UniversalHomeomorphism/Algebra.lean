@@ -110,7 +110,7 @@ lemma of_subalgebra (B₀ : Subalgebra A B) : Algebra.IsUniversalHomeomorphism A
       constructor
       intro x
       have := Algebra.IsIntegral.isIntegral (R := A) (x : B)
-      rwa [← isIntegral_algebraMap_iff (A := B₀) (B := B) Subtype.val_injective]
+      rwa [← isIntegral_algebraMap_iff (A := B₀) (B := B)]
     have hint' : Algebra.IsIntegral B₀ B :=
       Algebra.IsIntegral.tower_top (R := A) (S := B₀) (T := B)
     have hsurj : Function.Surjective (PrimeSpectrum.comap (algebraMap B₀ B)) :=
@@ -146,7 +146,7 @@ instance _root_.Algebra.IsUniversalHomeomorphism.of_isPurelyInseparable (K L : T
       ((algebraMap_isIntegral_iff (R := K) (A := L)).mpr inferInstance)
     have h2 : Surjective f := ⟨fun x ↦ ⟨IsLocalRing.closedPoint L, Subsingleton.elim _ _⟩⟩
     have h3 : UniversallyInjective f := by
-      refine ((tfae_universallyInjective f).out 1 0).mp ?_
+      refine ((tfae_universallyInjective f).out 2 1).mp ?_
       intro Ω _ g₁ g₂ hg
       rw [← Spec.map_preimage g₁, ← Spec.map_preimage g₂] at hg ⊢
       simp only [f, ← Spec.map_comp] at hg

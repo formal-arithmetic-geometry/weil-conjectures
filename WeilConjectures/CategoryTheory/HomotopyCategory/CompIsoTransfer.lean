@@ -53,6 +53,5 @@ lemma compIsoTransfer_mapHomotopyCategory_quotient (adj' : T ⊣ R') (adj : Ψ �
     ext n
     simp only [hφ, compIsoTransfer, homEquiv_unit]
     simp
-    rfl
 
 end CategoryTheory.Adjunction

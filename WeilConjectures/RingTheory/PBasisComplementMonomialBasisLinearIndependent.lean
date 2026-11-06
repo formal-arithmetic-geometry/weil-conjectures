@@ -83,9 +83,9 @@ private theorem paired_monomials
     ⟨(q.2 : I →₀ ℕ) + d q.1, by
       intro i
       by_cases hi : i ∈ J
-      · simp only [Finsupp.add_apply, q.2.property.2 i hi, zero_add, hd, dif_pos hi]
+      · simp only [Finsupp.add_apply, q.2.property.2 i hi, zero_add, hd, dite_eq_left hi]
         exact (q.1 ⟨i, hi⟩).isLt
-      · simpa only [Finsupp.add_apply, hd, dif_neg hi, add_zero] using q.2.property.1 i⟩
+      · simpa only [Finsupp.add_apply, hd, dite_eq_right hi, add_zero] using q.2.property.1 i⟩
   have hinj : Function.Injective merge := by
     intro q r h
     have heq (i : I) := congrArg (fun E : {E : I →₀ ℕ // ∀ i, E i < p} ↦
@@ -94,7 +94,7 @@ private theorem paired_monomials
       funext i
       apply Fin.ext
       simpa only [merge, Finsupp.add_apply, q.2.property.2 i i.property,
-        r.2.property.2 i i.property, zero_add, hd, dif_pos i.property] using heq i
+        r.2.property.2 i i.property, zero_add, hd, dite_eq_left i.property] using heq i
     have hright : q.2 = r.2 := by
       apply Subtype.ext
       ext i
@@ -107,7 +107,7 @@ private theorem paired_monomials
     · rw [← Finset.prod_attach]
       apply Finset.prod_congr rfl
       intro i _
-      simp only [dif_pos i.property]
+      simp only [dite_eq_left i.property]
     · intro i _
       exact pow_zero _
   have h := hli.comp merge hinj

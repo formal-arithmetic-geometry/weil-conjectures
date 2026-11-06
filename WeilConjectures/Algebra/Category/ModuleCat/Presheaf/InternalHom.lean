@@ -5,11 +5,13 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.MonoidalCompat
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Pushforward
 public import Mathlib.Algebra.Category.Ring.Limits
 public import Mathlib.CategoryTheory.Comma.Over.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Basic
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.MonoidalCompat
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal
 
 /-!
 # The internal hom of presheaves of modules
@@ -50,6 +52,8 @@ If `N` is a sheaf, then so is `homObj M N`: this is `PresheafOfModules.isSheaf_h
 -/
 
 @[expose] public section
+
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false
 
 universe v v₁ v₂ u₁ u₂ u
 
@@ -367,7 +371,7 @@ noncomputable def tensorHomCurryApp (φ : M ⊗ P ⟶ N) {U : C} (p : P.obj (op 
       (naturality_apply φ f.unop.left.op (m ⊗ₜ[R.obj (op W.unop.left)] P.map W.unop.hom.op p))
     refine (congrArg (fun q : P.obj (op W'.unop.left) ↦
       M.map f.unop.left.op m ⊗ₜ[R.obj (op W'.unop.left)] q) ?_).trans
-        (Monoidal.tensorObj_map_tmul f.unop.left.op m _).symm
+        (PresheafOfModules.Monoidal.tensorObj_map_tmul f.unop.left.op m _).symm
     rw [← map_comp_apply, ← op_comp, Over.w]
 
 @[simp]

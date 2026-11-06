@@ -84,9 +84,9 @@ lemma finFreeMatrix_id {n : ℕ} : finFreeMatrix (𝟙 (finiteFree R n)) = 1 := 
   rw [finFreeMatrix_apply, finFreeEntry, Category.id_comp, Matrix.one_apply]
   by_cases h : b = a
   · subst h
-    rw [biproduct.ι_π_self, if_pos rfl]
+    rw [biproduct.ι_π_self, ite_eq_left rfl]
     rfl
-  · rw [biproduct.ι_π_ne _ h, if_neg (Ne.symm h)]
+  · rw [biproduct.ι_π_ne _ h, ite_eq_right (Ne.symm h)]
 
 omit [PreservesFiniteColimits (tensorLeft R)] in
 /-- A morphism of free module objects is determined by its matrix. -/

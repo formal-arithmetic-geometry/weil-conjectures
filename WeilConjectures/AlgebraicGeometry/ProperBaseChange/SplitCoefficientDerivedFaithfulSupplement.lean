@@ -144,7 +144,7 @@ private lemma derived_faithful [PreservesFiniteLimits (Mod.extendScalars φ)]
         rw [← Category.assoc, ← ηD.naturality, Category.assoc]
         simpa using congrArg (I.mapDerivedCategory.map g ≫ ·) (congr_app hsD B)
   have : (F.mapDerivedCategory ⋙ G.mapDerivedCategory).Faithful :=
-    Functor.Faithful.of_iso (Functor.mapDerivedCategoryCompIso F G)
+    Functor.Faithful.of_iso (Functor.mapDerivedCategoryCompIso F G).symm
   exact Functor.Faithful.of_comp F.mapDerivedCategory G.mapDerivedCategory
 
 end AlgebraicGeometry.ProEtale

@@ -47,7 +47,7 @@ private theorem restrict_derived_adjunction (adj : f ⊣ g) :
       g.ιRightDerivedFunctorUnit.app (f.mapHomotopyCategoryPlus.obj K) := by
     simp [Functor.rightDerivedFunctorPlusCompatibility]
   have h₄ : DerivedCategory.Plus.ι.map
-      (g.rightDerivedFunctorPlusUnit.app (f.mapHomotopyCategoryPlus.obj K)) =
+      (g.rightDerivedFunctorPlusUnith.app (f.mapHomotopyCategoryPlus.obj K)) =
       g.ιRightDerivedFunctorUnit.app (f.mapHomotopyCategoryPlus.obj K) ≫
         g.rightDerivedFunctorPlusCompatibility.inv.app
           (DerivedCategory.Plus.Qh.obj (f.mapHomotopyCategoryPlus.obj K)) := by

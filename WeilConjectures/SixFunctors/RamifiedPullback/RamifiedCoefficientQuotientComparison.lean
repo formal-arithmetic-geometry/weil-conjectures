@@ -117,8 +117,7 @@ private theorem quotientSectionMap_bijective (c : R ⟶ S) (p : R ⟶ A) (q : S 
     change v (c.hom.app U x) = 0
     rw [hvp, show p.hom.app U x = 0 from hx, TensorProduct.tmul_zero]
   have hgen (z : T) : ∃ s, v s = z := by
-    induction z using TensorProduct.induction_on with
-    | zero => exact ⟨0, map_zero v⟩
+    induction z using TensorProduct.inductionOn with
     | tmul s x =>
       obtain ⟨x, rfl⟩ := hp x
       refine ⟨(show S.obj.obj U from s) * c.hom.app U x, ?_⟩

@@ -57,7 +57,7 @@ theorem IsAmple.exists_finite_common_power_cover (X : Scheme.{u}) (L : X.Modules
       (⨆ i, (Hom.zeroLocus (s i)).support.compl) = ⊤ := by
   classical
   have : SheafOfModules.IsInvertible.{u, u, u} (𝟙_ X.Modules) :=
-    inferInstanceAs (SheafOfModules.IsInvertible.{u, u, u} (SheafOfModules.unit X.ringCatSheaf))
+    SheafOfModules.instIsInvertibleUnit.{u, u, u}
   let : CompactSpace X := hL.1
   choose n hn a U hx hU ha using hL.2
   let σ (x : X) : 𝟙_ X.Modules ⟶ L.tensorPow (n x) :=

@@ -67,7 +67,7 @@ private theorem depth_subsingleton {R : Type u} [CommRing R] [IsLocalRing R]
     (M : Type u) [AddCommGroup M] [Module R M] [Module.Finite R M] [Subsingleton M] :
     IsLocalRing.depth (R := R) M = ⊤ := by
   unfold IsLocalRing.depth Ideal.depth
-  rw [if_pos (Subsingleton.elim _ _)]
+  rw [ite_eq_left (Subsingleton.elim _ _)]
 
 private theorem depth_one_of_short_exact {R : Type u} [CommRing R]
     [IsNoetherianRing R] [IsLocalRing R]

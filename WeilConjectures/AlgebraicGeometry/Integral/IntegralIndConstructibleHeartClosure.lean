@@ -340,7 +340,7 @@ theorem integralIndConstructibleHeartClosure_of_isNoetherian
       change ObjectProperty.EssentiallySmall.{u + 1} (IsConstantModelConstructible Λ X)
       rw [show IsConstantModelConstructible Λ X = IsFiniteConstantStratified Λ X by
         funext M
-        exact if_pos ⟨inferInstance, inferInstance⟩]
+        exact ite_eq_left ⟨inferInstance, inferInstance⟩]
       exact stratifiedModelsSmall Λ X
     infer_instance
   have hpres := canonicalPresentation_of_finitePresentation Λ X hsmall

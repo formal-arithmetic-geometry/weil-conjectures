@@ -72,14 +72,14 @@ theorem etale_finite_family_section_gluing
     intro j
     change Etale (Sigma.ι V j ≫ q)
     dsimp [q]
-    rw [Sigma.ι_desc]
+    rw [Sigma.ι_comp_desc]
     exact (U j).prop
   have hs : Surjective q := ⟨by
     intro x
     obtain ⟨j, y, hy⟩ := Set.mem_iUnion.mp (hcover (Set.mem_univ x))
     refine ⟨Sigma.ι V j y, ?_⟩
     change (Sigma.ι V j ≫ q) y = x
-    rw [show Sigma.ι V j ≫ q = (U j).hom from Sigma.ι_desc _ _]
+    rw [show Sigma.ι V j ≫ q = (U j).hom from Sigma.ι_comp_desc _ _]
     exact hy⟩
   let π : ∀ j, U j ⟶ Scheme.Etale.mk q := fun j ↦
     MorphismProperty.Over.homMk (Sigma.ι V j) (by simp [q])

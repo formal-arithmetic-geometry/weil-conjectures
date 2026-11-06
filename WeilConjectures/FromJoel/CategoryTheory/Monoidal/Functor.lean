@@ -115,13 +115,13 @@ def ofIso {F G : C ⥤ D} [F.LaxMonoidal] (e : F ≅ G) : G.LaxMonoidal where
     rw [assoc, assoc, tensorHom_def_assoc,
       ← comp_whiskerRight_assoc, assoc, e.hom_inv_id_app, comp_id,
       ← whisker_exchange_assoc, id_whiskerLeft_assoc, left_unitality_inv_assoc,
-      NatTrans.naturality_assoc, Iso.inv_hom_id_app_assoc, Iso.map_inv_hom_id, comp_id]
+      NatTrans.naturality_assoc, Iso.inv_hom_id_app_assoc, Iso.inv_hom_id_map, comp_id]
   right_unitality X := by
     rw [assoc, assoc, tensorHom_def'_assoc, ← MonoidalCategory.whiskerLeft_comp_assoc,
       assoc, Iso.hom_inv_id_app, comp_id, whisker_exchange_assoc,
       MonoidalCategory.whiskerRight_id_assoc, right_unitality_inv_assoc,
       NatTrans.naturality_assoc, Iso.inv_hom_id_app_assoc,
-      Iso.map_inv_hom_id, comp_id]
+      Iso.inv_hom_id_map, comp_id]
 
 end LaxMonoidal
 

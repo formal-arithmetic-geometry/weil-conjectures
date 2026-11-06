@@ -80,7 +80,9 @@ instance Functor.commShift_rightDerivedFunctorUnit
   have := hi
   refine ⟨HomotopyCategory.KInjectives.mk I,
     (HomotopyCategory.quotient C (.up ℤ)).map i, ?_⟩
-  change IsIso (F.rightDerivedFunctor.map (DerivedCategory.Q.map i))
+  have : IsIso (DerivedCategory.Qh.map ((HomotopyCategory.quotient C (.up ℤ)).map i)) :=
+    (NatIso.isIso_map_iff (DerivedCategory.quotientCompQhIso C) i).2 inferInstance
+  dsimp only [Functor.comp_map]
   infer_instance
 
 namespace Adjunction

@@ -542,7 +542,7 @@ private theorem injective_tower_transition_split
       apply Sigma.hom_ext
       intro g
       simp only [i, r, colimit.ι_desc_assoc, Cofan.mk_ι_app,
-        dif_pos (show Nonempty (op n ⟶ m) from ⟨g⟩), colimit.ι_desc]
+        dite_eq_left (show Nonempty (op n ⟶ m) from ⟨g⟩), colimit.ι_desc]
       exact (congrArg (Sigma.ι (fun _ : op n ⟶ m ↦ M))
         (Subsingleton.elim _ g)).trans (Category.comp_id _).symm
     exact (IsSplitMono.mk' ⟨r, hr⟩).mono
@@ -680,7 +680,7 @@ private lemma roos_kernel (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) :
   exact tower_kernel I.asFunctor (limit.cone _) (limit.isLimit _)
     (limit.cone (Discrete.functor (fun n : ℕ ↦ I.asFunctor.obj (op n))))
     (limit.isLimit _) (InjectiveTowerRoos.inclusion I) (roosU I)
-    (fun n ↦ Pi.lift_π _ n)
+    (fun n ↦ Pi.lift_comp_π _ n)
     (fun n ↦ (towerTransitionEndomorphism_eq_iff _ _).mp rfl n)
 
 omit [HasLimitsOfShape ℕᵒᵖ A] in
@@ -715,7 +715,7 @@ private lemma inclusion_shift (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (m : �
   have hi (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (q : ℤ) (n : ℕ) :
       (InjectiveTowerRoos.inclusion I).f q ≫ π I q n =
         (limit.π I.asFunctor (op n)).f q :=
-    congrArg (fun f ↦ f.f q) (Pi.lift_π (fun n : ℕ ↦ limit.π I.asFunctor (op n)) n)
+    congrArg (fun f ↦ f.f q) (Pi.lift_comp_π (fun n : ℕ ↦ limit.π I.asFunctor (op n)) n)
   simp only [← Category.assoc, hi]
   have h := limitShift_π I m q n
   erw [Category.id_comp] at h

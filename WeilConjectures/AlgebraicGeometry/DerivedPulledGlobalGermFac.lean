@@ -70,10 +70,10 @@ theorem derivedPulledGlobalGerm_fac
     let c := S.mapDerivedCategoryPlusFactorsh.inv.app
         (F'.mapHomotopyCategoryPlus.obj (G'.mapHomotopyCategoryPlus.obj M)) ≫
       S.mapDerivedCategoryPlus.map
-        (F'.rightDerivedFunctorPlusUnit.app (G'.mapHomotopyCategoryPlus.obj M)) ≫
+        (F'.rightDerivedFunctorPlusUnith.app (G'.mapHomotopyCategoryPlus.obj M)) ≫
       S.mapDerivedCategoryPlus.map (F'.rightDerivedFunctorPlus.map
         (G'.mapDerivedCategoryPlusFactorsh.inv.app M))
-    H.rightDerivedFunctorPlusUnit.app M ≫
+    H.rightDerivedFunctorPlusUnith.app M ≫
         (derivedPulledGlobalGerm f g t).app (DerivedCategory.Plus.Qh.obj M) ≫
         S.mapDerivedCategoryPlus.map
           ((derivedBaseChangeMapPlus B sq).app (DerivedCategory.Plus.Qh.obj M)) =
@@ -89,13 +89,13 @@ theorem derivedPulledGlobalGerm_fac
     (upperStarLowerStarAdjunction B f)
   let e := Functor.rightDerivedFunctorPlusCompIso' F J
     (lowerStarCompGlobalSectionsIso B f)
-  have he : H.rightDerivedFunctorPlusUnit.app M ≫
+  have he : H.rightDerivedFunctorPlusUnith.app M ≫
       e.inv.app (DerivedCategory.Plus.Qh.obj M) =
       DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus
         (lowerStarCompGlobalSectionsIso B f).inv).app M) ≫
-      J.rightDerivedFunctorPlusUnit.app (F.mapHomotopyCategoryPlus.obj M) ≫
-      J.rightDerivedFunctorPlus.map (F.rightDerivedFunctorPlusUnit.app M) := by
-    change H.rightDerivedFunctorPlusUnit.app M ≫
+      J.rightDerivedFunctorPlusUnith.app (F.mapHomotopyCategoryPlus.obj M) ≫
+      J.rightDerivedFunctorPlus.map (F.rightDerivedFunctorPlusUnith.app M) := by
+    change H.rightDerivedFunctorPlusUnith.app M ≫
       ((Functor.rightDerivedFunctorPlusNatTrans
         (lowerStarCompGlobalSectionsIso B f).inv).app (DerivedCategory.Plus.Qh.obj M) ≫
         (Functor.rightDerivedFunctorPlusCompIso F J).hom.app
@@ -103,13 +103,12 @@ theorem derivedPulledGlobalGerm_fac
     rw [Functor.rightDerivedFunctorPlusNatTrans_app_assoc,
       Functor.rightDerivedFunctorPlusCompIso_fac_app,
       Functor.rightDerivedFunctorPlusCompUnit_app]
-    rfl
   let β := Functor.rightDerivedFunctorPlusNatTrans (pulledGlobalGerm g t) ≫
     (G ⋙ S).rightDerivedFunctorPlusIsoMapDerivedCategoryPlus.hom ≫
     (Functor.mapDerivedCategoryPlusCompIso G S).hom
   set_option backward.isDefEq.respectTransparency false in
   have hβ (K : HomotopyCategory.Plus (Sheaf Y.smallEtaleTopology B)) :
-      J.rightDerivedFunctorPlusUnit.app K ≫ β.app (DerivedCategory.Plus.Qh.obj K) =
+      J.rightDerivedFunctorPlusUnith.app K ≫ β.app (DerivedCategory.Plus.Qh.obj K) =
       DerivedCategory.Plus.Qh.map
         ((NatTrans.mapHomotopyCategoryPlus (pulledGlobalGerm g t)).app K) ≫
       S.mapDerivedCategoryPlusFactorsh.inv.app (G.mapHomotopyCategoryPlus.obj K) ≫
@@ -130,10 +129,10 @@ theorem derivedPulledGlobalGerm_fac
     erw [hc]
     simp
     rfl
-  have hnat := β.naturality (F.rightDerivedFunctorPlusUnit.app M)
+  have hnat := β.naturality (F.rightDerivedFunctorPlusUnith.app M)
   dsimp only [Functor.comp_obj, Functor.comp_map] at hnat
   set_option backward.isDefEq.respectTransparency false in
-    change H.rightDerivedFunctorPlusUnit.app M ≫
+    change H.rightDerivedFunctorPlusUnith.app M ≫
       (e.inv.app (DerivedCategory.Plus.Qh.obj M) ≫
         β.app (F.rightDerivedFunctorPlus.obj (DerivedCategory.Plus.Qh.obj M))) ≫
       S.mapDerivedCategoryPlus.map

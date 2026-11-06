@@ -51,7 +51,7 @@ private theorem derived_unit_germ_fac
         Functor.whiskerLeft F'.rightDerivedFunctorPlus
           (Functor.rightDerivedFunctorPlusNatTrans γ ≫
             S.rightDerivedFunctorPlusIsoMapDerivedCategoryPlus.hom)
-    H.rightDerivedFunctorPlusUnit.app M ≫
+    H.rightDerivedFunctorPlusUnith.app M ≫
         (H.rightDerivedFunctorPlus.map
           (adj.derivedPlus.unit.app (DerivedCategory.Plus.Qh.obj M)) ≫
           (Functor.rightDerivedFunctorPlusCompIso' R H e).hom.app
@@ -61,7 +61,7 @@ private theorem derived_unit_germ_fac
         S.mapDerivedCategoryPlusFactorsh.inv.app
           (F'.mapHomotopyCategoryPlus.obj (L.mapHomotopyCategoryPlus.obj M)) ≫
         S.mapDerivedCategoryPlus.map
-          (F'.rightDerivedFunctorPlusUnit.app (L.mapHomotopyCategoryPlus.obj M)) ≫
+          (F'.rightDerivedFunctorPlusUnith.app (L.mapHomotopyCategoryPlus.obj M)) ≫
         S.mapDerivedCategoryPlus.map
           (F'.rightDerivedFunctorPlus.map (L.mapDerivedCategoryPlusFactorsh.inv.app M)) := by
   dsimp only
@@ -74,7 +74,7 @@ private theorem derived_unit_germ_fac
   -- Expand the derived adjunction unit and move its localization factor through Leray.
   have hu : adj.derivedPlus.unit.app (DerivedCategory.Plus.Qh.obj M) =
       DerivedCategory.Plus.Qh.map (adj.mapHomotopyCategoryPlus.unit.app M) ≫
-        R.rightDerivedFunctorPlusUnit.app (L.mapHomotopyCategoryPlus.obj M) ≫
+        R.rightDerivedFunctorPlusUnith.app (L.mapHomotopyCategoryPlus.obj M) ≫
         R.rightDerivedFunctorPlus.map (L.mapDerivedCategoryPlusFactorsh.inv.app M) := by
     rw [← Category.assoc, ← adj.derivedPlus_unit_app_fac, Category.assoc,
       ← Functor.map_comp]
@@ -86,7 +86,7 @@ private theorem derived_unit_germ_fac
   simp only [Functor.comp_map] at hn
   dsimp only [Functor.comp_obj] at hn
   rw [reassoc_of% hn]
-  have hH := H.rightDerivedFunctorPlusUnit.naturality
+  have hH := H.rightDerivedFunctorPlusUnith.naturality
     (adj.mapHomotopyCategoryPlus.unit.app M)
   simp only [Functor.comp_map] at hH
   rw [← reassoc_of% hH]
@@ -103,7 +103,7 @@ private theorem derived_unit_germ_fac
   -- The inverse target Leray map carries the global-sections unit to the composite unit.
   have hf := NatTrans.congr_app (Functor.rightDerivedFunctorPlusCompIso'_fac F' T e') N
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app] at hf
-  have hf' : H'.rightDerivedFunctorPlusUnit.app N ≫
+  have hf' : H'.rightDerivedFunctorPlusUnith.app N ≫
       (Functor.rightDerivedFunctorPlusCompIso' F' T e').inv.app
         (DerivedCategory.Plus.Qh.obj N) =
       DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus e'.inv).app N) ≫
@@ -124,7 +124,7 @@ private theorem derived_unit_germ_fac
   -- Move the direct-image unit through the germ, then use exactness of the stalk.
   let τ := Functor.rightDerivedFunctorPlusNatTrans γ ≫
     S.rightDerivedFunctorPlusIsoMapDerivedCategoryPlus.hom
-  have ht := τ.naturality (F'.rightDerivedFunctorPlusUnit.app N)
+  have ht := τ.naturality (F'.rightDerivedFunctorPlusUnith.app N)
   dsimp only [Functor.comp_obj] at ht
   dsimp only [τ, NatTrans.comp_app] at ht
   erw [reassoc_of% ht]
@@ -213,10 +213,10 @@ theorem derivedGlobalGerm_unit_fac
     let c := S.mapDerivedCategoryPlusFactorsh.inv.app
         (F'.mapHomotopyCategoryPlus.obj (G'.mapHomotopyCategoryPlus.obj M)) ≫
       S.mapDerivedCategoryPlus.map
-        (F'.rightDerivedFunctorPlusUnit.app (G'.mapHomotopyCategoryPlus.obj M)) ≫
+        (F'.rightDerivedFunctorPlusUnith.app (G'.mapHomotopyCategoryPlus.obj M)) ≫
       S.mapDerivedCategoryPlus.map (F'.rightDerivedFunctorPlus.map
         (G'.mapDerivedCategoryPlusFactorsh.inv.app M))
-    H.rightDerivedFunctorPlusUnit.app M ≫
+    H.rightDerivedFunctorPlusUnith.app M ≫
         (H.rightDerivedFunctorPlus.map
           ((upperStarLowerStarAdjunction B g').derivedPlus.unit.app
             (DerivedCategory.Plus.Qh.obj M)) ≫

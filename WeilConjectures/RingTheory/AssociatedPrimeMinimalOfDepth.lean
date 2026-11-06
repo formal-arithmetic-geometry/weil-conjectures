@@ -51,7 +51,7 @@ theorem mem_minimalPrimes_of_depth_ge {T : Type u} [CommRing T] [IsNoetherianRin
   refine ⟨hp.isPrime, ?_⟩
   intro q hq hqp
   by_contra hpq
-  obtain ⟨x, hxp, hxq⟩ := SetLike.not_le_iff_exists.mp hpq
+  obtain ⟨x, hxp, hxq⟩ := IsConcreteLE.not_le_iff_exists.mp hpq
   let : q.IsPrime := hq
   have hdrop : ringKrullDim (T ⧸ p) + 1 ≤ ringKrullDim (T ⧸ q) := by
     apply ringKrullDim_succ_le_of_surjective (Ideal.Quotient.factor hqp)

@@ -101,8 +101,8 @@ theorem isIso_homOfIsFreeGenerator_reindex (β γ : Type u) (b : γ ≃ β)
       rfl
     let Y := 𝔸({j : n // j ≠ i}; S)
     let w : n → Γ(Y, ⊤) := fun a ↦ if h : a = i then 1 else AffineSpace.coord S ⟨a, h⟩
-    have hwi : w i = 1 := dif_pos rfl
-    have hwj (j : {j : n // j ≠ i}) : w j.1 = AffineSpace.coord S j := dif_neg j.2
+    have hwi : w i = 1 := dite_eq_left rfl
+    have hwj (j : {j : n // j ≠ i}) : w j.1 = AffineSpace.coord S j := dite_eq_right j.2
     have hw : Ideal.span (Set.range w) = ⊤ :=
       Ideal.eq_top_of_isUnit_mem _ (Ideal.subset_span ⟨i, rfl⟩)
         (by rw [hwi]; exact isUnit_one)

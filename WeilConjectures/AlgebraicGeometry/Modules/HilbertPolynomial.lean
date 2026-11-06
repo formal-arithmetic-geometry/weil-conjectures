@@ -452,7 +452,7 @@ theorem exists_hom_free_isIso_restrictFunctor_map (F : X.Modules)
   change (restrictFunctor V.ι).map (SheafOfModules.ιFree i) ≫ _ =
     (restrictFunctor V.ι).map (SheafOfModules.ιFree i) ≫ _
   rw [← Functor.map_comp, show SheafOfModules.ιFree i ≫ φ = homOfGlobalSection _ (u i) from
-    Sigma.ι_desc _ _, ← cancel_epi (restrictUnitIso V.ι).inv]
+    Sigma.ι_comp_desc _ _, ← cancel_epi (restrictUnitIso V.ι).inv]
   rw [← sub_eq_zero, ← Preadditive.comp_sub]
   refine eq_zero_of_app_top_one _ ?_
   rw [Preadditive.comp_sub, Hom.sub_app]

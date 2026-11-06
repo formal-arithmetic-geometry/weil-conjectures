@@ -50,7 +50,7 @@ theorem depth_le_supportDim {R : Type u} [CommRing R] [IsNoetherianRing R]
   rw [← WithBot.coe_unbot (Module.supportDim R M) hd]
   apply WithBot.coe_le_coe.mpr
   unfold IsLocalRing.depth Ideal.depth
-  rw [if_neg hm]
+  rw [ite_eq_right hm]
   apply sSup_le
   rintro n ⟨rs, hreg, _, rfl⟩
   apply WithBot.coe_le_coe.mp

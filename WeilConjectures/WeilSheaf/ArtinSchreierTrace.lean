@@ -309,7 +309,7 @@ theorem affineLine.frobeniusEnd_stalkAt_artinSchreierImage {n : ℕ} (hn : 1 ≤
   have hc : (ULift.up (ψ d) • 𝟙 ((WeilSheaf.adicConstant k₀ l (affineLine k₀)).stalkObj t)) ≫
       (ULift.up (ψ (-d)) • 𝟙 _) = 𝟙 _ := by
     have h1 : ULift.up (ψ d) * ULift.up (ψ (-d)) = (1 : ULift.{u + 1} (PadicAlgCl l)) :=
-      ULift.ext _ _ ((AddChar.map_add_eq_mul ψ d (-d)).symm.trans
+      ULift.ext ((AddChar.map_add_eq_mul ψ d (-d)).symm.trans
         (by rw [add_neg_cancel, AddChar.map_zero_eq_one]; rfl))
     rw [Linear.smul_comp, Linear.comp_smul, Category.comp_id, smul_smul, h1, one_smul]
   have e₁ := key =≫ (ULift.up (ψ (-d)) • 𝟙 _)

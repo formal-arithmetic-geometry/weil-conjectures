@@ -8,6 +8,7 @@ module
 public import Mathlib.CategoryTheory.Monoidal.Cartesian.Grp
 public import WeilConjectures.AlgebraicGeometry.DualNumbers
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Basic
+public import WeilConjectures.AlgebraicGeometry.Modules.LocalDerivation
 
 /-!
 # Infinitesimal points of a group scheme
@@ -120,7 +121,8 @@ noncomputable def omegaHom (v : Scheme.dualNumbersOver S ⟶ G) :
       Scheme.Modules.unitModule S :=
   ((Scheme.Modules.pullbackPushforwardAdjunction _).homEquiv _ _).symm
     ((PresheafOfModules.sheafificationHomEquiv (𝟙 _)).symm
-      ((PresheafOfModules.DifferentialsConstruction.isUniversal' _).desc (infDerivation G v)))
+      ((PresheafOfModulesOfCommRing.DifferentialsConstruction.isUniversal' _).desc
+        (infDerivation G v)))
 
 /-- The bridge from infinitesimal points to the Lie algebra: a point `v : S[ε] ⟶ G` reducing to
 the identity goes to the `ε`-coefficient of `v^♯`, a derivation `𝒪_G → e_*𝒪_S`, that is a morphism

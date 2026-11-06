@@ -68,8 +68,7 @@ theorem tensorMap_polynomialPresentation
       commutes' := by
         intro x
         change e (x ⊗ₜ[B] 1) = ψ x
-        induction x using TensorProduct.induction_on with
-        | zero => simp
+        induction x using TensorProduct.inductionOn with
         | tmul t b => simp [e, e₁, e₂, e₃, e₄, ψ, Algebra.smul_def, RingHom.algebraMap_toAlgebra]
         | add x y hx hy =>
           simpa only [TensorProduct.add_tmul, map_add] using congrArg₂ (· + ·) hx hy }

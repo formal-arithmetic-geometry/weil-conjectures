@@ -117,7 +117,7 @@ theorem exists_finite_relative_boundary_cover
       exact hy
     refine ⟨(Sigma.ι W i).left z, ?_⟩
     have hw : (Sigma.ι W i).left ≫ (ν ≫ e).left = (τ i ≫ e).left :=
-      congrArg (fun f ↦ f.left) (Sigma.ι_desc_assoc τ i e)
+      congrArg (fun f ↦ f.left) (Sigma.ι_comp_desc_assoc τ i e)
     change ((Sigma.ι W i).left ≫ (ν ≫ e).left) z = x
     rw [hw]
     change e.left ((hV i).fromSpec z) = x

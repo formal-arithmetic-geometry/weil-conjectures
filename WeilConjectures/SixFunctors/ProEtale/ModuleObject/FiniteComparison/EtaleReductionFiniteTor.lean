@@ -106,15 +106,15 @@ theorem boundedConstructibleFiniteTor_etaleReduction_of_components
     have hx := (Ideal.mem_span_singleton' (x := x.down)).symm.trans
       (Ideal.ext_iff.1 (PadicAlgCl.ker_integersModPowToResidueField ℓ E n hϖ) x.down).symm
     rw [RingHom.mem_ker] at hx
-    refine ULift.ext_iff.trans (hx.symm.trans ⟨fun ⟨c, hc⟩ ↦ ⟨ULift.up c, ULift.ext _ _ hc⟩,
+    refine ULift.ext_iff.trans (hx.symm.trans ⟨fun ⟨c, hc⟩ ↦ ⟨ULift.up c, ULift.ext hc⟩,
       fun ⟨c, hc⟩ ↦ ⟨c.down, congrArg ULift.down hc⟩⟩)
   have : (Ideal.span {a}).IsMaximal :=
     ha ▸ RingHom.ker_isMaximal_of_surjective _ fun y ↦ ⟨⟨(hρ y.down).choose⟩,
-      ULift.ext _ _ (hρ y.down).choose_spec⟩
+      ULift.ext (hρ y.down).choose_spec⟩
   have hnil : IsNilpotent a := by
     obtain ⟨m, hm⟩ := PadicAlgCl.isNilpotent_integersModPowMk_of_mem_maximalIdeal ℓ E n
       (hϖ ▸ Ideal.mem_span_singleton_self ϖ)
-    exact ⟨m, ULift.ext _ _ hm⟩
+    exact ⟨m, ULift.ext hm⟩
   -- `Φ (K ⊗ᴸ A) ⊗ᴸ κ` is bounded
   let ψ := coefficientMap (Profinite.continuousMapRingObjMap.{u} ρ continuous_of_discreteTopology)
     Y.left
@@ -125,7 +125,7 @@ theorem boundedConstructibleFiniteTor_etaleReduction_of_components
         ((boundedConstructibleIntegersModPowReductionCompatibility Y.left ℓ E n).app K).symm)
       (bounded_derivedExtendScalars_integersModPowToResidueField Y.left ℓ E n K.obj K.property.1)
   let i := (nonempty_iso_derivedRestrictScalars_derivedExtendScalars
-    (fun y ↦ ⟨⟨(hρ y.down).choose⟩, ULift.ext _ _ (hρ y.down).choose_spec⟩) ha Y.left
+    (fun y ↦ ⟨⟨(hρ y.down).choose⟩, ULift.ext (hρ y.down).choose_spec⟩) ha Y.left
     (Φ.functor.obj KA)).some
   have hB := _root_.DerivedCategory.TStructure.t.bounded.prop_of_iso
     ((Sheaf.derivedRestrictScalars (Scheme.ProEt.topology Y.left) ρ.ulift).mapIso

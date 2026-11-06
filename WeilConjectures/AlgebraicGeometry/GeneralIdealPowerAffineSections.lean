@@ -6,9 +6,11 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
 import all WeilConjectures.AlgebraicGeometry.CoherentSupportVanishingIdealNilpotence
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Affine sections of recursive powers of a quasi-coherent ideal module
 

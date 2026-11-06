@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
@@ -18,6 +19,7 @@ import WeilConjectures.AlgebraicGeometry.FormalCompletionFullyFaithfulProper
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import Mathlib.RingTheory.AdicCompletion.Algebra
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Algebraizing a formal pullback isomorphism with quotient compatibility
 

@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 
@@ -15,6 +16,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Limits
 import WeilConjectures.AlgebraicGeometry.FormalComparisonCompletedAffineModel
 import WeilConjectures.AlgebraicGeometry.CoherentAffineMapSupportRadical
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Affine annihilation of the canonical formal push-pull comparison
 

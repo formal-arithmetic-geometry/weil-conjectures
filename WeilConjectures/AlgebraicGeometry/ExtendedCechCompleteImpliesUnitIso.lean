@@ -125,7 +125,6 @@ private theorem localization_single_one_isZero
     · exact (K.isZero_of_isStrictlyLE n i hi).eq_of_src _ _
   · apply HomologicalComplex.from_single_hom_ext
     simp
-    rfl
 
 private theorem concentratedIso_hom_f
     {A : Type*} [Category* A] [Preadditive A] [HasZeroObject A]
@@ -163,14 +162,14 @@ private theorem localization_precomposition_isIso
   let : L.IsStrictlyGE 0 := (CochainComplex.isStrictlyGE_iff L 0).mpr (by
     intro i hi
     change IsZero (ringedLocalizationTwoTermX O s i)
-    simp only [ringedLocalizationTwoTermX, if_neg (by omega : i ≠ 0),
-      if_neg (by omega : i ≠ 1)]
+    simp only [ringedLocalizationTwoTermX, ite_eq_right (by omega : i ≠ 0),
+      ite_eq_right (by omega : i ≠ 1)]
     exact isZero_zero _)
   let : L.IsStrictlyLE 1 := (CochainComplex.isStrictlyLE_iff L 1).mpr (by
     intro i hi
     change IsZero (ringedLocalizationTwoTermX O s i)
-    simp only [ringedLocalizationTwoTermX, if_neg (by omega : i ≠ 0),
-      if_neg (by omega : i ≠ 1)]
+    simp only [ringedLocalizationTwoTermX, ite_eq_right (by omega : i ≠ 0),
+      ite_eq_right (by omega : i ≠ 1)]
     exact isZero_zero _)
   let ac := ComplexShape.Embedding.embeddingUpInt_areComplementary 0 1 (by omega)
   let S := L.shortComplexStupidTrunc ac

@@ -57,6 +57,6 @@ theorem falseProjectionChartFactor_cancel
   let := isIso_ordinaryFiniteP1Exchange A (ProjectiveLine S ↘ S)
     ((ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧)
   unfold falseProjectionChartFactor falseProjectionChartFactorInv
-  simp only [Category.assoc, Iso.map_hom_inv_id_assoc, IsIso.hom_inv_id]
+  simp only [Category.assoc, Iso.hom_inv_id_map_assoc, IsIso.hom_inv_id]
 
 end AlgebraicGeometry.Etale.SfP1Transport

@@ -110,7 +110,7 @@ theorem coherent_ideal_power_supported_on_closed
         K.ideal U ^ t ≤ Module.annihilator Γ(X, U.1) Γ(F, U.1) := by
       have hnt : n ⟨U, hU⟩ ≤ t := by
         have hm : U ∈ T := hfin.mem_toFinset.mpr hU
-        simpa only [dif_pos hU] using Finset.le_sup
+        simpa only [dite_eq_left hU] using Finset.le_sup
           (f := fun U ↦ if hU : U ∈ S then n ⟨U, hU⟩ else 0) hm
       exact (Ideal.pow_le_pow_right hnt).trans (hn ⟨U, hU⟩)
     have hpow := (powers_affine_sections K.toModulesι t).1

@@ -100,7 +100,7 @@ lemma preservesFiniteColimits_lowerStar_of_sections (hs : ∀ i, s i ≫ g = �
     (hcover : ⋃ i, Set.range (s i).base = Set.univ) :
     PreservesFiniteColimits (g)_*[A] := by
   have := preservesEpimorphisms_lowerStar_of_sections A g s hs hclosed hdisj hcover
-  refine ((Functor.preservesFiniteColimits_tfae (g)_*[A]).out 0 3).1 ?_
+  refine ((Functor.preservesFiniteColimits_tfae (g)_*[A]).out 1 4).1 ?_
   intro T hT
   refine ⟨?_, ?_⟩
   · exact ((Functor.preservesFiniteLimits_iff_forall_exact_map_and_mono (g)_*[A]).1

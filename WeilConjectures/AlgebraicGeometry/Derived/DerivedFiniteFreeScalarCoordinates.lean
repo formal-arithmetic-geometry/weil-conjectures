@@ -185,9 +185,9 @@ def DerivedCoordinateCompatibility
                   (Iso.refl (F ⋙ T')) (.up ℤ)).inv.app K)) ∧
       ∀ K : DerivedCategory A,
         F.mapDerivedCategory.map (Φ.hom.app K) ≫ σD.hom.app K =
-          ((Functor.mapDerivedCategoryCompIso U F).symm ≪≫
+          ((Functor.mapDerivedCategoryCompIso U F) ≪≫
             Functor.mapDerivedCategoryNatIso ρ ≪≫
-            Functor.mapDerivedCategoryCompIso G U').hom.app
+            (Functor.mapDerivedCategoryCompIso G U').symm).hom.app
               (E.obj K) ≫
             U'.mapDerivedCategory.map (β.hom.app K) ≫
             Φ'.hom.app (F.mapDerivedCategory.obj K)
@@ -216,6 +216,10 @@ def scalarBasisCoordinate
       (restriction.{u, u} a).obj (unit (ringSheaf S))) (i : Fin d) :
     (restriction.{u, u} a).obj (unit (ringSheaf S)) ⟶ unit (ringSheaf R) :=
   θ.inv ≫ Pi.π (fun _ : Fin d ↦ unit (ringSheaf R)) i
+
+local instance (M : SheafOfModules.{u} (ringSheaf R)) (U : Cᵒᵖ) :
+    SMul ((unit (ringSheaf R)).val.obj U) (M.val.obj U) :=
+  inferInstanceAs (SMul ((ringSheaf R).obj.obj U) (M.val.obj U))
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -860,9 +864,9 @@ private theorem scalarComparisonDescent_normalized
         F.mapDerivedCategory.{w, w} ≅
       G.mapDerivedCategory.{w, w} ⋙
         U'.mapDerivedCategory.{w, w} :=
-  (Functor.mapDerivedCategoryCompIso (U) F).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso (U) F) ≪≫
     Functor.mapDerivedCategoryNatIso ρ ≪≫
-      Functor.mapDerivedCategoryCompIso G (U')
+      (Functor.mapDerivedCategoryCompIso G (U')).symm
 
 private theorem derivedRestrictionComparison_spec
     [PreservesFiniteLimits (U')]
@@ -904,9 +908,9 @@ private theorem derivedCoordinateSquare
     (K : DerivedCategory A) :
     F.mapDerivedCategory.map (Φ.hom.app K) ≫
         (powerComparison F.mapDerivedCategory d).hom.app K =
-      ((Functor.mapDerivedCategoryCompIso U F).symm ≪≫
+      ((Functor.mapDerivedCategoryCompIso U F) ≪≫
         Functor.mapDerivedCategoryNatIso ρ ≪≫
-        Functor.mapDerivedCategoryCompIso G U').hom.app (E.obj K) ≫
+        (Functor.mapDerivedCategoryCompIso G U').symm).hom.app (E.obj K) ≫
         U'.mapDerivedCategory.map
           ((scalarComparisonDescent T F G T' E ε E' ε' χ).hom.app K) ≫
         Φ'.hom.app (F.mapDerivedCategory.obj K) := by
@@ -1007,6 +1011,6 @@ set_option backward.isDefEq.respectTransparency.types true
 
 attribute [local irreducible] Functor.mapDerivedCategoryFactors
   Functor.mapHomologicalComplexCompIso
-  Functor.mapDerivedCategoryCompIso Functor.mapDerivedCategoryNatIso
+  Functor.mapDerivedCategoryNatIso
 
 end SheafOfModules.RingedTensor

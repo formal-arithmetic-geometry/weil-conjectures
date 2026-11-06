@@ -293,8 +293,7 @@ attribute [local implicit_reducible] Precoverage.ZeroHypercover.pullback₁
   CategoryTheory.Pseudofunctor.comp CategoryTheory.PrelaxFunctor.comp
   CategoryTheory.Bicategory.Adj.forget₁ CategoryTheory.LocallyDiscrete.mkPseudofunctor
   CategoryTheory.PrelaxFunctorStruct.comp Prefunctor.comp
-  CategoryTheory.pseudofunctorOfIsLocallyDiscrete CategoryTheory.Cat.of
-  CategoryTheory.Bundled.of CategoryTheory.Adjunction.toCat
+  CategoryTheory.pseudofunctorOfIsLocallyDiscrete CategoryTheory.Adjunction.toCat
   overlapLimitMap overlapStageMap CategoryTheory.Pseudofunctor.toDescentData
   CategoryTheory.Pseudofunctor.DescentData.ofObj Quiver.Hom.toLoc
 

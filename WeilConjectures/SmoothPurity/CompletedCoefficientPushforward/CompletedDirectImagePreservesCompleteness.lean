@@ -385,8 +385,8 @@ private theorem towerProductIso_transition (H : A ⥤ B) [H.Additive]
       (towerProductIso H K L e).hom ≫ towerProductShift τ' := by
     apply Pi.hom_ext
     intro n
-    simp only [Category.assoc, towerProductIso_π, towerProductShift, Pi.lift_π]
-    rw [← Functor.map_comp_assoc, Pi.lift_π, Functor.map_comp, Category.assoc, h]
+    simp only [Category.assoc, towerProductIso_π, towerProductShift, Pi.lift_comp_π]
+    rw [← Functor.map_comp_assoc, Pi.lift_comp_π, Functor.map_comp, Category.assoc, h]
     rw [← Category.assoc, ← Category.assoc, towerProductIso_π, Category.assoc]
   simp only [towerTransitionEndomorphism, Functor.map_sub,
     Preadditive.sub_comp, Preadditive.comp_sub, Category.comp_id, hs]

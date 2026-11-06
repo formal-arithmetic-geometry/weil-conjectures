@@ -102,7 +102,7 @@ theorem popescu_special_chart_substitution (R : Type a) (Cbar : Type c)
   let z (l : Fin d.m) : P := if hl : l ∈ d.E k then MvPolynomial.X ⟨l, hl⟩
     else (↑u⁻¹ : P) * ∑ j : d.E k, s (d.h k l j) * MvPolynomial.X j
   have hz (j : d.E k) : z j = MvPolynomial.X j := by
-    simp only [z, dif_pos j.property]
+    simp only [z, dite_eq_left j.property]
   have hrel (l : Fin d.m) :
       s (d.a k) * z l = ∑ j ∈ d.E k, s (d.h k l j) * z j := by
     rw [← Finset.sum_coe_sort (d.E k) (fun j ↦ s (d.h k l j) * z j)]
@@ -119,7 +119,7 @@ theorem popescu_special_chart_substitution (R : Type a) (Cbar : Type c)
           exact Subtype.ext heq.symm
         simp [hne]
     · rw [show z l = (↑u⁻¹ : P) * ∑ j : d.E k,
-          s (d.h k l j) * MvPolynomial.X j from dif_neg hl, ← hu,
+          s (d.h k l j) * MvPolynomial.X j from dite_eq_right hl, ← hu,
         ← mul_assoc]
       simp
   let ev : d.polynomial →+* P := MvPolynomial.eval₂Hom

@@ -65,7 +65,7 @@ theorem CategoryTheory.Adjunction.rightDerivedFunctorPlusBaseChange_mateEquiv (e
     rw [← Functor.mapDerivedCategoryPlusCompIso_hom_app_factorsh a p N]
     simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
   apply Functor.rightDerived_ext (R+(r) ⋙ D+(a))
-    (Functor.whiskerRight r.rightDerivedFunctorPlusUnit D+(a) ≫
+    (Functor.whiskerRight r.rightDerivedFunctorPlusUnith D+(a) ≫
       (Functor.associator _ _ _).hom) (HomotopyCategory.Plus.quasiIso D)
   apply NatTrans.ext
   funext M

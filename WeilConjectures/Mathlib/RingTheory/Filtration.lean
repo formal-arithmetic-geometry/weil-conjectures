@@ -51,8 +51,7 @@ lemma bijective_rTensor_mkQ_of_smul_eq_zero {N : Type*} [AddCommGroup N] [Module
     (Submodule.mkQ_surjective _)
   obtain ⟨y, rfl⟩ := (hex x).1 hx
   clear hx hex
-  induction y with
-  | zero => simp
+  induction y using TensorProduct.inductionOn with
   | add y z hy hz => simp [hy, hz]
   | tmul m n =>
     obtain ⟨m, hm⟩ := m
@@ -118,8 +117,7 @@ lemma lTensor_smul_top_subtype_injective {F : Type*} [AddCommGroup F] [Module R 
   have hrange : LinearMap.range u = I • (⊤ : Submodule R F) := by
     apply le_antisymm
     · rintro _ ⟨x, rfl⟩
-      induction x with
-      | zero => simp
+      induction x using TensorProduct.inductionOn with
       | add x y hx hy => rw [map_add]; exact Submodule.add_mem _ hx hy
       | tmul i f => exact Submodule.smul_mem_smul i.2 trivial
     · rw [Submodule.smul_le]
@@ -306,8 +304,7 @@ lemma map_eq_zero_of_lTensor_subtype_eq_zero_of_flat
   -- `ν : I ⊗ F → I F` is surjective.
   let ν : I ⊗[R] F →ₗ[R] P := (TensorProduct.lid R F ∘ₗ I.subtype.rTensor F).codRestrict P
     fun x ↦ by
-      induction x with
-      | zero => simp
+      induction x using TensorProduct.inductionOn with
       | add x y hx hy => rw [map_add]; exact Submodule.add_mem _ hx hy
       | tmul i f => exact Submodule.smul_mem_smul i.2 trivial
   have hν : Function.Surjective ν := by
@@ -334,13 +331,11 @@ lemma map_eq_zero_of_lTensor_subtype_eq_zero_of_flat
       (Submodule.inclusion hK).lTensor M (ν.lTensor M (TensorProduct.assoc R M I F (t ⊗ₜ f))) =
         (((toSpanSingleton R F f) ∘ₗ I.subtype).codRestrict K
           fun i ↦ hK (Submodule.smul_mem_smul i.2 trivial)).lTensor M t := by
-    induction t with
-    | zero => simp
+    induction t using TensorProduct.inductionOn with
     | add x y hx hy => rw [add_tmul, map_add, map_add, map_add, hx, hy, map_add]
     | tmul m i => rfl
   clear hw
-  induction w with
-  | zero => simp
+  induction w using TensorProduct.inductionOn with
   | add x y hx hy => simp only [map_add, hx, hy, add_zero]
   | tmul k f =>
     rw [LinearMap.rTensor_tmul, Submodule.subtype_apply, key]
@@ -438,8 +433,7 @@ lemma range_lTensor_smul_top_subtype_le {N : Type*} [AddCommGroup N] [Module R N
     LinearMap.range ((J • (⊤ : Submodule R N)).subtype.lTensor M) ≤
       J • (⊤ : Submodule R (M ⊗[R] N)) := by
   rintro _ ⟨x, rfl⟩
-  induction x with
-  | zero => simp
+  induction x using TensorProduct.inductionOn with
   | add x y hx hy => rw [map_add]; exact Submodule.add_mem _ hx hy
   | tmul m n =>
     obtain ⟨n, hn⟩ := n
@@ -706,14 +700,12 @@ theorem quotient_range [Flat R M] (φ : M →ₗ[R] M)
   set π := (LinearMap.range φ).mkQ
   have hnat (y : M ⊗[R] J) : π (TensorProduct.rid R M (J.subtype.lTensor M y)) =
       TensorProduct.rid R C (J.subtype.lTensor C (π.rTensor J y)) := by
-    induction y with
-    | zero => simp
+    induction y using TensorProduct.inductionOn with
     | add y y' h h' => simp only [map_add] at h h' ⊢; rw [h, h']
     | tmul m j => simp
   have hφnat (y : M ⊗[R] J) : φ (TensorProduct.rid R M (J.subtype.lTensor M y)) =
       TensorProduct.rid R M (J.subtype.lTensor M (φ.rTensor J y)) := by
-    induction y with
-    | zero => simp
+    induction y using TensorProduct.inductionOn with
     | add y y' h h' => simp only [map_add] at h h' ⊢; rw [h, h']
     | tmul m j => simp
   rw [injective_iff_map_eq_zero]

@@ -296,7 +296,9 @@ theorem derivedPullbackComposition_unit_kflat
     (((Scheme.Modules.tensorPullback f).mapHomotopyCategory
       (ComplexShape.up ℤ)).obj H)) (hi X)
   have hiY := congrArg (fun t ↦ t.app H) (hi Y)
-  dsimp at hiX hiY
+  dsimp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.rightUnitor_hom_app, Functor.leftUnitor_hom_app,
+    Functor.comp_obj, Functor.id_obj] at hiX hiY
   simp only [Category.comp_id] at hiX hiY
   constructor
   · apply (cancel_mono ((ε f).app H)).1
@@ -331,7 +333,7 @@ theorem derivedPullbackComposition_unit_kflat
         (Functor.mapHomotopyCategoryIdIso
           (SheafOfModules.{u₁} (moduleRings Y.toRingedSpace))
           (ComplexShape.up ℤ)).hom.app H)
-    dsimp at hn
+    dsimp only [Functor.comp_map, Functor.comp_obj] at hn
     rw [← Functor.map_comp] at hiY
     rw [← hn, ← Category.assoc, ← (derivedPullback f).map_comp, ← hiY]
     simp only [Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,

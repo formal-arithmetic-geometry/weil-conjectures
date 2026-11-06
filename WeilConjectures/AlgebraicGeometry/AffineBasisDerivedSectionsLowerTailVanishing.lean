@@ -9,6 +9,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
 
 import WeilConjectures.AlgebraicGeometry.AffineBasisLowerTailSectionsReconstruction
@@ -17,6 +18,7 @@ import WeilConjectures.CategoryTheory.Triangulated.MilnorSequence
 import WeilConjectures.CategoryTheory.DerivedLimitEventuallyIso
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Derived sections vanish above a lower tail with basis-acyclic homology
 

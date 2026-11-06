@@ -159,7 +159,7 @@ theorem principalOpenCech_singleton_gluing
         rw [Finset.pair_comm]
         simp [hij.ne']
       simp [hdel]
-    rw [dif_pos hna, dif_pos hnb] at hz
+    rw [dite_eq_left hna, dite_eq_left hnb] at hz
     have hpa : (S.val.filter (fun x ↦ x < i)).card = 0 := by
       simp [S, Finset.filter_insert, Finset.filter_singleton, hij.not_gt]
     have hpb : (S.val.filter (fun x ↦ x < j)).card = 1 := by
@@ -229,7 +229,7 @@ theorem principalOpenCech_singleton_gluing
   funext S
   rw [hα]
   by_cases hS : S.val.card = 1
-  · rw [dif_pos hS]
+  · rw [dite_eq_left hS]
     obtain ⟨i, hi⟩ := Finset.card_eq_one.mp hS
     have hSi : S = singleton i := Subtype.ext hi
     subst S
@@ -253,7 +253,7 @@ theorem principalOpenCech_singleton_gluing
         (TopologicalSpace.Opens.leSupr U i : U i ⟶ ⨆ j, U j) := Subsingleton.elim _ _
     rw [heq]
     exact hs0 i
-  · rw [dif_neg hS]
+  · rw [dite_eq_right hS]
     exact (ht S (by have := S.property.card_pos; omega)).symm
 
 end AlgebraicGeometry

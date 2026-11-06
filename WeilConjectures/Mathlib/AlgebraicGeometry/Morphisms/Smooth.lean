@@ -277,11 +277,12 @@ theorem coheight_le_of_etale_mvPolynomial {K : Type u} [Field K] {A : CommRingCa
   rw [← g.coheight_apply_of_flat y, ← idealHeight_eq_coheight]
   refine ⟨?_, fun hy ↦ ?_⟩
   · have h := Ideal.height_le_ringKrullDim_of_ne_top (g y).2.ne_top
-    rw [MvPolynomial.ringKrullDim_of_isNoetherianRing, ringKrullDim_eq_zero_of_field] at h
+    rw [MvPolynomial.ringKrullDim_of_isNoetherianRing_of_finite,
+      ringKrullDim_eq_zero_of_field] at h
     simp only [Nat.card_eq_fintype_card, Fintype.card_fin, zero_add] at h
     exact_mod_cast h
   · have : (g y).asIdeal.IsMaximal := (PrimeSpectrum.isClosed_singleton_iff_isMaximal _).mp
-      (g.closePoints_subset_preimage_closedPoints hy)
+      (g.closedPoints_subset_preimage_closedPoints hy)
     exact MvPolynomial.height_eq_of_isMaximal n _
 
 /-- A scheme `X` smooth of relative dimension `n` over a field `K` is covered by affine opens

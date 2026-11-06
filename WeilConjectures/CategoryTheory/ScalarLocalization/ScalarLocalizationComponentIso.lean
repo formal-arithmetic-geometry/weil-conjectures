@@ -59,8 +59,8 @@ theorem existsUnique_iso_of_component_formulas
       F.map f ≫ (c K').hom = (c K).hom ≫ G.map f := by
     obtain ⟨K⟩ := K
     obtain ⟨K'⟩ := K'
-    induction f using TensorProduct.induction_on with
-    | zero => simp
+    change Localization.Away t ⊗[R] (K ⟶ K') at f
+    induction f using TensorProduct.inductionOn with
     | add f g hf hg =>
       rw [F.map_add, G.map_add, Preadditive.add_comp, Preadditive.comp_add, hf, hg]
     | tmul a f =>

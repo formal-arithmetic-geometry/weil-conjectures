@@ -449,7 +449,7 @@ private theorem inclusion_sign : ExactProductsRoos.comparison ≫ signIso.hom =
               biprod.snd := by
         obtain rfl := (ComplexShape.up ℤ).next_eq' hq
         dsimp only [HomologicalComplex.homotopyCofiber.sndX]
-        rw [dif_pos hq]
+        rw [dite_eq_left hq]
       have h := CochainComplex.mappingCocone.lift_f_snd_v (-roosU X)
         (ExactProductsRoos.inclusion.app X) 0
         (ExactProductsRoos.comparison_condition X) (p + 1) p (by omega)
@@ -485,8 +485,8 @@ private theorem inclusion_sign : ExactProductsRoos.comparison ≫ signIso.hom =
       ((ordinaryIso.hom.app X).f (p + 1) ≫
         (Pi.lift (fun n : ℕ ↦ limit.π X.asFunctor (op n))).f (p + 1)) ≫
           (Pi.π (fun k : ℕ ↦ X.asFunctor.obj (op k)) n).f (p + 1)
-    rw [← HomologicalComplex.comp_f, Pi.lift_π]
-    rw [Category.assoc, ← HomologicalComplex.comp_f, Pi.lift_π,
+    rw [← HomologicalComplex.comp_f, Pi.lift_comp_π]
+    rw [Category.assoc, ← HomologicalComplex.comp_f, Pi.lift_comp_π,
       ← HomologicalComplex.comp_f, ordinaryIso_components]
     rfl
 

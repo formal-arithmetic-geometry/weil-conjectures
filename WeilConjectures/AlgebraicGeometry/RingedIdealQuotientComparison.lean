@@ -90,7 +90,10 @@ private def quotientPresheaf (I : RingedSiteIdeal R) :
 
 private def quotientProjection (I : RingedSiteIdeal R) :
     (SheafOfModules.unit (siteModuleRings R)).val ⟶ quotientPresheaf I where
-  app X := ModuleCat.ofHom (I.sections X.unop).mkQ
+  app X := ModuleCat.ofHom (R := R.obj.obj X)
+    (X := ModuleCat.of (R.obj.obj X) (R.obj.obj X))
+    (Y := ModuleCat.of (R.obj.obj X) (R.obj.obj X ⧸ I.sections X.unop))
+    (I.sections X.unop).mkQ
   naturality f := by
     apply ModuleCat.hom_ext
     apply LinearMap.ext

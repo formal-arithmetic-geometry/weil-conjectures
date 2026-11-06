@@ -286,8 +286,7 @@ theorem compare_properties {R : Type u} {S : Type w}
       apply LinearMap.ext
       intro x
       change S ⊗[R] P at x
-      induction x using TensorProduct.induction_on with
-      | zero => simp
+      induction x using TensorProduct.inductionOn with
       | tmul s p =>
         change s ⊗ₜ[R] ell p =
           TensorProduct.comm R (localize f P) S (rt (p ⊗ₜ[R] s))
@@ -327,8 +326,7 @@ theorem compare_properties {R : Type u} {S : Type w}
       apply LinearMap.ext
       intro x
       change S ⊗[R] P at x
-      induction x using TensorProduct.induction_on with
-      | zero => simp
+      induction x using TensorProduct.inductionOn with
       | tmul s p => simpa [t, restrictMap, extendMap, ell] using hh p s
       | add x y hx hy => simpa only [map_add] using congrArg₂ (· + ·) hx hy
     · rintro rfl

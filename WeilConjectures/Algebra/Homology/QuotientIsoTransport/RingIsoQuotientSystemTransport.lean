@@ -203,8 +203,8 @@ def derivedSquare {R R' S S' : Sheaf J CommRingCat.{w}}
       (transport e').mapDerivedCategory ⋙
         (restrictScalars
           ((sheafCompose J (forget₂ CommRingCat RingCat)).map b)).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
-    Functor.mapDerivedCategoryNatIso rho ≪≫ Functor.mapDerivedCategoryCompIso _ _
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
+    Functor.mapDerivedCategoryNatIso rho ≪≫ (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- Abstract comparison data with its specified normalization predicate.
 Source: Stacks 03D7, 015F and 06YY
@@ -365,7 +365,7 @@ set_option backward.defeqAttrib.useBackward true
 
 attribute [local irreducible] Functor.mapDerivedCategory Functor.mapDerivedCategoryFactors
   HasDerivedCategory.standard derivedSquare systemModelTmul
-  Functor.mapDerivedCategoryCompIso Functor.mapDerivedCategoryNatIso
+  Functor.mapDerivedCategoryNatIso
   DerivedCategory.Q DerivedCategory.Qh DerivedCategory.quotientCompQhIso
 
 private theorem derivedSquare_eq {R R' S S' : Sheaf J CommRingCat.{w}}

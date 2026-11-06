@@ -277,8 +277,7 @@ theorem realization_hom_ext (X : Scheme.{u})
       ((SheafOfModules.toSheaf _).map g).hom
   have hFG : F = G := by
     ext U t
-    induction t using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction t using TensorProduct.inductionOn with
     | add t t' ht ht' => simp only [map_add, ht, ht']
     | tmul s m =>
       let η := toSheafify (ProEt.topology X)

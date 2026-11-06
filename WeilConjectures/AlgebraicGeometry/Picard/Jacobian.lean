@@ -957,7 +957,7 @@ theorem exists_decomposition_picardFunctor_representableBy (P : Over (Spec (.of 
     { app T := TypeCat.ofHom fun L ↦ ULift.up (lift L)
       naturality T T' g := by
         ext L
-        refine ULift.ext _ _ (hjmono d _ _ ?_)
+        refine ULift.ext (hjmono d _ _ ?_)
         change lift (S.toFunctor.map g L) ≫ j d = (g.unop ≫ lift L) ≫ j d
         rw [lift_j, Category.assoc, lift_j, hP.comp_homEquiv_symm]
         exact congrArg hP.homEquiv.symm (NatTrans.naturality_apply (toPicardFunctor f) g L.1) }
@@ -979,7 +979,7 @@ theorem exists_decomposition_picardFunctor_representableBy (P : Over (Spec (.of 
       rw [← picardDegree_toPicardFunctor, hL, picardDegree_map, hδh, ← Set.mem_singleton_iff,
         ← Set.mem_preimage, ← hj d]
       exact ⟨l.down.left (g.left z), rfl⟩
-    refine ⟨⟨L, hLS⟩, ULift.ext _ _ (hjmono d _ _ ?_)⟩
+    refine ⟨⟨L, hLS⟩, ULift.ext (hjmono d _ _ ?_)⟩
     change lift ⟨L, hLS⟩ ≫ j d = (g ≫ l.down) ≫ j d
     rw [lift_j, Category.assoc, ← Equiv.symm_apply_apply hP.homEquiv (l.down ≫ j d),
       hP.comp_homEquiv_symm]

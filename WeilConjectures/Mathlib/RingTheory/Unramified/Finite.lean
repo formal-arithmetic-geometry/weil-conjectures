@@ -46,8 +46,7 @@ theorem ker_mapOfCompatibleSMul_le (J : Ideal (A ⊗[R] A))
       commutes' := fun p ↦ ((Ideal.Quotient.eq).mpr (hJ p)).symm }
   let σ := productMap f₁ f₂
   have hσ (x : A ⊗[R] A) : σ (mapOfCompatibleSMul P R R A A x) = mk x := by
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul a b =>
       simp [σ, f₁, f₂, mk, ← map_mul]
     | add x y hx hy => simp only [map_add, hx, hy]
@@ -71,8 +70,7 @@ theorem exists_lmul'_eq_one_mul_mem_ker [FormallyUnramified P A] [EssFiniteType 
   have hlmul (x : A ⊗[R] A) :
       TensorProduct.lmul' P (TensorProduct.mapOfCompatibleSMul P R R A A x) =
         TensorProduct.lmul' R x := by
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul a b => simp
     | add x y hx hy => simp only [map_add, hx, hy]
   refine ⟨e, by rwa [← hlmul], fun k hk ↦ ?_⟩

@@ -128,7 +128,7 @@ theorem exists_finiteType_subring_relativeGlobalCompleteIntersection
     ∃ (R₀ : Subring R), Algebra.FiniteType ℤ R₀ ∧
       ∃ (f₀ : Fin c → MvPolynomial (Fin n) R₀),
         (∀ (i : Fin c) (d : Fin n →₀ ℕ),
-          (MvPolynomial.coeff d (f i)) = (((MvPolynomial.coeff d (f₀ i)) : R₀) : R)) ∧
+          (AddMonoidAlgebra.coeff (f i) d) = (((AddMonoidAlgebra.coeff (f₀ i) d) : R₀) : R)) ∧
         IsRelativeGlobalCompleteIntersectionPresentation f₀ := by
   classical
   obtain ⟨R₀, hR₀, f₀, hf₀⟩ := finite_coefficient_model R n c f
@@ -140,7 +140,7 @@ theorem exists_finiteType_subring_relativeGlobalCompleteIntersection
       (PrimeSpectrum S) G (fun q ↦ ⟨q, hG q⟩) hbound
   refine ⟨R₁, hR₁, f₁, ?_, ?_⟩
   · intro i d
-    have hc := congrArg (MvPolynomial.coeff d) (hf₁ i)
+    have hc := congrArg (fun f ↦ AddMonoidAlgebra.coeff f d) (hf₁ i)
     exact hc.symm.trans (MvPolynomial.coeff_map R₁.subtype (f₁ i) d)
   · intro p hp hn
     obtain ⟨⟨q⟩, hu⟩ := hupper p hn

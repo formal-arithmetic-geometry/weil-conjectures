@@ -206,8 +206,7 @@ theorem symmetric_degree_exact (R : Type u) (M₂ M₁ M : Type v) [CommRing R]
       change degreeMap R M₁ M p n (φ t) = 0
       apply Subtype.ext
       change lift ((ι R M).comp p) (φ t : SymmetricAlgebra R M₁) = 0
-      induction t using TensorProduct.induction_on with
-      | zero => simp
+      induction t using TensorProduct.inductionOn with
       | tmul y s =>
         rw [hφ, map_mul, lift_ι_apply]
         have hay : p (a y) = 0 := by

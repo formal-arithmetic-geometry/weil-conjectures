@@ -36,6 +36,10 @@ namespace SheafOfModules
 
 set_option backward.isDefEq.respectTransparency false
 
+noncomputable local instance {R S : Type*} [Ring R] [Ring S] (f : R →+* S)
+    (M : ModuleCat.{m} S) :
+    Module S ((ModuleCat.restrictScalars f).obj M) :=
+  inferInstanceAs (Module S M)
 
 section ChangeOfRings
 
@@ -47,6 +51,13 @@ open scoped ChangeOfRings
 
 variable {R₁ R₂ : Sheaf J CommRingCat.{u}} (α : R₁ ⟶ R₂)
   (M : SheafOfModules.{m} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R₁))
+
+local instance {X Y : Cᵒᵖ} (f : X ⟶ Y) :
+    Module (R₁.obj.obj Y)
+      ((ModuleCat.restrictScalars
+        (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R₁).obj.map f).hom).obj
+          (M.val.obj Y)) :=
+  inferInstanceAs (Module (R₁.obj.obj Y) (M.val.obj Y))
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The sectionwise tensor restriction exists. Source: Stacks, Tag 03EK
@@ -89,8 +100,8 @@ theorem exists_changeOfRingsMapMixedUniverses
       map_add' := map_add _
       map_smul' := ?_ }, ?_⟩
   · intro s z
-    induction z using TensorProduct.induction_on with
-    | zero => simp only [smul_zero, map_zero]
+    change TensorProduct (R₁.obj.obj X) (R₂.obj.obj X) (M.val.obj X) at z
+    induction z using TensorProduct.inductionOn with
     | tmul t n =>
       change R₂.obj.obj X at t
       change R₂.obj.map f (s * t) ⊗ₜ[R₁.obj.obj Y, (α.hom.app Y).hom]
@@ -214,6 +225,13 @@ end ChangeOfRings
 section GeneralTensor
 
 variable {C : Type u₀} [Category.{v₀} C] {R : Cᵒᵖ ⥤ CommRingCat.{u}}
+
+local instance (M : PresheafOfModules.{m} (R ⋙ forget₂ CommRingCat RingCat))
+    {X Y : Cᵒᵖ} (f : X ⟶ Y) :
+    Module (R.obj Y)
+      ((ModuleCat.restrictScalars ((R ⋙ forget₂ CommRingCat RingCat).map f).hom).obj
+        (M.obj Y)) :=
+  inferInstanceAs (Module (R.obj Y) (M.obj Y))
 
 /-- Tensor restriction with independent ring and module universes.
 Source: Stacks, Tag 03EK (blueprint: def-pur-sheaf-tensor-product). -/

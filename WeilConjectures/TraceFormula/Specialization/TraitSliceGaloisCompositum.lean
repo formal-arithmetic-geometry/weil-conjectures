@@ -96,8 +96,7 @@ theorem range_traitGenericTensorLift :
   let := (traitLaurentFieldMap k' K).toAlgebra
   apply le_antisymm
   · rintro _ ⟨x, rfl⟩
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul ω a =>
       rw [traitGenericTensorLift_tmul]
       exact mul_mem (subset_adjoin _ _ ⟨ω, rfl⟩) (algebraMap_mem _ a)

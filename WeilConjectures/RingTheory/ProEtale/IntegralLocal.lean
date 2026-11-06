@@ -364,8 +364,7 @@ theorem isLocalRing_tensorProduct_of_isPurelyInseparable_left
   let Φ : (ResidueField R) ⊗[R] K →ₐ[R] K := Algebra.TensorProduct.productMap u (AlgHom.id R K)
   have htmul : ∀ z : (ResidueField R) ⊗[R] K, ∃ x : K, z = 1 ⊗ₜ[R] x := by
     intro z
-    induction z with
-    | zero => exact ⟨0, (TensorProduct.tmul_zero _ _).symm⟩
+    induction z using TensorProduct.inductionOn with
     | tmul r x =>
       obtain ⟨r, rfl⟩ := IsLocalRing.residue_surjective r
       refine ⟨algebraMap R K r * x, ?_⟩
@@ -467,7 +466,7 @@ theorem isLocalRing_tensorProduct_aux
     intro Q hQ
     have := hQ.isPrime
     have hT : Q.comap (algebraMap T A) = maximalIdeal T :=
-      IsLocalRing.eq_maximalIdeal (Ideal.isMaximal_comap_of_isIntegral_of_isMaximal Q)
+      IsLocalRing.eq_maximalIdeal (Ideal.isMaximal_under_of_isIntegral_of_isMaximal Q)
     have hR : Q.comap (algebraMap R A) = maximalIdeal R := by
       rw [IsScalarTower.algebraMap_eq R T A, ← Ideal.comap_comap, hT,
         IsLocalRing.maximalIdeal_comap]
@@ -477,9 +476,9 @@ theorem isLocalRing_tensorProduct_aux
         exact inclS.commutes r
       rw [Ideal.comap_comap, hcompS, hR]
     have hSmax : (Q.comap inclS.toRingHom).IsMaximal := by
-      refine Ideal.isMaximal_of_isIntegral_of_isMaximal_comap (R := R)
+      refine Ideal.isMaximal_of_isIntegral_of_isMaximal_under (R := R)
         (Q.comap inclS.toRingHom) ?_
-      rw [hScomap]
+      rw [Ideal.under_def, hScomap]
       exact IsLocalRing.maximalIdeal.isMaximal R
     have hS : Q.comap inclS.toRingHom = maximalIdeal S := IsLocalRing.eq_maximalIdeal hSmax
     refine sup_le ?_ (Ideal.map_le_iff_le_comap.mpr hT.ge)

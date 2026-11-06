@@ -123,7 +123,7 @@ lemma padicIntRingObjToPadicIntegers_comp_padicIntegersRingObjToPadicAlgCl :
     padicIntRingObjToPadicAlgCl, ← Functor.map_comp]
   congr 1
   refine Sheaf.hom_ext (NatTrans.ext (funext fun S ↦ RingCat.hom_ext (RingHom.ext
-    fun a ↦ ULift.ext _ _ (Subtype.ext (ContinuousMap.ext fun x ↦ ?_)))))
+    fun a ↦ ULift.ext (Subtype.ext (ContinuousMap.ext fun x ↦ ?_)))))
   exact (IsScalarTower.algebraMap_apply ℚ_[ℓ] E (PadicAlgCl ℓ) (a.down x)).symm
 
 end Profinite

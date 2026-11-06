@@ -16,6 +16,7 @@ public import Mathlib.Algebra.Category.Grp.Limits
 public import Mathlib.CategoryTheory.Sites.Whiskering
 public import Mathlib.CategoryTheory.Sites.Equivalence
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.Algebra.Homology.Localization
 public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
 public import WeilConjectures.Algebra.Homology.KFlatResolution
 public import WeilConjectures.Algebra.Homology.ChangeOfRingsKFlatQuasiIso
@@ -178,6 +179,7 @@ import Mathlib.CategoryTheory.Monoidal.Closed.Basic
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 import WeilConjectures.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
 import Mathlib.Algebra.Homology.DerivedCategory.Basic
+import all Mathlib.Algebra.Homology.Localization
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 import Mathlib.CategoryTheory.Adjunction.Additive
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
@@ -413,6 +415,10 @@ private theorem kFlat_of_iso_independent
     {P Q : CochainComplex (Mod J R) ℤ}
     (e : P ≅ Q) (hP : P.IsKFlatIndependentCoefficients) :
     Q.IsKFlatIndependentCoefficients := by
+  have (I : Type r) : HasColimitsOfShape (Discrete I)
+      (PresheafOfModules.{r}
+        ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R).obj) :=
+    PresheafOfModules.hasColimitsOfShape _ _
   let := isMonoidal_W_independentCoefficients R
   let := monoidalCategory R
   let := preservesZeroMorphisms_curriedTensor_independentCoefficients R
@@ -470,7 +476,7 @@ structure RingedPullbackResolutionComparisons
     (hq : QuasiIso p),
     (comparison (A := A) (P := P) p hp hf hq).hom =
       inv (LF.map (DerivedCategory.Q.map p)) ≫
-        epsilon.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)
+        cast (by rfl) (epsilon.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))
   naturality : ∀ {A A' P P' : CochainComplex (Mod JC R) ℤ}
     (p : P ⟶ A) (p' : P' ⟶ A') (a : P ⟶ P') (b : A ⟶ A')
     (hp : P.IsKFlatIndependentCoefficients) (hf : ∀ n : ℤ, IsFlatOnSite (J := JC) (R := R) (P.X n))

@@ -43,7 +43,7 @@ noncomputable def opMapBicone : Bicone fun j ↦ F.obj (op (f j)) where
     by_cases h : j = j'
     · subst h
       simp
-    · rw [biproduct.ι_π_ne _ (Ne.symm h), dif_neg h, op_zero, F.map_zero]
+    · rw [biproduct.ι_π_ne _ (Ne.symm h), dite_eq_right h, op_zero, F.map_zero]
 
 /-- The image of the biproduct bicone of `f` under an additive functor `F : Cᵒᵖ ⥤ D` is a
 bilimit bicone. -/

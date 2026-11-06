@@ -345,7 +345,7 @@ theorem exists_artinSchreier_root_of_charP (p : ℕ) [Fact p.Prime] [CharP Ω₁
       (∀ i ∈ s', f i ∈ S.map Γ) → ∃ g : ιw → (𝒟₁).Ω, ∀ i ∈ s', g i ∈ S ∧ Γ (g i) = f i := by
     intro S s' f hf
     refine ⟨fun i ↦ if h : f i ∈ S.map Γ then (Subfield.mem_map.1 h).choose else 0, fun i hi ↦ ?_⟩
-    simp only [dif_pos (hf i hi)]
+    simp only [dite_eq_left (hf i hi)]
     exact (Subfield.mem_map.1 (hf i hi)).choose_spec
   have hcoord : v₂ ((𝒟₂).a x₂ - Γ ((𝒟₁).a x₁)) < 1 := by
     have hΓa : Γ ((𝒟₁).a x₁) = (𝒟₂).a (H.ψ x₁) := RingHom.congr_fun H.ΩMap_comp_a x₁

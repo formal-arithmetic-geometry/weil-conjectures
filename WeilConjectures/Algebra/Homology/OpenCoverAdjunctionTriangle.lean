@@ -58,7 +58,7 @@ def openRestrictionComparison {S : Type u} [TopologicalSpace S]
   let B := overMap.{u} R i
   letI : PreservesFiniteLimits (A ⋙ B) := comp_preservesFiniteLimits A B
   letI : PreservesFiniteColimits (A ⋙ B) := comp_preservesFiniteColimits A B
-  (Functor.mapDerivedCategoryCompIso A B).symm ≪≫
+  Functor.mapDerivedCategoryCompIso A B ≪≫
     Functor.mapDerivedCategoryNatIso (overFunctorMap.{u} R i)
 
 private theorem openExtension_exact (X : AlgebraicGeometry.RingedSpace.{u})

@@ -108,8 +108,7 @@ theorem finite_affine_normalization_coproduct
   let b : (∐ N) ⟶ Spec A := Sigma.desc (fun i ↦ (g i).fromNormalization)
   let : IsIntegralHom b := integral_fin_sigma_desc r N (Spec A) _ (fun _ ↦ inferInstance)
   let v : X ⟶ ∐ N := e.hom ≫ CategoryTheory.Limits.Sigma.map
-    (f := fun i : Fin r ↦ Spec (CommRingCat.of (D i))) (g := N)
-      (fun i ↦ (g i).toNormalization)
+    (fun i : Fin r ↦ (g i).toNormalization)
   have hv : f = v ≫ b := by
     rw [← he]
     dsimp only [v, b]
@@ -141,7 +140,7 @@ theorem finite_affine_normalization_coproduct
     intro i
     apply Hom.normalization.hom_ext (g i) _ _ b
     · simp [a, z, v, j]
-    · simp only [Sigma.ι_desc_assoc, Category.assoc]
+    · simp only [Sigma.ι_comp_desc_assoc, Category.assoc]
       rw [show z ≫ b = f.fromNormalization from f.normalizationDesc_comp v b hv]
       exact (g i).normalizationDesc_comp _ _ _
     · simp [b]

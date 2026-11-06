@@ -234,9 +234,9 @@ theorem chart_relations_pi_divisible {R : Type a} {Cbar : Type c}
             MvPolynomial.X (.inr j)) =
             d.includeX (d.a k) * MvPolynomial.X (.inr l) := by
           rw [Finset.sum_eq_single l]
-          · rw [hd.normalized_h k l hl l, if_pos rfl]
+          · rw [hd.normalized_h k l hl l, ite_eq_left rfl]
           · intro j hj hjl
-            rw [hd.normalized_h k l hl j, if_neg (Ne.symm hjl), map_zero, zero_mul]
+            rw [hd.normalized_h k l hl j, ite_eq_right (Ne.symm hjl), map_zero, zero_mul]
           · exact fun h ↦ (h hl).elim
         rw [hsum, sub_self]
       rw [heq, map_zero]

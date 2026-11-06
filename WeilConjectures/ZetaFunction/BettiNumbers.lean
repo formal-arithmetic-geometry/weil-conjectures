@@ -52,12 +52,12 @@ noncomputable def weilBettiNumber {n : ℕ} (P : Fin (n + 1) → Polynomial ℤ)
 
 theorem weilBettiNumber_natCast {n : ℕ} (P : Fin (n + 1) → Polynomial ℤ) (i : Fin (n + 1)) :
     weilBettiNumber P (i : ℕ) = (P i).natDegree := by
-  rw [weilBettiNumber, dif_pos ⟨by omega, by exact_mod_cast i.is_le⟩]
+  rw [weilBettiNumber, dite_eq_left ⟨by omega, by exact_mod_cast i.is_le⟩]
   congr
 
 theorem weilBettiNumber_eq_zero {n : ℕ} (P : Fin (n + 1) → Polynomial ℤ) {i : ℤ}
     (hi : i < 0 ∨ (n : ℤ) < i) : weilBettiNumber P i = 0 := by
-  rw [weilBettiNumber, dif_neg (by omega)]
+  rw [weilBettiNumber, dite_eq_right (by omega)]
 
 /-- Blueprints `def-weil-determinant-constants` and `det-def-roots` (determinant constants): the
 determinant constant

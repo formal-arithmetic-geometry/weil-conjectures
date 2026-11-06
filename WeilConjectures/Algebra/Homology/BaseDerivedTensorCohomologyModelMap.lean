@@ -127,8 +127,7 @@ theorem exists_baseDerivedTensorCohomologyModelMap
       map_smul' := by
         intro t x
         change β (t • x) = t • β x
-        induction t using TensorProduct.induction_on with
-        | zero => simpa only [zero_smul] using β.hom.map_zero
+        induction t using TensorProduct.inductionOn with
         | add t t' ht ht' =>
             simp only [add_smul, β.hom.map_add, ht, ht']
         | tmul a b =>

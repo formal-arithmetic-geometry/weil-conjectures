@@ -115,7 +115,7 @@ lemma unitHomEval_constRingHom_comp_globalCoefficientIso_hom (c : PadicAlgCl l) 
     ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ (toSpecZ X)).map
       ((ProEt.isTerminalMkId specZ).from (profiniteToProEt.obj (Profinite.of PUnit.{u + 1})))).op
     _)
-  exact congrArg _ (ULift.ext _ _ (Subtype.ext (ContinuousMap.ext fun _ ↦ rfl)))
+  exact congrArg _ (ULift.ext (Subtype.ext (ContinuousMap.ext fun _ ↦ rfl)))
 
 /-- The comparison `ℚ̄_ℓ,X ⟶ forgetAb ℚ̄_ℓ,X` of the two models of the constant sheaf is, on the
 sections coming from bounded functions, the inclusion of the bounded functions into the locally

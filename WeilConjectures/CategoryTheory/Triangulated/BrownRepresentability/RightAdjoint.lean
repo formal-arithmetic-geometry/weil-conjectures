@@ -66,7 +66,7 @@ lemma eq_zero_of_sum_comp_ι_eq_zero [Preadditive C] {J : Type*} {X : J → C} [
   rw [Preadditive.sum_comp, Finset.sum_eq_single j] at this
   · simpa using this
   · intro b _ hb
-    rw [assoc, Sigma.ι_desc, Pi.single_eq_of_ne hb, comp_zero]
+    rw [assoc, Sigma.ι_comp_desc, Pi.single_eq_of_ne hb, comp_zero]
   · exact fun h ↦ (h hj).elim
 
 variable [Preadditive C] [HasZeroObject C] [HasShift C ℤ]

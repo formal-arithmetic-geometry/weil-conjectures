@@ -80,11 +80,9 @@ theorem tensor_kernel_eventually_zero_of_flat_quotients
   let eP := TensorProduct.AlgebraTensorModule.cancelBaseChange A S S M P
   have hnat (z : M ⊗[S] (S ⊗[A] K)) :
       eP (f.lTensor M z) = K.subtype.lTensor M (eK z) := by
-    induction z using TensorProduct.induction_on with
-    | zero => simp
+    induction z using TensorProduct.inductionOn with
     | tmul a b =>
-      induction b using TensorProduct.induction_on with
-      | zero => simp
+      induction b using TensorProduct.inductionOn with
       | tmul s k => simp [f, eK, eP]
       | add b b' hb hb' => simp only [map_add, TensorProduct.tmul_add, hb, hb']
     | add z z' hz hz' => simp only [map_add, hz, hz']
@@ -148,8 +146,7 @@ theorem tensor_kernel_eventually_zero_of_flat_quotients
   have hbzero : t.lTensor K (TensorProduct.comm A M K
       (eK (f.ker.subtype.lTensor M b))) = 0 := by
     clear hb
-    induction b using TensorProduct.induction_on with
-    | zero => simp
+    induction b using TensorProduct.inductionOn with
     | tmul a q => exact hkern q a
     | add b b' hb hb' => simp only [map_add, hb, hb', add_zero]
   rw [hb] at hbzero

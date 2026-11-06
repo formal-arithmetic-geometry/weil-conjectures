@@ -177,7 +177,7 @@ private theorem finitePerfectModelsOverMap_exact (X : Scheme.{t})
       (SheafOfModules.toSheaf.{t + 1} (R.over U))
     exact ShortComplex.shortExact_of_iso (S.mapNatIso e.symm)
       ((hS.map_of_exact (SheafOfModules.toSheaf.{t + 1} (R.over V))).map_of_exact H)
-  exact ⟨hAdd, (Functor.exact_tfae F).out 0 3 |>.mp h⟩
+  exact ⟨hAdd, (Functor.exact_tfae F).out 1 4 |>.mp h⟩
 
 /-- The exact derived restriction agrees with the chosen representative formula.
 Source: Stacks Tags 03DJ and 05RU

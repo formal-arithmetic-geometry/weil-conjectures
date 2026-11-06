@@ -39,7 +39,7 @@ private theorem euler_monomial
     by_cases hij : i = j
     · subst j
       have hfi : f i = 0 := Finsupp.notMem_support_iff.mp hj
-      simp only [if_true, Finsupp.single_eq_same, hfi, add_zero, smul_eq_mul,
+      simp only [ite_true, Finsupp.single_eq_same, hfi, add_zero, smul_eq_mul,
         nsmul_eq_mul, mul_one]
       have hpow : t i * t i ^ (n - 1) = t i ^ n := by
         rw [← pow_succ', Nat.sub_add_cancel (Nat.pos_of_ne_zero hn)]
@@ -48,7 +48,7 @@ private theorem euler_monomial
         _ = t i ^ n * (t i * d (f.prod (fun j n ↦ t j ^ n))) +
             (n : K) * (t i * t i ^ (n - 1)) * f.prod (fun j n ↦ t j ^ n) := by ring
         _ = _ := by rw [hz, hpow]; ring
-    · simp only [if_neg hij, mul_zero, nsmul_zero, add_zero,
+    · simp only [ite_eq_right hij, mul_zero, nsmul_zero, add_zero,
         Finsupp.single_eq_of_ne hij, zero_add, smul_eq_mul]
       calc
         _ = t j ^ n * (t i * d (f.prod (fun j n ↦ t j ^ n))) := by ring

@@ -47,10 +47,6 @@ namespace Subrepresentation
 variable {k : Type*} [Field k] {W : Type*} [Group W] {V : Type*} [AddCommGroup V] [Module k V]
   {ρ : Representation k W V}
 
-/-- The quotient representation `V ⧸ U` of a representation by a subrepresentation. -/
-noncomputable abbrev quotient (U : Subrepresentation ρ) : Representation k W (V ⧸ U.toSubmodule) :=
-  ρ.quotient U.toSubmodule fun g _ hx ↦ U.apply_mem_toSubmodule g hx
-
 /-- The quotient map `V → V ⧸ U` as an intertwining map. -/
 noncomputable def mkQ (U : Subrepresentation ρ) : ρ.IntertwiningMap U.quotient :=
   ⟨U.toSubmodule.mkQ, fun _ ↦ rfl⟩

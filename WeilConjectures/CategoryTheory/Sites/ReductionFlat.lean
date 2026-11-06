@@ -89,7 +89,7 @@ theorem Presheaf.HasLocallyTrivialRelations.comp_quotSMulTop [IsNoetherianRing R
     simp only [Matrix.mul_apply, E, Fintype.sum_sum_type, Sum.elim_inl, Sum.elim_inr,
       Fintype.sum_prod_type, ite_mul, zero_mul, neg_mul, Matrix.zero_apply] at h₀
     rw [Finset.sum_eq_single l (fun l' _ hl' ↦ by simp [hl']) (by simp)] at h₀
-    simp only [if_true, Finset.sum_neg_distrib, ← sub_eq_add_neg, sub_eq_zero] at h₀
+    simp only [ite_true, Finset.sum_neg_distrib, ← sub_eq_add_neg, sub_eq_zero] at h₀
     simp only [Matrix.mul_apply, Matrix.zero_apply, ← he, ← map_mul, ← map_sum, h₀,
       Ideal.Quotient.eq_zero_iff_mem]
     refine Ideal.sum_mem _ fun k _ ↦ Ideal.mul_mem_right _ _ ?_

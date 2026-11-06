@@ -151,8 +151,8 @@ def sliceDerivedRestrictionIso :
     max c d vc vd r} Rg (F.obj U)
   letI : B.Additive := SheafOfModules.sitePerfectOverFunctor_additive.{c, vc,
     max c d vc vd r} Rs U
-  exact (Functor.mapDerivedCategoryCompIso A Ts).symm ≪≫
+  exact (Functor.mapDerivedCategoryCompIso A Ts) ≪≫
     Functor.mapDerivedCategoryNatIso (sliceRestrictionIso.{c, d, vc, vd, r} F R U) ≪≫
-      Functor.mapDerivedCategoryCompIso Tg B
+      (Functor.mapDerivedCategoryCompIso Tg B).symm
 
 end CategoryTheory.NativeRestriction

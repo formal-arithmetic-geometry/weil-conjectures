@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Category.Grp.EnoughInjectives
 public import Mathlib.Algebra.Category.Grp.Zero
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughInjectives
+public import Mathlib.CategoryTheory.Abelian.Exact
 public import Mathlib.CategoryTheory.Abelian.Subcategory
 public import Mathlib.CategoryTheory.Action.Limits
 public import Mathlib.CategoryTheory.Preadditive.LeftExact
@@ -474,7 +475,7 @@ def homIntTrivialEquiv : (intTrivial G ⟶ M) ≃+ (invariants G).obj M where
     rw [← map_zsmul]
     congr 1
     change (x.down • (ULift.up 1 : ULift.{max u w} ℤ)) = x
-    exact ULift.ext _ _ (by simp)
+    exact ULift.ext (by simp)
   right_inv x := by
     refine Subtype.ext ?_
     change (1 : ℤ) • x.1 = x.1

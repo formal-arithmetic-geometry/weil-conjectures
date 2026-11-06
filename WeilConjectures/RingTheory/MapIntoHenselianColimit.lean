@@ -255,7 +255,7 @@ private theorem filteredColimit_forget
       exact ConcreteCategory.congr_hom (hd.fac _ i) x
     · intro s m hm
       apply CommAlgCat.hom_ext
-      apply AlgHom.coe_ringHom_injective
+      apply AlgHom.toRingHom_injective
       change m.hom.toRingHom =
         (hd.desc ((forget₂ (CommAlgCat.{w} R) CommRingCat.{w}).mapCocone s)).hom
       have h : CommRingCat.ofHom m.hom.toRingHom =

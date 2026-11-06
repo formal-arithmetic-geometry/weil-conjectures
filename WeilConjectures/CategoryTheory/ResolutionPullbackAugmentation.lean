@@ -63,19 +63,20 @@ theorem resolution_pullback_augmentation
       ⟨(L.mapHomologicalComplex (.up ℤ)).obj I.obj, 0, inferInstance⟩
     let a := DerivedCategory.Plus.ι.preimageIso
       (X := (DerivedCategory.Plus.singleFunctor A 0).obj Y)
-      (Y := DerivedCategory.Plus.Q.obj I)
+      (Y := (HomotopyCategory.Plus.quotient A ⋙ DerivedCategory.Plus.Qh).obj I)
       ((DerivedCategory.singleFunctorIsoCompQ A 0).app Y ≪≫
         asIso (DerivedCategory.Q.map (injectiveResolution Y).ι') ≪≫
         (DerivedCategory.quotientCompQhIso A).symm.app _)
     let a' := DerivedCategory.Plus.ι.preimageIso
       (X := (DerivedCategory.Plus.singleFunctor A' 0).obj (L.obj Y))
-      (Y := DerivedCategory.Plus.Q.obj J)
+      (Y := (HomotopyCategory.Plus.quotient A' ⋙ DerivedCategory.Plus.Qh).obj J)
       ((DerivedCategory.singleFunctorIsoCompQ A' 0).app (L.obj Y) ≪≫
         asIso (DerivedCategory.Q.map (injectiveResolution (L.obj Y)).ι') ≪≫
         (DerivedCategory.quotientCompQhIso A').symm.app _)
     L.mapDerivedCategoryPlus.map a.hom ≫
         L.mapDerivedCategoryPlusFactorsh.hom.app ((HomotopyCategory.Plus.quotient A).obj I) ≫
-        DerivedCategory.Plus.Q.map (ObjectProperty.homMk φ : LI ⟶ J) =
+        (HomotopyCategory.Plus.quotient A' ⋙ DerivedCategory.Plus.Qh).map
+          (ObjectProperty.homMk φ : LI ⟶ J) =
       (L.mapDerivedCategoryPlusSingleFunctor 0).hom.app Y ≫ a'.hom := by
   dsimp only
   apply DerivedCategory.Plus.ι.map_injective

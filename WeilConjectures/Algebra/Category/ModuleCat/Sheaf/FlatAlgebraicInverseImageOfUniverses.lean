@@ -159,7 +159,7 @@ private def ringHom (T : Sheaf J (Type (max r m)))
      naturality := by
        intro U V i
        ext x
-       exact ULift.ext _ _ (hf i x).symm }⟩
+       exact ULift.ext (hf i x).symm }⟩
 
 private def moduleHom (M : SheafOfModules.{max r m}
     ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))
@@ -171,7 +171,7 @@ private def moduleHom (M : SheafOfModules.{max r m}
      naturality := by
        intro U V i
        ext x
-       exact ULift.ext _ _ (hf i x).symm }⟩
+       exact ULift.ext (hf i x).symm }⟩
 
 private def moduleZero (M : SheafOfModules.{max r m}
     ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))

@@ -135,7 +135,7 @@ theorem affine_torsor_split_point_lifting
   have hn : n = l ≫ a ≫ k := by
     have e := congrArg (fun f ↦ f ≫ Sigma.desc (fun _ : Fin d ↦ 𝟙 T))
       (pullback.condition (f := M) (g := Sigma.ι (fun _ : Fin d ↦ T) x))
-    simpa only [Category.assoc, hM, Sigma.ι_desc, Category.comp_id] using e.symm
+    simpa only [Category.assoc, hM, Sigma.ι_comp_desc, Category.comp_id] using e.symm
   have hly : l ≫ y = l ≫ a ≫ fixedSplitSection p t k d δ x := by
     have e := congrArg (fun f ↦ f ≫ δ.inv ≫ pullback.fst p t)
       (pullback.condition (f := M) (g := Sigma.ι (fun _ : Fin d ↦ T) x))

@@ -49,7 +49,7 @@ theorem coe_expand (p : ℕ) (hp : p ≠ 0) (f : Polynomial K) :
 series of the traces `e tr (B^{m / e})`, `e ∣ m`. -/
 theorem X_mul_derivative_expand_charpolyRev {W : Type*} [AddCommGroup W] [Module K W]
     [FiniteDimensional K W] (B : Module.End K W) (e : ℕ) (he : e ≠ 0) :
-    X * derivative K (PowerSeries.expand e he (B.charpolyRev : K⟦X⟧)) =
+    X * derivative (R := K) (PowerSeries.expand e he (B.charpolyRev : K⟦X⟧)) =
       (-PowerSeries.mk fun m ↦ if m ≠ 0 ∧ e ∣ m then (e : K) * trace K W (B ^ (m / e)) else 0) *
         PowerSeries.expand e he (B.charpolyRev : K⟦X⟧) := by
   set P : K⟦X⟧ := (B.charpolyRev : K⟦X⟧)
@@ -57,8 +57,8 @@ theorem X_mul_derivative_expand_charpolyRev {W : Type*} [AddCommGroup W] [Module
   have hP := X_mul_derivative_charpolyRev B
   have hsubst : PowerSeries.HasSubst (X ^ e : K⟦X⟧) :=
     PowerSeries.HasSubst.of_constantCoeff_zero' (by simp [he])
-  have hD : derivative K (PowerSeries.expand e he P) =
-      PowerSeries.expand e he (derivative K P) * ((e : K⟦X⟧) * X ^ (e - 1)) := by
+  have hD : derivative (R := K) (PowerSeries.expand e he P) =
+      PowerSeries.expand e he (derivative (R := K) P) * ((e : K⟦X⟧) * X ^ (e - 1)) := by
     rw [PowerSeries.expand_apply, PowerSeries.expand_apply, PowerSeries.derivative_subst hsubst]
     congr 1
     rw [Derivation.leibniz_pow, PowerSeries.derivative_X, smul_eq_mul, nsmul_eq_mul, mul_one]
@@ -69,17 +69,17 @@ theorem X_mul_derivative_expand_charpolyRev {W : Type*} [AddCommGroup W] [Module
       PowerSeries.coeff_C_mul, PowerSeries.coeff_expand]
     by_cases hm : e ∣ m
     · obtain ⟨k, rfl⟩ := hm
-      rw [if_pos (dvd_mul_right e k), Nat.mul_div_cancel_left _ (Nat.pos_of_ne_zero he)]
+      rw [ite_eq_left (dvd_mul_right e k), Nat.mul_div_cancel_left _ (Nat.pos_of_ne_zero he)]
       by_cases hk : k = 0
       · subst hk; simp [T]
-      · rw [if_pos ⟨mul_ne_zero he hk, dvd_mul_right e k⟩]
+      · rw [ite_eq_left ⟨mul_ne_zero he hk, dvd_mul_right e k⟩]
         simp [T, hk]
-    · rw [if_neg hm, if_neg fun h ↦ hm h.2, mul_zero]
+    · rw [ite_eq_right hm, ite_eq_right fun h ↦ hm h.2, mul_zero]
   have key := congrArg (PowerSeries.expand e he) hP
   rw [map_mul, map_mul, PowerSeries.expand_X, map_neg] at key
   rw [hD, ← hT, map_mul]
-  calc X * (PowerSeries.expand e he (derivative K P) * ((e : K⟦X⟧) * X ^ (e - 1)))
-      = (e : K⟦X⟧) * (X ^ e * PowerSeries.expand e he (derivative K P)) := by
+  calc X * (PowerSeries.expand e he (derivative (R := K) P) * ((e : K⟦X⟧) * X ^ (e - 1)))
+      = (e : K⟦X⟧) * (X ^ e * PowerSeries.expand e he (derivative (R := K) P)) := by
         rw [show X ^ e = X ^ (e - 1) * X from by
           rw [← pow_succ, Nat.sub_add_cancel (Nat.pos_of_ne_zero he)]]
         ring
@@ -91,7 +91,7 @@ theorem X_mul_derivative_expand_charpolyRev {W : Type*} [AddCommGroup W] [Module
 theorem X_mul_derivative_prod_expand_charpolyRev {ι : Type*} (s : Finset ι) {W : ι → Type*}
     [∀ i, AddCommGroup (W i)] [∀ i, Module K (W i)] [∀ i, FiniteDimensional K (W i)]
     (B : ∀ i, Module.End K (W i)) (e : ι → ℕ) (he : ∀ i, e i ≠ 0) :
-    X * derivative K (∏ i ∈ s, PowerSeries.expand (e i) (he i) ((B i).charpolyRev : K⟦X⟧)) =
+    X * derivative (R := K) (∏ i ∈ s, PowerSeries.expand (e i) (he i) ((B i).charpolyRev : K⟦X⟧)) =
       (-∑ i ∈ s, PowerSeries.mk fun m ↦
           if m ≠ 0 ∧ e i ∣ m then (e i : K) * trace K (W i) (B i ^ (m / e i)) else 0) *
         ∏ i ∈ s, PowerSeries.expand (e i) (he i) ((B i).charpolyRev : K⟦X⟧) := by
@@ -128,7 +128,7 @@ theorem charpolyRev_eq_prod_expand_of_trace_pow_eq [CharZero K] (A : Module.End 
     simp only [PowerSeries.coeff_mk]
     by_cases hm : m = 0
     · simp [hm]
-    · rw [if_neg hm, h m hm]
+    · rw [ite_eq_right hm, h m hm]
       refine Finset.sum_congr rfl fun i _ ↦ ?_
       simp [hm]
   rw [hsum] at hB

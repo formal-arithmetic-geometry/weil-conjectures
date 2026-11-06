@@ -121,8 +121,8 @@ theorem zeroDimensional_sections_stalks (k : Type u) [Field k] [IsAlgClosed k]
             (Over.homMk (s c) (Category.comp_id (s c))) F.obj) := by
       apply Limits.Pi.hom_ext
       intro c
-      simp only [Category.assoc, Limits.Pi.map_π, Limits.Pi.lift_π_assoc,
-        Limits.Pi.lift_π]
+      simp only [Category.assoc, Limits.Pi.map_π, Limits.Pi.lift_comp_π_assoc,
+        Limits.Pi.lift_comp_π]
       dsimp [g]
       rw [(pointSmallEtale (s c)).toPresheafFiber_w]
       congr 1
@@ -134,8 +134,8 @@ theorem zeroDimensional_sections_stalks (k : Type u) [Field k] [IsAlgClosed k]
     dsimp [GrothendieckTopology.Point.sheafFiber]
     apply Limits.Pi.hom_ext
     intro c
-    simp only [Category.assoc, Limits.Pi.map_π, Limits.Pi.lift_π_assoc,
-      Limits.Pi.lift_π]
+    simp only [Category.assoc, Limits.Pi.map_π, Limits.Pi.lift_comp_π_assoc,
+      Limits.Pi.lift_comp_π]
     exact ((pointSmallEtale (s c)).toPresheafFiber_naturality φ.hom
       (Etale.mk (𝟙 C)) (Over.homMk (s c) (Category.comp_id (s c)))).symm
 

@@ -54,8 +54,7 @@ private theorem tensor_bilinear_universal_exists {C : Type u} [Category.{u} C]
         ext t
         change TensorProduct.lift (β V) ((F.val ⊗ G.val).map f t) =
           H.val.map f (TensorProduct.lift (β U) t)
-        induction t using TensorProduct.induction_on with
-        | zero => simp only [map_zero]
+        induction t using TensorProduct.inductionOn with
         | tmul x y =>
           change β V (F.val.map f x) (G.val.map f y) = H.val.map f (β U x y)
           exact hβ f x y
@@ -119,8 +118,7 @@ private theorem tensor_bilinear_universal_unique {C : Type u} [Category.{u} C]
       (((adj.unit.app (F.val ⊗ G.val)).app U) t)) =
     ψ.val.app U ((tensorObjIsoSheafification F G).inv.val.app U
       (((adj.unit.app (F.val ⊗ G.val)).app U) t))
-  induction t using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction t using TensorProduct.inductionOn with
   | tmul x y => exact (hφ U x y).trans (hψ U x y).symm
   | add t s ht hs => simp only [map_add, ht, hs]
 

@@ -95,6 +95,11 @@ theorem changeOfRingsTransitionMap_tmul (X : Cᵒᵖ) (s : R₂.obj.obj X) (m : 
 
 variable [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasWeakSheafify J AddCommGrpCat.{u}]
 
+local instance changeOfRingsTransitionRestrictedModule {X Y : Cᵒᵖ} (f : X ⟶ Y) :
+    Module (R₁.obj.obj Y)
+      ((ModuleCat.restrictScalars ((𝓡 R₁).obj.map f).hom).obj (M.val.obj Y)) :=
+  inferInstanceAs (Module (R₁.obj.obj Y) (M.val.obj Y))
+
 private theorem changeOfRingsMap_tmul' {X Y : Cᵒᵖ} (f : X ⟶ Y)
     (s : R₂.obj.obj X) (m : M.val.obj X) :
     changeOfRingsMap α M f (s ⊗ₜ[R₁.obj.obj X, (α.hom.app X).hom] m) =
@@ -191,8 +196,7 @@ theorem changeOfRingsTransition_naturality {N : SheafOfModules.{u} (𝓡 R₁)} 
   rw [PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def,
     PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def]
   ext X x
-  induction x using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction x using TensorProduct.inductionOn with
   | add x y hx hy => simp only [map_add, hx, hy]
   | tmul s m =>
     change (changeOfRingsTransition α β γ h N).val.app X

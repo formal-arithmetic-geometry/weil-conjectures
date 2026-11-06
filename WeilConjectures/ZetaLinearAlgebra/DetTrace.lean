@@ -80,22 +80,22 @@ private theorem mk_pow_mul_one_sub (l : K) :
   | 0 => simp
   | (m + 1) =>
     rw [map_sub, coeff_mk, coeff_C_mul, coeff_succ_X_mul, coeff_mk, coeff_C_mul,
-      if_neg (Nat.succ_ne_zero m)]
+      ite_eq_right (Nat.succ_ne_zero m)]
     match m with
     | 0 => simp
     | (k + 1) =>
-      rw [if_neg (Nat.succ_ne_zero k)]
+      rw [ite_eq_right (Nat.succ_ne_zero k)]
       simp [pow_succ, coeff_X, mul_comm]
 
 private theorem derivative_one_sub_C_mul_X (l : K) :
-    derivative K (1 - C l * X : K⟦X⟧) = -C l := by
+    derivative (R := K) (1 - C l * X : K⟦X⟧) = -C l := by
   rw [map_sub, Derivation.map_one_eq_zero, Derivation.leibniz, derivative_X, derivative_C,
     smul_zero, add_zero, smul_eq_mul, mul_one, zero_sub]
 
 /-- The logarithmic derivative of a finite product `∏ (1 - λ t)` is
 `- ∑_{n ≥ 1} (∑ λ ^ n) t ^ n`. -/
 private theorem X_mul_derivative_multiset_prod (s : Multiset K) :
-    X * derivative K (s.map fun l ↦ (1 - C l * X : K⟦X⟧)).prod =
+    X * derivative (R := K) (s.map fun l ↦ (1 - C l * X : K⟦X⟧)).prod =
       (-mk fun n ↦ if n = 0 then 0 else (s.map (· ^ n)).sum) *
         (s.map fun l ↦ (1 - C l * X : K⟦X⟧)).prod := by
   induction s using Multiset.induction with
@@ -109,7 +109,7 @@ private theorem X_mul_derivative_multiset_prod (s : Multiset K) :
       ext n
       simp only [coeff_mk, map_add, Multiset.map_cons, Multiset.sum_cons]
       split <;> simp
-    have h4 : X * derivative K (1 - C a * X : K⟦X⟧) =
+    have h4 : X * derivative (R := K) (1 - C a * X : K⟦X⟧) =
         (-mk fun n ↦ if n = 0 then 0 else a ^ n) * (1 - C a * X) := by
       rw [neg_mul, mk_pow_mul_one_sub, derivative_one_sub_C_mul_X]
       ring
@@ -130,7 +130,7 @@ series of the power sums of its reciprocal roots:
 `t * Q' = - (∑_{n ≥ 1} (∑_z z⁻ⁿ) tⁿ) * Q`, the inner sum running over the roots `z` of `Q`. -/
 theorem X_mul_derivative_coe_of_coeff_zero_eq_one {Q : Polynomial K} (hQ : Q.Splits)
     (h0 : Q.coeff 0 = 1) :
-    X * derivative K (Q : K⟦X⟧) =
+    X * derivative (R := K) (Q : K⟦X⟧) =
       (-mk fun n ↦ if n = 0 then 0 else (Q.roots.map fun z ↦ z⁻¹ ^ n).sum) * (Q : K⟦X⟧) := by
   have h : (Q : K⟦X⟧) = ((Q.roots.map (·⁻¹)).map fun l ↦ (1 - C l * X : K⟦X⟧)).prod := by
     conv_lhs => rw [Polynomial.eq_prod_one_sub_inv_roots hQ h0]
@@ -150,7 +150,7 @@ namespace Matrix
 variable {K : Type*} [Field K] {ι : Type*} [Fintype ι] [DecidableEq ι]
 
 private theorem X_mul_derivative_charpolyRev_of_isAlgClosed [IsAlgClosed K] (A : Matrix ι ι K) :
-    X * derivative K (A.charpolyRev : K⟦X⟧) =
+    X * derivative (R := K) (A.charpolyRev : K⟦X⟧) =
       (-mk fun n ↦ if n = 0 then 0 else (A ^ n).trace) * (A.charpolyRev : K⟦X⟧) := by
   simp only [Matrix.trace_pow_eq_sum_pow_roots_charpoly]
   rw [Matrix.charpolyRev_eq_prod_one_sub_smul, coe_multiset_prod_one_sub]
@@ -159,7 +159,7 @@ private theorem X_mul_derivative_charpolyRev_of_isAlgClosed [IsAlgClosed K] (A :
 /-- The logarithmic derivative of the reciprocal characteristic polynomial `det (1 - t A)` of a
 square matrix is minus the generating series of the traces of the powers of `A`. -/
 theorem X_mul_derivative_charpolyRev (A : Matrix ι ι K) :
-    X * derivative K (A.charpolyRev : K⟦X⟧) =
+    X * derivative (R := K) (A.charpolyRev : K⟦X⟧) =
       (-mk fun n ↦ if n = 0 then 0 else (A ^ n).trace) * (A.charpolyRev : K⟦X⟧) := by
   set φ := algebraMap K (AlgebraicClosure K)
   have hinj : Function.Injective φ := (algebraMap K (AlgebraicClosure K)).injective
@@ -189,7 +189,7 @@ derivative of the reciprocal characteristic polynomial `det (1 - t F)` of an end
 of a finite dimensional vector space is minus the generating series of the traces of the
 powers of `F`, i.e. `t * (det (1 - t F))' = - (∑_{n ≥ 1} tr (F ^ n) t ^ n) * det (1 - t F)`. -/
 theorem X_mul_derivative_charpolyRev (F : Module.End K V) :
-    X * derivative K (F.charpolyRev : K⟦X⟧) =
+    X * derivative (R := K) (F.charpolyRev : K⟦X⟧) =
       (-PowerSeries.mk fun n ↦ if n = 0 then 0 else LinearMap.trace K V (F ^ n)) *
         (F.charpolyRev : K⟦X⟧) := by
   classical
@@ -220,21 +220,21 @@ theorem inv_charpolyRev_eq_exp [CharZero K] (F : Module.End K V) :
   have hP1 : PowerSeries.constantCoeff P = 1 := by
     rw [hP, Polynomial.constantCoeff_coe, Polynomial.coeff_zero_eq_eval_zero, eval_charpolyRev]
   have hmul : P * P⁻¹ = 1 := PowerSeries.mul_inv_cancel _ (by rw [hP1]; exact one_ne_zero)
-  have hlogPinv : X * derivative K P⁻¹ = T * P⁻¹ := by
+  have hlogPinv : X * derivative (R := K) P⁻¹ = T * P⁻¹ := by
     rw [PowerSeries.derivative_inv']
     linear_combination (-(P⁻¹ ^ 2)) * hlogP + (T * P⁻¹) * hmul
-  have hXg : X * derivative K g = T := by
+  have hXg : X * derivative (R := K) g = T := by
     ext n
     match n with
     | 0 => simp [hg, hT]
     | m + 1 =>
       rw [PowerSeries.coeff_succ_X_mul, PowerSeries.coeff_derivative, hg, hT,
-        PowerSeries.coeff_mk, PowerSeries.coeff_mk, if_neg m.succ_ne_zero,
-        if_neg m.succ_ne_zero]
+        PowerSeries.coeff_mk, PowerSeries.coeff_mk, ite_eq_right m.succ_ne_zero,
+        ite_eq_right m.succ_ne_zero]
       have hm : ((m : K) + 1) ≠ 0 := by exact_mod_cast Nat.succ_ne_zero m
       push_cast
       rw [div_mul_cancel₀ _ hm]
-  have hlogE : X * derivative K ((PowerSeries.exp K).subst g) =
+  have hlogE : X * derivative (R := K) ((PowerSeries.exp K).subst g) =
       T * (PowerSeries.exp K).subst g := by
     rw [PowerSeries.derivative_subst hsubst, PowerSeries.derivative_exp,
       mul_comm (PowerSeries.subst g (PowerSeries.exp K)), ← mul_assoc, hXg]
@@ -275,7 +275,7 @@ omit [FiniteDimensional K V] in
 @[simp]
 theorem constantCoeff_traceSeries (F : Module.End K V) :
     PowerSeries.constantCoeff (traceSeries F) = 0 := by
-  rw [← PowerSeries.coeff_zero_eq_constantCoeff_apply, coeff_traceSeries, if_pos rfl]
+  rw [← PowerSeries.coeff_zero_eq_constantCoeff_apply, coeff_traceSeries, ite_eq_left rfl]
 
 /-- **The determinant-trace identity**, logarithmic form: the formal logarithm of
 `det (1 - t F)` is minus the trace series,
@@ -290,15 +290,15 @@ theorem logOf_charpolyRev [CharZero K] (F : Module.End K V) :
   have hP1 : PowerSeries.constantCoeff P = 1 := by
     rw [hP, Polynomial.constantCoeff_coe, Polynomial.coeff_zero_eq_eval_zero, eval_charpolyRev]
   have hP0 : P ≠ 0 := fun h ↦ by simp [h] at hP1
-  have hlogP : X * derivative K P = -T * P := X_mul_derivative_charpolyRev F
-  have hXg : X * derivative K (traceSeries F) = T := by
+  have hlogP : X * derivative (R := K) P = -T * P := X_mul_derivative_charpolyRev F
+  have hXg : X * derivative (R := K) (traceSeries F) = T := by
     ext n
     match n with
     | 0 => simp [hT]
     | m + 1 =>
       rw [PowerSeries.coeff_succ_X_mul, PowerSeries.coeff_derivative, traceSeries, hT,
-        PowerSeries.coeff_mk, PowerSeries.coeff_mk, if_neg m.succ_ne_zero,
-        if_neg m.succ_ne_zero]
+        PowerSeries.coeff_mk, PowerSeries.coeff_mk, ite_eq_right m.succ_ne_zero,
+        ite_eq_right m.succ_ne_zero]
       have hm : ((m : K) + 1) ≠ 0 := by exact_mod_cast Nat.succ_ne_zero m
       push_cast
       rw [div_mul_cancel₀ _ hm]
@@ -337,7 +337,7 @@ theorem coeff_alternatingTraceSeries (s : Finset ℤ) (F : ∀ i, Module.End K (
   · simp [hn]
   · rw [div_eq_mul_inv, Finset.sum_mul]
     refine Finset.sum_congr rfl fun i _ ↦ ?_
-    rw [PowerSeries.coeff_smul, coeff_traceSeries, if_neg hn, zsmul_eq_mul, zsmul_eq_mul,
+    rw [PowerSeries.coeff_smul, coeff_traceSeries, ite_eq_right hn, zsmul_eq_mul, zsmul_eq_mul,
       div_eq_mul_inv, mul_assoc]
 
 omit [∀ i, FiniteDimensional K (W i)] in
@@ -347,7 +347,7 @@ omit [∀ i, FiniteDimensional K (W i)] in
 theorem constantCoeff_alternatingTraceSeries (s : Finset ℤ) (F : ∀ i, Module.End K (W i)) :
     PowerSeries.constantCoeff (alternatingTraceSeries s F) = 0 := by
   rw [← PowerSeries.coeff_zero_eq_constantCoeff_apply, coeff_alternatingTraceSeries,
-    if_pos rfl]
+    ite_eq_left rfl]
 
 /-- The alternating determinant
 

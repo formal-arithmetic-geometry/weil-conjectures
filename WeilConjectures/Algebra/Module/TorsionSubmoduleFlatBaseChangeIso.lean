@@ -42,8 +42,7 @@ private theorem killed_by_fg_lift
       TensorProduct.piRight R R S (fun _ : s ↦ M) (δ.lTensor S z) =
         fun a : s ↦ (a : R) • z := by
     intro z
-    induction z using TensorProduct.induction_on with
-    | zero => simp only [map_zero]; rfl
+    induction z using TensorProduct.inductionOn with
     | tmul b m =>
       simp [δ, TensorProduct.tmul_smul]
     | add z z' hz hz' =>

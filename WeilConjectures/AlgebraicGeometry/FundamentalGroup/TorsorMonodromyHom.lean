@@ -214,7 +214,7 @@ lemma _root_.AddMonoidHom.uliftMap_apply_down {A B : Type*} [AddCommGroup A] [Ad
 lemma _root_.AddMonoidHom.uliftMap_injective {A B : Type*} [AddCommGroup A] [AddCommGroup B]
     {φ : A →+ B} (hφ : Function.Injective φ) :
     Function.Injective (φ.uliftMap : ULift.{v} A →+ ULift.{v} B) :=
-  fun _ _ h ↦ ULift.ext _ _ (hφ (congrArg ULift.down h))
+  fun _ _ h ↦ ULift.ext (hφ (congrArg ULift.down h))
 
 /-- A continuous character `G → ℤ / lᵐ⁺¹` which is not surjective is `l` times a character,
 provided that `G` has `l ^ (r k)` characters with values in `ℤ / lᵏ` for `k = 1, m, m + 1`: its
@@ -235,7 +235,7 @@ lemma exists_eq_smul_of_not_surjective {m r : ℕ}
     by_contra hg
     refine hψ fun y ↦ ?_
     have hu : IsUnit (ψ g).toAdd.down := ZMod.isUnit_of_notMem_range_mulLeftPowSucc m _
-      fun ⟨z, hz⟩ ↦ hg ⟨ULift.up z, ULift.ext _ _ hz⟩
+      fun ⟨z, hz⟩ ↦ hg ⟨ULift.up z, ULift.ext hz⟩
     obtain ⟨u, hu⟩ := hu
     refine ⟨g ^ (y * u⁻¹ : ZMod (l ^ (m + 1))).val, ?_⟩
     have : NeZero (l ^ (m + 1)) := ⟨pow_ne_zero _ hl.ne_zero⟩
@@ -265,11 +265,11 @@ lemma exists_eq_smul_of_not_surjective {m r : ℕ}
       simp only [red, toAdd_postcompAddMonoidHom_apply, AddMonoidHom.uliftMap_apply_down,
         ContinuousMonoidHom.coe_one, Pi.one_apply, toAdd_one, ULift.zero_down] at this
       obtain ⟨z, hz⟩ := (ZMod.reducePowSucc_eq_zero_iff m _).mp this
-      exact ⟨ULift.up z, ULift.ext _ _ hz⟩
+      exact ⟨ULift.up z, ULift.ext hz⟩
     · rintro ⟨χ₀, rfl⟩
       refine ContinuousMonoidHom.ext fun g ↦ ?_
       apply Multiplicative.toAdd.injective
-      refine ULift.ext _ _ ?_
+      refine ULift.ext ?_
       simp only [red, inc, toAdd_postcompAddMonoidHom_apply, AddMonoidHom.uliftMap_apply_down,
         ContinuousMonoidHom.coe_one, Pi.one_apply, toAdd_one, ULift.zero_down]
       exact (ZMod.reducePowSucc_eq_zero_iff m _).mpr ⟨_, rfl⟩
@@ -279,7 +279,7 @@ lemma exists_eq_smul_of_not_surjective {m r : ℕ}
     (by rw [hcardker, hm1, hm, ← pow_add, mul_add, mul_one, add_comm])
     (by rw [hm1]; exact pow_ne_zero _ hl.ne_zero)
   obtain ⟨ψ₁, hψ₁⟩ := hsurj ψ₀
-  refine ⟨ψ₁, fun g ↦ ULift.ext _ _ ?_⟩
+  refine ⟨ψ₁, fun g ↦ ULift.ext ?_⟩
   rw [← hψ₀, ← hψ₁]
   simp only [red, toAdd_postcompAddMonoidHom_apply, AddMonoidHom.uliftMap_apply_down,
     ZMod.mulLeftPowSucc_reducePowSucc, ULift.smul_down]
@@ -302,7 +302,7 @@ theorem exists_surjective_of_card_eq {n r : ℕ}
     rintro ⟨χ', hχ'⟩
     refine hχ (ContinuousMonoidHom.ext fun g ↦ ?_)
     rw [ContinuousMonoidHom.coe_one, Pi.one_apply, ← toAdd_eq_zero, hχ' g]
-    refine ULift.ext _ _ ?_
+    refine ULift.ext ?_
     rw [ULift.smul_down, ULift.zero_down, nsmul_eq_mul,
       (ZMod.natCast_eq_zero_iff _ _).mpr (pow_dvd_pow l ha), zero_mul]
   obtain ⟨a, ⟨χ', hχ'⟩, hna⟩ : ∃ a, P a ∧ ¬ P (a + 1) := by

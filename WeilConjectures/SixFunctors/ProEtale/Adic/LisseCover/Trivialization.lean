@@ -118,7 +118,7 @@ theorem IsAdicLisseSheaf.exists_affine_cover_iso {Y : Scheme.{u}} [CompactSpace 
   have : ∀ s, IsAffine (U s) := fun s ↦ hW s.down
   let g : ∐ U ⟶ Y := Sigma.desc fun s ↦ (W s.down).ι ≫ f (a s.down)
   have hg (s : ULift.{u} (Fin N)) : Sigma.ι U s ≫ g = (W s.down).ι ≫ f (a s.down) :=
-    Sigma.ι_desc _ _
+    Sigma.ι_comp_desc _ _
   have : WeaklyEtale g :=
     IsZariskiLocalAtSource.sigmaDesc (P := @WeaklyEtale) fun s ↦ inferInstance
   have : Surjective g := by

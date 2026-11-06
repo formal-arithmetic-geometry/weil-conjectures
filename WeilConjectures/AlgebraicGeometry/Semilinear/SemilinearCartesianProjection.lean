@@ -53,8 +53,8 @@ private theorem evaluation_detects
       rfl)
   have hh (q : ℕ) : E.mapDerivedCategory.inverse ⋙
       SheafOfModules.derivedSystemEvaluation R q ≅ e.{c, v, max c v r} J B τ q :=
-    (Functor.mapDerivedCategoryCompIso E.inverse
-      (SheafOfModules.systemEvaluation R q)).symm ≪≫
+    Functor.mapDerivedCategoryCompIso E.inverse
+      (SheafOfModules.systemEvaluation R q) ≪≫
       Functor.mapDerivedCategoryNatIso (h q)
   have : IsIso (E.mapDerivedCategory.inverse.map f) := by
     apply (SheafOfModules.systemDerivedEvaluation_isIso_iff R _).2
@@ -94,8 +94,8 @@ private theorem singleton_above
       rfl)
   let β (m : ℕ) : E.mapDerivedCategory.inverse ⋙
       SheafOfModules.derivedSystemEvaluation R m ≅ e.{c, v, max c v r} J B τ m :=
-    (Functor.mapDerivedCategoryCompIso E.inverse
-      (SheafOfModules.systemEvaluation R m)).symm ≪≫
+    Functor.mapDerivedCategoryCompIso E.inverse
+      (SheafOfModules.systemEvaluation R m) ≪≫
       Functor.mapDerivedCategoryNatIso (h m)
   let a := (d.adjunction.comp E.mapDerivedCategory.toAdjunction).ofNatIsoRight (β n)
   let γ := adj.leftAdjointUniq a

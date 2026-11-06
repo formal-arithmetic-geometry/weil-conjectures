@@ -105,9 +105,9 @@ private theorem derivedLimitTriangle [EnoughInjectives A]
       eR.hom ≫ Pi.lift (fun n : ℕ ↦ (π n).app X) := by
     apply Pi.hom_ext
     intro n
-    simp only [Category.assoc, hEn, Pi.lift_π]
+    simp only [Category.assoc, hEn, Pi.lift_comp_π]
     rw [← Category.assoc]
-    have hp₀ := Pi.lift_π (fun n : ℕ ↦ DerivedCategory.Q.map
+    have hp₀ := Pi.lift_comp_π (fun n : ℕ ↦ DerivedCategory.Q.map
       ((NatTrans.mapHomologicalComplex (lim.π (op n)) (.up ℤ)).app I)) n
     have hh₀ := congrArg (fun z ↦ z ≫ (en n).hom) hp₀
     apply hh₀.trans

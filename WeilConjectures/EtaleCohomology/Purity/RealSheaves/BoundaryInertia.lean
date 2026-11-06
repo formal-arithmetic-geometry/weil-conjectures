@@ -174,7 +174,7 @@ lemma finite_quotient [Finite (C.residueField z)] : Finite (Γ(C, c.W) ⧸ c.ide
   let _ : Algebra Γ(C, c.W) (C.presheaf.stalk z') := TopCat.Presheaf.algebra_section_stalk _ z'
   have := c.isAffineOpen.isLocalization_stalk z'
   let e : Γ(C, c.W) ⧸ c.ideal ≃+* C.residueField z :=
-    IsLocalization.AtPrime.equivQuotMaximalIdeal c.ideal (C.presheaf.stalk z')
+    (IsLocalization.AtPrime.equivQuotMaximalIdeal c.ideal (C.presheaf.stalk z')).toRingEquiv
   exact Finite.of_equiv _ e.symm.toEquiv
 
 omit [Finite K] [GeometricallyConnected p] [ConnectedSpace U] [IsCurve pU]

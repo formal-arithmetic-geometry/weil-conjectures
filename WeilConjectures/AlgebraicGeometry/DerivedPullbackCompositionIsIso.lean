@@ -129,7 +129,7 @@ theorem isIso_derivedPullbackCompositionLift
         ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P)) ≫
           (ε (f ≫ g)).app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P)) := by
       rw [show τ.app _ ≫ _ = _ from fac]
-      dsimp [β]
+      dsimp only [β, NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
       set_option synthInstance.maxSize 512 in infer_instance
     exact IsIso.of_isIso_comp_right _
       ((ε (f ≫ g)).app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P))

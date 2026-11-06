@@ -8,8 +8,10 @@ module
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
 public import Mathlib.CategoryTheory.Functor.Derived.RightDerived
+public import Mathlib.Algebra.Homology.Localization
 import Mathlib.CategoryTheory.Functor.KanExtension.Basic
 import Mathlib.CategoryTheory.Adjunction.Limits
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # Derived squares under exact equivalences
 

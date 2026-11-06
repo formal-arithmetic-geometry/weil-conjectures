@@ -43,13 +43,13 @@ private theorem sum_singleton_subsets (r : ℕ)
     have hk : k = 0 := Subsingleton.elim _ _
     simpa only [S, Finset.mem_singleton, hk] using hm
   rw [Finset.sum_eq_single S]
-  · rw [dif_pos hS]
+  · rw [dite_eq_left hS]
     change Pi.single (S.val.orderEmbOfFin hS) (z (S.val.orderEmbOfFin hS)) t = z t
     rw [ht]
     simp
   · intro T _ hTS
     by_cases hT : T.val.card = 1
-    · rw [dif_pos hT, Pi.single_eq_of_ne]
+    · rw [dite_eq_left hT, Pi.single_eq_of_ne]
       intro h
       apply hTS
       apply Subtype.ext
@@ -145,10 +145,11 @@ theorem principalSubsetInsertion_augmentation
         Pi.single (S.val.orderEmbOfFin h) (z (S.val.orderEmbOfFin h)) else 0) := by
     by_cases h : S.val.card = 1
     · dsimp only [c]
-      rw [dif_pos h, dif_pos h]
+      rw [dite_eq_left h, dite_eq_left h]
       exact principalSubsetInsertOne_singleton_augmentation A r f J n S h
         (hls S h) (hes S h n) s
-    · simp [c, h]
+    · simpa only [c, dite_eq_right h] using
+        (map_zero (principalSubsetInsertOne A r f J n S).hom).trans (map_zero b.hom).symm
   change (∑ S, principalSubsetInsertOne A r f J n S (c S)) = _
   simp_rw [hc]
   rw [← map_sum b.hom, sum_singleton_subsets]

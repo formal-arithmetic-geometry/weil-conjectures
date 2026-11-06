@@ -55,10 +55,10 @@ theorem valuation_coeff_kummer_sub_lt_one (p : ℕ) [hp : Fact p.Prime]
   rcases eq_or_ne i 0 with rfl | hi0
   · have : ϖ⁻¹ ^ p * ((p.choose 0 : ℕ) : Ω) - (1 + x) / ϖ ^ p -
         ((if 0 = p then 1 else 0) - (if 1 = 0 then 1 else 0) - x / ϖ ^ p) = 0 := by
-      rw [if_neg (by omega), if_neg (by omega), Nat.choose_zero_right, inv_pow]
+      rw [ite_eq_right (by omega), ite_eq_right (by omega), Nat.choose_zero_right, inv_pow]
       field_simp
       ring
-    simp only [Nat.sub_zero, if_true]
+    simp only [Nat.sub_zero, ite_true]
     rw [this, map_zero]
     exact zero_lt_one
   rcases eq_or_ne i p with h | hip'
@@ -68,11 +68,11 @@ theorem valuation_coeff_kummer_sub_lt_one (p : ℕ) [hp : Fact p.Prime]
       intro h
       rw [h, neg_zero] at hϖ
       exact hϖ0 (pow_eq_zero_iff (by omega) |>.1 hϖ)
-    simp only [one_ne_zero, hip', if_false, if_true, sub_zero, zero_sub, sub_neg_eq_add]
+    simp only [one_ne_zero, hip', ite_false, ite_true, sub_zero, zero_sub, sub_neg_eq_add]
     rw [inv_pow, hϖ, Nat.choose_one_right, inv_neg, neg_mul, inv_mul_cancel₀ hp0, neg_add_cancel,
       map_zero]
     exact zero_lt_one
-  · simp only [hi0, hip', Ne.symm hi1, if_false, sub_zero]
+  · simp only [hi0, hip', Ne.symm hi1, ite_false, sub_zero]
     obtain ⟨m, hm⟩ := hp.out.dvd_choose_self hi0 (lt_of_le_of_ne hip hip')
     rw [hm, Nat.cast_mul, map_mul, map_mul, map_pow, map_inv₀, ← hvϖ]
     have hvm : 𝒪.valuation (m : Ω) ≤ 1 := (valuation_le_one_iff _ _).2 (natCast_mem 𝒪 m)

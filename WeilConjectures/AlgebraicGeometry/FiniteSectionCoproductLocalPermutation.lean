@@ -114,7 +114,7 @@ theorem finiteSectionCoproduct_local_permutation (S P : Scheme.{u}) (p : P ⟶ S
   · intro j
     have hU : Set.range (U.ι ≫ s₁ j) ⊆ Set.range (s₂ (e j)) := by
       rintro _ ⟨x, rfl⟩
-      have hx : x.1 ∈ (s₁ j) ⁻¹ᵁ (s₂ (e j)).opensRange := SetLike.le_def.mp (iInf_le _ j) x.2
+      have hx : x.1 ∈ (s₁ j) ⁻¹ᵁ (s₂ (e j)).opensRange := IsConcreteLE.le_iff.mp (iInf_le _ j) x.2
       exact hx
     let l := IsOpenImmersion.lift (s₂ (e j)) (U.ι ≫ s₁ j) hU
     have hl : l ≫ s₂ (e j) = U.ι ≫ s₁ j := IsOpenImmersion.lift_fac _ _ hU

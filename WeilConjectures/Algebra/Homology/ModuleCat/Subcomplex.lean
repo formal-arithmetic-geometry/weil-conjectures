@@ -221,8 +221,7 @@ lemma range_ιTensorObj_le (p q j : ℤ) (h : p + q = j) :
     LinearMap.range (HomologicalComplex.ιTensorObj L F p q j h).hom ≤
       tensorFiniteSubmodule L F j := by
   rintro _ ⟨z, rfl⟩
-  induction z using TensorProduct.induction_on with
-  | zero => simp
+  induction z using TensorProduct.inductionOn with
   | add z z' hz hz' => simpa using add_mem hz hz'
   | tmul l f =>
     let N := SubcomplexFamily.span l

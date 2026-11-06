@@ -195,8 +195,7 @@ theorem sheafTensorPushoutComparison_isIso
   let gt := ht.hom.hom.toAddMonoidHom
   let g := PresheafOfModules.stalkAddMap (x := x) f.val
   have hcomp (z : Cx ⊗[Dx] Mx) : g (gr z) = gt (E z) := by
-    induction z using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction z using TensorProduct.inductionOn with
     | add z w hz hw => simp only [map_add, hz, hw]
     | tmul c m =>
       obtain ⟨U, hxU, c, rfl⟩ := TopCat.Presheaf.exists_germ_eq C.obj c

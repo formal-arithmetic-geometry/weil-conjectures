@@ -180,7 +180,7 @@ def kerEquivRootsOfUnity :
     rfl⟩
   invFun ζ := ⟨⟨Additive.ofMul (Additive.toMul ζ).1⟩, by
     rw [AddMonoidHom.mem_ker, nsmul_id_gmSheaf_app_apply]
-    refine ULift.ext _ _ ?_
+    refine ULift.ext ?_
     change Additive.ofMul ((Additive.toMul ζ).1 ^ N) = 0
     rw [(mem_rootsOfUnity _ _).1 (Additive.toMul ζ).2]
     rfl⟩

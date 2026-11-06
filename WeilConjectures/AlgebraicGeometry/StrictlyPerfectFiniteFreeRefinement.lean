@@ -93,7 +93,7 @@ theorem exists_finiteFree_refinement_of_isStrictlyPerfect
     exact ⟨(Functor.mapDerivedCategoryNatIso
       (SheafOfModules.overFunctorMap (moduleRings X.toRingedSpace)
         (homOfLE hVU))).symm.app E ≪≫
-      (Functor.mapDerivedCategoryCompIso G R).app E ≪≫ R.mapDerivedCategory.mapIso e ≪≫
+      (Functor.mapDerivedCategoryCompIso G R).symm.app E ≪≫ R.mapDerivedCategory.mapIso e ≪≫
         R.mapDerivedCategoryFactors.app P⟩
 
 end AlgebraicGeometry.Scheme

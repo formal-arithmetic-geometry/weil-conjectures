@@ -85,11 +85,9 @@ theorem tensor_cycles_flat_cokernel
   let w := eX.symm z'
   have hcomm (v : B ⊗[A] (A ⊗[R] X)) :
       eY (dA.lTensor B v) = (d.hom.baseChange B) (eX v) := by
-    induction v using TensorProduct.induction_on with
-    | zero => simp
+    induction v using TensorProduct.inductionOn with
     | tmul b v =>
-      induction v using TensorProduct.induction_on with
-      | zero => simp
+      induction v using TensorProduct.inductionOn with
       | tmul a x => rfl
       | add v v' hv hv' => simp only [TensorProduct.tmul_add, map_add, hv, hv']
     | add v v' hv hv' => simp only [map_add, hv, hv']
@@ -143,8 +141,7 @@ theorem tensor_cycles_flat_cokernel
           (X ◁ ModuleCat.ofHom ((Algebra.lsmul R R B b).comp
             (IsScalarTower.toAlgHom R A B).toLinearMap))
             ((TensorProduct.comm R A X) v) := by
-        induction v using TensorProduct.induction_on with
-        | zero => simp
+        induction v using TensorProduct.inductionOn with
         | tmul a x =>
           change x ⊗ₜ[R] (a • b) = x ⊗ₜ[R] (b * algebraMap A B a)
           rw [Algebra.smul_def, mul_comm]

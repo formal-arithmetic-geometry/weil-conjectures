@@ -76,7 +76,7 @@ theorem strictHenselizationPointEvaluation_comparison
   let P : ObjectProperty Nall := fun n ↦ IsAffine n.1.left
   let Q : ObjectProperty P.FullSubcategory := fun n ↦
     ∃ g : n.obj.1.left ⟶ Spec A, g ≫ i = n.obj.1.hom
-  let D := (P.ι ⋙ CategoryOfElements.π (pointSmallEtale x).fiber ⋙
+  let D := (P.ι ⋙ Functor.Elements.π (pointSmallEtale x).fiber ⋙
     Etale.forget Y ⋙ Over.forget Y).op ⋙ Scheme.Γ
   let : HasColimit D := ⟨⟨cn, hcn⟩⟩
   let incl := strictHenselizationAffineInclusion x
@@ -95,7 +95,7 @@ theorem strictHenselizationPointEvaluation_comparison
       app := fun n ↦ n.unop.obj.2.left.appTop ≫ (ΓSpecIso (.of Ω)).hom
       naturality := by
         intro n m f
-        have h := congrArg Over.Hom.left f.unop.hom.property
+        have h := congrArg Over.Hom.left f.unop.hom.map_val
         change m.unop.obj.2.left ≫ f.unop.hom.1.left = n.unop.obj.2.left at h
         change f.unop.hom.1.left.appTop ≫
           m.unop.obj.2.left.appTop ≫ (ΓSpecIso (.of Ω)).hom = _

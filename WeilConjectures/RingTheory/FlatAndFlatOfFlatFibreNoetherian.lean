@@ -125,8 +125,7 @@ theorem flat_and_flat_of_flat_fibre_noetherian
           rw [← TensorProduct.smul_tmul]
           exact hz
       intro y
-      induction y using TensorProduct.induction_on with
-      | zero => exact ⟨0, by simp⟩
+      induction y using TensorProduct.inductionOn with
       | tmul x b => exact hgen b b.property b.property x
       | add y z hy hz =>
         obtain ⟨y, rfl⟩ := hy
@@ -139,8 +138,7 @@ theorem flat_and_flat_of_flat_fibre_noetherian
         (Module.Flat.lTensor_preserves_injective_linearMap J.subtype Subtype.val_injective)
     have hcomm : ∀ z, muS (a z) = muR z := by
       intro z
-      induction z using TensorProduct.induction_on with
-      | zero => simp
+      induction z using TensorProduct.inductionOn with
       | tmul x b => simp [muS, muR, a, f, g]
       | add x y hx hy => simp [map_add, hx, hy]
     intro x y hxy

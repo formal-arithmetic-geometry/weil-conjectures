@@ -6,6 +6,9 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
+
 public import WeilConjectures.AlgebraicGeometry.OpenPinnedSingleDegreeZeroCounitIso
 
 /-! # Single-complex identities for exact restriction and tensor reassociation

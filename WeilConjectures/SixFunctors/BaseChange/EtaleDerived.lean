@@ -91,7 +91,8 @@ theorem Etale.isIso_derivedBaseChangeMapPlus_of_etale (sq : IsPullback g' f' f g
     let P := (HomotopyCategory.Plus.quotient _).obj M
     suffices IsIso ((Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app
         (DerivedCategory.Plus.Qh.obj P)) by
-      rw [← NatTrans.isIso_app_iff_of_iso _ e]
+      rw [← NatTrans.isIso_app_iff_of_iso _
+        ((DerivedCategory.Plus.quotientCompQhIso _).app M ≪≫ e)]
       exact this
     have hM : ∀ m, (f')_*[ModuleCat.{u + 1} Λ].rightAcyclic
         ((((g')^*[ModuleCat.{u + 1} Λ]).mapCochainComplexPlus.obj M).obj.X m) := fun m ↦
@@ -99,22 +100,22 @@ theorem Etale.isIso_derivedBaseChangeMapPlus_of_etale (sq : IsPullback g' f' f g
       have : Injective ((((g')^*[ModuleCat.{u + 1} Λ]).mapCochainComplexPlus.obj M).obj.X m) :=
         Etale.injective_upperStar_obj_of_etale Λ g' (M.obj.X m)
       (f')_*[ModuleCat.{u + 1} Λ].rightAcyclic_of_injective _
-    have h₁ : IsIso ((f')_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnit.app
+    have h₁ : IsIso ((f')_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnith.app
         (((g')^*[ModuleCat.{u + 1} Λ]).mapHomotopyCategoryPlus.obj P)) :=
       (f')_*[ModuleCat.{u + 1} Λ].isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic
         (((g')^*[ModuleCat.{u + 1} Λ]).mapCochainComplexPlus.obj M) hM
-    have h₂ : IsIso ((f)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnit.app P) := by
+    have h₂ : IsIso ((f)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnith.app P) := by
       dsimp only [P, M]
       infer_instance
     have hfac := Etale.derivedBaseChangeMapPlus_fac_app (ModuleCat.{u + 1} Λ) sq.toCommSq P
     have : IsIso (((g)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.map
-        ((f)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnit.app P) ≫
+        ((f)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnith.app P) ≫
         (Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app
           (DerivedCategory.Plus.Qh.obj P)) := by
       rw [hfac]
       infer_instance
     exact IsIso.of_isIso_comp_left (((g)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.map
-        ((f)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnit.app P)) _
+        ((f)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnith.app P)) _
   exact NatIso.isIso_of_isIso_app _
 
 end AlgebraicGeometry

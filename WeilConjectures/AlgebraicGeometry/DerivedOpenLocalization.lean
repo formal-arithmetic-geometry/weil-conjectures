@@ -76,7 +76,7 @@ theorem nonempty_derivedOpenLocalization (X : Scheme.{u})
   let : Limits.PreservesFiniteColimits (E ⋙ R) := Limits.comp_preservesFiniteColimits E R
   obtain ⟨e⟩ := nonempty_openExtensionRestrictionIso X.toRingedSpace U
   let d : E.mapDerivedCategory ⋙ R.mapDerivedCategory ≅ 𝟭 (DerivedCategory B) :=
-    (Functor.mapDerivedCategoryCompIso E R).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso E R) ≪≫
       Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryIdIso B
   let : E.mapDerivedCategory.Faithful := Functor.Faithful.of_comp_iso d
   let : LocallySmall.{w} (DerivedCategory B) :=

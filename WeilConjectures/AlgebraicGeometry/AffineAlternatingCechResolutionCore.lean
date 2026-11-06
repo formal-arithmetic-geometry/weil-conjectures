@@ -41,7 +41,7 @@ private theorem unit_isIso_of_acyclic
     infer_instance
   let L : CochainComplex.Plus Y.Modules := ⟨K, 0, inferInstance⟩
   let H := (HomotopyCategory.Plus.quotient Y.Modules).obj L
-  have hunit : IsIso (F.rightDerivedFunctorPlusUnit.app H) :=
+  have hunit : IsIso (F.rightDerivedFunctorPlusUnith.app H) :=
     F.isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic L hK
   have he : F.rightDerivedFunctorPlusιUnit.app H ≫
       F.rightDerivedFunctorPlusCompatibility.hom.app (DerivedCategory.Plus.Qh.obj H) =

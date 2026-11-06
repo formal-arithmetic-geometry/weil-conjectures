@@ -160,7 +160,7 @@ theorem exists_mem_stabilizer_isFrobeniusElement
   let _ : Algebra Γ(C, W) (C.presheaf.stalk z') := TopCat.Presheaf.algebra_section_stalk _ z'
   have := hW.isLocalization_stalk z'
   let e : Γ(C, W) ⧸ m ≃+* C.residueField z :=
-    IsLocalization.AtPrime.equivQuotMaximalIdeal m (C.presheaf.stalk z')
+    (IsLocalization.AtPrime.equivQuotMaximalIdeal m (C.presheaf.stalk z')).toRingEquiv
   have : Finite (Γ(C, W) ⧸ m) := Finite.of_equiv _ e.symm.toEquiv
   let : Fintype (Γ(C, W) ⧸ m) := Fintype.ofFinite _
   let _ : Algebra (C.residueField z) (integralClosure Γ(C, W) Ω ⧸ Q) :=

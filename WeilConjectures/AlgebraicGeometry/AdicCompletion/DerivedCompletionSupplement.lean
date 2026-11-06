@@ -109,6 +109,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 attribute [local instance] ringMonoidalObject ringCommutative finiteRingMonoidalObject
   finiteRingCommutative modulesMonoidal modulesSymmetric modulesClosed modulesMonoidalPreadditive
   finiteModulesDerived modulesDerived modulesProducts complexProducts
+  modulesNatProducts complexNatProducts complexNatLimit
 
 private theorem restricted_linear {C : Type*} [Category C] [MonoidalCategory C]
     {R S T : C} [MonObj S] [MonObj T] (q : R ⟶ S) (r : R ⟶ T)
@@ -187,6 +188,8 @@ attribute [local instance] AdicCompletion.ringMonoidalObject AdicCompletion.ring
   AdicCompletion.modulesMonoidalPreadditive AdicCompletion.finiteModulesDerived
   AdicCompletion.modulesDerived
   AdicCompletion.modulesProducts AdicCompletion.complexProducts
+  AdicCompletion.modulesNatProducts AdicCompletion.complexNatProducts
+  AdicCompletion.complexNatLimit
 
 end AlgebraicGeometry.ProEtale
 
@@ -196,6 +199,7 @@ attribute [local irreducible] upperStarFromPoint
 attribute [local instance] ringMonoidalObject ringCommutative finiteRingMonoidalObject
   finiteRingCommutative modulesMonoidal modulesSymmetric modulesClosed
   modulesMonoidalPreadditive finiteModulesDerived modulesDerived modulesProducts complexProducts
+  modulesNatProducts complexNatProducts complexNatLimit
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})
@@ -376,8 +380,8 @@ private theorem augmentation_naturality {P P' : CochainComplex (Modules l E X) �
     have h : unitProduct l E X P ≫ productMap l E X a = a ≫ unitProduct l E X P' := by
       apply Pi.hom_ext
       intro n
-      simp only [unitProduct, productMap, Category.assoc, Pi.map_π, Pi.lift_π_assoc,
-        Pi.lift_π]
+      simp only [unitProduct, productMap, Category.assoc, Pi.map_π, Pi.lift_comp_π_assoc,
+        Pi.lift_comp_π]
       exact ((NatTrans.mapHomologicalComplex
         ((rightUnitorNatIso (Modules l E X)).inv ≫
           (tensoringRight (Modules l E X)).map (finiteUnit l E X n)) (.up ℤ)).naturality a).symm
@@ -489,6 +493,7 @@ attribute [local irreducible] upperStarFromPoint
 attribute [local instance] ringMonoidalObject ringCommutative finiteRingMonoidalObject
   finiteRingCommutative modulesMonoidal modulesSymmetric modulesClosed
   modulesMonoidalPreadditive finiteModulesDerived modulesDerived modulesProducts complexProducts
+  modulesNatProducts complexNatProducts complexNatLimit
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})
@@ -610,7 +615,7 @@ private theorem generic_roosLimit
       Q.map (Pi.π V n) ≫ (eL n).hom = _
     rw [← Q.map_comp_assoc, ← Q.map_comp_assoc, Category.assoc aug, haug,
       ← Q.map_comp_assoc]
-    simp only [Pi.lift_π]
+    simp only [Pi.lift_comp_π]
     rw [hunit, Iso.inv_hom_id_assoc]
 
 

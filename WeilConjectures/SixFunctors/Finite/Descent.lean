@@ -145,7 +145,7 @@ lemma upperStarCompSheafFiberIso_hom_toPresheafFiber_pullSection (s : Spec (.of 
       rw [Category.assoc, hφ, reassoc_of% hv])
   have hv : v.left ≫ V.hom = s := CategoryTheory.Over.w v
   have e : (pointSmallEtale s).fiber.map (homToPullback t φ hφ) v =
-      ((Etale.baseChangeNbhd t (s ≫ t) ⟨s, rfl⟩).obj ⟨U, u⟩).2 := by
+      ((Etale.baseChangeNbhd t (s ≫ t) ⟨s, rfl⟩).obj (Functor.elementsMk _ U u)).2 := by
     refine CategoryTheory.Over.OverMorphism.ext (pullback.hom_ext ?_ ?_)
     · change (v.left ≫ (homToPullback t φ hφ).left) ≫ _ = _
       simp [u, Scheme.Hom.basePt]
@@ -153,7 +153,7 @@ lemma upperStarCompSheafFiberIso_hom_toPresheafFiber_pullSection (s : Spec (.of 
       simp [u, Scheme.Hom.basePt, hv]
   rw [pullSection, GrothendieckTopology.Point.toPresheafFiber_w_apply, e]
   have h1 := ConcreteCategory.congr_hom (Etale.toPresheafFiber_stalkRestrict AddCommGrpCat.{u + 1}
-    t (s ≫ t) ⟨s, rfl⟩ ((t)^*[AddCommGrpCat.{u + 1}].obj G) ⟨U, u⟩)
+    t (s ≫ t) ⟨s, rfl⟩ ((t)^*[AddCommGrpCat.{u + 1}].obj G) (Functor.elementsMk _ U u))
     (((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} t).unit.app G).hom.app (op U) g)
   rw [ConcreteCategory.comp_apply] at h1
   erw [← h1]
@@ -332,7 +332,7 @@ lemma exists_pullSection_eq_map_toEtaleMkId [Surjective r]
     intro t
     have e := ConcreteCategory.congr_hom (Etale.toPresheafFiber_stalkRestrict
       AddCommGrpCat.{u + 1} r ybar t ((r)^*[AddCommGrpCat.{u + 1}].obj G)
-      ⟨U, fiberPt (v₀ ≫ φ₀) hu⟩) δ
+      (Functor.elementsMk _ U (fiberPt (v₀ ≫ φ₀) hu))) δ
     rw [ConcreteCategory.comp_apply] at e
     erw [e]
     obtain ⟨V₁, a₁, U₁, φ₁, hφ₁, g₁, ⟨x₁, hx₁⟩, hrep₁⟩ :=
@@ -355,7 +355,8 @@ lemma exists_pullSection_eq_map_toEtaleMkId [Surjective r]
       upperStarCompSheafFiberIso_hom_toPresheafFiber_pullSection]
     erw [upperStarCompSheafFiberIso_hom_toPresheafFiber_pullSection]
     exact toPresheafFiber_fiberPt_eq_of_eq rfl rfl
-      (Scheme.Hom.basePt_fst r ⟨U, fiberPt (v₀ ≫ φ₀) hu⟩ t).symm _ _ _ _ G.obj g₁ g C
+      (Scheme.Hom.basePt_fst r (Functor.elementsMk _ U (fiberPt (v₀ ≫ φ₀) hu)) t).symm
+      _ _ _ _ G.obj g₁ g C
   have hz : (pointSmallEtale ybar).toPresheafFiber U (fiberPt (v₀ ≫ φ₀) hu)
       ((r)_*[AddCommGrpCat.{u + 1}].obj ((r)^*[AddCommGrpCat.{u + 1}].obj G)).obj δ = 0 := by
     apply (ConcreteCategory.bijective_of_isIso (Pi.lift fun t ↦
@@ -365,7 +366,7 @@ lemma exists_pullSection_eq_map_toEtaleMkId [Surjective r]
     apply Concrete.limit_ext
     rintro ⟨t⟩
     rw [map_zero, ← ConcreteCategory.comp_apply]
-    erw [Pi.lift_π]
+    erw [Pi.lift_comp_π]
     exact key t
   have : PreservesFilteredColimitsOfSize.{u, u} (forget AddCommGrpCat.{u + 1}) :=
     preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _

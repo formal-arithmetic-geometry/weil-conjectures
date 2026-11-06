@@ -149,8 +149,7 @@ theorem localized_approximation_transition_base_change
       apply (RingHom.cancel_right (f := e.toRingHom) e.surjective).mp
       apply RingHom.ext
       intro x
-      induction x using TensorProduct.induction_on with
-      | zero => simp only [map_zero]
+      induction x using TensorProduct.inductionOn with
       | add x y hx hy => simpa only [map_add] using congrArg₂ (· + ·) hx hy
       | tmul b a =>
         change t (k (e.symm (e (b ⊗ₜ[A.obj i] a)))) = ρB j (e (b ⊗ₜ[A.obj i] a))

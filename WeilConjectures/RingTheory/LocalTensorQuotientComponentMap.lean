@@ -92,7 +92,7 @@ theorem tensor_quotient_component_map
       let := hq
       have hPA : P.comap (algebraMap A B) = m :=
         IsLocalRing.eq_maximalIdeal
-          (Ideal.isMaximal_comap_of_isIntegral_of_isMaximal (R := A) P)
+          (Ideal.isMaximal_under_of_isIntegral_of_isMaximal (R := A) P)
       have hqover : q.LiesOver p := by
         constructor
         change p = (P.comap (algebraMap S B)).comap (algebraMap R S)

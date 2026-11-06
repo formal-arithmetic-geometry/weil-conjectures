@@ -158,7 +158,7 @@ theorem popescu_special_chart_map_surjective (R : Type a) (Cbar : Type c)
     obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective x
     obtain ⟨p, hp⟩ := Ideal.Quotient.mk_surjective x.down
     have hx : x = ULift.up (Ideal.Quotient.mk d.definingIdeal p) := by
-      exact ULift.ext _ _ hp.symm
+      exact ULift.ext hp.symm
     rw [hx]
     exact allpoly p
   intro z

@@ -48,7 +48,7 @@ isomorphism: it is a flat surjective quasi-compact monomorphism. -/
 theorem isIso_diagonal_of_universallyInjective (f : V ⟶ S) [WeaklyEtale f]
     [UniversallyInjective f] [QuasiSeparated f] : IsIso (pullback.diagonal f) := by
   have : Surjective (pullback.diagonal f) :=
-    ((tfae_universallyInjective f).out 0 3).1 ‹UniversallyInjective f›
+    ((tfae_universallyInjective f).out 1 4).1 ‹UniversallyInjective f›
   exact Flat.isIso_of_surjective_of_mono _
 
 /-- Blueprint `lem-trf-weakly-etale-homeomorphism`: A weakly etale universal homeomorphism is an

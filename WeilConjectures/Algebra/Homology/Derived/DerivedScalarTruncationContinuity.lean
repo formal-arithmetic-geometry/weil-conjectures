@@ -180,6 +180,12 @@ theorem derivedScalar_lower_bound_of_truncations
     (F.obj (DerivedCategory.Q.obj G)).IsGE a := by
   let A := SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J R)
   let B := SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J S)
+  have (I : Type r) : HasColimitsOfShape (Discrete I)
+      (PresheafOfModules.{r} (derivedChangeRingIndependentCoefficients J R).obj) :=
+    PresheafOfModules.hasColimitsOfShape _ _
+  have (I : Type r) : HasColimitsOfShape (Discrete I) A :=
+    SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf
+      _ _
   let := isMonoidal_W_independentCoefficients R
   let := monoidalCategory R
   let := symmetricCategory R
@@ -203,6 +209,10 @@ theorem derivedScalar_lower_bound_of_truncations
     HasExactColimitsOfShape.domain_of_functor ℤ (toSheaf _)
   have : HasExactColimitsOfShape ℤ B :=
     HasExactColimitsOfShape.domain_of_functor ℤ (toSheaf _)
+  have : HasFiniteBiproducts (ObjectProperty.flat (A := A)).FullSubcategory :=
+    HasFiniteBiproducts.of_hasFiniteProducts
+  have : HasFiniteCoproducts (ObjectProperty.flat (A := A)).FullSubcategory :=
+    hasFiniteCoproducts_of_hasFiniteBiproducts _
   let := hasFunctorialFlatResolution_kfi R
   let Λ := (Classical.arbitrary (Abelian.LeftResolution
     (ObjectProperty.flat.ι : _ ⥤ A))).reduced

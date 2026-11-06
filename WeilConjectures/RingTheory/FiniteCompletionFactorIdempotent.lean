@@ -217,8 +217,7 @@ theorem finite_completion_factor_idempotent
     rw [map_mul, Pi.mul_apply, hE, hey]
     rfl
   have hproj (t : T) : φ (j t) = α (E t q₀) := by
-    induction t using TensorProduct.induction_on with
-    | zero => simp only [map_zero, Pi.zero_apply]
+    induction t using _root_.TensorProduct.inductionOn with
     | tmul x y =>
       change φ (TensorProduct.tmul R x y.1) = α (E (TensorProduct.tmul R x y) q₀)
       rw [hφ, hEtmul, α.map_mul, hθψ, hαbase]

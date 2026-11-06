@@ -41,11 +41,8 @@ noncomputable def singleFunctorIsoQObj {X : Scheme.{u}}
     (DerivedCategory.Plus.singleFunctor _ 0).obj G ≅
       DerivedCategory.Plus.Q.obj (singleComplex Λ G) :=
   DerivedCategory.Plus.ι.preimageIso (X := (DerivedCategory.Plus.singleFunctor _ 0).obj G)
-    (Y := DerivedCategory.Plus.Qh.obj ((HomotopyCategory.Plus.quotient _).obj (singleComplex Λ G)))
-    ((DerivedCategory.singleFunctorIsoCompQ _ 0).app G ≪≫
-      (DerivedCategory.quotientCompQhIso
-        (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))).symm.app
-        ((HomologicalComplex.single _ (.up ℤ) 0).obj G))
+    (Y := DerivedCategory.Plus.Q.obj (singleComplex Λ G))
+    ((DerivedCategory.singleFunctorIsoCompQ _ 0).app G)
 
 namespace LimitStage
 
@@ -70,15 +67,15 @@ instance isIso_homology_homotopyUnit (α : LimitStage B W)
   have hu := Functor.isIso_homologyFunctor_zero_map_rightDerivedFunctorPlusUnit_app
     ((α.g)_*[ModuleCat.{u + 1} Λ]) (((α.w)^*[ModuleCat.{u + 1} Λ]).obj G)
   have hc : IsIso ((DerivedCategory.Plus.homologyFunctor _ 0).map
-      (((α.g)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnit.app
+      (((α.g)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnith.app
         (((α.w)^*[ModuleCat.{u + 1} Λ]).mapHomotopyCategoryPlus.obj
           ((HomotopyCategory.Plus.quotient _).obj (singleComplex Λ G))))) := by
     have hN := congrArg (DerivedCategory.Plus.homologyFunctor _ 0).map
-      (((α.g)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnit.naturality ψ.hom)
+      (((α.g)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnith.naturality ψ.hom)
     simp only [Functor.comp_map, Functor.map_comp] at hN
     exact IsIso.of_isIso_fac_left hN
   have hz : IsIso ((DerivedCategory.Plus.homologyFunctor _ 0).map
-      (((α.g)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnit.app
+      (((α.g)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnith.app
           (((α.w)^*[ModuleCat.{u + 1} Λ]).mapHomotopyCategoryPlus.obj
             ((HomotopyCategory.Plus.quotient _).obj (singleComplex Λ G))) ≫
         R+((α.g)_*[ModuleCat.{u + 1} Λ]).map
@@ -88,7 +85,7 @@ instance isIso_homology_homotopyUnit (α : LimitStage B W)
     infer_instance
   have ha : IsIso ((DerivedCategory.Plus.homologyFunctor _ 0).map
       (D+((α.π)^*[ModuleCat.{u + 1} Λ]).map
-        (((α.g)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnit.app
+        (((α.g)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnith.app
             (((α.w)^*[ModuleCat.{u + 1} Λ]).mapHomotopyCategoryPlus.obj
               ((HomotopyCategory.Plus.quotient _).obj (singleComplex Λ G))) ≫
           R+((α.g)_*[ModuleCat.{u + 1} Λ]).map
@@ -96,7 +93,7 @@ instance isIso_homology_homotopyUnit (α : LimitStage B W)
               ((HomotopyCategory.Plus.quotient _).obj (singleComplex Λ G)))))) := by
     have hN := (((α.π)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusHomologyFunctorIso
       0).hom.naturality
-      (((α.g)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnit.app
+      (((α.g)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnith.app
           (((α.w)^*[ModuleCat.{u + 1} Λ]).mapHomotopyCategoryPlus.obj
             ((HomotopyCategory.Plus.quotient _).obj (singleComplex Λ G))) ≫
         R+((α.g)_*[ModuleCat.{u + 1} Λ]).map
@@ -115,8 +112,14 @@ noncomputable def homologyZeroIso (α : LimitStage B W)
     (DerivedCategory.Plus.homologyFunctor _ 0).obj
         ((functor Λ α).obj (DerivedCategory.Plus.Q.obj (singleComplex Λ G))) ≅
       (sheafFunctor Λ α).obj G :=
-  (asIso ((DerivedCategory.Plus.homologyFunctor _ 0).map
+  (DerivedCategory.Plus.homologyFunctor _ 0).mapIso
+      ((functor Λ α).mapIso
+        ((DerivedCategory.Plus.quotientCompQhIso _).app (singleComplex Λ G)).symm) ≪≫
+    (asIso ((DerivedCategory.Plus.homologyFunctor _ 0).map
       (homotopyUnit Λ α ((HomotopyCategory.Plus.quotient _).obj (singleComplex Λ G))))).symm ≪≫
+    (DerivedCategory.Plus.homologyFunctor _ 0).mapIso
+      ((DerivedCategory.Plus.quotientCompQhIso _).app
+        (((sheafFunctor Λ α).mapCochainComplexPlus).obj (singleComplex Λ G))) ≪≫
     DerivedCategory.Plus.homologyFunctorObjQIso
       (((sheafFunctor Λ α).mapCochainComplexPlus).obj (singleComplex Λ G)) 0 ≪≫
     singleHomologyZeroIso (sheafFunctor Λ α) G
@@ -152,14 +155,29 @@ lemma homology_map_transition_homologyZeroIso {α β : LimitStage B W} (φ : Hom
         (singleComplex Λ G).obj)) 0
   have hr := homologyMap_mapHomologicalComplex_single_singleHomologyZeroIso _ _
     (sheafTransition Λ φ) G
-  simp only [homologyZeroIso, Iso.trans_hom, Iso.symm_hom, asIso_inv, Category.assoc]
+  have ht := congrArg (DerivedCategory.Plus.homologyFunctor _ 0).map
+    ((transition Λ φ).naturality
+      ((DerivedCategory.Plus.quotientCompQhIso _).inv.app (singleComplex Λ G)))
+  have hq := congrArg (DerivedCategory.Plus.homologyFunctor _ 0).map
+    ((DerivedCategory.Plus.quotientCompQhIso _).hom.naturality
+      (ObjectProperty.homMk
+        (X := ((sheafFunctor Λ β).mapCochainComplexPlus).obj (singleComplex Λ G))
+        (Y := ((sheafFunctor Λ α).mapCochainComplexPlus).obj (singleComplex Λ G))
+        ((NatTrans.mapHomologicalComplex (sheafTransition Λ φ) (.up ℤ)).app
+          (singleComplex Λ G).obj)))
+  simp only [Functor.comp_map, Functor.map_comp] at ht hq
+  simp only [homologyZeroIso, Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, Iso.app_hom,
+    Iso.app_inv, asIso_inv, Category.assoc]
+  erw [← reassoc_of% ht]
+  congr 1
   rw [← cancel_epi ((DerivedCategory.Plus.homologyFunctor _ 0).map
       (homotopyUnit Λ β ((HomotopyCategory.Plus.quotient _).obj (singleComplex Λ G)))),
     IsIso.hom_inv_id_assoc]
   erw [reassoc_of% key]
   rw [IsIso.hom_inv_id_assoc]
+  erw [reassoc_of% hq]
   erw [reassoc_of% hn]
-  exact congrArg (_ ≫ ·) hr
+  exact congrArg (_ ≫ ·) (congrArg (_ ≫ ·) hr)
 
 
 /-- The underived transition maps compose. -/

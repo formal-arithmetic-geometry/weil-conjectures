@@ -24,8 +24,7 @@ lemma TensorProduct.lift_bijective_of_forall_eq_smul {A P Q N : Type*} [CommRing
     (B : P →ₗ[A] Q →ₗ[A] N) (p₀ : P) (hp₀ : ∀ p : P, ∃ a : A, p = a • p₀)
     (hB : Function.Bijective (B p₀)) : Function.Bijective (TensorProduct.lift B) := by
   have key (t : TensorProduct A P Q) : ∃ q : Q, t = p₀ ⊗ₜ q := by
-    induction t using TensorProduct.induction_on with
-    | zero => exact ⟨0, by simp⟩
+    induction t using TensorProduct.inductionOn with
     | tmul p q =>
       obtain ⟨a, rfl⟩ := hp₀ p
       exact ⟨a • q, TensorProduct.smul_tmul _ _ _⟩

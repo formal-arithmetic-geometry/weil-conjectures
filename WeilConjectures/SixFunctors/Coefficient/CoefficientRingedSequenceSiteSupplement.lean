@@ -14,6 +14,8 @@ public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.SmoothPurity.Completed.CompletedIntegralCoefficientGerm
 public import WeilConjectures.SixFunctors.Normalized.NormalizedDVRTower
 public import WeilConjectures.SixFunctors.Integral.IntegralReductionTower
@@ -773,7 +775,7 @@ noncomputable def coefficientSequenceDerivedTransition {m n : ℕ} (h : n ≤ m)
       (NatTrans.mapHomologicalComplex (coefficientSequenceTransition l E W h)
         (ComplexShape.up ℤ)) DerivedCategory.Q) ≫
     (Functor.mapDerivedCategoryCompIso (coefficientSequenceEvaluation l E W n)
-      (normalizedDVRModuleRes l E W h)).hom
+      (normalizedDVRModuleRes l E W h)).inv
 
 /-- Normalization of an actual derived semilinear system, using the dependency's
 universal derived tensor/restriction criterion for its specified transitions.
@@ -1004,12 +1006,24 @@ private theorem derived_projection_exists
     have h := Functor.rightDerived_fac_app F.rightDerivedFunctor
       F.rightDerivedFunctorUnit (HomotopyCategory.quasiIso A (.up ℤ))
       G.mapDerivedCategory β ((HomotopyCategory.quotient A (.up ℤ)).obj I)
-    have hqA : (DerivedCategory.quotientCompQhIso A).hom.app I = 𝟙 _ := rfl
-    have hqAi : (DerivedCategory.quotientCompQhIso A).inv.app I = 𝟙 _ := rfl
+    have hqA : (DerivedCategory.quotientCompQhIso A).hom.app I = 𝟙 _ := by
+      simp [DerivedCategory.quotientCompQhIso,
+        HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift_hom]
+      rfl
+    have hqAi : (DerivedCategory.quotientCompQhIso A).inv.app I = 𝟙 _ := by
+      simp [DerivedCategory.quotientCompQhIso,
+        HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift_inv]
+      rfl
     have hqB (K : CochainComplex B ℤ) :
-        (DerivedCategory.quotientCompQhIso B).hom.app K = 𝟙 _ := rfl
+        (DerivedCategory.quotientCompQhIso B).hom.app K = 𝟙 _ := by
+      simp [DerivedCategory.quotientCompQhIso,
+        HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift_hom]
+      rfl
     have hqBi (K : CochainComplex B ℤ) :
-        (DerivedCategory.quotientCompQhIso B).inv.app K = 𝟙 _ := rfl
+        (DerivedCategory.quotientCompQhIso B).inv.app K = 𝟙 _ := by
+      simp [DerivedCategory.quotientCompQhIso,
+        HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift_inv]
+      rfl
     have hf : G.mapDerivedCategoryFactorsh.hom.app
         ((HomotopyCategory.quotient A (.up ℤ)).obj I) =
           G.mapDerivedCategoryFactors.hom.app I := by
@@ -1139,12 +1153,12 @@ noncomputable def coefficientRestrictedEvaluationIso (n : ℕ) :
   letI := HasDerivedCategory.standard (coefficientSequenceModules l E W)
   letI := (scalarReductionRestriction_exact l E W n).1
   letI := (scalarReductionRestriction_exact l E W n).2
-  (Functor.mapDerivedCategoryCompIso (coefficientSequenceRestriction l E W)
-    ((evaluation ℕᵒᵖ (scalarReductionSource l E W)).obj (op n))).symm ≪≫
+  Functor.mapDerivedCategoryCompIso (coefficientSequenceRestriction l E W)
+    ((evaluation ℕᵒᵖ (scalarReductionSource l E W)).obj (op n)) ≪≫
     Functor.mapDerivedCategoryNatIso
       (eqToIso (coefficientSequenceRestriction_evaluation l E W n)) ≪≫
-    Functor.mapDerivedCategoryCompIso (coefficientSequenceEvaluation l E W n)
-      (scalarReductionRestriction l E W n)
+    (Functor.mapDerivedCategoryCompIso (coefficientSequenceEvaluation l E W n)
+      (scalarReductionRestriction l E W n)).symm
 
 /-- The actual projection L N to the restricted nth coefficient component.
 Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site). -/

@@ -77,8 +77,7 @@ private noncomputable def coefficientTensorIso
     { t.toAddEquiv with
       map_smul' := by
         intro s x
-        induction x using TensorProduct.induction_on with
-        | zero => simp
+        induction x using TensorProduct.inductionOn with
         | tmul r m =>
           change τ (s * (show S from r)) ⊗ₜ[R'] m =
             τ s • (τ (show S from r) ⊗ₜ[R'] m)

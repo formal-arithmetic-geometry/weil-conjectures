@@ -100,8 +100,7 @@ theorem closedImmersion_pushforward_annihilated
           change μ.val.app U
             ((SheafOfModules.tensorObjIsoSheafification i.ker.toModules F).inv.val.app U
               (((adj.unit.app (i.ker.toModules.val ⊗ F.val)).app U) t)) = _
-          induction t using TensorProduct.induction_on with
-          | zero => simp only [map_zero]
+          induction t using TensorProduct.inductionOn with
           | add t s ht hs => simp only [map_add, ht, hs]
           | tmul a s =>
             change μ.app U.unop (tmulSection a s) = 0

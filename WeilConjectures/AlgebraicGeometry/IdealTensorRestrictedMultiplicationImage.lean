@@ -8,6 +8,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
 import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
@@ -67,8 +69,7 @@ private theorem restricted_product_affine {X : Scheme.{u}} {K N : X.Modules}
         apply le_antisymm
         · rintro _ ⟨z, rfl⟩
           obtain ⟨w, rfl⟩ := ht.2 z
-          induction w using TensorProduct.induction_on with
-          | zero => simp only [map_zero]; exact Submodule.zero_mem _
+          induction w using TensorProduct.inductionOn with
           | tmul s t =>
             change a.app U.1 (tensorSectionsMap K M U.1 (s ⊗ₜ t)) ∈ I • ⊤
             rw [hp]
@@ -277,7 +278,8 @@ theorem ideal_tensor_restricted_multiplication_image
         let f := J.subschemeι
         let F := SheafOfModules.unit J.subscheme.ringCatSheaf
         refine isQuasicoherent_of_forall_isAffineOpen _ (fun W hW g s ↦ ?_) (fun W hW g t ht ↦ ?_)
-        · obtain ⟨n, t, ht⟩ := exists_map_eq_pow_smul_of_basicOpen_eq F (hW.preimage f) (f.app W g)
+        · obtain ⟨n, t, ht⟩ := exists_map_eq_pow_smul_of_basicOpen_eq F
+            (IsAffineOpen.preimage (U := W) hW f) (f.app W g)
             (f.preimage_basicOpen g).symm (f.preimage_mono (X.basicOpen_le g)) s
           refine ⟨n, t, ht.trans ?_⟩
           have h : f.app (X.basicOpen g) (X.presheaf.map (homOfLE (X.basicOpen_le g)).op g) =
@@ -287,7 +289,8 @@ theorem ideal_tensor_restricted_multiplication_image
             rfl
           rw [← h, ← map_pow]
           rfl
-        · obtain ⟨n, hn⟩ := exists_pow_smul_eq_zero_of_basicOpen_eq F (hW.preimage f) (f.app W g)
+        · obtain ⟨n, hn⟩ := exists_pow_smul_eq_zero_of_basicOpen_eq F
+            (IsAffineOpen.preimage (U := W) hW f) (f.app W g)
             (f.preimage_basicOpen g).symm (f.preimage_mono (X.basicOpen_le g)) t ht
           rw [← map_pow] at hn
           exact ⟨n, hn⟩

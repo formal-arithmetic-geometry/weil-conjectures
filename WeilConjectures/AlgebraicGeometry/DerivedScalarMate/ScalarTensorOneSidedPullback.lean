@@ -79,7 +79,7 @@ private theorem coordinates_normalization {W : Scheme.{u}}
   have hn := ht P Q hp hq q h
   have hh := congrArg (fun g ↦ g ≫ DerivedCategory.Q.map (ordinaryComplexIso a P).hom) hn
   simpa only [tensorScalarCoordinates, tensorScalarCounit, Category.assoc,
-    Functor.map_comp, Iso.map_inv_hom_id, Category.comp_id,
+    Functor.map_comp, Iso.inv_hom_id_map, Category.comp_id,
     Functor.comp_obj, Functor.prod_obj, ObjectProperty.ι_obj] using hh
 
 /-- Pullback of the one-sided tensor coordinates is the localized ordinary tensor map.

@@ -111,7 +111,7 @@ theorem exists_localizedTensorComparison_direct_sum_square
   have hd (j : I) : Sigma.ι (fun j ↦ (F.obj (U j) ⊗ N).homology i) j ≫ d.hom =
       HomologicalComplex.homologyMap (F.map (Sigma.ι U j) ▷ N) i := by
     change Sigma.ι _ j ≫ sigmaComparison T U = T.map (Sigma.ι U j)
-    exact Sigma.ι_desc _ _
+    exact Sigma.ι_comp_desc _ _
   refine ⟨e, d, ?_⟩
   apply Sigma.hom_ext
   intro j

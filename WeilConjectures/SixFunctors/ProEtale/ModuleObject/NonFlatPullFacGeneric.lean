@@ -132,7 +132,7 @@ lemma mapDerivedCategoryFactorsh_inv_app_comp_mapDerivedCategoryComapCompIso_inv
         ((comap ψ ⋙ comap φ).mapDerivedCategoryFactorsh.hom.app N), Category.assoc, e₁]
     simp
   have e₂' : (comap ψ ⋙ comap φ).mapDerivedCategoryFactorsh.inv.app N ≫
-      (Functor.mapDerivedCategoryCompIso (comap ψ) (comap φ)).hom.app (DerivedCategory.Qh.obj N) =
+      (Functor.mapDerivedCategoryCompIso (comap ψ) (comap φ)).inv.app (DerivedCategory.Qh.obj N) =
       (comap φ).mapDerivedCategoryFactorsh.inv.app
           (((comap ψ).mapHomotopyCategory (.up ℤ)).obj N) ≫
         (comap φ).mapDerivedCategory.map ((comap ψ).mapDerivedCategoryFactorsh.inv.app N) := by

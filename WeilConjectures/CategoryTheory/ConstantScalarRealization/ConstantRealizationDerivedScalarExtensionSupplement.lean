@@ -550,8 +550,7 @@ private theorem moduleComparison_isIso (M : ModuleCat.{max u v} R) :
     change (moduleComparison J q M).val.app V
       (g.val.app V (constantSection J ((ModuleCat.extendScalars q).obj M) V z)) =
         constantSection J ((ModuleCat.extendScalars q).obj M) V z
-    induction z using TensorProduct.induction_on with
-    | zero => rw [constantSection_zero, map_zero, map_zero]
+    induction z using TensorProduct.inductionOn with
     | tmul s x =>
       rw [tensorLift_constantSection, tensorSection_tmul]
       exact moduleComparison_formula J q M V x s
@@ -587,9 +586,9 @@ def derivedRestrictionIso :
     (ModuleCat.restrictScalars q) (commutativeSiteConstantModuleFunctor J R)
   letI := comp_preservesFiniteColimits
     (ModuleCat.restrictScalars q) (commutativeSiteConstantModuleFunctor J R)
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso _ _) ≪≫
     Functor.mapDerivedCategoryNatIso (restrictionIso J q) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The comparison map is the mate of the realized scalar-extension unit.
 Source: Stacks 0G7E and 07A6

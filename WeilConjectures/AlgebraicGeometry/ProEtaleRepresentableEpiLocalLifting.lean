@@ -165,7 +165,7 @@ private theorem open_refinement_of_split_cover {X : Scheme.{u}} {W : X.ProEt}
     exact hx
   refine ⟨O, fun j ↦ hS j _ (IsOpenImmersion.lift (Sigma.ι V j) ((O j).ι ≫ s) (hO j))
     ?_, ?_⟩
-  · rw [← Sigma.ι_desc v j, ← Category.assoc, IsOpenImmersion.lift_fac,
+  · rw [← Sigma.ι_comp_desc v j, ← Category.assoc, IsOpenImmersion.lift_fac,
       Category.assoc, hs, Category.comp_id]
     rfl
   · refine mem_topology_of_openImmersion _ (fun j ↦ (O j).ι) (fun x ↦ ?_)

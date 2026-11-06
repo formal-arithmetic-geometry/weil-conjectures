@@ -40,7 +40,7 @@ private theorem affine_qcoh_representative
   refine ⟨F, ?_, ⟨?_⟩⟩
   · intro n
     change ((tilde.functor (.of A)).obj (M.X n)).IsQuasicoherent
-    exact instIsQuasicoherentOpensCarrierCarrierCommRingCatSpecOfCarrierObjModuleCatModulesFunctor _
+    infer_instance
   · exact (h.app M).symm ≪≫
       (schemeDerivedQCohProperty (Spec (.of A))).ι.mapIso
         (e.functor.mapIso (DerivedCategory.Q.objObjPreimageIso (e.inverse.obj E)) ≪≫

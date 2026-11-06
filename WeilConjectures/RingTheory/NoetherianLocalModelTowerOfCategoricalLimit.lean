@@ -329,26 +329,26 @@ theorem noetherian_localModelTower_of_categoricalLimit
       exact ⟨i, x.down, congrArg ULift.down hx⟩
     rlimit_eq := by
       intro i x y hxy
-      have hxy' : (π.app i) x = (π.app i) y := ULift.ext _ _ hxy
+      have hxy' : (π.app i) x = (π.app i) y := ULift.ext hxy
       obtain ⟨j, f, g, hfg⟩ :=
         Concrete.isColimit_exists_of_rep_eq A colA.some x y hxy'
       exact ⟨j, leOfHom f, hfg⟩
     slimit_eq := by
       intro i x y hxy
-      have hxy' : (κ.app i) x = (κ.app i) y := ULift.ext _ _ hxy
+      have hxy' : (κ.app i) x = (κ.app i) y := ULift.ext hxy
       obtain ⟨j, f, g, hfg⟩ :=
         Concrete.isColimit_exists_of_rep_eq B colB.some x y hxy'
       exact ⟨j, leOfHom f, hfg⟩
     tlimit_eq := by
       intro i x y hxy
-      have hxy' : (κ'.app i) x = (κ'.app i) y := ULift.ext _ _ hxy
+      have hxy' : (κ'.app i) x = (κ'.app i) y := ULift.ext hxy
       obtain ⟨j, f, g, hfg⟩ :=
         Concrete.isColimit_exists_of_rep_eq C colC.some x y hxy'
       exact ⟨j, leOfHom f, hfg⟩
     nlimit_eq := by
       intro i x y hxy
       have hxy' : (liftD.map (ν.app i)) (ULift.up x) =
-          (liftD.map (ν.app i)) (ULift.up y) := ULift.ext _ _ hxy
+          (liftD.map (ν.app i)) (ULift.up y) := ULift.ext hxy
       obtain ⟨j, f, g, hfg⟩ := Concrete.isColimit_exists_of_rep_eq
         (D ⋙ liftD) colLiftD (ULift.up x) (ULift.up y) hxy'
       exact ⟨j, leOfHom f, congrArg ULift.down hfg⟩

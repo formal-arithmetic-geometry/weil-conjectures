@@ -55,8 +55,7 @@ private noncomputable def extensionPresheafIso (a : R ⟶ S) (M : scalarModules 
       intro V W i
       apply ModuleCat.hom_ext
       ext t
-      induction t using TensorProduct.induction_on with
-      | zero => simp only [map_zero]
+      induction t using TensorProduct.inductionOn with
       | add z z' hz hz' => simp only [map_add, hz, hz']
       | tmul s x =>
         change changeOfRingsMap a M i (s ⊗ₜ[R.obj.obj V, (a.hom.app V).hom] x) =

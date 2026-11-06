@@ -262,7 +262,7 @@ lemma ratio_self ⦃Y : Scheme.{u}⦄ (q : Y ⟶ S) ⦃i : ι⦄ (g : Y ⟶ X i)
     ratio e q g g hg hg = 1 := by
   refine ratio_eq e _ _ _ _ _ ?_
   rw [D₂.hom_self q g hg, D₁.hom_self q g hg, pseudofunctorSmulHom_one, Category.id_comp,
-    Category.id_comp, Iso.map_inv_hom_id]
+    Category.id_comp, Iso.inv_hom_id_map]
 
 include hD₂ in
 lemma ratio_mul ⦃Y : Scheme.{u}⦄ (q : Y ⟶ S) ⦃i₁ i₂ i₃ : ι⦄ (f₁ : Y ⟶ X i₁) (f₂ : Y ⟶ X i₂)
@@ -273,7 +273,7 @@ lemma ratio_mul ⦃Y : Scheme.{u}⦄ (q : Y ⟶ S) ⦃i₁ i₂ i₃ : ι⦄ (f�
     pseudofunctorSmulHom_mul, Category.assoc, ← Category.assoc _ _ (pseudofunctorSmulHom _ _),
     ← pseudofunctorSmulHom_naturality, ← Category.assoc, hom_comp_ratio, Category.assoc,
     hom_comp_ratio]
-  simp only [Category.assoc, Iso.map_hom_inv_id_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_map_assoc]
 
 /-- The cocycle by which two descent data with isomorphic invertible components differ. -/
 noncomputable def ratioCocycle : DescentCocycle f where
@@ -287,7 +287,7 @@ lemma map_hom_comp_twist_hom ⦃Y : Scheme.{u}⦄ (q : Y ⟶ S) ⦃i₁ i₂ : �
     (modulesPseudofunctor.map f₁.op.toLoc).toFunctor.map (e i₁).hom ≫
         D₂.hom q f₁ f₂ hf₁ hf₂ ≫ pseudofunctorSmulHom _ (ratio e q f₁ f₂ hf₁ hf₂) =
       D₁.hom q f₁ f₂ hf₁ hf₂ ≫ (modulesPseudofunctor.map f₂.op.toLoc).toFunctor.map (e i₂).hom := by
-  rw [hom_comp_ratio, Iso.map_hom_inv_id_assoc]
+  rw [hom_comp_ratio, Iso.hom_inv_id_map_assoc]
 
 /-- A descent datum whose components are isomorphic to the invertible components of `D₂` is
 isomorphic to the twist of `D₂` by `DescentCocycle.ratioCocycle`. -/

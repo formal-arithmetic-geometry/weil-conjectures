@@ -28,6 +28,18 @@ private theorem quasiCoherent_slice_image {X : Scheme.{u}} (U : X.Opens)
     {F G : SheafOfModules.{u} (X.ringCatSheaf.over U)}
     [F.IsQuasicoherent] [G.IsQuasicoherent] (φ : F ⟶ G) :
     (Abelian.image φ).IsQuasicoherent := by
+  have (V : Over U) :
+      HasSheafify (((Opens.grothendieckTopology X).over U).over V) AddCommGrpCat.{u} :=
+    inferInstance
+  have (V : Over U) :
+      (((Opens.grothendieckTopology X).over U).over V).WEqualsLocallyBijective
+        AddCommGrpCat.{u} := inferInstance
+  have (V : U.toScheme.Opens) :
+      HasSheafify ((Opens.grothendieckTopology U.carrier).over V) AddCommGrpCat.{u} :=
+    inferInstance
+  have (V : U.toScheme.Opens) :
+      ((Opens.grothendieckTopology U.carrier).over V).WEqualsLocallyBijective
+        AddCommGrpCat.{u} := inferInstance
   have := U.instIsDenseSubsiteSubtypeMemOverGrothendieckTopologyOverInverseOverEquivalence
   have (V : U.toScheme.Opens) :
       (Over.post U.overEquivalence.inverse).IsContinuous
@@ -67,6 +79,15 @@ private theorem finiteType_image_free_slice (X : Scheme.{u}) (U : X.Opens) (n : 
     {G : SheafOfModules.{u} (X.ringCatSheaf.over U)}
     (φ : SheafOfModules.free (R := X.ringCatSheaf.over U) (ULift.{u} (Fin n)) ⟶ G) :
     (Abelian.image φ).IsFiniteType := by
+  have hs (V : Over U) :
+      HasSheafify (((Opens.grothendieckTopology X).over U).over V) AddCommGrpCat.{u} :=
+    inferInstance
+  have (V : Over U) :
+      HasWeakSheafify (((Opens.grothendieckTopology X).over U).over V) AddCommGrpCat.{u} :=
+    (hs V).isRightAdjoint
+  have (V : Over U) :
+      (((Opens.grothendieckTopology X).over U).over V).WEqualsLocallyBijective
+        AddCommGrpCat.{u} := inferInstance
   let g := (SheafOfModules.free.generatingSections
     (R := X.ringCatSheaf.over U) (ULift.{u} (Fin n))).ofEpi (Abelian.factorThruImage φ)
   let q := g.localGeneratorsData
@@ -75,7 +96,7 @@ private theorem finiteType_image_free_slice (X : Scheme.{u}) (U : X.Opens) (n : 
   refine ⟨q, ?_⟩
   refine SheafOfModules.LocalGeneratorsData.IsFiniteType.mk (p := q) (fun i ↦ ?_)
   dsimp [q, SheafOfModules.GeneratingSections.localGeneratorsData]
-  infer_instance
+  exact ⟨inferInstanceAs (Finite (ULift.{u} (Fin n)))⟩
 
 set_option backward.isDefEq.respectTransparency false in
 private noncomputable def section_on_open {X : Scheme.{u}} (E : X.Modules)
@@ -108,6 +129,12 @@ theorem exists_coherent_open_section_carrier
     ∃ (H : X.Modules) (h : H ⟶ E) (t : H.val.obj (op U)),
       H.IsQuasicoherent ∧ RingedSpace.IsCoherent X.toRingedSpace H ∧
       Mono h ∧ h.val.app (op U) t = s := by
+  have hs : HasSheafify ((Opens.grothendieckTopology X).over U) AddCommGrpCat.{u} :=
+    inferInstance
+  have : HasWeakSheafify ((Opens.grothendieckTopology X).over U) AddCommGrpCat.{u} :=
+    hs.isRightAdjoint
+  have : ((Opens.grothendieckTopology X).over U).WEqualsLocallyBijective
+      AddCommGrpCat.{u} := inferInstance
   let φ : SheafOfModules.free (R := X.ringCatSheaf.over U) (ULift.{u} (Fin 1)) ⟶
       E.over U := (E.over U).freeHomEquiv.symm (fun _ ↦ section_on_open E U s)
   have : (E.over U).IsQuasicoherent := SheafOfModules.isQuasicoherent_over E U

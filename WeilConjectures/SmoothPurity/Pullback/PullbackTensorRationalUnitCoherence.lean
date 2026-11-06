@@ -130,8 +130,7 @@ private theorem rationalLeftUnitor_natural (W : Scheme.{u})
   obtain ⟨b, hb, hp⟩ := spec.2 U U M N
   change T.map (Prod.mkHom (𝟙 U) f) ≫ _ = _
   rw [hb]
-  induction f using TensorProduct.induction_on with
-  | zero => simp only [map_zero, Limits.zero_comp, Limits.comp_zero]
+  induction f using TensorProduct.inductionOn with
   | add f g hf hg =>
     change (b (𝟙 U)) (f + g) ≫ _ = _ ≫ (f + g)
     rw [map_add, Preadditive.add_comp]

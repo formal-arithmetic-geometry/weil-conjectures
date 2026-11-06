@@ -60,7 +60,6 @@ lemma singleFunctorCompHomologyFunctorIso_hom_app (P : C) (n : ℤ) :
     Functor.whiskerRight_app, NatTrans.id_app, Functor.associator_hom_app,
     Functor.whiskerLeft_app, HomologicalComplex.homologyFunctorSingleIso_hom_app, Q_obj_single_obj]
   erw [(homologyFunctor C n).map_id, Category.id_comp, Category.id_comp]
-  rfl
 
 /-- Let `a : P ⟶ Lⁿ` be a morphism landing in the cycles of `L`, and `P[-n] ⟶ L` the morphism of
 complexes it defines. The following square commutes, where the left map is

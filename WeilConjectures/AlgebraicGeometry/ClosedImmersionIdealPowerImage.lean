@@ -7,12 +7,14 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
 import WeilConjectures.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
 import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import WeilConjectures.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
 import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Image of an ideal power after closed pushforward
 
@@ -79,8 +81,7 @@ private theorem product_range_affine {X : Scheme.{u}} {J : X.Modules}
   · rintro _ ⟨s, rfl⟩
     obtain ⟨z, rfl⟩ :=
       (Modules.quasiCoherent_tensor_product_affine_sections J M).2 U.1 U.2 |>.2 s
-    induction z using TensorProduct.induction_on with
-    | zero => simp only [map_zero]; exact H.zero_mem
+    induction z using TensorProduct.inductionOn with
     | tmul a t =>
       rw [Modules.tensorSectionsMap_tmul, ht]
       exact AddSubgroup.subset_closure ⟨a, t, rfl⟩

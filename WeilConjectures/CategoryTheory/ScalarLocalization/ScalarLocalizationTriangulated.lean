@@ -57,11 +57,9 @@ private noncomputable def rationalComparison
     change Rationalization.tensorHomEquiv _ _ _ _ (1 ⊗ₜ[R] 𝟙 X.obj) = _
     simp
   map_comp {X Y Z} f g := by
-    induction f using TensorProduct.induction_on with
-    | zero => simp only [Limits.zero_comp, map_zero, Limits.zero_comp]
+    induction f using TensorProduct.inductionOn with
     | tmul a f =>
-      induction g using TensorProduct.induction_on with
-      | zero => simp only [Limits.comp_zero, map_zero, Limits.comp_zero]
+      induction g using TensorProduct.inductionOn with
       | tmul b g =>
         change Rationalization.tensorHomEquiv _ _ _ _
           (composition R C p _ _ _ (b ⊗ₜ[R] g) (a ⊗ₜ[R] f)) = _

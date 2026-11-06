@@ -95,7 +95,7 @@ private theorem geometric_fiber_flat
     infer_instance
   apply (ModuleCat.flat_iff_flat _).mp
   rw [ObjectProperty.flat_iff_preservesFiniteLimits]
-  refine ((Functor.preservesFiniteLimits_tfae _).out 0 3).1 fun S hS ↦ ?_
+  refine ((Functor.preservesFiniteLimits_tfae _).out 1 4).1 fun S hS ↦ ?_
   have := hS.mono_f
   refine ⟨?_, hm S.f⟩
   exact ((Functor.preservesFiniteColimits_iff_forall_exact_map_and_epi _).1

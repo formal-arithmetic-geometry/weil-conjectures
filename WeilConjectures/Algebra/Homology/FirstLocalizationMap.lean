@@ -157,8 +157,7 @@ theorem exists_firstLocalization_iso (S : Submonoid A) [IsLocalization S Aq] (i 
   have hφ : (algebraMap (Aq ⊗[R] B) D).comp φ = algebraMap (A ⊗[R] B) D := by
     apply RingHom.ext
     intro z
-    induction z using TensorProduct.induction_on with
-    | zero => simp
+    induction z using TensorProduct.inductionOn with
     | tmul a b =>
       change algebraMap (Aq ⊗[R] B) D
           (algebraMap A Aq a ⊗ₜ[R] b) = algebraMap (A ⊗[R] B) D (a ⊗ₜ[R] b)

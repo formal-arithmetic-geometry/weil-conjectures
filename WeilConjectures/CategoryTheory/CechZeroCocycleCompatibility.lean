@@ -68,7 +68,7 @@ theorem cech_zero_cocycle_compatibility
     CosimplicialObject.δ,
     FormalCoproduct.cech, FormalCoproduct.mapPower,
     FormalCoproduct.power, SimplexCategory.δ] at h
-  erw [Category.assoc, Pi.lift_π, Category.assoc, Pi.lift_π] at h
+  erw [Category.assoc, Pi.lift_comp_π, Category.assoc, Pi.lift_comp_π] at h
   change z ≫ Pi.π (fun s : Fin 1 → ι ↦
       P.obj (op (∏ᶜ (fun k ↦ Over.mk (π (s k)))).left))
       (t ∘ ⇑(Fin.succAboveOrderEmb (0 : Fin 2)).toOrderHom) ≫

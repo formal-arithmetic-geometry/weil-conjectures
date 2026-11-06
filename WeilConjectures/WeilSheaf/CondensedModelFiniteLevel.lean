@@ -136,7 +136,7 @@ lemma comp_eq_of_isUnit (h : φ.comp (algebraMap k K) = ψ.comp (algebraMap k K)
     { r.comp ψ with
       commutes' c := by
         simp only [RingHom.toMonoidHom_eq_coe, OneHom.toFun_eq_coe, MonoidHom.toOneHom_coe,
-          MonoidHom.coe_coe, RingHom.comp_apply, RingHom.algebraMap_toAlgebra]
+          MonoidHom.coe_ofClass, RingHom.comp_apply, RingHom.algebraMap_toAlgebra]
         rw [← RingHom.comp_apply ψ, ← h, RingHom.comp_apply] }
   let f₂ : K →ₐ[k] S :=
     { r.comp (φ.comp (σ : K →+* K)) with

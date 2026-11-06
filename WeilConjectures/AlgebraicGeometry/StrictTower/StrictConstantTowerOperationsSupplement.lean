@@ -5,6 +5,9 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
+
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantDerivedDirectImage
 public import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 public import Mathlib.Algebra.Category.Grp.AB
@@ -187,8 +190,8 @@ private theorem exactSquare_factorsh
     [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     [PreservesFiniteLimits H] [PreservesFiniteColimits H]
     (s : G ⋙ L' ≅ L ⋙ H) (K : HomotopyCategory A (.up ℤ)) :
-    ((Functor.mapDerivedCategoryCompIso G L').symm ≪≫
-        Functor.mapDerivedCategoryNatIso s ≪≫ Functor.mapDerivedCategoryCompIso L H).hom.app
+    (Functor.mapDerivedCategoryCompIso G L' ≪≫
+        Functor.mapDerivedCategoryNatIso s ≪≫ (Functor.mapDerivedCategoryCompIso L H).symm).hom.app
           (DerivedCategory.Qh.obj K) ≫
         H.mapDerivedCategory.map (L.mapDerivedCategoryFactorsh.hom.app K) ≫
         H.mapDerivedCategoryFactorsh.hom.app ((L.mapHomotopyCategory (.up ℤ)).obj K) =
@@ -205,7 +208,7 @@ private theorem exactSquare_factorsh
     ((Functor.mapHomotopyCategoryCompIso (Iso.refl (L ⋙ H)) (.up ℤ)).hom.app K))).1
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
   rw [h₁, h₃, ← h₂]
-  simp only [Functor.map_comp, Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Functor.map_comp, Category.assoc, Iso.hom_inv_id_app_assoc]
   have hc : DerivedCategory.Qh.map
         ((Functor.mapHomotopyCategoryCompIso (Iso.refl (L ⋙ H)) (.up ℤ)).inv.app K) ≫
       DerivedCategory.Qh.map
@@ -289,9 +292,9 @@ private theorem derived_mate_factorsh
       (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
         adj'.mapDerivedCategoryRightDerivedAdjunction
         (TwoSquare.mk _ _ _ _
-          ((Functor.mapDerivedCategoryCompIso G L').symm ≪≫
+          (Functor.mapDerivedCategoryCompIso G L' ≪≫
             Functor.mapDerivedCategoryNatIso s ≪≫
-            Functor.mapDerivedCategoryCompIso L H).hom)).app (DerivedCategory.Qh.obj K) ≫
+            (Functor.mapDerivedCategoryCompIso L H).symm).hom)).app (DerivedCategory.Qh.obj K) ≫
       R'.rightDerivedFunctor.map (H.mapDerivedCategoryFactorsh.hom.app K) =
     G.mapDerivedCategoryFactorsh.hom.app ((R.mapHomotopyCategory (.up ℤ)).obj K) ≫
       DerivedCategory.Qh.map
@@ -313,8 +316,8 @@ private theorem derived_mate_factorsh
         NatTrans.mapHomotopyCategory s.hom (.up ℤ) ≫
         (Functor.mapHomotopyCategoryCompIso (Iso.refl (L ⋙ H)) (.up ℤ)).inv))
     (TwoSquare.mk _ _ _ _
-      ((Functor.mapDerivedCategoryCompIso G L').symm ≪≫
-        Functor.mapDerivedCategoryNatIso s ≪≫ Functor.mapDerivedCategoryCompIso L H).hom)
+      (Functor.mapDerivedCategoryCompIso G L' ≪≫
+        Functor.mapDerivedCategoryNatIso s ≪≫ (Functor.mapDerivedCategoryCompIso L H).symm).hom)
     K (exactSquare_factorsh L L' G H s _)
 
 private theorem adjunct_comp_comparison {C D E : Type*}
@@ -479,7 +482,7 @@ Source: Stacks, Tag 0D6D (blueprint: def-cbc-strict-constant-tower-operations). 
 noncomputable def gComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     G B (f ≫ g) ≅ G B g ⋙ G B f :=
   Functor.mapDerivedCategoryNatIso (towerGComp B f g) ≪≫
-    Functor.mapDerivedCategoryCompIso (towerPullback B g) (towerPullback B f)
+    (Functor.mapDerivedCategoryCompIso (towerPullback B g) (towerPullback B f)).symm
 
 /-- The direct-image compositor is the conjugate for the composition adjunction.
 Source: Stacks, Tags 0D6D and 07A7
@@ -608,9 +611,9 @@ Source: blueprint evaluation normalization
 (blueprint: def-cbc-strict-constant-tower-operations). -/
 noncomputable def evalG {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     G B f ⋙ ev B X n ≅ ev B Y n ⋙ (modulePullback B f).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
   Functor.mapDerivedCategoryNatIso (eqToIso (evaluationPullback B f n)) ≪≫
-  Functor.mapDerivedCategoryCompIso _ _
+  (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The direct-image evaluation map is its specified adjunction mate.
 Source: Stacks, Tags 07A7 and 0DVC
@@ -684,9 +687,9 @@ theorem evalR_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     infer_instance
   have hm : (mateEquiv a a' (TwoSquare.mk _ _ _ _ s.hom)).natTrans =
       𝟙 (E' ⋙ P') := evaluation_mate B f n
-  have hs : ((Functor.mapDerivedCategoryCompIso E L').symm ≪≫
+  have hs : (Functor.mapDerivedCategoryCompIso E L' ≪≫
       Functor.mapDerivedCategoryNatIso s ≪≫
-      Functor.mapDerivedCategoryCompIso L E').hom = (evalG B f n).inv := by
+      (Functor.mapDerivedCategoryCompIso L E').symm).hom = (evalG B f n).inv := by
     dsimp only [s, evalG]
     simp only [Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv,
       Functor.mapDerivedCategoryNatIso_symm, Category.assoc]

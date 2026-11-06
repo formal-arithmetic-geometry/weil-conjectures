@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
+public import Mathlib.CategoryTheory.Abelian.Exact
 
 /-! # Bounded complexes belong to triangulated subcategories containing their terms
 

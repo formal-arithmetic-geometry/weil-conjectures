@@ -88,8 +88,7 @@ theorem Algebra.FormallySmooth.of_isRegularLocalRing_of_surjective {k B S : Type
   have hG : Function.Surjective (Finsupp.linearCombination κ g) := by
     rw [← LinearMap.range_eq_top, Finsupp.range_linearCombination]
     refine Submodule.eq_top_iff'.2 fun z ↦ ?_
-    induction z using TensorProduct.induction_on with
-    | zero => exact zero_mem _
+    induction z using TensorProduct.inductionOn with
     | add x y hx hy => exact add_mem hx hy
     | tmul a i =>
       rw [show a ⊗ₜ[B] i = a • (1 ⊗ₜ[B] i) by
@@ -183,7 +182,7 @@ theorem Algebra.FormallySmooth.localization_of_isRegularLocalRing {k A : Type*} 
       change algebraMap P A s' ∉ q
       exact hs' ▸ s.2
     refine ⟨IsLocalization.mk' _ a' ⟨s', hs'Q⟩, ?_⟩
-    rw [Localization.AtPrime.IsLiesOverAlgebra.algebraMap_eq, Localization.localRingHom_mk']
+    rw [Localization.AtPrime.algebraMap_eq, Localization.localRingHom_mk']
     congr 1
     exact Subtype.ext hs'
   have : Algebra.FormallySmooth P (Localization.AtPrime Q) := .of_isLocalization Q.primeCompl

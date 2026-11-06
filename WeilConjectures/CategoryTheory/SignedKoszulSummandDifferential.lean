@@ -177,7 +177,7 @@ private theorem negativeBasis_map_succ (r : ℕ)
     (ringedNegativeKoszulFactorBasis O (b 0) m k)
     (ringedNegativeKoszulBasis O r (fun i ↦ b i.succ) m S (n - k))
   have he : (if (0 : Fin (r + 1)) ∈ S.map (Fin.succEmb r) then (-1 : ℤ) else 0) = 0 :=
-    if_neg h0
+    ite_eq_right h0
   have hrec : ringedNegativeKoszulBasis O (r + 1) b m (S.map (Fin.succEmb r)) n =
       B (if (0 : Fin (r + 1)) ∈ S.map (Fin.succEmb r) then -1 else 0) := by
     simp only [ringedNegativeKoszulBasis, B, tensorPoint, hp]
@@ -203,7 +203,7 @@ private theorem negativeBasis_insert_zero (r : ℕ)
     (ringedNegativeKoszulFactorBasis O (b 0) m k)
     (ringedNegativeKoszulBasis O r (fun i ↦ b i.succ) m S (n - k))
   have he : (if (0 : Fin (r + 1)) ∈ insert 0 (S.map (Fin.succEmb r))
-      then (-1 : ℤ) else 0) = -1 := if_pos h0
+      then (-1 : ℤ) else 0) = -1 := ite_eq_left h0
   have hrec : ringedNegativeKoszulBasis O (r + 1) b m
       (insert 0 (S.map (Fin.succEmb r))) n =
       B (if (0 : Fin (r + 1)) ∈ insert 0 (S.map (Fin.succEmb r)) then -1 else 0) := by
@@ -375,7 +375,7 @@ theorem ringedNegativeKoszulBasis_d_succ
     have := Finset.card_pos.mpr ⟨i, hi⟩
     omega
   have hsrc : -(I.card : ℤ) + 1 = -((I.erase i).card : ℤ) := by omega
-  rw [dif_pos hsrc]
+  rw [dite_eq_left hsrc]
   symm
   exact congrArg (fun f ↦
     ((-1 : ℤ) ^ (I.filter (fun j ↦ j < i)).card •
@@ -492,13 +492,13 @@ theorem ringedNegativeKoszulSummand_D₂_succ
       rw [Finset.card_erase_of_mem hi]
       omega
     have hsrc : -(I.card : ℤ) + 1 = -((I.erase i).card : ℤ) := by omega
-    simp only [dif_pos hsrc, dif_pos hdeg]
+    simp only [dite_eq_left hsrc, dite_eq_left hdeg]
     rw [ringedNegativeKoszulSummand]
     exact ringedNegativeKoszulSummand_D₂_term O ρ r a m K q I i hi hdeg hsrc
   · have hsrc : -(I.card : ℤ) + 1 ≠ -((I.erase i).card : ℤ) := by
       intro hs
       apply hdeg
       omega
-    simp only [dif_neg hsrc, dif_neg hdeg, Functor.map_zero,
+    simp only [dite_eq_right hsrc, dite_eq_right hdeg, Functor.map_zero,
       comp_zero, zero_comp, smul_zero]
 end CategoryTheory

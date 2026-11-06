@@ -164,7 +164,7 @@ private theorem contraction_le_selected (q : PrimeSpectrum (algebra A)) (x : Pri
     exact (cutIndex_partAt E hE f Set.Subset.rfl x).mpr hfx
   have hden : i.denominator (stagePoint q i).1 = f := by
     change (if (stagePoint q i).1.val = E then f else 1) = f
-    rw [if_pos hpart]
+    rw [ite_eq_left hpart]
   have hnot : i.denominator (stagePoint q i).1 ∉
       (PrimeSpectrum.comap (algebraMap A (algebra A)) q).asIdeal := by
     rw [← stagePoint_contraction q i]

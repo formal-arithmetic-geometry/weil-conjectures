@@ -46,7 +46,7 @@ private theorem lift_map_eq
     Limits.Pi.lift γ ≫ Limits.Pi.map f = Limits.Pi.lift δ := by
   apply Limits.Pi.hom_ext
   intro i
-  simp only [Category.assoc, Limits.Pi.map_π, Limits.Pi.lift_π, Limits.Pi.lift_π_assoc]
+  simp only [Category.assoc, Limits.Pi.map_π, Limits.Pi.lift_comp_π, Limits.Pi.lift_comp_π_assoc]
   exact h i
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in

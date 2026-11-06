@@ -116,8 +116,8 @@ theorem restrictScalarsComp_derived_factors
     (f : R →+* S) (g : S →+* T) (gf : R →+* T) (hgf : gf = g.comp f)
     (P : CochainComplex (ModuleCat.{max u v} T) ℤ) :
     ((Functor.mapDerivedCategoryNatIso (ModuleCat.restrictScalarsComp' f g gf hgf)) ≪≫
-      Functor.mapDerivedCategoryCompIso (ModuleCat.restrictScalars g)
-        (ModuleCat.restrictScalars f)).hom.app (Q.obj P) ≫
+      (Functor.mapDerivedCategoryCompIso (ModuleCat.restrictScalars g)
+        (ModuleCat.restrictScalars f)).symm).hom.app (Q.obj P) ≫
       (ModuleCat.restrictScalars f).mapDerivedCategory.map
         ((ModuleCat.restrictScalars g).mapDerivedCategoryFactors.hom.app P) ≫
       (ModuleCat.restrictScalars f).mapDerivedCategoryFactors.hom.app

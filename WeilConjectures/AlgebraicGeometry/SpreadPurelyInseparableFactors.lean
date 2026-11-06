@@ -87,7 +87,7 @@ private theorem universallyInjective_of_localized_powers
     (IsScalarTower.toAlgHom A A' E) (AlgHom.id A B)).toRingHom
   have ht : IsUnit (algebraMap A' R t) :=
     IsLocalization.Away.isUnit_of_dvd (algebraMap A A' s) hdvd
-  refine ((tfae_universallyInjective _).out 1 0).mp ?_
+  refine ((tfae_universallyInjective _).out 2 1).mp ?_
   intro Ω _ g₁ g₂ hg
   rw [← Spec.map_preimage g₁, ← Spec.map_preimage g₂] at hg ⊢
   simp only [← Spec.map_comp] at hg

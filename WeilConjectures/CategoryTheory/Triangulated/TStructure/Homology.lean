@@ -295,7 +295,7 @@ lemma homology₀_exact (T : Triangle C) (hT : T ∈ distTriang C) :
     { τ₁ := t.homology₀.map ((t.truncLEι 0).app T.obj₁)
       τ₂ := 𝟙 _
       τ₃ := t.homology₀.map O.m₃
-      comm₁₂ := by dsimp; rw [comp_id, ← Functor.map_comp]; rfl
+      comm₁₂ := by dsimp; rw [comp_id, ← Functor.map_comp]
       comm₂₃ := by
         dsimp; rw [id_comp, ← Functor.map_comp]; exact (congrArg t.homology₀.map O.comm₃).symm }
   have : Mono φ.τ₃ := hmono

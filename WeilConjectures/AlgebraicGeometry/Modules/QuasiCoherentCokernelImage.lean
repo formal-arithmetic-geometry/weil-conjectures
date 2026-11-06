@@ -7,12 +7,14 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Coherent
+public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.CategoryTheory.Abelian.Images
 public import Mathlib.LinearAlgebra.Quotient.Basic
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.CechAcyclic
 import Mathlib.LinearAlgebra.Isomorphisms
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Cokernels and images of quasi-coherent modules
 

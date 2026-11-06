@@ -105,8 +105,7 @@ theorem tensor_model_pushout_base_change
   have square : d₁.comp mD = mE.comp d₀ := by
     apply RingHom.ext
     intro x
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | add x y hx hy => simpa only [map_add] using congrArg₂ (· + ·) hx hy
     | tmul s a =>
       change Algebra.TensorProduct.map (AlgHom.id T T) f
@@ -143,8 +142,7 @@ theorem tensor_model_pushout_base_change
       (Algebra.TensorProduct.cancelBaseChange R S T T A)
     apply RingHom.ext
     intro x
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | add x y hx hy => simpa only [map_add] using congrArg₂ (· + ·) hx hy
     | tmul s a =>
       change (Algebra.TensorProduct.cancelBaseChange R S T T A)
@@ -157,8 +155,7 @@ theorem tensor_model_pushout_base_change
       (Algebra.TensorProduct.cancelBaseChange R S T T B)
     apply RingHom.ext
     intro x
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | add x y hx hy => simpa only [map_add] using congrArg₂ (· + ·) hx hy
     | tmul s b =>
       change (Algebra.TensorProduct.cancelBaseChange R S T T B)

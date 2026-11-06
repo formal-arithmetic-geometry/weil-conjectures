@@ -85,7 +85,7 @@ theorem exists_grothendieck_resolution_unit_comparison
         (DerivedCategory.Plus.homologyFunctorObjQIso
           (G.mapCochainComplexPlus.obj L) n).inv ≫
         (DerivedCategory.Plus.homologyFunctor C n).map
-          (G.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient B).obj L)) := by
+          (G.rightDerivedFunctorPlusUnit.app L) := by
   dsimp
   refine ⟨canonicalResolutionDerivedIso F I, ?_, ?_⟩
   · exact resolution_homology_transport F X I n

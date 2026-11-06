@@ -79,12 +79,10 @@ lemma cancelBaseChange_baseChange_baseChange {A : Type u} [CommRing A] [Algebra 
     [Module A N] (φ : M →ₗ[A] N) (x : B ⊗[R] (R ⊗[A] M)) :
     AlgebraTensorModule.cancelBaseChange A R B B N ((φ.baseChange R).baseChange B x) =
       φ.baseChange B (AlgebraTensorModule.cancelBaseChange A R B B M x) := by
-  induction x using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction x using TensorProduct.inductionOn with
   | add x y hx hy => simp only [map_add, hx, hy]
   | tmul c y =>
-    induction y using TensorProduct.induction_on with
-    | zero => simp only [TensorProduct.tmul_zero, map_zero]
+    induction y using TensorProduct.inductionOn with
     | add y y' hy hy' => simp only [TensorProduct.tmul_add, map_add, hy, hy']
     | tmul r m =>
       simp only [LinearMap.baseChange_tmul, AlgebraTensorModule.cancelBaseChange_tmul]
@@ -231,8 +229,7 @@ lemma presheaf_map_mumfordSectionsMap_one_tmul {W' : T.Opens} (hW : W ≤ W')
     ((mumfordCech (f' := f') (g' := g') ℱ U).X k).presheaf.map (homOfLE hW).op
         (mumfordSectionsMap H ℱ U W' hg' k (1 ⊗ₜ z)) =
       mumfordSectionsMap H ℱ U W hg k (1 ⊗ₜ z) := by
-  induction z using TensorProduct.induction_on with
-  | zero => simp only [TensorProduct.tmul_zero, map_zero]
+  induction z using TensorProduct.inductionOn with
   | add x y hx hy => simp only [TensorProduct.tmul_add, map_add, hx, hy]
   | tmul r m =>
     have h₁ (B : Type u) [CommRing B] [Algebra R B] :
@@ -383,8 +380,7 @@ lemma mumfordFreeHom_sections (W : T.Opens) [Algebra Γ(S, ⊤) Γ(T, W)] [Algeb
   change Hom.app (freeHomOfSections _ (mumfordSections H ℱ U hg P b Φ k)) W
       (freeSectionsTensorEquiv P b W k x) =
     mumfordSectionsMap H ℱ U W hgW k ((Φ.f k).hom.baseChange Γ(T, W) x)
-  induction x using TensorProduct.induction_on with
-  | zero => rw [map_zero, map_zero, map_zero, map_zero]
+  induction x using TensorProduct.inductionOn with
   | add x y hx hy => rw [map_add, map_add, map_add, map_add, hx, hy]
   | tmul r p =>
     rw [freeHomOfSections_app, freeSectionsEquivOpens_freeSectionsTensorEquiv,

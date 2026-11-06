@@ -241,8 +241,8 @@ theorem stalkTensorIso (X : AlgebraicGeometry.RingedSpace.{u}) (x : X) :
       (TopCat.Presheaf.germ (F.val ⊗ G.val).presheaf U x hx z)) =
       (S.map f ⊗ₘ S.map g) ((e F G).hom
         (TopCat.Presheaf.germ (F.val ⊗ G.val).presheaf U x hx z))
-    induction z using TensorProduct.induction_on with
-    | zero => simp
+    change TensorProduct (X.presheaf.obj (op U)) (F.val.obj (op U)) (G.val.obj (op U)) at z
+    induction z using TensorProduct.inductionOn with
     | add a b ha hb => simpa only [map_add] using congrArg₂ (· + ·) ha hb
     | tmul s t =>
       have hg := stalkMap_germ X x (f.val ⊗ₘ g.val) U hx (s ⊗ₜ t)

@@ -146,7 +146,7 @@ theorem field_curve_normalization_good_open
     obtain ⟨y, hy⟩ := hi.symm ▸ mem_irreducibleComponent (x := x)
     obtain ⟨z, hz⟩ := (C i).fromNormalization.surjective y
     refine ⟨(Sigma.ι Y i) ((e i).inv z), ?_⟩
-    rw [← Scheme.Hom.comp_apply, Sigma.ι_desc, Scheme.Hom.comp_apply,
+    rw [← Scheme.Hom.comp_apply, Sigma.ι_comp_desc, Scheme.Hom.comp_apply,
       Scheme.Hom.comp_apply]
     simpa using (congrArg (c i) hz).trans hy
   let W : X.Opens := ⟨r '' (U : Set R), hrh.isOpenMap _ U.isOpen⟩

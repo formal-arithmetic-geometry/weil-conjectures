@@ -201,7 +201,8 @@ private theorem scalarComparison
     let z := scalarAdd (S.obj (r.modules.obj N)) T b x y
     have hz (V : Cᵒᵖ) (t : T.obj.obj V) :
         z.hom.app V t = @Add.add ((r.modules.obj N).val.obj V) inferInstance
-          (@SMul.smul _ ((r.modules.obj N).val.obj V) inferInstance
+          (@SMul.smul (((constantSheaf J RingCat.{u}).obj (RingCat.of B)).obj.obj V)
+            ((r.modules.obj N).val.obj V) inferInstance
             (a.hom.app V t) (x.hom.app V t)) (y.hom.app V t) := by
       have hs : a.hom.app V t =
           (toSheafify J ((Functor.const Cᵒᵖ).obj (RingCat.of B))).app V b :=

@@ -138,12 +138,12 @@ private theorem nat_free_model (R : Type u) [CommRing R]
     { hom := H
       zero i j hij := by
         have hne : j ≠ i + 1 := fun he ↦ hij he.symm
-        simp only [H, dif_neg hne]
+        simp only [H, dite_eq_right hne]
       comm i := by
         cases i with
         | zero =>
           rw [Homotopy.dNext_zero_chainComplex, Homotopy.prevD_chainComplex]
-          simp only [H, dif_pos rfl, eqToHom_refl, Category.comp_id, zero_add]
+          simp only [H, dite_eq_left rfl, eqToHom_refl, Category.comp_id, zero_add]
           apply ModuleCat.hom_ext
           apply LinearMap.ext
           intro v
@@ -162,7 +162,7 @@ private theorem nat_free_model (R : Type u) [CommRing R]
             simp
         | succ n =>
           rw [Homotopy.dNext_succ_chainComplex, Homotopy.prevD_chainComplex]
-          simp only [H, dif_pos rfl, eqToHom_refl, Category.comp_id]
+          simp only [H, dite_eq_left rfl, eqToHom_refl, Category.comp_id]
           apply ModuleCat.hom_ext
           apply LinearMap.ext
           intro v

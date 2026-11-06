@@ -245,10 +245,6 @@ theorem exists_baseTensorDerivedComparison
     r.map (((c.sc i).mapHomologyIso t).hom) = _
   rw [DerivedCategory.homologyFunctorFactorsh_hom_app_quotient_obj]
   simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
-  have hy : (DerivedCategory.quotientCompQhIso _).hom.app X =
-      𝟙 (DerivedCategory.Q.obj X) := rfl
-  erw [hy, CategoryTheory.Functor.map_id]
-  erw [Category.id_comp] at hh ⊢
   simpa only [τ, NatTrans.comp_app, CategoryTheory.Functor.whiskerRight_app,
     CategoryTheory.Functor.whiskerLeft_app, scalarExtensionHomologyMap, ℓ, s, q, X, c, r, t,
     CategoryTheory.Functor.comp_map, CategoryTheory.Functor.map_comp, Category.assoc]

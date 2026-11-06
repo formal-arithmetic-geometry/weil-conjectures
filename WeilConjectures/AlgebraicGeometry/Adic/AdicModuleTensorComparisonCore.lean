@@ -103,7 +103,9 @@ private noncomputable def presheafPairing {l : ℕ} [Fact l.Prime] {X : Scheme.{
     change ULift.{u + 1} (PadicAlgCl.locallyFiniteFunctions l V.unop.left) at r
     change M.X.obj V at x
     change N.X.obj V at y
-    have h := ConcreteCategory.congr_hom (congr_app hq.balanced V) (x ⊗ₜ (r ⊗ₜ y))
+    have h := ConcreteCategory.congr_hom (congr_app hq.balanced V)
+      (x ⊗ₜ (TensorProduct.tmul (ULift.{u + 1} (PadicAlgCl l))
+        (M := (adicConstantSheaf l X).obj.obj V) (N := N.X.obj V) r y))
     exact h.trans (ConcreteCategory.congr_hom (congr_app hq.linear V)
       (r ⊗ₜ (x ⊗ₜ y)))
 
@@ -240,8 +242,7 @@ private lemma nativeTensor_exists {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
       apply ModuleCat.hom_ext
       apply TensorProduct.ext'
       intro r z
-      induction z using TensorProduct.induction_on with
-      | zero => simp only [TensorProduct.tmul_zero, map_zero]
+      induction z using TensorProduct.inductionOn with
       | add z w hz hw => simp only [TensorProduct.tmul_add, map_add, hz, hw]
       | tmul x y =>
         exact LinearMap.congr_fun ((b V).map_smul r x) y
@@ -250,8 +251,7 @@ private lemma nativeTensor_exists {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
       apply ModuleCat.hom_ext
       apply TensorProduct.ext'
       intro x z
-      induction z using TensorProduct.induction_on with
-      | zero => simp only [TensorProduct.tmul_zero, map_zero]
+      induction z using TensorProduct.inductionOn with
       | add z w hz hw => simp only [TensorProduct.tmul_add, map_add, hz, hw]
       | tmul r y =>
         exact ((b V x).map_smul r y).trans

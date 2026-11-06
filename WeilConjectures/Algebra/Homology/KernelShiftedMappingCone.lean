@@ -183,7 +183,7 @@ private lemma comparisonSequence_shortExact
   dsimp only [comparisonSequence, ShortComplex.map, eval_map]
   refine { exact := ?_, mono_f := comparison_mono f p, epi_g := quotientMap_epi f hf p }
   apply ShortComplex.exact_of_f_is_kernel
-  have : Mono ((eval C (ComplexShape.up ℤ) p).map (comparison f)) := comparison_mono f p
+  have : Mono ((comparison f).f p) := comparison_mono f p
   apply KernelFork.IsLimit.ofι'
   intro A k hk
   have hk' : k ≫ (quotientMap f).f p = 0 := hk

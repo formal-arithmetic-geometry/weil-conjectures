@@ -7,7 +7,7 @@ Authors: Bin Wu
 module
 
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
-import Mathlib.Data.Countable.Small
+import Mathlib.Basic.Countable.Small
 
 @[expose] public section
 
@@ -77,7 +77,7 @@ theorem isOpen_of_fpqc_preimages
   change IsOpen ((Limits.Sigma.ι F.cover.X j) ⁻¹' (p ⁻¹' V))
   rw [← Set.preimage_comp, ← TopCat.coe_comp, ← Scheme.Hom.comp_base]
   change IsOpen ((Limits.Sigma.ι F.cover.X j ≫ Limits.Sigma.desc F.cover.f) ⁻¹' V)
-  rw [Limits.Sigma.ι_desc]
+  rw [Limits.Sigma.ι_comp_desc]
   have he : e.h₀ j ≫ g (e.s₀ j) = F.cover.f j := e.w₀ j
   rw [← he, Scheme.Hom.comp_base, TopCat.coe_comp, Set.preimage_comp]
   exact (hV (e.s₀ j)).preimage (Scheme.Hom.continuous _)

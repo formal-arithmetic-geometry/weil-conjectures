@@ -54,6 +54,17 @@ local notation "𝓡" T => (sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u
 set_option hygiene false in
 local notation "𝓻" φ => (sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).map φ
 
+private abbrev sectionUnitSMul (M : SheafOfModules.{u} (𝓡 R)) (V : Cᵒᵖ) :
+    SMul ((unit (𝓡 R)).val.obj V) (M.val.obj V) :=
+  inferInstanceAs (SMul (R.obj.obj V) (M.val.obj V))
+
+private abbrev sectionMapModule (M : SheafOfModules.{u} (𝓡 R)) {V W : Cᵒᵖ} (f : V ⟶ W) :
+    Module (R.obj.obj W)
+      ((ModuleCat.restrictScalars ((𝓡 R).obj.map f).hom).obj (M.val.obj W)) :=
+  inferInstanceAs (Module (R.obj.obj W) (M.val.obj W))
+
+attribute [local instance] sectionUnitSMul sectionMapModule
+
 @[irreducible] private def sectionProductIso (d : ℕ) (M : SheafOfModules.{u} (𝓡 R)) (V : Cᵒᵖ) :
     (∏ᶜ fun _ : Fin d ↦ M).val.obj V ≅ ModuleCat.of (R.obj.obj V)
       (Fin d → M.val.obj V) :=
@@ -153,8 +164,7 @@ attribute [local irreducible] changeOfRingsMap
   PresheafOfModules.isoMk (scalarExtensionApp φ d e M) (by
     intro V W f
     ext x
-    induction x using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction x using TensorProduct.inductionOn with
     | add x y hx hy => simp only [map_add, hx, hy]
     | tmul s m =>
       apply sectionProduct_ext d M W
@@ -178,7 +188,7 @@ attribute [local irreducible] changeOfRingsMap
           (((e.inv ≫ Pi.π (fun _ : Fin d ↦ unit (𝓡 R)) i).val.app V) s) m
         have hb := PresheafOfModules.naturality_apply
           (e.inv ≫ Pi.π (fun _ : Fin d ↦ unit (𝓡 R)) i).val f s
-        exact (congrArg (fun r ↦ r • M.val.map f m) hb).trans
+        exact (congrArg (fun r : R.obj.obj W ↦ r • (M.val.map f m : M.val.obj W)) hb).trans
           (hl.symm.trans ((congrArg (M.val.map f) hc).symm.trans hπ.symm)))))
 
 section SheafComparison
@@ -283,8 +293,7 @@ private theorem scalarPresheaf_naturality (φ : R ⟶ S) (d : ℕ)
       (scalarExtensionPresheafIso φ d e N).hom =
         (scalarExtensionPresheafIso φ d e M).hom ≫ (Limits.Pi.map (fun _ : Fin d ↦ f)).val := by
   ext V x
-  induction x using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction x using TensorProduct.inductionOn with
   | add x y hx hy => simp only [map_add, hx, hy]
   | tmul s m =>
     apply sectionProduct_ext d N V

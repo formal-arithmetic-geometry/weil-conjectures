@@ -69,13 +69,14 @@ private theorem exact_restriction_inv_factors {A B D : Type*}
       DerivedCategory.Q.map ((NatIso.mapHomologicalComplex e (.up ℤ)).inv.app P) ≫
         H.mapDerivedCategoryFactors.inv.app P ≫
           (Functor.mapDerivedCategoryNatIso e ≪≫
-            Functor.mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Q.obj P) := by
+            (Functor.mapDerivedCategoryCompIso F G).symm).hom.app (DerivedCategory.Q.obj P) := by
   have h := Functor.exactDerivedRestrictionComposition_inv_factors F G H e.symm P
   rw [← Category.assoc]
   apply (Iso.eq_comp_inv ((Functor.mapDerivedCategoryNatIso e ≪≫
-    Functor.mapDerivedCategoryCompIso F G).app (DerivedCategory.Q.obj P)).symm).2
+    (Functor.mapDerivedCategoryCompIso F G).symm).app (DerivedCategory.Q.obj P)).symm).2
   simpa only [Functor.exactDerivedRestrictionComposition, Iso.trans_hom, Iso.trans_inv,
-    Iso.symm_hom, Iso.app_inv, NatTrans.comp_app, Functor.mapDerivedCategoryNatIso_symm,
+    Iso.symm_hom, Iso.symm_inv, Iso.app_inv, NatTrans.comp_app,
+    Functor.mapDerivedCategoryNatIso_symm,
     NatIso.mapHomologicalComplex, Category.assoc] using h
 
 private theorem map_postcompose_iso_cancel {A B : Type*} [Category A] [Category B]

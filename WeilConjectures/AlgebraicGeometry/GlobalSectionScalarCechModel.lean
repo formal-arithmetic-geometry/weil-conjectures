@@ -150,7 +150,9 @@ private theorem augmented_iso_of_good_quasiIso
     rw [← hα, ← Category.assoc, he, IsIso.hom_inv_id_assoc]
   let H := HomotopyCategory.quotient A (.up ℤ)
   have hh : DerivedCategory.Qh.map (H.map (s ≫ a)) =
-      DerivedCategory.Qh.map (H.map (t ≫ b)) := hst
+      DerivedCategory.Qh.map (H.map (t ≫ b)) := by
+    apply (cancel_mono ((DerivedCategory.quotientCompQhIso A).hom.app U)).1
+    simp only [H, DerivedCategory.quotientCompQhIso_hom_naturality, hst]
   obtain ⟨V, v, hv, hcomm⟩ :=
     (MorphismProperty.map_eq_iff_precomp DerivedCategory.Qh
       (HomotopyCategory.quasiIso A (.up ℤ)) _ _).1 hh

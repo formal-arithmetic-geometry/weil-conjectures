@@ -305,7 +305,7 @@ theorem isColimit_ringedNegativeKoszulBasis_step
     have hfac := (hc p (n - p)).fac
       (Cofan.mk s.pt (fun L ↦ (δ p hp).inv ≫
         s.inj (idx p (n - p) hp (by omega) L))) ⟨⟨T, ht⟩⟩
-    simpa only [d, dif_pos hp, tensorLeft, Category.assoc, Cofan.mk_ι_app,
+    simpa only [d, dite_eq_left hp, tensorLeft, Category.assoc, Cofan.mk_ι_app,
       cofan_mk_inj, Discrete.functor_obj, Iso.hom_inv_id_assoc, hidx] using
       congrArg ((δ p hp).hom ≫ ·) hfac
   · intro s f hf
@@ -338,7 +338,7 @@ theorem isColimit_ringedNegativeKoszulBasis_step
           CochainComplex.ιMapBifunctor F Q (curriedTensor _) p (n - p) n hpq ≫ f =
         (δ p hp).hom ≫ (tensorLeft (F.X p)).map (B (n - p) ⟨L, hL⟩) ≫ d s p (n - p) hpq
       exact hi.trans (by
-        simpa only [d, dif_pos hp, tensorLeft, Category.assoc, Cofan.mk_ι_app,
+        simpa only [d, dite_eq_left hp, tensorLeft, Category.assoc, Cofan.mk_ι_app,
           cofan_mk_inj, Discrete.functor_obj, Iso.hom_inv_id_assoc] using
           (congrArg ((δ p hp).hom ≫ ·) hfac).symm)
     · have hzF : IsZero (F.X p) :=

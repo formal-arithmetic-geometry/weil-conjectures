@@ -173,6 +173,8 @@ theorem isFlatOver_pullback_fst_tensorObj {K : Type u} [Field K] {W Z : Scheme.{
   have : SheafOfModules.IsInvertible.{u, u, u} L := IsInvertible.sheafOfModules_isInvertible L
   have : (MonoidalCategory.tensorObj F L).IsQuasicoherent := isQuasicoherent_tensorObj F L
   refine isFlatOver_of_forall_exists _ _ fun V p _ ↦ ?_
+  have : SheafOfModules.IsInvertible.{u, u, u} (Modules.unit W) :=
+    IsInvertible.sheafOfModules_isInvertible (MonoidalCategory.tensorUnit W.Modules)
   obtain ⟨UW, hpUW, -, -⟩ := exists_isFreeGenerator (Modules.unit W)
     (TopologicalSpace.Opens.mem_top (Limits.pullback.fst gW gZ p))
   obtain ⟨N, hpN, -, ℓ, hℓ⟩ := exists_isFreeGenerator L (TopologicalSpace.Opens.mem_top p)

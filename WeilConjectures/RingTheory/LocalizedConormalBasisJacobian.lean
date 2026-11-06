@@ -182,7 +182,7 @@ theorem localized_conormal_basis_jacobian
     have hex : ∃ l : W →ₗ[S] (S ⊗[A] G.toExtension.Cotangent),
         l.comp d = LinearMap.id :=
       (((LinearMap.exact_map_mkQ_range d).split_tfae hd
-        (Submodule.mkQ_surjective _)).out 0 1).mp (Exists.intro s hs)
+        (Submodule.mkQ_surjective _)).out 1 2).mp (Exists.intro s hs)
     obtain ⟨l, hl⟩ := hex
     -- Its matrix in the two prescribed bases is exactly the evaluated Jacobian.
     let w := G.cotangentSpaceBasis.baseChange S

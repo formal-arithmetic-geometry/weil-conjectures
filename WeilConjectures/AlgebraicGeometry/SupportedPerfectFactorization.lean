@@ -81,7 +81,7 @@ private theorem telescope_factor
     intro n
     dsimp only [d]
     rw [← Category.assoc]
-    rw [Preadditive.comp_sub, Category.comp_id, Preadditive.sub_comp, Sigma.ι_desc,
+    rw [Preadditive.comp_sub, Category.comp_id, Preadditive.sub_comp, Sigma.ι_comp_desc,
       Category.assoc (tA n.down), he,
       ← Category.assoc (Sigma.ι Y n), he, Preadditive.comp_sub, Category.comp_id]
     simp only [he]

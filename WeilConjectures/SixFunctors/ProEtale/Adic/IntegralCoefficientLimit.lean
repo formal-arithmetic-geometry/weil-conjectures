@@ -48,11 +48,11 @@ noncomputable def zmodPowSheafDiagram : ℕᵒᵖ ⥤ Sheaf (ProEt.topology X) R
     continuous_of_discreteTopology
   map_id n := by
     refine ObjectProperty.hom_ext _ (NatTrans.ext (funext fun U ↦ RingCat.hom_ext
-      (RingHom.ext fun g ↦ ULift.ext _ _ (ContinuousMap.ext fun t ↦ ?_))))
+      (RingHom.ext fun g ↦ ULift.ext (ContinuousMap.ext fun t ↦ ?_))))
     exact RingHom.congr_fun ZMod.castHom_self _
   map_comp f g := by
     refine ObjectProperty.hom_ext _ (NatTrans.ext (funext fun U ↦ RingCat.hom_ext
-      (RingHom.ext fun x ↦ ULift.ext _ _ (ContinuousMap.ext fun t ↦ ?_))))
+      (RingHom.ext fun x ↦ ULift.ext (ContinuousMap.ext fun t ↦ ?_))))
     exact RingHom.congr_fun (ZMod.castHom_comp
       (pow_dvd_pow l (leOfHom g.unop)) (pow_dvd_pow l (leOfHom f.unop))).symm _
 
@@ -64,7 +64,7 @@ noncomputable def padicIntSheafCone : Cone (zmodPowSheafDiagram X l) where
         (PadicInt.isLocallyConstant_toZModPow n.unop).continuous
       naturality m n h := by
         refine ObjectProperty.hom_ext _ (NatTrans.ext (funext fun U ↦ RingCat.hom_ext
-          (RingHom.ext fun x ↦ ULift.ext _ _ (ContinuousMap.ext fun t ↦ ?_))))
+          (RingHom.ext fun x ↦ ULift.ext (ContinuousMap.ext fun t ↦ ?_))))
         exact RingHom.congr_fun
           (PadicInt.zmod_cast_comp_toZModPow _ _ (leOfHom h.unop)).symm _ }
 
@@ -89,10 +89,10 @@ lemma nonempty_isLimit_mapCone_padicIntSheafCone (U : X.ProEtᵒᵖ) :
         ((sheafToPresheaf _ _).mapCone (padicIntSheafCone X l))))) := by
   refine (Types.isLimit_iff _).2 fun s hs ↦ ?_
   let a := compatibleLocallyConstantOfSection X l U (s := s) hs
-  refine ⟨ULift.up (PadicInt.compatibleLocallyConstantToContinuousMap a), fun j ↦ ULift.ext _ _
+  refine ⟨ULift.up (PadicInt.compatibleLocallyConstantToContinuousMap a), fun j ↦ ULift.ext
     (ContinuousMap.ext fun t ↦
       (PadicInt.toZModPow_ringEquivCompatibleFamilies_symm _ _).trans (by rfl)), fun y hy ↦ ?_⟩
-  refine ULift.ext _ _ (ContinuousMap.ext fun t ↦ PadicInt.ext_of_toZModPow.1 fun n ↦ ?_)
+  refine ULift.ext (ContinuousMap.ext fun t ↦ PadicInt.ext_of_toZModPow.1 fun n ↦ ?_)
   exact (congrArg (fun g : ULift.{u + 1} C(U.unop.left, ZMod (l ^ n)) ↦ g.down t)
     (hy (op n))).trans (PadicInt.toZModPow_ringEquivCompatibleFamilies_symm
       (PadicInt.compatibleLocallyConstantEval t a) n).symm

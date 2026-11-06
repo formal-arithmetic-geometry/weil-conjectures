@@ -92,7 +92,7 @@ lemma hasInvertibleExponent_integersResidueField (E : PadicAlgCl.FiniteIntermedi
     · exact CharP.ringChar_ne_one h₁
     · exact (Fact.out : ringChar k' ≠ ℓ) h₁
   exact ⟨ℓ, (Fact.out : ℓ.Prime).pos,
-    ULift.ext _ _ (by simpa using natCast_eq_zero_integersResidueField ℓ E.1),
+    ULift.ext (by simpa using natCast_eq_zero_integersResidueField ℓ E.1),
     by simpa using (Ne.isUnit hk).map (Scheme.ΓSpecIso (.of k')).inv.hom⟩
 
 /-- **Deligne's finiteness theorem on `𝔸ⁿ_S` with `𝔽_E`-coefficients, for reductions**: the

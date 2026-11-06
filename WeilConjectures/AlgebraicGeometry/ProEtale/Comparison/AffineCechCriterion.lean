@@ -97,11 +97,11 @@ lemma isSheafFor_ofArrows_X₃_of_disjoint {T : ShortComplex ((S.AffineProEt)ᵒ
   rw [Presieve.isSheafFor_arrows_iff]
   intro x _
   refine ⟨Pi.lift x ≫ inv (Pi.lift fun i ↦ T.X₃.map (j i).op), fun i ↦ ?_, fun t ht ↦ ?_⟩
-  · rw [comp_coyoneda_obj_map_apply, ← Pi.lift_π (fun i ↦ T.X₃.map (j i).op) i,
-      Category.assoc, IsIso.inv_hom_id_assoc, Pi.lift_π]
+  · rw [comp_coyoneda_obj_map_apply, ← Pi.lift_comp_π (fun i ↦ T.X₃.map (j i).op) i,
+      Category.assoc, IsIso.inv_hom_id_assoc, Pi.lift_comp_π]
   · rw [IsIso.eq_comp_inv]
     refine Pi.hom_ext _ _ fun i ↦ ?_
-    rw [Category.assoc, Pi.lift_π, Pi.lift_π]
+    rw [Category.assoc, Pi.lift_comp_π, Pi.lift_comp_π]
     exact ht i
 
 /-- Let `0 ⟶ P₁ ⟶ P₂ ⟶ P₃ ⟶ 0` be an objectwise short exact sequence of presheaves on the

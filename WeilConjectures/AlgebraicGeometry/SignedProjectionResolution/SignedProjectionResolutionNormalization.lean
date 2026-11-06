@@ -78,8 +78,7 @@ def derivedComparison (H : CochainComplex (proEtaleRingModules X S) ℤ) :
     DerivedCategory.Q.obj
         (((proEtaleRingModuleDirectImage f R S c).mapHomologicalComplex (.up ℤ)).obj H) ⟶
       (proEtaleRingDerivedDirectImage f R S c).obj (DerivedCategory.Q.obj H) :=
-  (proEtaleRingModuleDirectImage f R S c).rightDerivedFunctorUnit.app
-    ((HomotopyCategory.quotient _ (.up ℤ)).obj H)
+  (proEtaleRingModuleDirectImage f R S c).rightDerivedFunctorUnitQ H
 
 /-- Flat-term K-flat coefficient models, the K-injective target total, and the
 invertible right-derived comparisons.
@@ -129,10 +128,10 @@ theorem model_properties
       package.N package.i package.p package.splitting
   let := hI
   let := hJ
-  exact ⟨proEtaleStrictPerfect_flat R F package bounded,
-    proEtaleStrictPerfect_flat S _ package' bounded', hJ,
-    proEtaleRingDerivedDirectImage_kInjective f R S c I,
-    proEtaleRingDerivedDirectImage_kInjective f R S c _⟩
+  refine ⟨proEtaleStrictPerfect_flat R F package bounded,
+    proEtaleStrictPerfect_flat S _ package' bounded', hJ, ?_, ?_⟩ <;>
+    dsimp only [derivedComparison] <;>
+    rw [Functor.rightDerivedFunctorUnitQ_eq] <;> infer_instance
 
 variable (a : ProEtaleTensorModel Y R) (b : ProEtaleTensorModel X S)
   (K : DerivedCategory (proEtaleRingModules X S))

@@ -74,8 +74,7 @@ theorem integral_overring_jacobson_power
   have : Algebra.IsIntegral A B' := ⟨fun x ↦
     (Algebra.IsIntegral.isIntegral (R := B) x).tower_top⟩
   have : Algebra.IsIntegral B A := ⟨fun x ↦
-    (isIntegral_algebraMap_iff (R := B) (A := A) (B := B')
-      (FaithfulSMul.algebraMap_injective A B')).mp
+    (isIntegral_algebraMap_iff (R := B) (A := A) (B := B')).mp
         (Algebra.IsIntegral.isIntegral (R := B) (algebraMap A B' x))⟩
   have lift (p : MaximalSpectrum A) :
       ∃ q : MaximalSpectrum B', Ideal.comap (algebraMap A B') q.asIdeal = p.asIdeal := by
@@ -83,11 +82,14 @@ theorem integral_overring_jacobson_power
     have heq : Ideal.comap (algebraMap A B') q.asIdeal = p.asIdeal :=
       congrArg PrimeSpectrum.asIdeal hq
     have hm : q.asIdeal.IsMaximal :=
-      Ideal.isMaximal_of_isIntegral_of_isMaximal_comap q.asIdeal (heq ▸ p.isMaximal)
+      Ideal.isMaximal_of_isIntegral_of_isMaximal_under (R := A) q.asIdeal (by
+        change (Ideal.comap (algebraMap A B') q.asIdeal).IsMaximal
+        rw [heq]
+        exact p.isMaximal)
     exact ⟨⟨q.asIdeal, hm⟩, heq⟩
   let f : MaximalSpectrum B' → MaximalSpectrum A := fun q ↦
     ⟨Ideal.comap (algebraMap A B') q.asIdeal,
-      Ideal.isMaximal_comap_of_isIntegral_of_isMaximal q.asIdeal⟩
+      Ideal.isMaximal_under_of_isIntegral_of_isMaximal (R := A) q.asIdeal⟩
   have hf : Function.Surjective f := by
     intro p
     obtain ⟨q, hq⟩ := lift p
@@ -100,7 +102,7 @@ theorem integral_overring_jacobson_power
     intro p hp
     have : p.IsMaximal := hp.2
     apply Ideal.map_le_iff_le_comap.mpr
-    exact sInf_le ⟨bot_le, Ideal.isMaximal_comap_of_isIntegral_of_isMaximal p⟩
+    exact sInf_le ⟨bot_le, Ideal.isMaximal_under_of_isIntegral_of_isMaximal (R := B) p⟩
   have hrad : Ideal.jacobson (⊥ : Ideal A) =
       (Ideal.map (algebraMap B A) (Ideal.jacobson (⊥ : Ideal B))).radical := by
     apply le_antisymm
@@ -121,7 +123,7 @@ theorem integral_overring_jacobson_power
         (f := fun q : MaximalSpectrum B ↦ q.asIdeal)).mp
           (by rwa [Finset.inf_univ_eq_iInf])
       have hm : r.IsMaximal := (q.isMaximal.eq_of_le hr.ne_top hq) ▸ q.isMaximal
-      have : p.IsMaximal := Ideal.isMaximal_of_isIntegral_of_isMaximal_comap p hm
+      have : p.IsMaximal := Ideal.isMaximal_of_isIntegral_of_isMaximal_under (R := B) p hm
       exact sInf_le ⟨bot_le, this⟩
     · exact (Ideal.isRadical_jacobson ⊥).radical_le_iff.mpr hmap
   refine ⟨hfinite, hrad, ?_⟩

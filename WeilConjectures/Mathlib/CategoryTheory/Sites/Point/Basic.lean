@@ -57,7 +57,7 @@ noncomputable def ulift : Point.{max w w'} J where
       (Functor.Elements.uliftEquivalence.{w'} Φ.fiber).inverse
   jointly_surjective _ hR x := by
     obtain ⟨Y, f, hf, y, hy⟩ := Φ.jointly_surjective _ hR x.down
-    exact ⟨Y, f, hf, ULift.up y, ULift.ext _ _ hy⟩
+    exact ⟨Y, f, hf, ULift.up y, ULift.ext hy⟩
 
 @[simp]
 lemma ulift_fiber_map {X Y : C} (f : X ⟶ Y) (x : (Φ.ulift.{w'}).fiber.obj X) :
@@ -78,7 +78,7 @@ noncomputable def uliftPresheafFiberIso :
     Functor.initial_of_adjunction (Functor.Elements.uliftEquivalence.{w'} Φ.fiber).toAdjunction
   have : HasColimitsOfShape (Φ.fiber ⋙ uliftFunctor.{w', w}).Elementsᵒᵖ A :=
     inferInstanceAs (HasColimitsOfShape (Φ.ulift.{w'}).fiber.Elementsᵒᵖ A)
-  Functor.isoWhiskerLeft ((Functor.whiskeringLeft _ _ A).obj (CategoryOfElements.π Φ.fiber).op)
+  Functor.isoWhiskerLeft ((Functor.whiskeringLeft _ _ A).obj (Functor.Elements.π Φ.fiber).op)
     (Functor.Final.colimIso (Functor.Elements.uliftEquivalence.{w'} Φ.fiber).functor.op)
 
 /-- Taking the fibre of an `A`-valued sheaf at a point of a site does not depend on the

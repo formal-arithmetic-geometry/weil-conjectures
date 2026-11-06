@@ -74,7 +74,7 @@ theorem exists_isTwistedSection_compactOpenLattice_of_connectedSpace [IsLocallyN
     else CompactOpenLattice.standard E n
   have hsumL (w : V) : sumL (A w) = CompactOpenLattice.sum (hAfin w).toFinset
       ((hAfin w).toFinset_nonempty.2 (hne w)) := by
-    simp only [sumL, dif_pos (And.intro (hAfin w) (hne w))]
+    simp only [sumL, dite_eq_left (And.intro (hAfin w) (hne w))]
   refine ⟨fun x ↦ sumL (A (q x)), ?_, fun w ↦ ?_⟩
   · exact (hAlc.comp sumL).comp_continuous (pullback.fst f (𝟙 T)).base.hom.continuous
   · set z := (twistedPairMap f (𝟙 T)).base w

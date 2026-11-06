@@ -65,8 +65,7 @@ private theorem square_test_ext {X : Scheme.{u}} {G P : X.Modules}
   apply affine_test_ext
   intro U hU t
   obtain ⟨s, rfl⟩ := (quasiCoherent_tensor_product_affine_sections G G).2 U hU |>.surjective t
-  induction s using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction s using TensorProduct.inductionOn with
   | tmul x y => exact h U x y
   | add s t hs ht => simp only [map_add, hs, ht]
 
@@ -81,13 +80,11 @@ private theorem cube_test_ext {X : Scheme.{u}} {G P : X.Modules}
   intro U hU t
   obtain ⟨s, rfl⟩ :=
     (quasiCoherent_tensor_product_affine_sections (G ⊗ G) G).2 U hU |>.surjective t
-  induction s using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction s using TensorProduct.inductionOn with
   | tmul xy z =>
     rw [tensorSectionsMap_tmul]
     obtain ⟨r, rfl⟩ := (quasiCoherent_tensor_product_affine_sections G G).2 U hU |>.surjective xy
-    induction r using TensorProduct.induction_on with
-    | zero => simp only [map_zero, zero_tmulSection]
+    induction r using TensorProduct.inductionOn with
     | tmul x y => exact h U x y z
     | add r s hr hs => simp only [map_add, add_tmulSection, hr, hs]
   | add s t hs ht => simp only [map_add, hs, ht]

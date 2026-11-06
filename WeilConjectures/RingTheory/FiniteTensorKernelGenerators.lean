@@ -82,8 +82,7 @@ theorem exists_finite_tensor_kernel_generators
     apply eq_top_iff.mpr
     intro k
     suffices k ∈ P from fun _ ↦ this
-    induction k with
-    | zero => exact P.zero_mem
+    induction k using TensorProduct.inductionOn with
     | tmul x y => exact htmul y x
     | add k l hk hl => exact P.add_mem hk hl
   have hfinite : Module.Finite S (M ⊗[R] I) :=
@@ -94,8 +93,7 @@ theorem exists_finite_tensor_kernel_generators
     { toFun := fun k ↦ μ (e k)
       map_add' := fun k l ↦ by rw [map_add, map_add]
       map_smul' := fun b k ↦ by
-        induction k with
-        | zero => simp
+        induction k using TensorProduct.inductionOn with
         | tmul x a =>
           simp only [TensorProduct.smul_tmul', e, TensorProduct.comm_tmul,
             μ, TensorProduct.lift.tmul, LinearMap.comp_apply, LinearMap.lsmul_apply,

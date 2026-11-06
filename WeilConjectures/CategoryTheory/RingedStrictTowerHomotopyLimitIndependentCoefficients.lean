@@ -179,7 +179,7 @@ private lemma proZero_transition_iso
   let s : P ⟶ P := towerProductShift
     (fun n : ℕ ↦ K.map (homOfLE (Nat.le_succ n)).op)
   have hs (n : ℕ) : s ≫ Pi.π X n =
-      Pi.π X (n + 1) ≫ K.map (homOfLE (Nat.le_succ n)).op := Pi.lift_π _ _
+      Pi.π X (n + 1) ≫ K.map (homOfLE (Nat.le_succ n)).op := Pi.lift_comp_π _ _
   have hp (k n : ℕ) : (End.of s ^ k) ≫ Pi.π X n =
       Pi.π X (n + k) ≫ K.map (homOfLE (Nat.le_add_right n k)).op := by
     induction k generalizing n with
@@ -235,7 +235,7 @@ private lemma proZero_transition_iso
     intro i hi hi'
     exact hv n i (by have := (Finset.mem_range.not.mp hi'); omega)
   let t : P ⟶ P := Pi.lift (fun n ↦ g (k n) ≫ Pi.π X n)
-  have ht (n : ℕ) : t ≫ Pi.π X n = g (k n) ≫ Pi.π X n := Pi.lift_π _ _
+  have ht (n : ℕ) : t ≫ Pi.π X n = g (k n) ≫ Pi.π X n := Pi.lift_comp_π _ _
   refine ⟨t, ?_, ?_⟩
   · change (𝟙 P - s) ≫ t = 𝟙 P
     apply Pi.hom_ext
@@ -278,7 +278,7 @@ private theorem injective_tower_transition_split
       apply Sigma.hom_ext
       intro g
       simp only [i, r, colimit.ι_desc_assoc, Cofan.mk_ι_app,
-        dif_pos (show Nonempty (op n ⟶ m) from ⟨g⟩), colimit.ι_desc]
+        dite_eq_left (show Nonempty (op n ⟶ m) from ⟨g⟩), colimit.ι_desc]
       exact (congrArg (Sigma.ι (fun _ : op n ⟶ m ↦ M))
         (Subsingleton.elim _ g)).trans (Category.comp_id _).symm
     exact (IsSplitMono.mk' ⟨r, hr⟩).mono
@@ -418,7 +418,7 @@ private theorem complexRoos_shortExact
     change t ≫ Pi.π K n = Pi.π K n - Pi.π K (n + 1) ≫ _
     simp [t, K, towerTransitionEndomorphism, towerProductShift]
   obtain ⟨h, ⟨hk⟩⟩ := tower_kernel I.asFunctor c hc P
-    (limit.isLimit _) p t (fun n ↦ Pi.lift_π _ n) ht
+    (limit.isLimit _) p t (fun n ↦ Pi.lift_comp_π _ n) ht
   refine ⟨h, HomologicalComplex.shortExact_of_degreewise_shortExact _ ?_⟩
   intro r
   let ev := HomologicalComplex.eval A (ComplexShape.up ℤ) r
@@ -460,7 +460,7 @@ variable {A : Type u} [Category.{v} A] [Abelian A]
   naturality I J f := by
     apply Pi.hom_ext
     intro n
-    simp only [P, Category.assoc, Limits.Pi.map_π, Pi.lift_π_assoc, Pi.lift_π]
+    simp only [P, Category.assoc, Limits.Pi.map_π, Pi.lift_comp_π_assoc, Pi.lift_comp_π]
     exact (NatTrans.mapHomologicalComplex (lim.π (op n))
       (ComplexShape.up ℤ)).naturality f
 
@@ -483,7 +483,7 @@ private lemma inc_diff (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) :
   intro n
   simp only [towerTransitionEndomorphism, towerProductShift, Category.assoc,
     Preadditive.sub_comp, Category.id_comp, Preadditive.comp_sub,
-    Pi.lift_π, Pi.lift_π_assoc, zero_comp, sub_eq_zero]
+    Pi.lift_comp_π, Pi.lift_comp_π_assoc, zero_comp, sub_eq_zero]
   ext r
   exact (limit.w (I.X r) (homOfLE (Nat.le_succ n)).op).symm
 

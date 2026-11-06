@@ -1634,7 +1634,7 @@ literal identity functors, which are additive as well. -/
     infer_instance
   · have hs : pbcScalarExtension l Ω T hdim hl h =
         (pbcRationalScalarExtension_exists l Ω T hdim hl h).exists.choose := by
-      simp only [pbcScalarExtension, dif_neg hEF]
+      simp only [pbcScalarExtension, dite_eq_right hEF]
     rw [hs]
     have hB := (pbcRationalScalarExtension_exists l Ω T hdim hl h).exists.choose_spec
     have : (pbcIntegralScalarExtension l Ω T hdim hl h).Additive := by

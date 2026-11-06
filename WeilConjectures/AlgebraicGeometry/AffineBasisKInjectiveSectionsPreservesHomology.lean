@@ -9,11 +9,13 @@ module
 public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 import WeilConjectures.AlgebraicGeometry.DerivedLowerTruncationCycleFormula
 import WeilConjectures.CategoryTheory.LeftExactUpperTruncationComparison
 import WeilConjectures.AlgebraicGeometry.AffineBasisDerivedSectionsLowerTailVanishing
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # K-injective section homology from affine-basis acyclicity
 

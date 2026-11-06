@@ -101,8 +101,8 @@ private theorem rawElementDirectSumMap_id {C : Type u} [SmallCategory C]
   have aux (t : A.obj.obj U) (ht : A.obj.map (𝟙 U) s = t) :
       DirectSum.lof (R.obj.obj U) (A.obj.obj U)
         (fun t ↦ (L.obj (elementObj A U t) : Type u)) t
-        (L.map (CategoryOfElements.homMk (A.obj.elementsMk U s)
-          (A.obj.elementsMk U t) (𝟙 U) ht).op.op x) =
+        (L.map (Functor.Elements.homMk (x := A.obj.elementsMk U s)
+          (y := A.obj.elementsMk U t) (𝟙 U) ht).op.op x) =
       DirectSum.lof (R.obj.obj U) (A.obj.obj U)
         (fun t ↦ (L.obj (elementObj A U t) : Type u)) s x := by
     have h : s = t := by simpa only [Functor.map_id_apply] using ht
@@ -146,21 +146,21 @@ private theorem rawElementDirectSumMap_comp {C : Type u} [SmallCategory C]
           (fun t ↦ (L.obj (elementObj A U t) : Type u)) s x) =
       DirectSum.lof (R.obj.obj W) (A.obj.obj W)
         (fun t ↦ (L.obj (elementObj A W t) : Type u)) t
-        (L.map (CategoryOfElements.homMk (A.obj.elementsMk U s)
-          (A.obj.elementsMk W t) (f ≫ g) ht).op.op x) := by
+        (L.map (Functor.Elements.homMk (x := A.obj.elementsMk U s)
+          (y := A.obj.elementsMk W t) (f ≫ g) ht).op.op x) := by
     cases ht
     exact rawElementDirectSumMap_lof R A L (f ≫ g) s x
   rw [aux _ (A.obj.map_comp_apply f g s), rawElementDirectSumMap_lof,
     rawElementDirectSumMap_lof]
   apply congrArg (DirectSum.lof (R.obj.obj W) (A.obj.obj W)
     (fun t ↦ (L.obj (elementObj A W t) : Type u)) (A.obj.map g (A.obj.map f s)))
-  have h : (CategoryOfElements.homMk (A.obj.elementsMk U s)
-      (A.obj.elementsMk W (A.obj.map g (A.obj.map f s))) (f ≫ g)
+  have h : (Functor.Elements.homMk (x := A.obj.elementsMk U s)
+      (y := A.obj.elementsMk W (A.obj.map g (A.obj.map f s))) (f ≫ g)
         (A.obj.map_comp_apply f g s)).op.op =
       elementObjMap A f s ≫ elementObjMap A g (A.obj.map f s) := by
     apply Quiver.Hom.unop_inj
     apply Quiver.Hom.unop_inj
-    apply Subtype.ext
+    apply Functor.Elements.hom_ext
     rfl
   rw [h]
   exact L.map_comp_apply _ _ x
@@ -191,7 +191,7 @@ private noncomputable abbrev sumToRestriction
     (DirectSum.lof (R.obj.obj e.unop.unop.1) (A.obj.obj e.unop.unop.1)
       (fun s ↦ (L.obj (elementObj A e.unop.unop.1 s) : Type u)) e.unop.unop.2))
   naturality := by
-    rintro ⟨⟨⟨U, s⟩⟩⟩ ⟨⟨⟨V, t⟩⟩⟩ ⟨g, hg⟩
+    rintro ⟨⟨@⟨U, s⟩⟩⟩ ⟨⟨@⟨V, t⟩⟩⟩ ⟨g, hg⟩
     change U ⟶ V at g
     change A.obj.map g s = t at hg
     subst t

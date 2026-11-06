@@ -267,7 +267,7 @@ lemma isUniversalSection_uliftYoneda (V : T.Etale) :
   convert (Equiv.ulift.{w}.symm.bijective : Function.Bijective (Equiv.ulift.{w}.symm :
     (W ⟶ V) → ULift (W ⟶ V))) using 1
   ext a
-  exact ULift.ext _ _ (Category.comp_id a)
+  exact congrArg ULift.up (Category.comp_id a)
 
 end Representable
 

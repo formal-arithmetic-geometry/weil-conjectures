@@ -75,7 +75,7 @@ theorem exists_isInvertible_tensorPullback_iso_of_isClosedImmersion
         apply FreeAbelianGroup.lift_ext
         intro a
         simp [FreeAbelianGroup.uniqueEquiv])
-  let eS := (presheafToSheaf (Opens.grothendieckTopology X) AddCommGrpCat).mapIso e
+  let eS := (presheafToSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).mapIso e
   let eH : Sheaf.H (Limits.kernel f) 2 ≃+ Sheaf.H' (Limits.kernel f) 2 ⊤ :=
     CategoryTheory.Abelian.Ext.precompAddEquiv eS (Limits.kernel f) 2
   let : Subsingleton (Sheaf.H (Limits.kernel f) 2) := eH.injective.subsingleton

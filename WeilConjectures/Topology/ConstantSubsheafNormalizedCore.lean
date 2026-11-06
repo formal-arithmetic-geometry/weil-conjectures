@@ -233,7 +233,7 @@ theorem constantSubsheaf_normalized_completion
     (fun k ↦ ⟨hc (q k), hq k⟩), f, hf, (fun k ↦ s (q k)), ?_,
     (fun k ↦ hvalue (q k)), ?_⟩
   · intro k
-    simpa only [f, Sigma.ι_desc] using hsection (q k)
+    simpa only [f, Sigma.ι_comp_desc] using hsection (q k)
   · intro x hx
     obtain ⟨j, hj⟩ := Opens.mem_iSup.mp hx
     obtain ⟨k, hk, hd⟩ := hretain x (Opens.mem_iSup.mpr ⟨q j, hj⟩)

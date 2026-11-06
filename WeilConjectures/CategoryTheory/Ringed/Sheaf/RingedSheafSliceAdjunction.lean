@@ -67,7 +67,7 @@ structure RingedSheafSliceAdjunctionData
   localization_modules : pullback ⊣ localization.modules
   pullback_formula :
     ∀ (M : ringedSiteModules R) (U : Cᵒᵖ) (s : A.obj.obj U),
-      ((pullback.obj M).val.obj (⟨U, s⟩) : Type u) = (M.val.obj U : Type u)
+      ((pullback.obj M).val.obj (elementObj A U s) : Type u) = (M.val.obj U : Type u)
   extensionByZero :
     ringedSiteModules (elementRing R A) ⥤ ringedSiteModules R
   /-- Extension by zero is the module sheafification of the direct-sum presheaf. -/

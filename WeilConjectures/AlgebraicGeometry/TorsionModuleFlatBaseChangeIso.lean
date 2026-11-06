@@ -89,8 +89,7 @@ private theorem killedModule_baseChange_bijective
     rw [TensorProduct.smul_tmul, Algebra.smul_def, mul_one]
     exact (sub_eq_zero.mp hz).symm
   intro z
-  induction z using TensorProduct.induction_on with
-  | zero => exact ⟨0, by simp⟩
+  induction z using TensorProduct.inductionOn with
   | tmul x s => exact hgen x s
   | add z w hz hw =>
     obtain ⟨x, rfl⟩ := hz
@@ -155,8 +154,7 @@ theorem torsionModule_flat_baseChange_bijective
     exact congrArg Subtype.val he
   refine ⟨hinj, ?_⟩
   intro z
-  induction z using TensorProduct.induction_on with
-  | zero => exact ⟨0, by simp⟩
+  induction z using TensorProduct.inductionOn with
   | tmul x s =>
     obtain ⟨N, hxN, hN⟩ := hlocal x
     obtain ⟨y, hy⟩ := hN.2 ((⟨x, hxN⟩ : N) ⊗ₜ[R] s)

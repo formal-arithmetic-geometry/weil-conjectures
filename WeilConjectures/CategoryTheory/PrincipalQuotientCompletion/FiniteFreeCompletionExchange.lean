@@ -384,16 +384,16 @@ private theorem augmentationSquare
           (D.β P).hom.app (op n) := by rw [EC.map_comp, Category.assoc]
       _ = EC.map (quotientMap R t P n) ≫ (D.β P).hom.app (op n) := by
         rw [show quotientProduct R t P ≫ Pi.π _ n = quotientMap R t P n from
-          Pi.lift_π _ n]
+          Pi.lift_comp_π _ n]
       _ = quotientMap S vS (EC.obj P) (e * (n + 1) - 1) := D.quotient_formula P n
       _ = quotientProduct S vS (EC.obj P) ≫ Pi.π
           (fun m : ℕ ↦ Y.asFunctor.obj (op m)) (e * (n + 1) - 1) :=
-        (Pi.lift_π (quotientMap S vS (EC.obj P)) (e * (n + 1) - 1)).symm
+        (Pi.lift_comp_π (quotientMap S vS (EC.obj P)) (e * (n + 1) - 1)).symm
       _ = quotientProduct S vS (EC.obj P) ≫
           (selection e Y.asFunctor ≫ Pi.π
             (fun m : ℕ ↦ Y.asFunctor.obj (op (e * (m + 1) - 1))) n) := by
         exact congrArg (quotientProduct S vS (EC.obj P) ≫ ·)
-          (Pi.lift_π (fun m : ℕ ↦ Pi.π
+          (Pi.lift_comp_π (fun m : ℕ ↦ Pi.π
             (fun i : ℕ ↦ Y.asFunctor.obj (op i)) (e * (m + 1) - 1)) n).symm
       _ = _ := (Category.assoc _ _ _).symm
   ext k : 1

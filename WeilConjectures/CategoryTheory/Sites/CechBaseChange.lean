@@ -222,8 +222,7 @@ lemma piLeft_apply_eq_rTensor_proj {κ : Type*} [Fintype κ] [DecidableEq κ] {R
     [CommRing R] {Mₖ : κ → Type*} [∀ i, AddCommGroup (Mₖ i)] [∀ i, Module R (Mₖ i)] {N : Type*}
     [AddCommGroup N] [Module R N] (t : (∀ i, Mₖ i) ⊗[R] N) (i : κ) :
     TensorProduct.piLeft R N Mₖ t i = (LinearMap.proj i).rTensor N t := by
-  induction t using TensorProduct.induction_on with
-  | zero => simp
+  induction t using TensorProduct.inductionOn with
   | tmul x n => simp
   | add x x' hx hx' => simp only [map_add, Pi.add_apply, hx, hx']
 
@@ -278,12 +277,7 @@ theorem exactAt_cechComplex_of_baseChange [Finite ι] (P : Cᵒᵖ ⥤ AddCommGr
         E k (t + t') = E k t + E k t' := funext fun y ↦ by simp [E]
     have hEd (k : ℕ) (t : ModuleCechCochain U M k ⊗[A] B a) :
         E (k + 1) ((d k).rTensor (B a) t) = bcD U a Q k (E k t) := by
-      induction t using TensorProduct.induction_on with
-      | zero =>
-        simp only [map_zero]
-        rw [show E k 0 = 0 from funext fun y ↦ by simp [E], bcD_zero]
-        funext y
-        simp [E]
+      induction t using TensorProduct.inductionOn with
       | add x x' hx hx' =>
         rw [map_add, hEadd, hx, hx', hEadd, bcD_add]
       | tmul c b =>

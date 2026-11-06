@@ -7,12 +7,14 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Limits
 
 import WeilConjectures.AlgebraicGeometry.FormalFunctionsCompleteBase
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Separation by proper infinitesimal quotient sections
 

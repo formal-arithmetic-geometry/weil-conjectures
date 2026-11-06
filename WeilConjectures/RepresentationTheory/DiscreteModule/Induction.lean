@@ -291,7 +291,7 @@ lemma surjective_coind_map (hK : IsOpen (K : Set G)) {N N' : DiscreteModule.{w} 
     let c : Quotient (QuotientGroup.rightRel K) := Quotient.mk _ g
     have hc : cosetRep K g = c.out := rfl
     obtain ⟨σ, hσ, hσu⟩ := Subgroup.mem_iInf.1 hu c
-    simp only [MulEquiv.toMonoidHom_eq_coe, MonoidHom.coe_coe, MulAut.conj_apply,
+    simp only [MulEquiv.toMonoidHom_eq_coe, MonoidHom.coe_ofClass, MulAut.conj_apply,
       Subgroup.coe_subtype] at hσu
     have h1 : cosetRep K (g * u) = cosetRep K g := by
       apply cosetRep_eq_of_mul_inv_mem

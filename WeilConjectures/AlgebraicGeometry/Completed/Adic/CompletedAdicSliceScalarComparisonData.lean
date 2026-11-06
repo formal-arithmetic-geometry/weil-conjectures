@@ -270,8 +270,7 @@ private def scalarOverPresheafIso (X : Scheme.{t}) (U : X.ProEt)
   refine PresheafOfModules.isoMk (fun V ↦ Iso.refl _) ?_
   intro V W g
   ext x
-  induction x using TensorProduct.induction_on with
-  | zero => simp
+  induction x using TensorProduct.inductionOn with
   | tmul s m =>
     change SheafOfModules.changeOfRingsMap.{t, t + 1, t + 1}
         (sliceCoefficientMap X U f) (M.over U) g (s ⊗ₜ m) =

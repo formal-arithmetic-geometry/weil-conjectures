@@ -53,7 +53,7 @@ private def orbitRetract (N : CochainComplex C ℤ) :
         change Sigma.ι _ j ≫ Sigma.desc _ ≫ N.d n m =
           Sigma.ι (IsoAlgebra.Free.obj F (N.X n)) j ≫
             Limits.Sigma.map (IsoAlgebra.Free.objMap F (N.d n m)) ≫ Sigma.desc _
-        simp only [Sigma.ι_desc_assoc, Sigma.ι_map_assoc, Sigma.ι_desc]
+        simp only [Sigma.ι_comp_desc_assoc, Sigma.ι_map_assoc, Sigma.ι_comp_desc]
         by_cases hj : j = 0
         · subst j
           simp only [Pi.single_eq_same, IsoAlgebra.Free.objMap_zero]
@@ -61,7 +61,7 @@ private def orbitRetract (N : CochainComplex C ℤ) :
         · simp [Pi.single_eq_of_ne hj] }
   retract := by
     ext n
-    exact Sigma.ι_desc _ _
+    exact Sigma.ι_comp_desc _ _
 
 private theorem isZero_of_retract {D : Type*} [Category D] [HasZeroMorphisms D]
     {Y Z : D} (r : Retract Y Z) (h : IsZero Z) : IsZero Y := by

@@ -49,21 +49,25 @@ private noncomputable def restrictedAction (M : SheafOfModules.{max u₁ v₁ u�
           (moduleLift J K F R M)) := by
   let e := moduleLiftIso J K F R M
   refine ⟨{ app := fun U ↦ ↾fun x ↦ e.inv.hom.app U
-              (x.1 • (show M.val.obj U from e.hom.hom.app U x.2))
+              ((show R.obj.obj (F.op.obj U) from x.1) •
+                (show M.val.obj U from e.hom.hom.app U x.2))
             naturality := ?_ }⟩
   intro U V f
   ext x
   symm
   change (moduleLift J K F R M).obj.map (F.op.map f)
-      (e.inv.hom.app U (x.1 • (show M.val.obj U from e.hom.hom.app U x.2))) =
+      (e.inv.hom.app U ((show R.obj.obj (F.op.obj U) from x.1) •
+        (show M.val.obj U from e.hom.hom.app U x.2))) =
     e.inv.hom.app V (R.obj.map (F.op.map f) x.1 •
       (show M.val.obj V from
       e.hom.hom.app V ((moduleLift J K F R M).obj.map (F.op.map f) x.2)))
   have hi := congrArg (fun t ↦ t
-    (x.1 • (show M.val.obj U from e.hom.hom.app U x.2))) (e.inv.hom.naturality f)
+    ((show R.obj.obj (F.op.obj U) from x.1) •
+      (show M.val.obj U from e.hom.hom.app U x.2))) (e.inv.hom.naturality f)
   have hh := congrArg (fun t ↦ t x.2) (e.hom.hom.naturality f)
   change _ = (moduleLift J K F R M).obj.map (F.op.map f)
-    (e.inv.hom.app U (x.1 • (show M.val.obj U from e.hom.hom.app U x.2))) at hi
+    (e.inv.hom.app U ((show R.obj.obj (F.op.obj U) from x.1) •
+      (show M.val.obj U from e.hom.hom.app U x.2))) at hi
   rw [← hi]
   change e.hom.hom.app V ((moduleLift J K F R M).obj.map (F.op.map f) x.2) =
     M.val.map f (e.hom.hom.app U x.2) at hh

@@ -184,8 +184,7 @@ theorem exists_stage_finite_ideal_kernel_vanishes
     (N.map g).hom (hR (j e) l g)
   have hcomp : ∀ x, δ (θ e x) = Θ x := by
     intro x
-    induction x with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | add x y hx hy => simp only [map_add, hx, hy]
     | tmul a x =>
       rw [ht, hδ, hΘ]

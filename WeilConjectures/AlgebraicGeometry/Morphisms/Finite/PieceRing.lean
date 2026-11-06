@@ -98,7 +98,7 @@ include hval in
 lemma fiberPoint_pieceIdem :
     ch.fiberPoint f hY₀ hy A' φ' hφ' t (ch.pieceIdem f hY₀ hy A' e t) = 1 := by
   change (ch.basePoint f hY₀ hy t).tensor hφ' (e (ch.basePoint f hY₀ hy t)) = 1
-  rw [hval, if_pos rfl]
+  rw [hval, ite_eq_left rfl]
 
 /-- The point of the ring of the `t`-th piece given by `(u, t)`. -/
 def piecePoint : PointsOver φ' (ch.PieceRing f hY₀ hy A' e t) :=
@@ -223,13 +223,13 @@ def refine₂ : Nbhd y :=
   have : AlgebraicGeometry.Etale (Spec.map (CommRingCat.ofHom (algebraMap A' A''))) :=
     HasRingHomProperty.Spec_iff (P := @AlgebraicGeometry.Etale).mpr
       (RingHom.etale_algebraMap.mpr inferInstance)
-  ⟨Scheme.Etale.mk (Spec.map (CommRingCat.ofHom (algebraMap A' A'')) ≫
-    (ch.refine hY₀ A' φ' hφ').1.hom), CategoryTheory.Over.homMk
+  Functor.elementsMk _ (Scheme.Etale.mk (Spec.map (CommRingCat.ofHom (algebraMap A' A'')) ≫
+    (ch.refine hY₀ A' φ' hφ').1.hom)) (CategoryTheory.Over.homMk
     (Spec.map (CommRingCat.ofHom φ'')) (by
       change Spec.map (CommRingCat.ofHom φ'') ≫ Spec.map (CommRingCat.ofHom (algebraMap A' A'')) ≫
         (ch.refine hY₀ A' φ' hφ').1.hom = y
       rw [← Category.assoc, ← Spec.map_comp, ← CommRingCat.ofHom_comp, hφ'']
-      exact CategoryTheory.Over.w (ch.refine hY₀ A' φ' hφ').2)⟩
+      exact CategoryTheory.Over.w (ch.refine hY₀ A' φ' hφ').2))
 
 @[simp]
 lemma refine₂_fst_hom : (ch.refine₂ hY₀ A' φ' hφ' A'' φ'' hφ'').1.hom =
@@ -241,7 +241,7 @@ lemma refine₂_snd_left :
 
 /-- The refinement `Spec A'' ⟶ Spec A'` of pointed étale neighbourhoods. -/
 def refine₂Map : ch.refine₂ hY₀ A' φ' hφ' A'' φ'' hφ'' ⟶ ch.refine hY₀ A' φ' hφ' :=
-  CategoryOfElements.homMk _ _
+  Functor.Elements.homMk
     (MorphismProperty.Over.homMk (Spec.map (CommRingCat.ofHom (algebraMap A' A''))) rfl)
     (CategoryTheory.Over.OverMorphism.ext (by
       change Spec.map (CommRingCat.ofHom φ'') ≫ Spec.map (CommRingCat.ofHom (algebraMap A' A'')) =

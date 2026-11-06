@@ -225,7 +225,7 @@ private lemma matrixHom_block :
       simp [sumComplEquiv]
     rw [this, blockMap]
     simp only [Category.assoc]
-    erw [biproduct.ι_toSubtype_assoc, dif_neg hj]
+    erw [biproduct.ι_toSubtype_assoc, dite_eq_right hj]
     simp only [Limits.zero_comp]
     rcases x with a | ⟨i, hi⟩ <;> exact map_zero φ
 

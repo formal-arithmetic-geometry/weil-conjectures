@@ -48,7 +48,7 @@ noncomputable def rightDerivedFunctorObjQIsoOfRightAcyclic (K : CochainComplex C
   have := F.isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic L hK
   F.rightDerivedFunctor.mapIso ((DerivedCategory.quotientCompQhIso C).symm.app K) ≪≫
     (F.rightDerivedFunctorPlusCompatibility.app (DerivedCategory.Plus.Qh.obj H)).symm ≪≫
-    (DerivedCategory.Plus.ι (C := D)).mapIso (asIso (F.rightDerivedFunctorPlusUnit.app H)).symm ≪≫
+    (DerivedCategory.Plus.ι (C := D)).mapIso (asIso (F.rightDerivedFunctorPlusUnith.app H)).symm ≪≫
     (DerivedCategory.quotientCompQhIso D).app _
 
 /-- **An acyclic resolution computes the right derived functor.** For a resolution

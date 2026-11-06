@@ -10,6 +10,7 @@ public import Mathlib.CategoryTheory.Sites.Whiskering
 import WeilConjectures.CategoryTheory.Adjunction.FiniteProductRingFunctor
 import WeilConjectures.CategoryTheory.SheafRingObjectReconstruction
 import WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresRingCore
+public import Mathlib.CategoryTheory.Limits.Shapes.BinaryProducts.ProdComparison
 
 /-!
 # Transporting a sheaf of rings through a geometric inverse image

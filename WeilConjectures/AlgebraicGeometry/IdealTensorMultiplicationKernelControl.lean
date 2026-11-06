@@ -81,8 +81,7 @@ private theorem kernel_control_multiplication_range {X : Scheme.{u}} {K : X.Modu
     apply le_antisymm
     · rintro _ ⟨z, rfl⟩
       obtain ⟨w, rfl⟩ := ht.2 z
-      induction w using TensorProduct.induction_on with
-      | zero => simp only [map_zero]; exact Submodule.zero_mem _
+      induction w using TensorProduct.inductionOn with
       | tmul s t =>
         change a.app U.1 (tensorSectionsMap K M U.1 (s ⊗ₜ t)) ∈ I • ⊤
         rw [hp]
@@ -270,8 +269,7 @@ theorem ideal_tensor_multiplication_kernel_control
     have hb (z : Γ(T, U.1)) : r • z = L (μ.app U.1 z) := by
       obtain ⟨w, rfl⟩ :=
         ((quasiCoherent_tensor_product_affine_sections J.toModules H).2 U.1 U.2).2 z
-      induction w using TensorProduct.induction_on with
-      | zero => simp
+      induction w using TensorProduct.inductionOn with
       | tmul b h =>
         simp only [tensorSectionsMap_tmul, hμ]
         change r • tmulSection b h = tmulSection a _
@@ -293,8 +291,7 @@ theorem ideal_tensor_multiplication_kernel_control
   have hzero (U : X.affineOpens) (z : Γ(P ⊗ kernel μ, U.1)) : ν.app U.1 z = 0 := by
     obtain ⟨w, rfl⟩ :=
       ((quasiCoherent_tensor_product_affine_sections P (kernel μ)).2 U.1 U.2).2 z
-    induction w using TensorProduct.induction_on with
-    | zero => simp
+    induction w using TensorProduct.inductionOn with
     | tmul a k =>
       rw [tensorSectionsMap_tmul]
       change (λ_ (kernel μ)).hom.app U.1 ((ι ▷ kernel μ).app U.1

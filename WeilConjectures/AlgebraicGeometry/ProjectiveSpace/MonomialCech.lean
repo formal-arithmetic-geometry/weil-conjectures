@@ -252,13 +252,13 @@ lemma monomialCechHomotopy_coeff {p : ℕ} (c : MonomialCechCochain n A m (p + 1
 lemma monomialCechHomotopy_coeff_of_exists {p : ℕ} (c : MonomialCechCochain n A m (p + 1))
     (σ : Fin (p + 1) → n) {e : n → ℤ} (he : ∃ i, 0 ≤ e i) :
     (monomialCechHomotopy p c).coeff σ e = c.coeff (Fin.cons he.choose σ) e := by
-  rw [monomialCechHomotopy_coeff, monomialCechHomotopyCoeff, dif_pos he]
+  rw [monomialCechHomotopy_coeff, monomialCechHomotopyCoeff, dite_eq_left he]
 
 lemma monomialCechHomotopy_coeff_of_forall {p : ℕ} (c : MonomialCechCochain n A m (p + 1))
     (σ : Fin (p + 1) → n) {e : n → ℤ} (he : ∀ i, e i < 0) :
     (monomialCechHomotopy p c).coeff σ e = 0 := by
   rw [monomialCechHomotopy_coeff, monomialCechHomotopyCoeff,
-    dif_neg fun ⟨i, hi⟩ ↦ (he i).not_ge hi]
+    dite_eq_right fun ⟨i, hi⟩ ↦ (he i).not_ge hi]
 
 /-- **The homotopy identity** `d h + h d = 1` in positive degrees, on the summand of an exponent
 vector with a nonnegative coordinate. -/
@@ -485,9 +485,9 @@ def monomialCechComplexHomologyZeroLinearEquiv [Nonempty n] (D : ℕ) :
 private lemma val_succAbove_eq_ite {k : ℕ} (p : Fin (k + 1)) (i : Fin k) :
     (p.succAbove i : ℕ) = if (i : ℕ) < p then (i : ℕ) else (i : ℕ) + 1 := by
   rcases lt_or_ge (i : ℕ) p with h | h
-  · rw [Fin.succAbove_of_castSucc_lt _ _ (by simpa [Fin.lt_def] using h), if_pos h]
+  · rw [Fin.succAbove_of_castSucc_lt _ _ (by simpa [Fin.lt_def] using h), ite_eq_left h]
     rfl
-  · rw [Fin.succAbove_of_le_castSucc _ _ (by simpa [Fin.le_def] using h), if_neg h.not_gt]
+  · rw [Fin.succAbove_of_le_castSucc _ _ (by simpa [Fin.le_def] using h), ite_eq_right h.not_gt]
     rfl
 
 open scoped Classical in
@@ -705,7 +705,7 @@ lemma monomialCechTopCoeff_monomialCechTopCocycle {d : ℕ} (hn : Fintype.card n
     monomialCechTopCoeff n A m E (monomialCechTopCocycle n A m hn E a) = a := by
   ext e
   rw [monomialCechTopCoeff_apply, monomialCechTopCocycle_coeff, tupleSign_self, one_mul,
-    Finsupp.mapDomain_apply Subtype.val_injective]
+    Finsupp.mapDomain_apply_of_injective Subtype.val_injective]
 
 variable (n A m) in
 /-- The coefficients of the top-degree cocycles on the bijective tuple `E`. -/

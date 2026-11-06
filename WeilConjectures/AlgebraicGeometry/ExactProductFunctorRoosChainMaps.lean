@@ -163,7 +163,7 @@ private theorem cofiber_snd {T : CochainComplex A ℤ} (a : T ⟶ T)
     (homotopyCofiber.XIsoBiprod a p j hpj).hom ≫ biprod.snd =
       homotopyCofiber.sndX a p := by
   obtain rfl := (ComplexShape.up ℤ).next_eq' hpj
-  simp only [homotopyCofiber.sndX, dif_pos hpj]
+  simp only [homotopyCofiber.sndX, dite_eq_left hpj]
 
 private theorem signed_snd (p : ℤ) :
     (cs F φ ψ e h).hom.f (p + 1) ≫ (signedCoords Q ψ p).hom ≫ biprod.snd =
@@ -230,7 +230,7 @@ private theorem productComparison_transition {A B : Type*} [Category* A] [Catego
   apply Pi.hom_ext
   intro n
   simp only [Category.assoc, towerTransitionEndomorphism, towerProductShift,
-    Preadditive.sub_comp, Pi.lift_π, Preadditive.comp_sub, Category.comp_id]
+    Preadditive.sub_comp, Pi.lift_comp_π, Preadditive.comp_sub, Category.comp_id]
   simp only [Preadditive.sub_comp, Functor.map_sub]
   simp [← Functor.map_comp]
 

@@ -6,6 +6,8 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.RawRestrictedCohomologyComparisonMap
 import WeilConjectures.AlgebraicGeometry.RawRestrictedResolutionEvaluation
 import WeilConjectures.AlgebraicGeometry.Sites.TorsionAcyclic

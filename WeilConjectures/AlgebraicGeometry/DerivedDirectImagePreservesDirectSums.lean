@@ -100,7 +100,7 @@ theorem derivedDirectImagePreservesDirectSums {X Y : Scheme.{u₁}} (f : X ⟶ Y
         Sigma.desc (fun i ↦ H.map (F.map (c.ι.app ⟨i⟩))) := by
       apply Sigma.hom_ext
       intro i
-      simp only [Sigma.ι_desc, Sigma.ι_desc_assoc]
+      simp only [Sigma.ι_comp_desc, Sigma.ι_comp_desc_assoc]
       rw [← H.map_comp]
       congr 1
       exact hs.fac c' ⟨i⟩

@@ -112,7 +112,8 @@ private lemma stepProjection_naturality {C : Type u} [Category.{v} C] [Abelian C
     {K L : CochainComplex C ℤ} (f : K ⟶ L) (q : ℤ) :
     truncLEMap f q ≫ stepProjection L q =
       stepProjection K q ≫ (singleFunctor C q).map (HomologicalComplex.homologyMap f q) := by
-  ext r
+  apply HomologicalComplex.hom_ext
+  intro r
   by_cases hr : r = q
   · subst r
     rw [← cancel_mono
@@ -131,7 +132,8 @@ private lemma stepProjection_naturality {C : Type u} [Category.{v} C] [Abelian C
 private lemma stepInclusion_projection {C : Type u} [Category.{v} C] [Abelian C]
     (K : CochainComplex C ℤ) (q : ℤ) :
     stepInclusion K q ≫ stepProjection K q = 0 := by
-  ext r
+  apply HomologicalComplex.hom_ext
+  intro r
   by_cases hr : r = q
   · subst r
     exact ((K.truncLE (q - 1)).isZero_of_isStrictlyLE (q - 1) q (by omega)).eq_of_src _ _

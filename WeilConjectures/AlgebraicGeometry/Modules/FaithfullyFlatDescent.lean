@@ -99,8 +99,7 @@ lemma pullback_hom_ext_Spec {M : (Spec (.of A)).Modules} [M.IsQuasicoherent]
   intro y
   obtain ⟨e, he⟩ := exists_linearEquiv_pullback_Spec (B := B) M
   obtain ⟨t, rfl⟩ := e.surjective y
-  induction t using TensorProduct.induction_on with
-  | zero => rw [map_zero, map_zero, map_zero]
+  induction t using TensorProduct.inductionOn with
   | tmul b m =>
     have : e (b ⊗ₜ m) = b • e (1 ⊗ₜ m) := by
       rw [← LinearEquiv.map_smul, smul_tmul', smul_eq_mul, mul_one]
@@ -155,8 +154,7 @@ lemma pullbackCompOfEq_hom_app_top_linearEquiv {C : Type u} [CommRing C] [Algebr
     (heC : ∀ n, eC (1 ⊗ₜ n) = pullbackΓ fC N n) (t : B ⊗[A] Γ(N, ⊤)) :
     ((pullbackCompOfEq p fB fC h N).hom).app ⊤ (pullbackΓ p _ (eB t)) =
       eC (ι.toLinearMap.rTensor _ t) := by
-  induction t using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction t using TensorProduct.inductionOn with
   | tmul b n =>
     have hb : eB (b ⊗ₜ n) = b • eB (1 ⊗ₜ n) := by
       rw [← LinearEquiv.map_smul, smul_tmul', smul_eq_mul, mul_one]
@@ -177,8 +175,7 @@ lemma pullback_hom_ext_of {f : Spec (.of B) ⟶ Spec (.of A)} {M : (Spec (.of A)
   apply hom_ext_of_isQuasicoherent_Spec (R := .of B)
   intro y
   obtain ⟨t, rfl⟩ := e.surjective y
-  induction t using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction t using TensorProduct.inductionOn with
   | tmul b m =>
     have : e (b ⊗ₜ m) = b • e (1 ⊗ₜ m) := by
       rw [← LinearEquiv.map_smul, smul_tmul', smul_eq_mul, mul_one]

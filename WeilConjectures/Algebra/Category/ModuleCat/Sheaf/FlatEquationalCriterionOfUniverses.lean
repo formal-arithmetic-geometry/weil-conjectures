@@ -258,8 +258,8 @@ private theorem matrixSieve_mem (hM : RowCriterion M) {q : ℕ} (U : C) (n : ℕ
         _ = ∑ i, R.obj.map f.op (a k.succ i) • ∑ j, b i j • t j := by
           simp only [a', Finset.sum_smul, mul_smul, Finset.smul_sum]
           exact Finset.sum_comm
-        _ = ∑ i, R.obj.map f.op (a k.succ i) • M.val.map f.op (s i) := by
-          simp only [hs]
+        _ = ∑ i, R.obj.map f.op (a k.succ i) • M.val.restrictₛₗ f.op (s i) := by
+          simp only [PresheafOfModules.restrictₛₗ_apply, hs]
         _ = 0 := by
           have h := congrArg (fun z : M.val.obj (op U) ↦ M.val.map f.op z) (heq k.succ)
           simp only [map_sum, M.val.map_smul, map_zero] at h
@@ -316,24 +316,26 @@ private theorem tensor_equalizerSieve_mem (hM : RowCriterion M)
     exact Finset.sum_comm
   have hkill (V : C) (f : V ⟶ U) (c : Fin s → R.obj.obj (op V))
       (hc : ∀ l, ∑ j, R.obj.map f.op (e l j) * c j = 0) :
-      ∑ j, c j • P.map f.op (p' j) = 0 := by
+      ∑ j, c j • P.restrictₛₗ f.op (p' j) = 0 := by
+    simp only [PresheafOfModules.restrictₛₗ_apply]
     apply hg (op V)
     rw [map_sum, map_zero]
     have hcomponent (j : Fin s) :
         g.app (op V) (P.map f.op (p' j)) =
-          -∑ l, R.obj.map f.op (e l j) • N.map f.op (z l) := by
+          -∑ l, R.obj.map f.op (e l j) • N.restrictₛₗ f.op (z l) := by
+      simp only [PresheafOfModules.restrictₛₗ_apply]
       have h := congrArg (fun x : N.obj (op U) ↦ N.map f.op x) (hcoeff j)
       simp only [map_add, map_sum, N.map_smul, map_zero] at h
       apply eq_neg_of_add_eq_zero_left
-      change (∑ k, R.obj.map f.op (a k j) • N.map f.op (g.app (op U) (p k))) +
-        (∑ l, R.obj.map f.op (e l j) • N.map f.op (z l)) = 0 at h
+      change (∑ k, R.obj.map f.op (a k j) • N.restrictₛₗ f.op (g.app (op U) (p k))) +
+        (∑ l, R.obj.map f.op (e l j) • N.restrictₛₗ f.op (z l)) = 0 at h
       rw [PresheafOfModules.naturality_apply]
       dsimp only [p']
       rw [map_sum, map_sum]
       simp only [map_smul]
       exact h
-    simp only [map_smul, hcomponent, smul_neg, Finset.sum_neg_distrib,
-      Finset.smul_sum, smul_smul]
+    simp only [map_smul, hcomponent, PresheafOfModules.restrictₛₗ_apply, smul_neg,
+      Finset.sum_neg_distrib, Finset.smul_sum, smul_smul]
     rw [Finset.sum_comm]
     simp_rw [← Finset.sum_smul]
     have hc' (l : Fin q) : ∑ j, c j * R.obj.map f.op (e l j) = 0 := by
@@ -350,8 +352,10 @@ private theorem tensor_equalizerSieve_mem (hM : RowCriterion M)
   change TensorProduct.map ρP ρM t = 0
   rw [ht']
   simp only [map_sum, TensorProduct.map_tmul]
-  change (∑ j, P.map f.op (p' j) ⊗ₜ[R.obj.obj (op V)] M.val.map f.op (y j)) = 0
-  simp_rw [hfac, TensorProduct.tmul_sum, TensorProduct.tmul_smul]
+  change (∑ j, P.restrictₛₗ f.op (p' j) ⊗ₜ[R.obj.obj (op V)]
+    M.val.restrictₛₗ f.op (y j)) = 0
+  simp_rw [PresheafOfModules.restrictₛₗ_apply, hfac, TensorProduct.tmul_sum,
+    TensorProduct.tmul_smul]
   rw [Finset.sum_comm]
   change (∑ k, ∑ j, (b j k • (@id (P.obj (op V)) (P.map f.op (p' j))))
     ⊗ₜ[R.obj.obj (op V)] v k) = 0

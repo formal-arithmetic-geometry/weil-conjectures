@@ -45,8 +45,7 @@ private theorem tensorQuotientBijective
     intro a ha
     apply Module.mem_annihilator.mpr
     intro t
-    induction t using TensorProduct.induction_on with
-    | zero => simp
+    induction t using TensorProduct.inductionOn with
     | tmul b m =>
       rw [TensorProduct.smul_tmul', smul_eq_mul, ← Algebra.smul_def,
         TensorProduct.smul_tmul (R := A) a b m,

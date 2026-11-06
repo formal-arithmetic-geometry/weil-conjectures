@@ -572,8 +572,7 @@ private noncomputable def pointTensorSquareIso
       map_add' := fun x y ↦ et.map_add x y
       map_smul' := ?_ }
   intro b x
-  induction x using TensorProduct.induction_on with
-  | zero => simp only [smul_zero, map_zero]
+  induction x using TensorProduct.inductionOn with
   | tmul c m =>
     change ej (b * (show B from c)) ⊗ₜ[R, g] m =
       ej b • (ej (show B from c) ⊗ₜ[R, g] m)

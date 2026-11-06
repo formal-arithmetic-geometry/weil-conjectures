@@ -233,14 +233,14 @@ lemma comp_torsorIdempotent_hom (χ : AddChar G (PadicAlgCl l))
     rw [Mod.comp_hom', AdicSheaf.smul_hom, Linear.smul_comp,
       Category.id_comp, Linear.comp_smul, hq, smul_smul]
     congr 1
-    refine ULift.ext _ _ ?_
+    refine ULift.ext ?_
     change (Nat.card G : PadicAlgCl l)⁻¹ * χ (-g) * χ g = _
     rw [mul_assoc, ← AddChar.map_add_eq_mul, neg_add_cancel, AddChar.map_zero_eq_one, mul_one]
   simp_rw [this]
   rw [Finset.sum_const, Finset.card_univ, ← Nat.card_eq_fintype_card, ← Nat.cast_smul_eq_nsmul
     (ULift (PadicAlgCl l)), smul_smul]
   convert one_smul (ULift (PadicAlgCl l)) q
-  refine ULift.ext _ _ ?_
+  refine ULift.ext ?_
   change (Nat.card G : PadicAlgCl l) * (Nat.card G : PadicAlgCl l)⁻¹ = 1
   exact mul_inv_cancel₀ hG
 
@@ -289,7 +289,7 @@ theorem exists_retraction_of_isotypic [WeaklyEtale π] [QuasiCompact π] [Surjec
     have hχ : χ h * χ (-h) = 1 := by
       rw [← AddChar.map_add_eq_mul, add_neg_cancel, AddChar.map_zero_eq_one]
     refine congrArg (fun x : ULift.{u + 1} (PadicAlgCl l) ↦ AdicSheaf.smul x _ ≫ _)
-      (ULift.ext _ _ ?_)
+      (ULift.ext ?_)
     change c g = χ h * c (g + h)
     simp only [c, neg_add, AddChar.map_add_eq_mul]
     linear_combination (-((Nat.card G : PadicAlgCl l)⁻¹ * χ (-g))) * hχ

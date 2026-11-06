@@ -179,8 +179,6 @@ private noncomputable def isTerminalCostructuredArrow (h : P f) [Mono f]
           exact Category.id_comp _))
     (fun s m => by
       ext
-      apply Quiver.Hom.unop_inj
-      apply MorphismProperty.Over.Hom.ext
       have hw := m.w
       apply_fun (fun z => z.unop.left) at hw
       exact (Category.id_comp _).symm.trans hw)
@@ -224,8 +222,6 @@ private lemma subsingleton_hom_costructuredArrow (h : P f) (α : LiftIndex f W)
     Subsingleton (s ⟶ α.costructuredArrow h) := by
   refine ⟨fun m m' ↦ ?_⟩
   ext
-  apply Quiver.Hom.unop_inj
-  apply MorphismProperty.Over.Hom.ext
   have hw := congrArg (fun z ↦ z.unop.left) m.w
   have hw' := congrArg (fun z ↦ z.unop.left) m'.w
   exact ((Category.id_comp _).symm.trans hw).trans

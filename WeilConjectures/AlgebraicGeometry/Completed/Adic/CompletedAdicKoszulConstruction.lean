@@ -610,7 +610,7 @@ private theorem adicKoszulProductUnit_oneSubShift (T : Scheme.{t})
   rw [Preadditive.comp_sub, Category.comp_id, sub_eq_zero]
   apply Pi.hom_ext
   intro n
-  simp only [Category.assoc, Pi.lift_π, Pi.lift_π_assoc, adicKoszulTensorUnit_transition]
+  simp only [Category.assoc, Pi.lift_comp_π, Pi.lift_comp_π_assoc, adicKoszulTensorUnit_transition]
 
 private theorem adicShiftedConeUnit_comm {A : Type*} [Category* A] [Preadditive A]
     (C P : CochainComplex A ℤ) (a : C ⟶ P) (φ : P ⟶ P)

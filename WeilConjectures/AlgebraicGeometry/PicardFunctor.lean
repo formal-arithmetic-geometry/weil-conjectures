@@ -228,7 +228,7 @@ theorem small (Y : Scheme.{u}) : Small.{u} Y.Pic := by
       exact ⟨⟨V, ⟨(Modules.restrictFunctorIsoPullback V.ι).app M ≪≫
         Modules.pullbackIotaUnitIsoOfOverIso e⟩⟩, hx⟩
     · have h := hg =≫ Pi.π _ U.1
-      simp only [Category.assoc, Pi.lift_π, φ, dif_pos U.2] at h
+      simp only [Category.assoc, Pi.lift_comp_π, φ, dite_eq_left U.2] at h
       rw [← Category.assoc, ← Category.assoc] at h
       exact (cancel_mono _).mp h
   let f (L : Y.Pic) : Subobject P :=

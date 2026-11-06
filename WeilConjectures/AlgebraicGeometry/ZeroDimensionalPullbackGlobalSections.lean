@@ -108,9 +108,9 @@ theorem bijective_globalSectionsUpperStarMap_of_dim_zero {k k' : Type u}
     simp only [q, q', r, e, Category.assoc]
     rw [Limits.Pi.mapIso_hom_π (g := (fun c : C ↦
       (Scheme.pointSmallEtale (s c)).sheafFiber.obj F) ∘ b) d c']
-    simp only [Limits.Pi.lift_π_assoc]
+    simp only [Limits.Pi.lift_comp_π_assoc]
     rw [Limits.Pi.reindex_inv_π b (fun c : C ↦ (Scheme.pointSmallEtale (s c)).sheafFiber.obj F) c']
-    simp only [Limits.Pi.lift_π]
+    simp only [Limits.Pi.lift_comp_π]
     exact Classical.choose_spec (hd c')
   have ha : IsIso a := by dsimp [a]; infer_instance
   have ha' : IsIso a' := by dsimp [a']; infer_instance

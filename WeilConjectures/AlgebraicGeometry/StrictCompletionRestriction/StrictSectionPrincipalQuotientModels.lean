@@ -306,7 +306,7 @@ theorem strictSectionPrincipalQuotientModels (X : Scheme.{u})
       apply Pi.hom_ext
       intro n
       simp only [SheafOfModules.KFlatRoos.oneSubShift, towerTransitionEndomorphism,
-        towerProductShift, Preadditive.sub_comp, Pi.lift_π]
+        towerProductShift, Preadditive.sub_comp, Pi.lift_comp_π]
       erw [Category.id_comp]
     rw [ht]
     exact (towerTransitionEndomorphism_natural_backward _ _ c
@@ -342,7 +342,7 @@ theorem strictSectionPrincipalQuotientModels (X : Scheme.{u})
       apply Pi.hom_ext
       intro n
       simp only [p, SheafOfModules.KFlatRoos.unitProduct, Category.assoc,
-        Pi.map_π, Pi.lift_π]
+        Pi.map_π, Pi.lift_comp_π]
       ext i : 1
       have hn := congrArg (fun f ↦ f.f i) (hunitc n)
       simpa only [HomologicalComplex.comp_f, roosEval, Category.assoc] using hn

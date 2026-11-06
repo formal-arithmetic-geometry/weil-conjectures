@@ -46,9 +46,9 @@ lemma ιFree_freeHomOfSections (M : Y.Modules) {I : Type u} [Fintype I] [Decidab
     (c : I → Γ(M, ⊤)) (i : I) :
     ιFree i ≫ freeHomOfSections M c = homOfGlobalSection M (c i) := by
   rw [freeHomOfSections, Preadditive.comp_sum, Finset.sum_eq_single i]
-  · rw [ιFree_freeπ_assoc, if_pos rfl, Category.id_comp]
+  · rw [ιFree_freeπ_assoc, ite_eq_left rfl, Category.id_comp]
   · intro j _ hj
-    rw [ιFree_freeπ_assoc, if_neg (Ne.symm hj), zero_comp]
+    rw [ιFree_freeπ_assoc, ite_eq_right (Ne.symm hj), zero_comp]
   · simp
 
 /-- The sections over `W` of `freeHomOfSections M c`: `x ↦ ∑ᵢ xᵢ • (c i)|_W`. -/
@@ -69,11 +69,11 @@ lemma ιFree_freeHomOfMatrix {I J : Type u} [Fintype I] [DecidableEq I] [Fintype
   rw [freeHomOfMatrix, Preadditive.comp_sum, Finset.sum_eq_single i]
   · rw [Preadditive.comp_sum]
     refine Finset.sum_congr rfl fun j _ ↦ ?_
-    rw [ιFree_freeπ_assoc, if_pos rfl, Category.id_comp]
+    rw [ιFree_freeπ_assoc, ite_eq_left rfl, Category.id_comp]
   · intro i' _ hi
     rw [Preadditive.comp_sum]
     refine Finset.sum_eq_zero fun j _ ↦ ?_
-    rw [ιFree_freeπ_assoc, if_neg (Ne.symm hi), zero_comp]
+    rw [ιFree_freeπ_assoc, ite_eq_right (Ne.symm hi), zero_comp]
   · simp
 
 lemma homOfGlobalSection_app_top_one (M : Y.Modules) (u : Γ(M, ⊤)) :

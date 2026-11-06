@@ -159,7 +159,7 @@ theorem constantSubsheaf_quotient_gluing
     by_cases hi : c i = b + 1
     · by_cases hj : c j = b + 1
       · dsimp [sf]
-        rw [if_pos hi, if_pos hj]
+        rw [ite_eq_left hi, ite_eq_left hj]
         have hn (l : Fin n) (W : Opens X) (hW : W ≤ A l) :
             (ι ≫ isoC.hom).hom.app (op W) (K.obj.map (homOfLE hW).op (s l)) =
               (toSheafify (Opens.grothendieckTopology X)
@@ -201,6 +201,6 @@ theorem constantSubsheaf_quotient_gluing
   refine ⟨q, ?_⟩
   intro i hi
   rw [hq (A i) (le_iSup A i)]
-  exact (ht i).trans (if_pos hi)
+  exact (ht i).trans (ite_eq_left hi)
 
 end TopCat.Sheaf

@@ -135,7 +135,7 @@ private theorem roos_cone_d
             biprod.snd := by
       obtain rfl := (ComplexShape.up ℤ).next_eq' h
       dsimp only [HomologicalComplex.homotopyCofiber.sndX]
-      rw [dif_pos h]
+      rw [dite_eq_left h]
     simp only [hp p (p + 1) rfl, hp (p + 1) (p + 1 + 1) rfl,
       HomologicalComplex.homotopyCofiber.fstX, Category.assoc] at hd_snd
     change -(eS p).hom ≫ HomologicalComplex.homotopyCofiber.d t p (p + 1) ≫ _ = _
@@ -196,7 +196,7 @@ private theorem roos_inclusion_quasiIso
     intro n
     simp only [Category.assoc, heP]
     simp only [towerTransitionEndomorphism, towerProductShift, Preadditive.comp_sub,
-      Preadditive.sub_comp, Category.id_comp, Pi.lift_π, heP,
+      Preadditive.sub_comp, Category.id_comp, Pi.lift_comp_π, heP,
       reassoc_of% heP]
     exact congrArg (fun f ↦ f.f p) (ht n)
   have hKernel (p : ℤ) : iota.f p ≫ t.f p = 0 :=

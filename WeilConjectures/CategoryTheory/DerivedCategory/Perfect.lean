@@ -169,8 +169,7 @@ theorem IsPerfect.tensor_homology [IsNoetherianRing R] (E : Type*) [Field E] [Al
     · exact C.isZero_of_isLE b i hi
   have := (ModuleCat.isZero_iff_subsingleton).1 hz
   refine subsingleton_of_forall_eq 0 fun x ↦ ?_
-  induction x using TensorProduct.induction_on with
-  | zero => rfl
+  induction x using TensorProduct.inductionOn with
   | tmul e m => rw [Subsingleton.elim m 0, TensorProduct.tmul_zero]
   | add x y hx hy => rw [hx, hy, add_zero]
 

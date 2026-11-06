@@ -222,7 +222,7 @@ private lemma integralPrincipalQuotientFunctionsSurjective (ℓ : ℕ) [Fact ℓ
     (a : continuousIntegers ℓ E) (ha : a ≠ 0)
     (S : Type u) [TopologicalSpace S] :
     Function.Surjective ((Ideal.Quotient.mk (Ideal.span {a})).compLeftContinuous S
-      continuous_quot_mk) := by
+      continuous_quotient_mk') := by
   classical
   let : DiscreteTopology ((continuousIntegers ℓ E) ⧸ Ideal.span {a}) :=
     integralPrincipalQuotientDiscrete ℓ E a ha
@@ -238,7 +238,7 @@ private lemma integralPrincipalQuotientFunctionsKernel (ℓ : ℕ) [Fact ℓ.Pri
     (a : continuousIntegers ℓ E) (ha : a ≠ 0)
     (S : Type u) [TopologicalSpace S] (f : C(S, continuousIntegers ℓ E))
     (hf : ((Ideal.Quotient.mk (Ideal.span {a})).compLeftContinuous S
-      continuous_quot_mk) f = 0) :
+      continuous_quotient_mk') f = 0) :
     ∃ g : C(S, continuousIntegers ℓ E), ContinuousMap.const S a * g = f := by
   have ha' : (a : E) ≠ 0 := fun h ↦ ha (Subtype.ext h)
   have hdiv (x : S) : (f x : E) / a ∈ continuousIntegers ℓ E := by
@@ -306,7 +306,7 @@ private lemma integralPrincipalCokernelIso (ℓ : ℕ) [Fact ℓ.Prime]
   let q : R ⟶ continuousAbRing X ((continuousIntegers ℓ E) ⧸ Ideal.span {a}) :=
     (sheafCompose J (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
       (continuousMapRingSheafMap X (Ideal.Quotient.mk (Ideal.span {a}))
-        continuous_quot_mk)
+        continuous_quotient_mk')
   have hqa : Ideal.Quotient.mk (Ideal.span {a}) a = 0 :=
     Ideal.Quotient.eq_zero_iff_mem.mpr (Ideal.subset_span (Set.mem_singleton a))
   have hw : p.hom ≫ q = 0 := by
@@ -338,12 +338,12 @@ private lemma integralPrincipalCokernelIso (ℓ : ℕ) [Fact ℓ.Prime]
       intro y
       obtain ⟨x, hx⟩ := integralPrincipalQuotientFunctionsSurjective ℓ E a ha
         U.unop.left y.down
-      exact ⟨ULift.up x, ULift.ext _ _ hx⟩
+      exact ⟨ULift.up x, ULift.ext hx⟩
     have hex : T.Exact := by
       rw [ShortComplex.ab_exact_iff]
       intro x hx
       have hx' : ((Ideal.Quotient.mk (Ideal.span {a})).compLeftContinuous
-          U.unop.left continuous_quot_mk) x.down = 0 := congrArg ULift.down hx
+          U.unop.left continuous_quotient_mk') x.down = 0 := congrArg ULift.down hx
       obtain ⟨g, hg⟩ := integralPrincipalQuotientFunctionsKernel ℓ E a ha U.unop.left
         x.down hx'
       refine ⟨ULift.up g, ?_⟩

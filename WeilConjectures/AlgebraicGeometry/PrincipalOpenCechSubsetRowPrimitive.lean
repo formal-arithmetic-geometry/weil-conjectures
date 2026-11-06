@@ -158,7 +158,7 @@ theorem principalOpenCech_subset_row_primitive
       omega
     split_ifs with h
     · dsimp only [c']
-      rw [dif_pos hj, map_smul]
+      rw [dite_eq_left hj, map_smul]
       exact congrArg (fun z ↦ (-1 : A) ^
         ((S.val.filter (fun i ↦ i < j.val)).card) • z)
         (rowCast_comp A J hq (he S.val j.val j.property (n + 1))
@@ -175,14 +175,14 @@ theorem principalOpenCech_subset_row_primitive
       else 0
   refine ⟨b, ?_, ?_⟩
   · intro S hS
-    exact dif_neg hS
+    exact dite_eq_right hS
   · intro S hS
     have hq : n + 1 + 1 - (S.val.card : ℤ) = q := cq S hS
     apply rowCast_injective A J hq (D S.val)
     rw [map_sum]
     have hh := hb' S hS
     change _ = c' S at hh
-    rw [show c' S = rowCast A J hq (D S.val) (c S) from dif_pos hS] at hh
+    rw [show c' S = rowCast A J hq (D S.val) (c S) from dite_eq_left hS] at hh
     rw [← hh]
     apply Finset.sum_congr rfl
     intro j _
@@ -191,7 +191,7 @@ theorem principalOpenCech_subset_row_primitive
       omega
     split_ifs with h
     · dsimp only [b]
-      rw [dif_pos hj, map_smul]
+      rw [dite_eq_left hj, map_smul]
       have hbq : n + 1 - ((S.val.erase j.val).card : ℤ) = q :=
         (bq ⟨S.val.erase j.val, h⟩ hj).symm
       have hcast : rowCast A J hbq (D (S.val.erase j.val))

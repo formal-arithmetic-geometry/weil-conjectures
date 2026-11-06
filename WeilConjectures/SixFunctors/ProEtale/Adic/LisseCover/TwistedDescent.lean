@@ -84,13 +84,13 @@ noncomputable def finInv {N : ℕ} (g : Fin N → Fin N) (a : Fin N) : Fin N :=
 lemma finInv_apply {N : ℕ} {g : Fin N → Fin N} (hg : Function.Injective g) (b : Fin N) :
     finInv g (g b) = b := by
   have h : ∃ b', g b' = g b := ⟨b, rfl⟩
-  simp only [finInv, dif_pos h]
+  simp only [finInv, dite_eq_left h]
   exact hg h.choose_spec
 
 lemma apply_finInv {N : ℕ} {g : Fin N → Fin N} (hg : Function.Surjective g) (a : Fin N) :
     g (finInv g a) = a := by
   have h : ∃ b, g b = a := hg a
-  simp only [finInv, dif_pos h]
+  simp only [finInv, dite_eq_left h]
   exact h.choose_spec
 
 lemma finInv_id {N : ℕ} (a : Fin N) : finInv id a = a :=
@@ -163,7 +163,7 @@ lemma coact_counit : coactionUnit p (trivπ N W) ≫ coact hc hjp = 𝟙 (triv N
   · have hk : coactionUnit p (trivπ N W) ≫ kappa hjp ≫ pairRestrict j =
         trivπ N W ≫ j ≫ pullback.diagonal f := by
       apply pullback.hom_ext
-      · simp [kappa_fst_assoc]; rfl
+      · simp [kappa_fst_assoc]
       · simp [kappa_snd_assoc]
     rw [Scheme.Hom.comp_apply, idx_coact]
     have e₁ : (pairRestrict j).base ((kappa hjp).base ((coactionUnit p (trivπ N W)).base x)) =
@@ -450,7 +450,7 @@ theorem exists_isUniversalSection (hc : IsDescentCocycle f c) {S W : Scheme.{u}}
   · intro K _ wk a
     let nk : Spec (.of K) ⟶ Nsch := wk ≫ Sigma.ι (fun _ : ULift.{u} (Fin N) ↦ W) ⟨a⟩ ≫ q
     have hnk : nk ≫ n = wk ≫ p := by
-      simp only [nk, Category.assoc, hq.w, Sigma.ι_desc_assoc, Category.id_comp]
+      simp only [nk, Category.assoc, hq.w, Sigma.ι_comp_desc_assoc, Category.id_comp]
     have h : (wk ≫ j) ≫ f = nk ≫ n ≫ s := by rw [reassoc_of% hnk, Category.assoc, hjp]
     refine ⟨nk, h, ?_⟩
     have hl : pullback.lift (f := f) (g := NE.hom) (wk ≫ j) nk h =
@@ -463,7 +463,7 @@ theorem exists_isUniversalSection (hc : IsDescentCocycle f c) {S W : Scheme.{u}}
       · rw [Category.assoc, descLift_q, pullback.lift_snd_assoc]
         erw [Category.comp_id]
       · rw [Category.assoc, descLift_trivπ, pullback.lift_fst, Category.assoc,
-          Sigma.ι_desc, Category.comp_id]
+          Sigma.ι_comp_desc, Category.comp_id]
     change σ₀ ((pullback.lift (f := f) (g := NE.hom) (wk ≫ j) nk h).base _) = a
     rw [hl, Scheme.Hom.comp_apply]
     change (σ₀ ∘ (pullbackMapLeft j NE.hom).base) _ = _

@@ -167,8 +167,7 @@ lemma pullbackStalkMap_naturality {M M' : S.Modules} (φ : M ⟶ M')
     (z : T.presheaf.stalk t ⊗[S.presheaf.stalk (g t)] M.presheaf.stalk (g t)) :
     pullbackStalkMap g t M' (LinearMap.lTensor _ (φ.stalkLinearMap (g t)) z) =
       ((pullback g).map φ).stalkLinearMap t (pullbackStalkMap g t M z) := by
-  induction z using TensorProduct.induction_on with
-  | zero => simp
+  induction z using TensorProduct.inductionOn with
   | add z z' hz hz' => simp only [map_add, hz, hz']
   | tmul a b =>
     obtain ⟨U, hU, m, rfl⟩ := M.presheaf.exists_germ_eq b

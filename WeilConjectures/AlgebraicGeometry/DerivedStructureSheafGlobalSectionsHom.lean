@@ -162,18 +162,18 @@ theorem derivedStructureSheaf_globalSections_hom (X : Scheme.{u})
   let c (J : HomotopyCategory C (ComplexShape.up ℤ)) (hJ : T J) :
       (M.obj B ⟶ M.obj (G.obj J)) ≃+ (A₀ ⟶ R.obj (L.obj J)) :=
     let _ := unitIso J hJ
-    { toEquiv := Iso.homCongr t (asIso (F.rightDerivedFunctorUnit.app J))
+    { toEquiv := Iso.homCongr t.symm (asIso (F.rightDerivedFunctorUnit.app J))
       map_add' := by intro f g; simp [Iso.homCongr] }
   let b (J : HomotopyCategory C (ComplexShape.up ℤ)) (hJ : T J) :=
     (a J).trans ((q J).trans (c J hJ))
   have nat (J J' : HomotopyCategory C (ComplexShape.up ℤ)) (hJ : T J) (hJ' : T J')
       (f : J ⟶ J') (g : P ⟶ J) :
       b J' hJ' (g ≫ f) = b J hJ g ≫ R.map (L.map f) := by
-    change t.inv ≫ M.map (a J' (g ≫ f)) ≫ F.rightDerivedFunctorUnit.app J' =
-      (t.inv ≫ M.map (a J g) ≫ F.rightDerivedFunctorUnit.app J) ≫ R.map (L.map f)
+    change t.hom ≫ M.map (a J' (g ≫ f)) ≫ F.rightDerivedFunctorUnit.app J' =
+      (t.hom ≫ M.map (a J g) ≫ F.rightDerivedFunctorUnit.app J) ≫ R.map (L.map f)
     rw [ha, M.map_comp]
     simp only [Category.assoc]
-    exact congrArg (fun z ↦ t.inv ≫ M.map (a J g) ≫ z)
+    exact congrArg (fun z ↦ t.hom ≫ M.map (a J g) ≫ z)
       (F.rightDerivedFunctorUnit.naturality f)
   exact descendHomEquiv L R P A₀ S s T rep full b nat
 

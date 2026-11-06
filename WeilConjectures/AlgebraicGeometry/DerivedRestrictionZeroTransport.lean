@@ -34,33 +34,15 @@ private theorem single_comp {C D E : Type*} [Category C] [Category D] [Category 
     (F : C ⥤ D) (H : D ⥤ E) [F.Additive] [H.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     [PreservesFiniteLimits H] [PreservesFiniteColimits H] (X : C) :
-    (Functor.mapDerivedCategoryCompIso F H).hom.app
+    (Functor.mapDerivedCategoryCompIso F H).inv.app
         ((DerivedCategory.singleFunctor C 0).obj X) ≫
       H.mapDerivedCategory.map ((F.mapDerivedCategorySingleFunctor 0).hom.app X) ≫
       (H.mapDerivedCategorySingleFunctor 0).hom.app (F.obj X) =
     ((F ⋙ H).mapDerivedCategorySingleFunctor 0).hom.app X := by
-  simp only [Functor.mapDerivedCategorySingleFunctor, Iso.trans_hom,
-    Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom, NatTrans.comp_app,
-    Functor.whiskerRight_app, Functor.whiskerLeft_app]
-  dsimp [DerivedCategory.singleFunctorIsoCompQ]
-  simp only [Functor.map_comp, CategoryTheory.Functor.map_id, Category.comp_id, Category.id_comp,
-    Category.assoc]
-  erw [H.mapDerivedCategoryFactors.hom.naturality_assoc]
-  erw [← Functor.mapDerivedCategoryCompIso_fac F H
-    ((CochainComplex.singleFunctor C 0).obj X)]
-  simp only [Functor.comp_map, Category.assoc]
-  congr 1
-  congr 1
-  congr 1
-  rw [← Functor.map_comp, ← Functor.map_comp]
-  congr 1
-  apply HomologicalComplex.to_single_hom_ext
-  simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
-    HomologicalComplex.singleMapHomologicalComplex_hom_app_self, Functor.map_comp,
-    Category.assoc, Iso.map_inv_hom_id_assoc,
-    Functor.mapHomologicalComplexCompIso_hom_app_f, Iso.refl_hom, NatTrans.id_app,
-    Functor.comp_obj, Functor.comp_map]
-  erw [CategoryTheory.Functor.map_id, Category.id_comp]
+  rw [← cancel_epi ((Functor.mapDerivedCategoryCompIso F H).hom.app _),
+    Iso.hom_inv_id_app_assoc]
+  exact (F.mapDerivedCategoryCompIso_hom_app_comp_mapDerivedCategorySingleFunctor_hom_app
+    H X 0).symm
 
 /-- A derived natural isomorphism agrees with its coefficient map on a single object.
 Source: `mapDerivedCategoryNatIso_fac` and the definition of
@@ -123,9 +105,9 @@ private theorem single_square {C D D' E : Type*}
     [PreservesFiniteLimits F'] [PreservesFiniteColimits F']
     [PreservesFiniteLimits H'] [PreservesFiniteColimits H']
     (e : F ⋙ H ≅ F' ⋙ H') (X : C) :
-    ((Functor.mapDerivedCategoryCompIso F H).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso F H ≪≫
         Functor.mapDerivedCategoryNatIso e ≪≫
-        Functor.mapDerivedCategoryCompIso F' H').hom.app
+        (Functor.mapDerivedCategoryCompIso F' H').symm).hom.app
           ((DerivedCategory.singleFunctor C 0).obj X) ≫
       H'.mapDerivedCategory.map ((F'.mapDerivedCategorySingleFunctor 0).hom.app X) ≫
       (H'.mapDerivedCategorySingleFunctor 0).hom.app (F'.obj X) =
@@ -134,7 +116,7 @@ private theorem single_square {C D D' E : Type*}
       (DerivedCategory.singleFunctor E 0).map (e.hom.app X) := by
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
   rw [single_comp, single_nat, ← single_comp F H]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The single-object degree-zero right-derived comparison is natural.
@@ -192,8 +174,8 @@ private theorem square_zero_transport {C D D' E : Type*}
     [PreservesFiniteLimits L'] [PreservesFiniteColimits L']
     (R : E ⥤ AddCommGrpCat.{v + 1}) [R.Additive] [PreservesFiniteLimits R]
     (t : L ⋙ Q ≅ A ⋙ L') (X : C) (Y : D') (f : A.obj X ⟶ Y) :
-    (let e := (Functor.mapDerivedCategoryCompIso L Q).symm ≪≫
-        Functor.mapDerivedCategoryNatIso t ≪≫ Functor.mapDerivedCategoryCompIso A L'
+    (let e := Functor.mapDerivedCategoryCompIso L Q ≪≫
+        Functor.mapDerivedCategoryNatIso t ≪≫ (Functor.mapDerivedCategoryCompIso A L').symm
     let b := L.mapDerivedCategory.mapIso
         ((DerivedCategory.Plus.singleFunctorιIso _ 0).app X) ≪≫
       (L.mapDerivedCategorySingleFunctor 0).app X
@@ -276,10 +258,10 @@ theorem derivedRestriction_zero_transport {S Y Y' : Scheme.{v}}
       let r := Limits.pullback.snd U.hom h
       let r' := Limits.pullback.snd U.hom h'
       have hw : r' ≫ a = q ≫ r := by simp [q, r, r', rawAffineRestrictedMap]
-      exact (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      exact (Functor.mapDerivedCategoryCompIso _ _) ≪≫
         Functor.mapDerivedCategoryNatIso ((upperStarComp AddCommGrpCat.{v + 1} q r).symm ≪≫
           upperStarComp AddCommGrpCat.{v + 1} r' a (q ≫ r) hw.symm) ≪≫
-        Functor.mapDerivedCategoryCompIso _ _
+        (Functor.mapDerivedCategoryCompIso _ _).symm
     let W := (MorphismProperty.Over.pullback @Etale ⊤ h).obj U
     let W' := (MorphismProperty.Over.pullback @Etale ⊤ h').obj U
     let L := upperStar AddCommGrpCat.{v + 1} W.hom

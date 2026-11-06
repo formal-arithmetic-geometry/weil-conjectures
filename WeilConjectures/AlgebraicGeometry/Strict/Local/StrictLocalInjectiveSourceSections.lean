@@ -9,7 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.Curve.MateProjectionData
 public import WeilConjectures.AlgebraicGeometry.Etale.EtaleInjectiveSectionsComparison
 public import WeilConjectures.AlgebraicGeometry.StrictLocalNeighbourhoodGeometry.NeighbourhoodGeometry
 import WeilConjectures.AlgebraicGeometry.Strict.Local.StrictLocalInjectiveSourceTransition
-import WeilConjectures.AlgebraicGeometry.Strict.Local.StrictLocalInjectiveSourceRestriction
+import WeilConjectures.AlgebraicGeometry.Strict.Local.StrictLocalComplexSectionsMate
+import WeilConjectures.AlgebraicGeometry.Strict.Local.StrictLocalLocalizedHomGerm
 import WeilConjectures.AlgebraicGeometry.SiteRestrictionInjectives
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
@@ -118,6 +119,33 @@ theorem smallModel_exists_strictLocalInjectiveSourceSections {X S : Scheme.{v}}
     apply (cancel_mono (e i).hom).1
     simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
     exact smallModel_strictLocalInjectiveSourceIso_transition f s K n J q a
-  · exact smallModel_strictLocalInjectiveSourceIso_restriction f s K n Q J q
+  · set_option backward.isDefEq.respectTransparency false in
+      intro i
+      let M : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ :=
+        ((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj
+      let F := lowerStar AddCommGrpCat.{v + 1} f
+      let L : CochainComplex (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ :=
+        (F.mapHomologicalComplex (.up ℤ)).obj M
+      have : F.PreservesInjectiveObjects :=
+        Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms
+          (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} f)
+      have (k : ℤ) : Injective (L.X k) :=
+        F.injective_obj ((InjectiveObject.ι _).obj (J.obj.X k))
+      have : L.IsKInjective := by
+        obtain ⟨b, hb⟩ := J.property
+        let : J.obj.IsStrictlyGE b := hb
+        have : L.IsStrictlyGE b := by dsimp [L, M]; infer_instance
+        exact CochainComplex.isKInjective_of_injective L b
+      let r := smallModel_sourceInjectiveDirectImageIso f K J q
+      apply (cancel_mono (smallModel_strictLocalBaseChangeTargetIso f s K n).hom).1
+      simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+      rw [smallModel_sourceLocalizedSectionsIso_germ s _ L r n i]
+      simp only [Category.assoc]
+      have hm := smallModel_strictLocalComplexSectionRestriction_mate f s K n Q J q i
+      erw [hm]
+      dsimp only [e]
+      delta smallModel_sourceLocalizedSectionsIso smallModel_strictLocalInjectiveSourceIso
+      simp only [Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom, Category.assoc]
+      rfl
 
 end AlgebraicGeometry.Etale

@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.CategoryTheory.Scalar.ScalarInternalHomDataSupplement
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.CategoryTheory.ClosedScalarHom.ClosedScalarHomComparison
 import WeilConjectures.CategoryTheory.Ringed.RingedDerivedClosedSymmetricMonoidal
 import WeilConjectures.CategoryTheory.Scalar.ScalarTensorTowerComparison

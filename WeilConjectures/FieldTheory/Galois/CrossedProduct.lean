@@ -411,7 +411,7 @@ theorem exists_eq_of_isCocycle {K L : Type*} [Field K] [Field L] [Algebra K L]
         simp [Matrix.sum_apply, Matrix.single_apply]
       · rw [Matrix.one_apply_ne h, Matrix.sum_apply]
         refine Finset.sum_eq_zero fun i _ ↦ ?_
-        rw [Matrix.single_apply, if_neg]
+        rw [Matrix.single_apply, ite_eq_right]
         rintro ⟨rfl, rfl⟩
         exact h rfl
     simp only [E, ← map_sum, this, map_one]

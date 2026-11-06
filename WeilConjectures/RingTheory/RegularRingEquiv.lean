@@ -50,12 +50,10 @@ private def tensorRingEquiv
   refine { E.toAddEquiv with map_mul' := ?_ }
   intro x y
   change E (x * y) = E x * E y
-  induction x using TensorProduct.induction_on with
-  | zero => simp
+  induction x using TensorProduct.inductionOn with
   | add x₁ x₂ h₁ h₂ => simp [add_mul, h₁, h₂]
   | tmul a b =>
-    induction y using TensorProduct.induction_on with
-    | zero => simp
+    induction y using TensorProduct.inductionOn with
     | add y₁ y₂ h₁ h₂ => simp [mul_add, h₁, h₂]
     | tmul c d =>
       rw [Algebra.TensorProduct.tmul_mul_tmul]

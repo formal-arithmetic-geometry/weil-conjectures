@@ -308,7 +308,7 @@ theorem exists_puncturedTrait_iso_spec_fractionRing [IsSepClosed Ω]
   refine ⟨B, inferInstance, inferInstance, inferInstance, hsh, φ, π, hπ, mP.symm ≪≫ e,
     Units.map (mU.inv.appTop.hom : _ →* _) u, ?_, ?_⟩
   · rw [Iso.trans_hom, Iso.symm_hom, Scheme.Hom.comp_appTop, CommRingCat.hom_comp,
-      RingHom.comp_apply, ← hu, Units.coe_map, MonoidHom.coe_coe, ← RingHom.comp_apply,
+      RingHom.comp_apply, ← hu, Units.coe_map, MonoidHom.coe_ofClass, ← RingHom.comp_apply,
       ← CommRingCat.hom_comp, ← Scheme.Hom.comp_appTop, hmι, Scheme.Hom.comp_appTop,
       CommRingCat.hom_comp, RingHom.comp_apply]
   · exact (ConcreteCategory.bijective_of_isIso mU.hom.base).2.connectedSpace

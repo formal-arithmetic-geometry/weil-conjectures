@@ -115,13 +115,13 @@ instance isLeftDerivedFunctor_mapDerivedCategoryPlus_comp :
 
 instance isRightDerivedFunctor_rightDerivedFunctorPlus_comp :
     (R.rightDerivedFunctorPlus ⋙ L.mapDerivedCategoryPlus).IsRightDerivedFunctor
-      (Functor.whiskerRight R.rightDerivedFunctorPlusUnit L.mapDerivedCategoryPlus ≫
+      (Functor.whiskerRight R.rightDerivedFunctorPlusUnith L.mapDerivedCategoryPlus ≫
         (Functor.associator _ _ _).hom)
       (HomotopyCategory.Plus.quasiIso D) := by
   refine (HomotopyCategory.Plus.localizerMorphism_derives
     ((R.mapHomotopyCategoryPlus ⋙ DerivedCategory.Plus.Qh) ⋙
       L.mapDerivedCategoryPlus)).isRightDerivedFunctor_of_isIso _ (fun X₁ => ?_)
-  have : IsIso (R.rightDerivedFunctorPlusUnit.app
+  have : IsIso (R.rightDerivedFunctorPlusUnith.app
     ((InjectiveObject.ι D).mapHomotopyCategoryPlus.obj X₁)) := inferInstance
   dsimp
   infer_instance
@@ -134,7 +134,7 @@ noncomputable def derivedPlus :
     L.mapDerivedCategoryPlus ⊣ R.rightDerivedFunctorPlus :=
   adj.mapHomotopyCategoryPlus.derived
     (HomotopyCategory.Plus.quasiIso C) (HomotopyCategory.Plus.quasiIso D)
-    L.mapDerivedCategoryPlusFactorsh.hom R.rightDerivedFunctorPlusUnit
+    L.mapDerivedCategoryPlusFactorsh.hom R.rightDerivedFunctorPlusUnith
 
 /-- The unit of the bounded below derived adjunction is determined by the unit of `adj`:
 on the image of a bounded below complex `K`, it is the unit of `adj` on `K` followed by the
@@ -144,20 +144,20 @@ lemma derivedPlus_unit_app_fac (K : HomotopyCategory.Plus C) :
     adj.derivedPlus.unit.app (DerivedCategory.Plus.Qh.obj K) ≫
         R.rightDerivedFunctorPlus.map (L.mapDerivedCategoryPlusFactorsh.hom.app K) =
       DerivedCategory.Plus.Qh.map (adj.mapHomotopyCategoryPlus.unit.app K) ≫
-        R.rightDerivedFunctorPlusUnit.app (L.mapHomotopyCategoryPlus.obj K) :=
+        R.rightDerivedFunctorPlusUnith.app (L.mapHomotopyCategoryPlus.obj K) :=
   adj.mapHomotopyCategoryPlus.derivedη_fac_app (HomotopyCategory.Plus.quasiIso C)
-    L.mapDerivedCategoryPlusFactorsh.hom R.rightDerivedFunctorPlusUnit K
+    L.mapDerivedCategoryPlusFactorsh.hom R.rightDerivedFunctorPlusUnith K
 
 /-- The counit of the bounded below derived adjunction is determined by the counit of
 `adj`, dually to `Adjunction.derivedPlus_unit_app_fac`. -/
 @[reassoc]
 lemma derivedPlus_counit_app_fac (M : HomotopyCategory.Plus D) :
-    L.mapDerivedCategoryPlus.map (R.rightDerivedFunctorPlusUnit.app M) ≫
+    L.mapDerivedCategoryPlus.map (R.rightDerivedFunctorPlusUnith.app M) ≫
         adj.derivedPlus.counit.app (DerivedCategory.Plus.Qh.obj M) =
       L.mapDerivedCategoryPlusFactorsh.hom.app (R.mapHomotopyCategoryPlus.obj M) ≫
         DerivedCategory.Plus.Qh.map (adj.mapHomotopyCategoryPlus.counit.app M) :=
   adj.mapHomotopyCategoryPlus.derivedε_fac_app (HomotopyCategory.Plus.quasiIso D)
-    L.mapDerivedCategoryPlusFactorsh.hom R.rightDerivedFunctorPlusUnit M
+    L.mapDerivedCategoryPlusFactorsh.hom R.rightDerivedFunctorPlusUnith M
 
 /-- The formula of `Adjunction.derivedPlus_unit_app_fac` characterises the unit of the
 bounded below derived adjunction: `L.mapDerivedCategoryPlus ⋙ R.rightDerivedFunctorPlus`
@@ -170,7 +170,7 @@ lemma derivedPlus_unit_eq
       η.app (DerivedCategory.Plus.Qh.obj K) ≫
           R.rightDerivedFunctorPlus.map (L.mapDerivedCategoryPlusFactorsh.hom.app K) =
         DerivedCategory.Plus.Qh.map (adj.mapHomotopyCategoryPlus.unit.app K) ≫
-          R.rightDerivedFunctorPlusUnit.app (L.mapHomotopyCategoryPlus.obj K)) :
+          R.rightDerivedFunctorPlusUnith.app (L.mapHomotopyCategoryPlus.obj K)) :
     η = adj.derivedPlus.unit := by
   refine Functor.leftDerived_ext _
     ((Functor.associator _ _ _).inv ≫
@@ -199,7 +199,7 @@ theorem derivedPlus_id_unit [EnoughInjectives C] :
           ((Functor.mapHomotopyCategoryPlusIdIso C).inv.app K) := by
     rw [Functor.mapDerivedCategoryPlusIdIso_fac_app, Category.assoc, ← Functor.map_comp]
     simp
-  have hu : (𝟭 C).rightDerivedFunctorPlusUnit.app ((𝟭 C).mapHomotopyCategoryPlus.obj K) =
+  have hu : (𝟭 C).rightDerivedFunctorPlusUnith.app ((𝟭 C).mapHomotopyCategoryPlus.obj K) =
       DerivedCategory.Plus.Qh.map
           ((Functor.mapHomotopyCategoryPlusIdIso C).hom.app
             ((𝟭 C).mapHomotopyCategoryPlus.obj K)) ≫
@@ -250,13 +250,13 @@ theorem derivedPlus_unit_comp :
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app]
   rw [← cancel_mono (RA.rightDerivedFunctorPlus.map
     (LB.mapDerivedCategoryPlusFactorsh.hom.app K))]
-  have hnatU : RA.rightDerivedFunctorPlusUnit.app (LA.mapHomotopyCategoryPlus.obj K) ≫
+  have hnatU : RA.rightDerivedFunctorPlusUnith.app (LA.mapHomotopyCategoryPlus.obj K) ≫
       RA.rightDerivedFunctorPlus.map (DerivedCategory.Plus.Qh.map
         ((NatTrans.mapHomotopyCategoryPlus u.hom).app K)) =
       DerivedCategory.Plus.Qh.map (RA.mapHomotopyCategoryPlus.map
           ((NatTrans.mapHomotopyCategoryPlus u.hom).app K)) ≫
-        RA.rightDerivedFunctorPlusUnit.app (LB.mapHomotopyCategoryPlus.obj K) :=
-    (RA.rightDerivedFunctorPlusUnit.naturality _).symm
+        RA.rightDerivedFunctorPlusUnith.app (LB.mapHomotopyCategoryPlus.obj K) :=
+    (RA.rightDerivedFunctorPlusUnith.naturality _).symm
   have hnatL : (Functor.rightDerivedFunctorPlusNatTrans l.hom).app
         (LB.mapDerivedCategoryPlus.obj (DerivedCategory.Plus.Qh.obj K)) ≫
       RA.rightDerivedFunctorPlus.map (LB.mapDerivedCategoryPlusFactorsh.hom.app K) =
@@ -267,7 +267,7 @@ theorem derivedPlus_unit_comp :
   trans DerivedCategory.Plus.Qh.map (adjA.mapHomotopyCategoryPlus.unit.app K) ≫
     DerivedCategory.Plus.Qh.map (RA.mapHomotopyCategoryPlus.map
       ((NatTrans.mapHomotopyCategoryPlus u.hom).app K)) ≫
-    RA.rightDerivedFunctorPlusUnit.app (LB.mapHomotopyCategoryPlus.obj K)
+    RA.rightDerivedFunctorPlusUnith.app (LB.mapHomotopyCategoryPlus.obj K)
   · rw [Category.assoc, ← Functor.map_comp,
       Functor.mapDerivedCategoryPlusNatIso_hom_app_factorsh, Functor.map_comp,
       derivedPlus_unit_app_fac_assoc, hnatU]
@@ -320,7 +320,7 @@ theorem derivedPlus_comp_unit :
           (Functor.rightDerivedFunctorPlusCompIso R₂ R₁).inv := by
   refine ((adj₁.comp adj₂).derivedPlus_unit_eq _ ?_).symm
   intro K
-  have hw : (R₂ ⋙ R₁).rightDerivedFunctorPlusUnit.app
+  have hw : (R₂ ⋙ R₁).rightDerivedFunctorPlusUnith.app
         ((L₁ ⋙ L₂).mapHomotopyCategoryPlus.obj K) =
       (Functor.rightDerivedFunctorPlusCompUnit R₂ R₁).app
           ((L₁ ⋙ L₂).mapHomotopyCategoryPlus.obj K) ≫
@@ -353,7 +353,7 @@ theorem derivedPlus_comp_unit :
           (adj₂.mapHomotopyCategoryPlus.unit.app (L₁.mapHomotopyCategoryPlus.obj K) ≫
             R₂.mapHomotopyCategoryPlus.map
               ((Functor.mapHomotopyCategoryPlusCompIso (Iso.refl (L₁ ⋙ L₂))).hom.app K)) ≫
-        R₂.rightDerivedFunctorPlusUnit.app ((L₁ ⋙ L₂).mapHomotopyCategoryPlus.obj K) := by
+        R₂.rightDerivedFunctorPlusUnith.app ((L₁ ⋙ L₂).mapHomotopyCategoryPlus.obj K) := by
     simp only [Functor.map_comp, Category.assoc]
     rw [← Functor.comp_map L₂.mapDerivedCategoryPlus R₂.rightDerivedFunctorPlus,
       ← NatTrans.naturality_assoc]
@@ -362,7 +362,7 @@ theorem derivedPlus_comp_unit :
       ← Functor.comp_map DerivedCategory.Plus.Qh R₂.rightDerivedFunctorPlus,
       ← NatTrans.naturality, Functor.comp_map]
   rw [hin]
-  have hv₁ : R₁.rightDerivedFunctorPlusUnit.app (L₁.mapHomotopyCategoryPlus.obj K) ≫
+  have hv₁ : R₁.rightDerivedFunctorPlusUnith.app (L₁.mapHomotopyCategoryPlus.obj K) ≫
       R₁.rightDerivedFunctorPlus.map (DerivedCategory.Plus.Qh.map
         (adj₂.mapHomotopyCategoryPlus.unit.app (L₁.mapHomotopyCategoryPlus.obj K) ≫
           R₂.mapHomotopyCategoryPlus.map
@@ -371,9 +371,9 @@ theorem derivedPlus_comp_unit :
         (adj₂.mapHomotopyCategoryPlus.unit.app (L₁.mapHomotopyCategoryPlus.obj K) ≫
           R₂.mapHomotopyCategoryPlus.map
             ((Functor.mapHomotopyCategoryPlusCompIso (Iso.refl (L₁ ⋙ L₂))).hom.app K))) ≫
-      R₁.rightDerivedFunctorPlusUnit.app
+      R₁.rightDerivedFunctorPlusUnith.app
         (R₂.mapHomotopyCategoryPlus.obj ((L₁ ⋙ L₂).mapHomotopyCategoryPlus.obj K)) :=
-    (R₁.rightDerivedFunctorPlusUnit.naturality _).symm
+    (R₁.rightDerivedFunctorPlusUnith.naturality _).symm
   rw [Functor.map_comp, derivedPlus_unit_app_fac_assoc, Functor.map_comp,
     reassoc_of% hv₁]
   simp only [Functor.map_comp, Category.assoc]
@@ -428,13 +428,13 @@ theorem derivedPlus_mateEquiv_app_fac (adj : L ⊣ R) (adj' : L' ⊣ R')
           L'.mapDerivedCategoryPlusFactorsh.hom.app (G.mapHomotopyCategoryPlus.obj N) ≫
           DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus σ.natTrans).app N))
     (K : HomotopyCategory.Plus C₁) :
-    G.mapDerivedCategoryPlus.map (R.rightDerivedFunctorPlusUnit.app K) ≫
+    G.mapDerivedCategoryPlus.map (R.rightDerivedFunctorPlusUnith.app K) ≫
         (mateEquiv adj.derivedPlus adj'.derivedPlus θ).natTrans.app
           (DerivedCategory.Plus.Qh.obj K) =
       G.mapDerivedCategoryPlusFactorsh.hom.app (R.mapHomotopyCategoryPlus.obj K) ≫
         DerivedCategory.Plus.Qh.map
           ((NatTrans.mapHomotopyCategoryPlus (mateEquiv adj adj' σ).natTrans).app K) ≫
-        R'.rightDerivedFunctorPlusUnit.app (G'.mapHomotopyCategoryPlus.obj K) ≫
+        R'.rightDerivedFunctorPlusUnith.app (G'.mapHomotopyCategoryPlus.obj K) ≫
         R'.rightDerivedFunctorPlus.map (G'.mapDerivedCategoryPlusFactorsh.inv.app K) := by
   have hmate : ∀ (Z : DerivedCategory.Plus C₁),
       (mateEquiv adj.derivedPlus adj'.derivedPlus θ).natTrans.app Z =
@@ -445,12 +445,12 @@ theorem derivedPlus_mateEquiv_app_fac (adj : L ⊣ R) (adj' : L' ⊣ R')
             (adj.derivedPlus.counit.app Z)) := fun Z => by
     simp [mateEquiv_apply]
   set N := R.mapHomotopyCategoryPlus.obj K
-  set u := R.rightDerivedFunctorPlusUnit.app K
+  set u := R.rightDerivedFunctorPlusUnith.app K
   have h₁ := adj'.derivedPlus.unit.naturality (G.mapDerivedCategoryPlus.map u)
   have h₂ := θ.natTrans.naturality u
   have h₃ := adj.derivedPlus_counit_app_fac K
   have h₄ := NatTrans.mapHomotopyCategoryPlus_mateEquiv_app adj adj' σ K
-  have h₅ := R'.rightDerivedFunctorPlusUnit.naturality
+  have h₅ := R'.rightDerivedFunctorPlusUnith.naturality
     ((NatTrans.mapHomotopyCategoryPlus σ.natTrans).app N ≫
       G'.mapHomotopyCategoryPlus.map (adj.mapHomotopyCategoryPlus.counit.app K))
   have h₆ := adj'.derivedPlus_unit_app_fac (G.mapHomotopyCategoryPlus.obj N)

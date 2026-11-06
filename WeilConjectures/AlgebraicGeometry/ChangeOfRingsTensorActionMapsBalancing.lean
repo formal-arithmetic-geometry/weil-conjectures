@@ -57,8 +57,7 @@ private theorem tensor_right_triple_hom_ext {Y : Scheme.{u}} {M N L H : Y.Module
   have hh (z : TensorProduct Γ(Y, W) Γ(N, W) Γ(L, W)) :
       a.app W (tmulSection (M.presheaf.map i.op s) (tensorSectionsMap N L W z)) =
         b.app W (tmulSection (M.presheaf.map i.op s) (tensorSectionsMap N L W z)) := by
-    induction z using TensorProduct.induction_on with
-    | zero => simp only [map_zero, tmulSection_zero]
+    induction z using TensorProduct.inductionOn with
     | tmul t w => exact h W (M.presheaf.map i.op s) t w
     | add z z' hz hz' => simp only [map_add, tmulSection_add, hz, hz']
   change H.presheaf.map i.op (a.app U (tmulSection s w)) =

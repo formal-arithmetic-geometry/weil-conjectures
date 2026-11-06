@@ -64,7 +64,7 @@ theorem strict_local_root_domain_etale
   have huniq (M : Ideal C) [M.IsMaximal] : M = RingHom.ker ε := by
     have hcomap : M.comap (algebraMap H C) = IsLocalRing.maximalIdeal H :=
       IsLocalRing.eq_maximalIdeal
-        (Ideal.isMaximal_comap_of_isIntegral_of_isMaximal M)
+        (Ideal.isMaximal_under_of_isIntegral_of_isMaximal M)
     have htm : t ∈ M := by
       apply Ideal.IsPrime.mem_of_pow_mem (inferInstance : M.IsPrime) n
       rw [hpow]

@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib.CategoryTheory.MorphismProperty.OfObjectProperty
+public import Mathlib.CategoryTheory.MorphismProperty.Composition
 
 /-!
 # OfObjectProperty

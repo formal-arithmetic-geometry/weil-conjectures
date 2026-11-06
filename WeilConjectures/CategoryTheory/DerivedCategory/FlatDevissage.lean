@@ -170,7 +170,9 @@ lemma isIso_app_Q_obj_of_isStrictlyGE_of_isStrictlyLE_of_prop (P : ObjectPropert
     (K : CochainComplex C ℤ) (a b : ℤ) [K.IsStrictlyGE a] [K.IsStrictlyLE b]
     (hK : ∀ n, P (K.X n)) : IsIso (τ.app (Q.obj K)) := by
   have hK' := HomotopyCategory.mem_subcategory_of_strictly_bounded
-    (Functor.whiskerLeft Qh τ).isoLocus K a b fun n _ _ ↦ hP _ (hK n)
+    (Functor.whiskerLeft Qh τ).isoLocus K a b fun n _ _ ↦
+      (NatTrans.isIso_app_iff_of_iso τ ((singleFunctorIsoCompQh C 0).app (K.X n))).1
+        (hP _ (hK n))
   rw [NatTrans.isoLocus_iff, Functor.whiskerLeft_app] at hK'
   exact (NatTrans.isIso_app_iff_of_iso τ ((quotientCompQhIso C).app K)).1 hK'
 

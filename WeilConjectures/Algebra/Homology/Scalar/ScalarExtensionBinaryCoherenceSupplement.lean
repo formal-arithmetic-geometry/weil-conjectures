@@ -184,8 +184,7 @@ theorem scalarExtension_tensor_hom_ext {R S : Sheaf J CommRingCat.{u}} (α : R �
   rw [← PresheafOfModules.naturality_apply f.val,
     ← PresheafOfModules.naturality_apply g.val, scalarExtensionSection_naturality, ← ht]
   clear ht
-  induction t using TensorProduct.induction_on with
-  | zero => simp only [map_zero, scalarExtensionSection_zero]
+  induction t using TensorProduct.inductionOn with
   | add t t' ih ih' =>
     simp only [map_add, scalarExtensionSection_add, ih, ih']
   | tmul x y => exact h (op V) (S.obj.map i.op s) x y
@@ -241,9 +240,7 @@ theorem scalarExtension_tensor3_hom_ext {R S : Sheaf J CommRingCat.{u}} (α : R 
     ← PresheafOfModules.naturality_apply g.val, scalarExtensionSection_naturality,
     scalarTensorTmul_naturality, ← ht]
   clear ht
-  induction t using TensorProduct.induction_on with
-  | zero =>
-    simp only [map_zero, scalarTensorTmul_zero_first, scalarExtensionSection_zero]
+  induction t using TensorProduct.inductionOn with
   | add t t' ih ih' =>
     simp only [map_add, scalarTensorTmul_add_first, scalarExtensionSection_add, ih, ih']
   | tmul x y => exact h (op V) (S.obj.map i.op s) x y (Q.val.map i.op z)
@@ -383,12 +380,10 @@ noncomputable def scalarTensorBinaryRawInverse {R S : Sheaf J CommRingCat.{u}} (
     apply ModuleCat.hom_ext
     apply TensorProduct.ext'
     intro x y
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | add x x' hx hx' => simp only [map_add, TensorProduct.add_tmul, hx, hx']
     | tmul s x =>
-      induction y using TensorProduct.induction_on with
-      | zero => simp
+      induction y using TensorProduct.inductionOn with
       | add y y' hy hy' => simp only [map_add, TensorProduct.tmul_add, hy, hy']
       | tmul t y =>
         change scalarTensorBinaryInverseApp α N P V
@@ -671,12 +666,10 @@ theorem scalarTensorBinaryInverse_forward {R S : Sheaf J CommRingCat.{u}} (α : 
       ((scalarSheafificationUnit (siteTensorPresheaf
         (changeOfRingsPresheafOfUniverses α N)
         (changeOfRingsPresheafOfUniverses α P))).app U (z ⊗ₜ[S.obj.obj U] w))
-  induction z using TensorProduct.induction_on with
-  | zero => simp only [TensorProduct.zero_tmul, map_zero]
+  induction z using TensorProduct.inductionOn with
   | add z z' hz hz' => simp only [TensorProduct.add_tmul, map_add, hz, hz']
   | tmul s x =>
-    induction w using TensorProduct.induction_on with
-    | zero => simp only [TensorProduct.tmul_zero, map_zero]
+    induction w using TensorProduct.inductionOn with
     | add w w' hw hw' => simp only [TensorProduct.tmul_add, map_add, hw, hw']
     | tmul t y =>
       change S.obj.obj U at s t

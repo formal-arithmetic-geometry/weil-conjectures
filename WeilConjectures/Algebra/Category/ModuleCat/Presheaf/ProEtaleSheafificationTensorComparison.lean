@@ -66,8 +66,7 @@ private theorem tensor_bilinear_universal_exists {C : Type (u + 1)} [Category.{u
         ext t
         change TensorProduct.lift (β V) ((F.val ⊗ G.val).map f t) =
           H.val.map f (TensorProduct.lift (β U) t)
-        induction t using TensorProduct.induction_on with
-        | zero => simp only [map_zero]
+        induction t using TensorProduct.inductionOn with
         | tmul x y =>
           change β V (F.val.map f x) (G.val.map f y) = H.val.map f (β U x y)
           exact hβ f x y
@@ -134,8 +133,7 @@ private theorem tensor_bilinear_universal_unique {C : Type (u + 1)} [Category.{u
       (((adj.unit.app (F.val ⊗ G.val)).app U) t)) =
     ψ.val.app U ((tensorObjIsoSheafification F G).inv.val.app U
       (((adj.unit.app (F.val ⊗ G.val)).app U) t))
-  induction t using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction t using TensorProduct.inductionOn with
   | tmul x y => exact (hφ U x y).trans (hψ U x y).symm
   | add t s ht hs => simp only [map_add, ht, hs]
 
@@ -241,8 +239,9 @@ private noncomputable def tensorSheafificationUnits
     change (show ((S).obj F).val.obj V from ((η).app F).app V (F.map i f))
       ⊗ₜ[R.obj.obj V]
         (show ((S).obj G).val.obj V from ((η).app G).app V (G.map i g)) =
-      ((S).obj F).val.map i (((η).app F).app U f) ⊗ₜ[R.obj.obj V]
-        ((S).obj G).val.map i (((η).app G).app U g)
+      (show ((S).obj F).val.obj V from ((S).obj F).val.map i (((η).app F).app U f))
+        ⊗ₜ[R.obj.obj V]
+          (show ((S).obj G).val.obj V from ((S).obj G).val.map i (((η).app G).app U g))
     congr 1
     · exact naturality_apply ((η).app F) i f
     · exact naturality_apply ((η).app G) i g

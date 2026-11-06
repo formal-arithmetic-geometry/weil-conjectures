@@ -113,6 +113,12 @@ universe u v
 variable {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C]
   {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{w})
 
+private local instance (I : Type w) :
+    HasColimitsOfShape (Discrete I) (PresheafOfModules.{w}
+      ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R).obj) :=
+  PresheafOfModules.hasColimitsOfShape
+    ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R).obj (Discrete I)
+
 private theorem kFlat_cone_independent
     (K L : CochainComplex (SheafOfModules.{w}
       ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ℤ)

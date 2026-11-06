@@ -168,7 +168,7 @@ theorem liftsAlongEpi_of_exists_epi_sigma_freeYoneda
     Sheaf.freeYonedaHomEquiv.symm (Sheaf.freeYonedaHomEquiv (s j.1) ≫ G.obj.map (φ j.1 j.2).op)
   have he (j : Σ i, Fin (m i)) : t j.1 j.2 ≫ pullback.snd p g = Sigma.ι _ j ≫ e := by
     apply Sheaf.freeYonedaHomEquiv.injective
-    rw [ht, Sigma.ι_desc, Equiv.apply_symm_apply]
+    rw [ht, Sigma.ι_comp_desc, Equiv.apply_symm_apply]
   refine ⟨_, e, Sigma.desc (fun j ↦ t j.1 j.2) ≫ pullback.fst p g,
     S.prop_coproduct (fun j ↦ hS _ (hV _ _)), ?_, ?_⟩
   · refine Preadditive.epi_of_cancel_zero _ fun {F} f hf ↦ ?_
@@ -179,7 +179,7 @@ theorem liftsAlongEpi_of_exists_epi_sigma_freeYoneda
         ((Scheme.ofArrows_mem_smallEtaleTopology_iff _).2 (hcov i)) fun k ↦ ?_
       have h₁ := congrArg Sheaf.freeYonedaHomEquiv
         (Sigma.ι (fun j : Σ i, Fin (m i) ↦ free (V j.1 j.2)) ⟨i, k⟩ ≫= hf)
-      rw [comp_zero, ← Category.assoc, Sigma.ι_desc, freeYonedaHomEquiv_comp,
+      rw [comp_zero, ← Category.assoc, Sigma.ι_comp_desc, freeYonedaHomEquiv_comp,
         Equiv.apply_symm_apply] at h₁
       simp only [Category.assoc, ← NatTrans.naturality] at h₁ ⊢
       rw [h₁]
@@ -189,7 +189,7 @@ theorem liftsAlongEpi_of_exists_epi_sigma_freeYoneda
         _ = 0 := by simp
     exact hepi f hs
   · ext j
-    simp only [Sigma.ι_desc_assoc, Category.assoc, pullback.condition]
+    simp only [Sigma.ι_comp_desc_assoc, Category.assoc, pullback.condition]
     rw [← Category.assoc, he, Category.assoc]
 
 omit [CommRing Λ] in
@@ -203,7 +203,7 @@ lemma _root_.CategoryTheory.ObjectProperty.flat_colimit {A : Type*} [Category* A
     (ObjectProperty.flat_iff_preservesFiniteLimits (F.obj j)).1 (hF j)
   rw [ObjectProperty.flat_iff_preservesFiniteLimits]
   have : PreservesColimit F (MonoidalCategory.curriedTensor A) :=
-    MonoidalCategory.Limits.preservesCoLimit_curriedTensor _
+    MonoidalCategory.Limits.preservesColimit_curriedTensor _
   have e : tensorLeft (colimit F) ≅ (F ⋙ MonoidalCategory.curriedTensor A).flip ⋙ colim :=
     preservesColimitIso (MonoidalCategory.curriedTensor A) F ≪≫ colimitIsoFlipCompColim _
   have : PreservesFiniteLimits ((F ⋙ MonoidalCategory.curriedTensor A).flip) :=
@@ -345,7 +345,7 @@ noncomputable def freeYonedaTrivialCoverIso [Finite S] :
     dsimp only [e, Equiv.trans_apply]
     erw [Equiv.apply_symm_apply, Equiv.apply_symm_apply]
     refine Sigma.hom_ext _ _ fun s ↦ ?_
-    simp only [sigmaDescEquiv, Equiv.coe_fn_mk, Sigma.ι_desc, Sigma.ι_desc_assoc,
+    simp only [sigmaDescEquiv, Equiv.coe_fn_mk, Sigma.ι_comp_desc, Sigma.ι_comp_desc_assoc,
       Equiv.ofBijective_apply, freeYonedaHomEquiv_comp, Category.assoc]
     erw [h.hom.naturality]
   Coyoneda.ext _ _ (fun f ↦ e _ f) (fun f ↦ (e _).symm f) (fun f ↦ by simp)

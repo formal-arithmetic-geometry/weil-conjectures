@@ -6,6 +6,8 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.StalkComparisonSourceTransport
 import WeilConjectures.Algebra.Homology.KFlatStalkCriterion
 import WeilConjectures.Algebra.Homology.KFlatScalarExtensionCounit
@@ -84,7 +86,9 @@ theorem stalkDerivedExtensionComparison_isIso (z : X') :
             (RingedSpace.moduleStalkFunctor X'.toRingedSpace z).mapDerivedCategoryFactors.inv.app
                 (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P) ≫
             (comparisonDerivedStalk X' z).map
-              (inv ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))), IsIso j := by
+              (cast (by rfl)
+                (inv ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))))),
+      IsIso j := by
   let := leftAlgebra f g' z
   let := rightAlgebra f f' g g' sq z
   let := (tensorMap f f' g g' sq z).toAlgebra
@@ -106,6 +110,7 @@ theorem stalkDerivedExtensionComparison_isIso (z : X') :
         (g' z)).mapDerivedCategoryFactors.inv.app P) ≫
         j.app (DerivedCategory.Q.obj P)) := by
       rw [heq]
+      simp only [cast_eq]
       infer_instance
     exact IsIso.of_isIso_comp_left
       (L.map ((RingedSpace.moduleStalkFunctor X.toRingedSpace
@@ -121,5 +126,6 @@ theorem stalkDerivedExtensionComparison_isIso (z : X') :
       ((comparisonDerivedStalk X (g' z) ⋙ L).map c.e.hom) _
   have : ∀ K, IsIso (j.app K) := hobj
   exact NatIso.isIso_of_isIso_app j
+
 
 end AlgebraicGeometry.SingleComplexBaseChange

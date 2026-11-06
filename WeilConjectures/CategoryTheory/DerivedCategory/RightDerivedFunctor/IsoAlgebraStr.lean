@@ -77,7 +77,7 @@ theorem str_homologyRightDerivedFunctorForgetIso {K : IsoAlgebra F}
   simp only [Iso.trans_hom, comp_hom_f, Functor.map_comp, Category.assoc] at hα
   simp only [homologyRightDerivedFunctorForgetIso, Iso.trans_hom, Functor.mapIso_hom,
     Iso.symm_hom, Functor.map_comp, Category.assoc, h', forget_map, str_hom]
-  rw [Iso.map_inv_hom_id_assoc]
+  rw [Iso.inv_hom_id_map_assoc]
   simp only [comp_hom_f, Functor.map_comp, Category.assoc]
   have hβ := hα =≫ (((mapResolution e I).sc r).mapHomologyIso (forget G)).inv
   simp only [Category.assoc] at hβ

@@ -52,27 +52,27 @@ noncomputable def mkHomToDouble : K ⟶ double f hi₀₁ where
   comm' k₀ k₁ hk := by
     by_cases h₁ : k₁ = i₁
     · subst h₁
-      rw [dif_neg h.symm, dif_pos rfl]
+      rw [dite_eq_right h.symm, dite_eq_left rfl]
       obtain rfl := c.prev_eq hk hi₀₁
       simp [double_d f hi₀₁ h, comm]
     · rw [double_d_eq_zero₁ _ _ _ _ h₁, comp_zero]
       by_cases h₀ : k₁ = i₀
       · subst h₀
         dsimp
-        rw [if_pos rfl, id_comp, comp_id, reassoc_of% (hφ k₀ hk), zero_comp]
+        rw [ite_eq_left rfl, id_comp, comp_id, reassoc_of% (hφ k₀ hk), zero_comp]
       · apply (isZero_double_X f hi₀₁ k₁ h₀ h₁).eq_of_tgt
 
 @[simp, reassoc]
 lemma mkHomToDouble_f₀ :
     (mkHomToDouble hi₀₁ h φ₀ φ₁ comm hφ).f i₀ = φ₀ ≫ (doubleXIso₀ f hi₀₁).inv := by
   dsimp [mkHomToDouble]
-  rw [if_pos rfl, id_comp, comp_id]
+  rw [ite_eq_left rfl, id_comp, comp_id]
 
 @[simp, reassoc]
 lemma mkHomToDouble_f₁ :
     (mkHomToDouble hi₀₁ h φ₀ φ₁ comm hφ).f i₁ = φ₁ ≫ (doubleXIso₁ f hi₀₁ h).inv := by
   dsimp [mkHomToDouble]
-  rw [dif_neg h.symm, if_pos rfl, id_comp, comp_id]
+  rw [dite_eq_right h.symm, ite_eq_left rfl, id_comp, comp_id]
 
 variable {hi₀₁} in
 /-- Morphisms `K ⟶ double (𝟙 X) hi₀₁` identify with morphisms `K.X i₁ ⟶ X`. -/

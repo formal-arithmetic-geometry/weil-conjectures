@@ -66,7 +66,7 @@ private noncomputable def prefixLimitIso (s : ℕ) (A : ℕᵒᵖ ⥤ AddCommGrp
       limit.π (roosPrefixTower s A) (Opposite.op (i + 1)) ≫
         roosPrefixEval s A (i + 1) i (by omega) := by
   change Pi.lift _ ≫ _ = _
-  rw [Pi.lift_π]
+  rw [Pi.lift_comp_π]
   rfl
 
 private noncomputable def prefixLimitNatIso (s : ℕ) :
@@ -102,7 +102,7 @@ private theorem prefixLimitDifferential (A : ℕᵒᵖ ⥤ AddCommGrpCat.{u}) :
   dsimp only [roosPrefixProjection, roosPrefixFunctor]
   erw [limMap_π_assoc]
   simp only [towerTransitionEndomorphism, towerProductShift, Preadditive.sub_comp,
-    Pi.lift_π, Preadditive.comp_sub]
+    Pi.lift_comp_π, Preadditive.comp_sub]
   erw [prefixLimitIso_π_at 1 A (i + 1) i (by omega),
     prefixLimitIso_π_at_assoc 1 A (i + 1) (i + 1) (by omega)]
   ext x

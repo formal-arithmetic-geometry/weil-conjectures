@@ -92,22 +92,22 @@ theorem Etale.isIso_derivedBaseChangeMapPlus_of_forall_isIso_baseChangeHomologyM
         ((((e)^*[ModuleCat.{u + 1} Λ]).mapCochainComplexPlus.obj M).obj.X m) := fun m ↦
       have : Injective (M.obj.X m) := (L.obj.X m).2
       hI (M.obj.X m)
-    have h₁ : IsIso ((h)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnit.app
+    have h₁ : IsIso ((h)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnith.app
         (((e)^*[ModuleCat.{u + 1} Λ]).mapHomotopyCategoryPlus.obj P)) :=
       (h)_*[ModuleCat.{u + 1} Λ].isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic
         (((e)^*[ModuleCat.{u + 1} Λ]).mapCochainComplexPlus.obj M) hM
-    have h₂ : IsIso ((g)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnit.app P) := by
+    have h₂ : IsIso ((g)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnith.app P) := by
       dsimp only [P, M]
       infer_instance
     have hfac := Etale.derivedBaseChangeMapPlus_fac_app (ModuleCat.{u + 1} Λ) sq.toCommSq P
     have : IsIso (((p)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.map
-        ((g)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnit.app P) ≫
+        ((g)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnith.app P) ≫
         (Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app
           (DerivedCategory.Plus.Qh.obj P)) := by
       rw [hfac]
       infer_instance
     exact IsIso.of_isIso_comp_left (((p)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.map
-        ((g)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnit.app P)) _
+        ((g)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnith.app P)) _
   exact NatIso.isIso_of_isIso_app _
 
 section Limit

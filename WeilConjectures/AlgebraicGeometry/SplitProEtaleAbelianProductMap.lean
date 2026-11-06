@@ -194,7 +194,7 @@ private theorem sectionSheet_transpose
   funext ⟨V⟩
   simp only [Adjunction.homEquiv_unit, localizationRestrictionLowerStarAdjunction,
     Adjunction.sheafPushforwardContinuous, Adjunction.whiskerLeft_unit_app_app,
-    Adjunction.op_unit, NatTrans.op_app, MorphismProperty.Over.mapPullbackAdj_counit_app,
+    Adjunction.op_unit_app, MorphismProperty.Over.mapPullbackAdj_counit_app,
     sectionSheet, ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
     Functor.id_obj, Functor.op_obj, lowerStar_map_hom_app]
   rw [lowerStarComp_hom_app_hom_app]
@@ -416,7 +416,7 @@ theorem splitProEtaleAbelianProductMap_isIso
     intro j
     simp only [d, Category.assoc, Pi.mapIso_hom_π]
     dsimp only [q, q']
-    erw [Pi.lift_π_assoc, Pi.lift_π]
+    erw [Pi.lift_comp_π_assoc, Pi.lift_comp_π]
     simpa only [Iso.app_hom, Category.assoc] using
       canonicalSheet_is_restriction_of_comm p g (t j) (w j) N
   have : IsIso (q ≫ d.hom) := hq.symm ▸ inferInstance

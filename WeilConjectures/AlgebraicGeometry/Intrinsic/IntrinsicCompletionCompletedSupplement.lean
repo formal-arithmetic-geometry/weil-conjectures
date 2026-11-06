@@ -506,7 +506,7 @@ theorem completedKoszulLift_relation (r : ℕ) (f : Fin r → A)
     rw [Preadditive.comp_sub, Category.comp_id, sub_eq_zero]
     apply Pi.hom_ext
     intro n
-    simp only [completedKoszulProductUnit, Category.assoc, Pi.lift_π, Pi.lift_π_assoc]
+    simp only [completedKoszulProductUnit, Category.assoc, Pi.lift_comp_π, Pi.lift_comp_π_assoc]
     exact (completedKoszulTensorUnit_transition X d r f C n).symm
   simp only [CochainComplex.HomComplex.δ_zero, zero_add, Preadditive.comp_neg,
     hu, neg_zero, CochainComplex.HomComplex.Cochain.ofHom_zero]
@@ -666,7 +666,7 @@ private theorem completedProduct_shift_natural (r : ℕ) (f : Fin r → A)
   apply Pi.hom_ext
   intro n
   simp only [completedKoszulOneSubShift, completedProductMap, Preadditive.sub_comp,
-    Preadditive.comp_sub, Category.assoc, Pi.lift_π_assoc, Pi.lift_π,
+    Preadditive.comp_sub, Category.assoc, Pi.lift_comp_π_assoc, Pi.lift_comp_π,
     Category.id_comp, Category.comp_id]
   rw [completedTensor_transition_natural]
 
@@ -713,7 +713,7 @@ private theorem completedProductUnit_natural (r : ℕ) (f : Fin r → A)
   apply Pi.hom_ext
   intro m
   simp only [completedKoszulProductUnit, completedProductMap, Category.assoc,
-    Pi.lift_π, Pi.lift_π_assoc]
+    Pi.lift_comp_π, Pi.lift_comp_π_assoc]
   exact completedTensorUnit_natural X d r f α m
 
 private theorem completedTensorMap_quasiIso (r : ℕ) (f : Fin r → A)
