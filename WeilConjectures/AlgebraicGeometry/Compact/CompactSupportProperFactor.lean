@@ -121,10 +121,10 @@ private theorem inclusion_comp_inv {C D E : Type*}
     [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     (K : DerivedCategory.Plus C) :
     DerivedCategory.Plus.ι.map ((Functor.mapDerivedCategoryPlusCompIso F G).inv.app K) =
-      (Functor.mapDerivedCategoryCompIso F G).inv.app K.obj := by
+      (Functor.mapDerivedCategoryCompIso F G).hom.app K.obj := by
   change (DerivedCategory.Plus.ι.mapIso
     ((Functor.mapDerivedCategoryPlusCompIso F G).app K)).inv =
-      ((Functor.mapDerivedCategoryCompIso F G).app K.obj).inv
+      ((Functor.mapDerivedCategoryCompIso F G).symm.app K.obj).inv
   congr 1
   apply Iso.ext
   exact Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app F G K

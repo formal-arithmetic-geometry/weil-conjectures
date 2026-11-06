@@ -158,6 +158,7 @@ theorem standard_flat_single_baseChange_homology_mono
           (Classical.choose_spec
             (SingleComplexBaseChange.exists_tensorMap p r g q sq z)).2)
   have hc := singleComplexBaseChange_homology_mono p r g q sq _ hG _ hEG _ hstalk n
+  simp only [cast_eq] at hc
   let s : E.obj G ⟶ (CochainComplex.singleFunctor
       (SheafOfModules.{u} (moduleRings (pullback p g).toRingedSpace)) 0).obj
         ((Scheme.Modules.tensorPullback q).obj M) :=
