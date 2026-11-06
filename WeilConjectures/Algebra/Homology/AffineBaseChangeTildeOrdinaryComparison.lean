@@ -6,6 +6,8 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.Algebra.Homology.AffineBaseChangeTildeCoordinates
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
@@ -127,7 +129,18 @@ theorem exists_affineBaseChangeTildeOrdinaryComparison
   have hb : affineTildeRepresentativeCohomologyIso A' Cg
       ((derivedPullback (Spec.map (CommRingCat.ofHom φg'))).obj K) t i =
       affineBaseChangeTildeCohomologyIso A A' φg' K M e hc i := by
-    rfl
+    apply Iso.ext
+    simp only [affineTildeRepresentativeCohomologyIso,
+      affinePushforwardRepresentativeCohomologyIso, affineBaseChangeTildeCohomologyIso,
+      t, affineBaseChangeTildeRepresentativeIso, affineBaseChangeTildeComplexIso,
+      Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv,
+      Functor.mapIso_hom, Functor.mapIso_inv,
+      DerivedCategory.quotientCompQhIso, HomologicalComplexUpToQuasiIso.quotientCompQhIso,
+      Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_hom, Quotient.lift.isLift_inv,
+      cast_eq, Functor.map_comp,
+      Category.assoc, Category.id_comp, Category.comp_id, Cg]
+    repeat erw [CategoryTheory.Functor.map_id]
+    simp only [Category.id_comp, Category.comp_id] <;> rfl
   rw [hb] at ht
   dsimp only at heC ⊢
   rw [heC]
