@@ -378,7 +378,6 @@ open MonoidalCategory
       ((SheafOfModules.siteSheafTensorRight N).mapHomologicalComplex (.up ℤ)).obj P :=
   (singleComparisonNatural J R N).app P
 
-omit [HasSheafify J AddCommGrpCat.{u + 1}] in
 private theorem presentation_hom (M N : GS J R) :
     (SheafOfModules.tensorRightPresentation R N).hom.app M =
       (SheafOfModules.tensorObjIsoSheafification M N).hom := by
@@ -395,7 +394,6 @@ private theorem presentation_hom (M N : GS J R) :
     rfl
   exact congrArg Iso.hom (Iso.ext_inv hi)
 
-omit [HasSheafify J AddCommGrpCat.{u + 1}] in
 private theorem tensorComparison_pure (M N : GS J R) (U : Cᵒᵖ)
     (x : M.val.obj U) (y : N.val.obj U) :
     ((SheafOfModules.siteSheafTensorRightIso R N).inv.app M).val.app U
@@ -506,8 +504,7 @@ end Singleton
 
 section Assembly
 attribute [local irreducible] SheafOfModules.KFlatRoos.algebraModule
-attribute [local implicit_reducible] HomologicalComplex.asFunctor CochainComplex.singleFunctors
-  Prod.sectL
+attribute [local implicit_reducible] HomologicalComplex.asFunctor Prod.sectL
 attribute [local irreducible] CochainComplex.mapBifunctorSingle₂Iso
   SheafOfModules.siteSheafTensorRightIso PresheafOfModules.sheafificationAdjunction
   SheafOfModules.tensorObjIsoSheafification
@@ -736,6 +733,7 @@ end Assembly
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The normalized tensor identification of the section reductions, without the
 completion assertion.
 
