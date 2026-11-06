@@ -96,6 +96,55 @@ private theorem perfect_thick_property (X : Scheme.{u})
   let := hcone
   exact ⟨ObjectProperty.IsTriangulated.mk, hret⟩
 
+/-- Compact objects in the quasi-coherent derived category are perfect.
+Source: Stacks Project, Tag 09M1, converse direction of
+`perfect-proposition-compact-is-perfect`; restriction to affine opens and the
+finite-projective criterion reduce compactness to perfectness.
+(blueprint: lem-sc-derived-qcoh-compact-is-perfect)
+Proof: Use the existing perfect supported generator with empty excluded open to obtain
+an explicit generator telescope for P. Compactness factors the identity through a finite
+thick construction from that generator. Perfectness is closed under shifts, triangles
+and retracts, so the ambient thick envelope consists of perfect objects. The retract
+closure is derived from the split-triangle biproduct decomposition, and the zero object
+is a retract of the perfect generator. This route does not require comparing open models. -/
+theorem compact_isPerfect_of_isNoetherian (X : Scheme.{u}) [IsNoetherian X]
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
+    [hOpen : ∀ U : X.Opens,
+      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] :
+    let _ : HasCoproducts.{u} (schemeDerivedQCohCategory X) := derivedQCohDirectSums X
+    ∀ P : schemeDerivedQCohCategory X, IsCompactObject P → Scheme.IsPerfect X P.obj := by
+  let _ : HasCoproducts.{u} (schemeDerivedQCohCategory X) := derivedQCohDirectSums X
+  dsimp only
+  intro P hP
+  have hqc : (schemeDerivedQCohProperty X).IsTriangulated := by
+    simpa using supported_qcoh_isTriangulated X Set.univ
+  let := hqc
+  have hqciso : (schemeDerivedQCohProperty X).IsClosedUnderIsomorphisms := by
+    constructor
+    intro E F e hE n
+    exact (SheafOfModules.isQuasicoherent (moduleRings X.toRingedSpace)).prop_of_iso
+      ((DerivedCategory.homologyFunctor
+        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).mapIso e) (hE n)
+  let := hqciso
+  let (I : Type u) :
+      (schemeDerivedQCohProperty X).IsClosedUnderColimitsOfShape (Discrete I) :=
+    schemeDerivedQCohClosedUnderCoproducts X I
+  obtain ⟨G, hG, _, hbuild⟩ := supported_derived_generated_perfect X ⊥ (by simp)
+  obtain ⟨K, t, hzero, hsteps, S, ⟨hS⟩, s, q, r, hs, hT⟩ := hbuild P (by simp)
+  have hmem := compact_generator_ambient_thick (schemeDerivedQCohProperty X) G
+    (perfectObjectCompact X G hG) P hP K t hzero hsteps S hS s q r hs hT
+  obtain ⟨hperftri, hperfretract⟩ := perfect_thick_property X G.obj hG
+  let := hperftri
+  let := hperfretract
+  have hle : (ObjectProperty.singleton G.obj).triangEnvelope ≤
+      Scheme.perfectSubcategory X :=
+    (ObjectProperty.triangEnvelope_le_iff _).2 (by
+      intro E hE
+      rw [ObjectProperty.singleton_iff] at hE
+      subst E
+      exact hG)
+  exact hle P.obj hmem
+
 /-- Perfect objects on a Noetherian scheme are compact in its QCoh derived category.
 Source: Stacks Project, Tag 09M1, the perfect-to-compact implication, using
 tensor-Hom duality and preservation of coproducts.
