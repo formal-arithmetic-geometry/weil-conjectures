@@ -35,7 +35,8 @@ section
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-private noncomputable def mapHomotopySquare
+/-- Lift a commuting square of additive functors to their homotopy categories. -/
+noncomputable def mapHomotopySquare
     {C D B E : Type*} [Category C] [Category D] [Category B] [Category E]
     [Preadditive C] [Preadditive D] [Preadditive B] [Preadditive E]
     {F : C ⥤ D} {G : D ⥤ E} {R : C ⥤ B} {J : B ⥤ E}
