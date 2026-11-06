@@ -464,3 +464,27 @@
 - Completion marker: /home/ubuntu/u9/state/BZ1077.DONE.
 - No local Lean/Lake, proof placeholders, trust bypasses, heartbeat raises, or profiler probes.
 - All ucheck invocations have finished. This completion commit changes documentation only.
+
+
+# PZ034 complete
+
+- Both assigned modules, ProjectionFormula.Unit and CompletedDirectImageLimits, pass
+  together with ucheck-bump: rc=0, built=1, failed=0, 13500 jobs. Unit rebuilt in 43s.
+- Validated source commit: cef108af28a819d108a180469f2618d3ebe9436c.
+- Applied the proposed private-helper visibility change after the user's continuation;
+  singleFunctorObjUnitIso_inv retains its proposition, and its callers are all local.
+  Removed the obsolete Qh_obj_singleFunctors_obj simp entry and explicitly normalized
+  quotient comparison identities before the final reflexivity proof.
+- Thirty downstream modules were verified green in earlier batches, reaching the cap.
+  Remaining targets and their last errors are listed in the DONE record. The constant
+  reduction tower branch needs the upstream-deleted quotientProjection_isIso.
+- Preserved needed declarations and restored three helpers in their original modules.
+  Recorded 37 authorized unused-declaration deletions after caller/prune-list checks.
+- Merged origin/bump/v4.35 at 46766e3e2ce0eddba05845bd493e8a62dac45263.
+- Fix records: /home/ubuntu/u9/bz/FIXES-PZ034.md (28 PATTERN/ERROR/RULE triples).
+  All four continuation rules replay the exact Unit diff; all regexes compile.
+- Final log: /home/ubuntu/u9/bz/PZ034-batch19-full.log.
+- Completion marker: /home/ubuntu/u9/state/PZ034.DONE, superseding PZ034.BLOCKED.
+- Both assigned sources are free of sorry/admit/axiom/native_decide and trust bypasses.
+  No local Lean/Lake, heartbeat raises, or profiler probes. Every ucheck has finished.
+- This final commit changes documentation only; Lean sources match the green build.
