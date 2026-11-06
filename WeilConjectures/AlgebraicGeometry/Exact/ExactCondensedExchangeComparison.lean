@@ -317,7 +317,7 @@ private theorem total_forward_cube
           ((CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ p).hom.app M) =
       (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ (v ≫ p)).hom.app M ≫
         (exactComp Λ v p).hom.app M := by
-    simpa only [exactComp_hom, Iso.trans_hom, NatTrans.comp_app, Category.assoc] using
+    simpa only [exactComp_hom, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc] using
       total_comp_normalization Λ v p M
   rw [totalSquare_hom]
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
