@@ -190,6 +190,101 @@ lemma _root_.AlgebraicGeometry.Etale.plus_derivedTensor_leftDerivedUpperStar
     (Etale.torAmplitudeIn_leftDerivedUpperStar A g a b hL)
   exact ((_root_.DerivedCategory.exists_homologyConcentratedIn_iff_bounded _).1 ⟨_, _, hMP⟩).1
 
+variable {A} in
+/-- **The pro-étale projection formula from the étale one.** Let `c = (X ⟶[i] Z ⟶[g] Y)` be a
+compactification of `f`, and let `K ≅ ν^* K₀`, `L ≅ ν^* L₀` be pro-étale complexes of étale
+origin, with `K₀` bounded and `i_! K₀ ⊗ᴸ Lg^* L₀` bounded below. If the étale projection map of
+`Rg_*` is an isomorphism at `(i_! K₀, L₀)`, the pro-étale projection formula holds for `c` at
+`(K, L)`: the projection map is the one of `Rg_*` at `(i_! K, L)` followed by isomorphisms,
+`i_! ν^* K₀ ≅ ν^* i_! K₀`, and `ν^*` carries the étale projection map of `Rg_*` to the
+pro-étale one
+(`AlgebraicGeometry.ProEtale.isIso_rightDerivedLowerStarProjectionMap_app_app_leftDerived`). -/
+theorem hasProjectionFormulaOfCompactification_of_comparison [Etale.UpperStarPreservesFlat A]
+    [∀ X : Scheme.{u}, (ν^*(X)[A]).PreservesFlat] {f : X ⟶ Y} (c : Compactification f)
+    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
+    {L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)}
+    {K₀ : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
+    {L₀ : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)}
+    (eK : D(ν^*(X)[A]).obj K₀ ≅ K) (eL : D(ν^*(Y)[A]).obj L₀ ≅ L)
+    (hK₀ : _root_.DerivedCategory.TStructure.t.bounded K₀)
+    (hML : _root_.DerivedCategory.TStructure.t.plus
+      (((Etale.derivedTensor A c.Z).obj (D(Etale.openImmersionLowerShriek A c.i).obj K₀)).obj
+        ((L(Etale.upperStar A c.g)).obj L₀)))
+    (hPF : IsIso (((Etale.rightDerivedLowerStarProjectionMap A c.g).app
+      (D(Etale.openImmersionLowerShriek A c.i).obj K₀)).app L₀)) :
+    HasProjectionFormulaOfCompactification A c K L := by
+  rw [HasProjectionFormulaOfCompactification, projectionMapOfCompactification_app_app]
+  let M₀ := D(Etale.openImmersionLowerShriek A c.i).obj K₀
+  have hM₀ : _root_.DerivedCategory.TStructure.t.plus M₀ :=
+    ((Etale.openImmersionLowerShriek A c.i).bounded_mapDerivedCategory_obj hK₀).1
+  -- `i_! K ≅ ν^* M₀` and `L ≅ ν^* L₀`
+  let eM : D(ProEtale.openImmersionLowerShriek A c.i).obj K ≅ L(ν^*(c.Z)[A]).obj M₀ :=
+    D(ProEtale.openImmersionLowerShriek A c.i).mapIso eK.symm ≪≫
+      (Functor.mapDerivedCategoryCompIso _ _ ≪≫
+        Functor.mapDerivedCategoryNatIso
+          (openImmersionLowerShriekComparisonUpperStarIso A c.i).symm ≪≫
+        (Functor.mapDerivedCategoryCompIso _ _).symm).app K₀ ≪≫
+      ((ν^*(c.Z)[A]).leftDerivedFunctorIsoMapDerivedCategory.app M₀).symm
+  let eL' : L ≅ L(ν^*(Y)[A]).obj L₀ :=
+    eL.symm ≪≫ ((ν^*(Y)[A]).leftDerivedFunctorIsoMapDerivedCategory.app L₀).symm
+  have := isIso_rightDerivedLowerStarProjectionMap_app_app_leftDerived A c.g M₀ L₀ hM₀ hML
+  have := NatTrans.isIso_app_app_of_iso
+    (rightDerivedLowerStarProjectionMap A c.g) eM.symm eL'.symm
+  infer_instance
+
+end ProEtale
+
+end AlgebraicGeometry
+
+namespace AlgebraicGeometry.ProEtale
+
+open Scheme
+
+variable (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}}
+
+/-- The projection formula of `sk-thm-sf-pf-proetale` for `Rf_!` computed with an arbitrary
+compactification `c` of `f`: for a finite ring `Λ` and `K`, `L` bounded constructible of finite Tor
+amplitude, the projection map `PF_c : (Rf_!(c) K) ⊗ᴸ L ⟶ Rf_!(c)(K ⊗ᴸ Lf^* L)` is an isomorphism.
+
+Bounded constructibility on the pro-étale site is étale origin, so `K ≅ ν^* K₀` and
+`L ≅ ν^* L₀` for étale complexes `K₀` and `L₀`. For the compactification `X ⟶[i] Z ⟶[g] Y` the
+projection map is the one of `Rg_*` at `(i_! K, L)` followed by isomorphisms, and
+`i_! ν^* K₀ ≅ ν^* i_! K₀`. The comparison `ν^*` carries the étale projection map of `Rg_*` to
+the pro-étale one
+(`AlgebraicGeometry.ProEtale.isIso_rightDerivedLowerStarProjectionMap_app_app_leftDerived`),
+and the étale projection formula for the proper `g` at finite coefficients is
+`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_of_finite`. The finite Tor
+amplitude of `L` makes `i_! K₀ ⊗ᴸ Lg^* L₀` bounded below, where `ν^*` commutes with `Rg_*`.
+
+Only the bounded constructibility of `K` is used, as in the pro-étale half of blueprint
+`lem-weil-finite-compact-projection-formula`. -/
+theorem hasProjectionFormulaOfCompactification_of_boundedConstructible [Finite Λ] {f : X ⟶ Y}
+    (c : Compactification f)
+    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
+    {L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))}
+    (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K)
+    (hL : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y L) :
+    HasProjectionFormulaOfCompactification (ModuleCat.{u + 1} Λ) c K L := by
+  have hKb := hK.bounded
+  obtain ⟨K₀, hK₀, ⟨eK⟩⟩ := hK
+  obtain ⟨L₀, -, ⟨eL⟩⟩ := hL.1
+  obtain ⟨a, b, hLt⟩ := hL.2
+  -- `i_! K₀ ⊗ᴸ Lg^* L₀` is bounded below, since its pro-étale realization `i_! K ⊗ᴸ Lg^* L` is
+  have hML := plus_derivedTensor_leftDerivedUpperStar_of_comparison c.g
+    (D(ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) c.i).mapIso eK.symm ≪≫
+      (Functor.mapDerivedCategoryCompIso _ _ ≪≫
+        Functor.mapDerivedCategoryNatIso
+          (openImmersionLowerShriekComparisonUpperStarIso (ModuleCat.{u + 1} Λ) c.i).symm ≪≫
+        (Functor.mapDerivedCategoryCompIso _ _).symm).app K₀ ≪≫
+      ((ν^*(c.Z)[ModuleCat.{u + 1} Λ]).leftDerivedFunctorIsoMapDerivedCategory.app _).symm)
+    (eL.symm ≪≫
+      ((ν^*(Y)[ModuleCat.{u + 1} Λ]).leftDerivedFunctorIsoMapDerivedCategory.app L₀).symm)
+    ((ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) c.i).bounded_mapDerivedCategory_obj
+      hKb) hLt
+  -- the étale projection formula for the proper `g`
+  have := Etale.isIso_rightDerivedLowerStarProjectionMap_of_finite Λ c.g
+  exact hasProjectionFormulaOfCompactification_of_comparison c eK eL hK₀.1 hML inferInstance
+
 /-- The pro-étale projection formula at a finite coefficient stage for `K` bounded constructible
 (of étale origin) and `L` in `Dctf`, computed with the chosen compactification of `f`. -/
 theorem hasProjectionFormula_of_boundedConstructible [Finite Λ] (f : X ⟶ Y)
@@ -202,21 +297,4 @@ theorem hasProjectionFormula_of_boundedConstructible [Finite Λ] (f : X ⟶ Y)
   hasProjectionFormulaOfCompactification_of_boundedConstructible Λ
     (HasCompactification.compactification f) hK hL
 
-/-- Blueprint `lem-weil-finite-compact-projection-formula`: Finite-coefficient compact-support
-projection formula.
-
-Let `Λ` be a finite coefficient ring and `f : X ⟶ Y` a morphism admitting a compactification.
-On the small étale sites, for `K ∈ Dᵇc(X_ét, Λ)` and `L ∈ Dᵇc(Y_ét, Λ)` of finite Tor amplitude,
-the projection transformation `Rf_! K ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^* L)` is an isomorphism; and the same
-holds on the small pro-étale sites for the pro-étale realizations, i.e. for `K` bounded
-constructible (of étale origin) and `L` in `Dctf(Y_proét, Λ)`. Naturality in `K` and `L` holds
-because the projection map is a natural transformation of bifunctors
-(`AlgebraicGeometry.Etale.projectionMap`, `AlgebraicGeometry.ProEtale.projectionMap`).
-
-The étale half is `AlgebraicGeometry.Etale.hasProjectionFormula_of_finite`, the pro-étale half
-`AlgebraicGeometry.ProEtale.hasProjectionFormula_of_boundedConstructible`, transported along
-the comparison `ν^*`. -/
-
-end ProEtale
-
-end AlgebraicGeometry
+end AlgebraicGeometry.ProEtale
