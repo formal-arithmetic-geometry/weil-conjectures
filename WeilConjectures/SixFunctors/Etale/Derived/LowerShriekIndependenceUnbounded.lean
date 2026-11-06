@@ -91,7 +91,7 @@ noncomputable def refinementLowerShriekBaseChangeDerivedIso
     D((c.i)_!open[A]) ≅ D((d.i)_!open[A]) ⋙ D((r.hom)^*[A]) :=
   haveI := r.isIso_openImmersionLowerShriekBaseChange A hcart
   Functor.mapDerivedCategoryNatIso (asIso (r.openImmersionLowerShriekBaseChange A)) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The comparison `Rf_!(d)[A] ⟶ Rf_!(c)[A]` of the unbounded derived lower shrieks attached
 to two compactifications `c`, `d` of `f : X ⟶ Y` linked by a refinement `r : c.Refinement d`
@@ -167,7 +167,7 @@ theorem isIso_mapDerivedUpperStarLowerStarAdjunction_unit_app_openImmersionLower
         ((leftDerivedUpperStarIsoMapDerivedCategory _ _).app N ≪≫
           ((Functor.mapDerivedCategoryNatIso (Etale.upperStarComp _
             (pullback.fst r.hom d.i.closedComplement) r.hom) ≪≫
-            Functor.mapDerivedCategoryCompIso _ _).app _).symm)
+            (Functor.mapDerivedCategoryCompIso _ _).symm).app _).symm)
       refine isZero_mapDerivedCategoryUpperStar_obj_openImmersionLowerShriek_of_disjoint_range _
         d.i _ (hdisj.mono_left ?_) K
       rw [pullback.condition, Scheme.Hom.comp_base, TopCat.coe_comp]

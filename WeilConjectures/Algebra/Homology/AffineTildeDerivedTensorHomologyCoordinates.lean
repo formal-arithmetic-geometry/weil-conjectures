@@ -6,6 +6,8 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.Algebra.Homology.AffineTildeDerivedTensorMate
 import WeilConjectures.Algebra.Homology.AffineTildePushforwardHomologyFactorization
 import WeilConjectures.Algebra.Homology.AffineTildeCoefficientPushforwardHomologyCoordinates
