@@ -83,11 +83,11 @@ private theorem structure_fac
           (((forget F).mapHomologicalComplex (.up ℤ)).obj K) ≫
         DerivedCategory.Q.map
           ((NatTrans.mapHomologicalComplex (strNatIso F).hom (.up ℤ)).app K) := by
-  change ((Functor.mapDerivedCategoryCompIso (forget F) F).inv.app _ ≫
+  change ((Functor.mapDerivedCategoryCompIso (forget F) F).hom.app _ ≫
       (Functor.mapDerivedCategoryNatIso (strNatIso F)).hom.app _) ≫ _ = _
   rw [Category.assoc, Functor.mapDerivedCategoryNatIso_fac]
   rw [← Functor.mapDerivedCategoryCompIso_hom_app_factors (forget F) F K]
-  simp only [← Category.assoc, Iso.inv_hom_id_app, Category.id_comp]
+  simp only [← Category.assoc, Iso.hom_inv_id_app, Category.id_comp]
 
 private theorem square_fac
     {A B E H : Type*} [Category A] [Category B] [Category E] [Category H]
@@ -112,7 +112,7 @@ private theorem square_fac
   rw [Functor.mapDerivedCategoryCompIso_hom_app_factors,
     Functor.mapDerivedCategoryNatIso_fac]
   rw [← Functor.mapDerivedCategoryCompIso_hom_app_factors a b K]
-  simp only [← Category.assoc, Iso.inv_hom_id_app, Category.id_comp]
+  simp only [← Category.assoc, Iso.hom_inv_id_app, Category.id_comp]
 
 private def actionComparison :
     L.mapDerivedCategory ⋙ G.mapDerivedCategory ≅
