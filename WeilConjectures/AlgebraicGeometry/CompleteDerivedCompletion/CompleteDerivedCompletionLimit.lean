@@ -158,6 +158,7 @@ theorem rlim_isDerivedLimit (T : Scheme.{u}) :
   trace "PF180 rlim: generic limit"
   refine isDerivedLimit_of_iso hL ?_
   trace "PF180 rlim: transport goal"
+  have : HasLimit I.asFunctor := ⟨⟨c, hc⟩⟩
   let e₁ : c.pt ≅ limit I.asFunctor := hc.conePointUniqueUpToIso (limit.isLimit _)
   trace "PF180 rlim: limit cone"
   let e₂ : limit I.asFunctor ≅ (ExactProductsRoos.ordinary (B := A)).obj I :=
