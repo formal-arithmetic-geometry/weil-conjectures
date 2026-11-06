@@ -423,3 +423,16 @@
 - No local Lean/Lake, proof placeholders, trust bypasses, declaration deletions,
   profiler probes, or heartbeat changes. Both rewrite rules replay the exact diff.
 - All ucheck invocations finished. This final commit changes documentation only.
+
+
+# BZ1064 in progress
+
+- Branch: u9/BZ1064; initial commit dfaed262b6fc1850faba3b46955a11d3225a1e86.
+- The user instructed continuation after the exact four-statement compositor proposal.
+  Applied that API-direction migration and corresponding proof-local compositor/cancellation
+  updates, preserving the intended comparison paths under Mathlib b63f6e8a.
+- Baseline ucheck-bump reproduced 10 errors; first repair build is next.
+- Direct importer: ComparisonSquareTransport; continue downstream after the leaf is green,
+  respecting the separately owned Etale normalization (BZ1065).
+- Fix records and baseline diagnostics: /home/ubuntu/u9/bz/FIXES-BZ1064.md.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
