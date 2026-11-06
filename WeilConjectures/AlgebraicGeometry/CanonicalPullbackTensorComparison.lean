@@ -195,11 +195,11 @@ def IsCanonicalPullbackTensorComparison {T X : Scheme.{uTC}} (g : T ⟶ X)
             (curriedTensor
               (SheafOfModules.{uTC} (moduleRings T.toRingedSpace))) (.up ℤ) p q n h) ∧
       (derivedPullback g).map (pullbackTensorModelMap X P N) ≫
-          (SingleComplexBaseChange.counit g).app
-            ((HomotopyCategory.quotient _ (.up ℤ)).obj (pullbackTensorTotal X P N)) ≫
+          cast (by rfl) ((SingleComplexBaseChange.counit g).app
+            ((HomotopyCategory.quotient _ (.up ℤ)).obj (pullbackTensorTotal X P N))) ≫
           DerivedCategory.Q.map φ.hom =
         τ (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj N) ≫
-          ((SingleComplexBaseChange.counit g).app
+          cast (by rfl) ((SingleComplexBaseChange.counit g).app
               ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ⊗ₘ
             (SingleComplexBaseChange.counit g).app
               ((HomotopyCategory.quotient _ (.up ℤ)).obj N)) ≫
@@ -436,7 +436,7 @@ theorem IsCanonicalPullbackTensorComparison.unique {T X : Scheme.{uTC}} {g : T �
         pullbackTensorModelMap T
           (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj P)
           (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj N))).1
-    rw [← heq, ← heq', hhom]
+    erw [← heq, ← heq', hhom]
   funext E K
   obtain ⟨c⟩ := SingleComplexBaseChange.nonempty_coordinates g E
     ((derivedPullback g).obj E) (𝟙 _)

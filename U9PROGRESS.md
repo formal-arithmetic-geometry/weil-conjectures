@@ -273,3 +273,17 @@
 - Next: ucheck-bump on the assigned module and both direct importers, then downstream.
 - Fix patterns and whole-tree inventories: /home/ubuntu/u9/bz/FIXES-BZ885.md.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+
+# BZ908 in progress
+
+- Branch: u9/BZ908; baseline 40e255942.
+- The user instructed continuation after the explicit two-cast proposal.
+- Applied the two `cast (by rfl)` wrappers in IsCanonicalPullbackTensorComparison,
+  preserving the existing maps while restoring hidden Qh/Q endpoint conversions.
+- Localization imports resolve the proof-local mismatch. The uniqueness proof uses
+  `erw` to rewrite through the reflexive casts and semireducible category aliases.
+- Next: remote validation, then the 19 direct importers and further downstream
+  modules up to the brief's limit of 30 extra modules.
+- Fix patterns: /home/ubuntu/u9/bz/FIXES-BZ908.md.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
