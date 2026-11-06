@@ -44,6 +44,10 @@ attribute [local irreducible] rationalDerivedPullback rationalDerivedTensor
   rationalPullbackScalarComparison rationalTensorScalarComparison
   commonStagePullbackComparison commonStageTensorComparison operationStageTransitionIso
 
+-- Match the transported structures on the small coefficient models.
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
 /-- The mixed tensor square identifies the class of the compositum representative
 with its class at every larger finite field.
 Source: def-pur-section-invariant, common-stage subargument, steps 3--5
