@@ -74,7 +74,8 @@ private theorem deriveTargetStep
     (mapDerivedCategoryCompIso R (S ⋙ H)).hom ≫
         (mapDerivedCategoryNatIso (isoWhiskerRight c.symm H)).hom ≫ k₀.hom =
       whiskerLeft R.mapDerivedCategory k₁.hom ≫
-        whiskerRight (mapDerivedCategoryNatIso c ≪≫ (mapDerivedCategoryCompIso R S).symm).inv J := by
+        whiskerRight (mapDerivedCategoryNatIso c ≪≫
+          (mapDerivedCategoryCompIso R S).symm).inv J := by
   dsimp only
   have hw := mapDerivedCategoryNatIso_isoWhiskerRight c.symm H
   rw [mapDerivedCategoryNatIso_symm] at hw
