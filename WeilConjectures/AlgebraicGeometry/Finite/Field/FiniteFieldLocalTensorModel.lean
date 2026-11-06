@@ -253,12 +253,16 @@ private noncomputable def constantExtensionIso
 private noncomputable def pbcTensorIso
     (Y : Scheme.{u}) {A S : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}}
     (a : A ⟶ S) : pbcExtend a ≅ tensorFunctor a := by
-  let h := (pbcExtensionExistence a).choose_spec.choose
+  let h : ∀ M, (pbcExtend a).obj M = changeOfRings a M :=
+    (pbcExtensionExistence a).choose_spec.choose
   refine NatIso.ofComponents (fun M ↦ eqToIso (h M)) ?_
   intro M N f
   change (pbcExtend a).map f ≫ eqToHom (h N) =
     eqToHom (h M) ≫ changeOfRingsHom a M f
-  rw [(pbcExtensionExistence a).choose_spec.choose_spec.choose f]
+  have hm : (pbcExtend a).map f =
+      eqToHom (h M) ≫ changeOfRingsHom a M f ≫ eqToHom (h N).symm :=
+    (pbcExtensionExistence a).choose_spec.choose_spec.choose f
+  rw [hm]
   simp only [Category.assoc, eqToHom_trans, eqToHom_refl, Category.comp_id]
 
 end FiniteFieldTensor
