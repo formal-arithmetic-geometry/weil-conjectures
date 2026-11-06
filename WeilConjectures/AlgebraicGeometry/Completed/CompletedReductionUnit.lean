@@ -258,7 +258,7 @@ theorem completedReductionTowerUnit_exists (T : Scheme.{u}) :
       HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift,
       Functor.mapHomotopyCategoryFactors, NatIso.ofComponents, Iso.refl]
     erw [CategoryTheory.Functor.map_id, Category.id_comp,
-      CategoryTheory.Functor.map_id, Category.comp_id, Category.comp_id]
+      CategoryTheory.Functor.map_id, Category.comp_id]
     exact hτ P hP
   · intro τ' hτ'
     apply huniq τ'
@@ -268,7 +268,7 @@ theorem completedReductionTowerUnit_exists (T : Scheme.{u}) :
       HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift,
       Functor.mapHomotopyCategoryFactors, NatIso.ofComponents, Iso.refl] at h
     erw [CategoryTheory.Functor.map_id, Category.id_comp,
-      CategoryTheory.Functor.map_id, Category.comp_id, Category.comp_id] at h
+      CategoryTheory.Functor.map_id, Category.comp_id] at h
     exact h
 
 /-- The canonical strict derived reduction unit ΔK → K_bullet.
