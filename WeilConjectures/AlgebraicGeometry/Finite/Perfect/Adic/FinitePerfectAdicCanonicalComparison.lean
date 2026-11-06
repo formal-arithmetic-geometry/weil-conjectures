@@ -25,6 +25,10 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectAdicAlgebraDerived
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
+local instance finitePerfectAdicCanonicalComparisonCategory
+    (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A) :
+    Category.{t + 2} (DerivedCategory (CompletedAdicModules X d)) := inferInstance
+
 private theorem tensorModule_retract
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (M : ModuleCat.{t} A) [Module.Projective A M] [Module.Finite A M] :
