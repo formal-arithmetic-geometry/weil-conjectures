@@ -31,8 +31,6 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 
 namespace AlgebraicGeometry.Etale.FiniteFieldDescent
 
-attribute [local semireducible] scheme pull
-
 variable {K : Type u} [Field K] {Y : Scheme.{u}} (f : Y ⟶ Spec (.of K))
 
 /-- The canonical compositor for two successive field-stage pullbacks.
@@ -74,6 +72,8 @@ instance finiteStageIndexSemilatticeSup {L : Type u} [Field L] [Algebra K L]
     let _ := hy.2
     exact ⟨hx.1.trans le_sup_left, inferInstance⟩)
 
+set_option maxHeartbeats 400000 in
+-- Lean 4.35 elaboration uses 308464 heartbeats for the concrete finite-stage pullbacks.
 /-- The canonical transition on finite-stage Hom sets.
 Source: Stacks Lemma 09YU (3), blueprint `lem-sfb-finite-etale-constructible-hom-descent`. -/
 noncomputable def finiteStageHomTransition {L : Type u} [Field L] [Algebra K L]
@@ -138,8 +138,6 @@ end AlgebraicGeometry.Etale.FiniteFieldDescent
 
 namespace AlgebraicGeometry.Etale.FiniteFieldDescent
 
-attribute [local semireducible] scheme pull
-
 variable {K : Type u} [Field K] {Y : Scheme.{u}} (f : Y ⟶ Spec (.of K))
 
 private theorem finiteStageHomLeg_map {L : Type u} [Field L] [Algebra K L]
@@ -192,6 +190,8 @@ theorem finiteEtaleConstructibleHomContinuity
     ∃ (H : FiniteStageHomSystem f Λ P₀ Q₀), Nonempty (IsColimit H.c) := by
   sorry
 
+set_option maxHeartbeats 800000 in
+-- Lean 4.35 elaboration uses 531439 heartbeats for the four descent clauses.
 /-- Finite-stage descent and Hom continuity. The first three clauses are essential surjectivity,
 descent of morphisms, and eventual equality; the last is the filtered-colimit Hom comparison.
 Proof steps: (1) finite intermediate fields give a filtered affine finite-etale system; (2) bounded
