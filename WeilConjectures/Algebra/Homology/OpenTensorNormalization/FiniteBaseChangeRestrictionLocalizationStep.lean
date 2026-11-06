@@ -115,7 +115,7 @@ private theorem exact_square_model
     Functor.mapDerivedCategoryCompIso_hom_app_factors,
     Functor.mapDerivedCategoryNatIso_fac]
   rw [← Functor.mapDerivedCategoryCompIso_hom_app_factors F V P]
-  simp only [← Category.assoc, Iso.inv_hom_id_app, Category.id_comp]
+  simp only [← Category.assoc, Iso.hom_inv_id_app, Category.id_comp]
 
 private theorem categorical_localization_square
     {C D B E C₀ D₀ B₀ E₀ T V W Z T₀ V₀ W₀ Z₀ : Type*}

@@ -65,7 +65,11 @@ def affineBaseChangeIntoPullback
     HomologicalComplex.homologyMap
       (SingleComplexBaseChange.tensorStalkIso f f' g g' sq p P).hom i ≫
     (affineRepresentativeStalkIso X' p T i).inv ≫
-    s.map (H.map (inv ((SingleComplexBaseChange.counit g').app
-      ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫ (derivedPullback g').map e.hom))
+    s.map (H.map ((DerivedCategory.quotientCompQhIso
+      (SheafOfModules.{u} (moduleRings X'.toRingedSpace))).inv.app T ≫
+      inv ((SingleComplexBaseChange.counit g').app
+        ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫
+      (derivedPullback g').map ((DerivedCategory.quotientCompQhIso
+        (SheafOfModules.{u} (moduleRings X.toRingedSpace))).hom.app P ≫ e.hom)))
 
 end AlgebraicGeometry

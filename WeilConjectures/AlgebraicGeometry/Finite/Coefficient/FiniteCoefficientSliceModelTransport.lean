@@ -319,7 +319,7 @@ private def restrictionCoordinatesIso [IsIso φ] (W : X.Etale)
     (O.mapDerivedCategory.mapIso (DerivedCategory.Q.objObjPreimageIso K)).symm ≪≫
       O.mapDerivedCategoryFactors.app (DerivedCategory.Q.objPreimage K)
   exact E.mapDerivedCategory.mapIso e.symm ≪≫
-    ((Functor.mapDerivedCategoryCompIso O E).app K).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso O E).app K ≪≫
       (Functor.mapDerivedCategoryNatIso (sliceCoordinatesSquare X B R φ W)).app K
 
 private def globalScalarIso :
@@ -434,7 +434,7 @@ private theorem constantModelIso [IsIso φ]
       constantSheaf (ProEt.topology W.left) (ModuleCat.{t + 1} (ULift.{t + 1} B)) :=
     Functor.isoWhiskerRight (koszulConstantScalarIso X B) S ≪≫
       constantLocalizationIso X B W
-  exact ⟨(Functor.mapDerivedCategoryCompIso U (H ⋙ S)).app _ ≪≫
+  exact ⟨(Functor.mapDerivedCategoryCompIso U (H ⋙ S)).symm.app _ ≪≫
     (H ⋙ S).mapDerivedCategory.mapIso
       ((eUnit.app (DerivedCategory.Q.obj (finiteModelConstantComplex X B P))).symm) ≪≫
     (H ⋙ S).mapDerivedCategoryFactors.app (finiteModelConstantComplex X B P) ≪≫
@@ -515,7 +515,7 @@ theorem finiteCoefficient_slice_model_transport
       (ULift.ringEquiv : ULift.{t + 1} B ≃+* B).toRingHom).mapHomologicalComplex (.up ℤ)).obj P
   let ecomp := Functor.mapDerivedCategoryNatIso
     (SliceModelTransportProof.fixedRestrictionComp X B R φ V W g) ≪≫
-      Functor.mapDerivedCategoryCompIso (finiteCoefficientSliceRestriction X B R φ V) G
+      (Functor.mapDerivedCategoryCompIso (finiteCoefficientSliceRestriction X B R φ V) G).symm
   let eorigin : (finiteCoefficientSliceRestriction X B R φ W).mapDerivedCategory.obj K ≅
       N.mapDerivedCategory.obj
         ((AlgebraicGeometry.Etale.upperStar A g.left).mapDerivedCategory.obj L) :=

@@ -109,7 +109,11 @@ private theorem liftedDerivedScalarRepresentative
     ModuleCat.scalarExtensionCounit_isIso_of_kFlat q R
       (ConstantScalarRealization.acyclic_tensor_of_categorical_kFlat R hRcat) L ε hL
   let r : L.obj (DerivedCategory.Q.obj R) ≅ DerivedCategory.Q.obj Rq :=
-    asIso (ε.app ((HomotopyCategory.quotient _ _).obj R))
+    L.mapIso ((DerivedCategory.quotientCompQhIso _).symm.app R) ≪≫
+      asIso (ε.app ((HomotopyCategory.quotient _ _).obj R)) ≪≫
+      DerivedCategory.Qh.mapIso
+        (((ModuleCat.extendScalars q).mapHomotopyCategoryFactors (.up ℤ)).app R) ≪≫
+      (DerivedCategory.quotientCompQhIso _).app Rq
   have : IsIso (ConstantScalarRealization.moduleRepresentative q' R') :=
     ConstantScalarRealization.moduleRepresentative_isIso q' R' hRup
   let a : DerivedCategory.Q.obj R ≅ DerivedCategory.Q.obj P :=

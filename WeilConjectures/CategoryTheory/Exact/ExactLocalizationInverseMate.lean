@@ -89,6 +89,56 @@ private lemma exact_hom_fac
     (R.mapDerivedCategoryFactors.inv.naturality f).symm
 
 set_option backward.defeqAttrib.useBackward true in
+/-- The standard derived square, conjugated by its cochain factorizations. -/
+private lemma square_fac
+    {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄}
+    [Category.{v₁} A] [Category.{v₂} B] [Category.{v₃} C] [Category.{v₄} D]
+    [Abelian A] [Abelian B] [Abelian C] [Abelian D]
+    [HasDerivedCategory.{w₁} A] [HasDerivedCategory.{w₂} B]
+    [HasDerivedCategory.{w₃} C] [HasDerivedCategory.{w₄} D]
+    {F₁ : A ⥤ B} {F₂ : B ⥤ D} {G₁ : A ⥤ C} {G₂ : C ⥤ D}
+    [F₁.Additive] [F₂.Additive] [G₁.Additive] [G₂.Additive]
+    [PreservesFiniteLimits F₁] [PreservesFiniteColimits F₁]
+    [PreservesFiniteLimits F₂] [PreservesFiniteColimits F₂]
+    [PreservesFiniteLimits G₁] [PreservesFiniteColimits G₁]
+    [PreservesFiniteLimits G₂] [PreservesFiniteColimits G₂]
+    (e : F₁ ⋙ F₂ ≅ G₁ ⋙ G₂) (K : CochainComplex A ℤ) :
+    F₂.mapDerivedCategoryFactors.inv.app ((F₁.mapHomologicalComplex (.up ℤ)).obj K) ≫
+        F₂.mapDerivedCategory.map (F₁.mapDerivedCategoryFactors.inv.app K) ≫
+        (Functor.mapDerivedCategorySquareIso e).hom.app (DerivedCategory.Q.obj K) ≫
+        G₂.mapDerivedCategory.map (G₁.mapDerivedCategoryFactors.hom.app K) ≫
+        G₂.mapDerivedCategoryFactors.hom.app ((G₁.mapHomologicalComplex (.up ℤ)).obj K) =
+      DerivedCategory.Q.map ((Functor.mapHomologicalComplexCompIso
+          (Iso.refl (F₁ ⋙ F₂)) (.up ℤ)).hom.app K ≫
+        (NatTrans.mapHomologicalComplex e.hom (.up ℤ)).app K ≫
+        (Functor.mapHomologicalComplexCompIso (Iso.refl (G₁ ⋙ G₂)) (.up ℤ)).inv.app K) := by
+  have hF := Functor.mapDerivedCategoryCompIso_fac F₁ F₂ K
+  have hG := Functor.mapDerivedCategoryCompIso_fac G₁ G₂ K
+  have he := Functor.mapDerivedCategoryNatIso_fac e K
+  have hG' : (Functor.mapDerivedCategoryCompIso G₁ G₂).inv.app (DerivedCategory.Q.obj K) ≫
+      G₂.mapDerivedCategory.map (G₁.mapDerivedCategoryFactors.hom.app K) ≫
+      G₂.mapDerivedCategoryFactors.hom.app ((G₁.mapHomologicalComplex (.up ℤ)).obj K) =
+      (G₁ ⋙ G₂).mapDerivedCategoryFactors.hom.app K ≫ DerivedCategory.Q.map
+        ((Functor.mapHomologicalComplexCompIso (Iso.refl (G₁ ⋙ G₂)) (.up ℤ)).inv.app K) := by
+    rw [← hG]
+    simp only [Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app]
+    erw [CategoryTheory.Functor.map_id, Category.comp_id]
+  have hF' : F₂.mapDerivedCategoryFactors.inv.app ((F₁.mapHomologicalComplex (.up ℤ)).obj K) ≫
+      F₂.mapDerivedCategory.map (F₁.mapDerivedCategoryFactors.inv.app K) ≫
+      (Functor.mapDerivedCategoryCompIso F₁ F₂).hom.app (DerivedCategory.Q.obj K) =
+      DerivedCategory.Q.map
+        ((Functor.mapHomologicalComplexCompIso (Iso.refl (F₁ ⋙ F₂)) (.up ℤ)).hom.app K) ≫
+        (F₁ ⋙ F₂).mapDerivedCategoryFactors.inv.app K := by
+    rw [← cancel_mono ((F₁ ⋙ F₂).mapDerivedCategoryFactors.hom.app K)]
+    simp only [Category.assoc, Iso.inv_hom_id_app]
+    rw [← hF, Iso.hom_inv_id_app_assoc, ← Functor.map_comp_assoc, Iso.inv_hom_id_app]
+    erw [CategoryTheory.Functor.map_id, Category.id_comp, Iso.inv_hom_id_app_assoc]
+    exact (Category.comp_id _).symm
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
+  rw [reassoc_of% hF', hG', reassoc_of% he, Iso.inv_hom_id_app_assoc]
+  simp only [Functor.map_comp]
+
+set_option backward.defeqAttrib.useBackward true in
 /-- Localization preserves the unit equation characterizing a pair of mates. -/
 private lemma mate_unit_Q
     {A : Type u₁} {B : Type u₂} {D : Type u₃} {F : Type u₄}
@@ -303,6 +353,5 @@ theorem exact_localization_inverse_mate
   refine ⟨?_, heq, exact_hom_fac a₁, exact_hom_fac a₂⟩
   rw [heq]
   infer_instance
-
 
 end CategoryTheory

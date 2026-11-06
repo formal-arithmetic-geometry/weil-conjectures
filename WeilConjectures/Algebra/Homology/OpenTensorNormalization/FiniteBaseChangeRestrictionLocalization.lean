@@ -72,7 +72,6 @@ namespace SheafOfModules.OpenTensorNormalization
 
 set_option synthInstance.maxSize 4096
 set_option maxRecDepth 2048
-attribute [local implicit_reducible] CategoryTheory.Functor.mapHomologicalComplex
 
 private theorem resolving_of_iso {X : Scheme.{u}}
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1})

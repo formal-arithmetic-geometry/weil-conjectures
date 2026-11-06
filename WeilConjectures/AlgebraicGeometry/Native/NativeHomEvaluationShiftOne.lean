@@ -120,6 +120,23 @@ private lemma uncurry_nativeHom_comparison
   rw [hμ]
   congr 1
 
+private lemma nativeHom_comparison_transport
+    {C : Type d} [Category.{u + 1} C] [Abelian C]
+    [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C]
+    [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
+    [Abelian.HasFunctorialFlatResolution C] (P I : CochainComplex C ℤ) :
+    (DerivedCategory.quotientCompQhIso C).inv.app (CochainComplex.internalHomObj P I) ≫
+        DerivedCategory.qhInternalHomToIhom P I ≫
+        (ihom (DerivedCategory.Qh.obj ((HomotopyCategory.quotient C (.up ℤ)).obj P))).map
+          ((DerivedCategory.quotientCompQhIso C).hom.app I) ≫
+        (MonoidalClosed.pre ((DerivedCategory.quotientCompQhIso C).inv.app P)).app
+          (DerivedCategory.Q.obj I) = DerivedCategory.qhInternalHomToIhom P I := by
+  change (𝟙 _ ≫ DerivedCategory.qhInternalHomToIhom P I ≫
+    (ihom (DerivedCategory.Q.obj P)).map (𝟙 (DerivedCategory.Q.obj I)) ≫
+    (MonoidalClosed.pre (𝟙 (DerivedCategory.Q.obj P))).app (DerivedCategory.Q.obj I)) = _
+  simp only [MonoidalClosed.pre_id, NatTrans.id_app, Category.id_comp, Category.comp_id]
+  erw [(ihom (DerivedCategory.Q.obj P)).map_id, Category.comp_id]
+
 private lemma localize_evaluation_shift
     {E : Type*} {D : Type*} [Category E] [Category D]
     [HasShift E ℤ] [HasShift D ℤ] [MonoidalCategory E] [MonoidalCategory D]
@@ -387,11 +404,8 @@ theorem nativeHom_evaluation_shift_one
             ((DerivedCategory.quotientCompQhIso C).hom.app I) ≫
           (MonoidalClosed.pre ((DerivedCategory.quotientCompQhIso C).inv.app P)).app
             (DerivedCategory.Q.obj I))⟦(1 : ℤ)⟧' := by
-  simp only [DerivedCategory.quotientCompQhIso,
-    HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift_hom,
-    Quotient.lift.isLift_inv, DerivedCategory.Q, DerivedCategory.Qh,
-    HomologicalComplexUpToQuasiIso.Qh, CategoryTheory.Functor.map_id, MonoidalClosed.pre_id,
-    NatTrans.id_app, Category.id_comp, Category.comp_id]
+  rw [reassoc_of% nativeHom_comparison_transport (P⟦(-1 : ℤ)⟧) I,
+    nativeHom_comparison_transport P I]
   let K := DerivedCategory.Q.obj P
   let M := DerivedCategory.Q.obj I
   let U := CochainComplex.internalHomObj P I
