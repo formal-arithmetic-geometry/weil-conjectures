@@ -36,7 +36,6 @@ namespace WeilConjectures
 
 attribute [local implicit_reducible] integralCoefficientSheaf integralCoefficientCommRingSheaf
   CategoryTheory.sheafCompose CommRingCat.hasForgetToRingCat
-  CategoryTheory.Functor.mapHomologicalComplex
 
 section Formal
 

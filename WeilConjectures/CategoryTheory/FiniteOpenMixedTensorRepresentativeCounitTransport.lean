@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 
 /-!
 # The native cochain localization tensorator
@@ -39,11 +41,11 @@ theorem cochainLocalization_tensorator_eq
     [Abelian.HasFunctorialFlatResolution C]
     (P Q : CochainComplex C ℤ) :
     LaxMonoidal.μ DerivedCategory.Q P Q =
-      LaxMonoidal.μ DerivedCategory.Qh
+      cast (by rfl) (LaxMonoidal.μ DerivedCategory.Qh
         ((HomotopyCategory.quotient C (.up ℤ)).obj P)
-        ((HomotopyCategory.quotient C (.up ℤ)).obj Q) := by
+        ((HomotopyCategory.quotient C (.up ℤ)).obj Q)) := by
   change (𝟙 _ ⊗ₘ 𝟙 _) ≫ (_ ≫ DerivedCategory.Qh.map (𝟙 _)) ≫ 𝟙 _ = _
   simp only [tensorHom_id, id_whiskerRight, CategoryTheory.Functor.map_id,
-    Category.id_comp, Category.comp_id]
+    Category.id_comp, Category.comp_id, cast_eq]
 
 end CategoryTheory.Functor

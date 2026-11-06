@@ -375,14 +375,8 @@ private theorem monomialSum_bijective (V : X.affineOpens) :
     rw [LinearEquiv.coe_coe, Module.Basis.equiv_apply]
     change _ = c (monomialIndexEquiv r a)
     rw [directSumBasis_apply]
-    change (DirectSum.toModule Γ(X, V.1) ℕ
-      ((SymmetricAlgebraSheaf.algebra (freeModule X r)).toModule.val.obj (op V.1))
-      (fun n ↦ ((monomialMap X r n).val.app (op V.1)).hom))
-      (DirectSum.lof Γ(X, V.1) ℕ
-        (fun n ↦ (SheafOfModules.free (R := X.ringCatSheaf)
-          (monomials.{u} r n)).val.obj (op V.1)) a.1
-        (monomialSectionBasis X r a.1 V.1 a.2)) = _
-    rw [DirectSum.toModule_lof, monomialMap_basis]
+    rw [← DirectSum.lof_eq_of Γ(X, V.1)]
+    erw [DirectSum.toModule_lof, monomialMap_basis]
     change monomial X r a.1 a.2 V.1 =
       e (MvPolynomial.monomial (Finsupp.equivFunOnFinite.symm a.2.down.val) 1)
     have hp : (∏ i : Fin (r + 1), (MvPolynomial.X i :
@@ -441,7 +435,7 @@ private theorem monomialCofan_isColimit : Nonempty (IsColimit (Cofan.mk
     let localMap (U : X.affineOpens) : N.val.obj (op U.1) →ₗ[Γ(X, U.1)]
         M.val.obj (op U.1) :=
       (DirectSum.toModule Γ(X, U.1) ℕ (M.val.obj (op U.1))
-        (fun d ↦ ((c d).val.app (op U.1)).hom)).comp (e U).symm.toLinearMap
+        (fun d ↦ ((c d).val.app (op U.1)).hom)) ∘ₗ (e U).symm.toLinearMap
     have localFac (U : X.affineOpens) (d : ℕ) (a : (P d).val.obj (op U.1)) :
         localMap U ((b d).val.app (op U.1) a) = (c d).val.app (op U.1) a := by
       have he : e U (DirectSum.lof Γ(X, U.1) ℕ

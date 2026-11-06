@@ -49,8 +49,8 @@ lemma freeYoneda_map_freeYonedaGen (X U : C) (f : U ⟶ X) :
     (Presheaf.freeYoneda X (ModuleCat.of R R)).map f.op (freeYonedaGen R X) =
       (Sigma.ι (fun _ : (yoneda.obj X).obj (op U) ↦ ModuleCat.of R R) f).hom 1 := by
   have h := ConcreteCategory.congr_hom (Sigma.ι_comp_map'
-    (f := fun _ : (yoneda.obj X).obj (op X) ↦ ModuleCat.of R R)
-    (g := fun _ : (yoneda.obj X).obj (op U) ↦ ModuleCat.of R R)
+    (g := fun _ : (yoneda.obj X).obj (op X) ↦ ModuleCat.of R R)
+    (f := fun _ : (yoneda.obj X).obj (op U) ↦ ModuleCat.of R R)
     ((yoneda.obj X).map f.op) (fun _ ↦ 𝟙 _) (𝟙 X)) (1 : R)
   rw [freeYonedaGen, Presheaf.freeYoneda_map]
   simp only [ConcreteCategory.comp_apply, ConcreteCategory.id_apply] at h
