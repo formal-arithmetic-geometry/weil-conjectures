@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.Picard.CanonicalSingleDirectImag
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
 public import Mathlib.Algebra.Homology.Localization
+public import Mathlib.CategoryTheory.Limits.HasLimits
 import all Mathlib.Algebra.Homology.Localization
+import all Mathlib.CategoryTheory.Limits.HasLimits
 import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeUnitCompatibility
 import WeilConjectures.AlgebraicGeometry.HomotopySingleBaseChangeComparison
 
