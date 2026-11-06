@@ -59,7 +59,9 @@ def affinePushforwardCohomologyMapOfComparison (A B : Type u) [CommRing A] [Comm
             (((affinePushforwardTilde A).mapHomologicalComplex (.up ℤ)).obj C))) := by
   let T := affinePushforwardTilde A
   let F := ModuleCat.restrictScalars φ ⋙ affinePushforwardTilde B
-  let P := Scheme.Modules.pushforward (Spec.map (CommRingCat.ofHom φ))
+  let P : SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace) ⥤
+      SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace) :=
+    Scheme.Modules.pushforward (Spec.map (CommRingCat.ofHom φ))
   let : (affinePushforwardTilde B).Additive := by
     constructor
     intro M N f g
