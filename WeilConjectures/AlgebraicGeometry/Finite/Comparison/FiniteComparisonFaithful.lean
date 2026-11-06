@@ -47,15 +47,13 @@ theorem finiteComparisonOrdinary_fullyFaithful
     (comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory
   let G : DerivedCategory.{u + 1} (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)) ⥤
       FiniteCoefficientDerivedCategory.{u} X A :=
-    (finiteCoefficientRealization.{u} X A).mapDerivedCategory.{u + 1, u + 2,
-      u + 1, u + 1, u + 2, u + 2}
+    (finiteCoefficientRealization.{u} X A).mapDerivedCategory.{u + 1, u + 2}
   have : (finiteCoefficientDerivedComparison.{u} X A).Full := h.full
   have : (finiteCoefficientDerivedComparison.{u} X A).Faithful := h.faithful
   let e : F ⋙ G ≅ finiteCoefficientDerivedComparison.{u} X A :=
-    (Functor.mapDerivedCategoryCompIso.{u + 2, u + 2, u + 2,
-        u + 1, u + 1, u + 1, u + 1, u + 1, u + 2}
+    Functor.mapDerivedCategoryCompIso
       (comparisonUpperStar (ModuleCat.{u + 1} A) X)
-      (finiteCoefficientRealization.{u} X A)).symm
+      (finiteCoefficientRealization.{u} X A)
   have : F.Full := Functor.Full.of_comp_faithful_iso e
   have : F.Faithful := Functor.Faithful.of_comp_iso e
   exact ⟨Functor.FullyFaithful.ofFullyFaithful F⟩
