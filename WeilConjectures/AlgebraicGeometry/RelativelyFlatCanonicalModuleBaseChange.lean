@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedModuleBaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+import WeilConjectures.AlgebraicGeometry.DerivedModulePullbackComparison
 import WeilConjectures.AlgebraicGeometry.AffineRelativelyFlatCanonicalModuleBaseChange
 import WeilConjectures.AlgebraicGeometry.CanonicalModuleBaseChangeAffineLocality
 import WeilConjectures.Topology.SheafIsomorphismLocalOpenCover
@@ -103,20 +104,7 @@ theorem exists_isIso_canonicalModuleBaseChange_of_isFlatOver
             ((DerivedCategory.singleFunctor
               (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj G) ≫
           (schemeDerivedDirectImage f').map c) := by
-  obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
-    E, hE, hEmap, hEadd, ε, hε, htri, hK⟩ :=
-    derivedPullback_spec g'
-  have h : E = Scheme.Modules.tensorPullback g' :=
-    CategoryTheory.Functor.ext hE (fun M N a ↦ hEmap a)
-  subst E
-  let q := HomotopyCategory.quotient
-    (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) (ComplexShape.up ℤ)
-  let c := ε.app ((HomotopyCategory.singleFunctor
-      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj G) ≫
-    DerivedCategory.Qh.map ((q.map
-      ((HomologicalComplex.singleMapHomologicalComplex
-        (Scheme.Modules.tensorPullback g') (ComplexShape.up ℤ) 0).hom.app G)))
-  have hc : IsDerivedModulePullbackComparison g' G c := ⟨ε, hε, rfl⟩
+  obtain ⟨c, hc⟩ := exists_isDerivedModulePullbackComparison.{u, w} g' G
   refine ⟨c, hc, ?_⟩
   let I := {p : S.affineOpens × S'.affineOpens | p.2.1 ≤ g ⁻¹ᵁ p.1.1}
   let U : I → S'.Opens := fun p ↦ p.1.2.1
