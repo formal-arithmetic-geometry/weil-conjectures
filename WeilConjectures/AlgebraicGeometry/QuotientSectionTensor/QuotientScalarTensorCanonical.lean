@@ -326,6 +326,6 @@ theorem canonicalTensor_normalized (T : Scheme.{u}) :
   unfold cochainCompute at h
   unfold canonicalTensor compute scalarCounit D totalScalar
   dsimp only [uncurryTensorIso, NatIso.ofComponents_hom_app, Iso.app_hom, asIso_hom]
-  convert h using 1; rfl
+  convert h using 1 <;> rfl
 
 end AlgebraicGeometry.ProEtale.QuotientSectionTensor
