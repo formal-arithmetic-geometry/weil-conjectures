@@ -103,7 +103,7 @@ lemma isZero_mapDerivedCategory_obj_mapDerivedCategory_obj
     (h₀ : ∀ M, IsZero (jUp.obj (iLow.obj M))) (M : DerivedCategory Z) :
     IsZero (jUp.mapDerivedCategory.obj (iLow.mapDerivedCategory.obj M)) :=
   (Functor.isZero_mapDerivedCategory_obj (iLow ⋙ jUp) M fun _ ↦ h₀ _).of_iso
-    ((iLow.mapDerivedCategoryCompIso jUp).symm.app M)
+    ((iLow.mapDerivedCategoryCompIso jUp).app M)
 
 omit [iUp.Additive] [PreservesFiniteLimits iUp]
   [PreservesFiniteColimits iUp] in

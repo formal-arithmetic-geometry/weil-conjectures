@@ -288,6 +288,8 @@ theorem lisse_tower_algebraic_derived_presentation
   let : HasLimits (ModuleCat.{u + 1} C) := ModuleCat.hasLimits'
   let : HasCountableProducts (ModuleCat.{u + 1} C) :=
     ⟨fun _ _ ↦ ModuleCat.hasLimitsOfShape⟩
+  let : AB4StarOfSize.{0} (ModuleCat.{u + 1} C) :=
+    AB4StarOfSize_shrink.{0, u + 1} _
   let : HasCountableProducts (DerivedCategory (ModuleCat.{u + 1} C)) :=
     derivedCategory_hasCountableProducts (ModuleCat.{u + 1} C)
   obtain ⟨E, p, δ, hE⟩ := Pretriangulated.distinguished_cocone_triangle₁
