@@ -414,3 +414,8 @@
 - Merged upstream fdc7e6fe1516; no overlapping changes to the two owned/required files.
 - Next: remote validation with ucheck-bump, then direct importers and downstream layers.
 - Fix records: /home/ubuntu/u9/bz/FIXES-BZ1036.md. No local Lean/Lake or proof escapes.
+
+- Assigned leaf and restored prerequisite are green at fef581c123fd53775f28ca90deba284b0b095bca:
+  ucheck-bump rc=0, failed=0, built=10, 6856 jobs. Leaf rebuilt in 46s.
+- Full log: /home/ubuntu/u9/bz/BUILD-BZ1036-leaf-green-full.log.
+- First batch of six direct importers is running; twelve direct importers are tracked.
