@@ -21,8 +21,8 @@ compositor on localized representatives.
 set_option autoImplicit false
 set_option Elab.async false
 set_option backward.defeqAttrib.useBackward true
-set_option backward.isDefEq.respectTransparency true
-set_option backward.isDefEq.respectTransparency.types true
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 2048
 universe u v
 open CategoryTheory AlgebraicGeometry
@@ -81,9 +81,9 @@ private theorem rational_naturality
     (ρJ : (rationalDerivedPullback l E (f ≫ g)).obj J ≅
       (rationalDerivedPullback l E f).obj ((rationalDerivedPullback l E g).obj J))
     (hK : HEq ρK.hom ((sfRationalConstructibleLocalization l E X).map
-      (((integralPullbackComposition l E).choose f g).hom.app K.obj)))
+      ((integralPullbackCompositor l E f g).hom.app K.obj)))
     (hJ : HEq ρJ.hom ((sfRationalConstructibleLocalization l E X).map
-      (((integralPullbackComposition l E).choose f g).hom.app J.obj)))
+      ((integralPullbackCompositor l E f g).hom.app J.obj)))
     (v : K ⟶ J) :
     ρK.hom ≫ (rationalDerivedPullback l E f).map
         ((rationalDerivedPullback l E g).map v) =
@@ -138,13 +138,13 @@ private theorem rational_naturality
     change ScalarLocalization.composition _ _ _ _ _ _
         (c ⊗ₜ (constructibleIntegralPullback l E f).map
           ((constructibleIntegralPullback l E g).map a))
-        (1 ⊗ₜ ((integralPullbackComposition l E).choose f g).hom.app K.obj) =
+        (1 ⊗ₜ (integralPullbackCompositor l E f g).hom.app K.obj) =
       ScalarLocalization.composition _ _ _ _ _ _
-        (1 ⊗ₜ ((integralPullbackComposition l E).choose f g).hom.app J.obj)
+        (1 ⊗ₜ (integralPullbackCompositor l E f g).hom.app J.obj)
         (c ⊗ₜ (constructibleIntegralPullback l E (f ≫ g)).map a)
     simp only [ScalarLocalization.composition_tmul, one_mul, mul_one]
     exact congrArg (fun b ↦ c ⊗ₜ b)
-      (((integralPullbackComposition l E).choose f g).hom.naturality a).symm
+      ((integralPullbackCompositor l E f g).hom.naturality a).symm
   | add a b ha hb =>
     change _ ≫ (rationalDerivedPullback l E f).map
         ((rationalDerivedPullback l E g).map (a + b : K ⟶ J)) =
@@ -182,8 +182,8 @@ theorem commonStagePullbackRationalComposition_naturality
       HEq (commonStagePullbackRationalComposition l Ω f g L M hM).hom
         ((sfRationalConstructibleLocalization l
           (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) X).map
-          (((integralPullbackComposition l
-            (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L)).choose f g).hom.app
+          ((integralPullbackCompositor l
+            (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f g).hom.app
             (M.toStage hM).obj)) := by
     unfold commonStagePullbackRationalComposition
     have ha := (rationalDerivedPullback_existsUnique l

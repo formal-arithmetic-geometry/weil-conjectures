@@ -20,8 +20,8 @@ import all Mathlib.Logic.Small.Defs
 set_option autoImplicit false
 set_option Elab.async false
 set_option backward.defeqAttrib.useBackward true
-set_option backward.isDefEq.respectTransparency true
-set_option backward.isDefEq.respectTransparency.types true
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 2048
 universe u v
 open CategoryTheory AlgebraicGeometry
@@ -54,12 +54,10 @@ set_option allowUnsafeReducibility true in
 attribute [local irreducible] ScalarLocalization.composition
   GeneralAlgebraicallyClosedCoefficients.ofHom StageSystem.PairCategory.mkHom
   rationalDerivedPullback commonStagePullbackComparison
+  rationalPullbackCompositionIso rationalPullbackScalarComparison
   commonStagePullbackRationalComposition HasDerivedCategory.standard integralCoefficientLinear
   completedIntegralCoefficientSheafUnrestricted scalarReductionExistence
   scalarReductionDerivedExistence Scheme.residueField
-
-set_option allowUnsafeReducibility true in
-attribute [local reducible] rationalDerivedPullback
 
 private theorem normalization_map_heq
     {C D : Type*} [Category* C] [Category* D] (F : C ⥤ D)
@@ -177,14 +175,15 @@ theorem commonStagePullbackCompComponent_stage_representation
           (commonStagePullbackComparison l Ω f
             (commonStagePullbackObject l Ω g P) L hP).inv)) := by
   have h0 := commonStagePullbackCompComponent_heq l Ω f g P
+  rw [integralPullbackCompositor_eq_choose] at h0
   have hw := rationalPullbackCompositionIso_heq l
     (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) f g P.obj
   have eA : (sfRationalConstructibleLocalization l
       (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) X).obj
         ((constructibleIntegralPullback l _ (f ≫ g)).obj P.obj.obj) =
       (rationalDerivedPullback l
-        (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) (f ≫ g)).obj P.obj :=
-    ((rationalDerivedPullback_existsUnique l
+        (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) (f ≫ g)).obj P.obj := by
+    simpa only [rationalDerivedPullback] using ((rationalDerivedPullback_existsUnique l
       (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) (f ≫ g)).exists.choose_spec.2.1
         P.obj).symm
   have eB : (sfRationalConstructibleLocalization l
@@ -194,9 +193,10 @@ theorem commonStagePullbackCompComponent_stage_representation
       (rationalDerivedPullback l
         (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) f).obj
           ((rationalDerivedPullback l
-            (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) g).obj P.obj) :=
-    ((congrArg (rationalDerivedPullback l
-        (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) f).obj
+            (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) g).obj P.obj) := by
+    simpa only [rationalDerivedPullback] using
+      ((congrArg (rationalDerivedPullback_existsUnique l
+        (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) f).exists.choose.obj
       ((rationalDerivedPullback_existsUnique l
         (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) g).exists.choose_spec.2.1
           P.obj)).trans
@@ -233,11 +233,15 @@ theorem commonStagePullbackCompComponent_stage_representation
       rationalPullbackCompositionIso l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f g
         (P.toStage hP) := by
     unfold commonStagePullbackRationalComposition rationalPullbackCompositionIso
-    rfl
-  rw [eR]
-  unfold commonStagePullbackComparison
-    operationStageTransitionIso GeneralAlgebraicallyClosedCoefficients.ofHom
-  exact congrArg (StageSystem.PairCategory.mkHom (X := commonStagePullbackObject l Ω (f ≫ g) P)
-      (Y := commonStagePullbackObject l Ω f (commonStagePullbackObject l Ω g P)) L hP hP) key
+    simp only [integralPullbackCompositor_eq_choose]
+  simp only [eR]
+  unfold GeneralAlgebraicallyClosedCoefficients.ofHom
+  apply congrArg (StageSystem.PairCategory.mkHom
+      (X := commonStagePullbackObject l Ω (f ≫ g) P)
+      (Y := commonStagePullbackObject l Ω f (commonStagePullbackObject l Ω g P)) L hP hP)
+  set_option backward.isDefEq.respectTransparency true in
+  set_option backward.isDefEq.respectTransparency.types true in
+  simpa only [commonStagePullbackComparison, operationStageTransitionIso,
+    commonStagePullbackObject, StageSystem.PairCategory.toStage] using key
 
 end WeilConjectures
