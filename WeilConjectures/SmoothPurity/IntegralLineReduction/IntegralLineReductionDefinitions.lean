@@ -364,6 +364,7 @@ def TransitionFormula (P : Cx.{u, u} l E X none) (L : scalarReductionSource.{u, 
           (.up ℤ)).app P).f i).val.app U) x)
         ((powerTransition l E X L b m n).val.app U y)
 
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 /-- Simultaneous normalization of the natural derived isomorphisms on every admissible
 K-flat representative, and compatibility with the strict quotient transitions.
 The hypotheses inside the representative clause only select computations on which the
