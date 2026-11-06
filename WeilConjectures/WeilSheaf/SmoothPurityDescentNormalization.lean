@@ -49,7 +49,6 @@ lemma rightDerivedFunctorCompMapOfNatIsoIsoOfForgetIso_hom_fac
   simp [rightDerivedFunctorCompMapOfNatIsoIsoOfForgetIso]
 
 variable {B : Type*} [Category B] [Abelian B] [HasDerivedCategory B]
-  [Abelian.HasKInjectiveResolutions B]
   {L₀ : A ⥤ B} [L₀.Additive]
   (S : B ⥤ IsoAlgebra G) [S.Additive] [PreservesFiniteLimits S] [PreservesFiniteColimits S]
 
@@ -180,7 +179,8 @@ lemma lowerStarGeometricFiberWeilBaseChange_app_forget
     (hc : UpperStarWeilCompatible Λ f h)
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
     ((lowerStarGeometricFiberWeilBaseChange hc).app M).hom.f =
-      (lowerStarBaseChange Λ (Scheme.Hom.isPullback_geometricFiberMap f h).flip.toCommSq).app M := by
+      (lowerStarBaseChange Λ
+        (Scheme.Hom.isPullback_geometricFiberMap f h).flip.toCommSq).app M := by
   have he := Endofunctor.IsoAlgebra.traceMate_forget
     (upperStarLowerStarAdjunction Λ f)
     (upperStarLowerStarAdjunction Λ (Scheme.Hom.geometricFiberMap f h))

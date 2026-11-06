@@ -57,8 +57,8 @@ lemma purity_geometricFiberProjUpperStarFrobeniusIso_hom_app_extendScalars_obj
             ((geometricFiberProjUpperStarFrobeniusIso Λ f).hom.app M) ≫
           (pullIso a f.geometricFiberProj).hom.app M := by
   rw [purity_extendScalars_map_geometricFiberProjUpperStarFrobeniusIso_hom_app_comp_pullIso_hom_app,
-    Iso.inv_hom_id_app_assoc, ← Functor.map_comp_assoc, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id,
-    Category.id_comp]
+    Iso.inv_hom_id_app_assoc, ← Functor.map_comp_assoc, Iso.inv_hom_id_app,
+    CategoryTheory.Functor.map_id, Category.id_comp]
 
 end Transport
 
@@ -94,8 +94,9 @@ theorem purityChangeCoefficientPullbackIso_weil
     (pullIso a f.geometricGaloisFrobenius.hom) (pullIso a f.geometricFiberProj)
     (geometricFiberProjUpperStarFrobeniusIso Λ f)
     (geometricFiberProjUpperStarFrobeniusIso Λ' f) M N
-    (fun K ↦ purity_extendScalars_map_geometricFiberProjUpperStarFrobeniusIso_hom_app_comp_pullIso_hom_app
-      a f K)
+    (fun K ↦
+      purity_extendScalars_map_geometricFiberProjUpperStarFrobeniusIso_hom_app_comp_pullIso_hom_app
+        a f K)
     (purityExtendPullbackIso Λ f.geometricFiberProj M N e) c
     (purityExtendPullbackIso_weil Λ f M N e c he)
 

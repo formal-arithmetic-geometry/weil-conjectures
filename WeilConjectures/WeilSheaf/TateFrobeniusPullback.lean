@@ -144,8 +144,8 @@ lemma upperStarMapModTateModuleIsoUnit_hom_comp_π (n : ℕ) :
         (upperStarTateModuleLevelIso g f ℓ hζ n).hom := by
   simp only [upperStarMapModTateModuleIsoUnit, Iso.trans_hom, Category.assoc,
     IsLimit.conePointUniqueUpToIso_hom_comp, limit.cone_π, HasLimit.isoOfNatIso_hom_π,
-    preservesLimitIso_hom_π_assoc, preservesLimitIso_hom_π, upperStarTateModuleSystemIso,
-    asIso_hom, NatTrans.ofOpSequence_app]
+    preservesLimitIso_hom_π_assoc, upperStarTateModuleSystemIso,
+    asIso_hom]
   try rfl
 
 end Projection

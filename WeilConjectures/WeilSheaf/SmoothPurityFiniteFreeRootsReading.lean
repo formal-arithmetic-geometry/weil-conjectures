@@ -28,6 +28,7 @@ variable (T : Type) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T]
 
 include T hT
 
+omit [TopologicalSpace T] [IsTopologicalRing T] [DiscreteTopology T] in
 /-- Inverse-coordinate form of the root comparison square. -/
 lemma purity_comparisonUpperStarRootsOfUnityIso_pullback_inv :
     upperStarRootsOfUnitySheafHom g N ≫

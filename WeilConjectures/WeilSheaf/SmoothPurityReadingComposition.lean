@@ -30,7 +30,7 @@ lemma purity_reading_composition
   have hm := congrArg F.map hred
   have hn := α.hom.naturality rY.hom
   dsimp only [Functor.comp_map] at hn
-  simp only [Functor.map_comp, Category.assoc] at hm
+  simp only [Functor.map_comp] at hm
   simp only [Iso.trans_hom, Functor.mapIso_hom, Functor.map_comp, Category.assoc]
   rw [reassoc_of% hm, hread, reassoc_of% hn]
 
