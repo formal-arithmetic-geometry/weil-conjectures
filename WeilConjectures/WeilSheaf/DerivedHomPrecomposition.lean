@@ -291,8 +291,10 @@ local notation "HO" => H (C := Sheaf
   (R := ProEtale.adicConstantSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
 
 private instance preservesProducts (n : ℤ) :
-    PreservesLimitsOfShape (Discrete (CochainComplex.HomComplex.Triplet n)) (U) :=
-  inferInstanceAs (PreservesLimitsOfShape (Discrete (CochainComplex.HomComplex.Triplet n))
+    PreservesLimitsOfShape (Discrete (CochainComplex.HomComplex.Triplet n)) (U) := by
+  have : HasLimitsOfShape (Discrete (CochainComplex.HomComplex.Triplet n))
+      (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) := inferInstance
+  exact inferInstanceAs (PreservesLimitsOfShape (Discrete (CochainComplex.HomComplex.Triplet n))
     ((Endofunctor.Algebra.IsIsoStr (WeilSheaf.frobeniusPullback k₀ l X)).ι ⋙
       Endofunctor.Algebra.forget (WeilSheaf.frobeniusPullback k₀ l X)))
 
