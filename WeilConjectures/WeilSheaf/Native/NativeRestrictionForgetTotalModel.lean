@@ -50,7 +50,7 @@ attribute [local irreducible]
   AlgebraicGeometry.ProEtaleWeilSheaf.nativeOpenTensorModel
   DerivedCategory DerivedCategory.Q instCategoryDerivedCategory
   CategoryTheory.Functor.mapDerivedCategory CategoryTheory.Functor.mapDerivedCategoryFactors
-  CategoryTheory.Functor.mapDerivedCategoryCompIso CategoryTheory.Functor.mapDerivedCategoryNatIso
+  CategoryTheory.Functor.mapDerivedCategoryNatIso
 section ExactFactors
 
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
