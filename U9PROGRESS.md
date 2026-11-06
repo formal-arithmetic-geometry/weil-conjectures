@@ -544,3 +544,21 @@
 - No local Lean/Lake, proof placeholders, trust bypasses, new/deleted declarations,
   heartbeat changes, or profiler probes. All ucheck calls finished.
 - This completion commit changes progress documentation only; Lean source matches green builds.
+
+
+# BZ1407 complete
+
+- Assigned QuotientSystemMixedCoherence is GREEN and free of proof placeholders.
+- ucheck-bump passed: rc=0, built=1, failed=0, 16917 jobs; target rebuilt in 13s.
+- Validated source commit: c3b3c3f118. Final Lean source is identical to this green build.
+- Applied the proposed four-line private-helper compositor migration after the user's
+  continuation instruction. Original morphisms and all public statements are preserved.
+- All four direct closure importers were attempted together. Each is blocked by three
+  unowned prerequisites: ScalarCompletionPresentationNormalization (BZ1405),
+  ScalarPullbackStrictTower (BZ1406), and IntegralPullbackStrictFiniteComponent.
+  No importer is claimed green; further layers share these blockers and are skipped.
+- Fix pattern, exact errors, replayable rule, counts, build logs, and dependency paths:
+  /home/ubuntu/u9/bz/FIXES-BZ1407.md. Completion marker: /home/ubuntu/u9/state/BZ1407.DONE.
+- Rule replay exactly reproduces all four changes and is idempotent. No local Lean/Lake,
+  declarations added/deleted, proof escapes, profiling options, or heartbeat increases.
+- Both ucheck calls finished. This completion commit changes progress documentation only.
