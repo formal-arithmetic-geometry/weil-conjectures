@@ -91,10 +91,11 @@ theorem Hom.pointCount_eq_sum_roots (f : X.Hom (Spec (.of k))) {q d : ℕ}
   set se := Finset.univ.filter fun i : Fin (2 * d + 1) ↦ Even (i : ℕ) with hse
   set so := Finset.univ.filter fun i : Fin (2 * d + 1) ↦ Odd (i : ℕ) with hso
   set Zc : ℂ⟦X⟧ := map (algebraMap ℚ ℂ) f.zetaSeries with hZc
-  have hQd : ∀ i, PowerSeries.X * derivative ℂ (Q i : ℂ⟦X⟧) = T i * (Q i : ℂ⟦X⟧) := fun i ↦
+  have hQd : ∀ i, PowerSeries.X * derivative (R := ℂ) (Q i : ℂ⟦X⟧) =
+      T i * (Q i : ℂ⟦X⟧) := fun i ↦
     X_mul_derivative_coe_of_coeff_zero_eq_one (IsAlgClosed.splits _) (hQ0 i)
-  have hZ : PowerSeries.X * derivative ℂ Zc = NS * Zc := by
-    have h0 : PowerSeries.X * derivative ℚ f.zetaSeries =
+  have hZ : PowerSeries.X * derivative (R := ℂ) Zc = NS * Zc := by
+    have h0 : PowerSeries.X * derivative (R := ℚ) f.zetaSeries =
         (PowerSeries.mk fun n ↦ if n = 0 then 0 else (f.pointCount n : ℚ)) * f.zetaSeries :=
       X_mul_derivative_exp_subst _
     have h := congrArg (map (algebraMap ℚ ℂ)) h0
@@ -112,7 +113,7 @@ theorem Hom.pointCount_eq_sum_roots (f : X.Hom (Spec (.of k))) {q d : ℕ}
       hcast] using h
   have hE := X_mul_derivative_prod se fun i _ ↦ hQd i
   have hO := X_mul_derivative_prod so fun i _ ↦ hQd i
-  have hL : PowerSeries.X * derivative ℂ (Zc * ∏ i ∈ se, (Q i : ℂ⟦X⟧)) =
+  have hL : PowerSeries.X * derivative (R := ℂ) (Zc * ∏ i ∈ se, (Q i : ℂ⟦X⟧)) =
       (NS + ∑ i ∈ se, T i) * (Zc * ∏ i ∈ se, (Q i : ℂ⟦X⟧)) := by
     rw [Derivation.leibniz, smul_eq_mul, smul_eq_mul]
     linear_combination Zc * hE + (∏ i ∈ se, (Q i : ℂ⟦X⟧)) * hZ
