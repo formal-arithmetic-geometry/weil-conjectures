@@ -29,8 +29,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.InternalCompletionTransport
 attribute [local irreducible] IntegralConstantModel.pointComparison upperStarFromPoint
 attribute [local irreducible] IntegralModelsStacks.smallModules
-attribute [local irreducible] Functor.mapDerivedCategoryCompIso
-  Functor.mapDerivedCategoryFactors Functor.mapDerivedCategory
+attribute [local irreducible] Functor.mapDerivedCategoryFactors Functor.mapDerivedCategory
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})
 local instance roosLimitDerived :

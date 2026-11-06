@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.CompleteDerivedCompletion
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.CategoryTheory.DirectImageRoosNormalization.DirectImageRoosNormalization
 import WeilConjectures.AlgebraicGeometry.ProEtaleProductsExact
 import Mathlib.AlgebraicGeometry.Sites.Proetale
