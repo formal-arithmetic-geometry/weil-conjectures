@@ -328,4 +328,91 @@ private theorem coefficientPlusCounit
   rw [mateEquiv_counit]
   exact Iso.inv_hom_id_app_assoc (hPullbackPlus B Λ φ f) _ _
 
+/-- The canonical coefficient realization transports the normalized finite etale mate.
+Source: Stacks Project, Tags 03DA, 07A7, 099R and 09AF; the coefficient-realization
+part of steps 4--5 of the parent calculus proof
+(blueprint: lem-cbc-single-level-finite-proper-open-transport).
+Proof: factor H as site inverse image, finite-coefficient realization, and restriction
+of scalars. The underlying-sheaf identification of C fixes every sheafification-unit
+section. Its direct-image comparison is cDirect, and the inverse-image comparison is
+its adjunction mate. The open comparison is the mate for extension by zero. On the
+clopen lift all three comparisons preserve the projection onto the first factor of
+the disjoint-cover product, since they preserve restriction and zero sections.
+They consequently preserve the ordinary alpha, with its inverse cartesian comparison
+and its two compositors. Apply exact localization to this equality. The unit-normalized
+derived direct-image comparison is hR, including the bounded-below inclusion into the
+unbounded category. Transposing alpha under the two proper adjunctions gives the
+singleDerivedGamma square. The finite site-transport theorem identifies its fixed-ring
+site part with the etale derived mate; etale clopen normalization identifies this with
+the specified normalizedComparison. Composition of the coefficient and site squares
+is exactly the displayed equation. No flatness of the scalar map is required. -/
+theorem singleLevelFiniteProperOpenTransport
+    (B Λ : Type (u + 1)) [CommRing B] [CommRing Λ] [Finite Λ]
+    [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ)
+    {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
+    [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]
+    [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i)
+    (L : DerivedCategory.Plus (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (hJ B i Λ φ).hom.app
+        ((Etale.rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) r).obj L) ≫
+      (moduleJ B i).mapDerivedCategory.map ((hR B r Λ φ).app L) ≫
+      (MateEvaluationScalars.singleDerivedGamma B k r p i h).app
+        ((HD B V Λ φ).obj L) =
+    (HD B T Λ φ).map
+        ((Etale.ClopenMateNormalization.normalizedComparison Λ k r p i h).hom.app L) ≫
+      (hR B p Λ φ).app
+        ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k).mapDerivedCategoryPlus.obj L) ≫
+      (moduleDirectImage B p).rightDerivedFunctor.map ((hJ B k Λ φ).hom.app L) := by
+  let a := Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) r
+  let b := Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) p
+  let a' := clopenModuleAdj B r
+  let b' := clopenModuleAdj B p
+  let γ := (mateEquiv a'.derivedPlus b'.derivedPlus
+    (Etale.ClopenMateNormalization.clopenLocalizedSquarePlus
+      (singleAlpha B k r p i h))).natTrans
+  have heq := transport_mate a.derivedPlus b.derivedPlus a'.derivedPlus b'.derivedPlus
+    (H B S Λ φ).mapDerivedCategoryPlus (H B V Λ φ).mapDerivedCategoryPlus
+    (H B T Λ φ).mapDerivedCategoryPlus (H B W Λ φ).mapDerivedCategoryPlus
+    (hPullbackPlus B Λ φ r).symm (hPullbackPlus B Λ φ p).symm
+    (Functor.rightDerivedFunctorPlusBaseChange (hDirect B r Λ φ))
+    (Functor.rightDerivedFunctorPlusBaseChange (hDirect B p Λ φ))
+    (hOpenPlus B Λ φ i) (hOpenPlus B Λ φ k)
+    (Etale.ClopenMateNormalization.derivedAlphaPlus Λ k r p i h)
+    (Etale.ClopenMateNormalization.clopenLocalizedSquarePlus
+      (singleAlpha B k r p i h))
+    (coefficientPlusCounit B Λ φ r) (coefficientPlusCounit B Λ φ p)
+    (coefficientClopenAlphaPlus B Λ φ k r p i h) L
+  have hn := congr_app
+    (Etale.ClopenMateNormalization.etaleClopenMateNormalization Λ k r p i h).2.1 L
+  change (hOpenPlus B Λ φ i).hom.app _ ≫ _ ≫
+      γ.app ((H B V Λ φ).mapDerivedCategoryPlus.obj L) = _ at heq
+  change _ = (H B T Λ φ).mapDerivedCategoryPlus.map
+      ((Etale.ClopenMateNormalization.derivedMatePlus Λ k r p i h).app L) ≫ _ at heq
+  rw [hn] at heq
+  have ham := Etale.ClopenMateNormalization.mate_ambient a' b'
+    (TwoSquare.mk _ _ _ _ (singleAlpha B k r p i h))
+    ((H B V Λ φ).mapDerivedCategoryPlus.obj L)
+  simp only [Etale.ClopenMateNormalization.clopenLocalizedSquare] at ham
+  change DerivedCategory.Plus.ι.map (γ.app _) ≫ _ =
+    (moduleJ B i).mapDerivedCategory.map _ ≫
+      (MateEvaluationScalars.singleDerivedGamma B k r p i h).app _ at ham
+  have ht := congrArg (fun z ↦ DerivedCategory.Plus.ι.map z ≫
+    (moduleDirectImage B p).rightDerivedFunctorPlusCompatibility.hom.app
+      ((moduleJ B k).mapDerivedCategoryPlus.obj
+        ((H B V Λ φ).mapDerivedCategoryPlus.obj L))) heq
+  simp only [Functor.map_comp, Category.assoc] at ht
+  rw [ham] at ht
+  have hnat := (moduleDirectImage B p).rightDerivedFunctorPlusCompatibility.hom.naturality
+    ((hOpenPlus B Λ φ k).hom.app L)
+  simp only [Functor.comp_map] at hnat
+  erw [hnat] at ht
+  simpa only [hJ, hR, hOpenPlus, HD, Iso.trans_hom, Iso.symm_hom,
+    NatTrans.comp_app, Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.comp_map,
+    Functor.associator_hom_app, Functor.associator_inv_app,
+    Functor.mapDerivedCategoryPlusCompatibility, Iso.refl_hom, NatTrans.id_app,
+    Category.id_comp, Category.comp_id, Functor.map_id, Functor.map_comp,
+    Functor.comp_obj, Etale.rightDerivedLowerStarPlus,
+    MateEvaluationScalars.j, MateEvaluationScalars.r, exactPlusMap_ι, Category.assoc] using ht
+
 end AlgebraicGeometry.ProEtale.StrictTower

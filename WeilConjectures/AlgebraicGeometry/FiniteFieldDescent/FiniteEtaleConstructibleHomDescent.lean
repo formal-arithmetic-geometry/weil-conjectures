@@ -31,6 +31,8 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 
 namespace AlgebraicGeometry.Etale.FiniteFieldDescent
 
+attribute [local semireducible] scheme pull
+
 variable {K : Type u} [Field K] {Y : Scheme.{u}} (f : Y ⟶ Spec (.of K))
 
 /-- The canonical compositor for two successive field-stage pullbacks.
@@ -135,6 +137,8 @@ structure FiniteStageHomSystem {L : Type u} [Field L] [Algebra K L]
 end AlgebraicGeometry.Etale.FiniteFieldDescent
 
 namespace AlgebraicGeometry.Etale.FiniteFieldDescent
+
+attribute [local semireducible] scheme pull
 
 variable {K : Type u} [Field K] {Y : Scheme.{u}} (f : Y ⟶ Spec (.of K))
 

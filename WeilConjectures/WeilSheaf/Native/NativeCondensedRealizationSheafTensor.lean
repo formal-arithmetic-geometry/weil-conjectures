@@ -59,7 +59,7 @@ private lemma tensorπ_relativeTensorRightIso_hom_app (M N : Mod C R) :
     Mod.tensorπ M N ≫ ((Mod.relativeTensorRightIso N).hom.app M).hom = Mod.tensorObjπ M N := by
   have h : colimit.ι ((Mod.tensorLeftDiagram R N).flip.obj M) WalkingParallelPair.one ≫
       (Mod.relativeTensorRightIso N).hom.app M = Mod.relativeTensorπ M N := by
-    simp [Mod.relativeTensorRightIso, HasColimit.isoOfNatIso_ι_hom_assoc,
+    simp [Mod.relativeTensorRightIso, HasColimit.ι_isoOfNatIso_hom_assoc,
       Mod.relativeTensorCofork]
   exact congrArg Mod.Hom.hom h
 
