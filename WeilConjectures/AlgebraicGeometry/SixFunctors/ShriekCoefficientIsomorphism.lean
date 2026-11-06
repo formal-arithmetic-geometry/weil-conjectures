@@ -114,11 +114,11 @@ noncomputable def shriekCoefficientCompactificationIso
     CondensedRing.derivedComapLowerStarIso e.inv.hom c.obj.obj.g
   let j : J.mapDerivedCategory ⋙ UZ ≅
       shriekCoefficientTransport e X ⋙ J'.mapDerivedCategory :=
-    (Functor.mapDerivedCategoryCompIso J (Mod.comap
-      (coefficientMap e.inv.hom c.obj.obj.Z))).symm ≪≫
+    Functor.mapDerivedCategoryCompIso J (Mod.comap
+      (coefficientMap e.inv.hom c.obj.obj.Z)) ≪≫
       Functor.mapDerivedCategoryNatIso
         (CondensedRing.comapOpenImmersionLowerShriekIso e.inv.hom c.obj.obj.i) ≪≫
-      Functor.mapDerivedCategoryCompIso (Mod.comap (coefficientMap e.inv.hom X)) J'
+      (Functor.mapDerivedCategoryCompIso (Mod.comap (coefficientMap e.inv.hom X)) J').symm
   exact Functor.associator J.mapDerivedCategory P.rightDerivedFunctor
       (shriekCoefficientTransport e Y) ≪≫
     Functor.isoWhiskerLeft J.mapDerivedCategory d ≪≫
@@ -169,7 +169,7 @@ private instance ctf_replete (T : Scheme.{u}) :
 private noncomputable def transportCompIso
     (e : Mon.mk Λ ≅ Mon.mk Λ') (T : Scheme.{u}) :
     shriekCoefficientTransport e T ⋙ shriekCoefficientTransport e.symm T ≅ 𝟭 _ := by
-  exact (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  exact Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso
       ((Mod.comapComp _ _).symm ≪≫ Mod.comapCongr (by
         change (upperStarFromPoint T).map e.hom.hom ≫
