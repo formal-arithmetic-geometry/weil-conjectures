@@ -109,12 +109,12 @@ theorem sfbImmersion_residueComparisons
       Nonempty ((ConstantCompletion.extend
         (ConstantCompletion.projection (proEtaleModelTopology S) A I 0)).obj
           (sfbImmersionCompletedModel i I K) ≅
-        (Functor.mapDerivedCategory.{u + 1, u + 2, u + 1, u + 1, u + 2, u + 2}
+        (Functor.mapDerivedCategory.{u + 1, u + 2}
           (sfbFixedResiduePull i (A ⧸ I ^ (0 + 1)))).obj
           (DerivedCategory.Q.obj (sfbResidueComplex X I K)))) ∧
     (∀ C : CochainComplex
         (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (A ⧸ I ^ (0 + 1)))) ℤ,
-      Nonempty ((Functor.mapDerivedCategory.{u + 1, u + 2, u + 1, u + 1, u + 2, u + 2}
+      Nonempty ((Functor.mapDerivedCategory.{u + 1, u + 2}
           (sfbFixedResiduePull i (A ⧸ I ^ (0 + 1)))).obj
           (DerivedCategory.Q.obj
             (((ProEtale.comparisonUpperStar.{u + 2, u}
