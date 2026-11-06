@@ -36,6 +36,7 @@ private theorem flat_zero {C : Type w} [SmallCategory C]
     Classical.choice (SheafOfModules.tensorClosed R).1
   exact (ObjectProperty.flat_of_isZero hM).2
 
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The canonical comparison inverse image preserves flat module sheaves.
 Source: Stacks Project, Tag 05VD, lemma-pullback-flat; blueprint finite-Tor comparison,
 paragraph Flatness is preserved (auxiliary; not a blueprint node).
@@ -50,7 +51,6 @@ for its image. The degree-zero term is the pullback of M; transport its flatness
 the single-complex term isomorphism and the left-adjoint identification.
 This works for any discrete commutative coefficient ring, including the zero ring,
 and requires no constructibility or Noetherian hypothesis. -/
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 theorem constructibleComparisonPullback_flat (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A]
     (M : ConstantCompletion.Mod (ConstantCompletion.constant
@@ -99,6 +99,7 @@ theorem constructibleComparisonPullback_flat (X : Scheme.{u})
     G.mapIso (HomologicalComplex.singleObjXSelf (.up ℤ) 0 M) ≪≫ e.app M
   exact flat_iso S es ht
 
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- Termwise comparison carries K-flat complexes with flat terms to K-flat complexes.
 Source: Stacks Project, Tag 0G7E
 (auxiliary; not a blueprint node).
@@ -106,7 +107,6 @@ Proof: construct the same ringed-topos morphism and identify its supplied pullba
 with the canonical module pullback by uniqueness of left adjoints. The general
 K-flat pullback theorem gives K-flatness before this identification. Tensor the
 complex isomorphism with each acyclic test to transport its vanishing homology. -/
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 theorem constructibleComparisonComplexPullback_kFlat (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A]
     (P : ConstantCompletion.Cx (ConstantCompletion.constant
