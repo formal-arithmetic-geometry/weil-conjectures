@@ -55,10 +55,10 @@ noncomputable def fixSiteOpenComparison (Λ : Type (u + 1)) [CommRing Λ] [Finit
         (comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategory ≅
       (comparisonUpperStar (ModuleCat.{u + 1} Λ) U).mapDerivedCategory ⋙
         (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso
       (openImmersionLowerShriekComparisonUpperStarIso (ModuleCat.{u + 1} Λ) j) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The inverse-image comparison, oriented as `rho_u : u_proet⁻¹ N_V ≅
 N_T u_et⁻¹`: degreewise `comparisonUpperStarCompUpperStarIso`, the inverse of the canonical
@@ -72,10 +72,10 @@ noncomputable def fixSitePullbackComparison (Λ : Type (u + 1)) [CommRing Λ] [F
         (upperStar (ModuleCat.{u + 1} Λ) u).mapDerivedCategory ≅
       (Etale.upperStar (ModuleCat.{u + 1} Λ) u).mapDerivedCategory ⋙
         (comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso
       (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) u) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 section Localization
 
@@ -95,8 +95,8 @@ attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimi
 private noncomputable def derivedFace (e : R ⋙ G ≅ L ⋙ S) :
     R.mapDerivedCategory ⋙ G.mapDerivedCategory ≅
       L.mapDerivedCategory ⋙ S.mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso R G).symm ≪≫
-    Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryCompIso L S
+  Functor.mapDerivedCategoryCompIso R G ≪≫
+    Functor.mapDerivedCategoryNatIso e ≪≫ (Functor.mapDerivedCategoryCompIso L S).symm
 
 private theorem derivedPlusFace (e : R ⋙ G ≅ L ⋙ S)
     (K : DerivedCategory.Plus C) :
@@ -107,9 +107,9 @@ private theorem derivedPlusFace (e : R ⋙ G ≅ L ⋙ S)
       (derivedFace R G L S e).hom.app (DerivedCategory.Plus.ι.obj K) := by
   have hi : DerivedCategory.Plus.ι.map
       ((Functor.mapDerivedCategoryPlusCompIso R G).inv.app K) =
-      (Functor.mapDerivedCategoryCompIso R G).inv.app
+      (Functor.mapDerivedCategoryCompIso R G).hom.app
         (DerivedCategory.Plus.ι.obj K) := by
-    apply (cancel_mono ((Functor.mapDerivedCategoryCompIso R G).hom.app
+    apply (cancel_mono ((Functor.mapDerivedCategoryCompIso R G).inv.app
       (DerivedCategory.Plus.ι.obj K))).mp
     rw [← Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app R G K]
     rw [← Functor.map_comp]

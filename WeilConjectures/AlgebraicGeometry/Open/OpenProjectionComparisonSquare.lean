@@ -68,24 +68,24 @@ theorem openProjectionTransport_projection_square
       (ModuleCat.{u + 1} Λ)
       ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).mapDerivedCategory.obj F)).app B ≪≫
     ((derivedTensor (ModuleCat.{u + 1} Λ) X).mapIso
-      ((((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      (((Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso
       (openImmersionLowerShriekComparisonUpperStarIso (ModuleCat.{u + 1} Λ) j) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _)).app F)).app _).hom =
-    ((((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso _ _).symm)).app F)).app _).hom =
+    (((Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso
       (openImmersionLowerShriekComparisonUpperStarIso (ModuleCat.{u + 1} Λ) j) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _)).app _ ≪≫
+    (Functor.mapDerivedCategoryCompIso _ _).symm)).app _ ≪≫
     (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).mapDerivedCategory.mapIso
       (((derivedTensorObjCompMapDerivedCategoryComparisonUpperStarIso
         (ModuleCat.{u + 1} Λ) F).app _) ≪≫
         ((derivedTensor (ModuleCat.{u + 1} Λ) U).obj _).mapIso
           (((Functor.isoWhiskerRight
       (Etale.leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) j) _ ≪≫
-    ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso _ _ ≪≫
       Functor.mapDerivedCategoryNatIso
         (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) j) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso _ _).symm).symm ≪≫
     Functor.isoWhiskerLeft _
       (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) j).symm)).app B))).hom ≫
       ((derivedOpenImmersionLowerShriekProjectionMap (ModuleCat.{u + 1} Λ) j).app

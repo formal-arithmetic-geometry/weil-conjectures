@@ -321,20 +321,83 @@
 - No local Lean/Lake, forbidden proof escapes, or heartbeat changes.
 
 
-# BZ978 in progress
+# BZ978 complete
 
-- Branch: u9/BZ978; baseline: 2390944b5.
-- The user instructed continuation after the exact identity-cast proposal.
-  Applied BZ978-public-cast-proposal.patch in HasCompletedReductionTowerUnitNormalization.
-  The reflexive type conversion preserves the existing counit morphism and assumptions.
-- Localization imports already repaired the private exactAugmentation_existsUnique helper.
-- Next: validate the assigned module with ucheck-bump, then its seven direct importers
-  and unblocked downstream layers, up to the brief's limit.
-- Fix patterns and build evidence: /home/ubuntu/u9/bz/FIXES-BZ978.md.
+- Branch: u9/BZ978; baseline 2390944b5.
+- Assigned CompletedReductionUnit is green and sorry-free. The authorized identity cast
+  and Localization imports preserve its normalization equation across hidden Qh endpoints.
+- Two direct importers are green: CompletedPullbackInterface and CompletedQuotientUnitNormalization.
+  The interface fixes Mathlib's reversed compositor in its construction; its type is unchanged.
+- Green source commit: 68722d6cc7ac77c7987137f65e895ed614607434, ucheck-bump rc=0,
+  failed=0, 6672 jobs. All three modules freshly rebuilt. Final Lean source is identical.
+- All seven direct importers and the next frontier were checked or traced to observed
+  unowned failures. ReductionAugmentationCompatibility is red because BZ704 removed
+  two prerequisite helpers; its own redundant reducibility attribute is also recorded.
+  Other blocked branches and exact diagnostics are in FIXES-BZ978.md.
+- No declaration deletions, local Lean/Lake execution, proof placeholders, trust bypasses,
+  profiler probes, or heartbeat changes. All four rewrite rules replay exactly.
+- Logs: BUILD-BZ978-leaf-green-full.log, BUILD-BZ978-downstream-green-full.log,
+  BUILD-BZ978-downstream1-full.log, and BUILD-BZ978-downstream2-full.log under ~/u9/bz/.
+- Final records: ~/u9/bz/FIXES-BZ978.md and ~/u9/state/BZ978.DONE.
+- This completion commit changes only progress documentation.
+
+
+# BZ1001 complete
+
+- Assigned SectionScalarComputationTransport and two downstream layers are green:
+  SectionTensorConjugateComputation and SectionTensorNormalizationTransport.
+- ucheck-bump: rc=0, failed=0, 5412 jobs; source b0a4f1ec0698e0eb27275f8a717345ea9c13612f.
+- Applied the explicitly proposed private compositor direction updates and inverse
+  cancellation proof after the user instructed continuation. Public theorem unchanged.
+- Merged current upstream; all green modules and their source dependencies are unchanged.
+- The next two direct importers were attempted and are blocked by unowned failures
+  assigned to BZ997–BZ1000. Exact diagnostics and import paths are in the fix record.
+- Fix record: /home/ubuntu/u9/bz/FIXES-BZ1001.md.
+- Completion marker: /home/ubuntu/u9/state/BZ1001.DONE.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
+- All ucheck invocations finished. This final commit changes progress documentation only.
 
-- Assigned leaf is green at 6a2f097183f65efa1284234f5c479e30ac937e3f: rc=0, failed=0,
-  6499 jobs, freshly rebuilt in 16s on newsrv:/home/ubuntu/u9n/bumpw2.
-- Full log: /home/ubuntu/u9/bz/BUILD-BZ978-leaf-green-full.log.
-- Next target OrderedExchangeStrictCoefficientEquations covers all seven direct
-  importers in its dependency closure.
+
+# BZ995 in progress
+
+- Branch: u9/BZ995; original base f6b78661b.
+- The user instructed continuation after the concrete deleted-helper restoration proposal.
+- Restored derivedReduction_augmentationOfCounits in its original file, preserving its
+  assumptions and updating the two compositor directions for Mathlib b63f6e8a.
+- Reuses the existing Functor.exactSquare_fac through import all; no duplicate helper.
+- Assigned module statements are unchanged. The first ucheck-bump confirmed that the
+  opaque attribute removal and direct tower-unit normalization resolve two errors.
+- Next: ucheck-bump for the restored helper, assigned module, and direct importer
+  StratumCompletionUnitRestriction, then continue downstream as the brief requires.
+- Fix log: /home/ubuntu/u9/bz/FIXES-BZ995.md. No local Lean/Lake or forbidden proof shortcuts.
+
+# BZ1027 complete
+
+- Branch: `u9/BZ1027`; start: `c42746d5e58cc55d63dd9ef190dd34bc4130ed3c`.
+- Replayed the final BZ1020 import repairs missing from its early upstream integration:
+  use `Mathlib.CategoryTheory.Sites.EpiMono` in `Integral.Exact` and remove the umbrella
+  `Mathlib` import from `SmoothBaseChange.CurveTestDatum`.
+- Assigned `Integral.BaseChange` and downstream `SmoothBaseChange.IntegralBaseChange`
+  and `SmoothBaseChange.CurveTestDatum` pass `ucheck-bump`: rc=0, built=12, failed=0.
+- Validated source commit: `fefcc97aeb`; remote log:
+  `/home/ubuntu/u9/logs/BZ1027-20261106T105011.log`.
+- All non-import source content is unchanged; machine rewrite rules replay the exact diff.
+- Further downstream work is deferred to live owners: BZ1021 (`FieldBaseChange`,
+  `Induction`) and BZ1028 (the `AlgClosedExtension` / `Vanishing` frontier).
+  No additional downstream modules were tested or claimed green.
+- Patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ1027.md`.
+- Completion marker: `/home/ubuntu/u9/state/BZ1027.DONE`.
+- No local Lean/Lake execution, declaration changes, proof escapes, or limit increases.
+
+
+# BZ1034 in progress
+
+- Branch: u9/BZ1034; starting commit 604047e529f6b513e0c4b425b3bfbd62aa4cfd36.
+- The user instructed continuation after the concrete four-private-helper compositor proposal.
+  Applied BZ1034-compositor-proposal.patch, preserving the original comparison arrows
+  under Mathlib b63f6e8a. The public theorem statement is unchanged.
+- Attribute-only build at 89034d5807 removed two errors; the nine remaining diagnostics
+  concern those compositor expressions. Next: validate the patch with ucheck-bump.
+- Direct importer: UnboundedProperOpenInterchangeSupplement; continue downstream after green.
+- Fix records: /home/ubuntu/u9/bz/FIXES-BZ1034.md.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.

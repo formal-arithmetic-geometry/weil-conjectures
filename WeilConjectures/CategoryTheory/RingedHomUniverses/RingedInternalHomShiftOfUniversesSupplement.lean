@@ -1517,16 +1517,22 @@ private theorem kInjectiveQ_full
     {A : Type*} [Category A] [Abelian A] [HasDerivedCategory A]
     [Abelian.HasKInjectiveResolutions A] :
     (CochainComplex.KInjectives.ι (C := A) ⋙ DerivedCategory.Q).Full :=
-  inferInstanceAs ((CochainComplex.KInjectives.toHomotopyCategory (C := A) ⋙
-    HomotopyCategory.KInjectives.Qh).Full)
+  letI : (CochainComplex.KInjectives.toHomotopyCategory (C := A) ⋙
+      HomotopyCategory.KInjectives.Qh).Full := inferInstance
+  Functor.Full.of_iso (F := CochainComplex.KInjectives.toHomotopyCategory (C := A) ⋙
+      HomotopyCategory.KInjectives.Qh) (Functor.isoWhiskerLeft CochainComplex.KInjectives.ι
+    (DerivedCategory.quotientCompQhIso A))
 
 set_option backward.isDefEq.respectTransparency true in
 private theorem kInjectiveQ_essSurj
     {A : Type*} [Category A] [Abelian A] [HasDerivedCategory A]
     [Abelian.HasKInjectiveResolutions A] :
     (CochainComplex.KInjectives.ι (C := A) ⋙ DerivedCategory.Q).EssSurj :=
-  inferInstanceAs ((CochainComplex.KInjectives.toHomotopyCategory (C := A) ⋙
-    HomotopyCategory.KInjectives.Qh).EssSurj)
+  letI : (CochainComplex.KInjectives.toHomotopyCategory (C := A) ⋙
+      HomotopyCategory.KInjectives.Qh).EssSurj := inferInstance
+  Functor.essSurj_of_iso (F := CochainComplex.KInjectives.toHomotopyCategory (C := A) ⋙
+      HomotopyCategory.KInjectives.Qh) (Functor.isoWhiskerLeft CochainComplex.KInjectives.ι
+    (DerivedCategory.quotientCompQhIso A))
 
 private theorem ordinaryRightShiftsAux
     {A : Type*} [Category A] [Preadditive A] [HasBinaryBiproducts A]
@@ -2014,6 +2020,16 @@ private theorem rightNormalizedShift_exists :
   refine ⟨((S₀ L).commShiftIso s).symm.app F, hform L F s, ?_⟩
   exact hS M L F eM s
 
+/-- Existence and uniqueness of the ordinary normalized right shift structure.
+Source: Stacks 08JA, 08JC
+(blueprint: lem-weil-pbc-ringed-internal-hom-exact-restriction).
+Proof: product projections define the unsigned reindexing chain isomorphism.
+The shifted Hom differential and Hom into the shifted target agree. Its naturality
+commutes with the fixed K-injective augmentation. Localize this identity; on
+K-injective targets the augmentation comparison is invertible. Essential
+surjectivity and the localization universal property give a unique natural shift
+structure on every derived object. The degreewise reindexings compose and are the
+identity at zero, so they satisfy the CommShift coherence identities. -/
 theorem rightShift_existsUnique :
     ∃! S : ∀ M : D.{c, v, r, w} J R, (hom.{c, v, r, w} J R M).CommShift ℤ,
       RightNormalization.{c, v, r, w} J R S := by

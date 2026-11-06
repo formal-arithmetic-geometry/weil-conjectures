@@ -331,7 +331,7 @@ theorem preimage_range_normalConeZeroSection
       ?_ (fun a ha ↦ ?_) hb
     · have h0 : Ideal.Quotient.mk (J.tIdeal (op U')) (J.siteIdeal U').extendedReesAlgebraT = 0 :=
         Ideal.Quotient.eq_zero_iff_mem.mpr (Ideal.subset_span rfl)
-      exact Ideal.mem_comap.mpr (by convert y.asIdeal.zero_mem; exact h0)
+      exact Ideal.mem_comap.mpr (by convert y.asIdeal.zero_mem)
     · exact hker (RingHom.mem_ker.mpr ((I.normalConeToQuotient_app_mk (op U) a).trans
         (Ideal.Quotient.eq_zero_iff_mem.mpr ha)))
   · rintro _ ⟨w, rfl⟩

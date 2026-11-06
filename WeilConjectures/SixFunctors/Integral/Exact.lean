@@ -5,7 +5,7 @@ Authors: Nailin Guan, Claude
 -/
 module
 
-public import Mathlib
+public import Mathlib.CategoryTheory.Sites.EpiMono
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.DisjointCover
 public import WeilConjectures.SixFunctors.Finite.Exact
 import WeilConjectures.AlgebraicGeometry.IntegralPointedClopenRefinement

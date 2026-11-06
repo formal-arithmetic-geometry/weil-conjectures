@@ -54,7 +54,7 @@ theorem exists_affine_sections_for_chosen_derivation (f : X ⟶ S)
       (fun a b ↦ map_add _ a b) (fun a b ↦ D.d_mul a b)
       (fun a ↦ by
         rw [Scheme.Hom.appLE_eq_pullbackPresheafToPresheaf_app]
-        exact PresheafOfModules.Derivation'.d_app D _)
+        exact PresheafOfModulesOfCommRing.Derivation'.d_app D _)
   let e := d.desc.hom
   have he (a : Γ(X, U.1)) : e (CommRingCat.KaehlerDifferential.d a) =
       D.d (X := op U.1) a := d.desc_d a

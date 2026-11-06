@@ -205,8 +205,8 @@ private theorem derive_right_unit (U : E ⥤ E) [U.Additive]
   simp only [Functor.mapDerivedCategoryTriangleIso, Iso.trans_inv, NatTrans.comp_app,
     ← Functor.mapDerivedCategoryNatIso_symm, hh, Iso.trans_hom,
     eqToHom_refl, Category.comp_id]
-  rw [← cancel_epi ((Functor.mapDerivedCategoryCompIso F U).hom.app K),
-    Iso.hom_inv_id_app_assoc, ← reassoc_of% hn, hu]
+  rw [← cancel_epi ((Functor.mapDerivedCategoryCompIso F U).inv.app K), Iso.symm_inv,
+    Iso.inv_hom_id_app_assoc, ← reassoc_of% hn, hu]
   exact (Category.comp_id _).symm
 
 end DerivedUnitProof

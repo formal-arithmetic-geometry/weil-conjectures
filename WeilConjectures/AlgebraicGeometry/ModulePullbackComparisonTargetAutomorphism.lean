@@ -7,6 +7,9 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedModuleBaseChangeMap
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
+import WeilConjectures.AlgebraicGeometry.ModulePullbackComparisonDegreeAutomorphism
 import WeilConjectures.Algebra.Homology.BoundedFlatReplacement
 import WeilConjectures.AlgebraicGeometry.FlatComplexDerivedPullback
 import WeilConjectures.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
@@ -155,44 +158,6 @@ private theorem modulePullbackComparison_homology_zero_isIso
   infer_instance
 
 
-private theorem modulePullback_single_isLE
-    [∀ Y : Scheme.{u},
-      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
-    {X Y : Scheme.{u}} (a : X ⟶ Y) (G : Y.Modules) :
-    ((derivedPullback a).obj ((DerivedCategory.singleFunctor
-      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj G)).IsLE 0 := by
-  let A := SheafOfModules.{u} (moduleRings Y.toRingedSpace)
-  let K := (CochainComplex.singleFunctor A 0).obj G
-  let B : ObjectProperty (CochainComplex A ℤ) :=
-    fun F ↦ ∀ i : ℤ, 0 < i → IsZero (F.X i)
-  let K' : B.FullSubcategory := ⟨K, fun i hi ↦ K.isZero_of_isStrictlyLE 0 i hi⟩
-  obtain ⟨R, ε, hR⟩ := CochainComplex.exists_functorial_boundedAbove_flat_replacement
-    (Opens.grothendieckTopology Y) Y.sheaf 0
-  obtain ⟨hflat, hbound, _, hq⟩ := hR K'
-  let P := R.obj K'
-  let s : P ⟶ K := ε.app K'
-  have : QuasiIso s := hq
-  have : IsIso (DerivedCategory.Q.map s) :=
-    by
-    rw [DerivedCategory.isIso_Q_map_iff_quasiIso]
-    infer_instance
-  obtain ⟨F, _, _, hAdd, _, _, e, _⟩ :=
-    flatComplexDerivedPullback a P ⟨0, hbound⟩ hflat
-  have : F.Additive := hAdd
-  have : P.IsStrictlyLE 0 := (CochainComplex.isStrictlyLE_iff P 0).2 hbound
-  let e' := e ≪≫ (derivedPullback a).mapIso (asIso (DerivedCategory.Q.map s))
-  have : CochainComplex.IsStrictlyLE
-      ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj P) 0 :=
-    inferInstance
-  have hLE : (DerivedCategory.Q.obj
-      ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj P)).IsLE 0 := inferInstance
-  let eF := (DerivedCategory.quotientCompQhIso
-      (SheafOfModules.{u} (moduleRings X.toRingedSpace))).symm.app
-        ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj P) ≪≫
-    DerivedCategory.Qh.mapIso ((F.mapHomotopyCategoryFactors
-      (ComplexShape.up ℤ)).symm.app P)
-  exact DerivedCategory.TStructure.t.isLE_of_iso (eF ≪≫ e') 0
-
 /-- Two left-derived counits on a single module differ by an automorphism of its
 ordinary pullback. There is no cover, direct image or base-change square in this lemma.
 Source: Stacks Project, Tags 06YJ and 08HY; Step 4 of the affine alternating model
@@ -228,28 +193,7 @@ theorem modulePullbackComparison_target_automorphism
         (Scheme.Modules.tensorPullback a).obj G,
       c = c₀ ≫ (DerivedCategory.singleFunctor
         (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).map α.hom := by
-  let C := SheafOfModules.{u} (moduleRings X.toRingedSpace)
-  let S := DerivedCategory.singleFunctor C 0
-  let H := DerivedCategory.homologyFunctor C 0
-  let M := (Scheme.Modules.tensorPullback a).obj G
-  have : IsIso (H.map c₀) := modulePullbackComparison_homology_zero_isIso a G c₀ hc₀
-  have : IsIso (H.map c) := modulePullbackComparison_homology_zero_isIso a G c hc
-  let e : H.obj (S.obj M) ≅ M :=
-    (DerivedCategory.singleFunctorCompHomologyFunctorIso C 0).app M
-  let α : M ≅ M := e.symm ≪≫ (asIso (H.map c₀)).symm ≪≫ asIso (H.map c) ≪≫ e
-  refine ⟨α, ?_⟩
-  have : ((derivedPullback a).obj ((DerivedCategory.singleFunctor
-      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj G)).IsLE 0 :=
-    modulePullback_single_isLE a G
-  apply (DerivedCategory.homologyFunctor_map_bijective_of_isLE_of_isGE 0).1
-  change H.map c = H.map (c₀ ≫ S.map α.hom)
-  rw [H.map_comp]
-  have hn := (DerivedCategory.singleFunctorCompHomologyFunctorIso C 0).hom.naturality
-    α.hom
-  change H.map (S.map α.hom) ≫ e.hom = e.hom ≫ α.hom at hn
-  apply (cancel_mono e.hom).1
-  rw [Category.assoc, hn]
-  simp [α, e]
+  exact modulePullbackComparison_degree_target_automorphism a G 0 c₀ c hc₀ hc
 
 
 end AlgebraicGeometry

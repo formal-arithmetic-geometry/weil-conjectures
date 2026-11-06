@@ -79,10 +79,40 @@ private theorem exactAdj_unit
     NatTrans.comp_app, Functor.whiskerLeft_app, Category.assoc]
   rw [← reassoc_of% h₄]
   erw [reassoc_of% h₁]
-  rw [reassoc_of% h₃, Iso.inv_hom_id_app]
-  exact Category.comp_id _
+  rw [reassoc_of% h₃]
+  erw [Iso.inv_hom_id_app, Category.comp_id]
 
 -- Exact localization preserves mate equations for the specified unit normalization.
+section ExactMates
+
+variable {C₁ D₁ C₂ D₂ : Type*} [Category C₁] [Category D₁] [Category C₂] [Category D₂]
+  [Abelian C₁] [Abelian D₁] [Abelian C₂] [Abelian D₂]
+  [HasDerivedCategory C₁] [HasDerivedCategory D₁] [HasDerivedCategory C₂]
+  [HasDerivedCategory D₂]
+  {f₁ : C₁ ⥤ D₁} {g₁ : D₁ ⥤ C₁} (adj₁ : f₁ ⊣ g₁)
+  {f₂ : C₂ ⥤ D₂} {g₂ : D₂ ⥤ C₂} (adj₂ : f₂ ⊣ g₂)
+  {u : C₁ ⥤ C₂} {v : D₁ ⥤ D₂}
+  [f₁.Additive] [PreservesFiniteLimits f₁] [PreservesFiniteColimits f₁]
+  [g₁.Additive] [PreservesFiniteLimits g₁] [PreservesFiniteColimits g₁]
+  [f₂.Additive] [PreservesFiniteLimits f₂] [PreservesFiniteColimits f₂]
+  [g₂.Additive] [PreservesFiniteLimits g₂] [PreservesFiniteColimits g₂]
+  [u.Additive] [PreservesFiniteLimits u] [PreservesFiniteColimits u]
+  [v.Additive] [PreservesFiniteLimits v] [PreservesFiniteColimits v]
+  (τ : g₁ ⋙ u ≅ v ⋙ g₂) (β : u ⋙ f₂ ≅ f₁ ⋙ v)
+  (d₁ : f₁.mapDerivedCategory ⊣ g₁.mapDerivedCategory)
+  (d₂ : f₂.mapDerivedCategory ⊣ g₂.mapDerivedCategory)
+  (hu₁ : ∀ X : HomotopyCategory C₁ (.up ℤ),
+    d₁.unit.app (DerivedCategory.Qh.obj X) ≫
+        g₁.mapDerivedCategory.map (f₁.mapDerivedCategoryFactorsh.hom.app X) ≫
+        g₁.mapDerivedCategoryFactorsh.hom.app ((f₁.mapHomotopyCategory (.up ℤ)).obj X) =
+      DerivedCategory.Qh.map ((adj₁.mapHomotopyCategory (.up ℤ)).unit.app X))
+  (hu₂ : ∀ X : HomotopyCategory C₂ (.up ℤ),
+    d₂.unit.app (DerivedCategory.Qh.obj X) ≫
+        g₂.mapDerivedCategory.map (f₂.mapDerivedCategoryFactorsh.hom.app X) ≫
+        g₂.mapDerivedCategoryFactorsh.hom.app ((f₂.mapHomotopyCategory (.up ℤ)).obj X) =
+      DerivedCategory.Qh.map ((adj₂.mapHomotopyCategory (.up ℤ)).unit.app X))
+
+include hu₁ hu₂ in
 private theorem exact_mate_Qh
     (hβ : ∀ K, adj₂.unit.app (u.obj K) ≫ g₂.map (β.hom.app K) =
       u.map (adj₁.unit.app K) ≫ τ.hom.app (f₁.obj K))
@@ -113,7 +143,7 @@ private theorem exact_mate_Qh
     ((Functor.mapHomotopyCategoryCompIso (Iso.refl (u ⋙ f₂)) (.up ℤ)).hom.app X ≫
       (NatTrans.mapHomotopyCategory β.hom (.up ℤ)).app X ≫
       (Functor.mapHomotopyCategoryCompIso (Iso.refl (f₁ ⋙ v)) (.up ℤ)).inv.app X)
-  dsimp at h₁ h₄
+  dsimp only [Functor.comp_obj, Functor.comp_map, Functor.id_obj, Functor.id_map] at h₁ h₄
   have h₂' : d₂.unit.app
       (DerivedCategory.Qh.obj ((u.mapHomotopyCategory (.up ℤ)).obj X)) =
       DerivedCategory.Qh.map ((adj₂.mapHomotopyCategory (.up ℤ)).unit.app
@@ -169,7 +199,7 @@ private theorem exact_mate_Qh
     (Functor.mapDerivedCategorySquareIso τ).hom.naturality _
   have k₄ := Functor.mapDerivedCategorySquareIso_hom_app_Qh_obj τ
     ((f₁.mapHomotopyCategory (.up ℤ)).obj X)
-  dsimp at k₂
+  dsimp only [Functor.comp_obj, Functor.comp_map] at k₂
   have hR : u.mapDerivedCategoryFactorsh.inv.app X ≫
       u.mapDerivedCategory.map
         (d₁.unit.app (DerivedCategory.Qh.obj X)) ≫
@@ -228,6 +258,7 @@ private theorem exact_mate_Qh
   simp only [Functor.map_comp] at this ⊢
   exact this
 
+include hu₁ hu₂ in
 private theorem exact_mate
     (hβ : ∀ K, adj₂.unit.app (u.obj K) ≫ g₂.map (β.hom.app K) =
       u.map (adj₁.unit.app K) ≫ τ.hom.app (f₁.obj K))
@@ -263,6 +294,8 @@ private theorem exact_mate
     Functor.map_comp, Category.assoc, h₄,
     reassoc_of% (exact_mate_Qh adj₁ adj₂ τ β d₁ d₂ hu₁ hu₂ hβ _)]
 
+end ExactMates
+
 section EvaluationCoherence
 
 private abbrev W {C D : Type*} [Category C] [Category D] (F : C ⥤ D) :=
@@ -293,8 +326,8 @@ variable {C D H : Type*} [Category C] [Category D] [Category H]
 private noncomputable def evalD (n : ℕ) :
     (W F).mapDerivedCategory ⋙ (E D n).mapDerivedCategory ≅
       (E C n).mapDerivedCategory ⋙ F.mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso (W F) (E D n)).symm ≪≫
-    Functor.mapDerivedCategoryCompIso (E C n) F
+  Functor.mapDerivedCategoryCompIso (W F) (E D n) ≪≫
+    (Functor.mapDerivedCategoryCompIso (E C n) F).symm
 
 private theorem evalD_nat (e : F ≅ G) (n : ℕ) :
     Functor.whiskerRight
@@ -310,30 +343,30 @@ private theorem evalD_nat (e : F ≅ G) (n : ℕ) :
       Functor.isoWhiskerLeft (E C n) e := rfl
   rw [he] at h₁
   dsimp only [evalD, Iso.trans_hom, Iso.symm_hom]
-  rw [← cancel_epi (Functor.mapDerivedCategoryCompIso (W F) (E D n)).hom]
+  rw [← cancel_epi (Functor.mapDerivedCategoryCompIso (W F) (E D n)).inv]
   simp only [Category.assoc]
-  rw [← reassoc_of% h₁, Iso.hom_inv_id_assoc]
-  rw [Iso.hom_inv_id_assoc]
+  rw [← reassoc_of% h₁, Iso.inv_hom_id_assoc]
+  rw [Iso.inv_hom_id_assoc]
   exact h₂
 
 private theorem evalD_comp (n : ℕ) :
-    Functor.whiskerRight (Functor.mapDerivedCategoryCompIso (W F) (W K)).hom
+    Functor.whiskerRight (Functor.mapDerivedCategoryCompIso (W F) (W K)).inv
         (E H n).mapDerivedCategory ≫
       Functor.whiskerLeft (W F).mapDerivedCategory (evalD K n).hom ≫
       Functor.whiskerRight (evalD F n).hom K.mapDerivedCategory =
     (evalD (F ⋙ K) n).hom ≫ Functor.whiskerLeft (E C n).mapDerivedCategory
-      (Functor.mapDerivedCategoryCompIso F K).hom := by
+      (Functor.mapDerivedCategoryCompIso F K).inv := by
   have h₁ := Functor.mapDerivedCategoryCompIso_assoc (W F) (W K) (E H n)
   simp only [W, Functor.whiskeringRight_obj_comp] at h₁
   have h₂ := Functor.mapDerivedCategoryCompIso_assoc (W F) (E D n) K
   have h₃ := Functor.mapDerivedCategoryCompIso_assoc (E C n) F K
   simp only [evalD, Iso.trans_hom, Iso.symm_hom, Functor.whiskerLeft_comp,
     Functor.whiskerRight_comp, Category.assoc]
-  rw [← cancel_epi (Functor.mapDerivedCategoryCompIso (W (F ⋙ K)) (E H n)).hom]
+  rw [← cancel_epi (Functor.mapDerivedCategoryCompIso (W (F ⋙ K)) (E H n)).inv]
   rw [← reassoc_of% h₁]
-  simp only [← Functor.whiskerLeft_comp_assoc, Iso.hom_inv_id_assoc]
+  simp only [← Functor.whiskerLeft_comp_assoc, Iso.inv_hom_id_assoc]
   erw [reassoc_of% h₂]
-  simp only [← Functor.whiskerRight_comp_assoc, Iso.hom_inv_id, Functor.whiskerRight_id',
+  simp only [← Functor.whiskerRight_comp_assoc, Iso.inv_hom_id, Functor.whiskerRight_id',
     Category.id_comp]
   exact h₃.symm
 
@@ -416,11 +449,11 @@ private theorem evalD_square
     NatTrans.comp_app] at *
   simp only [Functor.whiskerLeft_app, Functor.whiskerRight_app] at hF hG he
   rw [← cancel_epi ((E D n).mapDerivedCategory.map
-    ((Functor.mapDerivedCategoryCompIso (W F₁) (W F₂)).hom.app M))]
+    ((Functor.mapDerivedCategoryCompIso (W F₁) (W F₂)).inv.app M))]
   simp only [Functor.map_comp, Category.assoc]
-  rw [← Functor.map_comp_assoc, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp,
+  rw [← Functor.map_comp_assoc, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id, Category.id_comp,
     hG, reassoc_of% he, reassoc_of% hF]
-  simp only [Iso.hom_inv_id_app_assoc]
+  simp only [Iso.inv_hom_id_app_assoc]
 
 end EvaluationCoherence
 private theorem exact_mate_tower
@@ -804,12 +837,12 @@ private theorem derivedSquare_comp
     (hd : L.mapDerivedCategory = L'.mapDerivedCategory) :
     (Functor.mapDerivedCategorySquareIso (a.symm ≪≫ eqToIso h ≪≫ b)).hom =
       ((Functor.mapDerivedCategoryNatIso a ≪≫
-        Functor.mapDerivedCategoryCompIso F₁ F₂).symm ≪≫ eqToIso hd ≪≫
+        (Functor.mapDerivedCategoryCompIso F₁ F₂).symm).symm ≪≫ eqToIso hd ≪≫
         (Functor.mapDerivedCategoryNatIso b ≪≫
-          Functor.mapDerivedCategoryCompIso G₁ G₂)).hom := by
+          (Functor.mapDerivedCategoryCompIso G₁ G₂).symm)).hom := by
   simp only [Functor.mapDerivedCategorySquareIso, Functor.mapDerivedCategoryNatIso_trans,
     Functor.mapDerivedCategoryNatIso_symm, Iso.trans_hom, Iso.trans_inv,
-    Iso.symm_hom, Category.assoc]
+    Iso.symm_hom, Iso.symm_inv, Category.assoc]
   rw [derived_eqToIso h hd]
 
 private theorem towerSquare_moduleSquareG {V W S T : Scheme.{u}}
@@ -961,18 +994,18 @@ private theorem singleBeta_lift [Finite B] {U' U X' X : Scheme.{u}}
 private theorem evalJ_eq {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] (n : ℕ) : evalJ B j n = evalD (moduleJ B j) n := by
   apply Iso.ext
-  change ((Functor.mapDerivedCategoryCompIso (towerJ B j) (E (Modules B X) n)).symm ≪≫
+  change (Functor.mapDerivedCategoryCompIso (towerJ B j) (E (Modules B X) n) ≪≫
     Functor.mapDerivedCategoryNatIso (Iso.refl _) ≪≫
-    Functor.mapDerivedCategoryCompIso (E (Modules B U) n) (moduleJ B j)).hom = _
+    (Functor.mapDerivedCategoryCompIso (E (Modules B U) n) (moduleJ B j)).symm).hom = _
   simp only [evalD, Functor.mapDerivedCategoryNatIso_refl, Iso.trans_hom,
     Iso.symm_hom, Category.id_comp]
 
 private theorem evalG_eq {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     evalG B f n = evalD (modulePullback B f) n := by
   apply Iso.ext
-  change ((Functor.mapDerivedCategoryCompIso (towerPullback B f) (E (Modules B X) n)).symm ≪≫
+  change (Functor.mapDerivedCategoryCompIso (towerPullback B f) (E (Modules B X) n) ≪≫
     Functor.mapDerivedCategoryNatIso (Iso.refl _) ≪≫
-    Functor.mapDerivedCategoryCompIso (E (Modules B Y) n) (modulePullback B f)).hom = _
+    (Functor.mapDerivedCategoryCompIso (E (Modules B Y) n) (modulePullback B f)).symm).hom = _
   simp only [evalD, Functor.mapDerivedCategoryNatIso_refl, Iso.trans_hom,
     Iso.symm_hom, Category.id_comp]
 

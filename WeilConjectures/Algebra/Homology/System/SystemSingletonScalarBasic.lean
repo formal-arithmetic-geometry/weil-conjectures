@@ -152,7 +152,7 @@ def singletonSequenceDerivedAdjunction (n : ℕ) :
   ((systemSingleDerivedExtension B n S T).adjunction.comp
     (strictSystemSequenceEquivalence B).mapDerivedCategory.toAdjunction).ofNatIsoRight
       (Functor.mapDerivedCategoryCompIso (strictSystemSequenceEquivalence B).inverse
-        (systemEvaluation B n)).symm
+        (systemEvaluation B n))
 
 /-- The representative comparison of the transported singleton universal derived pair.
 Source: Stacks 06XN (blueprint: def-pur-system-singleton-scalar-comparisons). -/

@@ -47,7 +47,8 @@ private theorem tensorRestriction_tmul
     {A S : Sheaf K CommRingCat.{s}} (c : A ⟶ S) (M : SheafOfModules.{s} (ringSheaf A))
     {X Y : Dᵒᵖ} (i : X ⟶ Y) (s : S.obj.obj X) (m : M.val.obj X) :
     (changeOfRingsPresheaf.{b, a, s} c M).map i (s ⊗ₜ[A.obj.obj X, (c.hom.app X).hom] m) =
-      S.obj.map i s ⊗ₜ[A.obj.obj Y, (c.hom.app Y).hom] M.val.map i m :=
+      S.obj.map i s ⊗ₜ[A.obj.obj Y, (c.hom.app Y).hom]
+        PresheafOfModulesOfCommRing.map (R := A.obj) M.val i m :=
   Classical.choose_spec (exists_changeOfRingsMap.{b, a, s} c M i) s m
 
 private noncomputable def tensorToRestriction
@@ -61,7 +62,7 @@ private noncomputable def tensorToRestriction
         intro X Y i
         ext m
         change f.app Y ((1 : S.obj.obj Y) ⊗ₜ[A.obj.obj Y, (c.hom.app Y).hom]
-          M.val.map i m) = H.val.map i (f.app X
+          PresheafOfModulesOfCommRing.map (R := A.obj) M.val i m) = H.val.map i (f.app X
             ((1 : S.obj.obj X) ⊗ₜ[A.obj.obj X, (c.hom.app X).hom] m))
         have h := PresheafOfModules.naturality_apply f i
           ((1 : S.obj.obj X) ⊗ₜ[A.obj.obj X, (c.hom.app X).hom] m)

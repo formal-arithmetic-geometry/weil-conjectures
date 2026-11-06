@@ -195,7 +195,6 @@ private theorem composition_factorization_transport
   cases h
   simpa only [eqToIso_refl, Iso.trans_refl, Iso.app_hom] using
     composition_factorization f g P
-
 /-- The composition comparison intertwines the successive derived counits at a complex.
 There is no coefficient morphism, representative isomorphism or K-flatness assumption.
 Source: Stacks Project, Tag 0D5S, composition of derived pullbacks.
@@ -214,7 +213,7 @@ the displayed equation. The quotient/localization comparison has identity compon
 its naturality identifies Qh of the termwise comparison with Q of that comparison.
 No inversion of a counit is used; zero complexes and empty schemes satisfy the same
 factorization equations. -/
-theorem affineSpectrum_composition_counit_square
+private theorem affineSpectrum_composition_counit_square_aux
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     {X X' : Scheme.{u}} [IsAffine X] [IsAffine X']
@@ -269,5 +268,61 @@ theorem affineSpectrum_composition_counit_square
     NatIso.mapHomologicalComplex,
     NatTrans.mapHomologicalComplex_comp, NatTrans.comp_app, Functor.map_comp,
     Functor.mapIso_hom, Functor.mapIso_inv, Category.assoc] using h
+
+
+/-- The composition comparison intertwines the successive derived counits at a complex.
+There is no coefficient morphism, representative isomorphism or K-flatness assumption.
+Source: Stacks Project, Tag 0D5S, composition of derived pullbacks.
+(blueprint: lem-pc-affine-spectrum-composition-counit-square).
+
+Proof: Apply the leftDerived_fac_app equation to each of the two chosen composition
+comparisons, at the image of P in the homotopy category. Expand whiskering and
+associators: each equation is the composite of the two successive counits followed
+by Qh of the underived composition comparison. The latter is the inverse of the
+pinned tensorPullbackCompositionIso, since conjugation commutes with inversion and
+pushforwardCongr rfl is the identity. Transport the second equation along
+isoSpec_inv_naturality. Its total pullback and counit agree with those in the first
+equation by equality elimination and proof irrelevance. Cancel the second derived
+comparison and the first underived comparison. The resulting square is precisely
+the displayed equation. The quotient/localization comparison has identity components;
+its naturality identifies Qh of the termwise comparison with Q of that comparison.
+No inversion of a counit is used; zero complexes and empty schemes satisfy the same
+factorization equations. -/
+theorem affineSpectrum_composition_counit_square
+    [∀ Y : Scheme.{u},
+      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+    {X X' : Scheme.{u}} [IsAffine X] [IsAffine X']
+    (g' : X' ⟶ X)
+    (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :
+    let a : Scheme.Modules.tensorPullback X.isoSpec.inv ⋙
+        Scheme.Modules.tensorPullback (Spec.map g'.appTop) ≅
+        Scheme.Modules.tensorPullback g' ⋙ Scheme.Modules.tensorPullback X'.isoSpec.inv :=
+      (Scheme.Modules.tensorPullbackCompositionIso (Spec.map g'.appTop) X.isoSpec.inv
+        ((Spec.map g'.appTop) ≫ X.isoSpec.inv) rfl).symm ≪≫
+      Scheme.Modules.tensorPullbackCompositionIso X'.isoSpec.inv g'
+        ((Spec.map g'.appTop) ≫ X.isoSpec.inv) (Scheme.isoSpec_inv_naturality g').symm
+    (derivedPullback (Spec.map g'.appTop)).map
+        (cast (by rfl)
+          ((counit X.isoSpec.inv).app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) :
+          (derivedPullback X.isoSpec.inv).obj (DerivedCategory.Q.obj P) ⟶
+            DerivedCategory.Q.obj
+              (((Scheme.Modules.tensorPullback X.isoSpec.inv).mapHomologicalComplex
+                (.up ℤ)).obj P)) ≫
+      cast (by rfl) ((counit (Spec.map g'.appTop)).app
+        ((HomotopyCategory.quotient _ (.up ℤ)).obj
+          (((Scheme.Modules.tensorPullback X.isoSpec.inv).mapHomologicalComplex
+            (.up ℤ)).obj P))) ≫
+      DerivedCategory.Q.map ((NatIso.mapHomologicalComplex a (.up ℤ)).hom.app P) =
+    (affineSpectrumDerivedPullbackIso g').hom.app (DerivedCategory.Q.obj P) ≫
+      (derivedPullback X'.isoSpec.inv).map
+        (cast (by rfl) ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) :
+          (derivedPullback g').obj (DerivedCategory.Q.obj P) ⟶
+            DerivedCategory.Q.obj
+              (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P)) ≫
+      cast (by rfl) ((counit X'.isoSpec.inv).app
+        ((HomotopyCategory.quotient _ (.up ℤ)).obj
+          (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P))) := by
+  with_unfolding_all
+    exact affineSpectrum_composition_counit_square_aux g' P
 
 end AlgebraicGeometry.SingleComplexBaseChange

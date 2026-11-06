@@ -77,7 +77,7 @@ private lemma structure_fac (K : CochainComplex (IsoAlgebra F) ℤ) :
   erw [hid, Functor.map_id, Category.comp_id] at hc
   dsimp only [cyclicDerivedStructure, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app]
   erw [Category.assoc, h, ← hc]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
 
 private lemma unit_fac (K : CochainComplex C ℤ) :
     (cyclicDerivedFreeAdjunction F).unit.app (DerivedCategory.Q.obj K) ≫

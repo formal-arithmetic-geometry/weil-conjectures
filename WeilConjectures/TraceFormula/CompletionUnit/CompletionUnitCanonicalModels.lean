@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.TraceFormula.CompletionUnit.CompletionUnitModels
 import WeilConjectures.TraceFormula.CompletionUnit.CompletionUnitOrdinaryAdjunction
 import WeilConjectures.TraceFormula.CompletionUnit.CompletionUnitDerivedAdjunctionComparison

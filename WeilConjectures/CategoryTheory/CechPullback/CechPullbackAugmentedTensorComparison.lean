@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Homology.Monoidal
 public import Mathlib.Algebra.Homology.Additive
 public import Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import Mathlib.CategoryTheory.Monoidal.Closed.Braided
 public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
 public import Mathlib.CategoryTheory.Monoidal.Preadditive
 public import Mathlib.CategoryTheory.Abelian.Basic

@@ -347,7 +347,7 @@ lemma exists_monodromy_eq (φ : G →ₜ* Multiplicative M) :
   have hsmul (g : G) (v : V) : g • v = eM ((φ g).toAdd + eM.symm v) := rfl
   let X : ContAction FintypeCat.{u} G :=
     ⟨Action.FintypeCat.ofMulAction G (FintypeCat.of V), by
-      rw [Action.isContinuous_def]
+      constructor
       have : DiscreteTopology ((forget₂ (Action FintypeCat G) TopCat).obj
         (Action.FintypeCat.ofMulAction G (FintypeCat.of V))) := ⟨rfl⟩
       have : DiscreteTopology ((forget₂ FintypeCat TopCat).obj

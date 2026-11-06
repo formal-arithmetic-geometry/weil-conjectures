@@ -54,7 +54,8 @@ structure RhomInjectiveCocycleFamily
       let η := V.rightDerivedFunctorPlusUnit.app I
       map I hi n ((H n).map η b) =
         ShiftedHom.map (Cocycle.equivHomShift.symm
-            (Cocycle.fromSingleMk f (zero_add n) (n + 1) rfl hf)) DerivedCategory.Q
+            (Cocycle.fromSingleMk f (zero_add n) (n + 1) rfl hf)) DerivedCategory.Q ≫
+          ((DerivedCategory.Plus.QCompιIso C).inv.app I)⟦n⟧'
   natural :
     let V := preadditiveCoyoneda.obj (op M)
     let RV := V.rightDerivedFunctorPlus

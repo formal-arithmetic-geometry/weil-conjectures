@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.PinnedPullbackCounitShifts
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 public import Mathlib.CategoryTheory.Shift.Adjunction
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryAdjunctionShift
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.UnitShift
 
 /-! # Shift compatibility of the selected derived adjunction
 Source: Stacks Project, Tags 08HY and 0D5S. -/
@@ -69,7 +70,9 @@ private theorem canonicalRightDerivedUnitShift
   have := hi
   refine ⟨HomotopyCategory.KInjectives.mk I,
     (HomotopyCategory.quotient C (.up ℤ)).map i, ?_⟩
-  change IsIso (F.rightDerivedFunctor.map (DerivedCategory.Q.map i))
+  have : IsIso (DerivedCategory.Qh.map ((HomotopyCategory.quotient C (.up ℤ)).map i)) :=
+    (NatIso.isIso_map_iff (DerivedCategory.quotientCompQhIso C) i).2 inferInstance
+  dsimp only [Functor.comp_map]
   infer_instance
 
 -- Normalization identifies the left-derived counit with the inverse mate of the right unit.

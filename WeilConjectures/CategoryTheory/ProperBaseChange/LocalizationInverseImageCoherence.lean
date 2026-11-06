@@ -177,8 +177,10 @@ theorem existsUnique_scalarLocalizationUnit
         intro U V f
         apply ModuleCat.hom_ext
         ext m
-        change M.val.map f m ⊗ₜ[R.obj.obj V] j.val.app V (1 : R.obj.obj V) =
-          M.val.map f m ⊗ₜ[R.obj.obj V] N.val.map f (j.val.app U (1 : R.obj.obj U))
+        change (show M.val.obj V from M.val.map f m) ⊗ₜ[R.obj.obj V]
+            j.val.app V (1 : R.obj.obj V) =
+          (show M.val.obj V from M.val.map f m) ⊗ₜ[R.obj.obj V]
+            (show N.val.obj V from N.val.map f (j.val.app U (1 : R.obj.obj U)))
         congr 1
         rw [← PresheafOfModules.naturality_apply j.val f]
         change j.val.app V (1 : R.obj.obj V) =
@@ -589,11 +591,12 @@ private def localizationScalar (R : Sheaf J CommRingCat.{u})
      naturality := by
        intro U V f
        ext m
-       change (t.val V : R.obj.obj V) • M.val.map f m =
+       change (t.val V : R.obj.obj V) • (show M.val.obj V from M.val.map f m) =
          M.val.map f ((t.val U : R.obj.obj U) • m)
        rw [M.val.map_smul]
        have ht : R.obj.map f (t.val U) = t.val V := t.property f
-       change (t.val V : R.obj.obj V) • _ = R.obj.map f (t.val U) • _
+       change (t.val V : R.obj.obj V) • (show M.val.obj V from M.val.map f m) =
+         R.obj.map f (t.val U) • (show M.val.obj V from M.val.map f m)
        rw [ht] }⟩
 
 private theorem localizationSets_preserves_sequence (R : Sheaf J CommRingCat.{u}) :

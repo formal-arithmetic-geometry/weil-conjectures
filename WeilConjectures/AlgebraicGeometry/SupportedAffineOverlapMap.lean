@@ -9,11 +9,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Mathlib.AlgebraicGeometry.AffineScheme
-import WeilConjectures.AlgebraicGeometry.AffinePerfectMapLift
-import WeilConjectures.AlgebraicGeometry.SupportedOverlapPerfectExtension
-import WeilConjectures.AlgebraicGeometry.LocalPerfectSupportedStabilization
-import WeilConjectures.AlgebraicGeometry.CompactOverlapRestrictionModel
-import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionQCoh
 
 /-! # Supported affine overlap data
 

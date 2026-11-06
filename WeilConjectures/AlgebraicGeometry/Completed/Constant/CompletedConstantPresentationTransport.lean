@@ -491,8 +491,8 @@ theorem completed_constant_presentation_transport
   let δD : F.functor ≅ (completedCechDerivedEquiv T d).functor ⋙
       ConstantCompletion.dres β.inv :=
     α ≪≫ CategoryTheory.Functor.mapDerivedCategoryNatIso δ ≪≫
-      CategoryTheory.Functor.mapDerivedCategoryCompIso
-        (completedCechModulesEquiv T d).functor Rb
+      (CategoryTheory.Functor.mapDerivedCategoryCompIso
+        (completedCechModulesEquiv T d).functor Rb).symm
   refine ⟨{
     equivalence := F
     quotient := hQ
