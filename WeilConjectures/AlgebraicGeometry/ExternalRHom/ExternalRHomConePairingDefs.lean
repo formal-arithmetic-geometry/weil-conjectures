@@ -188,7 +188,10 @@ noncomputable def leftDerivedModelOf (F : C ⥤ D) [F.Additive] [F.PreservesKFla
     (U : CochainComplex C ℤ) :
     F.leftDerivedFunctor.obj (DerivedCategory.Q.obj U) ⟶
       DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj U) :=
-  F.leftDerivedFunctorCounit.app ((HomotopyCategory.quotient C (.up ℤ)).obj U)
+  F.leftDerivedFunctor.map ((DerivedCategory.quotientCompQhIso C).inv.app U) ≫
+    F.leftDerivedFunctorCounit.app ((HomotopyCategory.quotient C (.up ℤ)).obj U) ≫
+    DerivedCategory.Qh.map ((F.mapHomotopyCategoryFactors (.up ℤ)).hom.app U) ≫
+    (DerivedCategory.quotientCompQhIso D).hom.app ((F.mapHomologicalComplex (.up ℤ)).obj U)
 
 end DerivedModels
 
