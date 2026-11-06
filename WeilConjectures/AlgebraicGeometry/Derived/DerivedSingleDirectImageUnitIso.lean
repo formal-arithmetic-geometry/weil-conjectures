@@ -51,7 +51,7 @@ private theorem single_unit_iso
     have : IsIso (H₀.map (DerivedCategory.Q.map
         ((F.mapCochainComplexSingleFunctor 0).inv.app M)) ≫
       H₀.map (η.app ((HomotopyCategory.singleFunctor C 0).obj M))) := by
-      simpa only [Functor.rightDerivedSingleUnit, Functor.map_comp,
+      simpa only [Functor.rightDerivedSingleUnit, cast_eq, Functor.map_comp,
         Functor.comp_obj, HomotopyCategory.singleFunctor, HomotopyCategory.singleFunctors,
         CochainComplex.singleFunctor, CochainComplex.singleFunctors,
         SingleFunctors.postcomp] using hzero
