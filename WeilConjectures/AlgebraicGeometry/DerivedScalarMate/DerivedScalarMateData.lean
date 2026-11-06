@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.FourCornersSupplement
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.DerivedScalarMate.DerivedScalarTensorOrdinary
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Canonical.ProEtaleCanonicalTensorPullback
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Projection.ProEtaleProjectionFormulaArrows
@@ -80,17 +82,17 @@ def IsDerivedTensor {W : Scheme.{u}}
       a.tensor.map (Prod.mkHom (𝟙 (DerivedCategory.Q.obj P)) (DerivedCategory.Q.map q)) ≫
       h.inv.app (DerivedCategory.Q.obj P) ≫
       (restriction φ).mapDerivedCategory.map
-        ((Scheme.proEtaleRingDerivedExtensionCounit
+        (cast (by rfl) ((Scheme.proEtaleRingDerivedExtensionCounit
           φ).app
-            ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P)) ≫
+            ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P))) ≫
       (restriction φ).mapDerivedCategoryFactorsh.hom.app
         (((Scheme.proEtaleRingExtension
           φ).mapHomotopyCategory (ComplexShape.up ℤ)).obj
             ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P)) =
-    DerivedCategory.Q.map
+    cast (by rfl) (DerivedCategory.Q.map
       (HomologicalComplex.mapBifunctorMap (𝟙 P) q
         (Scheme.proEtaleOrdinaryTensor W A)
-        (ComplexShape.up ℤ) ≫ (ordinaryComplexIso φ P).inv)
+        (ComplexShape.up ℤ) ≫ (ordinaryComplexIso φ P).inv))
 
 set_option backward.defeqAttrib.useBackward true
 attribute [local implicit_reducible] CategoryTheory.Functor.map₂HomologicalComplex

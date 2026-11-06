@@ -167,7 +167,8 @@ theorem exists_unique_minimalFreeModel
   have hPrank (i : ℤ) :
       Nonempty (P.X i ≅ ModuleCat.of R (ULift.{v} (Fin (d i) → R))) := by
     have : Module.Finite R (P.X i) := (hPterms i).1
-    have : Module.Free R (P.X i) := hPfree i inferInstance
+    have : Module.Free R (P.X i) := hPfree i (by
+      change Module.Free κ (ULift.{v} (Fin (d i) → κ)); infer_instance)
     apply free_iso_of_residue_finrank (P.X i) (d i)
     have hi := ((HomologicalComplex.eval _ _ i).mapIso e).toLinearEquiv.finrank_eq
     change Module.finrank κ ((ModuleCat.extendScalars (IsLocalRing.residue R)).obj
@@ -180,7 +181,8 @@ theorem exists_unique_minimalFreeModel
     K hK d hd P G hPbound hGbound hPK hGK hPrank hGterms
   have (i : ℤ) : IsIso (β.f i) := by
     have : Module.Finite R (P.X i) := (hPterms i).1
-    have : Module.Free R (P.X i) := hPfree i inferInstance
+    have : Module.Free R (P.X i) := hPfree i (by
+      change Module.Free κ (ULift.{v} (Fin (d i) → κ)); infer_instance)
     let eG := (hGterms i).some.toLinearEquiv
     have : Module.Finite R (G.X i) := Module.Finite.equiv eG.symm
     have : Module.Free R (G.X i) := Module.Free.of_equiv eG.symm

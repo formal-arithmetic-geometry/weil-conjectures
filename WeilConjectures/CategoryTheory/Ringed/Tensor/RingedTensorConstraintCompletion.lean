@@ -56,6 +56,13 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   (R : Sheaf J CommRingCat.{max c v r})
 private abbrev Mod := RingedTensorModules.{c, v, r} J R
 
+noncomputable local instance ringedTensorUnitSMul
+    (M : SheafOfModules.{max c v r}
+      ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R))
+    (U : Cᵒᵖ) :
+    SMul (((ringedTensorUnitComplex.{c, v, r} J R).X 0).val.obj U) (M.val.obj U) :=
+  (M.val.obj U).isModule.toSMul
+
 private def pure (A B : Mod.{c, v, r} J R) (U : Cᵒᵖ)
     (x : A.val.obj U) (y : B.val.obj U) : (A ⊗ B).val.obj U :=
   (tensorObjIsoSheafification A B).inv.val.app U
@@ -230,7 +237,7 @@ structure RingedTensorConstraintModels
         (ρ.f p).val.app U
             (WeilConjectures.coefficientTensorGenerator.{r, c, v} J R P
       (ringedTensorUnitComplex.{c, v, r} J R)
-              p 0 p (Int.add_zero p) U x a) = (show R.obj.obj U from a) • x) ∧
+              p 0 p (Int.add_zero p) U x a) = a • x) ∧
       (T.iso J R S P (ringedTensorUnitComplex.{c, v, r} J R)
           hP unitKFlat).hom ≫ S.tensor.map (Prod.mkHom (𝟙 _) u.inv) ≫
           (S.monoidal.rightUnitor (DerivedCategory.Q.obj P)).hom = DerivedCategory.Q.map ρ

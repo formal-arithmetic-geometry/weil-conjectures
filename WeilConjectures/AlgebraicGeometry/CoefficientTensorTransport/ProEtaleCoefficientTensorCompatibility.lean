@@ -16,7 +16,23 @@ import WeilConjectures.AlgebraicGeometry.TensorPullbackRepresentativeDescent
 
 (blueprint: lem-pbc-coefficient-restriction-tensor-comparison-compatibility)
 -/
+@[expose] public noncomputable section
+set_option autoImplicit false
+set_option synthInstance.maxSize 4096
+universe u
+open CategoryTheory CategoryTheory.Functor CategoryTheory.Limits
+namespace AlgebraicGeometry.Scheme.CoefficientTensorTransport
 
+attribute [local implicit_reducible] pbcDerivedRestrict
+  Functor.map₂HomologicalComplex Functor.mapHomologicalComplex
+  SheafOfModules.restrictScalars
+
+attribute [local irreducible] Functor.mapDerivedCategory
+  proEtaleRingDerivedPullbackFactors CoefficientTensorChain.complexPullback
+  pullback SheafOfModules.monoidalCategory
+
+set_option maxHeartbeats 800000 in
+-- Converting exact-derived functor identities requires a larger elaboration budget.
 /-- The normalized coefficient tensor comparison, including its geometric compatibility.
 
 Source: Stacks Tags 03EL and 07A4. Construct the coefficient tensor comparison by
@@ -86,3 +102,5 @@ theorem tensorComparison_compatibility {X Y : Scheme.{u}} (f : X ⟶ Y)
   change left.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) =
     right.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q)
   exact representative_square f R S c aY z aX o hU gamma hgamma P Q hp hq
+
+end AlgebraicGeometry.Scheme.CoefficientTensorTransport

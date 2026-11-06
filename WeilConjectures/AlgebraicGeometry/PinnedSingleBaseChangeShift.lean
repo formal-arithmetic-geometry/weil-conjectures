@@ -50,6 +50,35 @@ def singleDegreeBaseChangeTarget
   ((Scheme.Modules.tensorPullback g' ⋙ DerivedCategory.singleFunctor
     (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) n) ⋙ schemeDerivedDirectImage.{u, w, w} f')
 
+/-- The base-change comparison followed by the composition-pinned tensor counit.
+This uses the same composition-pinned left-derived counit as the original comparison.
+Source: Stacks Project, Tag 08HY (blueprint: lem-pc-pinned-single-base-change-shift). -/
+def singleDegreeBaseChangeComposite
+    [∀ Y : Scheme.{u},
+      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+    [∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z), (Scheme.Modules.tensorPullback k).Additive]
+    {X S X' S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S)
+    (g' : X' ⟶ X) (f' : X' ⟶ S') (h : g' ≫ f = f' ≫ g)
+    (n : ℤ) (G : X.Modules) :
+    (singleDegreeBaseChangeSource.{u, w} f g n).obj G ⟶
+      (singleDegreeBaseChangeTarget.{u, w} g' f' n).obj G :=
+  let ε := (Classical.choose
+    (Classical.choose_spec exists_derivedPullbackComposition.{u, w})) g'
+  let c : (derivedPullback.{u, w} g').obj
+      ((DerivedCategory.singleFunctor
+        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj G) ⟶
+      (DerivedCategory.singleFunctor
+        (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) n).obj
+          ((Scheme.Modules.tensorPullback g').obj G) :=
+    cast (by rfl) (ε.app ((HomotopyCategory.singleFunctor _ n).obj G) ≫
+      DerivedCategory.Qh.{w}.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
+        ((HomologicalComplex.singleMapHomologicalComplex
+          (Scheme.Modules.tensorPullback g') (ComplexShape.up ℤ) n).hom.app G)))
+  schemeDerivedBaseChangeMap.{u, w} f f' g g' h
+      ((DerivedCategory.singleFunctor
+        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj G) ≫
+    (schemeDerivedDirectImage.{u, w, w} f').map c
+
 theorem pinned_single_base_change_shift
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -108,34 +137,5 @@ theorem pinned_single_base_change_shift
     dsimp only [a, b, Iso.symm_hom]
     simp only [Iso.hom_inv_id_app_assoc]
     rw [← Category.assoc, hb, Category.assoc, Iso.hom_inv_id_app, Category.comp_id]
-
-/-- The base-change comparison followed by the composition-pinned tensor counit.
-This uses the same composition-pinned left-derived counit as the original comparison.
-Source: Stacks Project, Tag 08HY (blueprint: lem-pc-pinned-single-base-change-shift). -/
-def singleDegreeBaseChangeComposite
-    [∀ Y : Scheme.{u},
-      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
-    [∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z), (Scheme.Modules.tensorPullback k).Additive]
-    {X S X' S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S)
-    (g' : X' ⟶ X) (f' : X' ⟶ S') (h : g' ≫ f = f' ≫ g)
-    (n : ℤ) (G : X.Modules) :
-    (singleDegreeBaseChangeSource.{u, w} f g n).obj G ⟶
-      (singleDegreeBaseChangeTarget.{u, w} g' f' n).obj G :=
-  let ε := (Classical.choose
-    (Classical.choose_spec exists_derivedPullbackComposition.{u, w})) g'
-  let c : (derivedPullback.{u, w} g').obj
-      ((DerivedCategory.singleFunctor
-        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj G) ⟶
-      (DerivedCategory.singleFunctor
-        (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) n).obj
-          ((Scheme.Modules.tensorPullback g').obj G) :=
-    cast (by rfl) (ε.app ((HomotopyCategory.singleFunctor _ n).obj G) ≫
-      DerivedCategory.Qh.{w}.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
-        ((HomologicalComplex.singleMapHomologicalComplex
-          (Scheme.Modules.tensorPullback g') (ComplexShape.up ℤ) n).hom.app G)))
-  schemeDerivedBaseChangeMap.{u, w} f f' g g' h
-      ((DerivedCategory.singleFunctor
-        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj G) ≫
-    (schemeDerivedDirectImage.{u, w, w} f').map c
 
 end AlgebraicGeometry

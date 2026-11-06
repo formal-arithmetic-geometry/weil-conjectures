@@ -31,6 +31,10 @@ universe u w
 open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry
 
+attribute [local implicit_reducible] Scheme.Modules Scheme.Modules.Hom TopCat.Sheaf
+  DerivedCategory HomotopyCategory
+attribute [local irreducible] Scheme.Modules.tensorPullback
+
 /-- Composing two commuting squares composes their endpoint isomorphisms. -/
 private theorem comparison_comp
     {C : Type*} [Category C] {A B A' B' A'' B'' : C}
@@ -63,7 +67,7 @@ private theorem pinned_comparison_isComparison
     (Classical.choose_spec exists_derivedPullbackComposition.{u, w})) k
 
 set_option maxHeartbeats 400000 in
--- The replacement proof exhausted 200000 heartbeats in the remote check (12s).
+-- The remote check exhausted 200000 heartbeats in this comparison proof (13s).
 /-- Restriction and affine charts identify the canonical *arrow*, without asserting
 that it is invertible. Both the restricted scheme and its module are explicit.
 Source: Stacks Project, Tag 08IB, first paragraph of the proof; Tag 08HY and Tag 08FE.
@@ -129,37 +133,32 @@ theorem exists_canonicalModuleBaseChange_affineChart_comparison
   classical
   intro U fA gA H E E0 R T
   dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
-  obtain ⟨cV, hcV⟩ := exists_isDerivedModulePullbackComparison.{u, w}
-    (pullback.fst (f ∣_ V.1) (g.resLE V.1 W.1 hWV)) H
   let p := pullback.fst (f ∣_ V.1) (g.resLE V.1 W.1 hWV)
   let q := pullback.snd (f ∣_ V.1) (g.resLE V.1 W.1 hWV)
   let c₁ := openPinnedSingleDegreeZeroCounit.{u, w} g' G
-  let c₂ := openPinnedSingleDegreeZeroCounit.{u, w} p H
+  let cV := openPinnedSingleDegreeZeroCounit.{u, w} p H
+  have hcV : IsDerivedModulePullbackComparison p H cV :=
+    pinned_comparison_isComparison.{u, w} p H
   obtain ⟨α, hα⟩ := modulePullbackComparison_target_automorphism.{u, w}
-    g' G c₁ c (pinned_comparison_isComparison g' G) hc
-  obtain ⟨γ, hγ⟩ := modulePullbackComparison_target_automorphism.{u, w}
-    p H c₂ cV (pinned_comparison_isComparison p H) hcV
+    g' G c₁ c (pinned_comparison_isComparison.{u, w} g' G) hc
   obtain ⟨aP, bP, hP⟩ :=
     open_pinned_single_degree_zero_square.{u, w} f g g' f' sq V.1 W.1 hWV
   let A := R.mapIso ((schemeDerivedDirectImage f').mapIso
     ((DerivedCategory.singleFunctor
       (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) 0).mapIso α))
-  let B := (schemeDerivedDirectImage q).mapIso
-    ((DerivedCategory.singleFunctor
-      (SheafOfModules.{u} (moduleRings (pullback (f ∣_ V.1)
-        (g.resLE V.1 W.1 hWV)).toRingedSpace)) 0).mapIso γ)
   let aV := aP.app G
-  let bV := A.symm ≪≫ bP.app G ≪≫ B
-  have h := comparison_conjugate _ _ (aP.app G) (bP.app G) A B (hP G)
+  let bV := A.symm ≪≫ bP.app G
+  have h := comparison_conjugate _ _ (aP.app G) (bP.app G) A (Iso.refl _) (hP G)
+  simp only [Iso.trans_refl, Iso.refl_hom, Category.comp_id] at h
   change (R.map (schemeDerivedBaseChangeMap f f' g g' sq.w E ≫
     (schemeDerivedDirectImage f').map c₁) ≫ A.hom) ≫ bV.hom =
-    aV.hom ≫ ((schemeDerivedBaseChangeMap (f ∣_ V.1) q (g.resLE V.1 W.1 hWV) p
-      pullback.condition E0 ≫ (schemeDerivedDirectImage q).map c₂) ≫ B.hom) at h
+    aV.hom ≫ (schemeDerivedBaseChangeMap (f ∣_ V.1) q (g.resLE V.1 W.1 hWV) p
+      pullback.condition E0 ≫ (schemeDerivedDirectImage q).map cV) at h
   have hV : R.map (schemeDerivedBaseChangeMap f f' g g' sq.w E ≫
       (schemeDerivedDirectImage f').map c) ≫ bV.hom =
       aV.hom ≫ (schemeDerivedBaseChangeMap (f ∣_ V.1) q (g.resLE V.1 W.1 hWV) p
         pullback.condition E0 ≫ (schemeDerivedDirectImage q).map cV) := by
-    simpa only [hα, hγ, A, B, Functor.map_comp, Functor.mapIso_hom,
+    simpa only [hα, A, Functor.map_comp, Functor.mapIso_hom,
       Category.assoc] using h
   have hi := exists_canonicalModuleBaseChange_iso_comparison.{u, w}
     (f ∣_ V.1) (g.resLE V.1 W.1 hWV)

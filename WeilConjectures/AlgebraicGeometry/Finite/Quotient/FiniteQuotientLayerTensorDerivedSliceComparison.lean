@@ -417,7 +417,6 @@ private instance layerSliceRes_colimits (X : Scheme.{t}) (U : X.ProEt)
     PreservesFiniteColimits (layerSliceRes X U f) :=
   (SheafOfModules.sheafRingDerivedCoefficientAdjunction
     (((ProEt.topology X).overPullback CommRingCat.{t + 1} U).map f)).choose_spec.choose
-
 private theorem layerRes_over (X : Scheme.{t}) (U : X.ProEt)
     {R S : Sheaf (ProEt.topology X) CommRingCat.{t + 1}} (f : R ⟶ S) :
     Nonempty ((layerRes X f).mapDerivedCategory ⋙ ringedDerivedRestrictionGeneral _ U ≅
@@ -446,6 +445,36 @@ private theorem layerRes_over (X : Scheme.{t}) (U : X.ProEt)
       SheafOfModules.overFunctor _ U ⋙ layerSliceRes X U f := Iso.refl _
   exact ⟨(Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
     Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryCompIso _ _⟩
+
+
+private theorem layerRes_over (X : Scheme.{t}) (U : X.ProEt)
+    {R S : Sheaf (ProEt.topology X) CommRingCat.{t + 1}} (f : R ⟶ S) :
+    Nonempty ((layerRes X f).mapDerivedCategory ⋙ ringedDerivedRestrictionGeneral _ U ≅
+      ringedDerivedRestrictionGeneral _ U ⋙ (layerSliceRes X U f).mapDerivedCategory) := by
+  have := (ringedOverFunctor_exactGeneral
+    ((sheafCompose (ProEt.topology X)
+      (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj R) U).1
+  have := (ringedOverFunctor_exactGeneral
+    ((sheafCompose (ProEt.topology X)
+      (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj R) U).2.1
+  have := (ringedOverFunctor_exactGeneral
+    ((sheafCompose (ProEt.topology X)
+      (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj R) U).2.2
+  have := (ringedOverFunctor_exactGeneral
+    ((sheafCompose (ProEt.topology X)
+      (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj S) U).1
+  have := (ringedOverFunctor_exactGeneral
+    ((sheafCompose (ProEt.topology X)
+      (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj S) U).2.1
+  have := (ringedOverFunctor_exactGeneral
+    ((sheafCompose (ProEt.topology X)
+      (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj S) U).2.2
+  have := layerSliceRes_limits X U f
+  have := layerSliceRes_colimits X U f
+  let e : layerRes X f ⋙ SheafOfModules.overFunctor _ U ≅
+      SheafOfModules.overFunctor _ U ⋙ layerSliceRes X U f := Iso.refl _
+  exact ⟨Functor.mapDerivedCategoryCompIso _ _ ≪≫
+    Functor.mapDerivedCategoryNatIso e ≪≫ (Functor.mapDerivedCategoryCompIso _ _).symm⟩
 
 private instance layerConstant_zero (X : Scheme.{t}) (B : Type t) [CommRing B]
     [(koszulConstantFunctor X B).PreservesZeroMorphisms]

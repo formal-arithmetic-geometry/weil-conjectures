@@ -54,6 +54,10 @@ private theorem paste_scalar_complex_faces {C : Type*} [Category C]
     (hv : v = v') : a ≫ b ≫ δ = δD ≫ v := by
   rw [ha, hb, hh, hv]
 
+attribute [local irreducible] coefficientInternalScalarComplex
+
+set_option maxHeartbeats 800000 in
+-- Compare the complex and homotopy localization tensor structures.
 /-- The internal scalar tensor comparison on complex representatives.
 Source: Stacks Project, Cohomology on Sites, Tag 07A4.
 The complex localization tensorator is the homotopy localization tensorator: the

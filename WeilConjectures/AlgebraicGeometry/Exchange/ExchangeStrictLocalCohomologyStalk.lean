@@ -44,6 +44,42 @@ namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+private theorem evaluation_local
+    {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
+    (y : Spec (.of Ω) ⟶ Y) [IsLocalRing (Scheme.strictHenselizationRing y)] :
+    IsLocalHom (Scheme.strictHenselizationRingPointEvaluation y) := by
+  let : Algebra (Y.residueField (y (IsLocalRing.closedPoint Ω))) Ω :=
+    (Scheme.descResidueField (Scheme.stalkClosedPointTo y)).hom.toAlgebra
+  let e := Scheme.smallStrictHenselizationColimitIso y
+  let ψ : Scheme.strictHenselizationRing y →+* _ :=
+    (Scheme.strictHenselizationPointEvaluationToSep y rfl).comp e.hom.hom
+  have : IsLocalHom ψ := IsLocalHom.of_surjective ψ
+    ((Scheme.strictHenselizationPointEvaluationToSep_surjective y rfl).comp
+      e.commRingCatIsoToRingEquiv.surjective)
+  let ι : separableClosure (Y.residueField (y (IsLocalRing.closedPoint Ω))) Ω →+* Ω :=
+    (IntermediateField.val _).toRingHom
+  have : IsLocalHom ι := inferInstance
+  change IsLocalHom (ι.comp ψ)
+  infer_instance
+
+private theorem localization_model_transport
+    {Y Z : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
+    (s t : Spec (.of Ω) ⟶ Y) (h : s = t)
+    (e : Z ≅ Scheme.strictLocalization s) :
+    ∃ e' : Z ≅ Scheme.strictLocalization t,
+      e'.hom ≫ Scheme.strictLocalizationToBase t =
+        e.hom ≫ Scheme.strictLocalizationToBase s := by
+  subst t
+  exact ⟨e, rfl⟩
+
+private theorem bijective_conjugate
+    {A B C D : Type*} (f : A → B) (g : C → D)
+    (e : A ≃ C) (e' : B ≃ D) (h : ∀ x, e' (f x) = g (e x)) :
+    Function.Bijective f ↔ Function.Bijective g := by
+  have hh : e' ∘ f = g ∘ e := funext h
+  rw [← Function.Bijective.of_comp_iff' e'.bijective f, hh]
+  exact Function.Bijective.of_comp_iff g e.bijective
+
 theorem isIso_exchange_stalk_iff_strictLocalCohomology
     {X S T : Scheme.{u}} (f : X ⟶ S) (g : T ⟶ S)
     [QuasiCompact g] [QuasiSeparated g]
@@ -164,41 +200,5 @@ theorem isIso_exchange_stalk_iff_strictLocalCohomology
   change b₂ (c₂ _) = cohomologyMap p₁ _ q (b₁ (c₁ z))
   rw [hc]
   exact hb (c₁ z)
-
-private theorem evaluation_local
-    {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
-    (y : Spec (.of Ω) ⟶ Y) [IsLocalRing (Scheme.strictHenselizationRing y)] :
-    IsLocalHom (Scheme.strictHenselizationRingPointEvaluation y) := by
-  let : Algebra (Y.residueField (y (IsLocalRing.closedPoint Ω))) Ω :=
-    (Scheme.descResidueField (Scheme.stalkClosedPointTo y)).hom.toAlgebra
-  let e := Scheme.smallStrictHenselizationColimitIso y
-  let ψ : Scheme.strictHenselizationRing y →+* _ :=
-    (Scheme.strictHenselizationPointEvaluationToSep y rfl).comp e.hom.hom
-  have : IsLocalHom ψ := IsLocalHom.of_surjective ψ
-    ((Scheme.strictHenselizationPointEvaluationToSep_surjective y rfl).comp
-      e.commRingCatIsoToRingEquiv.surjective)
-  let ι : separableClosure (Y.residueField (y (IsLocalRing.closedPoint Ω))) Ω →+* Ω :=
-    (IntermediateField.val _).toRingHom
-  have : IsLocalHom ι := inferInstance
-  change IsLocalHom (ι.comp ψ)
-  infer_instance
-
-private theorem localization_model_transport
-    {Y Z : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
-    (s t : Spec (.of Ω) ⟶ Y) (h : s = t)
-    (e : Z ≅ Scheme.strictLocalization s) :
-    ∃ e' : Z ≅ Scheme.strictLocalization t,
-      e'.hom ≫ Scheme.strictLocalizationToBase t =
-        e.hom ≫ Scheme.strictLocalizationToBase s := by
-  subst t
-  exact ⟨e, rfl⟩
-
-private theorem bijective_conjugate
-    {A B C D : Type*} (f : A → B) (g : C → D)
-    (e : A ≃ C) (e' : B ≃ D) (h : ∀ x, e' (f x) = g (e x)) :
-    Function.Bijective f ↔ Function.Bijective g := by
-  have hh : e' ∘ f = g ∘ e := funext h
-  rw [← Function.Bijective.of_comp_iff' e'.bijective f, hh]
-  exact Function.Bijective.of_comp_iff g e.bijective
 
 end AlgebraicGeometry.Etale

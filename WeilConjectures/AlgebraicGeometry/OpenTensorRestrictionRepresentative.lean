@@ -23,7 +23,6 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 open SingleComplexBaseChange
-
 private theorem localize_termwise_comparison
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     [Abelian A] [Abelian B] [Abelian C] [Abelian D]
@@ -73,6 +72,7 @@ private theorem localize_termwise_comparison
     𝟙 _ ≫ DerivedCategory.Q.map a at hq
   simpa only [Category.comp_id, Category.id_comp] using
     congrArg (fun t ↦ t ≫ R.mapDerivedCategoryFactors.inv.app N) hq
+
 
 attribute [local irreducible] openPinnedTensorRestrictionIso
 

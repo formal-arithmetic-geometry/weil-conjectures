@@ -56,7 +56,7 @@ theorem geometricPointMorphism_set_stalk
       (pointSmallEtale s).toPresheafFiber U (α.app U t) F.obj σ := by
     intro U t σ
     exact ConcreteCategory.congr_hom
-      (colimit.ι_pre D (NatTrans.mapElements α).op (op ⟨U, t⟩)) σ
+      (colimit.ι_pre D (NatTrans.mapElements α).op (op (Functor.elementsMk _ U t))) σ
   have hi : IsIso f := by dsimp [f]; infer_instance
   have hu : ∀ g : (pointSmallEtale s').sheafFiber.obj F →
       (pointSmallEtale s).sheafFiber.obj F,

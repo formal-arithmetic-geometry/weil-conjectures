@@ -247,7 +247,7 @@ private theorem exists_kernel_germ_representative
     (h₁.symm.trans (hz.trans (map_zero _).symm))
   change F.obj.map g.op a = F.obj.map g.op 0 at hgw
   have hzero : F.obj.map g.op a = 0 := by simpa only [map_zero] using hgw
-  obtain ⟨W', ⟨k⟩⟩ := AffinePointedEtaleNeighborhood.exists_hom x ⟨W, w⟩
+  obtain ⟨W', ⟨k⟩⟩ := AffinePointedEtaleNeighborhood.exists_hom x ⟨w⟩
   refine ⟨V, v, a, W'.obj.1, k.1 ≫ g, W'.obj.2, W'.property, ?_, ?_, he⟩
   · have hk : (pointSmallEtale x).fiber.map k.1 W'.obj.2 = w := k.2
     simp only [Functor.map_comp, ConcreteCategory.comp_apply]

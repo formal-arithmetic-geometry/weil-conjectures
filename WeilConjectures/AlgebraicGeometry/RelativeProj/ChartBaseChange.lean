@@ -169,7 +169,6 @@ lemma mem_span (n : ℕ) {b : B} (hb : b ∈ ℬ n) :
   suffices ∀ x : ℬ n, (x : B) ∈ Submodule.span S (φ '' (𝒜 n : Set A)) from this ⟨b, hb⟩
   intro x
   induction x using (h.isBaseChange n).inductionOn with
-  | zero => exact zero_mem _
   | tmul a => exact Submodule.subset_span ⟨a, a.2, rfl⟩
   | smul c x hx => exact Submodule.smul_mem _ c hx
   | add x y hx hy => exact add_mem hx hy

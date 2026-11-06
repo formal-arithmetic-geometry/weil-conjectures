@@ -69,9 +69,7 @@ theorem exists_span_eq_span_pow_of_irreducible_germ {Y : Scheme.{u}} {y : Y}
   have hunit : IsUnit (Y.presheaf.map (r₁ ≫ a₁ ≫ homOfLE inf_le_right).op s) := by
     refine IsUnit.of_mul_eq_one (Y.presheaf.map (r₂ ≫ a₂ ≫ homOfLE inf_le_right).op t) ?_
     convert f₂' using 3
-    rfl
   rw [← Ideal.span_singleton_mul_right_unit hunit]
   convert congrArg (fun x ↦ Ideal.span {x}) f₁' using 4
-  rfl
 
 end AlgebraicGeometry.Scheme

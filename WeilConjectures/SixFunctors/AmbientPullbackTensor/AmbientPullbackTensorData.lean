@@ -179,7 +179,7 @@ theorem tensorData_existsUnique {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ
     refine ⟨?_, ?_, hd.2.1, ?_⟩
     · intro M N U V a x y r
       dsimp only [generator, tensor, pure, Modules]
-      simp only [one_smul]
+      erw [one_smul]
       exact hd.1.1 M N U V a x y r
     · intro M M' N N' a b
       exact hd.1.2 M M' N N' a b
@@ -192,7 +192,7 @@ theorem tensorData_existsUnique {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ
   · intro M N U V a x y r
     have h := ho.1 M N U V a x y r
     dsimp only [generator, tensor, pure, Modules] at h
-    simp only [one_smul] at h
+    erw [one_smul] at h
     exact h
   · intro P hp hf
     exact ho.2.2.2 P ⟨hp, hf⟩

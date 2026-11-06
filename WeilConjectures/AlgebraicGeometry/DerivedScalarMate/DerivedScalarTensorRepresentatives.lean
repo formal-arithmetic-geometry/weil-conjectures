@@ -124,13 +124,13 @@ theorem representativeScalarTensorIso
           a.tensor.map (Prod.mkHom (𝟙 (DerivedCategory.Q.obj P)) (DerivedCategory.Q.map q)) ≫
           b.inv.app ⟨P, hp⟩ ≫
           (restriction φ).mapDerivedCategory.map
-            ((proEtaleRingDerivedExtensionCounit φ).app
-              ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫
+            (cast (by rfl) ((proEtaleRingDerivedExtensionCounit φ).app
+              ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) ≫
           (restriction φ).mapDerivedCategoryFactorsh.hom.app
             (((proEtaleRingExtension φ).mapHomotopyCategory (.up ℤ)).obj
               ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) =
-        DerivedCategory.Q.map (HomologicalComplex.mapBifunctorMap (𝟙 P) q
-          (proEtaleOrdinaryTensor W A) (.up ℤ) ≫ (ordinaryComplexIso φ P).inv) := by
+        cast (by rfl) (DerivedCategory.Q.map (HomologicalComplex.mapBifunctorMap (𝟙 P) q
+          (proEtaleOrdinaryTensor W A) (.up ℤ) ≫ (ordinaryComplexIso φ P).inv)) := by
   classical
   let M := proEtaleRingModules W A
   let PR := proEtaleFlatRepresentatives W A
