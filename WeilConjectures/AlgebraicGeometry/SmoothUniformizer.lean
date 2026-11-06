@@ -67,7 +67,7 @@ theorem Algebra.FormallySmooth.of_comp_of_mapBaseChange_retraction {R S T : Type
     [CommRing S] [CommRing T] [Algebra R S] [Algebra R T] [Algebra S T] [IsScalarTower R S T]
     [Algebra.FormallySmooth R T] (l : Ω[T⁄R] →ₗ[T] T ⊗[S] Ω[S⁄R])
     (hl : l ∘ₗ mapBaseChange R S T = LinearMap.id) : Algebra.FormallySmooth S T := by
-  obtain ⟨-, s, hs⟩ := ((exact_mapBaseChange_map R S T).split_tfae'.out 1 0 rfl rfl).mp
+  obtain ⟨-, s, hs⟩ := ((exact_mapBaseChange_map R S T).split_tfae'.out 2 1 rfl rfl).mp
     ⟨map_surjective R S T, l, hl⟩
   refine ⟨Module.Projective.of_split s (map R S T T) hs, subsingleton_of_forall_eq 0 fun z ↦ ?_⟩
   have hδ : H1Cotangent.δ R S T z = 0 := by
