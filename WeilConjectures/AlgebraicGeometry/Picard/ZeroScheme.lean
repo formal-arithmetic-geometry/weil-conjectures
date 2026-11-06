@@ -522,8 +522,8 @@ theorem finrank_zeroLocus_directImageCounit
     have : SheafOfModules.IsFiniteLocallyFree.{u, u, u}
         (SheafOfModules.unit (Limits.pullback (X ↘ Spec (.of k)) T₀.hom).ringCatSheaf) :=
       SheafOfModules.IsInvertible.isFiniteLocallyFree.{u, u, u} _
-    have : (SheafOfModules.unit
-        (Limits.pullback (X ↘ Spec (.of k)) T₀.hom).ringCatSheaf).IsFinitePresentation :=
+    have : SheafOfModules.IsFinitePresentation.{u, u, u}
+        (SheafOfModules.unit (Limits.pullback (X ↘ Spec (.of k)) T₀.hom).ringCatSheaf) :=
       SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
     rw [Modules.eulerChar_congr κ (Modules.pullbackObjUnitIso ι).symm,
       Modules.eulerChar_congr κ ((Modules.pullback ι).mapIso
