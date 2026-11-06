@@ -50,7 +50,7 @@ section Proofs
 attribute [local implicit_reducible] SheafOfModules.restrictScalars change
   PresheafOfModules.restrictScalars PresheafOfModules.restrictScalarsObj
   ModuleCat.restrictScalars ModuleCat.RestrictScalars.obj'
-  Functor.mapHomologicalComplex extend extendComparison
+  extend extendComparison
   SheafOfModules.unit PresheafOfModules.unit CategoryTheory.sheafCompose
 
 private theorem scalar_inverse_pure

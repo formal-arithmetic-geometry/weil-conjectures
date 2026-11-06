@@ -22,6 +22,8 @@ open CategoryTheory CategoryTheory.Limits
 open CategoryTheory.ConstantCompletion
 namespace AlgebraicGeometry.Scheme
 
+attribute [local instance] HasDerivedCategory.standard
+
 /-- Finite reductions with the given Tor interval and the prescribed residue marking.
 Source: Stacks Project, proetale.tex, Tag 09C2 (1)-(4), and Tag 09AL.
 (auxiliary; not a blueprint node).
