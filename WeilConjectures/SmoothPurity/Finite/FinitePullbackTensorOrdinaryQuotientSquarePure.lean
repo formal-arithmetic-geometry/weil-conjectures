@@ -40,8 +40,7 @@ attribute [local irreducible] constantSheaf Functor.leftAdjoint presheafToSheaf
   pullbackTensorCalculus coefficientFiniteQuotientExtension
   coefficientFiniteQuotientUnitSection sfIntrinsicPullback sfIntrinsicConstantModuleAdjunction
   coefficientTotalTensor coefficientTensorGenerator SheafOfModules.monoidalCategory
-attribute [local implicit_reducible] Functor.mapHomologicalComplex
-  proEtaleConstantModuleDirectImage
+attribute [local implicit_reducible] proEtaleConstantModuleDirectImage
   SheafOfModules.pushforward PresheafOfModules.pushforward
   PresheafOfModules.pushforward₀ PresheafOfModules.pushforward₀Obj
   PresheafOfModules.restrictScalars PresheafOfModules.restrictScalarsObj

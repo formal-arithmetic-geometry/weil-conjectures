@@ -46,6 +46,9 @@ private theorem single_kflat
     (completedIntegralCommRingSheafUnrestricted.{u, u} l E X)
     (power l E X L m)).2.2.choose
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 private theorem chain_comparison
     (L : scalarReductionSource.{u, u} l E X) [L.IsFiniteLocallyFreeOfRank 1] (m : ℤ) :
     ∃ c : DerivedCategory.Q.{u + 2, u + 1, u + 2} ⋙ ordinary l E X L m ≅
