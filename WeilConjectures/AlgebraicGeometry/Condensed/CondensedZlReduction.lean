@@ -196,8 +196,7 @@ private theorem purContinuousCokernel (ℓ : ℕ) [Fact ℓ.Prime] (r : ℕ) :
     obtain ⟨y, hy⟩ := purContinuousDivide ℓ r S.unop x.down hx'
     refine ⟨ULift.up y, ?_⟩
     apply ULift.ext
-    ext t
-    exact hy t)
+    exact ContinuousMap.ext hy)
   exact he.gIsCokernel
 
 private theorem purPointMap_ext (ℓ : ℕ) [Fact ℓ.Prime] (r : ℕ)
