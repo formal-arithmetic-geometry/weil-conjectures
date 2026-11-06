@@ -8,6 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumSupplement
 public import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicCompletion
 public import Mathlib.CategoryTheory.Whiskering
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.Bounded.BoundedConstructibleTowerSupplement
 public import WeilConjectures.AlgebraicGeometry.Completed.CompletedTowerDerivedLimitFunctor
 public import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
