@@ -287,3 +287,14 @@
   modules up to the brief's limit of 30 extra modules.
 - Fix patterns: /home/ubuntu/u9/bz/FIXES-BZ908.md.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+
+# BZ932 in progress
+
+- Branch: u9/BZ932; baseline 902c558126dff07f1b90673880f577206572e997.
+- The user instructed continuation after the concrete five-module upstream-restoration proposal.
+- Applied BZ932-proposed-upstream-restoration.patch, preserving restored statement/docstring text.
+- Explicit terminal-object preservation supplies GU.PreservesZeroMorphisms; removed the old
+  unmeasured maxHeartbeats override from the restored helper.
+- Next: ucheck-bump on the five prerequisites and SupportedKoszulRelativeDetector, then downstream.
+- Fix notes: /home/ubuntu/u9/bz/FIXES-BZ932.md. No local Lean/Lake or proof shortcuts.
