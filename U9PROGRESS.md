@@ -423,3 +423,17 @@
 - No local Lean/Lake, proof placeholders, trust bypasses, declaration deletions,
   profiler probes, or heartbeat changes. Both rewrite rules replay the exact diff.
 - All ucheck invocations finished. This final commit changes documentation only.
+
+
+# BZ1067 in progress
+
+- Branch: u9/BZ1067; starting commit dfaed262b6fc1850faba3b46955a11d3225a1e86.
+- The user instructed continuation after the exact two-line private-statement API proposal.
+  Applied BZ1067-proposed-statement.patch to derived_cartesian_normalized, preserving
+  the intended composition under Mathlib's reversed compositor. Public theorem unchanged.
+- Proof-local compositor directions and the opaque reducibility attribute are repaired.
+  The direct exchange import avoids the unowned LowerShriekComposition failure.
+- Next: ucheck-bump for the assigned module, then its direct importer
+  EtaleProperOpenExchangeCube and any unblocked downstream layers.
+- Fix records: /home/ubuntu/u9/bz/FIXES-BZ1067.md.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.

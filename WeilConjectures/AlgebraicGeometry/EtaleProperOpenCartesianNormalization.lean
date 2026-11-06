@@ -172,9 +172,9 @@ private theorem derived_cartesian_normalized
       (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ e.hom)).natTrans c) :
     c = (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
       adj'.mapDerivedCategoryRightDerivedAdjunction
-      (TwoSquare.mk _ _ _ _ ((Functor.mapDerivedCategoryCompIso G L').symm ≪≫
+      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategoryCompIso G L' ≪≫
         Functor.mapDerivedCategoryNatIso e ≪≫
-        Functor.mapDerivedCategoryCompIso L H).hom)).natTrans := by
+        (Functor.mapDerivedCategoryCompIso L H).symm).hom)).natTrans := by
   have : (R.rightDerivedFunctor ⋙ G.mapDerivedCategory).IsRightDerivedFunctor
       (Functor.whiskerRight R.rightDerivedFunctorUnit G.mapDerivedCategory ≫
         (Functor.associator _ _ _).hom) (HomotopyCategory.quasiIso C₁ (.up ℤ)) := by
