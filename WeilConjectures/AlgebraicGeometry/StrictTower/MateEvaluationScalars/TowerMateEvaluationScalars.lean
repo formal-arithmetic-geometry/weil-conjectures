@@ -92,7 +92,7 @@ private theorem exactNat_iso (e : F ≅ G) :
 private theorem exactNat_whiskerRight (t : F ⟶ G) (K : D ⥤ H)
     [K.Additive] [PreservesFiniteLimits K] [PreservesFiniteColimits K] :
     exactNat (Functor.whiskerRight t K) ≫ (Functor.mapDerivedCategoryCompIso G K).hom =
-      (Functor.mapDerivedCategoryCompIso F K).inv ≫
+      (Functor.mapDerivedCategoryCompIso F K).hom ≫
         Functor.whiskerRight (exactNat t) K.mapDerivedCategory := by
   refine Localization.natTrans_ext DerivedCategory.Q
     (HomologicalComplex.quasiIso C (.up ℤ)) (fun L ↦ ?_)
@@ -108,7 +108,7 @@ private theorem exactNat_whiskerRight (t : F ⟶ G) (K : D ⥤ H)
 private theorem exactNat_whiskerLeft (K : H ⥤ C)
     [K.Additive] [PreservesFiniteLimits K] [PreservesFiniteColimits K] (t : F ⟶ G) :
     exactNat (Functor.whiskerLeft K t) ≫ (Functor.mapDerivedCategoryCompIso K G).hom =
-      (Functor.mapDerivedCategoryCompIso K F).inv ≫
+      (Functor.mapDerivedCategoryCompIso K F).hom ≫
         Functor.whiskerLeft K.mapDerivedCategory (exactNat t) := by
   refine Localization.natTrans_ext DerivedCategory.Q
     (HomologicalComplex.quasiIso H (.up ℤ)) (fun L ↦ ?_)
@@ -120,33 +120,6 @@ private theorem exactNat_whiskerLeft (K : H ⥤ C)
       (K.mapDerivedCategoryFactors.hom.app L)), exactNat_fac,
     Functor.mapDerivedCategoryCompIso_hom_app_factors_assoc]
   congr 2
-
-private theorem exactNat_square
-    {C' D' : Type*} [Category C'] [Category D'] [Abelian C'] [Abelian D']
-    [HasDerivedCategory C'] [HasDerivedCategory D']
-    {F' G' : C' ⥤ D'}
-    [F'.Additive] [PreservesFiniteLimits F'] [PreservesFiniteColimits F']
-    [G'.Additive] [PreservesFiniteLimits G'] [PreservesFiniteColimits G']
-    (u : C ⥤ C') (v : D ⥤ D')
-    [u.Additive] [PreservesFiniteLimits u] [PreservesFiniteColimits u]
-    [v.Additive] [PreservesFiniteLimits v] [PreservesFiniteColimits v]
-    (p : F ⋙ v ≅ u ⋙ F') (q : G ⋙ v ≅ u ⋙ G') (t : F ⟶ G) (t' : F' ⟶ G')
-    (h : Functor.whiskerRight t v ≫ q.hom = p.hom ≫ Functor.whiskerLeft u t') :
-    Functor.whiskerRight (exactNat t) v.mapDerivedCategory ≫
-        (Functor.mapDerivedCategorySquareIso q).hom =
-      (Functor.mapDerivedCategorySquareIso p).hom ≫
-        Functor.whiskerLeft u.mapDerivedCategory (exactNat t') := by
-  have hm : exactNat (Functor.whiskerRight t v) ≫
-      (Functor.mapDerivedCategoryNatIso q).hom =
-      (Functor.mapDerivedCategoryNatIso p).hom ≫
-        exactNat (Functor.whiskerLeft u t') := by
-    rw [← exactNat_iso, ← exactNat_iso, ← exactNat_comp, ← exactNat_comp, h]
-  have hR := exactNat_whiskerRight t v
-  have hL := exactNat_whiskerLeft u t'
-  dsimp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom]
-  rw [← cancel_epi (Functor.mapDerivedCategoryCompIso F v).hom]
-  simp only [Category.assoc, Iso.hom_inv_id_assoc]
-  rw [← reassoc_of% hR, Iso.hom_inv_id_assoc, reassoc_of% hm, hL]
 
 private theorem exactNat_unique (t : F ⟶ G) (δ : F.mapDerivedCategory ⟶ G.mapDerivedCategory)
     (h : ClopenProjectorDescent F G t δ) : δ = exactNat t := by
@@ -240,8 +213,8 @@ private theorem exactSquare_unique
     (a : F₁.mapDerivedCategory ⋙ F₂.mapDerivedCategory ⟶
       G₁.mapDerivedCategory ⋙ G₂.mapDerivedCategory)
     (h : ClopenProjectorDescent (F₁ ⋙ F₂) (G₁ ⋙ G₂) t
-      ((Functor.mapDerivedCategoryCompIso F₁ F₂).inv ≫ a ≫
-        (Functor.mapDerivedCategoryCompIso G₁ G₂).hom)) :
+      ((Functor.mapDerivedCategoryCompIso F₁ F₂).hom ≫ a ≫
+        (Functor.mapDerivedCategoryCompIso G₁ G₂).inv)) :
     a = exactSquare F₁ F₂ G₁ G₂ t := by
   have he := exactNat_unique t _ h
   rw [← cancel_epi (Functor.mapDerivedCategoryCompIso F₁ F₂).hom,
@@ -262,103 +235,6 @@ variable {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
   [PreservesFiniteLimits R] [PreservesFiniteColimits R]
 
 end ExactEvaluation
-
-section ExactScalarDescent
-attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
-
-private theorem exactSquare_scalar
-    {A B C D A' B' C' D' : Type*}
-    [Category A] [Category B] [Category C] [Category D]
-    [Category A'] [Category B'] [Category C'] [Category D']
-    [Abelian A] [Abelian B] [Abelian C] [Abelian D]
-    [Abelian A'] [Abelian B'] [Abelian C'] [Abelian D']
-    [HasDerivedCategory A] [HasDerivedCategory B]
-    [HasDerivedCategory C] [HasDerivedCategory D]
-    [HasDerivedCategory A'] [HasDerivedCategory B']
-    [HasDerivedCategory C'] [HasDerivedCategory D']
-    {F : A ⥤ B} {G : A ⥤ C} {H : B ⥤ D} {K : C ⥤ D}
-    {F' : A' ⥤ B'} {G' : A' ⥤ C'} {H' : B' ⥤ D'} {K' : C' ⥤ D'}
-    [F.Additive] [G.Additive] [H.Additive] [K.Additive]
-    [F'.Additive] [G'.Additive] [H'.Additive] [K'.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
-    [PreservesFiniteLimits H] [PreservesFiniteColimits H]
-    [PreservesFiniteLimits K] [PreservesFiniteColimits K]
-    [PreservesFiniteLimits F'] [PreservesFiniteColimits F']
-    [PreservesFiniteLimits G'] [PreservesFiniteColimits G']
-    [PreservesFiniteLimits H'] [PreservesFiniteColimits H']
-    [PreservesFiniteLimits K'] [PreservesFiniteColimits K']
-    (u₀ : A ⥤ A') (u₁ : B ⥤ B') (u₂ : C ⥤ C') (u₃ : D ⥤ D')
-    [u₀.Additive] [u₁.Additive] [u₂.Additive] [u₃.Additive]
-    [PreservesFiniteLimits u₀] [PreservesFiniteColimits u₀]
-    [PreservesFiniteLimits u₁] [PreservesFiniteColimits u₁]
-    [PreservesFiniteLimits u₂] [PreservesFiniteColimits u₂]
-    [PreservesFiniteLimits u₃] [PreservesFiniteColimits u₃]
-    (pF : F ⋙ u₁ ≅ u₀ ⋙ F') (pG : G ⋙ u₂ ≅ u₀ ⋙ G')
-    (pH : H ⋙ u₃ ≅ u₁ ⋙ H') (pK : K ⋙ u₃ ≅ u₂ ⋙ K')
-    (t : G ⋙ K ⟶ F ⋙ H) (t' : G' ⋙ K' ⟶ F' ⋙ H')
-    (h : ∀ L, u₃.map (t.app L) ≫ pH.hom.app (F.obj L) ≫ H'.map (pF.hom.app L) =
-      pK.hom.app (G.obj L) ≫ K'.map (pG.hom.app L) ≫ t'.app (u₀.obj L))
-    (M : DerivedCategory A) :
-    u₃.mapDerivedCategory.map ((exactSquare G K F H t).app M) ≫
-        (Functor.mapDerivedCategorySquareIso pH).hom.app (F.mapDerivedCategory.obj M) ≫
-        H'.mapDerivedCategory.map ((Functor.mapDerivedCategorySquareIso pF).hom.app M) =
-      (Functor.mapDerivedCategorySquareIso pK).hom.app (G.mapDerivedCategory.obj M) ≫
-        K'.mapDerivedCategory.map ((Functor.mapDerivedCategorySquareIso pG).hom.app M) ≫
-        (exactSquare G' K' F' H' t').app (u₀.mapDerivedCategory.obj M) := by
-  let a := Functor.associator G K u₃ ≪≫
-    Functor.isoWhiskerLeft G pK ≪≫
-    (Functor.associator G u₂ K').symm ≪≫
-    Functor.isoWhiskerRight pG K' ≪≫
-    Functor.associator u₀ G' K'
-  let b := Functor.associator F H u₃ ≪≫
-    Functor.isoWhiskerLeft F pH ≪≫
-    (Functor.associator F u₁ H').symm ≪≫
-    Functor.isoWhiskerRight pF H' ≪≫
-    Functor.associator u₀ F' H'
-  have hc : Functor.whiskerRight t u₃ ≫ b.hom =
-      a.hom ≫ Functor.whiskerLeft u₀ t' := by
-    apply NatTrans.ext
-    funext L
-    simpa only [a, b, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
-      Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
-      Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
-      Functor.associator_inv_app, Category.id_comp, Category.comp_id, Category.assoc]
-      using h L
-  have hd := congrArg (fun z ↦ z.app M)
-    (exactNat_square u₀ u₃ a b
-      t t' hc)
-  have ha := Functor.exactSquare_comp_forward G K
-    (G ⋙ K) G' K'
-    (G' ⋙ K') u₀ u₂
-    u₃ pG pK a (Iso.refl _) (Iso.refl _)
-    (by intro L; simp [a]) M
-  have hb := Functor.exactSquare_comp_forward F H
-    (F ⋙ H) F' H'
-    (F' ⋙ H') u₀ u₁
-    u₃ pF pH b (Iso.refl _) (Iso.refl _)
-    (by intro L; simp [b]) M
-  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.mapDerivedCategoryNatIso_refl,
-    Category.id_comp] at ha hb
-  rw [← cancel_epi (u₃.mapDerivedCategory.map
-    ((Functor.mapDerivedCategoryCompIso G K).hom.app M))]
-  simp only [exactSquare, NatTrans.comp_app, Functor.map_comp, Category.assoc]
-  rw [← Functor.map_comp_assoc, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp]
-  simp only [Category.assoc, Iso.symm_hom] at ha hb
-  dsimp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app] at hd
-  simp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
-    NatTrans.comp_app, Category.assoc] at hd ⊢
-  rw [hb, reassoc_of% hd]
-  have he := congrArg (fun z ↦ z ≫
-    (Functor.mapDerivedCategoryCompIso G' K').inv.app
-      (u₀.mapDerivedCategory.obj M) ≫
-    (exactNat t').app (u₀.mapDerivedCategory.obj M) ≫
-    (Functor.mapDerivedCategoryCompIso F' H').hom.app
-      (u₀.mapDerivedCategory.obj M)) ha
-  simp only [Category.assoc, Iso.hom_inv_id_app_assoc] at he
-  exact he.symm
-
-end ExactScalarDescent
 
 variable (B : Type (u + 1)) [CommRing B]
 
@@ -412,7 +288,7 @@ def singleDerivedAlpha {V W S T : Scheme.{u}} (k : V ⟶ W) (f : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper f] [IsProper p]
     (h : k ≫ p = f ≫ i) : j B i ⋙ g B p ⟶ g B f ⋙ j B k :=
-  (Functor.mapDerivedCategoryCompIso _ _).hom ≫
+  (Functor.mapDerivedCategoryCompIso _ _).inv ≫
     Localization.liftNatTrans DerivedCategory.Q
       (HomologicalComplex.quasiIso (Modules B S) (.up ℤ))
       ((moduleJ B i ⋙ modulePullback B p).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)
@@ -664,83 +540,6 @@ Source: Stacks 03DI (blueprint: lem-cbc-tower-mate-evaluation-scalars). -/
 def scalarJModule (φ : B →+* Λ) {U X : Scheme.{u}} (f : U ⟶ X) [IsOpenImmersion f] :
     moduleJ Λ f ⋙ moduleRes φ X ≅ moduleRes φ U ⋙ moduleJ B f :=
   (@asIso _ _ _ _ (scalarJInv φ f) (scalarJInv_isIso φ f)).symm
-
-/-- Exact descent of the same identity on extension presheaves.
-Source: Stacks 03DI, 03DJ, 015F (blueprint: lem-cbc-tower-mate-evaluation-scalars). -/
-def scalarJ (φ : B →+* Λ) {U X : Scheme.{u}} (f : U ⟶ X) [IsOpenImmersion f] :
-    j Λ f ⋙ Res φ X ≅ Res φ U ⋙ j B f :=
-  (Functor.mapDerivedCategoryCompIso _ _) ≪≫
-    Functor.mapDerivedCategoryNatIso (scalarJModule φ f) ≪≫
-    (Functor.mapDerivedCategoryCompIso _ _).symm
-
-set_option backward.isDefEq.respectTransparency false in
-/-- The scalar comparisons preserve the specified ordinary open unit and counit.
-These equations normalize the identity on extension-presheaf generators.
-Source: Stacks 03DI, 03DJ (blueprint: lem-cbc-tower-mate-evaluation-scalars).
-Proof: the slice scalar theorem identifies each generator with the same section in
-the same summand, and sends the open unit and counit to themselves. Transport
-through weakly-etale localization and uniqueness of the unit-preserving adjoint.
-These are exactly the two equations of RingedOpenScalar.Equations. -/
-theorem scalar_open_normalized (φ : B →+* Λ) {U X : Scheme.{u}} (f : U ⟶ X)
-    [IsOpenImmersion f] :
-    ((∀ N : Modules Λ U,
-      (moduleRes φ U).map ((moduleJAdj Λ f).unit.app N) ≫
-        (scalarGModule φ f).hom.app ((moduleJ Λ f).obj N) ≫
-        (modulePullback B f).map ((scalarJModule φ f).hom.app N) =
-      (moduleJAdj B f).unit.app ((moduleRes φ U).obj N)) ∧
-    (∀ Q : Modules Λ X,
-      (scalarJModule φ f).hom.app ((modulePullback Λ f).obj Q) ≫
-        (moduleJ B f).map ((scalarGModule φ f).hom.app Q) ≫
-        (moduleJAdj B f).counit.app ((moduleRes φ X).obj Q) =
-      (moduleRes φ X).map ((moduleJAdj Λ f).counit.app Q))) ∧
-    ((∀ N : DerivedCategory (Modules Λ U),
-      (Res φ U).map ((dJAdj Λ f).unit.app N) ≫
-        (scalarG φ f).hom.app ((j Λ f).obj N) ≫
-        (g B f).map ((scalarJ φ f).hom.app N) =
-      (dJAdj B f).unit.app ((Res φ U).obj N)) ∧
-    (∀ Q : DerivedCategory (Modules Λ X),
-      (scalarJ φ f).hom.app ((g Λ f).obj Q) ≫
-        (j B f).map ((scalarG φ f).hom.app Q) ≫
-        (dJAdj B f).counit.app ((Res φ X).obj Q) =
-      (Res φ X).map ((dJAdj Λ f).counit.app Q))) := by
-  have hm : ((mateEquiv (moduleJAdj Λ f) (moduleJAdj B f)).symm
-      (TwoSquare.mk _ _ _ _ (scalarGModule φ f).hom)).natTrans =
-      (scalarJModule φ f).inv := rfl
-  have he := SheafOfModules.RingedOpenScalar.equations_of_inverseMate
-    (scalarJModule φ f) (scalarGModule φ f).symm
-    (moduleJAdj Λ f) (moduleJAdj B f) hm
-  refine ⟨he, ?_⟩
-  have hu (K : DerivedCategory (Modules Λ U)) := exact_mate
-    (moduleJAdj Λ f) (moduleJAdj B f) (scalarGModule φ f) (scalarJModule φ f).symm
-    (dJAdj Λ f) (dJAdj B f)
-    (by intro L; simpa only [exactAdj, dJAdj] using exactAdj_unit (moduleJAdj Λ f) L)
-    (by intro L; simpa only [exactAdj, dJAdj] using exactAdj_unit (moduleJAdj B f) L)
-    (by
-      intro L
-      have hh := unit_mateEquiv_symm (moduleJAdj Λ f) (moduleJAdj B f)
-        (TwoSquare.mk _ _ _ _ (scalarGModule φ f).hom) L
-      change _ = _ ≫ (modulePullback B f).map
-        (((mateEquiv (moduleJAdj Λ f) (moduleJAdj B f)).symm
-          (TwoSquare.mk _ _ _ _ (scalarGModule φ f).hom)).natTrans.app L) at hh
-      rw [hm] at hh
-      exact hh.symm) K
-  apply SheafOfModules.RingedOpenScalar.equations_of_inverseMate
-    (scalarJ φ f) (scalarG φ f).symm (dJAdj Λ f) (dJAdj B f)
-  ext K
-  apply ((dJAdj B f).homEquiv _ _).injective
-  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
-  have hu' : (dJAdj B f).unit.app ((Res φ U).obj K) ≫
-      (g B f).map ((scalarJ φ f).inv.app K) =
-    (Res φ U).map ((dJAdj Λ f).unit.app K) ≫
-      (scalarG φ f).hom.app ((j Λ f).obj K) := by
-    have hG : scalarG φ f =
-        Functor.mapDerivedCategorySquareIso (scalarGModule φ f) := by rfl
-    rw [hG]
-    simpa only [scalarJ, Functor.mapDerivedCategorySquareIso, Iso.trans_inv,
-      Iso.trans_hom, Iso.symm_inv, Iso.symm_hom,
-      Functor.mapDerivedCategoryNatIso_symm, Category.assoc] using hu K
-  exact (unit_mateEquiv_symm (dJAdj Λ f) (dJAdj B f)
-    (TwoSquare.mk _ _ _ _ (scalarG φ f).hom) K).symm.trans hu'.symm
 
 section ScalarCalculations
 
