@@ -425,39 +425,21 @@
 - All ucheck invocations finished. This final commit changes documentation only.
 
 
-# BZ1068 in progress
+# BZ1068 complete
 
 - Branch: u9/BZ1068; starting commit dfaed262b6fc1850faba3b46955a11d3225a1e86.
-- The user instructed continuation after the concrete two-site compositor statement proposal.
-  Applied BZ1068-statement-only.patch; the statement and local hb proof now preserve the
-  original comparison using Mathlib's reversed derived compositor.
-- Merged BZ1059 prerequisite fixes; no duplicate declarations or declaration deletions.
-- Proof-only baseline cleared two errors; next: validate the complete leaf repair with
-  ucheck-bump, then build its four direct importers and continue through unblocked layers.
-- Patterns, exact errors, replay-checked rules: /home/ubuntu/u9/bz/FIXES-BZ1068.md.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
-
-- BZ1068 leaf is GREEN and sorry-free: ucheck-bump rc=0, built=1, failed=0 at
-  6afc4fae13c7e090b915aa0e3d61980300964a3c (poolb:43.157.189.27).
-  Next: validate all four direct importers; leaf log BUILD-BZ1068-leaf-full.log.
-
-
-# BZ1066 complete
-
-- Branch: u9/BZ1066; start dfaed262b6fc1850faba3b46955a11d3225a1e86.
-- Assigned OpenImmersionProjectionComposition and five downstream modules are green
-  and sorry-free: ucheck-bump rc=0, built=6, failed=0, 11974 jobs.
-- Validated source: 19fe33e58b35ddf560d7b9dfd04efda3a06525da. All six modules freshly rebuilt.
-- Green downstream: CompactificationProjectionComposition, SfGraphProjectionWord,
-  SfGraphProjectionData, SfGraphProjectionStages, SfGraphSecondProjectionSquare.
-- Applied the explicitly proposed private compositor .symm after user continuation;
-  the original comparison is preserved. The proof-local unit comparison uses .inv.
-- Merged upstream round 73 (261dc924aa) and BZ1057 prerequisite fixes, retaining the
-  validated compositor expressions when resolving mechanical-fix conflicts.
-- Sixteen extra modules were reached through their import closure. The remaining
-  eleven are blocked by observed external dependency failures and are recorded.
-- Patterns, exact errors, rules, counts, and paths: /home/ubuntu/u9/bz/FIXES-BZ1066.md.
-- Final log: /home/ubuntu/u9/bz/BZ1066-build-6-final-green.log.
-- No local Lean/Lake, proof escapes, declaration deletions, or heartbeat changes.
-- All ucheck invocations finished. This final commit changes documentation only.
-- Completion marker: /home/ubuntu/u9/state/BZ1066.DONE.
+- Assigned EtaleCompactSupportGraphGeometricBaseChange is GREEN and sorry-free:
+  ucheck-bump rc=0, built=1, failed=0, 11821 jobs; target rebuilt in 60s.
+- Green source commit: 6afc4fae13c7e090b915aa0e3d61980300964a3c.
+  Applied the proposed compositor statement migration after the user instructed continuation;
+  it preserves the intended comparison under Mathlib's reversed isomorphism.
+- Merged the completed BZ1059 normalization and finite-graph prerequisite repairs.
+- All four direct importers were attempted together. Each is blocked by the same four
+  unowned prerequisites; no importer is claimed green. The leaf rebuilt again in 63s.
+  No unblocked downstream branch remains; import paths and exact errors are recorded.
+- Fix patterns and replay-checked rules: /home/ubuntu/u9/bz/FIXES-BZ1068.md.
+- Logs: BUILD-BZ1068-leaf-full.log and BUILD-BZ1068-downstream1-full.log under ~/u9/bz/.
+- Completion marker: /home/ubuntu/u9/state/BZ1068.DONE.
+- No new declarations, deletions, local Lean/Lake, proof placeholders, trust bypasses,
+  profiler probes, or heartbeat changes. All ucheck invocations finished.
+- This completion commit changes documentation only; Lean sources match the green build.
