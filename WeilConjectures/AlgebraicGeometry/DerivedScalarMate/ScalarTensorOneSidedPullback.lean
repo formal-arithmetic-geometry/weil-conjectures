@@ -79,8 +79,14 @@ private theorem coordinates_normalization {W : Scheme.{u}}
   have ht : IsDerivedTensor a t (derivedTensorIso a t) :=
     Classical.choose_spec (derivedTensorIso_existsUnique a t).exists
   have hn := ht P Q hp hq q h
+  with_unfolding_all
+    change t.representative.hom.app (⟨P, hp⟩, ⟨Q, hq⟩) ≫
+      t.tensor.map (Prod.mkHom (𝟙 _) (DerivedCategory.Q.map q)) ≫
+      (derivedTensorIso a t).inv.app (DerivedCategory.Q.obj P) ≫ tensorScalarCounit a P =
+      DerivedCategory.Q.map (HomologicalComplex.mapBifunctorMap (𝟙 P) q
+        (proEtaleOrdinaryTensor W A) (.up ℤ) ≫ (ordinaryComplexIso a P).inv) at hn
   have hh := congrArg (fun g ↦ g ≫ DerivedCategory.Q.map (ordinaryComplexIso a P).hom) hn
-  simpa only [tensorScalarCoordinates, tensorScalarCounit, Category.assoc,
+  simpa only [tensorScalarCoordinates, Category.assoc,
     Functor.map_comp, Iso.inv_hom_id_map, Category.comp_id,
     Functor.comp_obj, Functor.prod_obj, ObjectProperty.ι_obj] using hh
 
