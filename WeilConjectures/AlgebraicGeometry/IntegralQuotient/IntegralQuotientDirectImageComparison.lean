@@ -128,7 +128,8 @@ private theorem exact_computation
   simp only [← Category.assoc, ← DerivedCategory.Qh.map_comp,
     Iso.inv_hom_id_app]
   erw [DerivedCategory.Qh.map_id]
-  simp only [Category.assoc, Category.id_comp, Iso.inv_hom_id_app, Category.comp_id]
+  simp only [Category.assoc]
+  erw [Category.id_comp, Iso.inv_hom_id_app, Category.comp_id]
 
 private theorem exact_single
     {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
@@ -439,7 +440,7 @@ private theorem scalarCoefficientPull_eq
   have hv (T : Scheme.{u}) : (scalarCoefficientUnit a T).hom =
       ((V₀ a T).mapDerivedCategorySingleFunctor 0).hom.app
         (Mod.regular (condensedRingObj Λ' T)) := by
-    simpa only [scalarCoefficientUnit, Iso.trans_hom, Iso.app_hom,
+    simpa only [scalarCoefficientUnit, cast_eq, Iso.trans_hom, Iso.app_hom,
       Functor.mapIso_hom, Functor.mapCochainComplexSingleFunctor, CochainComplex.singleFunctor,
       CochainComplex.singleFunctors] using
       ((V₀ a T).mapDerivedCategorySingleFunctor_hom_app_eq _).symm
