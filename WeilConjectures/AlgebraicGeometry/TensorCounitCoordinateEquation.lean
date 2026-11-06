@@ -7,6 +7,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.CanonicalPullbackTensorComparison
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.Algebra.Homology.KFlatResolution
 
 /-! # Tensor compatibility of the universal pullback counit
@@ -243,11 +245,11 @@ theorem tensorCounit_coordinateEquation
             (curriedTensor (SheafOfModules.{u} (moduleRings T.toRingedSpace)))
             (.up ℤ) p q n h) →
       (derivedPullback k).map (pullbackTensorModelMap X P G) ≫
-          (SingleComplexBaseChange.counit k).app
-            ((HomotopyCategory.quotient _ (.up ℤ)).obj (pullbackTensorTotal X P G)) ≫
+          cast (by rfl) ((SingleComplexBaseChange.counit k).app
+            ((HomotopyCategory.quotient _ (.up ℤ)).obj (pullbackTensorTotal X P G))) ≫
           DerivedCategory.Q.map φ.hom =
         τ (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj G) ≫
-          ((SingleComplexBaseChange.counit k).app
+          cast (by rfl) ((SingleComplexBaseChange.counit k).app
               ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ⊗ₘ
             (SingleComplexBaseChange.counit k).app
               ((HomotopyCategory.quotient _ (.up ℤ)).obj G)) ≫
