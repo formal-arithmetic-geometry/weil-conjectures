@@ -213,7 +213,7 @@ private theorem commonStagePullbackCompComponent_stage_transport
   dsimp only [commonStagePullbackObject, StageSystem.PairCategory.toStage]
   set_option backward.isDefEq.respectTransparency true in
   set_option backward.isDefEq.respectTransparency.types true in
-    rw [hX, hY, hZ]
+    simp only [hX, hY, hZ]
     exact key
 
 
