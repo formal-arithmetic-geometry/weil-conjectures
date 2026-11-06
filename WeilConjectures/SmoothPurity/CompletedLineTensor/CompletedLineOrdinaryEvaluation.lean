@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SmoothPurity.CompletedLineTensor.CompletedLineTensorOrdinaryData
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSupplement
 import all WeilConjectures.TraceFormula.Supporting.FiniteFreeCompletedScalarComparison
 import all WeilConjectures.Algebra.Homology.PoincareDuality.TensorTrilinearUniversal
@@ -262,7 +264,7 @@ private theorem epsilon_app_Q (L : integralTowerModules l E X) [L.IsFiniteLocall
     simp only [evaluationComplex]
     exact Category.id_comp _
   have he : (epsilon l E X L m).hom.app (DerivedCategory.Q.obj K) =
-      (Functor.mapDerivedCategoryCompIso (sheaf l E X L m) (sheaf l E X L (-m))).inv.app
+      (Functor.mapDerivedCategoryCompIso (sheaf l E X L m) (sheaf l E X L (-m))).hom.app
           (DerivedCategory.Q.obj K) ≫
         (Functor.mapDerivedCategoryNatIso (evaluation l E X L m)).hom.app
           (DerivedCategory.Q.obj K) ≫
@@ -280,7 +282,7 @@ private theorem epsilon_app_Q (L : integralTowerModules l E X) [L.IsFiniteLocall
   rw [he, h23, ← h1, ← h4]
   erw [Functor.map_comp]
   simp only [Category.assoc]
-  erw [Iso.inv_hom_id_app_assoc]
+  erw [Iso.hom_inv_id_app_assoc]
   rfl
 
 set_option backward.isDefEq.respectTransparency false in
