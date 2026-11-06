@@ -152,7 +152,8 @@ theorem derivedReduction_augmentationOfCounits
               (Functor.mapDerivedCategoryCompIso F CY).symm).hom.app (DerivedCategory.Q.obj P) ≫
           CY.mapDerivedCategory.map s ≫ CY.mapDerivedCategoryFactors.hom.app (Fc.obj P) ≫
             DerivedCategory.Q.map ax := by
-        simpa only [Category.assoc, DerivedCategory.Q.map_comp] using
+        simpa only [Functor.mapDerivedCategorySquareIso, Category.assoc,
+          DerivedCategory.Q.map_comp] using
           congrArg (fun z ↦ z ≫ DerivedCategory.Q.map ax)
             (Functor.exactSquare_fac c P).symm
       _ = (Functor.mapDerivedCategoryCompIso CX G ≪≫
