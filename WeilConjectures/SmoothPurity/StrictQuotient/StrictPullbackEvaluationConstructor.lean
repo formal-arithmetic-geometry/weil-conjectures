@@ -83,11 +83,10 @@ private theorem pullbackComputes {V W : Scheme.{t}} (g : V ⟶ W)
   let : PreservesFiniteColimits (integralOperationsLevelPullback l E g n) := h.2
   have := Functor.isIso_of_isLeftDerivedFunctor_of_inverts LF ε
     (by
-      rw [← MorphismProperty.IsInvertedBy.iff_of_iso
-        (HomologicalComplex.quasiIso (normalizedDVRModules l E W n) (.up ℤ))
-        (integralOperationsLevelPullback l E g n).mapDerivedCategoryFactors]
-      refine MorphismProperty.IsInvertedBy.of_comp _ _ ?_ _
-      exact Localization.inverts _ _)
+      intro A B f hf
+      have : QuasiIso f := hf
+      dsimp only [Functor.comp_map]
+      infer_instance)
   infer_instance
 
 private def evaluationFiniteAdjunction {V W : Scheme.{t}} (g : V ⟶ W) (n : ℕ) :
