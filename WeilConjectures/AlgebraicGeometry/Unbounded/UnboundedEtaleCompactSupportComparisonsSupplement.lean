@@ -158,7 +158,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CompCo
 import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarAdjunctionCompat
 public import WeilConjectures.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
 import all WeilConjectures.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
-import all WeilConjectures.AlgebraicGeometry.Exact.ExactCompactificationUnitTower
+import all WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedProperOpenCompositionSupplement
 
 /-!
 # Unbounded ordinary etale compact-support comparisons
@@ -4087,7 +4087,12 @@ private lemma normalization_open_interchange
   have hs : N.sheafComparison k c = a := by
     apply NatTrans.ext
     funext M
-    have := compactification_comparison_mono A c M
+    have : Mono ((openImmersionLowerShriekToLowerStar
+        (ModuleCat.{u + 1} A) c.i).app M) := open_compare_mono A c.i M
+    have : Mono ((compactificationSheafToDirectImage A c).app M) := by
+      dsimp only [compactificationSheafToDirectImage, NatTrans.comp_app,
+        Functor.whiskerRight_app]
+      infer_instance
     apply (cancel_mono ((compactificationSheafToDirectImage A c).app M)).1
     rw [N.sheaf_normalization]
     have he := theta_normalization (ModuleCat.{u + 1} A) c.i c.g k c.comm.symm θ hθ M
