@@ -209,7 +209,7 @@ theorem eq_one_of_conj_invariant [SmoothOfRelativeDimension 1 p] [GeometricallyC
     rw [ht] at h1
     exact Multiplicative.toAdd.injective h1
   have hb'1 : b' = 1 := by
-    refine ContinuousMonoidHom.ext fun g ↦ ?_
+    refine ContinuousMonoidHom.ext fun g ↦ Multiplicative.toAdd.injective ?_
     refine PadicInt.ext_of_toZModPow.mp fun n ↦ ?_
     have h := congrArg Multiplicative.toAdd (htriv n g)
     rw [PadicInt.continuousMonoidHomEquiv_apply_coe] at h
