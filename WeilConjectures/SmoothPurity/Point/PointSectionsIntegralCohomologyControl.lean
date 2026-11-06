@@ -511,8 +511,8 @@ theorem point_sections_integral_cohomology_control (D : FiniteFieldDatum.{u})
         (fun n ↦ (sfDerivedReductionTransition l E (Spec (.of D.k)) n).app K) K :=
       ⟨_, δ, hT⟩
     have hFL := exact_map_roos F L _ K hL
-    have hnil : ∀ (a : R), a ∈ Ideal.span {ULift.up
-        (Padic.coefficientExtensionUniformizer l E)} → ∀ n : ℕ, ∃ e : ℕ,
+    have hnil : ∀ (a : R), a ∈ Ideal.span
+        {ULift.up (Padic.coefficientExtensionUniformizer l E)} → ∀ n : ℕ, ∃ e : ℕ,
         1 ≤ e ∧ (a ^ e) • 𝟙 (F.mapDerivedCategory.obj (L n)) = 0 := by
       intro a ha n
       refine ⟨n + 1, by omega, ?_⟩
