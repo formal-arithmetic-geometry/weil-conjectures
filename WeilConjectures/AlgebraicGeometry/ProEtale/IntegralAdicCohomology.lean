@@ -207,12 +207,12 @@ noncomputable def bocksteinShortComplex (m : ℕ) :
 /-- An element of `pᵐ ℤ_p` divided by `pᵐ`. -/
 private noncomputable def divPow {m : ℕ} (x : ℤ_[p]) (hx : x ∈ powOpenAddSubgroup p m) :
     ℤ_[p] :=
-  ⟨(x : ℚ_[p]) / (p : ℚ_[p]) ^ m, by
+  Padic.lift ((x : ℚ_[p]) / (p : ℚ_[p]) ^ m) (by
     rw [mem_powOpenAddSubgroup, ← norm_le_pow_iff_mem_span_pow] at hx
     have hp : (0 : ℝ) < (p : ℝ) ^ (-(m : ℤ)) :=
       zpow_pos (by exact_mod_cast (Fact.out : p.Prime).pos) _
     rw [norm_div, Padic.norm_p_pow, div_le_one hp]
-    exact hx⟩
+    exact hx)
 
 private lemma pow_mul_divPow {m : ℕ} (x : ℤ_[p]) (hx : x ∈ powOpenAddSubgroup p m) :
     (p : ℤ_[p]) ^ m * divPow p x hx = x := by
