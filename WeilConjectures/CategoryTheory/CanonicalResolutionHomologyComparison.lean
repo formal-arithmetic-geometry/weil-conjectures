@@ -114,9 +114,8 @@ theorem resolution_homology_transport
       have hI : (resolutionDerivedIso F I).hom =
           F.rightDerivedFunctorPlus.map (resolutionAugmentationIso I).hom ≫
             inv (F.rightDerivedFunctorPlusUnit.app LY) := by
-        simp only [resolutionDerivedIso, Functor.rightDerivedFunctorPlusUnit,
-          Functor.quotientCompMapHomotopyCategoryPlusIso, LY, Category.assoc, Functor.comp_obj,
-          IsIso.eq_comp_inv]
+        simp? [resolutionDerivedIso, Functor.rightDerivedFunctorPlusUnit,
+          Functor.quotientCompMapHomotopyCategoryPlusIso, LY, Category.assoc]
         erw [Functor.map_id]
         simp [← Functor.map_comp]
       rw [hI]

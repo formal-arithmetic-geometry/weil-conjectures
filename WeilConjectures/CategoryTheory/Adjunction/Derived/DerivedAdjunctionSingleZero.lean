@@ -82,12 +82,10 @@ private theorem unit_single (M : C) :
     change _ = L.mapDerivedCategoryFactorsh.hom.app
       ((HomotopyCategory.quotient C (.up ℤ)).obj ((CochainComplex.singleFunctor C 0).obj M)) ≫ _
     rw [Functor.mapDerivedCategoryFactorsh_hom_app]
-    simp only [Functor.mapDerivedCategorySingleFunctor, DerivedCategory.singleFunctorIsoCompQ,
+    simp? [Functor.mapDerivedCategorySingleFunctor, DerivedCategory.singleFunctorIsoCompQ,
       DerivedCategory.quotientCompQhIso, HomologicalComplexUpToQuasiIso.quotientCompQhIso,
-      Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_hom, Quotient.lift.isLift_inv,
-      Category.assoc, HomotopyCategory.quotient_obj_singleFunctors_obj, Functor.comp_obj,
-      Functor.mapHomotopyCategory_obj, ObjectProperty.ι_obj, Iso.trans_hom, Iso.app_hom,
-      Functor.mapIso_hom]
+      Functor.mapHomotopyCategoryFactors,
+      Quotient.lift.isLift_hom, Quotient.lift.isLift_inv, Category.assoc]
     erw [Functor.map_id, Category.id_comp, Category.id_comp, Category.id_comp, Category.id_comp]
   rw [hL, Functor.map_comp, ← Category.assoc]
   erw [h]
