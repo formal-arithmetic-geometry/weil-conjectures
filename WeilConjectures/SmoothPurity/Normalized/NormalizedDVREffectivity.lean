@@ -13,6 +13,8 @@ public import WeilConjectures.SmoothPurity.Derived.DerivedScalarExtensionRestric
 import WeilConjectures.SixFunctors.Normalized.NormalizedDVRRoosFiniteReduction
 import WeilConjectures.SixFunctors.Normalized.NormalizedDVRKFlatReductionModel
 import Mathlib.Algebra.Homology.Functor
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # Effectivity of normalized DVR towers
 
