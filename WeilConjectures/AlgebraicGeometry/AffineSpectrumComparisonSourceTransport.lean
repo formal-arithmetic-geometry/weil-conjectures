@@ -240,7 +240,9 @@ theorem exists_affineSpectrum_comparisonIntoPullback_transport
         Iso.trans_hom, Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
         NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
         Iso.symm_hom, asIso_hom, Functor.comp_obj]
-      erw [(derivedPullback X.isoSpec.inv).map_id, DerivedCategory.Qh.map_id]
+      erw [(derivedPullback X.isoSpec.inv).map_id,
+        (DerivedCategory.Qh.{w}
+          (C := SheafOfModules.{u} (moduleRings (Spec Γ(X, ⊤)).toRingedSpace))).map_id]
       erw [Category.id_comp, Category.comp_id, Category.comp_id]
     have hj' : (isoPullbackComplexCounitIso X'.isoSpec.inv).hom.app
         (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P) =
@@ -251,7 +253,9 @@ theorem exists_affineSpectrum_comparisonIntoPullback_transport
         Iso.trans_hom, Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
         NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
         Iso.symm_hom, asIso_hom, Functor.comp_obj]
-      erw [(derivedPullback X'.isoSpec.inv).map_id, DerivedCategory.Qh.map_id]
+      erw [(derivedPullback X'.isoSpec.inv).map_id,
+        (DerivedCategory.Qh.{w}
+          (C := SheafOfModules.{u} (moduleRings (Spec Γ(X', ⊤)).toRingedSpace))).map_id]
       erw [Category.id_comp, Category.comp_id, Category.comp_id]
     rw [← hj, ← hj'] at h
     let e := (derivedPullback (Spec.map g'.appTop)).mapIso
@@ -259,7 +263,9 @@ theorem exists_affineSpectrum_comparisonIntoPullback_transport
     let c := asIso ((counit (Spec.map g'.appTop)).app
       ((HomotopyCategory.quotient _ (.up ℤ)).obj
         (((Scheme.Modules.tensorPullback X.isoSpec.inv).mapHomologicalComplex (.up ℤ)).obj P)))
-    let a := DerivedCategory.Q.mapIso (affineSpectrumTensorComplexIso g' P)
+    let a := (DerivedCategory.Q.{w}
+      (C := SheafOfModules.{u} (moduleRings (Spec Γ(X', ⊤)).toRingedSpace))).mapIso
+        (affineSpectrumTensorComplexIso g' P)
     let d := (affineSpectrumDerivedPullbackIso g').app (DerivedCategory.Q.obj P)
     let b := (derivedPullback X'.isoSpec.inv).mapIso (asIso
       ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))
@@ -285,7 +291,7 @@ theorem exists_affineSpectrum_comparisonIntoPullback_transport
         comparisonIntoTensorPullback f f' g g' sq z P i ≫
           (comparisonStalkCohomology X' z i).map
             (inv ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) := by
-    simp only [comparisonIntoPullback, comparisonIntoTensorPullback, Category.assoc]
+    simp only [comparisonIntoPullback, comparisonIntoTensorPullback, Category.assoc, cast_eq]
 
   have exists_affineSpectrum_canonicalComparison_square
       [∀ Y : Scheme.{u},
