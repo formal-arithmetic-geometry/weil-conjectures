@@ -191,8 +191,9 @@ theorem injective_mvPolynomialToReesQuot (ha : MvPolynomial.IsRevRegular a) :
     have := coeff_mem_pow_of_mem_extendedReesAlgebra w.2 (-(d : ℤ) - 1)
     rwa [show (-(-(d : ℤ) - 1)).toNat = d + 1 by omega] at this
   ext m
-  rw [MvPolynomial.coeff_map, AddMonoidAlgebra.coeff_zero, Finsupp.zero_apply,
-    Quotient.eq_zero_iff_mem]
+  rw [MvPolynomial.coeff_map]
+  change _ = (0 : R ⧸ span (Set.range a))
+  rw [Quotient.eq_zero_iff_mem]
   have := MvPolynomial.coeff_mem_of_eval_mem_pow_succ ha m.degree
     (MvPolynomial.homogeneousComponent_isHomogeneous _ _) (hcoeff m.degree) m
   rwa [MvPolynomial.coeff_homogeneousComponent, ite_eq_left rfl] at this
