@@ -102,12 +102,12 @@ noncomputable def scalarPairWithAdjunction
       CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) P →
       d.unit.app (DerivedCategory.Q.obj P) ≫
         (scalarDerivedRestriction a).map
-          (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫
+          (cast (by rfl) (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) ≫
         (scalarRestriction a).mapDerivedCategoryFactorsh.hom.app
           ((E.mapHomotopyCategory (.up ℤ)).obj
             ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) =
-        DerivedCategory.Qh.map ((am.mapHomotopyCategory (.up ℤ)).unit.app
-          ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) :
+        cast (by rfl) (DerivedCategory.Qh.map ((am.mapHomotopyCategory (.up ℤ)).unit.app
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))) :
     ScalarDerivedPair a := by
   classical
   have := hadd

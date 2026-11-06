@@ -19,7 +19,7 @@ namespace WeilConjectures
 
 section RoosCoherence
 attribute [local implicit_reducible] integralOperationsRoos
-  Functor.mapHomologicalComplex CochainComplex.mappingCocone
+  CochainComplex.mappingCocone
 
 open CochainComplex CochainComplex.HomComplex
 variable {A : Type a} [Category.{b} A] [Abelian A] [HasCountableProducts A]

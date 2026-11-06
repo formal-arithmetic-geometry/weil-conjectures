@@ -5,6 +5,10 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
+
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Projection.ProEtaleProjectionFormulaArrows
 public import WeilConjectures.CategoryTheory.Projection.ProjectionFormulaBaseChangeNaturality
 import all Mathlib.CategoryTheory.Limits.HasLimits
@@ -53,6 +57,46 @@ universe u v u' v' uA vA uB vB wA wB
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 
 namespace AlgebraicGeometry.Scheme
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem quotient_obj
+    {A : Type uA} [Category.{vA} A] [Abelian A] [HasDerivedCategory.{wA} A]
+    (I : CochainComplex A ℤ) :
+    DerivedCategory.Qh.obj ((HomotopyCategory.quotient A (.up ℤ)).obj I) =
+      DerivedCategory.Q.obj I := rfl
+
+private theorem cochain_counit
+    {A : Type uA} [Category.{vA} A] [Abelian A] [HasDerivedCategory.{wA} A]
+    {B : Type uB} [Category.{vB} B] [Abelian B] [HasDerivedCategory.{wB} B]
+    [Abelian.HasKInjectiveResolutions B]
+    (L : A ⥤ B) (V : B ⥤ A) [L.Additive] [V.Additive]
+    [PreservesFiniteLimits L] [PreservesFiniteColimits L]
+    (am : L ⊣ V) (I : CochainComplex B ℤ) :
+    L.mapDerivedCategory.map (V.rightDerivedFunctorUnit.app
+        ((HomotopyCategory.quotient B (.up ℤ)).obj I)) ≫
+      am.mapDerivedCategoryRightDerivedAdjunction.counit.app (DerivedCategory.Q.obj I) =
+      L.mapDerivedCategoryFactors.hom.app ((V.mapHomologicalComplex (.up ℤ)).obj I) ≫
+        DerivedCategory.Q.map ((am.mapHomologicalComplex (.up ℤ)).counit.app I) := by
+  have hh := (am.mapHomotopyCategory (.up ℤ)).derivedε_fac_app
+    (HomotopyCategory.quasiIso B (.up ℤ)) L.mapDerivedCategoryFactorsh.hom
+    V.rightDerivedFunctorUnit ((HomotopyCategory.quotient B (.up ℤ)).obj I)
+  change L.mapDerivedCategory.map _ ≫
+    am.mapDerivedCategoryRightDerivedAdjunction.counit.app _ =
+    L.mapDerivedCategoryFactorsh.hom.app
+      ((HomotopyCategory.quotient A (.up ℤ)).obj
+        ((V.mapHomologicalComplex (.up ℤ)).obj I)) ≫ _ at hh
+  simp only [Functor.mapDerivedCategoryFactorsh_hom_app,
+    Adjunction.mapHomotopyCategory_counit_app_quotient,
+    Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv,
+    DerivedCategory.quotientCompQhIso, HomologicalComplexUpToQuasiIso.quotientCompQhIso,
+    Category.assoc, Quotient.lift.isLift_hom] at hh
+  erw [L.mapDerivedCategory.map_id] at hh
+  erw [Category.id_comp] at hh
+  erw [(DerivedCategory.Qh (C := B)).map_id] at hh
+  erw [Category.id_comp] at hh
+  erw [Category.id_comp] at hh
+  exact hh
 
 attribute [local irreducible] SheafOfModules.monoidalClosed_kfg
 
@@ -438,6 +482,22 @@ private theorem total_counit
     ((am.mapHomologicalComplex (.up ℤ)).homEquiv _ _ _) = _
   exact Equiv.symm_apply_apply _ _
 
+private theorem proEtale_cochain_counit
+    {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
+    (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
+    (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S)
+    (I : CochainComplex (proEtaleRingModules X S) ℤ) :
+    (proEtaleRingDerivedPullback f R S c).map
+        ((proEtaleRingModuleDirectImage f R S c).rightDerivedFunctorUnit.app
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj I)) ≫
+      (proEtaleRingDerivedAdjunction f R S c).counit.app (DerivedCategory.Q.obj I) =
+      (proEtaleRingDerivedPullbackFactors f R S c).hom.app
+          (((proEtaleRingModuleDirectImage f R S c).mapHomologicalComplex (.up ℤ)).obj I) ≫
+        DerivedCategory.Q.map
+          (((proEtaleRingModuleAdjunction f R S c).mapHomologicalComplex (.up ℤ)).counit.app I) :=
+  cochain_counit _ _ (proEtaleRingModuleAdjunction f R S c) I
+
 attribute [local irreducible] proEtaleRingDerivedPullbackFactors
 attribute [local irreducible] proEtaleRingModulePullback proEtaleRingModuleAdjunction
   proEtaleRingDerivedAdjunction
@@ -467,5 +527,292 @@ def proEtaleProjectionTotal
     (fun {_ _ _ _} v z ↦ by
       simpa only [proEtaleOrdinaryTensor, curriedTensor, tensorHom_def, Category.assoc] using
         proEtaleOrdinaryTensorPullback_naturality f R S c _ _ _ _ v z) I F
+
+attribute [local irreducible] CategoryTheory.tensorAdjunctionTotal proEtaleProjectionTotal
+
+attribute [local instance 2000] Limits.instHasColimitOfHasColimitsOfShape
+  Limits.instHasLimitOfHasLimitsOfShape
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+set_option maxHeartbeats 200000 in
+-- Nested localization comparisons require extra elaboration steps.
+/-- The derived counit mate is the localization of the ordinary total mate on mixed
+representatives. Only the coefficient complex is required to be flat and K-flat;
+no finite-projective splitting or inverse projection map is involved.
+
+Source: literature/stacks-project/sites-cohomology.tex, Tags 07A4, 07A6 and 0B56;
+blueprint order 1267, proof step 5
+(blueprint: lem-weil-pbc-proetale-mixed-projection-mate).
+
+Proof: choose a flat K-flat resolution P of the ordinary direct image of I. The
+mixed tensor characterization computes the source comparison after tensoring this
+resolution with F. The canonical tensor-pullback representative square computes
+its pullback on P and F. Naturality of the mixed comparison identifies the ensuing
+map with tensor of the ordinary counit and the identity of the pulled-back F.
+The representative normalization of the derived adjunction identifies the derived
+counit with this ordinary counit. Transpose the resulting equality under the
+derived adjunction. The transpose of the ordinary total counit is the signed total
+mate. Naturality of the right-derived unit gives the right side of the equation.
+Cancel the localization of the tensor-resolution quasi-isomorphism, which is an
+isomorphism because F is K-flat. This proves the formula for every resolution and
+hence for the uniquely normalized mixed tensor comparisons. -/
+theorem proEtaleMixedProjectionMate
+    {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
+    (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
+    (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S)
+    (a : ProEtaleTensorModel Y R) (b : ProEtaleTensorModel X S)
+    (I : CochainComplex (proEtaleRingModules X S) ℤ) (_hI : I.IsKInjective)
+    (F : CochainComplex (proEtaleRingModules Y R) ℤ)
+    (hF : proEtaleFlatRepresentatives Y R F) :
+    let L := proEtaleRingModulePullback f R S c
+    let V := proEtaleRingModuleDirectImage f R S c
+    let G := (L.mapHomologicalComplex (.up ℤ)).obj F
+    let J := CochainComplex.mapBifunctor I G (proEtaleOrdinaryTensor X S)
+    let hG := (proEtaleCanonicalTensorPullback f R S c a b).1 F hF
+    let eta (C : CochainComplex (proEtaleRingModules X S) ℤ) :
+        DerivedCategory.Q.obj ((V.mapHomologicalComplex (.up ℤ)).obj C) ⟶
+          (proEtaleRingDerivedDirectImage f R S c).obj (DerivedCategory.Q.obj C) :=
+      V.rightDerivedFunctorUnitQ C
+    a.tensor.map (Prod.mkHom (eta I) (𝟙 (DerivedCategory.Q.{u + 2}.obj F))) ≫
+        proEtaleProjectionFormulaMate f R S c a b
+          (DerivedCategory.Q.{u + 2}.obj I) (DerivedCategory.Q.{u + 2}.obj F) ≫
+        (proEtaleRingDerivedDirectImage f R S c).map
+          (b.tensor.map (Prod.mkHom (𝟙 (DerivedCategory.Q.{u + 2}.obj I))
+            ((proEtaleRingDerivedPullbackFactors f R S c).hom.app F)) ≫
+              (proEtaleMixedTensor S b I G hG).hom) =
+      (proEtaleMixedTensor R a
+        ((V.mapHomologicalComplex (.up ℤ)).obj I) F hF).hom ≫
+        DerivedCategory.Q.{u + 2}.map (proEtaleProjectionTotal f R S c I F) ≫ eta J := by
+  classical
+  let := SheafOfModules.monoidalCategory R
+  let := SheafOfModules.monoidalCategory S
+  let L := proEtaleRingModulePullback f R S c
+  let V := proEtaleRingModuleDirectImage f R S c
+  let LD := proEtaleRingDerivedPullback f R S c
+  let VD := proEtaleRingDerivedDirectImage f R S c
+  let adj := proEtaleRingDerivedAdjunction f R S c
+  let am := proEtaleRingModuleAdjunction f R S c
+  let A := (V.mapHomologicalComplex (.up ℤ)).obj I
+  let G := (L.mapHomologicalComplex (.up ℤ)).obj F
+  let J := CochainComplex.mapBifunctor I G (proEtaleOrdinaryTensor X S)
+  let eta (C : CochainComplex (proEtaleRingModules X S) ℤ) :
+      DerivedCategory.Q.obj ((V.mapHomologicalComplex (.up ℤ)).obj C) ⟶
+        VD.obj (DerivedCategory.Q.obj C) :=
+    V.rightDerivedFunctorUnitQ C
+  let hG := (proEtaleCanonicalTensorPullback f R S c a b).1 F hF
+  let beta := proEtaleCanonicalTensorComparison f R S c a b
+  let eps := (proEtaleRingDerivedPullbackFactors f R S c).hom
+  let epsc := (am.mapHomologicalComplex (.up ℤ)).counit.app I
+  let total := proEtaleProjectionTotal f R S c I F
+  change a.tensor.map (Prod.mkHom (eta I) (𝟙 (DerivedCategory.Q.obj F))) ≫
+      proEtaleProjectionFormulaMate f R S c a b
+        (DerivedCategory.Q.obj I) (DerivedCategory.Q.obj F) ≫
+      VD.map (b.tensor.map (Prod.mkHom (𝟙 (DerivedCategory.Q.obj I)) (eps.app F)) ≫
+        (proEtaleMixedTensor S b I G hG).hom) =
+    (proEtaleMixedTensor R a A F hF).hom ≫ DerivedCategory.Q.map total ≫ eta J
+  have hc (I : CochainComplex (proEtaleRingModules X S) ℤ) :
+      LD.map (eta I) ≫ adj.counit.app (DerivedCategory.Q.{u + 2}.obj I) =
+      eps.app ((V.mapHomologicalComplex (.up ℤ)).obj I) ≫
+        DerivedCategory.Q.{u + 2}.map
+          ((am.mapHomologicalComplex (.up ℤ)).counit.app I) := by
+    exact proEtale_cochain_counit f R S c I
+  obtain ⟨D, q, hres⟩ := flat_resolution_functor Y R
+  let P := D.obj A
+  let p := q.app A
+  have hP : proEtaleFlatRepresentatives Y R P := (hres A).1
+  have hq : QuasiIso p := (hres A).2
+  have : QuasiIso p := hq
+  have : IsIso (Prod.mkHom (DerivedCategory.Q.{u + 2}.map p)
+      (𝟙 (DerivedCategory.Q.{u + 2}.obj F))) :=
+    (Iso.prod (asIso (DerivedCategory.Q.{u + 2}.map p)) (Iso.refl _)).isIso_hom
+  apply (cancel_epi (a.tensor.map
+    (Prod.mkHom (DerivedCategory.Q.{u + 2}.map p) (𝟙 (DerivedCategory.Q.{u + 2}.obj F))))).mp
+  have hs := mixed_normalization Y R a A F P hF hP p hq
+  rw [representativeInv_eq] at hs
+  have hLP := (proEtaleCanonicalTensorPullback f R S c a b).1 P hP
+  have ht := tensor_comparison_normalization f R S c a b P F hP hF hLP hG
+  let LP := (L.mapHomologicalComplex (.up ℤ)).obj P
+  let v := (L.mapHomologicalComplex (.up ℤ)).map p ≫ epsc
+  have hm := mixed_naturality X S b LP I G hG v
+  have hmP := mixed_normalization X S b LP G LP hG hLP (𝟙 LP) (by infer_instance)
+  have hid : HomologicalComplex.mapBifunctorMap (𝟙 LP) (𝟙 G)
+      (proEtaleOrdinaryTensor X S) (.up ℤ) = 𝟙 _ := by
+    simp [HomologicalComplex.mapBifunctorMap]
+  simp only [DerivedCategory.Q.{u + 2}.map_id, ← prod_id, hid] at hmP
+  change b.tensor.map (𝟙 (DerivedCategory.Q.obj LP, DerivedCategory.Q.obj G)) ≫ _ = _ at hmP
+  rw [b.tensor.map_id, Category.id_comp] at hmP
+  erw [Category.comp_id] at hmP
+  rw [representativeInv_eq] at hmP
+  have hcv : LD.map (DerivedCategory.Q.map p ≫ eta I) ≫
+      adj.counit.app (DerivedCategory.Q.obj I) =
+      eps.app P ≫ DerivedCategory.Q.map v := by
+    rw [Functor.map_comp, Category.assoc, hc I, ← Category.assoc]
+    have hn := eps.naturality p
+    change LD.map (DerivedCategory.Q.map p) ≫ eps.app A =
+      eps.app P ≫ DerivedCategory.Q.map
+        ((L.mapHomologicalComplex (.up ℤ)).map p) at hn
+    rw [hn, Category.assoc, ← Functor.map_comp]
+  have hb : LD.map (a.tensor.map
+        (Prod.mkHom (DerivedCategory.Q.map p ≫ eta I) (𝟙 (DerivedCategory.Q.obj F)))) ≫
+      beta.hom.app (VD.obj (DerivedCategory.Q.obj I), DerivedCategory.Q.obj F) ≫
+      b.tensor.map (Prod.mkHom (adj.counit.app (DerivedCategory.Q.obj I)) (eps.app F)) =
+      beta.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj F) ≫
+        b.tensor.map (Prod.mkHom (eps.app P ≫ DerivedCategory.Q.map v) (eps.app F)) := by
+    have hn := beta.hom.naturality
+      (Prod.mkHom (DerivedCategory.Q.map p ≫ eta I) (𝟙 (DerivedCategory.Q.obj F)))
+    change LD.map (a.tensor.map
+        (Prod.mkHom (DerivedCategory.Q.map p ≫ eta I)
+          (𝟙 (DerivedCategory.Q.obj F)))) ≫
+        beta.hom.app (VD.obj (DerivedCategory.Q.obj I), DerivedCategory.Q.obj F) =
+      beta.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj F) ≫ b.tensor.map
+        (Prod.mkHom (LD.map (DerivedCategory.Q.map p ≫ eta I))
+          (LD.map (𝟙 (DerivedCategory.Q.obj F)))) at hn
+    rw [← Category.assoc, hn, Category.assoc, ← b.tensor.map_comp]
+    simp only [prod_comp, LD.map_id, hcv]
+    erw [Category.id_comp]
+  have hpi : LD.map (proEtaleProjectionFormulaMate f R S c a b
+        (DerivedCategory.Q.obj I) (DerivedCategory.Q.obj F)) ≫
+      adj.counit.app (b.tensor.obj
+        (DerivedCategory.Q.obj I, LD.obj (DerivedCategory.Q.obj F))) =
+      beta.hom.app (VD.obj (DerivedCategory.Q.obj I), DerivedCategory.Q.obj F) ≫
+        b.tensor.map (Prod.mkHom (adj.counit.app (DerivedCategory.Q.obj I))
+          (𝟙 (LD.obj (DerivedCategory.Q.obj F)))) := by
+    exact proEtale_projection_counit f R S c a b
+      (DerivedCategory.Q.obj I) (DerivedCategory.Q.obj F)
+  have hrep : beta.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj F) ≫
+      b.tensor.map (Prod.mkHom (eps.app P) (eps.app F)) ≫
+      representativeInv X S b LP G hLP hG =
+      LD.map (representativeInv Y R a P F hP hF) ≫
+        eps.app (CochainComplex.mapBifunctor P F (proEtaleOrdinaryTensor Y R)) ≫
+        (DerivedCategory.Q.mapIso (proEtaleTensorPullbackTotalIso f R S c P F)).inv := by
+    have hh := inverse_normalization LD
+      (a.representative.app (⟨P, hP⟩, ⟨F, hF⟩))
+      (b.representative.app (⟨LP, hLP⟩, ⟨G, hG⟩))
+      (beta.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj F) ≫
+        b.tensor.map (Prod.mkHom (eps.app P) (eps.app F)))
+      (eps.app (CochainComplex.mapBifunctor P F (proEtaleOrdinaryTensor Y R)) ≫
+        (DerivedCategory.Q.mapIso (proEtaleTensorPullbackTotalIso f R S c P F)).inv)
+      (by
+        set_option backward.isDefEq.respectTransparency false in
+        set_option backward.isDefEq.respectTransparency.types false in
+        exact (by
+          simpa only [beta, Category.assoc, Iso.app_hom] using ht))
+    simp only [Iso.app_inv, representativeInv_eq] at hh
+    exact assoc_equality _ _ _ hh
+  let muP := proEtaleTensorPullbackTotalIso f R S c P F
+  let muA := proEtaleTensorPullbackTotalIso f R S c A F
+  let LC := L.mapHomologicalComplex (.up ℤ)
+  let UY := ((proEtaleOrdinaryTensor Y R).map₂HomologicalComplex
+    (.up ℤ) (.up ℤ) (.up ℤ)).flip.obj F
+  let UX := ((proEtaleOrdinaryTensor X S).map₂HomologicalComplex
+    (.up ℤ) (.up ℤ) (.up ℤ)).flip.obj G
+  have htc : LC.map total ≫ (am.mapHomologicalComplex (.up ℤ)).counit.app J =
+      muA.inv ≫ UX.map epsc := by
+    unfold total proEtaleProjectionTotal
+    exact total_counit L V am (proEtaleOrdinaryTensorPullback f R S c)
+      (fun {_ _ _ _} p q ↦ by
+        simpa only [proEtaleOrdinaryTensor, curriedTensor, tensorHom_def, Category.assoc] using
+          proEtaleOrdinaryTensorPullback_naturality f R S c _ _ _ _ p q)
+      I F
+  have hmu : UX.map (LC.map p) ≫ muA.hom = muP.hom ≫ LC.map (UY.map p) := by
+    exact total_naturality L (proEtaleOrdinaryTensorPullback f R S c)
+      (fun {_ _ _ _} v z ↦ by
+        simpa only [proEtaleOrdinaryTensor, curriedTensor, tensorHom_def, Category.assoc] using
+          proEtaleOrdinaryTensorPullback_naturality f R S c _ _ _ _ v z) (F := F) p
+  have hchain : muP.inv ≫ UX.map v =
+      LC.map (UY.map p) ≫ LC.map total ≫
+        (am.mapHomologicalComplex (.up ℤ)).counit.app J := by
+    set_option backward.isDefEq.respectTransparency false in
+    set_option backward.isDefEq.respectTransparency.types false in
+    exact (by
+      have hh : muP.inv ≫ UX.map (LC.map p) = LC.map (UY.map p) ≫ muA.inv := by
+        apply (cancel_mono muA.hom).mp
+        simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+        rw [hmu, Iso.inv_hom_id_assoc]
+      dsimp only [v]
+      rw [UX.map_comp, ← Category.assoc, hh, Category.assoc, ← htc]
+    )
+  let B := b.tensor.map (Prod.mkHom (𝟙 (DerivedCategory.Q.obj I)) (eps.app F)) ≫
+    (proEtaleMixedTensor S b I G hG).hom
+  have hleft : LD.map
+      (a.tensor.map (Prod.mkHom (DerivedCategory.Q.map p ≫ eta I)
+        (𝟙 (DerivedCategory.Q.obj F))) ≫
+        proEtaleProjectionFormulaMate f R S c a b
+          (DerivedCategory.Q.obj I) (DerivedCategory.Q.obj F) ≫ VD.map B) ≫
+        adj.counit.app (DerivedCategory.Q.obj J) =
+      LD.map (representativeInv Y R a P F hP hF) ≫
+        eps.app (CochainComplex.mapBifunctor P F (proEtaleOrdinaryTensor Y R)) ≫
+        DerivedCategory.Q.map (muP.inv ≫ UX.map v) := by
+    have hh := mate_calculation LD VD adj a.tensor b.tensor
+      (a.tensor.map (Prod.mkHom (DerivedCategory.Q.map p ≫ eta I)
+        (𝟙 (DerivedCategory.Q.obj F))))
+      (proEtaleProjectionFormulaMate f R S c a b
+        (DerivedCategory.Q.obj I) (DerivedCategory.Q.obj F))
+      (beta.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj F))
+      (beta.hom.app (VD.obj (DerivedCategory.Q.obj I), DerivedCategory.Q.obj F))
+      (eps.app P) (eps.app F) (DerivedCategory.Q.map v)
+      (representativeInv X S b LP G hLP hG)
+      (proEtaleMixedTensor S b I G hG).hom (DerivedCategory.Q.map (UX.map v))
+      (representativeInv Y R a P F hP hF)
+      (eps.app (CochainComplex.mapBifunctor P F (proEtaleOrdinaryTensor Y R)) ≫
+        (DerivedCategory.Q.mapIso muP).inv) hpi hb
+      (by
+        set_option backward.isDefEq.respectTransparency true in
+        set_option backward.isDefEq.respectTransparency.types true in
+        exact hm.trans (congrArg (fun z ↦ z ≫ DerivedCategory.Q.map
+          (HomologicalComplex.mapBifunctorMap v (𝟙 G)
+            (proEtaleOrdinaryTensor X S) (.up ℤ))) hmP))
+      (by simpa only [Category.assoc] using hrep)
+    set_option backward.isDefEq.respectTransparency false in
+    set_option backward.isDefEq.respectTransparency.types false in
+    exact (by
+      simpa only [B, J, Functor.mapIso_inv, Category.assoc,
+        ← (DerivedCategory.Q (C := proEtaleRingModules X S)).map_comp,
+        quotient_obj] using hh)
+  have hright : LD.map
+      (a.tensor.map (Prod.mkHom (DerivedCategory.Q.map p)
+        (𝟙 (DerivedCategory.Q.obj F))) ≫
+        (proEtaleMixedTensor R a A F hF).hom ≫
+          DerivedCategory.Q.map total ≫ eta J) ≫
+        adj.counit.app (DerivedCategory.Q.obj J) =
+      LD.map (representativeInv Y R a P F hP hF) ≫
+        eps.app (CochainComplex.mapBifunctor P F (proEtaleOrdinaryTensor Y R)) ≫
+        DerivedCategory.Q.map (LC.map (UY.map p) ≫ LC.map total ≫
+          (am.mapHomologicalComplex (.up ℤ)).counit.app J) := by
+    set_option backward.isDefEq.respectTransparency false in
+    set_option backward.isDefEq.respectTransparency.types false in
+    exact (by
+      apply localized_counit_composite
+        (DerivedCategory.Q (C := proEtaleRingModules Y R))
+        (DerivedCategory.Q (C := proEtaleRingModules X S)) LC LD eps
+        (UY.map p) total ((am.mapHomologicalComplex (.up ℤ)).counit.app J)
+        (representativeInv Y R a P F hP hF)
+        (a.tensor.map (Prod.mkHom (DerivedCategory.Q.map p)
+          (𝟙 (DerivedCategory.Q.obj F))))
+        (proEtaleMixedTensor R a A F hF).hom (eta J) (adj.counit.app _)
+      · exact hs
+      · simpa only [J, V, G, proEtaleOrdinaryTensor, Functor.id_obj, quotient_obj,
+          Functor.comp_obj] using hc J
+    )
+  change a.tensor.map (Prod.mkHom (DerivedCategory.Q.map p)
+      (𝟙 (DerivedCategory.Q.obj F))) ≫
+    a.tensor.map (Prod.mkHom (eta I) (𝟙 (DerivedCategory.Q.obj F))) ≫
+    proEtaleProjectionFormulaMate f R S c a b
+      (DerivedCategory.Q.obj I) (DerivedCategory.Q.obj F) ≫ VD.map B = _
+  have hx : a.tensor.map (Prod.mkHom (DerivedCategory.Q.map p)
+      (𝟙 (DerivedCategory.Q.obj F))) ≫
+      a.tensor.map (Prod.mkHom (eta I) (𝟙 (DerivedCategory.Q.obj F))) =
+    a.tensor.map (Prod.mkHom (DerivedCategory.Q.map p ≫ eta I)
+      (𝟙 (DerivedCategory.Q.obj F))) := by
+    rw [← a.tensor.map_comp]
+    rfl
+  rw [reassoc_of% hx]
+  apply transpose_injective LD VD adj
+  exact hleft.trans ((congrArg (fun z ↦
+    LD.map (representativeInv Y R a P F hP hF) ≫
+      eps.app (CochainComplex.mapBifunctor P F (proEtaleOrdinaryTensor Y R)) ≫
+        DerivedCategory.Q.map z) hchain).trans hright.symm)
 
 end AlgebraicGeometry.Scheme

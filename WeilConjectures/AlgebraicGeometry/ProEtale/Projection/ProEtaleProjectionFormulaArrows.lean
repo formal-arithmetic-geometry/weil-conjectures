@@ -155,6 +155,125 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y)
   (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
   (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S)
 
+section ProjectionUnitProof
+
+attribute [local irreducible] proEtaleRingModuleAdjunction
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+/-- Unit normalization of the canonical ordinary comparison on the original site.
+Source: definition 1264, ordinary finite-free identification
+(blueprint: def-weil-pbc-projection-formula-arrows).
+Proof: scalar multiplication identifies pullback of the coefficient ring with the
+coefficient ring. On m tensor r both displayed routes multiply by the image of r.
+Pure tensors generate and sheafification is universal. At the unit this equation
+uniquely determines the unit identification. -/
+theorem proEtaleProjectionUnit_existsUnique :
+    ∃! j : (proEtaleRingModulePullback f R S c).obj
+        (SheafOfModules.unit ((sheafCompose (ProEt.topology Y)
+          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)) ≅
+        SheafOfModules.unit ((sheafCompose (ProEt.topology X)
+          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S),
+      ∀ M : proEtaleRingModules Y R,
+        (proEtaleOrdinaryTensorPullback f R S c M
+          (SheafOfModules.unit ((sheafCompose (ProEt.topology Y)
+            (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R))).hom ≫
+          (SheafOfModules.monoidalCategory S).tensorHom
+            (𝟙 ((proEtaleRingModulePullback f R S c).obj M)) j.hom ≫
+          ((SheafOfModules.monoidalCategory S).rightUnitor
+            ((proEtaleRingModulePullback f R S c).obj M)).hom =
+        (proEtaleRingModulePullback f R S c).map
+          (((SheafOfModules.monoidalCategory R).rightUnitor M).hom) := by
+  let := SheafOfModules.monoidalCategory R
+  let := SheafOfModules.monoidalCategory S
+  let adj := proEtaleRingModuleAdjunction f R S c
+  let φ : (sheafCompose (ProEt.topology Y)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R ⟶
+      ((proEtaleBaseChange f).sheafPushforwardContinuous RingCat.{u + 1}
+        (ProEt.topology Y) (ProEt.topology X)).obj
+          ((sheafCompose (ProEt.topology X)
+            (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S) :=
+    ⟨Functor.whiskerRight (proEtaleRingDirectImageMap f R S c).hom
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})⟩
+  have : (SheafOfModules.pushforward.{u + 1} φ).IsRightAdjoint := adj.isRightAdjoint
+  let adj' := SheafOfModules.pullbackPushforwardAdjunction.{u + 1} φ
+  let e := adj.leftAdjointUniq adj'
+  let j := e.app (SheafOfModules.unit _) ≪≫
+    asIso (SheafOfModules.pullbackObjUnitToUnit φ)
+  have hj : adj.homEquiv _ _ j.hom = SheafOfModules.unitToPushforwardObjUnit φ := by
+    change adj.homEquiv _ _ (e.hom.app _ ≫ _) = _
+    rw [adj.homEquiv_naturality_right]
+    rw [Adjunction.homEquiv_leftAdjointUniq_hom_app]
+    exact SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit φ
+  have hcompat (M : proEtaleRingModules Y R) :
+      (proEtaleOrdinaryTensorPullback f R S c M (𝟙_ _)).hom ≫
+        (𝟙 _ ⊗ₘ j.hom) ≫ (ρ_ _).hom =
+      (proEtaleRingModulePullback f R S c).map (ρ_ M).hom := by
+    apply (adj.homEquiv _ _).injective
+    rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit, adj.unit_naturality]
+    apply proEtaleTensorPair_hom_ext Y R
+    intro U m r
+    obtain ⟨U⟩ := U
+    have hmu := (Classical.choose_spec
+      (proEtaleOrdinaryTensorPullback_existsUnique f R S c).exists).2 M (𝟙_ _) U m r
+    have hjr := congrArg (fun z ↦ z.val.app (Opposite.op U) r) hj
+    rw [Adjunction.homEquiv_unit] at hjr
+    change j.hom.val.app (Opposite.op ((proEtaleBaseChange f).obj U))
+      ((adj.unit.app (𝟙_ _)).val.app (Opposite.op U) r) =
+        (proEtaleRingDirectImageMap f R S c).hom.app (Opposite.op U) r at hjr
+    change (ρ_ ((proEtaleRingModulePullback f R S c).obj M)).hom.val.app _
+        (((SheafOfModules.monoidalCategory S).tensorHom (𝟙 _) j.hom).val.app _
+          ((proEtaleOrdinaryTensorPullback f R S c M (𝟙_ _)).hom.val.app _
+            ((adj.unit.app _).val.app _ (proEtaleTensorPair Y R M (𝟙_ _) _ m r)))) =
+      (adj.unit.app M).val.app _ ((ρ_ M).hom.val.app _
+        (proEtaleTensorPair Y R M (𝟙_ _) _ m r))
+    erw [hmu]
+    let V := Opposite.op ((proEtaleBaseChange f).obj U)
+    let m' : ((proEtaleRingModulePullback f R S c).obj M).val.obj V :=
+      (adj.unit.app M).val.app (Opposite.op U) m
+    let r' : ((proEtaleRingModulePullback f R S c).obj (𝟙_ _)).val.obj V :=
+      (adj.unit.app (𝟙_ _)).val.app (Opposite.op U) r
+    change j.hom.val.app V r' =
+      (proEtaleRingDirectImageMap f R S c).hom.app (Opposite.op U) r at hjr
+    change (ρ_ ((proEtaleRingModulePullback f R S c).obj M)).hom.val.app V
+        (((SheafOfModules.monoidalCategory S).tensorHom (𝟙 _) j.hom).val.app V
+          (proEtaleTensorPair X S _ _ V m' r')) = _
+    have htens := proEtaleTensorPair_tensorHom X S
+      (𝟙 ((proEtaleRingModulePullback f R S c).obj M)) j.hom V m' r'
+    change ((SheafOfModules.monoidalCategory S).tensorHom (𝟙 _) j.hom).val.app V
+        (proEtaleTensorPair X S _ _ V m' r') =
+      proEtaleTensorPair X S _ _ V m' (j.hom.val.app V r') at htens
+    calc
+      _ = (ρ_ ((proEtaleRingModulePullback f R S c).obj M)).hom.val.app V
+          (proEtaleTensorPair X S _ _ V m' (j.hom.val.app V r')) :=
+        congrArg (fun z ↦
+          (ρ_ ((proEtaleRingModulePullback f R S c).obj M)).hom.val.app V z) htens
+      _ = (show S.obj.obj V from j.hom.val.app V r') • m' :=
+        proEtaleTensorPair_rightUnitor X S _ V m' (j.hom.val.app V r')
+      _ = ((proEtaleRingDirectImageMap f R S c).hom.app (Opposite.op U) r) • m' :=
+        congrArg (fun z ↦ z • m') hjr
+      _ = (adj.unit.app M).val.app (Opposite.op U)
+          ((show R.obj.obj (Opposite.op U) from r) • m) :=
+        ((adj.unit.app M).val.app (Opposite.op U)).hom.map_smul r m |>.symm
+      _ = _ := congrArg (fun z ↦ (adj.unit.app M).val.app (Opposite.op U) z)
+        (proEtaleTensorPair_rightUnitor Y R M (Opposite.op U) m r).symm
+  refine ⟨j, hcompat, ?_⟩
+  intro j' hj'
+  apply Iso.ext
+  have h := (hj' (𝟙_ _)).trans (hcompat (𝟙_ _)).symm
+  let T := (proEtaleRingModulePullback f R S c).obj (𝟙_ _)
+  have ht : (𝟙 T ⊗ₘ j'.hom) = (𝟙 T ⊗ₘ j.hom) :=
+    (cancel_mono (ρ_ T).hom).1
+      ((cancel_epi (proEtaleOrdinaryTensorPullback f R S c (𝟙_ _) (𝟙_ _)).hom).1 h)
+  have h' := congrArg (fun z ↦ (j.inv ⊗ₘ 𝟙 _) ≫ z) ht
+  simp only [tensorHom_comp_tensorHom, Category.id_comp] at h'
+  have h'' := congrArg (fun z ↦ (λ_ _).inv ≫ z) h'
+  rw [leftUnitor_inv_comp_tensorHom, leftUnitor_inv_comp_tensorHom] at h''
+  exact (cancel_mono ((λ_ (𝟙_ (proEtaleRingModules X S))).inv ≫
+    j.inv ▷ (𝟙_ (proEtaleRingModules X S)))).1 h''
+
+end ProjectionUnitProof
+
 set_option backward.isDefEq.respectTransparency false in
 /-- Bounded split-free coefficients are flat and K-flat on the original site.
 Source: definition 1264, representatives C and J

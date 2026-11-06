@@ -192,6 +192,63 @@ private theorem moduleGComp_id_right {U X : Scheme.{u}} (j : U ⟶ X) :
   simpa only [Category.assoc, eqToIso.hom, eqToHom_trans, eqToHom_refl,
     NatTrans.id_app, Category.id_comp, Category.comp_id] using ordinary_right_unit j B N
 
+private theorem gComp_id_left {U X : Scheme.{u}} (j : U ⟶ X) :
+    (gComp B (𝟙 U) j).hom ≫
+        Functor.whiskerLeft (G B j) (gId B U).hom =
+      (eqToIso (congrArg (G B) (Category.id_comp j))).hom := by
+  apply NatTrans.ext
+  funext N
+  have h := NatTrans.congr_app (congrArg Iso.hom (gCompEq_left_unit j B)) N
+  simp only [gCompEq, Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
+    Functor.whiskerLeft_app, Functor.rightUnitor_hom_app, Iso.refl_hom,
+    NatTrans.id_app] at h
+  erw [Category.comp_id] at h
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app]
+  apply (cancel_epi ((eqToIso
+    (congrArg (G B) (Category.id_comp j).symm)).hom.app N)).1
+  simpa only [Category.assoc, eqToIso.hom, eqToHom_trans, eqToHom_refl,
+    Category.id_comp, Category.comp_id, NatTrans.id_app] using h
+
+private theorem gComp_id_right {U X : Scheme.{u}} (j : U ⟶ X) :
+    (gComp B j (𝟙 X)).hom ≫
+        Functor.whiskerRight (gId B X).hom (G B j) =
+      (eqToIso (congrArg (G B) (Category.comp_id j))).hom := by
+  apply NatTrans.ext
+  funext N
+  have h := NatTrans.congr_app (congrArg Iso.hom (gCompEq_right_unit j B)) N
+  simp only [gCompEq, Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+    Functor.whiskerRight_app, Functor.leftUnitor_hom_app, Iso.refl_hom,
+    NatTrans.id_app] at h
+  erw [Category.comp_id ((G B j).map ((gId B X).hom.app N))] at h
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app]
+  apply (cancel_epi ((eqToIso
+    (congrArg (G B) (Category.comp_id j).symm)).hom.app N)).1
+  simpa only [Category.assoc, eqToIso.hom, eqToHom_trans, eqToHom_refl,
+    Category.id_comp, Category.comp_id, NatTrans.id_app] using h
+
+private theorem squareG_id {U X : Scheme.{u}} (j : U ⟶ X)
+    (h : (𝟙 U) ≫ j = j ≫ (𝟙 X)) (N : Derived B X) :
+    (squareG B (𝟙 U) j j (𝟙 X) h).inv.app N ≫
+        (G B j).map ((gId B X).hom.app N) =
+      (gId B U).hom.app ((G B j).obj N) := by
+  have hl := congr_app (gComp_id_left B j) N
+  have hr := congr_app (gComp_id_right B j) N
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app] at hl hr
+  have ht : (eqToIso (congrArg (G B) h)).hom ≫
+      (eqToIso (congrArg (G B) (Category.comp_id j))).hom =
+        (eqToIso (congrArg (G B) (Category.id_comp j))).hom := by
+    simp only [eqToIso.hom, eqToHom_trans]
+  have htN := congr_app ht N
+  simp only [NatTrans.comp_app] at htN
+  simp only [squareG, Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app,
+    eqToIso.inv, Category.assoc]
+  change (gComp B (𝟙 U) j).inv.app N ≫
+      (eqToIso (congrArg (G B) h)).hom.app N ≫
+      (gComp B j (𝟙 X)).hom.app N ≫
+      (G B j).map ((gId B X).hom.app N) = _
+  rw [hr, htN, ← hl]
+  simp only [← Category.assoc, Iso.inv_hom_id_app, Category.id_comp]
+
 private theorem betaInv_id_aux
     {C D : Type*} [Category* C] [Category* D]
     {L : C ⥤ D} {G₀ : D ⥤ C} (a : L ⊣ G₀)
@@ -227,6 +284,16 @@ private theorem jId_transpose (X : Scheme.{u}) (N : Derived B X) :
         (G B (𝟙 X)).map ((jId B X).hom.app N) = (gId B X).inv.app N := by
   exact leftAdjointIdIso_transpose (jAdj B (𝟙 X)) (gId B X) N
 
+private theorem squareG_id_open {U X : Scheme.{u}} (p : U ⟶ X)
+    (h : p ≫ (𝟙 X) = (𝟙 U) ≫ p) (N : Derived B X) :
+    (squareG B p (𝟙 U) (𝟙 X) p h).inv.app N ≫
+        (gId B U).hom.app ((G B p).obj N) =
+      (G B p).map ((gId B X).hom.app N) := by
+  rw [squareG_flip B (𝟙 U) p p (𝟙 X) h.symm, Iso.symm_inv]
+  apply (cancel_epi ((squareG B (𝟙 U) p p (𝟙 X) h.symm).inv.app N)).1
+  rw [← Category.assoc, Iso.inv_hom_id_app, Category.id_comp]
+  exact (squareG_id B p h.symm N).symm
+
 private theorem betaInv_id_open_aux
     {C D : Type*} [Category* C] [Category* D]
     {J₀ G₀ : C ⥤ C} {J₁ G₁ : D ⥤ D} (a₀ : J₀ ⊣ G₀) (a₁ : J₁ ⊣ G₁)
@@ -250,9 +317,28 @@ private theorem betaInv_id_open_aux
   rw [Category.assoc, hs, ← Functor.map_comp, Iso.inv_hom_id_app]
   exact (F.map_id _).trans (Iso.inv_hom_id_app e₁ _).symm
 
+private theorem betaInv_id_open {U X : Scheme.{u}} (p : U ⟶ X)
+    (h : p ≫ (𝟙 X) = (𝟙 U) ≫ p) (N : Derived B X) :
+    (betaInv B p (𝟙 U) (𝟙 X) p h).app N ≫
+        (G B p).map ((jId B X).hom.app N) =
+      (jId B U).hom.app ((G B p).obj N) := by
+  exact betaInv_id_open_aux (jAdj B (𝟙 X)) (jAdj B (𝟙 U)) (G B p)
+    (gId B X) (gId B U) (jId B X) (jId B U)
+    (squareG B p (𝟙 U) (𝟙 X) p h) (jId_transpose B X) (jId_transpose B U)
+    (squareG_id_open B p h) N
+
 private theorem iso_unit_cancel {C : Type*} [Category* C] {X Y Z : C}
     (e : X ≅ Y) (a : X ⟶ Z) (b : Y ⟶ Z) (h : e.inv ≫ a = b) : e.hom ≫ b = a := by
   rw [← h, ← Category.assoc, e.hom_inv_id, Category.id_comp]
+
+private theorem beta_id_open {U X : Scheme.{u}} (p : U ⟶ X)
+    (h : p ≫ (𝟙 X) = (𝟙 U) ≫ p) (hsq : IsPullback p (𝟙 U) (𝟙 X) p)
+    (N : Derived B X) :
+    (beta B p (𝟙 U) (𝟙 X) p h hsq).hom.app N ≫
+        (jId B U).hom.app ((G B p).obj N) =
+      (G B p).map ((jId B X).hom.app N) := by
+  exact iso_unit_cancel ((beta B p (𝟙 U) (𝟙 X) p h hsq).app N) _ _
+    (betaInv_id_open B p h N)
 
 attribute [local semireducible] G R J adj jAdj gComp gId alpha
 set_option backward.isDefEq.respectTransparency true

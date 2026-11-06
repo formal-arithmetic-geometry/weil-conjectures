@@ -694,6 +694,12 @@ private lemma bidual_iso_hom_eval {n : ℕ} {T : SheafOfModules.{max c v w} 𝓡
   unfold evaluation_map
   rfl
 
+local instance restrictedUnitSectionSMul
+    (T : SheafOfModules.{max c v w} 𝓡) (U : Cᵒᵖ) :
+    SMul (((PresheafOfModules.restrictOver R.obj U.unop).obj (unit 𝓡).val).obj
+      (op (Over.mk (𝟙 U.unop)))) (T.val.obj U) :=
+  (T.val.obj U).isModule.toSMul
+
 private lemma bidual_iso_inv_apply {n : ℕ} {T : SheafOfModules.{max c v w} 𝓡}
     (i : T ⟶ free (R := 𝓡) (ULift.{max c v w} (Fin n)))
     (p : free (R := 𝓡) (ULift.{max c v w} (Fin n)) ⟶ T) (hip : i ≫ p = 𝟙 T)

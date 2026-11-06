@@ -108,8 +108,9 @@ theorem constantPullback_scalar
     simp only [Functor.map_id] at hsm
     change (AI.moduleUnderlying.inv.app M).hom.app U
         ((L.map ((underlying (constant JC A)).map μ)).hom.app U x) =
-      AI.ringUnderlying.hom.hom.app U
-          ((L.map (constantSectionMap A a ((underlying (constant JC A)).obj M))).hom.app U x) •
+      (show (F.rings.obj (constant JC A)).obj.obj U from
+        AI.ringUnderlying.hom.hom.app U
+          ((L.map (constantSectionMap A a ((underlying (constant JC A)).obj M))).hom.app U x)) •
         (show (AI.modules.obj M).val.obj U from
           (AI.moduleUnderlying.inv.app M).hom.app U x) at hsm
     rw [hx] at hsm

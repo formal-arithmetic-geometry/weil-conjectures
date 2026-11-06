@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModuleAnnihilated
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
@@ -15,6 +16,7 @@ import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
 import WeilConjectures.AlgebraicGeometry.FormalSystemsPushPullComparison
 import WeilConjectures.AlgebraicGeometry.FormalSystemsPushPullAffineAnnihilation
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 @[expose] public section
 

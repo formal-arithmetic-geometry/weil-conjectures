@@ -7,9 +7,11 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 import WeilConjectures.Topology.GlueSheavesOfModules
 import WeilConjectures.AlgebraicGeometry.TorsionControlledAlgebraizationLocalDescent
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Gluing torsion-controlled triples -/
 

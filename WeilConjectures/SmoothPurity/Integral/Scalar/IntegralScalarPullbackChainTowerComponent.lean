@@ -69,7 +69,7 @@ variable (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F
 section RoosComposition
 
 attribute [local implicit_reducible] integralOperationsRoos
-  Functor.mapHomologicalComplex CochainComplex.mappingCocone
+  CochainComplex.mappingCocone
 open CochainComplex CochainComplex.HomComplex
 
 private theorem roos_comparison_comp
@@ -208,7 +208,6 @@ end RoosComposition
 
 attribute [local irreducible] integralOrdinaryScalarComp scalarPullbackLevel scalarPullbackTower
   integralOperationsPullbackTowerFunctor integralOperationsRoos
-attribute [local implicit_reducible] Functor.mapHomologicalComplex
 
 /--
 Degreewise form of the normalized pullback Roos chain tower identity.
