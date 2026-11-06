@@ -9,6 +9,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.DerivedModuleBaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 
+import WeilConjectures.AlgebraicGeometry.DerivedModulePullbackComparison
 import WeilConjectures.AlgebraicGeometry.OpenPinnedSingleDegreeZeroSquare
 import WeilConjectures.AlgebraicGeometry.OpenPinnedSingleDegreeZeroCounit
 import WeilConjectures.AlgebraicGeometry.ModulePullbackComparisonTargetAutomorphism
@@ -30,10 +31,6 @@ universe u w
 open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry
 
-attribute [local implicit_reducible] Scheme.Modules Scheme.Modules.Hom TopCat.Sheaf
-  DerivedCategory HomotopyCategory
-attribute [local irreducible] Scheme.Modules.tensorPullback
-
 /-- Composing two commuting squares composes their endpoint isomorphisms. -/
 private theorem comparison_comp
     {C : Type*} [Category C] {A B A' B' A'' B'' : C}
@@ -46,11 +43,11 @@ private theorem comparison_comp
 
 private theorem comparison_conjugate {C : Type*} [Category C]
     {L L0 N N0 : C} (m : L ⟶ N) (n : L0 ⟶ N0)
-    (a : L ≅ L0) (b : N ≅ N0) (A : N ≅ N)
+    (a : L ≅ L0) (b : N ≅ N0) (A : N ≅ N) (B : N0 ≅ N0)
     (h : m ≫ b.hom = a.hom ≫ n) :
-    (m ≫ A.hom) ≫ (A.symm ≪≫ b).hom = a.hom ≫ n := by
+    (m ≫ A.hom) ≫ (A.symm ≪≫ b ≪≫ B).hom = a.hom ≫ (n ≫ B.hom) := by
   simp only [Iso.trans_hom, Iso.symm_hom, Category.assoc, Iso.hom_inv_id_assoc]
-  exact h
+  rw [← Category.assoc, h, Category.assoc]
 
 private theorem pinned_comparison_isComparison
     [∀ Y : Scheme.{u},
@@ -66,15 +63,15 @@ private theorem pinned_comparison_isComparison
     (Classical.choose_spec exists_derivedPullbackComposition.{u, w})) k
 
 set_option maxHeartbeats 400000 in
--- The replacement proof exhausted 200000 heartbeats in the remote check (12s).
+-- The remote check exhausted 200000 heartbeats in this comparison proof (13s).
 /-- Restriction and affine charts identify the canonical *arrow*, without asserting
 that it is invertible. Both the restricted scheme and its module are explicit.
 Source: Stacks Project, Tag 08IB, first paragraph of the proof; Tag 08HY and Tag 08FE.
 (blueprint: lem-pc-canonical-module-base-change-affine-chart-comparison).
 
 Proof: use the pinned degree-zero open square on V and W, then conjugate its
-target isomorphism to the given comparison c using its target automorphism.
-Use the pinned restricted comparison for cV. This gives endpoint isomorphisms aV and bV with a commuting square.
+target isomorphisms to the chosen comparisons c and cV using their target
+automorphisms. This gives endpoint isomorphisms aV and bV with a commuting square.
 Apply exists_canonicalModuleBaseChange_iso_comparison to that chosen cartesian
 square and the spectrum charts V.isoSpec and W.isoSpec. Its module is exactly
 H = G restricted to U. It gives c0, endpoint isomorphisms a0 and b0, and a second
@@ -147,7 +144,8 @@ theorem exists_canonicalModuleBaseChange_affineChart_comparison
       (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) 0).mapIso α))
   let aV := aP.app G
   let bV := A.symm ≪≫ bP.app G
-  have h := comparison_conjugate _ _ (aP.app G) (bP.app G) A (hP G)
+  have h := comparison_conjugate _ _ (aP.app G) (bP.app G) A (Iso.refl _) (hP G)
+  simp only [Iso.trans_refl, Iso.refl_hom, Category.comp_id] at h
   change (R.map (schemeDerivedBaseChangeMap f f' g g' sq.w E ≫
     (schemeDerivedDirectImage f').map c₁) ≫ A.hom) ≫ bV.hom =
     aV.hom ≫ (schemeDerivedBaseChangeMap (f ∣_ V.1) q (g.resLE V.1 W.1 hWV) p
