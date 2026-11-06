@@ -312,8 +312,16 @@ private theorem normalizedDVRKFlatUnit (n : ℕ)
       (unrestrictedTowerUnit_condition l E X P n i U x).symm
   have h' := h.trans hq
   unfold normalizedDVRKFlatComparison normalizedDVRIntegralAdjunction
-  dsimp only [DerivedCategory.Qh, HomologicalComplexUpToQuasiIso.Qh,
-    Functor.mapHomotopyCategory, CategoryTheory.Quotient.lift, Functor.comp_obj] at h' ⊢
+  dsimp only [Functor.mapHomotopyCategory, CategoryTheory.Quotient.lift,
+    Functor.comp_obj] at h'
+  simp only [Functor.mapDerivedCategoryFactorsh_hom_app,
+    Functor.mapHomotopyCategoryFactors, DerivedCategory.quotientCompQhIso,
+    HomologicalComplexUpToQuasiIso.quotientCompQhIso,
+    Quotient.lift.isLift_inv, Quotient.lift.isLift_hom] at h' ⊢
+  erw [(scalarReductionDerivedExtension l E X n).map_id, DerivedCategory.Qh.map_id,
+    Category.id_comp, Category.comp_id]
+  erw [(scalarReductionRestriction l E X n).mapDerivedCategory.map_id,
+    DerivedCategory.Qh.map_id, Category.id_comp, Category.comp_id] at h'
   exact h'.trans (congrArg DerivedCategory.Q.map hg.symm)
 
 set_option backward.isDefEq.respectTransparency false in
