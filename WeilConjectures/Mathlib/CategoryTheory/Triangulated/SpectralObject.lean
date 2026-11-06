@@ -34,10 +34,6 @@ namespace Triangulated.SpectralObject
 variable {C ι A : Type*} [Category* C] [Category* ι] [Category* A] [Abelian A]
   [HasZeroObject C] [Preadditive C] [HasShift C ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive]
   [Pretriangulated C] (X : SpectralObject C ι) (F : C ⥤ A) [F.IsHomological] [F.ShiftSequence ℤ]
-@[simp]
-lemma mapHomologicalFunctor_H (n : ℤ) :
-    (X.mapHomologicalFunctor F).H n = X.ω₁ ⋙ F.shift n := rfl
-
 
 end Triangulated.SpectralObject
 

@@ -366,44 +366,6 @@ def normalization (P : Modules.{t, a} X R)
         (single.{t, a} X R P) hK hP hKf hPf).symm ≪≫
           DerivedCategory.Q.mapIso ((collapse.{t, a} X R P).app K)
 
-set_option maxHeartbeats 300000 in
--- The concrete sheaf instance conversions in this assembly exceed the default budget.
-/-- Tensoring an arbitrary unbounded complex with a locally free line is termwise,
-with its inverse given by the internal dual and the specified evaluation. Global-section
-linearity is equivalent to the universal B-linearity clause: every sheaf B-algebra
-structure is a ring map B → Γ(R), and B = Γ(R) is itself allowed. Every component of
-an ordinary evaluation is R-linear; the derived evaluations are their images under Q,
-as required by the two representative equations.
-
-Source: Stacks, Tags 0B8Q, 0B8N, 06YN, 06YU, 015F and 010N;
-blueprint Tate-twist local freeness, proof (3)
-(blueprint: lem-pur-line-unbounded-derived-tensor).
-
-Proof plan (all eight steps of the node):
-1. On a trivializing slice write P = Rp and its internal dual = Rp*. Evaluation
-   sends ap tensor bp* to ab; its inverse sends a to ap tensor p*. Under p' = up,
-   p'* = u⁻¹p*, so the inverses agree on overlaps and glue (0B8Q).
-2. Associate, evaluate and apply the unitor, in both orders. On pure tensors the
-   resulting inverse-pair triangle identities are the identities cx tensor p = x tensor cp
-   and dx tensor p* = x tensor dp*. These local identities glue (0B8N).
-3. The ordinary inverse tensor equivalence is additive and preserves finite limits
-   and colimits by their universal properties. Thus both factors are flat.
-4. Tot(C tensor L[0]) is degreewise C^i tensor L with differential d tensor 1.
-   Exactness identifies its cohomology with H^i(C) tensor L. It sends acyclics to
-   acyclics, proving K-flatness of L[0], with flat terms including the zero terms.
-5. Use lem-weil-pbc-kflat-fixed-tensor-triangulated for both lines and the exact
-   functor factorization (015F). The localization universal property identifies the
-   derived tensor with the termwise induced functor. The comparisons commute with
-   integer shifts and preserve distinguished triangles, including connecting arrows.
-6. Localize the degreewise cancellation isomorphisms. Uniqueness of localization
-   of natural transformations descends their compositions, inverses and triangle
-   identities. Their components satisfy exactly the representative equations below.
-7. Exact-functor cohomology (010N) and the termwise comparisons give the natural
-   H^i isomorphisms, independent of representatives by localization. No bound enters.
-8. Balanced tensor is linear over Γ(R); linear localization and the exact-linear
-   derived-functor lemma give linearity of both derived functors. The evaluations
-   are images of R-linear sheaf maps. Restrict scalars along B → Γ(R).
--/
 theorem line_unbounded_derived_tensor (P : Modules.{t, a} X R)
     [P.IsFiniteLocallyFreeOfRank 1] :
     IsFlatOnSite.{t + 1, t, max a (t + 1), max a (t + 1)}
