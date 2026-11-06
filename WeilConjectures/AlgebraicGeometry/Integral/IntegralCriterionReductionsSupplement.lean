@@ -512,25 +512,14 @@ private theorem finiteTopology_discrete (l : ℕ) [Fact l.Prime]
   rw [he] at hb
   exact hb
 
-set_option pp.universes true in
-#check @FiniteDiscreteOrdinary.Encoding.normalization
-set_option pp.universes true in
-#check @FiniteDiscreteOrdinary.Encoding.ringIso
-set_option pp.universes true in
-#check @FiniteDiscreteOrdinary.sectionRing
-
 private theorem finiteEncoding_ringIso_unique
     (A : Type u) [CommRing A] [TopologicalSpace A] [IsTopologicalRing A]
     (X : Scheme.{u}) (e f : FiniteDiscreteOrdinary.Encoding A X) :
     e.ringIso = f.ringIso := by
   apply Iso.ext
-  trace_state
   apply Sheaf.hom_ext
-  trace_state
-  apply sheafify_hom_ext (Scheme.ProEt.topology X)
-    (P := (Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1, u} A)))
-    e.ringIso.hom.hom f.ringIso.hom.hom (FiniteDiscreteOrdinary.sectionRing A X).property
-  trace_state
+  apply sheafify_hom_ext.{u, u + 1, u + 1, u + 2} (Scheme.ProEt.topology X) _ _
+    (FiniteDiscreteOrdinary.sectionRing A X).property
   ext U a
   exact (e.normalization U a).trans (f.normalization U a).symm
 
