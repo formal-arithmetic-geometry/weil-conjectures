@@ -57,12 +57,6 @@ def affinePushforwardCohomologyMapOfComparison (A B : Type u) [CommRing A] [Comm
         ((schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φ))).obj
           (DerivedCategory.Q.obj
             (((affinePushforwardTilde A).mapHomologicalComplex (.up ℤ)).obj C))) := by
-  let : HasDerivedCategory.{w} (Spec (.of A)).Modules :=
-    inferInstanceAs (HasDerivedCategory.{w}
-      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)))
-  let : HasDerivedCategory.{w} (Spec (.of B)).Modules :=
-    inferInstanceAs (HasDerivedCategory.{w}
-      (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)))
   let T := affinePushforwardTilde A
   let F := ModuleCat.restrictScalars φ ⋙ affinePushforwardTilde B
   let P := Scheme.Modules.pushforward (Spec.map (CommRingCat.ofHom φ))
@@ -88,17 +82,12 @@ def affinePushforwardCohomologyMapOfComparison (A B : Type u) [CommRing A] [Comm
   let H := DerivedCategory.homologyFunctor
     (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i
   let β := (RingedSpace.moduleDirectImage
-    (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom).rightDerivedFunctorUnit.{_, _, _, _, w, w}
+    (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom).rightDerivedFunctorUnit
   exact ((C.sc i).mapHomologyIso F).inv ≫
     ((DerivedCategory.homologyFunctorFactors _ i).app
       ((F.mapHomologicalComplex (.up ℤ)).obj C)).inv ≫
     H.map (DerivedCategory.Q.map a) ≫
-    H.map ((DerivedCategory.quotientCompQhIso.{w} _).inv.app
-      ((P.mapHomologicalComplex (.up ℤ)).obj D) ≫
-      DerivedCategory.Qh.{w}.map ((P.mapHomotopyCategoryFactors (.up ℤ)).inv.app D) ≫
-      β.app ((HomotopyCategory.quotient _ (.up ℤ)).obj D) ≫
-      P.rightDerivedFunctor.{_, _, _, _, w, w}.map
-        ((DerivedCategory.quotientCompQhIso.{w} _).hom.app D))
+    cast (by rfl) (H.map (β.app ((HomotopyCategory.quotient _ (.up ℤ)).obj D)))
 
 /-- Cohomology coordinates from the tilde unit and exact homology comparisons.
 Source: Stacks Project, Tags 01I9 and 06Z0.
