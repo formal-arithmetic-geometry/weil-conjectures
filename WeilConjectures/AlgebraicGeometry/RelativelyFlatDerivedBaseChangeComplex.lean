@@ -171,6 +171,7 @@ theorem relativelyFlat_derivedBaseChange_complex
                 (.up ℤ)).obj (CochainComplex.mapBifunctor P G
                   (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf)))))) := by
   classical
+  simp only [cast_eq]
   let sq : IsPullback (pullback.fst f g) (pullback.snd f g) f g :=
     IsPullback.of_hasPullback f g
   obtain ⟨τ, hτ⟩ := exists_canonicalPullbackTensorComparison (pullback.fst f g)
@@ -218,7 +219,7 @@ theorem relativelyFlat_derivedBaseChange_complex
       (tensor_cancel_iso ((derivedPullback (pullback.fst f g)).mapIso e)
         ((SingleComplexBaseChange.counit (pullback.fst f g)).app
           ((HomotopyCategory.quotient _ (.up ℤ)).obj G)))
-  erw [← hab, Functor.map_comp, Functor.map_comp] at hi
+  erw [← hab] at hi
   have := hi
   have : IsIso (schemeDerivedBaseChangeMap f (pullback.snd f g) g
       (pullback.fst f g) pullback.condition (E ⊗ DerivedCategory.Q.obj G) ≫
@@ -230,7 +231,7 @@ theorem relativelyFlat_derivedBaseChange_complex
             (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf)))))) := by
     exact (isIso_comp_right_iff _
       ((schemeDerivedDirectImage (pullback.snd f g)).map b.hom)).mp
-        (by simpa only [Category.assoc] using hi)
+        (by simpa only [a, Iso.trans_hom, Functor.map_comp, Category.assoc] using hi)
   have hn := baseChange_naturality f (pullback.snd f g) g (pullback.fst f g)
     pullback.condition a.hom
   have : IsIso (schemeDerivedBaseChangeMap f (pullback.snd f g) g
