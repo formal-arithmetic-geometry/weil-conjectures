@@ -5,10 +5,11 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.Completed.CompletedTowerPullbackSupplement
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
 import WeilConjectures.AlgebraicGeometry.Completed.Pullback.CompletedPullbackReductionData
-import all Mathlib.Algebra.Homology.Localization
 
 /-! # Strict representative normalization of completed pullback
 
@@ -100,21 +101,8 @@ private theorem reductionUnit_onComplex
         DerivedCategory.Q.map
           ((NatTrans.mapHomologicalComplex (completedReductionModuleUnit d T) (.up ℤ)).app K) := by
   have := completedReductionModuleTowerFunctor_additive T d
-  have hec : completedReductionTowerComplexCounit T d K =
-      (completedReductionTowerCounit d T).app
-        ((HomotopyCategory.quotient _ (.up ℤ)).obj K) :=
-    reductionCounitOnComplex_eq (completedReductionModuleTowerFunctor T d)
-      (completedReductionTower T d) (coherenceReductionTowerCounit T d) K
-  rw [hec]
-  have h₁ : (DerivedCategory.quotientCompQhIso _).inv.app K = 𝟙 _ := rfl
-  have h₂ : (DerivedCategory.quotientCompQhIso _).hom.app
-      (((completedReductionModuleTowerFunctor T d).mapHomologicalComplex (.up ℤ)).obj K) =
-        𝟙 _ := rfl
-  have h₃ := (completedReductionTowerUnit_exists d T).exists.choose_spec K hK
-  rw [h₁, h₂, Functor.mapHomotopyCategoryFactors_hom_app] at h₃
-  erw [CategoryTheory.Functor.map_id, Category.id_comp, CategoryTheory.Functor.map_id,
-    Category.id_comp, Category.comp_id] at h₃
-  exact h₃
+  unfold completedReductionTowerComplexCounit reductionComplexCounit
+  exact (completedReductionTowerUnit_exists d T).exists.choose_spec K hK
 
 private theorem constantPullback_onComplex
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
