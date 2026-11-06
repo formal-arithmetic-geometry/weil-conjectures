@@ -197,7 +197,8 @@ private theorem finite_ordinary_constructible
     CochainComplex.exists_isKFlatResolutionIndependentCoefficients.{u + 1, u + 1, u}
       (R := R) G
   let := hf
-  let e : DerivedCategory.Q.obj P ≅ K :=
+  let e : (DerivedCategory.Q.obj P : DerivedCategory (scalarReductionTarget.{u, u} l E X n)) ≅
+      K :=
     asIso (DerivedCategory.Q.map f) ≪≫ DerivedCategory.Q.objObjPreimageIso K
   let collapse := SheafOfModules.FlatSingleDerivedNormalization.collapse.{u + 1, u, u + 1} R M
   let a : DerivedCategory.Q.obj ((T.mapHomologicalComplex (.up ℤ)).obj P) ≅
