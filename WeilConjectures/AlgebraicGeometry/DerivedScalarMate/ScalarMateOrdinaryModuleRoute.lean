@@ -110,7 +110,7 @@ private theorem projectionUnit_homEquiv {X Y : Scheme.{u}} (f : X ⟶ Y)
           (proEtaleTensorPair X S _ _ V m' (j.hom.val.app V r')) :=
         congrArg (fun z ↦
           (ρ_ ((proEtaleRingModulePullback f R S c).obj M)).hom.val.app V z) htens
-      _ = (j.hom.val.app V r') • m' :=
+      _ = (show S.obj.obj V from j.hom.val.app V r') • m' :=
         proEtaleTensorPair_rightUnitor X S _ V m' (j.hom.val.app V r')
       _ = ((proEtaleRingDirectImageMap f R S c).hom.app (Opposite.op U) r) • m' :=
         congrArg (fun z ↦ z • m') hjr
