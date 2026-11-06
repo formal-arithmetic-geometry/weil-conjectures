@@ -136,7 +136,7 @@ theorem lieCotangentDualEquiv_apply_toCotangent
     let θ := lieIdentityTangentEquiv G v
     ∃ hx : θ.val (IsLocalRing.closedPoint (DualNumber (G.left.residueField x))) = x,
       ∀ a : IsLocalRing.maximalIdeal R,
-        lieCotangentDualEquiv G v ((IsLocalRing.maximalIdeal R).toCotangent a) =
+        (lieCotangentDualEquiv G).toLinearMap v ((IsLocalRing.maximalIdeal R).toCotangent a) =
           TrivSqZeroExt.snd ((eqToHom (congrArg (fun y : G.left ↦ G.left.presheaf.stalk y)
             hx.symm) ≫ Scheme.stalkClosedPointTo θ.val).hom a) := by
   let x := unitSection G (IsLocalRing.closedPoint k)
