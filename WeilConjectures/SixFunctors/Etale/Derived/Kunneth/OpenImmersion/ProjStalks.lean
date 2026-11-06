@@ -112,13 +112,13 @@ theorem isIso_sheafFiber_baseChangeHomologyMap_cube_iff (sq : IsPullback e h g p
   set Φ := (pointSmallEtale s).ulift.{u + 1}.sheafFiber (A := ModuleCat.{u + 1} Λ)
   have : IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) bT.toCommSq).app K) := by
     rw [DerivedCategory.Plus.isIso_iff]
-    exact fun q ↦ (Etale.isIso_baseChangeHomologyMap_iff Λ bT q F).1 (hT q)
+    exact fun q ↦ (Etale.isIso_baseChangeHomologyMap_iff' Λ bT q F).1 (hT q)
   have : IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) bX.toCommSq).app
       (((e)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.obj K)) := by
     refine (NatTrans.isIso_app_iff_of_iso _
       ((((e)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).app F).symm).1 ?_
     rw [DerivedCategory.Plus.isIso_iff]
-    exact fun q ↦ (Etale.isIso_baseChangeHomologyMap_iff Λ bX q _).1 (hX q)
+    exact fun q ↦ (Etale.isIso_baseChangeHomologyMap_iff' Λ bX q _).1 (hX q)
   -- the base change map of `sq'` at `uT⁻¹ F` versus at `uT^* K`
   have h₁ : IsIso (Φ.map (Etale.baseChangeHomologyMap Λ sq' q
         ((uT)^*[ModuleCat.{u + 1} Λ].obj F))) ↔
