@@ -22,6 +22,8 @@ functor counit at the homotopy quotient of that complex.
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
 set_option linter.unusedSectionVars false
+-- The module only keeps private declarations (their statements mention `@[no_expose]` `Qh`).
+set_option linter.privateModule false
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory AlgebraicGeometry
 open scoped CategoryTheory.Obj ChangeOfRings

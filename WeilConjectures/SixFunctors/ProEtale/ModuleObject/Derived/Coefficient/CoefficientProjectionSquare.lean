@@ -62,6 +62,44 @@ variable {A : Type u₁} {B : Type u₂} {B' : Type u₃} {C : Type u₄}
   [PreservesFiniteLimits G₂] [PreservesFiniteColimits G₂]
   [U₂.PreservesKInjectiveComplexes] [V₂.PreservesKInjectiveComplexes]
   (a₁ : F₁ ⊣ U₁) (a₂ : F₂ ⊣ U₂) (b₁ : G₁ ⊣ V₁) (b₂ : G₂ ⊣ V₂)
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+-- Compare each path with the common right adjoint of the underived composite.
+private theorem rightSquare (e : U₂ ⋙ U₁ ≅ V₂ ⋙ V₁) (t : G₁ ⋙ G₂ ≅ F₁ ⋙ F₂)
+    (ht : e.hom = conjugateEquiv (a₁.comp a₂) (b₁.comp b₂) t.hom) :
+    (Functor.rightDerivedFunctorCompIso U₂ U₁).inv ≫
+      (Functor.rightDerivedFunctorNatIso e).hom ≫
+      (Functor.rightDerivedFunctorCompIso V₂ V₁).hom =
+    conjugateEquiv
+      (a₁.mapDerivedCategoryRightDerivedAdjunction.comp a₂.mapDerivedCategoryRightDerivedAdjunction)
+      (b₁.mapDerivedCategoryRightDerivedAdjunction.comp
+          b₂.mapDerivedCategoryRightDerivedAdjunction)
+      (Functor.mapDerivedCategorySquareIso t).hom := by
+  have : U₂.PreservesKInjectiveComplexes := a₂.preservesKInjectiveComplexes
+  have : V₂.PreservesKInjectiveComplexes := b₂.preservesKInjectiveComplexes
+  have h₁ := rightDerivedFunctorCompIso'_hom_eq_conjugateEquiv a₂ a₁ (b₁.comp b₂) e t ht
+  have h₂ := rightDerivedFunctorCompIso'_hom_eq_conjugateEquiv b₂ b₁ (b₁.comp b₂)
+    (Iso.refl (V₂ ⋙ V₁)) (Iso.refl (G₁ ⋙ G₂)) (by
+      ext X
+      simp only [Iso.refl_hom, NatTrans.id_app, conjugateEquiv_id])
+  have h₂' : (Functor.rightDerivedFunctorCompIso V₂ V₁).inv =
+      conjugateEquiv
+        (b₁.mapDerivedCategoryRightDerivedAdjunction.comp
+          b₂.mapDerivedCategoryRightDerivedAdjunction)
+        (b₁.comp b₂).mapDerivedCategoryRightDerivedAdjunction
+        (Functor.mapDerivedCategoryCompIso G₁ G₂).inv := by
+    simpa [Functor.rightDerivedFunctorCompIso', Functor.rightDerivedFunctorNatIso,
+      Functor.rightDerivedFunctorNatTrans, Functor.mapDerivedCategoryNatIso_refl] using h₂
+  apply (cancel_mono (Functor.rightDerivedFunctorCompIso V₂ V₁).inv).1
+  simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
+  change (Functor.rightDerivedFunctorCompIso' U₂ U₁ e).hom = _
+  rw [h₁, h₂']
+  rw [conjugateEquiv_comp]
+  congr 1
+  simp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom]
+  ext X
+  simp only [NatTrans.comp_app, Iso.inv_hom_id_app_assoc]
 
 end CategoryTheory.Adjunction
 
@@ -227,7 +265,32 @@ variable {U₁ : B ⥤ A} {U₂ : C ⥤ B} {V₁ : B' ⥤ A} {V₂ : C ⥤ B'}
   [PreservesFiniteLimits V₁] [PreservesFiniteColimits V₁]
   [U₂.PreservesKInjectiveComplexes] [V₂.PreservesKInjectiveComplexes]
   (a₁ : F₁ ⊣ U₁) (a₂ : F₂ ⊣ U₂) (b₁ : G₁ ⊣ V₁) (b₂ : G₂ ⊣ V₂)
-
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+-- Combine exact transport with the right-derived composition/conjugation identity.
+private theorem derived_square_conjugate
+    (e : U₂ ⋙ U₁ ≅ V₂ ⋙ V₁) (t : G₁ ⋙ G₂ ≅ F₁ ⋙ F₂)
+    (ht : e.hom = conjugateEquiv (a₁.comp a₂) (b₁.comp b₂) t.hom) :
+    conjugateEquiv
+      (a₁.derivedAdjunction.comp (a₂.derivedAdjunction.ofNatIsoRight
+        U₂.rightDerivedFunctorIsoMapDerivedCategory))
+      ((b₁.derivedAdjunction.ofNatIsoRight V₁.rightDerivedFunctorIsoMapDerivedCategory).comp
+        b₂.derivedAdjunction)
+      ((G₁.leftDerivedFunctorCompIso G₂).symm ≪≫
+        (G₁ ⋙ G₂).leftDerivedFunctorNatIso t ≪≫ F₁.leftDerivedFunctorCompIso F₂).hom =
+      (isoWhiskerRight U₂.rightDerivedFunctorIsoMapDerivedCategory.symm U₁.rightDerivedFunctor ≪≫
+        (rightDerivedFunctorCompIso U₂ U₁).symm ≪≫ rightDerivedFunctorNatIso e ≪≫
+        rightDerivedFunctorCompMapDerivedCategoryIso V₂ V₁).hom := by
+  have hraw := CategoryTheory.Adjunction.rightSquare a₁ a₂ b₁ b₂ e t ht
+  simp only [CategoryTheory.Adjunction.mapDerived_eq,
+    CategoryTheory.Adjunction.conjugate_left_transport,
+    CategoryTheory.Functor.left_path_comparison] at hraw
+  simp only [CategoryTheory.Adjunction.conjugate_right_transport, ← hraw]
+  rw [rightDerivedFunctorCompMapDerivedCategoryIso_eq_viaRightDerived]
+  simp only [rightDerivedFunctorCompMapDerivedCategoryIsoViaRightDerived,
+    rightDerivedFunctorCompIso, Iso.trans_hom, Iso.symm_hom,
+    isoWhiskerRight_hom, isoWhiskerLeft_hom, Category.assoc]
 end CategoryTheory.Functor
 
 set_option backward.defeqAttrib.useBackward true in
@@ -260,6 +323,31 @@ variable {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   (a : R ⟶ S) [IsMonHom a]
   [∀ Z : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coefficientMap a Z))]
   {X Y : Scheme.{u}} (f : X ⟶ Y)
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option maxHeartbeats 800000 in
+-- The comparison specializes four large derived adjunctions.
+private theorem path_conjugate :
+    conjugateEquiv
+      ((derivedUpperStarLowerStarAdjunction R f).comp
+        (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a X)))
+      ((Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a Y)).comp
+        (derivedUpperStarLowerStarAdjunction S f))
+      (coefficientScalarPathIso a f).hom =
+        (derivedComapLowerStarIso a f).inv := by
+  let := (upperStarLowerStarAdjunction S f).preservesKInjectiveComplexes
+  have h := Functor.derived_square_conjugate (upperStar R f)
+    (Mod.extendScalars (coefficientMap a X)) (Mod.extendScalars (coefficientMap a Y))
+    (upperStar S f) (upperStarLowerStarAdjunction R f)
+    (Mod.extendRestrictAdjunction (coefficientMap a X))
+    (Mod.extendRestrictAdjunction (coefficientMap a Y)) (upperStarLowerStarAdjunction S f)
+    (comapLowerStarIso a f).symm (pullIso a f).symm
+    (((conjugateEquiv _ _).apply_symm_apply _).symm)
+  exact h.trans (by
+    simp only [derivedComapLowerStarIso, Iso.trans_hom, Iso.trans_inv, Iso.symm_inv,
+      Functor.isoWhiskerRight_hom, Functor.isoWhiskerRight_inv,
+      Functor.rightDerivedFunctorNatIso, Iso.symm_hom, Category.assoc])
 
 -- Do not expand the canonical comparisons during tactic matching.
 attribute [local irreducible]
