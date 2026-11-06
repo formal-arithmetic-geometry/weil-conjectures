@@ -49,6 +49,22 @@ private theorem normalize_counit
     L.map (𝟙 A) ≫ e ≫ Q.map (𝟙 B) ≫ 𝟙 (Q.obj B) = e := by
   simp
 
+private theorem invert_factorization_map_transport
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    (L : C ⥤ D) (M : D ⥤ E) (N : C ⥤ E) (c : L ⋙ M ≅ N)
+    {X X' : C} {Y Y' : D} {Z Z' R R' : E}
+    (eX : X ≅ X') (eY : Y ≅ Y') (eZ : Z ≅ Z') (eR : R ≅ R')
+    (f : L.obj X ⟶ Y) (g : M.obj Y ⟶ Z) (h : N.obj X ⟶ R)
+    (k : R ⟶ Z) (k' : R' ⟶ Z')
+    (hf : c.inv.app X ≫ M.map f ≫ g = h ≫ k)
+    (hk : k ≫ eZ.hom = eR.hom ≫ k') :
+    c.inv.app X' ≫ M.map (L.map eX.inv ≫ f ≫ eY.hom) ≫
+        (M.map eY.inv ≫ g ≫ eZ.hom) =
+      (N.map eX.inv ≫ h ≫ eR.hom) ≫ k' := by
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← M.map_comp_assoc eY.hom eY.inv, eY.hom_inv_id, M.map_id, Category.id_comp]
+  rw [← c.inv.naturality_assoc eX.inv, reassoc_of% hf, hk]
+
 private theorem pushforwardCongr_refl {X Y : Scheme.{v}} (f : X ⟶ Y) :
     Modules.pushforwardCongr (rfl : f = f) = Iso.refl _ := by
   ext M U
@@ -180,22 +196,27 @@ theorem picard_termwise_counit_composition
   simp only [picardTermwiseCounit, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
     Functor.isoWhiskerLeft_hom, Iso.symm_hom, Functor.whiskerRight_app,
     Functor.whiskerLeft_app, Functor.associator_hom_app, Functor.associator_inv_app,
-    Category.id_comp, Functor.mapHomotopyCategoryFactors_hom_app, Functor.map_id]
+    Category.id_comp, Functor.mapHomotopyCategoryFactors_hom_app]
   change (c i s).inv.app (DerivedCategory.Q.obj P) ≫
       (derivedPullback i).map
-        ((derivedPullback s).map (e.inv.app P) ≫ (ε s).app q ≫ eT.hom.app PS) ≫
+        ((derivedPullback s).map (e.inv.app P) ≫ (ε s).app q ≫
+          DerivedCategory.Qh.map (𝟙 _) ≫ eT.hom.app PS) ≫
       ((derivedPullback i).map (eT.inv.app PS) ≫
         (ε i).app (((Modules.tensorPullback s).mapHomotopyCategory (.up ℤ)).obj q) ≫
-          eT'.hom.app _) =
+          DerivedCategory.Qh.map (𝟙 _) ≫ eT'.hom.app _) =
     ((derivedPullback (i ≫ s)).map (e.inv.app P) ≫
-      (ε (i ≫ s)).app q ≫ eT'.hom.app _) ≫ DerivedCategory.Q.map b.inv
-  simp only [Functor.map_comp, Category.assoc]
-  rw [← (derivedPullback i).map_comp_assoc (eT.hom.app PS) (eT.inv.app PS),
-    eT.hom_inv_id_app]
-  simp only [Functor.map_id, Category.id_comp]
-  erw [← (c i s).inv.naturality_assoc (e.inv.app P)]
-  rw [hfac]
-  erw [DerivedCategory.quotientCompQhIso_hom_naturality]
+      (ε (i ≫ s)).app q ≫ DerivedCategory.Qh.map (𝟙 _) ≫ eT'.hom.app _) ≫
+        DerivedCategory.Q.map b.inv
+  erw [(DerivedCategory.Qh (C := T.Modules)).map_id, Category.id_comp,
+    (DerivedCategory.Qh (C := T'.Modules)).map_id, Category.id_comp,
+    (DerivedCategory.Qh (C := T'.Modules)).map_id, Category.id_comp]
+  exact invert_factorization_map_transport
+    (derivedPullback s) (derivedPullback i) (derivedPullback (i ≫ s)) (c i s)
+    (e.app P) (eT.app PS) (eT'.app _) (eT'.app _)
+    ((ε s).app q)
+    ((ε i).app (((Modules.tensorPullback s).mapHomotopyCategory (.up ℤ)).obj q))
+    ((ε (i ≫ s)).app q) _ (DerivedCategory.Q.map b.inv) hfac
+    (DerivedCategory.quotientCompQhIso_hom_naturality b.inv)
 
 end
 end AlgebraicGeometry.Scheme
