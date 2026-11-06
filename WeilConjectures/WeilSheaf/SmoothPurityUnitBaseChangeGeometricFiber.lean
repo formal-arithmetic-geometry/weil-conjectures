@@ -64,11 +64,13 @@ abbrev geometricFiberOverMap {X Y : Over (Spec (.of k))} (h : X ⟶ Y) :
     geometricFiberOver X ⟶ geometricFiberOver Y :=
   Over.homMk (Scheme.Hom.geometricFiberMap h.left (Over.w h)) (by simp)
 
+omit [Finite k] in
 lemma geometricFiberOverMap_comp {X Y Z : Over (Spec (.of k))} (h₁ : X ⟶ Y) (h₂ : Y ⟶ Z) :
     geometricFiberOverMap (h₁ ≫ h₂) = geometricFiberOverMap h₁ ≫ geometricFiberOverMap h₂ := by
   ext1
   exact Scheme.Hom.geometricFiberMap_comp h₁.left h₂.left (Over.w h₁) (Over.w h₂)
 
+omit [Finite k] in
 /-- The base change square of `h` to `k̄` is cartesian (in the orientation of
 `ProEtale.CondensedRing.upperShriekBaseChangeOfMap`). -/
 lemma isPullback_geometricFiberOverMap {X Y : Over (Spec (.of k))} (h : X ⟶ Y) :
@@ -85,6 +87,7 @@ instance {X Y : Over (Spec (.of k))} (h : X ⟶ Y) [IsProper h.left] :
   Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange (P := @IsProper) h.left (Over.w h)
     inferInstance
 
+omit [Finite k] in
 /-- The base changes of a jointly surjective family of morphisms are jointly surjective. -/
 lemma exists_geometricFiberOverMap_eq {X : Over (Spec (.of k))} {ι : Type*}
     {U : ι → Over (Spec (.of k))} (j : ∀ i, U i ⟶ X)
@@ -154,6 +157,9 @@ attribute [instance] Chart.hU₁ Chart.hU₂ Chart.hU₃ Chart.hA₁ Chart.hA₂
 
 variable (f : X ⟶ Y)
 
+omit [Fact (ringChar k).Prime]
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] in
 /-- The base change of a chart: `j̄ ≫ f̄ = ḡ ≫ j̄A ≫ p̄ ≫ j̄V`. -/
 lemma Chart.comm_geometricFiber (c : Chart f) :
     geometricFiberOverMap c.j ≫ geometricFiberOverMap f =
@@ -175,7 +181,7 @@ theorem isIso_smoothUnitBaseChange_geometricFiber_of_charts {ι : Type u} (c : �
       [QuasiCompact A'.hom] [IsSeparated A'.hom] [LocallyOfFiniteType B'.hom]
       [QuasiCompact B'.hom] [IsSeparated B'.hom] (h : A ⟶ B) (h' : A' ⟶ B')
       {πA : A'.left ⟶ A.left} {πB : B'.left ⟶ B.left}
-      (sq : IsPullback πA h'.left h.left πB),
+      (_sq : IsPullback πA h'.left h.left πB),
       boundedConstructibleLowerShriek l h ⋙ boundedConstructibleUpperStarOfMap l πB ≅
         boundedConstructibleUpperStarOfMap l πA ⋙ boundedConstructibleLowerShriek l h')
     (hEx : ∀ {A B C : Over (Spec (.of k))} [LocallyOfFiniteType A.hom] [QuasiCompact A.hom]
@@ -245,9 +251,9 @@ theorem isIso_smoothUnitBaseChange_geometricFiber_of_charts {ι : Type u} (c : �
     hEx (c i).p _ _ _ (isPullback_geometricFiberOverMap (c i).p)
       (isPullback_geometricFiberOverMap (c i).jV) sqpV,
     hExProper i]
-  haveI := hg i
-  haveI := hjA i
-  haveI := hjV i
+  have := hg i
+  have := hjA i
+  have := hjV i
   exact isIso_smoothUnitBaseChange_chart_of_projectiveSpace l (c i).g (c i).jA (c i).p (c i).jV
     (geometricFiberOverMap (c i).g) (geometricFiberOverMap (c i).jA)
     (geometricFiberOverMap (c i).p) (geometricFiberOverMap (c i).jV)

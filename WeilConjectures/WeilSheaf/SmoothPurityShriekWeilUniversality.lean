@@ -29,8 +29,10 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 attached to the base-changed compactification. -/
 noncomputable def weilRightDerivedLowerShriekCompForgetIso :
     weilRightDerivedLowerShriek Λ c h ⋙
-        (Endofunctor.IsoAlgebra.forget (lowerStar Λ t.geometricGaloisFrobenius.inv)).mapDerivedCategory ≅
-      (Endofunctor.IsoAlgebra.forget (lowerStar Λ s.geometricGaloisFrobenius.inv)).mapDerivedCategory ⋙
+        (Endofunctor.IsoAlgebra.forget
+          (lowerStar Λ t.geometricGaloisFrobenius.inv)).mapDerivedCategory ≅
+      (Endofunctor.IsoAlgebra.forget
+        (lowerStar Λ s.geometricGaloisFrobenius.inv)).mapDerivedCategory ⋙
         rightDerivedLowerShriekOfCompactification Λ (c.geometricFiber h) :=
   exactRightDerivedForgetIso
     (openImmersionLowerShriekGeometricFiberMapCompFrobeniusIso Λ c.i (c.i_comp_g_comp h))
@@ -46,7 +48,8 @@ theorem bijective_map_comp_weilRightDerivedLowerShriek_of_bounded
     (ε : (weilRightDerivedLowerShriek Λ c h).obj P ⟶ N)
     (K : DerivedCategory (Endofunctor.IsoAlgebra
       (lowerStar Λ s.geometricGaloisFrobenius.inv)))
-    (hK : DerivedCategory.TStructure.t.bounded ((Endofunctor.IsoAlgebra.forget _).mapDerivedCategory.obj K))
+    (hK : DerivedCategory.TStructure.t.bounded
+      ((Endofunctor.IsoAlgebra.forget _).mapDerivedCategory.obj K))
     (hε : ∀ n : ℤ,
       (rightDerivedLowerShriekOfCompactification Λ (c.geometricFiber h)).TraceUniversalAt
         ((shiftFunctor _ n).obj ((Endofunctor.IsoAlgebra.forget _).mapDerivedCategory.obj K))
