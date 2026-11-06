@@ -423,3 +423,15 @@
 - No local Lean/Lake, proof placeholders, trust bypasses, declaration deletions,
   profiler probes, or heartbeat changes. Both rewrite rules replay the exact diff.
 - All ucheck invocations finished. This final commit changes documentation only.
+
+
+# BZ1066 in progress
+
+- Branch: u9/BZ1066; starting commit dfaed262b6fc1850faba3b46955a11d3225a1e86.
+- The user instructed continuation after the exact one-statement compositor proposal.
+  Applied BZ1066-statement-migration.patch to derived_open_unit; its original comparison
+  direction is preserved under Mathlib b63f6e8a. The proof-local unit comparison uses .inv.
+- Merged owner BZ1057's prerequisite fixes at 872c0baf9bc.
+- Next: ucheck-bump on OpenImmersionProjectionComposition, then its four direct importers.
+- Fix records: /home/ubuntu/u9/bz/FIXES-BZ1066.md.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
