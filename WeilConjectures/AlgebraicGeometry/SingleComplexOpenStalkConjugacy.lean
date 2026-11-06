@@ -6,6 +6,8 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 public import Mathlib.CategoryTheory.Comma.Arrow
 import WeilConjectures.AlgebraicGeometry.OpenComparisonIntoPullbackTransport
@@ -64,8 +66,8 @@ private theorem open_stalkComparison_normalized
       H.map ((derivedPullback g').map c.e.hom ≫ φ) =
       H.map (DerivedCategory.Q.map c.t) ≫ H.map c.e'.hom := by
     rw [← H.map_comp, ← c.represents]
-    simp only [IsIso.inv_hom_id_assoc, H.map_comp]
-  simp only [stalkComparison, comparisonIntoPullback, Category.assoc]
+    simp only [cast_eq, IsIso.inv_hom_id_assoc, H.map_comp]
+  simp only [stalkComparison, comparisonIntoPullback, cast_eq, Category.assoc]
   rw [hrep, ht'']
 
 set_option backward.isDefEq.respectTransparency.types false in
