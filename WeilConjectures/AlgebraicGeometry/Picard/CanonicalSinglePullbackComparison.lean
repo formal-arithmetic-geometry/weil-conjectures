@@ -50,10 +50,10 @@ def canonicalSinglePullbackMap {X Y : Scheme.{u}} (f : X ⟶ Y) (M : Y.Modules) 
   let ε := (Classical.choose (Classical.choose_spec exists_derivedPullbackComposition)) f
   let t := (Classical.choose (exists_tensorPullbackAdjunction f)).leftAdjointUniq
     (pullbackPushforwardAdjunction f)
-  exact ε.app ((HomotopyCategory.singleFunctor _ 0).obj M) ≫
+  exact cast (by rfl) (ε.app ((HomotopyCategory.singleFunctor _ 0).obj M) ≫
     DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
       ((HomologicalComplex.singleMapHomologicalComplex
-        (tensorPullback f) (ComplexShape.up ℤ) 0).hom.app M)) ≫
+        (tensorPullback f) (ComplexShape.up ℤ) 0).hom.app M))) ≫
     (DerivedCategory.singleFunctor _ 0).map (t.hom.app M)
 
 /-- The pinned comparison is invertible on an invertible module.
