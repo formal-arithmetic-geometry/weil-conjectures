@@ -176,7 +176,7 @@ theorem native_homology (K : WeilComplex k₀ l X) (n : ℤ) :
       (Functor.mapDerivedCategoryCompIso U F).hom.app K.obj ≫
         (Functor.mapDerivedCategoryNatIso (IsoAlgebra.strNatIso F)).hom.app K.obj := by
     simp only [theta, Iso.trans_hom, NatTrans.comp_app, Functor.associator_hom_app,
-      Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Iso.symm_hom]
+      Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app]
     erw [Category.id_comp]
     rfl
   rw [ht]
