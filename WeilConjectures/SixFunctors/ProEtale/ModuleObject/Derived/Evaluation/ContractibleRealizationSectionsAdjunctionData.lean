@@ -89,7 +89,7 @@ private theorem extensionPresheaf_one
     (extensionPresheaf c M).map i
         ((1 : S.obj.obj X) ⊗ₜ[(realizationRing J R).obj.obj X, (c.hom.app X).hom] m) =
       (1 : S.obj.obj Y) ⊗ₜ[(realizationRing J R).obj.obj Y, (c.hom.app Y).hom]
-        M.val.map i m := by
+        PresheafOfModulesOfCommRing.map (R := (realizationRing J R).obj) M.val i m := by
   have h := SheafOfModules.changeOfRingsMap_tmulOfUniverses.{u, u + 1, u + 1, u + 1}
     c M i (1 : S.obj.obj X) m
   rw [map_one] at h
@@ -135,8 +135,9 @@ private noncomputable def tensorToRestriction
         intro X Y i
         ext m
         change f.app Y ((1 : S.obj.obj Y) ⊗ₜ[(realizationRing J R).obj.obj Y, (c.hom.app Y).hom]
-          M.val.map i m) = H.val.map i (f.app X
-            ((1 : S.obj.obj X) ⊗ₜ[(realizationRing J R).obj.obj X, (c.hom.app X).hom] m))
+          PresheafOfModulesOfCommRing.map (R := (realizationRing J R).obj) M.val i m) =
+            H.val.map i (f.app X
+              ((1 : S.obj.obj X) ⊗ₜ[(realizationRing J R).obj.obj X, (c.hom.app X).hom] m))
         have h := PresheafOfModules.naturality_apply f i
           ((1 : S.obj.obj X) ⊗ₜ[(realizationRing J R).obj.obj X, (c.hom.app X).hom] m)
         rw [extensionPresheaf_one c M i m] at h

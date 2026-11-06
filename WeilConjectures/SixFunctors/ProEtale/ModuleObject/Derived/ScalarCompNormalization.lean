@@ -90,12 +90,12 @@ theorem scalarCompNormalization
       exact Iso.ext (NatTrans.ext (funext fun M ↦
         Mod.hom_ext _ _ (Mod.comapCongr_hom_app_hom rfl M)))
     simp only [Mod.mapDerivedCategoryComapCompIso, hc, Iso.trans_refl,
-      Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app]
+      Iso.trans_hom, NatTrans.comp_app]
     rw [← cancel_mono ((Mod.comap (φ ≫ ψ)).mapDerivedCategoryFactorsh.hom.app M)]
     simp only [Category.assoc, Iso.inv_hom_id_app]
     rw [hn, ← hf]
     simp only [Category.assoc]
-    rw [Iso.inv_hom_id_app_assoc, ← Functor.map_comp_assoc, Iso.inv_hom_id_app]
+    rw [Iso.hom_inv_id_app_assoc, ← Functor.map_comp_assoc, Iso.inv_hom_id_app]
     erw [CategoryTheory.Functor.map_id, Category.id_comp, Iso.inv_hom_id_app_assoc]
     rw [Functor.map_comp]
     exact (Category.comp_id _).symm
