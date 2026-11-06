@@ -389,9 +389,9 @@ private theorem squareComparison_eq_mate
     (mateEquiv a.mapDerivedCategoryRightDerivedAdjunction
       b.mapDerivedCategoryRightDerivedAdjunction
       (TwoSquare.mk _ _ _ _
-        ((Functor.mapDerivedCategoryCompIso Q LH).symm ≪≫
+        (Functor.mapDerivedCategoryCompIso Q LH ≪≫
           Functor.mapDerivedCategoryNatIso s ≪≫
-            Functor.mapDerivedCategoryCompIso LF P).hom)).natTrans := by
+            (Functor.mapDerivedCategoryCompIso LF P).symm).hom)).natTrans := by
   apply Functor.rightDerived_ext (F.rightDerivedFunctor ⋙ Q.mapDerivedCategory)
     (Functor.rightDerivedFunctorCompMapDerivedCategoryUnit F Q)
     (HomotopyCategory.quasiIso C (.up ℤ))
@@ -810,9 +810,9 @@ abbrev L (X : Scheme.{u}) := completedRlim X (coefficients A X)
 Source: Stacks 00YV (blueprint: lem-sf-cbc-constant-tower-direct-image-normalization). -/
 def deltaPull {X Y : Scheme.{u}} (f : X ⟶ Y) :
     delta A Y ⋙ G A f ≅ pull A f ⋙ delta A X :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (Functor.compConstIso ℕᵒᵖ (modulePullback A f)).symm ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The exact diagonal preserves K-injectives because it is right adjoint to exact
 terminal-index evaluation. Source: Stacks 08BJ
@@ -858,7 +858,7 @@ def chi {X Y : Scheme.{u}} (f : X ⟶ Y) :
 /-- Evaluation of a diagonal is canonically the identity.
 Source: Stacks 0941 (blueprint: lem-sf-cbc-constant-tower-direct-image-normalization). -/
 def deltaEval (X : Scheme.{u}) (n : ℕ) : delta A X ⋙ ev A X n ≅ 𝟭 _ :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso
       (Functor.constCompEvaluationObj (D := Modules A X) (op n)) ≪≫
       Functor.mapDerivedCategoryIdIso _
