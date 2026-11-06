@@ -15,6 +15,7 @@ import WeilConjectures.AlgebraicGeometry.OpenPinnedSingleDegreeZeroCounit
 import WeilConjectures.AlgebraicGeometry.ModulePullbackComparisonTargetAutomorphism
 import WeilConjectures.AlgebraicGeometry.CanonicalModuleBaseChangeIsoComparison
 import all Mathlib.Algebra.Homology.Localization
+import Mathlib.Tactic.Trace
 
 /-! # The canonical module base-change arrow in affine charts
 
@@ -63,6 +64,7 @@ private theorem pinned_comparison_isComparison
     (Classical.choose_spec exists_derivedPullbackComposition.{u, w})) k
 
 set_option maxHeartbeats 400000 in
+set_option diagnostics true in
 -- The replacement proof exhausted 200000 heartbeats in the remote check (12s).
 /-- Restriction and affine charts identify the canonical *arrow*, without asserting
 that it is invertible. Both the restricted scheme and its module are explicit.
@@ -128,9 +130,12 @@ theorem exists_canonicalModuleBaseChange_affineChart_comparison
       := by
   classical
   intro U fA gA H E E0 R T
+  trace "BZ864: introduced lets"
   dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
+  trace "BZ864: normalized aliases"
   obtain ⟨cV, hcV⟩ := exists_isDerivedModulePullbackComparison.{u, w}
     (pullback.fst (f ∣_ V.1) (g.resLE V.1 W.1 hWV)) H
+  trace "BZ864: chose comparison"
   let p := pullback.fst (f ∣_ V.1) (g.resLE V.1 W.1 hWV)
   let q := pullback.snd (f ∣_ V.1) (g.resLE V.1 W.1 hWV)
   let c₁ := openPinnedSingleDegreeZeroCounit.{u, w} g' G
@@ -139,8 +144,10 @@ theorem exists_canonicalModuleBaseChange_affineChart_comparison
     g' G c₁ c (pinned_comparison_isComparison g' G) hc
   obtain ⟨γ, hγ⟩ := modulePullbackComparison_target_automorphism.{u, w}
     p H c₂ cV (pinned_comparison_isComparison p H) hcV
+  trace "BZ864: chose automorphisms"
   obtain ⟨aP, bP, hP⟩ :=
     open_pinned_single_degree_zero_square.{u, w} f g g' f' sq V.1 W.1 hWV
+  trace "BZ864: obtained square"
   let A := R.mapIso ((schemeDerivedDirectImage f').mapIso
     ((DerivedCategory.singleFunctor
       (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) 0).mapIso α))
@@ -150,22 +157,27 @@ theorem exists_canonicalModuleBaseChange_affineChart_comparison
         (g.resLE V.1 W.1 hWV)).toRingedSpace)) 0).mapIso γ)
   let aV := aP.app G
   let bV := A.symm ≪≫ bP.app G ≪≫ B
+  trace "BZ864: defined endpoints"
   have h := comparison_conjugate _ _ (aP.app G) (bP.app G) A B (hP G)
+  trace "BZ864: conjugated square"
   change (R.map (schemeDerivedBaseChangeMap f f' g g' sq.w E ≫
     (schemeDerivedDirectImage f').map c₁) ≫ A.hom) ≫ bV.hom =
     aV.hom ≫ ((schemeDerivedBaseChangeMap (f ∣_ V.1) q (g.resLE V.1 W.1 hWV) p
       pullback.condition E0 ≫ (schemeDerivedDirectImage q).map c₂) ≫ B.hom) at h
+  trace "BZ864: changed square"
   have hV : R.map (schemeDerivedBaseChangeMap f f' g g' sq.w E ≫
       (schemeDerivedDirectImage f').map c) ≫ bV.hom =
       aV.hom ≫ (schemeDerivedBaseChangeMap (f ∣_ V.1) q (g.resLE V.1 W.1 hWV) p
         pullback.condition E0 ≫ (schemeDerivedDirectImage q).map cV) := by
     simpa only [hα, hγ, A, B, Functor.map_comp, Functor.mapIso_hom,
       Category.assoc] using h
+  trace "BZ864: normalized square"
   have hi := exists_canonicalModuleBaseChange_iso_comparison.{u, w}
     (f ∣_ V.1) (g.resLE V.1 W.1 hWV)
     (pullback.fst (f ∣_ V.1) (g.resLE V.1 W.1 hWV))
     (pullback.snd (f ∣_ V.1) (g.resLE V.1 W.1 hWV))
     (IsPullback.of_hasPullback _ _) H cV hcV V.2.isoSpec W.2.isoSpec
+  trace "BZ864: obtained coordinate comparison"
   rcases hi with ⟨c0, h⟩
   rcases h with ⟨hc0, h⟩
   rcases h with ⟨a0, h⟩
@@ -174,6 +186,7 @@ theorem exists_canonicalModuleBaseChange_affineChart_comparison
   refine ⟨hc0, ?_⟩
   refine ⟨aV ≪≫ a0, ?_⟩
   refine ⟨bV ≪≫ b0, ?_⟩
+  trace "BZ864: closing composite"
   exact comparison_comp _ _ _ aV bV a0 b0 hV h0
 
 end AlgebraicGeometry
