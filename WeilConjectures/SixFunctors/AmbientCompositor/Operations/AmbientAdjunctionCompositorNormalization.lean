@@ -459,7 +459,7 @@ private theorem descend_pull_coherence (o : Operations.{u})
     funext M
     have hm := congr_app hh M
     simp only [pComp_eq, Operations.pId, Operations.P,
-      Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
+      Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
       Functor.whiskerLeft_app, Functor.rightUnitor_hom_app,
       Iso.refl_hom, NatTrans.id_app, Category.assoc]
     dsimp only [Functor.comp_obj, Functor.id_obj, NatTrans.id_app] at hm ⊢
@@ -476,7 +476,7 @@ private theorem descend_pull_coherence (o : Operations.{u})
     funext M
     have hm := congr_app hh M
     simp only [pComp_eq, Operations.pId, Operations.P,
-      Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+      Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
       Functor.whiskerRight_app, Functor.leftUnitor_hom_app,
       Iso.refl_hom, NatTrans.id_app, Functor.map_comp, Category.assoc]
     dsimp only [Functor.comp_obj, Functor.id_obj, NatTrans.id_app] at hm ⊢
