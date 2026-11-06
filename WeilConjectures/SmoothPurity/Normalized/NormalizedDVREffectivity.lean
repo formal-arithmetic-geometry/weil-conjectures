@@ -325,7 +325,7 @@ private theorem normalizedDVRKFlatUnit (n : ℕ)
     rhs
     rhs
     erw [(scalarReductionDerivedRestriction l E X n).map_id,
-      DerivedCategory.Qh.map_id, Category.id_comp, Category.comp_id, Category.comp_id]
+      DerivedCategory.Qh.map_id, Category.id_comp, Category.comp_id]
   exact h'.trans (congrArg DerivedCategory.Q.map hg.symm)
 
 set_option backward.isDefEq.respectTransparency false in
