@@ -48,8 +48,8 @@ theorem affineLinearExchange_paste (A : Type (u + 1)) [CommRing A] [Finite A]
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
     unboundedEtaleCompactSupportBaseChange,
-    unboundedEtaleUpperStarCompIso, Iso.trans_hom, Iso.trans_inv, Functor.map_comp,
-    Category.assoc] at h
+    unboundedEtaleUpperStarCompIso, Iso.trans_hom, Iso.trans_inv, Iso.symm_hom,
+    Iso.symm_inv, Functor.map_comp, Category.assoc] at h
   apply (cancel_epi ((leftDerivedUpperStarComp (ModuleCat.{u + 1} A) w v).hom.app _)).mp
   apply (cancel_mono ((rightDerivedLowerShriek (ModuleCat.{u + 1} A) f'').map
     ((leftDerivedUpperStarComp (ModuleCat.{u + 1} A) w' v').inv.app K))).mp
