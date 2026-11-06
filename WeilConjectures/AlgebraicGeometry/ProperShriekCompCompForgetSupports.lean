@@ -54,7 +54,7 @@ private lemma exact_adj_comp
     (a.comp b).mapDerivedCategoryAdjunction =
       ((a.mapDerivedCategoryAdjunction.comp b.mapDerivedCategoryAdjunction
         ).ofNatIsoLeft (Functor.mapDerivedCategoryCompIso L₁ L₂)
-          ).ofNatIsoRight (Functor.mapDerivedCategoryCompIso R₂ R₁).symm := by
+          ).ofNatIsoRight (Functor.mapDerivedCategoryCompIso R₂ R₁) := by
   apply Adjunction.ext
   apply exact_unit_ext (C := C)
   intro K
@@ -71,17 +71,17 @@ private lemma exact_adj_comp
       (DerivedCategory.Qh.obj K) ≫ (L₁ ⋙ L₂).mapDerivedCategoryFactorsh.hom.app K =
       L₂.mapDerivedCategory.map (L₁.mapDerivedCategoryFactorsh.hom.app K) ≫
         L₂.mapDerivedCategoryFactorsh.hom.app ((L₁.mapHomotopyCategory (.up ℤ)).obj K) := by
-    rw [← cancel_epi ((Functor.mapDerivedCategoryCompIso L₁ L₂).hom.app
-      (DerivedCategory.Qh.obj K)), Iso.hom_inv_id_app_assoc]
+    rw [← cancel_epi ((Functor.mapDerivedCategoryCompIso L₁ L₂).inv.app
+      (DerivedCategory.Qh.obj K)), Iso.inv_hom_id_app_assoc]
     exact (Functor.mapDerivedCategoryCompIso_hom_app_factorsh L₁ L₂ K).symm
-  have hR : (Functor.mapDerivedCategoryCompIso R₂ R₁).inv.app
+  have hR : (Functor.mapDerivedCategoryCompIso R₂ R₁).hom.app
       (DerivedCategory.Qh.obj KL) ≫ (R₂ ⋙ R₁).mapDerivedCategoryFactorsh.hom.app KL =
       R₁.mapDerivedCategory.map (R₂.mapDerivedCategoryFactorsh.hom.app KL) ≫
         R₁.mapDerivedCategoryFactorsh.hom.app ((R₂.mapHomotopyCategory (.up ℤ)).obj KL) := by
-    rw [← cancel_epi ((Functor.mapDerivedCategoryCompIso R₂ R₁).hom.app
-      (DerivedCategory.Qh.obj KL)), Iso.hom_inv_id_app_assoc]
+    rw [← cancel_epi ((Functor.mapDerivedCategoryCompIso R₂ R₁).inv.app
+      (DerivedCategory.Qh.obj KL)), Iso.inv_hom_id_app_assoc]
     exact (Functor.mapDerivedCategoryCompIso_hom_app_factorsh R₂ R₁ KL).symm
-  have hn := (Functor.mapDerivedCategoryCompIso R₂ R₁).inv.naturality
+  have hn := (Functor.mapDerivedCategoryCompIso R₂ R₁).hom.naturality
     ((L₁ ⋙ L₂).mapDerivedCategoryFactorsh.hom.app K)
   simp only [Functor.comp_map] at hn
   erw [← reassoc_of% hn]
@@ -201,17 +201,18 @@ private lemma derived_open_comp_conjugate
   let R₁ := upperStar B j₁
   let R₂ := upperStar B j₂
   have hk := congrArg (fun t ↦ t ≫ R.mapDerivedCategory.map
-    ((Functor.mapDerivedCategoryCompIso L₁ L₂).hom.app K)) hK
+    ((Functor.mapDerivedCategoryCompIso L₁ L₂).inv.app K)) hK
   simp only [Category.assoc] at hk
   have hn := (Functor.mapDerivedCategoryTriangleIso r).inv.naturality
-    ((Functor.mapDerivedCategoryCompIso L₁ L₂).hom.app K)
+    ((Functor.mapDerivedCategoryCompIso L₁ L₂).inv.app K)
   simp only [Functor.comp_map] at hn
-  simp only [Functor.mapDerivedCategoryTriangleIso, Iso.trans_inv,
+  simp only [Functor.mapDerivedCategoryTriangleIso, Iso.trans_inv, Iso.symm_inv,
     NatTrans.comp_app, Category.assoc] at hn
   erw [← hn] at hk
   erw [← (R₂.mapDerivedCategory ⋙ R₁.mapDerivedCategory).map_comp_assoc,
-    Iso.inv_hom_id_app, CategoryTheory.Functor.map_id, Category.id_comp] at hk
-  simpa only [Functor.mapDerivedCategoryTriangleIso, Iso.trans_hom, Iso.trans_inv,
+    Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp] at hk
+  simpa only [Functor.mapDerivedCategoryTriangleIso, Iso.trans_hom, Iso.symm_hom,
+    Iso.trans_inv, Iso.symm_inv,
     NatTrans.comp_app, Functor.map_comp, Adjunction.comp_unit_app,
     a, b, c, e, r, L₁, L₂, R, R₁, R₂, Category.assoc] using hk.symm
 
