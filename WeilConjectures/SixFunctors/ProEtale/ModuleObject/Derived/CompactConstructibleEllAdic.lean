@@ -18,16 +18,12 @@ import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 import WeilConjectures.CategoryTheory.Monoidal.Conjugate
 import WeilConjectures.ConstructibleSheaf.Pullback
-import WeilConjectures.AlgebraicGeometry.Constructible.ConstructibleExtContinuity
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.IntegralExtHomContinuity
-import all WeilConjectures.AlgebraicGeometry.SixFunctors.IndHeartKernelsCokernels
 import all WeilConjectures.AlgebraicGeometry.SixFunctors.IndConstructibleFilteredColimits
 import WeilConjectures.AlgebraicGeometry.SixFunctors.IndConstructibleExtensions
 import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeartClosure
 import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeartSmall
 import WeilConjectures.AlgebraicGeometry.SixFunctors.IndHeartFullFaithfulness
 import WeilConjectures.AlgebraicGeometry.NormedCoefficientRealization.NormedCoefficientRealization
-import WeilConjectures.CategoryTheory.Brown.BrownHypothesesFiniteCdIntegralExt
 import WeilConjectures.AlgebraicGeometry.Base.BaseFieldCohomologicalDimension
 import WeilConjectures.AlgebraicGeometry.SmoothPurity.SeparablyClosedTorsionCohomologicalDimension
 import WeilConjectures.AlgebraicGeometry.SixFunctors.EllCohomologicalDimensionComparison
@@ -734,73 +730,6 @@ private theorem ellAdicFactorsOfContinuity
   obtain ⟨i, g, hg⟩ := Concrete.isColimit_exists_rep (F ⋙ G)
     (isColimitOfPreserves G hc) f
   exact ⟨i, g, hg.symm⟩
-
-private theorem ellAdicHeartOfConstantModels
-    (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) [IsNoetherian X]
-    (R : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
-    [IsCommMonObj (coefficientHeartRingObj R)]
-    (hR : (∃ E : IntermediateField ℚ_[ℓ] (PadicAlgCl ℓ),
-      FiniteDimensional ℚ_[ℓ] E ∧ R = Profinite.padicSubfieldCondensedRing ℓ E) ∨
-      R = Profinite.padicAlgClCondensedRing ℓ)
-    (hcert : IsEllAdicCoefficient ℓ (coefficientHeartRingObj R) inferInstance)
-    (hfp : IsConstantModelConstructible (coefficientHeartRingObj R) X ≤
-      ObjectProperty.isFinitelyPresentable.{u + 1} _)
-    (hext : ∀ (S : ShortComplex
-      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-        (condensedRingObj (coefficientHeartRingObj R) X))), S.ShortExact →
-      ObjectProperty.ind.{u + 1}
-        (IsConstantModelConstructible (coefficientHeartRingObj R) X) S.X₁ →
-      ObjectProperty.ind.{u + 1}
-        (IsConstantModelConstructible (coefficientHeartRingObj R) X) S.X₃ →
-      ObjectProperty.ind.{u + 1}
-        (IsConstantModelConstructible (coefficientHeartRingObj R) X) S.X₂) :
-    IsIndConstructibleHeart (condensedRingObj (coefficientHeartRingObj R) X) := by
-  let Λ := coefficientHeartRingObj R
-  let P : ObjectProperty _ := IsConstantModelConstructible Λ X
-  have hcomp : IsConstructibleModuleObject (condensedRingObj Λ X) = P := by
-    funext M
-    exact propext ((adicConstructibilityPredicateComparison ℓ X Λ
-      (hcert)).1 M)
-  obtain ⟨hk, hc, he, hab, _hlim, hcol, _⟩ :=
-    (coefficientHeart_closure ℓ R hR).2 X
-  have : P.IsClosedUnderKernels := hk
-  have : P.IsClosedUnderCokernels := hc
-  have : P.IsClosedUnderExtensions := he
-  have : Abelian P.FullSubcategory := hab.some
-  have : PreservesFiniteColimits P.ι := hcol
-  have hsmall : EssentiallySmall.{u + 1} P.FullSubcategory :=
-    coefficientHeart_essentiallySmall ℓ R hR X
-  have hpres := canonicalPresentation_of_finitePresentation Λ X hsmall
-    (fun M ↦ hfp M.obj M.property)
-  have hkc := assertions_of_ring ℓ R hR X hpres
-  refine ⟨?_, ?_, ?_, ?_⟩
-  · change (ObjectProperty.ind (IsConstructibleModuleObject (condensedRingObj Λ X)
-      )).IsClosedUnderKernels
-    rw [hcomp]
-    refine ⟨fun Y ⟨f, c, hf, h₁, h₂⟩ ↦ ?_⟩
-    exact P.ind.prop_of_iso (hf.conePointUniqueUpToIso (kernelIsKernel f)).symm
-      (hkc _ _ f h₁ h₂).2.2.2.2.2.2.2.1
-  · change (ObjectProperty.ind (IsConstructibleModuleObject (condensedRingObj Λ X)
-      )).IsClosedUnderCokernels
-    rw [hcomp]
-    refine ⟨fun Y ⟨f, c, hf, h₁, h₂⟩ ↦ ?_⟩
-    exact P.ind.prop_of_iso (hf.coconePointUniqueUpToIso (cokernelIsCokernel f)).symm
-      (hkc _ _ f h₁ h₂).2.2.2.2.2.2.2.2
-  · change (ObjectProperty.ind (IsConstructibleModuleObject (condensedRingObj Λ X)
-      )).IsClosedUnderExtensions
-    rw [hcomp]
-    exact ⟨fun hS h₁ h₃ ↦ hext _ hS h₁ h₃⟩
-  · intro J
-    change (ObjectProperty.ind (IsConstructibleModuleObject (condensedRingObj Λ X)
-      )).IsClosedUnderColimitsOfShape (Discrete J)
-    rw [hcomp]
-    constructor
-    rintro Y ⟨p⟩
-    apply P.ind.prop_of_iso
-      ((coproductIsCoproduct' p.diag).coconePointUniqueUpToIso p.isColimit)
-    exact ind_coproduct P hfp (constructible_finite_coproduct Λ X)
-      J (fun j ↦ p.diag.obj ⟨j⟩) _ (coproductIsCoproduct _)
-      (fun j ↦ p.prop_diag_obj ⟨j⟩)
 
 private theorem fieldCoeffIso (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] :

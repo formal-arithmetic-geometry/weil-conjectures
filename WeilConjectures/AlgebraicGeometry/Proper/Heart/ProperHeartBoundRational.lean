@@ -623,14 +623,4 @@ private theorem localization_preserves_vanishing
   intro i
   exact hq.eq_of_src _ _
 
-/-- The rational proper direct-image bound over a Noetherian source, with no base field.
-Source: blueprint det-proper-heart-bound-rational, finite-field case; the base field of
-`isZero_higherDirectImage_rational_of_isProper` only makes the source Noetherian
-(blueprint: det-proper-heart-bound-rational). -/
-
-set_option linter.unusedVariables false in
-/-- The algebraic-closure proper direct-image bound over a Noetherian source, with no base
-field. Source: blueprint det-proper-heart-bound-rational, Qbar case; the base field only made
-the source Noetherian (blueprint: det-proper-heart-bound-rational). -/
-
 end AlgebraicGeometry.ProEtale

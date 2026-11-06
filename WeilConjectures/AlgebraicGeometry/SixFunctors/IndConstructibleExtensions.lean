@@ -12,7 +12,6 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import WeilConjectures.CategoryTheory.PushoutShortExactSequence
 import WeilConjectures.CategoryTheory.ProperBaseChange.ExtOneExtensionClassification
-import WeilConjectures.AlgebraicGeometry.Constructible.ConstructibleExtContinuity
 import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeartClosure
 import WeilConjectures.AlgebraicGeometry.SixFunctors.IndHeartFullFaithfulness
 import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Connected
@@ -191,99 +190,5 @@ private theorem ind_extension_of_finitelyPresentable
       ⟨F, pullback.snd c.ι ((Functor.const J).map S.g),
         hc.pullbackOfHasExactColimitsOfShape S.g⟩, hF⟩
   rwa [ObjectProperty.ind_ind hfp] at hM
-
-/-- Extensions of ind-constructible sheaves with finite field coefficients are
-ind-constructible. Source: blueprint sk-prop-ind-heart-extensions, with the Noetherian
-setting of det-ind-heart-extensions (blueprint: det-ind-heart-extensions).
-
-Proof:
-1. The existing ambient sheaf and module instances make the category Grothendieck abelian.
-2. Present the kernel and quotient by small filtered diagrams of constructibles. Pull back
-along the quotient stages. Exactness is verified by the exact-up-to-refinements criterion.
-3. Apply constructible-sheaf Ext continuity in degree one to the kernel presentation.
-4. Every element of a filtered colimit of abelian groups comes from one stage. The existing
-Ext-one classification represents it by a short exact sequence; pushout and Ext naturality
-identify its pushout with the pullback extension, up to an endpoint-fixed isomorphism.
-5. The filtered undercategory of a kernel stage has final projection to the index category;
-its induced under-cocone is colimiting by Mathlib IsColimit.underPost.
-6. Push out the finite-stage extension over this undercategory. Constructible extension
-closure, supplied by det-lem-coefficient-heart-closure, makes every stage constructible.
-7. Cobase change preserves colimits, and the undercategory forgetful functor preserves
-connected colimits. Their composite exhibits the pushout as the required ind-presentation.
-8. Exact filtered colimits commute with the quotient-stage pullbacks by Mathlib
-IsColimit.pullbackOfHasExactColimitsOfShape. Finite presentability, supplied by
-det-ind-heart-full-faithfulness, and ObjectProperty.ind_ind flatten this ind-of-ind
-presentation to an ind-constructible presentation. -/
-theorem indConstructible_of_shortExact
-    (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
-    (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X]
-    (S : ShortComplex (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.continuousMapRingObj E) X)))
-    (hS : S.ShortExact)
-    (hN : ObjectProperty.ind.{u + 1}
-      (IsConstantModelConstructible (Profinite.continuousMapRingObj E) X) S.X₁)
-    (hB : ObjectProperty.ind.{u + 1}
-      (IsConstantModelConstructible (Profinite.continuousMapRingObj E) X) S.X₃) :
-    ObjectProperty.ind.{u + 1}
-      (IsConstantModelConstructible (Profinite.continuousMapRingObj E) X) S.X₂ := by
-  have : IsNoetherian X := ⟨⟩
-  let P : ObjectProperty _ := IsConstantModelConstructible (Profinite.continuousMapRingObj E) X
-  have hP : P.IsClosedUnderExtensions := by
-    let := (coefficientHeart_closure ℓ
-      (Profinite.padicSubfieldCondensedRing ℓ E.1) (by
-        left
-        exact ⟨E.1, E.2, rfl⟩)).2 X |>.2.2.1
-    infer_instance
-  have := hP
-  have hfp : P ≤ ObjectProperty.isFinitelyPresentable.{u + 1} _ := by
-    intro M hM
-    obtain ⟨h, _⟩ := (indHeart_fullFaithfulness ℓ X).1 E
-    exact h ⟨M, hM⟩
-  apply ind_extension_of_finitelyPresentable P hfp ?_ S hS hN hB
-  intro C hC J _ _ N pres hp ξ
-  apply ext_stage_of_comparison C pres _ ξ
-  exact constructible_sheaf_ext_continuity ℓ E
-    (Profinite.padicSubfieldCondensedRing ℓ E.1) (Or.inl rfl)
-    X C hC pres.diag (Cocone.mk N pres.ι) pres.isColimit 1
-
-/-- Extensions of ind-constructible sheaves with condensed algebraic-closure coefficients
-are ind-constructible. Source: blueprint sk-prop-ind-heart-extensions, with the Noetherian
-setting of det-ind-heart-extensions (blueprint: det-ind-heart-extensions).
-
-Proof: use the same eight-step extension-class and filtered-pushout argument as the
-finite-field coefficient theorem. Constructible extension closure and finite presentability
-are supplied by the algebraic-closure clauses of the same existing declarations. Apply
-constructible-sheaf Ext continuity with algebraic-closure coefficients; its auxiliary finite
-intermediate field can be the bottom field. This does not change the coefficient category
-or impose an additional hypothesis on the extension. -/
-theorem indConstructible_of_shortExact_padicAlgCl
-    (ℓ : ℕ) [Fact ℓ.Prime]
-    (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X]
-    (S : ShortComplex (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X)))
-    (hS : S.ShortExact)
-    (hN : ObjectProperty.ind.{u + 1}
-      (IsConstantModelConstructible (Profinite.padicAlgClRingObj ℓ) X) S.X₁)
-    (hB : ObjectProperty.ind.{u + 1}
-      (IsConstantModelConstructible (Profinite.padicAlgClRingObj ℓ) X) S.X₃) :
-    ObjectProperty.ind.{u + 1}
-      (IsConstantModelConstructible (Profinite.padicAlgClRingObj ℓ) X) S.X₂ := by
-  have : IsNoetherian X := ⟨⟩
-  let P : ObjectProperty _ := IsConstantModelConstructible (Profinite.padicAlgClRingObj ℓ) X
-  have hP : P.IsClosedUnderExtensions := by
-    let := (coefficientHeart_closure ℓ
-      (Profinite.padicAlgClCondensedRing ℓ) (by right; rfl)).2 X |>.2.2.1
-    infer_instance
-  have := hP
-  have hfp : P ≤ ObjectProperty.isFinitelyPresentable.{u + 1} _ := by
-    intro M hM
-    obtain ⟨_, h⟩ := indHeart_fullFaithfulness ℓ X
-    exact h.1 ⟨M, hM⟩
-  apply ind_extension_of_finitelyPresentable P hfp ?_ S hS hN hB
-  intro C hC J _ _ N pres hp ξ
-  apply ext_stage_of_comparison C pres _ ξ
-  exact constructible_sheaf_ext_continuity ℓ ⟨⊥, inferInstance⟩
-    (Profinite.padicAlgClCondensedRing ℓ) (Or.inr rfl)
-    X C hC pres.diag (Cocone.mk N pres.ι) pres.isColimit 1
 
 end AlgebraicGeometry.ProEtale

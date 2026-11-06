@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.Finite.Type.FiniteTypeFibreDimensionBou
 import WeilConjectures.AlgebraicGeometry.FieldBaseChangeDimension
 import all WeilConjectures.AlgebraicGeometry.Integral.IntegralIndConstructibleHeartClosure
 import all WeilConjectures.AlgebraicGeometry.SixFunctors.IndHeartCanonicalPresentation
-import all WeilConjectures.AlgebraicGeometry.SixFunctors.IndHeartKernelsCokernels
 import all WeilConjectures.AlgebraicGeometry.SixFunctors.IndConstructibleFilteredColimits
 import WeilConjectures.AlgebraicGeometry.SixFunctors.IndConstructibleExtensions
 import Mathlib.Algebra.Homology.HomologicalComplexLimits
@@ -168,88 +167,8 @@ private theorem bound_transport
       (ep ≪≫ (R((p)_*⟦Λ'⟧)).mapIso es))
   exact (NormedCoefficientRealization.bounds_comap ψ _ d).1.mp ht
 
-private theorem qbar_closure_le_ind (ℓ : ℕ) [Fact ℓ.Prime]
-    (X : Scheme.{u}) [IsNoetherian X] :
-    constructibleCoproductClosure (Profinite.padicAlgClRingObj ℓ) X ≤
-      ObjectProperty.ind.{u + 1}
-        (IsConstantModelConstructible (Profinite.padicAlgClRingObj ℓ) X) := by
-  let Λ := Profinite.padicAlgClRingObj.{u} ℓ
-  let P : ObjectProperty _ := IsConstantModelConstructible Λ X
-  let Q := ObjectProperty.ind.{u + 1} P
-  have hfp : P ≤ ObjectProperty.isFinitelyPresentable.{u + 1} _ :=
-    fun M hM ↦ (indHeart_fullFaithfulness ℓ X).2.1 ⟨M, hM⟩
-  have hcoeff := (coefficientHeart_closure ℓ
-    (Profinite.padicAlgClCondensedRing ℓ) (Or.inr rfl)).2 X
-  let : Abelian (ConstantModelConstructible Λ X) := hcoeff.2.2.2.1.some
-  let : PreservesFiniteColimits P.ι := hcoeff.2.2.2.2.2.1
-  have hsmall := coefficientHeart_essentiallySmall ℓ
-    (Profinite.padicAlgClCondensedRing.{u} ℓ) (Or.inr rfl) X
-  have hpres := canonicalPresentation_of_finitePresentation Λ X hsmall
-    (fun A ↦ hfp A.obj A.property)
-  have hker := assertions_of_ring ℓ (Profinite.padicAlgClCondensedRing ℓ)
-    (Or.inr rfl) X hpres
-  have : Q.IsClosedUnderKernels := ⟨by
-    rintro _ ⟨S, c, hc, hS⟩
-    exact Q.prop_of_iso (hc.conePointUniqueUpToIso (kernelIsKernel S)).symm
-      ((hker _ _ S hS.1 hS.2).2.2.2.2.2.2.2.1)⟩
-  have : Q.IsClosedUnderCokernels := ⟨by
-    rintro _ ⟨S, c, hc, hS⟩
-    exact Q.prop_of_iso (hc.coconePointUniqueUpToIso (cokernelIsCokernel S)).symm
-      ((hker _ _ S hS.1 hS.2).2.2.2.2.2.2.2.2)⟩
-  have : Q.IsClosedUnderExtensions := ⟨fun hS h₁ h₃ ↦
-    indConstructible_of_shortExact_padicAlgCl ℓ X _ hS h₁ h₃⟩
-  have hsum (J : Type (u + 1)) : Q.IsClosedUnderColimitsOfShape (Discrete J) := by
-    constructor
-    rintro M ⟨h⟩
-    let B : J → _ := fun j ↦ h.diag.obj ⟨j⟩
-    let e : h.diag ≅ Discrete.functor B := Discrete.natIsoFunctor
-    let c : Cofan B := (Cocone.precompose e.inv).obj h.cocone
-    have hc : IsColimit c := (IsColimit.precomposeInvEquiv e _).symm h.isColimit
-    exact _root_.ind_coproduct P hfp (constructible_finite_coproduct Λ X)
-      J B c hc (fun j ↦ h.prop_diag_obj ⟨j⟩)
-  intro M hM
-  exact hM Q (fun N hN ↦ ObjectProperty.le_ind P N
-    (((adicConstructibilityPredicateComparison ℓ X Λ .algebraicClosure).1 N).mp hN))
-    inferInstance inferInstance inferInstance inferInstance hsum
-
 set_option synthInstance.maxHeartbeats 100000 in
 -- Colimit inference in the internal module category needs a larger search budget.
-set_option synthInstance.maxSize 4096 in
-private theorem higherDirectImage_filtered
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    {X Y : Scheme.{u}} (p : X ⟶ Y) [QuasiCompact p] [QuasiSeparated p] (q : ℤ) :
-    PreservesFilteredColimitsOfSize.{u + 1, u + 1}
-      (DerivedCategory.singleFunctor _ 0 ⋙ R((p)_*⟦Λ⟧) ⋙
-        DerivedCategory.homologyFunctor _ q) := by
-  let A := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)
-  have : HasColimitsOfSize.{u + 1, u + 1} A := inferInstance
-  let S := CochainComplex.singleFunctor A 0
-  let T := DerivedCategory.Q ⋙ (CondensedRing.lowerStar Λ p).rightDerivedFunctor ⋙
-    DerivedCategory.homologyFunctor _ q
-  constructor
-  intro I _ _
-  have : HasColimitsOfShape I (CochainComplex A ℤ) := inferInstance
-  constructor
-  intro M
-  have : PreservesColimit M S := by
-    change PreservesColimit M (HomologicalComplex.single A (.up ℤ) 0)
-    infer_instance
-  let D := M ⋙ S
-  let π := Functor.whiskerLeft D ((ComplexShape.embeddingUpIntGE 0).πTruncGENatTrans A)
-  have hπ (i : I) : IsIso (π.app i) := by
-    change IsIso (((S.obj (M.obj i))).πTruncGE 0)
-    infer_instance
-  have : IsIso π := NatIso.isIso_of_isIso_app π
-  have hc : IsColimit (condensedContinuityCocone D 0) :=
-    (IsColimit.precomposeHomEquiv (asIso π) _).symm (colimit.isColimit _)
-  have ht : IsIso (condensedContinuityComparison D 0 T) :=
-    condensed_qcqs_pushforward_continuity Λ p D 0
-      (fun i n hn ↦ (S.obj (M.obj i)).isZero_of_isGE 0 n hn) q
-  have hcT : IsColimit (T.mapCocone (condensedContinuityCocone D 0)) :=
-    IsColimit.ofPointIso (colimit.isColimit (D ⋙ T)) (i := ht)
-  have : PreservesColimit D T := preservesColimit_of_preserves_colimit_cocone hc hcT
-  change PreservesColimit M (S ⋙ T)
-  infer_instance
 
 -- A finite bound for the geometric fibres of a proper morphism to a Noetherian scheme.
 private theorem exists_geometricFibre_bound {Z Y : Scheme.{u}} [IsNoetherian Y]
@@ -272,99 +191,9 @@ private theorem exists_geometricFibre_bound {Z Y : Scheme.{u}} [IsNoetherian Y]
   exact (hi.symm.trans he).le.trans (hd y)
 
 -- Filtered colimits of constructibles keep a uniform bound, by qcqs continuity.
-private theorem bound_of_ind
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    {Z Y : Scheme.{u}} (p : Z ⟶ Y) [QuasiCompact p] [QuasiSeparated p] (d : ℤ)
-    (hb : ∀ M, IsConstantModelConstructible Λ Z M →
-      (R((p)_*⟦Λ⟧).obj ((DerivedCategory.singleFunctor _ 0).obj M)).IsLE d)
-    (M : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))
-    (hM : ObjectProperty.ind.{u + 1} (IsConstantModelConstructible Λ Z) M) :
-    (R((p)_*⟦Λ⟧).obj ((DerivedCategory.singleFunctor _ 0).obj M)).IsLE d := by
-  obtain ⟨I, hI, hfI, pres, hpres⟩ := hM
-  rw [DerivedCategory.isLE_iff]
-  intro r hr
-  let H := DerivedCategory.singleFunctor _ 0 ⋙ R((p)_*⟦Λ⟧) ⋙
-    DerivedCategory.homologyFunctor _ r
-  have hH : PreservesFilteredColimitsOfSize.{u + 1, u + 1} H :=
-    higherDirectImage_filtered Λ p r
-  have : PreservesColimitsOfShape I H := hH.preserves_filtered_colimits I
-  exact (pres.map H).isColimit.isZero_pt
-    (Functor.isZero _ fun i ↦ (DerivedCategory.isLE_iff _ _).mp (hb _ (hpres i)) r hr)
 
 -- The filtered-colimit closure of finite-field constructibles contains the Serre closure.
-private theorem continuous_closure_le_ind (ℓ : ℕ) [Fact ℓ.Prime]
-    (F : PadicAlgCl.FiniteIntermediateField ℓ) (X : Scheme.{u}) [IsNoetherian X] :
-    constructibleCoproductClosure (Profinite.continuousMapRingObj F) X ≤
-      ObjectProperty.ind.{u + 1}
-        (IsConstantModelConstructible (Profinite.continuousMapRingObj F) X) := by
-  let Λ := Profinite.continuousMapRingObj.{u} F
-  let P : ObjectProperty _ := IsConstantModelConstructible Λ X
-  let Q := ObjectProperty.ind.{u + 1} P
-  have hR : (∃ E : IntermediateField ℚ_[ℓ] (PadicAlgCl ℓ), FiniteDimensional ℚ_[ℓ] E ∧
-      Profinite.padicSubfieldCondensedRing ℓ F.1 = Profinite.padicSubfieldCondensedRing ℓ E) ∨
-      Profinite.padicSubfieldCondensedRing ℓ F.1 = Profinite.padicAlgClCondensedRing ℓ :=
-    Or.inl ⟨F.1, F.2, rfl⟩
-  have hfp : P ≤ ObjectProperty.isFinitelyPresentable.{u + 1} _ :=
-    fun M hM ↦ ((indHeart_fullFaithfulness ℓ X).1 F).1 ⟨M, hM⟩
-  have hcoeff := (coefficientHeart_closure ℓ (Profinite.padicSubfieldCondensedRing ℓ F.1) hR).2 X
-  let : Abelian (ConstantModelConstructible Λ X) := hcoeff.2.2.2.1.some
-  let : PreservesFiniteColimits P.ι := hcoeff.2.2.2.2.2.1
-  have hsmall := coefficientHeart_essentiallySmall ℓ
-    (Profinite.padicSubfieldCondensedRing.{u} ℓ F.1) hR X
-  have hpres := canonicalPresentation_of_finitePresentation Λ X hsmall
-    (fun A ↦ hfp A.obj A.property)
-  have hker := assertions_of_ring ℓ (Profinite.padicSubfieldCondensedRing ℓ F.1) hR X hpres
-  have : Q.IsClosedUnderKernels := ⟨by
-    rintro _ ⟨S, c, hc, hS⟩
-    exact Q.prop_of_iso (hc.conePointUniqueUpToIso (kernelIsKernel S)).symm
-      ((hker _ _ S hS.1 hS.2).2.2.2.2.2.2.2.1)⟩
-  have : Q.IsClosedUnderCokernels := ⟨by
-    rintro _ ⟨S, c, hc, hS⟩
-    exact Q.prop_of_iso (hc.coconePointUniqueUpToIso (cokernelIsCokernel S)).symm
-      ((hker _ _ S hS.1 hS.2).2.2.2.2.2.2.2.2)⟩
-  have : Q.IsClosedUnderExtensions := ⟨fun hS h₁ h₃ ↦
-    indConstructible_of_shortExact ℓ F X _ hS h₁ h₃⟩
-  have hsum (J : Type (u + 1)) : Q.IsClosedUnderColimitsOfShape (Discrete J) := by
-    constructor
-    rintro M ⟨h⟩
-    let B : J → _ := fun j ↦ h.diag.obj ⟨j⟩
-    let e : h.diag ≅ Discrete.functor B := Discrete.natIsoFunctor
-    let c : Cofan B := (Cocone.precompose e.inv).obj h.cocone
-    have hc : IsColimit c := (IsColimit.precomposeInvEquiv e _).symm h.isColimit
-    exact _root_.ind_coproduct P hfp (constructible_finite_coproduct Λ X)
-      J B c hc (fun j ↦ h.prop_diag_obj ⟨j⟩)
-  intro M hM
-  exact hM Q (fun N hN ↦ ObjectProperty.le_ind P N
-    (((adicConstructibilityPredicateComparison ℓ X Λ (.continuous F)).1 N).mp hN))
-    inferInstance inferInstance inferInstance inferInstance hsum
 
 -- The filtered-colimit closure of integral constructibles contains the Serre closure.
-private theorem integral_closure_le_ind (ℓ : ℕ) [Fact ℓ.Prime]
-    (F : PadicAlgCl.FiniteIntermediateField ℓ) (X : Scheme.{u}) [IsNoetherian X] :
-    constructibleCoproductClosure (Profinite.padicIntegersRingObj ℓ F) X ≤
-      ObjectProperty.ind.{u + 1}
-        (IsConstantModelConstructible (Profinite.padicIntegersRingObj ℓ F) X) := by
-  let Λ := Profinite.padicIntegersRingObj.{u} ℓ F
-  let P : ObjectProperty _ := IsConstantModelConstructible Λ X
-  let Q := ObjectProperty.ind.{u + 1} P
-  obtain ⟨_, hker, hcoker, hext, hsum⟩ :=
-    integralIndConstructibleHeartClosure_of_isNoetherian ℓ F X
-  have hsum' (J : Type (u + 1)) : Q.IsClosedUnderColimitsOfShape (Discrete J) := by
-    constructor
-    rintro M ⟨h⟩
-    let B : J → _ := fun j ↦ h.diag.obj ⟨j⟩
-    let e : h.diag ≅ Discrete.functor B := Discrete.natIsoFunctor
-    let c : Cofan B := (Cocone.precompose e.inv).obj h.cocone
-    have hc : IsColimit c := (IsColimit.precomposeInvEquiv e _).symm h.isColimit
-    exact hsum J B c hc (fun j ↦ h.prop_diag_obj ⟨j⟩)
-  intro M hM
-  exact hM Q (fun N hN ↦ ObjectProperty.le_ind P N
-    (((adicConstructibilityPredicateComparison ℓ X Λ (.integral F)).1 N).mp hN))
-    inferInstance hker hcoker hext hsum'
-
-set_option linter.unusedVariables false in
-/-- The uniform proper heart bound of `properLowerStar_uniformBound_continuousMapRingObj`, for the
-coefficient ring `𝒪_E` of a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`.
-(blueprint: lem-sfb-noetherian-proper-heart-uniform-bound) -/
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -16,7 +16,6 @@ public import Mathlib.RingTheory.Ideal.Quotient.Index
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 import WeilConjectures.AlgebraicGeometry.Integral.Constant.IntegralConstantModelHeartClosureSupplement
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.IntegralExtHomContinuity
 import Mathlib.CategoryTheory.Limits.Indization.Category
 import WeilConjectures.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 import WeilConjectures.CategoryTheory.RingedSiteModules
@@ -64,7 +63,6 @@ import WeilConjectures.CategoryTheory.PushoutShortExactSequence
 import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import all WeilConjectures.AlgebraicGeometry.SixFunctors.IndHeartFullFaithfulness
 import all WeilConjectures.AlgebraicGeometry.SixFunctors.IndHeartCanonicalPresentation
-import all WeilConjectures.AlgebraicGeometry.SixFunctors.IndHeartKernelsCokernels
 import all WeilConjectures.AlgebraicGeometry.SixFunctors.IndConstructibleExtensions
 import all WeilConjectures.AlgebraicGeometry.SixFunctors.IndConstructibleFilteredColimits
 import all WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeartSmall
@@ -238,176 +236,5 @@ private theorem canonicalPresentation_of_finitePresentation
       (IsColimit.ofIsoColimit p.isColimit (Cocone.ext (Iso.refl _)))⟩
   · intro J _ _ q
     exact final_constructiblePresentation (IsConstantModelConstructible Λ X) hfp q
-
-private theorem integral_sheaf_ext_continuity_noetherian
-    (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
-    (X : Scheme.{u}) [IsNoetherian X]
-    (C : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))
-    (hC : IsConstantModelConstructible (Profinite.padicIntegersRingObj ℓ E) X C)
-    {I : Type (u + 1)} [SmallCategory I] [IsFiltered I]
-    (M : I ⥤ Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))
-    (c : Cocone M) (hc : IsColimit c) (q : ℤ) :
-    IsIso (colimit.desc _
-      (((DerivedCategory.singleFunctor _ 0 ⋙ shiftFunctor _ q ⋙
-        preadditiveCoyoneda.obj
-          (Opposite.op ((DerivedCategory.singleFunctor _ 0).obj C))).mapCocone c))) := by
-  let A := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-    (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X)
-  have : HasColimitsOfSize.{u + 1, u + 1} A := IsGrothendieckAbelian.hasColimits A
-  have : HasColimitsOfShape I A := inferInstance
-  have : HasColimitsOfShape I (CochainComplex A ℤ) := inferInstance
-  let S := CochainComplex.singleFunctor A 0
-  let K := M ⋙ S
-  have : HasColimit K := inferInstance
-  let G := DerivedCategory.Q ⋙ shiftFunctor _ q ⋙
-    preadditiveCoyoneda.obj (Opposite.op ((DerivedCategory.singleFunctor A 0).obj C))
-  have h := CondensedRing.integralExtHomContinuous_of_isNoetherian (E := E.val) X
-    ((DerivedCategory.singleFunctor A 0).obj C)
-    (constantModelConstructible_single _ X C hC) K 0
-    (fun i r hr ↦ HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 (M.obj i) r
-      (ne_of_lt hr)) q
-  change IsIso (colimit.post K G) at h
-  have : PreservesColimit M S := by
-    change PreservesColimit M (HomologicalComplex.single A (.up ℤ) 0)
-    infer_instance
-  have : IsIso (colimit.desc K (S.mapCocone c)) := by
-    change IsIso ((colimit.isColimit K).coconePointUniqueUpToIso
-      (isColimitOfPreserves S hc)).hom
-    infer_instance
-  change IsIso (colimit.desc (K ⋙ G) (G.mapCocone (S.mapCocone c)))
-  rw [← colimit.post_desc]
-  infer_instance
-
-/-- The integral ind-constructible heart closure over a Noetherian scheme, with no base field.
-Source: blueprint lem-sfb-integral-ind-heart-closure; the base field of
-`integralIndConstructibleHeartClosure` only makes the scheme Noetherian
-(blueprint: lem-sfb-integral-ind-heart-closure). -/
-theorem integralIndConstructibleHeartClosure_of_isNoetherian
-    (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
-    (X : Scheme.{u}) [IsNoetherian X] :
-    let Λ := Profinite.padicIntegersRingObj ℓ E
-    let A := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)
-    let P := ObjectProperty.ind.{u + 1} (IsConstantModelConstructible Λ X)
-    P.ContainsZero ∧ P.IsClosedUnderKernels ∧ P.IsClosedUnderCokernels ∧
-      P.IsClosedUnderExtensions ∧
-      (∀ (I : Type (u + 1)) (M : I → A) (c : Cofan M), IsColimit c →
-        (∀ i, P (M i)) → P c.pt) := by
-  classical
-  let Λ := Profinite.padicIntegersRingObj ℓ E
-  let A := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)
-  let H : ObjectProperty A := IsConstantModelConstructible Λ X
-  let P := H.ind.{u + 1}
-  have : HasColimitsOfSize.{u + 1, u + 1} A := IsGrothendieckAbelian.hasColimits A
-  have hzero : H.ContainsZero := ⟨⟨0, isZero_zero A, constantModelConstructible_of_isZero Λ X 0
-    (isZero_zero A)⟩⟩
-  have : H.IsClosedUnderIsomorphisms := constructible_iso Λ X
-  obtain ⟨hk, he⟩ := isConstantModelConstructible_serre_padicIntegers X ℓ ⟨E.val, E.property⟩
-  have hker : H.IsClosedUnderKernels := ⟨fun _ ⟨f, _, hf, hH⟩ ↦
-    H.prop_of_iso (hf.conePointUniqueUpToIso (kernelIsKernel f)).symm
-      (hk _ _ f hH.1 hH.2).1⟩
-  have hcoker : H.IsClosedUnderCokernels := ⟨fun _ ⟨f, _, hf, hH⟩ ↦
-    H.prop_of_iso (hf.coconePointUniqueUpToIso (cokernelIsCokernel f)).symm
-      (hk _ _ f hH.1 hH.2).2⟩
-  have hext : H.IsClosedUnderExtensions := ⟨fun hS h1 h3 ↦ he _ hS h1 h3⟩
-  have hfp : H ≤ ObjectProperty.isFinitelyPresentable.{u + 1} A := by
-    intro C hC
-    let S := DerivedCategory.singleFunctor A 0
-    apply finitelyPresentable_of_continuity
-      (S ⋙ shiftFunctor _ (0 : ℤ)) C (S.obj C) ((shiftFunctorZero _ ℤ).app (S.obj C))
-    intro J _ _ M
-    exact integral_sheaf_ext_continuity_noetherian ℓ E X C hC M
-      (colimit.cocone M) (colimit.isColimit M) 0
-  have : H.IsClosedUnderBinaryProducts := by
-    apply ObjectProperty.IsClosedUnderLimitsOfShape.mk'
-    rintro _ ⟨D, hD⟩
-    exact H.prop_of_iso (biprod.isoProd (D.obj ⟨WalkingPair.left⟩)
-      (D.obj ⟨WalkingPair.right⟩) ≪≫
-        (HasLimit.isoOfNatIso (diagramIsoPair D)).symm)
-      (H.prop_biprod (hD ⟨WalkingPair.left⟩) (hD ⟨WalkingPair.right⟩))
-  have : H.IsClosedUnderFiniteProducts := ObjectProperty.IsClosedUnderFiniteProducts.mk'
-  have : Abelian H.FullSubcategory := inferInstance
-  have : HasFiniteBiproducts H.FullSubcategory :=
-    HasFiniteBiproducts.of_hasFiniteProducts
-  have : HasBinaryBiproducts H.FullSubcategory :=
-    HasBinaryBiproducts.of_hasBinaryProducts
-  have : PreservesFiniteColimits H.ι := by
-    have := H.preservesCokernels_ι
-    exact Functor.preservesFiniteColimits_of_preservesCokernels H.ι
-  have hsmall : EssentiallySmall.{u + 1} H.FullSubcategory := by
-    have : ObjectProperty.EssentiallySmall.{u + 1} H := by
-      change ObjectProperty.EssentiallySmall.{u + 1} (IsConstantModelConstructible Λ X)
-      rw [show IsConstantModelConstructible Λ X = IsFiniteConstantStratified Λ X by
-        funext M
-        exact ite_eq_left ⟨inferInstance, inferInstance⟩]
-      exact stratifiedModelsSmall Λ X
-    infer_instance
-  have hpres := canonicalPresentation_of_finitePresentation Λ X hsmall
-    (fun C ↦ hfp C.obj C.property)
-  have hkc := assertions_of_closure Λ X hsmall ⟨inferInstance⟩ inferInstance
-    hker hcoker hpres
-  refine ⟨?_, ?_, ?_, ?_, ?_⟩
-  · exact ⟨⟨0, isZero_zero A, ObjectProperty.le_ind H 0
-      (constantModelConstructible_of_isZero Λ X 0 (isZero_zero A))⟩⟩
-  · refine ⟨fun _ ⟨f, _, hf, hP⟩ ↦ ?_⟩
-    exact P.prop_of_iso (hf.conePointUniqueUpToIso (kernelIsKernel f)).symm
-      (hkc _ _ f hP.1 hP.2).2.2.2.2.2.2.2.1
-  · refine ⟨fun _ ⟨f, _, hf, hP⟩ ↦ ?_⟩
-    exact P.prop_of_iso (hf.coconePointUniqueUpToIso (cokernelIsCokernel f)).symm
-      (hkc _ _ f hP.1 hP.2).2.2.2.2.2.2.2.2
-  · refine ⟨fun {T} hT h1 h3 ↦ ?_⟩
-    apply ind_extension_of_finitelyPresentable H hfp ?_ T hT h1 h3
-    intro C hC J _ _ N pres hp ξ
-    apply ext_stage_of_comparison C pres _ ξ
-    exact integral_sheaf_ext_continuity_noetherian ℓ E X C hC pres.diag
-      (Cocone.mk N pres.ι) pres.isColimit 1
-  · intro I M c hc hM
-    exact ind_coproduct H hfp (constructible_finite_coproduct Λ X) I M c hc hM
-
-set_option linter.unusedVariables false in
-/-- The filtered-colimit closure of integral constructibles is a weak Serre class
-and is closed under ambient small coproducts. This is a statement in the abelian
-module category; it involves neither derived truncations nor localizing subcategories.
-
-Source: blueprint main-20261015, det-prop-int-compactness-compact, proof steps 1--7
-and 9; det-prop-int-compactness-direct-sums, proof steps 7 and 11.
-(blueprint: lem-sfb-integral-ind-heart-closure).
-
-Proof: integral constant-model heart closure gives ambient kernels, cokernels and
-extensions of constructibles. Bounded-below integral Hom and Ext-one continuity
-makes the filtered-colimit realization fully faithful. Present a morphism between
-two realized diagrams on the filtered category of constructible squares. Exact
-filtered colimits identify its ambient kernel and cokernel with the colimits of
-the constructible kernels and cokernels. For an extension, pull it back to each
-constructible quotient stage. Ext-one continuity lifts its class to an extension
-by one constructible kernel stage. Push that extension out to later kernel stages;
-these constructible extensions have colimit the pulled-back extension. Taking the
-filtered colimit over the quotient stages recovers the original extension. The zero
-scalar model on one stratum is constructible. Finite sums are constructible by split
-extensions. A coproduct is the filtered colimit of its finite subsums; take the
-filtered category of finite tuples of constructible presentation stages to flatten
-these presentations into one small filtered constructible diagram. Its cocones are
-exactly families of maps from the summands, so it presents the original coproduct.
-The empty family uses the zero model. -/
-theorem integralIndConstructibleHeartClosure
-    (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
-    (k : Type u) [Field k] (p₀ : ℕ) [CharP k p₀] (hp₀ : 0 < p₀) (hpℓ : p₀ ≠ ℓ)
-    (X : Scheme.{u}) [X.Over (Spec (.of k))]
-    [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]
-    [QuasiCompact (X ↘ Spec (.of k))] :
-    let Λ := Profinite.padicIntegersRingObj ℓ E
-    let A := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)
-    let P := ObjectProperty.ind.{u + 1} (IsConstantModelConstructible Λ X)
-    P.ContainsZero ∧ P.IsClosedUnderKernels ∧ P.IsClosedUnderCokernels ∧
-      P.IsClosedUnderExtensions ∧
-      (∀ (I : Type (u + 1)) (M : I → A) (c : Cofan M), IsColimit c →
-        (∀ i, P (M i)) → P c.pt) := by
-  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian
-    (X ↘ Spec (.of k))
-  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace
-    (X ↘ Spec (.of k))
-  have : IsNoetherian X := ⟨⟩
-  exact integralIndConstructibleHeartClosure_of_isNoetherian ℓ E X
 
 end AlgebraicGeometry.ProEtale

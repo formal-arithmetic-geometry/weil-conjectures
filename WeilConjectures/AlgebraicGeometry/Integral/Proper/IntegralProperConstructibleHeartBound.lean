@@ -18,7 +18,6 @@ public import Mathlib.Topology.KrullDimension
 import WeilConjectures.AlgebraicGeometry.AdicCompletion.DerivedCompletionSupplement
 import WeilConjectures.CategoryTheory.SixFunctors.ModuleObjects
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.IntegralProperBaseChange
-import WeilConjectures.AlgebraicGeometry.Integral.Proper.IntegralProperReductionBound
 import WeilConjectures.SixFunctors.ProEtale.IntegralResidueCriterion
 import WeilConjectures.SixFunctors.ProEtale.IntegralDirectImageLimits
 import all WeilConjectures.AlgebraicGeometry.Integral.IntegralCoefficientExtComparison
@@ -70,11 +69,5 @@ private theorem complete_upper_of_levels
       (b + 1) hshift hprod'
   exact DerivedCategory.TStructure.t.isLE_of_iso
     (asIso (AdicCompletion.completionMap ℓ E Y K P e)).symm (b + 1)
-
-/-- The integral constructible proper heart estimate over a Noetherian source, with no base
-field. Derived completeness of the image comes from integral direct-image limits and the
-residue criterion; the finite reductions use the Noetherian finite-reduction bound.
-Source: blueprint lem-sfb-integral-proper-constructible-heart-bound
-(blueprint: lem-sfb-integral-proper-constructible-heart-bound). -/
 
 end AlgebraicGeometry.ProEtale
