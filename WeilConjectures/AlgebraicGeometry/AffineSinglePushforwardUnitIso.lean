@@ -56,9 +56,12 @@ theorem affine_singlePushforward_unit_isIso
     IsIso (DerivedCategory.Q.map
       ((HomologicalComplex.singleMapHomologicalComplex
         (RingedSpace.moduleDirectImage f.toLRSHom.toShHom) (ComplexShape.up ℤ) 0).inv.app M) ≫
-      cast (by rfl) ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerivedFunctorUnit.app
+      (cast (by rfl) ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerivedFunctorUnit.app
         ((HomotopyCategory.quotient _ _).obj ((CochainComplex.singleFunctor
-          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M)))) := by
+          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M))) :
+        _ ⟶ (RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerivedFunctor.obj
+          ((DerivedCategory.singleFunctor
+            (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M))) := by
   classical
   let F := RingedSpace.moduleDirectImage f.toLRSHom.toShHom
   let : M.IsQuasicoherent := hM
