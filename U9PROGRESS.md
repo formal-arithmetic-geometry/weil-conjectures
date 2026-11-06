@@ -299,3 +299,5 @@
 - Machine-rule audit: 16 rules parse; five snapshot-checked rules now match once before and zero times after. Identity-cleanup insertion rule made idempotent.
 
 - Build 11: target comparison and degree-zero square green. Only the assigned theorem failed, exhausting 200000 heartbeats in 12s. For build 12, normalize module aliases, make derived universes explicit, and scope its budget to 400000. Public theorem header unchanged.
+
+- Build 12: alias normalization before intro erased the theorem lets; moved normalization after intro. Build 13 (ac16def6c9) is running on poolb:43.157.187.72; log /home/ubuntu/u9/logs/BZ864-20261106T084431.log; local session 99560. All prerequisites through counit compatibility are green so far.
