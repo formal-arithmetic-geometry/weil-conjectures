@@ -132,10 +132,10 @@ theorem derivedPullback_tensor_successive_normalization
           (derivedPullback g).obj (DerivedCategory.Q.obj N)) ≫
       ((c f g).hom.app (DerivedCategory.Q.obj P) ⊗ₘ
         (c f g).hom.app (DerivedCategory.Q.obj N))) ≫
-      (((SingleComplexBaseChange.counit (f ≫ g)).app
-          ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ⊗ₘ
-        (SingleComplexBaseChange.counit (f ≫ g)).app
-          ((HomotopyCategory.quotient _ (.up ℤ)).obj N)) ≫
+      ((cast (by rfl) ((SingleComplexBaseChange.counit (f ≫ g)).app
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ⊗ₘ
+        cast (by rfl) ((SingleComplexBaseChange.counit (f ≫ g)).app
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj N))) ≫
         pullbackTensorModelMap X
           (((Scheme.Modules.tensorPullback (f ≫ g)).mapHomologicalComplex (.up ℤ)).obj P)
           (((Scheme.Modules.tensorPullback (f ≫ g)).mapHomologicalComplex (.up ℤ)).obj N)) =
