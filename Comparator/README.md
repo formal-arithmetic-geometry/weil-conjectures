@@ -48,3 +48,22 @@ sandboxed invocation):
 lake build Challenge Solution
 lake env <path/to/comparator> Comparator/config.json
 ```
+
+## Second pair: the lean-eval statement
+
+`config-leaneval.json` sets up a second challenge/solution pair for the problem
+`weil_conjectures` of [leanprover/lean-eval](https://github.com/leanprover/lean-eval)
+(submitted by Junyan Xu), the Weil conjectures in terms of point counts and multisets of
+Frobenius eigenvalues:
+
+- `LeanEvalWeil/Challenge.lean` — the lean-eval statement
+  `LeanEval.AlgebraicGeometry.WeilConjectures.weil_conjectures`, verbatim from lean-eval
+  commit `85a88c3`, with `sorry`. It imports only `Mathlib`. The `@[eval_problem]` marker
+  from lean-eval's `EvalTools` is dropped.
+- `LeanEvalWeil/Solution.lean` — imports `WeilConjectures/LeanEval/WeilConjectures.lean`,
+  which proves the identical statement from the main theorem.
+
+```bash
+lake build LeanEvalChallenge LeanEvalSolution
+lake env <path/to/comparator> Comparator/config-leaneval.json
+```
