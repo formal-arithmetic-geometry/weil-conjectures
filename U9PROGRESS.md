@@ -370,3 +370,35 @@
 - Next: ucheck-bump for the restored helper, assigned module, and direct importer
   StratumCompletionUnitRestriction, then continue downstream as the brief requires.
 - Fix log: /home/ubuntu/u9/bz/FIXES-BZ995.md. No local Lean/Lake or forbidden proof shortcuts.
+
+# BZ1021 in progress
+
+- Branch: u9/BZ1021; starting commit 203ea75a45628a5a18c524c66580a676a0da3d5c.
+- The user instructed continuation after the explicit BertiniNoether prerequisite-import proposal.
+  Applied that prepared import-only patch; DegreeZero's umbrella import is also removed.
+- The first remote build confirmed the Sheaf.H.δ collision through SlicingFlat and BertiniNoether.
+- All theorem statements, definitions, proofs, and docstrings are unchanged.
+- Next: validate BertiniNoether and DegreeZero with ucheck-bump, then direct importers.
+- Fix record: /home/ubuntu/u9/bz/FIXES-BZ1021.md; full first build log:
+  /home/ubuntu/u9/bz/BUILD-BZ1021-1-full.log.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
+
+- Assigned DegreeZero is now green and sorry-free at source b1c1890653a9221b928af7f85aac476908c7d89d.
+  ucheck-bump rc=0, failed=0, 7091 jobs; DegreeZero rebuilt in 62 seconds.
+- BertiniNoether's narrower imports exposed three missing imports in GenericIrreducibility;
+  added the defining Mathlib modules explicitly. Both prerequisites now build.
+- All Lean changes so far are imports only; all pre-existing proof/resource settings are unchanged.
+- Next: build all five direct importers, applying the known umbrella-import fix to Induction.
+
+
+# BZ1030 in progress
+
+- Branch: u9/BZ1030; starting commit 7ea4a948f63a4e02d11f7481d82e5d3d99bbfa69.
+- The user instructed continuation after the exact one-counit reflexive-cast proposal.
+  Applied BZ1030-statement-proposal.patch; all other statement text is unchanged.
+- Localization imports and a reflexive cast in the target-map body eliminate its error,
+  as verified by the second ucheck-bump. The theorem cast now awaits validation.
+- Next: validate AffineTildeTensorOrdinaryExchange, then its direct importer
+  AffineTildeDerivedTensorMate and further unblocked downstream modules.
+- Fix records and full logs: /home/ubuntu/u9/bz/FIXES-BZ1030.md.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.

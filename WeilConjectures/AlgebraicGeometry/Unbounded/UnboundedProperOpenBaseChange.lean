@@ -43,7 +43,7 @@ namespace AlgebraicGeometry.Etale
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types false
 set_option backward.defeqAttrib.useBackward true
-attribute [local implicit_reducible] Functor.mapHomologicalComplex
+attribute [local implicit_reducible] 
 
 attribute [local irreducible] upperStar lowerStar squareUpperStarIso
   openImmersionLowerShriek
@@ -165,7 +165,7 @@ variable {X Y Y' Z : Type v} [Category.{w} X] [Category.{w} Y]
 private lemma exactComparison_factors (M : CochainComplex X ℤ) :
     ((Functor.mapDerivedCategoryCompIso F J).symm ≪≫
         Functor.mapDerivedCategoryNatIso t ≪≫
-        Functor.mapDerivedCategoryCompIso F' J').hom.app (DerivedCategory.Q.obj M) ≫
+        (Functor.mapDerivedCategoryCompIso F' J').symm).hom.app (DerivedCategory.Q.obj M) ≫
       D(J').map (F'.mapDerivedCategoryFactors.hom.app M) ≫
       J'.mapDerivedCategoryFactors.hom.app ((F'.mapHomologicalComplex (.up ℤ)).obj M) =
     D(J).map (F.mapDerivedCategoryFactors.hom.app M) ≫
@@ -183,7 +183,7 @@ private lemma exactComparison_inv_factors (M : CochainComplex X ℤ) :
       D(J').map (F'.mapDerivedCategoryFactors.inv.app M) ≫
       ((Functor.mapDerivedCategoryCompIso F J).symm ≪≫
         Functor.mapDerivedCategoryNatIso t ≪≫
-        Functor.mapDerivedCategoryCompIso F' J').inv.app (DerivedCategory.Q.obj M) =
+        (Functor.mapDerivedCategoryCompIso F' J').symm).inv.app (DerivedCategory.Q.obj M) =
     DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex t.inv (.up ℤ)).app M) ≫
       J.mapDerivedCategoryFactors.inv.app ((F.mapHomologicalComplex (.up ℤ)).obj M) ≫
       D(J).map (F.mapDerivedCategoryFactors.inv.app M) := by
@@ -285,13 +285,13 @@ private theorem derived_cube
     D(V').map (de.app K) ≫ db.app (D(P).obj K) ≫
         R(H₀).map (((Functor.mapDerivedCategoryCompIso U P₀).symm ≪≫
           Functor.mapDerivedCategoryNatIso d ≪≫
-          Functor.mapDerivedCategoryCompIso P U').inv.app K) =
+          (Functor.mapDerivedCategoryCompIso P U').symm).inv.app K) =
       ((Functor.mapDerivedCategoryCompIso V Q₀).symm ≪≫
         Functor.mapDerivedCategoryNatIso c ≪≫
-        Functor.mapDerivedCategoryCompIso Q V').inv.app (R(G).obj K) ≫
+        (Functor.mapDerivedCategoryCompIso Q V').symm).inv.app (R(G).obj K) ≫
         D(Q₀).map (da.app K) ≫ de₀.app (D(U).obj K) := by
   generalize hdc : ((Functor.mapDerivedCategoryCompIso V Q₀).symm ≪≫
-    Functor.mapDerivedCategoryNatIso c ≪≫ Functor.mapDerivedCategoryCompIso Q V') = dc
+    Functor.mapDerivedCategoryNatIso c ≪≫ (Functor.mapDerivedCategoryCompIso Q V').symm) = dc
   generalize hdd : ((Functor.mapDerivedCategoryCompIso U P₀).symm ≪≫
     Functor.mapDerivedCategoryNatIso d ≪≫ Functor.mapDerivedCategoryCompIso P U') = dd
   let α : R(G) ⋙ (D(Q) ⋙ D(V')) ⟶ (D(U) ⋙ D(P₀)) ⋙ R(H₀) :=
