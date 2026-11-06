@@ -660,7 +660,7 @@ noncomputable def integralOrdinaryDerivedScalarComp :
     integralOrdinaryDerivedScalar l E L ι Y ⋙ integralOrdinaryDerivedScalar l L M j Y ≅
       integralOrdinaryDerivedScalar l E M (j.comp ι) Y :=
   (Functor.mapDerivedCategoryCompIso (integralOrdinaryScalar l E L ι Y)
-    (integralOrdinaryScalar l L M j Y)).symm ≪≫
+    (integralOrdinaryScalar l L M j Y)) ≪≫
     Functor.mapDerivedCategoryNatIso (integralOrdinaryScalarComp l E L ι Y M j)
 
 /-- The ordinary derived tensor unit, through the fixed derived localization.
@@ -793,7 +793,7 @@ private theorem ordinary_pentagon
 end OrdinaryCoherence
 
 attribute [local irreducible] integralOrdinaryScalarComp integralOrdinaryScalarUnit
-  Functor.mapDerivedCategoryNatIso Functor.mapDerivedCategoryCompIso
+  Functor.mapDerivedCategoryNatIso
   Functor.mapDerivedCategoryIdIso Functor.mapDerivedCategory
 
 section DerivedCoherence

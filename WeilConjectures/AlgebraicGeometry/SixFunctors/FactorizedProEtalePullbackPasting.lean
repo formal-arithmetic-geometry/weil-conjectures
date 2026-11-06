@@ -113,7 +113,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 attribute [local irreducible] proEtaleRingModulePullback proEtaleConstantRingComparison
-  Functor.mapDerivedCategoryNatIso Functor.mapDerivedCategoryCompIso
+  Functor.mapDerivedCategoryNatIso
   Functor.mapDerivedCategory
 
 /-- The ordinary compositor with the published unit-section normalization.
@@ -162,7 +162,7 @@ private theorem composition_localization
     {X Y Z : Scheme.{u}} (h : Z ⟶ Y) (k : Y ⟶ X) (A : Type u) [CommRing A] :
     proEtaleConstantRingPullbackComposition h k A =
       (Functor.mapDerivedCategoryCompIso (proEtaleConstantRingPullback A k)
-        (proEtaleConstantRingPullback A h)).symm ≪≫
+        (proEtaleConstantRingPullback A h)) ≪≫
         Functor.mapDerivedCategoryNatIso (proEtalePastingOrdinaryComposition h k A) := by
   let a := Classical.choose (proEtaleConstantRingPullbackComposition_ordinary h k A)
   have ha := (Classical.choose_spec
@@ -172,7 +172,7 @@ private theorem composition_localization
     apply Iso.ext
     exact Functor.mapDerivedCategoryNatIso_symm a
   apply Iso.ext_inv
-  rw [Iso.trans_inv, Iso.symm_inv, hs, Iso.symm_inv]
+  rw [Iso.trans_inv, hs, Iso.symm_inv]
   exact (congrArg Iso.hom ha).symm
 
 private theorem localized_transport
