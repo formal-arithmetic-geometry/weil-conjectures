@@ -272,18 +272,18 @@ noncomputable def comparisonOpenDerivedPullbackIso
   Functor.isoWhiskerRight
       (Etale.leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) j)
       D(comparisonUpperStar (ModuleCat.{u + 1} Λ) U) ≪≫
-    (Functor.mapDerivedCategoryCompIso
+    Functor.mapDerivedCategoryCompIso
       (Etale.upperStar (ModuleCat.{u + 1} Λ) j)
-      (comparisonUpperStar (ModuleCat.{u + 1} Λ) U)).symm ≪≫
+      (comparisonUpperStar (ModuleCat.{u + 1} Λ) U) ≪≫
     Functor.mapDerivedCategoryNatIso
       (F := Etale.upperStar (ModuleCat.{u + 1} Λ) j ⋙
         comparisonUpperStar (ModuleCat.{u + 1} Λ) U)
       (G := comparisonUpperStar (ModuleCat.{u + 1} Λ) X ⋙
         upperStar (ModuleCat.{u + 1} Λ) j)
       (supportSiteComparisonCoefficientPullbackIso (ModuleCat.{u + 1} Λ) j) ≪≫
-    Functor.mapDerivedCategoryCompIso
+    (Functor.mapDerivedCategoryCompIso
       (comparisonUpperStar (ModuleCat.{u + 1} Λ) X)
-      (upperStar (ModuleCat.{u + 1} Λ) j) ≪≫
+      (upperStar (ModuleCat.{u + 1} Λ) j)).symm ≪≫
     Functor.isoWhiskerLeft D(comparisonUpperStar (ModuleCat.{u + 1} Λ) X)
       (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) j).symm
 
