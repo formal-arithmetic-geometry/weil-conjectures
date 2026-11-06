@@ -187,6 +187,7 @@ theorem exists_singleComplexOpen_termwise_comparison
         F₀.map (H₀.map ε₀) ≫ F₀.map (H₀.map β) := by
     have : (Scheme.Modules.tensorPullback g').Additive := tensorPullbackAdditive g'
     have : (Scheme.Modules.tensorPullback j).Additive := tensorPullbackAdditive j
+    dsimp only at hcompat
     erw [termwise_counit_transport
       (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))
       (D := SheafOfModules.{u} (moduleRings X'.toRingedSpace))
