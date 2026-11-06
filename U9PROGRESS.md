@@ -230,49 +230,68 @@
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 - This final commit changes only progress documentation; Lean source matches the green build.
 
-# BZ798 in progress
+# BZ824 in progress
 
-- Branch: `u9/BZ798`; original baseline: `6a4b38f19`.
-- Resumed after rereading `/home/ubuntu/u9/briefs/BZ798.md` and the progress notes.
-- Merged the current integrated bump branch at `d9a3ea12c`. It already removes the
-  unused signed-projection comparison chain and its downstream callers. The earlier
-  referenced-caller blocker therefore no longer applies.
-- Deleted only the remaining unused `SignedProjectionResolution.totalInverse`;
-  whole-tree `git grep -w totalInverse -- WeilConjectures Comparator` found its sole
-  declaration and no callers. It is listed unused and absent from kept-decls.txt.
-- All surviving declaration text is unchanged from the integrated branch.
-- Next: validate the owned module, then its direct importers and downstream layers.
-- Previous diagnostic history is archived in FIXES-BZ798-preintegration.md.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+- Branch: u9/BZ824; starting commit 95c8987257f.
+- The user instructed continuation after the upstream-restoration proposal.
+- Restored four prerequisite modules. The comparison predicate uses verified PZ003
+  Localization imports and a reflexive cast; the transport proof is unchanged,
+  and target automorphism specializes the existing arbitrary-degree theorem to zero.
+- All six submitted modules passed ucheck-bump at 826d8e1a1fb: rc=0, failed=0, 4065 jobs.
+- Green: DerivedModuleBaseChangeMap, DerivedModulePullbackComparison,
+  ModulePullbackComparisonIsoTransport, ModulePullbackComparisonTargetAutomorphism,
+  CanonicalModuleBaseChangeIsoComparisonCompat, CanonicalModuleBaseChangeIsoComparison.
+- All restored declaration headers and original assigned/caller sources are unchanged.
+- Full log: /home/ubuntu/u9/bz/BUILD-BZ824-restored-full.log.
+- Next: build layer-two importer CanonicalModuleBaseChangeAffineChartComparison.
+- Notes: /home/ubuntu/u9/bz/FIXES-BZ824.md. No local Lean/Lake or proof shortcuts.
 
-# BZ850 in progress
 
-- Branch: `u9/BZ850`; baseline: `2ab2b07a3`.
-- The user instructed continuation after the explicit three-declaration upstream restoration proposal.
-- Restored `derived_projection_exists`, `coefficientConstantTowerProjection_exists`, and
-  `coefficientConstantTowerProjection` in CoefficientRingedSequenceSiteSupplement with their
-  original statements and docstrings. Their surviving users prohibit pruning them.
-- Added Localization imports and explicit simplification of its hidden comparison components.
-- The assigned CoefficientConstantTowerRoos source is unchanged.
-- Next: remote ucheck-bump on the assigned module, then both direct importers.
+# BZ859 in progress
+
+- Branch: u9/BZ859; initial commit db406319f.
+- The user instructed continuation after the concrete upstream-restoration proposal.
+- Applied BZ859-proposed-restoration.patch: restores tilde_preservesHomology,
+  affinePushforwardCohomologyMapOfComparison, and affinePushforwardRepresentativeCohomologyIso
+  with their original signatures/docs; ports generated additive-instance references.
+- Assigned factorization uses Localization implementation imports and a reflexive cast
+  for the original homology map, following the supplied BZ457 pattern.
+- Remote ucheck-bump is queued and reads the pushed branch upon acquiring a build tree.
+- Next: validate the assigned module; build its sole direct importer
+  AffinePushforwardCohomologyEdgeIdentity, then continue downstream up to the brief's limit.
+- Fix log: /home/ubuntu/u9/bz/FIXES-BZ859.md. No local Lean/Lake, proof escapes, or limit raises.
+
+
+# BZ885 in progress
+
+- Branch: u9/BZ885; baseline checkpoint 691397bb53c1a609462baa9046b9add95fc8dfef.
+- The user instructed continuation after the exact two-site compositor API proposal.
+- Applied BZ885-proposed-compositor.patch in GeometricCoefficientPullback and
+  GeometryEvaluation.coefficientPullback_transpose in GeometricDerivedEvaluation.
+  This preserves the intended comparisons under Mathlib's reversed compositor.
+- Declaration binders, hypotheses, proof bodies, and docstrings remain unchanged.
+- Next: ucheck-bump on the assigned module and both direct importers, then downstream.
+- Fix patterns and whole-tree inventories: /home/ubuntu/u9/bz/FIXES-BZ885.md.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ877 complete
 
-- Branch: `u9/BZ877`; baseline: `e167a50a4`.
-- Final combined `ucheck-bump` passed at `a7d71ec05f3522bb3d7875ddd3704d1e29de76de`: rc=0, failed=0, 4012 jobs.
-- Final targets: DerivedPullbackTensorUnit, CanonicalPullbackTensorMonoidalRealization, OpenRestrictionDerivedMonoidal, and TensorStalkChainCoordinates. Their closure covers all seven edited Lean files.
-- Toolchain: Lean v4.35.0-rc3; Mathlib b63f6e8a68d220e3b3bc4f3792bb53650d375f24.
-- Root plus 30 extra downstream modules checked: 23 green, 8 blocked by unowned prerequisites; the downstream cap is reached.
-- Seven targets are blocked by CanonicalTensorHomUncurryChainNaturality.lean:134:6: Type mismatch.
-- TensorStalkFixedMapSquare is blocked by missing comparisonIntoPullback/comparisonIntoPullback_naturality, pruned from the unowned StalkComparisonPullbackNaturality by 2353019b4.
-- The user instructed continuation after the reviewed reflexive-cast proposal; the same Qh endpoint repair is applied downstream. Casts and explicit category annotations preserve the original morphisms.
-- Other repairs: public/implementation Localization imports, the new compositor direction, and explicit cast/asIso normalization in proofs.
-- All 18 ordered replay rules exactly reproduce the seven edited Lean files. Existing docstrings are preserved; referenced declarations were retained despite their prune-list classification.
-- No local Lean/Lake, proof placeholders, trust bypasses, declarations deleted, or heartbeat changes.
-- Final log: `/home/ubuntu/u9/bz/BUILD-BZ877-final-green-full.log`.
-- Full module/evidence inventory: `/home/ubuntu/u9/bz/BZ877-build-status.json`.
-- Fix records and audit: `/home/ubuntu/u9/bz/FIXES-BZ877.md`, `BZ877-fix-records.json`, and `BZ877-contract-audit.txt`.
-- Completion marker: `/home/ubuntu/u9/state/BZ877.DONE` lists green modules, blockers, cap-deferred modules, and every PATTERN/ERROR/RULE triple.
-- Earlier interrupted broad runs are used only as evidence of individual completed targets; the final combined run completed successfully.
-- This completion commit changes only progress documentation; Lean source matches the final green build.
+# BZ908 complete
+
+- Branch: u9/BZ908; baseline 40e255942.
+- Assigned leaf CanonicalPullbackTensorComparison is sorry-free and green.
+- Final ucheck-bump: rc=0, failed=0, 4008 jobs, source cfd4ac2a174ca736193fd9f27f23749b0836955f.
+- All three edited modules and direct caller TensorStalkChainCoordinates passed together.
+- Ported hidden Qh/Q endpoint conversions using authorized reflexive casts and
+  localization imports; normalized casts, isomorphism projections, and local aliases.
+- Downstream scope: 30 extra modules (19 direct importers plus 11 in layer two),
+  with 24 green and 6 blocked by unowned dependencies; no further scope expansion.
+- Blockers: StalkDerivedExtensionComparisonIsoCore, OpenRestrictionDerivedMonoidal,
+  and CanonicalTensorHomUncurryChainNaturality. Their source is untouched.
+- Kept the unused-listed coordinate theorem because its caller still exists.
+- Full logs and ten replay rules: /home/ubuntu/u9/bz/FIXES-BZ908.md.
+- Final build log: /home/ubuntu/u9/bz/BUILD-BZ908-final-full.log.
+- The per-run snapshot wrapper retains the coordinator's locking/selection rules
+  while avoiding in-place edits to shared bbuild.sh. No shared scripts were changed.
+- No local Lean/Lake, forbidden proof devices, profiler probes, or heartbeat increases.
+- This documentation checkpoint does not change the successfully built Lean sources.
+- Completion marker: /home/ubuntu/u9/state/BZ908.DONE.
