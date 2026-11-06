@@ -80,7 +80,7 @@ def properOpenRestriction (A : Type (u + 1)) [CommRing A]
   let k := Functor.mapDerivedCategoryNatIso
       (eqToIso (congrArg (upperStar (ModuleCat.{u + 1} A)) h.symm) ≪≫
         upperStarComp (ModuleCat.{u + 1} A) j₁ r) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
   { app N := k.hom.app _ ≫
       (upperStar (ModuleCat.{u + 1} A) j₁).mapDerivedCategory.map
         ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) r
@@ -236,7 +236,7 @@ private theorem included_restriction
   let B := ModuleCat.{u + 1} A
   let k := Functor.mapDerivedCategoryNatIso
       (upperStarCongr B h.symm ≪≫ upperStarComp B j₁ r) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
   have hn := k.hom.naturality
     ((lowerStar B r).rightDerivedFunctorPlusCompatibility.hom.app N)
   dsimp only [Functor.comp_map] at hn
