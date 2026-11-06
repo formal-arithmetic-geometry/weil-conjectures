@@ -52,7 +52,7 @@ private theorem coefficientIso_eq
 attribute [local irreducible] Functor.leftAdjoint Functor.rightAdjoint
   Functor.leftDerivedFunctor Functor.mapDerivedCategory Functor.rightDerivedFunctor
   derivedTensor upperStar lowerStar HasDerivedCategory.standard
-  Functor.mapDerivedCategoryCompIso Functor.mapDerivedCategoryNatIso
+  Functor.mapDerivedCategoryNatIso
   Functor.mapDerivedCategorySingleFunctor singleFunctorCompLeftDerivedUpperStarIso
   exceptionalConstantPullbackIso scalarCoefficientPullbackIso
 
