@@ -275,23 +275,26 @@
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
 
-# BZ908 complete
+# BZ908 in progress
 
 - Branch: u9/BZ908; baseline 40e255942.
-- Assigned leaf CanonicalPullbackTensorComparison is sorry-free and green.
-- Final ucheck-bump: rc=0, failed=0, 4008 jobs, source cfd4ac2a174ca736193fd9f27f23749b0836955f.
-- All three edited modules and direct caller TensorStalkChainCoordinates passed together.
-- Ported hidden Qh/Q endpoint conversions using authorized reflexive casts and
-  localization imports; normalized casts, isomorphism projections, and local aliases.
-- Downstream scope: 30 extra modules (19 direct importers plus 11 in layer two),
-  with 24 green and 6 blocked by unowned dependencies; no further scope expansion.
-- Blockers: StalkDerivedExtensionComparisonIsoCore, OpenRestrictionDerivedMonoidal,
-  and CanonicalTensorHomUncurryChainNaturality. Their source is untouched.
-- Kept the unused-listed coordinate theorem because its caller still exists.
-- Full logs and ten replay rules: /home/ubuntu/u9/bz/FIXES-BZ908.md.
-- Final build log: /home/ubuntu/u9/bz/BUILD-BZ908-final-full.log.
-- The per-run snapshot wrapper retains the coordinator's locking/selection rules
-  while avoiding in-place edits to shared bbuild.sh. No shared scripts were changed.
-- No local Lean/Lake, forbidden proof devices, profiler probes, or heartbeat increases.
-- This documentation checkpoint does not change the successfully built Lean sources.
-- Completion marker: /home/ubuntu/u9/state/BZ908.DONE.
+- The user instructed continuation after the explicit two-cast proposal.
+- Applied the two `cast (by rfl)` wrappers in IsCanonicalPullbackTensorComparison,
+  preserving the existing maps while restoring hidden Qh/Q endpoint conversions.
+- Localization imports resolve the proof-local mismatch. The uniqueness proof uses
+  `erw` to rewrite through the reflexive casts and semireducible category aliases.
+- Next: remote validation, then the 19 direct importers and further downstream
+  modules up to the brief's limit of 30 extra modules.
+- Fix patterns: /home/ubuntu/u9/bz/FIXES-BZ908.md.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+
+# BZ932 in progress
+
+- Branch: u9/BZ932; baseline 902c558126dff07f1b90673880f577206572e997.
+- The user instructed continuation after the concrete five-module upstream-restoration proposal.
+- Applied BZ932-proposed-upstream-restoration.patch, preserving restored statement/docstring text.
+- Explicit terminal-object preservation supplies GU.PreservesZeroMorphisms; removed the old
+  unmeasured maxHeartbeats override from the restored helper.
+- Next: ucheck-bump on the five prerequisites and SupportedKoszulRelativeDetector, then downstream.
+- Fix notes: /home/ubuntu/u9/bz/FIXES-BZ932.md. No local Lean/Lake or proof shortcuts.
