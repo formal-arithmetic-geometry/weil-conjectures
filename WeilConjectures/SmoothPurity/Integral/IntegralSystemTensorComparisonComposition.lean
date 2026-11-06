@@ -352,6 +352,7 @@ theorem integralSystemTensorComparison_comp {X Y Z : Scheme.{u}} (h : Z ⟶ X) (
     dsimp only [integralComparisonSystemComposition, integralComparisonDerivedSequencePullback]
     rw [Iso.trans_hom, NatTrans.comp_app, Iso.symm_hom, Category.assoc,
       Functor.mapDerivedCategoryCompIso_hom_app_factors, Functor.mapDerivedCategoryNatIso_fac]
+    rfl
   · exact hm
   · intro P _
     infer_instance
