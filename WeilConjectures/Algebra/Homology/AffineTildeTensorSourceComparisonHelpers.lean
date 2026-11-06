@@ -174,7 +174,7 @@ theorem leftDerived_comparison_on_resolution
         intro P K s
         have h := leftCounit_naturality E L ε s
         simp only [F, J, Functor.comp_map]
-        rw [← T.mapDerivedCategory.map_comp_assoc, h, Functor.map_comp]
+        erw [← T.mapDerivedCategory.map_comp_assoc, h, Functor.map_comp]
         have ht := T.mapDerivedCategoryFactors.hom.naturality (EC.map s)
         dsimp only [Functor.comp_map] at ht
         simp only [Category.assoc]
