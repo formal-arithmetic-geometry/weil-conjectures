@@ -311,8 +311,8 @@ theorem sfbResidue_normalization
       (DerivedCategory.Q.{u + 1}.obj (sfbResidueComplex X I K)) ≅
         HS.mapDerivedCategory.obj ((completedAdicDerivedChange X π).obj K) :=
     T.mapDerivedCategory.mapIso (H.mapDerivedCategoryFactors.{u + 2, u + 1}.app P).symm ≪≫
-      ((Functor.mapDerivedCategoryCompIso.{_, _, _, _, _, _, u + 2, u + 1, u + 2}).symm
-        H T).symm.app (DerivedCategory.Q.obj P) ≪≫
+      (Functor.mapDerivedCategoryCompIso.{_, _, _, _, _, _, u + 2, u + 1, u + 2}
+        H T).app (DerivedCategory.Q.obj P) ≪≫
       HS.mapDerivedCategory.mapIso (DerivedCategory.Q.objObjPreimageIso _)
   exact ⟨(ConstantCompletion.extend p).mapIso eB ≪≫ (dπ.app K).symm ≪≫ eS.symm⟩
 
