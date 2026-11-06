@@ -689,12 +689,12 @@ def stratumTowerEvaluationIso (n : ℕ) :
         (reductionModuleRing Y (d.completedRing Y)) n ≅
       reductionTowerDerivedEvaluation X (reductionModuleRing X (d.completedRing X)) n ⋙
         d.pull f :=
-  ((Functor.mapDerivedCategoryCompIso (d.towerModulePull f)).symm
-    (reductionTowerEvaluation Y (reductionModuleRing Y (d.completedRing Y)) n)).symm ≪≫
+  Functor.mapDerivedCategoryCompIso (d.towerModulePull f)
+    (reductionTowerEvaluation Y (reductionModuleRing Y (d.completedRing Y)) n) ≪≫
     Functor.mapDerivedCategoryNatIso (Iso.refl _) ≪≫
-    (Functor.mapDerivedCategoryCompIso).symm
+    (Functor.mapDerivedCategoryCompIso
       (reductionTowerEvaluation X (reductionModuleRing X (d.completedRing X)) n)
-      (stratumModulePull d f)
+      (stratumModulePull d f)).symm
 
 section
 attribute [local semireducible] completedReductionModuleTowerFunctor
