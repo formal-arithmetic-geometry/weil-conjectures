@@ -168,12 +168,13 @@ theorem exists_singleComplexOpen_termwise_comparison
           F₀.map (H₀.map
             ((schemeOpenRestriction X' (f' ⁻¹ᵁ V')).mapDerivedCategory.map ε)) =
         F₀.map (H₀.map ε₀) ≫ F₀.map (H₀.map β) := by
-    simpa only [DerivedCategory.quotientCompQhIso,
-      HomologicalComplexUpToQuasiIso.quotientCompQhIso,
-      Quotient.lift.isLift_hom, Quotient.lift.isLift_inv,
-      Functor.mapHomotopyCategoryFactors_hom_app, Functor.map_id,
-      Category.id_comp, Category.comp_id, Functor.map_comp, Category.assoc] using
-      congrArg (fun t => F₀.map (H₀.map t)) hcompat
+    with_unfolding_all
+      simpa only [DerivedCategory.quotientCompQhIso,
+        HomologicalComplexUpToQuasiIso.quotientCompQhIso,
+        Quotient.lift.isLift_hom, Quotient.lift.isLift_inv,
+        Functor.mapHomotopyCategoryFactors_hom_app, Functor.map_id,
+        Category.id_comp, Category.comp_id, Functor.map_comp, Category.assoc] using
+        congrArg (fun t => F₀.map (H₀.map t)) hcompat
   have hν := ν.hom.naturality ε
   have hP₀ := congrArg F₀.map (comparisonIntoPullback_comp_counit
     (f ∣_ V) (f' ∣_ V') (g.resLE V V' hV') j sq₀ z Q hcQ i)
