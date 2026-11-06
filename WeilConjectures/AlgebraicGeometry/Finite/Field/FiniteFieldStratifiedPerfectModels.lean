@@ -144,9 +144,9 @@ private noncomputable def derivedCoefficientComparisonPullbackIso
     finiteCoefficientDerivedComparison Y k ⋙ finiteCoefficientDerivedPullback Y k f ≅
       (Etale.upperStar (ModuleCat.{u + 1} k) f).mapDerivedCategory ⋙
         finiteCoefficientDerivedComparison X k :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso _ _) ≪≫
     Functor.mapDerivedCategoryNatIso (coefficientComparisonPullbackIso f k) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
 
 private noncomputable def comparisonConstantComplexIso
     (X : Scheme.{u}) (k : Type (u + 1)) [CommRing k] [Finite k]
