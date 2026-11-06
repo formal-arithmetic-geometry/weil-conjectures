@@ -389,3 +389,9 @@
   added the defining Mathlib modules explicitly. Both prerequisites now build.
 - All Lean changes so far are imports only; all pre-existing proof/resource settings are unchanged.
 - Next: build all five direct importers, applying the known umbrella-import fix to Induction.
+
+- Downstream batch completed: DegreeZero, ConnectedFibresConstantDegreeZero, and
+  Derived.Exchange.Basic rebuilt green. Three other direct importers are blocked
+  by five unowned dependencies (BZ1017–BZ1020 and BZ1022); no fixes made in those files.
+- Reverted the unvalidated Induction import edit because its dependencies block it.
+- Next: the two direct importers of the newly green modules, then final verification.
