@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Derived.DerivedAdjunctionTopEdgeData
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # The pinned derived adjunction on single complexes
 Source: Stacks Project, cohomology.tex, Tag 079W; derived.tex, Tags 08J5 and 06XS.
