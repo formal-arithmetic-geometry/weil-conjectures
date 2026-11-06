@@ -313,5 +313,6 @@ theorem canonicalDirectImageH0Unit {X S : Scheme.{u}} (f : X ⟶ S)
     CategoryTheory.Functor.map_id, Category.id_comp]
   dsimp [DerivedCategory.singleFunctorCompHomologyFunctorIso]
   erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.id_comp]
+  rfl
 
 end AlgebraicGeometry.Scheme.Modules
