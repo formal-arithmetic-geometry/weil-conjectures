@@ -110,7 +110,7 @@ private theorem ringed_uncurry_pure
       (pureTensor M Q U x y) = (f.val.app U y).app (op (Over.mk (𝟙 U.unop))) x := by
   delta SheafOfModules.tensorHomAdjunction
   rw [Adjunction.mkOfHomEquiv_homEquiv]
-  let adj := PresheafOfModules.sheafificationAdjunction (𝟙 (ring R).obj)
+  let adj := PresheafOfModules.sheafificationAdjunction.{u} (𝟙 (ring R).obj)
   let q := ((PresheafOfModules.homObjEquiv (R := R.obj) M.val Q.val N.val).symm f.val)
   let k := (adj.homEquiv (M.val ⊗ Q.val) N).symm q
   let t := (adj.unit.app (M.val ⊗ Q.val)).app U (x ⊗ₜ[R.obj.obj U] y)
