@@ -266,7 +266,7 @@ private theorem exact_nt_homology
     change IsIso ((_root_.DerivedCategory.homologyFunctor D q).map
       (_root_.DerivedCategory.Qh.map ((HomotopyCategory.quotient D (.up ℤ)).map a))) at hiq
     have hiq' := (NatIso.isIso_map_iff
-      (isoWhiskerRight (_root_.DerivedCategory.quotientCompQhIso D)
+      (Functor.isoWhiskerRight (_root_.DerivedCategory.quotientCompQhIso D)
         (_root_.DerivedCategory.homologyFunctor D q)) a).1 hiq
     exact (NatIso.isIso_map_iff (_root_.DerivedCategory.homologyFunctorFactors D q) a).1 hiq'
   have hτL : IsIso (τ.app (L.homology q)) := by
