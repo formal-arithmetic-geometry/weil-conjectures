@@ -137,7 +137,9 @@ theorem IsCurve.bijective_fieldExtensionCohomologyMap_of_connectedSpace [IsAlgCl
     (f := f) (g := Spec.map (CommRingCat.ofHom (algebraMap k k'))) x₀
     (default : Spec (.of k')) (Subsingleton.elim _ _)
   have : Nonempty C' := ⟨z⟩
-  have : ConnectedSpace C' := inferInstance
+  have : ConnectedSpace C' :=
+    { isPreconnected_univ := Set.subsingleton_of_subsingleton.isPreconnected
+      toNonempty := inferInstance }
   have hn0 : n ≠ 0 := by rintro rfl; exact hn Nat.cast_zero
   have : NeZero n := ⟨hn0⟩
   rcases q with _ | q
@@ -294,7 +296,7 @@ theorem IsCurve.bijective_fieldExtensionCohomologyMap [IsAlgClosed k] [IsCurve f
   refine hinj.bijective_of_nat_card_le ?_
   rw [Nat.card_congr E.toEquiv, Nat.card_congr eC', Nat.card_congr eC,
     Nat.card_pi, Nat.card_pi]
-  refine Finset.prod_le_prod (fun _ _ ↦ Nat.zero_le _) fun c _ ↦ ?_
+  refine Finset.prod_le_prod₀ (fun _ _ ↦ Nat.zero_le _) fun c _ ↦ ?_
   rw [Nat.card_congr ((U' c).ι.sheafHUpperStarConstantZModAddEquiv n q).toEquiv,
     Nat.card_congr ((U c).ι.sheafHUpperStarConstantZModAddEquiv n q).toEquiv]
   exact Nat.card_le_card_of_injective _ (hψ c)
