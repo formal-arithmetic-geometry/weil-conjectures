@@ -94,6 +94,9 @@ private theorem ordinaryPullback_Q_iso {T X : Scheme.{u}} (g : T ⟶ X)
     (DerivedCategory.quotientCompQhIso _).app _ ≪≫
     DerivedCategory.Q.mapIso ((NatIso.mapHomologicalComplex η (.up ℤ)).app P)⟩
 
+set_option maxHeartbeats 800000 in
+-- The restored comparison reaches the 200000-heartbeat whnf limit on Lean v4.35.0-rc3.
+-- Its transports cross independently chosen derived categories; retain the historical limit.
 /-- A specified local strictly perfect model computes derived pullback on its inverse-image
 open. This only identifies the derived object; preservation of strict perfectness of the
 ordinary pulled complex is a separate, elementary argument.
