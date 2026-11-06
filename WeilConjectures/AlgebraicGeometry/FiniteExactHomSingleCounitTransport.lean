@@ -287,6 +287,6 @@ theorem finite_exactHom_single_counit_transport
   have hf := affine_singlePushforward_unit_isIso f M hM
   have result := CategoryTheory.assembly_transport F T H
     (RingedSpace.moduleDirectImage f.toLRSHom.toShHom) adjH M L hFT hf γ hγ e
-  simpa only [eqToHom_refl, Category.id_comp] using result
+  simpa only [eqToHom_refl, Category.id_comp, cast_eq] using result
 
 end AlgebraicGeometry
