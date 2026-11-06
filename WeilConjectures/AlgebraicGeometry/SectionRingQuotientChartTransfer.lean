@@ -60,7 +60,6 @@ private theorem sectionRing_power_generator {X : Scheme.{v}} (L : X.Modules)
     rw [hm, ← Hom.app_presheaf_map, tmulSection_map]
     exact (ih.tmulSection ht).app_hom (L.tensorPowAddIso (k • e) e).symm
 
-set_option maxHeartbeats 800000 in
 -- Elaborating the ambient-open section identifications and tensor cancellation needs this limit.
 /-- The coefficient equation on the chosen chart determines all other chart equations.
 Source: Stacks Project, Constructions, Tag 01N8, proof, comparison on intersecting charts;

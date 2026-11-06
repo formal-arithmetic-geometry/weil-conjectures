@@ -62,7 +62,6 @@ private theorem lax_tensor_evaluation {C D : Type*} [Category* C] [Category* D]
     rw [← whiskerLeft_comp, hz, whiskerLeft_id]
   simp only [whiskerLeft_comp, Category.assoc, reassoc_of% hzz]
 
-set_option maxHeartbeats 800000 in
 -- Elaborating total tensor associators uses the sheaf tensor and coproduct instances.
 /-- Localization transports tensor evaluation against the single unit.
 Source: Stacks Project, cohomology.tex, Tags 08DM and 08DQ;

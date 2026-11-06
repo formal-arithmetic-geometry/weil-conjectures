@@ -72,7 +72,6 @@ private theorem component_formula (X : Scheme.{u})
 
 attribute [local irreducible] homComplexFunctor
 
-set_option maxHeartbeats 800000 in
 -- The abstract API avoids unfolding Hom-complex data during the calculation.
 /-- Restricting uncurrying and postcomposition to an arbitrary tensor summand.
 Source: Stacks Project, cohomology.tex, Tags 08DJ, 08DM and 08DQ;

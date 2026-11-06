@@ -162,7 +162,6 @@ private theorem singleSquareOfSummands
   rw [Iso.map_inv_hom_id_assoc]
   rfl
 
-set_option maxHeartbeats 800000 in
 -- Only the single nonzero right degree is needed in the total comparison.
 omit [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ T)]
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ' T)]
@@ -252,7 +251,6 @@ private theorem computationPasteMapped
   exact computationPaste θ a b c q₀ q₁ m z (F.map f) loc α τ (F.map g) α'.hom v
     (Q.map k.hom) hc hn hr hl ho hα
 
-set_option maxHeartbeats 800000 in
 -- The section equivalence requires substantial tensor and colimit typeclass elaboration.
 omit [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ' T)]
   [IsCommMonObj Λ'] in

@@ -92,7 +92,7 @@ private theorem exterior_over_component_ext
       (f.val.app (op (Over.mk (b ≫ a₁)))).hom.map_smul,
       (g.val.app (op (Over.mk (b ≫ a₂)))).hom.map_smul, hx]
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- Identifying the derived tensor coordinates with abstract module maps needs extra fuel.
 set_option backward.isDefEq.respectTransparency false in
 /-- Choose affine source and target coordinates using quotient resolutions and conormal

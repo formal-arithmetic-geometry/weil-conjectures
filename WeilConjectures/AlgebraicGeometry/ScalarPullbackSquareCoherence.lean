@@ -206,7 +206,6 @@ Source: Stacks 07A7 (auxiliary; not a blueprint node). -/
     eqToIso (congrArg (fun h : X' ⟶ Y ↦ L R h) sq.toCommSq.w.symm) ≪≫
     scalarPullbackComposition R a f
 
-set_option maxHeartbeats 300000 in
 -- Specializing the categorical lemma searches instances on categories of module objects.
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types false
