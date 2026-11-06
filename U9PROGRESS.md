@@ -338,3 +338,16 @@
 - Full log: /home/ubuntu/u9/bz/BUILD-BZ978-leaf-green-full.log.
 - Next target OrderedExchangeStrictCoefficientEquations covers all seven direct
   importers in its dependency closure.
+
+- First downstream run rebuilt the leaf and CompletedQuotientUnitNormalization green.
+  CompletedPullbackInterface had two compositor orientation errors; both definition-body
+  directions are repaired with the declared isomorphism type unchanged. The declaration
+  is retained because external callers use it despite its unused-list entry.
+- Four unowned dependency failures block five direct importers; recorded in
+  BZ978-downstream1-blockers.json. The next unblocked importer is ReductionAugmentationCompatibility.
+- Current validation: CompletedPullbackInterface and CompletedQuotientUnitNormalization.
+
+- Both direct importers passed together at 68722d6cc7ac77c7987137f65e895ed614607434: rc=0, failed=0, 6672 jobs.
+  The assigned leaf also rebuilt green. Full log: BUILD-BZ978-downstream-green-full.log.
+- Continuing with ReductionAugmentationCompatibility; other layer-two importers
+  have verified external blockers in BZ978-downstream2-plan.json.
