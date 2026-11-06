@@ -71,12 +71,14 @@ theorem affineSpectrum_counit_square
     let P0 := ((Scheme.Modules.tensorPullback X.isoSpec.inv).mapHomologicalComplex
       (.up ℤ)).obj P
     (derivedPullback X'.isoSpec.inv).map
-        (inv ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) ≫
+        (cast (by rfl)
+          (inv ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) :
+          DerivedCategory.Q.obj Pg ⟶ (derivedPullback g').obj (DerivedCategory.Q.obj P)) ≫
       (affineSpectrumDerivedPullbackIso g').inv.app (DerivedCategory.Q.obj P) =
     (isoPullbackComplexCounitIso X'.isoSpec.inv).hom.app Pg ≫
       DerivedCategory.Q.map (affineSpectrumTensorComplexIso g' P).inv ≫
-      inv ((counit (Spec.map g'.appTop)).app
-        ((HomotopyCategory.quotient _ (.up ℤ)).obj P0)) ≫
+      cast (by rfl) (inv ((counit (Spec.map g'.appTop)).app
+        ((HomotopyCategory.quotient _ (.up ℤ)).obj P0))) ≫
       (derivedPullback (Spec.map g'.appTop)).map
         ((isoPullbackComplexCounitIso X.isoSpec.inv).inv.app P) := by
   have _hFlat := hP
