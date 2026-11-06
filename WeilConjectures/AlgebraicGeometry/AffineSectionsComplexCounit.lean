@@ -8,6 +8,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Homology.Additive
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # Reconstruction of an affine quasi-coherent complex from its sections
 
@@ -105,7 +106,9 @@ theorem affine_sections_complex_counit (Y : Scheme.{u}) [IsAffine Y]
   have : S.Additive := ⟨by intros; rfl⟩
   have : T.Additive := by
     change (tilde.functor Γ(Y, ⊤)).Additive
-    exact instAdditiveModuleCatCarrierModulesSpecOfFunctor
+    constructor
+    intro M N f g
+    exact tilde.map_add (R := Γ(Y, ⊤)) f g
   have : (SheafOfModules.evaluation.{u}
       Y.ringCatSheaf (op ⊤)).Additive := ⟨by intros; rfl⟩
   let FC := F.mapHomologicalComplex (ComplexShape.up ℤ)
