@@ -190,7 +190,7 @@ theorem ringedSite_completeElement_mul
   let : MonoidalPreadditive A := tensor_monoidalPreadditive
   let Q : CochainComplex A ℤ ⥤ DerivedCategory A := DerivedCategory.Q
   let N := ringedSiteDerivedRestriction O U K
-  letI : Category.{w} (@DerivedCategory (SheafOfModules.{u}
+  let : Category.{w} (@DerivedCategory (SheafOfModules.{u}
       ((sheafCompose (J.over U) (forget₂ CommRingCat RingCat)).obj (R.over U))) _ _
       (inferInstanceAs (HasDerivedCategory.{w} (SheafOfModules.{u} (O.over U))))) :=
     inferInstanceAs (Category.{w} (DerivedCategory (SheafOfModules.{u} (O.over U))))
