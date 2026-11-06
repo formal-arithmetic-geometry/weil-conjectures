@@ -417,3 +417,14 @@
 - Downstream edits are Localization imports and cast_eq proof normalization only;
   all downstream statements and existing heartbeat settings are unchanged.
 - Continuing through the next six modules in the affine-comparison import chain.
+
+- Eight downstream modules are now green, through AffineBaseChangeTildeSourceModel.
+  The ordinary-comparison proof cancels shared context before normalizing canonical
+  transports, avoiding the measured 200000-heartbeat timeout without raising limits.
+- Next blocker was a deleted helper still called by AffineBaseChangeSourceModel.
+  Restored exists_affineBaseChangeIntoPullback_representativeIso in its original file
+  from 8984c01d58^, preserving its signature and docstring. Its Qh/Q comparison proof
+  is being ported using the same Localization visibility and identity-transport fixes.
+- Latest completed chain source: 33812e754d43c4c8b79d43b7811fc081d01e2a23;
+  log BUILD-BZ1030-chain-green-source-red-full.log. Current ucheck tests restoration
+  plus AffineBaseChangeSourceModel and AffineBaseChangeCohomologyModel.

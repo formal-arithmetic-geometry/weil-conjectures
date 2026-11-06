@@ -135,6 +135,8 @@ theorem exists_affineBaseChangeIntoPullback_representativeIso
     have hd' := congrArg (fun b ↦
       (SingleComplexBaseChange.comparisonStalkHomologyIso X' p T i).inv ≫ b) hd
     simp only [Functor.map_comp, Category.assoc, Iso.inv_hom_id_assoc] at hd'
+    letI : HasDerivedCategory.{w} X'.Modules :=
+      inferInstanceAs (HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X'.toRingedSpace)))
     have htransport :
         (DerivedCategory.quotientCompQhIso.{w} _).inv.app T ≫
           (DerivedCategory.Qh.{w}
@@ -153,8 +155,9 @@ theorem exists_affineBaseChangeIntoPullback_representativeIso
       erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id]
       repeat erw [Category.id_comp, Category.comp_id]
       all_goals rfl
-    simpa only [affineBaseChangeIntoPullback, htransport,
-      SingleComplexBaseChange.comparisonIntoPullback, F, G, T, cast_eq,
+    dsimp only [affineBaseChangeIntoPullback]
+    erw [htransport]
+    simpa only [SingleComplexBaseChange.comparisonIntoPullback, F, G, T, cast_eq,
       Functor.comp_map, Functor.map_comp, Category.assoc] using
         congrArg (fun b ↦
           (SingleComplexBaseChange.cohomologyModel f f' g g' sq p N).localizedComparison i ≫
