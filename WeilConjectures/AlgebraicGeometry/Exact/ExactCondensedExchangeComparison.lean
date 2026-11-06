@@ -162,7 +162,8 @@ private theorem invert_square
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :=
   Functor.mapDerivedCategoryNatIso (CondensedRing.upperStarComp Λ f g) ≪≫
-    (Functor.mapDerivedCategoryCompIso (CondensedRing.upperStar Λ g) (CondensedRing.upperStar Λ f)).symm
+    (Functor.mapDerivedCategoryCompIso (CondensedRing.upperStar Λ g)
+      (CondensedRing.upperStar Λ f)).symm
 
 private theorem exactComp_hom
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
