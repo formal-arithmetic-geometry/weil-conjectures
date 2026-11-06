@@ -654,19 +654,19 @@ private theorem descend_coherence
   have hR := Functor.mapDerivedCategoryNatIso_isoWhiskerRight a02 H
   have hL := Functor.mapDerivedCategoryNatIso_isoWhiskerLeft F a13
   have hC := Functor.mapDerivedCategoryCompIso_assoc F G H
-  rw [← Category.assoc (Functor.mapDerivedCategoryCompIso F02 H).hom,
+  rw [← Category.assoc (Functor.mapDerivedCategoryCompIso F02 H).inv,
     ← hR, Category.assoc, ← hC]
   have ht := congrArg (fun t ↦ t ≫
-    (Functor.mapDerivedCategoryCompIso F (G ⋙ H)).hom ≫
+    (Functor.mapDerivedCategoryCompIso F (G ⋙ H)).inv ≫
     Functor.whiskerLeft F.mapDerivedCategory
-      (Functor.mapDerivedCategoryCompIso G H).hom) hd
+      (Functor.mapDerivedCategoryCompIso G H).inv) hd
   calc
     _ = ((Functor.mapDerivedCategoryNatIso e).hom ≫
           (Functor.mapDerivedCategoryNatIso a1).hom ≫
           (Functor.mapDerivedCategoryNatIso (Functor.isoWhiskerLeft F a13)).hom) ≫
-        (Functor.mapDerivedCategoryCompIso F (G ⋙ H)).hom ≫
+        (Functor.mapDerivedCategoryCompIso F (G ⋙ H)).inv ≫
         Functor.whiskerLeft F.mapDerivedCategory
-          (Functor.mapDerivedCategoryCompIso G H).hom := by
+          (Functor.mapDerivedCategoryCompIso G H).inv := by
             simpa only [Category.assoc] using ht
     _ = _ := by
       simp only [Category.assoc]
@@ -727,7 +727,7 @@ private theorem systemDerivedCoherence
       E.hom.app S ≫ (finiteSystemDerivedComposition.{u} A τ (j ≫ h) k).hom.app S ≫
         (finiteSystemDerivedComposition.{u} A τ j h).hom.app
           ((finiteSystemDerivedPullback.{u} A τ k).obj S) := by
-    simpa only [finiteSystemDerivedComposition, Iso.trans_hom, NatTrans.comp_app,
+    simpa only [finiteSystemDerivedComposition, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
       Functor.map_comp, Category.assoc] using hm
   have hf := congrArg (fun t ↦ E.inv.app S ≫ t) hm'
   simp only [← Category.assoc, Iso.inv_hom_id_app, Category.id_comp] at hf
