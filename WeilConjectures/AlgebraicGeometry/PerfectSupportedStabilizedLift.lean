@@ -8,6 +8,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.AffineScheme
+import WeilConjectures.AlgebraicGeometry.SupportedMapInitialAmbientLift
+import WeilConjectures.AlgebraicGeometry.SupportedMapAffineAttachment
 
 /-! # The finite stabilization construction for supported map lifting
 
