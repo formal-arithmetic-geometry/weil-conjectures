@@ -321,33 +321,22 @@
 - No local Lean/Lake, forbidden proof escapes, or heartbeat changes.
 
 
-# BZ978 in progress
+# BZ978 complete
 
-- Branch: u9/BZ978; baseline: 2390944b5.
-- The user instructed continuation after the exact identity-cast proposal.
-  Applied BZ978-public-cast-proposal.patch in HasCompletedReductionTowerUnitNormalization.
-  The reflexive type conversion preserves the existing counit morphism and assumptions.
-- Localization imports already repaired the private exactAugmentation_existsUnique helper.
-- Next: validate the assigned module with ucheck-bump, then its seven direct importers
-  and unblocked downstream layers, up to the brief's limit.
-- Fix patterns and build evidence: /home/ubuntu/u9/bz/FIXES-BZ978.md.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
-
-- Assigned leaf is green at 6a2f097183f65efa1284234f5c479e30ac937e3f: rc=0, failed=0,
-  6499 jobs, freshly rebuilt in 16s on newsrv:/home/ubuntu/u9n/bumpw2.
-- Full log: /home/ubuntu/u9/bz/BUILD-BZ978-leaf-green-full.log.
-- Next target OrderedExchangeStrictCoefficientEquations covers all seven direct
-  importers in its dependency closure.
-
-- First downstream run rebuilt the leaf and CompletedQuotientUnitNormalization green.
-  CompletedPullbackInterface had two compositor orientation errors; both definition-body
-  directions are repaired with the declared isomorphism type unchanged. The declaration
-  is retained because external callers use it despite its unused-list entry.
-- Four unowned dependency failures block five direct importers; recorded in
-  BZ978-downstream1-blockers.json. The next unblocked importer is ReductionAugmentationCompatibility.
-- Current validation: CompletedPullbackInterface and CompletedQuotientUnitNormalization.
-
-- Both direct importers passed together at 68722d6cc7ac77c7987137f65e895ed614607434: rc=0, failed=0, 6672 jobs.
-  The assigned leaf also rebuilt green. Full log: BUILD-BZ978-downstream-green-full.log.
-- Continuing with ReductionAugmentationCompatibility; other layer-two importers
-  have verified external blockers in BZ978-downstream2-plan.json.
+- Branch: u9/BZ978; baseline 2390944b5.
+- Assigned CompletedReductionUnit is green and sorry-free. The authorized identity cast
+  and Localization imports preserve its normalization equation across hidden Qh endpoints.
+- Two direct importers are green: CompletedPullbackInterface and CompletedQuotientUnitNormalization.
+  The interface fixes Mathlib's reversed compositor in its construction; its type is unchanged.
+- Green source commit: 68722d6cc7ac77c7987137f65e895ed614607434, ucheck-bump rc=0,
+  failed=0, 6672 jobs. All three modules freshly rebuilt. Final Lean source is identical.
+- All seven direct importers and the next frontier were checked or traced to observed
+  unowned failures. ReductionAugmentationCompatibility is red because BZ704 removed
+  two prerequisite helpers; its own redundant reducibility attribute is also recorded.
+  Other blocked branches and exact diagnostics are in FIXES-BZ978.md.
+- No declaration deletions, local Lean/Lake execution, proof placeholders, trust bypasses,
+  profiler probes, or heartbeat changes. All four rewrite rules replay exactly.
+- Logs: BUILD-BZ978-leaf-green-full.log, BUILD-BZ978-downstream-green-full.log,
+  BUILD-BZ978-downstream1-full.log, and BUILD-BZ978-downstream2-full.log under ~/u9/bz/.
+- Final records: ~/u9/bz/FIXES-BZ978.md and ~/u9/state/BZ978.DONE.
+- This completion commit changes only progress documentation.
