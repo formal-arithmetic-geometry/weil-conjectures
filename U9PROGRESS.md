@@ -370,3 +370,21 @@
 - Next: ucheck-bump for the restored helper, assigned module, and direct importer
   StratumCompletionUnitRestriction, then continue downstream as the brief requires.
 - Fix log: /home/ubuntu/u9/bz/FIXES-BZ995.md. No local Lean/Lake or forbidden proof shortcuts.
+
+# BZ1027 complete
+
+- Branch: `u9/BZ1027`; start: `c42746d5e58cc55d63dd9ef190dd34bc4130ed3c`.
+- Replayed the final BZ1020 import repairs missing from its early upstream integration:
+  use `Mathlib.CategoryTheory.Sites.EpiMono` in `Integral.Exact` and remove the umbrella
+  `Mathlib` import from `SmoothBaseChange.CurveTestDatum`.
+- Assigned `Integral.BaseChange` and downstream `SmoothBaseChange.IntegralBaseChange`
+  and `SmoothBaseChange.CurveTestDatum` pass `ucheck-bump`: rc=0, built=12, failed=0.
+- Validated source commit: `fefcc97aeb`; remote log:
+  `/home/ubuntu/u9/logs/BZ1027-20261106T105011.log`.
+- All non-import source content is unchanged; machine rewrite rules replay the exact diff.
+- Further downstream work is deferred to live owners: BZ1021 (`FieldBaseChange`,
+  `Induction`) and BZ1028 (the `AlgClosedExtension` / `Vanishing` frontier).
+  No additional downstream modules were tested or claimed green.
+- Patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ1027.md`.
+- Completion marker: `/home/ubuntu/u9/state/BZ1027.DONE`.
+- No local Lean/Lake execution, declaration changes, proof escapes, or limit increases.
