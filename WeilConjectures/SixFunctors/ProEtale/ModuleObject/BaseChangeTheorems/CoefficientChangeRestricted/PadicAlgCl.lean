@@ -55,18 +55,23 @@ theorem isIso_map_baseChangeMap_app_padicAlgCl_of_padicSubfield [QuasiCompact p]
       (pullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) sq)).app
       ((Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
         X)).leftDerivedFunctor.obj K))) := by
-  #count_heartbeats (have :=
-    isGE_leftDerivedUpperStar_obj (Profinite.continuousMapRingObj E.1) g' K n)
-  #count_heartbeats (have hA := isIso_map_baseChangeMap_app_derivedExtendScalars
-    (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) (derivedPullIsoCompCoherence _) sq i K
-    (isIso_derivedPushHom_app_padicSubfieldRingObjToPadicAlgCl_of_isGE ℓ E p K n)
-    (isIso_derivedPushHom_app_padicSubfieldRingObjToPadicAlgCl_of_isGE ℓ E p'
-      ((g')^*⟦Profinite.continuousMapRingObj E.1⟧.leftDerivedFunctor.obj K) n))
+  #count_heartbeats
+    have := isGE_leftDerivedUpperStar_obj (Profinite.continuousMapRingObj E.1) g' K n
+  #count_heartbeats
+    have hA := isIso_map_baseChangeMap_app_derivedExtendScalars
+      (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) (derivedPullIsoCompCoherence _) sq i K
+      (isIso_derivedPushHom_app_padicSubfieldRingObjToPadicAlgCl_of_isGE ℓ E p K n)
+      (isIso_derivedPushHom_app_padicSubfieldRingObjToPadicAlgCl_of_isGE ℓ E p'
+        ((g')^*⟦Profinite.continuousMapRingObj E.1⟧.leftDerivedFunctor.obj K) n)
   -- Align the proofs of `Precoherent Profinite` before applying the coefficient-change theorem.
-  #count_heartbeats (revert h hA)
-  #count_heartbeats normalize_precoherent
-  #count_heartbeats (intro h hA)
-  #count_heartbeats exact hA h
+  #count_heartbeats
+    revert h hA
+  #count_heartbeats
+    normalize_precoherent
+  #count_heartbeats
+    intro h hA
+  #count_heartbeats
+    exact hA h
 
 end Coefficients
 
