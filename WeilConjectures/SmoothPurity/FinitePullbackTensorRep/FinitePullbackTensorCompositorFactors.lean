@@ -60,7 +60,7 @@ private theorem exact_compositor_fac
     [Limits.PreservesFiniteLimits G] [Limits.PreservesFiniteColimits G]
     [Limits.PreservesFiniteLimits K] [Limits.PreservesFiniteColimits K]
     (a : K ≅ F ⋙ G) (P : CochainComplex A ℤ) :
-    (Functor.mapDerivedCategoryNatIso a ≪≫ Functor.mapDerivedCategoryCompIso F G).hom.app
+    (Functor.mapDerivedCategoryNatIso a ≪≫ (Functor.mapDerivedCategoryCompIso F G).symm).hom.app
         (DerivedCategory.Q.obj P) ≫
         G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app P) ≫
         G.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj P) =

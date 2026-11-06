@@ -67,7 +67,7 @@ variable {C D A B : Type*} [Category* C] [Category* D] [Category* A] [Category* 
 
 private theorem exact_forget_factors (e : L ⋙ V ≅ F ⋙ R) (P : CochainComplex C ℤ) :
     ((Functor.mapDerivedCategoryCompIso L V).symm ≪≫
-      Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryCompIso F R).hom.app
+      Functor.mapDerivedCategoryNatIso e ≪≫ (Functor.mapDerivedCategoryCompIso F R).symm).hom.app
         (DerivedCategory.Q.obj P) ≫
       R.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app P) ≫
       R.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj P) =
