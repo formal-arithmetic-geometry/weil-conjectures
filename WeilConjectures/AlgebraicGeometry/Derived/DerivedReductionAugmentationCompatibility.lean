@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Derived.DerivedReductionComparisonFormula
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 import all WeilConjectures.CategoryTheory.StrictReduction.ReductionPullbackDerivedTower
 import all WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumSupplement
 
@@ -34,5 +35,142 @@ attribute [local irreducible] completedAdicChangeData completedReductionCoeffici
   CategoryTheory.Functor.mapDerivedCategoryNatIso
 attribute [local irreducible] completedReductionModuleTowerFunctor
   completedReductionTowerComplexCounit reductionComplexCounit coherenceReductionTowerCounit
+
+/-- Ordinary augmentation compatibility descends through computing reduction counits.
+Source: Stacks Tags 03EL, 06YY
+(blueprint: lem-weil-pbc-derived-reduction-augmentation-of-counits).
+Proof: on resolving complexes, postcompose with the invertible target counit and
+apply the representative comparison equation. The two unit normalizations reduce
+the equation to the ordinary augmented square and the exact derived localization
+factors. Fully faithful restriction to resolving complexes gives the equation for
+every derived object. -/
+theorem derivedReduction_augmentationOfCounits
+    {B C D E : Type*} [Category B] [Category C] [Category D] [Category E]
+    [Abelian B] [Abelian C] [Abelian D] [Abelian E]
+    [HasDerivedCategory B] [HasDerivedCategory C]
+    [HasDerivedCategory D] [HasDerivedCategory E]
+    (F : B ⥤ C) (G : D ⥤ E) (RX CX : B ⥤ D) (RY CY : C ⥤ E)
+    [F.Additive] [G.Additive] [RX.Additive] [RY.Additive]
+    [CX.Additive] [CY.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    [PreservesFiniteLimits CX] [PreservesFiniteColimits CX]
+    [PreservesFiniteLimits CY] [PreservesFiniteColimits CY]
+    (LX : DerivedCategory B ⥤ DerivedCategory D)
+    (LY : DerivedCategory C ⥤ DerivedCategory E)
+    (cX : ∀ P : CochainComplex B ℤ, LX.obj (DerivedCategory.Q.obj P) ⟶
+      DerivedCategory.Q.obj ((RX.mapHomologicalComplex (.up ℤ)).obj P))
+    (cY : ∀ P : CochainComplex C ℤ, LY.obj (DerivedCategory.Q.obj P) ⟶
+      DerivedCategory.Q.obj ((RY.mapHomologicalComplex (.up ℤ)).obj P))
+    (uX : CX ⟶ RX) (uY : CY ⟶ RY)
+    (iX : CX.mapDerivedCategory ⟶ LX) (iY : CY.mapDerivedCategory ⟶ LY)
+    (e : RX ⋙ G ≅ F ⋙ RY) (c : CX ⋙ G ≅ F ⋙ CY)
+    (τ : LX ⋙ G.mapDerivedCategory ≅ F.mapDerivedCategory ⋙ LY)
+    (good : ObjectProperty (CochainComplex B ℤ))
+    (res : ∀ K, ∃ (P : CochainComplex B ℤ) (p : P ⟶ K), good P ∧ QuasiIso p)
+    (hiso : ∀ P, good P → IsIso (cY ((F.mapHomologicalComplex (.up ℤ)).obj P)))
+    (hnorm : ∀ P, good P →
+      DerivedReductionComparisonFormula F G RX RY LX LY cX cY e τ P)
+    (hX : ∀ P, good P → iX.app (DerivedCategory.Q.obj P) ≫ cX P =
+      CX.mapDerivedCategoryFactors.hom.app P ≫
+        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex uX (.up ℤ)).app P))
+    (hY : ∀ P, good P →
+      iY.app (DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj P)) ≫
+        cY ((F.mapHomologicalComplex (.up ℤ)).obj P) =
+      CY.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj P) ≫
+        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex uY (.up ℤ)).app
+          ((F.mapHomologicalComplex (.up ℤ)).obj P)))
+    (hOrd : ∀ M, G.map (uX.app M) ≫ e.hom.app M = c.hom.app M ≫ uY.app (F.obj M)) :
+    ∀ K : DerivedCategory B,
+      G.mapDerivedCategory.map (iX.app K) ≫ τ.hom.app K =
+        (Functor.mapDerivedCategoryCompIso CX G ≪≫
+          Functor.mapDerivedCategoryNatIso c ≪≫
+            (Functor.mapDerivedCategoryCompIso F CY).symm).hom.app K ≫
+          iY.app (F.mapDerivedCategory.obj K) := by
+  have heq :
+    Functor.whiskerRight iX G.mapDerivedCategory ≫ τ.hom =
+      (Functor.mapDerivedCategoryCompIso CX G ≪≫
+        Functor.mapDerivedCategoryNatIso c ≪≫
+          (Functor.mapDerivedCategoryCompIso F CY).symm).hom ≫
+        Functor.whiskerLeft F.mapDerivedCategory iY := by
+    let ff := cochainRepresentativeWhiskering good res (DerivedCategory E)
+    apply ff.map_injective
+    ext Y
+    let P := Y.obj
+    have hP : good P := Y.property
+    let Fc := F.mapHomologicalComplex (.up ℤ)
+    let FT := G.mapDerivedCategory
+    let Ftc := G.mapHomologicalComplex (.up ℤ)
+    let ay := (NatTrans.mapHomologicalComplex uX (.up ℤ)).app P
+    let ax := (NatTrans.mapHomologicalComplex uY (.up ℤ)).app (Fc.obj P)
+    let oc := (NatIso.mapHomologicalComplex e (.up ℤ)).hom.app P
+    let cc := (NatIso.mapHomologicalComplex c (.up ℤ)).hom.app P
+    let s := F.mapDerivedCategoryFactors.hom.app P
+    let cx := cY (Fc.obj P)
+    have : IsIso cx := hiso P hP
+    have : IsIso (LY.map s ≫ cx) := by dsimp [s]; infer_instance
+    have hN := hnorm P hP
+    change τ.hom.app (DerivedCategory.Q.obj P) ≫ LY.map s ≫ cx =
+      FT.map (cX P) ≫ G.mapDerivedCategoryFactors.hom.app
+        ((RX.mapHomologicalComplex (.up ℤ)).obj P) ≫ DerivedCategory.Q.map oc at hN
+    have hOrd' : Ftc.map ay ≫ oc = cc ≫ ax := by
+      apply HomologicalComplex.Hom.ext
+      funext i
+      exact hOrd (P.X i)
+    change FT.map (iX.app (DerivedCategory.Q.obj P)) ≫ τ.hom.app _ = _
+    apply (cancel_mono (LY.map s ≫ cx)).1
+    calc
+      _ = FT.map (iX.app (DerivedCategory.Q.obj P)) ≫
+          (FT.map (cX P) ≫ G.mapDerivedCategoryFactors.hom.app
+            ((RX.mapHomologicalComplex (.up ℤ)).obj P) ≫ DerivedCategory.Q.map oc) := by
+        simpa only [Category.assoc] using
+          congrArg (fun z ↦ FT.map (iX.app (DerivedCategory.Q.obj P)) ≫ z) hN
+      _ = FT.map (iX.app (DerivedCategory.Q.obj P) ≫ cX P) ≫
+          G.mapDerivedCategoryFactors.hom.app
+            ((RX.mapHomologicalComplex (.up ℤ)).obj P) ≫ DerivedCategory.Q.map oc := by
+        rw [FT.map_comp]
+        simp only [Category.assoc]
+      _ = FT.map (CX.mapDerivedCategoryFactors.hom.app P ≫ DerivedCategory.Q.map ay) ≫
+          G.mapDerivedCategoryFactors.hom.app
+            ((RX.mapHomologicalComplex (.up ℤ)).obj P) ≫ DerivedCategory.Q.map oc := by
+        rw [hX P hP]
+      _ = FT.map (CX.mapDerivedCategoryFactors.hom.app P) ≫
+          G.mapDerivedCategoryFactors.hom.app
+            ((CX.mapHomologicalComplex (.up ℤ)).obj P) ≫
+          DerivedCategory.Q.map (Ftc.map ay ≫ oc) := by
+        rw [FT.map_comp]
+        simp only [Category.assoc]
+        erw [G.mapDerivedCategoryFactors.hom.naturality_assoc ay]
+        rw [DerivedCategory.Q.map_comp]
+        rfl
+      _ = FT.map (CX.mapDerivedCategoryFactors.hom.app P) ≫
+          G.mapDerivedCategoryFactors.hom.app
+            ((CX.mapHomologicalComplex (.up ℤ)).obj P) ≫
+          DerivedCategory.Q.map (cc ≫ ax) := by rw [hOrd']
+      _ = (Functor.mapDerivedCategoryCompIso CX G ≪≫
+            Functor.mapDerivedCategoryNatIso c ≪≫
+              (Functor.mapDerivedCategoryCompIso F CY).symm).hom.app (DerivedCategory.Q.obj P) ≫
+          CY.mapDerivedCategory.map s ≫ CY.mapDerivedCategoryFactors.hom.app (Fc.obj P) ≫
+            DerivedCategory.Q.map ax := by
+        simpa only [FT, Fc, s, cc, NatIso.mapHomologicalComplex,
+          Functor.mapDerivedCategorySquareIso, Category.assoc, DerivedCategory.Q.map_comp] using
+          congrArg (fun z ↦ z ≫ DerivedCategory.Q.map ax)
+            (Functor.exactSquare_fac c P).symm
+      _ = (Functor.mapDerivedCategoryCompIso CX G ≪≫
+            Functor.mapDerivedCategoryNatIso c ≪≫
+              (Functor.mapDerivedCategoryCompIso F CY).symm).hom.app (DerivedCategory.Q.obj P) ≫
+          CY.mapDerivedCategory.map s ≫ iY.app (DerivedCategory.Q.obj (Fc.obj P)) ≫ cx := by
+        simpa only [Category.assoc] using congrArg (fun z ↦
+          (Functor.mapDerivedCategoryCompIso CX G ≪≫
+            Functor.mapDerivedCategoryNatIso c ≪≫
+              (Functor.mapDerivedCategoryCompIso F CY).symm).hom.app (DerivedCategory.Q.obj P) ≫
+                CY.mapDerivedCategory.map s ≫ z) (hY P hP).symm
+      _ = _ := by
+        erw [← Category.assoc (CY.mapDerivedCategory.map s), iY.naturality s]
+        simp only [Functor.whiskeringLeft, Functor.whiskerLeft_app,
+          NatTrans.comp_app, Category.assoc]
+        rfl
+  intro K
+  exact NatTrans.congr_app heq K
 
 end AlgebraicGeometry.Scheme
