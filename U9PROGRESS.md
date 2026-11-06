@@ -319,3 +319,8 @@
   the brief's 30-extra-module limit.
 - Fix records: /home/ubuntu/u9/bz/FIXES-BZ938.md.
 - No local Lean/Lake, forbidden proof escapes, or heartbeat changes.
+
+- Assigned leaf GREEN at 01d3d8d6e: ucheck-bump rc=0, failed=0, built=65,
+  on newsrv:/home/ubuntu/u9n/bumpw3. Full log BUILD-BZ938-leaf-green-full.log.
+- Next target IntegralPullbackCompositionScalarRational has all nine direct
+  importers in its dependency closure; downstream validation is starting.
