@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+import all WeilConjectures.AlgebraicGeometry.AdmissibleScalarRealization.AdmissibleScalarRealizationExactSupplement
+
 public import WeilConjectures.AlgebraicGeometry.InternalPerfectOrdinaryReductions
 public import WeilConjectures.NumberTheory.Padics.IntegralScalarTowers
 public import WeilConjectures.AlgebraicGeometry.LocallyConstantModuleHomology
@@ -170,7 +172,11 @@ def integralIso (W : Scheme.{u})
       (LinearEquiv.piCongrRight fun _ : Fin r ↦ ULift.moduleEquiv.symm)).toModuleIso
   let F := FiniteConstantModel.modelFunctor (A l E) W
   letI : F.Additive :=
-    (((AdmissibleScalarRealization.admissible_scalar_realization_exact l W).2.2.1 E).1.1).2.1
+    by
+      have : IsPrincipalIdealRing (Padic.coefficientExtensionIntegers l E) :=
+        (Padic.coefficientExtensionIntegers_dvr l E).choose_spec.2.2.2.2.2.2.2.2.1
+      exact (AdmissibleScalarRealization.pid_scalar_assertions
+        (Padic.coefficientExtensionIntegers l E) W).2.1
   exact F.mapIso (e ≪≫
       (ModuleCat.biproductIsoPi (fun _ : Fin r ↦
         ModuleCat.of (A l E) (ULift.{u + 1} (A l E)))).symm) ≪≫
