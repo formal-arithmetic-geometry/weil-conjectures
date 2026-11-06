@@ -12,9 +12,6 @@ import WeilConjectures.Tactic.ExactModProofs
 
 @[expose] public section
 
-set_option profiler true
-set_option profiler.threshold 1
-
 universe u
 
 open CategoryTheory Limits MonoidalCategory
@@ -32,7 +29,8 @@ variable {k : Type u} [Field k] [Finite k] (ℓ : ℕ) [Fact ℓ.Prime]
 local instance : NeZero (ℓ : k) := ⟨by
   rw [Ne, ringChar.spec, Nat.prime_dvd_prime_iff_eq (CharP.char_is_prime k _) Fact.out]
   exact Fact.out⟩
-local instance : NeZero (ℓ : AlgebraicClosure k) := WeilSheaf.purity_neZero_natCast_algebraicClosure k ℓ
+local instance : NeZero (ℓ : AlgebraicClosure k) :=
+  WeilSheaf.purity_neZero_natCast_algebraicClosure k ℓ
 
 /-- A root trivialization of the geometric Tate line, using its canonical pullback
 from the finite-base model. -/
@@ -52,7 +50,8 @@ lemma purityCanonicalTateOneTrivialization_weil :
       (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricGaloisFrobenius.hom).map
           (purityCanonicalTateOneTrivialization ℓ a hζ hζ').hom ≫
         (Functor.Monoidal.εIso
-          (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricGaloisFrobenius.hom)).inv := by
+          (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ)
+            a.geometricGaloisFrobenius.hom)).inv := by
   have h := CategoryTheory.K4Native.scalarEquation_conjugate_named
     (purityScalarFrobeniusPull ℓ a)
     (purityScalarTateCompare ℓ a) (purityScalarUnitCompare ℓ a)
