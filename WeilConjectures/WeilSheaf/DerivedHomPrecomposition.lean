@@ -294,9 +294,10 @@ private instance preservesProducts (n : ℤ) :
     PreservesLimitsOfShape (Discrete (CochainComplex.HomComplex.Triplet n)) (U) := by
   have : HasLimitsOfShape (Discrete (CochainComplex.HomComplex.Triplet n))
       (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) := inferInstance
-  exact inferInstanceAs (PreservesLimitsOfShape (Discrete (CochainComplex.HomComplex.Triplet n))
+  change PreservesLimitsOfShape (Discrete (CochainComplex.HomComplex.Triplet n))
     ((Endofunctor.Algebra.IsIsoStr (WeilSheaf.frobeniusPullback k₀ l X)).ι ⋙
-      Endofunctor.Algebra.forget (WeilSheaf.frobeniusPullback k₀ l X)))
+      Endofunctor.Algebra.forget (WeilSheaf.frobeniusPullback k₀ l X))
+  exact preservesLimitOfShape_of_createsLimitsOfShape_and_hasLimitsOfShape _
 
 private noncomputable def forgetIhom (M N : ProEtaleWeilSheaf k₀ l X) :
     (U).obj (((HW).obj (op M)).obj N) ≅ ((HO).obj (op ((U).obj M))).obj ((U).obj N) :=
