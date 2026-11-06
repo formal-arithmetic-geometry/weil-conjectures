@@ -128,10 +128,11 @@ theorem forward_transport_general
     derivedTensorLeftDerivedUpperStarCounit_app_app] at h
   dsimp only [Functor.whiskeringLeft₂, Functor.postcompose₂,
     Functor.whiskeringLeft, Functor.whiskeringRight, Functor.comp_obj] at h
-  simpa only [leftDerivedUpperStarTensorNatIso_hom, tensorHom_def,
-    mapH_quotient, quotient_tensor, cochain_tensor_obj,
-    Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans_app_app,
-    Qh_quotient_obj, Qh_quotient_map, Functor.comp_obj, Category.assoc] using h
+  with_unfolding_all
+    simpa only [leftDerivedUpperStarTensorNatIso_hom, tensorHom_def,
+      mapH_quotient, quotient_tensor, cochain_tensor_obj,
+      Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans_app_app,
+      Qh_quotient_obj, Qh_quotient_map, Functor.comp_obj, Category.assoc, cast_eq] using h
 
 end MixedRepForward
 end AlgebraicGeometry.ProEtale
