@@ -286,6 +286,7 @@ private lemma relativeExtension_eq_of_represents {D T : Scheme.{u}} (i : D ⟶ T
     (hβ : RelativeExtensionRepresents i P β) : β = relativeExtension i P :=
   (Classical.choose_spec (relativeExtension_existsUnique i P)).2 β hβ
 
+set_option backward.isDefEq.respectTransparency false in
 private theorem relativeExtensionRepresents_mk {D T : Scheme.{u}} (i : D ⟶ T)
     [IsClosedImmersion i] {G : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}}
     (P : Sheaf.Torsor.WithSection G (Scheme.Etale.mk i.openComplement.ι))
