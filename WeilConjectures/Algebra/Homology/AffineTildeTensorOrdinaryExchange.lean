@@ -146,7 +146,7 @@ theorem affineTildeTensorOrdinaryExchange
   dsimp only at h
   rw [← (schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom ψ))).map_comp,
     affineBaseChangeTildeRepresentativeIso_counit A D φ M hc]
-  simpa only [affineTildeTensorOrdinaryTargetMap, Category.assoc] using h
+  simpa only [affineTildeTensorOrdinaryTargetMap, cast_eq, Category.assoc] using h
 
 
 end AlgebraicGeometry
