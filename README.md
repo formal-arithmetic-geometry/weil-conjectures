@@ -64,8 +64,11 @@ Tingxiao Shi, Bin Wu, Wei Yang. Most of the proof was written by AI agents
 
 This project builds on [Mathlib](https://github.com/leanprover-community/mathlib4), in
 particular on its foundational algebraic geometry, developed largely by Andrew Yang and
-many other Mathlib contributors. Material on localization and derived categories was
-taken from Joël Riou's Mathlib branch `jriou_localization`.
+many other Mathlib contributors. Material on localization, derived categories and derived functors
+was taken from Joël Riou's branch
+[`jriou_localization`](https://github.com/joelriou/mathlib4/tree/jriou_localization); it
+lives in [`WeilConjectures/FromJoel`](WeilConjectures/FromJoel) (see its
+[README](WeilConjectures/FromJoel/README.md)).
 
 ## Tools
 
