@@ -288,39 +288,26 @@
 - Fix patterns: /home/ubuntu/u9/bz/FIXES-BZ908.md.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-- Assigned leaf compiled successfully (51s), all 3998 jobs green at 47eabae395f.
-  The shared remote wrapper hit a shell syntax error after compilation; full Lean
-  success is recorded in BUILD-BZ908-leaf-green-full.log. Rechecking the runner.
-- Next batch uses two direct importers whose dependency closures cover all 19:
-  SingleComplexInheritedTensorCondition and NormalizedInternalHomPullbackComparison.
 
-- The stable downstream run at 0997529457 rebuilt the assigned leaf (59s) and
-  CanonicalPullbackTensorMonoidalRealization (50s) successfully.
-- TensorCoordinateIdentifications needs the same Qh/Q reflexive casts plus an
-  explicit target sheaf category; the known BZ877 repair is applied for recheck.
-  The unused-list theorem has an external caller, so it is retained.
-- Unowned blockers found: StalkDerivedExtensionComparisonIsoCore (heartbeat
-  timeout) and OpenRestrictionDerivedMonoidal (reversed compositor).
-- Per-run ucheck-bump snapshot: /home/ubuntu/u9/bz/BZ908-bin/ucheck-bump. It preserves
-  the lead's locking and one-build-per-helper rules while avoiding shared-script
-  overwrite failures. No shared build scripts were edited.
+# BZ932 in progress
 
+- Branch: u9/BZ932; baseline 902c558126dff07f1b90673880f577206572e997.
+- The user instructed continuation after the concrete five-module upstream-restoration proposal.
+- Applied BZ932-proposed-upstream-restoration.patch, preserving restored statement/docstring text.
+- Explicit terminal-object preservation supplies GU.PreservesZeroMorphisms; removed the old
+  unmeasured maxHeartbeats override from the restored helper.
+- Next: ucheck-bump on the five prerequisites and SupportedKoszulRelativeDetector, then downstream.
+- Fix notes: /home/ubuntu/u9/bz/FIXES-BZ932.md. No local Lean/Lake or proof shortcuts.
 
-# BZ938 in progress
+# BZ943 in progress
 
-- Branch: u9/BZ938; baseline before repairs: 1626b332e^.
-- The user instructed continuation after the exact four-projection private-helper proposal.
-  Applied BZ938-private-compositor-proposal.patch to descend_coherence.
-  The .hom → .inv migration preserves the original equation under Mathlib's reversed compositor.
-- Definition bodies and proof-local comparisons now use the correct compositor direction.
-- First remote build cleared five of eight diagnostics; remaining three shared the
-  private helper statement as their root. Next: validate the completed repair.
-- Then check the nine direct importers, continuing through unblocked layers up to
-  the brief's 30-extra-module limit.
-- Fix records: /home/ubuntu/u9/bz/FIXES-BZ938.md.
-- No local Lean/Lake, forbidden proof escapes, or heartbeat changes.
-
-- Assigned leaf GREEN at 01d3d8d6e: ucheck-bump rc=0, failed=0, built=65,
-  on newsrv:/home/ubuntu/u9n/bumpw3. Full log BUILD-BZ938-leaf-green-full.log.
-- Next target IntegralPullbackCompositionScalarRational has all nine direct
-  importers in its dependency closure; downstream validation is starting.
+- Branch: `u9/BZ943`; starting commit: `c59b55069`.
+- Baseline build at `19d501377e` failed only because `finiteQuotient_layer_local_complexes`
+  and its upstream proof chain were deleted by prior prune units.
+- The user instructed continuation after the explicit six-module restoration proposal.
+  Applied that proposal, restoring nine historical declaration headers unchanged.
+- Candidate proof updates: new derived compositor orientation, explicit slice-module
+  category in `singleFunctor`, and strictly bounded complex vanishing.
+- Next: `ucheck-bump` on the assigned filtration triangle, then downstream importers.
+- Evidence and fix patterns: `/home/ubuntu/u9/bz/FIXES-BZ943.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat raises.
