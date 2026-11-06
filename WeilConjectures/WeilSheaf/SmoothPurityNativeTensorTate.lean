@@ -50,9 +50,9 @@ noncomputable def constantTwistDerivedAdjunction (b : (PadicAlgCl l)ˣ) :
     constantTwistCompConstantTwistIso k₀ l X b⁻¹ b ≪≫
       constantTwistFunctorCongrIso k₀ l X (inv_mul_cancel b) ≪≫ constantTwistOneIso k₀ l X
   exact Adjunction.ofInverseFunctorIsos F.mapDerivedCategory G.mapDerivedCategory
-    ((Functor.mapDerivedCategoryCompIso F G).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso F G ≪≫
       Functor.mapDerivedCategoryNatIso ef ≪≫ Functor.mapDerivedCategoryIdIso _)
-    ((Functor.mapDerivedCategoryCompIso G F).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso G F ≪≫
       Functor.mapDerivedCategoryNatIso eg ≪≫ Functor.mapDerivedCategoryIdIso _)
 
 /-- Internal Hom from the Tate sheaf is the inverse scalar twist. -/
