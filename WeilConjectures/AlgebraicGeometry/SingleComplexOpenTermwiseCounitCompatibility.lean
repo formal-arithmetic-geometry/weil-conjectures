@@ -56,7 +56,7 @@ private theorem termwise_exact_factors
   simp only [Category.id_comp]
   exact Category.comp_id _
 
-private theorem termwise_counit_transport
+@[reassoc] private theorem termwise_counit_transport
     {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
     [HasDerivedCategory.{w} C] [HasDerivedCategory.{w} D]
     (F : C ⥤ D) [F.Additive] (L : DerivedCategory C ⥤ DerivedCategory D)
@@ -70,8 +70,8 @@ private theorem termwise_counit_transport
       ε.app ((HomotopyCategory.quotient C (.up ℤ)).obj P) := by
   change L.map (𝟙 _) ≫ ε.app _ ≫ DerivedCategory.Qh.map (𝟙 _) ≫ 𝟙 _ = _
   erw [L.map_id, DerivedCategory.Qh.map_id]
-  simp only [Category.id_comp]
-  exact Category.comp_id _
+  change 𝟙 _ ≫ ε.app ((HomotopyCategory.quotient C (.up ℤ)).obj P) ≫ 𝟙 _ ≫ 𝟙 _ = _
+  simp only [Category.id_comp, Category.comp_id]
 
 private theorem termwise_homotopy_square_inv
     {C D B E : Type*} [Category C] [Category D] [Category B] [Category E]
@@ -161,7 +161,7 @@ theorem singleComplexOpen_termwise_counit_compatibility
   dsimp only [singleComplexOpenTensorRestrictionMap]
   erw [termwise_counit_transport (Scheme.Modules.tensorPullback g')
     (derivedPullback g') (counit g') P,
-    termwise_counit_transport (Scheme.Modules.tensorPullback j)
+    termwise_counit_transport_assoc (Scheme.Modules.tensorPullback j)
       (derivedPullback j) (counit j)
       (((schemeOpenRestriction X U).mapHomologicalComplex (.up ℤ)).obj P)]
   have hf : (schemeOpenRestriction X U).mapDerivedCategoryFactorsh.hom.app
@@ -208,7 +208,9 @@ theorem singleComplexOpen_termwise_counit_compatibility
         (openPinnedTensorRestrictionIso g' U U' j hj).inv (.up ℤ)).app P) := by
     exact termwise_homotopy_square_inv (openPinnedTensorRestrictionIso g' U U' j hj) P
   simp only [Functor.mapIso_inv, Iso.app_inv, Iso.symm_hom, Iso.app_hom] at h'
-  erw [hβ, htarget] at h'
-  exact h'
+  exact h'.trans (congrArg₂ (fun x y =>
+    (counit j).app ((HomotopyCategory.quotient _ (.up ℤ)).obj
+      (((schemeOpenRestriction X U).mapHomologicalComplex (.up ℤ)).obj P)) ≫ x ≫ y)
+    hβ htarget)
 
 end AlgebraicGeometry
