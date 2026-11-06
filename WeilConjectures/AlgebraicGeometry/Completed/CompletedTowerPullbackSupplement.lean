@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumSupplement
 public import WeilConjectures.AlgebraicGeometry.Completed.CompletedReductionUnit
 public import WeilConjectures.AlgebraicGeometry.Bounded.BoundedConstructibleTowerSupplement
@@ -880,6 +882,10 @@ private theorem constantRlimUnit_eq (V : Scheme.{u}) :
   apply (completedConstantRlimUnit_exists d V).unique
     (completedConstantRlimUnit_exists d V).exists.choose_spec
   intro P
+  simp only [DerivedCategory.quotientCompQhIso,
+    HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift_hom,
+    Quotient.lift.isLift_inv]
+  erw [Functor.map_id, Category.id_comp, Category.id_comp]
   exact exactLeftDerivedUnit (completedTowerConstant d V) lim constLimAdj P
 
 private theorem pullbackDatumTowerModulePull_eq :

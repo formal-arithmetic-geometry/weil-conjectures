@@ -390,53 +390,27 @@
 - No local Lean/Lake execution, declaration changes, proof escapes, or limit increases.
 
 
-# BZ1034 complete
+# BZ1034 in progress
 
 - Branch: u9/BZ1034; starting commit 604047e529f6b513e0c4b425b3bfbd62aa4cfd36.
-- Assigned UnboundedProperOpenBaseChange is green and sorry-free. ucheck-bump returned
-  rc=0, built=1, failed=0, with all 7240 jobs successful at source d455f0edc9b02a1747757092a837ad7bc358f2f1.
-- Applied the explicitly proposed four-private-helper compositor migration after the user
-  instructed continuation. Removed redundant/opaque reducibility attributes and corrected
-  the matching inverse cancellation. The public theorem statement is byte-identical.
-- Merged upstream through 7c0ae1ea8b, preserving the validated source. No assigned-leaf
-  prerequisites changed in its 4009-module source import closure.
-- Direct importer UnboundedProperOpenInterchangeSupplement was attempted twice. The final
-  attempt is blocked by SmoothBaseChange.Vanishing (owner BZ1035), whose imports collide
-  on CategoryTheory.Sheaf.H.δ. No downstream source was edited; second layer is deferred.
-- Full logs, patterns, exact diagnostics, and audit: /home/ubuntu/u9/bz/FIXES-BZ1034.md.
-- Completion marker: /home/ubuntu/u9/state/BZ1034.DONE.
-- No local Lean/Lake, new/deleted declarations, proof placeholders, trust bypasses,
-  profiler probes, or heartbeat changes. All ucheck-bump invocations have finished.
-- This final commit changes progress documentation only; Lean source matches the green build.
-
-# BZ1021 in progress
-
-- Branch: u9/BZ1021; starting commit 203ea75a45628a5a18c524c66580a676a0da3d5c.
-- The user instructed continuation after the explicit BertiniNoether prerequisite-import proposal.
-  Applied that prepared import-only patch; DegreeZero's umbrella import is also removed.
-- The first remote build confirmed the Sheaf.H.δ collision through SlicingFlat and BertiniNoether.
-- All theorem statements, definitions, proofs, and docstrings are unchanged.
-- Next: validate BertiniNoether and DegreeZero with ucheck-bump, then direct importers.
-- Fix record: /home/ubuntu/u9/bz/FIXES-BZ1021.md; full first build log:
-  /home/ubuntu/u9/bz/BUILD-BZ1021-1-full.log.
+- The user instructed continuation after the concrete four-private-helper compositor proposal.
+  Applied BZ1034-compositor-proposal.patch, preserving the original comparison arrows
+  under Mathlib b63f6e8a. The public theorem statement is unchanged.
+- Attribute-only build at 89034d5807 removed two errors; the nine remaining diagnostics
+  concern those compositor expressions. Next: validate the patch with ucheck-bump.
+- Direct importer: UnboundedProperOpenInterchangeSupplement; continue downstream after green.
+- Fix records: /home/ubuntu/u9/bz/FIXES-BZ1034.md.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
 
-- Assigned DegreeZero is now green and sorry-free at source b1c1890653a9221b928af7f85aac476908c7d89d.
-  ucheck-bump rc=0, failed=0, 7091 jobs; DegreeZero rebuilt in 62 seconds.
-- BertiniNoether's narrower imports exposed three missing imports in GenericIrreducibility;
-  added the defining Mathlib modules explicitly. Both prerequisites now build.
-- All Lean changes so far are imports only; all pre-existing proof/resource settings are unchanged.
-- Next: build all five direct importers, applying the known umbrella-import fix to Induction.
 
+# BZ1036 in progress
 
-# BZ1030 in progress
-
-- Branch: u9/BZ1030; starting commit 7ea4a948f63a4e02d11f7481d82e5d3d99bbfa69.
-- The user instructed continuation after the exact one-counit reflexive-cast proposal.
-  Applied BZ1030-statement-proposal.patch; all other statement text is unchanged.
-- Localization imports and a reflexive cast in the target-map body eliminate its error,
-  as verified by the second ucheck-bump. The theorem cast now awaits validation.
-- Next: validate AffineTildeTensorOrdinaryExchange, then its direct importer
-  AffineTildeDerivedTensorMate and further unblocked downstream modules.
-- Fix records and full logs: /home/ubuntu/u9/bz/FIXES-BZ1030.md.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+- Assigned: CompletedTowerPullbackSupplement; branch u9/BZ1036.
+- The user instructed continuation after the exact six-line restored-statement proposal.
+  Applied BZ1036-restored-statement-proposal.patch, making Q/Qh transports explicit.
+- Restored completedConstantRlimUnit_exists and completedConstantRlimUnit in their
+  original CompletedTowerDerivedLimitFunctor module; callers prohibit deletion.
+- Assigned-module statements and all existing docstrings remain unchanged.
+- Merged upstream fdc7e6fe1516; no overlapping changes to the two owned/required files.
+- Next: remote validation with ucheck-bump, then direct importers and downstream layers.
+- Fix records: /home/ubuntu/u9/bz/FIXES-BZ1036.md. No local Lean/Lake or proof escapes.
