@@ -301,3 +301,5 @@
 - Build 11: target comparison and degree-zero square green. Only the assigned theorem failed, exhausting 200000 heartbeats in 12s. For build 12, normalize module aliases, make derived universes explicit, and scope its budget to 400000. Public theorem header unchanged.
 
 - Build 12: alias normalization before intro erased the theorem lets; moved normalization after intro. Build 13 (ac16def6c9) is running on poolb:43.157.187.72; log /home/ubuntu/u9/logs/BZ864-20261106T084431.log; local session 99560. All prerequisites through counit compatibility are green so far.
+
+- Build 14 diagnostics: proof reaches introductions, alias normalization, and the arbitrary restricted-comparison choice; it times out before finishing the automorphism setup. Removed all diagnostic options/traces. Build 15 uses the canonical pinned restricted comparison directly, removing γ and its endpoint isomorphism; private comparison proofs now have explicit universes.
