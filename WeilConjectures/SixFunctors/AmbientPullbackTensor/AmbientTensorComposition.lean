@@ -112,7 +112,6 @@ private theorem ordinary_composition {X Y Z : Scheme.{t}}
       ((ring (topology X s) (coefficients ell E X s)).obj.obj (op ((base f s).obj U)))
       (show ((pull ell E f s).obj M).val.obj (op ((base f s).obj U)) from
         ((adjunction ell E f s).unit.app M).val.app (op U) m)
-
   have generator_map {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ)
       {M N : Modules ell E Y s} (a : M ⟶ N) (U : Site Y s) (V : Site X s)
       (q : V ⟶ (base f s).obj U) (m : M.val.obj (op U))

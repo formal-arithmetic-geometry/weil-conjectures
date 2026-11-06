@@ -32,7 +32,7 @@ attribute [local irreducible] HasDerivedCategory.standard
 attribute [local irreducible] completedAdicChangeData completedReductionCoefficient
   completedReductionTower CategoryTheory.Functor.mapDerivedCategory
   CategoryTheory.Functor.mapDerivedCategoryFactors CategoryTheory.Functor.mapDerivedCategoryFactorsh
-  CategoryTheory.Functor.mapDerivedCategoryCompIso CategoryTheory.Functor.mapDerivedCategoryNatIso
+  CategoryTheory.Functor.mapDerivedCategoryNatIso
 attribute [local irreducible] completedReductionModuleTowerFunctor
   completedReductionTowerComplexCounit reductionComplexCounit coherenceReductionTowerCounit
 
@@ -50,11 +50,8 @@ private theorem stratumUnit_formula (T : Scheme.{u})
         DerivedCategory.Q.map
           ((NatTrans.mapHomologicalComplex (completedReductionModuleUnit d T) (.up ℤ)).app P) := by
   let _ := completedReductionModuleTowerFunctor_additive T d
-  unfold completedReductionTowerComplexCounit
-  exact unitCounit_onComplex (d.constantTower T) (completedReductionModuleTowerFunctor T d)
-    (completedReductionTower T d) (coherenceReductionTowerCounit T d)
-    (completedReductionAugmentation d T) (completedReductionModuleUnit d T) P
-    ((completedReductionTowerUnit_exists d T).exists.choose_spec P hP)
+  unfold completedReductionTowerComplexCounit reductionComplexCounit
+  exact (completedReductionTowerUnit_exists d T).exists.choose_spec P hP
 
 /-- A normalized strict reduction comparison preserves the actual quotient augmentation.
 Source: Stacks Tags 03EL, 06YY
