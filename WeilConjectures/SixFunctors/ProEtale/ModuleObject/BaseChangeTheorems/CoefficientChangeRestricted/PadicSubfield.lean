@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Util.CountHeartbeats
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangeRestricted.Basic
 
 /-!
@@ -33,6 +34,9 @@ section Coefficients
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ)
   {X Y X' Y' Z : Scheme.{u}} {p : X ⟶ Y} {g : Y' ⟶ Y} {p' : X' ⟶ Y'} {g' : X' ⟶ X}
 
+#count_heartbeats in
+set_option maxHeartbeats 800000 in
+-- Measure the existing proof after its real-tree timeout at 200000 heartbeats.
 /-- **From `𝒪_E` to `E` for the restricted base change map**: for quasi-compact quasi-separated
 vertical maps, if the restricted base change map with `𝒪_E`-coefficients is invertible at a
 bounded below `K₀`, then the one with `E`-coefficients is invertible at `E ⊗ᴸ_{𝒪_E} K₀`. -/
