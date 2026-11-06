@@ -91,6 +91,10 @@ private theorem mixed_square_transport
     Functor.isoWhiskerRight_refl, hS, hT, Iso.refl_trans, Iso.trans_refl]
     using square
 
+-- Match the transported structures on the small coefficient models.
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
 /-- The given scalar mixed square holds for the normalized stage comparisons.
 
 Source: def-pur-section-invariant, common-stage subargument, steps 3–5.
