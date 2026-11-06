@@ -107,7 +107,7 @@ private theorem integral_naturality (X : Scheme.{u})
         HL.map (Prod.mkHom (T.map a.hom).op (T.map b.hom)) := by
     rw [← HL.map_comp, ← HL.map_comp]
     congr 1
-    ext
+    apply Prod.hom_ext
     · exact congrArg Quiver.Hom.op ha
     · exact hb
   change T.map (HE.map (Prod.mkHom a.hom.op b.hom)) ≫
