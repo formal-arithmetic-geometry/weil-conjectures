@@ -83,6 +83,7 @@ lemma traceDescentComparison_inv_fac (β : L₀ ⋙ S ≅ T ⋙ mapOfNatIso e)
   rw [reassoc_of% h₁, reassoc_of% h₂,
     rightDerivedFunctorCompMapOfNatIsoIsoOfForgetIso_hom_fac]
 
+omit [Abelian.HasKInjectiveResolutions B] in
 /-- The derived-unit normalization with the source unit expanded. -/
 lemma traceDescentComparison_inv_fac' (β : L₀ ⋙ S ≅ T ⋙ mapOfNatIso e)
     (K : HomotopyCategory A (.up ℤ)) :

@@ -213,6 +213,7 @@ lemma upperStar_map_upperStarMapModTateModuleIsoUnit_hom_hom_comp_leg (n : ℕ) 
     (limit.π (tateModuleSystem X ℓ) (op n)).hom]
   try rfl
 
+omit [WeaklyEtale g₁] in
 include h hf in
 /-- **The trivialization of the Tate module is natural under weakly étale pullback**: on underlying
 sheaves, `g₁^*` of the trivialization `g^* ℤ_ℓ(1) ≅ g^* ℤ_ℓ,X` followed by the factorization
