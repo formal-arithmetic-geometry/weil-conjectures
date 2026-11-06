@@ -163,7 +163,7 @@ theorem nativeWeilBasicComparisons (k₀ : Type u) [Field k₀] [Finite k₀]
     let adj := (nativeOpenAdjunction k₀ l j).comp (nativeOpenAdjunction k₀ l i)
     let adj' := (nativeOpenAdjunction k₀ l (j ≫ i)).ofNatIsoRight
       (ProEtaleWeilSheaf.upperStarCompIso k₀ l j i)
-    exact ⟨(Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    exact ⟨Functor.mapDerivedCategoryCompIso _ _ ≪≫
       Functor.mapDerivedCategoryNatIso (Adjunction.leftAdjointUniq adj adj')⟩
   · intro S _ _
     let adj := (nativeOpenAdjunction k₀ l (𝟙 S)).ofNatIsoRight
