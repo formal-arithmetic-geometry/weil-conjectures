@@ -277,45 +277,15 @@ theorem affineSpectrum_representative_map_eq
       (NatIso.mapHomologicalComplex a (.up ℤ)).hom.app c.P ≫
       ((Scheme.Modules.tensorPullback X'.isoSpec.inv).mapHomologicalComplex
         (.up ℤ)).map c.t
-    (counit (Spec.map g'.appTop)).app
+    cast (by rfl) ((counit (Spec.map g'.appTop)).app
           ((HomotopyCategory.quotient _ (.up ℤ)).obj
             (((Scheme.Modules.tensorPullback X.isoSpec.inv).mapHomologicalComplex
-              (.up ℤ)).obj c.P)) ≫
+              (.up ℤ)).obj c.P))) ≫
         (DerivedCategory.Q (C := SheafOfModules.{u}
           (moduleRings (Spec Γ(X', ⊤)).toRingedSpace))).map t ≫ e'.hom =
         (derivedPullback (Spec.map g'.appTop)).map e.hom ≫
           affineSpectrumDerivedMorphism g' K K' φ := by
-  classical
-  let (Y : Scheme.{u}) : HasDerivedCategory.{w} Y.Modules := inferInstanceAs
-    (HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace)))
-  change e.inv = (derivedPullback X.isoSpec.inv).map c.e.inv ≫
-    (derivedPullback X.isoSpec.inv).map (𝟙 (DerivedCategory.Q.obj c.P)) ≫
-    (counit X.isoSpec.inv).app ((HomotopyCategory.quotient _ (.up ℤ)).obj c.P) ≫
-    𝟙 ((DerivedCategory.Q.{w}
-      (C := SheafOfModules.{u} (moduleRings (Spec Γ(X, ⊤)).toRingedSpace))).obj
-      (((Scheme.Modules.tensorPullback X.isoSpec.inv).mapHomologicalComplex (.up ℤ)).obj
-        c.P)) at he
-  change e'.inv = (derivedPullback X'.isoSpec.inv).map c.e'.inv ≫
-    (derivedPullback X'.isoSpec.inv).map (𝟙 (DerivedCategory.Q.obj c.N)) ≫
-    (counit X'.isoSpec.inv).app ((HomotopyCategory.quotient _ (.up ℤ)).obj c.N) ≫
-    𝟙 ((DerivedCategory.Q.{w}
-      (C := SheafOfModules.{u} (moduleRings (Spec Γ(X', ⊤)).toRingedSpace))).obj
-      (((Scheme.Modules.tensorPullback X'.isoSpec.inv).mapHomologicalComplex (.up ℤ)).obj
-        c.N)) at he'
-  have he0 := he.trans (remove_comparison_identities _ _ _)
-  have he0' := he'.trans (remove_comparison_identities _ _ _)
-  dsimp only
-  exact transport_representative
-    (derivedPullback X.isoSpec.inv) (derivedPullback (Spec.map g'.appTop))
-    (derivedPullback g') (derivedPullback X'.isoSpec.inv) DerivedCategory.Q
-    (affineSpectrumDerivedPullbackIso g') c.e c.e' e e' φ
-    ((counit X.isoSpec.inv).app ((HomotopyCategory.quotient _ (.up ℤ)).obj c.P))
-    ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj c.P))
-    ((counit X'.isoSpec.inv).app ((HomotopyCategory.quotient _ (.up ℤ)).obj c.N))
-    ((counit X'.isoSpec.inv).app ((HomotopyCategory.quotient _ (.up ℤ)).obj
-      (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj c.P)))
-    _ _ _ (DerivedCategory.Q.map c.t) he0 he0' c.represents
-    (affineSpectrum_composition_counit_square g' c.P)
-    (counit_naturality_complex X'.isoSpec.inv c.t).symm
+  with_unfolding_all
+    exact affineSpectrum_representative_map_eq_aux g' K K' φ c e e' he he'
 
 end AlgebraicGeometry.SingleComplexBaseChange
