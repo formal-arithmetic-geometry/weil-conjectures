@@ -23,7 +23,7 @@ namespace AlgebraicGeometry.Etale
 
 attribute [local irreducible] upperStar lowerStar openImmersionLowerShriek
   Functor.mapDerivedCategory Functor.rightDerivedFunctor
-  Functor.mapDerivedCategoryNatIso Functor.mapDerivedCategoryCompIso
+  Functor.mapDerivedCategoryNatIso
   mapDerivedCategoryOpenImmersionLowerShriekComp
   mapDerivedCategoryOpenImmersionLowerShriekCongr
 
