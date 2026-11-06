@@ -51,7 +51,6 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
 
 attribute [local irreducible] Mod.extendScalars CondensedRing.internalScalarMonoidal
   ordinaryTensorComparison totalComparison totalScalar
-attribute [local implicit_reducible] Functor.mapHomologicalComplex
 attribute [local irreducible] HomologicalComplex₂.total Mod.inducingFunctorData
   InternalAbelianSheafModule.sectionModuleEquivalence SheafOfModules.monoidalCategory
 
