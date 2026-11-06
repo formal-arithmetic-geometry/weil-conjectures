@@ -149,10 +149,10 @@ lemma Etale.derivedBaseChangeMapPlus_eq_termwise (sq : CommSq g' f' f g)
       s.hom ≫ DerivedCategory.Qh.map h.1 = ρ →
       t ≫ DerivedCategory.Qh.map h.2 = ρ' →
       let χ := DerivedCategory.Qh.map ((F.mapHomotopyCategory (.up ℤ)).map h.1) ≫
-        DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnit.app P ≫
+        DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnith.app P ≫
           F.rightDerivedFunctorPlus.map (E.counitIso.hom.app K))
       let χ' := DerivedCategory.Qh.map ((F'.mapHomotopyCategory (.up ℤ)).map h.2) ≫
-        DerivedCategory.Plus.ι.map (F'.rightDerivedFunctorPlusUnit.app P' ≫
+        DerivedCategory.Plus.ι.map (F'.rightDerivedFunctorPlusUnith.app P' ≫
           F'.rightDerivedFunctorPlus.map (E'.counitIso.hom.app K'))
       let σ := G.mapDerivedCategoryFactorsh.inv.app
         ((F.mapHomotopyCategory (.up ℤ)).obj (q.obj I)) ≫ G.mapDerivedCategory.map χ
@@ -179,19 +179,19 @@ lemma Etale.derivedBaseChangeMapPlus_eq_termwise (sq : CommSq g' f' f g)
     @CochainComplex.IsKInjective.isIso_of_isIso_Qh_map _ _ _ _ I P.obj.as _ _ h.1 q₁
   have i₂ : IsIso h.2 :=
     @CochainComplex.IsKInjective.isIso_of_isIso_Qh_map _ _ _ _ J P'.obj.as _ _ h.2 q₂
-  have iu : IsIso (F.rightDerivedFunctorPlusUnit.app P) :=
-    inferInstanceAs (IsIso (F.rightDerivedFunctorPlusUnit.app
+  have iu : IsIso (F.rightDerivedFunctorPlusUnith.app P) :=
+    inferInstanceAs (IsIso (F.rightDerivedFunctorPlusUnith.app
       ((InjectiveObject.ι C).mapHomotopyCategoryPlus.obj (E.inverse.obj K))))
-  have iu' : IsIso (F'.rightDerivedFunctorPlusUnit.app P') :=
-    inferInstanceAs (IsIso (F'.rightDerivedFunctorPlusUnit.app
+  have iu' : IsIso (F'.rightDerivedFunctorPlusUnith.app P') :=
+    inferInstanceAs (IsIso (F'.rightDerivedFunctorPlusUnith.app
       ((InjectiveObject.ι C').mapHomotopyCategoryPlus.obj (E'.inverse.obj K'))))
   have iχ : IsIso χ := IsIso.comp_isIso' inferInstance (DerivedCategory.Plus.ι.mapIso
-    (@asIso _ _ _ _ (F.rightDerivedFunctorPlusUnit.app P ≫
+    (@asIso _ _ _ _ (F.rightDerivedFunctorPlusUnith.app P ≫
       F.rightDerivedFunctorPlus.map (E.counitIso.hom.app K))
       (IsIso.comp_isIso' iu
         (F.rightDerivedFunctorPlus.mapIso (E.counitIso.app K)).isIso_hom))).isIso_hom
   have iχ' : IsIso χ' := IsIso.comp_isIso' inferInstance (DerivedCategory.Plus.ι.mapIso
-    (@asIso _ _ _ _ (F'.rightDerivedFunctorPlusUnit.app P' ≫
+    (@asIso _ _ _ _ (F'.rightDerivedFunctorPlusUnith.app P' ≫
       F'.rightDerivedFunctorPlus.map (E'.counitIso.hom.app K'))
       (IsIso.comp_isIso' iu'
         (F'.rightDerivedFunctorPlus.mapIso (E'.counitIso.app K')).isIso_hom))).isIso_hom
@@ -243,20 +243,20 @@ lemma Etale.derivedBaseChangeMapPlus_eq_termwise (sq : CommSq g' f' f g)
       IsIso.Iso.inv_hom, reassoc_of% e₃,
       ← Functor.map_comp, assoc, Iso.hom_inv_id, comp_id]
     rfl
-  have H₂ : F'.rightDerivedFunctorPlusUnit.app (G'.mapHomotopyCategoryPlus.obj P) ≫
+  have H₂ : F'.rightDerivedFunctorPlusUnith.app (G'.mapHomotopyCategoryPlus.obj P) ≫
       F'.rightDerivedFunctorPlus.map
         (G'.mapDerivedCategoryPlusFactorsh.inv.app P ≫ G'.mapDerivedCategoryPlus.map cK) =
       DerivedCategory.Plus.Qh.map (F'.mapHomotopyCategoryPlus.map k) ≫
-        F'.rightDerivedFunctorPlusUnit.app P' ≫ F'.rightDerivedFunctorPlus.map cK' := by
-    have := F'.rightDerivedFunctorPlusUnit.naturality k
+        F'.rightDerivedFunctorPlusUnith.app P' ≫ F'.rightDerivedFunctorPlus.map cK' := by
+    have := F'.rightDerivedFunctorPlusUnith.naturality k
     simp only [Functor.comp_map] at this
     rw [H₄, Functor.map_comp, reassoc_of% this]
-  have H₁ : G.mapDerivedCategoryPlus.map (F.rightDerivedFunctorPlusUnit.app P ≫
+  have H₁ : G.mapDerivedCategoryPlus.map (F.rightDerivedFunctorPlusUnith.app P ≫
       F.rightDerivedFunctorPlus.map cK) ≫ (Etale.derivedBaseChangeMapPlus A sq).app K =
       G.mapDerivedCategoryPlusFactorsh.hom.app (F.mapHomotopyCategoryPlus.obj P) ≫
         DerivedCategory.Plus.Qh.map
           ((NatTrans.mapHomotopyCategoryPlus (Etale.baseChangeMap A sq)).app P) ≫
-        F'.rightDerivedFunctorPlusUnit.app (G'.mapHomotopyCategoryPlus.obj P) ≫
+        F'.rightDerivedFunctorPlusUnith.app (G'.mapHomotopyCategoryPlus.obj P) ≫
         F'.rightDerivedFunctorPlus.map
           (G'.mapDerivedCategoryPlusFactorsh.inv.app P ≫ G'.mapDerivedCategoryPlus.map cK) := by
     have := (Etale.derivedBaseChangeMapPlus A sq).naturality cK
@@ -265,7 +265,8 @@ lemma Etale.derivedBaseChangeMapPlus_eq_termwise (sq : CommSq g' f' f g)
       Functor.map_comp]
   let ιY := DerivedCategory.Plus.ι (C := Sheaf Y'.smallEtaleTopology A)
   have H₅ :
-      G.mapDerivedCategory.map (DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnit.app P)) ≫
+      G.mapDerivedCategory.map
+          (DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnith.app P)) ≫
       G.mapDerivedCategory.map (DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlus.map cK)) ≫
         ιY.map ((Etale.derivedBaseChangeMapPlus A sq).app K) =
       G.mapDerivedCategoryFactorsh.hom.app ((F.mapHomotopyCategory _).obj P.obj) ≫
@@ -273,7 +274,7 @@ lemma Etale.derivedBaseChangeMapPlus_eq_termwise (sq : CommSq g' f' f g)
           ((NatTrans.mapHomologicalComplex (Etale.baseChangeMap A sq) _).app P.obj.as)) ≫
         DerivedCategory.Qh.map (qY.map ((F'.mapHomologicalComplex _).map
           ((G'.mapHomologicalComplex _).map ψ₁ ≫ j ≫ φ₂))) ≫
-        ιY.map (F'.rightDerivedFunctorPlusUnit.app P') ≫
+        ιY.map (F'.rightDerivedFunctorPlusUnith.app P') ≫
         ιY.map (F'.rightDerivedFunctorPlus.map cK') := by
     have a₁ : ιY.map (G.mapDerivedCategoryPlusFactorsh.hom.app (F.mapHomotopyCategoryPlus.obj P)) =
         G.mapDerivedCategoryFactorsh.hom.app ((F.mapHomotopyCategory _).obj P.obj) :=

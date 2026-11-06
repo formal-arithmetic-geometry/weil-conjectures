@@ -70,8 +70,8 @@ private theorem derivedUnit
   dsimp only [Functor.mapDerivedCategoryCompNatIso, Iso.trans_hom, Iso.symm_hom,
     NatTrans.comp_app]
   rw [CategoryTheory.Functor.map_comp]
-  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso S G).hom.app P)).mp
-  rw [Iso.hom_inv_id_app_assoc, ← Category.assoc, ← hw, Category.assoc, hu]
+  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso S G).inv.app P)).mp
+  rw [Iso.inv_hom_id_app_assoc, ← Category.assoc, ← hw, Category.assoc, hu]
   exact (Category.comp_id _).symm
 
 section

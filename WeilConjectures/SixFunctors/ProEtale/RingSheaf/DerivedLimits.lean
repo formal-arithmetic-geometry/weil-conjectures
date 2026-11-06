@@ -49,6 +49,8 @@ open Scheme
 
 variable {R : Type (u + 1)} [CommRing R]
 
+attribute [local instance high] Mod.instHasLimitsOfShape_weilConjectures
+
 /-- **Bhatt–Scholze, Proposition 3.1.10** for module sheaves over a sheaf of rings: products of
 `B`-module sheaves on `T_proét` are exact, since they are so on underlying sheaves. -/
 instance hasExactLimitsOfShape_discrete {T : Scheme.{u}}

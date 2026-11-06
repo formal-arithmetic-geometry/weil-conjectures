@@ -165,10 +165,12 @@ private theorem comparison_descent
   classical
   let H := HomotopyCategory.quotient B₀ (.up ℤ)
   let W := HomotopyCategory.quasiIso B₀ (.up ℤ)
+  let e := DerivedCategory.quotientCompQhIso B₀
   let α (X : HomotopyCategory B₀ (.up ℤ)) (hX : res X.as) :
       F.obj (DerivedCategory.Qh.obj X) ⟶ G.obj (DerivedCategory.Qh.obj X) := by
     have := hG X.as hX
-    exact εF.app X.as ≫ t.app X.as ≫ inv (εG.app X.as)
+    exact F.map (e.hom.app X.as) ≫ εF.app X.as ≫ t.app X.as ≫ inv (εG.app X.as) ≫
+      G.map (e.inv.app X.as)
   have hr : ∀ X, ∃ (Y : _) (p : Y ⟶ X), res Y.as ∧ W p := by
     intro X
     obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective X
@@ -189,9 +191,22 @@ private theorem comparison_descent
     obtain ⟨p, rfl⟩ := H.map_surjective p
     have := hG P hX
     have := hG Q hY
-    change F.map (DerivedCategory.Q.map p) ≫
-        (εF.app Q ≫ t.app Q ≫ inv (εG.app Q)) =
-      (εF.app P ≫ t.app P ≫ inv (εG.app P)) ≫ G.map (DerivedCategory.Q.map p)
+    change F.map (DerivedCategory.Qh.map (H.map p)) ≫
+        (F.map (e.hom.app Q) ≫ εF.app Q ≫ t.app Q ≫ inv (εG.app Q) ≫ G.map (e.inv.app Q)) =
+      (F.map (e.hom.app P) ≫ εF.app P ≫ t.app P ≫ inv (εG.app P) ≫ G.map (e.inv.app P)) ≫
+        G.map (DerivedCategory.Qh.map (H.map p))
+    have heF : F.map (DerivedCategory.Qh.map (H.map p)) ≫ F.map (e.hom.app Q) =
+        F.map (e.hom.app P) ≫ F.map (DerivedCategory.Q.map p) := by
+      rw [← F.map_comp, ← F.map_comp, DerivedCategory.quotientCompQhIso_hom_naturality]
+    have heG : G.map (e.inv.app P) ≫ G.map (DerivedCategory.Qh.map (H.map p)) =
+        G.map (DerivedCategory.Q.map p) ≫ G.map (e.inv.app Q) := by
+      rw [← G.map_comp, ← G.map_comp, DerivedCategory.quotientCompQhIso_inv_naturality]
+    rw [← Category.assoc, heF]
+    simp only [Category.assoc, heG]
+    congr 1
+    simp only [← Category.assoc]
+    congr 1
+    simp only [Category.assoc]
     apply (cancel_mono (εG.app Q)).1
     simp only [Category.assoc, IsIso.inv_hom_id, Category.comp_id]
     calc
@@ -216,9 +231,18 @@ private theorem comparison_descent
       εF.app P ≫ t.app P := by
     intro P hP
     have := hG P hP
-    have hc : τ.app (DerivedCategory.Q.obj P) =
-        εF.app P ≫ t.app P ≫ inv (εG.app P) :=
+    have hc' : τ.app (DerivedCategory.Qh.obj (H.obj P)) =
+        F.map (e.hom.app P) ≫ εF.app P ≫ t.app P ≫ inv (εG.app P) ≫ G.map (e.inv.app P) :=
       (congr_app hτ (H.obj P)).trans (hβ (H.obj P) hP)
+    have hc : τ.app (DerivedCategory.Q.obj P) =
+        εF.app P ≫ t.app P ≫ inv (εG.app P) := by
+      have hnat : F.map (e.hom.app P) ≫ τ.app (DerivedCategory.Q.obj P) =
+          τ.app (DerivedCategory.Qh.obj (H.obj P)) ≫ G.map (e.hom.app P) :=
+        τ.naturality (e.hom.app P)
+      rw [hc'] at hnat
+      rw [← cancel_epi (F.map (e.hom.app P)), hnat]
+      simp only [Category.assoc, ← G.map_comp, Iso.inv_hom_id_app, Functor.comp_obj,
+        CategoryTheory.Functor.map_id, Category.comp_id]
     rw [hc]
     simp only [Category.assoc, IsIso.inv_hom_id, Category.comp_id]
   refine ⟨τ, he, ?_⟩
