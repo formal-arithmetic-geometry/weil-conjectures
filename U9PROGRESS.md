@@ -246,30 +246,36 @@
 - Next: build layer-two importer CanonicalModuleBaseChangeAffineChartComparison.
 - Notes: /home/ubuntu/u9/bz/FIXES-BZ824.md. No local Lean/Lake or proof shortcuts.
 
+# BZ861 complete
 
-# BZ859 complete
-
-- Branch: u9/BZ859; starting commit db406319f.
-- Final five-target ucheck-bump passed: rc=0, failed=0, 4426 jobs,
-  on poolb:43.157.187.72. All five handoff targets rebuilt successfully.
-- Validated source commit: e9ade5f7c629b713f1d64b02073efdb9654e4d63.
-- Green prerequisite modules: AffineBaseChangeTildeCoordinates and
-  AffinePushforwardComparisonCoordinates.
-- Green assigned module: AffinePushforwardComparisonFactorization.
-- Green downstream modules: AffinePushforwardCohomologyEdgeIdentity and
-  AffinePushforwardCohomologyEdgeExists.
-- The user instructed continuation after the concrete prerequisite-restoration proposal.
-  The three restored declarations retain their original signatures and documentation.
-- Ported generated additive-instance references using tilde.map_add; used Localization
-  implementation imports and reflexive casts for the original derived-unit homology maps.
-  The assigned theorem's binders, assumptions, and underlying maps are unchanged.
-- Layer-three AffineTildePushforwardCohomologyNormalization was attempted and is blocked
-  only by BZ860-owned AffinePushforwardCohomologyEdgeIsIso. No edits were made there.
-- Full validation log: /home/ubuntu/u9/bz/BUILD-BZ859-final-full.log.
-- Downstream evidence: /home/ubuntu/u9/bz/BUILD-BZ859-downstream-full.log.
-- Fix patterns, exact errors, rewrite rules, and counts: /home/ubuntu/u9/bz/FIXES-BZ859.md.
-- Contract audit: /home/ubuntu/u9/bz/BZ859-contract-audit.txt. The rules exactly replay
-  the assigned-module source from the starting revision.
-- No local Lean/Lake, proof placeholders, trust escapes, or heartbeat increases.
-- Completion marker: /home/ubuntu/u9/state/BZ859.DONE.
-- This completion commit changes only progress documentation after the green source build.
+- Branch: `u9/BZ861`; starting commit: `db406319f`.
+- Assigned module `AffineBaseChangeGlobalSectionsFactorization` and all six edited
+  Lean files passed the remote build at `1b026e579672269a72965a179ef957ea61d3bb89`.
+- Restored `tilde_preservesHomology`, `affineBaseChangeTildeCohomologyIso`, and
+  `affineTensorPullbackHomologySheafIso` in their original two upstream modules;
+  their original declaration types and docstrings are unchanged.
+- The user instructed continuation after the exact restoration and canonical-transport
+  proposal. The factorization and its direct importer now use explicit Q/Qh transports,
+  the derived universe w, and a typed pullback functor with its existing additive instance.
+- Replaced ten references to the renamed generated additive instance using tilde.map_add
+  with the appropriate coefficient ring. Retained all externally referenced declarations.
+- Eight downstream modules are green: AffineTensorPullbackStalkCoordinates,
+  AffineOrdinaryTensorStalkCoordinates, AffineStalkScalarExtensionCoordinates,
+  AffineDirectLocalizedTensorSquareCore, AffineDirectLocalizedTensorSquare,
+  AffineScalarLocalizedTensorSquare, AffineLocalizedTensorStalkSquare,
+  and AffineBaseChangeOrdinaryStalkComparison.
+- Remaining frontier: AffineBaseChangeTildeStalkComparison line 93 reports
+  Unknown identifier `affineBaseChangeIntoPullback`. That upstream module contains
+  no declarations after an earlier prune and is outside this unit; defer per brief.
+  All other direct importers of the green downstream modules passed.
+- Downstream log: `/home/ubuntu/u9/bz/BUILD-BZ861-downstream3-full.log`.
+- Final `ucheck-bump` passed at `2578f775d544205321b84e3c7e3a3d045dec5a53`:
+  rc=0, failed=0, 4061 jobs, on newsrv:/home/ubuntu/u9n/bumpw3.
+  Explicit targets: AffineBaseChangeGlobalSectionsFactorization and
+  AffineBaseChangeOrdinaryStalkComparison; their dependencies cover all six edited files.
+- Final green log: `/home/ubuntu/u9/bz/BUILD-BZ861-final-green-full.log`.
+- Completion marker: `/home/ubuntu/u9/state/BZ861.DONE`.
+- Fix records: `/home/ubuntu/u9/bz/FIXES-BZ861.md`; logs use `BUILD-BZ861-*`.
+- The replay audit reproduces all six changed Lean files using 15 contextual rewrite rules.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+- This final commit changes only progress documentation; Lean sources match the green build.

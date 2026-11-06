@@ -201,6 +201,7 @@ theorem affineTensorPullbackHomologyStalkIso_counit_coordinate
     exact affineTildeLocalizationStalkIso_apply A' p (C.homology i) _ d₀ y
   rw [hl]
   simp only [c, Functor.map_comp, ModuleCat.comp_apply]
+  rfl
 
 
 /-- The canonical target coordinate commutes with stalk localization.
