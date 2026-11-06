@@ -190,6 +190,33 @@ lemma _root_.AlgebraicGeometry.Etale.plus_derivedTensor_leftDerivedUpperStar
     (Etale.torAmplitudeIn_leftDerivedUpperStar A g a b hL)
   exact ((_root_.DerivedCategory.exists_homologyConcentratedIn_iff_bounded _).1 ⟨_, _, hMP⟩).1
 
+/-- The pro-étale projection formula at a finite coefficient stage for `K` bounded constructible
+(of étale origin) and `L` in `Dctf`, computed with the chosen compactification of `f`. -/
+theorem hasProjectionFormula_of_boundedConstructible [Finite Λ] (f : X ⟶ Y)
+    [HasCompactification f]
+    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
+    {L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))}
+    (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K)
+    (hL : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y L) :
+    HasProjectionFormula (ModuleCat.{u + 1} Λ) f K L :=
+  hasProjectionFormulaOfCompactification_of_boundedConstructible Λ
+    (HasCompactification.compactification f) hK hL
+
+/-- Blueprint `lem-weil-finite-compact-projection-formula`: Finite-coefficient compact-support
+projection formula.
+
+Let `Λ` be a finite coefficient ring and `f : X ⟶ Y` a morphism admitting a compactification.
+On the small étale sites, for `K ∈ Dᵇc(X_ét, Λ)` and `L ∈ Dᵇc(Y_ét, Λ)` of finite Tor amplitude,
+the projection transformation `Rf_! K ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^* L)` is an isomorphism; and the same
+holds on the small pro-étale sites for the pro-étale realizations, i.e. for `K` bounded
+constructible (of étale origin) and `L` in `Dctf(Y_proét, Λ)`. Naturality in `K` and `L` holds
+because the projection map is a natural transformation of bifunctors
+(`AlgebraicGeometry.Etale.projectionMap`, `AlgebraicGeometry.ProEtale.projectionMap`).
+
+The étale half is `AlgebraicGeometry.Etale.hasProjectionFormula_of_finite`, the pro-étale half
+`AlgebraicGeometry.ProEtale.hasProjectionFormula_of_boundedConstructible`, transported along
+the comparison `ν^*`. -/
+
 end ProEtale
 
 end AlgebraicGeometry
