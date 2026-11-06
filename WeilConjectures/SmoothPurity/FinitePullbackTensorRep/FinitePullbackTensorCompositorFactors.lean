@@ -66,7 +66,7 @@ private theorem exact_compositor_fac
         G.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj P) =
       K.mapDerivedCategoryFactors.hom.app P ≫ DerivedCategory.Q.map
         ((Functor.mapHomologicalComplexCompIso a.symm (.up ℤ)).inv.app P) := by
-  simp only [Iso.trans_hom, NatTrans.comp_app, Category.assoc]
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
   rw [Functor.mapDerivedCategoryCompIso_hom_app_factors]
   exact Functor.mapDerivedCategoryNatIso_fac a P
 
