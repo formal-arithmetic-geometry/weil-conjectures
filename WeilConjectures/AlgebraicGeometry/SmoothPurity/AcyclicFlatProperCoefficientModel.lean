@@ -13,8 +13,10 @@ public import WeilConjectures.Algebra.Homology.CanonicalTensorPullbackOfUniverse
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.Algebra.Homology.Localization
+public import Mathlib.CategoryTheory.Limits.HasLimits
 public import Mathlib.Logic.Small.Defs
 import all Mathlib.Algebra.Homology.Localization
+import all Mathlib.CategoryTheory.Limits.HasLimits
 import all Mathlib.Logic.Small.Defs
 import all WeilConjectures.AlgebraicGeometry.ProperBaseChange.WitnessCompatibility
 
@@ -221,7 +223,10 @@ private lemma derived_counit_normalization (adj : F ⊣ G) (C : CochainComplex E
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_hom, Quotient.lift.isLift_inv,
     DerivedCategory.quotientCompQhIso, HomologicalComplexUpToQuasiIso.quotientCompQhIso]
-  simp only [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+  repeat' first
+    | erw [CategoryTheory.Functor.map_id]
+    | erw [Category.id_comp]
+    | erw [Category.comp_id]
   exact h
 
 private lemma derived_unit_normalization (adj : F ⊣ G) (C : CochainComplex D ℤ) :
@@ -239,7 +244,10 @@ private lemma derived_unit_normalization (adj : F ⊣ G) (C : CochainComplex D �
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_hom, Quotient.lift.isLift_inv,
     DerivedCategory.quotientCompQhIso, HomologicalComplexUpToQuasiIso.quotientCompQhIso]
-  simp only [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+  repeat' first
+    | erw [CategoryTheory.Functor.map_id]
+    | erw [Category.id_comp]
+    | erw [Category.comp_id]
   exact h
 end DerivedComparison
 
