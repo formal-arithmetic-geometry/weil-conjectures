@@ -204,6 +204,14 @@ private noncomputable def openPresheafRestriction {X Y : Scheme.{v}}
       _root_.PresheafOfModules.{v} X.ringCatSheaf.obj :=
   PresheafOfModules.pushforward (openRingRestriction f)
 
+private local instance restrictedSectionModule {X : Scheme.{v}}
+    (M : _root_.PresheafOfModules.{v} X.ringCatSheaf.obj)
+    {V W : X.Opens} (i : W ⟶ V) :
+    Module Γ(X, W)
+      ((ModuleCat.restrictScalars (X.ringCatSheaf.obj.map i.op).hom).obj
+        (M.obj (Opposite.op W))) :=
+  inferInstanceAs (Module Γ(X, W) (M.obj (Opposite.op W)))
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- The presheaf analogue of Mathlib's `restrictAdjunction`: its unit is restriction to

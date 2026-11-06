@@ -99,7 +99,7 @@ theorem verticalCutoff_column_quasiIso_strict_positive
     · rw [haNat]
       exact hd
   let S := ShortComplex.mk (kernel.ι q) q (kernel.condition q)
-  have hS : S.ShortExact := { exact := ShortComplex.exact_kernel q }
+  have hS : S.ShortExact := { exact := ShortComplex.kernelSequence_exact q }
   rw [quasiIso_iff]
   intro n
   rw [quasiIsoAt_iff_isIso_homologyMap]

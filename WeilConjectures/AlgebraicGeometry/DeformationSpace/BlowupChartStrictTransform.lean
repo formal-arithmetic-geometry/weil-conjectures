@@ -259,8 +259,9 @@ lemma homogeneousAwayToChart_isLocalizationElem (hc : c ∈ I) :
   rw [e, coe_homogeneousAwayToChart_mk]
 
 lemma ker_chartToAway_le (hc : c ∈ I) :
-    RingHom.ker (chartToAway hc) ≤ Ideal.span {Away.isLocalizationElem
-      (reesX_mem _ _ (C_mem_deformationCenter hc)) (reesX_mem _ X X_mem_deformationCenter)} := by
+    RingHom.ker (chartToAway hc) ≤ Ideal.span
+      {Away.isLocalizationElem (reesX_mem _ _ (C_mem_deformationCenter hc))
+        (reesX_mem _ X X_mem_deformationCenter)} := by
   intro z hz
   obtain ⟨e, he, h⟩ := exists_eq_mul_of_evalAway_eq_zero
     (homogeneousAwayToChart _ (C_mem_deformationCenter hc) z).2 (RingHom.mem_ker.mp hz)

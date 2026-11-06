@@ -724,7 +724,6 @@ variable [MonoidalCategory E] [MonoidalPreadditive E]
   [∀ (X : E), PreservesColimitsOfShape ℤ ((curriedTensor E).flip.obj X)]
   [Abelian.HasFunctorialFlatResolution E]
   {V : Type*} [Category V] [Abelian V] [HasDerivedCategory V]
-
 private lemma leftComp_assoc
     (G : D ⥤ E) [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     (H : E ⥤ V) [H.Additive] [PreservesFiniteLimits H] [PreservesFiniteColimits H]
@@ -745,6 +744,7 @@ private lemma leftComp_assoc
   apply transportComp_assoc
   apply derivedComp_assoc
   simpa only [associator_trans_eq] using h
+
 
 end LeftTransport
 end CategoryTheory.Functor
@@ -922,7 +922,6 @@ private noncomputable abbrev scalarDerivedUnit
   (Mod.extendScalars a).leftDerivedFunctorNatIso (scalarUnit a ha) ≪≫
     (𝟭 (Mod C R)).leftDerivedFunctorIsoMapDerivedCategory ≪≫
       Functor.mapDerivedCategoryIdIso (Mod C R)
-
 private lemma scalarDerivedComp_assoc
     (f : R ⟶ S) [IsMonHom f] (g : S ⟶ U) [IsMonHom g] (j : U ⟶ V) [IsMonHom j]
     (fg : R ⟶ U) [IsMonHom fg] (gj : S ⟶ V) [IsMonHom gj]
@@ -972,6 +971,7 @@ private lemma scalarDerivedComp_comp_id
   apply Functor.transportComp_comp_id
   apply Functor.derivedComp_comp_id
   exact scalarComp_comp_id a ha f h
+
 
 private lemma scalarDerivedComp_shift
     (f : R ⟶ S) [IsMonHom f] (g : S ⟶ U) [IsMonHom g]
@@ -1103,6 +1103,58 @@ theorem condensedFiniteCoefficientCalculus
   let := scalarHasDerived (C := Sheaf (ProEt.topology T) Ab.{u + 1})
   exact ⟨scheme_finiteFree T ℓ h, scalarCalculus (padicSubfieldRingObjMap T ℓ h)⟩
 
+/-- Source: Compatibility.lean, A0.2 and Flat; ordinary module tensor adjunction;
+TwoColimit.lean, ExtendScalars
+(blueprint: lem-weil-pbc-condensed-flat-coefficient-calculus).
+Proof: choose a finite field basis; its coordinate maps are continuous by the
+finite-dimensional linear homeomorphism lemma. Continuous maps on profinite sets
+therefore identify the finite coefficient module with the free module of that rank.
+The exact strong monoidal inverse image from the point preserves this identification.
+The tensor/restriction adjunction is given by `p ↦ 1 ⊗ p` and multiplication.
+Restriction is exact because it only changes the action. Finite-stage tensor is exact
+because its underlying module is a finite direct sum. For the algebraic closure, its
+finite-stage coefficient cocone is a filtered colimit already on the finite-cover
+basis of profinite sets; pullback preserves this colimit. Module sheaf filtered
+colimits are exact and commute with tensor, giving flatness at the closure.
+The exact-functor factorization and exact-derived-functor lemmas identify derivation
+with termwise tensor on every complex, with its canonical shifts and cone triangles.
+Descend the termwise unit and counit through localization; their triangle identities
+are detected before localization, yielding the unbounded derived adjunction. -/
+theorem condensedAlgClCoefficientCalculus
+    (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T] (ℓ : ℕ) [Fact ℓ.Prime]
+    (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)) :
+    PreservesFiniteLimits (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl T ℓ E)) ∧
+    PreservesFiniteColimits (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl T ℓ E)) ∧
+    PreservesFiniteLimits
+      (Mod.comap (padicSubfieldRingObjToPadicAlgCl T ℓ E) :
+        Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (padicAlgClRingObj T ℓ) ⥤
+          Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (padicSubfieldRingObj T ℓ E)) ∧
+    PreservesFiniteColimits
+      (Mod.comap (padicSubfieldRingObjToPadicAlgCl T ℓ E) :
+        Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (padicAlgClRingObj T ℓ) ⥤
+          Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (padicSubfieldRingObj T ℓ E)) ∧
+    Nonempty ((Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl T ℓ E)) ⊣ (Mod.comap
+      (padicSubfieldRingObjToPadicAlgCl T ℓ E))) ∧
+    Nonempty (DerivedCategory.Q ⋙ (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl T ℓ
+      E)).leftDerivedFunctor ≅
+      (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl T ℓ E)).mapHomologicalComplex
+        (ComplexShape.up ℤ) ⋙ DerivedCategory.Q) ∧
+    Nonempty ((Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl T ℓ E)).leftDerivedFunctor ⊣
+      (Mod.comap (padicSubfieldRingObjToPadicAlgCl T ℓ E)).mapDerivedCategory) ∧
+    Nonempty ((Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl T ℓ E)).leftDerivedFunctor ≅
+      (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl T ℓ E)).mapDerivedCategory) ∧
+    (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl T ℓ E)).leftDerivedFunctor.IsTriangulated ∧
+    (∀ n : ℤ, Nonempty (shiftFunctor (DerivedCategory (Mod (Sheaf (ProEt.topology T) Ab.{u + 1})
+      (padicSubfieldRingObj T ℓ E))) n ⋙
+      (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl T ℓ E)).leftDerivedFunctor ≅
+        (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl T ℓ E)).leftDerivedFunctor ⋙
+        shiftFunctor (DerivedCategory (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (padicAlgClRingObj
+        T ℓ))) n)) := by
+  let := scalarAbelian (C := Sheaf (ProEt.topology T) Ab.{u + 1})
+  let := scalarMonoidal (C := Sheaf (ProEt.topology T) Ab.{u + 1})
+  let := scalarHasDerived (C := Sheaf (ProEt.topology T) Ab.{u + 1})
+  exact scalarCalculus (padicSubfieldRingObjToPadicAlgCl T ℓ E)
+
 /-- Coherence of the canonical multiplication and unit comparisons.
 Source: TwoColimit.lean, ExtendScalars; sheaf tensor coherence and localization
 (blueprint: lem-weil-pbc-condensed-flat-coefficient-calculus).
@@ -1207,57 +1259,5 @@ theorem condensedCoefficientCoherence
   · intro E
     exact scalarDerivedUnit_shift (padicSubfieldRingObjMap T ℓ (le_refl E))
       (condensedCoefficientMap_id T ℓ E)
-
-/-- Source: Compatibility.lean, A0.2 and Flat; ordinary module tensor adjunction;
-TwoColimit.lean, ExtendScalars
-(blueprint: lem-weil-pbc-condensed-flat-coefficient-calculus).
-Proof: choose a finite field basis; its coordinate maps are continuous by the
-finite-dimensional linear homeomorphism lemma. Continuous maps on profinite sets
-therefore identify the finite coefficient module with the free module of that rank.
-The exact strong monoidal inverse image from the point preserves this identification.
-The tensor/restriction adjunction is given by `p ↦ 1 ⊗ p` and multiplication.
-Restriction is exact because it only changes the action. Finite-stage tensor is exact
-because its underlying module is a finite direct sum. For the algebraic closure, its
-finite-stage coefficient cocone is a filtered colimit already on the finite-cover
-basis of profinite sets; pullback preserves this colimit. Module sheaf filtered
-colimits are exact and commute with tensor, giving flatness at the closure.
-The exact-functor factorization and exact-derived-functor lemmas identify derivation
-with termwise tensor on every complex, with its canonical shifts and cone triangles.
-Descend the termwise unit and counit through localization; their triangle identities
-are detected before localization, yielding the unbounded derived adjunction. -/
-theorem condensedAlgClCoefficientCalculus
-    (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T] (ℓ : ℕ) [Fact ℓ.Prime]
-    (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)) :
-    PreservesFiniteLimits (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl T ℓ E)) ∧
-    PreservesFiniteColimits (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl T ℓ E)) ∧
-    PreservesFiniteLimits
-      (Mod.comap (padicSubfieldRingObjToPadicAlgCl T ℓ E) :
-        Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (padicAlgClRingObj T ℓ) ⥤
-          Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (padicSubfieldRingObj T ℓ E)) ∧
-    PreservesFiniteColimits
-      (Mod.comap (padicSubfieldRingObjToPadicAlgCl T ℓ E) :
-        Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (padicAlgClRingObj T ℓ) ⥤
-          Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (padicSubfieldRingObj T ℓ E)) ∧
-    Nonempty ((Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl T ℓ E)) ⊣ (Mod.comap
-      (padicSubfieldRingObjToPadicAlgCl T ℓ E))) ∧
-    Nonempty (DerivedCategory.Q ⋙ (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl T ℓ
-      E)).leftDerivedFunctor ≅
-      (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl T ℓ E)).mapHomologicalComplex
-        (ComplexShape.up ℤ) ⋙ DerivedCategory.Q) ∧
-    Nonempty ((Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl T ℓ E)).leftDerivedFunctor ⊣
-      (Mod.comap (padicSubfieldRingObjToPadicAlgCl T ℓ E)).mapDerivedCategory) ∧
-    Nonempty ((Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl T ℓ E)).leftDerivedFunctor ≅
-      (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl T ℓ E)).mapDerivedCategory) ∧
-    (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl T ℓ E)).leftDerivedFunctor.IsTriangulated ∧
-    (∀ n : ℤ, Nonempty (shiftFunctor (DerivedCategory (Mod (Sheaf (ProEt.topology T) Ab.{u + 1})
-      (padicSubfieldRingObj T ℓ E))) n ⋙
-      (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl T ℓ E)).leftDerivedFunctor ≅
-        (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl T ℓ E)).leftDerivedFunctor ⋙
-        shiftFunctor (DerivedCategory (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (padicAlgClRingObj
-        T ℓ))) n)) := by
-  let := scalarAbelian (C := Sheaf (ProEt.topology T) Ab.{u + 1})
-  let := scalarMonoidal (C := Sheaf (ProEt.topology T) Ab.{u + 1})
-  let := scalarHasDerived (C := Sheaf (ProEt.topology T) Ab.{u + 1})
-  exact scalarCalculus (padicSubfieldRingObjToPadicAlgCl T ℓ E)
 
 end AlgebraicGeometry.ProEtale

@@ -80,7 +80,7 @@ theorem matrixDescentScalarMap_bijective (K : Type u) [Field K]
         _ = (Submodule.span K (Set.range c)).map A.toSubmodule.subtype := by
           rw [Submodule.map_span, ← Set.range_comp]
           rfl
-        _ = A.toSubmodule := by rw [c.span_eq]; simp
+        _ = A.toSubmodule := by rw [c.span_eq, Submodule.map_top, Submodule.range_subtype]
     have hrange : Submodule.span (SeparableClosure K)
         (Set.range fun i ↦ (c i : Matrix (Fin n) (Fin n) (SeparableClosure K))) =
         Submodule.span (SeparableClosure K)

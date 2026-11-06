@@ -10,6 +10,23 @@ public import WeilConjectures.AlgebraicGeometry.AffineAlternatingCechModel
 public import WeilConjectures.AlgebraicGeometry.DerivedModuleBaseChangeMap
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+import WeilConjectures.AlgebraicGeometry.AffineAlternatingCechPinnedMate
+import WeilConjectures.AlgebraicGeometry.ModulePullbackComparisonTargetAutomorphism
+
+/-! # Identification of the canonical map on the explicit alternating Čech model
+
+Source: blueprint `lem-pc-rf-base-change-flat-module`, Steps 2--5;
+Stacks Project, Tags 02KH, 08HY, and 0A1D.
+-/
+
+@[expose] public section
+
+set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+universe u w
+open CategoryTheory Limits
+namespace AlgebraicGeometry
 
 /-- The module base-change composite factors through ordinary pullback of the
 explicit Čech model, via a left-derived counit. No relative flatness is assumed
@@ -115,3 +132,5 @@ theorem affineAlternatingCech_baseChange_factorization
   · rw [hα, Functor.map_comp, ← Category.assoc, he]
     simp only [Iso.trans_hom, Functor.mapIso_hom, Category.assoc]
     rfl
+
+end AlgebraicGeometry

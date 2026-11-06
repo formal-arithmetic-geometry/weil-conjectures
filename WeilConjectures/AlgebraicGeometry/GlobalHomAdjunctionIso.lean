@@ -508,6 +508,74 @@ theorem schemeHomDirectImageComparison_counit_transport
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
+omit [∀ (R : Type u) [Ring R], HasDerivedCategory.{w} (ModuleCat.{u} R)] in
+/-- Transporting the pinned adjunction along a counit comparison gives the
+representative Hom equation for the new counit. This can be applied to the
+original-counit comparison without choosing another adjunction.
+Source: Stacks, Tags 079W and 06YJ (blueprint: lem-pc-global-hom-adjunction).
+Proof: the transported Hom equivalence precomposes by the comparison iso.
+The counit comparison equation replaces that composite by the composition counit.
+The recorded representative equation of the legacy adjunction gives the result. -/
+theorem schemeHomPullbackAdjunction_counit_transport
+    {X Y : Scheme.{u}} (f : X ⟶ Y) (δ : derivedPullback f ≅ derivedPullback f)
+    (ε : DerivedCategory.Qh ⋙ derivedPullback f ⟶
+      (Scheme.Modules.tensorPullback f).mapHomotopyCategory (.up ℤ) ⋙
+        DerivedCategory.Qh (C := SheafOfModules.{u} (moduleRings X.toRingedSpace)))
+    (hδ : ∀ N : HomotopyCategory
+        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (.up ℤ),
+      δ.hom.app (DerivedCategory.Qh.obj N) ≫ ε.app N =
+        (SingleComplexBaseChange.counit f).app N)
+    (N : HomotopyCategory (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (.up ℤ))
+    (K : HomotopyCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ))
+    (a : ((Scheme.Modules.tensorPullback f).mapHomotopyCategory (.up ℤ)).obj N ⟶ K) :
+    ((schemeHomPullbackAdjunction f).ofNatIsoLeft δ).homEquiv
+        (DerivedCategory.Qh.obj N) (DerivedCategory.Qh.obj K)
+        (ε.app N ≫ DerivedCategory.Qh.map a) =
+      (DerivedCategory.Qh
+        (C := SheafOfModules.{u} (moduleRings Y.toRingedSpace))).map
+        (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f)).mapHomotopyCategory
+          (.up ℤ)).homEquiv N K a) ≫
+        (RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerivedFunctorUnit.app K := by
+  rw [Adjunction.homEquiv_ofNatIsoLeft_apply, ← Category.assoc, hδ]
+  unfold schemeHomPullbackAdjunction SingleComplexBaseChange.counit
+  exact (Classical.choose_spec (exists_schemeDerivedAdjunction f
+    (hAdd := (Classical.choose exists_derivedPullbackComposition) f)
+    ((Classical.choose (Classical.choose_spec exists_derivedPullbackComposition)) f)
+    ((Classical.choose (Classical.choose_spec
+      (Classical.choose_spec exists_derivedPullbackComposition))) f))) N K a
+
+/-- The canonical global direct-image Hom comparison: Leray followed by the
+internal-Hom comparison defined by the evaluation mate equation.
+Source: Stacks, Tag 0B6I (blueprint: lem-pc-global-hom-adjunction). -/
+def schemeGlobalHomDirectImageMap {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (P Q : schemeDerivedCategory X) :
+    (schemeGlobalScalarRestriction f).obj ((schemeGlobalDerivedHom X).obj (op P, Q)) ⟶
+      (schemeGlobalDerivedHom Y).obj
+        (op ((schemeDerivedDirectImage f).obj P), (schemeDerivedDirectImage f).obj Q) :=
+  (mixedGlobalSectionsDirectImageIso f).inv.app
+      ((derivedInternalHom (Opens.grothendieckTopology X) X.sheaf).obj (op P, Q)) ≫
+    (schemeDerivedGlobalSections Y).map
+      ((Classical.choose (exists_schemeHomDirectImageComparison f)).app (op P, Q))
+
+/-- The global Hom adjunction map is induced by the counit, not an arbitrary iso.
+Source: Stacks, Tag 0B6I (blueprint: lem-pc-global-hom-adjunction). -/
+def schemeGlobalHomAdjunctionMap {X Y : Scheme.{u}}
+    [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y]
+    (f : X ⟶ Y)
+    (a : schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory X)
+    (adj : (schemeDerivedQCohProperty Y).lift
+      ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f)
+      (fun E ↦ (schemeDerivedDirectImage_qcqs_hasRightAdjoint X Y f).fst
+        E.obj E.property) ⊣ a)
+    (P : schemeDerivedQCohCategory X) (K : schemeDerivedQCohCategory Y) :
+    (schemeGlobalScalarRestriction f).obj
+      ((schemeGlobalDerivedHom X).obj (op P.obj, (a.obj K).obj)) ⟶
+      (schemeGlobalDerivedHom Y).obj (op ((schemeDerivedDirectImage f).obj P.obj), K.obj) :=
+  schemeGlobalHomDirectImageMap f P.obj (a.obj K).obj ≫
+    (schemeGlobalDerivedHom Y).map ((𝟙 _).op, (adj.counit.app K).hom)
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
 /-- The counit-induced global Hom adjunction is invertible, naturally in P and K.
 Source: Stacks, Tag 0B6I (blueprint: lem-pc-global-hom-adjunction).
 Proof:
@@ -624,71 +692,5 @@ def schemeGlobalHomAdjunctionIso {X Y : Scheme.{u}}
       (schemeGlobalDerivedHom Y).obj (op ((schemeDerivedDirectImage f).obj P.obj), K.obj) :=
   haveI := (schemeGlobalHomAdjunctionMap_isIso f a adj).1 P K
   asIso (schemeGlobalHomAdjunctionMap f a adj P K)
-
-omit [∀ (R : Type u) [Ring R], HasDerivedCategory.{w} (ModuleCat.{u} R)] in
-/-- Transporting the pinned adjunction along a counit comparison gives the
-representative Hom equation for the new counit. This can be applied to the
-original-counit comparison without choosing another adjunction.
-Source: Stacks, Tags 079W and 06YJ (blueprint: lem-pc-global-hom-adjunction).
-Proof: the transported Hom equivalence precomposes by the comparison iso.
-The counit comparison equation replaces that composite by the composition counit.
-The recorded representative equation of the legacy adjunction gives the result. -/
-theorem schemeHomPullbackAdjunction_counit_transport
-    {X Y : Scheme.{u}} (f : X ⟶ Y) (δ : derivedPullback f ≅ derivedPullback f)
-    (ε : DerivedCategory.Qh ⋙ derivedPullback f ⟶
-      (Scheme.Modules.tensorPullback f).mapHomotopyCategory (.up ℤ) ⋙
-        DerivedCategory.Qh (C := SheafOfModules.{u} (moduleRings X.toRingedSpace)))
-    (hδ : ∀ N : HomotopyCategory
-        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (.up ℤ),
-      δ.hom.app (DerivedCategory.Qh.obj N) ≫ ε.app N =
-        (SingleComplexBaseChange.counit f).app N)
-    (N : HomotopyCategory (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (.up ℤ))
-    (K : HomotopyCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ))
-    (a : ((Scheme.Modules.tensorPullback f).mapHomotopyCategory (.up ℤ)).obj N ⟶ K) :
-    ((schemeHomPullbackAdjunction f).ofNatIsoLeft δ).homEquiv
-        (DerivedCategory.Qh.obj N) (DerivedCategory.Qh.obj K)
-        (ε.app N ≫ DerivedCategory.Qh.map a) =
-      (DerivedCategory.Qh
-        (C := SheafOfModules.{u} (moduleRings Y.toRingedSpace))).map
-        (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f)).mapHomotopyCategory
-          (.up ℤ)).homEquiv N K a) ≫
-        (RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerivedFunctorUnit.app K := by
-  rw [Adjunction.homEquiv_ofNatIsoLeft_apply, ← Category.assoc, hδ]
-  unfold schemeHomPullbackAdjunction SingleComplexBaseChange.counit
-  exact (Classical.choose_spec (exists_schemeDerivedAdjunction f
-    (hAdd := (Classical.choose exists_derivedPullbackComposition) f)
-    ((Classical.choose (Classical.choose_spec exists_derivedPullbackComposition)) f)
-    ((Classical.choose (Classical.choose_spec
-      (Classical.choose_spec exists_derivedPullbackComposition))) f))) N K a
-
-/-- The canonical global direct-image Hom comparison: Leray followed by the
-internal-Hom comparison defined by the evaluation mate equation.
-Source: Stacks, Tag 0B6I (blueprint: lem-pc-global-hom-adjunction). -/
-def schemeGlobalHomDirectImageMap {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (P Q : schemeDerivedCategory X) :
-    (schemeGlobalScalarRestriction f).obj ((schemeGlobalDerivedHom X).obj (op P, Q)) ⟶
-      (schemeGlobalDerivedHom Y).obj
-        (op ((schemeDerivedDirectImage f).obj P), (schemeDerivedDirectImage f).obj Q) :=
-  (mixedGlobalSectionsDirectImageIso f).inv.app
-      ((derivedInternalHom (Opens.grothendieckTopology X) X.sheaf).obj (op P, Q)) ≫
-    (schemeDerivedGlobalSections Y).map
-      ((Classical.choose (exists_schemeHomDirectImageComparison f)).app (op P, Q))
-
-/-- The global Hom adjunction map is induced by the counit, not an arbitrary iso.
-Source: Stacks, Tag 0B6I (blueprint: lem-pc-global-hom-adjunction). -/
-def schemeGlobalHomAdjunctionMap {X Y : Scheme.{u}}
-    [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y]
-    (f : X ⟶ Y)
-    (a : schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory X)
-    (adj : (schemeDerivedQCohProperty Y).lift
-      ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f)
-      (fun E ↦ (schemeDerivedDirectImage_qcqs_hasRightAdjoint X Y f).fst
-        E.obj E.property) ⊣ a)
-    (P : schemeDerivedQCohCategory X) (K : schemeDerivedQCohCategory Y) :
-    (schemeGlobalScalarRestriction f).obj
-      ((schemeGlobalDerivedHom X).obj (op P.obj, (a.obj K).obj)) ⟶
-      (schemeGlobalDerivedHom Y).obj (op ((schemeDerivedDirectImage f).obj P.obj), K.obj) :=
-  schemeGlobalHomDirectImageMap f P.obj (a.obj K).obj ≫
-    (schemeGlobalDerivedHom Y).map ((𝟙 _).op, (adj.counit.app K).hom)
 
 end AlgebraicGeometry

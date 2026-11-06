@@ -5,6 +5,11 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+import all Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 
@@ -110,68 +115,58 @@ private theorem total_classical_chosen
       exact (Category.assoc _ _ _).symm
     rw [ht']
     exact F.rightDerivedFunctor.map_comp_assoc _ _ _
-  let qC := (DerivedCategory.Plus.quotientCompQhIso C).app L
-  let qD := (DerivedCategory.Plus.quotientCompQhIso D).app (F.rightDerivedPlusComplex M)
-  let v' := DerivedCategory.Plus.ι.preimageIso
-    (X := (DerivedCategory.Plus.singleFunctor C 0).obj M)
-    (Y := DerivedCategory.Plus.Q.obj L) e
-  have hUnit : F.rightDerivedFunctorPlusUnit.app L =
-      qD.inv ≫ ηp ≫ F.rightDerivedFunctorPlus.map qC.hom := by
-    have h1 : F.rightDerivedFunctorPlusUnit.app L =
-        (DerivedCategory.Plus.quotientCompQhIso D).inv.app (F.mapCochainComplexPlus.obj L) ≫
-          DerivedCategory.Plus.Qh.map (F.quotientCompMapHomotopyCategoryPlusIso.inv.app L) ≫
-            ηp ≫ F.rightDerivedFunctorPlus.map qC.hom :=
-      F.rightDerivedFunctorPlusUnit_app L
-    have h2 : DerivedCategory.Plus.Qh.map
-        (F.quotientCompMapHomotopyCategoryPlusIso.inv.app L) = 𝟙 _ :=
-      CategoryTheory.Functor.map_id _ _
-    rw [h1, h2]
-    exact congrArg (_ ≫ ·) (Category.id_comp _)
-  have hv : v.hom ≫ qC.hom = v'.hom := by
-    apply DerivedCategory.Plus.ι.map_injective
-    rw [Functor.map_comp]
-    dsimp only [v, v']
-    erw [Functor.preimageIso_hom, Functor.map_preimage, Functor.preimageIso_hom,
-      Functor.map_preimage]
-    dsimp only [t, e, Iso.trans_hom, Iso.symm_hom, Iso.app_hom]
-    erw [Category.assoc, Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
-  have hplus : (F.rightDerivedFunctorPlusObjSingleFunctorIsoQ M).hom =
-      F.rightDerivedFunctorPlus.map v.hom ≫ inv ηp ≫ qD.hom := by
-    rw [← cancel_mono (F.rightDerivedFunctorPlusObjSingleFunctorIsoQ M).inv, Iso.hom_inv_id]
-    dsimp only [Functor.rightDerivedFunctorPlusObjSingleFunctorIsoQ, Iso.trans_inv,
-      Iso.symm_inv, asIso_hom, Functor.mapIso_inv]
-    erw [hUnit]
-    simp only [Category.assoc, Iso.hom_inv_id_assoc, IsIso.inv_hom_id_assoc,
-      ← Functor.map_comp]
-    erw [reassoc_of% hv]
-    rw [Iso.hom_inv_id, CategoryTheory.Functor.map_id]
-  have hqD : DerivedCategory.Plus.ι.map qD.hom =
-      (DerivedCategory.quotientCompQhIso D).hom.app
-        ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj R.cochainComplex) := rfl
+  have he : (DerivedCategory.Plus.homologyFunctorObjQIso
+      (F.rightDerivedPlusComplex M) (n : ℤ)).hom =
+      H.map ((DerivedCategory.quotientCompQhIso D).hom.app
+        ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj R.cochainComplex)) ≫
+      (DerivedCategory.homologyFunctorFactors D (n : ℤ)).hom.app _ := by
+    change _ = H.map (𝟙 _) ≫ _
+    rw [H.map_id, Category.id_comp]
+    rfl
   let c := (F.rightDerivedFunctorPlusCompatibility.app
     ((DerivedCategory.Plus.singleFunctor C 0).obj M)).inv
   let b := DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlus.map v.hom ≫ inv ηp)
   let j := (DerivedCategory.Plus.homologyFunctorObjQIso
     (F.rightDerivedPlusComplex M) (n : ℤ)).hom
   let k := (R.isoRightDerivedObjCochainComplex F n).inv
+  have hplus : (F.rightDerivedFunctorPlusObjSingleFunctorIsoQ M).hom =
+      F.rightDerivedFunctorPlus.map v.hom ≫ inv ηp := by
+    have hηp : F.rightDerivedFunctorPlusUnit.app L = ηp := by
+      erw [Functor.rightDerivedFunctorPlusUnit_app]
+      change 𝟙 _ ≫ DerivedCategory.Plus.Qh.map (𝟙 _) ≫ ηp ≫
+        F.rightDerivedFunctorPlus.map (𝟙 _) = _
+      erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id,
+        Category.id_comp, Category.id_comp, Category.comp_id]
+    have : IsIso (F.rightDerivedFunctorPlusUnit.app L) := hηp ▸ inferInstance
+    have hq : (DerivedCategory.quotientCompQhIso C).symm.app R.cochainComplex =
+        Iso.refl _ := rfl
+    have hv : v.hom = (DerivedCategory.Plus.ι.preimageIso
+        (X := (DerivedCategory.Plus.singleFunctor C 0).obj M)
+        (Y := DerivedCategory.Plus.Q.obj L) e).hom := by
+      dsimp only [v, t]
+      erw [hq, Iso.trans_refl]
+    change F.rightDerivedFunctorPlus.map
+      (DerivedCategory.Plus.ι.preimageIso
+        (X := (DerivedCategory.Plus.singleFunctor C 0).obj M)
+        (Y := DerivedCategory.Plus.Q.obj L) e).hom ≫
+      inv (F.rightDerivedFunctorPlusUnit.app L) = _
+    rw [IsIso.inv_eq_inv.mpr hηp, hv]
   calc
-    _ = H.map (c ≫ b ≫ DerivedCategory.Plus.ι.map qD.hom) ≫ j ≫ k := by
+    _ = H.map (c ≫ b) ≫ j ≫ k := by
       dsimp only [Functor.homologyRightDerivedFunctorObjSingleFunctorIso,
         Functor.homologyRightDerivedFunctorPlusObjSingleFunctorIso,
         Iso.trans, Iso.symm, Functor.mapIso, Iso.app]
       erw [hplus]
-      dsimp only [DerivedCategory.Plus.homologyFunctor, Functor.comp_map, b]
-      rw [← Category.assoc (F.rightDerivedFunctorPlus.map v.hom), Functor.map_comp]
-      exact (H.map_comp_assoc c _ (j ≫ k)).symm
-    _ = H.map ((F.rightDerivedFunctor.map e.hom ≫
+      dsimp only [DerivedCategory.Plus.homologyFunctor, Functor.comp_map]
+      exact (H.map_comp_assoc c b (j ≫ k)).symm
+    _ = H.map (F.rightDerivedFunctor.map e.hom ≫
         F.rightDerivedFunctor.map
           ((DerivedCategory.quotientCompQhIso C).inv.app R.cochainComplex) ≫ inv η) ≫
-          DerivedCategory.Plus.ι.map qD.hom) ≫ j ≫ k := by
-      rw [← hm, Category.assoc]
+        j ≫ k := congrArg (fun z ↦ H.map z ≫ j ≫ k) hm
     _ = _ := by
-      rw [hqD]
-      dsimp only [j, DerivedCategory.Plus.homologyFunctorObjQIso,
-        Functor.rightDerivedFunctorObjQIso, e, Iso.trans_hom,
+      dsimp only [j]
+      conv_lhs => erw [he]
+      dsimp only [Functor.rightDerivedFunctorObjQIso, e, Iso.trans_hom,
         Iso.symm_hom, Functor.mapIso_hom, Iso.app_hom, asIso_inv]
       simp only [Functor.map_comp, Category.assoc]
       rfl

@@ -20,7 +20,7 @@ open CategoryTheory CategoryTheory.Functor CategoryTheory.Limits
 attribute [local instance]
   AlgebraicGeometry.Scheme.proEtaleRingRestrictionPullbackInv_isIso
 attribute [local implicit_reducible] AlgebraicGeometry.Scheme.pbcDerivedRestrict
-  SheafOfModules.restrictScalars
+  Functor.mapHomologicalComplex SheafOfModules.restrictScalars
 attribute [local irreducible] Functor.mapDerivedCategory Functor.leftAdjoint
   AlgebraicGeometry.Scheme.proEtaleRingDerivedPullbackFactors SheafOfModules.monoidalCategory
 
@@ -182,6 +182,37 @@ end AlgebraicGeometry.Scheme.CoefficientTensorChain
 
 namespace AlgebraicGeometry.Scheme.CoefficientTensorTransport
 
+variable {X Y : Scheme.{u}} (f : X ⟶ Y)
+  (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
+  (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
+  (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S)
+
+/-- Exact derived restriction along the identity, identified with the identity functor.
+Source: functoriality of exact derived functors; Stacks Tag 07A6. -/
+def identityRestriction : pbcDerivedRestrict (𝟙 R) ≅
+    𝟭 (DerivedCategory (proEtaleRingModules Y R)) :=
+  Functor.mapDerivedCategoryNatIso (Iso.refl _) ≪≫
+    Functor.mapDerivedCategoryIdIso (proEtaleRingModules Y R)
+
+/-- The canonical pullback comparison, with identity restriction on the base removed.
+Source: Stacks Tags 0D6D and 07A6. -/
+def pullback :
+    proEtaleRingDerivedPullback f R S c ⋙ pbcDerivedRestrict c.hom ≅
+      proEtaleRingDerivedPullback f R
+        ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R) (Iso.refl _) :=
+  proEtaleRingRestrictionDerivedPullback f R R
+      ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R) S
+      (𝟙 R) c.hom (Iso.refl _) c (by simp) ≪≫
+    isoWhiskerRight (identityRestriction R) _ ≪≫ Functor.leftUnitor _
+
+end AlgebraicGeometry.Scheme.CoefficientTensorTransport
+
+namespace AlgebraicGeometry.Scheme.CoefficientTensorTransport
+
+attribute [local irreducible] CoefficientTensorChain.complexPullback pullback
+
+set_option maxHeartbeats 800000 in
+-- Converting exact-derived functor identities requires a larger elaboration budget.
 /-- The canonical derived pullback comparison is the localization of the specified
 ordinary comparison on every complex.
 
@@ -266,28 +297,5 @@ theorem pullback_pair_factors {X Y : Scheme.{u}} (f : X ⟶ Y)
   ext
   · exact pullback_factors f R S c P
   · exact pullback_factors f R S c Q
-
-variable {X Y : Scheme.{u}} (f : X ⟶ Y)
-  (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
-  (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
-  (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S)
-
-/-- Exact derived restriction along the identity, identified with the identity functor.
-Source: functoriality of exact derived functors; Stacks Tag 07A6. -/
-def identityRestriction : pbcDerivedRestrict (𝟙 R) ≅
-    𝟭 (DerivedCategory (proEtaleRingModules Y R)) :=
-  Functor.mapDerivedCategoryNatIso (Iso.refl _) ≪≫
-    Functor.mapDerivedCategoryIdIso (proEtaleRingModules Y R)
-
-/-- The canonical pullback comparison, with identity restriction on the base removed.
-Source: Stacks Tags 0D6D and 07A6. -/
-def pullback :
-    proEtaleRingDerivedPullback f R S c ⋙ pbcDerivedRestrict c.hom ≅
-      proEtaleRingDerivedPullback f R
-        ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R) (Iso.refl _) :=
-  proEtaleRingRestrictionDerivedPullback f R R
-      ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R) S
-      (𝟙 R) c.hom (Iso.refl _) c (by simp) ≪≫
-    isoWhiskerRight (identityRestriction R) _ ≪≫ Functor.leftUnitor _
 
 end AlgebraicGeometry.Scheme.CoefficientTensorTransport

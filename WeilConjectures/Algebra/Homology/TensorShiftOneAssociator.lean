@@ -84,7 +84,7 @@ theorem tensorShiftOne_associator (P T U : CochainComplex C ℤ) :
     (p + q + 1) _ (by dsimp; omega) (by dsimp; omega),
     HomologicalComplex.mapBifunctor₂₃.ι_eq _ _ _ _ _ _ _ _ _ _ _
     (q + r) _ rfl h₄] at he
-  erw [Category.id_comp, Category.comp_id]
+  erw [Category.comp_id]
   simp only [Category.assoc] at he
   convert he.symm using 1 <;> rfl
 

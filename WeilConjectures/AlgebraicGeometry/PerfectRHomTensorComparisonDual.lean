@@ -70,6 +70,12 @@ theorem exists_perfect_rhom_dual
       Scheme.exists_bounded_finiteFree_derived_dual_model X V F hFb hFf
     obtain ⟨eR⟩ := derivedInternalHom_restrict_open X.toRingedSpace V
       K.obj (𝟙_ (schemeDerivedCategory X))
+    let C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V)
+    let : Category.{w} (@DerivedCategory (SheafOfModules.{u}
+        ((sheafCompose ((Opens.grothendieckTopology X.toRingedSpace).over V)
+          (forget₂ CommRingCat RingCat)).obj (X.toRingedSpace.sheaf.over V))) _ _
+        (inferInstanceAs (HasDerivedCategory.{w} C))) :=
+      inferInstanceAs (Category.{w} (DerivedCategory C))
     let H := @derivedInternalHom.{u, w} (Over V) _
       ((Opens.grothendieckTopology X.toRingedSpace).over V)
       (X.toRingedSpace.sheaf.over V) (inferInstanceAs (HasDerivedCategory.{w}

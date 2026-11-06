@@ -38,7 +38,6 @@ private theorem small_skeleton_of_family {C : Type v} [Category.{z} C]
   exact P.ι.mapSkeleton_injective (congrArg Subtype.val hst)
 
 namespace AlgebraicGeometry.Scheme
-
 /-- The middle and overlap terms form small families of isomorphism classes.
 Source: Step 2 of lem-pc-perfect-complexes-compact-set, Stacks Project, Tags 08BV and 08DR
 (blueprint: lem-perfect-gluing-endpoints-small).
@@ -123,5 +122,6 @@ theorem perfectGluing_endpoints_small (X : Scheme.{u}) (U V : X.Opens)
     refine ⟨toSkeleton EW, ?_⟩
     let ew := PW.ι.mapIso (fromSkeletonToSkeletonIso EW)
     exact ⟨(perfectGluingDirectImage Y (A ⊓ B)).mapIso ew ≪≫ e⟩
+
 
 end AlgebraicGeometry.Scheme

@@ -261,6 +261,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import WeilConjectures.AlgebraicGeometry.CondensedStratumModelInductionStepNonemptyGluing
 public import WeilConjectures.AlgebraicGeometry.CondensedFiniteModelExtensions
+public import WeilConjectures.AlgebraicGeometry.CondensedSheafExtContinuity
+public import WeilConjectures.AlgebraicGeometry.CondensedLocalPieceHomContinuity
 public import WeilConjectures.AlgebraicGeometry.CondensedConstructiblePiece
 public import WeilConjectures.AlgebraicGeometry.CondensedLocallyClosedPiece
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
@@ -273,6 +275,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
 public import Mathlib.CategoryTheory.Triangulated.Yoneda
 public import Mathlib.CategoryTheory.Abelian.DiagramLemmas.Four
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
+public import WeilConjectures.AlgebraicGeometry.CondensedLfpHomContinuity
 public import WeilConjectures.AlgebraicGeometry.CondensedFiniteFreeDerivedHom
 public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedQcqsPushforwardContinuitySupplement
 public import WeilConjectures.AlgebraicGeometry.CondensedFiniteFreeInternalHomColimits
@@ -294,6 +297,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.ProperBaseChange.Grot
 public import WeilConjectures.CategoryTheory.Sites.CohomologyDerivedEvaluation
 public import WeilConjectures.AlgebraicGeometry.CondensedFiniteFreeTensorExact
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
+public import WeilConjectures.AlgebraicGeometry.CondensedFiniteFreeHomContinuity
 public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 public import WeilConjectures.AlgebraicGeometry.CondensedLocalPieceCostalkModel
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
@@ -307,6 +311,7 @@ public import Mathlib.Algebra.Homology.TotalComplex
 public import WeilConjectures.Algebra.Homology.FunctorialObjectResolution
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 public import Mathlib.Algebra.Homology.SingleHomology
+public import WeilConjectures.AlgebraicGeometry.CondensedClosedCostalkDerivedContinuity
 public import WeilConjectures.AlgebraicGeometry.CondensedOpenClosedRecollement
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TriangleShift
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHomology
@@ -375,6 +380,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImme
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal
 public import WeilConjectures.CategoryTheory.DerivedCategory.DegreewiseLimits
+public import WeilConjectures.AlgebraicGeometry.CondensedClosedCostalkInjectiveContinuity
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 public import WeilConjectures.AlgebraicGeometry.CondensedConstructibleExtensionTower
 public import WeilConjectures.AlgebraicGeometry.CondensedConstructibleOneStep
@@ -642,6 +648,49 @@ private lemma descentHomToAlgCl_injective
   have e' := (cancel_epi ((derivedExtendScalarsCompIso X ℓ h).inv.app C)).mp e
   simpa only [← Category.assoc, cancel_mono] using e'
 
+/-- Derived coefficient Hom adjunction, its coefficient naturality, the uniformly
+bounded-below coefficient tensor colimit, and bijectivity on finite representatives.
+Source: blueprint main-20261015, sk-thm-sfb-qlbar-two-colimit,
+sk-lem-coefficient-finite-descent-hom.md, clauses (1)--(3)
+(blueprint: det-lem-coefficient-finite-descent-hom).
+
+Proof, following the ten DAG steps:
+1. On a small skeleton of the pro-etale site, sheaf tensor is closed and preserves
+colimits (sk-def-sfb-sheaf-tensor). The extension/restriction adjunction of
+sk-def-sfb-change-of-scalars has exact restriction; lem-sfb-subfield-flat and
+lem-sfb-qlbar-flat make extension exact as well.
+2. Lift this adjunction to complexes by lem-weil-pbc-termwise-adjunction-homotopy.
+Exact functors preserve quasi-isomorphisms by
+lem-weil-pbc-exact-functor-derived-factorization. Apply lem-sfb-adjunction-localization:
+the Hom map is restriction followed by the unit, and its inverse is extension
+followed by the counit. Restriction commutes with shifts.
+3. Identify the recorded left-derived extensions with these termwise extensions
+by the exact-functor clause of sk-def-sfb-derived-categories.
+4. Tensor multiplication and insertion of 1 give inverse transitivity maps.
+Their unit compatibility and lem-weil-pbc-conjugate-iso-unit-equation identify
+them with def-sfb-derived-extend-comp-iso and the recorded finite comparison.
+5. The inclusion map sends the old unit to the new one. Counit naturality gives
+the two displayed Hom-naturality identities, also for the algebraic closure.
+6. The finite fields containing E form a nonempty directed poset, by finite
+composita (det-def-sfb-qlbar-condensed-subextensions). The ring cocone of
+sk-prop-sfb-qlbar-colimit-x remains colimiting on this tail: extend a cocone on
+the tail to every finite H via EH. All legs remain the actual inclusions.
+7. Use def-weil-pbc-internal-abelian-sheaf-module-equivalence and
+lem-sfb-directed-ring-sheaf-module-colimit to identify this same cocone as a
+colimit of E-module sheaves.
+8. Tensor with each term of the representative preserves this colimit, by
+lem-weil-pbc-independent-sheaf-tensor-colimits; its balancing maps are those of
+def-sfb-modobj-relative-tensor. The comparisons commute with differentials.
+Additivity preserves every zero term below the given lower bound.
+9. The standing scheme is Noetherian by lem-weil-pbc-finite-type-over-noetherian.
+Bounded constructibility and lem-sfb-bounded-representative give a bounded
+representative of D.
+10. Apply sk-lem-constructible-ext-continuity with source C, the coefficient
+diagram of steps 6--8, and degree r. The identities of step 5 identify its
+comparison with coefficient extension on Hom. A filtered-colimit element is a
+finite representative, and equality is equality at a common later stage. Thus
+the last two clauses say exactly that this canonical comparison is bijective.
+-/
 theorem coefficient_finite_descent_hom
     {k : Type u} [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (_hpℓ : p ≠ ℓ)
     [X.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]

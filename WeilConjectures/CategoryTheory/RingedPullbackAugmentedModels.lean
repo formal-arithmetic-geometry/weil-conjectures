@@ -52,6 +52,8 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 import Mathlib.RingTheory.Flat.CategoryTheory
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import Mathlib.CategoryTheory.Adjunction.Additive
+import all Mathlib.Algebra.Homology.DerivedCategory.Basic
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # Pullback transports augmented models on flat K-flat representatives
 

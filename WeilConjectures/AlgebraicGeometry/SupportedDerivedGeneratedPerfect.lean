@@ -9,6 +9,9 @@ module
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
 public import Mathlib.Topology.QuasiSeparated
+import WeilConjectures.AlgebraicGeometry.SupportedPerfectGenerator
+import WeilConjectures.AlgebraicGeometry.PerfectObjectCompact
+import WeilConjectures.AlgebraicGeometry.SupportedDerivedGeneratedPerfectCore
 
 /-! # Building supported derived objects from a perfect complex
 
@@ -20,6 +23,14 @@ Coproducts are specified by colimiting cofans, so the statement does not require
 coproduct instance. Distinguished triangles are taken in the ambient derived category;
 the sequence objects lie in its full quasi-coherent subcategory.
 -/
+
+@[expose] public section
+
+universe u w
+
+open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
+
+namespace AlgebraicGeometry
 
 /-- Every quasi-coherent derived object supported off a quasi-compact open is built from
 one perfect supported complex by successive cones and a sequential homotopy colimit.
@@ -82,3 +93,5 @@ theorem supported_derived_generated_perfect (Y : Scheme.{u})
         simpa only [Set.mem_compl_iff, not_not, SetLike.mem_coe] using hy))
     · intro k y hy
       exact hQ k y (by simpa only [Set.mem_compl_iff, not_not, SetLike.mem_coe] using hy)
+
+end AlgebraicGeometry

@@ -10,6 +10,8 @@ public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Mathlib.AlgebraicGeometry.AffineScheme
 
+import WeilConjectures.AlgebraicGeometry.AffinePerfectSupportExtension
+import WeilConjectures.AlgebraicGeometry.SupportedOverlapRestrictionData
 
 /-! # Supported perfect extension across an affine overlap
 
@@ -17,6 +19,35 @@ Source: Stacks Project, Tags 08EK and 09IM.
 (blueprint: lem-sc-supported-overlap-perfect-extension).
 -/
 
+@[expose] public section
+
+set_option autoImplicit false
+universe u w
+open CategoryTheory CategoryTheory.Limits
+namespace AlgebraicGeometry.Scheme
+attribute [local instance] Functor.additive_of_preserves_binary_products
+  comp_preservesFiniteLimits comp_preservesFiniteColimits
+
+set_option maxHeartbeats 800000 in
+-- The chosen overlap localization and its open-site family are dependent data.
+set_option synthInstance.maxSize 2048 in
+set_option backward.isDefEq.respectTransparency false in
+/-- Extend the stabilization of a supported perfect object from the overlap to V.
+Source: Stacks Project, Tag 09IM, affine extension step using Tag 08EK.
+(blueprint: lem-sc-supported-overlap-perfect-extension).
+
+Proof: Regard W intersect V as the inverse-image open U in V. Its inclusion into the
+ambient overlap is a scheme isomorphism. Quasi-separatedness makes the intersection of
+the compact opens W and V compact; the homeomorphism makes U compact. The inverse image
+of T in V is closed. Its complement is compact because it identifies with the intersection
+of V and the compact open complement of T. Restrict F from W to the overlap. Restriction
+of strictly perfect local models proves perfectness there, and exactness and the stalk
+comparison prove support on the pullback of T. Transport this object to U and apply
+exists_perfect_supported_extension on the affine scheme V.toScheme. Transport the resulting
+restriction isomorphism back through the scheme isomorphism. Exact restriction preserves
+biproducts and commutes with shifts, identifying its stabilized target with the displayed
+restriction of F plus F[1]. The same comparisons give the stated support on V. Empty
+opens and T are covered by the extension theorem and the zero restriction categories. -/
 theorem exists_supported_overlap_perfect_extension
     (X : Scheme.{u}) [QuasiSeparatedSpace X]
     (W V : X.Opens) (hW : IsCompact (W : Set X)) (hV : IsAffineOpen V)
@@ -51,3 +82,5 @@ theorem exists_supported_overlap_perfect_extension
   obtain ⟨Q, hQ, hQT, ⟨q⟩⟩ := exists_perfect_supported_extension V.toScheme
     (Subtype.val ⁻¹' T) hTV hTVc U hU G hG hGT
   exact ⟨Q, hQ, hQT, ⟨(d.app Q).symm ≪≫ e.functor.mapIso q ≪≫ g⟩⟩
+
+end AlgebraicGeometry.Scheme

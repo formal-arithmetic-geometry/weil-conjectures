@@ -8,12 +8,21 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Mathlib.Topology.QuasiSeparated
+import WeilConjectures.AlgebraicGeometry.SupportedDetectorOpenLiftCore
 
 /-! # Lifting the detector from the smaller open
 
 Source: Stacks Project, Tag 0A9A.
 (blueprint: lem-pc-supported-detector-open-lift).
 -/
+
+@[expose] public section
+
+set_option autoImplicit false
+
+universe u w
+open CategoryTheory CategoryTheory.Limits
+namespace AlgebraicGeometry
 
 /-- The lift of the smaller-cover detector detects supported objects whose open unit
 is invertible; it need not detect arbitrary supported objects on X.
@@ -95,3 +104,5 @@ theorem exists_supported_detector_open_lift
     apply (adj.homEquiv _ _).injective
     apply (cancel_mono (inv (adj.unit.app K.obj))).mp
     exact (hHom n).elim _ _
+
+end AlgebraicGeometry

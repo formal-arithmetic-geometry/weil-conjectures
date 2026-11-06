@@ -64,6 +64,10 @@ theorem coefficientScalarTensor_complexCounit (Z : Scheme.{u})
     DerivedCategory.Qh.map_id _]
   simp only [Category.id_comp, Category.comp_id]
 
+attribute [local irreducible] coefficientInternalScalarComplex
+
+set_option maxHeartbeats 800000 in
+-- Check the counit and localization corner with native functor object types.
 /-- The tensor of the two scalar complex comparisons, followed by localization,
 is the tensor of the two derived counits followed by homotopy localization.
 Use the two scalar-counit equations, tensor their components, and compose with

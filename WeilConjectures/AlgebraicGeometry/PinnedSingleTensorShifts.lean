@@ -6,9 +6,6 @@ Authors: Bin Wu
 
 module
 
-public import Mathlib.Algebra.Homology.Localization
-import all Mathlib.Algebra.Homology.Localization
-
 public import WeilConjectures.AlgebraicGeometry.PinnedPullbackCounitShifts
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
 
@@ -172,13 +169,32 @@ lemma mappedHomotopySingleIso_hom_app {A B : Type*} [Category A] [Category B]
     Functor.associator_hom_app, Functor.whiskerLeft_app, Quotient.lift.isLift_hom,
     Functor.associator_inv_app, Functor.whiskerRight_app, Category.id_comp]
   all_goals erw [Category.id_comp, Category.comp_id]
-  all_goals exact Category.id_comp _
 
 end CategoryTheory.SingleFunctors
 
 namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency.types false
 
+/-- The selected counit followed by the actual termwise mapped-single comparison.
+Source: Stacks Project, Tag 08HY; Mathlib mapped-single comparison.
+(blueprint: lem-pc-pinned-single-tensor-shifts). -/
+def pinnedSingleTensorCounit
+    [∀ Y : Scheme.{u},
+      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+    [∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z), (Scheme.Modules.tensorPullback k).Additive]
+    {X X' : Scheme.{u}} (g' : X' ⟶ X) (n : ℤ) (G : X.Modules) :
+    (derivedPullback.{u, w} g').obj ((DerivedCategory.singleFunctor
+      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj G) ⟶
+    (DerivedCategory.singleFunctor
+      (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) n).obj
+        ((Scheme.Modules.tensorPullback g').obj G) :=
+  (pinnedPullbackCounit.{u, w} g').app ((HomotopyCategory.singleFunctor _ n).obj G) ≫
+    DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
+      ((HomologicalComplex.singleMapHomologicalComplex
+        (Scheme.Modules.tensorPullback g') (ComplexShape.up ℤ) n).hom.app G))
+
+set_option maxHeartbeats 800000 in
+-- The nested family comparison must identify the shared sheaf-module category instances.
 /-- The tensor comparison is a morphism of single-functor families.
 Source: Stacks Project, Tag 08HY; the derived counit universal property and
 Mathlib's termwise mapped-single shift identity.
@@ -230,24 +246,5 @@ theorem exists_pinned_single_tensor_shifts
   rw [SingleFunctors.mappedHomotopySingleIso_hom_app]
   simp only [Category.id_comp, Category.comp_id]
   rfl
-
-/-- The selected counit followed by the actual termwise mapped-single comparison.
-Source: Stacks Project, Tag 08HY; Mathlib mapped-single comparison.
-(blueprint: lem-pc-pinned-single-tensor-shifts). -/
-def pinnedSingleTensorCounit
-    [∀ Y : Scheme.{u},
-      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
-    [∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z), (Scheme.Modules.tensorPullback k).Additive]
-    {X X' : Scheme.{u}} (g' : X' ⟶ X) (n : ℤ) (G : X.Modules) :
-    (derivedPullback.{u, w} g').obj ((DerivedCategory.singleFunctor
-      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj G) ⟶
-    (DerivedCategory.singleFunctor
-      (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) n).obj
-        ((Scheme.Modules.tensorPullback g').obj G) :=
-  cast (by rfl) ((pinnedPullbackCounit.{u, w} g').app
-    ((HomotopyCategory.singleFunctor _ n).obj G) ≫
-    DerivedCategory.Qh.{w}.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
-      ((HomologicalComplex.singleMapHomologicalComplex
-        (Scheme.Modules.tensorPullback g') (ComplexShape.up ℤ) n).hom.app G)))
 
 end AlgebraicGeometry

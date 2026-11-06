@@ -626,7 +626,7 @@ theorem resolution_exists (n : ℕ) : Nonempty (Resolution d (X := X) (Y := Y) K
   obtain ⟨hred, hret, hbounded⟩ :=
     (CompletedConstantReduction.completed_constant_sheaf_reduction Y d.ideal).2.2.2
       n F q a b hq' (fun i ↦ ⟨(hF i).2, (hF i).1⟩) hbound
-  let C := ((completedAdicChange Y
+  let C : CochainComplex (modules d Y) ℤ := ((completedAdicChange Y
     (CompletedConstantReduction.base Y d.ideal)).mapHomologicalComplex
     (.up ℤ)).obj ((CompletedConstantReduction.constantComplex Y A).obj F)
   have : HasFiniteBiproducts (modules d Y) := HasFiniteBiproducts.of_hasFiniteProducts
@@ -899,6 +899,25 @@ def Resolution.total :=
   SignedProjectionResolution.totalMate f (ring d Y) (ring d X) (coefficients d f)
     r.injective r.coefficient
 
+set_option linter.flexible false in
+/-- The normalized source comparison, specified by the mixed representative squares.
+Source: blueprint order 1275 (blueprint: lemma-weil-pbc-perfect-projection-formula). -/
+def Resolution.sourceModel :=
+  SignedProjectionResolution.sourceModel f (ring d Y) (ring d X) (coefficients d f)
+    aY K (quotient d Y n) r.injective r.isKInjective r.representsK
+    r.coefficient r.representsQuotient r.package r.bounded
+
+set_option linter.flexible false in
+/-- The normalized target comparison, using exact pullback, mixed tensor and the
+K-injective right-derived unit. Source: blueprint order 1275
+(blueprint: lemma-weil-pbc-perfect-projection-formula). -/
+def Resolution.targetModel :=
+  ((directImage d f).mapIso
+    (aX.tensor.mapIso (Iso.prod (Iso.refl K) (quotientDerivedPullback d f n)))).symm ≪≫
+      SignedProjectionResolution.targetModel f (ring d Y) (ring d X) (coefficients d f)
+        aX K (quotient d Y n) r.injective r.isKInjective r.representsK
+        r.coefficient r.representsQuotient r.package r.bounded
+
 section TotalizationProof
 
 attribute [local irreducible] proEtaleRingModulePullback proEtaleRingModuleDirectImage
@@ -998,23 +1017,6 @@ def exchange :=
 
 set_option linter.flexible false in
 set_option linter.flexible false in
-/-- The normalized target comparison, using exact pullback, mixed tensor and the
-K-injective right-derived unit. Source: blueprint order 1275
-(blueprint: lemma-weil-pbc-perfect-projection-formula). -/
-def Resolution.targetModel :=
-  ((directImage d f).mapIso
-    (aX.tensor.mapIso (Iso.prod (Iso.refl K) (quotientDerivedPullback d f n)))).symm ≪≫
-      SignedProjectionResolution.targetModel f (ring d Y) (ring d X) (coefficients d f)
-        aX K (quotient d Y n) r.injective r.isKInjective r.representsK
-        r.coefficient r.representsQuotient r.package r.bounded
-
-/-- The normalized source comparison, specified by the mixed representative squares.
-Source: blueprint order 1275 (blueprint: lemma-weil-pbc-perfect-projection-formula). -/
-def Resolution.sourceModel :=
-  SignedProjectionResolution.sourceModel f (ring d Y) (ring d X) (coefficients d f)
-    aY K (quotient d Y n) r.injective r.isKInjective r.representsK
-    r.coefficient r.representsQuotient r.package r.bounded
-
 attribute [local irreducible] proEtaleProjectionFormulaMate proEtaleAmbientRingedExchange
   proEtaleCanonicalTensorComparison
 

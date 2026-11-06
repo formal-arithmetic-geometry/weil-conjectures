@@ -151,6 +151,134 @@ attribute [local instance 20000] hasSheafCompose_of_preservesLimitsOfSize
 
 set_option backward.isDefEq.respectTransparency.types false
 
+private theorem comparison_descent
+    {B₀ : Type*} [Category B₀] [Abelian B₀] [HasDerivedCategory B₀]
+    {D₀ : Type*} [Category D₀]
+    (res : CochainComplex B₀ ℤ → Prop)
+    (hres : ∀ K, ∃ (P : CochainComplex B₀ ℤ) (p : P ⟶ K), QuasiIso p ∧ res P)
+    (F G : DerivedCategory B₀ ⥤ D₀) (U V : CochainComplex B₀ ℤ ⥤ D₀)
+    (εF : DerivedCategory.Q ⋙ F ⟶ U) (εG : DerivedCategory.Q ⋙ G ⟶ V)
+    (_hF : ∀ P, res P → IsIso (εF.app P))
+    (hG : ∀ P, res P → IsIso (εG.app P)) (t : U ⟶ V) :
+    ∃! τ : F ⟶ G, ∀ P, res P → τ.app (DerivedCategory.Q.obj P) ≫ εG.app P =
+      εF.app P ≫ t.app P := by
+  classical
+  let H := HomotopyCategory.quotient B₀ (.up ℤ)
+  let W := HomotopyCategory.quasiIso B₀ (.up ℤ)
+  let α (X : HomotopyCategory B₀ (.up ℤ)) (hX : res X.as) :
+      F.obj (DerivedCategory.Qh.obj X) ⟶ G.obj (DerivedCategory.Qh.obj X) := by
+    have := hG X.as hX
+    exact εF.app X.as ≫ t.app X.as ≫ inv (εG.app X.as)
+  have hr : ∀ X, ∃ (Y : _) (p : Y ⟶ X), res Y.as ∧ W p := by
+    intro X
+    obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective X
+    obtain ⟨P, p, hp, hP⟩ := hres K
+    exact ⟨H.obj P, H.map p, hP,
+      (HomotopyCategory.quotient_map_mem_quasiIso_iff p).2 hp⟩
+  have hinv : W.IsInvertedBy (DerivedCategory.Qh ⋙ F) := by
+    intro X Y f hf
+    have := Localization.inverts DerivedCategory.Qh W f hf
+    change IsIso (F.map (DerivedCategory.Qh.map f))
+    infer_instance
+  have hn : ∀ X Y (hX : res X.as) (hY : res Y.as) (p : X ⟶ Y),
+      (DerivedCategory.Qh ⋙ F).map p ≫ α Y hY =
+        α X hX ≫ (DerivedCategory.Qh ⋙ G).map p := by
+    intro X Y hX hY p
+    obtain ⟨P, rfl⟩ := HomotopyCategory.quotient_obj_surjective X
+    obtain ⟨Q, rfl⟩ := HomotopyCategory.quotient_obj_surjective Y
+    obtain ⟨p, rfl⟩ := H.map_surjective p
+    have := hG P hX
+    have := hG Q hY
+    change F.map (DerivedCategory.Q.map p) ≫
+        (εF.app Q ≫ t.app Q ≫ inv (εG.app Q)) =
+      (εF.app P ≫ t.app P ≫ inv (εG.app P)) ≫ G.map (DerivedCategory.Q.map p)
+    apply (cancel_mono (εG.app Q)).1
+    simp only [Category.assoc, IsIso.inv_hom_id, Category.comp_id]
+    calc
+      F.map (DerivedCategory.Q.map p) ≫ εF.app Q ≫ t.app Q =
+          εF.app P ≫ U.map p ≫ t.app Q := by
+        have hnF : F.map (DerivedCategory.Q.map p) ≫ εF.app Q =
+            εF.app P ≫ U.map p := εF.naturality p
+        rw [← Category.assoc, hnF, Category.assoc]
+      _ = εF.app P ≫ t.app P ≫ V.map p := by rw [t.naturality]
+      _ = εF.app P ≫ t.app P ≫ inv (εG.app P) ≫
+          G.map (DerivedCategory.Q.map p) ≫ εG.app Q := by
+        have hnG : G.map (DerivedCategory.Q.map p) ≫ εG.app Q =
+            εG.app P ≫ V.map p := εG.naturality p
+        rw [hnG]
+        simp only [IsIso.inv_hom_id_assoc]
+  obtain ⟨β, hβ⟩ := exists_natTrans_from_resolvingClass W
+    (fun X ↦ res X.as) hr (DerivedCategory.Qh ⋙ F) (DerivedCategory.Qh ⋙ G) hinv α hn
+  let FF := Localization.fullyFaithfulWhiskeringLeft DerivedCategory.Qh W D₀
+  let τ := FF.preimage β
+  have hτ : Functor.whiskerLeft DerivedCategory.Qh τ = β := FF.map_preimage β
+  have he : ∀ P, res P → τ.app (DerivedCategory.Q.obj P) ≫ εG.app P =
+      εF.app P ≫ t.app P := by
+    intro P hP
+    have := hG P hP
+    have hc : τ.app (DerivedCategory.Q.obj P) =
+        εF.app P ≫ t.app P ≫ inv (εG.app P) :=
+      (congr_app hτ (H.obj P)).trans (hβ (H.obj P) hP)
+    rw [hc]
+    simp only [Category.assoc, IsIso.inv_hom_id, Category.comp_id]
+  refine ⟨τ, he, ?_⟩
+  intro τ' he'
+  apply Localization.natTrans_ext DerivedCategory.Q
+    (HomologicalComplex.quasiIso _ (.up ℤ))
+  intro K
+  obtain ⟨P, p, hp, hP⟩ := hres K
+  have := hp
+  have hc : τ'.app (DerivedCategory.Q.obj P) = τ.app (DerivedCategory.Q.obj P) := by
+    have := hG P hP
+    apply (cancel_mono (εG.app P)).1
+    rw [he' P hP, he P hP]
+  apply (cancel_epi (F.map (DerivedCategory.Q.map p))).1
+  rw [τ'.naturality, τ.naturality, hc]
+
+theorem comparison_descent_iso
+    {B₀ : Type*} [Category B₀] [Abelian B₀] [HasDerivedCategory B₀]
+    {D₀ : Type*} [Category D₀]
+    (res : CochainComplex B₀ ℤ → Prop)
+    (hres : ∀ K, ∃ (P : CochainComplex B₀ ℤ) (p : P ⟶ K), QuasiIso p ∧ res P)
+    (F G : DerivedCategory B₀ ⥤ D₀) (U V : CochainComplex B₀ ℤ ⥤ D₀)
+    (εF : DerivedCategory.Q ⋙ F ⟶ U) (εG : DerivedCategory.Q ⋙ G ⟶ V)
+    (hF : ∀ P, res P → IsIso (εF.app P))
+    (hG : ∀ P, res P → IsIso (εG.app P)) (t : U ≅ V) :
+    ∃! τ : F ≅ G, ∀ P, res P → τ.hom.app (DerivedCategory.Q.obj P) ≫ εG.app P =
+      εF.app P ≫ t.hom.app P := by
+  obtain ⟨τ, hτ, huniq⟩ := comparison_descent res hres F G U V εF εG hF hG t.hom
+  have hr (P : CochainComplex B₀ ℤ) (hP : res P) :
+      IsIso (τ.app (DerivedCategory.Q.obj P)) := by
+    have := hF P hP
+    have := hG P hP
+    have he : τ.app (DerivedCategory.Q.obj P) =
+        εF.app P ≫ t.hom.app P ≫ inv (εG.app P) := by
+      apply (cancel_mono (εG.app P)).1
+      simp only [Category.assoc, IsIso.inv_hom_id, Category.comp_id]
+      exact hτ P hP
+    rw [he]
+    infer_instance
+  have hk (K : CochainComplex B₀ ℤ) : IsIso (τ.app (DerivedCategory.Q.obj K)) := by
+    obtain ⟨P, p, hp, hP⟩ := hres K
+    have := hp
+    have := hr P hP
+    have hc : IsIso (F.map (DerivedCategory.Q.map p) ≫ τ.app (DerivedCategory.Q.obj K)) := by
+      rw [τ.naturality]
+      infer_instance
+    exact (isIso_comp_left_iff _ _).1 hc
+  have ht (X : DerivedCategory B₀) : IsIso (τ.app X) := by
+    let e := DerivedCategory.Q.objObjPreimageIso X
+    have := hk (DerivedCategory.Q.objPreimage X)
+    have hc : IsIso (F.map e.hom ≫ τ.app X) := by
+      rw [τ.naturality]
+      infer_instance
+    exact (isIso_comp_left_iff _ _).1 hc
+  have : IsIso τ := NatIso.isIso_of_isIso_app τ
+  refine ⟨asIso τ, hτ, ?_⟩
+  intro e he
+  apply Iso.ext
+  exact huniq e.hom he
+
 set_option backward.isDefEq.respectTransparency.types true
 
 /-- A ringed site in fixed size bounds, with the existing module derived category.
@@ -285,187 +413,7 @@ private theorem resolving_resolution (X : Site.{u, v, r, d})
 
 end
 
-set_option backward.isDefEq.respectTransparency.types true
-
-/-- Normalization of a descended ordinary cell through the actual word counits.
-Source: DAG proof steps 3--4 following Stacks 06YY and 0D6D
-(blueprint: lem-trf-ringed-kflat-word-comparison-descent). -/
-def Normalized {i j : I} {w v : Word E i j}
-    (t : w.ordinary S E A ⟶ v.ordinary S E A)
-    (tL : w.derived S E A ⟶ v.derived S E A) : Prop :=
-  ∀ (P : CochainComplex (CochainPullback.Modules.{r, u, v} (J := (S i).J) (S i).R) ℤ), Resolving
-      (S i) P →
-    tL.app (DerivedCategory.Q.obj P) ≫ v.counit S E A P =
-      w.counit S E A P ≫
-        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex t (.up ℤ)).app P)
-
-set_option backward.isDefEq.respectTransparency.types true
-
-section
-
-attribute [local instance 40000] siteHasSheafCompose siteHasSheafify siteWEquals siteAbelian
-
-private noncomputable def counitNat : {i j : I} → (w : Word E i j) →
-    (DerivedCategory.Q ⋙ w.derived S E A ⟶ w.complex S E A ⋙ DerivedCategory.Q)
-  | _, _, .nil i => Functor.whiskerRight
-      (Functor.mapHomologicalComplexIdIso
-        (CochainPullback.Modules.{r, u, v} (J := (S i).J) (S i).R) (.up ℤ)).inv
-      DerivedCategory.Q
-  | _, _, .edge a => (A a).counit
-  | _, _, .comp w v => Functor.whiskerRight (counitNat w) (v.derived S E A) ≫
-      Functor.whiskerLeft (w.complex S E A) (counitNat v) ≫
-        Functor.whiskerRight (Functor.mapHomologicalComplexCompIso
-          (Iso.refl (w.ordinary S E A ⋙ v.ordinary S E A)) (.up ℤ)).hom DerivedCategory.Q
-
-private theorem counitNat_app {i j : I} (w : Word E i j)
-    (P : CochainComplex (CochainPullback.Modules.{r, u, v} (J := (S i).J) (S i).R) ℤ) :
-    (counitNat S E A w).app P = w.counit S E A P := by
-  induction w with
-  | nil i => rfl
-  | edge a => rfl
-  | comp w v hw hv =>
-      dsimp only [counitNat, NatTrans.comp_app, Functor.whiskerRight_app,
-        Functor.whiskerLeft_app, Word.counit]
-      rw [hw P, hv ((w.complex S E A).obj P)]
-
-private theorem counit_naturality {i j : I} (w : Word E i j)
-    {P Q : CochainComplex (CochainPullback.Modules.{r, u, v} (J := (S i).J) (S i).R) ℤ}
-    (p : P ⟶ Q) :
-    (w.derived S E A).map (DerivedCategory.Q.map p) ≫ w.counit S E A Q =
-      w.counit S E A P ≫ DerivedCategory.Q.map ((w.complex S E A).map p) := by
-  simpa only [counitNat_app, Functor.comp_map] using (counitNat S E A w).naturality p
-
-end
-
--- Inline these canonical instances to avoid repeated dependent instance reduction.
 set_option linter.style.haveILetI false in
-set_option backward.isDefEq.respectTransparency.types true
-
-/-- Finite pastings of ordinary cells, with the actual functor associators and unitors.
-Whiskering by words includes whiskering by each specified edge.
-Source: DAG proof steps 6--8 following Stacks 0D6D
-(blueprint: lem-trf-ringed-kflat-word-comparison-descent). -/
-inductive Expression : {i j : I} → Word E i j → Word E i j →
-    Type (max z e u v (r + 1) d)
-  | cell {i j : I} {w v : Word E i j}
-      (t : w.ordinary S E A ⟶ v.ordinary S E A) : Expression w v
-  | id {i j : I} (w : Word E i j) : Expression w w
-  | comp {i j : I} {w v q : Word E i j}
-      (f : Expression w v) (g : Expression v q) : Expression w q
-  | input {h i j : I} (x : Word E h i) {w v : Word E i j}
-      (f : Expression w v) : Expression (.comp x w) (.comp x v)
-  | output {i j k : I} {w v : Word E i j} (f : Expression w v)
-      (x : Word E j k) : Expression (.comp w x) (.comp v x)
-  | assoc {i j k l : I} (w : Word E i j) (v : Word E j k) (q : Word E k l) :
-      Expression (.comp (.comp w v) q) (.comp w (.comp v q))
-  | assocInv {i j k l : I} (w : Word E i j) (v : Word E j k) (q : Word E k l) :
-      Expression (.comp w (.comp v q)) (.comp (.comp w v) q)
-  | leftUnit {i j : I} (w : Word E i j) : Expression (.comp (.nil i) w) w
-  | leftUnitInv {i j : I} (w : Word E i j) : Expression w (.comp (.nil i) w)
-  | rightUnit {i j : I} (w : Word E i j) : Expression (.comp w (.nil j)) w
-  | rightUnitInv {i j : I} (w : Word E i j) : Expression w (.comp w (.nil j))
-
-/-- Ordinary evaluation uses the literal composition and whiskering operations.
-Source: DAG proof steps 6--8, Stacks 0D6D
-(blueprint: lem-trf-ringed-kflat-word-comparison-descent). -/
-def Expression.ordinary {i j : I} {w v : Word E i j} :
-    Expression S E A w v → (w.ordinary S E A ⟶ v.ordinary S E A)
-  | .cell t => t
-  | .id _ => 𝟙 _
-  | .comp f g => ordinary f ≫ ordinary g
-  | .input x f => Functor.whiskerLeft (x.ordinary S E A) (ordinary f)
-  | .output f x => Functor.whiskerRight (ordinary f) (x.ordinary S E A)
-  | .assoc w v q =>
-      (Functor.associator (w.ordinary S E A) (v.ordinary S E A) (q.ordinary S E A)).hom
-  | .assocInv w v q =>
-      (Functor.associator (w.ordinary S E A) (v.ordinary S E A) (q.ordinary S E A)).inv
-  | .leftUnit w => (Functor.leftUnitor (w.ordinary S E A)).hom
-  | .leftUnitInv w => (Functor.leftUnitor (w.ordinary S E A)).inv
-  | .rightUnit w => (Functor.rightUnitor (w.ordinary S E A)).hom
-  | .rightUnitInv w => (Functor.rightUnitor (w.ordinary S E A)).inv
-
-/-- Derived evaluation uses the same operations on the uniquely descended cells.
-Source: DAG proof steps 6--8, Stacks 0D6D
-(blueprint: lem-trf-ringed-kflat-word-comparison-descent). -/
-noncomputable def Expression.derived [Finite I] {i j : I} {w v : Word E i j} :
-    Expression S E A w v → (w.derived S E A ⟶ v.derived S E A)
-  | .cell t => Word.cell S E A t
-  | .id _ => 𝟙 _
-  | .comp f g => derived f ≫ derived g
-  | .input x f => Functor.whiskerLeft (x.derived S E A) (derived f)
-  | .output f x => Functor.whiskerRight (derived f) (x.derived S E A)
-  | .assoc w v q =>
-      (Functor.associator (w.derived S E A) (v.derived S E A) (q.derived S E A)).hom
-  | .assocInv w v q =>
-      (Functor.associator (w.derived S E A) (v.derived S E A) (q.derived S E A)).inv
-  | .leftUnit w => (Functor.leftUnitor (w.derived S E A)).hom
-  | .leftUnitInv w => (Functor.leftUnitor (w.derived S E A)).inv
-  | .rightUnit w => (Functor.rightUnitor (w.derived S E A)).hom
-  | .rightUnitInv w => (Functor.rightUnitor (w.derived S E A)).inv
-
-set_option backward.isDefEq.respectTransparency.types true
-
-section
-
-attribute [local instance 40000] siteHasSheafCompose siteHasSheafify siteWEquals siteAbelian
-
-private theorem identity_normalization
-    {B D : Type*} [Category B] [Category D] (Q : B ⥤ D)
-    {P : B} {X : D} (f g : X ⟶ Q.obj P) (h : f = g) :
-    𝟙 X ≫ f = g ≫ Q.map (𝟙 P) :=
-  (Category.id_comp f).trans (h.trans
-    ((congrArg (fun a ↦ g ≫ a) (Q.map_id P)).trans (Category.comp_id g)).symm)
-
-end
-
--- Inline these canonical instances to avoid repeated dependent instance reduction.
-set_option linter.style.haveILetI false in
-/-- Unique descent with the required resolving-representative equation.
-Source: DAG proof steps 3--5, Stacks 04VC, 04VK, 05RT, 06YS and 06YY
-(blueprint: lem-trf-ringed-kflat-word-comparison-descent).
-
-Proof: on a resolving P conjugate Q(C(t)_P) by the two counit isomorphisms.
-Counit naturality proves naturality on all maps of resolving complexes. Additivity
-sends homotopies to homotopies, so this is a natural family on the full resolving
-subcategory of the homotopy category. Apply lem-sc-nattrans-from-resolving-class
-using right fractions and incoming K-flat resolutions. Localization full faithfulness
-then descends the family to the derived category. For uniqueness use naturality along
-P → K: both derived word functors invert Q(p), so agreement at P forces agreement
-at K, and Localization.natTrans_ext gives equality. -/
-theorem descent_existsUnique [Finite I] {i j : I} {w v : Word E i j}
-    (t : w.ordinary S E A ⟶ v.ordinary S E A) :
-    ∃! tL : w.derived S E A ⟶ v.derived S E A, Normalized S E A t tL := by
-  letI (i : I) : (S i).J.HasSheafCompose
-      (forget₂ CommRingCat.{r} RingCat.{r}) := siteHasSheafCompose (S i)
-  letI (i : I) : HasSheafify (S i).J AddCommGrpCat.{r} := siteHasSheafify (S i)
-  letI (i : I) : (S i).J.WEqualsLocallyBijective AddCommGrpCat.{r} := siteWEquals (S i)
-  letI (i : I) : Abelian (CochainPullback.Modules.{r, u, v} (S i).R) := siteAbelian (S i)
-  let εw : DerivedCategory.Q ⋙ w.derived S E A ⟶
-      w.complex S E A ⋙ DerivedCategory.Q :=
-    { app := w.counit S E A
-      naturality := fun _ _ p ↦ counit_naturality S E A w p }
-  let εv : DerivedCategory.Q ⋙ v.derived S E A ⟶
-      v.complex S E A ⋙ DerivedCategory.Q :=
-    { app := v.counit S E A
-      naturality := fun _ _ p ↦ counit_naturality S E A v p }
-  exact comparison_descent (Resolving (S i))
-    (fun K ↦ by
-      obtain ⟨P, p, hp, hP, _⟩ := simultaneous_resolution S E A i K
-      exact ⟨P, p, hp, hP⟩)
-    (w.derived S E A) (v.derived S E A) _ _ εw εv
-    (fun P hP ↦ (word_computation S E A w P hP).2)
-    (fun P hP ↦ (word_computation S E A v P hP).2)
-    (Functor.whiskerRight (NatTrans.mapHomologicalComplex t (.up ℤ)) DerivedCategory.Q)
-
-/-- The uniquely specified descent; choice extracts a uniquely determined object.
-Source: DAG proof step 4, Stacks 06YY
-(blueprint: lem-trf-ringed-kflat-word-comparison-descent). -/
-noncomputable def Word.cell [Finite I] {i j : I} {w v : Word E i j}
-    (t : w.ordinary S E A ⟶ v.ordinary S E A) :
-    w.derived S E A ⟶ v.derived S E A :=
-  Classical.choose (descent_existsUnique S E A t)
-
--- Inline these canonical instances to avoid repeated dependent instance reduction.
 /-- Every resolving model, not just the chosen replacement, computes every word.
 Source: Stacks 0G7E, 06YY, 0D6D; DAG proof steps 1--2
 (blueprint: lem-trf-ringed-kflat-word-comparison-descent).
@@ -525,135 +473,189 @@ theorem simultaneous_resolution [Finite I] (i : I)
   obtain ⟨P, p, hp, hP⟩ := resolving_resolution (S i) K
   exact ⟨P, p, hp, hP, fun j w ↦ word_computation S E A w P hP⟩
 
+set_option backward.isDefEq.respectTransparency.types true
+
+/-- Normalization of a descended ordinary cell through the actual word counits.
+Source: DAG proof steps 3--4 following Stacks 06YY and 0D6D
+(blueprint: lem-trf-ringed-kflat-word-comparison-descent). -/
+def Normalized {i j : I} {w v : Word E i j}
+    (t : w.ordinary S E A ⟶ v.ordinary S E A)
+    (tL : w.derived S E A ⟶ v.derived S E A) : Prop :=
+  ∀ (P : CochainComplex (CochainPullback.Modules.{r, u, v} (J := (S i).J) (S i).R) ℤ), Resolving
+      (S i) P →
+    tL.app (DerivedCategory.Q.obj P) ≫ v.counit S E A P =
+      w.counit S E A P ≫
+        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex t (.up ℤ)).app P)
+
+set_option backward.isDefEq.respectTransparency.types true
+
+section
+
+attribute [local instance 40000] siteHasSheafCompose siteHasSheafify siteWEquals siteAbelian
+
+private noncomputable def counitNat : {i j : I} → (w : Word E i j) →
+    (DerivedCategory.Q ⋙ w.derived S E A ⟶ w.complex S E A ⋙ DerivedCategory.Q)
+  | _, _, .nil i => Functor.whiskerRight
+      (Functor.mapHomologicalComplexIdIso
+        (CochainPullback.Modules.{r, u, v} (J := (S i).J) (S i).R) (.up ℤ)).inv
+      DerivedCategory.Q
+  | _, _, .edge a => (A a).counit
+  | _, _, .comp w v => Functor.whiskerRight (counitNat w) (v.derived S E A) ≫
+      Functor.whiskerLeft (w.complex S E A) (counitNat v) ≫
+        Functor.whiskerRight (Functor.mapHomologicalComplexCompIso
+          (Iso.refl (w.ordinary S E A ⋙ v.ordinary S E A)) (.up ℤ)).hom DerivedCategory.Q
+
+private theorem counitNat_app {i j : I} (w : Word E i j)
+    (P : CochainComplex (CochainPullback.Modules.{r, u, v} (J := (S i).J) (S i).R) ℤ) :
+    (counitNat S E A w).app P = w.counit S E A P := by
+  induction w with
+  | nil i => rfl
+  | edge a => rfl
+  | comp w v hw hv =>
+      dsimp only [counitNat, NatTrans.comp_app, Functor.whiskerRight_app,
+        Functor.whiskerLeft_app, Word.counit]
+      rw [hw P, hv ((w.complex S E A).obj P)]
+
+private theorem counit_naturality {i j : I} (w : Word E i j)
+    {P Q : CochainComplex (CochainPullback.Modules.{r, u, v} (J := (S i).J) (S i).R) ℤ}
+    (p : P ⟶ Q) :
+    (w.derived S E A).map (DerivedCategory.Q.map p) ≫ w.counit S E A Q =
+      w.counit S E A P ≫ DerivedCategory.Q.map ((w.complex S E A).map p) := by
+  simpa only [counitNat_app, Functor.comp_map] using (counitNat S E A w).naturality p
+
+end
+
+-- Inline these canonical instances to avoid repeated dependent instance reduction.
+set_option linter.style.haveILetI false in
+/-- Unique descent with the required resolving-representative equation.
+Source: DAG proof steps 3--5, Stacks 04VC, 04VK, 05RT, 06YS and 06YY
+(blueprint: lem-trf-ringed-kflat-word-comparison-descent).
+
+Proof: on a resolving P conjugate Q(C(t)_P) by the two counit isomorphisms.
+Counit naturality proves naturality on all maps of resolving complexes. Additivity
+sends homotopies to homotopies, so this is a natural family on the full resolving
+subcategory of the homotopy category. Apply lem-sc-nattrans-from-resolving-class
+using right fractions and incoming K-flat resolutions. Localization full faithfulness
+then descends the family to the derived category. For uniqueness use naturality along
+P → K: both derived word functors invert Q(p), so agreement at P forces agreement
+at K, and Localization.natTrans_ext gives equality. -/
+theorem descent_existsUnique [Finite I] {i j : I} {w v : Word E i j}
+    (t : w.ordinary S E A ⟶ v.ordinary S E A) :
+    ∃! tL : w.derived S E A ⟶ v.derived S E A, Normalized S E A t tL := by
+  letI (i : I) : (S i).J.HasSheafCompose
+      (forget₂ CommRingCat.{r} RingCat.{r}) := siteHasSheafCompose (S i)
+  letI (i : I) : HasSheafify (S i).J AddCommGrpCat.{r} := siteHasSheafify (S i)
+  letI (i : I) : (S i).J.WEqualsLocallyBijective AddCommGrpCat.{r} := siteWEquals (S i)
+  letI (i : I) : Abelian (CochainPullback.Modules.{r, u, v} (S i).R) := siteAbelian (S i)
+  let εw : DerivedCategory.Q ⋙ w.derived S E A ⟶
+      w.complex S E A ⋙ DerivedCategory.Q :=
+    { app := w.counit S E A
+      naturality := fun _ _ p ↦ counit_naturality S E A w p }
+  let εv : DerivedCategory.Q ⋙ v.derived S E A ⟶
+      v.complex S E A ⋙ DerivedCategory.Q :=
+    { app := v.counit S E A
+      naturality := fun _ _ p ↦ counit_naturality S E A v p }
+  exact comparison_descent (Resolving (S i))
+    (fun K ↦ by
+      obtain ⟨P, p, hp, hP, _⟩ := simultaneous_resolution S E A i K
+      exact ⟨P, p, hp, hP⟩)
+    (w.derived S E A) (v.derived S E A) _ _ εw εv
+    (fun P hP ↦ (word_computation S E A w P hP).2)
+    (fun P hP ↦ (word_computation S E A v P hP).2)
+    (Functor.whiskerRight (NatTrans.mapHomologicalComplex t (.up ℤ)) DerivedCategory.Q)
+
+set_option linter.style.haveILetI false in
+/-- The uniquely specified descent; choice extracts a uniquely determined object.
+Source: DAG proof step 4, Stacks 06YY
+(blueprint: lem-trf-ringed-kflat-word-comparison-descent). -/
+noncomputable def Word.cell [Finite I] {i j : I} {w v : Word E i j}
+    (t : w.ordinary S E A ⟶ v.ordinary S E A) :
+    w.derived S E A ⟶ v.derived S E A :=
+  Classical.choose (descent_existsUnique S E A t)
+
+-- Inline these canonical instances to avoid repeated dependent instance reduction.
+set_option backward.isDefEq.respectTransparency.types true
+
+/-- Finite pastings of ordinary cells, with the actual functor associators and unitors.
+Whiskering by words includes whiskering by each specified edge.
+Source: DAG proof steps 6--8 following Stacks 0D6D
+(blueprint: lem-trf-ringed-kflat-word-comparison-descent). -/
+inductive Expression : {i j : I} → Word E i j → Word E i j →
+    Type (max z e u v (r + 1) d)
+  | cell {i j : I} {w v : Word E i j}
+      (t : w.ordinary S E A ⟶ v.ordinary S E A) : Expression w v
+  | id {i j : I} (w : Word E i j) : Expression w w
+  | comp {i j : I} {w v q : Word E i j}
+      (f : Expression w v) (g : Expression v q) : Expression w q
+  | input {h i j : I} (x : Word E h i) {w v : Word E i j}
+      (f : Expression w v) : Expression (.comp x w) (.comp x v)
+  | output {i j k : I} {w v : Word E i j} (f : Expression w v)
+      (x : Word E j k) : Expression (.comp w x) (.comp v x)
+  | assoc {i j k l : I} (w : Word E i j) (v : Word E j k) (q : Word E k l) :
+      Expression (.comp (.comp w v) q) (.comp w (.comp v q))
+  | assocInv {i j k l : I} (w : Word E i j) (v : Word E j k) (q : Word E k l) :
+      Expression (.comp w (.comp v q)) (.comp (.comp w v) q)
+  | leftUnit {i j : I} (w : Word E i j) : Expression (.comp (.nil i) w) w
+  | leftUnitInv {i j : I} (w : Word E i j) : Expression w (.comp (.nil i) w)
+  | rightUnit {i j : I} (w : Word E i j) : Expression (.comp w (.nil j)) w
+  | rightUnitInv {i j : I} (w : Word E i j) : Expression w (.comp w (.nil j))
+
+/-- Ordinary evaluation uses the literal composition and whiskering operations.
+Source: DAG proof steps 6--8, Stacks 0D6D
+(blueprint: lem-trf-ringed-kflat-word-comparison-descent). -/
+def Expression.ordinary {i j : I} {w v : Word E i j} :
+    Expression S E A w v → (w.ordinary S E A ⟶ v.ordinary S E A)
+  | .cell t => t
+  | .id _ => 𝟙 _
+  | .comp f g => ordinary f ≫ ordinary g
+  | .input x f => Functor.whiskerLeft (x.ordinary S E A) (ordinary f)
+  | .output f x => Functor.whiskerRight (ordinary f) (x.ordinary S E A)
+  | .assoc w v q =>
+      (Functor.associator (w.ordinary S E A) (v.ordinary S E A) (q.ordinary S E A)).hom
+  | .assocInv w v q =>
+      (Functor.associator (w.ordinary S E A) (v.ordinary S E A) (q.ordinary S E A)).inv
+  | .leftUnit w => (Functor.leftUnitor (w.ordinary S E A)).hom
+  | .leftUnitInv w => (Functor.leftUnitor (w.ordinary S E A)).inv
+  | .rightUnit w => (Functor.rightUnitor (w.ordinary S E A)).hom
+  | .rightUnitInv w => (Functor.rightUnitor (w.ordinary S E A)).inv
+/-- Derived evaluation uses the same operations on the uniquely descended cells.
+Source: DAG proof steps 6--8, Stacks 0D6D
+(blueprint: lem-trf-ringed-kflat-word-comparison-descent). -/
+noncomputable def Expression.derived [Finite I] {i j : I} {w v : Word E i j} :
+    Expression S E A w v → (w.derived S E A ⟶ v.derived S E A)
+  | .cell t => Word.cell S E A t
+  | .id _ => 𝟙 _
+  | .comp f g => derived f ≫ derived g
+  | .input x f => Functor.whiskerLeft (x.derived S E A) (derived f)
+  | .output f x => Functor.whiskerRight (derived f) (x.derived S E A)
+  | .assoc w v q =>
+      (Functor.associator (w.derived S E A) (v.derived S E A) (q.derived S E A)).hom
+  | .assocInv w v q =>
+      (Functor.associator (w.derived S E A) (v.derived S E A) (q.derived S E A)).inv
+  | .leftUnit w => (Functor.leftUnitor (w.derived S E A)).hom
+  | .leftUnitInv w => (Functor.leftUnitor (w.derived S E A)).inv
+  | .rightUnit w => (Functor.rightUnitor (w.derived S E A)).hom
+  | .rightUnitInv w => (Functor.rightUnitor (w.derived S E A)).inv
+
+
+set_option backward.isDefEq.respectTransparency.types true
+
+section
+
+attribute [local instance 40000] siteHasSheafCompose siteHasSheafify siteWEquals siteAbelian
+
+private theorem identity_normalization
+    {B D : Type*} [Category B] [Category D] (Q : B ⥤ D)
+    {P : B} {X : D} (f g : X ⟶ Q.obj P) (h : f = g) :
+    𝟙 X ≫ f = g ≫ Q.map (𝟙 P) :=
+  (Category.id_comp f).trans (h.trans
+    ((congrArg (fun a ↦ g ≫ a) (Q.map_id P)).trans (Category.comp_id g)).symm)
+
+end
+
+-- Inline these canonical instances to avoid repeated dependent instance reduction.
+set_option linter.style.haveILetI false in
 set_option backward.isDefEq.respectTransparency.types false
-
-private theorem comparison_descent
-    {B₀ : Type*} [Category B₀] [Abelian B₀] [HasDerivedCategory B₀]
-    {D₀ : Type*} [Category D₀]
-    (res : CochainComplex B₀ ℤ → Prop)
-    (hres : ∀ K, ∃ (P : CochainComplex B₀ ℤ) (p : P ⟶ K), QuasiIso p ∧ res P)
-    (F G : DerivedCategory B₀ ⥤ D₀) (U V : CochainComplex B₀ ℤ ⥤ D₀)
-    (εF : DerivedCategory.Q ⋙ F ⟶ U) (εG : DerivedCategory.Q ⋙ G ⟶ V)
-    (_hF : ∀ P, res P → IsIso (εF.app P))
-    (hG : ∀ P, res P → IsIso (εG.app P)) (t : U ⟶ V) :
-    ∃! τ : F ⟶ G, ∀ P, res P → τ.app (DerivedCategory.Q.obj P) ≫ εG.app P =
-      εF.app P ≫ t.app P := by
-  classical
-  let H := HomotopyCategory.quotient B₀ (.up ℤ)
-  let W := HomotopyCategory.quasiIso B₀ (.up ℤ)
-  let α (X : HomotopyCategory B₀ (.up ℤ)) (hX : res X.as) :
-      F.obj (DerivedCategory.Qh.obj X) ⟶ G.obj (DerivedCategory.Qh.obj X) := by
-    have := hG X.as hX
-    exact εF.app X.as ≫ t.app X.as ≫ inv (εG.app X.as)
-  have hr : ∀ X, ∃ (Y : _) (p : Y ⟶ X), res Y.as ∧ W p := by
-    intro X
-    obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective X
-    obtain ⟨P, p, hp, hP⟩ := hres K
-    exact ⟨H.obj P, H.map p, hP,
-      (HomotopyCategory.quotient_map_mem_quasiIso_iff p).2 hp⟩
-  have hinv : W.IsInvertedBy (DerivedCategory.Qh ⋙ F) := by
-    intro X Y f hf
-    have := Localization.inverts DerivedCategory.Qh W f hf
-    change IsIso (F.map (DerivedCategory.Qh.map f))
-    infer_instance
-  have hn : ∀ X Y (hX : res X.as) (hY : res Y.as) (p : X ⟶ Y),
-      (DerivedCategory.Qh ⋙ F).map p ≫ α Y hY =
-        α X hX ≫ (DerivedCategory.Qh ⋙ G).map p := by
-    intro X Y hX hY p
-    obtain ⟨P, rfl⟩ := HomotopyCategory.quotient_obj_surjective X
-    obtain ⟨Q, rfl⟩ := HomotopyCategory.quotient_obj_surjective Y
-    obtain ⟨p, rfl⟩ := H.map_surjective p
-    have := hG P hX
-    have := hG Q hY
-    change F.map (DerivedCategory.Q.map p) ≫
-        (εF.app Q ≫ t.app Q ≫ inv (εG.app Q)) =
-      (εF.app P ≫ t.app P ≫ inv (εG.app P)) ≫ G.map (DerivedCategory.Q.map p)
-    apply (cancel_mono (εG.app Q)).1
-    simp only [Category.assoc, IsIso.inv_hom_id, Category.comp_id]
-    calc
-      F.map (DerivedCategory.Q.map p) ≫ εF.app Q ≫ t.app Q =
-          εF.app P ≫ U.map p ≫ t.app Q := by
-        have hnF : F.map (DerivedCategory.Q.map p) ≫ εF.app Q =
-            εF.app P ≫ U.map p := εF.naturality p
-        rw [← Category.assoc, hnF, Category.assoc]
-      _ = εF.app P ≫ t.app P ≫ V.map p := by rw [t.naturality]
-      _ = εF.app P ≫ t.app P ≫ inv (εG.app P) ≫
-          G.map (DerivedCategory.Q.map p) ≫ εG.app Q := by
-        have hnG : G.map (DerivedCategory.Q.map p) ≫ εG.app Q =
-            εG.app P ≫ V.map p := εG.naturality p
-        rw [hnG]
-        simp only [IsIso.inv_hom_id_assoc]
-  obtain ⟨β, hβ⟩ := exists_natTrans_from_resolvingClass W
-    (fun X ↦ res X.as) hr (DerivedCategory.Qh ⋙ F) (DerivedCategory.Qh ⋙ G) hinv α hn
-  let FF := Localization.fullyFaithfulWhiskeringLeft DerivedCategory.Qh W D₀
-  let τ := FF.preimage β
-  have hτ : Functor.whiskerLeft DerivedCategory.Qh τ = β := FF.map_preimage β
-  have he : ∀ P, res P → τ.app (DerivedCategory.Q.obj P) ≫ εG.app P =
-      εF.app P ≫ t.app P := by
-    intro P hP
-    have := hG P hP
-    have hc : τ.app (DerivedCategory.Q.obj P) =
-        εF.app P ≫ t.app P ≫ inv (εG.app P) :=
-      (congr_app hτ (H.obj P)).trans (hβ (H.obj P) hP)
-    rw [hc]
-    simp only [Category.assoc, IsIso.inv_hom_id, Category.comp_id]
-  refine ⟨τ, he, ?_⟩
-  intro τ' he'
-  apply Localization.natTrans_ext DerivedCategory.Q
-    (HomologicalComplex.quasiIso _ (.up ℤ))
-  intro K
-  obtain ⟨P, p, hp, hP⟩ := hres K
-  have := hp
-  have hc : τ'.app (DerivedCategory.Q.obj P) = τ.app (DerivedCategory.Q.obj P) := by
-    have := hG P hP
-    apply (cancel_mono (εG.app P)).1
-    rw [he' P hP, he P hP]
-  apply (cancel_epi (F.map (DerivedCategory.Q.map p))).1
-  rw [τ'.naturality, τ.naturality, hc]
-
-theorem comparison_descent_iso
-    {B₀ : Type*} [Category B₀] [Abelian B₀] [HasDerivedCategory B₀]
-    {D₀ : Type*} [Category D₀]
-    (res : CochainComplex B₀ ℤ → Prop)
-    (hres : ∀ K, ∃ (P : CochainComplex B₀ ℤ) (p : P ⟶ K), QuasiIso p ∧ res P)
-    (F G : DerivedCategory B₀ ⥤ D₀) (U V : CochainComplex B₀ ℤ ⥤ D₀)
-    (εF : DerivedCategory.Q ⋙ F ⟶ U) (εG : DerivedCategory.Q ⋙ G ⟶ V)
-    (hF : ∀ P, res P → IsIso (εF.app P))
-    (hG : ∀ P, res P → IsIso (εG.app P)) (t : U ≅ V) :
-    ∃! τ : F ≅ G, ∀ P, res P → τ.hom.app (DerivedCategory.Q.obj P) ≫ εG.app P =
-      εF.app P ≫ t.hom.app P := by
-  obtain ⟨τ, hτ, huniq⟩ := comparison_descent res hres F G U V εF εG hF hG t.hom
-  have hr (P : CochainComplex B₀ ℤ) (hP : res P) :
-      IsIso (τ.app (DerivedCategory.Q.obj P)) := by
-    have := hF P hP
-    have := hG P hP
-    have he : τ.app (DerivedCategory.Q.obj P) =
-        εF.app P ≫ t.hom.app P ≫ inv (εG.app P) := by
-      apply (cancel_mono (εG.app P)).1
-      simp only [Category.assoc, IsIso.inv_hom_id, Category.comp_id]
-      exact hτ P hP
-    rw [he]
-    infer_instance
-  have hk (K : CochainComplex B₀ ℤ) : IsIso (τ.app (DerivedCategory.Q.obj K)) := by
-    obtain ⟨P, p, hp, hP⟩ := hres K
-    have := hp
-    have := hr P hP
-    have hc : IsIso (F.map (DerivedCategory.Q.map p) ≫ τ.app (DerivedCategory.Q.obj K)) := by
-      rw [τ.naturality]
-      infer_instance
-    exact (isIso_comp_left_iff _ _).1 hc
-  have ht (X : DerivedCategory B₀) : IsIso (τ.app X) := by
-    let e := DerivedCategory.Q.objObjPreimageIso X
-    have := hk (DerivedCategory.Q.objPreimage X)
-    have hc : IsIso (F.map e.hom ≫ τ.app X) := by
-      rw [τ.naturality]
-      infer_instance
-    exact (isIso_comp_left_iff _ _).1 hc
-  have : IsIso τ := NatIso.isIso_of_isIso_app τ
-  refine ⟨asIso τ, hτ, ?_⟩
-  intro e he
-  apply Iso.ext
-  exact huniq e.hom he
 
 section ScalarFormulas
 

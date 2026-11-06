@@ -30,6 +30,8 @@ public import Mathlib.CategoryTheory.Generator.Basic
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
 public import Mathlib.CategoryTheory.Functor.Derived.RightDerived
 public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.CategoryTheory.RingedToposKFlatPullback
 import WeilConjectures.CategoryTheory.Ringed.RingedToposMorphismSupplement
 import WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
@@ -127,7 +129,7 @@ import WeilConjectures.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Mathlib.CategoryTheory.Monoidal.Closed.Basic
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 import WeilConjectures.AlgebraicGeometry.RingedTopoiDerivedPullback
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
+import all Mathlib.Algebra.Homology.DerivedCategory.Basic
 import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
 import WeilConjectures.Algebra.Homology.KFlatResolution
 import WeilConjectures.Algebra.Homology.ChangeOfRingsKFlatQuasiIso
@@ -158,6 +160,7 @@ import all WeilConjectures.CategoryTheory.DerivedCategory.EssentiallyConstantPro
 import all Mathlib.CategoryTheory.Functor.Derived.Adjunction
 import all Mathlib.CategoryTheory.Functor.KanExtension.Preserves
 import all WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedPointwiseKanBridge
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # A derived left adjoint with independent localization universes
 

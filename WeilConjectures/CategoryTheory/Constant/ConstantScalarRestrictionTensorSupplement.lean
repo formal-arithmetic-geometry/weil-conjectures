@@ -339,6 +339,7 @@ def DerivedComparisonData
 
 section DerivedComparisonProof
 
+
 set_option backward.isDefEq.respectTransparency true
 open CategoryTheory.Category CategoryTheory.Functor CategoryTheory.Functor.LaxMonoidal
 open CategoryTheory.Functor.OplaxMonoidal
@@ -521,6 +522,8 @@ private abbrev moduleInclusion : Modules J B ⥤
       ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj (ring J B)).obj :=
   SheafOfModules.forget _ ⋙ PresheafOfModules.restrictScalars (𝟙 _)
 
+attribute [local instance] moduleInclusionLax
+
 set_option backward.isDefEq.respectTransparency true in
 private def restrictionPresheafIso :
     moduleInclusion J B ⋙ rawRestriction J B ≅
@@ -546,6 +549,12 @@ private def restrictionPresheafIso :
           naturality _ _ _ := by ext x; rfl }
       hom_inv_id := by ext X x; rfl
       inv_hom_id := by ext X x; rfl }) (fun _ ↦ by ext X x; rfl)
+
+attribute [local instance] fixedSheafificationMonoidal
+
+attribute [local instance] fixedSheafificationBraided
+
+attribute [local instance] ordinaryLax
 
 private theorem scalarUnit_surjective : Presheaf.IsLocallySurjective J (scalarUnit J B) := by
   unfold scalarUnit
@@ -616,7 +625,6 @@ private theorem ringTensor_ext (M N H : Modules J B) (f g : M ⊗ N ⟶ H)
   apply SheafOfModules.CochainScalarConstruction.pure_hom_ext (ring J B) M N H
   exact h
 
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 set_option backward.isDefEq.respectTransparency false in
 private theorem fixedTensor_ext (M N H : Fixed J B) (f g : M ⊗ N ⟶ H)
     (h : ∀ (U : Cᵒᵖ) (x : M.obj.obj U) (y : N.obj.obj U),
@@ -629,6 +637,8 @@ private theorem fixedTensor_ext (M N H : Fixed J B) (f g : M ⊗ N ⟶ H)
   apply ModuleCat.MonoidalCategory.tensor_ext
   intro x y
   exact h U x y
+
+attribute [local instance] fixedInclusionLax
 
 set_option backward.isDefEq.respectTransparency false in
 private theorem monoidalMate
@@ -688,6 +698,9 @@ private theorem isoTensor_pure (M N : Modules J B) (U : Cᵒᵖ)
           (show ((restriction J B).obj N).obj.obj U from y) := by
   rfl
 
+attribute [local irreducible] ordinaryLax ringPure fixedPure restrictionPresheafIso
+attribute [local semireducible] ringPure fixedPure restrictionPresheafIso
+
 set_option backward.isDefEq.respectTransparency true in
 private theorem restrictionTensor_ext (M N H : Modules J B)
     (f g : (restriction J B).obj (M ⊗ N) ⟶ (restriction J B).obj H)
@@ -713,7 +726,6 @@ Source: Stacks 015F and 05RT (blueprint: lem-sfb-constant-scalar-restriction-ten
 def onDerived : DerivedCategory (Modules J B) ⥤ DerivedCategory (Fixed J B) :=
   (restriction J B).mapDerivedCategory
 
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The normalized coherent comparison on ordinary unbounded K-flat derived tensors.
 The monoidal structures here are the existing K-flat derived localization structures.
 Source: Stacks 06YS, 0G7D, 06YT and 06YU

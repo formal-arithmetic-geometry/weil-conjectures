@@ -55,7 +55,8 @@ lemma toPresheafFiber_uliftSheafFiberIso_hom_app (F : Sheaf J A) (X : C) (x : Φ
   have : HasColimitsOfSize.{u, u} A := hasColimitsOfSizeShrink.{u, u, u + 1, u + 1} A
   rw [asIso_hom]
   exact colimit.ι_pre ((Functor.Elements.π Φ.fiber).op ⋙ F.obj)
-    (Functor.Elements.uliftEquivalence.{u + 1} Φ.fiber).functor.op (op ⟨X, ULift.up x⟩)
+    (Functor.Elements.uliftEquivalence.{u + 1} Φ.fiber).functor.op
+    (op (Functor.elementsMk _ X (ULift.up x)))
 
 end CategoryTheory.GrothendieckTopology.Point
 
