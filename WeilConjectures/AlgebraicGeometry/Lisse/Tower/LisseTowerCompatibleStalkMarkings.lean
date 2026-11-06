@@ -178,7 +178,7 @@ theorem lisse_tower_compatible_stalk_markings
       rw [hv i n] at h
       simpa only [F, N, Functor.comp_map, Functor.ofOpSequence_map_homOfLE_succ,
         constantAdicRestrictedTower, constantAdicRestrictedStep, b, z,
-        Category.assoc] using h.symm)
+        s, R, J, C, Iso.symm_inv, Category.assoc] using h.symm)
     intro m n h
     have hn := α.naturality (homOfLE h).op
     change _ ≫ z n = z m ≫ N.map (homOfLE h).op at hn
