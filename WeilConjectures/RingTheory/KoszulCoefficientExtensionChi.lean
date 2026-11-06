@@ -142,13 +142,7 @@ private theorem koszulDualBoundary_wedge
     (((koszulComplex R r f).d (n + 1) n).hom
       (exteriorPower.ιMulti R (n + 1) v)) = _
   simp only [koszulComplex, ChainComplex.of_d, ModuleCat.hom_ofHom,
-    koszulBoundary_wedge]
-  change (-1 : R) ^ (n + 1) * (x.hom : ⋀[R]^n (Fin r →₀ R) →ₗ[R] R) (∑ i : Fin (n + 1),
-    ((-1 : R) ^ (i.val + 2) * Finsupp.linearCombination R f (v i)) •
-      exteriorPower.ιMulti R n (v ∘ i.succAbove)) = _
-  rw [map_sum]
-  simp only [map_smul, smul_eq_mul]
-  rfl
+    koszulBoundary_wedge, map_sum, map_smul, smul_eq_mul]
 
 private theorem linearCombination_mapRange
     (A S : Type u) [CommRing A] [CommRing S] [Algebra A S] (r : ℕ)
