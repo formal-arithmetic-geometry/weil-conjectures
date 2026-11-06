@@ -94,7 +94,7 @@ def refinementFixedWitnessIso (T : Scheme.{u}) (Λ : Type (u + 1))
   e.unitIso.app _ ≪≫ e.inverse.mapIso
     (((Functor.mapDerivedCategoryCompIso
       (comparisonUpperStar (ModuleCat.{u + 1} Λ) T)
-      (finiteCoefficientRealization T Λ)).app O.2.L.obj).symm ≪≫
+      (finiteCoefficientRealization T Λ)).app O.2.L.obj) ≪≫
       ((finiteCoefficientComparison T Λ).mapDerivedCategoryPlusCompatibility.app O.2.L).symm ≪≫
       DerivedCategory.Plus.ι.mapIso O.2.alpha)
 
