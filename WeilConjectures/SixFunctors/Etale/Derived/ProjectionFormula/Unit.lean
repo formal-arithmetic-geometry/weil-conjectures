@@ -7,6 +7,8 @@ module
 
 public import Mathlib.Algebra.Homology.Localization
 import all Mathlib.Algebra.Homology.Localization
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+import all Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.CupProductCoherence
 public import WeilConjectures.SixFunctors.Etale.Derived.CupProductWeil
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Reduction
@@ -183,10 +185,15 @@ lemma leftDerivedUpperStar_map_singleFunctorObjUnitIso_inv_comp (g : X ⟶ Y) :
     Functor.whiskerRight_app, NatTrans.id_app, Category.comp_id, Category.id_comp, Category.assoc,
     Functor.Monoidal.εIso_inv, Functor.map_comp]
   refine (Category.id_comp _).trans ?_
-  simp only [Iso.app_inv, DerivedCategory.quotientCompQhIso,
-    HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift_hom,
-    Quotient.lift.isLift_inv, NatTrans.id_app]
+  have hY : ∀ K, (DerivedCategory.quotientCompQhIso (Sheaf Y.smallEtaleTopology A)).hom.app K =
+      𝟙 _ := fun _ ↦ rfl
+  have hX : ∀ K, (DerivedCategory.quotientCompQhIso (Sheaf X.smallEtaleTopology A)).inv.app K =
+      𝟙 _ := fun _ ↦ rfl
+  simp only [Iso.app_inv, hY, hX]
   erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+  have hη : (DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology A) 0).map (η (g)^*[A]) =
+      DerivedCategory.Q.map ((HomologicalComplex.single _ (.up ℤ) 0).map (η (g)^*[A])) := rfl
+  rw [hη]
   rfl
 
 /-- The identification `Lg^* M_Y ≅ M_X` of constant complexes
