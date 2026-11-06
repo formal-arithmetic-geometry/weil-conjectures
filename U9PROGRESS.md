@@ -425,6 +425,23 @@
 - All ucheck invocations finished. This final commit changes documentation only.
 
 
+# BZ1068 in progress
+
+- Branch: u9/BZ1068; starting commit dfaed262b6fc1850faba3b46955a11d3225a1e86.
+- The user instructed continuation after the concrete two-site compositor statement proposal.
+  Applied BZ1068-statement-only.patch; the statement and local hb proof now preserve the
+  original comparison using Mathlib's reversed derived compositor.
+- Merged BZ1059 prerequisite fixes; no duplicate declarations or declaration deletions.
+- Proof-only baseline cleared two errors; next: validate the complete leaf repair with
+  ucheck-bump, then build its four direct importers and continue through unblocked layers.
+- Patterns, exact errors, replay-checked rules: /home/ubuntu/u9/bz/FIXES-BZ1068.md.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
+
+- BZ1068 leaf is GREEN and sorry-free: ucheck-bump rc=0, built=1, failed=0 at
+  6afc4fae13c7e090b915aa0e3d61980300964a3c (poolb:43.157.189.27).
+  Next: validate all four direct importers; leaf log BUILD-BZ1068-leaf-full.log.
+
+
 # BZ1063 in progress
 
 - Branch: u9/BZ1063; start dfaed262b6fc1850faba3b46955a11d3225a1e86.
