@@ -324,8 +324,8 @@ theorem integralConstantDerived_transport (T : Scheme.{u})
   let := (integralConstantModule_exact T d').1
   let := (integralConstantModule_exact T d').2
   exact ⟨((Functor.mapDerivedCategoryNatIso e) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _ ≪≫
-    Functor.isoWhiskerLeft _ (Functor.mapDerivedCategoryCompIso _ _)).app P⟩
+    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    Functor.isoWhiskerLeft _ (Functor.mapDerivedCategoryCompIso _ _).symm).app P⟩
 
 end ConstantTransport
 section PerfectTransport
