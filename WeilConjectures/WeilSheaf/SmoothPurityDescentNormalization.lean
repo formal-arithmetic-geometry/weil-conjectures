@@ -118,12 +118,12 @@ noncomputable def ordinaryTraceDescentIso (β : L₀ ⋙ S ≅ T ⋙ mapOfNatIso
 theorem traceDescentComparison_forget (β : L₀ ⋙ S ≅ T ⋙ mapOfNatIso e)
     (K : DerivedCategory A) :
     (Functor.rightDerivedFunctorCommIso (ordinaryTraceDescentIso e T α S αS β)).hom.app K =
-      ((Functor.mapDerivedCategoryCompIso S (forget G)).symm ≪≫
+      ((Functor.mapDerivedCategoryCompIso S (forget G)) ≪≫
         Functor.mapDerivedCategoryNatIso αS).inv.app (L₀.rightDerivedFunctor.obj K) ≫
       (forget G).mapDerivedCategory.map ((traceDescentComparison e T α S β).inv.app K) ≫
       (rightDerivedFunctorMapOfNatIsoCompForgetIso F e).hom.app (T.mapDerivedCategory.obj K) ≫
       L.rightDerivedFunctor.map
-        (((Functor.mapDerivedCategoryCompIso T (forget F)).symm ≪≫
+        (((Functor.mapDerivedCategoryCompIso T (forget F)) ≪≫
           Functor.mapDerivedCategoryNatIso α).hom.app K) := by
   apply Functor.traceDerivedSquare_comp (mapOfNatIsoCompForgetIso e) β
     (ordinaryTraceDescentIso e T α S αS β)
