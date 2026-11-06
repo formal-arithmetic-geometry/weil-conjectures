@@ -137,7 +137,7 @@ private lemma exact_square_triangle
   rw [hd]
   apply Iso.ext
   simp only [Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv,
-    Category.assoc, Iso.hom_inv_id_assoc]
+    Category.assoc, Iso.inv_hom_id_assoc, Iso.hom_inv_id_assoc]
 
 private lemma support_associativity
     (A : Type (u + 1)) [CommRing A] [Finite A]
