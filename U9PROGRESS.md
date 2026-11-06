@@ -371,21 +371,20 @@
   StratumCompletionUnitRestriction, then continue downstream as the brief requires.
 - Fix log: /home/ubuntu/u9/bz/FIXES-BZ995.md. No local Lean/Lake or forbidden proof shortcuts.
 
-# BZ1021 in progress
+# BZ1027 complete
 
-- Branch: u9/BZ1021; starting commit 203ea75a45628a5a18c524c66580a676a0da3d5c.
-- The user instructed continuation after the explicit BertiniNoether prerequisite-import proposal.
-  Applied that prepared import-only patch; DegreeZero's umbrella import is also removed.
-- The first remote build confirmed the Sheaf.H.δ collision through SlicingFlat and BertiniNoether.
-- All theorem statements, definitions, proofs, and docstrings are unchanged.
-- Next: validate BertiniNoether and DegreeZero with ucheck-bump, then direct importers.
-- Fix record: /home/ubuntu/u9/bz/FIXES-BZ1021.md; full first build log:
-  /home/ubuntu/u9/bz/BUILD-BZ1021-1-full.log.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
-
-- Assigned DegreeZero is now green and sorry-free at source b1c1890653a9221b928af7f85aac476908c7d89d.
-  ucheck-bump rc=0, failed=0, 7091 jobs; DegreeZero rebuilt in 62 seconds.
-- BertiniNoether's narrower imports exposed three missing imports in GenericIrreducibility;
-  added the defining Mathlib modules explicitly. Both prerequisites now build.
-- All Lean changes so far are imports only; all pre-existing proof/resource settings are unchanged.
-- Next: build all five direct importers, applying the known umbrella-import fix to Induction.
+- Branch: `u9/BZ1027`; start: `c42746d5e58cc55d63dd9ef190dd34bc4130ed3c`.
+- Replayed the final BZ1020 import repairs missing from its early upstream integration:
+  use `Mathlib.CategoryTheory.Sites.EpiMono` in `Integral.Exact` and remove the umbrella
+  `Mathlib` import from `SmoothBaseChange.CurveTestDatum`.
+- Assigned `Integral.BaseChange` and downstream `SmoothBaseChange.IntegralBaseChange`
+  and `SmoothBaseChange.CurveTestDatum` pass `ucheck-bump`: rc=0, built=12, failed=0.
+- Validated source commit: `fefcc97aeb`; remote log:
+  `/home/ubuntu/u9/logs/BZ1027-20261106T105011.log`.
+- All non-import source content is unchanged; machine rewrite rules replay the exact diff.
+- Further downstream work is deferred to live owners: BZ1021 (`FieldBaseChange`,
+  `Induction`) and BZ1028 (the `AlgClosedExtension` / `Vanishing` frontier).
+  No additional downstream modules were tested or claimed green.
+- Patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ1027.md`.
+- Completion marker: `/home/ubuntu/u9/state/BZ1027.DONE`.
+- No local Lean/Lake execution, declaration changes, proof escapes, or limit increases.
