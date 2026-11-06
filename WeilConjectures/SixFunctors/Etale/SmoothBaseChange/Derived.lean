@@ -168,8 +168,13 @@ lemma Etale.isIso_baseChange_app_singleFunctor_obj_iff (sq : IsPullback e h g p)
     IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app
         ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) ↔
       ∀ q, IsIso (Etale.baseChangeHomologyMap Λ sq q F) := by
-  rw [DerivedCategory.Plus.isIso_iff]
-  simp only [Etale.isIso_baseChangeHomologyMap_iff]
+  -- The statement is elaborated with the shortcut `ModuleCat.isGrothendieckAbelian_of_commRing`,
+  -- `Etale.isIso_baseChangeHomologyMap_iff` with the Mathlib instance; comparing them directly
+  -- makes the kernel unfold the derived categories, so the instance is generalized first.
+  generalize ModuleCat.isGrothendieckAbelian_of_commRing Λ = i
+  obtain rfl : i = instIsGrothendieckAbelianModuleCat Λ := Subsingleton.elim _ _
+  exact (DerivedCategory.Plus.isIso_iff _).trans
+    (forall_congr' fun q ↦ (Etale.isIso_baseChangeHomologyMap_iff Λ sq q F).symm)
 
 /-- The source `p^* ∘ Rg_*` of the derived base-change map does not lower the cohomological
 degree. -/
