@@ -308,9 +308,12 @@
   Restored nine historical declaration headers unchanged; all existing declarations
   and the assigned theorem statement are preserved.
 - The two Mathlib compositor directions are ported. The remaining category synthesis
-  failure now uses the known local `HasDerivedCategory.standard` registration.
-- Remote build `BUILD-BZ943-restoration3.log` is queued through `ucheck-bump`.
-  Never start another build while this one is active.
+  failure now uses the known local Category bridge across the two equivalent ring
+  presentations on the slice, plus an explicit slice category in `singleFunctor`.
+  Registering `HasDerivedCategory.standard` alone did not fix this case.
+- Assigned module and all six restored prerequisite modules are GREEN at `68a2db882848fd4f3e254310b71880a537fc0206`.
+  `ucheck-bump`: rc=0, failed=0, 7193 jobs, poolb:43.157.135.193.
+  Full log: `/home/ubuntu/u9/bz/BUILD-BZ943-restoration4-full.log`.
 - First downstream chain: `FiniteQuotientFiniteModuleCohomology`,
   `FiniteQuotientFiniteModuleModels`, `FinitePerfectQuotientModels`.
 - Evidence, exact errors, patterns and whole-tree counts:
