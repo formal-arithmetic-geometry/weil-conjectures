@@ -113,7 +113,7 @@ private theorem coefficientPullback_square
         (cg R).inv ≫ (ch R).hom := by
     simp only [exactDerivedSquareUpperStarIso, squareUpperStarIso,
       Functor.mapDerivedCategoryNatIso_trans, Functor.mapDerivedCategoryNatIso_symm,
-      Iso.trans_hom, Iso.symm_hom, cg, ch, Iso.trans_inv, Category.assoc]
+      Iso.trans_hom, Iso.symm_hom, cg, ch, Iso.trans_inv, Iso.symm_inv, Category.assoc]
   apply (cancel_epi ((cg B).hom.app ((scalarExtension φ Y).obj N))).mp
   simp only [hs, NatTrans.comp_app, ← Category.assoc, Iso.hom_inv_id_app,
     Category.id_comp]
