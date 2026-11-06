@@ -131,7 +131,7 @@ theorem exists_cohomology_class_of_isLimit
               (c'.π.app k.unop) (E.map f.unop) (π.app j.unop) (π.app k.unop)
               (c.π.app i) (hπ f.unop) (ht k.unop)
             simp only [c'.w f.unop] at h
-            exact (AddCommGrpCat.ofHom_comp _ _).symm.trans
+            simpa only [AddCommGrpCat.ofHom_comp] using
               (congrArg AddCommGrpCat.ofHom h).symm } }
   have hH (j k : Over i) (f : j ⟶ k) : H.map f.op =
       (eH k).hom ≫ AddCommGrpCat.ofHom

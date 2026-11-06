@@ -242,7 +242,8 @@ private def scalarSections (T : Scheme.{u}) (O : Type (u + 1)) [CommRing O]
      naturality := by
        intro U V f
        ext x
-       change (unit T (coefficient O t n)).app V a • M.val.map f x =
+       change (unit T (coefficient O t n)).app V a •
+         (show M.val.obj V from M.val.map f x) =
          M.val.map f ((unit T (coefficient O t n)).app U a •
            (show M.val.obj U from x))
        rw [M.val.map_smul]

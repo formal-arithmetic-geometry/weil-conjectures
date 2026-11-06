@@ -292,7 +292,7 @@ theorem nonempty_localizedResidueHomology_sheaf_restriction_iso (S : Scheme.{u})
   have : Limits.PreservesFiniteLimits (R ⋙ E) := Limits.comp_preservesFiniteLimits _ _
   have : Limits.PreservesFiniteColimits (R ⋙ E) := Limits.comp_preservesFiniteColimits _ _
   let combined := @Functor.mapDerivedCategory _ _ _ hA _ _ _ hB (R ⋙ E) _ _ _
-  let comp : combined ≅ F := Functor.mapDerivedCategoryCompIso R E
+  let comp : combined ≅ F := (Functor.mapDerivedCategoryCompIso R E).symm
   let g := S.fromSpecResidueField (U.ι x)
   let r := Spec.map (U.ι.residueFieldMap x)
   let T : C ⥤ D := Scheme.Modules.tensorPullback r
