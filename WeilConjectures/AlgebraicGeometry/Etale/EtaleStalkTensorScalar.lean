@@ -141,7 +141,9 @@ theorem etale_stalk_tensor_unique
   intro a ha
   apply ((p.isColimitPresheafFiberCocone F.obj).tensor
     (p.isColimitPresheafFiberCocone G.obj)).hom_ext
-  rintro ⟨⟨U, x⟩⟩
+  intro j
+  let U := j.unop.1
+  let x := j.unop.2
   exact (ha U x).trans (hμ U x).symm
 
 end Tensor

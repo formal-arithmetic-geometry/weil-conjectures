@@ -76,8 +76,8 @@ private theorem transport_representatives
 
 set_option linter.unusedVariables false in
 -- The quantified proof hypotheses occur only in the proof, not in the conclusion.
-set_option maxHeartbeats 1600000 in
--- Elaborating the stalk tensor-model instances and their scalar extensions needs this budget.
+set_option maxHeartbeats 2400000 in
+-- The reconstructed counit arguments exhausted 1600000 heartbeats after 68s near the proof's end.
 /-- Transport the localized tensor comparison into derived pullback, independently
 of any coefficient morphism or target representative.
 

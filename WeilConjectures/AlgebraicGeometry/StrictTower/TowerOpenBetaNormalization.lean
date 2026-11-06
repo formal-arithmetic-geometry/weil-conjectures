@@ -356,6 +356,7 @@ def openBetaTower {U' U X' X : Scheme.{u}}
       (openBetaModule B a j' j g w sq) ≪≫
     (Functor.whiskeringRightObjCompIso _ _).symm
 
+set_option backward.isDefEq.respectTransparency true in
 /-- The derived tower comparison is the exact descent of the specific sheaf comparison,
 and its inverse has the specified open-unit transpose before evaluation.
 Source: Stacks, Tags 015F, 09AE and 04J0

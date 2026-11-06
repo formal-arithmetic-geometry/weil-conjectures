@@ -338,6 +338,7 @@ theorem exchangeOrdinaryResPull_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y �
   rw [reassoc_of% h', Iso.inv_hom_id_app_assoc, ← Functor.map_comp, Iso.inv_hom_id_app]
   erw [CategoryTheory.Functor.map_id, Category.comp_id]
 
+attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits in
 /-- Restriction to constant coefficients respects the derived inverse-image compositors.
 Source: Stacks, Modules on Sites, Tags 03D8 and 03D7 (blueprint: thm-cbc-complete-proetale).
 -/

@@ -85,7 +85,10 @@ theorem range_eq_setOf_nonempty_pullback_fiber_iso_unit
       (IsLocalRing.closedPoint (S.residueField s)) N
     exact ⟨d ≪≫ (Modules.pullback p).mapIso eN ≪≫ Modules.pullbackObjUnitIso p⟩
   · rintro ⟨e⟩
-    have hunit := SheafOfModules.IsInvertible.isFiniteLocallyFree
+    have : SheafOfModules.IsInvertible.{u, u, u}
+        (SheafOfModules.unit (Spec (S.residueField s)).ringCatSheaf) :=
+      SheafOfModules.instIsInvertibleUnit.{u, u, u}
+    have hunit := SheafOfModules.IsInvertible.isFiniteLocallyFree.{u, u, u}
       (SheafOfModules.unit (Spec (S.residueField s)).ringCatSheaf)
     obtain ⟨h, hh⟩ := (hZ g).mpr ⟨SheafOfModules.unit _, hunit,
       ⟨(tensorPullbackIsoPullback q).app L ≪≫ e ≪≫

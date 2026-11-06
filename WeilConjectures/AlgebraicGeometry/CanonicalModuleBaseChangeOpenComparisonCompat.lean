@@ -5,10 +5,15 @@ Authors: Bin Wu
 -/
 
 module
-
 public import WeilConjectures.AlgebraicGeometry.DerivedModuleBaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
-
+import WeilConjectures.AlgebraicGeometry.BaseChangeOpenFixedCounits
+import WeilConjectures.AlgebraicGeometry.ModulePullbackComparisonTargetAutomorphism
+@[expose] public section
+set_option autoImplicit false
+universe u w
+open CategoryTheory Limits Opposite
+namespace AlgebraicGeometry
 private theorem conjugateSquare {C : Type*} [Category* C]
     {L L0 N N0 : C} (m : L ⟶ N) (n : L0 ⟶ N0)
     (a : L ≅ L0) (b : N ≅ N0) (A : N ≅ N) (B : N0 ≅ N0)
@@ -17,6 +22,8 @@ private theorem conjugateSquare {C : Type*} [Category* C]
   simp only [Iso.trans_hom, Iso.symm_hom, Category.assoc, Iso.hom_inv_id_assoc]
   rw [← Category.assoc, h, Category.assoc]
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 private theorem canonicalTensorComparison
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -40,6 +47,12 @@ private theorem canonicalTensorComparison
     erw [Category.assoc, Category.assoc, ← Functor.map_comp, ht]
     erw [CategoryTheory.Functor.map_id, Category.comp_id]
 
+set_option linter.unusedVariables false in
+-- Keep the original universally quantified comparison-proof binder hc0 unchanged.
+set_option maxHeartbeats 1000000 in
+-- Comparing the restricted derived-category witnesses needs extra elaboration heartbeats.
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Compatibility of restriction isomorphisms with the canonical base-change map.
 Source: Stacks Project, Tags 08FE, 08HY, 08IB.
 (blueprint: lem-pc-canonical-module-base-change-open-comparison-compat) -/
@@ -122,3 +135,4 @@ theorem restricted_base_change_compatibility
   have h := conjugateSquare _ _ a b A B hb
   simpa only [A, B, R, T, T0, c₁, c₂, hα, hγ, Functor.map_comp, Functor.mapIso_hom,
     Functor.mapIso_inv, Iso.trans_hom, Iso.symm_hom, Category.assoc] using h
+end AlgebraicGeometry

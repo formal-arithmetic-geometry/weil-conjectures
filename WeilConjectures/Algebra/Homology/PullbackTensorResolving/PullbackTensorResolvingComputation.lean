@@ -297,6 +297,59 @@ private noncomputable def scalarExtensionIdIso
   change F.map (scalarExtensionPresheafIdIso R M).inv ≫ F.map a.val ≫ _ = _
   rw [← F.map_comp_assoc, hp', F.map_comp_assoc]
 
+set_option synthInstance.maxSize 256 in
+open MonoidalCategory in
+private theorem isKFlat_of_iso
+    {C : Type uC} [Category.{vC} C] [EssentiallySmall.{r} C] {J : GrothendieckTopology C}
+    {R : Sheaf J CommRingCat.{r}}
+    {P Q : CochainComplex (SheafOfModules.{r}
+      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ}
+    (e : P ≅ Q) (hP : P.IsKFlatIndependentCoefficients) : Q.IsKFlatIndependentCoefficients := by
+  let := isMonoidal_W_independentCoefficients R
+  let := monoidalCategory R
+  intro A hA n
+  let F := (MonoidalCategory.curriedTensor (SheafOfModules.{r}
+    ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))).mapBifunctorHomologicalComplex
+      (ComplexShape.up ℤ) (ComplexShape.up ℤ)
+  let e' : CochainComplex.mapBifunctor A P (curriedTensor _) ≅
+      CochainComplex.mapBifunctor A Q (curriedTensor _) :=
+    HomologicalComplex₂.total.mapIso ((F.obj A).mapIso e) (ComplexShape.up ℤ)
+  exact ((HomologicalComplex.exactAt_iff_isZero_homology _ n).1 (hP A hA n)).of_iso
+    ((HomologicalComplex.homologyFunctor _ _ n).mapIso e').symm |>
+      (HomologicalComplex.exactAt_iff_isZero_homology _ n).2
+
+private theorem isKFlat_inverseImage
+    {C : Type uC} [Category.{vC} C] [EssentiallySmall.{r} C]
+    {D : Type uD} [Category.{vD} D] [EssentiallySmall.{r} D]
+    {JC : GrothendieckTopology C} {JD : GrothendieckTopology D}
+    {R : Sheaf JC CommRingCat.{r}} {RI : Sheaf JD CommRingCat.{r}}
+    (L : Sheaf JC (Type (r)) ⥤ Sheaf JD (Type (r)))
+    (V : Sheaf JD (Type (r)) ⥤ Sheaf JC (Type (r))) (adj : L ⊣ V)
+    [PreservesFiniteLimits L] (I : AlgebraicInverseImage L R RI) [I.modules.Additive]
+    (P : CochainComplex (SheafOfModules.{r}
+      ((sheafCompose JC (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ)
+    (hP : P.IsKFlatIndependentCoefficients)
+    (hf : ∀ n : ℤ, IsFlatOnSite (J := JC) (R := R) (P.X n)) :
+    CochainComplex.IsKFlatIndependentCoefficients
+      ((I.modules.mapHomologicalComplex (ComplexShape.up ℤ)).obj P) := by
+  have := algebraicInverseImage_finiteLimits L I
+  have : I.modules.Additive := Functor.additive_of_preserves_binary_products I.modules
+  have := scalarExtension_additive (𝟙 RI)
+  let U := I.modules ⋙ scalarExtension (𝟙 RI)
+  have hobj (M) : U.obj M = changeOfRings.{vD, uD, r} (𝟙 RI) (I.modules.obj M) := rfl
+  have hmap {M N} (a : M ⟶ N) : U.map a = eqToHom (hobj M) ≫
+      changeOfRingsHom.{vD, uD, r} (𝟙 RI) (I.modules.obj M) (I.modules.map a) ≫
+        eqToHom (hobj N).symm := by
+    simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
+    rfl
+  have hk := (isKFlat_ringedToposPullback L V adj I (𝟙 RI) U hobj hmap P
+    hP
+      hf).1
+  let e : U ≅ I.modules :=
+    Functor.isoWhiskerLeft I.modules (scalarExtensionIdIso RI) ≪≫ I.modules.rightUnitor
+  exact isKFlat_of_iso ((NatIso.mapHomologicalComplex e (ComplexShape.up ℤ)).app P)
+    hk
+
 open CategoryTheory.CochainPullback hiding Modules
 open SheafOfModules.KFlatFixedTensor
 
@@ -306,6 +359,8 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{r} C]
   {R : Sheaf J CommRingCat.{r}} {S : Sheaf K CommRingCat.{r}}
   [HasDerivedCategory.{wR} (Modules R)] [HasDerivedCategory.{wS} (Modules S)]
 
+set_option maxHeartbeats 400000 in
+-- The derived-change-of-rings comparison needs more time after the upstream bump.
 /-- The prescribed complex-level derived-pullback counit is invertible on every
 flat-term K-flat complex, with independent site and coefficient universes.
 Source: Stacks 06YY and 0G7E

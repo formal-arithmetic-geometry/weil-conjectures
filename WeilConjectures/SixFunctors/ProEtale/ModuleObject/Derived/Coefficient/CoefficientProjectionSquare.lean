@@ -326,6 +326,39 @@ variable {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+set_option maxHeartbeats 800000 in
+-- The comparison specializes four large derived adjunctions.
+private theorem path_conjugate :
+    conjugateEquiv
+      ((derivedUpperStarLowerStarAdjunction R f).comp
+        (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a X)))
+      ((Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a Y)).comp
+        (derivedUpperStarLowerStarAdjunction S f))
+      (coefficientScalarPathIso a f).hom =
+        (derivedComapLowerStarIso a f).inv := by
+  let := (upperStarLowerStarAdjunction S f).preservesKInjectiveComplexes
+  have h := Functor.derived_square_conjugate (upperStar R f)
+    (Mod.extendScalars (coefficientMap a X)) (Mod.extendScalars (coefficientMap a Y))
+    (upperStar S f) (upperStarLowerStarAdjunction R f)
+    (Mod.extendRestrictAdjunction (coefficientMap a X))
+    (Mod.extendRestrictAdjunction (coefficientMap a Y)) (upperStarLowerStarAdjunction S f)
+    (comapLowerStarIso a f).symm (pullIso a f).symm
+    (((conjugateEquiv _ _).apply_symm_apply _).symm)
+  exact h.trans (by
+    simp only [derivedComapLowerStarIso, Iso.trans_hom, Iso.trans_inv, Iso.symm_inv,
+      Functor.isoWhiskerRight_hom, Functor.isoWhiskerRight_inv,
+      Functor.rightDerivedFunctorNatIso, Iso.symm_hom, Category.assoc])
+
+-- Do not expand the canonical comparisons during tactic matching.
+attribute [local irreducible]
+  AlgebraicGeometry.ProEtale.CondensedRing.coefficientScalarPathIso
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option synthInstance.maxHeartbeats 200000 in
+-- The statement shares geometric and scalar derived tensor instances.
+set_option maxHeartbeats 800000 in
+-- The categorical square specializes large derived adjunctions.
 /-- The specified scalar push mate and pull comparison commute with the actual projection
 morphism, on ordinary unbounded derived module-object categories.
 Source: blueprint main-20261015, proper-base-change-rational.proof.md (3)
@@ -432,32 +465,5 @@ theorem coefficientProjectionSquare
   simpa only [moduleObjectProjectionMap, moduleObjectProjectionData,
     internalScalarTensorComparison, moduleObjectDerivedPushforward,
     moduleObjectDerivedPullback, internalScalarExtension, α, Iso.symm_inv] using h.symm
-
-set_option maxHeartbeats 800000 in
--- The comparison specializes four large derived adjunctions.
-private theorem path_conjugate :
-    conjugateEquiv
-      ((derivedUpperStarLowerStarAdjunction R f).comp
-        (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a X)))
-      ((Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a Y)).comp
-        (derivedUpperStarLowerStarAdjunction S f))
-      (coefficientScalarPathIso a f).hom =
-        (derivedComapLowerStarIso a f).inv := by
-  let := (upperStarLowerStarAdjunction S f).preservesKInjectiveComplexes
-  have h := Functor.derived_square_conjugate (upperStar R f)
-    (Mod.extendScalars (coefficientMap a X)) (Mod.extendScalars (coefficientMap a Y))
-    (upperStar S f) (upperStarLowerStarAdjunction R f)
-    (Mod.extendRestrictAdjunction (coefficientMap a X))
-    (Mod.extendRestrictAdjunction (coefficientMap a Y)) (upperStarLowerStarAdjunction S f)
-    (comapLowerStarIso a f).symm (pullIso a f).symm
-    (((conjugateEquiv _ _).apply_symm_apply _).symm)
-  exact h.trans (by
-    simp only [derivedComapLowerStarIso, Iso.trans_hom, Iso.trans_inv, Iso.symm_inv,
-      Functor.isoWhiskerRight_hom, Functor.isoWhiskerRight_inv,
-      Functor.rightDerivedFunctorNatIso, Iso.symm_hom, Category.assoc])
-
--- Do not expand the canonical comparisons during tactic matching.
-attribute [local irreducible]
-  AlgebraicGeometry.ProEtale.CondensedRing.coefficientScalarPathIso
 
 end AlgebraicGeometry.ProEtale.CondensedRing

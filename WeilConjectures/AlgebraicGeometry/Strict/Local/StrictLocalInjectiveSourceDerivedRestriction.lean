@@ -26,6 +26,8 @@ open AlgebraicGeometry
 
 namespace AlgebraicGeometry.Etale
 
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency true in
 /-- The germ leg and derived mate agree with restriction of stage hypercohomology.
 This identity stops before replacing derived restriction by termwise restriction:
 that replacement is the separate theorem `smallModel_injectiveSections_strictLocal_comparison`.

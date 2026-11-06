@@ -21,6 +21,18 @@ Source: Stacks Project, Derived Categories of Schemes, Tag 09IR, proof via
 Lemma 36.9.6 and Tag 06Z0 (blueprint: lem-pc-koszul-affine-detection).
 -/
 
+@[expose] public section
+
+universe u w
+
+open CategoryTheory CategoryTheory.Limits
+
+namespace AlgebraicGeometry
+
+-- Apply the affine generator criterion in the standard localization, then transport
+-- back to the given universe using uniqueness of localization. This avoids asking
+-- for new localization instances in the arbitrary universe w on every open.
+set_option backward.isDefEq.respectTransparency false in
 private theorem affine_unit_detects (A : Type u) [CommRing A]
     [HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))]
@@ -71,6 +83,7 @@ private theorem affine_unit_detects (A : Type u) [CommRing A]
 -- Only the triangle clause of represent-cohomology is used here. Obtain it in the
 -- standard localization and transport its three objects and maps back along the
 -- triangulated equivalence induced by the identity on the homotopy category.
+set_option backward.isDefEq.respectTransparency false in
 private theorem koszul_triangles (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     [HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))]
@@ -140,6 +153,7 @@ private theorem koszul_triangles (A : Type u) [CommRing A] (r : ℕ) (f : Fin r 
     simp only [δ, Iso.hom_inv_id_assoc]
 
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Koszul powers detect an object of `D_QCoh` supported on the common zero locus.
 The Koszul complexes are sheafified termwise and placed in nonpositive cochain degrees;
 they are the bounded finite-free, hence perfect, complexes of Stacks Tag 09IR.
@@ -224,3 +238,5 @@ theorem isZero_of_koszul_powers_orthogonal
   have : Subsingleton ((koszulOpenStructure A)⟦n⟧ ⟶ E.obj) :=
     ⟨fun φ ψ ↦ (hz φ).trans (hz ψ).symm⟩
   exact (Iso.homCongr ((shiftFunctor _ n).mapIso unitIso) (Iso.refl E.obj)).symm.subsingleton
+
+end AlgebraicGeometry

@@ -434,6 +434,7 @@ private theorem projector_unit_fac
   rw [projector_factorsh, Adjunction.mapHomotopyCategory_unit_app_quotient] at h
   exact h
 
+set_option backward.isDefEq.respectTransparency true in
 private theorem projector_restriction_descent
     {A D : Type*} [Category A] [Category D] [Abelian A] [Abelian D]
     [HasDerivedCategory A] [HasDerivedCategory D] [Abelian.HasKInjectiveResolutions A]
@@ -505,28 +506,10 @@ private theorem projector_lift_fac (K : CochainComplex A ℤ) :
   simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
   rfl
 
-private theorem projector_map_descent : ClopenProjectorDescent
-    (𝟭 A) (F ⋙ H) p ((Functor.mapDerivedCategoryIdIso A).hom ≫
-      projector_map F H p ≫ (Functor.mapDerivedCategoryCompIso F H).inv) := by
-  have h : (Functor.mapDerivedCategoryIdIso A).hom ≫ projector_map F H p ≫
-      (Functor.mapDerivedCategoryCompIso F H).inv = projector_lift F H p := by
-    rw [projector_map]
-    simp only [Category.assoc, Iso.hom_inv_id_assoc, Iso.hom_inv_id, Category.comp_id]
-  rw [h]
-  exact projector_lift_fac F H p
-
-private theorem projector_map_descent_eq
-    (e : 𝟭 (DerivedCategory A) ⟶ F.mapDerivedCategory ⋙ H.mapDerivedCategory)
-    (he : projector_map F H p = e) : ClopenProjectorDescent
-    (𝟭 A) (F ⋙ H) p ((Functor.mapDerivedCategoryIdIso A).hom ≫
-      e ≫ (Functor.mapDerivedCategoryCompIso F H).inv) := by
-  rw [← he]
-  exact projector_map_descent F H p
-
 @[irreducible] private def projector_map :
     𝟭 (DerivedCategory A) ⟶ F.mapDerivedCategory ⋙ H.mapDerivedCategory :=
   (Functor.mapDerivedCategoryIdIso A).inv ≫ projector_lift F H p ≫
-    (Functor.mapDerivedCategoryCompIso F H).inv
+    (Functor.mapDerivedCategoryCompIso F H).hom
 
 private theorem projector_map_fac (K : CochainComplex A ℤ) :
     (projector_map F H p).app (DerivedCategory.Q.obj K) ≫
@@ -546,6 +529,24 @@ private theorem projector_map_fac (K : CochainComplex A ℤ) :
     _ = _ := by
       rw [projector_lift_fac, ← hi]
       exact Iso.inv_hom_id_app_assoc _ _ _
+
+private theorem projector_map_descent : ClopenProjectorDescent
+    (𝟭 A) (F ⋙ H) p ((Functor.mapDerivedCategoryIdIso A).hom ≫
+      projector_map F H p ≫ (Functor.mapDerivedCategoryCompIso F H).inv) := by
+  have h : (Functor.mapDerivedCategoryIdIso A).hom ≫ projector_map F H p ≫
+      (Functor.mapDerivedCategoryCompIso F H).inv = projector_lift F H p := by
+    rw [projector_map]
+    simp only [Category.assoc, Iso.hom_inv_id_assoc, Iso.hom_inv_id, Category.comp_id]
+  rw [h]
+  exact projector_lift_fac F H p
+
+private theorem projector_map_descent_eq
+    (e : 𝟭 (DerivedCategory A) ⟶ F.mapDerivedCategory ⋙ H.mapDerivedCategory)
+    (he : projector_map F H p = e) : ClopenProjectorDescent
+    (𝟭 A) (F ⋙ H) p ((Functor.mapDerivedCategoryIdIso A).hom ≫
+      e ≫ (Functor.mapDerivedCategoryCompIso F H).inv) := by
+  rw [← he]
+  exact projector_map_descent F H p
 
 end ProjectorLocalization
 
@@ -617,6 +618,7 @@ private theorem intrinsic_projector_normalization {U X : Scheme.{u}}
   rw [Category.assoc, ← Functor.whiskerLeft_comp]
   simp only [IsIso.inv_hom_id, Functor.whiskerLeft_id', Category.comp_id]
 
+set_option backward.isDefEq.respectTransparency true in
 /-- Localization gives the specified intrinsic projector and preserves the normalized
 unit and both component equations as actual transformations on D(T_X).
 Source: Stacks 015F, 0DVC, 0FND and localization's universal property
@@ -774,6 +776,21 @@ private theorem iso_projector_counit {U X : Scheme.{u}}
   dsimp only [Functor.id_obj, Functor.comp_obj]
   exact ((jAdj B s).right_triangle_components M).trans ((G B s).map_id M).symm
 
+/-- Alpha is beta followed by the descended section projection and the specified
+open and inverse-image compositors. Cartesian squares recover beta; an identity
+left vertical map makes the lift the indicated clopen section.
+Source: Stacks 0F7B, with the arbitrary-ring strict-tower refinement
+(blueprint: lem-cbc-proper-open-clopen-projector).
+Proof: insert the section projection into the definition of alpha and use its
+identification with pi. The equations bs=k and qs=r give the displayed final
+compositors. In a cartesian square the canonical lift is the pullback isomorphism.
+Its inverse-image functor is faithful, by the inverse-map and identity compositors.
+The projector restriction and adjunction triangle then show that pi followed by
+the open counit is identity. Source factorization of betaInv inserts this counit;
+naturality and cancellation of the open and inverse-image compositors give beta.
+For V=S and r=identity the pullback equations give qs=identity, so the same
+projector selects the clopen section (k,identity). All equalities are equalities
+of natural transformations on the whole unbounded derived category. -/
 theorem properOpen_clopen_projector {V W S T : Scheme.{u}}
     (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
     [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]

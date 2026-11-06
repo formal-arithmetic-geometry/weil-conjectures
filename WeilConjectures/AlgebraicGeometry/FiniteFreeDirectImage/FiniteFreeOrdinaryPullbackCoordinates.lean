@@ -217,6 +217,40 @@ private theorem ordinaryBalancing_pure {Z W : Scheme.{u}} {q : Z ⟶ W}
     ((proEtaleBaseChange q).op.obj V)).hom.map_smul, ordinaryBalancing_unit]
   exact (sectionTensor_smul_one (sZ.presentation a.source) _ _ _ _).symm
 
+private theorem presentedTensor_hom_ext (X : Scheme.{u}) (s : ScalarModel X)
+    {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}} (a : R ⟶ S) (d : ℕ)
+    (θ : (∏ᶜ fun _ : Fin d ↦ SheafOfModules.unit ((sheafCompose (ProEt.topology X)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)) ≅
+      (proEtaleRingRestrictScalars a).obj (SheafOfModules.unit ((sheafCompose
+        (ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S)))
+    (M N : proEtaleRingModules X R)
+    (f g : (proEtaleRingRestrictScalars a).obj ((s.presentation a).ordinary.obj M) ⟶ N)
+    (h : ∀ (V : X.ProEtᵒᵖ) (b : S.obj.obj V) (m : M.val.obj V),
+      f.val.app V (sectionTensor (s.presentation a) M V b m) =
+        g.val.app V (sectionTensor (s.presentation a) M V b m)) : f = g := by
+  let p := s.presentation a
+  let U := proEtaleRingRestrictScalars a
+  apply (cancel_epi (U.map (eqToHom (p.obj_eq M).symm))).mp
+  apply SheafOfModules.scalarExtension_hom_ext_of_basis a d θ M N
+  let VR := PresheafOfModules.toPresheaf ((sheafCompose (ProEt.topology X)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R).obj
+  let VS := PresheafOfModules.toPresheaf ((sheafCompose (ProEt.topology X)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S).obj
+  apply VR.map_injective
+  change VS.map (SheafOfModules.tensorUnit a M) ≫
+      VR.map (U.map (eqToHom (p.obj_eq M).symm) ≫ f).val =
+    VS.map (SheafOfModules.tensorUnit a M) ≫
+      VR.map (U.map (eqToHom (p.obj_eq M).symm) ≫ g).val
+  dsimp only [VS]
+  unfold SheafOfModules.tensorUnit
+  simp only [PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app]
+  ext V z
+  induction z using TensorProduct.inductionOn with
+  | tmul b m => exact h V b m
+  | add x y hx hy => simp_all
+
+set_option maxHeartbeats 400000 in
+-- Elaborating the projected square expands both scalar and geometric adjunctions.
 private theorem ordinaryCoordinate_square {Z W : Scheme.{u}} {q : Z ⟶ W}
     (sW : ScalarModel W) (sZ : ScalarModel Z)
     (R S : Coefficients q) (a : CoefficientMap R S) (d : ℕ)
@@ -339,37 +373,5 @@ theorem finiteFreeDirectImage_ordinaryPullbackCoordinates {Z W : Scheme.{u}} (q 
   obtain ⟨φZ, _, _, hεZ, hZ⟩ := finiteFreeDirectImage_presentedScalarCoordinates Z sZ a.source d
     θZ
   exact ⟨φW, φZ, hεW, hεZ, ordinaryCoordinate_square sW sZ R S a d θ θZ hcoord φW φZ hW hZ⟩
-
-private theorem presentedTensor_hom_ext (X : Scheme.{u}) (s : ScalarModel X)
-    {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}} (a : R ⟶ S) (d : ℕ)
-    (θ : (∏ᶜ fun _ : Fin d ↦ SheafOfModules.unit ((sheafCompose (ProEt.topology X)
-      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)) ≅
-      (proEtaleRingRestrictScalars a).obj (SheafOfModules.unit ((sheafCompose
-        (ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S)))
-    (M N : proEtaleRingModules X R)
-    (f g : (proEtaleRingRestrictScalars a).obj ((s.presentation a).ordinary.obj M) ⟶ N)
-    (h : ∀ (V : X.ProEtᵒᵖ) (b : S.obj.obj V) (m : M.val.obj V),
-      f.val.app V (sectionTensor (s.presentation a) M V b m) =
-        g.val.app V (sectionTensor (s.presentation a) M V b m)) : f = g := by
-  let p := s.presentation a
-  let U := proEtaleRingRestrictScalars a
-  apply (cancel_epi (U.map (eqToHom (p.obj_eq M).symm))).mp
-  apply SheafOfModules.scalarExtension_hom_ext_of_basis a d θ M N
-  let VR := PresheafOfModules.toPresheaf ((sheafCompose (ProEt.topology X)
-    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R).obj
-  let VS := PresheafOfModules.toPresheaf ((sheafCompose (ProEt.topology X)
-    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S).obj
-  apply VR.map_injective
-  change VS.map (SheafOfModules.tensorUnit a M) ≫
-      VR.map (U.map (eqToHom (p.obj_eq M).symm) ≫ f).val =
-    VS.map (SheafOfModules.tensorUnit a M) ≫
-      VR.map (U.map (eqToHom (p.obj_eq M).symm) ≫ g).val
-  dsimp only [VS]
-  unfold SheafOfModules.tensorUnit
-  simp only [PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app]
-  ext V z
-  induction z using TensorProduct.inductionOn with
-  | tmul b m => exact h V b m
-  | add x y hx hy => simp_all
 
 end AlgebraicGeometry.Scheme.FiniteFreeDirectImage

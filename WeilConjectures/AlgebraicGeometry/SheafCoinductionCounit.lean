@@ -86,7 +86,8 @@ private noncomputable def coinductionCurryApp
   app W := ModuleCat.ofHom
     (X := ((PresheafOfModules.restrictOver R.obj U).obj (AM).val).obj W)
     (Y := ((PresheafOfModules.restrictOver R.obj U).obj F.val).obj W)
-    { toFun := fun b => g.val.app (op W.unop.left) (b • G.val.map W.unop.hom.op m)
+    { toFun := fun b => g.val.app (op W.unop.left)
+        ((show (A).obj.obj (op W.unop.left) from b) • G.val.map W.unop.hom.op m)
       map_add' := by
         intro b c
         simp only [add_smul, map_add]
@@ -103,6 +104,7 @@ private noncomputable def coinductionCurryApp
     apply ModuleCat.hom_ext
     apply LinearMap.ext
     intro b
+    change (A).obj.obj (op W.unop.left) at b
     change g.val.app (op W'.unop.left)
       ((A).obj.map h.unop.left.op b • G.val.map W'.unop.hom.op m) =
         F.val.map h.unop.left.op
@@ -170,6 +172,7 @@ private noncomputable def coinductionCurry
         apply ModuleCat.hom_ext
         apply LinearMap.ext
         intro b
+        change (A).obj.obj (op W.unop.left) at b
         change g.val.app (op W.unop.left)
           (b • G.val.map W.unop.hom.op (G.val.map h m)) =
             g.val.app (op W.unop.left) (b • G.val.map (W.unop.hom ≫ h.unop).op m)
@@ -306,7 +309,8 @@ private lemma coinductionTranspose_eval
     (ψ.val.app (op W.unop.left) (G.val.map W.unop.hom.op m)) =
       PresheafOfModules.restrictOverMap W.unop.hom (q.val.app U m) at hn
   change ((i.hom.app F).val.app (op W.unop.left)
-    (ψ.val.app (op W.unop.left) (b • G.val.map W.unop.hom.op m))).app
+    (ψ.val.app (op W.unop.left)
+      (b • (show G.val.obj (op W.unop.left) from G.val.map W.unop.hom.op m)))).app
       (op (Over.mk (𝟙 W.unop.left))) (1 : S.obj.obj (op W.unop.left)) =
         (q.val.app U m).app W b
   calc

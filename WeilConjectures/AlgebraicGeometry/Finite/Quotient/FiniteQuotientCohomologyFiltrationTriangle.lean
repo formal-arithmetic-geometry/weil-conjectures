@@ -128,3 +128,5 @@ theorem finiteQuotient_cohomology_filtration_triangle
       ((DerivedCategory.homologyFunctor _ q).mapIso e₃) ≪≫ e⟩⟩
 
 end AlgebraicGeometry.Scheme
+
+#print axioms AlgebraicGeometry.Scheme.finiteQuotient_cohomology_filtration_triangle
