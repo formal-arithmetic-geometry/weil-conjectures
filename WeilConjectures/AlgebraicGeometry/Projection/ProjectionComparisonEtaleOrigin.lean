@@ -161,7 +161,7 @@ private theorem exact_comparison_triangle
   simp only [Category.assoc, Iso.inv_hom_id_assoc,
     Functor.mapDerivedCategoryNatIso_trans]
   rw [reassoc_of% hn]
-  simp only [Functor.isoWhiskerLeft_hom, Iso.trans_hom,
+  simp only [Functor.isoWhiskerLeft_hom, Functor.isoWhiskerLeft_inv, Iso.trans_hom, Iso.symm_hom,
     Functor.whiskerLeft_comp]
   rw [← reassoc_of% hl]
 
