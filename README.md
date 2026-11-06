@@ -33,8 +33,8 @@ derived from the main theorem.
 ## Status
 
 The main theorems are proved without `sorry`. The Lean code on `master` is identical to
-commit `91ebbc09a7`, which was independently rebuilt from scratch: `#print axioms` shows
-only `propext`, `Classical.choice` and `Quot.sound`. See
+commit `91ebbc09a7`, which was independently built (from the shared build cache) and audited:
+`#print axioms` shows only `propext`, `Classical.choice` and `Quot.sound`. See
 [`formalization.yaml`](formalization.yaml) for the details of the process, the review
 status and the sources.
 
