@@ -261,13 +261,25 @@
   AffinePushforwardCohomologyEdgeIdentity, then continue downstream up to the brief's limit.
 - Fix log: /home/ubuntu/u9/bz/FIXES-BZ859.md. No local Lean/Lake, proof escapes, or limit raises.
 
-# BZ883 in progress
+# BZ883 complete
 
 - Branch: u9/BZ883; initial commit bf8c8b11135566efd44c8f83beb127b346f97afc.
-- Re-read the brief and progress notes on continuation; no new LEAD lines.
-- The user instructed continuation after the exact two-cast statement proposal.
-  Applied BZ883-statement-conversion-proposal.patch to the two regular-unit arguments.
-- Localization implementation imports already cleared the private internalLocalizationUnit error.
-- Next: remote ucheck-bump on SectionLocalizationUnitConstraints and its direct importer,
-  SectionResolvingOplaxUnitModels, then continue downstream under the brief's rules.
-- Fix records: /home/ubuntu/u9/bz/FIXES-BZ883.md. No local Lean/Lake or proof shortcuts.
+- Final ucheck-bump passed: rc=0, built=9, failed=0, 4833 jobs.
+- Validated source commit: f9b5e19c0382df5c3d1c3678921264e2e3a186d7.
+- Green modules: SectionLocalizationUnitConstraints, SectionResolvingOplaxUnitModels,
+  SectionResolvingOplaxInternalConjugation, SectionResolvingOplaxConstraintDiagrams
+  (all under WeilConjectures.AlgebraicGeometry).
+- Added Localization imports for hidden Qh conversions in three modules. The user
+  instructed continuation after the exact two-cast statement proposal; those two
+  reflexive casts are applied. One downstream proof simplifies identity casts and
+  finishes with exact under with_unfolding_all. All other statements/docs are unchanged.
+- Two deeper modules were attempted: SectionDerivedRepresentativeSquare and
+  SectionDerivedTensorNormalization. Both are skipped because BZ867-owned prerequisite
+  SectionResolutionConjugationIdentities fails at 576:39 (Application type mismatch)
+  and 772:4 (Type mismatch: After simplification, term). No unowned source was changed.
+- Final log: /home/ubuntu/u9/bz/BUILD-BZ883-final-full.log.
+- Fix patterns and exact rewrite rules: /home/ubuntu/u9/bz/FIXES-BZ883.md.
+- Contract audit: /home/ubuntu/u9/bz/BZ883-contract-audit.txt; all rules replay exactly.
+- Completion marker: /home/ubuntu/u9/state/BZ883.DONE.
+- No local Lean/Lake, sorries, proof shortcuts, profiler probes, or heartbeat increases.
+- This final commit changes only progress documentation; Lean sources match the green build.
