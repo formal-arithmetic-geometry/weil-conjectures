@@ -215,7 +215,7 @@ lemma scal_comp_nsmul_of_ne (i : D.ι) (hi : i ≠ D.i₀) (n : ℤ) :
 
 /-- The coproduct `∐ᵢ M∞` of complexes, computed termwise. -/
 noncomputable def cofan : Cofan (fun _ : D.ι ↦ M∞) :=
-  let mkCofan {C : Type _} [Category* C] [HasZeroMorphisms C]
+  let mkCofan {C : Type (u + 2)} [Category.{u + 1} C] [HasZeroMorphisms C]
       [HasColimitsOfShape (Discrete D.ι) C] (N : CochainComplex C ℤ) :
       Cofan (fun _ : D.ι ↦ N) :=
     HomologicalComplex.coconeOfHasColimitEval (Discrete.functor fun _ : D.ι ↦ N)
@@ -226,10 +226,15 @@ noncomputable def cofan : Cofan (fun _ : D.ι ↦ M∞) :=
 
 /-- The cofan `MoebiusDecomposition.cofan` is a coproduct. -/
 noncomputable def isColimitCofan : IsColimit D.cofan :=
+  let mkIsColimit {C : Type (u + 2)} [Category.{u + 1} C] [HasZeroMorphisms C]
+      [HasColimitsOfShape (Discrete D.ι) C] (N : CochainComplex C ℤ) :
+      IsColimit (HomologicalComplex.coconeOfHasColimitEval
+        (Discrete.functor fun _ : D.ι ↦ N)) :=
+    HomologicalComplex.isColimitCoconeOfHasColimitEval _
   haveI : HasColimitsOfShape (Discrete D.ι)
       (CategoryTheory.Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :=
     inferInstance
-  HomologicalComplex.isColimitCoconeOfHasColimitEval _
+  mkIsColimit M∞
 
 /-- The section `M∞ ⟶ ∐ᵢ M∞` with components `|Aᵢ|⁻¹ eᵢ` (`i ≠ i₀`) and `e_{i₀}`. -/
 noncomputable def sigmaSection : M∞ ⟶ D.cofan.pt where
