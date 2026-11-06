@@ -144,7 +144,7 @@ private noncomputable def contractionPresheaf
         erw [PresheafOfModules.Monoidal.tensorObj_map_tmul]
         exact congrArg (fun x : M.val.obj V ↦
           (show ((restrictScalars (𝓻 α)).obj M).val.obj V from x)
-            ⊗ₜ[R.obj.obj V] N.val.map i n) (M.val.map_smul i b m).symm
+            ⊗ₜ[R.obj.obj V] (show N.val.obj V from N.val.map i n)) (M.val.map_smul i b m).symm
 
 set_option maxHeartbeats 400000 in
 -- The coefficient comparison and tensor sheafification require extra equality checks.
