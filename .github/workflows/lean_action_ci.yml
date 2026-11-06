@@ -58,11 +58,17 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           FORK: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository }}
+          UPLOAD: ${{ github.ref == 'refs/heads/master' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch') }}
         run: |
           set -uo pipefail
           big='["self-hosted","big-server"]'; gh='"ubuntu-latest"'
           if [ "$FORK" = true ]; then
             choice=gh why="pull request from a fork"
+          elif [ "$UPLOAD" = true ]; then
+            # Master builds are uploaded, which needs the artifact cache on during the build: Lake
+            # then files ~23 GB of restored outputs again (17 min on big-server, over an hour on a
+            # 2-thread hosted runner). So master always waits for big-server.
+            choice=big why="master build (uploads): always big-server"
           else
             # Jobs on big-server: queued or in progress, in any active run of this repository.
             n=0 ok=true
