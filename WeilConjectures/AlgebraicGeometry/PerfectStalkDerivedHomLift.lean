@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
 public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkRestrictionComparison
 import WeilConjectures.AlgebraicGeometry.PerfectAffineMapRepresentative
