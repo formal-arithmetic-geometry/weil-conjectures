@@ -7,10 +7,10 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedPullbackMonoidalModel
-public import Mathlib.Algebra.Homology.Localization
-import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 public import Mathlib.Algebra.Homology.Monoidal
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.Algebra.Homology.KFlatPullback
 import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
 
@@ -436,8 +436,7 @@ theorem IsCanonicalPullbackTensorComparison.unique {T X : Scheme.{uTC}} {g : T �
         pullbackTensorModelMap T
           (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj P)
           (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj N))).1
-    have heq'' := heq.symm.trans (by simpa only [hhom] using heq')
-    simpa only [cast_eq] using heq''
+    erw [← heq, ← heq', hhom]
   funext E K
   obtain ⟨c⟩ := SingleComplexBaseChange.nonempty_coordinates g E
     ((derivedPullback g).obj E) (𝟙 _)
