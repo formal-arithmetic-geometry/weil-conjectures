@@ -229,9 +229,9 @@ theorem exists_supported_map_affine_union_gluing
   let d : H ≅ P ⋙ Q :=
     (Functor.mapDerivedCategoryNatIso
       (relative_restriction_comp_iso X U W Y hUW le_sup_left)).symm ≪≫
-      Functor.mapDerivedCategoryCompIso
+      (Functor.mapDerivedCategoryCompIso
         (schemeOpenOverlapRestriction X (homOfLE le_sup_left : W ⟶ Y))
-        (schemeOpenOverlapRestriction X (homOfLE hUW : U ⟶ W))
+        (schemeOpenOverlapRestriction X (homOfLE hUW : U ⟶ W))).symm
   have : Q.Additive := inferInstance
   obtain ⟨e, he⟩ := stabilized_map_restriction L H J JW P Q d kW kU c
     E.obj R β F α iW hα

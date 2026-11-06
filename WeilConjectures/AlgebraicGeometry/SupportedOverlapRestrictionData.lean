@@ -256,9 +256,9 @@ theorem exists_supported_overlap_restriction_data
       Functor.isoWhiskerLeft _ cE ≪≫ (Modules.restrictFunctorComp s.inv j).symm ≪≫
         Modules.restrictFunctorCongr hsW ≪≫ cW.symm
     let dV := (Functor.mapDerivedCategoryCompIso
-      (schemeOpenRestriction V.toScheme U) E.functor).symm ≪≫
+      (schemeOpenRestriction V.toScheme U) E.functor) ≪≫
         Functor.mapDerivedCategoryNatIso tV
-    let dW := (Functor.mapDerivedCategoryCompIso R E.functor).symm ≪≫
+    let dW := (Functor.mapDerivedCategoryCompIso R E.functor) ≪≫
       Functor.mapDerivedCategoryNatIso tW
     refine ⟨e, ⟨dV⟩, ⟨?_⟩⟩
     have : R.mapDerivedCategory.Additive := inferInstance
