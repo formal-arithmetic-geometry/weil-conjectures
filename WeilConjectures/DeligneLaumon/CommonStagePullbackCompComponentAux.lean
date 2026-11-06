@@ -8,7 +8,7 @@ module
 public import WeilConjectures.TraceFormula.Integral.IntegralPullbackComposition
 public import WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorHom
 public import WeilConjectures.DeligneLaumon.CommonStagePullbackCompData
-import WeilConjectures.TraceFormula.Integral.IntegralPullbackCompositionScalarRational
+import all WeilConjectures.TraceFormula.Integral.IntegralPullbackCompositionScalarRational
 import all Mathlib.Logic.Small.Defs
 
 /-! # Common-stage pullback composition: rational naturality
@@ -30,6 +30,38 @@ open scoped TensorProduct
 namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
+
+/-- A transported comparison whose implementation stays behind an opaque boundary. -/
+private irreducible_def commonStageTransportComparison
+    {A B C D : Type*} [Category* A] [Category* B] [Category* C] [Category* D]
+    (p : A ⥤ B) (q : C ⥤ D)
+    (SA TA : A ⥤ C) (SB TB : B ⥤ D) (eA : TA = SA) (eB : TB = SB)
+    (ρ : p ⋙ SB ≅ SA ⋙ q) (Q : A) :
+    TB.obj (p.obj Q) ≅ q.obj (TA.obj Q) :=
+  (eqToIso eB).app (p.obj Q) ≪≫ ρ.app Q ≪≫ q.mapIso ((eqToIso eA).app Q).symm
+
+/-- Transport a compositor using the named comparisons, before specializing the categories. -/
+private theorem commonStageTransportCompositor
+    {AX AY AZ BX BY BZ : Type*} [Category* AX] [Category* AY] [Category* AZ]
+    [Category* BX] [Category* BY] [Category* BZ]
+    (pEg : AZ ⥤ AY) (pEf : AY ⥤ AX) (pEfg : AZ ⥤ AX)
+    (pLg : BZ ⥤ BY) (pLf : BY ⥤ BX) (pLfg : BZ ⥤ BX)
+    (SX TX : AX ⥤ BX) (SY TY : AY ⥤ BY) (SZ TZ : AZ ⥤ BZ)
+    (eX : TX = SX) (eY : TY = SY) (eZ : TZ = SZ)
+    (ρf : pEf ⋙ SX ≅ SY ⋙ pLf) (ρg : pEg ⋙ SY ≅ SZ ⋙ pLg)
+    (ρfg : pEfg ⋙ SX ≅ SZ ⋙ pLfg)
+    (Q : AZ) (wE : pEfg.obj Q ≅ pEf.obj (pEg.obj Q))
+    (wL : ∀ Q' : BZ, pLfg.obj Q' ≅ pLf.obj (pLg.obj Q'))
+    (R : SX.map wE.hom ≫ ρf.hom.app (pEg.obj Q) ≫ pLf.map (ρg.hom.app Q) =
+      ρfg.hom.app Q ≫ (wL (SZ.obj Q)).hom) :
+    TX.map wE.hom =
+      (commonStageTransportComparison pEfg pLfg SZ TZ SX TX eZ eX ρfg Q).hom ≫
+        (wL (TZ.obj Q)).hom ≫
+        pLf.map (commonStageTransportComparison pEg pLg SZ TZ SY TY eZ eY ρg Q).inv ≫
+        (commonStageTransportComparison pEf pLf SY TY SX TX eY eX ρf (pEg.obj Q)).inv := by
+  simpa only [commonStageTransportComparison_def] using
+    compositor_transport pEg pEf pEfg pLg pLf pLfg SX SY SZ TX TY TZ
+      eX eY eZ ρf ρg ρfg Q wE wL R
 
 attribute [local irreducible] commonStagePullbackCompComponent
   commonStageDerivedPullback constructibleIntegralPullback
