@@ -167,7 +167,7 @@ theorem completedConstantRlimUnit_exists (T : Scheme.{u}) :
   simp only [DerivedCategory.quotientCompQhIso,
     HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift_hom,
     Quotient.lift.isLift_inv]
-  erw [Functor.map_id, Category.id_comp, Category.id_comp]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.id_comp]
   let : HasSheafify (ProEt.topology T) AddCommGrpCat.{u + 1} :=
     WeilConjectures.integralCoefficientAbSheafify.{u, 0} T
   let : (ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
