@@ -425,13 +425,19 @@
 - All ucheck invocations finished. This final commit changes documentation only.
 
 
-# BZ1066 in progress
+# BZ1066 complete
 
-- Branch: u9/BZ1066; starting commit dfaed262b6fc1850faba3b46955a11d3225a1e86.
-- The user instructed continuation after the exact one-statement compositor proposal.
-  Applied BZ1066-statement-migration.patch to derived_open_unit; its original comparison
-  direction is preserved under Mathlib b63f6e8a. The proof-local unit comparison uses .inv.
-- Merged owner BZ1057's prerequisite fixes at 872c0baf9bc.
-- Next: ucheck-bump on OpenImmersionProjectionComposition, then its four direct importers.
-- Fix records: /home/ubuntu/u9/bz/FIXES-BZ1066.md.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
+- Branch: u9/BZ1066; start dfaed262b6fc1850faba3b46955a11d3225a1e86.
+- Assigned OpenImmersionProjectionComposition is green and sorry-free: ucheck-bump
+  rc=0, failed=0, 11814 jobs; source 9a0b6bfc1a7b13721ff11af7fb583074e10e43e8.
+- Applied the explicitly proposed private compositor .symm after user continuation;
+  its original comparison is preserved. The proof-local unit comparison uses .inv.
+- Green downstream modules: CompactificationProjectionComposition and SfGraphProjectionWord.
+- The downstream run covered twelve extra modules through their import closure.
+  Remaining branches are blocked by other units' observed dependency errors.
+- Exact errors, owners, patterns, regex rules, counts, and import paths are recorded in
+  /home/ubuntu/u9/bz/FIXES-BZ1066.md and BZ1066-downstream-blocker-paths.json.
+- Merged BZ1057 prerequisite fixes at 872c0baf9bc; no competing dependency edits.
+- No local Lean/Lake, proof escapes, declaration deletions, or heartbeat changes.
+- All ucheck invocations finished. This completion commit changes documentation only.
+- Completion marker: /home/ubuntu/u9/state/BZ1066.DONE.
