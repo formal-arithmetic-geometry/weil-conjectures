@@ -267,7 +267,7 @@ theorem scalarPullback_composition
     (N : DerivedCategoryModule A T₂) :
     (Functor.mapDerivedCategoryNatIso
           (upperStarComp (ModuleCat.{u + 1} B) j₁ v j₂ h.symm) ≪≫
-        Functor.mapDerivedCategoryCompIso _ _).hom.app ((scalarExtension φ T₂).obj N) ≫
+        (Functor.mapDerivedCategoryCompIso _ _).symm).hom.app ((scalarExtension φ T₂).obj N) ≫
       (upperStar (ModuleCat.{u + 1} B) j₁).mapDerivedCategory.map
         ((Functor.isoWhiskerLeft _
           (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} B) v).symm ≪≫
@@ -285,7 +285,7 @@ theorem scalarPullback_composition
         (scalarExtension φ X).map
           ((Functor.mapDerivedCategoryNatIso
               (upperStarComp (ModuleCat.{u + 1} A) j₁ v j₂ h.symm) ≪≫
-            Functor.mapDerivedCategoryCompIso _ _).hom.app N)  := by
+            (Functor.mapDerivedCategoryCompIso _ _).symm).hom.app N)  := by
   subst j₂
   simpa only [scalarExactIso, Functor.mapDerivedCategoryTriangleIso] using
     scalarExact_composition φ v j₁ N
