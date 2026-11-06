@@ -360,7 +360,7 @@ def pbcDerivedFunctionRestriction (n : ℕ) :
       pbcDerivedFunctionRealization T d (n + 1) ≅
     pbcDerivedFunctionRealization T d n ⋙
       pbcDerivedRestrict (pbcAdicQuotient T d (n + 1) n (Nat.le_succ n)) :=
-  (Functor.mapDerivedCategoryCompIso _ _) ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (pbcFunctionRestriction T d n) ≪≫
       (Functor.mapDerivedCategoryCompIso _ _).symm
 
