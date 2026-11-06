@@ -665,11 +665,8 @@ private theorem derive_chain
   simp only [Iso.hom_inv_id_app_assoc, Iso.inv_hom_id_app_assoc,
     Iso.inv_hom_id_app, Iso.inv_hom_id_app]
   rw [← Functor.map_comp_assoc]
-  simp only [Category.assoc, Iso.hom_inv_id_app_assoc, Iso.inv_hom_id_app_assoc,
-    Iso.inv_hom_id_app]
-  erw [CategoryTheory.Functor.map_id, Category.id_comp]
-  simp only [Iso.hom_inv_id_app_assoc, Iso.inv_hom_id_app]
-  rfl
+  simp only [Iso.hom_inv_id_app, Functor.map_id, Category.id_comp,
+    Iso.inv_hom_id_app_assoc, Iso.inv_hom_id_app]
 
 private theorem transport_chain
     {A₀ A₁ A₂ B₀ B₁ B₂ : Type*}
