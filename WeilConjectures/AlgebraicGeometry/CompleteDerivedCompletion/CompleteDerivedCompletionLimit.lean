@@ -41,6 +41,9 @@ attribute [local instance] AdicCompletion.ringMonoidalObject AdicCompletion.ring
 
 namespace CompleteDerivedCompletion
 
+attribute [local instance] AdicCompletion.modulesNatProducts AdicCompletion.complexNatProducts
+  AdicCompletion.complexNatLimit
+
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
