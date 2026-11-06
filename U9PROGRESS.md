@@ -428,3 +428,9 @@
 - Latest completed chain source: 33812e754d43c4c8b79d43b7811fc081d01e2a23;
   log BUILD-BZ1030-chain-green-source-red-full.log. Current ucheck tests restoration
   plus AffineBaseChangeSourceModel and AffineBaseChangeCohomologyModel.
+
+- Restored theorem transport proof now elaborates. A remaining measured timeout
+  reaches the final additive-equivalence construction at 200000 heartbeats in 13s;
+  testing scoped maxHeartbeats 400000 for this theorem only. This is not a limit-
+  instance timeout. The assigned leaf and other four edited modules keep all
+  original resource settings. Log BUILD-BZ1030-restoration-timeout-full.log.
