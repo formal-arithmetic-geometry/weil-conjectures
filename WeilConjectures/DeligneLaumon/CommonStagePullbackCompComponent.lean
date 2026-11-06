@@ -20,8 +20,8 @@ import all Mathlib.Logic.Small.Defs
 set_option autoImplicit false
 set_option Elab.async false
 set_option backward.defeqAttrib.useBackward true
-set_option backward.isDefEq.respectTransparency true
-set_option backward.isDefEq.respectTransparency.types true
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 2048
 universe u v
 open CategoryTheory AlgebraicGeometry
@@ -177,6 +177,7 @@ theorem commonStagePullbackCompComponent_stage_representation
           (commonStagePullbackComparison l Ω f
             (commonStagePullbackObject l Ω g P) L hP).inv)) := by
   have h0 := commonStagePullbackCompComponent_heq l Ω f g P
+  rw [integralPullbackCompositor_eq_choose] at h0
   have hw := rationalPullbackCompositionIso_heq l
     (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) f g P.obj
   have eA : (sfRationalConstructibleLocalization l
@@ -233,7 +234,7 @@ theorem commonStagePullbackCompComponent_stage_representation
       rationalPullbackCompositionIso l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f g
         (P.toStage hP) := by
     unfold commonStagePullbackRationalComposition rationalPullbackCompositionIso
-    rfl
+    simp only [integralPullbackCompositor_eq_choose]
   rw [eR]
   unfold commonStagePullbackComparison
     operationStageTransitionIso GeneralAlgebraicallyClosedCoefficients.ofHom
