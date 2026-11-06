@@ -544,3 +544,16 @@
 - No local Lean/Lake, proof placeholders, trust bypasses, new/deleted declarations,
   heartbeat changes, or profiler probes. All ucheck calls finished.
 - This completion commit changes progress documentation only; Lean source matches green builds.
+
+
+# BZ1407 in progress
+
+- Branch: u9/BZ1407; start: 74a53ea7b72eff0b19fff25845652ee55186c953.
+- The user instructed continuation after the concrete four-line compositor proposal.
+  Applied .hom → .inv in two private helper statements and their matching rewrites,
+  preserving the original morphisms under Mathlib b63f6e8a.
+- Current upstream has not changed the assigned module. No live overlap found.
+- Next: validate QuotientSystemMixedCoherence with ucheck-bump, then its four
+  direct closure importers and further unblocked layers (at most 30 extras).
+- Fix records: /home/ubuntu/u9/bz/FIXES-BZ1407.md.
+- No local Lean/Lake execution, proof placeholders, or heartbeat changes.
