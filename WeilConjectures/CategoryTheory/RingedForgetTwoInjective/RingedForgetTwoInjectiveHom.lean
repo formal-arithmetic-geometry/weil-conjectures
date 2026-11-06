@@ -230,6 +230,8 @@ theorem native_two_injective_hom_model
   let T := standardHomModel (underlyingHomBifunctor (k₀ := k₀) (l := l) (X := X))
   let U := Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)
   have : U.PreservesKInjectiveComplexes := forgetKInjective
+  have : HasLimitsOfShape (Discrete ℤ)
+      (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) := inferInstance
   have : PreservesLimitsOfShape (Discrete ℤ) U :=
     inferInstanceAs (PreservesLimitsOfShape (Discrete ℤ)
       ((Endofunctor.Algebra.IsIsoStr (WeilSheaf.frobeniusPullback k₀ l X)).ι ⋙
