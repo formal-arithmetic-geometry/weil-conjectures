@@ -174,7 +174,8 @@ theorem purNormalizedReconstructionOfScheme
   obtain ⟨D, hlp, P, G, q, hq, eG, hp, δ, hδ⟩ := hK
   let := hp
   have : QuasiIso q := hq.1
-  let e : DerivedCategory.Q.obj P ≅ K := asIso (DerivedCategory.Q.map q) ≪≫ eG
+  let e : (DerivedCategory.Q.obj P : DerivedCategory (scalarReductionSource l E W)) ≅ K :=
+    asIso (DerivedCategory.Q.map q) ≪≫ eG
   let N := S.reduction.obj K
   let X := (coefficientSequenceDerivedRestriction l E W).obj N
   obtain ⟨hpX, δX, hδX⟩ := coefficientConstantTower_roos l E W D hlp X
