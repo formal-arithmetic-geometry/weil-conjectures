@@ -232,13 +232,14 @@ theorem native_two_injective_hom_model
   have : U.PreservesKInjectiveComplexes := forgetKInjective
   have : HasLimitsOfShape (Discrete ℤ)
       (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) := inferInstance
-  have : HasLimitsOfShape (Discrete ℤ)
-      (Endofunctor.Algebra (WeilSheaf.frobeniusPullback k₀ l X)) :=
-    hasLimitsOfShape_of_hasLimitsOfShape_createsLimitsOfShape (Endofunctor.Algebra.forget _)
-  have : PreservesLimitsOfShape (Discrete ℤ) U :=
-    inferInstanceAs (PreservesLimitsOfShape (Discrete ℤ)
-      ((Endofunctor.Algebra.IsIsoStr (WeilSheaf.frobeniusPullback k₀ l X)).ι ⋙
-        Endofunctor.Algebra.forget (WeilSheaf.frobeniusPullback k₀ l X)))
+  have : PreservesLimitsOfShape (Discrete ℤ) U := by
+    let A := ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber
+    have : HasColimitsOfSize.{u + 1, u + 1} A := inferInstance
+    have : HasColimitsOfSize.{0, 0} A := hasColimitsOfSizeShrink.{0, 0, u + 1, u + 1} A
+    exact
+      (Endofunctor.IsoAlgebra.Free.adjunction
+        (WeilSheaf.frobeniusPullback k₀ l X)).rightAdjoint_preservesLimits
+        |>.preservesLimitsOfShape
   let h : Functor.uncurry.obj (ihomBifunctor k₀ l X) ⋙ U ≅
       (U.op.prod U) ⋙ Functor.uncurry.obj
         (underlyingHomBifunctor (k₀ := k₀) (l := l) (X := X)) :=
