@@ -101,12 +101,7 @@ private theorem reductionUnit_onComplex
         DerivedCategory.Q.map
           ((NatTrans.mapHomologicalComplex (completedReductionModuleUnit d T) (.up ℤ)).app K) := by
   have := completedReductionModuleTowerFunctor_additive T d
-  have hec : completedReductionTowerComplexCounit T d K =
-      (completedReductionTowerCounit d T).app
-        ((HomotopyCategory.quotient _ (.up ℤ)).obj K) :=
-    reductionCounitOnComplex_eq (completedReductionModuleTowerFunctor T d)
-      (completedReductionTower T d) (coherenceReductionTowerCounit T d) K
-  rw [hec]
+  unfold completedReductionTowerComplexCounit reductionComplexCounit
   exact (completedReductionTowerUnit_exists d T).exists.choose_spec K hK
 
 private theorem constantPullback_onComplex
