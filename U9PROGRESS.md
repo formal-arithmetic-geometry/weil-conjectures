@@ -351,3 +351,17 @@
 - Next: remote validation of the assigned leaf and its first two downstream layers.
 - Fix records and baseline log: /home/ubuntu/u9/bz/FIXES-BZ1001.md.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
+
+
+# BZ995 in progress
+
+- Branch: u9/BZ995; original base f6b78661b.
+- The user instructed continuation after the concrete deleted-helper restoration proposal.
+- Restored derivedReduction_augmentationOfCounits in its original file, preserving its
+  assumptions and updating the two compositor directions for Mathlib b63f6e8a.
+- Reuses the existing Functor.exactSquare_fac through import all; no duplicate helper.
+- Assigned module statements are unchanged. The first ucheck-bump confirmed that the
+  opaque attribute removal and direct tower-unit normalization resolve two errors.
+- Next: ucheck-bump for the restored helper, assigned module, and direct importer
+  StratumCompletionUnitRestriction, then continue downstream as the brief requires.
+- Fix log: /home/ubuntu/u9/bz/FIXES-BZ995.md. No local Lean/Lake or forbidden proof shortcuts.
