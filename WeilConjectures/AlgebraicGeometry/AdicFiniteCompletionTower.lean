@@ -19,6 +19,8 @@ open CategoryTheory CategoryTheory.Limits
 open CategoryTheory.ConstantCompletion
 namespace AlgebraicGeometry.Scheme
 
+attribute [local instance] HasDerivedCategory.standard
+
 open CategoryTheory.Pretriangulated Opposite
 
 private theorem transportDerivedLimit
