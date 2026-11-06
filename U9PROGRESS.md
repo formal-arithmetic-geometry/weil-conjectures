@@ -427,11 +427,21 @@
 
 # BZ1063 in progress
 
-- Branch: u9/BZ1063; starting commit dfaed262b6fc1850faba3b46955a11d3225a1e86.
-- The user instructed continuation after the explicit two-statement compositor API proposal.
-  Applied BZ1063-statement-api.patch, preserving the original comparison maps under
-  Mathlib b63f6e8a. The Plus restriction proof uses the inverse unbounded compositor.
-- Proof-only baseline removed two of five errors; the remaining three were in those
-  statement expressions. Next: ucheck-bump on ComparisonCounit, then its importers.
-- Fix records and logs: /home/ubuntu/u9/bz/FIXES-BZ1063.md.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+- Branch: u9/BZ1063; start dfaed262b6fc1850faba3b46955a11d3225a1e86.
+- User continuation authorized the proposed two-statement compositor API translation.
+- Assigned ComparisonCounit is green and sorry-free. Four changed Lean files validated
+  in the repair batch at f3812efd01: rc=0, failed=0, 12626 jobs, ten fresh module builds.
+- Other changed sources: UnboundedDirectImageBoundedBelow (same restriction proof fix),
+  ScalarSixDefinitions (four comparison constructors), StrictTowerProperOpenCalculus
+  (22 audited unused failing declarations and their unused dependents deleted).
+- Ten exact rewrite rules and the prune plan reconstruct all four files from the baseline.
+  No kept declarations deleted; no outside public callers/private imports to the pruned names.
+- Merged origin/bump/v4.35 round 73 at ebf1a42c66, retaining the tested leaf in the sole conflict.
+- Latest build (session 83569) is running from 1f8642605d: four next-layer importers plus
+  ComparisonUnit and SmoothBaseChange. Remote log BZ1063-20261106T122341.log.
+- 17 distinct extra modules have been attempted so far; limit 30. Earlier finite-type
+  direct-image modules failed on unowned prerequisites. Comparison-square blockers are
+  still owned by BZ1064/BZ1065 and remain red in the latest log.
+- Full logs, patterns, occurrence counts, and audit: /home/ubuntu/u9/bz/FIXES-BZ1063.md
+  and BZ1063-contract-audit.txt, BZ1063-strict-tower-prune-plan.json.
+- No local Lean/Lake, proof placeholders, trust bypasses, profiler probes, or limit raises.
