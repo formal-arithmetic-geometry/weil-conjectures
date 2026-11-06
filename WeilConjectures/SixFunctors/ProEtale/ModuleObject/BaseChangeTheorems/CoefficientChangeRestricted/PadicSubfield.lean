@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangeRestricted.Basic
+public import WeilConjectures.Tactic.FirstOrderApply
 
 /-!
 # Coefficient change for restricted base change maps: from `𝒪_E` to `E`
@@ -58,7 +59,7 @@ theorem isIso_map_baseChangeMap_app_padicSubfield_of_padicIntegers [QuasiCompact
     (isIso_derivedPushHom_app_padicIntegers_of_isGE ℓ E p'
       ((g')^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧.leftDerivedFunctor.obj K₀) n)
     (by transport_mod_proofs h)
-  transport_mod_proofs hE
+  fo_apply hE using
 
 end Coefficients
 
