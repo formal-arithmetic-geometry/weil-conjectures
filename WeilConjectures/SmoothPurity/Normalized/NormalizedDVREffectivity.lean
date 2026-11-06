@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SixFunctors.Normalized.NormalizedDVRTower
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.SmoothPurity.Derived.DerivedComplete
 public import WeilConjectures.SmoothPurity.Derived.DerivedScalarExtensionRestrictionAdjunctionSupplement
 import WeilConjectures.SixFunctors.Normalized.NormalizedDVRRoosFiniteReduction
