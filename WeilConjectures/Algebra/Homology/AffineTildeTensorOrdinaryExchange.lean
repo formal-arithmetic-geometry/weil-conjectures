@@ -6,6 +6,8 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.Algebra.Homology.AffineTildeTensorSourceComparison
 public import WeilConjectures.Algebra.Homology.AffineBaseChangeTildeRepresentative
 import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeUnitCompatibility
