@@ -332,10 +332,13 @@ theorem IsReal.exists_isPunctuallyPureOfWeight_cokernel_detWeight
   have hreal' : W.IsReal l P.obj.ρ ι := fun x n ↦ by
     as_aux_lemma =>
       obtain ⟨f, hf⟩ := hst G x
-      have hpoly : (G.obj.stalk x).localPolynomial = W.localPolynomial l P.obj.ρ x :=
-        FrobeniusModule.localPolynomial_eq_of_linearEquiv _ f hf
+      have hr : (G.obj.stalk x).IsReal ι := by
+        as_aux_lemma => exact hreal x
+      have hpoly : (G.obj.stalk x).localPolynomial = W.localPolynomial l P.obj.ρ x := by
+        as_aux_lemma => exact FrobeniusModule.localPolynomial_eq_of_linearEquiv _ f hf
       have hcoeff := congrArg (fun p : Polynomial (PadicAlgCl l) ↦ ι (p.coeff n)) hpoly
-      exact (congrArg (starRingEnd ℂ) hcoeff).symm.trans ((hreal x n).trans hcoeff)
+      as_aux_lemma =>
+        exact (congrArg (starRingEnd ℂ) hcoeff).symm.trans ((hr n).trans hcoeff)
   -- purity of the constituent, transported back to the stalks
   obtain ⟨γ, hγ⟩ : ∃ γ, W.HasDetWeight l R.obj.ρ ι γ := ⟨_, R.property.2.hasDetWeight ι⟩
   have hpure := WeilGroup.isPunctuallyPure_of_isConstituent_of_isReal W l P.obj.ρ ι
