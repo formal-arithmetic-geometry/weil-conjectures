@@ -150,9 +150,10 @@ theorem directImage_complex_unit
     let D := RingedSpace.moduleDirectImage f
     letI : D.Additive := RingedSpace.moduleDirectImage_additive f
     let F := RingedSpace.localAbelianSections Y
-    cast (by rfl) (((D ⋙ F).rightDerivedFunctorOfQuasiIsoResolutionsUnit.{w}
+    (cast (by rfl) (((D ⋙ F).rightDerivedFunctorOfQuasiIsoResolutionsUnit.{w}
       (RingedSpace.localSectionsEnoughKInjectives X)).app
-        ((HomotopyCategory.quotient _ (.up ℤ)).obj I)) ≫
+        ((HomotopyCategory.quotient _ (.up ℤ)).obj I)) :
+      DerivedCategory.Q.obj (((D ⋙ F).mapHomologicalComplex (.up ℤ)).obj I) ⟶ _) ≫
         (RingedSpace.localLerayComparison f).app (DerivedCategory.Q.obj I) ≫
         (RingedSpace.derivedLocalAbelianSections Y).map
           (D.rightDerivedFunctorOfQuasiIsoResolutionsObjIso
