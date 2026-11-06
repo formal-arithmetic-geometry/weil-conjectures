@@ -12,7 +12,6 @@ import WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimit
 import WeilConjectures.FromJoel.Algebra.Homology.HomologicalComplexFunctorEquiv
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
-import Mathlib.Tactic.Trace
 
 /-!
 # Towers and the derived completion: derived limits
@@ -117,11 +116,9 @@ theorem rlim_isDerivedLimit (T : Scheme.{u}) :
       ∀ M : DTow l E T,
         IsDerivedLimit (K := fun n : ℕ ↦ (dev l E T n).obj M)
           (fun n : ℕ ↦ (transition l E T n).app M) ((rlim l E T).obj M) := by
-  trace "PF180 rlim: start"
   let A := AdicCompletion.Modules l E T
   have : CountableAB4Star A := CountableAB4Star.of_hasExactLimitsOfShape_nat A
   obtain ⟨hP, -, -, h3⟩ := derivedCategory_countableProducts_and_towerLimit.{0} A
-  trace "PF180 rlim: products"
   refine ⟨hP, fun M ↦ ?_⟩
   obtain ⟨I, hI, i, -, hi⟩ := Abelian.HasKInjectiveResolutions.exists_isKInjective
     (DerivedCategory.Q.objPreimage M)
@@ -130,44 +127,33 @@ theorem rlim_isDerivedLimit (T : Scheme.{u}) :
     (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).2 hi
   let eM : DerivedCategory.Q.obj I ≅ M :=
     (asIso (DerivedCategory.Q.map i)).symm ≪≫ DerivedCategory.Q.objObjPreimageIso M
-  trace "PF180 rlim: representative"
   let comp (n : ℕ) : DerivedCategory.Q.obj (I.asFunctor.obj (op n)) ≅ (dev l E T n).obj M :=
     ((ev l E T n).mapDerivedCategoryFactors.app I).symm ≪≫ (dev l E T n).mapIso eM
-  trace "PF180 rlim: components"
   let τ : I.asFunctor ⋙ DerivedCategory.Q ⟶
       Functor.ofOpSequence (X := fun n : ℕ ↦ (dev l E T n).obj M)
         (fun n : ℕ ↦ (transition l E T n).app M) :=
     NatTrans.ofOpSequence (G := Functor.ofOpSequence (X := fun n : ℕ ↦ (dev l E T n).obj M)
         (fun n : ℕ ↦ (transition l E T n).app M)) (fun n ↦ (comp n).hom) (by
-      trace "PF180 rlim: naturality"
       intro n
       rw [Functor.ofOpSequence_map_homOfLE_succ]
       dsimp only [comp, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom, Iso.app_inv]
       rw [Category.assoc, (transition l E T n).naturality eM.hom,
         reassoc_of% transition_inv_fac l E T n I]
-      trace "PF180 rlim: naturality rfl"
       rfl)
-  trace "PF180 rlim: transformation"
   have : IsIso τ := by
     rw [NatTrans.isIso_iff_isIso_app]
     intro n
     change IsIso (comp n.unop).hom
     infer_instance
-  trace "PF180 rlim: transformation iso"
   obtain ⟨c, ⟨hc⟩, hL⟩ := h3 inferInstance I _ _ (asIso τ)
-  trace "PF180 rlim: generic limit"
   refine isDerivedLimit_of_iso hL ?_
-  trace "PF180 rlim: transport goal"
   have : HasLimit I.asFunctor := ⟨⟨c, hc⟩⟩
   let e₁ : c.pt ≅ limit I.asFunctor := hc.conePointUniqueUpToIso (limit.isLimit _)
-  trace "PF180 rlim: limit cone"
   let e₂ : limit I.asFunctor ≅ (ExactProductsRoos.ordinary (B := A)).obj I :=
     limitAsFunctorIsoOrdinary A I
-  trace "PF180 rlim: ordinary limit"
   have hu : IsIso ((inverseLimit l E T).rightDerivedFunctorUnitQ I) := by
     rw [Functor.rightDerivedFunctorUnitQ_eq]
     infer_instance
-  trace "PF180 rlim: final comparison"
   exact DerivedCategory.Q.mapIso (e₁ ≪≫ e₂) ≪≫
     asIso ((inverseLimit l E T).rightDerivedFunctorUnitQ I) ≪≫ (rlim l E T).mapIso eM
 
