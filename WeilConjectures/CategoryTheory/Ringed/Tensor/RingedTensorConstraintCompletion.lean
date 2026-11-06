@@ -237,7 +237,7 @@ structure RingedTensorConstraintModels
         (ρ.f p).val.app U
             (WeilConjectures.coefficientTensorGenerator.{r, c, v} J R P
       (ringedTensorUnitComplex.{c, v, r} J R)
-              p 0 p (Int.add_zero p) U x a) = a • x) ∧
+              p 0 p (Int.add_zero p) U x a) = (show R.obj.obj U from a) • x) ∧
       (T.iso J R S P (ringedTensorUnitComplex.{c, v, r} J R)
           hP unitKFlat).hom ≫ S.tensor.map (Prod.mkHom (𝟙 _) u.inv) ≫
           (S.monoidal.rightUnitor (DerivedCategory.Q.obj P)).hom = DerivedCategory.Q.map ρ
