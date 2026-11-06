@@ -104,7 +104,6 @@ private theorem strictTransition_localization {m n : ℕ} (h : n ≤ m)
       (.up ℤ)).hom.app X = 𝟙 _ := by
     ext i
     simp
-    rfl
   have hf := Functor.mapDerivedCategoryCompIso_fac
     (coefficientSequenceEvaluation l L W n) (normalizedDVRModuleRes l L W h) X
   erw [he, CategoryTheory.Functor.map_id, Category.comp_id] at hf
