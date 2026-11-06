@@ -71,7 +71,7 @@ attribute [local irreducible] Functor.mapDerivedCategory
   openImmersionLowerShriek leftDerivedUpperStarComp leftDerivedUpperStarId
   leftDerivedUpperStarTensorComparison leftDerivedUpperStarTensorNatIso
   mapDerivedCategoryUpperStarDerivedTensorIso leftDerivedUpperStarIsoMapDerivedCategory
-  Functor.mapDerivedCategoryNatIso Functor.mapDerivedCategoryIdIso
+  Functor.mapDerivedCategoryNatIso
 
 attribute [local instance] Sheaf.monoidalCategory
 

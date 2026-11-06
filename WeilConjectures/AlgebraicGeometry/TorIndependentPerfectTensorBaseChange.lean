@@ -11,6 +11,8 @@ public import WeilConjectures.AlgebraicGeometry.PullbackStalkTensorComparison
 public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorQCoh
 import WeilConjectures.AlgebraicGeometry.SingleComplexInheritedTensorCondition
 import WeilConjectures.AlgebraicGeometry.SingleComplexQcqsInduction
@@ -56,7 +58,7 @@ private theorem stalkCondition_of_comparison
   have ht : IsIso ((DerivedCategory.Q (C := SheafOfModules.{uPT}
       (moduleRings (pullback f g).toRingedSpace))).map c.t) := by
     have hh := c.represents
-    simp only [Category.comp_id] at hh
+    simp only [cast_eq, Category.comp_id] at hh
     have hiso : IsIso ((SingleComplexBaseChange.counit (pullback.fst f g)).app
         ((HomotopyCategory.quotient _ (.up ℤ)).obj c.P) ≫
       (DerivedCategory.Q (C := SheafOfModules.{uPT}
