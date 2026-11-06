@@ -1,16 +1,14 @@
-# PZ017 resumed
+# PZ017 assigned modules green; downstream in progress
 
-- Branch: `u9/PZ017`.
-- The user instructed continuation after the exact two-cast proposal for
-  `scalarPairWithAdjunction`; that patch is applied and the signature errors are gone.
-- Four newly exposed body errors require `Qh` reductions unavailable inside exposed
-  public data definitions. Their normalization and unit proofs now live in private
-  theorems, preserving every data field and the reviewed constructor signature.
-- The updated three-module build is queued at source commit `d1e50bc851`.
-- `SectionDerivedPushpullNormalization` and `ProperOpenClopenProjector` already passed
-  remote validation; all three assigned modules are being rebuilt together.
+- Branch: `u9/PZ017`; validated source: `a31ae424ec30a45a6681e3014c4a80bec24938e7`.
+- All three assigned modules passed `ucheck-bump` together: rc=0, built=10, failed=0,
+  6218 jobs on `poolb:43.166.72.113`.
+- Full log: `/home/ubuntu/u9/bz/BUILD-PZ017-assigned-green-full.log`.
+- The reviewed two identity casts are applied. Normalization and unit proofs are
+  public theorems with opaque proofs, so exposed constructors can use their results.
+  The constructor's functor/adjunction fields and existing rfl equations are preserved.
 - Thirteen geometry direct importers were checked or traced to other units' failures.
-  The six scalar direct importers remain to be checked after the scalar module passes.
+  The six scalar direct importers are the next build batch.
 - Fix records: `/home/ubuntu/u9/bz/FIXES-PZ017.md`.
 - No local Lean/Lake, forbidden proof shortcuts, or heartbeat increases.
 
