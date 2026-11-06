@@ -67,13 +67,13 @@ private theorem open_single_image
   have : PreservesFiniteLimits B := (openImmersion_restriction_derived_properties j).1
   have hbase := Modules.pushforwardRestrictIso sq
   have : (RingedSpace.moduleDirectImage p.toLRSHom.toShHom).Additive :=
-    RingedSpace.moduleDirectImage_additive_proof p.toLRSHom.toShHom
+    RingedSpace.moduleDirectImage_additive p.toLRSHom.toShHom
   have : (RingedSpace.moduleDirectImage p'.toLRSHom.toShHom).Additive :=
-    RingedSpace.moduleDirectImage_additive_proof p'.toLRSHom.toShHom
+    RingedSpace.moduleDirectImage_additive p'.toLRSHom.toShHom
   have : (Modules.pushforward p).Additive :=
-    RingedSpace.moduleDirectImage_additive_proof p.toLRSHom.toShHom
+    RingedSpace.moduleDirectImage_additive p.toLRSHom.toShHom
   have : (Modules.pushforward p').Additive :=
-    RingedSpace.moduleDirectImage_additive_proof p'.toLRSHom.toShHom
+    RingedSpace.moduleDirectImage_additive p'.toLRSHom.toShHom
   let δ : schemeDerivedDirectImage p ⋙ B.mapDerivedCategory ≅
       A.mapDerivedCategory ⋙ schemeDerivedDirectImage p' :=
     (Functor.rightDerivedFunctorCompMapDerivedCategoryIso _ B).symm ≪≫

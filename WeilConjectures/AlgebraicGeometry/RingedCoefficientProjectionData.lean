@@ -20,6 +20,7 @@ public import WeilConjectures.Algebra.Homology.SheafRingCoefficientOrdinaryAdjun
 public import WeilConjectures.Algebra.Homology.SheafRingDerivedHomComparison
 public import WeilConjectures.Algebra.Homology.SuccessiveDerivedQuotientNormalization
 public import WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
+public import WeilConjectures.Algebra.Homology.TotalTensorSigns.TotalTensorHomotopyConeSigns
 public import WeilConjectures.AlgebraicGeometry.DerivedPullbackRepresentativeComputation
 public import WeilConjectures.AlgebraicGeometry.KFlatRingedToposPullback
 public import WeilConjectures.AlgebraicGeometry.ProEtaleDerivedPullbackComposition
@@ -81,11 +82,7 @@ variable {C X : Type c} [Category.{v} C] [Category.{v} X]
   [EssentiallySmall.{r} C] [EssentiallySmall.{r} X]
   {J : GrothendieckTopology C} {K : GrothendieckTopology X}
 
-/-- Cache an already inferred sheaf instance on an essentially small site.
-Source: Mathlib site transport and sheafification instances. The proof is typeclass inference.
-(auxiliary; not a blueprint node). -/
-instance (priority := 100000) cachedComposeRings (J : GrothendieckTopology C) :
-    J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r}) := inferInstance
+attribute [instance 100000] SheafOfModules.TotalTensorSigns.coefficientCompose
 
 /-- Cache an already inferred sheaf instance on an essentially small site.
 Source: Mathlib site transport and sheafification instances. The proof is typeclass inference.
