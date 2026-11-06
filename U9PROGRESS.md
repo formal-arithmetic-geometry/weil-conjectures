@@ -247,16 +247,29 @@
 - Notes: /home/ubuntu/u9/bz/FIXES-BZ824.md. No local Lean/Lake or proof shortcuts.
 
 
-# BZ859 in progress
+# BZ859 complete
 
-- Branch: u9/BZ859; initial commit db406319f.
-- The user instructed continuation after the concrete upstream-restoration proposal.
-- Applied BZ859-proposed-restoration.patch: restores tilde_preservesHomology,
-  affinePushforwardCohomologyMapOfComparison, and affinePushforwardRepresentativeCohomologyIso
-  with their original signatures/docs; ports generated additive-instance references.
-- Assigned factorization uses Localization implementation imports and a reflexive cast
-  for the original homology map, following the supplied BZ457 pattern.
-- Remote ucheck-bump is queued and reads the pushed branch upon acquiring a build tree.
-- Next: validate the assigned module; build its sole direct importer
-  AffinePushforwardCohomologyEdgeIdentity, then continue downstream up to the brief's limit.
-- Fix log: /home/ubuntu/u9/bz/FIXES-BZ859.md. No local Lean/Lake, proof escapes, or limit raises.
+- Branch: u9/BZ859; starting commit db406319f.
+- Final five-target ucheck-bump passed: rc=0, failed=0, 4426 jobs,
+  on poolb:43.157.187.72. All five handoff targets rebuilt successfully.
+- Validated source commit: e9ade5f7c629b713f1d64b02073efdb9654e4d63.
+- Green prerequisite modules: AffineBaseChangeTildeCoordinates and
+  AffinePushforwardComparisonCoordinates.
+- Green assigned module: AffinePushforwardComparisonFactorization.
+- Green downstream modules: AffinePushforwardCohomologyEdgeIdentity and
+  AffinePushforwardCohomologyEdgeExists.
+- The user instructed continuation after the concrete prerequisite-restoration proposal.
+  The three restored declarations retain their original signatures and documentation.
+- Ported generated additive-instance references using tilde.map_add; used Localization
+  implementation imports and reflexive casts for the original derived-unit homology maps.
+  The assigned theorem's binders, assumptions, and underlying maps are unchanged.
+- Layer-three AffineTildePushforwardCohomologyNormalization was attempted and is blocked
+  only by BZ860-owned AffinePushforwardCohomologyEdgeIsIso. No edits were made there.
+- Full validation log: /home/ubuntu/u9/bz/BUILD-BZ859-final-full.log.
+- Downstream evidence: /home/ubuntu/u9/bz/BUILD-BZ859-downstream-full.log.
+- Fix patterns, exact errors, rewrite rules, and counts: /home/ubuntu/u9/bz/FIXES-BZ859.md.
+- Contract audit: /home/ubuntu/u9/bz/BZ859-contract-audit.txt. The rules exactly replay
+  the assigned-module source from the starting revision.
+- No local Lean/Lake, proof placeholders, trust escapes, or heartbeat increases.
+- Completion marker: /home/ubuntu/u9/state/BZ859.DONE.
+- This completion commit changes only progress documentation after the green source build.
