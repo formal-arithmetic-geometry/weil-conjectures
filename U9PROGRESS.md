@@ -401,3 +401,16 @@
 - Direct importer: UnboundedProperOpenInterchangeSupplement; continue downstream after green.
 - Fix records: /home/ubuntu/u9/bz/FIXES-BZ1034.md.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
+
+
+# BZ1036 in progress
+
+- Assigned: CompletedTowerPullbackSupplement; branch u9/BZ1036.
+- The user instructed continuation after the exact six-line restored-statement proposal.
+  Applied BZ1036-restored-statement-proposal.patch, making Q/Qh transports explicit.
+- Restored completedConstantRlimUnit_exists and completedConstantRlimUnit in their
+  original CompletedTowerDerivedLimitFunctor module; callers prohibit deletion.
+- Assigned-module statements and all existing docstrings remain unchanged.
+- Merged upstream fdc7e6fe1516; no overlapping changes to the two owned/required files.
+- Next: remote validation with ucheck-bump, then direct importers and downstream layers.
+- Fix records: /home/ubuntu/u9/bz/FIXES-BZ1036.md. No local Lean/Lake or proof escapes.

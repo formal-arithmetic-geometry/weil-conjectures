@@ -152,12 +152,21 @@ theorem completedConstantRlimUnit_exists (T : Scheme.{u}) :
           DerivedCategory.Q.map
             ((NatTrans.mapHomologicalComplex (completedConstantLimitUnit d T)
               (.up ℤ)).app C) ≫
+          (DerivedCategory.quotientCompQhIso
+            (pbcModules T (pbcAdicCompletion T d))).inv.app _ ≫
           (lim : pbcTowers T (pbcAdicCompletion T d) ⥤
             pbcModules T (pbcAdicCompletion T d)).rightDerivedFunctorUnit.app
               ((HomotopyCategory.quotient _ (.up ℤ)).obj
                 (((completedTowerConstant d T).mapHomologicalComplex (.up ℤ)).obj C)) ≫
           (completedTowerRlim d T).map
+            ((DerivedCategory.quotientCompQhIso
+              (pbcTowers T (pbcAdicCompletion T d))).hom.app
+                (((completedTowerConstant d T).mapHomologicalComplex (.up ℤ)).obj C)) ≫
+          (completedTowerRlim d T).map
             (((completedTowerConstant d T).mapDerivedCategoryFactors).inv.app C) := by
+  simp only [DerivedCategory.quotientCompQhIso,
+    HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift_hom,
+    Quotient.lift.isLift_inv, Functor.map_id, Category.id_comp, Category.comp_id]
   let : HasSheafify (ProEt.topology T) AddCommGrpCat.{u + 1} :=
     WeilConjectures.integralCoefficientAbSheafify.{u, 0} T
   let : (ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=

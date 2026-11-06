@@ -882,7 +882,10 @@ private theorem constantRlimUnit_eq (V : Scheme.{u}) :
   apply (completedConstantRlimUnit_exists d V).unique
     (completedConstantRlimUnit_exists d V).exists.choose_spec
   intro P
-  exact exactLeftDerivedUnit (completedTowerConstant d V) lim constLimAdj P
+  simpa only [DerivedCategory.quotientCompQhIso,
+    HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift_hom,
+    Quotient.lift.isLift_inv, Functor.map_id, Category.id_comp, Category.comp_id] using
+    exactLeftDerivedUnit (completedTowerConstant d V) lim constLimAdj P
 
 private theorem pullbackDatumTowerModulePull_eq :
     completedTowerModulePullback g d = d.towerModulePull g := by
