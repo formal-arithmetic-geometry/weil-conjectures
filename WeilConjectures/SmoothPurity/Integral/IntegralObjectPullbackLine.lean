@@ -104,8 +104,9 @@ theorem integralObjectPullbackLine (l : ℕ) [Fact l.Prime]
   let : HasDerivedCategory (SheafOfModules.LineUnbounded.Modules.{u, u} X R) :=
     HasDerivedCategory.standard _
   let P := (CochainComplex.singleFunctor (integralTowerModules l E X) 0).obj L
-  let Rm := (sheafCompose (AlgebraicGeometry.Scheme.ProEt.topology X)
-    (forget₂ CommRingCat RingCat)).obj R
+  let Rm : Sheaf (ProEt.topology X) RingCat.{u + 1} :=
+    (sheafCompose (ProEt.topology X)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R
   have hcover : ∀ U : X.ProEt, ∃ s : Sieve U,
       s ∈ AlgebraicGeometry.Scheme.ProEt.topology X U ∧
       ∀ (V : X.ProEt) (f : V ⟶ U), s f →

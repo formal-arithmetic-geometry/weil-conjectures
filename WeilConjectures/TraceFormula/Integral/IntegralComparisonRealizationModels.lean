@@ -651,6 +651,7 @@ private theorem integralComparisonDerivedCounit
     dsimp only [Functor.comp_obj]
     erw [CategoryTheory.Functor.map_id]
     erw [Category.id_comp, Iso.inv_hom_id_app_assoc]
+    rfl
   calc
     d.counit.app (DerivedCategory.Q.obj I) =
         F.mapDerivedCategory.map (G.rightDerivedFunctor.map e.inv) ≫
