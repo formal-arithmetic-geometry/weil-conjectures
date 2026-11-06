@@ -275,7 +275,7 @@ theorem sequenceDerivedCoherence
     dsimp only [transport, eqToIso]
     simpa only [integralComparisonSystemComposition, integralComparisonDerivedSequencePullback,
       Functor.comp_obj,
-      Iso.trans_hom, NatTrans.comp_app,
+      Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
       Functor.map_comp, Category.assoc] using hm
   have hf := congrArg (fun t ↦ transport.inv.app S ≫ t) hm'
   simp only [← Category.assoc, Iso.inv_hom_id_app, Category.id_comp] at hf
