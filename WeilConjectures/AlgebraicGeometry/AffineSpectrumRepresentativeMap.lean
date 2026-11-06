@@ -168,13 +168,15 @@ private theorem affineSpectrum_representative_map_eq
   change e.inv = (derivedPullback X.isoSpec.inv).map c.e.inv ≫
     (derivedPullback X.isoSpec.inv).map (𝟙 (DerivedCategory.Q.obj c.P)) ≫
     (counit X.isoSpec.inv).app ((HomotopyCategory.quotient _ (.up ℤ)).obj c.P) ≫
-    𝟙 (DerivedCategory.Q.obj
+    𝟙 ((DerivedCategory.Q.{w}
+      (C := SheafOfModules.{u} (moduleRings (Spec Γ(X, ⊤)).toRingedSpace))).obj
       (((Scheme.Modules.tensorPullback X.isoSpec.inv).mapHomologicalComplex (.up ℤ)).obj
         c.P)) at he
   change e'.inv = (derivedPullback X'.isoSpec.inv).map c.e'.inv ≫
     (derivedPullback X'.isoSpec.inv).map (𝟙 (DerivedCategory.Q.obj c.N)) ≫
     (counit X'.isoSpec.inv).app ((HomotopyCategory.quotient _ (.up ℤ)).obj c.N) ≫
-    𝟙 (DerivedCategory.Q.obj
+    𝟙 ((DerivedCategory.Q.{w}
+      (C := SheafOfModules.{u} (moduleRings (Spec Γ(X', ⊤)).toRingedSpace))).obj
       (((Scheme.Modules.tensorPullback X'.isoSpec.inv).mapHomologicalComplex (.up ℤ)).obj
         c.N)) at he'
   have he0 := he.trans (remove_comparison_identities _ _ _)
