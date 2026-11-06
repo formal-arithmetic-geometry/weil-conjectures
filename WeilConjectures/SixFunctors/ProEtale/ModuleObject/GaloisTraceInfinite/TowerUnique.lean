@@ -226,10 +226,15 @@ noncomputable def cofan : Cofan (fun _ : D.ι ↦ M∞) :=
 
 /-- The cofan `MoebiusDecomposition.cofan` is a coproduct. -/
 noncomputable def isColimitCofan : IsColimit D.cofan :=
+  let mkIsColimit {C : Type (u + 2)} [Category.{u + 1} C] [HasZeroMorphisms C]
+      [HasColimitsOfShape (Discrete D.ι) C] (N : CochainComplex C ℤ) :
+      IsColimit (HomologicalComplex.coconeOfHasColimitEval
+        (Discrete.functor fun _ : D.ι ↦ N)) :=
+    HomologicalComplex.isColimitCoconeOfHasColimitEval _
   haveI : HasColimitsOfShape (Discrete D.ι)
       (CategoryTheory.Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :=
     inferInstance
-  HomologicalComplex.isColimitCoconeOfHasColimitEval (Discrete.functor fun _ : D.ι ↦ M∞)
+  mkIsColimit M∞
 
 /-- The section `M∞ ⟶ ∐ᵢ M∞` with components `|Aᵢ|⁻¹ eᵢ` (`i ≠ i₀`) and `e_{i₀}`. -/
 noncomputable def sigmaSection : M∞ ⟶ D.cofan.pt where
