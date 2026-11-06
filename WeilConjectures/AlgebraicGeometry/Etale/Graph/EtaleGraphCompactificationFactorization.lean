@@ -26,7 +26,7 @@ attribute [local irreducible] lowerStar upperStar etaleLowerShriek openImmersion
   canonicalEtaleCompactSupportComparison derivedEtaleLowerShriekUpperStarAdjunction
   derivedOpenImmersionLowerShriekUpperStarAdjunction mapDerivedUpperStarLowerStarAdjunction
   rightDerivedLowerShriekIso unboundedEtaleLowerShriekCompIso unboundedEtaleLowerShriekCongr
-  rightDerivedLowerStarIdIso Functor.mapDerivedCategoryNatIso Functor.mapDerivedCategoryIdIso
+  rightDerivedLowerStarIdIso Functor.mapDerivedCategoryNatIso
 
 -- Reduce only the small structural records while matching their identity-map instances.
 set_option allowUnsafeReducibility true in

@@ -49,7 +49,7 @@ theorem sfConstructibleCanonicalCompleteness
     (M : PbcCompletedDerived X d) (hM : PbcIsIntrinsicallyComplete X d M) :
     (∀ (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal)
       (D : CochainComplex (reductionModules X (d.completedRing X)) ℤ)
-      (i : DerivedCategory.Q.obj D ≅ M),
+      (i : (DerivedCategory.Q.obj D : PbcCompletedDerived X d) ≅ M),
       IsIso (intrinsicCompletionUnit X d r a ha M D i)) ∧
     d.TowerComplete X M := by
   have hTower := pbcIntrinsicComplete_towerComplete d X M hM
