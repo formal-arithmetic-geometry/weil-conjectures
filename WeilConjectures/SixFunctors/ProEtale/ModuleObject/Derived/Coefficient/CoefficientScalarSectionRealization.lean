@@ -124,34 +124,6 @@ private theorem map_computation {C D : Type*} [Category C] [Category D]
     (hh : H.map f ≫ j ≫ k = x) : H.map g ≫ j ≫ k = H.map e ≫ x := by
   rw [← h, H.map_comp, Category.assoc, hh]
 
-private theorem factor_on_complex {C D : Type*} [Category C] [Category D]
-    [Abelian C] [Abelian D] [HasDerivedCategory.{d₁} C] [HasDerivedCategory.{d₂} D]
-    (H : C ⥤ D) [H.Additive] [PreservesFiniteLimits H] [PreservesFiniteColimits H]
-    (P : CochainComplex C ℤ) :
-    H.mapDerivedCategoryFactorsh.hom.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P) =
-      H.mapDerivedCategoryFactors.hom.app P := by
-  rw [Functor.mapDerivedCategoryFactorsh_hom_app]
-  simp only [DerivedCategory.quotientCompQhIso,
-    HomologicalComplexUpToQuasiIso.quotientCompQhIso,
-    Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv,
-    Functor.comp_obj, Quotient.lift.isLift_hom]
-  erw [H.mapDerivedCategory.map_id, Category.id_comp, DerivedCategory.Qh.map_id,
-    Category.comp_id, Category.comp_id]
-
-private theorem factor_on_mapped_complex {C D E : Type*}
-    [Category C] [Category D] [Category E] [Abelian C] [Abelian D] [Abelian E]
-    [HasDerivedCategory.{d₁} D] [HasDerivedCategory.{d₂} E]
-    (F : C ⥤ D) [F.Additive] (H : D ⥤ E) [H.Additive]
-    [PreservesFiniteLimits H] [PreservesFiniteColimits H]
-    (P : CochainComplex C ℤ) :
-    H.mapDerivedCategoryFactorsh.hom.app
-        ((F.mapHomotopyCategory (.up ℤ)).obj ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) =
-      H.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj P) := by
-  change H.mapDerivedCategoryFactorsh.hom.app
-    ((HomotopyCategory.quotient _ (.up ℤ)).obj
-      ((F.mapHomologicalComplex (.up ℤ)).obj P)) = _
-  exact factor_on_complex H _
-
 private def uncurry_comparison {C D : Type*} [Category C] [Category D]
     (T : C ⥤ D) (B : C ⥤ C ⥤ C) (B' : D ⥤ D ⥤ D)
     (e : (Functor.postcompose₂.obj T).obj B ≅
@@ -364,54 +336,6 @@ private theorem ordinary_monoidal (Z : Scheme.{u})
 private def native_adj (Z : Scheme.{u}) : internalScalarExtension a Z ⊣
     (Mod.comap (coefficientMap a Z)).mapDerivedCategory :=
   Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a Z)
-
-omit [∀ Z : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules S Z)] in
-private theorem native_unit (Z : Scheme.{u})
-    (P : CochainComplex (ModuleRingedComparison.internalModules R Z) ℤ) :
-    (native_adj a Z).unit.app
-        (DerivedCategory.Q.obj P) ≫
-      (Mod.comap (coefficientMap a Z)).mapDerivedCategory.map
-        (coefficientInternalScalarComplex a Z P) ≫
-      (Mod.comap (coefficientMap a Z)).mapDerivedCategoryFactors.hom.app
-        (((Mod.extendScalars (coefficientMap a Z)).mapHomologicalComplex (.up ℤ)).obj P) =
-    DerivedCategory.Q.map
-      (((Mod.extendRestrictAdjunction (coefficientMap a Z)).mapHomologicalComplex
-        (.up ℤ)).unit.app P) := by
-  unfold native_adj coefficientInternalScalarComplex
-  have h := Adjunction.mapDerivedCategoryAdjunction_unit_app_fac
-    (Mod.extendRestrictAdjunction (coefficientMap a Z))
-      ((HomotopyCategory.quotient _ (.up ℤ)).obj P)
-  simp only [Adjunction.mapDerivedCategoryAdjunction, Adjunction.ofNatIsoLeft_unit,
-    Adjunction.ofNatIsoRight_unit, NatTrans.comp_app, Functor.whiskerRight_app,
-    Functor.whiskerLeft_app, Category.assoc] at h
-  rw [NatTrans.naturality_assoc
-    (Mod.comap (coefficientMap a Z)).rightDerivedFunctorIsoMapDerivedCategory.hom] at h
-  have hfacE := factor_on_complex (Mod.extendScalars (coefficientMap a Z)) P
-  have hfacU := factor_on_mapped_complex (Mod.extendScalars (coefficientMap a Z))
-    (Mod.comap (coefficientMap a Z)) P
-  conv at h =>
-    lhs
-    rhs
-    rhs
-    rhs
-    lhs
-    rw [hfacE]
-  conv at h =>
-    lhs
-    rhs
-    rhs
-    rhs
-    rhs
-    rw [hfacU]
-  conv at h =>
-    rhs
-    rw [Adjunction.mapHomotopyCategory_unit_app_quotient]
-  simp only [CategoryTheory.Functor.map_comp, Category.assoc]
-  simp only [Mod.derivedExtendMapDerivedCategoryAdjunction,
-    Mod.derivedExtendRestrictAdjunction, Mod.rightDerivedComapIsoMapDerivedCategory,
-    Adjunction.ofNatIsoRight_unit, NatTrans.comp_app, Functor.whiskerLeft_app,
-    Category.assoc]
-  exact h
 
 omit [∀ Z : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coefficientMap a Z))] in
 private theorem tensor_transport (Z : Scheme.{u})
