@@ -546,14 +546,19 @@
 - This completion commit changes progress documentation only; Lean source matches green builds.
 
 
-# BZ1407 in progress
+# BZ1407 complete
 
-- Branch: u9/BZ1407; start: 74a53ea7b72eff0b19fff25845652ee55186c953.
-- The user instructed continuation after the concrete four-line compositor proposal.
-  Applied .hom → .inv in two private helper statements and their matching rewrites,
-  preserving the original morphisms under Mathlib b63f6e8a.
-- Current upstream has not changed the assigned module. No live overlap found.
-- Next: validate QuotientSystemMixedCoherence with ucheck-bump, then its four
-  direct closure importers and further unblocked layers (at most 30 extras).
-- Fix records: /home/ubuntu/u9/bz/FIXES-BZ1407.md.
-- No local Lean/Lake execution, proof placeholders, or heartbeat changes.
+- Assigned QuotientSystemMixedCoherence is GREEN and free of proof placeholders.
+- ucheck-bump passed: rc=0, built=1, failed=0, 16917 jobs; target rebuilt in 13s.
+- Validated source commit: c3b3c3f118. Final Lean source is identical to this green build.
+- Applied the proposed four-line private-helper compositor migration after the user's
+  continuation instruction. Original morphisms and all public statements are preserved.
+- All four direct closure importers were attempted together. Each is blocked by three
+  unowned prerequisites: ScalarCompletionPresentationNormalization (BZ1405),
+  ScalarPullbackStrictTower (BZ1406), and IntegralPullbackStrictFiniteComponent.
+  No importer is claimed green; further layers share these blockers and are skipped.
+- Fix pattern, exact errors, replayable rule, counts, build logs, and dependency paths:
+  /home/ubuntu/u9/bz/FIXES-BZ1407.md. Completion marker: /home/ubuntu/u9/state/BZ1407.DONE.
+- Rule replay exactly reproduces all four changes and is idempotent. No local Lean/Lake,
+  declarations added/deleted, proof escapes, profiling options, or heartbeat increases.
+- Both ucheck calls finished. This completion commit changes progress documentation only.
