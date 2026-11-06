@@ -325,3 +325,20 @@
   CompletedTensorProjectionCoefficientTransport, CompletedScalarMateCoefficientTransport,
   NormalizedCoefficientDirectImageSquare.
 - Replay audit passes for all fifteen recorded rules; no proof shortcuts or limit raises.
+
+
+# PZ030 complete
+
+- Both assigned modules passed ucheck-bump together; rc=0, failed=0.
+- Continued downstream to 17 green modules total (15 extra), with five targets
+  skipped for foreign dependency errors. No unblocked direct importer remains.
+- Final successful scalar-mate batch: /home/ubuntu/u9/bz/BUILD-PZ030-layer2-green.log
+  (rc=0, built=14, failed=0, 6499 jobs).
+- Final importer batch additionally proved CoefficientDirectImageRestrictionCube
+  and NormalizedCoefficientDirectImageSquare; its failures are foreign blockers.
+- Fifteen PATTERN/ERROR/RULE triples and whole-tree match counts are recorded in
+  /home/ubuntu/u9/bz/FIXES-PZ030.md and /home/ubuntu/u9/state/PZ030.DONE.
+- All seven edited Lean files replay exactly from those rules and contain no
+  proof placeholders, native_decide, kernel bypass, or raised heartbeat limits.
+- No declarations deleted; referenced unused declarations retained. All remote
+  builds finished; no local Lean/Lake was executed.
