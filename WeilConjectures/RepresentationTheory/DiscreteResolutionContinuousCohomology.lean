@@ -101,7 +101,8 @@ noncomputable def invariantResolutionHomologyAddEquivContinuousCohomology
     (TopRep.homogeneousCochains N)
   let t' : ∀ n : ℕ, K.X n ≃+
       LocallyConstant (Fin n → G) (E.functor.obj F).obj.V :=
-    fun n ↦ (t n).trans (LocallyConstant.congrRightₗ ℤ e.symm).toAddEquiv
+    fun n ↦ (t n).trans (AddEquiv.mk' (LocallyConstant.congrRight e.symm.toEquiv)
+      fun _ _ ↦ by ext; simp [LocallyConstant.congrRight])
   have ht' : ∀ (n : ℕ) (x : K.X n) (g : Fin (n + 1) → G),
       t' (n + 1) ((K.d n (n + 1)) x) g =
         (E.functor.obj F).obj.ρ (g 0) (t' n x (fun k ↦ g k.succ)) +
