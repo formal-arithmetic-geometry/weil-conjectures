@@ -290,7 +290,7 @@ private lemma derived_unit_left
 
 attribute [local irreducible] upperStar lowerStar openImmersionLowerShriek
   Functor.mapDerivedCategory Functor.rightDerivedFunctor
-  Functor.mapDerivedCategoryNatIso Functor.mapDerivedCategoryCompIso
+  Functor.mapDerivedCategoryNatIso
 
 private noncomputable def exact_pb_comp
     (A : Type (u + 1)) [CommRing A] {X Y Z : Scheme.{u}}
@@ -565,7 +565,7 @@ private lemma exact_adj_comp
     (a : L₁ ⊣ R₁) (b : L₂ ⊣ R₂) :
     (a.comp b).mapDerivedCategoryAdjunction =
       ((a.mapDerivedCategoryAdjunction.comp b.mapDerivedCategoryAdjunction
-        ).ofNatIsoLeft (Functor.mapDerivedCategoryCompIso L₁ L₂).symm
+        ).ofNatIsoLeft (Functor.mapDerivedCategoryCompIso L₁ L₂)
           ).ofNatIsoRight (Functor.mapDerivedCategoryCompIso R₂ R₁).symm := by
   apply Adjunction.ext
   apply exact_unit_ext (C := C)
@@ -1159,7 +1159,7 @@ attribute [local irreducible] upperStarLowerStarAdjunction
 
 attribute [local irreducible] upperStar lowerStar
 section ProperExchangeRestriction
-attribute [local irreducible] Functor.rightDerivedFunctor Functor.rightDerivedFunctorPlus
+attribute [local irreducible] Functor.rightDerivedFunctor
   Functor.mapDerivedCategory Functor.rightDerivedFunctorPlusCompatibility
 end ProperExchangeRestriction
 end Proper

@@ -191,7 +191,7 @@ private theorem derived_open_unit
       ((Functor.mapDerivedCategoryIdIso (Sheaf X.smallEtaleTopology B)).symm ≪≫
         Functor.mapDerivedCategoryNatIso
           (asIso (openImmersionLowerShriekUpperStarAdjunction B j).unit) ≪≫
-        Functor.mapDerivedCategoryCompIso (openImmersionLowerShriek B j) (upperStar B j)).hom := by
+        (Functor.mapDerivedCategoryCompIso (openImmersionLowerShriek B j) (upperStar B j)).symm).hom := by
   rw [derivedOpenImmersionLowerShriekUpperStarAdjunction]
   let J := openImmersionLowerShriek B j
   let R := upperStar B j

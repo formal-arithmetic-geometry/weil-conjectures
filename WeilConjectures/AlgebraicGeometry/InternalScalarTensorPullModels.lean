@@ -4,6 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.IntegralResidueTensorModel
 public import WeilConjectures.AlgebraicGeometry.InternalDerivedScalarComparisons
 public import WeilConjectures.AlgebraicGeometry.ModuleObjectProjectionMap
@@ -44,7 +46,7 @@ def scalarTensorRestrictPullIso (a : Λ ⟶ Λ') [IsMonHom a]
 Source: Stacks 06YY (auxiliary; not a blueprint node). -/
 def scalarTensorRegularRestriction (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u}) :
     (V a T).obj (𝟙_ (DerivedCategory (Modules Λ' T))) ≅ B a T :=
-  (V₀ a T).mapDerivedCategoryFactors.app
+  cast (by rfl) <| (V₀ a T).mapDerivedCategoryFactors.app
       ((CochainComplex.singleFunctor (Modules Λ' T) 0).obj
         (Mod.regular (condensedRingObj Λ' T))) ≪≫
     DerivedCategory.Q.mapIso

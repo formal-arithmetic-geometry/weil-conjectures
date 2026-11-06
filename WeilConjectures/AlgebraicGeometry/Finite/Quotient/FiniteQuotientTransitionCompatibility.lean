@@ -34,6 +34,7 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 import Mathlib.RingTheory.Flat.CategoryTheory
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+import WeilConjectures.CategoryTheory.DerivedCategory.ExactRestrictionComposition
 import all WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumSupplement
 import all Mathlib.CategoryTheory.Limits.HasLimits
 
@@ -140,30 +141,6 @@ private theorem finiteModel_isIso (n : ℕ)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-private theorem exactFunctorComp_factors
-    {C D E : Type*} [Category* C] [Category* D] [Category* E]
-    [Abelian C] [Abelian D] [Abelian E]
-    [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
-    (F : C ⥤ D) (G : D ⥤ E) (H : C ⥤ E)
-    [F.Additive] [G.Additive] [H.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
-    [PreservesFiniteLimits H] [PreservesFiniteColimits H]
-    (e : F ⋙ G ≅ H) (P : CochainComplex C ℤ) :
-    ((Functor.mapDerivedCategoryCompIso F G).symm ≪≫
-      Functor.mapDerivedCategoryNatIso e).hom.app (DerivedCategory.Q.obj P) ≫
-      H.mapDerivedCategoryFactors.hom.app P =
-    G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app P) ≫
-      G.mapDerivedCategoryFactors.hom.app
-        ((F.mapHomologicalComplex (.up ℤ)).obj P) ≫
-      DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex e.hom (.up ℤ)).app P) := by
-  dsimp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app]
-  erw [Category.assoc, Functor.mapDerivedCategoryNatIso_fac,
-    ← Functor.mapDerivedCategoryCompIso_hom_app_factors]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
-
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 private theorem derivedRestrictionComp_factors
     {T : Scheme.{u}} {R S B : Sheaf (ProEt.topology T) CommRingCat.{u + 1}}
     (φ : R ⟶ S) (ψ : S ⟶ B) (χ : R ⟶ B) (h : φ ≫ ψ = χ)
@@ -175,7 +152,8 @@ private theorem derivedRestrictionComp_factors
         (((pbcRestrict ψ).mapHomologicalComplex (.up ℤ)).obj P) ≫
       DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
         (pbcRestrictComp φ ψ χ h).hom (.up ℤ)).app P) := by
-  exact exactFunctorComp_factors (pbcRestrict ψ) (pbcRestrict φ) (pbcRestrict χ)
+  exact Functor.exactDerivedRestrictionComposition_hom_factors
+    (pbcRestrict ψ) (pbcRestrict φ) (pbcRestrict χ)
     (pbcRestrictComp φ ψ χ h) P
 
 private theorem restriction_diagram
@@ -446,7 +424,10 @@ theorem finite_quotient_transition_compatibility
   unfold HasCompletedReductionFiniteEvaluationNormalization
     completedReductionComparisonNormalized at hb hc
   have hs := normalized_evaluation_square
-    DerivedCategory.Q Fa Fb Fc Fd DerivedCategory.Q DerivedCategory.Q DerivedCategory.Q
+    (DerivedCategory.Q (C := pbcModules Y (pbcAdicCompletion Y d))) Fa Fb Fc Fd
+    (DerivedCategory.Q (C := pbcModules X (reductionCoefficient X d a)))
+    (DerivedCategory.Q (C := pbcModules X (reductionCoefficient X d b)))
+    (DerivedCategory.Q (C := pbcModules X (pbcAdicCompletion X d)))
     (completedReductionFiniteTarget g d a) (completedReductionFiniteTarget g d b) Hc Hd
     ((pbcRestrict q).mapHomologicalComplex (.up ℤ))
     ((pbcRestrict πb).mapHomologicalComplex (.up ℤ))
