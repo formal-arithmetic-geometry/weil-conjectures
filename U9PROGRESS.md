@@ -360,3 +360,8 @@
 - While that build runs, prepared the known compositor-direction body repair in
   stratumTowerEvaluationIso. Its declared type is unchanged; it has external callers.
 - Fix log: /home/ubuntu/u9/bz/FIXES-BZ995.md. No local Lean/Lake or forbidden shortcuts.
+
+- Direct importer GREEN at 85044280a3cc2cf26d4502e6f6d613f58296a6c3: rc=0, 6854 jobs.
+  Helper, assigned module, and StratumCompletionUnitRestriction freshly rebuilt;
+  remote log BZ995-20261106T095815.log. Proceeding to four targets covering 13 direct
+  importers of StratumCompletionUnitRestriction.
