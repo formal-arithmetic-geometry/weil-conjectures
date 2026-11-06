@@ -43,14 +43,13 @@ namespace AlgebraicGeometry.Etale
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types false
 set_option backward.defeqAttrib.useBackward true
-attribute [local implicit_reducible] Functor.mapHomologicalComplex
 
 attribute [local irreducible] upperStar lowerStar squareUpperStarIso
   openImmersionLowerShriek
   Functor.mapDerivedCategory Functor.mapDerivedCategoryFactors Functor.mapDerivedCategoryFactorsh
   Functor.rightDerivedFunctor Functor.rightDerivedFunctorUnit Functor.rightDerivedFunctorUnitQ
   Functor.rightDerivedFunctorObjQIso
-  Functor.mapDerivedCategoryNatIso Functor.mapDerivedCategoryCompIso
+  Functor.mapDerivedCategoryNatIso
 
 private theorem natTrans_eq_of_kinjective
     {C : Type v} {T : Type vT} [Category.{w} C] [Category.{wT} T] [Abelian C]
