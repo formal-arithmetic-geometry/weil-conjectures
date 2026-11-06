@@ -132,7 +132,8 @@ theorem affineTildeTensorOrdinaryExchange
       (DerivedCategory.Q.obj
         (((affinePushforwardTilde A).mapHomologicalComplex (.up ℤ)).obj M)) M (Iso.refl _) hc
     DerivedCategory.Q.map (affineTildeTensorOrdinarySourceIso R A B M).hom ≫
-        DerivedCategory.Qh.map ((moduleHomotopyBaseChange f f' g p hw).app H) ≫
+        cast (by rfl) (DerivedCategory.Qh.{w}.map
+          ((moduleHomotopyBaseChange f f' g p hw).app H)) ≫
         (RingedSpace.moduleDirectImage f'.toLRSHom.toShHom).rightDerivedFunctorUnit.app
           (((Scheme.Modules.tensorPullback p).mapHomotopyCategory (.up ℤ)).obj H) =
       affineTildeTensorOrdinaryTargetMap R A B D M φ ψ k ≫
