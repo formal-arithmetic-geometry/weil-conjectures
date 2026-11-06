@@ -326,6 +326,9 @@ private theorem normalizedDVRKFlatUnit (n : ℕ)
     rhs
     erw [(scalarReductionDerivedRestriction l E X n).map_id,
       DerivedCategory.Qh.map_id, Category.id_comp, Category.comp_id]
+  dsimp only [DerivedCategory.Qh, HomologicalComplexUpToQuasiIso.Qh,
+    CategoryTheory.Quotient.lift] at h'
+  simp only [HomotopyCategory.quotient_obj_as] at h'
   exact h'.trans (congrArg DerivedCategory.Q.map hg.symm)
 
 set_option backward.isDefEq.respectTransparency false in
