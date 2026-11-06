@@ -298,17 +298,16 @@ theorem exists_isPerfPair_of_finiteLevel
   obtain ⟨P, hPF, hPl, hPr⟩ := exists_isSimilitude_torsion_of_finiteLevel FA FB c e ρ σ Q hkerA
     hkerB hrangeE hrangeF hQl hQr hQF
   have hspanV : Submodule.span K (Set.range ι) = ⊤ :=
-    eq_top_iff.2 fun v _ ↦ hι.inductionOn v _ (zero_mem _)
+    eq_top_iff.2 fun v _ ↦ hι.inductionOn v
       (fun m ↦ Submodule.subset_span ⟨m, rfl⟩) (fun s _ hn ↦ Submodule.smul_mem _ s hn)
       (fun _ _ ↦ add_mem)
   have hspanW : Submodule.span K (Set.range κ) = ⊤ :=
-    eq_top_iff.2 fun v _ ↦ hκ.inductionOn v _ (zero_mem _)
+    eq_top_iff.2 fun v _ ↦ hκ.inductionOn v
       (fun m ↦ Submodule.subset_span ⟨m, rfl⟩) (fun s _ hn ↦ Submodule.smul_mem _ s hn)
       (fun _ _ ↦ add_mem)
   refine ⟨baseChangePairing hι hκ P, isPerfPair_of_span_eq_top ι κ hspanV hspanW P _
     (baseChangePairing_apply hι hκ P) hPl hPr, fun x y ↦ ?_⟩
   induction x using hι.inductionOn with
-  | zero => simp
   | smul s x hx =>
     simp only [map_smul, smul_apply, smul_eq_mul, hx]
     ring
@@ -317,7 +316,6 @@ theorem exists_isPerfPair_of_finiteLevel
     ring
   | tmul a =>
     induction y using hκ.inductionOn with
-    | zero => simp
     | smul s y hy =>
       simp only [map_smul, smul_eq_mul, hy]
       ring
