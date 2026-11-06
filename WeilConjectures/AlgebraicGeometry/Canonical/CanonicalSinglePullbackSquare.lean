@@ -53,7 +53,9 @@ private theorem singlePullback_naturality
     simp only [canonicalSinglePullbackMap, cast_eq]
     simp only [DerivedCategory.singleFunctor, DerivedCategory.singleFunctors,
       HomotopyCategory.singleFunctor, HomotopyCategory.singleFunctors,
-      SingleFunctors.postcomp, Functor.comp_map] at hε hs ht ⊢
+      SingleFunctors.postcomp, Functor.comp_map, Scheme.Modules, Scheme.ringCatSheaf,
+      moduleRings, DerivedCategory.Qh, HomologicalComplexUpToQuasiIso.Qh,
+      HomotopyCategory.quotient, Quotient.lift_map_functor_map, DerivedCategory.Q] at hε hs ht ⊢
     simp only [Functor.map_comp] at hs ht
     simp only [Category.assoc]
     rw [← Category.assoc]
@@ -66,7 +68,12 @@ private theorem singlePullback_naturality
       ((HomotopyCategory.singleFunctor _ 0).obj M) ≫
         DerivedCategory.Qh.map (q.map (s.hom.app M)) ≫ k) ht
     simp only [Category.assoc] at hs' ht'
-    exact hs'.trans ht'
+    simpa only [ε, t, q, s, DerivedCategory.singleFunctor, DerivedCategory.singleFunctors,
+      HomotopyCategory.singleFunctor, HomotopyCategory.singleFunctors,
+      SingleFunctors.postcomp, Functor.comp_map, Category.assoc, Scheme.Modules,
+      Scheme.ringCatSheaf, moduleRings, DerivedCategory.Qh,
+      HomologicalComplexUpToQuasiIso.Qh, HomotopyCategory.quotient,
+      Quotient.lift_map_functor_map, DerivedCategory.Q] using hs'.trans ht'
 
 private theorem singlePullback_congr
     {X Y : Scheme.{u}} {f g : X ⟶ Y} (h : f = g) (N : Y.Modules) :

@@ -144,7 +144,8 @@ private theorem single_naturality {A B : Scheme.{v}} (a : B ⟶ A)
   have ht := congrArg (fun k ↦ SB.map k) (t.hom.naturality f)
   simp only [Functor.map_comp] at ht
   simpa only [canonicalSinglePullbackMap, cast_eq, Category.assoc,
-    ε, t, Q, H, s, SA, SB, HA, T] using naturality_three
+    ε, t, Q, H, s, SA, SB, HA, T, Scheme.Modules, Scheme.ringCatSheaf,
+    moduleRings] using naturality_three
     ((derivedPullback a).map (SA.map f)) (Q.map (T.map (HA.map f)))
     (SB.map ((Scheme.Modules.tensorPullback a).map f))
     (SB.map ((Scheme.Modules.pullback a).map f))

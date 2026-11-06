@@ -133,9 +133,8 @@ private theorem single_map_normalize {X Y : Scheme.{v}} (f : X ⟶ Y)
   dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
   simp only [picardTermwiseSingleMap, Modules.canonicalSinglePullbackMap, cast_eq,
     Scheme.Modules, Scheme.ringCatSheaf, moduleRings,
-    Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app, Functor.map_id,
+    Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id,
     Category.comp_id, perfectHomTensorCounit]
-  erw [Functor.map_id, Category.comp_id]
 
 private theorem counit_normalize {X Y : Scheme.{v}} (f : X ⟶ Y)
     (K : CochainComplex Y.Modules ℤ) :
