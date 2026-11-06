@@ -225,7 +225,7 @@ noncomputable def derivedHom (τ : f₁ ⋙ g₁ ⟶ f₂ ⋙ g₂) :
     f₁.leftDerivedFunctor ⋙ g₁.rightDerivedFunctor ⟶
       f₂.leftDerivedFunctor ⋙ g₂.rightDerivedFunctor :=
   derivedCompIsoMapDerivedCategoryComp.hom ≫ (Functor.mapDerivedCategoryCompIso f₁ g₁).inv ≫
-    Functor.mapDerivedCategoryNatTrans τ ≫ (Functor.mapDerivedCategoryCompIso f₂ g₂).hom ≫
+    Functor.mapDerivedCategoryNatTrans τ ≫ (Functor.mapDerivedCategoryCompIso f₂ g₂).inv ≫
     derivedCompIsoMapDerivedCategoryComp.inv
 
 /-- `derivedEndo` is the special case of `derivedHom` for endomorphisms. -/
@@ -246,7 +246,7 @@ lemma derivedCompQhComparison_comp_derivedHom_app (τ : f₁ ⋙ g₁ ⟶ f₂ �
       DerivedCategory.Qh.map
           ((Functor.mapHomotopyCategoryCompIso (Iso.refl (f₂ ⋙ g₂)) _).hom.app K) ≫
         (f₂ ⋙ g₂).mapDerivedCategoryFactorsh.inv.app K ≫
-        (Functor.mapDerivedCategoryCompIso f₂ g₂).hom.app (DerivedCategory.Qh.obj K) ≫
+        (Functor.mapDerivedCategoryCompIso f₂ g₂).inv.app (DerivedCategory.Qh.obj K) ≫
         (derivedCompIsoMapDerivedCategoryComp (f := f₂) (g := g₂)).inv.app
           (DerivedCategory.Qh.obj K) := by
     rw [← reassoc_of% (Functor.mapDerivedCategoryFactorsh_inv_comp_compIso_inv f₂ g₂ K),
