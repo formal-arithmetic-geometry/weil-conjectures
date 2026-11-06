@@ -445,17 +445,22 @@
 - This completion commit changes documentation only; Lean sources match the green build.
 
 
-# BZ1077 in progress
+# BZ1077 complete
 
-- Branch: u9/BZ1077; start: d6df1ded8ce203469c3ccdde034e73d5ce4c644c.
-- The user instructed continuation after the exact compositor API proposal.
-- Applied the nine comparison-chain direction corrections across ComparisonSquareTransport,
-  ComparisonSquare, and SmoothBaseChange, preserving the intended comparison maps.
-- Declaration binders, hypotheses, proof bodies, and docstrings remain unchanged.
-- Next: remote ucheck-bump validation, then direct importers through the 30-module cap.
-- Fix patterns: /home/ubuntu/u9/bz/FIXES-BZ1077.md.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
-
-- The assigned leaf and both downstream layers are GREEN at
-  39a2abaca23e5021c1ed37cf83063de80bacbd73: ucheck-bump rc=0, failed=0, 11415 jobs.
-  Full log: BUILD-BZ1077-fix1-full.log. Next: check the eight SmoothBaseChange importers.
+- Assigned ComparisonSquareTransport is GREEN and sorry-free; all five modified Lean
+  modules passed together with ucheck-bump: rc=0, built=9, failed=0, 12040 jobs.
+- Validated source commit: 776a981bb1ae634bed7c182e0c4d202abb3b5bae.
+- Applied the proposed compositor API corrections after the user's continuation;
+  preserved the intended maps, all hypotheses, and retained declaration types otherwise.
+- ComparisonSquare and SmoothBaseChange received the same correction. FiniteFieldStratifiedPerfectModels
+  needed matching definition/proof compositor corrections; its external caller requires retaining it.
+- Deleted the three unused LowerShriekBaseChange helper/caller declarations after whole-tree checks.
+- Checked 30 downstream targets, reaching the brief's cap. 30 modules were observed green
+  including the assigned leaf and rebuilt dependencies. Remaining failures/skipped paths are recorded.
+- Merged origin/bump/v4.35 at 75c16e0146, retaining the completed upstream progress notes.
+  Upstream repairs to three earlier blockers are distinguished from unverified target builds.
+- Full final log: /home/ubuntu/u9/bz/BUILD-BZ1077-final-full.log.
+- Fixes, exact errors, replayable rules, occurrence counts: /home/ubuntu/u9/bz/FIXES-BZ1077.md.
+- Completion marker: /home/ubuntu/u9/state/BZ1077.DONE.
+- No local Lean/Lake, proof placeholders, trust bypasses, heartbeat raises, or profiler probes.
+- All ucheck invocations have finished. This completion commit changes documentation only.
