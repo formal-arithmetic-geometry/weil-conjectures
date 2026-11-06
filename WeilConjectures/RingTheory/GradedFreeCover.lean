@@ -40,7 +40,7 @@ private noncomputable def shiftedGrade {k : Type u} [Field k] {r : ℕ}
 private theorem mem_shiftedGrade {k : Type u} [Field k] {r : ℕ}
     (e : Fin r → ℤ) (j : ℤ) (x : Fin r →₀ MvPolynomial (Fin 2) k) :
     x ∈ shiftedGrade e j ↔
-      ∀ a t, coeff t (x a) ≠ 0 → (t.degree : ℤ) + e a = j := by
+      ∀ a t, (x a).coeff t ≠ 0 → (t.degree : ℤ) + e a = j := by
   simp only [shiftedGrade, Submodule.mem_comap, Finsupp.mem_supported,
     Set.subset_def, Finset.mem_coe, Finsupp.mem_support_iff, Set.mem_ofPred_eq,
     Prod.forall]
