@@ -73,10 +73,12 @@ private theorem complete_cone
   let := hH
   let : (ringedDerivedRestriction R U).CommShift ℤ := by
     unfold ringedDerivedRestriction
-    infer_instance
+    set_option backward.isDefEq.respectTransparency true in
+      infer_instance
   let : (ringedDerivedRestriction R U).IsTriangulated := by
     unfold ringedDerivedRestriction
-    infer_instance
+    set_option backward.isDefEq.respectTransparency true in
+      infer_instance
   let G := ringedDerivedRestriction R U ⋙ H
   exact Pretriangulated.Triangle.isZero₃_of_isZero₁₂ _ (G.map_distinguished T hT)
     (h₁ U f hf) (h₂ U f hf)
