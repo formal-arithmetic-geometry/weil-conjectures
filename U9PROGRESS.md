@@ -218,30 +218,29 @@
 - Fix patterns and exact diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ740.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ780: 14 modules green; final importer check pending
+# BZ780 complete
 
 - Branch: `u9/BZ780`; baseline: `8027d88a3`.
 - Assigned `DerivedPullbackTensorUnitKFlat` is sorry-free and green, with 13 downstream
   modules green through `QCqsSheafRHomAdjunction`. Inventory: `BZ780-validation.json`.
-- Latest successful six-target batch: `ucheck-bump` rc=0, failed=0, 5684 jobs at
-  `19f7a3b3d4` on newsrv:/home/ubuntu/u9n/bumpw2. Full log:
+- Validated Lean source: `19f7a3b3d4`. Both complete remote batches returned rc=0, failed=0:
+  3957 jobs for the repair batch and 5684 jobs for the projection-mate batch.
+- Full logs: `/home/ubuntu/u9/bz/BUILD-BZ780-downstream3-green-full.log` and
   `/home/ubuntu/u9/bz/BUILD-BZ780-downstream5-green-full.log`.
 - The user authorized the concrete two-identity-cast proposal for the leaf. Added
   Localization imports and proof normalization, preserving its original morphisms.
-- Applied the same casts/imports inside the monoidal-model proposition body. Its
-  signature and theorem statements are unchanged; the old No goals error disappeared.
+- Applied the same casts/imports inside the monoidal-model proposition body; its
+  signature and theorem statements are unchanged. The old No goals error disappeared.
 - Deleted unused `AlgebraicGeometry.exists_openRestriction_derivedMonoidal` with its
-  docstring after its obsolete compositor direction failed. Its sole caller is in the
-  already-blocked unused open-restriction closed-monoidal theorem.
-- Seven machine rewrite rules exactly reproduce all three changed Lean files.
-- Six targets are blocked by unowned `SingleComplexBaseChangeStalkCondition`; details,
-  exact errors, occurrence counts, and replay rules are in `/home/ubuntu/u9/bz/FIXES-BZ780.md`.
-- The four-module repair batch also passed at 19f7a3b3d4: rc=0, failed=0, 3957 jobs,
-  including the pruned OpenRestrictionDerivedMonoidal module. Full log:
-  `/home/ubuntu/u9/bz/BUILD-BZ780-downstream3-green-full.log`.
-- Final direct importer GlobalHomAdjunctionIso is queued: exec 80076, Weil PID 3233493.
-  It transitively depends on the confirmed stalk-condition blocker. Do not duplicate the request.
-- Final source audit passes: exact seven-rule replay, idempotence, whole-tree counts, pruning
-  eligibility, unchanged heartbeat options, forbidden-proof scan, and git diff --check.
-- Next: record the final importer result and write BZ780.DONE.
-- No local Lean/Lake, proof placeholders, trust bypasses, profiler probes, or heartbeat increases.
+  docstring after the compositor-direction error. Its unused caller remains in the
+  already-blocked OpenRestrictionClosedMonoidal module.
+- Seven downstream targets were skipped for unowned SingleComplexBaseChangeStalkCondition.
+  Six were attempted in remote builds. GlobalHomAdjunctionIso has the confirmed same
+  dependency path; its queued request was cancelled before tree acquisition under the
+  skip rule. No build is claimed for that final target. 20 extra modules reached (limit 30).
+- Seven machine rules exactly replay all three changed Lean files and are idempotent.
+  Whole-tree counts, exact errors, deletion eligibility, forbidden-proof scan,
+  unchanged heartbeat settings, and git diff --check all passed.
+- Fix records and audit are copied to Weil. Completion marker: `/home/ubuntu/u9/state/BZ780.DONE`.
+- This final commit changes only progress documentation; Lean sources match the green builds.
+- No local Lean/Lake, proof placeholders, trust bypasses, profiler probes, or heartbeat changes.
