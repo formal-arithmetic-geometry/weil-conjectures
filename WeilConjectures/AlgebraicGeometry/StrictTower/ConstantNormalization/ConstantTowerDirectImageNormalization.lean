@@ -370,6 +370,54 @@ private theorem homotopy_comp_inv_id (F : C ⥤ D) [F.Additive]
   rw [Functor.mapHomotopyCategoryCompIso_refl_hom_app, Category.id_comp] at h
   exact h
 
+set_option backward.isDefEq.respectTransparency false in
+private theorem squareComparison_eq_mate
+    (F : C ⥤ D) [F.Additive] (P : C ⥤ T) [P.Additive]
+    [PreservesFiniteLimits P] [PreservesFiniteColimits P]
+    (Q : D ⥤ U) [Q.Additive] [PreservesFiniteLimits Q] [PreservesFiniteColimits Q]
+    (H : T ⥤ U) [H.Additive]
+    (LF : D ⥤ C) [LF.Additive] [PreservesFiniteLimits LF] [PreservesFiniteColimits LF]
+    (LH : U ⥤ T) [LH.Additive] [PreservesFiniteLimits LH] [PreservesFiniteColimits LH]
+    [Abelian.HasKInjectiveResolutions C] [Abelian.HasKInjectiveResolutions T]
+    [P.PreservesKInjectiveComplexes]
+    (a : LF ⊣ F) (b : LH ⊣ H) (s : Q ⋙ LH ≅ LF ⋙ P) (e : F ⋙ Q ≅ P ⋙ H)
+    (he : (mateEquiv a b (TwoSquare.mk _ _ _ _ s.hom)).natTrans = e.hom) :
+    ((Functor.rightDerivedFunctorCompMapDerivedCategoryIso F Q).symm ≪≫
+      Functor.rightDerivedFunctorNatIso e ≪≫
+      Functor.rightDerivedFunctorCompIso P H ≪≫
+      Functor.isoWhiskerRight P.rightDerivedFunctorIsoMapDerivedCategory
+        H.rightDerivedFunctor).hom =
+    (mateEquiv a.mapDerivedCategoryRightDerivedAdjunction
+      b.mapDerivedCategoryRightDerivedAdjunction
+      (TwoSquare.mk _ _ _ _
+        (Functor.mapDerivedCategoryCompIso Q LH ≪≫
+          Functor.mapDerivedCategoryNatIso s ≪≫
+            (Functor.mapDerivedCategoryCompIso LF P).symm).hom)).natTrans := by
+  apply Functor.rightDerived_ext (F.rightDerivedFunctor ⋙ Q.mapDerivedCategory)
+    (Functor.rightDerivedFunctorCompMapDerivedCategoryUnit F Q)
+    (HomotopyCategory.quasiIso C (.up ℤ))
+  apply NatTrans.ext
+  funext K
+  dsimp only [Functor.rightDerivedFunctorCompMapDerivedCategoryUnit,
+    NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Functor.associator_hom_app, Functor.associator_inv_app]
+  simp only [homotopy_comp_inv_id, CategoryTheory.Functor.map_id, Category.id_comp]
+  repeat' first | erw [Category.id_comp] | erw [Category.comp_id]
+  apply (cancel_epi (Q.mapDerivedCategoryFactorsh.hom.app
+    ((F.mapHomotopyCategory (.up ℤ)).obj K))).mp
+  simp only [Category.assoc]
+  erw [Iso.hom_inv_id_app_assoc, Iso.hom_inv_id_app_assoc]
+  apply (cancel_mono (H.rightDerivedFunctor.map
+    (P.mapDerivedCategoryFactorsh.hom.app K))).mp
+  simp only [Category.assoc]
+  rw [squareComparison_unit]
+  have h := _root_.derived_mate_factorsh a b s K
+  rw [he] at h
+  simp only [Functor.mapHomotopyCategoryCompIso_refl_hom_app, homotopy_comp_inv_id,
+    Category.comp_id] at h
+  repeat' first | erw [Category.id_comp] at h | erw [Category.comp_id] at h
+  exact h.symm
+
 end GenericNormalization
 
 set_option backward.isDefEq.respectTransparency false in
