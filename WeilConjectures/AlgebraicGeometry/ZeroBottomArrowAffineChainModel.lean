@@ -253,7 +253,7 @@ theorem zeroBottomArrow_affine_chain_model
       (cU.app D).symm ≪≫ e
     let eB : (derivedPullback W.ι).obj D ≅ DerivedCategory.Q.obj B :=
       cR.app D ≪≫ (Functor.mapDerivedCategoryNatIso cRestrict).app D ≪≫
-        (Functor.mapDerivedCategoryCompIso RU S).app D ≪≫
+        (Functor.mapDerivedCategoryCompIso RU S).symm.app D ≪≫
         S.mapDerivedCategory.mapIso eRU ≪≫ S.mapDerivedCategoryFactors.app K
     let H := DerivedCategory.homologyFunctor C a
     have hrestriction : IsIso (H.map ((derivedPullback W.ι).map f)) := by
