@@ -8,6 +8,9 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
+public import Mathlib.Algebra.Homology.Localization
+
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # The exact derived adjunction counit on a single complex
 
