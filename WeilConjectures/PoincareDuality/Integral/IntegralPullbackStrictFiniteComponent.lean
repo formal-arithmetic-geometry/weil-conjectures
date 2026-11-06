@@ -570,7 +570,6 @@ private theorem finiteEvaluation_fac_comp {X Y : Scheme.{u}} (f : X ⟶ Y)
   erw [B.mapDerivedCategoryFactors.hom.naturality k]
   erw [reassoc_of% hfac]
   dsimp only [Functor.comp_map]
-  simp only [Category.assoc]
   change VD.map (F.mapDerivedCategoryFactors.inv.app C) ≫
     VD.map (F.mapDerivedCategoryFactors.hom.app C) ≫
     V.mapDerivedCategoryFactors.hom.app D ≫ DerivedCategory.Q.map H ≫
