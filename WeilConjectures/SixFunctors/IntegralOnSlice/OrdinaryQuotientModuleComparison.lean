@@ -105,13 +105,8 @@ private def uniformizerPower (W : Scheme.{t}) (n : ℕ) (M : Mod l E W none) : M
       naturality := by
         intro V Z i
         ext x
-        change uniformizerSection l E W Z ^ (n + 1) • M.val.map i x =
-          M.val.map i (uniformizerSection l E W V ^ (n + 1) • x)
-        rw [PresheafOfModules.map_smul, map_pow]
-        change uniformizerSection l E W Z ^ (n + 1) • M.val.map i x =
-          (ring l E W none).obj.map i (uniformizerSection l E W V) ^ (n + 1) •
-            M.val.map i x
-        rw [uniformizerSection_natural] }
+        simpa only [map_pow, uniformizerSection_natural] using
+          (M.val.map_smul i (uniformizerSection l E W V ^ (n + 1)) x).symm }
 
 private theorem projection_uniformizer_zero (W : Scheme.{t}) (n : ℕ)
     (V : W.ProEtᵒᵖ) :

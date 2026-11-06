@@ -289,7 +289,7 @@ private theorem derived_localization
   let c := (Functor.mapDerivedCategoryCompIso Q D).symm.app K ≪≫
     (D.rightDerivedFunctorIsoMapDerivedCategory.app ((d.pull i).obj K)).symm
   refine ⟨a.inv ≫ f, g ≫ c.hom, c.inv ≫ h ≫ a.hom⟦(1 : ℤ)⟧',
-    isomorphic_distinguished _ hT _
+    Pretriangulated.isomorphic_distinguished _ hT _
       (Triangle.isoMk _ _ a.symm (Iso.refl _) c.symm ?_ ?_ ?_)⟩
   · simp
   · simp [Category.assoc]
