@@ -109,7 +109,7 @@ theorem rightDerivedGlobalSections_map_unit_strictLocalizationToBase_eq_zero {S 
         ((D((π)^*[ModuleCat.{u + 1} Λ])).obj N))
     refine IsZero.of_iso (hN _ (r ≫ π) fun x ↦ ?_)
       ((Functor.mapDerivedCategoryNatIso (Etale.upperStarComp _ r π) ≪≫
-        Functor.mapDerivedCategoryCompIso _ _).app N).symm
+        (Functor.mapDerivedCategoryCompIso _ _).symm).app N).symm
     rw [Scheme.Hom.comp_apply, closedGeometricPoint_apply]
     exact strictLocalizationToBase_apply_closedPoint s
   exact (hZ.of_iso ((rightDerivedLowerStarCompRightDerivedGlobalSectionsIso _ π).app _)).eq_of_tgt
