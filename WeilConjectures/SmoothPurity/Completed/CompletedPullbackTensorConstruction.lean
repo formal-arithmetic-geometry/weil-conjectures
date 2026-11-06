@@ -488,24 +488,18 @@ def pullbackTensorAtCommonStage {X Y : Scheme.{u}} (f : X ⟶ Y)
     (h : (commonStageTensorObject l Ω Y P Q).stage ≤ L) :
     (commonStagePullbackObject l Ω f (commonStageTensorObject l Ω Y P Q)).toStage h ≅
       (commonStageTensorObject l Ω X
-        (commonStagePullbackObject l Ω f P) (commonStagePullbackObject l Ω f Q)).toStage h := by
-  letI : FiniteDimensional (Padic l) (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) :=
-    AlgebraicallyClosedCoefficients.coefficientFinite l Ω L
-  exact
-    commonStagePullbackComparison l Ω f (commonStageTensorObject l Ω Y P Q) L h ≪≫
-    ((@rationalDerivedPullback l _ (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) _ _ _ X Y f
-      hX hY)).mapIso
-      (commonStageTensorComparison l Ω Y P Q L h) ≪≫
-    (@canonicalRationalPullbackTensor l _ (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) _ _
-      _ X Y f hX hY) _ _ ≪≫
-    ((@rationalDerivedTensor l _ (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) _ _ _ X
-      hX)).mapIso
-      (Iso.prod (commonStagePullbackComparison l Ω f P L
-        (((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).1.trans h)).symm
-        (commonStagePullbackComparison l Ω f Q L
-          (((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).2.trans h)).symm) ≪≫
-    (commonStageTensorComparison l Ω X
-      (commonStagePullbackObject l Ω f P) (commonStagePullbackObject l Ω f Q) L h).symm
+        (commonStagePullbackObject l Ω f P) (commonStagePullbackObject l Ω f Q)).toStage h :=
+  commonStagePullbackComparison l Ω f (commonStageTensorObject l Ω Y P Q) L h ≪≫
+  (rationalDerivedPullback l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f).mapIso
+    (commonStageTensorComparison l Ω Y P Q L h) ≪≫
+  canonicalRationalPullbackTensor l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f _ _ ≪≫
+  (rationalDerivedTensor l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) X).mapIso
+    (Iso.prod (commonStagePullbackComparison l Ω f P L
+      (((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).1.trans h)).symm
+      (commonStagePullbackComparison l Ω f Q L
+        (((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).2.trans h)).symm) ≪≫
+  (commonStageTensorComparison l Ω X
+    (commonStagePullbackObject l Ω f P) (commonStagePullbackObject l Ω f Q) L h).symm
 
 end CommonComparison
 
