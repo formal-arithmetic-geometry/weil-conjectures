@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerCoefficientBaseChange
+public import WeilConjectures.AlgebraicGeometry.SfIntegralReductionTower
 public import WeilConjectures.AlgebraicGeometry.CartierPoleBoundary
 public import WeilConjectures.AlgebraicGeometry.DivisibleExtensionDerivedReduction
 public import WeilConjectures.AlgebraicGeometry.EtaleSectionsFpqcDescent
@@ -81,11 +82,6 @@ Source: Stacks 00WJ (auxiliary; not a blueprint node). -/
 theorem cartierEtaleAbSheafify (Z : Scheme.{u}) :
     HasSheafify Z.smallEtaleTopology AddCommGrpCat.{u + 1} := inferInstance
 
-/-- Pro-etale sheafification for integral coefficients.
-Source: Stacks 00WJ (auxiliary; not a blueprint node). -/
-theorem cartierProAbSheafify (Z : Scheme.{u}) :
-    HasSheafify (Scheme.ProEt.topology Z) AddCommGrpCat.{u + 1} := inferInstance
-
 /-- Etale sheafification for fixed module coefficients.
 Source: Stacks 00WJ (auxiliary; not a blueprint node). -/
 theorem cartierEtaleModuleSheafify (A : Type (u + 1)) [CommRing A] (Z : Scheme.{u}) :
@@ -104,7 +100,7 @@ theorem cartierEtaleAbHasExt (Z : Scheme.{u}) :
 end AlgebraicGeometry
 
 attribute [local instance] AlgebraicGeometry.cartierEtaleAbSheafify
-  AlgebraicGeometry.cartierProAbSheafify AlgebraicGeometry.cartierEtaleModuleSheafify
+  WeilConjectures.sfAbSheafify AlgebraicGeometry.cartierEtaleModuleSheafify
   AlgebraicGeometry.cartierProModuleSheafify
 
 attribute [local instance] AlgebraicGeometry.cartierEtaleAbHasExt

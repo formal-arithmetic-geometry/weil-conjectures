@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.SfIntegralReductionTower
 public import WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerOrdinaryProperOpenArrows
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAdjunctionSupplement
 import all WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAdjunctionSupplement
@@ -362,11 +363,7 @@ end ExactScalarDescent
 
 variable (B : Type (u + 1)) [CommRing B]
 
-/-- The existing local-bijection characterization at the same coefficient universe.
-Source: Stacks 03CY (blueprint: lem-cbc-tower-mate-evaluation-scalars). -/
-instance siteLocallyBijective (X : Scheme.{u}) :
-    (Scheme.ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
-  SheafOfModules.wEqualsLocallyBijective_coefficientUniverse.{u + 1, u, u + 1}
+attribute [local instance] WeilConjectures.sfAbBijective
 
 /-- The existing abelian structure with its coefficient universe made explicit.
 Source: Stacks 03DA (blueprint: lem-cbc-tower-mate-evaluation-scalars). -/

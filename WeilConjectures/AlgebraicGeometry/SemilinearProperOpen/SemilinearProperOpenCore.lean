@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.SfIntegralReductionTower
 public import WeilConjectures.SixFunctors.Supporting.AdjunctConjugateOpenFactor
 public import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearDerivedSections
 public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.OpenTensorNormalization
