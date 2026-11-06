@@ -1120,8 +1120,8 @@ theorem pullbackTensorReductionModel_existsUnique (W : Scheme.{u}) :
     have hcomp : (Functor.mapHomologicalComplexCompIso
         (Iso.refl (coefficientSequenceRestriction l E W ⋙
           pullbackTensorConstantLimit l E W)) (.up ℤ)).inv.app C = 𝟙 _ := rfl
-    simp only [pullbackTensorLimitUnit, hcomp, CategoryTheory.Functor.map_id,
-      Category.id_comp]
+    simp only [pullbackTensorLimitUnit, hcomp]
+    erw [CategoryTheory.Functor.map_id, Category.id_comp] <;> rfl
   obtain ⟨_, ε, _, hε, _, hhom⟩ :=
     CompletionUnit.fixedDerivedComparison l E W (pullbackTensorCalculus l E W) M c
       (CompletionUnit.termwiseLimitComparison_projection l E W) η hη
