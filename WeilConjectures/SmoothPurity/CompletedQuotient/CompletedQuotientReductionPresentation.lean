@@ -51,7 +51,7 @@ set_option backward.isDefEq.respectTransparency.types true
 attribute [local irreducible] HasDerivedCategory.standard
   CategoryTheory.Functor.leftAdjoint CategoryTheory.Functor.mapDerivedCategory
   SheafOfModules.monoidalCategory completedIntegralCoefficientSheafUnrestricted
-attribute [local implicit_reducible] CategoryTheory.Functor.mapHomologicalComplex
+attribute [local implicit_reducible]
   coefficientFiniteDerivedExtension coefficientFiniteDerivedRestriction
   coefficientConstantTowerLimit coefficientConstantTowerEvaluation
   coefficientSequenceLimit
