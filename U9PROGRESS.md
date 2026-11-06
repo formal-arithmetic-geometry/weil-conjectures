@@ -474,5 +474,26 @@
   remain fixed and the reordered category universes are inferred.
 - The initial ucheck-bump confirmed a statement-level type mismatch caused by Mathlib's
   new mapDerivedCategory universe order. Pinned API and whole-tree inventory are recorded.
-- Next: remote validation of the assigned leaf, then direct importers as the brief requires.
+- Assigned leaf GREEN: ucheck-bump rc=0, failed=0, 13186 jobs; 12s rebuild at 4e7639af1d.
+- Merged the completed BZ1099 prerequisite; next: check the shared direct importer.
 - Fix record: /home/ubuntu/u9/bz/FIXES-BZ1098.md. No local Lean/Lake or proof escapes.
+
+
+# BZ1099 complete
+
+- Assigned AdicImmersionResidueComparisonFixed is GREEN and sorry-free.
+- ucheck-bump passed: rc=0, built=6, failed=0, 13230 jobs; target rebuilt in 4.1s.
+- Green source commit: 92c739ce57c42b0543ecc04d2f0065bd8aa5412f.
+- Applied the proposed one-line universe-annotation migration after the user's
+  continuation instruction. Localization universes remain explicit; Mathlib's
+  reordered category universes are inferred. Proof and assumptions are unchanged.
+- The sole direct importer AdicImmersionResidueComparison was attempted and is
+  blocked by AdicImmersionResidueComparisonEtale, owned by live unit BZ1098.
+  Its first error is a statement type mismatch at 238:8. No unowned file was edited.
+- The assigned leaf also rebuilt successfully in the downstream batch.
+- Logs: BUILD-BZ1099-leaf-green-full.log and BUILD-BZ1099-downstream-full.log in ~/u9/bz/.
+- Fix pattern, exact error, replayable rule, and occurrence count: ~/u9/bz/FIXES-BZ1099.md.
+- Completion marker: ~/u9/state/BZ1099.DONE.
+- No local Lean/Lake, proof placeholders, new declarations, trust bypasses, profiler probes,
+  or heartbeat changes. Rule replay and idempotence checks pass; all ucheck invocations ended.
+- This final commit changes progress documentation only; Lean source matches the green build.
