@@ -1033,63 +1033,6 @@ noncomputable def finiteTarget {V W T : Scheme.{u}} (k : V ⟶ W) (p : W ⟶ T)
   (moduleDirectImage B p).rightDerivedFunctor.mapIso ((evalJ B k n).symm.app M) ≪≫
   ((@asIso _ _ _ _ (evalR B p n) (evalR_isIso B p n)).app ((J B k).obj M)).symm
 
-/-- The n-th evaluation is this particular normalized finite comparison, including
-refinements, and not just some isomorphism between the same objects.
-Source: Stacks, Tag 0F7B and blueprint, seventh and eighth proof steps
-(blueprint: lem-cbc-strict-tower-proper-open-calculus).
-Proof: evaluation preserves the exact functors, and its R comparison is the mate
-preserving their units and counits. Scalar restriction preserves the identity/zero
-clopen projector. The site comparison carries the two clopen components to the
-same components. Transpose under the proper adjunction: the direct-image unit
-normalization cancels its counit, leaving the same compared clopen alpha on both
-sides. The finite etale node has precisely this transpose, by its section and
-K-injective unit normalization. Injectivity of the adjunction Hom equivalence
-proves the equation, including when r is identity and the lift is a clopen section. -/
-theorem gamma_evaluation {V W S T : Scheme.{u}}
-    (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
-    [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]
-    [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i) (M : Derived B V) (n : ℕ)
-    (w : ScalarEtaleOrigin B V ((ev B V n).obj M)) :
-    (finiteSource B r i M n w).hom ≫ (ev B T n).map ((gamma B k r p i h).app M) =
-      (HD B T w.Λ w.φ).map ((finiteGamma w.Λ k r p i h).hom.app w.origin.L) ≫
-        (finiteTarget B k p M n w).hom := by
-  have := evalR_isIso B p n
-  have := evalR_isIso B r n
-  have he := MateEvaluationScalars.evaluation_gamma B k r p i h n M
-  have hs := singleLevelFiniteProperOpenTransport B w.Λ w.φ k r p i h w.origin.L
-  have hn := (MateEvaluationScalars.singleDerivedGamma B k r p i h).naturality
-    (originIso B w).hom
-  dsimp only [Functor.comp_map] at hn
-  dsimp only [MateEvaluationScalars.r, MateEvaluationScalars.j] at he hn
-  change _ = (HD B T w.Λ w.φ).map
-    ((Etale.ClopenMateNormalization.normalizedComparison w.Λ k r p i h).hom.app
-      w.origin.L) ≫ _
-  apply (cancel_mono ((evalR B p n).app ((J B k).obj M) ≫
-    (moduleDirectImage B p).rightDerivedFunctor.map ((evalJ B k n).hom.app M))).1
-  dsimp only [finiteSource, finiteTarget, Iso.trans_hom, Iso.symm_hom,
-    Functor.mapIso_hom, Iso.app_hom, Iso.app_inv, asIso_hom, asIso_inv]
-  dsimp only [Etale.rightDerivedLowerStarPlus, Functor.comp_obj] at hs ⊢
-  simp only [Category.assoc]
-  conv_lhs =>
-    arg 2; arg 2; arg 2; arg 2; arg 2
-    rw [he]
-  simp only [Iso.inv_hom_id_app_assoc, NatIso.isIso_inv_app,
-    IsIso.inv_hom_id_assoc, ← Functor.map_comp_assoc, ← Functor.map_comp,
-    IsIso.inv_hom_id, Iso.inv_hom_id_app, Category.comp_id]
-  simp only [Functor.map_comp, Category.assoc]
-  conv_lhs =>
-    arg 2; arg 2
-    rw [hn]
-  have hid := (moduleDirectImage B p).rightDerivedFunctor.map_id
-    ((moduleJ B k).mapDerivedCategory.obj ((ev B V n).obj M))
-  conv_rhs =>
-    arg 2; arg 2; arg 2; arg 2
-    dsimp only [Functor.comp_obj]
-    rw [hid]
-  simpa only [Category.assoc, Category.comp_id] using
-    congrArg (fun f ↦ f ≫ (moduleDirectImage B p).rightDerivedFunctor.map
-      ((moduleJ B k).mapDerivedCategory.map (originIso B w).hom)) hs
-
 attribute [local irreducible] finiteSource finiteTarget
 
 private theorem isIso_of_evaluations
@@ -1107,37 +1050,6 @@ private theorem isIso_of_evaluations
       change IsIso ((DerivedCategory.homologyFunctor C q).map
         (((evaluation ℕᵒᵖ C).obj n).mapDerivedCategory.map f))
       infer_instance)
-
-/-- Proper/open interchange is invertible for independently bounded finite etale
-origins at every positive level, with no uniform bound on those origins.
-Source: Stacks, Tag 0F7B and blueprint, steps 7--9
-(blueprint: lem-cbc-strict-tower-proper-open-calculus).
-Proof: evaluation of a K-injective strict tower is K-injective, so evaluation
-commutes with R and its adjunction units and counits. Scalar restriction commutes
-with G, J and R by the normalized change-of-ring adjunction, not by any claim that
-it preserves K-injectives. The identity/zero clopen projector is unchanged by
-scalar restriction. At an etale origin the canonical direct-image comparisons for
-proper (hence qcqs) maps and open comparisons identify this mate with the normalized
-finite etale comparison of properOpenInterchangeCoherence. It is an isomorphism.
-Thus every evaluated map is invertible. Tower cohomology is levelwise, so the map
-induces an isomorphism in every degree, and the unbounded-derived cohomology
-criterion proves invertibility. This detects isomorphisms, not equality of maps. -/
-theorem gamma_isIso {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
-    (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
-    [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
-    (h : k ≫ p = r ≫ i) (M : Derived B V)
-    (hM : ∀ n : ℕ, Nonempty (ScalarEtaleOrigin B V ((ev B V n).obj M))) :
-    IsIso ((gamma B k r p i h).app M) := by
-  have heval (n : ℕ) : IsIso ((ev B T n).map ((gamma B k r p i h).app M)) := by
-    let w := Classical.choice (hM n)
-    have heq := gamma_evaluation B k r p i h M n w
-    have : IsIso ((finiteSource B r i M n w).hom ≫
-        (ev B T n).map ((gamma B k r p i h).app M)) := by
-      rw [heq]
-      infer_instance
-    exact IsIso.of_isIso_comp_left (finiteSource B r i M n w).hom _
-  exact isIso_of_evaluations (C := Modules B T)
-    ((gamma B k r p i h).app M) (fun n ↦ heval n.unop)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option linter.unusedVariables false in
