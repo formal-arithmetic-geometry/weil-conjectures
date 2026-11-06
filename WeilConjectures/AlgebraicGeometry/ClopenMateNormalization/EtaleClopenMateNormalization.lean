@@ -191,7 +191,7 @@ private theorem clopenLocalizedSquare_fac (σ : G ⋙ L' ⟶ L ⋙ G')
     Functor.whiskerRight_app, Category.assoc]
   change _ ≫ ((G ⋙ L').mapDerivedCategoryFactors.hom.app K ≫ _) = _
   erw [← reassoc_of% h₁]
-  simp only [Iso.hom_inv_id_app_assoc, Iso.hom_inv_id_app, Category.comp_id]
+  simp only [Iso.hom_inv_id_app_assoc, Iso.inv_hom_id_app, Category.comp_id]
 
 omit [HasKInjectiveResolutions C₁] [HasKInjectiveResolutions C₃] in
 private theorem clopenLocalizedSquare_fach (σ : G ⋙ L' ⟶ L ⋙ G')
