@@ -381,6 +381,8 @@ theorem affinePullbackSections_unit_uncancelled
   dsimp only [Scheme.Modules, Scheme.ringCatSheaf]
   have hp := pinned_unit_fac g ((HomotopyCategory.quotient _ (.up ℤ)).obj K)
   have ht := Adjunction.mapHomotopyCategory_unit_app_quotient (.up ℤ)
+    (C := SheafOfModules.{u} (moduleRings (Spec R).toRingedSpace))
+    (D := SheafOfModules.{u} (moduleRings (Spec B).toRingedSpace))
     (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)) K
   have hp' := hp.trans (congrArg (fun f ↦
     (DerivedCategory.Qh
