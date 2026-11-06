@@ -39,14 +39,13 @@ local instance (Z : Scheme.{u}) : HasDerivedCategory.{w} Z.Modules :=
     (SheafOfModules.{u} (moduleRings Z.toRingedSpace)))
 local instance (Z : Scheme.{u}) : IsGrothendieckAbelian.{u} Z.Modules :=
   SheafOfModules.isGrothendieckAbelian _
-local instance (Z : Scheme.{u}) : Abelian.HasKInjectiveResolutions Z.Modules :=
-  Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian
+attribute [local instance] instHasKInjectiveResolutionsModules
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 set_option backward.isDefEq.lazyProjDelta false in
 set_option backward.isDefEq.lazyWhnfCore false in
 set_option linter.all false in
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- The explicit categorical carrier conversions require the larger elaboration budget.
 /-- Component assembly from the two comparison-unit equations and transport.
 Source: Stacks Project, Cohomology, Tag 0D5T.

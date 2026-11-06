@@ -28,7 +28,6 @@ namespace AlgebraicGeometry.Etale
 local macro_rules
   | `(tactic| lia) => `(tactic| first | exact le_refl _ | omega)
 
-set_option maxHeartbeats 1000000 in
 -- The dependent first-page and graded-class witnesses are elaborated together.
 set_option linter.unusedVariables false in
 /-- Sheaf continuity gives the canonical isomorphism on each first-page term.

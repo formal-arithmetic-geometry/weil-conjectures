@@ -31,7 +31,7 @@ noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance] Scheme.Modules.enoughInjectives
 
-set_option maxHeartbeats 1200000 in
+set_option maxHeartbeats 800000 in
 -- Explicit homology transports need more elaboration than the default budget.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

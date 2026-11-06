@@ -72,7 +72,7 @@ theorem exists_proper_limit_noetherian_core
     dsimp [D, baseChangeDiagram]
     exact quasiSeparatedSpace_of_quasiSeparated (pullback.snd _ _)
   obtain ⟨Z, k, πX, hX, htrans, hclosed, hfactor⟩ :=
-    exists_closed_image_limit_system D i πY hY
+    exists_closedImmersion_system_of_isLimit D i πY hY
   obtain ⟨A, horder, hdir, hne, F, hfinal⟩ :=
     IsFiltered.exists_directed (Over a)ᵒᵖ
   let := horder
@@ -163,7 +163,7 @@ theorem proper_limit_noetherian_affine_clause
     dsimp [D, baseChangeDiagram]
     exact quasiSeparatedSpace_of_quasiSeparated (pullback.snd _ _)
   obtain ⟨Z, k, πX, hX, htrans, hclosed, hfactor⟩ :=
-    exists_closed_image_limit_system D i πY hY
+    exists_closedImmersion_system_of_isLimit D i πY hY
   obtain ⟨A, horder, hdir, hne, F, hfinal⟩ :=
     IsFiltered.exists_directed (Over a)ᵒᵖ
   let := horder

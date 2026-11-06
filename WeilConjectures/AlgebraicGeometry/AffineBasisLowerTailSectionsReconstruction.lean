@@ -83,7 +83,7 @@ private theorem transport_roos_triangle
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 500000 in
 -- Transport between the two module-category presentations needs additional elaboration.
 /-- Derived abelian sections reconstruct the lower tail from its canonical lower
 truncations. This is only the reconstruction step, with no homology conclusion.

@@ -20,10 +20,10 @@ Source: Bhatt--Scholze, Proposition 6.8.4(6), descent of embedded lattices
 attribute [local instance] AlgebraicGeometry.ProEtale.latticeWeakSheafifyOver
   AlgebraicGeometry.ProEtale.latticeWEqualsOver
 
-attribute [local instance] AlgebraicGeometry.ProEtale.latticeStrongSheafifyOver
-  AlgebraicGeometry.ProEtale.latticeWeakSheafifyOverOver
-  AlgebraicGeometry.ProEtale.latticeWEqualsOverOver
-  AlgebraicGeometry.ProEtale.latticeStrongSheafifyOverOver
+attribute [local instance] AlgebraicGeometry.ProEtale.restrictionStrongSheafifyOver
+  AlgebraicGeometry.ProEtale.restrictionWeakSheafifyOverOver
+  AlgebraicGeometry.ProEtale.restrictionWEqualsOverOver
+  AlgebraicGeometry.ProEtale.restrictionStrongSheafifyOverOver
 
 universe u
 

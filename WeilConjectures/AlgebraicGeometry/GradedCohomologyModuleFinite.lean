@@ -90,7 +90,6 @@ private theorem finite_moduleCohomology
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
 -- Naturality and scalar transport need additional elaboration heartbeats.
 /-- The compatible graded cohomology direct sum has a finitely generated top submodule.
 

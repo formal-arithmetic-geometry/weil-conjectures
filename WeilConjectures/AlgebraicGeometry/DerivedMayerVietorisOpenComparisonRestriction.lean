@@ -61,7 +61,7 @@ private theorem isIso_smaller_unit (X : Scheme.{u})
     (W U : X.Opens) (hWU : W ≤ U) (E : schemeDerivedCategory X) :
     IsIso ((schemeMVDerivedRestriction X W).map ((schemeMVAdjunction X U).unit.app E)) := by
   let R := RingedSpace.moduleDirectImage U.ι.toLRSHom.toShHom
-  have : R.Additive := RingedSpace.moduleDirectImage_additive_proof _
+  have : R.Additive := RingedSpace.moduleDirectImage_additive _
   let a : schemeOpenRestriction X U ⊣ R := schemeOpenModuleAdjunction X U
   have : R.PreservesKInjectiveComplexes := a.preservesKInjectiveComplexes
   have : R.Full :=

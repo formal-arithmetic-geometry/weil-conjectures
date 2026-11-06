@@ -18,8 +18,9 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicohe
 
 For quasi-coherent `𝒪_X`-modules `M` and `N`, the presheaf `V ↦ Hom(V^* M, V^* N)` on schemes
 over `X` is a sheaf for the fpqc topology; this is the full faithfulness part of fpqc descent
-for quasi-coherent modules (`AlgebraicGeometry.bijective_toDescentData_map`). Restricting to the
-small étale site gives the étale sheaves `AlgebraicGeometry.Scheme.Modules.etaleHom M N` and
+for quasi-coherent modules (`AlgebraicGeometry.bijective_toDescentData_map_of_mem_fpqcTopology`).
+Restricting to the small étale site gives the étale sheaves
+`AlgebraicGeometry.Scheme.Modules.etaleHom M N` and
 `AlgebraicGeometry.Scheme.Modules.etaleIso M N` of homomorphisms and isomorphisms.
 
 ## Main statements

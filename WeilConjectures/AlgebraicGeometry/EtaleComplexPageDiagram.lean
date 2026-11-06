@@ -104,7 +104,6 @@ private noncomputable def swapSequenceFunctor :
   map_comp f g := by apply SpectralSequence.hom_ext; intros; rfl
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 1000000 in
 -- Elaborate the dependent page and presentation families.
 set_option linter.unusedVariables false in
 /-- Assemble functorial pullback presentations into a spectral diagram, with coordinates swapped.

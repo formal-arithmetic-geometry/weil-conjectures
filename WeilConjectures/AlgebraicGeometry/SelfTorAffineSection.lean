@@ -25,7 +25,6 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-set_option maxHeartbeats 800000 in
 -- Explicit restriction and tensor-pullback objects require more elaboration fuel.
 /-- Send an algebraic element to the associated sheaf on its chart, extend it by
 pushforward, and apply the canonical tensor-pullback unit.

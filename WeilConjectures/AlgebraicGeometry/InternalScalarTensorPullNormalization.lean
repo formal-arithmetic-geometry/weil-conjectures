@@ -118,7 +118,7 @@ theorem scalar_tensor_pull_normalization (a : Λ ⟶ Λ') [IsMonHom a]
   change ∀ M, α.app M = β.app M
   intro M
   have : (CondensedRing.upperStar Λ f).PreservesFlat := CondensedRing.upperStar_preservesFlat Λ f
-  obtain ⟨P, hP, ⟨e⟩⟩ := (CondensedRing.upperStar Λ f).residue_exists_kFlatMap_iso M
+  obtain ⟨P, hP, ⟨e⟩⟩ := (CondensedRing.upperStar Λ f).exists_kFlatMap_iso M
   have h : α.app (DerivedCategory.Qh.obj P) = β.app (DerivedCategory.Qh.obj P) := by
     have := modelTarget_isIso a f P hP
     apply (cancel_mono (scalarTensorPullModelTarget a f P)).mp

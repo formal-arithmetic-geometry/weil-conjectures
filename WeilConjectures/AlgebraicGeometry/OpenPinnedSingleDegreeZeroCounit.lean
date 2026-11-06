@@ -55,7 +55,7 @@ private theorem assembleCounitSquare
     _ = i ≫ k ≫ l ≫ h := by rw [← Category.assoc j, ← hn, Category.assoc]
     _ = s ≫ l ≫ h := by rw [← Category.assoc i, hR]
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- Nested derived and homotopy comparisons require additional typeclass reduction.
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Restriction of the pinned counit, before applying any direct image.

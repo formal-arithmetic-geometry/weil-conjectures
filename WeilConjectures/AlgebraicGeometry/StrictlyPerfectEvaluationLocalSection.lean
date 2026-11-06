@@ -28,7 +28,7 @@ open CategoryTheory CategoryTheory.MonoidalCategory Opposite TopologicalSpace
 namespace AlgebraicGeometry
 
 set_option synthInstance.maxSize 2048 in
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 600000 in
 -- The localized carriers and canonical tensor-Hom expression need extra elaboration steps.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

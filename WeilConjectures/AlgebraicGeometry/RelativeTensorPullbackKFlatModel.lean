@@ -35,7 +35,7 @@ noncomputable local instance modelModuleTensor (X : Scheme.{u}) :
     MonoidalCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   SheafOfModules.monoidalCategory X.sheaf
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- Derived and ordinary homology comparisons involve several nested functors.
 /-- On K-flat representatives in both source module categories, the balanced tensor
 identity computes the underlying homology of derived tensor with derived pullback.

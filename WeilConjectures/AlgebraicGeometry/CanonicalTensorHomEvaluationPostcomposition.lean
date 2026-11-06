@@ -112,7 +112,6 @@ private theorem evaluation_chain_natural (X : Scheme.{u})
     exact hn₀
   exact tensor_naturality _ _ _ _ _ _ _ hn he
 
-set_option maxHeartbeats 800000 in
 -- Elaborating the fixed sheaf tensor and localization instances needs extra heartbeats.
 set_option backward.isDefEq.respectTransparency.types true in
 /-- One-variable compatibility of the explicit localized identity evaluation.

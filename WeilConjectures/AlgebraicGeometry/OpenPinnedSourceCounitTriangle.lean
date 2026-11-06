@@ -195,7 +195,6 @@ private theorem sourceTriangleAlgebra
 -- The final calculation uses these constructions only through their interfaces.
 attribute [local irreducible] singleComplexOpenPullbackIso openPinnedTensorOpenIso
 
-set_option maxHeartbeats 400000 in
 -- Elaborating the four equations compares several selected localization functors.
 /-- The source-open leg of the derived counit composition calculation.
 Source: Stacks Project, Tags 08DW and 0D5S.

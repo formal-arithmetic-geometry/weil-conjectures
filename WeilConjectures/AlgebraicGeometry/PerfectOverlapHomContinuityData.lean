@@ -67,7 +67,6 @@ structure TwoOpenTransportData
 
 set_option synthInstance.maxHeartbeats 400000 in
 -- Exact open restriction comparisons need this instance-search budget.
-set_option maxHeartbeats 1600000 in
 /-- Real comparison data at every later stage, without an overlap transition.
 The final fields pin both local identifications to the supplied comparisons.
 Source: Stacks Project, Tags 08DW and 0D5S.
@@ -180,7 +179,6 @@ noncomputable def perfectOverlapComparisonDataType
 
 set_option synthInstance.maxHeartbeats 400000 in
 -- Exact open restriction comparisons need this instance-search budget.
-set_option maxHeartbeats 1600000 in
 /-- The Hom-continuity proposition with dependent stage expressions kept behind an API.
 Source: Stacks Project, Tag 09RE.
 (blueprint: def-pc-perfect-overlap-hom-continuity-data). -/

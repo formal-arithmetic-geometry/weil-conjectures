@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerCoefficientBaseChange
 public import WeilConjectures.AlgebraicGeometry.CartierPoleBoundary
 public import WeilConjectures.AlgebraicGeometry.DivisibleExtensionDerivedReduction
 public import WeilConjectures.AlgebraicGeometry.EtaleSectionsFpqcDescent
@@ -100,21 +101,6 @@ Source: Grothendieck sheaf categories (auxiliary; not a blueprint node). -/
 theorem cartierEtaleAbHasExt (Z : Scheme.{u}) :
     HasExt.{u + 1} (Sheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1}) := inferInstance
 
-/-- Small Ext for the etale coefficient category.
-Source: Grothendieck sheaf categories (auxiliary; not a blueprint node). -/
-theorem cartierEtaleModuleHasExt (A : Type (u + 1)) [CommRing A] (Z : Scheme.{u}) :
-    HasExt.{u + 1} (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} A)) := inferInstance
-
-/-- Small Ext for the pro coefficient category.
-Source: Grothendieck sheaf categories (auxiliary; not a blueprint node). -/
-theorem cartierProAbHasExt (Z : Scheme.{u}) :
-    HasExt.{u + 1} (Sheaf (Scheme.ProEt.topology Z) AddCommGrpCat.{u + 1}) := inferInstance
-
-/-- Small Ext for the pro coefficient category.
-Source: Grothendieck sheaf categories (auxiliary; not a blueprint node). -/
-theorem cartierProModuleHasExt (A : Type (u + 1)) [CommRing A] (Z : Scheme.{u}) :
-    HasExt.{u + 1} (Sheaf (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} A)) := inferInstance
-
 end AlgebraicGeometry
 
 attribute [local instance] AlgebraicGeometry.cartierEtaleAbSheafify
@@ -122,8 +108,8 @@ attribute [local instance] AlgebraicGeometry.cartierEtaleAbSheafify
   AlgebraicGeometry.cartierProModuleSheafify
 
 attribute [local instance] AlgebraicGeometry.cartierEtaleAbHasExt
-  AlgebraicGeometry.cartierProAbHasExt AlgebraicGeometry.cartierEtaleModuleHasExt
-  AlgebraicGeometry.cartierProModuleHasExt
+  AlgebraicGeometry.ProEtale.geoCartierIntegralExt AlgebraicGeometry.Etale.hasExt_sheaf_moduleCat
+  AlgebraicGeometry.ProEtale.geoCartierModuleExt
 
 namespace AlgebraicGeometry.Etale
 

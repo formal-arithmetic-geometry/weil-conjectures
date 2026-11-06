@@ -55,7 +55,6 @@ private theorem sectionsUnit_naturality {X Y : Scheme.{u}} (f : Y ⟶ X)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option linter.unusedVariables false in
-set_option maxHeartbeats 1000000 in
 -- Elaborate the dependent presentation, stable-range and resolution-map families.
 /-- Construct the filtered resolution comparison on every page in the support-controlled
 stable range. The abutment map is expressed on K-injective resolutions; no derived

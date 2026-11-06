@@ -176,7 +176,6 @@ private theorem extensionFunctor_unit {T : TopCat.{u}} {C D : T.Sheaf CommRingCa
     ((PresheafOfModules.sheafificationAdjunction
       (𝟙 ((sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u})).obj D).obj)).unit_naturality p)
 
-set_option maxHeartbeats 800000 in
 -- The unit calculation unfolds two scalar restrictions and the chosen adjunction.
 /-- Base change across the ring-sheaf pushout identifies extension of the inverse-image
 algebra module with tensor pullback after scalar restriction.

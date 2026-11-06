@@ -44,7 +44,6 @@ private theorem product_qc {X : Scheme.{u}} {P : X.Modules}
   exact (SheafOfModules.isQuasicoherent X.ringCatSheaf).prop_of_iso
     (Abelian.imageIsoImage a) inferInstance
 
-set_option maxHeartbeats 1000000 in
 -- Quotient projection transport elaborates several affine adjunction layers.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -140,7 +139,6 @@ private theorem tensor_quotient_comparison {X Y : Scheme.{u}} (f : X ⟶ Y)
   rw [PreservesCokernel.iso_inv]
   simp [cokernel.mapIso, cokernelImageι]
 
-set_option maxHeartbeats 1000000 in
 -- Transport along the affine isomorphism unfolds ideal and module equivalences.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

@@ -397,7 +397,6 @@ theorem siteCompleteRestrictScalars_equivalence_of_completion
     infer_instance
   exact IsIso.of_isIso_comp_right _ (θ.hom.app (r.obj M.obj))
 
-set_option maxHeartbeats 1200000 in
 -- The localization comparison contains both product variables and resolution functors.
 set_option backward.isDefEq.respectTransparency false in
 private theorem ringedDerivedHomUnit_Q_obj
@@ -474,7 +473,6 @@ private theorem ringedDerivedHomUnit_Q_obj
     rfl
   exact (hu (Q.obj M)).trans (hd M)
 
-set_option maxHeartbeats 800000 in
 -- Computing the unit unfolds the product localization and its chosen resolution.
 set_option backward.isDefEq.respectTransparency false in
 private theorem ringedCechCompletionUnit_Q_obj
@@ -596,7 +594,7 @@ private theorem derivedCoefficientHomFunctor
   let fF := Localization.fac (I ⋙ G ⋙ QB) hinv QR
   exact ⟨F, ⟨fF⟩⟩
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- The localization comparison involves three resolutions and several whiskered isomorphisms.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

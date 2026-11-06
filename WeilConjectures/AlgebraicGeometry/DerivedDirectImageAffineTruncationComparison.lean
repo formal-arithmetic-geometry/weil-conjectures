@@ -48,7 +48,7 @@ private theorem isQuasicoherent_overEquiv (X : Scheme.{u}) (U : X.Opens)
     _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
     (U.sheafOfModulesEquivOverUnit X.ringCatSheaf) _ _ (fun V ↦ this V) _ _ M _
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- Exact restriction through the site equivalences needs additional elaboration heartbeats.
 set_option synthInstance.maxHeartbeats 100000 in
 /-- On an affine open, a sufficiently low canonical truncation induces an

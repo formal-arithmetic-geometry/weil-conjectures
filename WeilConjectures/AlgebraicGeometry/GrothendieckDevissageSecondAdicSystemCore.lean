@@ -76,7 +76,7 @@ theorem grothendieckDevissage_secondAdicSystem_core
         IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι t).2
           (cokernel (δ.hom.app (op e))))) := by
   obtain ⟨N, δ, σ, hsquare⟩ :=
-    grothendieckDevissage_secondAdicSystem_lift I K M hthick H α θ
+    grothendieckDevissage_secondAdicSystem_lift_data I K M hthick H α θ
   obtain ⟨t, ht, hα⟩ := htorsion
   refine ⟨N, δ, σ, hsquare, 4 * t, ?_, ?_⟩
   · omega

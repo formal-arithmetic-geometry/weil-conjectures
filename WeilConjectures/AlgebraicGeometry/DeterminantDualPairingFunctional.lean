@@ -25,7 +25,6 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry
 open Scheme.Modules (wedge)
 
-set_option maxHeartbeats 300000 in
 -- Explicit scalar restrictions on the over-open site require additional elaboration.
 set_option backward.isDefEq.respectTransparency false in
 /-- A tuple of dual sections determines a unique internal functional on the exterior sheaf.

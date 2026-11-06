@@ -27,7 +27,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 open AlgebraicGeometry
 
-set_option maxHeartbeats 800000 in
 -- The induction elaborates dependent products of Ext groups in two abelian categories.
 private theorem mapExt_family_bijective
     {J : Type u} {A : Type (u + 2)} [Category.{u + 1} A] [Abelian A]

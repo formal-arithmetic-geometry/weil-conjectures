@@ -579,8 +579,9 @@ theorem exists_iso_tensorObj_of_pic_map_eq (f : X ⟶ S)
   let cT := cX.ofBaseChange hbij
   let DT := cT.twist ((modulesPseudofunctor.toDescentData fun i ↦ (g i).left).obj
     (𝟙_ T.left.Modules))
-  obtain ⟨N, -, ⟨eN⟩⟩ := exists_isQuasicoherent_toDescentData_iso _ hgT DT fun i ↦
-    inferInstanceAs ((Modules.pullback (g i).left).obj (𝟙_ T.left.Modules)).IsQuasicoherent
+  obtain ⟨N, -, ⟨eN⟩⟩ :=
+    exists_isQuasicoherent_toDescentData_iso_of_mem_fpqcTopology _ hgT DT fun i ↦
+      inferInstanceAs ((Modules.pullback (g i).left).obj (𝟙_ T.left.Modules)).IsQuasicoherent
   have : SheafOfModules.IsInvertible.{u, u, u} (N : T.left.Modules) :=
     isInvertible_of_toDescentData_iso _ hgT DT N ⟨eN⟩ fun i ↦
       Modules.IsInvertible.sheafOfModules_isInvertible
@@ -809,8 +810,9 @@ theorem isSheaf_fpqc_picardFunctorNormalized (f : X ⟶ S) (σ : S ⟶ X) (hσ :
         (Precoverage.mem_coverings_of_isPullback (fun i ↦ (g i).left) hR' (pullback.snd f T.hom)
           (fun i ↦ baseChangeMap f (g i)) (fun i ↦ pullback.snd f (T' i).hom)
           (fun i ↦ isPullback_baseChangeMap f (g i)))
-    obtain ⟨M, -, ⟨eM⟩⟩ := exists_isQuasicoherent_toDescentData_iso _ hg D.descentData
-      (fun i ↦ inferInstanceAs (L i).IsQuasicoherent)
+    obtain ⟨M, -, ⟨eM⟩⟩ :=
+      exists_isQuasicoherent_toDescentData_iso_of_mem_fpqcTopology _ hg D.descentData
+        (fun i ↦ inferInstanceAs (L i).IsQuasicoherent)
     have : SheafOfModules.IsInvertible.{u, u, u} (M : (pullback f T.hom).Modules) :=
       isInvertible_of_toDescentData_iso _ hg D.descentData M ⟨eM⟩
         (fun i ↦ Modules.IsInvertible.sheafOfModules_isInvertible (L i))

@@ -297,7 +297,6 @@ private lemma lfp_of_cover {X : Scheme.{u}}
   rcases ij with ⟨i, j⟩
   exact (fp_pullback_comp_iff ((V i).f j) (U.f i) M).mpr (hV i j)
 
-set_option maxHeartbeats 800000 in
 -- Two successive module pullbacks require additional elaboration heartbeats.
 private lemma lfp_kernel_of_descended_matrix_kernels {X : Scheme.{u}}
     {R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}} [MonObj R] [IsCommMonObj R]
@@ -522,7 +521,6 @@ private abbrev IntegralMatrixKernels : Prop :=
             (cokernel a)))) →
     IsLocallyFinitelyPresented (condensedRingObj (integralCoeff ℓ E) X) (kernel a)
 
-set_option maxHeartbeats 800000 in
 -- Strong induction removes one integral pivot and preserves the smaller rational cokernel.
 omit [FiniteDimensional ℚ_[ℓ] E] in
 private lemma integralMatrixKernels_of_pivots
@@ -595,7 +593,6 @@ private abbrev RationalMatrixKernels : Prop :=
             ((Mod.extendScalars φ).obj (cokernel a)))) →
       IsLocallyFinitelyPresented R'' (kernel a)
 
-set_option maxHeartbeats 800000 in
 -- Two successive module pullbacks require additional elaboration heartbeats.
 omit [FiniteDimensional ℚ_[ℓ] E] in
 private lemma rationalMatrixKernels_of_integral
@@ -695,7 +692,6 @@ private lemma integral_lfp_kernel_of_rational
   exact lfp_kernel_of_descended_matrix_kernels
     (descendedMatrixKernels_of_rational ℓ E hmat X) f hM hN
 
-set_option maxHeartbeats 800000 in
 -- The restriction and coefficient equivalence are composed on module kernels.
 private lemma integral_constructible_kernel_of_rational
     (hmat : RationalMatrixKernels.{u} ℓ E)

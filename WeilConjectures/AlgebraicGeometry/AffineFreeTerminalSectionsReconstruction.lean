@@ -25,7 +25,6 @@ namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
-set_option maxHeartbeats 600000 in
 -- Identifying the chart and slice module scalar actions needs more definitional checks.
 private theorem overChartSectionsIso (W : Scheme.{v}) (U : W.Opens)
     (hU : IsAffineOpen U) :

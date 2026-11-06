@@ -25,7 +25,6 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
-set_option maxHeartbeats 800000 in
 -- The witnesses transport finite biproduct bases through normalized coefficient pullbacks.
 /-- One integral pivot, after refining a free rational cokernel cover.
 

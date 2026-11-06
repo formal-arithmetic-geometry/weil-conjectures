@@ -44,20 +44,13 @@ def affineOpenSections (U : (Spec (.of A)).Opens) :
   map_id F := congrArg (fun g ↦ g.hom.app (op U)) (modulesSpecToSheaf.map_id F)
   map_comp g h := congrArg (fun g ↦ g.hom.app (op U)) (modulesSpecToSheaf.map_comp g h)
 
-/-- Sections are additive, including after restriction of scalars from Γ(U,O).
-Source: Stacks, Tag 08D2 (blueprint: def-sc-principal-open-alternating-total).
-Proof: sheaf-module morphisms add sectionwise, and evaluation and restriction of scalars
-preserve their addition. -/
-theorem affineOpenSections_additive_proof (U : (Spec (.of A)).Opens) :
+/-- The additive instance for A-module sections.
+Source: Stacks, Tag 08D2 (blueprint: def-sc-principal-open-alternating-total). -/
+instance affineOpenSections_additive (U : (Spec (.of A)).Opens) :
     (affineOpenSections A U).Additive := by
   constructor
   intro F G g h
   rfl
-
-/-- The additive instance for A-module sections.
-Source: Stacks, Tag 08D2 (blueprint: def-sc-principal-open-alternating-total). -/
-instance affineOpenSections_additive (U : (Spec (.of A)).Opens) :
-    (affineOpenSections A U).Additive := affineOpenSections_additive_proof A U
 
 variable {A} (r : ℕ) (f : Fin r → A)
 
@@ -708,7 +701,6 @@ private theorem principalCech_transport_two_restrictions
   exact ((modulesSpecToSheaf.obj (F.X a)).obj.map_comp
     (homOfLE hVU).op (homOfLE hWV).op).symm
 
-set_option maxHeartbeats 800000 in
 -- The pair calculation contains several dependent transports of section modules.
 private theorem principalCechAugmentationComponent_comm (n : ℤ) :
     principalCechAugmentationComponent r f F n ≫

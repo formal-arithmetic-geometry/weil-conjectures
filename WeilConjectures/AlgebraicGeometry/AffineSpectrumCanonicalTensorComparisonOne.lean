@@ -22,7 +22,6 @@ open scoped TensorProduct ChangeOfRings
 noncomputable section
 namespace AlgebraicGeometry.SingleComplexBaseChange
 
-set_option maxHeartbeats 800000 in
 -- The restriction and tensor comparison identify several concrete stalk functors.
 private theorem additive_one {Y Z : Scheme.{u}} (j : Y ⟶ Z) [IsIso j]
     (y : Y) (M : Z.Modules)
@@ -162,7 +161,6 @@ private theorem composition_one {X Y Z : Scheme.{u}}
       ((Scheme.Modules.tensorPullback g).obj ((Scheme.Modules.tensorPullback h).obj M)).val.presheaf
       ((g ≫ h) ⁻¹ᵁ V) z hz) hsec')
 
-set_option maxHeartbeats 800000 in
 -- Comparing source-point transports reduces the concrete stalk functors.
 private theorem square_one {X X' Z Z' : Scheme.{u}}
     (g' : X' ⟶ X) (j : Z' ⟶ X') (a : Z ⟶ X) (g0 : Z' ⟶ Z)
@@ -236,7 +234,6 @@ private theorem restrictScalarsIso_cast_apply
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-set_option maxHeartbeats 800000 in
 -- Identifying the tensor model with stalk extension reduces scalar-change functors.
 private theorem tensorStalkIso_one
     {X X' S S' : Scheme.{u}}
@@ -262,7 +259,7 @@ private theorem tensorStalkIso_one
       (Classical.choose_spec (exists_tensorMap f f' g g' sq z)).1
       ((RingedSpace.moduleStalkFunctor X.toRingedSpace (g' z)).obj (P.X k)) x)
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 600000 in
 -- The extension-restriction unit is lifted through several complex functor isomorphisms.
 private theorem canonicalSpectrumStalkComplexIso_one
     (X : Scheme.{u}) [IsAffine X] (x : X) (y : Spec Γ(X, ⊤))
@@ -286,7 +283,6 @@ private theorem canonicalSpectrumStalkComplexIso_one
   dsimp [isoPullbackModuleStalkComplexIso]
   rfl
 
-set_option maxHeartbeats 800000 in
 -- The fixed complex and its scalar-change functors require substantial reduction.
 /-- The coefficient-one comparison for the canonical input chain coordinates.
 Proof: represent x by the germ of a section s of P.X k. The original tensor-stalk

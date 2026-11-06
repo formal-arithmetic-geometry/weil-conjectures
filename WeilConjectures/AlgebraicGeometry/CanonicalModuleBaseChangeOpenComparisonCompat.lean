@@ -49,7 +49,7 @@ private theorem canonicalTensorComparison
 
 set_option linter.unusedVariables false in
 -- Keep the original universally quantified comparison-proof binder hc0 unchanged.
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 900000 in
 -- Comparing the restricted derived-category witnesses needs extra elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

@@ -36,7 +36,7 @@ private theorem rank_one_of_clopen_injective
     (W : X.Opens) (hW : IsClosed (W : Set X)) :
     IsIso (W.ι ≫ q) ↔ IsIso ((j ⁻¹ᵁ W).ι ≫ q₀) := by
   obtain ⟨hfin, het, hfin₀, het₀, hrank⟩ :=
-    Scheme.finiteEtale_clopen_restriction_rank q j q₀ i h W hW
+    Scheme.finrank_restrict_isClopen_of_isPullback q j q₀ i h W hW
   have := hfin
   have := het
   have := hfin₀

@@ -47,7 +47,7 @@ attribute [local instance] enoughInjectives
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- The nested section, evaluation and homology functors require extra elaboration work.
 /-- The homology comparison of restricted section complexes is semilinear.
 Source: Stacks Project, Tags 01E4 and 01E5.

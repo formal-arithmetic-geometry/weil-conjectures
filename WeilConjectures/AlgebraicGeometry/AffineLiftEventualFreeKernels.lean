@@ -179,7 +179,7 @@ private theorem tensor_exactAt_of_vanishes (Y : Scheme.{u})
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- Tensor and over-site equivalence comparisons require additional elaboration heartbeats.
 /-- The restricted finite-free lift is exact in all sufficiently low degrees, and
 its outgoing kernels in those degrees are finite locally free.

@@ -16,10 +16,10 @@ public import WeilConjectures.RingTheory.Etale.IntegrallyClosed
 
 Four elementary facts used by the Noetherian theory of constructible étale sheaves:
 
-- `AlgebraicGeometry.Scheme.finite_irreducibleComponents` (blueprint
+- `AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian` (blueprint
   `lem-weil-pbc-noetherian-finite-components`): a Noetherian scheme has finitely many
   irreducible components.
-- `AlgebraicGeometry.universallyOpen_of_flat_of_locallyOfFinitePresentation` (blueprint
+- `AlgebraicGeometry.UniversallyOpen.of_flat` (blueprint
   `lem-weil-pbc-flat-lfp-open`): a flat morphism locally of finite presentation is universally
   open, in particular open (`AlgebraicGeometry.Scheme.Hom.isOpenMap`).
 - `AlgebraicGeometry.Scheme.exists_isClopen_isIntegral_of_isIntegrallyClosed_stalk` (Stacks 033M):
@@ -37,21 +37,6 @@ universe u
 open CategoryTheory Limits
 
 namespace AlgebraicGeometry
-
-/-- Blueprint `lem-weil-pbc-noetherian-finite-components`: Finitely many irreducible components.
-
-A Noetherian scheme has finitely many irreducible components. -/
-theorem Scheme.finite_irreducibleComponents (X : Scheme.{u}) [IsNoetherian X] :
-    (irreducibleComponents X).Finite :=
-  TopologicalSpace.NoetherianSpace.finite_irreducibleComponents
-
-/-- Blueprint `lem-weil-pbc-flat-lfp-open`: Flat finite-presentation morphisms are open.
-
-A flat morphism locally of finite presentation is universally open: it is open, and so is every
-base change of it. This is Mathlib's `AlgebraicGeometry.UniversallyOpen.of_flat`. -/
-theorem universallyOpen_of_flat_of_locallyOfFinitePresentation {X Y : Scheme.{u}} (f : X ⟶ Y)
-    [Flat f] [LocallyOfFinitePresentation f] : UniversallyOpen f :=
-  UniversallyOpen.of_flat f
 
 /-- The local rings of a scheme étale over an integral scheme with integrally closed local rings
 are integrally closed domains (the étale case of Stacks 033C). -/
