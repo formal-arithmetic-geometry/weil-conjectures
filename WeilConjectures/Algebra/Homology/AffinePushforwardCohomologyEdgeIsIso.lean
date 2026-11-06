@@ -146,6 +146,7 @@ theorem affinePushforwardCohomologyEdge_isIso
     have : IsIso ((σ.hom.mapHomologicalComplex (.up ℤ)).app C) :=
       ((NatIso.mapHomologicalComplex σ (.up ℤ)).app C).isIso_hom
     dsimp only [affinePushforwardCohomologyMapOfComparison]
+    simp only [cast_eq]
     infer_instance
   have hn := hα C L₀ (Iso.refl _) ⟨rfl, rfl⟩
   simp only [Iso.refl_hom] at hn
