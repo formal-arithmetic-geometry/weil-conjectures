@@ -298,3 +298,13 @@
   unmeasured maxHeartbeats override from the restored helper.
 - Next: ucheck-bump on the five prerequisites and SupportedKoszulRelativeDetector, then downstream.
 - Fix notes: /home/ubuntu/u9/bz/FIXES-BZ932.md. No local Lean/Lake or proof shortcuts.
+
+
+# BZ950 in progress
+
+- Branch: u9/BZ950; baseline bd35b30c08a8dd66e184f7c95d02625e6eb3431b.
+- User instructed continuation after the exact one-line reflexive statement-cast proposal.
+- Applied cast (by rfl) around H.map β in affineTildePushforwardHomologyFactorization; all other statement text and the proof are unchanged.
+- Next: ucheck-bump on the leaf, then its two direct importers and further downstream.
+- Fix records, baseline diagnostics, and prepared downstream patch: /home/ubuntu/u9/bz/FIXES-BZ950.md.
+- No local Lean/Lake, proof placeholders, trust bypasses, heartbeat changes, or profiler probes.
