@@ -254,7 +254,10 @@ theorem properSmoothCurves_higherDirectImage_ga_frobeniusLinear_zero_aux
       (fun _ ↦ inferInstance) V.hom
   obtain ⟨b, hb, hs⟩ := Modules.exists_etaleTensorUnit_sections_natural_smul S
   let Φ := lowerStar AddCommGrpCat.{u + 1} f
-  refine ⟨SheafOfModules.unit S.ringCatSheaf, inferInstance, inferInstance,
+  have : (SheafOfModules.unit S.ringCatSheaf).IsInvertible :=
+    SheafOfModules.instIsInvertibleUnit.{u, u, u}
+  refine ⟨SheafOfModules.unit S.ringCatSheaf, inferInstance,
+    SheafOfModules.IsInvertible.isFiniteLocallyFree.{u, u, u} _,
     frobeniusOfSectionsAddEquiv _ b hb p hpS, fun U a e ↦ ?_,
     Φ.homologyRightDerivedFunctorObjSingleFunctorIso C.gaSheaf 0 ≪≫
       Φ.rightDerivedZeroIsoSelf.app C.gaSheaf ≪≫ lowerStarGaSheafIsoOfBijective f hf ≪≫
