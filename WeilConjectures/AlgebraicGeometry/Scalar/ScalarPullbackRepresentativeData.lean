@@ -122,8 +122,10 @@ private theorem scalarGeometricRepresentative_eq
   have hq : (DerivedCategory.quotientCompQhIso _).inv.app P = 𝟙 _ := rfl
   have hq' : (DerivedCategory.quotientCompQhIso _).hom.app
       (((upperStar (ModuleCat.{u + 1} A) f).mapHomologicalComplex (.up ℤ)).obj P) = 𝟙 _ := rfl
-  simpa only [scalarGeometricRepresentative, hq, hq', Functor.map_id,
-    Category.id_comp, Category.comp_id] using h
+  dsimp only [scalarGeometricRepresentative]
+  rw [hq, hq']
+  erw [Functor.map_id, Category.id_comp, Category.comp_id]
+  exact h
 
 private theorem scalarGeometricRepresentative_exact
     (A : Type (u + 1)) [CommRing A] {T X : Scheme.{u}} (f : T ⟶ X)
