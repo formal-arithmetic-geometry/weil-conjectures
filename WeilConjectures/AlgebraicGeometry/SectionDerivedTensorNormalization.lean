@@ -7,7 +7,13 @@ module
 public import WeilConjectures.AlgebraicGeometry.SectionDerivedPushpullNormalization
 public import WeilConjectures.AlgebraicGeometry.SectionTotalOplaxComparisonData
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
+public import Mathlib.Algebra.Homology.Localization
+public import Mathlib.CategoryTheory.Limits.HasLimits
+public import Mathlib.Logic.Small.Defs
 import all WeilConjectures.AlgebraicGeometry.ProEtaleSectionModuleFunctors
+import all Mathlib.Algebra.Homology.Localization
+import all Mathlib.CategoryTheory.Limits.HasLimits
+import all Mathlib.Logic.Small.Defs
 import WeilConjectures.AlgebraicGeometry.SectionDerivedRepresentativeSquare
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalTensorCounit
 
@@ -83,15 +89,15 @@ def normalizationDerivedAssociator (T : Scheme.{u})
 Source: Stacks 06YU (auxiliary; not a blueprint node). -/
 def normalizationDerivedLeftUnitor (T : Scheme.{u}) (M : DerivedCategory (modules Λ T)) :
     (tensor Λ T).obj (tensorUnit Λ T, M) ≅ M :=
-  @MonoidalCategoryStruct.leftUnitor _ _
-    (Monoidal.transportStruct (derivedEquivalence Λ T)) M
+  cast (by rfl) (@MonoidalCategoryStruct.leftUnitor _ _
+    (Monoidal.transportStruct (derivedEquivalence Λ T)) M)
 
 /-- The right unitor of the existing conjugate tensor.
 Source: Stacks 06YU (auxiliary; not a blueprint node). -/
 def normalizationDerivedRightUnitor (T : Scheme.{u}) (M : DerivedCategory (modules Λ T)) :
     (tensor Λ T).obj (M, tensorUnit Λ T) ≅ M :=
-  @MonoidalCategoryStruct.rightUnitor _ _
-    (Monoidal.transportStruct (derivedEquivalence Λ T)) M
+  cast (by rfl) (@MonoidalCategoryStruct.rightUnitor _ _
+    (Monoidal.transportStruct (derivedEquivalence Λ T)) M)
 
 /-- The regular-module unit comparison, obtained from localization and the ordinary unit.
 Source: Stacks 06YU (auxiliary; not a blueprint node). -/
@@ -479,7 +485,7 @@ private theorem unit_normalization {X Y : Scheme.{u}} (f : X ⟶ Y) :
       (derivedPullback Λ f).map (DerivedRepresentativeSquare.regular Λ Y).hom ≫
         k ≫ (DerivedRepresentativeSquare.regular Λ X).inv) h
   dsimp only [tensorUnit] at h' ⊢
-  simp only [DerivedRepresentativeSquare.actualUnit, Category.assoc,
+  with_unfolding_all simp only [DerivedRepresentativeSquare.actualUnit, cast_eq, Category.assoc,
     ← Functor.map_comp_assoc, Iso.hom_inv_id, CategoryTheory.Functor.map_id, Category.id_comp,
     Iso.hom_inv_id_app_assoc, Iso.hom_inv_id_app, Category.comp_id] at h'
   rw [regular_hom_eq] at h'
