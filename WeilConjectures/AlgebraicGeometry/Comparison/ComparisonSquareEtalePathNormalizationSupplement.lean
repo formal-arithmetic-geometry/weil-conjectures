@@ -90,9 +90,9 @@ private theorem exact_path (e : F ⋙ G ≅ F' ⋙ G')
   simp only [Category.assoc] at hp ⊢
   rw [reassoc_of% hw', reassoc_of% hp]
   simp only [Functor.isoWhiskerRight_hom, Functor.isoWhiskerRight_inv,
-    Functor.isoWhiskerLeft_symm,
+    ← Functor.isoWhiskerLeft_symm,
     Iso.trans_hom, Iso.symm_hom, Iso.symm_inv, Functor.whiskerRight_comp, Category.assoc,
-    Iso.inv_hom_id, Iso.hom_inv_id, Category.comp_id]
+    Iso.hom_inv_id, Category.comp_id]
 
 private theorem exact_path_with_comparisons (e : F ⋙ G ≅ F' ⋙ G')
     (a : F' ⋙ K₁ ≅ K₀ ⋙ P₁) (b : G' ⋙ K₂ ≅ K₁ ⋙ P₂)
