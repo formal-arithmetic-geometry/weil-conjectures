@@ -124,6 +124,7 @@ Source: Stacks Project, Tags 01E4 and 0D5X
       ((RingedSpace.localHypercohomologyPresheaf Y.toRingedSpace (q : ℤ)).obj
         ((schemeDerivedDirectImage f).obj ((DerivedCategory.singleFunctor
           (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj F))).obj (op V) := by
+  dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
   letI : HasDerivedCategory.{w} X.Modules := inferInstanceAs
     (HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace)))
   letI := RingedSpace.globalSectionsFunctor_additive U.toScheme.toRingedSpace
