@@ -103,6 +103,7 @@ private theorem transition_inv_fac (T : Scheme.{u}) (n : ℕ)
   apply (cancel_mono ((ev l E T n).mapDerivedCategoryFactors.hom.app J)).mp
   simp [transition, towerDerivedEvaluationTransition, Localization.liftNatTrans_app, hm, hn]
 
+set_option diagnostics true in
 /-- The derived limit is a derived limit of the derived evaluations.
 Source: blueprint Assertion 5 (blueprint: det-pbc-complete-derived-completion).
 Proof: represent the tower by a K-injective complex; exact countable products give
@@ -116,6 +117,8 @@ theorem rlim_isDerivedLimit (T : Scheme.{u}) :
   let A := AdicCompletion.Modules l E T
   have : CountableAB4Star A := CountableAB4Star.of_hasExactLimitsOfShape_nat A
   obtain ⟨hP, -, -, h3⟩ := derivedCategory_countableProducts_and_towerLimit.{0} A
+  have : HasLimitsOfShape (Discrete ℕ) (DerivedCategory A) := HasCountableProducts.out ℕ
+  have (F : Discrete ℕ ⥤ DerivedCategory A) : HasLimit F := HasLimitsOfShape.has_limit F
   refine ⟨hP, fun M ↦ ?_⟩
   obtain ⟨I, hI, i, -, hi⟩ := Abelian.HasKInjectiveResolutions.exists_isKInjective
     (DerivedCategory.Q.objPreimage M)
