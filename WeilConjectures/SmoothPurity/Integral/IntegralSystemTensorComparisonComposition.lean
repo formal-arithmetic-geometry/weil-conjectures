@@ -349,7 +349,7 @@ theorem integralSystemTensorComparison_comp {X Y Z : Scheme.{u}} (h : Z ⟶ X) (
   · intro P Q hP hQ
     exact integralSystemTensorComparison_square l E (h ≫ f) P Q hP hQ
   · intro P
-    dsimp only [integralComparisonSystemComposition]
+    dsimp only [integralComparisonSystemComposition, integralComparisonDerivedSequencePullback]
     rw [Iso.trans_hom, NatTrans.comp_app, Iso.symm_hom, Category.assoc,
       Functor.mapDerivedCategoryCompIso_hom_app_factors, Functor.mapDerivedCategoryNatIso_fac]
   · exact hm
