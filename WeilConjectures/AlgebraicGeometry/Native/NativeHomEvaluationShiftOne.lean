@@ -9,6 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.Native.NativeHomSourceShiftData
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.ClosedTriangulated
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.CategoryTheory.DerivedCategory.SixFunctors.NativeDerivedClosedTensorShifts
 
 /-! # Evaluation and the signed source shift in degree one
