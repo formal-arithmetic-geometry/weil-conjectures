@@ -138,6 +138,7 @@ private theorem finiteUnit_eq (n : ℕ)
   simp only [completedFiniteDirectImageComplexUnit, proEtaleRingDirectImageDerivedUnit,
     h]
   erw [CategoryTheory.Functor.map_id, Category.id_comp]
+  rfl
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
