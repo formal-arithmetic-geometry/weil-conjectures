@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.DeligneLaumon.Reduction.FibreCohomology
+public import WeilConjectures.WeilSheaf.CohomologyNonneg
 public import WeilConjectures.WeilSheaf.Fourier
 public import WeilConjectures.WeilSheaf.UpperStarPointwise
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Real
@@ -109,8 +110,7 @@ theorem isReal_higherLowerShriek_one {ι : PadicAlgCl l →+* ℂ} {K : WeilShea
     exists_fiber_expand_charpolyRev_stalk_higherLowerShriek (k₀ := k₀) (f := f) (l := l) ξ
   have h₁ := (hK.upperStar g).isReal_compactlySupportedCohomology_of_subsingleton 1 fun i hi ↦ by
     rcases lt_or_ge i 0 with h | h
-    · exact subsingleton_globalSections_of_isZero
-        (isZero_homologySheaf_derivedLowerShriek_of_neg ((upperStar g).obj K) h)
+    · exact subsingleton_compactlySupportedCohomology_of_neg ((upperStar g).obj K) h
     · obtain ⟨ν, rfl⟩ := Int.eq_ofNat_of_zero_le h
       exact (hfib K ν).1 (hvan ν (by exact_mod_cast hi))
   have hd := Scheme.Hom.degreeOver_ne_zero (Y ↘ Spec (CommRingCat.of k₀)) ξ.2
