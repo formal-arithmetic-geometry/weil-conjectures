@@ -2,48 +2,127 @@ name: Lean Action CI
 
 on:
   # Only the default branch: a push to a branch with an open PR is already
-  # covered by the `pull_request` trigger, and building it twice ties up the
-  # shared self-hosted runner pool for no benefit.
+  # covered by the `pull_request` trigger.
   push:
     branches:
       - master
   # Only pull requests into `master`. Agent pull requests into the integration branch
   # `slopmaster2` are built in full with `--wfail` by the maintainer's merge pipeline before
-  # they land, so building every push to them here only queued the shared runner for hours
-  # in front of `master` pull requests.
+  # they land.
   pull_request:
     branches:
       - master
+  # The merge queue on master (repository ruleset) requires the `build` check on the queue's
+  # merge-group commit; without this trigger that check never starts and every queue entry
+  # waits until the ruleset's check timeout removes it.
+  merge_group:
   workflow_dispatch:
 
-# This workflow only checks out and builds the project; it deploys nothing.
+# Nothing here deploys; the upload to the Lake cache is the separate `publish-cache` job.
 permissions:
-  contents: read # Read access to repository contents
+  contents: read
 
-# One in-flight build per PR (and one per branch for pushes): a superseded
-# build is cancelled instead of queueing ahead of everything else on the
-# shared runners. Keyed on the PR number when there is one; `github.ref`
-# covers `push` and `workflow_dispatch`.
+# One in-flight build per PR (and one per branch for pushes): a superseded build is cancelled.
 concurrency:
   group: ${{ github.repository }}-lean-ci-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
+# The project's build cache: the cluster's Lake artifact cache, served publicly at
+# https://cache.fuxi.merten.dev (nixos-config: kuafu/lake-cache.nix, fuxi/lake-cache.nix).
+# Reading needs no credentials; uploading is S3 with the `LAKE_CACHE_KEY` secret, which only
+# the `publish-cache` job ever sees.
+env:
+  LAKE_CACHE_ENDPOINT: https://cache.fuxi.merten.dev/lake-cache
+  LAKE_CACHE_REPO: formal-arithmetic-geometry/weil-conjectures
+
 jobs:
+  # Where to build: the self-hosted `big-server` runner (256 cores, 600 GB; Bin Wu's server)
+  # unless it is already busy, else GitHub's hosted runners. Actions has no "prefer A, else B"
+  # for `runs-on`, so this looks first: big-server is busy if a job of this repository that
+  # targets it is running or queued. That needs only `actions: read` on GITHUB_TOKEN (the
+  # runners API itself would need an admin token). An offline big-server is not detected: the
+  # build then waits for it, as "always prefer big-server" asks.
+  # Pull requests from forks always build on GitHub's runners: the repository is public, and a
+  # self-hosted runner would execute an outsider's code (Lean runs code while compiling).
+  pick-runner:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      actions: read
+    outputs:
+      runner: ${{ steps.pick.outputs.runner }}
+      threads: ${{ steps.pick.outputs.threads }}
+      hosted: ${{ steps.pick.outputs.hosted }}
+    steps:
+      - id: pick
+        env:
+          GH_TOKEN: ${{ github.token }}
+          FORK: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository }}
+          UPLOAD: ${{ github.ref == 'refs/heads/master' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch') }}
+        run: |
+          set -uo pipefail
+          big='["self-hosted","big-server"]'; gh='"ubuntu-latest"'
+          if [ "$FORK" = true ]; then
+            choice=gh why="pull request from a fork"
+          elif [ "$UPLOAD" = true ]; then
+            # Master builds are uploaded, which needs the artifact cache on during the build: Lake
+            # then files ~23 GB of restored outputs again (17 min on big-server, over an hour on a
+            # 2-thread hosted runner). So master always waits for big-server.
+            choice=big why="master build (uploads): always big-server"
+          else
+            # Jobs on big-server: queued or in progress, in any active run of this repository.
+            n=0 ok=true
+            for st in in_progress queued; do
+              ids=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs?status=$st&per_page=100" \
+                      --jq '.workflow_runs[].id') || { ok=false; break; }
+              for id in $ids; do
+                c=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$id/jobs?filter=latest&per_page=100" \
+                      --jq '[.jobs[] | select(.status == "in_progress" or .status == "queued")
+                             | select(any(.labels[]; . == "big-server"))] | length') || { ok=false; break; }
+                n=$((n + c))
+              done
+            done
+            if [ "$ok" != true ]; then choice=big why="status query failed; preferring big-server"
+            elif [ "$n" -eq 0 ]; then choice=big why="big-server free"
+            else choice=gh why="big-server busy ($n job(s) on it)"; fi
+          fi
+          if [ "$choice" = big ]; then
+            { echo "runner=$big"; echo "threads=64"; echo "hosted=false"; } >> "$GITHUB_OUTPUT"
+          else
+            { echo "runner=$gh"; echo "threads=2"; echo "hosted=true"; } >> "$GITHUB_OUTPUT"
+          fi
+          echo "::notice::building on $choice ($why)"
+
   build:
-    runs-on: self-hosted
+    needs: pick-runner
+    # big-server: 64 concurrent Lean processes (~5.5 GiB peak each, 600 GB cap). GitHub-hosted:
+    # 4 cores, 16 GB, so 2; what makes that enough is the cache, a pull request compiling only
+    # the modules its changes touch.
+    runs-on: ${{ fromJSON(needs.pick-runner.outputs.runner) }}
+    timeout-minutes: 360
+    outputs:
+      staged: ${{ steps.stage.outputs.staged }}
 
     steps:
-      # `clean: false`: by default checkout runs `git clean -ffdx`, which deletes
-      # `.lake/` and made every run compile the whole project from scratch. Lake's
-      # traces decide what is stale, so keeping the build between runs is safe.
+      # The packages (Mathlib's unpacked build) and the project's outputs need ~25 GB; the
+      # hosted image has much less free until the preinstalled SDKs we never use are removed.
+      - name: Free disk space
+        if: needs.pick-runner.outputs.hosted == 'true'
+        run: |
+          df -h /
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL \
+            /usr/local/share/boost /usr/local/.ghcup /usr/share/swift /usr/local/share/powershell
+          sudo docker image prune --all --force >/dev/null 2>&1 || true
+          df -h /
+
+      # History, not the default depth-1 clone: `lake cache get` walks back from HEAD to the
+      # nearest commit with an uploaded build (master's tip, for a pull request's merge commit),
+      # and in a shallow clone there is nothing to walk. 50 covers `--max-revs 30` below.
       - uses: actions/checkout@v5
         with:
-          clean: false
+          fetch-depth: 50
 
-      # elan, the toolchain and the Mathlib cache; the build is the step below.
-      # No GitHub cache: the self-hosted runner's workspace survives between
-      # runs, and lean-action's GitHub cache tars the whole `.lake` on every
-      # run (keyed on the commit, so it never hits).
+      # elan, the toolchain and the Mathlib cache; the build is a step of its own below.
       - uses: leanprover/lean-action@v1
         with:
           build: false
@@ -51,52 +130,166 @@ jobs:
           lint: false
           use-github-cache: false
 
-      # The project's own oleans from the cluster's Lake cache (Garage on the
-      # k3s cluster), which holds the builds of `slopmaster2`. A pull request
-      # from `slopmaster2` then compiles only what its merge commit changes,
-      # instead of every module of the project. Best effort: on a miss the
-      # build below simply compiles more.
-      - name: Fetch the project's build from the cluster's Lake cache
+      # The project's own outputs: the build of HEAD's nearest uploaded ancestor, every archive
+      # up front (one parallel `curl -Z`; ~27k archives, ~1.4 GB, under a minute), into a
+      # private cache in the workspace, which is what the bulk restore below works on.
+      # `lake cache` runs as the toolchain's own binary with ELAN_TOOLCHAIN unset, so that the
+      # revision scope is named after Lean's version ("leanprover--lean4---4.33.1") as the
+      # cluster's uploaders name it; through elan the two sides would never find each other's
+      # uploads. Best effort: on a miss the build simply compiles more.
+      - name: Fetch the project's build from the Lake cache
         continue-on-error: true
         run: |
           set -euo pipefail
           config="$RUNNER_TEMP/lake-config.toml"
-          cat > "$config" <<'TOML'
-          cache.defaultService = "garage"
+          cat > "$config" <<TOML
+          cache.defaultService = "fuxi"
 
           [[cache.service]]
-          name = "garage"
+          name = "fuxi"
           kind = "s3"
-          artifactEndpoint = "http://13.140.132.28:3900/lake-cache/a"
-          revisionEndpoint = "http://13.140.132.28:3900/lake-cache/r"
+          artifactEndpoint = "$LAKE_CACHE_ENDPOINT/a"
+          revisionEndpoint = "$LAKE_CACHE_ENDPOINT/r"
           TOML
-          echo "LAKE_CONFIG=$config" >> "$GITHUB_ENV"
-          echo "LAKE_CACHE_DIR=$HOME/.cache/lake" >> "$GITHUB_ENV"
-          export LAKE_CONFIG="$config" LAKE_CACHE_DIR="$HOME/.cache/lake"
-          # Downloads older than two weeks: what is still needed comes again.
-          find "$LAKE_CACHE_DIR" -type f -mtime +14 -delete 2>/dev/null || true
+          {
+            echo "LAKE_CONFIG=$config"
+            echo "LAKE_CACHE_DIR=$GITHUB_WORKSPACE/.lake/cache"
+            echo "LAKE_ARTIFACT_CACHE=true"
+            echo "LAKE_RESTORE_ARTIFACTS=true"
+          } >> "$GITHUB_ENV"
+          export LAKE_CONFIG="$config" LAKE_CACHE_DIR="$GITHUB_WORKSPACE/.lake/cache"
           env -u ELAN_TOOLCHAIN "$(elan which lake)" cache get \
-            --repo formal-arithmetic-geometry/weil-conjectures --max-revs 30
+            --repo "$LAKE_CACHE_REPO" --max-revs 30
 
-      # Four concurrent Lean processes: the algebraic-geometry files peak at
-      # about 5.5 GiB each, and the runner VM has 32 GiB. This Lake has no jobs
-      # flag; its scheduler runs on Lean's thread pool, which this sizes.
+      # Before any project code runs: which modules came from the remote cache, and as which
+      # archive. The upload below re-files exactly those and adds only what this build produced.
+      - name: Record the downloaded cache entries
+        run: python3 scripts/ci/stage_lake_cache.py snapshot . "$RUNNER_TEMP/lake-snapshot.json"
+
+      # Extract every downloaded archive with one `leantar` call instead of letting the build
+      # unpack them one module at a time on its 2-thread job pool (TauCeti's workaround, until
+      # `lake cache get --unpack`, lean4#15868). Falls back to stock restoration on anything
+      # unexpected.
+      - name: Restore the cached build in bulk
+        run: python3 scripts/ci/bulk_unpack_cache.py .
+
+      # LEAN_NUM_THREADS from pick-runner (64 on big-server, 2 on a 16 GiB hosted runner; the
+      # algebraic-geometry files peak at about 5.5 GiB each). This Lake has no jobs flag; its
+      # scheduler runs on Lean's thread pool, which LEAN_NUM_THREADS sizes. `--wfail`: modules compiled here must be
+      # warning-free (master's full from-scratch build is, and cached modules come from it).
+      # LAKE_NO_CACHE: the build only uses what the fetch step brought; `-o` lists its outputs.
+      # Artifact cache only when the build is uploaded (master): with it on, Lake files every
+      # bulk-restored module's outputs into the cache again (~23 GB of copies; 17 min on
+      # big-server), which `-o` needs and nothing else does. Off, it only checks the restored
+      # traces: on kuafu 128 s, nothing compiled.
       - name: Build
         env:
-          LEAN_NUM_THREADS: "4"
-        run: lake build
+          LEAN_NUM_THREADS: ${{ needs.pick-runner.outputs.threads }}
+          LAKE_NO_CACHE: "true"
+          UPLOAD: ${{ github.ref == 'refs/heads/master' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch') }}
+        run: |
+          if [ "$UPLOAD" = true ]; then
+            lake build --wfail -o "$RUNNER_TEMP/lake-map.jsonl"
+          else
+            LAKE_ARTIFACT_CACHE=false lake build --wfail
+          fi
 
-      # Lake writes a module's `.setup.json` (its import closure, as absolute
-      # paths, about 2 MB) just before compiling it and reads it only then.
-      # Thousands of them fill the runner's disk.
-      - name: Drop the compiler's setup files
-        if: always()
-        run: find .lake/build -name '*.setup.json' -delete 2>/dev/null || true
-
-      # Same check as `.orchestra/validation.sh`: every tracked `.lean` file
-      # under `WeilConjectures/` must be imported by `WeilConjectures.lean`,
-      # otherwise it is silently never built. Runs after `lean-action` so that
-      # the toolchain and mathlib (which provides `mk_all`) are already in
-      # place; `--check` only reports, it does not rewrite the file.
+      # Same check as `.orchestra/validation.sh`: every tracked `.lean` file under
+      # `WeilConjectures/` must be imported by `WeilConjectures.lean`, otherwise it is silently
+      # never built. `--check` only reports, it does not rewrite the file.
       - name: Check all files are imported
         run: lake exe mk_all --lib WeilConjectures --git --check
+
+      # For master only: the upload map (every module, filed under this commit) and the
+      # archives the remote cache does not have yet, handed to `publish-cache` as a workflow
+      # artifact. A pull request's merge commit is never an ancestor of a later build.
+      - name: Stage the build for the Lake cache
+        id: stage
+        if: >-
+          success() && github.ref == 'refs/heads/master' &&
+          (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+        run: |
+          set -euo pipefail
+          python3 scripts/ci/stage_lake_cache.py stage . "$RUNNER_TEMP/lake-map.jsonl" \
+            "$RUNNER_TEMP/lake-snapshot.json" "$RUNNER_TEMP/lake-stage"
+          cat lean-toolchain > "$RUNNER_TEMP/lake-stage/lean-toolchain"
+          echo "staged=true" >> "$GITHUB_OUTPUT"
+
+      - name: Hand the staged build to the publisher
+        if: steps.stage.outputs.staged == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: lake-cache-stage
+          path: ${{ runner.temp }}/lake-stage
+          retention-days: 1
+          if-no-files-found: error
+
+  # Uploads the staged build. The upload key lives only here: Lean runs arbitrary code while
+  # compiling (`run_cmd`, `initialize`, macros), so any step after `lake build` in the build job
+  # is within reach of whatever landed on master, through the runner user's files and
+  # $GITHUB_ENV / $GITHUB_PATH. This job checks nothing out and runs no project code: inline
+  # shell and curl only, on data it validates first. (TauCeti draws the same boundary.)
+  publish-cache:
+    needs: build
+    if: needs.build.outputs.staged == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    permissions: {}
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: lake-cache-stage
+          path: stage
+
+      - name: Validate the staged build
+        run: |
+          set -euo pipefail
+          cd stage
+          # Only the expected files, all regular.
+          find . -mindepth 1 \( -type l -o \( ! -type f ! -type d \) \) -print | grep . && exit 1 || true
+          find . -type f ! -path ./map.jsonl ! -path ./lean-toolchain \
+            ! -regex '\./artifacts/[0-9a-f]\{16\}\.ltar' -print | grep . && exit 1 || true
+          # The toolchain names the revision scope; only official releases.
+          grep -Eqx 'leanprover/lean4:v[0-9]+\.[0-9]+\.[0-9]+(-rc[0-9]+)?' lean-toolchain
+          # Map: a version header, then [16-hex input hash, 16-hex archive] lines.
+          tail -n +2 map.jsonl | grep -Evx '\["[0-9a-f]{16}","[0-9a-f]{16}\.ltar"\]' | grep . && exit 1 || true
+          # Every staged archive is referenced by the map.
+          for f in artifacts/*.ltar; do [ -e "$f" ] || continue
+            grep -q "\"$(basename "$f")\"" map.jsonl || { echo "unreferenced $f"; exit 1; }
+          done
+          echo "map: $(( $(wc -l < map.jsonl) - 1 )) mappings; new archives: $(find artifacts -name "*.ltar" | wc -l)"
+
+      # Archives first, then the map, so that the map never names an archive that is missing.
+      # Paths as Lake files them: artifacts under the repository, the map under repository,
+      # platform and toolchain (Lean's version without the leading `v`).
+      - name: Upload to the Lake cache
+        env:
+          LAKE_CACHE_KEY: ${{ secrets.LAKE_CACHE_KEY }}
+          REV: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          cd stage
+          [ -n "$LAKE_CACHE_KEY" ] || { echo "::warning::LAKE_CACHE_KEY is not set; not uploading"; exit 0; }
+          tc=$(sed -E 's|^leanprover/lean4:v|leanprover--lean4---|' lean-toolchain)
+          scope="$LAKE_CACHE_REPO/pt/x86_64-unknown-linux-gnu/tc/$tc"
+          # Exactly as Lake uploads (Lake/Config/Cache.lean): SigV4 for region "auto", and the
+          # content types Lake checks again when it downloads.
+          put() { curl -sS --fail --retry 3 --aws-sigv4 "aws:amz:auto:s3" --user "$LAKE_CACHE_KEY" \
+                    -X PUT -H "Content-Type: $3" -T "$1" "$2"; }
+          n=0
+          for f in artifacts/*.ltar; do [ -e "$f" ] || continue
+            h=$(basename "$f" .ltar)
+            put "$f" "$LAKE_CACHE_ENDPOINT/a/$LAKE_CACHE_REPO/$h.art" application/vnd.reservoir.artifact; n=$((n+1))
+          done
+          echo "uploaded $n archives"
+          put map.jsonl "$LAKE_CACHE_ENDPOINT/r/$scope/$REV.jsonl" application/vnd.reservoir.outputs+json-lines
+          echo "filed $(( $(wc -l < map.jsonl) - 1 )) mappings under $REV"
+
+      - name: Check the map is publicly readable
+        env:
+          REV: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          tc=$(sed -E 's|^leanprover/lean4:v|leanprover--lean4---|' stage/lean-toolchain)
+          curl -sS --fail -o /tmp/map "$LAKE_CACHE_ENDPOINT/r/$LAKE_CACHE_REPO/pt/x86_64-unknown-linux-gnu/tc/$tc/$REV.jsonl"
+          cmp /tmp/map stage/map.jsonl && echo "map readable and identical"

@@ -115,5 +115,3 @@ theorem IsFiniteSheaf.tensorObj_part
       ((pointSmallEtale s).uliftSheafFiberIso.{u + 1} (ModuleCat.{u + 1} Λ)).app (F ⊗ G))
 
 end AlgebraicGeometry.Scheme
-#print AlgebraicGeometry.Scheme.IsFiniteSheaf.tensorObj_part
-#print AlgebraicGeometry.Scheme.IsLocallyConstantSheaf.tensorObj_part
