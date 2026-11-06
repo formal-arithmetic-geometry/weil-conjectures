@@ -21,7 +21,6 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme.Modules
 
-set_option maxHeartbeats 100000 in
 -- Degree-zero simplification unfolds the single-complex construction.
 private theorem single_exchange
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]

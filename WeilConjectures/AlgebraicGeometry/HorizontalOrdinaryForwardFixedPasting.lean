@@ -105,7 +105,6 @@ private theorem cancel_ordinary_comparisons
     CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id,
     Iso.inv_hom_id_assoc] using h
 
-set_option maxHeartbeats 400000 in
 -- Type checking the pinned adjunction/comparison families needs additional kernel reductions.
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in

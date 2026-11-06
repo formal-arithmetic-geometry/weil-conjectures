@@ -101,7 +101,6 @@ private theorem factor_naturality
     _ = eM ≫ (τM ≫ ψ) := by rw [← heM, Category.assoc]
     _ = _ := by rw [← hk, Category.assoc]
 
-set_option maxHeartbeats 800000 in
 -- The generic product and signed differential calculation needs extra elaboration fuel.
 set_option backward.isDefEq.respectTransparency false in
 private theorem compare_hom_complex
@@ -276,7 +275,7 @@ private theorem compare_hom_complex
     (s (L.X p) (M.X (p + n))).hom (s (L.X p) (N.X (p + n))).hom
     (he' M n p (p + n) rfl) (he' N n p (p + n) rfl) (hmap M N f) hmap' hs'
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- Specializing the generic Hom-complex interface requires extra elaboration fuel.
 set_option backward.isDefEq.respectTransparency false in
 /-- Assemble any natural termwise internal-Hom comparison through the specified
