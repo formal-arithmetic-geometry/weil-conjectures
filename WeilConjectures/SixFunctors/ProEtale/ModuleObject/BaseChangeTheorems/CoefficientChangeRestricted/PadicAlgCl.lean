@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangeRestricted.Basic
+public import Mathlib.Util.CountHeartbeats
 
 /-!
 # Coefficient change for restricted base change maps: from `E` to `ℚ̄_ℓ`
@@ -33,6 +34,9 @@ section Coefficients
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ)
   {X Y X' Y' Z : Scheme.{u}} {p : X ⟶ Y} {g : Y' ⟶ Y} {p' : X' ⟶ Y'} {g' : X' ⟶ X}
 
+#count_heartbeats in
+set_option maxHeartbeats 400000 in
+-- The normalized proof exceeded 200000 heartbeats in the real-tree baseline (282s).
 /-- **From `E` to `ℚ̄_ℓ` for the restricted base change map**: for quasi-compact quasi-separated
 vertical maps, if the restricted base change map with `E`-coefficients is invertible at a
 bounded below `K`, then the one with `ℚ̄_ℓ`-coefficients is invertible at `ℚ̄_ℓ ⊗ᴸ_E K`. -/
@@ -51,17 +55,18 @@ theorem isIso_map_baseChangeMap_app_padicAlgCl_of_padicSubfield [QuasiCompact p]
       (pullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) sq)).app
       ((Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
         X)).leftDerivedFunctor.obj K))) := by
-  have := isGE_leftDerivedUpperStar_obj (Profinite.continuousMapRingObj E.1) g' K n
-  have hA := isIso_map_baseChangeMap_app_derivedExtendScalars
+  #count_heartbeats (have :=
+    isGE_leftDerivedUpperStar_obj (Profinite.continuousMapRingObj E.1) g' K n)
+  #count_heartbeats (have hA := isIso_map_baseChangeMap_app_derivedExtendScalars
     (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) (derivedPullIsoCompCoherence _) sq i K
     (isIso_derivedPushHom_app_padicSubfieldRingObjToPadicAlgCl_of_isGE ℓ E p K n)
     (isIso_derivedPushHom_app_padicSubfieldRingObjToPadicAlgCl_of_isGE ℓ E p'
-      ((g')^*⟦Profinite.continuousMapRingObj E.1⟧.leftDerivedFunctor.obj K) n)
+      ((g')^*⟦Profinite.continuousMapRingObj E.1⟧.leftDerivedFunctor.obj K) n))
   -- Align the proofs of `Precoherent Profinite` before applying the coefficient-change theorem.
-  revert h hA
-  normalize_precoherent
-  intro h hA
-  exact hA h
+  #count_heartbeats (revert h hA)
+  #count_heartbeats normalize_precoherent
+  #count_heartbeats (intro h hA)
+  #count_heartbeats exact hA h
 
 end Coefficients
 
