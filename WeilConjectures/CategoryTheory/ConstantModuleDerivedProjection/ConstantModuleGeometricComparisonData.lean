@@ -202,9 +202,9 @@ namespace CategoryTheory.ConstantModuleDerivedProjection
 variable {C D : Type u} [Category.{v} C] [Category.{v} D]
   (J : GrothendieckTopology C) (K : GrothendieckTopology D)
   (A : Type (max u v)) [CommRing A]
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 set_option maxHeartbeats 70000 in
 -- Bound the dependent ordinary-data elaboration.
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The geometric morphism and its two ordinary module adjunctions.
 The Hom equations normalize the adjunctions on the underlying sheaves; the fixed-ring
 action is the induced one, as specified by the scalar equation for its direct image.
@@ -310,6 +310,13 @@ attribute [instance] ExactData.pullA_additive ExactData.pushA_additive
 
 variable [HasDerivedCategory.{w} (Modules J A)] [HasDerivedCategory.{w} (Modules K A)]
   [HasDerivedCategory.{w} (Fixed J A)] [HasDerivedCategory.{w} (Fixed K A)]
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
+/-- Cache the recorded K-flat monoidal structure on the ringed derived category.
+Source: Stacks Tag 07A4
+(blueprint: def-sfb-constant-module-geometric-comparison-data). -/
+instance ringDerivedMonoidal : MonoidalCategory (DerivedCategory (Modules J A)) :=
+  inferInstance
+
 /-- Cache the recorded K-flat monoidal structure on the fixed-scalar derived category.
 Source: Stacks Tag 07A4
 (blueprint: def-sfb-constant-module-geometric-comparison-data). -/

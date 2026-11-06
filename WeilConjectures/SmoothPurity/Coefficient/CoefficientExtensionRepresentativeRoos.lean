@@ -136,6 +136,46 @@ attribute [local irreducible] towerRoosComparison
 
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
+private theorem derivedEvaluationFactors
+    {C B D T : Type*} [Category C] [Category B] [Category D] [Category T]
+    [Abelian C] [Abelian B] [Abelian D] [Abelian T]
+    [HasDerivedCategory C] [HasDerivedCategory B] [HasDerivedCategory D]
+    [HasDerivedCategory T]
+    (U : C ⥤ B) (V : B ⥤ T) (F : C ⥤ D) (R : D ⥤ T)
+    [U.Additive] [V.Additive] [F.Additive] [R.Additive]
+    [PreservesFiniteLimits U] [PreservesFiniteColimits U]
+    [PreservesFiniteLimits V] [PreservesFiniteColimits V]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits R] [PreservesFiniteColimits R]
+    (a : U ⋙ V ≅ F ⋙ R) (X : CochainComplex C ℤ) :
+    V.mapDerivedCategory.map (U.mapDerivedCategoryFactors.hom.app X) ≫
+        V.mapDerivedCategoryFactors.hom.app ((U.mapHomologicalComplex (.up ℤ)).obj X) ≫
+        DerivedCategory.Q.map
+          ((Functor.mapHomologicalComplexCompIso (Iso.refl (U ⋙ V)) (.up ℤ) ≪≫
+            NatIso.mapHomologicalComplex a (.up ℤ) ≪≫
+            (Functor.mapHomologicalComplexCompIso (Iso.refl (F ⋙ R)) (.up ℤ)).symm).hom.app X) =
+      (Functor.mapDerivedCategoryCompIso U V ≪≫
+          Functor.mapDerivedCategoryNatIso a ≪≫
+          (Functor.mapDerivedCategoryCompIso F R).symm).hom.app (DerivedCategory.Q.obj X) ≫
+        R.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app X) ≫
+        R.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj X) := by
+  have h := Functor.mapDerivedCategoryNatIso_fac a X
+  dsimp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app]
+  erw [Category.assoc, Category.assoc,
+    Functor.mapDerivedCategoryCompIso_hom_app_factors]
+  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso U V).inv.app
+    (DerivedCategory.Q.obj X))).1
+  erw [Iso.inv_hom_id_app_assoc]
+  erw [Functor.mapDerivedCategoryCompIso_hom_app_factors_assoc]
+  have hi : (Functor.mapHomologicalComplexCompIso (Iso.refl (F ⋙ R)) (.up ℤ)).inv.app X =
+      𝟙 _ := by
+    apply (cancel_epi
+      ((Functor.mapHomologicalComplexCompIso (Iso.refl (F ⋙ R)) (.up ℤ)).hom.app X)).1
+    erw [Iso.hom_inv_id_app]
+  erw [Functor.mapHomologicalComplexCompIso_refl_hom_app, Category.id_comp, hi,
+    Category.comp_id]
+  exact h.symm
+
 private theorem restrictedEvaluation_factors
     (X : CochainComplex (coefficientSequenceModules l L W) ℤ) (n : ℕ) :
     (coefficientConstantTowerEvaluation l L W n).map

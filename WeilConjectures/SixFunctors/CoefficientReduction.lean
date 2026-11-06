@@ -649,6 +649,166 @@ private lemma coefficientArrow
   rw [Category.assoc, ← R.map_comp, he, R.map_comp, ← Category.assoc, hu,
     Category.assoc]
 
+namespace Etale
+
+attribute [local instance 2000] CommRing.toRing
+
+-- Keep the two complex-composition comparisons explicit before specializing the sites.
+@[irreducible] private noncomputable def cochainSquareIso
+    {C₁ C₂ C₃ C₄ : Type*} [Category C₁] [Category C₂] [Category C₃] [Category C₄]
+    [Preadditive C₁] [Preadditive C₂] [Preadditive C₃] [Preadditive C₄]
+    (F : C₁ ⥤ C₂) (G : C₂ ⥤ C₄) (H : C₁ ⥤ C₃) (I : C₃ ⥤ C₄)
+    [F.Additive] [G.Additive] [H.Additive] [I.Additive] (e : F ⋙ G ≅ H ⋙ I) :
+    F.mapHomologicalComplex (.up ℤ) ⋙ G.mapHomologicalComplex (.up ℤ) ≅
+      H.mapHomologicalComplex (.up ℤ) ⋙ I.mapHomologicalComplex (.up ℤ) :=
+  Functor.mapHomologicalComplexCompIso e (.up ℤ) ≪≫
+    (Functor.mapHomologicalComplexCompIso (Iso.refl (H ⋙ I)) (.up ℤ)).symm
+
+private noncomputable def cochainCounit
+    {C D : Type*} [Category.{u + 1} C] [Category.{u + 1} D]
+    [Abelian C] [Abelian D] [IsGrothendieckAbelian.{u + 1} C]
+    [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
+    [Abelian.HasFunctorialFlatResolution C]
+    [HasDerivedCategory.{u + 1} C] [HasDerivedCategory.{u + 1} D]
+    (F : C ⥤ D) [F.Additive] [F.PreservesKFlatQuasiIso] :
+    _root_.DerivedCategory.Q ⋙ F.leftDerivedFunctor ⟶
+      F.mapHomologicalComplex (.up ℤ) ⋙ _root_.DerivedCategory.Q :=
+  Functor.whiskerLeft (HomotopyCategory.quotient _ (.up ℤ)) F.leftDerivedFunctorCounit ≫
+    Functor.whiskerRight (F.mapHomotopyCategoryFactors (.up ℤ)).hom _root_.DerivedCategory.Qh
+
+private lemma cochainCounit_isIso
+    {C D : Type*} [Category.{u + 1} C] [Category.{u + 1} D]
+    [Abelian C] [Abelian D] [IsGrothendieckAbelian.{u + 1} C]
+    [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
+    [Abelian.HasFunctorialFlatResolution C]
+    [HasDerivedCategory.{u + 1} C] [HasDerivedCategory.{u + 1} D]
+    (F : C ⥤ D) [F.Additive] [F.PreservesKFlatQuasiIso]
+    (P : CochainComplex C ℤ) (hP : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat P) :
+    IsIso ((cochainCounit F).app P) := by
+  have := F.isIso_leftDerivedFunctorCounit_app_of_kFlat P hP
+  dsimp only [cochainCounit, NatTrans.comp_app, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app]
+  infer_instance
+
+private lemma comparisonFromResolution
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    (Q : C ⥤ D) (W : MorphismProperty C) [Q.IsLocalization W]
+    (F G : D ⥤ E) (H : C ⥤ E) (s : Q ⋙ G ⟶ H) (t : Q ⋙ F ⟶ H)
+    (R : C ⥤ C) (π : R ⟶ 𝟭 C)
+    (hπ : ∀ X, IsIso (Q.map (π.app X)))
+    (hs : ∀ X, IsIso (s.app (R.obj X)))
+    (ht : ∀ X, IsIso (t.app (R.obj X))) : Nonempty (F ≅ G) := by
+  let : ∀ X, IsIso (Q.map (π.app X)) := hπ
+  let : ∀ X, IsIso (s.app (R.obj X)) := hs
+  let : ∀ X, IsIso (t.app (R.obj X)) := ht
+  have : IsIso (Functor.whiskerRight π (Q ⋙ F)) := by
+    apply (NatTrans.isIso_iff_isIso_app _).2
+    intro X
+    dsimp only [Functor.whiskerRight_app, Functor.comp_map]
+    infer_instance
+  have : IsIso (Functor.whiskerRight π (Q ⋙ G)) := by
+    apply (NatTrans.isIso_iff_isIso_app _).2
+    intro X
+    dsimp only [Functor.whiskerRight_app, Functor.comp_map]
+    infer_instance
+  have : IsIso (Functor.whiskerLeft R s) := by
+    apply (NatTrans.isIso_iff_isIso_app _).2
+    exact hs
+  have : IsIso (Functor.whiskerLeft R t) := by
+    apply (NatTrans.isIso_iff_isIso_app _).2
+    exact ht
+  let e : Q ⋙ F ≅ Q ⋙ G :=
+    (asIso (Functor.whiskerRight π (Q ⋙ F))).symm ≪≫
+      asIso (Functor.whiskerLeft R t) ≪≫
+      (asIso (Functor.whiskerLeft R s)).symm ≪≫
+      asIso (Functor.whiskerRight π (Q ⋙ G))
+  exact ⟨Localization.liftNatIso Q W (Q ⋙ F) (Q ⋙ G) F G e⟩
+
+-- Prove the resolution comparison with abstract categories, before choosing the sites.
+private lemma leftDerivedSquare
+    {C D E F : Type*}
+    [Category.{u + 1} C] [Category.{u + 1} D]
+    [Category.{u + 1} E] [Category.{u + 1} F]
+    [Abelian C] [Abelian D] [Abelian E] [Abelian F]
+    [IsGrothendieckAbelian.{u + 1} C] [IsGrothendieckAbelian.{u + 1} D]
+    [IsGrothendieckAbelian.{u + 1} F]
+    [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
+    [MonoidalCategory D] [MonoidalPreadditive D] [MonoidalClosed D] [BraidedCategory D]
+    [MonoidalCategory F] [MonoidalPreadditive F] [MonoidalClosed F] [BraidedCategory F]
+    [Abelian.HasFunctorialFlatResolution C] [Abelian.HasFunctorialFlatResolution D]
+    [Abelian.HasFunctorialFlatResolution F]
+    [HasDerivedCategory.{u + 1} C] [HasDerivedCategory.{u + 1} D]
+    [HasDerivedCategory.{u + 1} E] [HasDerivedCategory.{u + 1} F]
+    (FA : C ⥤ D) (EX : D ⥤ E) (EY : C ⥤ F) (FB : F ⥤ E)
+    [FA.Additive] [EX.Additive] [EY.Additive] [FB.Additive]
+    [FA.PreservesKFlatQuasiIso] [EX.PreservesKFlatQuasiIso]
+    [EY.PreservesKFlatQuasiIso] [FB.PreservesKFlatQuasiIso]
+    [FA.PreservesFlat] [EY.PreservesFlat]
+    [PreservesColimitsOfShape ℤ FA] [PreservesColimitsOfShape ℤ EY]
+    (e : EY ⋙ FB ≅ FA ⋙ EX) :
+    Nonempty (EY.leftDerivedFunctor ⋙ FB.leftDerivedFunctor ≅
+      FA.leftDerivedFunctor ⋙ EX.leftDerivedFunctor) := by
+  let eC := cochainSquareIso EY FB FA EX e
+  let F := EY.leftDerivedFunctor ⋙ FB.leftDerivedFunctor
+  let G := FA.leftDerivedFunctor ⋙ EX.leftDerivedFunctor
+  let H := FA.mapHomologicalComplex (.up ℤ) ⋙ EX.mapHomologicalComplex (.up ℤ) ⋙
+    _root_.DerivedCategory.Q
+  let s : _root_.DerivedCategory.Q ⋙ G ⟶ H :=
+    Functor.whiskerRight (cochainCounit FA) EX.leftDerivedFunctor ≫
+      Functor.whiskerLeft (FA.mapHomologicalComplex (.up ℤ)) (cochainCounit EX)
+  let t : _root_.DerivedCategory.Q ⋙ F ⟶ H :=
+    Functor.whiskerRight (cochainCounit EY) FB.leftDerivedFunctor ≫
+      Functor.whiskerLeft (EY.mapHomologicalComplex (.up ℤ)) (cochainCounit FB) ≫
+      Functor.whiskerRight eC.hom _root_.DerivedCategory.Q
+  let Λ : Abelian.LeftResolution (ObjectProperty.flat.ι : _ ⥤ C) := Classical.arbitrary _
+  have hs : ∀ K, IsIso (s.app (Λ.reduced.resolutionFunctor.obj K)) := by
+    intro K
+    have hF := FA.kFlat_mapHomologicalComplex_obj_resolutionFunctor_obj Λ.reduced
+      ObjectProperty.flat.essImage_ι_le K
+    have := cochainCounit_isIso EX _ hF
+    have := cochainCounit_isIso FA _
+      (Λ.reduced.kFlat_resolutionFunctor_obj ObjectProperty.flat.essImage_ι_le K)
+    dsimp only [s, NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
+    infer_instance
+  have ht : ∀ K, IsIso (t.app (Λ.reduced.resolutionFunctor.obj K)) := by
+    intro K
+    have := cochainCounit_isIso EY _
+      (Λ.reduced.kFlat_resolutionFunctor_obj ObjectProperty.flat.essImage_ι_le K)
+    have hE := EY.kFlat_mapHomologicalComplex_obj_resolutionFunctor_obj Λ.reduced
+      ObjectProperty.flat.essImage_ι_le K
+    have := cochainCounit_isIso FB _ hE
+    dsimp only [t, NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
+    infer_instance
+  exact comparisonFromResolution _root_.DerivedCategory.Q
+    (HomologicalComplex.quasiIso _ (.up ℤ)) F G H s t
+    Λ.reduced.resolutionFunctor Λ.reduced.resolutionNatTrans (fun _ => inferInstance) hs ht
+
+private lemma scalarPullback
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
+    {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    have := Sheaf.scalar_preservesKFlatQuasiIso Y.smallEtaleTopology φ
+    have := Sheaf.scalar_preservesKFlatQuasiIso X.smallEtaleTopology φ
+    Nonempty ((Sheaf.extendScalars Y.smallEtaleTopology φ).leftDerivedFunctor ⋙ L(upperStar
+      (ModuleCat.{u + 1} B) f) ≅
+      L(upperStar (ModuleCat.{u + 1} A) f) ⋙ (Sheaf.extendScalars X.smallEtaleTopology
+        φ).leftDerivedFunctor) := by
+  let FA := upperStar (ModuleCat.{u + 1} A) f
+  let FB := upperStar (ModuleCat.{u + 1} B) f
+  let EY := Sheaf.extendScalars Y.smallEtaleTopology φ
+  let EX := Sheaf.extendScalars X.smallEtaleTopology φ
+  let : EY.PreservesKFlatQuasiIso := Sheaf.scalar_preservesKFlatQuasiIso Y.smallEtaleTopology φ
+  let : EX.PreservesKFlatQuasiIso := Sheaf.scalar_preservesKFlatQuasiIso X.smallEtaleTopology φ
+  have := Sheaf.preservesFlat_extendScalars Y.smallEtaleTopology (f := φ)
+  let e : EY ⋙ FB ≅ FA ⋙ EX :=
+    (conjugateIsoEquiv
+      ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f).comp
+        (Sheaf.extendScalarsAdjunction X.smallEtaleTopology φ))
+      ((Sheaf.extendScalarsAdjunction Y.smallEtaleTopology φ).comp
+        (upperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f))).symm
+      (lowerStarRestrictScalarsIso φ f).symm
+  exact leftDerivedSquare FA EX EY FB e
+
+end Etale
 
 namespace Etale
 -- Match the monoidal structures of the public etale tensor and internal Hom.

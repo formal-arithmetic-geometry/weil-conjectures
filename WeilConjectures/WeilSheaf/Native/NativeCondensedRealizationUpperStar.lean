@@ -34,6 +34,10 @@ Its mate under the derived adjunctions `D(g^*) ⊣ Rg_*` and `Lḡ^* ⊣ Rḡ_*`
 the underived base change map is invertible (forgetting the Weil structure commutes with the
 pushforward, and so does the condensed model, being an equivalence), and `N_Z` preserves
 K-injective complexes (`CategoryTheory.Adjunction.isIso_mateEquiv_mapDerivedCategorySquareIso`).
+
+On complexes, the derived comparison is the counit of `Lḡ^*` followed by the termwise
+comparison
+(`AlgebraicGeometry.ProEtaleWeilSheaf.whiskerLeft_Q_derivedCondensedRealizationUpperStarIso_hom`).
 -/
 
 @[expose] public section
@@ -133,5 +137,54 @@ instance isIso_mateEquiv_derivedCondensedRealizationUpperStarIso :
     (CondensedRing.upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj l)
       (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))
     (condensedRealizationUpperStarIso k₀ l g)
+
+/-- **The derived pullback comparison on complexes.** After precomposition with
+`Q : CochainComplex _ ℤ ⥤ DerivedCategory _`,
+`AlgebraicGeometry.ProEtaleWeilSheaf.derivedCondensedRealizationUpperStarIso` is the counit
+`Lḡ^* (Qh (N_Y P)) ⟶ Qh (ḡ^* (N_Y P))` of the derived pullback of module objects followed by the
+image under `Q` of the termwise isomorphism
+`AlgebraicGeometry.ProEtaleWeilSheaf.condensedRealizationUpperStarIso`, up to the factorizations
+of `D(N_Y)`, `D(g^* ⋙ N_Z)` through `Q` and of `Q` through `Qh`. No K-flatness is needed, the
+pullback `ḡ^*` of module objects being exact. This is
+`CategoryTheory.Functor.whiskerLeft_Q_leftDerivedFunctorSquareIso_hom`; its components at a
+complex `P` are obtained with `CategoryTheory.NatTrans.congr_app`. -/
+lemma whiskerLeft_Q_derivedCondensedRealizationUpperStarIso_hom :
+    Functor.whiskerLeft DerivedCategory.Q (derivedCondensedRealizationUpperStarIso k₀ l g).hom =
+      (Functor.associator _ _ _).inv ≫
+      Functor.whiskerRight (condensedRealization k₀ l Y).mapDerivedCategoryFactors.hom
+        (CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
+          (Scheme.Hom.geometricFiberMap g
+            (comp_over g (Spec (CommRingCat.of k₀))))).leftDerivedFunctor ≫
+      Functor.whiskerRight (Functor.whiskerLeft
+        ((condensedRealization k₀ l Y).mapHomologicalComplex (.up ℤ))
+        (DerivedCategory.quotientCompQhIso _).inv)
+        (CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
+          (Scheme.Hom.geometricFiberMap g
+            (comp_over g (Spec (CommRingCat.of k₀))))).leftDerivedFunctor ≫
+      Functor.whiskerRight (Functor.associator _ _ _).inv
+        (CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
+          (Scheme.Hom.geometricFiberMap g
+            (comp_over g (Spec (CommRingCat.of k₀))))).leftDerivedFunctor ≫
+      (Functor.associator _ _ _).hom ≫
+      Functor.whiskerLeft _ (CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
+          (Scheme.Hom.geometricFiberMap g
+            (comp_over g (Spec (CommRingCat.of k₀))))).leftDerivedFunctorCounit ≫
+      (Functor.associator _ _ _).inv ≫
+      Functor.whiskerRight (Functor.associator _ _ _).hom DerivedCategory.Qh ≫
+      Functor.whiskerRight (Functor.whiskerLeft
+        ((condensedRealization k₀ l Y).mapHomologicalComplex (.up ℤ))
+        ((CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
+          (Scheme.Hom.geometricFiberMap g
+            (comp_over g (Spec (CommRingCat.of k₀))))).mapHomotopyCategoryFactors (.up ℤ)).hom)
+        DerivedCategory.Qh ≫
+      Functor.whiskerRight (Functor.associator _ _ _).inv DerivedCategory.Qh ≫
+      (Functor.associator _ _ _).hom ≫
+      Functor.whiskerLeft _ (DerivedCategory.quotientCompQhIso _).hom ≫
+      Functor.whiskerRight (Functor.mapHomologicalComplexCompIso
+        (condensedRealizationUpperStarIso k₀ l g) (.up ℤ)).hom DerivedCategory.Q ≫
+      (upperStar k₀ l g ⋙ condensedRealization k₀ l Z).mapDerivedCategoryFactors.inv ≫
+      Functor.whiskerLeft DerivedCategory.Q
+        (Functor.mapDerivedCategoryCompIso (upperStar k₀ l g) (condensedRealization k₀ l Z)).hom :=
+  Functor.whiskerLeft_Q_leftDerivedFunctorSquareIso_hom _
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
