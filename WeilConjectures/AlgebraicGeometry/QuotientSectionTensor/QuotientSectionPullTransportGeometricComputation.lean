@@ -8,8 +8,6 @@ module
 public import Mathlib.Algebra.Homology.Localization
 import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionTensorData
-public import Mathlib.Logic.Small.Defs
-import all Mathlib.Logic.Small.Defs
 import WeilConjectures.SixFunctors.Supporting.ModCondensedCachedInstances
 import WeilConjectures.AlgebraicGeometry.SectionDerivedPushpullNormalization
 
