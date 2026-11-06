@@ -525,3 +525,22 @@
   /home/ubuntu/u9/state/BZ1116.DONE.
 - No local Lean/Lake, proof placeholders, trust bypasses, declarations deleted, or heartbeat changes.
 - All ucheck calls finished. This final commit changes progress documentation only.
+
+
+# BZ1385 complete
+
+- Assigned SequenceDerivedMixedSquare is GREEN and sorry-free: ucheck-bump rc=0,
+  built=1, failed=0, 16912 jobs; target freshly rebuilt in 20 seconds.
+- Green source commit: 84019207419479ed0419dbbacde1ace5428268de.
+- Applied the proposed private helper compositor inversion after the user instructed
+  continuation. Added Iso.symm_hom to its proof simplification. The public theorem,
+  assumptions, all other declaration types, and docstrings are unchanged.
+- The direct importer QuotientSystemMixedCoherence was attempted, but is blocked by
+  SequenceDerivedAssociativity:276:4 (type mismatch), owned by BZ1386. The leaf rebuilt
+  green again. All further importer paths share that blocker; no unowned file was edited.
+- Fix patterns, exact errors, occurrence counts, replay rules, and logs are recorded in
+  /home/ubuntu/u9/bz/FIXES-BZ1385.md. Both replay rules reproduce the source diff exactly
+  and are idempotent. Completion marker: /home/ubuntu/u9/state/BZ1385.DONE.
+- No local Lean/Lake, proof placeholders, trust bypasses, new/deleted declarations,
+  heartbeat changes, or profiler probes. All ucheck calls finished.
+- This completion commit changes progress documentation only; Lean source matches green builds.
