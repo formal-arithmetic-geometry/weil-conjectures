@@ -87,7 +87,7 @@ private theorem pullbackComputes {V W : Scheme.{t}} (g : V ⟶ W)
         (HomologicalComplex.quasiIso (normalizedDVRModules l E W n) (.up ℤ))
         (integralOperationsLevelPullback l E g n).mapDerivedCategoryFactors]
       refine MorphismProperty.IsInvertedBy.of_comp _ _ ?_ _
-      exact Functor.IsLocalization.inverts (L := DerivedCategory.Q))
+      exact Localization.inverts _ _)
   infer_instance
 
 private def evaluationFiniteAdjunction {V W : Scheme.{t}} (g : V ⟶ W) (n : ℕ) :
