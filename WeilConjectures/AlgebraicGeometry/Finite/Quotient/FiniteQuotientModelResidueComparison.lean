@@ -130,6 +130,20 @@ private theorem residueChange_adjunction (X : Scheme.{t})
   have ha := (h E hE hm).choose_spec.2 L ε hL
   exact ⟨ha.choose⟩
 
+private def residueChange_comp (X : Scheme.{t})
+    {R S V : Sheaf (ProEt.topology X) CommRingCat.{t + 1}}
+    (f : R ⟶ S) (g : S ⟶ V) :
+    residueChange X f ⋙ residueChange X g ≅ residueChange X (f ≫ g) := by
+  let a := (residueChange_adjunction X f).some
+  let b := (residueChange_adjunction X g).some
+  let c := (residueChange_adjunction X (f ≫ g)).some
+  let e : (completedRestriction X g).mapDerivedCategory ⋙
+      (completedRestriction X f).mapDerivedCategory ≅
+      (completedRestriction X (f ≫ g)).mapDerivedCategory :=
+    Functor.mapDerivedCategoryCompIso _ _ ≪≫
+      Functor.mapDerivedCategoryNatIso (completedRestrictCompIso X f g).symm
+  exact ((a.comp b).ofNatIsoRight e).leftAdjointUniq c
+
 private theorem residueCoefficient_square (X : Scheme.{t})
     {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶

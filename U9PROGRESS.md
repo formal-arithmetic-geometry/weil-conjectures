@@ -298,3 +298,16 @@
   unmeasured maxHeartbeats override from the restored helper.
 - Next: ucheck-bump on the five prerequisites and SupportedKoszulRelativeDetector, then downstream.
 - Fix notes: /home/ubuntu/u9/bz/FIXES-BZ932.md. No local Lean/Lake or proof shortcuts.
+
+# BZ943 in progress
+
+- Branch: `u9/BZ943`; starting commit: `c59b55069`.
+- Baseline build at `19d501377e` failed only because `finiteQuotient_layer_local_complexes`
+  and its upstream proof chain were deleted by prior prune units.
+- The user instructed continuation after the explicit six-module restoration proposal.
+  Applied that proposal, restoring nine historical declaration headers unchanged.
+- Candidate proof updates: new derived compositor orientation, explicit slice-module
+  category in `singleFunctor`, and strictly bounded complex vanishing.
+- Next: `ucheck-bump` on the assigned filtration triangle, then downstream importers.
+- Evidence and fix patterns: `/home/ubuntu/u9/bz/FIXES-BZ943.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat raises.
