@@ -100,7 +100,8 @@ private def restrictedTensorPresheafIsoAux (φ : R ⟶ S)
     induction z using TensorProduct.inductionOn with
     | add z z' hz hz' => simp only [map_add, hz, hz']
     | tmul s m =>
-      change S.obj.map f s ⊗ₜ[R.obj.obj W, (φ.hom.app W).hom] M.val.map f m =
+      change S.obj.map f s ⊗ₜ[R.obj.obj W, (φ.hom.app W).hom]
+          PresheafOfModulesOfCommRing.map (R := R.obj) M.val f m =
         changeOfRingsMapOfUniverses φ M f (s ⊗ₜ[R.obj.obj V, (φ.hom.app V).hom] m)
       exact (changeOfRingsMap_tmulOfUniverses φ M f s m).symm
 
