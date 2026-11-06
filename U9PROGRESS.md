@@ -269,3 +269,6 @@
 - Two scoped 400000-heartbeat budgets have measured failures recorded in FIXES and are below the original pre-prune 1000000 budgets. No local Lean/Lake, placeholders, axioms, native_decide, trust bypasses, or profiler probes.
 - Records: `/home/ubuntu/u9/bz/FIXES-BZ864.md`, `BZ864-restored-declarations.tsv`, `BZ864-restored-prerequisites.tsv`, `BZ864-full-header-audit.tsv`, `BZ864-contract-audit.txt`.
 - Next: finish cleaned-source/downstream validation, fix local errors if any, record any unowned dependency blocker, and write DONE.
+
+- Build 19: cleaned open comparison, assigned leaf, and affine locality all green. RelativelyFlatCanonicalModuleBaseChange failed at line 119 because its manually constructed c has hidden Qh endpoints. Replaced that entire construction with the already-compiled exists_isDerivedModulePullbackComparison helper and its import; no statement change.
+- Build 20: source `72c9186137`, newsrv:/home/ubuntu/u9n/bumpw1, remote log `/home/ubuntu/u9/logs/BZ864-20261106T092703.log`, local session 35946. Checks leaf, locality, and the downstream fix.
