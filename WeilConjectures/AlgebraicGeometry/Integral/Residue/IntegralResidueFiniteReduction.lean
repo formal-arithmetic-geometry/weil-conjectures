@@ -259,6 +259,7 @@ private local instance integralResidueFiniteCategory (T : Scheme.{u})
     [HasDerivedCategory.{u + 2} (SheafOfModules.{u + 1} R)] :
     Category.{u + 2} (DerivedCategory (SheafOfModules.{u + 1} R)) := inferInstance
 
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 /-- Reduction commutes with the normalized integral coefficient comparison and inverse image.
 There is no completeness, perfectness or covering hypothesis.
 Source: Bhatt--Scholze, Definition 6.5.1 and Lemma 6.5.8(1)
@@ -292,9 +293,9 @@ theorem integralResidueFiniteReduction
     (C : CochainComplex
       (FiniteCoefficientModules T (PbcQuotient (pbcIntegralDatum l E) n)) ℤ)
     (eC : Nonempty
-      (DerivedCategory.Q.obj (((SheafOfModules.restrictScalars
+      ((DerivedCategory.Q.obj (((SheafOfModules.restrictScalars
         (AdicCoefficients.finiteRingComparison T
-          (PbcQuotient (pbcIntegralDatum l E) n)).hom).mapHomologicalComplex (.up ℤ)).obj C) ≅
+          (PbcQuotient (pbcIntegralDatum l E) n)).hom).mapHomologicalComplex (.up ℤ)).obj C) :) ≅
         (pbcCompletedReduction T (pbcIntegralDatum l E) n).obj K)) :
     Nonempty
       ((completedAdicQuotientReduction S d n).obj
@@ -372,7 +373,7 @@ theorem integralResidueFiniteReduction
       (pbcCompletedReduction T D n).obj K := RT.mapDerivedCategoryFactors.app C ≪≫ eC
   let endIso : F.mapDerivedCategory.obj M ≅ integralResidueFiniteModel S l E d c n M :=
     F.mapDerivedCategory.mapIso (DerivedCategory.Q.objObjPreimageIso M).symm ≪≫
-      F.mapDerivedCategoryFactors.app (DerivedCategory.Q.objPreimage M)
+      F.mapDerivedCategoryFactors.app (DerivedCategory.Q.objPreimage M :)
   refine ⟨?_⟩
   exact red.mapIso a ≪≫ σ.app pulled ≪≫
     Rb.mapIso (((D.chi g n).app K).symm) ≪≫
