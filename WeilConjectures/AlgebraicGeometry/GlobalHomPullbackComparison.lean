@@ -64,7 +64,7 @@ def schemeGlobalScalarRestrictionCompIso {X Y Z : Scheme.{uP}}
       schemeGlobalScalarRestriction f ⋙ schemeGlobalScalarRestriction g :=
   Functor.mapDerivedCategoryNatIso
     (ModuleCat.restrictScalarsComp' g.appTop.hom f.appTop.hom (f ≫ g).appTop.hom rfl) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- Scalar identification of the two paths around a commutative square.
 Source: Stacks, Tags 0B6A and 0AA8

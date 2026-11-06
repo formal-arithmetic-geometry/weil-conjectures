@@ -176,7 +176,6 @@ private theorem projection_derived_homology (A : CochainComplex C ℤ) :
       CategoryTheory.Functor.associator_hom_app, CategoryTheory.Functor.whiskerLeft_app,
       HomologicalComplex.homologyFunctorSingleIso_hom_app, Q_obj_single_obj]
     erw [(homologyFunctor C 0).map_id, Category.id_comp, Category.id_comp]
-    rfl
   rw [hs]
   erw [homologyFunctorFactors_hom_naturality_assoc,
     homologyFunctorFactors_hom_naturality, projection_homology]
@@ -454,12 +453,12 @@ private theorem derived_homology_comp (F : C ⥤ D) (G : D ⥤ E)
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G] (K : DerivedCategory C) :
     ((F ⋙ G).mapDerivedCategoryHomologyFunctorIso 0).hom.app K ≫
-        (homologyFunctor E 0).map ((CategoryTheory.Functor.mapDerivedCategoryCompIso F G).hom.app K)
+        (homologyFunctor E 0).map ((CategoryTheory.Functor.mapDerivedCategoryCompIso F G).inv.app K)
             =
       G.map ((F.mapDerivedCategoryHomologyFunctorIso 0).hom.app K) ≫
         (G.mapDerivedCategoryHomologyFunctorIso 0).hom.app (F.mapDerivedCategory.obj K) := by
   let τ₁ := ((F ⋙ G).mapDerivedCategoryHomologyFunctorIso 0).hom ≫
-    CategoryTheory.Functor.whiskerRight (CategoryTheory.Functor.mapDerivedCategoryCompIso F G).hom
+    CategoryTheory.Functor.whiskerRight (CategoryTheory.Functor.mapDerivedCategoryCompIso F G).inv
         (homologyFunctor E 0)
   let τ₂ := CategoryTheory.Functor.whiskerRight (F.mapDerivedCategoryHomologyFunctorIso 0).hom G ≫
     CategoryTheory.Functor.whiskerLeft F.mapDerivedCategory (G.mapDerivedCategoryHomologyFunctorIso

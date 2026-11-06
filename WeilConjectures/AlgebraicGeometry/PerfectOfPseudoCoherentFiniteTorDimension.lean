@@ -197,7 +197,7 @@ theorem isPerfect_of_isPseudoCoherent_of_hasFiniteTorDimension (S : Scheme.{uP})
     (Functor.mapDerivedCategoryNatIso
       (SheafOfModules.overFunctorMap.{uP}
         (moduleRings S.toRingedSpace) (homOfLE hVU))).symm.app K ≪≫
-      (Functor.mapDerivedCategoryCompIso G F).app K ≪≫ F.mapDerivedCategory.mapIso eP ≪≫
+      (Functor.mapDerivedCategoryCompIso G F).symm.app K ≪≫ F.mapDerivedCategory.mapIso eP ≪≫
         F.mapDerivedCategoryFactors.app P
   obtain ⟨M, b, hMb, hMf, ⟨eM⟩⟩ := affine_finiteFree_model S V hV PV hbV hfV
   let R := S.presheaf.obj (.op V)

@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.Derived.DerivedAdjunctionCochainUnit
 public import WeilConjectures.CategoryTheory.RightDerivedSingleZeroUnit
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # Degree zero of the derived adjunction unit on a single object
 
