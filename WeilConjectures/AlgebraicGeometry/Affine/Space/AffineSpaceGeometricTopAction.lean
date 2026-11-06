@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.Affine.Linear.AffineLinearTraceAction
 import WeilConjectures.AlgebraicGeometry.Affine.Space.AffineSpacePolynomialDeformation
 import WeilConjectures.AlgebraicGeometry.Affine.Linear.AffineLinearActionFamily
