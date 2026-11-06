@@ -255,11 +255,12 @@ private theorem towerAugmentation_computed
         DerivedCategory.Q.map
           ((NatTrans.mapHomologicalComplex (completedReductionModuleUnit d T) (.up ℤ)).app P) := by
   let := completedReductionModuleTowerFunctor_additive T d
-  simpa only [HasCompletedReductionTowerUnitNormalization, completedReductionTowerUnit,
-    completedReductionTowerComplexCounit, reductionComplexCounit,
-    completedReductionTowerCounit, coherenceReductionTowerCounit,
-    completedReductionComplexTowerFunctor] using
-    ((completedReductionTowerUnit_exists d T).exists.choose_spec P hP)
+  with_unfolding_all
+    simpa only [HasCompletedReductionTowerUnitNormalization, completedReductionTowerUnit,
+      completedReductionTowerComplexCounit, reductionComplexCounit,
+      completedReductionTowerCounit, coherenceReductionTowerCounit,
+      completedReductionComplexTowerFunctor] using
+      ((completedReductionTowerUnit_exists d T).exists.choose_spec P hP)
 
 private theorem pulledAugmentation_computed
     (P : CochainComplex (pbcModules Y (pbcAdicCompletion Y d)) ℤ)
