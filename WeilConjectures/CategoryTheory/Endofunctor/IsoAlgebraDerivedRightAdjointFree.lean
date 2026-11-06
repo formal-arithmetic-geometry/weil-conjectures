@@ -116,7 +116,15 @@ lemma unit_app_comp_map_derivedFreeComparison (X : DerivedCategory C) :
 
 /-- **`RW` commutes with free algebras on bounded below objects.** If `RL` preserves coproducts
 of uniformly bounded below families, then the comparison `I (RL X) ⟶ RW (I X)` is an
-isomorphism for every bounded below object `X`. -/
+isomorphism for every bounded below object `X`:
+```
+I (RL X) --derivedFreeComparison--> RW (I X)
+   |                                   |
+   U                                   U
+   v                                   v
+ ∐ₙ Gⁿ (RL X) ≅ ∐ₙ RL (Fⁿ X) ----≅----> RL (∐ₙ Fⁿ X)
+```
+-/
 theorem isIso_derivedFreeComparison
     (hcoprod : ∀ (X : ℤ → DerivedCategory C) (a : ℤ), (∀ n, (X n).IsGE a) →
       PreservesColimit (Discrete.functor X) L.rightDerivedFunctor)

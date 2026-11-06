@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.Comple
 import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.CompleteDerivedCompletionBasic
 import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.CompleteDerivedCompletionPullback
 import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.CompleteDerivedCompletionLimit
+import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.CompleteDerivedCompletionCompletion
 
 /-!
 # Towers and the derived completion
@@ -205,6 +206,24 @@ theorem completeDerivedCompletion
     CompleteDerivedCompletion.constantLimit_unit_isIso l E T,
     CompleteDerivedCompletion.rlim_isDerivedLimit l E T,
     CompleteDerivedCompletion.rlim_roos l E T, ?_⟩
-  all_goals sorry
+  · exact CompleteDerivedCompletion.tensorLimitIso l E T
+  · have hfinite (M : DerivedCategory (AdicCompletion.Modules l E T)) (n : ℕ) :
+        IsIso ((AdicCompletion.derivedReduction l E T n).map
+          ((CompleteDerivedCompletion.kappa l E T).app M)) := by
+      exact CompleteDerivedCompletion.finiteReduction_kappa l E T M n
+    intro M
+    refine ⟨CompleteDerivedCompletion.completion_isDerivedComplete l E T M, ?_, hfinite M⟩
+    apply (CompleteDerivedCompletion.dev_conservative l E T _).2
+    intro n
+    obtain ⟨e⟩ := CompleteDerivedCompletion.reductionEvaluation l E T n
+    apply (NatIso.isIso_map_iff e ((CompleteDerivedCompletion.kappa l E T).app M)).2
+    have := hfinite M n
+    exact inferInstanceAs (IsIso ((AdicCompletion.restrict l E T n).map
+      ((AdicCompletion.derivedReduction l E T n).map
+        ((CompleteDerivedCompletion.kappa l E T).app M))))
+  · exact CompleteDerivedCompletion.isDerivedComplete_iff l E T
+  · exact CompleteDerivedCompletion.reductionEvaluation l E T
+  · exact CompleteDerivedCompletion.red_triangulated l E T
+  · exact CompleteDerivedCompletion.completionComparison l E T
 
 end AlgebraicGeometry.ProEtale

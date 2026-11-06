@@ -21,7 +21,6 @@ universe w
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace CategoryTheory.ConstantScalarRestriction
 
-set_option maxHeartbeats 800000 in
 -- Compare the resolving predicate with the specified site tensor at independent universes.
 private theorem flatRepresentative {C : Type w} [SmallCategory C]
     (J : GrothendieckTopology C) (A : Type w) [CommRing A]

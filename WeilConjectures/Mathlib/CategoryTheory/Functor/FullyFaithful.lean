@@ -6,13 +6,13 @@ Authors: Claude
 module
 
 public import Mathlib.CategoryTheory.Functor.FullyFaithful
-public import Mathlib.CategoryTheory.Yoneda
+public import WeilConjectures.Mathlib.CategoryTheory.Yoneda
 
 /-!
 # Fully faithful functors and the Yoneda embedding
 
 For a fully faithful functor `F : C ⥤ D` and `A : C`, the functor `T ↦ Hom(F T, F A)` is
-isomorphic to `T ↦ Hom(T, A)`.
+isomorphic to `T ↦ Hom(T, A)`, naturally in `A` and `T`.
 -/
 
 @[expose] public section
@@ -23,10 +23,11 @@ namespace CategoryTheory.Functor.FullyFaithful
 
 variable {C : Type u₁} {D : Type u₂} [Category.{v} C] [Category.{v} D] {F : C ⥤ D}
 
-/-- For a fully faithful functor `F`, the functor `T ↦ Hom(F T, F A)` is `T ↦ Hom(T, A)`. -/
-noncomputable def opCompYonedaObjIso (hF : F.FullyFaithful) (A : C) :
-    F.op ⋙ yoneda.obj (F.obj A) ≅ yoneda.obj A :=
-  NatIso.ofComponents (fun _ ↦ hF.homEquiv.symm.toIso)
-    (fun g ↦ by ext x; exact hF.map_injective (by simp))
+/-- For a fully faithful functor `F`, the isomorphisms `Hom(F T, F A) ≅ Hom(T, A)`, natural in
+`A` and `T`. -/
+noncomputable def compYonedaCompWhiskeringLeftIso (hF : F.FullyFaithful) :
+    F ⋙ yoneda ⋙ (whiskeringLeft _ _ _).obj F.op ≅ yoneda :=
+  NatIso.ofComponents hF.opCompYonedaObjIso
+    (fun g ↦ by ext T x; exact hF.map_injective (by simp [opCompYonedaObjIso]))
 
 end CategoryTheory.Functor.FullyFaithful

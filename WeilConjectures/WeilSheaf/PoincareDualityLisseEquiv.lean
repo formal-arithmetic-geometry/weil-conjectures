@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.WeilSheaf.SmoothPuritySeparatedAdjunction
+
 public import WeilConjectures.PointCount
 public import WeilConjectures.WeilSheaf.ConstantTwistCohomology
 public import WeilConjectures.WeilSheaf.Dual
@@ -161,9 +163,9 @@ theorem nonempty_equiv_cohomology_dual_compactlySupportedCohomology (d : ℕ)
     (hF : F.IsLisse) (i j : ℤ) (h : i + j = 2 * d) :
     Nonempty ((((F.dual hF).constantTwist (cyclotomicUnit k₀ l ^ d)).cohomology j).Equiv
       (F.compactlySupportedCohomology i).dual) := by
-  have := WeilComplex.isLeftAdjoint_derivedLowerShriek (k₀ := k₀) (l := l)
+  have := WeilComplex.isLeftAdjoint_derivedLowerShriek_of_separated_base (k₀ := k₀) (l := l)
     (X ↘ Spec (CommRingCat.of k₀))
-  have := WeilComplex.isLeftAdjoint_derivedLowerShriek (k₀ := k₀) (l := l)
+  have := WeilComplex.isLeftAdjoint_derivedLowerShriek_of_separated_base (k₀ := k₀) (l := l)
     (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀))
   obtain ⟨E₁⟩ := nonempty_homologySheaf_derivedLowerStar_dual_iso d hF i j h
   obtain ⟨E₂⟩ := nonempty_homologySheaf_neg_verdierDual_iso_dual

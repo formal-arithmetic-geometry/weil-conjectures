@@ -55,6 +55,4 @@ theorem tensorComparisonIsoOfAllFlat
     (Functor.LaxMonoidal.μ DerivedCategory.Qh _ _ ≫ DerivedCategory.Qh.map _) ≫ _)
   infer_instance
 
-#print axioms tensorComparisonIsoOfAllFlat
-
 end AlgebraicGeometry.Etale

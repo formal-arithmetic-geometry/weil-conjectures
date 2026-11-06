@@ -44,7 +44,6 @@ variable [hD : ∀ R : Sheaf J CommRingCat.{r}, HasDerivedCategory.{w} (Modules 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 4096 in
-set_option linter.unusedSectionVars false in
 open CategoryTheory.Functor in
 private theorem presentation_exists {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S) :
     Nonempty (Presentation a) := by
@@ -58,7 +57,6 @@ private theorem presentation_exists {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 4096 in
-set_option linter.unusedSectionVars false in
 open CategoryTheory.Functor in
 private theorem restriction_exact {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S) :
     PreservesFiniteLimits (restriction a) ∧ PreservesFiniteColimits (restriction a) := by
@@ -68,7 +66,6 @@ private theorem restriction_exact {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S) 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 4096 in
-set_option linter.unusedSectionVars false in
 open CategoryTheory.Functor in
 private local instance restriction_limits {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S) :
     PreservesFiniteLimits (restriction a) := (restriction_exact a).1
@@ -76,7 +73,6 @@ private local instance restriction_limits {R S : Sheaf J CommRingCat.{r}} (a : R
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 4096 in
-set_option linter.unusedSectionVars false in
 open CategoryTheory.Functor in
 private local instance restriction_colimits {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S) :
     PreservesFiniteColimits (restriction a) := (restriction_exact a).2
@@ -84,7 +80,6 @@ private local instance restriction_colimits {R S : Sheaf J CommRingCat.{r}} (a :
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 4096 in
-set_option linter.unusedSectionVars false in
 open CategoryTheory.Functor in
 private structure AdjData {R S : Sheaf J CommRingCat.{r}} {a : R ⟶ S}
     (p : Presentation a) where
@@ -119,7 +114,6 @@ private structure AdjData {R S : Sheaf J CommRingCat.{r}} {a : R ⟶ S}
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 4096 in
-set_option linter.unusedSectionVars false in
 open CategoryTheory.Functor in
 private theorem adjData_exists {R S : Sheaf J CommRingCat.{r}} {a : R ⟶ S}
     (p : Presentation a) : Nonempty (AdjData p) := by
@@ -150,7 +144,6 @@ private theorem adjData_exists {R S : Sheaf J CommRingCat.{r}} {a : R ⟶ S}
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 4096 in
-set_option linter.unusedSectionVars false in
 open CategoryTheory.Functor in
 private noncomputable def resComp {R S T : Sheaf J CommRingCat.{r}}
     (a : R ⟶ S) (b : S ⟶ T) : restriction b ⋙ restriction a ≅ restriction (a ≫ b) :=
@@ -178,8 +171,8 @@ private noncomputable def resComp {R S T : Sheaf J CommRingCat.{r}}
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 4096 in
-set_option linter.unusedSectionVars false in
 open CategoryTheory.Functor in
+set_option linter.unusedSectionVars false in
 private theorem sectionTensor_smul_one {R S : Sheaf J CommRingCat.{r}} {a : R ⟶ S}
     (p : Presentation a) (M : Modules R) (U : Cᵒᵖ) (s : S.obj.obj U)
     (x : M.val.obj U) : sectionTensor p M U s x = s • sectionTensor p M U 1 x := by
@@ -200,7 +193,6 @@ private theorem sectionTensor_smul_one {R S : Sheaf J CommRingCat.{r}} {a : R �
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 4096 in
-set_option linter.unusedSectionVars false in
 open CategoryTheory.Functor in
 private noncomputable def ordinaryComp
     (p : ∀ {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S), Presentation a)
@@ -212,8 +204,8 @@ private noncomputable def ordinaryComp
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 4096 in
-set_option linter.unusedSectionVars false in
 open CategoryTheory.Functor in
+set_option linter.unusedSectionVars false in
 private theorem ordinaryComp_unit
     (p : ∀ {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S), Presentation a)
     (A : ∀ {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S), (p a).ordinary ⊣ restriction a)
@@ -230,7 +222,6 @@ private theorem ordinaryComp_unit
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 4096 in
-set_option linter.unusedSectionVars false in
 open CategoryTheory.Functor in
 private theorem ordinaryComp_hom
     (p : ∀ {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S), Presentation a)
@@ -273,7 +264,6 @@ private theorem ordinaryComp_hom
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 4096 in
-set_option linter.unusedSectionVars false in
 open CategoryTheory.Functor in
 private theorem ordinaryComp_inv
     (p : ∀ {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S), Presentation a)
@@ -297,7 +287,6 @@ private theorem ordinaryComp_inv
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 4096 in
-set_option linter.unusedSectionVars false in
 open CategoryTheory.Functor in
 private local instance exact_comp_limits {A B E : Type*}
     [Category A] [Category B] [Category E] (F : A ⥤ B) (G : B ⥤ E)
@@ -307,7 +296,6 @@ private local instance exact_comp_limits {A B E : Type*}
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 4096 in
-set_option linter.unusedSectionVars false in
 open CategoryTheory.Functor in
 private local instance exact_comp_colimits {A B E : Type*}
     [Category A] [Category B] [Category E] (F : A ⥤ B) (G : B ⥤ E)
@@ -317,7 +305,6 @@ private local instance exact_comp_colimits {A B E : Type*}
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 4096 in
-set_option linter.unusedSectionVars false in
 open CategoryTheory.Functor in
 private noncomputable def rightComp {R S T : Sheaf J CommRingCat.{r}}
     (a : R ⟶ S) (b : S ⟶ T) :
@@ -329,7 +316,6 @@ private noncomputable def rightComp {R S T : Sheaf J CommRingCat.{r}}
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 4096 in
-set_option linter.unusedSectionVars false in
 open CategoryTheory.Functor in
 private theorem exactComp_assoc
     {A₀ A₁ A₂ A₃ : Type*}
@@ -395,7 +381,6 @@ private theorem exactComp_assoc
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 4096 in
-set_option linter.unusedSectionVars false in
 open CategoryTheory.Functor in
 private theorem rightComp_assoc {R S T V : Sheaf J CommRingCat.{r}}
     (a : R ⟶ S) (b : S ⟶ T) (c : T ⟶ V) :
@@ -412,7 +397,6 @@ private theorem rightComp_assoc {R S T V : Sheaf J CommRingCat.{r}}
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 4096 in
-set_option linter.unusedSectionVars false in
 open CategoryTheory.Functor in
 private theorem rightComp_normalization {R S T : Sheaf J CommRingCat.{r}}
     (a : R ⟶ S) (b : S ⟶ T) (H : HomotopyCategory (Modules T) (ComplexShape.up ℤ)) :
@@ -435,7 +419,6 @@ private theorem rightComp_normalization {R S T : Sheaf J CommRingCat.{r}}
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 4096 in
-set_option linter.unusedSectionVars false in
 open CategoryTheory.Functor in
 private theorem rightComp_inverse_normalization {R S T : Sheaf J CommRingCat.{r}}
     (a : R ⟶ S) (b : S ⟶ T) (H : HomotopyCategory (Modules T) (ComplexShape.up ℤ)) :
@@ -458,7 +441,6 @@ private theorem rightComp_inverse_normalization {R S T : Sheaf J CommRingCat.{r}
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 4096 in
-set_option linter.unusedSectionVars false in
 open CategoryTheory.Functor in
 private noncomputable def identityInverse (R : Sheaf J CommRingCat.{r}) :
     AlgebraicInverseImage (𝟭 (Sheaf J (Type r))) R R where
@@ -476,7 +458,6 @@ private noncomputable def identityInverse (R : Sheaf J CommRingCat.{r}) :
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 4096 in
-set_option linter.unusedSectionVars false in
 open CategoryTheory.Functor in
 private theorem intermediate_computed {R S T : Sheaf J CommRingCat.{r}}
     (a : R ⟶ S) (b : S ⟶ T) (p : Presentation a) (q : Presentation b)
@@ -492,7 +473,6 @@ private theorem intermediate_computed {R S T : Sheaf J CommRingCat.{r}}
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 4096 in
-set_option linter.unusedSectionVars false in
 open CategoryTheory.Functor in
 private theorem ordinaryComp_homotopy_unit
     (p : ∀ {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S), Presentation a)
@@ -527,7 +507,6 @@ private theorem ordinaryComp_homotopy_unit
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 4096 in
-set_option linter.unusedSectionVars false in
 open CategoryTheory.Functor in
 private noncomputable def derivedComp
     (p : ∀ {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S), Presentation a)
@@ -540,7 +519,6 @@ private noncomputable def derivedComp
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 4096 in
-set_option linter.unusedSectionVars false in
 open CategoryTheory.Functor in
 private theorem derivedComp_eq
     (p : ∀ {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S), Presentation a)
@@ -566,7 +544,6 @@ private theorem derivedComp_eq
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 4096 in
-set_option linter.unusedSectionVars false in
 open CategoryTheory.Functor in
 private theorem derivedComp_unit
     (p : ∀ {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S), Presentation a)
@@ -587,7 +564,6 @@ private theorem derivedComp_unit
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 4096 in
-set_option linter.unusedSectionVars false in
 open CategoryTheory.Functor in
 private theorem derivedComp_assoc
     (p : ∀ {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S), Presentation a)
@@ -614,7 +590,6 @@ private theorem derivedComp_assoc
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 4096 in
-set_option linter.unusedSectionVars false in
 open CategoryTheory.Functor in
 private theorem derivedComp_assoc_strict
     (p : ∀ {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S), Presentation a)
@@ -630,7 +605,6 @@ private theorem derivedComp_assoc_strict
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 4096 in
-set_option linter.unusedSectionVars false in
 open CategoryTheory.Functor in
 private theorem derivedComp_transport_left
     (p : ∀ {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S), Presentation a)
@@ -647,7 +621,6 @@ private theorem derivedComp_transport_left
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 4096 in
-set_option linter.unusedSectionVars false in
 open CategoryTheory.Functor in
 private theorem derivedComp_transport_right
     (p : ∀ {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S), Presentation a)
@@ -664,7 +637,6 @@ private theorem derivedComp_transport_right
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 4096 in
-set_option linter.unusedSectionVars false in
 open CategoryTheory.Functor in
 private theorem derivedComp_coefficient_naturality
     (p : ∀ {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S), Presentation a)
@@ -707,7 +679,6 @@ private theorem derivedComp_coefficient_naturality
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 4096 in
-set_option linter.unusedSectionVars false in
 open CategoryTheory.Functor in
 private theorem derivedComp_representative
     (p : ∀ {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S), Presentation a)
@@ -760,7 +731,6 @@ private theorem derivedComp_representative
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 4096 in
-set_option linter.unusedSectionVars false in
 /-- Successive derived scalar extensions have their canonical tensor comparison, inverse,
 unit normalization, coefficient naturality and coherent finite iteration. This is a
 family statement, so naturality concerns arbitrary derived morphisms as well as changing

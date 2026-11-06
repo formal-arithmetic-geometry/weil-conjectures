@@ -33,7 +33,6 @@ local notation "Mod" => SheafOfModules.{max u v}
   ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)
 
 set_option synthInstance.maxSize 256 in
-set_option linter.style.haveILetI false in
 /-- Restriction to every summand determines a morphism into the internal Hom
 from a total tensor term. Source: Stacks Project, Modules on Sites, Section 03EK
 and Lemma 03EO (blueprint: lem-sc-hom-tensor-summand-restriction-ext).
@@ -58,7 +57,7 @@ theorem homTensorSummandRestriction_ext
         g ≫ SheafOfModules.homObjMap (R := R)
           (CochainComplex.ιMapBifunctor K L (curriedTensor Mod) p q t h) (𝟙 N)) →
       f = g := by
-  letI := SheafOfModules.monoidalCategory R
+  let := SheafOfModules.monoidalCategory R
   dsimp
   intro f g h
   let T := CochainComplex.mapBifunctor K L (curriedTensor Mod)

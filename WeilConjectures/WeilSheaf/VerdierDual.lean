@@ -10,12 +10,14 @@ public import WeilConjectures.WeilSheaf.DerivedHom
 public import WeilConjectures.WeilSheaf.DerivedHomTriangulated
 public import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 public import WeilConjectures.WeilSheaf.TateTwist
+public import WeilConjectures.WeilSheaf.UpperShriek
 import WeilConjectures.WeilSheaf.Bidual
 import WeilConjectures.WeilSheaf.DerivedHomSingleResolution
 import WeilConjectures.WeilSheaf.SmoothPurity
-import WeilConjectures.WeilSheaf.VerdierExchange
+import WeilConjectures.CategoryTheory.Adjunction.DualityConjugate
+import WeilConjectures.WeilSheaf.SmoothPurityAbsolute
+import WeilConjectures.WeilSheaf.VerdierExchangeNatural
 import WeilConjectures.WeilSheaf.VerdierBiduality
-import WeilConjectures.WeilSheaf.VerdierDualUpperShriek
 
 /-!
 # The exceptional inverse image and the Verdier dual of Weil complexes
@@ -24,11 +26,11 @@ For a separated morphism of finite type `f : X ⟶ Y` of separated `k₀`-scheme
 the direct image with compact support `Rf₀!` of Weil complexes
 (`AlgebraicGeometry.WeilComplex.derivedLowerShriek`) has a right adjoint `Rf^!` on Weil
 complexes; this is the constructible adjunction `Rf_! ⊣ Rf^!` of the six-functor chapter
-(`det-pd-biduality-coefficients`), stated here as
+(`det-pd-biduality-coefficients`), stated in `WeilConjectures.WeilSheaf.UpperShriek` as
 `AlgebraicGeometry.WeilComplex.isLeftAdjoint_derivedLowerShriek`. The exceptional inverse image
 `AlgebraicGeometry.WeilComplex.upperShriek f` is *defined* as that right adjoint, which is how
 the blueprint characterizes it (`def-weil-exceptional-inverse-image`); so that no data is chosen
-from the unproved existence statement, it takes the existence of the right adjoint
+from the existence statement, it takes the existence of the right adjoint
 (`AlgebraicGeometry.WeilComplex.HasUpperShriek f`) as a hypothesis. It gives the dualizing
 complex `ω_X = Ra_X^! ℚ̄_ℓ` (`AlgebraicGeometry.WeilComplex.dualizingComplex`) and the Verdier
 dual `𝔻_X = RHom(-, ω_X)` (`AlgebraicGeometry.WeilComplex.verdierDual`), the derived internal
@@ -38,8 +40,8 @@ The statements of the duality theory for Weil complexes that the boundary dualit
 `sec-deligne-laumon-a1` uses belong to the chapters on the six functors and on smooth purity;
 they are stated here with `sorry`, each with the blueprint node it renders:
 
-- `det-pd-biduality-coefficients`: the adjunction `Rf₀! ⊣ Rf^!`, the fact that `𝔻_X` preserves Weil
-  complexes, its exactness, biduality `K ≅ 𝔻_X 𝔻_X K` and `Rf^! ≅ 𝔻_X f^* 𝔻_Y`;
+- `det-pd-biduality-coefficients`: the fact that `𝔻_X` preserves Weil complexes, its exactness,
+  biduality `K ≅ 𝔻_X 𝔻_X K` and `Rf^! ≅ 𝔻_X f^* 𝔻_Y`;
 - `fix-cor-verdier-exchange`: `𝔻_Y Rf₀! ≅ Rf_* 𝔻_X`;
 - `cor-pur-adic-and-rational-smooth-dualizing-complexes`: `ω_X ≅ ℚ̄_ℓ(d)[2d]` for `X` smooth of
   pure dimension `d`;
@@ -63,93 +65,6 @@ namespace AlgebraicGeometry
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
 namespace WeilComplex
-
-section Proper
-
-variable {Z Y : Scheme.{u}} [Z.Over (Spec (CommRingCat.of k₀))]
-  [Y.Over (Spec (CommRingCat.of k₀))] (g : Z ⟶ Y) [g.IsOver (Spec (CommRingCat.of k₀))]
-  [IsProper g] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
-  [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
-
-/-- **The proper exceptional adjunction** (blueprint: `det-pd-biduality-coefficients`, "the
-constructible adjunction `Rf_! ⊣ Rf^!`", for a proper `f`, where `Rf_! = Rf_*`): for a proper
-morphism `g : Z ⟶ Y` of `k₀`-schemes, `Y` of finite type, the direct image `Rg_*` of Weil complexes
-has a right adjoint `Rg^!`. The general case
-`AlgebraicGeometry.WeilComplex.isLeftAdjoint_derivedLowerShriek` reduces to this one through a
-compactification.
-
-For `Y` separated over `k₀` this is
-`AlgebraicGeometry.WeilComplex.isLeftAdjoint_derivedLowerStar_of_isProper'`; the condensed model of
-`Dᵇc(-, ℚ̄_ℓ)` through which it is proved is only set up for separated schemes. -/
-theorem isLeftAdjoint_derivedLowerStar_of_isProper :
-    (derivedLowerStar (k₀ := k₀) (l := l) g).IsLeftAdjoint :=
-  sorry
-
-end Proper
-
-section UpperShriek
-
-variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
-  [Y.Over (Spec (CommRingCat.of k₀))] (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))]
-  [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
-  [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
-  [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
-  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-  [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
-
-variable (k₀ l) in
-/-- The direct image with compact support `Rf₀!` of Weil complexes along `f` has a right adjoint,
-the exceptional inverse image `Rf^!` (`AlgebraicGeometry.WeilComplex.upperShriek`). That it
-always has one is `AlgebraicGeometry.WeilComplex.isLeftAdjoint_derivedLowerShriek`. -/
-abbrev HasUpperShriek : Prop :=
-  (derivedLowerShriek k₀ l f).IsLeftAdjoint
-
-omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-  [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] in
-/-- **The constructible exceptional adjunction** (blueprint: `det-pd-biduality-coefficients`, "the
-constructible adjunction `Rf_! ⊣ Rf^!`"; the exceptional inverse image itself is defined at the
-finite stage as `AlgebraicGeometry.ProEtale.rightDerivedUpperShriek`): for a
-separated morphism of finite type `f : X ⟶ Y` of `k₀`-schemes of finite type, the direct image
-with compact support `Rf₀!` of Weil complexes has a right adjoint. -/
-theorem isLeftAdjoint_derivedLowerShriek : HasUpperShriek k₀ l f := by
-  let c := HasCompactification.compactification f (hf := hasCompactification_of_over (k₀ := k₀) f)
-  let := Compactification.over (k₀ := k₀) c
-  have : IsLocallyNoetherian Y :=
-    LocallyOfFiniteType.isLocallyNoetherian (Y ↘ Spec (CommRingCat.of k₀))
-  have : CompactSpace Y :=
-    QuasiCompact.compactSpace_of_compactSpace (Y ↘ Spec (CommRingCat.of k₀))
-  have : IsProper c.g := c.isProper
-  have : IsOpenImmersion c.i := c.isOpenImmersion
-  have : IsLocallyNoetherian c.Z := LocallyOfFiniteType.isLocallyNoetherian c.g
-  have : CompactSpace c.Z := QuasiCompact.compactSpace_of_compactSpace c.g
-  have : IsNoetherian c.Z := ⟨⟩
-  have : TopologicalSpace.NoetherianSpace X := c.i.isOpenEmbedding.isInducing.noetherianSpace
-  have : QuasiCompact c.i := inferInstance
-  have e : derivedLowerShriek k₀ l f ≅ extensionByZero c.i ⋙ derivedLowerStar c.g :=
-    NatIso.ofComponents (fun K ↦ ObjectProperty.isoMk _ ((derivedLowerShriekCompιIso k₀ l c).app K))
-      (fun φ ↦ by
-        apply (WeilComplex.objectProperty k₀ l Y).ι.map_injective
-        exact (derivedLowerShriekCompιIso k₀ l c).hom.naturality φ)
-  have := isLeftAdjoint_derivedLowerStar_of_isProper (k₀ := k₀) (l := l) c.g
-  have : (extensionByZero (k₀ := k₀) (l := l) c.i).IsLeftAdjoint :=
-    (extensionByZeroUpperStarAdjunction c.i).isLeftAdjoint
-  exact Functor.isLeftAdjoint_of_iso e.symm
-
-variable [HasUpperShriek k₀ l f]
-
-/-- The exceptional inverse image `Rf^!` of Weil complexes along a separated morphism of finite
-type `f : X ⟶ Y` of `k₀`-schemes of finite type: the right adjoint of the direct image with
-compact support `Rf₀!` (blueprint: `def-weil-exceptional-inverse-image`, which characterizes
-`Rf^!` by the adjunction `Hom(Rf_! K, L) ≅ Hom(K, Rf^! L)` on constructible complexes). -/
-noncomputable def upperShriek : WeilComplex k₀ l Y ⥤ WeilComplex k₀ l X :=
-  (derivedLowerShriek k₀ l f).rightAdjoint
-
-/-- The adjunction `Rf₀! ⊣ Rf^!`. -/
-noncomputable def derivedLowerShriekUpperShriekAdjunction :
-    derivedLowerShriek k₀ l f ⊣ upperShriek (k₀ := k₀) (l := l) f :=
-  Adjunction.ofIsLeftAdjoint _
-
-end UpperShriek
 
 section VerdierDual
 
@@ -246,9 +161,9 @@ finite type `f : X ⟶ Y`, `𝔻_Y (Rf₀! M) ≅ Rf_* (𝔻_X M)`. -/
 theorem nonempty_verdierDual_derivedLowerShriek_iso (M : WeilComplex k₀ l X) :
     Nonempty ((verdierDual k₀ l Y).obj (op ((derivedLowerShriek k₀ l f).obj M)) ≅
       (derivedLowerStar f).obj ((verdierDual k₀ l X).obj (op M))) :=
-  nonempty_iso_derivedLowerStar_of_adjunction f _ _ (comp_over f _)
-    (derivedLowerShriekUpperShriekAdjunction _) (derivedLowerShriekUpperShriekAdjunction _) _ M _ _
-    (Iso.refl _) (Iso.refl _)
+  ⟨(nonempty_verdierDual_derivedLowerShriek_natIso f
+    (objectProperty_derivedHom_dualizingComplex k₀ l)
+    (objectProperty_derivedHom_dualizingComplex k₀ l)).some.app (op M)⟩
 
 end Exchange
 
@@ -268,7 +183,8 @@ theorem nonempty_dualizingComplex_iso (d : ℕ)
     Nonempty (dualizingComplex k₀ l X ≅
       ((tateTwist k₀ l X d).obj
         (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)))⟦(2 * d : ℤ)⟧) :=
-  nonempty_rightAdjoint_obj_adicConstant_iso_of_smooth d (derivedLowerShriekUpperShriekAdjunction _)
+  purity_nonempty_shriekRightAdjoint_adicConstant_iso d
+    (derivedLowerShriekUpperShriekAdjunction _)
 
 end Smooth
 

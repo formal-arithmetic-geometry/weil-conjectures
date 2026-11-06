@@ -41,10 +41,6 @@ specifies evaluation, rather than only asserting the existence of abstract group
 @[expose] public section
 
 set_option autoImplicit false
-set_option linter.unusedTactic false
-set_option linter.unusedVariables false
-set_option linter.unusedSimpArgs false
-set_option linter.unusedSectionVars false
 set_option synthInstance.maxSize 2048
 universe u v w
 

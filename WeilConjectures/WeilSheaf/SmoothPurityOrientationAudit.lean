@@ -1,0 +1,42 @@
+/-
+Copyright (c) 2026 The Weil Conjectures contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+-/
+module
+
+import WeilConjectures.WeilSheaf.SmoothPurity
+import WeilConjectures.WeilSheaf.SmoothPurityEquivariantIsoLift
+import WeilConjectures.WeilSheaf.SmoothPurityCanonicalLift
+import WeilConjectures.WeilSheaf.SmoothPurityCanonicalUnique
+import WeilConjectures.WeilSheaf.SmoothPurityTraceNormalization
+import WeilConjectures.WeilSheaf.SmoothPurityFiniteEquivariance
+import WeilConjectures.WeilSheaf.SmoothPurityGeometricEquivariantLift
+import WeilConjectures.WeilSheaf.SmoothPurityIntegralTatePullback
+import WeilConjectures.WeilSheaf.UpperShriekWeilDatum
+import WeilConjectures.WeilSheaf.SmoothPurityEtaleEquivariantLift
+import WeilConjectures.WeilSheaf.SmoothPurityTateTowerProjection
+
+import WeilConjectures.WeilSheaf.UpperShriekWeilDatumAssembly
+
+/-! # Dependency audit of the orientation reconstruction helpers
+
+The assigned Weil leaf is not asserted to be closed by this audit.
+-/
+
+open AlgebraicGeometry.ProEtale.CondensedRing AlgebraicGeometry.Etale
+
+#print axioms eq_of_isIntegralSmoothOrientation
+#print axioms exists_isIntegralSmoothOrientation_of_compatible
+#print axioms isIntegralSmoothOrientation_iff_trace
+#print axioms exists_equivariant_iso_of_finite_reductions
+#print axioms isWeilMorphism_dualizingComplexTwistShiftIso_inv
+#print axioms exists_geometric_equivariant_integralOrientation_iso
+#print axioms AlgebraicGeometry.ProEtale.isWeilEquivariant_derivedReductionStep
+#print axioms AlgebraicGeometry.ProEtale.upperStarShiftIntegralTateTwistDerivedIso
+#print axioms AlgebraicGeometry.WeilComplex.exists_forget_upperShriek_obj_iso_isWeilEquivariant
+#print axioms exists_equivariant_integralOrientation_iso_of_etale_reductions
+#print axioms purityFiniteEtaleReadingUpperStarIso
+#print axioms AlgebraicGeometry.ProEtale.upperStarExtendScalarsLimitFreeTowerIso_hom_comp_map_π
+
+set_option linter.style.longLine false in
+#print axioms AlgebraicGeometry.WeilComplex.exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso_of_trace

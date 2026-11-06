@@ -485,18 +485,65 @@ private theorem linePullback_eq (A : Type (u + 1)) [CommRing A]
     (Etale.ordinaryFiniteTwistTransport_unique A N hA t (normalizedTransport A N hN hA))
   simpa only [normalizedTransport, Etale.p1DecompositionSheafPullback] using ht
 
-private theorem shiftedComparison_congr {C D C₀ D₀ : Type*}
+/-- `shiftedSinglePullbackIsoWith` is `p1DecompositionShiftedComparison` for the derived inverse
+image. -/
+private theorem shiftedSinglePullbackIsoWith_eq {B : Type*} [Category.{u + 1} B] [Abelian B]
+    [IsGrothendieckAbelian.{u + 1} B] [MonoidalCategory B] [MonoidalPreadditive B]
+    [SymmetricCategory B] [MonoidalClosed B] [Abelian.HasFunctorialFlatResolution B]
+    {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (sY : Sheaf Y.smallEtaleTopology B ⥤ DerivedCategory (Sheaf Y.smallEtaleTopology B))
+    (sX : Sheaf X.smallEtaleTopology B ⥤ DerivedCategory (Sheaf X.smallEtaleTopology B))
+    (c : sY ⋙ (Etale.upperStar B f).leftDerivedFunctor ≅ Etale.upperStar B f ⋙ sX)
+    (J : Sheaf Y.smallEtaleTopology B) (J' : Sheaf X.smallEtaleTopology B)
+    (e : (Etale.upperStar B f).obj J ≅ J') (n : ℤ) :
+    Etale.shiftedSinglePullbackIsoWith B f sY sX c J J' e n =
+      letI := Etale.commShiftLeftDerivedUpperStar B f
+      Etale.p1DecompositionShiftedComparison (Etale.upperStar B f).leftDerivedFunctor sY sX
+        (Etale.upperStar B f) c J J' e n := by
+  unfold Etale.p1DecompositionShiftedComparison Etale.shiftedSinglePullbackIsoWith
+  rfl
+
+/-- Congruence for a whiskered composite of isomorphisms. -/
+private theorem whiskerLeft_trans_heq {C D E : Type*} [Category C] [Category D] [Category E]
+    (s s' : C ⥤ D) (hs : s = s') (G H G' H' : D ⥤ E) (hG : G = G') (hH : H = H')
+    (α : G ≅ H) (α' : G' ≅ H') (hα : HEq α α')
+    (K K' : C ⥤ E) (hK : K = K') (β : s ⋙ H ≅ K) (β' : s' ⋙ H' ≅ K') (hβ : HEq β β') :
+    HEq (Functor.isoWhiskerLeft s α ≪≫ β) (Functor.isoWhiskerLeft s' α' ≪≫ β') := by
+  subst hs hG hH hK
+  cases hα
+  cases hβ
+  rfl
+
+/-- Congruence for `p1DecompositionShiftedComparison`, with every argument replaced. -/
+private theorem shiftedComparison_heq {C D C₀ D₀ : Type*}
     [Category C] [Category D] [Category C₀] [Category D₀]
     [HasShift C ℤ] [HasShift D ℤ]
-    (F : C ⥤ D) [F.CommShift ℤ] (single : C₀ ⥤ C) (single' : D₀ ⥤ D)
-    (pull : C₀ ⥤ D₀) (comp : single ⋙ F ≅ pull ⋙ single')
-    (L : C₀) (M : D₀) (e e' : pull.obj L ≅ M) (he : e = e') (b : ℤ) :
-    (F.commShiftIso b).app (single.obj L) ≪≫
-        (shiftFunctor _ b).mapIso (comp.app L ≪≫ single'.mapIso e) =
-      Etale.p1DecompositionShiftedComparison F single single' pull comp L M e' b := by
-  subst e'
-  unfold Etale.p1DecompositionShiftedComparison
+    (F F' : C ⥤ D) (hF : F = F') [iF : F.CommShift ℤ] [iF' : F'.CommShift ℤ] (hi : HEq iF iF')
+    (s s' : C₀ ⥤ C) (hs : s = s') (t t' : D₀ ⥤ D) (ht : t = t') (pull : C₀ ⥤ D₀)
+    (c : s ⋙ F ≅ pull ⋙ t) (c' : s' ⋙ F' ≅ pull ⋙ t') (hc : HEq c c')
+    (L L' : C₀) (hL : L = L') (M M' : D₀) (hM : M = M')
+    (e : pull.obj L ≅ M) (e' : pull.obj L' ≅ M') (he : HEq e e') (b : ℤ) :
+    HEq (Etale.p1DecompositionShiftedComparison F s t pull c L M e b)
+      (Etale.p1DecompositionShiftedComparison F' s' t' pull c' L' M' e' b) := by
+  subst hF hs ht hL hM
+  cases hi
+  cases hc
+  cases he
   rfl
+
+/-- The two single-degree comparisons for the etale inverse image agree. The degree-zero
+embeddings are matched through `ordinaryFiniteSingleFunctor_eq`, never by unfolding them
+against each other, which the kernel does only at great cost. -/
+private theorem singlePullbackIso_heq (A : Type (u + 1)) [CommRing A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    HEq (Etale.ordinaryFiniteSinglePullbackIso A f)
+      (Etale.singleFunctorCompLeftDerivedUpperStarIso (ModuleCat.{u + 1} A) f) := by
+  unfold Etale.ordinaryFiniteSinglePullbackIso Etale.singleFunctorCompLeftDerivedUpperStarIso
+    Functor.singleFunctorCompLeftDerivedFunctorIso
+  exact whiskerLeft_trans_heq _ _ (Etale.ordinaryFiniteSingleFunctor_eq A Y) _ _ _ _ rfl rfl
+    _ _ HEq.rfl _ _ (congrArg (fun F ↦ Etale.upperStar (ModuleCat.{u + 1} A) f ⋙ F)
+      ((Etale.ordinaryFiniteSingleFunctor_eq A X).trans rfl)) _ _
+    ((heq_of_eq (Etale.ordinaryFiniteSingleExactPullbackIso_eq A f)).trans HEq.rfl)
 
 private theorem shiftedLinePullback_eq (A : Type (u + 1)) [CommRing A]
     (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
@@ -506,14 +553,13 @@ private theorem shiftedLinePullback_eq (A : Type (u + 1)) [CommRing A]
       Etale.p1DecompositionTwistPullback A N hN hA f hY 1 2 := by
   have hl := linePullback_eq A N hN hA t f hY
   unfold Etale.ordinaryFiniteShiftedLinePullback Etale.p1DecompositionTwistPullback
-  let : (Etale.ordinaryFinitePullback A f).CommShift ℤ :=
-    Etale.commShiftLeftDerivedUpperStar (ModuleCat.{u + 1} A) f
-  exact shiftedComparison_congr (Etale.ordinaryFinitePullback A f)
-    (DerivedCategory.singleFunctor _ 0) (DerivedCategory.singleFunctor _ 0)
-    (Etale.upperStar (ModuleCat.{u + 1} A) f)
-    (Etale.singleFunctorCompLeftDerivedUpperStarIso (ModuleCat.{u + 1} A) f)
-    (Scheme.finiteEtaleTateLine Y N A hA) (Scheme.finiteEtaleTateLine X N A hA)
-    (t.line f hY) (Etale.p1DecompositionSheafPullback A N hN hA f hY 1) hl 2
+  rw [shiftedSinglePullbackIsoWith_eq, hl]
+  exact eq_of_heq (shiftedComparison_heq _ _ rfl
+    (iF := Etale.commShiftLeftDerivedUpperStar (ModuleCat.{u + 1} A) f)
+    (iF' := Etale.commShiftLeftDerivedUpperStar (ModuleCat.{u + 1} A) f) HEq.rfl _ _
+    ((Etale.ordinaryFiniteSingleFunctor_eq A Y).trans rfl) _ _
+    ((Etale.ordinaryFiniteSingleFunctor_eq A X).trans rfl) _ _ _ (singlePullbackIso_heq A f)
+    _ _ rfl _ _ rfl _ _ HEq.rfl 2)
 
 private theorem chern_unique (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)

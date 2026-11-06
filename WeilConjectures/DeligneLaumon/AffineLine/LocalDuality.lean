@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.WeilSheaf.SmoothPuritySeparatedAdjunction
+
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.DeligneLaumon.AffineLine.Defs
 public import WeilConjectures.WeilSheaf.OpenClosedTriangle
@@ -229,9 +231,9 @@ theorem exists_linearEquiv_dual_stalk_higherDirectImage
   have : LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀)) := inferInstance
   have : QuasiCompact (Z ↘ Spec (CommRingCat.of k₀)) := inferInstance
   -- the exceptional inverse images along the structure morphisms of `U` and `Z`
-  have := WeilComplex.isLeftAdjoint_derivedLowerShriek (k₀ := k₀) (l := l)
+  have := WeilComplex.isLeftAdjoint_derivedLowerShriek_of_separated_base (k₀ := k₀) (l := l)
     (U ↘ Spec (CommRingCat.of k₀))
-  have := WeilComplex.isLeftAdjoint_derivedLowerShriek (k₀ := k₀) (l := l)
+  have := WeilComplex.isLeftAdjoint_derivedLowerShriek_of_separated_base (k₀ := k₀) (l := l)
     (Z ↘ Spec (CommRingCat.of k₀))
   have hc : IsCompl (Set.range j.base) (Set.range i.base) := by
     rw [hij]

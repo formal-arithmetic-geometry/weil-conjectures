@@ -92,8 +92,6 @@ private theorem openExtension_exact (X : AlgebraicGeometry.RingedSpace.{u})
       (Opens.grothendieckTopology X).toPrecoverage O U).2.2
   exact h X.sheaf
 
-set_option maxHeartbeats 1600000 in
--- Comparing the three localized adjunction presentations needs extra elaboration heartbeats.
 /-- The geometric Mayer–Vietoris triangle with its arrows defined as adjunction mates.
 No Hom identifications or shifted Hom groups are part of this statement.
 

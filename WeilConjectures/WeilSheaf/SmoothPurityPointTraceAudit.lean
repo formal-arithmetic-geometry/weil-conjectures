@@ -1,0 +1,14 @@
+module
+
+public import WeilConjectures.WeilSheaf.SmoothPurityDescendedPointUnit
+public import WeilConjectures.WeilSheaf.SmoothPurityPointOpenComparison
+public import WeilConjectures.WeilSheaf.SmoothPurityAbsoluteDescent
+
+set_option linter.style.longLine false in
+#print axioms AlgebraicGeometry.ProEtale.CondensedRing.isIso_smoothUnitBaseChange_geometricFiberLowerShriekBaseChangePoint
+set_option linter.style.longLine false in
+#print axioms AlgebraicGeometry.ProEtale.CondensedRing.isIso_smoothUnitBaseChange_descendedShriekGeometricExchange_point
+set_option linter.style.longLine false in
+#print axioms AlgebraicGeometry.ProEtale.CondensedRing.geometricFiberWeilSmoothTrace_weilUniversal_point
+set_option linter.style.longLine false in
+#print axioms AlgebraicGeometry.WeilComplex.nonempty_shriekRightAdjoint_adicConstant_iso_of_tate_encoding

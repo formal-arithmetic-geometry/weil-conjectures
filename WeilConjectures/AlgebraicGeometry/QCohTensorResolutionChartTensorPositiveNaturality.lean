@@ -37,7 +37,6 @@ local instance trChartTensorNaturalObjZero (X : Scheme.{u}) (M : X.Modules) :
     ((curriedTensor X.Modules).obj M).PreservesZeroMorphisms :=
   SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X.sheaf M
 
-set_option maxHeartbeats 800000 in
 -- Tensor-resolution comparisons require substantial definitional reduction.
 /-- Naturality of the chart tensor inclusion after transport to nonzero degrees. -/
 theorem tensorResolutionChartTensorIso_naturality_positive_core {Y : Scheme.{u}}

@@ -65,11 +65,8 @@ private lemma cone_sum_identity {A : Type*} [AddCommGroup A] (a b c x y : A) :
     -a + b + c - (x + y) = -(a - -x) + (b + (c - y)) := by
   abel
 
-set_option maxHeartbeats 800000 in
 -- Elaborating the dependent projection formulas unfolds the chosen Hom-complex objects.
-set_option synthInstance.maxHeartbeats 80000 in
 -- Inferring the additive Hom types unfolds the chosen Hom-complex product objects.
--- A higher heartbeat limit is therefore needed.
 set_option backward.isDefEq.respectTransparency true in
 /-- A degreewise cone comparison with the specified product components is a chain map.
 This assertion constructs no degreewise isomorphism.

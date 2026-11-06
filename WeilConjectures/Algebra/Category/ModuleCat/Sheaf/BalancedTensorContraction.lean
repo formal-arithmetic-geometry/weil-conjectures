@@ -113,7 +113,6 @@ private theorem contractionApp_tmul
         ⊗ₜ[R.obj.obj W] n := by
   rfl
 
-set_option maxHeartbeats 400000 in
 -- Tensor restrictions with two coefficient rings need extra definitional equality checks.
 private noncomputable def contractionPresheaf
     (α : R ⟶ B) (M : SheafOfModules.{u} (𝓡 B))
@@ -144,8 +143,10 @@ private noncomputable def contractionPresheaf
         refine (contractionApp_tmul α M N V (M.val.map i m) (B.obj.map i b)
           (N.val.map i n)).trans ?_
         erw [contractionApp_tmul α M N U m b n]
-        erw [PresheafOfModules.Monoidal.tensorObj_map_tmul, M.val.map_smul]
-        rfl
+        erw [PresheafOfModules.Monoidal.tensorObj_map_tmul]
+        exact congrArg (fun x : M.val.obj V ↦
+          (show ((restrictScalars (𝓻 α)).obj M).val.obj V from x)
+            ⊗ₜ[R.obj.obj V] N.val.map i n) (M.val.map_smul i b m).symm
 
 set_option maxHeartbeats 400000 in
 -- The coefficient comparison and tensor sheafification require extra equality checks.

@@ -11,7 +11,6 @@ public import WeilConjectures.Algebra.Homology.AffineTildeTensorSourceComparison
 /-! # Counit-normalized affine derived tensor source -/
 @[expose] public section
 set_option autoImplicit false
-set_option linter.all false
 universe u w wM
 open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct
@@ -46,6 +45,8 @@ local instance sourceComparisonPullbackAdditive {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+set_option linter.unusedSectionVars false in
+set_option linter.overlappingInstances false in
 /-- (blueprint: lem-pc-affine-tilde-tensor-source-comparison) -/
 theorem exists_affineTildeTensorSourceComparison
     (R A B D : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing D]
