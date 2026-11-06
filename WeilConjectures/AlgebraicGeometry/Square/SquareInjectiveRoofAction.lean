@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.Square.SquareResolutionRoofModels
 public import WeilConjectures.AlgebraicGeometry.Derived.DerivedSquareUnitMap
 import WeilConjectures.AlgebraicGeometry.Injective.InjectiveSectionUnitComparison
