@@ -289,6 +289,6 @@ theorem exists_affineTildeDerivedTensorMate
   have hresult := hsource.trans (by simpa only [Category.assoc] using hexchange)
   have : IsIso ((schemeDerivedDirectImage f').map c) := inferInstance
   apply (cancel_mono ((schemeDerivedDirectImage f').map c)).mp
-  simpa only [σ, Category.assoc, hr] using hresult
+  simpa only [σ, cast_eq, Category.assoc, hr] using hresult
 
 end AlgebraicGeometry
