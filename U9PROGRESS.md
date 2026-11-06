@@ -506,3 +506,15 @@
 - No local Lean/Lake, proof placeholders, new declarations, trust bypasses, profiler probes,
   or heartbeat changes. Rule replay and idempotence checks pass; all ucheck invocations ended.
 - This final commit changes progress documentation only; Lean source matches the green build.
+
+
+# BZ1116 in progress
+
+- Branch: u9/BZ1116; start 68f814e0cb89c213db09d1dcdbf30b82f8e149f5.
+- Applied the concrete five-line compositor proposal after the user instructed continuation.
+  Two private helper signatures and their proofs now use the same intended maps under
+  Mathlib's reversed compositor; the public theorem and all hypotheses are unchanged.
+- Baseline ucheck-bump confirmed two root signature errors and two cascading errors.
+- Next: validate the leaf and continue through its three direct importers.
+- Fix patterns and exact errors: /home/ubuntu/u9/bz/FIXES-BZ1116.md.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
