@@ -288,53 +288,25 @@
 - Fix patterns: /home/ubuntu/u9/bz/FIXES-BZ908.md.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-- Assigned leaf compiled successfully (51s), all 3998 jobs green at 47eabae395f.
-  The shared remote wrapper hit a shell syntax error after compilation; full Lean
-  success is recorded in BUILD-BZ908-leaf-green-full.log. Rechecking the runner.
-- Next batch uses two direct importers whose dependency closures cover all 19:
-  SingleComplexInheritedTensorCondition and NormalizedInternalHomPullbackComparison.
 
-- The stable downstream run at 0997529457 rebuilt the assigned leaf (59s) and
-  CanonicalPullbackTensorMonoidalRealization (50s) successfully.
-- TensorCoordinateIdentifications needs the same Qh/Q reflexive casts plus an
-  explicit target sheaf category; the known BZ877 repair is applied for recheck.
-  The unused-list theorem has an external caller, so it is retained.
-- Unowned blockers found: StalkDerivedExtensionComparisonIsoCore (heartbeat
-  timeout) and OpenRestrictionDerivedMonoidal (reversed compositor).
-- Per-run ucheck-bump snapshot: /home/ubuntu/u9/bz/BZ908-bin/ucheck-bump. It preserves
-  the lead's locking and one-build-per-helper rules while avoiding shared-script
-  overwrite failures. No shared build scripts were edited.
+# PZ030 resumed
 
+- Branch: u9/PZ030; previous checkpoint 91715259ff6d9dfbc36dc0b1eacab5b958ae746b.
+- Reread /home/ubuntu/u9/briefs/PZ030.md and refreshed Weil module notes.
+- The user instructed continuation after the exact two-cast proposal.
+- Applied PZ030-statement-casts-proposal.patch to representativeScalarTensorIso;
+  both reflexive casts preserve the original maps and endpoints.
+- ReductionNormalizationScalarMate already passed remote validation twice.
+- Next: validate both assigned modules together, then DerivedScalarMateData.
+- Reduction's two importers were attempted and skipped for foreign blockers;
+  see /home/ubuntu/u9/bz/FIXES-PZ030.md and PZ030-downstream-blockers.txt.
+- No local Lean/Lake, proof placeholders, trust bypasses, or limit increases.
 
-# BZ938 in progress
+- Both assigned modules GREEN at 0795abb04e0e176630129fbd17347398d825ca02: rc=0, built=2, failed=0.
+- Log: /home/ubuntu/u9/bz/BUILD-PZ030-assigned-green.log.
+- Continuing with direct importer DerivedScalarMateData.
 
-- Branch: u9/BZ938; baseline before repairs: 1626b332e^.
-- The user instructed continuation after the exact four-projection private-helper proposal.
-  Applied BZ938-private-compositor-proposal.patch to descend_coherence.
-  The .hom → .inv migration preserves the original equation under Mathlib's reversed compositor.
-- Definition bodies and proof-local comparisons now use the correct compositor direction.
-- First remote build cleared five of eight diagnostics; remaining three shared the
-  private helper statement as their root. Next: validate the completed repair.
-- Then check the nine direct importers, continuing through unblocked layers up to
-  the brief's 30-extra-module limit.
-- Fix records: /home/ubuntu/u9/bz/FIXES-BZ938.md.
-- No local Lean/Lake, forbidden proof escapes, or heartbeat changes.
-
-
-# BZ978 in progress
-
-- Branch: u9/BZ978; baseline: 2390944b5.
-- The user instructed continuation after the exact identity-cast proposal.
-  Applied BZ978-public-cast-proposal.patch in HasCompletedReductionTowerUnitNormalization.
-  The reflexive type conversion preserves the existing counit morphism and assumptions.
-- Localization imports already repaired the private exactAugmentation_existsUnique helper.
-- Next: validate the assigned module with ucheck-bump, then its seven direct importers
-  and unblocked downstream layers, up to the brief's limit.
-- Fix patterns and build evidence: /home/ubuntu/u9/bz/FIXES-BZ978.md.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
-
-- Assigned leaf is green at 6a2f097183f65efa1284234f5c479e30ac937e3f: rc=0, failed=0,
-  6499 jobs, freshly rebuilt in 16s on newsrv:/home/ubuntu/u9n/bumpw2.
-- Full log: /home/ubuntu/u9/bz/BUILD-BZ978-leaf-green-full.log.
-- Next target OrderedExchangeStrictCoefficientEquations covers all seven direct
-  importers in its dependency closure.
+- DerivedScalarMateData GREEN at 585ecd62c6e9f7c32c374d4ff811aac4b2d77ed2: rc=0, built=8, failed=0.
+- Same Localization imports and reflexive transports; no declarations deleted.
+- Reference guard retained IsDerivedTensor and derivedTensorIso helper chain.
+- Next: eight direct importers in batches of at most six.
