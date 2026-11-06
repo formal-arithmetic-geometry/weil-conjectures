@@ -136,11 +136,11 @@ private theorem localizedRestrictionSquare
       Functor.mapDerivedCategoryNatIso_refl
     rw [hz0]
     simp only [NatTrans.id_app, Category.id_comp, Category.assoc, hc]
-    apply (cancel_epi ((Functor.mapDerivedCategoryCompIso (𝟭 A) e).hom.app M)).mp
-    simpa only [Category.assoc, Iso.hom_inv_id_app_assoc, Category.comp_id] using ha.symm
+    apply (cancel_epi ((Functor.mapDerivedCategoryCompIso (𝟭 A) e).inv.app M)).mp
+    simpa only [Category.assoc, Iso.inv_hom_id_app_assoc, Category.comp_id] using ha.symm
   have hi (L : DerivedCategory A) :
       (Functor.mapDerivedCategoryNatIso r.symm ≪≫
-          Functor.mapDerivedCategoryCompIso J R).hom.app L =
+          (Functor.mapDerivedCategoryCompIso J R).symm).hom.app L =
         (Functor.mapDerivedCategoryIdIso A).hom.app L ≫
           (localizedRho J R r).inv.app L := by
     simp only [localizedRho, Functor.mapDerivedCategoryCompNatIso,
@@ -148,7 +148,7 @@ private theorem localizedRestrictionSquare
       Functor.mapDerivedCategoryNatIso_symm, Iso.hom_inv_id_app_assoc]
   have hj (L : DerivedCategory C) :
       (Functor.mapDerivedCategoryNatIso rho.symm ≪≫
-          Functor.mapDerivedCategoryCompIso F Q).hom.app L =
+          (Functor.mapDerivedCategoryCompIso F Q).symm).hom.app L =
         (Functor.mapDerivedCategoryIdIso C).hom.app L ≫
           (localizedRho F Q rho).inv.app L := by
     simp only [localizedRho, Functor.mapDerivedCategoryCompNatIso,
