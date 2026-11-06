@@ -278,9 +278,9 @@ theorem completed_constant_derived_scalar_factorization
         ((adicTowerInverseImage g).obj (adicLisseConstantRing X C)) (Iso.refl _))
   let q := k.symm ≪≫
     Functor.mapDerivedCategoryNatIso (constantModulePullback g C) ≪≫
-      Functor.mapDerivedCategoryCompIso F (pbcRestrict κ.hom)
+      (Functor.mapDerivedCategoryCompIso F (pbcRestrict κ.hom)).symm
   refine ⟨Functor.mapDerivedCategoryNatIso z ≪≫
-    Functor.mapDerivedCategoryCompIso (F ⋙ E) (pbcRestrict b.hom) ≪≫
+    (Functor.mapDerivedCategoryCompIso (F ⋙ E) (pbcRestrict b.hom)).symm ≪≫
     Functor.isoWhiskerRight (Functor.mapDerivedCategoryCompIso F E)
       (pbcDerivedRestrict b.hom) ≪≫
     Functor.associator F.mapDerivedCategory E.mapDerivedCategory

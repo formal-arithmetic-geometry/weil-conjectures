@@ -661,7 +661,7 @@ theorem completedCoefficientCompletionRoosTransport
   let : F.IsTriangulated := by dsimp only [F]; infer_instance
   let : F.Additive := by dsimp only [F]; infer_instance
   let round : H ⋙ F ≅ 𝟭 _ :=
-    (Functor.mapDerivedCategoryCompIso (pbcRestrict c.inv) (pbcRestrict c.hom)).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso (pbcRestrict c.inv) (pbcRestrict c.hom)) ≪≫
       Functor.mapDerivedCategoryNatIso
         (pbcRestrictComp c.hom c.inv (𝟙 _) c.hom_inv_id ≪≫ restrictId _) ≪≫
       Functor.mapDerivedCategoryIdIso _

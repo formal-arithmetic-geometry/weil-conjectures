@@ -145,7 +145,7 @@ theorem constantAdicQuotientRealization_iso_lift
   let e₀ : (constantAdicQuotientModules X d n).mapDerivedCategory.{u + 1, u + 2} ≅
       (Q ⋙ C).mapDerivedCategory.{u + 1, u + 2} ⋙ V.mapDerivedCategory :=
     Functor.mapDerivedCategoryNatIso (Functor.associator Q C V).symm ≪≫
-      Functor.mapDerivedCategoryCompIso (Q ⋙ C) V
+      (Functor.mapDerivedCategoryCompIso (Q ⋙ C) V).symm
   let e₁ : constantAdicQuotientRealization j d n ≅
       ((Q ⋙ C).mapDerivedCategory.{u + 1, u + 2} ⋙ P.mapDerivedCategory) ⋙ U.mapDerivedCategory :=
     Functor.isoWhiskerRight e₀ (adicTowerPullback j ((pbcAdicRings X d).obj (op n))) ≪≫
@@ -164,8 +164,8 @@ theorem constantAdicQuotientRealization_iso_lift
   let e₂ : C.mapDerivedCategory.{u + 1, u + 2} ⋙ P.mapDerivedCategory ⋙
       S.mapDerivedCategory.{u + 2, u + 2} ≅
       K.mapDerivedCategory.{u + 1, u + 2} :=
-    Functor.isoWhiskerLeft _ (Functor.mapDerivedCategoryCompIso P S).symm ≪≫
-      (Functor.mapDerivedCategoryCompIso C (P ⋙ S)).symm ≪≫
+    Functor.isoWhiskerLeft _ (Functor.mapDerivedCategoryCompIso P S) ≪≫
+      (Functor.mapDerivedCategoryCompIso C (P ⋙ S)) ≪≫
       Functor.mapDerivedCategoryNatIso (pulledConstantIso j B)
   let e₃ : K.mapDerivedCategory.{u + 1, u + 2} ⋙ T.mapDerivedCategory.{u + 2, u + 1} ≅
       𝟭 (DerivedCategory.{u + 1} (ModuleCat.{u + 1} B)) :=
