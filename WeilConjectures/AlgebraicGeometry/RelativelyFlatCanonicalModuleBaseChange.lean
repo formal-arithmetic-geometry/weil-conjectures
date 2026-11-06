@@ -13,6 +13,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import WeilConjectures.AlgebraicGeometry.DerivedModulePullbackComparison
 import WeilConjectures.AlgebraicGeometry.AffineRelativelyFlatCanonicalModuleBaseChange
 import WeilConjectures.AlgebraicGeometry.CanonicalModuleBaseChangeAffineLocality
+import WeilConjectures.AlgebraicGeometry.DerivedModulePullbackComparison
 import WeilConjectures.Topology.SheafIsomorphismLocalOpenCover
 
 /-! # Canonical relatively flat module base change
