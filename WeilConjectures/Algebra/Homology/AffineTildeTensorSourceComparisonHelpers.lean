@@ -7,6 +7,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.Algebra.Homology.AffinePushforwardComparisonCoordinates
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModel
 
 
@@ -50,7 +52,10 @@ local instance (priority := 2000) helperSourceCoordinatesAbelian (Y : Scheme.{u}
 
 
 local instance helperSourceComparisonTildeAdditive (C : Type u) [CommRing C] :
-    (affinePushforwardTilde C).Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+    (affinePushforwardTilde C).Additive := by
+  constructor
+  intro M N f g
+  exact tilde.map_add (R := .of C) f g
 local instance helperSourceComparisonTildeHomology (C : Type u) [CommRing C] :
     (affinePushforwardTilde C).PreservesHomology := tilde_preservesHomology C
 local instance helperSourceComparisonTildeLimits (C : Type u) [CommRing C] :
