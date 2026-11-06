@@ -44,8 +44,6 @@ attribute [local semireducible] QuotientChange.L
 attribute [local implicit_reducible] QuotientChange.L
   InternalAbelianSheafModule.sectionRingSheaf
   DerivedCategory.Q DerivedCategory.Qh
-  HomologicalComplexUpToQuasiIso.Qh HomotopyCategory.quotient
-  CategoryTheory.Functor.mapHomologicalComplex CategoryTheory.Functor.mapHomotopyCategory
   CategoryTheory.catToReflQuiver
   GrothendieckTopology.monoidalCategory_sheaf_of_essentiallySmall
   GrothendieckTopology.braidedCategory_sheaf_of_essentiallySmall
