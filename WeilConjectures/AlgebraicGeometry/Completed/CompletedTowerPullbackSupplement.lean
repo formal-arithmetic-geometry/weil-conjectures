@@ -16,6 +16,7 @@ import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.FourCornersSupplem
 import WeilConjectures.AlgebraicGeometry.Completed.Koszul.CompletedKoszulQuotientComparison
 import WeilConjectures.AlgebraicGeometry.Stratum.StratumCompletionUnitRestriction
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
 import WeilConjectures.AlgebraicGeometry.ProEtaleLocalRestriction.ProEtaleLocalDerivedRestrictionComparisonsSupplement
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
@@ -595,19 +596,7 @@ private theorem exactConstantComparison
       G.mapDerivedCategory.map (R.mapDerivedCategoryFactors.hom.app P) ≫
         G.mapDerivedCategoryFactors.hom.app ((R.mapHomologicalComplex (.up ℤ)).obj P) ≫
         DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex e.hom (.up ℤ)).app P) := by
-  have hc := Functor.mapDerivedCategoryCompIso_hom_app_factors R G P
-  have hi : (Functor.mapDerivedCategoryCompIso R G).inv.app (DerivedCategory.Q.obj P) ≫
-      (R ⋙ G).mapDerivedCategoryFactors.hom.app P =
-      G.mapDerivedCategory.map (R.mapDerivedCategoryFactors.hom.app P) ≫
-        G.mapDerivedCategoryFactors.hom.app ((R.mapHomologicalComplex (.up ℤ)).obj P) := by
-    apply (cancel_epi
-      ((Functor.mapDerivedCategoryCompIso R G).hom.app (DerivedCategory.Q.obj P))).mp
-    rw [Iso.hom_inv_id_app_assoc]
-    exact hc.symm
-  simp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
-    NatTrans.comp_app, Category.assoc]
-  rw [Functor.mapDerivedCategoryCompIso_hom_app_factors, Functor.mapDerivedCategoryNatIso_fac]
-  rw [← Category.assoc, hi, Category.assoc]
+  exact Functor.exactSquare_fac e P
 
 private theorem exactSquare_symm
     {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]
