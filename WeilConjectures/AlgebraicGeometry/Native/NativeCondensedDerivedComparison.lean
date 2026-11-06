@@ -136,9 +136,9 @@ theorem nativeCondensedDerivedPullbackIso (l : ℕ) [Fact l.Prime]
         (nativeCondensedModules l S).mapDerivedCategory ≅
       (nativeCondensedModules l T).mapDerivedCategory ⋙
         CondensedRing.moduleObjectDerivedPullback (Profinite.padicAlgClRingObj l) f) := by
-  exact ⟨(Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  exact ⟨Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (nativeCondensedPullbackIso l f).some ≪≫
-    Functor.mapDerivedCategoryCompIso _ _ ≪≫
+    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
     Functor.isoWhiskerLeft _ (Functor.leftDerivedFunctorIsoMapDerivedCategory
       (CondensedRing.upperStar (Profinite.padicAlgClRingObj l) f)).symm⟩
 
