@@ -300,15 +300,13 @@
 - Fix notes: /home/ubuntu/u9/bz/FIXES-BZ932.md. No local Lean/Lake or proof shortcuts.
 
 
-# BZ950 in progress
+# BZ950 complete
 
-- Branch: u9/BZ950; baseline bd35b30c08a8dd66e184f7c95d02625e6eb3431b.
-- User instructed continuation after the exact one-line reflexive statement-cast proposal.
-- Applied cast (by rfl) around H.map β in affineTildePushforwardHomologyFactorization; all other statement text and the proof are unchanged.
-- Next: ucheck-bump on the leaf, then its two direct importers and further downstream.
-- Fix records, baseline diagnostics, and prepared downstream patch: /home/ubuntu/u9/bz/FIXES-BZ950.md.
-- No local Lean/Lake, proof placeholders, trust bypasses, heartbeat changes, or profiler probes.
-
-- BZ950 leaf GREEN at d8b603572: ucheck-bump rc=0, failed=0, tree newsrv:/home/ubuntu/u9n/bumpw1.
-- Leaf log: /home/ubuntu/u9/logs/BZ950-20261106T090157.log; local BUILD-BZ950-leaf-green-full.log.
-- The exact approved cast resolved the error without changing the root proof. Continuing to both direct importers.
+- Branch: u9/BZ950; assigned leaf and direct importer AffineTildeCoefficientPushforwardHomologyCoordinates are GREEN.
+- Leaf standalone ucheck-bump returned rc=0, failed=0 at d8b603572; remote log /home/ubuntu/u9/logs/BZ950-20261106T090157.log.
+- Both final Lean sources built at 6e477c336e78dcebf2285a9a195ca314bdca454c. Downstream batch rc=1 only for the two unowned dependencies AffineTildeTensorSourceComparisonHelpers and AffineBaseChangeTildeRepresentative.
+- AffineTildeDerivedTensorHomologyCoordinates and its onward frontier are skipped under the ownership rule; its speculative edits were restored to baseline.
+- Applied the user-approved reflexive endpoint cast, the matching repeated caller formula, four explicit Additive proofs, and Localization imports. All other statements and all docstrings are unchanged.
+- Four PATTERN/ERROR/RULE records reproduce both final Lean files exactly. Records: /home/ubuntu/u9/bz/FIXES-BZ950.md; audit: BZ950-rule-audit.txt.
+- Completion marker: /home/ubuntu/u9/state/BZ950.DONE.
+- No local Lean/Lake, proof placeholders, trust bypasses, heartbeat changes, profiler probes, or deletions.
