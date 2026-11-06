@@ -434,3 +434,22 @@
   testing scoped maxHeartbeats 400000 for this theorem only. This is not a limit-
   instance timeout. The assigned leaf and other four edited modules keep all
   original resource settings. Log BUILD-BZ1030-restoration-timeout-full.log.
+
+# BZ1030 complete
+
+- Assigned AffineTildeTensorOrdinaryExchange and twelve downstream modules through
+  SingleComplexOpenAffine are green, along with restored SourceRepresentativeIso.
+- Final ucheck-bump: rc=0, failed=0, 4717 jobs at source
+  c9b7e4ddd5bae38ac710618043ce1e53c29e22e2. Five final modules freshly rebuilt.
+- Six Lean files changed. Existing declaration headers/docstrings are preserved,
+  with the authorized reflexive endpoint transports in the assigned leaf. Restored
+  exists_affineBaseChangeIntoPullback_representativeIso in its original file.
+- One measured scoped heartbeat increase on that restored theorem: 200000 failed
+  at final equivalence construction in 13s; 400000 passed in 17-18s. Other limits unchanged.
+- Three attempted later modules remain blocked by unowned prerequisites assigned
+  to BZ770, BZ1037, and BZ1038. Exact errors and import paths are recorded.
+- All 23 machine rules replay exactly. No local Lean/Lake, placeholders, kernel
+  bypasses, native_decide, profiler probes, or declaration deletions.
+- Records: ~/u9/bz/FIXES-BZ1030.md and ~/u9/bz/BZ1030-final-validation.json.
+- Completion marker: ~/u9/state/BZ1030.DONE. Final commit changes progress only;
+  tested Lean sources are unchanged. No ucheck invocation remains running.
