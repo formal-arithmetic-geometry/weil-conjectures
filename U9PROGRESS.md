@@ -289,26 +289,19 @@
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
 
-# BZ932 in progress
+# PZ030 resumed
 
-- Branch: u9/BZ932; baseline 902c558126dff07f1b90673880f577206572e997.
-- The user instructed continuation after the concrete five-module upstream-restoration proposal.
-- Applied BZ932-proposed-upstream-restoration.patch, preserving restored statement/docstring text.
-- Explicit terminal-object preservation supplies GU.PreservesZeroMorphisms; removed the old
-  unmeasured maxHeartbeats override from the restored helper.
-- Next: ucheck-bump on the five prerequisites and SupportedKoszulRelativeDetector, then downstream.
-- Fix notes: /home/ubuntu/u9/bz/FIXES-BZ932.md. No local Lean/Lake or proof shortcuts.
+- Branch: u9/PZ030; previous checkpoint 91715259ff6d9dfbc36dc0b1eacab5b958ae746b.
+- Reread /home/ubuntu/u9/briefs/PZ030.md and refreshed Weil module notes.
+- The user instructed continuation after the exact two-cast proposal.
+- Applied PZ030-statement-casts-proposal.patch to representativeScalarTensorIso;
+  both reflexive casts preserve the original maps and endpoints.
+- ReductionNormalizationScalarMate already passed remote validation twice.
+- Next: validate both assigned modules together, then DerivedScalarMateData.
+- Reduction's two importers were attempted and skipped for foreign blockers;
+  see /home/ubuntu/u9/bz/FIXES-PZ030.md and PZ030-downstream-blockers.txt.
+- No local Lean/Lake, proof placeholders, trust bypasses, or limit increases.
 
-
-# BZ950 in progress
-
-- Branch: u9/BZ950; baseline bd35b30c08a8dd66e184f7c95d02625e6eb3431b.
-- User instructed continuation after the exact one-line reflexive statement-cast proposal.
-- Applied cast (by rfl) around H.map β in affineTildePushforwardHomologyFactorization; all other statement text and the proof are unchanged.
-- Next: ucheck-bump on the leaf, then its two direct importers and further downstream.
-- Fix records, baseline diagnostics, and prepared downstream patch: /home/ubuntu/u9/bz/FIXES-BZ950.md.
-- No local Lean/Lake, proof placeholders, trust bypasses, heartbeat changes, or profiler probes.
-
-- BZ950 leaf GREEN at d8b603572: ucheck-bump rc=0, failed=0, tree newsrv:/home/ubuntu/u9n/bumpw1.
-- Leaf log: /home/ubuntu/u9/logs/BZ950-20261106T090157.log; local BUILD-BZ950-leaf-green-full.log.
-- The exact approved cast resolved the error without changing the root proof. Continuing to both direct importers.
+- Both assigned modules GREEN at 0795abb04e0e176630129fbd17347398d825ca02: rc=0, built=2, failed=0.
+- Log: /home/ubuntu/u9/bz/BUILD-PZ030-assigned-green.log.
+- Continuing with direct importer DerivedScalarMateData.
