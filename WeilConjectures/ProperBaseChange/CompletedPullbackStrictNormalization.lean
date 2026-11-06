@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.Completed.CompletedTowerPullbackSupplement
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
 import WeilConjectures.AlgebraicGeometry.Completed.Pullback.CompletedPullbackReductionData
@@ -55,10 +57,6 @@ private theorem constantRlim_lift
   have hn' := congrArg
     (fun f ↦ f ≫ (L.rightDerivedFunctorObjQIso I).hom) hn
   simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id] at hn'
-  simp only [Functor.rightDerivedFunctorUnitQ, DerivedCategory.quotientCompQhIso,
-    HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift,
-    NatIso.ofComponents_hom_app, NatIso.ofComponents_inv_app, Iso.refl_hom, Iso.refl_inv] at hn'
-  erw [Category.id_comp, CategoryTheory.Functor.map_id, Category.comp_id] at hn'
   erw [← hn']
   rw [← DerivedCategory.Q.map_comp]
   rfl
