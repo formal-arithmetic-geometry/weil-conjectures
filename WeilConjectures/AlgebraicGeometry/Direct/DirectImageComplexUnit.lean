@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Derived.DerivedAdjunctionTopEdgeData
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import all WeilConjectures.AlgebraicGeometry.Local.LocalHypercohomologyClassUnit
 
 /-! # The unit equation for the local Leray comparison
@@ -148,17 +150,18 @@ theorem directImage_complex_unit
     let D := RingedSpace.moduleDirectImage f
     letI : D.Additive := RingedSpace.moduleDirectImage_additive f
     let F := RingedSpace.localAbelianSections Y
-    ((D ⋙ F).rightDerivedFunctorOfQuasiIsoResolutionsUnit
+    (cast (by rfl) (((D ⋙ F).rightDerivedFunctorOfQuasiIsoResolutionsUnit.{w}
       (RingedSpace.localSectionsEnoughKInjectives X)).app
-        ((HomotopyCategory.quotient _ (.up ℤ)).obj I) ≫
+        ((HomotopyCategory.quotient _ (.up ℤ)).obj I)) :
+      DerivedCategory.Q.obj (((D ⋙ F).mapHomologicalComplex (.up ℤ)).obj I) ⟶ _) ≫
         (RingedSpace.localLerayComparison f).app (DerivedCategory.Q.obj I) ≫
         (RingedSpace.derivedLocalAbelianSections Y).map
           (D.rightDerivedFunctorOfQuasiIsoResolutionsObjIso
             (RingedSpace.localSectionsEnoughKInjectives X) (𝟙 I)).hom =
-      (F.rightDerivedFunctorOfQuasiIsoResolutionsUnit
+      cast (by rfl) ((F.rightDerivedFunctorOfQuasiIsoResolutionsUnit.{w}
         (RingedSpace.localSectionsEnoughKInjectives Y)).app
           ((HomotopyCategory.quotient _ (.up ℤ)).obj
-            ((D.mapHomologicalComplex (.up ℤ)).obj I)) := by
-  simpa only [localComplexUnit_app_eq] using leray_complex_unit f I
+            ((D.mapHomologicalComplex (.up ℤ)).obj I))) := by
+  simpa only [localComplexUnit_app_eq, cast_eq] using leray_complex_unit f I
 
 end AlgebraicGeometry
