@@ -44,7 +44,7 @@ noncomputable def homologySequenceComposableArrows₅Map :
     rw [← Functor.map_comp, ← Functor.map_comp, φ.comm₂]
   homMk₅ ((F.shift n₀).map φ.hom₁) ((F.shift n₀).map φ.hom₂) ((F.shift n₀).map φ.hom₃)
     ((F.shift n₁).map φ.hom₁) ((F.shift n₁).map φ.hom₂) ((F.shift n₁).map φ.hom₃)
-    (w n₀) (w' n₀) (F.homologySequenceδ_naturality T T' φ n₀ n₁ h).symm (w n₁) (w' n₁)
+    (w n₀) (w' n₀) (F.homologySequenceδ_naturality φ n₀ n₁ h).symm (w n₁) (w' n₁)
 
 variable {F φ n₀ n₁ h} (hT : T ∈ distTriang C) (hT' : T' ∈ distTriang C)
 include h hT hT'
