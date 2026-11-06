@@ -428,16 +428,19 @@
 # BZ1066 complete
 
 - Branch: u9/BZ1066; start dfaed262b6fc1850faba3b46955a11d3225a1e86.
-- Assigned OpenImmersionProjectionComposition is green and sorry-free: ucheck-bump
-  rc=0, failed=0, 11814 jobs; source 9a0b6bfc1a7b13721ff11af7fb583074e10e43e8.
+- Assigned OpenImmersionProjectionComposition and five downstream modules are green
+  and sorry-free: ucheck-bump rc=0, built=6, failed=0, 11974 jobs.
+- Validated source: 19fe33e58b35ddf560d7b9dfd04efda3a06525da. All six modules freshly rebuilt.
+- Green downstream: CompactificationProjectionComposition, SfGraphProjectionWord,
+  SfGraphProjectionData, SfGraphProjectionStages, SfGraphSecondProjectionSquare.
 - Applied the explicitly proposed private compositor .symm after user continuation;
-  its original comparison is preserved. The proof-local unit comparison uses .inv.
-- Green downstream modules: CompactificationProjectionComposition and SfGraphProjectionWord.
-- The downstream run covered twelve extra modules through their import closure.
-  Remaining branches are blocked by other units' observed dependency errors.
-- Exact errors, owners, patterns, regex rules, counts, and import paths are recorded in
-  /home/ubuntu/u9/bz/FIXES-BZ1066.md and BZ1066-downstream-blocker-paths.json.
-- Merged BZ1057 prerequisite fixes at 872c0baf9bc; no competing dependency edits.
+  the original comparison is preserved. The proof-local unit comparison uses .inv.
+- Merged upstream round 73 (261dc924aa) and BZ1057 prerequisite fixes, retaining the
+  validated compositor expressions when resolving mechanical-fix conflicts.
+- Sixteen extra modules were reached through their import closure. The remaining
+  eleven are blocked by observed external dependency failures and are recorded.
+- Patterns, exact errors, rules, counts, and paths: /home/ubuntu/u9/bz/FIXES-BZ1066.md.
+- Final log: /home/ubuntu/u9/bz/BZ1066-build-6-final-green.log.
 - No local Lean/Lake, proof escapes, declaration deletions, or heartbeat changes.
-- All ucheck invocations finished. This completion commit changes documentation only.
+- All ucheck invocations finished. This final commit changes documentation only.
 - Completion marker: /home/ubuntu/u9/state/BZ1066.DONE.
