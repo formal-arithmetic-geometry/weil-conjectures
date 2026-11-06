@@ -127,8 +127,8 @@ theorem exists_canonicalModuleBaseChange_affineChart_comparison
               pullback.condition E0 ≫ (schemeDerivedDirectImage (pullback.snd fA gA)).map c0)
       := by
   classical
-  dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
   intro U fA gA H E E0 R T
+  dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
   obtain ⟨cV, hcV⟩ := exists_isDerivedModulePullbackComparison.{u, w}
     (pullback.fst (f ∣_ V.1) (g.resLE V.1 W.1 hWV)) H
   let p := pullback.fst (f ∣_ V.1) (g.resLE V.1 W.1 hWV)
