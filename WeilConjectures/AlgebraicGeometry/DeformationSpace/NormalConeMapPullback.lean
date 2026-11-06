@@ -92,7 +92,7 @@ lemma map_ker_normalConeToQuotient {U' : X'.AffineZariskiSite} {U : X.AffineZari
           (Ideal.Quotient.mk (J.tIdeal (op U')))) ?_ (fun a ha ↦ ?_) hb'
     · have h0 : Ideal.Quotient.mk (J.tIdeal (op U')) (J.siteIdeal U').extendedReesAlgebraT = 0 :=
         Ideal.Quotient.eq_zero_iff_mem.mpr (Ideal.subset_span rfl)
-      exact Ideal.mem_comap.mpr (by convert Ideal.zero_mem _; exact h0)
+      exact Ideal.mem_comap.mpr (by convert Ideal.zero_mem _)
     · have ha' : Ideal.Quotient.mk (I.tIdeal (op U)) a ∈
           RingHom.ker (I.normalConeToQuotient.app (op U)).hom :=
         RingHom.mem_ker.mpr ((I.normalConeToQuotient_app_mk (op U) a).trans

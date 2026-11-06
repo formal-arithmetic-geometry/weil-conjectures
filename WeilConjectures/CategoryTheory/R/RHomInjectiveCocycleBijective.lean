@@ -64,8 +64,8 @@ theorem rhom_injective_cocycle_map_bijective
         let η := V.rightDerivedFunctorPlusUnit.app I
         β ((H n).map η b) =
           ShiftedHom.map (Cocycle.equivHomShift.symm
-              (Cocycle.fromSingleMk f (zero_add n) (n + 1) rfl hf)) DerivedCategory.Q) →
-      Function.Bijective β := by
+              (Cocycle.fromSingleMk f (zero_add n) (n + 1) rfl hf)) DerivedCategory.Q ≫
+            ((DerivedCategory.Plus.QCompιIso C).inv.app I)⟦n⟧') → Function.Bijective β := by
   classical
   dsimp only
   intro β hβ
@@ -79,19 +79,33 @@ theorem rhom_injective_cocycle_map_bijective
   have : Localization.HasSmallLocalizedShiftedHom.{w}
       (HomologicalComplex.quasiIso C (.up ℤ)) ℤ K I.obj := fun a b ↦
     Localization.hasSmallLocalizedHom_of_isLocalization _ DerivedCategory.Q
-  let E : CohomologyClass K I.obj n ≃
+  let E₀ : CohomologyClass K I.obj n ≃
       (DerivedCategory.Q.obj K ⟶ (DerivedCategory.Q.obj I.obj)⟦n⟧) :=
     (CohomologyClass.equivOfIsKInjective.{w}).trans
       (Localization.SmallShiftedHom.equiv.{w} _ DerivedCategory.Q)
+  let E := E₀.trans (Iso.homCongr (Iso.refl _)
+    ((shiftFunctor (DerivedCategory C) n).mapIso
+      ((DerivedCategory.Plus.QCompιIso C).symm.app I)))
   have hE (f : M ⟶ I.obj.X n) (hf : f ≫ I.obj.d n (n + 1) = 0) :
       E (CohomologyClass.mk (Cocycle.fromSingleMk f (zero_add n) (n + 1) rfl hf)) =
         ShiftedHom.map (Cocycle.equivHomShift.symm
-          (Cocycle.fromSingleMk f (zero_add n) (n + 1) rfl hf)) DerivedCategory.Q := by
-    exact CohomologyClass.equiv_toSmallShiftedHom_mk _
+          (Cocycle.fromSingleMk f (zero_add n) (n + 1) rfl hf)) DerivedCategory.Q ≫
+            ((DerivedCategory.Plus.QCompιIso C).inv.app I)⟦n⟧' := by
+    simp [E, E₀, CohomologyClass.equivOfIsKInjective,
+      CohomologyClass.equiv_toSmallShiftedHom_mk]
+    rfl
   let T := (J.sc n).abCyclesIso.inv ≫ J.homologyπ n ≫
     (DerivedCategory.Plus.homologyFunctorObjQIso (V.mapCochainComplexPlus.obj I) n).inv ≫
     (DerivedCategory.Plus.homologyFunctor AddCommGrpCat.{v} n).map
       (V.rightDerivedFunctorPlusUnit.app I)
+  have : IsIso (V.rightDerivedFunctorPlusUnit.app I) := by
+    obtain ⟨L, m, hm⟩ := I
+    let L' : CochainComplex (InjectiveObject C) ℤ :=
+      HomologicalComplex.liftObjectProperty _ L _hi
+    have hL' : L'.IsStrictlyGE m := by
+      rwa [← CochainComplex.isStrictlyGE_mapHomologicalComplex_obj_iff _ (InjectiveObject.ι _)]
+    exact inferInstanceAs (IsIso (V.rightDerivedFunctorPlusUnit.app
+      ((InjectiveObject.ι C).mapCochainComplexPlus.obj ⟨L', m, hL'⟩)))
   have hT : Function.Surjective T :=
     (AddCommGrpCat.epi_iff_surjective T).1 inferInstance
   have hcycle (x : AddMonoidHom.ker (J.sc n).g.hom) :

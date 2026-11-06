@@ -156,8 +156,8 @@ theorem affineTildeTensorSourcePrecomparison
     simp only [eqToHom_refl, Category.id_comp]
     rfl
   refine ⟨χpre, ?_⟩
-  with_unfolding_all simpa only [cast_eq, f, g, C, H, N, E, T, TR, P, PB, RC, EC, TC, PC, PBC, q, qs,
-    Category.assoc] using hc.trans (congrArg (fun z ↦ z ≫
+  with_unfolding_all simpa only [cast_eq, f, g, C, H, N, E, T, TR, P, PB, RC, EC, TC,
+    PC, PBC, q, qs, Category.assoc] using hc.trans (congrArg (fun z ↦ z ≫
       DerivedCategory.Q.map (affineTildeTensorOrdinarySourceIso R A B M).hom) hdc.symm)
 
 
