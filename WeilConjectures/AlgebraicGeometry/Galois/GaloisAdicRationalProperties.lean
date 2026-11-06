@@ -1129,6 +1129,9 @@ private theorem rational_abelian :
   intro E
   let := (hR E).some
   let := Preadditive.ofFullyFaithful (d.eR E).fullyFaithfulFunctor
+  let (J : ℕ) : HasLimitsOfShape (Discrete (Fin J))
+      (galoisCoefficientRepresentations l E.val d.P d.δ) :=
+    @HasFiniteProducts.out _ _ Abelian.has_finite_products J
   let : HasFiniteProducts (LisseRationalSheaf l E.val Y) :=
     ⟨fun J ↦ Adjunction.hasLimitsOfShape_of_equivalence (d.eR E).functor⟩
   exact ⟨abelianOfEquivalence (d.eR E).functor⟩
