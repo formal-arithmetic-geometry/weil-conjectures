@@ -136,7 +136,7 @@ private theorem koszul_cone_coordinates (A : Type u) [CommRing A] (r : ℕ)
       AddEquiv.coe_mk, Equiv.invFun_as_coe, AddEquiv.coe_toEquiv_symm, AddEquiv.symm_mk,
       LinearEquiv.coe_mk, LinearMap.coe_mk, AddHom.coe_mk, Prod.map_fst, Prod.map_snd,
       u, v, e₀, e] at h ⊢
-    convert h using 1 <;> rfl
+    convert h using 1
   · intro n x
     have h := congrArg ((u (n + 1)).prodCongr (u n)) (hd n ((v (n + 2)).symm x))
     dsimp only [ExteriorAlgebra.koszulComplexTensor, ExteriorAlgebra.koszulComplex] at h ⊢
@@ -152,7 +152,7 @@ private theorem koszul_cone_coordinates (A : Type u) [CommRing A] (r : ℕ)
       TensorProduct.rid_symm_apply, LinearMap.rTensor_tmul, LinearEquiv.coe_mk,
       LinearMap.coe_mk, AddHom.coe_mk, Prod.map_apply, map_add, rid_naturality, map_smul,
       map_neg, LinearEquiv.trans_apply, Prod.map_fst, Prod.map_snd, u, v, e] at h ⊢
-    convert h using 1 <;> rfl
+    convert h using 1
 
 /-- The sheafified Koszul complex, with one distinguished coordinate, is the
 mapping cone of multiplication by that coordinate on the remaining complex.

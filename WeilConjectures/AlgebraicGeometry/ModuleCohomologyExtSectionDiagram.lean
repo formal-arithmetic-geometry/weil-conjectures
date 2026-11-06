@@ -195,6 +195,5 @@ theorem abelianEdge_section_diagram {X Y : Scheme.{u}} (f : X ⟶ Y) (F : X.Modu
           (D.a.hom ≫
             ((moduleSections Y).mapHomologicalComplex (ComplexShape.up ℕ)).map D.lambda) := by
   convert abelianEdge_section_diagram_after_identity f F D p using 1
-  all_goals try simp only [Category.comp_id]
 
 end AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution
