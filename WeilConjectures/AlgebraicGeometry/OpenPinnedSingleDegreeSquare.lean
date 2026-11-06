@@ -6,6 +6,9 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
+
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
@@ -41,10 +44,10 @@ def pinnedSingleDegreeTensorComparison
         ((Scheme.Modules.tensorPullback k).obj M) :=
   let ε := (Classical.choose
     (Classical.choose_spec exists_derivedPullbackComposition.{u, w})) k
-  ε.app ((HomotopyCategory.singleFunctor _ n).obj M) ≫
-    DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
+  cast (by rfl) (ε.app ((HomotopyCategory.singleFunctor _ n).obj M) ≫
+    DerivedCategory.Qh.{w}.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
       ((HomologicalComplex.singleMapHomologicalComplex
-        (Scheme.Modules.tensorPullback k) (ComplexShape.up ℤ) n).hom.app M))
+        (Scheme.Modules.tensorPullback k) (ComplexShape.up ℤ) n).hom.app M)))
 
 private theorem transport_square
     {C : Type*} [Category C] {A A₀ B B₀ C₁ C₀ D D₀ : C}
