@@ -486,10 +486,10 @@ def constantInterchange {T T' : Scheme.{u}}
     [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F] :
     F.mapDerivedCategory ⋙ dconstant l E T' ≅
       dconstant l E T ⋙ ((Functor.whiskeringRight ℕᵒᵖ _ _).obj F).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso F (constant l E T')).symm ≪≫
+  Functor.mapDerivedCategoryCompIso F (constant l E T') ≪≫
     Functor.mapDerivedCategoryNatIso (Functor.compConstIso ℕᵒᵖ F) ≪≫
-    Functor.mapDerivedCategoryCompIso (constant l E T)
-      ((Functor.whiskeringRight ℕᵒᵖ _ _).obj F)
+    (Functor.mapDerivedCategoryCompIso (constant l E T)
+      ((Functor.whiskeringRight ℕᵒᵖ _ _).obj F)).symm
 
 /-- The canonical derived pushforward/limit isomorphism. It is the conjugate of the
 constant/pullback comparison under the two composite derived adjunctions, and therefore
