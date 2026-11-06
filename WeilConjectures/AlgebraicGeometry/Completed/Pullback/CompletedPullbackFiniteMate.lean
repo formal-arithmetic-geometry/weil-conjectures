@@ -255,15 +255,18 @@ private theorem towerAugmentation_computed
         DerivedCategory.Q.map
           ((NatTrans.mapHomologicalComplex (completedReductionModuleUnit d T) (.up ℤ)).app P) := by
   let := completedReductionModuleTowerFunctor_additive T d
-  with_unfolding_all
-    simpa only [HasCompletedReductionTowerUnitNormalization, completedReductionTowerUnit,
-      completedReductionTowerComplexCounit, reductionComplexCounit,
-      completedReductionTowerCounit, coherenceReductionTowerCounit,
-      completedReductionComplexTowerFunctor, DerivedCategory.quotientCompQhIso,
-      HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift,
-      NatIso.ofComponents, Iso.refl, CategoryTheory.Functor.map_id,
-      Category.id_comp, Category.comp_id] using
-      ((completedReductionTowerUnit_exists d T).exists.choose_spec P hP)
+  have h := (completedReductionTowerUnit_exists d T).exists.choose_spec P hP
+  have hi₁ : (DerivedCategory.quotientCompQhIso
+      (pbcModules T (pbcAdicCompletion T d))).inv.app P = 𝟙 _ := rfl
+  have hi₂ : (DerivedCategory.quotientCompQhIso
+      (reductionModules T (completedReductionCoefficient T d))).inv.app P = 𝟙 _ := rfl
+  dsimp only [HasCompletedReductionTowerUnitNormalization, completedReductionTowerUnit,
+    completedReductionTowerComplexCounit, reductionComplexCounit,
+    completedReductionTowerCounit, coherenceReductionTowerCounit,
+    completedReductionComplexTowerFunctor] at h ⊢
+  erw [hi₁, CategoryTheory.Functor.map_id, Category.id_comp] at h
+  erw [hi₂, CategoryTheory.Functor.map_id, Category.id_comp]
+  exact h
 
 private theorem pulledAugmentation_computed
     (P : CochainComplex (pbcModules Y (pbcAdicCompletion Y d)) ℤ)
