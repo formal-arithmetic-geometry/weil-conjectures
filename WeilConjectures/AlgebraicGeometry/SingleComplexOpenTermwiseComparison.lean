@@ -10,6 +10,8 @@ public import WeilConjectures.AlgebraicGeometry.SingleComplexOpenRestrictionData
 public import WeilConjectures.AlgebraicGeometry.StalkComparisonPullbackNaturality
 public import Mathlib.CategoryTheory.Comma.Arrow
 public import WeilConjectures.AlgebraicGeometry.OpenDerivedAdditiveStalkIso
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.OpenRestrictionKFlatModel
 import WeilConjectures.AlgebraicGeometry.IsomorphismPullbackCounit
 import WeilConjectures.AlgebraicGeometry.SingleComplexOpenOrdinaryComparison
