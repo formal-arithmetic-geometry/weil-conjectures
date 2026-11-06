@@ -246,32 +246,30 @@
 - Next: build layer-two importer CanonicalModuleBaseChangeAffineChartComparison.
 - Notes: /home/ubuntu/u9/bz/FIXES-BZ824.md. No local Lean/Lake or proof shortcuts.
 
-# BZ857 complete
 
-- Branch: `u9/BZ857`; original baseline `2ab2b07a3`, integrated baseline `db406319f`.
-- Assigned module and four restored prerequisites passed ucheck-bump at
-  `949b84fad60d507c833b99d25b183a26d049eab6`: rc=0, failed=0, 4716 jobs.
-- Final downstream check passed at `17f7d860184b088850ae1e23f07017be3037ce6f`:
-  rc=0, built=15, failed=0, 4813 jobs, including the assigned theorem, all four
-  restored prerequisites, ProjectionFormulaCompactified, and
-  ProjectionFormulaIdentityCompactification.
-- Full logs: `/home/ubuntu/u9/bz/BUILD-BZ857-unit-green-full.log` and
-  `/home/ubuntu/u9/bz/BUILD-BZ857-downstream2-full.log`.
-- The assigned theorem statement and proof are byte-for-byte unchanged.
-- The user instructed continuation after the four-upstream-module restoration proposal.
-  Restored required declarations and repaired scalar carriers, Q/Qh endpoint transports,
-  public imports, identity rewrites, and the downstream compositor orientation.
-- The restored mixed-mate theorem's local eta uses the canonical cochain unit to
-  transport its endpoints; other restored statement text is unchanged.
-- PerfectProjectionFormula was attempted and skipped for unowned dependencies.
-  First error: `error: WeilConjectures/CategoryTheory/RingedKFlatWord/RingedKFlatWordComparisonDescent.lean:171:41: Application type mismatch: The argument`.
-- Checked importers, including multiline imports: the assigned theorem's two direct
-  importers are PerfectProjectionFormula and ProjectionFormulaCompactified; the
-  latter leads only to ProjectionFormulaIdentityCompactification, which leads only
-  to the already-blocked PerfectProjectionFormula. Three downstream modules attempted.
-- Replay audit exactly reproduces all five changed Lean files from historical sources.
-- Fix patterns, exact errors, and replay rules: `/home/ubuntu/u9/bz/FIXES-BZ857.md`.
-- Completion handoff: `/home/ubuntu/u9/state/BZ857.DONE`.
-- No declarations deleted, local Lean/Lake execution, proof placeholders, trust bypasses,
-  profiler probes, or heartbeat increases. Historical mixed-mate limit retained.
-- This final commit changes only progress documentation; Lean source matches the green build.
+# BZ859 complete
+
+- Branch: u9/BZ859; starting commit db406319f.
+- Final five-target ucheck-bump passed: rc=0, failed=0, 4426 jobs,
+  on poolb:43.157.187.72. All five handoff targets rebuilt successfully.
+- Validated source commit: e9ade5f7c629b713f1d64b02073efdb9654e4d63.
+- Green prerequisite modules: AffineBaseChangeTildeCoordinates and
+  AffinePushforwardComparisonCoordinates.
+- Green assigned module: AffinePushforwardComparisonFactorization.
+- Green downstream modules: AffinePushforwardCohomologyEdgeIdentity and
+  AffinePushforwardCohomologyEdgeExists.
+- The user instructed continuation after the concrete prerequisite-restoration proposal.
+  The three restored declarations retain their original signatures and documentation.
+- Ported generated additive-instance references using tilde.map_add; used Localization
+  implementation imports and reflexive casts for the original derived-unit homology maps.
+  The assigned theorem's binders, assumptions, and underlying maps are unchanged.
+- Layer-three AffineTildePushforwardCohomologyNormalization was attempted and is blocked
+  only by BZ860-owned AffinePushforwardCohomologyEdgeIsIso. No edits were made there.
+- Full validation log: /home/ubuntu/u9/bz/BUILD-BZ859-final-full.log.
+- Downstream evidence: /home/ubuntu/u9/bz/BUILD-BZ859-downstream-full.log.
+- Fix patterns, exact errors, rewrite rules, and counts: /home/ubuntu/u9/bz/FIXES-BZ859.md.
+- Contract audit: /home/ubuntu/u9/bz/BZ859-contract-audit.txt. The rules exactly replay
+  the assigned-module source from the starting revision.
+- No local Lean/Lake, proof placeholders, trust escapes, or heartbeat increases.
+- Completion marker: /home/ubuntu/u9/state/BZ859.DONE.
+- This completion commit changes only progress documentation after the green source build.
