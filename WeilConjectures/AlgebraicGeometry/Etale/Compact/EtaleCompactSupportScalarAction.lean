@@ -71,10 +71,9 @@ private def sectionScalar (R : Sheaf J CommRingCat.{w})
     naturality := by
       intro U V f
       ext x
-      change s V • M.val.map f x = M.val.map f (s U • x)
-      rw [M.val.map_smul]
-      congr 1
-      exact (hs f).symm }
+      exact ((M.val.map_smul f (s U) x).trans
+        (congrArg (fun a : R.obj.obj V ↦ a • (show M.val.obj V from M.val.map f x))
+          (hs f))).symm }
 
 private theorem sectionScalar_naturality (R : Sheaf J CommRingCat.{w})
     (s : ∀ U, R.obj.obj U)
