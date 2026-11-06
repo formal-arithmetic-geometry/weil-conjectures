@@ -56,7 +56,7 @@ private theorem termwise_exact_factors
   simp only [Category.id_comp]
   exact Category.comp_id _
 
-private theorem termwise_counit_transport
+@[reassoc] private theorem termwise_counit_transport
     {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
     [HasDerivedCategory.{w} C] [HasDerivedCategory.{w} D]
     (F : C ⥤ D) [F.Additive] (L : DerivedCategory C ⥤ DerivedCategory D)
@@ -161,7 +161,7 @@ theorem singleComplexOpen_termwise_counit_compatibility
   dsimp only [singleComplexOpenTensorRestrictionMap]
   erw [termwise_counit_transport (Scheme.Modules.tensorPullback g')
     (derivedPullback g') (counit g') P,
-    termwise_counit_transport (Scheme.Modules.tensorPullback j)
+    termwise_counit_transport_assoc (Scheme.Modules.tensorPullback j)
       (derivedPullback j) (counit j)
       (((schemeOpenRestriction X U).mapHomologicalComplex (.up ℤ)).obj P)]
   have hf : (schemeOpenRestriction X U).mapDerivedCategoryFactorsh.hom.app
