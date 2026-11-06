@@ -261,7 +261,7 @@ private theorem complexIso_naturality
     (IntegralModelsStacks.scalarMap l E X)
   let C := IntegralModelsStacks.smallModules X (constantRing l E X)
   let e := ((Functor.mapDerivedCategoryCompIso A (B ⋙ C)) ≪≫
-    Functor.isoWhiskerLeft A.mapDerivedCategory (Functor.mapDerivedCategoryCompIso B C)).symm
+    Functor.isoWhiskerLeft A.mapDerivedCategory (Functor.mapDerivedCategoryCompIso B C).symm).symm
   exact derivedFactor_naturality (modules l E X) (functor l E X) e a
 
 attribute [local irreducible] modules

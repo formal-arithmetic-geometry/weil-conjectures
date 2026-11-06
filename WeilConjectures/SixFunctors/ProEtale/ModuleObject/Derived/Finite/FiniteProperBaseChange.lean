@@ -353,7 +353,7 @@ private theorem preserves_coefficientIso
     ObjectProperty.prop_of_iso _ ep.symm hD
   have hU := constantModelCtf_coefficientIso e.symm Y ⟨_, hT⟩
   let ec : T Y ⋙ U Y ≅ 𝟭 _ :=
-    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso _ _) ≪≫
       Functor.mapDerivedCategoryNatIso
         ((Mod.comapComp _ _).symm ≪≫ Mod.comapCongr (by
           change (upperStarFromPoint Y).map e.hom.hom ≫

@@ -319,13 +319,13 @@ private theorem scalarModelComparison_associator
         Fb.mapDerivedCategory.map (Fa.mapDerivedCategoryFactors.hom.app P) ≫
           Fb.mapDerivedCategoryFactors.hom.app ((Fa.mapHomologicalComplex (.up ℤ)).obj P) ≫
           DerivedCategory.Q.map (ao.hom.app P) := by
-    change ((Functor.mapDerivedCategoryCompIso Fa Fb).inv.app _ ≫
+    change ((Functor.mapDerivedCategoryCompIso Fa Fb).hom.app _ ≫
       (Functor.mapDerivedCategoryNatIso
         (integralOrdinaryScalarComp l E L ι X M j)).hom.app _) ≫ _ = _
     rw [Category.assoc, Functor.mapDerivedCategoryNatIso_fac]
-    apply (cancel_epi ((Functor.mapDerivedCategoryCompIso Fa Fb).hom.app
+    apply (cancel_epi ((Functor.mapDerivedCategoryCompIso Fa Fb).inv.app
       (DerivedCategory.Q.obj P))).mp
-    simp only [← Category.assoc, Iso.hom_inv_id_app, Category.id_comp]
+    simp only [← Category.assoc, Iso.inv_hom_id_app, Category.id_comp]
     simp only [Category.assoc]
     rw [Functor.mapDerivedCategoryCompIso_hom_app_factors_assoc]
     rfl
