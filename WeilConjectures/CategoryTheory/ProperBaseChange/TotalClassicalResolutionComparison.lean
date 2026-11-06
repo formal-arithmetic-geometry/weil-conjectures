@@ -135,7 +135,8 @@ private theorem total_classical_chosen
       erw [Functor.rightDerivedFunctorPlusUnit_app]
       change 𝟙 _ ≫ DerivedCategory.Plus.Qh.map (𝟙 _) ≫ ηp ≫
         F.rightDerivedFunctorPlus.map (𝟙 _) = _
-      erw [Functor.map_id, Functor.map_id, Category.id_comp, Category.id_comp, Category.comp_id]
+      erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id,
+        Category.id_comp, Category.id_comp, Category.comp_id]
     have : IsIso (F.rightDerivedFunctorPlusUnit.app L) := hηp ▸ inferInstance
     have hq : (DerivedCategory.quotientCompQhIso C).symm.app R.cochainComplex =
         Iso.refl _ := rfl
@@ -144,7 +145,6 @@ private theorem total_classical_chosen
         (Y := DerivedCategory.Plus.Q.obj L) e).hom := by
       dsimp only [v, t]
       erw [hq, Iso.trans_refl]
-      rfl
     change F.rightDerivedFunctorPlus.map
       (DerivedCategory.Plus.ι.preimageIso
         (X := (DerivedCategory.Plus.singleFunctor C 0).obj M)
@@ -165,7 +165,7 @@ private theorem total_classical_chosen
         j ≫ k := congrArg (fun z ↦ H.map z ≫ j ≫ k) hm
     _ = _ := by
       dsimp only [j]
-      erw [he]
+      conv_lhs => erw [he]
       dsimp only [Functor.rightDerivedFunctorObjQIso, e, Iso.trans_hom,
         Iso.symm_hom, Functor.mapIso_hom, Iso.app_hom, asIso_inv]
       simp only [Functor.map_comp, Category.assoc]
