@@ -12,6 +12,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.StrictlyHenselianUnit
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
 public import WeilConjectures.AlgebraicGeometry.Supported.SupportedExteriorProduct
 
 /-!
@@ -541,10 +542,20 @@ noncomputable def exteriorProductResolutionComparison
     externalProduct C f g (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q) ⟶
       DerivedCategory.Q.obj (exteriorSectionsComplexTarget C f g P Q) :=
   derivedTensorHom C
-      ((upperStar C (pullback.fst f g)).leftDerivedFunctorCounit.app
-        ((HomotopyCategory.quotient _ _).obj P))
-      ((upperStar C (pullback.snd f g)).leftDerivedFunctorCounit.app
-        ((HomotopyCategory.quotient _ _).obj Q)) ≫
+      ((upperStar C (pullback.fst f g)).leftDerivedFunctor.map
+          ((DerivedCategory.quotientCompQhIso _).inv.app P) ≫
+        (upperStar C (pullback.fst f g)).leftDerivedFunctorCounit.app
+          ((HomotopyCategory.quotient _ _).obj P) ≫
+        DerivedCategory.Qh.map
+          (((upperStar C (pullback.fst f g)).mapHomotopyCategoryFactors (.up ℤ)).hom.app P) ≫
+        (DerivedCategory.quotientCompQhIso _).hom.app _)
+      ((upperStar C (pullback.snd f g)).leftDerivedFunctor.map
+          ((DerivedCategory.quotientCompQhIso _).inv.app Q) ≫
+        (upperStar C (pullback.snd f g)).leftDerivedFunctorCounit.app
+          ((HomotopyCategory.quotient _ _).obj Q) ≫
+        DerivedCategory.Qh.map
+          (((upperStar C (pullback.snd f g)).mapHomotopyCategoryFactors (.up ℤ)).hom.app Q) ≫
+        (DerivedCategory.quotientCompQhIso _).hom.app _) ≫
     Functor.LaxMonoidal.μ DerivedCategory.Q
       (((upperStar C (pullback.fst f g)).mapHomologicalComplex (.up ℤ)).obj P)
       (((upperStar C (pullback.snd f g)).mapHomologicalComplex (.up ℤ)).obj Q)
@@ -613,8 +624,7 @@ noncomputable def exteriorSupportResolutionUnit
     DerivedCategory.Q.obj
         (((globalSectionsWithSupport C i).mapHomologicalComplex (.up ℤ)).obj P) ⟶
       (rightDerivedSectionsWithSupport C i).obj (DerivedCategory.Q.obj P) :=
-  (globalSectionsWithSupport C i).rightDerivedFunctorUnit.app
-    ((HomotopyCategory.quotient _ _).obj P)
+  (globalSectionsWithSupport C i).rightDerivedFunctorUnitQ P
 
 
 /-- Resolution normalization of the supported exterior product. On every pair of
