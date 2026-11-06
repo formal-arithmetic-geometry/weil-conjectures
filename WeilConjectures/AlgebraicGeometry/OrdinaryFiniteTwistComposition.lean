@@ -91,8 +91,8 @@ theorem ordinaryFiniteShiftedLinePullback_comp
         (ordinaryFiniteShiftedLinePullback A N hA t (f ≫ g) hZ).hom := by
   let c := Functor.mapDerivedCategoryNatIso
       (upperStarComp (ModuleCat.{u + 1} A) f g) ≪≫
-    Functor.mapDerivedCategoryCompIso (upperStar (ModuleCat.{u + 1} A) g)
-      (upperStar (ModuleCat.{u + 1} A) f)
+    (Functor.mapDerivedCategoryCompIso (upperStar (ModuleCat.{u + 1} A) g)
+      (upperStar (ModuleCat.{u + 1} A) f)).symm
   have : NatTrans.CommShift c.hom ℤ := by
     dsimp only [c, Iso.trans_hom]
     infer_instance
