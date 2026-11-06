@@ -307,7 +307,9 @@ status:
     conjectures (`weil_conjectures`: factorisation, functional equation, integrality,
     Riemann hypothesis), plus the lean-eval formulation in terms of point counts and
     multisets of Frobenius eigenvalues. The complete development is on `master`; its
-    Lean code is identical to the independently verified commit 91ebbc09a7.
+    `WeilConjectures/` library is identical to the independently verified commit 91ebbc09a7
+    (`master` adds only the comparator files `Comparator/LeanEvalWeil/` and drops the unused
+    `checkdecls` dependency).
   # Files containing `sorry`, all outside the dependency closure of the main theorems
   # (checked with `#print axioms`); none is used below.
   sorry_count: 208
@@ -322,14 +324,15 @@ status:
       literature_dependencies: []
     - declaration: "AlgebraicGeometry.Scheme.weil_conjectures"
       file: "WeilConjectures/Statement.lean"
-      sorry_count: 0   # verified on 91ebbc09a7
+      sorry_count: 0   # verified on 91ebbc09a7; `#print axioms` re-run on master 2cf5ba93 (2026-11-06)
       axioms: ["propext", "Classical.choice", "Quot.sound"]
       comparator_config: "Comparator/config.json"
       literature_dependencies: []
     - declaration: "LeanEval.AlgebraicGeometry.WeilConjectures.weil_conjectures"
       file: "WeilConjectures/LeanEval/WeilConjectures.lean"
-      sorry_count: 0   # verified on 91ebbc09a7
+      sorry_count: 0   # verified on 91ebbc09a7; `#print axioms` re-run on master 2cf5ba93 (2026-11-06)
       axioms: ["propext", "Classical.choice", "Quot.sound"]
+      comparator_config: "Comparator/config-leaneval.json"
       literature_dependencies: []
 
 automation:
@@ -412,12 +415,12 @@ alignment:
       lean: "AlgebraicGeometry.Scheme.weil_conjectures"
       module: "WeilConjectures/Statement.lean"
       status: "proved"
-      note: "sorry-free; independently verified on 91ebbc09a7 (Lean code identical to master)"
+      note: "sorry-free; independently verified on 91ebbc09a7 (`WeilConjectures/` identical to master); `#print axioms` re-run on master 2cf5ba93"
     - source: "lean-eval `weil_conjectures` (point counts and Frobenius eigenvalues)"
       lean: "LeanEval.AlgebraicGeometry.WeilConjectures.weil_conjectures"
       module: "WeilConjectures/LeanEval/WeilConjectures.lean"
       status: "proved"
-      note: "sorry-free; independently verified on 91ebbc09a7 (Lean code identical to master)"
+      note: "sorry-free; independently verified on 91ebbc09a7 (`WeilConjectures/` identical to master); `#print axioms` re-run on master 2cf5ba93"
 
 acknowledgements: >-
   This project builds on Mathlib, and in particular on its foundational algebraic
