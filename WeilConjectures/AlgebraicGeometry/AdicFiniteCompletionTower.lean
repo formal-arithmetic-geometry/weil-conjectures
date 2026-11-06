@@ -21,12 +21,6 @@ namespace AlgebraicGeometry.Scheme
 
 open CategoryTheory.Pretriangulated Opposite
 
-private local instance {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
-    (R : Sheaf J CommRingCat.{u}) : ∀ n : ℤ, (shiftFunctor (D R) n).Additive := by
-  let := HasDerivedCategory.standard (Mod R)
-  intro n
-  infer_instance
-
 private theorem transportDerivedLimit
     {C : Type*} [Category C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
@@ -69,6 +63,7 @@ private def isoOfSuccessors
     (fun n ↦ by rw [Functor.ofOpSequence_map_homOfLE_succ]; exact h n)
   exact NatIso.ofComponents (fun n ↦ e n.unop) (fun g ↦ a.naturality g)
 
+attribute [local instance] HasDerivedCategory.standard
 attribute [local irreducible] adicFiniteStrictReductionLevel
   adicFiniteStrictReductionEvaluationIso derivedExtension DerivedCategory.Q
   HasDerivedCategory.standard dres change extend adicFiniteTransition

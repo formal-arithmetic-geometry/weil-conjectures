@@ -75,6 +75,7 @@ private theorem monoidalUnit_eq {E : Type w} [SmallCategory E]
 
 attribute [local instance] SheafOfModules.monoidalCategory
   SheafOfModules.symmetricCategory SheafOfModules.isMonoidal_W_independentCoefficients
+attribute [local instance] HasDerivedCategory.standard
 attribute [local irreducible] HasDerivedCategory.standard
   SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
 
@@ -320,10 +321,6 @@ private theorem triangle_transport
   · simp [f]
   · simp [g]
   · simp [δ, ← CategoryTheory.Functor.map_comp]
-
-local notation:60 (priority := high) "distTriang " C:60 =>
-  @Pretriangulated.distinguishedTriangles C _ inferInstance _ inferInstance inferInstance
-    inferInstance
 
 /-- The graded filtration gives a distinguished triangle with the two actual reductions.
 This assertion has no constructibility or boundedness hypothesis or conclusion.
