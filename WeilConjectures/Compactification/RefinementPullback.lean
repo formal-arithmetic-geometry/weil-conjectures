@@ -118,6 +118,4 @@ theorem isPullback_comp {e : Compactification f} (r : c.Refinement d) (s : d.Ref
     IsPullback c.i (𝟙 X) (r.comp s).hom e.i := by
   simpa using hr.paste_vert hs
 
-  AlgebraicGeometry.Compactification.Refinement.isPullback_of_isSchemeTheoreticallyDominant
-
 end AlgebraicGeometry.Compactification.Refinement

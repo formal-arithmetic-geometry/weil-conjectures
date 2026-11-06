@@ -81,6 +81,4 @@ theorem Compactification.exists_common_refinement_isDense_locallyOfFinitePresent
   let ⟨e, he, hc, hd⟩ := exists_common_refinement_isSchemeTheoreticallyDominant c d
   ⟨e, he, e.locallyOfFinitePresentation_g, hc, hd⟩
 
-  AlgebraicGeometry.Compactification.exists_common_refinement_isDense_locallyOfFinitePresentation
-
 end AlgebraicGeometry
