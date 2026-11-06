@@ -33,18 +33,18 @@ env:
 
 jobs:
   # Where to build: the self-hosted `big-server` runner (256 cores, 600 GB; Bin Wu's server)
-  # whenever it is online and idle, else GitHub's hosted runners. Actions has no "prefer A,
-  # else B" for `runs-on`, so this asks the API first. Listing a repository's runners needs
-  # Administration (read), which GITHUB_TOKEN cannot have: the `RUNNER_STATUS_TOKEN` secret is a
-  # fine-grained token with only that permission on this repository. Without it the build
-  # waits for big-server rather than guess.
+  # unless it is already busy, else GitHub's hosted runners. Actions has no "prefer A, else B"
+  # for `runs-on`, so this looks first: big-server is busy if a job of this repository that
+  # targets it is running or queued. That needs only `actions: read` on GITHUB_TOKEN (the
+  # runners API itself would need an admin token). An offline big-server is not detected: the
+  # build then waits for it, as "always prefer big-server" asks.
   # Pull requests from forks always build on GitHub's runners: the repository is public, and a
-  # self-hosted runner would execute an outsider's code (Lean runs code while compiling) on
-  # a machine we do not control the blast radius of.
+  # self-hosted runner would execute an outsider's code (Lean runs code while compiling).
   pick-runner:
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    permissions: {}
+    permissions:
+      actions: read
     outputs:
       runner: ${{ steps.pick.outputs.runner }}
       threads: ${{ steps.pick.outputs.threads }}
@@ -52,26 +52,29 @@ jobs:
     steps:
       - id: pick
         env:
-          TOKEN: ${{ secrets.RUNNER_STATUS_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
           FORK: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository }}
         run: |
           set -uo pipefail
           big='["self-hosted","big-server"]'; gh='"ubuntu-latest"'
-          choice=big why="token not set: waiting for big-server"
           if [ "$FORK" = true ]; then
             choice=gh why="pull request from a fork"
-          elif [ -n "$TOKEN" ]; then
-            state=$(curl -sS --fail -H "Authorization: Bearer $TOKEN" \
-                      -H "Accept: application/vnd.github+json" \
-                      "https://api.github.com/repos/$GITHUB_REPOSITORY/actions/runners?per_page=100" |
-                    jq -r '[.runners[] | select(any(.labels[]; .name == "big-server"))
-                            | select(.status == "online") | .busy] |
-                           if length == 0 then "offline" elif any(. == false) then "idle" else "busy" end')
-            case "$state" in
-              idle) choice=big why="big-server idle" ;;
-              busy|offline) choice=gh why="big-server $state" ;;
-              *) choice=gh why="runner query failed" ;;
-            esac
+          else
+            # Jobs on big-server: queued or in progress, in any active run of this repository.
+            n=0 ok=true
+            for st in in_progress queued; do
+              ids=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs?status=$st&per_page=100" \
+                      --jq '.workflow_runs[].id') || { ok=false; break; }
+              for id in $ids; do
+                c=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$id/jobs?filter=latest&per_page=100" \
+                      --jq '[.jobs[] | select(.status == "in_progress" or .status == "queued")
+                             | select(any(.labels[]; . == "big-server"))] | length') || { ok=false; break; }
+                n=$((n + c))
+              done
+            done
+            if [ "$ok" != true ]; then choice=big why="status query failed; preferring big-server"
+            elif [ "$n" -eq 0 ]; then choice=big why="big-server free"
+            else choice=gh why="big-server busy ($n job(s) on it)"; fi
           fi
           if [ "$choice" = big ]; then
             { echo "runner=$big"; echo "threads=64"; echo "hosted=false"; } >> "$GITHUB_OUTPUT"
