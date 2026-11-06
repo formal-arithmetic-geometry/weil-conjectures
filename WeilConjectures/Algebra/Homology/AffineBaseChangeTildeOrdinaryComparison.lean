@@ -129,12 +129,16 @@ theorem exists_affineBaseChangeTildeOrdinaryComparison
   have hb : affineTildeRepresentativeCohomologyIso A' Cg
       ((derivedPullback (Spec.map (CommRingCat.ofHom φg'))).obj K) t i =
       affineBaseChangeTildeCohomologyIso A A' φg' K M e hc i := by
+    apply Iso.ext
     simp only [affineTildeRepresentativeCohomologyIso,
       affinePushforwardRepresentativeCohomologyIso, affineBaseChangeTildeCohomologyIso,
       t, affineBaseChangeTildeRepresentativeIso, affineBaseChangeTildeComplexIso,
+      Iso.trans_hom, Iso.symm_hom, Iso.symm_inv, Iso.app_hom, Iso.app_inv,
+      Functor.mapIso_hom, Functor.mapIso_inv,
       DerivedCategory.quotientCompQhIso, HomologicalComplexUpToQuasiIso.quotientCompQhIso,
-      Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift, cast_eq,
-      Iso.symm_refl, Functor.mapIso_refl, Iso.refl_trans, Iso.trans_refl, Cg]
+      Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_hom, Quotient.lift.isLift_inv,
+      cast_eq, Functor.map_comp, CategoryTheory.Functor.map_id,
+      Category.assoc, Category.id_comp, Category.comp_id, Cg]
   rw [hb] at ht
   dsimp only at heC ⊢
   rw [heC]
