@@ -364,7 +364,15 @@ theorem nativeHom_evaluation_shift_one
     (hσ : ∀ (n p q : ℤ) (hpq : p + n = q),
       σ.f n ≫ CochainComplex.internalHomπ (P⟦(-1 : ℤ)⟧) I n p q hpq =
         p.negOnePow • CochainComplex.internalHomπ P I (n + 1) (p + -1) q (by omega)) :
-    DerivedCategory.Q.map σ ≫ DerivedCategory.qhInternalHomToIhom (P⟦(-1 : ℤ)⟧) I ≫
+    DerivedCategory.Q.map σ ≫
+        (DerivedCategory.quotientCompQhIso C).inv.app
+          (CochainComplex.internalHomObj (P⟦(-1 : ℤ)⟧) I) ≫
+        DerivedCategory.qhInternalHomToIhom (P⟦(-1 : ℤ)⟧) I ≫
+        (ihom (DerivedCategory.Qh.obj
+          ((HomotopyCategory.quotient C (.up ℤ)).obj (P⟦(-1 : ℤ)⟧)))).map
+            ((DerivedCategory.quotientCompQhIso C).hom.app I) ≫
+        (MonoidalClosed.pre ((DerivedCategory.quotientCompQhIso C).inv.app
+          (P⟦(-1 : ℤ)⟧))).app (DerivedCategory.Q.obj I) ≫
         (MonoidalClosed.internalHom.flip.obj (DerivedCategory.Q.obj I)).map
           ((DerivedCategory.Q.commShiftIso (-1 : ℤ)).inv.app P).op ≫
         (MonoidalClosed.internalHom.flip.obj (DerivedCategory.Q.obj I)).map
@@ -373,7 +381,16 @@ theorem nativeHom_evaluation_shift_one
         siteHomSignedSourceComponent (DerivedCategory.Q.obj I) 1
           (op (DerivedCategory.Q.obj P)) =
       (DerivedCategory.Q.commShiftIso (1 : ℤ)).hom.app (CochainComplex.internalHomObj P I) ≫
-        (DerivedCategory.qhInternalHomToIhom P I)⟦(1 : ℤ)⟧' := by
+        ((DerivedCategory.quotientCompQhIso C).inv.app (CochainComplex.internalHomObj P I) ≫
+          DerivedCategory.qhInternalHomToIhom P I ≫
+          (ihom (DerivedCategory.Qh.obj ((HomotopyCategory.quotient C (.up ℤ)).obj P))).map
+            ((DerivedCategory.quotientCompQhIso C).hom.app I) ≫
+          (MonoidalClosed.pre ((DerivedCategory.quotientCompQhIso C).inv.app P)).app
+            (DerivedCategory.Q.obj I))⟦(1 : ℤ)⟧' := by
+  simp only [DerivedCategory.quotientCompQhIso,
+    HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift_hom,
+    Quotient.lift.isLift_inv, CategoryTheory.Functor.map_id, MonoidalClosed.pre_id,
+    NatTrans.id_app, Category.id_comp, Category.comp_id]
   let K := DerivedCategory.Q.obj P
   let M := DerivedCategory.Q.obj I
   let U := CochainComplex.internalHomObj P I
