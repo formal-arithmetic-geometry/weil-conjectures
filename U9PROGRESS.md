@@ -274,31 +274,48 @@
 - Fix patterns and whole-tree inventories: /home/ubuntu/u9/bz/FIXES-BZ885.md.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ871 in progress
 
-- Branch: u9/BZ871; original baseline e167a50a4.
-- Resumed after rereading the unit brief and progress notes. The user instructed
-  continuation after the explicit canonical endpoint-transport proposal; that patch is applied.
-- Merged integrated bump commit 40e255942. Its restored upstream counit comparison
-  lemmas replace this unit's earlier duplicate private reconstruction.
-- The owned proof now normalizes the explicit quotient transports and compares
-  homotopy localization factors with their cochain counterparts.
-- Next: remote ucheck-bump validation, then the direct importer chain.
-- Previous blockers and diagnostic history: /home/ubuntu/u9/bz/FIXES-BZ871.md.
+# BZ908 in progress
+
+- Branch: u9/BZ908; baseline 40e255942.
+- The user instructed continuation after the explicit two-cast proposal.
+- Applied the two `cast (by rfl)` wrappers in IsCanonicalPullbackTensorComparison,
+  preserving the existing maps while restoring hidden Qh/Q endpoint conversions.
+- Localization imports resolve the proof-local mismatch. The uniqueness proof uses
+  `erw` to rewrite through the reflexive casts and semireducible category aliases.
+- Next: remote validation, then the 19 direct importers and further downstream
+  modules up to the brief's limit of 30 extra modules.
+- Fix patterns: /home/ubuntu/u9/bz/FIXES-BZ908.md.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-## BZ871 validation checkpoint
+- Assigned leaf compiled successfully (51s), all 3998 jobs green at 47eabae395f.
+  The shared remote wrapper hit a shell syntax error after compilation; full Lean
+  success is recorded in BUILD-BZ908-leaf-green-full.log. Rechecking the runner.
+- Next batch uses two direct importers whose dependency closures cover all 19:
+  SingleComplexInheritedTensorCondition and NormalizedInternalHomPullbackComparison.
 
-- Current source: e2d5e842232e947ec70e76a8173168c4f17ec9c3; remote root-only ucheck-bump running.
-- The prerequisite OpenPinnedSingleDegreeZeroCounitIso now passes with a local
-  abstract square helper at explicit Type (u + 1) / Category.{u} universes.
-- The owned public statement now elaborates with the canonical endpoint transports
-  and explicit canonical target categories. Its original hypotheses/docstring are unchanged.
-- The homotopy-square inverse normalization and exact-factor helper have compiled.
-- Latest correction normalizes both trailing identities in the endpoint helper
-  and uses congrArg₂ rather than a large concrete rewrite in the final proof.
-- Previous full diagnostics: BUILD-BZ871-resume1-full.log through resume7-full.log
-  under /home/ubuntu/u9/bz. The latest prior run hit the existing 600000 heartbeat
-  budget in the final concrete rewrite; no limit was increased.
-- FIXES-BZ871.md has chronological fix records; consolidate after the green run.
-- Remaining: green root, mandatory downstream batch, final fix records and DONE.
+- The stable downstream run at 0997529457 rebuilt the assigned leaf (59s) and
+  CanonicalPullbackTensorMonoidalRealization (50s) successfully.
+- TensorCoordinateIdentifications needs the same Qh/Q reflexive casts plus an
+  explicit target sheaf category; the known BZ877 repair is applied for recheck.
+  The unused-list theorem has an external caller, so it is retained.
+- Unowned blockers found: StalkDerivedExtensionComparisonIsoCore (heartbeat
+  timeout) and OpenRestrictionDerivedMonoidal (reversed compositor).
+- Per-run ucheck-bump snapshot: /home/ubuntu/u9/bz/BZ908-bin/ucheck-bump. It preserves
+  the lead's locking and one-build-per-helper rules while avoiding shared-script
+  overwrite failures. No shared build scripts were edited.
+
+
+# BZ938 in progress
+
+- Branch: u9/BZ938; baseline before repairs: 1626b332e^.
+- The user instructed continuation after the exact four-projection private-helper proposal.
+  Applied BZ938-private-compositor-proposal.patch to descend_coherence.
+  The .hom → .inv migration preserves the original equation under Mathlib's reversed compositor.
+- Definition bodies and proof-local comparisons now use the correct compositor direction.
+- First remote build cleared five of eight diagnostics; remaining three shared the
+  private helper statement as their root. Next: validate the completed repair.
+- Then check the nine direct importers, continuing through unblocked layers up to
+  the brief's 30-extra-module limit.
+- Fix records: /home/ubuntu/u9/bz/FIXES-BZ938.md.
+- No local Lean/Lake, forbidden proof escapes, or heartbeat changes.
