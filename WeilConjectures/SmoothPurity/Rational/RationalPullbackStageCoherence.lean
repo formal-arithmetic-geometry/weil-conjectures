@@ -11,6 +11,7 @@ public import WeilConjectures.CategoryTheory.StageSystem.StageSystemFunctorDesce
 import WeilConjectures.SmoothPurity.Rational.RationalPullbackScalarTower
 import all WeilConjectures.SixFunctors.GeneralAlgebraicallyClosedCoefficients.GeneralAlgebraicallyClosedCoefficientStages
 import all Mathlib.Logic.Small.Defs
+import Mathlib.Util.CountHeartbeats
 
 /-! # Pullback comparisons on the normalized coefficient stages
 
@@ -161,7 +162,7 @@ private theorem scalar_tower_nat
     scalar_tower_with_endpoint l E L M ι j κ e f K
 
 set_option maxHeartbeats 400000 in
--- Measured 229337 heartbeats for this transported-category equality on Lean 4.35.
+#count_heartbeats in
 private theorem canonical_natural {X Y : Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
