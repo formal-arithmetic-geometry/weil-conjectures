@@ -287,3 +287,9 @@
   modules up to the brief's limit of 30 extra modules.
 - Fix patterns: /home/ubuntu/u9/bz/FIXES-BZ908.md.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+- Assigned leaf compiled successfully (51s), all 3998 jobs green at 47eabae395f.
+  The shared remote wrapper hit a shell syntax error after compilation; full Lean
+  success is recorded in BUILD-BZ908-leaf-green-full.log. Rechecking the runner.
+- Next batch uses two direct importers whose dependency closures cover all 19:
+  SingleComplexInheritedTensorCondition and NormalizedInternalHomPullbackComparison.
