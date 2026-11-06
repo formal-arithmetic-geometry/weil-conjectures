@@ -368,7 +368,7 @@ noncomputable def derivedRestrictScalarsQuotientPowSuccIso (n : ℕ) :
     derivedRestrictScalars (quotientPowSuccFactor I n) X ⋙
         derivedRestrictScalars (Ideal.Quotient.mk (I ^ (n + 2))) X ≅
       derivedRestrictScalars (Ideal.Quotient.mk (I ^ (n + 1))) X :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso
       (Sheaf.restrictScalarsCompIso X.smallEtaleTopology _ _ _ (by ext; rfl))
 

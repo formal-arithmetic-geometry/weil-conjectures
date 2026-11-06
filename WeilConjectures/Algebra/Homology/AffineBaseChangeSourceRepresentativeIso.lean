@@ -141,22 +141,16 @@ theorem exists_affineBaseChangeIntoPullback_representativeIso
       inferInstanceAs (HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X'.toRingedSpace)))
     have htransport :
         (DerivedCategory.quotientCompQhIso.{w} _).inv.app T ≫
-          (DerivedCategory.Qh.{w}
-            (C := SheafOfModules.{u} (moduleRings X'.toRingedSpace))).map
-            (((Scheme.Modules.tensorPullback g').mapHomotopyCategoryFactors (.up ℤ)).inv.app N) ≫
           inv ((SingleComplexBaseChange.counit g').app
             ((HomotopyCategory.quotient _ (.up ℤ)).obj N)) ≫
-          (derivedPullback g').map ((DerivedCategory.quotientCompQhIso _).hom.app N) ≫
-          (derivedPullback g').map eN.hom =
+          (derivedPullback g').map ((DerivedCategory.quotientCompQhIso _).hom.app N ≫ eN.hom) =
         inv ((SingleComplexBaseChange.counit g').app
           ((HomotopyCategory.quotient _ (.up ℤ)).obj N)) ≫
           (derivedPullback g').map eN.hom := by
       simp only [DerivedCategory.quotientCompQhIso,
         HomologicalComplexUpToQuasiIso.quotientCompQhIso,
-        Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_hom, Quotient.lift.isLift_inv]
-      erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id]
+        Quotient.lift.isLift_hom, Quotient.lift.isLift_inv]
       repeat erw [Category.id_comp]
-      all_goals rfl
     dsimp only [affineBaseChangeIntoPullback]
     erw [htransport]
     simpa only [SingleComplexBaseChange.comparisonIntoPullback, F, G, T, cast_eq,

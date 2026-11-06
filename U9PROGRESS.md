@@ -508,18 +508,20 @@
 - This final commit changes progress documentation only; Lean source matches the green build.
 
 
-# BZ1116 in progress
+# BZ1116 complete
 
-- Branch: u9/BZ1116; start 68f814e0cb89c213db09d1dcdbf30b82f8e149f5.
-- Applied the concrete five-line compositor proposal after the user instructed continuation.
-  Two private helper signatures and their proofs now preserve the same maps under
-  Mathlib's reversed compositor; the public theorem and all hypotheses are unchanged.
-- Assigned leaf is green and sorry-free: 545b33d2f1, ucheck-bump rc=0, 12965 jobs.
-- Green chain check at 454495ac4f passed with zero failures, covering the leaf and eight
-  downstream modules through SfP1IntegralTraceComparison.
-- Merged completed prerequisite owners PZ037 (5ce8d8289243) and BZ1117 (82562d30eaad).
-- Current build: /home/ubuntu/u9/logs/BZ1116-20261106T141354.log, session 9321.
-  It has passed both previously blocked transport targets and is progressing through
-  the projective-line/affine-line duality chain toward SmoothDuality.SmoothBaseChange.
-- Fix patterns and exact errors: /home/ubuntu/u9/bz/FIXES-BZ1116.md.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+- Assigned SfIsoPushPullUnitNormalization is green and sorry-free, with 30 downstream modules green.
+- Final ucheck-bump passed: rc=0, failed=0, 13208 jobs; validated source 5befaf1f528b3cbdd6cd395dcf23eb4ed6c3f40b.
+- Applied the proposed private compositor API changes after the user's continuation instruction.
+  The public theorem, hypotheses, and docstrings are unchanged; proofs use matching cancellation.
+- Generation and GenericPerfect needed only Localization imports for hidden Qh comparisons.
+  All five recorded rewrite rules replay the edits exactly and are idempotent.
+- Merged completed prerequisite fixes from PZ037 and BZ1117, then current bump/v4.35.
+- Reached the 30-extra-module limit. SmoothBaseChange was previously blocked by Generation;
+  that dependency is now green, but SmoothBaseChange itself was not retested after the repair.
+  The remaining importer frontier is recorded without claiming it green or red.
+- Full final log: /home/ubuntu/u9/bz/BUILD-BZ1116-final-green-full.log.
+- Fixes and completion record: /home/ubuntu/u9/bz/FIXES-BZ1116.md and
+  /home/ubuntu/u9/state/BZ1116.DONE.
+- No local Lean/Lake, proof placeholders, trust bypasses, declarations deleted, or heartbeat changes.
+- All ucheck calls finished. This final commit changes progress documentation only.

@@ -249,8 +249,12 @@ omit [NoetherianSpace X] in
 theorem finiteDimensional_iInf_localSubalgebra :
     FiniteDimensional k
       ↥(⨅ x : closedPoints X, Modules.stalkLattice k (Modules.structureSheafToGeneric X) x.1) := by
-  have : (SheafOfModules.unit X.ringCatSheaf).IsFinitePresentation :=
-    SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
+  have : (SheafOfModules.unit X.ringCatSheaf).IsFinitePresentation := by
+    have : (SheafOfModules.unit X.ringCatSheaf).IsInvertible :=
+      SheafOfModules.instIsInvertibleUnit.{u, u, u}
+    have : (SheafOfModules.unit X.ringCatSheaf).IsFiniteLocallyFree :=
+      SheafOfModules.IsInvertible.isFiniteLocallyFree.{u, u, u} _
+    exact SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
   have := Modules.finiteDimensional_H_of_isProper (k := k) (SheafOfModules.unit X.ringCatSheaf) 0
   exact Module.Finite.equiv (structureSheafH0Equiv k X hdim)
 
@@ -261,8 +265,12 @@ theorem finiteDimensional_quotient_range_localPrincipalPartsMap :
       ((Π₀ x : closedPoints X,
         X.functionField ⧸ Modules.stalkLattice k (Modules.structureSheafToGeneric X) x.1) ⧸
         LinearMap.range (localPrincipalPartsMap k X hdim)) := by
-  have : (SheafOfModules.unit X.ringCatSheaf).IsFinitePresentation :=
-    SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
+  have : (SheafOfModules.unit X.ringCatSheaf).IsFinitePresentation := by
+    have : (SheafOfModules.unit X.ringCatSheaf).IsInvertible :=
+      SheafOfModules.instIsInvertibleUnit.{u, u, u}
+    have : (SheafOfModules.unit X.ringCatSheaf).IsFiniteLocallyFree :=
+      SheafOfModules.IsInvertible.isFiniteLocallyFree.{u, u, u} _
+    exact SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
   have := Modules.finiteDimensional_H_of_isProper (k := k) (SheafOfModules.unit X.ringCatSheaf) 1
   exact Module.Finite.equiv (structureSheafH1Equiv k X hdim)
 

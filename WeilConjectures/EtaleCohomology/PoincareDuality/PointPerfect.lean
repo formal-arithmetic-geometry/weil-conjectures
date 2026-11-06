@@ -269,8 +269,8 @@ lemma nonempty_iso_reductionModIdeal_of_distTriang {X : Scheme.{u}} {ϖ : Λ}
       CategoryTheory.Functor.map_id]
   obtain ⟨φ, -⟩ := exists_iso_of_arrow_iso _ _ hT hT'
     (Arrow.isoMk u.symm u.symm (by
-      dsimp only [Arrow.mk_hom, Triangle.mk_mor₁, Iso.symm_hom]
-      rw [hmor, Triangle.mk_mor₁, Linear.comp_smul, Linear.smul_comp]
+      change u.inv ≫ (F.mapTriangle.obj T).mor₁ = (ϖ • 𝟙 K) ≫ u.inv
+      rw [hmor, Linear.comp_smul, Linear.smul_comp]
       exact congrArg (ϖ • ·) ((Category.comp_id u.inv).trans (Category.id_comp u.inv).symm)))
   exact ⟨Triangle.π₃.mapIso φ ≪≫ F.mapIso ((_root_.DerivedCategory.singleFunctor _ 0).mapIso
     ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).mapIso e))⟩

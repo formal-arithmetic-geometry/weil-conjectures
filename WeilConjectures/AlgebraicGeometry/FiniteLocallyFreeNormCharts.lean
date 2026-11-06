@@ -153,6 +153,10 @@ private theorem exists_free_affine_chart
        Module.Finite Γ(X, B) Γ(Y, s ⁻¹ᵁ B)) := by
   classical
   let M := (Scheme.Modules.pushforward s).obj (SheafOfModules.unit Y.ringCatSheaf)
+  have : (SheafOfModules.unit Y.ringCatSheaf).IsInvertible :=
+    SheafOfModules.instIsInvertibleUnit.{u, u, u}
+  have : (SheafOfModules.unit Y.ringCatSheaf).IsFiniteLocallyFree :=
+    SheafOfModules.IsInvertible.isFiniteLocallyFree.{u, u, u} _
   have : M.IsFiniteLocallyFree := Scheme.Modules.isFiniteLocallyFree_pushforward s _
   obtain ⟨V, I, hI, hxV, ⟨e⟩⟩ := Scheme.Modules.exists_mem_over_iso_free M x
   obtain ⟨_, ⟨B, hB, rfl⟩, hxB, hBVW⟩ :=

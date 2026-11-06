@@ -39,7 +39,7 @@ theorem openSiteReturn_counit_app
     let R := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) W
     let PU := (schemeOpenRestriction X W).mapDerivedCategory
     e.mapDerivedCategory.functor.map ((openSiteReturnIso X W).hom.app E) ≫
-      ((Functor.mapDerivedCategoryCompIso R e.functor).symm).hom.app E =
+      (Functor.mapDerivedCategoryCompIso R e.functor).hom.app E =
       e.mapDerivedCategory.counitIso.hom.app (PU.obj E) := by
   intro e R PU
   unfold openSiteReturnIso
@@ -49,7 +49,7 @@ theorem openSiteReturn_counit_app
     Functor.associator_hom_app, Functor.rightUnitor_hom_app,
     Category.id_comp, Functor.map_comp, Category.assoc]
   exact equivalence_return_cancel e.mapDerivedCategory (R.mapDerivedCategory.obj E)
-    (PU.obj E) ((Functor.mapDerivedCategoryCompIso R e.functor).app E)
+    (PU.obj E) ((Functor.mapDerivedCategoryCompIso R e.functor).symm.app E)
 
 /-- The apex equivalence maps the open-site return and composition maps to
 the site counit on the overlap scheme. This is the component form used in
@@ -66,7 +66,7 @@ theorem perfectOverlapApex_siteReturn_comp
     let cart := perfectOverlapStageEquivalence g pX pY b hg U V
     (perfectOverlapApexEquivalence g pX pY b hg U V).functor.map
         ((openSiteReturnIso X W).hom.app E) ≫
-      cart.functor.map ((Functor.mapDerivedCategoryCompIso Rw e.functor).symm.hom.app E) =
+      cart.functor.map ((Functor.mapDerivedCategoryCompIso Rw e.functor).hom.app E) =
         cart.functor.map (e.mapDerivedCategory.counitIso.hom.app
           ((schemeOpenRestriction X W).mapDerivedCategory.obj E)) := by
   intro W e Rw cart
@@ -89,7 +89,7 @@ theorem perfectOverlapApex_overlapReturn_comp
     let RU := (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) P).mapDerivedCategory
     let τ : RU ⋙ SP ≅
         (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) (P ⊓ Q)).mapDerivedCategory :=
-      (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      Functor.mapDerivedCategoryCompIso _ _ ≪≫
         Functor.mapDerivedCategoryNatIso
           (SheafOfModules.overFunctorMap.{u} (moduleRings X.toRingedSpace) i)
     let eW : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over (P ⊓ Q)) ≌
@@ -100,7 +100,7 @@ theorem perfectOverlapApex_overlapReturn_comp
     let apex := perfectOverlapApexEquivalence g pX pY b hg U V
     apex.functor.map (SP.map ((openSiteReturnIso X P).hom.app E)) ≫
         apex.functor.map (τ.hom.app E) ≫
-          cart.functor.map ((Functor.mapDerivedCategoryCompIso Rw eW.functor).symm.hom.app E) =
+          cart.functor.map ((Functor.mapDerivedCategoryCompIso Rw eW.functor).hom.app E) =
       apex.functor.map ((openSiteOverlapIso X i).hom.app (PU.obj E)) ≫
         apex.functor.map (LW.map ((schemeDerivedOpenRestrictionCompIso X i).hom.app E)) ≫
           cart.functor.map (eW.mapDerivedCategory.counitIso.hom.app
@@ -127,7 +127,7 @@ theorem perfectOverlapApex_overlapReturn_comp_for
     let RQ := (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) Q).mapDerivedCategory
     let τ : RQ ⋙ SQ ≅
         (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) W).mapDerivedCategory :=
-      (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      Functor.mapDerivedCategoryCompIso _ _ ≪≫
         Functor.mapDerivedCategoryNatIso
           (SheafOfModules.overFunctorMap.{u} (moduleRings X.toRingedSpace) i)
     let eW : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over W) ≌
@@ -138,7 +138,7 @@ theorem perfectOverlapApex_overlapReturn_comp_for
     let apex := perfectOverlapApexEquivalence g pX pY b hg U V
     apex.functor.map (SQ.map ((openSiteReturnIso X Q).hom.app E)) ≫
         apex.functor.map (τ.hom.app E) ≫
-          cart.functor.map ((Functor.mapDerivedCategoryCompIso Rw eW.functor).symm.hom.app E) =
+          cart.functor.map ((Functor.mapDerivedCategoryCompIso Rw eW.functor).hom.app E) =
       apex.functor.map ((openSiteOverlapIso X i).hom.app (PQ.obj E)) ≫
         apex.functor.map (LW.map ((schemeDerivedOpenRestrictionCompIso X i).hom.app E)) ≫
           cart.functor.map (eW.mapDerivedCategory.counitIso.hom.app
