@@ -236,6 +236,7 @@ theorem canonicalSingleBaseChangeComparison
       DerivedCategory.singleFunctors, HomotopyCategory.singleFunctor,
       HomotopyCategory.singleFunctors, SingleFunctors.postcomp, Functor.comp_map, Functor.comp_obj,
       DerivedCategory.Qh, HomologicalComplexUpToQuasiIso.Qh, HomotopyCategory.quotient,
-      Quotient.lift_map_functor_map, Quotient.lift_obj_functor_obj, DerivedCategory.Q] using hf
+      Quotient.lift_map_functor_map, Quotient.lift_obj_functor_obj, DerivedCategory.Q,
+      Iso.app_hom, Iso.app_inv, pushforward, RingedSpace.moduleDirectImage] using hf
 
 end AlgebraicGeometry.Scheme.Modules
