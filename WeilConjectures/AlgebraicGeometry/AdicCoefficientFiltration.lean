@@ -321,7 +321,8 @@ private theorem triangle_transport
   · simp [g]
   · simp [δ, ← CategoryTheory.Functor.map_comp]
 
-local notation:60 "distTriang " C:60 => Pretriangulated.distinguishedTriangles (C := C)
+local notation:60 "distTriang " C:60 =>
+  @Pretriangulated.distinguishedTriangles C _ inferInstance _ inferInstance inferInstance inferInstance
 
 /-- The graded filtration gives a distinguished triangle with the two actual reductions.
 This assertion has no constructibility or boundedness hypothesis or conclusion.
