@@ -67,11 +67,11 @@ def derivedSquare (n : ℕ) (e : FiniteEncoding l E X n)
   letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   letI := scalarReductionRestrictionLimits.{u, u} l E X n
   letI := scalarReductionRestrictionColimits.{u, u} l E X n
-  ((Functor.mapDerivedCategoryCompIso).symm
-    (Mod.comap (AdicCompletion.quotient l E X n)) (A.modules.functor)).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso
+    (Mod.comap (AdicCompletion.quotient l E X n)) (A.modules.functor)) ≪≫
     Functor.mapDerivedCategoryNatIso a ≪≫
-      (Functor.mapDerivedCategoryCompIso e.ordinary.functor).symm
-        (scalarReductionRestriction.{u, u} l E X n)
+      (Functor.mapDerivedCategoryCompIso e.ordinary.functor
+        (scalarReductionRestriction.{u, u} l E X n)).symm
 
 /-- A comparison in D(R_n), retaining the finite coefficient action.
 Source: Stacks 06YY, derived tensor under an isomorphism of coefficients

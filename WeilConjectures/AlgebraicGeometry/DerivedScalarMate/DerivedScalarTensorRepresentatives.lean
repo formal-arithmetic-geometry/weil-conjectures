@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedScalarMate.DerivedScalarTensorOrdinary
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.DerivedScalarMate.DerivedFixedCoefficientTensorComparison
 import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
 import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse

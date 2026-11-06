@@ -104,14 +104,17 @@ private local instance {C : Type uC} [Category.{vC} C]
     HasLimitsOfShape (Discrete I) (Sheaf J CommRingCat.{u}) :=
   hasLimitsOfShape_of_hasLimitsOfShape_createsLimitsOfShape (sheafToPresheaf J CommRingCat.{u})
 
-private local instance {C : Type uC} [Category.{vC} C] (I : Type u) :
-    HasLimitsOfShape (Discrete I) (Cᵒᵖ ⥤ RingCat.{u}) :=
-  functorCategoryHasLimitsOfShape
+private local instance sheafBinaryProducts
+    {C : Type uC} [Category.{vC} C] (J : GrothendieckTopology C) :
+    HasBinaryProducts (Sheaf J (Type u)) := Sheaf.instHasLimitsOfShape
 
-private local instance {C : Type uC} [Category.{vC} C]
-    (J : GrothendieckTopology C) (I : Type u) :
-    HasLimitsOfShape (Discrete I) (Sheaf J RingCat.{u}) :=
-  hasLimitsOfShape_of_hasLimitsOfShape_createsLimitsOfShape (sheafToPresheaf J RingCat.{u})
+attribute [local instance] SheafOfModules.sheafHasBinaryProduct
+
+private local instance sheafBinaryProducts
+    {C : Type uC} [Category.{vC} C] (J : GrothendieckTopology C) :
+    HasBinaryProducts (Sheaf J (Type u)) := Sheaf.instHasLimitsOfShape
+
+attribute [local instance] SheafOfModules.sheafHasBinaryProduct
 
 private theorem reflect_binary
     {C D : Type*} [Category C] [Category D] [HasBinaryProducts C] [HasBinaryProducts D]
@@ -198,84 +201,6 @@ private noncomputable abbrev rmul
     {C : Type uC} [Category.{vC} C] [EssentiallySmall.{u} C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{u}) := fromProd (rset R) (rset R) ≫ ringMul R
 
-private theorem structural_map_add
-    {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
-    [EssentiallySmall.{u} C] [EssentiallySmall.{u} D]
-    (J : GrothendieckTopology C) (K : GrothendieckTopology D)
-    (A : Sheaf J CommRingCat.{u}) (B : Sheaf K CommRingCat.{u})
-    (f : RingedToposMorphismOfUniverses (C := C) (D := D) (J := J) (K := K) (base A) (base B))
-    (RI : Sheaf J CommRingCat.{u}) (I : AlgebraicInverseImage f.inverse B RI) :
-    ∀ (U : Cᵒᵖ) (x y : RI.obj.obj U),
-      (I.ringUnderlying.inv ≫ f.ringMap).hom.app U (x + y) =
-        @Add.add (A.obj.obj U) inferInstance
-          ((I.ringUnderlying.inv ≫ f.ringMap).hom.app U x)
-          ((I.ringUnderlying.inv ≫ f.ringMap).hom.app U y) := by
-  let _ := f.leftExact
-  let e := I.ringUnderlying.symm
-  let φ := f.ringMap
-  let d := e.hom ≫ φ
-  have hca : f.inverse.map (radd B) ≫ e.inv =
-      prodComparison f.inverse (rset B) (rset B) ≫ prod.map e.inv e.inv ≫ radd RI :=
-    binary_of_graph f.inverse e.inv e.inv e.inv (radd B) (radd RI)
-      (fun U x y ↦ @Add.add (B.obj.obj U) inferInstance x y)
-      (fun U x y ↦ @Add.add (RI.obj.obj U) inferInstance x y)
-      (fun _ _ ↦ rfl) (fun _ _ ↦ rfl) I.ringAdd
-  have ha : f.inverse.map (radd B) =
-      prodComparison f.inverse (rset B) (rset B) ≫
-        prod.map e.inv e.inv ≫ radd RI ≫ e.hom := by
-    apply (cancel_mono e.inv).mp
-    simpa only [Category.assoc, Iso.hom_inv_id, Category.comp_id] using hca
-  have hφa : f.inverse.map (radd B) ≫ φ =
-      prodComparison f.inverse (rset B) (rset B) ≫ prod.map φ φ ≫ radd A :=
-    binary_of_graph f.inverse φ φ φ (radd B) (radd A)
-      (fun U x y ↦ @Add.add (B.obj.obj U) inferInstance x y)
-      (fun U x y ↦ @Add.add (A.obj.obj U) inferInstance x y)
-      (fun _ _ ↦ rfl) (fun _ _ ↦ rfl) f.ring_add
-  exact binary_hom_sections d d d (radd RI) (radd A)
-    (fun U x y ↦ @Add.add (RI.obj.obj U) inferInstance x y)
-    (fun U x y ↦ @Add.add (A.obj.obj U) inferInstance x y)
-    (fun _ _ ↦ rfl) (fun _ _ ↦ rfl)
-    (reflect_binary f.inverse e (radd B) (radd RI) (radd A) φ ha hφa)
-
-private theorem structural_map_mul
-    {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
-    [EssentiallySmall.{u} C] [EssentiallySmall.{u} D]
-    (J : GrothendieckTopology C) (K : GrothendieckTopology D)
-    (A : Sheaf J CommRingCat.{u}) (B : Sheaf K CommRingCat.{u})
-    (f : RingedToposMorphismOfUniverses (C := C) (D := D) (J := J) (K := K) (base A) (base B))
-    (RI : Sheaf J CommRingCat.{u}) (I : AlgebraicInverseImage f.inverse B RI) :
-    ∀ (U : Cᵒᵖ) (x y : RI.obj.obj U),
-      (I.ringUnderlying.inv ≫ f.ringMap).hom.app U (x * y) =
-        @Mul.mul (A.obj.obj U) inferInstance
-          ((I.ringUnderlying.inv ≫ f.ringMap).hom.app U x)
-          ((I.ringUnderlying.inv ≫ f.ringMap).hom.app U y) := by
-  let _ := f.leftExact
-  let e := I.ringUnderlying.symm
-  let φ := f.ringMap
-  let d := e.hom ≫ φ
-  have hcm : f.inverse.map (rmul B) ≫ e.inv =
-      prodComparison f.inverse (rset B) (rset B) ≫ prod.map e.inv e.inv ≫ rmul RI :=
-    binary_of_graph f.inverse e.inv e.inv e.inv (rmul B) (rmul RI)
-      (fun U x y ↦ @Mul.mul (B.obj.obj U) inferInstance x y)
-      (fun U x y ↦ @Mul.mul (RI.obj.obj U) inferInstance x y)
-      (fun _ _ ↦ rfl) (fun _ _ ↦ rfl) I.ringMul
-  have hm : f.inverse.map (rmul B) =
-      prodComparison f.inverse (rset B) (rset B) ≫
-        prod.map e.inv e.inv ≫ rmul RI ≫ e.hom := by
-    apply (cancel_mono e.inv).mp
-    simpa only [Category.assoc, Iso.hom_inv_id, Category.comp_id] using hcm
-  have hφm : f.inverse.map (rmul B) ≫ φ =
-      prodComparison f.inverse (rset B) (rset B) ≫ prod.map φ φ ≫ rmul A :=
-    binary_of_graph f.inverse φ φ φ (rmul B) (rmul A)
-      (fun U x y ↦ @Mul.mul (B.obj.obj U) inferInstance x y)
-      (fun U x y ↦ @Mul.mul (A.obj.obj U) inferInstance x y)
-      (fun _ _ ↦ rfl) (fun _ _ ↦ rfl) f.ring_mul
-  exact binary_hom_sections d d d (rmul RI) (rmul A)
-    (fun U x y ↦ @Mul.mul (RI.obj.obj U) inferInstance x y)
-    (fun U x y ↦ @Mul.mul (A.obj.obj U) inferInstance x y)
-    (fun _ _ ↦ rfl) (fun _ _ ↦ rfl)
-    (reflect_binary f.inverse e (rmul B) (rmul RI) (rmul A) φ hm hφm)
-
 private theorem structural_map
     {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
     [EssentiallySmall.{u} C] [EssentiallySmall.{u} D]
@@ -289,8 +214,50 @@ private theorem structural_map
   let e := I.ringUnderlying.symm
   let φ := f.ringMap
   let d := e.hom ≫ φ
-  have hAdd := structural_map_add J K A B f RI I
-  have hMul := structural_map_mul J K A B f RI I
+  have hca : f.inverse.map (radd B) ≫ e.inv =
+      prodComparison f.inverse (rset B) (rset B) ≫ prod.map e.inv e.inv ≫ radd RI :=
+    binary_of_graph f.inverse e.inv e.inv e.inv (radd B) (radd RI)
+      (fun U x y ↦ @Add.add (B.obj.obj U) inferInstance x y)
+      (fun U x y ↦ @Add.add (RI.obj.obj U) inferInstance x y)
+      (fun _ _ ↦ rfl) (fun _ _ ↦ rfl) I.ringAdd
+  have hcm : f.inverse.map (rmul B) ≫ e.inv =
+      prodComparison f.inverse (rset B) (rset B) ≫ prod.map e.inv e.inv ≫ rmul RI :=
+    binary_of_graph f.inverse e.inv e.inv e.inv (rmul B) (rmul RI)
+      (fun U x y ↦ @Mul.mul (B.obj.obj U) inferInstance x y)
+      (fun U x y ↦ @Mul.mul (RI.obj.obj U) inferInstance x y)
+      (fun _ _ ↦ rfl) (fun _ _ ↦ rfl) I.ringMul
+  have ha : f.inverse.map (radd B) =
+      prodComparison f.inverse (rset B) (rset B) ≫
+        prod.map e.inv e.inv ≫ radd RI ≫ e.hom := by
+    apply (cancel_mono e.inv).mp
+    simpa only [Category.assoc, Iso.hom_inv_id, Category.comp_id] using hca
+  have hm : f.inverse.map (rmul B) =
+      prodComparison f.inverse (rset B) (rset B) ≫
+        prod.map e.inv e.inv ≫ rmul RI ≫ e.hom := by
+    apply (cancel_mono e.inv).mp
+    simpa only [Category.assoc, Iso.hom_inv_id, Category.comp_id] using hcm
+  have hφa : f.inverse.map (radd B) ≫ φ =
+      prodComparison f.inverse (rset B) (rset B) ≫ prod.map φ φ ≫ radd A :=
+    binary_of_graph f.inverse φ φ φ (radd B) (radd A)
+      (fun U x y ↦ @Add.add (B.obj.obj U) inferInstance x y)
+      (fun U x y ↦ @Add.add (A.obj.obj U) inferInstance x y)
+      (fun _ _ ↦ rfl) (fun _ _ ↦ rfl) f.ring_add
+  have hφm : f.inverse.map (rmul B) ≫ φ =
+      prodComparison f.inverse (rset B) (rset B) ≫ prod.map φ φ ≫ rmul A :=
+    binary_of_graph f.inverse φ φ φ (rmul B) (rmul A)
+      (fun U x y ↦ @Mul.mul (B.obj.obj U) inferInstance x y)
+      (fun U x y ↦ @Mul.mul (A.obj.obj U) inferInstance x y)
+      (fun _ _ ↦ rfl) (fun _ _ ↦ rfl) f.ring_mul
+  have hAdd := binary_hom_sections d d d (radd RI) (radd A)
+    (fun U x y ↦ @Add.add (RI.obj.obj U) inferInstance x y)
+    (fun U x y ↦ @Add.add (A.obj.obj U) inferInstance x y)
+    (fun _ _ ↦ rfl) (fun _ _ ↦ rfl)
+    (reflect_binary f.inverse e (radd B) (radd RI) (radd A) φ ha hφa)
+  have hMul := binary_hom_sections d d d (rmul RI) (rmul A)
+    (fun U x y ↦ @Mul.mul (RI.obj.obj U) inferInstance x y)
+    (fun U x y ↦ @Mul.mul (A.obj.obj U) inferInstance x y)
+    (fun _ _ ↦ rfl) (fun _ _ ↦ rfl)
+    (reflect_binary f.inverse e (rmul B) (rmul RI) (rmul A) φ hm hφm)
   have hOne (U : Cᵒᵖ) : d.hom.app U (1 : RI.obj.obj U) = (1 : A.obj.obj U) := by
     let z : rset B ⟶ rset B := CartesianMonoidalCategory.toUnit _ ≫ ringOne B
     let p := e.hom.hom.app U (1 : RI.obj.obj U)

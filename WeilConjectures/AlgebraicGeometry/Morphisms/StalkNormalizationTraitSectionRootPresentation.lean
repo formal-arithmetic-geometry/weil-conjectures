@@ -200,7 +200,7 @@ theorem GaloisCover.stalk_normalization_trait_section_root_presentation {S C : S
       exact IsLocalRing.eq_maximalIdeal
         (Ideal.isMaximal_under_of_isIntegral_of_isMaximal (R := R)
           (IsLocalRing.maximalIdeal D))
-    exact ((IsLocalRing.local_hom_TFAE _).out 4 0).mp hc
+    exact ((IsLocalRing.local_hom_TFAE _).out 5 1).mp hc
   let := hA
   let := hAtrait
   let := hK
