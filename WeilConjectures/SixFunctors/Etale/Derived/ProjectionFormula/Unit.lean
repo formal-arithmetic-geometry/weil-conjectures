@@ -155,7 +155,7 @@ private lemma singleFunctorObjUnitIso_inv (X : Scheme.{u}) :
   simp only [singleFunctorObjUnitIso, singleFunctorObjIsoQh, Iso.trans_inv, Iso.symm_inv,
     Functor.mapIso_inv, asIso_hom, Functor.Monoidal.εIso_hom, Iso.app_inv, h₁, h₂, h₃]
   simp only [CategoryTheory.Functor.map_id, Category.comp_id, Functor.comp_obj,
-    HomotopyCategory.quotient_obj_singleFunctors_obj, DerivedCategory.Qh_obj_singleFunctors_obj,
+    HomotopyCategory.quotient_obj_singleFunctors_obj,
     DerivedCategory.singleFunctorIsoCompQ, Iso.refl_inv, NatTrans.id_app, Category.id_comp]
   exact Category.comp_id _
 
@@ -183,7 +183,10 @@ lemma leftDerivedUpperStar_map_singleFunctorObjUnitIso_inv_comp (g : X ⟶ Y) :
     Functor.whiskerRight_app, NatTrans.id_app, Category.comp_id, Category.id_comp, Category.assoc,
     Functor.Monoidal.εIso_inv, Functor.map_comp]
   refine (Category.id_comp _).trans ?_
-  rfl
+  simp only [Iso.app_inv, DerivedCategory.quotientCompQhIso,
+    HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift_hom,
+    Quotient.lift.isLift_inv, NatTrans.id_app]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
 
 /-- The identification `Lg^* M_Y ≅ M_X` of constant complexes
 (`AlgebraicGeometry.Etale.leftDerivedUpperStarSingleConstantSheafIso`) is natural in `M`. -/
