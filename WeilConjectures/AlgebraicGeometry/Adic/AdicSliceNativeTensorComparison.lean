@@ -26,7 +26,8 @@ noncomputable def adicSliceNativeTensorIso {l : ℕ} [Fact l.Prime] {X : Scheme.
     have : PreservesColimitsOfShape WalkingParallelPair
         (Mod.mapModComap (adicUpperStarRingIso (l := l) (V := U.left) (X := X) U.hom)) :=
       inferInstanceAs (PreservesColimitsOfShape WalkingParallelPair (adicUpperStar l U.hom))
-    exact ((Mod.tensorLeftCompMapModComapIso (adicUpperStarRingIso (l := l) (V := U.left) (X := X) U.hom)
+    exact ((Mod.tensorLeftCompMapModComapIso
+      (adicUpperStarRingIso (l := l) (V := U.left) (X := X) U.hom)
       (fun _ _ ↦ Functor.LaxBraided.braided _ _) N).app M).symm
 
 /-- The native balanced tensor comparison is normalized before taking the quotient.
