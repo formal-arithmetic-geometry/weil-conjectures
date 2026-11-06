@@ -33,7 +33,7 @@ attribute [local irreducible] AdicQuotientSections.localConstantIso
 
 section NormalizedRealization
 attribute [local implicit_reducible] sheafCompose Functor.sheafPushforwardContinuous
-  Over.forget ConstantCompletion.quotient AdicCohomology.quotient
+  ConstantCompletion.quotient AdicCohomology.quotient
 
 attribute [local instance 30000] SheafOfModules.hasSheafify_coefficientUniverse
   SheafOfModules.wEqualsLocallyBijective_coefficientUniverse

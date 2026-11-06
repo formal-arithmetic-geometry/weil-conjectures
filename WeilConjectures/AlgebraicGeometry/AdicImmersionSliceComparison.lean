@@ -93,7 +93,7 @@ private def normalizationIso (X : Scheme.{u})
   let M := (ConstantCompletion.Q ((sfbModelRings X).obj (adicLisseCompletedRing X I))).obj
     ((F.mapHomologicalComplex (.up ℤ)).obj (DerivedCategory.Q.objPreimage K))
   exact realizeExact H M ≪≫ H.mapDerivedCategory.mapIso (realizeExact F K) ≪≫
-    (Functor.mapDerivedCategoryCompIso F H).symm.app K
+    (Functor.mapDerivedCategoryCompIso F H).app K
 
 private def completedModelIso {X S : Scheme.{u}} (i : S ⟶ X) [IsImmersion i]
     {A : Type (u + 1)} [CommRing A] (I : Ideal A)
@@ -210,19 +210,19 @@ theorem sfbImmersion_sliceComparisons
   let chain : (N ⋙ T ⋙ L ⋙ e.functor).mapDerivedCategory ≅
       N.mapDerivedCategory ⋙ T.mapDerivedCategory ⋙ L.mapDerivedCategory ⋙
         eD.functor :=
-    Functor.mapDerivedCategoryCompIso N (T ⋙ L ⋙ e.functor) ≪≫
+    (Functor.mapDerivedCategoryCompIso N (T ⋙ L ⋙ e.functor)).symm ≪≫
       Functor.isoWhiskerLeft N.mapDerivedCategory
-        (Functor.mapDerivedCategoryCompIso T (L ⋙ e.functor)) ≪≫
+        ((Functor.mapDerivedCategoryCompIso T (L ⋙ e.functor)).symm) ≪≫
       Functor.isoWhiskerLeft N.mapDerivedCategory
         (Functor.isoWhiskerLeft T.mapDerivedCategory
-          (Functor.mapDerivedCategoryCompIso L e.functor))
+          ((Functor.mapDerivedCategoryCompIso L e.functor).symm))
   let compare := chain.symm ≪≫ Functor.mapDerivedCategoryNatIso h
   have first (K : DerivedCategory (proEtaleRingModules X (adicLisseCompletedRing X I))) :
       Nonempty (sfbLocalRestriction i (adicLisseCompletedRing X I) U K ≅
         eD.functor.obj ((adicResidueRestriction B V).obj
           (sfbImmersionCompletedModel i I K))) := by
     exact ⟨realizeExact H (F.mapDerivedCategory.obj K) ≪≫
-      (Functor.mapDerivedCategoryCompIso F H).symm.app K ≪≫
+      (Functor.mapDerivedCategoryCompIso F H).app K ≪≫
       compare.symm.app K ≪≫
       eD.functor.mapIso (L.mapDerivedCategory.mapIso (completedModelIso i I K).symm)⟩
   refine ⟨eD, first, ?_⟩
