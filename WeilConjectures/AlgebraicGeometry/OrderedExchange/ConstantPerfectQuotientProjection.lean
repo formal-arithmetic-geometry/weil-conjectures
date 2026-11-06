@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.StrictTower.StrictConstantTowerO
 import all WeilConjectures.AlgebraicGeometry.CompletedConstantReduction.CompletedConstantSheafReductionSupplement
 import WeilConjectures.Algebra.Homology.DerivedCategory.ProjectiveHom
 import WeilConjectures.AlgebraicGeometry.ProEtale.Projection.ProEtaleProjectionFormulaArrows
+import WeilConjectures.AlgebraicGeometry.OrderedExchange.ConstantQuotientTensorComparison
 import WeilConjectures.AlgebraicGeometry.SignedProjectionResolution.SignedProjectionResolutionNormalization
 
 /-! # Perfect projection for one constant quotient
