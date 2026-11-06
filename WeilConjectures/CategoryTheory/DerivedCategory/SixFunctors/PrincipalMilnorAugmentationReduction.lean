@@ -85,7 +85,7 @@ private theorem isIso_map_of_milnor
   have hTKM : Triangle.mk (TM.map cX) (𝟙 _ - towerShift (F := F ⋙ TM) hPKM)
       (TM.map δK ≫ (TM.commShiftIso (1 : ℤ)).hom.app X) ∈ distTriang _ :=
     isomorphic_distinguished _ (TM.map_distinguished _ hTK) _
-      (Triangle.isoMk _ _ (Iso.refl _) (Iso.refl _) (Iso.refl _) (by simp; rfl)
+      (Triangle.isoMk _ _ (Iso.refl _) (Iso.refl _) (Iso.refl _) (by simp)
         (by
           simp only [Triangle.mk_mor₂, Iso.refl_hom, Category.comp_id, Category.id_comp]
           change _ = TM.map (𝟙 PK.pt - towerShift (F := F) hPK)
@@ -95,7 +95,7 @@ private theorem isIso_map_of_milnor
   have hTYM : Triangle.mk (TM.map cY) (𝟙 _ - towerShift (F := G ⋙ TM) hPGM)
       (TM.map δY ≫ (TM.commShiftIso (1 : ℤ)).hom.app Y) ∈ distTriang _ :=
     isomorphic_distinguished _ (TM.map_distinguished _ hTY) _
-      (Triangle.isoMk _ _ (Iso.refl _) (Iso.refl _) (Iso.refl _) (by simp; rfl)
+      (Triangle.isoMk _ _ (Iso.refl _) (Iso.refl _) (Iso.refl _) (by simp)
         (by
           simp only [Triangle.mk_mor₂, Iso.refl_hom, Category.comp_id, Category.id_comp]
           change _ = TM.map (𝟙 PG.pt - towerShift (F := G) hPG)
