@@ -213,7 +213,7 @@ the displayed equation. The quotient/localization comparison has identity compon
 its naturality identifies Qh of the termwise comparison with Q of that comparison.
 No inversion of a counit is used; zero complexes and empty schemes satisfy the same
 factorization equations. -/
-private theorem affineSpectrum_composition_counit_square
+private theorem affineSpectrum_composition_counit_square_aux
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     {X X' : Scheme.{u}} [IsAffine X] [IsAffine X']
@@ -302,18 +302,26 @@ theorem affineSpectrum_composition_counit_square
       Scheme.Modules.tensorPullbackCompositionIso X'.isoSpec.inv g'
         ((Spec.map g'.appTop) ≫ X.isoSpec.inv) (Scheme.isoSpec_inv_naturality g').symm
     (derivedPullback (Spec.map g'.appTop)).map
-        ((counit X.isoSpec.inv).app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫
-      (counit (Spec.map g'.appTop)).app
+        (cast (by rfl)
+          ((counit X.isoSpec.inv).app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) :
+          (derivedPullback X.isoSpec.inv).obj (DerivedCategory.Q.obj P) ⟶
+            DerivedCategory.Q.obj
+              (((Scheme.Modules.tensorPullback X.isoSpec.inv).mapHomologicalComplex
+                (.up ℤ)).obj P)) ≫
+      cast (by rfl) ((counit (Spec.map g'.appTop)).app
         ((HomotopyCategory.quotient _ (.up ℤ)).obj
           (((Scheme.Modules.tensorPullback X.isoSpec.inv).mapHomologicalComplex
-            (.up ℤ)).obj P)) ≫
+            (.up ℤ)).obj P))) ≫
       DerivedCategory.Q.map ((NatIso.mapHomologicalComplex a (.up ℤ)).hom.app P) =
     (affineSpectrumDerivedPullbackIso g').hom.app (DerivedCategory.Q.obj P) ≫
       (derivedPullback X'.isoSpec.inv).map
-        ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫
-      (counit X'.isoSpec.inv).app
+        (cast (by rfl) ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) :
+          (derivedPullback g').obj (DerivedCategory.Q.obj P) ⟶
+            DerivedCategory.Q.obj
+              (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P)) ≫
+      cast (by rfl) ((counit X'.isoSpec.inv).app
         ((HomotopyCategory.quotient _ (.up ℤ)).obj
-          (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P)) := by
+          (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P))) := by
   let b₁ := Scheme.Modules.tensorPullbackCompositionIso
     (Spec.map g'.appTop) X.isoSpec.inv ((Spec.map g'.appTop) ≫ X.isoSpec.inv) rfl
   let b₂ := Scheme.Modules.tensorPullbackCompositionIso
