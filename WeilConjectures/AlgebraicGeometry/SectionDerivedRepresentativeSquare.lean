@@ -4,6 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.SectionDerivedPushpullNormalization
 public import WeilConjectures.AlgebraicGeometry.SectionKFlatTensorComparison
 public import WeilConjectures.AlgebraicGeometry.SectionOplaxTotalComparison
@@ -952,6 +954,8 @@ private theorem unit_equation {X Y : Scheme.{u}} (f : X ⟶ Y) :
   with_unfolding_all
     unfold ResolutionConjugation.UnitEquation ResolutionConjugation.eta internalPullUnitArrow
       internalLocalizationFunctor internalCochainUnit at h
+    simp only [cast_eq] at h
+    simp only [Functor.mapHomotopyCategoryFactors_hom_app, Category.id_comp] at hu
     rw [← hu] at h
     rw [e_eq_regular Λ X, e_eq_regular Λ Y] at h
     simp only [ResolutionConjugation.epsilon, derivedPullSquare, sectionPullUnitArrow] at h
