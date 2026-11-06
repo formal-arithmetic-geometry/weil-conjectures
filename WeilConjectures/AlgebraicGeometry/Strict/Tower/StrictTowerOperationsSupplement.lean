@@ -179,18 +179,18 @@ Source: strict normalization, paragraph 2; Stacks 07A7
 def StrictTowerRingedSquare.exchangeTowerSquare (r : StrictTowerRingedSquare sq) :
     exchangeTowerPull g r.RY r.RY' r.cg ⋙ exchangeTowerPull f' r.RY' r.RX' r.cf' ≅
       exchangeTowerPull f r.RY r.RX r.cf ⋙ exchangeTowerPull g' r.RX r.RX' r.cg' :=
-  ((Functor.mapDerivedCategoryCompIso).symm
+  (Functor.mapDerivedCategoryCompIso
     (exchangeTowerModulePull g r.RY r.RY' r.cg)
-    (exchangeTowerModulePull f' r.RY' r.RX' r.cf')).symm ≪≫
+    (exchangeTowerModulePull f' r.RY' r.RX' r.cf')) ≪≫
   Functor.mapDerivedCategoryNatIso
     (F := exchangeTowerModulePull g r.RY r.RY' r.cg ⋙
       exchangeTowerModulePull f' r.RY' r.RX' r.cf')
     (G := exchangeTowerModulePull f r.RY r.RX r.cf ⋙
       exchangeTowerModulePull g' r.RX r.RX' r.cg')
     ((Functor.whiskeringRight ℕᵒᵖ _ _).mapIso r.exchangeModuleSquare) ≪≫
-  (Functor.mapDerivedCategoryCompIso).symm
+  (Functor.mapDerivedCategoryCompIso
     (exchangeTowerModulePull f r.RY r.RX r.cf)
-    (exchangeTowerModulePull g' r.RX r.RX' r.cg')
+    (exchangeTowerModulePull g' r.RX r.RX' r.cg')).symm
 
 /-- The canonical mate in the derived category of strict towers.
 Source: strict normalization, paragraph 2; Stacks 07A7
