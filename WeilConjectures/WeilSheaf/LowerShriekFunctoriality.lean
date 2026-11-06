@@ -194,10 +194,10 @@ private theorem exists_ambient_triangle_of_heart_sequence
     _root_.DerivedCategory.triangleOfSES_distinguished hS,
     ⟨((P ⋙ J).mapDerivedCategoryFactors.app L).symm ≪≫
       (P ⋙ J).mapDerivedCategory.mapIso e ≪≫
-      (Functor.mapDerivedCategoryCompIso P J).app K⟩,
+      (Functor.mapDerivedCategoryCompIso P J).symm.app K⟩,
     ⟨e⟩, ⟨((Q ⋙ I).mapDerivedCategoryFactors.app L).symm ≪≫
       (Q ⋙ I).mapDerivedCategory.mapIso e ≪≫
-      (Functor.mapDerivedCategoryCompIso Q I).app K⟩⟩
+      (Functor.mapDerivedCategoryCompIso Q I).symm.app K⟩⟩
 
 private theorem exists_subcategory_triangle_of_ambient
     {C : Type uC} [Category.{v} C] [Preadditive C] [HasZeroObject C]
