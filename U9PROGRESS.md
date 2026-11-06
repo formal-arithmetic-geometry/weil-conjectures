@@ -310,3 +310,11 @@
 - Same Localization imports and reflexive transports; no declarations deleted.
 - Reference guard retained IsDerivedTensor and derivedTensorIso helper chain.
 - Next: eight direct importers in batches of at most six.
+
+- Both assigned modules plus eight downstream modules have compiled successfully.
+- Added explicit scalar-ring annotations in ScalarMateOrdinaryModuleRoute and
+  transported the unchanged tensorScalarCounit composite in ScalarTensorOrdinaryPullback.
+- Five pending scalar-mate targets are in remote validation after the final
+  ScalarTensorOneSidedPullback proof change (expose the uncast RHS before simp).
+- ConstantQuotientTensorComparison is skipped for foreign dependency failures.
+- Current frontier: /home/ubuntu/u9/bz/PZ030-frontier.json.
