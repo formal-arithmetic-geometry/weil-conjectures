@@ -318,3 +318,10 @@
   ScalarTensorOneSidedPullback proof change (expose the uncast RHS before simp).
 - ConstantQuotientTensorComparison is skipped for foreign dependency failures.
 - Current frontier: /home/ubuntu/u9/bz/PZ030-frontier.json.
+
+- Entire local scalar-mate frontier GREEN at 7f68fb400fbe89dfd4bedf98d22770f5516a5de3: rc=0, failed=0, 6499 jobs.
+- Fifteen modules in the assigned closure are green; all seven edited Lean files passed.
+- Next four importers: CoefficientDirectImageRestrictionCube,
+  CompletedTensorProjectionCoefficientTransport, CompletedScalarMateCoefficientTransport,
+  NormalizedCoefficientDirectImageSquare.
+- Replay audit passes for all fifteen recorded rules; no proof shortcuts or limit raises.
