@@ -626,7 +626,7 @@ theorem resolution_exists (n : ℕ) : Nonempty (Resolution d (X := X) (Y := Y) K
   obtain ⟨hred, hret, hbounded⟩ :=
     (CompletedConstantReduction.completed_constant_sheaf_reduction Y d.ideal).2.2.2
       n F q a b hq' (fun i ↦ ⟨(hF i).2, (hF i).1⟩) hbound
-  let C := ((completedAdicChange Y
+  let C : CochainComplex (modules d Y) ℤ := ((completedAdicChange Y
     (CompletedConstantReduction.base Y d.ideal)).mapHomologicalComplex
     (.up ℤ)).obj ((CompletedConstantReduction.constantComplex Y A).obj F)
   have : HasFiniteBiproducts (modules d Y) := HasFiniteBiproducts.of_hasFiniteProducts
