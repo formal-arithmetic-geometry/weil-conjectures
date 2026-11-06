@@ -61,7 +61,7 @@ theorem mapDerivedCategorySquareIso_hom_app_Q (e : F₁ ⋙ F₂ ≅ G₁ ⋙ G�
   simp only [mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     Category.assoc]
   rw [mapDerivedCategoryCompIso_hom_app_factors, mapDerivedCategoryNatIso_fac,
-    ← mapDerivedCategoryCompIso_hom_app_factors_assoc F₁ F₂ K, Iso.inv_hom_id_app_assoc]
+    ← mapDerivedCategoryCompIso_hom_app_factors_assoc F₁ F₂ K, Iso.hom_inv_id_app_assoc]
   rfl
 
 /-- The inverse form of `mapDerivedCategorySquareIso_hom_app_Q`. -/
@@ -78,7 +78,6 @@ theorem mapDerivedCategorySquareIso_inv_app_Q (e : F₁ ⋙ F₂ ≅ G₁ ⋙ G�
   have hid : squareChainMap e.hom K ≫ squareChainMap e.inv K = 𝟙 _ := by
     ext i
     simp
-    rfl
   rw [← cancel_epi ((mapDerivedCategorySquareIso e).hom.app (DerivedCategory.Q.obj K)),
     Iso.hom_inv_id_app_assoc, reassoc_of% h, ← DerivedCategory.Q.map_comp, hid,
     DerivedCategory.Q.map_id, Category.comp_id]
