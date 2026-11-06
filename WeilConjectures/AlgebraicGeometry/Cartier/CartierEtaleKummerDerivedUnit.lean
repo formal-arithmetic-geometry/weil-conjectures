@@ -29,8 +29,8 @@ open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 attribute [local instance] AlgebraicGeometry.cartierEtaleAbSheafify
   AlgebraicGeometry.cartierProAbSheafify AlgebraicGeometry.cartierEtaleModuleSheafify
   AlgebraicGeometry.cartierProModuleSheafify AlgebraicGeometry.cartierEtaleAbHasExt
-  AlgebraicGeometry.cartierProAbHasExt AlgebraicGeometry.cartierEtaleModuleHasExt
-  AlgebraicGeometry.cartierProModuleHasExt
+  AlgebraicGeometry.ProEtale.geoCartierIntegralExt AlgebraicGeometry.Etale.hasExt_sheaf_moduleCat
+  AlgebraicGeometry.ProEtale.geoCartierModuleExt
 namespace AlgebraicGeometry.ProEtale
 -- Reuse the instance witnesses fixed by the ordinary derived-category interface.
 set_option linter.auxLemma false in

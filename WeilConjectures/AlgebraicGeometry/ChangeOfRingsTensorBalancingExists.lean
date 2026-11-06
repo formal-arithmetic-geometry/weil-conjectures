@@ -30,7 +30,7 @@ local notation "𝓡" S => (sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u
 set_option hygiene false in
 local notation "𝓻" a => (sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u})).map a
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- Tensor and scalar-restriction elaboration needs more than the default heartbeat budget.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
