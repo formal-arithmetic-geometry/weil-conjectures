@@ -280,3 +280,15 @@
 - Full log: /home/ubuntu/u9/bz/BZ885-build-1-full.log.
 - Continuing through GeometricOperationsBaseExistence, GeometricOperationsExistence,
   SemilinearOperationsExistence, and SemilinearDerivedSections.
+
+# BZ885 complete
+
+- Assigned module and both direct importers are green at source commit 5cca20eeb783.
+- Six extra modules were attempted across five layers: two green, four blocked.
+- The next four modules are skipped under the brief's unowned-dependency rule:
+  SemilinearCartesianProjection, GeometricTensorEvaluation, and RingedSiteDualityMaps fail.
+- Full downstream log: /home/ubuntu/u9/bz/BZ885-build-2-full.log.
+- Exact first errors and dependency paths: /home/ubuntu/u9/bz/BZ885-downstream-blockers.json.
+- Final PATTERN/ERROR/RULE handoff: /home/ubuntu/u9/bz/FIXES-BZ885.md.
+- Completion marker: /home/ubuntu/u9/state/BZ885.DONE.
+- Final changes are documentation only; Lean sources match the successful build.
