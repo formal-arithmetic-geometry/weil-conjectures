@@ -144,7 +144,7 @@ private theorem derived_unit_comp
       (Functor.mapDerivedCategoryIdIso C).hom.app K = 𝟙 K := by
   have h : η ≫
       Functor.whiskerLeft L.mapDerivedCategory (Functor.mapDerivedCategoryNatIso g.symm).hom ≫
-      (Functor.mapDerivedCategoryCompIso L V).inv ≫
+      (Functor.mapDerivedCategoryCompIso L V).hom ≫
       (Functor.mapDerivedCategoryNatIso c).hom ≫
       (Functor.mapDerivedCategoryIdIso _).hom = 𝟙 _ := by
     apply Localization.natTrans_ext DerivedCategory.Qh
