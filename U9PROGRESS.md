@@ -386,3 +386,7 @@
 - Leaf log: /home/ubuntu/u9/bz/BUILD-BZ1020-leaf-green-full.log.
 - Next: IntegralBaseChange and CurveTestDatum downstream; the latter gets the known
   umbrella-import removal. No overlapping current owner found for either module.
+
+- IntegralBaseChange and CurveTestDatum are green at 05bc6f1469 (7732 jobs, rc=0).
+- Next: Vanishing, with the same known umbrella-import removal.
+- FieldBaseChange and Induction overlap live BZ1021's downstream plan and are deferred.
