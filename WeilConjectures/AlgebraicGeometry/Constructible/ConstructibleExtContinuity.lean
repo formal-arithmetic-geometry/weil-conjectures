@@ -204,6 +204,7 @@ private theorem continuity_stratum_locus
         colimMap d.hom ≫ colimit.desc (N ⋙ G) (G.mapCocone (colimit.cocone N)) := by
       apply colimit.hom_ext
       intro t
+      dsimp only [G]
       simp only [colimit.ι_post_assoc, ι_colimMap_assoc, colimit.ι_desc]
       exact hleg t
     have : IsIso (colimit.post K (DerivedCategory.Q ⋙ F) ≫ v.hom) := by
