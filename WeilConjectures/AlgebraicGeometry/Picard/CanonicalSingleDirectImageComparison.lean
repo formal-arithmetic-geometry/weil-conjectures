@@ -8,6 +8,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.CategoryTheory.Abelian.RightDerived
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 
@@ -39,11 +41,11 @@ def canonicalSingleDirectImageMap {X S : Scheme.{u}} (f : X ⟶ S) (M : X.Module
       (SheafOfModules.{u} (moduleRings S.toRingedSpace)) 0).obj ((pushforward f).obj M) ⟶
     (schemeDerivedDirectImage f).obj ((DerivedCategory.singleFunctor
       (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M) :=
-  DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
+  cast (by rfl) (DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
       ((HomologicalComplex.singleMapHomologicalComplex
         (RingedSpace.moduleDirectImage f.toLRSHom.toShHom) (ComplexShape.up ℤ) 0).inv.app M)) ≫
     (RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerivedFunctorUnit.app
-      ((HomotopyCategory.singleFunctor _ 0).obj M)
+      ((HomotopyCategory.singleFunctor _ 0).obj M))
 
 /-- Vanishing of positive right-derived images makes the unit comparison invertible.
 No invertibility or flatness of either module is required.
@@ -113,6 +115,7 @@ theorem isIso_canonicalSingleDirectImageMap {X S : Scheme.{u}} (f : X ⟶ S)
         (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M)) := by
     exact hu
   unfold canonicalSingleDirectImageMap
+  simp only [cast_eq]
   infer_instance
 
 end AlgebraicGeometry.Scheme.Modules

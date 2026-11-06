@@ -59,7 +59,7 @@ and empty schemes, and needs no boundedness or quasi-coherence.
 Source: Stacks Project, Tag 0DJ8, affine reduction, and Tag 0D5S,
 composition of derived pullback using termwise K-flat representatives.
 (blueprint: lem-pc-affine-spectrum-coordinate-representatives). -/
-theorem exists_affineSpectrum_coordinate_representatives
+private theorem exists_affineSpectrum_coordinate_representatives_aux
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     {X X' : Scheme.{u}} [IsAffine X] [IsAffine X']

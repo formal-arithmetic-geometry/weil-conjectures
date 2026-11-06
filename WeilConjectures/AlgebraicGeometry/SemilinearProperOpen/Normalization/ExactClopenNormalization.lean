@@ -33,7 +33,7 @@ universe v₁ v₂ w₁ w₂ h₁ h₂ u₁ u₂ u₃ u₄ v₃ v₄ w₃ w₄ v
 
 attribute [local irreducible] Functor.leftAdjoint Functor.mapDerivedCategory
   Functor.rightDerivedFunctor Functor.mapDerivedCategoryNatIso
-  Functor.mapDerivedCategoryCompIso HasDerivedCategory.standard DerivedCategory.Q
+  HasDerivedCategory.standard DerivedCategory.Q
   Functor.mapDerivedCategoryFactors
 
 -- The localization equations explicitly unfold the ordinary quotient functor.
@@ -96,8 +96,8 @@ private def localizeSquare
     [lI : PreservesFiniteLimits I] [cI : PreservesFiniteColimits I] (a : F ⋙ G ⟶ H ⋙ I) :
     F.mapDerivedCategory ⋙ G.mapDerivedCategory ⟶
       H.mapDerivedCategory ⋙ I.mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso F G).inv ≫ localize a ≫
-    (Functor.mapDerivedCategoryCompIso H I).hom
+  (Functor.mapDerivedCategoryCompIso F G).hom ≫ localize a ≫
+    (Functor.mapDerivedCategoryCompIso H I).inv
 
 private theorem chosen_adj_congr
     {A B : Type*} [Category A] [Category B]
@@ -398,7 +398,7 @@ theorem open_comp_localized
       (SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction b)
       (SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction c)
       (Functor.exactDerivedRestrictionComposition Q P T e) =
-        (Functor.mapDerivedCategoryCompIso F G).symm ≪≫
+        Functor.mapDerivedCategoryCompIso F G ≪≫
           Functor.mapDerivedCategoryNatIso (Adjunction.leftAdjointCompIso a b c e) := by
   let ac := a.mapHomologicalComplex (.up ℤ)
   let bc := b.mapHomologicalComplex (.up ℤ)
@@ -447,12 +447,9 @@ theorem open_comp_localized
         ext i
         rfl
       rw [hv]
-      have hfac := Functor.exactDerivedRestrictionComposition_inv_factors Q P T η L
-      simp only [Functor.comp_obj, η,
-        Functor.exactDerivedRestrictionComposition] at hfac
-      convert hfac using 1
-      simp only [Functor.exactDerivedRestrictionComposition, η, Category.assoc]
-      rfl) K
+      simpa only [Functor.comp_obj, η, Functor.exactDerivedRestrictionComposition,
+        Category.assoc] using
+        (Functor.exactDerivedRestrictionComposition_inv_factors Q P T η L)) K
   apply Iso.ext
   apply Localization.natTrans_ext DerivedCategory.Q
     (HomologicalComplex.quasiIso A (.up ℤ))
@@ -567,11 +564,11 @@ private theorem localized_projector
     (he : ∀ M, F.mapDerivedCategory.map (e.app M) =
       a.mapExactDerivedCategory.unit.app (F.mapDerivedCategory.obj M)) :
     (Functor.mapDerivedCategoryIdIso A).inv ≫ localize p ≫
-      (Functor.mapDerivedCategoryCompIso F H).hom = e := by
+      (Functor.mapDerivedCategoryCompIso F H).inv = e := by
   apply StrictTower.projector_unique b t
   have hd := projector_restriction_descent F H a p
     ((Functor.mapDerivedCategoryIdIso A).inv ≫ localize p ≫
-      (Functor.mapDerivedCategoryCompIso F H).hom) hp (fun K ↦ ?_)
+      (Functor.mapDerivedCategoryCompIso F H).inv) hp (fun K ↦ ?_)
   · intro M
     exact (hd M).trans (he M).symm
   · simp only [NatTrans.comp_app, Category.assoc]
@@ -597,7 +594,7 @@ private theorem localized_projector_heq
     (he : ∀ M, F'.mapDerivedCategory.map (e.app M) =
       a'.mapExactDerivedCategory.unit.app (F'.mapDerivedCategory.obj M)) :
     HEq ((Functor.mapDerivedCategoryIdIso A).inv ≫ localize p ≫
-      (Functor.mapDerivedCategoryCompIso F H).hom) e := by
+      (Functor.mapDerivedCategoryCompIso F H).inv) e := by
   subst F'
   subst H'
   cases ha
@@ -627,9 +624,9 @@ private theorem localized_comp_iso_heq
     [lHp : PreservesFiniteLimits H'] [cHp : PreservesFiniteColimits H']
     (e : F ⋙ G ≅ H) (e' : F' ⋙ G' ≅ H')
     (hF : F = F') (hG : G = G') (hH : H = H') (he : HEq e e') :
-    HEq ((Functor.mapDerivedCategoryCompIso F G).symm ≪≫
+    HEq (Functor.mapDerivedCategoryCompIso F G ≪≫
       Functor.mapDerivedCategoryNatIso e)
-      ((Functor.mapDerivedCategoryCompIso F' G').symm ≪≫
+      (Functor.mapDerivedCategoryCompIso F' G' ≪≫
         Functor.mapDerivedCategoryNatIso e') := by
   subst F'
   subst G'
@@ -681,9 +678,9 @@ private theorem clopen_composite_localized
       B.obj.mapDerivedCategory K.obj.mapDerivedCategory R.obj.mapDerivedCategory
       (localizeSquare I.obj P.obj Q.obj B.obj β)
       ((Functor.mapDerivedCategoryIdIso (C 1)).inv ≫ localize π ≫
-        (Functor.mapDerivedCategoryCompIso S.obj J.obj).hom)
-      ((Functor.mapDerivedCategoryCompIso J.obj B.obj).inv ≫ localize c)
-      ((Functor.mapDerivedCategoryCompIso Q.obj S.obj).inv ≫ localize d) := by
+        (Functor.mapDerivedCategoryCompIso S.obj J.obj).inv)
+      ((Functor.mapDerivedCategoryCompIso J.obj B.obj).hom ≫ localize c)
+      ((Functor.mapDerivedCategoryCompIso Q.obj S.obj).hom ≫ localize d) := by
   let wi := ExactDerivedPasting.Word.edge I
   let wp := ExactDerivedPasting.Word.edge P
   let wq := ExactDerivedPasting.Word.edge Q

@@ -260,19 +260,15 @@ private theorem complexIso_naturality
   let B := Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
     (IntegralModelsStacks.scalarMap l E X)
   let C := IntegralModelsStacks.smallModules X (constantRing l E X)
-  let e := ((Functor.mapDerivedCategoryCompIso A (B ⋙ C)) ≪≫
-    Functor.isoWhiskerLeft A.mapDerivedCategory (Functor.mapDerivedCategoryCompIso B C)).symm
+  let e := Functor.isoWhiskerLeft A.mapDerivedCategory (Functor.mapDerivedCategoryCompIso B C) ≪≫
+    Functor.mapDerivedCategoryCompIso A (B ⋙ C)
   exact derivedFactor_naturality (modules l E X) (functor l E X) e a
 
 attribute [local irreducible] modules
 
 private theorem sourceTower_u (P : CochainComplex (AdicCompletion.Modules l E X) ℤ) :
     roosU (sourceTower l E X P) = AdicCompletion.oneSubShift l E X P := by
-  change towerTransitionEndomorphism
-    (K := fun n ↦ (AdicCompletion.level l E X n).obj P)
-    (fun n ↦ (Functor.ofOpSequence (X := fun n ↦ (AdicCompletion.level l E X n).obj P)
-      (AdicCompletion.levelStep l E X P)).map
-      (homOfLE (Nat.le_succ n)).op) = _
+  unfold roosU AdicCompletion.oneSubShift
   congr 1
   funext n
   exact Functor.ofOpSequence_map_homOfLE_succ _ n
