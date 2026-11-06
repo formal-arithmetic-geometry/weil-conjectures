@@ -273,12 +273,14 @@ private theorem reductionArrow_eq
     (by infer_instance) (by infer_instance) (by infer_instance)
     _ (IntegralQuotient.reduction_continuous l E n) continuous_quot_mk
 
+set_option maxHeartbeats 2000000 in
 -- Kernel checking unfolds both scalar-change functors in the coefficient-arrow transport.
 
 attribute [local instance 40000] AdicCompletion.ringMonoidalObject
   AdicCompletion.finiteRingMonoidalObject AdicCompletion.modulesDerived
   AdicCompletion.finiteModulesDerived AdicCompletion.modulesMonoidal
 
+set_option maxHeartbeats 2000000 in
 -- Compare the finite-bound presentation with the native completion-level API once.
 
 private theorem hom_roos_iso_zero
@@ -295,6 +297,7 @@ private theorem hom_roos_iso_zero
     apply (cancel_mono ((shiftFunctor _ r).mapIso e).hom).mp
     exact hQ.elim _ _⟩
 
+set_option maxHeartbeats 2000000 in
 -- Comparing the native Roos levels with the scalar-change bounds unfolds large functors.
 
 end
@@ -305,5 +308,6 @@ attribute [local instance 30000] brownHypothesesCondensedMonoidal
   brownHypothesesModuleMonoidalClosed
 attribute [local instance 20000] AlgebraicGeometry.ProEtale.sheafBraidedCategory
 
+set_option maxHeartbeats 2000000 in
 -- The derived coefficient equivalence compares large canonical single-functor constructions.
 end CategoryTheory

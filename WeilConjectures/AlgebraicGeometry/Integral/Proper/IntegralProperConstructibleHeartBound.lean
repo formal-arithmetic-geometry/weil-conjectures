@@ -77,4 +77,5 @@ residue criterion; the finite reductions use the Noetherian finite-reduction bou
 Source: blueprint lem-sfb-integral-proper-constructible-heart-bound
 (blueprint: lem-sfb-integral-proper-constructible-heart-bound). -/
 
+set_option linter.unusedVariables false in
 end AlgebraicGeometry.ProEtale

@@ -212,6 +212,7 @@ private theorem qbar_closure_le_ind (ℓ : ℕ) [Fact ℓ.Prime]
     (((adicConstructibilityPredicateComparison ℓ X Λ .algebraicClosure).1 N).mp hN))
     inferInstance inferInstance inferInstance inferInstance hsum
 
+set_option synthInstance.maxHeartbeats 100000 in
 -- Colimit inference in the internal module category needs a larger search budget.
 set_option synthInstance.maxSize 4096 in
 private theorem higherDirectImage_filtered
@@ -366,4 +367,5 @@ set_option linter.unusedVariables false in
 coefficient ring `𝒪_E` of a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`.
 (blueprint: lem-sfb-noetherian-proper-heart-uniform-bound) -/
 
+set_option linter.unusedVariables false in
 end AlgebraicGeometry.ProEtale.CondensedRing

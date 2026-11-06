@@ -633,4 +633,5 @@ set_option linter.unusedVariables false in
 field. Source: blueprint det-proper-heart-bound-rational, Qbar case; the base field only made
 the source Noetherian (blueprint: det-proper-heart-bound-rational). -/
 
+set_option linter.unusedVariables false in
 end AlgebraicGeometry.ProEtale
