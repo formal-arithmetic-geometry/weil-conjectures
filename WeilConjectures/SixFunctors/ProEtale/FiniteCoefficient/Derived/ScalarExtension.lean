@@ -420,7 +420,7 @@ theorem hasProjectionFormulaOfCompactification_extendScalars {X Y : Scheme.{u}} 
       ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
         Functor.mapDerivedCategoryNatIso
           (openImmersionLowerShriekCompSheafExtendScalarsIso (R := R) (S := S) c.i).symm ≪≫
-        Functor.mapDerivedCategoryCompIso _ _).app K ≪≫
+        (Functor.mapDerivedCategoryCompIso _ _).symm).app K ≪≫
       ((sheafExtendScalars (algebraMap R S) c.Z).leftDerivedFunctorIsoMapDerivedCategory.app
         _).symm
   have := NatTrans.isIso_app_app_of_iso

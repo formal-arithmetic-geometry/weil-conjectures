@@ -249,7 +249,7 @@ private theorem realization_complete (T : Scheme.{u})
   have hc := cech_model_complete T d.ideal D (fun q ↦ ⟨(hterms q).2, (hterms q).1⟩)
   intro U f hf
   exact (hc U f hf).of_iso
-    ((derivedInternalHom ((completedCechTopology T).over U)
+    ((derivedInternalHom.{u + 1, u + 2} ((completedCechTopology T).over U)
       ((ConstantCompletion.completed (completedCechTopology T) A d.ideal).over U)).mapIso
       ((Iso.refl _).prod ((ringedDerivedRestriction _ U).mapIso α)))
 
@@ -306,7 +306,7 @@ theorem cechPerfectModel_intrinsicComplete (T : Scheme.{u})
   let : PreservesFiniteColimits H := preservesFiniteColimits_of_natIso σ
   let δ : F ≅ (completedCechDerivedEquiv T d).functor ⋙ ConstantCompletion.dres β.inv :=
     Functor.mapDerivedCategoryNatIso σ ≪≫
-      Functor.mapDerivedCategoryCompIso (completedCechModulesEquiv T d).functor R
+      (Functor.mapDerivedCategoryCompIso (completedCechModulesEquiv T d).functor R).symm
   obtain ⟨c, hc⟩ := completed_koszul_constant_transport T d β
     (comparisonCompletedRingIso_scalar T d) F δ r a ha C
   have hcomplete := CechPerfectModel.realization_complete T d P hP
@@ -315,7 +315,7 @@ theorem cechPerfectModel_intrinsicComplete (T : Scheme.{u})
       (F.obj (DerivedCategory.Q.obj C)) := by
     intro U f hf
     exact (hcomplete U f hf).of_iso
-      ((derivedInternalHom ((completedCechTopology T).over U)
+      ((derivedInternalHom.{u + 1, u + 2} ((completedCechTopology T).over U)
         ((ConstantCompletion.completed (completedCechTopology T) A d.ideal).over U)).mapIso
         ((Iso.refl _).prod ((ringedDerivedRestriction _ U).mapIso (F.mapIso eC))))
   obtain ⟨_, _, _, _, hiff⟩ := ConstantCompletion.koszul_quotient_reflector
