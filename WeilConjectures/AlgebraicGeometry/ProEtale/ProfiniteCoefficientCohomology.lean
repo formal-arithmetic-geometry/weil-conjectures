@@ -51,7 +51,8 @@ lemma OpenAddSubgroup.exists_le_of_mem_nhds_zero (hU : ∀ m, U (m + 1) ≤ U m)
   have hanti : Antitone fun m ↦ (U m : Set A) :=
     antitone_nat_of_succ_le fun m ↦ (hU m : ((U (m + 1) : Set A) ⊆ U m))
   refine exists_subset_nhds_of_isCompact' hanti.directed_ge
-    (fun m ↦ (U m).isClosed.isCompact) (fun m ↦ (U m).isClosed) fun x hx ↦ ?_
+    (fun m ↦ (U m).isClosed.isCompact) (fun m ↦ (U m).isClosed)
+      (mem_nhdsSet_iff_forall.2 fun x hx ↦ ?_)
   rw [hU₀ x (Set.mem_iInter.1 hx)]
   exact hV
 
