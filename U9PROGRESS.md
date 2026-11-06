@@ -425,14 +425,22 @@
 - All ucheck invocations finished. This final commit changes documentation only.
 
 
-# BZ1064 in progress
+# BZ1064 complete
 
 - Branch: u9/BZ1064; initial commit dfaed262b6fc1850faba3b46955a11d3225a1e86.
-- The user instructed continuation after the exact four-statement compositor proposal.
-  Applied that API-direction migration and corresponding proof-local compositor/cancellation
-  updates, preserving the intended comparison paths under Mathlib b63f6e8a.
-- Baseline ucheck-bump reproduced 10 errors; first repair build is next.
-- Direct importer: ComparisonSquareTransport; continue downstream after the leaf is green,
-  respecting the separately owned Etale normalization (BZ1065).
-- Fix records and baseline diagnostics: /home/ubuntu/u9/bz/FIXES-BZ1064.md.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+- Assigned ComparisonSquareProEtalePathNormalization is green and sorry-free:
+  ucheck-bump rc=0, built=1, failed=0, 11405 jobs.
+- Validated source commit: cfa9ff16bd8d7128a05c3880879582a884628b15.
+- Applied the explicitly proposed four-statement API migration after the user's
+  continuation instruction; proof-local compositor directions and cancellation
+  lemmas now match Mathlib b63f6e8a. No premises, names, or docstrings changed.
+- Sole direct importer ComparisonSquareTransport was attempted. It is blocked by
+  ComparisonSquareEtalePathNormalization (BZ1065), first error at 64:4: Type mismatch.
+  This outside-owned dependency and later layers are deferred under the brief.
+- Logs: BUILD-BZ1064-leaf-green-full.log and BUILD-BZ1064-downstream-full.log
+  under /home/ubuntu/u9/bz/. Both ucheck invocations have finished.
+- Fix patterns: /home/ubuntu/u9/bz/FIXES-BZ1064.md. Contract and rule audit:
+  /home/ubuntu/u9/bz/BZ1064-contract-audit.json.
+- Completion marker: /home/ubuntu/u9/state/BZ1064.DONE.
+- No local Lean/Lake, proof placeholders, trust bypasses, declaration additions or
+  deletions, profiler probes, or heartbeat increases. Final commit changes notes only.
