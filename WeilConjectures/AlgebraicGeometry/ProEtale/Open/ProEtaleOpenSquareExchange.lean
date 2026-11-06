@@ -1318,6 +1318,8 @@ attribute [local irreducible] sfMateIso sfExchange sfIntrinsicDerivedOpenMate
   sfIntrinsicDerivedPullbackComp sfIntrinsicDerivedOpenComp
   sfIntrinsicDerivedPullbackId sfIntrinsicDerivedOpenId
 
+-- Kernel checking the concrete unit transport exceeds 200000 heartbeats (101 seconds).
+set_option maxHeartbeats 400000 in
 private theorem sfRestriction {U' U Y' Y : Scheme.{u}}
     (gU : U' ⟶ U) (j' : U' ⟶ Y') (j : U ⟶ Y) (g : Y' ⟶ Y)
     [IsOpenImmersion j] [IsOpenImmersion j'] (sq : IsPullback gU j' j g)
@@ -1331,12 +1333,6 @@ private theorem sfRestriction {U' U Y' Y : Scheme.{u}}
   have := sfOpenUnit_isIso A j'
   have := sfOpenMate_isIso A gU j' j g sq
   unfold sfIntrinsicDerivedOpenUnit sfIntrinsicDerivedSquarePullback sfExchange sfMateIso
-  rw [show sfIntrinsicDeriveMap A (sfIntrinsicOpenAdjunction A j).unit =
-      (mapDerivedCategoryNatIso (asIso (sfIntrinsicOpenAdjunction A j).unit)).hom from
-        dMap_iso (asIso (sfIntrinsicOpenAdjunction A j).unit),
-    show sfIntrinsicDeriveMap A (sfIntrinsicOpenAdjunction A j').unit =
-      (mapDerivedCategoryNatIso (asIso (sfIntrinsicOpenAdjunction A j').unit)).hom from
-        dMap_iso (asIso (sfIntrinsicOpenAdjunction A j').unit)]
   apply dUnit_square_inverse (sfIntrinsicExtensionByZero j A) (sfIntrinsicPullback A j)
     (sfIntrinsicExtensionByZero j' A) (sfIntrinsicPullback A j')
     (sfIntrinsicPullback A gU) (sfIntrinsicPullback A g)
@@ -1379,7 +1375,8 @@ private theorem sfDerivedMate_horizontal {U'' U' U Y'' Y' Y : Scheme.{u}}
     simp only [NatTrans.comp_app, whiskerLeft_app, whiskerRight_app, Category.assoc,
       Iso.inv_hom_id_app]
     erw [Category.comp_id]
-  have hcomp := mapDerivedCategorySquareIso_comp (sfIntrinsicPullback A gU) (sfIntrinsicPullback A hU)
+  have hcomp := mapDerivedCategorySquareIso_comp
+    (sfIntrinsicPullback A gU) (sfIntrinsicPullback A hU)
     (sfIntrinsicPullback A (hU ≫ gU)) (sfIntrinsicPullback A g) (sfIntrinsicPullback A h)
     (sfIntrinsicPullback A (h ≫ g)) (sfIntrinsicExtensionByZero j A)
     (sfIntrinsicExtensionByZero j' A) (sfIntrinsicExtensionByZero j'' A)
