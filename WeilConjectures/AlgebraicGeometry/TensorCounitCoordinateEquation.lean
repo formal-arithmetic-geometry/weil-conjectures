@@ -310,11 +310,11 @@ theorem tensorCounit_coordinateEquation
     ((derivedPullback k).map (DerivedCategory.Q.map r ⊗ₘ DerivedCategory.Q.map s))).1
   rw [← Functor.map_comp_assoc,
     modelMap_natural X P0 G0 P G r s, Functor.map_comp]
-  simp only [Category.assoc]
+  simp only [cast_eq, Category.assoc]
   erw [reassoc_of% hε _ _ t]
   rw [← Functor.map_comp, hchain, Functor.map_comp]
   rw [reassoc_of% hτ.2 _ _ _ _ (DerivedCategory.Q.map r) (DerivedCategory.Q.map s)]
-  rw [tensorHom_comp_tensorHom_assoc, hε _ _ r, hε _ _ s,
+  erw [tensorHom_comp_tensorHom_assoc, hε _ _ r, hε _ _ s,
     ← tensorHom_comp_tensorHom_assoc]
   erw [modelMap_natural T (F.obj P0) (F.obj G0) (F.obj P) (F.obj G)
       (F.map r) (F.map s)]
