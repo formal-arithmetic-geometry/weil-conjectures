@@ -94,8 +94,6 @@ attribute [-instance] AlgebraicGeometry.Scheme.proEtaleRingModules_hasDerivedCat
 
 open AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison
 namespace AlgebraicGeometry.ProEtale.StrictCompletionRestriction
-attribute [local instance] AdicCompletion.ringMonoidalObject AdicCompletion.ringCommutative
-  AdicCompletion.finiteRingMonoidalObject AdicCompletion.finiteRingCommutative
 
 private theorem uncurry_map_identity {A B D : Type*}
     [Category A] [Category B] [Category D] (F : A ⥤ B ⥤ D)
@@ -735,6 +733,7 @@ end Assembly
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The normalized tensor identification of the section reductions, without the
 completion assertion.
 
