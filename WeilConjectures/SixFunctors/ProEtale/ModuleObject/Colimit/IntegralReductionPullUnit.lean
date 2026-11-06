@@ -228,8 +228,8 @@ lemma upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app_Qh
   have i1' := i1 =≫ DerivedCategory.Qh.map ((Functor.mapHomotopyCategoryCompIso
     (Iso.refl ((f)^*⟦Λ'⟧ ⋙ Mod.comap (coefficientMap a X))) (ComplexShape.up ℤ)).inv.app
       (((Mod.extendScalars (coefficientMap a Y)).mapHomotopyCategory (ComplexShape.up ℤ)).obj K))
-  simp only [Category.assoc, ← DerivedCategory.Qh.map_comp, Iso.hom_inv_id_app,
-    CategoryTheory.Functor.map_id] at i1'
+  simp only [Category.assoc, ← DerivedCategory.Qh.map_comp, Iso.hom_inv_id_app] at i1'
+  erw [CategoryTheory.Functor.map_id, Category.comp_id] at i1'
   dsimp only [Functor.comp_obj, Functor.comp_map] at l1 l2 i1'
   rw [← reassoc_of% l1, l2, reassoc_of% i1']
   have r5 := Mod.derivedExtendMapDerivedCategoryAdjunction_unit_app_fac (coefficientMap a Y) K

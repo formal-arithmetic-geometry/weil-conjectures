@@ -5,7 +5,10 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import Mathlib.CategoryTheory.Abelian.Projective.Basic
 public import Mathlib.CategoryTheory.Preadditive.Yoneda.Projective
 public import WeilConjectures.CategoryTheory.DerivedCategory.FieldDevissage
