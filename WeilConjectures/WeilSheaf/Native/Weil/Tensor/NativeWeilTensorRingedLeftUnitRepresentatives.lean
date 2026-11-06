@@ -10,6 +10,8 @@ public import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorForge
 public import WeilConjectures.CategoryTheory.RingedForgetTensorTransposition.RingedForgetTensorDescent
 import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedAssociatorNormalized
 import WeilConjectures.CategoryTheory.SixFunctors.SemigroupalUnit
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # The left-unit representative calculation
 
@@ -331,7 +333,7 @@ theorem native_weil_tensor_ringed_left_unit_representatives
       F.mapIso (nativeWeilRingedUnit b SB TB βB cB) ≪≫
         (Functor.mapDerivedCategorySingleFunctor
           (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)) 0).app
-            (adicConstant k₀ l X) ≪≫ ((DerivedCategory.quotientCompQhIso _).app _).symm
+            (adicConstant k₀ l X) ≪≫ Iso.refl _
     obtain ⟨ε, hε⟩ := exists_leftUnit_of_associative_tensor F t v (by
       intro Y Z N
       simpa only [rho, Iso.app_hom, tensor_obj, tensor_map, id_tensorHom,
