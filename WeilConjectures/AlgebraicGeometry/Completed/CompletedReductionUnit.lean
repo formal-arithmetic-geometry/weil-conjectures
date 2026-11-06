@@ -24,6 +24,8 @@ public import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
 public import Mathlib.CategoryTheory.Limits.EssentiallySmall
 public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
@@ -138,8 +140,16 @@ def HasCompletedReductionTowerUnitNormalization (T : Scheme.{u})
         CochainComplex.IsKFlatIndependentCoefficients
           (R := pbcAdicCompletion T d) P →
         τ.app (DerivedCategory.Q.obj P) ≫
+            (completedReductionTower T d).map
+              ((DerivedCategory.quotientCompQhIso _).inv.app P) ≫
             (completedReductionTowerCounit d T).app
-              ((HomotopyCategory.quotient _ (.up ℤ)).obj P) =
+              ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ≫
+            DerivedCategory.Qh.map
+              (((completedReductionModuleTowerFunctor T d).mapHomotopyCategoryFactors
+                (.up ℤ)).hom.app P) ≫
+            (DerivedCategory.quotientCompQhIso _).hom.app
+              (((completedReductionModuleTowerFunctor T d).mapHomologicalComplex
+                (.up ℤ)).obj P) =
           ((completedTowerConstant d T).mapDerivedCategoryFactors).hom.app P ≫
             DerivedCategory.Q.map
               ((NatTrans.mapHomologicalComplex (completedReductionModuleUnit d T)
@@ -237,11 +247,29 @@ theorem completedReductionTowerUnit_exists (T : Scheme.{u}) :
   have : (completedReductionModuleTowerFunctor T d).Additive :=
     completedReductionModuleTowerFunctor_additive T d
   have hrep := independentKFlatRepresentatives (pbcAdicCompletion T d)
-  exact exactAugmentation_existsUnique (completedTowerConstant d T)
+  obtain ⟨τ, hτ, huniq⟩ := exactAugmentation_existsUnique (completedTowerConstant d T)
     (completedReductionModuleTowerFunctor T d) (completedReductionTower T d)
     (completedReductionTowerCounit d T) (completedReductionModuleUnit d T)
     (fun P ↦ CochainComplex.IsKFlatIndependentCoefficients (R := pbcAdicCompletion T d) P)
     (completedReductionTower_properties T d).2.2 hrep
+  refine ⟨τ, ?_, ?_⟩
+  · intro P hP
+    dsimp only [HasCompletedReductionTowerUnitNormalization, DerivedCategory.quotientCompQhIso,
+      HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift,
+      Functor.mapHomotopyCategoryFactors, NatIso.ofComponents, Iso.refl]
+    erw [CategoryTheory.Functor.map_id, Category.id_comp,
+      CategoryTheory.Functor.map_id, Category.comp_id]
+    exact hτ P hP
+  · intro τ' hτ'
+    apply huniq τ'
+    intro P hP
+    have h := hτ' P hP
+    dsimp only [HasCompletedReductionTowerUnitNormalization, DerivedCategory.quotientCompQhIso,
+      HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift,
+      Functor.mapHomotopyCategoryFactors, NatIso.ofComponents, Iso.refl] at h
+    erw [CategoryTheory.Functor.map_id, Category.id_comp,
+      CategoryTheory.Functor.map_id, Category.comp_id] at h
+    exact h
 
 /-- The canonical strict derived reduction unit ΔK → K_bullet.
 Source: blueprint order 1261 (blueprint: def-weil-pbc-reduction-augmentation). -/

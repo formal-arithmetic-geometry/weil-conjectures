@@ -7,6 +7,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.Algebra.Homology.AffineTildeTensorSourceComparisonCoreFinal
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # Counit-normalized affine derived tensor source -/
 @[expose] public section
@@ -26,7 +28,10 @@ local instance (priority := 2000) sourceCoordinatesAbelian (Y : Scheme.{u}) :
 
 
 local instance sourceComparisonTildeAdditive (C : Type u) [CommRing C] :
-    (affinePushforwardTilde C).Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+    (affinePushforwardTilde C).Additive := by
+  constructor
+  intro M N f g
+  exact tilde.map_add (R := .of C) f g
 local instance sourceComparisonTildeHomology (C : Type u) [CommRing C] :
     (affinePushforwardTilde C).PreservesHomology := tilde_preservesHomology C
 local instance sourceComparisonTildeLimits (C : Type u) [CommRing C] :
@@ -38,6 +43,11 @@ local instance sourceComparisonTildeColimits (C : Type u) [CommRing C] :
 
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+
+local instance sourceComparisonHasDerivedCategory (Y : Scheme.{u}) :
+    HasDerivedCategory.{w} Y.Modules :=
+  (‹∀ Z : Scheme.{u},
+    HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))›) Y
 
 local instance sourceComparisonPullbackAdditive {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (Scheme.Modules.tensorPullback f).Additive :=
@@ -76,7 +86,8 @@ theorem exists_affineTildeTensorSourceComparison
           (schemeDerivedDirectImage f').map ((SingleComplexBaseChange.counit p).app H) =
         affineTildeTensorDerivedCounit R A B D M m F₀ hF₀ ≫
           DerivedCategory.Q.map (affineTildeTensorOrdinarySourceIso R A B M).hom ≫
-          DerivedCategory.Qh.map ((moduleHomotopyBaseChange f f' g p hw).app H) ≫
+          cast (by rfl) (DerivedCategory.Qh.{w}.map
+            ((moduleHomotopyBaseChange f f' g p hw).app H)) ≫
           (RingedSpace.moduleDirectImage f'.toLRSHom.toShHom).rightDerivedFunctorUnit.app
             (((Scheme.Modules.tensorPullback p).mapHomotopyCategory (.up ℤ)).obj H) := by
   have h := exists_affineTildeTensorSourceComparisonCore R A B D M m F₀ hF₀

@@ -7,6 +7,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.Algebra.Homology.AffineTildeTensorSourceComparisonCorePre
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeUnitCompatibility
 
 /-! # Core affine derived tensor source comparison -/
@@ -28,7 +30,10 @@ local instance coreSourceCoordinatesPreadditive (Y : Scheme.{u}) :
 local instance coreSourceCoordinatesAbelian (Y : Scheme.{u}) :
     Abelian Y.Modules := inferInstanceAs (Abelian (SheafOfModules.{u} Y.ringCatSheaf))
 local instance coreTildeAdditive (C : Type u) [CommRing C] :
-    (affinePushforwardTilde C).Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+    (affinePushforwardTilde C).Additive := by
+  constructor
+  intro M N f g
+  exact tilde.map_add (R := .of C) f g
 local instance coreTildeHomology (C : Type u) [CommRing C] :
     (affinePushforwardTilde C).PreservesHomology := tilde_preservesHomology C
 local instance coreTildeLimits (C : Type u) [CommRing C] :
@@ -39,6 +44,11 @@ local instance coreTildeColimits (C : Type u) [CommRing C] :
   (affinePushforwardTilde C).preservesFiniteColimits_of_preservesHomology
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+local instance coreSourceComparisonHasDerivedCategory (Y : Scheme.{u}) :
+    HasDerivedCategory.{w} Y.Modules :=
+  (‹∀ Z : Scheme.{u},
+    HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))›) Y
+
 local instance corePullbackAdditive {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (Scheme.Modules.tensorPullback f).Additive :=
   SingleComplexBaseChange.tensorPullbackAdditive.{u, w} f
@@ -110,7 +120,8 @@ theorem exists_affineTildeTensorSourceComparisonCore
           (schemeDerivedDirectImage f').map ((SingleComplexBaseChange.counit p).app H) =
         affineTildeTensorDerivedCounit R A B D M m F₀ hF₀ ≫
           DerivedCategory.Q.map (affineTildeTensorOrdinarySourceIso R A B M).hom ≫
-          DerivedCategory.Qh.map ((moduleHomotopyBaseChange f f' g p hw).app H) ≫
+          cast (by rfl) (DerivedCategory.Qh.{w}.map
+            ((moduleHomotopyBaseChange f f' g p hw).app H)) ≫
           (RingedSpace.moduleDirectImage f'.toLRSHom.toShHom).rightDerivedFunctorUnit.app
             (((Scheme.Modules.tensorPullback p).mapHomotopyCategory (.up ℤ)).obj H) := by
   classical

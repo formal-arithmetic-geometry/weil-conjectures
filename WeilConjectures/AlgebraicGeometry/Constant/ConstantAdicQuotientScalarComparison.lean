@@ -566,8 +566,12 @@ private theorem pullComparison_mate_isIso {X Y : AlgebraicGeometry.Scheme.{u}} (
     Functor.whiskerLeft_id', Iso.symm_hom, Iso.refl_inv, Category.id_comp,
     NatTrans.comp_app, TwoSquare.vComp_app, Functor.whiskerRight_app,
     NatTrans.id_app, Category.assoc]
-  erw [(pbcDerivedRestrict (constantAdicFiniteProjection g d n)).map_id]
-  simp only [Category.comp_id]
+  letI : Category.{u + 2} (DerivedCategory
+      (pbcModules Y ((adicTowerInverseImage g).obj (constantAdicFiniteCone X d).pt))) :=
+    inferInstanceAs (Category.{u + 2} (DerivedCategory
+      (pbcModules Y ((adicTowerInverseImage g).obj
+        (adicLisseConstantRing X (AdicCompletion d.ideal A))))))
+  erw [CategoryTheory.Functor.map_id, Category.comp_id]
   let P := adicTowerPullback g (adicLisseConstantRing X (AdicCompletion d.ideal A))
   let f := P.map (kD.hom.app M)
   let t := kp.inv.app ((constantAdicQuotientModules X d n).mapDerivedCategory.obj M)

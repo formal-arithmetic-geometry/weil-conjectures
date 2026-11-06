@@ -39,7 +39,7 @@ attribute [local implicit_reducible] CategoryTheory.uniformProd
   SemilinearSections.evaluation SemilinearSections.ringPresheaf SemilinearSections.rings
   CategoryTheory.sheafCompose CommRingCat.hasForgetToRingCat
   integralReductionTargetHasDerivedCategory coefficientFiniteHasDerived
-  coefficientSequenceHasDerived Functor.mapHomologicalComplex
+  coefficientSequenceHasDerived
 attribute [local irreducible] DerivedCategory _root_.instCategoryDerivedCategory
   DerivedCategory.Q DerivedCategory.Qh HasDerivedCategory.standard
   coefficientTotalTensor coefficientTensorGenerator CoefficientClosedStructure.tensor

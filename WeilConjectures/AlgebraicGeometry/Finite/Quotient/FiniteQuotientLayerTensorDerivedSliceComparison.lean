@@ -123,7 +123,6 @@ universe t
 open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectModelsAbLocallyBijective
-attribute [local instance] HasDerivedCategory.standard
 attribute [local irreducible] completedAdicChangeData HasDerivedCategory.standard
   SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
   SheafOfModules.siteDerivedTensorIndependentCoefficients
@@ -329,11 +328,26 @@ private theorem layerOrdinaryOver (X : Scheme.{t})
     a ≪≫ Functor.isoWhiskerLeft V
       (SheafOfModules.siteSheafTensorRightIso (R.over U) (N.over U))⟩
 
+private local instance (X : Scheme.{t})
+    (R : Sheaf (ProEt.topology X) CommRingCat.{t + 1}) (U : X.ProEt)
+    [h : HasDerivedCategory.{t + 2} (SheafOfModules.{t + 1}
+      ((sheafCompose ((ProEt.topology X).over U)
+        (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj (R.over U)))] :
+    Category.{t + 2} (@DerivedCategory (SheafOfModules.{t + 1}
+      (((sheafCompose (ProEt.topology X)
+        (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj R).over U)) _ _ h) :=
+  inferInstanceAs (Category.{t + 2} (DerivedCategory (SheafOfModules.{t + 1}
+    ((sheafCompose ((ProEt.topology X).over U)
+      (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj (R.over U)))))
+
 private def layerSliceTensor (X : Scheme.{t})
     (R : Sheaf (ProEt.topology X) CommRingCat.{t + 1}) (U : X.ProEt)
     (N : layerModules X R) :=
   let : EssentiallySmall.{t + 1} X.ProEt := essentiallySmallSelf.{0, t, t + 1} _
-  (𝟭 _).prod' ((Functor.const _).obj ((DerivedCategory.singleFunctor _ 0).obj (N.over U))) ⋙
+  let S := (sheafCompose ((ProEt.topology X).over U)
+    (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj (R.over U)
+  (𝟭 _).prod' ((Functor.const _).obj
+    ((DerivedCategory.singleFunctor (SheafOfModules.{t + 1} S) 0).obj (N.over U))) ⋙
     SheafOfModules.siteDerivedTensorIndependentCoefficients ((ProEt.topology X).over U)
       (R.over U)
 

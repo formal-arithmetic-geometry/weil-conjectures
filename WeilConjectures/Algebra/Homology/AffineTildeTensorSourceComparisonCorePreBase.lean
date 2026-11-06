@@ -7,6 +7,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.Algebra.Homology.AffinePushforwardComparisonCoordinates
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModel
 
 
@@ -96,14 +98,8 @@ def affineTildeTensorOrdinarySourceIso
     SingleComplexBaseChange.tensorPullbackAdditive.{u, w} g
   let N := ((ModuleCat.restrictScalars (algebraMap R A)).mapHomologicalComplex
     (.up ℤ)).obj M
-  let : (affinePushforwardTilde R).Additive := by
-    constructor
-    intro M N f g
-    exact tilde.map_add (R := .of R) f g
-  let : (affinePushforwardTilde B).Additive := by
-    constructor
-    intro M N f g
-    exact tilde.map_add (R := .of B) f g
+  let : (affinePushforwardTilde R).Additive := prebaseSourceComparisonTildeAdditive R
+  let : (affinePushforwardTilde B).Additive := prebaseSourceComparisonTildeAdditive B
   let : (ModuleCat.extendScalars.{u, u, u} (algebraMap R B)).Additive :=
     ModuleCat.baseDerivedTensor_extendScalars_additive _
   let θ : affinePushforwardTilde R ⋙ Scheme.Modules.tensorPullback g ≅
@@ -112,10 +108,7 @@ def affineTildeTensorOrdinarySourceIso
       (CommRingCat.ofHom (algebraMap R B)))
   let δ := (Functor.mapHomologicalComplexCompIso θ (.up ℤ)).app N
   let P := Scheme.Modules.pushforward (Spec.map (CommRingCat.ofHom (algebraMap R A)))
-  let : (affinePushforwardTilde A).Additive := by
-    constructor
-    intro M N f g
-    exact tilde.map_add (R := .of A) f g
+  let : (affinePushforwardTilde A).Additive := prebaseSourceComparisonTildeAdditive A
   let : P.Additive := inferInstance
   let : (affinePushforwardTilde A ⋙ P).Additive := inferInstance
   let : (affinePushforwardTilde A ⋙ P).PreservesZeroMorphisms :=
@@ -157,7 +150,7 @@ def affineTildeTensorDerivedCounit
   exact eqToHom (congrArg (fun G ↦ G.obj
       (m.derived.obj (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj N)))) hF₀) ≫
     (affinePushforwardTilde B).mapDerivedCategory.map
-      (m.counit.app ((HomotopyCategory.quotient _ _).obj N)) ≫
+      (cast (by rfl) (m.counit.app ((HomotopyCategory.quotient _ _).obj N))) ≫
     ((affinePushforwardTilde B).mapDerivedCategoryFactors.app N').hom
 
 attribute [local irreducible] affineTildeTensorOrdinarySourceIso
@@ -193,10 +186,11 @@ theorem affineTilde_scalarExtension_comparison
         (L.obj (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj N))) ≅
       (derivedPullback g).obj (DerivedCategory.Q.obj
         ((TR.mapHomologicalComplex (.up ℤ)).obj N)),
-      e.hom ≫ (SingleComplexBaseChange.counit g).app
-          ((HomotopyCategory.quotient _ _).obj ((TR.mapHomologicalComplex (.up ℤ)).obj N)) ≫
+      e.hom ≫ cast (by rfl) ((SingleComplexBaseChange.counit g).app
+          ((HomotopyCategory.quotient _ _).obj ((TR.mapHomologicalComplex (.up ℤ)).obj N))) ≫
         DerivedCategory.Q.map δ.hom =
-      T.mapDerivedCategory.{wM, w}.map (ε.app ((HomotopyCategory.quotient _ _).obj N)) ≫
+      T.mapDerivedCategory.{wM, w}.map
+        (cast (by rfl) (ε.app ((HomotopyCategory.quotient _ _).obj N))) ≫
         (T.mapDerivedCategoryFactors.{wM, w}.app
           ((E.mapHomologicalComplex (.up ℤ)).obj N)).hom := by
   classical
@@ -252,8 +246,7 @@ theorem affineTilde_pushforward_unit_isIso
   have : QuasiIso s := hsi
   have hC (n : ℤ) : (C.X n).IsQuasicoherent := by
     change ((tilde.functor (.of A)).obj (M.X n)).IsQuasicoherent
-    exact
-      instIsQuasicoherentOpensCarrierCarrierCommRingCatSpecOfCarrierObjModuleCatModulesFunctor _
+    infer_instance
   have hPs : QuasiIso ((P.mapHomologicalComplex (.up ℤ)).map s) :=
     affinePushforward_resolution_quasiIso _ C J hC s
   have hs : IsIso (DerivedCategory.Qh.{w}.map (q.map s)) := by
