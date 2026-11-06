@@ -254,11 +254,17 @@ private theorem towerAugmentation_computed
           ((NatTrans.mapHomologicalComplex (completedReductionModuleUnit d T) (.up ℤ)).app P) := by
   let := completedReductionModuleTowerFunctor_additive T d
   have h := (completedReductionTowerUnit_exists d T).exists.choose_spec P hP
-  dsimp only [DerivedCategory.quotientCompQhIso,
-    HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift,
-    Functor.mapHomotopyCategoryFactors, NatIso.ofComponents, Iso.refl] at h
-  erw [CategoryTheory.Functor.map_id, Category.id_comp,
-    CategoryTheory.Functor.map_id, Category.comp_id] at h
+  have hi : (DerivedCategory.quotientCompQhIso (pbcModules T (pbcAdicCompletion T d))).inv.app
+      P = 𝟙 _ := rfl
+  have hh : (DerivedCategory.quotientCompQhIso
+      (reductionTowerCategory T (reductionModuleRing T (completedReductionCoefficient T d)))).hom.app
+      (((completedReductionModuleTowerFunctor T d).mapHomologicalComplex (.up ℤ)).obj P) =
+      𝟙 _ := rfl
+  have hid : ((completedReductionModuleTowerFunctor T d).mapHomotopyCategoryFactors (.up ℤ)).hom.app
+      P = 𝟙 _ := rfl
+  erw [hi, hh, hid] at h
+  erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id] at h
+  simp only [Category.id_comp, Category.comp_id] at h
   exact comp_counitOnComplex_eq (completedReductionModuleTowerFunctor T d)
     (completedReductionTower T d) (coherenceReductionTowerCounit T d) P _ _ h
 
@@ -745,7 +751,7 @@ private theorem finiteCanonicalTranspose (T : Scheme.{u})
       have hh : (DerivedCategory.quotientCompQhIso (reductionModules T S)).hom.app
           (((reductionChange T a).mapHomologicalComplex (.up ℤ)).obj P) = 𝟙 _ := rfl
       rw [hi, hh]
-      erw [Functor.map_id, Category.comp_id, Category.id_comp]
+      erw [CategoryTheory.Functor.map_id, Category.comp_id, Category.id_comp]
       exact (finiteCounit_eq (reductionChange T a) (reductionDerivedChange T a)
         (reductionDerivedCounit T a) P).symm) ad had
   have he : ad = pbcDerivedScalarAdjunction a := by
