@@ -408,8 +408,8 @@ theorem exists_isConstituent_hasDetWeight_of_hasEigenvalue {α : PadicAlgCl l}
       rw [← h, hmemN] at hv
       exact hw.2 hv
   have : WellFoundedLT (Subrepresentation ρ) :=
-    ⟨Subrelation.wf (r := fun a b ↦ a.toSubmodule < b.toSubmodule) (fun h ↦ h)
-      (InvImage.wf _ wellFounded_lt)⟩
+    Subrelation.wf (r := fun a b ↦ a.toSubmodule < b.toSubmodule) (fun h ↦ h)
+      (InvImage.wf _ wellFounded_lt)
   obtain ⟨M, hNM, hMM₀⟩ := exists_covBy_le_of_lt hNM₀
   refine ⟨N, M, hNM.le, ⟨(Subrepresentation.isIrreducible_subquotient_iff hNM.le).2 hNM,
     N, M, hNM.le, ⟨M.subquotientAsModuleLinearEquiv N⟩⟩, fun x ↦ ?_⟩
