@@ -84,6 +84,6 @@ theorem isIso_canonicalSinglePullbackMap {X Y : Scheme.{u}} (f : X ⟶ Y)
     (pullbackPushforwardAdjunction f)
   have hi : IsIso (c ≫ (DerivedCategory.singleFunctor _ 0).map (t.hom.app M)) :=
     inferInstance
-  simpa only [canonicalSinglePullbackMap, c, t, ε, Category.assoc] using hi
+  simpa only [canonicalSinglePullbackMap, c, t, ε, cast_eq, Category.assoc] using hi
 
 end AlgebraicGeometry.Scheme.Modules
