@@ -230,113 +230,39 @@
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 - This final commit changes only progress documentation; Lean source matches the green build.
 
-# BZ824 in progress
+# BZ798 in progress
 
-- Branch: u9/BZ824; starting commit 95c8987257f.
-- The user instructed continuation after the upstream-restoration proposal.
-- Restored four prerequisite modules. The comparison predicate uses verified PZ003
-  Localization imports and a reflexive cast; the transport proof is unchanged,
-  and target automorphism specializes the existing arbitrary-degree theorem to zero.
-- All six submitted modules passed ucheck-bump at 826d8e1a1fb: rc=0, failed=0, 4065 jobs.
-- Green: DerivedModuleBaseChangeMap, DerivedModulePullbackComparison,
-  ModulePullbackComparisonIsoTransport, ModulePullbackComparisonTargetAutomorphism,
-  CanonicalModuleBaseChangeIsoComparisonCompat, CanonicalModuleBaseChangeIsoComparison.
-- All restored declaration headers and original assigned/caller sources are unchanged.
-- Full log: /home/ubuntu/u9/bz/BUILD-BZ824-restored-full.log.
-- Next: build layer-two importer CanonicalModuleBaseChangeAffineChartComparison.
-- Notes: /home/ubuntu/u9/bz/FIXES-BZ824.md. No local Lean/Lake or proof shortcuts.
+- Branch: `u9/BZ798`; original baseline: `6a4b38f19`.
+- Resumed after rereading `/home/ubuntu/u9/briefs/BZ798.md` and the progress notes.
+- Merged the current integrated bump branch at `d9a3ea12c`. It already removes the
+  unused signed-projection comparison chain and its downstream callers. The earlier
+  referenced-caller blocker therefore no longer applies.
+- Deleted only the remaining unused `SignedProjectionResolution.totalInverse`;
+  whole-tree `git grep -w totalInverse -- WeilConjectures Comparator` found its sole
+  declaration and no callers. It is listed unused and absent from kept-decls.txt.
+- All surviving declaration text is unchanged from the integrated branch.
+- Next: validate the owned module, then its direct importers and downstream layers.
+- Previous diagnostic history is archived in FIXES-BZ798-preintegration.md.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
 
+# BZ850 in progress
 
-# BZ859 in progress
-
-- Branch: u9/BZ859; initial commit db406319f.
-- The user instructed continuation after the concrete upstream-restoration proposal.
-- Applied BZ859-proposed-restoration.patch: restores tilde_preservesHomology,
-  affinePushforwardCohomologyMapOfComparison, and affinePushforwardRepresentativeCohomologyIso
-  with their original signatures/docs; ports generated additive-instance references.
-- Assigned factorization uses Localization implementation imports and a reflexive cast
-  for the original homology map, following the supplied BZ457 pattern.
-- Remote ucheck-bump is queued and reads the pushed branch upon acquiring a build tree.
-- Next: validate the assigned module; build its sole direct importer
-  AffinePushforwardCohomologyEdgeIdentity, then continue downstream up to the brief's limit.
-- Fix log: /home/ubuntu/u9/bz/FIXES-BZ859.md. No local Lean/Lake, proof escapes, or limit raises.
-
-
-# BZ885 in progress
-
-- Branch: u9/BZ885; baseline checkpoint 691397bb53c1a609462baa9046b9add95fc8dfef.
-- The user instructed continuation after the exact two-site compositor API proposal.
-- Applied BZ885-proposed-compositor.patch in GeometricCoefficientPullback and
-  GeometryEvaluation.coefficientPullback_transpose in GeometricDerivedEvaluation.
-  This preserves the intended comparisons under Mathlib's reversed compositor.
-- Declaration binders, hypotheses, proof bodies, and docstrings remain unchanged.
-- Next: ucheck-bump on the assigned module and both direct importers, then downstream.
-- Fix patterns and whole-tree inventories: /home/ubuntu/u9/bz/FIXES-BZ885.md.
+- Branch: `u9/BZ850`; baseline: `2ab2b07a3`.
+- The user instructed continuation after the explicit three-declaration upstream restoration proposal.
+- Restored `derived_projection_exists`, `coefficientConstantTowerProjection_exists`, and
+  `coefficientConstantTowerProjection` in CoefficientRingedSequenceSiteSupplement with their
+  original statements and docstrings. Their surviving users prohibit pruning them.
+- Added Localization imports and explicit simplification of its hidden comparison components.
+- The assigned CoefficientConstantTowerRoos source is unchanged.
+- Next: remote ucheck-bump on the assigned module, then both direct importers.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
+# BZ864 completed
 
-# BZ908 in progress
-
-- Branch: u9/BZ908; baseline 40e255942.
-- The user instructed continuation after the explicit two-cast proposal.
-- Applied the two `cast (by rfl)` wrappers in IsCanonicalPullbackTensorComparison,
-  preserving the existing maps while restoring hidden Qh/Q endpoint conversions.
-- Localization imports resolve the proof-local mismatch. The uniqueness proof uses
-  `erw` to rewrite through the reflexive casts and semireducible category aliases.
-- Next: remote validation, then the 19 direct importers and further downstream
-  modules up to the brief's limit of 30 extra modules.
-- Fix patterns: /home/ubuntu/u9/bz/FIXES-BZ908.md.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
-
-- Assigned leaf compiled successfully (51s), all 3998 jobs green at 47eabae395f.
-  The shared remote wrapper hit a shell syntax error after compilation; full Lean
-  success is recorded in BUILD-BZ908-leaf-green-full.log. Rechecking the runner.
-- Next batch uses two direct importers whose dependency closures cover all 19:
-  SingleComplexInheritedTensorCondition and NormalizedInternalHomPullbackComparison.
-
-- The stable downstream run at 0997529457 rebuilt the assigned leaf (59s) and
-  CanonicalPullbackTensorMonoidalRealization (50s) successfully.
-- TensorCoordinateIdentifications needs the same Qh/Q reflexive casts plus an
-  explicit target sheaf category; the known BZ877 repair is applied for recheck.
-  The unused-list theorem has an external caller, so it is retained.
-- Unowned blockers found: StalkDerivedExtensionComparisonIsoCore (heartbeat
-  timeout) and OpenRestrictionDerivedMonoidal (reversed compositor).
-- Per-run ucheck-bump snapshot: /home/ubuntu/u9/bz/BZ908-bin/ucheck-bump. It preserves
-  the lead's locking and one-build-per-helper rules while avoiding shared-script
-  overwrite failures. No shared build scripts were edited.
-
-
-# BZ938 in progress
-
-- Branch: u9/BZ938; baseline before repairs: 1626b332e^.
-- The user instructed continuation after the exact four-projection private-helper proposal.
-  Applied BZ938-private-compositor-proposal.patch to descend_coherence.
-  The .hom → .inv migration preserves the original equation under Mathlib's reversed compositor.
-- Definition bodies and proof-local comparisons now use the correct compositor direction.
-- First remote build cleared five of eight diagnostics; remaining three shared the
-  private helper statement as their root. Next: validate the completed repair.
-- Then check the nine direct importers, continuing through unblocked layers up to
-  the brief's 30-extra-module limit.
-- Fix records: /home/ubuntu/u9/bz/FIXES-BZ938.md.
-- No local Lean/Lake, forbidden proof escapes, or heartbeat changes.
-
-
-# BZ978 complete
-
-- Branch: u9/BZ978; baseline 2390944b5.
-- Assigned CompletedReductionUnit is green and sorry-free. The authorized identity cast
-  and Localization imports preserve its normalization equation across hidden Qh endpoints.
-- Two direct importers are green: CompletedPullbackInterface and CompletedQuotientUnitNormalization.
-  The interface fixes Mathlib's reversed compositor in its construction; its type is unchanged.
-- Green source commit: 68722d6cc7ac77c7987137f65e895ed614607434, ucheck-bump rc=0,
-  failed=0, 6672 jobs. All three modules freshly rebuilt. Final Lean source is identical.
-- All seven direct importers and the next frontier were checked or traced to observed
-  unowned failures. ReductionAugmentationCompatibility is red because BZ704 removed
-  two prerequisite helpers; its own redundant reducibility attribute is also recorded.
-  Other blocked branches and exact diagnostics are in FIXES-BZ978.md.
-- No declaration deletions, local Lean/Lake execution, proof placeholders, trust bypasses,
-  profiler probes, or heartbeat changes. All four rewrite rules replay exactly.
-- Logs: BUILD-BZ978-leaf-green-full.log, BUILD-BZ978-downstream-green-full.log,
-  BUILD-BZ978-downstream1-full.log, and BUILD-BZ978-downstream2-full.log under ~/u9/bz/.
-- Final records: ~/u9/bz/FIXES-BZ978.md and ~/u9/state/BZ978.DONE.
-- This completion commit changes only progress documentation.
+- Branch `u9/BZ864`; baseline `e167a50a4`; final tested Lean source `d7c8c73c15`.
+- Final `ucheck-bump` build 21 returned rc=0, failed=0: assigned CanonicalModuleBaseChangeAffineChartComparison and direct importer CanonicalModuleBaseChangeAffineLocality are GREEN. Log: `/home/ubuntu/u9/logs/BZ864-20261106T093342.log` (poolb:43.157.187.72).
+- The assigned affine-chart source is unchanged from baseline. Restored its missing open-comparison helper with the original statement and a proof using the pinned degree-zero square, canonical restricted comparison, and one target automorphism. Separating the open proof from the affine context resolved elaboration timeouts.
+- Restored 24 still-referenced declarations. Validated 21 modules: assigned leaf, affine locality, and 19 edited prerequisites. Full-header audit: 63 unchanged types in edited files, three new helpers, no baseline deletion.
+- Downstream build 20 validated the replacement of a manual Qh comparison construction by exists_isDerivedModulePullbackComparison in RelativelyFlatCanonicalModuleBaseChange. The sole remaining error is `Unknown identifier canonicalModuleBaseChange_isIso_affine_of_isFlatOver` at line 123:6, from the unowned AffineRelativelyFlatCanonicalModuleBaseChange dependency pruned to imports. Its affine Cech factorization API is pruned too. Stopped at that external dependency per the ownership rule; the live caller was preserved. Log: `/home/ubuntu/u9/logs/BZ864-20261106T092703.log`.
+- No local Lean/Lake execution, proof placeholders, axioms, native_decide, trust bypasses, or remaining diagnostics/profiler probes. Two measured 400000-heartbeat scopes are below their original pre-prune 1000000 budgets.
+- Completion record: `/home/ubuntu/u9/state/BZ864.DONE`. Fix records: `/home/ubuntu/u9/bz/FIXES-BZ864.md` (26 PATTERN/ERROR/RULE entries). Module/restoration inventories and full-header audit are in `/home/ubuntu/u9/bz/BZ864-*.tsv` and `BZ864-green-modules.txt`.
