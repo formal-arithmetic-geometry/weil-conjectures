@@ -34,18 +34,6 @@ private instance ordinaryLimit_additive (S : Site.{u}) (A : Type u) [CommRing A]
   (constLimAdj : ConstantCompletion.constantTower S.topology (S.ring A) ⊣
     (lim : S.towers A ⥤ S.modules A)).right_adjoint_additive
 
-private abbrev diagonal (S : Site.{u}) (A : Type u) [CommRing A] (n : ℕ) :
-    S.delta A ⋙ S.evaluate A n ≅ 𝟭 (S.derived A) :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
-    Functor.mapDerivedCategoryNatIso
-      (NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun _ ↦ by rfl)) ≪≫
-    Functor.mapDerivedCategoryIdIso (S.modules A)
-
-private abbrev π (S : Site.{u}) (A : Type u) [CommRing A]
-    (X : S.towerDerived A) (n : ℕ) : (S.rlim A).obj X ⟶ (S.evaluate A n).obj X :=
-  (diagonal S A n).inv.app ((S.rlim A).obj X) ≫
-    (S.evaluate A n).map ((S.deltaAdjunction A).counit.app X)
-
 private theorem limitComparison_counit (S : Site.{u}) (A : Type u) [CommRing A]
     (X : CochainComplex (S.towers A) ℤ) :
     (S.delta A).map ((ConstantCompletion.limitComparison (S.ring A)).app X) ≫
@@ -102,64 +90,6 @@ private theorem derived_id_factors (S : Site.{u}) (A : Type u) [CommRing A]
   erw [Category.id_comp, hq, Category.comp_id] at hn
   exact (cancel_epi ((𝟭 (S.modules A)).mapDerivedCategory.map (q.hom.app P))).mp hn
 
-private theorem diagonal_factors (S : Site.{u}) (A : Type u) [CommRing A]
-    (P : CochainComplex (S.modules A) ℤ) (n : ℕ) :
-    (show S.delta A ⋙ S.evaluate A n ≅ 𝟭 (S.derived A) from
-      (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
-        Functor.mapDerivedCategoryNatIso
-          (NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun _ ↦ by rfl)) ≪≫
-        Functor.mapDerivedCategoryIdIso (S.modules A)).inv.app
-          ((ConstantCompletion.Q (S.ring A)).obj P) ≫
-      (S.evaluate A n).map
-        ((ConstantCompletion.constantTower S.topology (S.ring A)
-          ).mapDerivedCategoryFactors.hom.app P) ≫
-      (S.evaluateModule A n).mapDerivedCategoryFactors.hom.app
-        (((ConstantCompletion.constantTower S.topology (S.ring A)).mapHomologicalComplex
-          (.up ℤ)).obj P) = 𝟙 _ := by
-  let δ := ConstantCompletion.constantTower S.topology (S.ring A)
-  let E := S.evaluateModule A n
-  have hcomp := Functor.mapDerivedCategoryCompIso_hom_app_factors δ E P
-  have hnat := Functor.mapDerivedCategoryNatIso_fac
-    (NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun _ ↦ by rfl) :
-      δ ⋙ E ≅ 𝟭 (S.modules A)) P
-  have hh : (NatTrans.mapHomologicalComplex
-      (NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun _ ↦ by rfl) :
-        δ ⋙ E ≅ 𝟭 (S.modules A)).hom (.up ℤ)).app P = 𝟙 _ := by
-    ext q
-    rfl
-  erw [hh, CategoryTheory.Functor.map_id, Category.comp_id] at hnat
-  dsimp only [Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app]
-  rw [Category.assoc, Category.assoc, hcomp, ← hnat,
-    Iso.inv_hom_id_app_assoc, ← derived_id_factors S A P, Iso.inv_hom_id_app]
-
-private theorem projection_comparison (S : Site.{u}) (A : Type u) [CommRing A]
-    (X : CochainComplex (S.towers A) ℤ) (n : ℕ) :
-    (ConstantCompletion.limitComparison (S.ring A)).app X ≫
-        π S A ((ConstantCompletion.TQ (S.ring A)).obj X) n ≫
-        (S.evaluateModule A n).mapDerivedCategoryFactors.hom.app X =
-      (ConstantCompletion.Q (S.ring A)).map
-        (((S.evaluateModule A n).mapHomologicalComplex (.up ℤ)).map
-          (((constLimAdj : ConstantCompletion.constantTower S.topology (S.ring A) ⊣
-            (lim : S.towers A ⥤ S.modules A)).mapHomologicalComplex (.up ℤ)).counit.app X)) := by
-  let ad₀ := (constLimAdj : ConstantCompletion.constantTower S.topology (S.ring A) ⊣
-    (lim : S.towers A ⥤ S.modules A)).mapHomologicalComplex (.up ℤ)
-  have hd := (diagonal S A n).inv.naturality
-    ((ConstantCompletion.limitComparison (S.ring A)).app X)
-  dsimp only [Functor.id_map, Functor.comp_map, Functor.comp_obj] at hd
-  dsimp only [π]
-  erw [← Category.assoc, ← Category.assoc, hd]
-  simp only [Category.assoc]
-  erw [← CategoryTheory.Functor.map_comp_assoc, limitComparison_counit,
-    CategoryTheory.Functor.map_comp]
-  simp only [Category.assoc]
-  have he := (S.evaluateModule A n).mapDerivedCategoryFactors.hom.naturality
-    (ad₀.counit.app X)
-  dsimp only [Functor.comp_map, Functor.comp_obj, Functor.id_obj] at he
-  erw [he]
-  have hdiag := diagonal_factors S A ((ConstantCompletion.ordinaryLimit (S.ring A)).obj X) n
-  dsimp only [diagonal] at hdiag
-  erw [reassoc_of% hdiag]
-
 private theorem ordinary_finite_unit (S : Site.{u}) (A : Type u) [CommRing A]
     (I : Ideal A) (M : S.modules A) (n : ℕ) :
     ((ConstantCompletion.reductionUnit S.topology A I false).app M).app
@@ -207,19 +137,5 @@ private theorem ordinary_projection_unit (S : Site.{u}) (A : Type u) [CommRing A
   rw [limit_counit_app]
   exact ((ConstantCompletion.ordinaryUnit_existsUnique S.topology A I false P
     ).exists.choose_spec q n).trans (ordinary_finite_unit S A I (P.X q) n)
-
-private theorem projection_naturality (S : Site.{u}) (A : Type u) [CommRing A]
-    {M N : S.towerDerived A} (f : M ⟶ N) (n : ℕ) :
-    (S.rlim A).map f ≫ π S A N n =
-      π S A M n ≫ (S.evaluate A n).map f := by
-  have h := (diagonal S A n).inv.naturality ((S.rlim A).map f)
-  change (S.rlim A).map f ≫ (diagonal S A n).inv.app _ =
-    (diagonal S A n).inv.app _ ≫
-      (S.evaluate A n).map ((S.delta A).map ((S.rlim A).map f)) at h
-  have hc := (S.deltaAdjunction A).counit.naturality f
-  change (S.delta A).map ((S.rlim A).map f) ≫ _ = _ ≫ f at hc
-  dsimp only [π]
-  rw [← Category.assoc, h, Category.assoc, ← CategoryTheory.Functor.map_comp, hc,
-    CategoryTheory.Functor.map_comp, Category.assoc]
 
 end CategoryTheory.AdicSites
