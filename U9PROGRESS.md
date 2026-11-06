@@ -332,3 +332,9 @@
   and unblocked downstream layers, up to the brief's limit.
 - Fix patterns and build evidence: /home/ubuntu/u9/bz/FIXES-BZ978.md.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
+
+- Assigned leaf is green at 6a2f097183f65efa1284234f5c479e30ac937e3f: rc=0, failed=0,
+  6499 jobs, freshly rebuilt in 16s on newsrv:/home/ubuntu/u9n/bumpw2.
+- Full log: /home/ubuntu/u9/bz/BUILD-BZ978-leaf-green-full.log.
+- Next target OrderedExchangeStrictCoefficientEquations covers all seven direct
+  importers in its dependency closure.
