@@ -260,7 +260,7 @@ private theorem integral_sheaf_ext_continuity_noetherian
   have : HasColimitsOfShape I (CochainComplex A ℤ) := inferInstance
   let S := CochainComplex.singleFunctor A 0
   let K := M ⋙ S
-  have : HasColimit K := inferInstance
+  have : HasColimit K := HasColimitsOfShape.has_colimit _
   let G := DerivedCategory.Q ⋙ shiftFunctor _ q ⋙
     preadditiveCoyoneda.obj (Opposite.op ((DerivedCategory.singleFunctor A 0).obj C))
   have h := CondensedRing.integralExtHomContinuous_of_isNoetherian (E := E.val) X
