@@ -33,7 +33,7 @@ attribute [local irreducible] HasDerivedCategory.standard pullbackTensorCalculus
   pullbackTensorBraiding pullbackTensorSignedTotal coefficientTotalTensor
 attribute [local implicit_reducible] pullbackTensorSwap
   integralComparisonDerivedSequenceScalar
-  ScalarExtensionTower.tensor Functor.mapHomologicalComplex
+  ScalarExtensionTower.tensor
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall
 
 open Opposite ScalarExtensionTower
