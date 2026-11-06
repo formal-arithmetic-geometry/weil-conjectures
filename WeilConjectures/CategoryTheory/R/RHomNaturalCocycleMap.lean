@@ -67,11 +67,11 @@ theorem exists_rhom_natural_cocycle_map
             exact hf⟩)
         let b := (DerivedCategory.Plus.homologyFunctorObjQIso
           (V.mapCochainComplexPlus.obj I) n).inv a
-        let η := V.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient C).obj I)
+        let η := V.rightDerivedFunctorPlusUnit.app I
         τ ((DerivedCategory.Plus.Q (C := C)).obj I) n ((H n).map η b) =
           ShiftedHom.map (Cocycle.equivHomShift.symm
               (Cocycle.fromSingleMk f (zero_add n) (n + 1) rfl hf)) DerivedCategory.Q ≫
-            ((DerivedCategory.quotientCompQhIso C).hom.app I.obj)⟦n⟧') := by
+            ((DerivedCategory.Plus.QCompιIso C).inv.app I)⟦n⟧') := by
   dsimp only
   obtain ⟨F⟩ := exists_rhom_injective_cocycle_family M
   obtain ⟨τ, hnat, hrep⟩ := extend_rhom_injective_cocycle_family F
