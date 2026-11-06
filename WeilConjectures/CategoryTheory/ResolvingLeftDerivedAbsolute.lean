@@ -172,7 +172,7 @@ lemma isLeftDerivedFunctor_comp_of_resolving
     rw [NatTrans.isIso_app_iff_of_iso φ
       (Localization.isoOfHom L W s hs ≪≫ L.objObjPreimageIso Y).symm]
     exact hφ X' hX'
-  exact (isLeftDerivedFunctor_iff_of_iso _ _ _ ((F ⋙ G).totalLeftDerivedCounit L W) W
+  exact (isLeftDerivedFunctor_iff_of_iso _ ((F ⋙ G).totalLeftDerivedCounit L W) W
     (asIso φ) (by simp [φ])).2 inferInstance
 
 /-- For a functor sending `W`-arrows between objects of a resolving class `P` to
