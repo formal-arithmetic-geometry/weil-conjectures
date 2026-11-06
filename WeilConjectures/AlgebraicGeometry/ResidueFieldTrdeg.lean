@@ -200,7 +200,7 @@ theorem trdegAt_snd_le (t : ↑(pullback f g)) :
       CommRingCat.ofHom (((pullback.fst f g).residueFieldMap t).hom.codRestrict A
         fun a ↦ Algebra.subset_adjoin ⟨a, rfl⟩)
     let i₂ : Y.residueField (pullback.snd f g t) ⟶ CommRingCat.of A :=
-      CommRingCat.ofHom (algebraMap _ A)
+      CommRingCat.ofHom (algebraMap (Y.residueField (pullback.snd f g t)) A)
     have hd : ((S.residueFieldCongr (Triplet.ofPoint t).hx).inv ≫
         f.residueFieldMap (Triplet.ofPoint t).x) ≫ i₁ =
         ((S.residueFieldCongr (Triplet.ofPoint t).hy).inv ≫
