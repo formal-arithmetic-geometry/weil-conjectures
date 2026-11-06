@@ -527,13 +527,13 @@ private theorem derivedSquare_factors
         DerivedCategory.Q.map ((Functor.mapHomologicalComplexCompIso e (.up ℤ)).hom.app P ≫
           (Functor.mapHomologicalComplexCompIso
             (Iso.refl (G ⋙ I)) (.up ℤ)).inv.app P) := by
-  have hi : (Functor.mapDerivedCategoryCompIso F H).inv.app (DerivedCategory.Q.obj P) ≫
+  have hi : (Functor.mapDerivedCategoryCompIso F H).hom.app (DerivedCategory.Q.obj P) ≫
       (F ⋙ H).mapDerivedCategoryFactors.hom.app P =
     H.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app P) ≫
       H.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj P) := by
     apply (cancel_epi
-      ((Functor.mapDerivedCategoryCompIso F H).hom.app (DerivedCategory.Q.obj P))).mp
-    rw [Iso.hom_inv_id_app_assoc]
+      ((Functor.mapDerivedCategoryCompIso F H).inv.app (DerivedCategory.Q.obj P))).mp
+    rw [Iso.inv_hom_id_app_assoc]
     exact (Functor.mapDerivedCategoryCompIso_hom_app_factors F H P).symm
   simp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
     NatTrans.comp_app, Category.assoc]
