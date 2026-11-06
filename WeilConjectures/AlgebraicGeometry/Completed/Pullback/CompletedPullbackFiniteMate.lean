@@ -259,7 +259,9 @@ private theorem towerAugmentation_computed
     simpa only [HasCompletedReductionTowerUnitNormalization, completedReductionTowerUnit,
       completedReductionTowerComplexCounit, reductionComplexCounit,
       completedReductionTowerCounit, coherenceReductionTowerCounit,
-      completedReductionComplexTowerFunctor] using
+      completedReductionComplexTowerFunctor, DerivedCategory.quotientCompQhIso,
+      HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift,
+      NatIso.ofComponents, Iso.refl] using
       ((completedReductionTowerUnit_exists d T).exists.choose_spec P hP)
 
 private theorem pulledAugmentation_computed
