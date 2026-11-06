@@ -382,3 +382,10 @@
 - Fix record: /home/ubuntu/u9/bz/FIXES-BZ1021.md; full first build log:
   /home/ubuntu/u9/bz/BUILD-BZ1021-1-full.log.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
+
+- Assigned DegreeZero is now green and sorry-free at source b1c1890653a9221b928af7f85aac476908c7d89d.
+  ucheck-bump rc=0, failed=0, 7091 jobs; DegreeZero rebuilt in 62 seconds.
+- BertiniNoether's narrower imports exposed three missing imports in GenericIrreducibility;
+  added the defining Mathlib modules explicitly. Both prerequisites now build.
+- All Lean changes so far are imports only; all pre-existing proof/resource settings are unchanged.
+- Next: build all five direct importers, applying the known umbrella-import fix to Induction.
