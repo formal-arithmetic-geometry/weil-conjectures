@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
@@ -885,7 +887,7 @@ def derivedSquare {f : Morphism Y X} {g : Morphism Y Y'}
     {h : Morphism X X'} {k : Morphism Y' X'}
     (sq : Square f g h k) (A : Type u) [CommRing A] :
     g.pull A ⋙ k.pull A ≅ f.pull A ⋙ h.pull A :=
-  (Functor.mapDerivedCategoryCompIso _ _) ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (moduleSquare sq A) ≪≫
       (Functor.mapDerivedCategoryCompIso _ _).symm
 
@@ -910,7 +912,7 @@ def towerSquare {f : Morphism Y X} {g : Morphism Y Y'}
     {h : Morphism X X'} {k : Morphism Y' X'}
     (sq : Square f g h k) (A : Type u) [CommRing A] :
     g.towerPull A ⋙ k.towerPull A ≅ f.towerPull A ⋙ h.towerPull A :=
-  (Functor.mapDerivedCategoryCompIso _ _) ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (towerModuleSquare sq A) ≪≫
       (Functor.mapDerivedCategoryCompIso _ _).symm
 
@@ -1086,7 +1088,7 @@ Source: Stacks 0941 (blueprint: lem-sp-completion-mate-comparison). -/
 def Morphism.constantPullIso {V U : Site.{u}} (f : Morphism V U)
     (A : Type u) [CommRing A] :
     V.delta A ⋙ f.towerPull A ≅ f.pull A ⋙ U.delta A :=
-  (Functor.mapDerivedCategoryCompIso _ _) ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (f.constantModulePullIso A) ≪≫
       (Functor.mapDerivedCategoryCompIso _ _).symm
 
@@ -1761,7 +1763,7 @@ Source: Stacks 0941 (blueprint: lem-sp-completion-mate-comparison). -/
 def Morphism.evaluatePullIso {V U : Site.{u}} (f : Morphism V U)
     (A : Type u) [CommRing A] (n : ℕ) :
     f.towerPull A ⋙ U.evaluate A n ≅ V.evaluate A n ⋙ f.pull A :=
-  (Functor.mapDerivedCategoryCompIso _ _) ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (f.evaluateModulePullIso A n) ≪≫
       (Functor.mapDerivedCategoryCompIso _ _).symm
 
@@ -1772,7 +1774,8 @@ def Morphism.pushUnit {V U : Site.{u}} (f : Morphism V U)
     (A : Type u) [CommRing A] (P : CochainComplex (U.modules A) ℤ) :
     (ConstantCompletion.Q (V.ring A)).obj (((f.modulePush A).mapHomologicalComplex (.up ℤ)).obj P) ⟶
       (f.push A).obj ((ConstantCompletion.Q (U.ring A)).obj P) :=
-  (f.modulePush A).rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)
+  cast (by rfl) ((f.modulePush A).rightDerivedFunctorUnit.app
+    ((HomotopyCategory.quotient _ (.up ℤ)).obj P))
 
 /-- The same universal unit for derived termwise direct image of strict towers.
 Source: Stacks 0941 (blueprint: lem-sp-completion-mate-comparison). -/
@@ -1781,8 +1784,8 @@ def Morphism.towerPushUnit {V U : Site.{u}} (f : Morphism V U)
     (ConstantCompletion.TQ (V.ring A)).obj
         (((f.towerModulePush A).mapHomologicalComplex (.up ℤ)).obj P) ⟶
       (f.towerPush A).obj ((ConstantCompletion.TQ (U.ring A)).obj P) :=
-  (f.towerModulePush A).rightDerivedFunctorUnit.app
-    ((HomotopyCategory.quotient _ (.up ℤ)).obj P)
+  cast (by rfl) ((f.towerModulePush A).rightDerivedFunctorUnit.app
+    ((HomotopyCategory.quotient _ (.up ℤ)).obj P))
 
 /-- The specified representative or unit normalization for this comparison.
 Source: Stacks 099M, 099N, 0941 and 0E48
@@ -2290,7 +2293,7 @@ def Morphism.finiteRestrictionPullIso {V U : Site.{u}} (f : Morphism V U)
   letI := (siteRestrictScalars_exact (ConstantCompletion.quotient V.topology A I n)).2
   letI := (siteRestrictScalars_exact (ConstantCompletion.quotient U.topology A I n)).1
   letI := (siteRestrictScalars_exact (ConstantCompletion.quotient U.topology A I n)).2
-  (Functor.mapDerivedCategoryCompIso _ _) ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (f.finiteModuleRestrictionPullIso A I n) ≪≫
       (Functor.mapDerivedCategoryCompIso _ _).symm
 
