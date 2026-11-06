@@ -56,7 +56,7 @@ def openUnit {U X : Scheme.{u}} (s : U ⟶ X) [IsOpenImmersion s] :
   (Functor.mapDerivedCategoryIdIso _).symm ≪≫
     Functor.mapDerivedCategoryNatIso
       (asIso (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) s).unit) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The stipulated adjunct of the inverse open unit, as a natural transformation.
 Source: Stacks 0037 (blueprint: lem-sf-clopen-composite-counit-normalization). -/
@@ -101,7 +101,7 @@ def pullbackComposition {U X W : Scheme.{u}} (s : U ⟶ X) (q : X ⟶ W) :
     (upperStar (ModuleCat.{u + 1} Λ) q).mapDerivedCategory ⋙
         (upperStar (ModuleCat.{u + 1} Λ) s).mapDerivedCategory ≅
       (upperStar (ModuleCat.{u + 1} Λ) (s ≫ q)).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (upperStarComp (ModuleCat.{u + 1} Λ) s q).symm
 
 /-- Direct-image composition is the conjugate of inverse pullback composition for
@@ -151,7 +151,7 @@ private theorem exact_counit
     [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     (a : F ⊣ G) [IsIso a.counit] :
     a.mapExactDerivedCategory.counit =
-      (Functor.mapDerivedCategoryCompIso G F).inv ≫
+      (Functor.mapDerivedCategoryCompIso G F).hom ≫
         (Functor.mapDerivedCategoryNatIso (asIso a.counit)).hom ≫
           (Functor.mapDerivedCategoryIdIso D).hom := by
   apply Localization.natTrans_ext DerivedCategory.Q (HomologicalComplex.quasiIso D (.up ℤ))
@@ -161,7 +161,7 @@ private theorem exact_counit
   rw [Functor.mapDerivedCategoryIdIso_hom_app_Q_obj,
     Functor.mapDerivedCategoryNatIso_fac,
     ← Functor.mapDerivedCategoryCompIso_hom_app_factors G F K]
-  simp only [← Category.assoc, Iso.inv_hom_id_app, Category.id_comp]
+  simp only [← Category.assoc, Iso.hom_inv_id_app, Category.id_comp]
   rfl
 
 omit [Finite Λ] in
