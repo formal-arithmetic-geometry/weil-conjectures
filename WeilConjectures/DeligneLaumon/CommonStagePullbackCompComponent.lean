@@ -140,6 +140,20 @@ theorem commonStagePullbackCompComponent_stage_square
     ((rationalDerivedPullback l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) g).map r)
     (commonStagePullbackRationalComposition_naturality l Ω f g L hP hQ r)
 
+/-- Identify the two presentations of the fixed-stage rational compositor. -/
+private theorem commonStagePullbackRationalComposition_eq_scalar
+    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    [∀ x : X, Invertible (l : X.residueField x)]
+    [∀ y : Y, Invertible (l : Y.residueField y)]
+    [∀ z : Z, Invertible (l : Z.residueField z)]
+    (P : generalAlgebraicallyClosedConstructibleCategory l Ω Z)
+    (L : AlgebraicallyClosedCoefficients.Index l Ω) (hP : P.stage ≤ L) :
+    commonStagePullbackRationalComposition l Ω f g L P hP =
+      rationalPullbackCompositionIso l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f g
+        (P.toStage hP) := by
+  unfold commonStagePullbackRationalComposition rationalPullbackCompositionIso
+  simp only [integralPullbackCompositor_eq_choose]
+
 /-- The selected common-stage component is represented at every larger coefficient stage.
 Source: Stacks 099N(5), coefficient-compatibility argument in residue-compatible pullback.
 (blueprint: lem-zl-common-stage-pullback-comp-naturality-representative).
@@ -229,11 +243,7 @@ theorem commonStagePullbackCompComponent_stage_representation
     (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω P.stage L hP) f g
     _ _ _ eX eY eZ P.obj
   refine (StageSystem.ι_map_eq hP _).trans ?_
-  have eR : commonStagePullbackRationalComposition l Ω f g L P hP =
-      rationalPullbackCompositionIso l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f g
-        (P.toStage hP) := by
-    unfold commonStagePullbackRationalComposition rationalPullbackCompositionIso
-    simp only [integralPullbackCompositor_eq_choose]
+  have eR := commonStagePullbackRationalComposition_eq_scalar l Ω f g P L hP
   simp only [eR]
   unfold GeneralAlgebraicallyClosedCoefficients.ofHom
   apply congrArg (StageSystem.PairCategory.mkHom
