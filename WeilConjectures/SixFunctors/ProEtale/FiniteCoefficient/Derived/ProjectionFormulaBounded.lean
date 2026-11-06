@@ -100,44 +100,4 @@ lemma plus_derivedTensor_leftDerivedUpperStar_of_comparison_of_torAmplitudeIn
 
 end Coefficients
 
-variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
-
-/-- **The projection formula for a bounded second argument.** For a finite ring `Λ`, a proper
-`g : Z ⟶ Y`, an open immersion `j : U ⟶ Z`, `K` in `Dᵇctf(U_proét, Λ)` and `L₀` a bounded complex
-of étale sheaves on `Y`, the projection map `Rg_*(j_! K) ⊗ᴸ ν^* L₀ ⟶ Rg_*(j_! K ⊗ᴸ Lg^* ν^* L₀)` is
-an isomorphism. -/
-theorem isIso_rightDerivedLowerStarProjectionMap_app_app_of_bounded {Y Z U : Scheme.{u}}
-    (g : Z ⟶ Y) [IsProper g] (j : U ⟶ Z) [IsOpenImmersion j]
-    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology U) (ModuleCat.{u + 1} Λ))}
-    (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) U K)
-    {L₀ : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (hL₀ : _root_.DerivedCategory.TStructure.t.bounded L₀) :
-    IsIso (((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) g).app
-      (D((j)_!open[ModuleCat.{u + 1} Λ]).obj K)).app (D(ν^*(Y)[ModuleCat.{u + 1} Λ]).obj L₀)) := by
-  obtain ⟨K₀, hK₀, ⟨eK⟩⟩ := hK.1
-  obtain ⟨a, b, hKt⟩ := hK.2
-  let M₀ := D(Etale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).obj K₀
-  have hM₀ : _root_.DerivedCategory.TStructure.t.plus M₀ :=
-    ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).bounded_mapDerivedCategory_obj
-      hK₀.1).1
-  -- `j_! K ≅ ν^* M₀` and `ν^* L₀ ≅ Lν^* L₀`
-  let eM : D((j)_!open[ModuleCat.{u + 1} Λ]).obj K ≅ L(ν^*(Z)[ModuleCat.{u + 1} Λ]).obj M₀ :=
-    D((j)_!open[ModuleCat.{u + 1} Λ]).mapIso eK.symm ≪≫
-      ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
-        Functor.mapDerivedCategoryNatIso
-          (openImmersionLowerShriekComparisonUpperStarIso (ModuleCat.{u + 1} Λ) j).symm ≪≫
-        Functor.mapDerivedCategoryCompIso _ _).app K₀ ≪≫
-      ((ν^*(Z)[ModuleCat.{u + 1} Λ]).leftDerivedFunctorIsoMapDerivedCategory.app M₀).symm
-  let eL := ((ν^*(Y)[ModuleCat.{u + 1} Λ]).leftDerivedFunctorIsoMapDerivedCategory.app L₀).symm
-  -- `j_! K₀ ⊗ᴸ Lg^* L₀` is bounded below, since its pro-étale realization `j_! K ⊗ᴸ Lg^* L` is
-  have hML := plus_derivedTensor_leftDerivedUpperStar_of_comparison_of_torAmplitudeIn g eM eL
-    (torAmplitudeIn_mapDerivedCategory_openImmersionLowerShriek j hKt)
-    ((ν^*(Y)[ModuleCat.{u + 1} Λ]).bounded_mapDerivedCategory_obj hL₀)
-  -- the étale projection formula for the proper `g`
-  have := Etale.isIso_rightDerivedLowerStarProjectionMap_of_finite Λ g
-  have := isIso_rightDerivedLowerStarProjectionMap_app_app_leftDerived (ModuleCat.{u + 1} Λ) g
-    M₀ L₀ hM₀ hML
-  exact NatTrans.isIso_app_app_of_iso
-    (rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) g) eM.symm eL.symm
-
 end AlgebraicGeometry.ProEtale

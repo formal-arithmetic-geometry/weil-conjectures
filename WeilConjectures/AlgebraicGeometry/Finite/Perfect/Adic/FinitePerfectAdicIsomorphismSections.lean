@@ -129,6 +129,5 @@ theorem finitePerfectAdic_isomorphism_sections
     simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id,
       Iso.hom_inv_id_assoc]
     convert ht.symm using 1
-    rfl
 
 end AlgebraicGeometry.Scheme
