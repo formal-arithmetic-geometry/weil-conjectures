@@ -97,6 +97,7 @@ theorem open_pinned_single_degree_zero_counit_square
           (schemeOpenRestriction X' U').mapDerivedCategory.map
             (openPinnedSingleDegreeZeroCounit k M) ≫ t.hom.app M =
           (derivedPullback j).map s ≫ openPinnedSingleDegreeZeroCounit j H := by
+  dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
   let P := (HomotopyCategory.singleFunctor
     (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0)
   let t := openPinnedSingleTargetRestrictionIso.{u, w} k U U' j hj
@@ -117,8 +118,8 @@ theorem open_pinned_single_degree_zero_counit_square
     ((schemeOpenRestriction X U).mapDerivedCategoryFactorsh.hom.app (P.obj M))
     (DerivedCategory.Qh.map qR)).symm.trans
       (congrArg (fun f ↦ (derivedPullback j).map f) hR)
-  dsimp only [openPinnedSingleDegreeZeroCounit]
-  rw [Functor.map_comp]
-  exact assembleCounitSquare _ _ _ _ _ _ _ _ _ _ _ _ _ hT hc hn hR'
+  with_unfolding_all
+    simp only [openPinnedSingleDegreeZeroCounit, cast_eq, Functor.map_comp]
+    exact assembleCounitSquare _ _ _ _ _ _ _ _ _ _ _ _ _ hT hc hn hR'
 
 end AlgebraicGeometry

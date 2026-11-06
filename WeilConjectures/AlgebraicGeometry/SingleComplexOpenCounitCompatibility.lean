@@ -135,7 +135,7 @@ theorem singleComplexOpen_counit_compatibility
   obtain ⟨I, hI, ⟨e⟩⟩ := DerivedCategory.exists_iso_Q_obj_of_isKInjective K
   have he : K ≅ DerivedCategory.Qh.obj
       ((HomotopyCategory.quotient _ (.up ℤ)).obj I) :=
-    e ≪≫ (DerivedCategory.quotientCompQhIso _).app I
+    e ≪≫ ((DerivedCategory.quotientCompQhIso _).app I).symm
   change α.app K = β.app K
   rw [← cancel_mono (RX.map he.hom), ← α.naturality, ← β.naturality, hrep I]
 
