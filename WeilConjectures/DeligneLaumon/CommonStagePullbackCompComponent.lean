@@ -9,6 +9,7 @@ public import WeilConjectures.TraceFormula.Integral.IntegralPullbackComposition
 public import WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorHom
 public import WeilConjectures.DeligneLaumon.CommonStagePullbackCompData
 public import WeilConjectures.DeligneLaumon.CommonStagePullbackCompComponentAux
+import all WeilConjectures.DeligneLaumon.CommonStagePullbackCompComponentAux
 import WeilConjectures.TraceFormula.Integral.IntegralPullbackCompositionScalarRational
 import all Mathlib.Logic.Small.Defs
 
@@ -166,16 +167,19 @@ private theorem commonStagePullbackComparison_eq_transport
     (eY : (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω Y).T hP =
       GeneralAlgebraicallyClosedCoefficients.transition l Ω Y P.stage L hP) :
     commonStagePullbackComparison l Ω f P L hP =
-      (eqToIso eX).app
-          ((rationalDerivedPullback l
-            (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) f).obj P.obj) ≪≫
+      commonStageTransportComparison
+        (rationalDerivedPullback l
+          (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) f)
+        (rationalDerivedPullback l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f)
+        (GeneralAlgebraicallyClosedCoefficients.transition l Ω Y P.stage L hP)
+        ((GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω Y).T hP)
+        (GeneralAlgebraicallyClosedCoefficients.transition l Ω X P.stage L hP)
+        ((GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω X).T hP) eY eX
         (rationalPullbackScalarComparison l
           (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage)
           (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L)
-          (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω P.stage L hP) f).app P.obj ≪≫
-        (rationalDerivedPullback l
-          (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f).mapIso
-          ((eqToIso eY).app P.obj).symm := by
+          (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω P.stage L hP) f) P.obj := by
+  rw [commonStageTransportComparison_def]
   unfold commonStagePullbackComparison
   rfl
 
@@ -229,11 +233,37 @@ private theorem commonStagePullbackCompComponent_stage_transport
     simpa only [GeneralAlgebraicallyClosedCoefficients.stageSystem] using
       (GeneralAlgebraicallyClosedCoefficients.stageSystem_existsUnique l Ω Z).exists.choose_spec.1
         P.stage L hP
-  have key := rationalPullbackComposition_scalar_transport l
-    (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage)
-    (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L)
-    (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω P.stage L hP) f g
-    _ _ _ eX eY eZ P.obj
+  have key := commonStageTransportCompositor
+    (rationalDerivedPullback l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) g)
+    (rationalDerivedPullback l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) f)
+    (rationalDerivedPullback l
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) (f ≫ g))
+    (rationalDerivedPullback l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) g)
+    (rationalDerivedPullback l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f)
+    (rationalDerivedPullback l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) (f ≫ g))
+    (GeneralAlgebraicallyClosedCoefficients.transition l Ω X P.stage L hP) _
+    (GeneralAlgebraicallyClosedCoefficients.transition l Ω Y P.stage L hP) _
+    (GeneralAlgebraicallyClosedCoefficients.transition l Ω Z P.stage L hP) _ eX eY eZ
+    (rationalPullbackScalarComparison l
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage)
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L)
+      (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω P.stage L hP) f)
+    (rationalPullbackScalarComparison l
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage)
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L)
+      (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω P.stage L hP) g)
+    (rationalPullbackScalarComparison l
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage)
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L)
+      (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω P.stage L hP) (f ≫ g))
+    P.obj (rationalPullbackCompositionIso l
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) f g P.obj)
+    (fun Q ↦ rationalPullbackCompositionIso l
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f g Q)
+    (rationalPullbackComposition_scalar l
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage)
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L)
+      (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω P.stage L hP) f g P.obj)
   refine (StageSystem.ι_map_eq hP _).trans ?_
   have eR := commonStagePullbackRationalComposition_eq_scalar l Ω f g P L hP
   simp only [eR]
