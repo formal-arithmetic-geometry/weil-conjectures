@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.FourCornersSupplement
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import all WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumSupplement
 import WeilConjectures.Algebra.Homology.SheafRingDerivedHomComparison
 import WeilConjectures.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
@@ -83,7 +85,7 @@ namespace AlgebraicGeometry.Scheme
 
 attribute [local irreducible] HasDerivedCategory.standard
   Functor.mapDerivedCategory Functor.mapDerivedCategoryFactors
-  Functor.mapDerivedCategoryCompIso Functor.mapDerivedCategoryNatIso
+  Functor.mapDerivedCategoryNatIso
   completedReductionCoefficient completedReductionDerivedNormalization
 
 private theorem counit_eq
