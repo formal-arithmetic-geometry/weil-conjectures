@@ -121,7 +121,7 @@ noncomputable def rightDerivedLowerShriekOfCompactificationTransportIso :
           (Functor.mapDerivedCategoryNatIso
               (openImmersionLowerShriekComp A eX.inv c.i ≪≫
                 Functor.isoWhiskerRight (upperStarIsoOpenImmersionLowerShriekInv A eX).symm _) ≪≫
-            Functor.mapDerivedCategoryCompIso _ _) R((c.g ≫ eY.hom)_*[A]) ≪≫
+            (Functor.mapDerivedCategoryCompIso _ _).symm) R((c.g ≫ eY.hom)_*[A]) ≪≫
         Functor.isoWhiskerLeft _
           (Functor.rightDerivedFunctorCompIso' (c.g)_*[A] (eY.hom)_*[A]
             (Etale.lowerStarComp A c.g eY.hom)).symm) D((eY.hom)^*[A]) ≪≫
@@ -131,6 +131,7 @@ noncomputable def rightDerivedLowerShriekOfCompactificationTransportIso :
     Functor.isoWhiskerLeft _ (Functor.isoWhiskerLeft _
       (Functor.isoWhiskerLeft _ (rightDerivedLowerStarCompMapDerivedUpperStarIso A eY) ≪≫
         Functor.rightUnitor _))
+
 
 end Etale
 

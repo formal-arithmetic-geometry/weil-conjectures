@@ -175,7 +175,7 @@ private theorem derived_cartesian_normalized
       adj'.mapDerivedCategoryRightDerivedAdjunction
       (TwoSquare.mk _ _ _ _ ((Functor.mapDerivedCategoryCompIso G L').symm ≪≫
         Functor.mapDerivedCategoryNatIso e ≪≫
-        Functor.mapDerivedCategoryCompIso L H).hom)).natTrans := by
+        (Functor.mapDerivedCategoryCompIso L H).symm).hom)).natTrans := by
   have : (R.rightDerivedFunctor ⋙ G.mapDerivedCategory).IsRightDerivedFunctor
       (Functor.whiskerRight R.rightDerivedFunctorUnit G.mapDerivedCategory ≫
         (Functor.associator _ _ _).hom) (HomotopyCategory.quasiIso C₁ (.up ℤ)) := by
@@ -202,7 +202,7 @@ private theorem derived_cartesian_normalized
   exact Adjunction.derivedExact_mateEquiv_app_fac adj adj'
     (TwoSquare.mk _ _ _ _ e.hom)
     (TwoSquare.mk _ _ _ _ ((Functor.mapDerivedCategoryCompIso G L').symm ≪≫
-      Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryCompIso L H).hom)
+      Functor.mapDerivedCategoryNatIso e ≪≫ (Functor.mapDerivedCategoryCompIso L H).symm).hom)
     (by
       intro N
       simpa only [Iso.trans_hom, Iso.symm_hom] using square_factors G L L' H e N) K

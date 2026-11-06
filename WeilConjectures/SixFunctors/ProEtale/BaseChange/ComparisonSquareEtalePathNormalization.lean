@@ -115,7 +115,7 @@ private noncomputable def exactOrdinaryPath
 
 private noncomputable def exactSourceIso :
     D((F ⋙ G) ⋙ K₂) ≅ D(F) ⋙ D(G) ⋙ D(K₂) :=
-  Functor.mapDerivedCategoryCompIso _ _ ≪≫
+  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
     Functor.isoWhiskerRight (Functor.mapDerivedCategoryCompIso _ _) _
 
 private noncomputable def exactTargetIso
@@ -123,7 +123,7 @@ private noncomputable def exactTargetIso
     (P₂' : DerivedCategory Q ⥤ DerivedCategory R)
     (j₁ : P₁' ≅ D(P₁)) (j₂ : P₂' ≅ D(P₂)) :
     D(K₀ ⋙ (P₁ ⋙ P₂)) ≅ D(K₀) ⋙ P₁' ⋙ P₂' :=
-  Functor.mapDerivedCategoryCompIso _ _ ≪≫
+  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
     Functor.isoWhiskerLeft _ (Functor.mapDerivedCategoryCompIso _ _) ≪≫
     Functor.isoWhiskerLeft _
       (Functor.isoWhiskerRight j₁.symm _ ≪≫ Functor.isoWhiskerLeft _ j₂.symm)
@@ -183,7 +183,7 @@ private theorem restriction_path
       ((Functor.mapDerivedCategoryPlusNatIso e₁ ≪≫
         Functor.mapDerivedCategoryPlusCompIso F G).app M) =
       (Functor.mapDerivedCategoryNatIso e₁ ≪≫
-        Functor.mapDerivedCategoryCompIso F G).app M.obj := by
+        (Functor.mapDerivedCategoryCompIso F G).symm).app M.obj := by
     apply Iso.ext
     simp only [Functor.mapIso_hom, Iso.app_hom, Iso.trans_hom, NatTrans.comp_app,
       Functor.map_comp, Functor.ι_map_mapDerivedCategoryPlusNatIso_hom_app,
@@ -193,7 +193,7 @@ private theorem restriction_path
       ((Functor.mapDerivedCategoryPlusNatIso e₁ ≪≫
         Functor.mapDerivedCategoryPlusCompIso F G).inv.app M) =
       (Functor.mapDerivedCategoryNatIso e₁ ≪≫
-        Functor.mapDerivedCategoryCompIso F G).inv.app M.obj := congrArg Iso.inv hcomp
+        (Functor.mapDerivedCategoryCompIso F G).symm).inv.app M.obj := congrArg Iso.inv hcomp
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.map_comp]
   rw [hi, ht, Functor.ι_map_mapDerivedCategoryPlusNatIso_hom_app,
     Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app]
@@ -272,7 +272,7 @@ private theorem edge_derived (Λ : Type (u + 1)) [CommRing Λ]
         ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
           Functor.mapDerivedCategoryNatIso
             (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) g).symm ≪≫
-          Functor.mapDerivedCategoryCompIso _ _) ≪≫
+          (Functor.mapDerivedCategoryCompIso _ _).symm) ≪≫
       Functor.isoWhiskerLeft (DerivedCategory.Plus.ι ⋙ D(ν^*(V)[ModuleCat.{u + 1} Λ]))
         (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) g).symm
 ) f Λ).hom.app M =
@@ -383,7 +383,7 @@ private theorem normalization_aux
         ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
           Functor.mapDerivedCategoryNatIso
             (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) g).symm ≪≫
-          Functor.mapDerivedCategoryCompIso _ _) ≪≫
+          (Functor.mapDerivedCategoryCompIso _ _).symm) ≪≫
       Functor.isoWhiskerLeft (DerivedCategory.Plus.ι ⋙ D(ν^*(V)[ModuleCat.{u + 1} Λ]))
         (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) g).symm
 ) g' Λ).hom.app
@@ -397,7 +397,7 @@ private theorem normalization_aux
         ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
           Functor.mapDerivedCategoryNatIso
             (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) g).symm ≪≫
-          Functor.mapDerivedCategoryCompIso _ _) ≪≫
+          (Functor.mapDerivedCategoryCompIso _ _).symm) ≪≫
       Functor.isoWhiskerLeft (DerivedCategory.Plus.ι ⋙ D(ν^*(V)[ModuleCat.{u + 1} Λ]))
         (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) g).symm
 ) f Λ).hom.app M)) := by
@@ -485,7 +485,7 @@ theorem comparisonSquareEtalePath_normalization
         ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
           Functor.mapDerivedCategoryNatIso
             (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) g).symm ≪≫
-          Functor.mapDerivedCategoryCompIso _ _) ≪≫
+          (Functor.mapDerivedCategoryCompIso _ _).symm) ≪≫
       Functor.isoWhiskerLeft (DerivedCategory.Plus.ι ⋙ D(ν^*(V)[ModuleCat.{u + 1} Λ]))
         (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) g).symm
 ) g' Λ).hom.app
@@ -499,7 +499,7 @@ theorem comparisonSquareEtalePath_normalization
         ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
           Functor.mapDerivedCategoryNatIso
             (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) g).symm ≪≫
-          Functor.mapDerivedCategoryCompIso _ _) ≪≫
+          (Functor.mapDerivedCategoryCompIso _ _).symm) ≪≫
       Functor.isoWhiskerLeft (DerivedCategory.Plus.ι ⋙ D(ν^*(V)[ModuleCat.{u + 1} Λ]))
         (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) g).symm
 ) f Λ).hom.app M)) := by

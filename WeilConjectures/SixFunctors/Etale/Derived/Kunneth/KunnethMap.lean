@@ -366,7 +366,7 @@ constant complex, `Lf^*(C_Y) ≅ C_X`. -/
 noncomputable def constantFunctorCompLeftDerivedUpperStarIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     constantFunctor Λ Y ⋙ L((f)^*[ModuleCat.{u + 1} Λ]) ≅ constantFunctor Λ X :=
   Functor.isoWhiskerLeft _ (leftDerivedUpperStarIsoMapDerivedCategory _ f) ≪≫
-    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    Functor.mapDerivedCategoryCompIso _ _ ≪≫
       Functor.mapDerivedCategoryNatIso (constantSheafCompUpperStarIso Λ f)
 
 section Point

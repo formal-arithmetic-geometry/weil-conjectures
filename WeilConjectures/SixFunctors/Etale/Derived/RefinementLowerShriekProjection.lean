@@ -118,7 +118,7 @@ lemma unit_map_refinementLowerShriekBaseChangeLeftDerivedIso
     Functor.whiskerLeft_app, Iso.symm_hom, Functor.map_comp, refinementSquareMap,
     Functor.whiskerRight_app]
   rw [reassoc_of% h]
-  simp only [Iso.trans_hom, NatTrans.comp_app, Category.assoc]
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
 
 /-- **The projection formula for the extension by zero and refinements**: the derived pullback
 along `q = r.hom` of the projection map of `D(d.i)_!` is the projection map of `D(c.i)_!`, through
