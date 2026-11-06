@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.PulledReduction.PulledReductionComparisonData
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 import all WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAdjunctionSupplement
 
@@ -158,6 +160,10 @@ private theorem constantUnit_eq (T : Scheme.{t}) :
   apply (completedConstantRlimUnit_exists d T).unique
     (completedConstantRlimUnit_exists d T).exists.choose_spec
   intro P
+  simp only [Functor.rightDerivedFunctorUnitQ, DerivedCategory.quotientCompQhIso,
+    HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift_hom,
+    Quotient.lift.isLift_inv]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
   exact derivedUnit_complex (d.constantTower T)
     (completedTowerLimit T (d.completedRing T)) constLimAdj P
 
