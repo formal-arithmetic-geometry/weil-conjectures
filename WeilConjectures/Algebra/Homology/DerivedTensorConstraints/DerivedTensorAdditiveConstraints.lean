@@ -76,7 +76,6 @@ chain isomorphisms. The statements include the empty product and unbounded objec
 
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
-set_option synthInstance.maxHeartbeats 40000
 
 universe u v r w i e z
 
