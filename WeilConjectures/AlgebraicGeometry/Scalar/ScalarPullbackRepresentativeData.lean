@@ -9,6 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.Etale.Derived.EtaleDerivedScalar
 public import WeilConjectures.CategoryTheory.Etale.EtaleUnboundedRestrictionComparison
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
 public import WeilConjectures.SixFunctors.BaseChange.RestrictScalars
+public import Mathlib.Algebra.Homology.Localization
+
+import all Mathlib.Algebra.Homology.Localization
 
 /-!
 # Specified scalar/pullback representative data
@@ -164,11 +167,11 @@ private theorem square_cochain_fac {A B B' E : Type*} [Category A] [Category B] 
   have hF' : F₂.mapDerivedCategoryFactors.inv.app
         ((F₁.mapHomologicalComplex (.up ℤ)).obj X) ≫
       F₂.mapDerivedCategory.map (F₁.mapDerivedCategoryFactors.inv.app X) ≫
-      (mapDerivedCategoryCompIso F₁ F₂).inv.app (DerivedCategory.Q.obj X) =
+      (mapDerivedCategoryCompIso F₁ F₂).hom.app (DerivedCategory.Q.obj X) =
         (F₁ ⋙ F₂).mapDerivedCategoryFactors.inv.app X := by
     apply (cancel_mono ((F₁ ⋙ F₂).mapDerivedCategoryFactors.hom.app X)).1
     simp only [Category.assoc, Iso.inv_hom_id_app]
-    erw [← hF, Iso.inv_hom_id_app_assoc]
+    erw [← hF, Iso.hom_inv_id_app_assoc]
     simp only [← Functor.map_comp_assoc, Iso.inv_hom_id_app, Iso.inv_hom_id_app]
     erw [F₂.mapDerivedCategory.map_id, Category.id_comp, Iso.inv_hom_id_app]
     rfl
@@ -183,7 +186,7 @@ section ExactRepresentativeAPI
 attribute [local irreducible] HasDerivedCategory.standard
   Functor.leftDerivedFunctorCounit Functor.rightDerivedFunctorUnit
   Functor.mapDerivedCategoryFactors Functor.mapDerivedCategoryFactorsh
-  Functor.mapDerivedCategoryCompIso Functor.mapDerivedCategoryNatIso
+  Functor.mapDerivedCategoryNatIso
 
 private theorem exactSquareRepresentative
     {A B D E : Type*} [Category A] [Category B] [Category D] [Category E]
