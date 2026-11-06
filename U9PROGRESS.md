@@ -512,9 +512,14 @@
 
 - Branch: u9/BZ1116; start 68f814e0cb89c213db09d1dcdbf30b82f8e149f5.
 - Applied the concrete five-line compositor proposal after the user instructed continuation.
-  Two private helper signatures and their proofs now use the same intended maps under
+  Two private helper signatures and their proofs now preserve the same maps under
   Mathlib's reversed compositor; the public theorem and all hypotheses are unchanged.
-- Baseline ucheck-bump confirmed two root signature errors and two cascading errors.
-- Next: validate the leaf and continue through its three direct importers.
+- Assigned leaf is green and sorry-free: 545b33d2f1, ucheck-bump rc=0, 12965 jobs.
+- Green chain check at 454495ac4f passed with zero failures, covering the leaf and eight
+  downstream modules through SfP1IntegralTraceComparison.
+- Merged completed prerequisite owners PZ037 (5ce8d8289243) and BZ1117 (82562d30eaad).
+- Current build: /home/ubuntu/u9/logs/BZ1116-20261106T141354.log, session 9321.
+  It has passed both previously blocked transport targets and is progressing through
+  the projective-line/affine-line duality chain toward SmoothDuality.SmoothBaseChange.
 - Fix patterns and exact errors: /home/ubuntu/u9/bz/FIXES-BZ1116.md.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
