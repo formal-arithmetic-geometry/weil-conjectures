@@ -929,7 +929,7 @@ theorem exists_representableBy_invertibleDirectImageToHilbert [IsSepClosed k]
   let M := P ⊗ (Modules.pullback (Limits.pullback.snd (X ↘ Spec (.of k)) H.hom)).obj Aᵛ
   have : SheafOfModules.IsInvertible.{u, u, u} M :=
     Modules.IsInvertible.sheafOfModules_isInvertible M
-  have : (SheafOfModules.unit H.left.ringCatSheaf).IsInvertible :=
+  have : SheafOfModules.IsInvertible.{u, u, u} (SheafOfModules.unit H.left.ringCatSheaf) :=
     SheafOfModules.instIsInvertibleUnit.{u, u, u}
   have hM : Pic.map (sectionBaseChange _ σ hσ H) (Pic.mk M) =
       Pic.mk (SheafOfModules.unit H.left.ringCatSheaf) := by
