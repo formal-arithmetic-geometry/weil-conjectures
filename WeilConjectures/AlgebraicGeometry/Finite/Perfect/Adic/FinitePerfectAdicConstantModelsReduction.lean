@@ -214,7 +214,7 @@ private theorem chartScalarIso (X : Scheme.{t})
     (fun Z ↦ hT _
       ((SheafOfModules.ringedSite_restriction_exact_kflat.{t + 1, t, 0} J R U).2.2
         Z.obj Z.property)) b
-  with_unfolding_all exact ⟨c.app K ≪≫ DT.mapIso e ≪≫ (c.app L).symm⟩
+  exact ⟨asIso (c.hom.app K) ≪≫ DT.mapIso e ≪≫ asIso (c.inv.app L)⟩
 
 attribute [-instance] WeilConjectures.integralReductionSiteEssentiallySmall
   ProjectionRestriction.derivedOver ProjectionRestriction.derivedOverModules in
