@@ -195,7 +195,7 @@ private theorem pullback_unit_square
     simp only [exactDerivedSquareUpperStarIso, squareUpperStarIso,
       Functor.mapDerivedCategoryNatIso_trans, Functor.mapDerivedCategoryNatIso_symm,
       unboundedEtaleUpperStarCompIso, Iso.trans_hom, Iso.trans_inv, Iso.symm_hom,
-      NatTrans.comp_app, Category.assoc]
+      Iso.symm_inv, NatTrans.comp_app, Category.assoc]
   rw [hh]
   simp only [Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app, Category.assoc]
   rw [h₁]
