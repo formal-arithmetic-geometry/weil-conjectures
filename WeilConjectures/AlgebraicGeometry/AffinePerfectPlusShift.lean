@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Mathlib.AlgebraicGeometry.AffineScheme
 import WeilConjectures.AlgebraicGeometry.AffinePerfectMapLift
 import WeilConjectures.AlgebraicGeometry.AffinePerfectPlusLocallyFree
 import WeilConjectures.AlgebraicGeometry.PerfectTwoOutOfThree
