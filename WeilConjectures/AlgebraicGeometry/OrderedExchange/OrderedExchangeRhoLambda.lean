@@ -1142,9 +1142,9 @@ def ordinaryScalarDiagonal (T : Scheme.{t}) :
 Source: Stacks 0E48 (blueprint: def-weil-pbc-ordered-coefficient-comparison-data). -/
 def scalarDiagonal (T : Scheme.{t}) :
     d.derivedConstantTower T ⋙ exchangeTowerRes d T ≅ res d T ⋙ diagonal (A := A) T :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (ordinaryScalarDiagonal d T) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
 
 set_option linter.flexible false in
 private theorem ordinaryLambda_unit (T : Scheme.{t})

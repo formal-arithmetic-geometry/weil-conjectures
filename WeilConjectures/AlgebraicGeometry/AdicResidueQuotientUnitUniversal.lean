@@ -296,8 +296,6 @@ private theorem complete_cone
     (h₁ : ConstantCompletion.IsComplete q T.obj₁)
     (h₂ : ConstantCompletion.IsComplete q T.obj₂) :
     ConstantCompletion.IsComplete q T.obj₃ := by
-  let := HasDerivedCategory.standard (ConstantCompletion.Mod R)
-  let (U : C) := HasDerivedCategory.standard (ConstantCompletion.Mod (R.over U))
   intro U f hf
   let L := (DerivedCategory.singleFunctor _ 0).obj
     (ringedSectionLocalization (R.over U) (ringedSliceSection R U f))
@@ -307,12 +305,10 @@ private theorem complete_cone
   let := hH
   let : (ringedDerivedRestriction R U).CommShift ℤ := by
     unfold ringedDerivedRestriction
-    set_option backward.isDefEq.respectTransparency false in
-      infer_instance
+    infer_instance
   let : (ringedDerivedRestriction R U).IsTriangulated := by
     unfold ringedDerivedRestriction
-    set_option backward.isDefEq.respectTransparency false in
-      infer_instance
+    infer_instance
   let G := ringedDerivedRestriction R U ⋙ H
   exact Pretriangulated.Triangle.isZero₃_of_isZero₁₂ _ (G.map_distinguished T hT)
     (h₁ U f hf) (h₂ U f hf)

@@ -340,8 +340,9 @@ private theorem uniformizer_nilpotent
 private theorem residue_isMaximal
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) :
-    (Ideal.span {Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E n)
-      (Padic.coefficientExtensionUniformizer l E)}).IsMaximal := by
+    (Ideal.span
+      {Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E n)
+        (Padic.coefficientExtensionUniformizer l E)}).IsMaximal := by
   have h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   have hmax : (Padic.coefficientExtensionMaximalIdeal l E).IsMaximal := h.2.2.2.2.1
   have hgen : Ideal.span {Padic.coefficientExtensionUniformizer l E} =
