@@ -2205,7 +2205,7 @@ private lemma exact_square_plus
   rewrite [hc, hc]
   simp only [exactDerivedSquareUpperStarIso, squareUpperStarIso,
     Functor.mapDerivedCategoryNatIso_trans, Functor.mapDerivedCategoryNatIso_symm,
-    Iso.app_inv, Iso.app_hom, Iso.trans_hom, Iso.trans_inv, Iso.symm_hom,
+    Iso.app_inv, Iso.app_hom, Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv,
     NatTrans.comp_app, Category.assoc]
 
 section ProperExchangeRestriction
