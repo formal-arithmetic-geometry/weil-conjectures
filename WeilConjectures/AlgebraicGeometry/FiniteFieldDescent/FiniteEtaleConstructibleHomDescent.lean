@@ -29,12 +29,9 @@ set_option autoImplicit false
 universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 
-set_option linter.auxLemma false in
-attribute [local instance 100000]
-  AlgebraicGeometry.Etale.DerivedCategoryModule._proof_1
-  AlgebraicGeometry.Etale.DerivedCategoryModule._proof_2
-
 namespace AlgebraicGeometry.Etale.FiniteFieldDescent
+
+attribute [local semireducible] scheme pull
 
 variable {K : Type u} [Field K] {Y : Scheme.{u}} (f : Y ⟶ Spec (.of K))
 
@@ -140,6 +137,8 @@ structure FiniteStageHomSystem {L : Type u} [Field L] [Algebra K L]
 end AlgebraicGeometry.Etale.FiniteFieldDescent
 
 namespace AlgebraicGeometry.Etale.FiniteFieldDescent
+
+attribute [local semireducible] scheme pull
 
 variable {K : Type u} [Field K] {Y : Scheme.{u}} (f : Y ⟶ Spec (.of K))
 
