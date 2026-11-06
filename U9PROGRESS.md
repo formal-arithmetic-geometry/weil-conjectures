@@ -321,20 +321,36 @@
 - No local Lean/Lake, forbidden proof escapes, or heartbeat changes.
 
 
-# BZ978 in progress
+# BZ978 complete
 
-- Branch: u9/BZ978; baseline: 2390944b5.
-- The user instructed continuation after the exact identity-cast proposal.
-  Applied BZ978-public-cast-proposal.patch in HasCompletedReductionTowerUnitNormalization.
-  The reflexive type conversion preserves the existing counit morphism and assumptions.
-- Localization imports already repaired the private exactAugmentation_existsUnique helper.
-- Next: validate the assigned module with ucheck-bump, then its seven direct importers
-  and unblocked downstream layers, up to the brief's limit.
-- Fix patterns and build evidence: /home/ubuntu/u9/bz/FIXES-BZ978.md.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
+- Branch: u9/BZ978; baseline 2390944b5.
+- Assigned CompletedReductionUnit is green and sorry-free. The authorized identity cast
+  and Localization imports preserve its normalization equation across hidden Qh endpoints.
+- Two direct importers are green: CompletedPullbackInterface and CompletedQuotientUnitNormalization.
+  The interface fixes Mathlib's reversed compositor in its construction; its type is unchanged.
+- Green source commit: 68722d6cc7ac77c7987137f65e895ed614607434, ucheck-bump rc=0,
+  failed=0, 6672 jobs. All three modules freshly rebuilt. Final Lean source is identical.
+- All seven direct importers and the next frontier were checked or traced to observed
+  unowned failures. ReductionAugmentationCompatibility is red because BZ704 removed
+  two prerequisite helpers; its own redundant reducibility attribute is also recorded.
+  Other blocked branches and exact diagnostics are in FIXES-BZ978.md.
+- No declaration deletions, local Lean/Lake execution, proof placeholders, trust bypasses,
+  profiler probes, or heartbeat changes. All four rewrite rules replay exactly.
+- Logs: BUILD-BZ978-leaf-green-full.log, BUILD-BZ978-downstream-green-full.log,
+  BUILD-BZ978-downstream1-full.log, and BUILD-BZ978-downstream2-full.log under ~/u9/bz/.
+- Final records: ~/u9/bz/FIXES-BZ978.md and ~/u9/state/BZ978.DONE.
+- This completion commit changes only progress documentation.
 
-- Assigned leaf is green at 6a2f097183f65efa1284234f5c479e30ac937e3f: rc=0, failed=0,
-  6499 jobs, freshly rebuilt in 16s on newsrv:/home/ubuntu/u9n/bumpw2.
-- Full log: /home/ubuntu/u9/bz/BUILD-BZ978-leaf-green-full.log.
-- Next target OrderedExchangeStrictCoefficientEquations covers all seven direct
-  importers in its dependency closure.
+
+# BZ995 in progress
+
+- Branch: u9/BZ995; original base f6b78661b.
+- The user instructed continuation after the concrete deleted-helper restoration proposal.
+- Restored derivedReduction_augmentationOfCounits in its original file, preserving its
+  assumptions and updating the two compositor directions for Mathlib b63f6e8a.
+- Reuses the existing Functor.exactSquare_fac through import all; no duplicate helper.
+- Assigned module statements are unchanged. The first ucheck-bump confirmed that the
+  opaque attribute removal and direct tower-unit normalization resolve two errors.
+- Next: ucheck-bump for the restored helper, assigned module, and direct importer
+  StratumCompletionUnitRestriction, then continue downstream as the brief requires.
+- Fix log: /home/ubuntu/u9/bz/FIXES-BZ995.md. No local Lean/Lake or forbidden proof shortcuts.

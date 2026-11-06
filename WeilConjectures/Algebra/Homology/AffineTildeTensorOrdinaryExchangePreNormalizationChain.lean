@@ -178,7 +178,10 @@ local instance chainPullbackAdditive {X Y : Scheme.{u}} (f : X ⟶ Y) :
 local instance chainPushforwardAdditive {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (Scheme.Modules.pushforward f).Additive := ⟨fun {_ _} {_ _} ↦ rfl⟩
 local instance chainTildeAdditive (A : Type u) [CommRing A] :
-    (affinePushforwardTilde A).Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+    (affinePushforwardTilde A).Additive := by
+  constructor
+  intro M N f g
+  exact tilde.map_add (R := .of A) f g
 
 /-- The termwise pushforward comparison used in the target-map expansion.
 Source: Stacks, Tag 01I9.

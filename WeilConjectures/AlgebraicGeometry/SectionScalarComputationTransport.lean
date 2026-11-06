@@ -153,8 +153,6 @@ private theorem ordinary_computation_transport (a : Λ ⟶ Λ') [IsMonHom a]
     ((ho ((ModuleRingedComparison.equivalence Λ T).functor.obj M) U z x).symm.trans
       (hscalar.symm.trans hr.symm)))
 
-attribute [local implicit_reducible] CategoryTheory.Functor.mapHomologicalComplex
-
 attribute [local implicit_reducible] ModuleRingedComparison.sectionLocalizationComparison
   CategoryTheory.Functor.map₂HomologicalComplex
 
@@ -198,7 +196,7 @@ private theorem exactSquareFactors
     G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app P) ≫
       G.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj P) ≫
       DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex r.hom (.up ℤ)).app P) =
-    ((Functor.mapDerivedCategoryCompIso F G).inv.app (DerivedCategory.Q.obj P) ≫
+    ((Functor.mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Q.obj P) ≫
       (Functor.mapDerivedCategoryNatIso r).hom.app (DerivedCategory.Q.obj P) ≫
       (Functor.mapDerivedCategoryCompIso F' G').hom.app (DerivedCategory.Q.obj P)) ≫
       G'.mapDerivedCategory.map (F'.mapDerivedCategoryFactors.hom.app P) ≫

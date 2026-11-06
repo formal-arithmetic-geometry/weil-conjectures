@@ -198,9 +198,9 @@ private def canonicalDerivedConstantModel {X Z : Scheme.{u}} (g : Z ⟶ X)
     ((adicTowerInverseImage g).obj ((pbcAdicRings X d).obj (op n))) (Iso.refl _)
   exact Functor.isoWhiskerLeft C.mapDerivedCategory (lisseTowerFixedRealizationIso g d n).symm
       ≪≫
-    (Functor.mapDerivedCategoryCompIso C F).symm ≪≫
+    Functor.mapDerivedCategoryCompIso C F ≪≫
     Functor.mapDerivedCategoryNatIso (canonicalOrdinaryConstantModel g d n) ≪≫
-    Functor.mapDerivedCategoryCompIso (constantAdicQuotientModules X d n) P
+    (Functor.mapDerivedCategoryCompIso (constantAdicQuotientModules X d n) P).symm
 
 
 /-- The natural constant model: constants commute with the etale/pro-etale comparison
