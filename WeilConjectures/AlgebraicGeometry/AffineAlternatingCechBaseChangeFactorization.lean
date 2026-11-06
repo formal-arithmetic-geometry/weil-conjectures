@@ -121,6 +121,7 @@ theorem affineAlternatingCech_baseChange_factorization
   have hc₀ : IsDerivedModulePullbackComparison (pullback.fst f g) G c₀ :=
     ⟨δ (pullback.fst f g), hδ (pullback.fst f g), rfl⟩
   obtain ⟨e, t, he⟩ := affineAlternatingCech_pinned_mate f g U hU haffine G
+  simp only [cast_eq] at he
   obtain ⟨α, hα⟩ :=
     modulePullbackComparison_target_automorphism (pullback.fst f g) G c₀ c hc₀ hc
   refine ⟨Scheme.Modules.tensorPullback g, (fun _ ↦ rfl), ?_, inferInstance,
