@@ -9,6 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.Picard.CanonicalSinglePullbackCo
 public import WeilConjectures.AlgebraicGeometry.Picard.CanonicalSingleDirectImageComparison
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeUnitCompatibility
 import WeilConjectures.AlgebraicGeometry.HomotopySingleBaseChangeComparison
 
@@ -221,6 +223,8 @@ theorem canonicalSingleBaseChangeComparison
     (ε_g.app ((HomotopyCategory.singleFunctor C_S 0).obj (F.obj M)))
     c (t_g.app (F.obj M)) k d
     (v.app ((HomotopyCategory.singleFunctor C_X' 0).obj ((pullback p).obj M))) hh
-  exact hf
+  with_unfolding_all
+    simpa only [canonicalSingleDirectImageMap, canonicalSinglePullbackMap, cast_eq,
+      Category.assoc] using hf
 
 end AlgebraicGeometry.Scheme.Modules
