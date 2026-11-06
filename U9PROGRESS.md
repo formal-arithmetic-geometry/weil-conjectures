@@ -342,12 +342,31 @@
 - This completion commit changes only progress documentation.
 
 
-# BZ1001 in progress
+# BZ1001 complete
 
-- Branch: u9/BZ1001; baseline b5510fe234428620f0e0c56150bc6fd58787e621.
-- The user instructed continuation after the explicit four-line compositor proposal.
-- Applied the two component direction updates in kept private exactSquareFactors
-  and the corresponding inverse cancellation proof. Other statements are unchanged.
-- Next: remote validation of the assigned leaf and its first two downstream layers.
-- Fix records and baseline log: /home/ubuntu/u9/bz/FIXES-BZ1001.md.
+- Assigned SectionScalarComputationTransport and two downstream layers are green:
+  SectionTensorConjugateComputation and SectionTensorNormalizationTransport.
+- ucheck-bump: rc=0, failed=0, 5412 jobs; source b0a4f1ec0698e0eb27275f8a717345ea9c13612f.
+- Applied the explicitly proposed private compositor direction updates and inverse
+  cancellation proof after the user instructed continuation. Public theorem unchanged.
+- Merged current upstream; all green modules and their source dependencies are unchanged.
+- The next two direct importers were attempted and are blocked by unowned failures
+  assigned to BZ997–BZ1000. Exact diagnostics and import paths are in the fix record.
+- Fix record: /home/ubuntu/u9/bz/FIXES-BZ1001.md.
+- Completion marker: /home/ubuntu/u9/state/BZ1001.DONE.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
+- All ucheck invocations finished. This final commit changes progress documentation only.
+
+
+# BZ995 in progress
+
+- Branch: u9/BZ995; original base f6b78661b.
+- The user instructed continuation after the concrete deleted-helper restoration proposal.
+- Restored derivedReduction_augmentationOfCounits in its original file, preserving its
+  assumptions and updating the two compositor directions for Mathlib b63f6e8a.
+- Reuses the existing Functor.exactSquare_fac through import all; no duplicate helper.
+- Assigned module statements are unchanged. The first ucheck-bump confirmed that the
+  opaque attribute removal and direct tower-unit normalization resolve two errors.
+- Next: ucheck-bump for the restored helper, assigned module, and direct importer
+  StratumCompletionUnitRestriction, then continue downstream as the brief requires.
+- Fix log: /home/ubuntu/u9/bz/FIXES-BZ995.md. No local Lean/Lake or forbidden proof shortcuts.
