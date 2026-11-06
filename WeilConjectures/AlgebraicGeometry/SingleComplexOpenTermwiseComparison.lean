@@ -35,6 +35,23 @@ open SingleComplexBaseChange
 
 set_option synthInstance.maxSize 2048
 
+@[reassoc] private theorem termwise_counit_transport
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory.{w} C] [HasDerivedCategory.{w} D]
+    (F : C ⥤ D) [F.Additive] (L : DerivedCategory C ⥤ DerivedCategory D)
+    (ε : DerivedCategory.Qh ⋙ L ⟶ F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (P : CochainComplex C ℤ) :
+    L.map ((DerivedCategory.quotientCompQhIso C).inv.app P) ≫
+      ε.app ((HomotopyCategory.quotient C (.up ℤ)).obj P) ≫
+      DerivedCategory.Qh.map ((F.mapHomotopyCategoryFactors (.up ℤ)).hom.app P) ≫
+      (DerivedCategory.quotientCompQhIso D).hom.app
+        ((F.mapHomologicalComplex (.up ℤ)).obj P) =
+      ε.app ((HomotopyCategory.quotient C (.up ℤ)).obj P) := by
+  change L.map (𝟙 _) ≫ ε.app _ ≫ DerivedCategory.Qh.map (𝟙 _) ≫ 𝟙 _ = _
+  erw [L.map_id, DerivedCategory.Qh.map_id]
+  change 𝟙 _ ≫ ε.app ((HomotopyCategory.quotient C (.up ℤ)).obj P) ≫ 𝟙 _ ≫ 𝟙 _ = _
+  simp only [Category.id_comp, Category.comp_id]
+
 private theorem comparison_square_cancel
     {C : Type*} [Category C] {S₀ S T₀ T U₀ W₀ V₀ V : C}
     (p₀ : S₀ ⟶ T₀) (p : S ⟶ T) (l : S₀ ⟶ S) (d : T₀ ⟶ U₀)
@@ -168,13 +185,17 @@ theorem exists_singleComplexOpen_termwise_comparison
           F₀.map (H₀.map
             ((schemeOpenRestriction X' (f' ⁻¹ᵁ V')).mapDerivedCategory.map ε)) =
         F₀.map (H₀.map ε₀) ≫ F₀.map (H₀.map β) := by
-    with_unfolding_all
-      simpa only [DerivedCategory.quotientCompQhIso,
-        HomologicalComplexUpToQuasiIso.quotientCompQhIso,
-        Quotient.lift.isLift_hom, Quotient.lift.isLift_inv,
-        Functor.mapHomotopyCategoryFactors_hom_app, Functor.map_id,
-        Category.id_comp, Category.comp_id, Functor.map_comp, Category.assoc] using
-        congrArg (fun t => F₀.map (H₀.map t)) hcompat
+    erw [termwise_counit_transport
+      (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))
+      (D := SheafOfModules.{u} (moduleRings X'.toRingedSpace))
+      (Scheme.Modules.tensorPullback g') (derivedPullback g') (counit g') P,
+      termwise_counit_transport_assoc
+        (C := SheafOfModules.{u} (moduleRings (f ⁻¹ᵁ V).toScheme.toRingedSpace))
+        (D := SheafOfModules.{u} (moduleRings (f' ⁻¹ᵁ V').toScheme.toRingedSpace))
+        (Scheme.Modules.tensorPullback j)
+        (derivedPullback j) (counit j) Q] at hcompat
+    simpa only [Functor.map_comp, Category.assoc] using
+      congrArg (fun t => F₀.map (H₀.map t)) hcompat
   have hν := ν.hom.naturality ε
   have hP₀ := congrArg F₀.map (comparisonIntoPullback_comp_counit
     (f ∣_ V) (f' ∣_ V') (g.resLE V V' hV') j sq₀ z Q hcQ i)
