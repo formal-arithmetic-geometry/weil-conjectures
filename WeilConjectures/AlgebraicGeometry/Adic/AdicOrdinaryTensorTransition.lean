@@ -39,7 +39,8 @@ private theorem restrictionComp_factors
         DerivedCategory.Q.map ((NatIso.mapHomologicalComplex e (.up ℤ)).hom.app V) := by
   dsimp only
   unfold DerivedCategory.adicRestrictionComp DerivedCategory.adicLevelRestriction
-  simp only [Iso.trans_hom, NatTrans.comp_app, Category.assoc]
+    DerivedCategory.adicStepRestriction
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
   have hc := Functor.mapDerivedCategoryCompIso_fac
     (ModuleCat.restrictScalars (Ideal.Quotient.factorPowSucc I (n + 1)))
     (ModuleCat.restrictScalars (Ideal.Quotient.mk (I ^ (n + 1 + 1)))) V
