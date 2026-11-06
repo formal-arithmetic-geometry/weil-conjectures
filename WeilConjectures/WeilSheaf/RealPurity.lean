@@ -276,59 +276,61 @@ theorem IsReal.exists_isPunctuallyPureOfWeight_cokernel_detWeight
   set R := e.functor.obj Q
   have := P.property.1
   have := R.property.1
-  let fi := (e.functor.map i').hom.hom
-  let fj := (e.functor.map j').hom.hom
-  let fπ := (e.functor.map π').hom.hom
-  have hfj : Function.Injective fj := WeilGroup.isLisseRep.injective_of_mono _
-  have hfπ : Function.Surjective fπ := WeilGroup.isLisseRep.surjective_of_epi _
-  have hfiπ (v) : fπ (fi v) = 0 := by
-    have h : e.functor.map i' ≫ e.functor.map π' = 0 := by
-      rw [← e.functor.map_comp, hπ, e.functor.map_zero]
-    simpa using congrArg (fun φ : _ ⟶ R ↦ φ.hom.hom v) h
-  have hker {v} (hv : fπ v = 0) : v ∈ fi.range :=
-    WeilGroup.isLisseRep.mem_range_of_isColimit hc' hv
-  have hbot {x : R.obj.V} : x ∈ (⊥ : Subrepresentation R.obj.ρ) ↔ x = 0 := by
-    change x ∈ (⊥ : Subrepresentation R.obj.ρ).toSubmodule ↔ _
-    rw [Subrepresentation.toSubmodule_bot, Submodule.mem_bot]
-  -- the representation of `𝒢₂ / 𝒢₁` is a subquotient of that of `𝒢`
-  let M : Subrepresentation P.obj.ρ := fj.range
-  let N : Subrepresentation P.obj.ρ := Subrepresentation.map fj fi.range
-  have hNM : N ≤ M := by
-    rintro _ ⟨x, -, rfl⟩
-    exact ⟨x, rfl⟩
-  let E₁ : ((⊤ : Subrepresentation A₂.obj.ρ).subquotient fi.range).Equiv
-      ((⊤ : Subrepresentation R.obj.ρ).subquotient ⊥) :=
-    Subrepresentation.subquotientEquivOfIntertwiningMap fπ (fun _ _ ↦ trivial)
-      (fun _ _ ⟨y, hy⟩ ↦ hbot.2 (hy ▸ hfiπ y)) (fun _ _ hx ↦ hker (hbot.1 hx))
-      fun y _ ↦ by
-        obtain ⟨x, rfl⟩ := hfπ y
-        exact ⟨x, trivial, hbot.2 (sub_self _)⟩
-  let E₂ : ((⊤ : Subrepresentation A₂.obj.ρ).subquotient fi.range).Equiv (M.subquotient N) :=
-    Subrepresentation.subquotientEquivOfIntertwiningMap fj (fun x _ ↦ ⟨x, rfl⟩)
-      (fun x _ hx ↦ ⟨x, hx, rfl⟩)
-      (fun x _ hx ↦ by
-        obtain ⟨y, hy, hyx⟩ := hx
-        exact hfj hyx ▸ hy)
-      fun y hy ↦ by
-        obtain ⟨x, rfl⟩ := hy
-        exact ⟨x, trivial, by
-          simp only [Representation.IntertwiningMap.coe_toLinearMap, sub_self]
-          exact N.toSubmodule.zero_mem⟩
-  let E : R.obj.ρ.Equiv (M.subquotient N) :=
-    (Subrepresentation.topSubquotientBotEquiv R.obj.ρ).symm.trans (E₁.symm.trans E₂)
-  have : Simple Q := hirr.simple
-  have : Simple R := simple_obj e.functor Q
-  have hσ : R.obj.ρ.IsConstituent P.obj.ρ :=
-    ⟨WeilGroup.isLisseRep.isIrreducible_of_simple R, N, M, hNM,
-      ⟨E.asModuleLinearEquiv.trans (M.subquotientAsModuleLinearEquiv N)⟩⟩
+  have hσ : R.obj.ρ.IsConstituent P.obj.ρ := by
+    as_aux_lemma =>
+      let fi := (e.functor.map i').hom.hom
+      let fj := (e.functor.map j').hom.hom
+      let fπ := (e.functor.map π').hom.hom
+      have hfj : Function.Injective fj := WeilGroup.isLisseRep.injective_of_mono _
+      have hfπ : Function.Surjective fπ := WeilGroup.isLisseRep.surjective_of_epi _
+      have hfiπ (v) : fπ (fi v) = 0 := by
+        have h : e.functor.map i' ≫ e.functor.map π' = 0 := by
+          rw [← e.functor.map_comp, hπ, e.functor.map_zero]
+        simpa using congrArg (fun φ : _ ⟶ R ↦ φ.hom.hom v) h
+      have hker {v} (hv : fπ v = 0) : v ∈ fi.range :=
+        WeilGroup.isLisseRep.mem_range_of_isColimit hc' hv
+      have hbot {x : R.obj.V} : x ∈ (⊥ : Subrepresentation R.obj.ρ) ↔ x = 0 := by
+        change x ∈ (⊥ : Subrepresentation R.obj.ρ).toSubmodule ↔ _
+        rw [Subrepresentation.toSubmodule_bot, Submodule.mem_bot]
+      -- the representation of `𝒢₂ / 𝒢₁` is a subquotient of that of `𝒢`
+      let M : Subrepresentation P.obj.ρ := fj.range
+      let N : Subrepresentation P.obj.ρ := Subrepresentation.map fj fi.range
+      have hNM : N ≤ M := by
+        rintro _ ⟨x, -, rfl⟩
+        exact ⟨x, rfl⟩
+      let E₁ : ((⊤ : Subrepresentation A₂.obj.ρ).subquotient fi.range).Equiv
+          ((⊤ : Subrepresentation R.obj.ρ).subquotient ⊥) :=
+        Subrepresentation.subquotientEquivOfIntertwiningMap fπ (fun _ _ ↦ trivial)
+          (fun _ _ ⟨y, hy⟩ ↦ hbot.2 (hy ▸ hfiπ y)) (fun _ _ hx ↦ hker (hbot.1 hx))
+          fun y _ ↦ by
+            obtain ⟨x, rfl⟩ := hfπ y
+            exact ⟨x, trivial, hbot.2 (sub_self _)⟩
+      let E₂ : ((⊤ : Subrepresentation A₂.obj.ρ).subquotient fi.range).Equiv (M.subquotient N) :=
+        Subrepresentation.subquotientEquivOfIntertwiningMap fj (fun x _ ↦ ⟨x, rfl⟩)
+          (fun x _ hx ↦ ⟨x, hx, rfl⟩)
+          (fun x _ hx ↦ by
+            obtain ⟨y, hy, hyx⟩ := hx
+            exact hfj hyx ▸ hy)
+          fun y hy ↦ by
+            obtain ⟨x, rfl⟩ := hy
+            exact ⟨x, trivial, by
+              simp only [Representation.IntertwiningMap.coe_toLinearMap, sub_self]
+              exact N.toSubmodule.zero_mem⟩
+      let E : R.obj.ρ.Equiv (M.subquotient N) :=
+        (Subrepresentation.topSubquotientBotEquiv R.obj.ρ).symm.trans (E₁.symm.trans E₂)
+      have : Simple Q := hirr.simple
+      have : Simple R := simple_obj e.functor Q
+      exact ⟨WeilGroup.isLisseRep.isIrreducible_of_simple R, N, M, hNM,
+        ⟨E.asModuleLinearEquiv.trans (M.subquotientAsModuleLinearEquiv N)⟩⟩
   -- the representation of `𝒢` is `ι`-real
   have hreal' : W.IsReal l P.obj.ρ ι := fun x n ↦ by
-    obtain ⟨f, hf⟩ := hst G x
-    have h := hreal x n
-    rw [FrobeniusModule.localPolynomial, LinearMap.charpolyRev_def,
-      FrobeniusModule.charpoly_frobeniusEnd_eq_of_linearEquiv _ f hf] at h
-    rw [WeilGroup.localPolynomial, LinearMap.charpolyRev_def]
-    exact h
+    as_aux_lemma =>
+      obtain ⟨f, hf⟩ := hst G x
+      have h := hreal x n
+      rw [FrobeniusModule.localPolynomial, LinearMap.charpolyRev_def,
+        FrobeniusModule.charpoly_frobeniusEnd_eq_of_linearEquiv _ f hf] at h
+      rw [WeilGroup.localPolynomial, LinearMap.charpolyRev_def]
+      exact h
   -- purity of the constituent, transported back to the stalks
   obtain ⟨γ, hγ⟩ : ∃ γ, W.HasDetWeight l R.obj.ρ ι γ := ⟨_, R.property.2.hasDetWeight ι⟩
   have hpure := WeilGroup.isPunctuallyPure_of_isConstituent_of_isReal W l P.obj.ρ ι
@@ -337,21 +339,23 @@ theorem IsReal.exists_isPunctuallyPureOfWeight_cokernel_detWeight
       (C ↘ Spec (CommRingCat.of k₀)).residueCard x.1 = C.pointNorm x.1 :=
     (Scheme.Hom.pointNorm_eq_pow_degreeOver _ x.2).symm
   refine ⟨γ, fun x α hα ↦ ?_, fun x ↦ ?_⟩
-  · obtain ⟨f, hf⟩ := hst Q x
-    have : FiniteDimensional (PadicAlgCl l) (Q.obj.stalk x).carrier := Module.Finite.equiv f.symm
-    have hα' : α ∈ W.localEigenvalues l R.obj.ρ x := by
-      rw [WeilGroup.localEigenvalues, Polynomial.mem_roots (LinearMap.charpoly_monic _).ne_zero,
-        ← FrobeniusModule.charpoly_frobeniusEnd_eq_of_linearEquiv _ f hf,
-        ← Module.End.hasEigenvalue_iff_isRoot_charpoly]
-      exact hα
-    have : Finite (C.residueField x.1) := C.mem_finitePoints.mp x.2
-    have hq : 1 < C.pointNorm x.1 := Finite.one_lt_card
-    rw [hqx]
-    exact (WeilGroup.isOfWeight_iff_frobeniusWeight_eq hq
-      (FrobeniusModule.ne_zero_of_hasEigenvalue hα)).2 (hpure x α hα')
-  · obtain ⟨f, hf⟩ := hst Q x
-    rw [show (cokernel i).stalk x = Q.obj.stalk x from rfl,
-      FrobeniusModule.det_frobeniusEnd_eq_of_linearEquiv _ f hf, f.finrank_eq, hqx, hγ x]
+  · as_aux_lemma =>
+      obtain ⟨f, hf⟩ := hst Q x
+      have : FiniteDimensional (PadicAlgCl l) (Q.obj.stalk x).carrier := Module.Finite.equiv f.symm
+      have hα' : α ∈ W.localEigenvalues l R.obj.ρ x := by
+        rw [WeilGroup.localEigenvalues, Polynomial.mem_roots (LinearMap.charpoly_monic _).ne_zero,
+          ← FrobeniusModule.charpoly_frobeniusEnd_eq_of_linearEquiv _ f hf,
+          ← Module.End.hasEigenvalue_iff_isRoot_charpoly]
+        exact hα
+      have : Finite (C.residueField x.1) := C.mem_finitePoints.mp x.2
+      have hq : 1 < C.pointNorm x.1 := Finite.one_lt_card
+      rw [hqx]
+      exact (WeilGroup.isOfWeight_iff_frobeniusWeight_eq hq
+        (FrobeniusModule.ne_zero_of_hasEigenvalue hα)).2 (hpure x α hα')
+  · as_aux_lemma =>
+      obtain ⟨f, hf⟩ := hst Q x
+      rw [show (cokernel i).stalk x = Q.obj.stalk x from rfl,
+        FrobeniusModule.det_frobeniusEnd_eq_of_linearEquiv _ f hf, f.finrank_eq, hqx, hγ x]
 
 /-- **Purity of real lisse sheaves on curves**, weak form (blueprint:
 `thm-rp-real-lisse-purity-affine`, `sk-p-real-purity`). Let `C₀` be a smooth geometrically
