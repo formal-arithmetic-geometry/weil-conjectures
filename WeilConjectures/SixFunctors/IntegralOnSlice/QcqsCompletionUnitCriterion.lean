@@ -54,8 +54,8 @@ theorem canonicalCompletionUnitCriterion
   by_cases h : l = 2
   · subst l
     have : Fact (Nat.Prime 3) := ⟨by decide⟩
-    exact (roosIntrinsicCompletenessEquivalence 3 2 (by decide) E T d hd' H P e).out 4 0
+    exact (roosIntrinsicCompletenessEquivalence 3 2 (by decide) E T d hd' H P e).out 5 1
   · have : Fact (Nat.Prime 2) := ⟨by decide⟩
-    exact (roosIntrinsicCompletenessEquivalence 2 l (Ne.symm h) E T d hd' H P e).out 4 0
+    exact (roosIntrinsicCompletenessEquivalence 2 l (Ne.symm h) E T d hd' H P e).out 5 1
 
 end WeilConjectures.IntegralOnSlice
