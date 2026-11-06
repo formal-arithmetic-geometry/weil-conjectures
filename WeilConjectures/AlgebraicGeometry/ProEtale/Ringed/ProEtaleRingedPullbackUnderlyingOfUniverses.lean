@@ -171,6 +171,7 @@ private noncomputable def modelForgetForwardIso (Z : Scheme.{t})
     simp only [Iso.refl_hom, Category.comp_id, Category.id_comp]
     rfl)
 
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- Pullback with an invertible coefficient adjunct has ordinary abelian inverse
 image as its underlying sheaf. The coefficient rings and the adjoints are arbitrary.
 
