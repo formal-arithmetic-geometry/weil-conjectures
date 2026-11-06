@@ -65,7 +65,7 @@ private theorem complete_cone
     (h₁ : ConstantCompletion.IsComplete q T.obj₁)
     (h₂ : ConstantCompletion.IsComplete q T.obj₂) :
     ConstantCompletion.IsComplete q T.obj₃ := by
-  exact?
+  exact _root_.AlgebraicGeometry.Scheme.complete_cone q T hT h₁ h₂
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- Reconstruction from the quotient tower detects zero once all reductions vanish. -/
