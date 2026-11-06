@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMon.Comparison
 public import WeilConjectures.AlgebraicGeometry.MixedRepForward.FiniteCoefficientInstances
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TensorSheaf
 import WeilConjectures.CategoryTheory.FiniteOpenMixedTensorRepresentativeCounit
 import WeilConjectures.CategoryTheory.FiniteOpenMixedTensorRepresentativeCounitTransport
