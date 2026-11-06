@@ -418,7 +418,6 @@ attribute [local irreducible] upperStar lowerStar openImmersionLowerShriek
   Functor.mapDerivedCategory Functor.mapDerivedCategoryFactors Functor.mapDerivedCategoryFactorsh
   Functor.rightDerivedFunctor Functor.rightDerivedFunctorUnit
   Functor.rightDerivedFunctorObjQIso Functor.mapDerivedCategoryNatIso
-  Functor.mapDerivedCategoryCompIso
 
 set_option backward.isDefEq.respectTransparency true in
 /-- Horizontal pasting for normalized unbounded proper/open comparison families.
@@ -525,10 +524,10 @@ theorem etaleProperOpenHorizontalNormalization (A : Type (u + 1)) [CommRing A] [
     hΓ
     (Functor.mapDerivedCategoryNatIso
       (openImmersionLowerShriekComp (ModuleCat.{u + 1} A) k l) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _)
+      (Functor.mapDerivedCategoryCompIso _ _).symm)
     (Functor.mapDerivedCategoryNatIso
       (openImmersionLowerShriekComp (ModuleCat.{u + 1} A) i j) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _)
+      (Functor.mapDerivedCategoryCompIso _ _).symm)
     (fun X => derived_horizontal_factor _ _ _ _ X)
     (fun X => derived_horizontal_factor _ _ _ _ X) K
 
