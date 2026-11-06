@@ -442,17 +442,25 @@
   Next: validate all four direct importers; leaf log BUILD-BZ1068-leaf-full.log.
 
 
-# BZ1077 in progress
+# BZ1079 complete
 
-- Branch: u9/BZ1077; start: d6df1ded8ce203469c3ccdde034e73d5ce4c644c.
-- The user instructed continuation after the exact compositor API proposal.
-- Applied the nine comparison-chain direction corrections across ComparisonSquareTransport,
-  ComparisonSquare, and SmoothBaseChange, preserving the intended comparison maps.
-- Declaration binders, hypotheses, proof bodies, and docstrings remain unchanged.
-- Next: remote ucheck-bump validation, then direct importers through the 30-module cap.
-- Fix patterns: /home/ubuntu/u9/bz/FIXES-BZ1077.md.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
-
-- The assigned leaf and both downstream layers are GREEN at
-  39a2abaca23e5021c1ed37cf83063de80bacbd73: ucheck-bump rc=0, failed=0, 11415 jobs.
-  Full log: BUILD-BZ1077-fix1-full.log. Next: check the eight SmoothBaseChange importers.
+- Branch: u9/BZ1079; starting commit d6df1ded8ce203469c3ccdde034e73d5ce4c644c.
+- Assigned InternalScalarTensorPullNormalization is green and sorry-free.
+- Four downstream modules are green: InternalScalarMateProjection,
+  NormalizedScalarRestrictionPush, QuotientChange.NormalizedScalarRestrictionPush,
+  and SixFunctors.ProEtale.IntegralDirectImageReductionCone.
+- Final ucheck-bump: rc=0, built=0, failed=0, 13213 jobs, all five targets;
+  validated source commit 7db67865f6e353a668e81fc206cafba20a734d38.
+  Every changed module was freshly rebuilt successfully in earlier calls.
+- The user instructed continuation after the exact two-site reflexive-cast proposal.
+  Applied those casts to vY/vX; the original theorem proof is unchanged.
+  Downstream changes are the same cast in a definition body and Localization imports.
+- All five machine rewrite rules replay exactly; existing docstrings, other declaration
+  types, options, and theorem bodies are unchanged. No declarations added or deleted.
+- Six extra modules attempted. The remaining frontier has three modules blocked by
+  observed unowned dependency failures; import paths and exact first errors are recorded.
+- Final log: /home/ubuntu/u9/bz/BUILD-BZ1079-final-green-full.log.
+- Fix record: /home/ubuntu/u9/bz/FIXES-BZ1079.md.
+- Completion marker: /home/ubuntu/u9/state/BZ1079.DONE.
+- No local Lean/Lake, proof placeholders, trust bypasses, profiler probes, or limit changes.
+- All ucheck invocations finished. This final commit changes only progress documentation.
