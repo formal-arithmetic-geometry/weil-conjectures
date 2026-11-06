@@ -260,8 +260,8 @@ private theorem towerAugmentation_computed
       (reductionTowerCategory T (reductionModuleRing T (completedReductionCoefficient T d)))).hom.app
       (((completedReductionModuleTowerFunctor T d).mapHomologicalComplex (.up ℤ)).obj P) =
       𝟙 _ := rfl
-  have hid : ((completedReductionModuleTowerFunctor T d).mapHomotopyCategoryFactors (.up ℤ)).hom.app
-      P = 𝟙 _ := Functor.mapHomotopyCategoryFactors_hom_app _ P
+  have hid := Functor.mapHomotopyCategoryFactors_hom_app
+    (completedReductionModuleTowerFunctor T d) P
   erw [hi, hh, hid] at h
   erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id] at h
   simp only [Category.id_comp, Category.comp_id] at h
