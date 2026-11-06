@@ -162,6 +162,6 @@ theorem directImage_complex_unit
         (RingedSpace.localSectionsEnoughKInjectives Y)).app
           ((HomotopyCategory.quotient _ (.up ℤ)).obj
             ((D.mapHomologicalComplex (.up ℤ)).obj I))) := by
-  simpa only [localComplexUnit_app_eq] using leray_complex_unit f I
+  simpa only [localComplexUnit_app_eq, cast_eq] using leray_complex_unit f I
 
 end AlgebraicGeometry
