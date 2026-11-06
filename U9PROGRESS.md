@@ -274,28 +274,39 @@
 - Fix patterns and whole-tree inventories: /home/ubuntu/u9/bz/FIXES-BZ885.md.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ871 complete
 
-- Branch: u9/BZ871; original baseline e167a50a4; integrated checkpoint 40e255942.
-- Assigned SingleComplexOpenTermwiseCounitCompatibility is sorry-free and passed
-  ucheck-bump at a50954bafd9ce23d38475d21493509ac10169cd5: rc=0, failed=0,
-  3994 jobs; target built in 94 seconds.
-- The assigned target passed again in the downstream batch at
-  f64a936ab3e425671e7d5657db0db59ae13a9d64 in 74 seconds.
-- Applied the proposed canonical endpoint transports after the user instructed
-  continuation; specified their two target categories explicitly. Original binders,
-  hypotheses, and docstrings remain unchanged.
-- Reused the integrated upstream counit comparison lemmas and removed earlier
-  duplicate private reconstruction. The prerequisite homotopy tensor square now
-  uses a local abstract helper; its public signature is unchanged.
-- Proof normalization uses generic endpoint, factor, and square lemmas. The sole
-  resource change is the owned theorem's maxHeartbeats 600000 -> 1200000 after a
-  measured 38-second whnf timeout with all helpers passing; the full run then passed.
-- Checked five downstream modules. All are deferred because of unowned errors:
-  StalkDerivedExtensionComparisonIsoCore timeout (BZ910) and duplicate declarations
-  in SingleComplexOpenPullbackCounitHomotopyFactorization (BZ878).
-- Full logs, exact PATTERN/ERROR/RULE records, occurrence inventories, dependency
-  paths, and source contract audit are under /home/ubuntu/u9/bz for BZ871.
-- Completion marker: /home/ubuntu/u9/state/BZ871.DONE.
-- No local Lean/Lake, proof placeholders, axioms, kernel bypasses, or profiler probes.
-- Final documentation commit changes no Lean source from the successful builds.
+# BZ908 in progress
+
+- Branch: u9/BZ908; baseline 40e255942.
+- The user instructed continuation after the explicit two-cast proposal.
+- Applied the two `cast (by rfl)` wrappers in IsCanonicalPullbackTensorComparison,
+  preserving the existing maps while restoring hidden Qh/Q endpoint conversions.
+- Localization imports resolve the proof-local mismatch. The uniqueness proof uses
+  `erw` to rewrite through the reflexive casts and semireducible category aliases.
+- Next: remote validation, then the 19 direct importers and further downstream
+  modules up to the brief's limit of 30 extra modules.
+- Fix patterns: /home/ubuntu/u9/bz/FIXES-BZ908.md.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+
+# BZ932 complete
+
+- Branch: u9/BZ932; baseline 902c558126dff07f1b90673880f577206572e997.
+- Final validated source commit: f242a4dd6467eea184650cb5334bcdae759796c0.
+- Final ucheck-bump: rc=0, built=7, failed=0, 5769 jobs, on poolb:43.166.82.34.
+- Green: SupportedKoszulRelativeDetector, five restored prerequisites, and SupportedKoszulUnitSummand.
+- Restored nine prerequisite declarations after the user's continuation instruction.
+  Their original statement headers/docstrings remain unchanged. Exact terminal-limit
+  preservation resolves the localization instance timeout at default heartbeat limits.
+- The assigned detector changes only one compositor direction in its proof.
+- Pruned the unused, unreferenced exists_supported_koszul_unit_summand declaration
+  after checking both declaration lists and whole-tree references; module imports remain.
+- SupportedPerfectFactorization was attempted and skipped: unowned dependency
+  CanonicalTensorHomUncurryChainNaturality.lean:134 reports Type mismatch.
+  The green summand module has no importers; no further unblocked downstream layer remains.
+- Full logs: /home/ubuntu/u9/bz/BUILD-BZ932-final-full.log and BUILD-BZ932-downstream-full.log.
+- Fix patterns, exact diagnostics, rewrite rules, counts: /home/ubuntu/u9/bz/FIXES-BZ932.md.
+- Contract audit: /home/ubuntu/u9/bz/BZ932-contract-audit.txt.
+- Completion marker: /home/ubuntu/u9/state/BZ932.DONE.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+- This completion commit changes only progress documentation after the successful source build.
