@@ -425,15 +425,20 @@
 - All ucheck invocations finished. This final commit changes documentation only.
 
 
-# BZ1067 in progress
+# BZ1067 complete
 
-- Branch: u9/BZ1067; starting commit dfaed262b6fc1850faba3b46955a11d3225a1e86.
-- The user instructed continuation after the exact two-line private-statement API proposal.
-  Applied BZ1067-proposed-statement.patch to derived_cartesian_normalized, preserving
-  the intended composition under Mathlib's reversed compositor. Public theorem unchanged.
-- Proof-local compositor directions and the opaque reducibility attribute are repaired.
-  The direct exchange import avoids the unowned LowerShriekComposition failure.
-- Next: ucheck-bump for the assigned module, then its direct importer
-  EtaleProperOpenExchangeCube and any unblocked downstream layers.
-- Fix records: /home/ubuntu/u9/bz/FIXES-BZ1067.md.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
+- Assigned EtaleProperOpenCartesianNormalization is proved and sorry-free.
+- ucheck-bump returned rc=0, failed=0, 11814 jobs; leaf rebuilt in 4.2 seconds.
+  Green source commit: e67539561bf5b8b8b63d3e8ad56c628868e865d1.
+- Applied the exact two-line private-statement API proposal after the user's
+  continuation instruction. The public theorem statement is unchanged.
+- The compositor proof and opaque reducibility attribute are fixed; a direct
+  exchange import avoids the unowned LowerShriekComposition dependency.
+- The sole direct importer EtaleProperOpenExchangeCube was attempted and remains
+  blocked by BZ1057's LowerShriekComposition.lean:113:4 type mismatch, reached via
+  CompactificationProjectionComposition. No unowned source was edited.
+- Four machine rewrite rules replay the exact source diff and are idempotent.
+- Records: /home/ubuntu/u9/bz/FIXES-BZ1067.md and /home/ubuntu/u9/state/BZ1067.DONE.
+- Full logs: BUILD-BZ1067-leaf-full.log and BUILD-BZ1067-downstream1-full.log in ~/u9/bz/.
+- All ucheck invocations finished. This final commit changes progress documentation only.
+- No local Lean/Lake, proof placeholders, trust bypasses, deletions, or heartbeat changes.
