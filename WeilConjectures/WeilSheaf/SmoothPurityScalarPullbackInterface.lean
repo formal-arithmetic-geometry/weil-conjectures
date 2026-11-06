@@ -73,6 +73,7 @@ noncomputable def purityScalarSourceIso :
   (geometricFiberProjUpperStarFrobeniusIso (Profinite.padicAlgClRingObj ℓ) a).app
     (tateTwistOne X ℓ)
 
+omit [Fact (ringChar k ≠ ℓ)] in
 /-- Identify the whole isomorphism before projecting its morphism. -/
 lemma purityScalarSourceIso_eq :
     purityScalarSourceIso ℓ a =
@@ -86,6 +87,7 @@ noncomputable def purityScalarSourceUnitIso :
       purityScalarSourceUnit ℓ a :=
   (geometricFiberProjUpperStarFrobeniusIso (Profinite.padicAlgClRingObj ℓ) a).app (𝟙_ _)
 
+omit [Fact (ringChar k ≠ ℓ)] in
 lemma purityScalarSourceUnitIso_eq :
     purityScalarSourceUnitIso ℓ a =
       (geometricFiberProjUpperStarFrobeniusIso (Profinite.padicAlgClRingObj ℓ) a).app
@@ -133,6 +135,7 @@ lemma purityScalarTateCompare_comm :
     Functor.comp_obj, Functor.comp_map] at h ⊢
   exact_mod_proofs h
 
+omit [Fact (ringChar k ≠ ℓ)] in
 lemma purityScalarUnitCompare_comm :
     (purityScalarFrobeniusPull ℓ a).map (purityScalarUnitCompare ℓ a).hom ≫
         purityScalarTargetUnitDatum ℓ a =
@@ -161,6 +164,7 @@ noncomputable def purityScalarRootTrivialization :
       a.geometricFiberToAlgebraicClosure ℓ hζ hζ' ≪≫
       (a.geometricFiberProj)^*[Ab.{u + 1}].mapModUnitIso)
 
+omit [Fact (ringChar k ≠ ℓ)] in
 lemma purityScalarRootTrivialization_eq :
     purityScalarRootTrivialization ℓ a hζ hζ' =
       purityChangeCoefficientTrivialization (Profinite.continuousMapRingObj ℤ_[ℓ])
@@ -182,10 +186,12 @@ lemma purityScalarCanonicalTrivialization_eq :
       (purityScalarTateCompare ℓ a).symm ≪≫ purityScalarRootTrivialization ℓ a hζ hζ' ≪≫
         purityScalarUnitCompare ℓ a := (rfl)
 
+omit [Fact (ringChar k ≠ ℓ)] in
 /-- Expose the source datum as a projection before using the native scalar law. -/
 lemma purityScalarSourceDatum_eq_iso :
     purityScalarSourceDatum ℓ a = (purityScalarSourceIso ℓ a).hom := rfl
 
+omit [Fact (ringChar k ≠ ℓ)] in
 /-- Expose the source unit datum as a projection. -/
 lemma purityScalarSourceUnitDatum_eq_iso :
     purityScalarSourceUnitDatum ℓ a = (purityScalarSourceUnitIso ℓ a).hom := rfl

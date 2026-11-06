@@ -59,8 +59,8 @@ theorem unitBaseChange_ofNatIsoLeft :
   apply eq_unitBaseChange_of_comp_counit
   have h := app_comp_map_unitBaseChange_comp_counit (adj.ofNatIsoLeft ι) (adj'.ofNatIsoLeft ι')
     bcs e
-  simp only [ofNatIsoLeft_counit, NatTrans.comp_app, Functor.whiskerLeft_app, Functor.comp_obj,
-    Category.assoc] at h
+  simp only [ofNatIsoLeft_counit, NatTrans.comp_app, Functor.whiskerLeft_app,
+    Functor.comp_obj] at h
   simp only [ofNatIsoBaseChange, NatTrans.comp_app, Functor.whiskerRight_app,
     Functor.whiskerLeft_app, Functor.comp_obj, Category.assoc]
   rw [← ι'.inv.naturality_assoc, h, ← Functor.map_comp_assoc, Iso.hom_inv_id_app_assoc]
@@ -94,7 +94,7 @@ proper base change `Rf_* ⋙ πP^* ≅ πZ^* ⋙ Rf'_*`
 def properLowerShriekBaseChangeOfMap :
     boundedConstructibleLowerShriek l f ⋙ boundedConstructibleUpperStarOfMap l πP ≅
       boundedConstructibleUpperStarOfMap l πZ ⋙ boundedConstructibleLowerShriek l f' :=
-  haveI := isIso_boundedConstructibleBaseChangeOfMap l sqf
+  have := isIso_boundedConstructibleBaseChangeOfMap l sqf
   asIso (Adjunction.ofNatIsoBaseChange (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl l f)
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl l f')
     (boundedConstructibleBaseChangeOfMap l sqf.toCommSq))

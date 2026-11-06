@@ -251,9 +251,9 @@ theorem isIso_smoothUnitBaseChange_geometricFiber_of_charts {Î¹ : Type u} (c : Î
     hEx (c i).p _ _ _ (isPullback_geometricFiberOverMap (c i).p)
       (isPullback_geometricFiberOverMap (c i).jV) sqpV,
     hExProper i]
-  haveI := hg i
-  haveI := hjA i
-  haveI := hjV i
+  have := hg i
+  have := hjA i
+  have := hjV i
   exact isIso_smoothUnitBaseChange_chart_of_projectiveSpace l (c i).g (c i).jA (c i).p (c i).jV
     (geometricFiberOverMap (c i).g) (geometricFiberOverMap (c i).jA)
     (geometricFiberOverMap (c i).p) (geometricFiberOverMap (c i).jV)
