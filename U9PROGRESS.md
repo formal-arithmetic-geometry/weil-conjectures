@@ -371,25 +371,20 @@
   StratumCompletionUnitRestriction, then continue downstream as the brief requires.
 - Fix log: /home/ubuntu/u9/bz/FIXES-BZ995.md. No local Lean/Lake or forbidden proof shortcuts.
 
-# BZ1021 complete
+# BZ1027 complete
 
-- Assigned DegreeZero is green and sorry-free on Lean v4.35.0-rc3 / Mathlib b63f6e8a.
-- Final ucheck-bump: rc=0, failed=0, 7133 jobs on poolb:43.157.184.90.
-  Validated source commit: 5105e1aa97f167d0ab5bb3ea955ab6af57e22c65.
-- Green modules: RingTheory.BertiniNoether, RingTheory.GenericIrreducibility,
-  SixFunctors.Etale.SmoothBaseChange.DegreeZero,
-  AlgebraicGeometry.ProperBaseChange.ConnectedFibresConstantDegreeZero,
-  and SixFunctors.Etale.Derived.Exchange.Basic (all under WeilConjectures).
-- The user instructed continuation after the concrete BertiniNoether import proposal.
-  Removed the colliding umbrella imports in DegreeZero and BertiniNoether; supplied
-  specific public Mathlib imports in BertiniNoether and GenericIrreducibility.
-- All Lean changes are imports only. Statements, definitions, proofs, docstrings,
-  and existing resource settings are unchanged; no declarations deleted.
-- All five direct importers and the next layer of the two green importers were checked.
-  Five downstream targets are blocked by dependencies owned by BZ1017–BZ1020 and BZ1022.
-  Their exact errors and import paths are recorded; no edits retained in blocked modules.
-- All five machine rewrite rules reproduce the final Lean files exactly from the baseline.
-- Full final log: /home/ubuntu/u9/bz/BUILD-BZ1021-final-green-full.log.
-- Records: /home/ubuntu/u9/bz/FIXES-BZ1021.md and /home/ubuntu/u9/state/BZ1021.DONE.
-- No local Lean/Lake, proof placeholders, custom axioms, trust bypasses, profiler probes,
-  or heartbeat increases. All ucheck calls finished. This commit changes documentation only.
+- Branch: `u9/BZ1027`; start: `c42746d5e58cc55d63dd9ef190dd34bc4130ed3c`.
+- Replayed the final BZ1020 import repairs missing from its early upstream integration:
+  use `Mathlib.CategoryTheory.Sites.EpiMono` in `Integral.Exact` and remove the umbrella
+  `Mathlib` import from `SmoothBaseChange.CurveTestDatum`.
+- Assigned `Integral.BaseChange` and downstream `SmoothBaseChange.IntegralBaseChange`
+  and `SmoothBaseChange.CurveTestDatum` pass `ucheck-bump`: rc=0, built=12, failed=0.
+- Validated source commit: `fefcc97aeb`; remote log:
+  `/home/ubuntu/u9/logs/BZ1027-20261106T105011.log`.
+- All non-import source content is unchanged; machine rewrite rules replay the exact diff.
+- Further downstream work is deferred to live owners: BZ1021 (`FieldBaseChange`,
+  `Induction`) and BZ1028 (the `AlgClosedExtension` / `Vanishing` frontier).
+  No additional downstream modules were tested or claimed green.
+- Patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ1027.md`.
+- Completion marker: `/home/ubuntu/u9/state/BZ1027.DONE`.
+- No local Lean/Lake execution, declaration changes, proof escapes, or limit increases.
