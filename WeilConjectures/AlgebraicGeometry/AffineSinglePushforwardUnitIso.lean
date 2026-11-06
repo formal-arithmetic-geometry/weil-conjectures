@@ -119,6 +119,7 @@ theorem affine_singlePushforward_unit_isIso
   have : IsIso (F.rightDerivedFunctorUnit.app
       ((HomotopyCategory.quotient _ _).obj K'.obj)) :=
     IsIso.of_isIso_comp_right _ (F.rightDerivedFunctor.map (DerivedCategory.Qh.map iq))
+  simp only [cast_eq]
   infer_instance
 
 end AlgebraicGeometry
