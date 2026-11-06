@@ -230,6 +230,32 @@
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 - This final commit changes only progress documentation; Lean source matches the green build.
 
+# BZ798 in progress
+
+- Branch: `u9/BZ798`; original baseline: `6a4b38f19`.
+- Resumed after rereading `/home/ubuntu/u9/briefs/BZ798.md` and the progress notes.
+- Merged the current integrated bump branch at `d9a3ea12c`. It already removes the
+  unused signed-projection comparison chain and its downstream callers. The earlier
+  referenced-caller blocker therefore no longer applies.
+- Deleted only the remaining unused `SignedProjectionResolution.totalInverse`;
+  whole-tree `git grep -w totalInverse -- WeilConjectures Comparator` found its sole
+  declaration and no callers. It is listed unused and absent from kept-decls.txt.
+- All surviving declaration text is unchanged from the integrated branch.
+- Next: validate the owned module, then its direct importers and downstream layers.
+- Previous diagnostic history is archived in FIXES-BZ798-preintegration.md.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+
+# BZ850 in progress
+
+- Branch: `u9/BZ850`; baseline: `2ab2b07a3`.
+- The user instructed continuation after the explicit three-declaration upstream restoration proposal.
+- Restored `derived_projection_exists`, `coefficientConstantTowerProjection_exists`, and
+  `coefficientConstantTowerProjection` in CoefficientRingedSequenceSiteSupplement with their
+  original statements and docstrings. Their surviving users prohibit pruning them.
+- Added Localization imports and explicit simplification of its hidden comparison components.
+- The assigned CoefficientConstantTowerRoos source is unchanged.
+- Next: remote ucheck-bump on the assigned module, then both direct importers.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 # BZ824 in progress
 
 - Branch: u9/BZ824; starting commit 95c8987257f.
@@ -246,24 +272,85 @@
 - Next: build layer-two importer CanonicalModuleBaseChangeAffineChartComparison.
 - Notes: /home/ubuntu/u9/bz/FIXES-BZ824.md. No local Lean/Lake or proof shortcuts.
 
+# BZ856 in progress
 
-# BZ852 complete
+- Branch: `u9/BZ856`; original start: `2ab2b07a3`.
+- Reread the brief and prior notes on continuation; no new LEAD lines were present.
+- User instructed continuation after the explicit five-upstream-module restoration proposal.
+  The six deleted prerequisites are restored from the reviewed draft, retaining later
+  repairs to surviving helpers. They now need remote Lean 4.35 validation and porting.
+- Merged integrated bump branch `db406319f` before restoring the prerequisites.
+- Assigned theorem remains intact: it has live callers and cannot be pruned.
+- Next: ucheck-bump assigned module, repair prerequisite errors, then downstream targets.
+- No local Lean/Lake execution; no proof placeholders, trust bypasses, or heartbeat raises.
 
-- Branch: `u9/BZ852`; original baseline: `2ab2b07a323`; integrated baseline: `db406319f`.
-- Restored ten original declarations across LineEvaluationInversePair and SignedLinePowerFlat
-  after the user instructed continuation of the concrete two-file proposal.
-- Existing theorem statements and docstrings are unchanged. Repairs expose scalar carriers
-  in `chart_basis` and provide a private local scalar instance for `cancellation_pure`.
-- Assigned SignedLineDerivedAction and direct importer SignedLineDerivedBaseChange are green.
-- `ucheck-bump` at `d8d95ad22f12eb0cad385f9490dc058517797953`: rc=0, failed=0, 4005 jobs.
-  Both restored prerequisites, SignedLineOrdinaryConstraints, and SignedLineLocalizedCoherence
-  also rebuilt successfully (six modules total).
-- Full successful log: `/home/ubuntu/u9/bz/BUILD-BZ852-restored2-full.log`.
-- Layer 2 CartesianCoefficientTwistsSupplement was attempted and skipped because external
-  dependencies CanonicalModuleBaseChangeAffineChartComparison (BZ864) and
-  RingedKFlatWordComparisonDescent (BZ843) fail. Their first errors and import paths are recorded.
-  The build was stopped after these blockers were confirmed; no downstream source was changed.
-- No Lean source differences after the successful checkpoint; final changes are documentation only.
-- Fixes/rules: `/home/ubuntu/u9/bz/FIXES-BZ852.md`; audit: `BZ852-contract-audit.txt`.
-- Completion marker: `/home/ubuntu/u9/state/BZ852.DONE`.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+## BZ856 resumed build progress
+
+- Four restored prerequisites built green at `aacaa1bc8c`: StalkDerivedExtensionComparison,
+  StalkDerivedExtensionComparisonIso, StalkDerivedExtensionComparisonIsoCore, and
+  StalkDerivedExtensionComparisonIsIso. Full log: BUILD-BZ856-restored2-full.log.
+- Their public endpoint conversions use proof-local reflexive casts with Localization
+  implementation imports. The assigned theorem's statement is unchanged.
+- The comparison definition's explicit annotation exposed a Scheme.Modules alias
+  instance failure. Fixed by naming `SheafOfModules (moduleRings X'.toRingedSpace)`.
+- Latest pushed source: `928159606`. BUILD-BZ856-restored3.log is queued and reads
+  the pushed branch when a tree becomes available.
+- This next build also checks default heartbeat limits: the restored legacy 800000
+  and 1600000 overrides were removed pending measurement. Core previously built in
+  40 seconds under its original override.
+- Direct downstream targets: AffineSpectrumStalkCondition and
+  SingleComplexOpenRestrictionComparison. Their next importers are
+  SingleComplexAffineSpectrumCoordinates and SingleComplexTargetLocality.
+- Fix records: /home/ubuntu/u9/bz/FIXES-BZ856.md. No DONE marker yet.
+
+## BZ856 current checkpoint
+
+- Latest integration: d2d60c46e, merged while validation was queued.
+- An overlapping BZ862 merge dropped required comparisonIntoPullback_naturality.
+  Commit 5db8079bf restores it after that integration and retains our explicit
+  canonical category annotation. Other five BZ856 Lean files matched integration.
+- The resumed importer batch at 31033fc8ea completed: rc=1, failed=2.
+  Its log is BUILD-BZ856-downstream-resumed-full.log (remote BZ856-20261106T074824.log).
+- Default 200000 heartbeats exhausted in IsoCore at whnf (20 seconds). The original
+  800000 budget had already passed twice (40/42 seconds), so 9b46e2202 restores it
+  locally with the measured reason. Naturality still uses the default limit.
+- The unowned OpenPinnedSingleDegreeZeroCounitIso dependency fails at line 88 with
+  Category instance synthesis. Skip this open-restriction path under the brief.
+- The old restored3 leaf request was cancelled only after stopping it and verifying
+  no tree-lock descriptor; it never compiled. Replacement BUILD-BZ856-restored4.log
+  is queued (local session 21724), as is BUILD-BZ856-affine-retry.log (session 91602),
+  which requests the leaf plus AffineSpectrumStalkCondition after the core fix.
+- Next: read the first new remote log, fix any owned errors, obtain green ucheck,
+  continue any green downstream path, and write BZ856.DONE. No DONE exists yet.
+- Contract audit passes for all six public theorem statements modulo reflexive
+  casts/whitespace. No proof placeholders or trust bypasses; no local Lean/Lake.
+
+# BZ856 complete
+
+- Branch: `u9/BZ856`; validated source commit: `ad0a04059b15790d758f5ca7bbdaba945bfba8c3`.
+- Assigned module `WeilConjectures.AlgebraicGeometry.StalkComparisonCoordinateInvariance`
+  passed standalone `ucheck-bump`: rc=0, failed=0, 3993 jobs, on poolb:43.157.174.214.
+- All five restored prerequisites also built green at that source revision across the
+  standalone and affine batches: StalkComparisonPullbackNaturality and the four
+  StalkDerivedExtensionComparison{,Iso,IsoCore,IsIso} modules.
+- Restored the six required declarations, added Localization imports, repaired hidden
+  Qh endpoint conversions with reflexive casts, supplied the canonical category in
+  the comparison definition, and normalized casts before invertibility/cancellation.
+- The assigned theorem statement is unchanged. Four restored statements only add
+  reflexive endpoint casts; the naturality theorem statement is unchanged.
+- Historical local budgets (IsoCore 800000; naturality 1600000) were retained only
+  after default 200000 deterministically timed out at whnf. No higher budgets used.
+- Direct downstream AffineSpectrumStalkCondition is blocked in the unowned
+  AffineSpectrumComparisonSourceTransport:160 by missing
+  exists_affineSpectrum_canonicalComparison_square. Direct downstream
+  SingleComplexOpenRestrictionComparison is blocked in the unowned
+  OpenPinnedSingleDegreeZeroCounitIso:88 by Category instance synthesis.
+  Both branches were skipped per the brief; no further layer is unblocked.
+- The affine batch's Lean log completed with the above unowned failure. Its wrapper
+  then reported a shell EOF error; the separate owned-module ucheck returned rc=0.
+- Full green log: /home/ubuntu/u9/bz/BUILD-BZ856-assigned-green-full.log.
+- Fixes, exact diagnostics, counts, and eight idempotent rewrite rules:
+  /home/ubuntu/u9/bz/FIXES-BZ856.md. Audits: BZ856-contract-audit.txt, BZ856-rule-audit.txt.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or profiler probes.
+- Completion marker: /home/ubuntu/u9/state/BZ856.DONE.
+- This final commit changes only these progress notes; Lean sources match the green build.
