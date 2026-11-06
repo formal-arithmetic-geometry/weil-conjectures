@@ -14,6 +14,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Mathlib.CategoryTheory.Limits.ExactFunctor
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.SixFunctors.Etale.Derived.EtaleTorAmplitude
 public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleTorAmplitude
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
@@ -48,6 +49,7 @@ import all Mathlib.AlgebraicGeometry.Sites.Proetale
 import all Mathlib.CategoryTheory.Sites.ConstantSheaf
 import all Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import all Mathlib.Algebra.Homology.DerivedCategory.Basic
+import all Mathlib.Algebra.Homology.Localization
 import all WeilConjectures.CategoryTheory.RingedSiteModules
 import all Mathlib.Algebra.Category.Ring.Colimits
 import all Mathlib.FieldTheory.IsAlgClosed.Basic
