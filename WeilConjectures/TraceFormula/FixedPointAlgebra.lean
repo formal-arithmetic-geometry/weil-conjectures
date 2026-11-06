@@ -217,7 +217,7 @@ theorem ker_evalPointsOn [Finite σ] (hZ₁ : ∀ a ∈ Z, ∀ f ∈ J, evalPoin
   classical
   have := Fintype.ofFinite σ
   rw [← ker_evalPoints (F := F), RingHom.ker_eq_comap_bot (evalPoints F L σ),
-    ← Ideal.comap_map_of_surjective _ surjective_evalPoints]
+    ← Ideal.comap_map_of_surjective (f := evalPoints F L σ) surjective_evalPoints]
   ext f
   simp only [RingHom.mem_ker, Ideal.mem_comap]
   constructor

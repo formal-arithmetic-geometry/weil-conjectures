@@ -123,11 +123,11 @@ theorem mem_range_fractionRingMap_of_isSeparable {π : R} (hπ : Irreducible π)
     obtain ⟨b, rfl⟩ := IsLocalRing.residue_surjective z
     obtain ⟨r, hr⟩ := hres (PowerSeries.constantCoeff (β b))
     refine ⟨residue R r, ?_⟩
-    rw [ResidueField.algebraMap_residue, ← sub_eq_zero, ← map_sub, residue_eq_zero_iff,
+    rw [ResidueField.algebraMap_residue, ← sub_eq_zero, ← RingHom.map_sub, residue_eq_zero_iff,
       mem_maximalIdeal, mem_nonunits_iff]
     intro hunit
     have h := (hunit.map β).map (PowerSeries.constantCoeff (R := k))
-    rw [map_sub, hβR, map_sub, hr, sub_self] at h
+    rw [RingHom.map_sub, hβR, map_sub, hr, sub_self] at h
     exact not_isUnit_zero h
   have hf : Module.finrank (ResidueField R) (ResidueField B) = 1 :=
     (LinearEquiv.ofBijective (Algebra.linearMap _ _)
