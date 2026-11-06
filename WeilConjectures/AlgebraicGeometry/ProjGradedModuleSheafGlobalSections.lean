@@ -286,7 +286,7 @@ theorem gradedModuleSheaf_globalSections
     rw [hgam, F.val.map_smul]
     change q _ f = alpha f
       ((Proj 𝒜).presheaf.map (homOfLE le_top).op (et r) •
-        F.val.map (homOfLE le_top).op (gam m))
+        (show F.val.obj (op D[f]) from F.val.map (homOfLE le_top).op (gam m)))
     rw [het, hchart.1 f, hgam]
     apply Subtype.ext
     dsimp only [q, Submodule.coe_smul]
