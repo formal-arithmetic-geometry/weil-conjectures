@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.PinnedPullbackCounitShifts
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 public import Mathlib.CategoryTheory.Shift.Adjunction
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryAdjunctionShift
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.UnitShift
 
 /-! # Shift compatibility of the selected derived adjunction
 Source: Stacks Project, Tags 08HY and 0D5S. -/
@@ -123,5 +124,60 @@ abbrev pinnedDerivedAdjunction
     (pinnedPullbackCounit.{u, w} f)
     ((Classical.choose (Classical.choose_spec
       (Classical.choose_spec exists_derivedPullbackComposition.{u, w}))) f))
+
+/-- The selected derived adjunction respects the counit-compatible pullback shifts
+and the recorded right-derived direct-image shifts.
+Source: Stacks Project, Tag 08HY, canonical derived adjunction; Tag 079W.
+(blueprint: lem-pc-pinned-derived-adjunction-shifts).
+Proof: the normalization equation of exists_schemeDerivedAdjunction identifies
+its Hom equivalence on localized representatives with the termwise tensor-pullback
+adjunction, the selected left-derived counit and the right-derived unit. The
+termwise adjunction commutes with shifts. On K-injective representatives the
+right-derived unit commutes with the shift structure transported from the
+K-injective equivalence. Combine this with the assumed shift equation for the
+selected left-derived counit to obtain the shifted Hom-equivalence equation.
+K-flat and K-injective resolutions represent every object, so naturality extends
+this equation to arbitrary derived objects. Apply it to identity morphisms to
+obtain the shift equations for the derived unit and counit, precisely the two
+fields of Adjunction.CommShift. This concerns one morphism, independently of
+any base-change square or pullback composition comparison. -/
+theorem pinnedDerivedAdjunction_commShift
+    [∀ Y : Scheme.{u},
+      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+    [∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z), (Scheme.Modules.tensorPullback k).Additive]
+    (s : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y), (derivedPullback.{u, w} f).CommShift ℤ)
+    (hs : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y),
+      letI := s f
+      NatTrans.CommShift (pinnedPullbackCounit.{u, w} f) ℤ)
+    {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    letI := s f
+    (pinnedDerivedAdjunction.{u, w} f).CommShift ℤ := by
+  classical
+  dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
+  let adj := pinnedDerivedAdjunction.{u, w} f
+  -- Keep the recorded right-derived shifts fixed and compare the two left shift structures.
+  let t := adj.leftAdjointCommShift ℤ
+  let := t
+  have hadj : adj.CommShift ℤ := adj.commShift_of_rightAdjoint ℤ
+  let a := (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f))
+    |>.mapHomotopyCategory (.up ℤ)
+  have ha : a.CommShift ℤ := Adjunction.CommShift.mk' a ℤ inferInstance
+  let β := (RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerivedFunctorUnit
+  have hβ : NatTrans.CommShift β ℤ := inferInstance
+  have ht : NatTrans.CommShift (pinnedPullbackCounit.{u, w} f) ℤ := by
+    apply normalizedCounitShift a adj _ _
+      (pinnedPullbackCounit.{u, w} f) β
+    exact Classical.choose_spec (exists_schemeDerivedAdjunction.{u, w} f
+      (hAdd := (Classical.choose exists_derivedPullbackComposition.{u, w}) f)
+      (pinnedPullbackCounit.{u, w} f)
+      ((Classical.choose (Classical.choose_spec
+        (Classical.choose_spec exists_derivedPullbackComposition.{u, w}))) f))
+  have hL := (Classical.choose (Classical.choose_spec
+    (Classical.choose_spec exists_derivedPullbackComposition.{u, w}))) f
+  have := hL.isRightKanExtension
+  have heq : s f = t := rightKanShiftUnique DerivedCategory.Qh _
+    (derivedPullback.{u, w} f) (pinnedPullbackCounit.{u, w} f) (s f) t (hs f) ht
+  have hfinal : letI := t; (pinnedDerivedAdjunction.{u, w} f).CommShift ℤ := hadj
+  exact heq.symm ▸ hfinal
 
 end AlgebraicGeometry
