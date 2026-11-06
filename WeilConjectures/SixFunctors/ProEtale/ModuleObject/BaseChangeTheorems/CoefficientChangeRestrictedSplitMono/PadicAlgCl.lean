@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Util.CountHeartbeats
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangeRestrictedSplitMono.Basic
 
 /-!
@@ -32,6 +33,9 @@ section Coefficients
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ)
   {X Y X' Y' Z : Scheme.{u}} {p : X ⟶ Y} {g : Y' ⟶ Y} {p' : X' ⟶ Y'} {g' : X' ⟶ X}
 
+#count_heartbeats in
+set_option maxHeartbeats 400000 in
+-- The original proof exhausted 200000 heartbeats at whnf in the Lean 4.35 probe build.
 /-- **From `E` to `ℚ̄_ℓ` for split restricted base change maps**, for quasi-compact
 quasi-separated vertical maps and a bounded below `K`. -/
 theorem isSplitMono_map_baseChangeMap_app_padicAlgCl_of_padicSubfield [QuasiCompact p]
@@ -56,11 +60,8 @@ theorem isSplitMono_map_baseChangeMap_app_padicAlgCl_of_padicSubfield [QuasiComp
     (isIso_derivedPushHom_app_padicSubfieldRingObjToPadicAlgCl_of_isGE ℓ E p K n)
     (isIso_derivedPushHom_app_padicSubfieldRingObjToPadicAlgCl_of_isGE ℓ E p'
       ((g')^*⟦Profinite.continuousMapRingObj E.1⟧.leftDerivedFunctor.obj K) n)
-  -- Align the proofs of `Precoherent Profinite` before applying the coefficient-change theorem.
-  revert h hA
-  normalize_precoherent
-  intro h hA
-  exact hA h
+    (by exact_mod_proofs h)
+  exact_mod_proofs hA
 
 end Coefficients
 
