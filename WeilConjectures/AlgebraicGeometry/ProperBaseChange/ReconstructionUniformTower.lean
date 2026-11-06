@@ -201,7 +201,7 @@ private theorem tensorCast_smul
   convert (η.app V).hom.map_smul b
     ((1 : T.obj.obj V) ⊗ₜ[B.obj.obj V,(c.hom.app V).hom] x) using 1
   congr 1
-  rw [ModuleCat.ExtendScalars.smul_tmul, mul_one]
+  rw [ModuleCat.ExtendScalars.smul_tmul (c.hom.app V).hom, mul_one]
 
 private theorem localTensorSection_smul
     {T : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}} (c : B ⟶ T)
