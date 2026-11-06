@@ -198,13 +198,13 @@ private theorem exactSquareFactors
       DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex r.hom (.up ℤ)).app P) =
     ((Functor.mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Q.obj P) ≫
       (Functor.mapDerivedCategoryNatIso r).hom.app (DerivedCategory.Q.obj P) ≫
-      (Functor.mapDerivedCategoryCompIso F' G').hom.app (DerivedCategory.Q.obj P)) ≫
+      (Functor.mapDerivedCategoryCompIso F' G').inv.app (DerivedCategory.Q.obj P)) ≫
       G'.mapDerivedCategory.map (F'.mapDerivedCategoryFactors.hom.app P) ≫
       G'.mapDerivedCategoryFactors.hom.app ((F'.mapHomologicalComplex (.up ℤ)).obj P) := by
   simp only [Category.assoc]
   apply (cancel_epi
-    ((Functor.mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Q.obj P))).mp
-  simp only [Iso.hom_inv_id_app_assoc]
+    ((Functor.mapDerivedCategoryCompIso F G).inv.app (DerivedCategory.Q.obj P))).mp
+  simp only [Iso.inv_hom_id_app_assoc]
   rw [Functor.mapDerivedCategoryCompIso_hom_app_factors_assoc,
     Functor.mapDerivedCategoryCompIso_hom_app_factors,
     Functor.mapDerivedCategoryNatIso_fac]

@@ -36,7 +36,10 @@ local instance (priority := 2000) ordinaryCoordinatesAbelian (Y : Scheme.{u}) :
 
 
 local instance ordinaryExchangeTildeAdditive (C : Type u) [CommRing C] :
-    (affinePushforwardTilde C).Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+    (affinePushforwardTilde C).Additive := by
+  constructor
+  intro M N f g
+  exact tilde.map_add (R := .of C) f g
 
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
