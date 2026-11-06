@@ -12,7 +12,7 @@ public import Mathlib.CategoryTheory.Triangulated.Opposite.Functor
 public import Mathlib.Algebra.Homology.Localization
 import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.Algebra.Homology.SixFunctors.BifunctorHomHomotopyExactSupplement
-import WeilConjectures.AlgebraicGeometry.Native.NativeHomEvaluationShiftOne
+import all WeilConjectures.AlgebraicGeometry.Native.NativeHomEvaluationShiftOne
 
 /-! # The K-injective native Hom cone boundary
 
@@ -150,8 +150,8 @@ theorem nativeHom_localized_cone_boundary_model
     obtain ⟨σ, hσ, hσ'⟩ := hc P
     simp only [DerivedCategory.quotientCompQhIso,
       HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift_hom,
-      Quotient.lift.isLift_inv, DerivedCategory.Q, DerivedCategory.Qh,
-      HomologicalComplexUpToQuasiIso.Qh, CategoryTheory.Functor.map_id,
+      Quotient.lift.isLift_inv] at hσ'
+    erw [(shiftFunctor (DerivedCategory C) (1 : ℤ)).map_id,
       Category.id_comp, Category.comp_id] at hσ'
     let τ := ((HomotopyCategory.quotient C (.up ℤ)).commShiftIso (-1 : ℤ)).hom.app P
     have hτ : (DerivedCategory.Q.commShiftIso (-1 : ℤ)).inv.app P ≫
@@ -190,11 +190,8 @@ theorem nativeHom_localized_cone_boundary_model
       siteHomSignedSourceComponent (DerivedCategory.Q.obj I) 1
         (op (DerivedCategory.Q.obj P)) = (DerivedCategory.qhInternalHomToIhom P I)⟦(1 : ℤ)⟧'
     have hev := nativeHom_evaluation_shift_one P I σ hσ
-    simp only [DerivedCategory.quotientCompQhIso,
-      HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift_hom,
-      Quotient.lift.isLift_inv, DerivedCategory.Q, DerivedCategory.Qh,
-      HomologicalComplexUpToQuasiIso.Qh, CategoryTheory.Functor.map_id, MonoidalClosed.pre_id,
-      NatTrans.id_app, Category.id_comp, Category.comp_id] at hev
+    rw [reassoc_of% nativeHom_comparison_transport (P⟦(-1 : ℤ)⟧) I,
+      nativeHom_comparison_transport P I] at hev
     rw [hev]
     erw [Iso.inv_hom_id_app_assoc]
   let j₀ : DerivedCategory.Qh.mapTriangle.obj

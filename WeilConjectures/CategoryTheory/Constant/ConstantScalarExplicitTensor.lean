@@ -19,6 +19,7 @@ universe u v
 open CategoryTheory CategoryTheory.MonoidalCategory Opposite
 namespace CategoryTheory.ConstantScalarRestriction
 attribute [local instance] Sheaf.monoidalCategory
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 variable {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
   (B : Type (max u v)) [CommRing B]
 

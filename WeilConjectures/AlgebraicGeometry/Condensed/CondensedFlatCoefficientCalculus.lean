@@ -542,13 +542,13 @@ private lemma derivedComp_assoc (a : F ⋙ G ≅ FG) (b : FG ⋙ H ≅ FGH)
   simp only [derivedComp, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     isoWhiskerRight_hom, whiskerRight_app, isoWhiskerLeft_hom, whiskerLeft_app,
     Functor.map_comp, Category.assoc]
-  rw [← cancel_epi (H.mapDerivedCategory.map ((mapDerivedCategoryCompIso F G).hom.app K))]
-  simp only [← map_comp_assoc, Iso.hom_inv_id_app_assoc]
-  rw [← cancel_epi ((mapDerivedCategoryCompIso (F ⋙ G) H).hom.app K)]
-  rw [← reassoc_of% ha, Iso.hom_inv_id_app_assoc]
+  rw [← cancel_epi (H.mapDerivedCategory.map ((mapDerivedCategoryCompIso F G).inv.app K))]
+  simp only [← map_comp_assoc, Iso.inv_hom_id_app_assoc]
+  rw [← cancel_epi ((mapDerivedCategoryCompIso (F ⋙ G) H).inv.app K)]
+  rw [← reassoc_of% ha, Iso.inv_hom_id_app_assoc]
   rw [← reassoc_of% hassoc]
-  simp only [Iso.hom_inv_id_app_assoc]
-  rw [← reassoc_of% hc, Iso.hom_inv_id_app_assoc]
+  simp only [Iso.inv_hom_id_app_assoc]
+  rw [← reassoc_of% hc, Iso.inv_hom_id_app_assoc]
   exact hm'
 end DerivedComposition
 end CategoryTheory.Functor
@@ -620,8 +620,8 @@ private lemma derivedComp_id_comp (e : A ≅ 𝟭 C) (a : A ⋙ F ≅ F)
   simp only [derivedComp, derivedUnit, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     isoWhiskerRight_hom, whiskerRight_app, map_comp, leftUnitor_hom_app,
     mapDerivedCategoryNatIso_trans, he, Category.comp_id, Category.assoc]
-  rw [← cancel_epi ((mapDerivedCategoryCompIso A F).hom.app K),
-    Iso.hom_inv_id_app_assoc, ← reassoc_of% hn, reassoc_of% hu, Category.comp_id]
+  rw [← cancel_epi ((mapDerivedCategoryCompIso A F).inv.app K),
+    Iso.inv_hom_id_app_assoc, ← reassoc_of% hn, reassoc_of% hu, Category.comp_id]
   exact (Category.comp_id _).symm
 
 private lemma derivedComp_comp_id (e : B ≅ 𝟭 D) (a : F ⋙ B ≅ F)
@@ -640,8 +640,8 @@ private lemma derivedComp_comp_id (e : B ≅ 𝟭 D) (a : F ⋙ B ≅ F)
   simp only [derivedComp, derivedUnit, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     isoWhiskerLeft_hom, whiskerLeft_app, rightUnitor_hom_app,
     mapDerivedCategoryNatIso_trans, he, Category.comp_id, Category.assoc]
-  rw [← cancel_epi ((mapDerivedCategoryCompIso F B).hom.app K),
-    Iso.hom_inv_id_app_assoc, ← reassoc_of% hn, reassoc_of% hu, Category.comp_id]
+  rw [← cancel_epi ((mapDerivedCategoryCompIso F B).inv.app K),
+    Iso.inv_hom_id_app_assoc, ← reassoc_of% hn, reassoc_of% hu, Category.comp_id]
   exact (Category.comp_id _).symm
 end DerivedUnit
 end CategoryTheory.Functor

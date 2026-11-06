@@ -62,8 +62,8 @@ theorem derivedExtUnit_transport (ρ₀ : E ⋙ U ⋙ T ≅ V)
     (h : U.DerivedExtUnit X (E.obj H) n a) : V.DerivedExtUnit F H n b := by
   let ρ : E.mapDerivedCategory ⋙ U.mapDerivedCategory ⋙ T.mapDerivedCategory ≅
       V.mapDerivedCategory :=
-    isoWhiskerLeft E.mapDerivedCategory (mapDerivedCategoryCompIso U T).symm ≪≫
-      (mapDerivedCategoryCompIso E (U ⋙ T)).symm ≪≫ mapDerivedCategoryNatIso ρ₀
+    isoWhiskerLeft E.mapDerivedCategory (mapDerivedCategoryCompIso U T) ≪≫
+      (mapDerivedCategoryCompIso E (U ⋙ T)) ≪≫ mapDerivedCategoryNatIso ρ₀
   let sB := DerivedCategory.singleFunctor B 0
   let sA := DerivedCategory.singleFunctor A 0
   let sC := DerivedCategory.singleFunctor C 0

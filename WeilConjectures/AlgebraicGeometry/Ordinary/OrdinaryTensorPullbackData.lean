@@ -142,6 +142,11 @@ variable {C D : Type c} [Category.{v} C] [Category.{v} D]
   (adj : F ⊣ SheafOfModules.pushforward.{r}
     ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map phi))
 
+local instance (M : Mod.{c, v, r} K S) {X Y : Dᵒᵖ} (f : X ⟶ Y) :
+    Module (S.obj.obj Y)
+      ((ModuleCat.restrictScalars ((ring K S).obj.map f).hom).obj (M.val.obj Y)) :=
+  inferInstanceAs (Module (S.obj.obj Y) (M.val.obj Y))
+
 /-- The scalar-generator formula and two-variable naturality.
 Source: Stacks 03EL (blueprint: def-sf-ordinary-tensor-pullback-data). -/
 def OrdinaryTensorNormalized

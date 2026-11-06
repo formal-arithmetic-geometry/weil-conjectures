@@ -120,6 +120,10 @@ theorem isIso_exchange_stalk_iff_strictLocalCohomology
   let := hB
   have := hsA
   have := hsB
+  have : IsSepClosed (IsLocalRing.ResidueField (Scheme.strictHenselizationRing (x ≫ f))) :=
+    @IsStrictlyHenselianLocalRing.isSepClosed_residueField _ _ hsA
+  have : IsSepClosed (IsLocalRing.ResidueField (Scheme.strictHenselizationRing x)) :=
+    @IsStrictlyHenselianLocalRing.isSepClosed_residueField _ _ hsB
   have := evaluation_local (x ≫ f)
   have := evaluation_local x
   have : IsLocalHom ((Scheme.strictHenselizationRingPointEvaluation x).comp a.hom) :=
