@@ -76,6 +76,10 @@ private theorem affine_unit_detects (A : Type u) [CommRing A]
         (hsingle (-n))
     exact (Iso.homCongr ei (Iso.refl (Qs.obj K))).subsingleton_congr.mpr this
   let e := Localization.uniq Qs Qw (HomologicalComplex.quasiIso S (.up ℤ))
+  let : PreservesLimit (Functor.empty _) e.functor :=
+    e.symm.toAdjunction.rightAdjoint_preservesLimits.preservesLimitsOfShape.preservesLimit
+  let : e.functor.PreservesZeroMorphisms :=
+    Functor.preservesZeroMorphisms_of_preserves_terminal_object
   exact (e.functor.map_isZero hs).of_iso
     (((Localization.compUniqFunctor Qs Qw
       (HomologicalComplex.quasiIso S (.up ℤ))).app K) ≪≫ eK).symm
