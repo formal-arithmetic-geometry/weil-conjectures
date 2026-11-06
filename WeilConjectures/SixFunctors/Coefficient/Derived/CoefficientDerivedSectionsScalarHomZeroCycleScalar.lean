@@ -5,10 +5,11 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSectionsScalarHomZeroRepresentativeData
-public import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSectionsScalarHomZeroCycleClosed
 public import Mathlib.Algebra.Homology.Localization
 import all Mathlib.Algebra.Homology.Localization
+
+public import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSectionsScalarHomZeroRepresentativeData
+public import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSectionsScalarHomZeroCycleClosed
 
 /-! # Scalar extension of the unit class and of the left unitor
 
@@ -31,64 +32,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
 
 attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExistence
-
-/-- The finite derived scalar unit on a K-flat complex in cochain coordinates.
-Source: Stacks 07A6 (auxiliary; not a blueprint node). -/
-theorem coefficientFiniteAdjunction_unit_reductionModel
-    (Q : CochainComplex (scalarReductionSource l E W) ℤ)
-    (hQ : CochainComplex.IsKFlatIndependentCoefficients
-      (J := Scheme.ProEt.topology W) (R := completedIntegralCommRingSheafUnrestricted l E W) Q)
-    (n : ℕ) :
-    (coefficientFiniteAdjunction l E W n).unit.app (DerivedCategory.Q.obj Q) ≫
-        (coefficientFiniteDerivedRestriction l E W n).map
-          (coefficientFiniteReductionModel l E W Q hQ n).hom ≫
-        (scalarReductionRestriction l E W n).mapDerivedCategoryFactors.hom.app
-          (((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).obj Q) =
-      DerivedCategory.Q.map
-        (((coefficientOrdinaryScalarAdjunction l E W n).mapHomologicalComplex
-          (.up ℤ)).unit.app Q) := by
-  have h := (derivedScalarExtensionRestrictionAdjunction l E W n).choose_spec Q hQ
-  have hfac := (scalarReductionRestriction l E W n).mapDerivedCategoryFactorsh_hom_app
-    (((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).obj Q)
-  have hfac' : (scalarReductionRestriction l E W n).mapDerivedCategoryFactorsh.hom.app
-      (((scalarReductionExtension l E W n).mapHomotopyCategory (.up ℤ)).obj
-        ((HomotopyCategory.quotient _ (.up ℤ)).obj Q)) =
-      (scalarReductionRestriction l E W n).mapDerivedCategoryFactors.hom.app
-        (((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).obj Q) := by
-    erw [hfac]
-    change (scalarReductionDerivedRestriction l E W n).map (𝟙 _) ≫ _ ≫
-      𝟙 _ ≫ DerivedCategory.Qh.map (𝟙 _) = _
-    erw [(scalarReductionRestriction l E W n).mapDerivedCategory.map_id,
-      DerivedCategory.Qh.map_id, Category.id_comp, Category.comp_id]
-  have hunit : DerivedCategory.Qh.map
-      ((((scalarReductionExtension_adjunction l E W n).choose).mapHomotopyCategory
-        (.up ℤ)).unit.app ((HomotopyCategory.quotient _ (.up ℤ)).obj Q)) =
-      DerivedCategory.Q.map
-        ((((scalarReductionExtension_adjunction l E W n).choose).mapHomologicalComplex
-          (.up ℤ)).unit.app Q) := by
-    exact congrArg DerivedCategory.Qh.map
-      (Adjunction.mapHomotopyCategory_unit_app_quotient (.up ℤ)
-        (scalarReductionExtension_adjunction l E W n).choose Q)
-  have hmodel : (coefficientFiniteReductionModel l E W Q hQ n).hom =
-      (scalarReductionCounit l E W n).app
-        ((HomotopyCategory.quotient _ (.up ℤ)).obj Q) := by
-    dsimp only [coefficientFiniteReductionModel, coefficientLocalizedCounitModel,
-      Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, Iso.app, asIso_hom]
-    change (coefficientFiniteDerivedExtension l E W n).map (𝟙 _) ≫ _ ≫ 𝟙 _ = _
-    simp only [Category.comp_id]
-    erw [(coefficientFiniteDerivedExtension l E W n).map_id, Category.id_comp]
-  refine (congrArg (fun f ↦
-    (coefficientFiniteAdjunction l E W n).unit.app (DerivedCategory.Q.obj Q) ≫
-      (coefficientFiniteDerivedRestriction l E W n).map f ≫
-      (scalarReductionRestriction l E W n).mapDerivedCategoryFactors.hom.app
-        (((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).obj Q))
-          hmodel).trans ?_
-  exact (congrArg (fun f ↦
-    (coefficientFiniteAdjunction l E W n).unit.app (DerivedCategory.Q.obj Q) ≫
-      (scalarReductionDerivedRestriction l E W n).map
-        ((scalarReductionCounit l E W n).app
-          ((HomotopyCategory.quotient _ (.up ℤ)).obj Q)) ≫ f) hfac'.symm).trans
-      (h.trans hunit)
 
 /-- The finite reduction models are natural in chain maps of K-flat complexes.
 Source: Stacks 06YY (auxiliary; not a blueprint node). -/
@@ -343,7 +286,62 @@ theorem coefficientFiniteAdjunction_unit_unitClass
   let I := ((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).obj UA
   let pU := coefficientFiniteReductionModel l E W UA hUA n
   have hss := (D.scalarSections n).hom.naturality pU.hom
-  have hu := coefficientFiniteAdjunction_unit_reductionModel l E W UA hUA n
+  have hu
+      (Q : CochainComplex (scalarReductionSource l E W) ℤ)
+      (hQ : CochainComplex.IsKFlatIndependentCoefficients
+        (J := Scheme.ProEt.topology W) (R := completedIntegralCommRingSheafUnrestricted l E W) Q)
+      (n : ℕ) :
+      (coefficientFiniteAdjunction l E W n).unit.app (DerivedCategory.Q.obj Q) ≫
+          (coefficientFiniteDerivedRestriction l E W n).map
+            (coefficientFiniteReductionModel l E W Q hQ n).hom ≫
+          (scalarReductionRestriction l E W n).mapDerivedCategoryFactors.hom.app
+            (((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).obj Q) =
+        DerivedCategory.Q.map
+          (((coefficientOrdinaryScalarAdjunction l E W n).mapHomologicalComplex
+            (.up ℤ)).unit.app Q) := by
+    have h := (derivedScalarExtensionRestrictionAdjunction l E W n).choose_spec Q hQ
+    have hfac := (scalarReductionRestriction l E W n).mapDerivedCategoryFactorsh_hom_app
+      (((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).obj Q)
+    have hfac' : (scalarReductionRestriction l E W n).mapDerivedCategoryFactorsh.hom.app
+        (((scalarReductionExtension l E W n).mapHomotopyCategory (.up ℤ)).obj
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj Q)) =
+        (scalarReductionRestriction l E W n).mapDerivedCategoryFactors.hom.app
+          (((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).obj Q) := by
+      erw [hfac]
+      change (scalarReductionDerivedRestriction l E W n).map (𝟙 _) ≫ _ ≫
+        𝟙 _ ≫ DerivedCategory.Qh.map (𝟙 _) = _
+      erw [(scalarReductionRestriction l E W n).mapDerivedCategory.map_id,
+        DerivedCategory.Qh.map_id, Category.id_comp, Category.comp_id]
+    have hunit : DerivedCategory.Qh.map
+        ((((scalarReductionExtension_adjunction l E W n).choose).mapHomotopyCategory
+          (.up ℤ)).unit.app ((HomotopyCategory.quotient _ (.up ℤ)).obj Q)) =
+        DerivedCategory.Q.map
+          ((((scalarReductionExtension_adjunction l E W n).choose).mapHomologicalComplex
+            (.up ℤ)).unit.app Q) := by
+      exact congrArg DerivedCategory.Qh.map
+        (Adjunction.mapHomotopyCategory_unit_app_quotient (.up ℤ)
+          (scalarReductionExtension_adjunction l E W n).choose Q)
+    have hmodel : (coefficientFiniteReductionModel l E W Q hQ n).hom =
+        (scalarReductionCounit l E W n).app
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj Q) := by
+      dsimp only [coefficientFiniteReductionModel, coefficientLocalizedCounitModel,
+        Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, Iso.app, asIso_hom]
+      change (coefficientFiniteDerivedExtension l E W n).map (𝟙 _) ≫ _ ≫ 𝟙 _ = _
+      simp only [Category.comp_id]
+      erw [(coefficientFiniteDerivedExtension l E W n).map_id, Category.id_comp]
+    refine (congrArg (fun f ↦
+      (coefficientFiniteAdjunction l E W n).unit.app (DerivedCategory.Q.obj Q) ≫
+        (coefficientFiniteDerivedRestriction l E W n).map f ≫
+        (scalarReductionRestriction l E W n).mapDerivedCategoryFactors.hom.app
+          (((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).obj Q))
+            hmodel).trans ?_
+    exact (congrArg (fun f ↦
+      (coefficientFiniteAdjunction l E W n).unit.app (DerivedCategory.Q.obj Q) ≫
+        (scalarReductionDerivedRestriction l E W n).map
+          ((scalarReductionCounit l E W n).app
+            ((HomotopyCategory.quotient _ (.up ℤ)).obj Q)) ≫ f) hfac'.symm).trans
+        (h.trans hunit)
+  have hu := hu UA hUA n
   have hu' : (coefficientFiniteAdjunction l E W n).unit.app (DerivedCategory.Q.obj UA) ≫
       (coefficientFiniteDerivedRestriction l E W n).map pU.hom =
       DerivedCategory.Q.map (coefficientIntegralUnitComplexUnit l E W n) ≫
