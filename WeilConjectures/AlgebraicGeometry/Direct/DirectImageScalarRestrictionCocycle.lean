@@ -128,9 +128,9 @@ private theorem derive_chain
     Iso.inv_hom_id_app, Iso.inv_hom_id_app]
   rw [← Functor.map_comp_assoc]
   simp only [Category.assoc, Iso.hom_inv_id_app_assoc, Iso.inv_hom_id_app_assoc,
-    Iso.inv_hom_id_app]
+    Iso.hom_inv_id_app]
   erw [CategoryTheory.Functor.map_id, Category.id_comp]
-  simp only [Iso.hom_inv_id_app_assoc, Iso.inv_hom_id_app]
+  simp only [Iso.inv_hom_id_app_assoc, Iso.inv_hom_id_app]
   rfl
 
 /-- Transport coefficient pasting along three natural isomorphisms. Naturality moves
