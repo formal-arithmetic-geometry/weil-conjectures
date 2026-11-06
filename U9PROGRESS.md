@@ -294,3 +294,8 @@
 - Build 9: every prerequisite green through SingleComplexOpenBaseChangeCalculation. Only OpenPinnedSingleDegreeZeroTarget failed: 200000-heartbeat timeout at the broad source-factor rewrite (18s). Replaced it with targeted conv; also applied the established full-transparency cast normalization to the final equality. Default heartbeat limit retained. Build 10 next.
 
 - Build 10: targeted rewrite and cast normalization passed; timeout moved to the final apex-isomorphism composition at 200000 heartbeats (22s). Set only this theorem to 400000, justified by those measured failures; its original pre-prune budget was 1000000. No instance-limit timeout is involved. Build 11 next.
+
+- Current remote job: build 11, commit bda90a40ff, log /home/ubuntu/u9/logs/BZ864-20261106T083418.log, poolb:43.157.153.196. Local exec session 5819. All checks through SingleComplexOpenCounitCompatibility are green; target/leaf/locality still pending.
+- Machine-rule audit: 16 rules parse; five snapshot-checked rules now match once before and zero times after. Identity-cleanup insertion rule made idempotent.
+
+- Build 11: target comparison and degree-zero square green. Only the assigned theorem failed, exhausting 200000 heartbeats in 12s. For build 12, normalize module aliases, make derived universes explicit, and scope its budget to 400000. Public theorem header unchanged.
