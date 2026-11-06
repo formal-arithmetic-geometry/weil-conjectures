@@ -139,12 +139,12 @@ private theorem derived_unit_comp
     (K : DerivedCategory C) :
     η.app K ≫ (Functor.mapDerivedCategoryNatIso g.symm).hom.app
         (L.mapDerivedCategory.obj K) ≫
-      (Functor.mapDerivedCategoryCompIso L V).inv.app K ≫
+      (Functor.mapDerivedCategoryCompIso L V).hom.app K ≫
       (Functor.mapDerivedCategoryNatIso c).hom.app K ≫
       (Functor.mapDerivedCategoryIdIso C).hom.app K = 𝟙 K := by
   have h : η ≫
       Functor.whiskerLeft L.mapDerivedCategory (Functor.mapDerivedCategoryNatIso g.symm).hom ≫
-      (Functor.mapDerivedCategoryCompIso L V).inv ≫
+      (Functor.mapDerivedCategoryCompIso L V).hom ≫
       (Functor.mapDerivedCategoryNatIso c).hom ≫
       (Functor.mapDerivedCategoryIdIso _).hom = 𝟙 _ := by
     apply Localization.natTrans_ext DerivedCategory.Qh
@@ -161,13 +161,13 @@ private theorem derived_unit_comp
     erw [Category.comp_id, Category.comp_id] at hid
     rw [hid, Functor.mapDerivedCategoryNatIso_fach_assoc]
     have hc := Functor.mapDerivedCategoryCompIso_fach L V M
-    have hc' : (Functor.mapDerivedCategoryCompIso L V).inv.app
+    have hc' : (Functor.mapDerivedCategoryCompIso L V).hom.app
         (DerivedCategory.Qh.obj M) ≫ (L ⋙ V).mapDerivedCategoryFactorsh.hom.app M =
       V.mapDerivedCategory.map (L.mapDerivedCategoryFactorsh.hom.app M) ≫
         V.mapDerivedCategoryFactorsh.hom.app ((L.mapHomotopyCategory (.up ℤ)).obj M) ≫
         DerivedCategory.Qh.map ((Functor.mapHomotopyCategoryCompIso
           (Iso.refl (L ⋙ V)) (.up ℤ)).hom.app M) := by
-      rw [← hc, Iso.inv_hom_id_app_assoc]
+      rw [← hc, Iso.hom_inv_id_app_assoc]
     rw [reassoc_of% hc', ← (Functor.mapDerivedCategoryNatIso g.symm).hom.naturality_assoc,
       Functor.mapDerivedCategoryNatIso_fach_assoc,
       reassoc_of% (hη M)]
@@ -189,7 +189,7 @@ private theorem exact_unit_comp
         (upperStarInvIsoLowerStarHom (ModuleCat.{u + 1} A) i).symm).hom.app
           ((upperStar (ModuleCat.{u + 1} A) i.hom).mapDerivedCategory.obj K) ≫
       (Functor.mapDerivedCategoryCompIso (upperStar (ModuleCat.{u + 1} A) i.hom)
-        (upperStar (ModuleCat.{u + 1} A) i.inv)).inv.app K ≫
+        (upperStar (ModuleCat.{u + 1} A) i.inv)).hom.app K ≫
       (Functor.mapDerivedCategoryNatIso
         ((upperStarComp (ModuleCat.{u + 1} A) i.inv i.hom (𝟙 S) (by simp)).symm ≪≫
           upperStarId (ModuleCat.{u + 1} A) S)).hom.app K ≫
