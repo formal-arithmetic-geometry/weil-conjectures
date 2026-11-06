@@ -99,11 +99,10 @@ def sectionTensorRightLocalization (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u}
 attribute [local irreducible] sectionTensorRightComparison sectionTensorRightLocalization
   ModuleRingedComparison.ordinaryTensorComparison ModuleRingedComparison.totalComparison
   ModuleRingedComparison.localizedTotalComparison
-attribute [local implicit_reducible] CategoryTheory.Functor.mapHomologicalComplex
 
 attribute [local implicit_reducible] singleTensor
   CategoryTheory.Functor.mapCochainComplexSingleFunctor
-  ModuleRingedComparison.totalTensor CochainComplex.singleFunctors
+  ModuleRingedComparison.totalTensor
   CategoryTheory.Functor.map₂HomologicalComplex
   ModuleRingedComparison.sectionLocalizationComparison
 

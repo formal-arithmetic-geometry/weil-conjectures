@@ -45,7 +45,6 @@ noncomputable def free : Cᵒᵖ ⥤ AddCommGrpCat.{max w v} where
     refine AddCommGrpCat.ext fun x ↦ ?_
     change Finsupp.mapDomain _ x = x
     convert Finsupp.mapDomain_id (v := x) using 2
-    funext g
     simp
   map_comp {Z Z' Z''} h h' := by
     refine AddCommGrpCat.ext fun x ↦ ?_
@@ -79,7 +78,6 @@ noncomputable def augKer : Cᵒᵖ ⥤ AddCommGrpCat.{max w v} where
     refine AddCommGrpCat.ext fun x ↦ Subtype.ext ?_
     change Finsupp.mapDomain _ x.1 = x.1
     convert Finsupp.mapDomain_id (v := x.1) using 2
-    funext g
     simp
   map_comp {Z Z' Z''} h h' := by
     refine AddCommGrpCat.ext fun x ↦ Subtype.ext ?_

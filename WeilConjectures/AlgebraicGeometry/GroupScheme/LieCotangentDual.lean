@@ -104,10 +104,12 @@ def lieCotangentDualEquiv {k : Type u} [Field k] (G : Over (Spec (.of k))) [GrpO
     let R := G.left.presheaf.stalk (unitSection G (IsLocalRing.closedPoint k))
     letI : RingHomInvPair (identityResidueEquiv G).toRingHom
         (identityResidueEquiv G).symm.toRingHom :=
-      RingHomInvPair.of_ringEquiv (identityResidueEquiv G)
+      ⟨(identityResidueEquiv G).symm_toRingHom_comp_toRingHom,
+        (identityResidueEquiv G).symm.symm_toRingHom_comp_toRingHom⟩
     letI : RingHomInvPair (identityResidueEquiv G).symm.toRingHom
         (identityResidueEquiv G).toRingHom :=
-      RingHomInvPair.of_ringEquiv (identityResidueEquiv G).symm
+      ⟨(identityResidueEquiv G).symm.symm_toRingHom_comp_toRingHom,
+        (identityResidueEquiv G).symm_toRingHom_comp_toRingHom⟩
     Lie G ≃ₛₗ[(identityResidueEquiv G).toRingHom]
       Module.Dual (IsLocalRing.ResidueField R) (IsLocalRing.CotangentSpace R) := by
   let x := unitSection G (IsLocalRing.closedPoint k)

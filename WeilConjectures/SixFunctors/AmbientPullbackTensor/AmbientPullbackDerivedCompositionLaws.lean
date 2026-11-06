@@ -55,71 +55,6 @@ private theorem derivedTransport
   apply Iso.ext
   exact Functor.mapDerivedCategoryNatIso_refl
 
-private theorem derivedInnerUnit
-    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
-    [HasDerivedCategory C] [HasDerivedCategory D]
-    (I : C ⥤ C) (F H : C ⥤ D)
-    [I.Additive] [F.Additive] [H.Additive]
-    [PreservesFiniteLimits I] [PreservesFiniteColimits I]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    [PreservesFiniteLimits H] [PreservesFiniteColimits H]
-    (c : I ⋙ F ≅ H) (e : I ≅ 𝟭 C) (q : H ≅ F)
-    (hc : ∀ M, c.hom.app M ≫ q.hom.app M = F.map (e.hom.app M))
-    (M : DerivedCategory C) :
-    (Functor.mapDerivedCategoryCompNatIso c).hom.app M ≫
-        (Functor.mapDerivedCategoryNatIso q).hom.app M =
-      F.mapDerivedCategory.map
-        ((Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryIdIso C).hom.app M) := by
-  have hi : c ≪≫ q = Functor.isoWhiskerRight e F := by
-    apply Iso.ext
-    apply NatTrans.ext
-    funext M
-    exact hc M
-  have hd := congrArg (fun e ↦ (Functor.mapDerivedCategoryNatIso e).hom.app M) hi
-  simp only [Functor.mapDerivedCategoryNatIso_trans, NatTrans.comp_app] at hd
-  have hw := NatTrans.congr_app (Functor.mapDerivedCategoryNatIso_isoWhiskerRight e F) M
-  simp only [NatTrans.comp_app, Functor.whiskerRight_app] at hw
-  have hu := NatTrans.congr_app (Functor.mapDerivedCategoryCompIso_id_comp F) M
-  simp only [NatTrans.comp_app, Functor.whiskerRight_app, NatTrans.id_app] at hu
-  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso I F).hom.app M)).mp
-  simp only [Functor.mapDerivedCategoryCompNatIso, Iso.trans_hom, Iso.symm_hom,
-    NatTrans.comp_app, ← Category.assoc, Iso.hom_inv_id_app, Category.id_comp]
-  rw [hd, Functor.map_comp]
-  rw [← Category.assoc, ← hw, Category.assoc, hu]
-  erw [Category.comp_id]
-
-private theorem derivedOuterUnit
-    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
-    [HasDerivedCategory C] [HasDerivedCategory D]
-    (I : D ⥤ D) (F H : C ⥤ D)
-    [I.Additive] [F.Additive] [H.Additive]
-    [PreservesFiniteLimits I] [PreservesFiniteColimits I]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    [PreservesFiniteLimits H] [PreservesFiniteColimits H]
-    (c : F ⋙ I ≅ H) (e : I ≅ 𝟭 D) (q : H ≅ F)
-    (hc : ∀ M, c.hom.app M ≫ q.hom.app M = e.hom.app (F.obj M))
-    (M : DerivedCategory C) :
-    (Functor.mapDerivedCategoryCompNatIso c).hom.app M ≫
-        (Functor.mapDerivedCategoryNatIso q).hom.app M =
-      (Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryIdIso D).hom.app
-        (F.mapDerivedCategory.obj M) := by
-  have hi : c ≪≫ q = Functor.isoWhiskerLeft F e := by
-    apply Iso.ext
-    apply NatTrans.ext
-    funext M
-    exact hc M
-  have hd := congrArg (fun e ↦ (Functor.mapDerivedCategoryNatIso e).hom.app M) hi
-  simp only [Functor.mapDerivedCategoryNatIso_trans, NatTrans.comp_app] at hd
-  have hw := NatTrans.congr_app (Functor.mapDerivedCategoryNatIso_isoWhiskerLeft F e) M
-  simp only [NatTrans.comp_app, Functor.whiskerLeft_app] at hw
-  have hu := NatTrans.congr_app (Functor.mapDerivedCategoryCompIso_comp_id F) M
-  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, NatTrans.id_app] at hu
-  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso F I).hom.app M)).mp
-  simp only [Functor.mapDerivedCategoryCompNatIso, Iso.trans_hom, Iso.symm_hom,
-    NatTrans.comp_app, ← Category.assoc, Iso.hom_inv_id_app, Category.id_comp]
-  rw [hd, ← hw, Category.assoc, hu]
-  erw [Category.comp_id]
-
 namespace WeilConjectures.AmbientPullbackTensor
 variable (ell : ℕ) [Fact ell.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[ell] E] [FiniteDimensional ℚ_[ell] E]
@@ -161,6 +96,69 @@ theorem derived_pullback_compositionLaws (K : Scheme.{t}) (s : Option ℕ) :
         (derivedComp ell E (𝟙 X) f s).hom.app M ≫
           eqToHom (congrArg (fun a ↦ (derivedPull ell E a s).obj M)
             (Category.id_comp f))) := by
+  have derivedInnerUnit
+      {X Y : Scheme.{t}}
+      (I : Modules ell E Y s ⥤ Modules ell E Y s)
+      (F H : Modules ell E Y s ⥤ Modules ell E X s)
+      [I.Additive] [F.Additive] [H.Additive]
+      [PreservesFiniteLimits I] [PreservesFiniteColimits I]
+      [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+      [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+      (c : I ⋙ F ≅ H) (e : I ≅ 𝟭 (Modules ell E Y s)) (q : H ≅ F)
+      (hc : ∀ M, c.hom.app M ≫ q.hom.app M = F.map (e.hom.app M))
+      (M : Derived ell E Y s) :
+      (Functor.mapDerivedCategoryCompNatIso c).hom.app M ≫
+          (Functor.mapDerivedCategoryNatIso q).hom.app M =
+        F.mapDerivedCategory.map
+          ((Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryIdIso (Modules ell E Y s)).hom.app M) := by
+    have hi : c ≪≫ q = Functor.isoWhiskerRight e F := by
+      apply Iso.ext
+      apply NatTrans.ext
+      funext M
+      exact hc M
+    have hd := congrArg (fun e ↦ (Functor.mapDerivedCategoryNatIso e).hom.app M) hi
+    simp only [Functor.mapDerivedCategoryNatIso_trans, NatTrans.comp_app] at hd
+    have hw := NatTrans.congr_app (Functor.mapDerivedCategoryNatIso_isoWhiskerRight e F) M
+    simp only [NatTrans.comp_app, Functor.whiskerRight_app] at hw
+    have hu := NatTrans.congr_app (Functor.mapDerivedCategoryCompIso_id_comp F) M
+    simp only [NatTrans.comp_app, Functor.whiskerRight_app, NatTrans.id_app] at hu
+    apply (cancel_epi ((Functor.mapDerivedCategoryCompIso I F).inv.app M)).mp
+    simp only [Functor.mapDerivedCategoryCompNatIso, Iso.trans_hom, Iso.symm_hom,
+      NatTrans.comp_app, ← Category.assoc, Iso.inv_hom_id_app, Category.id_comp]
+    rw [hd, Functor.map_comp]
+    rw [← Category.assoc, ← hw, Category.assoc, hu]
+    erw [Category.comp_id]
+  have derivedOuterUnit
+      {X Y : Scheme.{t}}
+      (I : Modules ell E X s ⥤ Modules ell E X s)
+      (F H : Modules ell E Y s ⥤ Modules ell E X s)
+      [I.Additive] [F.Additive] [H.Additive]
+      [PreservesFiniteLimits I] [PreservesFiniteColimits I]
+      [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+      [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+      (c : F ⋙ I ≅ H) (e : I ≅ 𝟭 (Modules ell E X s)) (q : H ≅ F)
+      (hc : ∀ M, c.hom.app M ≫ q.hom.app M = e.hom.app (F.obj M))
+      (M : Derived ell E Y s) :
+      (Functor.mapDerivedCategoryCompNatIso c).hom.app M ≫
+          (Functor.mapDerivedCategoryNatIso q).hom.app M =
+        (Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryIdIso (Modules ell E X s)).hom.app
+          (F.mapDerivedCategory.obj M) := by
+    have hi : c ≪≫ q = Functor.isoWhiskerLeft F e := by
+      apply Iso.ext
+      apply NatTrans.ext
+      funext M
+      exact hc M
+    have hd := congrArg (fun e ↦ (Functor.mapDerivedCategoryNatIso e).hom.app M) hi
+    simp only [Functor.mapDerivedCategoryNatIso_trans, NatTrans.comp_app] at hd
+    have hw := NatTrans.congr_app (Functor.mapDerivedCategoryNatIso_isoWhiskerLeft F e) M
+    simp only [NatTrans.comp_app, Functor.whiskerLeft_app] at hw
+    have hu := NatTrans.congr_app (Functor.mapDerivedCategoryCompIso_comp_id F) M
+    simp only [NatTrans.comp_app, Functor.whiskerLeft_app, NatTrans.id_app] at hu
+    apply (cancel_epi ((Functor.mapDerivedCategoryCompIso F I).inv.app M)).mp
+    simp only [Functor.mapDerivedCategoryCompNatIso, Iso.trans_hom, Iso.symm_hom,
+      NatTrans.comp_app, ← Category.assoc, Iso.inv_hom_id_app, Category.id_comp]
+    rw [hd, ← hw, Category.assoc, hu]
+    erw [Category.comp_id]
   obtain ⟨ha, hr, hl⟩ := ordinary_pullback_compositionLaws ell E K s
   refine ⟨?_, ?_, ?_⟩
   · intro W X Y Z w f g aW aX aY aZ _ _ _ _ _ _ _ _ hw hf hg M
@@ -174,14 +172,14 @@ theorem derived_pullback_compositionLaws (K : Scheme.{t}) (s : Option ℕ) :
     simpa only [derivedComp, derivedPull, Iso.trans_hom, NatTrans.comp_app,
       eqToIso.hom, eqToHom_app] using h
   · intro X Y f aX aY _ _ _ _ hf M
-    have h := derivedInnerUnit (pull ell E (𝟙 Y) s) (pull ell E f s)
+    have h := derivedInnerUnit (X := X) (Y := Y) (pull ell E (𝟙 Y) s) (pull ell E f s)
       (pull ell E (f ≫ 𝟙 Y) s) (comp ell E f (𝟙 Y) s) (identity ell E Y s)
       (eqToIso (congrArg (fun a ↦ pull ell E a s) (Category.comp_id f)))
       (fun N ↦ (hr f aX aY hf N).symm) M
     rw [derivedTransport (fun a ↦ pull ell E a s) (Category.comp_id f)] at h
     simpa only [derivedComp, derivedIdentity, derivedPull, eqToIso.hom, eqToHom_app] using h.symm
   · intro X Y f aX aY _ _ _ _ hf M
-    have h := derivedOuterUnit (pull ell E (𝟙 X) s) (pull ell E f s)
+    have h := derivedOuterUnit (X := X) (Y := Y) (pull ell E (𝟙 X) s) (pull ell E f s)
       (pull ell E (𝟙 X ≫ f) s) (comp ell E (𝟙 X) f s) (identity ell E X s)
       (eqToIso (congrArg (fun a ↦ pull ell E a s) (Category.id_comp f)))
       (fun N ↦ (hl f aX aY hf N).symm) M

@@ -44,6 +44,11 @@ local instance coreTildeColimits (C : Type u) [CommRing C] :
   (affinePushforwardTilde C).preservesFiniteColimits_of_preservesHomology
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+local instance coreSourceComparisonHasDerivedCategory (Y : Scheme.{u}) :
+    HasDerivedCategory.{w} Y.Modules :=
+  (‹∀ Z : Scheme.{u},
+    HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))›) Y
+
 local instance corePullbackAdditive {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (Scheme.Modules.tensorPullback f).Additive :=
   SingleComplexBaseChange.tensorPullbackAdditive.{u, w} f
@@ -115,7 +120,7 @@ theorem exists_affineTildeTensorSourceComparisonCore
           (schemeDerivedDirectImage f').map ((SingleComplexBaseChange.counit p).app H) =
         affineTildeTensorDerivedCounit R A B D M m F₀ hF₀ ≫
           DerivedCategory.Q.map (affineTildeTensorOrdinarySourceIso R A B M).hom ≫
-          cast (by rfl) (DerivedCategory.Qh.map
+          cast (by rfl) (DerivedCategory.Qh.{w}.map
             ((moduleHomotopyBaseChange f f' g p hw).app H)) ≫
           (RingedSpace.moduleDirectImage f'.toLRSHom.toShHom).rightDerivedFunctorUnit.app
             (((Scheme.Modules.tensorPullback p).mapHomotopyCategory (.up ℤ)).obj H) := by

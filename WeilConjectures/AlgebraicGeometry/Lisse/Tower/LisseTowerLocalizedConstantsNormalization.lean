@@ -103,11 +103,11 @@ def lisseTowerAlgebraRestrictIso {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (n : ℕ) :
     normalizationModuleRestrict (lisseTowerEtaleQuotient d n) ⋙
         lisseTowerAlgebraForget d (n + 1) ≅ lisseTowerAlgebraForget d n :=
-  (Functor.mapDerivedCategoryCompIso
+  Functor.mapDerivedCategoryCompIso
     (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} (lisseTowerEtaleQuotient d n))
     (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1}
       (Ideal.Quotient.mk ((d.ideal.map
-        (algebraMap A (AdicCompletion d.ideal A))) ^ (n + 2))))).symm ≪≫
+        (algebraMap A (AdicCompletion d.ideal A))) ^ (n + 2)))) ≪≫
     (Functor.mapDerivedCategoryNatIso (ModuleCat.restrictScalarsComp'.{u + 1}
       (Ideal.Quotient.mk ((d.ideal.map
         (algebraMap A (AdicCompletion d.ideal A))) ^ (n + 2)))
