@@ -440,3 +440,16 @@
 - BZ1068 leaf is GREEN and sorry-free: ucheck-bump rc=0, built=1, failed=0 at
   6afc4fae13c7e090b915aa0e3d61980300964a3c (poolb:43.157.189.27).
   Next: validate all four direct importers; leaf log BUILD-BZ1068-leaf-full.log.
+
+
+# BZ1079 in progress
+
+- Branch: u9/BZ1079; starting commit d6df1ded8ce203469c3ccdde034e73d5ce4c644c.
+- The user instructed continuation after the concrete two-site reflexive-cast proposal.
+- Applied BZ1079-statement-cast.patch: the existing vY/vX isomorphism values now have
+  explicit endpoint types and cast (by rfl), with Localization imports.
+- All binders, assumptions, conclusion maps, and the theorem proof remain unchanged.
+- Baseline and imports-only builds confirmed two hidden-Qh statement errors.
+- Next: ucheck-bump on the assigned leaf, then direct importer InternalScalarMateProjection
+  and further unblocked layers, up to the brief's limit.
+- Records: /home/ubuntu/u9/bz/FIXES-BZ1079.md. No local Lean/Lake or proof shortcuts.
