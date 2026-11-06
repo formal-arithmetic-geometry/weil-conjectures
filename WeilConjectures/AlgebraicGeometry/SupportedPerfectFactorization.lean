@@ -18,4 +18,3 @@ import all WeilConjectures.AlgebraicGeometry.SupportedKoszulRelativeDetector
 Source: Stacks Project, Tags 0A9C, 0E4G, 094A and 09SP.
 (blueprint: lem-sc-supported-perfect-factorization).
 -/
-

@@ -20,4 +20,3 @@ Coproducts are specified by colimiting cofans, so the statement does not require
 coproduct instance. Distinguished triangles are taken in the ambient derived category;
 the sequence objects lie in its full quasi-coherent subcategory.
 -/
-

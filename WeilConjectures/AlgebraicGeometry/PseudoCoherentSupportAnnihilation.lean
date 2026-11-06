@@ -54,7 +54,8 @@ theorem isPerfect_tensorUnit (X : Scheme.{u})
   · let F := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) ⊤
     let eunit : 𝟙_ (schemeDerivedCategory X) ≅
         (DerivedCategory.singleFunctor _ 0).obj
-          (SheafOfModules.unit (moduleRings X.toRingedSpace)) := Iso.refl _
+          (SheafOfModules.unit (moduleRings X.toRingedSpace)) :=
+      (DerivedCategory.quotientCompQhIso _).app _
     exact ⟨F.mapDerivedCategory.mapIso eunit ≪≫
       (F.mapDerivedCategorySingleFunctor 0).app _ ≪≫
       (DerivedCategory.singleFunctorIsoCompQ _ 0).app (SheafOfModules.unit R)⟩
