@@ -183,7 +183,7 @@ private theorem square_single_transport
       (mapDerivedCategoryCompIso R G).inv.app
         ((DerivedCategory.singleFunctor A 0).obj M) ≫
       (mapDerivedCategoryNatIso e).inv.app ((DerivedCategory.singleFunctor A 0).obj M) ≫
-      (mapDerivedCategoryCompIso L S).hom.app ((DerivedCategory.singleFunctor A 0).obj M) ≫
+      (mapDerivedCategoryCompIso L S).inv.app ((DerivedCategory.singleFunctor A 0).obj M) ≫
       S.mapDerivedCategory.map (el.inv.app ((DerivedCategory.singleFunctor A 0).obj M)) ≫
       S.mapDerivedCategory.map (el.hom.app ((DerivedCategory.singleFunctor A 0).obj M)) ≫
       S.mapDerivedCategory.map ((L.mapDerivedCategorySingleFunctor 0).hom.app M) ≫
