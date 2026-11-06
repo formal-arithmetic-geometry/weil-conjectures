@@ -6,7 +6,7 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.EtaleProperOpenHorizontalNormalization
 public import WeilConjectures.AlgebraicGeometry.ExactUnboundedExchange
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
+public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekLowerStarExchange
 import all WeilConjectures.AlgebraicGeometry.DerivedExchangeModuleTermwise
 import all WeilConjectures.AlgebraicGeometry.UnboundedProperOpenComposition
 
@@ -37,7 +37,6 @@ attribute [local irreducible] upperStar lowerStar openImmersionLowerShriek
   Functor.mapDerivedCategory Functor.mapDerivedCategoryFactors Functor.mapDerivedCategoryFactorsh
   Functor.rightDerivedFunctor Functor.rightDerivedFunctorUnit
   Functor.rightDerivedFunctorObjQIso Functor.mapDerivedCategoryNatIso
-  Functor.mapDerivedCategoryCompIso
 
 private theorem ordinary_cartesian_support
     (A : Type (u + 1)) [CommRing A]
@@ -173,7 +172,7 @@ private theorem derived_cartesian_normalized
       (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ e.hom)).natTrans c) :
     c = (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
       adj'.mapDerivedCategoryRightDerivedAdjunction
-      (TwoSquare.mk _ _ _ _ ((Functor.mapDerivedCategoryCompIso G L').symm ≪≫
+      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategoryCompIso G L' ≪≫
         Functor.mapDerivedCategoryNatIso e ≪≫
         (Functor.mapDerivedCategoryCompIso L H).symm).hom)).natTrans := by
   have : (R.rightDerivedFunctor ⋙ G.mapDerivedCategory).IsRightDerivedFunctor
@@ -201,7 +200,7 @@ private theorem derived_cartesian_normalized
   symm
   exact Adjunction.derivedExact_mateEquiv_app_fac adj adj'
     (TwoSquare.mk _ _ _ _ e.hom)
-    (TwoSquare.mk _ _ _ _ ((Functor.mapDerivedCategoryCompIso G L').symm ≪≫
+    (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategoryCompIso G L' ≪≫
       Functor.mapDerivedCategoryNatIso e ≪≫ (Functor.mapDerivedCategoryCompIso L H).symm).hom)
     (by
       intro N
