@@ -50,7 +50,6 @@ private theorem pointEnd_hom
   have h := (ProEtale.upperStarFromPoint X).mapMod_map_regularEndRingHom Λ a
   exact (congrArg Mod.Hom.hom h).symm
 
-set_option maxHeartbeats 1200000 in
 -- Internal-module coefficient comparisons need additional kernel conversion.
 private theorem pointEnd_pullback_unit
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -75,7 +74,7 @@ private theorem pointEnd_pullback_unit
   unfold regularUnitIso
   convert h using 1 <;> rfl
 
-set_option maxHeartbeats 1200000 in
+set_option maxHeartbeats 400000 in
 -- Internal-module coefficient comparisons need additional kernel conversion.
 /-- Constant coefficient multiplication commutes with restriction to a sheet.
 Source: blueprint lem-fd-as-characters, weighted character averaging
