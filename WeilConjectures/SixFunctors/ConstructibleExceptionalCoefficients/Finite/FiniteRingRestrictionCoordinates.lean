@@ -111,8 +111,8 @@ theorem finite_restriction_coordinates
   let kf : L₂ ≅ Li ⋙ L₁ := Functor.mapDerivedCategoryNatIso
       (eqToIso (congrArg (fun t ↦ ProEtale.upperStar B t) r.i_hom.symm) ≪≫
         ProEtale.upperStarComp B c.i r.hom) ≪≫
-    Functor.mapDerivedCategoryCompIso (ProEtale.upperStar B r.hom)
-      (ProEtale.upperStar B c.i)
+    (Functor.mapDerivedCategoryCompIso (ProEtale.upperStar B r.hom)
+      (ProEtale.upperStar B c.i)).symm
   let ED := (sfIntrinsicDerivedEquivalence d.Z A).functor
   let af : Li ⊣ Rf := (ProEtale.upperStarLowerStarAdjunction B r.hom
     ).mapDerivedCategoryRightDerivedAdjunction
