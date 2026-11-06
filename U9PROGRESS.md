@@ -259,18 +259,13 @@
 
 # BZ864 in progress
 
-- Branch `u9/BZ864`, baseline `e167a50a4`; assigned module: CanonicalModuleBaseChangeAffineChartComparison.
-- The original open-comparison helper was pruned despite its surviving affine-chart caller. The replacement uses the pinned degree-zero open square, one target automorphism, and the existing coordinate comparison.
-- Restored 23 still-referenced declarations in its prerequisite chain, retaining their original types. The full-header audit checks 62 unchanged types and three new helpers across 19 changed Lean files.
-- All prerequisites through OpenPinnedSingleDegreeZeroTarget and OpenPinnedSingleDegreeZeroSquare compiled in builds 11, 13 and 14.
-- Build 14 diagnostics localized the assigned theorem's 400000-heartbeat timeout to comparison setup. The current proof chooses the canonical restricted comparison directly, supplies explicit universes, and uses the neighboring category-alias/tensorPullback elaboration hints.
-- Build 15 was superseded by build 16 under a newly updated one-build-per-helper wrapper. Build 16 failed before Lean started because its transient service was occupied. Do not submit overlapping checks for this helper.
-- Current build 17: source `551febd0e`, remote log `/home/ubuntu/u9/logs/BZ864-20261106T090913.log`, local session 95453. It checks the assigned module and CanonicalModuleBaseChangeAffineLocality. Prerequisite rebuild is progressing without new errors.
-- Local uncommitted cleanup restores the assigned theorem's original docstring. No type or proof changes after the build-17 snapshot.
-- Two scoped 400000-heartbeat budgets are supported by measured 200000-heartbeat failures: target comparison (22s after narrowing its rewrite) and the leaf (12s). No sheaf-limit instance failure was reported, and no further budget increases are planned.
-- No local Lean/Lake execution, placeholders, axioms, native_decide, trust bypasses, or profiler probes. All compilation uses ucheck-bump.
-- Fix records: `/home/ubuntu/u9/bz/FIXES-BZ864.md`; restoration inventory and provenance: `BZ864-restored-declarations.tsv`, `BZ864-restored-prerequisites.tsv`; audits: `BZ864-full-header-audit.tsv`, `BZ864-contract-audit.txt`.
-- Next: finish leaf/locality validation, build direct downstream importers (up to 30 extra modules), and write DONE only after the required checks.
-
-- Build 17: all prerequisites green; the assigned theorem still timed out at 400000 heartbeats in 20s. Build 18 restores the original open-comparison helper statement and proves the pinned square in that smaller context. The assigned affine-chart file is now identical to the baseline. Temporary ordinary trace/diagnostics probes identify stages if it still fails; remove them before final validation. No profiler probes.
-- Build 18 local session: 44077; wrapper log `/home/ubuntu/u9/bz/BZ864-build-18.log`.
+- Branch `u9/BZ864`, baseline `e167a50a4`.
+- Build 18 is GREEN: CanonicalModuleBaseChangeOpenComparison (17s), assigned CanonicalModuleBaseChangeAffineChartComparison (7.7s), and CanonicalModuleBaseChangeAffineLocality. Remote log `/home/ubuntu/u9/logs/BZ864-20261106T091914.log`; source `04c8261096`.
+- The assigned affine-chart file is unchanged from baseline. Restored its missing open-comparison helper with the original statement and a proof using the pinned degree-zero square, its canonical restricted comparison, and one target automorphism. Splitting this argument out of the affine context resolved the 400000-heartbeat timeout.
+- Restored 24 still-referenced declarations. Full-header audit: 61 unchanged types in changed files, three new helpers, no baseline deletion; the assigned file's two declarations remain unchanged too.
+- All temporary trace/diagnostics imports/options/probes are removed. Build 19 validates this cleaned source (`6b5417c713`) and checks the next downstream module RelativelyFlatCanonicalModuleBaseChange.
+- Build 19: newsrv:/home/ubuntu/u9n/bumpw4; remote log `/home/ubuntu/u9/logs/BZ864-20261106T092023.log`; local session 46335; wrapper log `/home/ubuntu/u9/bz/BZ864-build-19.log`. Prerequisites are rebuilding without errors.
+- Source inspection: RelativelyFlatCanonicalModuleBaseChange still calls the pruned external theorem canonicalModuleBaseChange_isIso_affine_of_isFlatOver. Its affine Cech factorization dependency is also pruned. Do not delete: HigherDirectImageDerivedModel still calls the relatively-flat theorem.
+- Two scoped 400000-heartbeat budgets have measured failures recorded in FIXES and are below the original pre-prune 1000000 budgets. No local Lean/Lake, placeholders, axioms, native_decide, trust bypasses, or profiler probes.
+- Records: `/home/ubuntu/u9/bz/FIXES-BZ864.md`, `BZ864-restored-declarations.tsv`, `BZ864-restored-prerequisites.tsv`, `BZ864-full-header-audit.tsv`, `BZ864-contract-audit.txt`.
+- Next: finish cleaned-source/downstream validation, fix local errors if any, record any unowned dependency blocker, and write DONE.
