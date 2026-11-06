@@ -271,7 +271,6 @@ private theorem tensorOnePullback_single_f
   rfl
 
 attribute [local implicit_reducible] proEtaleRingExtension level reductionRestrict
-  Functor.mapHomologicalComplex CochainComplex.singleFunctors
   proEtaleRingModuleDirectImage SheafOfModules.pushforward PresheafOfModules.pushforward
   PresheafOfModules.pushforward₀ PresheafOfModules.pushforward₀Obj
   PresheafOfModules.restrictScalars PresheafOfModules.restrictScalarsObj ModuleCat.restrictScalars
@@ -429,7 +428,8 @@ private theorem evalPull_factors (n : ℕ)
     (exchangeConstantRing U A) (exchangeConstantIso f A)
   let H := proEtaleRingModulePullback f (exchangeConstantRing V A)
     (exchangeConstantRing U A) (exchangeConstantIso f A)
-  let s := eqToIso (AlgebraicGeometry.ProEtale.StrictTower.evaluationPullback A f n)
+  let s : G ⋙ L' ≅ L ⋙ H :=
+    eqToIso (AlgebraicGeometry.ProEtale.StrictTower.evaluationPullback A f n)
   have h : (Functor.mapDerivedCategoryCompIso G L' ≪≫
         Functor.mapDerivedCategoryNatIso s ≪≫ (Functor.mapDerivedCategoryCompIso L H).symm).hom.app
           (DerivedCategory.Q.obj K) ≫
@@ -451,7 +451,7 @@ private theorem evalPull_factors (n : ℕ)
       ((Functor.mapDerivedCategoryCompIso G L').inv.app (DerivedCategory.Q.obj K))).1
     simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc,
       Iso.inv_hom_id_app_assoc]
-    rw [h₁, h₃, ← reassoc_of% h₂]
+    erw [h₁, h₃, ← reassoc_of% h₂]
   change E.hom.app (DerivedCategory.Q.obj K) ≫ _ = _ at h
   have hid : (NatTrans.mapHomologicalComplex
       (eqToIso (AlgebraicGeometry.ProEtale.StrictTower.evaluationPullback A f n)).hom
