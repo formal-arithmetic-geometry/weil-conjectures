@@ -12,6 +12,7 @@ public import WeilConjectures.Algebra.Homology.KFlat
 public import WeilConjectures.AlgebraicGeometry.DerivedHomMayerVietoris
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
 
 import WeilConjectures.AlgebraicGeometry.QCohTensorResolutionCoordinateSectionsNaturality
