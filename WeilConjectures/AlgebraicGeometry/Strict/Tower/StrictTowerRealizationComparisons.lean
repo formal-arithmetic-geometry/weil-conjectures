@@ -227,9 +227,9 @@ def cbcRealizationConst {T S : Scheme.{t}}
     F.mapDerivedCategory ⋙ (Functor.const ℕᵒᵖ).mapDerivedCategory ≅
       (Functor.const ℕᵒᵖ).mapDerivedCategory ⋙
         ((Functor.whiskeringRight ℕᵒᵖ _ _).obj F).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (Functor.compConstIso ℕᵒᵖ F) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The canonical limit comparison, defined by the constant-diagram mate.
 This definition fixes its value on resolutions and on strict augmentations.
@@ -446,10 +446,10 @@ private theorem cbcRealizationLimit_mate_eq
       mateEquiv
         (constLimAdj : (Functor.const ℕᵒᵖ : C ⥤ _) ⊣ lim).mapDerivedCategoryRightDerivedAdjunction
         (constLimAdj : (Functor.const ℕᵒᵖ : D ⥤ _) ⊣ lim).mapDerivedCategoryRightDerivedAdjunction
-        ((Functor.mapDerivedCategoryCompIso F (Functor.const ℕᵒᵖ)).symm ≪≫
+        (Functor.mapDerivedCategoryCompIso F (Functor.const ℕᵒᵖ) ≪≫
           Functor.mapDerivedCategoryNatIso (Functor.compConstIso ℕᵒᵖ F) ≪≫
-          Functor.mapDerivedCategoryCompIso (Functor.const ℕᵒᵖ)
-            ((Functor.whiskeringRight ℕᵒᵖ C D).obj F)).hom := by
+          (Functor.mapDerivedCategoryCompIso (Functor.const ℕᵒᵖ)
+            ((Functor.whiskeringRight ℕᵒᵖ C D).obj F)).symm).hom := by
   have : PreservesLimitsOfShape (Discrete ℕ) F := natProducts F hphi
   have : PreservesLimitsOfShape ℕᵒᵖ F := natProducts_preservesTowers F
   let aa := (constLimAdj : (Functor.const ℕᵒᵖ : C ⥤ _) ⊣ lim)
@@ -731,12 +731,12 @@ Source: Stacks 03DI (blueprint: lem-cbc-complete-proetale-strict-tower-realizati
 def cbcRealizationTowerScalarOpen {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j] :
     cbcRealizationJ d j ⋙ exchangeTowerRes d T ≅
       exchangeTowerRes d U ⋙ ProEtale.StrictTower.J A j :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso
       (Functor.whiskeringRightObjCompIso _ _ ≪≫
         (Functor.whiskeringRight ℕᵒᵖ _ _).mapIso (cbcRealizationScalarOpen d j) ≪≫
         (Functor.whiskeringRightObjCompIso _ _).symm) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- Scalar/open comparison on single derived objects, by exact descent.
 Source: Stacks 03DI (blueprint: lem-cbc-complete-proetale-strict-tower-realization). -/
@@ -744,9 +744,9 @@ def cbcRealizationDerivedScalarOpen {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImme
     cbcDerivedOpenShriek d j inferInstance ⋙ (cbcRealizationRes d T).mapDerivedCategory ≅
       (cbcRealizationRes d U).mapDerivedCategory ⋙
         (ProEtale.StrictTower.moduleJ A j).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (cbcRealizationScalarOpen d j) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The quotient/open tensor identification followed by scalar/open identification.
 Source: Stacks 03DI, 0E8I
