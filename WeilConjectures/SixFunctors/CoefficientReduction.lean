@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.DerivedBaseChange
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCompletion
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Reduction
@@ -17,6 +18,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Low
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ConstructibleUpperShriek
 
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.EtaleRestrictScalarsFunctorComparisons
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MonoidalStructure
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriek
