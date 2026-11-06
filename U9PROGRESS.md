@@ -404,3 +404,9 @@
   AffineTildeDerivedTensorMate and further unblocked downstream modules.
 - Fix records and full logs: /home/ubuntu/u9/bz/FIXES-BZ1030.md.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+- Assigned leaf passed ucheck-bump at 260ba33353123f4c60259e2dc5e74f6d8011faf4:
+  rc=0, failed=0, 4521 jobs; target freshly rebuilt in 79 seconds.
+- Final proof normalizes the reflexive casts with cast_eq. All binders, hypotheses,
+  mathematical maps, and existing docstrings are unchanged.
+- Next: direct importer AffineTildeDerivedTensorMate, then further unblocked layers.
