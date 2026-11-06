@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.TameInertia
 public import WeilConjectures.AlgebraicGeometry.Curve.HighDegreeVanishing
 public import Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
 public import Mathlib.Topology.Instances.ZMod
+public import Mathlib.RingTheory.RootsOfUnity.EnoughRootsOfUnity
 
 /-!
 # Local monodromy of Frobenius-invariant torsors on curves
