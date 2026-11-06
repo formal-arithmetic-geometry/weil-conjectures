@@ -251,8 +251,8 @@ private theorem towerAugmentation_computed
         DerivedCategory.Q.map
           ((NatTrans.mapHomologicalComplex (completedReductionModuleUnit d T) (.up ℤ)).app P) := by
   let := completedReductionModuleTowerFunctor_additive T d
-  exact comp_counitOnComplex_eq (completedReductionModuleTowerFunctor T d)
-    (completedReductionTower T d) (coherenceReductionTowerCounit T d) P _ _
+  simpa only [completedReductionTowerComplexCounit, reductionComplexCounit,
+    completedReductionTowerUnit, completedReductionTowerCounit, coherenceReductionTowerCounit] using
     ((completedReductionTowerUnit_exists d T).exists.choose_spec P hP)
 
 private theorem pulledAugmentation_computed
@@ -731,7 +731,10 @@ private theorem finiteCanonicalTranspose (T : Scheme.{u})
     (reductionDerivedChange T a)
     (complexCounitNat (reductionChange T a) (reductionDerivedChange T a)
       (reductionDerivedCounit T a)) (reductionDerivedCounit T a)
-    (fun P ↦ by simpa only [complexCounitNat_app] using (finiteCounit_eq _ _ _ P).symm) ad had
+    (fun P ↦ by
+      simpa only [complexCounitNat_app] using
+        (finiteCounit_eq (reductionChange T a) (reductionDerivedChange T a)
+          (reductionDerivedCounit T a) P).symm) ad had
   have he : ad = pbcDerivedScalarAdjunction a := by
     unfold pbcDerivedScalarAdjunction
     with_unfolding_all

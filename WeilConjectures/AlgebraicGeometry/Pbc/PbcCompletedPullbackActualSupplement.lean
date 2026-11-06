@@ -210,7 +210,8 @@ private theorem actualRightDerivedUnitShift
   have := hi
   refine ⟨HomotopyCategory.KInjectives.mk I,
     (HomotopyCategory.quotient C (.up ℤ)).map i, ?_⟩
-  change IsIso (F.rightDerivedFunctor.map (DerivedCategory.Q.map i))
+  change IsIso (F.rightDerivedFunctor.map
+    (DerivedCategory.Qh.map ((HomotopyCategory.quotient C (.up ℤ)).map i)))
   infer_instance
 
 namespace AlgebraicGeometry.Scheme
@@ -701,7 +702,7 @@ private theorem wfPresentation_of_complete (M : PbcCompletedDerived X d)
   let adj := pbcDerivedScalarAdjunction (pbcCompletedComparison X d).inv
   have : E.symm.functor.Additive := inferInstanceAs G.Additive
   have : E.symm.inverse.Additive := inferInstanceAs B.Additive
-  let ej := E.symm.mapDerivedCategory.toAdjunction
+  let ej : G.mapDerivedCategory ⊣ B.mapDerivedCategory := E.symm.mapDerivedCategory.toAdjunction
   let j : G.mapDerivedCategory ≅ pbcDerivedExtend (pbcCompletedComparison X d).inv :=
     Adjunction.leftAdjointUniq ej adj
   let eC : DerivedCategory.Q.obj C' ≅
