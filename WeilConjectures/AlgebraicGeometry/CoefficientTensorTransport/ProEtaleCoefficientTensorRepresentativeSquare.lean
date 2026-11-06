@@ -31,9 +31,9 @@ attribute [local irreducible] Functor.mapDerivedCategory
   pullback SheafOfModules.monoidalCategory proEtaleCanonicalTensorComparison
   proEtaleTensorPullbackTotalIso
 
+set_option maxHeartbeats 800000 in
 -- The restored proof exhausts 200000 heartbeats at its final tensor-composition rewrite.
 -- Retain the original theorem's local budget (measured with Lean 4.35.0-rc3).
-set_option maxHeartbeats 800000 in
 /-- Compatibility for a flat K-flat pair, given the normalized restriction comparison.
 
 Source: Stacks Tags 03EL, 07A4 and 07A6.

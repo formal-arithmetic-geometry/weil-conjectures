@@ -215,7 +215,8 @@ theorem cech_horseshoe_correction_cochain (X : Scheme.{u})
       PresheafOfModules.presheaf] at h ⊢
     simp only [AddMonoidHom.mk'_apply,
       sub_eq_add_neg] at h ⊢
-    convert h using 1 <;> rfl
+    convert h using 1
+    rfl
   have hdx : B.d 0 1 x₀ = (F.map S.f).f 1
       (((cechComplexFunctor U).obj S.X₁.presheafModuleCat).iCycles 1 z) := by
     apply TopCat.Presheaf.cechComplexFunctor_ext U S.X₂.presheafModuleCat
