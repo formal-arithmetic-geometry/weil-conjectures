@@ -298,3 +298,16 @@
   unmeasured maxHeartbeats override from the restored helper.
 - Next: ucheck-bump on the five prerequisites and SupportedKoszulRelativeDetector, then downstream.
 - Fix notes: /home/ubuntu/u9/bz/FIXES-BZ932.md. No local Lean/Lake or proof shortcuts.
+
+# BZ941 in progress
+
+- Branch: u9/BZ941; baseline c59b55069.
+- The user instructed continuation after the exact one-line public-statement proposal.
+- Applied BZ941-public-statement-proposal.patch: cast (by rfl) around the unit map
+  in section_derived_tensor_normalization. All other declaration headers are unchanged.
+- Six other failures were resolved by implementation imports, reflexive unitor
+  transports, and cast normalization in the unit proof.
+- Next: ucheck-bump for the assigned leaf, then its five direct importers and further
+  downstream modules up to the brief's limit of 30 extra modules.
+- Notes and logs: /home/ubuntu/u9/bz/FIXES-BZ941.md.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
