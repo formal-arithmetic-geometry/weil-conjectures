@@ -183,7 +183,7 @@ private theorem ordinary_comp_commShift :
     (integralOrdinaryScalarComp l E L i Y M j)
   change NatTrans.CommShift
     ((Functor.mapDerivedCategoryCompIso (integralOrdinaryScalar l E L i Y)
-      (integralOrdinaryScalar l L M j Y)).inv ≫
+      (integralOrdinaryScalar l L M j Y)).hom ≫
       (Functor.mapDerivedCategoryNatIso (integralOrdinaryScalarComp l E L i Y M j)).hom) ℤ
   infer_instance
 
@@ -319,6 +319,9 @@ open AlgebraicallyClosedCoefficients (Index Coefficient coefficientInclusion
 variable (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
   (Y : AlgebraicGeometry.Scheme.{u})
+
+local instance (E : Index l Ω) : FiniteDimensional (Padic l) (Coefficient.{u} l Ω E) :=
+  AlgebraicallyClosedCoefficients.coefficientFinite l Ω E
 
 /-- The specified raw rational stage, using its equivalent small coefficient model.
 Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
