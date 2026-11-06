@@ -242,6 +242,6 @@ theorem commonStagePullbackCompComponent_stage_representation
       (Y := commonStagePullbackObject l Ω f (commonStagePullbackObject l Ω g P)) L hP hP) key
   set_option backward.isDefEq.respectTransparency true in
   set_option backward.isDefEq.respectTransparency.types true in
-  exact hkey
+  with_reducible exact hkey
 
 end WeilConjectures
