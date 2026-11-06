@@ -677,7 +677,8 @@ private theorem singleComparison_composition
     DerivedCategory.singleFunctors, HomotopyCategory.singleFunctor,
     HomotopyCategory.singleFunctors, CochainComplex.singleFunctor,
     SingleFunctors.postcomp, Functor.comp_obj, DerivedCategory.Qh,
-    HomologicalComplexUpToQuasiIso.Qh] using h
+    HomologicalComplexUpToQuasiIso.Qh, HomotopyCategory.quotient,
+    Quotient.lift_obj_functor_obj, Quotient.lift_map_functor_map, DerivedCategory.Q] using h
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

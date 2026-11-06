@@ -130,6 +130,7 @@ private theorem single_map_normalize {X Y : Scheme.{v}} (f : X ⟶ Y)
       DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (.up ℤ)).map
         ((HomologicalComplex.singleMapHomologicalComplex
           (Modules.tensorPullback f) (.up ℤ) 0).hom.app N)) := by
+  dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
   simp only [picardTermwiseSingleMap, Modules.canonicalSinglePullbackMap, cast_eq,
     Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app, Functor.map_id,
     Category.comp_id, perfectHomTensorCounit]
