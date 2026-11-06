@@ -237,7 +237,7 @@ theorem tensorCounit_oneKFlat_coordinates
   refine ⟨a, b, ?_⟩
   simp only [cast_eq] at hgeneral
   have h := cancel_coordinate_tensor _ (τ (Q.obj P) (Q.obj G)) ep eg ν hgeneral
-  simpa only [cast_eq, a, b, Q, QT, K, ep, eg, pullbackTensorTotal, Iso.trans_hom, Iso.symm_hom, asIso_hom,
-    asIso_inv, Functor.mapIso_hom, tensorIso_hom, Iso.refl_hom, Category.assoc] using h
+  simpa only [cast_eq, a, b, Q, QT, K, ep, eg, pullbackTensorTotal, Iso.trans_hom, Iso.symm_hom,
+    asIso_hom, asIso_inv, Functor.mapIso_hom, tensorIso_hom, Iso.refl_hom, Category.assoc] using h
 
 end AlgebraicGeometry
