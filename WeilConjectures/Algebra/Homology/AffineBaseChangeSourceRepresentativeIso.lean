@@ -135,8 +135,26 @@ theorem exists_affineBaseChangeIntoPullback_representativeIso
     have hd' := congrArg (fun b ↦
       (SingleComplexBaseChange.comparisonStalkHomologyIso X' p T i).inv ≫ b) hd
     simp only [Functor.map_comp, Category.assoc, Iso.inv_hom_id_assoc] at hd'
-    simpa only [affineBaseChangeIntoPullback,
-      SingleComplexBaseChange.comparisonIntoPullback, F, G, T,
+    have htransport :
+        (DerivedCategory.quotientCompQhIso.{w} _).inv.app T ≫
+          (DerivedCategory.Qh.{w}
+            (C := SheafOfModules.{u} (moduleRings X'.toRingedSpace))).map
+            (((Scheme.Modules.tensorPullback g').mapHomotopyCategoryFactors (.up ℤ)).inv.app N) ≫
+          inv ((SingleComplexBaseChange.counit g').app
+            ((HomotopyCategory.quotient _ (.up ℤ)).obj N)) ≫
+          (derivedPullback g').map ((DerivedCategory.quotientCompQhIso _).hom.app N) ≫
+          (derivedPullback g').map eN.hom =
+        inv ((SingleComplexBaseChange.counit g').app
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj N)) ≫
+          (derivedPullback g').map eN.hom := by
+      simp only [DerivedCategory.quotientCompQhIso,
+        HomologicalComplexUpToQuasiIso.quotientCompQhIso,
+        Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_hom, Quotient.lift.isLift_inv]
+      erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id]
+      repeat erw [Category.id_comp, Category.comp_id]
+      all_goals rfl
+    simpa only [affineBaseChangeIntoPullback, htransport,
+      SingleComplexBaseChange.comparisonIntoPullback, F, G, T, cast_eq,
       Functor.comp_map, Functor.map_comp, Category.assoc] using
         congrArg (fun b ↦
           (SingleComplexBaseChange.cohomologyModel f f' g g' sq p N).localizedComparison i ≫
