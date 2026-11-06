@@ -115,6 +115,7 @@ theorem isIso_canonicalSingleDirectImageMap {X S : Scheme.{u}} (f : X ⟶ S)
         (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M)) := by
     exact hu
   unfold canonicalSingleDirectImageMap
+  simp only [cast_eq]
   infer_instance
 
 end AlgebraicGeometry.Scheme.Modules
