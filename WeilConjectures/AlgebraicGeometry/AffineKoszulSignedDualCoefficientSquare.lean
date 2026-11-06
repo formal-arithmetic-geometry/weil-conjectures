@@ -327,7 +327,10 @@ theorem affine_koszul_signed_dual_coefficient_square
   let K := ExteriorAlgebra.koszulComplex A n f
   let NO := ModuleCat.of A A
   let NQ := ModuleCat.of A (A ⧸ I)
-  have : (tilde.functor Γ(Y, U.1)).Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+  have : (tilde.functor Γ(Y, U.1)).Additive := by
+    constructor
+    intro M N f g
+    exact tilde.map_add (R := Γ(Y, U.1)) f g
   have : (Scheme.Modules.restrictFunctor U.2.isoSpec.hom).Additive := ⟨by intros; rfl⟩
   have hT : T.Additive := inferInstanceAs
     (tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom).Additive

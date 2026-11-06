@@ -389,7 +389,8 @@ theorem nativeHom_evaluation_shift_one
             (DerivedCategory.Q.obj I))⟦(1 : ℤ)⟧' := by
   simp only [DerivedCategory.quotientCompQhIso,
     HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift_hom,
-    Quotient.lift.isLift_inv, CategoryTheory.Functor.map_id, MonoidalClosed.pre_id,
+    Quotient.lift.isLift_inv, DerivedCategory.Q, DerivedCategory.Qh,
+    HomologicalComplexUpToQuasiIso.Qh, CategoryTheory.Functor.map_id, MonoidalClosed.pre_id,
     NatTrans.id_app, Category.id_comp, Category.comp_id]
   let K := DerivedCategory.Q.obj P
   let M := DerivedCategory.Q.obj I

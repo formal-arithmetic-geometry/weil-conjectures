@@ -9,6 +9,7 @@ module
 public import Mathlib.FieldTheory.Separable
 public import Mathlib.RingTheory.AlgebraicIndependent.Defs
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
+public import Mathlib.FieldTheory.TranscendentalSeparable
 
 /-!
 # Separably generated and separable field extensions

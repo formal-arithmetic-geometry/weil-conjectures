@@ -66,8 +66,9 @@ theorem coefficientFiniteAdjunction_unit_reductionModel
       DerivedCategory.Q.map
         ((((scalarReductionExtension_adjunction l E W n).choose).mapHomologicalComplex
           (.up ℤ)).unit.app Q) := by
-    rw [Adjunction.mapHomotopyCategory_unit_app_quotient]
-    rfl
+    exact congrArg DerivedCategory.Qh.map
+      (Adjunction.mapHomotopyCategory_unit_app_quotient (.up ℤ)
+        (scalarReductionExtension_adjunction l E W n).choose Q)
   have hmodel : (coefficientFiniteReductionModel l E W Q hQ n).hom =
       (scalarReductionCounit l E W n).app
         ((HomotopyCategory.quotient _ (.up ℤ)).obj Q) := by

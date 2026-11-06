@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedScalarMate.DerivedScalarMateData
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.ProEtale.Tensor.ProEtaleTensorPullbackDescentData
 
 /-! # Ordinary scalar tensor coordinates and total pullback
@@ -31,12 +33,12 @@ Source: Stacks 06YY (blueprint: lem-sfb-scalar-tensor-ordinary-pullback). -/
       DerivedCategory.Q.obj
         (((restriction a).mapHomologicalComplex (.up ℤ)).obj
           (((proEtaleRingExtension a).mapHomologicalComplex (.up ℤ)).obj P)) :=
-  (restriction a).mapDerivedCategory.map
+  cast (by rfl) ((restriction a).mapDerivedCategory.map
       ((proEtaleRingDerivedExtensionCounit a).app
         ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫
     (restriction a).mapDerivedCategoryFactorsh.hom.app
       (((proEtaleRingExtension a).mapHomotopyCategory (.up ℤ)).obj
-        ((HomotopyCategory.quotient _ (.up ℤ)).obj P))
+        ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))
 
 /-- The one-sided tensor comparison in the specified scalar coordinates.
 Source: Stacks 06YY (blueprint: lem-sfb-scalar-tensor-ordinary-pullback). -/

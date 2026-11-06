@@ -102,7 +102,7 @@ private def constantProEtaleFiberIso
       (comparisonPoint z).sheafFiber.mapDerivedCategory ≅ 𝟭 _ := by
   let F := (comparisonPoint z).sheafFiber (A := ModuleCat.{u + 1} B)
   have : F.Additive := Functor.additive_of_preserves_binary_products _
-  exact (Functor.mapDerivedCategoryCompIso _ F).symm ≪≫
+  exact Functor.mapDerivedCategoryCompIso _ F ≪≫
     Functor.mapDerivedCategoryNatIso
       ((comparisonPoint z).constantSheafCompSheafFiberIso _ _) ≪≫
     Functor.mapDerivedCategoryIdIso _
@@ -115,10 +115,10 @@ private def localComparisonConstantIso
   let ν := ProEtale.comparisonUpperStar (ModuleCat.{u + 1} B) S
   let F := ProEtale.upperStar (ModuleCat.{u + 1} B) f
   exact (Functor.associator _ _ _).symm ≪≫
-    Functor.isoWhiskerRight ((Functor.mapDerivedCategoryCompIso c ν).symm ≪≫
+    Functor.isoWhiskerRight (Functor.mapDerivedCategoryCompIso c ν ≪≫
       Functor.mapDerivedCategoryNatIso
         (ProEtale.constantSheafCompComparisonUpperStarIso _ S)) F.mapDerivedCategory ≪≫
-    (Functor.mapDerivedCategoryCompIso _ F).symm ≪≫
+    Functor.mapDerivedCategoryCompIso _ F ≪≫
     Functor.mapDerivedCategoryNatIso (ProEtale.constantSheafCompUpperStarIso _ f)
 
 private def localComparisonCompIso
@@ -142,7 +142,7 @@ private def etaleConstantPullbackIso
     normalizationConstant S.smallEtaleTopology ⋙
       (AlgebraicGeometry.Etale.upperStar (ModuleCat.{u + 1} B) b).mapDerivedCategory ≅
         normalizationConstant V.smallEtaleTopology :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (upperStarConstantSheafIso _ b)
 
 set_option backward.isDefEq.respectTransparency false in
@@ -183,7 +183,7 @@ private theorem sliceIsoOfPullback
       (derivedSliceRestriction S.smallEtaleTopology B V).obj D) := by
   let F := (Etale.overSheafEquiv V (ModuleCat.{u + 1} B)).functor
   have : F.Additive := Functor.additive_of_preserves_binary_products _
-  let h := (Functor.mapDerivedCategoryCompIso _ F).symm ≪≫
+  let h := Functor.mapDerivedCategoryCompIso _ F ≪≫
     Functor.mapDerivedCategoryNatIso (overRestrictionIso B V)
   exact ⟨F.mapDerivedCategory.preimageIso ((h.app K) ≪≫ e ≪≫ (h.app D).symm)⟩
 
