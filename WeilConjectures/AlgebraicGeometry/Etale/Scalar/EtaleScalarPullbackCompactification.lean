@@ -110,10 +110,10 @@ theorem scalarPullback_compactification
     leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} B) p
   let cA := Functor.mapDerivedCategoryNatIso
       (upperStarComp (ModuleCat.{u + 1} A) j g f c.comm) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
   let cB := Functor.mapDerivedCategoryNatIso
       (upperStarComp (ModuleCat.{u + 1} B) j g f c.comm) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
   have h := scalarPullback_composition φ g j f c.comm.symm K
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
