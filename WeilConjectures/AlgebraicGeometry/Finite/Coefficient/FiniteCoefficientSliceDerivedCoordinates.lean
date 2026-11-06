@@ -167,7 +167,7 @@ private theorem sliceCoordinate_iso_iff
       G.mapDerivedCategory.obj (ringedSiteDerivedRestrictionOfUniverses R₀ U Z) ≅
         H.mapDerivedCategory.obj Z :=
     G.mapDerivedCategory.mapIso (r Z).symm ≪≫
-      ((Functor.mapDerivedCategoryCompIso O G).app Z).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso O G).app Z ≪≫
       (Functor.mapDerivedCategoryNatIso c).app Z
   constructor
   · rintro ⟨f⟩

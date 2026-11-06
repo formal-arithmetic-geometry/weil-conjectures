@@ -173,6 +173,8 @@ private theorem chartScalarIso (X : Scheme.{t})
   let : EssentiallySmall.{t + 1} X.ProEt := essentiallySmallSelf.{0, t, t + 1} _
   let R₀ := (adicLisseForget X).obj R
   let S₀ := (adicLisseForget X).obj S
+  letI : HasDerivedCategory.{t + 2} (SheafOfModules.{t + 1} (S₀.over U)) :=
+    HasDerivedCategory.standard _
   let F := SheafOfModules.overFunctor.{t + 1} R₀ U
   let G := SheafOfModules.overFunctor.{t + 1} S₀ U
   have := (ringedOverFunctor_exactGeneral.{_, _, _, t + 1} R₀ U).1
