@@ -450,7 +450,7 @@ def integralPullbackCompositor : IntegralPullbackCompositionFamily l E :=
 
 /-- The named compositor is the choice made by `integralPullbackComposition`. -/
 theorem integralPullbackCompositor_eq_choose :
-    integralPullbackCompositor l E = (integralPullbackComposition l E).choose := by
+    @integralPullbackCompositor l _ E _ _ _ = @(integralPullbackComposition l E).choose := by
   unfold integralPullbackCompositor
   rfl
 
@@ -489,13 +489,14 @@ theorem integralPullbackCompositor_assoc :
       (j : Y ⟶ Z) (h : Z ⟶ W) (k : W ⟶ V)
       (K : sfIntegralConstructibleCategory l E V),
       (integralPullbackCompositor l E j (h ≫ k)).hom.app K ≫
-          (constructibleIntegralPullback l E j).map ((integralPullbackCompositor l E h k).hom.app K) =
+          (constructibleIntegralPullback l E j).map
+            ((integralPullbackCompositor l E h k).hom.app K) =
         eqToHom (congrArg
           (fun f : Y ⟶ V ↦ (constructibleIntegralPullback l E f).obj K)
           (Category.assoc j h k).symm) ≫
           (integralPullbackCompositor l E (j ≫ h) k).hom.app K ≫
             (integralPullbackCompositor l E j h).hom.app
-            ((constructibleIntegralPullback l E k).obj K) := by
+              ((constructibleIntegralPullback l E k).obj K) := by
   unfold integralPullbackCompositor
   exact (integralPullbackComposition l E).choose_spec.2.1
 
