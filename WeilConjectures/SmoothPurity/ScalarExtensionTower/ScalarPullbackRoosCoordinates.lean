@@ -47,7 +47,7 @@ attribute [local irreducible] completedIntegralCommRingSheafUnrestricted
   unrestrictedIntegralTensorSection integralOrdinaryTensorSection integralScalarTensorSection
 
 attribute [local implicit_reducible] integralCoefficientCommRingSheaf integralCoefficientSheaf
-  unrestrictedIntegralReductionFunctor Functor.mapHomologicalComplex
+  unrestrictedIntegralReductionFunctor
   SemilinearSections.systemRing coefficientSequenceCommRingSheaf coefficientSequenceCommRingPresheaf
 
 /-- Transport a whole-system map to fixed strict Roos coordinates.
