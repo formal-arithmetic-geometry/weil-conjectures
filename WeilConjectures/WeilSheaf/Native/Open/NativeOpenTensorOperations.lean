@@ -65,7 +65,7 @@ def nativeOpenPullComp {V W Y : Scheme.{u}}
     [Y.Over (Spec (CommRingCat.of k₀))] (j : V ⟶ W) (p : W ⟶ Y)
     [j.IsOver (Spec (CommRingCat.of k₀))] [p.IsOver (Spec (CommRingCat.of k₀))] :
     nativeOpenPull k₀ l p ⋙ nativeOpenPull k₀ l j ≅ nativeOpenPull k₀ l (j ≫ p) :=
-  (Functor.mapDerivedCategoryCompIso (upperStar k₀ l p) (upperStar k₀ l j)).symm ≪≫
+  Functor.mapDerivedCategoryCompIso (upperStar k₀ l p) (upperStar k₀ l j) ≪≫
     Functor.mapDerivedCategoryNatIso (upperStarCompIso k₀ l j p).symm
 
 variable {U Z : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
@@ -138,15 +138,15 @@ def nativeOpenForgetExtension :
       nativeForget k₀ l U ⋙
         (ProEtale.adicOpenImmersionLowerShriek l
           (Scheme.Hom.geometricFiberMap j (comp_over j _))).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso (extensionByZero k₀ l j)
-    (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l Z))).symm ≪≫
+  Functor.mapDerivedCategoryCompIso (extensionByZero k₀ l j)
+    (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l Z)) ≪≫
   Functor.mapDerivedCategoryNatIso (NatIso.ofComponents (fun _ ↦ Iso.refl _) (by
     intro M N f
     rfl)) ≪≫
-  Functor.mapDerivedCategoryCompIso
+  (Functor.mapDerivedCategoryCompIso
     (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l U))
     (ProEtale.adicOpenImmersionLowerShriek l
-      (Scheme.Hom.geometricFiberMap j (comp_over j _)))
+      (Scheme.Hom.geometricFiberMap j (comp_over j _)))).symm
 
 /-- Forgetting commutes with the actual open pullback, with the same exact factors.
 Source: Category.lean, mapOfNatIso; Stacks 015F
@@ -156,13 +156,13 @@ def nativeOpenForgetPull :
       nativeForget k₀ l Z ⋙
         (ProEtale.adicUpperStar l
           (Scheme.Hom.geometricFiberMap j (comp_over j _))).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso (upperStar k₀ l j)
-    (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l U))).symm ≪≫
+  Functor.mapDerivedCategoryCompIso (upperStar k₀ l j)
+    (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l U)) ≪≫
   Functor.mapDerivedCategoryNatIso (NatIso.ofComponents (fun _ ↦ Iso.refl _) (by
     intro M N f
     rfl)) ≪≫
-  Functor.mapDerivedCategoryCompIso
+  (Functor.mapDerivedCategoryCompIso
     (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l Z))
-    (ProEtale.adicUpperStar l (Scheme.Hom.geometricFiberMap j (comp_over j _)))
+    (ProEtale.adicUpperStar l (Scheme.Hom.geometricFiberMap j (comp_over j _)))).symm
 
 end AlgebraicGeometry.ProEtaleWeilSheaf

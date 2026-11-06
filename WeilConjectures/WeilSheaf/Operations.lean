@@ -76,14 +76,14 @@ noncomputable def upperStarCompForgetIso :
         D((Scheme.Hom.geometricFiberMap φ (comp_over φ _))^*ᵃ[l]) :=
   Functor.isoWhiskerLeft (ObjectProperty.ι _)
     ((Functor.mapDerivedCategoryCompIso (ProEtaleWeilSheaf.upperStar k₀ l φ)
-        (IsoAlgebra.forget _)).symm ≪≫
+        (IsoAlgebra.forget _)) ≪≫
       Functor.mapDerivedCategoryNatIso
         (Iso.refl (ProEtaleWeilSheaf.upperStar k₀ l φ ⋙ IsoAlgebra.forget _) :
           ProEtaleWeilSheaf.upperStar k₀ l φ ⋙ IsoAlgebra.forget _ ≅
             IsoAlgebra.forget _ ⋙
               (Scheme.Hom.geometricFiberMap φ (comp_over φ _))^*ᵃ[l]) ≪≫
-      Functor.mapDerivedCategoryCompIso (IsoAlgebra.forget _)
-        ((Scheme.Hom.geometricFiberMap φ (comp_over φ _))^*ᵃ[l]))
+      (Functor.mapDerivedCategoryCompIso (IsoAlgebra.forget _)
+        ((Scheme.Hom.geometricFiberMap φ (comp_over φ _))^*ᵃ[l])).symm)
 
 /-- Blueprint `prop-weil-operations`: Six operations on Weil complexes.
 
