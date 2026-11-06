@@ -190,8 +190,8 @@ private theorem total_inverse_comp
   simpa only [Iso.app_hom, Iso.app_inv, Category.assoc] using
     invert_compositor ((CondensedRing.leftDerivedUpperStarComp Λ f g).app M)
       ((Functor.mapDerivedCategoryNatIso (CondensedRing.upperStarComp Λ f g) ≪≫
-        Functor.mapDerivedCategoryCompIso (CondensedRing.upperStar Λ g)
-          (CondensedRing.upperStar Λ f)).app M) _ _ (total_comp_normalization Λ f g M)
+        (Functor.mapDerivedCategoryCompIso (CondensedRing.upperStar Λ g)
+          (CondensedRing.upperStar Λ f)).symm).app M) _ _ (total_comp_normalization Λ f g M)
 
 private theorem derived_eqToIso
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
