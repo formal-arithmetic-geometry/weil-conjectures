@@ -6,7 +6,9 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.Invertible
-import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Unit
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
+import all WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Unit
 
 /-!
 # Functorial normalization of the single-unit comparison
