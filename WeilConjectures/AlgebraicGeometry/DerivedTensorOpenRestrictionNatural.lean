@@ -104,7 +104,6 @@ private def tensorRestrictionIso
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 600000 in
 -- Matching total-tensor and localization bifunctors needs additional reduction heartbeats.
 /-- Exact open restriction commutes naturally with the derived tensor bifunctor.
 Source: Stacks Project, Tag 06YH (derived tensor construction) and Tag 08EU, locality.
