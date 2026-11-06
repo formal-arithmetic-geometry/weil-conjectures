@@ -254,7 +254,7 @@ theorem graph_etale_open_composition
         (derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j))).symm
       (Functor.mapDerivedCategoryNatIso
         (upperStarComp (ModuleCat.{u + 1} A) v j (v ≫ j) rfl) ≪≫
-        Functor.mapDerivedCategoryCompIso _ _)
+        (Functor.mapDerivedCategoryCompIso _ _).symm)
     Functor.isoWhiskerRight (graphChosenEtaleComparison A v)
         (rightDerivedLowerShriek (ModuleCat.{u + 1} A) j) ≪≫
       Functor.isoWhiskerLeft
@@ -276,7 +276,7 @@ theorem graph_etale_open_composition
         (derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j))).symm
       (Functor.mapDerivedCategoryNatIso
         (upperStarComp (ModuleCat.{u + 1} A) v j (v ≫ j) rfl) ≪≫
-        Functor.mapDerivedCategoryCompIso _ _) = σ := by
+        (Functor.mapDerivedCategoryCompIso _ _).symm) = σ := by
     apply (conjugateIsoEquiv _ _).injective
     rw [Equiv.apply_symm_apply]
     apply Iso.ext
