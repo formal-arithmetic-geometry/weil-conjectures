@@ -274,21 +274,33 @@
 - Fix patterns and whole-tree inventories: /home/ubuntu/u9/bz/FIXES-BZ885.md.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-- Assigned module and both direct importers passed ucheck-bump at
-  5cca20eeb783db7ec41171a7a488693bd489e3aa: rc=0, failed=0, 5034 jobs.
-- All three rebuilt successfully on poolb:43.166.83.208 (20s, 16s, 10s).
-- Full log: /home/ubuntu/u9/bz/BZ885-build-1-full.log.
-- Continuing through GeometricOperationsBaseExistence, GeometricOperationsExistence,
-  SemilinearOperationsExistence, and SemilinearDerivedSections.
 
-# BZ885 complete
+# BZ908 in progress
 
-- Assigned module and both direct importers are green at source commit 5cca20eeb783.
-- Six extra modules were attempted across five layers: two green, four blocked.
-- The next four modules are skipped under the brief's unowned-dependency rule:
-  SemilinearCartesianProjection, GeometricTensorEvaluation, and RingedSiteDualityMaps fail.
-- Full downstream log: /home/ubuntu/u9/bz/BZ885-build-2-full.log.
-- Exact first errors and dependency paths: /home/ubuntu/u9/bz/BZ885-downstream-blockers.json.
-- Final PATTERN/ERROR/RULE handoff: /home/ubuntu/u9/bz/FIXES-BZ885.md.
-- Completion marker: /home/ubuntu/u9/state/BZ885.DONE.
-- Final changes are documentation only; Lean sources match the successful build.
+- Branch: u9/BZ908; baseline 40e255942.
+- The user instructed continuation after the explicit two-cast proposal.
+- Applied the two `cast (by rfl)` wrappers in IsCanonicalPullbackTensorComparison,
+  preserving the existing maps while restoring hidden Qh/Q endpoint conversions.
+- Localization imports resolve the proof-local mismatch. The uniqueness proof uses
+  `erw` to rewrite through the reflexive casts and semireducible category aliases.
+- Next: remote validation, then the 19 direct importers and further downstream
+  modules up to the brief's limit of 30 extra modules.
+- Fix patterns: /home/ubuntu/u9/bz/FIXES-BZ908.md.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+- Assigned leaf compiled successfully (51s), all 3998 jobs green at 47eabae395f.
+  The shared remote wrapper hit a shell syntax error after compilation; full Lean
+  success is recorded in BUILD-BZ908-leaf-green-full.log. Rechecking the runner.
+- Next batch uses two direct importers whose dependency closures cover all 19:
+  SingleComplexInheritedTensorCondition and NormalizedInternalHomPullbackComparison.
+
+- The stable downstream run at 0997529457 rebuilt the assigned leaf (59s) and
+  CanonicalPullbackTensorMonoidalRealization (50s) successfully.
+- TensorCoordinateIdentifications needs the same Qh/Q reflexive casts plus an
+  explicit target sheaf category; the known BZ877 repair is applied for recheck.
+  The unused-list theorem has an external caller, so it is retained.
+- Unowned blockers found: StalkDerivedExtensionComparisonIsoCore (heartbeat
+  timeout) and OpenRestrictionDerivedMonoidal (reversed compositor).
+- Per-run ucheck-bump snapshot: /home/ubuntu/u9/bz/BZ908-bin/ucheck-bump. It preserves
+  the lead's locking and one-build-per-helper rules while avoiding shared-script
+  overwrite failures. No shared build scripts were edited.
