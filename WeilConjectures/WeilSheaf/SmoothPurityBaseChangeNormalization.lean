@@ -171,7 +171,7 @@ lemma geometricFiberWeilRightDerivedLowerStarIso_forget
   have ht : Functor.mapDerivedCategoryNatIso
       (Iso.refl (geometricFiberWeilLowerStar Λ t ⋙ Endofunctor.IsoAlgebra.forget _)) =
       Iso.refl _ := Iso.ext Functor.mapDerivedCategoryNatIso_refl
-  simp only [hs, ht, Iso.trans_refl, Iso.symm_inv, Iso.symm_hom] at he
+  simp only [hs, ht, Iso.trans_refl] at he
   dsimp only [Endofunctor.IsoAlgebra.traceDescentComparison,
     geometricFiberWeilRightDerivedLowerStarIso] at *
   exact_mod_proofs he

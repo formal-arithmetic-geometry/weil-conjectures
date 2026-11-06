@@ -197,7 +197,7 @@ noncomputable def homDualLinearEquiv (M : FrobeniusModule.{u, v} K)
 lemma homDualLinearEquiv_symm_tmul (M : FrobeniusModule.{u, v} K)
     (N : FrobeniusModule.{t, v} K) (x : M.carrier) (y : N.carrier)
     (φ : Module.Dual K M.carrier) : (homDualLinearEquiv M N).symm (x ⊗ₜ y) φ = φ x • y := by
-  simp [homDualLinearEquiv, dualTensorHom_apply]
+  simp [homDualLinearEquiv]
 
 /-- The Frobenius-equivariant isomorphism `Hom(M^∨, N) ≅ M ⊗ N`: `x ⊗ y` corresponds to the map
 `φ ↦ φ(x) y`. -/

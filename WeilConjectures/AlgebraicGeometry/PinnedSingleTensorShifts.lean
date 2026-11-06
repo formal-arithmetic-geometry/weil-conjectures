@@ -168,7 +168,7 @@ lemma mappedHomotopySingleIso_hom_app {A B : Type*} [Category A] [Category B]
     Functor.mapHomotopyCategoryFactors, mappedCochainSingleIso, precompPostcompIso,
     Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom, comp_hom, isoMk_hom_hom,
     Functor.isoWhiskerLeft_hom, isoMk_inv_hom, postcompFunctor_map_hom,
-    NatTrans.comp_app, HomotopyCategory.quotient_obj_singleFunctors_obj,
+    NatTrans.comp_app,
     Functor.associator_hom_app, Functor.whiskerLeft_app, Quotient.lift.isLift_hom,
     Functor.associator_inv_app, Functor.whiskerRight_app, Category.id_comp]
   all_goals erw [Category.id_comp, Category.comp_id]

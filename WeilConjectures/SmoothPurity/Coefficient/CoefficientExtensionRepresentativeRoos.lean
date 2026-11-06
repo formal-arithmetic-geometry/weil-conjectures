@@ -149,7 +149,7 @@ private theorem restrictedEvaluation_factors
           ((coefficientSequenceEvaluation l L W n).mapDerivedCategoryFactors.hom.app X) ≫
         (scalarReductionRestriction l L W n).mapDerivedCategoryFactors.hom.app
           (((coefficientSequenceEvaluation l L W n).mapHomologicalComplex (.up ℤ)).obj X) := by
-  simp only [coefficientRestrictedEvaluationIso, Functor.mapDerivedCategorySquareIso,
+  simp only [coefficientRestrictedEvaluationIso,
     coefficientRestrictedComplexEvaluation, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     Functor.mapHomologicalComplexCompIso_refl_hom_app, Category.id_comp]
   exact (Functor.mapDerivedCategorySquareIso_hom_app_Q_obj

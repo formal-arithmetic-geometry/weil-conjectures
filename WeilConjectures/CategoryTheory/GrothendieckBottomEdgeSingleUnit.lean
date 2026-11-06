@@ -138,7 +138,7 @@ theorem grothendieckBottomEdge_singleUnit
       Triangulated.TStructure.spectralObjectFunctor, Triangulated.TStructure.spectralObject,
       Triangulated.TStructure.ω₁]
     simp only [homOfLE_leOfHom, Fin.isValue, Functor.map_id, NatTrans.hcomp_app,
-      NatTrans.id_app, Category.comp_id]
+      NatTrans.id_app]
     dsimp
     simp only [Category.id_comp, Functor.map_id, Category.comp_id]
     change inv ((DerivedCategory.Plus.homologyFunctor C n).map

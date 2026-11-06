@@ -86,7 +86,7 @@ theorem baseChangedSmoothTrace_levelwise_universal
   simp only [purityFieldCompactificationAmbientExchange, Iso.trans_inv, Iso.symm_inv,
     NatTrans.comp_app, Functor.isoWhiskerLeft_inv, Functor.whiskerLeft_app,
     Functor.isoWhiskerRight_inv, Functor.whiskerRight_app,
-    Iso.app_hom, Iso.symm_hom, Iso.app_inv, Category.assoc,
+    Iso.app_hom, Iso.symm_hom, Category.assoc,
     ← Functor.map_comp_assoc, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id,
     Category.id_comp] at ht
   rw [(leftDerivedUpperStarIsoMapDerivedCategory (Profinite.padicAlgClRingObj l) πY).hom.naturality,

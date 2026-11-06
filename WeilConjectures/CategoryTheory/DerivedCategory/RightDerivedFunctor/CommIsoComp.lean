@@ -222,8 +222,8 @@ theorem rightDerivedFunctorCommIso_hom_app_comp (e₁₂ : P₂ ⋙ rY₁₂ ≅
   refine rightDerived_ext _ (rightDerivedFunctorCompMapDerivedCategoryUnit P₃ rY₁₃)
     (HomotopyCategory.quasiIso C₃ (ComplexShape.up ℤ)) _ _ _ ?_
   ext X
-  simp only [NatTrans.comp_app, whiskerLeft_app, τ, Iso.trans_inv, Iso.trans_hom, Iso.symm_inv,
-    Iso.symm_hom, associator_inv_app, associator_hom_app, whiskerRight_app, Category.id_comp,
+  simp only [NatTrans.comp_app, whiskerLeft_app, τ, Iso.trans_inv, Iso.trans_hom,
+    associator_inv_app, associator_hom_app, whiskerRight_app, Category.id_comp,
     Functor.map_comp, Category.assoc]
   rw [rightDerivedFunctorCommIso_fac_app, rightDerivedFunctorCompMapDerivedCategoryUnit_app_eq,
     mapHomotopyCategoryCompIso_refl_inv_app, mapHomotopyCategoryCompIso_refl_inv_app,

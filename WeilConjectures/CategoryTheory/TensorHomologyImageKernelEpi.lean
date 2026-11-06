@@ -44,7 +44,7 @@ private theorem tensorSingleIso_inv_naturality
   apply HomologicalComplex.Hom.ext
   funext n
   simp [CochainComplex.mapBifunctorSingle₂Iso_inv, CochainComplex.singleFunctor,
-    CochainComplex.singleFunctors, HomologicalComplex.single_map_f_self,
+    HomologicalComplex.single_map_f_self,
     whiskerLeft_comp]
 
 set_option maxHeartbeats 600000 in

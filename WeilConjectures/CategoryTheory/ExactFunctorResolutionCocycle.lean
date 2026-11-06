@@ -98,7 +98,7 @@ theorem exactFunctor_resolution_cocycle_hom
       InjectiveResolution.ι'_f_zero, Functor.map_comp, Category.assoc]
     simp only [Functor.mapCochainComplexSingleFunctor,
       HomologicalComplex.singleMapHomologicalComplex, CochainComplex.singleFunctor,
-      CochainComplex.singleFunctors,
+
       HomologicalComplex.singleObjXSelf, HomologicalComplex.singleObjXIsoOfEq,
       HomologicalComplex.single_map_f_self, Category.assoc,
       Functor.comp_obj, Int.cast_ofNat_Int, Iso.inv_hom_id_map_assoc,
@@ -147,14 +147,14 @@ theorem exactFunctor_resolution_cocycle_hom
           (zero_add (q : ℤ)) _ rfl hbc) := by
     apply HomologicalComplex.from_single_hom_ext
     dsimp [ShiftedHom.map]
-    simp only [CochainComplex.singleFunctor, CochainComplex.singleFunctors, Functor.comp_obj,
-      CochainComplex.shiftFunctor_obj_X',
+    simp only [CochainComplex.singleFunctor, Functor.comp_obj,
+
       HomologicalComplex.singleObjXSelf,
       HomologicalComplex.singleObjXIsoOfEq, eqToIso_refl, Iso.refl_hom,
       Category.id_comp, Functor.mapCochainComplexSingleFunctor,
       HomologicalComplex.singleMapHomologicalComplex, NatIso.ofComponents_inv_app,
       ↓reduceDIte, eqToHom_refl, CochainComplex.HomComplex.Cocycle.equivHomShift_symm_apply,
-      Functor.mapHomologicalComplex_map_f, CochainComplex.HomComplex.Cocycle.homOf_f,
+      CochainComplex.HomComplex.Cocycle.homOf_f,
       CochainComplex.HomComplex.Cocycle.rightShift_coe,
       CochainComplex.HomComplex.Cocycle.fromSingleMk_coe, zero_add,
       CochainComplex.HomComplex.Cochain.rightShift_v,

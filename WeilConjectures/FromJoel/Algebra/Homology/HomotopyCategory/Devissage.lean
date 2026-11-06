@@ -48,7 +48,7 @@ noncomputable def isoSingle (K : CochainComplex C ℤ) (n : ℤ)
       apply (isZero_of_isStrictlyLE _ _ _ h₁).eq_of_src
   inv_hom_id := by
     apply from_single_hom_ext
-    simp [toSingleEquiv, fromSingleEquiv, singleFunctor, singleFunctors]
+    simp [toSingleEquiv, fromSingleEquiv, singleFunctor]
 
 variable {ι : Type*} {c : ComplexShape ι} (e : c.Embedding (ComplexShape.up ℤ))
   [e.IsRelIff]

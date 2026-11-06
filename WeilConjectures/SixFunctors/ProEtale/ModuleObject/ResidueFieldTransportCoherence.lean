@@ -99,17 +99,17 @@ theorem residueFieldDerivedUpperStarIsoCompCoherenceAt {X Y Z : Scheme.{u}} (p :
     delta residueFieldDerivedUpperStarIso
     simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
       Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app, Functor.whiskerLeft_app,
-      Category.assoc, Iso.inv_hom_id_app_assoc]
+      Category.assoc]
   · intro M
     delta residueFieldDerivedUpperStarIso
     simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
       Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app, Functor.whiskerLeft_app,
-      Category.assoc, Iso.inv_hom_id_app_assoc]
+      Category.assoc]
   · intro M
     delta residueFieldDerivedUpperStarIso
     simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
       Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app, Functor.whiskerLeft_app,
-      Category.assoc, Iso.inv_hom_id_app_assoc]
+      Category.assoc]
   · intro M
     delta CondensedRing.leftDerivedUpperStarComp Functor.leftDerivedFunctorNatIso
       Functor.leftDerivedFunctorCompIso CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory

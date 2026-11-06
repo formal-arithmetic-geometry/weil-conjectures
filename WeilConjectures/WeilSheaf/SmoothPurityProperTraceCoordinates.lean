@@ -116,7 +116,7 @@ lemma baseChangedProperTrace_levelwise :
   have hbc := boundedConstructibleBaseChangeOfMap_inv_app_hom l f f' sq P
   simp only [baseChangedProperTrace, ObjectProperty.FullSubcategory.comp_hom,
     ObjectProperty.FullSubcategory.id_hom, boundedConstructibleUpperStarOfMap_map,
-    ObjectProperty.homMk_hom, Category.comp_id, Category.id_comp, Category.assoc, hbc]
+    ObjectProperty.homMk_hom, Category.assoc, hbc]
   erw [Category.id_comp]
   simp only [Functor.id_obj]
 

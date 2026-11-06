@@ -287,7 +287,7 @@ theorem restrictedOverSingle_composition {W S : Scheme.{u}} (k : W ⟶ S)
     set_option backward.isDefEq.respectTransparency.types false in
     set_option backward.isDefEq.respectTransparency false in
     simp only [single_map_zero, restrictedOverSingle,
-      CochainComplex.singleFunctor, CochainComplex.singleFunctors,
+      CochainComplex.singleFunctor,
       HomologicalComplex.singleObjXSelf,
       HomologicalComplex.singleObjXIsoOfEq, eqToIso_refl, Iso.refl_hom, Iso.refl_inv,
       CategoryTheory.Functor.map_id, Category.id_comp]

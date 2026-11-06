@@ -207,7 +207,7 @@ theorem singleComplexOpen_termwise_counit_compatibility
       DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
         (openPinnedTensorRestrictionIso g' U U' j hj).inv (.up ℤ)).app P) := by
     exact termwise_homotopy_square_inv (openPinnedTensorRestrictionIso g' U U' j hj) P
-  simp only [Functor.mapIso_inv, Iso.app_inv, Iso.symm_hom, Iso.app_hom] at h'
+  simp only [Functor.mapIso_inv, Iso.app_inv] at h'
   exact h'.trans (congrArg₂ (fun x y =>
     (counit j).app ((HomotopyCategory.quotient _ (.up ℤ)).obj
       (((schemeOpenRestriction X U).mapHomologicalComplex (.up ℤ)).obj P)) ≫ x ≫ y)

@@ -2785,7 +2785,7 @@ private lemma bounded_open_comp_conjugate
   simp only [Adjunction.comp_unit_app, Functor.map_comp, open_unit_plus,
     exact_map_plus, Iso.trans_hom, NatTrans.comp_app,
     Functor.ι_map_mapDerivedCategoryPlusNatIso_hom_app,
-    Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app, Iso.symm_hom]
+    Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app]
   have hi (L : DerivedCategory.Plus
       (Sheaf Z.smallEtaleTopology B)) :
       DerivedCategory.Plus.ι.map

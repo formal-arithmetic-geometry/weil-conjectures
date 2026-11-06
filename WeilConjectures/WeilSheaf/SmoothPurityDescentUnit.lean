@@ -74,7 +74,7 @@ lemma adicUpperStarUnitIso_descent_inv {X Y : Scheme.{u}}
   rw [← cancel_epi ((adicUpperStarIsoLowerStarInv l e).hom.app
     ((p)^*ᵃ[l].obj (AdicSheaf.unit l Y)))]
   rw [← NatTrans.naturality_assoc]
-  simp only [Category.assoc, Iso.hom_inv_id_app_assoc,
+  simp only [Iso.hom_inv_id_app_assoc,
     adicUpperStarIsoLowerStarInv_hom_comp_unit]
   exact (adicUpperStarUnitIso_descent p e.hom h).symm
 

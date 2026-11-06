@@ -87,8 +87,8 @@ private noncomputable def coefficientSubring
     · subst g
       by_cases ha : a = 0
       · subst a
-        simp [c, MvPolynomial.coeff_one, MvPowerSeries.coeff_one, good]
-      · simp [c, MvPolynomial.coeff_one, MvPowerSeries.coeff_one, ha]
+        simp [c, MvPowerSeries.coeff_one, good]
+      · simp [c, MvPowerSeries.coeff_one, ha]
     · simp [c, MvPolynomial.coeff_one, Ne.symm hg]
   · intro f h hf hh a g
     obtain ⟨hfS, hfG⟩ := hf a g
@@ -105,7 +105,7 @@ private noncomputable def coefficientSubring
   · intro a g
     simp [c]
   · intro f hf a g
-    have heq : c (-f) a g = -c f a g := by simp [c, MvPolynomial.coeff_neg]
+    have heq : c (-f) a g = -c f a g := by simp [c]
     change c (-f) a g ∈ S ∧ _
     rw [heq]
     exact ⟨S.neg_mem (hf a g).1, fun h => (hf a g).2 (neg_ne_zero.mp h)⟩

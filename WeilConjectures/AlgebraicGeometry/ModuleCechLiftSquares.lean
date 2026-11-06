@@ -70,7 +70,7 @@ theorem moduleCechLiftSquares {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens
     intro y
     simp only [CategoryTheory.cechComplexFunctor,
       FormalCoproduct.cochainComplexFunctor_map_f, Functor.rightOp_obj, homOfLE_leOfHom,
-      Functor.mapHomologicalComplex_map_f, Functor.comp_map, SheafOfModules.forget_map,
+      SheafOfModules.forget_map,
       PresheafOfModules.forgetToPresheafModuleCat_map, Category.assoc, Pi.map_π]
     change _ ≫ (Pi.lift fun z : Fin 1 → ι =>
       (I.cocomplex.X n).presheafModuleCat.map (homOfLE (le_top (a := ∏ᶜ fun l => U (z l)))).op) ≫
