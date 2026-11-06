@@ -193,8 +193,8 @@ theorem HasDirectImageBaseChangeOnPlus.of_surjective_closedImmersion {S X X' Y :
       _root_.DerivedCategory.Plus.ι.obj K :=
     ((r)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusCompatibility.app _) ≪≫
       (rightDerivedFunctorLowerStarIsoMapDerivedCategory _ r).app _ ≪≫
-      ((Functor.mapDerivedCategoryCompIso ((r)^*[ModuleCat.{u + 1} Λ])).symm
-        ((r)_*[ModuleCat.{u + 1} Λ])).symm.app _ ≪≫
+      (Functor.mapDerivedCategoryCompIso ((r)^*[ModuleCat.{u + 1} Λ])
+        ((r)_*[ModuleCat.{u + 1} Λ])).app _ ≪≫
       (Functor.mapDerivedCategoryNatIso
         (asIso (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) r).unit).symm).app _ ≪≫
       (Functor.mapDerivedCategoryIdIso _).app _

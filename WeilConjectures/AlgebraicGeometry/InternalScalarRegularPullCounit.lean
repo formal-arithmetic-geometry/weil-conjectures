@@ -126,6 +126,7 @@ private theorem restriction_pull_single (a : Λ ⟶ Λ') [IsMonHom a]
   erw [← Functor.mapDerivedCategoryCompIso_hom_app_singleFunctor
     (V₀ a Y) (CondensedRing.upperStar Λ f) M]
   simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
+  rfl
 
 omit [IsCommMonObj Λ] in
 private theorem regular_restriction_iso (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u}) :

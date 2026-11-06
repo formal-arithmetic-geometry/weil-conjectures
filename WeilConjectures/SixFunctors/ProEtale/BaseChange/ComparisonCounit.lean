@@ -84,13 +84,13 @@ private theorem comparison_iso_restrict (σ : a ⋙ p ≅ l ⋙ b)
     (Z : DerivedCategory.Plus C) :
     let θ := (Functor.mapDerivedCategoryPlusCompIso a p).symm ≪≫
       Functor.mapDerivedCategoryPlusNatIso σ ≪≫ Functor.mapDerivedCategoryPlusCompIso l b
-    let θD := (Functor.mapDerivedCategoryCompIso a p).symm ≪≫
+    let θD := Functor.mapDerivedCategoryCompIso a p ≪≫
       Functor.mapDerivedCategoryNatIso σ ≪≫ (Functor.mapDerivedCategoryCompIso l b).symm
     DerivedCategory.Plus.ι.map (θ.inv.app Z) = θD.inv.app Z.obj := by
   dsimp only
   have hc : DerivedCategory.Plus.ι.mapIso
       ((Functor.mapDerivedCategoryPlusCompIso l b).app Z) =
-      (Functor.mapDerivedCategoryCompIso l b).app Z.obj :=
+      (Functor.mapDerivedCategoryCompIso l b).symm.app Z.obj :=
     Iso.ext (Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app _ _ Z)
   have hn : DerivedCategory.Plus.ι.mapIso
       ((Functor.mapDerivedCategoryPlusNatIso σ).app Z) =
@@ -99,7 +99,7 @@ private theorem comparison_iso_restrict (σ : a ⋙ p ≅ l ⋙ b)
   simp only [Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app, Functor.map_comp]
   rw [show DerivedCategory.Plus.ι.map
       ((Functor.mapDerivedCategoryPlusCompIso l b).inv.app Z) =
-      (Functor.mapDerivedCategoryCompIso l b).inv.app Z.obj from congrArg Iso.inv hc]
+      (Functor.mapDerivedCategoryCompIso l b).hom.app Z.obj from congrArg Iso.inv hc]
   rw [show DerivedCategory.Plus.ι.map
       ((Functor.mapDerivedCategoryPlusNatIso σ).inv.app Z) =
       (Functor.mapDerivedCategoryNatIso σ).inv.app Z.obj from congrArg Iso.inv hn]
@@ -204,7 +204,7 @@ theorem comparison_counit {U V : Scheme.{u}} (f : U ⟶ V)
         (Etale.upperStar (ModuleCat.{u + 1} Λ) g).mapDerivedCategoryPlusCompatibility
         D(ν^*(U)[ModuleCat.{u + 1} Λ]) ≪≫
       Functor.isoWhiskerLeft DerivedCategory.Plus.ι
-        ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+        (Functor.mapDerivedCategoryCompIso _ _ ≪≫
           Functor.mapDerivedCategoryNatIso
             (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) g).symm ≪≫
           (Functor.mapDerivedCategoryCompIso _ _).symm) ≪≫

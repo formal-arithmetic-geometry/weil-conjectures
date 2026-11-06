@@ -61,7 +61,7 @@ lemma rightDerivedFunctorCompIso'_refinementLowerStarComp_hom :
           (mapDerivedUpperStarLowerStarAdjunction A r.hom))
         (mapDerivedUpperStarLowerStarAdjunction A c.g)
         (Functor.mapDerivedCategoryNatIso (Etale.upperStarComp A r.hom d.g c.g r.hom_g.symm) ≪≫
-          Functor.mapDerivedCategoryCompIso _ _).hom :=
+          (Functor.mapDerivedCategoryCompIso _ _).symm).hom :=
   Adjunction.rightDerivedFunctorCompIso'_hom_eq_conjugateEquiv
     (Etale.upperStarLowerStarAdjunction A r.hom) (Etale.upperStarLowerStarAdjunction A d.g)
     (Etale.upperStarLowerStarAdjunction A c.g) _ _ (by
