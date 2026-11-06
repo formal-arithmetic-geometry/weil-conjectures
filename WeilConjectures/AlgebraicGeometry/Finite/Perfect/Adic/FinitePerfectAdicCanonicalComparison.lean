@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicCoefficientLimit
 public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicQuotientDiagram
-public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicFlatTensorComparison
+import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicFlatTensorComparison
 import Mathlib.RingTheory.Finiteness.Projective
 
 /-! # The canonical quotient diagram as an explicit coefficient complex
@@ -24,7 +24,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectAdicAlgebraDerived
 attribute [local instance] finitePerfectModelsAbLocallyBijective
-attribute [local instance] finitePerfectAdicFlatTensorCategory
 
 local instance finitePerfectAdicCanonicalComparisonCategory
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A) :
