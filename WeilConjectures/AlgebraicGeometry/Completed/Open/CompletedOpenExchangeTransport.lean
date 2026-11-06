@@ -772,12 +772,10 @@ theorem completedOpenExchangeComparison [QuasiCompact j]
   · have hpull {V W : Scheme.{t}} (f : V ⟶ W) (M : d.derived W)
         (hm : cbcCompleteProperty d W r a ha M) :
         cbcCompleteProperty d V r a ha ((d.completedPull f).obj M) := by
-      letI := reductionModulesHasDerivedCategory V (d.completedRing V)
       let N := (d.completedPull f).obj M
       let C := DerivedCategory.Q.objPreimage N
       let eN : DerivedCategory.Q.obj C ≅ N := DerivedCategory.Q.objObjPreimageIso N
-      let e : DerivedCategory.Q.obj C ≅ completedPullbackObject f d M :=
-        eN ≪≫ ((cbcDatumCompletedTransport d f).app M).symm
+      let e := eN ≪≫ ((cbcDatumCompletedTransport d f).app M).symm
       have hc := (completedPullback_reduction f d r a ha M
         (DerivedCategory.Q.objPreimage M) (DerivedCategory.Q.objObjPreimageIso M) hm).1 C e
       change IsIso (e.inv ≫ DerivedCategory.Q.map
