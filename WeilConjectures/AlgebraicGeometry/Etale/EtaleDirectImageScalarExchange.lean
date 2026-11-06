@@ -103,11 +103,11 @@ private theorem coefficientPullback_square
   have hg := coefficientPullback_comp φ g f' (h ≫ f) sq.w.symm N
   let ch (R : Type (u + 1)) [CommRing R] :=
     Functor.mapDerivedCategoryNatIso (upperStarComp (ModuleCat.{u + 1} R) h f) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
   let cg (R : Type (u + 1)) [CommRing R] :=
     Functor.mapDerivedCategoryNatIso
         (upperStarComp (ModuleCat.{u + 1} R) f' g (h ≫ f) sq.w) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
   have hs (R : Type (u + 1)) [CommRing R] :
       (exactDerivedSquareUpperStarIso (ModuleCat.{u + 1} R) sq).hom =
         (cg R).inv ≫ (ch R).hom := by

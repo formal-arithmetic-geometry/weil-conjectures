@@ -124,7 +124,7 @@ theorem scalarPullback_compactification
     (eB g) (eB j) (eB f)
     (scalarPullbackIso φ g) (scalarPullbackIso φ j) (scalarPullbackIso φ f)
     cA cB K (by
-      simpa only [eA, eB, cA, cB, Iso.trans_hom, NatTrans.comp_app,
+      simpa only [eA, eB, cA, cB, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
         Functor.map_comp, Category.assoc] using h)
   have hf : (leftDerivedUpperStarComp (ModuleCat.{u + 1} B) j g f c.comm).hom.app
         ((scalarExtension φ Y).obj K) ≫
