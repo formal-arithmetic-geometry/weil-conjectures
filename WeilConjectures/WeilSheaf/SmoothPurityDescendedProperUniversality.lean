@@ -78,9 +78,9 @@ theorem geometricFiberWeilDirectTrace_universal
   exact Functor.bijective_map_comp_of_trace_coordinates
     (lowerStar Λ (Scheme.Hom.geometricFiberMap f h)).rightDerivedFunctor
     ((Functor.mapDerivedCategoryCompIso (geometricFiberWeilLowerStar Λ s)
-      (Endofunctor.IsoAlgebra.forget _)).symm.app P)
+      (Endofunctor.IsoAlgebra.forget _)).app P)
     ((Functor.mapDerivedCategoryCompIso (geometricFiberWeilLowerStar Λ t)
-      (Endofunctor.IsoAlgebra.forget _)).app N)
+      (Endofunctor.IsoAlgebra.forget _)).symm.app N)
     ((rightDerivedLowerStarBaseChangeIso Λ
       (Scheme.Hom.isPullback_geometricFiberMap f h).flip).inv.app P)
     ((upperStar Λ t.geometricFiberProj).mapDerivedCategory.map ε) _
