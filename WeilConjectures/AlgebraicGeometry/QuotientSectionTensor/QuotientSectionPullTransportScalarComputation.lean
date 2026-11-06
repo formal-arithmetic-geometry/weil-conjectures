@@ -6,6 +6,10 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionTensorData
+public import Mathlib.Algebra.Homology.Localization
+public import Mathlib.Logic.Small.Defs
+import all Mathlib.Algebra.Homology.Localization
+import all Mathlib.Logic.Small.Defs
 import WeilConjectures.SixFunctors.Supporting.ModCondensedCachedInstances
 
 /-! # Scalar computation for normalized section transport
@@ -40,12 +44,12 @@ namespace AlgebraicGeometry.ProEtale.QuotientSectionTensor
 
 open QuotientChange IntegralQuotient
 
+attribute [local instance] ModuleRingedComparison.sectionFunctorAdditive
+
 attribute [local semireducible] QuotientChange.L
 attribute [local implicit_reducible] QuotientChange.L
   InternalAbelianSheafModule.sectionRingSheaf
   DerivedCategory.Q DerivedCategory.Qh
-  HomologicalComplexUpToQuasiIso.Qh HomotopyCategory.quotient
-  CategoryTheory.Functor.mapHomologicalComplex CategoryTheory.Functor.mapHomotopyCategory
   CategoryTheory.catToReflQuiver
   GrothendieckTopology.monoidalCategory_sheaf_of_essentiallySmall
   GrothendieckTopology.braidedCategory_sheaf_of_essentiallySmall

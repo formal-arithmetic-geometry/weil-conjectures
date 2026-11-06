@@ -188,6 +188,6 @@ theorem scalar_section_derived_comparison_exists (T : Scheme.{u})
     Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerLeft_hom,
     Functor.isoWhiskerRight_hom, Functor.map_comp, Category.id_comp, Functor.comp_obj,
     sectionLocalizationComparison, Iso.app_hom, hc, Category.assoc] at h ⊢
-  exact h.trans (four_comp_id _ _ _ _)
+  simpa only [Category.id_comp] using h.trans (four_comp_id _ _ _ _)
 
 end AlgebraicGeometry.ProEtale.QuotientSectionTensor

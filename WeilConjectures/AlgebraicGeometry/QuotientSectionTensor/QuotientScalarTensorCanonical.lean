@@ -6,6 +6,12 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionTensorData
+public import Mathlib.Algebra.Homology.Localization
+public import Mathlib.CategoryTheory.Limits.HasLimits
+public import Mathlib.Logic.Small.Defs
+import all Mathlib.Algebra.Homology.Localization
+import all Mathlib.CategoryTheory.Limits.HasLimits
+import all Mathlib.Logic.Small.Defs
 import WeilConjectures.AlgebraicGeometry.IntegralResidueDerivedMonoidal
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MonoidalStructure
 
