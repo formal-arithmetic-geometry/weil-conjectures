@@ -254,7 +254,10 @@ def integralResidueFiniteModel
     (((SheafOfModules.restrictScalars e.inv).mapHomologicalComplex (.up ℤ)).obj
       (DerivedCategory.Q.objPreimage M))
 
-attribute [local instance] HasDerivedCategory.standard
+private local instance integralResidueFiniteCategory (T : Scheme.{u})
+    (R : Sheaf (ProEt.topology T) RingCat.{u + 1})
+    [HasDerivedCategory.{u + 2} (SheafOfModules.{u + 1} R)] :
+    Category.{u + 2} (DerivedCategory (SheafOfModules.{u + 1} R)) := inferInstance
 
 /-- Reduction commutes with the normalized integral coefficient comparison and inverse image.
 There is no completeness, perfectness or covering hypothesis.
