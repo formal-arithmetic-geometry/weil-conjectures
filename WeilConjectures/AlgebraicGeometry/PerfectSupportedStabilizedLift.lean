@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # The finite stabilization construction for supported map lifting
 
