@@ -301,3 +301,7 @@
 - Reduction's two importers were attempted and skipped for foreign blockers;
   see /home/ubuntu/u9/bz/FIXES-PZ030.md and PZ030-downstream-blockers.txt.
 - No local Lean/Lake, proof placeholders, trust bypasses, or limit increases.
+
+- Both assigned modules GREEN at 0795abb04e0e176630129fbd17347398d825ca02: rc=0, built=2, failed=0.
+- Log: /home/ubuntu/u9/bz/BUILD-PZ030-assigned-green.log.
+- Continuing with direct importer DerivedScalarMateData.
