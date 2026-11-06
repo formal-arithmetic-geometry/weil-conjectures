@@ -100,7 +100,7 @@ lemma isAlgClosed_residueField (hz : z ∉ Set.range j.base) : IsAlgClosed c.ide
   have := Scheme.isAlgClosed_residueField_of_isClosed p z
     (BoundaryChart.isClosed_singleton (p := p) (j := j) (z := z) hz)
   let e₁ : Γ(C, c.W) ⧸ c.ideal ≃+* C.residueField z :=
-    IsLocalization.AtPrime.equivQuotMaximalIdeal c.ideal (C.presheaf.stalk z)
+    (IsLocalization.AtPrime.equivQuotMaximalIdeal c.ideal (C.presheaf.stalk z)).toRingEquiv
   let e₀ : Γ(C, c.W) ⧸ c.ideal ≃+* c.ideal.ResidueField :=
     RingEquiv.ofBijective _ (Ideal.bijective_algebraMap_quotient_residueField c.ideal)
   exact IsAlgClosed.of_ringEquiv _ _ (e₁.symm.trans e₀)
