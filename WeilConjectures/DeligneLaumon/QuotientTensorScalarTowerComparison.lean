@@ -175,7 +175,6 @@ private theorem unitor_inv_pure
       ← comp_val, Iso.hom_inv_id, id_val, PresheafOfModules.id_app,
       ModuleCat.id_apply] using hh.symm : _)
   convert hh' using 1
-  rfl
 end SheafOfModules
 
 universe t u
