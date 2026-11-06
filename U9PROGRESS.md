@@ -256,56 +256,23 @@
 - The assigned CoefficientConstantTowerRoos source is unchanged.
 - Next: remote ucheck-bump on the assigned module, then both direct importers.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
-# BZ824 in progress
 
-- Branch: u9/BZ824; starting commit 95c8987257f.
-- The user instructed continuation after the upstream-restoration proposal.
-- Restored four prerequisite modules. The comparison predicate uses verified PZ003
-  Localization imports and a reflexive cast; the transport proof is unchanged,
-  and target automorphism specializes the existing arbitrary-degree theorem to zero.
-- All six submitted modules passed ucheck-bump at 826d8e1a1fb: rc=0, failed=0, 4065 jobs.
-- Green: DerivedModuleBaseChangeMap, DerivedModulePullbackComparison,
-  ModulePullbackComparisonIsoTransport, ModulePullbackComparisonTargetAutomorphism,
-  CanonicalModuleBaseChangeIsoComparisonCompat, CanonicalModuleBaseChangeIsoComparison.
-- All restored declaration headers and original assigned/caller sources are unchanged.
-- Full log: /home/ubuntu/u9/bz/BUILD-BZ824-restored-full.log.
-- Next: build layer-two importer CanonicalModuleBaseChangeAffineChartComparison.
-- Notes: /home/ubuntu/u9/bz/FIXES-BZ824.md. No local Lean/Lake or proof shortcuts.
+# BZ877 complete
 
-# BZ856 in progress
-
-- Branch: `u9/BZ856`; original start: `2ab2b07a3`.
-- Reread the brief and prior notes on continuation; no new LEAD lines were present.
-- User instructed continuation after the explicit five-upstream-module restoration proposal.
-  The six deleted prerequisites are restored from the reviewed draft, retaining later
-  repairs to surviving helpers. They now need remote Lean 4.35 validation and porting.
-- Merged integrated bump branch `db406319f` before restoring the prerequisites.
-- Assigned theorem remains intact: it has live callers and cannot be pruned.
-- Next: ucheck-bump assigned module, repair prerequisite errors, then downstream targets.
-- No local Lean/Lake execution; no proof placeholders, trust bypasses, or heartbeat raises.
-
-# BZ872 complete
-
-- Branch: `u9/BZ872`; original baseline: `e167a50a4`.
-- Assigned module: `WeilConjectures.AlgebraicGeometry.SingleComplexOpenOrdinaryComparison`.
-- Standalone `ucheck-bump`: rc=0, failed=0, 4041 jobs on poolb:43.135.211.170.
-  The leaf rebuilt in 33 seconds at source commit `ca4ebdd2771a9b683bba92e99ac892d9e18c892d`.
-- The user instructed continuation after the exact reflexive-cast proposal. Applied
-  that statement cast and the proof's `cast_eq` normalization. The only other leaf
-  changes are the Localization imports; binders, assumptions, other statements,
-  docstrings, and existing heartbeat settings are unchanged.
-- Required prerequisites reuse BZ856's validated restoration and measured historical
-  heartbeat limits; no independent upstream proof changes were introduced.
-- Direct importer `SingleComplexOpenTermwiseComparison` was checked after leaf success
-  at `3df1d5be63e95e3a4e7ec837f581574914ddb59e`. The leaf passed again in 32 seconds.
-  The batch failed only in the unowned BZ871 `SingleComplexOpenTermwiseCounitCompatibility`
-  at line 76: `Type mismatch`. Skipped this path under the brief's ownership rule.
-- The next layer, `SingleComplexOpenCoordinateStalkTransportData`, inherits that blocker.
-  One extra module attempted; no further unblocked importer remains.
-- Logs: `/home/ubuntu/u9/bz/BUILD-BZ872-cast-unit-full.log` and
-  `/home/ubuntu/u9/bz/BUILD-BZ872-downstream-after-green-full.log`.
-- Fixes: `/home/ubuntu/u9/bz/FIXES-BZ872.md`; contract audit:
-  `/home/ubuntu/u9/bz/BZ872-contract-audit.txt`.
-- No declarations deleted; no local Lean/Lake, proof placeholders, trust bypasses,
-  profiler probes, or unmeasured heartbeat increases.
-- This completion commit changes only progress documentation after validation.
+- Branch: `u9/BZ877`; baseline: `e167a50a4`.
+- Final combined `ucheck-bump` passed at `a7d71ec05f3522bb3d7875ddd3704d1e29de76de`: rc=0, failed=0, 4012 jobs.
+- Final targets: DerivedPullbackTensorUnit, CanonicalPullbackTensorMonoidalRealization, OpenRestrictionDerivedMonoidal, and TensorStalkChainCoordinates. Their closure covers all seven edited Lean files.
+- Toolchain: Lean v4.35.0-rc3; Mathlib b63f6e8a68d220e3b3bc4f3792bb53650d375f24.
+- Root plus 30 extra downstream modules checked: 23 green, 8 blocked by unowned prerequisites; the downstream cap is reached.
+- Seven targets are blocked by CanonicalTensorHomUncurryChainNaturality.lean:134:6: Type mismatch.
+- TensorStalkFixedMapSquare is blocked by missing comparisonIntoPullback/comparisonIntoPullback_naturality, pruned from the unowned StalkComparisonPullbackNaturality by 2353019b4.
+- The user instructed continuation after the reviewed reflexive-cast proposal; the same Qh endpoint repair is applied downstream. Casts and explicit category annotations preserve the original morphisms.
+- Other repairs: public/implementation Localization imports, the new compositor direction, and explicit cast/asIso normalization in proofs.
+- All 18 ordered replay rules exactly reproduce the seven edited Lean files. Existing docstrings are preserved; referenced declarations were retained despite their prune-list classification.
+- No local Lean/Lake, proof placeholders, trust bypasses, declarations deleted, or heartbeat changes.
+- Final log: `/home/ubuntu/u9/bz/BUILD-BZ877-final-green-full.log`.
+- Full module/evidence inventory: `/home/ubuntu/u9/bz/BZ877-build-status.json`.
+- Fix records and audit: `/home/ubuntu/u9/bz/FIXES-BZ877.md`, `BZ877-fix-records.json`, and `BZ877-contract-audit.txt`.
+- Completion marker: `/home/ubuntu/u9/state/BZ877.DONE` lists green modules, blockers, cap-deferred modules, and every PATTERN/ERROR/RULE triple.
+- Earlier interrupted broad runs are used only as evidence of individual completed targets; the final combined run completed successfully.
+- This completion commit changes only progress documentation; Lean source matches the final green build.
