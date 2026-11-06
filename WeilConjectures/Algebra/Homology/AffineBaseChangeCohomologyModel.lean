@@ -74,26 +74,20 @@ private theorem affine_stalkComparison_normalized
     simp only [cast_eq] at hrep
     rw [← hrep]
     erw [IsIso.inv_hom_id_assoc]
-  letI : HasDerivedCategory.{w} X'.Modules :=
+  let : HasDerivedCategory.{w} X'.Modules :=
     inferInstanceAs (HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X'.toRingedSpace)))
   have htransport :
       (DerivedCategory.quotientCompQhIso.{w} _).inv.app T ≫
-        (DerivedCategory.Qh.{w}
-          (C := SheafOfModules.{u} (moduleRings X'.toRingedSpace))).map
-          (((Scheme.Modules.tensorPullback g').mapHomotopyCategoryFactors (.up ℤ)).inv.app c.P) ≫
         inv ((SingleComplexBaseChange.counit g').app
           ((HomotopyCategory.quotient _ (.up ℤ)).obj c.P)) ≫
-        (derivedPullback g').map ((DerivedCategory.quotientCompQhIso _).hom.app c.P) ≫
-        (derivedPullback g').map c.e.hom =
+        (derivedPullback g').map ((DerivedCategory.quotientCompQhIso _).hom.app c.P ≫ c.e.hom) =
       inv ((SingleComplexBaseChange.counit g').app
         ((HomotopyCategory.quotient _ (.up ℤ)).obj c.P)) ≫
         (derivedPullback g').map c.e.hom := by
     simp only [DerivedCategory.quotientCompQhIso,
       HomologicalComplexUpToQuasiIso.quotientCompQhIso,
-      Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_hom, Quotient.lift.isLift_inv]
-    erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id]
+      Quotient.lift.isLift_hom, Quotient.lift.isLift_inv]
     repeat erw [Category.id_comp]
-    all_goals rfl
   dsimp only [affineBaseChangeIntoPullback]
   erw [htransport]
   simp only [SingleComplexBaseChange.stalkComparison, Category.assoc, Functor.map_comp]

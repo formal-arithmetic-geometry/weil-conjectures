@@ -47,6 +47,10 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   (R : Sheaf J CommRingCat.{max c v r})
   [HasDerivedCategory.{w} (Modules.{c, v, r} J R)]
 
+-- The bounded-coproduct predicates need termwise colimits of complexes; prefer that
+-- instance so the search does not time out through the cocompleteness instances.
+attribute [local instance high] HomologicalComplex.instHasColimitsOfShape
+
 /-- The property P of the node: continuity for all uniformly cohomologically bounded-below
 discrete complex diagrams, and a uniform lower-bound offset for the target variable.
 Source: Stacks 08JC and the bounded-target closure extraction in the node

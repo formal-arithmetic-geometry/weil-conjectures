@@ -467,6 +467,12 @@ private theorem kFlatShift (K : CochainComplex (SheafOfModules.{z}
   let (M : A) : ((MonoidalCategory.curriedTensor A).obj M).Additive := by
     change (MonoidalCategory.tensorLeft M).Additive
     exact SheafOfModules.tensorLeft_additive_independent R M
+  -- Supply the discrete colimits directly: unguided instance search times out here.
+  have (I : Type) : HasColimitsOfShape (Discrete I) A :=
+    have : HasColimitsOfShape (Discrete I) (PresheafOfModules.{z}
+        ((sheafCompose J (forget₂ CommRingCat.{z} RingCat.{z})).obj R).obj) :=
+      PresheafOfModules.hasColimitsOfShape _ _
+    SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
   intro F hF
   exact tensorAcyclicShift (MonoidalCategory.curriedTensor A) F K (h F hF) r
 end Generic

@@ -353,7 +353,6 @@ private theorem sfConeDecomposition (T : Scheme.{u}) (k : Type v) [Field k]
     apply HomologicalComplex.from_single_hom_ext
     simp [i, p, sfSplitCell, sfTopProjection,
       HomologicalComplex.mkHomFromSingle_f, HomologicalComplex.mkHomToSingle_f]
-    rfl
   have hjr : j ≫ r = 𝟙 _ := by
     apply HomologicalComplex.hom_ext
     intro q

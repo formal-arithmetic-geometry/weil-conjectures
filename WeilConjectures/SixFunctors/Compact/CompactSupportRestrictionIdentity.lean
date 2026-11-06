@@ -10,6 +10,7 @@ import WeilConjectures.SmoothPurity.Compact.CompactSupportScalarDirectNormalizat
 import all WeilConjectures.AlgebraicGeometry.ProEtale.Open.ProEtaleOpenScalarRestrictionCoherence
 import all WeilConjectures.AlgebraicGeometry.ProEtale.Open.ProEtaleOpenScalarRestrictionData
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # Identity normalization of the compact-support restriction comparison
 

@@ -70,9 +70,9 @@ theorem exists_rhom_hom_derived_roof
         let e : (DerivedCategory.Plus.Q (C := C)).obj K ≅
             (DerivedCategory.Plus.Q (C := C)).obj I :=
           (DerivedCategory.Plus.ι (C := C)).preimageIso
-            ((DerivedCategory.quotientCompQhIso C).symm.app K.obj ≪≫
+            ((DerivedCategory.Plus.QCompιIso C).app K ≪≫
               asIso (DerivedCategory.Q.map r.map) ≪≫
-              (DerivedCategory.quotientCompQhIso C).app r.complex)
+              (DerivedCategory.Plus.QCompιIso C).symm.app I)
         let J := V.rightDerivedComplexWithResolution K r
         let a := J.homologyπ n ((J.sc n).abCyclesIso.inv
           ⟨f, by
@@ -81,14 +81,14 @@ theorem exists_rhom_hom_derived_roof
             exact hf⟩)
         let b := (DerivedCategory.Plus.homologyFunctorObjQIso
           (V.mapCochainComplexPlus.obj I) n).inv a
-        let η := V.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient C).obj I)
+        let η := V.rightDerivedFunctorPlusUnit.app I
         ψ ((DerivedCategory.Plus.Q (C := C)).obj K) n
             ((H n).map (RV.map e.inv)
               ((H n).map η b)) =
           ShiftedHom.map (Cocycle.equivHomShift.symm
               (Cocycle.fromSingleMk f (zero_add n) (n + 1) rfl hf)) DerivedCategory.Q ≫
             (CategoryTheory.inv (DerivedCategory.Q.map r.map))⟦n⟧' ≫
-            ((DerivedCategory.quotientCompQhIso C).hom.app K.obj)⟦n⟧') := by
+            ((DerivedCategory.Plus.QCompιIso C).inv.app K)⟦n⟧') := by
   classical
   dsimp only
   let V := preadditiveCoyoneda.obj (op M)
@@ -129,22 +129,22 @@ theorem exists_rhom_hom_derived_roof
     let e : (DerivedCategory.Plus.Q (C := C)).obj K ≅
         (DerivedCategory.Plus.Q (C := C)).obj I :=
       (DerivedCategory.Plus.ι (C := C)).preimageIso
-        ((DerivedCategory.quotientCompQhIso C).symm.app K.obj ≪≫
+        ((DerivedCategory.Plus.QCompιIso C).app K ≪≫
           asIso (DerivedCategory.Q.map r.map) ≪≫
-          (DerivedCategory.quotientCompQhIso C).app r.complex)
+          (DerivedCategory.Plus.QCompιIso C).symm.app I)
     change τ _ n ((H n).map (RV.map e.inv) _) = _
     rw [hnat]
     erw [hnorm I hi n f hf]
     have he : (DerivedCategory.Plus.ι (C := C)).map e.inv =
-        (DerivedCategory.quotientCompQhIso C).inv.app r.complex ≫
+        (DerivedCategory.Plus.QCompιIso C).hom.app I ≫
           CategoryTheory.inv (DerivedCategory.Q.map r.map) ≫
-          (DerivedCategory.quotientCompQhIso C).hom.app K.obj := by
+          (DerivedCategory.Plus.QCompιIso C).inv.app K := by
       change (DerivedCategory.Plus.ι (C := C)).map
         ((DerivedCategory.Plus.ι (C := C)).preimage _) = _
       rw [Functor.map_preimage]
       simp only [Iso.trans_inv, Iso.app_inv, Iso.symm_inv, asIso_inv, Category.assoc]
     rw [he]
     simp only [Functor.map_comp, Category.assoc]
-    simp only [I, ← Functor.map_comp_assoc, Iso.hom_inv_id_app_assoc]
+    simp only [I, ← Functor.map_comp_assoc, Iso.inv_hom_id_app_assoc]
 
 end CategoryTheory.Functor

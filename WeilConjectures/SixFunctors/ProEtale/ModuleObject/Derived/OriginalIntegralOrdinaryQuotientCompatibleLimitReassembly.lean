@@ -94,6 +94,8 @@ private theorem lift_sectionwise
   ext U x
   exact hg U x n
 
+-- The high-priority `u + 1` sheafification instance gets stuck on these universe levels.
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 -- Represent sections by a sheafified free Yoneda module, with the site universes retained.
 private theorem sections_of_hom_lifts
     {C : Type v} [Category.{w} C] {J : GrothendieckTopology C}
