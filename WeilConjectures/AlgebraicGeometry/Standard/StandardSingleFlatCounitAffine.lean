@@ -261,7 +261,8 @@ private theorem affine_single_counit_comparison
     simp only [cast_eq, Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app,
       CategoryTheory.Functor.map_id, Category.comp_id, εp, SingleComplexBaseChange.counit,
       D, C, σ, P, HomotopyCategory.singleFunctor, HomotopyCategory.singleFunctors,
-      SingleFunctors.postcomp, Functor.comp_obj, Functor.mapIso_hom, NatIso.app_hom]
+      CochainComplex.singleFunctor, CochainComplex.singleFunctors, SingleFunctors.postcomp,
+      Functor.comp_obj, Functor.mapIso_hom, Iso.app_hom]
   have hc := derivedBaseChange_unit_compatibility.{u, u + 1} f f' g p pullback.condition D
   let εg := SingleComplexBaseChange.counit g
   have heq : (derivedPullback.{u, u + 1} g).map e.inv ≫ standardSingleBaseChangeMap f N g =
