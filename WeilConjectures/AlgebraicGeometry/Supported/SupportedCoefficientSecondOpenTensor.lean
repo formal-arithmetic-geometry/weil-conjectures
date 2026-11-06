@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Supported.SupportedCoefficientOpenTensor
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.Supported.SupportedCoefficientOpenMateQuotient
 import WeilConjectures.AlgebraicGeometry.Supported.SupportedTensorComplexSquare
 import WeilConjectures.CategoryTheory.Derived.DerivedExactMateSupplement
@@ -531,7 +533,7 @@ private theorem exactSquare
     have : IsIso (Functor.LaxMonoidal.μ DerivedCategory.Q
         ((H.mapHomologicalComplex (.up ℤ)).obj ((F₁.mapHomologicalComplex (.up ℤ)).obj P))
         ((H.mapHomologicalComplex (.up ℤ)).obj ((F₂.mapHomologicalComplex (.up ℤ)).obj R))) := by
-      rw [μQ_eq]
+      rw [μQ_eq (C := E)]
       exact DerivedMonoidal.isIso_counit_app_app_of_kFlat_right DerivedCategory.Qh
         (HomotopyCategory.quasiIso E (.up ℤ)) _ _
         ((HomotopyCategory.kFlat_quotient_obj_iff _).2 hR)

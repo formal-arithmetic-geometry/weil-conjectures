@@ -278,7 +278,7 @@ private theorem pullback_square
     (Functor.whiskerLeft P α ≫ (Functor.associator P Q G').inv ≫
             Functor.whiskerRight ε.hom G' ≫ (Functor.associator R S G').hom) (𝟙 (S ⋙ G'))
     (Functor.whiskerLeft P α ≫ (Functor.associator P Q G').inv) (by ext; simp) M
-  simp only [Iso.trans_hom, NatTrans.comp_app, mapDerived_refl, Category.id_comp,
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, mapDerived_refl, Category.id_comp,
     hP, hS] at h₁ h₂
   have h₁' := congrArg (fun t ↦ t ≫
     G'.rightDerivedFunctor.map ((Functor.mapDerivedCategoryCompIso P Q).hom.app M)) h₁
@@ -314,7 +314,7 @@ private theorem cut_derived_square (A : Type (u + 1)) [CommRing A]
       supportExactPullbackCompIso (ModuleCat.{u + 1} A) c'.openComplement.ι h
         (c'.openComplement.ι ≫ h) rfl).hom.app K := by
   simp only [support_cut_square, squareUpperStarIso, supportExactPullbackCompIso,
-    Iso.trans_hom, Iso.symm_hom, Iso.trans_inv, NatTrans.comp_app]
+    Iso.trans_hom, Iso.symm_hom, Iso.symm_inv, Iso.trans_inv, NatTrans.comp_app]
   rw [mapDerived_nat_comp, mapDerived_nat_inv]
   simp only [NatTrans.comp_app, Category.assoc]
 
