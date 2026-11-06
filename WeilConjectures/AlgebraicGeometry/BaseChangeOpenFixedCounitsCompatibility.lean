@@ -5,6 +5,9 @@ Authors: Bin Wu
 -/
 
 module
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
+
 public import WeilConjectures.AlgebraicGeometry.DerivedModuleBaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 import WeilConjectures.AlgebraicGeometry.OpenPinnedSingleDegreeSquare
