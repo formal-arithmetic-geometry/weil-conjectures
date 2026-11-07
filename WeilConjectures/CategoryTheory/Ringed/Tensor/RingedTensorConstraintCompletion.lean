@@ -35,6 +35,8 @@ import WeilConjectures.Algebra.Homology.Ringed.RingedTensorComplexConstraintsSup
 import WeilConjectures.SecSmoothPurity.ModuleTensorGenerators
 import WeilConjectures.SecSmoothPurity.CochainCoefficientArrowsSupplement
 
+set_option linter.privateModule false
+
 /-! # Completion of tensor constraints specified on K-flat pairs
 
 Source: Stacks Project, Tag 0FPT

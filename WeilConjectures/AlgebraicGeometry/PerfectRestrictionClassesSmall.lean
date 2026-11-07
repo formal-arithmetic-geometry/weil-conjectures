@@ -12,6 +12,8 @@ import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionQCoh
 import WeilConjectures.AlgebraicGeometry.DerivedPullbackPerfect
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 
+set_option linter.privateModule false
+
 /-! # Small classes of restrictions of perfect objects
 
 Source: Step 2 of lem-pc-perfect-complexes-compact-set; Stacks Project, Tag 08DR

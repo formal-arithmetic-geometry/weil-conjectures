@@ -376,6 +376,8 @@ import WeilConjectures.AlgebraicGeometry.CondensedFiniteCoefficientLocalization
 import WeilConjectures.AlgebraicGeometry.CondensedConstructibleOpenClosedImages
 import WeilConjectures.AlgebraicGeometry.CondensedStratumModelInductionStepEmpty
 
+set_option linter.privateModule false
+
 /-! # Algebraic-closure restriction is ind-constructible -/
 
 @[expose] public section

@@ -11,6 +11,8 @@ import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.OpenRestrictedTensorComplexIso
 public import WeilConjectures.AlgebraicGeometry.OpenRestrictedComparisonComposition
 import all WeilConjectures.AlgebraicGeometry.OpenRestrictedCounitFactorizationAux
+
+set_option linter.privateModule false
 @[expose] public section
 set_option autoImplicit false
 universe u w

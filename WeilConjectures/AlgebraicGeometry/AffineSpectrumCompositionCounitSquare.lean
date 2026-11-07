@@ -13,6 +13,8 @@ public import WeilConjectures.AlgebraicGeometry.AffineSpectrumDerivedCoordinates
 public import WeilConjectures.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 
+set_option linter.privateModule false
+
 /-! # Counit square for affine spectrum pullback composition
 
 Source: Stacks Project, Tag 0D5S.

@@ -12,6 +12,8 @@ import WeilConjectures.AlgebraicGeometry.PerfectGluingEndpointsSmall
 import WeilConjectures.AlgebraicGeometry.PerfectGluingTrianglePresentation
 public import Mathlib.AlgebraicGeometry.AffineScheme
 
+set_option linter.privateModule false
+
 @[expose] public section
 
 universe u w

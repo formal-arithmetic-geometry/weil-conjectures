@@ -27,6 +27,8 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarCoproducts
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftComplete
 
+set_option linter.privateModule false
+
 /-! The integral constructible proper heart estimate. -/
 
 @[expose] public noncomputable section

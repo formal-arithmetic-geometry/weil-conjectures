@@ -14,6 +14,8 @@ public import WeilConjectures.AlgebraicGeometry.SingleComplexBaseChangeStalkCond
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 import all WeilConjectures.AlgebraicGeometry.AffineSpectrumCompositionCounitSquare
 
+set_option linter.privateModule false
+
 /-! # Chain-map transport for affine spectrum representatives
 
 Source: Stacks Project, Tags 0DJ8 and 0D5S.

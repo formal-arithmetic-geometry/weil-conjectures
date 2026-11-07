@@ -16,6 +16,8 @@ import WeilConjectures.AlgebraicGeometry.OpenImmersionTensorVanishingTest
 import all WeilConjectures.AlgebraicGeometry.TorAmplitudeOpenLocal
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
+set_option linter.privateModule false
+
 /-! # Tor bounds for an affine module model
 
 Source: Stacks Project, Tags 08CG, 08E9 and 08DX.

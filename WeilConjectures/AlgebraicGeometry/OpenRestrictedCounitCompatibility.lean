@@ -13,6 +13,8 @@ public import WeilConjectures.AlgebraicGeometry.OpenRestrictedTensorComplexIso
 public import WeilConjectures.AlgebraicGeometry.OpenRestrictedComparisonComposition
 import all WeilConjectures.AlgebraicGeometry.OpenRestrictedCounitFactorization
 
+set_option linter.privateModule false
+
 /-! # The counit equation for literal open restriction
 
 Source: Stacks Project, Tags 0D5S and 0D5U.
