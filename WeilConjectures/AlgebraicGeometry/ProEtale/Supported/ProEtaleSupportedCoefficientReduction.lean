@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.EtaleChartComparison.EtaleChartComparisonIsos
 public import WeilConjectures.AlgebraicGeometry.Finite.Tate.FiniteTateSiteDescent
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantModuleUnit
 public import WeilConjectures.AlgebraicGeometry.ProEtaleInverseImage
@@ -69,12 +70,6 @@ open scoped CategoryTheory.Functor ChangeOfRings
 namespace AlgebraicGeometry.Etale
 
 open Scheme
-
-/-- Cache the existing weak pro-etale sheafification separately from left exactness.
-Source: Stacks 00WX (blueprint: def-amb-proetale-supported-coefficient-reduction). -/
-instance cartierHasWeakSheafifyPro (A : Type (u + 1)) [CommRing A]
-    (T : Scheme.{u}) : HasWeakSheafify (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A) :=
-  inferInstance
 
 /-- Name the existing abelian structure to share its elaboration across Ext expressions.
 Source: Stacks 03D0 (blueprint: def-amb-proetale-supported-coefficient-reduction). -/

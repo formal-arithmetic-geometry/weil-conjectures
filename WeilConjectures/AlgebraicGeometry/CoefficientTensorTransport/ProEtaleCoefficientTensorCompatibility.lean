@@ -31,8 +31,6 @@ attribute [local irreducible] Functor.mapDerivedCategory
   proEtaleRingDerivedPullbackFactors CoefficientTensorChain.complexPullback
   pullback SheafOfModules.monoidalCategory
 
-set_option maxHeartbeats 800000 in
--- Converting exact-derived functor identities requires a larger elaboration budget.
 /-- The normalized coefficient tensor comparison, including its geometric compatibility.
 
 Source: Stacks Tags 03EL and 07A4. Construct the coefficient tensor comparison by

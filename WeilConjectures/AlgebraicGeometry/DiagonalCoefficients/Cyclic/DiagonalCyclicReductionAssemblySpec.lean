@@ -33,7 +33,7 @@ attribute [local instance 5000] cyclicSmallShiftedSingleHom
 
 attribute [local instance 4000] cyclicCoefficientHasExt
   AlgebraicGeometry.ProEtale.diagonalHasLimit
-  AlgebraicGeometry.ProEtale.diagonalConstantTowerLimits
+  AlgebraicGeometry.ProEtale.diagonalModLimits
 
 attribute [local irreducible] CategoryTheory.Abelian.Ext
   HasDerivedCategory.standard HomotopyCategory.singleFunctors

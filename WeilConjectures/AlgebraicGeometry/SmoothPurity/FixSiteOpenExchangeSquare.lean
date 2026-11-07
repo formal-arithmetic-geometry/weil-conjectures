@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.ChosenCartesianSquare
+public import WeilConjectures.AlgebraicGeometry.EtaleChartComparison.EtaleChartComparisonIsos
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import WeilConjectures.SixFunctors.BaseChange.Square
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
@@ -33,10 +34,6 @@ namespace AlgebraicGeometry.ProEtale
 
 local instance etaleFamily (Λ : Type (u + 1)) [CommRing Λ] :
     ∀ T : Scheme.{u}, HasWeakSheafify T.smallEtaleTopology (ModuleCat.{u + 1} Λ) :=
-  fun _T ↦ inferInstance
-
-local instance proetaleFamily (Λ : Type (u + 1)) [CommRing Λ] :
-    ∀ T : Scheme.{u}, HasWeakSheafify (Scheme.ProEt.topology T) (ModuleCat.{u + 1} Λ) :=
   fun _T ↦ inferInstance
 
 private theorem comparison_coefficient_pullback_eq

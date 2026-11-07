@@ -81,14 +81,14 @@ theorem ordinaryFiniteP1TraceCounit_baseChange
         (ordinaryFinitePushforward A (ProjectiveLine S' ↘ S')).map
           (ordinaryFiniteShiftedLinePullback A N hA t
             (ProjectiveSpace.map (ULift.{u} (Fin 2)) f)
-            (ordinaryFiniteP1_isUnit N S hS)).hom ≫ b'.inv ≫ biprod.snd)
+            (affineTraceProjectiveInvertible N S hS)).hom ≫ b'.inv ≫ biprod.snd)
     (K : DerivedCategoryModule A S) :
     (ordinaryFinitePullback A f).map
         ((ordinaryFiniteP1TraceCounit A N hA S b).app K) =
       ordinaryFiniteP1Exchange A f ((ordinaryFiniteP1Right A N hA S).obj K) ≫
         (ordinaryFinitePushforward A (ProjectiveLine S' ↘ S')).map
           (ordinaryFiniteP1RightBaseChange A N hA t f
-            (ordinaryFiniteP1_isUnit N S hS) K).hom ≫
+            (affineTraceProjectiveInvertible N S hS) K).hom ≫
         (ordinaryFiniteP1TraceCounit A N hA S' b').app
           ((ordinaryFinitePullback A f).obj K) := by
   have : IsLocallyNoetherian (ProjectiveLine S) :=
@@ -104,7 +104,7 @@ theorem ordinaryFiniteP1TraceCounit_baseChange
   let g := ProjectiveSpace.map (ULift.{u} (Fin 2)) f
   let L := (ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧
   let L' := (ordinaryFiniteLine A N hA (ProjectiveLine S'))⟦(2 : ℤ)⟧
-  let c := ordinaryFiniteShiftedLinePullback A N hA t g (ordinaryFiniteP1_isUnit N S hS)
+  let c := ordinaryFiniteShiftedLinePullback A N hA t g (affineTraceProjectiveInvertible N S hS)
   have ht₀ : (ordinaryFinitePullback A f).map (b.inv ≫ biprod.snd) ≫
       (ordinaryFiniteUnitPullback A f).hom =
     (derivedBaseChangeMap (ModuleCat.{u + 1} A)
@@ -119,7 +119,7 @@ theorem ordinaryFiniteP1TraceCounit_baseChange
   apply transport_evaluation (ordinaryFinitePullback A f) (ordinaryFinitePushforward A q')
     ((ordinaryFiniteP1TraceCounit A N hA S b).app K) _
     (ordinaryFiniteP1Exchange A f ((ordinaryFiniteP1Right A N hA S).obj K)) _
-    (ordinaryFiniteP1RightBaseChange A N hA t f (ordinaryFiniteP1_isUnit N S hS) K).hom _
+    (ordinaryFiniteP1RightBaseChange A N hA t f (affineTraceProjectiveInvertible N S hS) K).hom _
     ((ordinaryFiniteP1TraceCounit A N hA S' b').app ((ordinaryFinitePullback A f).obj K)) _
     rfl (ordinaryFiniteP1Exchange_eq_derived A f _) rfl rfl
   simpa only [ordinaryFiniteP1TraceCounit, ordinaryFiniteP1Right,

@@ -90,7 +90,6 @@ private theorem realization_square
   rw [← hn, ← Functor.map_comp_assoc, h, Functor.map_comp]
   simp only [Category.assoc]
 
-set_option maxHeartbeats 800000 in
 -- Elaborating the two mate squares expands several derived-functor adjunctions.
 /-- Coherent quotient-coordinate arrows descend through the supplied bounded-below
 etale origins, preserving scalar realization and sourcewise universality.

@@ -108,7 +108,7 @@ theorem scalar_pull_route_model (a : Λ ⟶ Λ') [IsMonHom a]
   have h := scalar_restriction_counit a f lam hlam P
   have ho := scalar_ordinary_tensor_pull_model a f P
   unfold scalarTensorPullModelMap Functor.tensorModelMapWith
-  erw [tensorPresentation_app (coefficientMap a Y) P]
+  erw [IntegralResidueScalarCounitModel.tensorPresentation_app (coefficientMap a Y) P]
   simp only [Functor.map_comp]
   dsimp only at h ho
   erw [reassoc_of% h]
