@@ -214,6 +214,7 @@ lemma isPullback_geometricFiberProj_point :
       (point k).hom (Spec.map (CommRingCat.ofHom (algebraMap k (AlgebraicClosure k)))) :=
   IsPullback.of_hasPullback _ _
 
+omit [Finite k] in
 /-- **A1' over a point.** For a separated `k`-scheme of finite type `f : X ⟶ Spec k` (`k` finite)
 and the compact-support base change isomorphism along `k ⟶ k̄` attached to the compactification
 defining `Rf_!` (`nagataLowerShriekBaseChange`, for any base change isomorphism `bcj` of the open
