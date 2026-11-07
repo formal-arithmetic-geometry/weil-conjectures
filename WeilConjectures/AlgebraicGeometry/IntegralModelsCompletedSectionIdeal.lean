@@ -24,11 +24,6 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.IntegralModelsStacks
 attribute [local irreducible] upperStarFromPoint
 
-local macro "integersNoetherian" : term =>
-  pure <| Lean.mkIdent <|
-    (Lean.Name.num `_private.WeilConjectures.AlgebraicGeometry.IntegralConstantCompletion 0) ++
-      `AlgebraicGeometry.ProEtale.IntegralConstantCompletion.integers_noetherian
-
 private theorem kernel_sections {C : Type u} [SmallCategory C]
     {J : GrothendieckTopology C} {R S : Sheaf J CommRingCat.{u}}
     (q : R ⟶ S) (U : C) :
@@ -238,7 +233,7 @@ private theorem first_kernel_small (l : ℕ) [Fact l.Prime]
   let I := IntegralConstantCompletion.ideal l E
   let J := Scheme.coefficientProEtaleModelTopology.{u, u} X
   let F := Scheme.CompletedConstantAlgebra.pushRing X
-  let : IsNoetherianRing A := integersNoetherian l E
+  let : IsNoetherianRing A := IntegralConstantCompletion.integers_noetherian l E
   let : I.IsPrime := integers_prime l E
   exact kernel_radical_transport _ (ConstantCompletion.projection J A I 0)
     (Scheme.CompletedConstantAlgebra.completionIso X I)
@@ -301,7 +296,7 @@ theorem completedSectionIdeal (l : ℕ) [Fact l.Prime]
   let I := IntegralConstantCompletion.ideal l E
   let J := Scheme.coefficientProEtaleModelTopology.{u, u} X
   obtain ⟨β, hβ⟩ := integralModels_residueIdealComparison l E X
-  let : IsNoetherianRing A := integersNoetherian l E
+  let : IsNoetherianRing A := IntegralConstantCompletion.integers_noetherian l E
   let : I.IsPrime := integers_prime l E
   let L := (ConstantCompletion.kernelIdeal (smallMap X (residueMap l E X))).extension
     (smallMap X (scalarMap l E X))
