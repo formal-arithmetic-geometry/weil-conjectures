@@ -127,7 +127,6 @@ private theorem coefficientAdmissible (l : ℕ) [Fact l.Prime]
   | none => exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr ⟨Iso.refl _⟩))))
   | some E => exact Or.inr (Or.inr (Or.inr (Or.inl ⟨E, ⟨Iso.refl _⟩⟩)))
 
-set_option maxHeartbeats 800000 in
 -- The ambient derived functor comparisons need additional elaboration steps.
 private theorem brownComparison
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
@@ -185,7 +184,6 @@ private theorem brownComparison
     (localizingLowerShriek Λ compactification.obj.obj h) e
     (exceptional l c k p hpl Y) adj G adjG
 
-set_option maxHeartbeats 800000 in
 -- Normalize ambient components before assembling the adjunction.
 /-- Both kernel computations and integration identities, the prescribed adjunction, and
 comparison with every Brown exceptional adjoint for a chosen compactification.

@@ -187,7 +187,6 @@ private theorem unitEndpoint_nonempty
     Nonempty (UnitPullEndpoint Λ f) := by
   exact ⟨nativeUnitPullEndpoint Λ f⟩
 
-set_option maxHeartbeats 800000 in
 -- Compare the native and bundled monoidal structures on the derived coefficient unit.
 private theorem native_p2_endpoint
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -209,7 +208,6 @@ private theorem native_p2_endpoint
   unfold moduleObjectDerivedPullback internalMonoidal internalTensorBundle nativeTensorBundle
   rfl
 
-set_option maxHeartbeats 800000 in
 -- Keep the canonical right-derived comparison generic in the coefficient ring.
 private theorem canonical_local_adjunct
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -229,7 +227,6 @@ private theorem canonical_local_adjunct
   unfold modelLocalAdjunct
   simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
 
-set_option maxHeartbeats 800000 in
 -- Compare the canonical adjunct and the monoidal endpoint before specializing coefficients.
 private theorem canonical_q_local_adjunct
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -248,7 +245,6 @@ private theorem canonical_q_local_adjunct
   rw [canonical_local_adjunct Λ _ D canonical hcanonical cF]
   rw [unitPullEndpoint_eq Λ Y cF]
 
-set_option maxHeartbeats 800000 in
 -- Compare the canonical adjunct and the monoidal endpoint before specializing coefficients.
 private theorem canonical_p2_local_adjunct
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -267,7 +263,7 @@ private theorem canonical_p2_local_adjunct
   rw [canonical_local_adjunct Λ _ D canonical hcanonical cF]
   rw [native_p2_endpoint Λ Y cF]
 
-set_option maxHeartbeats 2000000 in
+set_option maxHeartbeats 1400000 in
 -- Concrete coefficient conversions cross the named derived functor interfaces.
 /-- A normalized completed adjunct comes from its local section class, and this
 factorization survives realization and both finite-field scalar changes.
