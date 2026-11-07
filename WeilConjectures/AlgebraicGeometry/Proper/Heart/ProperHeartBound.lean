@@ -16,6 +16,7 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.Topology.KrullDimension
 import WeilConjectures.AlgebraicGeometry.Condensed.CondensedQcqsPushforwardContinuitySupplement
+import all WeilConjectures.AlgebraicGeometry.CondensedClosedCostalkDerivedContinuity
 import Mathlib.Algebra.Homology.HomologicalComplexLimits
 import WeilConjectures.Mathlib.CategoryTheory.Preadditive.LiftToFinset
 import WeilConjectures.AlgebraicGeometry.Proper.Heart.ProperHeartBoundRational
@@ -117,25 +118,26 @@ private theorem properHeartHigherDirectImage_preservesFilteredColimits
     DerivedCategory.homologyFunctor _ q
   constructor
   intro I _ _
+  have : HasColimitsOfShape I A := inferInstance
+  have : HasColimitsOfShape I
+      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) :=
+    inferInstance
   constructor
   intro M
   have : PreservesColimit M S := by
     change PreservesColimit M (HomologicalComplex.single A (.up ℤ) 0)
     infer_instance
   let D := M ⋙ S
-  let π := Functor.whiskerLeft D ((ComplexShape.embeddingUpIntGE 0).πTruncGENatTrans A)
-  have hπ (i : I) : IsIso (π.app i) := by
-    change IsIso (((S.obj (M.obj i))).πTruncGE 0)
-    infer_instance
-  have : IsIso π := NatIso.isIso_of_isIso_app π
   have hc : IsColimit (condensedContinuityCocone D 0) :=
-    (IsColimit.precomposeHomEquiv (asIso π) _).symm (colimit.isColimit _)
+    canonicalContinuityIsColimit D 0 (fun _ ↦ inferInstance)
   have ht : IsIso (condensedContinuityComparison D 0 T) :=
     condensed_qcqs_pushforward_continuity Λ p D 0
       (fun i n hn ↦ (S.obj (M.obj i)).isZero_of_isGE 0 n hn) q
-  have hcT : IsColimit (T.mapCocone (condensedContinuityCocone D 0)) :=
-    IsColimit.ofPointIso (colimit.isColimit (D ⋙ T)) (i := ht)
-  have : PreservesColimit D T := preservesColimit_of_preserves_colimit_cocone hc hcT
+  change IsIso (colimit.desc (D ⋙ T) (T.mapCocone (condensedContinuityCocone D 0))) at ht
+  have : IsIso (colimit.post D T) :=
+    comparison_of_colimitCocone D (condensedContinuityCocone D 0) (colimit.cocone D)
+      hc (colimit.isColimit D) T
+  have : PreservesColimit D T := preservesColimit_of_isIso_post T D
   change PreservesColimit M (S ⋙ T)
   infer_instance
 
