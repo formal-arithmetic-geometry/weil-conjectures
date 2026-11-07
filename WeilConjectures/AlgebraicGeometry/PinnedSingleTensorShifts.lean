@@ -198,6 +198,8 @@ def pinnedSingleTensorCounit
       ((HomologicalComplex.singleMapHomologicalComplex
         (Scheme.Modules.tensorPullback g') (ComplexShape.up ℤ) n).hom.app G)))
 
+-- The nested family comparison timed out at `whnf` with 200000 heartbeats (18s on v4.35).
+set_option maxHeartbeats 800000 in
 /-- The tensor comparison is a morphism of single-functor families.
 Source: Stacks Project, Tag 08HY; the derived counit universal property and
 Mathlib's termwise mapped-single shift identity.
