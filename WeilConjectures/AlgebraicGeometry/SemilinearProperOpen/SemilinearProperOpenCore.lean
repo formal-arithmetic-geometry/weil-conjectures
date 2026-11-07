@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.SfIntegralReductionTower
 public import WeilConjectures.SixFunctors.Supporting.AdjunctConjugateOpenFactor
 public import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 public import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearDerivedSections
+public import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.OpenTensorNormalization
 public import WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerProperOpenArrows
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAdjunctionSupplement
@@ -681,11 +682,6 @@ namespace AlgebraicGeometry.ProEtale.SemilinearProperOpen
 Source: the small-site convention
 (blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/
 instance proEtSmall (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.ProEt :=
-  essentiallySmallSelf.{0, u, u + 1} _
-
-/-- The sequence site has the same fixed smallness universe.
-Source: Zheng 4.1 (blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/
-instance sequenceSmall (X : Scheme.{u}) : EssentiallySmall.{u + 1} (ℕ × X.ProEt) :=
   essentiallySmallSelf.{0, u, u + 1} _
 
 variable (C : ℕ → CommRingCat.{u + 1}) (τ : ∀ n : ℕ, C (n + 1) ⟶ C n)

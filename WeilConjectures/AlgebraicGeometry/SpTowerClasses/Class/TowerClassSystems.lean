@@ -36,11 +36,6 @@ open AlgebraicGeometry AlgebraicGeometry.Scheme WeilConjectures
 
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
-/-- The sequence site has the same object bound as the small pro-etale site.
-Source: inverse-system topos (blueprint: def-sp-tower-class-systems). -/
-instance sequenceSmall (T : Scheme.{u}) : EssentiallySmall.{u + 1} (ℕ × T.ProEt) :=
-  essentiallySmallSelf.{0} _
-
 attribute [local instance 4000] AlgebraicGeometry.ProEtale.VaryingRing.ringSheafify
 
 /-- Towers of abelian sheaves. Source: classes (1) (blueprint: def-sp-tower-class-systems). -/
