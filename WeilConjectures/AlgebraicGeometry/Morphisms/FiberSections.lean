@@ -51,7 +51,7 @@ lemma Scheme.fromSpecResidueField_appLE_ΓSpecIso_hom (y : Y) (V : Y.Opens) (hy 
   dsimp only [Scheme.fromSpecResidueField]
   rw [Scheme.Hom.comp_appLE, Scheme.fromSpecStalk_app hy,
     Category.assoc, Category.assoc, Category.assoc, Scheme.Hom.map_appLE_assoc,
-    Scheme.Hom.appLE_top_top_fiberDegree,
+    Scheme.Hom.appLE_top_top,
     Scheme.ΓSpecIso_naturality, Iso.inv_hom_id_assoc, Scheme.evaluation]
 
 /-- The fibre of `f` at `y` lies over every open `V ∋ y`. -/
@@ -81,7 +81,7 @@ theorem Scheme.Hom.isPushout_app_evaluation_fiber (f : X ⟶ Y) [IsAffineHom f] 
   · simp [Scheme.Hom.app_eq_appLE]
   · simpa using Y.fromSpecResidueField_appLE_ΓSpecIso_hom y V hy
   · simp [Scheme.Hom.fiberι]
-  · simp [Scheme.Hom.fiberToSpecResidueField, Scheme.Hom.appLE_top_top_fiberDegree]
+  · simp [Scheme.Hom.fiberToSpecResidueField, Scheme.Hom.appLE_top_top]
 
 open TensorProduct in
 /-- **Global sections of the fibres of an affine morphism.** For an affine morphism `f : X ⟶ Y`
