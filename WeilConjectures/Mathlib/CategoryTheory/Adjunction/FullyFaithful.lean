@@ -168,23 +168,6 @@ lemma iso_ext_of_inv_app_comp_counit {𝒜 : Type*} [Category* 𝒜]
   rw [← cancel_epi (e.hom.app M)]
   erw [hn, hn', key]
 
-/-- Let `F ⊣ G` and `F' ⊣ G'` be adjunctions such that the left adjoint `F ⋙ F'` of the composite
-adjunction is fully faithful and the unit of `F' ⊣ G'` is an isomorphism. Then the unit of
-`F ⊣ G` is an isomorphism: the unit of the composite adjunction is
-```
-  X --η_X--> G (F X) --G (η'_{F X})--> G (G' (F' (F X)))
-```
-which is an isomorphism, and so is its second factor. -/
-lemma isIso_unit_of_fullyFaithful_comp {E : Type*} [Category E] {F' : D ⥤ E} {G' : E ⥤ D}
-    (adj : F ⊣ G) (adj' : F' ⊣ G') [IsIso adj'.unit] [(F ⋙ F').Full] [(F ⋙ F').Faithful] :
-    IsIso adj.unit := by
-  have := (adj.comp adj').unit_isIso_of_L_fully_faithful
-  have (X : C) : IsIso (adj.unit.app X) := by
-    have h := Adjunction.comp_unit_app adj adj' X
-    have : IsIso ((adj.comp adj').unit.app X) := inferInstance
-    rw [h] at this
-    exact IsIso.of_isIso_comp_right _ (G.map (adj'.unit.app (F.obj X)))
-  exact NatIso.isIso_of_isIso_app _
 
 end Adjunction
 

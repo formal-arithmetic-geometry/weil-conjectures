@@ -116,7 +116,7 @@ lemma boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq_pushforwardData
     boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq =
       BoundedConstructiblePushforwardData.lowerShriekBaseChange
         (isIsoRefinementPushforward_padicAlgClPushforwardData ℓ k) sq := by
-  unfold boundedConstructibleLowerShriekBaseChange_padicAlgCl
+  rw [boundedConstructibleLowerShriekBaseChange_padicAlgCl_def]
   unfold boundedConstructibleLowerShriekOfCompactificationBaseChangePasting
   simp only [boundedConstructibleBaseChange_def]
   rfl

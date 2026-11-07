@@ -234,9 +234,6 @@ theorem mem_dualAnnihilator {U : Subrepresentation ρ} {f : Module.Dual k V} :
     f ∈ U.dualAnnihilator ↔ ∀ x ∈ U, f x = 0 :=
   Submodule.mem_dualAnnihilator f
 
-/-- Taking annihilators reverses inclusions. -/
-theorem dualAnnihilator_antitone : Antitone (dualAnnihilator : Subrepresentation ρ → _) :=
-  fun _ _ h ↦ Submodule.dualAnnihilator_anti (toSubmodule_le_toSubmodule.2 h)
 
 @[simp]
 theorem dualAnnihilator_bot : (⊥ : Subrepresentation ρ).dualAnnihilator = ⊤ :=
@@ -352,11 +349,6 @@ theorem detCharacter_subquotient_orderIsoMapComap (e : ρ.Equiv σ) (S U : Subre
       (S.subquotient U).detCharacter :=
   (subquotientEquiv e S U).detCharacter_eq
 
-/-- Subquotients can be transported along an equivalence of representations `e : ρ ≅ σ`: every
-subquotient `S / U` of `σ` is equivalent to a subquotient `S' / U'` of `ρ`. -/
-theorem exists_subquotient_equiv_of_equiv (e : ρ.Equiv σ) (U S : Subrepresentation σ) :
-    ∃ U' S' : Subrepresentation ρ, Nonempty ((S'.subquotient U').Equiv (S.subquotient U)) :=
-  ⟨_, _, ⟨(subquotientEquiv e.symm S U).symm⟩⟩
 
 end Equiv
 

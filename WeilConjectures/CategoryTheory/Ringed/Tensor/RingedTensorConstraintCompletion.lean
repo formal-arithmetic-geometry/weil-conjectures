@@ -91,6 +91,10 @@ private theorem pure_ext_private (A B N : Mod.{c, v, r} J R) {f g : A ⊗ B ⟶ 
   intro x y
   exact h U x y
 
+/-- Public export of the private `pure_ext_private`
+(used by `import all` importers; linter.privateModule). -/
+alias pure_ext := pure_ext_private
+
 private theorem pure_braiding (A B : Mod.{c, v, r} J R) (U : Cᵒᵖ)
     (x : A.val.obj U) (y : B.val.obj U) :
     (β_ A B).hom.val.app U (pure.{c, v, r} J R A B U x y) = pure.{c, v, r} J R B A U y x := by
@@ -157,6 +161,10 @@ private theorem tensorGenerator_ext_private
   apply pure_ext_private.{c, v, r} J R (P.X p) (Q.X q) (F.X k)
   intro U x y
   exact h p q k hpq U x y
+
+/-- Public export of the private `tensorGenerator_ext_private`
+(used by `import all` importers; linter.privateModule). -/
+alias tensorGenerator_ext := tensorGenerator_ext_private
 
 private theorem tensorGenerator_ext₃_private
     (P Q N F : Complex.{c, v, r} J R)
@@ -449,4 +457,5 @@ end CategoryTheory
 namespace CategoryTheory
 /-- Public export of the private `tensorGenerator_ext₃_private` (used by `import all` importers; linter.privateModule). -/
 alias tensorGenerator_ext₃ := tensorGenerator_ext₃_private
+
 end CategoryTheory

@@ -353,14 +353,6 @@ theorem Sheaf.hasLocallyTrivialRelations_of_flat {F : Sheaf J (ModuleCat.{u + 1}
   rw [hz]
   simp [x, map_sum, Pi.single_apply]
 
-/-- **Relation criterion for flatness of sheaves of modules.** A sheaf of modules over a
-Noetherian commutative ring is flat if and only if linear relations between its sections are
-locally trivial. -/
-theorem Sheaf.flat_iff_hasLocallyTrivialRelations (F : Sheaf J (ModuleCat.{u + 1} R)) :
-    ObjectProperty.flat F ↔ Presheaf.HasLocallyTrivialRelations J F.obj :=
-  ⟨Sheaf.hasLocallyTrivialRelations_of_flat, fun h ↦ ObjectProperty.prop_of_iso _
-    (asIso ((sheafificationAdjunction J _).counit.app F))
-    (Presheaf.flat_presheafToSheaf_obj_of_hasLocallyTrivialRelations h)⟩
 
 end Flat
 

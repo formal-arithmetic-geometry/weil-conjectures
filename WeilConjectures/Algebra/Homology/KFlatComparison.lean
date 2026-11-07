@@ -77,13 +77,6 @@ theorem isKFlatTensor_iff_kFlat (K : CochainComplex 𝒜 ℤ) :
     exact (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic _).1
       (hK _ ((HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic F).2 hF)).2
 
-set_option synthInstance.maxSize 256 in
-/-- `CochainComplex.IsKFlatTensor` agrees with `CochainComplex.IsKFlat` for complexes of sheaves
-of `R`-modules, whenever the latter is defined. -/
-theorem isKFlatTensor_iff_isKFlat [IsGrothendieckAbelian.{u} 𝒜]
-    [Abelian.HasFunctorialFlatResolution 𝒜] (K : CochainComplex 𝒜 ℤ) :
-    K.IsKFlatTensor ↔ K.IsKFlat :=
-  isKFlatTensor_iff_kFlat K
 
 end CochainComplex
 
@@ -101,12 +94,5 @@ noncomputable local instance : MonoidalCategory 𝒜 := SheafOfModules.monoidalC
 
 noncomputable local instance : SymmetricCategory 𝒜 := SheafOfModules.symmetricCategory R
 
-/-- A sheaf of `R`-modules `F` is flat in the sense of `SheafOfModules.IsFlat` (`G ↦ G ⊗ F` is
-exact) if and only if it is flat in the sense of `ObjectProperty.flat` (both `F ⊗ -` and
-`- ⊗ F` are exact): the braiding identifies `F ⊗ -` with `- ⊗ F`. -/
-theorem isFlat_iff_flat (F : 𝒜) :
-    IsFlat F ↔ ObjectProperty.flat F :=
-  ⟨fun h ↦ ⟨(exactFunctor _ _).prop_of_iso (BraidedCategory.tensorLeftIsoTensorRight F).symm h,
-    h⟩, fun h ↦ h.2⟩
 
 end SheafOfModules

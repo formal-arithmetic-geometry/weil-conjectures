@@ -108,19 +108,6 @@ def conjugateIso (e : F' ≅ F) : G ≅ G' :=
         (e.hom.app _).naturality_assoc, ← h₃, ← NatTrans.comp_app_assoc,
         ← NatTrans.comp_app_assoc, e.hom.naturality])
 
-lemma conjugateIso_app (e : F' ≅ F) (X₁ : C₁ᵒᵖ) :
-    (adj₂.conjugateIso adj₂' e).app X₁ =
-      conjugateIsoEquiv (adj₂.adj X₁.unop) (adj₂'.adj X₁.unop) (e.app X₁.unop) :=
-  rfl
-
-/-- The components of `conjugateIso` are characterized by the counits: the transpose of
-`((conjugateIso e).app X₁).hom.app X₃` along `F' X₁ ⊣ G' X₁` is `e.hom` followed by the counit
-of `F X₁ ⊣ G X₁`. -/
-lemma map_conjugateIso_app_hom_app_comp_counit (e : F' ≅ F) (X₁ : C₁ᵒᵖ) (X₃ : C₃) :
-    (F'.obj X₁.unop).map (((adj₂.conjugateIso adj₂' e).app X₁).hom.app X₃) ≫
-        (adj₂'.adj X₁.unop).counit.app X₃ =
-      (e.hom.app X₁.unop).app ((G.obj X₁).obj X₃) ≫ (adj₂.adj X₁.unop).counit.app X₃ :=
-  conjugateEquiv_counit (adj₂.adj X₁.unop) (adj₂'.adj X₁.unop) (e.hom.app X₁.unop) X₃
 
 end ConjugateIso
 

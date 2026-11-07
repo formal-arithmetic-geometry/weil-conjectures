@@ -21,7 +21,7 @@ open CategoryTheory Limits MonoidalCategory
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
 
-private theorem tensorPresentation_app_private
+theorem IntegralResidueScalarCounitModel.tensorPresentation_app
     {C : Type u} [Category.{v} C] [Abelian C] [MonoidalCategory C]
     [MonoidalPreadditive C] [SymmetricCategory C] [MonoidalClosed C]
     [IsGrothendieckAbelian.{v} C] [Abelian.HasFunctorialFlatResolution C]
@@ -46,6 +46,3 @@ attribute [local irreducible] Functor.leftDerivedFunctor Functor.rightDerivedFun
   Functor.mapDerivedCategory
 -- Normalize the inverse scalar mate, retaining ordinary restriction factors.
 end AlgebraicGeometry.ProEtale.CondensedRing
-
-/-- Public export of the private `tensorPresentation_app_private` (used by `import all` importers; linter.privateModule). -/
-alias tensorPresentation_app := tensorPresentation_app_private

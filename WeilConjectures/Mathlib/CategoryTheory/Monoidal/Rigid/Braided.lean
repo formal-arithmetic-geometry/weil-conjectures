@@ -103,17 +103,6 @@ lemma trace_eq_of_exactPairing {X : C} [HasRightDual X] (Y : C) [ExactPairing X 
     BraidedCategory.braiding_naturality_left_assoc,
     BraidedCategory.braiding_naturality_right_assoc, whisker_exchange_assoc]
 
-/-- **Conjugacy invariance of the trace**: for an isomorphism `e : X ≅ Y` of dualizable objects
-and an endomorphism `f` of `Y`, `tr(e ≫ f ≫ e⁻¹) = tr(f)`. -/
-lemma trace_conj {X Y : C} [HasRightDual X] [HasRightDual Y] (e : X ≅ Y) (f : Y ⟶ Y) :
-    trace (e.hom ≫ f ≫ e.inv) = trace f := by
-  let : ExactPairing X Yᘁ := exactPairingCongrLeft e
-  rw [trace_eq_of_exactPairing Yᘁ, trace]
-  change (η_ Y Yᘁ ≫ e.inv ▷ Yᘁ) ≫ (e.hom ≫ f ≫ e.inv) ▷ Yᘁ ≫ (β_ X Yᘁ).hom ≫
-    Yᘁ ◁ e.hom ≫ ε_ Y Yᘁ = _
-  rw [← BraidedCategory.braiding_naturality_left_assoc]
-  simp only [← comp_whiskerRight_assoc, Category.assoc, Iso.inv_hom_id_assoc, Iso.inv_hom_id,
-    Category.comp_id]
 
 section
 
@@ -159,13 +148,6 @@ theorem trace_comp_idempotent {P Q : C} [HasRightDual P] [HasRightDual Q] (v : P
     (i : Q ⟶ P) (π : P ⟶ Q) : trace (v ≫ π ≫ i) = trace (i ≫ v ≫ π) := by
   rw [← Category.assoc, trace_comp_comm]
 
-/-- Representative independence of the summand trace: if an isomorphism `w : P ≅ P'` transports the
-idempotent `e` to `e'` and the endomorphism `v` to `v'`, the summand traces `tr(v ∘ e ∣ P)` and
-`tr(v' ∘ e' ∣ P')` agree. -/
-theorem trace_comp_idempotent_eq_of_iso {P P' : C} [HasRightDual P] [HasRightDual P'] (w : P ≅ P')
-    (e : P ⟶ P) (e' : P' ⟶ P') (v : P ⟶ P) (v' : P' ⟶ P') (he : e ≫ w.hom = w.hom ≫ e')
-    (hv : v ≫ w.hom = w.hom ≫ v') : trace (v ≫ e) = trace (v' ≫ e') :=
-  trace_eq_of_iso w _ _ (by rw [Category.assoc, he, reassoc_of% hv])
 
 /-- The trace of the identity of the monoidal unit is the identity, for any right dual of the
 unit. -/
@@ -311,43 +293,6 @@ noncomputable def IsPerfectPairing.exactPairing {X Y : C} (hX : IsDualizable X)
   let := exactPairingOfIsIso X
   exactPairingCongrLeft (asIso (curry b))
 
-/-- The evaluation of the exact pairing `IsPerfectPairing.exactPairing` of a perfect pairing
-`b` is `b`. -/
-lemma IsPerfectPairing.evaluation_exactPairing {X Y : C} (hX : IsDualizable X)
-    {b : X ⊗ Y ⟶ 𝟙_ C}
-    (h : IsPerfectPairing b) :
-    letI := h.exactPairing hX
-    ε_ Y X = b :=
-  uncurry_curry b
-
-/-- Blueprint `rem-ptr-pod-perfect-derived-pairing-6` (pointer to the properties of
-`def-pod-perfect-derived-pairing`): perfectness of a pairing is symmetric in the two variables.
-
-If `X` is dualizable and the pairing `b : X ⊗ Y ⟶ 𝟙_ C` is perfect, `Y ≅ [X, 𝟙_ C]`, then the
-swapped pairing `Y ⊗ X ⟶ X ⊗ Y ⟶ 𝟙_ C` is perfect as well, `X ≅ [Y, 𝟙_ C]`: `b` is the
-evaluation of an exact pairing of `Y` and `X`, and the braiding turns it into an exact pairing
-of `X` and `Y` whose evaluation is the swapped pairing. -/
-theorem IsPerfectPairing.braiding_hom_comp {X Y : C} (hX : IsDualizable X)
-    {b : X ⊗ Y ⟶ 𝟙_ C} (h : IsPerfectPairing b) : IsPerfectPairing ((β_ Y X).hom ≫ b) := by
-  let := h.exactPairing hX
-  let := BraidedCategory.exactPairing_swap Y X
-  have hε : ε_ X Y = (β_ Y X).hom ≫ b := by
-    rw [← h.evaluation_exactPairing hX]
-    rfl
-  exact ⟨hε ▸ isIso_curry_evaluation X Y⟩
-
-/-- Blueprint `rem-ptr-pod-perfect-derived-pairing-6` (pointer to the properties of
-`def-pod-perfect-derived-pairing`): perfectness of a pairing is symmetric in the two variables.
-
-In a symmetric monoidal closed category, a pairing `b : X ⊗ Y ⟶ 𝟙_ C` of dualizable objects
-(for instance perfect point complexes) is perfect, `Y ≅ [X, 𝟙_ C]`, if and only if the swapped
-pairing `Y ⊗ X ⟶ X ⊗ Y ⟶ 𝟙_ C` is perfect, `X ≅ [Y, 𝟙_ C]`. -/
-theorem isPerfectPairing_braiding_hom_comp_iff {C : Type*} [Category C] [MonoidalCategory C]
-    [SymmetricCategory C] [MonoidalClosed C] {X Y : C} (hX : IsDualizable X)
-    (hY : IsDualizable Y) {b : X ⊗ Y ⟶ 𝟙_ C} :
-    IsPerfectPairing ((β_ Y X).hom ≫ b) ↔ IsPerfectPairing b := by
-  refine ⟨fun h ↦ ?_, fun h ↦ h.braiding_hom_comp hX⟩
-  simpa using h.braiding_hom_comp hY
 
 section
 

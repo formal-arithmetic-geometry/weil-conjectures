@@ -260,49 +260,6 @@ lemma leftDerivedFunctorSquareIso_hom_app_Q_obj (α : N_D ⋙ F' ≅ F ⋙ N_C)
   rw [← reassoc_of% h₂, reassoc_of% h₃]
   simpa [← Functor.map_comp_assoc] using h₁
 
-/-- **The isomorphism `CategoryTheory.Functor.leftDerivedFunctorSquareIso α` on complexes**, as an
-identity of natural transformations of functors `CochainComplex D ℤ ⥤ DerivedCategory C'`: after
-precomposition with `Q`, it is the counit of `LF'` on `N_D P` followed by the image under `Q` of
-the termwise isomorphism `α`, all functors being composed explicitly (with associators). This
-is the form of `CategoryTheory.Functor.leftDerivedFunctorSquareIso_hom_app_Q_obj` in which no
-identification of objects by definitional unfolding is needed, so it can be instantiated with
-concrete functors at no cost. -/
-lemma whiskerLeft_Q_leftDerivedFunctorSquareIso_hom (α : N_D ⋙ F' ≅ F ⋙ N_C) :
-    whiskerLeft DerivedCategory.Q (leftDerivedFunctorSquareIso α).hom =
-      (Functor.associator _ _ _).inv ≫
-      whiskerRight N_D.mapDerivedCategoryFactors.hom F'.leftDerivedFunctor ≫
-      whiskerRight (whiskerLeft (N_D.mapHomologicalComplex (.up ℤ))
-        (DerivedCategory.quotientCompQhIso D').inv) F'.leftDerivedFunctor ≫
-      whiskerRight (Functor.associator _ _ _).inv F'.leftDerivedFunctor ≫
-      (Functor.associator _ _ _).hom ≫
-      whiskerLeft _ F'.leftDerivedFunctorCounit ≫
-      (Functor.associator _ _ _).inv ≫
-      whiskerRight (Functor.associator _ _ _).hom DerivedCategory.Qh ≫
-      whiskerRight (whiskerLeft (N_D.mapHomologicalComplex (.up ℤ))
-        (F'.mapHomotopyCategoryFactors (.up ℤ)).hom) DerivedCategory.Qh ≫
-      whiskerRight (Functor.associator _ _ _).inv DerivedCategory.Qh ≫
-      (Functor.associator _ _ _).hom ≫
-      whiskerLeft _ (DerivedCategory.quotientCompQhIso C').hom ≫
-      whiskerRight (mapHomologicalComplexCompIso α (.up ℤ)).hom DerivedCategory.Q ≫
-      (F ⋙ N_C).mapDerivedCategoryFactors.inv ≫
-      whiskerLeft DerivedCategory.Q (mapDerivedCategoryCompIso F N_C).inv := by
-  ext P
-  have h₁ := leftDerivedFunctorSquareIso_hom_app_Q_obj α P
-  have h₂ := mapDerivedCategoryCompIso_fac F N_C P
-  simp only [NatTrans.comp_app, whiskerLeft_app, whiskerRight_app, associator_hom_app,
-    associator_inv_app, Functor.comp_obj, Category.id_comp, Functor.map_id]
-  have h₃ : (F'.mapHomotopyCategoryFactors (.up ℤ)).hom.app
-      ((N_D.mapHomologicalComplex (.up ℤ)).obj P) = 𝟙 _ := by
-    simp [Functor.mapHomotopyCategoryFactors]
-    rfl
-  rw [
-    ← cancel_mono (D(N_C).map (F.mapDerivedCategoryFactors.hom.app P) ≫
-      N_C.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj P) ≫
-      DerivedCategory.Q.map
-        ((mapHomologicalComplexCompIso (Iso.refl (F ⋙ N_C)) (.up ℤ)).hom.app P))]
-  simp only [Category.assoc]
-  rw [reassoc_of% h₁, h₂, Iso.inv_hom_id_app]
-  simp [h₃]
 
 end CategoryTheory.Functor
 

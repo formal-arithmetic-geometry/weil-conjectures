@@ -81,28 +81,6 @@ private def evaluationZeroConstAdjunction
       dsimp
       simp }
 
-private theorem towerProperties (A : Type uA) [Category.{vA} A] [Abelian A] :
-    Nonempty ((evaluation ℕᵒᵖ A).obj (op 0) ⊣ Functor.const ℕᵒᵖ) ∧
-      PreservesFiniteLimits (Functor.const ℕᵒᵖ : A ⥤ _) ∧
-      PreservesFiniteColimits (Functor.const ℕᵒᵖ : A ⥤ _) ∧
-      (∀ n : ℕᵒᵖ, PreservesFiniteLimits ((evaluation ℕᵒᵖ A).obj n) ∧
-        PreservesFiniteColimits ((evaluation ℕᵒᵖ A).obj n)) ∧
-      (∀ I : CochainComplex A ℤ, I.IsKInjective →
-        CochainComplex.IsKInjective
-          (((Functor.const ℕᵒᵖ : A ⥤ _).mapHomologicalComplex (.up ℤ)).obj I)) ∧
-      (∀ (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (n : ℕᵒᵖ), I.IsKInjective →
-        CochainComplex.IsKInjective
-          ((((evaluation ℕᵒᵖ A).obj n).mapHomologicalComplex (.up ℤ)).obj I)) := by
-  have h := evaluationZeroConstAdjunction A
-  have := h.preservesKInjectiveComplexes
-  refine ⟨⟨h⟩, inferInstance, inferInstance, fun n ↦ ⟨inferInstance, inferInstance⟩,
-    ?_, ?_⟩
-  · intro I hI
-    have := hI
-    infer_instance
-  · intro I n hI
-    have := hI
-    exact tower_evaluation_isKInjective A I n
 
 private theorem isIso_of_kinjective_components
     {A : Type uA} [Category.{vA} A] [Abelian A] [HasDerivedCategory.{wA} A]
@@ -138,29 +116,6 @@ private theorem mate_homEquiv
   simp only [R₂.map_comp, Category.assoc]
   rfl
 
-private theorem mate_cube
-    {C D C' D' E H E' H' : Type*}
-    [Category C] [Category D] [Category C'] [Category D']
-    [Category E] [Category H] [Category E'] [Category H']
-    {L : C ⥤ D} {R : D ⥤ C} {L' : C' ⥤ D'} {R' : D' ⥤ C'}
-    {T : E ⥤ H} {U : H ⥤ E} {T' : E' ⥤ H'} {U' : H' ⥤ E'}
-    (a : L ⊣ R) (b : L' ⊣ R') (aT : T ⊣ U) (bT : T' ⊣ U')
-    {V : C ⥤ E} {W : D ⥤ H} {V' : C' ⥤ E'} {W' : D' ⥤ H'}
-    {g : C ⥤ C'} {h : D ⥤ D'} {gt : E ⥤ E'} {ht : H ⥤ H'}
-    (s : g ⋙ L' ⟶ L ⋙ h) (st : gt ⋙ T' ⟶ T ⋙ ht)
-    (c : V ⋙ T ≅ L ⋙ W) (c' : V' ⋙ T' ≅ L' ⋙ W')
-    (e : V ⋙ gt ≅ g ⋙ V') (d : W ⋙ ht ≅ h ⋙ W')
-    (hc : ∀ X : C,
-      T'.map (e.hom.app X) ≫ c'.hom.app (g.obj X) ≫ W'.map (s.app X) =
-        st.app (V.obj X) ≫ ht.map (c.hom.app X) ≫ d.hom.app (L.obj X)) (N : D) :
-    e.inv.app (R.obj N) ≫ gt.map
-        ((mateEquiv a aT (TwoSquare.mk _ _ _ _ c.hom)).app N) ≫
-        (mateEquiv aT bT (TwoSquare.mk _ _ _ _ st)).app (W.obj N) =
-      V'.map ((mateEquiv a b (TwoSquare.mk _ _ _ _ s)).app N) ≫
-        (mateEquiv b bT (TwoSquare.mk _ _ _ _ c'.hom)).app (h.obj N) ≫
-        U'.map (d.inv.app N) := by
-  exact (exchangeMate_cube a b aT bT V W V' W'
-    c.symm e.symm d.symm c'.symm s st hc N).symm
 
 private theorem derivedNatIso_refl
     {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]
@@ -337,30 +292,6 @@ def towerSquare (θ : g ⋙ F' ≅ F ⋙ h) :
     ext n
     exact θ.hom.naturality (t.app n))
 
-private theorem constant_cube (θ : g ⋙ F' ≅ F ⋙ h) (M : DerivedCategory B) :
-    ((Functor.whiskeringRight ℕᵒᵖ B' A').obj F').mapDerivedCategory.map
-        ((constantInterchange g).hom.app M) ≫
-      (constantInterchange F').hom.app (g.mapDerivedCategory.obj M) ≫
-      (Functor.const ℕᵒᵖ : A' ⥤ _).mapDerivedCategory.map
-        ((localizedSquare F F' g h θ).hom.app M) =
-    (localizedSquare _ _ _ _ (towerSquare F F' g h θ)).hom.app
-        ((Functor.const ℕᵒᵖ : B ⥤ _).mapDerivedCategory.obj M) ≫
-      ((Functor.whiskeringRight ℕᵒᵖ A A').obj h).mapDerivedCategory.map
-        ((constantInterchange F).hom.app M) ≫
-      (constantInterchange h).hom.app (F.mapDerivedCategory.obj M) := by
-  have hc := Functor.mapDerivedCategory_exactCube
-    (Functor.const ℕᵒᵖ : B ⥤ _) ((Functor.whiskeringRight ℕᵒᵖ B B').obj g)
-    ((Functor.whiskeringRight ℕᵒᵖ B' A').obj F')
-    g (Functor.const ℕᵒᵖ : B' ⥤ _) F' (Functor.const ℕᵒᵖ : A' ⥤ _)
-    F h ((Functor.whiskeringRight ℕᵒᵖ B A).obj F)
-    ((Functor.whiskeringRight ℕᵒᵖ A A').obj h) (Functor.const ℕᵒᵖ : A ⥤ _)
-    (Functor.compConstIso ℕᵒᵖ g).symm (Functor.compConstIso ℕᵒᵖ F').symm θ
-    (towerSquare F F' g h θ) (Functor.compConstIso ℕᵒᵖ F).symm
-    (Functor.compConstIso ℕᵒᵖ h).symm (by
-      intro X
-      ext n
-      simp [towerSquare])
-  exact NatTrans.congr_app hc M
 
 variable {F F' g h} {G : A ⥤ B} {G' : A' ⥤ B'} [G.Additive] [G'.Additive]
   [Abelian.HasKInjectiveResolutions A] [Abelian.HasKInjectiveResolutions A']
@@ -487,32 +418,6 @@ variable {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]
   {G : A ⥤ B} [G.Additive] [Abelian.HasKInjectiveResolutions A]
   [Abelian.HasKInjectiveResolutions (ℕᵒᵖ ⥤ A)]
 
-omit [Abelian A] [Abelian B] [HasDerivedCategory A] [HasDerivedCategory B]
-  [HasDerivedCategory (ℕᵒᵖ ⥤ A)] [HasDerivedCategory (ℕᵒᵖ ⥤ B)]
-  [F.Additive] [G.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-  [Abelian.HasKInjectiveResolutions A] [Abelian.HasKInjectiveResolutions (ℕᵒᵖ ⥤ A)] in
-private theorem constant_mate (a : F ⊣ G) :
-    (mateEquiv a (a.whiskerRight ℕᵒᵖ)
-      (TwoSquare.mk _ _ _ _ (Functor.compConstIso ℕᵒᵖ F).inv)).natTrans =
-      (Functor.compConstIso ℕᵒᵖ G).hom := by
-  ext X n
-  simp [mateEquiv]
-
-private theorem constant_normalization (a : F ⊣ G) (I : CochainComplex A ℤ) :
-    (Functor.const ℕᵒᵖ : B ⥤ _).mapDerivedCategoryFactors.inv.app
-          ((G.mapHomologicalComplex (.up ℤ)).obj I) ≫
-        (Functor.const ℕᵒᵖ : B ⥤ _).mapDerivedCategory.map (cochainUnit G I) ≫
-        (constantComparison a).app (DerivedCategory.Q.obj I) ≫
-        ((Functor.whiskeringRight ℕᵒᵖ A B).obj G).rightDerivedFunctor.map
-          ((Functor.const ℕᵒᵖ : A ⥤ _).mapDerivedCategoryFactors.hom.app I) =
-      DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
-          (Functor.compConstIso ℕᵒᵖ G).hom (.up ℤ)).app I) ≫
-        cochainUnit ((Functor.whiskeringRight ℕᵒᵖ A B).obj G)
-          (((Functor.const ℕᵒᵖ : A ⥤ _).mapHomologicalComplex (.up ℤ)).obj I) := by
-  have ht := localized_mate_cochain a (a.whiskerRight ℕᵒᵖ)
-    (Functor.compConstIso ℕᵒᵖ F).symm I
-  erw [constant_mate] at ht
-  exact ht
 
 omit [Abelian.HasKInjectiveResolutions A]
   [Abelian.HasKInjectiveResolutions (ℕᵒᵖ ⥤ A)] in
@@ -559,27 +464,6 @@ private theorem evaluation_normalization (a : F ⊣ G) (n : ℕᵒᵖ)
   erw [hid, Functor.map_id, Category.id_comp] at ht
   exact ht
 
-private theorem constant_isIso (a : F ⊣ G) : IsIso (constantComparison a) := by
-  apply isIso_of_kinjective_components
-  intro I hI
-  have := hI
-  have := (towerProperties A).2.2.2.2.1 I hI
-  have := cochainUnit_isIso (G := G) I
-  have := cochainUnit_isIso (G := (Functor.whiskeringRight ℕᵒᵖ A B).obj G)
-    (((Functor.const ℕᵒᵖ : A ⥤ _).mapHomologicalComplex (.up ℤ)).obj I)
-  have ht := constant_normalization a I
-  have hc : IsIso ((NatTrans.mapHomologicalComplex
-      (Functor.compConstIso ℕᵒᵖ G).hom (.up ℤ)).app I) := by
-    change IsIso ((NatIso.mapHomologicalComplex (Functor.compConstIso ℕᵒᵖ G)
-      (.up ℤ)).hom.app I)
-    infer_instance
-  have hs : IsIso (DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
-      (Functor.compConstIso ℕᵒᵖ G).hom (.up ℤ)).app I) ≫
-      cochainUnit ((Functor.whiskeringRight ℕᵒᵖ A B).obj G)
-        (((Functor.const ℕᵒᵖ : A ⥤ _).mapHomologicalComplex (.up ℤ)).obj I)) :=
-    inferInstance
-  rw [← ht] at hs
-  simpa only [isIso_comp_left_iff, isIso_comp_right_iff] using hs
 
 private theorem evaluation_isIso (a : F ⊣ G) (n : ℕᵒᵖ) :
     IsIso (evaluationComparison a n) := by

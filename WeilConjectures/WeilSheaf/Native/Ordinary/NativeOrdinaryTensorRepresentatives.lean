@@ -135,6 +135,10 @@ private theorem ordinaryTotalIso_ι_private (P Q : CochainComplex (Mod C R) ℤ)
   simp only [Units.smul_def, Preadditive.comp_zsmul, mul_comm p q]
   rfl
 
+/-- Public export of the private `ordinaryTotalIso_ι_private`
+(used by `import all` importers; linter.privateModule). -/
+alias ordinaryTotalIso_ι := ordinaryTotalIso_ι_private
+
 omit [Abelian.HasFunctorialFlatResolution C] [HasDerivedCategory (Mod C R)] in
 private theorem ordinaryTotalIso_naturality
     {P Q P' Q' : CochainComplex (Mod C R) ℤ}
@@ -212,6 +216,10 @@ private theorem ordinaryModel_naturality_private (P Q P' Q' : CochainComplex (Mo
   rw [← Category.assoc, Functor.LaxMonoidal.μ_natural, Category.assoc,
     ← Functor.map_comp, hi, Functor.map_comp, Category.assoc]
 
+/-- Public export of the private `ordinaryModel_naturality_private`
+(used by `import all` importers; linter.privateModule). -/
+alias ordinaryModel_naturality := ordinaryModel_naturality_private
+
 omit [Abelian.HasFunctorialFlatResolution C] [HasDerivedCategory (Mod C R)] in
 private theorem ordinaryTotalIso_inv_ι (P Q : CochainComplex (Mod C R) ℤ)
     (p q n : ℤ) (hqp : q + p = n) :
@@ -278,6 +286,10 @@ private theorem ordinarySwap_signed_private :
   simp only [Category.assoc]
   rw [← Category.assoc (Mod.tensorObjπ (P.X p) (Q.X q)), hi]
 
+/-- Public export of the private `ordinarySwap_signed_private`
+(used by `import all` importers; linter.privateModule). -/
+alias ordinarySwap_signed := ordinarySwap_signed_private
+
 private theorem ordinaryModel_braiding_private (P Q : CochainComplex (Mod C R) ℤ)
     (hP : ordinaryFlat P) (hQ : ordinaryFlat Q) :
     letI := RingedDerivedNative.derivedSymmetric (A := Mod C R)
@@ -296,26 +308,10 @@ private theorem ordinaryModel_braiding_private (P Q : CochainComplex (Mod C R) �
   rw [← Functor.LaxBraided.braided]
   exact Category.assoc _ _ _
 
+/-- Public export of the private `ordinaryModel_braiding_private`
+(used by `import all` importers; linter.privateModule). -/
+alias ordinaryModel_braiding := ordinaryModel_braiding_private
+
 end GenericOrdinaryTensor
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
-
-namespace AlgebraicGeometry.ProEtaleWeilSheaf.GenericOrdinaryTensor
-/-- Public export of the private `ordinaryTotalIso_ι_private` (used by `import all` importers; linter.privateModule). -/
-alias ordinaryTotalIso_ι := ordinaryTotalIso_ι_private
-end AlgebraicGeometry.ProEtaleWeilSheaf.GenericOrdinaryTensor
-
-namespace AlgebraicGeometry.ProEtaleWeilSheaf.GenericOrdinaryTensor
-/-- Public export of the private `ordinaryModel_naturality_private` (used by `import all` importers; linter.privateModule). -/
-alias ordinaryModel_naturality := ordinaryModel_naturality_private
-end AlgebraicGeometry.ProEtaleWeilSheaf.GenericOrdinaryTensor
-
-namespace AlgebraicGeometry.ProEtaleWeilSheaf.GenericOrdinaryTensor
-/-- Public export of the private `ordinarySwap_signed_private` (used by `import all` importers; linter.privateModule). -/
-alias ordinarySwap_signed := ordinarySwap_signed_private
-end AlgebraicGeometry.ProEtaleWeilSheaf.GenericOrdinaryTensor
-
-namespace AlgebraicGeometry.ProEtaleWeilSheaf.GenericOrdinaryTensor
-/-- Public export of the private `ordinaryModel_braiding_private` (used by `import all` importers; linter.privateModule). -/
-alias ordinaryModel_braiding := ordinaryModel_braiding_private
-end AlgebraicGeometry.ProEtaleWeilSheaf.GenericOrdinaryTensor

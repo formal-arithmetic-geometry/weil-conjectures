@@ -65,27 +65,12 @@ lemma natCast_mem_maximalIdeal_integers (E : Type*) [Field E] [Algebra E (PadicA
 
 variable (E : Type) [Field E] [Algebra E (PadicAlgCl l)]
 
-/-- `ℓ` is a nonzero element of `𝒪_E`. -/
-lemma natCast_ne_zero_integers : (l : integers l E) ≠ 0 := fun h ↦ by
-  have h' := congrArg (fun x : integers l E ↦ algebraMap E (PadicAlgCl l) (x : E)) h
-  have hl : ((l : integers l E) : E) = l := by simp
-  simp only [hl, map_natCast, ZeroMemClass.coe_zero, map_zero] at h'
-  exact Nat.cast_ne_zero.2 (Fact.out : l.Prime).ne_zero h'
 
 /-- The image of `ℓ` in `Λ = Shrink 𝒪_E`. -/
 lemma shrinkRingEquiv_natCast [Small.{u + 1} E] :
     shrinkRingEquiv l E (l : integers l E) = (l : Shrink.{u + 1} (integers l E)) :=
   map_natCast _ l
 
-/-- `ℓ` is a nonzerodivisor of `Λ = Shrink 𝒪_E`, a domain. -/
-lemma natCast_mem_nonZeroDivisors_shrink [Small.{u + 1} E] :
-    (l : Shrink.{u + 1} (integers l E)) ∈ nonZeroDivisors (Shrink.{u + 1} (integers l E)) := by
-  rw [← shrinkRingEquiv_natCast, mem_nonZeroDivisors_iff]
-  refine ⟨fun x hx ↦ ?_, fun x hx ↦ ?_⟩ <;>
-  · apply (shrinkRingEquiv l E).symm.injective
-    have := congrArg (shrinkRingEquiv l E).symm hx
-    simp only [map_mul, RingEquiv.symm_apply_apply, map_zero] at this ⊢
-    simpa [natCast_ne_zero_integers] using this
 
 section Complete
 
@@ -182,34 +167,5 @@ lemma integersModPowEquivShrinkQuot_mk (n : ℕ) (x : integers l E) :
       Ideal.Quotient.mk _ (shrinkRingEquiv.{0, u} l E x) :=
   rfl
 
-/-- `PadicAlgCl.integersModPowEquivShrinkQuot` is compatible with the transition maps. -/
-lemma integersModPowEquivShrinkQuot_transition (n : ℕ) (x : integersModPow l E (n + 1)) :
-    integersModPowEquivShrinkQuot.{u} l E n (integersModPowTransition l E n x) =
-      Submodule.factor (Ideal.pow_le_pow_right n.le_succ)
-        (integersModPowEquivShrinkQuot.{u} l E (n + 1) x) := by
-  obtain ⟨y, rfl⟩ := integersModPowMk_surjective l E (n + 1) x
-  rfl
-
-/-- **`𝒪_E` acts on `ℓ`-power torsion through a discrete quotient**: for a `Λ`-module `M` and
-`m ∈ M` killed by `ℓⁿ`, the map `r ↦ r • m` on `𝒪_E` (with its `ℓ`-adic topology) is locally
-constant, factoring through the discrete ring `𝒪_E ⧸ ℓⁿ`. -/
-lemma isLocallyConstant_shrinkRingEquiv_smul {M : Type*} [AddCommGroup M]
-    [Module (Shrink.{u + 1} (integers l E)) M] (n : ℕ) (m : M)
-    (hm : (l : Shrink.{u + 1} (integers l E)) ^ n • m = 0) :
-    letI := normedFieldOfAlgebra l E
-    IsLocallyConstant fun r : integers l E ↦ shrinkRingEquiv.{0, u} l E r • m := by
-  let := normedFieldOfAlgebra l E
-  let s := Function.surjInv (integersModPowMk_surjective l E n)
-  have hf : (fun r : integers l E ↦ shrinkRingEquiv.{0, u} l E r • m) =
-      (fun q ↦ shrinkRingEquiv.{0, u} l E (s q) • m) ∘ integersModPowMk l E n := by
-    funext r
-    have hr : integersModPowMk l E n (s (integersModPowMk l E n r)) = integersModPowMk l E n r :=
-      Function.surjInv_eq _ _
-    obtain ⟨a, ha⟩ := Ideal.mem_span_singleton'.1 (Ideal.Quotient.eq.1 hr.symm)
-    simp only [Function.comp_apply]
-    rw [← sub_eq_zero, ← sub_smul, ← map_sub, ← ha, map_mul, map_pow, shrinkRingEquiv_natCast,
-      mul_smul, hm, smul_zero]
-  rw [hf]
-  exact (IsLocallyConstant.of_discrete _).comp_continuous (continuous_integersModPowMk l E n)
 
 end PadicAlgCl

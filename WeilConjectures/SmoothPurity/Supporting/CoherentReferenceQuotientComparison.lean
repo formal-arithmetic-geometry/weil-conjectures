@@ -164,7 +164,7 @@ private theorem referenceSystemUnit (W : Scheme.{u})
   erw [CategoryTheory.Functor.map_id, Category.id_comp]
   erw [Category.id_comp, Category.id_comp]
   dsimp only [Functor.rightDerivedFunctorUnitQ]
-  erw [hqiB, hqA, CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id] <;> rfl
+  erw [hqiB, hqA, CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]; rfl
 
 private theorem referenceDerivedModel (W : Scheme.{u}) :
     ∃ D : CompletionUnit.DerivedModel l E W (pullbackTensorCalculus l E W)
