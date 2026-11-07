@@ -164,6 +164,11 @@ noncomputable def deformationSpaceSection : 𝔸(ULift.{u} (Fin 1); B) ⟶ s.ker
   s.affineSpaceToQuotientPolynomialSpec ≫ relativeGluingMap s.ker.coequifibered_toReesPresheaf
     s.ker.coequifibered_toQuotientPolynomialAlgebra s.ker.reesToQuotientPolynomial
 
+lemma toReesPresheaf_comp_reesToQuotientPolynomial :
+    s.ker.toReesPresheaf ≫ s.ker.reesToQuotientPolynomial = s.ker.toQuotientPolynomialAlgebra := by
+  ext U x
+  exact Ideal.extendedReesAlgebraToPolynomial_algebraMap (I := s.ker.siteIdeal U.unop) _
+    Ideal.mk_ker.ge x
 
 @[reassoc (attr := simp)]
 lemma deformationSpaceSection_toPolynomialSpec :
@@ -187,6 +192,11 @@ lemma deformationSpaceSection_toBase :
       V.polynomialSpecToAffineSpace ≫ _ from V.polynomialSpecToAffineSpace_over.symm,
     IsIso.inv_hom_id_assoc, AffineSpace.map_over]
 
+variable {g s} in
+lemma deformationSpaceSection_deformationSpaceProj (hs : s ≫ g = 𝟙 B) :
+    s.deformationSpaceSection ≫ deformationSpaceProj g s = 𝟙 _ := by
+  rw [deformationSpaceProj, deformationSpaceSection_toPolynomialSpec_assoc,
+    IsIso.inv_hom_id_assoc, ← AffineSpace.map_comp, hs, AffineSpace.map_id]
 
 /-! #### The fibre over `t = 0` -/
 
@@ -287,6 +297,13 @@ lemma isPullback_laurentSpecToDeformationSpace :
   exact s.ker.isPullback_laurentSpecToDeformationSpace.paste_vert
     (isPullback_laurentSpecToPuncturedLine g)
 
+/-- **The punctured trivialisation.** Over `𝔾_{m,B}` the deformation space is `V ×_B 𝔾_{m,B}`. -/
+lemma isPullback_deformationSpaceGeneric :
+    IsPullback (deformationSpaceGeneric g s) (pullback.snd _ _) (deformationSpaceProj g s)
+      (puncturedLine B).ι :=
+  (isPullback_laurentSpecToDeformationSpace g s).of_iso (isPullback_laurentSpec g).isoPullback
+    (Iso.refl _) (Iso.refl _) (Iso.refl _) (by simp [deformationSpaceGeneric]) (by simp)
+    (by simp) (by simp)
 
 @[reassoc (attr := simp)]
 lemma deformationSpaceGeneric_toBase :
@@ -324,6 +341,88 @@ noncomputable def deformationSpaceOneFibre : V ⟶ s.ker.deformationSpace :=
     rw [Category.assoc, oneSectionToPuncturedLine_ι_over, Category.id_comp,
       Category.comp_id]) ≫ deformationSpaceGeneric g s
 
+/-- Pulling back a base change along a section gives back the source. -/
+lemma isPullback_lift_of_section {X' Y' Z' : Scheme.{u}} (f : X' ⟶ Z') (h : Y' ⟶ Z')
+    (σ : Z' ⟶ Y') (hσ : σ ≫ h = 𝟙 Z') :
+    IsPullback (pullback.lift (𝟙 X') (f ≫ σ) (by simp [hσ])) f (pullback.snd f h) σ :=
+  IsPullback.of_right (by simpa [hσ] using IsPullback.of_horiz_isIso (CommSq.mk (by simp)))
+    (by simp) (IsPullback.of_hasPullback f h)
+
+/-- **The fibre over `t = 1` is `(g, s)`.** -/
+lemma isPullback_deformationSpaceOneFibre :
+    IsPullback (deformationSpaceOneFibre g s) g (deformationSpaceProj g s)
+      (AffineSpace.oneSection (ULift.{u} (Fin 1)) B) := by
+  have := (isPullback_lift_of_section g ((puncturedLine B).ι ≫ 𝔸(ULift.{u} (Fin 1); B) ↘ B)
+    (oneSectionToPuncturedLine B) (oneSectionToPuncturedLine_ι_over B)).paste_horiz
+      (isPullback_deformationSpaceGeneric g s)
+  rwa [oneSectionToPuncturedLine_ι] at this
+
+lemma laurentSpecToDeformationSpace_toBase :
+    s.ker.laurentSpecToDeformationSpace ≫ s.ker.deformationSpaceProj =
+      V.laurentSpecToPolynomialSpec ≫ V.polynomialSpecProj := by
+  rw [IdealSheafData.laurentSpecToDeformationSpace,
+    relativeGluingMap_toBase _ _ _ s.ker.toReesPresheaf_comp_reesToLaurent,
+    laurentSpecToPolynomialSpec, relativeGluingMap_toBase _ _ _
+      IdealSheafData.toPolynomialPresheaf_comp_polynomialToLaurent]
+
+variable {g s} in
+lemma comp_deformationSpaceOneFibre (hs : s ≫ g = 𝟙 B) :
+    s ≫ deformationSpaceOneFibre g s =
+      AffineSpace.oneSection (ULift.{u} (Fin 1)) B ≫ s.deformationSpaceSection := by
+  have hP := isPullback_laurentSpecToDeformationSpace g s
+  have hm : (AffineSpace.oneSection (ULift.{u} (Fin 1)) B ≫ s.deformationSpaceSection) ≫
+      deformationSpaceProj g s = oneSectionToPuncturedLine B ≫ (puncturedLine B).ι := by
+    rw [Category.assoc, deformationSpaceSection_deformationSpaceProj hs, Category.comp_id,
+      oneSectionToPuncturedLine_ι]
+  rw [← hP.lift_fst _ _ hm, deformationSpaceOneFibre, deformationSpaceGeneric]
+  simp only [← Category.assoc]
+  congr 1
+  refine (isPullback_laurentSpec g).hom_ext ?_ ?_
+  · rw [Category.assoc, IsPullback.isoPullback_inv_fst, ← laurentSpecToDeformationSpace_toBase,
+      hP.lift_fst_assoc, Category.assoc, Category.assoc, deformationSpaceSection_toBase,
+      ← Category.assoc (AffineSpace.oneSection _ B), AffineSpace.oneSection_comp_over,
+      Category.id_comp]
+    simp
+  · rw [hP.lift_snd, Category.assoc, Category.assoc, IsPullback.isoPullback_inv_snd,
+      pullback.lift_snd, reassoc_of% hs]
+
+lemma zeroSection_comp_affineSpaceToQuotientPolynomialSpec :
+    AffineSpace.zeroSection (ULift.{u} (Fin 1)) B ≫ s.affineSpaceToQuotientPolynomialSpec =
+      s.toQuotientSpec ≫ relativeGluingMap s.ker.coequifibered_toQuotientPolynomialAlgebra
+        s.ker.coequifibered_toQuotientAlgebra s.ker.quotientPolynomialEvalZero := by
+  refine s.ker.isPullback_quotientPolynomialSpec.hom_ext ?_ ?_
+  · rw [Category.assoc, affineSpaceToQuotientPolynomialSpec_toQuotientSpec,
+      AffineSpace.zeroSection_over_assoc, Category.assoc, ← relativeGluingMap_comp,
+      s.ker.polynomialC_comp_quotientPolynomialEvalZero]
+    exact (Category.comp_id _).symm.trans (congrArg (s.toQuotientSpec ≫ ·)
+      (relativeGluingMap_id s.ker.coequifibered_toQuotientAlgebra).symm)
+  · rw [Category.assoc, affineSpaceToQuotientPolynomialSpec_toPolynomialSpec,
+      ← Category.assoc (AffineSpace.zeroSection _ B), AffineSpace.zeroSection_comp_map,
+      Category.assoc, Category.assoc, ← relativeGluingMap_comp,
+      ← s.ker.polynomialToPolynomialZero_comp_polynomialZeroToQuotient,
+      relativeGluingMap_comp V.coequifibered_toPolynomialPresheaf
+        V.coequifibered_toPolynomialZeroPresheaf]
+    have h : relativeGluingMap V.coequifibered_toPolynomialZeroPresheaf
+        s.ker.coequifibered_toQuotientAlgebra s.ker.polynomialZeroToQuotient =
+        (relativeGluingData s.ker.coequifibered_toQuotientAlgebra).toBase ≫
+          inv (relativeGluingData V.coequifibered_toPolynomialZeroPresheaf).toBase := by
+      rw [IsIso.eq_comp_inv]
+      exact relativeGluingMap_toBase _ _ _
+        s.ker.toPolynomialZeroPresheaf_comp_polynomialZeroToQuotient
+    rw [reassoc_of% h, toQuotientSpec_toBase_assoc]
+    change _ = s ≫ V.polynomialSpecZeroSection
+    rw [
+      ← polynomialSpecZeroSection_comp_polynomialSpecToAffineSpace, Category.assoc,
+      IsIso.hom_inv_id, Category.comp_id]
+
+variable {s} in
+lemma normalConeZeroSection_comp_normalConeToDeformationSpace :
+    s.normalConeZeroSection ≫ s.ker.normalConeToDeformationSpace =
+      AffineSpace.zeroSection (ULift.{u} (Fin 1)) B ≫ s.deformationSpaceSection := by
+  rw [normalConeZeroSection, deformationSpaceSection, reassoc_of%
+    zeroSection_comp_affineSpaceToQuotientPolynomialSpec, Category.assoc,
+    IdealSheafData.normalConeToDeformationSpace, ← relativeGluingMap_comp,
+    ← relativeGluingMap_comp, s.ker.toQuotientPresheaf_comp_normalConeToQuotient]
 
 end Construction
 
@@ -725,6 +824,17 @@ instance [QuasiCompact g] : QuasiCompact (deformationSpaceProj g s) := by
   rw [deformationSpaceProj]
   infer_instance
 
+/-- `g̃` is compactifiable over a quasi-compact quasi-separated base, by Nagata's
+compactification theorem. -/
+lemma hasCompactification_deformationSpaceProj (d : ℕ) [SmoothOfRelativeDimension d g]
+    [IsSeparated g] [QuasiCompact g] [CompactSpace B] [QuasiSeparatedSpace B]
+    [IsClosedImmersion s] (hs : s ≫ g = 𝟙 B) :
+    HasCompactification (deformationSpaceProj g s) :=
+  have := smoothOfRelativeDimension_deformationSpaceProj d g s hs
+  have := SmoothOfRelativeDimension.smooth d (deformationSpaceProj g s)
+  have := QuasiCompact.compactSpace_of_compactSpace (𝔸(ULift.{u} (Fin 1); B) ↘ B)
+  have := quasiSeparatedSpace_of_quasiSeparated (𝔸(ULift.{u} (Fin 1); B) ↘ B)
+  (NagataCompactification (deformationSpaceProj g s)).hasCompactification
 
 end Separated
 

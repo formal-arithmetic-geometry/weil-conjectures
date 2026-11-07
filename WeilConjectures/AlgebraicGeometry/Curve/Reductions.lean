@@ -116,6 +116,7 @@ private theorem finite_middle {X : Scheme.{u}}
   exact (CategoryTheory.Abelian.Ext.covariant_sequence_exact₂' _ hS q).ab_finite
 
 
+
 private theorem surjective_middle_cohomologyMap {X Y : Scheme.{u}} (a : Y ⟶ X)
     {S : ShortComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})}
     (hS : S.ShortExact) (q : ℕ) [Subsingleton (Sheaf.H S.X₁ (q + 1))]
@@ -312,6 +313,101 @@ theorem IsCurve.Assertions.of_shortExact [IsNoetherianRing Λ] {k : Type u} [Fie
 
 /-! ### Dimension zero -/
 
+private theorem subsingleton_sheafH_of_dim_zero {k : Type u} [Field k] [IsAlgClosed k]
+    {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsSeparated f]
+    [LocallyOfFiniteType f] [QuasiCompact f] (hC : topologicalKrullDim C ≤ 0)
+    (F : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) (hq : 0 < q) :
+    Subsingleton (Sheaf.H F q) := by
+  have h := (zero_dimensional_etale_cohomology k C f hC F
+    (fun x ↦ AlgebraicClosure (C.residueField x)) C.algClosurePoint
+    (fun x ↦ C.algClosurePoint_base x default)).2.1 q hq
+  let e := (Scheme.nonempty_sheafH_extDerivedIso C q).some.app F
+  constructor
+  intro x y
+  exact e.addCommGroupIsoToAddEquiv.injective (h.elim _ _)
+
+
+/-- **Field extension in dimension zero.** Let `k ⊆ k'` be algebraically closed fields, `C` a
+separated `k`-scheme of finite type of dimension at most zero, and `F` a torsion étale sheaf of
+`Λ`-modules on `C`. For every cartesian square
+
+```
+C' --ι'--> C
+|          |
+f'         f
+v          v
+Spec k' -ι-> Spec k
+```
+
+the pullback map `Hᵠ(C, F) ⟶ Hᵠ(C', ι'^* F)` is bijective for every `q`: both sides vanish for
+`q > 0`, and in degree zero both are the finite product of the stalks of `F` at the points of
+`C`. (blueprint: `lem-weil-pbc-zero-dimensional-field-extension`) 
+(blueprint: lem-weil-pbc-zero-dimensional-field-extension)
+-/
+theorem IsCurve.bijective_cohomologyMap_of_topologicalKrullDim_le_zero {k k' : Type u}
+    [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k'] {C C' : Scheme.{u}}
+    (f : C ⟶ Spec (.of k)) [IsCurve f] (hC : topologicalKrullDim C ≤ 0)
+    {ι : Spec (.of k') ⟶ Spec (.of k)} {f' : C' ⟶ Spec (.of k')} {ι' : C' ⟶ C}
+    (h : IsPullback ι' f' f ι) (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    [Scheme.IsTorsionModuleSheaf F] (q : ℕ) :
+    Function.Bijective (Etale.cohomologyMap ι'
+      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q) :=
+  by
+    let A := (sheafCompose C.smallEtaleTopology
+      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F
+    cases q with
+    | zero =>
+      let A' := ((ι')^*[AddCommGrpCat.{u + 1}]).obj A
+      let e : Sheaf.H A 0 ≃+ (Sheaf.Γ C.smallEtaleTopology AddCommGrpCat.{u + 1}).obj A :=
+        (Sheaf.H.equiv₀ A terminalIsTerminal).trans
+          (((Sheaf.ΓNatIsoSheafSections _ _ terminalIsTerminal).symm.app A)
+            |>.addCommGroupIsoToAddEquiv)
+      let e' : Sheaf.H A' 0 ≃+
+          (Sheaf.Γ C'.smallEtaleTopology AddCommGrpCat.{u + 1}).obj A' :=
+        (Sheaf.H.equiv₀ A' terminalIsTerminal).trans
+          (((Sheaf.ΓNatIsoSheafSections _ _ terminalIsTerminal).symm.app A')
+            |>.addCommGroupIsoToAddEquiv)
+      have hΓ := Etale.bijective_globalSectionsUpperStarMap_of_dim_zero f hC h A
+      have he (x : Sheaf.H A 0) :
+          Etale.cohomologyMap ι' A 0 x =
+            e'.symm (Etale.globalSectionsUpperStarMap AddCommGrpCat.{u + 1} ι' A (e x)) := by
+        have hh := Etale.cohomologyMap_zero_eq_globalSectionsUpperStarMap ι' A (e x)
+        change Etale.cohomologyMap ι' A 0 (e.symm (e x)) =
+          e'.symm (Etale.globalSectionsUpperStarMap AddCommGrpCat.{u + 1} ι' A (e x)) at hh
+        simpa only [AddEquiv.symm_apply_apply] using hh
+      have hb := e'.symm.bijective.comp (hΓ.comp e.bijective)
+      have heq : Etale.cohomologyMap ι' A 0 =
+          e'.symm ∘ Etale.globalSectionsUpperStarMap AddCommGrpCat.{u + 1} ι' A ∘ e :=
+        funext he
+      change Function.Bijective (Etale.cohomologyMap ι' A 0)
+      rw [heq]
+      exact hb
+    | succ q =>
+      obtain ⟨a, rfl⟩ := Spec.map_surjective ι
+      let : Algebra k k' := a.hom.toAlgebra
+      let : C.Over (Spec (.of k)) := ⟨f⟩
+      have : IsSeparated (C ↘ Spec (.of k)) := by
+        change IsSeparated f
+        infer_instance
+      have : LocallyOfFiniteType (C ↘ Spec (.of k)) := by
+        change LocallyOfFiniteType f
+        infer_instance
+      have : QuasiCompact (C ↘ Spec (.of k)) := by
+        change QuasiCompact f
+        infer_instance
+      have hdim := (zeroDimensional_baseChange_points k k' C hC).2.2.2.2.1
+      change topologicalKrullDim (pullback f (Spec.map a) : Scheme.{u}) ≤ 0 at hdim
+      have hdim' : topologicalKrullDim C' ≤ 0 := by
+        rw [IsHomeomorph.topologicalKrullDim_eq h.isoPullback.hom
+          h.isoPullback.hom.homeomorph.isHomeomorph]
+        exact hdim
+      have : IsSeparated f' := MorphismProperty.of_isPullback h inferInstance
+      have : LocallyOfFiniteType f' := MorphismProperty.of_isPullback h inferInstance
+      have : QuasiCompact f' := MorphismProperty.of_isPullback h inferInstance
+      have := subsingleton_sheafH_of_dim_zero f hC A (q + 1) (Nat.zero_lt_succ q)
+      have := subsingleton_sheafH_of_dim_zero f' hdim'
+        (((ι')^*[AddCommGrpCat.{u + 1}]).obj A) (q + 1) (Nat.zero_lt_succ q)
+      exact ⟨fun _ _ _ ↦ Subsingleton.elim _ _, fun y ↦ ⟨0, Subsingleton.elim _ _⟩⟩
 
 /-! ### Reduction to constructible prime torsion -/
 
@@ -417,9 +513,92 @@ theorem IsCurve.bijective_cohomologyMap_of_forall_isReduced {k : Type u} [Field 
       funext (Etale.cohomologyPullbackFunctorial j ι' A q).2.1
     exact (hj.of_comp_iff' _).mp (hcomp'.symm ▸ he'.comp hai)
 
+/-- **Constructible and primary reduction of the eight assertions.** Let `k` be algebraically
+closed. Suppose that the eight assertions `C(X, G)` hold for every reduced curve `X` over `k`,
+every prime `ℓ` and every constructible sheaf `G` of `𝐅_ℓ`-modules on `X` (modules over
+`ULift (ZMod ℓ)`). Then `C(C, F)` holds for every curve `C` over `k` and every torsion sheaf
+`F` of `Λ`-modules, for a finite ring `Λ` (over an infinite ring such as `𝐅_ℓ[t]` the constant
+sheaf is constructible and its `H⁰` on a proper curve is infinite); in particular so does the field
+extension invariance `C₇`.
+
+The proof is that of `AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_forall_isReduced`,
+run for all eight assertions simultaneously: reduction to `C_red`, constructible approximation
+and continuity of cohomology, primary decomposition, and induction on the exponent along
+`0 → F[ℓ] → F → F/F[ℓ] → 0` using `AlgebraicGeometry.IsCurve.Assertions.of_shortExact`.
+(blueprint: lemma-weil-pbc-curve-constructible-primary-reduction)
+-/
+theorem IsCurve.Assertions.of_forall_isReduced [Finite Λ] {k : Type u} [Field k]
+    [IsAlgClosed k]
+    (H : ∀ {X : Scheme.{u}} (g : X ⟶ Spec (.of k)) [IsCurve g] [IsReduced X] (ℓ : ℕ)
+      [Fact ℓ.Prime]
+      (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))))
+      [Scheme.IsConstructibleSheaf G], IsCurve.Assertions (ULift.{u + 1} (ZMod ℓ)) g G)
+    {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f]
+    (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Scheme.IsTorsionModuleSheaf F] :
+    IsCurve.Assertions Λ f F :=
+  by
+    obtain ⟨hred, hclosed, hsurj, -⟩ :=
+      reduction_isReduced_isClosedImmersion_isSurjective_isUniversalHomeomorphism C
+    let C₀ := C.nilradical.subscheme
+    let i : C₀ ⟶ C := C.nilradical.subschemeι
+    have : IsReduced C₀ := hred
+    have : IsClosedImmersion i := hclosed
+    have : Surjective i := hsurj
+    have : IsCurve (i ≫ f) :=
+      { toIsSeparated := inferInstance
+        toLocallyOfFiniteType := inferInstance
+        toQuasiCompact := inferInstance
+        krullDim_le_one := by
+          rw [IsHomeomorph.topologicalKrullDim_eq i i.isHomeomorph]
+          exact IsCurve.krullDim_le_one (f := f) }
+    let F₀ := ((i)^*[ModuleCat.{u + 1} Λ]).obj F
+    have hconstructible : ∀ (G : Sheaf C₀.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+        [Scheme.IsConstructibleSheaf G], IsCurve.Assertions Λ (i ≫ f) G := by
+      intro G _
+      apply IsCurve.assertions_of_constructible_prime_devissage Λ (i ≫ f) ?_ G
+      intro r _ M _
+      exact H (i ≫ f) r M
+    have hF₀ : IsCurve.Assertions Λ (i ≫ f) F₀ :=
+      IsCurve.assertions_of_constructible_approximation Λ (i ≫ f) hconstructible F₀
+    exact IsCurve.assertions_of_reduction Λ f F hF₀
 
 /-! ### Localisation to a dense open -/
 
+/-- **Dense-open localisation reduction.** Let `X` be a reduced curve over an algebraically
+closed field `k` and `F` a constructible sheaf of `Λ`-modules killed by a prime `r`, over a
+finite ring `Λ`. There is a dense open `j : U ⟶ X` whose connected components are irreducible
+and on which `F` is finite locally constant, and for it the eight assertions for `F` are
+equivalent to those for `j_! j^* F`: the open–closed sequence `0 → j_! j^* F → F → i_* i^* F → 0`
+has third term
+supported on the zero-dimensional complement `Z` of `U`, whose cohomology is concentrated in
+degree zero and invariant under field extension.
+(blueprint: lemma-weil-pbc-curve-dense-open-reduction)
+-/
+theorem IsCurve.exists_dense_assertions_iff_lowerShriek [Finite Λ] {k : Type u} [Field k]
+    [IsAlgClosed k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X]
+    (r : ℕ) [Fact r.Prime] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    [Scheme.IsConstructibleSheaf F] (hF : r • 𝟙 F = 0) :
+    ∃ U : X.Opens, Dense (U : Set X) ∧
+      (∀ x ∈ (U : Set X), IsIrreducible (connectedComponentIn (U : Set X) x)) ∧
+      Scheme.IsFiniteLocallyConstantSheaf ((U.ι)^*[ModuleCat.{u + 1} Λ].obj F) ∧
+      (IsCurve.Assertions Λ f F ↔ IsCurve.Assertions Λ f
+        ((U.ι)_!open[ModuleCat.{u + 1} Λ].obj ((U.ι)^*[ModuleCat.{u + 1} Λ].obj F))) :=
+  by
+    obtain ⟨V, hV, hFV⟩ := Scheme.IsConstructibleSheaf.exists_dense_open F
+    obtain ⟨n, U, hUV, hU, -, -, -, hcomp⟩ :=
+      IsCurve.exists_dense_irreducible_opens f V hV
+    let W : X.Opens := ⨆ a, U a
+    have hW : Dense (W : Set X) := by
+      simpa only [W, TopologicalSpace.Opens.coe_iSup] using hU
+    have hWV : W ≤ V := iSup_le hUV
+    have hFW : Scheme.IsFiniteLocallyConstantSheaf
+        ((W.ι)^*[ModuleCat.{u + 1} Λ].obj F) := by
+      have := hFV
+      apply Scheme.IsFiniteLocallyConstantSheaf.upperStar_of_range_subset W.ι V.ι
+      simpa only [Scheme.Opens.range_ι] using (show (W : Set X) ⊆ V from hWV)
+    refine ⟨W, hW, ?_, hFW, ?_⟩
+    · simpa only [W, TopologicalSpace.Opens.coe_iSup] using hcomp
+    · exact IsCurve.assertions_iff_dense_open_prime Λ f r F hF W hW
 
 /-- **Dense-open localisation, componentwise.** Let `C` be a reduced curve over an
 algebraically closed field `k` and `F` a constructible sheaf of `Λ`-modules killed by a prime

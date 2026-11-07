@@ -70,6 +70,18 @@ In degree `0` this is `Hom_{𝒪_X}(ℱ, 𝒢)` (`CategoryTheory.Abelian.Ext.hom
 abbrev Ext (ℱ 𝒢 : X.Modules) (i : ℕ) : Type u :=
   Abelian.Ext ℱ 𝒢 i
 
+/-- **The long exact `Ext` sequence.** A short exact sequence `0 → ℱ₁ → ℱ₂ → ℱ₃ → 0` of
+`𝒪_X`-modules gives, for every `𝒢` and `1 + n₀ = n₁`, the exact sequence
+`Ext^{n₀}(ℱ₃, 𝒢) → Ext^{n₀}(ℱ₂, 𝒢) → Ext^{n₀}(ℱ₁, 𝒢) → Ext^{n₁}(ℱ₃, 𝒢) → Ext^{n₁}(ℱ₂, 𝒢) →
+Ext^{n₁}(ℱ₁, 𝒢)`. The comparison with sheaf cohomology for finite locally free `ℱ` is
+`AlgebraicGeometry.Scheme.Modules.nonempty_ext_addEquiv_H`.
+
+(blueprint: `rem-ptr-sc-ext-sheaf-4`) -/
+theorem contravariantSequence_ext_exact {S : ShortComplex X.Modules} (hS : S.ShortExact)
+    (𝒢 : X.Modules) (n₀ n₁ : ℕ) (h : 1 + n₀ = n₁) :
+    (Abelian.Ext.contravariantSequence hS 𝒢 n₀ n₁ h).Exact :=
+  Abelian.Ext.contravariantSequence_exact hS 𝒢 n₀ n₁ h
+
 
 section Comparison
 
@@ -99,6 +111,10 @@ noncomputable def unitHomAddEquiv (M : X.Modules) : (𝟙_ X.Modules ⟶ M) ≃+
     rw [homOfGlobalSection_app_one, presheaf_map_id_apply]
   map_add' f g := rfl
 
+omit [HasExt X.Modules] in
+lemma unitHomAddEquiv_comp {M N : X.Modules} (f : 𝟙_ X.Modules ⟶ M) (g : M ⟶ N) :
+    unitHomAddEquiv N (f ≫ g) = Hom.app g ⊤ (unitHomAddEquiv M f) :=
+  rfl
 
 /-- `Ext⁰(𝒪_X, M)` is the group of global sections of `M`. -/
 noncomputable def extUnitZeroAddEquiv (M : X.Modules) : Ext (𝟙_ X.Modules) M 0 ≃+ Γ(M, ⊤) :=
@@ -337,6 +353,10 @@ noncomputable def extAddEquivOfIsoRight {A B B' : X.Modules} (e : B ≅ B') (n :
     exact Abelian.Ext.comp_mk₀_id x
   map_add' x y := Abelian.Ext.add_comp _ _ _ _
 
+/-- Evaluation of `AlgebraicGeometry.Scheme.Modules.extAddEquivOfIsoRight`. -/
+lemma extAddEquivOfIsoRight_apply {A B B' : X.Modules} (e : B ≅ B') {n : ℕ} (x : Ext A B n) :
+    extAddEquivOfIsoRight e n x = x.comp (Abelian.Ext.mk₀ e.hom) (add_zero n) :=
+  rfl
 
 /-- `Ext` is invariant under isomorphisms in its first variable. -/
 noncomputable def extAddEquivOfIsoLeft {A A' B : X.Modules} (e : A' ≅ A) (n : ℕ) :
@@ -353,6 +373,10 @@ noncomputable def extAddEquivOfIsoLeft {A A' B : X.Modules} (e : A' ≅ A) (n : 
     exact Abelian.Ext.mk₀_id_comp x
   map_add' x y := Abelian.Ext.comp_add _ _ _ _
 
+/-- Evaluation of `AlgebraicGeometry.Scheme.Modules.extAddEquivOfIsoLeft`. -/
+lemma extAddEquivOfIsoLeft_apply {A A' B : X.Modules} (e : A' ≅ A) {n : ℕ} (x : Ext A B n) :
+    extAddEquivOfIsoLeft e n x = (Abelian.Ext.mk₀ e.hom).comp x (zero_add n) :=
+  rfl
 
 /-- For a finite locally free `ℱ`, tensoring with the dual is the internal hom out of `ℱ`. -/
 noncomputable def tensorLeftDualIsoIhom (ℱ : X.Modules) [ℱ.IsFiniteLocallyFree] :
@@ -450,6 +474,29 @@ noncomputable def extAddEquivH (ℱ 𝒢 : X.Modules) [ℱ.IsFiniteLocallyFree] 
       ((extAddEquivOfIsoRight ((tensorLeftDualIsoIhom ℱ).app 𝒢).symm i).trans
         (extUnitAddEquivH _ i)))
 
+/-- The isomorphism `AlgebraicGeometry.Scheme.Modules.extAddEquivH` is natural in `𝒢`. -/
+lemma extAddEquivH_comp_mk₀ (ℱ : X.Modules) [ℱ.IsFiniteLocallyFree] {𝒢 𝒢' : X.Modules}
+    (g : 𝒢 ⟶ 𝒢') {i : ℕ} (x : Ext ℱ 𝒢 i) :
+    extAddEquivH ℱ 𝒢' i (x.comp (Abelian.Ext.mk₀ g) (add_zero i)) =
+      H.map (ℱᵛ ◁ g) i (extAddEquivH ℱ 𝒢 i x) := by
+  have hadj (z : Ext (ℱ ⊗ 𝟙_ X.Modules) 𝒢 i) :
+      ((ihom.adjunction ℱ).extAddEquiv (𝟙_ X.Modules) 𝒢' i).symm
+          (z.comp (Abelian.Ext.mk₀ g) (add_zero i)) =
+        (((ihom.adjunction ℱ).extAddEquiv (𝟙_ X.Modules) 𝒢 i).symm z).comp
+          (Abelian.Ext.mk₀ ((ihom ℱ).map g)) (add_zero i) := by
+    refine ((ihom.adjunction ℱ).extAddEquiv (𝟙_ X.Modules) 𝒢' i).symm_apply_eq.mpr ?_
+    refine Eq.trans ?_ ((ihom.adjunction ℱ).mapExtCounit_comp_mk₀ (𝟙_ X.Modules) g _).symm
+    exact congrArg (fun y ↦ y.comp (Abelian.Ext.mk₀ g) (add_zero i))
+      (((ihom.adjunction ℱ).extAddEquiv (𝟙_ X.Modules) 𝒢 i).apply_symm_apply z).symm
+  simp only [extAddEquivH, AddEquiv.trans_apply]
+  refine (congrArg (extUnitAddEquivH _ i) ?_).trans (extUnitAddEquivH_comp_mk₀ (ℱᵛ ◁ g) _)
+  rw [extAddEquivOfIsoLeft_apply, ← Abelian.Ext.comp_assoc_of_third_deg_zero]
+  erw [hadj]
+  rw [extAddEquivOfIsoRight_apply, extAddEquivOfIsoRight_apply,
+    Abelian.Ext.comp_assoc_of_third_deg_zero, Abelian.Ext.comp_assoc_of_third_deg_zero,
+    Abelian.Ext.mk₀_comp_mk₀, Abelian.Ext.mk₀_comp_mk₀]
+  congr 2
+  exact (tensorLeftDualIsoIhom ℱ).inv.naturality g
 
 end LocallyFreeCanonical
 

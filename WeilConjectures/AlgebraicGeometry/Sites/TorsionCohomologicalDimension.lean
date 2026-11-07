@@ -54,6 +54,15 @@ sense in general. -/
 noncomputable def torsionCohomologicalDimension (X : Scheme.{u}) : ℕ∞ :=
   ⨅ (d : ℕ) (_ : X.HasTorsionCohomologicalDimensionLE d), (d : ℕ∞)
 
+/-- `cd(X) ≤ c` if and only if `Hᵠ(X_ét, F) = 0` for all torsion `F` and `q > c`. -/
+lemma torsionCohomologicalDimension_le_iff {X : Scheme.{u}} {c : ℕ} :
+    X.torsionCohomologicalDimension ≤ c ↔ X.HasTorsionCohomologicalDimensionLE c := by
+  refine ⟨fun h ↦ ?_, fun h ↦ iInf₂_le c h⟩
+  by_contra hc
+  have : (c : ℕ∞) < X.torsionCohomologicalDimension := by
+    refine lt_of_lt_of_le (WithTop.coe_lt_coe.2 (Nat.lt_succ_self c)) (le_iInf₂ fun d hd ↦ ?_)
+    exact WithTop.coe_le_coe.2 (Nat.succ_le_of_lt (lt_of_not_ge fun hdc ↦ hc (hd.mono hdc)))
+  exact absurd h (not_le.2 this)
 
 /-- Blueprint `def-kun-cd`, relative version: the bound `cd(f) ≤ d` for a morphism `f : X ⟶ Y`.
 

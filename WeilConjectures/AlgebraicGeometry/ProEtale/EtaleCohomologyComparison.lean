@@ -57,6 +57,13 @@ lemma cohomologyComparison_apply (M : Sheaf S.smallEtaleTopology AddCommGrpCat.{
         (x.mapExactFunctor (comparisonUpperStar AddCommGrpCat.{u + 1} S)) (zero_add n) :=
   rfl
 
+/-- The comparison map is natural in the sheaf. -/
+lemma cohomologyComparison_map {M M' : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}}
+    (φ : M ⟶ M') (n : ℕ) (x : Sheaf.H M n) :
+    cohomologyComparison S M' n (Sheaf.H.map φ n x) =
+      Sheaf.H.map ((comparisonUpperStar AddCommGrpCat.{u + 1} S).map φ) n
+        (cohomologyComparison S M n x) :=
+  Sheaf.H.mapFunctor_map _ _ _ φ x
 
 /-- The pullback `ν^* I` of an injective étale sheaf has no higher pro-étale cohomology. -/
 theorem subsingleton_H_comparisonUpperStar_obj_of_injective

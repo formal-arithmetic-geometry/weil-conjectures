@@ -215,6 +215,23 @@ theorem surjective_npow_id (A : Over (Spec (.of K))) [GrpObj A] [IsAbelianVariet
     rw [Scheme.Hom.comp_base, TopCat.coe_comp]; exact hι.comp hsurj.surj⟩
   rwa [f.toImage_imageι] at this
 
+/-- Blueprint `lem-sc-mult-n-isogeny`: Surjectivity of the multiplication map.
+
+The `n`-torsion of an abelian variety is zero-dimensional for `0 < n`: it is finite over `K`
+(`AlgebraicGeometry.isFinite_torsionSubgroupScheme`), so its underlying space is discrete. -/
+theorem topologicalKrullDim_torsionSubgroupScheme (A : Over (Spec (.of K))) [GrpObj A]
+    [IsAbelianVariety A] (n : ℕ) (hn : 0 < n) :
+    topologicalKrullDim (torsionSubgroupScheme A n).left = 0 := by
+  have := isFinite_torsionSubgroupScheme A n hn
+  obtain ⟨p⟩ : Nonempty (Spec (.of K)) := inferInstance
+  have : DiscreteTopology (torsionSubgroupScheme A n).left := by
+    rw [← isDiscrete_univ_iff]
+    convert (torsionSubgroupScheme A n).hom.isDiscrete_preimage_singleton p
+    exact (Set.eq_univ_of_forall fun _ ↦ Subsingleton.elim _ _).symm
+  let x := (η[torsionSubgroupScheme A n]).left p
+  have : Nonempty (TopologicalSpace.IrreducibleCloseds (torsionSubgroupScheme A n).left) :=
+    ⟨⟨closure {x}, isIrreducible_singleton.closure, isClosed_closure⟩⟩
+  exact le_antisymm (topologicalKrullDim_zero_of_discreteTopology _) Order.krullDim_nonneg
 
 variable {A B : Over (Spec (.of K))} [GrpObj A] [GrpObj B]
 
@@ -297,6 +314,25 @@ theorem IsIsogeny.finrank_eq (f : A ⟶ B) [IsIsogeny f] (y : B.left) :
   have := LocallyOfFiniteType.isLocallyNoetherian B.hom
   exact f.left.finrank_eq_of_fiberDegree_eq (IsIsogeny.fiberDegree_eq f) y
 
+/-- Blueprint `lem-sc-isogeny-degree`: The degree of an isogeny.
+
+An isogeny `f : A ⟶ B` of abelian varieties is finite locally free of degree the order of its
+kernel: it is finite (`AlgebraicGeometry.IsIsogeny.isFinite`), flat
+(`AlgebraicGeometry.IsIsogeny.flat`) and of finite presentation, and all of its fibres have
+degree `isogenyDegree f` (`AlgebraicGeometry.IsIsogeny.fiberDegree_eq`).
+
+This is the second paragraph of blueprint `def-sc-isogeny` (and of `def-sc-isogeny`): an
+isogeny of abelian varieties is finite and flat, and its degree as a finite flat morphism is
+the order of its kernel. As blueprint `rem-ptr-sc-isogeny-2` notes, this is a theorem and not
+part of the definition `AlgebraicGeometry.IsIsogeny`. -/
+theorem IsIsogeny.isFiniteLocallyFreeOfDegree (f : A ⟶ B) [IsIsogeny f] :
+    f.left.IsFiniteLocallyFreeOfDegree (isogenyDegree f) := by
+  have := IsIsogeny.isFinite f
+  have := IsIsogeny.flat f
+  have := LocallyOfFiniteType.isLocallyNoetherian B.hom
+  have : LocallyOfFinitePresentation f.left :=
+    LocallyOfFinitePresentation.iff_locallyOfFiniteType.mpr inferInstance
+  exact { fiberDegree_eq := IsIsogeny.fiberDegree_eq f }
 
 /-- Blueprint `sk-prop-av-isogeny`: The multiplication-by-`n` isogeny.
 
@@ -345,6 +381,14 @@ theorem isogenyDegree_npow_id (n : ℕ) (hn : 0 < n) :
   rw [pow_mul]
   exact_mod_cast (mul_right_cancel₀ hpos.ne' hpull).symm
 
+omit [IsAbelianVariety A] in
+/-- Blueprint `sk-prop-av-isogeny`: The multiplication-by-`n` isogeny.
+
+The `n`-torsion of an abelian variety is flat over the base field for `0 < n`: every scheme over
+a field is flat over it. -/
+theorem flat_torsionSubgroupScheme (n : ℕ) (_hn : 0 < n) :
+    Flat (torsionSubgroupScheme A n).hom :=
+  inferInstance
 
 /-- Blueprint `sk-prop-av-isogeny`: The multiplication-by-`n` isogeny.
 
@@ -353,6 +397,39 @@ theorem finrankΓ_torsionSubgroupScheme (n : ℕ) (hn : 0 < n) :
     (torsionSubgroupScheme A n).hom.finrankΓ = n ^ (2 * IsAbelianVariety.dim A) :=
   isogenyDegree_npow_id n hn
 
+/-- Blueprint `lem-sc-isogeny-facts`: Multiplication by `n` is finite flat of degree
+`n ^ (2 * g)`.
+
+Let `A` be an abelian variety of dimension `g` over `K` and let `0 < n`. Then `[n] : A ⟶ A` is
+finite locally free of rank `n ^ (2 * g)`. Finiteness and flatness are
+`AlgebraicGeometry.isFinite_npow_id` and `AlgebraicGeometry.IsIsogeny.flat`, and the kernel
+`A[n]` has order `n ^ (2 * g)` by `AlgebraicGeometry.finrankΓ_torsionSubgroupScheme`. -/
+theorem finrank_npow_id (n : ℕ) (hn : 0 < n) (y : A.left) :
+    (𝟙 A ^ n).left.finrank y = n ^ (2 * IsAbelianVariety.dim A) := by
+  have := isIsogeny_npow_id (A := A) n hn
+  rw [IsIsogeny.finrank_eq, isogenyDegree_npow_id n hn]
+
+/-- Blueprint `lem-sc-isogeny-facts`: Multiplication by `n` is finite flat of degree
+`n ^ (2 * g)`.
+
+Multiplication by `0 < n` on an abelian variety of dimension `g` is finite locally free of
+degree `n ^ (2 * g)`: it is an isogeny of that degree (`AlgebraicGeometry.isogenyDegree_npow_id`),
+hence `AlgebraicGeometry.IsIsogeny.isFiniteLocallyFreeOfDegree` applies. -/
+theorem isFiniteLocallyFreeOfDegree_npow_id (n : ℕ) (hn : 0 < n) :
+    (𝟙 A ^ n).left.IsFiniteLocallyFreeOfDegree (n ^ (2 * IsAbelianVariety.dim A)) := by
+  have := isIsogeny_npow_id (A := A) n hn
+  exact isogenyDegree_npow_id (A := A) n hn ▸ IsIsogeny.isFiniteLocallyFreeOfDegree (𝟙 A ^ n)
+
+/-- Blueprint `lem-sc-isogeny-facts`, part (b): Basic facts about isogenies.
+
+Multiplication by `0 < n` on an abelian variety is an fppf covering: it is flat, locally of
+finite presentation (`AlgebraicGeometry.isFiniteLocallyFreeOfDegree_npow_id`) and surjective
+(`AlgebraicGeometry.surjective_npow_id`). -/
+theorem singleton_mem_fppfPrecoverage_npow_id (n : ℕ) (hn : 0 < n) :
+    Presieve.singleton (𝟙 A ^ n).left ∈ Scheme.fppfPrecoverage A.left := by
+  have := isFiniteLocallyFreeOfDegree_npow_id (A := A) n hn
+  have := surjective_npow_id A n hn
+  exact Scheme.Hom.singleton_mem_fppfPrecoverage _
 
 /-- Blueprint `lem-sc-isogeny-surjective`: Surjectivity of multiplication by `n` on points.
 

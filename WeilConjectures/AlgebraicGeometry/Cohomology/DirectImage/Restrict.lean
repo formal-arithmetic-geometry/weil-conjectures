@@ -55,6 +55,13 @@ section BaseChange
 
 variable {T' X' : Scheme.{u}} {f : X ⟶ T} {g : T' ⟶ T} {g' : X' ⟶ X} {f' : X' ⟶ T'}
 
+omit [HasInjectiveResolutions X.Modules] in
+/-- In a cartesian square whose bottom arrow `g` is an open immersion, the top arrow `g'` is an
+open immersion. -/
+lemma isOpenImmersion_of_isPullback [IsOpenImmersion g] (sq : IsPullback g' f' f g) :
+    IsOpenImmersion g' := by
+  rw [← sq.isoPullback_hom_fst]
+  infer_instance
 
 variable [IsOpenImmersion g] [IsOpenImmersion g'] (sq : IsPullback g' f' f g)
 

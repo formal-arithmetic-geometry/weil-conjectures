@@ -58,6 +58,14 @@ lemma finite_and_discreteTopology_of_isFinite {Z : Scheme.{u}} (g : Z ⟶ Spec (
   have : DiscreteTopology (Spec Γ(Z, ⊤)) := inferInstanceAs (DiscreteTopology (PrimeSpectrum _))
   exact ⟨Finite.of_injective e e.injective, e.isEmbedding.discreteTopology⟩
 
+/-- **A finite scheme locally of finite type over a field is finite over it**: the morphism is
+quasi-compact, the source being a finite space, and locally quasi-finite, its fibre being finite,
+over the artinian scheme `Spec K`. -/
+lemma IsFinite.of_finite_of_locallyOfFiniteType {Z : Scheme.{u}} [Finite Z]
+    (g : Z ⟶ Spec (.of K)) [LocallyOfFiniteType g] : IsFinite g :=
+  have : LocallyQuasiFinite g :=
+    LocallyQuasiFinite.of_finite_preimage_singleton _ fun _ ↦ Set.toFinite _
+  IsFinite.of_locallyQuasiFinite g
 
 /-- A nonempty scheme finite over a field `K` has non-zero `dim_K Γ(Z, 𝒪_Z)`. -/
 lemma Scheme.Hom.finrankΓ_pos_of_isFinite {Z : Scheme.{u}} (g : Z ⟶ Spec (.of K)) [IsFinite g]

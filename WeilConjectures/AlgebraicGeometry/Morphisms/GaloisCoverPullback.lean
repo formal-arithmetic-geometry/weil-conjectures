@@ -108,6 +108,8 @@ lemma pullback_P : (c.pullback f).P = Limits.pullback c.π f :=
 lemma pullback_π : (c.pullback f).π = Limits.pullback.snd c.π f :=
   rfl
 
+lemma pullback_smul (g : G) : (c.pullback f).smul g = c.pullbackSMul f g :=
+  rfl
 
 /-- The square `P ×_Y X ⟶ P`, `P ×_Y X ⟶ X` over `Y` commutes. -/
 @[reassoc]

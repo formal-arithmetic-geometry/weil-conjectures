@@ -138,5 +138,18 @@ theorem isFinitePresentation_cokernel_of_isFiniteType
   exact @SheafOfModules.IsFinitePresentation.of_coversTop _ _ _ _ _ _ _ _
     (cokernel f) q.I q.X q.coversTop hfp
 
+/-- Stacks Project, Modules, Lemma 0H96, its finite-presentation special case
+(blueprint: lem-weil-pbc-module-finite-presentation-cokernel).
+
+Proof: step 7 of the node applies Mathlib's instance
+`SheafOfModules.instIsFiniteTypeOfIsFinitePresentation` to G, as its
+local finite presentation supplies finitely many generators
+(def-weil-pbc-module-finite-type-presentation). Then steps 1-6, stated above in
+`isFinitePresentation_cokernel_of_isFiniteType`, give finite presentation of the cokernel. -/
+theorem isFinitePresentation_cokernel_of_both_isFinitePresentation
+    (X : RingedSpace.{u}) {G H : SheafOfModules.{u} (moduleRings X)}
+    (f : G ⟶ H) [G.IsFinitePresentation] [H.IsFinitePresentation] :
+    (cokernel f).IsFinitePresentation := by
+  exact isFinitePresentation_cokernel_of_isFiniteType X f
 
 end AlgebraicGeometry.RingedSpace

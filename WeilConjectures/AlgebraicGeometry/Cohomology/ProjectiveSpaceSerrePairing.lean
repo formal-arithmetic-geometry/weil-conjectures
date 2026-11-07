@@ -165,6 +165,57 @@ lemma twistLaurentSection_zero (m : ℤ) (s : Set n) :
     twistLaurentSection A m s 0 = 0 :=
   map_zero _
 
+/-- **Products of Laurent polynomial sections**: over `U_s` (`s` nonempty), the canonical
+isomorphism `𝒪(a) ⊗ 𝒪(b) ≅ 𝒪(a + b)` sends `F ⊗ G` to `F G`, for Laurent polynomials `F` and
+`G` of degrees `a` and `b` regular on `U_s`.
+
+(blueprint: `lem-pc-twist-tensor`, `lem-pc-projective-space-serre-pairing`) -/
+lemma twistTensorIso_hom_app_twistLaurentSection {s : Set n} (hs : s.Nonempty) {a b : ℤ}
+    {x y : (n → ℤ) →₀ A} (hx : x ∈ Finsupp.supported A A (laurentExponents s a))
+    (hy : y ∈ Finsupp.supported A A (laurentExponents s b)) :
+    (twistTensorIso n (Spec (.of A)) a b).hom.app
+        (toProjInt n (Spec (.of A)) ⁻¹ᵁ basicOpenInt n s)
+        (tmulSection (twistLaurentSection A a s x) (twistLaurentSection A b s y)) =
+      twistLaurentSection A (a + b) s
+        (AddMonoidAlgebra.ofCoeff x * AddMonoidAlgebra.ofCoeff y).coeff := by
+  rw [Finsupp.supported_eq_span_single] at hx hy
+  induction hx using Submodule.span_induction with
+  | mem x hx =>
+    obtain ⟨e, he, rfl⟩ := hx
+    induction hy using Submodule.span_induction with
+    | mem y hy =>
+      obtain ⟨e', he', rfl⟩ := hy
+      rw [AddMonoidAlgebra.ofCoeff_single, AddMonoidAlgebra.ofCoeff_single,
+        AddMonoidAlgebra.single_mul_single, AddMonoidAlgebra.coeff_single,
+        twistLaurentSection_single, twistLaurentSection_single,
+        twistLaurentSection_single, twistLaurentMonomial_of_mem he,
+        twistLaurentMonomial_of_mem he',
+        twistLaurentMonomial_of_mem (e := e + e') (Proj.addExponent a b ⟨e, he⟩ ⟨e', he'⟩).2,
+        smul_tmulSection, tmulSection_smul, Hom.app_smul, Hom.app_smul,
+        twistTensorIso_hom_app_twistMonomialSection _ hs, mul_one, map_one, one_smul, one_smul,
+        one_smul]
+      rfl
+    | zero =>
+      rw [twistLaurentSection_zero, tmulSection_zero, map_zero, AddMonoidAlgebra.ofCoeff_zero,
+        mul_zero, AddMonoidAlgebra.coeff_zero, twistLaurentSection_zero]
+    | add y y' _ _ h h' =>
+      rw [twistLaurentSection_add, tmulSection_add, map_add, h, h',
+        AddMonoidAlgebra.ofCoeff_add, mul_add, AddMonoidAlgebra.coeff_add,
+        twistLaurentSection_add]
+    | smul r y _ h =>
+      rw [twistLaurentSection_smul, tmulSection_smul, Hom.app_smul, h,
+        AddMonoidAlgebra.ofCoeff_smul, mul_smul_comm, AddMonoidAlgebra.coeff_smul,
+        twistLaurentSection_smul]
+  | zero =>
+    rw [twistLaurentSection_zero, zero_tmulSection, map_zero, AddMonoidAlgebra.ofCoeff_zero,
+      zero_mul, AddMonoidAlgebra.coeff_zero, twistLaurentSection_zero]
+  | add x x' _ _ h h' =>
+    rw [twistLaurentSection_add, add_tmulSection, map_add, h, h', AddMonoidAlgebra.ofCoeff_add,
+      add_mul, AddMonoidAlgebra.coeff_add, twistLaurentSection_add]
+  | smul r x _ h =>
+    rw [twistLaurentSection_smul, smul_tmulSection, Hom.app_smul, h,
+      AddMonoidAlgebra.ofCoeff_smul, smul_mul_assoc, AddMonoidAlgebra.coeff_smul,
+      twistLaurentSection_smul]
 
 omit [Fintype n] in
 /-- The structure morphism `A ⟶ Γ(ℙ, U)` is compatible with restriction. -/
@@ -233,9 +284,71 @@ section Cech
 
 variable {a b b' : ℤ}
 
+/-- **Multiplication by a polynomial on Čech cochains**: the comparison of the monomial Čech
+complex with the Čech complex of the twisting sheaves on the standard covering intertwines
+multiplication by a polynomial `F` of degree `a` on monomial cochains with the map induced by
+multiplication by the global section of `𝒪(a)` of `F`.
+
+(blueprint: `lem-pc-projective-space-serre-pairing`) -/
+lemma cechComplexFunctor_map_twistMulHom_monomialCechToCechFun
+    (F : AddMonoidAlgebra A (n → ℤ))
+    (hF : F.coeff ∈ Finsupp.supported A A (monomialExponents n a)) (h : a + b = b') (p : ℕ)
+    (c : MonomialCechCochain n A b p) :
+    ((cechComplexFunctor (standardOpen n (Spec (.of A)))).map (presheafModuleCatMap
+        (twistMulHom h (twistPolynomialSection A a F.coeff)))).f p
+        (monomialCechToCechFun A b p c) =
+      monomialCechToCechFun A b' p (monomialCechMulCochain n A F hF h p c) := by
+  subst h
+  refine TopCat.Presheaf.cechComplexFunctor_ext (standardOpen n (Spec (.of A)))
+    (twist n (Spec (.of A)) (a + b)).presheafModuleCat fun σ ↦ ?_
+  have hπ := ConcreteCategory.congr_hom (TopCat.Presheaf.cechComplexFunctor_map_f_π
+    (standardOpen n (Spec (.of A))) (twist n (Spec (.of A)) b).presheafModuleCat
+    (presheafModuleCatMap (twistMulHom rfl (twistPolynomialSection A a F.coeff))) p σ)
+    (monomialCechToCechFun A b p c)
+  rw [ConcreteCategory.comp_apply, ConcreteCategory.comp_apply] at hπ
+  rw [hπ, cechComplexFunctorπ_monomialCechToCechFun, cechComplexFunctorπ_monomialCechToCechFun,
+    NatTrans.naturality_apply]
+  congr 1
+  rw [presheafModuleCatMap_app_apply, twistMonomialLinearMap_supportedEquivFinsupp,
+    twistMonomialLinearMap_supportedEquivFinsupp]
+  refine (twistMulHom_app _ _ _).trans ?_
+  rw [twistPolynomialSection_map _ hF]
+  exact twistTensorIso_hom_app_twistLaurentSection (Set.range_nonempty σ)
+    (Finsupp.supported_mono (monomialExponents_subset_laurentExponents _) hF) (c σ).2
+
+/-- **Multiplication by a polynomial on Čech complexes**: the identification
+`cechComplexTwistIso` of the Čech complexes of the twisting sheaves with the monomial Čech
+complexes transports the map induced by multiplication by the global section of `𝒪(a)` of a
+polynomial `F` to multiplication by `F`. -/
+lemma cechComplexTwistIso_hom_comp_monomialCechMul (F : AddMonoidAlgebra A (n → ℤ))
+    (hF : F.coeff ∈ Finsupp.supported A A (monomialExponents n a)) (h : a + b = b') :
+    ((ModuleCat.restrictScalars (structureRingHom (n := n) A)).mapHomologicalComplex _).map
+        ((cechComplexFunctor (standardOpen n (Spec (.of A)))).map
+          (presheafModuleCatMap (twistMulHom h (twistPolynomialSection A a F.coeff)))) ≫
+      (cechComplexTwistIso n A b').hom =
+    (cechComplexTwistIso n A b).hom ≫ monomialCechMul n A F hF h := by
+  have hinv : (cechComplexTwistIso n A b).inv ≫
+      ((ModuleCat.restrictScalars (structureRingHom (n := n) A)).mapHomologicalComplex _).map
+        ((cechComplexFunctor (standardOpen n (Spec (.of A)))).map
+          (presheafModuleCatMap (twistMulHom h (twistPolynomialSection A a F.coeff)))) =
+      monomialCechMul n A F hF h ≫ (cechComplexTwistIso n A b').inv := by
+    ext p c
+    exact cechComplexFunctor_map_twistMulHom_monomialCechToCechFun F hF h p c
+  rw [(Iso.inv_comp_eq _).1 hinv]
+  simp
 
 end Cech
 
+/-- Restriction of scalars commutes with the maps induced on homology. -/
+lemma _root_.ModuleCat.restrictScalarsHomologyIso_inv_naturality {R S : Type u} [Ring R]
+    [Ring S] (f : R →+* S) {ι : Type*} {c : ComplexShape ι}
+    {K L : HomologicalComplex (ModuleCat.{u} S) c} (φ : K ⟶ L) (i : ι) :
+    (ModuleCat.restrictScalars.{u} f).map (HomologicalComplex.homologyMap φ i) ≫
+        (ModuleCat.restrictScalarsHomologyIso f L i).inv =
+      (ModuleCat.restrictScalarsHomologyIso f K i).inv ≫
+        HomologicalComplex.homologyMap
+          (((ModuleCat.restrictScalars.{u} f).mapHomologicalComplex c).map φ) i :=
+  ShortComplex.mapHomologyIso_inv_naturality _ _
 
 section Leray
 
@@ -272,6 +385,44 @@ def twistHLinearEquivMonomialCechHomology (m : ℤ) (q : ℕ) :
     ((ModuleCat.restrictScalarsHomologyIso (structureRingHom A) _ q).symm ≪≫
       (HomologicalComplex.homologyFunctor _ _ q).mapIso (cechComplexTwistIso n A m)).toLinearEquiv
 
+/-- `twistHLinearEquivMonomialCechHomology` on classes coming from Čech cohomology. -/
+lemma twistHLinearEquivMonomialCechHomology_cechComplexHomologyLinearEquivH (m : ℤ) (q : ℕ)
+    (x : ((cechComplexFunctor (standardOpen n (Spec (.of A)))).obj
+      (twist n (Spec (.of A)) m).presheafModuleCat).homology q) :
+    twistHLinearEquivMonomialCechHomology A m q (cechComplexHomologyLinearEquivH
+        (standardOpen n (Spec (.of A))) (isAffineOpen_biInf_standardOpen A)
+        (iSup_standardOpen n _) (twist n (Spec (.of A)) m) q x) =
+      HomologicalComplex.homologyMap (cechComplexTwistIso n A m).hom q
+        ((ModuleCat.restrictScalarsHomologyIso (structureRingHom A) _ q).inv x) := by
+  simp [twistHLinearEquivMonomialCechHomology]
+  rfl
+
+/-- **Naturality of `twistHLinearEquivMonomialCechHomology`**: a morphism `φ : 𝒪(m) ⟶ 𝒪(m')`
+whose map on Čech complexes corresponds to a morphism `g` of monomial Čech complexes induces on
+cohomology the map induced by `g` on homology. -/
+lemma twistHLinearEquivMonomialCechHomology_map {m m' : ℤ}
+    (φ : twist n (Spec (.of A)) m ⟶ twist n (Spec (.of A)) m')
+    (g : monomialCechComplex n A m ⟶ monomialCechComplex n A m')
+    (hg : ((ModuleCat.restrictScalars (structureRingHom (n := n) A)).mapHomologicalComplex _).map
+        ((cechComplexFunctor (standardOpen n (Spec (.of A)))).map (presheafModuleCatMap φ)) ≫
+      (cechComplexTwistIso n A m').hom = (cechComplexTwistIso n A m).hom ≫ g)
+    (q : ℕ) (x : (twist n (Spec (.of A)) m).H q) :
+    twistHLinearEquivMonomialCechHomology A m' q (H.map φ q x) =
+      HomologicalComplex.homologyMap g q (twistHLinearEquivMonomialCechHomology A m q x) := by
+  obtain ⟨z, rfl⟩ := (cechComplexHomologyLinearEquivH (standardOpen n (Spec (.of A)))
+    (isAffineOpen_biInf_standardOpen A) (iSup_standardOpen n _) (twist n (Spec (.of A)) m)
+    q).surjective x
+  rw [← cechComplexHomologyLinearEquivH_map,
+    twistHLinearEquivMonomialCechHomology_cechComplexHomologyLinearEquivH,
+    twistHLinearEquivMonomialCechHomology_cechComplexHomologyLinearEquivH]
+  have h₁ := ConcreteCategory.congr_hom (ModuleCat.restrictScalarsHomologyIso_inv_naturality
+    (structureRingHom (n := n) A) ((cechComplexFunctor (standardOpen n (Spec (.of A)))).map
+      (presheafModuleCatMap φ)) q) z
+  have h₂ := ConcreteCategory.congr_hom (congrArg (HomologicalComplex.homologyMap · q) hg)
+    ((ModuleCat.restrictScalarsHomologyIso (structureRingHom A) _ q).inv z)
+  simp only [HomologicalComplex.homologyMap_comp, ConcreteCategory.comp_apply] at h₁ h₂
+  rw [← h₂]
+  exact congrArg _ h₁
 
 end Leray
 
@@ -315,6 +466,14 @@ def twistMulPairing {a b c : ℤ} (h : a + b = c) (q : ℕ) :
     (fun _ _ _ ↦ map_add _ _ _)
     (fun r _ x ↦ H.map_smul _ q (structureRingHom A r) x)
 
+omit [Fintype n] in
+/-- The Serre pairing of `t` and `x` is `H^q(t ·)(x)`. -/
+lemma twistMulPairing_apply {a b c : ℤ} (h : a + b = c) (q : ℕ)
+    (t : (ModuleCat.restrictScalars (structureRingHom (n := n) A)).obj
+        ((twist n (Spec (.of A)) a).presheafModuleCat.obj (op ⊤)))
+    (x : (twist n (Spec (.of A)) b).H q) :
+    twistMulPairing A h q t x = H.map (twistMulHom h t) q x :=
+  rfl
 
 variable (A) in
 /-- The `A`-linear map sending a family of coefficients `(cₑ)` to the global section
@@ -327,6 +486,10 @@ def twistPolynomialLinearMap (a : ℤ) :
       (homOfLE (preimage_basicOpenInt_empty n (Spec (.of A))).ge).op)).hom ∘ₗ
     twistLaurentLinearMap A a ∅
 
+/-- `twistPolynomialLinearMap` is `twistPolynomialSection`. -/
+lemma twistPolynomialLinearMap_apply (a : ℤ) (c : (n → ℤ) →₀ A) :
+    twistPolynomialLinearMap A a c = twistPolynomialSection A a c :=
+  rfl
 
 variable (A) in
 /-- The coefficients of a homogeneous polynomial, as a Laurent polynomial. -/
@@ -375,6 +538,28 @@ def twistHTopLinearEquivDual {p : ℕ} (hn : Fintype.card n = p + 1 + 1) {m : �
   twistHLinearEquivMonomialCechHomology A m (p + 1) ≪≫ₗ
     monomialCechComplexHomologyTopLinearEquivDual n A m hn hm
 
+/-- **The Serre pairing on projective space is perfect.** Let `d ≥ 1`, `m ≤ -d - 1` and
+`D = -m - d - 1`. The isomorphism `Hᵈ(ℙᵈ_A, 𝒪(m)) ≅ Hom_A(A[x₀, …, x_d]_D, A)` of
+`twistHTopLinearEquivDual` sends a class `x` to `f ↦ tr ⟨f, x⟩`, where `⟨f, x⟩ ∈ Hᵈ(𝒪(-d-1))` is
+the Serre pairing (`twistMulPairing`) of the global section of `𝒪(D)` defined by `f` with `x`,
+and `tr : Hᵈ(𝒪(-d-1)) ≅ A` is the trace `twistTopTrace`. In the monomial bases, `x^f` pairs to
+`1` with the class of `x^{-f-1}` and to `0` with the other basis elements.
+
+(blueprint: `lem-pc-projective-space-serre-pairing`) -/
+theorem twistHTopLinearEquivDual_apply {p : ℕ} (hn : Fintype.card n = p + 1 + 1) {m : ℤ}
+    (hm : m ≤ -((p + 1 : ℕ) : ℤ) - 1) (x : (twist n (Spec (.of A)) m).H (p + 1))
+    (f : MvPolynomial.homogeneousSubmodule n A (-m - ((p + 1 : ℕ) : ℤ) - 1).toNat) :
+    twistHTopLinearEquivDual A hn hm x f = twistTopTrace A hn
+      (twistMulPairing A (monomialCechPairing_aux hm) (p + 1)
+        (homogeneousSubmoduleToTwist A _ f) x) := by
+  have key := twistHLinearEquivMonomialCechHomology_map
+    (twistMulHom (monomialCechPairing_aux hm) (homogeneousSubmoduleToTwist A _ f))
+    (monomialCechMul n A (toLaurent n A f) (coeff_toLaurent_mem f.2) (monomialCechPairing_aux hm))
+    (cechComplexTwistIso_hom_comp_monomialCechMul _ _ _) (p + 1) x
+  rw [twistHTopLinearEquivDual, LinearEquiv.trans_apply,
+    monomialCechComplexHomologyTopLinearEquivDual_apply, twistTopTrace, LinearEquiv.trans_apply,
+    twistMulPairing_apply, key]
+  rfl
 
 /-! ### Global sections of `𝒪(D)` -/
 
@@ -539,6 +724,49 @@ def twistSerrePairing {p : ℕ} (hn : Fintype.card n = p + 1 + 1) {m : ℤ}
     (twist n (Spec (.of A)) (-((p + 1 : ℕ) : ℤ) - 1)) (p + 1)
   (twistMulPairing A (monomialCechPairing_aux hm) (p + 1)).compr₂ (twistTopTrace A hn).toLinearMap
 
+/-- `twistSerrePairing` is the trace of the Serre pairing. -/
+lemma twistSerrePairing_apply {p : ℕ} (hn : Fintype.card n = p + 1 + 1) {m : ℤ}
+    (hm : m ≤ -((p + 1 : ℕ) : ℤ) - 1)
+    (t : (ModuleCat.restrictScalars (structureRingHom (n := n) A)).obj
+        ((twist n (Spec (.of A)) (-m - ((p + 1 : ℕ) : ℤ) - 1).toNat).presheafModuleCat.obj
+          (op ⊤)))
+    (x : (twist n (Spec (.of A)) m).H (p + 1)) :
+    twistSerrePairing A hn hm t x =
+      twistTopTrace A hn (twistMulPairing A (monomialCechPairing_aux hm) (p + 1) t x) :=
+  rfl
+
+/-- **The Serre pairing on projective space is perfect**: for `d ≥ 1`, `m ≤ -d - 1` and
+`D = -m - d - 1`, the pairing `H⁰(ℙᵈ_A, 𝒪(D)) × Hᵈ(ℙᵈ_A, 𝒪(m)) → Hᵈ(ℙᵈ_A, 𝒪(-d-1)) ≅ A` induced
+by multiplication of sections identifies each side with the `A`-dual of the other. Both sides are
+finite free `A`-modules (`homogeneousSubmoduleLinearEquivTwist`, `twistHTopLinearEquivDual`).
+
+(blueprint: `lem-pc-projective-space-serre-pairing`) -/
+theorem isPerfPair_twistSerrePairing {p : ℕ} (hn : Fintype.card n = p + 1 + 1) {m : ℤ}
+    (hm : m ≤ -((p + 1 : ℕ) : ℤ) - 1) :
+    letI := moduleHOfSpec (ℙ(n; Spec (.of A)) ↘ Spec (.of A)) (twist n (Spec (.of A)) m) (p + 1)
+    (twistSerrePairing A hn hm).IsPerfPair := by
+  let := moduleHOfSpec (ℙ(n; Spec (.of A)) ↘ Spec (.of A)) (twist n (Spec (.of A)) m) (p + 1)
+  have : Nonempty n := Fintype.card_pos_iff.1 (by omega)
+  have : Finite {s : n →₀ ℕ | s.degree = (-m - ((p + 1 : ℕ) : ℤ) - 1).toNat} :=
+    (Finsupp.finite_of_degree_eq _).to_subtype
+  let L := homogeneousSubmoduleLinearEquivTwist (n := n) A (-m - ((p + 1 : ℕ) : ℤ) - 1).toNat
+  have := Module.Free.of_basis (homogeneousSubmoduleBasis n A (-m - ((p + 1 : ℕ) : ℤ) - 1).toNat)
+  have := Module.Finite.of_basis
+    (homogeneousSubmoduleBasis n A (-m - ((p + 1 : ℕ) : ℤ) - 1).toNat)
+  have := Module.Free.of_equiv L
+  have := Module.Finite.equiv L
+  have hflip : (twistSerrePairing A hn hm).flip =
+      ((twistHTopLinearEquivDual A hn hm).trans L.symm.dualMap).toLinearMap := by
+    refine LinearMap.ext fun x ↦ LinearMap.ext fun t ↦ ?_
+    refine (congrArg (fun t' ↦ twistTopTrace A hn
+      (twistMulPairing A (monomialCechPairing_aux hm) (p + 1) t' x))
+      (L.apply_symm_apply t).symm).trans ?_
+    exact (twistHTopLinearEquivDual_apply hn hm x (L.symm t)).symm
+  have hb : Function.Bijective (twistSerrePairing A hn hm).flip := by
+    rw [hflip]
+    exact ((twistHTopLinearEquivDual A hn hm).trans L.symm.dualMap).bijective
+  have h := (LinearMap.IsPerfPair.of_bijective _ hb).flip
+  rwa [LinearMap.flip_flip] at h
 
 end Pairing
 section Canonical
@@ -565,6 +793,13 @@ def twistHZeroLinearEquiv [Nonempty n] (D : ℕ) :
         ((twist n (Spec (.of A)) D).presheafModuleCat.obj (op ⊤))) ≪≫ₗ
     (homogeneousSubmoduleLinearEquivTwist A D).symm
 
+/-- The inverse of `twistHZeroLinearEquiv` sends a homogeneous polynomial `f` of degree `D` to
+the class in `H⁰` of the global section of `𝒪(D)` defined by `f`. -/
+lemma twistHZeroLinearEquiv_symm_apply [Nonempty n] (D : ℕ)
+    (f : MvPolynomial.homogeneousSubmodule n A D) :
+    (twistHZeroLinearEquiv A D).symm f =
+      (H.zeroLinearEquiv (twist n (Spec (.of A)) D)).symm (homogeneousSubmoduleToTwist A D f) :=
+  rfl
 
 variable (A) in
 /-- **The monomial basis of the top cohomology of `𝒪(m)`**: with `d + 1` homogeneous
@@ -583,6 +818,49 @@ def twistHTopBasis {d : ℕ} (hn : Fintype.card n = d + 1) (E : Fin (d + 1) ≃ 
   .ofRepr (twistHLinearEquivMonomialCechHomology A m d ≪≫ₗ
     monomialCechComplexHomologyTopLinearEquiv n A m hn E hm)
 
+/-- The coordinates of a class in the monomial basis `twistHTopBasis` are those of its image in
+the top homology of the monomial Čech complex. -/
+lemma twistHTopBasis_repr {d : ℕ} (hn : Fintype.card n = d + 1) (E : Fin (d + 1) ≃ n) {m : ℤ}
+    (hm : d ≠ 0 ∨ m < 0) (x : (twist n (Spec (.of A)) m).H d) :
+    letI := moduleHOfSpec (ℙ(n; Spec (.of A)) ↘ Spec (.of A)) (twist n (Spec (.of A)) m) d
+    (twistHTopBasis A hn E hm).repr x = monomialCechComplexHomologyTopLinearEquiv n A m hn E hm
+      (twistHLinearEquivMonomialCechHomology A m d x) :=
+  rfl
+
+open Classical in
+/-- **The Serre pairing in the monomial bases.** Let `d ≥ 1`, `m ≤ -d - 1` and
+`D = -m - d - 1`. Under the Serre pairing `H⁰(𝒪(D)) × Hᵈ(𝒪(m)) → A` (`twistSerrePairing`), the
+monomial `x^f` (`f` of degree `D`) pairs to `1` with the basis class `x^{-f-𝟏}` of
+`twistHTopBasis` and to `0` with the other basis classes `xᵉ`. The basis is taken for the
+ordering of the coordinates used by the trace, which fixes the signs.
+
+(blueprint: `lem-pc-projective-space-serre-pairing`) -/
+theorem twistSerrePairing_basis {p : ℕ} (hn : Fintype.card n = p + 1 + 1) {m : ℤ}
+    (hm : m ≤ -((p + 1 : ℕ) : ℤ) - 1)
+    (s : {s : n →₀ ℕ | s.degree = (-m - ((p + 1 : ℕ) : ℤ) - 1).toNat})
+    (e : negativeExponents n m) :
+    letI := moduleHOfSpec (ℙ(n; Spec (.of A)) ↘ Spec (.of A)) (twist n (Spec (.of A)) m) (p + 1)
+    twistSerrePairing A hn hm (homogeneousSubmoduleToTwist A _ (homogeneousSubmoduleBasis n A _ s))
+        (twistHTopBasis A hn (Fintype.equivFinOfCardEq hn).symm (.inl (Nat.succ_ne_zero p)) e) =
+      if (e : n → ℤ) = fun i ↦ -(s.1 i : ℤ) - 1 then 1 else 0 := by
+  let := moduleHOfSpec (ℙ(n; Spec (.of A)) ↘ Spec (.of A)) (twist n (Spec (.of A)) m) (p + 1)
+  rw [twistSerrePairing_apply, ← twistHTopLinearEquivDual_apply hn hm]
+  have h1 : twistHLinearEquivMonomialCechHomology A m (p + 1)
+      (twistHTopBasis A hn (Fintype.equivFinOfCardEq hn).symm (.inl (Nat.succ_ne_zero p)) e) =
+      (monomialCechComplexHomologyTopLinearEquiv n A m hn (Fintype.equivFinOfCardEq hn).symm
+        (.inl (Nat.succ_ne_zero p))).symm (Finsupp.single e 1) := by
+    rw [twistHTopBasis, Module.Basis.coe_ofRepr]
+    exact LinearEquiv.apply_symm_apply _ _
+  rw [twistHTopLinearEquivDual, LinearEquiv.trans_apply, h1]
+  simp only [monomialCechComplexHomologyTopLinearEquivDual, LinearEquiv.trans_apply,
+    LinearEquiv.apply_symm_apply]
+  change ((homogeneousSubmoduleBasis n A _).constr A _) _ = _
+  rw [Module.Basis.constr_basis]
+  simp only [Finsupp.linearEquivFunOnFinite_apply, Finsupp.domLCongr_apply,
+    Finsupp.domCongr_apply, Finsupp.equivMapDomain_apply, Finsupp.single_apply]
+  by_cases h : (e : n → ℤ) = fun i ↦ -(s.1 i : ℤ) - 1
+  · rw [ite_eq_left h, ite_eq_left (Subtype.ext h)]
+  · rw [ite_eq_right h, ite_eq_right fun h' ↦ h (congrArg Subtype.val h')]
 
 end Canonical
 

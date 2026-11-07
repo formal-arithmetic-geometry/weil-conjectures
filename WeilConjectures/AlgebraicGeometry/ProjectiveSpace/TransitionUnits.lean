@@ -104,6 +104,11 @@ lemma standardOpen_inf_le (i j : n) :
   rw [Proj.basicOpen_mul]
   exact le_rfl
 
+lemma standardOpen_inf_inf_le (i j k : n) :
+    standardOpen n S i ⊓ standardOpen n S j ⊓ standardOpen n S k ≤ toProjInt n S ⁻¹ᵁ
+      Proj.basicOpen (homogeneousSubmodule n (ULift.{u} ℤ)) (X i * X j * X k) := by
+  rw [Proj.basicOpen_mul, Proj.basicOpen_mul]
+  exact le_rfl
 
 /-- `(xᵢ / xⱼ) (xⱼ / xᵢ) = 1` on `Uᵢ ∩ Uⱼ`. -/
 lemma ratio_mul_map_ratio (i j : n) :
@@ -130,6 +135,30 @@ def ratioUnit (i j : n) : Γ(ℙ(n; S), standardOpen n S i ⊓ standardOpen n S 
   val_inv := ratio_mul_map_ratio i j
   inv_val := by rw [mul_comm]; exact ratio_mul_map_ratio i j
 
+/-- The cocycle rule `(xᵢ / xⱼ) (xⱼ / x_k) = xᵢ / x_k` for the ratios, on `Uᵢ ∩ Uⱼ ∩ U_k`. -/
+lemma map_ratio_mul_map_ratio (i j k : n) :
+    ℙ(n; S).presheaf.map (homOfLE (inf_le_left :
+        standardOpen n S i ⊓ standardOpen n S j ⊓ standardOpen n S k ≤ _)).op
+        (ratio n S i j) *
+      ℙ(n; S).presheaf.map (homOfLE (le_inf (inf_le_left.trans inf_le_right) inf_le_right :
+        standardOpen n S i ⊓ standardOpen n S j ⊓ standardOpen n S k ≤
+          standardOpen n S j ⊓ standardOpen n S k)).op (ratio n S j k) =
+      ℙ(n; S).presheaf.map (homOfLE (le_inf (inf_le_left.trans inf_le_left) inf_le_right :
+        standardOpen n S i ⊓ standardOpen n S j ⊓ standardOpen n S k ≤
+          standardOpen n S i ⊓ standardOpen n S k)).op (ratio n S i k) := by
+  have hi := X_mem_homogeneousSubmodule_one (ULift.{u} ℤ) i
+  have hj := X_mem_homogeneousSubmodule_one (ULift.{u} ℤ) j
+  have hk := X_mem_homogeneousSubmodule_one (ULift.{u} ℤ) k
+  rw [map_ratio (SetLike.mul_mem_graded hi hk) (x := X i * X j * X k) (by ring)
+      (standardOpen_inf_inf_le i j k),
+    map_ratio (SetLike.mul_mem_graded hi hj) (x := X i * X j * X k) (by ring)
+      (standardOpen_inf_inf_le i j k),
+    map_ratio (SetLike.mul_mem_graded hi hj) (x := X i * X j * X k) (by ring)
+      (standardOpen_inf_inf_le i j k), ← map_mul]
+  refine appLE_awayToSection_congr _ ?_
+  rw [val_mul, val_awayMap_awayRatio, val_awayMap_awayRatio, val_awayMap_awayRatio,
+    Localization.mk_mul, Localization.mk_eq_mk_iff, Localization.r_iff_exists]
+  exact ⟨1, by simp; ring⟩
 
 variable (n S) in
 /-- **The transition units of the twisting sheaf `𝒪(d)`**: `u_{ij} = (xᵢ / xⱼ)^d` on
@@ -140,6 +169,27 @@ bases `eᵢ^{(d)}` along `eᵢ^{(d)} = u_{ij} eⱼ^{(d)}`.
 def transitionUnit (d : ℤ) (i j : n) : Γ(ℙ(n; S), standardOpen n S i ⊓ standardOpen n S j)ˣ :=
   ratioUnit n S i j ^ d
 
+/-- **The cocycle rule for the transition units of the twists**: on the triple overlap
+`Uᵢ ∩ Uⱼ ∩ U_k` of standard opens of `ℙ(n; S)`, `u_{ij} u_{jk} = u_{ik}` for the units
+`u_{ij} = (xᵢ / xⱼ)^d`. Indeed `(xᵢ / xⱼ) (xⱼ / x_k) = xᵢ / x_k`, and the power map is
+multiplicative on units.
+
+(blueprint: `lem-pc-twist-cocycle`) -/
+theorem transitionUnit_mul_transitionUnit (d : ℤ) (i j k : n) :
+    Units.map (ℙ(n; S).presheaf.map (homOfLE (inf_le_left :
+        standardOpen n S i ⊓ standardOpen n S j ⊓ standardOpen n S k ≤ _)).op).hom.toMonoidHom
+        (transitionUnit n S d i j) *
+      Units.map (ℙ(n; S).presheaf.map (homOfLE (le_inf (inf_le_left.trans inf_le_right)
+        inf_le_right : standardOpen n S i ⊓ standardOpen n S j ⊓ standardOpen n S k ≤
+          standardOpen n S j ⊓ standardOpen n S k)).op).hom.toMonoidHom
+        (transitionUnit n S d j k) =
+      Units.map (ℙ(n; S).presheaf.map (homOfLE (le_inf (inf_le_left.trans inf_le_left)
+        inf_le_right : standardOpen n S i ⊓ standardOpen n S j ⊓ standardOpen n S k ≤
+          standardOpen n S i ⊓ standardOpen n S k)).op).hom.toMonoidHom
+        (transitionUnit n S d i k) := by
+  simp only [transitionUnit, map_zpow, ← mul_zpow]
+  congr 1
+  exact Units.ext (map_ratio_mul_map_ratio i j k)
 
 end AlgebraicGeometry.ProjectiveSpace
 

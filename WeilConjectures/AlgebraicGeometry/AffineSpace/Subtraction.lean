@@ -129,6 +129,21 @@ lemma prodNeg_add : prodNeg n S ≫ add n S = sub n S := by
       ← Scheme.Hom.comp_appTop, prodNeg_fst, prodNeg_snd, Scheme.Hom.comp_appTop,
       CommRingCat.comp_apply, neg_appTop_coord, map_neg, sub_appTop_coord, sub_eq_add_neg]
 
+/-- The antidiagonal `x ↦ (x, -x)` of `𝔸(n; S)`, written `(1 × ι) ∘ Δ`, is the fibre of the
+addition over the zero section. -/
+theorem isPullback_diagonal_prodNeg_add :
+    IsPullback (𝔸(n; S) ↘ S) (pullback.diagonal (𝔸(n; S) ↘ S) ≫ prodNeg n S) (zeroSection n S)
+      (add n S) :=
+  (isPullback_diagonal_sub n S).of_iso (Iso.refl _) (Iso.refl _) (asIso (prodNeg n S))
+    (Iso.refl _) (by simp) (by simp) (by simp) (by simp)
+
+
+/-- Equal composites of morphisms of schemes act equally on global sections. -/
+private lemma appTop_appTop_eq_of_comp_eq {X Y Y' Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
+    {f' : X ⟶ Y'} {g' : Y' ⟶ Z} (w : f ≫ g = f' ≫ g') (x : Γ(Z, ⊤)) :
+    f.appTop (g.appTop x) = f'.appTop (g'.appTop x) := by
+  rw [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, w, Scheme.Hom.comp_appTop,
+    CommRingCat.comp_apply]
 
 section Triple
 
@@ -147,6 +162,35 @@ set_option hygiene false in
 local notation "r₁₃" =>
   Limits.pullback.tripleProj₁₃ (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S)
 
+/-- The shear `(x, ξ, y) ↦ (ξ, x - y)` pulls the standard pairing back to
+`⟨ξ, x - y⟩ = ⟨x, ξ⟩ - ⟨ξ, y⟩`. -/
+lemma tripleShear_sub_appTop_stdPairing :
+    (pullback.tripleShear (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) (sub_over n S)).appTop
+        (stdPairing n S) =
+      (r₁₂).appTop (stdPairing n S) - (r₂₃).appTop (stdPairing n S) := by
+  simp only [stdPairing, map_sum, map_mul, ← Finset.sum_sub_distrib]
+  refine Finset.sum_congr rfl fun i _ ↦ ?_
+  rw [appTop_appTop_eq_of_comp_eq (pullback.tripleShear_fst _ _ _ _),
+    appTop_appTop_eq_of_comp_eq (pullback.tripleShear_snd _ _ _ _), sub_appTop_coord, map_sub,
+    appTop_appTop_eq_of_comp_eq (pullback.tripleProj₁₃_fst _ _ _),
+    appTop_appTop_eq_of_comp_eq (pullback.tripleProj₁₃_snd _ _ _),
+    appTop_appTop_eq_of_comp_eq (pullback.condition (f := pr₂) (g := pr₁)).symm]
+  ring
+
+/-- The shear `(x, ξ, y) ↦ (ξ, x + y)` pulls the standard pairing back to
+`⟨ξ, x + y⟩ = ⟨x, ξ⟩ + ⟨ξ, y⟩`. -/
+lemma tripleShear_add_appTop_stdPairing :
+    (pullback.tripleShear (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) (add_over n S)).appTop
+        (stdPairing n S) =
+      (r₁₂).appTop (stdPairing n S) + (r₂₃).appTop (stdPairing n S) := by
+  simp only [stdPairing, map_sum, map_mul, ← Finset.sum_add_distrib]
+  refine Finset.sum_congr rfl fun i _ ↦ ?_
+  rw [appTop_appTop_eq_of_comp_eq (pullback.tripleShear_fst _ _ _ _),
+    appTop_appTop_eq_of_comp_eq (pullback.tripleShear_snd _ _ _ _), add_appTop_coord, map_add,
+    appTop_appTop_eq_of_comp_eq (pullback.tripleProj₁₃_fst _ _ _),
+    appTop_appTop_eq_of_comp_eq (pullback.tripleProj₁₃_snd _ _ _),
+    appTop_appTop_eq_of_comp_eq (pullback.condition (f := pr₂) (g := pr₁)).symm]
+  ring
 
 end Triple
 

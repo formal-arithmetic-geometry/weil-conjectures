@@ -498,6 +498,7 @@ noncomputable def sigma : X.CoordinateCover (Σ c, ι c) where
       Scheme.Hom.image_iSup]
     exact iSup_le fun i ↦ le_iSup (fun a : Σ c, ι c ↦ (V a.1).ι ''ᵁ (𝒟 a.1).U a.2) ⟨c, i⟩
 
+lemma sigma_U (a : Σ c, ι c) : (sigma V 𝒟 hV hcov).U a = (V a.1).ι ''ᵁ (𝒟 a.1).U a.2 := rfl
 
 end Sigma
 
@@ -592,6 +593,10 @@ def ofProj {X : Scheme.{u}} {ι : Type u} {σ' A : Type u} [CommRing A] [SetLike
     exact this
   iSup_U := hcov
 
+lemma ofProj_U {X : Scheme.{u}} {ι : Type u} {σ' A : Type u} [CommRing A] [SetLike σ' A]
+    [AddSubgroupClass σ' A] (𝒜 : ℕ → σ') [GradedRing 𝒜] (ρ : X ⟶ Proj 𝒜) {d : ℕ} (hd : 0 < d)
+    (f : ι → A) (hf : ∀ i, f i ∈ 𝒜 d) (hcov : ⨆ i, ρ ⁻¹ᵁ Proj.basicOpen 𝒜 (f i) = ⊤) (i : ι) :
+    (ofProj 𝒜 ρ hd f hf hcov).U i = ρ ⁻¹ᵁ Proj.basicOpen 𝒜 (f i) := rfl
 
 end Scheme.CoordinateCover
 

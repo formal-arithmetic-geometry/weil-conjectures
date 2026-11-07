@@ -285,6 +285,12 @@ lemma blowupMap_preimage (U : X.affineOpens) :
   rwa [show (X.directedAffineCover.f U).opensRange = U.1 from
     Scheme.Opens.opensRange_ι U.1] at h
 
+/-- **Affine restriction of the blow-up**: over an affine open `U`, the blow-up of `X`
+restricts to the affine blow-up of `U`.
+(blueprint: `prop:nagata-global-blowup-affine-restrict`) -/
+theorem isPullback_blowupι (U : X.affineOpens) :
+    IsPullback (I.blowupNatTrans.app U) (I.blowupι U) U.1.ι I.blowupMap :=
+  I.blowupGluingData.isPullback_natTrans_ι_toBase U
 
 /-- Transport of the blow-up structure morphism along an equality of centers. -/
 lemma eqToHom_comp_blowupMap {I J : X.IdealSheafData} (h : I = J) :

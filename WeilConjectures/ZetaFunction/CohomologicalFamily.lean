@@ -135,6 +135,53 @@ variable (k₀ l) (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))] (d : �
   [IsProper (X ↘ Spec (CommRingCat.of k₀))]
   [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))]
 
+/-- The smooth-proper cohomological family is a trace datum: the cohomology groups
+`Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)`, `0 ≤ i ≤ 2d`, with the geometric Frobenius, and the point counts
+`N_n = #X₀(𝔽_{qⁿ})`, related by the Grothendieck–Lefschetz trace formula
+(`AlgebraicGeometry.WeilSheaf.pointCount_eq_sum_trace_cohomology`). The spaces and the
+endomorphisms are the cohomology groups and their Frobenius, on the nose. -/
+theorem exists_traceDatum :
+    ∃ D : TraceDatum.{0, u + 1} (PadicAlgCl l) (2 * d),
+      (∀ i, D.V i = ((WeilSheaf.adicConstant k₀ l X).cohomology (i : ℕ)).carrier) ∧
+      (∀ i, D.P i = frobeniusCharpolyRev k₀ l X (i : ℕ)) ∧
+      ∀ n, D.N n = (X ↘ Spec (CommRingCat.of k₀)).pointCount n :=
+  ⟨{ V := fun i ↦ ((WeilSheaf.adicConstant k₀ l X).cohomology (i : ℕ)).carrier
+     F := fun i ↦ ((WeilSheaf.adicConstant k₀ l X).cohomology (i : ℕ)).frobeniusEnd
+     N := fun n ↦ (X ↘ Spec (CommRingCat.of k₀)).pointCount n
+     trace_eq := fun n hn ↦ by
+       rw [Int.cast_natCast, WeilSheaf.pointCount_eq_sum_trace_cohomology k₀ l X d hn]
+       exact (Fin.sum_univ_eq_sum_range (fun i ↦ (-1) ^ i * LinearMap.trace (PadicAlgCl l) _
+         (((WeilSheaf.adicConstant k₀ l X).cohomology (i : ℕ)).frobeniusEnd ^ n)) _).symm },
+    fun _ ↦ rfl, fun _ ↦ rfl, fun _ ↦ rfl⟩
+
+/-- Blueprint `det-thm-tracetodeterminant` and `thm-zl-lefschetz-weil-identity`
+(trace-to-determinant identity): for `X₀` smooth and proper of pure dimension `d`,
+
+`Z(X₀, T) = ∏_{i = 0}^{2d} P_{i,ℓ}(T)^{(-1)^{i+1}}` in `ℚ̄_ℓ⟦T⟧`,
+
+stated with the denominators cleared:
+`Z(X₀, T) · ∏_{i even} P_{i,ℓ}(T) = ∏_{i odd} P_{i,ℓ}(T)`. The right hand side is a quotient of
+polynomials with constant coefficient `1`, so the identity holds in `ℚ̄_ℓ(T) ∩ ℚ̄_ℓ⟦T⟧`. -/
+theorem map_zetaSeries_mul_evenFrobeniusProduct :
+    PowerSeries.map (algebraMap ℚ (PadicAlgCl l)) (X ↘ Spec (CommRingCat.of k₀)).zetaSeries *
+        (evenFrobeniusProduct k₀ l X d : PowerSeries (PadicAlgCl l)) =
+      (oddFrobeniusProduct k₀ l X d : PowerSeries (PadicAlgCl l)) := by
+  obtain ⟨D, -, hP, hN⟩ := exists_traceDatum k₀ l X d
+  have h := D.zeta_mul_prod_even_eq_prod_odd
+  rw [← D.map_zetaSeries _ hN] at h
+  have hpar (p : ℕ → Prop) [DecidablePred p] :
+      ∏ i ∈ Finset.univ.filter (fun i : Fin (2 * d + 1) ↦ p i),
+          (D.P i : PowerSeries (PadicAlgCl l)) =
+        ((∏ i ∈ (Finset.range (2 * d + 1)).filter p, frobeniusCharpolyRev k₀ l X i :
+          Polynomial (PadicAlgCl l)) : PowerSeries (PadicAlgCl l)) := by
+    rw [← Polynomial.coeToPowerSeries.ringHom_apply, map_prod, Finset.prod_filter,
+      Finset.prod_filter]
+    simp only [hP, Polynomial.coeToPowerSeries.ringHom_apply]
+    exact Fin.prod_univ_eq_prod_range (fun i ↦ if p i then
+      ((frobeniusCharpolyRev k₀ l X i : Polynomial (PadicAlgCl l)) :
+        PowerSeries (PadicAlgCl l)) else 1) _
+  rw [hpar Even, hpar Odd] at h
+  exact h
 
 end SmoothProper
 

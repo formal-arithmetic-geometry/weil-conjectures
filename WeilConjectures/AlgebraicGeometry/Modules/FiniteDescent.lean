@@ -164,6 +164,10 @@ theorem isFinitePresentation_of_iso {M N : X.Modules} (e : M ≅ N) [M.IsFiniteP
     N.IsFinitePresentation :=
   (SheafOfModules.isFinitePresentation X.ringCatSheaf).prop_of_iso e inferInstance
 
+/-- Finite local freeness of `𝒪_X`-modules is invariant under isomorphism. -/
+theorem isFiniteLocallyFree_of_iso {M N : X.Modules} (e : M ≅ N) [M.IsFiniteLocallyFree] :
+    N.IsFiniteLocallyFree :=
+  SheafOfModules.IsFiniteLocallyFree.of_iso (R := X.ringCatSheaf) e
 
 /-- The global sections of a module of finite presentation on `Spec R` are a finitely presented
 `R`-module. -/
@@ -173,6 +177,15 @@ theorem finitePresentation_sections_top {R : CommRingCat.{u}} (M : (Spec R).Modu
   Module.FinitePresentation.of_ringEquiv
     (Scheme.ΓSpecIso R).symm.commRingCatIsoToRingEquiv (smul_top_eq M)
 
+/-- The global sections of a finite locally free module on `Spec R` are a finitely presented flat
+`R`-module. -/
+theorem finitePresentation_flat_sections_top_of_isFiniteLocallyFree {R : CommRingCat.{u}}
+    (M : (Spec R).Modules) [M.IsFiniteLocallyFree] :
+    Module.FinitePresentation R Γ(M, ⊤) ∧ Module.Flat R Γ(M, ⊤) := by
+  obtain ⟨_, _⟩ := finitePresentation_projective_sections M (isAffineOpen_top (Spec R))
+  obtain ⟨h₁, h₂, -⟩ := Module.finitePresentation_flat_rankAtStalk_of_ringEquiv
+    (Scheme.ΓSpecIso R).symm.commRingCatIsoToRingEquiv (smul_top_eq M)
+  exact ⟨h₁, h₂⟩
 
 /-- A quasi-coherent module on `Spec R` whose global sections are a finitely presented `R`-module
 has a finite global presentation: it is `M^~` for the module `M` of its global sections. -/
@@ -303,6 +316,37 @@ noncomputable def restrictIsoFreeOfOpensRangeLE {M : X.Modules} {W : X.Opens} {I
   restrictCompIso M W.ι u f (IsOpenImmersion.lift_fac _ _ _) ≪≫ (restrictFunctor u).mapIso e ≪≫
     restrictFreeIso u I
 
+/-- **A locally free module of finite presentation is finite locally free.** If `M` is free on
+`I` over an affine open `V ∋ x`, then `Γ(M, V) ≅ Γ(X, V)^(I)` is a finite `Γ(X, V)`-module and
+`Γ(X, V) ≠ 0`, so `I` is finite. -/
+theorem isFiniteLocallyFree_of_isFinitePresentation_of_isLocallyFree (M : X.Modules)
+    [M.IsFinitePresentation] [M.IsLocallyFree] : M.IsFiniteLocallyFree := by
+  obtain ⟨q, hq⟩ := SheafOfModules.IsLocallyFree.exists_isLocallyFreeData (M := M)
+  have hcov : IsOpenCover q.X := (Opens.coversTop_iff _ q.X).mp q.coversTop
+  have key (x : X) : ∃ (V : X.Opens) (hV : IsAffineOpen V) (I : Type u), Finite I ∧ x ∈ V ∧
+      Nonempty (M.restrict hV.fromSpec ≅ SheafOfModules.free I) := by
+    obtain ⟨i, hi⟩ := hcov.exists_mem x
+    obtain ⟨_, ⟨V, hV, rfl⟩, hxV, hVi⟩ :=
+      X.isBasis_affineOpens.exists_subset_of_mem_open hi (q.X i).2
+    replace hV : IsAffineOpen V := hV
+    let I := (q.generators i).I
+    let E : M.restrict hV.fromSpec ≅ SheafOfModules.free I :=
+      restrictIsoFreeOfOpensRangeLE (overIsoFreeEquiv M (q.X i) I (asIso (q.generators i).π).symm)
+        hV.fromSpec (by
+          rw [hV.opensRange_fromSpec]
+          exact hVi)
+    have : Nontrivial Γ(X, V) := (hV.primeIdealOf ⟨x, hxV⟩).nontrivial
+    have := finitePresentation_sections_of_isFinitePresentation M hV
+    let e : (I →₀ Γ(X, V)) ≃ₗ[Γ(X, V)] Γ(M, V) :=
+      (asIso (tilde.adjunction.unit.app (ModuleCat.of Γ(X, V) (I →₀ Γ(X, V)))) ≪≫
+        moduleSpecΓFunctor.mapIso (tildeFinsupp I ≪≫ E.symm)).toLinearEquiv ≪≫ₗ
+        sectionsRestrictFromSpecLinearEquiv M hV
+    exact ⟨V, hV, I, Module.Finite.finite_basis (Finsupp.basisSingleOne.map e), hxV, ⟨E⟩⟩
+  choose V hV I hI hx E using key
+  refine isFiniteLocallyFree_of_restrict_iso_free M (fun x ↦ (hV x).fromSpec) ?_ I E
+  refine eq_top_iff.2 fun x _ ↦ TopologicalSpace.Opens.mem_iSup.2 ⟨x, ?_⟩
+  rw [(hV x).opensRange_fromSpec]
+  exact hx x
 
 /-- **Finite presentation descends along a faithfully flat map of affine schemes**
 `Spec.map φ : Spec B ⟶ Spec R`, for quasi-coherent modules: the global sections of the pullback
@@ -320,6 +364,23 @@ theorem finitePresentation_sections_top_of_pullback_Spec_map {R B : CommRingCat.
   have : Module.FinitePresentation B (TensorProduct R B Γ(P, ⊤)) := by exact hfp
   exact .of_finitePresentation_tensorProduct_of_faithfullyFlat (B := B)
 
+/-- **Flatness descends along a faithfully flat map of affine schemes**
+`Spec.map φ : Spec B ⟶ Spec R`, for quasi-coherent modules whose pullback is finite locally
+free. -/
+theorem flat_sections_top_of_pullback_Spec_map {R B : CommRingCat.{u}} (φ : R ⟶ B)
+    [Flat (Spec.map φ)] [Surjective (Spec.map φ)] (P : (Spec R).Modules) [P.IsQuasicoherent]
+    [((Modules.pullback (Spec.map φ)).obj P).IsFiniteLocallyFree] :
+    Module.Flat R Γ(P, ⊤) := by
+  have hφ : φ.hom.FaithfullyFlat := (flat_and_surjective_SpecMap_iff φ).1 ⟨‹_›, ‹_›⟩
+  obtain ⟨-, _⟩ :=
+    finitePresentation_flat_sections_top_of_isFiniteLocallyFree
+      ((Modules.pullback (Spec.map φ)).obj P)
+  have hfl : Module.Flat B
+      ((ModuleCat.extendScalars φ.hom).obj (moduleSpecΓFunctor.obj P)) :=
+    .of_linearEquiv (pullbackSpecΓEquiv φ P)
+  algebraize [φ.hom]
+  have : Module.Flat B (TensorProduct R B Γ(P, ⊤)) := by exact hfl
+  exact .of_flat_tensorProduct _ _ B
 
 /-- Descent of finite presentation along a flat surjective morphism `F : W ⟶ Spec R` from an
 affine scheme, for quasi-coherent modules on `Spec R`. -/
@@ -340,6 +401,23 @@ theorem finitePresentation_sections_top_of_pullback_of_isAffine {R : CommRingCat
       (pullbackCompOfEq W.isoSpec.inv F _ hφ.symm P)
   exact finitePresentation_sections_top_of_pullback_Spec_map φ P
 
+/-- Descent of flatness along a flat surjective morphism `F : W ⟶ Spec R` from an affine scheme,
+for quasi-coherent modules on `Spec R` whose pullback is finite locally free. -/
+theorem flat_sections_top_of_pullback_of_isAffine {R : CommRingCat.{u}}
+    {W : Scheme.{u}} [IsAffine W] (F : W ⟶ Spec R) [Flat F] [Surjective F]
+    (P : (Spec R).Modules) [P.IsQuasicoherent]
+    [((Modules.pullback F).obj P).IsFiniteLocallyFree] :
+    Module.Flat R Γ(P, ⊤) := by
+  obtain ⟨φ, hφ⟩ := Spec.map_surjective (W.isoSpec.inv ≫ F)
+  have : Flat (Spec.map φ) := by
+    rw [hφ]
+    infer_instance
+  have : Surjective (Spec.map φ) := by
+    rw [hφ]
+    infer_instance
+  have : ((Modules.pullback (Spec.map φ)).obj P).IsFiniteLocallyFree :=
+    isFiniteLocallyFree_of_iso (pullbackCompOfEq W.isoSpec.inv F _ hφ.symm P)
+  exact flat_sections_top_of_pullback_Spec_map φ P
 
 /-- Descent of finite presentation along a finite jointly surjective family of flat morphisms
 `f j : W j ⟶ Spec R` from affine schemes, for quasi-coherent modules on `Spec R`: the morphism
@@ -358,6 +436,22 @@ theorem finitePresentation_sections_top_of_pullback_of_iUnion_range_eq_univ
     exact isFinitePresentation_of_iso (pullbackCompOfEq _ _ _ (Sigma.ι_comp_desc f j) P).symm
   exact finitePresentation_sections_top_of_pullback_of_isAffine (Sigma.desc f) P
 
+/-- Descent of flatness along a finite jointly surjective family of flat morphisms
+`f j : W j ⟶ Spec R` from affine schemes, for quasi-coherent modules on `Spec R` whose pullbacks
+are finite locally free. -/
+theorem flat_sections_top_of_pullback_of_iUnion_range_eq_univ
+    {R : CommRingCat.{u}} (P : (Spec R).Modules) [P.IsQuasicoherent] {κ : Type u} [Finite κ]
+    {W : κ → Scheme.{u}} [∀ j, IsAffine (W j)] (f : ∀ j, W j ⟶ Spec R) [∀ j, Flat (f j)]
+    (hf : ⋃ j, Set.range (f j) = Set.univ)
+    (h : ∀ j, ((Modules.pullback (f j)).obj P).IsFiniteLocallyFree) :
+    Module.Flat R Γ(P, ⊤) := by
+  have : Surjective (Sigma.desc f) := .sigmaDesc_of_union_range_eq_univ hf
+  have : ((Modules.pullback (Sigma.desc f)).obj P).IsFiniteLocallyFree := by
+    refine isFiniteLocallyFree_of_isOpenImmersion _ (Sigma.ι W)
+      (sigmaOpenCover W).iSup_opensRange fun j ↦ ?_
+    have := h j
+    exact isFiniteLocallyFree_of_iso (pullbackCompOfEq _ _ _ (Sigma.ι_comp_desc f j) P).symm
+  exact flat_sections_top_of_pullback_of_isAffine (Sigma.desc f) P
 
 end AlgebraicGeometry.Scheme.Modules
 
@@ -429,5 +523,36 @@ theorem isFinitePresentation_of_toDescentData_iso_of_isQuasicoherent
   exact (iSup_congr fun V ↦ IsAffineOpen.opensRange_fromSpec V.2).trans
     (iSup_affineOpens_eq_top T)
 
+set_option backward.isDefEq.respectTransparency.types false in
+/-- **Finite local freeness descends along an fpqc covering**, for a quasi-coherent module: `M`
+is of finite presentation by `isFinitePresentation_of_toDescentData_iso_of_isQuasicoherent`, and
+over an affine open `U` of `T` the sections `Γ(M, U)` are flat over `Γ(T, U)` by faithfully flat
+descent, so `M` is finite locally free. -/
+theorem isLocallyFree_of_toDescentData_iso_of_isQuasicoherent
+    (hg : Sieve.ofArrows T' g ∈ Scheme.fpqcTopology T)
+    (D : modulesPseudofunctor.DescentData g)
+    (M : modulesPseudofunctor.obj (.mk (op T))) (hMq : (M : T.Modules).IsQuasicoherent)
+    (hM : Nonempty ((modulesPseudofunctor.toDescentData g).obj M ≅ D))
+    (hD : ∀ i, (D.obj i : (T' i).Modules).IsFinitePresentation ∧
+      (D.obj i : (T' i).Modules).IsLocallyFree) :
+    (M : T.Modules).IsLocallyFree := by
+  have := isFinitePresentation_of_toDescentData_iso_of_isQuasicoherent g hg D M hMq hM
+    fun i ↦ (hD i).1
+  suffices (M : T.Modules).IsFiniteLocallyFree from inferInstance
+  refine Scheme.Modules.isFiniteLocallyFree_of_isAffineOpen _ fun U hU ↦
+    ⟨Scheme.Modules.finitePresentation_sections_of_isFinitePresentation _ hU, ?_⟩
+  obtain ⟨κ, _, W, _, f, _, hf, h⟩ :=
+    exists_pullback_fromSpec_iso_of_toDescentData_iso g hg D M hM hU
+  let N := (Scheme.Modules.pullback hU.fromSpec).obj (M : T.Modules)
+  have : Module.Flat Γ(T, U) (moduleSpecΓFunctor.obj N) :=
+    Scheme.Modules.flat_sections_top_of_pullback_of_iUnion_range_eq_univ N f hf fun j ↦ by
+      obtain ⟨i, k, ⟨e⟩⟩ := h j
+      obtain ⟨_, _⟩ := hD i
+      have := Scheme.Modules.isFiniteLocallyFree_of_isFinitePresentation_of_isLocallyFree
+        (D.obj i : (T' i).Modules)
+      exact Scheme.Modules.isFiniteLocallyFree_of_iso e.symm
+  exact .of_linearEquiv ((Scheme.Modules.sectionsRestrictFromSpecLinearEquiv _ hU).symm ≪≫ₗ
+    (moduleSpecΓFunctor.mapIso
+      ((Scheme.Modules.restrictFunctorIsoPullback _).app _)).toLinearEquiv)
 
 end AlgebraicGeometry

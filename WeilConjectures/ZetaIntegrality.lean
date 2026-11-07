@@ -89,5 +89,15 @@ theorem Hom.exists_int_zetaSeries :
   rw [PowerSeries.coeff_map, PowerSeries.coeff_mk]
   simpa using hm n
 
+omit [Finite k] [QuasiCompact f] [LocallyOfFiniteType f] in
+/-- Any integral lift of the zeta series has constant coefficient `1`. -/
+theorem Hom.constantCoeff_of_map_eq_zetaSeries {Z : PowerSeries ℤ}
+    (hZ : PowerSeries.map (Int.castRingHom ℚ) Z = f.zetaSeries) :
+    PowerSeries.constantCoeff Z = 1 := by
+  have h : ((PowerSeries.constantCoeff Z : ℤ) : ℚ) = 1 := by
+    have hc := congrArg (PowerSeries.coeff 0) hZ
+    rw [PowerSeries.coeff_map] at hc
+    simpa [PowerSeries.coeff_zero_eq_constantCoeff, f.constantCoeff_zetaSeries] using hc
+  exact_mod_cast h
 
 end AlgebraicGeometry.Scheme

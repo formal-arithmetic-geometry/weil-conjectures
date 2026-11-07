@@ -33,6 +33,42 @@ section Coherence
 variable [IsProper f] [LocallyOfFinitePresentation f] [QuasiCompact f]
   [HasInjectiveResolutions X.Modules] [ℱ.IsFinitePresentation]
 
+/-- **Cohomology and base change on the perfect locus.** In the situation of
+`AlgebraicGeometry.Scheme.Modules.isZero_higherDirectImage_of_isPullback`, the `i`-th higher
+direct image commutes with the base change: `R^i f'_* ℱ' ≅ g^* R^i f_* ℱ`.
+
+Locally on `U_i`, `R f_* ℱ` is a finite locally free module placed in degree `i`, and its
+formation commutes with base change.
+
+The isomorphism is only asserted to exist: it is not stated to be the canonical base-change map,
+which is not available (see
+`AlgebraicGeometry.Scheme.Modules.exists_isFiniteFreeComplex_higherDirectImage`).
+
+(blueprint: `sk-thm-picard-perfect`) -/
+theorem nonempty_higherDirectImage_iso_pullback_of_isPullback (hℱ : ℱ.IsFlatOver f) {i : ℕ}
+    {T' X' : Scheme.{u}} (g : T' ⟶ T) (g' : X' ⟶ X) (f' : X' ⟶ T')
+    [HasInjectiveResolutions X'.Modules] (sq : IsPullback g' f' f g)
+    (hg : Set.range g.base ⊆ ℱ.perfectLocus f i) :
+    Nonempty ((higherDirectImage f' i).obj ((Modules.pullback g').obj ℱ) ≅
+      (Modules.pullback g).obj ((higherDirectImage f i).obj ℱ)) := by
+  let (Y : Scheme.{u}) :
+      HasDerivedCategory (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) :=
+    HasDerivedCategory.standard _
+  obtain ⟨E, hneg, hcoh, hbc⟩ := exists_derived_model_higherDirectImage f ℱ hℱ
+  obtain ⟨e⟩ := nonempty_homology_derivedPullback_iso_of_locally_single g E i hneg (by
+    intro t ht
+    obtain ⟨U, htU, hU⟩ := exists_mem_isFiniteLocallyFreeInDegree_restrict f ℱ hℱ
+      (𝟙 T) (𝟙 X) f (IsPullback.of_horiz_isIso ⟨by simp⟩) t
+      (r := ℱ.hFiber f i t) ⟨hg ht, rfl⟩
+    refine ⟨U, htU, ℱ.hFiber f i t, ?_⟩
+    have ec q := (restrictFunctor U.ι).mapIso (hcoh q).some
+    have eid := (Modules.pullbackId X).app ℱ
+    have eh q := (restrictFunctor U.ι).mapIso ((higherDirectImage f q).mapIso eid)
+    refine ⟨fun q hq ↦ (hU.isZero q hq).of_iso (ec q ≪≫ (eh q).symm), ?_⟩
+    have := hU.isFiniteLocallyFreeOfRank
+    exact SheafOfModules.IsFiniteLocallyFreeOfRank.of_iso ((eh i) ≪≫ (ec i).symm))
+  exact ⟨(hbc g g' f' sq i).some.symm ≪≫ e ≪≫
+    (Modules.pullback g).mapIso (hcoh i).some⟩
 
 /-- **Local freeness in degree `i` after base change to the perfect locus.** In the situation of
 `AlgebraicGeometry.Scheme.Modules.isZero_higherDirectImage_of_isPullback`, if the image of `g`
@@ -55,6 +91,23 @@ theorem isFiniteLocallyFreeOfRank_higherDirectImage_of_isPullback (hℱ : ℱ.Is
   exact isFiniteLocallyFreeOfRank_of_iSup_eq_top _ V (eq_top_iff.2 fun t' _ ↦
     TopologicalSpace.Opens.mem_iSup.2 ⟨t', hV t'⟩) fun t' ↦ (h t').isFiniteLocallyFreeOfRank
 
+/-- **The `i`-th higher direct image is finite locally free over the perfect locus.** Over an
+open subscheme `U` of `T` contained in the rank-`r` perfect locus `U_{i,r}`, the higher direct
+image `R^i f_* ℱ|_U` is finite locally free of rank `r`. This is the case of the inclusion of
+`U` in
+`AlgebraicGeometry.Scheme.Modules.isFiniteLocallyFreeOfRank_higherDirectImage_of_isPullback`.
+
+(blueprint: `sk-thm-picard-perfect`) -/
+theorem isFiniteLocallyFreeOfRank_higherDirectImage_restrict (hℱ : ℱ.IsFlatOver f) (i r : ℕ)
+    (U : T.Opens)
+    (hU : ↑U ⊆ {t : T | (∀ q, q ≠ i → ℱ.hFiber f q t = 0) ∧ ℱ.hFiber f i t = r}) :
+    (((higherDirectImage f i).obj ℱ).restrict U.ι).IsFiniteLocallyFreeOfRank r := by
+  have := isGrothendieckAbelian (f ⁻¹ᵁ U).toScheme
+  have sq : IsPullback (f ⁻¹ᵁ U).ι (f ∣_ U) f U.ι := (isPullback_morphismRestrict f U).flip
+  obtain ⟨e⟩ := nonempty_higherDirectImage_iso_restrict f ℱ U.ι _ _ sq i
+  have := isFiniteLocallyFreeOfRank_higherDirectImage_of_isPullback f ℱ hℱ U.ι _ _ sq
+    (by rw [Scheme.Opens.range_ι]; exact hU)
+  exact SheafOfModules.IsFiniteLocallyFreeOfRank.of_iso e
 
 /-- **Base change detects the rank-`r` perfect locus.** Let `f' : X' ⟶ T'` and `g' : X' ⟶ X` be
 the base change of `f` along `g : T' ⟶ T`, in the cartesian square `sq`

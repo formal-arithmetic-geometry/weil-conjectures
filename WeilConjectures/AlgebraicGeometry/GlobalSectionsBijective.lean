@@ -258,6 +258,18 @@ instance GlobalSectionsBijective.pullback (K : Type u) [Field K] [Algebra k K]
     simpa [Hom.appTop, Hom.app_eq_appLE] using hY
   exact IsIso.comp_isIso' inferInstance this
 
+/-- **Flat base change of `H⁰(X, 𝒪_X) = k` to an affine scheme.** If a quasi-compact
+quasi-separated `k`-scheme `X` has `H⁰(X, 𝒪_X) = k` and `U` is an affine `k`-scheme, then the
+second projection induces an isomorphism `Γ(U, 𝒪_U) ≅ Γ(X ×_k U, 𝒪)`: by flat base change
+along the flat map `k ⟶ Γ(U, 𝒪_U)`, `Γ(X ×_k U, 𝒪) = Γ(X, 𝒪_X) ⊗_k Γ(U, 𝒪_U)`. -/
+theorem GlobalSectionsBijective.isIso_appTop_pullback_snd [CompactSpace X]
+    [QuasiSeparatedSpace X] [GlobalSectionsBijective k X] {U : Scheme.{u}} [IsAffine U]
+    (fU : U ⟶ Spec (.of k)) : IsIso (Limits.pullback.snd (X ↘ Spec (.of k)) fU).appTop := by
+  have h := GlobalSectionsBijective.bijective_globalSectionsRingHom (k := k) (X := X)
+  rw [globalSectionsRingHom, ← ConcreteCategory.isIso_iff_bijective] at h
+  have : IsIso (X ↘ Spec (.of k)).appTop :=
+    IsIso.of_isIso_comp_left (Scheme.ΓSpecIso (.of k)).inv _
+  exact (isPushout_appTop_of_flat fU (X ↘ Spec (.of k))).isIso_inr_of_isIso
 
 /-- A `k`-scheme with `H⁰(X, 𝒪_X) = k` is nonempty, since the ring of global functions of the
 empty scheme is zero. -/

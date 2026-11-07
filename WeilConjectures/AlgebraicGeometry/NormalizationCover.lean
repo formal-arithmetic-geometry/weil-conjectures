@@ -34,6 +34,49 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
+/-- Blueprint `lem-fin-dense-normal-open`: A dense normal open in an integral finite-type scheme.
+
+Every integral scheme `X` locally of finite type over a field `k` has a nonempty (hence dense)
+open subscheme all of whose local rings are integrally closed. Over a nonempty affine open
+`Spec A`, the integral closure of the finitely generated `k`-domain `A` in its fraction field is
+a finite `A`-module (E. Noether), hence has a common denominator `b ≠ 0`, and `A[1/b]` is
+integrally closed. -/
+theorem Scheme.exists_nonempty_forall_isIntegrallyClosed_stalk {k : Type u} [Field k]
+    (X : Scheme.{u}) [IsIntegral X] (q : X ⟶ Spec (.of k)) [LocallyOfFiniteType q] :
+    ∃ V : X.Opens, (V : Set X).Nonempty ∧
+      ∀ x ∈ V, IsIntegrallyClosed (X.presheaf.stalk x) := by
+  obtain ⟨x⟩ := (inferInstance : Nonempty X)
+  obtain ⟨V, hV, hxV, -⟩ := exists_isAffineOpen_mem_and_subset (x := x) (U := ⊤) trivial
+  have : Nonempty V := ⟨⟨x, hxV⟩⟩
+  let := ((q.appLE ⊤ V le_top).hom.comp (Scheme.ΓSpecIso (.of k)).inv.hom).toAlgebra
+  have : Algebra.FiniteType k Γ(X, V) :=
+    RingHom.FiniteType.comp (HasRingHomProperty.appLE @LocallyOfFiniteType q ‹_›
+      ⟨⊤, isAffineOpen_top _⟩ ⟨V, hV⟩ le_top) (RingHom.FiniteType.of_surjective _
+        (Scheme.ΓSpecIso (.of k)).commRingCatIsoToRingEquiv.symm.surjective)
+  have := functionField_isFractionRing_of_isAffineOpen X V hV
+  have := Algebra.FiniteType.finite_integralClosure k (A := Γ(X, V)) X.functionField
+    X.functionField
+  obtain ⟨b, hb, hbint⟩ := exists_isInteger_smul_of_finite_integralClosure (A := Γ(X, V))
+    (K := X.functionField)
+  have hb0 : b ≠ 0 := nonZeroDivisors.ne_zero hb
+  have hηV : genericPoint X ∈ V :=
+    ((genericPoint_spec X).mem_open_set_iff V.isOpen).mpr (by simpa using ‹Nonempty V›)
+  have hηW : genericPoint X ∈ X.basicOpen b := by
+    rw [X.mem_basicOpen b _ hηV]
+    exact isUnit_iff_ne_zero.mpr ((map_ne_zero_iff _ (X.germToFunctionField_injective V)).mpr hb0)
+  have hW : IsAffineOpen (X.basicOpen b) := hV.basicOpen b
+  have : Nonempty (X.basicOpen b) := ⟨⟨_, hηW⟩⟩
+  have := hV.isLocalization_basicOpen b
+  have := functionField_isFractionRing_of_isAffineOpen X _ hW
+  have : IsScalarTower Γ(X, V) Γ(X, X.basicOpen b) X.functionField :=
+    .of_algebraMap_eq fun a ↦ (X.presheaf.germ_res_apply _ _ _ a).symm
+  have : IsIntegrallyClosed Γ(X, X.basicOpen b) :=
+    isIntegrallyClosed_of_isLocalization_away hb0 hbint
+  refine ⟨X.basicOpen b, ⟨_, hηW⟩, fun y hy ↦ ?_⟩
+  let := TopCat.Presheaf.algebra_section_stalk X.presheaf (⟨y, hy⟩ : X.basicOpen b)
+  have := hW.isLocalization_stalk ⟨y, hy⟩
+  exact isIntegrallyClosed_of_isLocalization _ _
+    (hW.primeIdealOf ⟨y, hy⟩).asIdeal.primeCompl_le_nonZeroDivisors
 
 namespace Scheme.Hom
 
