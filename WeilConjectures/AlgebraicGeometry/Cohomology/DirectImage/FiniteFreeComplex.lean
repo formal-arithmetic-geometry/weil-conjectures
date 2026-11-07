@@ -86,7 +86,7 @@ theorem isFinitePresentation_higherDirectImage [IsLocallyNoetherian T]
     have := IsLocallyNoetherian.component_noetherian ⟨V, hV⟩
     have : IsNoetherianRing Γ(Spec Γ(T, V), ⊤) :=
       isNoetherianRing_of_ringEquiv _ (Scheme.ΓSpecIso Γ(T, V)).commRingCatIsoToRingEquiv.symm
-    have := isGrothendieckAbelian (Limits.pullback f hV.fromSpec)
+    have := instIsGrothendieckAbelian_weilConjectures (Limits.pullback f hV.fromSpec)
     obtain ⟨e⟩ := nonempty_higherDirectImage_iso_restrict f ℱ hV.fromSpec _ _
       (IsPullback.of_hasPullback f hV.fromSpec) q
     have : ((Modules.pullback (pullback.fst f hV.fromSpec)).obj ℱ).IsFinitePresentation :=

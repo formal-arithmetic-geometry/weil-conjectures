@@ -37,8 +37,6 @@ variable [∀ Z : Scheme.{u},
 local instance (Z : Scheme.{u}) : HasDerivedCategory.{w} Z.Modules :=
   inferInstanceAs (HasDerivedCategory.{w}
     (SheafOfModules.{u} (moduleRings Z.toRingedSpace)))
-local instance (Z : Scheme.{u}) : IsGrothendieckAbelian.{u} Z.Modules :=
-  SheafOfModules.isGrothendieckAbelian _
 local instance (Z : Scheme.{u}) : Abelian.HasKInjectiveResolutions Z.Modules :=
   Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian
 set_option backward.isDefEq.respectTransparency true in

@@ -61,7 +61,7 @@ theorem isQuasicoherent_higherDirectImage (q : ℕ) :
     fun U ↦ ?_
   let g := U.2.fromSpec
   have : IsIso (((higherDirectImage f q).obj ℱ).restrict g).fromTildeΓ := by
-    have := isGrothendieckAbelian (Limits.pullback f g)
+    have := instIsGrothendieckAbelian_weilConjectures (Limits.pullback f g)
     obtain ⟨n, hn⟩ := exists_higherDirectImageBound_top (pullback.snd f g)
       ((Modules.pullback (pullback.fst f g)).obj ℱ)
     have : SheafOfModules.IsQuasicoherent (R := (Spec Γ(T, U.1)).ringCatSheaf)
@@ -134,7 +134,7 @@ lemma sectionsHigherDirectImageSuccAddEquiv_apply (I : InjectiveResolution ℱ) 
               (((I.isoRightDerivedObj (pushforward f) (n + 1)).hom.app ⊤) x))))) :=
   rfl
 
-set_option maxHeartbeats 1600000 in
+set_option maxHeartbeats 500000 in
 -- identifying sections of `f_* Iⁿ` and of `Iⁿ` over `⊤` unfolds `f ⁻¹ᵁ ⊤`
 /-- The comparison `Γ(T, R^{n+1} f_* ℱ) ≅ H^{n+1}(X, ℱ)` is natural in `ℱ`. -/
 lemma sectionsHigherDirectImageSuccAddEquiv_naturality (𝒢 : X.Modules)
@@ -291,7 +291,7 @@ lemma rightDerivedGlobalSectionsSuccAddEquiv_apply (I : InjectiveResolution ℱ)
               ((I.isoRightDerivedObj (globalSectionsFunctor X) (n + 1)).hom x))))) :=
   rfl
 
-set_option maxHeartbeats 1600000 in
+set_option maxHeartbeats 600000 in
 -- the identifications of the global sections complexes unfold the sections functor
 /-- `R^{n+1} Γ(X, ℱ) ≅ H^{n+1}(X, ℱ)` is natural in `ℱ`. -/
 lemma rightDerivedGlobalSectionsSuccAddEquiv_naturality (𝒢 : X.Modules) (φ : ℱ ⟶ 𝒢)
@@ -666,7 +666,7 @@ theorem exists_isZero_higherDirectImage_restrict (t : T) :
   obtain ⟨U, hU, htU, -⟩ :=
     (TopologicalSpace.Opens.isBasis_iff_nbhd.1 T.isBasis_affineOpens) (show t ∈ ⊤ from trivial)
   have : IsAffine U := hU
-  have := isGrothendieckAbelian (Limits.pullback f (Scheme.Opens.ι U))
+  have := instIsGrothendieckAbelian_weilConjectures (Limits.pullback f (Scheme.Opens.ι U))
   obtain ⟨n, hn⟩ := exists_higherDirectImageBound_top (pullback.snd f (Scheme.Opens.ι U))
     ((Modules.pullback (pullback.fst f (Scheme.Opens.ι U))).obj ℱ)
   exact ⟨U, n, htU, fun q hq ↦ IsZero.of_iso (hn.higherDirectImage.2 q hq)

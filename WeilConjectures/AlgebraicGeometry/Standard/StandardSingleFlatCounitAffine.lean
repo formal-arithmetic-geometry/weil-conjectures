@@ -109,7 +109,7 @@ private theorem affine_single_unit_iso
           (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj N))) := by
   let r := (HomologicalComplex.singleMapHomologicalComplex
     (RingedSpace.moduleDirectImage f.toLRSHom.toShHom) (.up ℤ) 0).inv.app N
-  have := Scheme.Modules.isGrothendieckAbelian X
+  have := Scheme.Modules.instIsGrothendieckAbelian_weilConjectures X
   have hA := Scheme.Modules.affine_pushforward_rightAcyclic f N
   have hi := Scheme.Modules.isIso_canonicalSingleDirectImageMap f N (fun q hq ↦ by
     obtain ⟨n, rfl⟩ : ∃ n, q = n + 1 := ⟨q - 1, by omega⟩

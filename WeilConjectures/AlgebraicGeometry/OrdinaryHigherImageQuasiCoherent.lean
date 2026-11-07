@@ -50,7 +50,8 @@ theorem ordinaryHigherImage_isQuasicoherent
     (p : ℕ) :
     SheafOfModules.IsQuasicoherent.{u}
       (((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived p).obj M) := by
-  let : IsGrothendieckAbelian.{u} X.Modules := Scheme.Modules.isGrothendieckAbelian X
+  let : IsGrothendieckAbelian.{u} X.Modules :=
+    Scheme.Modules.instIsGrothendieckAbelian_weilConjectures X
   let := hM
   exact Scheme.Modules.isQuasicoherent_higherDirectImage f M p
 

@@ -62,7 +62,7 @@ theorem hFiber_eq_finrank_homology {U : T.Opens} {P : CochainComplex U.toScheme.
     ℱ.hFiber f q s =
       Module.finrank (T.residueField s) ((moduleSpecΓFunctor (R := T.residueField s)).obj
         ((((Modules.pullback g).mapHomologicalComplex _).obj P).homology q)) := by
-  have := isGrothendieckAbelian (f.fiber s)
+  have := instIsGrothendieckAbelian_weilConjectures (f.fiber s)
   have sq : IsPullback (f.fiberι s) (f.fiberToSpecResidueField s) f (g ≫ U.ι) := by
     rw [hg]
     exact IsPullback.of_hasPullback _ _
@@ -142,7 +142,7 @@ theorem finiteDimensional_H_fiber (hℱ : ℱ.IsFlatOver f) (q : ℕ) (t : T) :
     FiniteDimensional (T.residueField t) (((Modules.pullback (f.fiberι t)).obj ℱ).H q) := by
   obtain ⟨U, P, d, htU, hP, hbc⟩ := exists_isFiniteFreeComplex_higherDirectImage f ℱ hℱ t
   obtain ⟨g, hg⟩ := exists_comp_ι_eq_fromSpecResidueField htU
-  have := isGrothendieckAbelian (f.fiber t)
+  have := instIsGrothendieckAbelian_weilConjectures (f.fiber t)
   have sq : IsPullback (f.fiberι t) (f.fiberToSpecResidueField t) f (g ≫ U.ι) := by
     rw [hg]
     exact IsPullback.of_hasPullback _ _
@@ -228,7 +228,7 @@ theorem exists_isFiniteLocallyFreeOfRank_higherDirectImage_of_isLocallyConstant 
   have hkq : r q - (A₁.map g₀.appTop).rank - (A₂.map g₀.appTop).rank = ℱ.hFiber f q t := by
     omega
   -- `H^q(j^* P)` computes the higher direct image on the image of `j`
-  have := isGrothendieckAbelian (Limits.pullback f (j ≫ U.ι))
+  have := instIsGrothendieckAbelian_weilConjectures (Limits.pullback f (j ≫ U.ι))
   have sq := IsPullback.of_hasPullback f (j ≫ U.ι)
   obtain ⟨e₁⟩ := hbc j _ _ sq q
   obtain ⟨e₂⟩ := nonempty_higherDirectImage_iso_restrict f ℱ (j ≫ U.ι) _ _ sq q
@@ -265,7 +265,7 @@ theorem exists_forall_hFiber_eq_zero (hℱ : ℱ.IsFlatOver f) (t : T) :
     simpa using ht'
   let g := IsOpenImmersion.lift U.ι (T.fromSpecResidueField t') hrange
   have hg : g ≫ U.ι = T.fromSpecResidueField t' := IsOpenImmersion.lift_fac _ _ _
-  have := isGrothendieckAbelian (f.fiber t')
+  have := instIsGrothendieckAbelian_weilConjectures (f.fiber t')
   have sq : IsPullback (f.fiberι t') (f.fiberToSpecResidueField t') f (g ≫ U.ι) := by
     rw [hg]
     exact IsPullback.of_hasPullback _ _

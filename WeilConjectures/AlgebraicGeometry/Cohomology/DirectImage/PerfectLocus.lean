@@ -70,7 +70,7 @@ theorem nonempty_restrict_higherDirectImage_iso_homology {U : T.Opens}
     (gV : V.toScheme ⟶ U.toScheme) (hgV : gV ≫ U.ι = V.ι ≫ g) (q : ℕ) :
     Nonempty (((higherDirectImage f' q).obj ((Modules.pullback g').obj ℱ)).restrict V.ι ≅
       (((Modules.pullback gV).mapHomologicalComplex _).obj P).homology q) := by
-  have := isGrothendieckAbelian (f' ⁻¹ᵁ V).toScheme
+  have := instIsGrothendieckAbelian_weilConjectures (f' ⁻¹ᵁ V).toScheme
   have sq' : IsPullback (f' ⁻¹ᵁ V).ι (f' ∣_ V) f' V.ι := (isPullback_morphismRestrict f' V).flip
   obtain ⟨e₁⟩ := nonempty_higherDirectImage_iso_restrict f' ((Modules.pullback g').obj ℱ) V.ι _ _
     sq' q
@@ -203,7 +203,7 @@ theorem isZero_higherDirectImage_restrict (hℱ : ℱ.IsFlatOver f) (i r : ℕ) 
     (hU : ↑U ⊆ {t : T | (∀ q, q ≠ i → ℱ.hFiber f q t = 0) ∧ ℱ.hFiber f i t = r})
     (q : ℕ) (hq : q ≠ i) :
     IsZero (((higherDirectImage f q).obj ℱ).restrict U.ι) := by
-  have := isGrothendieckAbelian (f ⁻¹ᵁ U).toScheme
+  have := instIsGrothendieckAbelian_weilConjectures (f ⁻¹ᵁ U).toScheme
   have sq : IsPullback (f ⁻¹ᵁ U).ι (f ∣_ U) f U.ι := (isPullback_morphismRestrict f U).flip
   obtain ⟨e⟩ := nonempty_higherDirectImage_iso_restrict f ℱ U.ι _ _ sq q
   refine (isZero_higherDirectImage_of_isPullback f ℱ hℱ U.ι _ _ sq ?_ hq).of_iso e.symm

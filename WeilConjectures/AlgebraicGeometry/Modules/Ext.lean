@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import WeilConjectures.AlgebraicGeometry.Cohomology.InjectiveFlasque
 public import WeilConjectures.AlgebraicGeometry.Cohomology.LongExact
+public import WeilConjectures.AlgebraicGeometry.Cohomology.PushforwardZero
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.MapBijective
 public import WeilConjectures.AlgebraicGeometry.Modules.HomTensor.LocallyFree
 
@@ -45,7 +46,8 @@ need not exist.
 ## Implementation notes
 
 The `Ext` groups need the hypothesis `HasExt.{u} X.Modules`, which holds because `X.Modules` is a
-Grothendieck abelian category (`AlgebraicGeometry.Scheme.Modules.isGrothendieckAbelian`); it is
+Grothendieck abelian category
+(`AlgebraicGeometry.Scheme.Modules.instIsGrothendieckAbelian_weilConjectures`); it is
 kept as an instance argument.
 -/
 
@@ -131,12 +133,6 @@ lemma extUnitZeroAddEquiv_comp {M N : X.Modules} (g : M ⟶ N) (x : Ext (𝟙_ X
   simp only [extUnitZeroAddEquiv, AddEquiv.trans_apply, h]
   rfl
 
-omit [HasExt X.Modules] in
-/-- `H⁰(X, M) ≅ Γ(M, ⊤)`, naturally. -/
-lemma zeroLinearEquiv_map {M N : X.Modules} (g : M ⟶ N) (x : M.H 0) :
-    H.zeroLinearEquiv N (H.map g 0 x) = Hom.app g ⊤ (H.zeroLinearEquiv M x) :=
-  (Sheaf.H.equiv₀_naturality (hT := isTerminalTop) _ x).symm
-
 /-- **`Ext` from the structure sheaf is sheaf cohomology.** For every `𝒪_X`-module `M`,
 `Ext^n_X(𝒪_X, M) ≅ H^n(X, M)`: both vanish on injective `𝒪_X`-modules in positive degrees
 (`AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_injective`), agree with global sections in
@@ -184,13 +180,13 @@ theorem nonempty_ext_unit_addEquiv_H (n : ℕ) (M : X.Modules) :
         refine ⟨(H.zeroLinearEquiv S.X₂).symm (extUnitZeroAddEquiv S.X₂ y), ?_⟩
         apply (H.zeroLinearEquiv S.X₃).injective
         change _ = (H.zeroLinearEquiv S.X₃) ((H.zeroLinearEquiv S.X₃).symm _)
-        rw [LinearEquiv.apply_symm_apply, zeroLinearEquiv_map, LinearEquiv.apply_symm_apply]
+        rw [LinearEquiv.apply_symm_apply, H.zeroLinearEquiv_map, LinearEquiv.apply_symm_apply]
         exact (extUnitZeroAddEquiv_comp S.g y).symm
       · rintro ⟨y, rfl⟩
         refine ⟨_, ⟨(extUnitZeroAddEquiv S.X₂).symm (H.zeroLinearEquiv S.X₂ y), rfl⟩, ?_⟩
         apply (H.zeroLinearEquiv S.X₃).injective
         change (H.zeroLinearEquiv S.X₃) ((H.zeroLinearEquiv S.X₃).symm _) = _
-        rw [LinearEquiv.apply_symm_apply, zeroLinearEquiv_map]
+        rw [LinearEquiv.apply_symm_apply, H.zeroLinearEquiv_map]
         exact (extUnitZeroAddEquiv_comp S.g _).trans
           (congrArg _ (AddEquiv.apply_symm_apply _ _))
     · -- higher degrees: both connecting maps are isomorphisms

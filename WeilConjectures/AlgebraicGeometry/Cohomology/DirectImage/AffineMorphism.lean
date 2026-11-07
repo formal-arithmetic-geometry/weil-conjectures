@@ -47,7 +47,7 @@ theorem finiteDimensional_H_of_isProper [IsProper (X ↘ Spec (.of k))] (ℱ : X
     [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) ℱ] (q : ℕ) :
     FiniteDimensional k (ℱ.H q) := by
   classical
-  have := isGrothendieckAbelian X
+  have := instIsGrothendieckAbelian_weilConjectures X
   have : IsNoetherianRing Γ(Spec (.of k), ⊤) :=
     isNoetherianRing_of_ringEquiv _ (Scheme.ΓSpecIso (.of k)).commRingCatIsoToRingEquiv.symm
   obtain ⟨e, he⟩ := exists_bijective_semilinearMap_sections_higherDirectImage_H_of_field

@@ -157,7 +157,7 @@ private theorem finitePresentation_higherDirectImage_proper
     have := IsLocallyNoetherian.component_noetherian ⟨V, hV⟩
     have : IsNoetherianRing Γ(Spec Γ(T, V), ⊤) :=
       isNoetherianRing_of_ringEquiv _ (Scheme.ΓSpecIso Γ(T, V)).commRingCatIsoToRingEquiv.symm
-    have := isGrothendieckAbelian (Limits.pullback f hV.fromSpec)
+    have := instIsGrothendieckAbelian_weilConjectures (Limits.pullback f hV.fromSpec)
     obtain ⟨e⟩ := nonempty_higherDirectImage_iso_restrict f ℱ hV.fromSpec _ _
       (IsPullback.of_hasPullback f hV.fromSpec) q
     have : ((Modules.pullback (pullback.fst f hV.fromSpec)).obj ℱ).IsFinitePresentation :=
@@ -250,7 +250,8 @@ theorem noetherian_proper_directImage_bounded_coherent
   have : Limits.PreservesFiniteLimits F := by
     change Limits.PreservesFiniteLimits (Scheme.Modules.pushforward f)
     infer_instance
-  have : IsGrothendieckAbelian.{u} Y.Modules := Scheme.Modules.isGrothendieckAbelian Y
+  have : IsGrothendieckAbelian.{u} Y.Modules :=
+    Scheme.Modules.instIsGrothendieckAbelian_weilConjectures Y
   obtain ⟨K, hK, ⟨e⟩⟩ := DerivedCategory.exists_iso_Q_obj_of_isGE A a
   let Kplus : CochainComplex.Plus C := ⟨K, a, hK⟩
   have ha : ∀ q : ℤ, q < a → Limits.IsZero (Kplus.obj.homology q) := by

@@ -225,18 +225,12 @@ lemma isFinitePresentation_toModules [IsLocallyNoetherian X] (J : X.IdealSheafDa
 
 section Tensor
 
-/-- Tensoring with an invertible module is an autoequivalence. -/
-lemma isEquivalence_tensorRight (P : X.Modules) [P.IsInvertible] :
-    (tensorRight P).IsEquivalence :=
-  (BraidedCategory.tensorRightEquivalence P Pᵛ
-    (nonempty_tensorObj_dual_iso_unit P).some).isEquivalence_functor
-
 /-- A module vanishing on `U` stays zero on `U` after tensoring with an invertible module. -/
 lemma isZero_restrict_tensorObj {M : X.Modules} (N : X.Modules) [N.IsInvertible] {U : X.Opens}
     (h : IsZero (M.restrict U.ι)) : IsZero ((M ⊗ N).restrict U.ι) := by
   have h₁ : IsZero ((pullback U.ι).obj M) :=
     h.of_iso ((restrictFunctorIsoPullback U.ι).app M).symm
-  have := isEquivalence_tensorRight ((pullback U.ι).obj N)
+  have := isEquivalence_tensorRight_of_isInvertible ((pullback U.ι).obj N)
   have h₂ : IsZero ((pullback U.ι).obj M ⊗ (pullback U.ι).obj N) :=
     (tensorRight ((pullback U.ι).obj N)).map_isZero h₁
   exact (h₂.of_iso (Functor.Monoidal.μIso (pullback U.ι) M N).symm).of_iso
@@ -332,7 +326,7 @@ theorem eulerChar_tensorObj_sub_eulerChar_tensorObj_eq {M N : X.Modules}
   have := isFinitePresentation_tensorObj M P
   have := isQuasicoherent_tensorObj N P
   have := isFinitePresentation_tensorObj N P
-  have := isEquivalence_tensorRight P
+  have := isEquivalence_tensorRight_of_isInvertible P
   have e₁ : (kernel (φ ▷ P)).eulerChar K = (kernel φ ⊗ P).eulerChar K :=
     eulerChar_congr K (PreservesKernel.iso (tensorRight P) φ).symm
   have e₂ : (cokernel (φ ▷ P)).eulerChar K = (cokernel φ ⊗ P).eulerChar K :=
@@ -347,7 +341,7 @@ theorem eulerChar_free_tensorObj (r : ℕ) (N : X.Modules) [N.IsInvertible]
     [∀ q, FiniteDimensional K (N.H q)] :
     (SheafOfModules.free (R := X.ringCatSheaf) (ULift.{u} (Fin r)) ⊗ₘ N).eulerChar K =
       r * N.eulerChar K := by
-  have := isEquivalence_tensorRight N
+  have := isEquivalence_tensorRight_of_isInvertible N
   let e : SheafOfModules.free (R := X.ringCatSheaf) (ULift.{u} (Fin r)) ⊗ₘ N ≅
       ⨁ fun _ : ULift.{u} (Fin r) ↦ N :=
     PreservesCoproduct.iso (tensorRight N) _ ≪≫
@@ -672,7 +666,7 @@ theorem exists_polynomial_eulerChar_tensorObj_tensorPow (hℒ : IsAmple (X ↘ S
     subst hUt
     have hℱ' : IsZero ℱ := isZero_of_isZero_restrict_top hℱ
     refine ⟨0, by simp, fun n ↦ ?_⟩
-    have := isEquivalence_tensorRight (ℒ.tensorPow n)
+    have := isEquivalence_tensorRight_of_isInvertible (ℒ.tensorPow n)
     have h₀ : IsZero (ℱ ⊗ ℒ.tensorPow n) := (tensorRight (ℒ.tensorPow n)).map_isZero hℱ'
     rw [eulerChar_eq_zero_of_isZero K h₀]
     simp
@@ -824,7 +818,7 @@ theorem eulerChar_tensorObj_eq_add (J : X.IdealSheafData) (N : X.Modules) [N.IsI
   have := SheafOfModules.isQuasicoherent_unit (R := X.ringCatSheaf)
   have := IsInvertible.sheafOfModules_isInvertible (𝟙_ X.Modules)
   have h := eulerChar_tensorObj_sub_eulerChar_tensorObj_eq K J.toModulesι N
-  have := isEquivalence_tensorRight N
+  have := isEquivalence_tensorRight_of_isInvertible N
   have e₁ : (kernel J.toModulesι ⊗ N).eulerChar K = 0 :=
     eulerChar_eq_zero_of_isZero K ((tensorRight N).map_isZero (isZero_kernel_of_mono _))
   have e₂ : (cokernel J.toModulesι ⊗ N).eulerChar K =
@@ -940,7 +934,7 @@ theorem le_degree_of_isIntegral (d : ℕ) (Y : Scheme.{u}) [Y.Over (Spec (.of K)
         (cokernel σ ⊗ ℒ.tensorPow n).eulerChar K +
           (𝟙_ Y'.Modules ⊗ ((pullback j).obj ℒ).tensorPow (n + a)).eulerChar K := by
       have h₁ := eulerChar_tensorObj_sub_eulerChar_tensorObj_eq K σ (ℒ.tensorPow n)
-      have := isEquivalence_tensorRight (ℒ.tensorPow n)
+      have := isEquivalence_tensorRight_of_isInvertible (ℒ.tensorPow n)
       have h₀ : (kernel σ ⊗ ℒ.tensorPow n).eulerChar K = 0 :=
         eulerChar_eq_zero_of_isZero K ((tensorRight _).map_isZero (isZero_kernel_of_mono σ))
       rw [h₀, sub_zero] at h₁

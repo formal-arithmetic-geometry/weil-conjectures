@@ -185,14 +185,14 @@ lemma rightAcyclic_pushforward_injective (I : X'.Modules) [Injective I] :
 /-- The resolution of `ℱ` over `g'_* J`, for an injective resolution `J` of `ℱ'`. -/
 noncomputable abbrev baseChangeResolution (θ : ℱ ⟶ (pushforward g').obj ℱ')
     (J : InjectiveResolution ℱ') : CochainComplex X.Modules ℕ :=
-  have := (isGrothendieckAbelian X).enoughInjectives
+  have := (instIsGrothendieckAbelian_weilConjectures X).enoughInjectives
   CochainComplex.OverResolution _ (baseChangeAugmentation θ J) (baseChangeAugmentation_d θ J)
 
 omit [HasInjectiveResolutions X'.Modules] in
 lemma rightAcyclic_baseChangeResolution (θ : ℱ ⟶ (pushforward g').obj ℱ')
     (J : InjectiveResolution ℱ') (n : ℕ) :
     (pushforward f).rightAcyclic ((baseChangeResolution θ J).X n) := by
-  have := (isGrothendieckAbelian X).enoughInjectives
+  have := (instIsGrothendieckAbelian_weilConjectures X).enoughInjectives
   obtain ⟨E, _, ⟨e⟩⟩ := CochainComplex.OverResolution.exists_iso_biprod _
     (baseChangeAugmentation θ J) (baseChangeAugmentation_d θ J) n
   exact (pushforward f).rightAcyclic.prop_of_iso e.symm
@@ -203,7 +203,7 @@ lemma rightAcyclic_baseChangeResolution (θ : ℱ ⟶ (pushforward g').obj ℱ')
 `J` of `ℱ'`. -/
 noncomputable def baseChangeDataOfInjective (θ : ℱ ⟶ (pushforward g').obj ℱ')
     (J : InjectiveResolution ℱ') : BaseChangeData f g' f' θ :=
-  have := (isGrothendieckAbelian X).enoughInjectives
+  have := (instIsGrothendieckAbelian_weilConjectures X).enoughInjectives
   { P := baseChangeResolution θ J
     ε := CochainComplex.OverResolution.ι _ _ _
     rightAcyclic_P := rightAcyclic_baseChangeResolution θ J
@@ -216,7 +216,7 @@ noncomputable def baseChangeDataOfInjective (θ : ℱ ⟶ (pushforward g').obj �
 /-- **The base change morphism does not depend on the datum.** -/
 theorem BaseChangeData.map_eq (D₁ D₂ : BaseChangeData f g' f' θ) (w : g' ≫ f = f' ≫ g)
     (i : ℕ) : D₁.map w i = D₂.map w i := by
-  have := (isGrothendieckAbelian X).enoughInjectives
+  have := (instIsGrothendieckAbelian_weilConjectures X).enoughInjectives
   let J := injectiveResolution ℱ'
   -- move both data to the injective resolution `J`
   have key (D : BaseChangeData f g' f' θ) :

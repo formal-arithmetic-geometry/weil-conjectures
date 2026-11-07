@@ -124,7 +124,7 @@ theorem exists_addEquiv_H_pushforward_natural_of_higherDirectImage_vanishing
       ∀ (φ : F ⟶ F) (x : ((pushforward p).obj F).H q),
         e (H.map ((pushforward p).map φ) q x) = H.map φ q (e x) := by
   classical
-  let := isGrothendieckAbelian X
+  let := instIsGrothendieckAbelian_weilConjectures X
   let A := pushforward p
   let B := RingedSpace.globalSectionsFunctor X.toRingedSpace
   have : B.Additive := inferInstanceAs

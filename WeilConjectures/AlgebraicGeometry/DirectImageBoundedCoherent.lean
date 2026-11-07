@@ -122,7 +122,8 @@ theorem directImage_isBounded_coherent
   have : Limits.PreservesFiniteLimits F := by
     change Limits.PreservesFiniteLimits (Scheme.Modules.pushforward f)
     infer_instance
-  have : IsGrothendieckAbelian.{u} X.Modules := Scheme.Modules.isGrothendieckAbelian X
+  have : IsGrothendieckAbelian.{u} X.Modules :=
+    Scheme.Modules.instIsGrothendieckAbelian_weilConjectures X
   obtain ⟨K, hK, ⟨e⟩⟩ := DerivedCategory.exists_iso_Q_obj_of_isGE E a
   let Kplus : CochainComplex.Plus A := ⟨K, a, hK⟩
   have ha : ∀ q : ℤ, q < a → Limits.IsZero (Kplus.obj.homology q) := by

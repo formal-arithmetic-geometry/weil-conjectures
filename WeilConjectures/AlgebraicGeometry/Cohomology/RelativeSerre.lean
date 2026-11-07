@@ -152,7 +152,7 @@ lemma exists_isZero_higherDirectImage_tensorObj_twistRestrict_restrict (G : Y'.M
         hV.fromSpec) := by
   have := isProper_of_comp_over he
   let g := hV.fromSpec
-  have := isGrothendieckAbelian (Limits.pullback π g)
+  have := instIsGrothendieckAbelian_weilConjectures (Limits.pullback π g)
   have : IsNoetherianRing Γ(Y, V) := IsLocallyNoetherian.component_noetherian ⟨V, hV⟩
   have := isClosedImmersion_chartLift he g
   obtain ⟨m₀, hm₀⟩ := exists_subsingleton_H_tensor_twist_of_isNoetherianRing Γ(Y, V)
@@ -213,7 +213,7 @@ theorem isFinitePresentation_higherDirectImage_zero_of_projectiveSpace (G : Y'.M
     have : IsNoetherianRing Γ(Y, V) := IsLocallyNoetherian.component_noetherian ⟨V, hV⟩
     have : IsNoetherianRing Γ(Spec Γ(Y, V), ⊤) :=
       isNoetherianRing_of_ringEquiv _ (Scheme.ΓSpecIso Γ(Y, V)).commRingCatIsoToRingEquiv.symm
-    have := isGrothendieckAbelian (Limits.pullback π g)
+    have := instIsGrothendieckAbelian_weilConjectures (Limits.pullback π g)
     have := isClosedImmersion_chartLift he g
     obtain ⟨E⟩ := nonempty_higherDirectImage_iso_restrict π G g (pullback.fst π g)
       (pullback.snd π g) (IsPullback.of_hasPullback π g) 0

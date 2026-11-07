@@ -170,7 +170,7 @@ theorem proper_smooth_geometric_components_locally_constant
   have hnβ (s : S) :
       n s = Scheme.Modules.hFiber (X := X) (SheafOfModules.unit X.ringCatSheaf) f 0 s :=
     (hn s).2.trans (hFiber_unit_eq_card_geometric_components f s).symm
-  have := Scheme.Modules.isGrothendieckAbelian X
+  have := Scheme.Modules.instIsGrothendieckAbelian_weilConjectures X
   have : (SheafOfModules.unit X.ringCatSheaf).IsFinitePresentation :=
     SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
   have hupper : UpperSemicontinuous n := by

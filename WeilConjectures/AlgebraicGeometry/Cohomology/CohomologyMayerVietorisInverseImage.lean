@@ -97,7 +97,7 @@ private theorem extRow_exact
         ((ShortComplex.ab_exact_iff_function_exact _).mp
           (CategoryTheory.Abelian.Ext.contravariant_sequence_exact₃' hK F n (n + 1) (by omega)))
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- Ext transport elaboration unfolds large categorical terms.
 /-- The original and pulled-back Mayer--Vietoris sequences are compatible with
 `H.baseChangeLinear`, before tensoring. Neither flatness nor quasi-coherence is needed.

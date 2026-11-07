@@ -171,7 +171,7 @@ theorem tensorGradedDegreeData_exists {X Z : Scheme.{u}} (j : Z ⟶ X)
   have hp : Epi p := colim.map_epi' β
     (Cofan.mk _ A.b) A.c_colimit p (fun d ↦ A.b_quotient d.as)
   let _ : IsGrothendieckAbelian.{u} X.Modules :=
-    isGrothendieckAbelian X
+    instIsGrothendieckAbelian_weilConjectures X
   refine ⟨{
     shortExact := { exact := ShortComplex.kernelSequence_exact p, epi_g := hp }
     k := k

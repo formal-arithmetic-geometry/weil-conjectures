@@ -50,7 +50,7 @@ theorem affine_open_pushforward_rightAcyclic
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) F] :
     (RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightAcyclic
       ((Scheme.Modules.pushforward W.ι).obj (F.restrict W.ι)) := by
-  have := Scheme.Modules.isGrothendieckAbelian W.toScheme
+  have := Scheme.Modules.instIsGrothendieckAbelian_weilConjectures W.toScheme
   have : IsAffine W.toScheme := hW
   have : IsAffineHom (W.ι ≫ f) := inferInstance
   have : IsAffineHom W.ι := IsAffineHom.of_comp W.ι f

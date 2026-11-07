@@ -447,7 +447,7 @@ def homOfSection (F : (ProjectiveLine (Spec (.of k))).Modules) (s : Γ(F, ⊤)) 
 lemma H_map_homOfSection_unitHZero (F : (ProjectiveLine (Spec (.of k))).Modules) (s : Γ(F, ⊤)) :
     H.map (homOfSection F s) 0 (unitHZero (k := k)) = (H.zeroLinearEquiv F).symm s := by
   apply (H.zeroLinearEquiv F).injective
-  rw [zeroLinearEquiv_map, LinearEquiv.apply_symm_apply, unitHZero, LinearEquiv.apply_symm_apply,
+  rw [H.zeroLinearEquiv_map, LinearEquiv.apply_symm_apply, unitHZero, LinearEquiv.apply_symm_apply,
     homOfSection, ← ConcreteCategory.comp_apply, ← Hom.comp_app, Iso.hom_inv_id_assoc,
     homOfGlobalSection_app_one]
   exact presheaf_map_id_apply _ _
