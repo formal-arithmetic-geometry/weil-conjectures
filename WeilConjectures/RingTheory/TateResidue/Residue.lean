@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.RingTheory.TateResidue.TateIdeals
 public import WeilConjectures.RingTheory.Kaehler.Trace
+public import Mathlib.Tactic.NoncommRing
 
 /-!
 # Tate's abstract residue
