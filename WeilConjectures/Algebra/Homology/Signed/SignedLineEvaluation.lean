@@ -43,6 +43,10 @@ def signedLinePairing (L : LineEvaluation.Modules.{uC, vC, r} R) (m : ℤ) (U : 
   | .ofNat (_n + 1) => fun a b ↦ b.app (op (Over.mk (𝟙 U.unop))) a
   | .negSucc _n => fun a b ↦ a.app (op (Over.mk (𝟙 U.unop))) b
 
+omit [HasSheafify J AddCommGrpCat.{max uC vC r}]
+  [J.WEqualsLocallyBijective AddCommGrpCat.{max uC vC r}]
+  [∀ U : C, (J.over U).HasSheafCompose
+    (forget₂ CommRingCat.{max uC vC r} RingCat.{max uC vC r})] in
 private theorem dualEvaluation (P : LineEvaluation.Modules.{uC, vC, r} R)
     [P.IsFiniteLocallyFreeOfRank 1] :
     ∃ e : P ⊗ LineEvaluation.unitDual.{uC, vC, r}

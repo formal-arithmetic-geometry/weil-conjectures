@@ -58,7 +58,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   {j : X ⟶ Y} [IsOpenImmersion j] {h : j ≫ t = s}
   (hc : UpperStarWeilCompatible Λ j h)
 
-set_option linter.unusedSectionVars false in
+omit [Finite k] in
 /-- The ordinary inverse mate used by descent is the specified extension-by-zero
 base-change comparison. -/
 lemma openTraceInverseMate_eq :

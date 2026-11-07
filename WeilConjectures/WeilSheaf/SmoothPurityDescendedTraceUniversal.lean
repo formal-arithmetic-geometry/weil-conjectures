@@ -23,8 +23,8 @@ map `smoothUnitBaseChange : πX^* Rf^! ℚ̄_ℓ ⟶ Rf'^! ℚ̄_ℓ` (the mate 
 this exceptional base change map is an isomorphism
 (`isIso_homEquiv_baseChangedSmoothTrace_of_isIso`).
 
-This is the finite-field input of
-`WeilComplex.exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso_of_descendedTrace`
+In `AlgebraicGeometry.WeilComplex`, this is the finite-field input of
+`exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso_of_descendedTrace`
 (`DescendedSmoothTraceUniversal`): the equivariance of the descended trace is automatic, and
 universality of its carrier reduces to the invertibility of `smoothUnitBaseChange`.
 
@@ -93,7 +93,7 @@ def baseChangedSmoothTrace :
   bc.inv.app (boundedConstructibleTateTwist l X d (2 * d)) ≫
     (boundedConstructibleUpperStarOfMap l πY).map (smoothTrace l f d) ≫ e
 
-set_option linter.unusedSectionVars false in
+omit [SmoothOfRelativeDimension d f.left] in
 /-- The transpose of the pulled-back trace is the pulled-back orientation followed by the
 exceptional base change map at the unit. -/
 lemma homEquiv_baseChangedSmoothTrace :

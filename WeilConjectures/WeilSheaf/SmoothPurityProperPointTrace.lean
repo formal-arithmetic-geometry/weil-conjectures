@@ -52,7 +52,7 @@ local instance : IsProper (traceGeometricFiberOverMap f).left :=
   Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange (P := @IsProper)
     f.left (Over.w f) inferInstance
 
-set_option linter.unusedSectionVars false in
+omit [Finite k] in
 /-- Exceptional base change of a proper structural map at the unit is invertible
 for the actual geometric-fibre square. -/
 theorem isIso_upperShriekBaseChange_geometricFiber_unit :
