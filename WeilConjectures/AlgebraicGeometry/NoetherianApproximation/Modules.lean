@@ -154,7 +154,7 @@ end Stages
 
 variable {I : Type u} [Category.{u} I] {D : I ⥤ Scheme.{u}} {c : Cone D}
 
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 800000 in
 -- The proof glues data over a finite affine open cover in a single declaration.
 open Scheme.Modules in
 /-- **Modules of finite presentation descend to a finite stage** (Stacks, Tag 01ZR). Let `{Dⱼ}`
