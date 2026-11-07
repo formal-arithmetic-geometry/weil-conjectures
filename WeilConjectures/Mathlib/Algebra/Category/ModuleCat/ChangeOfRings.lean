@@ -74,13 +74,6 @@ noncomputable def ModuleCat.tensorEquivExtendScalars (R S : Type u) [CommRing R]
       left_inv := h₁
       right_inv := h₂ }
 
-lemma ModuleCat.tensorEquivExtendScalars_tmul (R S : Type u) [CommRing R] [CommRing S]
-    [Algebra R S] (N : ModuleCat.{u} R) (s : S) (n : N) :
-    ModuleCat.tensorEquivExtendScalars R S N (s ⊗ₜ n) =
-      TensorProduct.tmul R
-        (M := (ModuleCat.restrictScalars (algebraMap R S)).obj (ModuleCat.of S S))
-        s n :=
-  rfl
 
 namespace ModuleCat
 

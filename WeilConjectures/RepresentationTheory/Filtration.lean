@@ -390,64 +390,9 @@ namespace Representation
 variable {k : Type u} [Field k] {W : Type w} [Group W] {V : Type v} [AddCommGroup V] [Module k V]
   {ρ : Representation k W V}
 
-/-- A finite filtration `F` is a filtration with graded pieces its subquotients
-`F (i + 1) / F i`. -/
-theorem hasGradedPieces_of_monotone {m : ℕ} (F : Fin (m + 1) → Subrepresentation ρ)
-    (hF : Monotone F) (h0 : F 0 = ⊥) (hl : F (Fin.last m) = ⊤) :
-    HasGradedPieces ρ fun i : Fin m ↦ EquivTo ((F i.succ).subquotient (F i.castSucc)) :=
-  ⟨m, F, .refl _, hF, h0, hl, fun _ ↦ ⟨.refl _⟩⟩
 
 namespace CompositionSeries
 
-/-- A composition series is a filtration whose graded pieces are its composition factors. -/
-theorem hasGradedPieces (s : ρ.CompositionSeries) :
-    HasGradedPieces ρ fun i : Fin s.length ↦ EquivTo (s.factor i) :=
-  hasGradedPieces_of_monotone s.series (Fin.monotone_iff_le_succ.2 fun i ↦ (s.covBy i).le)
-    s.head_eq s.last_eq
-
-/-- A filtration with irreducible graded pieces is a composition series. -/
-theorem exists_of_hasGradedPieces {ι : Type*} {P : ι → RepProp.{u, v} k W}
-    (h : HasGradedPieces ρ P)
-    (hirr : ∀ i {Y : Type v} {_ : AddCommGroup Y} {_ : Module k Y} (τ : Representation k W Y),
-      P i τ → τ.IsIrreducible) :
-    ∃ (s : ρ.CompositionSeries) (e : Fin s.length ≃ ι), ∀ j, P (e j) (s.factor j) := by
-  obtain ⟨m, F, e, hF, h0, hl, hP⟩ := h
-  let s : ρ.CompositionSeries :=
-    ⟨⟨m, F, fun i ↦ (Subrepresentation.isIrreducible_subquotient_iff
-      (hF i.castSucc_le_succ)).1 (hirr _ _ (hP i))⟩, h0, hl⟩
-  exact ⟨s, e, hP⟩
-
-/-- **Jordan–Hölder for filtrations with irreducible graded pieces.** If `ρ` has a filtration
-whose graded pieces are irreducible and satisfy invariant properties `P i`, then the factors of any
-composition series `c` of `ρ` satisfy these properties, along a bijection. -/
-theorem exists_equiv_of_hasGradedPieces {ι : Type*} {P : ι → RepProp.{u, v} k W}
-    (h : HasGradedPieces ρ P) (hP : ∀ i, RepProp.IsInvariant (P i))
-    (hirr : ∀ i {Y : Type v} {_ : AddCommGroup Y} {_ : Module k Y} (τ : Representation k W Y),
-      P i τ → τ.IsIrreducible) (c : ρ.CompositionSeries) :
-    ∃ e : Fin c.length ≃ ι, ∀ j, P (e j) (c.factor j) := by
-  obtain ⟨c', e', he'⟩ := exists_of_hasGradedPieces h hirr
-  obtain ⟨e, he⟩ := jordanHolder c c'
-  exact ⟨e.trans e', fun j ↦ hP _ (he j).some.symm (he' (e j))⟩
-
-/-- **Composition factors of a filtered representation.** Let `0 = F₀ ≤ F₁ ≤ ⋯ ≤ F_m = V` be a
-finite filtration, and choose a composition series `t i` of each graded piece `F_{i+1} / F_i`. Then
-the composition factors of any composition series `c` of `V` are, up to equivalence and with
-multiplicities, the composition factors of all the `t i`: there is a bijection between the factors
-of `c` and the pairs `(i, j)` of an index `i` and a factor `j` of `t i`, matching equivalent
-factors. (blueprint: `lem-mg-filtration-refinement`) -/
-theorem exists_equiv_sigma_of_monotone {m : ℕ} (F : Fin (m + 1) → Subrepresentation ρ)
-    (hF : Monotone F) (h0 : F 0 = ⊥) (hl : F (Fin.last m) = ⊤)
-    (t : ∀ i : Fin m, ((F i.succ).subquotient (F i.castSucc)).CompositionSeries)
-    (c : ρ.CompositionSeries) :
-    ∃ e : Fin c.length ≃ Σ i, Fin (t i).length,
-      ∀ j, Nonempty ((c.factor j).Equiv ((t (e j).1).factor (e j).2)) := by
-  have h := (hasGradedPieces_of_monotone F hF h0 hl).trans
-    (R := fun i j ↦ EquivTo ((t i).factor j)) (fun _ _ ↦ isInvariant_equivTo _)
-    fun i {_} {_} {_} τ ⟨f⟩ ↦ (t i).hasGradedPieces.of_equiv (fun _ ↦ isInvariant_equivTo _) f.symm
-  have hirr : ∀ (x : Σ i, Fin (t i).length) {Y : Type v} {_ : AddCommGroup Y} {_ : Module k Y}
-      (τ : Representation k W Y), EquivTo ((t x.1).factor x.2) τ → τ.IsIrreducible :=
-    fun x {_} {_} {_} τ hτ ↦ hτ.some.isIrreducible_iff.2 ((t x.1).isIrreducible_factor x.2)
-  exact exists_equiv_of_hasGradedPieces h (fun _ ↦ isInvariant_equivTo _) hirr c
 
 end CompositionSeries
 
@@ -576,18 +521,6 @@ namespace CompositionSeries
 variable {V V' : Type v} [AddCommGroup V] [Module k V] [AddCommGroup V'] [Module k V']
   {ρ : Representation k W V} {σ : Representation k W V'}
 
-/-- **The tensor product of two filtered representations.** For composition series `s` of `V` and
-`s'` of `V'`, with factors `A_i` and `B_j`, the representation `V ⊗ V'` has a finite filtration
-whose graded pieces, in a suitable order, are the `A_i ⊗ B_j`, each pair `(i, j)` occurring exactly
-once. (blueprint: `lem-mg-filtered-tensor-product`) -/
-theorem hasGradedPieces_tprod (s : ρ.CompositionSeries) (s' : σ.CompositionSeries) :
-    HasGradedPieces (ρ.tprod σ) fun x : Fin s.length × Fin s'.length ↦
-      EquivTo ((s.factor x.1).tprod (s'.factor x.2)) := by
-  have h := (s.hasGradedPieces.tprod_right σ).trans
-    (R := fun i j ↦ EquivTo ((s.factor i).tprod (s'.factor j))) (fun _ _ ↦ isInvariant_equivTo _)
-    fun i {_} {_} {_} τ ⟨f⟩ ↦ (s'.hasGradedPieces.tprod_left (s.factor i)).of_equiv
-      (fun _ ↦ isInvariant_equivTo _) f.symm
-  exact h.reindex (Equiv.sigmaEquivProd _ _)
 
 end CompositionSeries
 

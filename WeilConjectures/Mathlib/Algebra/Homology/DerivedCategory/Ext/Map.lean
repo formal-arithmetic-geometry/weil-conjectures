@@ -156,20 +156,6 @@ section
 
 variable {C : Type u} [Category.{v} C] [Abelian C] [HasExt.{w} C]
 
-/-- Precomposing with an isomorphism of degree `0` does not change whether a class vanishes. -/
-lemma mk₀_comp_eq_zero_iff {A A' B : C} {n : ℕ} (u : A' ⟶ A) [IsIso u] (y : Ext A B n) :
-    (mk₀ u).comp y (zero_add n) = 0 ↔ y = 0 := by
-  refine ⟨fun hy ↦ ?_, fun hy ↦ by rw [hy, comp_zero]⟩
-  have := congrArg (fun z ↦ (mk₀ (inv u)).comp z (zero_add n)) hy
-  simpa only [mk₀_comp_mk₀_assoc, IsIso.inv_hom_id, mk₀_id_comp, comp_zero] using this
-
-/-- Postcomposing with an isomorphism of degree `0` does not change whether a class vanishes. -/
-lemma comp_mk₀_eq_zero_iff {A B B' : C} {n : ℕ} (v : B ⟶ B') [IsIso v] (y : Ext A B n) :
-    y.comp (mk₀ v) (add_zero n) = 0 ↔ y = 0 := by
-  refine ⟨fun hy ↦ ?_, fun hy ↦ by rw [hy, zero_comp]⟩
-  have := congrArg (fun z ↦ z.comp (mk₀ (inv v)) (add_zero n)) hy
-  simpa only [comp_assoc_of_third_deg_zero, mk₀_comp_mk₀, IsIso.hom_inv_id, comp_mk₀_id,
-    zero_comp] using this
 
 end
 

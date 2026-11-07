@@ -129,50 +129,6 @@ lemma IsFiniteBiproductOf.of_iso {M N : C} (e : M ≅ N) (h : IsFiniteBiproductO
   obtain ⟨ι, _, ⟨e'⟩⟩ := h
   exact ⟨ι, inferInstance, ⟨e.symm ≪≫ e'⟩⟩
 
-/-- If the nonzero endomorphisms of `R` are isomorphisms, the cokernel of a morphism from `R` to
-a finite biproduct of copies of `R` is a finite biproduct of copies of `R`. -/
-lemma IsFiniteBiproductOf.cokernel_of_isIso (hR : ∀ g : R ⟶ R, g ≠ 0 → IsIso g) {M : C}
-    (hM : IsFiniteBiproductOf R M) (g : R ⟶ M) : IsFiniteBiproductOf R (cokernel g) := by
-  obtain ⟨ι, _, ⟨e⟩⟩ := hM
-  refine IsFiniteBiproductOf.of_iso (cokernelCompIsIso g e.hom) ?_
-  by_cases h : g ≫ e.hom = 0
-  · exact ⟨ι, inferInstance, ⟨cokernelIsoOfEq h ≪≫ cokernelZeroIsoTarget⟩⟩
-  · obtain ⟨i, hi⟩ : ∃ i, g ≫ e.hom ≫ biproduct.π _ i ≠ 0 := by
-      by_contra! h'
-      exact h (biproduct.hom_ext _ _ fun i ↦ by simpa using h' i)
-    have : IsIso ((g ≫ e.hom) ≫ biproduct.π _ i) := hR _ (by simpa using hi)
-    exact ⟨{ j // j ≠ i }, inferInstance, ⟨cokernelIsoOfIsIsoCompπ _ (g ≫ e.hom) i⟩⟩
-
-/-- If the nonzero endomorphisms of `R` are isomorphisms, the cokernel of a morphism from a
-finite biproduct of copies of `R` to a finite biproduct of copies of `R` is a finite biproduct
-of copies of `R`. -/
-lemma IsFiniteBiproductOf.cokernel_of_card_eq (hR : ∀ g : R ⟶ R, g ≠ 0 → IsIso g) :
-    ∀ (n : ℕ) (κ : Type) [Finite κ], Nat.card κ = n → ∀ {M : C}, IsFiniteBiproductOf R M →
-      ∀ f : (⨁ fun _ : κ ↦ R) ⟶ M, IsFiniteBiproductOf R (cokernel f) := by
-  intro n
-  induction n with
-  | zero =>
-    intro κ _ hκ M hM f
-    have : IsEmpty κ := (Finite.card_eq_zero_iff).1 hκ
-    have hf : f = 0 := biproduct.hom_ext' _ _ fun j ↦ isEmptyElim j
-    exact IsFiniteBiproductOf.of_iso (cokernelIsoOfEq hf ≪≫ cokernelZeroIsoTarget).symm hM
-  | succ n ih =>
-    intro κ _ hκ M hM f
-    have : Nonempty κ := (Finite.card_pos_iff).1 (by omega)
-    obtain ⟨i⟩ := this
-    refine IsFiniteBiproductOf.of_iso (cokernelIsoCokernelFromSubtype _ f i).symm ?_
-    refine ih { j // j ≠ i } ?_ (hM.cokernel_of_isIso hR _) _
-    classical
-    have := Fintype.ofFinite κ
-    rw [Nat.card_eq_fintype_card] at hκ ⊢
-    rw [Fintype.card_subtype_compl, Fintype.card_subtype_eq, hκ, Nat.add_sub_cancel]
-
-/-- **Cokernels of matrices over a division ring**: if the nonzero endomorphisms of `R` are
-isomorphisms, the cokernel of a morphism `⨁_κ R ⟶ ⨁_ι R` between finite biproducts of copies of
-`R` is a finite biproduct of copies of `R`. -/
-theorem isFiniteBiproductOf_cokernel (hR : ∀ g : R ⟶ R, g ≠ 0 → IsIso g) {κ ι : Type} [Finite κ]
-    [Finite ι] (f : (⨁ fun _ : κ ↦ R) ⟶ ⨁ fun _ : ι ↦ R) : IsFiniteBiproductOf R (cokernel f) :=
-  IsFiniteBiproductOf.cokernel_of_card_eq hR _ κ rfl ⟨ι, inferInstance, ⟨Iso.refl _⟩⟩ f
 
 end Division
 

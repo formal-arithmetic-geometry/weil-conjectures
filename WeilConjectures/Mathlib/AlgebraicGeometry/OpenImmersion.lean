@@ -232,21 +232,6 @@ section DisjointRange
 
 variable {U X : Scheme.{u}}
 
-set_option backward.isDefEq.respectTransparency false in
-/-- If `j` is an open immersion whose range is disjoint from the range of `f`, the fibre
-product `V ×_X U` is empty. -/
-lemma isEmpty_pullback_of_disjoint_range {V : Scheme.{u}} (f : V ⟶ X) (j : U ⟶ X)
-    [IsOpenImmersion j] (h : Set.range f.base ∩ Set.range j.base = ∅) :
-    IsEmpty ↥(Limits.pullback f j) := by
-  have hr : Set.range (Limits.pullback.fst f j).base = ∅ := by
-    rw [IsOpenImmersion.range_pullbackFst]
-    ext x
-    simp only [Set.mem_empty_iff_false, iff_false]
-    intro hx
-    have hmem : f.base x ∈ Set.range f.base ∩ Set.range j.base := ⟨⟨x, rfl⟩, hx⟩
-    rw [h] at hmem
-    exact hmem
-  exact Set.range_eq_empty_iff.mp hr
 
 end DisjointRange
 

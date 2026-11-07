@@ -153,53 +153,6 @@ theorem irreducible_X_pow_sub_X_sub_C_single {n : ℕ} (hn : 2 ≤ n) {b : k} (h
     (by rw [hdegu, hfnat])]
   exact minpoly.irreducible (hint u)
 
-/-- *The Galois group of an Artin–Schreier extension acts by all translations.* Let `k₀` be a
-finite field with `q` elements, `k` a field over `k₀`, `a ∈ k₀ˣ` and `L` an algebraic closure of
-`K = k((t))`. If `u ∈ L` is a root of `X^q - X - a t⁻¹`, then for every `c ∈ k₀` some
-`σ ∈ Gal(L/K)` maps `u` to `u + c`.
-
-Indeed `u + c` is again a root, as `c^q = c`, and the polynomial is irreducible
-(`LaurentSeries.irreducible_X_pow_sub_X_sub_C_single`), so `u` and `u + c` are conjugate.
-
-For `k` an algebraic closure of `k₀` and `t = 1 / x` the coordinate at `∞ ∈ ℙ¹`, `Gal(L/K)` is
-the inertia group at infinity, and `u^q - u = a / t` is the Artin–Schreier cover `u^q - u = a x`
-defining `ℒ_{ψ(a x)}`. An element `σ` with `σ u = u + c` acts on the geometric generic stalk of
-`ℒ_{ψ(a x)}` by `ψ(±c)`, so for nontrivial `ψ` inertia at infinity acts nontrivially: a
-nonzero linear Artin–Schreier sheaf is ramified at infinity.
-(blueprint: `lem-a1-artin-schreier-ramified-infinity`) -/
-theorem exists_algEquiv_apply_eq_add_C_of_pow_sub_eq_single {k₀ : Type*} [Field k₀] [Finite k₀]
-    [Algebra k₀ k] {a : k₀} (ha : a ≠ 0) (L : Type*) [Field L] [Algebra (LaurentSeries k) L]
-    [IsAlgClosure (LaurentSeries k) L] {u : L}
-    (hu : u ^ Nat.card k₀ - u =
-      algebraMap (LaurentSeries k) L (HahnSeries.single (-1) (algebraMap k₀ k a)))
-    (c : k₀) :
-    ∃ σ : L ≃ₐ[LaurentSeries k] L,
-      σ u = u + algebraMap (LaurentSeries k) L (HahnSeries.C (algebraMap k₀ k c)) := by
-  set K := LaurentSeries k
-  have := Fintype.ofFinite k₀
-  set ι : k₀ →+* L := (algebraMap K L).comp (HahnSeries.C.comp (algebraMap k₀ k))
-  set q := Nat.card k₀
-  have hq : 2 ≤ q := Finite.one_lt_card
-  set s : K := HahnSeries.single (-1 : ℤ) (algebraMap k₀ k a)
-  set f : K[X] := X ^ q - X - C s
-  have hfirr : Irreducible f := irreducible_X_pow_sub_X_sub_C_single hq
-    ((map_ne_zero_iff _ (algebraMap k₀ k).injective).2 ha)
-  have hfmon : f.Monic := by
-    unfold f
-    rw [sub_sub]
-    exact monic_X_pow_sub (by compute_degree; exact_mod_cast (by omega : 1 < q))
-  -- `u + ι c` is again a root of `f`, as `c ^ q = c`
-  obtain ⟨p, hp⟩ := CharP.exists k₀
-  have : Fact p.Prime := ⟨CharP.char_is_prime k₀ p⟩
-  have : CharP L p := charP_of_injective_ringHom ι.injective p
-  obtain ⟨m, -, hm⟩ := FiniteField.card k₀ p
-  have hqc : q = Fintype.card k₀ := Nat.card_eq_fintype_card
-  have hroot : (u + ι c) ^ q - (u + ι c) = algebraMap K L s := by
-    rw [hqc, hm, add_pow_char_pow, ← hm, ← map_pow, FiniteField.pow_card, ← hqc, ← hu]
-    ring
-  have hmin : ∀ x : L, x ^ q - x = algebraMap K L s → f = minpoly K x := fun x hx ↦
-    minpoly.eq_of_irreducible_of_monic hfirr (by simp [f, hx]) hfmon
-  exact (Normal.minpoly_eq_iff_mem_orbit L).1 ((hmin _ hroot).symm.trans (hmin _ hu))
 
 /-- The Galois group of `k((t))` acts on the roots of `X^q - X - b t⁻¹`, `q = #k₀`, `b ≠ 0`, by
 all translations by `k₀`; this is

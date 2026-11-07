@@ -76,47 +76,6 @@ section FiniteLevel
 variable {E F M : Type*} [AddCommGroup E] [Module R E] [AddCommGroup F] [Module R F]
   [AddCommGroup M] [Module R M]
 
-/-- **Finite-level step.** Let `Pₘ : E × F ⟶ M` have injective left adjoint and let
-`σ : B ⟶ F` have image containing `r • F`. If `x ∈ E` pairs to zero with `σ(B)`, then
-`r • x = 0`. -/
-theorem smul_eq_zero_of_pairing_eq_zero (Pm : E →ₗ[R] F →ₗ[R] M) (hPm : Injective Pm)
-    {σ : B →ₗ[R] F} {r : R} (hσ : ∀ y : F, r • y ∈ range σ) {x : E}
-    (hx : ∀ b, Pm x (σ b) = 0) : r • x = 0 := by
-  refine hPm (LinearMap.ext fun y ↦ ?_)
-  obtain ⟨b, hb⟩ := hσ y
-  rw [map_smul, smul_apply, ← map_smul, ← hb, hx, map_zero, zero_apply]
-
-/-- **Reduction of the left kernel.** Let `P : A × B ⟶ R` reduce, along `ρ : A ⟶ E`,
-`σ : B ⟶ F` and `φ : R ⟶ M`, to a pairing `Pₘ : E × F ⟶ M` with injective left adjoint. If
-`ker ρ ⊆ ϖᵐ A` and `ϖᵉ F ⊆ σ(B)`, then `ϖᵉ` maps the left kernel of `P` into `ϖᵐ A`. -/
-theorem exists_pow_smul_eq_of_pairing (P : A →ₗ[R] B →ₗ[R] R) (Pm : E →ₗ[R] F →ₗ[R] M)
-    (hPm : Injective Pm) (ρ : A →ₗ[R] E) (σ : B →ₗ[R] F) (φ : R →ₗ[R] M)
-    (hcompat : ∀ a b, Pm (ρ a) (σ b) = φ (P a b)) {ϖ : R} {e m : ℕ}
-    (hker : ∀ a, ρ a = 0 → ∃ a', a = ϖ ^ m • a') (hrange : ∀ y : F, ϖ ^ e • y ∈ range σ)
-    {a : A} (ha : P a = 0) : ∃ a', ϖ ^ e • a = ϖ ^ m • a' := by
-  refine hker _ ?_
-  rw [map_smul]
-  exact smul_eq_zero_of_pairing_eq_zero Pm hPm hrange fun b ↦ by
-    rw [hcompat, ha, zero_apply, map_zero]
-
-/-- The kernel of `ρ` is `ϖᵐ A` when `A --ϖᵐ--> A --ρ--> E` is exact (the first part of the
-Bockstein sequence). -/
-theorem exists_eq_pow_smul_of_exact {ϖ : R} {m : ℕ} {ρ : A →ₗ[R] E}
-    (hexact : Exact (fun a : A ↦ ϖ ^ m • a) ρ) {a : A} (ha : ρ a = 0) :
-    ∃ a', a = ϖ ^ m • a' := by
-  obtain ⟨a', rfl⟩ := (hexact a).1 ha
-  exact ⟨a', rfl⟩
-
-/-- The image of `ρ` contains `ϖᵉ E` when `A --ρ--> E --δ--> A'` is exact, `E` is killed by
-`ϖᵐ` and `ϖᵉ` kills the `ϖ`-power torsion of `A'` (the second part of the Bockstein
-sequence). -/
-theorem pow_smul_mem_range_of_exact {A' : Type*} [AddCommGroup A'] [Module R A'] {ϖ : R}
-    {m e : ℕ} {ρ : A →ₗ[R] E} {δ : E →ₗ[R] A'} (hexact : Exact ρ δ)
-    (hE : ∀ y : E, ϖ ^ m • y = 0) (hA' : ∀ x : A', (∃ n : ℕ, ϖ ^ n • x = 0) → ϖ ^ e • x = 0)
-    (y : E) : ϖ ^ e • y ∈ range ρ := by
-  refine (hexact _).1 ?_
-  rw [map_smul]
-  exact hA' _ ⟨m, by rw [← map_smul, hE, map_zero]⟩
 
 end FiniteLevel
 
@@ -201,18 +160,6 @@ theorem mem_torsion_of_pow_smul_eq [Module.Finite R A] (P : A →ₗ[R] B →ₗ
   simp only [smul_smul, ← pow_succ', ← pow_add] at h2 ⊢
   rw [h2, add_assoc]
 
-/-- **Torsion left kernel from a single finite level.** If `P : A × B ⟶ R` reduces, along
-`ρ : A ⟶ E` and `σ : B ⟶ F`, to a pairing with injective left adjoint, where `ker ρ ⊆ ϖᵐ A`
-and `ϖᵉ F ⊆ σ(B)` with `e < m`, then the left kernel of `P` is torsion. -/
-theorem mem_torsion_of_finiteLevel {E F M : Type*} [AddCommGroup E] [Module R E]
-    [AddCommGroup F] [Module R F] [AddCommGroup M] [Module R M] [Module.Finite R A]
-    (P : A →ₗ[R] B →ₗ[R] R) (Pm : E →ₗ[R] F →ₗ[R] M) (hPm : Injective Pm) (ρ : A →ₗ[R] E)
-    (σ : B →ₗ[R] F) (φ : R →ₗ[R] M) (hcompat : ∀ a b, Pm (ρ a) (σ b) = φ (P a b)) {ϖ : R}
-    (hϖ : ¬IsUnit ϖ) (hϖ0 : ϖ ≠ 0) {e m : ℕ} (hem : e < m)
-    (hker : ∀ a, ρ a = 0 → ∃ a', a = ϖ ^ m • a') (hrange : ∀ y : F, ϖ ^ e • y ∈ range σ)
-    {a : A} (ha : P a = 0) : a ∈ Submodule.torsion R A :=
-  mem_torsion_of_pow_smul_eq P hϖ hϖ0 hem
-    (fun _ ha' ↦ exists_pow_smul_eq_of_pairing P Pm hPm ρ σ φ hcompat hker hrange ha') ha
 
 end Torsion
 

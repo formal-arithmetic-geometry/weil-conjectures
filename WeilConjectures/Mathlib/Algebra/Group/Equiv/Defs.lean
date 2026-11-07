@@ -37,7 +37,5 @@ noncomputable def ofBijectiveAddMonoidHom (f : A →+ B) (hf : Function.Bijectiv
 def symmComp (e : B ≃+ C) (g : A →+ C) : A →+ B :=
   e.symm.toAddMonoidHom.comp g
 
-lemma apply_symmComp (e : B ≃+ C) (g : A →+ C) (x : A) : e (e.symmComp g x) = g x :=
-  e.apply_symm_apply _
 
 end AddEquiv

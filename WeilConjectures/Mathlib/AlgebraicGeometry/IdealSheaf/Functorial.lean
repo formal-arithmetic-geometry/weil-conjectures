@@ -102,10 +102,6 @@ out: the inclusion is a monomorphism, so it is its own kernel pair. -/
 lemma comap_subschemeι (I : X.IdealSheafData) : I.comap I.subschemeι = ⊥ :=
   Scheme.Hom.ker_eq_bot_of_isIso (pullback.fst I.subschemeι I.subschemeι)
 
-/-- The ideal `I` is contained in the pushforward of the zero ideal along `V(I) ⟶ X`. -/
-lemma le_map_bot_subschemeι (I : X.IdealSheafData) :
-    I ≤ (⊥ : I.subscheme.IdealSheafData).map I.subschemeι := by
-  rw [map_bot, ker_subschemeι]
 
 /-- Every morphism is scheme-theoretically dense in its scheme-theoretic image: the ideal
 sheaf cutting the image out pulls back to zero. -/
@@ -355,15 +351,6 @@ lemma ideal_map_appLE_le_ideal_comap (K : Y.IdealSheafData) (g : X ⟶ Y) (V : Y
     Scheme.Hom.app_eq_appLE, key]
   simp only [Scheme.Hom.appLE, CommRingCat.comp_apply, h1, map_zero]
 
-/-- Membership in the kernel ideal of a composite `w ≫ g` over an affine open `V` is
-detected on the preimage `g ⁻¹ᵁ V`, provided the latter is affine. -/
-lemma _root_.AlgebraicGeometry.Scheme.Hom.mem_ker_comp {W : Scheme.{u}} (w : W ⟶ X) (g : X ⟶ Y)
-    [QuasiCompact w] [QuasiCompact g] (V : Y.affineOpens) (hV : IsAffineOpen (g ⁻¹ᵁ V.1))
-    (s : Γ(Y, V.1)) :
-    s ∈ (w ≫ g).ker.ideal V ↔ (g.app V.1).hom s ∈ w.ker.ideal ⟨g ⁻¹ᵁ V.1, hV⟩ := by
-  rw [Scheme.Hom.ker_apply, Scheme.Hom.ker_apply, RingHom.mem_ker, RingHom.mem_ker,
-    Scheme.Hom.comp_app, CommRingCat.hom_comp, RingHom.comp_apply]
-  exact Iff.rfl
 
 end Sections
 

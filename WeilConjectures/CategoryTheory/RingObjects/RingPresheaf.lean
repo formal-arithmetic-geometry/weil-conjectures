@@ -72,8 +72,6 @@ noncomputable def toMonAb : RingCat.{w} ⥤ Mon Ab.{w} where
   obj R := Mon.mk (AddCommGrpCat.of R)
   map f := Mon.Hom.mk (AddCommGrpCat.ofHom f.hom.toAddMonoidHom)
 
-lemma toMonAb_comp_forget : toMonAb.{w} ⋙ Mon.forget Ab.{w} = forget₂ RingCat.{w} Ab.{w} :=
-  rfl
 
 end RingCat
 
@@ -90,20 +88,11 @@ functor category `C ⥤ Ab` with its objectwise monoidal structure: its underlyi
 noncomputable def toMonAb : Mon (C ⥤ Ab.{w}) :=
   (Monoidal.monFunctorCategoryEquivalence C Ab.{w}).inverse.obj (P ⋙ RingCat.toMonAb)
 
-lemma toMonAb_X : P.toMonAb.X = P ⋙ forget₂ RingCat.{w} Ab.{w} :=
-  rfl
 
 /-- A functor `P : C ⥤ RingCat` makes `P ⋙ forget₂ RingCat Ab` a monoid object of `C ⥤ Ab`. -/
 noncomputable instance monObjCompForget₂ : MonObj (P ⋙ forget₂ RingCat.{w} Ab.{w}) :=
   P.toMonAb.mon
 
-lemma one_compForget₂_app (X : C) :
-    η[P ⋙ forget₂ RingCat.{w} Ab.{w}].app X = η[AddCommGrpCat.of (P.obj X)] :=
-  rfl
-
-lemma mul_compForget₂_app (X : C) :
-    μ[P ⋙ forget₂ RingCat.{w} Ab.{w}].app X = μ[AddCommGrpCat.of (P.obj X)] :=
-  rfl
 
 /-- The monoid object `P ⋙ forget₂ RingCat Ab` is commutative when all the rings `P.obj X`
 are commutative. -/
