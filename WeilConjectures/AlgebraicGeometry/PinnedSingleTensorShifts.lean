@@ -116,8 +116,7 @@ def mappedCochainSingleIso {A B : Type*} [Category A] [Category B]
         Functor.mapHomologicalComplex_obj_X, HomologicalComplex.comp_f,
         Functor.mapHomologicalComplex_commShiftIso_inv_app_f,
         Functor.mapHomologicalComplex_commShiftIso_hom_app_f,
-        CochainComplex.shiftFunctor_map_f', Category.id_comp]
-      all_goals erw [Category.id_comp])
+        CochainComplex.shiftFunctor_map_f', Category.id_comp])
 
 /-- Passing the mapped-single comparison to the homotopy category.
 (blueprint: lem-pc-pinned-single-tensor-shifts)
