@@ -19,6 +19,9 @@ Source: Stacks Project, Tag 0D5S.
 (blueprint: lem-pc-affine-spectrum-composition-counit-square).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
