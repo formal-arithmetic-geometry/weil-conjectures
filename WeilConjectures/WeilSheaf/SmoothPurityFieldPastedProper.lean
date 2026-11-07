@@ -52,6 +52,8 @@ lemma purityFieldProperAmbientExchange_hom :
     (asIso (baseChangeMap (Profinite.padicAlgClRingObj l) hg.toCommSq))
   exact congrArg Iso.hom he
 
+omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom] in
 /-- The restricted proper factor is precisely the proper base change used in the
 exceptional base change theorem. -/
 lemma purityFieldProperRestrictedExchange_hom :
