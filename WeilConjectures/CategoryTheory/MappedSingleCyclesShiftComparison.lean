@@ -104,8 +104,8 @@ theorem mappedSingle_cycles_shift_comparison (X : B) (n : ℕ) :
       Functor.mapIso_inv, SingleFunctors.evaluation_map, NatTrans.comp_app,
       NatIso.ofComponents_inv_app, Functor.whiskerLeft_app, Functor.associator_inv_app,
       Functor.whiskerRight_app, Category.id_comp,
-      DerivedCategory.Plus.homologyFunctorObjQIso, ObjectProperty.ι_obj,
-      Iso.trans_hom, Iso.app_hom, SC]
+      DerivedCategory.Plus.homologyFunctorObjQIso,
+      Iso.app_hom, SC]
     rw [DerivedCategory.singleFunctorsPostcompQIso_inv_hom]
     simp
   have hsingle' : (DerivedCategory.Plus.homologyFunctorObjQIso SC n).inv ≫

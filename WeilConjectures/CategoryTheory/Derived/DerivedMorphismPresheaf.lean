@@ -322,7 +322,7 @@ private theorem derivedSliceMapIso_symm {U V : C} (f : V ⟶ U) :
       (sliceRestrictionMapIso J B f).symm := by
   apply Iso.ext
   simp only [derivedSliceMapIso, exactComp, Iso.symm_hom, Iso.trans_inv,
-    Iso.trans_hom, Iso.symm_inv,
+    Iso.trans_hom,
     Functor.mapDerivedCategoryNatIso_symm]
 
 private noncomputable def sliceMapDerivedId (U : C) :=

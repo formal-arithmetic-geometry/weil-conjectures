@@ -193,7 +193,7 @@ private noncomputable def abstract_singleMapCycle
     ((HomologicalComplex.singleObjXSelf (.up ℤ) 0 P).inv ≫ f.f 0) 1 (by simp) (by
       change ((HomologicalComplex.singleObjXSelf (.up ℤ) 0 P).inv ≫ f.f 0) ≫ K.d 0 1 = 0
       erw [Category.assoc, f.comm]
-      simp [CochainComplex.singleFunctor, CochainComplex.singleFunctors,
+      simp [CochainComplex.singleFunctor,
         HomologicalComplex.single_obj_d])
 
 private theorem abstract_singleMapCycle_i
@@ -240,7 +240,7 @@ private theorem abstract_singleHomologyEquiv_naturality
   rw [hi, ht, ← hz]
   simp only [HomologicalComplex.comp_f, Category.assoc]
   rw [← Category.assoc (HomologicalComplex.singleObjXSelf (.up ℤ) 0 P').inv]
-  simp [CochainComplex.singleFunctor, CochainComplex.singleFunctors,
+  simp [CochainComplex.singleFunctor,
     HomologicalComplex.single_map_f_self, Category.assoc]
 
 variable [HasDerivedCategory.{w} A] [IsGrothendieckAbelian.{u} A]

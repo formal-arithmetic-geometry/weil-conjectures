@@ -23,7 +23,7 @@ universe u
 open CategoryTheory MonoidalCategory Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 
-local instance {X : Scheme.{u}} (M : X.Modules) {U W : X.Opens} (h : W ≤ U) :
+local instance localInst_TensorHomRestrictionScalar_1 {X : Scheme.{u}} (M : X.Modules) {U W : X.Opens} (h : W ≤ U) :
     SMul ((SheafOfModules.unit X.ringCatSheaf).val.obj (op W))
       ((ModuleCat.restrictScalars (X.ringCatSheaf.obj.map (homOfLE h).op).hom).obj
         (M.val.obj (op W))) :=

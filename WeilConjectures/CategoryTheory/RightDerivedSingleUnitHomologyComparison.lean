@@ -181,7 +181,7 @@ theorem rightDerivedPlusSingleUnitHomology_comp_comparison (Y : B) :
       InjectiveResolution.toRightDerivedZero'_comp_iCycles]
     erw [HomologicalComplex.singleObjCyclesSelfIso_inv_iCycles_assoc]
     dsimp [b, a]
-    simp only [Functor.mapHomologicalComplex_map_f,
+    simp only [
       HomologicalComplex.singleMapHomologicalComplex_inv_app_self, Category.assoc]
     rw [InjectiveResolution.ι'_f_zero]
     simp only [Functor.map_comp, Category.assoc]

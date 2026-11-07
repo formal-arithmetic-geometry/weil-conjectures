@@ -123,7 +123,7 @@ theorem ceRowOrdinaryIso_naturality {X Y : Scheme.{uNatural}} (f : Y ⟶ X)
       HomologicalComplex.extend.XIso, eqToIso, HomologicalComplex.singleMapHomologicalComplex,
       NatIso.ofComponents_hom_app, NatIso.ofComponents_inv_app,
       HomologicalComplex.singleObjXSelf, HomologicalComplex.singleObjXIsoOfEq,
-      CochainComplex.singleFunctor, CochainComplex.singleFunctors,
+      CochainComplex.singleFunctor,
       HomologicalComplex.single_map_f_self, eqToHom_map, Functor.map_comp,
       Category.assoc, eqToHom_refl, Category.id_comp, Category.comp_id]
     simp only [↓reduceDIte, Category.id_comp, ← Category.assoc, eqToHom_trans,

@@ -39,7 +39,7 @@ variable {C : Type u} [Category.{v} C] [Abelian C]
 /-- A chain homotopy preserving every filtration step, including all its components.
 Source: Stacks, Section 13.13, before Tag 05S1
 (blueprint: def-trf-uniform-filtered-homotopy-category). -/
-def UniformFilteredHomotopy {K L : FilteredObject (CochainComplex C ℤ)}
+def UniformFilteredHomotopy {K L : WeilFilteredObject (CochainComplex C ℤ)}
     (f g : K ⟶ L) : Prop :=
   ∃ h : Homotopy f.hom g.hom, ∀ p n m : ℤ,
     ∃ lift : (K.filtration.F p : CochainComplex C ℤ).X n ⟶
@@ -59,7 +59,7 @@ def uniformFilteredHomotopyRel (B : Option (ℤ × ℤ))
 /-- The zero homotopy preserves every filtration step.
 Source: Stacks, Section 13.13. The indicated component operations preserve each step.
 (blueprint: def-trf-uniform-filtered-homotopy-category). -/
-theorem UniformFilteredHomotopy.refl {K L : FilteredObject (CochainComplex C ℤ)} (f : K ⟶ L) :
+theorem UniformFilteredHomotopy.refl {K L : WeilFilteredObject (CochainComplex C ℤ)} (f : K ⟶ L) :
     UniformFilteredHomotopy f f := by
   refine ⟨Homotopy.refl f.hom, fun p n m ↦ ⟨0, ?_⟩⟩
   simp
@@ -67,7 +67,7 @@ theorem UniformFilteredHomotopy.refl {K L : FilteredObject (CochainComplex C ℤ
 /-- Negating the component lifts reverses a filtered homotopy.
 Source: Stacks, Section 13.13. The indicated component operations preserve each step.
 (blueprint: def-trf-uniform-filtered-homotopy-category). -/
-theorem UniformFilteredHomotopy.symm {K L : FilteredObject (CochainComplex C ℤ)}
+theorem UniformFilteredHomotopy.symm {K L : WeilFilteredObject (CochainComplex C ℤ)}
     {f g : K ⟶ L} (h : UniformFilteredHomotopy f g) : UniformFilteredHomotopy g f := by
   obtain ⟨H, hH⟩ := h
   refine ⟨H.symm, ?_⟩

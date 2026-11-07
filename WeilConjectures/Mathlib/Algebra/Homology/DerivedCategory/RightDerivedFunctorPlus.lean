@@ -224,7 +224,7 @@ noncomputable def rightDerivedFunctorPlusIsoInjectiveObject :
     isoWhiskerRight (injectiveObjectEquivalence C).counitIso.symm _ ≪≫
     Functor.associator _ _ _ ≪≫ isoWhiskerLeft _ α.symm
 
-noncomputable instance : F.rightDerivedFunctorPlus.CommShift ℤ :=
+noncomputable instance rightDerivedFunctorPlusCommShift : F.rightDerivedFunctorPlus.CommShift ℤ :=
   Functor.CommShift.ofIso F.rightDerivedFunctorPlusIsoInjectiveObject.symm ℤ
 
 /-- The right derived functor `RF : D⁺(C) ⥤ D⁺(D)` of an additive functor `F` (for `C` with

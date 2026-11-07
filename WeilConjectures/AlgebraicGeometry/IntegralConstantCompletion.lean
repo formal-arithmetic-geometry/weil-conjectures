@@ -111,7 +111,7 @@ abbrev Complete (b : Bool) : ObjectProperty
     (D (coefficients (topology X) (integers l E) (ideal l E) b)) :=
   fun M ↦ IsIso ((completionUnit (topology X) (integers l E) (ideal l E) b).app M)
 
-private theorem integers_noetherian : IsNoetherianRing (integers l E) := by
+theorem integers_noetherian : IsNoetherianRing (integers l E) := by
   have h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   have : IsPrincipalIdealRing (Padic.coefficientExtensionIntegers l E) :=
     h.2.2.2.2.2.2.2.2.1

@@ -27,7 +27,7 @@ noncomputable local instance hasZeroMorphisms_condensedRingObj_condensedLfpHom
     HasZeroMorphisms (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X)) := inferInstance
 
-local instance
+local instance localInst_CondensedLfpHomContinuity_1
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] (X : Scheme.{u}) {I : Type (u + 1)} [SmallCategory I]
     (N : I ⥤ CochainComplex (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})

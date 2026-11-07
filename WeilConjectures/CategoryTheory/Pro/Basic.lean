@@ -52,7 +52,7 @@ def Limits.IsLimit.ofPreservesLimitColim {J K C : Type*} [Category J] [Category 
       Functor.mapCone_π_app, colim_map, colimitIsoFlipCompColim_inv_app,
       ι_colimMap_assoc, Category.assoc,
       colimit.comp_coconePointUniqueUpToIso_hom_assoc, natiso,
-      HasColimit.ι_isoOfNatIso_inv_assoc, compEvaluation_inv_app, Category.id_comp]
+      HasColimit.ι_isoOfNatIso_inv_assoc, compEvaluation_inv_app]
     erw [colimitObjIsoColimitCompEvaluation_ι_inv_assoc]
     simp [← NatTrans.comp_app, w]
   IsLimit.equivOfNatIsoOfIso natiso _ e t hc'

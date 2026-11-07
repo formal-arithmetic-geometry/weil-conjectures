@@ -192,7 +192,7 @@ private theorem multiplication_range {X : Scheme.{u}} {K : X.Modules}
   exact congrArg (fun P : Submodule Γ(X, U.1) Γ(M, U.1) ↦ (P : Set Γ(M, U.1))) ha
 
 
-local instance {X : Scheme.{u}} (H : X.Modules)
+local instance localInst_CoherentIdealPowerStableAnnihilator_1 {X : Scheme.{u}} (H : X.Modules)
     {V W : X.Opens} (h : V ≤ W) :
     SMul ((SheafOfModules.unit X.ringCatSheaf).val.obj (op V))
       ((ModuleCat.restrictScalars (X.ringCatSheaf.obj.map (homOfLE h).op).hom).obj

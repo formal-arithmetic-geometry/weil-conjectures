@@ -29,7 +29,7 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale
 
-noncomputable local instance (T : Scheme.{u}) :
+noncomputable local instance localInst_CartesianHigherImageAffineComplexPresentation_1 (T : Scheme.{u}) :
     HasShift (DerivedCategory.Plus (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})) ℤ :=
   inferInstance
 

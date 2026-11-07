@@ -96,7 +96,7 @@ theorem freeCechDifferential_compatibility (X : Scheme.{u}) (ι : Type u) (U₀ 
   classical
   dsimp
   intro n
-  simp only [Functor.mapHomologicalComplex_obj_d,
+  simp only [
     AlgebraicTopology.alternatingFaceMapComplex_obj_d]
   apply DFinsupp.lhom_ext'
   intro φ

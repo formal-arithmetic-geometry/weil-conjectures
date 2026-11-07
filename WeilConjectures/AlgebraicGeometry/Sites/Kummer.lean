@@ -234,7 +234,7 @@ additively.
 (blueprint: `lem-sc-kummer-les`) -/
 noncomputable def kummerδ₀ (hn : IsUnit (n : Γ(X, ⊤))) :
     Additive Γ(X, ⊤)ˣ →+ Sheaf.H (X.rootsOfUnitySheaf n) 1 :=
-  (Sheaf.H.δ (X.kummerSequence_shortExact n hn)
+  (Sheaf.H.δSections (X.kummerSequence_shortExact n hn)
     (MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale X)).comp
       AddEquiv.ulift.symm.toAddMonoidHom
 
@@ -260,9 +260,9 @@ terms mentioning the canonical one. -/
 private lemma exact_sheafH_rootsOfUnitySheaf_one_aux (hS : (X.kummerSequence n).ShortExact)
     {T : X.Etale} (hT : IsTerminal T)
     (e : Additive Γ(X, ⊤)ˣ ≃+ (X.kummerSequence n).X₃.obj.obj (Opposite.op T)) :
-    ((Sheaf.H.δ hS hT).comp e.toAddMonoidHom).ker =
+    ((Sheaf.H.δSections hS hT).comp e.toAddMonoidHom).ker =
         (zsmulAddGroupHom (α := Additive Γ(X, ⊤)ˣ) (n : ℤ)).range ∧
-      Function.Exact ((Sheaf.H.δ hS hT).comp e.toAddMonoidHom)
+      Function.Exact ((Sheaf.H.δSections hS hT).comp e.toAddMonoidHom)
         (Sheaf.H.map (X.kummerSequence n).f 1) ∧
       (Sheaf.H.map (X.kummerSequence n).f 1).range =
         AddSubgroup.torsionBy (Sheaf.H (X.kummerSequence n).X₂ 1) n := by

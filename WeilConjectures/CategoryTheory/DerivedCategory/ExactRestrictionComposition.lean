@@ -54,7 +54,7 @@ theorem exactDerivedRestrictionComposition_inv_factors (η : S ⋙ R ≅ U)
     rw [Iso.inv_hom_id_app_assoc]
     exact (mapDerivedCategoryCompIso_hom_app_factors S R K).symm
   apply (cancel_mono (U.mapDerivedCategoryFactors.hom.app K)).mp
-  simp only [exactDerivedRestrictionComposition, Iso.trans_hom, Iso.symm_hom,
+  simp only [exactDerivedRestrictionComposition, Iso.trans_hom,
     NatTrans.comp_app, Category.assoc]
   rw [mapDerivedCategoryNatIso_fac, ← Category.assoc _ _
     (DerivedCategory.Q.map _), hi]
@@ -76,7 +76,7 @@ theorem exactDerivedRestrictionComposition_hom_factors (η : S ⋙ R ≅ U)
       R.mapDerivedCategory.map (S.mapDerivedCategoryFactors.hom.app K) ≫
         R.mapDerivedCategoryFactors.hom.app ((S.mapHomologicalComplex (.up ℤ)).obj K) ≫
         DerivedCategory.Q.map ((NatIso.mapHomologicalComplex η (.up ℤ)).hom.app K) := by
-  simp only [exactDerivedRestrictionComposition, Iso.trans_hom, Iso.symm_hom,
+  simp only [exactDerivedRestrictionComposition, Iso.trans_hom,
     NatTrans.comp_app, Category.assoc]
   rw [mapDerivedCategoryNatIso_fac]
   apply (cancel_epi ((mapDerivedCategoryCompIso S R).inv.app

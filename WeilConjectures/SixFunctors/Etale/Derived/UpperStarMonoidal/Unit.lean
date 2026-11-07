@@ -64,7 +64,7 @@ lemma leftDerivedUpperStarUnitIso_hom_comp_ε :
   congr 1
   erw [(g)^*[A].mapDerivedCategoryFactorsh_hom_app (𝟙_ _)]
   simp only [Functor.OplaxMonoidal.mapHomotopyCategoryη,
-    Functor.OplaxMonoidal.mapHomologicalComplexη, Functor.Monoidal.εIso_inv, Functor.map_comp,
+    Functor.OplaxMonoidal.mapHomologicalComplexη, Functor.map_comp,
     Q_obj_single_obj, Functor.comp_obj, Category.assoc]
   have h₃ : ∀ K, (quotientCompQhIso (Sheaf Y.smallEtaleTopology A)).hom.app K = 𝟙 _ :=
     fun _ ↦ rfl

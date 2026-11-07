@@ -64,7 +64,7 @@ private theorem spectrum_stalkComparison_normalized
   simp only [Category.assoc] at ht''
   simp only [stalkComparison, comparisonIntoPullback, Category.assoc, Functor.map_comp]
   rw [← Functor.map_comp, ← Functor.map_comp, ← c.represents]
-  simp only [cast_eq, Functor.map_comp, Functor.map_inv, IsIso.inv_hom_id_assoc]
+  simp only [cast_eq, Functor.map_comp, IsIso.inv_hom_id_assoc]
   rw [ht'']
 
 private theorem square_of_normalizations

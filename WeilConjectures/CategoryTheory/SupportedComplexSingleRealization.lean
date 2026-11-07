@@ -86,7 +86,7 @@ theorem supported_complex_single_realization
       isoWhiskerLeft_inv, Category.assoc, isoWhiskerRight_inv, mapIso_inv,
       SingleFunctors.evaluation_map, NatTrans.comp_app, NatIso.ofComponents_inv_app,
       whiskerLeft_app, associator_inv_app, whiskerRight_app, Category.id_comp,
-      homologyFunctorObjQIso, ObjectProperty.ι_obj, Iso.trans_hom, Iso.app_hom, S]
+      homologyFunctorObjQIso, Iso.app_hom, S]
     rw [DerivedCategory.singleFunctorsPostcompQIso_inv_hom]
     simp
   have he : e.inv = 𝟙 _ := by

@@ -105,7 +105,7 @@ theorem schemeMV_restriction_chain_quotient_transport
     CategoryTheory.Functor.map_id, Category.id_comp]
   simp only [← Functor.map_comp]
   erw [hxi]
-  simp only [Functor.map_comp, Category.assoc]
+  simp only [Functor.map_comp]
   erw [DerivedCategory.quotientCompQhIso_inv_naturality_assoc]
   rfl
 

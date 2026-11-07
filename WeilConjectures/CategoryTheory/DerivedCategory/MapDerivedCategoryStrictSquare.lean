@@ -148,7 +148,7 @@ theorem strictSquare_localized (δ : Φ₁ ⟶ Φ₀ ⋙ r) (p : r ⋙ u₁ ≅ 
       (DerivedCategory.Q.obj L₀))).mp (mapDerivedCategoryCompIso_hom_app_factors r' s₁ L₀).symm
     have h₂ := mapDerivedCategoryNatIso_fac c L₀
     simp only [Iso.app_hom] at h₁
-    simp only [hcoh_def, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
+    simp only [hcoh_def, Iso.trans_hom, NatTrans.comp_app, Category.assoc]
     rw [h₂, reassoc_of% h₁]
   -- the strict square on complexes
   have hstrict : (s₁.mapHomologicalComplex (ComplexShape.up ℤ)).map

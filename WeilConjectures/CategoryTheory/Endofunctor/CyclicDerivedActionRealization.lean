@@ -247,7 +247,7 @@ private theorem action_comparison
       (DerivedCategory.Q.obj B)) ≫
     F.mapDerivedCategory.map ((forget F).mapDerivedCategoryFactors.hom.app B) ≫
       F.mapDerivedCategoryFactors.hom.app Y = _ at hc
-  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
+  simp only [Iso.trans_hom, NatTrans.comp_app, Category.assoc]
   rw [h, he, ← hc]
   simp only [Category.assoc]
   erw [Iso.hom_inv_id_app_assoc]

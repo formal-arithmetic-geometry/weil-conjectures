@@ -1141,14 +1141,14 @@ theorem kFlat_fixed_tensor_triangulated :
   · intro B hB hBf
     let hPB := (resolvingProperty_spec R (q.obj B)).2 ⟨hB, hBf⟩
     apply Iso.ext
-    simp [representativeIso, DerivedCategory.quotientCompQhIso,
+    simp [DerivedCategory.quotientCompQhIso,
       HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift]
     erw [Category.id_comp, Category.comp_id]
     exact congrArg Iso.hom (hcL B hPB)
   · intro B hB hBf
     let hPB := (resolvingProperty_spec R (q.obj B)).2 ⟨hB, hBf⟩
     apply Iso.ext
-    simp [representativeIso, DerivedCategory.quotientCompQhIso,
+    simp [DerivedCategory.quotientCompQhIso,
       HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift]
     erw [Category.id_comp, Category.comp_id]
     exact congrArg Iso.hom (hcR B hPB)
