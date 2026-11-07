@@ -33,7 +33,6 @@ attribute [local irreducible] Functor.mapDerivedCategory Functor.leftDerivedFunc
   CompletedRealization.singleUnit CompletedRealization.shiftedLine
 
 set_option backward.defeqAttrib.useBackward true in
-set_option maxHeartbeats 2000000 in
 -- Compare normalized endpoints through the derived and module-object presentations.
 private theorem pullEndpoint_iso_unique
     {R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
@@ -48,7 +47,6 @@ private theorem pullEndpoint_iso_unique
   exact a.normalization.trans b.normalization.symm
 
 set_option backward.defeqAttrib.useBackward true in
-set_option maxHeartbeats 2000000 in
 -- Compare normalized endpoints through the derived and module-object presentations.
 private theorem unitEndpoint_iso_eq
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -63,7 +61,7 @@ private theorem unitEndpoint_iso_eq
   exact pullEndpoint_iso_unique c d rfl
 
 set_option backward.defeqAttrib.useBackward true in
-set_option maxHeartbeats 2000000 in
+set_option maxHeartbeats 400000 in
 -- Compare normalized endpoints through the derived and module-object presentations.
 private theorem unitEndpoint_derived_eq
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -85,7 +83,6 @@ private theorem unitEndpoint_derived_eq
   simp only [Functor.map_comp]
   rfl
 
-set_option maxHeartbeats 2000000 in
 -- Compare normalized endpoints through the derived and module-object presentations.
 private theorem realizationLinePullMap_eq (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} (f : X ⟶ S) :
@@ -93,7 +90,6 @@ private theorem realizationLinePullMap_eq (l : ℕ) [Fact l.Prime]
   unfold diagonalRealizationLinePullMap
   exact ((upperStarLowerStarAdjunction Ab.{u + 1} f).homEquiv _ _).symm_apply_apply _
 
-set_option maxHeartbeats 2000000 in
 -- Compare normalized endpoints through the derived and module-object presentations.
 private theorem derivedUnit_transport
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -106,7 +102,7 @@ private theorem derivedUnit_transport
   rw [CondensedRing.upperStarCongr_self, Functor.leftDerivedFunctorNatIso_refl]
   simp
 
-set_option maxHeartbeats 2000000 in
+set_option maxHeartbeats 800000 in
 -- Compare normalized endpoints through the derived and module-object presentations.
 private theorem derivedUnit_square
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -129,7 +125,6 @@ private theorem derivedUnit_square
   erw [Iso.inv_hom_id_app_assoc]
   rfl
 
-set_option maxHeartbeats 2000000 in
 -- Compare normalized endpoints through the derived and module-object presentations.
 private theorem normalized_pullback_arrow
     {A B C D E E' : Type*}
@@ -192,7 +187,7 @@ private theorem realized_arrow_transport
   subst t'
   exact h
 
-set_option maxHeartbeats 5000000 in
+set_option maxHeartbeats 700000 in
 -- Assemble the independent tower, completed, and condensed comparison diagrams.
 /-- Whole-system pullback is preserved by the specified completed realizations.
 
