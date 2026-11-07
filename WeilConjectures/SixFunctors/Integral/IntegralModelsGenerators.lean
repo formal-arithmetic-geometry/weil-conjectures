@@ -994,7 +994,10 @@ private theorem integralModel_flat_derived_single
   have hK : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat K :=
     (CochainComplex.kFlat_single_obj_iff_flat M 0).mpr hM
   have := F.isIso_leftDerivedFunctorCounit_app_of_kFlat K hK
-  exact ⟨asIso (F.leftDerivedFunctorCounit.app
+  exact ⟨(integralModel_derivedScalar φ).mapIso
+      ((DerivedCategory.singleFunctorIsoCompQ _ 0).app M ≪≫
+        ((DerivedCategory.quotientCompQhIso _).app K).symm) ≪≫
+    asIso (F.leftDerivedFunctorCounit.app
       ((HomotopyCategory.quotient _ (.up ℤ)).obj K)) ≪≫
     DerivedCategory.Qh.mapIso ((F.mapHomotopyCategoryFactors (.up ℤ)).app K) ≪≫
     (DerivedCategory.quotientCompQhIso _).app
