@@ -93,6 +93,16 @@ open scoped PowerSeries.WithPiTopology
 
 variable {R : Type*} [Field R] [TopologicalSpace R]
 
+/-- The power series supported on the multiples of `f` form a closed submonoid. -/
+theorem isClosed_dvdSupportSubmonoid [T2Space R] (f : ℕ) :
+    IsClosed ((dvdSupportSubmonoid f : Submonoid R⟦X⟧) : Set R⟦X⟧) := by
+  have : ((dvdSupportSubmonoid f : Submonoid R⟦X⟧) : Set R⟦X⟧) =
+      ⋂ n, ⋂ (_ : ¬ f ∣ n), {G | coeff n G = 0} := by
+    ext G
+    simp [mem_dvdSupportSubmonoid_iff]
+  rw [this]
+  exact isClosed_iInter fun n ↦ isClosed_iInter fun _ ↦
+    isClosed_eq (continuous_coeff R n) continuous_const
 
 /-- A family `∏ₓ (1 - X ^ eₓ)⁻¹` with all `eₓ ≥ 1` and only finitely many `eₓ` below any bound is
 multipliable. -/
@@ -139,6 +149,49 @@ def nonnegOneSubmonoid : Submonoid ℂ⟦X⟧ where
     exact Finset.sum_nonneg fun p _ ↦ mul_nonneg (hG.1 _) (hH.1 _)
   one_mem' := ⟨fun n ↦ by rw [coeff_one]; split_ifs <;> simp, by simp⟩
 
+theorem inv_one_sub_X_pow_mem_nonnegOneSubmonoid {e : ℕ} (he : e ≠ 0) :
+    ((1 : ℂ⟦X⟧) - X ^ e)⁻¹ ∈ nonnegOneSubmonoid := by
+  rw [inv_one_sub_X_pow_eq_mk he]
+  refine ⟨fun n ↦ ?_, by simp⟩
+  rw [coeff_mk]
+  split_ifs <;> simp
+
+/-- The coefficients of `∏ₓ (1 - X ^ eₓ)⁻¹` in the degrees `e_{x₀} k` are at least `1`: the
+product dominates its factor `(1 - X ^ e_{x₀})⁻¹ = ∑ₖ X ^ (e_{x₀} k)`, all factors having
+nonnegative coefficients. -/
+theorem one_le_coeff_tprod_inv_one_sub_X_pow {β : Type*} {e : β → ℕ} (he : ∀ b, e b ≠ 0)
+    (hm : Multipliable fun b ↦ ((1 : ℂ⟦X⟧) - X ^ e b)⁻¹) (b₀ : β) (k : ℕ) :
+    1 ≤ coeff (e b₀ * k) (∏' b, ((1 : ℂ⟦X⟧) - X ^ e b)⁻¹) := by
+  classical
+  set F : β → ℂ⟦X⟧ := fun b ↦ ((1 : ℂ⟦X⟧) - X ^ e b)⁻¹
+  let T : Set ℂ⟦X⟧ := {G | 1 ≤ coeff (e b₀ * k) G}
+  have hT : IsClosed T := isClosed_le continuous_const (continuous_coeff ℂ _)
+  refine hT.mem_of_tendsto hm.hasProd ?_
+  filter_upwards [Filter.eventually_ge_atTop {b₀}] with s hs
+  have hb₀ : b₀ ∈ s := hs (Finset.mem_singleton_self b₀)
+  rw [← Finset.mul_prod_erase s F hb₀]
+  have hG : ∏ b ∈ s.erase b₀, F b ∈ nonnegOneSubmonoid :=
+    Submonoid.prod_mem _ fun b _ ↦ inv_one_sub_X_pow_mem_nonnegOneSubmonoid (he b)
+  have hF := inv_one_sub_X_pow_mem_nonnegOneSubmonoid (he b₀)
+  change 1 ≤ coeff (e b₀ * k) (F b₀ * ∏ b ∈ s.erase b₀, F b)
+  rw [coeff_mul]
+  have hmem : (e b₀ * k, 0) ∈ Finset.HasAntidiagonal.antidiagonal (e b₀ * k) := by simp
+  refine le_trans ?_ (Finset.single_le_sum (fun p _ ↦ mul_nonneg (hF.1 p.1) (hG.1 p.2)) hmem)
+  have h0 : coeff 0 (∏ b ∈ s.erase b₀, F b) = 1 := by simpa using hG.2
+  simp only [h0, mul_one, F, inv_one_sub_X_pow_eq_mk (he b₀), coeff_mk, dvd_mul_right,
+    ite_true, le_refl]
+
+/-- The product `∏ₓ (1 - X ^ eₓ)⁻¹` over a nonempty family is not a polynomial. -/
+theorem tprod_inv_one_sub_X_pow_ne_coe {β : Type*} [Nonempty β] {e : β → ℕ}
+    (he : ∀ b, e b ≠ 0) (hm : Multipliable fun b ↦ ((1 : ℂ⟦X⟧) - X ^ e b)⁻¹)
+    (R : Polynomial ℂ) : ∏' b, ((1 : ℂ⟦X⟧) - X ^ e b)⁻¹ ≠ (R : ℂ⟦X⟧) := by
+  intro h
+  obtain ⟨b₀⟩ := ‹Nonempty β›
+  have h₁ := one_le_coeff_tprod_inv_one_sub_X_pow he hm b₀ (R.natDegree + 1)
+  rw [h, Polynomial.coeff_coe, Polynomial.coeff_eq_zero_of_natDegree_lt] at h₁
+  · exact absurd h₁ (zero_lt_one (α := ℂ)).not_ge
+  · calc R.natDegree < R.natDegree + 1 := Nat.lt_succ_self _
+      _ ≤ e b₀ * (R.natDegree + 1) := Nat.le_mul_of_pos_left _ (Nat.pos_of_ne_zero (he b₀))
 
 end WithPiTopology
 

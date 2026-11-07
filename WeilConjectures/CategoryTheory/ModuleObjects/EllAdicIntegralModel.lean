@@ -91,6 +91,21 @@ lemma exists_boundedConstructibleExtendScalars_obj_iso (E : FiniteIntermediateFi
     (Rationalization.W (Submonoid.powers (ℓ : ℤ)) _)
   ⟨_, ⟨(boundedConstructibleExtendScalars X ℓ E).objObjPreimageIso K⟩⟩
 
+/-- **Integral models of morphisms** (blueprint `sk-lem-tf-rational-model`, from
+`sk-thm-sfb-rationalization-comparison`): every morphism `ψ : E ⊗ᴸ K₀ ⟶ E ⊗ᴸ L₀` between
+extensions of scalars of bounded constructible `𝒪_E`-complexes is integral up to a power of `ℓ`:
+`ℓ^N • ψ = E ⊗ᴸ θ` for some `N` and some `θ : K₀ ⟶ L₀`. -/
+lemma exists_pow_smul_eq_boundedConstructibleExtendScalars_map (E : FiniteIntermediateField ℓ)
+    {K₀ L₀ : BoundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)}
+    (ψ : (boundedConstructibleExtendScalars X ℓ E).obj K₀ ⟶
+      (boundedConstructibleExtendScalars X ℓ E).obj L₀) :
+    ∃ (N : ℕ) (θ : K₀ ⟶ L₀),
+      ((ℓ : ℤ) ^ N) • ψ = (boundedConstructibleExtendScalars X ℓ E).map θ := by
+  have : (boundedConstructibleExtendScalars X ℓ E).Linear ℤ := Functor.intLinear _
+  obtain ⟨m, ⟨N, rfl⟩, θ, h⟩ :=
+    Rationalization.exists_smul_eq_map_of_isLocalization (M := Submonoid.powers (ℓ : ℤ))
+      (boundedConstructibleExtendScalars X ℓ E) ψ
+  exact ⟨N, θ, h⟩
 
 /-- **Integral models of `ℚ̄_ℓ`-complexes** (blueprints `sk-thm-sfb-qlbar-two-colimit` and
 `sk-lem-tf-rational-model`): every bounded constructible `ℚ̄_ℓ`-complex `K` on a topologically

@@ -249,9 +249,60 @@ variable {M} {i : C ⥤ D} {jUp : D ⥤ E} {jLow : E ⥤ D} [i.CommShift ℤ] [i
   [i.Linear R] [jUp.CommShift ℤ] [jUp.IsTriangulated] [jUp.Linear R] [jLow.CommShift ℤ]
   [jLow.IsTriangulated] [jLow.Linear R]
 
+omit [IsTriangulated C] [IsTriangulated D] [∀ n : ℤ, (shiftFunctor C n).Linear R]
+  [∀ n : ℤ, (shiftFunctor D n).Linear R] in
+/-- Blueprint `prop-sf-localization-all-stages`, rational stage `E`: if `j^* i = 0` then the
+same holds for the rationalizations. -/
+lemma isZero_map_obj_map_obj (h₀ : ∀ X, IsZero (jUp.obj (i.obj X)))
+    (X : Rationalization M C) : IsZero ((map M jUp).obj ((map M i).obj X)) := by
+  have := Localization.essSurj (Q M C) (W M C)
+  exact ((Q M E).map_isZero (h₀ _)).of_iso ((map M jUp).mapIso ((map M i).mapIso
+    ((Q M C).objObjPreimageIso X).symm ≪≫ (mapFac M i).app _) ≪≫ (mapFac M jUp).app _)
+
+omit [IsTriangulated C] [IsTriangulated D] [∀ n : ℤ, (shiftFunctor C n).Linear R]
+  [∀ n : ℤ, (shiftFunctor D n).Linear R] in
+/-- Blueprint `prop-sf-localization-all-stages`, rational stage `E`: in a recollement situation,
+every object of the rationalization killed by `map M jUp` lies in the essential image of
+`map M i`. The proof: write the object as `Q K`; then `jUp K` is `M`-torsion, hence so is
+`jLow (jUp K)`, so that the first map of the triangle `F ⟶ K ⟶ jLow (jUp K) ⟶` (with `F` in the
+essential image of `i`) becomes invertible in the rationalization. -/
+lemma essImage_map_of_isZero (adj : jUp ⊣ jLow) [IsIso adj.counit]
+    (hess : ∀ K, IsZero (jUp.obj K) → i.essImage K) (K : Rationalization M D)
+    (hK : IsZero ((map M jUp).obj K)) : (map M i).essImage K := by
+  have := Localization.essSurj (Q M D) (W M D)
+  set e := (Q M D).objObjPreimageIso K
+  obtain ⟨m, hm, hm₀⟩ := (isZero_Q_obj_iff _).1
+    (hK.of_iso (((mapFac M jUp).app _).symm ≪≫ (map M jUp).mapIso e))
+  obtain ⟨F, a, δ, hT, Y, ⟨eY⟩⟩ := Pretriangulated.Recollement.exists_distTriang_unit adj hess
+    ((Q M D).objPreimage K)
+  have : IsIso ((Q M D).map a) := Localization.inverts (Q M D) (W M D) a
+    (ObjectProperty.trW.mk _ hT ⟨m, hm, by
+      rw [Triangle.mk_obj₃, Functor.comp_obj, ← jLow.map_id, ← jLow.map_smul, hm₀, jLow.map_zero]⟩)
+  exact ⟨(Q M C).obj Y, ⟨(mapFac M i).app Y ≪≫ (Q M D).mapIso eY ≪≫ asIso ((Q M D).map a) ≪≫
+    e⟩⟩
 
 variable [i.Full] [i.Faithful]
 
+/-- Blueprint `prop-sf-localization-all-stages`, rational stage `E`: the closed part of the
+rationalized recollement data has a right adjoint (the rational `Ri^!`). -/
+lemma isLeftAdjoint_map (adj : jUp ⊣ jLow) [IsIso adj.counit]
+    (h₀ : ∀ X, IsZero (jUp.obj (i.obj X))) (hess : ∀ K, IsZero (jUp.obj K) → i.essImage K) :
+    (map M i).IsLeftAdjoint :=
+  Pretriangulated.Recollement.isLeftAdjoint (mapAdjunction M adj)
+    (Functor.FullyFaithful.ofFullyFaithful _) (isZero_map_obj_map_obj h₀)
+    (essImage_map_of_isZero adj hess)
+
+/-- Blueprint `prop-sf-localization-all-stages`, rational stage `E`: the supported localization
+triangle `i i^! K ⟶ K ⟶ j_* j^* K ⟶` of the rationalized recollement data, for any right
+adjoint `G'` of `map M i`, exists and has a unique third map. -/
+theorem existsUnique_distTriang_counit_unit_map (adj : jUp ⊣ jLow) [IsIso adj.counit]
+    (h₀ : ∀ X, IsZero (jUp.obj (i.obj X))) (hess : ∀ K, IsZero (jUp.obj K) → i.essImage K)
+    {G' : Rationalization M D ⥤ Rationalization M C} (adj' : map M i ⊣ G')
+    (K : Rationalization M D) :
+    ∃! w, Pretriangulated.Recollement.triangle (mapAdjunction M adj) adj' K w ∈ distTriang _ :=
+  Pretriangulated.Recollement.existsUnique_distTriang_counit_unit (mapAdjunction M adj) adj'
+    (Functor.FullyFaithful.ofFullyFaithful _) (isZero_map_obj_map_obj h₀)
+    (essImage_map_of_isZero adj hess) K
 
 end Recollement
 

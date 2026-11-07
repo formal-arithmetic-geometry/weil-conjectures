@@ -59,6 +59,22 @@ noncomputable def fiberMap (φ : A ⟶ B) (h : φ ≫ b = a) (p : P ⟶ Y) :
     pullback a p ⟶ pullback b p :=
   pullback.map a p b p φ (𝟙 P) (𝟙 Y) (by simp [h]) (by simp)
 
+/-- The image in `B` of the fibre map `a.fiber y ⟶ b.fiber y` is the image under `φ` of the fibre
+of `a` over `y`. -/
+lemma image_fiberι_range_fiberMap (φ : A ⟶ B) (h : φ ≫ b = a) (y : Y) :
+    b.fiberι y '' Set.range (fiberMap φ h (Y.fromSpecResidueField y)) = φ '' (a ⁻¹' {y}) := by
+  rw [← Set.range_comp, ← a.range_fiberι y, ← Set.range_comp]
+  change Set.range (⇑(fiberMap φ h _ ≫ b.fiberι y)) = Set.range (⇑(a.fiberι y ≫ φ))
+  congr 2
+  simp [fiberMap, fiberι]
+
+/-- The fibre map `a.fiber y ⟶ b.fiber y` has finite image exactly when the image under `φ` of
+the fibre of `a` over `y` is finite. -/
+lemma finite_range_fiberMap_iff (φ : A ⟶ B) (h : φ ≫ b = a) (y : Y) :
+    (Set.range (fiberMap φ h (Y.fromSpecResidueField y))).Finite ↔
+      (φ '' (a ⁻¹' {y})).Finite := by
+  rw [← image_fiberι_range_fiberMap φ h y,
+    Set.finite_image_iff (b.fiberι y).isEmbedding.injective.injOn]
 
 end AlgebraicGeometry.Scheme.Hom
 

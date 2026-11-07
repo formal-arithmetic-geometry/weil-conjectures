@@ -133,5 +133,11 @@ end CategoryTheory.Functor
 
 namespace CategoryTheory.Functor
 
+/-- The image under an additive functor of an identity `∑ _a, i ≫ E = ∑ a, i ≫ U a`. -/
+lemma sum_const_map_comp_map_eq_sum {C D : Type*} [Category C] [Preadditive C] [Category D]
+    [Preadditive D] (F : C ⥤ D) [F.Additive] {P Q R : C} {κ : Type*} [Fintype κ] (i : P ⟶ Q)
+    (E : Q ⟶ R) (U : κ → (Q ⟶ R)) (h : ∑ _a : κ, i ≫ E = ∑ a, i ≫ U a) :
+    ∑ _a : κ, F.map i ≫ F.map E = ∑ a, F.map i ≫ F.map (U a) := by
+  simp only [← F.map_comp, ← F.map_sum, h]
 
 end CategoryTheory.Functor

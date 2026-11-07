@@ -132,6 +132,19 @@ noncomputable def tensorSingleToTensorRightComplex (L : CochainComplex C ℤ) :
           HomotopyCategory.quotient C (.up ℤ) ⋙ Qh ⟶ _) ≫
     Functor.whiskerLeft (Functor.tensorRightComplex L) (quotientCompQhIso C).hom
 
+lemma isIso_tensorSingleToTensorRightComplex_app (L : CochainComplex C ℤ) (X : C)
+    (hX : ObjectProperty.flat X) :
+    IsIso ((tensorSingleToTensorRightComplex L).app X) := by
+  have : IsIso ((tensorLeftCounit ((HomotopyCategory.quotient C (.up ℤ)).obj L)).app
+      ((HomotopyCategory.quotient C (.up ℤ)).obj
+        ((HomologicalComplex.single C (.up ℤ) 0).obj X))) :=
+    Functor.isIso_μNatTrans_Qh_app_app_of_kFlat _ _ ((HomotopyCategory.kFlat_quotient_obj_iff _).2
+      ((CochainComplex.kFlat_single_obj_iff_flat X 0).2 hX))
+  dsimp only [tensorSingleToTensorRightComplex, NatTrans.comp_app, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app]
+  refine IsIso.comp_isIso' inferInstance (IsIso.comp_isIso' inferInstance
+    (IsIso.comp_isIso' this (IsIso.comp_isIso' inferInstance
+      (IsIso.comp_isIso' inferInstance inferInstance))))
 
 end DerivedCategory
 
@@ -145,6 +158,38 @@ variable {Λ : Type (u + 1)} [CommRing Λ]
   [PreservesFiniteColimits F] [F.PreservesFlat] [F.IsLeftAdjoint] [F.Monoidal]
   {Γ : D ⥤ ModuleCat.{u + 1} Λ} [Γ.Additive] [PreservesFiniteLimits Γ]
 
+omit [IsGrothendieckAbelian.{u + 1} D] [MonoidalClosed D] [BraidedCategory D]
+  [HasFunctorialFlatResolution D] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+  [F.PreservesFlat] [F.IsLeftAdjoint] in
+/-- The tensor product of an injective object `I` with the image under `F` of a finite free
+module is injective: it is a finite product of copies of `I`. -/
+lemma injective_tensorObj_obj_finsupp (I : D) [Injective I] (k : ℕ) :
+    Injective (I ⊗ F.obj (ModuleCat.of Λ (Fin k →₀ Λ))) := by
+  have : HasFiniteBiproducts D := Abelian.hasFiniteBiproducts
+  have : (F ⋙ tensorLeft I).Additive := inferInstance
+  refine Injective.of_iso ?_ (inferInstance : Injective (∏ᶜ fun _ : Fin k ↦ I))
+  exact (biproduct.isoProduct _).symm ≪≫
+    (biproduct.mapIso fun _ ↦ (ρ_ I).symm ≪≫
+      whiskerLeftIso I (Functor.Monoidal.εIso F)) ≪≫
+    ((F ⋙ tensorLeft I).mapBiproduct _).symm ≪≫
+    (F ⋙ tensorLeft I).mapIso (ModuleCat.finsuppIsoBiproduct Λ k).symm
+
+omit [PreservesFiniteLimits Γ] [BraidedCategory D] [HasFunctorialFlatResolution D]
+  [PreservesFiniteLimits F] [PreservesFiniteColimits F] [F.PreservesFlat] in
+/-- Let `I` be injective and `M` a flat module. If the derived functors of `Γ` commute with
+filtered colimits, `I ⊗ F M` is `Γ`-acyclic: `M` is a filtered colimit of finite free modules
+`Λ^k`, and the objects `I ⊗ F(Λ^k)` are injective. -/
+lemma rightAcyclic_tensorObj_obj_of_flat
+    (hΓ : ∀ (J : Type (u + 1)) [SmallCategory J] [IsFiltered J] (q : ℕ),
+      PreservesColimitsOfShape J (Γ.rightDerived q))
+    (I : D) [Injective I] (M : ModuleCat.{u + 1} Λ) [Module.Flat Λ M] :
+    Γ.rightAcyclic (I ⊗ F.obj M) := fun q ↦ by
+  have := hΓ (ModuleCat.FinFreeOver M) (q + 1)
+  have hc := isColimitOfPreserves (F ⋙ tensorLeft I ⋙ Γ.rightDerived (q + 1))
+    (ModuleCat.FinFreeOver.isColimitCocone M)
+  refine hc.isZero_pt (Functor.isZero _ fun A ↦ ?_)
+  have := injective_tensorObj_obj_finsupp (F := F) I A.n
+  exact Γ.isZero_rightDerived_obj_injective_succ q (I ⊗ F.obj (ModuleCat.of Λ (Fin A.n →₀ Λ)))
 
 end Functor
 
@@ -209,5 +254,125 @@ variable {Λ : Type (u + 1)} [CommRing Λ]
   {Γ : D ⥤ ModuleCat.{u + 1} Λ} [Γ.Additive] [PreservesFiniteLimits Γ]
   (adj : F.mapDerivedCategory ⊣ Γ.rightDerivedFunctor)
 
+omit [PreservesFiniteLimits Γ] in
+/-- The projection map is an isomorphism at the finite free modules placed in degree `0`, the
+finite biproducts of copies of the unit. -/
+lemma isIso_mapDerivedCategoryProjectionMap_app_singleFunctor_finsupp (E : DerivedCategory D)
+    (k : ℕ) : IsIso ((mapDerivedCategoryProjectionMap adj E).app
+      ((singleFunctor _ 0).obj (ModuleCat.of Λ (Fin k →₀ Λ)))) := by
+  let τ := Functor.whiskerLeft (singleFunctor (ModuleCat.{u + 1} Λ) 0)
+    (mapDerivedCategoryProjectionMap adj E)
+  have : (Γ.rightDerivedFunctor).Additive := adj.right_adjoint_additive
+  have := DerivedCategory.additive_tensorLeft (Γ.rightDerivedFunctor.obj E)
+  have := DerivedCategory.additive_tensorLeft E
+  have hunit : IsIso (τ.app (ModuleCat.of Λ Λ)) :=
+    (NatTrans.isIso_app_iff_of_iso (mapDerivedCategoryProjectionMap adj E)
+      (singleFunctorObjUnitIso (ModuleCat.{u + 1} Λ))).2
+        (isIso_mapDerivedCategoryProjectionMap_app_tensorUnit adj E)
+  exact (NatTrans.isIso_app_iff_of_iso (mapDerivedCategoryProjectionMap adj E)
+    ((singleFunctor _ 0).mapIso (ModuleCat.finsuppIsoBiproduct Λ k))).2
+      (NatTrans.isIso_app_biproduct τ _ fun _ ↦ hunit)
+
+/-- If the derived functors of `Γ` commute with filtered colimits, the projection map
+`RΓ E ⊗ᴸ M[0] ⟶ RΓ (E ⊗ᴸ D(F) M[0])` is an isomorphism for every bounded below `E` and every
+flat module `M`: both sides commute in each degree with filtered colimits of flat modules, and
+`M` is a filtered colimit of finite free modules. -/
+theorem isIso_mapDerivedCategoryProjectionMap_app_singleFunctor_of_flat
+    (hΓ : ∀ (J : Type (u + 1)) [SmallCategory J] [IsFiltered J] (q : ℕ),
+      PreservesColimitsOfShape J (Γ.rightDerived q))
+    (E : DerivedCategory D) (a : ℤ) [E.IsGE a] (M : ModuleCat.{u + 1} Λ)
+    (hM : ObjectProperty.flat M) :
+    IsIso ((mapDerivedCategoryProjectionMap adj E).app ((singleFunctor _ 0).obj M)) := by
+  have : Module.Flat Λ M := (ModuleCat.flat_iff_flat M).1 hM
+  let τ := mapDerivedCategoryProjectionMap adj E
+  let L := Q.objPreimage (Γ.rightDerivedFunctor.obj E)
+  let eL : Q.obj L ≅ Γ.rightDerivedFunctor.obj E := Q.objObjPreimageIso _
+  obtain ⟨I₀, _, ⟨e₀⟩⟩ := DerivedCategory.exists_iso_Q_obj_of_isGE E a
+  obtain ⟨I, ι, _, hI, _⟩ :=
+    CochainComplex.Plus.modelCategoryQuillen.exists_quasiIso_injective I₀ a
+  have : IsIso (Q.map ι) := by
+    rw [isIso_Q_map_iff_quasiIso]
+    infer_instance
+  let eI : E ≅ Q.obj I := e₀ ≪≫ asIso (Q.map ι)
+  let c := ModuleCat.FinFreeOver.cocone M
+  have hc := ModuleCat.FinFreeOver.isColimitCocone M
+  have hflat (X : ModuleCat.{u + 1} Λ) [Module.Flat Λ X] : ObjectProperty.flat X :=
+    (ModuleCat.flat_iff_flat X).2 inferInstance
+  have hflat' (A : ModuleCat.FinFreeOver M) :
+      ObjectProperty.flat ((ModuleCat.FinFreeOver.diagram M).obj A) :=
+    hflat (ModuleCat.of Λ (Fin A.n →₀ Λ))
+  -- the objects `I ⊗ F X` are `Γ`-acyclic for `X` flat
+  have hacyc (X : ModuleCat.{u + 1} Λ) (hX : ObjectProperty.flat X) (p : ℤ) :
+      Γ.rightAcyclic (((Functor.tensorRightComplex I).obj (F.obj X)).X p) := by
+    have : Module.Flat Λ X := (ModuleCat.flat_iff_flat X).1 hX
+    exact rightAcyclic_tensorObj_obj_of_flat hΓ (I.X p) X
+  have hge (X : ModuleCat.{u + 1} Λ) :
+      CochainComplex.IsStrictlyGE ((Functor.tensorRightComplex I).obj (F.obj X)) a :=
+    (CochainComplex.isStrictlyGE_iff _ _).2 fun p hp ↦
+      (tensorRight (F.obj X)).map_isZero (CochainComplex.isZero_of_isStrictlyGE I a p hp)
+  have : PreservesColimitsOfShape (ModuleCat.FinFreeOver M) Γ := by
+    have := hΓ (ModuleCat.FinFreeOver M) 0
+    exact preservesColimitsOfShape_of_natIso Γ.rightDerivedZeroIsoSelf
+  have : PreservesColimitsOfShape (ModuleCat.FinFreeOver M)
+      (Γ.mapHomologicalComplex (ComplexShape.up ℤ)) :=
+    HomologicalComplex.preservesColimitsOfShape_of_eval _ fun p ↦
+      preservesColimitsOfShape_of_natIso (F := HomologicalComplex.eval _ _ p ⋙ Γ)
+        (NatIso.ofComponents (fun _ ↦ Iso.refl _) (by intros; simp))
+  rw [DerivedCategory.isIso_iff]
+  intro n
+  let H := DerivedCategory.homologyFunctor (ModuleCat.{u + 1} Λ) n
+  let P := singleFunctor (ModuleCat.{u + 1} Λ) 0 ⋙
+    (curriedTensor _).obj (Γ.rightDerivedFunctor.obj E) ⋙ H
+  let R := singleFunctor (ModuleCat.{u + 1} Λ) 0 ⋙
+    ((F.mapDerivedCategory ⋙ (curriedTensor _).obj E) ⋙ Γ.rightDerivedFunctor) ⋙ H
+  let τn : P ⟶ R := Functor.whiskerLeft (singleFunctor _ 0) (Functor.whiskerRight τ H)
+  -- the source commutes with the filtered colimit
+  let βP : P ⟶ Functor.tensorRightComplex L ⋙ Q ⋙ H :=
+    Functor.whiskerLeft (singleFunctor _ 0)
+      (Functor.whiskerRight ((curriedTensor _).map eL.inv) H) ≫
+    Functor.whiskerRight (tensorSingleToTensorRightComplex L) H
+  have hβP (X : ModuleCat.{u + 1} Λ) (hX : ObjectProperty.flat X) : IsIso (βP.app X) := by
+    have := isIso_tensorSingleToTensorRightComplex_app L X hX
+    dsimp only [βP, NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app]
+    infer_instance
+  have hP : IsColimit (P.mapCocone c) :=
+    isColimitMapCoconeOfNatTrans βP c (fun A ↦ hβP _ (hflat' A)) (hβP M hM)
+      (IsColimit.mapCoconeEquiv (Functor.isoWhiskerLeft _
+        (DerivedCategory.homologyFunctorFactors _ n)).symm (isColimitOfPreserves _ hc))
+  -- the target commutes with the filtered colimit
+  let T := F ⋙ Functor.tensorRightComplex I ⋙ Q ⋙ Γ.rightDerivedFunctor ⋙ H
+  let β₂ : F ⋙ Functor.tensorRightComplex I ⋙ Γ.mapHomologicalComplex _ ⋙ Q ⋙ H ⟶ T :=
+    { app X := H.map (Γ.rightDerivedFunctorUnitQ ((Functor.tensorRightComplex I).obj (F.obj X)))
+      naturality X Y f := by
+        dsimp [T]
+        rw [← H.map_comp, ← H.map_comp, rightDerivedFunctorUnitQ_naturality] }
+  have hβ₂ (X : ModuleCat.{u + 1} Λ) (hX : ObjectProperty.flat X) : IsIso (β₂.app X) := by
+    have := hge X
+    have := Γ.isIso_rightDerivedFunctorUnitQ_of_isStrictlyGE _ a (hacyc X hX)
+    exact Functor.map_isIso H
+      (Γ.rightDerivedFunctorUnitQ ((Functor.tensorRightComplex I).obj (F.obj X)))
+  let β₃ : R ⟶ T :=
+    Functor.whiskerRight (F.mapDerivedCategorySingleFunctor 0).hom
+      ((curriedTensor _).obj E ⋙ Γ.rightDerivedFunctor ⋙ H) ≫
+    Functor.whiskerLeft (F ⋙ singleFunctor D 0)
+      (Functor.whiskerRight ((curriedTensor _).map eI.hom) (Γ.rightDerivedFunctor ⋙ H)) ≫
+    Functor.whiskerLeft F (Functor.whiskerRight (tensorSingleToTensorRightComplex I)
+      (Γ.rightDerivedFunctor ⋙ H))
+  have hβ₃ (X : ModuleCat.{u + 1} Λ) (hX : ObjectProperty.flat X) : IsIso (β₃.app X) := by
+    have := isIso_tensorSingleToTensorRightComplex_app I (F.obj X)
+      (Functor.PreservesFlat.flat_obj (F := F) hX)
+    dsimp only [β₃, NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app]
+    infer_instance
+  have hT : IsColimit (T.mapCocone c) :=
+    isColimitMapCoconeOfNatTrans' β₂ c (fun A ↦ hβ₂ _ (hflat' A)) (hβ₂ M hM)
+      (IsColimit.mapCoconeEquiv (Functor.isoWhiskerLeft _ (Functor.isoWhiskerLeft _
+        (Functor.isoWhiskerLeft _ (DerivedCategory.homologyFunctorFactors _ n)))).symm
+        (isColimitOfPreserves _ hc))
+  have hR : IsColimit (R.mapCocone c) :=
+    isColimitMapCoconeOfNatTrans β₃ c (fun A ↦ hβ₃ _ (hflat' A)) (hβ₃ M hM) hT
+  exact NatTrans.isIso_app_of_isColimit_mapCocone τn c hP hR fun A ↦
+    have := isIso_mapDerivedCategoryProjectionMap_app_singleFunctor_finsupp adj E A.n
+    Functor.map_isIso H
+      (τ.app ((singleFunctor _ 0).obj (ModuleCat.of Λ (Fin A.n →₀ Λ))))
 
 end CategoryTheory.Functor

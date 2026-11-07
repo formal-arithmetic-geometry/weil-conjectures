@@ -98,6 +98,27 @@ variable {C D₁ D₂ : Type*} [Category* C] [Category* D₁] [Category* D₂] [
   [MonoidalCategory D₂] [MonoidalClosed D₂] (F₁ : D₁ ⥤ C) (F₂ : D₂ ⥤ C) [F₁.LaxMonoidal]
   [F₂.LaxMonoidal]
 
+/-- **Exchanging the two factors.** For a symmetric `C`, the external internal-hom map of
+`(F₂, F₁)` is that of `(F₁, F₂)` conjugated by the braidings. -/
+theorem externalIhomMap_swap (E₁ L₁ : D₁) (E₂ L₂ : D₂) :
+    externalIhomMap F₂ F₁ E₂ L₂ E₁ L₁ = (β_ _ _).hom ≫ externalIhomMap F₁ F₂ E₁ L₁ E₂ L₂ ≫
+      (pre (β_ (F₂.obj E₂) (F₁.obj E₁)).hom).app _ ≫
+        (ihom _).map (β_ (F₁.obj L₁) (F₂.obj L₂)).hom := by
+  apply uncurry_injective
+  rw [uncurry_natural_left, ← Category.assoc, uncurry_natural_right, uncurry_pre_app,
+    uncurry_externalIhomMap, uncurry_externalIhomMap, Category.assoc, Category.assoc,
+    whisker_exchange_assoc, ← tensorHom_def_assoc]
+  erw [BraidedCategory.braiding_naturality]
+  rw [SymmetricCategory.tensorμ_braiding_assoc, tensorHom_comp_tensorHom_assoc,
+    SymmetricCategory.symmetry, SymmetricCategory.symmetry, id_tensorHom_id, Category.id_comp]
+
+/-- The external internal-hom map of `(F₂, F₁)` is an isomorphism if and only if that of
+`(F₁, F₂)` is. -/
+theorem isIso_externalIhomMap_swap_iff (E₁ L₁ : D₁) (E₂ L₂ : D₂) :
+    IsIso (externalIhomMap F₂ F₁ E₂ L₂ E₁ L₁) ↔ IsIso (externalIhomMap F₁ F₂ E₁ L₁ E₂ L₂) := by
+  have : IsIso ((pre (β_ (F₂.obj E₂) (F₁.obj E₁)).hom).app (F₁.obj L₁ ⊗ F₂.obj L₂)) :=
+    isIso_pre_app _ _
+  rw [externalIhomMap_swap, isIso_comp_left_iff, isIso_comp_right_iff]
 
 end Swap
 
@@ -243,11 +264,52 @@ noncomputable def projectionIhomMap (X Y : C) :
     R.obj ((ihom X).obj Y) ⟶ (ihom (F.obj X)).obj (R.obj Y) :=
   curry ((β_ _ _).hom ≫ adj.projectionTensorMap π _ X ≫ R.map ((β_ _ X).hom ≫ (ihom.ev X).app Y))
 
+/-- The transpose of `projectionIhomMap` on the right: the tensor map followed by the
+evaluation. -/
+lemma braiding_comp_uncurry_projectionIhomMap (X Y : C) :
+    (β_ _ _).hom ≫ uncurry (adj.projectionIhomMap π X Y) =
+      adj.projectionTensorMap π _ X ≫ R.map ((β_ _ X).hom ≫ (ihom.ev X).app Y) := by
+  rw [projectionIhomMap, uncurry_curry, SymmetricCategory.symmetry_assoc]
 
 variable (hπ : ∀ {M M' : C'} (φ : M ⟶ M') (N : C),
   L.map φ ▷ N ≫ π M' N = π M N ≫ L.map (φ ▷ F.obj N))
 include hπ
 
+/-- The image under `R` of a map into an internal hom, followed by `projectionIhomMap`, is the
+transpose of the tensor map followed by the image of the uncurried map. -/
+lemma map_comp_projectionIhomMap {H X Y : C} (f : H ⟶ (ihom X).obj Y) :
+    R.map f ≫ adj.projectionIhomMap π X Y =
+      curry ((β_ _ _).hom ≫ adj.projectionTensorMap π H X ≫
+        R.map ((β_ H X).hom ≫ uncurry f)) := by
+  rw [projectionIhomMap, ← curry_natural_left, BraidedCategory.braiding_naturality_right_assoc,
+    projectionTensorMap_naturality_left_assoc adj π hπ, ← R.map_comp,
+    BraidedCategory.braiding_naturality_left_assoc, ← uncurry_eq]
+
+/-- **`R (X ⟶ Y) ≅ (F X ⟶ R Y)`.** The comparison `projectionIhomMap` is an isomorphism: by the
+Yoneda lemma, maps `T ⟶ R (X ⟶ Y)` correspond to maps `L T ⊗ X ⟶ Y`, hence through the
+projection formula to maps `L (T ⊗ F X) ⟶ Y`, i.e. to maps `T ⟶ (F X ⟶ R Y)`. -/
+theorem isIso_projectionIhomMap (X Y : C) : IsIso (adj.projectionIhomMap π X Y) := by
+  refine isIso_of_yoneda_map_bijective _ (fun T ↦ ?_)
+  let e : (T ⟶ R.obj ((ihom X).obj Y)) ≃ (T ⟶ (ihom (F.obj X)).obj (R.obj Y)) :=
+    (adj.homEquiv _ _).symm.trans <| ((ihom.adjunction X).homEquiv _ _).symm.trans <|
+      (β_ (L.obj T) X).symm.homFromEquiv.trans <| (asIso (π T X)).homFromEquiv.trans <|
+        (adj.homEquiv _ _).trans <| (β_ (F.obj X) T).symm.homFromEquiv.trans <|
+          (ihom.adjunction (F.obj X)).homEquiv _ _
+  have he : (fun t : T ⟶ R.obj ((ihom X).obj Y) ↦ t ≫ adj.projectionIhomMap π X Y) = e := by
+    ext t
+    simp only [e, Equiv.trans_apply, Iso.homFromEquiv_apply, asIso_inv, Iso.symm_inv,
+      MonoidalClosed.homEquiv_symm_apply_eq]
+    rw [projectionIhomMap, ← curry_natural_left, BraidedCategory.braiding_naturality_right_assoc]
+    congr 2
+    apply (adj.homEquiv _ _).symm.injective
+    rw [Equiv.symm_apply_apply, homEquiv_counit, L.map_comp, L.map_comp, Category.assoc,
+      Category.assoc, counit_naturality, map_projectionTensorMap_comp_counit_assoc,
+      ← cancel_epi (π T X), IsIso.hom_inv_id_assoc, ← reassoc_of% (hπ t X),
+      IsIso.hom_inv_id_assoc, ← comp_whiskerRight_assoc,
+      BraidedCategory.braiding_naturality_left_assoc, ← uncurry_eq, homEquiv_counit]
+    rfl
+  rw [he]
+  exact e.bijective
 
 end ProjectionIhom
 
@@ -323,6 +385,17 @@ variable {C₂ C C' : Type*} [Category* C₂] [Category* C] [Category* C'] [Mono
   [MonoidalCategory C] [MonoidalCategory C'] [BraidedCategory C] [BraidedCategory C']
   {G : C ⥤ C'} [G.LaxBraided] {F₂ : C₂ ⥤ C} {F₂' : C₂ ⥤ C'} [F₂.LaxMonoidal] [F₂'.LaxMonoidal]
 
+/-- A monoidal natural transformation `F₂ ⋙ G ⟶ F₂'`, for a braided `G`, commutes with the
+transposed evaluations `F₂ B ⊗ F₂ A ≅ F₂ A ⊗ F₂ B ⟶ F₂ (A ⊗ B) ⟶ F₂ Z`. -/
+lemma _root_.CategoryTheory.Functor.μ_comp_map_braiding_comp_app (e₂ : F₂ ⋙ G ⟶ F₂')
+    (he₂ : ∀ X Y : C₂, μ G (F₂.obj X) (F₂.obj Y) ≫ G.map (μ F₂ X Y) ≫ e₂.app (X ⊗ Y) =
+      (e₂.app X ⊗ₘ e₂.app Y) ≫ μ F₂' X Y) {A B Z : C₂} (f : A ⊗ B ⟶ Z) :
+    μ G (F₂.obj B) (F₂.obj A) ≫ G.map ((β_ _ _).hom ≫ μ F₂ A B ≫ F₂.map f) ≫ e₂.app Z =
+      (e₂.app B ⊗ₘ e₂.app A) ≫ (β_ _ _).hom ≫ μ F₂' A B ≫ F₂'.map f := by
+  simp only [G.map_comp, Category.assoc]
+  rw [Functor.LaxBraided.braided_assoc, ← Functor.comp_map,
+    e₂.naturality, reassoc_of% (he₂ A B), BraidedCategory.braiding_naturality_assoc]
+  rfl
 
 end MonoidalNatTrans
 
@@ -363,6 +436,51 @@ def ProjectionExchange (δ₁' : ∀ M N : C₁', F₁'.obj (M ⊗ N) ⟶ F₁'.
 variable (hEx : ProjectionExchange π π₁ Ex κ (Functor.OplaxMonoidal.δ F₁')
   (Functor.OplaxMonoidal.δ F₁))
 
+omit [MonoidalClosed C] [MonoidalClosed C'] [G.Braided] in
+include hπ hExξ hEx in
+/-- **The first factor.** The tensor map of `R` at `(F₁ H₁, F₁ E₁)` followed by the transposed
+evaluation is, through the base change map `F₁' R₁ ⟶ R F₁` (the mate of `ξ`) and the
+comparison `projectionIhomMap` of `R₁`, the transposed evaluation of `F₁'`. -/
+lemma projectionTensorMap_comp_map_comp_inv_mateEquiv
+    [∀ N, IsIso ((mateEquiv adj₁ adj ξ).natTrans.app N)] (E₁ L₁ : C₁) :
+    adj.projectionTensorMap π (F₁.obj ((ihom E₁).obj L₁)) (F₁.obj E₁) ≫
+        R.map ((β_ _ _).hom ≫ μ F₁ _ _ ≫ F₁.map ((ihom.ev E₁).app L₁)) ≫
+          inv ((mateEquiv adj₁ adj ξ).natTrans.app L₁) =
+      ((inv ((mateEquiv adj₁ adj ξ).natTrans.app ((ihom E₁).obj L₁)) ≫
+          F₁'.map (adj₁.projectionIhomMap π₁ E₁ L₁)) ⊗ₘ inv (κ E₁)) ≫
+        (β_ _ _).hom ≫ μ F₁' _ _ ≫ F₁'.map ((ihom.ev (G₁.obj E₁)).app (R₁.obj L₁)) := by
+  have hδb : ∀ {N N' : C₁} (φ : N ⟶ N') (N'' : C₁), F₁.map (φ ▷ N'') ≫
+      Functor.OplaxMonoidal.δ F₁ N' N'' =
+        Functor.OplaxMonoidal.δ F₁ N N'' ≫ F₁.map φ ▷ F₁.obj N'' :=
+    fun φ N'' ↦ (Functor.OplaxMonoidal.δ_natural_left F₁ φ N'').symm
+  have key := projectionTensorMap_mateEquiv adj₁ adj π₁ π hπ (Functor.OplaxMonoidal.δ F₁')
+    (Functor.OplaxMonoidal.δ F₁) hδb κ Ex ξ hExξ hEx ((ihom E₁).obj L₁) E₁
+  set BC := (mateEquiv adj₁ adj ξ).natTrans
+  set H₁ := (ihom E₁).obj L₁
+  -- solve `key` for the tensor map of `R`
+  have key' : adj.projectionTensorMap π (F₁.obj H₁) (F₁.obj E₁) =
+      (inv (BC.app H₁) ⊗ₘ inv (κ E₁)) ≫ μ F₁' _ _ ≫ F₁'.map (adj₁.projectionTensorMap π₁ H₁ E₁) ≫
+        BC.app (H₁ ⊗ E₁) ≫ R.map (Functor.OplaxMonoidal.δ F₁ H₁ E₁) := by
+    rw [key, ← Category.assoc (μ F₁' _ _), Functor.Monoidal.μ_δ, Category.id_comp,
+      tensorHom_def, Category.assoc, whisker_exchange_assoc, ← comp_whiskerRight_assoc,
+      IsIso.inv_hom_id, id_whiskerRight, Category.id_comp]
+    erw [← MonoidalCategory.whiskerLeft_comp_assoc, IsIso.inv_hom_id,
+      MonoidalCategory.whiskerLeft_id, Category.id_comp]
+  have hb : (β_ (F₁.obj H₁) (F₁.obj E₁)).hom ≫ μ F₁ E₁ H₁ =
+      μ F₁ H₁ E₁ ≫ F₁.map (β_ H₁ E₁).hom := (Functor.LaxBraided.braided H₁ E₁).symm
+  have hκ := adj₁.braiding_comp_uncurry_projectionIhomMap π₁ E₁ L₁
+  rw [uncurry_eq, ← BraidedCategory.braiding_naturality_left_assoc] at hκ
+  rw [key', reassoc_of% hb, R.map_comp (μ F₁ H₁ E₁)]
+  simp only [Category.assoc]
+  rw [← R.map_comp_assoc (Functor.OplaxMonoidal.δ F₁ H₁ E₁), Functor.Monoidal.δ_μ, R.map_id,
+    Category.id_comp, ← F₁.map_comp, ← Functor.comp_map F₁ R, ← BC.naturality_assoc]
+  dsimp only [Functor.id_obj]
+  rw [IsIso.hom_inv_id, Category.comp_id, Functor.comp_map, ← F₁'.map_comp, ← hκ,
+    F₁'.map_comp, F₁'.map_comp, ← Functor.LaxMonoidal.μ_natural_left_assoc,
+    Functor.LaxBraided.braided_assoc, tensorHom_def, tensorHom_def, Category.assoc,
+    whisker_exchange_assoc, ← comp_whiskerRight_assoc]
+  simp only [Category.assoc]
+  rfl
 
 omit [SymmetricCategory C₁] [SymmetricCategory C₁'] [SymmetricCategory C] [SymmetricCategory C']
   [MonoidalClosed C₁] [MonoidalClosed C₁'] [MonoidalClosed C₂] [MonoidalClosed C]
@@ -380,6 +498,89 @@ lemma projectionTensorMap_map_tensorHom
   rw [tensorHom_def, R.map_comp, ← projectionTensorMap_naturality_left_assoc adj π hπ,
     ← projectionTensorMap_naturality_right adj π hπr, tensorHom_def, Category.assoc]
 
+include hπ hπ₁ hExξ in
+/-- **The external internal-hom map under an exceptional inverse image.** Let `R = g^!` be right
+adjoint to `L = g_!` with an associative invertible projection formula for `G = g^*`, and let
+`g` be the base change of `g₁ : Z₁' ⟶ Z₁` along the first projection, with base change map
+`F₁' R₁ ⟶ R F₁` (the mate of `ξ`, where `F₁ = p₁^*`, `F₁' = p₁'^*`, `R₁ = g₁^!`) and an
+isomorphism `F₂ ⋙ G ≅ F₂'` of the second projections. If the base change map and the tensor
+maps of `R` at `(F₁ M, F₂ N)` are isomorphisms, then `R` of the external internal-hom map of
+`(E₁, L₁, E₂, L₂)` is an isomorphism if and only if the external internal-hom map of
+`(G₁ E₁, R₁ L₁, E₂, L₂)` is. -/
+theorem isIso_map_externalIhomMap_iff
+    (δ₁' : ∀ M N : C₁', F₁'.obj (M ⊗ N) ⟶ F₁'.obj M ⊗ F₁'.obj N)
+    (hδ₁' : ∀ M N, δ₁' M N = Functor.OplaxMonoidal.δ F₁' M N)
+    (δ₁ : ∀ M N : C₁, F₁.obj (M ⊗ N) ⟶ F₁.obj M ⊗ F₁.obj N)
+    (hδ₁ : ∀ M N, δ₁ M N = Functor.OplaxMonoidal.δ F₁ M N)
+    (hEx : ProjectionExchange π π₁ Ex κ δ₁' δ₁)
+    (hπr : ∀ (M : C') {N N' : C} (φ : N ⟶ N'),
+      L.obj M ◁ φ ≫ π M N' = π M N ≫ L.map (M ◁ G.map φ))
+    (δG : ∀ N N' : C, G.obj (N ⊗ N') ⟶ G.obj N ⊗ G.obj N')
+    (hδG : ∀ N N', δG N N' = Functor.OplaxMonoidal.δ G N N')
+    (hassoc : ∀ (M : C') (N N' : C), π M N ▷ N' ≫ π (M ⊗ G.obj N) N' ≫
+      L.map (α_ M (G.obj N) (G.obj N')).hom =
+        (α_ _ N N').hom ≫ π M (N ⊗ N') ≫ L.map (M ◁ δG N N'))
+    [∀ N, IsIso ((mateEquiv adj₁ adj ξ).natTrans.app N)]
+    (e₂ : F₂ ⋙ G ≅ F₂')
+    (he₂ : ∀ X Y : C₂, μ G (F₂.obj X) (F₂.obj Y) ≫ G.map (μ F₂ X Y) ≫ e₂.hom.app (X ⊗ Y) =
+      (e₂.hom.app X ⊗ₘ e₂.hom.app Y) ≫ μ F₂' X Y)
+    [∀ M N, IsIso (adj.projectionTensorMap π (F₁.obj M) (F₂.obj N))]
+    (E₁ L₁ : C₁) (E₂ L₂ : C₂) :
+    IsIso (R.map (externalIhomMap F₁ F₂ E₁ L₁ E₂ L₂)) ↔
+      IsIso (externalIhomMap F₁' F₂' (G₁.obj E₁) (R₁.obj L₁) E₂ L₂) := by
+  obtain rfl : δ₁' = Functor.OplaxMonoidal.δ F₁' := funext fun M ↦ funext (hδ₁' M)
+  obtain rfl : δ₁ = Functor.OplaxMonoidal.δ F₁ := funext fun M ↦ funext (hδ₁ M)
+  obtain rfl : δG = Functor.OplaxMonoidal.δ G := funext fun N ↦ funext (hδG N)
+  set BC := (mateEquiv adj₁ adj ξ).natTrans
+  set H₁ := (ihom E₁).obj L₁
+  set H₂ := (ihom E₂).obj L₂
+  have : IsIso (adj₁.projectionIhomMap π₁ E₁ L₁) := adj₁.isIso_projectionIhomMap π₁ hπ₁ E₁ L₁
+  have : IsIso (adj.projectionIhomMap π (F₁.obj E₁ ⊗ F₂.obj E₂) (F₁.obj L₁ ⊗ F₂.obj L₂)) :=
+    adj.isIso_projectionIhomMap π hπ _ _
+  rw [← isIso_comp_right_iff _ (adj.projectionIhomMap π _ _), map_comp_projectionIhomMap adj π hπ]
+  let a := inv (adj.projectionTensorMap π (F₁.obj H₁) (F₂.obj H₂)) ≫
+    ((inv (BC.app H₁) ≫ F₁'.map (adj₁.projectionIhomMap π₁ E₁ L₁)) ⊗ₘ e₂.hom.app H₂)
+  let c := Functor.OplaxMonoidal.δ G (F₁.obj E₁) (F₂.obj E₂) ≫ (inv (κ E₁) ⊗ₘ e₂.hom.app E₂)
+  let d := inv (adj.projectionTensorMap π (F₁.obj L₁) (F₂.obj L₂)) ≫
+    (inv (BC.app L₁) ⊗ₘ e₂.hom.app L₂)
+  have hmain : adj.projectionTensorMap π _ _ ≫
+      R.map ((β_ _ _).hom ≫ uncurry (externalIhomMap F₁ F₂ E₁ L₁ E₂ L₂)) ≫ d =
+      (a ⊗ₘ c) ≫ (β_ _ _).hom ≫
+        uncurry (externalIhomMap F₁' F₂' (G₁.obj E₁) (R₁.obj L₁) E₂ L₂) := by
+    rw [← cancel_epi (adj.projectionTensorMap π (F₁.obj H₁) (F₂.obj H₂) ⊗ₘ
+      μ G (F₁.obj E₁) (F₂.obj E₂))]
+    rw [uncurry_externalIhomMap, uncurry_externalIhomMap,
+      SymmetricCategory.braiding_tensorμ_assoc, SymmetricCategory.braiding_tensorμ_assoc,
+      tensorHom_comp_tensorHom_assoc, tensorHom_comp_tensorHom, tensorHom_comp_tensorHom,
+      R.map_comp]
+    simp only [Category.assoc]
+    rw [projectionTensorMap_tensorμ_assoc adj π hπ hπr hassoc,
+      projectionTensorMap_map_tensorHom_assoc adj π hπ hπr]
+    dsimp only [Functor.id_obj]
+    simp only [a, c, d, IsIso.hom_inv_id_assoc, Functor.Monoidal.μ_δ_assoc,
+      tensorHom_comp_tensorHom]
+    rw [tensorμ_natural_assoc]
+    congr 1
+    rw [tensorHom_comp_tensorHom]
+    congr 1
+    · exact projectionTensorMap_comp_map_comp_inv_mateEquiv adj π adj₁ π₁ hπ Ex ξ hExξ κ hEx
+        E₁ L₁
+    · exact Functor.μ_comp_map_braiding_comp_app e₂.hom he₂ _
+  have hd : IsIso d := by unfold d; infer_instance
+  have hc : IsIso c := by unfold c; infer_instance
+  have ha : IsIso a := by unfold a; infer_instance
+  have h : curry ((β_ _ _).hom ≫ adj.projectionTensorMap π _ _ ≫
+      R.map ((β_ _ _).hom ≫ uncurry (externalIhomMap F₁ F₂ E₁ L₁ E₂ L₂))) =
+      a ≫ externalIhomMap F₁' F₂' (G₁.obj E₁) (R₁.obj L₁) E₂ L₂ ≫ (pre c).app _ ≫
+        (ihom _).map (inv d) := by
+    apply uncurry_injective
+    rw [uncurry_curry, uncurry_natural_left, ← Category.assoc, ← Category.assoc,
+      uncurry_natural_right, Category.assoc, uncurry_pre_app, ← cancel_mono d, Category.assoc,
+      Category.assoc, hmain, Category.assoc, Category.assoc, Category.assoc, IsIso.inv_hom_id,
+      Category.comp_id, BraidedCategory.braiding_naturality_assoc, SymmetricCategory.symmetry_assoc,
+      whisker_exchange_assoc, ← tensorHom_def_assoc]
+  have : IsIso ((pre c).app (F₁'.obj (R₁.obj L₁) ⊗ F₂'.obj L₂)) := isIso_pre_app _ _
+  rw [h, isIso_comp_left_iff, isIso_comp_right_iff]
 
 end Step
 

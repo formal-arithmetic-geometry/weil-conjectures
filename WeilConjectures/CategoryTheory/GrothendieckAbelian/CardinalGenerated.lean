@@ -175,5 +175,11 @@ lemma degreewiseCardinalGenerated_of_epi {T T' : CochainComplex C ℤ} (p : T �
     [Epi p] (hT : degreewiseCardinalGenerated G κ T) : degreewiseCardinalGenerated G κ T' :=
   fun n ↦ isCardinalGenerated_of_epi G κ (p.f n) (hT n)
 
+lemma degreewiseCardinalGenerated_of_mono [Fact κ.IsRegular]
+    (hκ : Cardinal.aleph0 < κ) (hG : IsSeparator G)
+    (hsub : ∀ n : ℕ, HasCardinalLT (Subobject (∐ (fun (_ : Fin n) ↦ G))) κ)
+    {T T' : CochainComplex C ℤ} (i : T ⟶ T') [Mono i]
+    (hT' : degreewiseCardinalGenerated G κ T') : degreewiseCardinalGenerated G κ T :=
+  fun n ↦ isCardinalGenerated_of_mono G κ hκ hG hsub (i.f n) (hT' n)
 
 end CochainComplex

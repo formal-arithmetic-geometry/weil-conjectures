@@ -137,6 +137,20 @@ lemma mapBifunctorComparisonX_single₂ (n : ℤ) :
   rw [Iso.inv_hom_id_map_assoc]
   rfl
 
+/-- On `K₁ ⊗ single(X₂)`, the comparison morphism `G(K₁ ⊗ X₂) ⟶ G₁(K₁) ⊗ G₂(X₂)` is,
+through the identifications `mapBifunctorSingle₂Iso`, the degreewise application of
+`τ(-, X₂)`. -/
+lemma mapBifunctorComparison_single₂ :
+    (G.mapHomologicalComplex _).map (mapBifunctorSingle₂Iso F X₂ K₁).inv ≫
+      mapBifunctorComparison τ (.up ℤ) K₁ ((single C₂ (.up ℤ) 0).obj X₂) ≫
+      mapBifunctorMap (𝟙 _) ((singleMapHomologicalComplex G₂ (.up ℤ) 0).hom.app X₂) F'
+        (.up ℤ) ≫
+      (mapBifunctorSingle₂Iso F' (G₂.obj X₂) ((G₁.mapHomologicalComplex _).obj K₁)).hom =
+    (NatTrans.mapHomologicalComplex (τ.flipAppComp X₂) (.up ℤ)).app K₁ := by
+  rw [← cancel_mono (mapBifunctorSingle₂Iso F' (G₂.obj X₂)
+    ((G₁.mapHomologicalComplex _).obj K₁)).inv, assoc, assoc, assoc, Iso.hom_inv_id, comp_id]
+  ext n
+  exact mapBifunctorComparisonX_single₂ τ K₁ X₂ n
 
 end CochainComplex
 
@@ -168,6 +182,20 @@ variable {C D : Type*} [Category* C] [Category* D] [Preadditive C] [Preadditive 
     (Discrete (ComplexShape.π (.up ℤ) (.up ℤ) (.up ℤ) ⁻¹' {j})) G]
   (K : CochainComplex C ℤ) (X₂ : C)
 
+/-- For an additive oplax monoidal functor `G`, the comparison morphism
+`G(K ⊗ X₂) ⟶ G(K) ⊗ G(X₂)` induced by `δ` on the tensor product of a cochain complex `K` with
+the single complex `X₂` is, through the identifications `mapBifunctorSingle₂Iso`, the
+degreewise morphism `δ G (K.X n) X₂`. (The tensor product `K ⊗ L` of cochain complexes is
+definitionally `mapBifunctor K L (curriedTensor C) (.up ℤ)`, although not syntactically.) -/
+lemma mapBifunctorComparison_δNatTrans_single₂ :
+    (G.mapHomologicalComplex _).map (mapBifunctorSingle₂Iso (curriedTensor C) X₂ K).inv ≫
+      mapBifunctorComparison (δNatTrans G) (.up ℤ) K ((single C (.up ℤ) 0).obj X₂) ≫
+      mapBifunctorMap (𝟙 _) ((singleMapHomologicalComplex G (.up ℤ) 0).hom.app X₂)
+        (curriedTensor D) (.up ℤ) ≫
+      (mapBifunctorSingle₂Iso (curriedTensor D) (G.obj X₂)
+        ((G.mapHomologicalComplex _).obj K)).hom =
+    (NatTrans.mapHomologicalComplex (δRightNatTrans G X₂) (.up ℤ)).app K :=
+  mapBifunctorComparison_single₂ (δNatTrans G) K X₂
 
 end CochainComplex
 

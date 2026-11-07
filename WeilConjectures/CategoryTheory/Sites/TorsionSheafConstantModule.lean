@@ -87,6 +87,15 @@ lemma constantZModUnit_smul [NeZero N] (M : SheafOfModules.{w} (constantZModShea
     ULift.ext (by rw [ULift.down_natCast, ZMod.natCast_zmod_val])
   rw [this, map_natCast, Nat.cast_smul_eq_nsmul]
 
+/-- A sheaf of `(ℤ/N)_C`-modules is killed by `N`. -/
+lemma nsmul_eq_zero_of_constantZMod (M : SheafOfModules.{w} (constantZModSheaf J N))
+    {U : Cᵒᵖ} (x : M.val.obj U) : N • x = 0 := by
+  have h : (N : ULift.{w} (ZMod N)) = 0 :=
+    ULift.ext (by rw [ULift.down_natCast, ZMod.natCast_self]; rfl)
+  have h' : ((constantZModUnit J N).app U).hom (N : ULift.{w} (ZMod N)) =
+      (N : (constantZModSheaf J N).obj.obj U) := map_natCast _ N
+  rw [← Nat.cast_smul_eq_nsmul (R := (constantZModSheaf J N).obj.obj U), ← h', h, map_zero,
+    zero_smul]
 
 variable [J.WEqualsLocallyBijective RingCat.{w}] [HasWeakSheafify J AddCommGrpCat.{w}]
   [J.WEqualsLocallyBijective AddCommGrpCat.{w}]
@@ -156,5 +165,55 @@ noncomputable def toSheafConstantZModModuleOfNsmulIso (F : Sheaf J AddCommGrpCat
   (PresheafOfModules.sheafificationCompToSheaf (constantZModUnit J N)).app
     (presheafOfModulesOfNsmul F.obj hF) ≪≫ (sheafificationIso F).symm
 
+/-- The essential image of the forgetful functor from sheaves of `(ℤ/N)_C`-modules to abelian
+sheaves consists of the sheaves killed by `N`. -/
+theorem exists_constantZModModule_iff (F : Sheaf J AddCommGrpCat.{w}) :
+    (∃ M : SheafOfModules.{w} (constantZModSheaf J N),
+      Nonempty ((SheafOfModules.toSheaf _).obj M ≅ F)) ↔
+      ∀ (U : Cᵒᵖ) (x : F.obj.obj U), N • x = 0 := by
+  refine ⟨fun ⟨M, ⟨e⟩⟩ U x ↦ ?_, fun hF ↦ ⟨_, ⟨toSheafConstantZModModuleOfNsmulIso F hF⟩⟩⟩
+  obtain ⟨y, rfl⟩ : ∃ y, e.hom.hom.app U y = x :=
+    ⟨e.inv.hom.app U x, by
+      rw [← ConcreteCategory.comp_apply, ← NatTrans.comp_app,
+        ← ObjectProperty.FullSubcategory.comp_hom, e.inv_hom_id]
+      rfl⟩
+  rw [← map_nsmul]
+  exact (congrArg (e.hom.hom.app U)
+    (nsmul_eq_zero_of_constantZMod M (show M.val.obj U from y))).trans (map_zero _)
+
+/-- Blueprint `lem-pur-torsion-sheaf-constant-module`: An abelian sheaf killed by N is a module
+over the constant sheaf Z/N.
+
+Let `J` be a site, `N ≥ 1` and `F` an abelian sheaf killed by `N`. Then:
+
+1. `F` carries a structure of sheaf of `(ℤ/N)_C`-modules with underlying abelian sheaf `F`
+   (an isomorphism `e : M ≅ F` of abelian sheaves), on which the image `η(a)` of a class
+   `a ∈ ℤ/N` acts as multiplication by the representative `a.val` of `a`; it is unique: two such
+   structures `(M, e)`, `(M', e')` are isomorphic by an isomorphism of sheaves of
+   `(ℤ/N)_C`-modules whose underlying morphism is `e ≫ e'⁻¹`;
+2. every morphism of abelian sheaves between sheaves of `(ℤ/N)_C`-modules is
+   `(ℤ/N)_C`-linear.
+
+The action `η(a) • x = a.val • x` holds in every sheaf of `(ℤ/N)_C`-modules
+(`CategoryTheory.Sheaf.constantZModUnit_smul`), so the uniqueness of (1) is uniqueness of the
+module structure. Together with `CategoryTheory.Sheaf.exists_constantZModModule_iff`, (2) says
+that the sheaves of `(ℤ/N)_C`-modules are exactly the abelian sheaves killed by `N`, with the
+same morphisms. -/
+theorem torsionSheaf_constantModule [NeZero N] (F : Sheaf J AddCommGrpCat.{w})
+    (hF : ∀ (U : Cᵒᵖ) (x : F.obj.obj U), N • x = 0) :
+    (∃ (M : SheafOfModules.{w} (constantZModSheaf J N))
+        (_ : (SheafOfModules.toSheaf _).obj M ≅ F),
+        ∀ (U : Cᵒᵖ) (a : ZMod N) (x : M.val.obj U),
+          (constantZModUnit J N).app U ⟨a⟩ • x = a.val • x) ∧
+    (∀ (M M' : SheafOfModules.{w} (constantZModSheaf J N))
+        (e : (SheafOfModules.toSheaf _).obj M ≅ F) (e' : (SheafOfModules.toSheaf _).obj M' ≅ F),
+        ∃ E : M ≅ M', (SheafOfModules.toSheaf _).map E.hom = e.hom ≫ e'.inv) ∧
+    (∀ (M M' : SheafOfModules.{w} (constantZModSheaf J N))
+        (φ : (SheafOfModules.toSheaf _).obj M ⟶ (SheafOfModules.toSheaf _).obj M'),
+        ∃ ψ : M ⟶ M', (SheafOfModules.toSheaf _).map ψ = φ) :=
+  ⟨⟨_, toSheafConstantZModModuleOfNsmulIso F hF, fun _ a x ↦ constantZModUnit_smul _ a x⟩,
+    fun _ _ e e' ↦ ⟨fullyFaithfulToSheafConstantZMod.preimageIso (e ≪≫ e'.symm),
+      fullyFaithfulToSheafConstantZMod.map_preimage _⟩,
+    fun _ _ φ ↦ (SheafOfModules.toSheaf _).map_surjective φ⟩
 
 end CategoryTheory.Sheaf

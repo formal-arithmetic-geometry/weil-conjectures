@@ -72,6 +72,14 @@ lemma isPushout_quotient {R S : CommRingCat.{u}} (φ : R ⟶ S) (K : Ideal R) :
   · ext r
     exact (Algebra.TensorProduct.quotIdealMapEquivTensorQuot_mk S K r).symm
 
+/-- A variant of `CommRingCat.isPushout_quotient` with the extended ideal given up to equality. -/
+lemma isPushout_quotient_of_map_eq {R S : CommRingCat.{u}} (φ : R ⟶ S) (K : Ideal R)
+    {L : Ideal S} (hL : K.map φ.hom = L) :
+    IsPushout (ofHom (Ideal.Quotient.mk K)) φ
+      (ofHom (Ideal.quotientMap L φ.hom (hL ▸ Ideal.le_comap_map)))
+      (ofHom (Ideal.Quotient.mk L)) := by
+  subst hL
+  exact isPushout_quotient φ K
 
 /-- Transporting "the ranges of `a` and `b` generate" along an isomorphism of the target. -/
 lemma closure_range_union_eq_top_of_iso {A B R R' : CommRingCat.{u}}

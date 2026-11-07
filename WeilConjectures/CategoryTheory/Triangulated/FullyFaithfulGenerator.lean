@@ -176,6 +176,12 @@ lemma HomBijective.shift {X Y : C} (h : F.HomBijective X Y) (c : ℤ) :
   exact (Function.Bijective.of_comp_iff _
     ((Functor.FullyFaithful.ofFullyFaithful (shiftFunctor C c)).map_bijective _ _)).1 h₂
 
+/-- If `F` is bijective on the morphisms `X ⟶ Y⟦n⟧` for all `n`, it is bijective on the
+morphisms `X⟦a⟧ ⟶ Y⟦b⟧` for all `a`, `b`. -/
+lemma homBijectiveShifts_of_forall {X Y : C} (h : ∀ n : ℤ, F.HomBijective X (Y⟦n⟧)) :
+    F.HomBijectiveShifts X Y := fun a b ↦
+  ((h (b - a)).shift a).of_iso (Iso.refl _)
+    ((shiftFunctorAdd' C (b - a) a b (by lia)).app Y).symm
 
 end Shift
 

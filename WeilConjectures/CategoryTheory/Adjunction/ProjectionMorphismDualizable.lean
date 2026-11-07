@@ -118,6 +118,23 @@ variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C]
   {D : Type u₂} [Category.{v₂} D] [MonoidalCategory D]
   {F : D ⥤ C} {G : C ⥤ D} (adj : F ⊣ G) [F.Monoidal]
 
+/-- **Künneth maps along a base change with a dualizable first factor.** Let `F ⊣ G` be an
+adjunction with `F` strong monoidal, `Lj ⊣ Rj` an adjunction and `θ : P ⋙ F ≅ Lj ⋙ Q` a natural
+isomorphism whose exchange morphism `Rj ⋙ P ⟶ Q ⋙ G` is an isomorphism. For a dualizable `E`
+and an isomorphism `a : F E ⟶ A₁`, the transpose of
+`F (E ⊗ P Rj K) ⟶ F E ⊗ F P Rj K ⟶ A₁ ⊗ Q Lj Rj K ⟶ A₁ ⊗ Q K` is an isomorphism.
+
+All data are variables, so that the lemma can be instantiated by unification with the
+components of a concrete Künneth map. -/
+lemma isIso_homEquiv_δ_tensorHom_exchangeRight_of_isDualizable {D₂ D₂' : Type*} [Category D₂]
+    [Category D₂'] {Lj : D₂ ⥤ D₂'} {Rj : D₂' ⥤ D₂} (adjj : Lj ⊣ Rj) {P : D₂ ⥤ D}
+    {Q : D₂' ⥤ C} (θ : P ⋙ F ≅ Lj ⋙ Q) {E : D} (hE : IsDualizable E) {A₁ : C}
+    (a : F.obj E ⟶ A₁) (ha : IsIso a) (K : D₂') (hK : IsIso (exchangeRight adjj adj θ)) :
+    IsIso (adj.homEquiv _ _ (Functor.OplaxMonoidal.δ F E (P.obj (Rj.obj K)) ≫
+      (a ⊗ₘ (θ.hom.app (Rj.obj K) ≫ Q.map (adjj.counit.app K))))) := by
+  refine adj.isIso_homEquiv_δ_tensorHom_of_isDualizable hE a ha _ ?_
+  have := homEquiv_hom_app_comp_map_counit adjj adj θ K
+  exact this ▸ NatIso.isIso_app_of_isIso _ K
 
 end CategoryTheory.Adjunction
 
@@ -134,6 +151,12 @@ lemma projectionMorphism_eq_rightAdjointProjectionMap (A : C) (B : D) :
       ((adj.rightAdjointProjectionMap (Functor.OplaxMonoidal.δNatTrans F)).app A).app B :=
   rfl
 
+/-- For a strong monoidal left adjoint `F ⊣ G` and an object `B` with a left dual `B'`, the
+projection morphism `G A ⊗ B ⟶ G (A ⊗ F B)` is an isomorphism. -/
+lemma isIso_projectionMorphism_of_exactPairing (B' B : D) [ExactPairing B' B] (A : C) :
+    IsIso (adj.projectionMorphism A B) := by
+  rw [projectionMorphism_eq_rightAdjointProjectionMap]
+  exact adj.isIso_rightAdjointProjectionMap_app_app_of_exactPairing _ (fun _ _ ↦ rfl) A B' B
 
 /-- For a strong monoidal left adjoint `F ⊣ G` and a dualizable object `B` of a braided
 category, the projection morphism `G A ⊗ B ⟶ G (A ⊗ F B)` is an isomorphism. -/

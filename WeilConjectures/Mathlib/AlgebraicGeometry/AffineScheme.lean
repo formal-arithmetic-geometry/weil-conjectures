@@ -172,6 +172,19 @@ theorem exists_finite_basicOpen_cover_le_preimage_isAffineOpen
   obtain ⟨b, hb, hv⟩ := Set.mem_iUnion₂.mp (htcov (Set.mem_univ v))
   exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨b, hb⟩, hv⟩
 
+/-- The version of `AlgebraicGeometry.exists_finite_basicOpen_cover_le_preimage_isAffineOpen`
+phrased via the span of the chosen sections: the sections `b l` generate the unit ideal of
+`Γ(V, ⊤)`. -/
+theorem exists_finite_span_range_eq_top_le_preimage_isAffineOpen
+    {V S : Scheme.{u}} [IsAffine V] (g : V ⟶ S) :
+    ∃ (Λ : Type u) (_ : Finite Λ) (b : Λ → Γ(V, ⊤)) (W : Λ → S.Opens),
+      (∀ l, IsAffineOpen (W l)) ∧
+      (∀ l, V.basicOpen (b l) ≤ g ⁻¹ᵁ W l) ∧
+      Ideal.span (Set.range b) = ⊤ := by
+  obtain ⟨Λ, hΛ, b, W, hW, hWle, hcov⟩ := exists_finite_basicOpen_cover_le_preimage_isAffineOpen g
+  refine ⟨Λ, hΛ, b, W, hW, hWle, ?_⟩
+  rw [← (isAffineOpen_top V).iSup_basicOpen_eq_self_iff, iSup_range']
+  exact hcov
 
 /-- A quasi-compact open contained in an affine open `V` of a scheme is a finite union of
 basic opens of sections over `V`. -/
@@ -257,6 +270,32 @@ theorem isAffine_of_isOpenImmersion_of_isPrincipalIdealRing {X : Scheme.{u}}
   have : IsAffine f.opensRange := isAffineOpen_of_isPrincipalIdealRing f.opensRange
   .of_isIso f.isoOpensRange.hom
 
+/-- Let `a : T ⟶ U` be a morphism to an affine scheme `U` such that `Γ(U, ⊤) ⟶ Γ(T, ⊤)` is an
+isomorphism. Then every morphism `φ : T ⟶ V` to an affine scheme `V` factors through `a`:
+```
+T ---a---> U
+  \        |
+   φ       h
+    \      |
+     ↘     ↓
+           V
+```
+with `a ≫ h = φ`. Together with `Scheme.Hom.cancel_left_of_isIso_appTop`, this says that `a` is
+universal among morphisms from `T` to affine schemes. -/
+lemma Scheme.Hom.exists_comp_eq_of_isIso_appTop {T U V : Scheme.{u}} [IsAffine U] [IsAffine V]
+    (a : T ⟶ U) [IsIso a.appTop] (φ : T ⟶ V) : ∃ h : U ⟶ V, a ≫ h = φ := by
+  refine ⟨U.isoSpec.hom ≫ Spec.map (φ.appTop ≫ inv a.appTop) ≫ V.isoSpec.inv, ?_⟩
+  rw [Scheme.isoSpec_hom, Scheme.toSpecΓ_naturality_assoc, ← Spec.map_comp_assoc,
+    Category.assoc, IsIso.inv_hom_id, Category.comp_id, ← Scheme.toSpecΓ_naturality_assoc,
+    ← Scheme.isoSpec_hom, Iso.hom_inv_id, Category.comp_id]
+
+/-- Let `a : T ⟶ U` be a morphism such that `Γ(U, ⊤) ⟶ Γ(T, ⊤)` is an isomorphism. Then two
+morphisms `U ⟶ V` to an affine scheme `V` agreeing after precomposition with `a` are equal.
+Here `U` need not be affine. -/
+lemma Scheme.Hom.cancel_left_of_isIso_appTop {T U V : Scheme.{u}} [IsAffine V]
+    (a : T ⟶ U) [IsIso a.appTop] {h₁ h₂ : U ⟶ V} (e : a ≫ h₁ = a ≫ h₂) : h₁ = h₂ :=
+  ext_of_isAffine <| by
+    rw [← cancel_mono a.appTop, ← Scheme.Hom.comp_appTop, e, Scheme.Hom.comp_appTop]
 
 /-- **Prime avoidance in `Spec R`.** A finite set of points of an open subset `O` of
 `PrimeSpectrum R` is contained in a basic open `D(r) ⊆ O`. -/

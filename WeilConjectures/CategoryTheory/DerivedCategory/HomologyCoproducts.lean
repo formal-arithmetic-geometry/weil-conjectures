@@ -81,6 +81,36 @@ noncomputable def homologyElementOfHom (adj : L ⊣ G) {X : DerivedCategory C}
     G.obj ((homologyFunctor C 0).obj X) :=
   (adj.homEquiv _ _ (singleFunctorZeroHomEquiv _ X φ)).hom 1
 
+lemma homologyElementOfHom_comp (adj : L ⊣ G) {X X' : DerivedCategory C}
+    (φ : (singleFunctor C 0).obj (L.obj (ModuleCat.of R R)) ⟶ X) (f : X ⟶ X') :
+    homologyElementOfHom adj (φ ≫ f) =
+      G.map ((homologyFunctor C 0).map f) (homologyElementOfHom adj φ) := by
+  simp [homologyElementOfHom, Adjunction.homEquiv_naturality_right]
+
+lemma eq_zero_of_homologyElementOfHom_eq_zero (adj : L ⊣ G) [G.PreservesZeroMorphisms]
+    {X : DerivedCategory C} (φ : (singleFunctor C 0).obj (L.obj (ModuleCat.of R R)) ⟶ X)
+    (h : homologyElementOfHom adj φ = 0) : φ = 0 := by
+  have h₁ : adj.homEquiv _ _ (singleFunctorZeroHomEquiv _ X φ) = 0 :=
+    ModuleCat.hom_ext (LinearMap.ext_ring h)
+  have h₂ : singleFunctorZeroHomEquiv _ X φ = 0 :=
+    (adj.homEquiv _ _).injective (h₁.trans (by simp [Adjunction.homEquiv_unit]))
+  exact (singleFunctorZeroHomEquiv _ X).injective (h₂.trans (by simp))
+
+/-- Let `L ⊣ G` be an adjunction with `G : C ⥤ ModuleCat R` preserving coproducts of shape `β`
+and `P = L(R)` projective. For a coproduct `c` of a family `Y` in the derived category and
+morphisms `π j : c.pt ⟶ Y j` with `c.inj i ≫ π j = 0` for `i ≠ j`, every morphism
+`φ : P[0] ⟶ c.pt` satisfies `φ ≫ π j = 0` for all but finitely many `j`. -/
+lemma exists_finset_forall_comp_eq_zero [Abelian.HasKInjectiveResolutions C]
+    [HasColimitsOfShape (Discrete β) C] [HasExactColimitsOfShape (Discrete β) C] (adj : L ⊣ G)
+    [G.PreservesZeroMorphisms] [PreservesColimitsOfShape (Discrete β) G]
+    {Y : β → DerivedCategory C} {c : Cofan Y}
+    (hc : IsColimit c) (π : ∀ j, c.pt ⟶ Y j) (hπ : ∀ i j, i ≠ j → c.inj i ≫ π j = 0)
+    (φ : (singleFunctor C 0).obj (L.obj (ModuleCat.of R R)) ⟶ c.pt) :
+    ∃ S : Finset β, ∀ j ∉ S, φ ≫ π j = 0 := by
+  obtain ⟨S, hS⟩ := ModuleCat.exists_finset_forall_map_apply_eq_zero
+    (homologyFunctor C 0 ⋙ G) hc π hπ (homologyElementOfHom adj φ)
+  exact ⟨S, fun j hj ↦ eq_zero_of_homologyElementOfHom_eq_zero adj _
+    ((homologyElementOfHom_comp adj φ (π j)).trans (hS j hj))⟩
 
 section SigmaComparison
 

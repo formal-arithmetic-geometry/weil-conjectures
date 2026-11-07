@@ -207,6 +207,12 @@ variable [HasDerivedCategory.{w} (Modules.{c, v, u} J R)]
 local instance : MonoidalCategory (DerivedCategory (Modules.{c, v, u} J R)) :=
   monoidal.{c, v, u, w} J R
 
+omit [HasDerivedCategory.{w} (Modules.{c, v, u} J R)] in
+/-- The native complex tensor is precisely the recorded total tensor.
+Source: Stacks Project, Tag 06YN. -/
+theorem totalTensor_eq (P L : CochainComplex (Modules.{c, v, u} J R) ℤ) :
+    (coefficientTotalTensor.{u, c, v} J R).obj (P, L) = P ⊗ L := by
+  rfl
 
 omit [HasDerivedCategory.{w} (Modules.{c, v, u} J R)] in
 local instance : (DerivedCategory.Q : CochainComplex (Modules.{c, v, u} J R) ℤ ⥤

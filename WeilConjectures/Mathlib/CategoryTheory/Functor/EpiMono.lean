@@ -20,6 +20,12 @@ namespace CategoryTheory.Functor
 
 variable {C D E : Type*} [Category* C] [Category* D] [Category* E]
 
+/-- If `s` is an isomorphism and `Φ.map (H.map τ)` is a monomorphism, so is
+`Φ.map (H.map (τ ≫ s))`. -/
+lemma mono_map_map_comp_of_isIso (H : C ⥤ D) (Φ : D ⥤ E) {a b c : C} (τ : a ⟶ b) (s : b ⟶ c)
+    [IsIso s] (hτ : Mono (Φ.map (H.map τ))) : Mono (Φ.map (H.map (τ ≫ s))) := by
+  rw [H.map_comp, Φ.map_comp]
+  infer_instance
 
 /-- If `s` and `t` are isomorphisms and `Φ.map τ` is a monomorphism, so is
 `Φ.map (τ ≫ H.map s) ≫ Φ.map (H.map t)`. -/

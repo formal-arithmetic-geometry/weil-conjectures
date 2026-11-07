@@ -179,6 +179,15 @@ lemma exists_iso_isNormalizedAdicTower :
   have : IsIso α := NatIso.isIso_of_isIso_app _
   exact ⟨T, asIso α, hT⟩
 
+include hϖ hI hK in
+/-- Levelwise reduction: the realization `K_R = R lim_n K_n` of a normalized tower (the point of a
+homotopy limit cone `c`) reduces to the given levels, `K_R ⊗ᴸ_R R ⧸ Iⁿ ≅ K_n`, compatibly with the
+transitions, the legs `K_R ⟶ K_n` of `c` being the reduction maps followed by these isomorphisms. -/
+theorem exists_derivedCompletionDiagram_iso {c : Cone K} (hc : IsHomotopyLimit c) :
+    ∃ e : derivedCompletionDiagram J I c.pt ≅ K, ∀ n : ℕ,
+      c.π.app (op n) = (derivedCompletionCone J I c.pt).π.app (op n) ≫ e.hom.app (op n) := by
+  obtain ⟨T, E, hT⟩ := hK.exists_iso_isNormalizedAdicTower hϖ hI
+  exact exists_derivedCompletionDiagram_iso_of_iso_isNormalizedAdicTower hϖ hI hT E hc
 
 include hϖ hI hK in
 /-- Derived completeness: the realization `K_R = R lim_n K_n` of a normalized tower is derived
@@ -187,6 +196,13 @@ theorem derivedComplete {c : Cone K} (hc : IsHomotopyLimit c) : derivedComplete 
   obtain ⟨T, E, hT⟩ := hK.exists_iso_isNormalizedAdicTower hϖ hI
   exact derivedComplete_of_iso_isNormalizedAdicTower hϖ hI hT E hc
 
+include hϖ hI hK in
+/-- The transitions `K_{n+1} ⟶ K_n` of a normalized tower whose first level `K_1` lies in
+degrees `≤ b` are surjective on `H^b`. -/
+lemma epi_homologyFunctor_map (b : ℤ) (hb : (K.obj (op 1)).IsLE b) (n : ℕ) :
+    Epi ((homologyFunctor _ b).map (K.map (homOfLE n.le_succ).op)) := by
+  obtain ⟨T, E, hT⟩ := hK.exists_iso_isNormalizedAdicTower hϖ hI
+  exact epi_homologyFunctor_map_of_iso_isNormalizedAdicTower hT E b hb n
 
 end IsNormalizedTower
 
