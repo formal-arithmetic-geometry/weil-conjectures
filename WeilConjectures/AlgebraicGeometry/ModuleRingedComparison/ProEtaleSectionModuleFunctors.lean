@@ -168,7 +168,6 @@ private theorem mapMod_tensorπ_delta {X Y : Scheme.{u}} (f : X ⟶ Y)
   rw [Category.assoc, F.tensorπ_mapModTensorIso_hom_hom M N, ← Category.assoc,
     Functor.Monoidal.δ_μ, Category.id_comp]
 
-set_option maxHeartbeats 600000 in
 -- The scalar-extension and tensor comparison instances involve large coefficient types.
 private theorem upperStar_tensorπ_delta {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M N : internalModules Λ Y) :
@@ -286,7 +285,6 @@ private theorem tensorπ_natural {C : Type*} [Category C] [MonoidalCategory C]
     Mod.tensorObjπ_whiskerRight_assoc, Mod.tensorObjπ_whiskerLeft, ← Category.assoc,
     ← MonoidalCategory.tensorHom_def]
 
-set_option maxHeartbeats 600000 in
 -- The comparison expands scalar extension only in this underlying-sheaf calculation.
 private theorem canonical_projection {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M N : internalModules Λ X) :
@@ -815,7 +813,6 @@ private theorem total_preserves
 attribute [local instance 4000] total_preserves
 
 set_option backward.isDefEq.respectTransparency true in
-set_option maxHeartbeats 600000 in
 -- The concrete total tensors carry large category and universe instances.
 /-- Extension by zero is additive, since all its three specified factors are additive.
 Source: Stacks 03DJ (blueprint: def-pd-proetale-section-module-functors).
