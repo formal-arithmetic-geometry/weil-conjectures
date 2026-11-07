@@ -98,7 +98,6 @@ theorem exactFunctor_resolution_cocycle_hom
       InjectiveResolution.ι'_f_zero, Functor.map_comp, Category.assoc]
     simp only [Functor.mapCochainComplexSingleFunctor,
       HomologicalComplex.singleMapHomologicalComplex, CochainComplex.singleFunctor,
-
       HomologicalComplex.singleObjXSelf, HomologicalComplex.singleObjXIsoOfEq,
       HomologicalComplex.single_map_f_self, Category.assoc,
       Functor.comp_obj, Int.cast_ofNat_Int, Iso.inv_hom_id_map_assoc,
@@ -148,7 +147,6 @@ theorem exactFunctor_resolution_cocycle_hom
     apply HomologicalComplex.from_single_hom_ext
     dsimp [ShiftedHom.map]
     simp only [CochainComplex.singleFunctor, Functor.comp_obj,
-
       HomologicalComplex.singleObjXSelf,
       HomologicalComplex.singleObjXIsoOfEq, eqToIso_refl, Iso.refl_hom,
       Category.id_comp, Functor.mapCochainComplexSingleFunctor,
