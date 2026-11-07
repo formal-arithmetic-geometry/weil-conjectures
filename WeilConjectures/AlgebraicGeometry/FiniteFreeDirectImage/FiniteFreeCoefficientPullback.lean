@@ -247,7 +247,7 @@ private def transportedCoefficientBasis {Z W : Scheme.{u}} {q : Z ⟶ W}
           (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S.target)) ≪≫
     (proEtaleRingRestrictScalars a.source).mapIso (pullbackRegularIso S)
 
-set_option maxHeartbeats 2000000 in
+set_option maxHeartbeats 700000 in
 -- The expanded finite-product and coefficient transports require extra elaboration heartbeats.
 private theorem transportedCoefficientBasis_coordinate {Z W : Scheme.{u}} {q : Z ⟶ W}
     (R S : Coefficients q) (a : CoefficientMap R S) (d : ℕ)
