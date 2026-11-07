@@ -114,7 +114,7 @@ empty schemes obey the same composition equations.
 Source: Stacks Project, Tag 0DJ8, affine reduction; Tag 0D5S, composition of
 pullbacks and compatibility of the derived counits.
 (blueprint: lem-pc-affine-spectrum-representative-map). -/
-private theorem affineSpectrum_representative_map_eq
+private theorem affineSpectrum_representative_map_eq_private
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     {X X' : Scheme.{u}} [IsAffine X] [IsAffine X']
@@ -196,4 +196,9 @@ private theorem affineSpectrum_representative_map_eq
     (counit_naturality_complex X'.isoSpec.inv c.t).symm
 
 
+end AlgebraicGeometry.SingleComplexBaseChange
+
+namespace AlgebraicGeometry.SingleComplexBaseChange
+/-- Public export of the private `affineSpectrum_representative_map_eq_private` (used by `import all` importers; linter.privateModule). -/
+alias affineSpectrum_representative_map_eq := affineSpectrum_representative_map_eq_private
 end AlgebraicGeometry.SingleComplexBaseChange

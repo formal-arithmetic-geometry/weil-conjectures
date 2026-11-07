@@ -9,7 +9,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.PerfectComplexClassesSmallOnOpen
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisTriangle
-import WeilConjectures.AlgebraicGeometry.PerfectComplexClassesSmallGluingCore
+import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Gluing smallness of perfect isomorphism classes
 

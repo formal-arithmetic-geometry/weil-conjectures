@@ -127,7 +127,7 @@ The pinned composition comparisons are defined by the same derived counits, so
 the transposed equality descends to the displayed equality. There is no need to
 invert the counit on K and no flatness hypothesis. An empty cover forces X empty,
 and the same construction uses the zero complexes. -/
-private theorem affineAlternatingCech_pinned_mate
+private theorem affineAlternatingCech_pinned_mate_private
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     {A B : CommRingCat.{u}} {X : Scheme.{u}} (f : X ⟶ Spec A)
@@ -234,4 +234,9 @@ private theorem affineAlternatingCech_pinned_mate
     (QY.mapIso sh) (δp.app M) (δp.app D) (δg.app (Fh.obj D)) (δg.app _)
     (bc (QX.obj M)) (bc (QX.obj D)) hn hp hu hg
 
+end AlgebraicGeometry
+
+namespace AlgebraicGeometry
+/-- Public export of the private `affineAlternatingCech_pinned_mate_private` (used by `import all` importers; linter.privateModule). -/
+alias affineAlternatingCech_pinned_mate := affineAlternatingCech_pinned_mate_private
 end AlgebraicGeometry

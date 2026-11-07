@@ -7,7 +7,14 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicConstantNormalization
 public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicStalkModels
-import WeilConjectures.AlgebraicGeometry.Finite.Ring.FiniteRingConstructibleDerivedOrigin
+import WeilConjectures.AlgebraicGeometry.ProEtale.Finite.ProEtaleFiniteModuleIntrinsicComparison
+import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
+import WeilConjectures.AlgebraicGeometry.DerivedCategories
+import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
+import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import WeilConjectures.AlgebraicGeometry.ProEtale.Constructible.ProEtaleConstructibleSheaf
+import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
 /-! # Consecutive normalized arrows for actual finite levels
 

@@ -8,8 +8,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coeffici
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.CoefficientScalarTensorRepresentativeEquation
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.CoefficientScalarTensorRepresentativeHypotheses
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.CoefficientScalarTensorRepresentativeInternal
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.CoefficientScalarTensorRepresentativeTransport
-
 /-! # Tensor representatives under coefficient scalar reconstruction
 
 Source: Stacks Project, Tags 03EK, 03EL, 06YY, 07A4 and 07A6;

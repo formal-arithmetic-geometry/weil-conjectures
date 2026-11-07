@@ -188,7 +188,7 @@ composition identify the rest. In degree zero both paths are the same tensor
 restriction map; in every other degree the maps are between zero objects.
 Apply the homotopy quotient and Qh and reassociate. The identities use only
 additive tensor pullback and exact restriction, without any derived counit. -/
-private theorem open_pinned_single_tensor_restriction_factors
+private theorem open_pinned_single_tensor_restriction_factors_private
     [∀ Y : Scheme.{u}, HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     [∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z), (Scheme.Modules.tensorPullback k).Additive]
@@ -238,4 +238,9 @@ private theorem open_pinned_single_tensor_restriction_factors
       (schemeOpenRestriction X' U') (schemeOpenRestriction X U)
       (Scheme.Modules.tensorPullback j) (openPinnedTensorRestrictionIso k U U' j hj) M
 
+end AlgebraicGeometry
+
+namespace AlgebraicGeometry
+/-- Public export of the private `open_pinned_single_tensor_restriction_factors_private` (used by `import all` importers; linter.privateModule). -/
+alias open_pinned_single_tensor_restriction_factors := open_pinned_single_tensor_restriction_factors_private
 end AlgebraicGeometry

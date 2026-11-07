@@ -69,7 +69,6 @@ import Mathlib.Algebra.Category.Grp.Colimits
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 import WeilConjectures.CategoryTheory.SitePullbackAbelianUnderlying
 
-import WeilConjectures.AlgebraicGeometry.Native.NativeIntegralTateTowerLimit
 import all WeilConjectures.AlgebraicGeometry.ProEtale.Finite.ProEtaleFiniteScalarRestrictionConstructible
 import all WeilConjectures.AlgebraicGeometry.SmoothPurity.RootsOfUnityInverseImageIso
 import all WeilConjectures.AlgebraicGeometry.ProEtaleModuleInverseImageCanonicalUnit

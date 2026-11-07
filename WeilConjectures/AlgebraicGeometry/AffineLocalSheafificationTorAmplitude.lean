@@ -37,7 +37,7 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 
 namespace AlgebraicGeometry.Scheme
 
-private noncomputable def affine_cancel (S : Scheme.{u}) (U : S.Opens) (hU : IsAffineOpen U) :
+noncomputable def affine_cancel (S : Scheme.{u}) (U : S.Opens) (hU : IsAffineOpen U) :
     affinePerfectSheafification S U hU ⋙ (Modules.overEquiv U).functor ⋙
       Modules.restrictFunctor hU.isoSpec.inv ≅ tilde.functor (S.presheaf.obj (.op U)) := by
   let T := tilde.functor (S.presheaf.obj (.op U))

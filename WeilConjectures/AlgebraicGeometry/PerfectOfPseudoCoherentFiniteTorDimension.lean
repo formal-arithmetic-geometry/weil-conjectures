@@ -46,7 +46,7 @@ private theorem affine_free_iso (S : Scheme.{uP}) (U : S.Opens)
     (U.sheafOfModulesEquivOverInverseUnit S.ringCatSheaf).symm).symm
   exact ⟨G.mapIso (F.mapIso (tildeFinsupp (R := R) (ULift.{uP} (Fin m))) ≪≫ eF) ≪≫ eG⟩
 
-private theorem affine_finiteFree_model (S : Scheme.{uP}) (U : S.Opens)
+private theorem affine_finiteFree_model_private (S : Scheme.{uP}) (U : S.Opens)
     (hU : IsAffineOpen U)
     (P : CochainComplex
       (SheafOfModules.{uP} ((moduleRings S.toRingedSpace).over U)) ℤ)
@@ -109,7 +109,7 @@ private theorem affine_finiteFree_model (S : Scheme.{uP}) (U : S.Opens)
   exact ((ei i).isZero_iff.mpr (hb i hi)).eq_of_src _ _
 
 set_option backward.isDefEq.respectTransparency false in
-private theorem affine_projective_strictlyPerfect (S : Scheme.{uP}) (U : S.Opens)
+private theorem affine_projective_strictlyPerfect_private (S : Scheme.{uP}) (U : S.Opens)
     (hU : IsAffineOpen U)
     (P : CochainComplex (ModuleCat.{uP} (S.presheaf.obj (.op U))) ℤ)
     (hb : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → Limits.IsZero (P.X n))
@@ -140,4 +140,14 @@ private theorem affine_projective_strictlyPerfect (S : Scheme.{uP}) (U : S.Opens
     simp only [Category.assoc, Iso.hom_inv_id_assoc, ← F.map_comp]
     rw [hsplit, F.map_id]
 
+end AlgebraicGeometry.Scheme
+
+namespace AlgebraicGeometry.Scheme
+/-- Public export of the private `affine_finiteFree_model_private` (used by `import all` importers; linter.privateModule). -/
+alias affine_finiteFree_model := affine_finiteFree_model_private
+end AlgebraicGeometry.Scheme
+
+namespace AlgebraicGeometry.Scheme
+/-- Public export of the private `affine_projective_strictlyPerfect_private` (used by `import all` importers; linter.privateModule). -/
+alias affine_projective_strictlyPerfect := affine_projective_strictlyPerfect_private
 end AlgebraicGeometry.Scheme

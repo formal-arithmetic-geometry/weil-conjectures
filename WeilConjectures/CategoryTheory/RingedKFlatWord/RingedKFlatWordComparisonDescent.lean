@@ -19,7 +19,8 @@ public import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
 public import Mathlib.CategoryTheory.Limits.EssentiallySmall
 public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
-import WeilConjectures.Algebra.Homology.PullbackTensorResolving.PullbackTensorResolvingComputation
+import WeilConjectures.Algebra.Homology.KFlatFixedTensor.KFlatFixedTensorTriangulatedSupplement
+import WeilConjectures.AlgebraicGeometry.PullbackTensorResolvingComputation
 public import WeilConjectures.SecSmoothPurity.CochainTensorCoherenceDataSupplement
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses

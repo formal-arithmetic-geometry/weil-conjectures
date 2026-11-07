@@ -31,7 +31,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- Transport a chosen localization along an exact equivalence of abelian categories.
 This is the localization construction in `SchemeIsoDerivedLocalizations`, specialized
 to the module-sheaf universe; its helper there is private. -/
-private theorem hasDerivedCategory_of_equivalence {C D : Type (u + 1)}
+private theorem hasDerivedCategory_of_equivalence_private {C D : Type (u + 1)}
     [Category.{u} C] [Category.{u} D] [Abelian C] [Abelian D]
     (e : C ≌ D) [HasDerivedCategory.{w} D] : Nonempty (HasDerivedCategory.{w} C) := by
   have : e.functor.Additive := Functor.additive_of_preserves_binary_products _
@@ -58,4 +58,9 @@ private theorem hasDerivedCategory_of_equivalence {C D : Type (u + 1)}
         Functor.isoWhiskerRight eC.counitIso _ ≪≫ Functor.leftUnitor _
   exact ⟨{ D := DerivedCategory D, L := L }⟩
 
+end AlgebraicGeometry.Scheme
+
+namespace AlgebraicGeometry.Scheme
+/-- Public export of the private `hasDerivedCategory_of_equivalence_private` (used by `import all` importers; linter.privateModule). -/
+alias hasDerivedCategory_of_equivalence := hasDerivedCategory_of_equivalence_private
 end AlgebraicGeometry.Scheme
