@@ -386,7 +386,7 @@ section TensorPairing
 
 universe uC vC uD vD r
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- Construct and sheafify the sectionwise bilinear pairing.
 /-- Pair two maps into module pushforwards, then use the sectionwise tensor universal
 property and module sheafification. The uniqueness is the same universal property.
@@ -965,7 +965,6 @@ private theorem setComp_map_units {X Y Z : Scheme.{u}} (g : X ⟶ Y) (h : Y ⟶ 
           (ConcreteCategory.congr_hom
             (congrArg (fun z ↦ z.hom.app (op W)) hu).symm (ηh.hom.app (op V) s)))))
 
-set_option maxHeartbeats 800000 in
 -- Elaborate the semilinear actions on the iterated pullback.
 /-- The module compositor is uniquely fixed by the images of original sections,
 with the canonical fibre-product associator written explicitly.
@@ -1165,7 +1164,6 @@ private theorem ringId_unit {X : Scheme.{u}} (R : Rings X)
 -- Use the unit equation of the identity ring comparison.
 attribute [local irreducible] ringId
 
-set_option maxHeartbeats 800000 in
 -- Elaborate the identity scalar transport through the adjunction unit.
 /-- The module identity comparison is uniquely normalized by the identity unit.
 Source: Stacks, Tags 00VE and 03D2; the last sentence of clause 3
