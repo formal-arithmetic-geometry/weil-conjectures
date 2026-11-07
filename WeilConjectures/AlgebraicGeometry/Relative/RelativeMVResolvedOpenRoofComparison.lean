@@ -70,7 +70,6 @@ set_option cleanup.letToHave false
 attribute [local irreducible] Functor.rightDerivedFunctor
   Functor.rightDerivedFunctorUnit DerivedCategory.Qh
 set_option linter.all false in
-set_option maxHeartbeats 800000 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 private theorem global_arrow_transpose
@@ -124,7 +123,6 @@ attribute [local instance] openImage_isKInjective
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-set_option maxHeartbeats 1000000 in
 -- Normalization of the composed derived and open functors needs extra heartbeats.
 private theorem open_resolution_numerator
     [∀ Z : Scheme.{u},
@@ -156,7 +154,7 @@ private theorem open_resolution_numerator
     Functor.mapIso_inv, H, Functor.map_comp, Category.assoc, Iso.hom_inv_id, Category.comp_id]
     using hh
 
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 500000 in
 -- Normalization of the composed derived and open functors needs extra heartbeats.
 private theorem open_resolution_denominator_intersection
     [∀ Z : Scheme.{u},
@@ -210,7 +208,6 @@ private theorem open_resolution_denominator_intersection
     (schemeOpenModuleImageComplex X' W' J)]
   exact hh
 
-set_option maxHeartbeats 1000000 in
 -- Normalization of the composed derived and open functors needs extra heartbeats.
 private theorem open_resolution_denominator
     [∀ Z : Scheme.{u},
@@ -254,7 +251,7 @@ private theorem open_resolution_denominator
   exact Eq.mp (congrArg P (inf_idem W))
     (open_resolution_denominator_intersection g' K' s hs W W)
 
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 400000 in
 -- Normalization of the composed derived and open functors needs extra heartbeats.
 /-- A normalized direct-image roof on one open realizes the prescribed local
 base-change arrow. Source: Stacks Project, Tags 08BV, 08FE, 08HY and 0D5T.
