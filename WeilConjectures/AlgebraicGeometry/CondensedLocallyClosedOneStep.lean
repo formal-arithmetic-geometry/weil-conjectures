@@ -26,7 +26,6 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
 set_option backward.isDefEq.respectTransparency true in
-set_option maxHeartbeats 800000 in
 -- Recollement carries several nested exact-functor instance witnesses.
 /-- A constructible sheaf is a single locally closed piece, or an extension by a
 constructible sheaf supported on a proper closed subscheme.

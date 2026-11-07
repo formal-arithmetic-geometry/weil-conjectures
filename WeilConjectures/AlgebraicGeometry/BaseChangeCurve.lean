@@ -84,7 +84,7 @@ theorem baseChange_curve {k k' : Type u} {C : Scheme.{u}} [Field k] [Field k'] [
     infer_instance
   · intro hf
     let : IsConnectedCurve f := hf
-    let : ConnectedSpace C := IsConnectedCurve.connectedSpace' f
+    let : ConnectedSpace C := IsConnectedCurve.connectedSpace (f := f)
     let : GeometricallyConnected f :=
       GeometricallyConnected.of_connectedSpace_of_isSepClosed f
     exact

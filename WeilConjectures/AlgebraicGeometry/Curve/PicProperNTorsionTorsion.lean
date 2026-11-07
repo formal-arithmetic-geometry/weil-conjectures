@@ -83,7 +83,7 @@ theorem Scheme.Hom.pic_proper_ntorsion_torsion
     intro h
     exact _hn (by simp [h])
   let : C.Over (Spec (.of k)) := ⟨f⟩
-  have : ConnectedSpace C := IsConnectedCurve.connectedSpace' f
+  have : ConnectedSpace C := IsConnectedCurve.connectedSpace (f := f)
   have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian f
   have : IsRegular C := IsRegular.of_smooth f
   have : IrreducibleSpace C := IsRegular.irreducibleSpace C
@@ -96,7 +96,7 @@ theorem Scheme.Hom.pic_proper_ntorsion_torsion
     GeometricallyConnected.of_connectedSpace_of_isSepClosed f
   have : GeometricallyIrreducible f :=
     GeometricallyIrreducible.of_smooth_of_geometricallyConnected f
-  have : GeometricallyReduced f := GeometricallyReduced.of_smooth f
+  have : GeometricallyReduced f := Smooth.geometricallyReduced f
   have : GeometricallyIntegral f :=
     GeometricallyIntegral.of_geometricallyReduced_of_geometricallyIrreducible f
   have : GeometricallyIntegral (C ↘ Spec (.of k)) := ‹GeometricallyIntegral f›

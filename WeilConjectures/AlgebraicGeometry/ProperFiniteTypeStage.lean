@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.Order.Interval.Set.Basic
 public import Mathlib.Order.Interval.Set.Final
 public import WeilConjectures.AlgebraicGeometry.GeometricFibreDimension
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.FilteredColimits
@@ -86,8 +87,6 @@ theorem Scheme.exists_isProper_isPullback_of_isLimit [IsDirectedOrder I] [Nonemp
   exact H
 
 variable (D) (l : I) {Y₀ : Scheme.{u}} (p : Y₀ ⟶ D.obj (op l))
-
-instance (l : I) : Nonempty (Set.Ici l) := ⟨⟨l, le_rfl⟩⟩
 
 instance [IsDirectedOrder I] (l : I) : IsDirectedOrder (Set.Ici l) where
   directed i j := by

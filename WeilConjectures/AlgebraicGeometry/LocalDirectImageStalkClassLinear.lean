@@ -24,7 +24,7 @@ noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance] Scheme.Modules.enoughInjectives
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 700000 in
 -- Elaborating the nested derived, forgetful and evaluation comparisons needs a larger limit.
 private theorem resolution_top_smul {Z S : Scheme.{u}} (h : Z ⟶ S)
     {G : Z.Modules} (K : InjectiveResolution G) (p : ℕ)

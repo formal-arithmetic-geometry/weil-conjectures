@@ -28,7 +28,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 600000 in
 -- The explicit base-change construction needs a larger reduction budget.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

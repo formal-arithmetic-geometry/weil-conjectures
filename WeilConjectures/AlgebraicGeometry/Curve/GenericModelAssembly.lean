@@ -120,7 +120,7 @@ theorem isGenericCurveModel_morphismRestrict {S₀ X₀ : Scheme.{u}} [IsIntegra
     exact smoothOfRelativeDimension_of_isPullback hj' hq (d a)
   have hred (a : ι) : IsReduced (Y' a) := by
     have := SmoothOfRelativeDimension.smooth (d a) (p' a ≫ F')
-    have := GeometricallyReduced.of_smooth (p' a ≫ F')
+    have := Smooth.geometricallyReduced (p' a ≫ F')
     exact GeometricallyReduced.isReduced_of_flat_of_isLocallyNoetherian (p' a ≫ F')
   have : ∀ i, IsReduced ((sigmaOpenCover Y').X i) := fun i ↦ hred i
   have : IsReduced (∐ Y') := IsReduced.of_openCover (𝒰 := sigmaOpenCover Y')

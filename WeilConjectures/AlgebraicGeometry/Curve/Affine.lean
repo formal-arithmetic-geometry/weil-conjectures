@@ -125,7 +125,7 @@ theorem finite_units_quotient (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smo
   obtain ⟨c, hZ, hsm, hfin, hcl⟩ := IsConnectedCurve.exists_smooth_properCompactification f
   have := c.isProper
   have := c.isOpenImmersion
-  have := IsConnectedCurve.connectedSpace' c.g
+  have := IsConnectedCurve.connectedSpace (f := c.g)
   have := IsConnectedCurve.nonempty f
   have : IsLocallyNoetherian c.Z := LocallyOfFiniteType.isLocallyNoetherian c.g
   have : IsRegular c.Z := IsRegular.of_smooth c.g
@@ -260,8 +260,8 @@ theorem exists_addEquiv_pic_quotient (f : C ⟶ Spec (.of k)) [IsConnectedCurve 
   -- `C̄ = c.Z` and `C` are noetherian integral curves
   let : c.Z.Over (Spec (.of k)) := ⟨c.g⟩
   let : C.Over (Spec (.of k)) := ⟨f⟩
-  have := IsConnectedCurve.connectedSpace' c.g
-  have := IsConnectedCurve.connectedSpace' f
+  have := IsConnectedCurve.connectedSpace (f := c.g)
+  have := IsConnectedCurve.connectedSpace (f := f)
   have : SmoothOfRelativeDimension 1 (c.Z ↘ Spec (.of k)) :=
     IsConnectedCurve.smoothOfRelativeDimension_one c.g
   have : SmoothOfRelativeDimension 1 (C ↘ Spec (.of k)) :=

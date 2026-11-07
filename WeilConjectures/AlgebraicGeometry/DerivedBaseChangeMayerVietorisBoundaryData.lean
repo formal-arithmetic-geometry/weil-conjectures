@@ -26,7 +26,7 @@ namespace AlgebraicGeometry
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- Transporting the concrete complex comparisons requires more elaboration steps.
 /-- Distinguishedness for the specified SES boundary, without existential choices
 of the boundary or its comparisons. Proof: identify both first arrows using the
