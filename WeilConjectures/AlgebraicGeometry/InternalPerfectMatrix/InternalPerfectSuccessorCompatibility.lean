@@ -23,7 +23,6 @@ attribute [local instance] AdicCompletion.ringMonoidalObject AdicCompletion.ring
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-set_option maxHeartbeats 1000000 in
 -- Expanding the concrete scalar-extension square needs additional type reduction.
 /-- Coefficient and basis successor squares imply the successor square for evaluation.
 Source: blueprint Compatible isomorphisms, successor entrywise reduction.
