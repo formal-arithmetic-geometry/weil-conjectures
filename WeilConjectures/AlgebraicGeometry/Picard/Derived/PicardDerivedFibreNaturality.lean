@@ -19,7 +19,7 @@ universe v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-set_option maxHeartbeats 1600000 in
+set_option maxHeartbeats 600000 in
 -- The derived fibre comparison elaborates nested functor and fibre-product terms.
 /-- Direct-image residue fibres admit compatible geometric comparisons.
 Source: Stacks Project, Tags 0B91, 0BF2 and 01XK.
