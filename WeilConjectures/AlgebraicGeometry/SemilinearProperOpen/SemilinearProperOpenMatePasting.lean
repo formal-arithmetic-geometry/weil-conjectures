@@ -163,11 +163,11 @@ open WeilConjectures.SemilinearSections
 -- The original instances followed every proof import in this module. Restore that
 -- registration order after moving their declarations into the data modules.
 namespace AlgebraicGeometry.ProEtale.SemilinearProperOpen
-attribute [-instance] constantRingSheafify proEtSmall sequenceSmall derived
+attribute [-instance] VaryingRing.ringSheafify proEtSmall sequenceSmall derived
   siteMap_continuous push_additive push_isRightAdjoint pull_additive pull_limits
   pull_colimits systems_kInjective openPull_isRightAdjoint extension_additive
   extension_limits extension_colimits rho_additive rho_limits rho_colimits
-attribute [instance] constantRingSheafify
+attribute [instance] VaryingRing.ringSheafify
 attribute [instance] proEtSmall
 attribute [instance] sequenceSmall
 attribute [instance] derived
