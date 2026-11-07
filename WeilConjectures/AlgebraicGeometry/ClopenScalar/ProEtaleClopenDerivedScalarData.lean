@@ -244,7 +244,6 @@ abbrev extD {Z : Scheme.{t}}
 attribute [local irreducible] computation
 attribute [local irreducible] SheafOfModules.monoidalCategory HasDerivedCategory.standard
 
-set_option maxHeartbeats 30000 in
 -- Bound elaboration while checking the representative normalization.
 /-- Unit identifications normalized by multiplication on sections and by the canonical
 K-flat computation counit. Source: Stacks 06YY, 0D6D
@@ -268,7 +267,6 @@ structure Units {Z : Scheme.{t}} (p : Presentations.{t, u} Z) where
         ((NatIso.mapHomologicalComplex (ordinary R) (.up ℤ) ≪≫
           Functor.mapHomologicalComplexIdIso (Mods.{t, u} R) (.up ℤ)).hom.app P)
 
-set_option maxHeartbeats 30000 in
 -- Bound elaboration while checking the normalized comparison family.
 /-- The scalar/restriction comparison and its full chain-level normalization. All morphisms
 land in the component module category, so their linearity is part of their type.
@@ -374,7 +372,6 @@ def Comparison.unique {X Y : Scheme.{t}} {j : Y ⟶ X} [IsOpenImmersion j]
             (((ext.{t, u} (Z := X) (p a)).mapHomologicalComplex (.up ℤ)).obj P) ≫
           DerivedCategory.Q.map ((d.chain a).hom.app P)) → e = (d.derived a).hom
 
-set_option maxHeartbeats 30000 in
 -- Bound elaboration while checking the coherence diagrams.
 /-- Coherence with the existing normalized scalar compositor and multiplication units.
 Source: Stacks 0D6D (blueprint: def-pur-clopen-derived-scalar-comparison-data). -/
