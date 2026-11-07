@@ -119,19 +119,6 @@ section
 
 variable {D : Type*} [Category D] [MonoidalCategory D] [BraidedCategory D]
 
-/-- **Conjugacy invariance of the trace**: for an isomorphism `e : X ≅ Y` of dualizable objects
-and an endomorphism `f` of `Y`, `tr(e ≫ f ≫ e⁻¹) = tr(f)`. -/
-lemma trace_conj {X Y : C} [HasRightDual X] [HasRightDual Y] (e : X ≅ Y) (f : Y ⟶ Y) :
-    trace (e.hom ≫ f ≫ e.inv) = trace f := by
-  let : ExactPairing X Yᘁ := exactPairingCongrLeft e
-  rw [trace_eq_of_exactPairing Yᘁ, trace]
-  change (η_ Y Yᘁ ≫ e.inv ▷ Yᘁ) ≫ (e.hom ≫ f ≫ e.inv) ▷ Yᘁ ≫ (β_ X Yᘁ).hom ≫
-    Yᘁ ◁ e.hom ≫ ε_ Y Yᘁ = _
-  rw [← BraidedCategory.braiding_naturality_left_assoc]
-  simp only [← comp_whiskerRight_assoc, Category.assoc, Iso.inv_hom_id_assoc, Iso.inv_hom_id,
-    Category.comp_id]
-
-
 /-- **A braided monoidal functor preserves traces.** For a braided monoidal functor `F` and an
 endomorphism `f` of a dualizable object `X` such that `F X` is dualizable,
 `tr(F f) = ε⁻¹ ∘ F(tr f) ∘ ε`, where `ε : 𝟙_ ⟶ F 𝟙_` is the unit of `F`. -/
