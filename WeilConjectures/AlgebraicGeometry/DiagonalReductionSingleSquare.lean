@@ -124,7 +124,8 @@ theorem diagonalReduction_single_square
         (K'.ordinary.E.mapHomologicalComplex (.up ℤ)).map
           ((F.mapCochainComplexSingleFunctor 0).hom.app M) ≫
         (K'.ordinary.E.mapCochainComplexSingleFunctor 0).hom.app (F.obj M) := by
-    ext i : 1
+    apply HomologicalComplex.hom_ext
+    intro i
     by_cases hi : i = 0
     · subst i
       simp [Functor.mapCochainComplexSingleFunctor, CochainComplex.singleFunctor,
