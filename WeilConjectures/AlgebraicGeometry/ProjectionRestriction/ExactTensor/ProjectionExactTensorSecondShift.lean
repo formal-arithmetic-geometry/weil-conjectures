@@ -34,7 +34,6 @@ attribute [local irreducible] SheafOfModules.monoidalCategory
 attribute [local semireducible] ObjectProperty.hasShift ObjectProperty.commShiftι
 attribute [local irreducible] Functor.mapDerivedCategory Functor.mapDerivedCategoryFactors
 
-set_option maxHeartbeats 800000 in
 -- Elaborating the representative diagram involves many large composite functor expressions.
 private theorem fixedSecond_resolving (o : Data R S)
     (a : TensorModel R) (b : TensorModel S) [sa : TensorShifts a] [sb : TensorShifts b]
