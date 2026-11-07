@@ -282,6 +282,8 @@ jobs:
           # timeout (13k archives after nine master pushes in a minute, 2026-11-07). xargs exits
           # non-zero if any PUT failed, which stops the step before the map is filed.
           export -f put
+          # A build with nothing new stages no archives, and the artifact keeps no empty directory.
+          mkdir -p artifacts
           n=$(find artifacts -name '*.ltar' | wc -l)
           # shellcheck disable=SC2016 # expanded by the inner bash, per archive
           find artifacts -name '*.ltar' -print0 | xargs -0 -r -P 16 -I{} bash -c \
