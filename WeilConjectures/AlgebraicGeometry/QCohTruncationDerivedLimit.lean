@@ -66,7 +66,7 @@ theorem qcoh_truncation_isDerivedLimitTriangle (X : Scheme.{u})
     exact AddCommGrpCat.isZero_of_subsingleton _)
   exact ⟨δ, hδ⟩
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- Identifying Scheme.Modules with the shared SheafOfModules category requires
 -- unfolding their category and derived-functor instances during equality transport.
 /-- Applying a countable-product-preserving additive functor's right derived functor

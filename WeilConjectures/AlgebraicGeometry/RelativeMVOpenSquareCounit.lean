@@ -86,7 +86,6 @@ private theorem baseChange_counit
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 200000 in
 -- The pinned derived adjunctions require a larger elaboration and kernel budget.
 /-- The single open-square counit calculation. There is no structure morphism `f`
 or second base-change morphism `g`, and no relative direct image to a base.
