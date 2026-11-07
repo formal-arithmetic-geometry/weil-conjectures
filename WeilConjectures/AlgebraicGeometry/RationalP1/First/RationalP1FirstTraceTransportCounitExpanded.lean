@@ -41,7 +41,6 @@ attribute [local irreducible] twist projectionMap singleUnitIso
 attribute [local irreducible] firstProjection secondProjection square
 attribute [local irreducible] condensedAmbientExchange
 
-set_option maxHeartbeats 800000 in
 -- Keep the fixed geometric coefficient and derived interfaces folded during elaboration.
 /-- Expand the normalized counit into its projection and trace factors.
 This is the counit-expansion step of the terminal first-trace transport proof.
