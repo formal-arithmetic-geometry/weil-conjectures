@@ -69,14 +69,6 @@ lemma hasTorsionCohomologicalDimensionLE_zero_of_isSepClosed (K : Type u) [Field
     [IsSepClosed K] : (Spec (.of K)).HasTorsionCohomologicalDimensionLE 0 :=
   fun F _ q hq ↦ subsingleton_H_of_pos_of_isSepClosed K F q hq
 
-/-- **Cohomological dimension of a separably closed point.** If `K` is a separably closed field,
-then `cd(Spec K) = 0` in the sense of blueprint `def-kun-cd`. This is blueprint
-`lem-kun-cd-sep-closed-point`, whose content (the vanishing of `Hᵠ(Spec K, F)` for `q > 0`) is
-`AlgebraicGeometry.Scheme.subsingleton_H_of_isSepClosed`. -/
-theorem torsionCohomologicalDimension_spec_of_isSepClosed (K : Type u) [Field K]
-    [IsSepClosed K] : (Spec (.of K)).torsionCohomologicalDimension = 0 :=
-  le_antisymm (torsionCohomologicalDimension_le_iff.2
-    (hasTorsionCohomologicalDimensionLE_zero_of_isSepClosed K)) bot_le
 
 open ZeroObject in
 /-- An abelian étale sheaf on `X` whose pullback along a surjective morphism `s : S ⟶ X`

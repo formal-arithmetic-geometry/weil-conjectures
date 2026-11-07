@@ -350,10 +350,6 @@ noncomputable def toSheafTorsorContinuousMap (t : EtaleTorsor M Y) :
     · simp only [Set.iUnion_const]
       exact Set.range_eq_univ.2 (Surjective.surj (f := pullback.fst U.hom t.π))
 
-lemma toSheafTorsorContinuousMap_vadd (t : EtaleTorsor M Y) (U : Y.Etaleᵒᵖ) (f : C(U.unop.left, M))
-    (φ : U.unop ⟶ t.toEtale) :
-    t.toSheafTorsorContinuousMap.vadd U f ⟨φ⟩ = ⟨t.smulHom f φ⟩ :=
-  rfl
 
 /-- Isomorphic torsors have isomorphic sheaf torsors. -/
 lemma toSheafTorsorContinuousMap_equiv_of_isIsomorphic {t₁ t₂ : EtaleTorsor M Y}
@@ -497,9 +493,6 @@ lemma classH1_mk (t : EtaleTorsor M Y) :
     classH1 M Y ⟦t⟧ = Sheaf.Torsor.classH1 _ terminalIsTerminal ⟦t.toSheafTorsor⟧ :=
   rfl
 
-/-- Non-isomorphic `M`-torsors have different classes in `H¹(Y_ét, M)`. -/
-theorem injective_classH1 : Function.Injective (classH1 M Y) :=
-  (Sheaf.Torsor.classH1 _ terminalIsTerminal).injective.comp injective_quotientToSheafTorsor
 
 /-- An `M`-torsor has class `0` in `H¹(Y_ét, M)` if and only if its structure morphism has a
 section. -/

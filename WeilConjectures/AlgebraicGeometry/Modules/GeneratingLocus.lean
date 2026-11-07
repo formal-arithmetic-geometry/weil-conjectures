@@ -58,8 +58,6 @@ def generatingLocus (σ : Γ(M, ⊤)) : X.Opens where
   is_open' := isOpen_iff_forall_mem_open.mpr fun _ ⟨W, hxW, hW⟩ ↦
     ⟨W, fun _ hy ↦ ⟨W, hy, hW⟩, W.2, hxW⟩
 
-lemma mem_generatingLocus {σ : Γ(M, ⊤)} {x : X} : x ∈ generatingLocus σ ↔ GeneratesAt σ x :=
-  .rfl
 
 /-- A global section is a free generator on its generating locus. -/
 lemma isFreeGenerator_generatingLocus (σ : Γ(M, ⊤)) :

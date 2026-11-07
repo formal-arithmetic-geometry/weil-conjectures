@@ -91,10 +91,6 @@ extension `Ω` of `K`, with fibre functor `X ↦ Hom_K(Spec Ω, X)` valued in `T
 noncomputable def galoisPoint : (Spec (.of K)).smallEtaleTopology.Point.{u + 1} :=
   (pointSmallEtale (specAlgebraMap K Ω)).ulift.{u + 1}
 
-lemma galoisPoint_fiber_obj (X : (Spec (.of K)).Etale) :
-    (galoisPoint K Ω).fiber.obj X =
-      ULift.{u + 1} (Over.mk (specAlgebraMap K Ω) ⟶ (Etale.forget _).obj X) :=
-  rfl
 
 @[simp]
 lemma galoisPoint_fiber_map_down {X Y : (Spec (.of K)).Etale} (f : X ⟶ Y)
@@ -384,11 +380,6 @@ noncomputable def etaleSheafEquivDiscreteModule :
       DiscreteModule.{u + 1} Gal(Ω/K) :=
   (isGaloisPoint_galoisPoint K Ω).equivalence
 
-lemma etaleSheafEquivDiscreteModule_functor_obj_obj
-    (F : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1}) :
-    ((etaleSheafEquivDiscreteModule K Ω).functor.obj F).obj =
-      ((galoisPoint K Ω).sheafFiberAction (galoisPointAct K Ω)).obj F :=
-  rfl
 
 /-- **Étale cohomology of a field is Galois cohomology**:
 `Hⁿ(Spec K_ét, F) ≃ Hⁿ(Gal(Ω/K), F_Ω)` for every abelian étale sheaf `F` on `Spec K`.

@@ -58,18 +58,6 @@ namespace Scheme.IdealSheafData
 
 variable {X : Scheme.{u}}
 
-/-- **A finite type nil ideal sheaf is uniformly nilpotent** (blueprint:
-`lemma-nagata-finite-type-nil-ideal-nilpotent`): on a quasi-compact scheme, a finite-type
-quasi-coherent ideal sheaf with `V(I) = X` has a nonzero power equal to `0`. This is the case
-`A = 0` of `Scheme.IdealSheafData.exists_pow_le`, whose proof is the chart-wise argument of the
-blueprint (finitely generated ideals inside the nilradical are nilpotent, and a finite affine
-cover bounds the exponents). -/
-theorem exists_pow_eq_bot_of_support_eq_top [CompactSpace X] {I : X.IdealSheafData}
-    (hI : I.ofFiniteType) (h : I.support = ⊤) : ∃ n : ℕ, 0 < n ∧ I ^ n = ⊥ := by
-  obtain ⟨n, hn⟩ := exists_pow_le (A := ⊥) hI (by rw [h, support_bot])
-  refine ⟨n + 1, n.succ_pos, le_bot_iff.mp (le_trans (le_def.mpr fun U ↦ ?_) hn)⟩
-  change I.ideal U ^ (n + 1) ≤ I.ideal U ^ n
-  exact Ideal.pow_le_pow_right n.le_succ
 
 /-- A product of ideal sheaves is contained in the first factor. -/
 lemma mul_le_self_left (I J : X.IdealSheafData) : I * J ≤ I :=
@@ -153,27 +141,6 @@ section SeparationPreparation
 
 variable {X : Scheme.{u}} {U : X.Opens}
 
-open Scheme.IdealSheafData in
-/-- **The boundary of `Z = V(I₁ I₂)` over `U` splits into two pieces** (part of blueprint:
-`lemma-nagata-separate-closed-data-exists`): if `V(I₁) ∩ V(I₂) ∩ U = ∅`, the open
-`U_Z = Z ×_X U` of `Z` is the disjoint union of the traces `Pᵢ = Zᵢ ×_X U` of the closed
-subschemes `Zᵢ = V(Iᵢ) ↪ Z`. Both traces are closed in `U_Z`, hence open and closed. -/
-theorem disjoint_range_inclusion_inter_preimage_and_subset
-    (I₁ I₂ : X.IdealSheafData)
-    (hdisj : Disjoint (U : Set X) ((I₁.support : Set X) ∩ (I₂.support : Set X))) :
-    Disjoint (Set.range (inclusion (mul_le_self_left I₁ I₂)) ∩ (I₁ * I₂).subschemeι ⁻¹' U)
-      (Set.range (inclusion (mul_le_self_right I₁ I₂)) ∩ (I₁ * I₂).subschemeι ⁻¹' U) ∧
-    (I₁ * I₂).subschemeι ⁻¹' U ⊆
-      Set.range (inclusion (mul_le_self_left I₁ I₂)) ∪
-        Set.range (inclusion (mul_le_self_right I₁ I₂)) := by
-  rw [range_inclusion, range_inclusion]
-  refine ⟨Set.disjoint_left.mpr fun z ⟨h₁, hU⟩ ⟨h₂, _⟩ ↦
-    Set.disjoint_left.mp hdisj hU ⟨h₁, h₂⟩, fun z _ ↦ ?_⟩
-  have hz : (I₁ * I₂).subschemeι z ∈ (((I₁ * I₂).support : Set X)) := by
-    rw [← range_subschemeι]
-    exact ⟨z, rfl⟩
-  rw [support_mul] at hz
-  exact hz
 
 open Scheme.IdealSheafData in
 /-- **Preparation data for separating two closed boundaries** (Stacks Project Tag 080P;

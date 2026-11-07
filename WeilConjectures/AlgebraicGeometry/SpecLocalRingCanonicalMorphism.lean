@@ -41,33 +41,6 @@ set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- The natural localization map is an isomorphism, and every affine neighborhood gives
- the same canonical morphism. Source: Stacks, Tags 01J6, 02NA
-(blueprint: lem-weil-pbc-spec-local-ring-canonical-morphism).
-Proof (node steps 1 and 2): choose an affine neighborhood using affine-opens-basis.
-The affine-open-stalk-localization lemma identifies the germ map with localization at
-its prime. Compose its spectrum map with the affine open immersion. Compare two choices
-on an affine neighborhood inside their intersection; restrictions commute with germs
-and with the affine-open spectrum maps. Thus the composites agree. -/
-theorem fromSpecStalk_affine_description (Y : Scheme.{u}) (y : Y)
-    (V : Y.Opens) (hV : IsAffineOpen V) (hy : y ∈ V) :
-    (∃ e : Localization.AtPrime (hV.primeIdealOf ⟨y, hy⟩).asIdeal ≃+* Y.presheaf.stalk y,
-      e.toRingHom.comp (algebraMap (Y.presheaf.obj (op V))
-        (Localization.AtPrime (hV.primeIdealOf ⟨y, hy⟩).asIdeal)) =
-          (Y.presheaf.germ V y hy).hom) ∧
-    Spec.map (Y.presheaf.germ V y hy) ≫ hV.fromSpec = Y.fromSpecStalk y := by
-  constructor
-  · let : Algebra (Y.presheaf.obj (op V)) (Y.presheaf.stalk y) :=
-      (Y.presheaf.germ V y hy).hom.toAlgebra
-    have := hV.isLocalization_stalk ⟨y, hy⟩
-    refine ⟨(IsLocalization.algEquiv (hV.primeIdealOf ⟨y, hy⟩).asIdeal.primeCompl
-      (Localization.AtPrime (hV.primeIdealOf ⟨y, hy⟩).asIdeal)
-      (Y.presheaf.stalk y)).toRingEquiv, ?_⟩
-    ext r
-    exact (IsLocalization.algEquiv (hV.primeIdealOf ⟨y, hy⟩).asIdeal.primeCompl
-      (Localization.AtPrime (hV.primeIdealOf ⟨y, hy⟩).asIdeal)
-      (Y.presheaf.stalk y)).commutes r
-  · exact hV.fromSpecStalk_eq_fromSpecStalk hy
 
 /-- The closed point maps to `y`; the image is its generalizations, every neighborhood
 pulls back to the whole spectrum, all stalk maps are isomorphisms, the closed stalk map
@@ -194,31 +167,6 @@ theorem fromSpecStalk_module_stalk (Y : Scheme.{u}) (y : Y) (G : Y.Modules) :
   rw [← ModuleCat.comp_apply, e.inv_hom_id_app, ModuleCat.id_apply, he]
   rfl
 
-/-- For every proper ideal, the local-ring correspondence sends the quotient map to
-its spectrum map followed by the canonical morphism; the spectrum map is a closed
-immersion. Source: Stacks, Tag 01J6 and the paragraph following 02NA
-(blueprint: lem-weil-pbc-spec-local-ring-canonical-morphism).
-Proof (node step 8): a proper ideal lies in the maximal ideal, so the quotient is local
-and its quotient map is local. The spectrum of a surjection is a closed immersion.
-It sends the quotient closed point to the original closed point. Stalk-map-composition
-and compatibility of spectrum stalk maps with germs identify the normalized stalk map
-of the composite with the quotient map. Apply the bijection morphism-from-spec-local-ring. -/
-theorem fromSpecStalk_quotient_factorization (Y : Scheme.{u}) (y : Y)
-    (J : Ideal (Y.presheaf.stalk y)) (hJ : J ≠ ⊤) :
-    ∃ (hlocal : IsLocalRing ((Y.presheaf.stalk y) ⧸ J))
-      (hmap : IsLocalHom (Ideal.Quotient.mk J)),
-      (@SpecToEquivOfLocalRing Y (CommRingCat.of ((Y.presheaf.stalk y) ⧸ J)) hlocal).symm
-        ⟨y, ⟨CommRingCat.ofHom (Ideal.Quotient.mk J), hmap⟩⟩ =
-          Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk J)) ≫ Y.fromSpecStalk y ∧
-      IsClosedImmersion (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk J))) := by
-  have : Nontrivial ((Y.presheaf.stalk y) ⧸ J) :=
-    Ideal.Quotient.nontrivial_iff.mpr hJ
-  have hlocal : IsLocalRing ((Y.presheaf.stalk y) ⧸ J) :=
-    IsLocalRing.of_surjective' (Ideal.Quotient.mk J) Ideal.Quotient.mk_surjective
-  have hmap : IsLocalHom (Ideal.Quotient.mk J) :=
-    IsLocalHom.of_surjective (Ideal.Quotient.mk J) Ideal.Quotient.mk_surjective
-  refine ⟨hlocal, hmap, rfl, ?_⟩
-  exact IsClosedImmersion.spec_of_surjective _ Ideal.Quotient.mk_surjective
 
 end
 end AlgebraicGeometry.Scheme

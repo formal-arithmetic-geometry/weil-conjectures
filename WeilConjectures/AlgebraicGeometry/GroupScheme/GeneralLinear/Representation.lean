@@ -100,21 +100,5 @@ because `G` is locally of finite type over `k` and `k` is algebraically closed o
 abbrev IsSemisimple [LocallyOfFiniteType G.hom] [IsAlgClosed k] [CharZero k] : Prop :=
   r.representation.IsSemisimpleRepresentation
 
-/-- An algebraic-group module is simple if and only if it is nonzero and its only subspaces
-stable under `G` are `0` and `k^m`. (blueprint: `def-wf-simple-module`) -/
-theorem isSimple_iff [LocallyOfFiniteType G.hom] [IsAlgClosed k] [CharZero k] :
-    r.IsSimple ↔ Nontrivial (m → k) ∧ ∀ U : Submodule k (m → k),
-      (∀ g : AlgebraicGeometry.points G k, U ≤ U.comap (Matrix.toLin' (r.points k g))) →
-        U = ⊥ ∨ U = ⊤ :=
-  Representation.isIrreducible_iff
-
-/-- An algebraic-group module is semisimple if and only if it is a direct sum of simple modules:
-there is a set of subspaces stable under `G`, each simple, which are independent and span `k^m`.
-(blueprint: `def-wf-semisimple-module`) -/
-theorem isSemisimple_iff [LocallyOfFiniteType G.hom] [IsAlgClosed k] [CharZero k] :
-    r.IsSemisimple ↔ ∃ s : Set (Subrepresentation r.representation),
-      (∀ U ∈ s, U.toRepresentation.IsIrreducible) ∧
-        iSupIndep (fun U : s ↦ U.1.toSubmodule) ∧ ⨆ U : s, U.1.toSubmodule = ⊤ :=
-  Representation.isSemisimpleRepresentation_iff_exists_iSupIndep
 
 end AlgebraicGeometry.GeneralLinearGroup.RationalHom

@@ -163,41 +163,6 @@ theorem dualMap_mul_conj_of_similitude :
     (dualMap_comp_toPerfPair_comp_of_similitude hFG)
   simpa [LinearEquiv.conj_apply_apply] using h
 
-omit [FiniteDimensional L W] in
-include hc in
-/-- `G` is conjugate, by the isomorphism `W ≃ₗ[L] Dual L V` given by the pairing, to the
-endomorphism `c • (F.dualMap)⁻¹` of the dual of `V`: the transpose of `F` is invertible, and
-`G` corresponds to `c` times the transpose of its inverse. -/
-theorem conj_toPerfPair_eq_smul_inverse_dualMap_of_similitude :
-    p.flip.toPerfPair.conj G = c • Ring.inverse F.dualMap := by
-  set e := p.flip.toPerfPair with he
-  have hab : F.dualMap * (c⁻¹ • e.conj G) = 1 := by
-    rw [mul_smul_comm, dualMap_mul_conj_of_similitude hFG, smul_smul, inv_mul_cancel₀ hc,
-      one_smul]
-  have hba : (c⁻¹ • e.conj G) * F.dualMap = 1 := mul_eq_one_comm.mp hab
-  have hinv : Ring.inverse F.dualMap = c⁻¹ • e.conj G :=
-    Ring.inverse_unit (⟨F.dualMap, c⁻¹ • e.conj G, hab, hba⟩ : (Module.End L (Dual L V))ˣ)
-  rw [hinv, smul_smul, mul_inv_cancel₀ hc, one_smul]
-
-include hc in
-/-- `G` is conjugate, by the isomorphism `W ≃ₗ[L] Dual L V` given by the pairing, to the
-endomorphism `c • (F.dualMap)⁻¹` of the dual of `V`; in particular they have the same
-characteristic polynomial. -/
-theorem charpoly_eq_smul_inverse_dualMap_of_similitude :
-    G.charpoly = (c • Ring.inverse F.dualMap : Module.End L (Module.Dual L V)).charpoly := by
-  rw [← conj_toPerfPair_eq_smul_inverse_dualMap_of_similitude hc hFG,
-    LinearEquiv.charpoly_conj]
-
-omit [FiniteDimensional L W] in
-/-- **The determinant product rule.** If `F` and `G` multiply the perfect pairing `p` by the
-similitude factor `c`, then their determinants multiply to `c ^ dim V`. -/
-theorem det_mul_det_of_similitude :
-    LinearMap.det F * LinearMap.det G = c ^ finrank L V := by
-  have h := congrArg LinearMap.det (dualMap_mul_conj_of_similitude (p := p) hFG)
-  rwa [show dualMap F * p.flip.toPerfPair.conj G
-      = dualMap F ∘ₗ p.flip.toPerfPair.conj G from rfl, LinearMap.det_comp,
-    det_dualMap, LinearEquiv.conj_apply, LinearMap.comp_assoc, LinearMap.det_conj,
-    LinearMap.det_smul, map_one, mul_one, Subspace.dual_finrank_eq] at h
 
 /-- The reverse characteristic polynomial of `G` is determined by the characteristic polynomial
 of `F`: it is `det (1 - t • G) = (-1) ^ dim V * det (c * t - F) / det F`. -/
@@ -246,38 +211,6 @@ theorem roots_map_charpolyRev_of_similitude {M : Type*} [Field M] [IsAlgClosed M
   refine Multiset.map_congr rfl fun a _ ↦ ?_
   simp [Ring.inverse_eq_inv', mul_inv_rev, mul_comm]
 
-include hc in
-/-- **The reciprocal eigenvalues along a field embedding.** After mapping the characteristic
-polynomials into an algebraically closed extension field `M` along a ring homomorphism `ι`,
-the eigenvalues of `G`, with multiplicity, are the images of the eigenvalues of `F` under
-`α ↦ ι c / α`. Unlike `charpoly_roots_of_similitude`, the base field `L` is not assumed
-algebraically closed. -/
-theorem roots_map_charpoly_of_similitude {M : Type*} [Field M] [IsAlgClosed M] (ι : L →+* M) :
-    (G.charpoly.map ι).roots = (F.charpoly.map ι).roots.map fun z ↦ ι c / z := by
-  have h := roots_map_charpolyRev_of_similitude hc hFG ι
-  rw [roots_map_charpolyRev_eq_map_inv ι G (isUnit_det_right_of_similitude hc hFG),
-    roots_map_charpolyRev_eq_map_inv ι F (isUnit_det_of_similitude hc hFG),
-    Multiset.map_map] at h
-  have h' := congrArg (Multiset.map (·⁻¹ : M → M)) h
-  rw [Multiset.map_map, Multiset.map_map] at h'
-  simp only [Function.comp_def, inv_inv, Multiset.map_id'] at h'
-  rw [h']
-  exact Multiset.map_congr rfl fun z _ ↦ (div_eq_mul_inv _ _).symm
-
-include hc in
-/-- **The degrees along a field embedding.** Both members of a similitude pair are invertible,
-so their reverse characteristic polynomials keep the full degree `dim V = dim W` after their
-coefficients are mapped into an extension field `M` along a ring homomorphism `ι`.
-
-Together with `LinearMap.roots_map_charpolyRev_of_similitude` (the reciprocal root identity) and
-`LinearMap.coeff_zero_charpolyRev` (the constant coefficient is `1`, so neither polynomial
-vanishes at `0`), this is the whole of the blueprint's `cor:zla-reciprocal-roots-embedding`. -/
-theorem natDegree_map_charpolyRev_of_similitude {M : Type*} [Field M] (ι : L →+* M) :
-    (F.charpolyRev.map ι).natDegree = finrank L V ∧
-      (G.charpolyRev.map ι).natDegree = finrank L V :=
-  ⟨natDegree_map_charpolyRev (isUnit_det_of_similitude hc hFG) ι,
-    (natDegree_map_charpolyRev (isUnit_det_right_of_similitude hc hFG) ι).trans
-      (Module.finrank_of_isPerfPair p).symm⟩
 
 variable [IsAlgClosed L]
 include hc
@@ -340,16 +273,6 @@ theorem charpoly_roots_of_similitude :
     exact charpolyRev_roots_eq_of_similitude hc hFG
   simpa [Multiset.map_map, inv_div] using congrArg (Multiset.map (·⁻¹ : L → L)) h1
 
-/-- **The reciprocal eigenvalue pairing, reciprocal form.** The roots of `det (1 - t • G)` are
-the images of the roots of `det (1 - t • F)` under `z ↦ (c * z)⁻¹`. This is the shape of
-`AlgebraicGeometry.WeilFunctionalEquation`. -/
-theorem charpolyRev_roots_of_similitude :
-    G.charpolyRev.roots = F.charpolyRev.roots.map fun z ↦ (c * z)⁻¹ := by
-  have h0 : (0 : L) ∉ F.charpoly.roots :=
-    zero_notMem_roots_charpoly (isUnit_det_of_similitude hc hFG)
-  rw [charpolyRev_roots_eq_of_similitude hc hFG, charpolyRev_eq_prod_roots F,
-    roots_multiset_prod_one_sub_C_mul_X h0, Multiset.map_map]
-  exact Multiset.map_congr rfl fun a _ ↦ by simp [div_eq_mul_inv, mul_comm]
 
 end Similitude
 
@@ -363,23 +286,6 @@ variable {L V W : Type*} [CommRing L] [AddCommGroup V] [Module L V] [AddCommGrou
   [Module L W] {p : V →ₗ[L] W →ₗ[L] L} [p.IsPerfPair] {F : Module.End L V}
   {G : Module.End L W} {c : L}
 
-/-- `LinearMap.conj_toPerfPair_eq_smul_inverse_dualMap_of_similitude` over a commutative ring
-that is a field. -/
-theorem conj_toPerfPair_eq_smul_inverse_dualMap_of_similitude_of_isField (hL : IsField L)
-    (hc : c ≠ 0) (hFG : ∀ v w, p (F v) (G w) = c * p v w) :
-    p.flip.toPerfPair.conj G = c • Ring.inverse F.dualMap := by
-  let := hL.toField
-  have := Module.IsReflexive.of_isPerfPair p
-  exact conj_toPerfPair_eq_smul_inverse_dualMap_of_similitude hc hFG
-
-/-- `LinearMap.roots_map_charpoly_of_similitude` over a commutative ring that is a field. -/
-theorem roots_map_charpoly_of_similitude_of_isField (hL : IsField L) [Module.Free L V]
-    [Module.Finite L V] [Module.Free L W] [Module.Finite L W] (hc : c ≠ 0)
-    (hFG : ∀ v w, p (F v) (G w) = c * p v w) {M : Type*} [Field M] [IsAlgClosed M]
-    (ι : L →+* M) :
-    (G.charpoly.map ι).roots = (F.charpoly.map ι).roots.map fun z ↦ ι c / z := by
-  let := hL.toField
-  exact roots_map_charpoly_of_similitude hc hFG ι
 
 end IsField
 

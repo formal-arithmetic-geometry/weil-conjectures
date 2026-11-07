@@ -267,21 +267,6 @@ lemma closedGeometricPoint_henselianLift (p : V ⟶ X) [AlgebraicGeometry.Etale 
     closedGeometricPoint A ≫ henselianLift a p v hv = v :=
   (existsUnique_lift_of_isStrictlyHenselianLocalRing a p v hv).exists.choose_spec.2
 
-lemma henselianLift_eq (p : V ⟶ X) [AlgebraicGeometry.Etale p]
-    (v : Spec (.of (IsLocalRing.ResidueField A)) ⟶ V)
-    (hv : v ≫ p = closedGeometricPoint A ≫ a) (ℓ : Spec (.of A) ⟶ V) (hℓ : ℓ ≫ p = a)
-    (hℓv : closedGeometricPoint A ≫ ℓ = v) : henselianLift a p v hv = ℓ :=
-  (existsUnique_lift_of_isStrictlyHenselianLocalRing a p v hv).unique
-    ⟨henselianLift_comp a p v hv, closedGeometricPoint_henselianLift a p v hv⟩ ⟨hℓ, hℓv⟩
-
-/-- The lift is natural in the étale `X`-scheme `V`. -/
-lemma henselianLift_comp_hom {V' : Scheme.{u}} (p : V ⟶ X) [AlgebraicGeometry.Etale p]
-    (p' : V' ⟶ X) [AlgebraicGeometry.Etale p'] (k : V ⟶ V') (hk : k ≫ p' = p)
-    (v : Spec (.of (IsLocalRing.ResidueField A)) ⟶ V)
-    (hv : v ≫ p = closedGeometricPoint A ≫ a) :
-    henselianLift a p v hv ≫ k = henselianLift a p' (v ≫ k) (by rw [Category.assoc, hk, hv]) :=
-  (henselianLift_eq _ _ _ _ _ (by rw [Category.assoc, hk, henselianLift_comp])
-    (by rw [closedGeometricPoint_henselianLift_assoc])).symm
 
 end Henselian
 

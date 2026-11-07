@@ -57,12 +57,6 @@ restriction along `h : V ⟶ U` the ring map `h^♯` on global sections. -/
 noncomputable def structurePresheaf : S.ProEtᵒᵖ ⥤ CommRingCat.{u} :=
   (ProEt.forget S ⋙ Over.forget S).op ⋙ Scheme.Γ
 
-lemma structurePresheaf_obj (U : S.ProEt) : (structurePresheaf S).obj (op U) = Γ(U.left, ⊤) :=
-  rfl
-
-lemma structurePresheaf_map {U V : S.ProEt} (h : V ⟶ U) :
-    (structurePresheaf S).map h.op = h.left.appTop :=
-  rfl
 
 /-- The structure presheaf is a sheaf for the pro-étale topology: `Γ` is a sheaf for the big
 pro-étale topology, which is subcanonical (`AlgebraicGeometry.Scheme.isSheaf_Γ`), and the
@@ -87,9 +81,6 @@ and lifted to the next universe. -/
 noncomputable def gmPresheaf : S.ProEtᵒᵖ ⥤ AddCommGrpCat.{u + 1} :=
   structurePresheaf S ⋙ CommRingCat.unitsAddCommGrpULift.{u + 1, u}
 
-lemma gmPresheaf_obj (U : S.ProEt) :
-    (gmPresheaf S).obj (op U) = AddCommGrpCat.of (ULift.{u + 1} (Additive Γ(U.left, ⊤)ˣ)) :=
-  rfl
 
 /-- Restriction in `𝔾ₘ` along `h : V ⟶ U` is pullback of functions along `h`. -/
 lemma gmPresheaf_map_apply {U V : S.ProEt} (h : V ⟶ U) (x : (gmPresheaf S).obj (op U)) :
@@ -236,19 +227,6 @@ lemma rootsOfUnityTransition_ι (d : ℕ) :
       kernel.ι ((N * d) • 𝟙 (gmSheaf S)) ≫ (d • 𝟙 (gmSheaf S)) :=
   kernel.lift_ι _ _ _
 
-/-- On sections, the transition map is `u ↦ u ^ d`. -/
-lemma rootsOfUnityTransition_apply (d : ℕ) (U : S.ProEt)
-    (x : (rootsOfUnitySheaf S (N * d)).obj.obj (op U)) :
-    ((Additive.toMul (rootsOfUnitySheafSectionsEquiv S N U
-      ((rootsOfUnityTransition S N d).hom.app (op U) x)) :
-        rootsOfUnity N Γ(U.left, ⊤)) : Γ(U.left, ⊤)ˣ) =
-      ((Additive.toMul (rootsOfUnitySheafSectionsEquiv S (N * d) U x) :
-        rootsOfUnity (N * d) Γ(U.left, ⊤)) : Γ(U.left, ⊤)ˣ) ^ d := by
-  rw [rootsOfUnitySheafSectionsEquiv_apply, rootsOfUnitySheafSectionsEquiv_apply,
-  ]
-  have h := ConcreteCategory.congr_hom
-    (congrArg (fun f ↦ f.hom.app (op U)) (rootsOfUnityTransition_ι S N d)) x
-  exact (congrArg (fun y ↦ (Additive.toMul (ULift.down y) : Γ(U.left, ⊤)ˣ)) h).trans rfl
 
 /-- The transition map `μ_{N d} ⟶ μ_N` as a morphism of sheaves of `(ℤ/(N d))_S`-modules: every
 morphism of abelian sheaves between sheaves killed by `N d` is `(ℤ/(N d))_S`-linear
@@ -260,11 +238,6 @@ noncomputable def rootsOfUnityModuleTransition (d : ℕ) [NeZero (N * d)] :
     ((toSheafRootsOfUnityModuleIso S _ _ _).hom ≫ rootsOfUnityTransition S N d ≫
       (toSheafRootsOfUnityModuleIso S _ _ _).inv)
 
-lemma toSheaf_map_rootsOfUnityModuleTransition (d : ℕ) [NeZero (N * d)] :
-    (SheafOfModules.toSheaf _).map (rootsOfUnityModuleTransition S N d) =
-      (toSheafRootsOfUnityModuleIso S _ _ _).hom ≫ rootsOfUnityTransition S N d ≫
-        (toSheafRootsOfUnityModuleIso S _ _ _).inv :=
-  Sheaf.fullyFaithfulToSheafConstantZMod.map_preimage _
 
 /-- For a prime `ℓ`, the inverse system `(μ_{ℓ^r, S})_r` with the transition maps
 `μ_{ℓ^{r+1}} ⟶ μ_{ℓ^r}`, `u ↦ u ^ ℓ`. -/
@@ -277,9 +250,5 @@ lemma rootsOfUnityTower_obj (ℓ r : ℕ) :
     (rootsOfUnityTower S ℓ).obj (op r) = rootsOfUnitySheaf S (ℓ ^ r) :=
   rfl
 
-lemma rootsOfUnityTower_map (ℓ r : ℕ) :
-    (rootsOfUnityTower S ℓ).map (homOfLE (Nat.le_succ r)).op =
-      rootsOfUnityTransition S (ℓ ^ r) ℓ :=
-  Functor.ofOpSequence_map_homOfLE_succ _ r
 
 end AlgebraicGeometry.Scheme.ProEt

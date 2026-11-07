@@ -48,53 +48,11 @@ open CategoryTheory Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- Naturality of `f.app` on elements, for an arbitrary choice of the inclusion of preimages
-(all morphisms between opens are equal). -/
-lemma Scheme.Hom.app_map_apply {Y Z : Scheme.{u}} (f : Y ⟶ Z) {U V : Z.Opens} (i : V ⟶ U)
-    (j : f ⁻¹ᵁ V ⟶ f ⁻¹ᵁ U) (x : Γ(Z, U)) :
-    f.app V (Z.presheaf.map i.op x) = Y.presheaf.map j.op (f.app U x) := by
-  rw [← ConcreteCategory.comp_apply, f.naturality, ConcreteCategory.comp_apply]
-  rfl
 
 namespace Scheme.IdealSheafData
 
 variable {X : Scheme.{u}}
 
-/-- The ideals `J.idealOfOpens U` are stable under restriction. -/
-lemma map_mem_idealOfOpens (J : X.IdealSheafData) {U V : X.Opens} (i : V ≤ U) {x : Γ(X, U)}
-    (hx : x ∈ J.idealOfOpens U) : X.presheaf.map (homOfLE i).op x ∈ J.idealOfOpens V := by
-  rw [mem_idealOfOpens_iff] at hx ⊢
-  rw [J.subschemeι.app_map_apply _ (homOfLE (J.subschemeι.preimage_mono i)), hx, map_zero]
-
-/-- **Membership in `J.idealOfOpens U` is local**: a section over `U` whose restrictions to the
-members of an open cover of `U` lie in `J` lies in `J`. -/
-lemma mem_idealOfOpens_of_forall (J : X.IdealSheafData) {U : X.Opens} {ι : Type*}
-    (W : ι → X.Opens) (hWU : ∀ i, W i ≤ U) (hU : U ≤ ⨆ i, W i) {x : Γ(X, U)}
-    (hx : ∀ i, X.presheaf.map (homOfLE (hWU i)).op x ∈ J.idealOfOpens (W i)) :
-    x ∈ J.idealOfOpens U := by
-  rw [mem_idealOfOpens_iff]
-  refine J.subscheme.sheaf.eq_of_locally_eq' (fun i ↦ J.subschemeι ⁻¹ᵁ W i) _
-    (fun i ↦ homOfLE (J.subschemeι.preimage_mono (hWU i))) ?_ _ _ fun i ↦ ?_
-  · rw [← Scheme.Hom.preimage_iSup]
-    exact J.subschemeι.preimage_mono hU
-  · have h := hx i
-    rw [mem_idealOfOpens_iff,
-      J.subschemeι.app_map_apply _ (homOfLE (J.subschemeι.preimage_mono (hWU i)))] at h
-    exact h.trans (map_zero _).symm
-
-/-- `J.idealOfOpens U` is monotone in the ideal sheaf `J`. -/
-lemma idealOfOpens_mono_finiteType {J K : X.IdealSheafData} (h : J ≤ K) (U : X.Opens) :
-    J.idealOfOpens U ≤ K.idealOfOpens U := by
-  intro x hx
-  refine K.mem_idealOfOpens_of_forall (fun V : {V : X.affineOpens // V.1 ≤ U} ↦ V.1.1)
-    (fun V ↦ V.2) (fun y hy ↦ ?_) fun V ↦ ?_
-  · obtain ⟨_, ⟨V, hV, rfl⟩, hyV, hVU⟩ :=
-      X.isBasis_affineOpens.exists_subset_of_mem_open hy U.2
-    exact TopologicalSpace.Opens.mem_iSup.2 ⟨⟨⟨V, hV⟩, hVU⟩, hyV⟩
-  · have hx' := J.map_mem_idealOfOpens V.2 hx
-    rw [idealOfOpens_eq_ideal J V.1] at hx'
-    rw [idealOfOpens_eq_ideal K V.1]
-    exact h V.1 hx'
 
 end Scheme.IdealSheafData
 
@@ -221,42 +179,5 @@ ideal sheaf `J`. -/
 noncomputable def shortComplex (J : X.IdealSheafData) : ShortComplex X.Modules :=
   ShortComplex.mk J.toModulesι J.toPushforwardSubscheme (kernel.condition _)
 
-/-- The sequence `0 ⟶ ℐ ⟶ 𝒪_X ⟶ (ι_J)_* 𝒪_{V(J)} ⟶ 0` is short exact. -/
-lemma shortExact_shortComplex (J : X.IdealSheafData) : J.shortComplex.ShortExact where
-  exact := ShortComplex.exact_of_f_is_kernel _ (kernelIsKernel _)
-  mono_f := inferInstanceAs (Mono J.toModulesι)
-  epi_g := inferInstanceAs (Epi J.toPushforwardSubscheme)
-
-
-/-- A finite supremum of ideal sheaves of finite type is of finite type. -/
-lemma ofFiniteType_iSup {ι : Type*} [Finite ι] {K : ι → X.IdealSheafData}
-    (hK : ∀ i, (K i).ofFiniteType) : (⨆ i, K i).ofFiniteType := fun U _ ↦ by
-  rw [ideal_iSup, iSup_apply]
-  exact Submodule.fg_iSup _ fun i ↦ hK i U le_top
-
-/-- Let `X` be quasi-compact and quasi-separated. Every section `x` of an ideal sheaf `J` over a
-quasi-compact open `V` is a section of a subsheaf `K ≤ J` of finite type.
-
-Cover `V` by finitely many affine opens `W`; over each of them the restriction of `x` lies in a
-finite-type subsheaf of `J` (Stacks 01PF, `exists_ofFiniteType_le_mem_ideal`), and the
-supremum of these finitely many subsheaves does the job. -/
-lemma exists_ofFiniteType_le_mem_idealOfOpens [CompactSpace X] [QuasiSeparatedSpace X]
-    (J : X.IdealSheafData) {V : X.Opens} (hV : IsCompact (V : Set X)) {x : Γ(X, V)}
-    (hx : x ∈ J.idealOfOpens V) :
-    ∃ K : X.IdealSheafData, K ≤ J ∧ K.ofFiniteType ∧ x ∈ K.idealOfOpens V := by
-  obtain ⟨Us, hUs, hfin, hVUs⟩ := X.isBasis_affineOpens.exists_finite_of_isCompact hV
-  have := hfin.to_subtype
-  have hle (W : Us) : W.1 ≤ V := hVUs ▸ le_sSup W.2
-  have hmem (W : Us) : ∃ K : X.IdealSheafData, K ≤ J ∧ K.ofFiniteType ∧
-      X.presheaf.map (homOfLE (hle W)).op x ∈ K.ideal ⟨W.1, hUs W.2⟩ := by
-    refine J.exists_ofFiniteType_le_mem_ideal ⟨W.1, hUs W.2⟩ ?_
-    rw [← idealOfOpens_eq_ideal]
-    exact J.map_mem_idealOfOpens _ hx
-  choose K hKJ hK hxK using hmem
-  refine ⟨⨆ W, K W, iSup_le hKJ, ofFiniteType_iSup hK, ?_⟩
-  refine mem_idealOfOpens_of_forall _ (fun W : Us ↦ W.1) hle ?_ fun W ↦ ?_
-  · rw [hVUs, sSup_eq_iSup']
-  · exact idealOfOpens_mono_finiteType (le_iSup K W) _
-      ((idealOfOpens_eq_ideal (K W) ⟨W.1, hUs W.2⟩).ge (hxK W))
 
 end AlgebraicGeometry.Scheme.IdealSheafData

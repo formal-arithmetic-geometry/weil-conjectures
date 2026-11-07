@@ -261,11 +261,6 @@ noncomputable def reesToLaurent : I.reesPresheaf ⟶ X.laurentPresheaf where
   app U := CommRingCat.ofHom (I.siteIdeal U.unop).extendedReesAlgebra.val.toRingHom
   naturality U V i := by ext x; rfl
 
-lemma polynomialToRees_comp_reesToLaurent :
-    I.polynomialToRees ≫ I.reesToLaurent =
-      X.affineStructurePresheaf.whiskerLeft CommRingCat.polynomialToLaurent := by
-  ext U p
-  rfl
 
 /-- The trivialisation of the deformation space over the punctured line:
 `𝔾_{m,X} ⟶ D_I X`. -/
@@ -367,9 +362,6 @@ noncomputable def quotientPolynomialEvalZero : I.quotientPolynomialAlgebra ⟶ I
     refine CommRingCat.hom_ext (RingHom.ext fun p ↦ ?_)
     exact Polynomial.eval_zero_map _ p
 
-lemma toExtendedReesAlgebraT_mem_tIdeal (U : X.AffineZariskiSiteᵒᵖ) :
-    (I.siteIdeal U.unop).extendedReesAlgebraT ∈ I.tIdeal U :=
-  Ideal.subset_span rfl
 
 /-- The projection `⨁_{r ≥ 0} I^r / I^{r+1} ⟶ 𝒪_X / I` to the degree-zero part. -/
 noncomputable def normalConeToQuotient : I.normalConePresheaf ⟶ I.quotientAlgebra where
@@ -773,16 +765,6 @@ theorem isPullback_quotientPolynomialSpec :
   · simp only [Iso.refl_hom, asIso_hom, Category.id_comp]
     exact relativeGluingMap_toBase _ _ _ (Category.id_comp _)
 
-lemma toQuotientPresheaf_comp_normalConeToQuotient :
-    toQuotientPresheaf I.tIdeal I.map_tIdeal ≫ I.normalConeToQuotient =
-      I.reesToQuotientPolynomial ≫ I.quotientPolynomialEvalZero :=
-  rfl
-
-lemma polynomialC_comp_quotientPolynomialEvalZero :
-    I.quotientAlgebra.whiskerLeft CommRingCat.polynomialC ≫ I.quotientPolynomialEvalZero =
-      𝟙 _ := by
-  ext U x
-  exact Polynomial.eval_C
 
 /-- The map `𝒪_X[t] / t ⟶ 𝒪_X / I`, `t ↦ 0`. -/
 noncomputable def polynomialZeroToQuotient : X.polynomialZeroPresheaf ⟶ I.quotientAlgebra where
@@ -795,20 +777,6 @@ noncomputable def polynomialZeroToQuotient : X.polynomialZeroPresheaf ⟶ I.quot
         rw [← Ideal.map_le_iff_le_comap, Ideal.map_span, Set.image_singleton]
         exact le_of_eq (congrArg (fun p ↦ Ideal.span {p}) (Polynomial.map_X _)))).symm
 
-lemma polynomialToPolynomialZero_comp_polynomialZeroToQuotient :
-    X.polynomialToPolynomialZero ≫ I.polynomialZeroToQuotient =
-      I.polynomialToQuotientPolynomial ≫ I.quotientPolynomialEvalZero := by
-  ext U p
-  change Ideal.Quotient.mk _ (Polynomial.eval 0 p) = Polynomial.eval 0 (Polynomial.map _ p)
-  rw [Polynomial.eval_zero_map]
-  rfl
-
-lemma toPolynomialZeroPresheaf_comp_polynomialZeroToQuotient :
-    X.toPolynomialZeroPresheaf ≫ I.polynomialZeroToQuotient = I.toQuotientAlgebra := by
-  ext U x
-  change Ideal.Quotient.mk _ (Polynomial.eval 0 (Polynomial.C x)) = _
-  rw [Polynomial.eval_C]
-  rfl
 
 lemma toPolynomialZeroPresheaf_comp_polynomialZeroToNormalCone :
     X.toPolynomialZeroPresheaf ≫ I.polynomialZeroToNormalCone =

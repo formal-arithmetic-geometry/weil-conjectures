@@ -105,17 +105,6 @@ noncomputable def restrict : Compactification f :=
 @[reassoc (attr := simp)] lemma restrict_i_fst : e.restrict.i ≫ pullback.fst e.g m = e.i :=
   (ofIsPullback_i_fst _ e).trans (Category.id_comp _)
 
-/-- The open immersion of `e.restrict` is the base change of `e.i` along the projection:
-```
-  X -------𝟙 X------> X
-  |                   |
-  e.restrict.i       e.i
-  ↓                   ↓
-  e.Z ×_W Y --fst--> e.Z
-```
--/
-theorem isPullback_i_restrict : IsPullback (𝟙 X) e.restrict.i e.i (pullback.fst e.g m) :=
-  e.isPullback_i_ofIsPullback _
 
 /-- The proper morphism of `e.restrict` is the base change of `e.g` along `m`:
 ```

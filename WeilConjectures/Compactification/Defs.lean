@@ -266,11 +266,6 @@ theorem comp_of_isOpenImmersion {X' : Scheme.{u}} (e : X' ⟶ X) [IsOpenImmersio
     HasCompactification (e ≫ f) :=
   ((compactification f).precomp e).hasCompactification
 
-/-- **Compactifiability is preserved by proper postcomposition**: if `f : X ⟶ Y` admits a
-compactification and `p : Y ⟶ S` is proper, then `f ≫ p` admits one too. -/
-theorem comp_of_isProper {S : Scheme.{u}} (p : Y ⟶ S) [IsProper p] :
-    HasCompactification (f ≫ p) :=
-  ((compactification f).postcomp p).hasCompactification
 
 end HasCompactification
 

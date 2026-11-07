@@ -111,48 +111,6 @@ lemma homMk_left {U V : Y.Etale} (f : U.left ⟶ V.left) (w : f ≫ V.hom = U.ho
     (homMk f w).left = f :=
   rfl
 
-/-- **The sheaf condition** for a jointly surjective family of morphisms of étale `Y`-schemes:
-compatible sections glue uniquely. -/
-lemma existsUnique_of_isSheaf (F : Sheaf Y.smallEtaleTopology (Type w)) {T : Y.Etale}
-    {ι : Type*} {Z : ι → Y.Etale} (π : ∀ i, Z i ⟶ T)
-    (hπ : ⋃ i, Set.range (π i).left = Set.univ) (x : ∀ i, F.obj.obj (op (Z i)))
-    (hx : Presieve.Arrows.Compatible F.obj π x) :
-    ∃! s, ∀ i, F.obj.map (π i).op s = x i := by
-  have hS : Sieve.ofArrows Z π ∈ Y.smallEtaleTopology T :=
-    (ofArrows_mem_smallEtaleTopology_iff π).2 hπ
-  have hF : Presieve.IsSheaf Y.smallEtaleTopology F.obj :=
-    (isSheaf_iff_isSheaf_of_type _ _).1 F.property
-  have h := hF.isSheafFor _ hS
-  exact (Presieve.isSheafFor_arrows_iff _ _).1 h x hx
-
-/-- **Separatedness**: sections of a sheaf agreeing on a jointly surjective family of morphisms
-of étale `Y`-schemes are equal. -/
-lemma ext_of_isSheaf (F : Sheaf Y.smallEtaleTopology (Type w)) {T : Y.Etale}
-    {ι : Type*} {Z : ι → Y.Etale} (π : ∀ i, Z i ⟶ T)
-    (hπ : ⋃ i, Set.range (π i).left = Set.univ) {s s' : F.obj.obj (op T)}
-    (h : ∀ i, F.obj.map (π i).op s = F.obj.map (π i).op s') : s = s' := by
-  have hx : Presieve.Arrows.Compatible F.obj π (fun i ↦ F.obj.map (π i).op s) := by
-    intro i j W gi gj hij
-    simp only [← Functor.map_comp_apply, ← op_comp, hij]
-  obtain ⟨t, -, ht⟩ := existsUnique_of_isSheaf F π hπ _ hx
-  exact (ht s fun _ ↦ rfl).trans (ht s' fun i ↦ (h i).symm).symm
-
-/-- The sheaf condition for a single surjective morphism of étale `Y`-schemes. -/
-lemma existsUnique_of_isSheaf_of_surjective (F : Sheaf Y.smallEtaleTopology (Type w))
-    {T Z : Y.Etale} (π : Z ⟶ T) [Surjective π.left] (x : F.obj.obj (op Z))
-    (hx : ∀ (Z' : Y.Etale) (g₁ g₂ : Z' ⟶ Z), g₁ ≫ π = g₂ ≫ π →
-      F.obj.map g₁.op x = F.obj.map g₂.op x) :
-    ∃! s, F.obj.map π.op s = x := by
-  obtain ⟨s, hs, hu⟩ := existsUnique_of_isSheaf F (Z := fun _ : Unit ↦ Z) (fun _ ↦ π)
-    (by rw [Set.iUnion_const]; exact π.left.surjective.range_eq) (fun _ ↦ x)
-    (fun _ _ Z' g₁ g₂ h ↦ hx Z' g₁ g₂ h)
-  exact ⟨s, hs (), fun t ht ↦ hu t fun _ ↦ ht⟩
-
-lemma ext_of_isSheaf_of_surjective (F : Sheaf Y.smallEtaleTopology (Type w))
-    {T Z : Y.Etale} (π : Z ⟶ T) [Surjective π.left] {s s' : F.obj.obj (op T)}
-    (h : F.obj.map π.op s = F.obj.map π.op s') : s = s' :=
-  ext_of_isSheaf F (Z := fun _ : Unit ↦ Z) (fun _ ↦ π)
-    (by rw [Set.iUnion_const]; exact π.left.surjective.range_eq) fun _ ↦ h
 
 section AffineDescent
 
@@ -262,29 +220,6 @@ lemma left_comp_q_eq {T : Y.Etale} {a₁ a₂ : T ⟶ V.left}
     rw [r.overElt_comp, overElt_γC, ← r.overElt_comp, h₁, h]
   rw [← this, comp_left, Category.assoc, hq, ← Category.assoc, ← pr₁C_left, ← comp_left, h₁]
 
-include hpb hq in
-/-- Two points of `V` with the same image in the descended scheme represent the same section of
-`F`. -/
-lemma overElt_eq_of_left_comp_q_eq {T : Y.Etale} {b₁ b₂ : T ⟶ V.left}
-    (h : b₁.left ≫ q = b₂.left ≫ q) : r.overElt b₁ = r.overElt b₂ := by
-  have hc : b₁.left ≫ V.hom.left ≫ p.left = (b₂ ≫ V.hom).left ≫ p.left := by
-    simp only [comp_left, Category.assoc]
-    rw [← hpb.w, ← Category.assoc, h, Category.assoc]
-  let θ : T ⟶ PC p (V := V) := homMk (pullback.lift _ _ hc) (by
-    change _ ≫ pullback.snd _ _ ≫ W.hom = _
-    rw [pullback.lift_snd_assoc, w_left])
-  have h₁ : θ ≫ pr₁C p = b₁ := hom_ext (by simp [θ])
-  have h₂ : θ ≫ pr₂C p = b₂ ≫ V.hom := hom_ext (by simp [θ])
-  have hc' : θ ≫ γC F p r = b₂ := by
-    refine hom_ext (hpb.hom_ext ?_ ?_)
-    · change (θ.left ≫ (γC F p r).left) ≫ q = _
-      rw [Category.assoc, hq, ← Category.assoc]
-      change (θ ≫ pr₁C p).left ≫ q = _
-      rw [h₁, h]
-    · change (θ ≫ γC F p r ≫ V.hom).left = (b₂ ≫ V.hom).left
-      rw [γC_hom, h₂]
-  rw [← hc', r.overElt_comp, overElt_γC, ← r.overElt_comp, h₁]
-
 
 section Representation
 
@@ -385,100 +320,11 @@ noncomputable def desc [Surjective p.left] [AlgebraicGeometry.Etale n] (Z : Over
 @[simp] lemma desc_left_left [Surjective p.left] [AlgebraicGeometry.Etale n] (Z : Over B)
     (s : F.obj.obj (op Z.left)) : (desc hpb hq Z s).left.left = descLeft hpb hq Z s := rfl
 
-lemma desc_ext [AlgebraicGeometry.Etale n] {Z : Over B} {t t' : Z ⟶ XO n}
-    (h : t.left.left = t'.left.left) : t = t' :=
-  Over.OverMorphism.ext (hom_ext h)
-
-lemma desc_naturality [Surjective p.left] [AlgebraicGeometry.Etale n] {Z Z' : Over B}
-    (f : Z' ⟶ Z) (s : F.obj.obj (op Z.left)) :
-    desc hpb hq Z' (F.obj.map f.left.op s) = f ≫ desc hpb hq Z s := by
-  obtain ⟨a, ha₁, ha₂⟩ := r.exists_overElt_eq (prW p Z) (F.obj.map (prZ p Z).op s)
-  let hW : ZW p Z' ⟶ ZW p Z := homMk (pullback.map _ _ _ _ f.left.left (𝟙 _) (𝟙 _)
-    (by simp [← comp_left, Over.w f]) (by simp)) (by
-      change _ ≫ pullback.fst _ _ ≫ Z.left.hom = pullback.fst _ _ ≫ Z'.left.hom
-      simp)
-  have h₁ : hW ≫ prW p Z = prW p Z' := hom_ext (by simp [hW])
-  have h₂ : hW ≫ prZ p Z = prZ p Z' ≫ f.left := hom_ext (by simp [hW])
-  refine desc_ext ?_
-  rw [desc_left_left, Over.comp_left, comp_left, desc_left_left,
-    ← cancel_epi (pullback.fst Z'.hom.left p.left),
-    fst_descLeft hpb hq Z' _ (hW ≫ a) (by rw [Category.assoc, ha₁, h₁])
-      (by rw [r.overElt_comp, ha₂, ← Functor.map_comp_apply, ← op_comp, h₂, op_comp,
-        Functor.map_comp_apply])]
-  change _ = (prZ p Z' ≫ f.left).left ≫ _
-  rw [← h₂, comp_left, comp_left, Category.assoc, Category.assoc, prZ_left,
-    fst_descLeft hpb hq Z s a ha₁ ha₂]
-
-lemma desc_injective [Surjective p.left] [AlgebraicGeometry.Etale n] (Z : Over B) :
-    Function.Injective (desc (r := r) hpb hq Z) := by
-  intro s s' h
-  obtain ⟨a, ha₁, ha₂⟩ := r.exists_overElt_eq (prW p Z) (F.obj.map (prZ p Z).op s)
-  obtain ⟨a', ha'₁, ha'₂⟩ := r.exists_overElt_eq (prW p Z) (F.obj.map (prZ p Z).op s')
-  have e : a.left ≫ q = a'.left ≫ q := by
-    rw [← fst_descLeft hpb hq Z s a ha₁ ha₂, ← fst_descLeft hpb hq Z s' a' ha'₁ ha'₂,
-      ← desc_left_left (n := n), ← desc_left_left (n := n), h]
-  have : a = a' := hom_ext (hpb.hom_ext e (by rw [← comp_left, ← comp_left, ha₁, ha'₁]))
-  subst this
-  exact ext_of_isSheaf_of_surjective F (prZ p Z) (ha₂.symm.trans ha'₂)
-
-lemma desc_surjective [Surjective p.left] [AlgebraicGeometry.Etale n] (Z : Over B) :
-    Function.Surjective (desc (r := r) hpb hq Z) := by
-  intro t
-  have ht : t.left.left ≫ n = Z.hom.left := by
-    exact congr_arg (fun f ↦ f.left) (Over.w t)
-  let a : ZW p Z ⟶ V.left := homMk (hpb.lift (pullback.fst _ _ ≫ t.left.left)
-    (pullback.snd Z.hom.left p.left) (by rw [Category.assoc, ht, pullback.condition])) (by
-      change _ ≫ V.left.hom = pullback.fst _ _ ≫ Z.left.hom
-      rw [← over_w, hpb.lift_snd_assoc]
-      exact w_left (prW p Z))
-  have ha₁ : a ≫ V.hom = prW p Z := hom_ext (by simp [a])
-  have ha : a.left ≫ q = pullback.fst _ _ ≫ t.left.left := hpb.lift_fst _ _ _
-  obtain ⟨s, hs, -⟩ := existsUnique_of_isSheaf_of_surjective F (prZ p Z) (r.overElt a)
-    fun Z' g₁ g₂ hg ↦ by
-      rw [← r.overElt_comp, ← r.overElt_comp]
-      refine overElt_eq_of_left_comp_q_eq hpb hq ?_
-      rw [comp_left, comp_left, Category.assoc, Category.assoc, ha, ← Category.assoc,
-        ← Category.assoc, ← prZ_left, ← comp_left, ← comp_left, hg]
-      rfl
-  refine ⟨s, desc_ext ?_⟩
-  rw [desc_left_left, ← cancel_epi (pullback.fst Z.hom.left p.left),
-    fst_descLeft hpb hq Z s a ha₁ hs.symm, ha]
 
 end Representation
 
 end AffineDescent
 
-/-- **Effective étale descent of finite étale schemes, affine case.** Let `p : W ⟶ B` be a
-surjective morphism of étale `Y`-schemes with `W` and `B` affine, and let `F` be a sheaf of sets
-on the small étale site of `Y` whose restriction to étale `W`-schemes is represented by a finite
-étale `W`-scheme `V`. Then the restriction of `F` to étale `B`-schemes is represented by a
-finite étale `B`-scheme. -/
-theorem exists_representableBy_of_isAffine (F : Sheaf Y.smallEtaleTopology (Type w))
-    {B W : Y.Etale} [IsAffine B.left] [IsAffine W.left] (p : W ⟶ B) [Surjective p.left]
-    (V : Over W) [IsFinite V.hom.left] (r : ((Over.forget W).op ⋙ F.obj).RepresentableBy V) :
-    ∃ X : Over B, IsFinite X.hom.left ∧
-      Nonempty (((Over.forget B).op ⋙ F.obj).RepresentableBy X) := by
-  have : IsAffine V.left.left := isAffine_of_isAffineHom V.hom.left
-  obtain ⟨N, _, n, q, hpb, hq⟩ := exists_isPullback_of_coaction p.left V.hom.left
-    (γC F p r).left (γ_v F p r) (d_γ F p r) (γ₁_γ F p r)
-  have hQ : (@Surjective ⊓ @Flat ⊓ @QuasiCompact : MorphismProperty Scheme.{u}) p.left :=
-    ⟨⟨inferInstance, inferInstance⟩, inferInstance⟩
-  have : AlgebraicGeometry.Etale n :=
-    MorphismProperty.of_isPullback_of_descendsAlong hpb.flip hQ (inferInstance :
-      AlgebraicGeometry.Etale V.hom.left)
-  have : IsFinite n := by
-    have := IsFinite.descendsAlong_surjective_inf_flat_inf_quasicompact.{u}
-    exact MorphismProperty.of_isPullback_of_descendsAlong hpb.flip hQ
-      (inferInstance : IsFinite V.hom.left)
-  let e : ∀ Z : Over B, ((Over.forget B).op ⋙ F.obj).obj (op Z) ≃ (Z ⟶ XO n) := fun Z ↦
-    Equiv.ofBijective _ ⟨desc_injective (r := r) hpb hq Z, desc_surjective (r := r) hpb hq Z⟩
-  refine ⟨XO n, this, ⟨⟨fun {Z} ↦ (e Z).symm, fun {Z Z'} f g ↦ ?_⟩⟩⟩
-  apply (e Z).injective
-  rw [Equiv.apply_symm_apply]
-  change _ = desc hpb hq Z (F.obj.map f.left.op _)
-  rw [desc_naturality]
-  congr 1
-  exact ((e Z').apply_symm_apply g).symm
 
 end Etale
 

@@ -501,36 +501,6 @@ theorem exists_unitComparison_app_eq_zero_of_isLimit [∀ j, CompactSpace (D.obj
   rw [restrictAlong_congr' (π.app j) G (π.app j') (f₂ := D.map f) (by simp) _ (by simp) rfl] at this
   exact this
 
-/-- **Continuity of sections at an inverse limit.** Let `(Dⱼ)` be a cofiltered system of
-quasi-compact quasi-separated schemes over `R` with affine transition maps, with limit `X`, let
-`G` be an abelian étale sheaf on `R` and `W` a quasi-compact quasi-separated étale `R`-scheme,
-where `R` is quasi-separated, so that all the `W ×_R Dⱼ` are quasi-compact and quasi-separated
-(as for the étale objects of finite presentation of the blueprint; without it the statement
-fails).
-Then the sections of the pullback of `G` over `W ×_R X` are the filtered colimit of the sections
-of the pullbacks of `G` over the `W ×_R Dⱼ`: every section over `W ×_R X` comes from some
-`W ×_R Dⱼ`, and a section over `W ×_R Dⱼ` which vanishes on `W ×_R X` already vanishes on some
-`W ×_R Dⱼ'`, `j' ⟶ j`. The sections of the pullback of `G` over `W ×_R Dⱼ` are written as the
-sections of `πⱼ_* πⱼ^* G` over `W`, and the transition maps are
-`AlgebraicGeometry.Etale.unitComparison`.
-(blueprint: `lem-weil-pbc-etale-section-continuity`) -/
-theorem unitComparison_app_isColimit_of_isLimit [∀ j, CompactSpace (D.obj j)]
-    [∀ j, QuasiSeparatedSpace (D.obj j)] [∀ {j k : J} (f : j ⟶ k), IsAffineHom (D.map f)]
-    [QuasiSeparatedSpace R] (hc : IsLimit c)
-    (G : Sheaf R.smallEtaleTopology AddCommGrpCat.{u + 1}) (W : R.Etale)
-    [CompactSpace W.left] [QuasiSeparatedSpace W.left] :
-    (∀ t : ((P)_*[AddCommGrpCat.{u + 1}].obj
-        ((P)^*[AddCommGrpCat.{u + 1}].obj G)).obj.obj (op W),
-      ∃ (j : J) (s : ((π.app j)_*[AddCommGrpCat.{u + 1}].obj
-        ((π.app j)^*[AddCommGrpCat.{u + 1}].obj G)).obj.obj (op W)),
-        (unitComparison (c.π.app j) (π.app j) P (hP j) G).hom.app (op W) s = t) ∧
-    ∀ (j : J) (s : ((π.app j)_*[AddCommGrpCat.{u + 1}].obj
-        ((π.app j)^*[AddCommGrpCat.{u + 1}].obj G)).obj.obj (op W)),
-      (unitComparison (c.π.app j) (π.app j) P (hP j) G).hom.app (op W) s = 0 →
-        ∃ (j' : J) (f : j' ⟶ j), (unitComparison (D.map f) (π.app j) (π.app j')
-          (by simp) G).hom.app (op W) s = 0 :=
-  ⟨fun t ↦ unitComparison_app_surjective_of_isLimit D π c P hP hc G W t,
-    fun j s hs ↦ exists_unitComparison_app_eq_zero_of_isLimit D π c P hP hc G W j s hs⟩
 
 end Etale
 

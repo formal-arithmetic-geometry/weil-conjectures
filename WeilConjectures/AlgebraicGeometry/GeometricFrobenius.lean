@@ -562,31 +562,6 @@ theorem geometricFiberPoint_comp_geometricGaloisFrobenius_pow {K : Type u} [Fiel
   · simp [specGeometricFrobenius_pow_hom_comp_spec_map_of_card_eq_assoc k m hK]
   · simp
 
-/-- The Frobenius square
-
-```
-        g_X
-  X ---------> X
-  |            |
-a_X          a_X
-  v            v
-Spec k̄ --σ--> Spec k̄
-```
-
-is Cartesian: the geometric Galois Frobenius of the geometric fiber is the base change of
-the geometric Frobenius of `Spec k̄`. This is the square whose compact-support base change
-isomorphism transports Weil structures through `Rf_!`. -/
-theorem isPullback_geometricGaloisFrobenius :
-    IsPullback f.geometricGaloisFrobenius.hom f.geometricFiberToAlgebraicClosure
-      f.geometricFiberToAlgebraicClosure (specGeometricFrobenius k).hom :=
-  have h : IsPullback (f.geometricGaloisFrobenius.hom ≫ f.geometricFiberProj)
-      f.geometricFiberToAlgebraicClosure f
-      ((specGeometricFrobenius k).hom ≫ (Scheme.specAlgebraicClosure k).hom) := by
-    rw [f.geometricGaloisFrobenius_hom_comp_geometricFiberProj,
-      specGeometricFrobenius_hom_comp_specAlgebraicClosure]
-    exact IsPullback.of_hasPullback f (Scheme.specAlgebraicClosure k).hom
-  h.of_right f.geometricGaloisFrobenius_hom_comp_geometricFiberToAlgebraicClosure
-    (IsPullback.of_hasPullback f (Scheme.specAlgebraicClosure k).hom)
 
 variable {f} {Y₀ : Scheme.{u}} {g : Y₀ ⟶ Spec (.of k)}
 
@@ -610,42 +585,6 @@ theorem geometricFiberMap_comp_geometricGaloisFrobenius (φ : X₀ ⟶ Y₀) (h 
       f.geometricGaloisFrobenius.hom ≫ geometricFiberMap φ h := by
   apply pullback.hom_ext <;> simp [geometricFiberMap, geometricGaloisFrobenius]
 
-/-- The base change `φ̄ = φ × 𝟙` of a morphism over `k` and the geometric Galois Frobenii form
-a commutative square:
-
-```
-          Fr_X
-     X ────────▶ X
-     │           │
-   φ̄ │           │ φ̄
-     ▼           ▼
-     Y ────────▶ Y
-          Fr_Y
-```
--/
-theorem commSq_geometricGaloisFrobenius (φ : X₀ ⟶ Y₀) (h : φ ≫ g = f) :
-    CommSq f.geometricGaloisFrobenius.hom (geometricFiberMap φ h) (geometricFiberMap φ h)
-      g.geometricGaloisFrobenius.hom :=
-  ⟨(geometricFiberMap_comp_geometricGaloisFrobenius φ h).symm⟩
-
-/-- The square
-
-```
-          Fr_X
-     X ────────▶ X
-     │           │
-   φ̄ │           │ φ̄
-     ▼           ▼
-     Y ────────▶ Y
-          Fr_Y
-```
-
-of the base change `φ̄ = φ × 𝟙` of a morphism over `k` and the geometric Galois Frobenii is
-cartesian, its horizontal maps being isomorphisms. -/
-theorem isPullback_geometricGaloisFrobenius_geometricFiberMap (φ : X₀ ⟶ Y₀) (h : φ ≫ g = f) :
-    IsPullback f.geometricGaloisFrobenius.hom (geometricFiberMap φ h) (geometricFiberMap φ h)
-      g.geometricGaloisFrobenius.hom :=
-  .of_horiz_isIso (commSq_geometricGaloisFrobenius φ h)
 
 end Scheme.Hom
 
@@ -738,31 +677,6 @@ theorem geometricFrobenius_hom_comp_geometricFiberToAlgebraicClosure :
   simp [geometricFrobenius, geometricFiberToAlgebraicClosure,
     AlgebraicGeometry.specAlgebraicClosure, Scheme.specAlgebraicClosure]
 
-/-- The Frobenius square
-
-```
-        g_X
-  X ---------> X
-  |            |
-a_X          a_X
-  v            v
-Spec k̄ --σ--> Spec k̄
-```
-
-is Cartesian: the geometric Galois Frobenius of the geometric fiber is the base change of
-the geometric Frobenius of `Spec k̄`. This is the square whose compact-support base change
-isomorphism transports Weil structures through `Rf_!`. -/
-theorem isPullback_geometricFrobenius :
-    IsPullback f.geometricFrobenius.hom f.geometricFiberToAlgebraicClosure
-      f.geometricFiberToAlgebraicClosure (geometricFrobeniusField k).hom :=
-  have h : IsPullback (f.geometricFrobenius.hom ≫ f.geometricFiberProj)
-      f.geometricFiberToAlgebraicClosure f
-      ((geometricFrobeniusField k).hom ≫ AlgebraicGeometry.specAlgebraicClosure k) := by
-    rw [f.geometricFrobenius_hom_comp_geometricFiberProj,
-      geometricFrobeniusField_hom_comp_specAlgebraicClosure]
-    exact IsPullback.of_hasPullback f (AlgebraicGeometry.specAlgebraicClosure k)
-  h.of_right f.geometricFrobenius_hom_comp_geometricFiberToAlgebraicClosure
-    (IsPullback.of_hasPullback f (AlgebraicGeometry.specAlgebraicClosure k))
 
 end Scheme.Hom
 

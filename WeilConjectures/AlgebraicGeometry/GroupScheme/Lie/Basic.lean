@@ -51,16 +51,6 @@ sheaf of relative tangent vectors along the identity section. (blueprint:
 noncomputable def lieAlgebraSheaf : S.Modules :=
   Scheme.Modules.dual (omega G)
 
-theorem lieAlgebraSheaf_eq_tangentSheafAlong :
-    lieAlgebraSheaf G = G.hom.tangentSheafAlong (unitSection G) :=
-  rfl
-
-/-- For a smooth group scheme, the Lie algebra sheaf is the pullback `e^*T_{G/S}` of the tangent
-sheaf along the identity section. -/
-theorem lieAlgebraSheaf_iso_pullback_tangentSheaf [Smooth G.hom] :
-    Nonempty (lieAlgebraSheaf G ≅
-      (Scheme.Modules.pullback (unitSection G)).obj G.hom.tangentSheaf) :=
-  G.hom.tangentSheafAlong_iso_pullback_tangentSheaf (unitSection G) (unitSection_comp_hom G)
 
 /-- The Lie algebra `Lie(G) = Hom_{𝒪_S}(ω_{G/S}, 𝒪_S)` of a group scheme `G` over `S`: the global
 sections of the Lie algebra sheaf, the module of relative tangent vectors at the identity. Its Lie
@@ -75,9 +65,6 @@ noncomputable instance : AddCommGroup (Lie G) :=
 noncomputable instance : Module Γ(S, ⊤) (Lie G) :=
   inferInstanceAs (Module Γ(S, ⊤) (omega G ⟶ Scheme.Modules.unitModule S))
 
-/-- The Lie algebra is the module of global sections of the Lie algebra sheaf. -/
-theorem nonempty_lie_equiv_sections : Nonempty (Lie G ≃+ Γ(lieAlgebraSheaf G, ⊤)) :=
-  ⟨(Scheme.Modules.ΓHomObjAddEquiv _ _).symm⟩
 
 end GrpObj
 

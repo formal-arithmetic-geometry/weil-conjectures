@@ -968,23 +968,6 @@ def monomialCechMul (F : AddMonoidAlgebra A (n → ℤ))
     { app k := ModuleCat.ofHom (monomialCechMulCochain n A F hF h k.len)
       naturality _ _ _ := rfl }
 
-lemma monomialCechMul_f_apply (F : AddMonoidAlgebra A (n → ℤ))
-    (hF : F.coeff ∈ Finsupp.supported A A (monomialExponents n a)) (h : a + b = b') (p : ℕ)
-    (c : MonomialCechCochain n A b p) :
-    (monomialCechMul n A F hF h).f p c = monomialCechMulCochain n A F hF h p c :=
-  rfl
-
-/-- The class of a top-degree cocycle has, as coordinates, its coefficients on `E` at the
-strictly negative exponent vectors. -/
-lemma monomialCechComplexHomologyTopLinearEquivSucc_homologyClass {p : ℕ}
-    (hn : Fintype.card n = p + 1 + 1) (E : Fin (p + 1 + 1) ≃ n)
-    (z : LinearMap.ker ((monomialCechComplex n A m).d (p + 1) (p + 2)).hom) :
-    monomialCechComplexHomologyTopLinearEquivSucc n A m hn E
-        ((monomialCechComplex n A m).homologyClass p (p + 1) (p + 2) (by simp) (by simp) z) =
-      monomialCechCocycleTopCoeff n A m E z := by
-  simp only [monomialCechComplexHomologyTopLinearEquivSucc, LinearEquiv.trans_apply,
-    CochainComplex.homologyLinearEquivQuotient_homologyClass]
-  rfl
 
 variable (n) in
 /-- The strictly negative exponent vector `(-1, …, -1)`, of sum `-(d + 1)`. -/
@@ -1045,11 +1028,6 @@ lemma toLaurent_smul (r : A) (f : MvPolynomial n A) :
     r • AddMonoidAlgebra.ofCoeff (Finsupp.mapDomain _ (AddMonoidAlgebra.coeff f))
   rw [AddMonoidAlgebra.coeff_smul, Finsupp.mapDomain_smul, AddMonoidAlgebra.ofCoeff_smul]
 
-omit [Fintype n] in
-lemma toLaurent_monomial (s : n →₀ ℕ) (r : A) :
-    toLaurent n A (MvPolynomial.monomial s r) =
-      AddMonoidAlgebra.single (natCastExponents n s) r :=
-  AddMonoidAlgebra.mapDomain_single
 
 variable (n A) in
 /-- The coefficient of `x₀⁻¹ ⋯ x_d⁻¹` in the product of a polynomial with a Laurent
@@ -1064,55 +1042,5 @@ def coeffNegOneMul {D : ℕ} (G : AddMonoidAlgebra A (n → ℤ)) :
     simp only [Submodule.coe_smul, toLaurent_smul, smul_mul_assoc,
       AddMonoidAlgebra.coeff_smul_apply, RingHom.id_apply]
 
-omit [Fintype n] in
-lemma homogeneousSubmoduleBasis_apply (D : ℕ) (s : {s : n →₀ ℕ | s.degree = D}) :
-    (homogeneousSubmoduleBasis n A D s : MvPolynomial n A) = MvPolynomial.monomial s.1 1 := by
-  simp only [homogeneousSubmoduleBasis, MvPolynomial.basisRestrictSupport,
-    AddMonoidAlgebra.supportedEquivFinsupp, Module.Basis.map_apply]
-  simpa using MvPolynomial.single_eq_monomial s.1 (1 : A)
-
-/-- **The Serre pairing on the monomial Čech complex is perfect**: with `d + 1 ≥ 2` coordinates
-and `m ≤ -d - 1`, the isomorphism `Hᵈ(𝒪(m)) ≅ (A[xᵢ]_{-m-d-1})^∨` of
-`monomialCechComplexHomologyTopLinearEquivDual` is `x ↦ (f ↦ ⟨f, x⟩)` for the pairing
-`monomialCechPairing` induced by multiplication. In the monomial bases, `x^f` pairs to `1` with
-the class of `x^{-f-1}` and to `0` with the other basis elements.
-
-(blueprint: `lem-pc-projective-space-serre-pairing`) -/
-theorem monomialCechComplexHomologyTopLinearEquivDual_apply {p : ℕ}
-    (hn : Fintype.card n = p + 1 + 1) (hm : m ≤ -((p + 1 : ℕ) : ℤ) - 1)
-    (x : (monomialCechComplex n A m).homology (p + 1))
-    (f : MvPolynomial.homogeneousSubmodule n A (-m - ((p + 1 : ℕ) : ℤ) - 1).toNat) :
-    monomialCechComplexHomologyTopLinearEquivDual n A m hn hm x f =
-      monomialCechPairing n A hn hm f x := by
-  set E : Fin (p + 1 + 1) ≃ n := (Fintype.equivFinOfCardEq hn).symm
-  obtain ⟨z, rfl⟩ := (monomialCechComplex n A m).homologyClass_surjective (i := p)
-    (j := p + 1) (k := p + 2) (by simp) (by simp) x
-  have hR : monomialCechPairing n A hn hm f
-      ((monomialCechComplex n A m).homologyClass p (p + 1) (p + 2) (by simp) (by simp) z) =
-      coeffNegOneMul n A (AddMonoidAlgebra.ofCoeff (z.1 E : (n → ℤ) →₀ A)) f := by
-    simp only [monomialCechPairing, LinearMap.comp_apply]
-    erw [CochainComplex.homologyMap_homologyClass]
-    simp only [monomialCechTrace, LinearEquiv.coe_coe, LinearEquiv.trans_apply,
-      monomialCechComplexHomologyTopLinearEquivSucc_homologyClass,
-      Finsupp.uniqueLinearEquiv_apply]
-    rfl
-  rw [hR]
-  suffices h : (monomialCechComplexHomologyTopLinearEquivDual n A m hn hm
-      ((monomialCechComplex n A m).homologyClass p (p + 1) (p + 2) (by simp) (by simp) z) :
-        MvPolynomial.homogeneousSubmodule n A _ →ₗ[A] A) =
-      coeffNegOneMul n A (AddMonoidAlgebra.ofCoeff (z.1 E : (n → ℤ) →₀ A)) by
-    rw [h]
-  refine (homogeneousSubmoduleBasis n A _).ext fun s ↦ ?_
-  simp only [monomialCechComplexHomologyTopLinearEquivDual, LinearEquiv.trans_apply]
-  change ((homogeneousSubmoduleBasis n A _).constr A _) _ = _
-  rw [Module.Basis.constr_basis]
-  change _ = (toLaurent n A (homogeneousSubmoduleBasis n A _ s : MvPolynomial n A) *
-    AddMonoidAlgebra.ofCoeff (z.1 E : (n → ℤ) →₀ A)).coeff fun _ ↦ -1
-  rw [homogeneousSubmoduleBasis_apply, toLaurent_monomial, AddMonoidAlgebra.coeff_single_mul_apply,
-    one_mul]
-  change (monomialCechComplexHomologyTopLinearEquivSucc n A m hn E _ : _ →₀ A) _ = _
-  rw [monomialCechComplexHomologyTopLinearEquivSucc_homologyClass, monomialCechCocycleTopCoeff,
-    LinearMap.comp_apply, monomialCechTopCoeff_apply]
-  congr 1
 
 end AlgebraicGeometry.ProjectiveSpace

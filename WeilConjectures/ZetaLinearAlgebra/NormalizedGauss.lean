@@ -64,16 +64,6 @@ theorem exists_int_of_coeff_zero_eq_one_of_dvd {a : ℤ[X]} (ha : a.coeff 0 = 1)
   · rw [← reverse_map hinj, hg,
       reverse_reverse (natTrailingDegree_eq_zero_of_coeff_zero_eq_one hp)]
 
-/-- **Normalized Gauss lemma**: if a normalized integer polynomial factors as a product of two
-normalized rational polynomials, then both factors are images of normalized integer polynomials.
-Here *normalized* means that the constant coefficient is `1`. -/
-theorem exists_int_of_coeff_zero_eq_one_of_mul {a : ℤ[X]} (ha : a.coeff 0 = 1) {p q : ℚ[X]}
-    (hp : p.coeff 0 = 1) (hq : q.coeff 0 = 1) (h : a.map (Int.castRingHom ℚ) = p * q) :
-    ∃ p' q' : ℤ[X], p'.coeff 0 = 1 ∧ q'.coeff 0 = 1 ∧
-      p'.map (Int.castRingHom ℚ) = p ∧ q'.map (Int.castRingHom ℚ) = q := by
-  obtain ⟨p', hp', hp'p⟩ := exists_int_of_coeff_zero_eq_one_of_dvd ha hp ⟨q, h⟩
-  obtain ⟨q', hq', hq'q⟩ := exists_int_of_coeff_zero_eq_one_of_dvd ha hq ⟨p, by rw [h, mul_comm]⟩
-  exact ⟨p', q', hp', hq', hp'p, hq'q⟩
 
 end Integer
 

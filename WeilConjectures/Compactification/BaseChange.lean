@@ -211,13 +211,6 @@ theorem isSchemeTheoreticallyDominant_i_baseChange {f : X ⟶ S} (c : Compactifi
     IsSchemeTheoreticallyDominant (c.baseChange t).i :=
   isSchemeTheoreticallyDominant_i_ofIsPullback _ c hc
 
-/-- If the proper morphism of a compactification of `p` is locally of finite presentation,
-then so is the proper morphism of the base changed compactification. No flatness is needed:
-finite presentation is stable under arbitrary base change. -/
-theorem locallyOfFinitePresentation_g_ofIsPullback (hsq : IsPullback h u p t)
-    (c : Compactification p) [LocallyOfFinitePresentation c.g] :
-    LocallyOfFinitePresentation (c.ofIsPullback hsq).g :=
-  inferInstanceAs (LocallyOfFinitePresentation (pullback.snd c.g t))
 
 end Compactification
 

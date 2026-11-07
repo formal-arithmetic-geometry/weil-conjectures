@@ -57,43 +57,6 @@ lemma fromSpecResidueField_base_apply (y : Y) (x : Spec (Y.residueField y)) :
     (Y.fromSpecResidueField y).base x = y :=
   (Scheme.range_fromSpecResidueField y).subset ⟨x, rfl⟩
 
-/-- **Local split factorisation of a matrix of constant rank on a reduced scheme.** Let `A` be a
-matrix of global functions on a reduced scheme `Y`, of rank at most `ρ` at every point of an open
-`N`, and of rank at least `ρ` at a point `y ∈ N`. Then on an open neighbourhood `V ≤ N` of `y`,
-`A = L * M` with `L' * L = 1` and `M * M' = 1` for matrices `L`, `M`, `L'`, `M'` through `ρ`. -/
-theorem exists_split_factorization [IsReduced Y] {m n : Type*} [Fintype m] [Fintype n]
-    (A : Matrix m n Γ(Y, ⊤)) (ρ : ℕ) (N : Y.Opens)
-    (hle : ∀ y ∈ N, (A.map (Y.fromSpecResidueField y).appTop).rank ≤ ρ) {y : Y} (hy : y ∈ N)
-    (hge : ρ ≤ (A.map (Y.fromSpecResidueField y).appTop).rank) :
-    ∃ V : Y.Opens, V ≤ N ∧ y ∈ V ∧ ∃ (L : Matrix m (Fin ρ) Γ(V.toScheme, ⊤))
-      (M : Matrix (Fin ρ) n Γ(V.toScheme, ⊤)) (L' : Matrix (Fin ρ) m Γ(V.toScheme, ⊤))
-      (M' : Matrix n (Fin ρ) Γ(V.toScheme, ⊤)),
-      A.map V.ι.appTop = L * M ∧ L' * L = 1 ∧ M * M' = 1 := by
-  have : Nonempty (Spec (Y.residueField y)) := inferInstance
-  obtain ⟨x⟩ := this
-  obtain ⟨e₁, e₂, he⟩ := (le_rank_map_appTop_iff (isField_Γ_Spec_residueField y)
-    (Y.fromSpecResidueField y) x A ρ).1 hge
-  rw [fromSpecResidueField_base_apply] at he
-  refine ⟨N ⊓ Y.basicOpen (A.submatrix e₁ e₂).det, inf_le_left, ⟨hy, he⟩, ?_⟩
-  set V := N ⊓ Y.basicOpen (A.submatrix e₁ e₂).det
-  refine Matrix.exists_mul_eq_of_isUnit_det_submatrix _ e₁ e₂ ?_ fun f₁ f₂ ↦ ?_
-  · rw [Matrix.submatrix_map, ← RingHom.mapMatrix_apply, ← RingHom.map_det]
-    refine Scheme.isUnit_of_le_basicOpen (le_of_eq ?_)
-    rw [← Scheme.preimage_basicOpen_top, eq_comm, ← top_le_iff]
-    intro z _
-    exact (inf_le_right : V ≤ _) z.2
-  · rw [Matrix.submatrix_map, ← RingHom.mapMatrix_apply, ← RingHom.map_det]
-    refine eq_zero_of_basicOpen_eq_bot _ ?_
-    rw [← Scheme.preimage_basicOpen_top, eq_bot_iff]
-    intro z hz
-    have hzN : V.ι.base z ∈ N := (inf_le_left : V ≤ N) z.2
-    obtain ⟨x'⟩ : Nonempty (Spec (Y.residueField (V.ι.base z))) := inferInstance
-    have := (le_rank_map_appTop_iff (isField_Γ_Spec_residueField (V.ι.base z))
-      (Y.fromSpecResidueField (V.ι.base z)) x' A (ρ + 1)).2 ⟨f₁, f₂, by
-        rw [fromSpecResidueField_base_apply]
-        exact hz⟩
-    have := hle _ hzN
-    omega
 
 /-- **Free cohomology of a complex of finite free modules with a split middle term.** Let `Q` be a
 cochain complex of `𝒪_Y`-modules with `Q^{q-1} ≅ 𝒪^{(a)}`, `Q^q ≅ 𝒪^{(b)}`, `Q^{q+1} ≅ 𝒪^{(c)}`,
@@ -154,19 +117,6 @@ lemma map_appTop_comp {m n : Type*} {X Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ 
   rw [Scheme.Hom.comp_appTop, Matrix.map_map]
   rfl
 
-/-- The rank of a matrix restricted to an open subscheme, at a point, is its rank at the image
-point. -/
-lemma rank_map_appTop_restrict {m n : Type*} [Finite m] [Fintype n] (V : Y.Opens) (z : V.toScheme)
-    (A : Matrix m n Γ(Y, ⊤)) :
-    ((A.map V.ι.appTop).map (V.toScheme.fromSpecResidueField z).appTop).rank =
-      (A.map (Y.fromSpecResidueField (V.ι.base z)).appTop).rank := by
-  obtain ⟨x⟩ : Nonempty (Spec (V.toScheme.residueField z)) := inferInstance
-  obtain ⟨x'⟩ : Nonempty (Spec (Y.residueField (V.ι.base z))) := inferInstance
-  rw [← map_appTop_comp]
-  refine rank_map_appTop_eq_of_base_eq (isField_Γ_Spec_residueField z)
-    (isField_Γ_Spec_residueField _) _ _ x x' ?_ A
-  rw [Scheme.Hom.comp_apply, fromSpecResidueField_base_apply,
-    fromSpecResidueField_base_apply]
 
 /-- The matrices of the differentials of the pullback of a complex of free modules are the
 images of the matrices of the differentials. -/
@@ -233,90 +183,5 @@ lemma rank_splitIdempotent_map {R K : Type*} [CommRing R] [Field K] {a b c : Typ
       ((Matrix.rank_mul_le_left _ _).trans ((Matrix.rank_le_card_width _).trans (by simp)))
   omega
 
-/-- **Locally free cohomology of a complex of finite free modules with constant ranks.** Let `P`
-be a cochain complex of `𝒪_Y`-modules on a reduced scheme `Y` with `P^n ≅ 𝒪^{r_n}`, and suppose
-that on an open `N` the matrices of the differentials into and out of degree `q` have constant
-ranks `ρ₁` and `ρ₂` at every point. Then every point `y ∈ N` lies in the image of an open
-immersion `j : Z ⟶ Y` with `H^q(j^* P) ≅ 𝒪_Z^{r_q - ρ₁ - ρ₂}`.
-
-Near `y` both matrices have split rank factorisations
-(`AlgebraicGeometry.Scheme.Modules.exists_split_factorization`); the idempotent
-`ε = (1 - L₁ L₁') (1 - M₂' M₂)` then has rank `r_q - ρ₁ - ρ₂` at every point
-(`AlgebraicGeometry.Scheme.Modules.rank_splitIdempotent_map`), so it has itself a split rank
-factorisation `ε = L₃ M₃` near `y`, and `L₃`, `M₃` split off `𝒪^{r_q - ρ₁ - ρ₂}` as the cohomology
-(`AlgebraicGeometry.Scheme.Modules.nonempty_homology_iso_free_of_split`). -/
-theorem exists_isOpenImmersion_homology_pullback_iso_free [IsReduced Y]
-    (P : CochainComplex Y.Modules ℤ) {r : ℤ → ℕ}
-    (e : ∀ n, P.X n ≅ free (R := Y.ringCatSheaf) (ULift.{u} (Fin (r n)))) (q : ℤ) {ρ₁ ρ₂ : ℕ}
-    (N : Y.Opens)
-    (h₁ : ∀ z ∈ N, ((freeMatrix ((e (q - 1)).inv ≫ P.d (q - 1) q ≫ (e q).hom)).map
-      (Y.fromSpecResidueField z).appTop).rank = ρ₁)
-    (h₂ : ∀ z ∈ N, ((freeMatrix ((e q).inv ≫ P.d q (q + 1) ≫ (e (q + 1)).hom)).map
-      (Y.fromSpecResidueField z).appTop).rank = ρ₂)
-    {y : Y} (hy : y ∈ N) :
-    ∃ (Z : Scheme.{u}) (j : Z ⟶ Y) (_ : IsOpenImmersion j), y ∈ Set.range j.base ∧
-      Nonempty ((((Modules.pullback j).mapHomologicalComplex _).obj P).homology q ≅
-        free (R := Z.ringCatSheaf) (ULift.{u} (Fin (r q - ρ₁ - ρ₂)))) := by
-  classical
-  set A₁ := freeMatrix ((e (q - 1)).inv ≫ P.d (q - 1) q ≫ (e q).hom) with hA₁
-  set A₂ := freeMatrix ((e q).inv ≫ P.d q (q + 1) ≫ (e (q + 1)).hom) with hA₂
-  have hA : A₂ * A₁ = 0 := by
-    rw [hA₁, hA₂, ← freeMatrix_comp]
-    simp
-  obtain ⟨V₁, hV₁N, hyV₁, L₁, M₁, L₁', M₁', s₁⟩ :=
-    exists_split_factorization A₁ ρ₁ N (fun z hz ↦ (h₁ z hz).le) hy (h₁ y hy).ge
-  obtain ⟨V₂, hV₂N, hyV₂, L₂, M₂, L₂', M₂', s₂⟩ :=
-    exists_split_factorization A₂ ρ₂ N (fun z hz ↦ (h₂ z hz).le) hy (h₂ y hy).ge
-  set V := V₁ ⊓ V₂ with hV
-  -- the split factorisations over `V`
-  have t₁ := Matrix.split_map (Y.homOfLE (inf_le_left : V ≤ V₁)).appTop.hom s₁
-  have t₂ := Matrix.split_map (Y.homOfLE (inf_le_right : V ≤ V₂)).appTop.hom s₂
-  rw [Matrix.map_map, ← RingHom.coe_comp, ← CommRingCat.hom_comp, ← Scheme.Hom.comp_appTop,
-    Scheme.homOfLE_ι] at t₁ t₂
-  set ψ₁ := (Y.homOfLE (inf_le_left : V ≤ V₁)).appTop.hom
-  set ψ₂ := (Y.homOfLE (inf_le_right : V ≤ V₂)).appTop.hom
-  have hB : A₂.map V.ι.appTop * A₁.map V.ι.appTop = 0 := by
-    rw [← Matrix.map_mul, hA, Matrix.map_zero _ (map_zero _)]
-  set ε := Matrix.splitIdempotent (L₁.map ψ₁) (L₁'.map ψ₁) (M₂.map ψ₂) (M₂'.map ψ₂) with hε
-  have hrank (z : V.toScheme) :
-      (ε.map (V.toScheme.fromSpecResidueField z).appTop).rank = r q - ρ₁ - ρ₂ := by
-    let := (isField_Γ_Spec_residueField z).toField
-    have := rank_splitIdempotent_map hB t₁ t₂ (V.toScheme.fromSpecResidueField z).appTop.hom
-    simpa using this
-  have hyV : y ∈ V := ⟨hyV₁, hyV₂⟩
-  obtain ⟨V₃, -, hyV₃, L₃, M₃, L₃', M₃', s₃⟩ := exists_split_factorization ε (r q - ρ₁ - ρ₂) ⊤
-    (fun z _ ↦ (hrank z).le) (Set.mem_univ (⟨y, hyV⟩ : V.toScheme)) (hrank _).ge
-  -- everything over `Z = V₃`, via `j = V₃.ι ≫ V.ι`
-  set ψ := V₃.ι.appTop.hom
-  have u₁ := Matrix.split_map ψ t₁
-  have u₂ := Matrix.split_map ψ t₂
-  rw [← map_appTop_comp] at u₁ u₂
-  have hε₃ := s₃.1
-  rw [hε, Matrix.splitIdempotent_map] at hε₃
-  have h₃ : M₃ * L₃ = 1 := by
-    refine Matrix.mul_eq_one_of_isIdempotentElem ?_ s₃.2.1 s₃.2.2
-    rw [← hε₃]
-    exact Matrix.splitIdempotent_mul_self u₁.2.1 u₂.2.2
-      (Matrix.mul_eq_zero_of_split (by rw [← Matrix.map_mul, hA, Matrix.map_zero _ (map_zero _)])
-        u₁.1 u₁.2.2 u₂.1 u₂.2.1)
-  obtain ⟨k₁, k₂, k₃⟩ := Matrix.split_homology_data
-    (by rw [← Matrix.map_mul, hA, Matrix.map_zero _ (map_zero _)]) u₁.1 u₁.2.1 u₁.2.2 u₂.1 u₂.2.1
-    u₂.2.2 hε₃ h₃
-  obtain ⟨σ, τ, k₃⟩ : ∃ σ τ, L₃ * M₃ + A₁.map (V₃.ι ≫ V.ι).appTop * σ +
-      τ * A₂.map (V₃.ι ≫ V.ι).appTop = 1 := ⟨_, _, k₃⟩
-  refine ⟨V₃.toScheme, V₃.ι ≫ V.ι, inferInstance, ⟨⟨⟨y, hyV⟩, hyV₃⟩, rfl⟩, ?_⟩
-  let E (n : ℤ) := (Modules.pullback (V₃.ι ≫ V.ι)).mapIso (e n) ≪≫
-    pullbackFreeIso (V₃.ι ≫ V.ι) (ULift.{u} (Fin (r n)))
-  refine nonempty_homology_iso_free_of_split _ q (E (q - 1)) (E q) (E (q + 1)) σ τ
-    (L₃.submatrix id Equiv.ulift) (M₃.submatrix Equiv.ulift id) ?_ ?_ ?_ ?_
-  · rw [← Matrix.submatrix_mul _ _ _ _ _ Function.bijective_id, h₃, Matrix.submatrix_one_equiv]
-  · rw [freeMatrix_pullback_d, ← hA₂, ← Matrix.submatrix_id_id (A₂.map _),
-      ← Matrix.submatrix_mul _ _ _ _ _ Function.bijective_id, k₁, Matrix.submatrix_zero]
-    rfl
-  · rw [freeMatrix_pullback_d, ← hA₁, ← Matrix.submatrix_id_id (A₁.map _),
-      ← Matrix.submatrix_mul _ _ _ _ _ Function.bijective_id, k₂, Matrix.submatrix_zero]
-    rfl
-  · rw [freeMatrix_pullback_d, freeMatrix_pullback_d, ← hA₁, ← hA₂, Matrix.submatrix_mul_equiv,
-      Matrix.submatrix_id_id, k₃]
 
 end AlgebraicGeometry.Scheme.Modules
