@@ -241,7 +241,6 @@ private theorem component_square (n : ℕ) (M N : Systems.{c, v, max c v r} J B 
     Functor.mapIso_hom, CategoryTheory.MonoidalCategory.tensorIso_hom]
   unfold ordinaryTensorHom
   simp only [Category.assoc, Iso.inv_hom_id_assoc,
-
     CategoryTheory.MonoidalCategory.tensorHom_comp_tensorHom,
     Iso.inv_hom_id_app]
   erw [CategoryTheory.MonoidalCategory.id_tensorHom_id, Category.comp_id]
