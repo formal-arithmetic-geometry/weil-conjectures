@@ -622,3 +622,23 @@
 - Records: /home/ubuntu/u9/bz/FIXES-PF542.md and /home/ubuntu/u9/state/PF542.DONE.
 - All ucheck calls have finished. This final commit changes progress documentation only;
   Lean sources are identical to the successful builds.
+
+# PF555 in progress
+
+- Branch u9/PF555; baseline 4d8344e5776c63736db12b5f80aaaf55a72a9d05.
+- Re-read /home/ubuntu/u9/briefs/PF555.md and the existing progress notes on continuation.
+- Applied known BZ565/PF494 migration: ULift.ext now infers its two lifted values.
+  The only Lean edit removes `a b` from line 73 of EmbeddedFiniteHeartRealization.
+- Statements, definitions, imports, docstrings, and options are otherwise unchanged;
+  replay/idempotence and static proof-placeholder audits pass.
+- First leaf ucheck-bumpF checked aab0ba6392083396d9f211cc791dc454812e9b5e.
+  It ended with service timeout rc=124 after 4409 successful rebuilds and zero failures;
+  the leaf was not reached. A new invocation is required to finish from the warmed cache.
+  Remote full log: Weil u9/logs/PF555-20261107T184520.log.
+  Local summary: /home/ubuntu/u9/bz/BUILD-PF555-leaf.log (written when ucheck finishes).
+- The first invocation has finished. Never start another while a retry is active.
+- Fix/error/rule and baseline evidence: /home/ubuntu/u9/bz/FIXES-PF555.md.
+- Next: await leaf green, then use /home/ubuntu/u9/bz/PF555-downstream-batch1.txt
+  for the six-target importer batch. Whole importer graph is in PF555-downstream-layers.json.
+- Current registry assigns the leaf only to PF555; direct importers have no PF assignment.
+- No local Lean/Lake, new declarations, deletions, proof shortcuts, or heartbeat increases.
