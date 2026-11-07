@@ -97,7 +97,7 @@ noncomputable def specGaloisAction (σ : L ≃ₐ[F] L) : Spec (.of L) ⟶ Spec 
   Spec.map (CommRingCat.ofHom (σ : L →+* L))
 
 /-- `Spec L ⟶ Spec F` is finite for a finite field extension `L/F` (the instance form of
-`AlgebraicGeometry.isFinite_specMap_algebraMap`). -/
+`AlgebraicGeometry.instIsFiniteSpecMapAlgebraMap`). -/
 instance instIsFiniteSpecMapAlgebraMap [FiniteDimensional F L] :
     IsFinite (Spec.map (CommRingCat.ofHom (algebraMap F L))) :=
   (IsFinite.SpecMap_iff _).2 (RingHom.finite_algebraMap.2 inferInstance)
