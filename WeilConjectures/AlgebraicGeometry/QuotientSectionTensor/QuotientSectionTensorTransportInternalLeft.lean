@@ -82,7 +82,6 @@ private theorem kflat_from_acyclic_test_local
     (hP A hA)
   exact ⟨(HomotopyCategory.subcategoryAcyclic _).prop_of_iso (β_ _ _) h, h⟩
 
-set_option maxHeartbeats 800000 in
 -- The derived-category equivalence and tensor comparison require a large elaboration budget.
 theorem section_tensor_transport_internal_left (T : Scheme.{u})
     (c : ScalarSectionData a T) (hc : ScalarSectionNormalized a T c)

@@ -29,7 +29,6 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
 variable [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)]
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ' T)]
 
-set_option maxHeartbeats 800000 in
 -- The explicit generator calculation needs the larger elaboration budget.
 /-- The sectionwise scalar extension admits a natural transformation normalized on generators.
 Source: Stacks 03EK and 06YY; this is the map part of the fixed-model comparison.
