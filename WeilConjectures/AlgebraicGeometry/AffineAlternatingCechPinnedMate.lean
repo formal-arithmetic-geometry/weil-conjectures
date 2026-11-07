@@ -237,8 +237,3 @@ theorem affineAlternatingCech_pinned_mate
     (bc (QX.obj M)) (bc (QX.obj D)) hn hp hu hg
 
 end AlgebraicGeometry
-
-namespace AlgebraicGeometry
-/-- Public export of the private `affineAlternatingCech_pinned_mate_private` (used by `import all` importers; linter.privateModule). -/
-alias affineAlternatingCech_pinned_mate := affineAlternatingCech_pinned_mate_private
-end AlgebraicGeometry
