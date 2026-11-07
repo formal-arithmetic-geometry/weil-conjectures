@@ -218,7 +218,6 @@ private theorem pullback_bounded_constructible
       ((F.mapDerivedCategoryHomologyFunctorIso n).app K ≪≫
         (DerivedCategory.homologyFunctor _ n).mapIso (e.symm.app K)) (h _ (hK.2 n))
 
-set_option maxHeartbeats 200000 in
 -- The full-subcategory and universe transports require explicit structural comparisons.
 private theorem pullback_of_constructible
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -290,7 +289,6 @@ private theorem pullback_of_constructible
   · infer_instance
   · exact fun I ↦ preservesCoproducts_of_small R hrsmall I
 
-set_option maxHeartbeats 800000 in
 -- Elaborating all six coefficient instances needs the same heartbeat budget.
 /-- Exact inverse image preserves small sums, bounded constructible finite-Tor objects,
 and their localizing closure, for each of the six admissible coefficient types.
