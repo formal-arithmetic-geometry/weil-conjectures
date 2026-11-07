@@ -113,7 +113,7 @@ private theorem derivedTensor_eq_curriedTensor
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) :
     derivedTensor Λ X = @curriedTensor _ _
-      (DerivedCategory.instMonoidalCategory_weilConjectures (C := Mod
+      (DerivedCategory.instMonoidalCategory (C := Mod
         (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) := rfl
 
 private theorem constantModel_derived_comap_iff

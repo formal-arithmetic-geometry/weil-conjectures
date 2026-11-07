@@ -123,7 +123,7 @@ private theorem tensorator_Q_generic
   unfold Functor.LaxMonoidal.μ
   unfold DerivedCategory.laxMonoidalQ
   unfold inferInstance
-  unfold DerivedCategory.instLaxMonoidalCochainComplexIntQ_weilConjectures
+  unfold DerivedCategory.instLaxMonoidalQ
   unfold Functor.LaxMonoidal.ofIso
   dsimp only
   rw [Functor.LaxMonoidal.comp_μ]
