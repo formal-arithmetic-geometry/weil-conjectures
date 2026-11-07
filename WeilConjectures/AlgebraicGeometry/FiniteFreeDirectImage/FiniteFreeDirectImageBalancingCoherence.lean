@@ -667,7 +667,7 @@ private theorem unit
   ext K
   simp
 
-private theorem tower
+private theorem tower_private
     {A₀ A₁ A₂ B₀ B₁ B₂ : Type*}
     [Category A₀] [Category A₁] [Category A₂] [Category B₀] [Category B₁] [Category B₂]
     {F₀₁ : A₀ ⥤ A₁} {F₁₂ : A₁ ⥤ A₂} {F₀₂ : A₀ ⥤ A₂}
@@ -719,3 +719,8 @@ private theorem tower
 end Conjugation
 
 end AlgebraicGeometry.Scheme.FiniteFreeDirectImage
+
+namespace AlgebraicGeometry.Scheme.FiniteFreeDirectImage.Conjugation
+/-- Public export of the private `tower_private` (used by `import all` importers; linter.privateModule). -/
+alias tower := tower_private
+end AlgebraicGeometry.Scheme.FiniteFreeDirectImage.Conjugation

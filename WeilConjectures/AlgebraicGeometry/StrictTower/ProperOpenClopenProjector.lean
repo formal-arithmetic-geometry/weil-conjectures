@@ -8,7 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerProperOpenArrows
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Clopen.ProEtaleClopenRingedModuleGluing
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import WeilConjectures.AlgebraicGeometry.StrictTower.OpenBetaSourceFactorization
 import WeilConjectures.CategoryTheory.Exact.ExactRestrictionCompositionSupplement
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Complement

@@ -32,7 +32,6 @@ public import WeilConjectures.CategoryTheory.ScalarLocalization.PbcRationalTrans
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarRestriction
 import all WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarRestriction
 import all WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarOperationComp
-import all WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarOperationShift
 import all WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarStages
 import all WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarRationalShift
 import all WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarAmbientShift

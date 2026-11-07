@@ -20,7 +20,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.FiniteFreeDirectImage
 
-private theorem mate_columns
+private theorem mate_columns_private
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     {L : A ⥤ C} {R : C ⥤ A} {L' : B ⥤ D} {R' : D ⥤ B}
     {E : A ⥤ B} {U : B ⥤ A} {E' : C ⥤ D} {U' : D ⥤ C}
@@ -71,4 +71,9 @@ private theorem mate_columns
   simp only [Adjunction.homEquiv_unit, Functor.map_comp, ← Category.assoc,
     adj.right_triangle_components, Category.id_comp]
 
+end AlgebraicGeometry.Scheme.FiniteFreeDirectImage
+
+namespace AlgebraicGeometry.Scheme.FiniteFreeDirectImage
+/-- Public export of the private `mate_columns_private` (used by `import all` importers; linter.privateModule). -/
+alias mate_columns := mate_columns_private
 end AlgebraicGeometry.Scheme.FiniteFreeDirectImage

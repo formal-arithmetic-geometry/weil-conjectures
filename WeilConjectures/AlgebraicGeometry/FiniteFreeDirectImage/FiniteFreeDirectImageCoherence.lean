@@ -48,7 +48,7 @@ namespace AlgebraicGeometry.Scheme.FiniteFreeDirectImage
 
 set_option maxHeartbeats 800000 in
 -- The inlined coordinate construction exceeded 200000 heartbeats at the derived square.
-private theorem comparison_isIso_app {Z W : Scheme.{u}} (q : Z ⟶ W)
+private theorem comparison_isIso_app_private {Z W : Scheme.{u}} (q : Z ⟶ W)
     (sW : ScalarModel W) (sZ : ScalarModel Z)
     (R S : Coefficients q) (a : CoefficientMap R S) (d : ℕ)
     (hfree : Nonempty ((proEtaleRingRestrictScalars a.target).obj
@@ -297,4 +297,9 @@ private theorem comparison_isIso_app {Z W : Scheme.{u}} (q : Z ⟶ W)
       a.target a.source R.identification S.identification a.comm).2.1
   exact isIso_of_reflects_iso f U
 
+end AlgebraicGeometry.Scheme.FiniteFreeDirectImage
+
+namespace AlgebraicGeometry.Scheme.FiniteFreeDirectImage
+/-- Public export of the private `comparison_isIso_app_private` (used by `import all` importers; linter.privateModule). -/
+alias comparison_isIso_app := comparison_isIso_app_private
 end AlgebraicGeometry.Scheme.FiniteFreeDirectImage
