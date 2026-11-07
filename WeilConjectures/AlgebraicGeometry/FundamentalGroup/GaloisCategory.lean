@@ -690,20 +690,18 @@ lemma isAffineHom_of_isAffineHom {X Z : Scheme.{u}} (f : X ⟶ Z) (hf : IsAffine
     IsAffineHom f :=
   hf
 
-lemma isAffineHom_of_isAffine {X Z : Scheme.{u}} (f : X ⟶ Z) (_ : IsAffine X) (_ : IsAffine Z) :
-    IsAffineHom f :=
-  inferInstance
-
 /-- The gluing data for the quotient of a finite étale `Y`-scheme by a finite monoid action. -/
 noncomputable abbrev quotientGluingData :
     Y.directedAffineCover.ColimitGluingData (D ⋙ toAffineOver Y) :=
-  Scheme.quotientGluingData isAffineHom_of_isAffineHom isAffineHom_of_isAffine _
+  Scheme.quotientGluingData isAffineHom_of_isAffineHom
+    @AlgebraicGeometry.isAffineHom_of_isAffine _
 
 instance preservesColimitsOfShape_pullback_trans {U V : Y.directedAffineCover.I₀} (hUV : U ⟶ V) :
     PreservesColimitsOfShape (SingleObj G)
       (MorphismProperty.Over.pullback (@IsAffineHom : MorphismProperty Scheme.{u}) ⊤
         (Y.directedAffineCover.trans hUV)) :=
-  preservesColimitsOfShape_pullback isAffineHom_of_isAffineHom isAffineHom_of_isAffine _
+  preservesColimitsOfShape_pullback isAffineHom_of_isAffineHom
+    @AlgebraicGeometry.isAffineHom_of_isAffine _
 
 /-- The quotient cocone in affine `Y`-schemes is a colimit. -/
 noncomputable def isColimitGluedCocone : IsColimit (quotientGluingData D).gluedCocone :=
@@ -716,7 +714,8 @@ lemma isFinite_and_etale_gluedCocone :
     (D.obj (SingleObj.star G)).property
   have : Etale ((D ⋙ toAffineOver Y).obj (SingleObj.star G)).hom :=
     (D.obj (SingleObj.star G)).obj.prop
-  exact isFinite_and_etale_of_isColimit isAffineHom_of_isAffineHom isAffineHom_of_isAffine _
+  exact isFinite_and_etale_of_isColimit isAffineHom_of_isAffineHom
+    @AlgebraicGeometry.isAffineHom_of_isAffine _
     (isColimitGluedCocone D)
 
 /-- The quotient of a finite étale `Y`-scheme by a finite monoid action, as a cocone in
@@ -785,7 +784,7 @@ theorem fiber_quotientCocone :
   let s' := IsOpenImmersion.lift f s hrange
   have hs' : s' ≫ f = s := IsOpenImmersion.lift_fac _ _ _
   have := preservesColimit_pullback_directedAffineCover isAffineHom_of_isAffineHom
-    isAffineHom_of_isAffine (D ⋙ toAffineOver Y) i
+    @AlgebraicGeometry.isAffineHom_of_isAffine (D ⋙ toAffineOver Y) i
   let F := MorphismProperty.Over.pullback (@IsAffineHom : MorphismProperty Scheme.{u}) ⊤ f
   let K' := (D ⋙ toAffineOver Y) ⋙ F
   let hc' := isColimitOfPreserves F (isColimitGluedCocone D)
@@ -798,7 +797,7 @@ theorem fiber_quotientCocone :
       (D.obj (SingleObj.star G)).obj.prop
     inferInstanceAs (Etale (pullback.snd _ _))
   obtain ⟨H₁, H₂⟩ := geometricFiber_quotient_of_isAffine isAffineHom_of_isAffineHom
-    isAffineHom_of_isAffine K' hc' s'
+    @AlgebraicGeometry.isAffineHom_of_isAffine K' hc' s'
   let EW : (K'.obj (SingleObj.star G)).hom.GeometricFiber s' ≃
       (fiber s).obj (D.obj (SingleObj.star G)) :=
     fiberEquivOfOpen s f s' hs' (D.obj (SingleObj.star G))
