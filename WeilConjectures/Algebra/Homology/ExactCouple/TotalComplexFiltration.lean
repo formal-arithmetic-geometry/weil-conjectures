@@ -158,9 +158,6 @@ noncomputable def columnFiltration : DecreasingFiltration (K.total (up ℤ)) whe
   F_succ_le p := Subobject.mk_le_mk_of_comm (total.map (K.columnsGEMap p) (up ℤ))
     (K.total_map_columnsGEMap_comp p)
 
-/-- The `p`-th step of the column filtration is `Tot K^{≥ p, •}`. -/
-lemma columnFiltration_F (p : ℤ) :
-    K.columnFiltration.F p = Subobject.mk (K.totalιColumnsGE p) := rfl
 
 /-! ### The graded pieces of the column filtration -/
 
@@ -218,9 +215,6 @@ noncomputable def columnShortComplex (p : ℤ) : ShortComplex (CochainComplex C 
   ShortComplex.mk (total.map (K.columnsGEMap p) (up ℤ)) (total.map (K.toSingleColumn p) (up ℤ))
     (by rw [← total.map_comp, columnsGEMap_toSingleColumn, total.map_zero])
 
-/-- The first morphism of `HomologicalComplex₂.columnShortComplex`. -/
-lemma columnShortComplex_f (p : ℤ) :
-    (K.columnShortComplex p).f = total.map (K.columnsGEMap p) (up ℤ) := rfl
 
 /-- The second morphism of `HomologicalComplex₂.columnShortComplex`. -/
 lemma columnShortComplex_g (p : ℤ) :
@@ -328,13 +322,6 @@ noncomputable def columnFiltrationSesHom (p : ℤ) :
   comm₁₂ := (K.ofLE_comp_columnFiltrationPieceIso_hom p).symm
   comm₂₃ := (cokernel.π_desc _ _ _).symm
 
-/-- The first component of `HomologicalComplex₂.columnFiltrationSesHom`. -/
-lemma columnFiltrationSesHom_τ₁ (p : ℤ) :
-    (K.columnFiltrationSesHom p).τ₁ = (K.columnFiltrationPieceIso (p + 1)).hom := rfl
-
-/-- The second component of `HomologicalComplex₂.columnFiltrationSesHom`. -/
-lemma columnFiltrationSesHom_τ₂ (p : ℤ) :
-    (K.columnFiltrationSesHom p).τ₂ = (K.columnFiltrationPieceIso p).hom := rfl
 
 /-- The third component of `HomologicalComplex₂.columnFiltrationSesHom`. -/
 @[reassoc (attr := simp)]

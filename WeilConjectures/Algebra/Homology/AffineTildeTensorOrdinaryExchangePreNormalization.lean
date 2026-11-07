@@ -268,9 +268,9 @@ private theorem affineTildeTensorOrdinaryExchange_preNormalization_private
     (affineBaseChangeTildeComplexIso A D φ M).inv
     (affineTildeTensorOrdinaryExchange_preNormalization_chain R A B D M φ ψ hw k hk)
 
-end AlgebraicGeometry
+/-- Public export of the private `affineTildeTensorOrdinaryExchange_preNormalization_private`
+(used by `import all` importers; linter.privateModule). -/
+alias affineTildeTensorOrdinaryExchange_preNormalization :=
+  affineTildeTensorOrdinaryExchange_preNormalization_private
 
-namespace AlgebraicGeometry
-/-- Public export of the private `affineTildeTensorOrdinaryExchange_preNormalization_private` (used by `import all` importers; linter.privateModule). -/
-alias affineTildeTensorOrdinaryExchange_preNormalization := affineTildeTensorOrdinaryExchange_preNormalization_private
 end AlgebraicGeometry

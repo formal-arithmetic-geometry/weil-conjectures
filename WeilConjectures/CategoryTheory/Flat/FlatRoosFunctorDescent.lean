@@ -230,6 +230,10 @@ private theorem flat_representative_localization_private
       (ρ := T) π (fun X ↦ hπ X) rfl
   exact LocalizerMorphism.IsLocalizedEquivalence.isLocalization Φ DerivedCategory.Q
 
+/-- Public export of the private `flat_representative_localization_private`
+(used by `import all` importers; linter.privateModule). -/
+alias flat_representative_localization := flat_representative_localization_private
+
 private theorem projection_transport
     {E : Type*} [Category* E] {X Y L U V : E}
     (a : X ⟶ Y) (d : L ⟶ X) (η : L ⟶ Y) (p : X ⟶ U) (q : Y ⟶ V)
@@ -244,9 +248,4 @@ set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
 -- The normalization and product-localization proof has many dependent categorical expressions.
-end CategoryTheory
-
-namespace CategoryTheory
-/-- Public export of the private `flat_representative_localization_private` (used by `import all` importers; linter.privateModule). -/
-alias flat_representative_localization := flat_representative_localization_private
 end CategoryTheory

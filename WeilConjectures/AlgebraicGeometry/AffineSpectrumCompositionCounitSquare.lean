@@ -94,6 +94,10 @@ private theorem eqToIso_congr_symm_private
   subst l
   rfl
 
+/-- Public export of the private `eqToIso_congr_symm_private`
+(used by `import all` importers; linter.privateModule). -/
+alias eqToIso_congr_symm := eqToIso_congr_symm_private
+
 private theorem compare_counit_factorizations_private
     {C : Type*} [Category C] {U V W A B D : C}
     (c₁ : U ≅ V) (c₂ : W ≅ V) (b₁ : A ≅ B) (b₂ : A ≅ D)
@@ -105,6 +109,10 @@ private theorem compare_counit_factorizations_private
   rw [hr]
   simp only [Iso.inv_hom_id_assoc]
   exact ((reassoc_of% h₁) b₂.hom).symm
+
+/-- Public export of the private `compare_counit_factorizations_private`
+(used by `import all` importers; linter.privateModule). -/
+alias compare_counit_factorizations := compare_counit_factorizations_private
 
 noncomputable def selectedComposition
     [∀ Y : Scheme.{u},
@@ -176,6 +184,10 @@ private theorem composition_factorization_private
   simp only [Functor.comp_obj, Category.assoc] at h ⊢
   exact h
 
+/-- Public export of the private `composition_factorization_private`
+(used by `import all` importers; linter.privateModule). -/
+alias composition_factorization := composition_factorization_private
+
 private theorem composition_factorization_transport_private
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -195,6 +207,10 @@ private theorem composition_factorization_transport_private
   cases h
   simpa only [eqToIso_refl, Iso.trans_refl, Iso.app_hom] using
     composition_factorization_private f g P
+
+/-- Public export of the private `composition_factorization_transport_private`
+(used by `import all` importers; linter.privateModule). -/
+alias composition_factorization_transport := composition_factorization_transport_private
 /-- The composition comparison intertwines the successive derived counits at a complex.
 There is no coefficient morphism, representative isomorphism or K-flatness assumption.
 Source: Stacks Project, Tag 0D5S, composition of derived pullbacks.
@@ -325,25 +341,5 @@ theorem affineSpectrum_composition_counit_square
   with_unfolding_all
     exact affineSpectrum_composition_counit_square_aux g' P
 
-end AlgebraicGeometry.SingleComplexBaseChange
-
-namespace AlgebraicGeometry.SingleComplexBaseChange
-/-- Public export of the private `eqToIso_congr_symm_private` (used by `import all` importers; linter.privateModule). -/
-alias eqToIso_congr_symm := eqToIso_congr_symm_private
-end AlgebraicGeometry.SingleComplexBaseChange
-
-namespace AlgebraicGeometry.SingleComplexBaseChange
-/-- Public export of the private `compare_counit_factorizations_private` (used by `import all` importers; linter.privateModule). -/
-alias compare_counit_factorizations := compare_counit_factorizations_private
-end AlgebraicGeometry.SingleComplexBaseChange
-
-namespace AlgebraicGeometry.SingleComplexBaseChange
-/-- Public export of the private `composition_factorization_private` (used by `import all` importers; linter.privateModule). -/
-alias composition_factorization := composition_factorization_private
-end AlgebraicGeometry.SingleComplexBaseChange
-
-namespace AlgebraicGeometry.SingleComplexBaseChange
-/-- Public export of the private `composition_factorization_transport_private` (used by `import all` importers; linter.privateModule). -/
-alias composition_factorization_transport := composition_factorization_transport_private
 end AlgebraicGeometry.SingleComplexBaseChange
 

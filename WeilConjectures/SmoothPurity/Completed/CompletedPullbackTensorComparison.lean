@@ -155,14 +155,16 @@ theorem canonicalCommonStagePullbackTensor_existsUnique {X Y : Scheme.{u}} (f : 
     let g (K : AlgebraicallyClosedCoefficients.Index l Ω) (hK : H ≤ K) :=
       (a K hK).hom ≫ (μ K).hom.app
         (P.toStage (((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).1.trans hK),
-         Q.toStage (((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).2.trans hK)) ≫
+         Q.toStage (((Padic.finiteCoefficientFields_properties
+         l Ω).1 P.stage Q.stage).2.trans hK)) ≫
         (z K hK).inv
     have hc (K : AlgebraicallyClosedCoefficients.Index l Ω) (hK : H ≤ K) :
         (c K hK).hom = g K hK := by
       exact pullbackTensor_conjugate_hom
         (rationalDerivedTensor l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω K) X)
         (commonStagePullbackComparison l Ω f (commonStageTensorObject l Ω Y P Q) K hK)
-        ((rationalDerivedPullback l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω K) f).mapIso
+        ((rationalDerivedPullback l
+        (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω K) f).mapIso
           (commonStageTensorComparison l Ω Y P Q K hK))
         (canonicalRationalPullbackTensor l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω K)
           f _ _)

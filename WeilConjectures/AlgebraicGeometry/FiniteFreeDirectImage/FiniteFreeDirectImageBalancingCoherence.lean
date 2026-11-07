@@ -902,6 +902,10 @@ private theorem tower_private
     isoWhiskerLeft_hom, isoWhiskerRight_hom, isoWhiskerLeft_inv, isoWhiskerRight_inv,
     Functor.whiskerLeft_app, Functor.whiskerRight_app, Category.assoc]
 
+/-- Public export of the private `tower_private`
+(used by `import all` importers; linter.privateModule). -/
+alias tower := tower_private
+
 end Conjugation
 
 /-- Balancing respects scalar multiplication units and balanced tensor associators.
@@ -993,8 +997,3 @@ theorem finiteFreeDirectImageBalancingCoherence {Z W : Scheme.{u}} (q : Z ⟶ W)
       Functor.associator_inv_app, Category.id_comp, Category.comp_id] using hh
 
 end AlgebraicGeometry.Scheme.FiniteFreeDirectImage
-
-namespace AlgebraicGeometry.Scheme.FiniteFreeDirectImage.Conjugation
-/-- Public export of the private `tower_private` (used by `import all` importers; linter.privateModule). -/
-alias tower := tower_private
-end AlgebraicGeometry.Scheme.FiniteFreeDirectImage.Conjugation

@@ -95,7 +95,6 @@ instance : (comap φ : Mod C S ⥤ Mod C R).Faithful where
     have := congrArg Hom.hom h
     exact hom_ext _ _ this
 
-lemma comap_comp_forget : comap φ ⋙ forget R = (forget S : Mod C S ⥤ C) := rfl
 
 end Restriction
 
@@ -184,15 +183,6 @@ noncomputable def extendScalarsObj : Mod C S :=
       mul_smul := (extendScalarsBimod φ M).left_assoc }
   ⟨(extendScalarsBimod φ M).X⟩
 
-/-- `S ⊗_R M` is the coequalizer of the right action of `R` on `S` through `φ` and of the
-action of `R` on `M`. -/
-lemma extendScalarsObj_X : (extendScalarsObj φ M).X =
-    coequalizer ((S ◁ φ ≫ μ[S]) ▷ M.X) ((α_ S R M.X).hom ≫ S ◁ γ[R,M.X]) :=
-  rfl
-
-lemma extendScalarsObj_smul :
-    γ[S,(extendScalarsObj φ M).X] = (extendScalarsBimod φ M).actLeft :=
-  rfl
 
 /-- The projection `S ⊗ M ⟶ S ⊗_R M`. -/
 noncomputable def extendπ : S ⊗ M.X ⟶ (extendScalarsObj φ M).X :=
@@ -609,12 +599,6 @@ noncomputable def coextendScalarsObj : Mod C S :=
         simp only [Category.assoc] }
   ⟨equalizer (coextendFst φ N) (coextendSnd S N)⟩
 
-/-- `Hom_R(S, N)` is the equalizer of the two maps `[S, N] ⇉ [R ⊗ S, N]`. -/
-lemma coextendScalarsObj_X :
-    (coextendScalarsObj φ N).X = equalizer (coextendFst φ N) (coextendSnd S N) :=
-  rfl
-
-lemma coextendScalarsObj_smul : γ[S,(coextendScalarsObj φ N).X] = coextendSMul φ N := rfl
 
 /-- The inclusion `Hom_R(S, N) ⟶ [S, N]`. -/
 noncomputable def coextendι : (coextendScalarsObj φ N).X ⟶ (ihom S).obj N.X :=
@@ -633,8 +617,6 @@ lemma coextendι_condition :
 noncomputable def coextendEv : S ⊗ (coextendScalarsObj φ N).X ⟶ N.X :=
   S ◁ coextendι φ N ≫ (ihom.ev S).app N.X
 
-lemma uncurry_coextendι : MonoidalClosed.uncurry (coextendι φ N) = coextendEv φ N :=
-  rfl
 
 /-- The elements of `Hom_R(S, N)` are `R`-linear: `f(φ(r) s) = r • f(s)`. -/
 @[reassoc]
