@@ -13,7 +13,7 @@ set_option autoImplicit false
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 universe w v u
 set_option backward.isDefEq.respectTransparency false
-private theorem braided_ofIso
+theorem braided_ofIso
     {C D : Type*} [Category C] [MonoidalCategory C] [BraidedCategory C]
     [Category D] [MonoidalCategory D] [BraidedCategory D]
     (F G : C ⥤ D) [F.LaxMonoidal] (e : F ≅ G)
@@ -33,6 +33,5 @@ private theorem braided_ofIso
 variable (C : Type u) [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{w} C]
   [HasDerivedCategory.{w} C] [MonoidalCategory C] [MonoidalClosed C]
   [MonoidalPreadditive C] [BraidedCategory C] [Abelian.HasFunctorialFlatResolution C]
-local instance externalRHomHasColimitsOfSize : HasColimitsOfSize.{0, 0} C :=
-  hasColimitsOfSizeShrink C
+attribute [local instance] DerivedCategory.hasColimitsOfSize_braidedCategory
 attribute [local instance] DerivedCategory.braidedCategory'
