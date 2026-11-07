@@ -25,7 +25,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
-set_option maxHeartbeats 2000000 in
+set_option maxHeartbeats 600000 in
 -- The unbounded derived comparisons elaborate several functor structures.
 /-- Internal Hom out of open extension by zero is open direct image of internal
 Hom into the open restriction. All coefficients are the identified completed rings.
