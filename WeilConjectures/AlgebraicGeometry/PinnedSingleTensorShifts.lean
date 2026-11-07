@@ -117,8 +117,7 @@ def mappedCochainSingleIso {A B : Type*} [Category A] [Category B]
         Functor.mapHomologicalComplex_obj_X, HomologicalComplex.comp_f,
         Functor.mapHomologicalComplex_commShiftIso_inv_app_f,
         Functor.mapHomologicalComplex_commShiftIso_hom_app_f,
-        CochainComplex.shiftFunctor_map_f', Category.id_comp]
-      all_goals erw [Category.id_comp])
+        CochainComplex.shiftFunctor_map_f', Category.id_comp])
 
 /-- Passing the mapped-single comparison to the homotopy category.
 (blueprint: lem-pc-pinned-single-tensor-shifts)
@@ -199,7 +198,7 @@ def pinnedSingleTensorCounit
         (Scheme.Modules.tensorPullback g') (ComplexShape.up ℤ) n).hom.app G)))
 
 set_option maxHeartbeats 800000 in
--- The nested family comparison timed out at `whnf` with 200000 heartbeats (18s on v4.35).
+-- The nested family comparison must identify the shared sheaf-module category instances.
 /-- The tensor comparison is a morphism of single-functor families.
 Source: Stacks Project, Tag 08HY; the derived counit universal property and
 Mathlib's termwise mapped-single shift identity.
