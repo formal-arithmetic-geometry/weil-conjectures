@@ -26,7 +26,7 @@ namespace AlgebraicGeometry.Etale
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 400000 in
 -- Expanding canonical derived inverse-image comparisons requires substantial reduction.
 /-- The explicit raw pullbacks satisfy identity and composition, independently of any
 limit, affineness, or quasi-compactness assumption.

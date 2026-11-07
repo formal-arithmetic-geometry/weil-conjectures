@@ -149,8 +149,8 @@ theorem canonicalSingleBaseChangeComparison
   let I := RingedSpace.moduleDirectImage f'.toLRSHom.toShHom
   have : G.Additive := canonicalTensorPullbackAdditive g
   have : H.Additive := canonicalTensorPullbackAdditive p
-  have : F.Additive := RingedSpace.moduleDirectImage_additive_proof f.toLRSHom.toShHom
-  have : I.Additive := RingedSpace.moduleDirectImage_additive_proof f'.toLRSHom.toShHom
+  have : F.Additive := RingedSpace.moduleDirectImage_additive f.toLRSHom.toShHom
+  have : I.Additive := RingedSpace.moduleDirectImage_additive f'.toLRSHom.toShHom
   let ε_g := (Classical.choose (Classical.choose_spec
     exists_derivedPullbackComposition.{u, w})) g
   let t_p := (Classical.choose (exists_tensorPullbackAdjunction p)).leftAdjointUniq

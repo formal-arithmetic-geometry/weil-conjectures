@@ -199,8 +199,6 @@ namespace AlgebraicGeometry.Scheme.CoefficientTensorTransport
 
 attribute [local irreducible] CoefficientTensorChain.complexPullback pullback
 
-set_option maxHeartbeats 800000 in
--- Converting exact-derived functor identities requires a larger elaboration budget.
 /-- The canonical derived pullback comparison is the localization of the specified
 ordinary comparison on every complex.
 

@@ -21,7 +21,6 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 800000 in
 -- Lifted functors and the two iterated pullbacks require extra definitional-equality checks.
 /-- The right-adjoint mate for the rectangle factors through the two square mates
 on the genuine iterated pullback. This assertion concerns only successive base

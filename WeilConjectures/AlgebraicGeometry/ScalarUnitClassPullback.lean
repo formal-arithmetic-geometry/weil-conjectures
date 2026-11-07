@@ -118,7 +118,6 @@ private theorem homEquiv_unique {C D : Type*} [Category C] [Category D]
   rw [a.homEquiv_naturality_right, Adjunction.homEquiv_leftAdjointUniq_hom_app,
     b.homEquiv_unit]
 
-set_option maxHeartbeats 400000 in
 -- Adjunction comparisons require unfolding several sheaf evaluation functors.
 /-- The scalar-unit coefficient morphism commutes with inverse image and the
 structure-sheaf coefficient map.

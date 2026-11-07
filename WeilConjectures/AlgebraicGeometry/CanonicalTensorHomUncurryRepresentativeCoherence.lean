@@ -26,7 +26,7 @@ universe u w
 open CategoryTheory CategoryTheory.MonoidalCategory Opposite TopologicalSpace
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 700000 in
 -- Explicit functor identity rewrites elaborate through the sheaf and localization instances.
 set_option backward.isDefEq.respectTransparency.types true in
 private theorem localized_uncurry_input (X : Scheme.{u})

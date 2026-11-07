@@ -201,7 +201,6 @@ private theorem horizontal_varying_root_square
     exact hr.choose_spec U z
   exact hroot.trans hr.symm
 
-set_option maxHeartbeats 2000000 in
 -- Identify the completed and varying root cones through their actual finite projections.
 private theorem horizontal_root_cone_transposed
     (l : ℕ) [Fact l.Prime] {X S X' S' : Scheme.{u}}
@@ -419,7 +418,6 @@ private theorem exactSquare_single
     Functor.mapDerivedCategoryNatIso_hom_app_singleFunctor]
   erw [reassoc_of% (Functor.mapDerivedCategoryCompIso_hom_app_singleFunctor U P M)]
 
-set_option maxHeartbeats 2000000 in
 -- Normalize the two exact single squares and the full derived-limit cone equation.
 private theorem exactConeComparison_transport
     {A B C D E E' : Type*}
@@ -578,7 +576,7 @@ private theorem line_derivedIso_eq
           q.iso.hom := by
   rfl
 
-set_option maxHeartbeats 5000000 in
+set_option maxHeartbeats 1100000 in
 -- Instantiate cone transport on the independently normalized root systems.
 private theorem horizontal_root_unshifted (l : ℕ) [Fact l.Prime]
     {X S X' S' : Scheme.{u}} [IsNoetherian X] [IsNoetherian X']
@@ -712,7 +710,6 @@ private theorem comparison_commShift
         (Functor.associator G V' R').hom) ℤ := by
   infer_instance
 
-set_option maxHeartbeats 5000000 in
 -- Instantiate the exact cone diagram on the normalized completed endpoints.
 /-- The normalized positive-root cone is preserved, including the canonical shift.
 

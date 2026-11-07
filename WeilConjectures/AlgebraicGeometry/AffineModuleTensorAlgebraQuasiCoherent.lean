@@ -104,7 +104,7 @@ private theorem changeOfRings_unit_iso {T : TopCat.{u}} (C D : T.Sheaf CommRingC
     (((SheafOfModules.restrictScalars (𝓻 a)).obj N).unitHomEquiv
       (adj.homEquiv _ N k)) l).symm
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 700000 in
 -- Transporting sections through three equivalences unfolds dependent module instances.
 private theorem inverseImage_unit_iso {T T' : TopCat.{u}} (g : T ⟶ T')
     (C : T'.Sheaf CommRingCat.{u}) :

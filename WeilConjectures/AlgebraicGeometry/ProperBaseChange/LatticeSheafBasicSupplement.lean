@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+import WeilConjectures.AlgebraicGeometry.StrictPerfectPackageOnSite
 
 public import WeilConjectures.AlgebraicGeometry.ProEtaleInverseImage
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
@@ -65,7 +66,8 @@ open scoped ChangeOfRings
 
 namespace AlgebraicGeometry.ProEtale
 
-attribute [local instance] latticeWeakSheafifyOver latticeWEqualsOver
+attribute [local instance] latticeWeakSheafifyOver
+  AlgebraicGeometry.Scheme.strictPerfectSliceLocallyBijective
 
 /-- The commutative-ring version of the continuous coefficient presheaf, with exactly the
 same sections and precomposition maps as `continuousMapRingPresheaf`.

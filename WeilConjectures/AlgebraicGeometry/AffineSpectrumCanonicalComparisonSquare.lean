@@ -46,7 +46,7 @@ private theorem comparisonIntoPullback_eq
           (inv ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) := by
   simp only [comparisonIntoPullback, comparisonIntoTensorPullback, Category.assoc, cast_eq]
 
-set_option maxHeartbeats 1600000 in
+set_option maxHeartbeats 1100000 in
 -- The comparison expands several nested stalk and localization functors.
 /-- The comparison square for the termwise spectrum pullback with its canonical counit.
 

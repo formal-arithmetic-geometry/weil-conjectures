@@ -83,8 +83,8 @@ theorem local_finite_free_scalar_homology
   let A := SheafOfModules.{u} (moduleRings Y.toRingedSpace)
   let O := SheafOfModules.overFunctor.{u} Y.ringCatSheaf U
   let T := (Scheme.Modules.overEquiv U).functor
-  let : PreservesFiniteLimits O := moduleOverFunctor_limits_proof Y.toRingedSpace U
-  let : PreservesFiniteColimits O := moduleOverFunctor_colimits_proof Y.toRingedSpace U
+  let : PreservesFiniteLimits O := moduleOverFunctor_limits Y.toRingedSpace U
+  let : PreservesFiniteColimits O := moduleOverFunctor_colimits Y.toRingedSpace U
   let : PreservesFiniteLimits (O ⋙ T) := comp_preservesFiniteLimits O T
   let : PreservesFiniteColimits (O ⋙ T) := comp_preservesFiniteColimits O T
   let : T.Additive := T.additive_of_preserves_binary_products

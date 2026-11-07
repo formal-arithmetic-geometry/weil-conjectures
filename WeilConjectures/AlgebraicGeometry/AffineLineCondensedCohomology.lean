@@ -141,7 +141,6 @@ private instance pointAdditive (X : Scheme.{v}) : (upperStarFromPoint X).Additiv
   have := preservesBinaryBiproducts_of_preservesBinaryCoproducts (upperStarFromPoint X)
   exact Functor.additive_of_preservesBinaryBiproducts _
 
-set_option maxHeartbeats 800000 in
 -- The monoidal adjunction comparison unfolds both point and scheme inverse images.
 private theorem continuousMapComparison_constants
     (X : Scheme.{v}) (T : Type) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T]

@@ -84,7 +84,6 @@ private theorem ordinary_coefficient_naturality
 
 set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 1000000 in
 -- Elaborate the dependent CE and normalized page data together.
 /-- Construct normalized presentations and pin their first-page comparison to the
 concrete signed row comparison. No scheme-map naturality is asserted here.

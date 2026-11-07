@@ -78,7 +78,6 @@ private theorem adjoint_homology_naturality
   exact congrArg (((((U.mapHomologicalComplex (.up ℕ)).obj K).sc p).mapHomologyIso S).inv ≫ ·)
     hc
 
-set_option maxHeartbeats 800000 in
 -- Specializing the adjunction requires comparing the identity restriction of scalars.
 /-- The sheafification comparison is natural before choosing a resolution. -/
 private theorem sectionCohomologyTheta_naturality
@@ -94,7 +93,7 @@ private theorem sectionCohomologyTheta_naturality
     (SheafOfModules.forget Y.ringCatSheaf)
     (PresheafOfModules.sheafificationAdjunction (𝟙 Y.ringCatSheaf.obj)) g p
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- The naturality squares compare several termwise composite functors.
 /-- The canonical resolution-section map commutes with coefficient maps.
 

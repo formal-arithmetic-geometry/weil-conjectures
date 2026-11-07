@@ -455,7 +455,6 @@ private theorem right_evaluation_app (n : ℕ) N :
     Category.id_comp, Category.comp_id, Category.assoc, Functor.comp_map]
   erw [Category.id_comp]
 
-set_option maxHeartbeats 800000 in
 -- Elaborating the three concrete site adjunctions needs extra heartbeats.
 private theorem origin_hom_evaluation
     (record : ExceptionalSystemTransportData G CX CY CZ P R)
@@ -548,7 +547,6 @@ private theorem origin_hom_evaluation
     (CX.image.inverseEvaluation n) (CX.image.directEvaluation n) q qn _ _ _
     htS htN hq (CX.image.counit n M.obj)
 
-set_option maxHeartbeats 800000 in
 -- The three concrete evaluation identities elaborate over large derived categories.
 /-- Evaluation of origin-adjunction Hom words and quotient transitions.
 Source: Zheng Lemmas 4.10 and 5.22 and Proposition 5.24; Stacks 0B65.

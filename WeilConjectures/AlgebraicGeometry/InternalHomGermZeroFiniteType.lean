@@ -36,7 +36,7 @@ private theorem finiteType_neighborhood (X : RingedSpace.{u})
   obtain ⟨a, ⟨j⟩⟩ := hi
   exact ⟨q.X a, (leOfHom j) hxW, q.generators a, hq.isFiniteType a⟩
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 700000 in
 -- Elaborating the restricted free coproduct and its scalar restrictions needs extra heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 private theorem zero_on_generators (X : RingedSpace.{u}) (F G : Modules X)

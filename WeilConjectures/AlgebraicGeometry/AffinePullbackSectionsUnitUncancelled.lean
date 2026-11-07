@@ -63,7 +63,6 @@ private theorem normalizedCompUnit_app
           DG.map (H.rightDerivedFunctorUnit.app J) := by
   erw [compUnit_app, Category.assoc, a.hom.naturality]
 
-set_option maxHeartbeats 800000 in
 -- Exact restriction expands the right-derived uniqueness comparison.
 private theorem exactCompUnit_fac
     {C D E : Type*} [Category* C] [Category* D] [Category* E]
@@ -277,7 +276,6 @@ variable [∀ Z : Scheme.{u},
 
 set_option synthInstance.maxHeartbeats 100000 in
 -- Match the affine sheaf module carriers in the pinned adjunction.
-set_option maxHeartbeats 800000 in
 -- Match the chosen left-derived counit across the scheme module abbreviation.
 private theorem pinned_unit_fac
     {R B : CommRingCat.{u}} (g : Spec B ⟶ Spec R)
@@ -312,7 +310,7 @@ variable [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)]
 
 set_option synthInstance.maxHeartbeats 100000 in
 -- Affine carrier identifications require additional instance search.
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- Affine carrier identifications require additional elaboration heartbeats.
 /-- Before cancelling comparisons, the normalized derived pullback unit agrees with
 its ordinary model. This identity holds for every complex, without K-flatness.

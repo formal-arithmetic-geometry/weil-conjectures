@@ -29,7 +29,6 @@ set_option maxSynthPendingDepth 8
 noncomputable section
 namespace AlgebraicGeometry.RingedSpace
 
-set_option maxHeartbeats 800000 in
 -- The equivalence comparison unfolds into nested whiskerings.
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
@@ -126,7 +125,6 @@ private lemma comparison_app {X Y : RingedSpace.{u}}
     (comparison g).app K = (derivedModuleDirectImageKInjectiveIso g K).inv := by
   simp [comparison, derivedModuleDirectImageKInjectiveIso]
 
-set_option maxHeartbeats 800000 in
 -- Shift comparison expands through several composite functors and their isomorphisms.
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in

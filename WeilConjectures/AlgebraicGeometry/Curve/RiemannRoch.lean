@@ -433,7 +433,7 @@ theorem IdealSheafData.IsInvertible.finrankΓ_subschemeι_pow_comp {J : X.IdealS
     have := hJ.isFinite_subschemeι_comp (k := k)
     have := (hJ.pow n).isFinite_subschemeι_comp (k := k)
     have : IsFinite ((J ^ n * J).subschemeι ≫ X ↘ Spec (.of k)) :=
-      ((hJ.pow n).mul_effectiveCartier hJ).isFinite_subschemeι_comp
+      ((hJ.pow n).mul hJ).isFinite_subschemeι_comp
     rw [pow_succ, IdealSheafData.finrankΓ_subschemeι_mul_comp _ (hJ.pow n) hJ, ih, Nat.succ_mul]
 
 /-- **Twisting by a large multiple of a divisor produces sections.** Let `D` be a non-empty
@@ -523,7 +523,7 @@ theorem Modules.exists_isInvertible_zeroLocus_tensorObj_dual (ℒ : X.Modules) [
   let J : X.IdealSheafData := ∏ i, IdealSheafData.vanishingIdeal ⟨{x i}, hxcl i⟩
   have hJ : J.IsInvertible := Finset.prod_induction _
     (fun I : X.IdealSheafData ↦ I.IsInvertible)
-    (fun _ _ ha hb ↦ ha.mul_effectiveCartier hb) IdealSheafData.isInvertible_top fun i _ ↦
+    (fun _ _ ha hb ↦ ha.mul hb) IdealSheafData.isInvertible_top fun i _ ↦
       isInvertible_vanishingIdeal_of_smoothOfRelativeDimension_one (X ↘ Spec (.of k)) (hxcl i)
   have hJx (i : Fin m) : x i ∈ J.support := by
     have hle : J ≤ IdealSheafData.vanishingIdeal ⟨{x i}, hxcl i⟩ := by

@@ -29,7 +29,6 @@ attribute [local instance] RawRestrictedComparison.etaleComposition
   RawRestrictedComparison.etaleBaseChange RawRestrictedComparison.sheafifyInstance
   RawRestrictedComparison.weakSheafifyInstance
 
-set_option maxHeartbeats 800000 in
 -- The adjunction checks a nested derived-Hom and sheafification comparison.
 private theorem homologySheafificationIso
     {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)

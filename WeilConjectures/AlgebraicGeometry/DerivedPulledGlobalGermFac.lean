@@ -27,7 +27,7 @@ noncomputable local instance : AB5OfSize.{u, u} AddCommGrpCat.{u + 1} :=
 -- Keep the unused abbreviation R in the original statement unchanged.
 set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency true in
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- Canonical homotopy comparison endpoints require repeated definitional equality checks.
 /-- The source-side derived germ and exchange, precomposed with the global-sections
 unit, are the localized underived source-side composite followed by the target units.

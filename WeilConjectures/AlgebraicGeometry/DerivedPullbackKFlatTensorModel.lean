@@ -11,6 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedPullback
 public import Mathlib.CategoryTheory.Monoidal.Multifunctor
 public import Mathlib.Algebra.Homology.Localization
 import all Mathlib.Algebra.Homology.Localization
+import WeilConjectures.AlgebraicGeometry.KFlatBifunctorIsoDescent
 import WeilConjectures.Algebra.Homology.KFlatPullback
 import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
 
@@ -48,9 +49,7 @@ noncomputable local instance kFlatTensorModelModuleClosed (S : Scheme.{uModel}) 
     MonoidalClosed (SheafOfModules.{uModel} (moduleRings S.toRingedSpace)) :=
   Classical.choice (SheafOfModules.tensorClosed S.sheaf).2.1
 
-local instance kFlatTensorModelModuleGrothendieck (S : Scheme.{uModel}) :
-    IsGrothendieckAbelian.{uModel} (SheafOfModules.{uModel} (moduleRings S.toRingedSpace)) :=
-  SheafOfModules.isGrothendieckAbelian (moduleRings S.toRingedSpace)
+attribute [local instance] kFlatBifunctorDescentModuleGrothendieck
 
 local instance kFlatTensorModelModuleResolutions (S : Scheme.{uModel}) :
     Abelian.HasFunctorialFlatResolution

@@ -497,7 +497,6 @@ private theorem qh_map_quotient
       𝟙 _ = 𝟙 _ ≫ DerivedCategory.Q.map a at h
   simpa only [Category.id_comp, Category.comp_id] using h
 
-set_option maxHeartbeats 400000 in
 -- The concrete localization and total-comparison interfaces require extra elaboration steps.
 /-- Explicit resolution conjugation identities, their naturality, and counit substitution.
 Source: Stacks Project, sites-cohomology.tex, Tags 07A4 and 0G7E; the agent calculation

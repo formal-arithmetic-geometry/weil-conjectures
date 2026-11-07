@@ -62,7 +62,6 @@ private theorem homClass_map
   rw [hc]
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 800000 in
 -- Transposition and homology comparisons have nested complex and functor instances.
 private theorem stageClass_transition
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)

@@ -23,9 +23,7 @@ namespace AlgebraicGeometry.FiniteSplitEtaleHypercover
 
 open SchemeSplitAttachment
 
-local instance {X : Scheme.{u}} {I : Type} : HasCoproductsOfShape I X.Etale := by
-  dsimp [Scheme.Etale]
-  infer_instance
+attribute [local instance] SchemeSplitAttachment.instHasCoproductsOfShapeEtale_weilConjectures
 
 private theorem pullback_cofan
     {X : Scheme.{u}} {I : Type} [Finite I]

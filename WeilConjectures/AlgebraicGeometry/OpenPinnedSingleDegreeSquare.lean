@@ -66,7 +66,7 @@ private theorem transport_square
   rw [← Category.assoc x₀ b.hom, h₀, hy]
   simp only [Iso.inv_hom_id, Category.comp_id, Iso.inv_hom_id_assoc]
 
-set_option maxHeartbeats 2000000 in
+set_option maxHeartbeats 1600000 in
 -- Transporting the explicit derived functor comparisons needs extra elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Natural restriction isomorphisms commute with the base-change mate for the

@@ -749,7 +749,6 @@ theorem sheafAlgebraRestrictScalars_preservesFiniteColimits :
 
 attribute [instance] sheafAlgebraRestrictScalars_preservesFiniteColimits
 
-set_option maxHeartbeats 1000000 in
 -- The single-complex and scalar-restriction encodings need additional elaboration fuel.
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in

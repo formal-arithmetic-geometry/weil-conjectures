@@ -228,7 +228,6 @@ private def restrictedScalarComputation (a : Λ ⟶ Λ') [IsMonHom a] (T : Schem
 
 attribute [local irreducible] scalarComputation restrictedScalarComputation
 
-set_option maxHeartbeats 800000 in
 -- Pasting the two computations elaborates both derived tensor and scalar structures.
 /-- Conjugated normalized scalar tensor maps have the section K-flat computation equation.
 Source: Stacks Project, Tags 03EK, 06YY, 0G7E and 07A6; blueprint integral proper-base-change

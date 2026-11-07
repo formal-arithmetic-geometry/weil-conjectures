@@ -567,14 +567,14 @@ private theorem chern_unique (A : Type (u + 1)) [CommRing A] [Finite A]
     (c : Etale.ordinaryFiniteUnit A (ProjectiveLine S) ⟶
       (Etale.ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧)
     (hc : Etale.ordinaryFiniteP1ChernSpec A N hA S
-      (Etale.ordinaryFiniteP1_isUnit N S hS) c) :
+      (affineTraceProjectiveInvertible N S hS) c) :
     c = (Etale.projectiveLineTraceDatum N hN A hA S hS).chern := by
   let : IsLocallyNoetherian (ProjectiveLine S) :=
     LocallyOfFiniteType.isLocallyNoetherian (ProjectiveLine S ↘ S)
   let : CompactSpace (ProjectiveLine S) :=
     QuasiCompact.compactSpace_of_compactSpace (ProjectiveLine S ↘ S)
   exact (Etale.existsUnique_ordinaryFiniteP1Chern A N hA S
-    (Etale.ordinaryFiniteP1_isUnit N S hS)).unique hc
+    (affineTraceProjectiveInvertible N S hS)).unique hc
       (Etale.projectiveLineTraceDatum N hN A hA S hS).chern_spec
 
 set_option linter.flexible false in
@@ -919,7 +919,7 @@ private theorem twisted_square (A : Type (u + 1)) [CommRing A] [Finite A]
     (Etale.p1DecompositionTwistPullback A N hN hA
       (X := ProjectiveLine S') (Y := ProjectiveLine S)
       (ProjectiveSpace.map (ULift.{u} (Fin 2)) g)
-      (Etale.ordinaryFiniteP1_isUnit N S hS) 1 2).hom hb
+      (affineTraceProjectiveInvertible N S hS) 1 2).hom hb
   simpa only [geoP1TwistedMap, geoP1TwistExchange, geoP1UnitPullback,
     geoP1Twist, geoP1Unit, Etale.p1DecompositionTwist, Etale.ordinaryFiniteLine,
     Scheme.finiteEtaleTateSheaf, Scheme.finiteEtaleTateTwist,

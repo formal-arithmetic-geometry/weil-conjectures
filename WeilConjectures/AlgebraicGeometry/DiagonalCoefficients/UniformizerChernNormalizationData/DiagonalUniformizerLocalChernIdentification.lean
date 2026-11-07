@@ -272,7 +272,7 @@ theorem localChern_transport_identification
         (Y := Y) (A := ULift.{u + 1} (completedResidue l s.E s.π s.n))
         (N := l ^ (s.n + 1)) (hN := pow_pos (Fact.out : l.Prime).pos _)
         (hA := s.hA) (hY := s.hYpow)
-        (hP := Etale.ordinaryFiniteP1_isUnit (l ^ (s.n + 1)) Y s.hYpow)
+        (hP := affineTraceProjectiveInvertible (l ^ (s.n + 1)) Y s.hYpow)
         (k := LocalFiniteArrow.toHom l Y s k) hspec)) none
       Meta.withTransparency .all <| closeMainGoal `finite_chern_unique proof
 

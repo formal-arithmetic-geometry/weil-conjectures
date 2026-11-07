@@ -61,7 +61,6 @@ private theorem epi_overMap_iff_local_lifts
     rw [Sieve.overEquiv_iff]
     exact ⟨s, hs⟩
 
-set_option maxHeartbeats 800000 in
 -- Elaborating free coproduct maps across slice restriction needs additional steps.
 set_option backward.isDefEq.respectTransparency false in
 private theorem freeMap_subset_epi
@@ -85,7 +84,7 @@ private theorem freeMap_subset_epi
   have := hS
   exact epi_of_epi_fac hfac
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- The slice-site section types require additional elaboration steps.
 set_option backward.isDefEq.respectTransparency false in
 /-- A specified global generating family has a finite subfamily generating on a

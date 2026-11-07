@@ -23,7 +23,7 @@ open CategoryTheory AlgebraicGeometry SheafOfModules
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 700000 in
 -- Comparing iterated slice restrictions requires additional elaboration steps.
 set_option backward.isDefEq.respectTransparency false in
 /-- Near any point of an open on which a module sheaf is finite type, finitely many

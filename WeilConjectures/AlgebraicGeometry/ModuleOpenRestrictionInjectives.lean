@@ -96,14 +96,14 @@ theorem module_open_restriction_injectives (X : Scheme.{u}) (U : X.Opens) :
         (h : J.cocomplex = ((SheafOfModules.overFunctor.{u} X.ringCatSheaf U).mapHomologicalComplex
           (ComplexShape.up ℕ)).obj I.cocomplex),
         J.ι.f 0 ≫ eqToHom (congrArg (fun K ↦ K.X 0) h) = (I.ι.f 0).over U) := by
-  refine ⟨moduleOverFunctor_additive_proof X.toRingedSpace U, ?_, ?_, ?_, ?_⟩
+  refine ⟨moduleOverFunctor_additive X.toRingedSpace U, ?_, ?_, ?_, ?_⟩
   · intro S hS
     exact hS.map (SheafOfModules.overFunctor.{u} X.ringCatSheaf U)
   · exact restriction_injective X U
   · intro J hJ
     have : CategoryTheory.Limits.PreservesFiniteLimits
         (SheafOfModules.overFunctor.{u} X.ringCatSheaf U) :=
-      moduleOverFunctor_limits_proof X.toRingedSpace U
+      moduleOverFunctor_limits X.toRingedSpace U
     exact (Adjunction.preservesInjectiveObjects_of_preservesFiniteLimits
       (SheafOfModules.overPushforwardOverAdj (R := X.ringCatSheaf) U)).injective_obj hJ
   · exact restriction_resolution X U

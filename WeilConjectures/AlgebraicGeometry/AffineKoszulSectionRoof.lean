@@ -66,7 +66,7 @@ private theorem kflat_augmentation_realization
 
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 512 in
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 600000 in
 -- Comparing chosen restriction functors and their localization instances needs extra heartbeats.
 /-- A section of an arbitrary quasi-coherent derived object on a compact open of an affine scheme
 is represented by a map from a K-flat perfect complex with a chain augmentation.

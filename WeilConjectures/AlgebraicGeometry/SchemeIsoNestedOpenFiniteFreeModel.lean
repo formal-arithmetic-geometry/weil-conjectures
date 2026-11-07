@@ -26,7 +26,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- The nested functor comparisons require additional definitional equality checks.
 set_option backward.isDefEq.respectTransparency false in
 /-- Transport one specified bounded-above finite-free model on a nested open across a

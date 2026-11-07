@@ -33,7 +33,7 @@ attribute [local irreducible] Scheme.Modules.tensorPullback
 variable [∀ S : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- The selected adjunctions and composite sheaf instances need a larger budget.
 /-- The chosen pullback comparison and composite direct-image unit transpose to the
 explicit pasted underived counits.

@@ -48,7 +48,6 @@ private theorem assemble_open_counit_square
   rw [hn, ← Category.assoc a, hl]
   simp only [Category.assoc, ← HU.map_comp, hc']
 
-set_option maxHeartbeats 800000 in
 -- The localized tensor and exact restriction factors need extra elaboration heartbeats.
 set_option linter.unusedVariables false in
 -- Preserve the existing named K-flatness binder, unused in the dependent conclusion.

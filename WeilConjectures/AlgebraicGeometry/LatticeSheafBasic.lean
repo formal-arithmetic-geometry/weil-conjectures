@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+import WeilConjectures.AlgebraicGeometry.StrictPerfectPackageOnSite
 
 public import WeilConjectures.AlgebraicGeometry.ProEtaleInverseImage
 public import WeilConjectures.CategoryTheory.RingObjects.ContinuousMap
@@ -46,14 +47,6 @@ Source: Mathlib, sheafification on small sites.
 Proof: specialize the existing small-site sheafification instance. -/
 local instance latticeWeakSheafifyOver (X : Scheme.{u}) (U : X.ProEt) :
     HasWeakSheafify ((Scheme.ProEt.topology X).over U) AddCommGrpCat.{u + 1} := by
-  infer_instance
-
-/-- Cache the local bijectivity criterion for additive sheafification on slices.
-Source: Mathlib, sheafification on small sites.
-(auxiliary; not a blueprint node).
-Proof: specialize the existing small-site local-bijectivity instance. -/
-local instance latticeWEqualsOver (X : Scheme.{u}) (U : X.ProEt) :
-    ((Scheme.ProEt.topology X).over U).WEqualsLocallyBijective AddCommGrpCat.{u + 1} := by
   infer_instance
 
 /-- Restriction of the scalar-extension ring map to the localized site.

@@ -35,7 +35,7 @@ private theorem sliceBaseAbLocallyBijective (S : Scheme.{u}) :
 
 private theorem sliceOverAbLocallyBijective (S : Scheme.{u}) (U : S.ProEt) :
     ((ProEt.topology S).over U).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
-  finitePerfectModelsSliceAbLocallyBijective S U
+  strictPerfectSliceLocallyBijective S U
 
 attribute [local instance 100000] sliceBaseAbLocallyBijective sliceOverAbLocallyBijective
 

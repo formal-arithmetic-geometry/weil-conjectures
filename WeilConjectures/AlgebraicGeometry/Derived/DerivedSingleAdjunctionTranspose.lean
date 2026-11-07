@@ -88,7 +88,6 @@ Source: Stacks Project, cohomology.tex, Tag 079W.
     (RingedSpace.moduleDirectImage g.toLRSHom.toShHom).rightDerivedFunctorUnit.app
       ((HomotopyCategory.singleFunctor _ q).obj M))
 
-set_option maxHeartbeats 800000 in
 -- Comparing the pinned sheaf adjunction to its normalized construction needs extra heartbeats.
 /-- The pinned derived adjunction on a single complex in any integer degree.
 Source: Stacks Project, cohomology.tex, Tag 079W; sheaves.tex, Tag 0096.

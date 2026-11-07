@@ -179,7 +179,7 @@ theorem integralClosure_finiteFibrePart_localization
       exact ⟨_, hp, rfl⟩
     obtain ⟨x, hx, hxp⟩ := hpimage
     exact hxp ▸ hTU hx
-  obtain ⟨g, hg, _, hbij⟩ := AlgebraicGeometry.integralClosure_finite_fibre_choose_g
+  obtain ⟨g, hg, _, hbij⟩ := integralClosure.exists_bijective_awayMap_of_isIso_restrict
     A B C₁ C₂ C₁' C₂' I e e' he (fun _ ↦ rfl) f₁a f₂a
     (fun b ↦ (hq b ▸ hprod (π' b))) U hU hIso
   refine ⟨ε', g, q, hq, hε', ?_, ?_, ?_, ?_, ?_, hbij⟩

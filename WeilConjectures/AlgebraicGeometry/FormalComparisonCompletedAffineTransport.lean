@@ -55,7 +55,6 @@ private theorem limit_square_restrict
   simp only [Iso.inv_hom_id_assoc]
   rw [← lim.map_comp, ← lim.map_comp, hi]
 
-set_option maxHeartbeats 800000 in
 -- The comparison composes four diagram functors and dependent pullback equalities.
 set_option backward.isDefEq.respectTransparency false in
 /-- Restriction and flat completion base change transport the formal comparison and

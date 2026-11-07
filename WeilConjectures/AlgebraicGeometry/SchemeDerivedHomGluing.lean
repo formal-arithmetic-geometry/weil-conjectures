@@ -71,7 +71,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 2048 in
 set_option synthInstance.maxHeartbeats 400000 in
 -- Additivity of the three-fold composite restriction functors exceeds the default size.
-set_option maxHeartbeats 1600000 in
+set_option maxHeartbeats 500000 in
 -- Elaborating the restriction functors and their comparison isomorphisms needs this budget.
 /-- Compatible local morphisms between two fixed global derived objects lift globally.
 Source: Stacks Project, Cohomology, Tag 08BW, exactness at the local Hom pair

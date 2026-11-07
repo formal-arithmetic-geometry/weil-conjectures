@@ -519,7 +519,6 @@ def cyclicEvaluationTargetZero
 attribute [local irreducible] Functor.mapDerivedCategorySingleFunctor
   DerivedCategory.singleFunctors HomotopyCategory.singleFunctors
 
-set_option maxHeartbeats 2000000 in
 -- Exact-single coherence involves several derived functor compositions.
 /-- The cyclic augmentation followed by the unshifted target has the prescribed
 ordinary underlying root arrow.

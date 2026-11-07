@@ -321,7 +321,6 @@ private theorem horizontal_coefficient_cone
     Opposite.op_unop] using
     horizontal_coefficient_cone_transposed l hX p p' eX eX' r d n.unop
 
-set_option maxHeartbeats 2000000 in
 -- Normalize the two exact single squares and the full derived-limit cone equation.
 private theorem exactConeComparison_transport
     {A B C D E E' : Type*}
@@ -421,7 +420,7 @@ private theorem coefficient_derivedIso_eq
           q.iso.hom := by
   rfl
 
-set_option maxHeartbeats 5000000 in
+set_option maxHeartbeats 1200000 in
 -- Instantiate the exact cone diagram on the normalized completed endpoints.
 /-- The coefficient-unit cone is preserved by the normalized whole-tower comparison.
 

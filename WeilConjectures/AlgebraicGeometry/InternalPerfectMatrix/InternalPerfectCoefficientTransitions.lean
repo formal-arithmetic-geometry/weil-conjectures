@@ -191,7 +191,6 @@ private theorem coefficientSection_eval (W : Scheme.{u}) (n : ℕ)
         (AdicCompletion.finiteRing l E W n) U (Scheme.ProEt.isTerminalMkId W)).symm _) = _
   exact RingEquiv.apply_symm_apply _ _
 
-set_option maxHeartbeats 1000000 in
 -- The coefficient encoding square needs additional sheaf-instance reduction.
 /-- Locally constant finite coefficient sections reduce by the actual coefficient map.
 Source: blueprint Compatible isomorphisms, successor reduction of constant matrix entries.

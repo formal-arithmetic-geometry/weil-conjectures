@@ -238,7 +238,7 @@ private theorem localizedAugmentation
       rw [← Category.assoc, hn, Category.assoc, ← Q'.map_comp, hb]
       simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 600000 in
 -- The statement contains simultaneous universe-polymorphic cone comparisons.
 /-- Triangle and augmentation compatibility of a prescribed Roos square.
 

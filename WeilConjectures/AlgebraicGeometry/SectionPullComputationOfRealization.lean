@@ -645,7 +645,6 @@ private def section_pull_compute_nat {X Y : Scheme.{u}} (f : X ⟶ Y) :
         DerivedCategory.Q :=
   (ModuleRingedComparison.pullback Λ f).mapDerivedCategoryFactors.hom
 
-set_option maxHeartbeats 300000 in
 -- Unfold the two named interfaces once, preserving the fixed derived-functor instances.
 private theorem geometric_computation {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : CochainComplex (Modules Λ Y) ℤ) :
@@ -683,7 +682,6 @@ private theorem geometric_computation {X Y : Scheme.{u}} (f : X ⟶ Y)
 attribute [local irreducible] complex_iso complex_comp_iso section_localization_iso
 
 set_option cleanup.letToHave false in
-set_option maxHeartbeats 600000 in
 -- Track the specified localization and termwise-equivalence instances through the diagram.
 /-- The K-flat computation equation for supplied ordinary and derived comparisons.
 All isomorphisms are supplied as inputs; this theorem selects no data.

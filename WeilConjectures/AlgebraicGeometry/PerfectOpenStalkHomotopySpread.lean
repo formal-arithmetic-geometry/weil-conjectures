@@ -44,7 +44,6 @@ private def restriction_comp_iso (X : Scheme.{u}) (V Z W : X.Opens)
   NatIso.ofComponents (fun _ ↦ Iso.refl _) (by intros; rfl)
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 800000 in
 -- Nested restriction and stalk comparisons require extra definitional-equality checks.
 /-- Two fixed endomorphisms which are homotopic at the stalk become homotopic
 on an affine neighbourhood inside any prescribed smaller neighbourhood.

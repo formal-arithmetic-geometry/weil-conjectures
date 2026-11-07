@@ -45,7 +45,7 @@ private def basisPowerIso (X : Scheme.{u})
       (Equiv.ulift.{u + 1, 0} (α := Fin d)).symm (fun _ ↦ Iso.refl O) ≪≫
     biproduct.isoCoproduct (fun _ : ULift.{u + 1} (Fin d) ↦ O)
 
-set_option maxHeartbeats 2000000 in
+set_option maxHeartbeats 500000 in
 -- Elaborating the presentation transport and tensor coordinates requires extra heartbeats.
 /-- The tensor coordinates transported through the specified ordinary presentation.
 Source: Stacks Project, Tag 03EK

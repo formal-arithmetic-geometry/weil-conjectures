@@ -80,7 +80,7 @@ theorem colimitScalarExtensionComp_one_tmul
         ((1 : ↑(F.obj x)) ⊗ₜ[F.obj t, (F.map h).hom] m) := by
   exact scalarExtensionCompOfEq_one_tmul _ _ _ _ P m
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 600000 in
 -- The dependent chart and section-model witnesses require substantial elaboration.
 /-- Affine Hom comparisons commute with the canonical scalar-extension map.
 Source: Stacks Project, Tag 01ZR (first affine proof), Tag 01I6,

@@ -255,7 +255,6 @@ private theorem rowProjection_naturality
   · exact (HomologicalComplex.isZero_extend_X _ ComplexShape.embeddingUpNat i
       (fun m hm ↦ by change (m : ℤ) = i at hm; omega)).eq_of_src _ _
 
-set_option maxHeartbeats 1000000 in
 -- Elaborate the filtration quotient and the cycle comparison together.
 set_option backward.isDefEq.respectTransparency false in
 private theorem rowProjection_representative
@@ -302,7 +301,6 @@ private theorem rowProjection_representative
   rw [← hc', ← Category.assoc z, hz, Category.assoc, ha]
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 1000000 in
 -- Elaborate the dependent CE and normalized page data together.
 /-- The inverse canonical cycle comparison takes related filtered representatives to
 related row cycles. This is a degreewise statement, before taking homology; it assumes

@@ -75,7 +75,7 @@ private theorem annihilator_coker_of_square
   rw [map_smul, he, hx]
   exact hz
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- Identifying kernels and quotient carriers after restricting scalars needs extra heartbeats.
 /-- The canonical comparison, specified by its quotient and adjunction equations,
 has affine limit kernel and cokernel killed by a positive power of K.

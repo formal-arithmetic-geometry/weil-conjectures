@@ -21,7 +21,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- Both transported mate laws unfold the pinned sheaf adjunctions in this calculation.
 /-- Tensor composition mates satisfy both unit laws on the homotopy category.
 Source: Mathlib.CategoryTheory.Adjunction.CompositionIso,

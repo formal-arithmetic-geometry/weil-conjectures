@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.CompleteDerivedCompletionDefs
+import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.CompleteDerivedCompletionLimit
 import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 import Mathlib.CategoryTheory.Adjunction.Limits
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
@@ -957,7 +958,7 @@ private theorem scalarSource_reduction_zero (T : Scheme.{u})
   obtain ⟨e⟩ := (h T (n + 1) (Nat.succ_pos n)).2.1
   have hzF : IsZero ((DerivedNakayama.reductionFunctor l E T (n + 1)).obj
       (DerivedCategory.Q.obj F)) := hz.of_iso (e.app F)
-  obtain ⟨c⟩ := roosComparison l E T
+  obtain ⟨c⟩ := rlim_roos l E T
   exact hzF.of_iso
     ((DerivedNakayama.reductionFunctor l E T (n + 1)).mapIso (c.app X))
 
@@ -988,7 +989,7 @@ private theorem finiteReduction_kappa_complex (T : Scheme.{u})
     rw [← F.map_comp, ← (rlim l E T).map_comp, augmentation_fac,
       (rlim l E T).map_comp, F.map_comp]
     infer_instance
-  have := constantLimitUnit_isIso l E T (DerivedCategory.Q.obj P)
+  have := constantLimit_unit_isIso l E T (DerivedCategory.Q.obj P)
   change IsIso (F.map ((constantLimitAdjunction l E T).unit.app _ ≫
     (rlim l E T).map ((augmentation l E T).app _)))
   rw [F.map_comp]

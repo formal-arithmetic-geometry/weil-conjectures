@@ -279,7 +279,6 @@ private theorem diagonal_natural {A B : Type*} [Category* A] [Category* B]
     simpa only [Functor.map_comp, Category.assoc] using
       congrArg (fun t ↦ t ≫ b') hx₂.symm
 
-set_option maxHeartbeats 800000 in
 -- The statement contains simultaneous universe-polymorphic cone comparisons.
 /-- Strict chain-level Roos comparison for an exact product-preserving functor.
 

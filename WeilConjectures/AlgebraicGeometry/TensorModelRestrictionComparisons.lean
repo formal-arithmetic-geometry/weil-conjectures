@@ -90,7 +90,6 @@ private theorem transport_model_comparisons
       eU (R.obj (Q.obj J)) (R.obj A) (R.obj M) (R.map ξ ≫ (h A M).hom) = _
     rw [Category.assoc, hh, ← R.map_comp]
 
-set_option maxHeartbeats 1000000 in
 -- Canonical representative coherence requires substantial elaboration.
 /-- Coherent tensor-model and RHom object comparisons under open restriction.
 Source: Stacks Project, cohomology.tex, Tags 08DJ and 08DL, and Tag 06YH.

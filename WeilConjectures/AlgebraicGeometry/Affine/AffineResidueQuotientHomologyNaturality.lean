@@ -117,7 +117,6 @@ private theorem boundaries_map
       (termIso W U p K 0).apply_symm_apply]
     exact congrArg Subtype.val hy
 
-set_option maxHeartbeats 600000 in
 -- Comparing the quotient and categorical homology instances expands the tensor carriers.
 private def quotientIso
     (K : CochainComplex
@@ -210,7 +209,7 @@ private theorem abstractCycle_naturality
       (termIso_map W U p φ 1 x.val).symm
     _ = _ := (abstractCycle_i W U p C (affineResidueCycleMap φ x)).symm
 
-set_option maxHeartbeats 1600000 in
+set_option maxHeartbeats 1300000 in
 -- The statement compares tensor-product and quotient module structures.
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in

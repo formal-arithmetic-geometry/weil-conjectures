@@ -167,7 +167,7 @@ private theorem evaluation_summand_postcomp (Y : Scheme.{u})
   exact uncurry_postcomp Y.sheaf (P.X r) _ (N.X n) B (π P N q r n h) g
 
 set_option backward.isDefEq.respectTransparency.types true in
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 600000 in
 -- Specializing the total tensor formula elaborates sheaf coproduct and closed instances.
 /-- A tensor-unit action has the canonical dual-projection component formula.
 Source: Stacks Project, cohomology.tex, Tags 08DJ, 08DM and 08DQ;

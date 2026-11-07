@@ -141,7 +141,6 @@ private theorem derived_formula
   rw [Functor.mapDerivedCategoryCompIso_hom_app_factors]
   exact (Functor.mapDerivedCategoryNatIso_fac a K).symm
 
-set_option maxHeartbeats 800000 in
 -- Comparing the nested derived and termwise functors unfolds several sheaf transports.
 /-- The canonical composition isomorphism, including its K-flat representative formula.
 The existential adjunctions have their units fixed sectionwise by the construction;

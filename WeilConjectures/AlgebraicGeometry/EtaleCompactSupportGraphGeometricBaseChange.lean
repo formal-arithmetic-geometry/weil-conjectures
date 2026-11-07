@@ -534,7 +534,6 @@ private lemma clopenTransfer_comp
   rw [← Adjunction.counit_naturality,
     ← (clopenUpperStarLowerShriekAdjunction Λ σ).unit_naturality_assoc]
 
-set_option maxHeartbeats 800000 in
 -- the base change of the unit of `Lσ^* ⊣ Dσ_!` unfolds large derived functors
 /-- **`clopenTransfer` commutes with base change**: for a cartesian square
 `k ≫ σ = σ' ≫ h` of open and closed immersions `σ`, `σ'`, `Lh^*` of `clopenTransfer ψ` is
@@ -855,7 +854,6 @@ variable {X Y X' Y' : Scheme.{u}} {e : X ⟶ Y} {g : Y' ⟶ Y} {e' : X' ⟶ Y'} 
 
 attribute [local irreducible] compactificationEtaleGraphIso
   compactificationEtaleGraphMap
-set_option maxHeartbeats 1000000 in
 -- the derived functors involved are large terms
 omit [_root_.AlgebraicGeometry.Etale e] [_root_.AlgebraicGeometry.Etale e'] in
 /-- The coherence of the graph isomorphisms `Lq^* ⋙ Lσ^* ≅ Dj_! ⋙ Lq_Z^* ⋙ Lσ^*` with base
@@ -1923,7 +1921,6 @@ private lemma rightDerivedLowerShriekOfCompactificationBaseChangeMap_app_eq
     Functor.whiskerRight_app, Category.id_comp]
   erw [Category.comp_id]
 
-set_option maxHeartbeats 1000000 in
 -- the derived functors involved are large terms
 /-- **The candidate unit of `Rf_!(c) ⊣ Le^*` commutes with base change**: for a cartesian square
 `g' ≫ e = e' ≫ g` and the base change `c'` of the compactification `c`, the unit at

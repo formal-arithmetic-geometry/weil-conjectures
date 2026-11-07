@@ -106,7 +106,6 @@ private theorem composite_counit_of_associativity
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
 -- The dependent complex comparisons require substantial instance elaboration.
 set_option linter.unusedVariables false in
 -- Preserve the original statement, including its unused lambda binder t.

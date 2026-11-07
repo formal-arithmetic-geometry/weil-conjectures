@@ -136,7 +136,7 @@ private theorem regular_restriction_iso (a : Λ ⟶ Λ') [IsMonHom a] (T : Schem
   apply Iso.ext
   exact regular_restriction_hom a T
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- The single-object comparison traverses several exact derived functor isomorphisms.
 private theorem regular_pull_eq (a : Λ ⟶ Λ') [IsMonHom a]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :

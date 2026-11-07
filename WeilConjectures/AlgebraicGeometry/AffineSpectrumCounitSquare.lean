@@ -32,7 +32,7 @@ attribute [local instance_reducible] Scheme.Modules TopCat.Sheaf
 attribute [local implicit_reducible] DerivedCategory
   HomotopyCategory DerivedCategory.Q DerivedCategory.Qh
 
-set_option maxHeartbeats 1600000 in
+set_option maxHeartbeats 1500000 in
 -- The quotient comparison normalization unfolds several derived-category factors.
 /-- The inverse pullback counits commute with the canonical affine coordinate comparison.
 This is an equation of derived morphisms, independent of f, g, z0 and stalk cohomology.

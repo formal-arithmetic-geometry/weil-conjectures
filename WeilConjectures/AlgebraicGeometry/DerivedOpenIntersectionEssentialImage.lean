@@ -44,7 +44,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 2048 in
 set_option synthInstance.maxHeartbeats 400000 in
 -- Transport through the open and isomorphism adjunctions needs more instance search.
-set_option maxHeartbeats 1600000 in
 -- The nested derived-functor comparisons require a larger elaboration budget.
 
 /-- The restriction to O of an open direct image from P is in the essential image

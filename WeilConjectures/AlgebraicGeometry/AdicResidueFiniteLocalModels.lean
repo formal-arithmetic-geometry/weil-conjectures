@@ -42,7 +42,7 @@ private theorem adicResidue_complete_of_iso
       ((Iso.refl _).op.prod
         ((ringedDerivedRestriction.{w, w + 1, w + 1} B U).mapIso e)))
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- Comparing the two termwise constant presentations unfolds their sheafification maps.
 private theorem adicResidue_constant_complete
     (X : Scheme.{u})

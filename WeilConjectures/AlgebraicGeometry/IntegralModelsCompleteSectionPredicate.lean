@@ -33,7 +33,6 @@ attribute [local irreducible] upperStarFromPoint integralSectionRingIso
   WeilConjectures.purCoefficientIso Scheme.pbcCompletedComparison
   IntegralConstantModel.pointComparison smallDerivedObject
 
-set_option maxHeartbeats 800000 in
 -- Compare the four exact scalar transports without unfolding their coefficient limits.
 private def modulesSectionIso (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
@@ -87,7 +86,6 @@ private def toModelEquivalence (X : Scheme.{u})
     (NatIso.ofComponents (fun M ↦ (SheafOfModules.fullyFaithfulForget _).preimageIso
       (PresheafOfModules.isoMk (fun U ↦ Iso.refl _))))
 
-set_option maxHeartbeats 400000 in
 -- Fix the morphism universes of the exact functors across the two site presentations.
 private def derivedSectionIso (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

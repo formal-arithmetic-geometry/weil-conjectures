@@ -30,7 +30,7 @@ open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 open scoped TensorProduct
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 700000 in
 -- The chart scalar transports and projective homology comparisons need elaboration fuel.
 /-- Algebraic self-Tor gives linear coordinates on the affine sections of the
 ambient tensor homology, compatible with augmented resolution comparisons.

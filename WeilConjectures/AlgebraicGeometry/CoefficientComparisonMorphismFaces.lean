@@ -37,7 +37,6 @@ private def supportRestriction {S T : Scheme.{u}} (f : S ⟶ T) (M : S.Modules)
     (pushforwardComp i (D.ι ≫ f)).hom.app _ ≫
       (pushforwardCongr e).hom.app _ ≫ (pushforward (A.ι ≫ f)).map er.hom
 
-set_option maxHeartbeats 800000 in
 -- The four dependent restriction and pushforward isomorphisms require extra reduction.
 private theorem supportRestriction_app {S T : Scheme.{u}} (f : S ⟶ T) (M : S.Modules)
     {A D : S.Opens} (h : A ≤ D) (B : T.Opens)
@@ -60,7 +59,6 @@ private theorem supportRestriction_app {S T : Scheme.{u}} (f : S ⟶ T) (M : S.M
   rfl
 
 
-set_option maxHeartbeats 800000 in
 -- Comparing nested direct images requires reducing their scalar-restriction instances.
 private theorem coefficientSectionLinearMap_naturality
     {X T : Scheme.{u}} (f : X ⟶ T) (F : X.Modules) (U : T.Opens)
@@ -108,7 +106,6 @@ private theorem coefficientSectionLinearMap_naturality
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-set_option maxHeartbeats 800000 in
 -- The composed adjunction compares dependent scalar-restriction and direct-image instances.
 /-- The concrete coefficient mates commute with every Cech face restriction.
 Source: Stacks Project, Tags 02KE and 0097, naturality of the termwise map.

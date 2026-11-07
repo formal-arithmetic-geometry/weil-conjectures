@@ -174,7 +174,6 @@ def CoefficientTensorUncurryModel
             (DerivedCategory.Q.map φ ≫ (coefficientHomResolutionIso.{u, c, v, w} J A L.1 M).inv) =
         DerivedCategory.Q.map ψ ≫ coefficientHomResolutionInverse.{u, c, v, w} J A M)
 
-set_option maxHeartbeats 500000 in
 -- Elaborate the representative tensor-Hom square with independent site universes.
 /-- A derived tensor is specified by the natural total-tensor comparison on K-flats.
 This is a universal representative characterization, not an extra assumption on inputs.

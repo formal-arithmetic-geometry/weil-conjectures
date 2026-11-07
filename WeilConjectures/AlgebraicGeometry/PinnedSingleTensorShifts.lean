@@ -196,7 +196,7 @@ def pinnedSingleTensorCounit
       ((HomologicalComplex.singleMapHomologicalComplex
         (Scheme.Modules.tensorPullback g') (ComplexShape.up ℤ) n).hom.app G)))
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- The nested family comparison must identify the shared sheaf-module category instances.
 /-- The tensor comparison is a morphism of single-functor families.
 Source: Stacks Project, Tag 08HY; the derived counit universal property and

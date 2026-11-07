@@ -36,7 +36,7 @@ Proof: Stacks Project, More on Algebra, Tag 07M7.
 1. `exists_etale_neighbourhoods_of_smooth_section` performs the conormal, projective
    complement, symmetric algebra and basis quotient construction. It gives a
    factorization through an algebra étale near all primes of the section kernel.
-2. `exists_etale_localization_of_prime_mem` chooses a global étale localization
+2. `exists_isUnit_mk_and_etale_away` chooses a global étale localization
    with denominator invertible modulo that kernel. Map the unit through `kerLift`
    and use the localization universal property to extend the section.
 3. `exists_localization_quotient_equiv_of_etale_section` cuts out the section by
@@ -60,7 +60,7 @@ theorem exists_etale_lift_of_smooth
           Ideal.Quotient.mk (J.map (algebraMap A A')) ∘ tildeσ =
             α.toRingHom ∘ σ.toRingHom := by
   obtain ⟨E, jE, τE, hτE, hE⟩ := exists_etale_neighbourhoods_of_smooth_section A B J σ hB
-  obtain ⟨h, hh, hEt⟩ := exists_etale_localization_of_prime_mem
+  obtain ⟨h, hh, hEt⟩ := exists_isUnit_mk_and_etale_away
     (algebraMap A E) (RingHom.ker τE.toRingHom) hE
   have hhτ : IsUnit (τE h) := by
     exact hh.map (RingHom.kerLift τE.toRingHom)

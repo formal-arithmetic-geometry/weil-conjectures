@@ -24,7 +24,6 @@ noncomputable section
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] AlgebraicGeometry.Scheme.Modules.enoughInjectives
 
-set_option maxHeartbeats 800000 in
 -- The nested restriction-adjunction calculation needs elaboration fuel.
 /-- The explicitly restricted lift preserves the augmentation.
 Source: Stacks Project, Cohomology, Tags 01FB and 01E4.

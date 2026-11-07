@@ -162,7 +162,7 @@ private theorem pushLine_complete (l : ℕ) [Fact l.Prime]
   let := hpush V hV
   exact (Iso.homCongr (Iso.refl V) c).injective.subsingleton
 
-set_option maxHeartbeats 2000000 in
+set_option maxHeartbeats 500000 in
 -- Concrete derived-category comparisons require additional elaboration heartbeats.
 private theorem base_factor_completed (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} [IsNoetherian X] [IsNoetherian S]
@@ -323,7 +323,6 @@ private theorem adjunction_factor_of_iso
   apply (cancel_mono i.inv).mp
   simpa only [Category.assoc, Iso.hom_inv_id, Category.comp_id] using h.symm
 
-set_option maxHeartbeats 1000000 in
 -- Isolate the concrete single-unit comparison from the diagram algebra.
 private theorem localChern_unit (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
     [DiagonalTraceLocalizations l X] (eX : CompletedRealization l X)
@@ -336,7 +335,6 @@ private theorem localChern_unit (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
   unfold CompletedRealization.localChern
   simp only [IsIso.hom_inv_id_assoc]
 
-set_option maxHeartbeats 2000000 in
 -- Compare the two normalized unit transports with an arbitrary local target.
 private theorem realized_unit_adjunct (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}}
@@ -390,7 +388,6 @@ private theorem modelAdjunct_factor_pair
       cF.derived ≫ q = (derivedUpper Λ f).map γ' ≫ v := by
   exact ⟨γ, modelAdjunct_factor Λ f D canonical cF q γ a h⟩
 
-set_option maxHeartbeats 2000000 in
 -- Specialize coefficients while keeping the derived objects arbitrary.
 private theorem concrete_factor_pair (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} (f : X ⟶ S)
@@ -411,7 +408,6 @@ private theorem concrete_factor_pair (l : ℕ) [Fact l.Prime]
         (derivedUpper (Profinite.continuousMapRingObj.{u} ℤ_[l]) f).map γ' ≫ v := by
   exact @modelAdjunct_factor_pair _ _ _ X S f D canonical cF T V q γ a h
 
-set_option maxHeartbeats 2000000 in
 -- Keep the realization diagram separate from the inverse-adjunction construction.
 private theorem realized_factor_composite (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}}
@@ -453,7 +449,6 @@ private theorem realized_factor_composite (l : ℕ) [Fact l.Prime]
     (realized_unit_adjunct l f eX eS R D canonical hcanonical push cF _
       (eX.localChern l X w))
 
-set_option maxHeartbeats 2000000 in
 -- The concrete specialization compares derived sheaf and coefficient instances.
 private theorem realize_factorization (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}}
@@ -486,7 +481,6 @@ private theorem realize_factorization (l : ℕ) [Fact l.Prime]
   exact concrete_factor_pair l f D canonical cF (eX.localChern l X w) (eS.localChern l S z) _
     (realized_factor_composite l f eX eS R D canonical hcanonical push cF z w b hb)
 
-set_option maxHeartbeats 2000000 in
 -- Concrete derived-category comparisons require additional elaboration heartbeats.
 /-- A realized local Chern class of a base line factors through the shifted
 integral Tate line on that base, before taking any right adjunct.

@@ -301,7 +301,6 @@ private theorem evaluation_shift_transport
     (Evaluation.singleIso L₀ R F) (Evaluation.singleIso L₀' R' F')
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 150000 in
 -- The composite shift structures require several coherence comparisons.
 set_option synthInstance.maxSize 256 in
 set_option maxRecDepth 2048 in

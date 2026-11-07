@@ -47,16 +47,16 @@ theorem homologyEvaluation_local_iso_of_roof (X : AlgebraicGeometry.Scheme.{u})
   let R := Scheme.Modules.restrictFunctor V.ι
   let B := SheafOfModules.overFunctor.{u} V.toScheme.ringCatSheaf W
   let F := R ⋙ B
-  let : PreservesFiniteLimits O := moduleOverFunctor_limits_proof X.toRingedSpace V
-  let : PreservesFiniteColimits O := moduleOverFunctor_colimits_proof X.toRingedSpace V
+  let : PreservesFiniteLimits O := moduleOverFunctor_limits X.toRingedSpace V
+  let : PreservesFiniteColimits O := moduleOverFunctor_colimits X.toRingedSpace V
   let : PreservesFiniteLimits (O ⋙ A) := comp_preservesFiniteLimits O A
   let : PreservesFiniteColimits (O ⋙ A) := comp_preservesFiniteColimits O A
   let : PreservesFiniteLimits R :=
     preservesFiniteLimits_of_natIso (Scheme.Modules.overFunctorEquiv V)
   let : PreservesFiniteColimits R :=
     preservesFiniteColimits_of_natIso (Scheme.Modules.overFunctorEquiv V)
-  let : PreservesFiniteLimits B := moduleOverFunctor_limits_proof V.toScheme.toRingedSpace W
-  let : PreservesFiniteColimits B := moduleOverFunctor_colimits_proof V.toScheme.toRingedSpace W
+  let : PreservesFiniteLimits B := moduleOverFunctor_limits V.toScheme.toRingedSpace W
+  let : PreservesFiniteColimits B := moduleOverFunctor_colimits V.toScheme.toRingedSpace W
   let : PreservesFiniteLimits F := comp_preservesFiniteLimits R B
   let : PreservesFiniteColimits F := comp_preservesFiniteColimits R B
   let : F.PreservesZeroMorphisms := moduleOpenOver_preservesZeroMorphisms X V W

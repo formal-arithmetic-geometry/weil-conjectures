@@ -199,7 +199,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   (B : ℕ → Sheaf J CommRingCat.{max c v r})
   (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)
 
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 500000 in
 -- Elaborating the exact localization square compares several dependent derived categories.
 private theorem pull_transition
     (A : Data.{c, v, r} J B τ)

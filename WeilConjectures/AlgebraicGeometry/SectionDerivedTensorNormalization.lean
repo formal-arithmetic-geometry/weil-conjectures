@@ -442,7 +442,6 @@ private theorem representative_equation {X Y : Scheme.{u}} (f : X ⟶ Y)
     DerivedRepresentativeSquare.output]
   convert! ht using 1 <;> first | exact Category.assoc _ _ _ | rfl
 
-set_option maxHeartbeats 600000 in
 private theorem actualComparisonIso_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
     actualComparisonIso Λ f = tensorPullComparison Λ f := by
   obtain ⟨P, hP, _, _, hff⟩ :=
@@ -552,7 +551,6 @@ private theorem genericInternalWithUnit [PreservesFiniteLimits F]
   ⟨(F.leftDerivedMonoidalWithUnit).toOplaxMonoidal, (fun _ _ ↦ rfl), rfl⟩
 
 end GenericInternal
-set_option maxHeartbeats 200000 in
 include Λ in
 private theorem internal_oplax_compatible {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃ o : (internalDerivedPullback Λ f).OplaxMonoidal,

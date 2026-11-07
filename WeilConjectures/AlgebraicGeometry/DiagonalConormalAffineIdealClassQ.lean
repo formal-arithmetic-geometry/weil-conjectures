@@ -22,7 +22,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open scoped TensorProduct
 namespace AlgebraicGeometry
 variable {X S : Scheme.{u}}
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 600000 in
 -- The chart and scalar-action transports elaborate several nested sheaf module instances.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

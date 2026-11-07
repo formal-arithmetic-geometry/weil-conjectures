@@ -1144,7 +1144,6 @@ private lemma finiteBiproduct_double_pivot
       · simp [b]
 
 -- Strong induction on the number of source generators removes one cyclic block at a time.
-set_option maxHeartbeats 800000 in
 -- The induction elaborates several composed module and coefficient equivalences at each pivot.
 private lemma integralMatrixScalarCharts (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]

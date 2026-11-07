@@ -52,7 +52,6 @@ private theorem externalSectionsComponent_smul
     (scalarPullbackGlobalSection f (pullback.fst f g) F (pullback.snd f g ⁻¹ᵁ V) s)
     (scalarUnitSection g (pullback.snd f g) G V t)
 
-set_option maxHeartbeats 800000 in
 -- Elaborating section modules across scalar restriction and the pullback needs this budget.
 /-- The external section map on constant tensor coefficients, as an `O_Y`-linear presheaf
 morphism: on an open `V` it is the balanced identification

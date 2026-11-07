@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteCondensedRing
 public import WeilConjectures.AlgebraicGeometry.IntegralResidueOrdinaryTensorSquare
 public import WeilConjectures.AlgebraicGeometry.IntegralResidueTensorModel
 import WeilConjectures.AlgebraicGeometry.IntegralResidueOrdinaryTensorNormalization
@@ -19,7 +20,7 @@ Only the scalar mate and the ordinary balanced tensor comparison occur below.
 universe v u
 open CategoryTheory Limits MonoidalCategory
 open scoped CategoryTheory.Obj CategoryTheory.Functor
-local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+attribute [local instance] _root_.instEssentiallySmallProfinite_weilConjectures
 
 theorem IntegralResidueScalarCounitModel.tensorPresentation_app
     {C : Type u} [Category.{v} C] [Abelian C] [MonoidalCategory C]

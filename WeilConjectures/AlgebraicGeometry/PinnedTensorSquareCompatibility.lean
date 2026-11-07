@@ -39,13 +39,7 @@ local instance pinnedTensorSquareCompatibilityT2Instance2 (Y : Scheme.{u}) :
     MonoidalPreadditive (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) :=
   modulePreadditive Y
 
-local instance pinnedTensorSquareCompatibilityT2Instance3
-    (Y : Scheme.{u}) : (curriedTensor Y.Modules).PreservesZeroMorphisms :=
-  SheafOfModules.preservesZeroMorphisms_curriedTensor Y.sheaf
-
-local instance pinnedTensorSquareCompatibilityT2Instance4 (Y : Scheme.{u}) (M : Y.Modules) :
-    ((curriedTensor Y.Modules).obj M).PreservesZeroMorphisms :=
-  SheafOfModules.preservesZeroMorphisms_curriedTensor_obj Y.sheaf M
+attribute [local instance] pinnedTensorSquareComponentInstance3 pinnedTensorSquareComponentInstance4
 
 /-- Chain equation for the explicitly constructed pinned stalk tensor coordinates.
 

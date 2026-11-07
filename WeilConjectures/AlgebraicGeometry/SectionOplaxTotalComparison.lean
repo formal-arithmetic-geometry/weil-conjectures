@@ -42,7 +42,6 @@ def TotalMapAgreement (X : Scheme.{u})
 
 set_option backward.isDefEq.respectTransparency true
 
-set_option maxHeartbeats 600000 in
 -- One proposition records the component, local-generator and localized equations.
 /-- The clauses of actual internal-to-section total normalization: tensor and inverse
 equalities, both inverse laws, every summand, local scalar formulas, signed differential,
@@ -350,7 +349,6 @@ private theorem termwise_pull_hom_f {X Y : Scheme.{u}} (f : X ⟶ Y)
   unfold termwisePullComparison
   rfl
 
-set_option maxHeartbeats 600000 in
 -- The coproduct square compares several dependent tensor components.
 private theorem tensor_total_square {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P Q : CochainComplex (internalModules Λ Y) ℤ) :
@@ -427,7 +425,6 @@ private theorem tensor_total_square {X Y : Scheme.{u}} (f : X ⟶ Y)
   rw [MonoidalCategory.tensorHom_def]
   exact (Category.assoc _ _ _).symm
 
-set_option maxHeartbeats 600000 in
 -- The concrete categorical transport has several nested functor and tensor projections.
 private theorem conjugated_total_hom {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P Q : CochainComplex (internalModules Λ Y) ℤ) :
@@ -480,7 +477,6 @@ private theorem internal_apply_eq_of_comp (X : Scheme.{u})
   exact (congrArg (fun k ↦ (k.hom.hom.app W) x) hc).trans
     (congrArg (fun z ↦ (c.hom.hom.app W) z) hb)
 
-set_option maxHeartbeats 600000 in
 -- The twelve dependent comparison clauses share the same signed tensor structures.
 /-- Source: Stacks 07A4 and 03EL (auxiliary; not a blueprint node).
 Proof: preserve the full coproduct indexed by p+q=n using the specified left adjunctions.

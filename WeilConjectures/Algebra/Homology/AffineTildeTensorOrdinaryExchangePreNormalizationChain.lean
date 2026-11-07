@@ -200,7 +200,7 @@ def affineTildePushforwardComplexMap
   let σ := affineTildePushforwardComparison D B ψ
   let P := RingedSpace.moduleDirectImage
     (Spec.map (CommRingCat.ofHom ψ)).toLRSHom.toShHom
-  let : P.Additive := RingedSpace.moduleDirectImage_additive_proof _
+  let : P.Additive := RingedSpace.moduleDirectImage_additive _
   exact { f := fun i ↦ σ.hom.app (C.X i)
           comm' := fun i j _ ↦ (σ.hom.naturality (C.d i j)).symm }
 

@@ -22,7 +22,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 600000 in
+set_option maxHeartbeats 500000 in
 -- The over-site equivalence and evaluated biproduct require extra definitional reductions.
 /-- The map to H and the normalized formal quotient maps jointly separate local sections.
 Source: Stacks Project, Tag 0889(1), omitted uniqueness verification, made explicit

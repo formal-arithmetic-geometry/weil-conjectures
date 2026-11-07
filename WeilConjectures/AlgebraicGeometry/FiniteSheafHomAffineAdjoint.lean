@@ -39,7 +39,7 @@ open CategoryTheory Opposite TopologicalSpace
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 700000 in
 -- The localization comparisons require unfolding several sheaf carrier encodings.
 /-- Restriction along `O_X → A = f_* O_Y` (the ring sheaf of the landed
 `directImageAlgebraSpace f`) has right adjoint the derived sheaf-Hom out of `A`:

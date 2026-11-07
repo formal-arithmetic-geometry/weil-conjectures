@@ -29,7 +29,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 set_option autoImplicit false
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- Transport of local generators and restricted image factorizations needs extra heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 /-- A quasi-coherent module finite type on W has a quasi-coherent submodule

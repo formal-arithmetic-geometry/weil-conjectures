@@ -296,7 +296,6 @@ private theorem algebraic_boundary_transport
 
 
 set_option backward.isDefEq.respectTransparency true in
-set_option maxHeartbeats 200000 in
 -- The large dependent cohomology signature and its transports require additional elaboration steps.
 set_option linter.unusedVariables false in
 /-- Construct the difference and boundary maps, leaving the restriction row supplied.

@@ -110,7 +110,6 @@ private lemma unitLeray_naturality {X Y : Scheme.{uNatural}} (f : Y ⟶ X)
         AddCommGrpCat.{uNatural + 1} f).hom
   exact τ.naturality a
 
-set_option maxHeartbeats 1000000 in
 -- Elaborating the dependent presentation families and compatibility equations.
 /-- Identity and composition of pullback on derived étale cohomology.
 Source: Stacks Project, Tags 015J, 015K and 0EZM.

@@ -284,7 +284,6 @@ private theorem inverse_naturality {C : Type*} [Category C]
 
 namespace AlgebraicGeometry.Scheme
 
-set_option maxHeartbeats 400000 in
 -- Comparing tensors over two rings requires explicit coefficient-forgetting reductions.
 /-- The balanced tensor identity for ordinary module sheaves is natural in both variables.
 Source: Stacks Project, Cohomology, Lemma 20.27.4 (Tag 08DE), proof.

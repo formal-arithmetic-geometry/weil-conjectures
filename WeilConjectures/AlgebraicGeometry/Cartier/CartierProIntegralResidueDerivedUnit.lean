@@ -44,8 +44,8 @@ open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 attribute [local instance] AlgebraicGeometry.cartierEtaleAbSheafify
   AlgebraicGeometry.cartierProAbSheafify AlgebraicGeometry.cartierEtaleModuleSheafify
   AlgebraicGeometry.cartierProModuleSheafify AlgebraicGeometry.cartierEtaleAbHasExt
-  AlgebraicGeometry.cartierProAbHasExt AlgebraicGeometry.cartierEtaleModuleHasExt
-  AlgebraicGeometry.cartierProModuleHasExt
+  AlgebraicGeometry.ProEtale.geoCartierIntegralExt AlgebraicGeometry.Etale.hasExt_sheaf_moduleCat
+  AlgebraicGeometry.ProEtale.geoCartierModuleExt
 namespace AlgebraicGeometry.ProEtale
 attribute [local irreducible] comparisonUpperStar cartierUnitsComparison
   cartierRootsComparison cartierRootsIso cartierEtaleKummerUnit cartierProKummerUnit

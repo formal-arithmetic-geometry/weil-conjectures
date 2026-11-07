@@ -2631,7 +2631,7 @@ lemma exists_isAffineOpen_superset_of_isPullback {ks : Type u} [Field ks] [Algeb
   -- `J_K` is proper, so the immersion is closed
   have := smoothOfRelativeDimension_of_representableBy_picardFunctorDegree 0 Js (rs.ofIso e)
   have := geometricallyIntegral_of_representableBy_picardFunctorDegree 0 Js (rs.ofIso e)
-  obtain ⟨hJK, -, -⟩ := isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback
+  obtain ⟨hJK, -, -⟩ := isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback_aux
     JK.hom Js.hom q hq
     (arithmeticGenus ks
       (pullback (C ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k ks)))))
@@ -2682,7 +2682,7 @@ lemma exists_isClosedImmersion_projectiveSpace_of_isPullback {ks : Type u} [Fiel
   -- `J_K` is proper and smooth, so the immersion is closed
   have := smoothOfRelativeDimension_of_representableBy_picardFunctorDegree 0 Js (rs.ofIso e)
   have := geometricallyIntegral_of_representableBy_picardFunctorDegree 0 Js (rs.ofIso e)
-  obtain ⟨hJK, hJS, -⟩ := isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback
+  obtain ⟨hJK, hJS, -⟩ := isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback_aux
     JK.hom Js.hom q hq
     (arithmeticGenus ks
       (pullback (C ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k ks)))))
@@ -3003,7 +3003,7 @@ theorem exists_commGrpObj_representableBy_picardFunctorDegree (ks : Type u) [Fie
   have hJ : IsPullback (q' ≫ q) Js.hom J.hom (Spec.map (CommRingCat.ofHom (algebraMap k ks))) :=
     hs ▸ hq'.paste_horiz hq
   -- Step 6: the geometric properties descend along `k ⊆ k_s`.
-  obtain ⟨hP, hS, hG⟩ := isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback
+  obtain ⟨hP, hS, hG⟩ := isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback_aux
     J.hom Js.hom (q' ≫ q) hJ g
   -- Step 5: the group law of `Pic^0_{C/k}` makes `J` a commutative group scheme.
   obtain ⟨_, hr⟩ := exists_commGrpObj_isPicardZeroMul (C ↘ Spec (.of k)) r

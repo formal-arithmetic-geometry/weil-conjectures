@@ -130,7 +130,6 @@ private def sectionRestrictionPush (φ : Λ ⟶ Λ') [IsMonHom φ]
     (ModuleRingedComparison.equivalence Λ' U).functor).preimageIso
       (sectionRestrictionPushImage φ h)
 
-set_option maxHeartbeats 800000 in
 -- The essential-image component calculation compares several nested section functors.
 -- Its definitional equality checks exceed the default heartbeat count.
 private theorem sectionRestrictionPush_apply (φ : Λ ⟶ Λ') [IsMonHom φ]

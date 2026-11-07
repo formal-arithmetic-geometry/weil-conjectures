@@ -36,7 +36,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 800000 in
 -- The concrete projection argument elaborates sheafification and both evaluation functors.
 open Classical in
 /-- On an affine open, every section of truncated direct-image cohomology of an

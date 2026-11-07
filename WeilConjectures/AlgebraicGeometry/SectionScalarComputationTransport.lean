@@ -90,7 +90,6 @@ private theorem internal_tensor_generator (a : Λ ⟶ Λ') [IsMonHom a]
   rw [he]
   exact comparison_internalTmul_braiding J (condensedRingObj Λ T) (B₀ a T) M U z x
 
-set_option maxHeartbeats 800000 in
 -- Generator comparisons elaborate both internal and section module tensor structures.
 private theorem ordinary_computation_transport (a : Λ ⟶ Λ') [IsMonHom a]
     (T : Scheme.{u}) (s : SectionScalarComparison a T)
@@ -271,7 +270,6 @@ private theorem restriction_computation_transport (a : Λ ⟶ Λ') [IsMonHom a]
 
 attribute [local irreducible] sectionScalarRestriction
 
-set_option maxHeartbeats 800000 in
 -- Generator comparisons elaborate both internal and section module tensor structures.
 /-- Scalar normalization and ordinary generators identify the restricted scalar
 computation after the section equivalence. Source: Stacks 03EK, 06YY, 07A6;

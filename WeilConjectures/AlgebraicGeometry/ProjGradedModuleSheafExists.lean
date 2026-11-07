@@ -60,7 +60,7 @@ local notation "Rp[" x "]" => HomogeneousLocalization 𝒜 T[x]
 local notation "Np[" x "]" => LocalizedModule T[x] M
 local notation "ModX" => SheafOfModules (moduleRings (Proj 𝒜).toRingedSpace)
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 700000 in
 -- Elaborating the dependent chart, stalk and section witnesses requires extra reductions.
 /-- The associated sheaf exists, with the canonical restrictions, chart and stalk
 identifications, uniqueness, quasi-coherence, and the degree-zero global-section map.

@@ -49,7 +49,7 @@ private theorem restrict_map_comparison
         Functor.mapIso_hom, Category.assoc]
 
 set_option synthInstance.maxSize 2048 in
-set_option maxHeartbeats 1600000 in
+set_option maxHeartbeats 1100000 in
 -- The three-fold exact restriction comparison needs a larger elaboration budget.
 set_option backward.isDefEq.respectTransparency false in
 /-- Attaching a single affine open extends the source plus its shift.

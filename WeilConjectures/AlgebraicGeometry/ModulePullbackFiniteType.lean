@@ -29,7 +29,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 1600000 in
+set_option maxHeartbeats 600000 in
 -- The over-site equivalences and tensor-pullback object require extra definitional reductions.
 /-- For a morphism of schemes, the pullback of a finite type module is finite type.
 

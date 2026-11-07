@@ -446,7 +446,6 @@ private noncomputable def c3_etaleObjectSectionsIso {X : Scheme.{u}} (V : X.Etal
         (MorphismProperty.Over.mkIdTerminal (P := @Etale) V.left)).symm
 
 set_option maxRecDepth 2048 in
-set_option maxHeartbeats 800000 in
 -- Comparing nested pullback and localization components needs extra elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -664,7 +663,6 @@ private theorem c3_globalSections_naturality {X Y : Scheme.{u}} (f : Y ⟶ X)
 set_option linter.unusedVariables false in
 -- Projection equality proofs are referenced only through proof-irrelevant arguments.
 set_option maxRecDepth 4000 in
-set_option maxHeartbeats 1600000 in
 -- Nested inverse-image and global-section functors need extra elaboration reduction.
 /-- Evaluation of f_* f^* G at an étale object W identifies naturally with the global
 sections of the pullback of G to W ×_R X. This is a comparison for a single cartesian

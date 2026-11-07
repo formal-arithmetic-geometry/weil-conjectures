@@ -34,7 +34,7 @@ private theorem scalar_commute {S : Type*} [Ring S] {C : Type*}
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-set_option maxHeartbeats 2000000 in
+set_option maxHeartbeats 1600000 in
 -- The scalar action is transported through the derived localization.
 private theorem restriction_scalar (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
@@ -99,7 +99,7 @@ private theorem restriction_scalar (X : Scheme.{u})
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-set_option maxHeartbeats 2000000 in
+set_option maxHeartbeats 900000 in
 -- Sectionwise scalar actions require unfolding transported module structures.
 /-- Scalar identities commute with every affine realization comparison isomorphism.
 This requires neither perfectness nor a cohomology support condition.
