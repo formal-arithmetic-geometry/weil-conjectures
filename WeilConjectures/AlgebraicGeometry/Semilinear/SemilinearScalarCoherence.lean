@@ -170,7 +170,7 @@ private theorem triangle_comp (a : F ⟶ G ⋙ R) (b : G ⟶ H ⋙ S)
         DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex i.hom (.up ℤ)).app Pn) := by
     apply (cancel_epi ((Functor.mapDerivedCategoryCompIso S R).inv.app
       (DerivedCategory.Q.obj Pn))).mp
-    simp only [c, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc,
+    simp only [c, Iso.trans_hom, NatTrans.comp_app, Category.assoc,
       Iso.inv_hom_id_app_assoc]
     rw [Functor.mapDerivedCategoryNatIso_fac,
       Functor.mapDerivedCategoryCompIso_hom_app_factors_assoc]

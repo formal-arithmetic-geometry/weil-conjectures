@@ -161,7 +161,7 @@ theorem extMk_resolution_connecting_eq_triangle
     (show (1 : ℤ) + (n : ℤ) = ((n + 1 : ℕ) : ℤ) by omega) = _
   simp only [extMk_hom, DerivedCategory.singleFunctorIsoCompQ,
     Iso.refl_hom, Iso.refl_inv, NatTrans.id_app, ShiftedHom.mk₀_id_comp,
-    CochainComplex.singleFunctor, CochainComplex.singleFunctors,
+    CochainComplex.singleFunctor,
     DerivedCategory.Q_obj_single_obj, Category.comp_id] at ⊢
   rw [ShiftedHom.comp_assoc _ _ _ (zero_add _) (add_zero _) (by omega), hinv,
     ← ShiftedHom.comp_assoc _ _ _
@@ -170,7 +170,7 @@ theorem extMk_resolution_connecting_eq_triangle
     (ShiftedHom.mk₀ (0 : ℤ) rfl (inv (DerivedCategory.Q.map RA.ι')))
     (zero_add (n + 1 : ℤ))) hcomp using 1 <;>
     simp only [Nat.cast_add, Nat.cast_one, c', a', CochainComplex.singleFunctor,
-      CochainComplex.singleFunctors, Functor.comp_obj, DerivedCategory.Q_obj_single_obj] <;>
+      DerivedCategory.Q_obj_single_obj] <;>
       rfl
 
 end CategoryTheory.InjectiveResolution

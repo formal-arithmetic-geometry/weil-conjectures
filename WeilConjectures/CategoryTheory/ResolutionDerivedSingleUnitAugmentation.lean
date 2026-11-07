@@ -97,7 +97,7 @@ theorem resolutionDerivedSingleUnit_augmentation
       HomologicalComplex.extendMap_f _ ComplexShape.embeddingUpNat (i := 0) (i' := 0) (by simp),
       Category.assoc]
     dsimp [a]
-    simp only [Functor.mapHomologicalComplex_map_f,
+    simp only [
       HomologicalComplex.singleMapHomologicalComplex_inv_app_self,
       InjectiveResolution.ι'_f_zero, Functor.map_comp, Category.assoc]
     simp only [InjectiveResolution.cochainComplexXIso, Iso.inv_hom_id_assoc]
@@ -112,7 +112,7 @@ theorem resolutionDerivedSingleUnit_augmentation
   rw [← Category.assoc, hcancel]
   apply DerivedCategory.Plus.ι.map_injective
   simp only [Functor.map_comp, Functor.mapHomotopyCategoryPlusSingleFunctorQhObjIso,
-    Functor.preimageIso_inv, Functor.map_preimage, Functor.mapIso_inv,
+    Functor.preimageIso_inv, Functor.map_preimage,
     resolutionAugmentationIso, Functor.preimageIso_hom,
     DerivedCategory.Plus.quotientCompQhIso_hom_app_hom]
   dsimp
@@ -123,7 +123,7 @@ theorem resolutionDerivedSingleUnit_augmentation
           ((HomotopyCategory.quotient A (.up ℤ)).map I.ι')) ≫
       (DerivedCategory.quotientCompQhIso B).hom.app _ ≫ DerivedCategory.Q.map _ = _
   rw [Functor.mapHomotopyCategory_map]
-  simp only [Category.assoc, ← DerivedCategory.quotientCompQhIso_inv_naturality_assoc,
+  simp only [← DerivedCategory.quotientCompQhIso_inv_naturality_assoc,
     Iso.inv_hom_id_app_assoc]
   erw [Iso.inv_hom_id_app_assoc]
   change DerivedCategory.Q.map _ ≫ DerivedCategory.Q.map _ ≫ DerivedCategory.Q.map _ =

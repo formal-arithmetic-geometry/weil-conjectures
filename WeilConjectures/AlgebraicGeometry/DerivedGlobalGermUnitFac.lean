@@ -163,7 +163,7 @@ private theorem derived_unit_germ_fac
   simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
     Adjunction.mapHomologicalComplex_unit_app_f, NatTrans.mapHomologicalComplex_app_f,
     NatTrans.comp_app, Functor.leftUnitor_inv_app, Functor.associator_hom_app,
-    Functor.whiskerLeft_app, Functor.whiskerRight_app, HomotopyCategory.quotient_obj_as]
+    Functor.whiskerLeft_app, Functor.whiskerRight_app]
   change H.map (adj.unit.app (K.X n)) ≫ e.hom.app (L.obj (K.X n)) ≫
       e'.inv.app (L.obj (K.X n)) ≫ γ.app (F'.obj (L.obj (K.X n))) =
     𝟙 _ ≫ H.map (adj.unit.app (K.X n)) ≫ 𝟙 _ ≫ e.hom.app (L.obj (K.X n)) ≫

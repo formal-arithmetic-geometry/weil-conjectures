@@ -155,7 +155,7 @@ instance : AddCommGroup (M ⟶ N) :=
 
 end
 
-instance : Preadditive (Mod C A) where
+instance instPreadditive : Preadditive (Mod C A) where
   add_comp _ _ _ _ _ _ := Mod.hom_ext _ _ (Preadditive.add_comp _ _ _ _ _ _)
   comp_add _ _ _ _ _ _ := Mod.hom_ext _ _ (Preadditive.comp_add _ _ _ _ _ _)
 

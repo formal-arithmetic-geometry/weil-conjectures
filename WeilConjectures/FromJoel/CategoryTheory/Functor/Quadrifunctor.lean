@@ -8,6 +8,7 @@ module
 public import Mathlib.CategoryTheory.Functor.Trifunctor
 public import Mathlib.CategoryTheory.Functor.CurryingThree
 public import Mathlib.CategoryTheory.Whiskering
+public import Mathlib.CategoryTheory.Functor.Quadrifunctor
 
 /-!
 # Quatrifunctors
@@ -33,11 +34,6 @@ variable {C₁ C₂ C₃ C₄ C₁₂₃ C₂₃₄ C D₁ D₂ D₃ D₄ E : Ty
 def trifunctorComp₁₂₃ (F₁₂₃ : C₁ ⥤ C₂ ⥤ C₃ ⥤ C₁₂₃) (G : C₁₂₃ ⥤ C₄ ⥤ C) :
     C₁ ⥤ C₂ ⥤ C₃ ⥤ C₄ ⥤ C :=
   (Functor.postcompose₃.obj G).obj F₁₂₃
-
-@[simps!]
-def trifunctorComp₂₃₄ (F : C₁ ⥤ C₂₃₄ ⥤ C) (G₂₃₄ : C₂ ⥤ C₃ ⥤ C₄ ⥤ C₂₃₄) :
-    C₁ ⥤ C₂ ⥤ C₃ ⥤ C₄ ⥤ C :=
-  (F ⋙ Functor.postcompose₃).flip.obj G₂₃₄
 
 variable (E)
 

@@ -60,7 +60,7 @@ private lemma exact_adj_comp
   intro K
   simp only [Adjunction.ofNatIsoRight_unit, Adjunction.ofNatIsoLeft_unit,
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    Iso.symm_hom, Adjunction.comp_unit_app]
+    Adjunction.comp_unit_app]
   let KL := ((L₁ ⋙ L₂).mapHomotopyCategory (.up ℤ)).obj K
   rw [← cancel_mono ((R₂ ⋙ R₁).mapDerivedCategory.map
     ((L₁ ⋙ L₂).mapDerivedCategoryFactorsh.hom.app K) ≫
@@ -193,7 +193,7 @@ private lemma derived_open_comp_conjugate
   have hK := congrArg (fun t ↦ t.app K) hd
   simp only [Adjunction.ofNatIsoRight_unit, Adjunction.ofNatIsoLeft_unit,
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    Iso.symm_hom, Adjunction.comp_unit_app,
+    Adjunction.comp_unit_app,
     Functor.mapDerivedCategoryNatIso_symm] at hK
   let L₁ := openImmersionLowerShriek B j₁
   let L₂ := openImmersionLowerShriek B j₂

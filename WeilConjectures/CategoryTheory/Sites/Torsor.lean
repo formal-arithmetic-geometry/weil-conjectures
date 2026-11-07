@@ -689,7 +689,7 @@ omit [J.WEqualsLocallyBijective AddCommGrpCat.{w}] in
 short exact sequences `0 → G → I → Q → 0` and `0 → G → I' → Q' → 0`. -/
 lemma δ_hom_app_of_comp_eq [HasExt.{w'} (Sheaf J AddCommGrpCat.{w})] (φ : I ⟶ I') (ψ : Q ⟶ Q')
     (h₁ : ι ≫ φ = ι') (h₂ : d ≫ ψ = φ ≫ d') (s : Q.obj.obj (op T)) :
-    H.δ hS' hT (ψ.hom.app (op T) s) = H.δ hS hT s := by
+    H.δSections hS' hT (ψ.hom.app (op T) s) = H.δSections hS hT s := by
   let f : ShortComplex.mk ι d w ⟶ ShortComplex.mk ι' d' w' :=
     { τ₁ := 𝟙 G
       τ₂ := φ
@@ -766,7 +766,7 @@ noncomputable def classH1 : _root_.Quotient (Torsor.setoid (G := G)) ≃ H G 1 :
 
 private lemma classH1_lifts_injectiveSequence (s : (injectiveSequence G).X₃.obj.obj (op T)) :
     classH1 G hT ⟦lifts hT (injectiveSequence_shortExact G) s⟧ =
-      H.δ (injectiveSequence_shortExact G) hT s := by
+      H.δSections (injectiveSequence_shortExact G) hT s := by
   have h : ⟦lifts hT (injectiveSequence_shortExact G) s⟧ =
       Equiv.ofBijective _ (bijective_quotientToTorsor (G := G) hT) (QuotientAddGroup.mk s) :=
     rfl
@@ -787,7 +787,7 @@ homomorphism `Γ(Q) → H¹(G)`. This characterises `CategoryTheory.Sheaf.Torsor
 (blueprint: `thm-galois-torsor-h1`) -/
 theorem classH1_lifts {E Q : Sheaf J AddCommGrpCat.{w}} {ι : G ⟶ E} {d : E ⟶ Q} {w : ι ≫ d = 0}
     (hS : (ShortComplex.mk ι d w).ShortExact) (s : Q.obj.obj (op T)) :
-    classH1 G hT ⟦lifts hT hS s⟧ = H.δ hS hT s := by
+    classH1 G hT ⟦lifts hT hS s⟧ = H.δSections hS hT s := by
   have hS₀ := injectiveSequence_shortExact G
   have := hS.mono_f
   let φ : E ⟶ Injective.under G := Injective.factorThru (Injective.ι G) ι
@@ -938,7 +938,7 @@ lemma map_δ_of_comp_eq {G' I Q I' Q' : Sheaf J AddCommGrpCat.{w}} {ι : G ⟶ I
     {w' : ι' ≫ d' = 0} (hS' : (ShortComplex.mk ι' d' w').ShortExact) (φ : G ⟶ G')
     (χ : I ⟶ I') (ψ : Q ⟶ Q') (h₁ : ι ≫ χ = φ ≫ ι') (h₂ : d ≫ ψ = χ ≫ d')
     (s : Q.obj.obj (op T)) :
-    H.map φ 1 (H.δ hS hT s) = H.δ hS' hT (ψ.hom.app (op T) s) := by
+    H.map φ 1 (H.δSections hS hT s) = H.δSections hS' hT (ψ.hom.app (op T) s) := by
   let f : ShortComplex.mk ι d w ⟶ ShortComplex.mk ι' d' w' :=
     { τ₁ := φ
       τ₂ := χ

@@ -62,7 +62,7 @@ private theorem exactComp_fac (K : CochainComplex A ℤ) :
       R.mapDerivedCategoryFactors.hom.app
         ((H.mapHomologicalComplex (.up ℤ)).obj K) ≫
       DerivedCategory.Q.map ((Functor.mapHomologicalComplexCompIso i (.up ℤ)).hom.app K) := by
-  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc,
+  simp only [Iso.trans_hom, NatTrans.comp_app, Category.assoc,
     Functor.mapDerivedCategoryNatIso_fac]
   have h := Functor.mapDerivedCategoryCompIso_fac H R K
   rw [← h]

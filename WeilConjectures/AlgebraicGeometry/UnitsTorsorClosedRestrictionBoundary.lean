@@ -97,11 +97,11 @@ theorem units_extension_pullback_boundary_comparison
     (hk : k ≫ pullback.snd _ _ = 0)
     (hP : (ShortComplex.mk k (pullback.snd _ _) hk).ShortExact) :
     unitsPushforwardCohomologyComparison i 1
-      (Sheaf.H.δ hP isTerminalTop
+      (Sheaf.H.δSections hP isTerminalTop
         ((toSheafify (Opens.grothendieckTopology X)
           ((Functor.const (Opens X)ᵒᵖ).obj
             (AddCommGrpCat.of (ULift.{u} ℤ)))).app (op ⊤) ⟨1⟩)) =
-      Sheaf.H.δ hS isTerminalTop
+      Sheaf.H.δSections hS isTerminalTop
         ((toSheafify (Opens.grothendieckTopology Z)
           ((Functor.const (Opens Z)ᵒᵖ).obj
             (AddCommGrpCat.of (ULift.{u} ℤ)))).app (op ⊤) ⟨1⟩) := by
@@ -139,12 +139,12 @@ theorem units_extension_pullback_boundary_comparison
         rw [Category.assoc, ← adj.counit_naturality p,
           ← Category.assoc, ← L.map_comp, pullback.condition,
           L.map_comp, Category.assoc] }
-  have hδP : Sheaf.H.δ hP isTerminalTop
+  have hδP : Sheaf.H.δSections hP isTerminalTop
       ((toSheafify (Opens.grothendieckTopology X)
         ((Functor.const (Opens X)ᵒᵖ).obj
           (AddCommGrpCat.of (ULift.{u} ℤ)))).app (op ⊤) ⟨1⟩) = hP.extClass := by
     rw [Sheaf.H.δ_apply, equiv_zero_one, Abelian.Ext.mk₀_id_comp]
-  have hδS : Sheaf.H.δ hS isTerminalTop
+  have hδS : Sheaf.H.δSections hS isTerminalTop
       ((toSheafify (Opens.grothendieckTopology Z)
         ((Functor.const (Opens Z)ᵒᵖ).obj
           (AddCommGrpCat.of (ULift.{u} ℤ)))).app (op ⊤) ⟨1⟩) = hS.extClass := by

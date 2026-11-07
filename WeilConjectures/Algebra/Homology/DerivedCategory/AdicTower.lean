@@ -121,7 +121,7 @@ lemma coker_map_cokerDesc {m m' : ℕᵒᵖ} (f : m ⟶ m') :
       hT.cokerDesc n m := by
   apply coequalizer.hom_ext
   dsimp
-  simp only [cokernel.π_desc_assoc, Arrow.homMk_right, assoc, π_cokerDesc]
+  simp only [cokernel.π_desc_assoc, assoc, π_cokerDesc]
   simpa using (red n).naturality f
 
 section DerivedCategory

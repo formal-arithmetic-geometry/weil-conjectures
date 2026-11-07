@@ -71,7 +71,7 @@ private theorem mappedInverseComposite
       (Functor.mapDerivedCategoryCompIso F G ≪≫
         Functor.mapDerivedCategoryNatIso e).symm := by
   apply Iso.ext
-  simp only [Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv,
+  simp only [Iso.trans_hom, Iso.trans_inv, Iso.symm_hom,
     Functor.mapDerivedCategoryNatIso_symm]
 
 private theorem comapCongrSymm

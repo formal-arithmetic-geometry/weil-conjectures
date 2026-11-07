@@ -26,7 +26,7 @@ namespace PresheafOfModules
 variable {C : Type u} [Category.{u} C] {R : Cᵒᵖ ⥤ CommRingCat.{u}}
   (M P : PresheafOfModules.{u} (R ⋙ forget₂ _ _))
 
-local instance (N : PresheafOfModules.{u} (R ⋙ forget₂ CommRingCat RingCat))
+local instance localInst_Presheaf_1 (N : PresheafOfModules.{u} (R ⋙ forget₂ CommRingCat RingCat))
     {X Y : Cᵒᵖ} (f : X ⟶ Y) :
     Module (R.obj Y)
       ((ModuleCat.restrictScalars ((R ⋙ forget₂ CommRingCat RingCat).map f).hom).obj

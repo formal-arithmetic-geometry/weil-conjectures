@@ -57,7 +57,7 @@ private theorem composition_derived_factors
     [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     [PreservesFiniteLimits H] [PreservesFiniteColimits H]
     (a : H ≅ F ⋙ G) (K : CochainComplex C₀ ℤ) :
-    (Functor.mapDerivedCategoryNatIso a ≪≫ Functor.mapDerivedCategoryCompIso F G).hom.app
+    (Functor.mapDerivedCategoryNatIso a ≪≫ (Functor.mapDerivedCategoryCompIso F G).symm).hom.app
         (DerivedCategory.Q.obj K) ≫
       G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app K) ≫
       G.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj K) =
@@ -70,7 +70,7 @@ private theorem composition_derived_factors
       𝟙 _ := rfl
   rw [hid] at hc
   erw [CategoryTheory.Functor.map_id, Category.comp_id] at hc
-  simp only [Iso.trans_hom, NatTrans.comp_app, Category.assoc]
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
   erw [hc, ha]
   congr 2
   change _ = (NatTrans.mapHomologicalComplex a.hom (.up ℤ)).app K ≫ 𝟙 _

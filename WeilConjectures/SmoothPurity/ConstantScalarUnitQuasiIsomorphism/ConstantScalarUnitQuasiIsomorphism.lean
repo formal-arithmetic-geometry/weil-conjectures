@@ -512,7 +512,7 @@ private theorem projection_coordinates (n : ℕ) (V : Y.ProEt)
       (scalarReductionRestriction l L Y n).map (finiteZeroIso l L Y n).hom =
         projectionModule l L Y n := by
     simp [projectionComplex, CochainComplex.singleFunctor,
-      CochainComplex.singleFunctors, HomologicalComplex.single_map_f_self,
+      HomologicalComplex.single_map_f_self,
       Category.assoc, ← Functor.map_comp]
   change (((regularZeroIso l L Y).inv ≫ (projectionComplex l L Y n).f 0 ≫
     (scalarReductionRestriction l L Y n).map (finiteZeroIso l L Y n).hom).val.app (op V)) s = _

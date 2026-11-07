@@ -157,7 +157,7 @@ lemma derivedRestrictScalarsCompIso_hom_app_Q_obj
       (Sheaf.restrictScalars J gf).mapDerivedCategoryFactors.inv.app K := by
     rw [← reassoc_of% h₂]
     simp
-  simp only [Sheaf.derivedRestrictScalarsCompIso, Iso.trans_hom, Iso.symm_hom,
+  simp only [Sheaf.derivedRestrictScalarsCompIso, Iso.trans_hom,
     NatTrans.comp_app, e₁, e₂, Category.assoc, Iso.inv_hom_id_app_assoc]
   rw [← Functor.map_comp_assoc, Iso.inv_hom_id_app]
   erw [CategoryTheory.Functor.map_id, Category.id_comp, Iso.inv_hom_id_app_assoc]

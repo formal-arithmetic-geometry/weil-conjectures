@@ -61,7 +61,7 @@ private theorem moduleZeroDescent
 
 attribute [local irreducible] CondensedRing.upperStar Functor.mapDerivedCategory
   Functor.mapDerivedCategoryHomologyFunctorIso Functor.mapDerivedCategorySingleFunctor
-  DerivedCategory.instMonoidalCategory_weilConjectures
+  DerivedCategory.instMonoidalCategory
   CategoryTheory.Mod.monoidalClosed DerivedCategory.monoidalClosed
 
 private theorem coverHomologyZero

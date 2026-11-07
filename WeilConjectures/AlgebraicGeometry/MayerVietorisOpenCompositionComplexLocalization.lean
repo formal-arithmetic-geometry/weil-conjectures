@@ -93,7 +93,7 @@ theorem schemeMVOpenComposition_complex_localization
   simp only [Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv,
     Functor.comp_obj, Functor.map_comp, Category.assoc]
   repeat erw [DerivedCategory.Qh.map_id]
-  simp only [Category.id_comp, Functor.map_comp, Category.assoc]
+  simp only [Category.id_comp]
   erw [← (schemeDerivedDirectImage h).map_comp_assoc, Iso.hom_inv_id_app,
     (schemeDerivedDirectImage h).map_id, Category.id_comp]
   erw [← (schemeDerivedDirectImage W.ι).map_comp_assoc, Iso.hom_inv_id_app,

@@ -579,7 +579,7 @@ theorem section_resolution_conjugation_identities {X Y : Scheme.{u}} (f : X ⟶ 
     with_unfolding_all
       unfold eta d j epsilon cochainLocalizationIso termwisePullComparison
       simp only [internalDerivedPullFunctor, internalLocalizationFunctor,
-        totalInternalPull, retainedCochainFunctor, retainedCochainObject, cast_eq]
+        totalInternalPull, retainedCochainFunctor, retainedCochainObject]
       exact reverse_assoc_square _ _ _ h
   have qTensor_naturality (T : Scheme.{u})
       {A A' B B' : CochainComplex (modules Λ T) ℤ} (a : A ⟶ A') (b : B ⟶ B') :
@@ -778,8 +778,8 @@ theorem section_resolution_conjugation_identities {X Y : Scheme.{u}} (f : X ⟶ 
       ((HomotopyCategory.quotient _ (.up ℤ)).map a)
     with_unfolding_all
       simp only [eta, internalDerivedPullFunctor, internalLocalizationFunctor,
-        comparisonSource, totalInternalPull, retainedCochainFunctor, retainedCochainObject,
-        retainedCochainMap, cast_eq, Functor.comp_map,
+        totalInternalPull, retainedCochainFunctor, retainedCochainObject,
+        retainedCochainMap, Functor.comp_map,
         Functor.mapHomotopyCategory_map, qh_map_quotient] at h ⊢
       exact h
   have aInternal_naturality

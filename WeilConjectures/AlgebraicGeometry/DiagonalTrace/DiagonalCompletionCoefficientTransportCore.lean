@@ -467,9 +467,9 @@ theorem diagonalCompletionCoefficientTransportCore (l : ℕ) [Fact l.Prime] (S :
   refine ⟨EB₀.mapDerivedCategory, ER.mapDerivedCategory,
     Functor.additive_of_preserves_binary_products _,
     Functor.additive_of_preserves_binary_products _, ⟨?_⟩⟩
-  exact (Functor.mapDerivedCategoryCompIso (diagonalCompletedRestriction l S)
-      ER.functor).symm ≪≫
+  exact Functor.mapDerivedCategoryCompIso (diagonalCompletedRestriction l S)
+      ER.functor ≪≫
     Functor.mapDerivedCategoryNatIso α₀ ≪≫
-    Functor.mapDerivedCategoryCompIso EB₀.functor T
+    (Functor.mapDerivedCategoryCompIso EB₀.functor T).symm
 
 end AlgebraicGeometry.ProEtale.DiagonalTrace

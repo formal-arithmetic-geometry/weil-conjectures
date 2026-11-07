@@ -354,7 +354,7 @@ private theorem single_tensor_quotient_component
     koszulTensorFunctor, Functor.flip_obj_map, Functor.map₂HomologicalComplex_map_app,
     CochainComplex.mapBifunctorSingle₁Iso_inv_f, Category.assoc]
   erw [HomologicalComplex.ι_mapBifunctorMap]
-  simp only [CochainComplex.singleFunctor, CochainComplex.singleFunctors,
+  simp only [CochainComplex.singleFunctor,
     HomologicalComplex.single_map_f_self,
     HomologicalComplex.id_f, curriedTensor_map_app, ← comp_whiskerRight_assoc,
     Iso.inv_hom_id_assoc]

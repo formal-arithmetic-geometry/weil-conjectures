@@ -90,7 +90,7 @@ theorem unit_comp (F : V ⥤ W) (G : W ⥤ X) (H : V ⥤ X)
   unfold unit
   subst h
   simp only [map_comp, Functor.map_comp, Category.assoc,
-    Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app]
+    Iso.trans_hom, NatTrans.comp_app]
   have hn := (comparison G).inv.naturality g
   change map (G.map g) ≫ (comparison G).inv.app (F.obj M) =
     (comparison G).inv.app L ≫ G.mapDerivedCategory.map (map g) at hn

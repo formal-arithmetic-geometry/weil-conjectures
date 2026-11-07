@@ -40,7 +40,7 @@ private theorem cochain_comparison (Y : C) (n : ℤ) :
     HomologicalComplex.homologyπ_singleObjHomologySelfIso_hom]
   simp only [HomologicalComplex.singleObjCyclesSelfIso_hom]
   erw [ShortComplex.cyclesMap_i_assoc, HomologicalComplex.cyclesMap_i_assoc]
-  simp only [CochainComplex.singleFunctors, CochainComplex.shiftShortComplexFunctorIso,
+  simp only [CochainComplex.shiftShortComplexFunctorIso,
     CochainComplex.shiftShortComplexFunctor', CochainComplex.shiftEval,
     HomologicalComplex.singleObjXSelf, HomologicalComplex.singleObjXIsoOfEq,
     CategoryTheory.Functor.comp_obj, CochainComplex.shiftFunctor_obj_X']
