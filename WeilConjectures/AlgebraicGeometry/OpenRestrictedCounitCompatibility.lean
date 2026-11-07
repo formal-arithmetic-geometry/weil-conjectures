@@ -55,7 +55,7 @@ complexes use the same natural-transformation equations.
 Source: Stacks Project, Tag 0D5S, pullback composition; Tag 0D5U, exact
 restriction to an open subspace.
 (blueprint: lem-pc-open-restricted-counit-compatibility). -/
-private theorem openRestricted_counit_compatibility
+private theorem openRestricted_counit_compatibility_private
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     {X X' : Scheme.{u}} (g' : X' ⟶ X) (U : X.Opens)
@@ -72,4 +72,9 @@ private theorem openRestricted_counit_compatibility
   rw [openRestricted_counit_factorization]
   simp
 
+end AlgebraicGeometry.SingleComplexBaseChange
+
+namespace AlgebraicGeometry.SingleComplexBaseChange
+/-- Public export of the private `openRestricted_counit_compatibility_private` (used by `import all` importers; linter.privateModule). -/
+alias openRestricted_counit_compatibility := openRestricted_counit_compatibility_private
 end AlgebraicGeometry.SingleComplexBaseChange
