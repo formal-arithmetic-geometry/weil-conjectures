@@ -112,8 +112,8 @@ theorem etaleRestrictedSections_comparison_map
     dsimp only [etaleRestrictedMappedInclusion]
     rw [HomologicalComplex₂.ιTotal_map_assoc]
     erw [T.w_formula m s n h]
-    simp only [Functor.map_comp, Functor.mapHomologicalComplex_map_f,
-      HomologicalComplex.comp_f, Category.assoc]
+    simp only [Functor.map_comp,
+      Category.assoc]
     dsimp only [etaleRestrictedTotalInclusion]
     simp only [← Functor.map_comp]
     erw [HomologicalComplex₂.ιTotal_map_assoc]

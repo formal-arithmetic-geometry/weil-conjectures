@@ -32,7 +32,7 @@ same constituents: the graded pieces of a filtration of `V` determine the consti
 ## Main definitions
 
 - `exteriorPower.countSpan`: the filtration `F_j` of `⋀ⁿ V`.
-- `exteriorPower.wedge`: the product `⋀ʲ V × ⋀ˡ V → ⋀ʲ⁺ˡ V`.
+- `exteriorPower.wedgeMul`: the product `⋀ʲ V × ⋀ˡ V → ⋀ʲ⁺ˡ V`.
 - `Subrepresentation.exteriorPowerFiltration`: the filtration `F_j` for a subrepresentation.
 
 ## Main results
@@ -137,7 +137,7 @@ theorem ιMulti_add_sub_ιMulti_mem_countSpan {j : ℕ} (a y : Fin n → V) (J :
 
 /-- The wedge product `⋀ʲ V × ⋀ˡ V → ⋀ⁿ V`, for `j + l = n`, as a bilinear map: the product in the
 exterior algebra. -/
-noncomputable def wedge {j l : ℕ} (h : j + l = n) :
+noncomputable def wedgeMul {j l : ℕ} (h : j + l = n) :
     ⋀[k]^j V →ₗ[k] ⋀[k]^l V →ₗ[k] ⋀[k]^n V :=
   LinearMap.mk₂ k (fun x y ↦ ⟨(x : ExteriorAlgebra k V) * y,
     h ▸ SetLike.mul_mem_graded x.2 y.2⟩)
@@ -146,11 +146,11 @@ noncomputable def wedge {j l : ℕ} (h : j + l = n) :
 
 @[simp]
 theorem coe_wedge_apply {j l : ℕ} (h : j + l = n) (x : ⋀[k]^j V) (y : ⋀[k]^l V) :
-    (wedge n h x y : ExteriorAlgebra k V) = x * y :=
+    (wedgeMul n h x y : ExteriorAlgebra k V) = x * y :=
   rfl
 
 theorem wedge_ιMulti_ιMulti {j l : ℕ} (a : Fin j → V) (b : Fin l → V) :
-    wedge (j + l) rfl (ιMulti k j a) (ιMulti k l b) = ιMulti k (j + l) (Fin.append a b) :=
+    wedgeMul (j + l) rfl (ιMulti k j a) (ιMulti k l b) = ιMulti k (j + l) (Fin.append a b) :=
   Subtype.ext (by simp [ExteriorAlgebra.ιMulti_mul_ιMulti])
 
 /-! ### The graded pieces -/
@@ -163,7 +163,7 @@ variable {P} (s : V ⧸ P →ₗ[k] V)
 quotient map and `j + l = n`. -/
 noncomputable def wedgeSection {j l : ℕ} (h : j + l = n) :
     ⋀[k]^j P ⊗[k] ⋀[k]^l (V ⧸ P) →ₗ[k] ⋀[k]^n V :=
-  TensorProduct.lift ((wedge n h).compl₁₂ (map j P.subtype) (map l s))
+  TensorProduct.lift ((wedgeMul n h).compl₁₂ (map j P.subtype) (map l s))
 
 theorem wedgeSection_tmul_ιMulti {j l : ℕ} (u : Fin j → P) (x : Fin l → V ⧸ P) :
     wedgeSection (j + l) s rfl (ιMulti k j u ⊗ₜ ιMulti k l x) =

@@ -90,7 +90,7 @@ theorem truncated_directImage_sheaf_coproduct_epi
     truncated_directImage_secondPage_coproduct f I E S ι hc a p r
   obtain ⟨FS, FT, phi, hFS, hFT, hphi, hgraded⟩ :=
     exists_boundedBelow_coproduct_filtration F I K T u a q hK hT hE2
-  have hiso := (FilteredObject.finite_filtration_induction_steps
+  have hiso := (WeilFilteredObject.finite_filtration_induction_steps
     ⟨_, FS⟩ ⟨_, FT⟩ phi hFS hFT hgraded).1
   rw [hphi] at hiso
   have : IsIso (Sigma.desc (fun i ↦ (schemeHigherDirectImage f q).map

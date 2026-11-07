@@ -347,7 +347,7 @@ private theorem scalarDerivedSquare_comp {X Y : Scheme.{u}} (g : Y ⟶ X)
       (Functor.mapDerivedCategoryCompIso (pbcRestrict b) (pbcRestrict a)).symm).hom =
         (pbcDerivedRestrictComp a b c h).inv := by
     simp only [pbcDerivedRestrictComp, Functor.mapDerivedCategoryNatIso_symm,
-      Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv]
+      Iso.trans_hom, Iso.trans_inv, Iso.symm_hom]
   have hY : (Functor.mapDerivedCategoryNatIso
       (pbcRestrictComp ((adicTowerInverseImage g).map a)
         ((adicTowerInverseImage g).map b) ((adicTowerInverseImage g).map c) hi).symm ≪≫
@@ -357,7 +357,7 @@ private theorem scalarDerivedSquare_comp {X Y : Scheme.{u}} (g : Y ⟶ X)
       (pbcDerivedRestrictComp ((adicTowerInverseImage g).map a)
         ((adicTowerInverseImage g).map b) ((adicTowerInverseImage g).map c) hi).inv := by
     simp only [pbcDerivedRestrictComp, Functor.mapDerivedCategoryNatIso_symm,
-      Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv]
+      Iso.trans_hom, Iso.trans_inv, Iso.symm_hom]
   rw [hX, hY] at hd
   have hh := congrArg (fun k ↦
     (adicTowerPullback g R).map ((pbcDerivedRestrictComp a b c h).hom.app M) ≫ k ≫

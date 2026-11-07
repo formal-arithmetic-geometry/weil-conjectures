@@ -139,7 +139,7 @@ lemma mapDerivedCategoryFactorsh_inv_app_comp_mapDerivedCategoryComapCompIso_inv
     rw [← cancel_epi ((comap ψ ⋙ comap φ).mapDerivedCategoryFactorsh.hom.app N),
       Iso.hom_inv_id_app_assoc, ← e₂]
     simp [← Functor.map_comp]
-  simp only [mapDerivedCategoryComapCompIso, Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app, e₃]
+  simp only [mapDerivedCategoryComapCompIso, Iso.trans_inv, NatTrans.comp_app, e₃]
   rw [reassoc_of% e₁', e₂']
 
 /-- The transitivity isomorphism `L(Ext_{φ ≫ ψ}) ≅ L(Ext_φ) ⋙ L(Ext_ψ)` of the derived extensions

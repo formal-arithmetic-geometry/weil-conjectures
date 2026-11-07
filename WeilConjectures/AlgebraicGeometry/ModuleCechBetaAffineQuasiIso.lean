@@ -25,7 +25,7 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-local instance (R : Type u) [Ring R] (J : Type u) [Small.{u} J] :
+local instance localInst_ModuleCechBetaAffineQuasiIso_1 (R : Type u) [Ring R] (J : Type u) [Small.{u} J] :
     HasLimitsOfShape (Discrete J) (ModuleCat.{u} R) :=
   ModuleCat.hasLimitsOfShape
 

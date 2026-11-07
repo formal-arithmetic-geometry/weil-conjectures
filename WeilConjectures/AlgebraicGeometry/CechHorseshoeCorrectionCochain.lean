@@ -23,7 +23,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 set_option backward.isDefEq.respectTransparency false
 
-local instance (R : Type u) [Ring R] (J : Type*) [Small.{u} J] :
+local instance localInst_CechHorseshoeCorrectionCochain_1 (R : Type u) [Ring R] (J : Type*) [Small.{u} J] :
     HasLimitsOfShape (Discrete J) (ModuleCat.{u} R) :=
   ModuleCat.hasLimitsOfShape
 

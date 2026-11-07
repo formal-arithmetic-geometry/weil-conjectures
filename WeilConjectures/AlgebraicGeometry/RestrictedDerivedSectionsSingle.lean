@@ -103,7 +103,7 @@ private lemma complex_single_nat {C D : Type*}
   by_cases hn : n = 0
   · subst n
     simp [Functor.mapCochainComplexSingleFunctor, CochainComplex.singleFunctor,
-      CochainComplex.singleFunctors, HomologicalComplex.singleMapHomologicalComplex,
+      HomologicalComplex.singleMapHomologicalComplex,
       HomologicalComplex.single, NatTrans.mapHomologicalComplex]
   · exact (HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 _ n hn).eq_of_tgt _ _
 

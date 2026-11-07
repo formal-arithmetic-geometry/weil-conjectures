@@ -28,7 +28,7 @@ set_option autoImplicit false
 set_option backward.defeqAttrib.useBackward true
 set_option backward.isDefEq.respectTransparency false
 
-local instance {X : TopCat.{u}}
+local instance localInst_StalkChangeOfRingsPresheaf_1 {X : TopCat.{u}}
     {R : Sheaf (Opens.grothendieckTopology X) CommRingCat.{u}}
     (F : SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology X)
       (forget₂ CommRingCat.{u} RingCat.{u})).obj R))

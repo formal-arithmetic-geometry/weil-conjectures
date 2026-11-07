@@ -67,13 +67,13 @@ private theorem firstOrder_remainder {R : Type u} [CommRing R] {n : ℕ}
   rcases hd' with h0 | h1
   · have : d = 0 := (Finsupp.degree_eq_zero_iff d).mp h0
     subst d
-    simp [MvPolynomial.coeff_C_mul, MvPolynomial.coeff_sum]
+    simp [MvPolynomial.coeff_C_mul]
   · have hdmem : d ∈ Set.range (fun i : Fin n ↦ Finsupp.single i 1) := by
       rw [Finsupp.range_single_one]
       exact h1
     obtain ⟨i, rfl⟩ := hdmem
     have hi : Finsupp.single i 1 ≠ (0 : Fin n →₀ ℕ) := by simp
-    simp [MvPolynomial.coeff_C_mul, MvPolynomial.coeff_sum, MvPolynomial.coeff_C,
+    simp [MvPolynomial.coeff_C_mul, MvPolynomial.coeff_C,
       MvPolynomial.coeff_X, Ne.symm hi, Finsupp.single_eq_single_iff]
 
 /-- Polynomial coordinates on the square-zero augmentation quotient.

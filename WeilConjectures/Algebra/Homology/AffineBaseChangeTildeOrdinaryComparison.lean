@@ -136,11 +136,11 @@ theorem exists_affineBaseChangeTildeOrdinaryComparison
     congr 1
     apply Iso.ext
     simp only [Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv,
-      Functor.mapIso_hom, Functor.mapIso_inv,
+      Functor.mapIso_hom,
       DerivedCategory.quotientCompQhIso, HomologicalComplexUpToQuasiIso.quotientCompQhIso,
       Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_hom, Quotient.lift.isLift_inv,
-      cast_eq, Functor.map_comp,
-      Category.assoc, Category.id_comp, Category.comp_id, Cg]
+      cast_eq,
+      Category.assoc]
     erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id]
     repeat erw [Category.id_comp]
     all_goals rfl

@@ -63,7 +63,7 @@ theorem torsor_h1_boundary_representative (X : Scheme.{u})
             ((Functor.const (Opens X)ᵒᵖ).obj
               (AddCommGrpCat.of (ULift.{u, 0} ℤ)))).app (op ⊤) ⟨1⟩))) ∧
       CategoryTheory.Sheaf.Torsor.classH1 G (IsTerminal.ofUnique (⊤ : Opens X)) ⟦T⟧ =
-        H.δ hS
+        H.δSections hS
           (IsTerminal.ofUnique (⊤ : Opens X))
           ((toSheafify (Opens.grothendieckTopology X)
             ((Functor.const (Opens X)ᵒᵖ).obj
@@ -79,7 +79,7 @@ theorem torsor_h1_boundary_representative (X : Scheme.{u})
               ((toSheafify (Opens.grothendieckTopology X)
                 ((Functor.const (Opens X)ᵒᵖ).obj
                   (AddCommGrpCat.of (ULift.{u, 0} ℤ)))).app (op ⊤) ⟨1⟩)⟧ =
-          H.δ hS (IsTerminal.ofUnique (⊤ : Opens X))
+          H.δSections hS (IsTerminal.ofUnique (⊤ : Opens X))
             ((toSheafify (Opens.grothendieckTopology X)
               ((Functor.const (Opens X)ᵒᵖ).obj
                 (AddCommGrpCat.of (ULift.{u, 0} ℤ)))).app (op ⊤) ⟨1⟩) := by

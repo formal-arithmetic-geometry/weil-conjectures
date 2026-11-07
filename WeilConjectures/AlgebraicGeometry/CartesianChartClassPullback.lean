@@ -46,7 +46,7 @@ noncomputable def cartesianChartClassPullback {B T T' : Scheme.{u}}
     (D+((b)^*[AddCommGrpCat.{u + 1}])).map z ≫
     (D+((b)^*[AddCommGrpCat.{u + 1}]).commShiftIso q).hom.app K
 
-noncomputable local instance (T : Scheme.{u}) :
+noncomputable local instance localInst_CartesianChartClassPullback_1 (T : Scheme.{u}) :
     HasShift (DerivedCategory.Plus (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})) ℤ :=
   inferInstance
 

@@ -67,8 +67,8 @@ private theorem single_iso_id
   intro i
   by_cases hi : i = 0
   · subst i
-    simp only [CochainComplex.singleFunctor, CochainComplex.singleFunctors, Functor.comp_obj,
-      CochainComplex.shiftFunctor_obj_X', Functor.id_obj, HomologicalComplex.comp_f,
+    simp only [CochainComplex.singleFunctor, Functor.comp_obj,
+      Functor.id_obj, HomologicalComplex.comp_f,
       HomologicalComplex.singleMapHomologicalComplex_hom_app_self,
       HomologicalComplex.singleObjXSelf, HomologicalComplex.singleObjXIsoOfEq, eqToIso_refl,
       Iso.refl_hom, CategoryTheory.Functor.map_id, Iso.refl_inv, Category.id_comp,

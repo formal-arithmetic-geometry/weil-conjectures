@@ -360,7 +360,7 @@ theorem finitePerfectAdicScalarModelSource_localization :
     apply NatTrans.ext
     funext M
     simp only [q, SB, SD, zS, wS, finitePerfectAdicScalarCoherence, Iso.trans_hom,
-      Iso.symm_hom, Iso.refl_hom, NatTrans.comp_app, whiskerLeft_app, NatTrans.id_app,
+      Iso.refl_hom, NatTrans.comp_app, whiskerLeft_app, NatTrans.id_app,
       Functor.comp_obj, Category.comp_id]
     erw [Category.id_comp, Iso.inv_hom_id_app_assoc]
   let zU := finitePerfectAdicPasteCoefficientStep eU zS

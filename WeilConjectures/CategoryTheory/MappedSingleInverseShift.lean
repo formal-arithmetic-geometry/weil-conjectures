@@ -88,7 +88,7 @@ theorem mapped_single_inverse_shift (G : B ⥤ C) [G.Additive] (X : B) (n : ℕ)
   intro K₀ h
   apply DerivedCategory.Plus.ι.map_injective
   simp only [Functor.map_comp, mapHomotopyCategoryPlusSingleFunctorQhObjIso,
-    Functor.preimageIso_hom, Functor.map_preimage, Functor.mapIso_hom]
+    Functor.preimageIso_hom, Functor.map_preimage]
   simp only [DerivedCategory.Plus.singleFunctors, map_lift_single_shift_inv,
     Iso.refl_hom, Iso.refl_inv, NatTrans.id_app]
   erw [Category.id_comp, Functor.map_id, Category.id_comp]
