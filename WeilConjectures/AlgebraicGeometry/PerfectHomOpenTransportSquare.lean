@@ -62,7 +62,6 @@ private theorem tr_comp_source {W X Y Z : Scheme.{u}}
   simp only [Category.assoc]
   rw [hh]
 
-set_option maxHeartbeats 800000 in
 -- Equality transport through the selected composition comparisons needs this budget.
 private theorem trTo_comp_source {W X Y Z : Scheme.{u}}
     (h : W ⟶ X) (p : X ⟶ Y) (q : W ⟶ Y) (i : Y ⟶ Z) (e : h ≫ p = q)

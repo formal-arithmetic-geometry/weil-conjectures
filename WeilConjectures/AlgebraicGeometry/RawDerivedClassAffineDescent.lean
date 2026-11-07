@@ -74,7 +74,7 @@ private theorem raw_chart_transport {B Y Y' : Scheme.{u}}
   change z ≫ (shiftFunctor _ q).map e.inv = eF.hom ≫ t
   exact cancel_transport eF ((shiftFunctor _ q).mapIso e) t z ht
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- Constructing the chart diagram and its limiting cone needs a larger elaboration budget.
 /-- A raw derived class descends with its coefficient complex fixed at the original stage.
 

@@ -103,7 +103,7 @@ private lemma comapUpperStarIso_inv_hom {X Y : Scheme.{u}} (f : X ⟶ Y)
         (((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ' Y)).obj N)).hom) hn
   simpa [Functor.mapModComapIso, Mod.extendScalars, upperStar] using hh
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- Normalization uses the module adjunctions and scalar extension uniqueness.
 /-- The canonical restriction/pullback comparison is the inverse mate of the
 restriction/pushforward comparison for one scheme map.

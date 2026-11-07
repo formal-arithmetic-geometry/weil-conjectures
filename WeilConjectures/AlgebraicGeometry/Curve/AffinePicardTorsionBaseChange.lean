@@ -113,7 +113,7 @@ theorem affine_picard_torsion_base_change
   obtain ⟨c, hc, hs, hfin, hcl⟩ := IsConnectedCurve.exists_smooth_properCompactification f
   let := hc
   let := hs
-  have : ConnectedSpace c.Z := IsConnectedCurve.connectedSpace' c.g
+  have : ConnectedSpace c.Z := IsConnectedCurve.connectedSpace (f := c.g)
   have : IsLocallyNoetherian c.Z := LocallyOfFiniteType.isLocallyNoetherian c.g
   have : IsRegular c.Z := IsRegular.of_smooth c.g
   have : IsIntegral c.Z := IsRegular.isIntegral c.Z

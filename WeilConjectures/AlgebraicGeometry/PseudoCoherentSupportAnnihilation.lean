@@ -75,7 +75,7 @@ private theorem module_restriction_zero
     TopCat.Presheaf.germ M.val.presheaf _ x hx _
   exact (hM x (leOfHom U.unop.hom hx)).elim _ _
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- Comparing the shared derived tensor instance with its additive construction is expensive.
 /-- A map `α : P → Q` in D_QCoh(Y), from a perfect complex, or from a pseudo-coherent
 complex into a bounded below one, with `Q` supported on `T = Y \ V`, is killed by the tensor

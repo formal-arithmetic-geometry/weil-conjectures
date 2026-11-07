@@ -101,21 +101,11 @@ private theorem coefficient_unshifted
             (Over.w f).symm).inv.app _) := by
   exact rawModuleScalar_coefficient_unshifted Λ G A B f
 
-/-- Shift transport from the unshifted coefficient square.
-Source: Stacks Project, Tags 03D7 and 03Q8. The proof applies the generic
-shift transport identity to the four derived functors and the unshifted
-coefficient identity `coefficient_unshifted`. The required commutation of
-the comparison maps with shifts follows from `NatTrans.shift_app_comm` and
-the naturality of each `commShiftIso`; functoriality of shifts and
-associativity then produce the displayed equality. This applies to every
-integer shift, including zero and negative shifts, and to identity arrows
-and zero coefficient sheaves.
-(blueprint: lem-sbc-raw-scalar-coefficient-square-shift-transport). -/
-theorem rawModuleScalar_coefficient_square_of_unshifted
+/-- (blueprint: lem-sbc-raw-scalar-coefficient-square) -/
+theorem rawModuleScalar_coefficient_square
     (Λ : Type (u + 1)) [CommRing Λ] {W : Scheme.{u}}
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)
-    (A B : Over W) (f : A ⟶ B)
-    : 
+    (A B : Over W) (f : A ⟶ B) :
   let VA := (moduleAbelianForget Λ A.left).mapDerivedCategoryPlus
   let H := (upperStar AddCommGrpCat.{u + 1} f.left).mapDerivedCategoryPlus
   let FB := (upperStar (ModuleCat.{u + 1} Λ) B.hom).obj G
@@ -170,22 +160,5 @@ theorem rawModuleScalar_coefficient_square_of_unshifted
       let proof ← Lean.Meta.mkAppM ``shift_square inputs
       let proof ← Lean.Meta.zetaReduce proof
       coefficientStructuralExact proof
-
-/-- (blueprint: lem-sbc-raw-scalar-coefficient-square) -/
-theorem rawModuleScalar_coefficient_square
-    (Λ : Type (u + 1)) [CommRing Λ] {W : Scheme.{u}}
-    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)
-    (A B : Over W) (f : A ⟶ B) :
-  let VA := (moduleAbelianForget Λ A.left).mapDerivedCategoryPlus
-  let H := (upperStar AddCommGrpCat.{u + 1} f.left).mapDerivedCategoryPlus
-  let FB := (upperStar (ModuleCat.{u + 1} Λ) B.hom).obj G
-  let bA := scalarCoefficientFactor Λ A.hom G q
-  let bB := scalarCoefficientFactor Λ B.hom G q
-  let mT := moduleCoefficientFactor Λ G q A B f
-  let aT := abelianCoefficientFactor ((moduleAbelianForget Λ W).obj G) q A B f
-  (moduleAbelianDerivedUpperStarIso Λ f.left).hom.app
-      (((DerivedCategory.Plus.singleFunctor _ 0).obj FB)⟦q⟧) ≫
-    VA.map mT ≫ bA = H.map bB ≫ aT := by
-  apply rawModuleScalar_coefficient_square_of_unshifted Λ G q A B f
 
 end AlgebraicGeometry.Etale

@@ -54,7 +54,7 @@ theorem smooth_connected_generic_geometry_core {S C : Scheme.{u}} [IsIntegral S]
   have : GeometricallyIrreducible c :=
     GeometricallyIrreducible.of_smooth_of_geometricallyConnected c
   have : IrreducibleSpace C := GeometricallyIrreducible.irreducibleSpace c c.isOpenMap
-  have : GeometricallyReduced c := GeometricallyReduced.of_smooth c
+  have : GeometricallyReduced c := Smooth.geometricallyReduced c
   have : Finite (irreducibleComponents S) := by
     rw [irreducibleComponents_eq_singleton]
     infer_instance

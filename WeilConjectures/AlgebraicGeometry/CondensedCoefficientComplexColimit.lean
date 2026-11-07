@@ -101,8 +101,8 @@ theorem nonempty_isColimit_coefficientComplexCocone
           (padicSubfieldRingObjMap X ℓ (hf i)) (padicSubfieldRingObjMap X ℓ (hf j))
           (padicSubfieldRingObjMap X ℓ (he i)) (padicSubfieldRingObjMap X ℓ (he j))
           (padicSubfieldRingObjMap X ℓ (leOfHom (H.map a)))
-          (coefficientComplex_ringMap_comp X ℓ _ _)
-          (coefficientComplex_ringMap_comp X ℓ _ _) M).symm }
+          (padicSubfieldRingObjMap_comp_padicSubfieldRingObjMap X ℓ _ _)
+          (padicSubfieldRingObjMap_comp_padicSubfieldRingObjMap X ℓ _ _) M).symm }
   have hqi (i : I) : Epi (qi.app i) := by
     dsimp [qi]
     infer_instance
