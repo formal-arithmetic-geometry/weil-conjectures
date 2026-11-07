@@ -263,6 +263,9 @@ set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 2048 in
 set_option synthInstance.maxHeartbeats 400000 in
 -- Additivity of the three-fold composite restriction functors exceeds the default size.
+-- v4.35 tree: this override is still needed here (green in bumpF build81, whnf timeout without it in build82);
+-- master removed it on the pre-bump tree.
+set_option maxHeartbeats 1600000 in
 -- Elaborating the restriction functors and their comparison isomorphisms needs this budget.
 /-- Restricting a local derived morphism commutes with transporting from the localized
 site to the open subscheme. The formula includes all derived composition comparisons.
