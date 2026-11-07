@@ -128,10 +128,7 @@ theorem extMk_firstCycles :
       DerivedCategory.Q.map (CochainComplex.mappingCone.triangle S'.f).mor₃ ≫
         (DerivedCategory.Q.commShiftIso (1 : ℤ)).hom.app S'.X₁ := by
     dsimp only [ShortComplex.ShortExact.singleδ]
-    simp only [
-
-
-      Functor.comp_obj]
+    simp only [Functor.comp_obj]
     exact DerivedCategory.descShortComplex_triangleOfSESδ
       (hS.map_of_exact (HomologicalComplex.single C (.up ℤ) 0))
   conv_rhs =>
