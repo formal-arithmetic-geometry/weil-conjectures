@@ -87,11 +87,13 @@ noncomputable def purityTateRootPair (d : ℕ) :
   IsoAlgebra.mk (tateTwistNat a.geometricFiber ℓ d)
     (((purityTateFrobeniusCompare ℓ a).app _).symm ≪≫ purityTateRootDatum ℓ a d)
 
+omit [NeZero (ℓ : k)] in
 lemma purityTateRootPair_def (d : ℕ) :
     purityTateRootPair ℓ a d =
       IsoAlgebra.mk (tateTwistNat a.geometricFiber ℓ d)
         (((purityTateFrobeniusCompare ℓ a).app _).symm ≪≫ purityTateRootDatum ℓ a d) := (rfl)
 
+omit [NeZero (ℓ : k)] in
 lemma purityTateRootPair_eq (d : ℕ) :
     purityTateRootPair ℓ a d =
       IsoAlgebra.mk (tateTwistNat a.geometricFiber ℓ d)
