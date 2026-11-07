@@ -61,8 +61,8 @@ theorem boundary_point_class_base_change
   have : LocallyOfFiniteType (c.Z ↘ Spec (.of k)) :=
     inferInstanceAs (LocallyOfFiniteType c.g)
   have := c.isProper
-  have := IsConnectedCurve.connectedSpace' f
-  have := IsConnectedCurve.connectedSpace' c.g
+  have := IsConnectedCurve.connectedSpace (f := f)
+  have := IsConnectedCurve.connectedSpace (f := c.g)
   have : IsLocallyNoetherian c.Z := LocallyOfFiniteType.isLocallyNoetherian c.g
   have : IsRegular c.Z := IsRegular.of_smooth c.g
   have : IrreducibleSpace c.Z := IsRegular.irreducibleSpace c.Z

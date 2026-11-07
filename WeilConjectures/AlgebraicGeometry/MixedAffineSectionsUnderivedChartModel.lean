@@ -80,7 +80,6 @@ private theorem chart_tilde_unit_isIso (X : Scheme.{u}) [IsAffine X] :
     (tilde.fullyFaithfulFunctor (R := Γ(X, ⊤))).faithful
   exact Adjunction.unit_isIso_of_L_fully_faithful (chart_tilde_adjunction X)
 
-set_option maxHeartbeats 800000 in
 -- The affine carrier identifications require extra elaboration time.
 /-- The unit-normalized comparison between ordinary scalar extension of sections
 and sections of tensor pullback, on the canonical affine chart sheafification.

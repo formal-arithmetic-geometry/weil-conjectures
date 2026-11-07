@@ -75,7 +75,7 @@ private theorem pullbackSectionsEquiv_apply {R X : Scheme.{u}}
 set_option linter.unusedVariables false in
 -- Projection equality proofs are referenced only through proof-irrelevant arguments.
 set_option maxRecDepth 4000 in
-set_option maxHeartbeats 1600000 in
+set_option maxHeartbeats 700000 in
 -- The concrete abelian-sheaf functors require extra reduction during elaboration.
 /-- Evaluation of f_* f^* G at an étale object W identifies naturally with the global
 sections of the pullback of G to W ×_R X. This is a comparison for a single cartesian

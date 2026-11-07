@@ -28,7 +28,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
-set_option maxHeartbeats 1200000 in
 -- Nested coefficient and pullback comparisons require additional reduction heartbeats.
 set_option maxRecDepth 4096 in
 /-- Constant-module direct-image sections identify with abelian global sections

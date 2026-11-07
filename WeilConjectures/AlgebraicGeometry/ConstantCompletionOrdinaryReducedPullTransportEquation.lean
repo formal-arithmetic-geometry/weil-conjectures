@@ -148,7 +148,6 @@ private theorem completedMap_projection (A : Type u) [CommRing A] (I : Ideal A) 
 
 attribute [local irreducible] completed
 
-set_option maxHeartbeats 400000 in
 -- Two adjunction units and four whiskered isomorphisms require extra elaboration heartbeats.
 omit hL in
 /-- The ordinary comparison admits compatible transports to the canonical finite model.

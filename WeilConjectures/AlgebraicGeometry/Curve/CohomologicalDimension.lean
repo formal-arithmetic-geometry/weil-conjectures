@@ -364,7 +364,7 @@ theorem subsingleton_sheafH_two_of_isAffine_of_smooth (f : C ⟶ Spec (.of k))
     [IsConnectedCurve f] [Smooth f] [IsAffine C]
     (F : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : F.IsTorsion) :
     Subsingleton (Sheaf.H F 2) := by
-  have := IsConnectedCurve.connectedSpace' f
+  have := IsConnectedCurve.connectedSpace (f := f)
   have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian f
   have : IsRegular C := IsRegular.of_smooth f
   have : IrreducibleSpace C := IsRegular.irreducibleSpace C
@@ -537,7 +537,7 @@ theorem IsConnectedCurve.sheafH_constantZMod_of_isAffine (f : C ⟶ Spec (.of k)
           Function.Exact α β ∧ β.range = AddSubgroup.torsionBy C.CohomologicalPicardGroup n) ∧
       Finite (AddSubgroup.torsionBy C.CohomologicalPicardGroup n) ∧
       ∀ q, 1 < q → Subsingleton (Sheaf.H (C.constantZMod n) q) := by
-  have := IsConnectedCurve.connectedSpace' f
+  have := IsConnectedCurve.connectedSpace (f := f)
   have hn0 : n ≠ 0 := by rintro rfl; exact hn Nat.cast_zero
   have : NeZero (n : k) := ⟨hn⟩
   have : NeZero n := ⟨hn0⟩

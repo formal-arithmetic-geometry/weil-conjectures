@@ -81,7 +81,7 @@ private theorem directComparison (X : Scheme.{u}) {A Y : X.Opens} (i : A ⟶ Y)
 
 attribute [local irreducible] Functor.mapDerivedCategory transportDerived
 
-set_option maxHeartbeats 600000 in
+set_option maxHeartbeats 400000 in
 -- Transporting three localizations and their dependent comparison witnesses needs this limit.
 /-- Comparison equivalences and restriction isomorphisms on the three inverse image opens.
 Source: Stacks Project Tag 08BW, canonical restriction diagram.

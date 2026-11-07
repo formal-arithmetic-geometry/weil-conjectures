@@ -9,6 +9,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.SchemeOrdinaryEvaluationFormula
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import WeilConjectures.AlgebraicGeometry.LocalizedOpenSheafification
+import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationOverComponentIdentity
 import Mathlib.CategoryTheory.Localization.Monoidal.Functor
 
 /-! # Normalized tensor summands under the open-site equivalence
@@ -35,13 +36,9 @@ attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmet
 -- The proof uses the equivalence API, never its large sectionwise implementation.
 attribute [local irreducible] Scheme.Modules.overEquiv
 
-noncomputable local instance ordinarySummandOverPreadditive (X : Scheme.{u}) (U : X.Opens) :
-    MonoidalPreadditive (localEvaluationModules X U) :=
-  Classical.choice (SheafOfModules.tensorClosed (X.sheaf.over U)).1
+attribute [local instance] ordinaryComponentIdentityOverPreadditive
 
-noncomputable local instance ordinarySummandSchemePreadditive (Y : Scheme.{u}) :
-    MonoidalPreadditive (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) :=
-  Classical.choice (SheafOfModules.tensorClosed Y.sheaf).1
+attribute [local instance] ordinaryComponentIdentitySchemePreadditive
 
 section Normalize
 universe u₁ v₁ u₂ v₂
@@ -127,7 +124,7 @@ private theorem braided_descent (L : C ⥤ D) [L.Braided] (W : MorphismProperty 
 
 end Descent
 
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 500000 in
 -- Monoidal localization and its coefficient instances require extra elaboration heartbeats.
 /-- The open-site equivalence has a symmetric core monoidal structure with its prescribed unit.
 Source: Stacks Project, Tag 01CD, tensor transport along an equivalence of ringed sites.
@@ -210,7 +207,7 @@ private theorem exists_normalizedOpen_coreMonoidal (X : Scheme.{u}) (U : X.Opens
   exact normalize E (Scheme.Modules.overEquivFunctorObjUnitIso U)
 
 
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 700000 in
 -- Elaborating two nested bicomplex comparisons requires additional heartbeats.
 /-- The open-site tensor comparison has the prescribed unit, symmetry and total summands.
 Source: Stacks Project, Tag 0A8X, tensor totalization; Mathlib `overEquiv`.

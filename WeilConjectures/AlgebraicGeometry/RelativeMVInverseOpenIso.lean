@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.RelativeMVMaps
+public import WeilConjectures.AlgebraicGeometry.Standard.StandardSingleBaseChangeTopRestrictionAux
 public import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeMayerVietorisMaps
 import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
@@ -32,25 +33,6 @@ namespace AlgebraicGeometry
 variable [d : ∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 
-/-- Pullback along a scheme isomorphism is fully faithful, hence its adjunction unit
-is invertible. Source: Stacks, Tags 0D5S and 079W.
-(blueprint: lem-pc-relative-mv-inverse-open-iso). -/
-theorem relativeMVIsoPullbackUnit_isIso {A B : Scheme.{u}} (s : A ≅ B) :
-    IsIso (relativeMVAdj s.hom).unit := by
-  obtain ⟨_, i, _, _, _⟩ := Classical.choose_spec
-    (Classical.choose_spec (Classical.choose_spec (Classical.choose_spec
-      exists_derivedPullbackComposition)))
-  let b : derivedPullback s.hom ⋙ derivedPullback s.inv ≅ 𝟭 _ :=
-    relativeMVComp s.inv s.hom ≪≫
-      eqToIso (congrArg (fun t ↦ derivedPullback t) s.inv_hom_id) ≪≫ i B
-  let c : derivedPullback s.inv ⋙ derivedPullback s.hom ≅ 𝟭 _ :=
-    relativeMVComp s.hom s.inv ≪≫
-      eqToIso (congrArg (fun t ↦ derivedPullback t) s.hom_inv_id) ≪≫ i A
-  have : (derivedPullback s.inv).Faithful := Functor.Faithful.of_comp_iso c
-  have : (derivedPullback s.hom).Faithful := Functor.Faithful.of_comp_iso b
-  have : (derivedPullback s.hom).Full := Functor.Full.of_comp_faithful_iso b
-  infer_instance
-
 /-- Transport the open localization object along a specified isomorphism over X.
 The unit of pullback along the isomorphism is invertible. The last comparison is
 right-adjoint uniqueness for the composite adjunction, using the specified equality
@@ -63,7 +45,8 @@ of scheme morphisms. Source: Stacks, Tags 01JR, 079W and 08HZ.
       (schemeDerivedDirectImage p).obj ((derivedPullback p).obj K) := by
   let c := relativeMVComp s.hom j ≪≫
     eqToIso (congrArg (fun t : B ⟶ X ↦ derivedPullback t) h)
-  have : IsIso (relativeMVAdj s.hom).unit := relativeMVIsoPullbackUnit_isIso s
+  have : IsIso (relativeMVAdj s.hom).unit :=
+    standardSingleBaseChange_topRestriction_iso_pullback_unit s
   exact (schemeDerivedDirectImage j).mapIso
       (asIso ((relativeMVAdj s.hom).unit.app ((derivedPullback j).obj K))) ≪≫
     (schemeDerivedDirectImage s.hom ⋙ schemeDerivedDirectImage j).mapIso (c.app K) ≪≫

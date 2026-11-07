@@ -27,7 +27,6 @@ namespace AlgebraicGeometry.ProEtale
 
 attribute [local irreducible] condensedArtinSchreierSheaf
 
-set_option maxHeartbeats 1000000 in
 -- Keep the exact derived comparison generic before instantiating the character image.
 private theorem nonempty_derivedPullback_single_comp
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -44,7 +43,6 @@ private theorem nonempty_derivedPullback_single_comp
       ((CondensedRing.upperStarComp Λ f q).symm.app A ≪≫
         eqToIso (congrArg (fun t ↦ (CondensedRing.upperStar Λ t).obj A) hq))⟩
 
-set_option maxHeartbeats 1000000 in
 -- Keep the character image abstract during the derived comparisons.
 /-- The degree-zero Artin--Schreier complex pulls back to the complex of the
 pulled-back function, including on the empty scheme.

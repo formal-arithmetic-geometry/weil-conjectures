@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+public import WeilConjectures.AlgebraicGeometry.LatticePairRestriction
 public import WeilConjectures.AlgebraicGeometry.ProEtaleOperations
 public import WeilConjectures.AlgebraicGeometry.StrictPerfectCoefficientPackage
 
@@ -39,13 +40,6 @@ end SmallRingedSite
 end SheafOfModules
 
 namespace AlgebraicGeometry.Scheme
-
-/-- Abelian sheafification on a small pro-etale slice in the coefficient universe.
-Source: Stacks, Tag 03DA (blueprint: def-weil-pbc-strict-perfect-coefficient-package). -/
-instance strictPerfectSliceSheafify (X : Scheme.{u}) (V : X.ProEt) :
-    HasSheafify ((ProEt.topology X).over V) AddCommGrpCat.{u + 1} :=
-  letI : EssentiallySmall.{u + 1} (Over V) := essentiallySmallSelf.{0} _
-  hasSheafifyEssentiallySmallSite _ _
 
 /-- The locally bijective sheafification criterion on that same slice.
 Source: Stacks, Tag 03DA (blueprint: def-weil-pbc-strict-perfect-coefficient-package). -/

@@ -228,7 +228,7 @@ theorem exists_isFinite_universallyInjective_smooth_dense {k : Type u} [Field k]
   have : TopologicalSpace.NoetherianSpace V := v.isEmbedding.isInducing.noetherianSpace
   have : TopologicalSpace.NoetherianSpace (v ⁻¹ᵁ W₁).toScheme := inferInstance
   have : IsReduced (v ⁻¹ᵁ W₁).toScheme := by
-    have := GeometricallyReduced.of_smooth (v₁ ≫ f')
+    have := Smooth.geometricallyReduced (v₁ ≫ f')
     exact GeometricallyReduced.isReduced_of_flat_of_isLocallyNoetherian (v₁ ≫ f')
   -- shrink to the lisse locus of `F`
   have : IsConstructibleSheaf ((Etale.upperStar (ModuleCat.{u + 1} Λ)

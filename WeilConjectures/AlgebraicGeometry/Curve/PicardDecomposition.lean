@@ -52,7 +52,7 @@ theorem Scheme.Hom.exists_mulEquiv_prod_picZero
       (∀ L, (e L).1 = Multiplicative.ofAdd (f.picDegree L)) ∧
       ∀ y : P0, e y = (1, y) := by
   let : C.Over (Spec (.of k)) := ⟨f⟩
-  have : ConnectedSpace C := IsConnectedCurve.connectedSpace' f
+  have : ConnectedSpace C := IsConnectedCurve.connectedSpace (f := f)
   have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian f
   have : IsRegular C := IsRegular.of_smooth f
   have : IrreducibleSpace C := IsRegular.irreducibleSpace C
