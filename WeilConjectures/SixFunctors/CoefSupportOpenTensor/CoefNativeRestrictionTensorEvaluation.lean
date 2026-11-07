@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.SixFunctors.CoefSupportOpenTensor.CoefOpenTensorEvaluationData
 import all WeilConjectures.AlgebraicGeometry.Geometric.GeometricTensorEvaluation
 import all WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearTensorEvaluation

@@ -189,12 +189,6 @@ lemma Away.mk_pow (hf : f ∈ 𝒜 d) (n : ℕ) (a : A) (ha : a ∈ 𝒜 (n • 
   congr 1
   exact Subtype.ext (by rw [SubmonoidClass.coe_pow, ← pow_mul, mul_comm])
 
-/-- A common factor `f ^ k` cancels in `Away 𝒜 f`:
-`(a * f ^ k) / f ^ (n + k) = a / f ^ n`. -/
-lemma Away.mk_mul_pow_cancel (hf : f ∈ 𝒜 d) (n k : ℕ) (a : A) (ha : a ∈ 𝒜 (n • d))
-    (h : a * f ^ k ∈ 𝒜 ((n + k) • d)) :
-    Away.mk 𝒜 hf (n + k) (a * f ^ k) h = Away.mk 𝒜 hf n a ha :=
-  Away.mk_eq_mk_of_mul_pow_eq 𝒜 hf h ha (by ring)
 
 end Away
 
@@ -292,9 +286,6 @@ def degreePart (m : ℤ) : Submodule (HomogeneousLocalization 𝒜 x) (Localizat
 
 variable {𝒜 x}
 
-lemma mem_degreePart {m : ℤ} {y : Localization x} :
-    y ∈ degreePart 𝒜 x m ↔ y = 0 ∨ IsFractionOfDegree 𝒜 x m y :=
-  Iff.rfl
 
 /-- Multiplication maps the degree-`m` part times the degree-`n` part into the
 degree-`(m + n)` part. -/
@@ -417,13 +408,6 @@ lemma degreePart.powDivPowEquiv_apply {m : ℤ} (k l : ℕ) (h : (d : ℤ) * (k 
   ext
   simp [degreePart.powDivPowEquiv, Algebra.smul_def]
 
-theorem degreePart.toSpanSingleton_powDivPow_bijective {m : ℤ} (k l : ℕ)
-    (h : (d : ℤ) * (k - l) = m) :
-    Function.Bijective (LinearMap.toSpanSingleton (HomogeneousLocalization 𝒜 x)
-      (degreePart 𝒜 x m) (degreePart.powDivPow hf hfx k l h)) := by
-  convert (degreePart.powDivPowEquiv hf hfx k l h).bijective using 1
-  ext p : 1
-  simp
 
 end PowDivPow
 
@@ -460,39 +444,6 @@ lemma Away.congr_trans {x y z : A} (h : x = y) (h' : y = z) :
   subst h h'
   rfl
 
-lemma Away.congr_mk {d : ι} {x y : A} (h : x = y) (hx : x ∈ 𝒜 d) (n : ℕ) (a : A)
-    (ha : a ∈ 𝒜 (n • d)) :
-    Away.congr 𝒜 h (Away.mk 𝒜 hx n a ha) = Away.mk 𝒜 (h ▸ hx) n a ha := by
-  subst h
-  rfl
-
-/-- `Away.congr` is compatible with the restriction maps `awayMap`. -/
-lemma Away.congr_awayMap {e : ι} {f g x y : A} (hg : g ∈ 𝒜 e) (hx : x = f * g) (h : x = y)
-    (a : Away 𝒜 f) :
-    Away.congr 𝒜 h (awayMap 𝒜 hg hx a) = awayMap 𝒜 hg (h.symm.trans hx) a := by
-  subst h
-  rfl
-
-/-- `Away.congr` is compatible with the restriction maps `awayMap` out of the overlap ring. -/
-lemma Away.awayMap_congr {e : ι} {g x y z : A} (hg : g ∈ 𝒜 e) (h : x = y) (hz : z = y * g)
-    (a : Away 𝒜 x) :
-    awayMap 𝒜 hg hz (Away.congr 𝒜 h a) = awayMap 𝒜 hg (hz.trans (h ▸ rfl)) a := by
-  subst h
-  rfl
-
-/-- **Restriction maps between chart rings compose**: restricting a section of the chart
-`D₊(f)` first to `D₊(fg)` and then to `D₊(fgh)` is the same as restricting it directly to
-`D₊(f(gh))`. Both sides are the same map into the localization at `fgh`. -/
-lemma awayMap_awayMap {d e e' : ι} {f g h x y : A} (hf : f ∈ 𝒜 d) (hg : g ∈ 𝒜 e)
-    (hh : h ∈ 𝒜 e') (hx : x = f * g) (hy : y = x * h) (a : Away 𝒜 f) :
-    awayMap 𝒜 hh hy (awayMap 𝒜 hg hx a) =
-      awayMap 𝒜 (SetLike.mul_mem_graded hg hh) (by rw [hy, hx, mul_assoc]) a := by
-  obtain ⟨n, a, ha, rfl⟩ := Away.mk_surjective 𝒜 hf a
-  simp only [awayMap_mk]
-  apply val_injective
-  simp only [Away.val_mk]
-  congr 1
-  rw [mul_pow, mul_assoc]
 
 /-- The canonical identification of the overlap rings of the charts `D₊(f)` and `D₊(g)`
 computed from either side: `Away 𝒜 (f * g) ≃+* Away 𝒜 (g * f)`.
@@ -500,17 +451,6 @@ computed from either side: `Away 𝒜 (f * g) ≃+* Away 𝒜 (g * f)`.
 def Away.overlapEquiv (f g : A) : Away 𝒜 (f * g) ≃+* Away 𝒜 (g * f) :=
   Away.congr 𝒜 (mul_comm f g)
 
-/-- The overlap equivalence identifies the two restrictions of the chart ring at `f`.
-(blueprint: `lemma-nagata-proj-chart-ring-cocycle`) -/
-lemma Away.overlapEquiv_awayMap_left {e : ι} {f g : A} (hg : g ∈ 𝒜 e) (a : Away 𝒜 f) :
-    Away.overlapEquiv 𝒜 f g (awayMap 𝒜 hg rfl a) = awayMap 𝒜 hg (mul_comm g f) a :=
-  Away.congr_awayMap 𝒜 hg rfl _ a
-
-/-- The overlap equivalence identifies the two restrictions of the chart ring at `g`.
-(blueprint: `lemma-nagata-proj-chart-ring-cocycle`) -/
-lemma Away.overlapEquiv_awayMap_right {d : ι} {f g : A} (hf : f ∈ 𝒜 d) (a : Away 𝒜 g) :
-    Away.overlapEquiv 𝒜 f g (awayMap 𝒜 hf (mul_comm f g) a) = awayMap 𝒜 hf rfl a :=
-  Away.congr_awayMap 𝒜 hf _ _ a
 
 /-- The overlap equivalence of a chart with itself is the identity.
 (blueprint: `lemma-nagata-proj-chart-ring-cocycle`) -/
@@ -525,30 +465,6 @@ lemma Away.overlapEquiv_symm (f g : A) :
     (Away.overlapEquiv 𝒜 f g).symm = Away.overlapEquiv 𝒜 g f :=
   Away.congr_symm 𝒜 _
 
-/-- Restricting along the overlap equivalence does not change the restriction map into a
-further overlap ring. -/
-lemma Away.awayMap_overlapEquiv {e : ι} {f g h z : A} (hh : h ∈ 𝒜 e) (hz : z = f * g * h)
-    (hz' : z = g * f * h) (a : Away 𝒜 (f * g)) :
-    awayMap 𝒜 hh hz' (Away.overlapEquiv 𝒜 f g a) = awayMap 𝒜 hh hz a :=
-  Away.awayMap_congr 𝒜 hh (mul_comm f g) hz' a
-
-/-- **Cocycle condition for the chart rings of `Proj`**: on the triple overlap
-`D₊(fgh)`, i.e. after composing with the restriction maps into `Away 𝒜 z` for `z = fgh`,
-each of the overlap equivalences `φ_{fg}`, `φ_{gh}`, `φ_{fh}` becomes the identity. Hence
-`φ_{gh} ∘ φ_{fg} = φ_{fh}` on the triple overlap.
-(blueprint: `lemma-nagata-proj-chart-ring-cocycle`) -/
-theorem Away.overlapEquiv_cocycle {d e e' : ι} {f g h z : A} (hf : f ∈ 𝒜 d) (hg : g ∈ 𝒜 e)
-    (hh : h ∈ 𝒜 e') (hz : z = f * g * h) :
-    (awayMap 𝒜 hh (hz.trans (by ring) : z = g * f * h)).comp
-        (Away.overlapEquiv 𝒜 f g).toRingHom = awayMap 𝒜 hh hz ∧
-      (awayMap 𝒜 hf (hz.trans (by ring) : z = h * g * f)).comp
-        (Away.overlapEquiv 𝒜 g h).toRingHom =
-          awayMap 𝒜 hf (hz.trans (by ring) : z = g * h * f) ∧
-      (awayMap 𝒜 hg (hz.trans (by ring) : z = h * f * g)).comp
-        (Away.overlapEquiv 𝒜 f h).toRingHom =
-          awayMap 𝒜 hg (hz.trans (by ring) : z = f * h * g) := by
-  refine ⟨RingHom.ext fun a ↦ ?_, RingHom.ext fun a ↦ ?_, RingHom.ext fun a ↦ ?_⟩ <;>
-  exact Away.awayMap_overlapEquiv 𝒜 _ (hz.trans (by ring)) (hz.trans (by ring)) a
 
 end ChartCocycle
 

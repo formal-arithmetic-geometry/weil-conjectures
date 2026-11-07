@@ -391,7 +391,8 @@ private theorem chart_model (T : Scheme.{u}) (n a b : ℕ)
         ⟨h.finiteKernel, h.kernelModel, fun hn ↦ (hn rfl).elim⟩)
   by_cases h₀ : q = 0
   · subst q
-    simpa only [scalarCohomologyModel, ite_eq_right (by decide : (0 : ℤ) ≠ -1), ite_eq_left rfl, ite_true]
+    simpa only
+    [scalarCohomologyModel, ite_eq_right (by decide : (0 : ℤ) ≠ -1), ite_eq_left rfl, ite_true]
       using (show Finite ↥(cokernel (differential l E n a b v)) ∧
         Nonempty ((ordinaryHomology l E n T 0).obj
           ((derivedEncoding l E n T e).functor.obj D) ≅

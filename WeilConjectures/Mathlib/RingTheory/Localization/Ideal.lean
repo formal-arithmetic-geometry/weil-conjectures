@@ -115,12 +115,3 @@ theorem Ideal.map_eq_span_singleton_of_mul_mem_span_singleton {R S : Type*} [Com
   refine ((IsLocalization.Away.algebraMap_isUnit g).dvd_mul_left).mp ⟨algebraMap R S c, ?_⟩
   rw [← map_mul, hc, map_mul]
 
-/-- The nilradical of a localization of `A` is the extension of the nilradical of `A`, so a bound
-`nilradical A ^ N = ⊥` on the nilpotency index passes to localizations. -/
-theorem nilradical_pow_eq_bot_of_isLocalization {A S : Type*} [CommRing A] [CommRing S]
-    [Algebra A S] (M : Submonoid A) [IsLocalization M S] {N : ℕ}
-    (h : nilradical A ^ N = ⊥) : nilradical S ^ N = ⊥ := by
-  have : nilradical S = (nilradical A).map (algebraMap A S) := by
-    rw [nilradical, nilradical, IsLocalization.map_radical M]
-    simp
-  rw [this, ← Ideal.map_pow, h, Ideal.map_bot]

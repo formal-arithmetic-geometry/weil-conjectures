@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
 public import WeilConjectures.TraceFormula.BaseChange.Supertrace
 public import WeilConjectures.TraceFormula.Statement

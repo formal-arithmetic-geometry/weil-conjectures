@@ -74,10 +74,18 @@ private theorem constantPullback_unit_map_private {W : C} (hW : IsTerminal W)
     ((sheafificationAdjunction J A).unit.app ((Functor.const Cᵒᵖ).obj M)).app (op W) ≫ k)
       hn.symm
 
+/-- Public export of the private `constantPullback_unit_map_private`
+(used by `import all` importers; linter.privateModule). -/
+alias constantPullback_unit_map := constantPullback_unit_map_private
+
 private theorem constant_naturality_private {P : Cᵒᵖ ⥤ A} {M : A}
     (q : (Functor.const Cᵒᵖ).obj M ⟶ P) {X Y : Cᵒᵖ} (f : X ⟶ Y) :
     q.app X ≫ P.map f = q.app Y := by
   simpa using (q.naturality f).symm
+
+/-- Public export of the private `constant_naturality_private`
+(used by `import all` importers; linter.privateModule). -/
+alias constant_naturality := constant_naturality_private
 
 private theorem coefficient_comp {M X Y Z Y' Z' : A}
     (q0 : M ⟶ X) (uT : X ⟶ Y) (uU : X ⟶ Y') (η : Y ⟶ Z)
@@ -225,9 +233,3 @@ private theorem constantScheme_pushforward (M : Ab.{u + 1})
 variable (B : Type) [CommRing B] [TopologicalSpace B] [IsTopologicalRing B]
 
 end AlgebraicGeometry.ProEtale.CondensedRing
-
-/-- Public export of the private `constantPullback_unit_map_private` (used by `import all` importers; linter.privateModule). -/
-alias constantPullback_unit_map := constantPullback_unit_map_private
-
-/-- Public export of the private `constant_naturality_private` (used by `import all` importers; linter.privateModule). -/
-alias constant_naturality := constant_naturality_private

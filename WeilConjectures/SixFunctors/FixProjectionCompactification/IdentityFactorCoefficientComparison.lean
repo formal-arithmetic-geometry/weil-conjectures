@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.SixFunctors.Supporting.SixFunctorOperationDatumStages
 public import WeilConjectures.AlgebraicGeometry.SixFunctors.IdentityFactorFixedSupport
 import WeilConjectures.AlgebraicGeometry.Sf.SfIntrinsicDirectImageUnitNormalization

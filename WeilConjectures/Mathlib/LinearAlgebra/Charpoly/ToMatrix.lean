@@ -94,11 +94,6 @@ theorem charpolyRev_smul_one [Nontrivial R] (c : R) :
 theorem charpolyRev_one [Nontrivial R] : (1 : M →ₗ[R] M).charpolyRev = (1 - X) ^ finrank R M := by
   simpa using charpolyRev_smul_one (M := M) (1 : R)
 
-/-- The reverse characteristic polynomial of an endomorphism of the zero module is `1`. -/
-theorem charpolyRev_of_subsingleton [Nontrivial R] [Subsingleton M] (f : M →ₗ[R] M) :
-    f.charpolyRev = 1 := by
-  rw [Subsingleton.elim f ((0 : R) • 1), charpolyRev_smul_one, finrank_zero_of_subsingleton,
-    pow_zero]
 
 /-- Conjugate endomorphisms have the same characteristic polynomial. -/
 theorem charpoly_of_isConj {f g : Module.End R M} (h : IsConj f g) :

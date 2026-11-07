@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.Scalar.ScalarExtensionFunctor
 public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.FourCornersSupplement
 public import Mathlib.CategoryTheory.Adjunction.Mates

@@ -80,74 +80,11 @@ theorem le_rank_map_iff [Finite m] {R : Type*} [CommRing R] (A : Matrix m n R) (
     exact ⟨e₁, e₂, by rwa [RingHom.map_det]⟩
   · rwa [RingHom.map_det] at h
 
-/-- The ranks of the finite square submatrices of a matrix `A` over a field, with arbitrary
-(possibly infinite) row and column index types, are bounded if and only if the rows of `A` span a
-finite-dimensional space. This identifies the rank of an infinite matrix, as the supremum of the
-ranks of its finite square submatrices, with the dimension of its row space (blueprint
-`prop-weil-rationality-criterion`, first step of the proof). -/
-theorem bddAbove_range_rank_submatrix_iff {m n : Type*} (A : Matrix m n K) :
-    BddAbove (Set.range fun x : Σ r : ℕ, (Fin r → m) × (Fin r → n) ↦
-      (A.submatrix x.2.1 x.2.2).rank) ↔
-      FiniteDimensional K (Submodule.span K (Set.range A.row)) := by
-  classical
-  refine ⟨fun ⟨B, hB⟩ ↦ ?_, fun _ ↦ ⟨finrank K (Submodule.span K (Set.range A.row)), ?_⟩⟩
-  · by_contra hfd
-    obtain ⟨b, hb, hspan, hli⟩ := exists_linearIndependent K (Set.range A.row)
-    have hinf : b.Infinite := fun hfin ↦ hfd (hspan ▸ FiniteDimensional.span_of_finite K hfin)
-    let φ : Fin (B + 1) → b := fun i ↦ hinf.natEmbedding _ i
-    have hφ : Function.Injective φ :=
-      (hinf.natEmbedding _).injective.comp Fin.val_injective
-    choose e₁ he₁ using fun i ↦ hb (φ i).2
-    have hli' : LinearIndependent K fun i ↦ A.row (e₁ i) := by
-      simp_rw [he₁]
-      exact hli.comp φ hφ
-    have := FiniteDimensional.span_of_finite K (Set.finite_range fun i ↦ A.row (e₁ i))
-    obtain ⟨s, hs⟩ := (Submodule.span K (Set.range fun i ↦ A.row (e₁ i)))
-      |>.exists_finset_injective_funLeft_domRestrict
-    have hA' : LinearIndependent K (A.submatrix e₁ ((↑) : s → n)).row :=
-      hli'.map (f := LinearMap.funLeft K K ((↑) : s → n)) (LinearMap.injective_domRestrict_iff.1 hs)
-    obtain ⟨e₁', e₂', hdet⟩ :=
-      (A.submatrix e₁ ((↑) : s → n)).exists_submatrix_det_ne_zero_of_le_rank (r := B + 1)
-        (by simp [hA'.rank_matrix])
-    have hle := hB ⟨⟨B + 1, e₁ ∘ e₁', (↑) ∘ e₂'⟩, rfl⟩
-    dsimp only at hle
-    rw [← submatrix_submatrix] at hle
-    rw [rank_of_det_ne_zero hdet, Fintype.card_fin] at hle
-    omega
-  · rintro _ ⟨⟨r, e₁, e₂⟩, rfl⟩
-    have := FiniteDimensional.span_of_finite K (Set.finite_range fun i ↦ A.row (e₁ i))
-    dsimp only
-    rw [rank_eq_finrank_span_row]
-    calc finrank K (Submodule.span K (Set.range (A.submatrix e₁ e₂).row))
-        = finrank K ((Submodule.span K (Set.range fun i ↦ A.row (e₁ i))).map
-            (LinearMap.funLeft K K e₂)) := by
-          rw [Submodule.map_span, ← Set.range_comp]
-          rfl
-      _ ≤ finrank K (Submodule.span K (Set.range fun i ↦ A.row (e₁ i))) :=
-          Submodule.finrank_map_le _ _
-      _ ≤ finrank K (Submodule.span K (Set.range A.row)) :=
-          Submodule.finrank_mono (Submodule.span_mono (Set.range_comp_subset_range _ _))
 
 section Exact
 
 variable {ι₀ ι₁ ι₂ : Type*} [Fintype ι₀] [Fintype ι₁]
 
-/-- **Ranks in an exact sequence over a field.** If `B * A = 0` and every vector killed by `B` is
-in the image of `A`, then `rank A + rank B` is the size of the middle term. -/
-theorem rank_add_rank_eq_card_of_exact (A : Matrix ι₁ ι₀ K) (B : Matrix ι₂ ι₁ K)
-    (hBA : B * A = 0) (h : ∀ v : ι₁ → K, B *ᵥ v = 0 → ∃ w, A *ᵥ w = v) :
-    A.rank + B.rank = Fintype.card ι₁ := by
-  have hker : LinearMap.ker B.mulVecLin = LinearMap.range A.mulVecLin := by
-    refine le_antisymm (fun v hv ↦ ?_) ?_
-    · obtain ⟨w, hw⟩ := h v hv
-      exact ⟨w, hw⟩
-    · rintro _ ⟨w, rfl⟩
-      change B *ᵥ (A *ᵥ w) = 0
-      rw [Matrix.mulVec_mulVec, hBA, Matrix.zero_mulVec]
-  have := LinearMap.finrank_range_add_finrank_ker B.mulVecLin
-  rw [hker, Module.finrank_fintype_fun_eq_card] at this
-  rw [Matrix.rank, Matrix.rank]
-  omega
 
 end Exact
 

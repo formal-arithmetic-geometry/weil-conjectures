@@ -113,6 +113,10 @@ private theorem comapUpperStar_inv_forget_private
     ((CondensedRing.comapUpperStarIso a f).app N)
   exact isoInvFac e _ _ (comapUpperStar_forget a f N)
 
+/-- Public export of the private `comapUpperStar_inv_forget_private`
+(used by `import all` importers; linter.privateModule). -/
+alias comapUpperStar_inv_forget := comapUpperStar_inv_forget_private
+
 set_option maxHeartbeats 400000 in
 -- The concrete comparisons unfold several coefficient and module functor wrappers.
 private theorem ordinary_vertical_unit
@@ -179,18 +183,12 @@ private theorem ordinaryScalarUnit_private
   exact unitCompositeMate (Mod.extendRestrictAdjunction (coefficientMap a Y))
     (Mod.extendRestrictAdjunction (coefficientMap a X)) au av e
     (CondensedRing.comapUpperStarIso a f).inv hq M
+
+/-- Public export of the private `ordinaryScalarUnit_private`
+(used by `import all` importers; linter.privateModule). -/
+alias ordinaryScalarUnit := ordinaryScalarUnit_private
 end AlgebraicGeometry.ProEtale
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 end AlgebraicGeometry.ProEtale.CondensedRing
-
-namespace AlgebraicGeometry.ProEtale
-/-- Public export of the private `comapUpperStar_inv_forget_private` (used by `import all` importers; linter.privateModule). -/
-alias comapUpperStar_inv_forget := comapUpperStar_inv_forget_private
-end AlgebraicGeometry.ProEtale
-
-namespace AlgebraicGeometry.ProEtale
-/-- Public export of the private `ordinaryScalarUnit_private` (used by `import all` importers; linter.privateModule). -/
-alias ordinaryScalarUnit := ordinaryScalarUnit_private
-end AlgebraicGeometry.ProEtale

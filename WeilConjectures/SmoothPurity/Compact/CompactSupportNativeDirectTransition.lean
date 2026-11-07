@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.SmoothPurity.Compact.CompactSupportNativeSystemEvaluation
 public import WeilConjectures.SmoothPurity.Compact.CompactSupportCoefficientTransition
 import all WeilConjectures.SmoothPurity.Compact.CompactSupportCoefficientTransition

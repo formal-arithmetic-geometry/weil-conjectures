@@ -143,15 +143,6 @@ theorem quasiIso_map_of_rightAcyclic_of_map_acyclic {K L : CochainComplex C ℤ}
     (HomologicalComplex.homotopyCofiber.XIsoBiprod φ n (n + 1) rfl).symm
     (rightAcyclic_biprod (hK (n + 1)) (hL n))
 
-/-- A left exact additive functor of finite cohomological dimension preserves
-quasi-isomorphisms between (unbounded) cochain complexes of `F`-acyclic objects. -/
-theorem quasiIso_map_of_rightAcyclic_of_isZero_rightDerived {K L : CochainComplex C ℤ}
-    (φ : K ⟶ L) [QuasiIso φ] (d : ℕ)
-    (hF : ∀ (X : C) (q : ℕ), d < q → IsZero ((F.rightDerived q).obj X))
-    (hK : ∀ n, F.rightAcyclic (K.X n)) (hL : ∀ n, F.rightAcyclic (L.X n)) :
-    QuasiIso ((F.mapHomologicalComplex _).map φ) :=
-  F.quasiIso_map_of_rightAcyclic_of_map_acyclic φ
-    (fun _ hM hM' ↦ hM.map_of_rightAcyclic_of_isZero_rightDerived F d hF hM') hK hL
 
 end Classical
 

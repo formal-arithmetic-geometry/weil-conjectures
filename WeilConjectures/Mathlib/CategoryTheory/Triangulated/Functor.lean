@@ -92,12 +92,5 @@ variable {C D : Type*} [Category* C] [Category* D] [HasZeroObject C] [HasZeroObj
   [∀ n : ℤ, (shiftFunctor C n).Additive] [∀ n : ℤ, (shiftFunctor D n).Additive]
   [Pretriangulated C] [Pretriangulated D]
 
-/-- **Exact functors of pre-triangulated categories.** A functor `F` equipped with a
-commutation with the shifts (`F.CommShift ℤ`) is exact (triangulated) if and only if it carries
-distinguished triangles to distinguished triangles. (blueprint: `def-weil-triangulated-category`)
--/
-theorem isTriangulated_iff_map_distinguished (F : C ⥤ D) [F.CommShift ℤ] :
-    F.IsTriangulated ↔ ∀ T ∈ distTriang C, F.mapTriangle.obj T ∈ distTriang D :=
-  ⟨fun h ↦ h.map_distinguished, fun h ↦ ⟨h⟩⟩
 
 end CategoryTheory.Functor
