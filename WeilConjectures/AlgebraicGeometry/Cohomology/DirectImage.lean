@@ -42,7 +42,8 @@ and it is what lets the statements of this module be combined with the ones phra
 
 Every derived-functor statement below needs injective resolutions in `X.Modules`, carried as
 an instance hypothesis `[HasInjectiveResolutions X.Modules]`. It can be discharged by
-`AlgebraicGeometry.Scheme.Modules.isGrothendieckAbelian`, which gives `EnoughInjectives` and
+`AlgebraicGeometry.Scheme.Modules.instIsGrothendieckAbelian_weilConjectures`, which gives
+`EnoughInjectives` and
 hence `HasInjectiveResolutions`; it is not an instance, so the hypothesis is kept in the
 statements here and downstream.
 

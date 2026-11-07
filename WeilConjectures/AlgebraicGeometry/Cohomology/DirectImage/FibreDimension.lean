@@ -75,7 +75,7 @@ theorem isZero_higherDirectImage_of_hFiber_eq_zero (hℱ : ℱ.IsFlatOver f) {d 
     refine ⟨T.residueField (U.ι y), Field.toIsField _, g, x, U.ι.isOpenEmbedding.injective ?_, ?_⟩
     · rw [← Scheme.Hom.comp_apply, hg]
       exact (Scheme.range_fromSpecResidueField (U.ι y)).subset ⟨x, rfl⟩
-    have := isGrothendieckAbelian (f.fiber (U.ι y))
+    have := instIsGrothendieckAbelian_weilConjectures (f.fiber (U.ι y))
     have sq : IsPullback (f.fiberι (U.ι y)) (f.fiberToSpecResidueField (U.ι y)) f (g ≫ U.ι) := by
       rw [hg]
       exact IsPullback.of_hasPullback _ _
@@ -92,7 +92,7 @@ theorem isZero_higherDirectImage_of_hFiber_eq_zero (hℱ : ℱ.IsFlatOver f) {d 
       Module.finrank_zero_iff.mp (h _ q hq)
     exact (isZero_higherDirectImage_of_subsingleton_H _ _ q this).of_iso e
   -- `R^q f_* ℱ|_U` is the cohomology of `P`
-  have := isGrothendieckAbelian (f ⁻¹ᵁ U).toScheme
+  have := instIsGrothendieckAbelian_weilConjectures (f ⁻¹ᵁ U).toScheme
   have sq : IsPullback (f ⁻¹ᵁ U).ι (f ∣_ U) f (𝟙 U.toScheme ≫ U.ι) := by
     rw [Category.id_comp]
     exact (isPullback_morphismRestrict f U).flip
@@ -118,7 +118,7 @@ of `f` over `U`.
 theorem isZero_higherDirectImage_restrict_of_topologicalKrullDim_le (hℱ : ℱ.IsFlatOver f)
     (U : T.Opens) {d : ℕ} (hd : ∀ t ∈ U, topologicalKrullDim (f.fiber t) ≤ d) {q : ℕ}
     (hq : d < q) : IsZero (((higherDirectImage f q).obj ℱ).restrict U.ι) := by
-  have := isGrothendieckAbelian (f ⁻¹ᵁ U).toScheme
+  have := instIsGrothendieckAbelian_weilConjectures (f ⁻¹ᵁ U).toScheme
   have sq : IsPullback (f ⁻¹ᵁ U).ι (f ∣_ U) f U.ι := (isPullback_morphismRestrict f U).flip
   obtain ⟨e⟩ := nonempty_higherDirectImage_iso_restrict f ℱ U.ι _ _ sq q
   refine IsZero.of_iso ?_ e.symm

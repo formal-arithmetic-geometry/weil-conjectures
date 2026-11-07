@@ -278,7 +278,8 @@ theorem noetherian_cohomology_model_sections_isPseudoCoherent
       let Y := Limits.pullback f U.ι
       let a : Y ⟶ X := pullback.fst f U.ι
       let b : Y ⟶ U.toScheme := pullback.snd f U.ι
-      let : IsGrothendieckAbelian.{u} Y.Modules := Scheme.Modules.isGrothendieckAbelian Y
+      let : IsGrothendieckAbelian.{u} Y.Modules :=
+        Scheme.Modules.instIsGrothendieckAbelian_weilConjectures Y
       have : HasInjectiveResolutions Y.Modules := inferInstance
       have : ((Modules.pullback a).obj F).IsFinitePresentation := inferInstance
       have : IsProper b := inferInstance
@@ -390,7 +391,8 @@ theorem exists_cech_model_of_noetherian_descent
         Nonempty ((((Modules.pullback k).mapHomologicalComplex _).obj C).homology n ≅
           (higherDirectImage h n).obj ((Modules.pullback v).obj F)) := by
   classical
-  let : IsGrothendieckAbelian.{u} Y.Modules := Scheme.Modules.isGrothendieckAbelian Y
+  let : IsGrothendieckAbelian.{u} Y.Modules :=
+    Scheme.Modules.instIsGrothendieckAbelian_weilConjectures Y
   have : HasInjectiveResolutions Y.Modules := inferInstance
   obtain ⟨W, C₀, Q₀, d, hxW, hW, hge, hle, hflat, hqc, hQle, hfree,
       ⟨e₀, he₀⟩, hcomp⟩ := noetherian_exists_proper_flat_cech_model p M hM (g x)

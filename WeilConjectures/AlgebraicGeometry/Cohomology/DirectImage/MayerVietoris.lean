@@ -68,7 +68,7 @@ lemma le_of_image_preimage_ι_comp {W W' : X.Opens} (h : W' ≤ W) (V : T.Opens)
   rw [image_preimage_ι_comp, image_preimage_ι_comp]
   exact inf_le_inf_left _ h
 
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 500000 in
 -- composing the restriction maps unfolds the sections of pushforwards and restrictions
 lemma pushforwardRestrictMapApp_app {W W' : X.Opens} (h : W' ≤ W) (M : X.Modules)
     (V : T.Opens) :
@@ -478,7 +478,7 @@ variable (f ℱ) in
 theorem higherDirectImageBound_of_isAffineHom (W : X.Opens) [IsAffineHom (W.ι ≫ f)]
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] :
     HigherDirectImageBound f ℱ W 1 := by
-  have := isGrothendieckAbelian (W : Scheme.{u})
+  have := instIsGrothendieckAbelian_weilConjectures (W : Scheme.{u})
   have hE (I : X.Modules) [Injective I] :
       (pushforward (W.ι ≫ f)).rightAcyclic ((restrictFunctor W.ι).obj I) :=
     rightAcyclic_pushforward_of_isFlasque _ _

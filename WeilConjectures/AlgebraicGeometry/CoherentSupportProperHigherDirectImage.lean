@@ -115,7 +115,8 @@ theorem isCoherent_schemeModuleHigherDirectImage_of_support_proper
   have : IsLocallyNoetherian Z := LocallyOfFiniteType.isLocallyNoetherian (i ≫ f)
   have : G.IsFinitePresentation :=
     finitePresentation_of_quasicoherent_finiteType Z G hGqc hGft
-  have : IsGrothendieckAbelian.{u} Z.Modules := Scheme.Modules.isGrothendieckAbelian Z
+  have : IsGrothendieckAbelian.{u} Z.Modules :=
+    Scheme.Modules.instIsGrothendieckAbelian_weilConjectures Z
   let AZ := SheafOfModules.{u} (moduleRings Z.toRingedSpace)
   let AX := SheafOfModules.{u} (moduleRings X.toRingedSpace)
   let AS := SheafOfModules.{u} (moduleRings S.toRingedSpace)

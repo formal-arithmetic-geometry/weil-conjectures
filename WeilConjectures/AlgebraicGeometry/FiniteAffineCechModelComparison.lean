@@ -153,7 +153,7 @@ theorem finiteAffineCechModel_comparison {X T : Scheme.{u}} (f : X ⟶ T)
     rw [← he] at hj hf
     have : IsAffineHom (⨅ k, W (y k)).ι := hj
     have : IsAffineHom ((⨅ k, W (y k)).ι ≫ f') := hf
-    have := Modules.isGrothendieckAbelian (⨅ k, W (y k)).toScheme
+    have := Modules.instIsGrothendieckAbelian_weilConjectures (⨅ k, W (y k)).toScheme
     have hacyclic : (Modules.pushforward (⨅ k, W (y k)).ι).rightAcyclic
         (M.restrict (⨅ k, W (y k)).ι) := by
       intro n

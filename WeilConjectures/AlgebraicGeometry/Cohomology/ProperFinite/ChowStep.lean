@@ -157,7 +157,7 @@ theorem exists_hasFiniteH_hom_isIso_restrict {Y : Scheme.{u}} (p : Y ⟶ Spec (.
   let e := ChowModification.toProjectiveSpaceSource p
   have he : e ≫ ℙ(ChowModification.index p; Y) ↘ Y = π :=
     ChowModification.toProjectiveSpaceSource_over p
-  have := isGrothendieckAbelian (ChowModification p)
+  have := instIsGrothendieckAbelian_weilConjectures (ChowModification p)
   let F := (pullback π).obj G
   -- relative Serre vanishing
   obtain ⟨m₀, hm₀⟩ := exists_isZero_higherDirectImage_tensorObj_twistRestrict he F

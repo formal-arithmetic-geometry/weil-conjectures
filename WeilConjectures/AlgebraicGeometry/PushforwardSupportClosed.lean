@@ -56,7 +56,7 @@ theorem pushforward_support_closed_subset
         {x : Z | ¬ Subsingleton (((Scheme.Modules.pushforward q).obj F.obj).presheaf.stalk x)} ∧
       (D : Set Z) ⊆ q '' (C : Set Y) := by
   classical
-  have := Scheme.Modules.isGrothendieckAbelian Y
+  have := Scheme.Modules.instIsGrothendieckAbelian_weilConjectures Y
   have : IsLocallyNoetherian Y := LocallyOfFiniteType.isLocallyNoetherian q
   have hq := (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType Y F.obj).mp
     F.property

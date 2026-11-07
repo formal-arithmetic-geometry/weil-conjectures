@@ -164,7 +164,7 @@ theorem isZero_stalk_higherDirectImage_of_finite_preimage {Y : Scheme.{u}} (f : 
   have := LocallyOfFiniteType.isLocallyNoetherian f
   have := ((isFiniteTypeWithFiniteTypeKernels_iff ℱ).1 inferInstance).1
   obtain ⟨V, hyV, hV⟩ := exists_isFinite_morphismRestrict_of_finite_preimage_singleton f y hy
-  have := isGrothendieckAbelian (f ⁻¹ᵁ V).toScheme
+  have := instIsGrothendieckAbelian_weilConjectures (f ⁻¹ᵁ V).toScheme
   obtain ⟨e⟩ := nonempty_higherDirectImage_iso_restrict f ℱ V.ι _ _
     (isPullback_morphismRestrict f V).flip (p + 1)
   have hz : IsZero (((higherDirectImage f (p + 1)).obj ℱ).restrict V.ι) :=

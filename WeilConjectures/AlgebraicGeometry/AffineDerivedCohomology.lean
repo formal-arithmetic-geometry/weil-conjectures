@@ -61,7 +61,7 @@ theorem schemeHigherDirectImage_of_affine
       ((DerivedCategory.homologyFunctor
         (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i).obj E)).IsQuasicoherent := by
   have : IsGrothendieckAbelian.{u} X.Modules :=
-    Scheme.Modules.isGrothendieckAbelian X
+    Scheme.Modules.instIsGrothendieckAbelian_weilConjectures X
   have hacyc : ∀ (F : SheafOfModules.{u} (moduleRings X.toRingedSpace)),
       F.IsQuasicoherent → ∀ (p : ℤ), 0 < p →
         Limits.IsZero ((schemeModuleHigherDirectImage f p).obj F) := by

@@ -93,7 +93,7 @@ lemma homOfHZero_smul {G : X.Modules} (r : Γ(X, ⊤)) (b : G.H 0) :
 lemma homOfHZero_map {G G' : X.Modules} (g : G ⟶ G') (b : G.H 0) :
     homOfHZero (H.map g 0 b) = homOfHZero b ≫ g := by
   rw [homOfHZero, AddEquiv.symm_apply_eq, unitHomAddEquiv_comp, homOfHZero,
-    AddEquiv.apply_symm_apply, H.zeroLinearEquiv_map_homObj]
+    AddEquiv.apply_symm_apply, H.zeroLinearEquiv_map]
 
 variable (k : Type u) [Field k] [X.Over (Spec (.of k))]
 

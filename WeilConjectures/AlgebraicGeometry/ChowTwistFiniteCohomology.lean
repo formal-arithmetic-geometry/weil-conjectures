@@ -89,7 +89,8 @@ theorem exists_chow_twist_finite_cohomology {X W T Y : Scheme.{u}}
   have hX : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f
   have : _root_.CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
   have hXN : IsNoetherian X := ⟨⟩
-  have : EnoughInjectives Y.Modules := (isGrothendieckAbelian Y).enoughInjectives
+  have : EnoughInjectives Y.Modules :=
+    (instIsGrothendieckAbelian_weilConjectures Y).enoughInjectives
   have hI : HasInjectiveResolutions Y.Modules := inferInstance
   have hdiag : j ≫ (ℙ(N; T) ↘ T) = p ≫ f := by
     simpa only [p, Category.assoc] using hj

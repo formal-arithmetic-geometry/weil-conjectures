@@ -168,7 +168,7 @@ theorem subsingleton_H_unit_of_topologicalKrullDim_fiber_le {X T : Scheme.{u}} (
     [IsAffine T] [IsProper f] [Flat f] [LocallyOfFinitePresentation f] {d : ℕ}
     (hd : ∀ t, topologicalKrullDim (f.fiber t) ≤ d) {q : ℕ} (hq : d < q) :
     Subsingleton (Scheme.Modules.H (X := X) (SheafOfModules.unit X.ringCatSheaf) q) := by
-  have := isGrothendieckAbelian X
+  have := instIsGrothendieckAbelian_weilConjectures X
   have : (SheafOfModules.unit X.ringCatSheaf).IsFinitePresentation :=
     SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
   have : (SheafOfModules.unit X.ringCatSheaf).IsQuasicoherent :=

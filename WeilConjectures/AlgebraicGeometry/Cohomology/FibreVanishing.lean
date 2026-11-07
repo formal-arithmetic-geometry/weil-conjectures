@@ -49,7 +49,7 @@ theorem exists_subsingleton_H_preimage_of_hFiber_eq_zero (f : X ⟶ T) [IsProper
     ∃ U : T.Opens, t ∈ U ∧ ∀ V : T.Opens, IsAffineOpen V → V ≤ U →
       Subsingleton (((Modules.pullback (f ⁻¹ᵁ V).ι).obj ℱ).H q) := by
   classical
-  have := isGrothendieckAbelian X
+  have := instIsGrothendieckAbelian_weilConjectures X
   obtain ⟨U₀, P, d, htU₀, hP, hbc⟩ := exists_isFiniteFreeComplex_higherDirectImage f ℱ hℱ t
   choose r e using hP.exists_iso_free
   let e (n : ℤ) := (e n).some
@@ -116,7 +116,7 @@ theorem exists_subsingleton_H_preimage_of_hFiber_eq_zero (f : X ⟶ T) [IsProper
     · simp only [Fintype.card_fin]
       exact (add_comm _ _).trans hrank
   -- hence the higher direct image over `V` and the cohomology over `f⁻¹ V` vanish
-  have := isGrothendieckAbelian (f ⁻¹ᵁ V).toScheme
+  have := instIsGrothendieckAbelian_weilConjectures (f ⁻¹ᵁ V).toScheme
   have sq : IsPullback (f ⁻¹ᵁ V).ι (f ∣_ V) f (g ≫ U₀.ι) := by
     rw [Scheme.homOfLE_ι]
     exact (isPullback_morphismRestrict f V).flip

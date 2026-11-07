@@ -99,7 +99,7 @@ theorem exists_isZero_higherDirectImage_of_isPullback [CompactSpace T] (f : X �
     let m := (s ×ˢ s).sup fun p ↦ (t p.1 p.2).card
     refine ⟨s.card * m + 2, fun g g' f' _ sq W' hW' hW'A ℱ' _ p hp ↦ ?_⟩
     have : IsAffine W' := hW'
-    have := isGrothendieckAbelian (f' ⁻¹ᵁ W')
+    have := instIsGrothendieckAbelian_weilConjectures (f' ⁻¹ᵁ W')
     refine IsZero.of_iso ?_
       (higherDirectImagePullbackIsoRestrict (isPullback_morphismRestrict f' W').flip ℱ' p).symm
     -- the preimages in `f'⁻¹ W'` of the affine opens of `X` over `A` are affine
@@ -225,7 +225,8 @@ theorem isZero_higherDirectImage_of_isClosedImmersion {d : ℕ} (hn : Nat.card n
   have sq := IsPullback.of_hasPullback (i ≫ ℙ(n; S) ↘ S) (Scheme.Opens.ι S')
   let g := pullback.fst (i ≫ ℙ(n; S) ↘ S) (Scheme.Opens.ι S')
   let f' := pullback.snd (i ≫ ℙ(n; S) ↘ S) (Scheme.Opens.ι S')
-  have := isGrothendieckAbelian (Limits.pullback (i ≫ ℙ(n; S) ↘ S) (Scheme.Opens.ι S'))
+  have := instIsGrothendieckAbelian_weilConjectures
+    (Limits.pullback (i ≫ ℙ(n; S) ↘ S) (Scheme.Opens.ι S'))
   refine ⟨S', hsS', IsZero.of_iso ?_ (higherDirectImagePullbackIsoRestrict sq ℱ q).symm⟩
   -- the base change of `X` to `S'` is covered by the `d + 1` affine opens over the standard ones
   let U (j : n) := g ⁻¹ᵁ (i ⁻¹ᵁ ProjectiveSpace.standardOpen n S j ⊓ (i ≫ ℙ(n; S) ↘ S) ⁻¹ᵁ S')

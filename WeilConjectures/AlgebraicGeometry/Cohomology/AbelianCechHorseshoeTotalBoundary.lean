@@ -108,7 +108,7 @@ private lemma beta_naturality {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-set_option maxHeartbeats 600000 in
+set_option maxHeartbeats 500000 in
 -- Comparing the two nested complex functors with finite-diagonal totalization is expensive.
 /-- A prescribed horseshoe gives a common total boundary for alpha and beta.
 Source: Stacks 01EQ (the two augmentations) and 0117 (boundary naturality).

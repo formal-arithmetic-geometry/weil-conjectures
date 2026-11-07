@@ -87,7 +87,7 @@ theorem Modules.finite_range_and_isConstructible_finrankH_geometricFibre [IsNoet
         (AlgebraicClosure (S.residueField s)) r
     (Set.range φ).Finite ∧ ∀ m : ℕ, Topology.IsConstructible (φ ⁻¹' {m}) := by
   intro φ
-  have := isGrothendieckAbelian X
+  have := instIsGrothendieckAbelian_weilConjectures X
   subst hi
   have hφ : φ = 𝒢.hFiber (i ≫ ℙ(n; S) ↘ S) r := by
     funext s

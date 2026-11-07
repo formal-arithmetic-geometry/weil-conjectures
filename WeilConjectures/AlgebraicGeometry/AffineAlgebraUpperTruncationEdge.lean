@@ -109,7 +109,8 @@ private theorem affineAlgebra_lowerTruncation_isIso
     Functor.isoWhiskerLeft G T.rightDerivedFunctorIsoMapDerivedCategory ≪≫
       (Functor.rightDerivedFunctorCompMapDerivedCategoryIso F T).symm ≪≫
       Functor.rightDerivedFunctorNatIso underived
-  have : IsGrothendieckAbelian.{v} X.Modules := Scheme.Modules.isGrothendieckAbelian X
+  have : IsGrothendieckAbelian.{v} X.Modules :=
+    Scheme.Modules.instIsGrothendieckAbelian_weilConjectures X
   have hacyc : ∀ (M : C), M.IsQuasicoherent → ∀ (p : ℤ), 0 < p →
       Limits.IsZero ((schemeModuleHigherDirectImage f p).obj M) := by
     intro M hM p hp

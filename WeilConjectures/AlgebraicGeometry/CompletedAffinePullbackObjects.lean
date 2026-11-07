@@ -40,7 +40,7 @@ private theorem coherent_pushforward {X Y : Scheme.{u}} [IsNoetherian Y]
     (f : X ⟶ Y) [IsProper f] (F : CoherentModules X) :
     RingedSpace.IsCoherent Y.toRingedSpace ((Scheme.Modules.pushforward f).obj F.obj) := by
   have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f
-  have := Scheme.Modules.isGrothendieckAbelian X
+  have := Scheme.Modules.instIsGrothendieckAbelian_weilConjectures X
   have hq := (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType X F.obj).mp
     F.property
   have : F.obj.IsQuasicoherent := hq.1

@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNat
 
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
+public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 public import Mathlib.CategoryTheory.Abelian.Injective.Ext
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
@@ -40,7 +41,7 @@ Source: Mathlib's sheafification theorem for abelian sheaves.
 (blueprint: new-module-cohomology-ext-resolution-naturality) -/
 @[instance 2000]
 theorem comparisonHasSheafify (X : Scheme.{u}) :
-    HasSheafify (Opens.grothendieckTopology X) AddCommGrpCat.{u} := inferInstance
+    HasSheafify (Opens.grothendieckTopology X) AddCommGrpCat.{u} := cohomologyHasSheafify X
 
 /-- Cache the Ext-size proof used by the comparison on the Zariski site.
 Source: the Grothendieck abelian category instance for abelian sheaves.
