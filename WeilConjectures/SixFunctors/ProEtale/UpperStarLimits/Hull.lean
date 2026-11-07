@@ -243,7 +243,8 @@ lemma nonempty_isColimit_cofan_of_isHull {X Y : Scheme.{u}} {ι : Type u} {T : �
       Sigma.ι_comp_desc, (hψ' i).1])
   let ssum : Wsum ⟶ W₀ := MorphismProperty.Over.homMk (Sigma.desc fun i ↦ (s i).left)
     (Sigma.hom_ext _ _ fun i ↦ by
-      rw [Sigma.ι_comp_desc_assoc, MorphismProperty.Over.w (s i), ProEt.mk_hom, Sigma.ι_comp_desc]) trivial
+      rw [Sigma.ι_comp_desc_assoc, MorphismProperty.Over.w (s i),
+        ProEt.mk_hom, Sigma.ι_comp_desc]) trivial
   have h₁ : t ≫ ssum = 𝟙 W₀ := by
     refine (hψ.2 W₀ ψ hψ.1).unique ?_ (Category.comp_id _)
     refine Cofan.IsColimit.hom_ext hf _ _ fun i ↦ ?_

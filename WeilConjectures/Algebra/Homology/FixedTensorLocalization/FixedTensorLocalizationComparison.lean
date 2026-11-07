@@ -100,7 +100,7 @@ abbrev quotient := HomotopyCategory.quotient (Modules R) (.up ℤ)
 /-- The direct-sum total tensor with its canonical signs. Source: Stacks, Tag 06YM
 (blueprint: lem-weil-pbc-fixed-tensor-localization-comparison). -/
 abbrev totalTensor :=
-  let instPresheafCoproducts (I : Type r) : Limits.HasColimitsOfShape (Discrete I)
+  let _ (I : Type r) : Limits.HasColimitsOfShape (Discrete I)
       (PresheafOfModules.{r}
         ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R).obj) :=
     PresheafOfModules.hasColimitsOfShape _ _

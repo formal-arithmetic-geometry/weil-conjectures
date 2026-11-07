@@ -159,7 +159,8 @@ theorem coeff_prod_inv_alternatingCharpolyRevProd_stalk (K : WeilComplex k₀ l 
           rfl)
         (fun x hx ↦ hs x ((Nat.le_of_dvd hi0 hx).trans hi))] at htr
     simp only [map_sum, PowerSeries.coeff_mk]
-    rw [ite_eq_left ⟨hi0.ne', one_dvd i⟩, Nat.cast_one, one_mul, Nat.div_one, htr, Finset.sum_filter]
+    rw [ite_eq_left ⟨hi0.ne', one_dvd i⟩, Nat.cast_one, one_mul, Nat.div_one, htr,
+      Finset.sum_filter]
     refine Finset.sum_congr rfl fun x _ ↦ ?_
     simp [hi0.ne', nsmul_eq_mul]
 

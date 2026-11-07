@@ -73,7 +73,8 @@ noncomputable def tensorι {A : Sheaf J CommRingCat.{w}}
     have : HasColimitsOfShape (Discrete I) (PresheafOfModules.{w}
         ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj A).obj) :=
       PresheafOfModules.hasColimitsOfShape _ _
-    exact SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
+    exact
+      SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
   have : HasFiniteCoproducts (Modules A) :=
     hasFiniteCoproducts_of_hasCoproducts (C := Modules A)
   exact CochainComplex.ιMapBifunctor P Q (curriedTensor (Modules A)) p q n h

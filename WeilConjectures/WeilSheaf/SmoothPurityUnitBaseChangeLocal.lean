@@ -83,6 +83,7 @@ theorem isIso_smoothUnitBaseChange_comp_openImmersion_iff (i : ι)
     isIso_comp_left_iff]
   exact NatIso.isIso_map_iff (boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl l (j' i)) _
 
+omit [∀ i, IsOpenImmersion (j i).left] in
 /-- **Step 1: invertibility of the exceptional base change map at the unit is local on `X'`.**
 If the open immersions `jᵢ'` cover `X'`, the mates of the `bcjᵢ` are invertible (open-immersion
 case of step 2) and the exceptional base change maps of the restrictions `jᵢ ≫ f` are invertible,

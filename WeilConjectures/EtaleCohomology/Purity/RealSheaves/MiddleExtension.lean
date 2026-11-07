@@ -102,8 +102,8 @@ theorem coeff_prod_inv_localPolynomial_stalk_directImage (F : WeilSheaf k₀ l U
       LinearMap.coeff_zero_charpolyRev]
   rw [LinearMap.alternatingCharpolyRevProd, Finset.prod_insert (by decide),
     Finset.prod_insert (by decide), Finset.prod_singleton, ite_eq_left Even.zero,
-    ite_eq_right (by decide), ite_eq_left (by decide), pow_one, Polynomial.comp_X, Polynomial.comp_X,
-    Polynomial.comp_X, h0', Polynomial.coe_one, one_mul,
+    ite_eq_right (by decide), ite_eq_left (by decide), pow_one,
+    Polynomial.comp_X, Polynomial.comp_X, Polynomial.comp_X, h0', Polynomial.coe_one, one_mul,
     PowerSeries.inv_eq_iff_mul_eq_one
       (by rw [map_mul, PowerSeries.constantCoeff_inv, hc, hc]; simp),
     FrobeniusModule.localPolynomial, FrobeniusModule.localPolynomial]

@@ -139,11 +139,9 @@ theorem exists_affineBaseChangeTildeOrdinaryComparison
       Functor.mapIso_hom,
       DerivedCategory.quotientCompQhIso, HomologicalComplexUpToQuasiIso.quotientCompQhIso,
       Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_hom, Quotient.lift.isLift_inv,
-      cast_eq,
-      Category.assoc]
+      cast_eq]
     erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id]
     repeat erw [Category.id_comp]
-    all_goals rfl
   rw [hb] at ht
   dsimp only at heC ⊢
   rw [heC]

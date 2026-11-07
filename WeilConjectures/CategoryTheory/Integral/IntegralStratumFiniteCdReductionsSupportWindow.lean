@@ -94,8 +94,6 @@ private theorem reductionArrow_eq (l : ℕ) [Fact l.Prime] (E : Type u) [Field E
   exact coefficientArrow_eq _ _ _ _ _ _ _ _ _ _ _ _ _ hti hd
 
 -- The generalized coefficient arrow needs the exact module-derived functor instances.
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 1600000 in
 -- Generalizing the coefficient arrow requires the module-derived category instances.
 /-- The open restriction of supported sections of a finite reduction has cohomology
@@ -243,12 +241,18 @@ theorem integralStratumFiniteCdReductions_support_window
     · exact CondensedRing.module_classical_derived_pullback
         (DerivedNakayama.integerRing l E) v K hKclass q
     · let := CondensedRing.abSheafNatColimits S
+      let H := DerivedCategory.homologyFunctor
+        (Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1})
+          (condensedRingObj (DerivedNakayama.integerRing l E) S)) q
+      have : H.Additive := by
+        dsimp only [H]
+        infer_instance
       apply (isEllPowerTorsion_iff_local l (Fact.out : l.Prime) _).mp
       apply CondensedRing.ell_torsion_of_annihilated l (Fact.out : l.Prime) _ (n + 1)
       exact CondensedRing.functor_annihilator
         (Mod.forget (D := Sheaf (Scheme.ProEt.topology S) Ab.{u + 1})
           (condensedRingObj (DerivedNakayama.integerRing l E) S)) _ _
-        (CondensedRing.functor_annihilator (DerivedCategory.homologyFunctor _ q) _ _
+        (CondensedRing.functor_annihilator H _ _
           (CondensedRing.functor_annihilator
             (CondensedRing.upperStar (DerivedNakayama.integerRing l E) v).mapDerivedCategory
             K _ hk))

@@ -114,7 +114,7 @@ theorem smoothUnitBaseChange_proper_eq :
     smoothUnitBaseChange l f f' (properLowerShriekBaseChangeOfMap l f f' sqf) e =
       (upperShriekBaseChangeOfMap l sqf).app (𝟙_ _) ≫
         (boundedConstructibleUpperShriek l f').map e := by
-  haveI := isIso_boundedConstructibleBaseChangeOfMap l sqf
+  have := isIso_boundedConstructibleBaseChangeOfMap l sqf
   change Adjunction.unitBaseChange (boundedConstructibleUpperShriekAdjunction l f)
     (boundedConstructibleUpperShriekAdjunction l f')
     (Adjunction.ofNatIsoBaseChange (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl l f)

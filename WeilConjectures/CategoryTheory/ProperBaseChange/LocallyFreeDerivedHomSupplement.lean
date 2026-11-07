@@ -362,7 +362,7 @@ private theorem abstract_singleHomologyEquiv_cycle
       ((shiftFunctorZero _ ℤ).hom.app K) = _
   rw [Category.id_comp, ← Functor.map_comp]
   congr 1
-  ext i
+  ext
   simp [CochainComplex.HomComplex.Cocycle.equivHomShift_symm_apply,
     CochainComplex.HomComplex.Cocycle.homOf, CochainComplex.HomComplex.Cocycle.rightShift,
     CochainComplex.HomComplex.Cochain.rightShift_v, CochainComplex.shiftFunctorZero_hom_app_f]

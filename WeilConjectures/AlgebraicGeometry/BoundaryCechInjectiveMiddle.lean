@@ -100,7 +100,8 @@ private theorem local_lift_cocycle (X : Scheme.{u})
       PresheafOfModules.presheaf] at h ⊢
     simp only [AddMonoidHom.mk'_apply,
       sub_eq_add_neg] at h ⊢
-    convert h using 1 <;> rfl
+    convert h using 1
+    rfl
   have he (W : X.Opens) := by
     let E := SheafOfModules.evaluation.{u} X.ringCatSheaf (op W)
     let : E.Additive := inferInstanceAs

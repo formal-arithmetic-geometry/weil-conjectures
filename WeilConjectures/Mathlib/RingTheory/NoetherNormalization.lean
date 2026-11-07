@@ -438,7 +438,7 @@ theorem ringKrullDim_tensorProduct_of_finiteType (k A K : Type*) [Field k] [Comm
     have : FaithfulSMul (MvPolynomial (Fin n) k ⊗[k] K) (A ⊗[k] K) :=
       (faithfulSMul_iff_algebraMap_injective _ _).mpr hφ
     have : Algebra.IsIntegral (MvPolynomial (Fin n) k ⊗[k] K) (A ⊗[k] K) := by
-      refine ⟨fun z ↦ z.induction_on isIntegral_zero (fun a x ↦ ?_) fun _ _ ↦ .add⟩
+      refine ⟨fun z ↦ z.inductionOn (fun a x ↦ ?_) fun _ _ ↦ .add⟩
       have ha : IsIntegral (MvPolynomial (Fin n) k ⊗[k] K) (a ⊗ₜ[k] (1 : K)) :=
         (Algebra.IsIntegral.isIntegral (R := MvPolynomial (Fin n) k) a).map_of_comp_eq
           Algebra.TensorProduct.includeLeftRingHom Algebra.TensorProduct.includeLeftRingHom

@@ -144,7 +144,8 @@ private def component (n : ℤ) :
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj P) from Arrow.leftFunc.mapIso h)
   · by_cases h1 : n = 1
     · subst n
-      simpa only [ringedLocalizationTwoTermX, ite_eq_right (show (1 : ℤ) ≠ 0 by decide), ite_eq_left]
+      simpa only [ringedLocalizationTwoTermX,
+        ite_eq_right (show (1 : ℤ) ≠ 0 by decide), ite_eq_left]
         using (show V.obj (ringedSectionLocalization O s) ≅
           ringedSectionLocalization P t from Arrow.rightFunc.mapIso h)
     · simpa only [ringedLocalizationTwoTermX, ite_eq_right h0, ite_eq_right h1]

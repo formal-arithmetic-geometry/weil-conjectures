@@ -276,12 +276,14 @@ theorem eq_of_isPureOfWeight_of_prod_mul_eq {q r : ℕ} (hq : 1 < q) {P P' : Fin
   · have hoddj : j ∉ Finset.univ.filter fun i : Fin (r + 1) ↦ Odd i.1 := by
       simp [Nat.not_odd_iff_even.2 he]
     have hevenj : j ∈ Finset.univ.filter fun i : Fin (r + 1) ↦ Even i.1 := by simp [he]
-    rw [ite_eq_right hoddj, ite_eq_left hevenj, ite_eq_right hoddj, ite_eq_left hevenj, zero_add, zero_add] at hfil
+    rw [ite_eq_right hoddj, ite_eq_left hevenj, ite_eq_right hoddj, ite_eq_left hevenj,
+      zero_add, zero_add] at hfil
     exact hfil.symm
   · have hoddj : j ∈ Finset.univ.filter fun i : Fin (r + 1) ↦ Odd i.1 := by simp [ho]
     have hevenj : j ∉ Finset.univ.filter fun i : Fin (r + 1) ↦ Even i.1 := by
       simp [Nat.not_even_iff_odd.2 ho]
-    rw [ite_eq_left hoddj, ite_eq_right hevenj, ite_eq_left hoddj, ite_eq_right hevenj, add_zero, add_zero] at hfil
+    rw [ite_eq_left hoddj, ite_eq_right hevenj, ite_eq_left hoddj, ite_eq_right hevenj,
+      add_zero, add_zero] at hfil
     exact hfil
 
 

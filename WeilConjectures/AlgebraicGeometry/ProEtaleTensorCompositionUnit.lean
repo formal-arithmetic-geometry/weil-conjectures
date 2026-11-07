@@ -391,7 +391,7 @@ theorem proEtale_tensor_composition_unit
           proEtalePullbackTensorScalar h R_W R_Z c_h T P q a := rfl
     simp only [hscalar, op_comp,
       PresheafOfModules.map_comp_apply, ← mul_smul, mul_comm] at hs ⊢
-    convert hs using 1 <;> rfl
+    convert hs using 1
   refine ⟨d, t, ?_, hforward, ?_, ?_, ?_⟩
   · intro N U m
     rfl

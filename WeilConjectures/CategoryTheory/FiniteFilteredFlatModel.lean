@@ -71,7 +71,7 @@ filtration is degreewise a sum of its graded pieces.
 Source: blueprint sk-i-additivity.proof.md, Filtered operations, flat resolutions
 (blueprint: lem-trf-finite-filtered-flat-model). -/
 def IsSplitFlatFiltered
-    (K : FilteredObject (finiteFilteredComplex J R)) : Prop :=
+    (K : WeilFilteredObject (finiteFilteredComplex J R)) : Prop :=
   (∀ p n : ℤ,
     IsSplitMono ((Subobject.ofLE (K.filtration.F (p + 1)) (K.filtration.F p)
       (K.filtration.F_succ_le p)).f n)) ∧
@@ -120,7 +120,7 @@ with second index `r-p` is exactly the condition `p+q=r`.
 Source: blueprint sk-i-additivity.proof.md, Filtered operations, convolution tensor
 (blueprint: lem-trf-finite-filtered-flat-model). -/
 def finiteFilteredConvolutionStep
-    (P Q : FilteredObject (finiteFilteredComplex J R)) (r : ℤ) :
+    (P Q : WeilFilteredObject (finiteFilteredComplex J R)) (r : ℤ) :
     Subobject (HomologicalComplex.tensorObj P.obj Q.obj) :=
   imageSubobject (Sigma.desc (fun p : ℤ =>
     HomologicalComplex.tensorHom (P.filtration.F p).arrow
@@ -182,25 +182,25 @@ theorem finiteFilteredFlatModel
         (CochainComplex.minus (finiteFilteredModules J R)),
       IsSplitFlatFiltered (J := J) R K.obj ∧
       ∃ f : K.obj ⟶ M.obj,
-        (∀ p : ℤ, QuasiIso (FilteredObject.gradedMapSteps f p))) ∧
+        (∀ p : ℤ, QuasiIso (WeilFilteredObject.gradedMapSteps f p))) ∧
     (finiteFilteredLocalizationComparison (J := J) R a b).IsEquivalence ∧
     (∀ (P : UniformFilteredComplexes (finiteFilteredModules J R) (some (a, b))
           (CochainComplex.minus (finiteFilteredModules J R))),
       IsSplitFlatFiltered (J := J) R P.obj →
-      ∀ {Q Q' : FilteredObject (finiteFilteredComplex J R)},
+      ∀ {Q Q' : WeilFilteredObject (finiteFilteredComplex J R)},
         Q.filtration.IsFinite → Q'.filtration.IsFinite →
         ∀ g : Q ⟶ Q',
-          (∀ p : ℤ, QuasiIso (FilteredObject.gradedMapSteps g p)) →
+          (∀ p : ℤ, QuasiIso (WeilFilteredObject.gradedMapSteps g p)) →
           ∃ (FT : DecreasingFiltration (HomologicalComplex.tensorObj P.obj.obj Q.obj))
             (FT' : DecreasingFiltration (HomologicalComplex.tensorObj P.obj.obj Q'.obj))
             (t : (⟨HomologicalComplex.tensorObj P.obj.obj Q.obj, FT⟩ :
-                FilteredObject (finiteFilteredComplex J R)) ⟶
+                WeilFilteredObject (finiteFilteredComplex J R)) ⟶
               ⟨HomologicalComplex.tensorObj P.obj.obj Q'.obj, FT'⟩),
             (∀ r : ℤ, FT.F r = finiteFilteredConvolutionStep (J := J) R P.obj Q r) ∧
             (∀ r : ℤ, FT'.F r = finiteFilteredConvolutionStep (J := J) R P.obj Q' r) ∧
             FT.IsFinite ∧ FT'.IsFinite ∧
             t.hom = HomologicalComplex.tensorHom (𝟙 P.obj.obj) g.hom ∧
-            (∀ r : ℤ, QuasiIso (FilteredObject.gradedMapSteps t r))) := by
+            (∀ r : ℤ, QuasiIso (WeilFilteredObject.gradedMapSteps t r))) := by
   sorry
 
 end CategoryTheory

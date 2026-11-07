@@ -182,6 +182,7 @@ variable [IsProper p.left] [IsProper p'.left] (sqp : IsPullback πP p'.left p.le
   [IsOpenImmersion jV.left] [IsOpenImmersion jV'.left]
   (eV : (boundedConstructibleUpperStarOfMap l πV).obj (𝟙_ _) ⟶ 𝟙_ _)
 
+omit [IsOpenImmersion jV'.left] in
 /-- **The chart theorem with the proper piece from the library**: for `p` the projection of a
 projective space `ℙⁿ_V ⟶ V`, `πV` weakly étale, `bcp` proper base change, `jV` an open immersion
 with invertible exceptional base change map at the unit, and the mates of `bcg`, `bcjA`

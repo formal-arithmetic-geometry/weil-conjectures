@@ -153,7 +153,7 @@ private def localTensorBasisIso (X : Scheme.{u})
   rw [ModuleCat.ExtendScalars.map_tmul, ModuleCat.ExtendScalars.map_tmul]
   simp only [TensorProduct.AlgebraTensorModule.rid_tmul, Algebra.smul_def,
     RingHom.algebraMap_toAlgebra, mul_one]
-  convert (congrArg ((a.hom.app (op V.unop.left)).hom) he).trans ha using 1 <;> rfl
+  convert (congrArg ((a.hom.app (op V.unop.left)).hom) he).trans ha using 1
 
 /-- An internal module trivialized on one slice remains trivialized there after
 extension along a map of commutative coefficient rings.

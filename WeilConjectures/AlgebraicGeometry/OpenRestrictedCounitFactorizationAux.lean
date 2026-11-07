@@ -175,7 +175,7 @@ The equation follows by evaluating the defining left-derived composition
 factorization and the exact restriction adjunction, then identifying the
 remaining tensor comparisons with `openRestrictedTensorDerivedIso`.
 -/
-private theorem openRestricted_counit_compatibility_aux
+private theorem openRestricted_counit_compatibility_aux_private
     [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     {X X' : Scheme.{u}} (g' : X' ⟶ X) (U : X.Opens)
     (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :
@@ -242,4 +242,9 @@ private theorem openRestricted_counit_compatibility_aux
     set_option backward.isDefEq.respectTransparency.types false in
       exact h
 
+end AlgebraicGeometry.SingleComplexBaseChange
+
+namespace AlgebraicGeometry.SingleComplexBaseChange
+/-- Public export of the private `openRestricted_counit_compatibility_aux_private` (used by `import all` importers; linter.privateModule). -/
+alias openRestricted_counit_compatibility_aux := openRestricted_counit_compatibility_aux_private
 end AlgebraicGeometry.SingleComplexBaseChange
