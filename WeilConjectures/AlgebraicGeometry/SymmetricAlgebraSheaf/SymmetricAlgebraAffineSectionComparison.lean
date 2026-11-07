@@ -196,6 +196,7 @@ private theorem section_induction {X : Scheme.{u}} (F : X.Modules) [F.IsQuasicoh
   by_cases hx : x = 0
   · subst x
     exact hzero
+  clear hx
   obtain ⟨t, rfl⟩ := e.surjective x
   induction t using TensorProduct.inductionOn with
   | tmul r a => rw [he]; exact hgen r a
