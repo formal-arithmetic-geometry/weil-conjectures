@@ -462,7 +462,6 @@ theorem scalarPullbackSquare_eq
   exact congrArg (fun e ↦ (scalarPullbackComposition R f' c).symm ≪≫ e ≪≫
     scalarPullbackComposition R a f) hh
 
-set_option maxHeartbeats 300000 in
 -- Specializing the categorical lemma searches instances on categories of module objects.
 private theorem ordinary_scalar_comp (φ : Λ ⟶ Λ') [IsMonHom φ]
     {U V W : Scheme.{u}} (h : U ⟶ V) (k : V ⟶ W) :
@@ -517,7 +516,6 @@ attribute [local irreducible] CondensedRing.upperStar Mod.extendScalars
   scalarCounit pullCounit
 
 set_option backward.isDefEq.respectTransparency true in
-set_option maxHeartbeats 30000 in
 -- The explicit homotopy functor interfaces require additional instance synthesis.
 private theorem normalized_inv_fac (φ : Λ ⟶ Λ') [IsMonHom φ]
     {U V : Scheme.{u}} (h : U ⟶ V)
@@ -561,7 +559,6 @@ private def compositeInverse (φ : Λ ⟶ Λ') [IsMonHom φ]
     Functor.isoWhiskerLeft (D φ W) (scalarPullbackComposition Λ' h k).symm
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 300000 in
 -- Specializing the categorical lemma searches instances on categories of module objects.
 private theorem pull_comp_fac
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -606,7 +603,6 @@ private theorem pull_comp_inv_fac
     homotopy_iso_map, Iso.symm_inv] using hi
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 300000 in
 -- Specializing the categorical lemma searches instances on categories of module objects.
 private theorem ordinary_scalar_comp_homotopy (φ : Λ ⟶ Λ') [IsMonHom φ]
     {U V W : Scheme.{u}} (h : U ⟶ V) (k : V ⟶ W)
@@ -640,7 +636,6 @@ private theorem ordinary_scalar_comp_homotopy (φ : Λ ⟶ Λ') [IsMonHom φ]
     Functor.comp_obj, Category.id_comp, Category.comp_id] using hh
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 200000 in
 -- Bound elaboration while specializing the computation-counit calculation.
 private theorem scalar_comp_inv (φ : Λ ⟶ Λ') [IsMonHom φ]
     {U V W : Scheme.{u}} (h : U ⟶ V) (k : V ⟶ W)
