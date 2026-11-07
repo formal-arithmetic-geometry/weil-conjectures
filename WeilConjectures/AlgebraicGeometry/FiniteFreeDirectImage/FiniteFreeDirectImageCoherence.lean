@@ -37,7 +37,7 @@ open CategoryTheory CategoryTheory.Functor CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme.FiniteFreeDirectImage
 
-private theorem comparison_isIso_app {Z W : Scheme.{u}} (q : Z ⟶ W)
+private theorem comparison_isIso_app_private {Z W : Scheme.{u}} (q : Z ⟶ W)
     (sW : ScalarModel W) (sZ : ScalarModel Z)
     (R S : Coefficients q) (a : CoefficientMap R S) (d : ℕ)
     (hfree : Nonempty ((proEtaleRingRestrictScalars a.target).obj
@@ -240,7 +240,7 @@ theorem finiteFreeDirectImageCoherence {Z W : Scheme.{u}} (q : Z ⟶ W) :
     let := hZ
     have hi (M : DerivedCategory (proEtaleRingModules Z R.source)) :
         IsIso ((comparison sW sZ a).app M) :=
-      comparison_isIso_app q sW sZ R S a d hfree M
+      comparison_isIso_app_private q sW sZ R S a d hfree M
     exact ⟨NatIso.isIso_of_isIso_app _, finiteFreeDirectImageShift sW sZ a,
       inferInstance, inferInstance⟩
   · exact finiteFreeDirectImageUnit q sW sZ

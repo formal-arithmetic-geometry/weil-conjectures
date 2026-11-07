@@ -347,7 +347,3 @@ namespace AlgebraicGeometry.SingleComplexBaseChange
 alias composition_factorization_transport := composition_factorization_transport_private
 end AlgebraicGeometry.SingleComplexBaseChange
 
-namespace AlgebraicGeometry.SingleComplexBaseChange
-/-- Public export of the private `affineSpectrum_composition_counit_square_private` (used by `import all` importers; linter.privateModule). -/
-alias affineSpectrum_composition_counit_square := affineSpectrum_composition_counit_square_private
-end AlgebraicGeometry.SingleComplexBaseChange
