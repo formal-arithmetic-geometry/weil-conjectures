@@ -139,8 +139,8 @@ set_option synthInstance.maxSize 1024 in
 instance commShift_boundedConstructibleOpenImmersionLowerShriekBaseChange'
     (sq : CommSq g' j' j g) :
     NatTrans.CommShift (boundedConstructibleOpenImmersionLowerShriekBaseChange' Λ ℓ sq) ℤ := by
-  unfold boundedConstructibleOpenImmersionLowerShriekBaseChange'
-    boundedConstructibleOpenImmersionLowerShriekBaseChangeUnitStep'
+  rw [boundedConstructibleOpenImmersionLowerShriekBaseChange'_def]
+  unfold boundedConstructibleOpenImmersionLowerShriekBaseChangeUnitStep'
     boundedConstructibleOpenImmersionLowerShriekBaseChangeSquareStep'
     boundedConstructibleOpenImmersionLowerShriekBaseChangeCounitStep'
   dsimp only [Functor.squareTransport, Iso.trans_hom, Functor.isoWhiskerLeft_hom,

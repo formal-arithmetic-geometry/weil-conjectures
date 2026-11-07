@@ -107,7 +107,7 @@ noncomputable def boundedConstructibleUpperShriekIsoUpperStar_padicIntegers :
 (`boundedConstructibleUpperShriekIsoUpperStar_padicIntegers` and
 `Etale.rightDerivedUpperShriekIsoOfIsOpenImmersion`), and reduction commutes with pullback
 (`etaleReductionUpperStarIso`). -/
-noncomputable def etaleReductionUpperShriekIsoOfIsOpenImmersion :
+noncomputable irreducible_def etaleReductionUpperShriekIsoOfIsOpenImmersion :
     have := HasCompactification.of_over j
     PadicIntegersRingObj.boundedConstructibleUpperShriek ℓ E j ⋙ etaleReduction ℓ E n U ≅
       etaleReduction ℓ E n X ⋙
