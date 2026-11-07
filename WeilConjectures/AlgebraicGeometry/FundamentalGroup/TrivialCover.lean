@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Representable
+public import WeilConjectures.ConstructibleSheaf.FreeLifting
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Gluing
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Finite
 
@@ -119,9 +120,6 @@ end SigmaLift
 namespace Etale
 
 variable {Y : Scheme.{u}} {S : Type u}
-
-instance (W : Scheme.{u}) (S : Type u) : AlgebraicGeometry.Etale (Sigma.desc fun _ : S ↦ 𝟙 W) :=
-  IsZariskiLocalAtSource.sigmaDesc fun _ ↦ inferInstance
 
 /-- The trivial cover `∐_{s ∈ S} W ⟶ W` of an étale `Y`-scheme `W`, as an object over `W` in
 the small étale site of `Y`. -/

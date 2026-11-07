@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.AdditiveCharacters
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.CurvePairing
 public import WeilConjectures.GroupTheory.TateModuleDual
+public import WeilConjectures.TateTwist.TateModuleTrivialization
 
 /-!
 # `lim_n H¹(C, ℤ/ℓⁿ)` is the dual of the Tate module of the Picard group
@@ -74,9 +75,6 @@ lemma coe_picTorsionByPowEquiv_symm_apply (n : ℕ)
     (y : AddSubgroup.torsionBy (Additive X.Pic) ((l : ℤ) ^ n)) :
     ((picTorsionByPowEquiv X l n).symm y : Additive X.Pic) = y :=
   rfl
-
-instance neZero_pow_of_prime (n : ℕ) : NeZero (l ^ n) :=
-  ⟨pow_ne_zero _ (Fact.out : l.Prime).ne_zero⟩
 
 variable [GeometricallyIntegral (X ↘ Spec (.of k))] [Nonempty X]
 
