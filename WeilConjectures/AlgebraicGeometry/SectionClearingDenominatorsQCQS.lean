@@ -111,8 +111,8 @@ theorem exists_tensorPowSection_eq_restrict_qcqs [CompactSpace X]
       (F ⊗ L.tensorPow a).presheaf.map (homOfLE (hP.trans (X.basicOpen_le _))).op (u₁ j) =
         tmulSection (F.presheaf.map (homOfLE (hP.trans (hDle j))).op t)
           (tensorPowSectionOne σ a P) := by
-    rw [tmulSection_map, ← presheaf_map_homOfLE_homOfLE (X.basicOpen_le (fc j)) hP (t₁ j), ht₁,
-      map_smul, map_pow, presheaf_map_homOfLE_homOfLE,
+    rw [tmulSection_map, ← presheaf_map_homOfLE_map_homOfLE (X.basicOpen_le (fc j)) hP (t₁ j), ht₁,
+      map_smul, map_pow, presheaf_map_homOfLE_map_homOfLE,
       ← presheaf_map_tensorPowSectionOne σ a (homOfLE (hP.trans (X.basicOpen_le _))), hE',
       map_smul, map_pow, tmulSection_smul, smul_tmulSection, Scheme.presheaf_map_map_apply]
     rfl
@@ -130,7 +130,7 @@ theorem exists_tensorPowSection_eq_restrict_qcqs [CompactSpace X]
       rw [hD k]
       refine le_inf ((X.basicOpen_le g).trans inf_le_right) (hPj.trans (hDle j))
     have hd0 : (F ⊗ L.tensorPow a).presheaf.map (homOfLE (X.basicOpen_le g)).op d = 0 := by
-      rw [map_sub, presheaf_map_homOfLE_homOfLE, presheaf_map_homOfLE_homOfLE, hu₁ j hPj,
+      rw [map_sub, presheaf_map_homOfLE_map_homOfLE, presheaf_map_homOfLE_map_homOfLE, hu₁ j hPj,
         hu₁ k hPk]
       exact sub_self _
     obtain ⟨d', hd'⟩ := ((hE j a).bijective_tmulSection_right
@@ -139,7 +139,7 @@ theorem exists_tensorPowSection_eq_restrict_qcqs [CompactSpace X]
     have hd'0 : F.presheaf.map (homOfLE (X.basicOpen_le g)).op d' = 0 := by
       apply ((hE j a).bijective_tmulSection_right ((X.basicOpen_le g).trans inf_le_left)).1
       dsimp only
-      rw [zero_tmulSection, ← presheaf_map_homOfLE_homOfLE inf_le_left (X.basicOpen_le g),
+      rw [zero_tmulSection, ← presheaf_map_homOfLE_map_homOfLE inf_le_left (X.basicOpen_le g),
         ← tmulSection_map, hd', hd0]
     obtain ⟨b, hb⟩ := exists_pow_smul_eq_zero_of_isCompact F
       (QuasiSeparatedSpace.inter_isCompact (W j : Set X) (W k : Set X)
@@ -179,8 +179,8 @@ theorem exists_tensorPowSection_eq_restrict_qcqs [CompactSpace X]
     exact TopologicalSpace.Opens.mem_iSup.2 ⟨j, hj, hx⟩
   · have hu' : (F ⊗ L.tensorPow (a + b')).presheaf.map (homOfLE (le_top : W j ≤ ⊤)).op u =
         v j := hu j
-    refine (presheaf_map_homOfLE_homOfLE _ _ _).trans
-      ((presheaf_map_homOfLE_homOfLE le_top inf_le_left u).symm.trans ?_)
+    refine (presheaf_map_homOfLE_map_homOfLE _ _ _).trans
+      ((presheaf_map_homOfLE_map_homOfLE le_top inf_le_left u).symm.trans ?_)
     rw [hu', ← Hom.app_presheaf_map, hu₁ j (hD j).ge, mulTensorPowSection_app_tmulSection,
       tmulSection_map, presheaf_map_tensorPowSectionOne]
 
