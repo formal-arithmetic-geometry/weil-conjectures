@@ -264,7 +264,6 @@ variable {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
   (A : CoefficientSystemOrdinaryImage O t L R adj)
   (E : CoefficientSystemDerivedImage O t L R adj A PW PV)
 
-set_option maxHeartbeats 1000000 in
 -- The nested transpose exposes the underlying sheaf functors through several quotients.
 private theorem insertion_ext {m n : ℕ} (h : n ≤ m)
     (M : coefficientLevelModules (J := J) O t m) (N : coefficientLevelModules (J := K) O t n)
@@ -290,7 +289,7 @@ private theorem insertion_ext {m n : ℕ} (h : n ≤ m)
   erw [← adj.homEquiv_naturality_left, ← adj.homEquiv_naturality_left]
   exact congrArg (adj.homEquiv _ _) he
 
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 400000 in
 -- The nested transpose exposes the underlying sheaf functors through several quotients.
 private theorem insertion_ext_double {r m n : ℕ} (h₁ : m ≤ r) (h₂ : n ≤ m)
     (M : coefficientLevelModules (J := J) O t r) (N : coefficientLevelModules (J := K) O t n)
