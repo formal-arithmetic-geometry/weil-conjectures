@@ -9,6 +9,10 @@ on:
       - ".github/workflows/docs.yml"
       - "docbuild/**"
   workflow_dispatch:
+    inputs:
+      threads:
+        description: "LEAN_NUM_THREADS for the build and the documentation"
+        default: "10"
 
 permissions:
   contents: read
@@ -24,10 +28,12 @@ env:
 
 jobs:
   docs:
-    # big-server (Bin Wu's 256-core machine): a 2-thread GitHub-hosted runner did not finish the
-    # documentation within the 6 h job limit.
-    runs-on: [self-hosted, big-server]
-    timeout-minutes: 355
+    # Our own runner on fuxi (16 vCPU, 40 GiB): it has a C compiler, which doc-gen4's
+    # dependencies need and big-server lacks. Self-hosted jobs may run for days, not 6 h.
+    runs-on: [self-hosted, fuxi]
+    timeout-minutes: 1440
+    env:
+      THREADS: ${{ inputs.threads || '10' }}
     steps:
       # History, so that `lake cache get` can look for cached revisions behind HEAD.
       - uses: actions/checkout@v5
@@ -74,7 +80,7 @@ jobs:
       # Should compile next to nothing; how much it does compile is part of the test.
       - name: Build the project
         env:
-          LEAN_NUM_THREADS: "48"
+          LEAN_NUM_THREADS: ${{ env.THREADS }}
           LAKE_NO_CACHE: "true"
           LAKE_ARTIFACT_CACHE: "false"
         run: |
@@ -127,13 +133,23 @@ jobs:
         env:
           LAKE_NO_CACHE: "true"
           LAKE_ARTIFACT_CACHE: "false"
-          LEAN_NUM_THREADS: "48"
+          LEAN_NUM_THREADS: ${{ env.THREADS }}
           DOCGEN_SRC: github
         run: |
           set -o pipefail
           start=$(date +%s)
+          # Memory, once a minute, to see how many threads the runner can afford.
+          ( while sleep 60; do
+              used=$(free -m | awk '/Mem/{print $3}')
+              top=$(ps -eo rss,args --sort=-rss | awk '/[b]in\/lean|doc-gen4/{printf "%.1f", $1/1048576; exit}')
+              echo "$(( $(date +%s) - start ))s used=${used}MiB biggest=${top:-0}GiB" >> "$RUNNER_TEMP/mem.log"
+            done ) &
+          sampler=$!
           lake build WeilConjectures:docs 2>&1 | tee "$RUNNER_TEMP/docs.log" || true
           echo "jobs by kind: $(grep -oE "Built [A-Za-z]+" "$RUNNER_TEMP/docs.log" | sort | uniq -c | sort -rn | head -5 | tr "\n" " ")"
+          kill "$sampler" 2>/dev/null || true
+          echo "memory: peak used $(sort -t= -k2 -n "$RUNNER_TEMP/mem.log" | awk -F"used=" '{print $2}' | sort -n | tail -1), biggest process $(awk -F"biggest=" '{print $2}' "$RUNNER_TEMP/mem.log" | sort -n | tail -1) (threads: $THREADS)"
+          tail -3 "$RUNNER_TEMP/mem.log"
           echo "docs built in $(( $(date +%s) - start ))s"
           tail -1 "$RUNNER_TEMP/docs.log"
 
