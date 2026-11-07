@@ -77,45 +77,6 @@ def resolvedModuleDirectImage (g : X ⟶ Y) :
   CochainComplex.kInjectiveResolutionFunctor.{u} (SheafOfModules.{u} (moduleRings X)) ⋙
     (moduleDirectImage g).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q
 
-/-- Resolved direct image inverts quasi-isomorphisms.
-Source: Stacks, Tag 079V (blueprint: def-pc-ringed-spaces-derived-direct-image).
-Proof: naturality of the resolution map and two-out-of-three show that I(s) is a
-quasi-isomorphism when s is one. Both its endpoints are K-injective. By
-`CochainComplex.IsKInjective.quasiIso_iff` (lem-weil-pbc-kinjective-hom-derived),
-I(s) is a homotopy equivalence. Additive direct image preserves this equivalence,
-and the target localization therefore sends it to an isomorphism. -/
-theorem resolvedModuleDirectImage_inverts (g : X ⟶ Y) :
-    (HomologicalComplex.quasiIso (SheafOfModules.{u} (moduleRings X))
-      (ComplexShape.up ℤ)).IsInvertedBy (resolvedModuleDirectImage g) := by
-  intro K L s hs
-  let C := SheafOfModules.{u} (moduleRings X)
-  let I := CochainComplex.kInjectiveResolutionFunctor.{u} C
-  let η := CochainComplex.toKInjectiveResolution.{u} C
-  have hη (M : CochainComplex C ℤ) : QuasiIso (η.app M) :=
-    (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} C M).2
-  have : QuasiIso s := hs
-  have : IsIso (DerivedCategory.Q.map s) := inferInstance
-  have : QuasiIso (η.app K ≫ I.map s) := by
-    rw [← η.naturality s]
-    let _ := hη L
-    change QuasiIso (s ≫ η.app L)
-    infer_instance
-  let _ := hη K
-  have : QuasiIso (I.map s) := by
-    exact (quasiIso_iff_comp_left (η.app K) (I.map s)).mp inferInstance
-  have hi : IsIso ((HomotopyCategory.quotient C (ComplexShape.up ℤ)).map (I.map s)) :=
-    HomotopyCategory.quotient_inverts_homotopyEquivalences _ _ _
-      ((CochainComplex.IsKInjective.quasiIso_iff (I.map s)).mp inferInstance)
-  change IsIso (DerivedCategory.Q.map
-    (((moduleDirectImage g).mapHomologicalComplex (ComplexShape.up ℤ)).map (I.map s)))
-  have : IsIso ((DerivedCategory.Qh).map
-    (((moduleDirectImage g).mapHomotopyCategory (ComplexShape.up ℤ)).map
-      ((HomotopyCategory.quotient C (ComplexShape.up ℤ)).map (I.map s)))) := by
-    infer_instance
-  exact (NatIso.isIso_map_iff
-    (DerivedCategory.quotientCompQhIso _)
-    (((moduleDirectImage g).mapHomologicalComplex (ComplexShape.up ℤ)).map (I.map s))).mp
-      this
 
 /-- The unbounded derived direct image: the right derived functor
 `CategoryTheory.Functor.rightDerivedFunctor` (the landed unbounded right derived functor
@@ -167,20 +128,5 @@ theorem derivedModuleDirectImageFactorization (g : X ⟶ Y) :
   exact ⟨asIso (Functor.whiskerRight γ F.rightDerivedFunctor) ≪≫
     (asIso (Functor.whiskerLeft I β)).symm⟩
 
-/-- Any K-injective resolution computes the same derived direct image.
-Source: Stacks, Tag 079V (blueprint: def-pc-ringed-spaces-derived-direct-image).
-Proof: the bijection `CochainComplex.IsKInjective.Qh_map_bijective` lifts the
-isomorphism QI(K) to QJ to a homotopy class I(K) to J. Its representative is a
-quasi-isomorphism and therefore a homotopy equivalence by `quasiIso_iff`.
-Apply additive direct image and Q, and compose with the defining factorization
-(equivalently: the unit of the right derived functor is an isomorphism at J). -/
-theorem derivedModuleDirectImage_computed_by_resolution (g : X ⟶ Y)
-    {K J : CochainComplex (SheafOfModules.{u} (moduleRings X)) ℤ}
-    (s : K ⟶ J) [QuasiIso s] [J.IsKInjective] :
-    Nonempty ((derivedModuleDirectImage g).obj (DerivedCategory.Q.obj K) ≅
-      DerivedCategory.Q.obj
-        (((moduleDirectImage g).mapHomologicalComplex (ComplexShape.up ℤ)).obj J)) := by
-  exact ⟨(derivedModuleDirectImage g).mapIso (asIso (DerivedCategory.Q.map s)) ≪≫
-    (moduleDirectImage g).rightDerivedFunctorObjQIso J⟩
 
 end AlgebraicGeometry.RingedSpace

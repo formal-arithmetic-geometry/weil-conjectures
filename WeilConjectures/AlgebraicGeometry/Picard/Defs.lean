@@ -302,20 +302,6 @@ lemma whiskerLeft_toPicardFunctor_picardFunctorIsoOfIsPullback_hom (h : IsPullba
     Functor.mapIso_hom, Functor.mapIso_hom]
   rfl
 
-/-- **The canonical base change isomorphism on classes.** The isomorphism
-`AlgebraicGeometry.picardFunctorIsoOfIsPullback` sends the class of an invertible module `ℒ` on
-`X ×_S T` to the class of its pullback along `X' ×_{S'} T ≅ X ×_S T`.
-
-(blueprint: `lem-pd-picard-base-change`) -/
-lemma picardFunctorIsoOfIsPullback_hom_app_toPicardFunctor (h : IsPullback g' f' f g)
-    (T : (Over S')ᵒᵖ) (L : (picardPresheaf f).obj ((Over.map g).op.obj T)) :
-    (picardFunctorIsoOfIsPullback h).hom.app T ((toPicardFunctor f).app _ L) =
-      (toPicardFunctor f').app T (Pic.map (pullbackIsoOfIsPullback h T.unop).hom L) := by
-  have h' := NatTrans.congr_app (whiskerLeft_toPicardFunctor_picardFunctorIsoOfIsPullback_hom h) T
-  simp only [NatTrans.comp_app, Functor.whiskerLeft_app] at h'
-  rw [← picardPresheafIsoOfIsPullback_hom_app]
-  rw [← ConcreteCategory.comp_apply, ← h', ConcreteCategory.comp_apply]
-  rfl
 
 end BaseChange
 
@@ -415,39 +401,6 @@ end Scheme.Pic
 
 end Pic
 
-/-- **`Pic_{X/S,σ}` is a subfunctor of the Picard presheaf.** For a morphism `i : V ⟶ U` of
-`S`-schemes, pulling back a class of `Pic (X_U)` that is trivial along `σ_U` gives a class of
-`Pic (X_V)` that is trivial along `σ_V`, since `σ_U ∘ i = (X ×_S i) ∘ σ_V`.
-
-(blueprint: `lem-pc-sigma-subfunctor`, `rem-ptr-pc-pic-sigma-functor-8`) -/
-theorem picardPresheaf_map_mem_picardFunctorNormalized (f : X ⟶ S) (σ : S ⟶ X)
-    (hσ : σ ≫ f = 𝟙 S) {U V : (Over S)ᵒᵖ} (i : U ⟶ V) {L : (picardPresheaf f).obj U}
-    (hL : L ∈ (picardFunctorNormalized f σ hσ).obj U) :
-    (picardPresheaf f).map i L ∈ (picardFunctorNormalized f σ hσ).obj V :=
-  (picardFunctorNormalized f σ hσ).map i hL
-
-/-- **The `k`-points of `Pic_{X/k,σ}`.** Let `X` be a scheme over a field `k` with a rational
-point `σ`. Then `Pic_{X/k,σ}(k) = Pic (X)`: every class of `Pic (X_k)` is trivial along
-`σ_k : Spec k ⟶ X_k`, the Picard group of `Spec k` being trivial, and `X_k = X ×_k k ≅ X`.
-
-(blueprint: `lem-pc-sigma-k-points`) -/
-theorem nonempty_picardFunctorNormalized_obj_equiv_pic {k : Type u} [Field k]
-    (f : X ⟶ Spec (.of k)) (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ f = 𝟙 _) :
-    Nonempty ((picardFunctorNormalized f σ hσ).obj (Opposite.op (Over.mk (𝟙 _))) ≃ X.Pic) := by
-  let e : Limits.pullback f (Over.mk (𝟙 (Spec (.of k)))).hom ≅ X :=
-    asIso (Limits.pullback.fst f (𝟙 _))
-  have hmem (L : (picardPresheaf f).obj (Opposite.op (Over.mk (𝟙 _)))) :
-      L ∈ (picardFunctorNormalized f σ hσ).obj (Opposite.op (Over.mk (𝟙 _))) :=
-    Subsingleton.elim (α := (Spec (.of k)).Pic) _ _
-  refine ⟨(Equiv.subtypeUnivEquiv hmem).trans
-    { toFun := Pic.map e.inv
-      invFun := Pic.map e.hom
-      left_inv := fun L ↦ ?_
-      right_inv := fun L ↦ ?_ }⟩
-  · change Pic.map e.hom (Pic.map e.inv L) = L
-    rw [← Pic.map_comp, e.hom_inv_id, Pic.map_id]
-  · change Pic.map e.inv (Pic.map e.hom L) = L
-    rw [← Pic.map_comp, e.inv_hom_id, Pic.map_id]
 
 /-- **The `k`-points of `Pic_{X/k,σ}`**, as a canonical bijection
 `Pic_{X/k,σ}(k) ≃ Pic (X)`: every class of `Pic (X_k)` is `σ`-normalized since `Pic (Spec k)` is
@@ -642,60 +595,11 @@ theorem exists_iso_tensorObj_of_toPicardFunctor_app_eq (f : X ⟶ S)
   exact exists_iso_tensorObj_of_pic_map_eq f hf a (fppfPrecoverage_le_fpqcPrecoverage _ hR) L L'
     fun i ↦ (Sieve.overEquiv_iff _ _).1 (hle _ _ (Presieve.ofArrows.mk i))
 
-/-- **Exactness of the Picard sequence in the middle.** Assume that `𝒪_T ⟶ f_{T,*} 𝒪_{X_T}` is an
-isomorphism for every `T` in `(Sch/S)_fppf`.  Two classes `ℒ, ℒ' ∈ Pic (X_T)` have the same image
-in `Pic_{X/S}(T)` if and only if `ℒ ≅ ℒ' ⊗ f_T^* 𝒩` for an invertible `𝒪_T`-module `𝒩`: the
-kernel of `Pic (X_T) ⟶ Pic_{X/S}(T)` is the image of `f_T^* : Pic T ⟶ Pic (X_T)` (Stacks 0B9M).
-Together with `AlgebraicGeometry.injective_pic_map_snd` this is the exactness of
-`0 → Pic T → Pic (X_T) → Pic_{X/S}(T)`.
-
-(blueprint: `lem-pc-pic-exact`) -/
-theorem toPicardFunctor_app_eq_iff (f : X ⟶ S)
-    (hf : ∀ T : Over S, IsIso (pushforwardUnitMap (Limits.pullback.snd f T.hom))) {T : Over S}
-    (L L' : (Limits.pullback f T.hom).Pic) :
-    (toPicardFunctor f).app (.op T) L = (toPicardFunctor f).app (.op T) L' ↔
-      ∃ N : T.left.Pic, Nonempty ((fromSkeleton _).obj L.val ≅ (fromSkeleton _).obj L'.val ⊗
-        (Modules.pullback (Limits.pullback.snd f T.hom)).obj ((fromSkeleton _).obj N.val)) :=
-  ⟨exists_iso_tensorObj_of_toPicardFunctor_app_eq f hf L L',
-    fun ⟨N, ⟨e⟩⟩ ↦ toPicardFunctor_app_eq_of_iso f L L' N e⟩
 
 end Exactness
 
 section Split
 
-/-- **The pullback map `Pic T → Pic (X_T)` is injective.** This is the left-exactness half of
-the split exact sequence `0 → Pic T → Pic (X_T) → Pic_{X/S}(T) → 0`, under the hypothesis that
-the canonical map `𝒪_T ⟶ f_{T,*} 𝒪_{X_T}` is an isomorphism for every `T` in `(Sch/S)_fppf`
-(for `X ⟶ Spec k` a smooth projective curve with a `k`-point this is `H⁰(X, 𝒪_X) = k` together
-with flat base change).
-
-(blueprint: `sk-prop-picard-pic-split`) -/
-theorem injective_pic_map_snd (f : X ⟶ S)
-    (hf : ∀ T : Over S, IsIso (pushforwardUnitMap (Limits.pullback.snd f T.hom)))
-    (T : Over S) :
-    Function.Injective (Pic.map (Limits.pullback.snd f T.hom)) := by
-  -- By the projection formula `f_{T,*} f_T^* 𝒩 ≅ f_{T,*} 𝒪_{X_T} ⊗ 𝒩 ≅ 𝒩`, so `𝒩` is recovered
-  -- from its pullback.
-  intro N N' h
-  have := N.isInvertible
-  have := N'.isInvertible
-  have := Modules.IsInvertible.of_sheafOfModules ((fromSkeleton _).obj N.val)
-  have := Modules.IsInvertible.of_sheafOfModules ((fromSkeleton _).obj N'.val)
-  obtain ⟨e⟩ := toSkeleton_eq_toSkeleton_iff.1 (congrArg Pic.val h)
-  obtain ⟨e₁⟩ := Modules.nonempty_pushforward_pullback_iso_self _
-    (asIso (pushforwardUnitMap (Limits.pullback.snd f T.hom))).symm ((fromSkeleton _).obj N.val)
-  obtain ⟨e₂⟩ := Modules.nonempty_pushforward_pullback_iso_self _
-    (asIso (pushforwardUnitMap (Limits.pullback.snd f T.hom))).symm ((fromSkeleton _).obj N'.val)
-  exact Pic.eq_iff_nonempty_iso.2 ⟨e₁.symm ≪≫ (Modules.pushforward _).mapIso e ≪≫ e₂⟩
-
-/-- **The pullback map `Pic T → Pic (X_T)` is split by `σ_T^*`.**
-
-(blueprint: `sk-prop-picard-pic-split`) -/
-theorem pic_map_sectionBaseChange_snd (f : X ⟶ S) (σ : S ⟶ X) (hσ : σ ≫ f = 𝟙 S)
-    (_hf : ∀ T : Over S, IsIso (pushforwardUnitMap (Limits.pullback.snd f T.hom)))
-    (T : Over S) (N : T.left.Pic) :
-    Pic.map (sectionBaseChange f σ hσ T) (Pic.map (Limits.pullback.snd f T.hom) N) = N := by
-  rw [← Pic.map_comp, sectionBaseChange_snd, Pic.map_id]
 
 /-- Every class of the Picard presheaf is Zariski-locally `σ`-normalized: the pullback `σ_T^* ℒ`
 is trivial on the members `U` of a Zariski covering of `T`, which is an fppf covering, and there
@@ -935,34 +839,6 @@ theorem bijective_toPicardFunctor_picardFunctorNormalized (f : X ⟶ S) (σ : S 
   have : IsIso (φ.hom.app (.op T)) := inferInstance
   exact (isIso_iff_bijective _).1 this
 
-/-- **`Pic_{X/S,σ} ⟶ Pic_{X/S}` is an isomorphism.** If `f` has a section `σ` and
-`𝒪_T ⟶ f_{T,*} 𝒪_{X_T}` is an isomorphism for every `T` over `S`, then the inclusion of the
-`σ`-normalized Picard functor followed by the sheafification map is an isomorphism of presheaves:
-it is bijective on sections by
-`AlgebraicGeometry.bijective_toPicardFunctor_picardFunctorNormalized`.
-
-(blueprint: `thm-pc-pic-split`, `cor-pc-sigma-pic-iso`) -/
-theorem isIso_picardFunctorNormalized_ι_comp_toPicardFunctor (f : X ⟶ S) (σ : S ⟶ X)
-    (hσ : σ ≫ f = 𝟙 S)
-    (hf : ∀ T : Over S, IsIso (pushforwardUnitMap (Limits.pullback.snd f T.hom))) :
-    IsIso ((picardFunctorNormalized f σ hσ).ι ≫ toPicardFunctor f) := by
-  rw [NatTrans.isIso_iff_isIso_app]
-  intro T
-  rw [isIso_iff_bijective]
-  exact bijective_toPicardFunctor_picardFunctorNormalized f σ hσ hf T.unop
-
-/-- **`Pic_{X/S,σ}` is representable if and only if `Pic_{X/S}` is**, under the hypotheses of
-`AlgebraicGeometry.isIso_picardFunctorNormalized_ι_comp_toPicardFunctor`.
-
-(blueprint: `cor-pc-sigma-pic-iso`) -/
-theorem isRepresentable_picardFunctorNormalized_iff (f : X ⟶ S) (σ : S ⟶ X)
-    (hσ : σ ≫ f = 𝟙 S)
-    (hf : ∀ T : Over S, IsIso (pushforwardUnitMap (Limits.pullback.snd f T.hom))) :
-    (picardFunctorNormalized f σ hσ).toFunctor.IsRepresentable ↔
-      (picardFunctor f).obj.IsRepresentable := by
-  have := isIso_picardFunctorNormalized_ι_comp_toPicardFunctor f σ hσ hf
-  let e := asIso ((picardFunctorNormalized f σ hσ).ι ≫ toPicardFunctor f)
-  exact ⟨fun _ ↦ isRepresentable_of_natIso _ e, fun _ ↦ isRepresentable_of_natIso _ e.symm⟩
 
 /-- **`Pic_{X/S}` is the fppf sheafification of `Pic_{X/S,σ}`.** The inclusion
 `Pic_{X/S,σ} ⊆ T ↦ Pic (X_T)` is locally bijective for the fppf topology (it is injective, and
@@ -989,15 +865,6 @@ noncomputable def sheafifyPicardFunctorNormalizedIso (f : X ⟶ S) (σ : S ⟶ X
   asIso ((presheafToSheaf (fppfTopology.over S) (Type (u + 1))).map
     (picardFunctorNormalized f σ hσ).ι)
 
-/-- The sheafification map of `Pic_{X/S,σ}`, followed by
-`AlgebraicGeometry.sheafifyPicardFunctorNormalizedIso`, is the inclusion
-`Pic_{X/S,σ} ⊆ T ↦ Pic (X_T)` followed by the sheafification map of the Picard presheaf. -/
-lemma toSheafify_comp_sheafifyPicardFunctorNormalizedIso_hom (f : X ⟶ S) (σ : S ⟶ X)
-    (hσ : σ ≫ f = 𝟙 S) :
-    toSheafify (fppfTopology.over S) (picardFunctorNormalized f σ hσ).toFunctor ≫
-        (sheafifyPicardFunctorNormalizedIso f σ hσ).hom.hom =
-      (picardFunctorNormalized f σ hσ).ι ≫ toPicardFunctor f :=
-  (toSheafify_naturality _ _).symm
 
 /-- **The splitting of the sequence**: `ℒ ↦ (σ_T^* ℒ, [ℒ])` is a bijection
 `Pic (X_T) ≃ Pic T × Pic_{X/S}(T)`, i.e. `Pic (X_T) = Pic T ⊕ Pic_{X/S,σ}(T)`.

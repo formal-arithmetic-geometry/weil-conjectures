@@ -146,30 +146,6 @@ lemma relativeDifferentialsHomEquiv_apply {M : X.Modules} (g : f.relativeDiffere
     f.relativeDifferentialsHomEquiv M g = f.relativeDifferentialsDerivation.postcomp g.val :=
   rfl
 
-/-- If `f⁻¹𝒪_S ⟶ 𝒪_X` is surjective on sections, then `Ω¹_{X/S} = 0`. -/
-lemma isZero_relativeDifferentials_of_surjective
-    (h : ∀ U, Function.Surjective (f.pullbackPresheafToPresheaf.app U)) :
-    IsZero f.relativeDifferentials := by
-  rw [IsZero.iff_id_eq_zero]
-  apply (f.relativeDifferentialsHomEquiv _).injective
-  ext U x
-  obtain ⟨a, rfl⟩ := h U x
-  simp only [relativeDifferentialsHomEquiv_apply,
-    PresheafOfModulesOfCommRing.Derivation.postcomp_d_apply]
-  erw [PresheafOfModulesOfCommRing.Derivation'.d_app]
-  simp
-
-/-- The sheaf of relative differentials of an open immersion vanishes. -/
-lemma isZero_relativeDifferentials [IsOpenImmersion f] : IsZero f.relativeDifferentials := by
-  refine f.isZero_relativeDifferentials_of_surjective fun U y ↦ ?_
-  obtain ⟨z, rfl⟩ := (ConcreteCategory.bijective_of_isIso (f.appIso U.unop).hom).2 y
-  rw [appIso_hom', appLE_eq_pullbackPresheafToPresheaf_app]
-  exact ⟨_, rfl⟩
-
-variable (X) in
-/-- The sheaf of relative differentials of the identity morphism vanishes: `Ω¹_{X/X} = 0`. -/
-lemma isZero_relativeDifferentials_id : IsZero (𝟙 X : X ⟶ X).relativeDifferentials :=
-  isZero_relativeDifferentials _
 
 /-- Every section of `f⁻¹𝒪_S` over `W` comes, in `𝒪_X(W)`, from a section of `𝒪_S` over some
 open `V` with `W ⊆ f⁻¹ V`: the colimit defining `f⁻¹𝒪_S` is filtered. -/

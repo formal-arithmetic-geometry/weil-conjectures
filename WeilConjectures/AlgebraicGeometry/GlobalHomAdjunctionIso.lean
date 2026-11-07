@@ -170,15 +170,6 @@ variable {C : Type uC} {D : Type uD} {E : Type uE} {B : Type uB}
   [Category.{vC} C] [Category.{vD} D] [Category.{vE} E] [Category.{vB} B]
   (R : C ⥤ D) (G : D ⥤ E) (GX : C ⥤ B) (S : B ⥤ E)
   (e : R ⋙ G ≅ GX ⋙ S)
-/-- Transport a natural comparison through a Leray isomorphism.
-Source: Stacks, Tag 0B6I (blueprint: lem-pc-global-hom-adjunction). -/
-private theorem lerayNaturality {U U' : C} {V V' : D} (u : U ⟶ U') (v : V ⟶ V')
-    (q : R.obj U ⟶ V) (q' : R.obj U' ⟶ V') (h : R.map u ≫ q' = q ≫ v) :
-    S.map (GX.map u) ≫ e.inv.app U' ≫ G.map q' =
-      e.inv.app U ≫ G.map q ≫ G.map v := by
-  have he := e.inv.naturality u
-  dsimp only [Functor.comp_map] at he
-  rw [← Category.assoc, he, Category.assoc, ← G.map_comp, h, G.map_comp]
 
 end LerayNaturality
 
@@ -364,7 +355,6 @@ variable [∀ Z : Scheme.{u},
 variable [∀ (R : Type u) [Ring R], HasDerivedCategory.{w} (ModuleCat.{u} R)]
 
 
-
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The same pinned derived adjunction as the canonical base-change map.
@@ -464,85 +454,6 @@ theorem exists_schemeHomDirectImageComparison {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (schemeDerivedTensorHomEquiv X) (schemeDerivedTensorHomEquiv Y)
     (schemeHomTensorHom_naturality X) (schemeHomTensorHom_naturality Y)
 
-omit [∀ (R : Type u) [Ring R], HasDerivedCategory.{w} (ModuleCat.{u} R)] in
-/-- The fixed direct-image internal-Hom comparison also satisfies the mate equation
-when the pullback adjunction and tensor iso are transported together. In particular
-this applies to the unique change from the composition counit to the original one.
-Source: Stacks, Tags 08I3, 06YJ and 0B6I (blueprint: lem-pc-global-hom-adjunction).
-Proof: tensor-Hom naturality with identity maps in the last two variables gives
-naturality of evaluation in its test object. Apply the formal counit-transport
-calculation to identify the transported mate with the original mate. The defining
-equation of the chosen direct-image comparison then gives the assertion. -/
-theorem schemeHomDirectImageComparison_counit_transport
-    {X Y : Scheme.{u}} (f : X ⟶ Y) (δ : derivedPullback f ≅ derivedPullback f)
-    (L M : schemeDerivedCategory X) (A : schemeDerivedCategory Y)
-    (α : A ⟶ (schemeDerivedDirectImage f).obj
-      ((derivedInternalHom (Opens.grothendieckTopology X) X.sheaf).obj (op L, M))) :
-    let p := (schemeHomPullbackAdjunction f).ofNatIsoLeft δ
-    let t := Functor.isoWhiskerLeft (tensor (schemeDerivedCategory Y)) δ.symm ≪≫
-      mixedHomTensorPullbackIso f ≪≫
-        Functor.isoWhiskerRight (NatIso.prod δ δ) (tensor (schemeDerivedCategory X))
-    let c := Classical.choose (exists_schemeHomDirectImageComparison f)
-    schemeDerivedTensorHomEquiv Y A
-        ((schemeDerivedDirectImage f).obj L) ((schemeDerivedDirectImage f).obj M)
-        (α ≫ c.app (op L, M)) =
-      p.homEquiv _ M (t.hom.app (A, (schemeDerivedDirectImage f).obj L) ≫
-        (𝟙 _ ⊗ₘ p.counit.app L) ≫
-          schemeDerivedTensorHomEquiv X _ L M ((p.homEquiv _ _).symm α)) := by
-  have hx : ∀ (B B' N Q : schemeDerivedCategory X) (b : B' ⟶ B)
-      (g : B ⟶ (derivedInternalHom (Opens.grothendieckTopology X) X.sheaf).obj
-        (op N, Q)),
-      schemeDerivedTensorHomEquiv X B' N Q (b ≫ g) =
-        (b ⊗ₘ 𝟙 N) ≫ schemeDerivedTensorHomEquiv X B N Q g := by
-    intro B B' N Q b g
-    have h := schemeHomTensorHom_naturality X B B' N N Q Q b (𝟙 N) (𝟙 Q) g
-    change schemeDerivedTensorHomEquiv X B' N Q
-      (b ≫ g ≫ (derivedInternalHom (Opens.grothendieckTopology X) X.sheaf).map (𝟙 _)) =
-      _ at h
-    simpa only [CategoryTheory.Functor.map_id, Category.comp_id] using h
-  exact ((Classical.choose_spec (exists_schemeHomDirectImageComparison f)) L M A α).trans
-    (internalHomMate_counit_transport
-      (derivedInternalHom (Opens.grothendieckTopology X) X.sheaf)
-      (derivedPullback f) (schemeDerivedDirectImage f) (schemeHomPullbackAdjunction f)
-      (mixedHomTensorPullbackIso f) (schemeDerivedTensorHomEquiv X) hx δ L M A α).symm
-
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-omit [∀ (R : Type u) [Ring R], HasDerivedCategory.{w} (ModuleCat.{u} R)] in
-/-- Transporting the pinned adjunction along a counit comparison gives the
-representative Hom equation for the new counit. This can be applied to the
-original-counit comparison without choosing another adjunction.
-Source: Stacks, Tags 079W and 06YJ (blueprint: lem-pc-global-hom-adjunction).
-Proof: the transported Hom equivalence precomposes by the comparison iso.
-The counit comparison equation replaces that composite by the composition counit.
-The recorded representative equation of the legacy adjunction gives the result. -/
-theorem schemeHomPullbackAdjunction_counit_transport
-    {X Y : Scheme.{u}} (f : X ⟶ Y) (δ : derivedPullback f ≅ derivedPullback f)
-    (ε : DerivedCategory.Qh ⋙ derivedPullback f ⟶
-      (Scheme.Modules.tensorPullback f).mapHomotopyCategory (.up ℤ) ⋙
-        DerivedCategory.Qh (C := SheafOfModules.{u} (moduleRings X.toRingedSpace)))
-    (hδ : ∀ N : HomotopyCategory
-        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (.up ℤ),
-      δ.hom.app (DerivedCategory.Qh.obj N) ≫ ε.app N =
-        (SingleComplexBaseChange.counit f).app N)
-    (N : HomotopyCategory (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (.up ℤ))
-    (K : HomotopyCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ))
-    (a : ((Scheme.Modules.tensorPullback f).mapHomotopyCategory (.up ℤ)).obj N ⟶ K) :
-    ((schemeHomPullbackAdjunction f).ofNatIsoLeft δ).homEquiv
-        (DerivedCategory.Qh.obj N) (DerivedCategory.Qh.obj K)
-        (ε.app N ≫ DerivedCategory.Qh.map a) =
-      (DerivedCategory.Qh
-        (C := SheafOfModules.{u} (moduleRings Y.toRingedSpace))).map
-        (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f)).mapHomotopyCategory
-          (.up ℤ)).homEquiv N K a) ≫
-        (RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerivedFunctorUnit.app K := by
-  rw [Adjunction.homEquiv_ofNatIsoLeft_apply, ← Category.assoc, hδ]
-  unfold schemeHomPullbackAdjunction SingleComplexBaseChange.counit
-  exact (Classical.choose_spec (exists_schemeDerivedAdjunction f
-    (hAdd := (Classical.choose exists_derivedPullbackComposition) f)
-    ((Classical.choose (Classical.choose_spec exists_derivedPullbackComposition)) f)
-    ((Classical.choose (Classical.choose_spec
-      (Classical.choose_spec exists_derivedPullbackComposition))) f))) N K a
 
 /-- The canonical global direct-image Hom comparison: Leray followed by the
 internal-Hom comparison defined by the evaluation mate equation.

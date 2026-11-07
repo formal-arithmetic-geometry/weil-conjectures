@@ -152,14 +152,5 @@ theorem ringKrullDim_le_of_smoothOfRelativeDimension {K : Type u} [Field K] {X :
   exact (IsHomeomorph.topologicalKrullDim_eq _ X.isoSpec.hom.homeomorph.isHomeomorph).symm.trans_le
     (topologicalKrullDim_le_of_smoothOfRelativeDimension f n)
 
-/-- The affine fibres of a morphism `h` smooth of relative dimension `n` have Krull dimension at
-most `n`: the fibre `h.fiber y` is smooth of relative dimension `n` over the residue field of
-`y`, by base change. -/
-theorem Scheme.Hom.ringKrullDim_fiber_le {U Y : Scheme.{u}} (h : U ⟶ Y) (n : ℕ)
-    [SmoothOfRelativeDimension n h] (y : Y) [IsAffine (h.fiber y)] :
-    ringKrullDim Γ(h.fiber y, ⊤) ≤ n := by
-  have : SmoothOfRelativeDimension n (h.fiberToSpecResidueField y) :=
-    inferInstanceAs (SmoothOfRelativeDimension n (pullback.snd _ _))
-  exact ringKrullDim_le_of_smoothOfRelativeDimension (h.fiberToSpecResidueField y) n
 
 end AlgebraicGeometry

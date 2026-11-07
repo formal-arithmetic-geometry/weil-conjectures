@@ -94,21 +94,6 @@ theorem isPullback_of_isSchemeTheoreticallyDominant (r : c.Refinement d)
   have : IsIso t := IsClosedImmersion.isIso_iff_ker_eq_bot.mpr t.ker_eq_bot
   exact IsPullback.of_iso_pullback ⟨hcomm⟩ (asIso t) hfst hsnd
 
-/-- The dense refinement of a compactification of a quasi-compact morphism satisfies both
-instance hypotheses of
-`AlgebraicGeometry.Compactification.Refinement.isPullback_of_isSchemeTheoreticallyDominant`
-with no argument: its open immersion is the factor map through the scheme-theoretic image,
-hence scheme-theoretically dominant, and it is quasi-compact because `f` is. -/
-theorem isPullback_denseRefinement (c : Compactification f) [QuasiCompact f]
-    (r : c.denseRefinement.Refinement d) :
-    IsPullback c.denseRefinement.i (𝟙 X) r.hom d.i := by
-  have hqc : QuasiCompact c.i := c.quasiCompact_openImmersion ‹_›
-  have : IsSchemeTheoreticallyDominant c.denseRefinement.i :=
-    c.isSchemeTheoreticallyDominant_denseRefinement_i
-  have : QuasiCompact (c.i.toImage ≫ c.i.imageι) := by
-    rw [Scheme.Hom.toImage_imageι]; exact hqc
-  have : QuasiCompact c.denseRefinement.i := QuasiCompact.of_comp c.i.toImage c.i.imageι
-  exact r.isPullback_of_isSchemeTheoreticallyDominant
 
 /-- **Cartesianness pastes along a composite of refinements**: if the squares over `X` of
 `r : c.Refinement d` and `s : d.Refinement e` are cartesian, then so is the square of the

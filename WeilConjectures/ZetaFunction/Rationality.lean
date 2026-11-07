@@ -301,40 +301,5 @@ theorem Hom.exists_int_mul_zetaSeries_eq {X : Scheme.{u}} (f : X ⟶ Spec (.of k
   rw [htop, Hom.zetaSeries_congr _ f fun n _ ↦ f.pointCount_top_ι_comp n] at h
   exact h
 
-/-- Blueprint `prop-rational-descent` (rational descent of the zeta series): the zeta series
-`Z(X₀, T) = ∑ zₙ Tⁿ` of a scheme `X₀` of finite type over a finite field has a Hankel matrix of
-finite rank over `ℚ`, i.e. the span of the shifts of its coefficient sequence is
-finite-dimensional, and `Z(X₀, T) ∈ ℚ(T)`, i.e. `B(T) Z(X₀, T) = A(T)` for rational polynomials
-with `B(0) = 1`.
-
-The blueprint states this for `X₀` smooth, proper and geometrically connected, assuming the
-Euler product, the trace-to-determinant identity and the finiteness of the Hankel rank; these
-hypotheses are theorems here and the statement holds for any `X₀` of finite type. -/
-theorem Hom.finiteDimensional_shiftSpan_zetaSeries_and_exists_rat {X : Scheme.{u}}
-    (f : X ⟶ Spec (.of k)) [LocallyOfFiniteType f] [QuasiCompact f] :
-    FiniteDimensional ℚ (shiftSpan ℚ fun n ↦ PowerSeries.coeff n f.zetaSeries) ∧
-      ∃ A B : Polynomial ℚ, B.coeff 0 = 1 ∧
-        f.zetaSeries * (B : PowerSeries ℚ) = (A : PowerSeries ℚ) := by
-  have h : ∃ A B : Polynomial ℚ, B.coeff 0 = 1 ∧
-      f.zetaSeries * (B : PowerSeries ℚ) = (A : PowerSeries ℚ) := by
-    obtain ⟨A, B, hB, hAB⟩ := f.exists_int_mul_zetaSeries_eq
-    exact ⟨A.map (Int.castRingHom ℚ), B.map (Int.castRingHom ℚ), by simp [hB], hAB⟩
-  exact ⟨(PowerSeries.exists_normalized_fraction_iff_finiteDimensional_shiftSpan _).1 h, h⟩
-
-/-- Blueprint `prop-weil-zeta-integral-rational` (the zeta series is integral and rational): the
-zeta series of a scheme `X₀` of finite type over a finite field lies in
-`(1 + T ℤ⟦T⟧) ∩ ℚ(T)`.
-
-The blueprint states this in the situation of `prop-rational-descent` (`X₀` smooth, proper and
-geometrically connected); it holds for any `X₀` of finite type. -/
-theorem Hom.exists_int_zetaSeries_and_exists_rat_mul_eq {X : Scheme.{u}}
-    (f : X ⟶ Spec (.of k)) [LocallyOfFiniteType f] [QuasiCompact f] :
-    (∃ Z : PowerSeries ℤ, PowerSeries.constantCoeff Z = 1 ∧
-      PowerSeries.map (Int.castRingHom ℚ) Z = f.zetaSeries) ∧
-      ∃ A B : Polynomial ℚ, B.coeff 0 = 1 ∧
-        f.zetaSeries * (B : PowerSeries ℚ) = (A : PowerSeries ℚ) := by
-  obtain ⟨Z, hZ⟩ := f.exists_int_zetaSeries
-  exact ⟨⟨Z, f.constantCoeff_of_map_eq_zetaSeries hZ, hZ⟩,
-    (f.finiteDimensional_shiftSpan_zetaSeries_and_exists_rat).2⟩
 
 end AlgebraicGeometry.Scheme

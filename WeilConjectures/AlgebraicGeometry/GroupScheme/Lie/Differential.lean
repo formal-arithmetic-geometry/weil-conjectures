@@ -116,12 +116,6 @@ theorem lieEquivTangent_differential (f : G ⟶ H) [IsMonHom f] (x : Lie G) :
     lieEquivTangent H (differential f x) = kerPost f (lieEquivTangent G x) :=
   lieEquivTangent_infPointsMap f x
 
-/-- The tangent point of the image of a tangent vector under a homomorphism is the image of its
-tangent point. -/
-theorem tangentPoint_differential (f : G ⟶ H) [IsMonHom f] (x : Lie G) :
-    tangentPoint (differential f x) = tangentPoint x ≫ f := by
-  simp only [tangentPoint, differential_apply, Equiv.symm_apply_apply,
-    coe_infPointsEquivTangentGroup_apply, coe_infPointsMap_apply, Category.assoc]
 
 theorem differential_congr {f g : G ⟶ H} [IsMonHom f] [IsMonHom g] (e : f = g) :
     differential f = differential g := by
@@ -148,67 +142,6 @@ theorem differential_injective (f : G ⟶ H) [IsMonHom f] [Mono f] :
   apply kerPost_injective f
   rw [← lieEquivTangent_differential, ← lieEquivTangent_differential, h]
 
-/-- If the commutators of the points of `H` with values in `k[ε, δ]/(ε², δ²)` factor through the
-subgroup scheme `f : G ⟶ H`, then the brackets of tangent vectors of `H` are tangent to `G`: the
-bracket is the mixed term of the commutator of the points `1 + εx` and `1 + δy`.
-(blueprint: `sk-i-restriction`) -/
-theorem lie_mem_range_differential_of_commutator_mem (f : G ⟶ H) [IsMonHom f] [Mono f]
-    (hf : ∀ a b : points H (DualNumber (DualNumber k)),
-      ⁅a, b⁆ ∈ (IsMonHom.monoidHom f _).range)
-    (x y : Lie H) : ⁅x, y⁆ ∈ (differential f).range := by
-  set c := ⁅tangentEps (lieEquivTangent H x), tangentDel (lieEquivTangent H y)⁆
-  obtain ⟨d, hd⟩ := hf (tangentEps (lieEquivTangent H x)).1 (tangentDel (lieEquivTangent H y)).1
-  have hd' : d ≫ f = c.1 := by
-    rw [← IsMonHom.monoidHom_apply, hd]
-    simp [c, commutatorElement_def]
-  have hd₀ : d ∈ pointsKer G (aug₂ (k := k)) := by
-    rw [mem_pointsKer]
-    apply (cancel_mono f).1
-    rw [MonObj.one_comp]
-    change (_ ≫ d) ≫ f = 1
-    rw [Category.assoc, hd']
-    exact mem_pointsKer.1 c.2
-  have hc : kerPost f ⟨d, hd₀⟩ = c := Subtype.ext hd'
-  have h₁ : kerMap fst₂ aug₁_comp_fst₂ (⟨d, hd₀⟩ : pointsKer G (aug₂ (k := k))) = 1 := by
-    apply kerPost_injective f
-    rw [← kerMap_kerPost, hc, kerMap_fst₂_commutator, map_one]
-  have h₂ : kerMap rho₂ aug₁_comp_rho₂ (⟨d, hd₀⟩ : pointsKer G (aug₂ (k := k))) = 1 := by
-    apply kerPost_injective f
-    rw [← kerMap_kerPost, hc, kerMap_rho₂_commutator, map_one]
-  obtain ⟨u, hu⟩ := exists_tangentMul_eq _ h₁ h₂
-  refine (LieHom.mem_range _ _).2 ⟨(lieEquivTangent G).symm u, ?_⟩
-  apply (lieEquivTangent H).injective
-  rw [lieEquivTangent_differential, Equiv.apply_symm_apply, lieEquivTangent_lie]
-  apply tangentMul_injective
-  rw [tangentMul, ← kerPost_tangentMap, ← tangentMul, hu, hc, tangentMul_tangentBracket]
-
-/-- If the subgroup scheme `f : G ⟶ H` contains the commutators of `H`, then the brackets of
-tangent vectors of `H` are tangent to `G`. (blueprint: `sk-i-restriction`) -/
-theorem lie_mem_range_differential_of_containsCommutators (f : G ⟶ H) [IsMonHom f] [Mono f]
-    [IsMonHom.ContainsCommutators f] (x y : Lie H) : ⁅x, y⁆ ∈ (differential f).range :=
-  lie_mem_range_differential_of_commutator_mem f (fun a b ↦ MonoidHom.mem_range.2
-    (IsMonHom.ContainsCommutators.exists_comp_eq_commutator f a b)) x y
-
-/-- The tangent vectors of a central subgroup scheme `f : G ⟶ H` are central in `Lie(H)`: for
-`x ∈ Lie(G)` and `y ∈ Lie(H)` the points `1 + εx` and `1 + δy` commute over `k[ε, δ]/(ε², δ²)`,
-so the mixed term `⁅df(x), y⁆` of their commutator vanishes. (blueprint: `sk-p-comparison`) -/
-theorem range_differential_le_center (f : G ⟶ H) [IsMonHom f]
-    (hf : ∀ (X : Over (Spec (.of k))) (a : X ⟶ G) (b : X ⟶ H), (a ≫ f) * b = b * (a ≫ f)) :
-    (differential f).range ≤ (LieAlgebra.center k (Lie H) : LieSubalgebra k (Lie H)) := by
-  rintro _ ⟨x, rfl⟩
-  change differential f x ∈ LieModule.maxTrivSubmodule k (Lie H) (Lie H)
-  rw [LieModule.mem_maxTrivSubmodule]
-  intro y
-  rw [← lie_skew, neg_eq_zero]
-  apply (lieEquivTangent H).injective
-  rw [lieEquivTangent_lie, lieEquivTangent_differential,
-    show lieEquivTangent H 0 = 1 by
-      rw [← lieEquivTangent_symm_one (G := H), Equiv.apply_symm_apply]]
-  apply tangentMul_injective
-  rw [tangentMul_tangentBracket, show tangentMul (1 : pointsKer H aug₁) = 1 from map_one _,
-    tangentEps, ← kerPost_tangentMap,
-    commutatorElement_eq_one_iff_mul_comm]
-  exact Subtype.ext (hf _ _ _)
 
 /-- The differential of an open immersion of group schemes `f : G ⟶ H` is bijective: every
 tangent vector of `H` has the same underlying map as the identity section, hence factors

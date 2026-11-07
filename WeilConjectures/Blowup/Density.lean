@@ -130,25 +130,6 @@ namespace IsAdmissible
 
 variable {X : Scheme.{u}} {U : X.Opens} (B : IsAdmissible X U)
 
-/-- **Scheme-theoretic density is preserved by admissible blow-ups** (blueprint:
-`lemma:nagata-admissible-blowup-preserves-density`; proof order item 20): if `U` is a
-quasi-compact scheme-theoretically dense open of `X`, then the inverse image of `U`
-under any `U`-admissible blow-up is scheme-theoretically dense in the total space. -/
-theorem isSchemeTheoreticallyDominant_preimage_ι [QuasiCompact U.ι]
-    [IsSchemeTheoreticallyDominant U.ι] :
-    IsSchemeTheoreticallyDominant (B.I.blowupMap ⁻¹ᵁ U).ι := by
-  have := B.I.isSchemeTheoreticallyDominant_blowupMap_preimage_compl_support
-  exact .preimage_ι_of_le B.I.blowupMap B.le_preservedOpen
-    B.I.isIso_blowupMap_restrict_support_compl
-
-/-- The blown-up scheme of an admissible blow-up of a Noetherian scheme is
-Noetherian. -/
-theorem isNoetherian_blowup [IsNoetherian X] : IsNoetherian B.I.blowup := by
-  have := B.isProper_blowupMap
-  have : IsLocallyNoetherian B.I.blowup :=
-    LocallyOfFiniteType.isLocallyNoetherian B.I.blowupMap
-  have : CompactSpace B.I.blowup := QuasiCompact.compactSpace_of_compactSpace B.I.blowupMap
-  exact ⟨⟩
 
 /-- **The preimage of the preserved open is dense in the blow-up**: the inverse image
 of the complement of the center under a `U`-admissible blow-up of a quasi-compact,
@@ -208,13 +189,6 @@ theorem dense_preimage_blowupMap_of_qcqs [CompactSpace X] [QuasiSeparatedSpace X
     congr 1
   exact Set.mem_preimage.mpr (hcomm ▸ hdD)
 
-/-- **Topological density transports through an admissible blow-up**, in the form
-consumed by the Conrad case lemmas: the inverse image open of a dense open of a
-quasi-compact, quasi-separated scheme is dense in any admissible blow-up. -/
-theorem dense_coe_preimage_blowupMap [CompactSpace X] [QuasiSeparatedSpace X]
-    {D : X.Opens} (hD : Dense (D : Set X)) :
-    Dense ((B.I.blowupMap ⁻¹ᵁ D : B.I.blowup.Opens) : Set B.I.blowup) :=
-  B.dense_preimage_blowupMap_of_qcqs hD
 
 /-- **Topological density transports through an admissible blow-up**: the inverse
 image of a dense subset of a Noetherian scheme is dense in any admissible blow-up.

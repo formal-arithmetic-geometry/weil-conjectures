@@ -94,10 +94,6 @@ lemma mem_basicOpen_iff_isUnit_val {U : (Proj 𝒜).Opens} (s : Γ(Proj 𝒜, U)
 
 variable (hf : f ∈ 𝒜 d)
 
-/-- The value of `unitToTwist hf` on a section `s` at a point `x` is `s x * f`. -/
-lemma val_unitToTwist_app_apply {U : (Proj 𝒜).Opens} (s : Γ(Proj 𝒜, U)) (x : U) :
-    (((unitToTwist hf).app U s).1 x).1 = (s.1 x).val * Localization.mk f 1 :=
-  rfl
 
 /-- On an open contained in `D₊(f)`, the section `f` of `𝒪(d)` induces a bijection from the
 functions to the sections of `𝒪(d)`. -/

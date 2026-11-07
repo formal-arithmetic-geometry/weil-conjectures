@@ -91,18 +91,6 @@ theorem isDiscreteValuationRing_stalk_of_isClosed {x : X} (hx : IsClosed {x}) :
   ⟨inferInstance, IsRegularLocalRing.isDiscreteValuationRing _
     (ringKrullDim_stalk_eq_one_of_isClosed f hx)⟩
 
-/-- **Local regularity of smooth curves.** The local rings of a smooth curve over a field are
-regular local rings, hence domains, and at closed points they are discrete valuation rings.
-
-(blueprint: `rem-pc-regularity-sc`) -/
-theorem isRegularLocalRing_stalk_and_isDiscreteValuationRing (x : X) :
-    IsRegularLocalRing (X.presheaf.stalk x) ∧ ∃ _ : IsDomain (X.presheaf.stalk x),
-      IsClosed {x} → IsDiscreteValuationRing (X.presheaf.stalk x) :=
-  have := SmoothOfRelativeDimension.smooth 1 f
-  have := IsRegular.of_smooth f
-  ⟨inferInstance, inferInstance, fun hx ↦ by
-    obtain ⟨_, h⟩ := isDiscreteValuationRing_stalk_of_isClosed f hx
-    exact h⟩
 
 /-- **Closed points are Cartier divisors on smooth curves.** A closed point `x` of a smooth
 curve, with its reduced structure, is an effective Cartier divisor: its ideal sheaf is locally
@@ -115,14 +103,6 @@ theorem isInvertible_vanishingIdeal_of_isClosed {x : X} (hx : IsClosed {x}) :
     (IdealSheafData.vanishingIdeal ⟨{x}, hx⟩).IsInvertible :=
   isInvertible_vanishingIdeal_of_smoothOfRelativeDimension_one f hx
 
-/-- **Closed points of curves are Cartier divisors.** A closed point `x` of a smooth curve has
-invertible ideal sheaf, and `𝒪_{X,x}` is a discrete valuation ring.
-
-(blueprint: `rem-pc-closed-point-cartier-sc`) -/
-theorem isInvertible_vanishingIdeal_and_isDiscreteValuationRing {x : X} (hx : IsClosed {x}) :
-    (IdealSheafData.vanishingIdeal ⟨{x}, hx⟩).IsInvertible ∧
-      ∃ _ : IsDomain (X.presheaf.stalk x), IsDiscreteValuationRing (X.presheaf.stalk x) :=
-  ⟨isInvertible_vanishingIdeal_of_isClosed f hx, isDiscreteValuationRing_stalk_of_isClosed f hx⟩
 
 /-- The local rings of a smooth curve over a field are valuation rings: discrete valuation rings
 at closed points and fields at generic points. -/

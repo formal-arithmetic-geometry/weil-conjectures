@@ -339,13 +339,6 @@ theorem nonempty_pushforward_pullback_iso (g : X ⟶ Y) (N : Y.Modules) [N.IsInv
   obtain ⟨e⟩ := nonempty_pushforward_tensorObj_pullback_iso g (𝟙_ X.Modules) N
   exact ⟨(pushforward g).mapIso (λ_ _).symm ≪≫ e⟩
 
-/-- If `g_* 𝒪_X ≅ 𝒪_Y`, then `g_* (g^* N) ≅ N` for every invertible `𝒪_Y`-module `N`: by the
-projection formula `g_* (g^* N) ≅ g_* 𝒪_X ⊗ N ≅ 𝒪_Y ⊗ N ≅ N`. -/
-theorem nonempty_pushforward_pullback_iso_self (g : X ⟶ Y)
-    (e : (pushforward g).obj (𝟙_ X.Modules) ≅ 𝟙_ Y.Modules) (N : Y.Modules) [N.IsInvertible] :
-    Nonempty ((pushforward g).obj ((pullback g).obj N) ≅ N) := by
-  obtain ⟨e'⟩ := nonempty_pushforward_pullback_iso g N
-  exact ⟨e' ≪≫ (e ⊗ᵢ Iso.refl N) ≪≫ λ_ N⟩
 
 end ProjectionFormula
 

@@ -36,15 +36,6 @@ open CategoryTheory Limits Topology
 
 namespace AlgebraicGeometry
 
-/-- Blueprint `def-kun-projective`: **projective morphisms.** A morphism `f : X ⟶ Y` is
-projective (`AlgebraicGeometry.IsHProjective`) if and only if there are a finite type `n` of
-homogeneous coordinates and a closed immersion `i : X ⟶ ℙ(n; Y)` whose composite with the
-structural projection `ℙ(n; Y) ⟶ Y` is `f`. A scheme is projective over a field `k` if its
-structure morphism is projective. -/
-theorem isHProjective_iff {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    IsHProjective f ↔
-      ∃ (n : Type u) (_ : Finite n) (i : X ⟶ ℙ(n; Y)), IsClosedImmersion i ∧ i ≫ ℙ(n; Y) ↘ Y = f :=
-  ⟨fun h ↦ h.exists_isClosedImmersion, fun h ↦ ⟨h⟩⟩
 
 /-- Blueprint `lem-kun-projective-implies-proper`: **projective morphisms are proper**, as the
 composite of a closed immersion with the proper projection `ℙ(n; Y) ⟶ Y`. -/
@@ -52,15 +43,6 @@ theorem isProper_of_isHProjective {X Y : Scheme.{u}} (f : X ⟶ Y) [IsHProjectiv
     IsProper f :=
   inferInstance
 
-/-- Blueprint `lem-kun-proper-stability`: **properness survives base change and composition.**
-Proper morphisms are stable under base change and under composition; in particular, if `X` is
-proper over a field `k` and `Y` is any `k`-scheme, the projection `X ×_k Y ⟶ Y` is proper. -/
-theorem isProper_isStableUnderBaseChange_and_comp :
-    MorphismProperty.IsStableUnderBaseChange @IsProper ∧
-      MorphismProperty.IsStableUnderComposition @IsProper ∧
-      ∀ {k : Type u} [Field k] {X Y : Scheme.{u}} (a : X ⟶ Spec (.of k))
-        (b : Y ⟶ Spec (.of k)) [IsProper a], IsProper (pullback.snd a b) :=
-  ⟨inferInstance, inferInstance, fun _ _ ↦ inferInstance⟩
 
 /-- Blueprint `lem-kun-compactification-affine`: **compactification of an affine scheme.** Let
 `X` be an affine scheme of finite type over a field `K`. There is an open immersion

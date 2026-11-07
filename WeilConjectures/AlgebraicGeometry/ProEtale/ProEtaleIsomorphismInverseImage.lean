@@ -219,21 +219,6 @@ theorem proEtaleIsoInverseImage_equivalence {X Y : Scheme.{u}} (f : X ⟶ Y) [Is
     (proEtaleSheafAdjunction f D).isEquivalence_left_of_isEquivalence_right
   exact ⟨inferInstance, inferInstance, inferInstance, inferInstance, inferInstance⟩
 
-/-- The canonical comparison induced by the inverse images of all tower projections.
-The indexing natural number `r` denotes the original positive index `r+1`.
-Source: Stacks Project, Tags 09A5 and 00WX
-(blueprint: lem-weil-proetale-isomorphism-inverse-image).
-Proof: the equivalence preserves the limit cone; its comparison `limit.post` is therefore
-invertible. By its universal property its composites with the projections are exactly
-the inverse images of the original projections. -/
-theorem proEtaleIso_inverseLimitComparison {X Y : Scheme.{u}} (f : X ⟶ Y) [IsIso f]
-    (D : Type v) [Category.{u + 1} D] [HasColimitsOfSize.{u + 1, u + 1} D]
-    [HasWeakSheafify (ProEt.topology X) D]
-    (F : ℕᵒᵖ ⥤ Sheaf (ProEt.topology Y) D) [HasLimit F]
-    [HasLimit (F ⋙ proEtaleSheafInverseImage f D)] :
-    IsIso (limit.post F (proEtaleSheafInverseImage f D)) := by
-  let := (proEtaleIsoInverseImage_equivalence.{u, v, 0, 0} f D).1
-  infer_instance
 
 private theorem constantComparison_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     (D : Type v) [Category.{u + 1} D] [HasColimitsOfSize.{u + 1, u + 1} D]
@@ -278,44 +263,6 @@ private theorem constantComparison_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
   rw [he]
   infer_instance
 
-/-- Constant coefficient comparisons are isomorphisms and natural in the coefficient
-object; in particular this asserts the ring-sheaf statement for every commutative ring.
-Source: Stacks Project, Tags 09A5, 00WX and 0H7J
-(blueprint: lem-weil-proetale-isomorphism-inverse-image).
-Proof: under the canonical section identification the constant-presheaf map is the
-identity. Sheafification preserves this identification. Naturality follows from the
-naturality of the constant-presheaf map and the inverse-image adjunction counit. -/
-theorem proEtaleIso_constantComparison {X Y : Scheme.{u}} (f : X ⟶ Y) [IsIso f]
-    (D : Type v) [Category.{u + 1} D] [HasColimitsOfSize.{u + 1, u + 1} D]
-    [HasWeakSheafify (ProEt.topology X) D] [HasWeakSheafify (ProEt.topology Y) D] :
-    (∀ A : D, IsIso (proEtaleConstantInverseImageMap f D A)) ∧
-      ∀ (A B : D) (a : A ⟶ B),
-        proEtaleConstantInverseImageMap f D A ≫
-            (constantSheaf (ProEt.topology X) D).map a =
-          (proEtaleSheafInverseImage f D).map
-              ((constantSheaf (ProEt.topology Y) D).map a) ≫
-            proEtaleConstantInverseImageMap f D B := by
-  refine ⟨constantComparison_isIso f D, ?_⟩
-  intro A B a
-  symm
-  let L := proEtaleSheafInverseImage f D
-  let adj := proEtaleSheafAdjunction f D
-  change L.map _ ≫ (adj.homEquiv _ _).symm _ =
-    (adj.homEquiv _ _).symm _ ≫ _
-  rw [← adj.homEquiv_naturality_left_symm, ← adj.homEquiv_naturality_right_symm]
-  congr 1
-  apply ((sheafificationAdjunction (ProEt.topology Y) D).homEquiv
-    ((Functor.const Y.ProEtᵒᵖ).obj A) _).injective
-  change ((sheafificationAdjunction (ProEt.topology Y) D).homEquiv _ _)
-    ((presheafToSheaf (ProEt.topology Y) D).map
-      ((Functor.const Y.ProEtᵒᵖ).map a) ≫ _) = _
-  rw [Adjunction.homEquiv_naturality_left, Adjunction.homEquiv_naturality_right]
-  simp only [proEtaleConstantDirectImageMap, Equiv.apply_symm_apply]
-  apply NatTrans.ext
-  funext U
-  exact congrArg (fun t ↦ t.app ((proEtaleBaseChange f).op.obj U))
-    ((toSheafification (ProEt.topology X) D).naturality
-      ((Functor.const X.ProEtᵒᵖ).map a))
 
 private noncomputable def isoBaseChangeEquivalence {X Y : Scheme.{u}}
     (f : X ⟶ Y) [IsIso f] : Y.ProEt ≌ X.ProEt := by

@@ -64,19 +64,5 @@ theorem topologicalKrullDim_lt_top_of_finiteType {K : Type u} [Field K] {X : Sch
       (hn i)).trans (by exact_mod_cast hle i)
   · exact WithBot.coe_lt_coe.mpr (ENat.natCast_lt_top _)
 
-/-- Blueprint `lem-kun-dimension-extension`: **dimension after extension and restriction.** Let
-`X` be a scheme of finite type over a field `K`. For every field `L` over `K`, the base change
-`X_L = X ×_K L` has the same dimension as `X`; and if `j : U ⟶ X` is an open immersion with dense
-image, then `dim U = dim X`. -/
-theorem topologicalKrullDim_pullback_eq_and_eq_of_isOpenImmersion {K L : Type u} [Field K]
-    [Field L] {X : Scheme.{u}} (a : X ⟶ Spec (.of K)) [LocallyOfFiniteType a] [QuasiCompact a]
-    (q : Spec (.of L) ⟶ Spec (.of K)) {U : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
-    (hj : Dense (Set.range j)) :
-    topologicalKrullDim (pullback a q : Scheme.{u}) = topologicalKrullDim X ∧
-      topologicalKrullDim U = topologicalKrullDim X := by
-  refine ⟨topologicalKrullDim_pullback_eq_of_field a q, le_antisymm
-    j.isOpenEmbedding.isInducing.topologicalKrullDim_le ?_⟩
-  refine (topologicalKrullDim_le_of_dense a j.opensRange hj).trans_eq ?_
-  exact j.isOpenEmbedding.isEmbedding.topologicalKrullDim_eq_range.symm
 
 end AlgebraicGeometry

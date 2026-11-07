@@ -74,9 +74,6 @@ with junk value `0` if the residue field is infinite. -/
 noncomputable def pointNorm (x : X) : ℕ :=
   Nat.card (X.residueField x)
 
-lemma pointNorm_pos {x : X} (hx : x ∈ X.finitePoints) : 0 < X.pointNorm x :=
-  have : Finite (X.residueField x) := hx
-  Nat.card_pos
 
 lemma one_lt_pointNorm {x : X} (hx : x ∈ X.finitePoints) : 1 < X.pointNorm x :=
   have : Finite (X.residueField x) := hx

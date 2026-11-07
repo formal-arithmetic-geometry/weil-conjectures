@@ -74,9 +74,6 @@ noncomputable def artinSchreierAddHom (h : (p : R) = 0) : R →+ R where
     rw [add_pow_prime_of_natCast_eq_zero p h]
     ring
 
-lemma artinSchreierAddHom_apply (h : (p : R) = 0) (x : R) :
-    artinSchreierAddHom p h x = x ^ p - x :=
-  rfl
 
 /-- `∏_{s ∈ 𝔽_p} (x - s) = xᵖ - x`. -/
 lemma prod_sub_zmodRingHom (h : (p : R) = 0) (x : R) :
@@ -220,10 +217,6 @@ noncomputable def gaArtinSchreier : X.gaSheaf ⟶ X.gaSheaf :=
            ULift.down (α := Γ(U.unop.left, ⊤)) x)
        rw [map_sub, map_pow] }⟩
 
-lemma gaArtinSchreier_app_apply (U : X.Etaleᵒᵖ) (x : X.gaSheaf.obj.obj U) :
-    ULift.down (α := Γ(U.unop.left, ⊤)) ((X.gaArtinSchreier p hp).hom.app U x) =
-      (ULift.down (α := Γ(U.unop.left, ⊤)) x) ^ p - ULift.down (α := Γ(U.unop.left, ⊤)) x :=
-  rfl
 
 /-- **`℘` is an epimorphism of étale sheaves**: every section `t` of `𝔾ₐ` is of the form
 `ωᵖ - ω` on the Artin–Schreier cover `Spec 𝒪[y]/(yᵖ - y - t)`.

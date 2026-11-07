@@ -33,31 +33,6 @@ namespace CategoryTheory
 
 variable {J : Type*} [Category J] {C : Type*} [Category C]
 
-/-- Blueprint `lem-kun-fibre-product-limits`: **limits commute with fibre products.** Let
-`Pⱼ → Xⱼ, Pⱼ → Yⱼ, Xⱼ → Sⱼ, Yⱼ → Sⱼ` be a system of cartesian squares, natural in `j`, and let
-`cP, cX, cY, cS` be limit cones of the four diagrams. Then the square of limits, formed by the
-induced maps `lim P → lim X`, `lim P → lim Y`, `lim X → lim S`, `lim Y → lim S`, is cartesian:
-the canonical map `lim (Xⱼ ×_{Sⱼ} Yⱼ) → lim Xⱼ ×_{lim Sⱼ} lim Yⱼ` is an isomorphism. Both sides
-represent compatible systems of pairs of maps into `Xⱼ` and `Yⱼ` agreeing in `Sⱼ`. -/
-theorem IsPullback.isPullback_map_of_isLimit {P X Y S : J ⥤ C} {fst : P ⟶ X} {snd : P ⟶ Y}
-    {f : X ⟶ S} {g : Y ⟶ S} (h : ∀ j, IsPullback (fst.app j) (snd.app j) (f.app j) (g.app j))
-    {cP : Cone P} {cX : Cone X} {cY : Cone Y} {cS : Cone S} (hP : IsLimit cP) (hX : IsLimit cX)
-    (hY : IsLimit cY) (hS : IsLimit cS) :
-    IsPullback (hX.map cP fst) (hY.map cP snd) (hS.map cX f) (hS.map cY g) := by
-  have hw : ∀ j, cP.π.app j ≫ fst.app j ≫ f.app j = cP.π.app j ≫ snd.app j ≫ g.app j :=
-    fun j ↦ by rw [(h j).w]
-  refine ⟨⟨hS.hom_ext fun j ↦ by simpa using hw j⟩, ⟨PullbackCone.IsLimit.mk _
-    (fun s ↦ hP.lift ⟨s.pt, fun j ↦ (h j).lift (s.fst ≫ cX.π.app j) (s.snd ≫ cY.π.app j) ?_,
-      fun j k u ↦ ?_⟩) (fun s ↦ ?_) (fun s ↦ ?_) (fun s m h₁ h₂ ↦ ?_)⟩⟩
-  · simpa using congrArg (· ≫ cS.π.app j) s.condition
-  · refine (h k).hom_ext ?_ ?_
-    · simp
-    · simp
-  · exact hX.hom_ext fun j ↦ by simp
-  · exact hY.hom_ext fun j ↦ by simp
-  · refine hP.hom_ext fun j ↦ (h j).hom_ext ?_ ?_
-    · simpa using congrArg (· ≫ cX.π.app j) h₁
-    · simpa using congrArg (· ≫ cY.π.app j) h₂
 
 namespace Limits
 

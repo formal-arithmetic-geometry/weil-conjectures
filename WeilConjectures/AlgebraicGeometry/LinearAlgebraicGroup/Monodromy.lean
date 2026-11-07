@@ -394,9 +394,6 @@ theorem rep_mem_zeroLocus_arithmeticMonodromy (w : W) :
     D.rep w ∈ zeroLocus D.arithmeticMonodromy k :=
   D.range_rep_le_zeroLocus_arithmeticMonodromy ⟨w, rfl⟩
 
-theorem rep_mem_zeroLocus_geometricMonodromy {w : W} (hw : w ∈ D.degreeZero) :
-    D.rep w ∈ zeroLocus D.geometricMonodromy k :=
-  D.map_rep_degreeZero_le_zeroLocus_geometricMonodromy ⟨w, hw, rfl⟩
 
 /-- The Frobenius element `F = ρ(γ)`.
 (blueprint: `d-monodromy`) -/
@@ -482,13 +479,6 @@ theorem commutator_zeroLocus_le_zeroLocus_geometricMonodromy (R : Type*) [CommRi
 
 section Semisimple
 
-/-- **Normal restriction.** A semisimple Weil representation is geometrically semisimple: the
-restriction of a semisimple datum to the normal subgroup `P = ker deg` is semisimple, by
-Clifford's theorem `Representation.isSemisimpleRepresentation_comp_subtype`.
-(blueprint: `lem-mg-normal-restriction-semisimple`) -/
-theorem isSemisimpleRepresentation_degreeZero (hD : D.IsSemisimple) :
-    Representation.IsSemisimpleRepresentation (D.asRepresentation.comp D.degreeZero.subtype) :=
-  Representation.isSemisimpleRepresentation_comp_subtype _ _
 
 /-- The lattices of subrepresentations of `ρ` and of the defining representation of its arithmetic
 monodromy group `G(k)` agree: a subspace is `ρ(W)`-stable if and only if it is stable under the
@@ -620,10 +610,6 @@ theorem arithmeticMonodromyExtensionHom_inl_mul_inr (h : zeroLocus D.geometricMo
       h * D.frobenius ^ m.toAdd := by
   simp [arithmeticMonodromyExtensionHom]
 
-theorem arithmeticMonodromyExtensionHom_apply (x : D.ArithmeticMonodromyExtension) :
-    D.arithmeticMonodromyExtensionHom x = x.left * D.frobenius ^ x.right.toAdd := by
-  conv_lhs => rw [← SemidirectProduct.inl_left_mul_inr_right x]
-  exact D.arithmeticMonodromyExtensionHom_inl_mul_inr _ _
 
 /-- The degree component `G^[m] = H × {m}` of the arithmetic monodromy extension: the fibre over
 `m` of the degree map `deg_G = SemidirectProduct.rightHom`. Its elements are the
@@ -632,91 +618,6 @@ theorem arithmeticMonodromyExtensionHom_apply (x : D.ArithmeticMonodromyExtensio
 def degreeComponent (m : ℤ) : Set D.ArithmeticMonodromyExtension :=
   SemidirectProduct.rightHom ⁻¹' {Multiplicative.ofAdd m}
 
-theorem mem_degreeComponent {m : ℤ} {x : D.ArithmeticMonodromyExtension} :
-    x ∈ D.degreeComponent m ↔ x.right = Multiplicative.ofAdd m :=
-  Iff.rfl
-
-/-- The degree component `G^[m]` is `H × {m}`. (blueprint: `def-wf-degree-components`) -/
-theorem degreeComponent_eq_range (m : ℤ) :
-    D.degreeComponent m = Set.range fun h ↦
-      (⟨h, Multiplicative.ofAdd m⟩ : D.ArithmeticMonodromyExtension) := by
-  ext x
-  refine ⟨fun hx ↦ ⟨x.left, SemidirectProduct.ext rfl hx.symm⟩, ?_⟩
-  rintro ⟨h, rfl⟩
-  rfl
-
-/-- **The degree components multiply by degree:** `G^[m] G^[m'] = G^[m + m']`.
-(blueprint: `lem-wf-degree-components-grading`) -/
-theorem degreeComponent_mul_degreeComponent (m m' : ℤ) :
-    D.degreeComponent m * D.degreeComponent m' = D.degreeComponent (m + m') := by
-  ext x
-  refine ⟨?_, fun hx ↦ ?_⟩
-  · rintro ⟨y, hy, z, hz, rfl⟩
-    rw [mem_degreeComponent] at hy hz ⊢
-    rw [SemidirectProduct.mul_right, hy, hz, ofAdd_add]
-  · refine ⟨⟨x.left, Multiplicative.ofAdd m⟩, rfl, ⟨1, Multiplicative.ofAdd m'⟩, rfl, ?_⟩
-    rw [mem_degreeComponent] at hx
-    refine SemidirectProduct.ext ?_ ?_
-    · simp
-    · simp [hx, ofAdd_add]
-
-/-- **The degree components invert to the opposite degree:** `(G^[m])⁻¹ = G^[-m]`.
-(blueprint: `lem-wf-degree-components-grading`) -/
-theorem inv_degreeComponent (m : ℤ) : (D.degreeComponent m)⁻¹ = D.degreeComponent (-m) := by
-  ext x
-  rw [Set.mem_inv, mem_degreeComponent, mem_degreeComponent, SemidirectProduct.inv_right,
-    inv_eq_iff_eq_inv, ofAdd_neg]
-
-/-- The matrix image of the degree component `G^[m]` is the translate `H(k) Fᵐ`. -/
-theorem image_degreeComponent (m : ℤ) :
-    D.arithmeticMonodromyExtensionHom '' D.degreeComponent m =
-      (zeroLocus D.geometricMonodromy k : Set (GL n k)) * {D.frobenius ^ m} := by
-  ext g
-  constructor
-  · rintro ⟨x, hx, rfl⟩
-    refine ⟨x.left, x.left.2, _, rfl, ?_⟩
-    rw [arithmeticMonodromyExtensionHom_apply, (mem_degreeComponent D).1 hx, toAdd_ofAdd]
-  · rintro ⟨h, hh, _, rfl, rfl⟩
-    exact ⟨⟨⟨h, hh⟩, Multiplicative.ofAdd m⟩, rfl, by
-      rw [arithmeticMonodromyExtensionHom_apply, toAdd_ofAdd]⟩
-
-/-- The image `ρ(deg⁻¹(m))` of the elements of degree `m` is the translate `ρ(P) Fᵐ`. -/
-theorem image_rep_preimage_deg (m : ℤ) :
-    D.rep '' (D.deg ⁻¹' {Multiplicative.ofAdd m}) =
-      (D.degreeZero.map D.rep : Set (GL n k)) * {D.frobenius ^ m} := by
-  ext g
-  constructor
-  · rintro ⟨w, hw, rfl⟩
-    have hm : (D.deg w).toAdd = m := by rw [Set.mem_preimage.1 hw, toAdd_ofAdd]
-    refine ⟨_, ⟨_, D.mul_inv_zpow_mem_ker w, rfl⟩, _, rfl, ?_⟩
-    change D.rep _ * D.frobenius ^ m = D.rep w
-    rw [frobenius, ← map_zpow, ← map_mul, hm, inv_mul_cancel_right]
-  · rintro ⟨_, ⟨u, hu, rfl⟩, _, rfl, rfl⟩
-    refine ⟨u * D.degreeOneElement ^ m, ?_, by rw [map_mul, map_zpow]; rfl⟩
-    rw [Set.mem_preimage, Set.mem_singleton_iff, map_mul, map_zpow, MonoidHom.mem_ker.1 hu,
-      D.deg_degreeOneElement, one_mul, ← ofAdd_zsmul, smul_eq_mul, mul_one]
-
-/-- **Matrix image of a degree component.** The image of the degree component `G^[m]` under the
-map `(h, m) ↦ h Fᵐ` to matrices is the Zariski closure of the image `ρ(deg⁻¹(m))` of the elements
-of degree `m`, namely the translate `H(k) Fᵐ` (`image_degreeComponent`): right translation by
-`Fᵐ` carries the closure of `ρ(P)` to the closure of `ρ(P) Fᵐ = ρ(deg⁻¹(m))`.
-(blueprint: `lem-wf-degree-component-image`) -/
-theorem image_degreeComponent_eq_closure (m : ℤ) :
-    D.arithmeticMonodromyExtensionHom '' D.degreeComponent m =
-      {g : GL n k | ∀ a ∈ vanishingIdeal (D.rep '' (D.deg ⁻¹' {Multiplicative.ofAdd m})),
-        evalAlgHom g a = 0} := by
-  rw [image_degreeComponent, image_rep_preimage_deg,
-    setOf_forall_mem_vanishingIdeal_mul_singleton]
-  rfl
-
-/-- The arithmetic monodromy group `G_Zar = closure ρ(W)` contains all the translates `H(k) Fᵐ`.
-(blueprint: `d-monodromy`) -/
-theorem zeroLocus_geometricMonodromy_mul_frobenius_zpow_subset (m : ℤ) :
-    (zeroLocus D.geometricMonodromy k : Set (GL n k)) * {D.frobenius ^ m} ⊆
-      zeroLocus D.arithmeticMonodromy k := by
-  rintro _ ⟨h, hh, _, rfl, rfl⟩
-  exact mul_mem (D.zeroLocus_geometricMonodromy_le_zeroLocus_arithmeticMonodromy k hh)
-    (zpow_mem D.frobenius_mem_zeroLocus_arithmeticMonodromy m)
 
 /-- Conjugation by a `k`-point `g` of the arithmetic monodromy group preserves the ideal of the
 geometric one: if `a` vanishes on `H`, so does `x ↦ a(g x g⁻¹)`. -/
@@ -785,29 +686,6 @@ instance containsCommutators_subgroupSchemeHom_arithmeticMonodromy_le_geometricM
     intro R _ _
     exact D.commutator_zeroLocus_le_zeroLocus_geometricMonodromy R)
 
-/-- The geometric monodromy group contains the derived subgroup `[G, G]` of the arithmetic one, as
-closed subgroup schemes of `GL_n`: `J ≤ derivedIdeal I`. (blueprint: `sk-i-restriction`) -/
-theorem geometricMonodromy_le_derivedIdeal_arithmeticMonodromy :
-    D.geometricMonodromy ≤ derivedIdeal D.arithmeticMonodromy :=
-  (containsCommutators_iff_le_derivedIdeal _).1 inferInstance
-
-/-- The derived algebra of `Lie G` lies in `Lie H`, over any field, where `Lie H → Lie G` is the
-differential `lieAlgebraMap` of the closed immersion `H ⟶ G`.
-(blueprint: `sk-i-restriction`, `lem-ag-closure-commutators`) -/
-theorem lie_mem_lieAlgebra_geometricMonodromy
-    (X Y : GrpObj.Lie (subgroupScheme D.arithmeticMonodromy)) :
-    ∃ Z : GrpObj.Lie (subgroupScheme D.geometricMonodromy),
-      lieAlgebraMap D.arithmeticMonodromy_le_geometricMonodromy Z = ⁅X, Y⁆ :=
-  (LieHom.mem_range _ _).1 (lie_mem_range_lieAlgebraMap _ X Y)
-
-/-- The derived algebra of `Lie G°` lies in `Lie H°`, over an algebraically closed field of
-characteristic zero. (blueprint: `sk-i-restriction`, `lem-ag-closure-commutators`) -/
-theorem lie_mem_lieAlgebra_identityComponent_geometricMonodromy [IsAlgClosed k] [CharZero k]
-    (X Y : GrpObj.Lie (subgroupScheme (identityComponent D.arithmeticMonodromy))) :
-    ∃ Z : GrpObj.Lie (subgroupScheme (identityComponent D.geometricMonodromy)),
-      lieAlgebraMap (identityComponent_mono _ D.arithmeticMonodromy_le_geometricMonodromy) Z =
-        ⁅X, Y⁆ :=
-  (LieHom.mem_range _ _).1 (lie_mem_range_lieAlgebraMap_identityComponent _ X Y)
 
 /-- **Conjugation preserves the geometric monodromy group.** Conjugation `α : h ↦ F h F⁻¹` by the
 Frobenius `F = ρ(γ)` is an automorphism of the algebraic group `H`: the closed subgroup scheme
@@ -828,20 +706,6 @@ noncomputable def frobeniusConjIso :
 instance : IsMonHom D.frobeniusConjIso.hom :=
   inferInstanceAs (IsMonHom (subgroupSchemeConjIso (I := D.geometricMonodromy) D.frobenius _ _).hom)
 
-/-- The automorphism `frobeniusConjIso` of `H` is the restriction of the conjugation `conjHom F` of
-`GL_n`. -/
-theorem frobeniusConjIso_hom_comp_subgroupSchemeι :
-    D.frobeniusConjIso.hom ≫ subgroupSchemeι D.geometricMonodromy =
-      subgroupSchemeι D.geometricMonodromy ≫ conjHom D.frobenius :=
-  subgroupSchemeConjIso_hom_comp_subgroupSchemeι _ _ _
-
-/-- On `k`-points, the automorphism `frobeniusConjIso` of `H` is `α = frobeniusConj`.
-(blueprint: `lem-wf-conjugation-geometric-monodromy`) -/
-theorem zeroLocusMulEquiv_comp_frobeniusConjIso_hom (h : zeroLocus D.geometricMonodromy k) :
-    zeroLocusMulEquiv _ k h ≫ D.frobeniusConjIso.hom =
-      zeroLocusMulEquiv _ k (D.frobeniusConj h) := by
-  rw [frobeniusConjIso, zeroLocusMulEquiv_comp_subgroupSchemeConjIso_hom]
-  congr 1
 
 end Lie
 
@@ -897,17 +761,6 @@ theorem isSemisimpleRepresentation_standardRepresentation_identityComponent
       ⟨g.1.1, Subgroup.mem_subgroupOf.1 g.2⟩) v hv
     rw [hpt, MulEquiv.symm_apply_apply] at hg
     exact hg
-/-- For a semisimple represented degree datum the identity component of the arithmetic monodromy
-group is the central–geometric product `G° = Z(G°)° H°`: the multiplication morphism
-`Z(G°)° ×ₖ H° ⟶ G°` of group schemes is surjective. This is the general
-`AlgebraicGeometry.GeneralLinearGroup.surjective_mulCenterIdentityComponent` for the pair
-`H ⊆ G`, which contains the commutators of `G` and acts semisimply on `kⁿ`.
-(blueprint: `sk-p-product`) -/
-theorem surjective_mul_center_geometricMonodromy (hD : D.IsSemisimple) :
-    Function.Surjective
-      (mulCenterIdentityComponent D.arithmeticMonodromy_le_geometricMonodromy).left.base :=
-  have := D.isSemisimpleRepresentation_standardRepresentation_identityComponent hD
-  surjective_mulCenterIdentityComponent _
 
 omit [CharZero k] in
 /-- The `k`-points of the identity component `G°` of the arithmetic monodromy group act
@@ -1050,47 +903,6 @@ theorem exists_isPositiveCentralPair (hD : D.IsSemisimple) :
   · exact congrArg Subtype.val (Subgroup.mem_center_iff.1 hz ⟨g, hg⟩).symm
   · simp
 
-/-- **A common positive-degree central element.** For a semisimple represented degree datum (for
-instance the direct sum of the Weil representations of several semisimple lisse Weil sheaves on
-the same curve) there are `m > 0` and an algebraic-monodromy element `z` of degree `m` central in
-the arithmetic monodromy extension `G_arith(ρ)(k) = H(k) ⋊ ℤ`; its matrix `z_mat = h Fᵐ` is a
-positive central pair (`exists_isPositiveCentralPair`).
-
-With `z = (h, m)`: the matrix `z_mat` commutes with `H(k)` and with `F`, so `h` commutes with `F`,
-and `z (x, n) = (h Fᵐ x F⁻ᵐ, m + n) = (x h, m + n) = (x Fⁿ h F⁻ⁿ, n + m) = (x, n) z`.
-(blueprint: `lem-mg-common-positive-central-element`) -/
-theorem exists_pos_mem_center_mem_degreeComponent (hD : D.IsSemisimple) :
-    ∃ m : ℕ, 0 < m ∧ ∃ z ∈ Subgroup.center D.ArithmeticMonodromyExtension,
-      z ∈ D.degreeComponent m ∧
-        D.arithmeticMonodromyExtensionHom z ∈ centerPoints D.arithmeticMonodromy := by
-  obtain ⟨N, z, hN, hzc, h, hh, _, rfl, rfl⟩ := D.exists_isPositiveCentralPair hD
-  obtain ⟨-, hc⟩ := (mem_centerPoints_iff _).1 hzc
-  have hG := D.zeroLocus_geometricMonodromy_le_zeroLocus_arithmeticMonodromy k
-  -- `h` commutes with `F`
-  have hFz : h * D.frobenius ^ N * D.frobenius = D.frobenius * (h * D.frobenius ^ N) :=
-    hc _ D.frobenius_mem_zeroLocus_arithmeticMonodromy
-  have hhF : D.frobenius * h = h * D.frobenius := by
-    have : h * D.frobenius * D.frobenius ^ N = D.frobenius * h * D.frobenius ^ N := by
-      rw [mul_assoc, ← pow_succ', pow_succ, ← mul_assoc, hFz, ← mul_assoc]
-    exact (mul_right_cancel this).symm
-  have hhFz (m : ℤ) : D.frobenius ^ m * h = h * D.frobenius ^ m :=
-    ((Commute.zpow_left hhF m))
-  refine ⟨N, hN, ⟨⟨h, hh⟩, Multiplicative.ofAdd (N : ℤ)⟩, ?_, rfl, ?_⟩
-  · refine Subgroup.mem_center_iff.2 fun w ↦ SemidirectProduct.ext ?_ ?_
-    · apply Subtype.ext
-      simp only [SemidirectProduct.mul_left, Subgroup.coe_mul, coe_frobeniusAction_apply,
-        toAdd_ofAdd, zpow_natCast]
-      have hx : h * D.frobenius ^ N * w.left = w.left * (h * D.frobenius ^ N) :=
-        hc _ (hG w.left.2)
-      calc (w.left : GL n k) * (D.frobenius ^ w.right.toAdd * h * (D.frobenius ^ w.right.toAdd)⁻¹)
-          = w.left * h := by rw [hhFz, mul_inv_cancel_right]
-        _ = h * D.frobenius ^ N * w.left * (D.frobenius ^ N)⁻¹ := by
-          rw [hx, mul_assoc, mul_assoc, mul_inv_cancel, mul_one]
-        _ = h * (D.frobenius ^ N * w.left * (D.frobenius ^ N)⁻¹) := by group
-    · simp only [SemidirectProduct.mul_right]
-      exact mul_comm _ _
-  · rw [arithmeticMonodromyExtensionHom_apply, toAdd_ofAdd, zpow_natCast]
-    exact hzc
 
 end IsAlgClosed
 
