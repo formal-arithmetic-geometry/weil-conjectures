@@ -264,7 +264,7 @@ private theorem tensorPushAdjunction_symm_tmul
         b • (show N.obj U from g.app U x) := by
   simp only [tensorPushAdjunction, tensorAdjunction, Adjunction.adjunctionOfEquivLeft,
     id, Adjunction.mkOfHomEquiv_homEquiv]
-  convert tensorHomEquiv_symm_tmul R S α M N g U b x using 1 <;> rfl
+  convert tensorHomEquiv_symm_tmul R S α M N g U b x using 1
 
 private theorem tensorPullbackIso_transpose
     (M : PresheafOfModules.{u} (R ⋙ forget₂ _ _))

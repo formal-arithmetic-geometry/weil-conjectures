@@ -178,7 +178,8 @@ lemma isIso_sigmaDesc_of_existsUnique {M : Type (u + 1)} [Finite M]
       have : Nonempty (Spec (.of Ω)) := inferInstanceAs (Nonempty (PrimeSpectrum Ω))
       obtain ⟨m, x', hx'⟩ := exists_comp_sigmaι_eq_of_subsingleton (X := Spec (.of Ω)) x.left
       obtain ⟨n, y', hy'⟩ := exists_comp_sigmaι_eq_of_subsingleton (X := Spec (.of Ω)) y.left
-      rw [← hx', ← hy', Category.assoc, Category.assoc, hφ, Sigma.ι_comp_desc, Sigma.ι_comp_desc] at hxy'
+      rw [← hx', ← hy', Category.assoc, Category.assoc, hφ,
+        Sigma.ι_comp_desc, Sigma.ι_comp_desc] at hxy'
       have h₁ := congrArg (· ≫ pullback.fst _ _) hxy'
       have h₂ := congrArg (· ≫ pullback.snd _ _) hxy'
       simp only [Category.assoc, pullback.lift_fst, pullback.lift_snd, Category.comp_id] at h₁ h₂
