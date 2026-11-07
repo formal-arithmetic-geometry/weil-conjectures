@@ -609,7 +609,7 @@ private theorem coefficientRing_ext (n : ℕ)
     Equiv.apply_symm_apply] at hx
   exact congrArg (fun t ↦ t.app V PUnit.unit) hx
 
-set_option maxHeartbeats 1600000 in
+set_option maxHeartbeats 400000 in
 -- Comparing constant generators unfolds several prescribed geometric inverse-image functors.
 private theorem coefficientComparisonRing_id {U : Scheme.{u}} (g : X ⟶ U)
     {PX : StrictEtaleEvaluation X O ell} {PU : StrictEtaleEvaluation U O ell}
@@ -662,7 +662,6 @@ private theorem coefficientComparisonRing_id {U : Scheme.{u}} (g : X ⟶ U)
   erw [← reassoc_of% hsingle]
   erw [CategoryTheory.Functor.map_id, Category.comp_id]
 
-set_option maxHeartbeats 1600000 in
 -- Transporting the two algebraic presentations requires large sheaf-functor conversions.
 private theorem finiteComparison
     {T U : Scheme.{u}} (g : T ⟶ U)
@@ -777,7 +776,6 @@ private theorem finiteComparison
     NatTrans.comp_app, Category.assoc, Iso.inv_hom_id_app, Category.comp_id,
     asIso_hom, Iso.symm_hom] using hh
 
-set_option maxHeartbeats 1600000 in
 -- Assembly compares both inverse-image paths at every coefficient level and system transition.
 /-- The normalized pullback comparison on ordinary coefficient systems and levels.
 Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 03D2, 099R and 0B65.
