@@ -81,7 +81,8 @@ lemma ValuationSubring.coe_le_ord_of_strictMono {O K : Type*} [CommRing O] [IsDo
   set φ : O →+* V := (algebraMap O K).codRestrict V hV
   have hφ : Function.Injective φ := fun x y h ↦
     IsFractionRing.injective O K (congrArg Subtype.val h)
-  have hx (i : ℕ) : ∃ x : V, x ∈ f (i + 1) ∧ x ∉ f i := IsConcreteLE.exists_of_lt (hf i.lt_succ_self)
+  have hx (i : ℕ) : ∃ x : V, x ∈ f (i + 1) ∧ x ∉ f i :=
+    IsConcreteLE.exists_of_lt (hf i.lt_succ_self)
   choose x hx₁ hx₂ using hx
   obtain ⟨⟨c, hc⟩, hcx⟩ := IsLocalization.exist_integer_multiples (nonZeroDivisors O)
     (Finset.range m) (fun i ↦ (x i : K))

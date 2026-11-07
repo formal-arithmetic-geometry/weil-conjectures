@@ -60,7 +60,7 @@ theorem Algebra.WeaklyEtale.exists_bijectiveOnStalks_of_isWStrictlyLocalRing
   have : Algebra.WeaklyEtale C D' := inferInstance
   have hres : ∀ (m : Ideal C) (q' : Ideal D') [q'.LiesOver m] [m.IsMaximal] [q'.IsPrime]
       [Algebra (Localization.AtPrime m) (Localization.AtPrime q')]
-      [Localization.AtPrime.IsLiesOverAlgebra m q'],
+      [IsScalarTower C (Localization.AtPrime m) (Localization.AtPrime q')],
       Algebra.IsAlgebraic m.ResidueField q'.ResidueField := by
     intro m q' _ hm _ _ _
     have : m.IsPrime := hm.isPrime
