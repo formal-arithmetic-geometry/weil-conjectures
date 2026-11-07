@@ -153,8 +153,6 @@ private theorem transportArrow
   simp only [G.map_comp, Category.assoc, ← G.map_comp_assoc, Iso.hom_inv_id,
     G.map_id, Category.id_comp]
 
-set_option maxHeartbeats 1000000 in
--- Comparing the exact restriction and standard derived witnesses needs more heartbeats.
 /-- Restriction of the canonical single-module base-change arrow to target opens,
 then transport of its stalk back to the original local ring.
 
