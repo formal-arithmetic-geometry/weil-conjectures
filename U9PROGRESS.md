@@ -642,3 +642,26 @@
   for the six-target importer batch. Whole importer graph is in PF555-downstream-layers.json.
 - Current registry assigns the leaf only to PF555; direct importers have no PF assignment.
 - No local Lean/Lake, new declarations, deletions, proof shortcuts, or heartbeat increases.
+
+# PF554 in progress
+
+- Re-read /home/ubuntu/u9/briefs/PF554.md on continuation; no new LEAD instructions.
+- Assigned ProperHeartBound proof now reuses the existing private theorem
+  CondensedRing.higherDirectImage_filtered via import all EllAdicProperHeartUniformBound.
+  Commit d248e29eed is pushed and already present unchanged in origin/u9/bumpF.
+- No statement changes, new declarations, deletions, heartbeat increases, or proof placeholders.
+  The imported sibling was green in coordinator build78; the new wrapper awaits validation.
+- Builds 1 and 2 exhausted the two-hour service limit rebuilding dependencies. Build 3 reached
+  the leaf and rejected the first candidate with an isDefEq timeout. Coordinator build79 also
+  rejected the subsequent cached-instance proof with a whnf timeout.
+- Build 4 ended at the two-hour service limit on 43.166.74.121 at commit 01ba6453ee
+  (the older proof), after reaching 18714/18870 tasks with no Lean errors. The leaf was
+  not reached. Its local exec session expired on continuation; remote process exit was
+  confirmed before resubmission. Log: Weil u9/logs/PF554-20261107T230720.log.
+- Next validation uses d248e29eed's proof with ucheck-bumpF on the leaf and its three
+  direct importers. Continue downstream up to 30 extra modules after they pass.
+- Latest upstream check: leaf and direct importers unchanged through 91bbe97292.
+- Records: /home/ubuntu/u9/bz/FIXES-PF554.md and PF554-progress.txt; downstream plan:
+  /home/ubuntu/u9/bz/PF554-downstream.json. No DONE file yet; no green result claimed.
+- Only ucheck-bumpF may build; never run Lean/Lake locally. Explicit fetch refspec:
+  git fetch origin refs/heads/u9/bumpF:refs/remotes/origin/u9/bumpF.
