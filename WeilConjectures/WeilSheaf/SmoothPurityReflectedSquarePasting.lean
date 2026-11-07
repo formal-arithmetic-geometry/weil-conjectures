@@ -51,8 +51,7 @@ lemma preimageIso_liftSquareWithComparisons_comp :
     Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app,
     Category.id_comp, Category.comp_id, Functor.map_comp,
-    Functor.comp_obj, Category.assoc, FullSubcategory.comp_hom,
-    FullSubcategory.id_hom]
+    Functor.comp_obj, Category.assoc, FullSubcategory.comp_hom]
   rw [preimageIso_liftSquareWithComparisons_hom_app_hom]
   simp only [Category.assoc]
   have hn := cG'.inv.naturality
