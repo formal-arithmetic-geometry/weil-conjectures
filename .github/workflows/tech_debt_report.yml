@@ -1,0 +1,262 @@
+name: Technical debt report
+
+# Daily report on master's technical debt to Zulip (#Formalisation > Technical debt), the
+# analogue of Mathlib's weekly `technical_debt_metrics.yml`:
+#   - `metrics`: text counters (`scripts/tech_debt/metrics.py`: linter suppressions, heartbeat
+#     modifications, sorry, erw, ...), compared with the previous report;
+#   - `kernel`: declarations that are slow to type-check in the kernel
+#     (`scripts/tech_debt/kernel_times.py`), on a built tree on big-server. Daily, only the
+#     modules changed since the previous report are measured and the rest of the table is carried
+#     over; `workflow_dispatch` with `kernel: all` re-measures every module (hours, see below);
+#   - `post`: sends the report to Zulip.
+# Each report's state (counters as JSON, kernel table as TSV) is kept as a workflow artifact;
+# the next run downloads the newest one from master and compares with it.
+#
+# Security. Only master's own code runs (schedule runs on the default branch; workflow_dispatch
+# needs write access). The Zulip key is used only by `post`, which checks nothing out and runs
+# no project code: it downloads the two markdown files and sends them with curl.
+#
+# Required configuration (the post is skipped, with a notice, while it is missing):
+#   secret ZULIP_API_KEY            API key of the bot that posts
+#   secret or variable ZULIP_BOT_EMAIL   that bot's email address
+
+on:
+  schedule:
+    - cron: '30 5 * * *'  # daily, 05:30 UTC
+  workflow_dispatch:
+    inputs:
+      kernel:
+        description: 'Kernel timings: changed modules (daily mode), all modules (hours), or skip'
+        type: choice
+        options: [changed, all, skip]
+        default: changed
+      post:
+        description: 'Post the report to Zulip'
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.repository }}-tech-debt-report
+  cancel-in-progress: false
+
+env:
+  STATE_BRANCH: master
+  LAKE_CACHE_ENDPOINT: https://cache.fuxi.merten.dev/lake-cache
+  LAKE_CACHE_REPO: formal-arithmetic-geometry/weil-conjectures
+
+jobs:
+  metrics:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      actions: read  # to find the previous report's artifact
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0  # the previous report's commit, or yesterday's, for the comparison
+
+      - name: Download the previous counters
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -uo pipefail
+          run=$(gh api "repos/$GITHUB_REPOSITORY/actions/artifacts?name=tech-debt-metrics&per_page=20" \
+                  --jq "[.artifacts[] | select(.expired | not) | select(.workflow_run.head_branch == \"$STATE_BRANCH\")][0].workflow_run.id // empty")
+          if [ -n "$run" ] && gh run download "$run" -n tech-debt-metrics -D "$RUNNER_TEMP/prev"; then
+            echo "previous counters from run $run"
+          else
+            echo "::notice::no previous counters; comparing with master as of 24 hours ago"
+          fi
+
+      - name: Count
+        env:
+          REPO_URL: ${{ github.server_url }}/${{ github.repository }}
+        run: |
+          set -euo pipefail
+          mkdir -p out
+          python3 scripts/tech_debt/metrics.py count --rev HEAD --format json > out/metrics.json
+          prev="$RUNNER_TEMP/prev/metrics.json"
+          [ -f "$prev" ] || prev=$(git rev-list -1 --before="24 hours ago" HEAD)
+          python3 scripts/tech_debt/metrics.py diff "$prev" out/metrics.json --flavor zulip --full \
+            --max-files 15 --repo-url "$REPO_URL" > out/metrics.md
+          python3 scripts/tech_debt/metrics.py count --rev HEAD --format table
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tech-debt-metrics
+          path: out/
+          retention-days: 60
+          if-no-files-found: error
+
+  # Cost: each module is replayed in its own `lean --run` process: loading its imports takes
+  # 3-30 s and 5-10 GB of RAM (much of it the shared, mapped .olean files), then its kernel time;
+  # measured on 93 recently changed modules: about 13 s per module on average. A typical day
+  # changes ~100 modules (a few minutes with 32 jobs); all ~26,800 modules take on the order of
+  # 100 CPU-hours (3-4 hours with 32 jobs).
+  kernel:
+    if: github.event_name == 'schedule' || inputs.kernel != 'skip'
+    runs-on: [self-hosted, big-server]
+    timeout-minutes: 600
+    permissions:
+      contents: read
+      actions: read  # to find the previous table's artifact
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0  # `git diff` against the previous table's commit; `lake cache get`
+
+      - uses: leanprover/lean-action@v1
+        with:
+          build: false
+          test: false
+          lint: false
+          use-github-cache: false
+
+      # The build of master as in lean_action_ci.yml (see the comments there): fetch the
+      # project's build from the Lake cache, unpack it in bulk, then build what is missing
+      # (normally nothing: master's CI has uploaded it).
+      - name: Fetch the project's build from the Lake cache
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          config="$RUNNER_TEMP/lake-config.toml"
+          cat > "$config" <<TOML
+          cache.defaultService = "fuxi"
+
+          [[cache.service]]
+          name = "fuxi"
+          kind = "s3"
+          artifactEndpoint = "$LAKE_CACHE_ENDPOINT/a"
+          revisionEndpoint = "$LAKE_CACHE_ENDPOINT/r"
+          TOML
+          {
+            echo "LAKE_CONFIG=$config"
+            echo "LAKE_CACHE_DIR=$GITHUB_WORKSPACE/.lake/cache"
+            echo "LAKE_ARTIFACT_CACHE=true"
+            echo "LAKE_RESTORE_ARTIFACTS=true"
+          } >> "$GITHUB_ENV"
+          export LAKE_CONFIG="$config" LAKE_CACHE_DIR="$GITHUB_WORKSPACE/.lake/cache"
+          env -u ELAN_TOOLCHAIN "$(elan which lake)" cache get \
+            --repo "$LAKE_CACHE_REPO" --max-revs 30
+
+      - name: Restore the cached build in bulk
+        run: python3 scripts/ci/bulk_unpack_cache.py .
+
+      - name: Build
+        env:
+          LEAN_NUM_THREADS: "64"
+          LAKE_NO_CACHE: "true"
+          LAKE_ARTIFACT_CACHE: "false"
+        run: lake build
+
+      - name: Download the previous kernel table
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -uo pipefail
+          run=$(gh api "repos/$GITHUB_REPOSITORY/actions/artifacts?name=tech-debt-kernel&per_page=20" \
+                  --jq "[.artifacts[] | select(.expired | not) | select(.workflow_run.head_branch == \"$STATE_BRANCH\")][0].workflow_run.id // empty")
+          if [ -n "$run" ] && gh run download "$run" -n tech-debt-kernel -D "$RUNNER_TEMP/prev"; then
+            echo "previous kernel table from run $run"
+          else
+            echo "::notice::no previous kernel table"
+          fi
+
+      # Without a previous table (or with `kernel: all`), the daily mode measures the modules
+      # changed in the last 24 hours, so the table fills up over time; `kernel: all` seeds it.
+      - name: Measure kernel times
+        env:
+          MODE: ${{ inputs.kernel || 'changed' }}
+        run: |
+          set -euo pipefail
+          mkdir -p out
+          prev="$RUNNER_TEMP/prev/kernel-times.tsv"
+          if [ "$MODE" = all ]; then
+            python3 scripts/tech_debt/kernel_times.py measure --all --jobs 32 --out out/kernel-times.tsv
+          else
+            since=""
+            if [ -f "$prev" ]; then
+              since=$(sed -n '1s/.*\trev=\([0-9a-f]*\).*/\1/p' "$prev")
+              git cat-file -e "$since^{commit}" 2>/dev/null || since=""
+            fi
+            [ -n "$since" ] || since=$(git rev-list -1 --before="24 hours ago" HEAD)
+            python3 scripts/tech_debt/kernel_times.py measure --since "$since" --previous "$prev" \
+              --jobs 32 --out out/kernel-times.tsv
+          fi
+
+      - name: Report
+        env:
+          REPO_URL: ${{ github.server_url }}/${{ github.repository }}
+        run: |
+          set -euo pipefail
+          python3 scripts/tech_debt/kernel_times.py report out/kernel-times.tsv \
+            --previous "$RUNNER_TEMP/prev/kernel-times.tsv" --top 15 --repo-url "$REPO_URL" > out/kernel.md
+          cat out/kernel.md
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tech-debt-kernel
+          path: out/
+          retention-days: 60
+          if-no-files-found: error
+
+  # Holds the Zulip key: no checkout, no project code; it sends the two markdown files.
+  post:
+    needs: [metrics, kernel]
+    if: >-
+      always() && needs.metrics.result == 'success' &&
+      (github.event_name == 'schedule' || inputs.post)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions: {}
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: tech-debt-metrics
+          path: metrics
+
+      - uses: actions/download-artifact@v4
+        if: needs.kernel.result == 'success'
+        with:
+          name: tech-debt-kernel
+          path: kernel
+
+      - name: Post to Zulip
+        env:
+          ZULIP_API_KEY: ${{ secrets.ZULIP_API_KEY }}
+          ZULIP_BOT_EMAIL: ${{ secrets.ZULIP_BOT_EMAIL || vars.ZULIP_BOT_EMAIL }}
+          KERNEL_RESULT: ${{ needs.kernel.result }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          {
+            echo "**Technical debt on $GITHUB_REF_NAME,$(date -u +%Y-%m-%d)** ([run]($RUN_URL))"
+            echo
+            cat metrics/metrics.md
+            echo
+            if [ -f kernel/kernel.md ]; then cat kernel/kernel.md
+            else echo "Kernel timings: not available (job $KERNEL_RESULT)."; fi
+          } > message.md
+          # Zulip's limit is 10000 characters: cut at a line, closing an open spoiler block.
+          if [ "$(wc -c < message.md)" -gt 9500 ]; then
+            awk -v url="$RUN_URL" '
+              { if (n + length($0) + 1 > 9000) exit; n += length($0) + 1; print }
+              /^```/ { open = !open }
+              END { if (open) print "```"; printf "\n... (truncated; the full report is in the [run](%s))\n", url }
+            ' message.md > m && mv m message.md
+          fi
+          cat message.md
+          if [ -z "$ZULIP_API_KEY" ] || [ -z "$ZULIP_BOT_EMAIL" ]; then
+            echo "::notice::ZULIP_API_KEY / ZULIP_BOT_EMAIL not configured; not posting"
+            exit 0
+          fi
+          curl -sS --fail-with-body -X POST https://weil.zulip.merten.dev/api/v1/messages \
+            -u "$ZULIP_BOT_EMAIL:$ZULIP_API_KEY" \
+            --data-urlencode type=stream \
+            --data-urlencode to=Formalisation \
+            --data-urlencode "topic=Technical debt" \
+            --data-urlencode content@message.md
