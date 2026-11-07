@@ -65,6 +65,7 @@ variable
     (CondensedRing.geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l)
       (Y ↘ Spec (CommRingCat.of k₀))).mapDerivedCategory.obj (𝟙_ _))
 
+omit [Fact (ringChar k₀ ≠ l)] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))] in
 /-- Identify the two spellings of the chosen compact-support functor once, before
 composing the trace. The compactification choices use the same proposition. -/
 lemma condensedShriekForTrace_eq :

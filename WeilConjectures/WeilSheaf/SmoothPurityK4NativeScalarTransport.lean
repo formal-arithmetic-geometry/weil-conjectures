@@ -9,9 +9,6 @@ public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Scalar transport with normalized component sources -/
 
-set_option profiler true
-set_option profiler.threshold 1
-
 @[expose] public section
 
 namespace CategoryTheory.K4Native
@@ -48,7 +45,8 @@ lemma scalarDatum_postcomposeIso
     (P : C₀ ⥤ C) (Q : C ⥤ C) (b : P ⋙ Q ≅ P)
     {K M N : C₀} (e : P.obj K ≅ P.obj M) (v : M ≅ N) (t : P.obj K ≅ P.obj N)
     (ht : t = e ≪≫ P.mapIso v) (c : ℤ)
-    (he : c • ((scalarComponent P Q b K).hom ≫ e.hom) = Q.map e.hom ≫ (scalarComponent P Q b M).hom) :
+    (he : c • ((scalarComponent P Q b K).hom ≫ e.hom) =
+      Q.map e.hom ≫ (scalarComponent P Q b M).hom) :
     c • ((scalarComponent P Q b K).hom ≫ t.hom) = Q.map t.hom ≫ (scalarComponent P Q b N).hom := by
   exact purity_scalarDatum_postcomposeIso P Q b e v t ht c he
 

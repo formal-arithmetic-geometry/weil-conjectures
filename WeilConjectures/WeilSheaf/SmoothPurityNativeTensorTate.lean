@@ -70,7 +70,8 @@ noncomputable def nativeHomTateIso (d : ℤ) :
       (nativeDerivedClosedComparison k₀ l X).homModels.weilHom ≅
       (constantTwist k₀ l X (WeilSheaf.cyclotomicUnit k₀ l ^ d)⁻¹).mapDerivedCategory :=
   nativeHomSingleIso _ ≪≫ Functor.rightDerivedFunctorNatIso (ihomTateSheafIso d) ≪≫
-    (constantTwist k₀ l X (WeilSheaf.cyclotomicUnit k₀ l ^ d)⁻¹).rightDerivedFunctorIsoMapDerivedCategory
+    (constantTwist k₀ l X
+      (WeilSheaf.cyclotomicUnit k₀ l ^ d)⁻¹).rightDerivedFunctorIsoMapDerivedCategory
 
 /-- The tensor functor of the native closed model in fixed-source coordinates. -/
 noncomputable def nativeTensorRightSectRIso

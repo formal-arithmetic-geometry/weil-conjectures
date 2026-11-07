@@ -117,7 +117,8 @@ theorem nonempty_shriekRightAdjoint_finiteBaseNativeDescent_dualizing_iso
         exact (derivedLowerShriekCompιIso k₀ l c).hom.naturality φ)
   let eR := adj.rightAdjointUniq
     (((extensionByZeroUpperStarAdjunction (k₀ := k₀) (l := l) c.i).comp adjg).ofNatIsoLeft e.symm)
-  obtain ⟨eZ⟩ := nonempty_rightAdjoint_finiteBaseNativeDescent_dualizing_iso (k₀ := k₀) (l := l) c.g adjg
+  obtain ⟨eZ⟩ :=
+    nonempty_rightAdjoint_finiteBaseNativeDescent_dualizing_iso (k₀ := k₀) (l := l) c.g adjg
   let b := (upperStar (k₀ := k₀) (l := l) c.i).mapIso eZ
   exact ⟨eR.app _ ≪≫ b ≪≫ nativeOpenDualizingDescentIso (k₀ := k₀) (l := l) c.i⟩
 

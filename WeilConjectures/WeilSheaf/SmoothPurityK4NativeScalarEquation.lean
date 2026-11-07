@@ -8,9 +8,6 @@ public import WeilConjectures.WeilSheaf.SmoothPurityScalarDatumNamed
 
 /-! # A scalar equation interface with data arguments checked independently -/
 
-set_option profiler true
-set_option profiler.threshold 1
-
 @[expose] public section
 
 namespace CategoryTheory.K4Native

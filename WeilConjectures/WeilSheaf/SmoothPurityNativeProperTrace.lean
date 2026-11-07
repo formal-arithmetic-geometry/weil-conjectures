@@ -43,8 +43,10 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
 
 local instance : (objectProperty k₀ l X).ι.Full := (objectProperty k₀ l X).fullyFaithfulι.full
 local instance : (objectProperty k₀ l Y).ι.Full := (objectProperty k₀ l Y).fullyFaithfulι.full
-local instance : (objectProperty k₀ l X).ι.Faithful := (objectProperty k₀ l X).fullyFaithfulι.faithful
-local instance : (objectProperty k₀ l Y).ι.Faithful := (objectProperty k₀ l Y).fullyFaithfulι.faithful
+local instance : (objectProperty k₀ l X).ι.Faithful :=
+  (objectProperty k₀ l X).fullyFaithfulι.faithful
+local instance : (objectProperty k₀ l Y).ι.Faithful :=
+  (objectProperty k₀ l Y).fullyFaithfulι.faithful
 
 local instance : Fact (ringChar k₀).Prime := ⟨CharP.prime_ringChar k₀⟩
 local instance : LocallyOfFiniteType (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
@@ -92,7 +94,8 @@ local instance : IsProper
 
 variable {P : Dᵇc(X)⟦Profinite.padicAlgClRingObj l⟧}
   {N : Dᵇc(Y)⟦Profinite.padicAlgClRingObj l⟧}
-  (γ : P ⟶ (CondensedRing.boundedConstructibleUpperShriek l (properTraceBaseMap (k₀ := k₀) f)).obj N)
+  (γ : P ⟶
+    (CondensedRing.boundedConstructibleUpperShriek l (properTraceBaseMap (k₀ := k₀) f)).obj N)
   (T : WeilComplex k₀ l X) (U : WeilComplex k₀ l Y)
   (eT : (ProEtaleWeilSheaf.derivedEquivCondensed k₀ l X).functor.obj T.obj ≅
     (CondensedRing.geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l)
@@ -112,7 +115,8 @@ noncomputable def condensedProperTrace :
   CondensedRing.geometricFiberWeilDirectTrace (Profinite.padicAlgClRingObj l)
     (CondensedRing.upperStarWeilCompatible _ f (comp_over f _))
     (((CondensedRing.boundedConstructibleLowerStar l (properTraceBaseMap (k₀ := k₀) f)).map γ ≫
-      (CondensedRing.lowerStarUpperShriekAdjunction l (properTraceBaseMap (k₀ := k₀) f)).counit.app N).hom) ≫
+      (CondensedRing.lowerStarUpperShriekAdjunction l
+        (properTraceBaseMap (k₀ := k₀) f)).counit.app N).hom) ≫
   eU.inv
 
 /-- Lift the descended proper trace to native Weil complexes. -/
