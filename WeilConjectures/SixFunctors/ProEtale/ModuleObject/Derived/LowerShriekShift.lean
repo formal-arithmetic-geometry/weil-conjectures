@@ -214,7 +214,7 @@ instance commShift_boundedConstructibleLowerShriekOfCompactificationIso'_padicAl
     (c₁ c₂ : Compactification f.left) :
     NatTrans.CommShift
       (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ c₁ c₂).hom ℤ := by
-  unfold boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl
+  rw [boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_def]
   dsimp only [Iso.trans_hom, Iso.symm_hom]
   infer_instance
 

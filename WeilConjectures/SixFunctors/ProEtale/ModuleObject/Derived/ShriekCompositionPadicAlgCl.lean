@@ -186,8 +186,7 @@ composite of the independence of the compactification
 (`boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl`) for the composite
 compactification `X ⟶[i ≫ i'] W ⟶[p' ≫ q] S`, of the composition isomorphisms of `j_!`
 and `Rf_*`, and of the inverse of the exchange isomorphism `Rp_* ⋙ j_! ≅ i'_! ⋙ Rp'_*`. -/
-@[no_expose]
-noncomputable def boundedConstructibleLowerShriekComp_padicAlgCl :
+noncomputable irreducible_def boundedConstructibleLowerShriekComp_padicAlgCl :
     boundedConstructibleLowerShriek ℓ (f ≫ g) ≅
       boundedConstructibleLowerShriek ℓ f ⋙
         boundedConstructibleLowerShriek ℓ g :=
@@ -264,8 +263,7 @@ lemma boundedConstructibleLowerShriekComp_padicAlgCl_eq :
           (compactificationOverField g)).choose
         (Compactification.exists_isPullback_overG_overI (compactificationOverField f)
           (compactificationOverField g)).choose_spec := by
-  unfold boundedConstructibleLowerShriekComp_padicAlgCl
-    boundedConstructibleLowerShriekCompOfCompactifications_padicAlgCl
-  rfl
+  simp only [boundedConstructibleLowerShriekComp_padicAlgCl_def,
+    boundedConstructibleLowerShriekCompOfCompactifications_padicAlgCl]
 
 end AlgebraicGeometry.ProEtale.CondensedRing
