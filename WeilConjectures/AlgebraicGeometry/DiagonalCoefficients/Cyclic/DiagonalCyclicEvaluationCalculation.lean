@@ -38,7 +38,7 @@ attribute [local semireducible] cyclicCompletedQuotient cyclicDiscreteRestrictio
   cyclicSystemEvaluation cyclicStrictBoundary
 
 attribute [local instance 4000] AlgebraicGeometry.ProEtale.diagonalHasLimit
-  AlgebraicGeometry.ProEtale.diagonalConstantTowerLimits
+  AlgebraicGeometry.ProEtale.diagonalModLimits
 
 attribute [local irreducible] DerivedCategory diagonalCompletedSource
 

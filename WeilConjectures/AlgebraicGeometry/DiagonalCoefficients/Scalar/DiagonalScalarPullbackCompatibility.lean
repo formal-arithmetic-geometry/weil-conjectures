@@ -34,7 +34,7 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 open scoped AlgebraicGeometry.ProEtale.CondensedRing.CachedModInstances CategoryTheory.MonObj
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
-local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+attribute [local instance] _root_.instEssentiallySmallProfinite_weilConjectures
 attribute [local instance 20000] ProEtale.sheafBraidedCategory ProEtale.sheafMonoidalCategory
 set_option backward.defeqAttrib.useBackward true
 attribute [local implicit_reducible] ProEtale.sheafMonoidalCategory

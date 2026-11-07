@@ -205,6 +205,7 @@ import all WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
 import all Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.AlgebraicGeometry.CoefficientComparisonFixedPullback
+public import WeilConjectures.AlgebraicGeometry.SfbCompletionRingComparison
 public import WeilConjectures.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import all WeilConjectures.AlgebraicGeometry.CoefficientComparisonFixedPullback
 
@@ -220,10 +221,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.IntegralFiniteEncoding
-
-instance smallProEtaleDownEquivalence (X : Scheme.{u}) :
-    (AsSmall.down : Scheme.coefficientProEtaleSiteModel.{u, u} X ⥤ X.ProEt).IsEquivalence :=
-  (AsSmall.equiv.{u, u + 1, u + 1} (C := X.ProEt)).isEquivalence_inverse
 
 instance smallProEtaleDownDense (X : Scheme.{u}) :
     (AsSmall.down : Scheme.coefficientProEtaleSiteModel.{u, u} X ⥤ X.ProEt).IsDenseSubsite

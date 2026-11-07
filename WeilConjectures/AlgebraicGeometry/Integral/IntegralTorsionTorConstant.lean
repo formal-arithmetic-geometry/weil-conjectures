@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcRationalCategory
 public import WeilConjectures.AlgebraicGeometry.Integral.IntegralStratifiedPerfectModelsSupplement
+public import WeilConjectures.AlgebraicGeometry.Constant.ConstantAdicFiniteDiagramData
 public import WeilConjectures.RingTheory.QuotientLevelTor
 import WeilConjectures.AlgebraicGeometry.Integral.IntegralLevelConstantRestriction
 import all WeilConjectures.AlgebraicGeometry.CompletedConstantReduction.CompletedConstantSheafReductionSupplement
@@ -47,13 +48,6 @@ attribute [-instance] AlgebraicGeometry.ProEtale.surjectiveTower_wEqualsLocallyB
 section Sheaf
 
 variable (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
-
-omit [CommRing A] in
-/-- The constant module sheaf functor is exact. -/
-theorem adicLisseConstantModules_exact (B : Type (u + 1)) [CommRing B] :
-    PreservesFiniteLimits (adicLisseConstantModules T B) ∧
-      PreservesFiniteColimits (adicLisseConstantModules T B) :=
-  CompletedConstantReduction.constant_exact T B
 
 /-- The cohomology of a finite reduction of the constant realization of a perfect complex is
 the constant sheaf of the cohomology of the reduced complex. -/

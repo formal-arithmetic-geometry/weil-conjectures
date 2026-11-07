@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteCondensedRing
 public import WeilConjectures.AlgebraicGeometry.IntegralResidueDerivedMonoidal
 public import WeilConjectures.AlgebraicGeometry.IntegralResidueOrdinaryMonoidal
 public import WeilConjectures.AlgebraicGeometry.IntegralResidueTensorPresentation
@@ -186,7 +187,7 @@ Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15; explicit tensor compariso
 
 end CategoryTheory.Functor
 
-local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+attribute [local instance] _root_.instEssentiallySmallProfinite_weilConjectures
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 

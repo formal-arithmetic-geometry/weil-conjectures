@@ -661,10 +661,6 @@ def DiagonalArrowCompatibility
         F.map ((unit n).app Q) ≫ b.hom = t ≫ (π n).app J ∧
         F.map ((Rn n).map δ) = a.hom ≫ (En n).map f ≫ b.inv
 
-local instance (priority := 3000) diagonalConstantTowerLimits
-    (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) :
-    HasLimitsOfShape ℕᵒᵖ (DiagonalMod ℓ X) := inferInstance
-
 /-- The completed coefficient clause using the shared exact functor and endpoint maps.
 Source: blueprint diagonal limit clause 3 (blueprint: det-prop-diagonal-tower-limit). -/
 def diagonalCompleteDataAssertion

@@ -104,7 +104,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   (B : ℕ → Sheaf J CommRingCat.{max c v r})
   (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)
 
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 400000 in
 -- Assembling the dependent normalized fields requires extra elaboration heartbeats.
 /-- The termwise inverse/direct image construction supplies the geometric-operation data.
 The construction uses the induced coefficient tower, ordinary module adjunctions, and their
