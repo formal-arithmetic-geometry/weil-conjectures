@@ -336,6 +336,8 @@ attribute [local irreducible] Padic.coefficientExtensionIntegers
   sfRationalScalarExtension integralScalarExtension integralOrdinaryScalar
   rationalDerivedTensor rationalTensorScalarComparison sfIntegralConstructible
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Naturality of the prescribed associator on all three input arrows.
 
 Source: Stacks Project, Tags 06YS, 07A4 and 0941; the common-stage paragraph
