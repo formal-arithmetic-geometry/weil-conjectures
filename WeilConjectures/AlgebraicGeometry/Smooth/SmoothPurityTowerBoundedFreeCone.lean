@@ -56,7 +56,6 @@ private theorem composition_comparison {C : Type*} [Category C]
     _ = u ≫ z' ≫ t := by rw [hz]
     _ = (u ≫ z' ≫ r) ≫ s := by rw [Category.assoc, Category.assoc, hr]
 
-set_option maxHeartbeats 2000000 in
 -- Localization whiskering compares large coefficient functor records.
 private theorem zeroSandwich
     {C : Type*} [Category C] [HasZeroMorphisms C] {P K I Z W : C}

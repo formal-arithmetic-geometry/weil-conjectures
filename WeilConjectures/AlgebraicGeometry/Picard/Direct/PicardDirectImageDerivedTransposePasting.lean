@@ -64,7 +64,7 @@ private theorem pasteWithSection
 variable [∀ Y : Scheme.{v},
   HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]
 
-set_option maxHeartbeats 500000 in
+set_option maxHeartbeats 400000 in
 -- Keep categorical comparison choices folded during naturality rewriting.
 /-- The derived adjoint of a test morphism respects successive base change.
 The source is a twice-derived pullback of O_T[0], not a module on the fibre.
