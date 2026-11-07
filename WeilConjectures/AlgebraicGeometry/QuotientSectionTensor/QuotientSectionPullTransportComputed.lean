@@ -557,8 +557,6 @@ private def section_localization_iso (T : Scheme.{u}) :
         DerivedCategory.Q :=
   (ModuleRingedComparison.equivalence Λ T).functor.mapDerivedCategoryFactors
 
-set_option pp.all true in
-set_option pp.maxSteps 100000 in
 private theorem scalar_computation (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u})
     (c : ScalarSectionData a T) (h : ScalarSectionNormalized a T c)
     (P : CochainComplex (Modules Λ T) ℤ) :
@@ -578,8 +576,24 @@ private theorem scalar_computation (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u}
           (((ModuleRingedComparison.equivalence Λ T).functor.mapHomologicalComplex
             (.up ℤ)).obj P)) := by
   unfold complex_iso section_localization_iso
-  with_unfolding_all
-    simpa only [compute_eq] using section_pull_transport_scalar_computation a T c h P
+  have hh := section_pull_transport_scalar_computation a T c h P
+  simp only [compute_eq] at hh
+  run_tac do
+    let g ← Lean.Elab.Tactic.getMainGoal
+    g.withContext do
+      let some d := (← Lean.getLCtx).findFromUserName? `hh |
+        throwError "missing comparison hypothesis"
+      let rec diff (fuel : Nat) (a b : Lean.Expr) : Lean.MetaM Unit := do
+        if a == b then return
+        if ← Lean.withoutModifyingState (Lean.Meta.withTransparency .all
+            (Lean.Meta.isDefEq a b)) then return
+        match fuel, a, b with
+        | n + 1, .app af aa, .app bf ba =>
+          diff n af bf
+          diff n aa ba
+        | _, _, _ => Lean.logInfo m!"MISMATCH: {a} VERSUS {b}"
+      diff 100 d.type (← g.getType)
+  exact hh
 
 private def section_pull_compute_nat {X Y : Scheme.{u}} (f : X ⟶ Y) :
     DerivedCategory.Q ⋙ ModuleRingedComparison.derivedPullback Λ f ⟶
@@ -589,8 +603,6 @@ private def section_pull_compute_nat {X Y : Scheme.{u}} (f : X ⟶ Y) :
 
 set_option maxHeartbeats 300000 in
 -- Unfold the two named interfaces once, preserving the fixed derived-functor instances.
-set_option pp.all true in
-set_option pp.maxSteps 100000 in
 private theorem geometric_computation {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : CochainComplex (Modules Λ Y) ℤ) :
     @Eq ((ModuleRingedComparison.derivedEquivalence Λ X).functor.obj
@@ -613,9 +625,24 @@ private theorem geometric_computation {X Y : Scheme.{u}} (f : X ⟶ Y)
     := by
   rw [complex_iso_hom_app]
   unfold section_localization_iso section_pull_compute_nat
-  with_unfolding_all
-    simpa only [_root_.counit_quotient_transport] using
-      section_pull_transport_geometric_computation f P
+  have hh := section_pull_transport_geometric_computation f P
+  simp only [_root_.counit_quotient_transport] at hh
+  run_tac do
+    let g ← Lean.Elab.Tactic.getMainGoal
+    g.withContext do
+      let some d := (← Lean.getLCtx).findFromUserName? `hh |
+        throwError "missing comparison hypothesis"
+      let rec diff (fuel : Nat) (a b : Lean.Expr) : Lean.MetaM Unit := do
+        if a == b then return
+        if ← Lean.withoutModifyingState (Lean.Meta.withTransparency .all
+            (Lean.Meta.isDefEq a b)) then return
+        match fuel, a, b with
+        | n + 1, .app af aa, .app bf ba =>
+          diff n af bf
+          diff n aa ba
+        | _, _, _ => Lean.logInfo m!"MISMATCH: {a} VERSUS {b}"
+      diff 100 d.type (← g.getType)
+  exact hh
 
 attribute [local irreducible] complex_iso complex_comp_iso section_localization_iso
 
