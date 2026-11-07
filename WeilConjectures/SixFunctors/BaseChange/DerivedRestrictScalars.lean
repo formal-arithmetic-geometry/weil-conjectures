@@ -156,7 +156,8 @@ lemma isIso_derivedBaseChangeMapPlus_app_Qh_obj_iff (sq : CommSq g' f' f g)
     IsIso ((derivedBaseChangeMapPlus A sq).app (DerivedCategory.Plus.Qh.obj K)) ↔
       IsIso (DerivedCategory.Plus.Qh.map
           ((NatTrans.mapHomotopyCategoryPlus (baseChangeMap A sq)).app K) ≫
-        (f')_*[A].rightDerivedFunctorPlusUnith.app (((g')^*[A]).mapHomotopyCategoryPlus.obj K)) := by
+        (f')_*[A].rightDerivedFunctorPlusUnith.app
+          (((g')^*[A]).mapHomotopyCategoryPlus.obj K)) := by
   rw [← isIso_comp_left_iff (((g)^*[A]).mapDerivedCategoryPlus.map
     ((f)_*[A].rightDerivedFunctorPlusUnith.app K)), derivedBaseChangeMapPlus_fac_app,
     isIso_comp_left_iff, ← Category.assoc, isIso_comp_right_iff]
