@@ -623,53 +623,29 @@
 - All ucheck calls have finished. This final commit changes progress documentation only;
   Lean sources are identical to the successful builds.
 
-# PF555 in progress
+# PF555 complete — already green upstream
 
-- Branch u9/PF555; baseline 4d8344e5776c63736db12b5f80aaaf55a72a9d05.
-- Re-read /home/ubuntu/u9/briefs/PF555.md and the existing progress notes on continuation.
-- Applied known BZ565/PF494 migration: ULift.ext now infers its two lifted values.
-  The only Lean edit removes `a b` from line 73 of EmbeddedFiniteHeartRealization.
-- Statements, definitions, imports, docstrings, and options are otherwise unchanged;
-  replay/idempotence and static proof-placeholder audits pass.
-- First leaf ucheck-bumpF checked aab0ba6392083396d9f211cc791dc454812e9b5e.
-  It ended with service timeout rc=124 after 4409 successful rebuilds and zero failures;
-  the leaf was not reached. A new invocation is required to finish from the warmed cache.
-  Remote full log: Weil u9/logs/PF555-20261107T184520.log.
-  Local summary: /home/ubuntu/u9/bz/BUILD-PF555-leaf.log (written when ucheck finishes).
-- The first invocation has finished. Never start another while a retry is active.
-- Upstream adopted PF555 source commit 16df31b2a9 during the first build.
-  Merged origin/u9/bumpF at dd2996edeb6b4c5f0368b2dbe66433fa8af57c7f as required;
-  the assigned source is identical before and after this merge.
-- First retry checked b54acb0c6262951f26553fa1bd2220dbf5204115 and finished with
-  service timeout rc=124, built=5334, failed=0; leaf not reached on the second tree.
-  Remote log u9/logs/PF555-20261107T204641.log.
-  Local summary /home/ubuntu/u9/bz/BUILD-PF555-leaf-retry.log.
-- Both previous ucheck invocations have finished. A second retry is required.
-- Fix/error/rule and baseline evidence: /home/ubuntu/u9/bz/FIXES-PF555.md.
-- Next: await leaf green, then use /home/ubuntu/u9/bz/PF555-downstream-batch1.txt
-  for the six-target importer batch. Whole importer graph is in PF555-downstream-layers.json.
-- Current registry assigns the leaf only to PF555; direct importers have no PF assignment.
-- No local Lean/Lake, new declarations, deletions, proof shortcuts, or heartbeat increases.
-
-# PF554 in progress
-
-- Re-read /home/ubuntu/u9/briefs/PF554.md on continuation; no new LEAD instructions.
-- Assigned ProperHeartBound proof now reuses the existing private theorem
-  CondensedRing.higherDirectImage_filtered via import all EllAdicProperHeartUniformBound.
-  Commit d248e29eed is pushed and already present unchanged in origin/u9/bumpF.
-- No statement changes, new declarations, deletions, heartbeat increases, or proof placeholders.
-  The imported sibling was green in coordinator build78; the new wrapper awaits validation.
-- Builds 1 and 2 exhausted the two-hour service limit rebuilding dependencies. Build 3 reached
-  the leaf and rejected the first candidate with an isDefEq timeout. Coordinator build79 also
-  rejected the subsequent cached-instance proof with a whnf timeout.
-- Build 4 ended at the two-hour service limit on 43.166.74.121 at commit 01ba6453ee
-  (the older proof), after reaching 18714/18870 tasks with no Lean errors. The leaf was
-  not reached. Its local exec session expired on continuation; remote process exit was
-  confirmed before resubmission. Log: Weil u9/logs/PF554-20261107T230720.log.
-- Next validation uses d248e29eed's proof with ucheck-bumpF on the leaf and its three
-  direct importers. Continue downstream up to 30 extra modules after they pass.
-- Latest upstream check: leaf and direct importers unchanged through 91bbe97292.
-- Records: /home/ubuntu/u9/bz/FIXES-PF554.md and PF554-progress.txt; downstream plan:
-  /home/ubuntu/u9/bz/PF554-downstream.json. No DONE file yet; no green result claimed.
-- Only ucheck-bumpF may build; never run Lean/Lake locally. Explicit fetch refspec:
-  git fetch origin refs/heads/u9/bumpF:refs/remotes/origin/u9/bumpF.
+- Assigned EmbeddedFiniteHeartRealization and its two direct importers,
+  EmbeddedFiniteHeartConstructibility and EmbeddedFiniteHeartMonoidalPresentation,
+  are explicitly green in coordinator build77; Constructibility rebuilt in build78.
+- PF555 source commit 16df31b2a9 removes obsolete explicit values from ULift.ext.
+  Upstream already contains this commit. All three source files match this branch,
+  coordinator-tested head 87bddfac86, and fetched origin/u9/bumpF e685a2d098.
+- The sole source edit is inside finiteConstants_injective. Statements, declarations,
+  imports, docstrings, and options are unchanged. Rule replay and idempotence pass;
+  the assigned file contains no proof placeholders or forbidden shortcuts.
+- Three ucheck-bumpF invocations finished with the service's two-hour timeout, rc=124:
+  aab0ba6392083396d9f211cc791dc454812e9b5e: built=4409, failed=0;
+  b54acb0c6262951f26553fa1bd2220dbf5204115: built=5334, failed=0;
+  01f114b7c744864400c046759ef46c132a9aa74a: built=3679, failed=0.
+  None reached the assigned target; these are not claimed as green ucheck results.
+  The third timeout is confirmed by the remote service journal after local interruption.
+- Stop under the brief's explicit already-green-upstream rule. The independent successful
+  coordinator results are saved in /home/ubuntu/u9/bz/PF555-upstream-green-evidence.txt.
+  Both direct importers are covered; PF560 separately completed the next four downstream
+  modules. No tested downstream module remains red, and no additional source edit is needed.
+- All build invocations have ended. No local Lean/Lake execution, blocker edits,
+  declaration deletions, new axioms, profiler probes, or heartbeat increases by PF555.
+- Fix/error/rule and logs: /home/ubuntu/u9/bz/FIXES-PF555.md.
+  Completion: /home/ubuntu/u9/state/PF555.DONE.
+- This completion commit changes progress documentation only.
