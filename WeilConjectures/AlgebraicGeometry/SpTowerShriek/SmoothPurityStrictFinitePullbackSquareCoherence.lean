@@ -37,7 +37,6 @@ attribute [local implicit_reducible] AlgebraicGeometry.Scheme.ProEt
 -- Produce explicit checked congruences for definitional instance diamonds.
 -- Each reduction is recorded as a separate reflexivity theorem; the final
 -- proof uses these equations, so the kernel never reduces the complete word.
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private meta def conversionOfEq (h : Lean.Expr) : Lean.MetaM Lean.Expr := do
   let ty ← Lean.Meta.inferType h
@@ -45,14 +44,12 @@ private meta def conversionOfEq (h : Lean.Expr) : Lean.MetaM Lean.Expr := do
   return Lean.mkAppN (Lean.mkConst ``heq_of_eq ty.getAppFn.constLevels!)
     (ty.getAppArgs.push h)
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private meta def conversionSymm (h : Lean.Expr) : Lean.MetaM Lean.Expr := do
   let ty ← Lean.Meta.inferType h
   let some (α, a, β, b) := ty.heq? | throwError "expected HEq"
   return Lean.mkAppN (Lean.mkConst ``HEq.symm ty.getAppFn.constLevels!) #[α, β, a, b, h]
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private meta def conversionTrans (h k : Lean.Expr) : Lean.MetaM Lean.Expr := do
   let ty ← Lean.Meta.inferType h
@@ -61,14 +58,12 @@ private meta def conversionTrans (h k : Lean.Expr) : Lean.MetaM Lean.Expr := do
   return Lean.mkAppN (Lean.mkConst ``HEq.trans ty.getAppFn.constLevels!)
     #[α, β, γ, a, b, c, h, k]
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private meta def conversionToEq (h : Lean.Expr) : Lean.MetaM Lean.Expr := do
   let ty ← Lean.Meta.inferType h
   let some (α, a, _, b) := ty.heq? | throwError "expected HEq"
   return Lean.mkAppN (Lean.mkConst ``eq_of_heq ty.getAppFn.constLevels!) #[α, a, b, h]
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private meta def conversionReduction (a b : Lean.Expr) : Lean.MetaM Lean.Expr := do
   let α ← Lean.Meta.inferType a
@@ -79,7 +74,6 @@ private meta def conversionReduction (a b : Lean.Expr) : Lean.MetaM Lean.Expr :=
     (zetaDelta := true) (kind? := `_finiteReduction)
   conversionOfEq h
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private meta partial def conversionCongruence
     (cache : IO.Ref (Std.HashMap (Lean.Expr × Lean.Expr) Lean.Expr))
@@ -211,7 +205,6 @@ private meta partial def conversionCongruence
   cache.modify fun m => m.insert (a, b) h
   return h
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private meta def exactByConversion (h : Lean.Expr) : Lean.Elab.Tactic.TacticM Unit :=
   Lean.Elab.Tactic.withMainContext do
@@ -228,7 +221,6 @@ private meta def exactByConversion (h : Lean.Expr) : Lean.Elab.Tactic.TacticM Un
     let result ← Lean.Meta.mkAppM ``Eq.mp #[e, h]
     Lean.Elab.Tactic.closeMainGoal `exact result
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private theorem conjugate_cancel
     {C D H : Type*} [Category C] [Category D] [Category H]
@@ -252,7 +244,6 @@ private theorem conjugate_cancel
   change G.map (𝟙 _) ≫ s.hom.app M = _
   simp only [G.map_id, Category.id_comp]
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private theorem change_pull_models
     {C₀ C₁ C₂ D₀ D₁ D₂ : Type*}
@@ -291,7 +282,6 @@ private theorem change_pull_models
   rw [hnative, ← he]
   simp only [Iso.inv_hom_id_app_assoc]
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private theorem model_comp
     (A : Type u) [CommRing A] [Finite A]
@@ -354,7 +344,6 @@ private theorem model_comp
           (((proEtaleConstantRingAdjunction A f).unit.app M).val.app U z)) at hn
   erw [← hn, he Y X f]
   rfl
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private def ordinaryComparison (A : Type u) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -365,7 +354,6 @@ private def ordinaryComparison (A : Type u) [CommRing A] [Finite A]
       (openSquarePullbackModel A f) ≪≫
     (sfIntrinsicModuleEquivalence Y A).funInvIdAssoc _
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private theorem ordinary_comp_square
     (A : Type u) [CommRing A] [Finite A]
@@ -404,7 +392,6 @@ private theorem ordinary_comp_square
     Iso.trans, Iso.symm, Functor.isoWhiskerLeft, Functor.whiskerLeft] at hh ⊢
   exact hh
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private theorem exact_comp_square
     (A : Type u) [CommRing A] [Finite A]
@@ -448,7 +435,6 @@ private theorem exact_comp_square
     Functor.comp_obj, Category.id_comp, Category.comp_id, Category.assoc,
     proEtaleConstantRingDerivedPullback] using congrArg (fun t ↦ t.hom.app M) e
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private theorem pasteIsoSquares
     {C : Type*} [Category C] {T U B₁ B₂ I₁ I₂ IT IU : C}
@@ -472,7 +458,6 @@ private theorem pasteIsoSquares
   simpa only [Category.assoc] using
     congrArg (fun z ↦ k₁.inv ≫ z ≫ i₂.hom) hc
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private def derivedComparison (A : Type u) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -487,7 +472,6 @@ private def derivedComparison (A : Type u) [CommRing A] [Finite A]
     (Functor.mapDerivedCategorySquareIso.{u+2,u+2,u+2,u+2,
       u+2,u+1,u+2,u+1,u+1,u+1,u+1,u+1} (ordinaryComparison A f)).symm
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private theorem native_comp_square
     (A : Type u) [CommRing A] [Finite A]
@@ -535,7 +519,6 @@ private theorem native_comp_square
     congrArg (fun z ↦ (sfIntrinsicModuleEquivalence Z A).functor.mapDerivedCategory.map
       ((upperStar B (h ≫ f)).leftDerivedFunctorIsoMapDerivedCategory.hom.app M) ≫ z) e
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private theorem native_congr_square
     (A : Type u) [CommRing A] [Finite A]
@@ -553,7 +536,6 @@ private theorem native_congr_square
   simp only [leftDerivedUpperStarCongr, eqToIso_refl, Iso.refl_hom, NatTrans.id_app]
   erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private theorem pasteNativeIsoSquares
     {C D J₁ J₂ : Type*} [Category C] [Category D] [Category J₁] [Category J₂]
@@ -577,7 +559,6 @@ private theorem pasteNativeIsoSquares
   simpa only [Functor.mapIso_hom, Functor.mapIso_inv, Iso.trans_hom, Iso.trans_inv,
     Category.assoc] using H
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private theorem pasteFunctorComparisonSquares
     {A B C D A' B' C' D' : Type*}
@@ -613,7 +594,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 set_option linter.style.haveILetI false in
 -- Inlining the finite instance keeps the concrete realization conversions small.
-set_option maxHeartbeats 2000000 in
+set_option maxHeartbeats 600000 in
 -- Explicit comparison congruences are checked within this declaration.
 /-- The fixed scalar pullback comparisons identify the two pullback-square words.
 Source: blueprint operations proof (2), pullback compositor normalization.
