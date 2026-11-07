@@ -100,7 +100,7 @@ theorem picardPresheafDegree_map [IsProper f] [LocallyOfFinitePresentation f] {T
     (g : T' ⟶ T) (L : (picardPresheaf f).obj (.op T)) (t : T'.left) :
     picardPresheafDegree f ((picardPresheaf f).map g.op L) t =
       picardPresheafDegree f L (g.left t) := by
-  have := Modules.isGrothendieckAbelian (pullback f T.hom)
+  have := Modules.instIsGrothendieckAbelian_weilConjectures (pullback f T.hom)
   have := Pic.isInvertible (Y := pullback f T.hom) L
   have : (SheafOfModules.unit (pullback f T.hom).ringCatSheaf).IsFinitePresentation :=
     SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
@@ -123,7 +123,7 @@ theorem picardPresheafDegree_pic_map_of_isPullback [IsProper f] [LocallyOfFinite
     (sq : IsPullback e (pullback.snd f' T'.hom) (pullback.snd f T.hom) φ)
     (L : (picardPresheaf f).obj (.op T)) (t : T'.left) :
     picardPresheafDegree f' (Pic.map e L) t = picardPresheafDegree f L (φ t) := by
-  have := Modules.isGrothendieckAbelian (pullback f T.hom)
+  have := Modules.instIsGrothendieckAbelian_weilConjectures (pullback f T.hom)
   have := Pic.isInvertible (Y := pullback f T.hom) L
   have : (SheafOfModules.unit (pullback f T.hom).ringCatSheaf).IsFinitePresentation :=
     SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
@@ -143,7 +143,7 @@ since both modules are invertible, hence of finite presentation and flat over `T
 theorem isLocallyConstant_picardPresheafDegree [IsProper f] [LocallyOfFinitePresentation f]
     [Flat f] {T : Over S} (L : (picardPresheaf f).obj (.op T)) :
     IsLocallyConstant (picardPresheafDegree f L) := by
-  have := Modules.isGrothendieckAbelian (pullback f T.hom)
+  have := Modules.instIsGrothendieckAbelian_weilConjectures (pullback f T.hom)
   have := Pic.isInvertible (Y := pullback f T.hom) L
   have : (SheafOfModules.unit (pullback f T.hom).ringCatSheaf).IsFinitePresentation :=
     SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _

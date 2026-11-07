@@ -36,7 +36,7 @@ theorem rightAcyclic_extendRestrict_of_isAffineHom [IsSeparated f]
     [HasInjectiveResolutions X.Modules] (ℱ : X.Modules) [ℱ.IsQuasicoherent] {V : X.Opens}
     (hV : IsAffineHom (V.ι ≫ f)) :
     (pushforward f).rightAcyclic ((extendRestrictFunctor V).obj ℱ) := by
-  have := isGrothendieckAbelian V
+  have := instIsGrothendieckAbelian_weilConjectures V
   have : IsAffineHom V.ι := IsAffineHom.of_comp V.ι f
   exact rightAcyclic_pushforward_obj_of_isZero V.ι f _
     (fun q ↦ isZero_higherDirectImage_of_isAffineHom _ _ q.succ_pos)

@@ -132,7 +132,8 @@ theorem affine_algebra_derived_counit_homology_factorization
     exact (SheafOfModules.isQuasicoherent (moduleRings Y.toRingedSpace)).prop_of_iso
       c.symm hq
   have := IsSeparated.of_isAffineHom f
-  have : IsGrothendieckAbelian.{v} X.Modules := Scheme.Modules.isGrothendieckAbelian X
+  have : IsGrothendieckAbelian.{v} X.Modules :=
+    Scheme.Modules.instIsGrothendieckAbelian_weilConjectures X
   have hacyc : ∀ (F : SheafOfModules.{v} (moduleRings X.toRingedSpace)),
       F.IsQuasicoherent → ∀ (p : ℤ), 0 < p →
         Limits.IsZero ((schemeModuleHigherDirectImage f p).obj F) := by

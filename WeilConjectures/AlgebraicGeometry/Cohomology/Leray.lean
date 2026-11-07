@@ -92,8 +92,8 @@ theorem exists_leraySpectralSequence [HasInjectiveResolutions X.Modules]
       (∀ p q : ℕ, Nonempty ((E.page 2).X (p, q) ≅
         ((globalSectionsFunctor Y).rightDerived p).obj ((higherDirectImage f q).obj ℱ))) ∧
       E.AbutsTo (fun n ↦ ((globalSectionsFunctor X).rightDerived n).obj ℱ) := by
-  have := isGrothendieckAbelian X
-  have := isGrothendieckAbelian Y
+  have := instIsGrothendieckAbelian_weilConjectures X
+  have := instIsGrothendieckAbelian_weilConjectures Y
   refine (pushforward f).exists_grothendieckSpectralSequence (globalSectionsFunctor Y)
     (fun I _ q hq ↦ ?_) ℱ
   -- injective modules are flasque, and so are their direct images

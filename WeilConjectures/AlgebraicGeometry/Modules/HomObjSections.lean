@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
+public import WeilConjectures.AlgebraicGeometry.Cohomology.PushforwardZero
 
 /-!
 # Global sections of the internal hom of `𝒪_X`-modules
@@ -82,11 +83,6 @@ lemma homToΓHomObj_comp_smulHom {M N : X.Modules} (φ : M ⟶ N) (r : Γ(X, ⊤
   ext x
   rfl
 
-lemma H.zeroLinearEquiv_map_homObj {M N : X.Modules} (φ : M ⟶ N) (x : M.H 0) :
-    H.zeroLinearEquiv N (H.map φ 0 x) = φ.app ⊤ (H.zeroLinearEquiv M x) :=
-  (Sheaf.H.equiv₀_naturality (hT := isTerminalTop)
-    ((SheafOfModules.toSheaf X.ringCatSheaf).map φ) x).symm
-
 /-- **`H⁰` of the internal hom**: `H⁰(X, Hom(M, N)) ≃ Hom(M, N)`. -/
 def homObjHZeroAddEquiv (M N : X.Modules) :
     H (X := X) (SheafOfModules.homObj (R := X.sheaf) M N) 0 ≃+ (M ⟶ N) :=
@@ -104,7 +100,7 @@ lemma homObjHZeroAddEquiv_map {M' M N : X.Modules} (f : M' ⟶ M)
       f ≫ homObjHZeroAddEquiv M N x := by
   apply homToΓHomObj_injective
   rw [homToΓHomObj_homObjHZeroAddEquiv, homToΓHomObj_comp, homToΓHomObj_homObjHZeroAddEquiv,
-    H.zeroLinearEquiv_map_homObj]
+    H.zeroLinearEquiv_map]
 
 /-- `homObjHZeroAddEquiv` turns multiplication by a global function into composition with the
 multiplication on the target. -/

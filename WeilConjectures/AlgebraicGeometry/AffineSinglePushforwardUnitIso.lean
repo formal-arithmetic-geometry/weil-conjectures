@@ -64,7 +64,7 @@ theorem affine_singlePushforward_unit_isIso
     change PreservesFiniteLimits (Scheme.Modules.pushforward f)
     have := (Scheme.Modules.pullbackPushforwardAdjunction f).rightAdjoint_preservesLimits
     infer_instance
-  have := Scheme.Modules.isGrothendieckAbelian X
+  have := Scheme.Modules.instIsGrothendieckAbelian_weilConjectures X
   have hA : F.rightAcyclic M := by
     intro n
     exact Scheme.Modules.isZero_higherDirectImage_of_isAffineHom f M (Nat.succ_pos n)

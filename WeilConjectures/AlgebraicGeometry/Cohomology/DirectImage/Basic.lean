@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.AffineMorphism
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Derived.Basic
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.RightDerived
@@ -33,14 +34,6 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme.Modules
 
 variable {X T : Scheme.{u}}
-
-/-- `X.Modules` is a Grothendieck abelian category (`SheafOfModules.isGrothendieckAbelian`).
-
-Together with `CategoryTheory.IsGrothendieckAbelian.enoughInjectives` it supplies the
-`HasInjectiveResolutions X.Modules` instance that every statement below, and every statement
-about the Picard functor `F` downstream, assumes. -/
-theorem isGrothendieckAbelian (X : Scheme.{u}) : IsGrothendieckAbelian.{u} X.Modules :=
-  SheafOfModules.isGrothendieckAbelian X.ringCatSheaf
 
 /-- The `q`-th **higher direct image** functor `R^q f_*` along a morphism of schemes
 `f : X ⟶ T`: the `q`-th right derived functor of the pushforward functor

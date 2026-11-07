@@ -174,7 +174,7 @@ theorem isClosed_setOf_nonempty_iso_fiber (f : P ⟶ T) [IsProper f] [Flat f]
     [N.IsInvertible] :
     IsClosed {t : T | Nonempty ((Modules.pullback (f.fiberι t)).obj M ≅
       (Modules.pullback (f.fiberι t)).obj N)} := by
-  have := isGrothendieckAbelian P
+  have := instIsGrothendieckAbelian_weilConjectures P
   have hopen (L : P.Modules) [L.IsInvertible] : IsOpen {t | L.hFiber f 0 t < 1} :=
     have := IsInvertible.isFinitePresentation L
     have : SheafOfModules.IsInvertible.{u, u, u} L := IsInvertible.sheafOfModules_isInvertible L

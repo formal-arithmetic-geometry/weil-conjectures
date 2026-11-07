@@ -100,8 +100,8 @@ theorem affine_morphism_cohomology_edge
             h.appTop r •
               @id ((RingedSpace.moduleCohomology X.toRingedSpace p).obj F)
                 (moduleCohomologyEdgeMap h F p x)) := by
-  have := isGrothendieckAbelian X
-  have := isGrothendieckAbelian S
+  have := instIsGrothendieckAbelian_weilConjectures X
+  have := instIsGrothendieckAbelian_weilConjectures S
   have : PreservesFiniteLimits (RingedSpace.globalSectionsFunctor S.toRingedSpace) :=
     inferInstanceAs (PreservesFiniteLimits
       (SheafOfModules.evaluation (moduleRings S.toRingedSpace) (op ⊤)))

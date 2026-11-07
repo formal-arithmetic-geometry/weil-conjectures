@@ -16,7 +16,8 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 # The derived category of `𝒪_X`-modules and perfect complexes
 
 For a scheme `X`, the category `X.Modules` of `𝒪_X`-modules is a Grothendieck abelian category
-(`AlgebraicGeometry.Scheme.Modules.isGrothendieckAbelian`), made an instance here. Hence it has
+(`AlgebraicGeometry.Scheme.Modules.instIsGrothendieckAbelian_weilConjectures`), made an instance
+here. Hence it has
 K-injective resolutions and a derived category `D(𝒪_X) = DerivedCategory X.Modules`
 (`HasDerivedCategory.ofIsGrothendieckAbelian`).
 

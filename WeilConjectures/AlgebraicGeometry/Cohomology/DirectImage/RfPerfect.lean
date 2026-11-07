@@ -173,7 +173,7 @@ over the base: the Čech complex has finitely generated cohomology `Γ(S, R^q f_
 lemma isPerfect_Q_cechModuleComplex_of_isNoetherianRing [IsNoetherianRing Γ(S, ⊤)] [IsProper f]
     [LocallyOfFinitePresentation f] [ℱ.IsFinitePresentation] (hℱ : ℱ.IsFlatOver f) :
     (Q.obj (cechModuleComplex f ℱ U)).IsPerfect := by
-  have := isGrothendieckAbelian X
+  have := instIsGrothendieckAbelian_weilConjectures X
   have := Fintype.ofFinite ι
   refine isPerfect_Q_cechModuleComplex f ℱ U hU hU' hℱ fun q ↦ ?_
   obtain ⟨e⟩ := nonempty_homology_cechModuleComplex_linearEquiv f ℱ U hU hU' q

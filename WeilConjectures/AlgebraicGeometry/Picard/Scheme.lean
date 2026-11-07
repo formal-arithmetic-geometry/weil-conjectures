@@ -238,7 +238,8 @@ theorem isRepresentable_picardFunctor_aux [IsSepClosed k] :
       Nonempty ((picardFunctor (X ↘ Spec (.of k))).obj.RepresentableBy A) := by
   set f := X ↘ Spec (.of k)
   have : ∀ T : Over (Spec (.of k)), HasInjectiveResolutions (pullback f T.hom).Modules :=
-    fun T ↦ have := Modules.isGrothendieckAbelian (pullback f T.hom); inferInstance
+    fun T ↦
+      have := Modules.instIsGrothendieckAbelian_weilConjectures (pullback f T.hom); inferInstance
   -- a `k`-rational point `σ`
   have : Smooth f := SmoothOfRelativeDimension.smooth 1 f
   have : IsIntegral X := GeometricallyIntegral.isIntegral_of_subsingleton f
@@ -276,7 +277,8 @@ theorem smoothOfRelativeDimension_of_representableBy_picardFunctor [IsSepClosed 
     SmoothOfRelativeDimension (arithmeticGenus k X) A.hom := by
   set f := X ↘ Spec (.of k)
   have : ∀ T : Over (Spec (.of k)), HasInjectiveResolutions (pullback f T.hom).Modules :=
-    fun T ↦ have := Modules.isGrothendieckAbelian (pullback f T.hom); inferInstance
+    fun T ↦
+      have := Modules.instIsGrothendieckAbelian_weilConjectures (pullback f T.hom); inferInstance
   -- a `k`-rational point `σ`
   have : Smooth f := SmoothOfRelativeDimension.smooth 1 f
   have : IsIntegral X := GeometricallyIntegral.isIntegral_of_subsingleton f

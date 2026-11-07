@@ -72,7 +72,7 @@ factorization is finite. For a general affine base this is not proved in the blu
 theorem Scheme.Hom.isFinite_steinFactorizationBase {A : Type u} [CommRing A]
     [IsNoetherianRing A] {Y : Scheme.{u}} (p : Y ⟶ Spec (.of A)) [IsProper p] :
     IsFinite p.steinFactorizationBase := by
-  have := Modules.isGrothendieckAbelian Y
+  have := Modules.instIsGrothendieckAbelian_weilConjectures Y
   have : IsNoetherianRing Γ(Spec (.of A), ⊤) :=
     isNoetherianRing_of_ringEquiv _ (Scheme.ΓSpecIso (.of A)).commRingCatIsoToRingEquiv.symm
   let O : Y.Modules := SheafOfModules.unit Y.ringCatSheaf
