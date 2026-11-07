@@ -7,7 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.BoundedOrdinaryEvaluationAssembly
-import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationPostDifferential
+public import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationPostDifferential
 import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationPreDifferential
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import WeilConjectures.Algebra.Homology.HomComplexProjections
@@ -33,9 +33,7 @@ namespace AlgebraicGeometry
 
 attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
 
-local instance ordinarySummandMonoidalPreadditive (X : Scheme.{u}) (U : X.Opens) :
-    MonoidalPreadditive (localEvaluationModules X U) :=
-  Classical.choice (SheafOfModules.tensorClosed (X.sheaf.over U)).1
+attribute [local instance] ordinaryPostMonoidalPreadditive
 
 private theorem projection_transport (X : Scheme.{u}) (U : X.Opens)
     (P F : CochainComplex (localEvaluationModules X U) ℤ)

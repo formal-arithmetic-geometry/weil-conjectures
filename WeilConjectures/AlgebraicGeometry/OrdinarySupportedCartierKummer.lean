@@ -20,7 +20,7 @@ import WeilConjectures.AlgebraicGeometry.PullbackMonoidalUnitComparison
 import WeilConjectures.AlgebraicGeometry.PullbackTensorComposition
 import WeilConjectures.AlgebraicGeometry.ScalarUnitExt
 import WeilConjectures.AlgebraicGeometry.Sites.GmPicardPullback
-import WeilConjectures.AlgebraicGeometry.SupportedCartierBoundaryExistence
+public import WeilConjectures.AlgebraicGeometry.SupportedCartierBoundaryExistence
 import WeilConjectures.AlgebraicGeometry.SupportedDerivedUnitForget
 import WeilConjectures.AlgebraicGeometry.SupportedKummerChernRealization
 import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
@@ -66,20 +66,5 @@ set_option linter.auxLemma false in
 attribute [local instance 100000] DerivedCategoryModule._proof_1 DerivedCategoryModule._proof_2
 
 end
-
-/-- The unique-boundary clause of ordinary_supported_kummer, with its other witnesses hidden.
-Source: Stacks 03PL, 0A45 (auxiliary; not a blueprint node).
-Proof: apply supported_cartier_boundary_existsUnique directly. Its unique representative
-is the boundary class used in ordinary_supported_kummer. This avoids normalizing the
-pullback and scalar witnesses in consumers.
--/
-theorem ordinary_supported_kummer_uniqueBoundary (T : Scheme.{u}) (N : ℕ) (hN : 0 < N)
-    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
-    (hT : IsUnit (N : Γ(T, ⊤))) {D : Scheme.{u}} (i : D ⟶ T)
-    [IsClosedImmersion i] (hI : i.ker.IsInvertible) :
-    ∃! κ : Ext ((lowerStar (ModuleCat.{u + 1} A) i).obj (ordinaryFiniteConstant A D))
-      (Scheme.finiteEtaleTateLine T N A hA) 2,
-      SupportedKummerBoundary A N hA i hI hT κ := by
-  exact supported_cartier_boundary_existsUnique T N hN A hA hT i hI
 
 end AlgebraicGeometry.Etale
