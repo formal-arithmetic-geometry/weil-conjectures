@@ -82,20 +82,6 @@ lemma mem_idealOfOpens_of_forall (J : X.IdealSheafData) {U : X.Opens} {ι : Type
       J.subschemeι.app_map_apply _ (homOfLE (J.subschemeι.preimage_mono (hWU i)))] at h
     exact h.trans (map_zero _).symm
 
-/-- `J.idealOfOpens U` is monotone in the ideal sheaf `J`. -/
-lemma idealOfOpens_mono_finiteType {J K : X.IdealSheafData} (h : J ≤ K) (U : X.Opens) :
-    J.idealOfOpens U ≤ K.idealOfOpens U := by
-  intro x hx
-  refine K.mem_idealOfOpens_of_forall (fun V : {V : X.affineOpens // V.1 ≤ U} ↦ V.1.1)
-    (fun V ↦ V.2) (fun y hy ↦ ?_) fun V ↦ ?_
-  · obtain ⟨_, ⟨V, hV, rfl⟩, hyV, hVU⟩ :=
-      X.isBasis_affineOpens.exists_subset_of_mem_open hy U.2
-    exact TopologicalSpace.Opens.mem_iSup.2 ⟨⟨⟨V, hV⟩, hVU⟩, hyV⟩
-  · have hx' := J.map_mem_idealOfOpens V.2 hx
-    rw [idealOfOpens_eq_ideal J V.1] at hx'
-    rw [idealOfOpens_eq_ideal K V.1]
-    exact h V.1 hx'
-
 end Scheme.IdealSheafData
 
 end AlgebraicGeometry
@@ -256,7 +242,7 @@ lemma exists_ofFiniteType_le_mem_idealOfOpens [CompactSpace X] [QuasiSeparatedSp
   refine ⟨⨆ W, K W, iSup_le hKJ, ofFiniteType_iSup hK, ?_⟩
   refine mem_idealOfOpens_of_forall _ (fun W : Us ↦ W.1) hle ?_ fun W ↦ ?_
   · rw [hVUs, sSup_eq_iSup']
-  · exact idealOfOpens_mono_finiteType (le_iSup K W) _
+  · exact idealOfOpens_mono (le_iSup K W) _
       ((idealOfOpens_eq_ideal (K W) ⟨W.1, hUs W.2⟩).ge (hxK W))
 
 end AlgebraicGeometry.Scheme.IdealSheafData

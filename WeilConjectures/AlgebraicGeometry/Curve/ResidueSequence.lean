@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.Modules.GenericRank
 public import Mathlib.AlgebraicGeometry.FunctionField
 public import WeilConjectures.AlgebraicGeometry.Cohomology.AcyclicResolution
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Flasque
@@ -44,11 +45,6 @@ open CategoryTheory Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry.Scheme
 
 variable {X : Scheme.{u}}
-
-/-- On an irreducible scheme every nonempty open contains the generic point. -/
-lemma genericPoint_mem_of_mem [IrreducibleSpace X] {U : X.Opens} {x : X} (hx : x ∈ U) :
-    genericPoint X ∈ U :=
-  ((genericPoint_spec X).mem_open_set_iff U.isOpen).mpr ⟨x, trivial, hx⟩
 
 /-- A `k`-algebra structure on the function field of a `k`-scheme is *compatible* if it is the
 composite `k → Γ(X, 𝒪_X) → K` of the structure map and the germ at the generic point. -/
@@ -120,7 +116,7 @@ neighbourhoods of `x`; for `φ` the inclusion of `𝒪_X` into the constant shea
 local ring `𝒪_{X,x} ⊆ K`. -/
 noncomputable def stalkLattice (x : X) : Submodule k V where
   carrier := {v | ∃ (U : X.Opens) (hx : x ∈ U) (s : Γ(M, U)),
-    genericValue φ (genericPoint_mem_of_mem hx) s = v}
+    genericValue φ (Modules.genericPoint_mem hx) s = v}
   zero_mem' := ⟨⊤, trivial, 0, genericValue_zero _ _⟩
   add_mem' := by
     rintro _ _ ⟨U, hU, s, rfl⟩ ⟨U', hU', s', rfl⟩
@@ -136,16 +132,16 @@ noncomputable def stalkLattice (x : X) : Submodule k V where
 
 lemma mem_stalkLattice {x : X} {v : V} :
     v ∈ stalkLattice k φ x ↔ ∃ (U : X.Opens) (hx : x ∈ U) (s : Γ(M, U)),
-      genericValue φ (genericPoint_mem_of_mem hx) s = v :=
+      genericValue φ (Modules.genericPoint_mem hx) s = v :=
   Iff.rfl
 
 lemma genericValue_mem_stalkLattice {U : X.Opens} {x : X} (hx : x ∈ U) (s : Γ(M, U)) :
-    genericValue φ (genericPoint_mem_of_mem hx) s ∈ stalkLattice k φ x :=
+    genericValue φ (Modules.genericPoint_mem hx) s ∈ stalkLattice k φ x :=
   ⟨U, hx, s, rfl⟩
 
 lemma germ_smul_mem_stalkLattice {U : X.Opens} {x : X} (hx : x ∈ U) (a : Γ(X, U)) {v : V}
     (hv : v ∈ stalkLattice k φ x) :
-    X.presheaf.germ U _ (genericPoint_mem_of_mem hx) a • v ∈ stalkLattice k φ x := by
+    X.presheaf.germ U _ (Modules.genericPoint_mem hx) a • v ∈ stalkLattice k φ x := by
   obtain ⟨U', hU', s, rfl⟩ := hv
   refine ⟨U ⊓ U', ⟨hx, hU'⟩, X.presheaf.map (homOfLE (inf_le_left : U ⊓ U' ≤ U)).op a •
     M.presheaf.map (homOfLE (inf_le_right : U ⊓ U' ≤ U')).op s, ?_⟩
@@ -163,13 +159,13 @@ variable [X.Over (Spec (.of k))] [IsFunctionFieldAlgebra k X] {k}
 /-- Multiplication by a section `a` of `𝒪_X` over `U ∋ x` on `V ⧸ V_x`. -/
 noncomputable def quotSMul {U : X.Opens} {x : X} (hx : x ∈ U) (a : Γ(X, U)) :
     V ⧸ stalkLattice k φ x →ₗ[k] V ⧸ stalkLattice k φ x :=
-  (stalkLattice k φ x).mapQ (stalkLattice k φ x) (germSMulLinear k (genericPoint_mem_of_mem hx) a)
+  (stalkLattice k φ x).mapQ (stalkLattice k φ x) (germSMulLinear k (Modules.genericPoint_mem hx) a)
     fun _ hv ↦ germ_smul_mem_stalkLattice φ hx a hv
 
 @[simp]
 lemma quotSMul_mk {U : X.Opens} {x : X} (hx : x ∈ U) (a : Γ(X, U)) (v : V) :
     quotSMul φ hx a (Submodule.Quotient.mk v : V ⧸ stalkLattice k φ x) =
-      Submodule.Quotient.mk (X.presheaf.germ U _ (genericPoint_mem_of_mem hx) a • v) :=
+      Submodule.Quotient.mk (X.presheaf.germ U _ (Modules.genericPoint_mem hx) a • v) :=
   rfl
 
 lemma quotSMul_one {U : X.Opens} {x : X} (hx : x ∈ U) (q : V ⧸ stalkLattice k φ x) :
@@ -268,7 +264,7 @@ lemma sub_val (s t : PrincipalParts k φ U) (x : U) :
 noncomputable instance : SMul Γ(X, U) (PrincipalParts k φ U) where
   smul a s := mk φ (fun x ↦ quotSMul φ x.2 a (s.val φ x)) fun x ↦ by
     obtain ⟨W, hW, hxW, v, hv⟩ := s.property φ x
-    exact ⟨W, hW, hxW, X.presheaf.germ U _ (genericPoint_mem_of_mem x.2) a • v,
+    exact ⟨W, hW, hxW, X.presheaf.germ U _ (Modules.genericPoint_mem x.2) a • v,
       fun y hy ↦ by rw [hv y hy, quotSMul_mk]⟩
 
 @[simp]
@@ -386,8 +382,8 @@ variable [X.Over (Spec (.of k))] [IsFunctionFieldAlgebra k X] {k}
 noncomputable def toPrincipalPartsApp (U : X.Opens) :
     SkyscraperSections (genericPoint X) V U →+ PrincipalParts k φ U where
   toFun t := PrincipalParts.mk φ
-    (fun y ↦ Submodule.Quotient.mk (t ⟨genericPoint_mem_of_mem y.2⟩))
-    fun x ↦ ⟨U, le_rfl, x.2, t ⟨genericPoint_mem_of_mem x.2⟩, fun _ _ ↦ rfl⟩
+    (fun y ↦ Submodule.Quotient.mk (t ⟨Modules.genericPoint_mem y.2⟩))
+    fun x ↦ ⟨U, le_rfl, x.2, t ⟨Modules.genericPoint_mem x.2⟩, fun _ _ ↦ rfl⟩
   map_zero' := PrincipalParts.ext φ fun _ ↦ Submodule.Quotient.mk_zero _
   map_add' _ _ := PrincipalParts.ext φ fun _ ↦ Submodule.Quotient.mk_add _
 
@@ -406,7 +402,7 @@ noncomputable def toPrincipalParts : skyscraper (genericPoint X) V ⟶ principal
 lemma toPrincipalParts_app_val {U : X.Opens} (t : Γ(skyscraper (genericPoint X) V, U)) (y : U) :
     PrincipalParts.val φ (show PrincipalParts k φ U from (toPrincipalParts k φ).app U t) y =
       Submodule.Quotient.mk
-        ((show SkyscraperSections (genericPoint X) V U from t) ⟨genericPoint_mem_of_mem y.2⟩) :=
+        ((show SkyscraperSections (genericPoint X) V U from t) ⟨Modules.genericPoint_mem y.2⟩) :=
   rfl
 
 variable (k) in
@@ -423,13 +419,13 @@ include hφ
 /-- A section of the constant sheaf `V_η` over `U` whose value lies in `V_x` for every `x ∈ U`
 comes from a section of `M`: glue the local sections witnessing `v ∈ V_x`. -/
 theorem exists_app_eq_of_forall_mem {U : X.Opens} (t : SkyscraperSections (genericPoint X) V U)
-    (ht : ∀ (y : X) (hy : y ∈ U), t ⟨genericPoint_mem_of_mem hy⟩ ∈ stalkLattice k φ y) :
+    (ht : ∀ (y : X) (hy : y ∈ U), t ⟨Modules.genericPoint_mem hy⟩ ∈ stalkLattice k φ y) :
     ∃ s : Γ(M, U), φ.app U s = t := by
   by_cases hη : genericPoint X ∈ U
   swap
   · exact ⟨0, SkyscraperSections.ext fun h ↦ (hη h).elim⟩
   have ht' (y : U) : ∃ (W : X.Opens) (hyW : y.1 ∈ W) (s : Γ(M, W)),
-      genericValue φ (genericPoint_mem_of_mem hyW) s = t ⟨hη⟩ := ht y.1 y.2
+      genericValue φ (Modules.genericPoint_mem hyW) s = t ⟨hη⟩ := ht y.1 y.2
   choose W hyW s hs using ht'
   let F : TopCat.Sheaf Ab.{u} X := ⟨M.presheaf, M.isSheaf⟩
   let W' : U → X.Opens := fun y ↦ W y ⊓ U

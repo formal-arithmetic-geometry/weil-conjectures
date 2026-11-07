@@ -15,7 +15,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageVanishingTors
 
 Let `C` be a curve over an algebraically closed field `k`. The étale cohomology of a torsion
 sheaf on `C` vanishes in degrees `≥ 3`
-(`AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le`). This file deduces the
+(`AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_generic`). This file deduces the
 corresponding statement for complexes: for a bounded complex `K` of étale abelian sheaves with
 torsion cohomology sheaves and `𝓗ⁱ(K) = 0` for `i > b`, the hypercohomology
 `Hᵠ(C, K) = Hom_{D(C_ét)}(ℤ, K[q])` vanishes for `q > b + 2`. It also records the
@@ -69,13 +69,13 @@ structure IsCurveCoefficientPair (f : C ⟶ Spec (.of k))
   isTorsion : F.IsTorsion
 
 /-- The cohomology of a curve coefficient pair vanishes in degrees `≥ 3`
-(`AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le`). -/
+(`AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_generic`). -/
 lemma IsCurveCoefficientPair.subsingleton_sheafH {f : C ⟶ Spec (.of k)}
     {F : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}} (h : IsCurveCoefficientPair f F)
     (q : ℕ) (hq : 3 ≤ q) : Subsingleton (Sheaf.H F q) :=
   have := h.isAlgClosed
   have := h.isCurve
-  IsCurve.subsingleton_sheafH_of_three_le f F h.isTorsion q hq
+  IsCurve.subsingleton_sheafH_of_three_le_generic f F h.isTorsion q hq
 
 variable [IsAlgClosed k]
 
@@ -105,7 +105,7 @@ cohomology sheaves are torsion. Then the hypercohomology
 
 The proof is by induction on the amplitude of `K`, using the truncation triangles
 `τ_{< b} K ⟶ K ⟶ 𝓗ᵇ(K)[-b] ⟶` of the canonical t-structure and the sheaf case
-`AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le`; this replaces the
+`AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_generic`; this replaces the
 hypercohomology spectral sequence of the blueprint proof.
 (blueprint: `lem-sc-arbitrary-curve-cd`) -/
 theorem IsCurve.subsingleton_shiftedHom_of_isGE_of_isLE (f : C ⟶ Spec (.of k)) [IsCurve f]
@@ -117,7 +117,7 @@ theorem IsCurve.subsingleton_shiftedHom_of_isGE_of_isLE (f : C ⟶ Spec (.of k))
       ((constantSheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
         (AddCommGrpCat.of (ULift ℤ)))) K q) :=
   DerivedCategory.subsingleton_shiftedHom_of_ext _ (fun F ↦ F.IsTorsion) 3
-    (fun Y hY m hm ↦ IsCurve.subsingleton_sheafH_of_three_le f Y hY m hm) K a b
+    (fun Y hY m hm ↦ IsCurve.subsingleton_sheafH_of_three_le_generic f Y hY m hm) K a b
     (fun i _ ↦ hK i) q (by lia)
 
 /-- **Vanishing in high degrees, complex form, for `D^b`.** Let `C` be a curve over an

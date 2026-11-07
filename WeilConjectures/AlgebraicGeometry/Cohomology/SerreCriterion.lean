@@ -115,7 +115,7 @@ theorem surjective_subschemeι_appTop_of_ofFiniteType [CompactSpace X] [QuasiSep
     refine (ι'.app_map_apply (homOfLE inf_le_left) _ (e a)).symm.trans
       (Eq.trans ?_ (ι'.app_map_apply (homOfLE inf_le_right) _ (e b)))
     rw [← sub_eq_zero, ← map_sub, ← mem_idealOfOpens_iff]
-    exact idealOfOpens_mono_finiteType (le_iSup K (a, b)) _ (hdK (a, b))
+    exact idealOfOpens_mono (le_iSup K (a, b)) _ (hdK (a, b))
   obtain ⟨g, hg, -⟩ := K'.subscheme.sheaf.existsUnique_gluing' (fun a : Us ↦ ι' ⁻¹ᵁ a.1) ⊤
     (fun a ↦ homOfLE le_top) (by rw [← Scheme.Hom.preimage_iSup]; exact ι'.preimage_mono hcov)
     _ hcompat
@@ -126,7 +126,7 @@ theorem surjective_subschemeι_appTop_of_ofFiniteType [CompactSpace X] [QuasiSep
   have hfa : X.presheaf.map (homOfLE le_top).op f - e a ∈ K'.idealOfOpens a.1 := by
     rw [mem_idealOfOpens_iff, map_sub, sub_eq_zero, ι'.app_map_apply _ (homOfLE le_top)]
     exact (congrArg _ hf).trans (hg a)
-  have := idealOfOpens_mono_finiteType (iSup_le hKJ) _ hfa
+  have := idealOfOpens_mono (iSup_le hKJ) _ hfa
   rw [mem_idealOfOpens_iff, map_sub, sub_eq_zero,
     J.subschemeι.app_map_apply _ (homOfLE le_top), he] at this
   exact this

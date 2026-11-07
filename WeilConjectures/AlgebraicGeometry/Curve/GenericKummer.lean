@@ -69,7 +69,7 @@ def genericKummerResidueIso :
   haveI := IsCurve.isNoetherian f
   haveI := IsRegular.of_smooth f
   Scheme.genericKummerResidueIso (IsConnectedCurve.krullDim_eq_one (f := f))
-    (Scheme.isUnit_natCast_of_ne_zero f hn) c hc
+    (AffineSpace.isUnit_natCast_of_ne_zero f hn) c hc
 
 /-- **The generic Kummer residue isomorphism of a smooth curve is given by valuations**: composed
 with the Kummer coboundary `η_* 𝔾ₘ ⟶ R¹η_* μₙ`, it is the divisor map `f ↦ ∑_x ord_x(f) [x]`
@@ -80,7 +80,7 @@ lemma genericKummerResidueIso_spec
     (hcD : IsColimit cD) :
     haveI := IsCurve.isNoetherian f
     haveI := IsRegular.of_smooth f
-    C.genericGmIso.hom ≫ Scheme.genericKummerδ n (Scheme.isUnit_natCast_of_ne_zero f hn) ≫
+    C.genericGmIso.hom ≫ Scheme.genericKummerδ n (AffineSpace.isUnit_natCast_of_ne_zero f hn) ≫
         (genericKummerResidueIso f hn c hc).hom =
       C.divisorSequenceMap cD hcD ≫
         Scheme.divisorsModNMap n (IsConnectedCurve.krullDim_eq_one (f := f)) cD hcD c :=

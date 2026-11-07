@@ -34,7 +34,7 @@ to it (`AlgebraicGeometry.IsCurve.subsingleton_sheafH_two_of_isAffine_of_forall`
 
 ## Main statements
 
-- `AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le`: `H^q(C, F) = 0` for `q ≥ 3`.
+- `AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_generic`: `H^q(C, F) = 0` for `q ≥ 3`.
 - `AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_two_le_of_isAffine`: `H^q(C, F) = 0` for
   `q ≥ 2` on an affine curve.
 - `AlgebraicGeometry.IsConnectedCurve.sheafH_constantZMod_of_isAffine`: the Kummer computation
@@ -395,27 +395,6 @@ theorem subsingleton_sheafH_two_of_isAffine (f : C ⟶ Spec (.of k)) [IsCurve f]
   subsingleton_sheafH_two_of_isAffine_of_forall f F hF fun _ f' _ _ _ F' hF' ↦
     IsConnectedCurve.subsingleton_sheafH_two_of_isAffine_of_smooth f' F' hF'
 
-/-- **Vanishing in high degrees.** Let `C` be a curve over an algebraically closed field `k`.
-Then `H^q(C_ét, F) = 0` for `q ≥ 3` and every torsion abelian sheaf `F` on `C_ét`: the étale
-cohomological dimension of a curve over an algebraically closed field is at most two. The
-sharper bound for affine `C` is
-`AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_two_le_of_isAffine`.
-
-The proof reduces to integral curves
-(`AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_generic`, blueprint
-`lem-sc-arbitrary-curve-cd`, Step 1): the units `F ⟶ cₚ_* cₚ^* F` for the irreducible components
-`cₚ : Zₚ ⟶ C` with their reduced structure assemble to a map `F ⟶ ⨁ₚ cₚ_* cₚ^* F` which is an
-isomorphism away from finitely many closed points, hence bijective on `Hᵠ` for `q ≥ 2`. On an
-integral curve the vanishing is the generic-point argument of
-`AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_of_isIntegral`: `Hᵠ(C, F)` agrees
-with `Hᵠ(C, η_* η^* F)` for the generic point `η`, and the function field has cohomological
-dimension at most one. (blueprint: `lem-sc-arbitrary-curve-cd`) -/
-@[stacks 03SC "(1)"]
-theorem subsingleton_sheafH_of_three_le (f : C ⟶ Spec (.of k)) [IsCurve f]
-    (F : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : F.IsTorsion) (q : ℕ)
-    (hq : 3 ≤ q) : Subsingleton (Sheaf.H F q) :=
-  subsingleton_sheafH_of_three_le_generic f F hF q hq
-
 end IsCurve
 
 namespace IsConnectedCurve
@@ -426,7 +405,8 @@ variable {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
 curve over an algebraically closed field `k`. Then `H^q(C_ét, F) = 0` for `q ≥ 2` and every
 torsion abelian sheaf `F` on `C_ét`.
 
-Degrees `q ≥ 3` are `AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le`. In degree two,
+Degrees `q ≥ 3` are `AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_generic`.
+In degree two,
 `H²(C, F) ≅ H²(C, η_* η^* F)` for the generic point `η` of `C`
 (`AlgebraicGeometry.IsCurve.isIso_functorH_map_unit_fromSpecFunctionField`), and the latter
 vanishes by `AlgebraicGeometry.IsConnectedCurve.subsingleton_sheafH_two_lowerStar`.
@@ -437,7 +417,7 @@ theorem subsingleton_sheafH_of_two_le_of_isAffine_of_smooth (f : C ⟶ Spec (.of
     (hq : 2 ≤ q) : Subsingleton (Sheaf.H F q) := by
   obtain rfl | hq := hq.eq_or_lt
   · exact subsingleton_sheafH_two_of_isAffine_of_smooth f F hF
-  · exact IsCurve.subsingleton_sheafH_of_three_le f F hF q hq
+  · exact IsCurve.subsingleton_sheafH_of_three_le_generic f F hF q hq
 
 end IsConnectedCurve
 
@@ -450,7 +430,7 @@ algebraically closed field `k`. Then `H^q(C_ét, F) = 0` for `q ≥ 2` and every
 sheaf `F` on `C_ét`: the étale cohomological dimension of an affine curve over an
 algebraically closed field is at most one.
 
-Degrees `q ≥ 3` are `AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le`. Degree two
+Degrees `q ≥ 3` are `AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_generic`. Degree two
 reduces (`AlgebraicGeometry.IsCurve.subsingleton_sheafH_two_of_isAffine_of_forall`) to smooth
 affine connected curves, where it is
 `AlgebraicGeometry.IsConnectedCurve.subsingleton_sheafH_of_two_le_of_isAffine_of_smooth`.
@@ -461,7 +441,7 @@ theorem subsingleton_sheafH_of_two_le_of_isAffine (f : C ⟶ Spec (.of k)) [IsCu
     (q : ℕ) (hq : 2 ≤ q) : Subsingleton (Sheaf.H F q) := by
   obtain rfl | hq := hq.eq_or_lt
   · exact subsingleton_sheafH_two_of_isAffine f F hF
-  · exact subsingleton_sheafH_of_three_le f F hF q hq
+  · exact subsingleton_sheafH_of_three_le_generic f F hF q hq
 
 end IsCurve
 

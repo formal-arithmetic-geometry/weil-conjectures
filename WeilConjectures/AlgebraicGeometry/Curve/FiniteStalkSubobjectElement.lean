@@ -69,7 +69,7 @@ private theorem finite_stable_submodule
   | smul n y hy ih => simpa using W.smul_mem n ih
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 600000 in
 -- Comparing the stalk functor with the composite forgetful functor unfolds several layers.
 set_option backward.defeqAttrib.useBackward true in
 set_option linter.style.haveILetI false in

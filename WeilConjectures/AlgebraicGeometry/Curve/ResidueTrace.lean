@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.WeilSheaf.CurveEndpoints
 public import WeilConjectures.AlgebraicGeometry.Curve.AdelicDifferentials
 public import WeilConjectures.AlgebraicGeometry.Curve.AdelicLocal
 public import WeilConjectures.AlgebraicGeometry.Curve.TracePairing
@@ -108,12 +109,6 @@ namespace AlgebraicGeometry.Scheme
 section General
 
 variable {k : Type u} [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))]
-
-variable (k X) in
-/-- A curve over a field has dimension at most one. -/
-lemma topologicalKrullDim_le_one [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] :
-    topologicalKrullDim X ≤ 1 := by
-  exact_mod_cast topologicalKrullDim_le_of_smoothOfRelativeDimension (X ↘ Spec (.of k)) 1
 
 variable (k X) in
 /-- A scheme of finite type over a field is a noetherian topological space. -/
@@ -237,11 +232,12 @@ noncomputable def residueTrace :
     Module.Dual k (Modules.H (X := X) (X ↘ Spec (.of k)).relativeDifferentials 1) :=
   have := SmoothOfRelativeDimension.smooth 1 (X ↘ Spec (.of k))
   have := noetherianSpace_of_locallyOfFiniteType k X
-  (LinearMap.range (differentialsPrincipalPartsMap k (topologicalKrullDim_le_one k X))).liftQ
+  (LinearMap.range (differentialsPrincipalPartsMap k
+    (topologicalKrullDim_le_one_of_curve (k₀ := k) (C := X)))).liftQ
     (residueSum k X) (by
       rintro _ ⟨η, rfl⟩
       exact residueSum_differentialsPrincipalPartsMap k X _ η) ∘ₗ
-    (differentialsH1Equiv k (topologicalKrullDim_le_one k X)).toLinearMap
+    (differentialsH1Equiv k (topologicalKrullDim_le_one_of_curve (k₀ := k) (C := X))).toLinearMap
 
 /-- **The residue trace of a class of principal parts.** If the class in `H¹(X, ω)` is
 represented by `d ∈ ⨁_x Ω[K⁄k] ⧸ ω_x`, then `t_X` takes the value `∑_x res_x(d_x)`. -/
@@ -277,7 +273,7 @@ theorem residueTrace_ne_zero : residueTrace k X ≠ 0 := by
   classical
   have := SmoothOfRelativeDimension.smooth 1 (X ↘ Spec (.of k))
   have := noetherianSpace_of_locallyOfFiniteType k X
-  have hdim := topologicalKrullDim_le_one k X
+  have hdim := topologicalKrullDim_le_one_of_curve (k₀ := k) (C := X)
   obtain ⟨x, hx, -, hsep⟩ :=
     (Hom.dense_setOf_isClosed_finite_isSeparable (X ↘ Spec (.of k))).nonempty
   set O := localSubalgebra k X x

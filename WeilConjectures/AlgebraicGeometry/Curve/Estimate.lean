@@ -24,7 +24,8 @@ A smooth proper connected curve is recorded by the class `AlgebraicGeometry.IsCo
 together with `Smooth` and `IsProper`. Dimension exactly one is needed in degree two: `Spec k`
 is a smooth proper connected scheme of dimension zero with `H² = 0`. Degree zero holds for every
 connected scheme (`AlgebraicGeometry.Scheme.nonempty_addEquiv_sheafH_zero_constantZMod`). The
-vanishing for `q ≥ 3` is `AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le` applied to
+vanishing for `q ≥ 3` is `AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_generic`
+applied to
 `C.constantZMod n`.
 
 After choosing a primitive `n`-th root of unity, `ℤ/n ≅ μₙ`, and the Kummer sequence identifies
@@ -152,7 +153,7 @@ theorem IsConnectedCurve.sheafH_constantZMod_of_isProper (f : C ⟶ Spec (.of k)
   ⟨IsCurve.nonempty_addEquiv_sheafH_constantZMod_zero f n hn,
     IsCurve.nonempty_addEquiv_sheafH_constantZMod_one f n hn,
     IsCurve.nonempty_addEquiv_sheafH_constantZMod_two f n hn,
-    fun q hq ↦ IsCurve.subsingleton_sheafH_of_three_le f (C.constantZMod n)
+    fun q hq ↦ IsCurve.subsingleton_sheafH_of_three_le_generic f (C.constantZMod n)
       (C.isTorsion_constantZMod (by rintro rfl; exact hn Nat.cast_zero)) q hq⟩
 
 end AlgebraicGeometry

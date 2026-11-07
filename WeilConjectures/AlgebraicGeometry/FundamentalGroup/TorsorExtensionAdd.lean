@@ -288,7 +288,7 @@ lemma epi_pairSeq_g : Epi T.pairSeq.g := by
       (T.ιN_ι_pairDiff_app _ (.inl rfl) _ _) (T.ιN_ι_pairDiff_app _ (.inr rfl) _ _)
     obtain ⟨y, hy, hy₁, hy₂⟩ := T.exists_pairDiff_eq (pullback.snd U.hom T.π) hσ c₁ c₂
       (congrArg ULift.down hc₁) (congrArg ULift.down hc₂)
-    obtain ⟨v, hv⟩ := exists_kernel_ι_app_eq (m • 𝟙 T.pushforwardGm) y
+    obtain ⟨v, hv⟩ := AlgebraicGeometry.Etale.exists_kernel_ι_app_eq (m • 𝟙 T.pushforwardGm) y
       (by rw [nsmul_id_app, hy])
     have hDv₁ : (T.pairMuDiff (1, 0)).hom.app (op U') v = (kernel.ι T.pairPhi).hom.app _ n₁ := by
       apply injective_kernel_ι_app
@@ -296,7 +296,8 @@ lemma epi_pairSeq_g : Epi T.pairSeq.g := by
     have hDv₂ : (T.pairMuDiff (0, 1)).hom.app (op U') v = (kernel.ι T.pairPhi).hom.app _ n₂ := by
       apply injective_kernel_ι_app
       rw [← app_apply_comp, pairMuDiff_ι, app_apply_comp, hv, hy₂, hcw₂]
-    obtain ⟨k, hk⟩ := exists_kernel_ι_app_eq (T.pairPhi ≫ biprod.map T.pairPhi T.pairPhi) v (by
+    obtain ⟨k, hk⟩ := AlgebraicGeometry.Etale.exists_kernel_ι_app_eq
+      (T.pairPhi ≫ biprod.map T.pairPhi T.pairPhi) v (by
       apply biprod_app_ext
       · rw [map_zero, ← app_apply_comp, Category.assoc, biprod.map_fst, ← Category.assoc,
           show T.pairPhi ≫ biprod.fst = T.pairMuDiff (1, 0) from biprod.lift_fst _ _,
@@ -382,7 +383,8 @@ lemma isIso_pairUnit : IsIso T.pairUnit := by
       obtain ⟨c, hc, hcw⟩ := T.exists_of_pairDiff_eq_zero (pullback.snd U.hom T.π)
         (T.coverObj_section U) w hw (T.ιN_ι_pairDiff_app _ (.inl rfl) _ _)
         (T.ιN_ι_pairDiff_app _ (.inr rfl) _ _)
-      obtain ⟨r, hr⟩ := exists_kernel_ι_app_eq (m • 𝟙 Y.gmSheaf) c (by rw [nsmul_id_app, hc])
+      obtain ⟨r, hr⟩ := AlgebraicGeometry.Etale.exists_kernel_ι_app_eq (m • 𝟙 Y.gmSheaf) c
+        (by rw [nsmul_id_app, hc])
       refine ⟨r, injective_kernel_ι_app _ _ (injective_kernel_ι_app _ _ ?_)⟩
       change (T.pairUnit ≫ kernel.ι T.pairPhi ≫ kernel.ι (m • 𝟙 T.pushforwardGm)).hom.app _ r = w
       rw [hι, app_apply_comp]

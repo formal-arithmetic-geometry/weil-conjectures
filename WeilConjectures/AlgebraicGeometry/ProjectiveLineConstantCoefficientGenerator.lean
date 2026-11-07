@@ -41,7 +41,7 @@ private theorem p1_h2_reduction_surjective
   obtain ⟨hcurve, -, -, -, -⟩ :=
     ProjectiveSpace.isConnectedCurve_smooth_proper_genus_zero k
   have := hcurve
-  have hz := IsCurve.subsingleton_sheafH_of_three_le (P ↘ Spec (.of k))
+  have hz := IsCurve.subsingleton_sheafH_of_three_le_generic (P ↘ Spec (.of k))
     ((constantSheaf P.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (kernel r))
     (isTorsion_constantSheaf' P (kernel r) hn hK) 3 le_rfl
   intro y

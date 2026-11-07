@@ -267,7 +267,7 @@ theorem hasTorsionEtaleCohomologicalDimensionLE_one_of_finite
   let _ := hfiltered
   let T := DerivedCategory.singleFunctor _ 0 ⋙
     Etale.cohomology AddCommGrpCat.{u + 1} (Spec (.of K)) (q : ℤ)
-  have hH := (Scheme.etaleCohomology_isColimit_large_filtered
+  have hH := (Scheme.etaleCohomology_isColimit_of_isFiltered_coefficientSize
     (Spec (.of K)) hcolim.some q).some
   have hzero : IsZero (D ⋙ T) := (Functor.isZero_iff _).mpr fun i ↦
     finite_stalk_vanishing K (D.obj i) (htor i) (hfin i) q hq
