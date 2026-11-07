@@ -49,6 +49,7 @@ lemma rightDerivedFunctorCompMapOfNatIsoIsoOfForgetIso_hom_fac
   simp [rightDerivedFunctorCompMapOfNatIsoIsoOfForgetIso]
 
 variable {B : Type*} [Category B] [Abelian B] [HasDerivedCategory B]
+  [Abelian.HasKInjectiveResolutions B]
   {L₀ : A ⥤ B} [L₀.Additive]
   (S : B ⥤ IsoAlgebra G) [S.Additive] [PreservesFiniteLimits S] [PreservesFiniteColimits S]
 
@@ -60,6 +61,7 @@ noncomputable def traceDescentComparison (β : L₀ ⋙ S ≅ T ⋙ mapOfNatIso 
     (Functor.rightDerivedFunctorNatIso β).symm ≪≫
     Functor.rightDerivedFunctorCompMapDerivedCategoryIso L₀ S
 
+omit [Abelian.HasKInjectiveResolutions B] in
 /-- Normalization of the derived descent square by the two derived units. -/
 lemma traceDescentComparison_inv_fac (β : L₀ ⋙ S ≅ T ⋙ mapOfNatIso e)
     (K : HomotopyCategory A (.up ℤ)) :
@@ -81,6 +83,7 @@ lemma traceDescentComparison_inv_fac (β : L₀ ⋙ S ≅ T ⋙ mapOfNatIso e)
   rw [reassoc_of% h₁, reassoc_of% h₂,
     rightDerivedFunctorCompMapOfNatIsoIsoOfForgetIso_hom_fac]
 
+omit [Abelian.HasKInjectiveResolutions B] in
 /-- The derived-unit normalization with the source unit expanded. -/
 lemma traceDescentComparison_inv_fac' (β : L₀ ⋙ S ≅ T ⋙ mapOfNatIso e)
     (K : HomotopyCategory A (.up ℤ)) :
@@ -113,6 +116,7 @@ noncomputable def ordinaryTraceDescentIso (β : L₀ ⋙ S ≅ T ⋙ mapOfNatIso
     Functor.isoWhiskerLeft T (mapOfNatIsoCompForgetIso e) ≪≫
     (Functor.associator T (forget F) L).symm ≪≫ Functor.isoWhiskerRight α L
 
+omit [Abelian.HasKInjectiveResolutions B] in
 /-- Forgetting the derived descent comparison gives the derived ordinary square. -/
 theorem traceDescentComparison_forget (β : L₀ ⋙ S ≅ T ⋙ mapOfNatIso e)
     (K : DerivedCategory A) :

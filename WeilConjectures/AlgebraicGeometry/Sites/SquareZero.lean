@@ -192,7 +192,7 @@ theorem subsingleton_H_upperStar_gaKernel [IsClosedImmersion h] {W : Scheme.{u}}
     refine subsingleton_of_forall_eq 0 fun x ↦ ?_
     obtain ⟨s, rfl⟩ := (Sheaf.H.exact_δ_map hS hT x).1 (Subsingleton.elim _ _)
     obtain ⟨t, ht⟩ := hsurj s
-    have : s ∈ (Sheaf.H.δ hS hT).ker := by
+    have : s ∈ (Sheaf.H.δSections hS hT).ker := by
       rw [Sheaf.H.ker_δ]
       exact ⟨t, ht⟩
     exact this

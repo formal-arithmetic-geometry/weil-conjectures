@@ -57,8 +57,8 @@ private theorem finiteType_of_iso
 
 
 
--- Measured 228151 heartbeats with Lean v4.35.0-rc3 and Mathlib b63f6e8a.
 set_option maxHeartbeats 400000 in
+-- Measured 228151 heartbeats with Lean v4.35.0-rc3 and Mathlib b63f6e8a.
 /-- Glue a finite-type submodule on V to the whole module on W when its inclusion
 is an isomorphism on the overlap. No compactness or affineness is required.
 

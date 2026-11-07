@@ -183,7 +183,7 @@ private theorem tensorHomShiftComparison_aux
 set_option backward.defeqAttrib.useBackward true
 attribute [local irreducible] _root_.DerivedCategory.monoidalClosed
   Functor.leftDerivedFunctor Functor.leftDerivedFunctorCounit
-  _root_.DerivedCategory.instMonoidalCategory_weilConjectures
+  _root_.DerivedCategory.instMonoidalCategory
   _root_.DerivedCategory.commShift₂CurriedTensor
 
 /-- `EtaleHomShiftNormalization` in the form used by the abstract chase. Stated once for both

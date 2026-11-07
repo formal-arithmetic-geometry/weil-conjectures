@@ -446,7 +446,8 @@ theorem IsHomogeneous.sum_monomial_linearMap {σ K L : Type*} [CommRing K]
 coefficients of `G` at a point `y` with coordinates in `K` is `f` of the value of `G` at `y`. -/
 theorem eval_sum_monomial_linearMap {σ K L : Type*} [CommRing K] [CommRing L]
     [Algebra K L] (f : L →ₗ[K] K) (G : MvPolynomial σ L) (y : σ → K) :
-    eval y (∑ s ∈ G.support, monomial s (f (AddMonoidAlgebra.coeff G s))) = f (eval (algebraMap K L ∘ y) G) := by
+    eval y (∑ s ∈ G.support, monomial s (f (AddMonoidAlgebra.coeff G s))) =
+      f (eval (algebraMap K L ∘ y) G) := by
   rw [map_sum, eval_eq (algebraMap K L ∘ y) G, map_sum]
   refine Finset.sum_congr rfl fun s _ => ?_
   rw [eval_monomial, Finsupp.prod]

@@ -1228,7 +1228,8 @@ noncomputable def profinitePointModuleDerivedComp
       (CondensedRing.upperStar Λ g).mapDerivedCategory ⋙ (CondensedRing.upperStar Λ
         f).mapDerivedCategory :=
   Functor.mapDerivedCategoryNatIso (CondensedRing.upperStarComp Λ f g) ≪≫
-    (Functor.mapDerivedCategoryCompIso (CondensedRing.upperStar Λ g) (CondensedRing.upperStar Λ f)).symm
+    (Functor.mapDerivedCategoryCompIso (CondensedRing.upperStar Λ g)
+      (CondensedRing.upperStar Λ f)).symm
 
 /-- The canonical termwise derived identity comparison, using the existing lift of the
 ordinary inverse-image identity and its normalization on the identity functor.

@@ -244,7 +244,8 @@ theorem exists_ringedSignedKoszulTensorCoordinates
         simp [h, Category.assoc, hp]
       · by_cases heq : q + (I.card : ℤ) = (q + 1) + ((I.erase i).card : ℤ)
         · simp only [dite_eq_left heq, Category.assoc,
-            Linear.smul_comp, hp, dite_eq_right he, ite_eq_right he, map_zero, comp_zero, zero_smul, smul_zero]
+            Linear.smul_comp, hp, dite_eq_right he, ite_eq_right he, map_zero, comp_zero,
+            zero_smul, smul_zero]
         · simp only [dite_eq_right heq, zero_comp, ite_eq_right he, map_zero, zero_smul]
     · rw [dite_eq_right h]
       apply Finset.sum_eq_zero

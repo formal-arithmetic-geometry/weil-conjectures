@@ -114,7 +114,8 @@ private theorem comparisonSection_tmul
 
 section
 
-local instance localInst_SheafTensorPushoutCancellation_1 (M : SheafOfModules.{u} (𝓡 D)) {U V : (Opens T)ᵒᵖ} (i : U ⟶ V) :
+local instance localInst_SheafTensorPushoutCancellation_1
+    (M : SheafOfModules.{u} (𝓡 D)) {U V : (Opens T)ᵒᵖ} (i : U ⟶ V) :
     Module (D.obj.obj V)
       ((ModuleCat.restrictScalars ((𝓡 D).obj.map i).hom).obj (M.val.obj V)) :=
   inferInstanceAs (Module (D.obj.obj V) (M.val.obj V))

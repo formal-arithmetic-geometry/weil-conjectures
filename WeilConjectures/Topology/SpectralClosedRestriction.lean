@@ -81,7 +81,7 @@ private theorem restriction_eq_implies_germ_eq
     apply hinj.1
     rw [Presheaf.stalkFunctor_map_germ_apply, Presheaf.stalkFunctor_map_germ_apply]
     simp only [ConcreteCategory.comp_apply] at he'
-    convert he' using 1 <;> rfl
+    convert he' using 1
   apply (CategoryTheory.isIso_iff_bijective
     (Presheaf.stalkPullbackIso (Type u) i F.1 z).hom).mp (inferInstance :
       IsIso (Presheaf.stalkPullbackIso (Type u) i F.1 z).hom) |>.1
@@ -92,7 +92,7 @@ private theorem restriction_eq_implies_germ_eq
   rw [Presheaf.germ_stalkPullbackHom]
   simp only [P, η] at hg
   simp only [ConcreteCategory.comp_apply]
-  convert hg using 1 <;> rfl
+  convert hg using 1
 
 
 /-- Source: Stacks Project, Etale Cohomology, Lemma 59.82.1 (Tag 09ZG).

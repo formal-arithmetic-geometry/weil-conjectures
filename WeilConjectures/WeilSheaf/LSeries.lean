@@ -121,7 +121,8 @@ theorem constantCoeff_lFactor (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ 
 lₓ`, by the determinant-trace identity `LinearMap.X_mul_derivative_charpolyRev`. -/
 theorem X_mul_derivative_lFactor (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X)
     (x : X.finitePoints) :
-    PowerSeries.X * derivative (R := ℂ) (F.lFactor ι x) = F.lFactorLogDeriv ι x * F.lFactor ι x := by
+    PowerSeries.X * derivative (R := ℂ) (F.lFactor ι x) =
+      F.lFactorLogDeriv ι x * F.lFactor ι x := by
   set d := (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1
   have hd : d ≠ 0 := (X ↘ Spec (CommRingCat.of k₀)).degreeOver_ne_zero x.2
   set P := locPoly ι F x

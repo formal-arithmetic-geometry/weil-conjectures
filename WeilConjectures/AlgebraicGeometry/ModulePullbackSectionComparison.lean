@@ -307,6 +307,6 @@ theorem exists_modulePullbackSectionComparison
     eqToHom_refl, ObjectProperty.FullSubcategory.id_hom, NatTrans.id_app,
     types_comp_apply, types_id_apply, V, W, T, j, v, t, setAdj,
     Functor.comp_obj] at result ⊢
-  convert result using 1 <;> rfl
+  convert result using 1
 
 end AlgebraicGeometry.Etale

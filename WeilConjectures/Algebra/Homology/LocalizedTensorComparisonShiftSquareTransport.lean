@@ -86,6 +86,6 @@ theorem localizedTensorComparison_shift_transport
       Functor.flip_obj_obj, Functor.map₂HomologicalComplex_obj_obj,
       cochain_tensorHom, cochain_whiskerLeft, Functor.comp_obj,
       Functor.map₂CochainComplex, CochainComplex.mapBifunctor, Category.assoc] at h ⊢
-    convert h.symm using 1 <;> rfl
+    convert h.symm using 1
 
 end ModuleCat

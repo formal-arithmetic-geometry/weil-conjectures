@@ -154,7 +154,8 @@ lemma isZero_relativeDifferentials_of_surjective
   apply (f.relativeDifferentialsHomEquiv _).injective
   ext U x
   obtain ⟨a, rfl⟩ := h U x
-  simp only [relativeDifferentialsHomEquiv_apply, PresheafOfModulesOfCommRing.Derivation.postcomp_d_apply]
+  simp only [relativeDifferentialsHomEquiv_apply,
+    PresheafOfModulesOfCommRing.Derivation.postcomp_d_apply]
   erw [PresheafOfModulesOfCommRing.Derivation'.d_app]
   simp
 
@@ -260,7 +261,8 @@ noncomputable def relativeDifferentialsIsoOfDerivation {S₁ S₂ : Scheme.{u}} 
     apply (f₁.relativeDifferentialsHomEquiv _).injective
     ext U x
     simp only [relativeDifferentialsHomEquiv_apply]
-    erw [PresheafOfModulesOfCommRing.Derivation.postcomp_d_apply, PresheafOfModulesOfCommRing.Derivation.postcomp_d_apply]
+    erw [PresheafOfModulesOfCommRing.Derivation.postcomp_d_apply,
+      PresheafOfModulesOfCommRing.Derivation.postcomp_d_apply]
     erw [SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.hom_comp,
       LinearMap.comp_apply, relativeDifferentialsHomEquiv_symm_app_d]
     exact (f₂.relativeDifferentialsHomEquiv_symm_app_d _ _).trans rfl
@@ -268,7 +270,8 @@ noncomputable def relativeDifferentialsIsoOfDerivation {S₁ S₂ : Scheme.{u}} 
     apply (f₂.relativeDifferentialsHomEquiv _).injective
     ext U x
     simp only [relativeDifferentialsHomEquiv_apply]
-    erw [PresheafOfModulesOfCommRing.Derivation.postcomp_d_apply, PresheafOfModulesOfCommRing.Derivation.postcomp_d_apply]
+    erw [PresheafOfModulesOfCommRing.Derivation.postcomp_d_apply,
+      PresheafOfModulesOfCommRing.Derivation.postcomp_d_apply]
     erw [SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.hom_comp,
       LinearMap.comp_apply, relativeDifferentialsHomEquiv_symm_app_d]
     exact (f₁.relativeDifferentialsHomEquiv_symm_app_d _ _).trans rfl

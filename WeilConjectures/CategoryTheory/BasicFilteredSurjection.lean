@@ -41,7 +41,7 @@ piece are free modules, and every differential is zero. Source: Stacks Project, 
 Algebra, Tag 0H7X, lemma-resolution-filtered-complex (blueprint:
 lem-pur-kunneth-basic-filtered-surjection). -/
 def BasicFilteredComplex (R : Type u) [CommRing R]
-    (B : FilteredObject (CochainComplex (ModuleCat.{u} R) ℤ)) :
+    (B : WeilFilteredObject (CochainComplex (ModuleCat.{u} R) ℤ)) :
     Prop :=
   (∀ n : ℤ, Module.Free R (B.obj.X n)) ∧
   (∀ (i n : ℤ), Module.Free R ((B.filtration.step i : CochainComplex (ModuleCat.{u} R) ℤ).X n)) ∧

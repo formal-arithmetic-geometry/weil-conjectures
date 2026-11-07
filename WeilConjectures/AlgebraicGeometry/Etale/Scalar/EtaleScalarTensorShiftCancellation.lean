@@ -25,7 +25,7 @@ set_option Elab.async false
 attribute [local instance 2000] scalarSheafMonoidal
 attribute [local irreducible] _root_.DerivedCategory.monoidalClosed
   Functor.leftDerivedFunctor Functor.leftDerivedFunctorCounit
-  _root_.DerivedCategory.instMonoidalCategory_weilConjectures
+  _root_.DerivedCategory.instMonoidalCategory
   _root_.DerivedCategory.commShift₂CurriedTensor
 
 set_option maxHeartbeats 2000000 in

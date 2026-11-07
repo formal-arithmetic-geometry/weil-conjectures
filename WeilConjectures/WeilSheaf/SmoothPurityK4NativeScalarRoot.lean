@@ -10,7 +10,6 @@ import WeilConjectures.Tactic.ExactModProofs
 
 /-! # The scalar law immediately after rational coefficient change -/
 
-
 @[expose] public section
 
 universe u

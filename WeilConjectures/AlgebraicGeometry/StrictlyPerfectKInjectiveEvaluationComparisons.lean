@@ -108,7 +108,7 @@ theorem exists_strictlyPerfect_kInjective_evaluation_comparisons (X : Scheme.{u}
       inv := r
       hom_inv_id := hr
       inv_hom_id := by rw [hrs]; exact hs }
-  letI : Category.{w} (@DerivedCategory (SheafOfModules.{u}
+  let : Category.{w} (@DerivedCategory (SheafOfModules.{u}
       ((sheafCompose ((Opens.grothendieckTopology X.toRingedSpace).over U)
         (forget₂ CommRingCat RingCat)).obj (X.sheaf.over U))) _ _
       (inferInstanceAs (HasDerivedCategory.{w}

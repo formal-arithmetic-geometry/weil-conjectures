@@ -347,7 +347,8 @@ restrictions and descents provide squares for each filtered map, so the universa
 square property determines every component, and therefore the whole family. -/
 theorem filteredQuotient_page_maps
     (D : ∀ (U : ObjectProperty.FullSubcategory
-      (fun W : WeilFilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)) (r : ℤ) (hr : 1 ≤ r),
+      (fun W : WeilFilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)) (r : ℤ)
+      (hr : 1 ≤ r),
       FilteredComplexPageDifferential U.obj.obj U.obj.filtration r) :
     ∃! m : ∀ {U V : ObjectProperty.FullSubcategory
       (fun W : WeilFilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)} (t : U ⟶ V)

@@ -147,13 +147,13 @@ theorem singleComplexOpen_termwise_counit_compatibility
   dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
   have : ∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z),
       (Scheme.Modules.tensorPullback k).Additive := fun k => tensorPullbackAdditive k
-  letI := schemeOpenRestriction_additive X U
-  letI := schemeOpenRestriction_additive X' U'
-  letI := tensorPullbackAdditive g'
-  letI := tensorPullbackAdditive j
-  letI : (schemeOpenRestriction X U ⋙ Scheme.Modules.tensorPullback j).PreservesZeroMorphisms :=
+  let := schemeOpenRestriction_additive X U
+  let := schemeOpenRestriction_additive X' U'
+  let := tensorPullbackAdditive g'
+  let := tensorPullbackAdditive j
+  let : (schemeOpenRestriction X U ⋙ Scheme.Modules.tensorPullback j).PreservesZeroMorphisms :=
     Functor.preservesZeroMorphisms_of_additive _
-  letI : (Scheme.Modules.tensorPullback g' ⋙ schemeOpenRestriction X' U').PreservesZeroMorphisms :=
+  let : (Scheme.Modules.tensorPullback g' ⋙ schemeOpenRestriction X' U').PreservesZeroMorphisms :=
     Functor.preservesZeroMorphisms_of_additive _
   have h := open_pinned_counit_homotopy_restriction g' U U' j hj
     ((HomotopyCategory.quotient

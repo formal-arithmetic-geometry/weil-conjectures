@@ -113,8 +113,8 @@ restrictions `P(g) : P(Y) ⟶ P(Z)` along all the morphisms `g : Z ⟶ Y`. -/
 noncomputable def toPiCofree : P ⟶ piCofree P where
   app Y := Pi.lift fun x : Σ Z : C, (Z ⟶ Y.unop) ↦ P.map x.2.op
   naturality Y Y' h := Pi.hom_ext _ _ fun x ↦ by
-    rw [Category.assoc, Pi.lift_comp_π, piCofree_map, Category.assoc, Pi.lift_comp_π, Pi.lift_comp_π, op_comp,
-      Quiver.Hom.op_unop, P.map_comp]
+    rw [Category.assoc, Pi.lift_comp_π, piCofree_map, Category.assoc, Pi.lift_comp_π,
+      Pi.lift_comp_π, op_comp, Quiver.Hom.op_unop, P.map_comp]
 
 instance : Mono (toPiCofree P) := by
   have (Y : Cᵒᵖ) : IsSplitMono ((toPiCofree P).app Y) :=

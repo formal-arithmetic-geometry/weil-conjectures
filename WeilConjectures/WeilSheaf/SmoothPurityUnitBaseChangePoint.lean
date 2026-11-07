@@ -173,7 +173,7 @@ lemma nagataOpenImmersion_comp_nagataProper :
     nagataOpenImmersion f ≫ nagataProper f = f :=
   (compactificationOverField f).overI_overG
 
-omit [Fact (ringChar k).Prime] in
+omit [Finite k] [Fact (ringChar k).Prime] in
 lemma geometricFiberOverMap_nagataOpenImmersion_comp_nagataProper :
     geometricFiberOverMap (nagataOpenImmersion f) ≫ geometricFiberOverMap (nagataProper f) =
       geometricFiberOverMap f := by
@@ -214,6 +214,7 @@ lemma isPullback_geometricFiberProj_point :
       (point k).hom (Spec.map (CommRingCat.ofHom (algebraMap k (AlgebraicClosure k)))) :=
   IsPullback.of_hasPullback _ _
 
+omit [Finite k] in
 /-- **A1' over a point.** For a separated `k`-scheme of finite type `f : X ⟶ Spec k` (`k` finite)
 and the compact-support base change isomorphism along `k ⟶ k̄` attached to the compactification
 defining `Rf_!` (`nagataLowerShriekBaseChange`, for any base change isomorphism `bcj` of the open
@@ -265,6 +266,7 @@ noncomputable def geometricFiberLowerShriekBaseChangePoint :
     (openImmersionLowerShriekBaseChangeOfMap l
       (isPullback_geometricFiberOverMap (nagataOpenImmersion f)))
 
+omit [Finite k] in
 /-- **A1' over a point**: for a separated `k`-scheme of finite type `f : X ⟶ Spec k` over a
 finite field `k`, the exceptional base change map at the unit `πX^* Rf^! ℚ̄_ℓ ⟶ Rf̄^! ℚ̄_ℓ` along
 `k ⟶ k̄` attached to the compact-support base change isomorphism

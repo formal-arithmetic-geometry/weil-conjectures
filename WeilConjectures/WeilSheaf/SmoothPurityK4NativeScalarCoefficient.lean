@@ -12,7 +12,6 @@ import WeilConjectures.Tactic.ExactModProofs
 
 /-! # Changing coefficients in a scalar Frobenius relation -/
 
-
 @[expose] public section
 
 universe u
@@ -70,8 +69,9 @@ theorem purityChangeCoefficientPullbackIso_weil
     (pullIso a f.geometricGaloisFrobenius.hom) (pullIso a f.geometricFiberProj)
     (geometricFiberProjUpperStarFrobeniusIso Λ f)
     (geometricFiberProjUpperStarFrobeniusIso Λ' f) M N
-    (fun K ↦ purity_extendScalars_map_geometricFiberProjUpperStarFrobeniusIso_hom_app_comp_pullIso_hom_app
-      a f K)
+    (fun K ↦
+      purity_extendScalars_map_geometricFiberProjUpperStarFrobeniusIso_hom_app_comp_pullIso_hom_app
+        a f K)
     (purityExtendPullbackIso Λ f.geometricFiberProj M N e) c
     (purityExtendPullbackIso_weil Λ f M N e c he)
 

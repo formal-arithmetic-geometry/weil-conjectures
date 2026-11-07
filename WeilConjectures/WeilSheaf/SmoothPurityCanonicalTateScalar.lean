@@ -12,7 +12,6 @@ import WeilConjectures.Tactic.ExactModProofs
 
 @[expose] public section
 
-
 universe u
 
 open CategoryTheory Limits MonoidalCategory

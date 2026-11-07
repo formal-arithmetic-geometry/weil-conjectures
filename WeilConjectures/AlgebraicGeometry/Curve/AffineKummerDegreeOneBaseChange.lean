@@ -117,14 +117,14 @@ theorem IsConnectedCurve.affine_kummer_degree_one_baseChange_bijective
         (MorphismProperty.Over.mkIdTerminal @Etale C)).apply_symm_apply (ULift.up a)
       have hd := Sheaf.H.δSucc_zero hC
         (MorphismProperty.Over.mkIdTerminal @Etale C) z
-      change Sheaf.H.δ (C.kummerSequence_shortExact n hnC)
+      change Sheaf.H.δSections (C.kummerSequence_shortExact n hnC)
         (MorphismProperty.Over.mkIdTerminal @Etale C) (ULift.up a) = _
       change Sheaf.H.δSucc hC 0 z =
-        Sheaf.H.δ hC (MorphismProperty.Over.mkIdTerminal @Etale C)
+        Sheaf.H.δSections hC (MorphismProperty.Over.mkIdTerminal @Etale C)
           (Sheaf.H.equiv₀ C.gmSheaf
             (MorphismProperty.Over.mkIdTerminal @Etale C) z) at hd
       exact (hd.trans (congrArg
-        (Sheaf.H.δ hC (MorphismProperty.Over.mkIdTerminal @Etale C)) he)).symm
+        (Sheaf.H.δSections hC (MorphismProperty.Over.mkIdTerminal @Etale C)) he)).symm
     change Sheaf.H.map ψ.τ₁ 1
       (Etale.cohomologyMap π (C.rootsOfUnitySheaf n) 1 (α a)) = _
     rw [hz, hδ 0, hψ₃]
@@ -132,7 +132,7 @@ theorem IsConnectedCurve.affine_kummer_degree_one_baseChange_bijective
     have hd := Sheaf.H.δSucc_zero hP (MorphismProperty.Over.mkIdTerminal @Etale P)
       (Sheaf.H.map (upperStarGmSheafToGmSheaf π) 0 (Etale.cohomologyMap π C.gmSheaf 0 z))
     exact hd.trans (congrArg
-      (Sheaf.H.δ hP (MorphismProperty.Over.mkIdTerminal @Etale P)) hu)
+      (Sheaf.H.δSections hP (MorphismProperty.Over.mkIdTerminal @Etale P)) hu)
   let E := Scheme.Pic.toCohomologicalPicardGroupAddEquiv C
   let EP := Scheme.Pic.toCohomologicalPicardGroupAddEquiv P
   let V : C.CohomologicalPicardGroup →+ P.CohomologicalPicardGroup :=

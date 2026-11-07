@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.IntegralQuotient.IntegralQuotientDirectImageComparison
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.InternalScalarTensorComparison
 public import WeilConjectures.AlgebraicGeometry.ModuleObjectProjectionMap
@@ -123,7 +125,7 @@ private theorem tensorator_Q_generic
   unfold Functor.LaxMonoidal.μ
   unfold DerivedCategory.laxMonoidalQ
   unfold inferInstance
-  unfold DerivedCategory.instLaxMonoidalCochainComplexIntQ_weilConjectures
+  unfold DerivedCategory.instLaxMonoidalQ
   unfold Functor.LaxMonoidal.ofIso
   dsimp only
   rw [Functor.LaxMonoidal.comp_μ]
