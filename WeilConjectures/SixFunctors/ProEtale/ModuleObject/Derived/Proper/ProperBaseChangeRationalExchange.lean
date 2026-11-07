@@ -117,8 +117,6 @@ variable {X' Y' : Over (Spec (.of k))}
   [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
   {g : Y' ⟶ Y} {p' : X' ⟶ Y'} {g' : X' ⟶ X}
 
-attribute [local irreducible] boundedConstructibleBaseChange
-
 attribute [local irreducible] boundedConstructibleUpperStar
   derivedUpperStarLowerStarAdjunction ObjectProperty.lift
   boundedConstructibleUpperStarCompatibility boundedConstructiblePullbackSquareComparison
@@ -129,6 +127,7 @@ private theorem baseChange_restriction_eq
     (sq : CommSq g' p' p g) :
     boundedConstructibleBaseChangeOfPreserves (Profinite.padicAlgClRingObj ℓ) ℓ H sq =
       boundedConstructibleBaseChange ℓ sq := by
+  rw [boundedConstructibleBaseChange_def]
   with_unfolding_all rfl
 
 private theorem baseChange_restriction_eq_subfield
@@ -137,6 +136,7 @@ private theorem baseChange_restriction_eq_subfield
     (sq : CommSq g' p' p g) :
     boundedConstructibleBaseChangeOfPreserves (Profinite.continuousMapRingObj E) ℓ H sq =
       ContinuousMapRingObj.boundedConstructibleBaseChange ℓ E sq := by
+  rw [ContinuousMapRingObj.boundedConstructibleBaseChange_def]
   with_unfolding_all rfl
 
 set_option backward.isDefEq.respectTransparency false in
