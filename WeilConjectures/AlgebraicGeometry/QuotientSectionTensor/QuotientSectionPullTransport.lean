@@ -118,10 +118,9 @@ theorem section_pull_transport_condition_of_normalized {X Y : Scheme.{u}} (f : X
       Functor.whiskerLeft (derivedFunctor Λ Y) barLam.hom
   intro M
   obtain ⟨H, hH, ⟨e⟩⟩ := CondensedRing.exists_kFlat_iso_Qh_obj Λ M
-  letI : IsCommMonObj (condensedRingObj Λ Y) := isCommMonObj_condensedRingObj Λ Y
-  letI : IsCommMonObj (condensedRingObj Λ' Y) := isCommMonObj_condensedRingObj Λ' Y
-  have : (extension a Y).PreservesKFlatQuasiIso :=
-    Mod.preservesKFlatQuasiIso (AlgebraicGeometry.ProEtale.coefficientMap a Y)
+  have : (extension a Y).PreservesKFlatQuasiIso := by
+    set_option backward.isDefEq.respectTransparency false in
+      exact Mod.preservesKFlatQuasiIso (AlgebraicGeometry.ProEtale.coefficientMap a Y)
   have hε : IsIso ((scalarCounit a Y).app H) := by
     have := CondensedRing.isLeftDerivabilityStructure_localizerMorphismKFlat Λ Y
     unfold scalarCounit D
