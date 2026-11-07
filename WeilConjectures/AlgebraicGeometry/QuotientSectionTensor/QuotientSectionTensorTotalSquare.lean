@@ -55,7 +55,6 @@ attribute [local implicit_reducible] Functor.mapHomologicalComplex
 attribute [local irreducible] HomologicalComplex₂.total Mod.inducingFunctorData
   InternalAbelianSheafModule.sectionModuleEquivalence SheafOfModules.monoidalCategory
 
-set_option maxHeartbeats 800000 in
 -- Check all summands without expanding the derived tensor structures.
 /-- Totalization of the ordinary scalar section tensor square.
 Source: Stacks, Cohomology on Sites, Tags 06YY and 07A4.
