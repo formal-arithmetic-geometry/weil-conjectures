@@ -216,6 +216,6 @@ theorem localDirectImage_stalk_class_top_comparison
             (((Scheme.Modules.pushforward h).rightDerived p).obj G)).presheaf
           ⊤ y (by trivial)) : _ ⟶ _) eta = _
   simp only [ConcreteCategory.comp_apply] at hx ⊢
-  convert hx using 1 <;> rfl
+  convert hx using 1
 
 end AlgebraicGeometry

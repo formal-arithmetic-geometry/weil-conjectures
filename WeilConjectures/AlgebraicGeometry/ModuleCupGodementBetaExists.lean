@@ -228,8 +228,8 @@ private lemma multiply_eval_sections (X : Scheme.{u}) (H : X.Modules)
       eval X H x ((proj X (moduleCup_godementObject X H) x).app U s ⟨hx⟩) := by
   have hp : moduleCup_godementMultiply X H ≫ proj X H x =
       toSkyscraper (eval X H x ∘ₗ eval X (moduleCup_godementObject X H) x) := by
-    simp only [moduleCup_godementMultiply, proj, CategoryTheory.Limits.Pi.lift_comp_π, comp_toSkyscraper,
-      eval, LinearMap.comp_assoc]
+    simp only [moduleCup_godementMultiply, proj, CategoryTheory.Limits.Pi.lift_comp_π,
+      comp_toSkyscraper, eval, LinearMap.comp_assoc]
   change ((moduleCup_godementMultiply X H ≫ proj X H x).app U s) ⟨hx⟩ = _
   rw [hp, toSkyscraper_app_apply, LinearMap.comp_apply, eval_germ]
 
