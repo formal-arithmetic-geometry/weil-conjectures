@@ -303,7 +303,7 @@ private theorem ordinaryCoordinate_square {Z W : Scheme.{u}} {q : Z ⟶ W}
   apply (adj.homEquiv _ _).injective
   simp only [Adjunction.homEquiv_unit]
   erw [← adj.unit.naturality (φW.hom.app M ≫ Pi.π (fun _ : Fin d ↦ M) i)]
-  apply presentedTensor_hom_ext W sW a.target d θ
+  apply presentedTensor_hom_ext_private W sW a.target d θ
   intro V b m
   change ((adj.unit.app M).val.app V)
       ((φW.hom.app M ≫ Pi.π (fun _ : Fin d ↦ M) i).val.app V
@@ -321,7 +321,7 @@ private theorem ordinaryCoordinate_square {Z W : Scheme.{u}} {q : Z ⟶ W}
   erw [((adj.unit.app M).val.app V).hom.map_smul]
   erw [restrictionPullback_unit R S a ((sW.presentation a.target).ordinary.obj M) V
     (sectionTensor (sW.presentation a.target) M V b m)]
-  erw [ordinaryBalancing_pure sW sZ a M V b m]
+  erw [ordinaryBalancing_pure_private sW sZ a M V b m]
   erw [hZ (F.obj M) ((proEtaleBaseChange q).op.obj V)
     ((proEtaleRingDirectImageMap q S.target S.source S.identification).hom.app V b)
     ((adj.unit.app M).val.app V m) i, hcoord V b i]

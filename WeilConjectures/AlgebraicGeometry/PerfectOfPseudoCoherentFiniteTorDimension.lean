@@ -199,7 +199,7 @@ theorem isPerfect_of_isPseudoCoherent_of_hasFiniteTorDimension (S : Scheme.{uP})
         (moduleRings S.toRingedSpace) (homOfLE hVU))).symm.app K ≪≫
       (Functor.mapDerivedCategoryCompIso G F).symm.app K ≪≫ F.mapDerivedCategory.mapIso eP ≪≫
         F.mapDerivedCategoryFactors.app P
-  obtain ⟨M, b, hMb, hMf, ⟨eM⟩⟩ := affine_finiteFree_model S V hV PV hbV hfV
+  obtain ⟨M, b, hMb, hMf, ⟨eM⟩⟩ := affine_finiteFree_model_private S V hV PV hbV hfV
   let R := S.presheaf.obj (.op V)
   let : HasDerivedCategory (ModuleCat.{uP} R) := HasDerivedCategory.standard _
   have hMpc : DerivedCategory.IsPseudoCoherent (DerivedCategory.Q.obj M) :=
@@ -211,7 +211,7 @@ theorem isPerfect_of_isPseudoCoherent_of_hasFiniteTorDimension (S : Scheme.{uP})
       (DerivedCategory.Q.obj M) hMpc hMtor
   let T := (affinePerfectSheafification S V hV).mapHomologicalComplex (.up ℤ)
   obtain ⟨D, _, ⟨c⟩⟩ := affine_localized_derived_sheafification S V hV
-  refine ⟨V, hxV, T.obj E, affine_projective_strictlyPerfect S V hV E hEb hEf hEp, ?_⟩
+  refine ⟨V, hxV, T.obj E, affine_projective_strictlyPerfect_private S V hV E hEb hEf hEp, ?_⟩
   exact ⟨eKM ≪≫ (c.app M).symm ≪≫ D.mapIso eE.symm ≪≫ c.app E⟩
 
 end AlgebraicGeometry.Scheme

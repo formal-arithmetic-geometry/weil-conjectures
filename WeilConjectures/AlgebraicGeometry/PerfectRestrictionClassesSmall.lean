@@ -154,7 +154,7 @@ theorem perfectRestriction_classes_small (X : Scheme.{u}) (W : X.Opens)
   let e : B ≌ C := Modules.overEquiv A
   have : e.functor.Additive := Functor.additive_of_preserves_binary_products _
   have : e.inverse.Additive := Functor.additive_of_preserves_binary_products _
-  obtain ⟨hD⟩ := hasDerivedCategory_of_equivalence e.symm
+  obtain ⟨hD⟩ := hasDerivedCategory_of_equivalence_private e.symm
   let : HasDerivedCategory.{w} C := hD
   obtain ⟨hO⟩ := nonempty_derivedOpenLocalization A.toScheme
   let : ∀ V : A.toScheme.Opens, HasDerivedCategory.{w}

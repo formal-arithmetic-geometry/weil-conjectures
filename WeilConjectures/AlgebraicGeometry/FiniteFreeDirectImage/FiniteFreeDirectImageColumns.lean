@@ -126,7 +126,7 @@ theorem finiteFreeDirectImage_columns {Z W : Scheme.{u}} (q : Z ⟶ W)
     finiteFreeDirectImage_balancingComputed sW sZ a β hsource hβ
   subst β
   refine ⟨eW _, eZ M, fun i ↦ ?_⟩
-  simpa only [comparison, Category.assoc] using mate_columns
+  simpa only [comparison, Category.assoc] using mate_columns_private
     (proEtaleRingDerivedAdjunction q R.target R.source R.identification)
     (proEtaleRingDerivedAdjunction q S.target S.source S.identification)
     (proEtaleRingRestrictionDerivedPullback q R.target S.target R.source S.source

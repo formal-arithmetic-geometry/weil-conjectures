@@ -284,7 +284,7 @@ private theorem model_symmetry
   intro P Q hP hQ
   obtain ⟨σ, hσ, he⟩ := M.symmetry_model P Q hP hQ
   have hs : σ = (β_ P Q).hom := by
-    apply tensorGenerator_ext.{c, v, r} J R
+    apply tensorGenerator_ext_private.{c, v, r} J R
     intro p q k hpq U x y
     have hqp : q + p = k := (add_comm q p).trans hpq
     exact (hσ p q k hpq hqp U x y).trans
@@ -309,7 +309,7 @@ private theorem model_associator
   intro P Q N hP hQ hN
   obtain ⟨a, ha, he⟩ := M.associator_model P Q N hP hQ hN
   have heq : a = (α_ P Q N).hom := by
-    apply tensorGenerator_ext₃.{c, v, r} J R
+    apply tensorGenerator_ext₃_private.{c, v, r} J R
     intro p q t i k hpq hit U x y z
     have hpj : p + (q + t) = k := by omega
     exact (ha p q t i (q + t) k hpq hit rfl hpj U x y z).trans
@@ -346,7 +346,7 @@ private theorem model_rightUnitor
     · subst q
       have hk : k = p := by omega
       subst hk
-      apply pure_ext.{c, v, r} J R (P.X k)
+      apply pure_ext_private.{c, v, r} J R (P.X k)
         ((ringedTensorUnitComplex.{c, v, r} J R).X 0) (P.X k)
       intro U x a
       exact (hρ k U x a).trans

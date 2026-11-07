@@ -310,9 +310,9 @@ theorem finiteFreeDirectImage_pullbackCoordinates {Z W : Scheme.{u}} (q : Z ⟶ 
   · intro X Y f i
     simpa only [eZ, Iso.trans_hom, Iso.symm_hom, Iso.app_inv,
       Functor.comp_map, Category.assoc] using
-      coordinateInjection_naturality d (E' ⋙ U'.mapDerivedCategory) Φ' f i
+      coordinateInjection_naturality_private d (E' ⋙ U'.mapDerivedCategory) Φ' f i
   · intro X i
-    have h := coordinateInjection_square d F.mapDerivedCategory
+    have h := coordinateInjection_square_private d F.mapDerivedCategory
       (E ⋙ U.mapDerivedCategory) (E' ⋙ U'.mapDerivedCategory) Φ Φ' τ hτ X i
     simpa only [τ, eW, eZ, Iso.trans_hom, Iso.symm_hom, Iso.app_inv,
       NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,

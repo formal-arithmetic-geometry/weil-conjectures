@@ -976,7 +976,7 @@ theorem finiteFreeDirectImageBalancingCoherence {Z W : Scheme.{u}} (q : Z ⟶ W)
         isoWhiskerRight_hom, Functor.whiskerLeft_app, Functor.whiskerRight_app,
         Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
         Category.comp_id] using rightSquare_comp a b M
-    have h := Conjugation.tower
+    have h := Conjugation.tower_private
       (sW.adjunction a.target) (sW.adjunction b.target) (sW.adjunction (a.comp b).target)
       (sZ.adjunction a.source) (sZ.adjunction b.source) (sZ.adjunction (a.comp b).source)
       (proEtaleRingDerivedAdjunction q R.target R.source R.identification)
