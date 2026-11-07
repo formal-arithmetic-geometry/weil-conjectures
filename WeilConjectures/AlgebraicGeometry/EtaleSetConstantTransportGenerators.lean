@@ -114,8 +114,8 @@ theorem etaleSetConstantTransportGenerators
         (op ((MorphismProperty.Over.pullback @Etale ⊤ v).obj W)) e)
   simp only [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
     ConcreteCategory.comp_apply] at he
-  convert he using 1 <;>
-    (simp only [c, ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
-      ConcreteCategory.comp_apply] <;> first | rfl)
+  convert he using 1
+  simp only [c, ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
+    ConcreteCategory.comp_apply]
 
 end AlgebraicGeometry
