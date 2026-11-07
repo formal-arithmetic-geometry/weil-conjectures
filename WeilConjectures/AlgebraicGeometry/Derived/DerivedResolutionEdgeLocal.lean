@@ -201,7 +201,7 @@ private theorem section_edge_square {T S : Scheme.{u}} (g : T ⟶ S)
 variable [∀ X : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- The fixed resolution comparisons require several large definitional identifications.
 /-- The kernel/cokernel resolution edge has the fixed local-class description.
 Source: Stacks Project, cohomology.tex, Tags 0BKJ and 0D5X, the cycle-class
