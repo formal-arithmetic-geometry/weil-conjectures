@@ -372,6 +372,7 @@ private theorem tensorGenerator_smul_left (P Q : CochainComplex (GMod R) ℤ)
         (SheafOfModules.ScalarHomOrdinary.pure R (P.X p) (Q.X q) V x y)
   rw [pure_smul_left, map_smul]
 
+omit [EssentiallySmall.{max c v r} C] in
 private theorem extension_preserves_small_colimits (F : GMod R ⥤ GMod S)
     (hF : ∀ M, F.obj M = SheafOfModules.changeOfRings a M)
     (hmF : ∀ {M N} (f : M ⟶ N), F.map f = eqToHom (hF M) ≫
