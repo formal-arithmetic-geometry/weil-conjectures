@@ -8,8 +8,9 @@ module
 public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.FourCornersSupplement
 public import WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerOperationsSupplement
 import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingRestrictionSquare
-import WeilConjectures.AlgebraicGeometry.StrictTowerRingedSquare.ProEtaleRingedSquareLocalization
+import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import all WeilConjectures.AlgebraicGeometry.Tensor.TensorPullbackSquare
+import WeilConjectures.AlgebraicGeometry.StrictTowerRingedSquare.ProEtaleRingedSquareLocalization
 /-! Finite coefficient reduction and the canonical inverse-image square.
 Source: Stacks Project, Tags 0D6D and 0E48.
 (blueprint: lem-weil-pbc-finite-reduction-pullback-square) -/

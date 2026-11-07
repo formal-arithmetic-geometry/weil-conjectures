@@ -170,7 +170,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Functor.leftDerivedFunc
 attribute [local implicit_reducible] derivedTensorRightDerivedLowerShriek
   rightDerivedLowerShriekDerivedTensorLeftDerivedUpperStar
 
-private theorem projectionMap_chosen_comp
+private theorem projectionMap_chosen_comp_private
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
@@ -204,4 +204,9 @@ end TensorConventionProof
 
 set_option backward.isDefEq.respectTransparency false
 
+end AlgebraicGeometry.Etale
+
+namespace AlgebraicGeometry.Etale
+/-- Public export of the private `projectionMap_chosen_comp_private` (used by `import all` importers; linter.privateModule). -/
+alias projectionMap_chosen_comp := projectionMap_chosen_comp_private
 end AlgebraicGeometry.Etale

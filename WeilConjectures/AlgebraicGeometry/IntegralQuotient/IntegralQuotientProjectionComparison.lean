@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.IntegralQuotient.IntegralQuotientDirectImageComparison
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.InternalScalarTensorComparison
 public import WeilConjectures.AlgebraicGeometry.ModuleObjectProjectionMap

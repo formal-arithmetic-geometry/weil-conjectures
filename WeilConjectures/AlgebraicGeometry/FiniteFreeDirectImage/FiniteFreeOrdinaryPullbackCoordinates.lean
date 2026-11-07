@@ -184,7 +184,7 @@ private theorem ordinaryBalancing_unit {Z W : Scheme.{u}} {q : Z ⟶ W}
         ((adjR.unit.app M).val.app V m))) (χ.inv_hom_id_app M)
   exact hh.trans hi
 
-private theorem ordinaryBalancing_pure {Z W : Scheme.{u}} {q : Z ⟶ W}
+private theorem ordinaryBalancing_pure_private {Z W : Scheme.{u}} {q : Z ⟶ W}
     (sW : ScalarModel W) (sZ : ScalarModel Z)
     {R S : Coefficients q} (a : CoefficientMap R S)
     (M : proEtaleRingModules W R.target) (V : W.ProEtᵒᵖ)
@@ -217,7 +217,7 @@ private theorem ordinaryBalancing_pure {Z W : Scheme.{u}} {q : Z ⟶ W}
     ((proEtaleBaseChange q).op.obj V)).hom.map_smul, ordinaryBalancing_unit]
   exact (sectionTensor_smul_one (sZ.presentation a.source) _ _ _ _).symm
 
-private theorem presentedTensor_hom_ext (X : Scheme.{u}) (s : ScalarModel X)
+private theorem presentedTensor_hom_ext_private (X : Scheme.{u}) (s : ScalarModel X)
     {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}} (a : R ⟶ S) (d : ℕ)
     (θ : (∏ᶜ fun _ : Fin d ↦ SheafOfModules.unit ((sheafCompose (ProEt.topology X)
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)) ≅
@@ -303,7 +303,7 @@ private theorem ordinaryCoordinate_square {Z W : Scheme.{u}} {q : Z ⟶ W}
   apply (adj.homEquiv _ _).injective
   simp only [Adjunction.homEquiv_unit]
   erw [← adj.unit.naturality (φW.hom.app M ≫ Pi.π (fun _ : Fin d ↦ M) i)]
-  apply presentedTensor_hom_ext W sW a.target d θ
+  apply presentedTensor_hom_ext_private W sW a.target d θ
   intro V b m
   change ((adj.unit.app M).val.app V)
       ((φW.hom.app M ≫ Pi.π (fun _ : Fin d ↦ M) i).val.app V
@@ -321,7 +321,7 @@ private theorem ordinaryCoordinate_square {Z W : Scheme.{u}} {q : Z ⟶ W}
   erw [((adj.unit.app M).val.app V).hom.map_smul]
   erw [restrictionPullback_unit R S a ((sW.presentation a.target).ordinary.obj M) V
     (sectionTensor (sW.presentation a.target) M V b m)]
-  erw [ordinaryBalancing_pure sW sZ a M V b m]
+  erw [ordinaryBalancing_pure_private sW sZ a M V b m]
   erw [hZ (F.obj M) ((proEtaleBaseChange q).op.obj V)
     ((proEtaleRingDirectImageMap q S.target S.source S.identification).hom.app V b)
     ((adj.unit.app M).val.app V m) i, hcoord V b i]
@@ -377,4 +377,14 @@ theorem finiteFreeDirectImage_ordinaryPullbackCoordinates {Z W : Scheme.{u}} (q 
     θZ
   exact ⟨φW, φZ, hεW, hεZ, ordinaryCoordinate_square sW sZ R S a d θ θZ hcoord φW φZ hW hZ⟩
 
+end AlgebraicGeometry.Scheme.FiniteFreeDirectImage
+
+namespace AlgebraicGeometry.Scheme.FiniteFreeDirectImage
+/-- Public export of the private `ordinaryBalancing_pure_private` (used by `import all` importers; linter.privateModule). -/
+alias ordinaryBalancing_pure := ordinaryBalancing_pure_private
+end AlgebraicGeometry.Scheme.FiniteFreeDirectImage
+
+namespace AlgebraicGeometry.Scheme.FiniteFreeDirectImage
+/-- Public export of the private `presentedTensor_hom_ext_private` (used by `import all` importers; linter.privateModule). -/
+alias presentedTensor_hom_ext := presentedTensor_hom_ext_private
 end AlgebraicGeometry.Scheme.FiniteFreeDirectImage

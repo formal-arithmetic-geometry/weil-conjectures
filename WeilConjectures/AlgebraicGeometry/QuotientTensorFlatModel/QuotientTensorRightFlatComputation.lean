@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.QuotientTensorFlatModel.QuotientTensorFlatModelMaps
 import all WeilConjectures.CategoryTheory.Derived.DerivedTensorRightExact
 import WeilConjectures.CategoryTheory.Exact.ExactEquivalenceDerivedSquares
