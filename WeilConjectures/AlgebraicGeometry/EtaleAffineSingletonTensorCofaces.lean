@@ -80,7 +80,7 @@ theorem singletonTensorDegreeComparison_coface
       exact congrArg₂ (· + ·) (hb m) (hc m)
     | smul_tprod r b =>
       simp only [← TensorProduct.smul_tmul]
-      exact singletonTensorDegreeComparison_pure_coface X F U W g e he n j (r • m) b
+      exact singletonTensorDegreeComparison_pure_coface_fixed X F U W g e he n j (r • m) b
 
 end
 end AlgebraicGeometry.Scheme
