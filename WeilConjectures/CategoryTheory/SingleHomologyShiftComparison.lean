@@ -47,7 +47,6 @@ private theorem cochain_comparison (Y : C) (n : ℤ) :
   dsimp [HomologicalComplex.XIsoOfEq]
   erw [Category.comp_id, eqToHom_trans]
   · simp
-  all_goals simp [CochainComplex.singleFunctor, CochainComplex.singleFunctors]
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
