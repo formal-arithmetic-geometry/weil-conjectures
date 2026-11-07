@@ -408,7 +408,7 @@ private theorem tateIntegralLineProduct
   let PG : (IntegralOnSlice.Good ℓ E X none).FullSubcategory :=
     ⟨(integralLineSingle ℓ E X).obj P, tateLineGood X ℓ E P⟩
   let hT := (tateLineGood X ℓ E T).1
-  have ep : DerivedCategory.Q.obj PG.obj ≅ K.obj :=
+  have ep : CategoryTheory.Iso.{u + 2} (DerivedCategory.Q.obj PG.obj) K.obj :=
     ((DerivedCategory.singleFunctorIsoCompQ _ 0).app P).symm
   have hc : IntegralOnSlice.IsComplete ℓ E X none K.obj :=
     CompletedLineTensor.intrinsic_complete ℓ E X K
