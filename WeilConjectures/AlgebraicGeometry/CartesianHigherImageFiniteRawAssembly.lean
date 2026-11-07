@@ -17,11 +17,11 @@ open CategoryTheory Limits Opposite
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
-noncomputable local instance (X : Scheme.{u}) :
+noncomputable local instance localInst_CartesianHigherImageFiniteRawAssembly_1 (X : Scheme.{u}) :
     HasShift (DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) ℤ :=
   inferInstance
 
-noncomputable local instance (X : Scheme.{u}) :
+noncomputable local instance localInst_CartesianHigherImageFiniteRawAssembly_2 (X : Scheme.{u}) :
     HasZeroMorphisms (DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) :=
   inferInstance
 

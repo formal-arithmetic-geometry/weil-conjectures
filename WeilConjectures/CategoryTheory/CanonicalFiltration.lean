@@ -38,13 +38,13 @@ theorem antitone_step {A : C} (F : DecreasingFiltration A) : Antitone F.step := 
 
 end DecreasingFiltration
 
-namespace FilteredObject
+namespace WeilFilteredObject
 
 
 
 /-- (blueprint: def-sp-filtration) Filtered objects and filtration-preserving maps
 form the category `Fil(C)` (Stacks, Tag 0121). -/
-instance : Category.{v} (FilteredObject C) where
+instance : Category.{v} (WeilFilteredObject C) where
   Hom := Hom
   id A := ⟨𝟙 A.obj, fun i => ⟨𝟙 _, by simp⟩⟩
   comp f g := ⟨f.hom ≫ g.hom, fun i => by
@@ -70,7 +70,7 @@ instance : Category.{v} (FilteredObject C) where
     congr 1
     simp
 
-end FilteredObject
+end WeilFilteredObject
 
 namespace DecreasingFiltration
 

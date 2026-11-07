@@ -110,7 +110,7 @@ lemma Scheme.kummerδ₀_eq_comp_extClass (n : ℕ) (hn : IsUnit (n : Γ(X, ⊤)
     X.kummerδ₀ n hn (Additive.ofMul u) =
       (Abelian.Ext.mk₀ ((X.constantSheafULiftIntIso).hom ≫ unitToGmSheaf u)).comp
         (X.kummerSequence_shortExact n hn).extClass (zero_add 1) := by
-  change Sheaf.H.δ _ _ _ = _
+  change Sheaf.H.δSections _ _ _ = _
   rw [Sheaf.H.δ_apply]
   congr 1
   rw [AddEquiv.symm_apply_eq]
