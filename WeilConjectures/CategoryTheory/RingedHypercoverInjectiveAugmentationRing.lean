@@ -20,6 +20,7 @@ import Mathlib.Algebra.Homology.ShortComplex.Exact
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 import WeilConjectures.CategoryTheory.RingedHypercoverFiniteCones
+import Mathlib.Tactic.IrreducibleDef
 
 /-!
 # Injective module sheaves on a ringed-site hypercover
@@ -41,43 +42,64 @@ open scoped Simplicial
 
 namespace CategoryTheory.RingedHypercover
 
+set_option backward.isDefEq.respectTransparency false in
+private noncomputable irreducible_def freeObjMap.{u', v', r'}
+    {C : Type u'} [SmallCategory C] (R : Cᵒᵖ ⥤ RingCat.{r'})
+    (A : C) {X Y : Cᵒᵖ} (f : X ⟶ Y) :
+    ModuleCat.of (R.obj X) (ULift.{max u' v' r'} (unop X ⟶ A) →₀ R.obj X) ⟶
+      (ModuleCat.restrictScalars (R.map f).hom).obj
+        (ModuleCat.of (R.obj Y) (ULift.{max u' v' r'} (unop Y ⟶ A) →₀ R.obj Y)) :=
+  ModuleCat.ofHom
+    (Y := (ModuleCat.restrictScalars (R.map f).hom).obj
+      (ModuleCat.of (R.obj Y) (ULift.{max u' v' r'} (unop Y ⟶ A) →₀ R.obj Y)))
+    (Finsupp.linearCombination (R.obj X)
+      (M := (ModuleCat.restrictScalars (R.map f).hom).obj
+        (ModuleCat.of (R.obj Y) (ULift.{max u' v' r'} (unop Y ⟶ A) →₀ R.obj Y)))
+      (fun a ↦ Finsupp.single (ULift.up (f.unop ≫ a.down)) 1))
+
+@[simp]
+private lemma freeObjMap_single.{u', v', r'}
+    {C : Type u'} [SmallCategory C] (R : Cᵒᵖ ⥤ RingCat.{r'}) (A : C) {X Y : Cᵒᵖ} (f : X ⟶ Y)
+    (a : ULift.{max u' v' r'} (unop X ⟶ A)) (b : R.obj X) :
+    (freeObjMap.{u', v', r'} R A f) (Finsupp.single a b) =
+      Finsupp.single (ULift.up (f.unop ≫ a.down)) (R.map f b) := by
+  rw [freeObjMap_def.{u', v', r'}]
+  change (Finsupp.linearCombination (R.obj X)
+    (M := (ModuleCat.restrictScalars (R.map f).hom).obj
+      (ModuleCat.of (R.obj Y) (ULift.{max u' v' r'} (unop Y ⟶ A) →₀ R.obj Y)))
+    (fun a ↦ Finsupp.single (ULift.up (f.unop ≫ a.down)) 1)) (Finsupp.single a b) = _
+  rw [Finsupp.linearCombination_single]
+  change (R.map f b) • (Finsupp.single _ 1 : _ →₀ R.obj Y) = _
+  simp
+
 variable {C : Type u} [SmallCategory C] (R : Cᵒᵖ ⥤ RingCat.{r})
 
 set_option backward.isDefEq.respectTransparency false in
 private noncomputable def freeObj (A : C) : PresheafOfModules.{max u v r} R where
   obj X := ModuleCat.of (R.obj X) (ULift.{max u v r} (unop X ⟶ A) →₀ R.obj X)
-  map {X Y} f := ModuleCat.ofHom
-    (Y := (ModuleCat.restrictScalars (R.map f).hom).obj
-      (ModuleCat.of (R.obj Y) (ULift.{max u v r} (unop Y ⟶ A) →₀ R.obj Y)))
-    (Finsupp.linearCombination (R.obj X)
-      (M := (ModuleCat.restrictScalars (R.map f).hom).obj
-        (ModuleCat.of (R.obj Y) (ULift.{max u v r} (unop Y ⟶ A) →₀ R.obj Y)))
-      (fun a ↦ Finsupp.single (ULift.up (f.unop ≫ a.down)) 1))
+  map f := freeObjMap.{u, v, r} R A f
   map_id X := by
     apply ModuleCat.hom_ext
     apply Finsupp.lhom_ext'
     intro a
     apply LinearMap.ext_ring
-    simp [Finsupp.linearCombination_single]
-    rfl
+    change (freeObjMap.{u, v, r} R A (𝟙 X)) (Finsupp.single a 1) = Finsupp.single a 1
+    simp only [freeObjMap_single.{u, v, r}, map_one, unop_id, Category.id_comp]
   map_comp {X Y Z} f g := by
     apply ModuleCat.hom_ext
     apply Finsupp.lhom_ext'
     intro a
     apply LinearMap.ext_ring
-    simp [Finsupp.linearCombination_single, Category.assoc]
+    change (freeObjMap.{u, v, r} R A (f ≫ g)) (Finsupp.single a 1) =
+      (freeObjMap.{u, v, r} R A g) ((freeObjMap.{u, v, r} R A f) (Finsupp.single a 1))
+    simp only [freeObjMap_single.{u, v, r}, map_one, unop_comp, Category.assoc]
 
 @[simp]
 private lemma freeObj_map_single (A : C) {X Y : Cᵒᵖ} (f : X ⟶ Y)
     (a : ULift.{max u v r} (unop X ⟶ A)) (b : R.obj X) :
     (freeObj.{u, v, r} R A).map f (Finsupp.single a b) =
       Finsupp.single (ULift.up (f.unop ≫ a.down)) (R.map f b) := by
-  change (Finsupp.linearCombination (R.obj X)
-    (M := (ModuleCat.restrictScalars (R.map f).hom).obj ((freeObj R A).obj Y))
-    (fun a ↦ Finsupp.single (ULift.up (f.unop ≫ a.down)) 1)) (Finsupp.single a b) = _
-  rw [Finsupp.linearCombination_single]
-  change (R.map f b) • (Finsupp.single _ 1 : _ →₀ R.obj Y) = _
-  simp
+  exact freeObjMap_single.{u, v, r} R A f a b
 
 set_option backward.isDefEq.respectTransparency false in
 private noncomputable def freeMap {A B : C} (f : A ⟶ B) : freeObj.{u, v, r} R A ⟶ freeObj R B where

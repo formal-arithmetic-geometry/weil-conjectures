@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenClosedComplement
+public import Mathlib.Tactic.IrreducibleDef
 
 /-!
 
@@ -145,6 +146,7 @@ noncomputable def boundedConstructibleOpenImmersionLowerShriekBaseChangeCounitSt
 
 variable {j g j' g'}
 
+omit ℓ k in
 /-- The canonical exchange morphism `Lg'^* ⋙ j'_! ⟶ j_! ⋙ Lg^*` on bounded constructible
 complexes for a commutative square
 ```
@@ -156,8 +158,8 @@ Z' --g---> Z
 ```
 of schemes with `j` and `j'` open immersions, assembled as the composite of the unit insertion,
 the square transport, and the counit contraction. -/
-@[no_expose]
-noncomputable def boundedConstructibleOpenImmersionLowerShriekBaseChange' (sq : CommSq g' j' j g) :
+noncomputable irreducible_def boundedConstructibleOpenImmersionLowerShriekBaseChange'
+    (sq : CommSq g' j' j g) :
     boundedConstructibleUpperStar Λ ℓ g' ⋙ boundedConstructibleOpenImmersionLowerShriek Λ ℓ j' ⟶
       boundedConstructibleOpenImmersionLowerShriek Λ ℓ j ⋙
         boundedConstructibleUpperStar Λ ℓ g :=
@@ -175,8 +177,8 @@ lemma boundedConstructibleOpenImmersionLowerShriekBaseChange'_eq_exchangeLeft
         (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ j)
         (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ j')
         (boundedConstructiblePullbackSquareComparison Λ ℓ sq.flip) := by
-  unfold boundedConstructibleOpenImmersionLowerShriekBaseChange'
-    boundedConstructibleOpenImmersionLowerShriekBaseChangeUnitStep'
+  rw [boundedConstructibleOpenImmersionLowerShriekBaseChange'_def]
+  unfold boundedConstructibleOpenImmersionLowerShriekBaseChangeUnitStep'
     boundedConstructibleOpenImmersionLowerShriekBaseChangeSquareStep'
     boundedConstructibleOpenImmersionLowerShriekBaseChangeCounitStep' Adjunction.exchangeLeft
   rfl
