@@ -61,6 +61,12 @@ theorem snd_scale (c : R) (x : R[ε]) : (scale c x).snd = c * x.snd :=
 theorem scale_one : scale (1 : R) = AlgHom.id R R[ε] := by
   ext <;> simp
 
+theorem scale_mul (c d : R) : scale (c * d) = (scale c).comp (scale d) := by
+  ext <;> simp
+
+/-- Scaling by zero is the reduction `R[ε] → R` modulo `ε`, followed by the inclusion. -/
+theorem scale_zero : scale (0 : R) = (Algebra.ofId R R[ε]).comp (fstHom R R R) := by
+  ext <;> simp
 
 @[simp]
 theorem fstHom_comp_scale (c : R) : (fstHom R R R).comp (scale c) = fstHom R R R := by

@@ -401,6 +401,18 @@ theorem translate_mem {I : Ideal (CoordinateRing n k)} [I.IsHopfIdeal k] {g h : 
   exact (zeroLocus I _).mul_mem ((zeroLocus I _).mul_mem
     (map_mem_zeroLocus (Algebra.ofId k _) hg) hγ) (map_mem_zeroLocus (Algebra.ofId k _) hh) a ha
 
+/-- Every `k`-point of `V(J)` is evaluation at a matrix. -/
+theorem exists_eq_liftₐ_evalAlgHom {J : Ideal (CoordinateRing n k)} [J.IsHopfIdeal k]
+    (χ : CoordinateRing n k ⧸ J →ₐ[k] k) :
+    ∃ g, ∃ hg : g ∈ zeroLocus J k, χ = Ideal.Quotient.liftₐ J (evalAlgHom g) hg := by
+  obtain ⟨g, hgdef⟩ : ∃ g, g = algHomMulEquiv n k k
+      (WithConv.toConv (χ.comp (Ideal.Quotient.mkₐ k J))) := ⟨_, rfl⟩
+  have hev : evalAlgHom g = χ.comp (Ideal.Quotient.mkₐ k J) := by
+    rw [hgdef, algHomMulEquiv_apply, WithConv.ofConv_toConv, evalAlgHom_map_genericUnit]
+  have hg : g ∈ zeroLocus J k := fun a ha ↦ by
+    rw [hev, AlgHom.comp_apply, Ideal.Quotient.mkₐ_eq_mk, Ideal.Quotient.eq_zero_iff_mem.2 ha,
+      map_zero]
+  exact ⟨g, hg, Ideal.Quotient.algHom_ext k (by rw [Ideal.Quotient.liftₐ_comp, hev])⟩
 
 end CommRing
 
@@ -479,6 +491,35 @@ theorem zeroLocus_vanishingIdeal_le {Γ : Subgroup (GL n k)} (J : Set (Coordinat
     zeroLocus (vanishingIdeal (Γ : Set (GL n k))) k ≤ Γ :=
   fun g hg ↦ hJ g fun a ha ↦ hg a (mem_vanishingIdeal.2 fun h hh ↦ hΓ h hh a ha)
 
+/-- A matrix outside a finite subgroup `Γ` of `GL n k` is separated from `Γ` by an equation: the
+product, over `γ ∈ Γ`, of `x_ij - γ_ij` for an entry `(i, j)` at which `g` and `γ` differ. -/
+theorem exists_mem_vanishingIdeal_evalAlgHom_ne_zero {Γ : Subgroup (GL n k)} [Finite Γ]
+    {g : GL n k} (hg : g ∉ Γ) :
+    ∃ a ∈ vanishingIdeal (Γ : Set (GL n k)), evalAlgHom g a ≠ 0 := by
+  have : Fintype Γ := Fintype.ofFinite Γ
+  have hne (γ : Γ) :
+      ∃ p : n × n, (g : Matrix n n k) p.1 p.2 ≠ ((γ : GL n k) : Matrix n n k) p.1 p.2 := by
+    by_contra! h
+    exact hg (Units.ext (Matrix.ext fun i j ↦ h (i, j)) ▸ γ.2)
+  choose p hp using hne
+  refine ⟨∏ γ : Γ, (coord n k (p γ).1 (p γ).2 -
+    algebraMap k _ (((γ : GL n k) : Matrix n n k) (p γ).1 (p γ).2)),
+    mem_vanishingIdeal.2 fun δ hδ ↦ ?_, ?_⟩
+  · rw [map_prod]
+    exact Finset.prod_eq_zero (Finset.mem_univ ⟨δ, hδ⟩) (by simp)
+  · rw [map_prod]
+    exact Finset.prod_ne_zero_iff.2 fun γ _ ↦ by simpa [sub_eq_zero] using hp γ
+
+/-- A finite subgroup of `GL n k` is Zariski closed: the `k`-points of its Zariski closure are
+the subgroup itself. -/
+theorem zeroLocus_vanishingIdeal_eq_of_finite (Γ : Subgroup (GL n k)) [Finite Γ] :
+    zeroLocus (vanishingIdeal (Γ : Set (GL n k))) k = Γ := by
+  refine le_antisymm (zeroLocus_vanishingIdeal_le (vanishingIdeal (Γ : Set (GL n k)))
+    (fun g hg a ha ↦ mem_vanishingIdeal.1 ha g hg) fun g hg ↦ ?_)
+    (subset_zeroLocus_vanishingIdeal Γ)
+  by_contra hgΓ
+  obtain ⟨a, ha, hga⟩ := exists_mem_vanishingIdeal_evalAlgHom_ne_zero hgΓ
+  exact hga (hg a ha)
 
 /-- If a subgroup `Γ` of `GL n k` normalizes a subgroup `Δ`, then the Zariski closure of `Γ`
 normalizes the Zariski closure of `Δ`, on `R`-points for every `k`-algebra `R`.
@@ -963,6 +1004,13 @@ end IdentityComponent
 
 end Translation
 
+
+theorem one_mem_zeroLocus_identityComponent [IsAlgClosed k] (I : Ideal (CoordinateRing n k))
+    [I.IsHopfIdeal k] : (1 : GL n k) ∈ zeroLocus (identityComponent I) k := by
+  intro a ha
+  have h1 : toPrimeSpectrum (1 : GL n k) ∈ PrimeSpectrum.zeroLocus (I : Set _) :=
+    toPrimeSpectrum_mem_zeroLocus_iff.2 (zeroLocus I k).one_mem
+  exact (PrimeSpectrum.mem_vanishingIdeal _ _).1 ha _ (mem_connectedComponentIn h1)
 
 /-- The matrices of `G(k)` commuting with all of `G(k)`, for `G = V(I)`: the `k`-points of the
 centre `Z(G)` when `k` is algebraically closed, and in general the subgroup `Z(G)(k) ⊆ G(k)` of

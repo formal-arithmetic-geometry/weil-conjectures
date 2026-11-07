@@ -99,5 +99,26 @@ noncomputable def pullHomMapComp' ⦃X₁ X₂ Z : C⦄ ⦃M₁ : F.obj (.mk (op
     (F.mapComp' r₂.op.toLoc p₂.op.toLoc (p₂ ≫ r₂).op.toLoc
       (by rw [← Quiver.Hom.comp_toLoc, ← op_comp])).hom.toNatTrans.app M₂
 
+set_option backward.isDefEq.respectTransparency false in
+/-- Pulling back `pullHomMapComp' φ r₁ r₂ l p₁ p₂` along `g` gives
+`pullHomMapComp' φ r₁ r₂ (g ≫ l) (g ≫ p₁) (g ≫ p₂)`. -/
+lemma pullHom_pullHomMapComp' ⦃X₁ X₂ Z : C⦄ ⦃M₁ : F.obj (.mk (op X₁))⦄
+    ⦃M₂ : F.obj (.mk (op X₂))⦄ ⦃w₁ : Z ⟶ X₁⦄ ⦃w₂ : Z ⟶ X₂⦄
+    (φ : (F.map w₁.op.toLoc).toFunctor.obj M₁ ⟶ (F.map w₂.op.toLoc).toFunctor.obj M₂)
+    ⦃X₁' X₂' : C⦄ (r₁ : X₁' ⟶ X₁) (r₂ : X₂' ⟶ X₂) ⦃Y : C⦄ (l : Y ⟶ Z) (p₁ : Y ⟶ X₁')
+    (p₂ : Y ⟶ X₂') (hl₁ : l ≫ w₁ = p₁ ≫ r₁) (hl₂ : l ≫ w₂ = p₂ ≫ r₂) ⦃Y' : C⦄ (g : Y' ⟶ Y)
+    (gp₁ : Y' ⟶ X₁') (gp₂ : Y' ⟶ X₂') (hgp₁ : g ≫ p₁ = gp₁) (hgp₂ : g ≫ p₂ = gp₂)
+    (gl : Y' ⟶ Z) (hgl : g ≫ l = gl) (hgl₁ : gl ≫ w₁ = gp₁ ≫ r₁)
+    (hgl₂ : gl ≫ w₂ = gp₂ ≫ r₂) :
+    pullHom (pullHomMapComp' φ r₁ r₂ l p₁ p₂ hl₁ hl₂) g gp₁ gp₂ hgp₁ hgp₂ =
+      pullHomMapComp' φ r₁ r₂ gl gp₁ gp₂ hgl₁ hgl₂ := by
+  subst hgp₁ hgp₂ hgl
+  dsimp only [pullHomMapComp']
+  rw [← pullHom_pullHom φ l (p₁ ≫ r₁) (p₂ ≫ r₂) g ((g ≫ p₁) ≫ r₁) ((g ≫ p₂) ≫ r₂) hl₁ hl₂
+    (by simp) (by simp)]
+  dsimp [pullHom]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [F.mapComp'₀₁₃_inv_comp_mapComp'₀₂₃_hom_app_assoc _ _ _ _ _ _ _ _ (by cat_disch),
+    mapComp'₀₂₃_inv_comp_mapComp'₀₁₃_hom_app _ _ _ _ _ _ _ _ _ (by cat_disch)]
 
 end CategoryTheory.Pseudofunctor.LocallyDiscreteOpToCat

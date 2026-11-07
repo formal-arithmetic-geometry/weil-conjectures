@@ -36,11 +36,24 @@ variable (l : ℕ) [Fact l.Prime] (E : Type) [Field E] [Algebra E (PadicAlgCl l)
 noncomputable instance integersAlgebra : Algebra (integers l E) (PadicAlgCl l) :=
   ((algebraMap E (PadicAlgCl l)).comp (integers l E).subtype).toAlgebra
 
+lemma algebraMap_integers_apply (x : integers l E) :
+    algebraMap (integers l E) (PadicAlgCl l) x = algebraMap E (PadicAlgCl l) (x : E) :=
+  rfl
 
 instance faithfulSMul_integers : FaithfulSMul (integers l E) (PadicAlgCl l) :=
   (faithfulSMul_iff_algebraMap_injective _ _).2
     ((algebraMap E (PadicAlgCl l)).injective.comp Subtype.val_injective)
 
+lemma algebraMap_integers_mem (E : IntermediateField ℚ_[l] (PadicAlgCl l)) (x : integers l E) :
+    algebraMap (integers l E) (PadicAlgCl l) x ∈ E :=
+  (x : E).2
+
+/-- The structure map `𝒪_E → ℚ̄_ℓ` is continuous. -/
+lemma continuous_algebraMap_integers :
+    letI := normedFieldOfAlgebra l E
+    Continuous (algebraMap (integers l E) (PadicAlgCl l)) :=
+  letI := normedFieldOfAlgebra l E
+  (continuous_induced_dom (f := algebraMap E (PadicAlgCl l))).comp continuous_subtype_val
 
 /-- `𝒪_E` is a topological ring, as a subring of `E`. -/
 lemma isTopologicalRing_integers :
@@ -49,6 +62,11 @@ lemma isTopologicalRing_integers :
   letI := normedFieldOfAlgebra l E
   inferInstanceAs (IsTopologicalRing (integers l E).toSubring)
 
+/-- The algebra map `ℚ_ℓ → ℚ̄_ℓ` is continuous, being an isometry. -/
+lemma continuous_algebraMap_padic :
+    Continuous (algebraMap ℚ_[l] (PadicAlgCl l)) :=
+  (AddMonoidHomClass.isometry_iff_norm (algebraMap ℚ_[l] (PadicAlgCl l))).2
+    (PadicAlgCl.norm_extends l) |>.continuous
 
 variable [Algebra ℚ_[l] E] [IsScalarTower ℚ_[l] E (PadicAlgCl l)]
 
@@ -61,6 +79,21 @@ noncomputable def integersPadicIntHom : ℤ_[l] →+* integers l E :=
       PadicAlgCl.norm_extends]
     exact z.2
 
+lemma algebraMap_integersPadicIntHom (z : ℤ_[l]) :
+    algebraMap (integers l E) (PadicAlgCl l) (integersPadicIntHom l E z) =
+      algebraMap ℚ_[l] (PadicAlgCl l) (PadicInt.Coe.ringHom z) :=
+  (IsScalarTower.algebraMap_apply ℚ_[l] E (PadicAlgCl l) _).symm
+
+/-- The inclusion `ℤ_ℓ → 𝒪_E` is continuous. -/
+lemma continuous_integersPadicIntHom :
+    letI := normedFieldOfAlgebra l E
+    Continuous (integersPadicIntHom l E) := by
+  let := normedFieldOfAlgebra l E
+  refine Continuous.subtype_mk (continuous_induced_rng.2 ?_) _
+  have : (algebraMap E (PadicAlgCl l)) ∘ (fun z : ℤ_[l] ↦ algebraMap ℚ_[l] E (z : ℚ_[l])) =
+      (algebraMap ℚ_[l] (PadicAlgCl l)) ∘ (fun z : ℤ_[l] ↦ (z : ℚ_[l])) :=
+    funext fun z ↦ (IsScalarTower.algebraMap_apply ℚ_[l] E (PadicAlgCl l) _).symm
+  exact this ▸ (continuous_algebraMap_padic l).comp continuous_subtype_val
 
 end PadicAlgCl
 

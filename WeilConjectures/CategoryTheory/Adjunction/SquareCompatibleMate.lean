@@ -343,6 +343,17 @@ lemma mateEquiv_ofNatIsoRight {R₁' : D ⥤ C} {R₂' : F ⥤ E} (e₁ : R₁ �
   simp only [Functor.map_comp] at hα'
   rw [e₂.hom.naturality_assoc, e₂.hom.naturality_assoc, reassoc_of% hα']
 
+/-- The inverse mate for adjunctions whose right adjoints are replaced by isomorphic
+functors. -/
+lemma mateEquiv_symm_ofNatIsoRight {R₁' : D ⥤ C} {R₂' : F ⥤ E} (e₁ : R₁ ≅ R₁')
+    (e₂ : R₂ ≅ R₂') (β : TwoSquare R₁' H G R₂') :
+    (mateEquiv (adj₁.ofNatIsoRight e₁) (adj₂.ofNatIsoRight e₂)).symm β =
+      (mateEquiv adj₁ adj₂).symm (TwoSquare.mk _ _ _ _
+        (Functor.whiskerRight e₁.hom G ≫ β.natTrans ≫ Functor.whiskerLeft H e₂.inv)) := by
+  rw [Equiv.symm_apply_eq]
+  ext d
+  rw [mateEquiv_ofNatIsoRight, Equiv.apply_symm_apply]
+  simp [TwoSquare.mk, ← Functor.map_comp_assoc]
 
 end MateWhisker
 

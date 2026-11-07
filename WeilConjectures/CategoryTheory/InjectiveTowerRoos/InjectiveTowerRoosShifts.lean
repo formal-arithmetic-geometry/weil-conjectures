@@ -485,7 +485,40 @@ private theorem roos_ext_at {N : CochainComplex (ℕᵒᵖ ⥤ A) ℤ}
       simp only [Preadditive.comp_add, ← Category.assoc, hv, hu]
     _ = g := by rw [hid, Category.comp_id]
 
+private lemma roos_boundary_f (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (q : ℤ) :
+    (InjectiveTowerRoos.boundary I).f q =
+      (mappingCocone.inr (roosU I)).1.v q (q + 1) rfl := by
+  simp [InjectiveTowerRoos.boundary, Triangle.invRotate, mappingCone.triangle,
+    mappingCocone.inr, HomComplex.Cocycle.rightShift_coe,
+    HomComplex.Cocycle.ofHom_coe,
+    HomComplex.Cochain.rightShift_v _ _ _ _ _ _ _ _ (add_zero q),
+    shiftFunctorCompIsoId, shiftFunctorAdd'_hom_app_f', shiftFunctorZero_inv_app_f,
+    shiftFunctorObjXIso, HomologicalComplex.XIsoOfEq, eqToIso.hom, eqToIso.inv]
 
+private lemma boundary_shift (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (m : ℤ) :
+    InjectiveTowerRoos.boundary (I⟦m⟧) ≫ (roosShiftMap I m)⟦(1 : ℤ)⟧' =
+      m.negOnePow •
+        (((Functor.commShiftIso productFunctor (self := productShift) m).hom.app I) ≫
+          (InjectiveTowerRoos.boundary I)⟦m⟧' ≫
+            (shiftFunctorComm (CochainComplex A ℤ) (1 : ℤ) m).hom.app (roosF.obj I)) := by
+  ext q
+  simp only [HomologicalComplex.comp_f, HomologicalComplex.units_smul_f_apply,
+    shiftFunctor_map_f', roos_boundary_f, shiftFunctorComm_hom_app_f]
+  have h := roosShift_inr I m q (q + 1) rfl
+  simp only [productShiftComponent_eq, shiftFunctorObjXIso,
+    HomologicalComplex.XIsoOfEq_rfl, Iso.refl_inv] at h
+  rw [h]
+  erw [Category.comp_id]
+  rw [productShift_hom_f]
+  congr 1
+  congr 1
+  simpa only [roosF, Functor.comp_obj, roosConeFunctor, mappingCocone,
+    HomologicalComplex.XIsoOfEq_rfl, Iso.refl_hom, Category.id_comp] using
+    SignedCoconeShift.cast_cochain (mappingCocone.inr (roosU I)).1
+      (rfl : q + m = q + m) (by omega : q + m + 1 = q + 1 + m) rfl (by omega)
+
+-- These prefix, kernel, and recursive-section arguments also occur in
+-- Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients.
 private theorem injective_tower_transition_split
     {A : Type*} [Category A] [Abelian A]
     (T : ℕᵒᵖ ⥤ A) [Injective T]
@@ -623,6 +656,23 @@ private lemma roosι_fst (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) :
   unfold roosι roosLift
   exact CochainComplex.mappingCocone.lift_fst _ _ _ _
 
+omit [HasLimitsOfShape ℕᵒᵖ A] in
+private lemma injective_product [HasDerivedCategory.{w} A]
+    (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) [I.IsKInjective] :
+    (roosP I).IsKInjective ∧
+      Nonempty (IsLimit (DerivedCategory.Q.{w}.mapCone
+        (limit.cone (Discrete.functor (fun n : ℕ ↦ I.asFunctor.obj (op n)))))) := by
+  let K : ℕ → CochainComplex A ℤ := fun n ↦ I.asFunctor.obj (op n)
+  have (n : ℕ) : CochainComplex.IsKInjective (K n) := tower_evaluation_isKInjective A I (op n)
+  obtain ⟨hk, ⟨hd⟩⟩ := CochainComplex.termwise_product_isKInjective_and_isLimit K
+  let c := HomologicalComplex.coneOfHasLimitEval (Discrete.functor K)
+  let hc := HomologicalComplex.isLimitConeOfHasLimitEval (Discrete.functor K)
+  let e := hc.conePointUniqueUpToIso (limit.isLimit (Discrete.functor K))
+  have : CochainComplex.IsKInjective c.pt := hk
+  refine ⟨CochainComplex.isKInjective_of_iso e, ⟨?_⟩⟩
+  exact hd.ofIsoLimit
+    ((Cone.functoriality (Discrete.functor K) DerivedCategory.Q).mapIso
+      (hc.uniqueUpToIso (limit.isLimit _)))
 
 private lemma roos_kernel (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) :
     ∃ h : InjectiveTowerRoos.inclusion I ≫ roosU I = 0,
@@ -700,6 +750,40 @@ private lemma augmentation_shift (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (m :
     simp only [Linear.comp_units_smul, ← Category.assoc, roosι_u,
       zero_comp, smul_zero, comp_zero]
 
+private lemma injective_roos_quasiIso [HasDerivedCategory.{w} A]
+    (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (hI : ∀ q : ℤ, Injective (I.X q)) :
+    QuasiIso (roosι I) := by
+  obtain ⟨h, ⟨hk⟩⟩ := roos_kernel I
+  let e : limit I.asFunctor ≅ kernel (roosU I) :=
+    hk.conePointUniqueUpToIso (limit.isLimit _)
+  have he : e.hom ≫ kernel.ι (roosU I) = InjectiveTowerRoos.inclusion I :=
+    hk.conePointUniqueUpToIso_hom_comp (limit.isLimit _) WalkingParallelPair.zero
+  obtain ⟨κ, hκ, hq, _⟩ :=
+    CochainComplex.exists_kernel_to_shifted_mappingCone_of_degreewise_epi
+      (roosU I) (roosU_degreewise_epi I hI)
+  have hκfst (q : ℤ) : κ.f q ≫ (mappingCocone.fst (roosU I)).f q =
+      (kernel.ι (roosU I)).f q := by
+    have h := (hκ q).2
+    simp only [Int.sub_eq_add_neg] at h
+    simpa [mappingCocone.fst, HomComplex.Cocycle.homOf,
+      HomComplex.Cocycle.leftShift, HomComplex.Cochain.leftShift,
+      mappingCone.fst, Int.sub_eq_add_neg] using h
+  have hκsnd (q : ℤ) : κ.f q ≫ ucoord I q (q - 1) rfl = 0 := by
+    have h := (hκ q).1
+    simp only [Int.sub_eq_add_neg] at h
+    simpa [ucoord, mappingCocone.snd, HomComplex.Cochain.leftShift,
+      show Int.negOnePow 2 = 1 by rfl, mappingCone.snd, Int.sub_eq_add_neg] using h
+  have hcomp : e.hom ≫ κ = roosι I := by
+    ext q
+    apply roos_ext_at q (q - 1) rfl
+    · simp only [HomologicalComplex.comp_f, Category.assoc, v_eq_fst]
+      rw [hκfst, ← HomologicalComplex.comp_f, he]
+      exact (congrArg (fun f ↦ f.f q) (roosι_fst I)).symm
+    · simp only [HomologicalComplex.comp_f, Category.assoc]
+      rw [hκsnd, comp_zero, roosι_u]
+  rw [← hcomp]
+  let _ := hq
+  infer_instance
 
 omit [HasLimitsOfShape ℕᵒᵖ A] in
 private lemma roos_cone_distinguished [HasDerivedCategory.{w} A]
@@ -751,6 +835,91 @@ private lemma normalizedBoundary_distinguished [HasDerivedCategory.{w} A]
     (by simpa [T, U, e] using normalizedBoundary_eq I)
   exact isomorphic_distinguished _ (roos_cone_distinguished I) _ h
 
+private lemma localized_inclusion_shift [HasDerivedCategory.{w} A]
+    (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (m : ℤ) :
+    InjectiveTowerRoos.projection (I⟦m⟧) ≫
+        InjectiveTowerRoos.localizedShift productFunctor productShift I m =
+      InjectiveTowerRoos.localizedShift roosLimitFunctor limitShift I m ≫
+        (InjectiveTowerRoos.projection I)⟦m⟧' := by
+  simp only [InjectiveTowerRoos.localizedShift, InjectiveTowerRoos.projection,
+    Category.assoc]
+  rw [← Functor.map_comp_assoc, inclusion_shift, Functor.map_comp, Category.assoc,
+    Functor.commShiftIso_hom_naturality]
+
+private lemma localized_augmentation_shift [HasDerivedCategory.{w} A]
+    (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (m : ℤ) :
+    DerivedCategory.Q.{w}.map (roosι (I⟦m⟧)) ≫
+        InjectiveTowerRoos.localizedShift roosF roosCommShift I m =
+      InjectiveTowerRoos.localizedShift roosLimitFunctor limitShift I m ≫
+        (DerivedCategory.Q.map (roosι I))⟦m⟧' := by
+  simp only [InjectiveTowerRoos.localizedShift, Category.assoc]
+  rw [← Functor.map_comp_assoc, ← roosShiftMap_eq, augmentation_shift,
+    Functor.map_comp, Category.assoc, Functor.commShiftIso_hom_naturality]
+
+omit [HasCountableProducts A] [HasLimitsOfShape ℕᵒᵖ A] in
+private lemma localized_commuting_shifts [HasDerivedCategory.{w} A]
+    (K : CochainComplex A ℤ) (m : ℤ) :
+    DerivedCategory.Q.map
+        ((shiftFunctorComm (CochainComplex A ℤ) (1 : ℤ) m).hom.app K) ≫
+      (DerivedCategory.Q.commShiftIso (1 : ℤ)).hom.app (K⟦m⟧) ≫
+        ((DerivedCategory.Q.commShiftIso m).hom.app K)⟦(1 : ℤ)⟧' =
+      (DerivedCategory.Q.commShiftIso m).hom.app (K⟦(1 : ℤ)⟧) ≫
+        ((DerivedCategory.Q.commShiftIso (1 : ℤ)).hom.app K)⟦m⟧' ≫
+          (shiftFunctorComm (DerivedCategory.{w} A) (1 : ℤ) m).hom.app
+            (DerivedCategory.Q.obj K) := by
+  rw [Functor.map_shiftFunctorComm_hom_app]
+  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  rw [← Functor.map_comp, Iso.inv_hom_id_app]
+  dsimp only [Functor.comp_obj]
+  rw [Functor.map_id, Category.comp_id]
+
+omit [HasLimitsOfShape ℕᵒᵖ A] in
+private lemma localized_boundary_shift [HasDerivedCategory.{w} A]
+    (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (m : ℤ) :
+    (DerivedCategory.Q.map (InjectiveTowerRoos.boundary (I⟦m⟧)) ≫
+        (DerivedCategory.Q.commShiftIso (1 : ℤ)).hom.app (roosF.obj (I⟦m⟧))) ≫
+        (InjectiveTowerRoos.localizedShift roosF roosCommShift I m)⟦(1 : ℤ)⟧' =
+      m.negOnePow •
+        (InjectiveTowerRoos.localizedShift productFunctor productShift I m ≫
+          (DerivedCategory.Q.map (InjectiveTowerRoos.boundary I) ≫
+            (DerivedCategory.Q.commShiftIso (1 : ℤ)).hom.app (roosF.obj I))⟦m⟧' ≫
+              (shiftFunctorComm (DerivedCategory.{w} A) (1 : ℤ) m).hom.app
+                (DerivedCategory.Q.obj (roosF.obj I))) := by
+  simp only [InjectiveTowerRoos.localizedShift, Functor.map_comp, Category.assoc]
+  rw [← Functor.commShiftIso_hom_naturality_assoc]
+  rw [← Functor.map_comp_assoc]
+  have h := congrArg DerivedCategory.Q.{w}.map (boundary_shift I m)
+  simp only [roosShiftMap_eq] at h
+  rw [h]
+  simp only [Functor.map_units_smul, Functor.map_comp, Linear.units_smul_comp,
+    Category.assoc]
+  congr 1
+  simp only [Functor.comp_obj]
+  rw [localized_commuting_shifts]
+  rw [Functor.commShiftIso_hom_naturality_assoc]
+
+private lemma normalizedBoundary_shift [HasDerivedCategory.{w} A]
+    (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (m : ℤ)
+    [QuasiIso (roosι I)] [QuasiIso (roosι (I⟦m⟧))] :
+    normalizedBoundary (I⟦m⟧) ≫
+        (InjectiveTowerRoos.localizedShift roosLimitFunctor limitShift I m)⟦(1 : ℤ)⟧' =
+      m.negOnePow •
+        (InjectiveTowerRoos.localizedShift productFunctor productShift I m ≫
+          (normalizedBoundary I)⟦m⟧' ≫
+            (shiftFunctorComm (DerivedCategory.{w} A) (1 : ℤ) m).hom.app
+              (DerivedCategory.Q.obj (limit I.asFunctor))) := by
+  have haug := congrArg ((shiftFunctor (DerivedCategory.{w} A) (1 : ℤ)).map)
+    (localized_augmentation_shift I m)
+  simp only [Functor.map_comp] at haug
+  have hcomm := (shiftFunctorComm (DerivedCategory.{w} A) (1 : ℤ) m).hom.naturality
+    (DerivedCategory.Q.map (roosι I))
+  change ((DerivedCategory.Q.map (roosι I))⟦(1 : ℤ)⟧')⟦m⟧' ≫ _ =
+    _ ≫ ((DerivedCategory.Q.map (roosι I))⟦m⟧')⟦(1 : ℤ)⟧' at hcomm
+  apply (cancel_mono (((DerivedCategory.Q.{w}.map (roosι I))⟦m⟧')⟦(1 : ℤ)⟧')).1
+  rw [Category.assoc, ← haug, ← Category.assoc, normalizedBoundary_eq]
+  rw [localized_boundary_shift]
+  simp only [Linear.units_smul_comp, Category.assoc]
+  rw [← hcomm, ← Functor.map_comp_assoc, normalizedBoundary_eq]
 
 omit [HasLimitsOfShape ℕᵒᵖ A] in
 private lemma boundary_natural {I I' : CochainComplex (ℕᵒᵖ ⥤ A) ℤ} (f : I ⟶ I') :

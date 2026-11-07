@@ -223,6 +223,16 @@ noncomputable instance associatedGradedCommRing (J : Ideal A) :
     CommRing (associatedGraded J) :=
   DirectSum.commRing _
 
+/-- (blueprint: lem-weil-pbc-associated-graded-ring-structure) The unit is
+the degree-zero class of one, as in Stacks, Algebra, Lemma 05GH. Proof: this is
+the definition of the unit of the direct sum. 
+(blueprint: def-weil-pbc-associated-graded-ring)
+-/
+theorem associatedGraded_one (J : Ideal A) :
+    (1 : associatedGraded J) =
+      DirectSum.of (fun n : ℕ => associatedGradedPiece J n) 0
+        (Submodule.Quotient.mk (⟨1, by simp⟩ : (J ^ 0 : Ideal A))) := by
+  rfl
 
 /-- (blueprint: lem-weil-pbc-associated-graded-ring-structure) Products of
 homogeneous classes are classes of products (Stacks, Algebra, Lemma 05GH).
@@ -301,6 +311,23 @@ noncomputable instance associatedGradedAlgebra (J : Ideal A) :
   (Ideal.Quotient.lift J (associatedGradedRingHom J)
     (associatedGradedRingHom_ker J)).toAlgebra
 
+/-- (blueprint: lem-weil-pbc-associated-graded-ring-structure) The degree-zero
+inclusion `ι_0 : A/J → gr_J(A)` is injective (Stacks, Algebra, Lemma 05GH).
+Proof: `ι_0(a mod J)` is the class of `a` in `J^0/J^1 = A/J`, placed in degree `0`. -/
+theorem algebraMap_associatedGraded_injective (J : Ideal A) :
+    Function.Injective (algebraMap (A ⧸ J) (associatedGraded J)) := by
+  refine (injective_iff_map_eq_zero _).2 fun x hx ↦ ?_
+  obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective x
+  rw [RingHom.algebraMap_toAlgebra, Ideal.Quotient.lift_mk,
+    show associatedGradedRingHom J a =
+      DirectSum.of (fun k : ℕ => associatedGradedPiece J k) 0
+        (Submodule.Quotient.mk (⟨a, by simp⟩ : (J ^ 0 : Ideal A))) by rfl,
+    ← map_zero (DirectSum.of (fun k : ℕ => associatedGradedPiece J k) 0)] at hx
+  have h : a ∈ J ^ (0 + 1) :=
+    (Submodule.Quotient.mk_eq_zero (p := Submodule.comap (J ^ 0 : Ideal A).subtype
+      (J ^ (0 + 1)))).1 (DirectSum.of_injective 0 hx)
+  rw [zero_add, pow_one] at h
+  exact Ideal.Quotient.eq_zero_iff_mem.2 h
 
 /-- (blueprint: lem-weil-pbc-associated-graded-ring-structure) The action of
 `A/J` on a homogeneous class is multiplication by a representative in `A`

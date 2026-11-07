@@ -18,6 +18,15 @@ matrices is a homomorphism `GL n R × GL m R →* GL (n × m) R`, natural in the
 
 namespace Matrix.GeneralLinearGroup
 
+/-- Invertible matrices of size at most one commute. -/
+theorem mul_comm_of_subsingleton {n R : Type*} [Fintype n] [DecidableEq n] [Subsingleton n]
+    [CommRing R] (g h : GL n R) : g * h = h * g := by
+  ext i j
+  simp only [Units.val_mul, Matrix.mul_apply]
+  refine Finset.sum_congr rfl fun l _ ↦ ?_
+  obtain rfl := Subsingleton.elim l i
+  obtain rfl := Subsingleton.elim j l
+  exact mul_comm _ _
 
 section kronecker
 
