@@ -16,8 +16,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
-attribute [local implicit_reducible] DerivedCategory.singleFunctors
-  HomotopyCategory.singleFunctors CochainComplex.singleFunctors
+attribute [local implicit_reducible] HomotopyCategory.singleFunctors
 private theorem singleCounit_naturality
     {A B : Type*} [Category A] [Abelian A] [Category B] [Abelian B]
     [HasDerivedCategory A] [HasDerivedCategory (ℕᵒᵖ ⥤ B)]

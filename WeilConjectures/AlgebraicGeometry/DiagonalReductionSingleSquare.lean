@@ -20,8 +20,7 @@ namespace AlgebraicGeometry.ProEtale
 
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
-attribute [local implicit_reducible] DerivedCategory.singleFunctors
-  HomotopyCategory.singleFunctors CochainComplex.singleFunctors
+attribute [local implicit_reducible] HomotopyCategory.singleFunctors
 
 /-- Termwise application preserves finite limits, since it preserves each finite
 limit shape pointwise. Source: Mathlib pointwise functor limits.
