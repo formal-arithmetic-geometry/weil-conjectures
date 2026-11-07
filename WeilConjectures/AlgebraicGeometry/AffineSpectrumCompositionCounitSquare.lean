@@ -343,23 +343,3 @@ theorem affineSpectrum_composition_counit_square
 
 end AlgebraicGeometry.SingleComplexBaseChange
 
-namespace AlgebraicGeometry.SingleComplexBaseChange
-/-- Public export of the private `eqToIso_congr_symm_private` (used by `import all` importers; linter.privateModule). -/
-alias eqToIso_congr_symm := eqToIso_congr_symm_private
-end AlgebraicGeometry.SingleComplexBaseChange
-
-namespace AlgebraicGeometry.SingleComplexBaseChange
-/-- Public export of the private `compare_counit_factorizations_private` (used by `import all` importers; linter.privateModule). -/
-alias compare_counit_factorizations := compare_counit_factorizations_private
-end AlgebraicGeometry.SingleComplexBaseChange
-
-namespace AlgebraicGeometry.SingleComplexBaseChange
-/-- Public export of the private `composition_factorization_private` (used by `import all` importers; linter.privateModule). -/
-alias composition_factorization := composition_factorization_private
-end AlgebraicGeometry.SingleComplexBaseChange
-
-namespace AlgebraicGeometry.SingleComplexBaseChange
-/-- Public export of the private `composition_factorization_transport_private` (used by `import all` importers; linter.privateModule). -/
-alias composition_factorization_transport := composition_factorization_transport_private
-end AlgebraicGeometry.SingleComplexBaseChange
-

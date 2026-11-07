@@ -384,11 +384,6 @@ theorem finiteFreeDirectImage_ordinaryPullbackCoordinates {Z W : Scheme.{u}} (q 
 end AlgebraicGeometry.Scheme.FiniteFreeDirectImage
 
 namespace AlgebraicGeometry.Scheme.FiniteFreeDirectImage
-/-- Public export of the private `ordinaryBalancing_pure_private` (used by `import all` importers; linter.privateModule). -/
-alias ordinaryBalancing_pure := ordinaryBalancing_pure_private
-end AlgebraicGeometry.Scheme.FiniteFreeDirectImage
-
-namespace AlgebraicGeometry.Scheme.FiniteFreeDirectImage
 /-- Public export of the private `presentedTensor_hom_ext_private` (used by `import all` importers; linter.privateModule). -/
 alias presentedTensor_hom_ext := presentedTensor_hom_ext_private
 

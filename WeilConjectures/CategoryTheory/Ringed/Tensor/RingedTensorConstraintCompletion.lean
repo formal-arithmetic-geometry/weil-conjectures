@@ -445,16 +445,6 @@ theorem ringedTensorConstraint_completion
 end CategoryTheory
 
 namespace CategoryTheory
-/-- Public export of the private `pure_ext_private` (used by `import all` importers; linter.privateModule). -/
-alias pure_ext := pure_ext_private
-end CategoryTheory
-
-namespace CategoryTheory
-/-- Public export of the private `tensorGenerator_ext_private` (used by `import all` importers; linter.privateModule). -/
-alias tensorGenerator_ext := tensorGenerator_ext_private
-end CategoryTheory
-
-namespace CategoryTheory
 /-- Public export of the private `tensorGenerator_ext₃_private` (used by `import all` importers; linter.privateModule). -/
 alias tensorGenerator_ext₃ := tensorGenerator_ext₃_private
 
