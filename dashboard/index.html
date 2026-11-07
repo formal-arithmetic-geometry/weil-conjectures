@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quality dashboard</title>
+<meta name="description" content="Technical debt and other quality metrics of the Weil conjectures formalisation, over time.">
+<link rel="stylesheet" href="dashboard.css">
+<!-- Chart.js, pinned, with subresource integrity (dist/chart.umd.js is the npm file as published). -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.js"
+        integrity="sha384-zYPBGXwO4633CABX/5Spf6emCKUJCfoOkhOMYyxMsatqQZPnDblmmOewfjsIVWCM"
+        crossorigin="anonymous" defer></script>
+<script src="dashboard.js" defer></script>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <div>
+      <h1 id="title">Quality dashboard</h1>
+      <p class="sub" id="subtitle">Loading&hellip;</p>
+    </div>
+    <div class="controls">
+      <div class="seg" role="group" aria-label="Time range" id="range">
+        <button type="button" data-days="30">30 d</button>
+        <button type="button" data-days="90">90 d</button>
+        <button type="button" data-days="365">1 y</button>
+        <button type="button" data-days="0">All</button>
+      </div>
+      <button type="button" class="theme" id="theme" aria-label="Colour theme">Auto</button>
+    </div>
+  </div>
+</header>
+<main id="main">
+  <section id="summary" aria-label="Current values"></section>
+  <section id="kernel-top" hidden></section>
+  <div id="charts"></div>
+  <p class="foot" id="foot"></p>
+</main>
+<noscript><p class="foot">This page needs JavaScript to draw its charts. The data is in
+<a href="data/history.jsonl">data/history.jsonl</a> and <a href="data/meta.json">data/meta.json</a>.</p></noscript>
+</body>
+</html>

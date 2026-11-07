@@ -1,0 +1,151 @@
+name: Quality dashboard
+
+# Keeps the quality dashboard's data and site on the `quality-data` branch:
+#   data/history.jsonl  one record per master commit (scripts/quality/history.py has the schema)
+#   data/meta.json      the metadata of each metric kind (label, unit, lower is better, ...)
+#   index.html, dashboard.js, dashboard.css   the static page (copied from dashboard/)
+# After each daily "Technical debt report" run on master, this records the commit that run
+# measured -- its text counters, and the kernel table when that job succeeded -- fills in any
+# days missed since the last record, refreshes the page files, and pushes one commit to the
+# branch. The first run, with no branch yet, creates it and backfills one commit per day of
+# master's whole history from git objects (about a minute and a half).
+#
+# Hosting. The branch is the site: fuxi (chrisflav/nixos-config, fuxi/quality-dashboard.nix)
+# fetches it over anonymous HTTPS every 15 minutes and serves it statically at
+# https://quality.fuxi.merten.dev. Nothing is deployed from here, and this workflow holds no
+# secret. GitHub Pages is deliberately not used: a repository has one Pages site, which is kept
+# free for the doc-gen documentation.
+#
+# Security. Only master's own code runs, on a GitHub-hosted runner: workflow_run uses this file
+# from the default branch, and the job runs only for a triggering run on master that was
+# scheduled or dispatched (never a pull request), or for a dispatch of this workflow on master.
+# The token can write contents (to push `quality-data`) and read actions (the kernel artifact);
+# the artifact is data (a TSV table), parsed, never executed.
+#
+# workflow_dispatch with `rebuild` recomputes the counters of every recorded day (e.g. after
+# scripts/tech_debt/metrics.py learnt a new counter); kernel data in the records is kept.
+
+on:
+  workflow_run:
+    workflows: ["Technical debt report"]
+    types: [completed]
+    branches: [master]
+  workflow_dispatch:
+    inputs:
+      rebuild:
+        description: 'Recompute the counters for the whole history (one commit per day)'
+        type: boolean
+        default: false
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.repository }}-quality-dashboard
+  cancel-in-progress: false
+
+env:
+  DATA_BRANCH: quality-data
+
+jobs:
+  update:
+    if: >-
+      (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/master') ||
+      (github.event_name == 'workflow_run' &&
+       github.event.workflow_run.head_branch == 'master' &&
+       github.event.workflow_run.head_repository.full_name == github.repository &&
+       contains(fromJSON('["schedule", "workflow_dispatch"]'), github.event.workflow_run.event))
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write  # push the data branch
+      actions: read    # the kernel table of the triggering run
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: master
+          fetch-depth: 0  # the daily samples between the last record and today
+
+      - name: Commit to record
+        id: rev
+        env:
+          RUN_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          set -euo pipefail
+          sha=${RUN_SHA:-$(git rev-parse HEAD)}
+          git cat-file -e "$sha^{commit}"
+          echo "sha=$sha" >> "$GITHUB_OUTPUT"
+          echo "recording $sha"
+
+      - name: Download the kernel table of the triggering run
+        if: github.event_name == 'workflow_run'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ github.event.workflow_run.id }}
+        run: |
+          set -uo pipefail
+          if gh run download "$RUN_ID" -n tech-debt-kernel -D "$RUNNER_TEMP/kernel"; then
+            echo "kernel table from run $RUN_ID"
+          else
+            echo "::notice::no kernel table in run $RUN_ID (job skipped or failed); counters only"
+          fi
+
+      - name: Check out the data branch
+        run: |
+          set -euo pipefail
+          if git ls-remote --exit-code --heads origin "$DATA_BRANCH" > /dev/null; then
+            git fetch --no-tags origin "+refs/heads/$DATA_BRANCH:refs/remotes/origin/$DATA_BRANCH"
+            git worktree add -B "$DATA_BRANCH" site "origin/$DATA_BRANCH"
+          else
+            echo "::notice::no $DATA_BRANCH branch yet; creating it"
+            git worktree add --detach site
+            git -C site checkout --orphan "$DATA_BRANCH"
+            git -C site rm -rfq .
+          fi
+
+      - name: Record
+        env:
+          SHA: ${{ steps.rev.outputs.sha }}
+          REBUILD: ${{ inputs.rebuild || false }}
+          REPO_URL: ${{ github.server_url }}/${{ github.repository }}
+        run: |
+          set -euo pipefail
+          if [ ! -s site/data/history.jsonl ] || [ "$REBUILD" = true ]; then
+            python3 scripts/quality/history.py backfill --data site/data --ref "$SHA" --repo-url "$REPO_URL"
+          fi
+          kernel=()
+          if [ -f "$RUNNER_TEMP/kernel/kernel-times.tsv" ]; then
+            kernel=(--kernel "$RUNNER_TEMP/kernel/kernel-times.tsv")
+          fi
+          python3 scripts/quality/history.py update --data site/data --rev "$SHA" \
+            "${kernel[@]}" --repo-url "$REPO_URL"
+
+      - name: Refresh the page
+        run: |
+          set -euo pipefail
+          cp dashboard/index.html dashboard/dashboard.js dashboard/dashboard.css site/
+          cat > site/README.md <<'EOF'
+          # Quality dashboard data
+
+          Written by `.github/workflows/quality_dashboard.yml` on master; do not edit by hand.
+          `data/history.jsonl` and `data/meta.json` are the history (schema in
+          `scripts/quality/history.py`); the other files are copies of `dashboard/`.
+          Served at https://quality.fuxi.merten.dev.
+          EOF
+
+      - name: Push
+        env:
+          SHA: ${{ steps.rev.outputs.sha }}
+        run: |
+          set -euo pipefail
+          cd site
+          git add -A
+          if git diff --cached --quiet; then
+            echo "nothing changed"
+            exit 0
+          fi
+          git -c user.name="github-actions[bot]" \
+              -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+              commit -q -m "quality data: ${SHA:0:10} ($(date -u +%Y-%m-%d))"
+          git push origin "HEAD:refs/heads/$DATA_BRANCH"
+          echo "### Quality dashboard" >> "$GITHUB_STEP_SUMMARY"
+          echo "Recorded \`${SHA:0:10}\`; $(wc -l < data/history.jsonl) points on \`$DATA_BRANCH\`." >> "$GITHUB_STEP_SUMMARY"

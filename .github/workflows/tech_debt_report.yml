@@ -11,6 +11,8 @@ name: Technical debt report
 #   - `post`: sends the report to Zulip.
 # Each report's state (counters as JSON, kernel table as TSV) is kept as a workflow artifact;
 # the next run downloads the newest one from master and compares with it.
+# After each run on master, quality_dashboard.yml records the same commit in the dashboard's
+# history (branch `quality-data`, served at https://quality.fuxi.merten.dev).
 #
 # Security. Only master's own code runs (schedule runs on the default branch; workflow_dispatch
 # needs write access). The Zulip key is used only by `post`, which checks nothing out and runs
