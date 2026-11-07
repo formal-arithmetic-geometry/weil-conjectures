@@ -79,9 +79,9 @@ noncomputable def derivedOpenCoherencePullbackSquare
     {f' : X' ⟶ Y'} {i : X' ⟶ X} (sq : CommSq i f' f j) :
     (upperStar Λ j).mapDerivedCategory ⋙ (upperStar Λ f').mapDerivedCategory ≅
       (upperStar Λ f).mapDerivedCategory ⋙ (upperStar Λ i).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (openCoherencePullbackSquare Λ sq) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The canonical derived open restriction map, using the exact-left derived adjunctions.
 Source: blueprint composition proof (blueprint: lem-sfb-derived-direct-image-open-coherence). -/
@@ -222,6 +222,6 @@ noncomputable def openCoherenceRestrictionComp
     (upperStar Λ (i ≫ j)).mapDerivedCategory ≅
       (upperStar Λ j).mapDerivedCategory ⋙ (upperStar Λ i).mapDerivedCategory :=
   Functor.mapDerivedCategoryNatIso (upperStarComp Λ i j) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 end AlgebraicGeometry.ProEtale.CondensedRing
