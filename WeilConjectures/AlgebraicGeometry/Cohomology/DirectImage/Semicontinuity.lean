@@ -208,9 +208,9 @@ theorem exists_isFiniteLocallyFreeOfRank_higherDirectImage_of_isLocallyConstant 
     obtain ⟨x⟩ : Nonempty (Spec (T.residueField (U.ι.base z))) := inferInstance
     obtain ⟨x'⟩ : Nonempty (Spec (U.toScheme.residueField z)) := inferInstance
     have hgz : g.base x = z := U.ι.isOpenEmbedding.injective (by
-      rw [← Scheme.Hom.comp_apply, hg, fromSpecResidueField_base_apply])
+      rw [← Scheme.Hom.comp_apply, hg, Scheme.fromSpecResidueField_apply])
     have hpt : (U.toScheme.fromSpecResidueField z).base x' = g.base x := by
-      rw [fromSpecResidueField_base_apply, hgz]
+      rw [Scheme.fromSpecResidueField_apply, hgz]
     rw [rank_map_appTop_eq_of_base_eq (isField_Γ_Spec_residueField z) (hΓ _) _ g x' x hpt,
       rank_map_appTop_eq_of_base_eq (isField_Γ_Spec_residueField z) (hΓ _) _ g x' x hpt]
     have l₁ := (le_rank_map_appTop_iff (hΓ _) g x A₁ _).2
@@ -222,7 +222,7 @@ theorem exists_isFiniteLocallyFreeOfRank_higherDirectImage_of_isLocallyConstant 
   have hyN : g₀.base x₀ ∈ N := by
     refine ⟨⟨?_, hδ₁⟩, hδ₂⟩
     rw [SetLike.mem_coe, Scheme.Hom.mem_preimage, TopologicalSpace.Opens.mem_mk, Set.mem_ofPred_eq,
-      ← Scheme.Hom.comp_apply, hg₀, fromSpecResidueField_base_apply]
+      ← Scheme.Hom.comp_apply, hg₀, Scheme.fromSpecResidueField_apply]
   obtain ⟨Z, j, _, ⟨z, hz⟩, ⟨eZ⟩⟩ := exists_isOpenImmersion_homology_pullback_iso_free P e q N
     (fun z hz ↦ (hrank z hz).1) (fun z hz ↦ (hrank z hz).2) hyN
   have hkq : r q - (A₁.map g₀.appTop).rank - (A₂.map g₀.appTop).rank = ℱ.hFiber f q t := by
@@ -233,7 +233,7 @@ theorem exists_isFiniteLocallyFreeOfRank_higherDirectImage_of_isLocallyConstant 
   obtain ⟨e₁⟩ := hbc j _ _ sq q
   obtain ⟨e₂⟩ := nonempty_higherDirectImage_iso_restrict f ℱ (j ≫ U.ι) _ _ sq q
   refine ⟨(j ≫ U.ι).opensRange, ⟨z, ?_⟩, ?_⟩
-  · rw [Scheme.Hom.comp_apply, hz, ← Scheme.Hom.comp_apply, hg₀, fromSpecResidueField_base_apply]
+  · rw [Scheme.Hom.comp_apply, hz, ← Scheme.Hom.comp_apply, hg₀, Scheme.fromSpecResidueField_apply]
   · rw [← hkq]
     let M := (higherDirectImage f q).obj ℱ
     have e₃ : (M.restrict (j ≫ U.ι).opensRange.ι).restrict (j ≫ U.ι).isoOpensRange.hom ≅

@@ -115,7 +115,7 @@ theorem fibre_cartier_local {X S : Scheme.{u}} (π : X ⟶ S) [Flat π]
       (ideal_top_comap_specMap_ofHom_fromSpec J U _) P
   have := q.isPrime
   obtain ⟨g, hgq, hg⟩ := Algebra.exists_notMem_isRegularPrincipal_and_flat_of_fiber
-    (isField_residueField_sections _) (J.ideal U) hJU q.asIdeal
+    (Modules.isField_Γ_Spec_residueField _) (J.ideal U) hJU q.asIdeal
     (ker_appLE_fromSpecResidueField π _ hW hsW' hU hUW q (by rw [hq])) hfib
   let D := X.affineBasicOpen (U := U) g
   have hDU : D.1 ≤ U.1 := X.basicOpen_le g

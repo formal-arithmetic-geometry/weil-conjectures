@@ -39,7 +39,7 @@ private theorem restrict_unit_bijective {X : Scheme.{v}} (M : X.Modules)
   rw [restrictAdjunction_unit_app_app]
   exact ConcreteCategory.bijective_of_isIso _
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 700000 in
 -- Transporting scalar actions through restriction and pushforward needs extra elaboration fuel.
 set_option backward.isDefEq.respectTransparency false in
 /-- Local bilinear presheaf pairings into a sheaf extend through sheafification and tensor.

@@ -122,7 +122,6 @@ private theorem frameBasis_natural (X : Scheme.{u}) (M : X.Modules)
     e.inv.val.app Z ((SheafOfModules.freeSection _).val Z)
   rw [← PresheafOfModules.naturality_apply, PresheafOfModules.sections_property]
 
-set_option maxHeartbeats 800000 in
 -- Elaborating pure wedges across the scheme and over-site module interfaces is expensive.
 set_option backward.isDefEq.respectTransparency false in
 private theorem frameExteriorBasis_natural (X : Scheme.{u}) (M : X.Modules)

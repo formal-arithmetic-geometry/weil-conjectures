@@ -22,7 +22,6 @@ universe v
 open CategoryTheory Opposite MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
 
-set_option maxHeartbeats 800000 in
 -- Naturality compares exterior restrictions across the ring-sheaf module interfaces.
 set_option backward.isDefEq.respectTransparency false in
 /-- An epimorphism induces an epimorphism on a tensor of exterior sheaves.
