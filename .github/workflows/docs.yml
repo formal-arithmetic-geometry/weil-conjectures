@@ -17,12 +17,10 @@ concurrency:
   group: ${{ github.repository }}-docs-${{ github.ref }}
   cancel-in-progress: true
 
+# The project's build comes from the public Lake cache, exactly as in lean_action_ci.yml.
 env:
-  # The cluster's Lake cache (Garage) holds the builds of slopmaster2. The Lean code of
-  # `WeilConjectures/` on master is identical to slopmaster2 91ebbc09a7, and the cache
-  # maps module inputs to outputs, so that revision's mappings serve master too when
-  # master's own history has none.
-  CACHE_FALLBACK_REV: 91ebbc09a7fe7fe29bfcfb85a46cc364ca4ead3d
+  LAKE_CACHE_ENDPOINT: https://cache.fuxi.merten.dev/lake-cache
+  LAKE_CACHE_REPO: formal-arithmetic-geometry/weil-conjectures
 
 jobs:
   docs:
@@ -45,41 +43,49 @@ jobs:
         with:
           fetch-depth: 50
 
-      - name: Install elan
-        run: |
-          set -o pipefail
-          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh \
-            | sh -s -- --default-toolchain none -y
-          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      # elan, the toolchain and the Mathlib cache.
+      - uses: leanprover/lean-action@v1
+        with:
+          build: false
+          test: false
+          lint: false
+          use-github-cache: false
 
-      - name: Mathlib from its cache
-        run: lake exe cache get
-
-      - name: The project's build from the cluster's Lake cache
+      # As in lean_action_ci.yml: the build of HEAD's nearest uploaded ancestor, every archive
+      # up front, with the toolchain's own `lake` and ELAN_TOOLCHAIN unset so that the revision
+      # scope matches the cluster's uploaders.
+      - name: Fetch the project's build from the Lake cache
         run: |
           set -euo pipefail
-          curl -sS -o /dev/null -w 'Garage reachable: HTTP %{http_code}\n' --max-time 20 \
-            "http://13.140.132.28:3900/lake-cache/r/formal-arithmetic-geometry/weil-conjectures/pt/x86_64-unknown-linux-gnu/tc/leanprover--lean4---4.33.1/$CACHE_FALLBACK_REV.jsonl"
           config="$RUNNER_TEMP/lake-config.toml"
-          cat > "$config" <<'TOML'
-          cache.defaultService = "garage"
+          cat > "$config" <<TOML
+          cache.defaultService = "fuxi"
 
           [[cache.service]]
-          name = "garage"
+          name = "fuxi"
           kind = "s3"
-          artifactEndpoint = "http://13.140.132.28:3900/lake-cache/a"
-          revisionEndpoint = "http://13.140.132.28:3900/lake-cache/r"
+          artifactEndpoint = "$LAKE_CACHE_ENDPOINT/a"
+          revisionEndpoint = "$LAKE_CACHE_ENDPOINT/r"
           TOML
-          echo "LAKE_CONFIG=$config" >> "$GITHUB_ENV"
-          export LAKE_CONFIG="$config"
-          lake cache get --repo formal-arithmetic-geometry/weil-conjectures --max-revs 50 \
-            || lake cache get --repo formal-arithmetic-geometry/weil-conjectures --rev "$CACHE_FALLBACK_REV"
-          df -h /
+          {
+            echo "LAKE_CONFIG=$config"
+            echo "LAKE_CACHE_DIR=$GITHUB_WORKSPACE/.lake/cache"
+            echo "LAKE_ARTIFACT_CACHE=true"
+            echo "LAKE_RESTORE_ARTIFACTS=true"
+          } >> "$GITHUB_ENV"
+          export LAKE_CONFIG="$config" LAKE_CACHE_DIR="$GITHUB_WORKSPACE/.lake/cache"
+          env -u ELAN_TOOLCHAIN "$(elan which lake)" cache get \
+            --repo "$LAKE_CACHE_REPO" --max-revs 30
+
+      - name: Restore the cached build in bulk
+        run: python3 scripts/ci/bulk_unpack_cache.py .
 
       # Should compile next to nothing; how much it does compile is part of the test.
       - name: Build the project
         env:
-          LEAN_NUM_THREADS: "4"
+          LEAN_NUM_THREADS: "2"
+          LAKE_NO_CACHE: "true"
+          LAKE_ARTIFACT_CACHE: "false"
         run: |
           set -o pipefail
           start=$(date +%s)
@@ -105,12 +111,17 @@ jobs:
 
       - name: Build doc-gen4
         working-directory: docbuild
+        env:
+          LAKE_NO_CACHE: "true"
+          LAKE_ARTIFACT_CACHE: "false"
         run: lake build doc-gen4
 
       - name: Generate the documentation
         working-directory: docbuild
         env:
-          LEAN_NUM_THREADS: "4"
+          LAKE_NO_CACHE: "true"
+          LAKE_ARTIFACT_CACHE: "false"
+          LEAN_NUM_THREADS: "2"
           DOCGEN_SRC: github
         run: |
           set -o pipefail
