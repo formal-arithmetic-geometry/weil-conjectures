@@ -113,46 +113,4 @@ noncomputable abbrev finiteCoefficientExchange :=
     (finiteCoefficientRingIso Λ g') (finiteCoefficientRingIso Λ f')
     (finiteCoefficientRingIso_coherent Λ sq)
 
-/-- Finite-coefficient proper exchange is invertible for an object with the retained
-bounded-below etale-origin witness. The exchange itself is defined independently of
-that witness, so replacing it by an isomorphic witness gives the same arrow.
-Source: blueprint finite-level pro-etale theorem; Stacks Tags 09C8 and 09C9
-(blueprint: thm-weil-pbc-finite-level-proetale).
-Proof: the normalized ringed pullbacks along constant coefficient identifications are
-exact inverse images, so the ambient mate is the displayed inverse-image exchange.
-The bounded-below etale witness has torsion cohomology since Λ is finite. Apply
-thm-weil-pbc-bounded-below to its etale complex. The fully faithful comparison
-thm-weil-pbc-site-comparison transports this isomorphism. The canonical comparison
-lem-weil-pbc-transport-identifies-exchange identifies the transported morphism with
-the ringed ambient exchange. Conjugate it using the witness isomorphism. Naturality
-of exchange shows that isomorphic witnesses give the same intrinsic morphism. No
-bound uniform in a coefficient level is used. -/
-theorem finiteLevelProEtaleBaseChange [IsProper f]
-    (K : DerivedCategory (proEtaleRingModules X (finiteOriginFunctionRing X Λ)))
-    (_W : FiniteEtaleOriginWitness X Λ K) :
-    IsIso ((finiteCoefficientExchange Λ sq).app K) := by
-  let a := (finiteOriginConstantIso Y' Λ).hom
-  letI : (proEtaleRingRestrictScalars a).Additive := inferInstance
-  letI : PreservesFiniteLimits (proEtaleRingRestrictScalars a) :=
-    (proEtaleRingRestrictScalars_properties a).1
-  letI : PreservesFiniteColimits (proEtaleRingRestrictScalars a) :=
-    (proEtaleRingRestrictScalars_properties a).2.1
-  letI : (proEtaleRingRestrictScalars a).ReflectsIsomorphisms :=
-    (proEtaleRingRestrictScalars_properties a).2.2
-  letI : (proEtaleRingRestrictScalars a).mapDerivedCategory.ReflectsIsomorphisms :=
-    { reflects := fun f _ ↦ by
-        rw [DerivedCategory.isIso_iff]
-        intro n
-        have : IsIso ((proEtaleRingRestrictScalars a).map
-            ((DerivedCategory.homologyFunctor _ n).map f)) :=
-          (NatIso.isIso_map_iff
-            ((proEtaleRingRestrictScalars a).mapDerivedCategoryHomologyFunctorIso n) f).2
-              (by rw [Functor.comp_map]; infer_instance)
-        exact isIso_of_reflects_iso _ (proEtaleRingRestrictScalars a) }
-  have hmap := finiteOriginToConstant_map_ambientExchange_isIso Λ sq
-    (finiteCoefficientRingIso Λ f) (finiteCoefficientRingIso Λ g)
-    (finiteCoefficientRingIso Λ g') (finiteCoefficientRingIso Λ f')
-    (finiteCoefficientRingIso_coherent Λ sq) K _W
-  exact isIso_of_reflects_iso _ (finiteOriginToConstant Y' Λ)
-
 end AlgebraicGeometry.Scheme

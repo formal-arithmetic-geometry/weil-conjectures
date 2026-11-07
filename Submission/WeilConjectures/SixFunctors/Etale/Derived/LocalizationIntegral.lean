@@ -486,30 +486,6 @@ variable [IsDomain Λ] [IsNoetherianRing Λ] [IsAdicComplete I Λ] [Finite (Λ �
   {k : Type u} [Field k] [IsAlgClosed k] [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
   {X Y : Scheme.{u}}
 
-include hϖ hI in
-/-- `Rf^!` carries `Dᵇc(Y, Λ)` into `Dᵇc(X, Λ)`, for a separated morphism `f` of separated
-schemes of finite type over `k`: the image of the derived completion cone of `L` under `Rf^!` is
-a homotopy limit of the tower `n ↦ Rf^!(L ⊗ᴸ Λ ⧸ Iⁿ)`, whose point lies in `Dᵇc(X, Λ)` by the
-construction of the integral exceptional adjoint
-(`AlgebraicGeometry.Etale.boundedConstructibleIntegral_exceptionalAdjoint`). -/
-theorem boundedConstructibleIntegral_rightDerivedUpperShriek
-    (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
-    [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aX] [IsSeparated aY]
-    [HasCompactification aX] [HasCompactification aY]
-    [(R(aX)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] [(R(aY)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
-    (f : X ⟶ Y) (hf : f ≫ aY = aX) [QuasiCompact f] [HasCompactification f]
-    [(R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] {L : 𝐃(Y, Λ)}
-    (hL : DerivedCategory.boundedConstructibleIntegral I Y L) :
-    DerivedCategory.boundedConstructibleIntegral I X
-      ((R(f)_![ModuleCat.{u + 1} Λ]).rightAdjoint.obj L) := by
-  let adj := Adjunction.ofIsLeftAdjoint (R(f)_![ModuleCat.{u + 1} Λ])
-  have := adj.commShift_of_leftAdjoint ℤ
-  have : (R(f)_![ModuleCat.{u + 1} Λ]).rightAdjoint.IsTriangulated :=
-    adj.isTriangulated_rightAdjoint
-  have : (R(f)_![ModuleCat.{u + 1} Λ]).rightAdjoint.Additive := adj.right_adjoint_additive
-  exact (boundedConstructibleIntegral_exceptionalAdjoint I hϖ hI aX aY f hf hL
-    (hL.1.map (R(f)_![ModuleCat.{u + 1} Λ]).rightAdjoint)).1.1
-
 end UpperShriek
 
 /-! ### The closed-support triangle at the integral stage -/
@@ -718,25 +694,6 @@ theorem torAmplitudeIn_reductionModIdeal_of_distTriang (hϖ : ϖ ∈ nonZeroDivi
     (boundedConstructible_and_torAmplitudeIn_reductionModIdeal_leftDerivedUpperStar hϖ hI i n
       ⟨(hM.2.choose_spec.choose_spec n).1, h₁'⟩).2
 
-variable (I) in
-/-- The exceptional inverse image `Ri^! : Dᵇc(X, Λ) ⥤ Dᵇc(Z, Λ)` along a closed immersion, the
-restriction of `Ri^!`
-(`AlgebraicGeometry.Etale.boundedConstructibleIntegral_rightDerivedUpperShriek`), under the
-hypotheses providing the exceptional adjunction `Ri_! ⊣ Ri^!` on `D(X_ét, Λ)`. -/
-noncomputable abbrev boundedConstructibleIntegralRightDerivedUpperShriek [IsAlgClosed k]
-    [IsDomain Λ] [IsAdicComplete I Λ] (hϖ : ϖ ∈ nonZeroDivisors Λ)
-    (hI : I = Ideal.span {ϖ}) (aX : X ⟶ Spec (.of k)) (aZ : Z ⟶ Spec (.of k))
-    [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aZ] [QuasiCompact aZ]
-    [IsSeparated aX] [IsSeparated aZ] [HasCompactification aX] [HasCompactification aZ]
-    [(R(aX)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] [(R(aZ)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
-    (i : Z ⟶ X) (hi : i ≫ aX = aZ) [IsClosedImmersion i] [HasCompactification i]
-    [(R(i)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] :
-    (DerivedCategory.boundedConstructibleIntegral I X).FullSubcategory ⥤
-      (DerivedCategory.boundedConstructibleIntegral I Z).FullSubcategory :=
-  ObjectProperty.liftFullSubcategory (DerivedCategory.boundedConstructibleIntegral I X) _
-    (R(i)_![ModuleCat.{u + 1} Λ]).rightAdjoint fun _ hK ↦
-      boundedConstructibleIntegral_rightDerivedUpperShriek hϖ hI aZ aX i hi hK
-
 end BoundedConstructible
 
 section Triangle
@@ -751,51 +708,6 @@ variable {U Z X : Scheme.{u}} [IsDomain Λ] [IsNoetherianRing Λ] [IsAdicComplet
   [(R(aX)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] [(R(aZ)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
   (i : Z ⟶ X) (hi : i ≫ aX = aZ) [IsClosedImmersion i] [HasCompactification i]
   [(R(i)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
-
-include hϖ hI hi in
-/-- Blueprint `prop-sf-localization-all-stages`, clauses (3) and (3') at the integral stage
-`𝒪_E`, under the hypotheses providing the exceptional adjunction on `D(X_ét, Λ)`: for
-`K ∈ Dᵇc(X, Λ)` the counit `Ri_* Ri^! K ⟶ K` and the unit `K ⟶ Rj_* j^* K` extend to a
-distinguished triangle `Ri_* Ri^! K ⟶ K ⟶ Rj_* j^* K ⟶ (Ri_* Ri^! K)[1]` with a unique third
-arrow, and its three vertices lie in `Dᵇc(-, Λ)`. The vanishing of
-`Hom((Ri_* Q)[m], Rj_* G)` is
-`AlgebraicGeometry.Etale.subsingleton_hom_shift_rightDerivedLowerStar_rightDerivedLowerStar`,
-and the functoriality in `K` is
-`AlgebraicGeometry.Etale.exists_triangleHom_closedSupportTriangle` and
-`AlgebraicGeometry.Etale.closedSupportTriangle_hom_ext`. -/
-theorem boundedConstructibleIntegral_closedSupportTriangle (j : U ⟶ X) [IsOpenImmersion j]
-    [QuasiCompact j] (hij : Set.range i.base = (Set.range j.base)ᶜ) {K : 𝐃(X, Λ)}
-    (hK : DerivedCategory.boundedConstructibleIntegral I X K) :
-    DerivedCategory.boundedConstructibleIntegral I X
-        ((R((i)_*[ModuleCat.{u + 1} Λ])).obj ((R(i)_![ModuleCat.{u + 1} Λ]).rightAdjoint.obj K)) ∧
-      DerivedCategory.boundedConstructibleIntegral I X
-        ((R((j)_*[ModuleCat.{u + 1} Λ])).obj ((L((j)^*[ModuleCat.{u + 1} Λ])).obj K)) ∧
-      ∃! w, closedSupportTriangle i j K w ∈ distTriang _ :=
-  ⟨boundedConstructibleIntegral_rightDerivedLowerStar_of_isClosedImmersion hϖ hI aX i
-      (boundedConstructibleIntegral_rightDerivedUpperShriek hϖ hI aZ aX i hi hK),
-    (boundedConstructibleIntegral_rightDerivedLowerStar_of_isOpenImmersion hϖ hI aX j
-      (boundedConstructibleIntegral_leftDerivedUpperStar hϖ hI j hK)).1,
-    existsUnique_distTriang_closedSupportTriangle i j hij K⟩
-
-include hϖ hI hi in
-/-- Blueprint `prop-sf-localization-all-stages`, clause (2') at the integral stage `𝒪_E`, under
-the hypotheses providing the exceptional adjunction on `D(X_ét, Λ)`: if the reductions of
-`K ∈ Dᵇc(X, Λ)` have Tor amplitude in `[a, b]` and the open complement `U` has dimension `≤ d`,
-the reductions of `Ri^! K` have Tor amplitude in `[a, b + 2d + 1]`
-(`AlgebraicGeometry.Etale.torAmplitudeIn_reductionModIdeal_of_distTriang`). -/
-theorem torAmplitudeIn_reductionModIdeal_rightDerivedUpperShriek (j : U ⟶ X)
-    [IsOpenImmersion j] [QuasiCompact j] (hij : Set.range i.base = (Set.range j.base)ᶜ)
-    {K : 𝐃(X, Λ)} (hK : DerivedCategory.boundedConstructibleIntegral I X K) (d : ℕ)
-    (hd : topologicalKrullDim U ≤ (d : WithBot ℕ∞)) (a b : ℤ)
-    (hab : ∀ n : ℕ, DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b
-      ((reductionModIdeal Λ X (I ^ (n + 1))).obj K)) (n : ℕ) :
-    DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) Z a (b + 2 * (d : ℤ) + 1)
-      ((reductionModIdeal Λ Z (I ^ (n + 1))).obj
-        ((R(i)_![ModuleCat.{u + 1} Λ]).rightAdjoint.obj K)) := by
-  obtain ⟨hM, -, w, hw, -⟩ := boundedConstructibleIntegral_closedSupportTriangle hϖ hI aX aZ i hi
-    j hij hK
-  exact torAmplitudeIn_reductionModIdeal_of_distTriang hϖ hI aX i j hK hM hw (Iso.refl _)
-    (Iso.refl _) (Iso.refl _) d hd a b hab n
 
 end Triangle
 

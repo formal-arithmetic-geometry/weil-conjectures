@@ -68,59 +68,6 @@ private def prodConstIsoOfIso {C : Type*} [Category* C] {P Q : C} (e : P ≅ Q) 
   NatIso.ofComponents (fun K ↦ Iso.prod (Iso.refl K) e) (fun _ ↦ by
     ext <;> simp)
 
-/-- The purity map and its geometric comparison, given the Weil orientation. -/
-theorem exists_natTrans_forget_eq_upperShriekUnitTensorMap_of_orientation (d : ℕ)
-    [SmoothOfRelativeDimension d f]
-    (θ : (upperShriek f).obj (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l Y)) ≅
-      ((tateTwist k₀ l X d).obj
-        (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)))⟦(2 * d : ℤ)⟧)
-    (φ : ∀ L : WeilComplex k₀ l Y, (adicSheafDerivedEquivCondensedMod l
-        (X ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor.obj
-          (forget.obj ((upperShriek f).obj L)) ≅
-      ((CondensedRing.boundedConstructibleUpperShriek l (geometricFiberHom (k₀ := k₀) f)).obj
-        (geometricFiberBoundedConstructibleObj L)).obj) :
-    ∃ γ : upperStar f ⋙ tateTwist k₀ l X d ⋙ shiftFunctor (WeilComplex k₀ l X) (2 * d : ℤ) ⟶
-        upperShriek f,
-      ∀ L : WeilComplex k₀ l Y, ∃ ψ : (adicSheafDerivedEquivCondensedMod l
-          (X ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor.obj
-            (forget.obj ((upperStar f ⋙ tateTwist k₀ l X d ⋙
-              shiftFunctor (WeilComplex k₀ l X) (2 * d : ℤ)).obj L)) ≅
-          ((CondensedRing.boundedConstructibleUpperStar _ l (geometricFiberHom (k₀ := k₀) f)).obj
-              (geometricFiberBoundedConstructibleObj L) ⊗
-            (CondensedRing.boundedConstructibleUpperShriek l
-              (geometricFiberHom (k₀ := k₀) f)).obj (𝟙_ _)).obj,
-        (adicSheafDerivedEquivCondensedMod l _).functor.map (forget.map (γ.app L)) ≫ (φ L).hom =
-          ψ.hom ≫ (ObjectProperty.ι _).map (CondensedRing.upperShriekUnitTensorMap l
-            (geometricFiberHom (k₀ := k₀) f) (geometricFiberBoundedConstructibleObj L)) := by
-  obtain ⟨π, hπ⟩ :=
-    exists_coprojection_forget_eq_upperShriekUnitTensorMap (k₀ := k₀) (l := l) f
-  obtain ⟨τ⟩ := nonempty_nativeConstructibleTensor_iso_tateTwist_comp_shift k₀ l X d (2 * d)
-  -- `f^* L(d)[2d] ≅ f^* L ⊗ ℚ̄_ℓ(d)[2d] ≅ f^* L ⊗ Rf^! ℚ̄_ℓ`
-  let e : (𝟭 (WeilComplex k₀ l X)).prod' ((Functor.const _).obj
-      (((tateTwist k₀ l X d).obj
-        (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)))⟦(2 * d : ℤ)⟧)) ≅
-      (𝟭 (WeilComplex k₀ l X)).prod' ((Functor.const _).obj
-        ((upperShriek f).obj (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l Y)))) :=
-    prodConstIsoOfIso θ.symm
-  let α := Functor.isoWhiskerLeft (upperStar f)
-    (τ.symm ≪≫ Functor.isoWhiskerRight e (nativeConstructibleTensor k₀ l X))
-  have : Smooth f := SmoothOfRelativeDimension.smooth (n := d) (f := f)
-  have : Smooth (geometricFiberHom (k₀ := k₀) f).left :=
-    Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange (P := @Smooth) f (comp_over f _) ‹_›
-  refine ⟨α.hom ≫ π, fun L ↦ ?_⟩
-  obtain ⟨φ', ψ', h⟩ := hπ L
-  have := CondensedRing.isIso_upperShriekUnitTensorMap_of_smooth l
-    (geometricFiberHom (k₀ := k₀) f) (geometricFiberBoundedConstructibleObj L)
-  let u := asIso ((ObjectProperty.ι _).map (CondensedRing.upperShriekUnitTensorMap l
-    (geometricFiberHom (k₀ := k₀) f) (geometricFiberBoundedConstructibleObj L)))
-  refine ⟨(adicSheafDerivedEquivCondensedMod l _).functor.mapIso (forget.mapIso (α.app L)) ≪≫
-    ψ' ≪≫ u ≪≫ φ'.symm ≪≫ φ L ≪≫ u.symm, ?_⟩
-  have h' : (adicSheafDerivedEquivCondensedMod l
-      (X ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor.map (forget.map (π.app L)) =
-      (ψ'.hom ≫ u.hom) ≫ φ'.inv :=
-    (Iso.eq_comp_inv φ').2 h
-  exact comp_map_comp_hom_eq_of_eq _ _ (α.app L) (π.app L) h'
-
 end Geometric
 
 end WeilComplex

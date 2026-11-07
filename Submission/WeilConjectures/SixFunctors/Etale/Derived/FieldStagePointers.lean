@@ -109,20 +109,6 @@ local instance (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
     @locallySmall_of_univLE X.Etale _ (@univLE_of_max.{u, u + 1} UnivLE.self)
   essentiallySmall_of_small_of_locallySmall _
 
-/-- Pointer to the properties of the rationalization.
-
-The rationalization `Dᵇc(X, E) = Dᵇc(X, 𝒪_E)[1/ϖ_E]`, in which no idempotent is adjoined, is
-nevertheless idempotent complete, so that the canonical functor into its Karoubi envelope is an
-equivalence. -/
-theorem Etale.DerivedCategory.isIdempotentComplete_and_isEquivalence_toKaroubi_rational
-    (X : Scheme.{u}) :
-    IsIdempotentComplete
-        (Etale.DerivedCategory.boundedConstructibleRational l E X).FullSubcategory ∧
-      (Idempotents.toKaroubi
-        (Etale.DerivedCategory.boundedConstructibleRational l E X).FullSubcategory).IsEquivalence :=
-  ⟨Etale.DerivedCategory.isIdempotentComplete_boundedConstructibleRational l E X,
-    Etale.DerivedCategory.isEquivalence_toKaroubi_boundedConstructibleRational l E X⟩
-
 end Rational
 
 section AlgebraicClosure

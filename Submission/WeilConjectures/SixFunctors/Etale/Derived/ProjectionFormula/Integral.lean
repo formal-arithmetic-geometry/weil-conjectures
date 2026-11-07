@@ -151,60 +151,6 @@ lemma finite_quotient_maximalIdealShrink_pow (n : ℕ) :
     (PadicAlgCl.shrinkRingEquiv l E)
     (by rw [PadicAlgCl.maximalIdealShrink, Ideal.map_pow]; rfl)).toEquiv
 
-/-- Steps 1 and 2 of blueprint `sk-thm-sf-pf-adic`: the reduction of the projection map modulo
-`𝔪_E` is an isomorphism.
-
-If `K` and `L` are bounded constructible, derived complete for `𝔪_E` and of finite Tor
-amplitude, then `ρ(PF_{f, K, L})`, the image of the projection map under the reduction
-`- ⊗ᴸ (𝒪_E/𝔪_E)_Y`, is an isomorphism. In the blueprint, `ρ(PF_{f, K, L})` is identified with the
-finite-level projection map `PF_{f, K₁, L₁}` by the reduction square of
-`sk-prop-sf-pf-reduction` (`lem-fix-operation-reduction`), and the latter is an isomorphism by
-the finite-level projection formula `sk-thm-sf-pf-finite`
-(`AlgebraicGeometry.Etale.isIso_reductionModIdeal_map_projectionMap_of_finite`). The hypotheses
-on `K` and `L` are not needed. -/
-theorem isIso_reductionModIdeal_map_projectionMap_of_derivedCompleteIntegral (f : X ⟶ Y)
-    [HasCompactification f]
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology 𝐌))
-    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology 𝐌))
-    (_hKc : DerivedCategory.boundedConstructible 𝐌 X K)
-    (_hK : _root_.DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E K)
-    (_hKt : DerivedCategory.finiteTorAmplitude 𝐌 X K)
-    (_hLc : DerivedCategory.boundedConstructible 𝐌 Y L)
-    (_hL : _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E L)
-    (_hLt : DerivedCategory.finiteTorAmplitude 𝐌 Y L) :
-    IsIso ((reductionModIdeal _ Y (PadicAlgCl.maximalIdealShrink l E)).map
-      (projectionMapApp (Shrink.{u + 1} (PadicAlgCl.integers l E)) f K L)) := by
-  obtain ⟨ϖ, hϖ, hI⟩ :=
-    PadicAlgCl.exists_mem_nonZeroDivisors_maximalIdealShrink_eq_span.{w, u} l E
-  have : Finite (Shrink.{u + 1} (PadicAlgCl.integers l E) ⧸ Ideal.span {ϖ} ^ 1) := by
-    rw [← hI]
-    exact finite_quotient_maximalIdealShrink_pow l E _
-  have h := isIso_reductionModIdeal_map_projectionMap_of_finite hϖ 1 f K L
-  rwa [pow_one, ← hI] at h
-
-/-- Steps 1 and 2 of blueprint `sk-thm-sf-pf-adic`, at every level `n`: the reduction of the
-projection map modulo `𝔪_Eⁿ` is an isomorphism.
-
-For all `K` and `L`, `ρ_n(PF_{f, K, L})`, the image of the projection map under the reduction
-`- ⊗ᴸ (𝒪_E/𝔪_Eⁿ)_Y`, is an isomorphism: it is identified with the finite-level projection map
-`PF_{f, K_n, L_n}` over `𝒪_E/𝔪_Eⁿ` by the reduction square of `sk-prop-sf-pf-reduction`
-(`lem-fix-operation-reduction`), an isomorphism by the finite-level projection formula
-`sk-thm-sf-pf-finite`
-(`AlgebraicGeometry.Etale.isIso_reductionModIdeal_map_projectionMap_of_finite`). -/
-theorem isIso_reductionModIdeal_maximalIdealShrink_pow_map_projectionMap (f : X ⟶ Y)
-    [HasCompactification f]
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology 𝐌))
-    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology 𝐌)) (n : ℕ) :
-    IsIso ((reductionModIdeal _ Y (PadicAlgCl.maximalIdealShrink l E ^ n)).map
-      (projectionMapApp (Shrink.{u + 1} (PadicAlgCl.integers l E)) f K L)) := by
-  obtain ⟨ϖ, hϖ, hI⟩ :=
-    PadicAlgCl.exists_mem_nonZeroDivisors_maximalIdealShrink_eq_span.{w, u} l E
-  have : Finite (Shrink.{u + 1} (PadicAlgCl.integers l E) ⧸ Ideal.span {ϖ} ^ n) := by
-    rw [← hI]
-    exact finite_quotient_maximalIdealShrink_pow l E _
-  have h := isIso_reductionModIdeal_map_projectionMap_of_finite hϖ n f K L
-  rwa [← hI] at h
-
 /-- **The derived completion inverts morphisms whose reduction is an isomorphism.** A morphism
 `u` of `D(X_ét, 𝒪_E)` whose reduction modulo `𝔪_E` is an isomorphism becomes an isomorphism in
 the integral stage `D_comp(X_ét, 𝒪_E)`: its cone `C` has `C ⊗ᴸ (𝒪_E/𝔪_E)_X = 0`, so `ϖ` acts
@@ -223,68 +169,6 @@ theorem isIso_completion_map_of_isIso_reductionModIdeal
       ((reductionModIdeal _ X (Ideal.span {ϖ})).map_distinguished _ hT)).2 hu
   exact _root_.DerivedCategory.isIso_derivedCompletion_map _ hI hT
     (isIso_smul_id_of_isZero_reductionModIdeal hϖ C hC)
-
-/-- **The projection formula at the integral stage of the étale model** (the étale-site form of
-the old blueprint `sk-thm-sf-pf-adic`; the pro-étale statement of the current blueprint is in
-`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaAdic`).
-
-At the integral stage of the `ℓ`-adic formalism, where the coefficients are the ring of
-integers `𝒪_E` of an extension `E` of `ℚ_ℓ` inside `ℚ̄_ℓ`, the projection map
-
-```
-  PF_{f, K, L} : (Rf_! K) ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^* L)
-```
-
-is an isomorphism in `D_comp(Y_ét, 𝒪_E)`: its image under the derived completion
-`D(Y_ét, 𝒪_E) ⥤ D_comp(Y_ét, 𝒪_E)`, which is the projection map for the operations of the
-integral stage (defined levelwise as derived limits of their finite reductions, see the module
-docstring), is an isomorphism. This holds for all `K` and `L`, in particular for the
-derived-complete objects of finite Tor amplitude of the blueprint.
-
-The proof follows Steps 1 and 2 of the blueprint: the reduction of the projection map modulo
-`𝔪_E` is an isomorphism
-(`AlgebraicGeometry.Etale.isIso_reductionModIdeal_maximalIdealShrink_pow_map_projectionMap`).
-Step 3 is replaced by the fact that the derived completion inverts such morphisms
-(`AlgebraicGeometry.Etale.isIso_completion_map_of_isIso_reductionModIdeal`); the derived
-completeness of the two sides of the plain projection map, which Step 3 needs and which the
-blueprint sketch leaves open, is not used. -/
-theorem isIso_completion_map_projectionMap (f : X ⟶ Y) [HasCompactification f]
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology 𝐌))
-    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology 𝐌)) :
-    IsIso ((DerivedCategoryDerivedCompleteIntegral.completion Y.smallEtaleTopology l E).map
-      (projectionMapApp (Shrink.{u + 1} (PadicAlgCl.integers l E)) f K L)) := by
-  refine isIso_completion_map_of_isIso_reductionModIdeal l E _ ?_
-  have h := isIso_reductionModIdeal_maximalIdealShrink_pow_map_projectionMap l E f K L 1
-  rwa [pow_one] at h
-
-/-- Blueprint `thm-sf-pf-adic`: Derived-complete reconstruction over `𝒪_E`.
-
-Let `K` and `L` be bounded constructible, derived complete for `𝔪_E` and of finite Tor amplitude.
-The finite-level projection maps `PF_{f, K_n, L_n}`, which are the reductions modulo `𝔪_Eⁿ` of the
-projection map `PF_{f, K, L}`, are isomorphisms, and they realize an isomorphism over `𝒪_E`: the
-derived completion of `PF_{f, K, L}`, an isomorphism of `D_comp(Y_ét, 𝒪_E)` whose reductions are
-the `PF_{f, K_n, L_n}` (the completion map `M ⟶ M^` of any `M` induces isomorphisms on all
-reductions, its cone having `ϖ` acting invertibly).
-
-The hypotheses on `K` and `L` are not needed: see
-`AlgebraicGeometry.Etale.isIso_completion_map_projectionMap` and
-`AlgebraicGeometry.Etale.isIso_reductionModIdeal_maximalIdealShrink_pow_map_projectionMap`. -/
-theorem isIso_completion_map_projectionMap_of_derivedCompleteIntegral (f : X ⟶ Y)
-    [HasCompactification f]
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology 𝐌))
-    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology 𝐌))
-    (_hKc : DerivedCategory.boundedConstructible 𝐌 X K)
-    (_hK : _root_.DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E K)
-    (_hKt : DerivedCategory.finiteTorAmplitude 𝐌 X K)
-    (_hLc : DerivedCategory.boundedConstructible 𝐌 Y L)
-    (_hL : _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E L)
-    (_hLt : DerivedCategory.finiteTorAmplitude 𝐌 Y L) :
-    IsIso ((DerivedCategoryDerivedCompleteIntegral.completion Y.smallEtaleTopology l E).map
-        (projectionMapApp (Shrink.{u + 1} (PadicAlgCl.integers l E)) f K L)) ∧
-      ∀ n : ℕ, IsIso ((reductionModIdeal _ Y (PadicAlgCl.maximalIdealShrink l E ^ n)).map
-        (projectionMapApp (Shrink.{u + 1} (PadicAlgCl.integers l E)) f K L)) :=
-  ⟨isIso_completion_map_projectionMap l E f K L,
-    isIso_reductionModIdeal_maximalIdealShrink_pow_map_projectionMap l E f K L⟩
 
 end Etale
 
