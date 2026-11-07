@@ -212,7 +212,6 @@ private def freeRestrictionIso {Y : Scheme.{u}}
     simp only [Category.comp_id, whiskerLeft_id, Category.id_comp, comp_whiskerRight]
     rw [associator_inv_naturality_left_assoc])
 
-set_option maxHeartbeats 2000000 in
 -- Elaborating the root-tower naturality comparison unfolds several module actions.
 private def rootTensorIso (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u}) :
