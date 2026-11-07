@@ -47,7 +47,6 @@ private theorem homologyCounit_naturality
   rw [← Functor.map_comp, ← Functor.map_comp]
   exact congrArg H.map ((ε.mapHomologicalComplex (ComplexShape.up ℕ)).naturality l)
 
-set_option maxHeartbeats 800000 in
 -- Elaborating sheafification and the mapped homology comparisons requires extra heartbeats.
 private theorem sectionComparison_naturality {Y : Scheme.{u}}
     {A B : CochainComplex Y.Modules ℕ} (l : A ⟶ B) (p : ℕ) :
@@ -74,7 +73,7 @@ private theorem sectionTheta_naturality {Y : Scheme.{u}}
     (𝟙 Y.ringCatSheaf.obj)).homEquiv_naturality_left_square _ _ _ _
       (sectionComparison_naturality l p)
 
-set_option maxHeartbeats 600000 in
+set_option maxHeartbeats 500000 in
 -- Match global sections with top evaluation of the pushforward section complex.
 private theorem topSection_naturality {Z Y : Scheme.{u}} (h : Z ⟶ Y)
     {G : Z.Modules} (R K : InjectiveResolution G) (l : R.cocomplex ⟶ K.cocomplex)
@@ -125,7 +124,6 @@ private theorem topSection_naturality {Z Y : Scheme.{u}} (h : Z ⟶ Y)
   rfl
 
 
-set_option maxHeartbeats 800000 in
 -- The pullback and stalk types need additional elaboration heartbeats.
 /-- The defined local class map can be computed on the top open using any
 injective resolution of the pulled-back module.

@@ -128,7 +128,6 @@ private theorem localizedEquiv_totalTensor_iso (X : Scheme.{u}) (U : X.Opens)
         simpa [E] using (he (A.X p) (A.X p') (B.X q) (B.X q) (A.d p p') (𝟙 _)).symm)
   exact ⟨e₁ ≪≫ HomologicalComplex₂.total.mapIso e₂ (.up ℤ)⟩
 
-set_option maxHeartbeats 800000 in
 -- The localized-site tensor carrier needs additional elaboration steps.
 /-- Exact open restriction preserves K-flatness and the total tensor model.
 Source: Stacks Project, Tag 06YC for K-flat pullback, Tag 01CD for sheaf tensor

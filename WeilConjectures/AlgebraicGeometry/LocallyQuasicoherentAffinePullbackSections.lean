@@ -30,7 +30,7 @@ set_option backward.isDefEq.respectTransparency.types false
 
 namespace Scheme.Modules
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 700000 in
 -- Affine chart tensors and module-category scalar extensions need elaboration fuel.
 private theorem tensorPullback_affine_sections_bijective_of_chart
     {X Y : Scheme.{u}} (f : X ⟶ Y) (V : Y.affineOpens) (U : X.affineOpens)
