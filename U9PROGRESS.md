@@ -637,6 +637,14 @@
   Remote full log: Weil u9/logs/PF555-20261107T184520.log.
   Local summary: /home/ubuntu/u9/bz/BUILD-PF555-leaf.log (written when ucheck finishes).
 - The first invocation has finished. Never start another while a retry is active.
+- Upstream adopted PF555 source commit 16df31b2a9 during the first build.
+  Merged origin/u9/bumpF at dd2996edeb6b4c5f0368b2dbe66433fa8af57c7f as required;
+  the assigned source is identical before and after this merge.
+- First retry checked b54acb0c6262951f26553fa1bd2220dbf5204115 and finished with
+  service timeout rc=124, built=5334, failed=0; leaf not reached on the second tree.
+  Remote log u9/logs/PF555-20261107T204641.log.
+  Local summary /home/ubuntu/u9/bz/BUILD-PF555-leaf-retry.log.
+- Both previous ucheck invocations have finished. A second retry is required.
 - Fix/error/rule and baseline evidence: /home/ubuntu/u9/bz/FIXES-PF555.md.
 - Next: await leaf green, then use /home/ubuntu/u9/bz/PF555-downstream-batch1.txt
   for the six-target importer batch. Whole importer graph is in PF555-downstream-layers.json.
