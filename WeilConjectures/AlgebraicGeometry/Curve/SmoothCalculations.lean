@@ -269,7 +269,7 @@ variable {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec
 /-- **`C₁` for `𝐅_n`.** Let `C` be a smooth separated connected curve over an algebraically
 closed field `k` and `n` a prime. Then `Hᵠ(C, 𝐅_n) = 0` for `q > 2`, where `𝐅_n` is the constant
 sheaf `Λ/nΛ` and `Hᵠ` is the cohomology of its underlying abelian sheaf. This is the
-cohomological dimension bound `AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le`,
+cohomological dimension bound `AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_generic`,
 the constant sheaf being killed by `n`.
 (blueprint: lem-sc-c1)
 -/
@@ -278,7 +278,7 @@ theorem subsingleton_sheafH_constantModSheaf_of_two_lt [IsCurve f] [Smooth f] [C
     Subsingleton (Sheaf.H
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
         (Etale.constantModSheaf Λ C n)) q) :=
-  subsingleton_sheafH_of_three_le f _
+  subsingleton_sheafH_of_three_le_generic f _
     (Etale.isTorsion_constantModSheaf Λ C (Fact.out : n.Prime).pos) q hq
 
 /-- **`C₂` for `𝐅_n`.** Let `C` be a smooth affine connected curve over an algebraically closed

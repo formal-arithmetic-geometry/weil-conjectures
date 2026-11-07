@@ -70,8 +70,8 @@ private lemma exists_germToFunctionField_eq (U : X.Opens) [Nonempty U] [Nonempty
     simp only [s, map_mul]
     have h₂ : X.germToFunctionField (V f) (X.presheaf.map (homOfLE le_top).op (c f.1 f.2.1)) =
         b * X.germToFunctionField (V f) (X.presheaf.map (homOfLE (X.basicOpen_le f.1)).op f.1) := by
-      rw [Scheme.germToFunctionField_map_quasiProjective,
-        Scheme.germToFunctionField_map_quasiProjective]
+      rw [Scheme.germToFunctionField_map,
+        Scheme.germToFunctionField_map]
       exact hc f.1 f.2.1
     rw [h₂, mul_assoc]
     convert mul_one b using 2
@@ -92,8 +92,8 @@ private lemma exists_germToFunctionField_eq (U : X.Opens) [Nonempty U] [Nonempty
   let i : ι := ⟨f, hf, hf0⟩
   have : Nonempty (⨆ i, V i : X.Opens) := ⟨⟨x, hle hx⟩⟩
   refine ⟨X.presheaf.map (homOfLE hle).op t, ?_⟩
-  rw [Scheme.germToFunctionField_map_quasiProjective, ← hs i, ← ht i,
-    Scheme.germToFunctionField_map_quasiProjective]
+  rw [Scheme.germToFunctionField_map, ← hs i, ← ht i,
+    Scheme.germToFunctionField_map]
 
 /-- **Opens of an affine Dedekind scheme are affine.** If `X` is an integral affine scheme whose
 ring of global sections is a Dedekind domain, then every open `U` of `X` is affine. -/
@@ -140,7 +140,7 @@ theorem isAffineOpen_of_isDedekindDomain (U : X.Opens) : IsAffineOpen U := by
       exact ⟨c, hc⟩
     refine ⟨X.presheaf.map (homOfLE le_top).op a * β,
       Ideal.mul_mem_right _ _ (Ideal.subset_span ⟨a, ha, rfl⟩), ?_⟩
-    rw [map_mul, hβ, Scheme.germToFunctionField_map_quasiProjective]
+    rw [map_mul, hβ, Scheme.germToFunctionField_map]
     rfl
   rw [FractionalIdeal.coe_ideal_mul_inv I hI0] at key
   obtain ⟨t, ht, ht1⟩ := key 1 (FractionalIdeal.one_mem_one _)

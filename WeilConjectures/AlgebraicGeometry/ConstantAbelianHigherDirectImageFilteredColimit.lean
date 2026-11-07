@@ -54,7 +54,8 @@ quasi-compactness and quasi-separatedness of h are stable under base change.
 Pullback of a constant sheaf is the constant sheaf on this pullback scheme.
 Filtered cohomology continuity on that qcqs scheme identifies the canonical image
 cocone with a colimit cocone. The index remains in Type(u+1); the finite-cover
-argument of 0739 applies at this size, as in etaleCohomology_isColimit_large_filtered.
+argument of 0739 applies at this size, as in
+etaleCohomology_isColimit_of_isFiltered_coefficientSize.
 These comparisons commute with restriction in U and with maps of coefficient
 groups. Sheafification preserves colimits. Restrict to the affine etale site,
 apply these pointwise colimit comparisons, and use the sheafified cohomology
@@ -113,7 +114,8 @@ theorem preservesColimitsOfShape_constantAbelianHigherDirectImage
         cohomology AddCommGrpCat.{u + 1} V (q : ℤ)
     have : PreservesColimitsOfShape I C :=
       ⟨fun {D} ↦ preservesColimit_of_preserves_colimit_cocone (colimit.isColimit D)
-        (Scheme.etaleCohomology_isColimit_large_filtered V (colimit.isColimit D) q).some⟩
+        (Scheme.etaleCohomology_isColimit_of_isFiltered_coefficientSize V
+          (colimit.isColimit D) q).some⟩
     have : PreservesColimitsOfShape I
         (upperStar AddCommGrpCat.{u + 1} (pullback.snd U.hom h) ⋙ C) := inferInstance
     obtain ⟨e⟩ := nonempty_abelianHigherDirectImage_evaluationFunctorIso h q U

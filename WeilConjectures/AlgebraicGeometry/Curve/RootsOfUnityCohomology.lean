@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.Curve.AffineLineKummer
 public import WeilConjectures.AlgebraicGeometry.Curve.Estimate
 public import WeilConjectures.AlgebraicGeometry.Curve.GmCohomology
 public import WeilConjectures.AlgebraicGeometry.Curve.Jacobian
@@ -45,18 +46,6 @@ namespace AlgebraicGeometry
 namespace Scheme
 
 variable {k : Type u} [Field k] {C : Scheme.{u}}
-
-/-- An integer which is nonzero in a field `k` is invertible on every `k`-scheme. -/
-lemma isUnit_natCast_of_ne_zero (f : C ⟶ Spec (.of k)) {n : ℕ} (hn : (n : k) ≠ 0) :
-    IsUnit (n : Γ(C, ⊤)) := by
-  simpa using hn.isUnit.map ((Scheme.ΓSpecIso (.of k)).inv ≫ f.appTop).hom
-
-/-- The sheaf `μₙ` of `n`-th roots of unity is killed by `n`, so it is a torsion sheaf. -/
-lemma isTorsion_rootsOfUnitySheaf (X : Scheme.{u}) {n : ℕ} (hn : 0 < n) :
-    (X.rootsOfUnitySheaf n).IsTorsion := by
-  refine isTorsion_of_nsmul_id_eq_zero hn ((cancel_mono (kernel.ι (n • 𝟙 X.gmSheaf))).1 ?_)
-  rw [Preadditive.nsmul_comp, Category.id_comp, zero_comp,
-    ← Category.comp_id (kernel.ι (n • 𝟙 X.gmSheaf)), ← Preadditive.comp_nsmul, kernel.condition]
 
 /-- `H⁰` of `μₙ` injects into `H⁰` of `𝔾ₘ`, the global units. -/
 lemma injective_map_rootsOfUnitySheafι_zero (X : Scheme.{u}) (n : ℕ) :
@@ -145,13 +134,13 @@ theorem sheafH_rootsOfUnitySheaf_of_isProper (f : C ⟶ Spec (.of k)) [IsConnect
         (Sheaf.H.map (C.rootsOfUnitySheafι n) 1).range =
           AddSubgroup.torsionBy C.CohomologicalPicardGroup n ∧
         Nat.card (Sheaf.H (C.rootsOfUnitySheaf n) 1) = n ^ (2 * f.genus)) ∧
-      (Function.Surjective (C.kummerδ₁ n (Scheme.isUnit_natCast_of_ne_zero f hn)) ∧
+      (Function.Surjective (C.kummerδ₁ n (AffineSpace.isUnit_natCast_of_ne_zero f hn)) ∧
         ∃! d : Sheaf.H (C.rootsOfUnitySheaf n) 2 ≃+ ZMod n, ∀ L : C.Pic,
-          d (C.kummerδ₁ n (Scheme.isUnit_natCast_of_ne_zero f hn)
+          d (C.kummerδ₁ n (AffineSpace.isUnit_natCast_of_ne_zero f hn)
             (Scheme.Pic.toCohomologicalPicardGroup C L)) = (f.picDegree L : ZMod n)) ∧
       ∀ q : ℕ, 2 < q → Subsingleton (Sheaf.H (C.rootsOfUnitySheaf n) q) := by
   have := IsConnectedCurve.connectedSpace (f := f)
-  have hn' := Scheme.isUnit_natCast_of_ne_zero f hn
+  have hn' := AffineSpace.isUnit_natCast_of_ne_zero f hn
   have hn0 : 0 < n := Nat.pos_of_ne_zero (by rintro rfl; exact hn Nat.cast_zero)
   have : NeZero n := ⟨hn0.ne'⟩
   have : NeZero (n : k) := ⟨hn⟩
@@ -249,7 +238,8 @@ theorem sheafH_rootsOfUnitySheaf_of_isProper (f : C ⟶ Spec (.of k)) [IsConnect
     obtain ⟨L, rfl⟩ := (Scheme.Pic.toCohomologicalPicardGroup C).surjective c
     rw [hd', hd, hD]
   · intro q hq
-    exact IsCurve.subsingleton_sheafH_of_three_le f _ (C.isTorsion_rootsOfUnitySheaf hn0) q hq
+    exact IsCurve.subsingleton_sheafH_of_three_le_generic f _
+      (AffineSpace.rootsOfUnitySheaf_isTorsion C hn0) q hq
 
 /-- Blueprint `det-curveestimate-canonical-mu`, part 5: invariance under extension of
 algebraically closed fields.
@@ -307,7 +297,7 @@ theorem rootsOfUnityCohomologyMap_baseChangeField (f : C ⟶ Spec (.of k)) [IsCo
         (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k k')))) n 2 y) = d y := by
   set π := pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k k')))
   have hn0 : NeZero n := ⟨by rintro rfl; exact hn Nat.cast_zero⟩
-  have hnC := Scheme.isUnit_natCast_of_ne_zero f hn
+  have hnC := AffineSpace.isUnit_natCast_of_ne_zero f hn
   refine ⟨fun q ↦ ?_, fun x a hx ↦ ?_, fun x L hx ↦ ?_, fun hC hC' d d' hd hd' y ↦ ?_⟩
   · -- `π^* μₙ ≅ μₙ`, and the cohomology of `μₙ ≅ ℤ/n` is invariant
     have : IsIso (Scheme.upperStarRootsOfUnitySheafToRootsOfUnitySheaf n π) :=
@@ -493,9 +483,9 @@ theorem sheafH_rootsOfUnitySheaf_canonical_of_isProper (f : C ⟶ Spec (.of k))
         (Sheaf.H.map (C.rootsOfUnitySheafι n) 1).range =
           AddSubgroup.torsionBy C.CohomologicalPicardGroup n ∧
         Nat.card (Sheaf.H (C.rootsOfUnitySheaf n) 1) = n ^ (2 * f.genus)) ∧
-      (Function.Surjective (C.kummerδ₁ n (Scheme.isUnit_natCast_of_ne_zero f hn)) ∧
+      (Function.Surjective (C.kummerδ₁ n (AffineSpace.isUnit_natCast_of_ne_zero f hn)) ∧
         ∃! d : Sheaf.H (C.rootsOfUnitySheaf n) 2 ≃+ ZMod n, ∀ L : C.Pic,
-          d (C.kummerδ₁ n (Scheme.isUnit_natCast_of_ne_zero f hn)
+          d (C.kummerδ₁ n (AffineSpace.isUnit_natCast_of_ne_zero f hn)
             (Scheme.Pic.toCohomologicalPicardGroup C L)) = (f.picDegree L : ZMod n)) ∧
       ∀ q : ℕ, 2 < q → Subsingleton (Sheaf.H (C.rootsOfUnitySheaf n) q)) ∧
     (letI : C.Over (Spec (.of k)) := ⟨f⟩

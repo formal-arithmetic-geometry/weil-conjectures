@@ -153,7 +153,7 @@ theorem surjective_cupMu [GeometricallyIntegral (X ↘ Spec (.of k))] [Nonempty 
         topologicalKrullDim_le_of_smoothOfRelativeDimension (X ↘ Spec (.of k)) 1 }
   have h3 (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (i : F ⟶ t.pushforwardMu)
       [Mono i] : Subsingleton (Sheaf.H F 3) :=
-    IsCurve.subsingleton_sheafH_of_three_le (X ↘ Spec (.of k)) F
+    IsCurve.subsingleton_sheafH_of_three_le_generic (X ↘ Spec (.of k)) F
       (isTorsion_of_nsmul_id_eq_zero hm0 (nsmul_id_eq_zero_of_mono i t.nsmul_id_pushforwardMu))
       3 le_rfl
   -- `#H²(X, K₂) ≤ m`

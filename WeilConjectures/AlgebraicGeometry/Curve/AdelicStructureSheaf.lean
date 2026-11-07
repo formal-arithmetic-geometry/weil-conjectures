@@ -104,7 +104,7 @@ lemma injective_structureSheafToGeneric_app (U : X.Opens) :
   · intro a b h
     refine germ_injective_of_isIntegral X _ hU ?_
     exact congr_arg (fun t : SkyscraperSections (genericPoint X) X.functionField U ↦ t ⟨hU⟩) h
-  · have : U = ⊥ := eq_bot_iff.2 fun x hx ↦ hU (genericPoint_mem_of_mem hx)
+  · have : U = ⊥ := eq_bot_iff.2 fun x hx ↦ hU (Modules.genericPoint_mem hx)
     subst this
     intro a b _
     exact Subsingleton.elim (α := Γ(X, ⊥)) a b
@@ -144,7 +144,7 @@ lemma localSubalgebra_toSubmodule (x : X) :
 lemma mem_localSubalgebra {x : X} {f : X.functionField} :
     f ∈ localSubalgebra k X x ↔
       ∃ (U : X.Opens) (hx : x ∈ U) (a : Γ(X, U)),
-        X.presheaf.germ U _ (genericPoint_mem_of_mem hx) a = f :=
+        X.presheaf.germ U _ (Modules.genericPoint_mem hx) a = f :=
   Iff.rfl
 
 /-- The local subalgebra `𝒪_{X,x} ⊆ K` is the image of the stalk `𝒪_{X,x} → K`. -/

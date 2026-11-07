@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Compactification.BoundarySeparationData
 public import WeilConjectures.AlgebraicGeometry.Curve.ClosedPoint
 public import WeilConjectures.AlgebraicGeometry.Curve.Divisor
 public import WeilConjectures.AlgebraicGeometry.EffectiveCartierSum
@@ -621,24 +622,19 @@ lemma IdealSheafData.sectionsι_toModulesOfLE {I J : X.IdealSheafData} (h : I �
     J.sectionsι U ((IdealSheafData.toModulesOfLE h).app U m) = I.sectionsι U m :=
   congr($(IdealSheafData.toModulesOfLE_toModulesι h).app U m)
 
-lemma IdealSheafData.mul_le_left' (I J : X.IdealSheafData) : I * J ≤ I := by
-  change (I * J).ideal ≤ I.ideal
-  intro U
-  exact (Ideal.mul_le_left : I.ideal U * J.ideal U ≤ I.ideal U)
-
 /-- **The zero scheme of the inclusion `I J ⊆ I` is `J`.** On an affine open on which `I = (a)`
 and `J = (b)`, the inclusion sends the free generator `a b` of `I J` to `b` times the free
 generator `a` of `I`. -/
 theorem IdealSheafData.IsInvertible.zeroLocus_toModulesOfLE_mul {I J : X.IdealSheafData}
     (hI : I.IsInvertible) (hJ : J.IsInvertible) :
-    Modules.Hom.zeroLocus (IdealSheafData.toModulesOfLE (I.mul_le_left' J)) = J := by
+    Modules.Hom.zeroLocus (IdealSheafData.toModulesOfLE (I.mul_le_self_left J)) = J := by
   have hIJ := hI.mul hJ
   have := hI.isInvertible_toModules
   have := hIJ.isInvertible_toModules
   have := Modules.IsInvertible.sheafOfModules_isInvertible I.toModules
   have := Modules.IsInvertible.sheafOfModules_isInvertible (I * J).toModules
   have key (x : X) : ∃ W : X.affineOpens, x ∈ W.1 ∧
-      (Modules.Hom.zeroLocus (IdealSheafData.toModulesOfLE (I.mul_le_left' J))).ideal W =
+      (Modules.Hom.zeroLocus (IdealSheafData.toModulesOfLE (I.mul_le_self_left J))).ideal W =
         J.ideal W := by
     obtain ⟨W, hxW, -, ⟨a, ha⟩, b, hb⟩ :=
       hI.isLocallyPrincipal.exists_ideal_eq_span₂ hJ.isLocallyPrincipal (O := ⊤) (y := x) trivial
@@ -664,10 +660,11 @@ theorem IdealSheafData.IsInvertible.nonempty_toModules_iso_dual_tensorObj_mul
   have := Modules.IsInvertible.sheafOfModules_isInvertible I.toModules
   have := Modules.IsInvertible.sheafOfModules_isInvertible (I * J).toModules
   have h := IdealSheafData.IsInvertible.zeroLocus_toModulesOfLE_mul hI hJ
-  have hZ : (Modules.Hom.zeroLocus (IdealSheafData.toModulesOfLE (I.mul_le_left' J))).IsInvertible
+  have hZ :
+      (Modules.Hom.zeroLocus (IdealSheafData.toModulesOfLE (I.mul_le_self_left J))).IsInvertible
     := by rw [h]; exact hJ
   obtain ⟨e⟩ := Modules.Hom.nonempty_iso_dual_toModules_tensorObj
-    (IdealSheafData.toModulesOfLE (I.mul_le_left' J)) hZ
+    (IdealSheafData.toModulesOfLE (I.mul_le_self_left J)) hZ
   exact ⟨e ≪≫ eqToIso (by rw [h])⟩
 
 variable [IsIntegral X]

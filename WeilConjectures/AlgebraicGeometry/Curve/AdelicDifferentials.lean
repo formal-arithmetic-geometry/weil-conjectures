@@ -198,7 +198,7 @@ theorem injective_differentialsToGeneric_app [Smooth (X ↘ Spec (.of k))] (U : 
   choose W hW hxW hWU using hb
   refine F.eq_of_locally_eq' (U := W) U (fun x ↦ homOfLE (hWU x))
     (fun x hx ↦ Opens.mem_iSup.2 ⟨⟨x, hx⟩, hxW ⟨x, hx⟩⟩) s t fun x ↦ ?_
-  have hη : genericPoint X ∈ W x := genericPoint_mem_of_mem (hxW x)
+  have hη : genericPoint X ∈ W x := Modules.genericPoint_mem (hxW x)
   refine injective_genericValue_differentialsToGeneric k (hW x) hη ?_
   change Modules.genericValue _ hη (_root_.AlgebraicGeometry.Scheme.Modules.presheaf _ |>.map
     (homOfLE (hWU x)).op s) = Modules.genericValue _ hη (Modules.presheaf _ |>.map
@@ -217,7 +217,7 @@ theorem coe_stalkLattice_differentialsToGeneric (x : X) :
   constructor
   · rintro ⟨U, hx, s, rfl⟩
     obtain ⟨W, hW, hxW, hWU⟩ := (Opens.isBasis_iff_nbhd.1 X.isBasis_affineOpens) hx
-    have hη : genericPoint X ∈ W := genericPoint_mem_of_mem hxW
+    have hη : genericPoint X ∈ W := Modules.genericPoint_mem hxW
     let := ((X ↘ Spec (.of k)).specStructureMap W).hom.toAlgebra
     have hA : algebraMap k Γ(X, W) = ((X ↘ Spec (.of k)).specStructureMap W).hom := rfl
     obtain ⟨ω, hω⟩ := ((X ↘ Spec (.of k)).kaehlerSectionsEquiv W hA hW).surjective

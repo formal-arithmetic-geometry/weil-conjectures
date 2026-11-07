@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.Limits
 public import WeilConjectures.AlgebraicGeometry.Curve.GenericCohomologicalDimension
 public import WeilConjectures.AlgebraicGeometry.Curve.GenericComparison
 public import WeilConjectures.AlgebraicGeometry.Curve.FunctionFieldUnits
@@ -53,27 +54,10 @@ namespace AlgebraicGeometry
 
 namespace Scheme
 
-/-- A scheme with a single point is affine: an affine open neighbourhood of the point is the
-whole scheme. -/
-lemma isAffine_of_subsingleton (X : Scheme.{u}) [Subsingleton X] : IsAffine X := by
-  cases isEmpty_or_nonempty X with
-  | inl _ => infer_instance
-  | inr hX =>
-  obtain ⟨x⟩ := hX
-  obtain ⟨_, ⟨U, hU, rfl⟩, hxU, -⟩ :=
-    X.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ x) isOpen_univ
-  have hU' : U = ⊤ := by
-    ext y
-    simp only [TopologicalSpace.Opens.coe_top, Set.mem_univ, iff_true]
-    exact Subsingleton.elim x y ▸ hxU
-  subst hU'
-  have : IsAffine (⊤ : X.Opens).toScheme := hU
-  exact .of_isIso X.topIso.inv
-
 /-- The global sections of a nonempty reduced scheme with a single point form a field. -/
 lemma isField_Γ_of_subsingleton (X : Scheme.{u}) [Subsingleton X] [Nonempty X] [IsReduced X] :
     IsField Γ(X, ⊤) := by
-  have := X.isAffine_of_subsingleton
+  have := instIsAffineOfSubsingletonCarrierCarrierCommRingCat (X := X)
   obtain ⟨x⟩ := ‹Nonempty X›
   have : Nonempty (⊤ : X.Opens) := ⟨⟨x, trivial⟩⟩
   rw [← PrimeSpectrum.subsingleton_iff_isField_of_isReduced]
@@ -106,7 +90,7 @@ theorem subsingleton_sheafH_upperStar_gmSheaf_of_isAffine {K : Type u} [Field K]
   have : IsReduced ((Functor.fromPUnit (Spec (.of K))).obj W.right) :=
     inferInstanceAs (IsReduced (Spec (.of K)))
   have : IsReduced U.toScheme := isReduced_of_etale (U.ι ≫ W.hom)
-  have := U.toScheme.isAffine_of_subsingleton
+  have := instIsAffineOfSubsingletonCarrierCarrierCommRingCat (X := U.toScheme)
   let := (U.toScheme.isField_Γ_of_subsingleton).toField
   obtain ⟨φ, hφ⟩ := Spec.map_surjective (U.toScheme.isoSpec.inv ≫ U.ι ≫ W.hom)
   have hφe : φ.hom.Etale := by

@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.Curve.HighDegreeVanishing
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.TorsorUnits
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 
@@ -115,19 +116,6 @@ lemma injective_kernel_ι_app (φ : F ⟶ G) (U : X.Etaleᵒᵖ) :
   have : Mono ((kernel.ι φ).hom.app U) :=
     inferInstanceAs (Mono (((sheafToPresheaf _ _).map (kernel.ι φ)).app U))
   exact (AddCommGrpCat.mono_iff_injective _).1 this
-
-lemma exists_kernel_ι_app_eq (φ : F ⟶ G) {U : X.Etale} (x : F.obj.obj (op U))
-    (hx : φ.hom.app (op U) x = 0) :
-    ∃ y : (kernel φ).obj.obj (op U), (kernel.ι φ).hom.app (op U) y = x := by
-  let E := sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙
-    (CategoryTheory.evaluation _ _).obj (op U)
-  let e := PreservesKernel.iso E φ ≪≫ AddCommGrpCat.kernelIsoKer (E.map φ)
-  refine ⟨e.inv ⟨x, hx⟩, ?_⟩
-  have h₁ := PreservesKernel.iso_inv_ι E φ
-  have h₂ := AddCommGrpCat.kernelIsoKer_inv_comp_ι (E.map φ)
-  change (e.inv ≫ E.map (kernel.ι φ)) ⟨x, hx⟩ = x
-  rw [Iso.trans_inv, Category.assoc, h₁, h₂]
-  rfl
 
 lemma kernel_ι_app_apply_eq_zero (φ : F ⟶ G) (U : X.Etaleᵒᵖ) (y : (kernel φ).obj.obj U) :
     φ.hom.app U ((kernel.ι φ).hom.app U y) = 0 := by
@@ -342,12 +330,12 @@ lemma epi_extSeq_g : Epi t.extSeq.g := by
       rw [← muDiff_ι, app_apply_comp, hv, map_zero]
     obtain ⟨-, -, -, y, hy, hDy⟩ := t.exists_of_gmDiff_eq_zero (pullback.snd U.hom t.π)
       (t.coverObj_section U) w hw hDw
-    obtain ⟨v', hv'⟩ := exists_kernel_ι_app_eq (m • 𝟙 t.pushforwardGm) y
+    obtain ⟨v', hv'⟩ := AlgebraicGeometry.Etale.exists_kernel_ι_app_eq (m • 𝟙 t.pushforwardGm) y
       (by rw [nsmul_id_app, hy])
     have hDv' : t.muDiff.hom.app (op U') v' = v := by
       apply injective_kernel_ι_app
       rw [← app_apply_comp, muDiff_ι, app_apply_comp, hv', hDy]
-    obtain ⟨k, hk⟩ := exists_kernel_ι_app_eq (t.muDiff ≫ t.muDiff) v'
+    obtain ⟨k, hk⟩ := AlgebraicGeometry.Etale.exists_kernel_ι_app_eq (t.muDiff ≫ t.muDiff) v'
       (by rw [app_apply_comp, hDv', hv])
     refine ⟨k, injective_kernel_ι_app _ _ ?_⟩
     change (kernelCompToKernel t.muDiff ≫ kernel.ι _).hom.app _ k = v
@@ -392,7 +380,8 @@ lemma isIso_muUnit : IsIso t.muUnit := by
         rw [← muDiff_ι, app_apply_comp, hv, map_zero]
       obtain ⟨c, hc, hcw, -⟩ := t.exists_of_gmDiff_eq_zero (pullback.snd U.hom t.π)
         (t.coverObj_section U) w hw hDw
-      obtain ⟨r, hr⟩ := exists_kernel_ι_app_eq (m • 𝟙 Y.gmSheaf) c (by rw [nsmul_id_app, hc])
+      obtain ⟨r, hr⟩ := AlgebraicGeometry.Etale.exists_kernel_ι_app_eq (m • 𝟙 Y.gmSheaf) c
+        (by rw [nsmul_id_app, hc])
       refine ⟨r, injective_kernel_ι_app _ _ (injective_kernel_ι_app _ _ ?_)⟩
       change (t.muUnit ≫ kernel.ι t.muDiff ≫ kernel.ι (m • 𝟙 t.pushforwardGm)).hom.app _ r = w
       rw [hι, app_apply_comp]
@@ -607,7 +596,7 @@ lemma epi_rhoK : Epi t.rhoK := by
       rw [← muDiff_ι_assoc, ← muDiff_ι, ← Category.assoc, app_apply_comp, hv, map_zero]
     obtain ⟨y, hy, hρy⟩ := t.exists_rhoW_eq (pullback.snd U.hom t.π) (t.coverObj_section U)
       w hw hDDw
-    obtain ⟨v', hv'⟩ := exists_kernel_ι_app_eq (m • 𝟙 t.pushforwardGm) y
+    obtain ⟨v', hv'⟩ := AlgebraicGeometry.Etale.exists_kernel_ι_app_eq (m • 𝟙 t.pushforwardGm) y
       (by rw [nsmul_id_app, hy])
     refine ⟨v', injective_kernel_ι_app _ _ (injective_kernel_ι_app _ _ ?_)⟩
     change (t.rhoK ≫ kernel.ι _ ≫ kernel.ι (m • 𝟙 t.pushforwardGm)).hom.app _ v' = w

@@ -125,9 +125,9 @@ theorem proper_constant_base_change_higher [IsCurve f] [Smooth f] [ConnectedSpac
               hvanD (eH.hom x) (eH.hom y))⟩
       exact ⟨fun _ _ _ ↦ Subsingleton.elim _ _, fun y ↦ ⟨0, Subsingleton.elim _ _⟩⟩
     · have hq3 : 3 ≤ q := by omega
-      have : Subsingleton (Sheaf.H A q) := subsingleton_sheafH_of_three_le f A ht q hq3
+      have : Subsingleton (Sheaf.H A q) := subsingleton_sheafH_of_three_le_generic f A ht q hq3
       have : Subsingleton (Sheaf.H ((Etale.upperStar AddCommGrpCat.{u + 1} ι').obj A) q) :=
-        subsingleton_sheafH_of_three_le f' _ (Etale.isTorsion_upperStar ι' ht) q hq3
+        subsingleton_sheafH_of_three_le_generic f' _ (Etale.isTorsion_upperStar ι' ht) q hq3
       exact ⟨fun _ _ _ ↦ Subsingleton.elim _ _, fun y ↦ ⟨0, Subsingleton.elim _ _⟩⟩
   · let F₀ := (Etale.upperStar (ModuleCat.{u + 1} Λ) (𝟙 C)).obj F
     have hF₀ : r • 𝟙 F₀ = 0 := by
