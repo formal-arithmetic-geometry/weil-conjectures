@@ -120,7 +120,6 @@ private theorem section_eval_zero
   exact projection_zero_of_iso (upperStarCongr Λ hs.symm) k _ _
     (upperStarCongr_hom_app_stalkLowerStarProj Λ hs.symm hs rfl N) hk
 
-set_option maxHeartbeats 400000 in
 -- Explicit internal-module comparisons require additional elaboration heartbeats.
 private theorem sections_detect
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -248,7 +247,6 @@ private theorem projection_zero_congr
   rw [stalkLowerStarProj_upperStarCongr_hom_app Λ e hg hh N]
   exact hk
 
-set_option maxHeartbeats 400000 in
 -- Graphs enter the pullback comparisons through their projection equations.
 private theorem graphs_detect
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -349,7 +347,6 @@ private theorem deck_projection_congr
   subst h
   rfl
 
-set_option maxHeartbeats 1600000 in
 -- Explicit internal-module comparisons require additional elaboration heartbeats.
 private theorem deck_evaluation_add
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -410,7 +407,6 @@ private theorem average_evaluation_mono
     rw [Category.assoc, hi, Linear.comp_smul, hk, smul_zero]
   exact (cancel_mono (image.ι e)).1 (by simpa using hz)
 
-set_option maxHeartbeats 1600000 in
 -- Explicit internal-module comparisons require additional elaboration heartbeats.
 /-- Evaluation on a character-projector image is monic on a transitive finite cover.
 Source: blueprint lem-fd-as-characters Step 5, the eigenfunction calculation, and

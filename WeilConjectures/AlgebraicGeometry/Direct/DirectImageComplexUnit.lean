@@ -64,7 +64,7 @@ private theorem resolution_identity_hom
     Iso.app_hom, quotient_hom_id,
     Category.id_comp, Category.id_comp, Category.comp_id]
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- The unit equation crosses three derived categories and their quotient comparisons.
 private theorem leray_complex_unit
     {X Y : RingedSpace.{u}}

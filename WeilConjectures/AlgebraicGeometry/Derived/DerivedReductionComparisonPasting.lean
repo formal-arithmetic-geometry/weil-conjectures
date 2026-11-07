@@ -98,7 +98,6 @@ variable {BY BY' BX BX' DY DY' DX DX' : Type*}
   (εX : DerivedCategory.Q ⋙ MX ⟶ RX.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)
   (εX' : DerivedCategory.Q ⋙ MX' ⟶ RX'.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)
 
-set_option maxHeartbeats 400000 in
 -- The pasting computation unfolds four reduction squares and two exact squares.
 /-- Reduction comparisons normalized on good complexes paste along squares of exact
 functors, provided the underlying ordinary comparisons paste. -/

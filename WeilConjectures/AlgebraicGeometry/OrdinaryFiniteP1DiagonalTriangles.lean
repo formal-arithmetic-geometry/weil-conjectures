@@ -129,7 +129,7 @@ theorem ordinaryFiniteP1_diagonal_triangles (N : ℕ) (hN : 0 < N)
   let : IsLocallyNoetherian P := LocallyOfFiniteType.isLocallyNoetherian q
   let : CompactSpace P := QuasiCompact.compactSpace_of_compactSpace q
   let : IsNoetherian P := ⟨⟩
-  let hP := ordinaryFiniteP1_isUnit N S hS
+  let hP := affineTraceProjectiveInvertible N S hS
   let L := (ordinaryFiniteLine A N hA S)⟦(2 : ℤ)⟧
   let w := ordinaryFiniteShiftedLinePullback A N hA t q hS
   let w₂ : (ordinaryFinitePullback A (pullback.snd q q)).obj
@@ -173,7 +173,7 @@ theorem ordinaryFiniteP1_diagonal_triangles (N : ℕ) (hN : 0 < N)
         (Scheme.finiteEtaleTateLine (pullback q q) N A hA) κ)
       (projectiveLineDiagonalAlpha A S a)
       (ordinaryFiniteP1DiagonalChartMap A N hA t S hS a ≫
-        (b (ProjectiveLine S) (ordinaryFiniteP1_isUnit N S hS)).inv ≫ biprod.snd)).trans
+        (b (ProjectiveLine S) (affineTraceProjectiveInvertible N S hS)).inv ≫ biprod.snd)).trans
     simpa only [Category.assoc, q, P] using hh
   have hi₂ : (diagonalPushSection A q).hom.app (ordinaryFiniteUnit A P) ≫
       (ordinaryFinitePushforward A (pullback.snd q q)).map δ ≫ t₂ ≫

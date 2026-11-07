@@ -24,6 +24,7 @@ namespace AlgebraicGeometry.Scheme.ProEt.ClopenScalar
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall
 attribute [-instance] GrothendieckTopology.hasSheafify_proEtTopology
 attribute [-instance] ClopenLocalization.modulesAbelian ClopenLocalization.hasDerived
-attribute [-instance] ClopenLocalization.sheafify ClopenLocalization.locallyBijective
+attribute [-instance] AlgebraicGeometry.ProEtale.surjectiveTower_hasSheafify
+  AlgebraicGeometry.ProEtale.surjectiveTower_wEqualsLocallyBijective
 
 end AlgebraicGeometry.Scheme.ProEt.ClopenScalar

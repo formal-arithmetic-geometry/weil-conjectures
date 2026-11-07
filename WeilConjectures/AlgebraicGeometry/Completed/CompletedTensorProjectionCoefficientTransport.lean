@@ -219,7 +219,7 @@ theorem completedTensorProjectionCoefficientTransport
   let b := CoefficientTensorTransport.pullback f R S c
   let q := CoefficientTensorTransport.pushforward f R S c
   let aX := coefficientTensorModel X S
-  obtain ⟨rho, hTensor⟩ := CoefficientTensorTransport.tensorComparison f R S c aY z aX
+  obtain ⟨rho, hTensor⟩ := CoefficientTensorTransport.tensorComparison_compatibility f R S c aY z aX
   let s0 := aY.tensor.mapIso ((q.app K).symm.prod (Iso.refl Q))
   let t0 := H.mapIso
     (z.tensor.mapIso ((Iso.refl (U.obj K)).prod (b.app Q).symm) ≪≫

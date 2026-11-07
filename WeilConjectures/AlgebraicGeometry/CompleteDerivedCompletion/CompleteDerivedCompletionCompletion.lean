@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.CompleteDerivedCompletionDefs
+import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.CompleteDerivedCompletionLimit
 import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 import Mathlib.CategoryTheory.Adjunction.Limits
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
@@ -67,53 +68,6 @@ attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimi
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
-
-/-- The specified right derived inverse limit has the normalized strict Roos model.
-Source: blueprint Notation 1, Stacks Tag 0941
-(blueprint: det-pbc-complete-derived-completion).
-Proof: use the exact-products comparison for the integral module category. Its
-comparison with ordinary inverse limit is invertible on K-injective towers by the
-construction of the total right derived functor. Reverse the resulting comparison. -/
-theorem roosComparison (T : Scheme.{u}) :
-    Nonempty (DerivedCategory.Q ⋙ rlim l E T ≅ ExactProductsRoos.fibre ⋙ DerivedCategory.Q) := by
-  let : CountableAB4Star (AdicCompletion.Modules l E T) :=
-    .of_epi_π_app_zero (Mod.epiπAppZeroOfEpi
-      Scheme.ProEt.epi_π_app_zero_of_epi_addCommGrpCat)
-  obtain ⟨e, _⟩ := ExactProductsRoos.comparisonIso (rlim l E T)
-    (show (inverseLimit l E T).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶
-      DerivedCategory.Q ⋙ rlim l E T from
-      { app := (inverseLimit l E T).rightDerivedFunctorUnitQ
-        naturality _ _ a := (inverseLimit l E T).rightDerivedFunctorUnitQ_naturality a })
-    (fun I hI ↦ by
-      let := hI
-      change IsIso ((inverseLimit l E T).rightDerivedFunctorUnitQ I)
-      rw [Functor.rightDerivedFunctorUnitQ_eq]
-      infer_instance)
-  exact ⟨e.symm⟩
-
-/-- The constant-tower functor on derived categories is fully faithful, so the
-canonical constant-limit unit is invertible.
-Source: blueprint Notation 4 (blueprint: det-pbc-complete-derived-completion).
-Proof: evaluation at the terminal level is exact and left adjoint to the constant
-functor. Derive this adjunction. The composite constant then evaluation is the identity,
-so the derived constant functor is fully faithful. The unit of any adjunction with
-fully faithful left adjoint is invertible, in particular the specified limit adjunction. -/
-theorem constantLimitUnit_isIso (T : Scheme.{u})
-    (M : DerivedCategory (AdicCompletion.Modules l E T)) :
-    IsIso ((constantLimitAdjunction l E T).unit.app M) := by
-  let a := (UnboundedExactTower.evaluationZeroConstAdjunction
-    (AdicCompletion.Modules l E T)).mapDerivedCategoryRightDerivedAdjunction
-    |>.ofNatIsoRight (constant l E T).rightDerivedFunctorIsoMapDerivedCategory
-  let e : dconstant l E T ⋙ dev l E T 0 ≅ 𝟭 _ :=
-    (Functor.mapDerivedCategoryCompIso (constant l E T) (ev l E T 0)).symm ≪≫
-      Functor.mapDerivedCategoryNatIso
-        (Functor.constCompEvaluationObj (C := ℕᵒᵖ)
-          (D := AdicCompletion.Modules l E T) (op 0)) ≪≫
-      Functor.mapDerivedCategoryIdIso _
-  let h := a.fullyFaithfulROfCompIsoId e
-  let := h.full
-  let := h.faithful
-  infer_instance
 
 /-- Scalar powers are respected by the induced action on every integral module.
 Source: blueprint Notation 3 (blueprint: det-pbc-complete-derived-completion).
@@ -954,7 +908,7 @@ private theorem scalarSource_reduction_zero (T : Scheme.{u})
   obtain ⟨e⟩ := (h T (n + 1) (Nat.succ_pos n)).2.1
   have hzF : IsZero ((DerivedNakayama.reductionFunctor l E T (n + 1)).obj
       (DerivedCategory.Q.obj F)) := hz.of_iso (e.app F)
-  obtain ⟨c⟩ := roosComparison l E T
+  obtain ⟨c⟩ := rlim_roos l E T
   exact hzF.of_iso
     ((DerivedNakayama.reductionFunctor l E T (n + 1)).mapIso (c.app X))
 
@@ -985,7 +939,7 @@ private theorem finiteReduction_kappa_complex (T : Scheme.{u})
     rw [← F.map_comp, ← (rlim l E T).map_comp, augmentation_fac,
       (rlim l E T).map_comp, F.map_comp]
     infer_instance
-  have := constantLimitUnit_isIso l E T (DerivedCategory.Q.obj P)
+  have := constantLimit_unit_isIso l E T (DerivedCategory.Q.obj P)
   change IsIso (F.map ((constantLimitAdjunction l E T).unit.app _ ≫
     (rlim l E T).map ((augmentation l E T).app _)))
   rw [F.map_comp]

@@ -377,7 +377,6 @@ private lemma comparison_restriction_mate (Λ : Type (u + 1)) [CommRing Λ]
   rw [hh]
   exact Equiv.apply_symm_apply _ _
 
-set_option maxHeartbeats 20000 in
 -- Bound the concrete adjunction comparison while diagnosing elaboration.
 set_option backward.defeqAttrib.useBackward true in
 private lemma comparison_extension_mate (Λ : Type (u + 1)) [CommRing Λ]
@@ -408,7 +407,6 @@ noncomputable def comparisonTensorNatIso
     (comparisonUpperStar (ModuleCat.{u + 1} Λ) X).leftDerivedFunctorIsoMapDerivedCategory
     (asIso (comparisonUpperStar (ModuleCat.{u + 1} Λ) X).leftDerivedTensorComparison)
 
-set_option maxHeartbeats 10000 in
 -- Avoid unbounded unfolding while checking the two site comparisons.
 lemma supportComparison_eq (Λ : Type (u + 1)) [CommRing Λ]
     {U X : Scheme.{u}} (j : U ⟶ X) :
@@ -503,7 +501,6 @@ lemma comparison_tensor_app (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
         (ModuleCat.{u + 1} Λ) K := by
   exact tensorTransport_app _ _ _ _ _
 
-set_option maxHeartbeats 15000 in
 -- Bound the comparison of the two composite isomorphisms.
 private lemma comparison_mixed_pullback (Λ : Type (u + 1)) [CommRing Λ]
     {U X : Scheme.{u}} (j : U ⟶ X) :
@@ -528,7 +525,6 @@ private lemma comparison_mixed_pullback (Λ : Type (u + 1)) [CommRing Λ]
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-set_option maxHeartbeats 50000 in
 -- Keep localization elaboration within a fixed bound.
 private lemma comparison_derived_extension_mate (Λ : Type (u + 1)) [CommRing Λ]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]

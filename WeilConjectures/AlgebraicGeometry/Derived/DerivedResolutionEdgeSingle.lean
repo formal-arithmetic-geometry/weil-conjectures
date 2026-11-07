@@ -116,7 +116,7 @@ private theorem single_homology_iso
 variable [∀ X : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 600000 in
 -- The fixed resolution and the two homology factorizations carry large module parameters.
 private theorem resolutionEdge_unit {T S : Scheme.{u}} (g : T ⟶ S) (q : ℤ)
     (J : CochainComplex (SheafOfModules.{u} (moduleRings T.toRingedSpace)) ℤ) :
@@ -186,7 +186,7 @@ private theorem resolutionEdge_unit {T S : Scheme.{u}} (g : T ⟶ S) (q : ℤ)
   simpa only [Functor.map_comp, Category.assoc, HomologicalComplex.homologyMap,
     HomologicalComplex.sc, F] using hh
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- Integer singles have several definitionally equal quotient and homotopy presentations.
 /-- The constructed edge on a single complex is normalized by the derived unit.
 Source: Stacks, Tags 0BKJ and 079W

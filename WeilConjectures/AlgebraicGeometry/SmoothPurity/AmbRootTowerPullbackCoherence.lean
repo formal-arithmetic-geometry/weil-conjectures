@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.PerfectProjection.PerfectProjectionFormula
 public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleRootsOfUnityInverseImageSupplement
 public import WeilConjectures.AlgebraicGeometry.SmoothPurity.RootsOfUnityInverseImageIso
 public import WeilConjectures.AlgebraicGeometry.Pur.PurTwistSheavesSupplement
@@ -40,12 +41,6 @@ variable (l : ℕ) [Fact l.Prime]
 
 set_option maxHeartbeats 100000 in
 -- Bound the one-time search for the cached sheafification proof.
-/-- The canonical constant-ring sheafification instance, cached for the constructions below. -/
-theorem ambRootCommRingSheafify (S : Scheme.{u}) :
-    HasWeakSheafify (ProEt.topology S) CommRingCat.{u + 1} := inferInstance
-
-set_option maxHeartbeats 100000 in
--- Bound the one-time search for the cached sheafification proof.
 /-- The canonical ring sheafification instance, cached for the constructions below. -/
 theorem ambRootRingSheafify (S : Scheme.{u}) :
     HasWeakSheafify (ProEt.topology S) RingCat.{u + 1} := inferInstance
@@ -58,7 +53,8 @@ theorem ambRootAbSheafify (S : Scheme.{u}) :
   (CategoryTheory.GrothendieckTopology.hasSheafify_proEtTopology
     AddCommGrpCat.{u + 1} S).isRightAdjoint
 
-attribute [local instance] ambRootCommRingSheafify ambRootRingSheafify ambRootAbSheafify
+attribute [local instance] PerfectProjection.completedCommRingWeakSheafify
+  ambRootRingSheafify ambRootAbSheafify
 
 /-- The canonical limit instance of the existing root tower, cached for its projections. -/
 theorem ambRootHasLimit (S : Scheme.{u}) :
