@@ -72,8 +72,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 variable {X : Scheme.{u}} (U : X.Opens)
 
-/--  is ; instance search does
-not unfold the definition, so the additivity (hence ) is recorded here. -/
+/-- Evaluation at an open subset is additive. -/
 instance (V : X.Opens) : (SheafOfModules.evaluation X.ringCatSheaf (op V)).Additive :=
   inferInstanceAs (SheafOfModules.forget _ ⋙ PresheafOfModules.evaluation _ (op V)).Additive
 

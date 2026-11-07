@@ -392,7 +392,8 @@ private lemma exists_etale_orthogonalIdempotents_aux [Module.Finite A B] (φ : A
         rw [← map_mul, hortho t hs t' hs' htt', map_zero]
     · intro t ht t'
       by_cases h : t = t₀
-      · rw [show e' t = ψ e'' * ∏ s ∈ S, (1 - f (e s)) from ite_eq_left h, map_mul, hval'', map_prod]
+      · rw [show e' t = ψ e'' * ∏ s ∈ S, (1 - f (e s)) from ite_eq_left h, map_mul, hval'',
+          map_prod]
         simp only [map_sub, map_one, hval']
         by_cases ht' : t' = t
         · rw [ite_eq_left ht', ht', h, h₁, one_mul]
@@ -400,7 +401,8 @@ private lemma exists_etale_orthogonalIdempotents_aux [Module.Finite A B] (φ : A
           rw [hval s hs, ite_eq_right (fun h' : t₀ = s ↦ ht₀S (h' ▸ hs)), sub_zero]
         · rw [ite_eq_right ht']
           by_cases ht'S : t' ∈ S
-          · rw [Finset.prod_eq_zero ht'S (by rw [hval t' ht'S, ite_eq_left rfl, sub_self]), mul_zero]
+          · rw [Finset.prod_eq_zero ht'S (by rw [hval t' ht'S, ite_eq_left rfl, sub_self]),
+              mul_zero]
           · rw [hzero t' (fun h' ↦ ht' (h'.trans h.symm)), zero_mul]
       · rw [show e' t = f (e t) from ite_eq_right h, hval']
         exact hval t (Finset.mem_of_mem_insert_of_ne ht h) t'
