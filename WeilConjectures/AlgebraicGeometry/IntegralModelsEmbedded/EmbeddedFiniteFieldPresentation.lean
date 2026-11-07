@@ -180,9 +180,9 @@ theorem finiteFieldPresentation
             I.rightDerivedFunctor ≪≫
           Functor.isoWhiskerLeft S.mapDerivedCategory I.rightDerivedFunctorIsoMapDerivedCategory)
         H.functor.mapDerivedCategory ≪≫
-      Functor.isoWhiskerRight (Functor.mapDerivedCategoryCompIso S I).symm
+      Functor.isoWhiskerRight (Functor.mapDerivedCategoryCompIso S I)
         H.functor.mapDerivedCategory ≪≫
-      (Functor.mapDerivedCategoryCompIso F H.functor).symm⟩
+      Functor.mapDerivedCategoryCompIso F H.functor⟩
   · intro M N e
     have j : F.obj M ≅ N := H.functor.preimageIso e
     refine (finiteHeartConstructibility X A M).trans ?_
