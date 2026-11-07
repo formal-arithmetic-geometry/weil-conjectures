@@ -203,8 +203,6 @@ variable {C D : Type u} [Category.{v} C] [Category.{v} D]
   (J : GrothendieckTopology C) (K : GrothendieckTopology D)
   (A : Type (max u v)) [CommRing A]
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-set_option maxHeartbeats 70000 in
--- Bound the dependent ordinary-data elaboration.
 /-- The geometric morphism and its two ordinary module adjunctions.
 The Hom equations normalize the adjunctions on the underlying sheaves; the fixed-ring
 action is the induced one, as specified by the scalar equation for its direct image.

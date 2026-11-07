@@ -109,9 +109,9 @@ noncomputable def homologySequenceComposableArrows₅Functor
     ((CommSq.mk (T.map f).comm₁).map ((homologyFunctor 𝒜 0).shift n₁)).w
     ((CommSq.mk (T.map f).comm₂).map ((homologyFunctor 𝒜 0).shift n₁)).w
   map_id X := by
-    refine ComposableArrows.hom_ext₅ ?_ ?_ ?_ ?_ ?_ ?_ <;> simp <;> rfl
+    refine ComposableArrows.hom_ext₅ ?_ ?_ ?_ ?_ ?_ ?_ <;> simp
   map_comp f g := by
-    refine ComposableArrows.hom_ext₅ ?_ ?_ ?_ ?_ ?_ ?_ <;> simp <;> rfl
+    refine ComposableArrows.hom_ext₅ ?_ ?_ ?_ ?_ ?_ ?_ <;> simp
 
 lemma homologySequenceComposableArrows₅Functor_obj_exact
     (T : C' ⥤ Triangle (DerivedCategory 𝒜)) (hT : ∀ X, T.obj X ∈ distTriang _)
