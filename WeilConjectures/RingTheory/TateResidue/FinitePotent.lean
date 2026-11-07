@@ -5,7 +5,9 @@ Authors: Claude
 -/
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Exact.Basic
+public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
+public import Mathlib.LinearAlgebra.PID
 
 /-!
 # Finite-potent endomorphisms and their trace
