@@ -26,7 +26,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-set_option maxHeartbeats 800000 in
 -- Comparing the nested chart, triple and small-model diagrams requires extra elaboration.
 set_option backward.isDefEq.respectTransparency false in
 /-- In any affine open chart through which the geometric point factors, the structural

@@ -31,7 +31,7 @@ open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 open scoped TensorProduct
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- Comparing the two lifts requires elaboration of restricted tensor complexes.
 /-- Affine tensor-resolution homology computes the sections of the ordinary total tensor
 with a global K-flat resolution. This is a statement entirely about complexes and homology;
