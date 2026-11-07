@@ -76,7 +76,7 @@ open CategoryTheory Limits
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
-set_option maxHeartbeats 1600000 in
+set_option maxHeartbeats 400000 in
 -- The cocone comparisons below unify large derived module categories.
 /-- The specified scalar-extension/pushforward mate is invertible on integral bounded
 constructible complexes for a qcqs map.

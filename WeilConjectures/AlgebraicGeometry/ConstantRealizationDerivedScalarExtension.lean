@@ -639,7 +639,7 @@ Proof: derived change of rings supplies an everywhere defined left derived tenso
 functor computed by K-flat resolutions. The derived adjunction theorem identifies
 its right adjoint with exact restriction. Transport along the canonical equivalences
 of localization universes gives the independently sized source and target. -/
-theorem derivedRestriction_isRightAdjoint :
+@[instance] theorem derivedRestriction_isRightAdjoint :
     (derivedRestriction.{u, v, dR, dS} J q).IsRightAdjoint := by
   let Ft := derivedRestriction.{u, v, dR, dS} J q
   let QAR := @DerivedCategory.Q (realizationModules J R) _ _
@@ -687,12 +687,6 @@ theorem derivedRestriction_isRightAdjoint :
     Localization.liftNatIso QBS WB (H ⋙ QAR) (H ⋙ QAR) Ft G (Iso.refl _)
   exact Functor.isRightAdjoint_of_iso i.symm
 
-/-- The sheaf scalar adjunction instance, supplied by the named existence theorem.
-Source: Stacks 07A6 (auxiliary; not a blueprint node). -/
-instance derivedRestriction_rightAdjoint :
-    (derivedRestriction.{u, v, dR, dS} J q).IsRightAdjoint :=
-  derivedRestriction_isRightAdjoint J q
-
 end SheafDerivedExistence
 
 section Derived
@@ -716,7 +710,7 @@ Proof: apply derived change of rings on the one-object identity-covering site,
 whose module category is ordinary modules. K-flat resolutions compute its everywhere
 defined left derived functor. The derived adjunction theorem identifies exact
 restriction as its right adjoint, for any independently chosen localization sizes. -/
-theorem moduleDerivedRestriction_isRightAdjoint
+instance moduleDerivedRestriction_rightAdjoint
     {A B : Type r} [CommRing A] [CommRing B] (f : A →+* B)
     [HasDerivedCategory.{wR} (ModuleCat.{r} A)]
     [HasDerivedCategory.{wS} (ModuleCat.{r} B)] :
@@ -758,15 +752,6 @@ theorem moduleDerivedRestriction_isRightAdjoint
   let i : Ft ≅ G :=
     Localization.liftNatIso QBS WB (H ⋙ QAR) (H ⋙ QAR) Ft G (Iso.refl _)
   exact Functor.isRightAdjoint_of_iso i.symm
-
-/-- The module scalar adjunction instance, supplied by the named existence theorem.
-Source: Stacks 07A6 (auxiliary; not a blueprint node). -/
-instance moduleDerivedRestriction_rightAdjoint
-    {A B : Type r} [CommRing A] [CommRing B] (f : A →+* B)
-    [HasDerivedCategory.{wR} (ModuleCat.{r} A)]
-    [HasDerivedCategory.{wS} (ModuleCat.{r} B)] :
-    (moduleDerivedRestriction.{wR, wS, r} f).IsRightAdjoint :=
-  moduleDerivedRestriction_isRightAdjoint f
 
 /-- Derived scalar tensor of ordinary modules, fixed by its adjunction.
 Source: Stacks 06YY (auxiliary; not a blueprint node). -/
