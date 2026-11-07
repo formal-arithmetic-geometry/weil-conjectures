@@ -103,7 +103,6 @@ private theorem coefficient_one
 attribute [local irreducible] sectionAdjoint pure positive
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 800000 in
 -- The normalization fields retain their original direct-image section carriers.
 private theorem ordinary_unit_square
     {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}} {f : X ⟶ Y}
@@ -157,7 +156,7 @@ private theorem ordinary_unit_square
     (tX.equivalence.functor.map q.iso.hom ≫ tX.unitIso.hom) n U z
   exact hleft.trans (hX.symm.trans hright.symm)
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- The derived single-functor comparison rewrites need the larger heartbeat budget.
 /-- The positive pullback comparison respects the coefficient-to-line unit.
 
