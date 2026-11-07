@@ -1,6 +1,6 @@
 name: Docs (doc-gen4)
 
-# Test of building the doc-gen4 documentation on a GitHub-hosted runner, so that it can
+# Test of building the doc-gen4 documentation (on the self-hosted big-server runner), so that it can
 # be served from GitHub Pages and the blueprint can link Lean names to it. This run only
 # builds and measures: the artifact is uploaded in the Pages format but not deployed.
 on:
@@ -24,20 +24,11 @@ env:
 
 jobs:
   docs:
-    runs-on: ubuntu-latest
+    # big-server (Bin Wu's 256-core machine): a 2-thread GitHub-hosted runner did not finish the
+    # documentation within the 6 h job limit.
+    runs-on: [self-hosted, big-server]
     timeout-minutes: 355
     steps:
-      # The project's oleans (~24 GB), Mathlib's (~6.5 GB) and the documentation do not
-      # fit next to everything a hosted runner ships with.
-      - name: Free disk space
-        run: |
-          df -h /
-          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /usr/local/.ghcup \
-            /opt/hostedtoolcache/CodeQL /usr/local/share/boost /usr/share/swift \
-            /usr/local/share/powershell /usr/local/share/chromium /opt/microsoft || true
-          sudo docker image prune --all --force > /dev/null 2>&1 || true
-          df -h /
-
       # History, so that `lake cache get` can look for cached revisions behind HEAD.
       - uses: actions/checkout@v5
         with:
@@ -83,7 +74,7 @@ jobs:
       # Should compile next to nothing; how much it does compile is part of the test.
       - name: Build the project
         env:
-          LEAN_NUM_THREADS: "2"
+          LEAN_NUM_THREADS: "48"
           LAKE_NO_CACHE: "true"
           LAKE_ARTIFACT_CACHE: "false"
         run: |
@@ -121,12 +112,15 @@ jobs:
         env:
           LAKE_NO_CACHE: "true"
           LAKE_ARTIFACT_CACHE: "false"
-          LEAN_NUM_THREADS: "2"
+          LEAN_NUM_THREADS: "48"
           DOCGEN_SRC: github
         run: |
           set -o pipefail
           start=$(date +%s)
-          lake build WeilConjectures:docs 2>&1 | tee "$RUNNER_TEMP/docs.log" | grep -E "error|✖" | head -50 || true
+          # Progress: every 250th finished job, and every failure, with the time since the start.
+          lake build WeilConjectures:docs 2>&1 | tee "$RUNNER_TEMP/docs.log" \
+            | perl -ne 'BEGIN { $| = 1; $s = time } if (/✖|error/) { print; next } if (/\[(\d+)\/\d+\]/ && $1 % 250 == 0) { printf "%5ds %s", time - $s, $_ }' || true
+          echo "jobs by kind: $(grep -oE "Built [A-Za-z]+" "$RUNNER_TEMP/docs.log" | sort | uniq -c | sort -rn | head -5 | tr "\n" " ")"
           echo "docs built in $(( $(date +%s) - start ))s"
           tail -1 "$RUNNER_TEMP/docs.log"
 
