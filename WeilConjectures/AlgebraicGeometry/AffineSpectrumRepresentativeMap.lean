@@ -289,3 +289,8 @@ theorem affineSpectrum_representative_map_eq
     exact affineSpectrum_representative_map_eq_aux g' K K' φ c e e' he he'
 
 end AlgebraicGeometry.SingleComplexBaseChange
+
+namespace AlgebraicGeometry.SingleComplexBaseChange
+/-- Public export of the private `affineSpectrum_representative_map_eq_private` (used by `import all` importers; linter.privateModule). -/
+alias affineSpectrum_representative_map_eq := affineSpectrum_representative_map_eq_private
+end AlgebraicGeometry.SingleComplexBaseChange

@@ -77,7 +77,7 @@ private theorem pure_restrict (A B : Mod.{c, v, r} J R)
     (A.val ⊗ B.val)) ≫ (tensorObjIsoSheafification A B).inv.val
   exact (PresheafOfModules.naturality_apply η f (x ⊗ₜ[R.obj.obj U] y)).symm
 
-private theorem pure_ext (A B N : Mod.{c, v, r} J R) {f g : A ⊗ B ⟶ N}
+private theorem pure_ext_private (A B N : Mod.{c, v, r} J R) {f g : A ⊗ B ⟶ N}
     (h : ∀ U x y, f.val.app U (pure.{c, v, r} J R A B U x y) =
       g.val.app U (pure.{c, v, r} J R A B U x y)) : f = g := by
   apply (cancel_epi (tensorObjIsoSheafification A B).inv).mp
@@ -112,7 +112,7 @@ private theorem pure_ext₃ (A B D N : Mod.{c, v, r} J R)
   apply (SheafOfModules.tensorHomEquiv_kfi (R := R) D (A ⊗ B) N).injective
   change (SheafOfModules.tensorHomEquiv_kfi (R := R) D (A ⊗ B) N
       ((β_ D (A ⊗ B)).hom ≫ f)) = _
-  refine pure_ext.{c, v, r} J R A B (SheafOfModules.homObjSmall_kfi (R := R) D N)
+  refine pure_ext_private.{c, v, r} J R A B (SheafOfModules.homObjSmall_kfi (R := R) D N)
     (f := SheafOfModules.tensorHomEquiv_kfi (R := R) D (A ⊗ B) N ((β_ D (A ⊗ B)).hom ≫ f))
     (g := SheafOfModules.tensorHomEquiv_kfi (R := R) D (A ⊗ B) N ((β_ D (A ⊗ B)).hom ≫ g)) ?_
   intro U x y
@@ -141,7 +141,7 @@ private theorem pure_ext₃ (A B D N : Mod.{c, v, r} J R)
 
 private abbrev Complex := CochainComplex (Mod.{c, v, r} J R) ℤ
 
-private theorem tensorGenerator_ext
+private theorem tensorGenerator_ext_private
     (P Q F : Complex.{c, v, r} J R)
     (φ ψ : (coefficientTotalTensor.{r, c, v} J R).obj (P, Q) ⟶ F)
     (h : ∀ (p q k : ℤ) (hpq : p + q = k) (U : Cᵒᵖ)
@@ -154,11 +154,11 @@ private theorem tensorGenerator_ext
   apply HomologicalComplex.mapBifunctor.hom_ext
     (K₁ := P) (K₂ := Q) (F := curriedTensor (Mod.{c, v, r} J R)) (c := .up ℤ)
   intro p q hpq
-  apply pure_ext.{c, v, r} J R (P.X p) (Q.X q) (F.X k)
+  apply pure_ext_private.{c, v, r} J R (P.X p) (Q.X q) (F.X k)
   intro U x y
   exact h p q k hpq U x y
 
-private theorem tensorGenerator_ext₃
+private theorem tensorGenerator_ext₃_private
     (P Q N F : Complex.{c, v, r} J R)
     (φ ψ : (coefficientTotalTensor.{r, c, v} J R).obj
       ((coefficientTotalTensor.{r, c, v} J R).obj (P, Q), N) ⟶ F)
@@ -434,4 +434,19 @@ theorem ringedTensorConstraint_completion
     model_associator J R S T s u M t ht, model_leftUnitor J R S T s u M t ht,
     model_rightUnitor J R S T s u M t ht⟩, rfl⟩
 
+end CategoryTheory
+
+namespace CategoryTheory
+/-- Public export of the private `pure_ext_private` (used by `import all` importers; linter.privateModule). -/
+alias pure_ext := pure_ext_private
+end CategoryTheory
+
+namespace CategoryTheory
+/-- Public export of the private `tensorGenerator_ext_private` (used by `import all` importers; linter.privateModule). -/
+alias tensorGenerator_ext := tensorGenerator_ext_private
+end CategoryTheory
+
+namespace CategoryTheory
+/-- Public export of the private `tensorGenerator_ext₃_private` (used by `import all` importers; linter.privateModule). -/
+alias tensorGenerator_ext₃ := tensorGenerator_ext₃_private
 end CategoryTheory

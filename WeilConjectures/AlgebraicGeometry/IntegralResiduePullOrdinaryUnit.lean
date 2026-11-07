@@ -100,7 +100,7 @@ private theorem comapUpperStar_forget
   erw [← Category.assoc, hs]
   rfl
 
-private theorem comapUpperStar_inv_forget
+private theorem comapUpperStar_inv_forget_private
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
     (a : Λ ⟶ Λ') [IsMonHom a] {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -146,14 +146,14 @@ private theorem ordinary_vertical_unit
           ((Mod.comap (coefficientMap a Y)).obj N)) := by
     change (lowerStar Ab.{u + 1} f).map
       (((CondensedRing.comapUpperStarIso a f).inv.app N).hom) ≫ _ = _
-    erw [← Functor.map_comp, comapUpperStar_inv_forget]
+    erw [← Functor.map_comp, comapUpperStar_inv_forget_private]
   erw [hm, moduleUnit_forget Λ' f N,
     moduleUnit_forget Λ f ((Mod.comap (coefficientMap a Y)).obj N)]
   rfl
 
 set_option maxHeartbeats 400000 in
 -- The concrete comparisons unfold several coefficient and module functor wrappers.
-private theorem ordinaryScalarUnit
+private theorem ordinaryScalarUnit_private
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
     (a : Λ ⟶ Λ') [IsMonHom a] {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -184,3 +184,13 @@ end AlgebraicGeometry.ProEtale
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 end AlgebraicGeometry.ProEtale.CondensedRing
+
+namespace AlgebraicGeometry.ProEtale
+/-- Public export of the private `comapUpperStar_inv_forget_private` (used by `import all` importers; linter.privateModule). -/
+alias comapUpperStar_inv_forget := comapUpperStar_inv_forget_private
+end AlgebraicGeometry.ProEtale
+
+namespace AlgebraicGeometry.ProEtale
+/-- Public export of the private `ordinaryScalarUnit_private` (used by `import all` importers; linter.privateModule). -/
+alias ordinaryScalarUnit := ordinaryScalarUnit_private
+end AlgebraicGeometry.ProEtale

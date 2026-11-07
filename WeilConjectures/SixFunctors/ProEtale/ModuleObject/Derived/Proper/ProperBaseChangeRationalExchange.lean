@@ -51,13 +51,15 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.Prop
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.IntegralProperBaseChange
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.CoefficientProjectionSquare
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.InternalScalarTensorComparison
+import WeilConjectures.AlgebraicGeometry.CondensedModuleDerivedPushpull
 import all WeilConjectures.AlgebraicGeometry.NormedCoefficientRealization.NormedCoefficientRealization
 import all WeilConjectures.AlgebraicGeometry.Adic.AdicConstructibilityPredicateComparison
 import all WeilConjectures.AlgebraicGeometry.Integral.IntegralCoefficientExtComparison
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Bounded.BoundedConstructibleTensorPreservation
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.LocalizedDirectImageComparison
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperBaseChange.Compatibility
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.CoefficientProjectionSquare
 
 /-!
 # Proper direct image with rational condensed coefficients: proper base change

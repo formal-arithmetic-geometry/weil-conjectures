@@ -183,7 +183,7 @@ Naturality of the right-derived unit then moves the inverse tensor/tilde compari
 to the final direct image. This proves the displayed equation before cancellation
 against the invertible derived pullback counit; no such invertibility is assumed
 here. Zero complexes and zero rings use the same generator calculation. -/
-private theorem affineTildeTensorOrdinaryExchange_preNormalization
+private theorem affineTildeTensorOrdinaryExchange_preNormalization_private
     (R A B D : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing D]
     [Algebra R A] [Algebra R B]
     (M : CochainComplex (ModuleCat.{u} A) ℤ)
@@ -268,4 +268,9 @@ private theorem affineTildeTensorOrdinaryExchange_preNormalization
     (affineBaseChangeTildeComplexIso A D φ M).inv
     (affineTildeTensorOrdinaryExchange_preNormalization_chain R A B D M φ ψ hw k hk)
 
+end AlgebraicGeometry
+
+namespace AlgebraicGeometry
+/-- Public export of the private `affineTildeTensorOrdinaryExchange_preNormalization_private` (used by `import all` importers; linter.privateModule). -/
+alias affineTildeTensorOrdinaryExchange_preNormalization := affineTildeTensorOrdinaryExchange_preNormalization_private
 end AlgebraicGeometry

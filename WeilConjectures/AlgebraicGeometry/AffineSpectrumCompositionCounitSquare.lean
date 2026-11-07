@@ -88,13 +88,13 @@ private theorem reassoc_transported_factorization
     (c ≪≫ e).hom ≫ ε = (l ≫ r) ≫ t :=
   (Category.assoc c.hom e.hom ε).trans (h.trans (Category.assoc l r t).symm)
 
-private theorem eqToIso_congr_symm
+private theorem eqToIso_congr_symm_private
     {C D : Type*} [Category D] (F : C → D) {k l : C} (h : k = l) :
     eqToIso (congrArg F h.symm) = (eqToIso (congrArg F h)).symm := by
   subst l
   rfl
 
-private theorem compare_counit_factorizations
+private theorem compare_counit_factorizations_private
     {C : Type*} [Category C] {U V W A B D : C}
     (c₁ : U ≅ V) (c₂ : W ≅ V) (b₁ : A ≅ B) (b₂ : A ≅ D)
     (ε : V ⟶ A) (l : U ⟶ B) (r : W ⟶ D)
@@ -106,7 +106,7 @@ private theorem compare_counit_factorizations
   simp only [Iso.inv_hom_id_assoc]
   exact ((reassoc_of% h₁) b₂.hom).symm
 
-private noncomputable def selectedComposition
+noncomputable def selectedComposition
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
@@ -114,7 +114,7 @@ private noncomputable def selectedComposition
   (Classical.choose (Classical.choose_spec (Classical.choose_spec
     (Classical.choose_spec exists_derivedPullbackComposition.{u, w})))) f g
 
-private theorem composition_factorization
+private theorem composition_factorization_private
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
@@ -176,7 +176,7 @@ private theorem composition_factorization
   simp only [Functor.comp_obj, Category.assoc] at h ⊢
   exact h
 
-private theorem composition_factorization_transport
+private theorem composition_factorization_transport_private
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (k : X ⟶ Z) (h : f ≫ g = k)
@@ -194,7 +194,7 @@ private theorem composition_factorization_transport
             (Scheme.Modules.tensorPullbackCompositionIso f g k h) (.up ℤ)).app P)).inv := by
   cases h
   simpa only [eqToIso_refl, Iso.trans_refl, Iso.app_hom] using
-    composition_factorization f g P
+    composition_factorization_private f g P
 /-- The composition comparison intertwines the successive derived counits at a complex.
 There is no coefficient morphism, representative isomorphism or K-flatness assumption.
 Source: Stacks Project, Tag 0D5S, composition of derived pullbacks.
@@ -248,12 +248,12 @@ private theorem affineSpectrum_composition_counit_square_aux
   let c₂ := selectedComposition.{u, w} X'.isoSpec.inv g' ≪≫
     (eqToIso (congrArg (fun k ↦ derivedPullback.{u, w} k)
       (Scheme.isoSpec_inv_naturality g'))).symm
-  have h₁ := composition_factorization (Spec.map g'.appTop) X.isoSpec.inv P
-  have h₂ := composition_factorization_transport X'.isoSpec.inv g'
+  have h₁ := composition_factorization_private (Spec.map g'.appTop) X.isoSpec.inv P
+  have h₂ := composition_factorization_transport_private X'.isoSpec.inv g'
     ((Spec.map g'.appTop) ≫ X.isoSpec.inv) (Scheme.isoSpec_inv_naturality g').symm P
-  erw [eqToIso_congr_symm (fun k ↦ derivedPullback.{u, w} k)
+  erw [eqToIso_congr_symm_private (fun k ↦ derivedPullback.{u, w} k)
     (Scheme.isoSpec_inv_naturality g')] at h₂
-  have h := compare_counit_factorizations
+  have h := compare_counit_factorizations_private
     (c₁.app (DerivedCategory.Q.obj P)) (c₂.app (DerivedCategory.Q.obj P))
     (DerivedCategory.Q.mapIso ((NatIso.mapHomologicalComplex b₁ (.up ℤ)).app P))
     (DerivedCategory.Q.mapIso ((NatIso.mapHomologicalComplex b₂ (.up ℤ)).app P))
@@ -325,4 +325,29 @@ theorem affineSpectrum_composition_counit_square
   with_unfolding_all
     exact affineSpectrum_composition_counit_square_aux g' P
 
+end AlgebraicGeometry.SingleComplexBaseChange
+
+namespace AlgebraicGeometry.SingleComplexBaseChange
+/-- Public export of the private `eqToIso_congr_symm_private` (used by `import all` importers; linter.privateModule). -/
+alias eqToIso_congr_symm := eqToIso_congr_symm_private
+end AlgebraicGeometry.SingleComplexBaseChange
+
+namespace AlgebraicGeometry.SingleComplexBaseChange
+/-- Public export of the private `compare_counit_factorizations_private` (used by `import all` importers; linter.privateModule). -/
+alias compare_counit_factorizations := compare_counit_factorizations_private
+end AlgebraicGeometry.SingleComplexBaseChange
+
+namespace AlgebraicGeometry.SingleComplexBaseChange
+/-- Public export of the private `composition_factorization_private` (used by `import all` importers; linter.privateModule). -/
+alias composition_factorization := composition_factorization_private
+end AlgebraicGeometry.SingleComplexBaseChange
+
+namespace AlgebraicGeometry.SingleComplexBaseChange
+/-- Public export of the private `composition_factorization_transport_private` (used by `import all` importers; linter.privateModule). -/
+alias composition_factorization_transport := composition_factorization_transport_private
+end AlgebraicGeometry.SingleComplexBaseChange
+
+namespace AlgebraicGeometry.SingleComplexBaseChange
+/-- Public export of the private `affineSpectrum_composition_counit_square_private` (used by `import all` importers; linter.privateModule). -/
+alias affineSpectrum_composition_counit_square := affineSpectrum_composition_counit_square_private
 end AlgebraicGeometry.SingleComplexBaseChange
