@@ -389,12 +389,6 @@ lemma Scheme.exists_gluing_of_germToFunctionField_eq [IsIntegral X] {ι : Type u
         (Opens.infLERight (V i) (V j)) _ _ (s j)).trans (hs j)).symm
   exact ⟨t, ht⟩
 
-/-- Restriction of sections is compatible with the maps to the function field. -/
-lemma Scheme.germToFunctionField_map_quasiProjective [IsIntegral X] {U V : X.Opens} (h : V ≤ U)
-    [Nonempty V] [Nonempty U] (s : Γ(X, U)) :
-    X.germToFunctionField V (X.presheaf.map (homOfLE h).op s) = X.germToFunctionField U s :=
-  TopCat.Presheaf.germ_res_apply _ _ _ _ _
-
 /-- **A coordinate cover with an affine chart of an integral curve** (Stacks, Tag 09NB). For a
 nonempty affine open `U` of an integral curve `X` over a field, there is a coordinate cover of `X`
 by two charts, one of which is `U`: the second chart `W` is the locus where `f⁻¹` is regular, for
@@ -430,7 +424,7 @@ theorem exists_coordinateCover_of_isAffineOpen {K : Type u} [Field K] (p : X ⟶
     rcases i with _ | x
     · have := hV' none
       have h1 := congrArg (X.germToFunctionField (X.basicOpen f)) hfu.mul_val_inv
-      rw [map_mul, map_one, Scheme.germToFunctionField_map_quasiProjective] at h1
+      rw [map_mul, map_one, Scheme.germToFunctionField_map] at h1
       exact (eq_inv_of_mul_eq_one_right h1)
     · have := hV' (some x)
       rw [← Scheme.algebraMap_germ_eq_germToFunctionField X (hxV x)]
@@ -442,13 +436,13 @@ theorem exists_coordinateCover_of_isAffineOpen {K : Type u} [Field K] (p : X ⟶
   have hUW : Nonempty (U ⊓ W : X.Opens) := ⟨⟨_, X.basicOpen_le f hη, hfW hη⟩⟩
   have hW : Nonempty W := ⟨⟨_, hfW hη⟩⟩
   have htφ : X.germToFunctionField W t = φ := by
-    rw [← hs' none, ← ht none, Scheme.germToFunctionField_map_quasiProjective]
+    rw [← hs' none, ← ht none, Scheme.germToFunctionField_map]
   -- `f t = 1` on `U ∩ W`
   have hab : X.presheaf.map (homOfLE (inf_le_left : U ⊓ W ≤ U)).op f *
       X.presheaf.map (homOfLE (inf_le_right : U ⊓ W ≤ W)).op t = 1 := by
     refine X.germToFunctionField_injective (U ⊓ W) ?_
-    rw [map_mul, map_one, Scheme.germToFunctionField_map_quasiProjective,
-      Scheme.germToFunctionField_map_quasiProjective, htφ]
+    rw [map_mul, map_one, Scheme.germToFunctionField_map,
+      Scheme.germToFunctionField_map, htφ]
     exact mul_inv_cancel₀ hf0
   have hunit₁ := IsUnit.of_mul_eq_one _ hab
   have hunit₂ := IsUnit.of_mul_eq_one_right _ hab

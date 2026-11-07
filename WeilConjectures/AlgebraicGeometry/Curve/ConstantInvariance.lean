@@ -283,10 +283,10 @@ theorem IsConnectedCurve.constant_cohomology_baseChange_compatible
             fun y => ⟨0, Subsingleton.elim _ _⟩⟩
       · have hq' : 3 ≤ q := by omega
         have : Subsingleton (Sheaf.H (C.constantZMod n) q) :=
-          IsCurve.subsingleton_sheafH_of_three_le f _
+          IsCurve.subsingleton_sheafH_of_three_le_generic f _
             (C.isTorsion_constantZMod (NeZero.ne n)) q hq'
         have : Subsingleton (Sheaf.H (P.constantZMod n) q) :=
-          IsCurve.subsingleton_sheafH_of_three_le fK _
+          IsCurve.subsingleton_sheafH_of_three_le_generic fK _
             (P.isTorsion_constantZMod (NeZero.ne n)) q hq'
         exact ⟨fun _ _ _ => Subsingleton.elim _ _,
           fun y => ⟨0, Subsingleton.elim _ _⟩⟩

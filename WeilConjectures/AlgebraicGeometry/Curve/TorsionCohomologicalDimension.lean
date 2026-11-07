@@ -46,7 +46,7 @@ theorem IsCurve.hasTorsionCohomologicalDimensionLE {k : Type u} [Field k] [IsAlg
     {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsCurve f] :
     X.HasTorsionCohomologicalDimensionLE 2 ∧
       (IsAffine X → X.HasTorsionCohomologicalDimensionLE 1) :=
-  ⟨fun F hF q hq ↦ subsingleton_sheafH_of_three_le f F hF q hq,
+  ⟨fun F hF q hq ↦ subsingleton_sheafH_of_three_le_generic f F hF q hq,
     fun _ F hF q hq ↦ subsingleton_sheafH_of_two_le_of_isAffine f F hF q hq⟩
 
 /-- The torsion bound on a curve over a separably closed field `k`: `cd_tor(X) ≤ 2`, and
