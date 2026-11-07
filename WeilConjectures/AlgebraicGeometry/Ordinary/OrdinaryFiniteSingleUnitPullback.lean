@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.Coordinate.CoordinateCoefficientUnitBaseChange
 public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Arrows
 public import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryFiniteP1KummerSupplement
 public import WeilConjectures.AlgebraicGeometry.Relative.RelativeKummerExchangeGeneratorsSupplement
@@ -608,29 +609,5 @@ attribute [local irreducible] DerivedCategory HasDerivedCategory.ofIsGrothendiec
   HasDerivedCategory.ofHasKInjectiveResolutions Functor.leftDerivedFunctor
   Functor.rightDerivedFunctor Functor.mapDerivedCategory DerivedCategory.singleFunctors
   upperStar lowerStar
-
-/-- The specified finite-coefficient inverse image commutes with the native single-unit map.
-Source: latest blueprint sec-smooth-purity/sk-prop-an,
-cor-pur-vector-bundle-purity.proof.md, paragraph 2, scalar integration normalization;
-and thm-amb-p1-adjunction.proof.md, constant-unit normalization.
-(blueprint: lem-pur-ordinary-finite-single-unit-pullback).
-
-Proof: replace each native single-unit map by the proved constantUnit comparison.
-The specified constantUnit_pullback equation then identifies the two composites.
-Congruence with constantUnit_hom on the source and target supplies the two replacements.
--/
-theorem ordinaryFiniteSingleUnitPullback_hom (A : Type (u + 1)) [CommRing A] [Finite A]
-    {S T : Scheme.{u}} (g : T ⟶ S) :
-    (Etale.ordinaryFiniteUnitPullback A g).hom ≫
-        (Etale.singleFunctorObjUnitIso (ModuleCat.{u + 1} A) T).hom =
-      (Etale.ordinaryFinitePullback A g).map
-        (Etale.singleFunctorObjUnitIso (ModuleCat.{u + 1} A) S).hom ≫
-        (Etale.leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} A) g).hom := by
-  exact (congrArg (fun k ↦ (Etale.ordinaryFiniteUnitPullback A g).hom ≫ k)
-      (Etale.SfP1Transport.constantUnit_hom A T).symm).trans
-    ((Etale.SfP1Transport.constantUnit_pullback A g).trans
-      (congrArg (fun k ↦ (Etale.ordinaryFinitePullback A g).map k ≫
-          (Etale.leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} A) g).hom)
-        (Etale.SfP1Transport.constantUnit_hom A S)))
 
 end AlgebraicGeometry.Etale
