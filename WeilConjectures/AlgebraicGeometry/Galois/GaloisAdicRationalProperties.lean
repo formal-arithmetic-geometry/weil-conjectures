@@ -1059,7 +1059,6 @@ variable {Y : Scheme.{u}} [ConnectedSpace Y]
   (Q : Type (u + 1)) [Field Q] [Algebra ℚ_[l] Q] [IsAlgClosure ℚ_[l] Q]
   (d : GaloisLisseAdicData y G c l Q)
 
-set_option maxHeartbeats 8000000 in
 -- The normalized stalk and tensor comparisons have large dependent module types.
 private theorem integralEvaluation_from_construction
     (hcanon : GaloisAdicCanonicalConstruction y G c l Q d) :
@@ -1095,7 +1094,6 @@ private theorem integralEvaluation_from_construction
       (galoisUnderlyingFLC (Padic.coefficientExtensionIntegers l E.val)
         (F.obj.obj (op n)) h) (κ w)) (hproj z)
 
-set_option maxHeartbeats 8000000 in
 -- Allow elaboration of the large dependent representation and fibre comparison types.
 private theorem integral_tensor_from_construction
     (hcanon : GaloisAdicCanonicalConstruction y G c l Q d) :
@@ -1111,7 +1109,6 @@ private theorem integral_tensor_from_construction
     (fun F ↦ ((d.eI E).functor.obj F).obj)
     (fun F ↦ ((d.τI E).app F).toLinearEquiv) c.γ (heval E)
 
-set_option maxHeartbeats 8000000 in
 -- Allow elaboration of the large dependent representation and fibre comparison types.
 private theorem integral_unit_from_construction
     (hcanon : GaloisAdicCanonicalConstruction y G c l Q d) :
@@ -1123,7 +1120,6 @@ private theorem integral_unit_from_construction
     (fun F ↦ ((d.eI E).functor.obj F).obj)
     (fun F ↦ ((d.τI E).app F).toLinearEquiv) c.γ (heval E)
 
-set_option maxHeartbeats 8000000 in
 -- Allow elaboration of the large dependent representation and fibre comparison types.
 omit [ConnectedSpace Y] [IsTopologicalGroup G] [CompactSpace G]
   [IsFundamentalGroup (FiniteEtale.fiber y) G] in
@@ -1172,7 +1168,6 @@ private theorem rational_unit_from_integral
   obtain ⟨η, hη, _⟩ := hcanon.localization E F
   exact ⟨η, hη⟩
 
-set_option maxHeartbeats 8000000 in
 -- Allow elaboration of the large dependent representation and fibre comparison types.
 omit [ConnectedSpace Y] [IsTopologicalGroup G] [CompactSpace G]
   [IsFundamentalGroup (FiniteEtale.fiber y) G] in
@@ -1189,7 +1184,6 @@ private theorem integral_monoidal_from_tensor_unit
     exact tensor_iso_of_comparison _ _ _ e he
   · exact ⟨(hIU E).some.symm⟩
 
-set_option maxHeartbeats 8000000 in
 -- Allow elaboration of the large dependent representation and fibre comparison types.
 omit [ConnectedSpace Y] [IsTopologicalGroup G] [CompactSpace G]
   [IsFundamentalGroup (FiniteEtale.fiber y) G] in
