@@ -81,7 +81,7 @@ theorem isLeftAdjoint_derivedLowerShriek
       (fun φ ↦ by
         apply (WeilComplex.objectProperty k₀ l Y).ι.map_injective
         exact (derivedLowerShriekCompιIso k₀ l c).hom.naturality φ)
-  have := isLeftAdjoint_derivedLowerStar_of_isProper' (k₀ := k₀) (l := l) c.g
+  have := isLeftAdjoint_derivedLowerStar_of_isProper (k₀ := k₀) (l := l) c.g
   have : (extensionByZero (k₀ := k₀) (l := l) c.i).IsLeftAdjoint :=
     (extensionByZeroUpperStarAdjunction c.i).isLeftAdjoint
   exact Functor.isLeftAdjoint_of_iso e.symm
