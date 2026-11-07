@@ -583,16 +583,17 @@ private theorem scalar_computation (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u}
     g.withContext do
       let some d := (← Lean.getLCtx).findFromUserName? `hh |
         throwError "missing comparison hypothesis"
-      let rec diff (fuel : Nat) (a b : Lean.Expr) : Lean.MetaM Unit := do
-        if a == b then return
+      let mut todo := [(d.type, ← g.getType)]
+      for _ in List.range 1000 do
+        let (a, b) :: rest := todo | break
+        todo := rest
+        if a == b then continue
         if ← Lean.withoutModifyingState (Lean.Meta.withTransparency .all
-            (Lean.Meta.isDefEq a b)) then return
-        match fuel, a, b with
-        | n + 1, .app af aa, .app bf ba =>
-          diff n af bf
-          diff n aa ba
-        | _, _, _ => Lean.logInfo m!"MISMATCH: {a} VERSUS {b}"
-      diff 100 d.type (← g.getType)
+            (Lean.Meta.isDefEq a b)) then continue
+        if a.isApp && b.isApp then
+          todo := (a.appFn!, b.appFn!) :: (a.appArg!, b.appArg!) :: todo
+        else
+          Lean.logInfo m!"MISMATCH: {a} VERSUS {b}"
   exact hh
 
 private def section_pull_compute_nat {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -632,16 +633,17 @@ private theorem geometric_computation {X Y : Scheme.{u}} (f : X ⟶ Y)
     g.withContext do
       let some d := (← Lean.getLCtx).findFromUserName? `hh |
         throwError "missing comparison hypothesis"
-      let rec diff (fuel : Nat) (a b : Lean.Expr) : Lean.MetaM Unit := do
-        if a == b then return
+      let mut todo := [(d.type, ← g.getType)]
+      for _ in List.range 1000 do
+        let (a, b) :: rest := todo | break
+        todo := rest
+        if a == b then continue
         if ← Lean.withoutModifyingState (Lean.Meta.withTransparency .all
-            (Lean.Meta.isDefEq a b)) then return
-        match fuel, a, b with
-        | n + 1, .app af aa, .app bf ba =>
-          diff n af bf
-          diff n aa ba
-        | _, _, _ => Lean.logInfo m!"MISMATCH: {a} VERSUS {b}"
-      diff 100 d.type (← g.getType)
+            (Lean.Meta.isDefEq a b)) then continue
+        if a.isApp && b.isApp then
+          todo := (a.appFn!, b.appFn!) :: (a.appArg!, b.appArg!) :: todo
+        else
+          Lean.logInfo m!"MISMATCH: {a} VERSUS {b}"
   exact hh
 
 attribute [local irreducible] complex_iso complex_comp_iso section_localization_iso
