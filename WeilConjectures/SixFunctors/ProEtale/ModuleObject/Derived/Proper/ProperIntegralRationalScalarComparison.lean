@@ -79,9 +79,9 @@ private lemma exact_comp_hom_fac (e : F ⋙ G ≅ H)
   obtain ⟨P, rfl⟩ := HomotopyCategory.quotient_obj_surjective K
   simp only [exact_comp, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
   erw [Functor.mapDerivedCategoryNatIso_fach]
-  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso F G).hom.app
+  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso F G).inv.app
     (DerivedCategory.Q.obj P))).1
-  erw [Iso.hom_inv_id_app_assoc,
+  erw [Iso.inv_hom_id_app_assoc,
     Functor.mapDerivedCategoryCompIso_hom_app_factorsh_assoc]
   rfl
 
