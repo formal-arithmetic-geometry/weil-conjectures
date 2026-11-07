@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.CondensedDerivedTensorComparison
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimitHomSurjColimit
 
 /-! # Canonical coefficient diagrams on complexes -/
 
@@ -117,13 +118,6 @@ namespace AlgebraicGeometry.ProEtale
 open Scheme PadicAlgCl
 variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
 
-/-- Composition of the finite coefficient inclusions. -/
-lemma coefficientComplex_ringMap_comp {E F G : FiniteIntermediateField ℓ}
-    (h : E ≤ F) (k : F ≤ G) :
-    padicSubfieldRingObjMap X ℓ h ≫ padicSubfieldRingObjMap X ℓ k =
-      padicSubfieldRingObjMap X ℓ (h.trans k) := by
-  rw [← coefficientMap_comp, ← Profinite.padicSubfieldRingObjMap_comp]
-
 /-- The termwise coefficient functor, with scalars restricted to `E`. -/
 noncomputable def coefficientComplexStage {E F G : FiniteIntermediateField ℓ}
     (he : E ≤ G) (hf : F ≤ G) :=
@@ -141,8 +135,8 @@ noncomputable def coefficientComplexMap {E F G G' : FiniteIntermediateField ℓ}
     (Mod.mixedScalarNatTrans (padicSubfieldRingObjMap X ℓ hf)
       (padicSubfieldRingObjMap X ℓ hf') (padicSubfieldRingObjMap X ℓ he)
       (padicSubfieldRingObjMap X ℓ he') (padicSubfieldRingObjMap X ℓ h)
-      (coefficientComplex_ringMap_comp X ℓ hf h)
-      (coefficientComplex_ringMap_comp X ℓ he h)) (.up ℤ)).app C
+      (padicSubfieldRingObjMap_comp_padicSubfieldRingObjMap X ℓ hf h)
+      (padicSubfieldRingObjMap_comp_padicSubfieldRingObjMap X ℓ he h)) (.up ℤ)).app C
 
 /-- The canonical coefficient diagram, with actual termwise scalar inclusions as maps.
 Source: the coefficient-algebra construction of the archived `TwoColimit.lean`.
@@ -175,7 +169,7 @@ noncomputable def coefficientComplexDiagram {E F : FiniteIntermediateField ℓ}
     have h : padicSubfieldRingObjMap X ℓ (leOfHom (H.map (f ≫ g))) =
         padicSubfieldRingObjMap X ℓ (leOfHom (H.map f)) ≫
           padicSubfieldRingObjMap X ℓ (leOfHom (H.map g)) :=
-      (coefficientComplex_ringMap_comp X ℓ _ _).symm
+      (padicSubfieldRingObjMap_comp_padicSubfieldRingObjMap X ℓ _ _).symm
     simp only [h]
     exact Mod.mixedScalarMap_comp
       (padicSubfieldRingObjMap X ℓ (hf i)) (padicSubfieldRingObjMap X ℓ (hf j))
@@ -183,8 +177,10 @@ noncomputable def coefficientComplexDiagram {E F : FiniteIntermediateField ℓ}
       (padicSubfieldRingObjMap X ℓ (he j)) (padicSubfieldRingObjMap X ℓ (he k))
       (padicSubfieldRingObjMap X ℓ (leOfHom (H.map f)))
       (padicSubfieldRingObjMap X ℓ (leOfHom (H.map g)))
-      (coefficientComplex_ringMap_comp X ℓ _ _) (coefficientComplex_ringMap_comp X ℓ _ _)
-      (coefficientComplex_ringMap_comp X ℓ _ _) (coefficientComplex_ringMap_comp X ℓ _ _)
+      (padicSubfieldRingObjMap_comp_padicSubfieldRingObjMap X ℓ _ _)
+      (padicSubfieldRingObjMap_comp_padicSubfieldRingObjMap X ℓ _ _)
+      (padicSubfieldRingObjMap_comp_padicSubfieldRingObjMap X ℓ _ _)
+      (padicSubfieldRingObjMap_comp_padicSubfieldRingObjMap X ℓ _ _)
       (C.X n)
 
 /-- Extension to the algebraic closure followed by restriction to `E`, degreewise. -/

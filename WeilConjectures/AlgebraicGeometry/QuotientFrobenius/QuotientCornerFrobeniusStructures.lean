@@ -5,8 +5,10 @@ Authors: Bin Wu
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.SfIntegralReductionTower
 public import WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerExchangeMateNormalization
 public import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearDerivedSections
+public import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 public import WeilConjectures.ProperBaseChange.IntegralFinitePullbackComposition
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcActualRingedExchange
 public import WeilConjectures.CategoryTheory.Ringed.RingedTowerPushforwardLimitComparison
@@ -176,26 +178,9 @@ Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius
 instance (priority := 2000) baseSmall (T : Scheme.{t}) : EssentiallySmall.{t + 1} T.ProEt :=
   essentiallySmallSelf.{0} T.ProEt
 
-/-- Abelian sheafification in the original finite-coefficient universe.
-Source: blueprint paragraph 4
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
-instance (priority := 2100) baseSheafify (T : Scheme.{t}) :
-    HasSheafify (ProEt.topology T) AddCommGrpCat.{t + 1} :=
-  @SemilinearSections.abelianSheafify.{t + 1, t, t + 1} T.ProEt _
-    (essentiallySmallSelf.{0} _) _
+attribute [local instance 2100] WeilConjectures.sfAbSheafify
 
-/-- The locally bijective sheafification criterion in the same finite-coefficient universe.
-Source: blueprint paragraph 4
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
-instance (priority := 2100) baseLocallyBijective (T : Scheme.{t}) :
-    (ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{t + 1} :=
-  @SemilinearSections.locallyBijective.{t + 1, t, t + 1} T.ProEt _
-    (essentiallySmallSelf.{0} _) _
-
-/-- The vertical sequence site is small in the same coefficient universe.
-Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
-instance (priority := 2000) sequenceSiteSmall (T : Scheme.{t}) :
-    EssentiallySmall.{t + 1} (ℕ × T.ProEt) := essentiallySmallSelf.{0} _
+attribute [local instance 2100] WeilConjectures.sfAbBijective
 
 /-- Sheafification in the fixed coefficient universe of the quotient diagram site.
 Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/

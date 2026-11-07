@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Completed.Koszul.CompletedKoszulCoefficientConeRealization
 import WeilConjectures.Algebra.Homology.BifunctorMappingConeNaturality
 import WeilConjectures.AlgebraicGeometry.Completed.Koszul.CompletedKoszulTensorConeComparisonAux
-import WeilConjectures.AlgebraicGeometry.Completed.Koszul.CompletedKoszulTensorAugmentationComponent
+public import WeilConjectures.AlgebraicGeometry.Completed.Koszul.CompletedKoszulTensorAugmentationComponent
 
 /-! # Tensor comparison for normalized completed Koszul augmentation cones
 
@@ -26,13 +26,7 @@ attribute [local instance] completedKoszulCochainMonoidal
   completedKoszulCochainMonoidalStruct
 attribute [local instance] Functor.preservesZeroMorphisms_of_additive
 
-/-- Additivity of the recorded module tensor, with its coefficient sheaf explicit.
-Source: Stacks 03EK (blueprint: lem-weil-pbc-completed-koszul-tensor-cone-comparison). -/
-local instance coneComparisonPreadditive
-    (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A) :
-    MonoidalPreadditive (CompletedAdicModules T d) := by
-  let : EssentiallySmall.{t + 1} T.ProEt := essentiallySmallSelf.{0, t, t + 1} _
-  exact SheafOfModules.cochainModulesPreadditive (completedAdicCommRing T d)
+attribute [local instance] augmentationComponentPreadditive
 
 attribute [local irreducible] completedAdicRing
 

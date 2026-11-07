@@ -5,7 +5,9 @@ Authors: Bin Wu
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.SfIntegralReductionTower
 public import WeilConjectures.SixFunctors.Supporting.AdjunctConjugateOpenFactor
+public import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 public import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearDerivedSections
 public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.OpenTensorNormalization
 public import WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerProperOpenArrows
@@ -675,21 +677,10 @@ end DerivedConstantSquare
 
 namespace AlgebraicGeometry.ProEtale.SemilinearProperOpen
 
-/-- Ring sheafification in the fixed coefficient universe, using the recorded transport.
-Source: Stacks 00W1 (blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/
-instance constantRingSheafify (X : Scheme.{u}) :
-    HasSheafify (ProEt.topology X) CommRingCat.{u + 1} :=
-  integralCoefficientRingSheafify.{u, u + 1} X
-
 /-- The original site is essentially small in the coefficient universe.
 Source: the small-site convention
 (blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/
 instance proEtSmall (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.ProEt :=
-  essentiallySmallSelf.{0, u, u + 1} _
-
-/-- The sequence site has the same fixed smallness universe.
-Source: Zheng 4.1 (blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/
-instance sequenceSmall (X : Scheme.{u}) : EssentiallySmall.{u + 1} (ℕ × X.ProEt) :=
   essentiallySmallSelf.{0, u, u + 1} _
 
 variable (C : ℕ → CommRingCat.{u + 1}) (τ : ∀ n : ℕ, C (n + 1) ⟶ C n)

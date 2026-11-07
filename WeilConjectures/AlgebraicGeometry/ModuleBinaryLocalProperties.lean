@@ -149,7 +149,7 @@ end SiteHelpers
 namespace AlgebraicGeometry.Scheme.Modules
 
 set_option backward.defeqAttrib.useBackward true in
-set_option maxHeartbeats 600000 in
+set_option maxHeartbeats 400000 in
 -- Transport across iterated slice sites requires additional elaboration.
 set_option backward.isDefEq.respectTransparency false in
 /-- Quasi-coherence and finite type descend from the two members of a binary open cover.

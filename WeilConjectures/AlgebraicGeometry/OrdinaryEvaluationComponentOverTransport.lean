@@ -32,13 +32,9 @@ namespace AlgebraicGeometry
 
 attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
 
-noncomputable local instance ordinaryComponentOverPreadditive (X : Scheme.{u}) (U : X.Opens) :
-    MonoidalPreadditive (localEvaluationModules X U) :=
-  Classical.choice (SheafOfModules.tensorClosed (X.sheaf.over U)).1
+attribute [local instance] ordinaryComponentIdentityOverPreadditive
 
-noncomputable local instance ordinaryComponentSchemePreadditive (Y : Scheme.{u}) :
-    MonoidalPreadditive (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) :=
-  Classical.choice (SheafOfModules.tensorClosed Y.sheaf).1
+attribute [local instance] ordinaryComponentIdentitySchemePreadditive
 
 attribute [local irreducible] homComplexFunctor Scheme.Modules.overEquiv
   schemeOrdinaryEvaluationComponent

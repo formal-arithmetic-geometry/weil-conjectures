@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.SfIntegralReductionTower
 public import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearDerivedSections
 public import WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerOpenExtension
 public import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses

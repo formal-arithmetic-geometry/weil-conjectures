@@ -29,7 +29,6 @@ namespace AlgebraicGeometry
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 
-set_option maxHeartbeats 800000 in
 -- Comparing normalized adjunctions compares the shared localization instances.
 /-- The legacy pullback adjunction is the original-counit adjunction transported
 back along the unique change of universal counit. This equation records the

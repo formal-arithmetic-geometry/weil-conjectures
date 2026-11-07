@@ -151,7 +151,6 @@ private theorem finiteSetLocal_congr {Y : Scheme.{v}}
     exact Finite.of_equiv _
       (((pointSmallEtale s).sheafFiber (A := Type (v + 1))).mapIso e).toEquiv
 
-set_option maxHeartbeats 1000000 in
 -- Comparing coefficient structures and stratifications requires substantial reduction.
 /-- An abelian sheaf killed by a positive integer is torsion and has a unique cyclic-ring
 module structure. Underlying-set constructibility of the curve coefficient pair agrees
