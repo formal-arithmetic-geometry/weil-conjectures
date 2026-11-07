@@ -113,33 +113,36 @@ private theorem properHeartHigherDirectImage_preservesFilteredColimits
     PreservesFilteredColimitsOfSize.{u + 1, u + 1}
       (properHeartHigherDirectImage Λ p q) := by
   let A := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)
+  -- Cache the zero morphisms of `A`: searching for them under `truncGEFunctor` times out
+  -- (same route as `higherDirectImage_filtered` in EllAdicProperHeartUniformBound).
+  let : HasZeroMorphisms A := inferInstance
+  have : HasColimitsOfSize.{u + 1, u + 1} A := inferInstance
   let S := CochainComplex.singleFunctor A 0
   let T := DerivedCategory.Q ⋙ (CondensedRing.lowerStar Λ p).rightDerivedFunctor ⋙
     DerivedCategory.homologyFunctor _ q
   constructor
   intro I _ _
-  have : HasColimitsOfShape I A := inferInstance
-  have : HasColimitsOfShape I
-      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) :=
-    inferInstance
+  have : HasColimitsOfShape I (CochainComplex A ℤ) := inferInstance
   constructor
   intro M
   have : PreservesColimit M S := by
     change PreservesColimit M (HomologicalComplex.single A (.up ℤ) 0)
     infer_instance
   let D := M ⋙ S
+  let π := Functor.whiskerLeft D ((ComplexShape.embeddingUpIntGE 0).πTruncGENatTrans A)
+  have hπ (i : I) : IsIso (π.app i) :=
+    inferInstanceAs (IsIso ((S.obj (M.obj i)).πTruncGE 0))
+  have : IsIso π := NatIso.isIso_of_isIso_app π
   have hc : IsColimit (condensedContinuityCocone D 0) :=
-    canonicalContinuityIsColimit D 0 (fun _ ↦ inferInstance)
+    (IsColimit.precomposeHomEquiv (asIso π) _).symm (colimit.isColimit _)
   have ht : IsIso (condensedContinuityComparison D 0 T) :=
     condensed_qcqs_pushforward_continuity Λ p D 0
       (fun i n hn ↦ (S.obj (M.obj i)).isZero_of_isGE 0 n hn) q
-  change IsIso (colimit.desc (D ⋙ T) (T.mapCocone (condensedContinuityCocone D 0))) at ht
-  have : IsIso (colimit.post D T) :=
-    comparison_of_colimitCocone D (condensedContinuityCocone D 0) (colimit.cocone D)
-      hc (colimit.isColimit D) T
-  have : PreservesColimit D T := preservesColimit_of_isIso_post T D
+  have hcT : IsColimit (T.mapCocone (condensedContinuityCocone D 0)) :=
+    IsColimit.ofPointIso (colimit.isColimit (D ⋙ T)) (i := ht)
+  have : PreservesColimit D T := preservesColimit_of_preserves_colimit_cocone hc hcT
   change PreservesColimit M (S ⋙ T)
-  infer_instance
+  exact comp_preservesColimit S T
 
 set_option synthInstance.maxHeartbeats 100000 in
 -- Coproduct inference for internal modules needs the same search budget as filtered colimits.
