@@ -26,7 +26,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 600000 in
 -- Elaborating naturality across the composed affine equivalences needs more heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 /-- The finite completed-module equivalence with natural local section cones.

@@ -38,7 +38,7 @@ the mate equations for `exchange1` and `exchange2` identify the two base-change
 routes.  The tensor comparison for the pullback square then identifies the resulting
 maps, and the counit equation for `directComparison` identifies their direct-image
 targets.  This is the pullback-counit calculation; the final cancellation by the
-adjunction is performed by `coordinateKunnethFactorization`.
+adjunction is performed by `coordinateKunnethFactorization_route_eq`.
 (auxiliary; not a blueprint node). -/
 theorem coordinateKunnethFactorization_transpose [Finite A] {X Y : Scheme.{u}}
     (f : X ⟶ Y) [IsProper f] (L : DerivedCategoryModule A Y)

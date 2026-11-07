@@ -17,6 +17,7 @@ import Mathlib.Algebra.Category.Grp.AB
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import WeilConjectures.AlgebraicGeometry.ZariskiEtalePushedResolution
 import WeilConjectures.AlgebraicGeometry.ZariskiEtaleResolutionMap
+import WeilConjectures.AlgebraicGeometry.ZariskiEtaleResolutionHomologyDataExists
 import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 
 /-! # Canonical Leray comparison for the Zariski-to-étale morphism
@@ -151,7 +152,7 @@ theorem zariski_etale_canonical_leray
     simp [R, a, HomologicalComplex.singleMapHomologicalComplex_inv_app_self]
   intro q V
   obtain ⟨e₁, e₂, hcomp⟩ :=
-    zariski_etale_resolution_map i hi fstar hfstar F I R (𝟙 R.cocomplex) he q V
+    zariski_etale_resolution_homology_data_exists i hi fstar hfstar F I R (𝟙 R.cocomplex) he q V
   let E := sheafToPresheaf (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u + 1} ⋙
     (evaluation X.Opensᵒᵖ AddCommGrpCat.{u + 1}).obj (op V)
   let b := HomologicalComplex.homologyMap

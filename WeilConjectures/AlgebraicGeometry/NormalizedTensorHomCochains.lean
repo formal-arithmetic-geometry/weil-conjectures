@@ -55,7 +55,7 @@ def normalizedTensorHomCochains (X : Scheme.{u})
   exact (normalizedHomGlobalCochains X.sheaf P H k).symm.trans
     (b.trans (normalizedHomGlobalCochains X.sheaf T I k))
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- Elaborating the composite sheaf and tensor comparisons exceeds the default heartbeat limit.
 /-- The uncurrying equivalence commutes with the ordinary cochain differential.
 Source: Stacks Project, sites-cohomology.tex, Tag 0A90 (lemma-compose).

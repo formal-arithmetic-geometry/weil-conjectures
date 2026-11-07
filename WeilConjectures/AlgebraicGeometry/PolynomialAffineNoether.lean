@@ -43,12 +43,6 @@ lemma coe_support_polyAffineHyperplane (N : ℕ) :
   simp only [Set.mem_preimage, Set.mem_singleton_iff, polyAffineCoord]
   exact (ConcreteCategory.bijective_of_isIso _).1.eq_iff
 
-/-- The global function `Spec f` pulls back `x`, viewed as a global function on `Spec R`, to
-`f x`. -/
-lemma Scheme.Spec_map_appTop_ΓSpecIso_inv {R S : CommRingCat.{u}} (f : R ⟶ S) (x : R) :
-    (Spec.map f).appTop ((Scheme.ΓSpecIso R).inv x) = (Scheme.ΓSpecIso S).inv (f x) := by
-  rw [← CommRingCat.comp_apply, ← Scheme.ΓSpecIso_inv_naturality, CommRingCat.comp_apply]
-
 /-- The automorphism of `𝔸ᴺ_k` induced by a `k`-algebra automorphism `σ` of `k[X₀, …, X_{N-1}]`;
 its underlying morphism of schemes is `Spec σ`. -/
 noncomputable def polyAffineIsoOfAlgEquiv {N : ℕ}
@@ -117,7 +111,7 @@ theorem exists_isFinite_polyAffineProj (N : ℕ) {Y : Set (polyAffine k (N + 2))
       Set.image_singleton]
     congr 3
     rw [polyAffineCoord, polyAffineIsoOfAlgEquiv_hom_left]
-    refine (Scheme.Spec_map_appTop_ΓSpecIso_inv _ _).trans ?_
+    refine (Scheme.specMap_appTop_ΓSpecIso_inv _ _).trans ?_
     simp [σ.symm_apply_eq.mpr hσX.symm]
 
 end AlgebraicGeometry

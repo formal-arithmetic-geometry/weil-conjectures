@@ -299,7 +299,6 @@ variable (c : A ⟶ B)
   (((PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 B).obj)).unit.app
     (changeOfRingsPresheaf.{u, u, u} c M)).app W
       ((1 : B.obj.obj W) ⊗ₜ[A.obj.obj W, (c.hom.app W).hom] m))
-set_option maxHeartbeats 600000 in
 -- Expand the two scalar extensions through the sheafification adjunction.
 private theorem scalar_tensor_ext
     (M N : SheafOfModules.{u} (𝓡 A)) (H : SheafOfModules.{u} (𝓡 B))
@@ -456,7 +455,6 @@ attribute [local irreducible] monoidalCategory
 
 set_option backward.isDefEq.respectTransparency.types false
 
-set_option maxHeartbeats 600000 in
 -- Compare bilinear maps through sheafification and the scalar-extension adjunctions.
 /-- The pure-tensor conditions determine the ordinary comparison uniquely and are attainable.
 Source: Stacks 03EL (auxiliary; not a blueprint node).

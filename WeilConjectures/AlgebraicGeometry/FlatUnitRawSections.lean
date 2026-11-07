@@ -115,7 +115,6 @@ private theorem section_comparison_cycles {Y : Scheme.{uBC}}
   rfl
 
 set_option backward.defeqAttrib.useBackward false in
-set_option maxHeartbeats 400000 in
 -- Comparing sheaf, presheaf and section functor presentations needs extra elaboration.
 /-- The cycle calculation only uses exactness and an adjunction to pushforward. -/
 private theorem flat_unit_raw_sections_of_adjunction {S S' : Scheme.{uBC}}

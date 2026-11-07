@@ -54,7 +54,7 @@ private theorem affineSheafification_preservesFiniteLimits
   unfold affinePerfectSheafification
   exact comp_preservesFiniteLimits _ _
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- Elaborating the two derived localization comparisons and the model witnesses needs this limit.
 set_option linter.unusedVariables false in
 /-- Affine restriction admits a bounded finite-projective source model and a target

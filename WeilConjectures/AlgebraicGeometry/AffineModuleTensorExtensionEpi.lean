@@ -41,7 +41,6 @@ set_option hygiene false in
 local notation "ρ" => (show X.sheaf ⟶ A from ⟨f.c⟩)
 set_option hygiene false in
 local notation "S" => SheafOfModules.restrictScalars.{u} (𝓻 ρ)
-set_option maxHeartbeats 600000 in
 -- Object transports and sheafified tensor instances require additional elaboration steps.
 /-- The second tensor operation is a quotient of the underlying first operation.
 Source: Stacks Project, Tag 01SB, construction of h and the map p to p tensor 1;

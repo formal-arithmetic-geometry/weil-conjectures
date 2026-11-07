@@ -26,7 +26,6 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 800000 in
 -- Coproduct and tensor comparison elaboration requires additional heartbeats.
 /-- An ambient ideal times a closed finite free source is the pushforward of the
 finite sum of its extended ideal, compatibly with the inclusions.

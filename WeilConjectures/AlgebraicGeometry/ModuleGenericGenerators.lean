@@ -69,7 +69,7 @@ theorem exists_generic_generating_locallyConstant_subsheaf
   obtain ⟨i, y, hy⟩ := 𝒰.exists_eq η
   have hfi : Etale (𝒰.f i) := 𝒰.map_prop i
   obtain ⟨W, hyW, hW, hygen⟩ :=
-    exists_irreducible_open_of_etale_generic (𝒰.f i) η hη y hy
+    Etale.exists_isGenericPoint_open_of_isGenericPoint (𝒰.f i) η hη y hy
   let := hW
   let g : W.toScheme ⟶ X := W.ι ≫ 𝒰.f i
   have hg : Etale g := by dsimp [g]; infer_instance

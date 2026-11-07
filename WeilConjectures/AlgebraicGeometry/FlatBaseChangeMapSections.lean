@@ -28,7 +28,7 @@ noncomputable section
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] AlgebraicGeometry.Scheme.Modules.enoughInjectives
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 600000 in
 -- Comparing section maps elaborates the nested resolution and homology transports.
 /-- The base-change map constructed from resolutions is independent of the resolutions
 and augmented lifts. Its adjoint sends the canonical image of a class on f⁻¹V to the

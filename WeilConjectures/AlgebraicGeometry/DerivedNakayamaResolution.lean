@@ -10,6 +10,7 @@ public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionFinite
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
 import Mathlib.CategoryTheory.Abelian.DiagramLemmas.KernelCokernelComp
 import Mathlib.CategoryTheory.Limits.FunctorCategory.Shapes.Kernels
+import WeilConjectures.Algebra.Homology.ReductionIsoShift
 import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.TensorMappingCone
 import WeilConjectures.CategoryTheory.Monoidal.Closed.UnitEnd
 import WeilConjectures.NumberTheory.Padics.ContinuousUniformizerDivision
@@ -267,8 +268,7 @@ namespace UnitScalar
 variable {A : Type u} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A]
   [HasDerivedCategory.{v} A] [MonoidalCategory A] [MonoidalClosed A]
   [MonoidalPreadditive A] [BraidedCategory A] [Abelian.HasFunctorialFlatResolution A]
-local instance derivedNakayamaResolutionInst2
-    : HasColimitsOfSize.{0, 0} A := hasColimitsOfSizeShrink A
+attribute [local instance] DerivedCategory.instHasColimitsOfSizeReductionIsoShift
 private def scalarNat (r : Scalars A) : 𝟭 (CochainComplex A ℤ) ⟶ 𝟭 _ where
   app C := r • 𝟙 C
   naturality C D f := by simp

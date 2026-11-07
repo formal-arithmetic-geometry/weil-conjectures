@@ -144,7 +144,6 @@ private theorem exists_chart_iso {W X Y Z : Scheme.{u}}
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option maxRecDepth 4096 in
-set_option maxHeartbeats 100000 in
 -- Transport between native tensors and module-category sections.
 /-- Sections on an affine open of the pullback of an associated module have a
 unit-compatible tensor presentation. This assertion involves no comparison morphism.

@@ -89,7 +89,6 @@ private theorem comparison_unit_hom
   simpa only [Functor.comp_map, Category.assoc] using
     congrArg (fun k ↦ k ≫ DS.map x) h
 
-set_option maxHeartbeats 800000 in
 -- Exact restriction expands the right-derived uniqueness comparison.
 private theorem exactCompUnit_fac
     {C D E : Type*} [Category* C] [Category* D] [Category* E]
@@ -421,7 +420,7 @@ attribute [local irreducible] Functor.rightDerivedFunctor Functor.rightDerivedFu
 -- Profiling found expensive linting of the fixed, nondependent forall binders.
 set_option linter.all false in
 set_option cleanup.letToHave false in
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 600000 in
 -- The sections and exact-restriction comparisons require unfolding scalar actions.
 /-- The path through the square mate and the comparisons r,d, evaluated on the
 unit for p_* followed by affine sections. This formula does not involve the derived

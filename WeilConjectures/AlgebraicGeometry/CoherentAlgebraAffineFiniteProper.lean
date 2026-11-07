@@ -38,9 +38,8 @@ set_option hygiene false in
 local notation "𝒪⁎" g:max => Under.mk (⟨(g).c⟩ : Scheme.sheaf _ ⟶
   (TopCat.Sheaf.pushforward CommRingCat.{u} (g).base).obj (Scheme.sheaf _))
 
-set_option maxHeartbeats 600000 in
--- Transporting finite generators through iterated slice sites needs extra elaboration heartbeats.
 set_option synthInstance.maxHeartbeats 200000 in
+-- Transporting finite generators through iterated slice sites needs extra elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- An affine realization of a coherent algebra is finite, and proper over the base

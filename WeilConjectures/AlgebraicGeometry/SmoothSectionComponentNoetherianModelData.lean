@@ -40,7 +40,7 @@ private theorem exists_smooth_noetherian_model_with_section {X S : Scheme.{u}}
   let : LocallyOfFinitePresentation q₁ := hqfp
   let : QuasiCompact q₁ := hqqc
   let : QuasiSeparated q₁ := hqqs
-  obtain ⟨j₁, hj₁⟩ := N.exists_smooth_stage q₁ f a₁ H₁
+  obtain ⟨j₁, hj₁⟩ := N.exists_smooth_affine_model q₁ f a₁ H₁
   let i := j₁.left
   let Y := Limits.pullback q₁ (N.D.map j₁.hom)
   let q : Y ⟶ N.D.obj i := Limits.pullback.snd _ _

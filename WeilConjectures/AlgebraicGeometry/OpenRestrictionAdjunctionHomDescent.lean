@@ -60,7 +60,7 @@ private theorem localization_hom
     ((CatCommSq.iso G rX rY GO).hom.naturality v)
 
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- The independent derived-category instances require extra elaboration heartbeats.
 /-- The adjunction descends coherently to the inverse-image open.
 Source: Stacks Project, Tags 08EU (locality) and 08FE (direct-image restriction).

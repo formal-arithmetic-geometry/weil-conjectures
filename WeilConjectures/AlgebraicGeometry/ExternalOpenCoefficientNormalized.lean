@@ -30,7 +30,6 @@ set_option backward.isDefEq.respectTransparency.types false
 
 variable {k : Type w} [Field k] {X Y : Scheme.{w}}
 
-set_option maxHeartbeats 400000 in
 -- Tensor section transports require additional elaboration of restriction instances.
 private theorem restriction_tensor_hom_tmul {A B : Scheme.{w}}
     (j : A ⟶ B) [IsOpenImmersion j] (M N : B.Modules)

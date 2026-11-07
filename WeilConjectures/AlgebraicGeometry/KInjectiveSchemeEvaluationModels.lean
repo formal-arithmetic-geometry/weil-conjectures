@@ -88,7 +88,7 @@ private theorem tensorModel_isIso_right (Y : Scheme.{u})
   change IsIso (Functor.LaxMonoidal.μ DerivedCategory.Q F V)
   infer_instance
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- The canonical sheaf tensor and Hom comparisons require extra instance-reconciliation work.
 /-- Compute derived evaluation using ordinary complexes on the same scheme site.
 Source: Stacks Project, Tags 08DJ, 08DM and 08DQ, representative calculation.

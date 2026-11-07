@@ -48,7 +48,6 @@ local notation "𝓡" => (sheafCompose J (forget₂ CommRingCat RingCat)).obj R
 set_option hygiene false in
 local notation "Mod" => SheafOfModules.{u} 𝓡
 
-set_option maxHeartbeats 1000000 in
 -- Keep the sheafification and tensor comparison types explicit during elaboration.
 set_option backward.isDefEq.respectTransparency true in
 private theorem tensor_braiding_comparison (A B : Mod) :
@@ -70,7 +69,6 @@ private theorem tensor_braiding_comparison (A B : Mod) :
     (F := PresheafOfModules.sheafification (𝟙 (𝓡).obj))
     A.val B.val).symm
 
-set_option maxHeartbeats 1000000 in
 -- Keep the sheafification and tensor comparison types explicit during elaboration.
 set_option backward.isDefEq.respectTransparency true in
 private theorem tensor_section_braiding (A B : Mod) :
@@ -109,7 +107,6 @@ private theorem tensor_section_braiding (A B : Mod) :
   erw [Category.assoc, hv, ← Category.assoc, ← hn]
   rfl
 
-set_option maxHeartbeats 1000000 in
 -- Keep the sheafification and tensor comparison types explicit during elaboration.
 set_option backward.isDefEq.respectTransparency true in
 private theorem tensor_section_uncurry (A B D : Mod)
@@ -136,7 +133,6 @@ private theorem tensor_section_uncurry (A B D : Mod)
     (e.symm f).val = e'.symm f.val
   exact (Category.assoc _ _ _).trans he'
 
-set_option maxHeartbeats 1000000 in
 -- Keep the sheafification and tensor comparison types explicit during elaboration.
 set_option backward.isDefEq.respectTransparency true in
 private theorem tensor_section_braiding_uncurry (A B D : Mod)
@@ -152,7 +148,6 @@ private theorem tensor_section_braiding_uncurry (A B D : Mod)
   rw [SheafOfModules.comp_val, ← Category.assoc (homTensorSectionMap R A B),
     tensor_section_braiding R A B, Category.assoc, tensor_section_uncurry R B A D f]
 
-set_option maxHeartbeats 1000000 in
 -- Keep the sheafification and tensor comparison types explicit during elaboration.
 set_option backward.isDefEq.respectTransparency true in
 private theorem tensor_section_ext (A B D : Mod) :
@@ -229,7 +224,6 @@ private theorem curry_condition_reindex (K L M : CochainComplex Mod ℤ) (d : �
   subst k
   exact ha p q U s (op (Over.mk (𝟙 U.unop))) x y
 
-set_option maxHeartbeats 1000000 in
 -- Work over an abstract ring sheaf before specializing the global comparison.
 set_option backward.isDefEq.respectTransparency true in
 private theorem tensor_hom_global_component (K L M : CochainComplex Mod ℤ) :
@@ -279,7 +273,6 @@ private theorem tensor_hom_global_component (K L M : CochainComplex Mod ℤ) :
 
 end TensorHelpers
 
-set_option maxHeartbeats 1000000 in
 -- The normalized Hom and tensor types require additional elaboration fuel.
 set_option backward.isDefEq.respectTransparency true in
 /-- Restricting the explicitly constructed degree-zero uncurrying comparison

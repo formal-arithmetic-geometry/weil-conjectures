@@ -223,8 +223,8 @@ attribute [local instance] AlgebraicGeometry.cartierEtaleAbSheafify
   AlgebraicGeometry.cartierProModuleSheafify
 
 attribute [local instance] AlgebraicGeometry.cartierEtaleAbHasExt
-  AlgebraicGeometry.cartierProAbHasExt AlgebraicGeometry.cartierEtaleModuleHasExt
-  AlgebraicGeometry.cartierProModuleHasExt
+  AlgebraicGeometry.ProEtale.geoCartierIntegralExt AlgebraicGeometry.Etale.hasExt_sheaf_moduleCat
+  AlgebraicGeometry.ProEtale.geoCartierModuleExt
 
 namespace AlgebraicGeometry.Etale
 

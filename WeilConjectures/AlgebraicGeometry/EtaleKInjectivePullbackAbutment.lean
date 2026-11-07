@@ -25,7 +25,6 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
 
-set_option maxHeartbeats 1000000 in
 -- Elaborating resolution and spectral-page comparison families together.
 /-- A pullback comparison between K-injective resolutions computes the canonical
 unit--Leray map, after the canonical resolution identifications.

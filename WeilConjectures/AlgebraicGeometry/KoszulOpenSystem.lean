@@ -186,19 +186,12 @@ def koszulOpenTilde : ModuleCat.{u} A ⥤
   map_comp g h := (tilde.functor (.of A)).map_comp g h
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Tilde transport is additive. Source: Stacks, Tag 08CX
-(blueprint: def-sc-koszul-open-system).
-Proof: the category transport is identity on module-sheaf morphisms; Mathlib's
-tilde functor is additive. -/
-theorem koszulOpenTilde_additive_proof : (koszulOpenTilde A).Additive := by
+/-- Additivity instance for termwise tilde. Source: Stacks, Tag 08CX
+(blueprint: def-sc-koszul-open-system). -/
+instance koszulOpenTilde_additive : (koszulOpenTilde A).Additive := by
   constructor
   intro M N g h
   exact tilde.map_add (R := .of A) g h
-
-/-- Additivity instance for termwise tilde. Source: Stacks, Tag 08CX
-(blueprint: def-sc-koszul-open-system). -/
-instance koszulOpenTilde_additive : (koszulOpenTilde A).Additive :=
-  koszulOpenTilde_additive_proof A
 
 /-- Termwise tilde, after extending `I^{-n}` by zero to integer cochain degrees.
 Source: Stacks, Tag 08CX (blueprint: def-sc-koszul-open-system). -/

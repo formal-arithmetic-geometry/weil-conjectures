@@ -27,7 +27,6 @@ namespace AlgebraicGeometry.SingleComplexBaseChange
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-set_option maxHeartbeats 800000 in
 -- The fixed stalk comparison requires substantial definitional reduction.
 /-- Existence of input-complex coordinates compatible with the fixed comparison,
 using the actual affine-spectrum stalk ring maps.

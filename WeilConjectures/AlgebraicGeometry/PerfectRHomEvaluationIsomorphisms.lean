@@ -84,7 +84,7 @@ private theorem evaluationIso_changeAdjunction
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 1600000 in
+set_option maxHeartbeats 500000 in
 -- Comparing the canonical derived tensor instances requires extra elaboration work.
 /-- Tensor evaluation is invertible for a perfect first argument.
 Source: Stacks Project, Cohomology, Tags 08DQ and 08DM.

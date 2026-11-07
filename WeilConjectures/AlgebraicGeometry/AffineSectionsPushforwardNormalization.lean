@@ -97,7 +97,7 @@ variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 variable [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)]
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- Scalar-action comparisons unfold global-section and derived-functor identifications.
 /-- Sections of pushforward retain their affine scalar action before and after deriving.
 There are no internal-Hom, perfectness or quasi-coherence inputs in this statement.

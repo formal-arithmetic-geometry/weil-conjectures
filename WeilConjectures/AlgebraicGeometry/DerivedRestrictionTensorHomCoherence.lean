@@ -56,7 +56,7 @@ private theorem restriction_mate_equation
   have h := hx (H.obj (op L, E)) K L E ξ (𝟙 _)
   simpa only [Category.comp_id] using congrArg R.map h.symm
 
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 800000 in
 -- Naturality of the canonical family unfolds the sheaf tensor-Hom instance data.
 /-- Exact open restriction has simultaneous tensor and internal-Hom comparisons
 compatible with the canonical tensor-Hom bijections.

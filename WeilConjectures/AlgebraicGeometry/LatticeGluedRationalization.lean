@@ -18,10 +18,10 @@ Source: Bhatt--Scholze, Proposition 6.8.4(6), pp. 59–60.
 attribute [local instance] AlgebraicGeometry.ProEtale.latticeWeakSheafifyOver
   AlgebraicGeometry.ProEtale.latticeWEqualsOver
 
-attribute [local instance] AlgebraicGeometry.ProEtale.latticeStrongSheafifyOver
-  AlgebraicGeometry.ProEtale.latticeWeakSheafifyOverOver
-  AlgebraicGeometry.ProEtale.latticeWEqualsOverOver
-  AlgebraicGeometry.ProEtale.latticeStrongSheafifyOverOver
+attribute [local instance] AlgebraicGeometry.ProEtale.restrictionStrongSheafifyOver
+  AlgebraicGeometry.ProEtale.restrictionWeakSheafifyOverOver
+  AlgebraicGeometry.ProEtale.restrictionWEqualsOverOver
+  AlgebraicGeometry.ProEtale.restrictionStrongSheafifyOverOver
 universe u v w r m s
 open CategoryTheory Opposite
 open scoped ChangeOfRings

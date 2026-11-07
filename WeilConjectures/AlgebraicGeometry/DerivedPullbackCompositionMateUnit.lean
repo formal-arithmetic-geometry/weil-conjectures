@@ -61,7 +61,6 @@ variable [∀ Z : Scheme.{u},
 
 set_option linter.all false in
 -- Avoid repeating the expensive chosen-object type comparisons during linting.
-set_option maxHeartbeats 800000 in
 -- Matching the composition expands the sheaf and derived-functor instances.
 /-- The conjugate of the fixed pullback comparison satisfies the pasted direct-image
 unit equation, before identifying it with any direct-image composition isomorphism.

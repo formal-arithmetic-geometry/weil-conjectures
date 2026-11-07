@@ -146,7 +146,7 @@ private theorem transportHomColimit
 
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 512 in
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 500000 in
 -- Comparing chosen localization instances and restriction functors needs extra heartbeats.
 /-- The whole Hom-colimit comparison, transported from the spectrum presentation.
 This asserts a compatible system of perfect derived augmentations and its colimit;

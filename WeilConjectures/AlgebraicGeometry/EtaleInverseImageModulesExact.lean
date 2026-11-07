@@ -29,7 +29,7 @@ open scoped TensorProduct ChangeOfRings
 
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 1200000 in
+set_option maxHeartbeats 500000 in
 -- Elaborating the dependent witness package and its comparisons exceeds the default limit.
 set_option backward.defeqAttrib.useBackward true in
 /-- Constant-ring inverse image is the exact module pullback, with the abelian adjunction.

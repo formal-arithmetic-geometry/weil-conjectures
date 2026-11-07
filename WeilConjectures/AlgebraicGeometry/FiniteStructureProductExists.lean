@@ -119,7 +119,7 @@ theorem finite_structure_product_exists
             (Ideal.Quotient.mk (I ^ (n + 1)))))) (fnY n) G (ψ n).hom).app U x
         ∀ (x y : Γ(G, U)),
           a (μ.app U (tmulSection x y)) = a x * a y) := by
-  exact finite_structure_product_compatibility A I X f i hi hp c hc
+  exact finite_structure_product_exists_core A I X f i hi hp c hc
     Yn fnY gn hcart hw G hG hproper ψ hψ
 
 end AlgebraicGeometry

@@ -116,16 +116,16 @@ theorem openOver_internalHom_cycle_homology_squares (X : Scheme.{u})
   let R := Scheme.Modules.restrictFunctor V.ι
   let B := SheafOfModules.overFunctor.{u} V.toScheme.ringCatSheaf W
   let F := R ⋙ B
-  let : PreservesFiniteLimits O := moduleOverFunctor_limits_proof X.toRingedSpace V
-  let : PreservesFiniteColimits O := moduleOverFunctor_colimits_proof X.toRingedSpace V
+  let : PreservesFiniteLimits O := moduleOverFunctor_limits X.toRingedSpace V
+  let : PreservesFiniteColimits O := moduleOverFunctor_colimits X.toRingedSpace V
   let : PreservesFiniteLimits (O ⋙ E) := comp_preservesFiniteLimits O E
   let : PreservesFiniteColimits (O ⋙ E) := comp_preservesFiniteColimits O E
   let : PreservesFiniteLimits R :=
     preservesFiniteLimits_of_natIso (Scheme.Modules.overFunctorEquiv V)
   let : PreservesFiniteColimits R :=
     preservesFiniteColimits_of_natIso (Scheme.Modules.overFunctorEquiv V)
-  let : PreservesFiniteLimits B := moduleOverFunctor_limits_proof V.toScheme.toRingedSpace W
-  let : PreservesFiniteColimits B := moduleOverFunctor_colimits_proof V.toScheme.toRingedSpace W
+  let : PreservesFiniteLimits B := moduleOverFunctor_limits V.toScheme.toRingedSpace W
+  let : PreservesFiniteColimits B := moduleOverFunctor_colimits V.toScheme.toRingedSpace W
   let : PreservesFiniteLimits F := comp_preservesFiniteLimits R B
   let : PreservesFiniteColimits F := comp_preservesFiniteColimits R B
   let : F.PreservesZeroMorphisms := moduleOpenOver_preservesZeroMorphisms X V W

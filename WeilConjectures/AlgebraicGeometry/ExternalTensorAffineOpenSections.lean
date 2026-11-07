@@ -152,7 +152,7 @@ private def rightSectionEquiv :
   simp only [← CommRingCat.comp_apply, ← Y.presheaf.map_comp]
   rfl
 
-set_option maxHeartbeats 1200000 in
+set_option maxHeartbeats 1000000 in
 -- The section tensor comparison elaborates several compatible restricted scalar actions.
 private theorem exists_external_open_raw [F.IsQuasicoherent] [G.IsQuasicoherent]
     (hA : IsAffineOpen A) (hV : IsAffineOpen V)

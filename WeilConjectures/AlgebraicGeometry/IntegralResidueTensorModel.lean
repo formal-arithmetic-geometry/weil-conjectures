@@ -215,7 +215,6 @@ local instance : BraidedCategory (DerivedCategory C) :=
   derivedTensorPresentationBraiding
 local instance : BraidedCategory (DerivedCategory D) :=
   derivedTensorPresentationBraiding
-set_option maxHeartbeats 600000 in
 -- Allow elaboration of the explicitly constructed module tensor comparisons.
 /-- Normalize a tensor route by its tensor/counit square and the ordinary braiding.
 

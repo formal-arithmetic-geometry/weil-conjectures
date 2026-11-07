@@ -24,7 +24,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-set_option maxHeartbeats 1600000 in
+set_option maxHeartbeats 500000 in
 -- Elaborating the derived restriction comparisons needs this larger budget.
 set_option synthInstance.maxHeartbeats 400000 in
 set_option synthInstance.maxSize 2048 in

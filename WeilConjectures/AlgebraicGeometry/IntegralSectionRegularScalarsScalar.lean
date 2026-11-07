@@ -37,7 +37,8 @@ attribute [local irreducible] upperStarFromPoint CondensedRing.upperStar
 
 open MonoidalCategory
 attribute [local instance] IntegralModelsStacks.projectionCommRingSheafify
-  IntegralModelsStacks.projectionAbSheafify IntegralModelsStacks.projectionAbLocallyBijective
+  Scheme.ProEt.instHasSheafifyTopologyAb_weilConjectures
+  IntegralModelsStacks.projectionAbLocallyBijective
   IntegralModelsStacks.projectionSiteSmall
 
 private def liftedRegularIso (A : Type u) [CommRing A] :
@@ -156,7 +157,7 @@ private theorem pulledRegularIso_coefficient (l : ℕ) [Fact l.Prime]
         (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E))) :
     let : EssentiallySmall.{u + 1} X.ProEt := IntegralModelsStacks.projectionSiteSmall X
     let : HasSheafify (Scheme.ProEt.topology X) Ab.{u + 1} :=
-      IntegralModelsStacks.projectionAbSheafify X
+      Scheme.ProEt.instHasSheafifyTopologyAb_weilConjectures X
     let : HasSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
       IntegralModelsStacks.projectionCommRingSheafify X
     let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
@@ -170,7 +171,7 @@ private theorem pulledRegularIso_coefficient (l : ℕ) [Fact l.Prime]
           FiniteDiscreteOrdinary.canonicalAbelianMap.{u} A X := by
   let : EssentiallySmall.{u + 1} X.ProEt := IntegralModelsStacks.projectionSiteSmall X
   let : HasSheafify (Scheme.ProEt.topology X) Ab.{u + 1} :=
-    IntegralModelsStacks.projectionAbSheafify X
+    Scheme.ProEt.instHasSheafifyTopologyAb_weilConjectures X
   let : HasSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
     IntegralModelsStacks.projectionCommRingSheafify X
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
@@ -212,7 +213,7 @@ private theorem pulledRegularIso_scalar_one (l : ℕ) [Fact l.Prime]
     (X : Scheme.{u}) (a : Padic.coefficientExtensionIntegers l E) (U : X.ProEtᵒᵖ) :
     let : EssentiallySmall.{u + 1} X.ProEt := IntegralModelsStacks.projectionSiteSmall X
     let : HasSheafify (Scheme.ProEt.topology X) Ab.{u + 1} :=
-      IntegralModelsStacks.projectionAbSheafify X
+      Scheme.ProEt.instHasSheafifyTopologyAb_weilConjectures X
     let : HasSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
       IntegralModelsStacks.projectionCommRingSheafify X
     let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
@@ -228,7 +229,7 @@ private theorem pulledRegularIso_scalar_one (l : ℕ) [Fact l.Prime]
             (ULift.up a)) := by
   let : EssentiallySmall.{u + 1} X.ProEt := IntegralModelsStacks.projectionSiteSmall X
   let : HasSheafify (Scheme.ProEt.topology X) Ab.{u + 1} :=
-    IntegralModelsStacks.projectionAbSheafify X
+    Scheme.ProEt.instHasSheafifyTopologyAb_weilConjectures X
   let : HasSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
     IntegralModelsStacks.projectionCommRingSheafify X
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
@@ -541,7 +542,7 @@ private theorem coefficientRingCompatibility (l : ℕ) [Fact l.Prime]
     (X : Scheme.{u}) :
     let : EssentiallySmall.{u + 1} X.ProEt := IntegralModelsStacks.projectionSiteSmall X
     let : HasSheafify (Scheme.ProEt.topology X) Ab.{u + 1} :=
-      IntegralModelsStacks.projectionAbSheafify X
+      Scheme.ProEt.instHasSheafifyTopologyAb_weilConjectures X
     let : HasSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
       IntegralModelsStacks.projectionCommRingSheafify X
     let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
@@ -554,7 +555,7 @@ private theorem coefficientRingCompatibility (l : ℕ) [Fact l.Prime]
         (Scheme.pbcIntegralDatum l E)).hom := by
   let : EssentiallySmall.{u + 1} X.ProEt := IntegralModelsStacks.projectionSiteSmall X
   let : HasSheafify (Scheme.ProEt.topology X) Ab.{u + 1} :=
-    IntegralModelsStacks.projectionAbSheafify X
+    Scheme.ProEt.instHasSheafifyTopologyAb_weilConjectures X
   let : HasSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
     IntegralModelsStacks.projectionCommRingSheafify X
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField

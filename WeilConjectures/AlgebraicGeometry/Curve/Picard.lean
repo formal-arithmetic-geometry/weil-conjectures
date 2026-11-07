@@ -145,12 +145,12 @@ lemma Pic.ofIsInvertible_toModules_mul {I J : C.IdealSheafData} (hI : I.IsInvert
     (hJ : J.IsInvertible) :
     haveI := hI.isInvertible_toModules
     haveI := hJ.isInvertible_toModules
-    haveI := (hI.mul_effectiveCartier hJ).isInvertible_toModules
+    haveI := (hI.mul hJ).isInvertible_toModules
     Pic.ofIsInvertible (I * J).toModules =
       Pic.ofIsInvertible I.toModules * Pic.ofIsInvertible J.toModules := by
   have := hI.isInvertible_toModules
   have := hJ.isInvertible_toModules
-  have := (hI.mul_effectiveCartier hJ).isInvertible_toModules
+  have := (hI.mul hJ).isInvertible_toModules
   obtain ⟨e⟩ := hI.nonempty_toModules_iso_dual_tensorObj_mul hJ
   have h := Pic.ofIsInvertible_eq_of_iso e
   rw [Pic.ofIsInvertible_tensorObj, Pic.ofIsInvertible_dual] at h
@@ -184,7 +184,7 @@ lemma Pic.ofIsInvertible_toModules_pow {I : C.IdealSheafData} (hI : I.IsInvertib
   | succ n ih =>
     have := (hI.pow n).isInvertible_toModules
     have := (hI.pow (n + 1)).isInvertible_toModules
-    have := ((hI.pow n).mul_effectiveCartier hI).isInvertible_toModules
+    have := ((hI.pow n).mul hI).isInvertible_toModules
     exact (Pic.ofIsInvertible_eq_of_iso (eqToIso (by rw [pow_succ]))).trans
       ((Pic.ofIsInvertible_toModules_mul (hI.pow n) hI).trans (by rw [ih, pow_succ]))
 
@@ -208,7 +208,7 @@ lemma Divisor.toMul_toPic_mapRange (E : closedPoints C →₀ ℕ) :
     have h₂ := Divisor.isInvertible_idealSheaf (C ↘ Spec (.of k)) E'
     have := h₁.isInvertible_toModules
     have := h₂.isInvertible_toModules
-    have := (h₁.mul_effectiveCartier h₂).isInvertible_toModules
+    have := (h₁.mul h₂).isInvertible_toModules
     have := (Divisor.isInvertible_idealSheaf (C ↘ Spec (.of k)) (E + E')).isInvertible_toModules
     have hmul : Pic.ofIsInvertible (Divisor.idealSheaf (E + E')).toModules =
         Pic.ofIsInvertible (Divisor.idealSheaf E).toModules *

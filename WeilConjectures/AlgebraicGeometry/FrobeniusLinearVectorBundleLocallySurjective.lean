@@ -110,7 +110,6 @@ private theorem exists_affine_polynomial_cover
     exact hq
   exact hz
 
-set_option maxHeartbeats 1200000 in
 -- Checking the scalar-action coercions needs a larger kernel budget.
 private theorem exists_frobenius_linear_local_lift
     (p : ℕ) [Fact p.Prime]

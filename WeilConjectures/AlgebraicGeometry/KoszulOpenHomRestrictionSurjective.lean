@@ -46,7 +46,7 @@ private theorem affine_qcoh_representative
         (e.functor.mapIso (DerivedCategory.Q.objObjPreimageIso (e.inverse.obj E)) ≪≫
           e.counitIso.app E)
 
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 500000 in
 -- The repeated derived restriction expressions require extra elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 /-- Every derived section on the principal-open union comes from a finite Koszul stage.
