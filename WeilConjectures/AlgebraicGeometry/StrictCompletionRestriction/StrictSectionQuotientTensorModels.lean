@@ -522,7 +522,7 @@ variable (X : Scheme.{u})
   (B : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1})
   (ι : (Functor.const ℕᵒᵖ).obj R ⟶ B)
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- Check the simultaneous normalization and all three representative equations together.
 private theorem reductionModels
     (T : Presentation.{u + 2, u + 1, u + 1} (SC (Scheme.ProEt.topology X) R))
