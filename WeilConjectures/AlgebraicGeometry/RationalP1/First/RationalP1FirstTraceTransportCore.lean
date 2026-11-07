@@ -39,7 +39,6 @@ attribute [local irreducible] twist projectionMap singleUnitIso
 attribute [local irreducible] firstProjection secondProjection square
 attribute [local irreducible] condensedAmbientExchange
 
-set_option maxHeartbeats 800000 in
 -- Keep the fixed geometric coefficient and derived interfaces folded during elaboration.
 /-- Transport the terminal trace functional before any diagonal class is inserted.
 This core equation has source Rq_*Rp₂*(p₁*M tensor T_W), rather than Rq_*M, and contains

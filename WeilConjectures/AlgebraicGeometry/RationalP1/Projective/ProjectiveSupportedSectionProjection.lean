@@ -33,7 +33,6 @@ attribute [local irreducible] projectionMap singleUnitIso secondLineComparison
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
-set_option maxHeartbeats 800000 in
 -- The statement compares the fixed derived pullback and tensor interfaces.
 /-- Section/projection coherence on the supported coefficient source, before any class map.
 

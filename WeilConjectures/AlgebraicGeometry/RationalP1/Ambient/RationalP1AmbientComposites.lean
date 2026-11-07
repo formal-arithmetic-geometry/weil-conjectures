@@ -40,7 +40,6 @@ open DiagonalCoefficients CondensedRing
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
-set_option maxHeartbeats 800000 in
 -- Keep fixed site and derived comparisons folded during elaboration.
 /-- The given trace, through its full-unit-normalized derived-functor identification.
 Source: blueprint counit clause 3
@@ -51,7 +50,6 @@ def trace (Y : Scheme.{u}) (L : ∀ X : Scheme.{u}, Modules Λ X) (d : Diagram �
         (L (ProjectiveLine Y))) ⟦(2 : ℤ)⟧) ⟶ unit Λ Y :=
   (eqToIso d.q_canonical).inv.app _ ≫ d.traceq
 
-set_option maxHeartbeats 800000 in
 -- Keep fixed site and derived comparisons folded during elaboration.
 /-- Tensor the fixed diagonal class and then use the native tensor-shift comparison.
 Source: blueprint unit clause 2
@@ -66,7 +64,6 @@ def diagonalClassMap (Y : Scheme.{u}) (L : ∀ X : Scheme.{u}, Modules Λ X)
       ((supportedUnitIso Λ Y).hom ≫ d.delta)) ≫
     (tensorShiftIso Λ (diagonalSurface Y) (L (diagonalSurface Y)) _).hom
 
-set_option maxHeartbeats 800000 in
 -- Keep fixed site and derived comparisons folded during elaboration.
 /-- The exact four-arrow unit paste, with inverses only of the specified maps.
 Source: blueprint unit clause 2
@@ -96,7 +93,6 @@ def unitComponent (Y : Scheme.{u}) (L : ∀ X : Scheme.{u}, Modules Λ X)
     (twist Λ (ProjectiveLine Y) (L (ProjectiveLine Y))).map
       (inv ((condensedAmbientExchange Λ (square Y)).app M))
 
-set_option maxHeartbeats 800000 in
 -- Keep fixed site and derived comparisons folded during elaboration.
 /-- The specified inverse projection followed by identity tensor the trace and the unitor.
 Source: blueprint counit clause 3
