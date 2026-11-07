@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.SfIntegralReductionTower
 public import WeilConjectures.AlgebraicGeometry.Finite.FiniteDiscreteSchemeRingSupplement
 public import WeilConjectures.AlgebraicGeometry.Semilinear.ConstantCoefficientSystem
 public import WeilConjectures.CategoryTheory.InternalAbelianSheafModuleEquivalence
@@ -36,7 +37,6 @@ set_option relaxedAutoImplicit false
 set_option synthInstance.maxSize 4096
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 
-
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 open WeilConjectures.SemilinearSections
@@ -44,13 +44,7 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.CoherentReduction
 
-/-- The small pro-etale site in the coefficient universe, with its original morphisms.
-Source: Bhatt--Scholze, section 4.1, small pro-etale site size convention
-(blueprint: def-sfb-coherent-integral-reduction). -/
-local instance proEtSmall (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.ProEt :=
-  @essentiallySmall_of_small_of_locallySmall.{u + 1, u, u + 1} X.ProEt _ inferInstance
-    (@locallySmall_of_univLE.{u + 1, u, u + 1} X.ProEt _
-      (@univLE_of_max.{u, u + 1} UnivLE.self))
+attribute [local instance] WeilConjectures.instEssentiallySmallProEt_weilConjectures
 
 /-- The sequence site has the same coefficient-size bound.
 Source: Zheng, Construction 4.1, coefficient system site

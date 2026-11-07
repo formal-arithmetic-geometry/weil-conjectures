@@ -86,9 +86,9 @@ abbrev FiniteOpenCochainsData {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion 
     (ProEtale.StrictTower.coefficients (compactSupportSystemLevel l E n) X)
     (ProEtale.StrictTower.constantRingIso (compactSupportSystemLevel l E n) j)
   @OpenTensorCochainData.{u + 1, u, u} Z.ProEt _
-    (ProEtale.VaryingRing.siteSmall Z) (ProEt.topology Z)
+    (WeilConjectures.instEssentiallySmallProEt_weilConjectures Z) (ProEt.topology Z)
     (ProEtale.StrictTower.coefficients (compactSupportSystemLevel l E n) Z)
-    X.ProEt _ (ProEtale.VaryingRing.siteSmall X) (ProEt.topology X)
+    X.ProEt _ (WeilConjectures.instEssentiallySmallProEt_weilConjectures X) (ProEt.topology X)
     (ProEtale.StrictTower.coefficients (compactSupportSystemLevel l E n) X)
     (ProEtale.StrictTower.moduleJ (compactSupportSystemLevel l E n) j)
     (ProEtale.StrictTower.modulePullback (compactSupportSystemLevel l E n) j)

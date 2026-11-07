@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.SfIntegralReductionTower
 public import WeilConjectures.AlgebraicGeometry.Smooth.SmoothPurityCoefficientTowersAbelian
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Constructible.ProEtaleConstructibleSheaf
 public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleTorAmplitude
@@ -36,12 +37,7 @@ namespace AlgebraicGeometry.ProEtale
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u})
 
-/-- The existing locally bijective description at that same size.
-Source: blueprint, ordinary finite-level derived category
-(blueprint: sk-def-sp-normalized-towers). -/
-instance (priority := 2000) spFiniteLevelLocallyBijective :
-    (Scheme.ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
-  surjectiveTower_wEqualsLocallyBijective.{u, u} T
+attribute [local instance 2000] WeilConjectures.sfAbBijective
 
 /-- The actual ell-power quotient is finite. This proof-valued instance is obtained
 from the recorded cofinality and finite uniformizer-power quotients by the surjective
