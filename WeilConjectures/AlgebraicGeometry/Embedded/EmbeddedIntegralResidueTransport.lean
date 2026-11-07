@@ -122,9 +122,9 @@ private def derivedResidueSquare (X : Scheme.{u})
   let rightDerivedSquare :
       (Mod.comap q').mapDerivedCategory ⋙ D.inverse.mapDerivedCategory ≅
         R.inverse.mapDerivedCategory ⋙ (Mod.comap q).mapDerivedCategory :=
-    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    Functor.mapDerivedCategoryCompIso _ _ ≪≫
       Functor.mapDerivedCategoryNatIso rightSquare ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
   let adj := (D.toAdjunction.mapDerivedCategoryAdjunction).comp
     (Mod.derivedExtendMapDerivedCategoryAdjunction q')
   let adj' := ((Mod.derivedExtendMapDerivedCategoryAdjunction q).comp
@@ -220,12 +220,12 @@ theorem embeddedIntegralResidueTransport
       (Mod.comap di.inv).mapDerivedCategory ≅
       (Mod.comap ce.inv).mapDerivedCategory ⋙
         IntegralModelsStacks.restriction ℓ (ULift.{u} E.val) X :=
-    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    Functor.mapDerivedCategoryCompIso _ _ ≪≫
       Functor.mapDerivedCategoryNatIso
         ((Mod.comapComp di.inv (IntegralModelsEmbedded.scalarMap ℓ E X)).symm ≪≫
           Mod.comapCongr hs ≪≫ Mod.comapComp
             (IntegralModelsStacks.scalarMap ℓ (ULift.{u} E.val) X) ce.inv) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
   let L := (IntegralModelsEmbedded.restriction ℓ E X).obj K
   let comparison := reductionSquare.app L ≪≫
     (Mod.extendScalars q').leftDerivedFunctor.mapIso (scalarSquare.app K)
