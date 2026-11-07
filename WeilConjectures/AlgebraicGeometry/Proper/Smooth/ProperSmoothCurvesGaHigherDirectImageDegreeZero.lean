@@ -45,8 +45,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-local instance (X : Scheme.{u}) : (SheafOfModules.unit X.ringCatSheaf).IsQuasicoherent :=
-  SheafOfModules.isQuasicoherent_unit (R := X.ringCatSheaf)
+attribute [local instance]
+  instIsQuasicoherentOpensCarrierCarrierCommRingCatUnitRingCatSheaf_weilConjectures
 
 namespace Scheme.Modules
 
