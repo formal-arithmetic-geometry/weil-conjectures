@@ -345,8 +345,7 @@ the morphism
 `boundedConstructibleLowerShriekOfCompactificationBaseChangePasting` into `Rf'_!^{c_f.ofIsPullback
 sq}`, followed by its identification
 `boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl` with `Rf'_! = Rf'_!^{c_{f'}}`. -/
-@[no_expose]
-noncomputable def boundedConstructibleLowerShriekBaseChange_padicAlgCl
+noncomputable irreducible_def boundedConstructibleLowerShriekBaseChange_padicAlgCl
     (sq : IsPullback g' f' f g) :
     boundedConstructibleLowerShriek ℓ f ⋙
       boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g ⟶
@@ -366,7 +365,7 @@ lemma boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq (sq : IsPullback g
         Functor.whiskerLeft _ (boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl ℓ
           ((compactificationOverField f).ofIsPullback sq.overLeft)
           (compactificationOverField f')).hom := by
-  rw [boundedConstructibleLowerShriekBaseChange_padicAlgCl]
+  rw [boundedConstructibleLowerShriekBaseChange_padicAlgCl_def]
 
 end Chosen
 

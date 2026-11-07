@@ -1285,7 +1285,7 @@ private theorem lambda_unit (T : Scheme.{t}) (K : d.derived T) :
       (scalarDiagonal d T).hom.app K = 𝟙 _ := by
     have hsy := Functor.mapDerivedCategoryNatIso_symm (ordinaryScalarDiagonal d T)
     simp only [Functor.mapDerivedCategorySquareIso, scalarDiagonal, Iso.trans_hom, Iso.symm_hom,
-      NatTrans.comp_app, Category.assoc, Iso.hom_inv_id_app_assoc]
+      NatTrans.comp_app, Category.assoc]
     rw [hsy]
     simp
   erw [hs, CategoryTheory.Functor.map_id, Category.comp_id]

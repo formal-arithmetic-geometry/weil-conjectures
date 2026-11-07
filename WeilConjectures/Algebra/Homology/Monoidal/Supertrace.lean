@@ -135,19 +135,6 @@ theorem sum_negOnePow_smul_trace_eq {C : Type*} [Category C] [Preadditive C] [Mo
   ho.sum_negOnePow_smul_eq a b (fun p ↦ traceAddMonoidHom (K.X p))
     (fun _ _ g h ↦ trace_comp_comm g h)
 
-/-- Blueprint `lem-trf-chain-supertrace` (homotopy invariance): for a bounded complex `P` of
-finite free modules over a commutative ring `R`, the supertrace `∑ᵢ (-1)ⁱ Tr(vⁱ | Pⁱ)` of a chain
-endomorphism `v` only depends on the homotopy class of `v`. -/
-theorem sum_negOnePow_smul_linearMapTrace_eq {R : Type*} [CommRing R]
-    {P : CochainComplex (ModuleCat R) ℤ} [∀ n, Module.Free R (P.X n)]
-    [∀ n, Module.Finite R (P.X n)] {v v' : P ⟶ P} (ho : Homotopy v v') (a b : ℤ)
-    [P.IsStrictlyGE a] [P.IsStrictlyLE b] :
-    ∑ i ∈ Finset.Icc a b, (i.negOnePow : ℤ) • LinearMap.trace R (P.X i) (v.f i).hom =
-      ∑ i ∈ Finset.Icc a b, (i.negOnePow : ℤ) • LinearMap.trace R (P.X i) (v'.f i).hom :=
-  ho.sum_negOnePow_smul_eq a b
-    (fun i ↦ (LinearMap.trace R (P.X i)).toAddMonoidHom.comp
-      (ModuleCat.homAddEquiv (M := P.X i) (N := P.X i)).toAddMonoidHom)
-    (fun _ _ g h ↦ LinearMap.trace_comp_comm' g.hom h.hom)
 
 end Homotopy
 

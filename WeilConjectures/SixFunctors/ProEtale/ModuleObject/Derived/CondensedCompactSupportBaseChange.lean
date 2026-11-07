@@ -83,9 +83,9 @@ private theorem transport_compactSupport_baseChange
     let J' := openImmersionLowerShriek Λ' d.i
     let P' := lowerStar Λ' d.g
     let j : J.mapDerivedCategory ⋙ U d.Z ≅ U T ⋙ J'.mapDerivedCategory :=
-      (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      Functor.mapDerivedCategoryCompIso _ _ ≪≫
         Functor.mapDerivedCategoryNatIso (comapOpenImmersionLowerShriekIso a d.i) ≪≫
-        Functor.mapDerivedCategoryCompIso _ _
+        (Functor.mapDerivedCategoryCompIso _ _).symm
     exact Functor.associator _ _ _ ≪≫
       Functor.isoWhiskerLeft J.mapDerivedCategory (derivedComapLowerStarIso a d.g) ≪≫
       (Functor.associator _ _ _).symm ≪≫

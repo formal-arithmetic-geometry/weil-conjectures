@@ -108,6 +108,10 @@ private theorem affine_finiteFree_model_private (S : Scheme.{uP}) (U : S.Opens)
   rw [F.map_id, F.map_zero]
   exact ((ei i).isZero_iff.mpr (hb i hi)).eq_of_src _ _
 
+/-- Public export of the private `affine_finiteFree_model_private`
+(used by `import all` importers; linter.privateModule). -/
+alias affine_finiteFree_model := affine_finiteFree_model_private
+
 set_option backward.isDefEq.respectTransparency false in
 private theorem affine_projective_strictlyPerfect_private (S : Scheme.{uP}) (U : S.Opens)
     (hU : IsAffineOpen U)
@@ -217,11 +221,7 @@ theorem isPerfect_of_isPseudoCoherent_of_hasFiniteTorDimension (S : Scheme.{uP})
 end AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry.Scheme
-/-- Public export of the private `affine_finiteFree_model_private` (used by `import all` importers; linter.privateModule). -/
-alias affine_finiteFree_model := affine_finiteFree_model_private
-end AlgebraicGeometry.Scheme
-
-namespace AlgebraicGeometry.Scheme
 /-- Public export of the private `affine_projective_strictlyPerfect_private` (used by `import all` importers; linter.privateModule). -/
 alias affine_projective_strictlyPerfect := affine_projective_strictlyPerfect_private
+
 end AlgebraicGeometry.Scheme
