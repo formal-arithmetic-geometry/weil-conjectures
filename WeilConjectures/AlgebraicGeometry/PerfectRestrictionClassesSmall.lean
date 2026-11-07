@@ -61,6 +61,7 @@ private theorem hasDerivedCategory_of_equivalence_private {C D : Type (u + 1)}
 end AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry.Scheme
-/-- Public export of the private `hasDerivedCategory_of_equivalence_private` (used by `import all` importers; linter.privateModule). -/
+/-- Public export of the private `hasDerivedCategory_of_equivalence_private`
+(used by `import all` importers; linter.privateModule). -/
 alias hasDerivedCategory_of_equivalence := hasDerivedCategory_of_equivalence_private
 end AlgebraicGeometry.Scheme

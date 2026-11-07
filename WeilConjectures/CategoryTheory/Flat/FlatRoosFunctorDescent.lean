@@ -247,6 +247,7 @@ set_option backward.isDefEq.respectTransparency.types true
 end CategoryTheory
 
 namespace CategoryTheory
-/-- Public export of the private `flat_representative_localization_private` (used by `import all` importers; linter.privateModule). -/
+/-- Public export of the private `flat_representative_localization_private`
+(used by `import all` importers; linter.privateModule). -/
 alias flat_representative_localization := flat_representative_localization_private
 end CategoryTheory

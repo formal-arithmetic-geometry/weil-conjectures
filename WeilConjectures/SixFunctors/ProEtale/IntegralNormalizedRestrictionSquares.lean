@@ -432,11 +432,13 @@ private theorem integral_projection_back_private (n : ℕ)
 end AlgebraicGeometry.ProEtale.IntegralPresentation
 
 namespace AlgebraicGeometry.ProEtale.IntegralPresentation
-/-- Public export of the private `finiteBack_ringIso_private` (used by `import all` importers; linter.privateModule). -/
+/-- Public export of the private `finiteBack_ringIso_private`
+(used by `import all` importers; linter.privateModule). -/
 alias finiteBack_ringIso := finiteBack_ringIso_private
 end AlgebraicGeometry.ProEtale.IntegralPresentation
 
 namespace AlgebraicGeometry.ProEtale.IntegralPresentation
-/-- Public export of the private `integral_projection_back_private` (used by `import all` importers; linter.privateModule). -/
+/-- Public export of the private `integral_projection_back_private`
+(used by `import all` importers; linter.privateModule). -/
 alias integral_projection_back := integral_projection_back_private
 end AlgebraicGeometry.ProEtale.IntegralPresentation

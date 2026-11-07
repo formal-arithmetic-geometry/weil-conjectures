@@ -39,7 +39,8 @@ omit [IsCommMonObj Λ] in
 private theorem cachedProofInstance3_private : HasCountableCoproducts M := inferInstance
 omit [IsCommMonObj Λ] in
 private theorem cachedProofInstance4_private : HasColimitsOfShape ℤ M := inferInstance
-private theorem cachedProofInstance5_private : Abelian.HasFunctorialFlatResolution M := inferInstance
+private theorem cachedProofInstance5_private : Abelian.HasFunctorialFlatResolution M :=
+  inferInstance
 omit [IsCommMonObj Λ] in
 private theorem cachedProofInstance6_private : Abelian.HasKInjectiveResolutions M := inferInstance
 omit [IsCommMonObj Λ] in
@@ -56,9 +57,12 @@ private theorem cachedProofInstance12_private : ∀ (X : M),
     PreservesColimitsOfShape ℤ ((curriedTensor M).flip.obj X) := inferInstance
 end CachedInstances
 attribute [local instance]
-  cachedProofInstance1 cachedProofInstance2_private cachedProofInstance3_private cachedProofInstance4_private
-  cachedProofInstance5_private cachedProofInstance6_private cachedProofInstance7_private cachedProofInstance8_private
-  cachedProofInstance9_private cachedProofInstance10_private cachedProofInstance11_private cachedProofInstance12_private
+  cachedProofInstance1 cachedProofInstance2_private
+  cachedProofInstance3_private cachedProofInstance4_private
+  cachedProofInstance5_private cachedProofInstance6_private
+  cachedProofInstance7_private cachedProofInstance8_private
+  cachedProofInstance9_private cachedProofInstance10_private
+  cachedProofInstance11_private cachedProofInstance12_private
 
 private theorem exactSquareFac
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
@@ -298,47 +302,62 @@ attribute [local irreducible] Functor.leftDerivedFunctor Functor.rightDerivedFun
   Functor.mapDerivedCategory
 end AlgebraicGeometry.ProEtale.CondensedRing
 
-/-- Public export of the private `cachedProofInstance2_private` (used by `import all` importers; linter.privateModule). -/
+/-- Public export of the private `cachedProofInstance2_private`
+(used by `import all` importers; linter.privateModule). -/
 alias cachedProofInstance2 := cachedProofInstance2_private
 
-/-- Public export of the private `cachedProofInstance3_private` (used by `import all` importers; linter.privateModule). -/
+/-- Public export of the private `cachedProofInstance3_private`
+(used by `import all` importers; linter.privateModule). -/
 alias cachedProofInstance3 := cachedProofInstance3_private
 
-/-- Public export of the private `cachedProofInstance4_private` (used by `import all` importers; linter.privateModule). -/
+/-- Public export of the private `cachedProofInstance4_private`
+(used by `import all` importers; linter.privateModule). -/
 alias cachedProofInstance4 := cachedProofInstance4_private
 
-/-- Public export of the private `cachedProofInstance5_private` (used by `import all` importers; linter.privateModule). -/
+/-- Public export of the private `cachedProofInstance5_private`
+(used by `import all` importers; linter.privateModule). -/
 alias cachedProofInstance5 := cachedProofInstance5_private
 
-/-- Public export of the private `cachedProofInstance6_private` (used by `import all` importers; linter.privateModule). -/
+/-- Public export of the private `cachedProofInstance6_private`
+(used by `import all` importers; linter.privateModule). -/
 alias cachedProofInstance6 := cachedProofInstance6_private
 
-/-- Public export of the private `cachedProofInstance7_private` (used by `import all` importers; linter.privateModule). -/
+/-- Public export of the private `cachedProofInstance7_private`
+(used by `import all` importers; linter.privateModule). -/
 alias cachedProofInstance7 := cachedProofInstance7_private
 
-/-- Public export of the private `cachedProofInstance8_private` (used by `import all` importers; linter.privateModule). -/
+/-- Public export of the private `cachedProofInstance8_private`
+(used by `import all` importers; linter.privateModule). -/
 alias cachedProofInstance8 := cachedProofInstance8_private
 
-/-- Public export of the private `cachedProofInstance9_private` (used by `import all` importers; linter.privateModule). -/
+/-- Public export of the private `cachedProofInstance9_private`
+(used by `import all` importers; linter.privateModule). -/
 alias cachedProofInstance9 := cachedProofInstance9_private
 
-/-- Public export of the private `cachedProofInstance10_private` (used by `import all` importers; linter.privateModule). -/
+/-- Public export of the private `cachedProofInstance10_private`
+(used by `import all` importers; linter.privateModule). -/
 alias cachedProofInstance10 := cachedProofInstance10_private
 
-/-- Public export of the private `cachedProofInstance11_private` (used by `import all` importers; linter.privateModule). -/
+/-- Public export of the private `cachedProofInstance11_private`
+(used by `import all` importers; linter.privateModule). -/
 alias cachedProofInstance11 := cachedProofInstance11_private
 
-/-- Public export of the private `cachedProofInstance12_private` (used by `import all` importers; linter.privateModule). -/
+/-- Public export of the private `cachedProofInstance12_private`
+(used by `import all` importers; linter.privateModule). -/
 alias cachedProofInstance12 := cachedProofInstance12_private
 
-/-- Public export of the private `exactLeftSquareFac_private` (used by `import all` importers; linter.privateModule). -/
+/-- Public export of the private `exactLeftSquareFac_private`
+(used by `import all` importers; linter.privateModule). -/
 alias exactLeftSquareFac := exactLeftSquareFac_private
 
-/-- Public export of the private `mixedDerivedUnitFac_private` (used by `import all` importers; linter.privateModule). -/
+/-- Public export of the private `mixedDerivedUnitFac_private`
+(used by `import all` importers; linter.privateModule). -/
 alias mixedDerivedUnitFac := mixedDerivedUnitFac_private
 
-/-- Public export of the private `mateModel_private` (used by `import all` importers; linter.privateModule). -/
+/-- Public export of the private `mateModel_private`
+(used by `import all` importers; linter.privateModule). -/
 alias mateModel := mateModel_private
 
-/-- Public export of the private `naturalOrdinaryFac_private` (used by `import all` importers; linter.privateModule). -/
+/-- Public export of the private `naturalOrdinaryFac_private`
+(used by `import all` importers; linter.privateModule). -/
 alias naturalOrdinaryFac := naturalOrdinaryFac_private

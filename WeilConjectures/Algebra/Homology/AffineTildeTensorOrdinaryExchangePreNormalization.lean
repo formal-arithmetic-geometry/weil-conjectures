@@ -271,6 +271,8 @@ private theorem affineTildeTensorOrdinaryExchange_preNormalization_private
 end AlgebraicGeometry
 
 namespace AlgebraicGeometry
-/-- Public export of the private `affineTildeTensorOrdinaryExchange_preNormalization_private` (used by `import all` importers; linter.privateModule). -/
-alias affineTildeTensorOrdinaryExchange_preNormalization := affineTildeTensorOrdinaryExchange_preNormalization_private
+/-- Public export of the private `affineTildeTensorOrdinaryExchange_preNormalization_private`
+(used by `import all` importers; linter.privateModule). -/
+alias affineTildeTensorOrdinaryExchange_preNormalization :=
+  affineTildeTensorOrdinaryExchange_preNormalization_private
 end AlgebraicGeometry

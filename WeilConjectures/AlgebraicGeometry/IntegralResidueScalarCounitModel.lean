@@ -47,5 +47,6 @@ attribute [local irreducible] Functor.leftDerivedFunctor Functor.rightDerivedFun
 -- Normalize the inverse scalar mate, retaining ordinary restriction factors.
 end AlgebraicGeometry.ProEtale.CondensedRing
 
-/-- Public export of the private `tensorPresentation_app_private` (used by `import all` importers; linter.privateModule). -/
+/-- Public export of the private `tensorPresentation_app_private`
+(used by `import all` importers; linter.privateModule). -/
 alias tensorPresentation_app := tensorPresentation_app_private

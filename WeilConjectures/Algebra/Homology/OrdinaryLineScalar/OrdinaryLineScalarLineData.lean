@@ -218,6 +218,7 @@ end LineConstruction
 end SheafOfModules.OrdinaryLineScalar
 
 namespace SheafOfModules.OrdinaryLineScalar
-/-- Public export of the private `pure_eq_ordinary_private` (used by `import all` importers; linter.privateModule). -/
+/-- Public export of the private `pure_eq_ordinary_private`
+(used by `import all` importers; linter.privateModule). -/
 alias pure_eq_ordinary := pure_eq_ordinary_private
 end SheafOfModules.OrdinaryLineScalar

@@ -245,6 +245,7 @@ private theorem openRestricted_counit_compatibility_aux_private
 end AlgebraicGeometry.SingleComplexBaseChange
 
 namespace AlgebraicGeometry.SingleComplexBaseChange
-/-- Public export of the private `openRestricted_counit_compatibility_aux_private` (used by `import all` importers; linter.privateModule). -/
+/-- Public export of the private `openRestricted_counit_compatibility_aux_private`
+(used by `import all` importers; linter.privateModule). -/
 alias openRestricted_counit_compatibility_aux := openRestricted_counit_compatibility_aux_private
 end AlgebraicGeometry.SingleComplexBaseChange

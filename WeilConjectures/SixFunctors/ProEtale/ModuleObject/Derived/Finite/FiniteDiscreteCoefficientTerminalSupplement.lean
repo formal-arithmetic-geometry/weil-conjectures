@@ -226,8 +226,10 @@ variable (B : Type) [CommRing B] [TopologicalSpace B] [IsTopologicalRing B]
 
 end AlgebraicGeometry.ProEtale.CondensedRing
 
-/-- Public export of the private `constantPullback_unit_map_private` (used by `import all` importers; linter.privateModule). -/
+/-- Public export of the private `constantPullback_unit_map_private`
+(used by `import all` importers; linter.privateModule). -/
 alias constantPullback_unit_map := constantPullback_unit_map_private
 
-/-- Public export of the private `constant_naturality_private` (used by `import all` importers; linter.privateModule). -/
+/-- Public export of the private `constant_naturality_private`
+(used by `import all` importers; linter.privateModule). -/
 alias constant_naturality := constant_naturality_private

@@ -186,11 +186,13 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra 
 end AlgebraicGeometry.ProEtale.CondensedRing
 
 namespace AlgebraicGeometry.ProEtale
-/-- Public export of the private `comapUpperStar_inv_forget_private` (used by `import all` importers; linter.privateModule). -/
+/-- Public export of the private `comapUpperStar_inv_forget_private`
+(used by `import all` importers; linter.privateModule). -/
 alias comapUpperStar_inv_forget := comapUpperStar_inv_forget_private
 end AlgebraicGeometry.ProEtale
 
 namespace AlgebraicGeometry.ProEtale
-/-- Public export of the private `ordinaryScalarUnit_private` (used by `import all` importers; linter.privateModule). -/
+/-- Public export of the private `ordinaryScalarUnit_private`
+(used by `import all` importers; linter.privateModule). -/
 alias ordinaryScalarUnit := ordinaryScalarUnit_private
 end AlgebraicGeometry.ProEtale

@@ -100,5 +100,6 @@ attribute [local instance 20000] Functor.tensorModelHomotopyMonoidal
 attribute [local irreducible] Functor.leftDerivedFunctor Functor.mapDerivedCategory
 end AlgebraicGeometry.ProEtale.CondensedRing
 
-/-- Public export of the private `tensorPullCounit_fac_private` (used by `import all` importers; linter.privateModule). -/
+/-- Public export of the private `tensorPullCounit_fac_private`
+(used by `import all` importers; linter.privateModule). -/
 alias tensorPullCounit_fac := tensorPullCounit_fac_private

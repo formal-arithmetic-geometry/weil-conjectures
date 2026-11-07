@@ -143,11 +143,13 @@ private theorem affine_projective_strictlyPerfect_private (S : Scheme.{uP}) (U :
 end AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry.Scheme
-/-- Public export of the private `affine_finiteFree_model_private` (used by `import all` importers; linter.privateModule). -/
+/-- Public export of the private `affine_finiteFree_model_private`
+(used by `import all` importers; linter.privateModule). -/
 alias affine_finiteFree_model := affine_finiteFree_model_private
 end AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry.Scheme
-/-- Public export of the private `affine_projective_strictlyPerfect_private` (used by `import all` importers; linter.privateModule). -/
+/-- Public export of the private `affine_projective_strictlyPerfect_private`
+(used by `import all` importers; linter.privateModule). -/
 alias affine_projective_strictlyPerfect := affine_projective_strictlyPerfect_private
 end AlgebraicGeometry.Scheme

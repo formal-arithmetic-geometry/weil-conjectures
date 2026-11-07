@@ -57,6 +57,7 @@ private theorem openRestricted_counit_factorization_private
 end AlgebraicGeometry.SingleComplexBaseChange
 
 namespace AlgebraicGeometry.SingleComplexBaseChange
-/-- Public export of the private `openRestricted_counit_factorization_private` (used by `import all` importers; linter.privateModule). -/
+/-- Public export of the private `openRestricted_counit_factorization_private`
+(used by `import all` importers; linter.privateModule). -/
 alias openRestricted_counit_factorization := openRestricted_counit_factorization_private
 end AlgebraicGeometry.SingleComplexBaseChange

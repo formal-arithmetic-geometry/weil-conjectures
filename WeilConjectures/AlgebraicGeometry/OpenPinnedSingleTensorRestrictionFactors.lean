@@ -241,6 +241,8 @@ private theorem open_pinned_single_tensor_restriction_factors_private
 end AlgebraicGeometry
 
 namespace AlgebraicGeometry
-/-- Public export of the private `open_pinned_single_tensor_restriction_factors_private` (used by `import all` importers; linter.privateModule). -/
-alias open_pinned_single_tensor_restriction_factors := open_pinned_single_tensor_restriction_factors_private
+/-- Public export of the private `open_pinned_single_tensor_restriction_factors_private`
+(used by `import all` importers; linter.privateModule). -/
+alias open_pinned_single_tensor_restriction_factors :=
+  open_pinned_single_tensor_restriction_factors_private
 end AlgebraicGeometry
