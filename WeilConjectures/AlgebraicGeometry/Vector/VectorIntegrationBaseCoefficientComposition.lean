@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Vector.VectorBundleIntegrationCharts
+public import WeilConjectures.AlgebraicGeometry.Ordered.OrderedTateCoefficientComposition
 import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteUnitPullbackComp
 import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Arrows
 import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryFiniteP1KummerSupplement
@@ -699,7 +700,7 @@ private lemma tensor_mapIso_hom (A : Type (u + 1)) [CommRing A] (T : Scheme.{u})
   change e.hom ▷ L ≫ K' ◁ c.hom = e.hom ⊗ₘ c.hom
   rw [MonoidalCategory.tensorHom_def]
 
-private lemma coefficient_succ_hom (A : Type (u + 1)) [CommRing A] (N : ℕ)
+lemma coefficient_succ_hom (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     {X Y : Scheme.{u}} (f : X ⟶ Y) (hY : IsUnit (N : Γ(Y, ⊤))) (d : ℕ) :
     (vectorIntegrationBaseCoefficientPullback A N hA t f hY (d + 1)).hom =
@@ -710,48 +711,5 @@ private lemma coefficient_succ_hom (A : Type (u + 1)) [CommRing A] (N : ℕ)
   change (_ ≪≫ ordinaryFiniteTensorRightMapIso A X _ _).hom = _
   rw [Iso.trans_hom, tensor_mapIso_hom]
   rfl
-
-/-- Canonical ordered Tate coefficient pullback respects arbitrary composition.
-Source: blueprint vector-bundle purity proof, paragraph 2, Tate pullback compatibility;
-the existing proof of orderedTateExactOpenComposition, general coefficient_comp calculation.
-(blueprint: lem-pur-vector-integration-base-coefficient-composition).
-
-Proof: at rank zero this is constant-unit pullback composition. At a successor,
-monoidality of derived inverse image separates the ordered previous coefficient and
-the shifted Tate line. The former obeys the induction hypothesis. For the latter,
-normalization identifies the roots maps after inclusion in the multiplicative-group
-sheaf; the tensor generators identify the line maps. Degree-zero realization and
-shift coherence transport their composition equation to the shifted line. Tensor
-naturality and pullback composition reassemble the ordered coefficient. No coordinates
-are permuted, and the same unit equations cover rank zero, empty schemes and zero rings.
--/
-theorem vectorIntegrationBaseCoefficientPullback_comp (A : Type (u + 1)) [CommRing A] (N : ℕ)
-    (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
-    {T U S : Scheme.{u}} (p : T ⟶ U) (v : U ⟶ S) (w : T ⟶ S)
-    (hw : w = p ≫ v) (hS : IsUnit (N : Γ(S, ⊤))) (hU : IsUnit (N : Γ(U, ⊤))) (d : ℕ) :
-    (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) p v w hw).hom.app
-        (affineLinearBaseCoefficient A N hA S d) ≫
-      (ordinaryFinitePullback A p).map
-        (vectorIntegrationBaseCoefficientPullback A N hA t v hS d).hom ≫
-      (vectorIntegrationBaseCoefficientPullback A N hA t p hU d).hom =
-        (vectorIntegrationBaseCoefficientPullback A N hA t w hS d).hom := by
-  induction d with
-  | zero => exact ordinaryFiniteUnitPullback_comp A p v w hw
-  | succ d ih =>
-    rw [coefficient_succ_hom, coefficient_succ_hom, coefficient_succ_hom]
-    exact tensor_comp
-      (ordinaryFinitePullback A v) (ordinaryFinitePullback A p)
-      (ordinaryFinitePullback A w)
-      (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) p v w hw)
-      (vectorIntegrationBaseCoefficientPullback A N hA t v hS d).hom
-      (ordinaryFiniteShiftedLinePullback A N hA t v hS).hom
-      (vectorIntegrationBaseCoefficientPullback A N hA t p hU d).hom
-      (ordinaryFiniteShiftedLinePullback A N hA t p hU).hom
-      (vectorIntegrationBaseCoefficientPullback A N hA t w hS d).hom
-      (ordinaryFiniteShiftedLinePullback A N hA t w hS).hom
-      _ _ _ _
-      (leftDerivedUpperStarTensorComparison_comp (ModuleCat.{u + 1} A) p v w hw _ _)
-      (leftDerivedUpperStarTensorComparison_naturality (ModuleCat.{u + 1} A) p _ _)
-      ih (shifted_line_comp A N hA t p v hS hU w hw)
 
 end AlgebraicGeometry.Etale
