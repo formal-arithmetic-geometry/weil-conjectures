@@ -76,18 +76,18 @@ theorem localChern_normalized_integral_boundary
         (SpTowerClasses.hyperplanePic Y)) z) :
     completedIntegralProjection l (ProjectiveLine Y)
       (ULift.{u + 1} (completedResidue l s.E s.π s.n)) s.n s.hA
-      (Etale.ordinaryFiniteP1_isUnit (l ^ (s.n + 1)) Y s.hYpow) z =
+      (affineTraceProjectiveInvertible (l ^ (s.n + 1)) Y s.hYpow) z =
     DiagonalTrace.evaluatedIntegralKummerClass l (ProjectiveLine Y)
       (ULift.{u + 1} (completedResidue l s.E s.π s.n)) s.n s.hA s.tq.chernX.kummer
-      (Etale.ordinaryFiniteP1_isUnit (l ^ (s.n + 1)) Y s.hYpow)
+      (affineTraceProjectiveInvertible (l ^ (s.n + 1)) Y s.hYpow)
       (SpTowerClasses.hyperplanePic Y) := by
   exact (DiagonalTrace.localChern_normalized_boundary_projection l (ProjectiveLine Y)
     s.tq.chernX s.tq.restrictionX s.tq.coefficientsX _ s.n s.hA
-    (Etale.ordinaryFiniteP1_isUnit (l ^ (s.n + 1)) Y s.hYpow) s.tq.LX _ z
+    (affineTraceProjectiveInvertible (l ^ (s.n + 1)) Y s.hYpow) s.tq.LX _ z
     (by simpa only [LocalNormalized] using hz)).trans
       (DiagonalTrace.localChern_normalized_boundary_kummer l (ProjectiveLine Y)
         s.tq.chernX s.tq.restrictionX s.tq.coefficientsX _ s.n s.hA
-        (Etale.ordinaryFiniteP1_isUnit (l ^ (s.n + 1)) Y s.hYpow)
+        (affineTraceProjectiveInvertible (l ^ (s.n + 1)) Y s.hYpow)
         s.tq.finiteX (SpTowerClasses.hyperplanePic Y))
 
 end UniformizerChernNormalizationData

@@ -90,7 +90,7 @@ theorem ordinaryFiniteP1_diagonal_unit (N : ℕ) (hN : 0 < N)
         ordinaryFiniteP1Exchange A f ((ordinaryFiniteP1Right A N hA S).obj K) ≫
           (ordinaryFinitePushforward A (ProjectiveLine S' ↘ S')).map
             (ordinaryFiniteP1RightBaseChange A N hA t f
-              (ordinaryFiniteP1_isUnit N S hS) K).hom ≫
+              (affineTraceProjectiveInvertible N S hS) K).hom ≫
           (ordinaryFiniteP1TraceCounit A N hA S' (b S' hS')).app
             ((ordinaryFinitePullback A f).obj K)) := by
   exact ⟨ordinaryFiniteP1_diagonal_triangles N hN A hA t c hc b hb hbc,
