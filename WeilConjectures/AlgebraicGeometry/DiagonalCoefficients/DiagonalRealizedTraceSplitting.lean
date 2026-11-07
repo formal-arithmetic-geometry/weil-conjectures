@@ -39,7 +39,6 @@ private theorem conjugate_degree
 attribute [local irreducible] Functor.mapDerivedCategory
   CompletedRealization.singleUnit CompletedRealization.shiftedLine
 
-set_option maxHeartbeats 600000 in
 -- The endpoint conversions compare the independently normalized realization functors.
 /-- A realized completed trace kills the complementary shifted line and takes its
 normalized Chern component to the identity.

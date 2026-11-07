@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+public import WeilConjectures.AlgebraicGeometry.Finite.Coefficient.FiniteCoefficientSliceRealization
 
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Finite.ProEtaleFiniteModuleIntrinsicComparison
 public import WeilConjectures.AlgebraicGeometry.Derived.DerivedTensor
@@ -28,29 +29,6 @@ universe u v w
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory AlgebraicGeometry
 
 namespace AlgebraicGeometry.ProEtale
-
-local instance resolutionSheafCountableColimits
-    (A : Type u) [CommRing A] (T : Scheme.{u}) :
-    CategoryTheory.Limits.HasColimitsOfSize.{0, 0}
-      (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1, u} A))) :=
-by
-  let : CategoryTheory.IsGrothendieckAbelian.{u + 1}
-      (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1, u} A))) :=
-    CategoryTheory.GrothendieckTopology.isGrothendieckAbelian_sheaf_proEtTopology _ T
-  let : CategoryTheory.Limits.HasColimitsOfSize.{u + 1, u + 1}
-      (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1, u} A))) :=
-    CategoryTheory.IsGrothendieckAbelian.hasColimits _
-  exact CategoryTheory.Limits.hasColimitsOfSizeShrink.{0, 0, u + 1, u + 1} _
-
-local instance resolutionSheafTensorTotal
-    (A : Type u) [CommRing A] (T : Scheme.{u})
-    (V W : CochainComplex
-      (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1, u} A))) ℤ) :
-    HomologicalComplex.HasMapBifunctor V W
-      (CategoryTheory.MonoidalCategory.curriedTensor _) (.up ℤ) :=
-  fun _ ↦ @CategoryTheory.Limits.HasColimitsOfShape.has_colimit _ _ _ _
-    (@CategoryTheory.Limits.HasColimitsOfSize.has_colimits_of_shape _ _
-      (resolutionSheafCountableColimits A T) _ _) _
 
 private theorem acyclic_map_iff
     {C D : Type*} [Category.{v} C] [Category.{w} D] [Abelian C] [Abelian D]

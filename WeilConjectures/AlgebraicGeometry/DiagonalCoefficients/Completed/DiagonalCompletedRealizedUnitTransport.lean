@@ -177,7 +177,7 @@ private theorem realization_unit_square_comp
 
 end RealizationSingleSquare
 
-set_option maxHeartbeats 600000 in
+set_option maxHeartbeats 500000 in
 -- The ordinary unit comparison uses concrete sheaf and module instances.
 private theorem completed_ordinary_unit_general
     (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}} (f : X ⟶ S)
@@ -235,7 +235,6 @@ private theorem completed_ordinary_unit_general
   simpa only [Functor.map_comp, Category.assoc] using
     congrArg (fun k ↦ Functor.LaxMonoidal.ε G ≫ G.map k) hP
 
-set_option maxHeartbeats 800000 in
 -- Concrete coefficient instances are compared only at the generic lemma boundary.
 /-- The realized completed unit transport, with an arbitrary local arrow.
 

@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.DiagonalCyclicCoefficientInstances
+
 public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Trace.DiagonalTraceFiniteCartierClass
 public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Trace.DiagonalTraceFiniteCartierSourceObject
 public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Trace.DiagonalTraceFiniteCartierLineObject
@@ -41,15 +43,6 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext
   diagonalSingleLimitComparison diagonalExactFunctorExtImage
   diagonalShiftedSingleLimitComparison diagonalCompletedGenerator
 
-/-- The finite Ext witness for the fixed diagonal module category.
-Source: finite Cartier normalization and the module-sheaf Ext witness.
-(blueprint: lem-sfb-diagonal-trace-coordinate-module-has-ext).
-Proof: apply the existing module-sheaf Ext witness, sharing the category instance
-of DiagonalMod rather than re-inferring it from the commutative coefficient ring. -/
-theorem diagonalCoordinateHasExt (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) :
-    HasExt.{u + 1} (DiagonalMod l T) :=
-  geoCartierModuleExt (ULift.{u + 1} ℤ_[l]) T
-
 /-- The canonical finite Cartier class with its scalar endpoints explicitly shared.
 Source: diagonal trace proof (2), finite Cartier endpoint.
 (blueprint: def-sfb-diagonal-trace-finite-cartier-coordinate-class). -/
@@ -59,7 +52,7 @@ Source: diagonal trace proof (2), finite Cartier endpoint.
     @Ext (DiagonalMod l (diagonalSurface Y))
       (inferInstanceAs (Category (DiagonalMod l (diagonalSurface Y))))
       (inferInstanceAs (Abelian (DiagonalMod l (diagonalSurface Y))))
-      (diagonalCoordinateHasExt l (diagonalSurface Y))
+      (DiagonalCoefficients.cyclicCoefficientHasExt l (diagonalSurface Y))
       (finiteCartierSourceObject l Y n) (finiteCartierLineObject l Y n) 2 :=
   finiteCartierClass l Y hY n
 

@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+import WeilConjectures.AlgebraicGeometry.StrictPerfectPackageOnSite
 
 public import WeilConjectures.AlgebraicGeometry.LatticeSheafBasic
 import WeilConjectures.AlgebraicGeometry.LatticePairEffectiveDescent
@@ -18,7 +19,7 @@ Source: Bhatt--Scholze, Proposition 6.8.4(6), pp. 59--60
 @[expose] public section
 
 attribute [local instance] AlgebraicGeometry.ProEtale.latticeWeakSheafifyOver
-  AlgebraicGeometry.ProEtale.latticeWEqualsOver
+  AlgebraicGeometry.Scheme.strictPerfectSliceLocallyBijective
 
 universe u
 

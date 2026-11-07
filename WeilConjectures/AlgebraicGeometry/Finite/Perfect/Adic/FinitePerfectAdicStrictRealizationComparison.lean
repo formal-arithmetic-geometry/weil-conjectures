@@ -432,7 +432,7 @@ variable (X : Scheme.{t}) (V : X.Etale) (U : V.left.ProEt) (W : X.ProEt)
   (hδ : ∀ (U' : V.left.ProEt) x, δ.hom.app (op U') x =
     g.val.app (op (finitePerfectAdicChartObject V U')) x)
 
-set_option maxHeartbeats 1600000 in
+set_option maxHeartbeats 600000 in
 -- The explicit square compares two presentations of the realization on the slice.
 include hps hαp hcoh hδ in
 /-- The explicit part of the realization square, after replacing inverse image by restriction:
@@ -521,7 +521,6 @@ theorem finitePerfectAdicRealization_square_explicit :
   exact (PresheafOfModules.naturality_apply g.val (finitePerfectAdicChartPoint X V U W f Z.unop).op
     x).symm
 
-set_option maxHeartbeats 1600000 in
 -- Unfolding the realization isomorphisms requires unifying two presentations of the slice.
 include hps hαp hcoh hδ in
 /-- The scalar realizations of consecutive fixed-scalar coordinates carry a semilinear map of

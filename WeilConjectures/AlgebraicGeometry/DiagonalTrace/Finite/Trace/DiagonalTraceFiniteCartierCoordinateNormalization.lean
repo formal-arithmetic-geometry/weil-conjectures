@@ -70,7 +70,7 @@ the canonical finite-cycle equation, with the evaluated Ext expression shared. -
       @normalizedFiniteExtClass (DiagonalMod l (diagonalSurface Y))
         (inferInstanceAs (Category (DiagonalMod l (diagonalSurface Y))))
         (inferInstanceAs (Abelian (DiagonalMod l (diagonalSurface Y))))
-        (diagonalCoordinateHasExt l (diagonalSurface Y))
+        (DiagonalCoefficients.cyclicCoefficientHasExt l (diagonalSurface Y))
         (DiagonalTraceLocalizations.ext (ℓ := l) (X := diagonalSurface Y))
         _ _ xi n _ _ sigma t = finiteCartierCoordinateClass l Y hY n
 

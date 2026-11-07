@@ -99,7 +99,6 @@ private theorem cochain_unit_normalization_generic
   repeat erw [Category.comp_id]
   simpa only [Category.id_comp, Category.comp_id] using! h
 
-set_option maxHeartbeats 1000000 in
 -- The cochain comparison elaborates concrete derived-category instances.
 private theorem cochain_unit_normalization
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -121,7 +120,6 @@ private theorem cochain_unit_normalization
   let a := CondensedRing.upperStarLowerStarAdjunction Λ f
   exact cochain_unit_normalization_generic a P
 
-set_option maxHeartbeats 800000 in
 -- Single comparisons share the concrete inverse-image and derived-category instances.
 private theorem adjunct_single
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -186,7 +184,6 @@ private theorem adjunct_single
       rw [hc, Functor.map_comp, Category.assoc]
       rfl
 
-set_option maxHeartbeats 800000 in
 -- Abstract coefficients keep the derived comparison independent of ring realizations.
 private theorem canonical_unit_push_general
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -216,7 +213,6 @@ private theorem canonical_unit_push_general
     ((CondensedRing.derivedUpperStarLowerStarAdjunction Λ f).homEquiv_naturality_right
       cF.derived q).symm
 
-set_option maxHeartbeats 2000000 in
 -- The concrete coefficient specialization can require substantial kernel conversion.
 /-- The single condensed coefficient-unit push is the canonical derived
 adjunction unit after the chosen endpoint and right-derived identifications.

@@ -92,7 +92,7 @@ theorem diagonalTrace_supportedFiniteCoordinateAssembly
     (hcycle : @normalizedFiniteExtClass (DiagonalMod l (diagonalSurface Y))
       (inferInstanceAs (Category (DiagonalMod l (diagonalSurface Y))))
       (inferInstanceAs (Abelian (DiagonalMod l (diagonalSurface Y))))
-      (diagonalCoordinateHasExt l (diagonalSurface Y))
+      (DiagonalCoefficients.cyclicCoefficientHasExt l (diagonalSurface Y))
       (DiagonalTraceLocalizations.ext (ℓ := l) (X := diagonalSurface Y))
       _ _ xi n _ _ sigma t = finiteCartierCoordinateClass l Y hY n) :
     supportedFiniteCoordinateEquation l Y hY D H s c r k e p L₀ L n a
@@ -115,7 +115,7 @@ theorem diagonalTrace_supportedFiniteCoordinateAssembly
           (diagonalSurface Y)).map (homOfLE (Nat.le_succ j)).op)))
     (DiagonalTraceLocalizations.systems (ℓ := l) (X := diagonalSurface Y))
     _ (DiagonalTraceLocalizations.ext (ℓ := l) (X := diagonalSurface Y))
-    (diagonalCoordinateHasExt l (diagonalSurface Y))
+    (DiagonalCoefficients.cyclicCoefficientHasExt l (diagonalSurface Y))
     (diagonalCompletedRestriction l (diagonalSurface Y)) _ _ _ r.F _ _ _
     _ _ (completedSupportedUnit l Y) _ _ xi p hp s L₀ L
     (SpTowerClasses.coefficient (diagonalSurface Y)
