@@ -9,9 +9,6 @@ public import WeilConjectures.CategoryTheory.Adjunction.ExchangeConjugate
 
 /-! # Normalization of the exact open exchange used by geometric descent -/
 
-set_option profiler true
-set_option profiler.threshold 0
-
 @[expose] public noncomputable section
 universe u
 open CategoryTheory Limits

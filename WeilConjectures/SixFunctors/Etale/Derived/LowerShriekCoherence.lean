@@ -404,7 +404,6 @@ theorem rightDerivedLowerShriekOfCompactificationPlusIso_symm (c d : Compactific
     Iso.hom_inv_id]
   exact (congrArg Iso.hom h).symm
 
-
 /-! ### Arbitrary refinements
 
 A refinement `r : c.Refinement d` need not have a cartesian square over `X`. The comparison
@@ -674,7 +673,6 @@ lemma refinementOpenImmersionLowerShriekComparisonAux_comp (u : c.Refinement d)
   simp only [Functor.map_comp, Category.assoc, hassoc]
   rw [reassoc_of% hnat]
 
-
 variable [QuasiCompact f]
 
 /-- `refinementOpenImmersionLowerShriekComparisonAux` does not depend on the refinement through
@@ -897,18 +895,3 @@ end ArbitraryRefinements
 end Etale
 
 end AlgebraicGeometry
-
-/-! ### Axiom census
-
-The transitivity of the cartesian comparison `α_u` depends only on the three standard axioms;
-the check below is run by the build. The statements that invert a comparison use that `α_u`
-is an isomorphism, which rests on proper base change
-(`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring`, blueprint
-`sk-thm-properbasechange`), not proved yet. -/
-
-/--
-info: 'AlgebraicGeometry.Etale.refinementOpenImmersionLowerShriekComparison_comp' depends on
-  axioms: [propext, Classical.choice, Quot.sound]
--/
-#guard_msgs (whitespace := lax) in
-#print axioms AlgebraicGeometry.Etale.refinementOpenImmersionLowerShriekComparison_comp

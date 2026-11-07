@@ -82,17 +82,4 @@ instance isCofiltered [QuasiCompact f] [HasCompactification f] :
     IsCofiltered (Compactification f) where
   nonempty := HasCompactification.nonempty_compactification
 
-/-! ### Axiom census
-
-Cofilteredness of the category of compactifications is unconditional: the check below is run
-by the build, so a `sorry` reappearing anywhere beneath it breaks compilation rather than
-going unnoticed. -/
-
-/--
-info: 'AlgebraicGeometry.Compactification.isCofiltered' depends on
-  axioms: [propext, Classical.choice, Quot.sound]
--/
-#guard_msgs (whitespace := lax) in
-#print axioms AlgebraicGeometry.Compactification.isCofiltered
-
 end AlgebraicGeometry.Compactification

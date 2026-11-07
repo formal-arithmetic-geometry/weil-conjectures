@@ -203,7 +203,7 @@ theorem exists_contracted_product_action :
     | mk x =>
       change Quot.mk _ (x.1, x.2 + (g + h)) = Quot.mk _ (x.1, (x.2 + h) + g)
       congr 1
-      abel
+      abel_nf
   have an : ∀ ⦃U V⦄ (f : U ⟶ V) g t,
       P.map f (a U g t) = a V (G'.obj.map f g) (P.map f t) := by
     intro U V f g t

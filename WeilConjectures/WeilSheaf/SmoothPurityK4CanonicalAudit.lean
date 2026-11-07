@@ -1,7 +1,0 @@
-module
-
-public import WeilConjectures.WeilSheaf.SmoothPurityCanonicalTateScalar
-
-#print axioms AlgebraicGeometry.ProEtale.purityCanonicalTateOneTrivialization_weil
-#print axioms AlgebraicGeometry.ProEtale.K4Native.scalarRootEquation_named
-#print axioms AlgebraicGeometry.ProEtale.K4Native.purity_rationalRootTrivialization_weil

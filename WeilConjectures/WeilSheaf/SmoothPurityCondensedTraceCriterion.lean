@@ -8,8 +8,7 @@ public import WeilConjectures.WeilSheaf.SmoothPurityTraceCriterion
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraDerivedAdjunction
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraDerivedRightAdjointFree
 public import WeilConjectures.WeilSheaf.CondensedModelBaseChange
-public import
-WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.EllAdic.EllAdicProperBoundedBelowCoproducts
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.EllAdic.EllAdicProperBoundedBelowCoproducts
 
 /-!
 # Testing a condensed Weil trace on its geometric carrier

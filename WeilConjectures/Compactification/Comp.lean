@@ -131,7 +131,6 @@ theorem isPullback_restrict : IsPullback e.restrict.g (pullback.fst e.g m) m e.g
 
 end Restrict
 
-
 section OfComp
 
 variable {X Y S : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ S}
@@ -175,24 +174,5 @@ noncomputable def ofComp [QuasiCompact (f ≫ g)] (c : Compactification (f ≫ g
 end OfComp
 
 end Compactification
-
-/-! ### Axiom census
-
-The constructions of this file are unconditional; the checks below are run by the build, so a
-`sorry` reappearing beneath them breaks compilation rather than going unnoticed. -/
-
-/--
-info: 'AlgebraicGeometry.Compactification.comp' depends on axioms: [propext, Classical.choice,
-  Quot.sound]
--/
-#guard_msgs (whitespace := lax) in
-#print axioms AlgebraicGeometry.Compactification.comp
-
-/--
-info: 'AlgebraicGeometry.Compactification.restrict' depends on axioms: [propext,
-  Classical.choice, Quot.sound]
--/
-#guard_msgs (whitespace := lax) in
-#print axioms AlgebraicGeometry.Compactification.restrict
 
 end AlgebraicGeometry

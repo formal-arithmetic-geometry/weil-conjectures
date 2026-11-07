@@ -46,7 +46,8 @@ theorem baseChangedSmoothTrace_ambient_universal
     (K : Dᵇc(X'.left)⟦Profinite.padicAlgClRingObj l⟧) :
     (rightDerivedLowerShriekOfCompactification (Profinite.padicAlgClRingObj l) c').TraceUniversalAt
       K.obj
-      ((purityFieldCompactificationAmbientExchange l f f' (compactificationOverField f) c' hi hg).inv.app
+      ((purityFieldCompactificationAmbientExchange l f f' (compactificationOverField f) c' hi
+        hg).inv.app
           (boundedConstructibleTateTwist l X d (2 * d)).obj ≫
         (upperStar (Profinite.padicAlgClRingObj l) πY).leftDerivedFunctor.map
           ((boundedConstructibleLowerShriekOfCompactificationCompatibility l

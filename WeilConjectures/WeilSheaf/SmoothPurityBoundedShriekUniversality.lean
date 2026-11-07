@@ -61,7 +61,8 @@ theorem baseChangedSmoothTrace_without_unit_universal
   have ht := Functor.bijective_map_comp_iso_trace
     (boundedConstructibleLowerShriekOfCompactification l c') (Iso.refl _) e.symm _ hb
   simpa only [Functor.TraceUniversalAt, baseChangedSmoothTrace,
-    purityFieldLowerShriekExchange, boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_refl,
+    purityFieldLowerShriekExchange,
+    boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_refl,
     Iso.trans_inv, Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_inv,
     Functor.whiskerLeft_app, Functor.whiskerRight_app, NatTrans.comp_app,
     Iso.refl_hom, Iso.refl_inv, NatTrans.id_app, CategoryTheory.Functor.map_id,

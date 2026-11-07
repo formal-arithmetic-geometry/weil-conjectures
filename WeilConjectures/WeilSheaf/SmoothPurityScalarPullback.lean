@@ -70,6 +70,7 @@ lemma purityExtendWeakPullbackIso_unit
       e.hom.hom ≫ purityPullbackUnit Λ g N :=
   Mod.extendUnitHom_extendScalarsMap (condensedPullbackHom Λ g) e.hom
 
+omit [WeaklyEtale g] in
 /-- The unit comparison for mapped modules is the identity on underlying objects. -/
 @[simp]
 lemma purityMapModUnitIso_hom_hom :

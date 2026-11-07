@@ -59,6 +59,7 @@ variable (χ : R ⋙ G.mapDerivedCategory ≅ F.mapDerivedCategory ⋙ R)
 
 include hσ
 
+omit [IsGrothendieckAbelian.{v} C] [IsGrothendieckAbelian.{v'} D] in
 /-- The cyclic compatibility written through the inverse forgetful comparison. -/
 @[reassoc]
 lemma map_derivedStrIso_comp_forgetComparison_inv (A : DerivedCategory (IsoAlgebra F)) :

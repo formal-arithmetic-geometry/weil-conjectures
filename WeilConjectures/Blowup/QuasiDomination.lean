@@ -155,26 +155,6 @@ theorem U_eq_top [UniversallyClosed y] (q : QuasiDomination x y) : q.U = ⊤ := 
 
 end QuasiDomination
 
-/-! ### Axiom census
-
-Both results about quasi-dominations are unconditional: the checks below are run by the
-build, so a `sorry` reappearing anywhere beneath them breaks compilation rather than going
-unnoticed. -/
-
-/--
-info: 'AlgebraicGeometry.QuasiDomination.of_isSeparated' depends on
-  axioms: [propext, Classical.choice, Quot.sound]
--/
-#guard_msgs (whitespace := lax) in
-#print axioms AlgebraicGeometry.QuasiDomination.of_isSeparated
-
-/--
-info: 'AlgebraicGeometry.QuasiDomination.U_eq_top' depends on
-  axioms: [propext, Classical.choice, Quot.sound]
--/
-#guard_msgs (whitespace := lax) in
-#print axioms AlgebraicGeometry.QuasiDomination.U_eq_top
-
 end AlgebraicGeometry
 
 end

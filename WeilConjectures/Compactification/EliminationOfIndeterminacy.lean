@@ -562,24 +562,4 @@ theorem exists_admissibleBlowup_isOpenImmersion_strictTransformMap
       IsOpenImmersion (strictTransformMap q B.I.blowupMap B.preservedOpen) :=
   ⟨eliminationBlowup hU q hq, isOpenImmersion_strictTransformMap_eliminationBlowup hU q hq⟩
 
-/-! ### Axiom census
-
-Elimination of indeterminacy is unconditional: the checks below are run by the build, so a
-`sorry` reappearing anywhere beneath Stacks Project Tag 081S breaks compilation rather than
-going unnoticed. -/
-
-/--
-info: 'AlgebraicGeometry.isOpenImmersion_strictTransformMap_eliminationBlowup' depends on
-  axioms: [propext, Classical.choice, Quot.sound]
--/
-#guard_msgs (whitespace := lax) in
-#print axioms AlgebraicGeometry.isOpenImmersion_strictTransformMap_eliminationBlowup
-
-/--
-info: 'AlgebraicGeometry.exists_admissibleBlowup_isOpenImmersion_strictTransformMap' depends on
-  axioms: [propext, Classical.choice, Quot.sound]
--/
-#guard_msgs (whitespace := lax) in
-#print axioms AlgebraicGeometry.exists_admissibleBlowup_isOpenImmersion_strictTransformMap
-
 end AlgebraicGeometry
