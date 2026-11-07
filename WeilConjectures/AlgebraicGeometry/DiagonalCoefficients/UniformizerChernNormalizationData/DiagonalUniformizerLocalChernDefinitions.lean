@@ -342,7 +342,7 @@ abbrev LocalFiniteChernSpecCanonical
   LocalFiniteChernSpec
     (ULift.{u + 1} (completedResidue l s.E s.π s.n))
     (l ^ (s.n + 1)) s.hA Y
-    (Etale.ordinaryFiniteP1_isUnit (l ^ (s.n + 1)) Y s.hYpow)
+    (affineTraceProjectiveInvertible (l ^ (s.n + 1)) Y s.hYpow)
     (LocalFiniteArrow.toHom l Y s k)
 
 end UniformizerChernNormalizationData

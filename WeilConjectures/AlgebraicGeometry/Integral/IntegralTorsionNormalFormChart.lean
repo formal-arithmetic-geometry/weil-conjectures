@@ -211,7 +211,7 @@ theorem tor_const_epi (T : Scheme.{u}) (q : ℤ)
       (pbcRestrict (pbcLevelConstantComparison T d k).inv).map
         ((adicLisseConstantModules T _).map t)) ≫ eR.hom ≫
     (PreservesCokernel.iso (integralConstantModule T d) φ).hom, ?_⟩
-  have := (adicLisseConstantModules_exact T (PbcIntegralRing l E ⧸ d.ideal ^ (k + 1))).2
+  have := (constantAdicFinite_constant_exact T (PbcIntegralRing l E ⧸ d.ideal ^ (k + 1))).2
   have e1 : Epi ((pbcRestrict (pbcLevelConstantComparison T d k).inv).map
       ((adicLisseConstantModules T _).map t)) := Functor.map_epi _ _
   exact epi_comp _ _
