@@ -123,12 +123,19 @@ private theorem properHeartHigherDirectImage_preservesFilteredColimits
   constructor
   intro I _ _
   have : HasColimitsOfShape I (CochainComplex A ℤ) := inferInstance
+  have : HasColimitsOfShape I
+      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) :=
+    inferInstance
   constructor
   intro M
   have : PreservesColimit M S := by
     change PreservesColimit M (HomologicalComplex.single A (.up ℤ) 0)
     infer_instance
   let D := M ⋙ S
+  -- Cache the two colimits the comparison below needs (measured: the uncached searches
+  -- at the declaration level exceed 200000 heartbeats; with them the proof takes ~15s).
+  have : HasColimit D := inferInstance
+  have : HasColimit (D ⋙ T) := inferInstance
   let π := Functor.whiskerLeft D ((ComplexShape.embeddingUpIntGE 0).πTruncGENatTrans A)
   have hπ (i : I) : IsIso (π.app i) :=
     inferInstanceAs (IsIso ((S.obj (M.obj i)).πTruncGE 0))
