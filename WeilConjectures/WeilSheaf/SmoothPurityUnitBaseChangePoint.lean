@@ -266,6 +266,7 @@ noncomputable def geometricFiberLowerShriekBaseChangePoint :
     (openImmersionLowerShriekBaseChangeOfMap l
       (isPullback_geometricFiberOverMap (nagataOpenImmersion f)))
 
+omit [Finite k] in
 /-- **A1' over a point**: for a separated `k`-scheme of finite type `f : X ⟶ Spec k` over a
 finite field `k`, the exceptional base change map at the unit `πX^* Rf^! ℚ̄_ℓ ⟶ Rf̄^! ℚ̄_ℓ` along
 `k ⟶ k̄` attached to the compact-support base change isomorphism
