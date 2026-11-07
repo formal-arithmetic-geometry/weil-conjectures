@@ -206,7 +206,7 @@ local instance (priority := 10000000) commRingSheafCompose
     J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r}) := by
   infer_instance
 
-private theorem flat_representative_localization
+private theorem flat_representative_localization_private
     {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
     (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{r})
     [HasSheafify J AddCommGrpCat.{r}] [J.WEqualsLocallyBijective AddCommGrpCat.{r}]
@@ -244,4 +244,9 @@ set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
 -- The normalization and product-localization proof has many dependent categorical expressions.
+end CategoryTheory
+
+namespace CategoryTheory
+/-- Public export of the private `flat_representative_localization_private` (used by `import all` importers; linter.privateModule). -/
+alias flat_representative_localization := flat_representative_localization_private
 end CategoryTheory

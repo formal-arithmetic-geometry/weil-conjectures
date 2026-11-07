@@ -69,7 +69,6 @@ import Mathlib.Algebra.Category.Grp.Colimits
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 import WeilConjectures.CategoryTheory.SitePullbackAbelianUnderlying
 
-import WeilConjectures.AlgebraicGeometry.Native.NativeIntegralTateTowerLimit
 import all WeilConjectures.AlgebraicGeometry.ProEtale.Finite.ProEtaleFiniteScalarRestrictionConstructible
 import all WeilConjectures.AlgebraicGeometry.SmoothPurity.RootsOfUnityInverseImageIso
 import all WeilConjectures.AlgebraicGeometry.ProEtaleModuleInverseImageCanonicalUnit
@@ -122,6 +121,7 @@ import all WeilConjectures.CategoryTheory.Sites.MonObj
 import WeilConjectures.CategoryTheory.ProEtaleCoefficients.EquivalenceAdjunctionComparisonSupplement
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 public import WeilConjectures.AlgebraicGeometry.CartesianCoefficientTwists
+import WeilConjectures.AlgebraicGeometry.Native.NativeIntegralTateTowerLimit
 
 /-! # Cartesian coefficients and Tate twists
 

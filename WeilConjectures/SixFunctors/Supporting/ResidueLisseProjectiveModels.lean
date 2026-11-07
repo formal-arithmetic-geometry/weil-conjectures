@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicFiniteTorsionConstructibility
 public import WeilConjectures.SmoothPurity.Sf.SfIntegralConstructible
 public import WeilConjectures.SixFunctors.Supporting.DerivedCompleteUnrestricted

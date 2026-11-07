@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.RationalP1.Second.RationalP1SecondPretraceData
 public import WeilConjectures.AlgebraicGeometry.RationalP1.Native.NativeProjectionTensorInterface
 import all WeilConjectures.CategoryTheory.Native.NativeForwardSelfSquareProjection

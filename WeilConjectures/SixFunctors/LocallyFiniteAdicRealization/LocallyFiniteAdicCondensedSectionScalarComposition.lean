@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.SixFunctors.LocallyFiniteAdicRealization.LocallyFiniteAdicCondensedIntegralModel
 import WeilConjectures.CategoryTheory.Normalized.NormalizedAdjunctionComposition
 import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalarsTriangleUnit
