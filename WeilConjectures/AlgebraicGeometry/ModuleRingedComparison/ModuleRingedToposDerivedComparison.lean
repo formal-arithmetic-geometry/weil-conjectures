@@ -230,7 +230,6 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 
 variable [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)]
 
-set_option maxHeartbeats 1600000 in
 -- The comparison instances contain large sheaf tensor constraints.
 -- Comparing the two localized mate squares elaborates the section-module constraints.
 /-- The ringed adjoint-of-unit open projection arrow, using inverse canonical delta.

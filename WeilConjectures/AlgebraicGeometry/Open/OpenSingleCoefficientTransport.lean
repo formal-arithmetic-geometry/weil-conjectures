@@ -154,7 +154,6 @@ attribute [local implicit_reducible] Scheme.Modules.Hom DerivedCategory
   HomologicalComplexUpToQuasiIso.Qh
 
 set_option cleanup.letToHave false in
-set_option maxHeartbeats 800000 in
 -- Keep the selected derived comparisons abstract during this calculation.
 private theorem open_counit_factor
     (X : Scheme.{u}) (U : X.Opens)
@@ -207,7 +206,6 @@ private theorem open_counit_factor
   rw [hθ]
 
 set_option cleanup.letToHave false in
-set_option maxHeartbeats 800000 in
 -- Keep the selected derived comparisons abstract during this calculation.
 private theorem q_normalize {X Y : Scheme.{u}} (f : X ⟶ Y) (M : Y.Modules) :
     Scheme.picardTermwiseSingleMap f M =
@@ -225,7 +223,6 @@ attribute [local irreducible] singleComplexOpenPullbackIso Scheme.picardTermwise
   Scheme.picardTermwiseCounit
 
 set_option cleanup.letToHave false in
-set_option maxHeartbeats 800000 in
 -- Keep the selected derived comparisons abstract during this calculation.
 private theorem open_single_factor (Y : Scheme.{u}) (U : Y.Opens) (M : Y.Modules) :
     let K := (DerivedCategory.singleFunctor
@@ -257,7 +254,6 @@ private theorem open_single_factor (Y : Scheme.{u}) (U : Y.Opens) (M : Y.Modules
   rw [← Category.assoc, hs]
 
 set_option cleanup.letToHave false in
-set_option maxHeartbeats 800000 in
 -- Keep the selected derived comparisons abstract during this calculation.
 private theorem counit_normalize {X Y : Scheme.{u}} (f : X ⟶ Y)
     (K : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ) :
@@ -277,7 +273,6 @@ private theorem counit_normalize {X Y : Scheme.{u}} (f : X ⟶ Y)
 attribute [local irreducible] SingleComplexBaseChange.counit
 
 set_option cleanup.letToHave false in
-set_option maxHeartbeats 800000 in
 -- Keep the selected derived comparisons abstract during this calculation.
 private theorem q_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
     {M N : Y.Modules} (m : M ⟶ N) :
@@ -297,7 +292,6 @@ private theorem q_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
   exact single_derived_map_naturality (Scheme.Modules.tensorPullback f) m
 
 set_option cleanup.letToHave false in
-set_option maxHeartbeats 800000 in
 -- Keep the selected derived comparisons abstract during this calculation.
 private theorem q_composition {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (t : X ⟶ Z) (ht : f ≫ g = t) (M : Z.Modules) :
@@ -343,7 +337,6 @@ private theorem q_composition {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
   simpa only [S, c, z, Functor.mapIso_hom, Category.assoc] using hh
 
 set_option cleanup.letToHave false in
-set_option maxHeartbeats 800000 in
 -- Keep the selected derived comparisons abstract during this calculation.
 private theorem q_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) [IsIso f] (M : Y.Modules) :
     IsIso (Scheme.picardTermwiseSingleMap f M) := by
@@ -357,7 +350,6 @@ private theorem q_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) [IsIso f] (M : Y.Module
   infer_instance
 
 set_option cleanup.letToHave false in
-set_option maxHeartbeats 800000 in
 -- The selected counits have large dependent types; keep their data abstract.
 /-- The single-complex coefficient square for restriction and an isomorphic apex.
 Source: Stacks Project, Tags 06YJ and 0D5S.
