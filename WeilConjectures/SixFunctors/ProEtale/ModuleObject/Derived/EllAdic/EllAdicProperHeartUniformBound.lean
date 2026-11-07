@@ -20,6 +20,7 @@ import all WeilConjectures.AlgebraicGeometry.SixFunctors.IndConstructibleFiltere
 import WeilConjectures.AlgebraicGeometry.SixFunctors.IndConstructibleExtensions
 import Mathlib.Algebra.Homology.HomologicalComplexLimits
 import WeilConjectures.AlgebraicGeometry.Condensed.CondensedQcqsPushforwardContinuitySupplement
+import all WeilConjectures.AlgebraicGeometry.CondensedClosedCostalkDerivedContinuity
 import WeilConjectures.AlgebraicGeometry.SixFunctors.IndHeartFullFaithfulness
 import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeartClosure
 import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeartSmall
@@ -212,6 +213,26 @@ private theorem qbar_closure_le_ind (ℓ : ℕ) [Fact ℓ.Prime]
     (((adicConstructibilityPredicateComparison ℓ X Λ .algebraicClosure).1 N).mp hN))
     inferInstance inferInstance inferInstance inferInstance hsum
 
+-- Keep colimit cocone conversions abstract over the abelian source category.
+private theorem singleFunctor_preservesColimit_of_continuity
+    {A : Type*} {B : Type*} {I : Type*}
+    [Category* A] [Abelian A] [Category* B] [Category* I]
+    [HasColimitsOfShape I A] [HasColimitsOfShape I B]
+    (M : I ⥤ A) (T : CochainComplex A ℤ ⥤ B)
+    (ht : IsIso (condensedContinuityComparison (M ⋙ CochainComplex.singleFunctor A 0) 0 T)) :
+    PreservesColimit M (CochainComplex.singleFunctor A 0 ⋙ T) := by
+  let S := CochainComplex.singleFunctor A 0
+  have : PreservesColimit M S := by
+    change PreservesColimit M (HomologicalComplex.single A (.up ℤ) 0)
+    infer_instance
+  let D := M ⋙ S
+  have hc : IsColimit (condensedContinuityCocone D 0) :=
+    canonicalContinuityIsColimit D 0 (fun _ ↦ inferInstance)
+  have hcT : IsColimit (T.mapCocone (condensedContinuityCocone D 0)) :=
+    IsColimit.ofPointIso (colimit.isColimit (D ⋙ T)) (i := ht)
+  have : PreservesColimit D T := preservesColimit_of_preserves_colimit_cocone hc hcT
+  infer_instance
+
 set_option synthInstance.maxHeartbeats 100000 in
 -- Colimit inference in the internal module category needs a larger search budget.
 set_option synthInstance.maxSize 4096 in
@@ -228,28 +249,11 @@ private theorem higherDirectImage_filtered
     DerivedCategory.homologyFunctor _ q
   constructor
   intro I _ _
-  have : HasColimitsOfShape I (CochainComplex A ℤ) := inferInstance
   constructor
   intro M
-  have : PreservesColimit M S := by
-    change PreservesColimit M (HomologicalComplex.single A (.up ℤ) 0)
-    infer_instance
-  let D := M ⋙ S
-  let π := Functor.whiskerLeft D ((ComplexShape.embeddingUpIntGE 0).πTruncGENatTrans A)
-  have hπ (i : I) : IsIso (π.app i) := by
-    change IsIso (((S.obj (M.obj i))).πTruncGE 0)
-    infer_instance
-  have : IsIso π := NatIso.isIso_of_isIso_app π
-  have hc : IsColimit (condensedContinuityCocone D 0) :=
-    (IsColimit.precomposeHomEquiv (asIso π) _).symm (colimit.isColimit _)
-  have ht : IsIso (condensedContinuityComparison D 0 T) :=
-    condensed_qcqs_pushforward_continuity Λ p D 0
-      (fun i n hn ↦ (S.obj (M.obj i)).isZero_of_isGE 0 n hn) q
-  have hcT : IsColimit (T.mapCocone (condensedContinuityCocone D 0)) :=
-    IsColimit.ofPointIso (colimit.isColimit (D ⋙ T)) (i := ht)
-  have : PreservesColimit D T := preservesColimit_of_preserves_colimit_cocone hc hcT
-  change PreservesColimit M (S ⋙ T)
-  infer_instance
+  exact singleFunctor_preservesColimit_of_continuity M T
+    (condensed_qcqs_pushforward_continuity Λ p (M ⋙ S) 0
+      (fun i n hn ↦ (S.obj (M.obj i)).isZero_of_isGE 0 n hn) q)
 
 -- A finite bound for the geometric fibres of a proper morphism to a Noetherian scheme.
 private theorem exists_geometricFibre_bound {Z Y : Scheme.{u}} [IsNoetherian Y]
