@@ -95,8 +95,11 @@ theorem rightDerivedPlusSingleUnitHomology_comp_comparison (Y : B) :
         (DerivedCategory.Plus.quotientCompQhIso C).inv.app
           (G.mapCochainComplexPlus.obj S) := by
     apply DerivedCategory.Plus.ι.map_injective
-    simp [mapHomotopyCategoryPlusSingleFunctorQhObjIso,
-      DerivedCategory.Plus.quotientCompQhIso, s, S, SC]
+    simp only [ObjectProperty.ι_obj, mapHomotopyCategoryPlusSingleFunctorQhObjIso, preimageIso_inv,
+      Iso.trans_inv, mapIso_inv, Iso.app_inv, NatTrans.naturality, DerivedCategory.Q_obj_single_obj,
+      comp_obj, comp_map, ObjectProperty.ι_map, DerivedCategory.Plus.quotientCompQhIso,
+      NatIso.ofComponents_inv_app, mapCochainComplexPlus_obj_obj, ObjectProperty.isoMk_inv,
+      ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.homMk_hom, SC, S, s]
     change DerivedCategory.Plus.ι.map (DerivedCategory.Plus.ι.preimage _) = _
     rw [Functor.map_preimage]
     exact ((DerivedCategory.quotientCompQhIso C).inv.naturality _).symm
@@ -108,15 +111,23 @@ theorem rightDerivedPlusSingleUnitHomology_comp_comparison (Y : B) :
           (DerivedCategory.quotientCompQhIso B).symm.app _)).inv =
       (DerivedCategory.Plus.quotientCompQhIso B).hom.app S := by
     apply DerivedCategory.Plus.ι.map_injective
-    simp [DerivedCategory.Plus.quotientCompQhIso, DerivedCategory.singleFunctorIsoCompQ, S]
+    simp only [ObjectProperty.ι_obj, comp_obj, DerivedCategory.singleFunctorIsoCompQ,
+      preimageIso_inv, Iso.trans_inv, Iso.app_inv, Iso.symm_inv, Iso.refl_inv, NatTrans.id_app,
+      ObjectProperty.ι_map, DerivedCategory.Plus.quotientCompQhIso, NatIso.ofComponents_hom_app,
+      ObjectProperty.isoMk_hom, Iso.app_hom, ObjectProperty.homMk_hom, S]
     change DerivedCategory.Plus.ι.map (DerivedCategory.Plus.ι.preimage _) = _
     rw [Functor.map_preimage]
     exact Category.comp_id _
   have hsingleUnit : G.rightDerivedPlusSingleUnit Y =
       DerivedCategory.Plus.Q.map s ≫ G.rightDerivedFunctorPlusUnit.app S := by
     simp only [rightDerivedPlusSingleUnit, hsource, htarget]
-    simp [rightDerivedFunctorPlusUnit, quotientCompMapHomotopyCategoryPlusIso, Category.assoc] <;>
-      (erw [Functor.map_id]; simp; rfl)
+    simp only [comp_obj, NatTrans.naturality, comp_map, Category.assoc, rightDerivedFunctorPlusUnit,
+      quotientCompMapHomotopyCategoryPlusIso, Iso.refl_inv, NatTrans.comp_app, whiskerLeft_app,
+      associator_inv_app, whiskerRight_app, NatTrans.id_app, associator_hom_app, Category.id_comp,
+      NatTrans.naturality_assoc, NatIso.cancel_natIso_inv_left]
+    erw [Functor.map_id]
+    simp
+    rfl
   have : ∀ n, Injective (L.obj.X n) := fun n ↦
     inferInstanceAs (Injective (R.cochainComplex.X n))
   have : IsIso (G.rightDerivedFunctorPlusUnit.app L) := by
@@ -130,8 +141,10 @@ theorem rightDerivedPlusSingleUnitHomology_comp_comparison (Y : B) :
   have hresolution : (G.rightDerivedFunctorPlusObjSingleFunctorIsoQ Y).hom =
       G.rightDerivedFunctorPlus.map (DerivedCategory.Plus.Q.map g) ≫
         CategoryTheory.inv (G.rightDerivedFunctorPlusUnit.app L) := by
-    simp [rightDerivedFunctorPlusObjSingleFunctorIsoQ,
-      DerivedCategory.singleFunctorIsoCompQ, g, R, L]
+    simp only [rightDerivedFunctorPlusObjSingleFunctorIsoQ, ObjectProperty.ι_obj, comp_obj,
+      DerivedCategory.singleFunctorIsoCompQ, Iso.trans_hom, mapIso_hom, preimageIso_hom,
+      Iso.app_hom, Iso.refl_hom, NatTrans.id_app, asIso_hom, Iso.symm_hom, asIso_inv,
+      IsIso.eq_comp_inv, Category.assoc, IsIso.inv_hom_id, Category.comp_id, L, R, g]
     congr 1
     apply DerivedCategory.Plus.ι.map_injective
     rw [Functor.map_preimage]
@@ -181,8 +194,7 @@ theorem rightDerivedPlusSingleUnitHomology_comp_comparison (Y : B) :
       InjectiveResolution.toRightDerivedZero'_comp_iCycles]
     erw [HomologicalComplex.singleObjCyclesSelfIso_inv_iCycles_assoc]
     dsimp [b, a]
-    simp only [
-      HomologicalComplex.singleMapHomologicalComplex_inv_app_self, Category.assoc]
+    simp only [HomologicalComplex.singleMapHomologicalComplex_inv_app_self, Category.assoc]
     rw [InjectiveResolution.ι'_f_zero]
     simp only [Functor.map_comp, Category.assoc]
     rw [← Functor.map_comp_assoc, Iso.inv_hom_id, Functor.map_id, Category.id_comp]

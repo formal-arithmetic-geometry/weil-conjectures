@@ -236,7 +236,7 @@ theorem etaleInverseImageScalarDistributivity_left (U V : Scheme.{u}) (f : U ⟶
     · have h := congrArg (fun k ↦ k.hom.app W z) (prod.map_snd (𝟙 R') addU)
       dsimp at h
       rw [sectionProduct_inv_snd]
-      convert h.trans hxy using 1 <;> rfl
+      convert h.trans hxy using 1
   have hx : (prod.lift prod.fst (prod.snd ≫ prod.fst) : R' ⨯ (X' ⨯ X') ⟶ R' ⨯ X').hom.app
       W z = (sectionProduct R' X').inv.hom.app W (r, x) := by
     apply product_section_ext R' X' W

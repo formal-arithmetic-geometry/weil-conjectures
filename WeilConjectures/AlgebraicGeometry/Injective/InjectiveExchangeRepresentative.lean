@@ -66,8 +66,8 @@ private lemma map_comp_naturality {A B C D : Type*}
   simpa only [Functor.map_comp, Category.assoc, Functor.comp_map] using
     congrArg (fun z ↦ U.map u ≫ z) (θ.naturality t)
 
--- Remote elaboration reached 200000 heartbeats in 21s after extracting generic proof steps.
 set_option maxHeartbeats 400000 in
+-- Remote elaboration reached 200000 heartbeats in 21s after extracting generic proof steps.
 /-- Compute the derived mate on the chosen injective representative, before sections.
 
 Source: Stacks Project, Tag 03Q9, final injective-complex paragraph, with the

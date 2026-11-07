@@ -155,6 +155,6 @@ theorem restriction_chart_unit_normalization
   repeat' erw [Category.assoc]
   repeat' erw [← Functor.map_comp] at hh
   repeat' erw [← Functor.map_comp]
-  convert hh.symm using 1 <;> congr 1
+  convert hh.symm using 1
 
 end AlgebraicGeometry.Scheme.Modules

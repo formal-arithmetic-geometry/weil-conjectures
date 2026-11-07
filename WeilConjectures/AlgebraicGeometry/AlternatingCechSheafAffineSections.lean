@@ -112,7 +112,8 @@ private noncomputable def mapExtendIso
   by_cases hn' : 0 ≤ n
   · by_cases hm' : 0 ≤ m
     · dsimp only [α]
-      simp only [dite_eq_left hn', dite_eq_left hm', Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom]
+      simp only [dite_eq_left hn', dite_eq_left hm', Iso.trans_hom, Iso.symm_hom,
+        Functor.mapIso_hom]
       change _ ≫ (L.extend e).d n m = F.map ((K.extend e).d n m) ≫ _
       rw [L.extend_d_eq e (hi n hn') (hi m hm'),
         K.extend_d_eq e (hi n hn') (hi m hm')]

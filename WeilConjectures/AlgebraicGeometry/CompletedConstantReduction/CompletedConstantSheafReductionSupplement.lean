@@ -743,7 +743,8 @@ theorem finiteReduction_exists (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     change s.val.app U (tensorSection T c M U 1
       ((toSheafify (ProEt.topology T) P.presheaf).app U x)) = _
     simp only [map_one, id_eq, one_mul] at hx
-    convert hx using 1 <;> rfl
+    convert hx using 1
+    rfl
 
 /-- The finite-coefficient reduction map, specified uniquely on tensor generators.
 Source: blueprint finite-coefficient interpretation, Stacks Tag 093M

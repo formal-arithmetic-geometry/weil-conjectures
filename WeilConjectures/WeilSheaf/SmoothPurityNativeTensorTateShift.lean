@@ -79,7 +79,8 @@ noncomputable def nativeConstructibleTensorTateShiftIso (d n : ℤ) :
   let a : Prod.sectR (G⟦n⟧) _ ⋙ ι.prod ι ≅
       ι ⋙ Prod.sectR ((ι.obj G) ⟦n⟧) _ :=
     NatIso.ofComponents (fun K ↦ e.prod (Iso.refl (ι.obj K))) (fun _ ↦ by
-      simp
+      simp only [Functor.comp_obj, Functor.prod_obj, prod_Hom, Functor.comp_map, Prod.sectR_map,
+        Functor.prod_map, Iso.prod_hom, Iso.refl_hom, prod_comp, Category.comp_id, Prod.mk.injEq]
       constructor
       · erw [ι.map_id]
         exact Category.id_comp _

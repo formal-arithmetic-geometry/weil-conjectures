@@ -295,8 +295,9 @@ private instance preservesProducts (n : ℤ) :
   let A := ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber
   have : HasColimitsOfSize.{u + 1, u + 1} A := inferInstance
   have : HasColimitsOfSize.{0, 0} A := hasColimitsOfSizeShrink.{0, 0, u + 1, u + 1} A
-  exact (IsoAlgebra.Free.adjunction (WeilSheaf.frobeniusPullback k₀ l X)).rightAdjoint_preservesLimits
-    |>.preservesLimitsOfShape
+  exact
+    (IsoAlgebra.Free.adjunction (WeilSheaf.frobeniusPullback k₀ l X)).rightAdjoint_preservesLimits
+      |>.preservesLimitsOfShape
 
 private noncomputable def forgetIhom (M N : ProEtaleWeilSheaf k₀ l X) :
     (U).obj (((HW).obj (op M)).obj N) ≅ ((HO).obj (op ((U).obj M))).obj ((U).obj N) :=

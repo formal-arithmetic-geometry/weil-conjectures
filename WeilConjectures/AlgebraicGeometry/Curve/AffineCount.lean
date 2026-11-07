@@ -142,7 +142,8 @@ theorem exists_units_pic_presentation (f : C ⟶ Spec (.of k)) [IsConnectedCurve
       have hQ : c.i.closedPointsMap ⟨y, hy'⟩ = Q := Subtype.ext hy
       rw [add_zero, ← hQ]
       change _ = Finsupp.mapDomain _ _ _
-      rw [Finsupp.mapDomain_apply_of_injective c.i.closedPointsMap_injective, Scheme.Divisor.comap_apply]
+      rw [Finsupp.mapDomain_apply_of_injective c.i.closedPointsMap_injective,
+        Scheme.Divisor.comap_apply]
     · suffices hz : ext (Scheme.Divisor.comap c.i E) Q = 0 by rw [hz, zero_add]
       refine Finsupp.mapDomain_of_notMem_range _ _ fun ⟨P, hP⟩ ↦ h ⟨P.1, congrArg Subtype.val hP⟩
   have hcomap_divS (v : S → ℤ) : Scheme.Divisor.comap c.i (divS v) = 0 := by

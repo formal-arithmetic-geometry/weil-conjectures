@@ -322,6 +322,7 @@ lemma commShiftTensorLeft_eq (P : CochainComplex.KFlat C) :
   infer_instance
 
 set_option maxHeartbeats 400000 in
+-- Comparing the localized tensor shift structures requires extra instance elaboration.
 open TensorCommShift₂ in
 /-- On `Qh.obj P` for a K-flat complex `P`, the commutation of `- ⊗ᴸ K` with the shifts given
 by `DerivedCategory.commShift₂CurriedTensor` is the one of `commShiftTensorRightQhObj`, which is

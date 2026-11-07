@@ -342,7 +342,8 @@ theorem rank_map_add_rank_map_add_eq_of_exact (hψ : ∀ s, ψ s ≠ 0 → IsUni
   -- the descending induction
   have top (q : ℤ) (hq : max N i < q) : P q := by
     have := hN q (lt_of_le_of_lt (le_max_left _ _) hq)
-    simp only [P, ite_eq_right (show q ≠ i by omega), add_zero, Fintype.card_eq_zero, Nat.add_eq_zero_iff]
+    simp only [P, ite_eq_right (show q ≠ i by omega), add_zero,
+      Fintype.card_eq_zero, Nat.add_eq_zero_iff]
     exact ⟨Nat.le_zero.1 ((rank_le_card_height _).trans_eq Fintype.card_eq_zero),
       Nat.le_zero.1 ((rank_le_card_width _).trans_eq Fintype.card_eq_zero)⟩
   have key (n : ℕ) : ∀ q, max N i + 1 - n ≤ q → P q := by

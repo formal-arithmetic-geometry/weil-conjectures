@@ -339,7 +339,8 @@ theorem bertini_noether [IsDomain A] (P : MvPolynomial (Fin n) A)
     rintro rfl
     exact hP.ne_zero (map_zero _)
   obtain ⟨m₀, hm₀, hm₀d⟩ := Finset.exists_mem_eq_sup P.support hP0 fun s ↦ s.sum fun _ e ↦ e
-  refine ⟨a₀ * AddMonoidAlgebra.coeff P m₀, mul_ne_zero ha₀ (mem_support_iff.mp hm₀), fun {k} _ φ hφ ↦ ?_⟩
+  refine ⟨a₀ * AddMonoidAlgebra.coeff P m₀, mul_ne_zero ha₀ (mem_support_iff.mp hm₀),
+    fun {k} _ φ hφ ↦ ?_⟩
   rw [map_mul] at hφ
   have hdeg : totalDegree (map φ P) = d := by
     refine le_antisymm (totalDegree_map_le φ P) ?_

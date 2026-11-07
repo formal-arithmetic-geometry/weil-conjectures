@@ -68,7 +68,8 @@ private def sectionExtension : PresheafOfModules.{u} (R ⋙ forget₂ CommRingCa
     ext1 X
     exact (ModuleCat.extendScalars (coeff φ X)).map_comp _ _
 
-local instance localInst_ScalarExtensionMonoidal_1 {M : PresheafOfModules.{u} (R ⋙ forget₂ CommRingCat.{u} RingCat.{u})}
+local instance localInst_ScalarExtensionMonoidal_1
+    {M : PresheafOfModules.{u} (R ⋙ forget₂ CommRingCat.{u} RingCat.{u})}
     {X Y : Cᵒᵖ} (f : X ⟶ Y) :
     Module (R.obj Y)
       ((ModuleCat.restrictScalars ((R ⋙ forget₂ CommRingCat RingCat).map f).hom).obj

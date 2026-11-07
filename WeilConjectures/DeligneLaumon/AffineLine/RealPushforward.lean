@@ -124,10 +124,10 @@ theorem isReal_higherLowerShriek_one {ι : PadicAlgCl l →+* ℂ} {K : WeilShea
   have hd := Scheme.Hom.degreeOver_ne_zero (Y ↘ Spec (CommRingCat.of k₀)) ξ.2
   have := h₁ (n * (Y ↘ Spec (CommRingCat.of k₀)).degreeOver ξ.1)
   have hc := (hfib K 1).2
-  -- `hfib` states the characteristic polynomials with the instance `AlgebraicClosure.instCommRing`,
-  -- while `localPolynomial` unfolds to `charpolyRev` through `Field.toCommRing`; identify the two
-  -- on a generic module (`charpolyRev_eq_localPolynomial`) so that the kernel never compares them
-  -- on the stalk (v4.35: kernel timeout).
+  -- `hfib` states the characteristic polynomials with the instance
+  -- `AlgebraicClosure.instCommRing`, while `localPolynomial` unfolds to `charpolyRev` through
+  -- `Field.toCommRing`; identify the two on a generic module (`charpolyRev_eq_localPolynomial`)
+  -- so that the kernel never compares them on the stalk (v4.35: timeout).
   rw [charpolyRev_eq_localPolynomial, charpolyRev_eq_localPolynomial] at hc
   rwa [← hc, Polynomial.coeff_expand_mul (Nat.pos_of_ne_zero hd)] at this
 

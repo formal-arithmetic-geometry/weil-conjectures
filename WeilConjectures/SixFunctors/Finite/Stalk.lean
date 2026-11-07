@@ -262,8 +262,8 @@ lemma Etale.stalkIsoColimitSections_hom_comp_piLift_stalkRestrict :
   simp only [Category.assoc, Pi.lift_comp_π, Limits.Pi.map_π, PreservesProduct.iso_hom]
   erw [Etale.stalkIsoColimitSections, Functor.Final.ι_colimitIso_hom_assoc,
     Etale.toPresheafFiber_stalkRestrict, piComparison_comp_π_assoc, colim_map, ι_colimMap_assoc,
-    ι_colimMap_assoc, sectionsIsoPi_hom, ← NatTrans.comp_app_assoc, Pi.lift_comp_π, Etale.pieceIsoStalk,
-    Functor.Final.ι_colimitIso_hom]
+    ι_colimMap_assoc, sectionsIsoPi_hom, ← NatTrans.comp_app_assoc, Pi.lift_comp_π,
+    Etale.pieceIsoStalk, Functor.Final.ι_colimitIso_hom]
   exact (colimit.w ((Functor.Elements.π (pointSmallEtale t.1).fiber).op ⋙ G.obj)
     (Functor.Elements.homMk
       (x := Functor.elementsMk _ (s.unop.pieceObj t) (s.unop.piecePt t))
