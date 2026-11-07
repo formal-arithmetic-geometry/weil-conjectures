@@ -557,6 +557,8 @@ private def section_localization_iso (T : Scheme.{u}) :
         DerivedCategory.Q :=
   (ModuleRingedComparison.equivalence Λ T).functor.mapDerivedCategoryFactors
 
+set_option pp.all true in
+set_option pp.maxSteps 100000 in
 private theorem scalar_computation (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u})
     (c : ScalarSectionData a T) (h : ScalarSectionNormalized a T c)
     (P : CochainComplex (Modules Λ T) ℤ) :
@@ -587,6 +589,8 @@ private def section_pull_compute_nat {X Y : Scheme.{u}} (f : X ⟶ Y) :
 
 set_option maxHeartbeats 300000 in
 -- Unfold the two named interfaces once, preserving the fixed derived-functor instances.
+set_option pp.all true in
+set_option pp.maxSteps 100000 in
 private theorem geometric_computation {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : CochainComplex (Modules Λ Y) ℤ) :
     @Eq ((ModuleRingedComparison.derivedEquivalence Λ X).functor.obj
