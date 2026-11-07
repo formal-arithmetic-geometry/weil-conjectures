@@ -101,7 +101,6 @@ theorem tensorSingleCoefficientMap_eq {A B X : Scheme.{v}}
 
 attribute [local irreducible] Scheme.Modules.tensorPullback
 
-set_option maxHeartbeats 600000 in
 -- The single embeddings use both the scheme and ringed-space module categories.
 private theorem single_naturality {A B : Scheme.{v}} (a : B ⟶ A)
     {M N : A.Modules} (f : M ⟶ N) :
