@@ -235,6 +235,77 @@ lemma intermediateGraph_openι :
       σ.interiorEmb_ι, Category.assoc, σ.graph_snd]
     rfl
 
+/-- **A specialization of the overlap stays on the graph** (blueprint:
+`lemma-nagata-intermediate-specialization-boundary`): if a point of the image of `O` in
+`U ×_S X` specializes to `t'`, then `t'` is a graph point `γ(v)`, and if its first
+coordinate leaves `O`, then its second coordinate lies in the forbidden boundary. -/
+theorem exists_graph_eq_of_specializes {t t' : ↥(pullback u σ.s)}
+    (ht : t ∈ Set.range (σ.υ ≫ σ.graph)) (h : t ⤳ t') :
+    ∃ v, σ.graph v = t' ∧
+      (pullback.fst u σ.s t' ∉ (O : Set U) → pullback.snd u σ.s t' ∈ σ.forbiddenBoundary) := by
+  have := σ.isProper_graph
+  have hmem : t' ∈ Set.range σ.graph := by
+    obtain ⟨o, rfl⟩ := ht
+    exact h.mem_closed σ.graph.isClosedMap.isClosed_range ⟨σ.υ o, by
+      rw [Scheme.Hom.comp_apply]⟩
+  obtain ⟨v, rfl⟩ := hmem
+  refine ⟨v, rfl, fun hv ↦ subset_closure ⟨v, ?_, ?_⟩⟩
+  · rwa [← Scheme.Hom.comp_apply, σ.graph_fst] at hv
+  · rw [← Scheme.Hom.comp_apply, σ.graph_snd]
+
+/-- **The overlap image is stable under specialization** (blueprint:
+`lemma-nagata-intermediate-overlap-specialization-closed`): a specialization of a point of
+the image of `O` in `U ×_S Xᵢ°` is a graph point lying over `O`, since its second
+coordinate avoids the forbidden boundary; it is therefore again in the image of `O`. -/
+theorem stableUnderSpecialization_range_intermediateGraph :
+    StableUnderSpecialization (Set.range σ.intermediateGraph) := by
+  have := σ.isOpenImmersion_υ
+  rintro - t' h ⟨o, rfl⟩
+  obtain ⟨v, hv, hbd⟩ := σ.exists_graph_eq_of_specializes
+    ⟨o, by rw [← σ.intermediateGraph_openι, Scheme.Hom.comp_apply]⟩
+    (h.map σ.intermediateOpenι.continuous)
+  have hsnd : pullback.snd u σ.s (σ.intermediateOpenι t') ∈ (σ.interior : Set σ.X) := by
+    rw [← Scheme.Hom.comp_apply, σ.intermediateOpenι_snd, Scheme.Hom.comp_apply,
+      ← Scheme.Opens.range_ι]
+    exact ⟨_, rfl⟩
+  have hvO : v ∈ Set.range σ.υ := by
+    rw [σ.range_υ, Set.mem_preimage, ← σ.graph_fst, Scheme.Hom.comp_apply, hv]
+    by_contra hn
+    exact hsnd (hbd hn)
+  obtain ⟨o', rfl⟩ := hvO
+  refine ⟨o', σ.intermediateOpenι.isOpenEmbedding.injective ?_⟩
+  rw [← Scheme.Hom.comp_apply, σ.intermediateGraph_openι, Scheme.Hom.comp_apply, hv]
+
+/-- **The overlap image is constructible** (blueprint:
+`lemma-nagata-intermediate-overlap-constructible`): over a Noetherian base, the overlap
+map is a morphism of finite presentation between Noetherian schemes, so Chevalley's
+theorem applies. -/
+theorem isConstructible_range_intermediateGraph [IsNoetherian S] [LocallyOfFiniteType u]
+    [QuasiCompact u] : Topology.IsConstructible (Set.range σ.intermediateGraph) := by
+  have := σ.isProper_s
+  have : IsNoetherian σ.X := σ.isNoetherian_X
+  have : IsLocallyNoetherian U := LocallyOfFiniteType.isLocallyNoetherian u
+  have : CompactSpace U := QuasiCompact.compactSpace_of_compactSpace u
+  have : IsNoetherian U := ⟨⟩
+  have : CompactSpace O.toScheme :=
+    isCompact_iff_compactSpace.mp (TopologicalSpace.NoetherianSpace.isCompact _)
+  have : IsNoetherian O.toScheme := ⟨⟩
+  have : CompactSpace σ.interior.toScheme :=
+    isCompact_iff_compactSpace.mp (TopologicalSpace.NoetherianSpace.isCompact _)
+  have : IsNoetherian σ.interior.toScheme := ⟨⟩
+  have : IsLocallyNoetherian (pullback u (σ.interior.ι ≫ σ.s)) :=
+    LocallyOfFiniteType.isLocallyNoetherian (pullback.fst u (σ.interior.ι ≫ σ.s) ≫ u)
+  have : CompactSpace ↥(pullback u (σ.interior.ι ≫ σ.s)) :=
+    QuasiCompact.compactSpace_of_compactSpace (pullback.fst u (σ.interior.ι ≫ σ.s))
+  have : IsNoetherian (pullback u (σ.interior.ι ≫ σ.s)) := ⟨⟩
+  have : LocallyOfFinitePresentation
+      (σ.intermediateGraph ≫ pullback.fst u (σ.interior.ι ≫ σ.s)) := by
+    rw [σ.intermediateGraph_fst]
+    infer_instance
+  have := locallyOfFinitePresentation_of_comp σ.intermediateGraph
+    (pullback.fst u (σ.interior.ι ≫ σ.s))
+  rw [← Set.image_univ]
+  exact σ.intermediateGraph.isConstructible_image Topology.IsConstructible.univ
 
 /-- **The overlap of the two charts of the intermediate scheme is a closed immersion**
 (blueprint: `lemma-nagata-intermediate-overlap-closed`).

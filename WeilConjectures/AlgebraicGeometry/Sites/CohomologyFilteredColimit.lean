@@ -174,6 +174,14 @@ open Presheaf
 
 variable {X : Scheme.{u}}
 
+/-- Every covering sieve of a quasi-compact étale `X`-scheme `W` contains a finite family
+generating a covering sieve. -/
+lemma exists_finite_ofArrows_mem_smallEtaleTopology {W : X.Etale} [CompactSpace W.left]
+    (R : Sieve W) (hR : R ∈ X.smallEtaleTopology W) :
+    ∃ (n : ℕ) (U : Fin n → Over W), (∀ a, R (U a).hom) ∧
+      Sieve.ofArrows (fun a ↦ (U a).left) (fun a ↦ (U a).hom) ∈ X.smallEtaleTopology W := by
+  obtain ⟨n, U, g, hRg, -, hg⟩ := exists_finite_affine_of_mem_smallEtaleTopology hR
+  exact ⟨n, fun a ↦ Over.mk (g a), hRg, (ofArrows_mem_smallEtaleTopology_iff g).2 hg⟩
 
 /-- The quasi-compact quasi-separated étale `X`-schemes satisfy the hypothesis of the Čech
 criterion `CategoryTheory.Sheaf.subsingleton_H_succ_of_exactAt_cechComplex`: every covering
@@ -198,6 +206,34 @@ lemma exists_finite_cechNerve_qcqs (V : X.Etale)
 variable {K : Type (u + 1)} [SmallCategory K] [IsFiltered K]
   {F : K ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} {c : Cocone F}
 
+/-- **Sections over a quasi-compact `W` of a filtered colimit of abelian sheaves are separated
+at a finite stage.** Two sections of `F k` over `W` with the same image in `c.pt` agree in some
+later `F k'`. -/
+theorem exists_map_eq_of_isColimit_ab (hc : IsColimit c) {W : X.Etale} [CompactSpace W.left]
+    {k : K} (t t' : (F.obj k).obj.obj (op W))
+    (h : (c.ι.app k).hom.app (op W) t = (c.ι.app k).hom.app (op W) t') :
+    ∃ (k' : K) (a : k ⟶ k'), (F.map a).hom.app (op W) t = (F.map a).hom.app (op W) t' :=
+  Sheaf.exists_map_eq_of_isColimit_of_finite hc exists_finite_ofArrows_mem_smallEtaleTopology
+    t t' h
+
+/-- **Sections over a quasi-compact `W` of a filtered colimit of abelian sheaves vanish at a
+finite stage.** A section of `F k` over `W` which vanishes in `c.pt` vanishes in some later
+`F k'`. -/
+theorem exists_map_eq_zero_of_isColimit_ab (hc : IsColimit c) {W : X.Etale}
+    [CompactSpace W.left] {k : K} (t : (F.obj k).obj.obj (op W))
+    (h : (c.ι.app k).hom.app (op W) t = 0) :
+    ∃ (k' : K) (a : k ⟶ k'), (F.map a).hom.app (op W) t = 0 :=
+  Sheaf.exists_map_eq_zero_of_isColimit_of_finite hc
+    exists_finite_ofArrows_mem_smallEtaleTopology t h
+
+/-- **Sections over a quasi-compact quasi-separated `W` of a filtered colimit of abelian
+sheaves come from a finite stage.** Every section of `c.pt` over `W` is the image of a section
+of some `F k` (Stacks 0738). -/
+theorem exists_app_eq_of_isColimit_ab (hc : IsColimit c) {W : X.Etale} [CompactSpace W.left]
+    [QuasiSeparatedSpace W.left] (s : c.pt.obj.obj (op W)) :
+    ∃ (k : K) (t : (F.obj k).obj.obj (op W)), (c.ι.app k).hom.app (op W) t = s :=
+  Sheaf.exists_app_eq_of_isColimit_of_finite hc _ exists_finite_cechNerve_qcqs
+    ⟨‹_›, ‹_›⟩ s
 
 variable (X) in
 /-- On a quasi-compact quasi-separated scheme `X`, a filtered colimit of injective abelian étale

@@ -60,6 +60,16 @@ namespace WeilComplex
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [IsProper (X ↘ Spec (CommRingCat.of k₀))]
 
+/-- Blueprint `prop-weil-proper-compact-coincidence` (proper coincidence): for `Y` proper over
+`k₀` with structure morphism `a`, the compactly supported direct image is the ordinary direct
+image, `Ra_! K ≅ Ra_* K` (the identity is a compactification of `a`), and hence
+`H_c^i(Y ⊗ k̄, K) ≅ Hⁱ(Y ⊗ k̄, K)` Frobenius-equivariantly for every Weil complex `K` and every
+`i`. -/
+theorem proper_compact_coincidence (K : WeilComplex k₀ l X) :
+    Nonempty ((derivedLowerShriek k₀ l (X ↘ Spec (CommRingCat.of k₀))).obj K ≅
+      (derivedLowerStar (X ↘ Spec (CommRingCat.of k₀))).obj K) ∧
+    ∀ i : ℤ, Nonempty ((K.compactlySupportedCohomology i).Equiv (K.cohomology i)) :=
+  ⟨⟨derivedLowerShriekObjIsoOfIsProper K⟩, nonempty_equiv_compactlySupportedCohomology_cohomology K⟩
 
 end WeilComplex
 
@@ -84,6 +94,15 @@ theorem isMixedOfWeightsAtMost_toComplex_adicConstant
   · exact isMixedOfWeightsAtMost_of_isZero
       (WeilComplex.isZero_homologySheaf_singleComplex hb _) _
 
+/-- Blueprint `prop-weight-purity`: the constant Weil sheaf is `ι`-pure of weight `0`, punctually
+(`AlgebraicGeometry.WeilSheaf.isPunctuallyPureOfWeight_adicConstant`), and as a Weil complex it
+is mixed of weights at most `0`. -/
+theorem weightPurity_adicConstant [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+    (ι : PadicAlgCl l →+* ℂ) :
+    (adicConstant k₀ l X).IsPunctuallyPureOfWeight ι 0 ∧
+      (toComplex.obj (adicConstant k₀ l X)).IsMixedOfWeightsAtMost ι 0 :=
+  ⟨isPunctuallyPureOfWeight_adicConstant (k₀ := k₀) (l := l) (X := X) (ι := ι),
+    isMixedOfWeightsAtMost_toComplex_adicConstant k₀ l X ι⟩
 
 variable {k₀ l} in
 /-- A Weil sheaf on `Spec k₀` which is `ι`-mixed of weights at most `w` has global sections of
@@ -186,6 +205,40 @@ theorem isPureOfWeightOver_cohomology_adicConstant (ι : PadicAlgCl l →+* ℂ)
       _ = Q ^ d * ‖ι α‖ := by field_simp
   exact le_of_mul_le_mul_left key (pow_pos hQ d)
 
+include d in
+/-- Blueprint `cor-zl-purity-smooth-proper`: for `X₀` smooth, proper and geometrically connected
+of pure dimension `d`, for every `i`, `Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` is `ι`-pure of weight `i` and
+`H_c^i(X₀ ⊗ k̄, ℚ̄_ℓ)` is `ι`-mixed of weights at most `i`. -/
+theorem purity_smoothProper (ι : PadicAlgCl l →+* ℂ) (i : ℤ) :
+    ((adicConstant k₀ l X).cohomology i).IsPureOfWeightOver k₀ ι i ∧
+      ((adicConstant k₀ l X).compactlySupportedCohomology i).HasWeightsAtMostOver k₀ ι i :=
+  ⟨isPureOfWeightOver_cohomology_adicConstant k₀ l X d ι i,
+    hasWeightsAtMostOver_compactlySupportedCohomology_adicConstant k₀ l X ι i⟩
+
+include d in
+/-- Blueprint `thm-weil-deligne-purity` and `sk-input-weights` (Deligne's purity theorem for
+smooth proper varieties): for `X₀` smooth, proper and geometrically connected of pure dimension
+`d` over `k₀ = 𝔽_q` and every `i`,
+
+1. the constant Weil sheaf is punctually `ι`-pure of weight `0`;
+2. `H_c^i(X₀ ⊗ k̄, ℚ̄_ℓ)` is `ι`-mixed of weights at most `i`;
+3. `H_c^i(X₀ ⊗ k̄, ℚ̄_ℓ) ≅ Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` Frobenius-equivariantly;
+4. `Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` is `ι`-pure of weight `i`;
+5. every eigenvalue `α` of the geometric Frobenius on `Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` has
+   `|ι α| = q^{i/2}`. -/
+theorem deligne_purity (ι : PadicAlgCl l →+* ℂ) (i : ℤ) :
+    (adicConstant k₀ l X).IsPunctuallyPureOfWeight ι 0 ∧
+      ((adicConstant k₀ l X).compactlySupportedCohomology i).HasWeightsAtMostOver k₀ ι i ∧
+      Nonempty (((adicConstant k₀ l X).compactlySupportedCohomology i).Equiv
+        ((adicConstant k₀ l X).cohomology i)) ∧
+      ((adicConstant k₀ l X).cohomology i).IsPureOfWeightOver k₀ ι i ∧
+      ∀ α : PadicAlgCl l, ((adicConstant k₀ l X).cohomology i).frobeniusEnd.HasEigenvalue α →
+        ‖ι α‖ = (Nat.card k₀ : ℝ) ^ ((i : ℝ) / 2) :=
+  ⟨isPunctuallyPureOfWeight_adicConstant (k₀ := k₀) (l := l) (X := X) (ι := ι),
+    hasWeightsAtMostOver_compactlySupportedCohomology_adicConstant k₀ l X ι i,
+    WeilComplex.nonempty_equiv_compactlySupportedCohomology_cohomology _ i,
+    isPureOfWeightOver_cohomology_adicConstant k₀ l X d ι i,
+    isPureOfWeightOver_cohomology_adicConstant k₀ l X d ι i⟩
 
 end WeilSheaf
 

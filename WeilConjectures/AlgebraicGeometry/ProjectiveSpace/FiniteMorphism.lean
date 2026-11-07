@@ -46,6 +46,63 @@ namespace AlgebraicGeometry.ProjectiveSpace
 
 variable {n : Type u} [Finite n]
 
+/-- Blueprint `lem-fin-projective-finite-fibres`: Projective morphisms with finite fibres are
+finite.
+
+Let `f : D ⟶ T` be projective, i.e. `f = π ∘ i` for a closed immersion `i : D ⟶ ℙ(n; T)`. If
+every geometric fibre `D ×_T Spec Ω`, for `Ω` algebraically closed, has only finitely many
+points, then `f` is finite. The blueprint assumes `T` Noetherian; this is not needed. -/
+theorem isFinite_of_finite_pullback {D T : Scheme.{u}} (f : D ⟶ T) (i : D ⟶ ℙ(n; T))
+    [IsClosedImmersion i] (hi : i ≫ ℙ(n; T) ↘ T = f)
+    (hfib : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ T),
+      Finite (pullback f t : Scheme.{u})) :
+    IsFinite f := by
+  subst hi
+  have : LocallyQuasiFinite (i ≫ ℙ(n; T) ↘ T) := by
+    refine LocallyQuasiFinite.of_finite_preimage_singleton _ fun x ↦ ?_
+    let K := T.residueField x
+    let t : Spec (.of (AlgebraicClosure K)) ⟶ T :=
+      Spec.map (CommRingCat.ofHom (algebraMap K (AlgebraicClosure K))) ≫ T.fromSpecResidueField x
+    have := hfib (AlgebraicClosure K) t
+    refine (Set.finite_range (pullback.fst (i ≫ ℙ(n; T) ↘ T) t)).subset fun y hy ↦ ?_
+    obtain ⟨p⟩ : Nonempty (Spec (.of (AlgebraicClosure K))) := inferInstance
+    obtain ⟨z, hz, -⟩ := Scheme.Pullback.exists_preimage_pullback (f := i ≫ ℙ(n; T) ↘ T) (g := t)
+      y p (by
+      simp only [Set.mem_preimage, Set.mem_singleton_iff] at hy
+      rw [hy]; exact (T.fromSpecResidueField_apply x _).symm)
+    exact ⟨z, hz⟩
+  exact IsFinite.of_isProper_of_locallyQuasiFinite _
+
+/-- Blueprint `lem-fin-projective-generically-finite`: A projective family with finite generic
+fibre is generically finite.
+
+Let `A` be a Noetherian domain with fraction field `K` and `f : D ⟶ Spec A` projective. If the
+generic fibre `D_K = D ×_{Spec A} Spec K` has dimension at most zero, then `f` is finite over a
+nonempty open `U` of `Spec A`. -/
+theorem exists_isFinite_morphismRestrict_of_generic_fibre {A : Type u} [CommRing A] [IsDomain A]
+    [IsNoetherianRing A] {D : Scheme.{u}} (f : D ⟶ Spec (.of A)) (i : D ⟶ ℙ(n; Spec (.of A)))
+    [IsClosedImmersion i] (hi : i ≫ ℙ(n; Spec (.of A)) ↘ Spec (.of A) = f)
+    (hD : topologicalKrullDim (pullback f
+      (Spec.map (CommRingCat.ofHom (algebraMap A (FractionRing A)))) : Scheme.{u}) ≤ 0) :
+    ∃ U : (Spec (.of A)).Opens, U ≠ ⊥ ∧ IsFinite (f ∣_ U) := by
+  subst hi
+  set η := Spec.map (CommRingCat.ofHom (algebraMap A (FractionRing A)))
+  have : IsLocallyNoetherian (pullback (i ≫ ℙ(n; Spec (.of A)) ↘ Spec (.of A)) η : Scheme.{u}) :=
+    LocallyOfFiniteType.isLocallyNoetherian (pullback.snd _ η)
+  have : IsLocallyArtinian (pullback (i ≫ ℙ(n; Spec (.of A)) ↘ Spec (.of A)) η : Scheme.{u}) :=
+    .of_topologicalKrullDim_le_zero hD
+  have : CompactSpace (pullback (i ≫ ℙ(n; Spec (.of A)) ↘ Spec (.of A)) η : Scheme.{u}) :=
+    QuasiCompact.compactSpace_of_compactSpace (pullback.snd _ η)
+  have : Finite (pullback (i ≫ ℙ(n; Spec (.of A)) ↘ Spec (.of A)) η : Scheme.{u}) :=
+    finite_of_compact_of_discrete
+  obtain ⟨p⟩ : Nonempty (Spec (.of (FractionRing A))) := inferInstance
+  obtain ⟨V, hV, hfin⟩ := exists_isFinite_morphismRestrict_of_finite_preimage_singleton
+    (i ≫ ℙ(n; Spec (.of A)) ↘ Spec (.of A)) (η p) <| by
+      refine (Set.finite_range
+        (pullback.fst (i ≫ ℙ(n; Spec (.of A)) ↘ Spec (.of A)) η)).subset fun y hy ↦ ?_
+      obtain ⟨z, hz, -⟩ := Scheme.Pullback.exists_preimage_pullback y p hy
+      exact ⟨z, hz⟩
+  exact ⟨V, fun h ↦ by simp [h] at hV, hfin⟩
 
 /-- Blueprint `lem-fin-finite-over-projective`: Finite covers of projective schemes are
 projective.

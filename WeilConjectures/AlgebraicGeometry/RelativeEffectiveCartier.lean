@@ -726,6 +726,25 @@ theorem isRelativeEffectiveCartier_iff_locallyQuasiFinite (π : X ⟶ S)
     h.1.isLocallyPrincipal.locallyOfFinitePresentation_subschemeι_comp π⟩,
     fun ⟨hqf, hflat, hlfp⟩ ↦ ⟨isInvertible_of_locallyQuasiFinite_of_flat π hqf hflat hlfp, hflat⟩⟩
 
+/-- **The Cartier criterion, `(4) ⇒ (3)` over a locally noetherian base.** Let `S` be locally
+noetherian, let `π : X ⟶ S` be smooth of relative dimension `1`, and let `D ⊆ X` be a closed
+subscheme, with ideal `J`, such that `D ⟶ S` is locally quasi-finite and flat. Then `D ⟶ S` is
+locally quasi-finite, flat and locally of finite presentation, so `D` is a relative effective
+Cartier divisor by `isRelativeEffectiveCartier_iff_locallyQuasiFinite`.
+
+`D ⟶ S` is a closed immersion followed by a smooth morphism, hence locally of finite type, and
+a morphism locally of finite type into a locally noetherian scheme is locally of finite
+presentation.
+
+(Stacks, Tag 0B9D; blueprint: `lem-pc-cartier-criterion`, the implication `(4) ⇒ (3)` for
+locally noetherian `S`) -/
+theorem locallyOfFinitePresentation_of_locallyQuasiFinite [IsLocallyNoetherian S]
+    (π : X ⟶ S) [SmoothOfRelativeDimension 1 π] {J : X.IdealSheafData}
+    (hqf : LocallyQuasiFinite (J.subschemeι ≫ π)) (hflat : Flat (J.subschemeι ≫ π)) :
+    LocallyQuasiFinite (J.subschemeι ≫ π) ∧ Flat (J.subschemeι ≫ π) ∧
+      LocallyOfFinitePresentation (J.subschemeι ≫ π) :=
+  have := SmoothOfRelativeDimension.smooth 1 π
+  ⟨hqf, hflat, inferInstance⟩
 
 /-- **Pullback of relative effective Cartier divisors.** Let `π : X ⟶ S` be flat and locally of
 finite presentation, let `D ⊆ X` be a relative effective Cartier divisor on `X/S` with ideal

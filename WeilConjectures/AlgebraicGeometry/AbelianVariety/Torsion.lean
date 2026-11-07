@@ -78,6 +78,34 @@ theorem etale_torsionSubgroupScheme (p : ℕ) [CharP K p] (A : Over (Spec (.of K
   · exact hnp (hp.dvd_of_dvd_pow h)
   · exact pow_ne_zero _ hn.ne' (zero_dvd_iff.1 h)
 
+/-- Blueprint `lem-sc-mult-n-etale-kernel`: Multiplication by `d` prime to the characteristic
+is étale.
+
+Let `A` be an abelian variety over a field `K` of characteristic `p` and let `n` be prime to
+`p`. Then `[n] : A ⟶ A` is étale; equivalently, its kernel `A[n]` is étale
+(`AlgebraicGeometry.etale_torsionSubgroupScheme`).
+
+By translation (`CategoryTheory.GrpObj.isPullback_ker_tensor`), the base change of `[n]` along
+itself is the projection `A[n] ⊗ A ⟶ A`, a base change of the étale `A[n] ⟶ Spec K`. As `[n]`
+is finite, flat and surjective (`AlgebraicGeometry.isIsogeny_npow_id`), étaleness descends
+along it. -/
+theorem etale_npow_id (p : ℕ) [CharP K p] (A : Over (Spec (.of K))) [GrpObj A]
+    [IsAbelianVariety A] (n : ℕ) (hn : 0 < n) (hnp : ¬ p ∣ n) :
+    Etale (𝟙 A ^ n).left := by
+  have : Etale (GrpObj.ker (𝟙 A ^ n)).hom := etale_torsionSubgroupScheme p A n hn hnp
+  have := isIsogeny_npow_id (A := A) n hn
+  have := IsIsogeny.flat (𝟙 A ^ n)
+  have := IsIsogeny.isFinite (𝟙 A ^ n)
+  have := surjective_npow_id A n hn
+  have sq := (Over.forget _).map_isPullback (GrpObj.isPullback_ker_tensor (𝟙 A ^ n) (𝟙 A)).flip
+  have hsnd : Etale (snd (GrpObj.ker (𝟙 A ^ n)) A).left := by
+    rw [Over.snd_left]
+    infer_instance
+  refine MorphismProperty.of_isPullback_of_descendsAlong
+    (Q := (@Surjective ⊓ @Flat ⊓ @QuasiCompact : MorphismProperty Scheme)) sq ?_ hsnd
+  change (@Surjective ⊓ @Flat ⊓ @QuasiCompact : MorphismProperty Scheme) (𝟙 A ≫ 𝟙 A ^ n).left
+  rw [Category.id_comp]
+  exact ⟨⟨inferInstance, inferInstance⟩, inferInstance⟩
 
 /-- Blueprint `lem-sc-ntorsion-etale`: The `n`-torsion of an abelian variety is étale.
 

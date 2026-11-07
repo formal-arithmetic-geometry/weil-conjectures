@@ -46,6 +46,22 @@ def IsEtaleLimitOfSmoothSurfaces (Z : Over (Spec (.of k))) : Prop :=
     (∀ j, SmoothOfRelativeDimension 2 (F.obj j).hom) ∧
     ∀ ⦃i j : J⦄ (f : i ⟶ j), IsAffineHom (F.map f).left ∧ Etale (F.map f).left
 
+/-- A smooth `k`-scheme of relative dimension `2` is an étale limit of smooth surfaces, as the
+limit of the one-object diagram. -/
+lemma IsEtaleLimitOfSmoothSurfaces.of_smoothOfRelativeDimension (Z : Over (Spec (.of k)))
+    [SmoothOfRelativeDimension 2 Z.hom] : IsEtaleLimitOfSmoothSurfaces Z := by
+  refine ⟨PUnit, inferInstance, inferInstance, (Functor.const _).obj Z,
+    (Cone.mk Z { app := fun _ ↦ 𝟙 Z }), ⟨?_⟩, ⟨Iso.refl _⟩,
+    fun _ ↦ ‹SmoothOfRelativeDimension 2 Z.hom›,
+    fun _ _ _ ↦ ⟨?_, ?_⟩⟩
+  · exact
+      { lift s := s.π.app PUnit.unit
+        fac s j := by cases j; simp
+        uniq s m hm := by simpa using hm PUnit.unit }
+  · change IsAffineHom (𝟙 Z.left)
+    infer_instance
+  · change Etale (𝟙 Z.left)
+    infer_instance
 
 /-- Being an étale limit of smooth surfaces is invariant under isomorphism. -/
 lemma IsEtaleLimitOfSmoothSurfaces.of_iso {Z Z' : Over (Spec (.of k))} (e : Z ≅ Z')

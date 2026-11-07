@@ -146,6 +146,34 @@ end Kernel
 
 section Etale
 
+/-- Blueprint `lem-sc-finite-etale-algebra-criterion`: Finite étale algebras.
+
+For a finite algebra `A` over a field `K`, the following are equivalent: `Spec A ⟶ Spec K` is
+étale; `Ω[A⁄K] = 0`; `A` is a *finite étale `K`-algebra*, a finite product of finite separable
+field extensions of `K`. -/
+theorem etale_SpecMap_algebraMap_tfae (A : Type u) [CommRing A] [Algebra K A]
+    [Module.Finite K A] :
+    List.TFAE [Etale (Spec.map (CommRingCat.ofHom (algebraMap K A))), Subsingleton Ω[A⁄K],
+      ∃ (I : Type u) (_ : Finite I) (L : I → Type u) (_ : ∀ i, Field (L i))
+        (_ : ∀ i, Algebra K (L i)) (_ : A ≃ₐ[K] Π i, L i),
+        ∀ i, Module.Finite K (L i) ∧ Algebra.IsSeparable K (L i)] := by
+  have h : Etale (Spec.map (CommRingCat.ofHom (algebraMap K A))) ↔ Algebra.Etale K A := by
+    rw [HasRingHomProperty.Spec_iff (P := @Etale), CommRingCat.hom_ofHom,
+      RingHom.etale_algebraMap]
+  tfae_have 1 ↔ 2 := h.trans Algebra.Etale.iff_subsingleton_kaehlerDifferential_of_field
+  tfae_have 1 ↔ 3 := h.trans (Algebra.Etale.iff_exists_algEquiv_prod K A)
+  tfae_finish
+
+/-- Blueprint `lem-sc-finite-etale-algebra-criterion`: a finite scheme `X` over a field `K`, for
+instance a finite group scheme, is étale over `K` if and only if `Γ(X, 𝒪_X)` is a finite étale
+`K`-algebra (`Algebra.Etale.iff_exists_algEquiv_prod`). -/
+theorem Scheme.Hom.etale_iff_etale_ΓAlgebra_of_isFinite {X : Scheme.{u}}
+    (h : X ⟶ Spec (.of K)) [IsFinite h] :
+    Etale h ↔
+      letI := h.ΓAlgebra
+      Algebra.Etale K Γ(X, ⊤) := by
+  have := isAffine_of_isAffineHom h
+  exact h.etale_iff_etale_ΓAlgebra
 
 end Etale
 

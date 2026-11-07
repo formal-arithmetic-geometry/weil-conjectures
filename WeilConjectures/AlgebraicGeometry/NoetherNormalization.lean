@@ -367,6 +367,11 @@ def Scheme.Hom.HasNoetherPartitionOver (Z : Set Y) : Prop :=
   ∃ (σ : ιS → ιT) (d : ιS → ℕ) (ν : ∀ a, S a ⟶ iteratedAffineLine (T (σ a)) (d a)),
     ∀ a, IsFinite (ν a) ∧ ν a ≫ iteratedAffineLineProj _ _ ≫ j (σ a) = i a ≫ f
 
+/-- The empty set has the empty partition. -/
+lemma Scheme.Hom.hasNoetherPartitionOver_empty : f.HasNoetherPartitionOver ∅ :=
+  ⟨Empty, inferInstance, Empty.elim, fun b ↦ b.elim, fun b ↦ b.elim, by simp,
+    Empty, inferInstance, Empty.elim, fun a ↦ a.elim, fun a ↦ a.elim, by simp,
+    Empty.elim, Empty.elim, fun a ↦ a.elim, fun a ↦ a.elim⟩
 
 /-- Partitions over disjoint subsets combine to a partition over their union. -/
 lemma Scheme.Hom.HasNoetherPartitionOver.union {Z₁ Z₂ : Set Y} (h : Disjoint Z₁ Z₂)
@@ -411,6 +416,205 @@ lemma Scheme.Hom.HasNoetherPartitionOver.union {Z₁ Z₂ : Set Y} (h : Disjoint
     · exact hν₁ a
     · exact hν₂ a
 
+/-- The induction step of blueprint `thm-zl-relative-noether`: a nonempty closed subset `Z` of the
+target contains a nonempty subset `Z₁` with closed complement `Z ∖ Z₁` over which the partition
+exists.
+
+Take an irreducible component of `Z ∩ V` for an affine open `V = Spec A`, i.e. a minimal prime
+`p` over the ideal of `Z ∩ V`, and a function `f₀` vanishing on the other components only. Cover
+the base change of `f` to the integral scheme `Spec (A ⧸ p)` by finitely many reduced affine pieces
+(blueprint `lem-zl-affine-partition`), spread out Noether normalization for each of them
+(blueprint `lem-zl-spread-normalization`) and shrink to a common principal open `D(s)`. -/
+lemma Scheme.Hom.exists_hasNoetherPartitionOver_nonempty [IsNoetherian Y] [QuasiCompact f]
+    [LocallyOfFiniteType f] {Z : Set Y} (hZ : IsClosed Z) (hne : Z.Nonempty) :
+    ∃ Z₁ ⊆ Z, Z₁.Nonempty ∧ IsClosed (Z \ Z₁) ∧ f.HasNoetherPartitionOver Z₁ := by
+  classical
+  -- An affine open `V = Spec A` meeting `Z`.
+  obtain ⟨z, hz⟩ := hne
+  obtain ⟨V, hV, hzV, -⟩ := exists_isAffineOpen_mem_and_subset (x := z) (U := ⊤) trivial
+  have : IsNoetherianRing Γ(Y, V) := IsLocallyNoetherian.component_noetherian ⟨V, hV⟩
+  set F := hV.fromSpec
+  let T : Set (Spec Γ(Y, V)) := F ⁻¹' Z
+  have hT : IsClosed T := hZ.preimage F.continuous
+  let I := PrimeSpectrum.vanishingIdeal T
+  obtain ⟨P₀, hP₀⟩ : ∃ P₀ : Spec Γ(Y, V), F P₀ = z := by
+    rw [← Set.mem_range, IsAffineOpen.range_fromSpec]; exact hzV
+  have hIP₀ : I ≤ P₀.asIdeal := fun a ha ↦
+    (PrimeSpectrum.mem_vanishingIdeal T a).mp ha P₀ (by simpa [T, hP₀] using hz)
+  -- A minimal prime `p` over `I`, i.e. an irreducible component of `Z ∩ V`, and a function `f₀`
+  -- vanishing on the other components but not on `p`.
+  obtain ⟨p, hp, -⟩ := Ideal.exists_minimalPrimes_le hIP₀
+  have : p.IsPrime := hp.1.1
+  have hIp : I ≤ p := hp.1.2
+  obtain ⟨f₀, hf₀, hf₀p⟩ : ∃ f₀ ∈ ((I.finite_minimalPrimes_of_isNoetherianRing).toFinset.erase
+      p).inf id, f₀ ∉ p := by
+    refine IsConcreteLE.not_le_iff_exists.mp fun hle ↦ ?_
+    obtain ⟨p', hp', hp'p⟩ := (Ideal.IsPrime.inf_le' this).mp hle
+    rw [Finset.mem_erase, Set.Finite.mem_toFinset] at hp'
+    exact hp'.1 (le_antisymm hp'p (hp.2 ⟨hp'.2.1.1, hp'.2.1.2⟩ hp'p))
+  -- The integral closed subscheme `Spec (A ⧸ p)` and the base change of `f` to it.
+  let A' := CommRingCat.of (Γ(Y, V) ⧸ p)
+  let q : Spec A' ⟶ Spec Γ(Y, V) := Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk p))
+  let h : Spec A' ⟶ Y := q ≫ F
+  obtain ⟨n, W, w, hw, hpart⟩ :=
+    Scheme.exists_partition_isImmersion_isAffine_isReduced (pullback f h)
+  let g (k : Fin n) : W k ⟶ Spec A' := w k ≫ pullback.snd f h
+  have : Nonempty (⊤ : (Spec A').Opens) := ⟨⟨⟨⊥, Ideal.isPrime_bot⟩, trivial⟩⟩
+  choose s₀ hs₀ d H using fun k ↦
+    have := (hw k).1
+    have := (hw k).2.1
+    exists_isFinite_toIteratedAffineLine_basicOpen (g k) (isAffineOpen_top (Spec A'))
+  -- Shrink to a principal open `D(s)` of `Spec (A ⧸ p)` with `s = f₀ ∏ₖ s₀ₖ`.
+  obtain ⟨t₁, ht₁⟩ := Ideal.Quotient.mk_surjective (I := p) ((Scheme.ΓSpecIso A').hom (∏ k, s₀ k))
+  let s : Γ(Spec A', ⊤) := (Scheme.ΓSpecIso A').inv (Ideal.Quotient.mk p f₀) * ∏ k, s₀ k
+  have hs : (Scheme.ΓSpecIso A').hom s = Ideal.Quotient.mk p (f₀ * t₁) := by
+    rw [map_mul, ← CommRingCat.comp_apply, Iso.inv_hom_id, CommRingCat.id_apply, map_mul, ht₁]
+  have hs0 : s ≠ 0 := by
+    refine mul_ne_zero ?_ (Finset.prod_ne_zero_iff.mpr fun k _ ↦ hs₀ k)
+    intro h0
+    apply hf₀p
+    rw [← Ideal.Quotient.eq_zero_iff_mem]
+    simpa using congr((Scheme.ΓSpecIso A').hom $h0)
+  have hdvd (k : Fin n) : s₀ k ∣ s := (Finset.dvd_prod_of_mem s₀ (Finset.mem_univ k)).mul_left _
+  set D := (Spec A').basicOpen s
+  choose ν hνfin hν _ using fun k ↦ H k s (hdvd k) hs0
+  have hD (x : Spec A') : x ∈ D ↔ Ideal.Quotient.mk p (f₀ * t₁) ∉ x.asIdeal := by
+    change x ∈ (Spec A').basicOpen s ↔ _
+    rw [basicOpen_eq_of_affine', hs]
+    rfl
+  -- The target piece `Z₁ = h(D(s))` is `Z ∩ O` for the open `O = F(D(f₀ t₁))` of `Y`.
+  have hTz (P : Spec Γ(Y, V)) (hP : I ≤ P.asIdeal) : P ∈ T := by
+    rw [← hT.closure_eq, ← PrimeSpectrum.zeroLocus_vanishingIdeal_eq_closure]
+    exact hP
+  have hqp (y : Spec A') : p ≤ (q y).asIdeal := fun a ha ↦ by
+    change Ideal.Quotient.mk p a ∈ y.asIdeal
+    rw [Ideal.Quotient.eq_zero_iff_mem.mpr ha]
+    exact zero_mem _
+  let O : Set Y := F '' {P : Spec Γ(Y, V) | f₀ * t₁ ∉ P.asIdeal}
+  have hO : IsOpen O :=
+    F.isOpenEmbedding.isOpenMap _ (PrimeSpectrum.basicOpen (f₀ * t₁)).isOpen
+  have hZ₁Z : Set.range (D.ι ≫ h) ⊆ Z := by
+    rintro _ ⟨x, rfl⟩
+    exact hTz _ (hIp.trans (hqp _))
+  have hZ₁O : Set.range (D.ι ≫ h) ⊆ O := by
+    rintro _ ⟨⟨x, hx⟩, rfl⟩
+    exact ⟨q x, fun hmem ↦ (hD x).mp hx hmem, rfl⟩
+  have hZO : Z ∩ O ⊆ Set.range (D.ι ≫ h) := by
+    rintro y ⟨hyZ, P, hP, rfl⟩
+    have hIP : I ≤ P.asIdeal := fun a ha ↦
+      (PrimeSpectrum.mem_vanishingIdeal T a).mp ha P (by simpa [T] using hyZ)
+    have hpP : p ≤ P.asIdeal := by
+      obtain ⟨p', hp', hp'P⟩ := Ideal.exists_minimalPrimes_le hIP
+      by_cases hpp' : p' = p
+      · exact hpp' ▸ hp'P
+      have hmem : p' ∈ (I.finite_minimalPrimes_of_isNoetherianRing).toFinset.erase p := by
+        rw [Finset.mem_erase, Set.Finite.mem_toFinset]
+        exact ⟨hpp', hp'⟩
+      exact absurd (P.asIdeal.mul_mem_right t₁ (hp'P (Finset.inf_le (f := id) hmem hf₀))) hP
+    have hker : RingHom.ker (Ideal.Quotient.mk p) ≤ P.asIdeal := by rwa [Ideal.mk_ker]
+    let Q : Spec A' := ⟨P.asIdeal.map (Ideal.Quotient.mk p),
+      Ideal.map_isPrime_of_surjective Ideal.Quotient.mk_surjective hker⟩
+    have hQ : q Q = P := by
+      apply PrimeSpectrum.ext
+      change Ideal.comap _ (Ideal.map _ _) = _
+      erw [Ideal.comap_map_of_surjective' _ Ideal.Quotient.mk_surjective]
+      exact sup_eq_left.mpr hker
+    have hQD : Q ∈ D := by
+      rw [hD]
+      intro hmem
+      apply hP
+      rw [← hQ]
+      exact hmem
+    exact ⟨⟨Q, hQD⟩, by simp [h, hQ]⟩
+  have hZ₁ne : (Set.range (D.ι ≫ h)).Nonempty := by
+    have : (D : Set (Spec A')).Nonempty := by
+      rw [Set.nonempty_iff_ne_empty, Ne, TopologicalSpace.Opens.coe_eq_empty,
+        basicOpen_eq_bot_iff]
+      exact hs0
+    obtain ⟨x, hx⟩ := this
+    exact ⟨_, ⟨x, hx⟩, rfl⟩
+  refine ⟨Set.range (D.ι ≫ h), hZ₁Z, hZ₁ne, ?_, ?_⟩
+  · have : Z \ Set.range (D.ι ≫ h) = Z ∩ Oᶜ := by
+      ext y
+      refine ⟨fun ⟨hyZ, hy⟩ ↦ ⟨hyZ, fun hyO ↦ hy (hZO ⟨hyZ, hyO⟩)⟩,
+        fun ⟨hyZ, hy⟩ ↦ ⟨hyZ, fun hy' ↦ hy (hZ₁O hy')⟩⟩
+    rw [this]
+    exact hZ.inter hO.isClosed_compl
+  -- The pieces: `D(s)` in the target and the `g ⁻¹ D(s)` in the source.
+  have e1 (k : Fin n) : ((g k ⁻¹ᵁ D).ι ≫ w k ≫ pullback.fst f h) ≫ f =
+      (g k ∣_ D) ≫ D.ι ≫ h := by
+    rw [← Category.assoc (g k ∣_ D), morphismRestrict_ι]
+    simp [g, pullback.condition]
+  have hfst : Function.Injective (pullback.fst f h) := (pullback.fst f h).isEmbedding.injective
+  refine ⟨Unit, inferInstance, fun _ ↦ D.toScheme, fun _ ↦ D.ι ≫ h,
+    fun _ ↦ ⟨inferInstance, inferInstance, subset_rfl⟩, fun y hy ↦ ⟨(), hy, fun _ _ ↦ rfl⟩,
+    Fin n, inferInstance, fun k ↦ (g k ⁻¹ᵁ D).toScheme,
+    fun k ↦ (g k ⁻¹ᵁ D).ι ≫ w k ≫ pullback.fst f h, fun k ↦ ⟨?_, ?_, ?_⟩, ?_,
+    fun _ ↦ (), d, ν, fun k ↦ ⟨hνfin k, ?_⟩⟩
+  · have := (hw k).1
+    infer_instance
+  · have := (hw k).2.2
+    infer_instance
+  · rintro _ ⟨u, rfl⟩
+    refine ⟨(g k ∣_ D) u, ?_⟩
+    change _ = ((((g k ⁻¹ᵁ D).ι ≫ w k ≫ pullback.fst f h) ≫ f) u)
+    rw [e1 k]
+    rfl
+  · rintro x ⟨⟨v, hv⟩, hx⟩
+    have hx' : f x = h v := by rw [← hx]; rfl
+    obtain ⟨P, hPx, hPv⟩ := Scheme.Pullback.exists_preimage_pullback x v hx'
+    obtain ⟨k, ⟨u, hu⟩, -⟩ := hpart P
+    have hgu : g k u ∈ D := by
+      simp only [g, Scheme.Hom.comp_apply, hu, hPv]
+      exact hv
+    refine ⟨k, ⟨⟨u, hgu⟩, by simp [hu, hPx]⟩, fun l ⟨⟨u', hu'⟩, hl⟩ ↦ ?_⟩
+    obtain ⟨k', -, hk'⟩ := hpart P
+    have h1 : w l u' = P := hfst (by simpa [hPx] using hl)
+    exact (hk' l ⟨u', h1⟩).trans (hk' k ⟨u, hu⟩).symm
+  · change (ν k ≫ iteratedAffineLineProj D (d k)) ≫ D.ι ≫ h = _
+    rw [hν k]
+    exact (e1 k).symm
+
+/-- Noetherian induction on the closed subsets of the target. -/
+lemma Scheme.Hom.hasNoetherPartitionOver_of_isClosed [IsNoetherian Y] [QuasiCompact f]
+    [LocallyOfFiniteType f] (Z : TopologicalSpace.Closeds Y) :
+    f.HasNoetherPartitionOver Z := by
+  induction Z using WellFoundedLT.induction with
+  | _ Z ih =>
+  rcases (Z : Set Y).eq_empty_or_nonempty with hZ | hZ
+  · rw [hZ]
+    exact f.hasNoetherPartitionOver_empty
+  obtain ⟨Z₁, hZ₁Z, hZ₁, hcl, hP⟩ := f.exists_hasNoetherPartitionOver_nonempty Z.isClosed hZ
+  let Z₂ : TopologicalSpace.Closeds Y := ⟨Z \ Z₁, hcl⟩
+  have hlt : Z₂ < Z := by
+    refine lt_of_le_of_ne (fun y hy ↦ hy.1) fun heq ↦ ?_
+    obtain ⟨y, hy⟩ := hZ₁
+    have : y ∈ (Z₂ : Set Y) := by rw [heq]; exact hZ₁Z hy
+    exact this.2 hy
+  have := Scheme.Hom.HasNoetherPartitionOver.union f Set.disjoint_sdiff_right hP (ih Z₂ hlt)
+  rwa [Set.union_sdiff_cancel hZ₁Z] at this
+
+/-- Blueprint `thm-zl-relative-noether`: relative Noether normalization.
+
+Let `f : X ⟶ Y` be a morphism of finite type to a Noetherian scheme (for instance a separated
+morphism of finite type between separated schemes of finite type over a field). There are finite
+partitions of `Y` and of `X` into reduced locally closed subschemes `T b ⟶ Y` and `S a ⟶ X` such
+that each source piece `S a` maps to the target piece `T (σ a)`, through a finite morphism
+`ν a : S a ⟶ 𝔸^{d a}_{T (σ a)}` followed by the `d a` coordinate projections
+`AlgebraicGeometry.iteratedAffineLineProj`. For `d a = 0` this is just a finite morphism
+`S a ⟶ T (σ a)`. -/
+theorem exists_partition_isFinite_toIteratedAffineLine [IsNoetherian Y] [QuasiCompact f]
+    [LocallyOfFiniteType f] :
+    ∃ (ιT : Type) (_ : Finite ιT) (T : ιT → Scheme.{u}) (j : ∀ b, T b ⟶ Y),
+      (∀ b, IsImmersion (j b) ∧ IsReduced (T b)) ∧ (∀ y, ∃! b, y ∈ Set.range (j b)) ∧
+    ∃ (ιS : Type) (_ : Finite ιS) (S : ιS → Scheme.{u}) (i : ∀ a, S a ⟶ X),
+      (∀ a, IsImmersion (i a) ∧ IsReduced (S a)) ∧ (∀ x, ∃! a, x ∈ Set.range (i a)) ∧
+    ∃ (σ : ιS → ιT) (d : ιS → ℕ) (ν : ∀ a, S a ⟶ iteratedAffineLine (T (σ a)) (d a)),
+      ∀ a, IsFinite (ν a) ∧ ν a ≫ iteratedAffineLineProj _ _ ≫ j (σ a) = i a ≫ f := by
+  obtain ⟨ιT, _, T, j, hj, hu, ιS, _, S, i, hi, hv, σ, d, ν, hν⟩ :=
+    f.hasNoetherPartitionOver_of_isClosed ⊤
+  exact ⟨ιT, inferInstance, T, j, fun b ↦ ⟨(hj b).1, (hj b).2.1⟩, fun y ↦ hu y trivial,
+    ιS, inferInstance, S, i, fun a ↦ ⟨(hi a).1, (hi a).2.1⟩, fun x ↦ hv x trivial, σ, d, ν, hν⟩
 
 end RelativeNoether
 

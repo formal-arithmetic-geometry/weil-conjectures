@@ -147,6 +147,30 @@ section BaseChange
 
 variable {K' : Type u} [Field K'] [Algebra K K']
 
+/-- Blueprint `lem-sc-mult-n-etale-kernel`: Multiplication by `d` prime to the characteristic
+is étale (the geometric fibre of `A[n]`).
+
+Let `A` be an abelian variety of dimension `g` over a field `K` of characteristic `p`, let `n` be
+prime to `p` and let `K'` be a separably closed field extension of `K`. Then the base change
+`A[n]_{K'}` is, as a scheme over `K'`, the disjoint union of `n ^ (2 * g)` copies of `Spec K'`:
+it is the constant scheme on a set with `n ^ (2 * g)` elements.
+
+`A[n]` is finite étale of order `n ^ (2 * g)` (`AlgebraicGeometry.etale_torsionSubgroupScheme`,
+`AlgebraicGeometry.finrankΓ_torsionSubgroupScheme`), the order is invariant under base change,
+and a finite étale scheme over a separably closed field is a disjoint union of copies of the
+base (`AlgebraicGeometry.Scheme.Hom.exists_overIso_sigma_of_isSepClosed`). -/
+theorem exists_overIso_sigma_torsionSubgroupScheme [IsSepClosed K'] (p : ℕ) [CharP K p] (n : ℕ)
+    (hn : 0 < n) (hnp : ¬ p ∣ n) :
+    ∃ (S : Type u) (_ : Finite S), Nat.card S = n ^ (2 * IsAbelianVariety.dim A) ∧
+      Nonempty (Over.mk (pullback.snd (torsionSubgroupScheme A n).hom
+          (Spec.map (CommRingCat.ofHom (algebraMap K K')))) ≅
+        Over.mk (Sigma.desc fun _ : S ↦ 𝟙 (Spec (.of K')))) := by
+  have := isFinite_torsionSubgroupScheme A n hn
+  have := etale_torsionSubgroupScheme p A n hn hnp
+  obtain ⟨S, hS, hcard, e⟩ := (torsionSubgroupScheme A n).hom.exists_overIso_sigma_of_isSepClosed
+    (Spec.map (CommRingCat.ofHom (algebraMap K K')))
+  refine ⟨S, hS, ?_, e⟩
+  rw [hcard, Scheme.Hom.finrankΓ_pullback_snd, finrankΓ_torsionSubgroupScheme n hn]
 
 /-- Blueprint `lem-sc-mult-n-etale-kernel`: Multiplication by `d` prime to the characteristic
 is étale (the geometric points of `A[n]`).

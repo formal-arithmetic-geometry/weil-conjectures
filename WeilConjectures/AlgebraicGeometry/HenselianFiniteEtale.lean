@@ -187,6 +187,23 @@ theorem Scheme.isEquivalence_pullback_finiteEtale_of_henselianRing
 
 end Henselian
 
+/-- **Finite étale lifting over a henselian local ring.** Let `A` be a henselian local ring,
+`f : Y ⟶ Spec A` proper and `i : Y₀ ⟶ Y` the closed fibre over the residue field. Then base
+change along `i` is an equivalence from the category of finite étale `Y`-schemes to the
+category of finite étale `Y₀`-schemes; in particular morphisms and finite group actions
+lift uniquely. This is the case `I = 𝔪` of
+`AlgebraicGeometry.Scheme.isEquivalence_pullback_finiteEtale_of_henselianRing`.
+(blueprint: `lemma-weil-pbc-finite-etale-henselian-lifting`) 
+(blueprint: lemma-weil-pbc-finite-etale-henselian-lifting)
+-/
+theorem Scheme.isEquivalence_pullback_finiteEtale_of_henselianLocalRing
+    {A : Type u} [CommRing A] [HenselianLocalRing A]
+    {Y Y₀ : Scheme.{u}} (f : Y ⟶ Spec (.of A)) [IsProper f] (i : Y₀ ⟶ Y)
+    (f₀ : Y₀ ⟶ Spec (.of (IsLocalRing.ResidueField A)))
+    (h : IsPullback i f₀ f (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)))) :
+    (MorphismProperty.Over.pullback (@IsFinite ⊓ @Etale) ⊤ i).IsEquivalence :=
+  Scheme.isEquivalence_pullback_finiteEtale_of_henselianRing (I := IsLocalRing.maximalIdeal A) f i
+    f₀ h
 
 /-- **The `H¹` comparison for a finite constant sheaf over a henselian pair.** Let `(A, I)` be
 a henselian pair, `f : Y ⟶ Spec A` proper and `i : Y₀ ⟶ Y` the closed fibre over `Spec A/I`.

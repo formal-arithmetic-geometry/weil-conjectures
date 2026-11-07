@@ -201,6 +201,56 @@ theorem X_mul_derivative_charpolyRev (F : Module.End K V) :
   rw [← LinearMap.charpolyRev_toMatrix b F]
   exact Matrix.X_mul_derivative_charpolyRev _
 
+/-- **The determinant-trace identity**, exponential form:
+`det (1 - t F)⁻¹ = exp (∑_{n ≥ 1} tr (F ^ n) t ^ n / n)` for an endomorphism `F` of a finite
+dimensional vector space over a field of characteristic zero
+(blueprint: `sk-prop-logdet`, `lem-zl-euler-product-identity`). -/
+theorem inv_charpolyRev_eq_exp [CharZero K] (F : Module.End K V) :
+    (F.charpolyRev : K⟦X⟧)⁻¹ =
+      (PowerSeries.exp K).subst
+        (PowerSeries.mk fun n ↦ if n = 0 then 0 else LinearMap.trace K V (F ^ n) / n) := by
+  have hlogP := X_mul_derivative_charpolyRev F
+  set P : K⟦X⟧ := (F.charpolyRev : K⟦X⟧) with hP
+  set T : K⟦X⟧ := PowerSeries.mk fun n ↦ if n = 0 then 0 else LinearMap.trace K V (F ^ n)
+    with hT
+  set g : K⟦X⟧ := PowerSeries.mk fun n ↦ if n = 0 then 0 else LinearMap.trace K V (F ^ n) / n
+    with hg
+  have hsubst : PowerSeries.HasSubst g :=
+    PowerSeries.HasSubst.of_constantCoeff_zero' (by simp [hg])
+  have hP1 : PowerSeries.constantCoeff P = 1 := by
+    rw [hP, Polynomial.constantCoeff_coe, Polynomial.coeff_zero_eq_eval_zero, eval_charpolyRev]
+  have hmul : P * P⁻¹ = 1 := PowerSeries.mul_inv_cancel _ (by rw [hP1]; exact one_ne_zero)
+  have hlogPinv : X * derivative (R := K) P⁻¹ = T * P⁻¹ := by
+    rw [PowerSeries.derivative_inv']
+    linear_combination (-(P⁻¹ ^ 2)) * hlogP + (T * P⁻¹) * hmul
+  have hXg : X * derivative (R := K) g = T := by
+    ext n
+    match n with
+    | 0 => simp [hg, hT]
+    | m + 1 =>
+      rw [PowerSeries.coeff_succ_X_mul, PowerSeries.coeff_derivative, hg, hT,
+        PowerSeries.coeff_mk, PowerSeries.coeff_mk, ite_eq_right m.succ_ne_zero,
+        ite_eq_right m.succ_ne_zero]
+      have hm : ((m : K) + 1) ≠ 0 := by exact_mod_cast Nat.succ_ne_zero m
+      push_cast
+      rw [div_mul_cancel₀ _ hm]
+  have hlogE : X * derivative (R := K) ((PowerSeries.exp K).subst g) =
+      T * (PowerSeries.exp K).subst g := by
+    rw [PowerSeries.derivative_subst hsubst, PowerSeries.derivative_exp,
+      mul_comm (PowerSeries.subst g (PowerSeries.exp K)), ← mul_assoc, hXg]
+  have hEconst : PowerSeries.constantCoeff ((PowerSeries.exp K).subst g) = 1 := by
+    have h0 : PowerSeries.coeff 0 ((PowerSeries.exp K).subst g) = 1 := by
+      rw [PowerSeries.coeff_subst' (hb := hsubst), finsum_eq_single _ 0
+        fun d hd ↦ by simp [PowerSeries.coeff_zero_eq_constantCoeff, map_pow, zero_pow hd, hg]]
+      simp [PowerSeries.coeff_exp]
+    simpa using h0
+  have hconst : PowerSeries.constantCoeff P⁻¹ =
+      PowerSeries.constantCoeff ((PowerSeries.exp K).subst g) := by
+    rw [PowerSeries.constantCoeff_inv, hP1, hEconst, inv_one]
+  have hT0 : PowerSeries.constantCoeff T = 0 := by rw [hT]; simp
+  ext n
+  exact PowerSeries.coeff_eq_of_X_mul_derivative_eq hlogPinv hlogE hconst hT0
+    (m := n) (fun i _ ↦ rfl) n le_rfl
 
 /-- The *trace series*
 
@@ -227,6 +277,37 @@ theorem constantCoeff_traceSeries (F : Module.End K V) :
     PowerSeries.constantCoeff (traceSeries F) = 0 := by
   rw [← PowerSeries.coeff_zero_eq_constantCoeff_apply, coeff_traceSeries, ite_eq_left rfl]
 
+/-- **The determinant-trace identity**, logarithmic form: the formal logarithm of
+`det (1 - t F)` is minus the trace series,
+`log det (1 - t F) = - ∑_{n ≥ 1} tr (F ^ n) t ^ n / n`, for an endomorphism `F` of a finite
+dimensional vector space over a field of characteristic zero. No semisimplicity is assumed
+(blueprint: `lem-zl-log-det-identity`, `sk-prop-logdet`). -/
+theorem logOf_charpolyRev [CharZero K] (F : Module.End K V) :
+    PowerSeries.logOf (F.charpolyRev : K⟦X⟧) = -traceSeries F := by
+  set P : K⟦X⟧ := (F.charpolyRev : K⟦X⟧) with hP
+  set T : K⟦X⟧ := PowerSeries.mk fun n ↦ if n = 0 then 0 else LinearMap.trace K V (F ^ n)
+    with hT
+  have hP1 : PowerSeries.constantCoeff P = 1 := by
+    rw [hP, Polynomial.constantCoeff_coe, Polynomial.coeff_zero_eq_eval_zero, eval_charpolyRev]
+  have hP0 : P ≠ 0 := fun h ↦ by simp [h] at hP1
+  have hlogP : X * derivative (R := K) P = -T * P := X_mul_derivative_charpolyRev F
+  have hXg : X * derivative (R := K) (traceSeries F) = T := by
+    ext n
+    match n with
+    | 0 => simp [hT]
+    | m + 1 =>
+      rw [PowerSeries.coeff_succ_X_mul, PowerSeries.coeff_derivative, traceSeries, hT,
+        PowerSeries.coeff_mk, PowerSeries.coeff_mk, ite_eq_right m.succ_ne_zero,
+        ite_eq_right m.succ_ne_zero]
+      have hm : ((m : K) + 1) ≠ 0 := by exact_mod_cast Nat.succ_ne_zero m
+      push_cast
+      rw [div_mul_cancel₀ _ hm]
+  refine PowerSeries.derivative.ext ?_ ?_
+  · refine mul_left_cancel₀ (mul_ne_zero hP0 PowerSeries.X_ne_zero) ?_
+    rw [map_neg]
+    linear_combination X * PowerSeries.mul_derivative_logOf hP1 + hlogP + P * hXg
+  · rw [PowerSeries.constantCoeff_logOf hP1, map_neg, traceSeries]
+    simp
 
 variable {W : ℤ → Type*} [∀ i, AddCommGroup (W i)] [∀ i, Module K (W i)]
   [∀ i, FiniteDimensional K (W i)]

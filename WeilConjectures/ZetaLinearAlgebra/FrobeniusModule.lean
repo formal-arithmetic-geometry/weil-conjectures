@@ -355,6 +355,13 @@ theorem IsPureOfWeight.dual {ι : K →+* ℂ} {q : ℕ} {M : FrobeniusModule.{u
   rw [map_inv₀, norm_inv] at hn
   rw [neg_div, Real.rpow_neg (Nat.cast_nonneg q), ← hn, inv_inv]
 
+/-- The evaluation pairing `M^∨ ⊗ M → K` is invariant under the Frobenius:
+`(F^∨ f) (F x) = f x`. -/
+lemma dual_frobenius_comp_frobenius (M : FrobeniusModule.{u, v} K)
+    (f : Module.Dual K M.carrier) :
+    (M.dual.frobenius f : Module.Dual K M.carrier) ∘ₗ M.frobenius.toLinearMap = f := by
+  ext
+  simp
 
 section Realization
 

@@ -301,5 +301,59 @@ theorem Hom.exists_baseChangeFieldPoint_notMem_support_zeroLocus [IsSepClosed k]
   (f.denseRange_baseChangeFieldPoint K).exists_mem_open
     φ.zeroLocus.support.isClosed.isOpen_compl h
 
+/-- **Non-vanishing at a rational point.** Let `X` be a reduced smooth scheme over a separably
+closed field `k`, e.g. a smooth projective curve, and let `φ : ℳ ⟶ 𝒩` be a nonzero morphism of
+invertible `𝒪_X`-modules, e.g. a nonzero global section `s : 𝒪_X ⟶ ℒ`. Then `φ` does not vanish
+at some `k`-rational point of `X`.
+
+(blueprint: `cor-pc-dense-points-curves-sections`, part (3)) -/
+theorem Hom.exists_fieldPoints_notMem_support_zeroLocus [IsSepClosed k]
+    (f : X.Hom (Spec (.of k))) [Smooth f] [IsReduced X] {M N : X.Modules}
+    [SheafOfModules.IsInvertible.{u, u, u} M] [SheafOfModules.IsInvertible.{u, u, u} N]
+    (φ : M ⟶ N) (hφ : φ ≠ 0) :
+    ∃ p : f.fieldPoints k, p.1.base default ∉ φ.zeroLocus.support := by
+  have h : φ.zeroLocus.support ≠ ⊤ := by
+    rwa [Ne, IdealSheafData.support_eq_top_iff, Modules.Hom.zeroLocus_eq_bot_iff]
+  obtain ⟨y, hy⟩ : ∃ y, y ∉ φ.zeroLocus.support := by
+    by_contra! H
+    exact h (eq_top_iff.mpr fun y _ ↦ H y)
+  exact f.denseRange_fieldPoints.exists_mem_open
+    φ.zeroLocus.support.isClosed.isOpen_compl ⟨y, hy⟩
+
+/-- **Infinitude of the rational points of a curve.** A smooth proper geometrically integral
+curve over a separably closed field has infinitely many rational points. Every rational point
+is a closed point, so if there were only finitely many of them, their union would be closed and,
+by `AlgebraicGeometry.Scheme.Hom.denseRange_fieldPoints`, equal to `X`; then `X` would be a
+finite discrete space, of dimension zero, whereas the curve `X` has dimension one.
+
+(blueprint: `det-prop-picard-dense-points`, `cor-pc-dense-points-curves-sections`, part (3)) -/
+theorem Hom.infinite_fieldPoints [IsSepClosed k] (f : X.Hom (Spec (.of k)))
+    [SmoothOfRelativeDimension 1 f] [IsProper f] [GeometricallyIntegral f] :
+    Infinite (f.fieldPoints k) := by
+  have : Smooth f := SmoothOfRelativeDimension.smooth 1 f
+  have : IsIntegral X := GeometricallyIntegral.isIntegral_of_subsingleton f
+  have hdim := (smoothOfRelativeDimension_iff_topologicalKrullDim_eq f 1).mp inferInstance
+  by_contra hfin
+  rw [not_infinite_iff_finite] at hfin
+  have hcl (p : f.fieldPoints k) : IsClosed {p.1.base default} := by
+    have hp : p.1 ≫ f = 𝟙 _ := by
+      rw [p.2, Algebra.algebraMap_self, CommRingCat.ofHom_id, Spec.map_id]
+    have := isClosedImmersion_of_comp_eq_id f p.1 hp
+    have hr : Set.range p.1.base = {p.1.base default} := by
+      ext y
+      simp only [Set.mem_range, Set.mem_singleton_iff]
+      exact ⟨fun ⟨z, hz⟩ ↦ hz ▸ congrArg _ (Subsingleton.elim _ _), fun h ↦ ⟨_, h.symm⟩⟩
+    rw [← hr]
+    exact p.1.isClosedEmbedding.isClosed_range
+  have hrange : Set.range (fun p : f.fieldPoints k ↦ p.1.base default) = Set.univ := by
+    rw [← (f.denseRange_fieldPoints).closure_range, Set.range_eq_iUnion,
+      (isClosed_iUnion_of_finite hcl).closure_eq]
+  have : T1Space X := ⟨fun x ↦ by
+    obtain ⟨p, rfl⟩ := hrange.symm ▸ Set.mem_univ x
+    exact hcl p⟩
+  have : Finite X := Set.finite_univ_iff.mp (hrange ▸ Set.finite_range _)
+  have := topologicalKrullDim_zero_of_discreteTopology X
+  rw [hdim] at this
+  exact absurd this (by decide)
 
 end AlgebraicGeometry.Scheme

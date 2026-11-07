@@ -110,6 +110,10 @@ noncomputable def mapPoints (φ : SemilinearGrpHom e A B) {X : Over S} (t : X.le
         pullback.lift_snd]
       simp
 
+theorem mapPoints_apply (φ : SemilinearGrpHom e A B) {X : Over S} (t : X.left ⟶ X.left)
+    (ht : t ≫ X.hom ≫ e = X.hom) (P : Additive (X ⟶ A)) :
+    (φ.mapPoints t ht P).toMul.left = t ≫ P.toMul.left ≫ φ.hom :=
+  rfl
 
 end SemilinearGrpHom
 
@@ -186,6 +190,15 @@ noncomputable def tateModuleEquivTorsionPoints :
     (cancel_mono (torsionSubgroupScheme.ι A (ℓ ^ n))).mp
       (torsionByPointsEquiv_comp_ι A (ℓ ^ n) _ _)
 
+omit [Fact ℓ.Prime] in
+/-- The point of `A[ℓ ^ n]` attached to `t ∈ T_ℓ A` by
+`AlgebraicGeometry.IsAbelianVariety.tateModuleEquivTorsionPoints` is the `n`-th coordinate of
+`t`, viewed in `A[ℓ ^ n]`. -/
+theorem tateModuleEquivTorsionPoints_apply_comp_ι (t : tateModule ℓ A) (n : ℕ) :
+    (tateModuleEquivTorsionPoints ℓ A t).1 n ≫ torsionSubgroupScheme.ι A (ℓ ^ n) =
+      ((t : ∀ _ : ℕ, Additive (Scheme.specAlgebraicClosure K ⟶ A)) n).toMul := by
+  rw [tateModuleEquivTorsionPoints, Equiv.coe_fn_mk]
+  exact torsionByPointsEquiv_comp_ι A (ℓ ^ n) _ _
 
 omit [IsAbelianVariety A] in
 /-- Over an algebraically closed field `K`, the structure morphism `Spec K̄ ⟶ Spec K` is an
@@ -277,12 +290,21 @@ noncomputable def tateModuleMap (f : A ⟶ B) [IsMonHom f] :
     tateModule ℓ A →ₗ[ℤ_[ℓ]] tateModule ℓ B :=
   AddCommGroup.tateModule.map (IsMonHom.monoidHom f _).toAdditive
 
+theorem coe_tateModuleMap_apply (f : A ⟶ B) [IsMonHom f] (t : tateModule ℓ A) (n : ℕ) :
+    ((tateModuleMap f t : tateModule ℓ B) :
+      ∀ _ : ℕ, Additive (Scheme.specAlgebraicClosure K ⟶ B)) n =
+      .ofMul (((t : ∀ _ : ℕ, Additive (Scheme.specAlgebraicClosure K ⟶ A)) n).toMul ≫ f) :=
+  rfl
 
 @[simp]
 theorem tateModuleMap_id : tateModuleMap (ℓ := ℓ) (𝟙 A) = LinearMap.id :=
   LinearMap.ext fun t ↦ Subtype.ext <| funext fun n ↦ congr_arg Additive.ofMul <|
     Category.comp_id ((t : ∀ _ : ℕ, Additive (Scheme.specAlgebraicClosure K ⟶ A)) n).toMul
 
+theorem tateModuleMap_comp (f : A ⟶ B) (g : B ⟶ C) [IsMonHom f] [IsMonHom g] :
+    tateModuleMap (ℓ := ℓ) (f ≫ g) = tateModuleMap g ∘ₗ tateModuleMap f :=
+  LinearMap.ext fun t ↦ Subtype.ext <| funext fun n ↦ congr_arg Additive.ofMul <|
+    (Category.assoc ((t : ∀ _ : ℕ, Additive (Scheme.specAlgebraicClosure K ⟶ A)) n).toMul f g).symm
 
 /-- Blueprint `def-wf-abelian-tate-module`: the action of homomorphisms on rational Tate modules.
 
@@ -292,6 +314,11 @@ noncomputable def rationalTateModuleMap (f : A ⟶ B) [IsMonHom f] :
     rationalTateModule ℓ A →ₗ[ℚ_[ℓ]] rationalTateModule ℓ B :=
   AddCommGroup.rationalTateModule.map (IsMonHom.monoidHom f _).toAdditive
 
+theorem rationalTateModuleMap_tmul (f : A ⟶ B) [IsMonHom f] (a : ℚ_[ℓ])
+    (t : tateModule ℓ A) :
+    rationalTateModuleMap f (a ⊗ₜ t : rationalTateModule ℓ A) =
+      (a ⊗ₜ tateModuleMap f t : rationalTateModule ℓ B) :=
+  AddCommGroup.rationalTateModule.map_tmul _ a t
 
 /-- Blueprint `def-wf-abelian-tate-module`: the action of semilinear homomorphisms on Tate modules.
 
@@ -307,6 +334,24 @@ noncomputable def tateModuleSemilinearMap {e : Spec (.of K) ⟶ Spec (.of K)}
     tateModule ℓ A →ₗ[ℤ_[ℓ]] tateModule ℓ B :=
   AddCommGroup.tateModule.map (φ.mapPoints (X := Scheme.specAlgebraicClosure K) t ht)
 
+theorem coe_tateModuleSemilinearMap_apply {e : Spec (.of K) ⟶ Spec (.of K)}
+    (φ : SemilinearGrpHom e A B) (t : Spec (.of (AlgebraicClosure K)) ⟶
+      Spec (.of (AlgebraicClosure K)))
+    (ht : t ≫ (Scheme.specAlgebraicClosure K).hom ≫ e = (Scheme.specAlgebraicClosure K).hom)
+    (x : tateModule ℓ A) (n : ℕ) :
+    (((tateModuleSemilinearMap φ t ht x : tateModule ℓ B) :
+      ∀ _ : ℕ, Additive (Scheme.specAlgebraicClosure K ⟶ B)) n).toMul.left =
+      t ≫ ((x : ∀ _ : ℕ, Additive (Scheme.specAlgebraicClosure K ⟶ A)) n).toMul.left ≫ φ.hom :=
+  rfl
+
+/-- The action of a homomorphism on Tate modules is the semilinear action of
+`AlgebraicGeometry.SemilinearGrpHom.ofIsMonHom f` with `t = 𝟙`. -/
+theorem tateModuleSemilinearMap_ofIsMonHom (f : A ⟶ B) [IsMonHom f] :
+    tateModuleSemilinearMap (ℓ := ℓ) (SemilinearGrpHom.ofIsMonHom f) (𝟙 _)
+      (by simp only [Category.id_comp]; exact Category.comp_id _) =
+      tateModuleMap f :=
+  LinearMap.ext fun _ ↦ Subtype.ext <| funext fun _ ↦ congr_arg Additive.ofMul <|
+    Over.OverMorphism.ext (Category.id_comp _)
 
 end Functoriality
 
@@ -331,6 +376,12 @@ noncomputable def geometricPointsAddEquiv (σ : Gal(AlgebraicClosure K/K)) :
     rw [← Category.assoc, Scheme.specAlgebraicClosureMap_comp_symm, Category.id_comp]
   map_add' P Q := congr_arg Additive.ofMul (MonObj.comp_mul _ P.toMul Q.toMul)
 
+omit [IsAbelianVariety A] in
+theorem geometricPointsAddEquiv_apply (σ : Gal(AlgebraicClosure K/K))
+    (P : Additive (Scheme.specAlgebraicClosure K ⟶ A)) :
+    geometricPointsAddEquiv σ P =
+      .ofMul (Scheme.specAlgebraicClosureMap σ.toAlgHom ≫ (P.toMul : _ ⟶ A)) :=
+  rfl
 
 omit [IsAbelianVariety A] in
 theorem geometricPointsAddEquiv_inv (σ : Gal(AlgebraicClosure K/K)) :
@@ -346,6 +397,16 @@ theorem geometricPointsAddEquiv_mul (σ τ : Gal(AlgebraicClosure K/K))
       Scheme.specAlgebraicClosureMap σ.toAlgHom ≫ Scheme.specAlgebraicClosureMap τ.toAlgHom ≫ _
     rw [Scheme.specAlgebraicClosureMap_comp, Category.assoc]
 
+omit [IsAbelianVariety A] in
+/-- The Galois action on a group scheme `A`, as a semilinear homomorphism: the action of
+`σ ∈ Gal(K̄/K)` on geometric points is the action of the identity of `A` (semilinear over the
+identity of `Spec K`) twisted by `Spec σ`. -/
+theorem geometricPointsAddEquiv_eq_mapPoints (σ : Gal(AlgebraicClosure K/K)) :
+    (geometricPointsAddEquiv (A := A) σ).toAddMonoidHom =
+      (SemilinearGrpHom.ofIsMonHom (𝟙 A)).mapPoints
+        (Scheme.specAlgebraicClosureMap σ.toAlgHom).left
+        (by rw [Category.comp_id]; exact (Scheme.specAlgebraicClosureMap σ.toAlgHom).w) :=
+  AddMonoidHom.ext fun _ ↦ rfl
 
 variable (A) in
 /-- Blueprint `def-wf-abelian-tate-module`: the Galois representation on the Tate module.
@@ -364,6 +425,12 @@ noncomputable def galoisRepresentation :
   map_mul' σ τ := LinearEquiv.ext fun t ↦ Subtype.ext <| funext fun n ↦
     geometricPointsAddEquiv_mul σ τ _
 
+theorem coe_galoisRepresentation_apply (σ : Gal(AlgebraicClosure K/K)) (t : tateModule ℓ A)
+    (n : ℕ) :
+    ((galoisRepresentation ℓ A σ t : tateModule ℓ A) :
+      ∀ _ : ℕ, Additive (Scheme.specAlgebraicClosure K ⟶ A)) n =
+      geometricPointsAddEquiv σ ((t : ∀ _ : ℕ, Additive (Scheme.specAlgebraicClosure K ⟶ A)) n) :=
+  rfl
 
 variable (A) [Fintype K]
 
@@ -377,6 +444,38 @@ theorem finite_setOf_frobenius_fixed :
   (Scheme.finite_setOf_specAlgebraicClosureMap_frobenius_comp_eq_self A).preimage
     (Additive.toMul.injective.injOn)
 
+/-- Blueprint `prop-av-tate-no-frobenius-fixed`: no Frobenius-fixed vectors on the Tate module.
+
+Let `A` be an abelian variety over a finite field `k₀` and `F = σ⁻¹` the geometric Frobenius,
+acting on the geometric points `A(k̄)` by coordinates. Then `F` fixes no nonzero vector of the
+`ℓ`-adic Tate module `T_ℓ A`: the fixed group `A^σ` is finite
+(`AlgebraicGeometry.IsAbelianVariety.finite_setOf_frobenius_fixed`), so this is
+`AddCommGroup.eq_zero_of_mem_tateModule_of_forall_symm_fixed`. -/
+theorem eq_zero_of_mem_tateModule_of_forall_geometricFrobenius_fixed {t : ℕ → _}
+    (ht : t ∈ tateModule ℓ A) (hst : ∀ n, geometricPointsAddEquiv
+      (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic K (AlgebraicClosure K)) (t n) = t n) :
+    t = 0 :=
+  AddCommGroup.eq_zero_of_mem_tateModule_of_forall_symm_fixed _
+    (finite_setOf_frobenius_fixed A) ht fun n ↦ by
+      rw [← geometricPointsAddEquiv_inv, ← FiniteField.geometricFrobeniusAlgEquivOfAlgebraic_eq_inv]
+      exact hst n
+
+/-- Blueprint `prop-av-tate-no-frobenius-fixed`: no Frobenius-fixed vectors on the Tate module.
+
+Let `A` be an abelian variety over a finite field `k₀` and `F = σ⁻¹` the geometric Frobenius,
+acting on the geometric points `A(k̄)` by coordinates. Then `F` fixes no nonzero vector of the
+rational Tate module: `(V_ℓ A)^F = 0`. The fixed group `A^σ` is finite
+(`AlgebraicGeometry.IsAbelianVariety.finite_setOf_frobenius_fixed`), so this is
+`AddCommGroup.rationalTateModule.eq_zero_of_map_symm_eq_self`. -/
+theorem eq_zero_of_map_geometricFrobenius_eq_self {v : rationalTateModule ℓ A}
+    (hv : AddCommGroup.rationalTateModule.map (geometricPointsAddEquiv
+      (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic K (AlgebraicClosure K))).toAddMonoidHom v =
+      v) :
+    v = 0 :=
+  AddCommGroup.rationalTateModule.eq_zero_of_map_symm_eq_self _
+    (finite_setOf_frobenius_fixed A) <| by
+      rwa [← geometricPointsAddEquiv_inv,
+        ← FiniteField.geometricFrobeniusAlgEquivOfAlgebraic_eq_inv]
 
 end Galois
 

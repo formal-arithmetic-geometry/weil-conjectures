@@ -153,6 +153,29 @@ lemma coeff_coe_mul {R : Type*} [CommSemiring R] (B : R[X]) (f : R⟦X⟧) {d n 
 
 variable {f g : K⟦X⟧} {A B A' B' : K[X]}
 
+lemma isUnit_coe_of_coeff_zero_eq_one (hB : B.coeff 0 = 1) : IsUnit (B : K⟦X⟧) := by
+  rw [isUnit_iff_constantCoeff, ← coeff_zero_eq_constantCoeff_apply, Polynomial.coeff_coe, hB]
+  exact isUnit_one
+
+/-- Two fractions representing the same power series cross-multiply. -/
+theorem mul_eq_mul_of_mul_coe_eq (h : f * (B : K⟦X⟧) = (A : K⟦X⟧))
+    (h' : f * (B' : K⟦X⟧) = (A' : K⟦X⟧)) : A * B' = A' * B := by
+  refine Polynomial.coe_injective K ?_
+  rw [Polynomial.coe_mul, Polynomial.coe_mul, ← h, ← h']
+  ring
+
+/-- Two normalized fractions that cross-multiply represent the same power series: the
+Taylor expansion map is faithful. -/
+theorem eq_of_mul_eq_mul (hB : B.coeff 0 = 1) (hB' : B'.coeff 0 = 1)
+    (h : f * (B : K⟦X⟧) = (A : K⟦X⟧)) (h' : g * (B' : K⟦X⟧) = (A' : K⟦X⟧))
+    (hAB : A * B' = A' * B) : f = g := by
+  have hu : IsUnit ((B : K⟦X⟧) * (B' : K⟦X⟧)) :=
+    (isUnit_coe_of_coeff_zero_eq_one hB).mul (isUnit_coe_of_coeff_zero_eq_one hB')
+  refine hu.mul_right_cancel ?_
+  calc f * ((B : K⟦X⟧) * (B' : K⟦X⟧)) = ((A * B' : K[X]) : K⟦X⟧) := by
+        rw [Polynomial.coe_mul, ← h]; ring
+    _ = ((A' * B : K[X]) : K⟦X⟧) := by rw [hAB]
+    _ = g * ((B : K⟦X⟧) * (B' : K⟦X⟧)) := by rw [Polynomial.coe_mul, ← h']; ring
 
 /-- A normalized fraction `f * B = A` makes the coefficients of `f` satisfy the linear
 recurrence given by `B`, in every degree beyond the degree of `A`. -/

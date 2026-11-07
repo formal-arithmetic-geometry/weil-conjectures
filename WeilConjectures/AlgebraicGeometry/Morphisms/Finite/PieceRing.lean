@@ -71,6 +71,11 @@ abbrev pieceIdem : ch.RefineFiber f A' := e (ch.basePoint f hY₀ hy t)
 abbrev PieceRing : Type u :=
   ch.RefineFiber f A' ⧸ Ideal.span {1 - ch.pieceIdem f hY₀ hy A' e t}
 
+omit [Algebra.Etale ch.Ring A'] [DecidableEq (PointsOver ch.point (ch.Fiber f))] in
+include he in
+theorem isLocalization_pieceRing :
+    IsLocalization.Away (ch.pieceIdem f hY₀ hy A' e t) (ch.PieceRing f hY₀ hy A' e t) :=
+  IsLocalization.Away.quotient_span_one_sub (he.idem _)
 
 instance finite_pieceRing : Module.Finite A' (ch.PieceRing f hY₀ hy A' e t) :=
   have := ch.finite_fiber f hY₀
@@ -147,6 +152,31 @@ section Spec
 def pieceSpecι : Spec (.of (ch.PieceRing f hY₀ hy A' e t)) ⟶ Spec (.of (ch.RefineFiber f A')) :=
   Spec.map (CommRingCat.ofHom (algebraMap _ _))
 
+omit [Algebra.Etale ch.Ring A'] [DecidableEq (PointsOver ch.point (ch.Fiber f))] in
+include he in
+theorem isOpenImmersion_pieceSpecι : IsOpenImmersion (ch.pieceSpecι f hY₀ hy A' e t) :=
+  have := ch.isLocalization_pieceRing f hY₀ hy A' e he t
+  IsOpenImmersion.of_isLocalization (ch.pieceIdem f hY₀ hy A' e t)
+
+omit [Algebra.Etale ch.Ring A'] [DecidableEq (PointsOver ch.point (ch.Fiber f))] in
+include he in
+theorem opensRange_pieceSpecι :
+    haveI := ch.isOpenImmersion_pieceSpecι f hY₀ hy A' e he t
+    (ch.pieceSpecι f hY₀ hy A' e t).opensRange =
+      PrimeSpectrum.basicOpen (ch.pieceIdem f hY₀ hy A' e t) :=
+  have := ch.isLocalization_pieceRing f hY₀ hy A' e he t
+  opensRange_SpecMap_algebraMap (S := ch.PieceRing f hY₀ hy A' e t) _
+
+include he in
+/-- The `t`-th piece of the split neighbourhood `Spec A'` is the range of
+`Spec (F ⧸ (1 - e t)) ⟶ Spec F ≅ Spec A' ×_Y X`. -/
+lemma opensRange_pieceSpecι_comp_refineIso_hom :
+    haveI := ch.isOpenImmersion_pieceSpecι f hY₀ hy A' e he t
+    (ch.pieceSpecι f hY₀ hy A' e t ≫ (ch.refineIso f hY₀ A' φ' hφ').hom).opensRange =
+      (ch.split f hY₀ hy A' φ' hφ' e he hval).piece t := by
+  have := ch.isOpenImmersion_pieceSpecι f hY₀ hy A' e he t
+  rw [split_piece, ← ch.opensRange_pieceSpecι f hY₀ hy A' e he t, Scheme.Hom.opensRange_comp,
+    Scheme.Hom.image_hom_eq_preimage_inv]
 
 /-- The structure morphism `Spec (F ⧸ (1 - e t)) ⟶ X` of the `t`-th piece. -/
 def pieceSpecToX : Spec (.of (ch.PieceRing f hY₀ hy A' e t)) ⟶ X :=

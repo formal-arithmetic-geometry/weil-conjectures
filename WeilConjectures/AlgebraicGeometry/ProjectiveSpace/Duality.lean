@@ -254,6 +254,30 @@ theorem bijective_yonedaDualMap_of_shortExact {S : ShortComplex X.Modules}
   · obtain ⟨x, rfl⟩ := hΨ ν
     exact ⟨D x, hYD x⟩
 
+/-- **`H⁰`-duality from a resolution.** Let `0 → 𝒦 → ℰ → 𝒢 → 0` be a short exact sequence of
+`𝒪_X`-modules with `H⁰(ℰ) = 0` and `Ext¹(ℰ, ω) = 0`, such that the duality pairing
+`Hom(-, ω) → H¹(X, -)^∨` is bijective on `𝒦` and surjective on `ℰ`. Then
+`H⁰(X, 𝒢)^∨ ≅ Ext¹(𝒢, ω)`, by the inverse of the Yoneda pairing
+(`bijective_yonedaDualMap_of_shortExact`). -/
+lemma nonempty_dual_H_zero_addEquiv_ext_of_shortExact {S : ShortComplex X.Modules}
+    (hS : S.ShortExact) [Subsingleton (S.X₂.H 0)] [Subsingleton (Ext S.X₂ ω 1)]
+    (h₁ : Function.Bijective (dualPairing t S.X₁))
+    (h₂ : Function.Surjective (dualPairing t S.X₂)) :
+    Nonempty (Module.Dual k (S.X₃.H 0) ≃+ Ext S.X₃ ω 1) :=
+  ⟨(LinearEquiv.ofBijective _ (bijective_yonedaDualMap_of_shortExact t hS h₁ h₂)).symm.toAddEquiv⟩
+
+/-- **`H⁰`-duality from a resolution, `k`-linearly.** Let `0 → 𝒦 → ℰ → 𝒢 → 0` be a short exact
+sequence of `𝒪_X`-modules with `H⁰(ℰ) = 0` and `Ext¹(ℰ, ω) = 0`, such that the duality pairing
+`Hom(-, ω) → H¹(X, -)^∨` is bijective on `𝒦` and surjective on `ℰ`. Then
+`H⁰(X, 𝒢)^∨ ≅ Ext¹(𝒢, ω)` as `k`-vector spaces, for the `k`-linear structure of `X.Modules`
+(`Scheme.Modules.linearOfOver`), by the inverse of the Yoneda pairing
+(`bijective_yonedaDualMap_of_shortExact`). -/
+lemma nonempty_dual_H_zero_linearEquiv_ext_of_shortExact {S : ShortComplex X.Modules}
+    (hS : S.ShortExact) [Subsingleton (S.X₂.H 0)] [Subsingleton (Ext S.X₂ ω 1)]
+    (h₁ : Function.Bijective (dualPairing t S.X₁))
+    (h₂ : Function.Surjective (dualPairing t S.X₂)) :
+    Nonempty (Module.Dual k (S.X₃.H 0) ≃ₗ[k] Ext S.X₃ ω 1) :=
+  ⟨(LinearEquiv.ofBijective _ (bijective_yonedaDualMap_of_shortExact t hS h₁ h₂)).symm⟩
 
 end Scheme.Modules
 
@@ -261,6 +285,36 @@ namespace ProjectiveLine
 
 variable (k : Type u) [Field k]
 
+/-- **Resolutions by twists on `ℙ¹_k`.** Every coherent `𝒪_{ℙ¹_k}`-module `𝒢` has a resolution
+`0 → ℰ₂ → ℰ₁ → ℰ₀ → 𝒢 → 0` in which each `ℰᵢ` is a finite direct sum of twists `𝒪(d)`. In
+fact `ℰ₂ = 0` can be taken: `exists_shortExact_sigma_twist` gives a resolution
+`0 → 𝒪(-N - 1)^a → 𝒪(-N)^b → 𝒢 → 0` by Castelnuovo–Mumford regularity, replacing the graded
+Hilbert syzygy theorem of the blueprint.
+
+(blueprint: `lem-sc-p1-graded-resolution`) -/
+theorem exists_exact_sigma_twist (𝒢 : (ProjectiveLine (Spec (.of k))).Modules)
+    [SheafOfModules.IsQuasicoherent (R := (ProjectiveLine (Spec (.of k))).ringCatSheaf) 𝒢]
+    [SheafOfModules.IsFinitePresentation (R := (ProjectiveLine (Spec (.of k))).ringCatSheaf) 𝒢] :
+    let 𝒪 : ℤ → (ProjectiveLine (Spec (.of k))).Modules :=
+      ProjectiveSpace.twist (ULift.{u} (Fin 2)) (Spec (.of k))
+    ∃ (n₀ n₁ n₂ : ℕ) (d₀ : Fin n₀ → ℤ) (d₁ : Fin n₁ → ℤ) (d₂ : Fin n₂ → ℤ)
+      (f₂ : ∐ (fun j ↦ 𝒪 (d₂ j)) ⟶ ∐ (fun j ↦ 𝒪 (d₁ j)))
+      (f₁ : ∐ (fun j ↦ 𝒪 (d₁ j)) ⟶ ∐ (fun j ↦ 𝒪 (d₀ j)))
+      (f₀ : ∐ (fun j ↦ 𝒪 (d₀ j)) ⟶ 𝒢),
+      Mono f₂ ∧ Epi f₀ ∧ (ComposableArrows.mk₃ f₂ f₁ f₀).Exact := by
+  intro 𝒪
+  obtain ⟨J₁, J₀, _, _, d₁, d₀, f, g, w, hS⟩ := exists_shortExact_sigma_twist 𝒢
+  let ε₁ := (Finite.equivFin J₁).symm
+  let ε₀ := (Finite.equivFin J₀).symm
+  have hS' := shortExact_of_isos hS (Sigma.reindex ε₁ fun _ ↦ 𝒪 d₁).symm
+    (Sigma.reindex ε₀ fun _ ↦ 𝒪 d₀).symm (Iso.refl 𝒢)
+  have hz : IsZero (∐ fun j : Fin 0 ↦ 𝒪 (Fin.elim0 j)) :=
+    (IsZero.iff_id_eq_zero _).2 (Sigma.hom_ext _ _ fun j ↦ j.elim0)
+  refine ⟨_, _, 0, fun _ ↦ d₀, fun _ ↦ d₁, Fin.elim0, 0, _, _, ⟨fun g h _ ↦ hz.eq_of_tgt g h⟩,
+    hS'.epi_g, ComposableArrows.exact_of_δ₀ (ComposableArrows.exact₂_mk _ (zero_comp) ?_)
+      (ComposableArrows.exact₂_mk _ _ hS'.exact)⟩
+  have := hS'.mono_f
+  exact (ShortComplex.exact_iff_mono _ rfl).2 this
 
 /-- `Hom(𝒪(a), Ω¹_{ℙ¹_k/k}) ≅ 𝒪(-a - 2)`, since `Ω¹_{ℙ¹_k/k} ≅ 𝒪(-2)` is invertible and
 `𝒪(a)ᵛ ≅ 𝒪(-a)`. -/
@@ -576,6 +630,14 @@ noncomputable def dualHZeroLinearEquivExt [HasExt.{u} (ProjectiveLine (Spec (.of
     Module.Dual k (𝒢.H 0) ≃ₗ[k] Ext 𝒢 ω 1 :=
   (LinearEquiv.ofBijective (yonedaDualMap t 𝒢) (bijective_yonedaDualMap k t ht 𝒢)).symm
 
+/-- The inverse of `dualHZeroLinearEquivExt` is the Yoneda pairing. -/
+lemma dualHZeroLinearEquivExt_symm_apply [HasExt.{u} (ProjectiveLine (Spec (.of k))).Modules]
+    (t : Module.Dual k ((ω).H 1)) (ht : t ≠ 0) (𝒢 : (ProjectiveLine (Spec (.of k))).Modules)
+    [SheafOfModules.IsQuasicoherent (R := (ProjectiveLine (Spec (.of k))).ringCatSheaf) 𝒢]
+    [SheafOfModules.IsFinitePresentation (R := (ProjectiveLine (Spec (.of k))).ringCatSheaf) 𝒢]
+    (ξ : Ext 𝒢 ω 1) :
+    (dualHZeroLinearEquivExt k t ht 𝒢).symm ξ = yonedaDualMap t 𝒢 ξ :=
+  rfl
 
 /-- **The Yoneda pairing on `ℙ¹_k` as a natural isomorphism**: on coherent
 `𝒪_{ℙ¹_k}`-modules `𝒢`, the Yoneda pairings `Ext¹(𝒢, Ω¹) → H⁰(ℙ¹_k, 𝒢)^∨` of
@@ -599,6 +661,64 @@ noncomputable def extIsoDualHZero [HasExt.{u} (ProjectiveLine (Spec (.of k))).Mo
       ext ξ : 2
       exact yonedaDualMap_naturality t f.unop.hom ξ)
 
+/-- `extIsoDualHZero` is the Yoneda pairing. -/
+lemma extIsoDualHZero_hom_app [HasExt.{u} (ProjectiveLine (Spec (.of k))).Modules]
+    (t : Module.Dual k ((ω).H 1)) (ht : t ≠ 0)
+    (G : (Scheme.Modules.isCoherent (ProjectiveLine (Spec (.of k)))).FullSubcategoryᵒᵖ)
+    (ξ : Ext G.unop.obj ω 1) :
+    (extIsoDualHZero k t ht).hom.app G ξ = yonedaDualMap t G.unop.obj ξ :=
+  rfl
+
+/-- **Duality on the projective line, `H⁰`.** For coherent `𝒪_{ℙ¹_k}`-modules `𝒢`, there is an
+isomorphism `H⁰(ℙ¹_k, 𝒢)^∨ ≅ Ext¹(𝒢, Ω¹_{ℙ¹_k/k})`, natural in `𝒢`.
+
+The isomorphism is the inverse of the Yoneda pairing
+`Ext¹(𝒢, ω) × Hom(𝒪, 𝒢) → Ext¹(𝒪, ω) ≅ H¹(ℙ¹_k, ω) → k` for a nonzero linear form `t` on
+`H¹(ℙ¹_k, Ω¹) ≅ k` (`extIsoDualHZero`), the same `t` as for the `H¹`-duality
+`nonempty_dual_H_one_iso`. Bijectivity comes from a resolution `0 → 𝒦 → ℰ → 𝒢 → 0` by twists
+and the `H¹`-duality on `𝒦` and `ℰ` (`bijective_yonedaDualMap`).
+
+(blueprint: `thm-sc-p1-duality`, second isomorphism) -/
+theorem nonempty_dual_H_zero_iso_ext [HasExt.{u} (ProjectiveLine (Spec (.of k))).Modules] :
+    Nonempty ((Scheme.Modules.isCoherent (ProjectiveLine (Spec (.of k)))).ι.op ⋙
+        (Scheme.Modules.cohomologyFunctor k 0).op ⋙ ModuleCat.dualFunctor k ≅
+      (Scheme.Modules.isCoherent (ProjectiveLine (Spec (.of k)))).ι.op ⋙
+        Scheme.Modules.extLinearFunctor k
+          (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials 1) := by
+  obtain ⟨t, ht⟩ := exists_dual_H_one_relativeDifferentials_ne_zero k
+  exact ⟨(extIsoDualHZero k t ht).symm⟩
+
+/-- **Duality on the projective line, `H⁰`, additively.** For a coherent `𝒪_{ℙ¹_k}`-module
+`𝒢`, `H⁰(ℙ¹_k, 𝒢)^∨ ≅ Ext¹(𝒢, Ω¹_{ℙ¹_k/k})`, by the inverse of the Yoneda pairing
+(`dualHZeroLinearEquivExt`).
+
+(blueprint: `thm-sc-p1-duality`, second isomorphism) -/
+theorem nonempty_dual_H_zero_addEquiv_ext [HasExt.{u} (ProjectiveLine (Spec (.of k))).Modules]
+    (𝒢 : (ProjectiveLine (Spec (.of k))).Modules)
+    [SheafOfModules.IsQuasicoherent (R := (ProjectiveLine (Spec (.of k))).ringCatSheaf) 𝒢]
+    [SheafOfModules.IsFinitePresentation (R := (ProjectiveLine (Spec (.of k))).ringCatSheaf) 𝒢] :
+    Nonempty (Module.Dual k (𝒢.H 0) ≃+
+      Scheme.Modules.Ext 𝒢 (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials
+        1) := by
+  obtain ⟨t, ht⟩ := exists_dual_H_one_relativeDifferentials_ne_zero k
+  exact ⟨(dualHZeroLinearEquivExt k t ht 𝒢).toAddEquiv⟩
+
+/-- **Duality on the projective line, `H⁰`, `k`-linearly.** For a coherent `𝒪_{ℙ¹_k}`-module
+`𝒢`, `H⁰(ℙ¹_k, 𝒢)^∨ ≅ Ext¹(𝒢, Ω¹_{ℙ¹_k/k})` as `k`-vector spaces, for the `k`-linear structure
+of `𝒪_{ℙ¹_k}`-modules (`Scheme.Modules.linearOfOver`) and the induced `k`-vector space structure
+on `Ext`, by the inverse of the Yoneda pairing (`dualHZeroLinearEquivExt`); it is natural in `𝒢`
+(`nonempty_dual_H_zero_iso_ext`).
+
+(blueprint: `thm-sc-p1-duality`, second isomorphism) -/
+theorem nonempty_dual_H_zero_linearEquiv_ext [HasExt.{u} (ProjectiveLine (Spec (.of k))).Modules]
+    (𝒢 : (ProjectiveLine (Spec (.of k))).Modules)
+    [SheafOfModules.IsQuasicoherent (R := (ProjectiveLine (Spec (.of k))).ringCatSheaf) 𝒢]
+    [SheafOfModules.IsFinitePresentation (R := (ProjectiveLine (Spec (.of k))).ringCatSheaf) 𝒢] :
+    Nonempty (Module.Dual k (𝒢.H 0) ≃ₗ[k]
+      Scheme.Modules.Ext 𝒢 (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials
+        1) := by
+  obtain ⟨t, ht⟩ := exists_dual_H_one_relativeDifferentials_ne_zero k
+  exact ⟨dualHZeroLinearEquivExt k t ht 𝒢⟩
 
 end ProjectiveLine
 

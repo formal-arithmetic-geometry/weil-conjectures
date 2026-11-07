@@ -60,6 +60,13 @@ def twistHZeroLinearEquivOfField [Fintype n] [Nonempty n] (m : ℕ) :
     (twist n (Spec (.of k)) m).H 0 ≃ₗ[k] MvPolynomial.homogeneousSubmodule n k m :=
   twistHZeroLinearEquiv k m
 
+/-- The inverse of `twistHZeroLinearEquivOfField` sends a homogeneous polynomial to the class in
+`H⁰` of the global section of `𝒪(m)` it defines. -/
+lemma twistHZeroLinearEquivOfField_symm_apply [Fintype n] [Nonempty n] (m : ℕ)
+    (f : MvPolynomial.homogeneousSubmodule n k m) :
+    (twistHZeroLinearEquivOfField n k m).symm f =
+      (H.zeroLinearEquiv (twist n (Spec (.of k)) m)).symm (homogeneousSubmoduleToTwist k m f) :=
+  rfl
 
 /-- **The top cohomology of the twisting sheaves on `ℙᵈ_k`, canonically.** For `m ≤ -d - 1`,
 `Hᵈ(ℙ(n; Spec k), 𝒪(m)) ≅ S^{-m-d-1}(V)^∨`: the canonical Leray isomorphism with the top
@@ -76,6 +83,20 @@ def twistHTopLinearEquivDualOfField [Fintype n] {d : ℕ} (hn : Fintype.card n =
   twistHLinearEquivMonomialCechHomology k m d ≪≫ₗ
     monomialCechComplexHomologyTopLinearEquivDual n k m hn hm
 
+/-- **`twistHTopLinearEquivDualOfField` is the Serre pairing.** For `d ≥ 1`, the isomorphism
+`Hᵈ(ℙᵈ_k, 𝒪(m)) ≅ (k[x]_{-m-d-1})^∨` sends a class `x` to `f ↦ tr (f · x)`, where `f · x` is the
+image of `x` under multiplication by the section `f` of `𝒪(-m-d-1)` and
+`tr : Hᵈ(ℙᵈ_k, 𝒪(-d-1)) ≅ k` is the trace `twistTopTrace`.
+
+(blueprint: `det-thm-picard-pn`, `lem-pc-projective-space-serre-pairing`) -/
+theorem twistHTopLinearEquivDualOfField_apply [Fintype n] {p : ℕ}
+    (hn : Fintype.card n = p + 1 + 1) {m : ℤ} (hm : m ≤ -((p + 1 : ℕ) : ℤ) - 1)
+    (x : (twist n (Spec (.of k)) m).H (p + 1))
+    (f : MvPolynomial.homogeneousSubmodule n k (-m - ((p + 1 : ℕ) : ℤ) - 1).toNat) :
+    twistHTopLinearEquivDualOfField n k hn hm x f = twistTopTrace k hn
+      (twistMulPairing k (monomialCechPairing_aux hm) (p + 1)
+        (homogeneousSubmoduleToTwist k _ f) x) :=
+  twistHTopLinearEquivDual_apply hn hm x f
 
 /-- **`H⁰` of the twisting sheaves on `ℙᵈ_k`.** With `X = ℙᵈ_k` presented as `ℙ(n; Spec k)`
 for an index type `n` of homogeneous coordinates with `Nat.card n = d + 1`, and `Sᵐ(V)` for

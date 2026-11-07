@@ -84,6 +84,15 @@ section Stalks
 
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
+/-- Isomorphic Weil sheaves have stalks with the same Frobenius trace. -/
+theorem WeilSheaf.trace_frobeniusEnd_stalkAt_congr {F G : WeilSheaf k₀ l X} (e : F ≅ G)
+    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
+      (specGeometricFrobenius k₀ ^ m).hom ≫ s) :
+    LinearMap.trace (PadicAlgCl l) _ (G.stalkAt s m hs).frobeniusEnd =
+      LinearMap.trace (PadicAlgCl l) _ (F.stalkAt s m hs).frobeniusEnd := by
+  obtain ⟨E⟩ := WeilSheaf.nonempty_equiv_stalkAt_of_iso s m hs e
+  simpa only [pow_one] using E.trace_frobeniusEnd_pow 1
 
 variable (k₀ l) in
 /-- The stalks `Γ(Spec k̄, s^* ℚ̄_ℓ)` of the constant Weil sheaf are one-dimensional: the unit
@@ -190,6 +199,26 @@ theorem WeilSheaf.pointCount_eq_finsum_trace_cohomology {m : ℕ} (hm : 1 ≤ m)
     (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)) i
   exact congrArg _ (e.trace_frobeniusEnd_pow m).symm
 
+/-- Blueprints `thm-weil-grothendieck-lefschetz-trace` and `prop-every-iterate-trace` (general
+clause) (Grothendieck–Lefschetz trace formula):
+for a Weil complex `K` on a separated `k₀`-scheme `Y₀` of finite type and `m ≥ 1`, the sum over
+`y ∈ Y₀(𝔽_{qᵐ})` of the local alternating traces `t_K(y)` is the alternating trace of `Fᵐ` on
+`H_c^•(Y₀ ⊗ k̄, K)`; for `K = ℚ̄_ℓ` and a proper `X₀` this specializes to
+`#X₀(𝔽_{qᵐ}) = ∑ᵢ (-1)ⁱ Tr(Fᵐ | Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ))`. -/
+theorem WeilComplex.finsum_traceFunction_eq_and_pointCount_eq {Y : Scheme.{u}}
+    [Y.Over (Spec (CommRingCat.of k₀))] [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] (K : WeilComplex k₀ l Y) {m : ℕ}
+    (hm : 1 ≤ m) :
+    ∑ᶠ y : (Y ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ m),
+        K.traceFunction m y =
+      ∑ᶠ i : ℤ, (i.negOnePow : ℤ) • LinearMap.trace (PadicAlgCl l) _
+        ((K.compactlySupportedCohomology i).frobeniusEnd ^ m) ∧
+    ((X ↘ Spec (CommRingCat.of k₀)).pointCount m : PadicAlgCl l) =
+      ∑ᶠ i : ℤ, (i.negOnePow : ℤ) • LinearMap.trace (PadicAlgCl l) _
+        (((WeilSheaf.adicConstant k₀ l X).cohomology i).frobeniusEnd ^ m) :=
+  ⟨(K.finsum_trace_compactlySupportedCohomology_eq hm).symm,
+    WeilSheaf.pointCount_eq_finsum_trace_cohomology k₀ l X hm⟩
 
 /-- Blueprint `prop-every-iterate-trace` (every-iterate Grothendieck–Lefschetz identity), smooth
 proper case: for `X₀` smooth and proper of pure dimension `d` and every `n ≥ 1`,

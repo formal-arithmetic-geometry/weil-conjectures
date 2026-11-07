@@ -59,6 +59,11 @@ lemma _root_.CategoryTheory.IsPullback.ker_fst_eq_comap {P A B C : Scheme.{u}} {
   rw [← h.isoPullback_hom_fst, Scheme.Hom.ker_comp_of_isIso,
     Scheme.IdealSheafData.ker_fst_of_isClosedImmersion]
 
+/-- The ideal sheaf of the slice `b ↦ (a, b)` is the pullback of the ideal sheaf of `a`. -/
+lemma ker_lift_toUnit_comp_left (A B : Over S) (a : 𝟙_ (Over S) ⟶ A)
+    [IsClosedImmersion a.left] :
+    (lift (toUnit B ≫ a) (𝟙 B)).left.ker = a.left.ker.comap (fst A B).left := by
+  exact (isPullback_lift_toUnit_comp_left A B a).ker_fst_eq_comap
 
 variable (X Y Z : Over S)
 

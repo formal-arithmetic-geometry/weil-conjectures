@@ -327,5 +327,25 @@ def canonicalModuleIsoTwist :
       (fun _ _ hij ↦ map_canonicalGenerator_eq_transitionUnit_smul A e hij)
       (fun i j _ ↦ map_twistGenerator_eq_transitionUnit_smul n _ _ i j))
 
+/-- **`ω_ℙ ≅ 𝒪(-d-1)` sends `ηᵢ` to `eᵢ^{(-d-1)}`** on the standard open `Uᵢ`.
+
+(blueprint: `lem-pc-projective-space-canonical`) -/
+lemma canonicalModuleIsoTwist_hom_app (i : n) :
+    (canonicalModuleIsoTwist A e).hom.app (standardOpen n _ i) (canonicalGenerator A e i) =
+      twistGenerator n _ (-(d : ℤ) - 1) i :=
+  isoOfIsFreeGenerator_hom_app _ _ _ _ i
+
+/-- **Local description of `canonicalModuleIsoTwist`**: on an open `W ⊆ Uᵢ`, it sends
+`r • ηᵢ|_W` to `r • eᵢ^{(-d-1)}|_W`.
+
+(blueprint: `lem-pc-projective-space-canonical`) -/
+lemma canonicalModuleIsoTwist_hom_app_smul (i : n) {W : ℙ(n; Spec (.of A)).Opens}
+    (hW : W ≤ standardOpen n _ i) (r : Γ(ℙ(n; Spec (.of A)), W)) :
+    (canonicalModuleIsoTwist A e).hom.app W
+        (r • (canonicalModule n (Spec (.of A)) d).presheaf.map (homOfLE hW).op
+          (canonicalGenerator A e i)) =
+      r • (twist n (Spec (.of A)) (-(d : ℤ) - 1)).presheaf.map (homOfLE hW).op
+        (twistGenerator n _ (-(d : ℤ) - 1) i) :=
+  isoOfIsFreeGenerator_hom_app_smul _ _ _ _ i hW r
 
 end AlgebraicGeometry.ProjectiveSpace

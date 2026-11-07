@@ -136,6 +136,46 @@ theorem isQuasicoherent_of_toDescentData_iso (hg : Sieve.ofArrows T' g ∈ Schem
     (M : T.Modules).IsQuasicoherent :=
   isQuasicoherent_of_toDescentData_iso_of_mem_fpqcTopology g hg D M hM hD
 
+/-- **Finite presentation descends along an fpqc covering.**
+
+(blueprint: `lem-pc-fpqc-descent`; `det-thm-picard-descent`, part (D1)) -/
+theorem isFinitePresentation_of_toDescentData_iso (hg : Sieve.ofArrows T' g ∈ Scheme.fpqcTopology T)
+    (D : modulesPseudofunctor.DescentData g)
+    (M : modulesPseudofunctor.obj (.mk (op T)))
+    (hM : Nonempty ((modulesPseudofunctor.toDescentData g).obj M ≅ D))
+    (hD : ∀ i, (D.obj i : (T' i).Modules).IsFinitePresentation) :
+    (M : T.Modules).IsFinitePresentation :=
+  isFinitePresentation_of_toDescentData_iso_of_isQuasicoherent g hg D M
+    (isQuasicoherent_of_toDescentData_iso g hg D M hM fun i ↦ have := hD i; inferInstance) hM hD
+
+/-- **Finite local freeness descends along an fpqc covering.** A descent datum whose
+components are of finite presentation and locally free, i.e. finite locally free with a rank
+allowed to vary locally, comes from a module on `T` which is locally free; it is of finite
+presentation by `isFinitePresentation_of_toDescentData_iso`.
+
+(blueprint: `lem-pc-fpqc-descent`; `det-thm-picard-descent`, part (D1)) -/
+theorem isLocallyFree_of_toDescentData_iso (hg : Sieve.ofArrows T' g ∈ Scheme.fpqcTopology T)
+    (D : modulesPseudofunctor.DescentData g)
+    (M : modulesPseudofunctor.obj (.mk (op T)))
+    (hM : Nonempty ((modulesPseudofunctor.toDescentData g).obj M ≅ D))
+    (hD : ∀ i, (D.obj i : (T' i).Modules).IsFinitePresentation ∧
+      (D.obj i : (T' i).Modules).IsLocallyFree) :
+    (M : T.Modules).IsLocallyFree :=
+  isLocallyFree_of_toDescentData_iso_of_isQuasicoherent g hg D M
+    (isQuasicoherent_of_toDescentData_iso g hg D M hM fun i ↦ have := (hD i).1; inferInstance)
+    hM hD
+
+/-- **Fpqc descent for modules: existence.** For an fpqc covering `{g i : T i ⟶ T}`, every
+descent datum whose components are quasi-coherent comes from a sheaf of modules on `T`.
+
+(blueprint: `lem-pc-fpqc-descent`; `det-thm-picard-descent`, part (D1)) -/
+theorem exists_toDescentData_iso (hg : Sieve.ofArrows T' g ∈ Scheme.fpqcTopology T)
+    (D : modulesPseudofunctor.DescentData g)
+    (hD : ∀ i, (D.obj i : (T' i).Modules).IsQuasicoherent) :
+    ∃ M : modulesPseudofunctor.obj (.mk (op T)),
+      Nonempty ((modulesPseudofunctor.toDescentData g).obj M ≅ D) :=
+  have ⟨M, _, hM⟩ := exists_isQuasicoherent_toDescentData_iso_of_mem_fpqcTopology g hg D hD
+  ⟨M, hM⟩
 
 /-- **Fpqc descent for modules: effectivity.** For an fpqc covering `{g i : T i ⟶ T}`, every
 descent datum whose components are quasi-coherent comes from a quasi-coherent module on `T`.

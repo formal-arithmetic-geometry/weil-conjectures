@@ -90,6 +90,26 @@ def absoluteFrobenius (m : ℕ) : X₀ ⟶ X₀ :=
   X₀.iterateFrobenius FiniteField.ringChar_prime f.natCast_ringChar_eq_zero
     (Nat.log (ringChar k) (Nat.card k) * m)
 
+/-- If `#k = p ^ a`, the absolute `q ^ m`-power Frobenius is the `p ^ (a * m)`-power absolute
+Frobenius. -/
+lemma absoluteFrobenius_eq_iterateFrobenius (m : ℕ) {p : ℕ} (hp : p.Prime)
+    (hX : (p : Γ(X₀, ⊤)) = 0) (a : ℕ) (hq : Nat.card k = p ^ a) :
+    f.absoluteFrobenius m = X₀.iterateFrobenius hp hX (a * m) := by
+  have := Fintype.ofFinite k
+  have hpk : ringChar k = p := by
+    have h0 : ((p ^ a : ℕ) : k) = 0 := by
+      rw [← hq, Nat.card_eq_fintype_card]
+      exact FiniteField.cast_card_eq_zero k
+    have ha : a ≠ 0 := by
+      rintro rfl
+      have := Finite.one_lt_card (α := k)
+      rw [pow_zero] at hq
+      omega
+    rw [Nat.cast_pow, pow_eq_zero_iff ha] at h0
+    exact (Nat.prime_dvd_prime_iff_eq FiniteField.ringChar_prime hp).1 (ringChar.dvd h0)
+  subst hpk
+  unfold absoluteFrobenius
+  simp only [hq, Nat.log_pow hp.one_lt]
 
 @[simp]
 lemma absoluteFrobenius_apply (m : ℕ) (x : X₀) : f.absoluteFrobenius m x = x :=
@@ -109,6 +129,10 @@ lemma absoluteFrobenius_zero : f.absoluteFrobenius 0 = 𝟙 X₀ := by
   unfold absoluteFrobenius
   simp [iterateFrobenius_zero]
 
+lemma absoluteFrobenius_add (m n : ℕ) :
+    f.absoluteFrobenius (m + n) = f.absoluteFrobenius m ≫ f.absoluteFrobenius n := by
+  unfold absoluteFrobenius
+  rw [mul_add, iterateFrobenius_add]
 
 /-- The absolute Frobenius commutes with every morphism of schemes over `k`, or more generally
 with every morphism `g : X₀ ⟶ Y₀` to a `k`-scheme. -/
@@ -183,6 +207,16 @@ lemma schemeFrobenius_comp_geometricFiberToAlgebraicClosure (m : ℕ) :
 lemma schemeFrobenius_zero : f.schemeFrobenius 0 = 𝟙 _ := by
   ext <;> simp
 
+lemma schemeFrobenius_add (m n : ℕ) :
+    f.schemeFrobenius (m + n) = f.schemeFrobenius m ≫ f.schemeFrobenius n := by
+  ext <;> simp [absoluteFrobenius_add]
+
+/-- `Φ^m` is the `m`-fold iterate of the scheme Frobenius `Φ = Φ^1`. -/
+lemma schemeFrobenius_eq_pow (m : ℕ) :
+    End.of (f.schemeFrobenius m) = End.of (f.schemeFrobenius 1) ^ m := by
+  induction m with
+  | zero => exact f.schemeFrobenius_zero
+  | succ m ih => rw [pow_succ', End.mul_def, ← ih, ← schemeFrobenius_add]
 
 /-- The scheme Frobenius is radicial, being a base change of the absolute Frobenius. -/
 instance (m : ℕ) : UniversallyInjective (f.schemeFrobenius m) :=
@@ -211,6 +245,15 @@ lemma specArithmeticFrobenius_hom [Fintype k] :
   obtain rfl : ‹Fintype k› = Fintype.ofFinite k := Subsingleton.elim _ _
   rfl
 
+lemma specArithmeticFrobenius_pow_hom [Fintype k] (m : ℕ) :
+    (specArithmeticFrobenius k ^ m).hom =
+      Spec.map (CommRingCat.ofHom (FiniteField.frobeniusAlgEquivOfAlgebraic k
+        (AlgebraicClosure k) ^ m).toRingEquiv.toRingHom) := by
+  induction m with
+  | zero => exact (Spec.map_id _).symm
+  | succ m ih =>
+    rw [pow_succ, Aut.mul_hom, ih, specArithmeticFrobenius_hom, ← Spec.map_comp, pow_succ']
+    rfl
 
 /-- The arithmetic Frobenius of `Spec k̄` is the inverse of the geometric Frobenius. -/
 lemma specArithmeticFrobenius_eq_inv :
@@ -256,6 +299,18 @@ lemma arithmeticGaloisFrobenius_hom_comp_geometricFiberToAlgebraicClosure :
       f.geometricFiberToAlgebraicClosure ≫ (specArithmeticFrobenius k).hom := by
   simp [arithmeticGaloisFrobenius, geometricFiberToAlgebraicClosure]
 
+/-- `g_σ = g_γ⁻¹`. -/
+lemma arithmeticGaloisFrobenius_eq_inv :
+    f.arithmeticGaloisFrobenius = f.geometricGaloisFrobenius⁻¹ := by
+  rw [eq_inv_iff_mul_eq_one]
+  ext1
+  rw [Aut.mul_hom, Aut.one_hom]
+  ext
+  · simp
+  · rw [Category.assoc, arithmeticGaloisFrobenius_hom_comp_geometricFiberToAlgebraicClosure,
+      geometricGaloisFrobenius_hom_comp_geometricFiberToAlgebraicClosure_assoc, ← Aut.mul_hom,
+      specArithmeticFrobenius_eq_inv, inv_mul_cancel, Aut.one_hom, Category.comp_id,
+      Category.id_comp]
 
 @[reassoc (attr := simp)]
 lemma arithmeticGaloisFrobenius_pow_hom_comp_geometricFiberProj (m : ℕ) :
@@ -291,6 +346,52 @@ lemma schemeFrobenius_comp_geometricGaloisFrobenius_pow (m n : ℕ) :
       (f.geometricGaloisFrobenius ^ n).hom ≫ f.schemeFrobenius m := by
   ext <;> simp
 
+/-- The absolute `q ^ m`-power Frobenius of the geometric fiber `X = X₀ ×_k k̄` lies over
+`Spec σ^m` on `Spec k̄`. -/
+lemma absoluteFrobenius_geometricFiber_comp_geometricFiberToAlgebraicClosure (m : ℕ) :
+    (f.geometricFiberProj ≫ f).absoluteFrobenius m ≫ f.geometricFiberToAlgebraicClosure =
+      f.geometricFiberToAlgebraicClosure ≫ (specArithmeticFrobenius k ^ m).hom := by
+  let := Fintype.ofFinite k
+  rw [geometricFiber_condition, absoluteFrobenius_naturality, absoluteFrobenius,
+    iterateFrobenius_Spec _ _ (by simp),
+    specArithmeticFrobenius_pow_hom]
+  congr 2
+  ext z
+  simp only [CommRingCat.hom_ofHom, iterateFrobeniusOfPrime_apply, pow_mul,
+    FiniteField.ringChar_pow_log_card, RingEquiv.toRingHom_eq_coe, RingHom.coe_coe,
+    AlgEquiv.coe_toRingEquiv, AlgEquiv.coe_pow,
+    FiniteField.coe_frobeniusAlgEquivOfAlgebraic_iterate]
+  rw [Nat.card_eq_fintype_card]
+
+/-- Blueprint `prop-trf-frobenius-factorization`: Factorization of the absolute Frobenius.
+
+For every `m`, the absolute `q ^ m`-power Frobenius of the geometric fiber `X = X₀ ×_k k̄`,
+`a ⊗ b ↦ a ^ (q ^ m) ⊗ b ^ (q ^ m)`, factors as `Fr^{(q^m)}_X = g_σ^m ∘ Φ^m`. -/
+theorem absoluteFrobenius_geometricFiber_eq_schemeFrobenius_comp (m : ℕ) :
+    (f.geometricFiberProj ≫ f).absoluteFrobenius m =
+      f.schemeFrobenius m ≫ (f.arithmeticGaloisFrobenius ^ m).hom := by
+  ext
+  · rw [absoluteFrobenius_naturality]
+    simp
+  · rw [absoluteFrobenius_geometricFiber_comp_geometricFiberToAlgebraicClosure]
+    simp
+
+/-- Blueprint `prop-trf-frobenius-factorization`, second factorization:
+`Fr^{(q^m)}_X = Φ^m ∘ g_σ^m`. -/
+theorem absoluteFrobenius_geometricFiber_eq_comp_schemeFrobenius (m : ℕ) :
+    (f.geometricFiberProj ≫ f).absoluteFrobenius m =
+      (f.arithmeticGaloisFrobenius ^ m).hom ≫ f.schemeFrobenius m := by
+  rw [absoluteFrobenius_geometricFiber_eq_schemeFrobenius_comp,
+    schemeFrobenius_comp_arithmeticGaloisFrobenius_pow]
+
+/-- The scheme Frobenius is the absolute Frobenius followed by the geometric Galois Frobenius:
+`Φ^m = g_γ^m ∘ Fr^{(q^m)}_X`. -/
+theorem schemeFrobenius_eq_absoluteFrobenius_comp (m : ℕ) :
+    f.schemeFrobenius m =
+      (f.geometricFiberProj ≫ f).absoluteFrobenius m ≫ (f.geometricGaloisFrobenius ^ m).hom := by
+  rw [absoluteFrobenius_geometricFiber_eq_schemeFrobenius_comp, Category.assoc, ← Aut.mul_hom,
+    arithmeticGaloisFrobenius_eq_inv, inv_pow, mul_inv_cancel,
+    Aut.one_hom, Category.comp_id]
 
 end Scheme.Hom
 

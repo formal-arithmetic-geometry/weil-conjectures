@@ -197,6 +197,16 @@ lemma projective_constantSheaf_moduleCat_of_iso {k} [Field k] [IsSepClosed k]
     (preservesEpimorphisms_sheafSections_of_iso e) _
     (ModuleCat.projective_of_categoryTheory_projective (ModuleCat.of Λ Λ))
 
+/-- **Cohomology of `ℤ` on a geometric point.** For a separably closed field `k` (in
+particular an algebraically closed one), `H^q(Spec k_ét, ℤ) = 0` for all `q ≥ 1`. The
+blueprint argues via the equivalence of étale sheaves on `Spec k` with discrete Galois modules,
+the Galois group being trivial; we use directly that the constant sheaf `ℤ` is projective
+(`AlgebraicGeometry.Scheme.projective_constantSheaf_of_isSepClosed`).
+(blueprint: `lem-sc-point-z-cohomology`) -/
+theorem subsingleton_H_constantSheaf_of_isSepClosed (q : ℕ) :
+    Subsingleton (Sheaf.H ((constantSheaf (Spec (.of k)).smallEtaleTopology
+      AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of (ULift ℤ))) (q + 1)) :=
+  Abelian.Ext.subsingleton_of_projective _ _ _
 
 end IsSepClosed
 

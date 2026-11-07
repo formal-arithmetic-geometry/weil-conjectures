@@ -860,6 +860,25 @@ section Curve
 
 variable {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k))
 
+/-- A geometrically integral smooth curve has a non-closed point, its generic point: otherwise
+it would be a single point, of dimension `0`. -/
+lemma exists_not_isClosed_singleton_of_smoothOfRelativeDimension_one
+    [SmoothOfRelativeDimension 1 f] [GeometricallyIntegral f] :
+    ∃ x : X, ¬ IsClosed ({x} : Set X) := by
+  have : IrreducibleSpace X := GeometricallyIrreducible.irreducibleSpace_of_subsingleton f
+  have : Smooth f := SmoothOfRelativeDimension.smooth 1 f
+  have hdim := (smoothOfRelativeDimension_iff_topologicalKrullDim_eq f 1).mp inferInstance
+  refine ⟨genericPoint X, fun h ↦ ?_⟩
+  have huniv : ({genericPoint X} : Set X) = Set.univ := by
+    rw [← h.closure_eq, (genericPoint_spec X).def]
+  have : Subsingleton X := ⟨fun a b ↦ by
+    have ha : a ∈ ({genericPoint X} : Set X) := huniv ▸ trivial
+    have hb : b ∈ ({genericPoint X} : Set X) := huniv ▸ trivial
+    exact ha.trans hb.symm⟩
+  have : DiscreteTopology X := inferInstance
+  have := topologicalKrullDim_zero_of_discreteTopology X
+  rw [hdim] at this
+  exact absurd this (by norm_num)
 
 /-- **A rational function regular at finitely many given points.** Let `X` be an integral
 `k`-scheme whose local rings are valuation rings, and which has a point whose local ring is not a
@@ -1257,6 +1276,282 @@ theorem hilbertPresheaf_curve_representable [SmoothOfRelativeDimension 1 f] [IsP
     congr 1
     apply pullback.hom_ext <;> simp
 
+/-- **The points of the Hilbert scheme of a curve.** For a field extension `k'` of `k`, the
+`k'`-points of `Hilb^d_{X/k}` are exactly the effective Cartier divisors of degree `d` on
+`X_{k'}`. Since both sides are described by ideal sheaves on `X_{k'}`, the bijection is the
+identity on underlying ideal sheaves, which is the naturality in `k'`.
+
+An effective Cartier divisor `D` on `X_{k'}` is finite over `k'`, since `X_{k'}` is a proper curve
+(`AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.isFinite_and_locallyOfFinitePresentation`),
+and flat, since `k'` is a field; its degree is the rank `Scheme.Hom.finrank` of `D ⟶ Spec k'`,
+the dimension of `Γ(D, 𝒪_D)` over `k'`.
+
+(blueprint: `sk-thm-picard-hilb-curves`, part (2)) -/
+theorem hilbertPresheaf_curve_points [SmoothOfRelativeDimension 1 f] [IsProper f]
+    [GeometricallyIntegral f] (d : ℕ) (k' : Type u) [Field k'] [Algebra k k']
+    (T : Over (Spec (.of k))) (hT : T = Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k k'))))
+    (I : (Limits.pullback f T.hom).IdealSheafData) :
+    (∃ Z : (hilbertPresheaf f d).obj (op T), Z.1 = I) ↔
+      IsEffectiveCartierCenter I.subschemeι ∧
+        ∀ t, (I.subschemeι ≫ Limits.pullback.snd f T.hom).finrank t = d := by
+  constructor
+  · rintro ⟨⟨I, hfin, hflat, hlfp, hrank⟩, rfl⟩
+    exact ⟨(Scheme.IdealSheafData.isRelativeEffectiveCartier_of_isFinite
+      (pullback.snd f T.hom)).1.isEffectiveCartierCenter, hrank⟩
+  · rintro ⟨hI, hrank⟩
+    subst hT
+    have hI : I.IsInvertible := by
+      rw [isEffectiveCartierCenter_iff_isInvertible_ker, Scheme.IdealSheafData.ker_subschemeι] at hI
+      exact hI
+    have hflat : Flat
+        (I.subschemeι ≫ pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k k')))) :=
+      Flat.of_field k' _
+    obtain ⟨hfin, hlfp⟩ := hI.isFinite_and_locallyOfFinitePresentation _ hflat
+    exact ⟨⟨I, hfin, hflat, hlfp, hrank⟩, rfl⟩
+
+/-- For a geometrically integral smooth proper curve `X` over `k`, a scheme representing
+`Hilb^d_{X/k}` is proper over `k`. -/
+theorem isProper_of_representableBy_hilbertPresheaf_curve [SmoothOfRelativeDimension 1 f]
+    [IsProper f] [GeometricallyIntegral f] (d : ℕ) (H : Over (Spec (.of k)))
+    (e : (hilbertPresheaf f d).RepresentableBy H) : IsProper H.hom := by
+  have := isSeparated_of_representableBy_hilbertPresheaf f e
+  have := smoothOfRelativeDimension_of_representableBy_hilbertPresheaf f
+    (isRepresentable_hilbertPresheaf_curve f) d H e
+  have := SmoothOfRelativeDimension.smooth d H.hom
+  obtain ⟨Y, _, π, hq, -, hπ, rfl⟩ :=
+    exists_surjective_of_representableBy_hilbertPresheaf_curve f d H e
+  have : UniversallyClosed H.hom := UniversallyClosed.of_comp_surjective π H.hom
+  exact ⟨⟩
+
+/-- **The addition morphism is finite locally free.** For a geometrically integral smooth proper
+curve `X` over `k`, let `H₁`, `H₂` and `H` represent `Hilb^{d₁}_{X/k}`, `Hilb^{d₂}_{X/k}` and
+`Hilb^{d₁ + d₂}_{X/k}`, and let `α : H₁ ×[k] H₂ ⟶ H` be the addition morphism, the morphism
+classifying the sum of the two universal divisors. Then `α` is finite, flat and locally of
+finite presentation of degree `(d₁ + d₂).choose d₁`.
+
+By induction on `d₂`; for `d₂ = 0` the morphism `α` is an isomorphism. For the inductive step,
+let `a : H₂' ×[k] X ⟶ H₂` and `b : H₁₂ ×[k] X ⟶ H` be the addition morphisms
+(`exists_addition_hilbertPresheaf`) and `α₀ : H₁ ×[k] H₂' ⟶ H₁₂` the addition morphism in
+degrees `d₁` and `d₂ - 1`. By associativity of the sum of divisors, `α ∘ (1 × a) = b ∘ (α₀ × 1)`
+on `H₁ ×[k] H₂' ×[k] X`. Here `1 × a` is finite locally free and surjective of degree `d₂`, and
+`b ∘ (α₀ × 1)` is finite locally free of degree `(d₁ + d₂ - 1).choose d₁ * (d₁ + d₂)`. So `α`
+is proper (`H₁ ×[k] H₂` is proper and `H` is separated) with finite fibres, hence finite; it is
+flat by descent along `1 × a` (`AlgebraicGeometry.Flat.of_comp_of_flat_of_surjective`), and its
+degree `N` satisfies `d₂ N = (d₁ + d₂ - 1).choose d₁ * (d₁ + d₂)`, by multiplicativity of
+degrees (`Scheme.Hom.finrank_comp_of_forall_finrank_eq`).
+
+(blueprint: `thm-pc-hilb-curves`, Step 3) -/
+theorem isFinite_flat_finrank_of_hilbertPresheaf_add [SmoothOfRelativeDimension 1 f]
+    [IsProper f] [GeometricallyIntegral f] (d₁ d₂ : ℕ) (H₁ H₂ H : Over (Spec (.of k)))
+    (e₁ : (hilbertPresheaf f d₁).RepresentableBy H₁)
+    (e₂ : (hilbertPresheaf f d₂).RepresentableBy H₂)
+    (e : (hilbertPresheaf f (d₁ + d₂)).RepresentableBy H)
+    (α : Over.mk (pullback.fst H₁.hom H₂.hom ≫ H₁.hom) ⟶ H)
+    (hα : (e.homEquiv α).1 =
+      (e₁.homEquiv (Over.homMk (pullback.fst H₁.hom H₂.hom))).1 *
+        (e₂.homEquiv (Over.homMk (pullback.snd H₁.hom H₂.hom) pullback.condition.symm)).1) :
+    IsFinite α.left ∧ Flat α.left ∧ LocallyOfFinitePresentation α.left ∧
+      ∀ t, α.left.finrank t = (d₁ + d₂).choose d₁ := by
+  induction d₂ generalizing H₂ H with
+  | zero =>
+    have := isIso_of_representableBy_hilbertPresheaf_zero f e₂
+    rw [(e₂.homEquiv _).2.eq_top_of_zero, Scheme.IdealSheafData.mul_top] at hα
+    let σ : H₁ ⟶ H := e.homEquiv.symm (e₁.homEquiv (𝟙 H₁))
+    have : IsIso σ := (e₁.uniqueUpToIso e).isIso_hom
+    have : IsIso σ.left := (Over.forget _).map_isIso σ
+    have : IsIso (pullback.fst H₁.hom H₂.hom) := inferInstance
+    have hαeq : α = Over.homMk (pullback.fst H₁.hom H₂.hom) ≫ σ := by
+      apply e.homEquiv.injective
+      apply Subtype.ext
+      rw [hα, hilbertPresheaf_homEquiv_comp_val, Equiv.apply_symm_apply,
+        ← hilbertPresheaf_homEquiv_comp_val, Category.comp_id]
+    subst hαeq
+    simp only [Over.comp_left, Over.homMk_left]
+    refine ⟨inferInstance, inferInstance, inferInstance, fun t ↦ ?_⟩
+    rw [Scheme.Hom.finrank_eq_one_of_isIso]
+    simp
+  | succ d₂ ih =>
+    obtain ⟨H₂₀, ⟨e₂₀⟩⟩ := isRepresentable_hilbertPresheaf_curve f d₂
+    obtain ⟨H₁₂, ⟨e₁₂⟩⟩ := isRepresentable_hilbertPresheaf_curve f (d₁ + d₂)
+    -- the addition morphism `α₀ : H₁ ×[k] H₂₀ ⟶ H₁₂` in degrees `d₁` and `d₂`
+    let P₀ : Over (Spec (.of k)) := Over.mk (pullback.fst H₁.hom H₂₀.hom ≫ H₁.hom)
+    let q₁ : P₀ ⟶ H₁ := Over.homMk (pullback.fst H₁.hom H₂₀.hom)
+    let q₂ : P₀ ⟶ H₂₀ := Over.homMk (pullback.snd H₁.hom H₂₀.hom) pullback.condition.symm
+    let α₀ : P₀ ⟶ H₁₂ :=
+      e₁₂.homEquiv.symm ⟨_, (e₁.homEquiv q₁).2.mul f (e₂₀.homEquiv q₂).2⟩
+    have hα₀ : (e₁₂.homEquiv α₀).1 = (e₁.homEquiv q₁).1 * (e₂₀.homEquiv q₂).1 :=
+      congrArg Subtype.val (e₁₂.homEquiv.apply_symm_apply _)
+    obtain ⟨hfin₀, hflat₀, hlfp₀, hrank₀⟩ := ih H₂₀ H₁₂ e₂₀ e₁₂ α₀ hα₀
+    -- the addition morphisms `a : H₂₀ ×[k] X ⟶ H₂` and `b : H₁₂ ×[k] X ⟶ H`
+    obtain ⟨a, ha, hafin, haflat, halfp, harank, haeq⟩ :=
+      exists_addition_hilbertPresheaf f d₂ H₂₀ H₂ e₂₀ e₂
+    obtain ⟨b, hb, hbfin, hbflat, hblfp, hbrank, hbeq⟩ :=
+      exists_addition_hilbertPresheaf f (d₁ + d₂) H₁₂ H e₁₂ e
+    -- `Q = H₁ ×[k] (H₂₀ ×[k] X)`, and the two ways to `H`
+    let Q := pullback H₁.hom (pullback.fst H₂₀.hom f ≫ H₂₀.hom)
+    let πA : Q ⟶ H₁.left := pullback.fst _ _
+    let πBC : Q ⟶ pullback H₂₀.hom f := pullback.snd _ _
+    have hQ : πA ≫ H₁.hom = πBC ≫ pullback.fst H₂₀.hom f ≫ H₂₀.hom := pullback.condition
+    let r : Q ⟶ P₀.left := pullback.lift πA (πBC ≫ pullback.fst H₂₀.hom f) (by simp [hQ])
+    let x : Q ⟶ X := πBC ≫ pullback.snd H₂₀.hom f
+    have hx : x ≫ f = πA ≫ H₁.hom := by simp [x, hQ, pullback.condition]
+    let v : Q ⟶ pullback H₁.hom H₂.hom := pullback.lift πA (πBC ≫ a)
+      (by rw [Category.assoc, ha, hQ, pullback.condition])
+    let m : Q ⟶ pullback H₁₂.hom f := pullback.lift (r ≫ α₀.left) x
+      (by
+        rw [Category.assoc, Over.w α₀, hx]
+        exact pullback.lift_fst_assoc _ _ _ _)
+    have hr₁ : r ≫ pullback.fst H₁.hom H₂₀.hom = πA := pullback.lift_fst _ _ _
+    have hr₂ : r ≫ pullback.snd H₁.hom H₂₀.hom = πBC ≫ pullback.fst H₂₀.hom f :=
+      pullback.lift_snd _ _ _
+    have hv₁ : v ≫ pullback.fst H₁.hom H₂.hom = πA := pullback.lift_fst _ _ _
+    have hv₂ : v ≫ pullback.snd H₁.hom H₂.hom = πBC ≫ a := pullback.lift_snd _ _ _
+    -- `v` is a base change of `a`, and `m` is a base change of `α₀`
+    have pbv : IsPullback πBC v a (pullback.snd H₁.hom H₂.hom) := by
+      refine IsPullback.of_bot ?_ hv₂.symm (IsPullback.of_hasPullback H₁.hom H₂.hom).flip
+      have e₁' : a ≫ H₂.hom = pullback.fst H₂₀.hom f ≫ H₂₀.hom := by
+        rw [ha, pullback.condition]
+      rw [hv₁, e₁']
+      exact (IsPullback.of_hasPullback _ _).flip
+    have pbm : IsPullback r m α₀.left (pullback.fst H₁₂.hom f) := by
+      refine IsPullback.of_bot ?_ (pullback.lift_fst _ _ _).symm
+        (IsPullback.of_hasPullback H₁₂.hom f)
+      have L : IsPullback r πBC (pullback.snd H₁.hom H₂₀.hom) (pullback.fst H₂₀.hom f) := by
+        refine IsPullback.of_right ?_ hr₂ (IsPullback.of_hasPullback H₁.hom H₂₀.hom)
+        rw [hr₁]
+        exact IsPullback.of_hasPullback _ _
+      have L' := L.paste_vert (IsPullback.of_hasPullback H₂₀.hom f)
+      rw [← pullback.condition] at L'
+      rw [pullback.lift_snd, Over.w α₀]
+      exact L'
+    -- the square `v ≫ α = m ≫ b`, by associativity of the sum of divisors
+    let TQ : Over (Spec (.of k)) := Over.mk (πA ≫ H₁.hom)
+    let V : TQ ⟶ Over.mk (pullback.fst H₁.hom H₂.hom ≫ H₁.hom) :=
+      Over.homMk v (by simp [TQ, reassoc_of% hv₁])
+    let R : TQ ⟶ P₀ := Over.homMk r (by simp [TQ, P₀, reassoc_of% hr₁])
+    let z₀ : TQ ⟶ H₂₀ := Over.homMk (πBC ≫ pullback.fst H₂₀.hom f) (by simp [TQ, hQ])
+    let ta : TQ ⟶ H₂ := Over.homMk (πBC ≫ a) (by
+      rw [Category.assoc, ha]
+      exact hx)
+    let tb : TQ ⟶ H := Over.homMk (m ≫ b) (by
+      rw [Category.assoc, hb, pullback.lift_snd_assoc]
+      exact hx)
+    have hlift : pullback.lift z₀.left x (by simp [z₀, x, pullback.condition]) = πBC :=
+      pullback.hom_ext (pullback.lift_fst _ _ _) (pullback.lift_snd _ _ _)
+    have hta := haeq TQ z₀ x hx ta (by simp [ta, hlift])
+    have htb := hbeq TQ (R ≫ α₀) x hx tb rfl
+    have hVα : V ≫ α = tb := by
+      apply e.homEquiv.injective
+      apply Subtype.ext
+      have hV₂ : V ≫ Over.homMk (pullback.snd H₁.hom H₂.hom) pullback.condition.symm = ta := by
+        ext1
+        exact hv₂
+      have hV₁ : V ≫ Over.homMk (pullback.fst H₁.hom H₂.hom) = R ≫ q₁ := by
+        ext1
+        simp [V, R, q₁, hv₁, hr₁]
+      have hR₂ : R ≫ q₂ = z₀ := by
+        ext1
+        exact hr₂
+      refine Eq.trans ?_ htb.symm
+      rw [hilbertPresheaf_homEquiv_comp_val, hilbertPresheaf_homEquiv_comp_val, hα, hα₀,
+        Scheme.IdealSheafData.comap_mul, Scheme.IdealSheafData.comap_mul,
+        ← hilbertPresheaf_homEquiv_comp_val, ← hilbertPresheaf_homEquiv_comp_val,
+        ← hilbertPresheaf_homEquiv_comp_val, ← hilbertPresheaf_homEquiv_comp_val, hV₁, hV₂,
+        hR₂, hta, mul_assoc]
+    have sq : v ≫ α.left = m ≫ b := congrArg CommaMorphism.left hVα
+    -- properties of `v` and `m`
+    have : IsFinite v := MorphismProperty.of_isPullback (P := @IsFinite) pbv hafin
+    have : Flat v := MorphismProperty.of_isPullback (P := @Flat) pbv haflat
+    have : LocallyOfFinitePresentation v :=
+      MorphismProperty.of_isPullback (P := @LocallyOfFinitePresentation) pbv halfp
+    have hvrank (y : _) : v.finrank y = d₂ + 1 := by
+      rw [Scheme.Hom.finrank_of_isPullback _ _ _ _ pbv, harank]
+    have : Surjective v := (Scheme.Hom.one_le_finrank_iff_surjective v).mp fun y ↦ by
+      simp [hvrank y]
+    have : IsFinite m := MorphismProperty.of_isPullback (P := @IsFinite) pbm hfin₀
+    have : Flat m := MorphismProperty.of_isPullback (P := @Flat) pbm hflat₀
+    have : LocallyOfFinitePresentation m :=
+      MorphismProperty.of_isPullback (P := @LocallyOfFinitePresentation) pbm hlfp₀
+    have hmrank (y : _) : m.finrank y = (d₁ + d₂).choose d₁ := by
+      rw [Scheme.Hom.finrank_of_isPullback _ _ _ _ pbm, hrank₀]
+    -- `α` is proper and quasi-finite, hence finite
+    have := isProper_of_representableBy_hilbertPresheaf_curve f _ H₁ e₁
+    have := isProper_of_representableBy_hilbertPresheaf_curve f _ H₂ e₂
+    have := isProper_of_representableBy_hilbertPresheaf_curve f _ H e
+    have := isSeparated_of_representableBy_hilbertPresheaf f e
+    have : IsProper (α.left ≫ H.hom) := by
+      rw [Over.w α]
+      exact inferInstanceAs (IsProper (pullback.fst H₁.hom H₂.hom ≫ H₁.hom))
+    have : IsProper α.left := IsProper.of_comp α.left H.hom
+    have : LocallyQuasiFinite α.left := by
+      refine .of_finite_preimage_singleton _ fun y ↦ ?_
+      refine (((m ≫ b).finite_preimage_singleton y).image v).subset fun p hp ↦ ?_
+      obtain ⟨q, rfl⟩ := v.surjective p
+      refine ⟨q, ?_, rfl⟩
+      rwa [Set.mem_preimage, ← sq, Scheme.Hom.comp_apply]
+    have : IsFinite α.left := .of_isProper_of_locallyQuasiFinite _
+    have : Flat (v ≫ α.left) := by
+      rw [sq]
+      infer_instance
+    have : Flat α.left := Flat.of_comp_of_flat_of_surjective v α.left
+    have : IsLocallyNoetherian H.left := LocallyOfFiniteType.isLocallyNoetherian H.hom
+    refine ⟨inferInstance, inferInstance, inferInstance, fun t ↦ ?_⟩
+    have h₁ := Scheme.Hom.finrank_comp_of_forall_finrank_eq v α.left hvrank t
+    rw [sq, Scheme.Hom.finrank_comp_of_forall_finrank_eq m b hmrank t, hbrank] at h₁
+    have h₂ := Nat.choose_mul_succ_eq (d₁ + d₂) d₁
+    have h₃ : d₁ + d₂ + 1 - d₁ = d₂ + 1 := by omega
+    rw [h₃] at h₂
+    refine Nat.eq_of_mul_eq_mul_left (Nat.succ_pos d₂) ?_
+    rw [← add_assoc]
+    linarith
+
+/-- **The addition morphism of the Hilbert schemes of a curve.** If `H₁`, `H₂` and `H`
+represent `Hilb^{d₁}_{X/k}`, `Hilb^{d₂}_{X/k}` and `Hilb^{d₁ + d₂}_{X/k}`, then there is a
+`k`-morphism `H₁ ×[k] H₂ ⟶ H`, which on points is addition of effective Cartier divisors —
+i.e. the product of the corresponding ideal sheaves — and which is finite, flat and locally of
+finite presentation of degree `(d₁ + d₂).choose d₁`.
+
+The last clause is what identifies `α`: without it any finite flat morphism of the right degree
+would do, and the descent argument of the blueprint needs to know which morphism it is.
+
+(blueprint: `sk-thm-picard-hilb-curves`, part (3)) -/
+theorem hilbertPresheaf_curve_add [SmoothOfRelativeDimension 1 f] [IsProper f]
+    [GeometricallyIntegral f] (d₁ d₂ : ℕ) (H₁ H₂ H : Over (Spec (.of k)))
+    (e₁ : (hilbertPresheaf f d₁).RepresentableBy H₁)
+    (e₂ : (hilbertPresheaf f d₂).RepresentableBy H₂)
+    (e : (hilbertPresheaf f (d₁ + d₂)).RepresentableBy H) :
+    ∃ α : Limits.pullback H₁.hom H₂.hom ⟶ H.left,
+      α ≫ H.hom = Limits.pullback.fst H₁.hom H₂.hom ≫ H₁.hom ∧
+        IsFinite α ∧ Flat α ∧ LocallyOfFinitePresentation α ∧
+          (∀ t, α.finrank t = (d₁ + d₂).choose d₁) ∧
+          ∀ (T : Over (Spec (.of k))) (t₁ : T ⟶ H₁) (t₂ : T ⟶ H₂) (t : T ⟶ H),
+            t.left = Limits.pullback.lift t₁.left t₂.left
+                (by rw [Over.w, Over.w]) ≫ α →
+              (e.homEquiv t).1 = (e₁.homEquiv t₁).1 * (e₂.homEquiv t₂).1 := by
+  let P : Over (Spec (.of k)) := Over.mk (pullback.fst H₁.hom H₂.hom ≫ H₁.hom)
+  let p₁ : P ⟶ H₁ := Over.homMk (pullback.fst H₁.hom H₂.hom)
+  let p₂ : P ⟶ H₂ := Over.homMk (pullback.snd H₁.hom H₂.hom) pullback.condition.symm
+  let u : (hilbertPresheaf f (d₁ + d₂)).obj (op P) :=
+    ⟨(e₁.homEquiv p₁).1 * (e₂.homEquiv p₂).1, (e₁.homEquiv p₁).2.mul f (e₂.homEquiv p₂).2⟩
+  let α := e.homEquiv.symm u
+  have hα : (e.homEquiv α).1 = (e₁.homEquiv p₁).1 * (e₂.homEquiv p₂).1 := by
+    simp [α, u]
+  obtain ⟨hfin, hflat, hlfp, hrank⟩ :=
+    isFinite_flat_finrank_of_hilbertPresheaf_add f d₁ d₂ H₁ H₂ H e₁ e₂ e α hα
+  refine ⟨α.left, Over.w α, hfin, hflat, hlfp, hrank, fun T t₁ t₂ t ht ↦ ?_⟩
+  let s : T ⟶ P := Over.homMk (pullback.lift t₁.left t₂.left (by rw [Over.w, Over.w]))
+    (by simp [P])
+  obtain rfl : t = s ≫ α := by
+    ext1
+    exact ht
+  have h₁ : t₁ = s ≫ p₁ := by
+    ext1
+    simp [s, p₁]
+  have h₂ : t₂ = s ≫ p₂ := by
+    ext1
+    simp [s, p₂]
+  rw [hilbertPresheaf_homEquiv_comp_val, hα, Scheme.IdealSheafData.comap_mul, h₁, h₂,
+    hilbertPresheaf_homEquiv_comp_val, hilbertPresheaf_homEquiv_comp_val]
 
 end Curve
 

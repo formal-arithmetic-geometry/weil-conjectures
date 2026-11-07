@@ -72,5 +72,36 @@ theorem Hom.eulerFactor_eq [Finite k] (f : X.Hom (Spec (.of k))) {x : X}
   rw [f.pointNorm_eq_pow_degreeOver hx, Nat.cast_pow,
     ← Complex.natCast_cpow_natCast_mul, Complex.cpow_nat_mul]
 
+/-- **The zeta function of a variety over a finite field is the evaluation of its zeta
+series**: `ζ_X(s) = Z(X, q ^ (-s))`, for `X` of finite type over a finite field `k` with
+`q` elements, whenever `‖q ^ (-s)‖ < 1` and the Euler product converges absolutely.
+The right hand side is the evaluation of the power series `Z(X, t)` at `t = q ^ (-s)`. -/
+theorem Hom.zeta_eq_tsum_coeff_zetaSeries [Finite k] (f : X ⟶ Spec (.of k))
+    [QuasiCompact f] [LocallyOfFiniteType f] {s : ℂ}
+    (hz : ‖(Nat.card k : ℂ) ^ (-s)‖ < 1)
+    (hsum : Summable fun x : X.finitePoints ↦ ‖(Nat.card k : ℂ) ^ (-s)‖ ^ f.degreeOver x.1) :
+    X.zeta s =
+      ∑' n : ℕ, ((PowerSeries.coeff n f.zetaSeries : ℚ) : ℂ) * ((Nat.card k : ℂ) ^ (-s)) ^ n := by
+  have hd : ∀ x : X.finitePoints, f.degreeOver x.1 ≠ 0 := fun x ↦ f.degreeOver_ne_zero x.2
+  have hP := PowerSeries.hasProd_inv_one_sub_pow
+    (d := fun x : X.finitePoints ↦ f.degreeOver x.1) hd f.finite_setOf_degreeOver_le hz hsum
+  rw [← f.zetaSeries_eq_tprod] at hP
+  have h1 : X.zeta s =
+      ∏' x : X.finitePoints, (1 - ((Nat.card k : ℂ) ^ (-s)) ^ f.degreeOver x.1)⁻¹ :=
+    tprod_congr fun x ↦ f.eulerFactor_eq x.2 s
+  rw [h1]
+  exact hP.tprod_eq
+
+/-- Under the assumptions of `zeta_eq_tsum_coeff_zetaSeries`, the Euler product defining
+the zeta function of `X` converges. -/
+theorem Hom.multipliable_eulerFactor [Finite k] (f : X ⟶ Spec (.of k))
+    [QuasiCompact f] [LocallyOfFiniteType f] {s : ℂ}
+    (hz : ‖(Nat.card k : ℂ) ^ (-s)‖ < 1)
+    (hsum : Summable fun x : X.finitePoints ↦ ‖(Nat.card k : ℂ) ^ (-s)‖ ^ f.degreeOver x.1) :
+    Multipliable fun x : X.finitePoints ↦ X.eulerFactor x.1 s := by
+  have hd : ∀ x : X.finitePoints, f.degreeOver x.1 ≠ 0 := fun x ↦ f.degreeOver_ne_zero x.2
+  have hP := PowerSeries.hasProd_inv_one_sub_pow
+    (d := fun x : X.finitePoints ↦ f.degreeOver x.1) hd f.finite_setOf_degreeOver_le hz hsum
+  exact hP.multipliable.congr fun x ↦ (f.eulerFactor_eq x.2 s).symm
 
 end AlgebraicGeometry.Scheme
