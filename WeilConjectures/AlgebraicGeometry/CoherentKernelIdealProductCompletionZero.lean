@@ -102,6 +102,9 @@ private theorem completionSections_dictionary {X : Scheme.{u}}
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+-- v4.35 tree: this override is still needed here (green in bumpF builds up to 81, timeout without it in build83);
+-- master removed it on the pre-bump tree.
+set_option maxHeartbeats 600000 in
 -- Comparing the evaluated quotient maps unfolds several layers of sheaf functors.
 private theorem completionSections_map_injective {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) {M N : X.Modules}
