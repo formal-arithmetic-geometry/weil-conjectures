@@ -70,7 +70,7 @@ private theorem residue_singlePullback_naturality
 
 end Modules
 
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 900000 in
 -- Normalizing the fixed derived single-functor comparisons expands the fibre objects.
 set_option maxRecDepth 2048 in
 /-- The single-module coefficient square before direct image.
