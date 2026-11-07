@@ -149,7 +149,6 @@ private theorem coefficientCompatibility {m n : ℕ} (h : n ≤ m) :
         O.coefficient_compatibility n)
   exact α.naturality (homOfLE h).op
 
-set_option maxHeartbeats 800000 in
 -- Normalize the two scalar adjunctions before passing to underlying sheaves.
 private theorem ordinaryScalarMate_isIso [PreservesFiniteLimits uInv]
     {m n : ℕ} (h : n ≤ m) :
@@ -246,7 +245,6 @@ private theorem inverseImage_good [PreservesFiniteLimits uInv] (n : ℕ)
     fun k ↦ SheafOfModules.flatOnSite_of_iso (O.coefficients n)
       ((HomologicalComplex.eval _ (.up ℤ) k).mapIso ic) (ht.2 k)⟩
 
-set_option maxHeartbeats 800000 in
 -- The representative comparison elaborates several independent coefficient universes.
 /-- The inverse mate of coefficient restriction and geometric pullback is invertible.
 Source: Zheng, Construction 4.1 and the paragraph preceding Lemma 4.10;
