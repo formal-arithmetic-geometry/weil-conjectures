@@ -173,7 +173,7 @@ lemma nagataOpenImmersion_comp_nagataProper :
     nagataOpenImmersion f ≫ nagataProper f = f :=
   (compactificationOverField f).overI_overG
 
-omit [Fact (ringChar k).Prime] in
+omit [Finite k] [Fact (ringChar k).Prime] in
 lemma geometricFiberOverMap_nagataOpenImmersion_comp_nagataProper :
     geometricFiberOverMap (nagataOpenImmersion f) ≫ geometricFiberOverMap (nagataProper f) =
       geometricFiberOverMap f := by
