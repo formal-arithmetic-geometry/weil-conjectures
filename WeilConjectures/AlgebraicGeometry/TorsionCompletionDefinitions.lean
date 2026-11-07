@@ -103,8 +103,13 @@ def torsionCompletionIdealInclusion (X : Scheme.{t}) {A : Type u}
     torsionCompletionIdeal X I ⟶ SheafOfModules.unit (torsionCompletionModuleRing X A) :=
   kernel.ι (torsionCompletionQuotientMap X I)
 
--- Retain the former instance's priority for the shared sheafification instance.
-attribute [instance 20000] coefficientModelAdditiveSheafify
+/-- Sheafification of abelian coefficients on the coefficient-sized small model, at the pinned
+universes `(t, u)`: the global instance form of `coefficientModelAdditiveSheafify` kept at its
+former priority. Source: Stacks Tags 03DA, 099Q (auxiliary; not a blueprint node). -/
+instance (priority := 20000) torsionCompletionSheafify (X : Scheme.{t}) :
+    HasSheafify (coefficientProEtaleModelTopology.{t, u} X)
+      AddCommGrpCat.{max u (t + 1)} :=
+  coefficientModelAdditiveSheafify.{t, u} X
 
 /-- The same abelian sheafification on each slice of the unchanged model site.
 Source: Stacks Tags 03DA, 03DJ, 099Q
