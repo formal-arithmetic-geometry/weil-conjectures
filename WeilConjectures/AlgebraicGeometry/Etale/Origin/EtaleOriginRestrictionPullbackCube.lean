@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.Etale.Origin.EtaleOriginScalarPullbackData
 import all WeilConjectures.AlgebraicGeometry.Etale.ProEtale.EtaleProEtaleScalarPullbackCube
 import all WeilConjectures.AlgebraicGeometry.FiniteCompactScalar.FiniteRealizationRestrictionCube

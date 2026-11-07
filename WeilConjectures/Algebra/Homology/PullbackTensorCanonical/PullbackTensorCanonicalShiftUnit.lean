@@ -11,7 +11,8 @@ public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
 import WeilConjectures.SecSmoothPurity.CochainComparisonMonoidalEquationsSupplement
 import WeilConjectures.Algebra.Homology.KFlatTotalTensorModel.KFlatTotalTensorModelSupplement
 import WeilConjectures.CategoryTheory.RightKanExtensionCoherentShift
-import WeilConjectures.Algebra.Homology.PullbackTensorResolving.PullbackTensorResolvingComputation
+import WeilConjectures.SecSmoothPurity.CochainTensorCoherenceDataSupplement
+import WeilConjectures.AlgebraicGeometry.PullbackTensorResolvingComputation
 import WeilConjectures.SecSmoothPurity.CochainPullbackTensorShift
 import WeilConjectures.CategoryTheory.ProperBaseChange.ResolvingRepresentativeWhiskeringSupplement
 import WeilConjectures.AlgebraicGeometry.TensorPullbackRepresentativeDescent
@@ -96,6 +97,7 @@ import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 import Mathlib.CategoryTheory.ObjectProperty.Shift
 import WeilConjectures.Mathlib.CategoryTheory.Shift.CommShift
+import WeilConjectures.Algebra.Homology.PullbackTensorResolving.PullbackTensorResolvingComputation
 
 /-! # Canonical shifts and action units of derived tensor pullback
 

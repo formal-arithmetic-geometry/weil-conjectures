@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.SixFunctors.Isomorphism.IsomorphismComparisonScalarExtension
 public import WeilConjectures.SmoothPurity.Supporting.IsomorphismDerivedPullback
 public import WeilConjectures.AlgebraicGeometry.SixFunctors.InverseImagePullbackComparison

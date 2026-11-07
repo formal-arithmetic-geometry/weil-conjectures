@@ -49,6 +49,8 @@ lemma isIso_purityFieldOpenRestrictedExchange_mate
 
 variable (e : (boundedConstructibleUpperStarOfMap l (X := Y) (Y := Y') πY).obj (𝟙_ _) ⟶ 𝟙_ _)
 
+omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom] in
 /-- The unit mate of the actual proper restriction is the library exceptional
 base-change map, followed by the target-unit comparison. -/
 lemma purityFieldProperRestrictedExchange_unitBaseChange :

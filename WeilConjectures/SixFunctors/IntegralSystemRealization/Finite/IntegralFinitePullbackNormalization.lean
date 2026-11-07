@@ -4,6 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.SixFunctors.IntegralSystemRealization.Finite.IntegralFinitePullbackCoordinates
 import WeilConjectures.SixFunctors.IntegralSystemRealization.Reduction.IntegralReductionPullFiniteSquare
 import WeilConjectures.CategoryTheory.Normalized.NormalizedAdjunctionComposition

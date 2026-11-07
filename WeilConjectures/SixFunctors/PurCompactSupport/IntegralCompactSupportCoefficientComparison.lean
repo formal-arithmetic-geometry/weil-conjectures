@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.SmoothPurity.PurCompactSupport.IntegralCompactSupportCoefficientData
 public import WeilConjectures.SmoothPurity.PurCompactSupport.IntegralCompactSupportScalarTensor
 import WeilConjectures.SmoothPurity.PurCompactSupport.IntegralCompactSupportRestrictionComposition

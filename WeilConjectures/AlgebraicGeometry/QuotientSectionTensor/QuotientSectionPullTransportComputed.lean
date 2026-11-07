@@ -6,10 +6,13 @@ Authors: Bin Wu
 module
 
 public import Mathlib.Algebra.Homology.Localization
+public import Mathlib.Logic.Small.Defs
+import all Mathlib.Logic.Small.Defs
 import all Mathlib.Algebra.Homology.Localization
+import all WeilConjectures.AlgebraicGeometry.SectionDerivedPushpullNormalization
 public import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionTensorData
 import WeilConjectures.SixFunctors.Supporting.ModCondensedCachedInstances
-import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionPullTransportScalarComputation
+import all WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionPullTransportScalarComputation
 import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionPullTransportGeometricComputation
 
 /-! # Pullback compatibility on scalar-computed representatives
@@ -512,7 +515,7 @@ private theorem cochain_computation_reverse
       j.map (εs.app P) ≫ εh.app ((s₀.mapHomologicalComplex (.up ℤ)).obj P) ≫
       DerivedCategory.Q.map
         ((Functor.mapHomologicalComplexCompIso cC (.up ℤ)).hom.app P))
-    (P : CochainComplex A0 ℤ) [IsIso (εS P)]
+    (P : CochainComplex A0 ℤ) [hεS : IsIso (εS P)]
     [IsIso (εh.app ((s₀.mapHomologicalComplex (.up ℤ)).obj
       ((e₀.mapHomologicalComplex (.up ℤ)).obj P)))] :
     k3.map (bD.hom.app (DerivedCategory.Q.obj P)) ≫
@@ -573,7 +576,9 @@ private theorem scalar_computation (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u}
           (((ModuleRingedComparison.equivalence Λ T).functor.mapHomologicalComplex
             (.up ℤ)).obj P)) := by
   unfold complex_iso section_localization_iso
-  exact section_pull_transport_scalar_computation a T c h P
+  have hh := section_pull_transport_scalar_computation a T c h P
+  simp only [compute_eq] at hh
+  exact hh
 
 private def section_pull_compute_nat {X Y : Scheme.{u}} (f : X ⟶ Y) :
     DerivedCategory.Q ⋙ ModuleRingedComparison.derivedPullback Λ f ⟶
@@ -605,7 +610,9 @@ private theorem geometric_computation {X Y : Scheme.{u}} (f : X ⟶ Y)
     := by
   rw [complex_iso_hom_app]
   unfold section_localization_iso section_pull_compute_nat
-  exact section_pull_transport_geometric_computation f P
+  have hh := section_pull_transport_geometric_computation f P
+  simp only [_root_.counit_quotient_transport] at hh
+  exact hh
 
 attribute [local irreducible] complex_iso complex_comp_iso section_localization_iso
 
@@ -671,6 +678,8 @@ theorem section_pull_transport_condition_on_computed (a : Λ ⟶ Λ') [IsMonHom 
     unfold section_pull_compute_nat
     infer_instance
   exact cochain_computation_reverse
+    (hεS := by
+      exact ‹IsIso ((scalarCounit a Y).app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))›)
     (abA0 := internalY.1.abelian) (derA0 := internalY.1.derived)
     (abA1 := internalX.1.abelian) (derA1 := internalX.1.derived)
     (abA2 := internalY.2.abelian) (derA2 := internalY.2.derived)

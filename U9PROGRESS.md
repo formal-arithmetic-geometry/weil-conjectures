@@ -597,3 +597,28 @@
 - Superseded root/import and downstream edits were archived outside the submission and removed from the branch. Earlier downstream validations are historical only; further work stopped per the new narrowed scope.
 - Records: `/home/ubuntu/u9/bz/FIXES-BZ1439.md`; completion: `/home/ubuntu/u9/state/BZ1439.DONE`.
 - This final commit changes progress documentation only. No local Lean/Lake execution or heartbeat increases.
+
+
+# PF542 complete
+
+- Assigned QuotientSectionPullTransportGeometricComputation is green and free of proof placeholders.
+- Downstream QuotientSectionPullTransportComputed and QuotientSectionPullTransport are also green.
+- Only ucheck-bumpF was used with Lean v4.35.0-rc3 / Mathlib b63f6e8a; no local Lean/Lake.
+- Assigned source passed at 4dbb4d0831 and rebuilt green at 62e96ceec1. Clean Computed passed
+  at 1362d342cd; PullTransport passed at 0ac4000519 (rc=0, failed=0, 17546 jobs).
+- The public geometric equation uses the known BZ409 canonical Q/Qh transport; its mathematical
+  endpoints are preserved. Downstream repairs normalize computation hypotheses, pass the existing
+  IsIso hypothesis explicitly, expose private localization definitions, remove obsolete local
+  attributes, and scope the existing transparency workaround to one instance proof.
+- QuotientSectionTensorNormalization was attempted at ac20f060ea and is blocked by three unowned
+  modules: QuotientScalarSectionDerivedComparisonExistence (PF541), QuotientScalarTensorCanonical,
+  and QuotientSectionTensorTransportNormalizedTotal (PF543). The complete error log is
+  /home/ubuntu/u9/bz/BUILD-PF542-normalization-blocked.log. No blocker was edited.
+- The single direct-importer path stops at this blocked module under the brief's downstream rule.
+  Three extra targets were attempted, two repaired and green. No deeper target is claimed green.
+- All recorded rewrite rules reproduce the final edits and are idempotent. No declaration was
+  added/deleted, no heartbeat was increased, and no diagnostic code or proof shortcut remains.
+- PF549 and PF550 explicitly stopped for overlap and deferred Computed to PF542.
+- Records: /home/ubuntu/u9/bz/FIXES-PF542.md and /home/ubuntu/u9/state/PF542.DONE.
+- All ucheck calls have finished. This final commit changes progress documentation only;
+  Lean sources are identical to the successful builds.

@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.PulledReduction.PulledReductionStrictTowerComparison
 public import WeilConjectures.Algebra.Homology.SuccessiveDerivedQuotientNormalization
 public import WeilConjectures.Algebra.Homology.SheafRingDerivedCoefficientAdjunction

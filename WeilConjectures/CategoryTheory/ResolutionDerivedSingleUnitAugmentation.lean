@@ -67,8 +67,7 @@ theorem resolutionDerivedSingleUnit_augmentation
     apply DerivedCategory.Plus.ι.map_injective
     simp only [resolutionAugmentationIso, Functor.map_comp, Functor.preimageIso_inv,
       Functor.preimageIso_hom, Functor.map_preimage, Iso.trans_inv, Iso.trans_hom,
-      Category.assoc, Iso.inv_hom_id_assoc, asIso_hom,
-      DerivedCategory.Plus.quotientCompQhIso_inv_app_hom]
+      Category.assoc, Iso.inv_hom_id_assoc, asIso_hom]
     change (DerivedCategory.quotientCompQhIso A).hom.app _ ≫
       DerivedCategory.Q.map I.ι' ≫ (DerivedCategory.quotientCompQhIso A).inv.app _ = _
     erw [(DerivedCategory.quotientCompQhIso A).inv.naturality]
@@ -113,8 +112,7 @@ theorem resolutionDerivedSingleUnit_augmentation
   apply DerivedCategory.Plus.ι.map_injective
   simp only [Functor.map_comp, Functor.mapHomotopyCategoryPlusSingleFunctorQhObjIso,
     Functor.preimageIso_inv, Functor.map_preimage,
-    resolutionAugmentationIso, Functor.preimageIso_hom,
-    DerivedCategory.Plus.quotientCompQhIso_hom_app_hom]
+    resolutionAugmentationIso, Functor.preimageIso_hom]
   dsimp
   simp only [Category.assoc]
   change DerivedCategory.Q.map _ ≫ (DerivedCategory.quotientCompQhIso B).inv.app _ ≫
@@ -123,8 +121,7 @@ theorem resolutionDerivedSingleUnit_augmentation
           ((HomotopyCategory.quotient A (.up ℤ)).map I.ι')) ≫
       (DerivedCategory.quotientCompQhIso B).hom.app _ ≫ DerivedCategory.Q.map _ = _
   rw [Functor.mapHomotopyCategory_map]
-  simp only [← DerivedCategory.quotientCompQhIso_inv_naturality_assoc,
-    Iso.inv_hom_id_app_assoc]
+  simp only [← DerivedCategory.quotientCompQhIso_inv_naturality_assoc]
   erw [Iso.inv_hom_id_app_assoc]
   change DerivedCategory.Q.map _ ≫ DerivedCategory.Q.map _ ≫ DerivedCategory.Q.map _ =
     𝟙 _ ≫ DerivedCategory.Q.map J.ι' ≫

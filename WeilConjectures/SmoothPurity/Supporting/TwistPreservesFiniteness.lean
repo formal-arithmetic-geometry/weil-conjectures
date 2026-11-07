@@ -564,15 +564,15 @@ theorem twist_preserves_finiteness
     let := (coefficientTwistLine_exact S (purTwistFiniteOne S l E n) (-m)).2.1
     let := (coefficientTwistLine_exact S (purTwistFiniteOne S l E n) (-m)).2.2
     obtain ⟨e⟩ := (hfinite n).2
-    exact ⟨(Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    exact ⟨Functor.mapDerivedCategoryCompIso _ _ ≪≫
       Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryIdIso _⟩
   · obtain ⟨e⟩ := hintegral.2
     let C := integralTowerModules l E S
     have : (𝟭 C).Additive := ⟨fun {_ _} _ _ ↦ rfl⟩
     have : PreservesFiniteLimits (𝟭 C) := inferInstance
     have : PreservesFiniteColimits (𝟭 C) := inferInstance
-    exact ⟨(Functor.mapDerivedCategoryCompIso (integralSheafTwist l E S m)
-      (integralSheafTwist l E S (-m))).symm ≪≫
+    exact ⟨Functor.mapDerivedCategoryCompIso (integralSheafTwist l E S m)
+      (integralSheafTwist l E S (-m)) ≪≫
       Functor.mapDerivedCategoryNatIso
         (G := 𝟭 (integralTowerModules l E S)) e ≪≫
           Functor.mapDerivedCategoryIdIso _⟩
