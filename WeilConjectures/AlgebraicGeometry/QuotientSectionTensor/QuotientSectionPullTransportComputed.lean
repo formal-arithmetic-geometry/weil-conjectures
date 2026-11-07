@@ -574,7 +574,8 @@ private theorem scalar_computation (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u}
           (((ModuleRingedComparison.equivalence Λ T).functor.mapHomologicalComplex
             (.up ℤ)).obj P)) := by
   unfold complex_iso section_localization_iso
-  simpa only [compute_eq] using section_pull_transport_scalar_computation a T c h P
+  with_unfolding_all
+    simpa only [compute_eq] using section_pull_transport_scalar_computation a T c h P
 
 private def section_pull_compute_nat {X Y : Scheme.{u}} (f : X ⟶ Y) :
     DerivedCategory.Q ⋙ ModuleRingedComparison.derivedPullback Λ f ⟶
@@ -606,8 +607,9 @@ private theorem geometric_computation {X Y : Scheme.{u}} (f : X ⟶ Y)
     := by
   rw [complex_iso_hom_app]
   unfold section_localization_iso section_pull_compute_nat
-  simpa only [_root_.counit_quotient_transport] using
-    section_pull_transport_geometric_computation f P
+  with_unfolding_all
+    simpa only [_root_.counit_quotient_transport] using
+      section_pull_transport_geometric_computation f P
 
 attribute [local irreducible] complex_iso complex_comp_iso section_localization_iso
 
