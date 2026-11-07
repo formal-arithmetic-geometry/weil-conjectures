@@ -15,8 +15,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import Mathlib.RingTheory.Finiteness.Projective
 import WeilConjectures.CategoryTheory.DerivedCategory.RingPseudoCoherentFiniteTorPerfect
 
-set_option linter.privateModule false
-
 /-! # Pseudo-coherent complexes of finite Tor dimension are perfect
 
 Source: Stacks Project, Cohomology of Sheaves, Lemma 20.49.5, Tag 08CQ

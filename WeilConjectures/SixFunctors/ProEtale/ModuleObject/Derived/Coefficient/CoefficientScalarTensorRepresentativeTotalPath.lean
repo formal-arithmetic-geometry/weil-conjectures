@@ -9,8 +9,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coeffici
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.CoefficientScalarTensorTotal
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.CoefficientTensorLocalization
 
-set_option linter.privateModule false
-
 /-! # The localized scalar total tensor path
 
 This normalizes the scalar path using the ordinary signed total tensor square.

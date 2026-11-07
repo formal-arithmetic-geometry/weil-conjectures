@@ -30,8 +30,6 @@ import WeilConjectures.CategoryTheory.Monoidal.Conjugate
 import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Kernels
 
-set_option linter.privateModule false
-
 /-!
 # Uniform proper heart amplitude over a Noetherian base
 

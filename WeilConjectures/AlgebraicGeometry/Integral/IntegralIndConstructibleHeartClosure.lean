@@ -74,8 +74,6 @@ import Mathlib.AlgebraicGeometry.QuasiAffine
 import Mathlib.RingTheory.DedekindDomain.Basic
 import Mathlib.RingTheory.DedekindDomain.Dvr
 
-set_option linter.privateModule false
-
 /-!
 # Closure of the integral ind-constructible heart
 

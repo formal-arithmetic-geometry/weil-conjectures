@@ -16,8 +16,6 @@ import WeilConjectures.CategoryTheory.SheafPullbackForgetComparison
 import Mathlib.CategoryTheory.Sites.Pullback
 import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
 
-set_option linter.privateModule false
-
 /-! # Inverse image preserves the native integral Tate tower limit
 
 Source: the Integral twist paragraph of the blueprint proof of

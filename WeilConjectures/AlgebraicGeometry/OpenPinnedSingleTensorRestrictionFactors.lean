@@ -11,8 +11,6 @@ import all Mathlib.Algebra.Homology.Localization
 
 public import WeilConjectures.AlgebraicGeometry.OpenPinnedSingleDegreeZeroCounitIso
 
-set_option linter.privateModule false
-
 /-! # Single-complex identities for exact restriction and tensor reassociation
 Source: Stacks Project, Tags 08DW and 08HY; Mathlib exact single comparison.
 (blueprint: lem-pc-open-pinned-single-tensor-restriction-factors). -/

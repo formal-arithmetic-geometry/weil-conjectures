@@ -17,8 +17,6 @@ import WeilConjectures.AlgebraicGeometry.SixFunctors.IndHeartFullFaithfulness
 import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Connected
 import Mathlib.Order.CompletePartialOrder
 
-set_option linter.privateModule false
-
 /-!
 # Extensions of ind-constructible module sheaves
 

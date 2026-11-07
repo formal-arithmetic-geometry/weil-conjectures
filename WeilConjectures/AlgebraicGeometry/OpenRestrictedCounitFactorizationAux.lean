@@ -11,8 +11,6 @@ import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.OpenRestrictedTensorComplexIso
 public import WeilConjectures.AlgebraicGeometry.OpenRestrictedComparisonComposition
 import all WeilConjectures.AlgebraicGeometry.AffineSpectrumCompositionCounitSquare
-
-set_option linter.privateModule false
 @[expose] public section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false

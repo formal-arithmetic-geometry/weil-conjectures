@@ -18,8 +18,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Functor.Derived.Adjunction
 import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapMate
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 
-set_option linter.privateModule false
-
 /-!
 # Coefficient compatibility of the actual projection mate
 

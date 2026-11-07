@@ -536,8 +536,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.HomologyCoproducts
 import WeilConjectures.CategoryTheory.GrothendieckDerivedCoproducts
 import WeilConjectures.CategoryTheory.DerivedModuleDirectSums
 
-set_option linter.privateModule false
-
 /-!
 # Proper direct-image bound for rational constructible module sheaves
 

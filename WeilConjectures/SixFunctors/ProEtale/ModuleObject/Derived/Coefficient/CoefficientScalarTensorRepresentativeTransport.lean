@@ -25,8 +25,6 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
-set_option linter.privateModule false
-
 /-! # Transport of scalar tensor representatives
 
 The second strict substep transports the internal-image equation across the exact

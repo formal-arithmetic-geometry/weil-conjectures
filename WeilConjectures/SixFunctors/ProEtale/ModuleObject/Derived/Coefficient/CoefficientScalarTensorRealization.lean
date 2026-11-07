@@ -41,8 +41,6 @@ import WeilConjectures.CategoryTheory.Monoidal.Conjugate
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.CoefficientScalarSectionRealization
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.CoefficientScalarDerivedTensorSquare
 
-set_option linter.privateModule false
-
 /-! # Scalar adjunction and tensor realization in the coefficient square
 
 Source: Stacks Project, sites-cohomology.tex, Tags 07A4 and 07A6; blueprint

@@ -10,8 +10,6 @@ import all WeilConjectures.Algebra.Homology.ScalarHomOrdinary.ScalarHomOrdinaryT
 import all WeilConjectures.Algebra.Homology.Signed.SignedLineScalarTensorTower
 import all WeilConjectures.Algebra.Homology.LineUnbounded.LineUnboundedDerivedTensor
 
-set_option linter.privateModule false
-
 /-! # Ordinary signed-line tensor and derived scalar extension
 
 Source: Stacks Project, Tags 07A4, 0G7E and 0D6D; blueprint main-20261015,

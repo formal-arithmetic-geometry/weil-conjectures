@@ -8,8 +8,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coeffici
 import WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionConstraintCoherence
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.CoefficientScalarTensorRepresentative
 
-set_option linter.privateModule false
-
 /-! # Section realization of coefficient scalar extension
 
 Source: Stacks Project, Tags 03EK, 03EL, 06YY, 07A4 and 07A6;

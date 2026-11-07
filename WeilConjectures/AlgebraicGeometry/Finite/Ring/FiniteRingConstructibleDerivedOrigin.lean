@@ -19,8 +19,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSiteComparisonFiniteLe
 import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Perfect
 
-set_option linter.privateModule false
-
 /-!
 # Bounded constructible derived comparison for arbitrary finite rings
 

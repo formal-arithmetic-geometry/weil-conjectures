@@ -9,8 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerOperatio
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import WeilConjectures.AlgebraicGeometry.ProEtale.Canonical.ProEtaleCanonicalDerivedPullbackNormalization
 
-set_option linter.privateModule false
-
 /-! The canonical ringed inverse-image square is exact localization of its ordinary square.
 Source: Stacks Project, Tag 0D6D.
 (blueprint: lem-weil-pbc-ringed-square-localization) -/

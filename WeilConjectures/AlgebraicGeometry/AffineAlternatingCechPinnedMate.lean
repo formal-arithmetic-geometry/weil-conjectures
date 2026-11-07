@@ -15,8 +15,6 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.Algebra.Homology.Localization
 import all Mathlib.Algebra.Homology.Localization
 
-set_option linter.privateModule false
-
 /-! # The alternating Čech calculation for the pinned derived mate
 
 Source: Stacks Project, Tags 02KH and 08HY; Steps 1--3 of
