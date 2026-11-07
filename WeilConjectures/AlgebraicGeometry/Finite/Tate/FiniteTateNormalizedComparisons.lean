@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.SfIntegralReductionTower
 public import WeilConjectures.AlgebraicGeometry.Finite.Tate.FiniteTateSiteDescentDefinitions
+public import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 
 import WeilConjectures.AlgebraicGeometry.Finite.Tate.FiniteTateRootTensorPresentation
 import WeilConjectures.CategoryTheory.Constant.ConstantScalarExplicitTensor
@@ -37,9 +38,7 @@ attribute [local instance] Sheaf.monoidalCategory
 
 -- Pin the existing coefficient-size instances to avoid an unconstrained maximum universe.
 attribute [local instance 4000] WeilConjectures.sfAbSheafify
-local instance (priority := 4000) (T : Scheme.{u}) :
-    HasSheafify (ProEt.topology T) CommRingCat.{u + 1} :=
-  integralCoefficientRingSheafify.{u, u} T
+attribute [local instance 4000] AlgebraicGeometry.ProEtale.VaryingRing.ringSheafify
 attribute [local instance 4000] WeilConjectures.sfAbBijective
 
 attribute [-instance] integralCoefficientAbSheafify integralCoefficientRingSheafify

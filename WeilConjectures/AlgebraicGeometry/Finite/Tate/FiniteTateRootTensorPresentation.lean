@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.SfIntegralReductionTower
 public import WeilConjectures.AlgebraicGeometry.Finite.Tate.FiniteTateSiteDescentDefinitions
+public import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 public import WeilConjectures.AlgebraicGeometry.Finite.FiniteRootSiteComparison
 import all WeilConjectures.AlgebraicGeometry.Finite.FiniteRootSiteComparison
 
@@ -27,9 +28,7 @@ namespace AlgebraicGeometry.Scheme
 
 -- Pin the existing coefficient-size instances to avoid an unconstrained maximum universe.
 attribute [local instance] WeilConjectures.sfAbSheafify
-local instance (T : Scheme.{u}) :
-    HasSheafify (ProEt.topology T) CommRingCat.{u + 1} :=
-  integralCoefficientRingSheafify.{u, u} T
+attribute [local instance] AlgebraicGeometry.ProEtale.VaryingRing.ringSheafify
 attribute [local instance] WeilConjectures.sfAbBijective
 attribute [local instance] WeilConjectures.instEssentiallySmallProEt_weilConjectures
 set_option synthInstance.maxSize 2048

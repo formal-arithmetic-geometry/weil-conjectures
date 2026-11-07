@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.SfIntegralReductionTower
 public import WeilConjectures.AlgebraicGeometry.Koszul.KoszulReconstructionModels
+public import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 import all WeilConjectures.AlgebraicGeometry.Koszul.KoszulReconstructionModels
 import WeilConjectures.AlgebraicGeometry.Completed.Koszul.CompletedKoszulQuotientRoosAugmentation
 import WeilConjectures.AlgebraicGeometry.Koszul.KoszulReconstructionLocalizationAssembly
@@ -31,9 +32,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] WeilConjectures.sfAbSheafify
 attribute [local instance] WeilConjectures.sfAbBijective
-local instance w6RingSheafify (Y : Scheme.{t}) :
-    HasSheafify (ProEt.topology Y) CommRingCat.{t + 1} :=
-  WeilConjectures.integralCoefficientRingSheafify.{t, 0} Y
+attribute [local instance] AlgebraicGeometry.ProEtale.VaryingRing.ringSheafify
 private theorem reconstructionUnitSquare {E : Type*} [Category E]
     {X Y Z U V R : E} (k : X ⟶ Y) (f : Y ⟶ Z) (b : X ⟶ Z)
     (a : Z ⟶ U) (v : X ⟶ V) (w : V ⟶ U) (e : U ⟶ R) (δ : V ⟶ R)

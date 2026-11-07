@@ -339,7 +339,6 @@ private theorem transpose_isIso_fast
   rw [Adjunction.homEquiv_naturality_left_symm, Equiv.symm_apply_apply]
   infer_instance
 
-set_option maxHeartbeats 1000000 in
 -- Compare the actual tensor mate through the two chosen coefficient isomorphisms.
 private theorem ordinaryFiniteMate_isIso (n : ℕ)
     (M : pbcModules Y (pbcAdicCompletion Y d)) :
