@@ -38,7 +38,6 @@ lemma scalarFunctor_coefficient
         (scalarComponent P' R b' (F₀.obj N)).hom := by
   exact purity_scalarFunctor_coefficient P F₀ F P' Q R τ α b b' M N hc e c he
 
-set_option linter.style.longLine false in
 /-- The isomorphism version retains both the datum's component and the named
 composite isomorphism in its conclusion. -/
 lemma scalarDatum_postcomposeIso

@@ -68,7 +68,6 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 
-set_option linter.flexible false in
 /-- The corresponding comparison on constructible Weil complexes. -/
 noncomputable def nativeConstructibleTensorTateShiftIso (d n : ℤ) :
     Prod.sectR ((WeilSheaf.toComplex.obj (WeilSheaf.tateTwistSheaf k₀ l X d)) ⟦n⟧) _ ⋙

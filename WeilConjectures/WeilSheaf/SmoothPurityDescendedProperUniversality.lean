@@ -128,7 +128,6 @@ variable (hc : UpperStarWeilCompatible (Profinite.padicAlgClRingObj l) f.left (O
   {N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj l⟧}
   (γ : P ⟶ (boundedConstructibleUpperShriek l f).obj N)
 
-set_option linter.style.longLine false in
 /-- The actual descended trace is geometrically universal when the exceptional
 base-change component is invertible. -/
 theorem bijective_map_comp_geometricFiberWeilDirectTrace_of_isIso [IsIso γ]
@@ -152,7 +151,6 @@ theorem bijective_map_comp_geometricFiberWeilDirectTrace_of_isIso [IsIso γ]
     (traceGeometricFiberOverMap f)
     (Scheme.Hom.isPullback_geometricFiberMap f.left (Over.w f)).flip γ K
 
-set_option linter.style.longLine false in
 /-- The actual descended trace is geometrically universal for a smooth proper map. -/
 theorem bijective_map_comp_geometricFiberWeilDirectTrace [IsIso γ]
     (d : ℕ) [SmoothOfRelativeDimension d f.left]

@@ -251,7 +251,6 @@ def pasteLowerShriekBaseChange :
     Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft _ (boundedConstructibleLowerShriekComp_padicAlgCl l f' g').symm
 
-set_option linter.style.longLine false in
 /-- The pasted base change isomorphism is compatible with the composition isomorphisms. -/
 lemma exchangeCompCompatible_pasteLowerShriekBaseChange :
     Adjunction.ExchangeCompCompatible bcf.hom bcg.hom

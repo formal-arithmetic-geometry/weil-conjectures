@@ -60,7 +60,6 @@ lemma adicUpperStarIsoLowerStarInv_hom_comp_unit {X Y : Scheme.{u}} (e : X ≅ Y
     adicLowerStarUnitIso_hom_hom]
   exact upperStarIsoLowerStarInv_hom_app_comp_adicConstantSheafLowerStarIso_hom l e
 
-set_option linter.unusedSimpArgs false in
 /-- The unit descent equation in inverse-pushforward coordinates. Keeping the
 automorphism abstract avoids unfolding the geometric Frobenius while cancelling
 the pullback/pushforward comparison. -/

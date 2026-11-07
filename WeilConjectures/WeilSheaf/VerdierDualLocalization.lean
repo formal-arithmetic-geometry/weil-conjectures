@@ -255,7 +255,6 @@ variable [IsSeparated (U ↘ Spec (CommRingCat.of k₀))]
   [HasUpperShriek k₀ l (U ↘ Spec (CommRingCat.of k₀))]
   [HasUpperShriek k₀ l (Z ↘ Spec (CommRingCat.of k₀))]
 
-set_option linter.style.longLine false in
 /-- **Step 4: the dual of the boundary complex** (blueprint: `lem-a1-local-boundary-duality`,
 step 4): for complementary immersions `j` and `i` and a Weil complex `G` on `U`,
 `𝔻_Z (i^* Rj_* G) ≅ (i^* Rj_* 𝔻_U G)[-1]`. -/

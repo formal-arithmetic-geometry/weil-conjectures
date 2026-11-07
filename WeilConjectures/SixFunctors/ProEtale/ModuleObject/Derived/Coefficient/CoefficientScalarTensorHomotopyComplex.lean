@@ -19,8 +19,6 @@ with the quotient and prolonged-functor objects in their native presentations.
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
 set_option linter.unusedSectionVars false
--- The only declaration is private: its statement needs `Q = quotient ⋙ Qh` definitionally.
-set_option linter.privateModule false
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory AlgebraicGeometry
 open scoped CategoryTheory.Obj ChangeOfRings
