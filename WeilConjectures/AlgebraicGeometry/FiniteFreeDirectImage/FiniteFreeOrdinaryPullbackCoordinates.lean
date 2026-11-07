@@ -250,7 +250,6 @@ private theorem presentedTensor_hom_ext (X : Scheme.{u}) (s : ScalarModel X)
   | tmul b m => exact h V b m
   | add x y hx hy => simp_all
 
-set_option maxHeartbeats 400000 in
 -- Elaborating the projected square expands both scalar and geometric adjunctions.
 private theorem ordinaryCoordinate_square {Z W : Scheme.{u}} {q : Z ⟶ W}
     (sW : ScalarModel W) (sZ : ScalarModel Z)
