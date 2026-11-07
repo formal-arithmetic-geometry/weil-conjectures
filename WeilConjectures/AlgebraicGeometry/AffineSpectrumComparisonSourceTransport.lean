@@ -197,7 +197,6 @@ theorem exists_affineSpectrum_comparisonIntoPullback_transport
       NatIso.mapHomologicalComplex,
       NatTrans.mapHomologicalComplex_comp, NatTrans.comp_app, Functor.map_comp,
       Functor.mapIso_hom, Functor.mapIso_inv, Category.assoc] using h
-
   have affineSpectrum_counit_square
       [∀ Y : Scheme.{u},
         HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -277,7 +276,6 @@ theorem exists_affineSpectrum_comparisonIntoPullback_transport
     simp only [Category.assoc, Iso.inv_hom_id_assoc]
     rw [← h]
     simp only [Iso.inv_hom_id_assoc, Iso.inv_hom_id, Category.comp_id]
-
   have comparisonIntoPullback_eq
       [∀ Y : Scheme.{u},
         HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -292,7 +290,6 @@ theorem exists_affineSpectrum_comparisonIntoPullback_transport
           (comparisonStalkCohomology X' z i).map
             (inv ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) := by
     simp only [comparisonIntoPullback, comparisonIntoTensorPullback, Category.assoc, cast_eq]
-
   have exists_affineSpectrum_canonicalComparison_square
       [∀ Y : Scheme.{u},
         HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
