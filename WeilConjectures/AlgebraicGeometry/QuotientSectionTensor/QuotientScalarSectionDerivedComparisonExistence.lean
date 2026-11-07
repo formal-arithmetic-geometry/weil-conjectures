@@ -190,6 +190,7 @@ theorem scalar_section_derived_comparison_exists (T : Scheme.{u})
     sectionLocalizationComparison, Iso.app_hom, hc, Category.assoc] at h ⊢
   erw [Category.id_comp] at h
   set_option backward.isDefEq.respectTransparency false in
-    simpa only [Category.id_comp, Category.comp_id] using h
+    simpa only [ec, Equivalence.mapHomologicalComplex_functor, ER, ES, F,
+      Category.id_comp, Category.comp_id] using h
 
 end AlgebraicGeometry.ProEtale.QuotientSectionTensor
