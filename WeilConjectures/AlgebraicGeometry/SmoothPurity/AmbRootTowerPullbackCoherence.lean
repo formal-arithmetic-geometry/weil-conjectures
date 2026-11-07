@@ -39,13 +39,11 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_proEtTopol
 
 variable (l : ℕ) [Fact l.Prime]
 
-set_option maxHeartbeats 100000 in
 -- Bound the one-time search for the cached sheafification proof.
 /-- The canonical ring sheafification instance, cached for the constructions below. -/
 theorem ambRootRingSheafify (S : Scheme.{u}) :
     HasWeakSheafify (ProEt.topology S) RingCat.{u + 1} := inferInstance
 
-set_option maxHeartbeats 100000 in
 -- Bound the one-time search for the cached sheafification proof.
 /-- The canonical abelian sheafification instance, cached for the constructions below. -/
 theorem ambRootAbSheafify (S : Scheme.{u}) :
@@ -778,7 +776,6 @@ private theorem roots_direct_id (S : Scheme.{u}) (N : ℕ) (U : S.ProEt)
     (roots_restrict_value S N
       ((MorphismProperty.Over.pullbackId @WeaklyEtale.{u} ⊤ S).hom.app U).op x).symm
 
-set_option maxHeartbeats 40000 in
 -- The fibre-product projection comparison has several definitionally equal section types.
 private theorem roots_direct_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (N : ℕ) (U : Z.ProEt) (x : (proEtaleRootsOfUnitySheaf Z N).obj.obj (op U)) :
@@ -860,7 +857,6 @@ private theorem root_direct_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z
     root_direct_project_value, root_direct_project_value, roots_direct_comp]
   rfl
 
-set_option maxHeartbeats 100000 in
 -- The normalized scalar action is transported along the ring-sheaf comparison.
 private theorem finite_module_linear
     {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
@@ -981,7 +977,6 @@ private theorem scalar_abelian_ext (S : Scheme.{u})
   | add z w hz hw => simp only [map_add, hz, hw]
   | tmul b x => exact h U b x
 
-set_option maxHeartbeats 50000 in
 -- Normalize the two constant-sheaf adjuncts before comparing their units.
 private theorem constant_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
     {A B : CommRingCat.{u + 1}} (k : A ⟶ B) :
