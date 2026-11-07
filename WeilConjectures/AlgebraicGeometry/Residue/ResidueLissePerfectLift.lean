@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+public import WeilConjectures.AlgebraicGeometry.StrictPerfectPackageOnSite
 
 public import WeilConjectures.AlgebraicGeometry.Completed.Adic.CompletedAdicIntrinsicCompletion
 public import WeilConjectures.CategoryTheory.RingedSiteDerivedRestrictionUniverses
@@ -257,15 +258,6 @@ private theorem residueLisse_reconstruction (X : Scheme.{t}) {A : Type t} [CommR
   have hκ : IsIso ((reconstructionKoszulDerivedUnit X d r a).app M) :=
     IsIso.of_isIso_fac_right hj
   exact (koszulReconstruction X d r a ha).choose_spec.2 M hκ
-
-/-- The locally bijective description on the same localized site.
-Source: Stacks Tags 03DA and 09C6
-(blueprint: lem-weil-pbc-residue-lisse-perfect-lift). -/
-instance residueLisseSliceAbLocallyBijective (X : Scheme.{t}) (U : X.ProEt) :
-    ((ProEt.topology X).over U).WEqualsLocallyBijective AddCommGrpCat.{t + 1} :=
-  letI : EssentiallySmall.{t + 1} (Over U) := essentiallySmallSelf.{0, t, t + 1} _
-  GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall.{t, t + 1, t + 1,
-    t + 2, t + 1, t + 1, t + 1} _
 
 /-- The standard localization on each slice, with its inherited coefficient ring.
 Source: Stacks Tags 05RU and 09C6

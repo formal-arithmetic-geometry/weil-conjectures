@@ -252,7 +252,6 @@ private theorem encoding_triangulated
   change (e.ordinary.functor ⋙ e.fixed.functor).mapDerivedCategory.IsTriangulated
   infer_instance
 
-set_option maxHeartbeats 30000 in
 -- Transport the specified fixed-interval equivalence.
 private theorem encoding_generator_etaleOrigin
     (ℓ p : ℕ) [Fact ℓ.Prime]
@@ -423,7 +422,6 @@ include hℓ hp hpℓ hA k
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-set_option maxHeartbeats 60000 in
 -- Keep the canonical derived functors abstract during elaboration.
 /-- Clause (1): proper pushforward preserves the recorded finite-coefficient Dctf and
 restricts to an exact sum-preserving functor of the localizing closures.
