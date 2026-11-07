@@ -1,0 +1,181 @@
+/-
+Copyright (c) 2026 Bin Wu. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Bin Wu
+-/
+module
+public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
+
+import all Submission.WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
+import all Mathlib.Algebra.Homology.DerivedCategory.TStructure
+import all Mathlib.CategoryTheory.ObjectProperty.Extensions
+import all Mathlib.CategoryTheory.ObjectProperty.Kernels
+import all Submission.WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory
+import all Submission.WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
+import all Submission.WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
+import all Submission.WeilConjectures.CategoryTheory.DerivedCategory.Constructible
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
+import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UnitBallRingObj.BoundedConstructibleTensorSingle
+import Submission.WeilConjectures.AlgebraicGeometry.Bounded.BoundedConstructibleDevissageSupplement
+import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.EllAdic.EllAdicBoundedTriangulated
+public import Submission.WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
+public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import Mathlib.CategoryTheory.ObjectProperty.Extensions
+public import Mathlib.CategoryTheory.ObjectProperty.Kernels
+public import Submission.WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory
+public import Submission.WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
+public import Submission.WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.Constructible
+
+set_option autoImplicit true
+set_option relaxedAutoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option maxSynthPendingDepth 3
+
+/-! # BoundedConstructibleTensorPreservation
+
+The tensor unit and the two finite truncation inductions for tensor closure.
+-/
+
+@[expose] public section
+
+set_option linter.style.haveILetI false
+set_option linter.unusedSectionVars false
+
+universe u
+
+open scoped CategoryTheory.Obj
+open CategoryTheory Limits MonoidalCategory Opposite
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+open Scheme
+
+variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ]
+  [IsCommMonObj Λ] {k : Type u} [Field k]
+variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom]
+  [QuasiCompact X.hom] [IsSeparated X.hom]
+
+/-- The derived tensor of two bounded constructible module-object complexes is bounded
+constructible, for any coefficient ring whose bounded constructible category is triangulated
+and satisfies the degree-zero tensor calculation `hsingle` (`boundedConstructible_tensor_single`).
+Source: `lem-sfb-dc-tensor-preserves` in the blueprint.
+(blueprint: lem-sfb-dc-tensor-preserves) -/
+private theorem boundedConstructible_tensor_closure_of
+    (htri : (boundedConstructible (condensedRingObj Λ X.left)).IsTriangulated)
+    (hsingle : ∀ F G : Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
+        (condensedRingObj Λ X.left),
+      IsConstructibleModuleObject (condensedRingObj Λ X.left) F →
+      IsConstructibleModuleObject (condensedRingObj Λ X.left) G →
+      boundedConstructible (condensedRingObj Λ X.left)
+        ((DerivedCategory.singleFunctor _ 0).obj F ⊗
+          (DerivedCategory.singleFunctor _ 0).obj G))
+    (K L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
+      (condensedRingObj Λ X.left)))
+    (hK : boundedConstructible (condensedRingObj Λ X.left) K)
+    (hL : boundedConstructible (condensedRingObj Λ X.left) L) :
+    boundedConstructible (condensedRingObj Λ X.left)
+      (((-⊗ᴸ-(X.left)⟦Λ⟧).obj K).obj L) := by
+  let P := boundedConstructible (condensedRingObj Λ X.left)
+  have : P.IsTriangulated := htri
+  change P (K ⊗ L)
+  apply prop_of_boundedConstructibleModule (P.inverseImage (tensorLeft K)) ?_ hL
+  intro G hG
+  exact prop_of_boundedConstructibleModule
+    (P.inverseImage (tensorRight ((DerivedCategory.singleFunctor _ 0).obj G)))
+    (fun F hF ↦ hsingle F G hF hG) hK
+
+variable {X}
+
+private theorem isNoetherian_left : IsNoetherian X.left :=
+  have : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
+  have : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
+  ⟨⟩
+
+/-- The derived tensor of two bounded constructible complexes is bounded constructible,
+`ℚ̄_ℓ` coefficients. This is the tensor-closure clause of the ell-adic finiteness theorem.
+Source: `lem-sfb-dc-tensor-preserves` in the blueprint.
+(blueprint: lem-sfb-dc-tensor-preserves) -/
+theorem boundedConstructible_tensor_closure
+    (ℓ : ℕ) [Fact ℓ.Prime] [Fact (ringChar k ≠ ℓ)]
+    (K L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)))
+    (hK : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left) K)
+    (hL : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left) L) :
+    boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)
+      (((-⊗ᴸ-(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧).obj K).obj L) :=
+  have := isNoetherian_left (X := X)
+  boundedConstructible_tensor_closure_of _ X
+    (isTriangulated_boundedConstructible_ellAdic_padicAlgCl X.left ℓ)
+    (fun F G hF hG ↦ boundedConstructible_tensor_single ℓ X F G hF hG) K L hK hL
+
+namespace ContinuousMapRingObj
+
+/-- The derived tensor of two bounded constructible complexes is bounded constructible,
+`E̲` coefficients for `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ`.
+(blueprint: lem-sfb-dc-tensor-preserves) -/
+theorem boundedConstructible_tensor_closure
+    (ℓ : ℕ) [Fact ℓ.Prime] [Fact (ringChar k ≠ ℓ)] (E : PadicAlgCl.FiniteIntermediateField ℓ)
+    (K L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
+      (condensedRingObj (Profinite.continuousMapRingObj E) X.left)))
+    (hK : boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj E) X.left) K)
+    (hL : boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj E) X.left) L) :
+    boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj E) X.left)
+      (((-⊗ᴸ-(X.left)⟦Profinite.continuousMapRingObj E⟧).obj K).obj L) :=
+  have := isNoetherian_left (X := X)
+  boundedConstructible_tensor_closure_of _ X
+    (isTriangulated_boundedConstructible_ellAdic_continuous X.left ℓ E)
+    (fun F G hF hG ↦
+      ContinuousMapRingObj.boundedConstructible_tensor_single ℓ E X F G hF hG)
+    K L hK hL
+
+end ContinuousMapRingObj
+
+namespace PadicIntegersRingObj
+
+/-- The derived tensor of two bounded constructible complexes is bounded constructible,
+`𝒪̲_E` coefficients for `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ`.
+(blueprint: lem-sfb-dc-tensor-preserves) -/
+theorem boundedConstructible_tensor_closure
+    (ℓ : ℕ) [Fact ℓ.Prime] [Fact (ringChar k ≠ ℓ)] (E : Type) [Field E]
+    [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)]
+    [FiniteDimensional ℚ_[ℓ] E]
+    (K L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left)))
+    (hK : boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left) K)
+    (hL : boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left) L) :
+    boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left)
+      (((-⊗ᴸ-(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧).obj K).obj L) :=
+  have := isNoetherian_left (X := X)
+  boundedConstructible_tensor_closure_of _ X
+    (isTriangulated_boundedConstructible_ellAdic_padicIntegers X.left ℓ E)
+    (fun F G hF hG ↦
+      PadicIntegersRingObj.boundedConstructible_tensor_single ℓ E X F G hF hG)
+    K L hK hL
+
+end PadicIntegersRingObj
+
+namespace UnitBallRingObj
+
+/-- The derived tensor of two bounded constructible complexes is bounded constructible,
+`O̲` coefficients for `O` the closed unit ball of a finite normed extension `E` of `ℚ_ℓ`.
+(blueprint: lem-sfb-dc-tensor-preserves) -/
+theorem boundedConstructible_tensor_closure
+    (ℓ : ℕ) [Fact ℓ.Prime] [Fact (ringChar k ≠ ℓ)] {E : Type} [NormedField E]
+    [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
+    (O : Subring E) [hO : Fact (∀ x : E, x ∈ O ↔ ‖x‖ ≤ 1)]
+    (K L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
+      (condensedRingObj (Profinite.continuousMapRingObj O) X.left)))
+    (hK : boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj O) X.left) K)
+    (hL : boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj O) X.left) L) :
+    boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj O) X.left)
+      (((-⊗ᴸ-(X.left)⟦Profinite.continuousMapRingObj O⟧).obj K).obj L) :=
+  have := isNoetherian_left (X := X)
+  boundedConstructible_tensor_closure_of _ X
+    (isTriangulated_boundedConstructible_ellAdic_unitBall X.left ℓ O hO.out)
+    (fun F G hF hG ↦ UnitBallRingObj.boundedConstructible_tensor_single ℓ O F G hF hG)
+    K L hK hL
+
+end UnitBallRingObj
+
+end AlgebraicGeometry.ProEtale.CondensedRing

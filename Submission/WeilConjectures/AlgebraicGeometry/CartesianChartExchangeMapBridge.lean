@@ -1,0 +1,36 @@
+/-
+Copyright (c) 2026 Bin Wu. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Bin Wu
+-/
+
+module
+
+public import Submission.WeilConjectures.AlgebraicGeometry.RestrictedOverAbelianComplexData
+import Submission.WeilConjectures.AlgebraicGeometry.RawAffineRestrictedCohomology
+
+set_option autoImplicit true
+set_option relaxedAutoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option maxSynthPendingDepth 3
+
+@[expose] public section
+
+universe u
+open CategoryTheory
+open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
+namespace AlgebraicGeometry.Etale
+
+lemma restrictedOverCohomologyMap_eq_rawAffine
+    {W S : Scheme.{u}} (k : W ⟶ S)
+    (F : Sheaf W.smallEtaleTopology AddCommGrpCat.{u + 1}) (p : ℕ)
+    {A B : Over W} (f : A ⟶ B) (U : S.Etale)
+    (w : f.left ≫ (B.hom ≫ k) = A.hom ≫ k) :
+    restrictedOverCohomologyMap k F (p : ℤ) f U =
+      rawAffineRestrictedCohomologyMap f.left (B.hom ≫ k) (A.hom ≫ k) w p
+        (restrictedOverCoefficient F B) (restrictedOverCoefficient F A)
+        ((upperStarComp AddCommGrpCat.{u + 1} f.left B.hom A.hom
+          (Over.w f).symm).inv.app F) U := by
+  rfl
+
+end AlgebraicGeometry.Etale

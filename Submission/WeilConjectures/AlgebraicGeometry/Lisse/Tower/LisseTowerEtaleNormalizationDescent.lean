@@ -1,0 +1,175 @@
+/-
+Copyright (c) 2026 Bin Wu. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Bin Wu
+-/
+module
+
+public import Submission.WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerEtaleDescentData
+import Submission.WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerScalarRestriction
+import Submission.WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerLocalizedRealization
+import Submission.WeilConjectures.AlgebraicGeometry.Etale.EtaleNormalizationCoherence
+import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison
+
+set_option autoImplicit true
+set_option relaxedAutoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option maxSynthPendingDepth 3
+
+/-! # Descending and realizing normalization arrows after descent of the levels
+
+Source: Stacks Tags 06YY, 099Z, 09B1 and 03DA.
+-/
+
+@[expose] public noncomputable section
+set_option autoImplicit false
+set_option Elab.async false
+set_option genInjectivity false
+set_option genSizeOf false
+set_option genSizeOfSpec false
+set_option genCtorIdx false
+universe u
+open CategoryTheory CategoryTheory.Limits Opposite
+namespace AlgebraicGeometry.Scheme
+attribute [local irreducible] HasDerivedCategory.standard
+  pbcDerivedRestrict constantAdicQuotientRealization constantAdicFiniteRealization
+  constantAdicQuotientRightIso constantAdicFiniteProjection
+  localProEtaleNormalization normalizationConstantArrow etaleIsomorphismNormalizationArrow
+  lisseTowerAlgebraArrow lisseTowerFixedRealization
+
+private theorem etaleRealization_map_bijective
+    {X Z : Scheme.{u}} (f : Z ⟶ X)
+    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ)
+    (C C' : DerivedCategory
+      (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} (lisseTowerEtaleRing d n))))
+    (hC' : ∃ a b : ℤ, ∀ q : ℤ, q < a ∨ b < q →
+      IsZero ((DerivedCategory.homologyFunctor _ q).obj C')) :
+    Function.Bijective (fun k : C ⟶ C' ↦ (lisseTowerEtaleRealization f d n).map k) := by
+  obtain ⟨a, b, hab⟩ := hC'
+  have hge : C'.IsGE a := (DerivedCategory.isGE_iff C' a).2 fun q hq ↦ hab q (Or.inl hq)
+  have hplus : DerivedCategory.TStructure.t.plus C' := ⟨a, hge⟩
+  exact ((Functor.FullyFaithful.ofFullyFaithful
+    (lisseTowerFixedRealization f d n)).map_bijective _ _).comp
+      (ProEtale.bijective_comparisonUpperStar_mapDerivedCategory_map C C' hplus)
+
+/-- Normalization arrows descend once the etale levels and their comparison are given.
+The statement neither constructs etale levels nor asks for finite locally constant
+cohomology, algebraic local markings, or inhabited Isom stalks.
+
+Source: Stacks Project, Tags 099Z and 09B1 (bounded-below full faithfulness),
+06YY (scalar extension), 03DA and 0H7J (restriction and inverse image).
+(blueprint: lem-weil-pbc-lisse-tower-etale-normalization-descent).
+
+Proof: the fixed realization is an equivalence: restriction along the completion
+quotient is an equivalence, and the constant scalar map is locally bijective. Transport
+the actual consecutive semilinear transition of M along the two given comparisons and
+the canonical coefficient-restriction interchange. The resulting arrow between the
+comparison images of D_(n+1) and Res D_n has a unique etale preimage by bounded-below
+full faithfulness; call it delta_n. This is a statement about actual arrows, not a
+choice of a new tensor functor. The inverse-image scalar mate is invertible by the
+sectionwise tensor computation. Thus the image of the scalar adjunct of delta_n is
+the pullback of M.normalization; it is invertible. Exact conservative comparison
+reflects this invertibility. The adjunction therefore makes delta_n universal.
+The same tensor mate for restriction to an etale object proves local universality.
+Exact constants and the constant scalar-extension comparison prove the analogous
+claim for every universal algebraic arrow. Coefficient-mate pasting and the canonical
+inverse-image compositors show that both localized arrows have restriction coherence.
+Applying inverse image to a supplied square and using those coherences proves the
+coefficient coherence fields.
+
+For V over U.left, realize fixed sheaves over V.left by restricting their algebraic
+scalars and sheafifying along constant scalar sections, then pull to W.left along
+f.left. The inverse-image coefficient comparison identifies the target coefficient
+ring with the prescribed pullback from X. Apply this construction termwise and localize
+to define realization. Pullback of the given level comparisons gives actual. Constant
+sheafification and its inverse-image comparison give model naturally for every E.
+Two successive scalar restrictions give scalar. Its equation on delta_n is the
+pullback of the defining descent equation, hence the actual restricted step of M.
+On a constant arrow k the sectionwise restriction calculation is the identity on every
+constant section. Localization and the specified mapDerivedCategoryCompIso and
+restrictScalarsComp' compositors identify it with lisseTowerAlgebraArrow d n k.
+Pasting with constantAdicQuotientRightIso gives exactly model_normalized for all k.
+The argument uses the comparisons at U only, then their canonical pullbacks; it makes
+no new or incompatible choices of comparisons on V or W. It applies unchanged to
+empty bases and zero objects, with no finite Tor-amplitude assumption. -/
+theorem lisse_tower_etale_normalization_descent
+    (X Y : Scheme.{u}) (g : Y ⟶ X)
+    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (M : AdicTower X d)
+    (U : Y.ProEt)
+    (D : ∀ n : ℕ, DerivedCategory
+      (Sheaf U.left.smallEtaleTopology (ModuleCat.{u + 1} (lisseTowerEtaleRing d n))))
+    (hbounded : ∀ n : ℕ, ∃ a b : ℤ, ∀ q : ℤ, q < a ∨ b < q →
+      IsZero ((DerivedCategory.homologyFunctor _ q).obj (D n)))
+    (e : ∀ n : ℕ, (lisseTowerFixedRealization (U.hom ≫ g) d n).obj
+      ((ProEtale.comparisonUpperStar
+        (ModuleCat.{u + 1} (lisseTowerEtaleRing d n)) U.left).mapDerivedCategory.obj (D n)) ≅
+      (adicTowerPullback (U.hom ≫ g) ((pbcAdicRings X d).obj (op n))).obj (M.level n)) :
+    Nonempty (LisseTowerEtaleNormalization X Y g d M U D) := by
+  classical
+  choose c hc using fun n ↦ (lisseTower_scalar_restriction (U.hom ≫ g) d n).exists
+  have lift_step (n : ℕ) : ∃ δ : D (n + 1) ⟶
+      (normalizationRestrict U.left.smallEtaleTopology (lisseTowerEtaleQuotient d n)).obj
+        (D n),
+      (lisseTowerEtaleRealization (U.hom ≫ g) d (n + 1)).map δ ≫
+          (lisseTowerEtaleScalarIso (U.hom ≫ g) d n (c n)).hom.app (D n) ≫
+          (pbcDerivedRestrict ((adicTowerInverseImage (U.hom ≫ g)).map
+            (pbcAdicQuotient X d (n + 1) n (Nat.le_succ n)))).map (e n).hom =
+        (e (n + 1)).hom ≫
+          adicTowerRestrictedTransition d (U.hom ≫ g) M (n + 1) n (Nat.le_succ n) := by
+    let R := pbcDerivedRestrict ((adicTowerInverseImage (U.hom ≫ g)).map
+      (pbcAdicQuotient X d (n + 1) n (Nat.le_succ n)))
+    let t := adicTowerRestrictedTransition d (U.hom ≫ g) M (n + 1) n (Nat.le_succ n)
+    let k := (e (n + 1)).hom ≫ t ≫ R.map (e n).inv ≫
+      (lisseTowerEtaleScalarIso (U.hom ≫ g) d n (c n)).inv.app (D n)
+    have hres : ∃ a b : ℤ, ∀ q : ℤ, q < a ∨ b < q →
+        IsZero ((DerivedCategory.homologyFunctor _ q).obj
+          ((normalizationRestrict U.left.smallEtaleTopology
+            (lisseTowerEtaleQuotient d n)).obj (D n))) := by
+      obtain ⟨a, b, hab⟩ := hbounded n
+      exact ⟨a, b, fun q hq ↦ Functor.isZero_homologyFunctor_mapDerivedCategory_obj
+        (sheafCompose U.left.smallEtaleTopology
+          (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} (lisseTowerEtaleQuotient d n)))
+        (hab q hq)⟩
+    obtain ⟨δ, hδ⟩ := (etaleRealization_map_bijective (U.hom ≫ g) d (n + 1)
+      (D (n + 1)) _ hres).surjective k
+    refine ⟨δ, ?_⟩
+    dsimp only at hδ
+    erw [hδ]
+    change ((e (n + 1)).hom ≫ t ≫ R.map (e n).inv ≫
+      (lisseTowerEtaleScalarIso (U.hom ≫ g) d n (c n)).inv.app (D n)) ≫
+        (lisseTowerEtaleScalarIso (U.hom ≫ g) d n (c n)).hom.app (D n) ≫
+        R.map (e n).hom = _
+    simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+    erw [← R.map_comp, Iso.inv_hom_id, R.map_id, Category.comp_id]
+  choose δ hδ using lift_step
+  obtain ⟨L⟩ := lisseTower_localized_realization X Y g d M U D c
+    (fun n ↦ (hc n).1) δ e hδ
+  refine ⟨{
+    delta := δ
+    local_delta := fun n ↦ by
+      have hr := (hc n).2.1
+      unfold LisseTowerScalarSquareReflects at hr
+      have hu := hr M (D (n + 1)) (D n) (hbounded (n + 1)) (hbounded n)
+        (e (n + 1)) (e n) (δ n) (hδ n)
+      exact {
+        universal := hu
+        coherence := etaleNormalization_coherence U.left (lisseTowerEtaleQuotient d n)
+          (δ n) }
+    local_constant_universal := ?_
+    constant_coherence := ?_
+    realization := lisseTowerLocalRealization g d U
+    model := L.model
+    actual := L.actual
+    scalar := L.scalar
+    actual_normalized := L.actual_normalized
+    model_normalized := L.model_normalized }⟩
+  · intro n E E' k hk V
+    have hk' := (hc n).2.2
+    unfold LisseTowerConstantLocalUniversal at hk'
+    exact hk' E E' k hk V
+  · intro n E E' k V Z f
+    exact etaleNormalization_coherence U.left (lisseTowerEtaleQuotient d n)
+      (normalizationConstantArrow U.left.smallEtaleTopology
+        (lisseTowerEtaleQuotient d n) k) f
+
+end AlgebraicGeometry.Scheme

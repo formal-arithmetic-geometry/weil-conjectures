@@ -1,0 +1,192 @@
+/-
+Copyright (c) 2026 Bin Wu. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Bin Wu
+-/
+
+module
+
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusComp
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+import Submission.WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+
+set_option autoImplicit true
+set_option relaxedAutoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option maxSynthPendingDepth 3
+
+/-!
+# Cohomology pullback and the derived unit
+
+Source: Stacks Project, cohomology.tex, Lemmas 01EZ and 01F8, equations 01F9 and 01FA;
+sites-cohomology.tex, Remark 08J6 and Lemmas 072Z and 07A6
+(blueprint: lem-weil-pbc-cohomology-pullback-derived-unit).
+
+The Leray isomorphism used below is `Functor.rightDerivedFunctorPlusCompIso'` applied to
+`Etale.lowerStarCompGlobalSectionsIso`. Its type is a natural isomorphism on all of D⁺.
+`Sheaf.Γ` and its bounded below right derived functor are the recorded global-sections
+functors; their comparison with the unbounded version is canonical.
+
+The pullback `u^* : RΓ(X, K) ⟶ RΓ(Y, u⁻¹K)` on D⁺ of def-weil-pbc-cohomology-pullback (whose
+recorded declaration `Etale.cohomologyMap` covers only the sheaf case) is spelled inline as the
+derived comparison (`Functor.rightDerivedDesc`) of the section map `Γ(X, I) ⟶ Γ(Y, u⁻¹I)` given
+by the underived unit, followed by the unit of `RΓ(Y, -)`: on resolutions `I` and `u⁻¹I → J`
+it is the class of `a ↦ r(η(a))`.
+-/
+
+@[expose] public section
+
+universe v
+
+open CategoryTheory CategoryTheory.Limits
+
+
+namespace AlgebraicGeometry.Etale
+
+
+/-- Pullback of derived global sections is Γ of the derived unit followed by the natural
+Leray identification, for every bounded below derived object (including a sheaf in degree 0).
+Source: Stacks Project, Lemma 01F8 and equations 01F9 and 01FA
+(blueprint: lem-weil-pbc-cohomology-pullback-derived-unit).
+Proof: compare the two natural transformations out of derived global sections using
+`Functor.rightDerived_ext`. It suffices to precompose their components on the bounded
+below homotopy category with the derived global-sections unit. The derived adjunction's
+unit formula expresses its component as the localized underived unit, the direct-image
+derived unit, and the inverse of the inverse-image factorization isomorphism. Move this
+last isomorphism through the Leray comparison by naturality, then move the localized
+underived unit through the global-sections derived unit. The Leray unit compatibility
+`Functor.rightDerivedFunctorPlusCompIso'_fac` identifies the resulting composite with
+global sections of the underived unit followed by the sectionwise identification.
+After passing through the faithful inclusion of bounded below homotopy categories,
+this final identity is the image under the quotient functor of an equality of maps of
+complexes, which is definitionally true. Thus the universal property gives equality of
+the natural transformations and hence of their components at every derived object. -/
+theorem derivedCohomologyPullback_eq_derivedUnit {X Y : Scheme.{v}} (f : Y ⟶ X)
+    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1})) :
+    (Functor.rightDerivedDesc _
+      (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{v + 1}).rightDerivedFunctorPlusUnith
+      (HomotopyCategory.Plus.quasiIso _)
+      ((upperStar AddCommGrpCat.{v + 1} f).mapDerivedCategoryPlus ⋙
+        (Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{v + 1}).rightDerivedFunctorPlus)
+      (Functor.whiskerRight
+          (NatTrans.mapHomotopyCategoryPlus
+            ((Functor.leftUnitor _).inv ≫
+              Functor.whiskerRight (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} f).unit
+                (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{v + 1}) ≫
+              (Functor.associator _ _ _).hom ≫
+              Functor.whiskerLeft (upperStar AddCommGrpCat.{v + 1} f)
+                (lowerStarCompGlobalSectionsIso AddCommGrpCat.{v + 1} f).hom))
+          DerivedCategory.Plus.Qh ≫
+        Functor.whiskerRight
+          (Functor.mapHomotopyCategoryPlusCompIso
+            (Iso.refl (upperStar AddCommGrpCat.{v + 1} f ⋙
+              Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{v + 1}))).inv
+          DerivedCategory.Plus.Qh ≫
+        (Functor.associator _ _ _).hom ≫
+        Functor.whiskerLeft (upperStar AddCommGrpCat.{v + 1} f).mapHomotopyCategoryPlus
+          (Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{v + 1}).rightDerivedFunctorPlusUnith ≫
+        (Functor.associator _ _ _).inv ≫
+        Functor.whiskerRight
+          (upperStar AddCommGrpCat.{v + 1} f).mapDerivedCategoryPlusFactorsh.inv
+          (Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{v + 1}).rightDerivedFunctorPlus ≫
+        (Functor.associator _ _ _).hom)).app K =
+      (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{v + 1}).rightDerivedFunctorPlus.map
+        ((upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} f).derivedPlus.unit.app K) ≫
+      (@Functor.rightDerivedFunctorPlusCompIso' _ _ _ _ _ _ _ _ _ _ _ _ _ _
+        (lowerStar AddCommGrpCat.{v + 1} f)
+        (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{v + 1}) _ _ _ _
+        (Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms
+          (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} f))
+        (lowerStarCompGlobalSectionsIso AddCommGrpCat.{v + 1} f)).hom.app
+          ((upperStar AddCommGrpCat.{v + 1} f).mapDerivedCategoryPlus.obj K) := by
+  let L := upperStar AddCommGrpCat.{v + 1} f
+  let R := lowerStar AddCommGrpCat.{v + 1} f
+  let G := Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{v + 1}
+  let H := Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{v + 1}
+  let adj := upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} f
+  have : R.PreservesInjectiveObjects :=
+    Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms adj
+  let e := lowerStarCompGlobalSectionsIso AddCommGrpCat.{v + 1} f
+  let β := Functor.whiskerRight
+      (NatTrans.mapHomotopyCategoryPlus
+        ((Functor.leftUnitor G).inv ≫ Functor.whiskerRight adj.unit G ≫
+          (Functor.associator L R G).hom ≫ Functor.whiskerLeft L e.hom))
+      DerivedCategory.Plus.Qh ≫
+    Functor.whiskerRight
+      (Functor.mapHomotopyCategoryPlusCompIso (Iso.refl (L ⋙ H))).inv
+      DerivedCategory.Plus.Qh ≫
+    (Functor.associator _ _ _).hom ≫
+    Functor.whiskerLeft L.mapHomotopyCategoryPlus H.rightDerivedFunctorPlusUnith ≫
+    (Functor.associator _ _ _).inv ≫
+    Functor.whiskerRight L.mapDerivedCategoryPlusFactorsh.inv H.rightDerivedFunctorPlus ≫
+    (Functor.associator _ _ _).hom
+  let γ := (Functor.leftUnitor G.rightDerivedFunctorPlus).inv ≫
+    Functor.whiskerRight adj.derivedPlus.unit G.rightDerivedFunctorPlus ≫
+    (Functor.associator _ _ _).hom ≫
+    Functor.whiskerLeft L.mapDerivedCategoryPlus
+      (Functor.rightDerivedFunctorPlusCompIso' R G e).hom
+  suffices h : Functor.rightDerivedDesc _ G.rightDerivedFunctorPlusUnith
+      (HomotopyCategory.Plus.quasiIso _) _ β = γ by
+    simpa only [γ, NatTrans.comp_app, Functor.whiskerRight_app,
+      Functor.whiskerLeft_app, Functor.associator_hom_app,
+      Functor.leftUnitor_inv_app, Category.id_comp, Category.assoc] using
+      NatTrans.congr_app h K
+  apply Functor.rightDerived_ext _ G.rightDerivedFunctorPlusUnith
+    (HomotopyCategory.Plus.quasiIso _)
+  rw [Functor.rightDerived_fac]
+  ext M : 2
+  simp only [β, γ, NatTrans.comp_app, Functor.whiskerRight_app,
+    Functor.whiskerLeft_app, Functor.associator_hom_app, Functor.associator_inv_app,
+    Functor.leftUnitor_inv_app, Category.id_comp, Category.comp_id]
+  -- Compute the derived unit before using naturality of the Leray comparison.
+  have hu : adj.derivedPlus.unit.app (DerivedCategory.Plus.Qh.obj M) =
+      DerivedCategory.Plus.Qh.map (adj.mapHomotopyCategoryPlus.unit.app M) ≫
+        R.rightDerivedFunctorPlusUnith.app (L.mapHomotopyCategoryPlus.obj M) ≫
+        R.rightDerivedFunctorPlus.map (L.mapDerivedCategoryPlusFactorsh.inv.app M) := by
+    rw [← Category.assoc, ← adj.derivedPlus_unit_app_fac, Category.assoc,
+      ← Functor.map_comp]
+    simp
+  rw [hu, Functor.map_comp, Functor.map_comp, Category.assoc, Category.assoc]
+  have hn := (Functor.rightDerivedFunctorPlusCompIso' R G e).hom.naturality
+    (L.mapDerivedCategoryPlusFactorsh.inv.app M)
+  simp only [Functor.comp_map] at hn
+  dsimp only [Functor.comp_obj] at hn
+  rw [hn]
+  have hG := G.rightDerivedFunctorPlusUnith.naturality
+    (adj.mapHomotopyCategoryPlus.unit.app M)
+  simp only [Functor.comp_map] at hG
+  rw [← reassoc_of% hG]
+  rw [← Functor.rightDerivedFunctorPlusCompUnit_app_assoc]
+  have hc := NatTrans.congr_app (Functor.rightDerivedFunctorPlusCompIso'_fac R G e)
+    (L.mapHomotopyCategoryPlus.obj M)
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app] at hc
+  rw [reassoc_of% hc]
+  rw [← Functor.map_comp_assoc, ← Functor.map_comp_assoc]
+  congr 2
+  apply (HomotopyCategory.Plus.ι _).map_injective
+  obtain ⟨M, hM⟩ := M
+  obtain ⟨A, rfl⟩ := HomotopyCategory.quotient_obj_surjective M
+  simp only [Functor.map_comp, NatTrans.ι_map_mapHomotopyCategoryPlus_app,
+    Functor.mapHomotopyCategoryPlusCompIso_refl_inv_app]
+  rw [(HomotopyCategory.Plus.ι _).map_id, Category.comp_id]
+  change _ = (G.mapHomotopyCategory _).map
+      ((HomotopyCategory.Plus.ι _).map
+        (adj.mapHomotopyCategoryPlus.unit.app ⟨_, hM⟩)) ≫ _
+  rw [Adjunction.ι_map_mapHomotopyCategoryPlus_unit_app]
+  change (HomotopyCategory.quotient _ _).map
+      ((NatTrans.mapHomologicalComplex
+        (G.leftUnitor.inv ≫ Functor.whiskerRight adj.unit G ≫
+          (Functor.associator L R G).hom ≫ Functor.whiskerLeft L e.hom) _).app A) ≫
+        𝟙 _ =
+      (G.mapHomotopyCategory _).map
+        ((adj.mapHomotopyCategory _).unit.app ((HomotopyCategory.quotient _ _).obj A)) ≫
+      (HomotopyCategory.quotient _ _).map
+        ((NatTrans.mapHomologicalComplex e.hom _).app
+          ((L.mapHomologicalComplex _).obj A))
+  rw [Category.comp_id, Adjunction.mapHomotopyCategory_unit_app_quotient,
+    Functor.mapHomotopyCategory_map, ← Functor.map_comp]
+  congr 1
+
+end AlgebraicGeometry.Etale

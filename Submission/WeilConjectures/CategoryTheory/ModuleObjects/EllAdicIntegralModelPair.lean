@@ -1,0 +1,93 @@
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import Submission.WeilConjectures.CategoryTheory.ModuleObjects.EllAdicIntegralModel
+
+set_option autoImplicit true
+set_option relaxedAutoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option maxSynthPendingDepth 3
+
+/-!
+# Integral models of pairs of bounded constructible `ℚ̄_ℓ`-complexes
+
+Bounded constructible `ℚ̄_ℓ`-complexes `K` on `X` and `K'` on `X'` (topologically noetherian
+schemes) have integral models over a common ring of integers `𝒪_E` of a finite subextension
+`E ⊆ ℚ̄_ℓ` (`ProEtale.exists_padicAlgCl_iso_integralModel_pair`): both descend to finite
+subextensions (blueprint `sk-thm-sfb-qlbar-two-colimit`), hence to a common one containing both,
+where they have integral models (blueprint `sk-lem-tf-rational-model`).
+`ProEtale.exists_derivedExtendScalars_iso_integralModel_pair` reads these isomorphisms in the
+ambient derived categories, with the derived extensions of scalars along the coefficient maps
+`ProEtale.coefficientMap`.
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory Limits
+
+open scoped CategoryTheory.Obj
+
+namespace AlgebraicGeometry.ProEtale
+
+open Scheme PadicAlgCl
+
+/-- **Integral models over a common `𝒪_E`**: bounded constructible `ℚ̄_ℓ`-complexes `K` on `X` and
+`K'` on `X'` (topologically noetherian schemes) are isomorphic to `ℚ̄_ℓ ⊗ᴸ_{𝒪_E} K₀` and
+`ℚ̄_ℓ ⊗ᴸ_{𝒪_E} K₀'` for one finite subextension `E` and bounded constructible `𝒪_E`-complexes
+`K₀`, `K₀'` (blueprints `sk-thm-sfb-qlbar-two-colimit` and `sk-lem-tf-rational-model`): both
+descend to finite subextensions, hence to a common one containing both, where they have
+integral models. -/
+lemma exists_padicAlgCl_iso_integralModel_pair (X X' : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
+    [TopologicalSpace.NoetherianSpace X] [TopologicalSpace.NoetherianSpace X']
+    (K : PadicAlgClConstructible X ℓ) (K' : PadicAlgClConstructible X' ℓ) :
+    ∃ (E : FiniteIntermediateField ℓ)
+      (K₀ : BoundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))
+      (K₀' : BoundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X')),
+      Nonempty ((constructibleToPadicAlgCl X ℓ E).obj
+        ((boundedConstructibleExtendScalars X ℓ E).obj K₀) ≅ K) ∧
+      Nonempty ((constructibleToPadicAlgCl X' ℓ E).obj
+        ((boundedConstructibleExtendScalars X' ℓ E).obj K₀') ≅ K') := by
+  obtain ⟨E₁, K₁, ⟨e₁⟩⟩ := constructibleCocone_essSurjObj X ℓ K
+  obtain ⟨E₂, K₂, ⟨e₂⟩⟩ := constructibleCocone_essSurjObj X' ℓ K'
+  obtain ⟨F, h₁, h₂⟩ := exists_ge_ge E₁ E₂
+  obtain ⟨K₀, ⟨e₀⟩⟩ := exists_boundedConstructibleExtendScalars_obj_iso X ℓ F
+    ((constructibleExtendScalars X ℓ h₁).obj K₁)
+  obtain ⟨K₀', ⟨e₀'⟩⟩ := exists_boundedConstructibleExtendScalars_obj_iso X' ℓ F
+    ((constructibleExtendScalars X' ℓ h₂).obj K₂)
+  exact ⟨F, K₀, K₀',
+    ⟨(constructibleToPadicAlgCl X ℓ F).mapIso e₀ ≪≫
+      (constructibleToPadicAlgClCompIso X ℓ h₁).app K₁ ≪≫ e₁⟩,
+    ⟨(constructibleToPadicAlgCl X' ℓ F).mapIso e₀' ≪≫
+      (constructibleToPadicAlgClCompIso X' ℓ h₂).app K₂ ≪≫ e₂⟩⟩
+
+set_option maxHeartbeats 1000000 in
+-- the extensions of scalars of `TwoColimit` are unfolded to the ambient derived functors
+/-- `exists_padicAlgCl_iso_integralModel_pair`, with the isomorphisms read in the ambient derived
+categories: `ℚ̄_ℓ ⊗ᴸ_E (E ⊗ᴸ_{𝒪_E} K₀) ≅ K` and `ℚ̄_ℓ ⊗ᴸ_E (E ⊗ᴸ_{𝒪_E} K₀') ≅ K'`. -/
+lemma exists_derivedExtendScalars_iso_integralModel_pair (X X' : Scheme.{u}) (ℓ : ℕ)
+    [Fact ℓ.Prime] [TopologicalSpace.NoetherianSpace X] [TopologicalSpace.NoetherianSpace X']
+    (K : PadicAlgClConstructible X ℓ) (K' : PadicAlgClConstructible X' ℓ) :
+    ∃ (E : FiniteIntermediateField ℓ)
+      (K₀ : BoundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))
+      (K₀' : BoundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X')),
+      Nonempty ((Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
+        X)).leftDerivedFunctor.obj
+        ((Mod.extendScalars (coefficientMap (padicIntegersRingObjToContinuousMapRingObj ℓ E)
+          X)).leftDerivedFunctor.obj
+          K₀.obj) ≅ K.obj) ∧
+      Nonempty ((Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
+        X')).leftDerivedFunctor.obj
+        ((Mod.extendScalars (coefficientMap (padicIntegersRingObjToContinuousMapRingObj ℓ E)
+          X')).leftDerivedFunctor.obj
+          K₀'.obj) ≅ K'.obj) := by
+  obtain ⟨E, K₀, K₀', ⟨e⟩, ⟨e'⟩⟩ := exists_padicAlgCl_iso_integralModel_pair X X' ℓ K K'
+  exact ⟨E, K₀, K₀', ⟨(boundedConstructible _).ι.mapIso e⟩,
+    ⟨(boundedConstructible _).ι.mapIso e'⟩⟩
+
+end AlgebraicGeometry.ProEtale

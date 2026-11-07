@@ -1,0 +1,192 @@
+/-
+Copyright (c) 2026 Bin Wu. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Bin Wu
+-/
+module
+
+public import Submission.WeilConjectures.AlgebraicGeometry.Integral.IntegralCriterionReductionsSupplement
+public import Submission.WeilConjectures.AlgebraicGeometry.Integral.IntegralStratifiedPerfectCharacterization
+public import Submission.WeilConjectures.AlgebraicGeometry.IntegralConstantCompletion
+public import Mathlib.AlgebraicGeometry.Sites.Proetale
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
+public import Submission.WeilConjectures.CategoryTheory.RingedSiteModules
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Submission.WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
+public import Submission.WeilConjectures.SixFunctors.Supporting.ConstantCompletionEquivalence
+public import Submission.WeilConjectures.NumberTheory.Padics.CoefficientExtensionFinite
+public import Submission.WeilConjectures.NumberTheory.Padics.CoefficientExtensionSupplement
+public import Mathlib.RingTheory.Ideal.Quotient.Index
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleCoefficientPullbackUniverses
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingInverseImage
+public import Submission.WeilConjectures.SmoothPurity.Completed.CompletedIntegralCoefficientsSupplement
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleIntegralCoefficientLimit
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleIntegralCoefficientData
+public import Mathlib.Topology.Category.Profinite.AsLimit
+public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtalePointPullback
+public import Submission.WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMapCondensedRingSupplement
+public import Submission.WeilConjectures.NumberTheory.Padics.IntegersProfiniteTower
+public import Mathlib.Algebra.Ring.Subring.Basic
+public import Mathlib.Algebra.Ring.Pi
+public import Mathlib.Topology.Homeomorph.Defs
+public import Mathlib.Topology.Connected.TotallyDisconnected
+public import Mathlib.Topology.Compactness.Compact
+public import Submission.WeilConjectures.NumberTheory.Padics.IntegersCosetBasis
+public import Mathlib.Topology.Bases
+public import Mathlib.Topology.MetricSpace.Pseudo.Defs
+public import Mathlib.Analysis.SpecificLimits.Basic
+public import Mathlib.Topology.LocallyConstant.Basic
+public import Mathlib.Topology.Homeomorph.Lemmas
+public import Mathlib.NumberTheory.Padics.ProperSpace
+public import Submission.WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvr
+public import Mathlib.Algebra.Order.AbsoluteValue.Basic
+public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
+public import Mathlib.NumberTheory.Padics.PadicNumbers
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Submission.WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrCore
+public import Mathlib.Analysis.Normed.Algebra.Ultra
+public import Mathlib.Analysis.Normed.Module.FiniteDimension
+public import Mathlib.Topology.Algebra.Valued.LocallyCompact
+public import Submission.WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrFactorization
+public import Submission.WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrFactorizationUnique
+public import Submission.WeilConjectures.Mathlib.RingTheory.OrderOfVanishing.Noetherian
+public import Submission.WeilConjectures.AlgebraicGeometry.CompletedIntegralConstantMapOfUniverses
+public import Submission.WeilConjectures.SmoothPurity.Completed.CompletedIntegralCoefficientGerm
+public import Submission.WeilConjectures.AlgebraicGeometry.ProfiniteTestObjectFunctor
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleDerivedCategory
+public import Mathlib.CategoryTheory.Limits.Shapes.Products
+public import Mathlib.Topology.Category.Profinite.CofilteredLimit
+public import Submission.WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
+public import Submission.WeilConjectures.AlgebraicGeometry.ProfiniteLocallyConstantAdjunction
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleFiniteConstantRepresentable
+public import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.CategoryTheory.FintypeCat
+public import Mathlib.CategoryTheory.Sites.LocallyBijective
+public import Submission.WeilConjectures.AlgebraicGeometry.CoproductCopiesMorphismsClopen
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Submission.WeilConjectures.CategoryTheory.SheafPullbackForgetComparison
+public import Mathlib.CategoryTheory.Sites.Pullback
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.CategoryTheory.Limits.Presheaf
+public import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleIntegralRingComparison
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleIntegralPointRingMap
+public import Submission.WeilConjectures.CategoryTheory.Sites.PushforwardMonoidal
+public import Submission.WeilConjectures.CategoryTheory.Sites.MonObj
+public import Mathlib.CategoryTheory.Sites.LocallySurjective
+public import Mathlib.CategoryTheory.Monoidal.Mon
+public import Submission.WeilConjectures.AlgebraicGeometry.AdicCompletion.DerivedCompletionSupplement
+public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import Mathlib.CategoryTheory.Limits.ExactFunctor
+public import Submission.WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
+public import Submission.WeilConjectures.Algebra.Homology.DerivedChangeOfRingsCochainModel
+public import Submission.WeilConjectures.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
+public import Submission.WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
+public import Submission.WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
+public import Submission.WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
+public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
+public import Mathlib.Algebra.Homology.BifunctorShift
+public import Mathlib.Algebra.Homology.QuasiIso
+public import Mathlib.CategoryTheory.Sites.Equivalence
+public import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
+public import Mathlib.CategoryTheory.Limits.EssentiallySmall
+public import Submission.WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
+public import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
+public import Mathlib.CategoryTheory.Adjunction.Additive
+public import Submission.WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+public import Submission.WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
+public import Submission.WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
+public import Submission.WeilConjectures.FromJoel.Algebra.Homology.ShortComplex.HomologicalComplex
+public import Submission.WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+public import Submission.WeilConjectures.Algebra.Homology.KFlatResolutionIndependentCoefficients
+public import Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import Submission.WeilConjectures.CategoryTheory.Abelian.Flat.Basic
+public import Submission.WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
+public import Mathlib.Algebra.Category.Grp.AB
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
+public import Mathlib.RingTheory.Flat.CategoryTheory
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+public import Mathlib.CategoryTheory.Limits.Final
+public import Submission.WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
+public import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
+public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+public import Submission.WeilConjectures.Algebra.Homology.SheafRingDerivedCoefficientAdjunction
+public import Submission.WeilConjectures.Algebra.Homology.Site.SiteTensorFunctorialitySupplement
+public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import Submission.WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
+public import Submission.WeilConjectures.Algebra.Homology.SheafRingCoefficientOrdinaryAdjunction
+public import Submission.WeilConjectures.Algebra.Homology.SheafRingDerivedHomComparison
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.DerivedAdjunctionCompatibility
+public import Mathlib.CategoryTheory.MorphismProperty.Comma
+public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
+public import Mathlib.CategoryTheory.Functor.Derived.RightDerived
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.EssentiallyConstantInd
+public import Mathlib.CategoryTheory.Filtered.Basic
+public import Mathlib.CategoryTheory.Limits.Cones
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.EssentiallyConstantPro
+public import Mathlib.Algebra.Homology.DerivedCategory.Fractions
+public import Mathlib.CategoryTheory.Functor.Derived.Adjunction
+public import Mathlib.CategoryTheory.Functor.KanExtension.Preserves
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedPointwiseKanBridge
+public import Submission.WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
+public import Mathlib.CategoryTheory.Functor.Derived.PointwiseRightDerived
+public import Mathlib.CategoryTheory.Adjunction.Restrict
+public import Mathlib.CategoryTheory.Adjunction.Unique
+public import Submission.WeilConjectures.AlgebraicGeometry.Adic.AdicLisseModuleSupplement
+public import Submission.WeilConjectures.AlgebraicGeometry.CompletedConstantReduction.CompletedConstantSheafReductionSupplement
+public import Submission.WeilConjectures.AlgebraicGeometry.Completed.Adic.CompletedAdicCoefficientDatumSupplement
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSupplement
+public import Submission.WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
+public import Submission.WeilConjectures.CategoryTheory.RingedSiteDerivedRestrictionUniverses
+public import Submission.WeilConjectures.CategoryTheory.RingedSiteDerivedRestriction
+public import Submission.WeilConjectures.Algebra.Homology.RhomIntoKInjectiveLocal
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.Perfect
+public import Submission.WeilConjectures.ConstructibleSheaf.Defs
+public import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
+public import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSiteComparisonSupplement
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import Submission.WeilConjectures.AlgebraicGeometry.AdicStratifiedPerfectData
+import all Submission.WeilConjectures.AlgebraicGeometry.Integral.IntegralCriterionReductionsSupplement
+public import Submission.WeilConjectures.AlgebraicGeometry.IntegralConstantModelRealization
+
+set_option autoImplicit true
+set_option relaxedAutoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option maxSynthPendingDepth 3
+
+/-! # Canonical integral constant-model realization
+
+Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3), and the
+projection-normalized integral coefficient comparison.
+(blueprint: def-sfb-integral-constant-model-realization).
+-/
+
+@[expose] public noncomputable section
+set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option synthInstance.maxSize 4096
+universe u
+open CategoryTheory CategoryTheory.Limits
+open scoped CategoryTheory.Obj
+attribute [local irreducible] AlgebraicGeometry.ProEtale.upperStarFromPoint
+
+namespace AlgebraicGeometry.ProEtale.IntegralConstantModel
+
+variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+  [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+
+end AlgebraicGeometry.ProEtale.IntegralConstantModel

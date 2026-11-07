@@ -1,0 +1,640 @@
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import Mathlib.AlgebraicGeometry.AlgClosed.Basic
+public import Mathlib.AlgebraicGeometry.Group.Affine
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.Integral
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.Normal
+public import Mathlib.Topology.KrullDimension
+public import Submission.WeilConjectures.AlgebraicGeometry.GroupScheme.Cartier
+public import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
+public import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
+public import Submission.WeilConjectures.Mathlib.Topology.JacobsonSpace
+public import Submission.WeilConjectures.Mathlib.Topology.Constructible
+public import Submission.WeilConjectures.Mathlib.Topology.KrullDimension
+public import Submission.WeilConjectures.Mathlib.Topology.NoetherianSpace
+
+set_option autoImplicit true
+set_option relaxedAutoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option maxSynthPendingDepth 3
+
+/-!
+# Geometry of group schemes over a field
+
+Let `G` be a group scheme over a field `k`: a group object in `Over (Spec k)`. This file states
+the basic facts about the underlying scheme of `G` used for algebraic groups: left translation by a
+rational point is an automorphism of `G`; a group scheme of finite type has finitely many connected
+components and its identity component `G°` is open; the image of a homomorphism of group schemes of
+finite type is closed; and a closed subgroup of a connected reduced group of the same dimension is
+the whole group.
+
+## Main definitions
+
+- `AlgebraicGeometry.GrpObj.onePoint`: the identity point of `G`, the image of the unit section.
+- `AlgebraicGeometry.GrpObj.mulLeft`: left translation by a rational point `g` of `G`.
+- `AlgebraicGeometry.GrpObj.mulRight`, `AlgebraicGeometry.GrpObj.conjBy`,
+  `AlgebraicGeometry.GrpObj.translate`: right translation, conjugation and the translate of a
+  closed subgroup scheme by a rational point.
+- `AlgebraicGeometry.GrpObj.mulLeftIso`, `AlgebraicGeometry.GrpObj.mulRightIso`: the
+  translations as automorphisms, with inverses the translations by `g⁻¹`.
+- `AlgebraicGeometry.GrpObj.identityComponentOpens`: the identity component `G°`, as an open
+  subset of `G`.
+- `AlgebraicGeometry.GrpObj.identityComponent`: the identity component `G°` as an open subgroup
+  scheme of `G`, with its inclusion `AlgebraicGeometry.GrpObj.identityComponentι : G° ⟶ G`, a
+  normal monomorphism of group objects.
+
+## Main results
+
+- `AlgebraicGeometry.GrpObj.irreducibleSpace_identityComponent`: `G°` is irreducible.
+- `AlgebraicGeometry.GrpObj.finiteIndex_range_identityComponentι`: `G°(k)` has finite index in
+  `G(k)`.
+- `AlgebraicGeometry.GrpObj.image_mulLeft_connectedComponent_onePoint`: the connected components
+  of `G` are the translates of `G°` by rational points.
+- `AlgebraicGeometry.finite_connectedComponents`: a group scheme of finite type over `k` has
+  finitely many connected components.
+- `AlgebraicGeometry.GrpObj.isReduced_of_charZero`: Cartier's theorem, a group scheme locally of
+  finite type over a field of characteristic zero is reduced.
+- `AlgebraicGeometry.isClosed_range_of_isMonHom`: the image of a homomorphism from a group scheme
+  of finite type to a group scheme locally of finite type over `k` is closed.
+- `AlgebraicGeometry.irreducibleSpace_of_connectedSpace`: a connected group scheme locally of
+  finite type over `k` is irreducible.
+- `AlgebraicGeometry.isIso_left_of_topologicalKrullDim_eq`: a closed subgroup of a connected reduced
+  group of the same dimension is the whole group.
+
+## Blueprint
+
+- `sk-p-geometry`: the identity component, images of homomorphisms and the dimension criterion.
+- `def-wf-algebraic-components`: the identity component `GrpObj.identityComponent`.
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory MonoidalCategory CartesianMonoidalCategory
+open scoped MonObj
+
+namespace AlgebraicGeometry
+
+variable {k : Type u} [Field k]
+
+/-- The identity point of a group scheme `G` over a field `k`: the image of the unique point of
+`Spec k` under the unit section. (blueprint: `sk-p-geometry`) -/
+noncomputable def GrpObj.onePoint (G : Over (Spec (.of k))) [GrpObj G] : G.left :=
+  η[G].left.base (show Spec (.of k) from ⟨⊥, Ideal.isPrime_bot⟩)
+
+/-- Left translation `x ↦ g * x` on a group scheme `G` over `k` by a rational point `g` of `G`.
+(blueprint: `sk-p-geometry`) -/
+noncomputable def GrpObj.mulLeft (G : Over (Spec (.of k))) [GrpObj G]
+    (g : 𝟙_ (Over (Spec (.of k))) ⟶ G) : G ⟶ G :=
+  lift (toUnit G ≫ g) (𝟙 G) ≫ μ[G]
+
+/-- Left translation by a rational point is an automorphism of the underlying scheme.
+(blueprint: `sk-p-geometry`) -/
+theorem GrpObj.isIso_mulLeft_left (G : Over (Spec (.of k))) [GrpObj G]
+    (g : 𝟙_ (Over (Spec (.of k))) ⟶ G) : IsIso (GrpObj.mulLeft G g).left := by
+  have hmul (g : 𝟙_ (Over (Spec (.of k))) ⟶ G) : GrpObj.mulLeft G g = (toUnit G ≫ g) * 𝟙 G :=
+    rfl
+  have hcomp (g h : 𝟙_ (Over (Spec (.of k))) ⟶ G) :
+      GrpObj.mulLeft G g ≫ GrpObj.mulLeft G h = GrpObj.mulLeft G (h * g) := by
+    rw [hmul, hmul, hmul, MonObj.comp_mul, ← Category.assoc, toUnit_unique (_ ≫ toUnit G),
+      Category.comp_id, ← mul_assoc, MonObj.comp_mul]
+  have hone : GrpObj.mulLeft G 1 = 𝟙 G := by
+    rw [hmul, MonObj.comp_one, one_mul]
+  have : IsIso (GrpObj.mulLeft G g) :=
+    ⟨GrpObj.mulLeft G g⁻¹, by rw [hcomp, inv_mul_cancel, hone],
+      by rw [hcomp, mul_inv_cancel, hone]⟩
+  exact inferInstanceAs (IsIso ((Over.forget _).map (GrpObj.mulLeft G g)))
+
+section Translation
+
+variable (G : Over (Spec (.of k))) [GrpObj G]
+
+/-- In the group `G ⟶ G` of endomorphisms, left translation by `g` is `g * id`. -/
+lemma GrpObj.mulLeft_eq_mul (g : 𝟙_ (Over (Spec (.of k))) ⟶ G) :
+    GrpObj.mulLeft G g = (toUnit G ≫ g) * 𝟙 G := rfl
+
+/-- Right translation `x ↦ x * g` on a group scheme `G` over `k` by a rational point `g`.
+(blueprint: `def-sc-group-scheme-translate`) -/
+noncomputable def GrpObj.mulRight (g : 𝟙_ (Over (Spec (.of k))) ⟶ G) : G ⟶ G :=
+  lift (𝟙 G) (toUnit G ≫ g) ≫ μ[G]
+
+lemma GrpObj.mulRight_eq_mul (g : 𝟙_ (Over (Spec (.of k))) ⟶ G) :
+    GrpObj.mulRight G g = 𝟙 G * (toUnit G ≫ g) := rfl
+
+lemma GrpObj.mulLeft_comp_mulLeft (g h : 𝟙_ (Over (Spec (.of k))) ⟶ G) :
+    GrpObj.mulLeft G g ≫ GrpObj.mulLeft G h = GrpObj.mulLeft G (h * g) := by
+  rw [mulLeft_eq_mul, mulLeft_eq_mul, mulLeft_eq_mul, MonObj.comp_mul, ← Category.assoc,
+    toUnit_unique (_ ≫ toUnit G), Category.comp_id, ← mul_assoc, MonObj.comp_mul]
+
+lemma GrpObj.mulRight_comp_mulRight (g h : 𝟙_ (Over (Spec (.of k))) ⟶ G) :
+    GrpObj.mulRight G g ≫ GrpObj.mulRight G h = GrpObj.mulRight G (g * h) := by
+  rw [mulRight_eq_mul, mulRight_eq_mul, mulRight_eq_mul, MonObj.comp_mul, ← Category.assoc,
+    toUnit_unique (_ ≫ toUnit G), Category.comp_id, mul_assoc, MonObj.comp_mul]
+
+lemma GrpObj.mulLeft_one : GrpObj.mulLeft G 1 = 𝟙 G := by
+  rw [mulLeft_eq_mul, MonObj.comp_one, one_mul]
+
+lemma GrpObj.mulRight_one : GrpObj.mulRight G 1 = 𝟙 G := by
+  rw [mulRight_eq_mul, MonObj.comp_one, mul_one]
+
+/-- Left translation by `g` as an automorphism of `G`, with inverse the left translation by
+`g⁻¹`. (blueprint: `lem-sc-translation-automorphism`) -/
+@[simps]
+noncomputable def GrpObj.mulLeftIso (g : 𝟙_ (Over (Spec (.of k))) ⟶ G) : G ≅ G where
+  hom := GrpObj.mulLeft G g
+  inv := GrpObj.mulLeft G g⁻¹
+  hom_inv_id := by rw [mulLeft_comp_mulLeft, inv_mul_cancel, mulLeft_one]
+  inv_hom_id := by rw [mulLeft_comp_mulLeft, mul_inv_cancel, mulLeft_one]
+
+/-- Right translation by `g` as an automorphism of `G`, with inverse the right translation by
+`g⁻¹`. (blueprint: `lem-sc-translation-automorphism`) -/
+@[simps]
+noncomputable def GrpObj.mulRightIso (g : 𝟙_ (Over (Spec (.of k))) ⟶ G) : G ≅ G where
+  hom := GrpObj.mulRight G g
+  inv := GrpObj.mulRight G g⁻¹
+  hom_inv_id := by rw [mulRight_comp_mulRight, mul_inv_cancel, mulRight_one]
+  inv_hom_id := by rw [mulRight_comp_mulRight, inv_mul_cancel, mulRight_one]
+
+/-- Conjugation `c_g = L_g ∘ R_{g⁻¹}`, `x ↦ g * x * g⁻¹`, by a rational point `g`.
+(blueprint: `def-sc-group-scheme-translate`) -/
+noncomputable def GrpObj.conjBy (g : 𝟙_ (Over (Spec (.of k))) ⟶ G) : G ⟶ G :=
+  GrpObj.mulRight G g⁻¹ ≫ GrpObj.mulLeft G g
+
+lemma GrpObj.comp_conjBy {X : Over (Spec (.of k))} (f : X ⟶ G)
+    (g : 𝟙_ (Over (Spec (.of k))) ⟶ G) :
+    f ≫ GrpObj.conjBy G g = (toUnit X ≫ g) * f * (toUnit X ≫ g⁻¹) := by
+  rw [conjBy, mulRight_eq_mul, mulLeft_eq_mul, ← Category.assoc, MonObj.comp_mul,
+    MonObj.comp_mul, ← Category.assoc, ← Category.assoc, toUnit_unique (_ ≫ toUnit G),
+    toUnit_unique (_ ≫ toUnit _), Category.comp_id, Category.comp_id, mul_assoc]
+
+/-- Conjugation by a rational point is a homomorphism of group schemes:
+`c_g ∘ m = m ∘ (c_g × c_g)` and `c_g ∘ e = e`. (blueprint: `lem-sc-translation-automorphism`) -/
+instance GrpObj.isMonHom_conjBy (g : 𝟙_ (Over (Spec (.of k))) ⟶ G) :
+    IsMonHom (GrpObj.conjBy G g) where
+  one_hom := by
+    have h1 : (η[G] : 𝟙_ _ ⟶ G) = 1 := by rw [Hom.one_def, toUnit_unit, Category.id_comp]
+    rw [comp_conjBy, toUnit_unit, Category.id_comp, Category.id_comp, h1, mul_one,
+      mul_inv_cancel]
+  mul_hom := by
+    have hμ : μ[G] = fst G G * snd G G := by rw [Hom.mul_def, lift_fst_snd, Category.id_comp]
+    have hinv : toUnit (G ⊗ G) ≫ g⁻¹ = (toUnit (G ⊗ G) ≫ g)⁻¹ := by
+      rw [Hom.inv_def, Hom.inv_def, Category.assoc]
+    rw [comp_conjBy, hμ, MonObj.comp_mul, tensorHom_fst, tensorHom_snd, comp_conjBy,
+      comp_conjBy, hinv]
+    group
+
+/-- The translate `gZ ⊆ G` of a closed subgroup scheme `j : Z ⟶ G` by a rational point `g`,
+recorded as the closed immersion `L_g ∘ j : Z ⟶ G` whose image it is.
+(blueprint: `def-sc-group-scheme-translate`) -/
+noncomputable def GrpObj.translate {Z : Over (Spec (.of k))} (j : Z ⟶ G)
+    (g : 𝟙_ (Over (Spec (.of k))) ⟶ G) : Z ⟶ G :=
+  j ≫ GrpObj.mulLeft G g
+
+
+end Translation
+
+/-- A group scheme of finite type over a field has finitely many connected components.
+(blueprint: `sk-p-geometry`) -/
+theorem finite_connectedComponents (G : Over (Spec (.of k))) [GrpObj G]
+    [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] :
+    Finite (_root_.ConnectedComponents G.left) :=
+  have := isNoetherian_left G
+  inferInstance
+
+/-- The connected component of the identity of a group scheme of finite type over a field is open.
+(blueprint: `sk-p-geometry`) -/
+theorem isOpen_connectedComponent_onePoint (G : Over (Spec (.of k))) [GrpObj G]
+    [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] :
+    IsOpen (connectedComponent (GrpObj.onePoint G)) :=
+  have := isNoetherian_left G
+  TopologicalSpace.NoetherianSpace.isOpen_connectedComponent _
+
+/-- The identity component `G°` of a group scheme `G` of finite type over a field, as an open
+subset of `G`: the connected component of the identity point. (blueprint: `sk-p-geometry`) -/
+noncomputable def GrpObj.identityComponentOpens (G : Over (Spec (.of k))) [GrpObj G]
+    [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] : G.left.Opens :=
+  ⟨connectedComponent (GrpObj.onePoint G), isOpen_connectedComponent_onePoint G⟩
+
+section AlgClosed
+
+variable {K : Type u} [Field K] [IsAlgClosed K]
+
+/-- Over an algebraically closed field `K`, the `K`-rational point of a group scheme `G` locally of
+finite type through a closed point `x`, as a section `𝟙_ ⟶ G`. -/
+noncomputable def GrpObj.sectionOfIsClosed (G : Over (Spec (.of K))) [LocallyOfFiniteType G.hom]
+    (x : G.left) (hx : IsClosed {x}) : 𝟙_ (Over (Spec (.of K))) ⟶ G :=
+  Over.homMk (pointOfClosedPoint G.hom x hx) (pointOfClosedPoint_comp G.hom x hx)
+
+theorem GrpObj.sectionOfIsClosed_left_apply (G : Over (Spec (.of K))) [LocallyOfFiniteType G.hom]
+    (x : G.left) (hx : IsClosed {x}) (a : Spec (.of K)) :
+    (GrpObj.sectionOfIsClosed G x hx).left a = x :=
+  pointOfClosedPoint_apply G.hom x hx a
+
+/-- Over an algebraically closed field, the left translations of a group scheme locally of finite
+type act transitively on its closed points. -/
+theorem GrpObj.exists_homeomorph_apply_eq (G : Over (Spec (.of K))) [GrpObj G]
+    [LocallyOfFiniteType G.hom] {x y : G.left} (hx : IsClosed {x}) (hy : IsClosed {y}) :
+    ∃ φ : G.left ≃ₜ G.left, φ x = y := by
+  set sx := GrpObj.sectionOfIsClosed G x hx
+  set sy := GrpObj.sectionOfIsClosed G y hy
+  have := GrpObj.isIso_mulLeft_left G (sy * sx⁻¹)
+  refine ⟨(GrpObj.mulLeft G (sy * sx⁻¹)).left.homeomorph, ?_⟩
+  have hcomp : sx ≫ GrpObj.mulLeft G (sy * sx⁻¹) = sy := by
+    change sx ≫ ((toUnit G ≫ (sy * sx⁻¹)) * 𝟙 G) = sy
+    rw [MonObj.comp_mul, ← Category.assoc, toUnit_unique (sx ≫ toUnit G) (𝟙 _),
+      Category.id_comp, Category.comp_id, inv_mul_cancel_right]
+  obtain ⟨a⟩ : Nonempty (Spec (.of K)) := inferInstance
+  rw [Scheme.Hom.homeomorph_apply, ← GrpObj.sectionOfIsClosed_left_apply G x hx a,
+    ← Scheme.Hom.comp_apply, ← Over.comp_left, hcomp, GrpObj.sectionOfIsClosed_left_apply]
+
+/-- **A connected group scheme over an algebraically closed field is irreducible.** Some closed
+point lies in a single irreducible component; the translations act transitively on the closed
+points, so every closed point, hence every point, lies in a single irreducible component. Each
+point then has an irreducible open neighbourhood, and a connected space with this property is
+irreducible. -/
+theorem irreducibleSpace_of_connectedSpace_of_isAlgClosed (G : Over (Spec (.of K))) [GrpObj G]
+    [LocallyOfFiniteType G.hom] [ConnectedSpace G.left] : IrreducibleSpace G.left := by
+  have := LocallyOfFiniteType.isLocallyNoetherian G.hom
+  have : JacobsonSpace G.left := LocallyOfFiniteType.jacobsonSpace G.hom
+  let P (x : G.left) : Prop := ∀ Z₁ ∈ irreducibleComponents G.left,
+    ∀ Z₂ ∈ irreducibleComponents G.left, x ∈ Z₁ → x ∈ Z₂ → Z₁ = Z₂
+  -- some closed point lies in a single irreducible component
+  have hA : ∃ p ∈ closedPoints G.left, P p := by
+    obtain ⟨x₀⟩ := ‹ConnectedSpace G.left›.toNonempty
+    obtain ⟨_, ⟨V, hV, rfl⟩, hxV, -⟩ :=
+      G.left.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ x₀) isOpen_univ
+    have := IsLocallyNoetherian.component_noetherian ⟨V, hV⟩
+    have : TopologicalSpace.NoetherianSpace V := noetherianSpace_of_isAffineOpen V hV
+    have : Nonempty V := ⟨⟨x₀, hxV⟩⟩
+    obtain ⟨U, hU, hUne, hUuniq⟩ :=
+      TopologicalSpace.NoetherianSpace.exists_isOpen_nonempty_forall_eq (α := V)
+    have hU' : IsOpen (((↑) : V → G.left) '' U) := V.2.isOpenMap_subtype_val U hU
+    obtain ⟨p, ⟨⟨p, hpV⟩, hpU, rfl⟩, hp⟩ :=
+      nonempty_inter_closedPoints (hUne.image _) hU'.isLocallyClosed
+    refine ⟨_, hp, fun Z₁ hZ₁ Z₂ hZ₂ h₁ h₂ ↦ ?_⟩
+    have hV' := V.2.isOpenEmbedding_subtypeVal
+    have key := hUuniq ⟨p, hpV⟩ hpU _ (preimage_mem_irreducibleComponents hZ₁ hV'
+      ⟨p, h₁, ⟨p, hpV⟩, rfl⟩) _ (preimage_mem_irreducibleComponents hZ₂ hV'
+      ⟨p, h₂, ⟨p, hpV⟩, rfl⟩) h₁ h₂
+    have hcl (Z : Set G.left) (hZ : Z ∈ irreducibleComponents G.left) (hp : p ∈ Z) :
+        Z = closure (Z ∩ V) := by
+      refine (subset_closure_inter_of_isPreirreducible_of_isOpen hZ.1.2 V.2 ⟨p, hp, hpV⟩).antisymm
+        (closure_minimal Set.inter_subset_left (isClosed_of_mem_irreducibleComponents Z hZ))
+    have hZV : Z₁ ∩ V = Z₂ ∩ V := Set.ext fun y ↦
+      ⟨fun ⟨hy, hyV⟩ ↦ ⟨(Set.ext_iff.1 key ⟨y, hyV⟩).1 hy, hyV⟩,
+        fun ⟨hy, hyV⟩ ↦ ⟨(Set.ext_iff.1 key ⟨y, hyV⟩).2 hy, hyV⟩⟩
+    calc Z₁ = closure (Z₁ ∩ V) := hcl Z₁ hZ₁ h₁
+      _ = closure (Z₂ ∩ V) := by rw [hZV]
+      _ = Z₂ := (hcl Z₂ hZ₂ h₂).symm
+  -- every closed point lies in a single irreducible component
+  have hB (q : G.left) (hq : q ∈ closedPoints G.left) : P q := by
+    obtain ⟨p, hp, hP⟩ := hA
+    obtain ⟨φ, hφ⟩ := GrpObj.exists_homeomorph_apply_eq G hq hp
+    intro Z₁ hZ₁ Z₂ hZ₂ h₁ h₂
+    exact φ.injective.image_injective (hP _ (φ.image_mem_irreducibleComponents hZ₁) _
+      (φ.image_mem_irreducibleComponents hZ₂) ⟨q, h₁, hφ⟩ ⟨q, h₂, hφ⟩)
+  -- every point lies in a single irreducible component
+  have hC (x : G.left) : P x := by
+    obtain ⟨q, hqx, hq⟩ := nonempty_inter_closedPoints (Z := closure {x})
+      ⟨x, subset_closure rfl⟩ isClosed_closure.isLocallyClosed
+    intro Z₁ hZ₁ Z₂ hZ₂ h₁ h₂
+    exact hB q hq Z₁ hZ₁ Z₂ hZ₂
+      (closure_minimal (Set.singleton_subset_iff.2 h₁) (isClosed_of_mem_irreducibleComponents _ hZ₁)
+        hqx)
+      (closure_minimal (Set.singleton_subset_iff.2 h₂) (isClosed_of_mem_irreducibleComponents _ hZ₂)
+        hqx)
+  refine irreducibleSpace_of_forall_exists_isPreirreducible fun x ↦ ?_
+  obtain ⟨_, ⟨V, hV, rfl⟩, hxV, -⟩ :=
+    G.left.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ x) isOpen_univ
+  have := IsLocallyNoetherian.component_noetherian ⟨V, hV⟩
+  have hVN : TopologicalSpace.NoetherianSpace V := noetherianSpace_of_isAffineOpen V hV
+  have hV' := V.2.isOpenEmbedding_subtypeVal
+  obtain ⟨U, hU, hxU, hUirr⟩ :=
+    @TopologicalSpace.NoetherianSpace.exists_isOpen_isPreirreducible V _ hVN (⟨x, hxV⟩ : V)
+      fun W₁ hW₁ W₂ hW₂ hx₁ hx₂ ↦ by
+        have hW (W : Set V) (hW : W ∈ irreducibleComponents V) (hxW : ⟨x, hxV⟩ ∈ W) :
+            ∃ Z ∈ irreducibleComponents G.left, x ∈ Z ∧ W = ((↑) : V → G.left) ⁻¹' Z := by
+          obtain ⟨Z, hZ, hWZ⟩ := exists_mem_irreducibleComponents_subset_of_isIrreducible _
+            (hW.1.image _ continuous_subtype_val.continuousOn).closure
+          have hsub : W ⊆ ((↑) : V → G.left) ⁻¹' Z := fun w hw ↦ hWZ (subset_closure ⟨w, hw, rfl⟩)
+          have hxZ : x ∈ Z := hsub hxW
+          have hpre := preimage_mem_irreducibleComponents hZ hV' ⟨x, hxZ, ⟨x, hxV⟩, rfl⟩
+          exact ⟨Z, hZ, hxZ, hsub.antisymm (hW.2 hpre.1 hsub)⟩
+        obtain ⟨Z₁, hZ₁, hxZ₁, rfl⟩ := hW W₁ hW₁ hx₁
+        obtain ⟨Z₂, hZ₂, hxZ₂, rfl⟩ := hW W₂ hW₂ hx₂
+        rw [hC x Z₁ hZ₁ Z₂ hZ₂ hxZ₁ hxZ₂]
+  exact ⟨((↑) : V → G.left) '' U, V.2.isOpenMap_subtype_val U hU, ⟨_, hxU, rfl⟩,
+    hUirr.image _ continuous_subtype_val.continuousOn⟩
+
+end AlgClosed
+
+/-- A connected group scheme locally of finite type over a field is irreducible (SGA 3, VI_A,
+Proposition 2.4).
+
+Having the rational point `e`, the connected scheme `G` is geometrically connected
+(`GeometricallyConnected.of_connectedSpace_of_section`), so its base change to an algebraic
+closure is connected, hence irreducible (`irreducibleSpace_of_connectedSpace_of_isAlgClosed`);
+`G` is the image of this base change. (blueprint: `sk-p-geometry`) -/
+theorem irreducibleSpace_of_connectedSpace (G : Over (Spec (.of k))) [GrpObj G]
+    [LocallyOfFiniteType G.hom] [ConnectedSpace G.left] : IrreducibleSpace G.left := by
+  let g : Spec (.of (AlgebraicClosure k)) ⟶ Spec (.of k) :=
+    Spec.map (CommRingCat.ofHom (algebraMap k (AlgebraicClosure k)))
+  let : GrpObj (Over.mk G.hom) := inferInstanceAs (GrpObj G)
+  let : GrpObj (Over.mk (Limits.pullback.snd G.hom g)) := Over.grpObjMkPullbackSnd
+  have hG : GeometricallyConnected G.hom :=
+    GeometricallyConnected.of_connectedSpace_of_section G.hom η[G].left (by simp)
+  have : ConnectedSpace (Over.mk (Limits.pullback.snd G.hom g)).left :=
+    hG.geometrically_connectedSpace g _ _ (IsPullback.of_hasPullback G.hom g)
+  have : LocallyOfFiniteType (Over.mk (Limits.pullback.snd G.hom g)).hom :=
+    inferInstanceAs (LocallyOfFiniteType (Limits.pullback.snd G.hom g))
+  have : IrreducibleSpace ↥(Limits.pullback G.hom g) :=
+    irreducibleSpace_of_connectedSpace_of_isAlgClosed (Over.mk (Limits.pullback.snd G.hom g))
+  have : Surjective g := ⟨fun x ↦ ⟨IsLocalRing.closedPoint _, Subsingleton.elim _ _⟩⟩
+  have hsurj : Function.Surjective (Limits.pullback.fst G.hom g) :=
+    (MorphismProperty.pullback_fst (P := @Surjective) G.hom g this).surj
+  have := (IrreducibleSpace.isIrreducible_univ ↥(Limits.pullback G.hom g)).image _
+    (Limits.pullback.fst G.hom g).continuous.continuousOn
+  rw [Set.image_univ, hsurj.range_eq] at this
+  exact (irreducibleSpace_def _).2 this
+
+/-- Let `X` and `Y` be schemes over a field `k` with `Y` geometrically connected, and let `y` be a
+rational point of `Y`. A morphism `f : X ⊗ Y ⟶ Z` which maps the slice `X × {y}` into a clopen
+subset `C` of `Z` maps all of `X ⊗ Y` into `C`: the fibres of the projection `X ⊗ Y ⟶ X` are
+connected and each of them meets the slice. -/
+theorem range_subset_of_isClopen_of_range_lift_subset {X Y Z : Over (Spec (.of k))}
+    [GeometricallyConnected Y.hom] (f : X ⊗ Y ⟶ Z) (y : 𝟙_ (Over (Spec (.of k))) ⟶ Y)
+    {C : Set Z.left} (hC : IsClopen C)
+    (h : Set.range (lift (𝟙 X) (toUnit X ≫ y) ≫ f).left.base ⊆ C) :
+    Set.range f.left.base ⊆ C := by
+  rintro _ ⟨z, rfl⟩
+  have : GeometricallyConnected (fst X Y).left :=
+    inferInstanceAs (GeometricallyConnected (Limits.pullback.fst X.hom Y.hom))
+  have hs : (fst X Y).left ((lift (𝟙 X) (toUnit X ≫ y)).left ((fst X Y).left z)) =
+      (fst X Y).left z := by
+    rw [← Scheme.Hom.comp_apply, ← Over.comp_left, lift_fst, Over.id_left]
+    rfl
+  have hsub : (fst X Y).left ⁻¹' {(fst X Y).left z} ⊆ f.left ⁻¹' C :=
+    ((fst X Y).left.isConnected_preimage_singleton _).isPreconnected.subset_isClopen
+      (hC.preimage f.left.continuous) ⟨_, hs, h ⟨(fst X Y).left z, by
+        rw [Over.comp_left, Scheme.Hom.comp_apply]⟩⟩
+  exact hsub rfl
+
+section IdentityComponent
+
+variable (G : Over (Spec (.of k))) [GrpObj G] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom]
+
+/-- The identity component `G°` of a group scheme `G` of finite type over a field, as a scheme
+over `k`: the open subscheme of `G` on the connected component of the identity point. The set
+`π₀(G)` of connected components is `ConnectedComponents G.left`.
+(blueprint: `sk-p-geometry`, `def-wf-algebraic-components`) -/
+noncomputable abbrev GrpObj.identityComponent : Over (Spec (.of k)) :=
+  Over.mk ((GrpObj.identityComponentOpens G).ι ≫ G.hom)
+
+/-- The open immersion `G° ⟶ G` of the identity component into `G`, as a morphism over `k`.
+(blueprint: `sk-p-geometry`) -/
+noncomputable def GrpObj.identityComponentι : GrpObj.identityComponent G ⟶ G :=
+  Over.homMk (GrpObj.identityComponentOpens G).ι
+
+instance : IsOpenImmersion (GrpObj.identityComponentι G).left :=
+  inferInstanceAs (IsOpenImmersion (GrpObj.identityComponentOpens G).ι)
+
+instance : Mono (GrpObj.identityComponentι G) :=
+  Over.mono_of_mono_left _
+
+/-- The image of `G° ⟶ G` is the connected component of the identity point. -/
+theorem GrpObj.range_identityComponentι :
+    Set.range (GrpObj.identityComponentι G).left.base =
+      connectedComponent (GrpObj.onePoint G) :=
+  Scheme.Opens.range_ι _
+
+/-- A morphism `X ⟶ G` over `k` whose image lies in the connected component of the identity
+factors (uniquely, as `G° ⟶ G` is a monomorphism) through the open subscheme `G°`. -/
+noncomputable def GrpObj.identityComponentLift {X : Over (Spec (.of k))} (f : X ⟶ G)
+    (hf : Set.range f.left.base ⊆ connectedComponent (GrpObj.onePoint G)) :
+    X ⟶ GrpObj.identityComponent G :=
+  Over.homMk (IsOpenImmersion.lift (GrpObj.identityComponentOpens G).ι f.left
+      (hf.trans (Scheme.Opens.range_ι (GrpObj.identityComponentOpens G)).symm.subset))
+    ((IsOpenImmersion.lift_fac_assoc (GrpObj.identityComponentOpens G).ι f.left _ _).trans
+      (Over.w f))
+
+@[reassoc (attr := simp)]
+theorem GrpObj.identityComponentLift_comp_identityComponentι {X : Over (Spec (.of k))}
+    (f : X ⟶ G) (hf : Set.range f.left.base ⊆ connectedComponent (GrpObj.onePoint G)) :
+    GrpObj.identityComponentLift G f hf ≫ GrpObj.identityComponentι G = f := by
+  apply Over.OverMorphism.ext
+  exact IsOpenImmersion.lift_fac (GrpObj.identityComponentOpens G).ι f.left _
+
+omit [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] in
+/-- The unit section of `G` lands in the identity component. -/
+theorem GrpObj.range_one_subset_connectedComponent :
+    Set.range η[G].left.base ⊆ connectedComponent (GrpObj.onePoint G) := by
+  rintro _ ⟨x, rfl⟩
+  obtain rfl : x = (⟨⊥, Ideal.isPrime_bot⟩ : PrimeSpectrum k) :=
+    Subsingleton.elim (α := PrimeSpectrum k) _ _
+  exact mem_connectedComponent
+
+/-- The unit section of `G`, as a rational point of the identity component `G°`. -/
+noncomputable def GrpObj.identityComponentOne :
+    𝟙_ (Over (Spec (.of k))) ⟶ GrpObj.identityComponent G :=
+  GrpObj.identityComponentLift G η[G] (GrpObj.range_one_subset_connectedComponent G)
+
+@[reassoc (attr := simp)]
+theorem GrpObj.identityComponentOne_comp_identityComponentι :
+    GrpObj.identityComponentOne G ≫ GrpObj.identityComponentι G = η[G] :=
+  GrpObj.identityComponentLift_comp_identityComponentι G _ _
+
+instance : ConnectedSpace (GrpObj.identityComponent G).left :=
+  isConnected_iff_connectedSpace.mp isConnected_connectedComponent
+
+/-- The identity component is geometrically connected: it is connected and has a rational point. -/
+instance : GeometricallyConnected (GrpObj.identityComponent G).hom :=
+  GeometricallyConnected.of_connectedSpace_of_section _ (GrpObj.identityComponentOne G).left
+    (Over.w (GrpObj.identityComponentOne G))
+
+theorem GrpObj.isClopen_connectedComponent_onePoint :
+    IsClopen (connectedComponent (GrpObj.onePoint G)) :=
+  ⟨isClosed_connectedComponent, isOpen_connectedComponent_onePoint G⟩
+
+/-- Multiplication `G° × G° ⟶ G` lands in the identity component: the product of two connected
+schemes with rational points is connected, and its image contains the identity.
+(blueprint: `sk-p-geometry`) -/
+theorem GrpObj.range_mul_subset_connectedComponent :
+    Set.range ((GrpObj.identityComponentι G ⊗ₘ GrpObj.identityComponentι G) ≫ μ[G]).left.base ⊆
+      connectedComponent (GrpObj.onePoint G) := by
+  refine range_subset_of_isClopen_of_range_lift_subset _ (GrpObj.identityComponentOne G)
+    (GrpObj.isClopen_connectedComponent_onePoint G) ?_
+  have : lift (𝟙 _) (toUnit _ ≫ GrpObj.identityComponentOne G) ≫
+      (GrpObj.identityComponentι G ⊗ₘ GrpObj.identityComponentι G) ≫ μ[G] =
+        GrpObj.identityComponentι G := by
+    rw [lift_map_assoc, Category.assoc, GrpObj.identityComponentOne_comp_identityComponentι,
+      Category.id_comp, ← Hom.mul_def, ← Hom.one_def, mul_one]
+  rw [this, GrpObj.range_identityComponentι]
+
+/-- Inversion maps the identity component into itself. (blueprint: `sk-p-geometry`) -/
+theorem GrpObj.range_inv_subset_connectedComponent :
+    Set.range (GrpObj.identityComponentι G ≫ ι[G]).left.base ⊆
+      connectedComponent (GrpObj.onePoint G) := by
+  refine (isConnected_range (GrpObj.identityComponentι G ≫ ι[G]).left.continuous).isPreconnected
+    |>.subset_connectedComponent ⟨(GrpObj.identityComponentOne G).left
+      (show Spec (.of k) from ⟨⊥, Ideal.isPrime_bot⟩), ?_⟩
+  rw [← Scheme.Hom.comp_apply, ← Over.comp_left,
+    GrpObj.identityComponentOne_comp_identityComponentι_assoc, GrpObj.one_inv]
+  rfl
+
+/-- Conjugation `G × G° ⟶ G`, `(g, h) ↦ g * h * g⁻¹`, lands in the identity component: each
+fibre `g G° g⁻¹` is connected and contains the identity. (blueprint: `sk-p-geometry`) -/
+theorem GrpObj.range_conj_subset_connectedComponent :
+    Set.range ((G ◁ GrpObj.identityComponentι G) ≫ GrpObj.conj G).left.base ⊆
+      connectedComponent (GrpObj.onePoint G) := by
+  refine range_subset_of_isClopen_of_range_lift_subset _ (GrpObj.identityComponentOne G)
+    (GrpObj.isClopen_connectedComponent_onePoint G) ?_
+  have : lift (𝟙 _) (toUnit _ ≫ GrpObj.identityComponentOne G) ≫
+      (G ◁ GrpObj.identityComponentι G) ≫ GrpObj.conj G = toUnit G ≫ η[G] := by
+    rw [lift_whiskerLeft_assoc, Category.assoc,
+      GrpObj.identityComponentOne_comp_identityComponentι, GrpObj.lift_conj_eq_mul_mul_inv,
+      ← Hom.one_def, mul_one, mul_inv_cancel, Hom.one_def]
+  rw [this]
+  rintro _ ⟨x, rfl⟩
+  rw [Over.comp_left, Scheme.Hom.comp_apply]
+  exact GrpObj.range_one_subset_connectedComponent G ⟨_, rfl⟩
+
+/-- The identity component `G°` is an open subgroup scheme of `G`: the unit, multiplication and
+inversion of `G` restrict to `G°`, and the group axioms follow from those of `G` since `G° ⟶ G`
+is a monomorphism. (blueprint: `sk-p-geometry`) -/
+noncomputable instance : GrpObj (GrpObj.identityComponent G) where
+  one := GrpObj.identityComponentLift G η[G] (GrpObj.range_one_subset_connectedComponent G)
+  mul := GrpObj.identityComponentLift G
+    ((GrpObj.identityComponentι G ⊗ₘ GrpObj.identityComponentι G) ≫ μ[G])
+    (GrpObj.range_mul_subset_connectedComponent G)
+  inv := GrpObj.identityComponentLift G (GrpObj.identityComponentι G ≫ ι[G])
+    (GrpObj.range_inv_subset_connectedComponent G)
+  one_mul := by
+    rw [← cancel_mono (GrpObj.identityComponentι G)]
+    simp [← lift_fst_comp_snd_comp, ← Hom.mul_def, MonObj.comp_mul, leftUnitor_hom,
+      toUnit_unique _ (toUnit _), ← Hom.one_def]
+  mul_one := by
+    rw [← cancel_mono (GrpObj.identityComponentι G)]
+    simp [← lift_fst_comp_snd_comp, ← Hom.mul_def, MonObj.comp_mul, rightUnitor_hom,
+      toUnit_unique _ (toUnit _), ← Hom.one_def]
+  mul_assoc := by
+    rw [← cancel_mono (GrpObj.identityComponentι G)]
+    simp [← lift_fst_comp_snd_comp, ← Hom.mul_def, MonObj.comp_mul, mul_assoc]
+  left_inv := by
+    rw [← cancel_mono (GrpObj.identityComponentι G)]
+    simp [← lift_fst_comp_snd_comp, ← Hom.mul_def, MonObj.comp_mul, ← Hom.inv_def, ← Hom.one_def]
+  right_inv := by
+    rw [← cancel_mono (GrpObj.identityComponentι G)]
+    simp [← lift_fst_comp_snd_comp, ← Hom.mul_def, MonObj.comp_mul, ← Hom.inv_def, ← Hom.one_def]
+
+/-- The inclusion `G° ⟶ G` of the identity component is a homomorphism of group schemes. -/
+instance : IsMonHom (GrpObj.identityComponentι G) where
+  one_hom := GrpObj.identityComponentLift_comp_identityComponentι G _ _
+  mul_hom := GrpObj.identityComponentLift_comp_identityComponentι G _ _
+
+/-- The identity component `G°` is a normal subgroup scheme of `G`: the conjugation morphism
+`G × G° ⟶ G` factors through `G° ⟶ G`. (blueprint: `sk-p-geometry`) -/
+instance : IsMonHom.Normal (GrpObj.identityComponentι G) where
+  exists_comp_eq_conj :=
+    ⟨GrpObj.identityComponentLift G _ (GrpObj.range_conj_subset_connectedComponent G),
+      GrpObj.identityComponentLift_comp_identityComponentι G _ _⟩
+
+/-- The identity component `G°` of a group scheme of finite type over a field is irreducible.
+(blueprint: `sk-p-geometry`) -/
+theorem GrpObj.irreducibleSpace_identityComponent :
+    IrreducibleSpace (GrpObj.identityComponent G).left :=
+  have : LocallyOfFiniteType (GrpObj.identityComponent G).hom :=
+    inferInstanceAs (LocallyOfFiniteType ((GrpObj.identityComponentOpens G).ι ≫ G.hom))
+  irreducibleSpace_of_connectedSpace (GrpObj.identityComponent G)
+
+
+omit [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] in
+/-- The connected components of a group scheme `G` of finite type over a field are the translates
+of the identity component: left translation by a rational point `g` maps `G°` onto the connected
+component of the point `g * 1 = g`. (blueprint: `sk-p-geometry`) -/
+theorem GrpObj.image_mulLeft_connectedComponent_onePoint (g : 𝟙_ (Over (Spec (.of k))) ⟶ G) :
+    (GrpObj.mulLeft G g).left.base '' connectedComponent (GrpObj.onePoint G) =
+      connectedComponent ((GrpObj.mulLeft G g).left.base (GrpObj.onePoint G)) := by
+  have := GrpObj.isIso_mulLeft_left G g
+  simpa [connectedComponentIn_univ] using
+    (GrpObj.mulLeft G g).left.homeomorph.image_connectedComponentIn
+      (Set.mem_univ (GrpObj.onePoint G))
+
+end IdentityComponent
+
+/-- Cartier's theorem: a group scheme locally of finite type over a field of characteristic zero
+is reduced (indeed smooth). (blueprint: `sk-i-cartier`) -/
+theorem GrpObj.isReduced_of_charZero [CharZero k] (G : Over (Spec (.of k))) [GrpObj G]
+    [LocallyOfFiniteType G.hom] : IsReduced G.left :=
+  let : GrpObj (Over.mk G.hom) := ‹GrpObj G›
+  isReduced_of_grpObj G.hom
+
+
+/-- A closed subgroup `J` of a connected reduced group scheme `G` locally of finite type over a
+field, with `J` reduced of the same dimension as `G`, is all of `G`.
+(blueprint: `sk-p-geometry`) -/
+theorem isIso_left_of_topologicalKrullDim_eq {J G : Over (Spec (.of k))} [GrpObj J] [GrpObj G]
+    [LocallyOfFiniteType G.hom] [IsReduced J.left] [IsReduced G.left] [ConnectedSpace G.left]
+    (f : J ⟶ G) [IsMonHom f] [IsClosedImmersion f.left]
+    (h : topologicalKrullDim J.left = topologicalKrullDim G.left) : IsIso f.left := by
+  have := irreducibleSpace_of_connectedSpace G
+  have : IsIntegral G.left := isIntegral_of_irreducibleSpace_of_isReduced _
+  have : Surjective f.left :=
+    ⟨f.left.isClosedEmbedding.isInducing.surjective_of_topologicalKrullDim_eq
+      f.left.isClosedEmbedding.isClosed_range (topologicalKrullDim_ne_top G.hom) h⟩
+  exact isIso_of_isClosedImmersion_of_surjective f.left
+
+/-! ### Subgroup schemes containing the commutators -/
+
+section ContainsCommutators
+
+variable {S : Scheme.{u}} {G H : Over S} [GrpObj G] [GrpObj H]
+
+/-- A homomorphism of group schemes `f : H ⟶ G` over `S` *contains the commutators* of `G` when
+every commutator `a b a⁻¹ b⁻¹` of two points `a b : X ⟶ G` of `G`, with values in an arbitrary
+`S`-scheme `X`, factors through `f`. For a subgroup scheme `H ⊆ G` this is the scheme-theoretic
+form of `⁅G, G⁆ ⊆ H`, that is, of the commutativity of the quotient `G ⧸ H`.
+(blueprint: `sk-i-restriction`) -/
+class IsMonHom.ContainsCommutators (f : H ⟶ G) [IsMonHom f] : Prop where
+  exists_comp_eq_commutator (f) : ∀ {X : Over S} (a b : X ⟶ G),
+    ∃ c : X ⟶ H, c ≫ f = a * b * a⁻¹ * b⁻¹
+
+instance : IsMonHom.ContainsCommutators (𝟙 G) where
+  exists_comp_eq_commutator a b := ⟨a * b * a⁻¹ * b⁻¹, Category.comp_id _⟩
+
+theorem IsMonHom.ContainsCommutators.of_eq {f g : H ⟶ G} [IsMonHom f] [IsMonHom g]
+    [IsMonHom.ContainsCommutators f] (e : f = g) : IsMonHom.ContainsCommutators g := by
+  subst e; assumption
+
+/-- A subgroup scheme containing the commutators is normal: `g h g⁻¹ = (g h g⁻¹ h⁻¹) h`. -/
+instance (priority := low) IsMonHom.Normal.of_containsCommutators (f : H ⟶ G) [IsMonHom f]
+    [Mono f] [IsMonHom.ContainsCommutators f] : IsMonHom.Normal f where
+  exists_comp_eq_conj := by
+    obtain ⟨c, hc⟩ :=
+      IsMonHom.ContainsCommutators.exists_comp_eq_commutator f (fst G H) (snd G H ≫ f)
+    refine ⟨c * snd G H, ?_⟩
+    have h := (IsMonHom.monoidHom f (G ⊗ H)).map_mul c (snd G H)
+    simp only [IsMonHom.monoidHom_apply] at h
+    rw [h, hc, GrpObj.conj, MonObj.comp_mul, MonObj.comp_mul, GrpObj.comp_inv, whiskerLeft_fst,
+      whiskerLeft_snd, inv_mul_cancel_right]
+
+end ContainsCommutators
+
+/-- A fibre product over `Spec k` of two schemes locally of finite type over `k` is locally of
+finite type over `k`. -/
+instance {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [LocallyOfFiniteType Y.hom] :
+    LocallyOfFiniteType (X ⊗ Y).hom := by
+  rw [Over.tensorObj_hom]
+  infer_instance
+
+end AlgebraicGeometry

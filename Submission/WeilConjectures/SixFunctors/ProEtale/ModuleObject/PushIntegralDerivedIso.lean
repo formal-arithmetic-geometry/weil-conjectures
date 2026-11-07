@@ -1,0 +1,247 @@
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategoryProjectionFlat
+public import Submission.WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalarsAdjunctionQh
+public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushIntegralDerivedIdentify
+public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushIntegralDerivedPlus
+
+set_option autoImplicit true
+set_option relaxedAutoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option maxSynthPendingDepth 3
+
+/-!
+# Derived pushforward commutes with `E ⊗_{𝒪_E} -` on bounded below objects
+
+Let `ℓ` be a prime, `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ` with ring of integers `𝒪_E`, and
+`f : X ⟶ Y` a quasi-compact quasi-separated morphism of schemes. The derived comparison
+**(Push)** `E_Y ⊗ᴸ Rf_* K ⟶ Rf_*(E_X ⊗ᴸ K)` for the inclusion `𝒪̲_E ⟶ E̲` is an isomorphism for
+every bounded below `K ∈ D(𝒪_{E,X})`
+(`ProEtale.CondensedRing.isIso_derivedPushHom_app_padicIntegers_of_isGE`).
+
+For a general flat coefficient change `a`, the derived (Push) on the image of a complex `I` is
+identified with the underived (Push), through the units of the right derived pushforwards and
+the counits of the derived extensions of scalars
+(`ProEtale.CondensedRing.derivedPushHom_app_Qh_fac`). This is proved through the adjunction
+`L(Ext) ⊣ D(Res)`, using the formulas for its unit and counit on complexes
+(`CategoryTheory.Mod.derivedExtendMapDerivedCategoryAdjunction_unit_app_Qh`) and for
+`derivedComapLowerStarIso` (`ProEtale.CondensedRing.derivedComapLowerStarIso_inv_app_Qh`).
+
+For `𝒪_E ⟶ E`, represent `K` by a bounded below complex `I` of injectives. The unit of `Rf_*` is
+an isomorphism at `I`, `I` being K-injective. The counits of the exact extensions of scalars are
+isomorphisms. The underived (Push) is an isomorphism. Finally, the unit of `Rf_*` is an
+isomorphism at `E_X ⊗ I`, a bounded below complex of `f_*`-acyclic objects.
+-/
+
+@[expose] public section
+
+universe v u' u
+
+open CategoryTheory Limits MonoidalCategory MonObj
+
+open scoped CategoryTheory.Obj
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+open Scheme DerivedCategory
+
+variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ] [IsCommMonObj Λ]
+  [MonObj Λ'] [IsCommMonObj Λ'] (a : Λ ⟶ Λ') [IsMonHom a]
+  {X Y : Scheme.{u}} (f : X ⟶ Y)
+
+omit [IsCommMonObj Λ'] in
+/-- The underived (Push) on homotopy categories is compatible with the units of extension of
+scalars, on the image of a complex. -/
+lemma unit_app_comp_map_mapHomotopyCategory_pushHom_app
+    (I : CochainComplex (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) ℤ) :
+    ((Mod.extendRestrictAdjunction (coefficientMap a Y)).mapHomotopyCategory
+        (ComplexShape.up ℤ)).unit.app
+        ((((f)_*⟦Λ⟧).mapHomotopyCategory _).obj ((HomotopyCategory.quotient _ _).obj I)) ≫
+      ((Mod.comap (coefficientMap a Y)).mapHomotopyCategory _).map
+        ((NatTrans.mapHomotopyCategory (pushHom a f) _).app
+          ((HomotopyCategory.quotient _ _).obj I)) =
+    (((f)_*⟦Λ⟧).mapHomotopyCategory _).map
+        (((Mod.extendRestrictAdjunction (coefficientMap a X)).mapHomotopyCategory
+          (ComplexShape.up ℤ)).unit.app ((HomotopyCategory.quotient _ _).obj I)) ≫
+      (NatTrans.mapHomotopyCategory (comapLowerStarIso a f).inv _).app
+        (((Mod.extendScalars (coefficientMap a X)).mapHomotopyCategory _).obj
+          ((HomotopyCategory.quotient _ _).obj I)) := by
+  rw [Adjunction.mapHomotopyCategory_unit_app_quotient]
+  erw [Adjunction.mapHomotopyCategory_unit_app_quotient]
+  simp only [NatTrans.mapHomotopyCategory_app, Functor.mapHomotopyCategory_map]
+  rw [← Functor.map_comp]
+  erw [← Functor.map_comp]
+  refine congrArg _ ?_
+  refine HomologicalComplex.hom_ext _ _ fun n => ?_
+  exact (unit_mateEquiv_symm _ _ (TwoSquare.mk _ _ _ _ (comapLowerStarIso a f).inv) (I.X n)).symm
+
+variable [∀ X : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coefficientMap a X))]
+
+omit [IsCommMonObj Λ'] in
+/-- `derivedComapLowerStarIso` on the image of a complex, inverse form. -/
+lemma derivedComapLowerStarIso_inv_app_Qh
+    (K : HomotopyCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ' X))
+      (ComplexShape.up ℤ)) :
+    ((f)_*⟦Λ⟧).rightDerivedFunctorUnit.app
+        (((Mod.comap (coefficientMap a X)).mapHomotopyCategory _).obj K) ≫
+      ((f)_*⟦Λ⟧).rightDerivedFunctor.map
+        ((Mod.comap (coefficientMap a X)).mapDerivedCategoryFactorsh.inv.app K) ≫
+      (derivedComapLowerStarIso a f).inv.app (Qh.obj K) =
+    Qh.map ((NatTrans.mapHomotopyCategory (comapLowerStarIso a f).inv _).app K) ≫
+      (Mod.comap (coefficientMap a Y)).mapDerivedCategoryFactorsh.inv.app
+        ((((f)_*⟦Λ'⟧).mapHomotopyCategory _).obj K) ≫
+      (Mod.comap (coefficientMap a Y)).mapDerivedCategory.map
+        (((f)_*⟦Λ'⟧).rightDerivedFunctorUnit.app K) := by
+  have h := derivedComapLowerStarIso_hom_app_Qh a f K
+  have hc : (NatTrans.mapHomotopyCategory (comapLowerStarIso a f).hom _).app K ≫
+      (NatTrans.mapHomotopyCategory (comapLowerStarIso a f).inv _).app K = 𝟙 _ := by
+    rw [← NatTrans.comp_app, ← NatTrans.mapHomotopyCategory_comp, Iso.hom_inv_id,
+      NatTrans.mapHomotopyCategory_id, NatTrans.id_app]
+  have hc' : (NatTrans.mapHomotopyCategory (comapLowerStarIso a f).inv _).app K ≫
+      (NatTrans.mapHomotopyCategory (comapLowerStarIso a f).hom _).app K = 𝟙 _ := by
+    rw [← NatTrans.comp_app, ← NatTrans.mapHomotopyCategory_comp, Iso.inv_hom_id,
+      NatTrans.mapHomotopyCategory_id, NatTrans.id_app]
+  have : IsIso ((NatTrans.mapHomotopyCategory (comapLowerStarIso a f).hom _).app K) :=
+    ⟨_, hc, hc'⟩
+  have : IsIso (Qh.map ((NatTrans.mapHomotopyCategory (comapLowerStarIso a f).hom _).app K)) :=
+    Functor.map_isIso _ _
+  have : Epi ((Mod.comap (coefficientMap a Y)).mapDerivedCategoryFactorsh.hom.app
+      ((((f)_*⟦Λ'⟧).mapHomotopyCategory _).obj K) ≫
+    Qh.map ((NatTrans.mapHomotopyCategory (comapLowerStarIso a f).hom _).app K)) := epi_comp _ _
+  rw [← cancel_epi ((Mod.comap (coefficientMap a Y)).mapDerivedCategoryFactorsh.hom.app
+      ((((f)_*⟦Λ'⟧).mapHomotopyCategory _).obj K) ≫
+    Qh.map ((NatTrans.mapHomotopyCategory (comapLowerStarIso a f).hom _).app K))]
+  simp only [Category.assoc]
+  have hQ : Qh.map ((NatTrans.mapHomotopyCategory (comapLowerStarIso a f).hom _).app K) ≫
+      Qh.map ((NatTrans.mapHomotopyCategory (comapLowerStarIso a f).inv _).app K) = 𝟙 _ := by
+    rw [← Functor.map_comp, hc, CategoryTheory.Functor.map_id]
+  rw [← reassoc_of% h, Iso.hom_inv_id_app]
+  erw [Category.comp_id]
+  erw [reassoc_of% hQ]
+  erw [Iso.hom_inv_id_app_assoc]
+
+set_option maxHeartbeats 1000000 in
+-- Rewriting inside derived-category composites requires unfolding homotopy category objects.
+/-- The derived (Push) on the image of a complex `I`, through the units of the right derived
+pushforwards and the counits of the derived extensions of scalars, is the underived (Push). -/
+lemma derivedPushHom_app_Qh_fac
+    (I : CochainComplex (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) ℤ) :
+    (Mod.extendScalars (coefficientMap a Y)).leftDerivedFunctor.map
+        (((f)_*⟦Λ⟧).rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj I)) ≫
+      (derivedPushHom a f).app (Qh.obj ((HomotopyCategory.quotient _ _).obj I)) ≫
+      ((f)_*⟦Λ'⟧).rightDerivedFunctor.map
+        ((Mod.extendScalars (coefficientMap a X)).leftDerivedFunctorCounit.app
+          ((HomotopyCategory.quotient _ _).obj I)) =
+    (Mod.extendScalars (coefficientMap a Y)).leftDerivedFunctorCounit.app
+        ((((f)_*⟦Λ⟧).mapHomotopyCategory _).obj ((HomotopyCategory.quotient _ _).obj I)) ≫
+      Qh.map ((NatTrans.mapHomotopyCategory (pushHom a f) _).app
+        ((HomotopyCategory.quotient _ _).obj I)) ≫
+      ((f)_*⟦Λ'⟧).rightDerivedFunctorUnit.app
+        (((Mod.extendScalars (coefficientMap a X)).mapHomotopyCategory _).obj
+          ((HomotopyCategory.quotient _ _).obj I)) := by
+  apply ((Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a Y)).homEquiv _ _
+    ).injective
+  simp only [Adjunction.homEquiv_unit, Functor.map_comp]
+  dsimp only [Functor.comp_obj]
+  erw [(Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a Y)).unit_naturality_assoc
+    (((f)_*⟦Λ⟧).rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj I))]
+  have hm : (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a Y)).unit.app
+        (((f)_*⟦Λ⟧).rightDerivedFunctor.obj (Qh.obj ((HomotopyCategory.quotient _ _).obj I))) ≫
+      (Mod.comap (coefficientMap a Y)).mapDerivedCategory.map
+        ((derivedPushHom a f).app (Qh.obj ((HomotopyCategory.quotient _ _).obj I))) =
+      ((f)_*⟦Λ⟧).rightDerivedFunctor.map
+        ((Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a X)).unit.app
+          (Qh.obj ((HomotopyCategory.quotient _ _).obj I))) ≫
+        (derivedComapLowerStarIso a f).inv.app _ :=
+    (unit_mateEquiv_symm (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a X))
+      (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a Y))
+      (TwoSquare.mk _ _ _ _ (derivedComapLowerStarIso a f).inv) _).symm
+  dsimp only [Functor.comp_obj]
+  have hm2 := reassoc_of% hm
+  rw [hm2]
+  have hn := (derivedComapLowerStarIso a f).inv.naturality
+    ((Mod.extendScalars (coefficientMap a X)).leftDerivedFunctorCounit.app
+      ((HomotopyCategory.quotient _ _).obj I))
+  dsimp only [Functor.comp_map] at hn
+  erw [← hn]
+  rw [← Functor.map_comp_assoc]
+  erw [Mod.derivedExtendMapDerivedCategoryAdjunction_unit_app_Qh (coefficientMap a X)
+    ((HomotopyCategory.quotient _ _).obj I)]
+  rw [Functor.map_comp, Category.assoc]
+  clear hm hm2 hn
+  erw [← ((f)_*⟦Λ⟧).rightDerivedFunctorUnit.naturality_assoc
+    (((Mod.extendRestrictAdjunction (coefficientMap a X)).mapHomotopyCategory
+      (ComplexShape.up ℤ)).unit.app ((HomotopyCategory.quotient _ _).obj I))]
+  erw [derivedComapLowerStarIso_inv_app_Qh a f
+    (((Mod.extendScalars (coefficientMap a X)).mapHomotopyCategory _).obj
+      ((HomotopyCategory.quotient _ _).obj I))]
+  erw [Mod.derivedExtendMapDerivedCategoryAdjunction_unit_app_Qh_assoc (coefficientMap a Y)
+    ((((f)_*⟦Λ⟧).mapHomotopyCategory _).obj ((HomotopyCategory.quotient _ _).obj I))]
+  erw [← (Mod.comap (coefficientMap a Y)).mapDerivedCategoryFactorsh.inv.naturality_assoc
+    ((NatTrans.mapHomotopyCategory (pushHom a f) _).app ((HomotopyCategory.quotient _ _).obj I))]
+  have hu := congrArg Qh.map (unit_app_comp_map_mapHomotopyCategory_pushHom_app a f I)
+  simp only [Functor.map_comp] at hu
+  dsimp only [Functor.comp_map]
+  erw [reassoc_of% hu]
+  rfl
+
+
+section Integral
+
+variable (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) {X Y : Scheme.{u}}
+  (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
+
+set_option maxHeartbeats 1000000 in
+-- Producing the bounded below injective resolution of `K` is slow to elaborate.
+/-- **(Push) for `𝒪_E ⟶ E` on bounded below objects**: for a quasi-compact quasi-separated `f`
+and a bounded below `K ∈ D(𝒪_{E,X})`, the comparison `E_Y ⊗ᴸ Rf_* K ⟶ Rf_*(E_X ⊗ᴸ K)` is an
+isomorphism. -/
+theorem isIso_derivedPushHom_app_padicIntegers_of_isGE
+    (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))) (n : ℤ) [K.IsGE n] :
+    IsIso ((derivedPushHom (padicIntegersRingObjToContinuousMapRingObj ℓ E) f).app K) := by
+  obtain ⟨T, _, ⟨e⟩⟩ := K.exists_iso_Q_obj_of_isGE n
+  obtain ⟨I, i, _, hI, _⟩ :=
+    CochainComplex.Plus.modelCategoryQuillen.exists_quasiIso_injective T n
+  have : I.IsKInjective := CochainComplex.isKInjective_of_injective I n
+  rw [NatTrans.isIso_app_iff_of_iso _
+    (e ≪≫ asIso (Q.map i) ≪≫ ((quotientCompQhIso _).app I).symm)]
+  have h := derivedPushHom_app_Qh_fac (padicIntegersRingObjToContinuousMapRingObj ℓ E) f I
+  have : ∀ k, IsIso (((NatTrans.mapHomologicalComplex
+      (pushHom (padicIntegersRingObjToContinuousMapRingObj ℓ E) f) (ComplexShape.up ℤ)).app I).f
+        k) := fun k ↦
+    (inferInstance : IsIso ((pushHom (padicIntegersRingObjToContinuousMapRingObj ℓ E) f).app
+      (I.X k)))
+  have : IsIso ((NatTrans.mapHomologicalComplex
+      (pushHom (padicIntegersRingObjToContinuousMapRingObj ℓ E) f) (ComplexShape.up ℤ)).app I) :=
+    HomologicalComplex.Hom.isIso_of_components _
+  have : IsIso ((NatTrans.mapHomotopyCategory
+      (pushHom (padicIntegersRingObjToContinuousMapRingObj ℓ E) f) (ComplexShape.up ℤ)).app
+        ((HomotopyCategory.quotient _ _).obj I)) :=
+    Functor.map_isIso (HomotopyCategory.quotient _ _) ((NatTrans.mapHomologicalComplex
+      (pushHom (padicIntegersRingObjToContinuousMapRingObj ℓ E) f) (ComplexShape.up ℤ)).app I)
+  have : CochainComplex.IsStrictlyGE ((Mod.extendScalars
+      (coefficientMap (padicIntegersRingObjToContinuousMapRingObj ℓ E) X)).mapHomologicalComplex
+        (ComplexShape.up ℤ) |>.obj I) n :=
+    (CochainComplex.isStrictlyGE_iff _ n).2 fun i hi ↦
+      show IsZero ((Mod.extendScalars _).obj (I.X i)) from
+        Functor.map_isZero _ (I.isZero_of_isStrictlyGE n i hi)
+  have : IsIso (((f)_*⟦Profinite.continuousMapRingObj E.1⟧).rightDerivedFunctorUnit.app
+      (((Mod.extendScalars (coefficientMap (padicIntegersRingObjToContinuousMapRingObj ℓ E)
+        X)).mapHomotopyCategory _).obj ((HomotopyCategory.quotient _ _).obj I))) :=
+    Functor.isIso_rightDerivedFunctorUnit_app_of_isStrictlyGE _ ((Mod.extendScalars
+      (coefficientMap (padicIntegersRingObjToContinuousMapRingObj ℓ E) X)).mapHomologicalComplex
+        (ComplexShape.up ℤ) |>.obj I) n fun k ↦
+      rightAcyclic_lowerStar_of_rightAcyclic_forget _ f
+        (rightAcyclic_lowerStar_extendScalars_of_injective ℓ E f (I.X k))
+  have := IsIso.of_isIso_fac_left h
+  exact @IsIso.of_isIso_comp_right _ _ _ _ _ _ _ inferInstance this
+
+end Integral
+
+end AlgebraicGeometry.ProEtale.CondensedRing

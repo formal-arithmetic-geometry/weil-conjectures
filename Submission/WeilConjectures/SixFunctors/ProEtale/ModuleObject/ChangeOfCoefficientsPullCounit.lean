@@ -1,0 +1,162 @@
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.CounitFac
+public import Submission.WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalarsCompCounit
+public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsPull
+
+set_option autoImplicit true
+set_option relaxedAutoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option maxSynthPendingDepth 3
+
+/-!
+
+# (Pull) on the image of the homotopy category
+
+The derived (Pull) `ProEtale.CondensedRing.derivedUpperStarExtendScalarsIso` is, modulo the
+counits of the left derived functors, the underived (Pull) `ProEtale.CondensedRing.pullIso`
+(`ProEtale.CondensedRing.derivedUpperStarExtendScalarsIso_hom_app_comp_counit`).
+
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory Limits MonoidalCategory MonObj
+
+open scoped CategoryTheory.Obj CategoryTheory.Functor
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+open Scheme
+
+variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ] [IsCommMonObj Λ]
+  [MonObj Λ'] [IsCommMonObj Λ'] (a : Λ ⟶ Λ') [IsMonHom a] {X Y : Scheme.{u}} (f : X ⟶ Y)
+
+
+
+/-- `ProEtale.CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory` is compatible with the
+counit of `Lf^*`. -/
+@[reassoc]
+lemma leftDerivedUpperStarIsoMapDerivedCategory_inv_app_comp_counit
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (K : HomotopyCategory (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))
+      (ComplexShape.up ℤ)) :
+    (leftDerivedUpperStarIsoMapDerivedCategory Λ f).inv.app (DerivedCategory.Qh.obj K) ≫
+        ((f)^*⟦Λ⟧).leftDerivedFunctorCounit.app K =
+      ((f)^*⟦Λ⟧).mapDerivedCategoryFactorsh.hom.app K :=
+  Functor.leftDerivedFunctorIsoMapDerivedCategory_inv_app_comp_counit _ K
+
+/-- The underived (Pull) `pullIso` and `mapModUpperStarExtendScalarsIso` on the homotopy
+categories. -/
+lemma mapHomotopyCategoryCompIso_extendScalarsComp_comp_mapModUpperStarExtendScalarsIso
+    (K : HomotopyCategory (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))
+      (ComplexShape.up ℤ)) :
+    (Functor.mapHomotopyCategoryCompIso
+        (Mod.extendScalarsComp (condensedPullbackHom Λ f) (coefficientMap a X)).symm
+          (ComplexShape.up ℤ)).hom.app
+        ((((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y)).mapHomotopyCategory
+          (ComplexShape.up ℤ)).obj K) ≫
+      (NatTrans.mapHomotopyCategory (mapModUpperStarExtendScalarsIso a f).hom
+        (ComplexShape.up ℤ)).app K =
+    (NatTrans.mapHomotopyCategory (pullIso a f).hom (ComplexShape.up ℤ)).app K := by
+  obtain ⟨P, rfl⟩ := HomotopyCategory.quotient_obj_surjective K
+  simp only [NatTrans.mapHomotopyCategory_app]
+  have hcI : (Functor.mapHomotopyCategoryCompIso
+        (Mod.extendScalarsComp (condensedPullbackHom Λ f) (coefficientMap a X)).symm
+          (ComplexShape.up ℤ)).hom.app
+        ((((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y)).mapHomotopyCategory
+          (ComplexShape.up ℤ)).obj ((HomotopyCategory.quotient _ _).obj P)) =
+      (HomotopyCategory.quotient _ _).map ((Functor.mapHomologicalComplexCompIso
+        (Mod.extendScalarsComp (condensedPullbackHom Λ f) (coefficientMap a X)).symm
+          (ComplexShape.up ℤ)).hom.app
+        (((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y)).mapHomologicalComplex _ |>.obj P)) := rfl
+  rw [hcI, ← Functor.map_comp]
+  congr 1
+  ext n : 2
+  simp only [mapModUpperStarExtendScalarsIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Functor.associator_inv_app,
+    HomologicalComplex.comp_f, NatTrans.mapHomologicalComplex_app_f, Mod.comp_hom',
+    Functor.mapHomologicalComplexCompIso_hom_app_f]
+  rw [← Category.assoc, ← Mod.comp_hom']
+  erw [Iso.inv_hom_id_app]
+  erw [Mod.id_hom', Category.id_comp, Category.id_comp]
+
+set_option maxHeartbeats 4000000 in -- large composites of derived functors on sheaf categories
+/-- **(Pull) is the underived (Pull) modulo the counits**: on the image `Qh K` of an object of the
+homotopy category, `derivedUpperStarExtendScalarsIso a f` followed by the counits of `L(Ext_{a_Y})`
+and `Lf^*_Λ'` is the counit of `Lf^*_Λ`, followed by the counit of `L(Ext_{a_X})` and the
+underived (Pull) `pullIso a f`. -/
+lemma derivedUpperStarExtendScalarsIso_hom_app_comp_counit
+    (K : HomotopyCategory (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))
+      (ComplexShape.up ℤ)) :
+    (derivedUpperStarExtendScalarsIso a f).hom.app (DerivedCategory.Qh.obj K) ≫
+        L((f)^*⟦Λ'⟧).map ((Mod.extendScalars (coefficientMap a Y)).leftDerivedFunctorCounit.app K) ≫
+        ((f)^*⟦Λ'⟧).leftDerivedFunctorCounit.app
+          (((Mod.extendScalars (coefficientMap a Y)).mapHomotopyCategory
+            (ComplexShape.up ℤ)).obj K) ≫
+        DerivedCategory.Qh.map ((Functor.mapHomotopyCategoryCompIso
+          (Iso.refl (Mod.extendScalars (coefficientMap a Y) ⋙ (f)^*⟦Λ'⟧))
+            (ComplexShape.up ℤ)).hom.app K) =
+      (L(Mod.extendScalars (coefficientMap a X)).map (((f)^*⟦Λ⟧).leftDerivedFunctorCounit.app K) ≫
+        (Mod.extendScalars (coefficientMap a X)).leftDerivedFunctorCounit.app
+          ((((f)^*⟦Λ⟧).mapHomotopyCategory (ComplexShape.up ℤ)).obj K) ≫
+        DerivedCategory.Qh.map ((Functor.mapHomotopyCategoryCompIso
+          (Iso.refl ((f)^*⟦Λ⟧ ⋙ Mod.extendScalars (coefficientMap a X)))
+            (ComplexShape.up ℤ)).hom.app K) ≫
+        DerivedCategory.Qh.map
+          ((NatTrans.mapHomotopyCategory (pullIso a f).hom (ComplexShape.up ℤ)).app K) :
+        (L((f)^*⟦Λ⟧) ⋙ L(Mod.extendScalars (coefficientMap a X))).obj
+          (DerivedCategory.Qh.obj K) ⟶ _) := by
+  simp only [derivedUpperStarExtendScalarsIso, Iso.trans_hom, NatTrans.comp_app,
+    Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app,
+    Functor.whiskerLeft_app, Iso.symm_hom, Functor.associator_hom_app, Category.id_comp,
+    Category.assoc]
+  have t1 := (leftDerivedUpperStarIsoMapDerivedCategory Λ' f).inv.naturality
+    ((Mod.extendScalars (coefficientMap a Y)).leftDerivedFunctorCounit.app K)
+  have t2 := leftDerivedUpperStarIsoMapDerivedCategory_inv_app_comp_counit f Λ'
+    (((Mod.extendScalars (coefficientMap a Y)).mapHomotopyCategory (ComplexShape.up ℤ)).obj K)
+  dsimp only [Functor.comp_obj, Functor.comp_map] at t1 t2 ⊢
+  rw [← reassoc_of% t1]
+  simp only [reassoc_of% t2]
+  have t3 := Functor.leftDerivedFunctorCompMapDerivedCategoryRightIso_hom_app_comp_counit
+    (Mod.extendScalars (coefficientMap a Y)) (f)^*⟦Λ'⟧ K
+  have t4 := Functor.leftDerivedFunctorIsoOfIso_hom_app_comp_counit
+    (mapModUpperStarExtendScalarsIso a f) K
+  have t5 := Functor.leftDerivedFunctorCompMapDerivedCategoryIso_inv_app_comp_counit
+    ((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y))
+    (Mod.extendScalars (condensedPullbackHom Λ f ≫ coefficientMap a X)) K
+  dsimp only [Functor.comp_obj, Functor.comp_map] at t3 t4 t5
+  simp only [t3, t4, reassoc_of% t5]
+  have t6 := (Mod.derivedExtendScalarsCompIso (condensedPullbackHom Λ f) (coefficientMap a X)
+    (condensedPullbackHom Λ f ≫ coefficientMap a X) rfl).inv.naturality
+      (((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y)).mapDerivedCategoryFactorsh.hom.app K)
+  have t7 := Mod.derivedExtendScalarsCompIso_inv_app_comp_counit (condensedPullbackHom Λ f)
+    (coefficientMap a X)
+    ((((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y)).mapHomotopyCategory
+      (ComplexShape.up ℤ)).obj K)
+  have t8 := Functor.leftDerivedFunctorCompMapDerivedCategoryIso_hom_app_comp_counit
+    ((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y))
+    (Mod.extendScalars (condensedPullbackHom Λ f)) K
+  dsimp only [Functor.comp_obj, Functor.comp_map] at t6 t7 t8
+  simp only [← reassoc_of% t6, reassoc_of% t7]
+  rw [Functor.mapHomotopyCategoryCompIso_refl_hom_app] at t8
+  erw [CategoryTheory.Functor.map_id, Category.comp_id] at t8
+  have t9 := congrArg (L(Mod.extendScalars (coefficientMap a X))).map t8
+  simp only [Functor.map_comp] at t9
+  simp only [leftDerivedUpperStarIso, reassoc_of% t9,
+    Functor.mapHomotopyCategoryCompIso_refl_hom_app]
+  erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id, Category.id_comp,
+    Category.id_comp]
+  have t10 :=
+    mapHomotopyCategoryCompIso_extendScalarsComp_comp_mapModUpperStarExtendScalarsIso a f K
+  simp only [← DerivedCategory.Qh.map_comp, t10]
+  rfl
+
+end AlgebraicGeometry.ProEtale.CondensedRing

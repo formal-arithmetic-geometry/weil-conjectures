@@ -1,0 +1,83 @@
+/-
+Copyright (c) 2026 Bin Wu. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Bin Wu
+-/
+module
+
+public import Submission.WeilConjectures.CategoryTheory.Ringed.RingedPresentationData
+
+import Submission.WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMapOfUniverses
+import Submission.WeilConjectures.Algebra.Homology.HomComplex
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+import Mathlib.Algebra.Category.Ring.Limits
+import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
+import Submission.WeilConjectures.Algebra.Homology.HomComplexSectionsQuasiIsoOfUniverses
+import Submission.WeilConjectures.CategoryTheory.SiteCoveringAxioms
+import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+import Submission.WeilConjectures.CategoryTheory.RingedSiteModules
+import Submission.WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
+import Mathlib.Algebra.Category.Grp.AB
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
+import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
+import Mathlib.CategoryTheory.Yoneda
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
+import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
+import Mathlib.CategoryTheory.Generator.Basic
+import Submission.WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
+import Submission.WeilConjectures.Algebra.Homology.HomotopyCategory.Products
+import Submission.WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
+import Mathlib.CategoryTheory.Sites.Equivalence
+import Mathlib.CategoryTheory.Sites.LocallyBijective
+import Mathlib.Algebra.Homology.DerivedCategory.Basic
+import Submission.WeilConjectures.CategoryTheory.Sites.RGammaDerivedLimit
+import Mathlib.Algebra.Category.Grp.Abelian
+import Submission.WeilConjectures.Algebra.Homology.HomComplexSectionsDerivedNaturalityOfUniverses
+import Submission.WeilConjectures.Algebra.Homology.RhomIntoKInjectiveLocal
+import Submission.WeilConjectures.Algebra.Homology.KInjectiveRestrictLocalizedOfUniverses
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+import Submission.WeilConjectures.Algebra.Homology.LocalizedRestrictionAdjunctionOfUniverses
+import Submission.WeilConjectures.Algebra.Homology.LocalizedRestrictionExtensionExistsOfUniverses
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Submission.WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
+import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
+import Mathlib.CategoryTheory.Adjunction.Additive
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+import Mathlib.Algebra.Homology.DerivedCategory.KInjective
+import Submission.WeilConjectures.Algebra.Homology.HomComplexSectionsHomotopyNaturalityOfUniverses
+import Submission.WeilConjectures.Algebra.Homology.HomComplexProjections
+import Submission.WeilConjectures.Algebra.Homology.HomComplexSectionsCanonicalComparisonOfUniverses
+import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexShift
+import Submission.WeilConjectures.Algebra.Homology.HomComplexSectionsCochainsOfUniverses
+import Submission.WeilConjectures.Algebra.Homology.HomComplexSectionsCochainsCommOfUniverses
+import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexCohomology
+import Mathlib.Algebra.Category.Grp.EpiMono
+import Submission.WeilConjectures.Algebra.Homology.LocalizedModuleRestrictionQuasiIsoOfUniverses
+import Mathlib.Algebra.Homology.QuasiIso
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
+import Submission.WeilConjectures.Algebra.Homology.QuasiIsoOfSectionsOfUniverses
+import Mathlib.CategoryTheory.Sites.Abelian
+import Mathlib.Algebra.Homology.Functor
+import Submission.WeilConjectures.CategoryTheory.ProperBaseChange.ElementSiteDescent
+import Submission.WeilConjectures.CategoryTheory.ProperBaseChange.ContinuousCocontinuousRingedRestriction
+import Submission.WeilConjectures.CategoryTheory.Ringed.RingedEquivalenceModuleHom
+import Mathlib.CategoryTheory.Sites.DenseSubsite.SheafEquiv
+import Submission.WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
+
+set_option autoImplicit true
+set_option relaxedAutoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option maxSynthPendingDepth 3
+
+/-! # Auxiliary ringed presentation comparisons -/
+
+-- All declarations in this module were removed by the unused-declaration prune.

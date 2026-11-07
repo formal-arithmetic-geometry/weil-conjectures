@@ -1,0 +1,63 @@
+/-
+Copyright (c) 2026 Bin Wu. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Bin Wu
+-/
+
+module
+
+public import Submission.WeilConjectures.AlgebraicGeometry.AffinePointedNeighbourhoodCofinal
+public import Submission.WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
+public import Submission.WeilConjectures.AlgebraicGeometry.StrictHenselizationLocalStructure
+
+public import Submission.WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMapExtension
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+import Submission.WeilConjectures.AlgebraicGeometry.StrictHenselization
+import Submission.WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
+import Submission.WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationLocal
+import Submission.WeilConjectures.Mathlib.RingTheory.Henselian
+import Submission.WeilConjectures.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotientRegularPart
+import Submission.WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
+
+set_option autoImplicit true
+set_option relaxedAutoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option maxSynthPendingDepth 3
+@[expose] public section
+universe u
+open CategoryTheory
+namespace AlgebraicGeometry.Scheme
+
+/-- The divisor quotient of the canonical strict henselization is a domain.
+Source: Stacks Project, Tag 00NP.
+Proof: The local-structure theorem makes the canonical strict henselization local.
+Since b(f) is not a unit, its principal ideal is proper, so the quotient is nontrivial
+and local. The regularity component makes this quotient regular, hence regular local.
+Apply the proved upstream theorem that a regular local ring is a domain.
+(blueprint: lem-sbc-strict-hensel-regular-divisor-quotient-domain-part)
+-/
+theorem strictHenselizationRing_divisor_quotient_domain_part
+    (R : CommRingCat.{u}) [IsRegularRing R] (f : R)
+    [IsRegularRing (R ⧸ Ideal.span {f})]
+    {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
+    (barY : Spec (.of Ω) ⟶ Spec R)
+    (b : R ⟶ strictHenselization barY)
+    (hb : Spec.map b = strictLocalizationToBase barY)
+    (hg : ¬ IsUnit (b.hom f)) :
+    IsDomain (strictHenselization barY ⧸ Ideal.span {b.hom f}) := by
+  obtain ⟨hlocal, _⟩ := (show ∃ (_ : IsLocalRing (Scheme.strictHenselization barY)),
+      IsStrictlyHenselianLocalRing (Scheme.strictHenselization barY) from
+      ⟨inferInstance, ⟨inferInstance⟩⟩)
+  let := hlocal
+  let := strictHenselizationRing_regular_divisor_quotient_part R f barY b hb hg
+  have hproper : Ideal.span {b.hom f} ≠ ⊤ := fun h ↦
+    hg (Ideal.span_singleton_eq_top.mp h)
+  let : Nontrivial (strictHenselization barY ⧸ Ideal.span {b.hom f}) :=
+    Ideal.Quotient.nontrivial_iff.mpr hproper
+  let : IsLocalRing (strictHenselization barY ⧸ Ideal.span {b.hom f}) :=
+    IsLocalRing.of_surjective' (Ideal.Quotient.mk _) Ideal.Quotient.mk_surjective
+  let := IsRegularLocalRing.of_isRegularRing_of_isLocalRing
+    (R := strictHenselization barY ⧸ Ideal.span {b.hom f})
+  infer_instance
+
+end AlgebraicGeometry.Scheme
