@@ -578,22 +578,6 @@ private theorem scalar_computation (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u}
   unfold complex_iso section_localization_iso
   have hh := section_pull_transport_scalar_computation a T c h P
   simp only [compute_eq] at hh
-  run_tac do
-    let g ← Lean.Elab.Tactic.getMainGoal
-    g.withContext do
-      let some d := (← Lean.getLCtx).findFromUserName? `hh |
-        throwError "missing comparison hypothesis"
-      let mut todo := [(d.type, ← g.getType)]
-      for _ in List.range 1000 do
-        let (a, b) :: rest := todo | break
-        todo := rest
-        if a == b then continue
-        if ← Lean.withoutModifyingState (Lean.Meta.withTransparency .all
-            (Lean.Meta.isDefEq a b)) then continue
-        if a.isApp && b.isApp then
-          todo := (a.appFn!, b.appFn!) :: (a.appArg!, b.appArg!) :: todo
-        else
-          Lean.logInfo m!"MISMATCH: {a} VERSUS {b}"
   exact hh
 
 private def section_pull_compute_nat {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -628,22 +612,6 @@ private theorem geometric_computation {X Y : Scheme.{u}} (f : X ⟶ Y)
   unfold section_localization_iso section_pull_compute_nat
   have hh := section_pull_transport_geometric_computation f P
   simp only [_root_.counit_quotient_transport] at hh
-  run_tac do
-    let g ← Lean.Elab.Tactic.getMainGoal
-    g.withContext do
-      let some d := (← Lean.getLCtx).findFromUserName? `hh |
-        throwError "missing comparison hypothesis"
-      let mut todo := [(d.type, ← g.getType)]
-      for _ in List.range 1000 do
-        let (a, b) :: rest := todo | break
-        todo := rest
-        if a == b then continue
-        if ← Lean.withoutModifyingState (Lean.Meta.withTransparency .all
-            (Lean.Meta.isDefEq a b)) then continue
-        if a.isApp && b.isApp then
-          todo := (a.appFn!, b.appFn!) :: (a.appArg!, b.appArg!) :: todo
-        else
-          Lean.logInfo m!"MISMATCH: {a} VERSUS {b}"
   exact hh
 
 attribute [local irreducible] complex_iso complex_comp_iso section_localization_iso
