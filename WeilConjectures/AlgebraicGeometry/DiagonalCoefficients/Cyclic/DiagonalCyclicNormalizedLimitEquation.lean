@@ -33,7 +33,7 @@ attribute [local semireducible] cyclicCompletedQuotient cyclicDiscreteRestrictio
 attribute [local irreducible] diagonalSourceLimitMap diagonalTargetLimitMap
 
 attribute [local instance 4000] AlgebraicGeometry.ProEtale.diagonalHasLimit
-  AlgebraicGeometry.ProEtale.diagonalConstantTowerLimits
+  AlgebraicGeometry.ProEtale.diagonalModLimits
 
 attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
   diagonalCompletedSource diagonalCompletedCoefficientMap
