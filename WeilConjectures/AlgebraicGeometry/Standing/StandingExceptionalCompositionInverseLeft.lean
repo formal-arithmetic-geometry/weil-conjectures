@@ -226,7 +226,6 @@ private theorem compositeHom_inverse
 attribute [local irreducible] originCompositionAmbient standingExceptionalHomEquiv
   rightDerivedLowerShriek rightDerivedUpperShriek
 
-set_option maxHeartbeats 800000 in
 -- Instantiating three derived Hom families needs more elaboration than the generic proof.
 private theorem standingCompositeHom_inverse (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y S : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ S)
@@ -407,7 +406,6 @@ private meta partial def coefficientHEq (lhs rhs : Expr) (fuel : Nat := 160) :
   modify fun st => {st with proofs := st.proofs.push (lhs, rhs, h)}
   return h
 
-set_option maxHeartbeats 200000 in
 -- Allow explicit congruence across the standing derived-category formulas.
 /-- One inverse equation for the explicit counit-transpose candidate.
 Source: thm-pur-composition-coherence, exceptional-composition isomorphism, and
