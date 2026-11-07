@@ -100,6 +100,21 @@ jobs:
           lake update
           git -C .. status --short | head -5
 
+      # doc-gen4's dependencies (leansqlite, MD4Lean) compile C with whatever `cc` is on the
+      # PATH, and big-server has none. Lean's toolchain ships a C compiler with its own
+      # headers: `leanc`. Used only when the runner has no `cc` of its own.
+      - name: A C compiler for doc-gen4's dependencies
+        run: |
+          if command -v cc > /dev/null; then
+            echo "cc: $(command -v cc)"
+          else
+            shim="$RUNNER_TEMP/cc-shim"
+            mkdir -p "$shim"
+            ln -sf "$(dirname "$(elan which lean)")/leanc" "$shim/cc"
+            echo "$shim" >> "$GITHUB_PATH"
+            echo "cc: $shim/cc -> $(readlink "$shim/cc")"
+          fi
+
       - name: Build doc-gen4
         working-directory: docbuild
         env:
