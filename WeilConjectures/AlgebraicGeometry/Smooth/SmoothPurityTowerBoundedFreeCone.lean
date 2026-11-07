@@ -29,7 +29,8 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u})
   (D : SpCoefficientTowersAbelian l E T)
 
-attribute [local instance] AlgebraicGeometry.ProEtale.VaryingRing.ringSheafify
+local instance : HasSheafify (Scheme.ProEt.topology T) CommRingCat.{u + 1} :=
+  AlgebraicGeometry.ProEtale.VaryingRing.ringSheafify T
 
 attribute [local instance] WeilConjectures.sfAbSheafify
 
