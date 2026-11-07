@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.PoincareDuality.PodReindexingCoherence.PodReindexingCoherenceData
 public import WeilConjectures.PoincareDuality.Pod.Reindexing.PodReindexingHomResolutionModel
 public import WeilConjectures.SixFunctors.CoefficientClosedStructure.CoefficientRingedTensorHomModelSupplement

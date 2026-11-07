@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.SmoothPurity.PurStrictScalar.ConstantCompletedOrdinaryAssociativity
 import WeilConjectures.FourierTransform.CompletedLineTensor.CompletedLineTensorCoherence
 import WeilConjectures.SmoothPurity.PurStrictScalar.CompletedScalarAssociatorLocalization

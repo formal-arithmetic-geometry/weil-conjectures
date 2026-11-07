@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.TraceFormula.BaseChange.LocalTrace
 public import WeilConjectures.TraceFormula.BaseChange.LowerShriek
 public import WeilConjectures.TraceFormula.BaseChange.LowerShriekIterate

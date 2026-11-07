@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.PoincareDuality.PodReindexingCoherence.PodReindexingCoherenceData
 import Mathlib.Tactic.CategoryTheory.Slice
 import all Mathlib.CategoryTheory.Limits.HasLimits

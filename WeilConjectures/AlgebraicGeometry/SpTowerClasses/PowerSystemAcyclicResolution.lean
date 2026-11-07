@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassCoefficients
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.PowerSystemOrdinaryCokernel
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass

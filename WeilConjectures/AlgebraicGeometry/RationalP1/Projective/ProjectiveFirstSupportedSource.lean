@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.RationalP1.Projective.ProjectiveFirstSectionComparison
 import WeilConjectures.AlgebraicGeometry.RationalP1.Projective.ProjectiveOrdinarySupportNormalization
 import WeilConjectures.CategoryTheory.Adjunction.SmoothPurity.RightDerivedSingleCounit

@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.Finite.Ring.FiniteRingConstructibleDerivedOrigin
 public import WeilConjectures.AlgebraicGeometry.Completed.CompletedCondensedCoefficients
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs

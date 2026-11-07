@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.SmoothPurity.Integral.IntegralRationalQbarCompactSupport
 public import WeilConjectures.SixFunctors.Compact.CompactSupportReductionTower
 public import WeilConjectures.SmoothPurity.Sf.SfRationalizationKaroubi

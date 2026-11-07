@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.SixFunctors.IntegralOrdinary.IntegralOrdinaryPullbackComparison
 public import WeilConjectures.SixFunctors.OpenFactorCoherence.OpenFactorPullModel
 import WeilConjectures.SixFunctors.IntegralOrdinary.IntegralPullbackModuleIdentification

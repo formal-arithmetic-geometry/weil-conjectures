@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.RationalP1.Second.RationalP1SecondPullComparison
 import WeilConjectures.AlgebraicGeometry.RationalP1.Second.RationalP1SecondPullSection
 import WeilConjectures.AlgebraicGeometry.RationalP1.RationalP1ProjectionNaturality

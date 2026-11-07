@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.SixFunctors.IntegralSystemRealization.Canonical.IntegralSystemCanonicalBridge
 public import WeilConjectures.SixFunctors.IntegralOnSlice.QcqsCompletionOrdinaryModels
 import WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients

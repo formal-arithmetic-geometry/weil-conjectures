@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.SmoothPurity.PurityFiniteSetting.PurityFiniteSetting
 public import WeilConjectures.CategoryTheory.Sites.SmoothPurity.SupportLongExact
 public import WeilConjectures.Algebra.Homology.SmoothPurity.ClosedSupportHom

@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralSystemOperations
 public import Mathlib.CategoryTheory.Adjunction.Mates
 import WeilConjectures.SmoothPurity.Compact.CompactSupportScalarDirectNormalization
