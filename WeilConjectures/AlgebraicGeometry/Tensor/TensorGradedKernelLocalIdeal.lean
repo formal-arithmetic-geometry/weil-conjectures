@@ -132,7 +132,7 @@ section KernelFactor
 attribute [local irreducible] tensorGradedAlgebraMap tensorGradedUnit
   commAlgebraSheafModule tensorPullback
 
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 900000 in
 -- Comparing the two adjunction units and ideal multiplication maps needs extra elaboration.
 private theorem gradedKernelFactor {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) (A : TensorGradedAlgebraData j L) :
