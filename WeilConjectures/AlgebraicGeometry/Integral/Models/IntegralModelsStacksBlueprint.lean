@@ -1218,7 +1218,7 @@ private theorem bp_stacksConstructible_iso (l : ℕ) [Fact l.Prime]
     (e : K ≅ L) (hK : stacksConstructible l E X K) : stacksConstructible l E X L :=
   ⟨bp_complete_iso _ (bp_smallDerivedIso X _ e) hK.1, residueCondition_iso l E X e hK.2⟩
 
-private theorem bp_selected_equivalence
+theorem bp_selected_equivalence
     {C D : Type*} [Category C] [Category D]
     (P PC : ObjectProperty C) (Q QC : ObjectProperty D)
     (F : C ⥤ D) (e : PC.FullSubcategory ≌ QC.FullSubcategory)
@@ -1248,34 +1248,5 @@ private theorem bp_selected_equivalence
     exact ⟨⟨K.obj, hK⟩, ⟨Q.fullyFaithfulι.preimageIso γ⟩⟩
   let : G.IsEquivalence := {}
   exact ⟨G.asEquivalence, ⟨Iso.refl _⟩⟩
-
-/-- `det-lem-integral-models-stacks` assembled along the current blueprint route; the
-statement is that of `integral_models_stacks`.
-Source: blueprint det-lem-integral-models-stacks; Stacks Tag 09C1
-(blueprint: det-lem-integral-models-stacks).
-
-Proof: the criterion is `integral_models_stacks_criterion`. Restriction is an equivalence
-from the complexes with complete restriction onto the complete complexes
-(`restriction_complete_equivalence`); bounded constructible complexes have complete
-restriction and Stacks adic constructible complexes are complete, so the equivalence
-restricts to the selected full subcategories with the same functor. -/
-theorem integral_models_stacks_blueprint (l : ℕ) [Fact l.Prime]
-    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
-    (X : Scheme.{u}) [IsNoetherian X] :
-    (∀ K, constantModelBoundedConstructible (integersObj l E) X K ↔
-      stacksConstructible l E X ((restriction l E X).obj K)) ∧
-    ∃ e : ConstantModelBoundedConstructible (integersObj l E) X ≌
-        (stacksConstructible l E X).FullSubcategory,
-      Nonempty (e.functor ⋙ (stacksConstructible l E X).ι ≅
-        (constantModelBoundedConstructible (integersObj l E) X).ι ⋙ restriction l E X) := by
-  have hm := integral_models_stacks_criterion l E X
-  refine ⟨hm, ?_⟩
-  obtain ⟨e, ⟨α⟩⟩ := restriction_complete_equivalence l E X
-  let : (stacksConstructible l E X).IsClosedUnderIsomorphisms :=
-    ⟨fun ε h ↦ bp_stacksConstructible_iso l E X ε h⟩
-  exact bp_selected_equivalence (constantModelBoundedConstructible (integersObj l E) X)
-    (restrictionComplete l E X) (stacksConstructible l E X) (stacksComplete l E X)
-    (restriction l E X) e α
-    (fun K hK ↦ ((hm K).mp hK).1) (fun _ h ↦ h.1) (fun K _ ↦ hm K)
 
 end AlgebraicGeometry.ProEtale.IntegralModelsStacks

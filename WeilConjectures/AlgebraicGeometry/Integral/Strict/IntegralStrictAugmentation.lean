@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalTowerSystemInte
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Mathlib.CategoryTheory.Functor.OfSequence
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
+public import WeilConjectures.CategoryTheory.Derived.DerivedTowerCounitProjections
 
 import WeilConjectures.CategoryTheory.Augmented.AugmentedDerivedTowerUnit
 
@@ -42,16 +43,6 @@ section Augmentation
 
 variable {A : Type a} [Category.{v} A] [Abelian A] [HasLimitsOfShape ℕᵒᵖ A]
   [HasDerivedCategory.{w} A] [HasDerivedCategory.{s} (ℕᵒᵖ ⥤ A)]
-
-/-- Constant towers preserve addition because they preserve binary products.
-Source: Stacks 099M (blueprint: lem-sfb-integral-strict-augmentation). -/
-instance integralStrictConstantAdditive : (Functor.const ℕᵒᵖ : A ⥤ _).Additive :=
-  Functor.additive_of_preserves_binary_products _
-
-/-- Inverse limit preserves addition because it preserves binary products.
-Source: Stacks 099M (blueprint: lem-sfb-integral-strict-augmentation). -/
-instance integralStrictLimitAdditive : (lim : (ℕᵒᵖ ⥤ A) ⥤ A).Additive :=
-  Functor.additive_of_preserves_binary_products _
 
 variable (ℓ : ℕ) (I : DiagonalDerivedReduction ℓ (𝟭 A))
   (RZ : DerivedCategory (ℕᵒᵖ ⥤ A) ⥤ DerivedCategory A)
