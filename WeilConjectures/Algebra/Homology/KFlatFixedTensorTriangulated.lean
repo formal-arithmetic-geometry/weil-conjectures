@@ -1141,16 +1141,16 @@ theorem kFlat_fixed_tensor_triangulated :
   · intro B hB hBf
     let hPB := (resolvingProperty_spec R (q.obj B)).2 ⟨hB, hBf⟩
     apply Iso.ext
-    simp [DerivedCategory.quotientCompQhIso,
-      HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift]
-    erw [Category.id_comp, Category.comp_id]
+    simp only [Functor.comp_obj, Functor.curry_obj_obj_obj, Iso.app_hom, Iso.symm_hom,
+      Iso.app_inv, Iso.trans_hom, Functor.mapIso_hom, Iso.prod_hom]
+    erw [Category.id_comp, CategoryTheory.Functor.map_id, Category.comp_id]
     exact congrArg Iso.hom (hcL B hPB)
   · intro B hB hBf
     let hPB := (resolvingProperty_spec R (q.obj B)).2 ⟨hB, hBf⟩
     apply Iso.ext
-    simp [DerivedCategory.quotientCompQhIso,
-      HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift]
-    erw [Category.id_comp, Category.comp_id]
+    simp only [Functor.comp_obj, Functor.flip_obj_obj, Functor.curry_obj_obj_obj, Iso.app_hom,
+      Iso.symm_hom, Iso.app_inv, Iso.trans_hom, Functor.mapIso_hom, Iso.prod_hom]
+    erw [Category.id_comp, CategoryTheory.Functor.map_id, Category.comp_id]
     exact congrArg Iso.hom (hcR B hPB)
 
 end LocalTensorDefinitions
