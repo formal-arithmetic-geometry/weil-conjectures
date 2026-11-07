@@ -145,7 +145,6 @@ variable {A : Type a} [Category.{b} A] [Abelian A] [HasDerivedCategory A]
 
 end DerivedPi
 
-set_option maxHeartbeats 800000 in
 -- The normalized comparison types carry several dependent localization instances.
 /-- Ordinary and total tensor comparisons, flatness and K-flatness, and the normalized
 symmetric monoidal derived restriction. Each `Braided` structure contains invertible
