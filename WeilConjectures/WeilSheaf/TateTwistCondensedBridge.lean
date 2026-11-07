@@ -13,8 +13,8 @@ public import WeilConjectures.WeilSheaf.FrobeniusTwist
 # The condensed Tate twist and the native constant twist `ℚ̄_ℓ ⊗ 𝓑_{χ^d}`
 
 In the condensed model of Weil sheaves (`AlgebraicGeometry.ProEtaleWeilSheaf.toCondensed`, Weil
-structures for `(Fr_X⁻¹)_*`), the native Tate sheaf `ℚ̄_ℓ(d) = ℚ̄_ℓ ⊗ 𝓑_{χ_ℓ(σ)^d}` becomes the regular
-module with structure `χ_ℓ(σ)^d` times the structure of `ℚ̄_ℓ`
+structures for `(Fr_X⁻¹)_*`), the native Tate sheaf `ℚ̄_ℓ(d) = ℚ̄_ℓ ⊗ 𝓑_{χ_ℓ(σ)^d}` becomes the
+regular module with structure `χ_ℓ(σ)^d` times the structure of `ℚ̄_ℓ`
 (`AlgebraicGeometry.WeilSheaf.toCondensedObjConstantTwistAdicConstantIso`). The condensed Tate
 twist `ℚ̄_ℓ,X̄(d)` (`AlgebraicGeometry.ProEtale.tateTwistNat`) with its pullback datum along the
 Frobenius `Fr_X^*` (`AlgebraicGeometry.ProEtale.upperStarTateTwistNatIso`), transported to the
@@ -45,6 +45,7 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime] [Fa
 
 attribute [local instance] neZero_natCast_algebraicClosure
 
+omit [Finite k₀] [Fact (ringChar k₀ ≠ l)] in
 /-- Powers of the scalar `b` on the regular module are the scalar `b ^ d`. -/
 lemma scalarPow_regularSmulIso_hom (b : (PadicAlgCl l)ˣ) :
     ∀ d : ℕ, (IsoAlgebra.scalarPow (regularSmulIso k₀ l X b) d).hom =
