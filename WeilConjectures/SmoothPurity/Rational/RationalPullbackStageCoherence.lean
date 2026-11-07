@@ -162,6 +162,7 @@ private theorem scalar_tower_nat
     scalar_tower_with_endpoint l E L M ι j κ e f K
 
 set_option maxHeartbeats 400000 in
+-- the stage coherence below unfolds several nested comparison isomorphisms
 #count_heartbeats in
 private theorem canonical_natural {X Y : Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (l : X.residueField x)]

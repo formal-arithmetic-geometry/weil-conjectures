@@ -124,7 +124,7 @@ theorem derived_pullback_compositionLaws (K : Scheme.{t}) (s : Option ℕ) :
     have hu := NatTrans.congr_app (Functor.mapDerivedCategoryCompIso_id_comp F) M
     simp only [NatTrans.comp_app, Functor.whiskerRight_app, NatTrans.id_app] at hu
     apply (cancel_epi ((Functor.mapDerivedCategoryCompIso I F).inv.app M)).mp
-    simp only [Functor.mapDerivedCategoryCompNatIso, Iso.trans_hom, Iso.symm_hom,
+    simp only [Functor.mapDerivedCategoryCompNatIso, Iso.trans_hom,
       NatTrans.comp_app, ← Category.assoc, Iso.inv_hom_id_app, Category.id_comp]
     rw [hd, Functor.map_comp]
     rw [← Category.assoc, ← hw, Category.assoc, hu]
@@ -157,7 +157,7 @@ theorem derived_pullback_compositionLaws (K : Scheme.{t}) (s : Option ℕ) :
     have hu := NatTrans.congr_app (Functor.mapDerivedCategoryCompIso_comp_id F) M
     simp only [NatTrans.comp_app, Functor.whiskerLeft_app, NatTrans.id_app] at hu
     apply (cancel_epi ((Functor.mapDerivedCategoryCompIso F I).inv.app M)).mp
-    simp only [Functor.mapDerivedCategoryCompNatIso, Iso.trans_hom, Iso.symm_hom,
+    simp only [Functor.mapDerivedCategoryCompNatIso, Iso.trans_hom,
       NatTrans.comp_app, ← Category.assoc, Iso.inv_hom_id_app, Category.id_comp]
     rw [hd, ← hw, Category.assoc, hu]
     erw [Category.comp_id]
