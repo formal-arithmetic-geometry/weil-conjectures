@@ -37,7 +37,7 @@ private def restrictionHomologyIso
     (fun g ↦ ShortComplex.mapHomologyIso_inv_naturality
       ((HomologicalComplex.shortComplexFunctor _ _ i).map g) (ModuleCat.restrictScalars f))
 
-set_option maxHeartbeats 1600000 in
+set_option maxHeartbeats 800000 in
 -- Scalar extension, residue restriction and quotient carriers use different module structures.
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
