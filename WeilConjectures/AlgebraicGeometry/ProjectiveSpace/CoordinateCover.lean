@@ -389,11 +389,6 @@ lemma _root_.AlgebraicGeometry.Scheme.Opens.image_ι_inf (W : X.Opens) (A B : W.
     W.ι ''ᵁ (A ⊓ B) = W.ι ''ᵁ A ⊓ W.ι ''ᵁ B :=
   Opens.ext (Set.image_inter W.ι.isOpenEmbedding.injective)
 
-lemma _root_.AlgebraicGeometry.Scheme.Opens.image_ι_le (W : X.Opens) (A : W.toScheme.Opens) :
-    W.ι ''ᵁ A ≤ W := by
-  rintro _ ⟨x, -, rfl⟩
-  exact x.2
-
 /-- Sections over an open in the image of an open immersion are determined by their pullbacks. -/
 lemma _root_.AlgebraicGeometry.Scheme.Opens.eq_of_ι_app_eq (W : X.Opens) {O : X.Opens}
     (hO : O ≤ W) {s t : Γ(X, O)} (h : W.ι.app O s = W.ι.app O t) : s = t := by
@@ -444,7 +439,7 @@ variable (hV : Pairwise (Function.onFun Disjoint V)) (hcov : ⨆ c, V c = ⊤)
 include hV in
 lemma inf_eq_bot_of_ne {a b : Σ c, ι c} (h : b.1 ≠ a.1) :
     (V a.1).ι ''ᵁ (𝒟 a.1).U a.2 ⊓ (V b.1).ι ''ᵁ (𝒟 b.1).U b.2 = ⊥ :=
-  eq_bot_iff.mpr ((inf_le_inf (Scheme.Opens.image_ι_le _ _) (Scheme.Opens.image_ι_le _ _)).trans
+  eq_bot_iff.mpr ((inf_le_inf (Scheme.Opens.ι_image_le _ _) (Scheme.Opens.ι_image_le _ _)).trans
     (hV (Ne.symm h)).le_bot)
 
 /-- **Gluing coordinate covers over a disjoint open cover.** If `X` is the disjoint union of
@@ -476,7 +471,7 @@ noncomputable def sigma : X.CoordinateCover (Σ c, ι c) where
         subst c''
         rw [sigmaRatio_mk, sigmaRatio_mk, sigmaRatio_mk]
         refine Scheme.Opens.eq_of_ι_app_eq (V c) (inf_le_left.trans
-          (Scheme.Opens.image_ι_le _ _)) ?_
+          (Scheme.Opens.ι_image_le _ _)) ?_
         have := congrArg ((V c).toScheme.presheaf.map (eqToHom (show (V c).ι ⁻¹ᵁ
             ((V c).ι ''ᵁ (𝒟 c).U i ⊓ (V c).ι ''ᵁ (𝒟 c).U j) = (𝒟 c).U i ⊓ (𝒟 c).U j by
           rw [← Scheme.Opens.image_ι_inf, Scheme.Hom.preimage_image_eq])).op)
