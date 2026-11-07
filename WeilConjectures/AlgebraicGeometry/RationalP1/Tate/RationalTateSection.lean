@@ -260,7 +260,6 @@ private def derivedLineComparison
   (nativeSingle (coefficient l c).X f).app (line l c S) ≪≫
     (DerivedCategory.singleFunctor _ 0).mapIso (lineComparison l c f)
 
-set_option maxHeartbeats 800000 in
 -- Elaborate the canonical derived comparison with the module instance caches folded.
 private theorem derivedLineComparison_comp
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
@@ -299,7 +298,6 @@ private theorem derivedLineComparison_hom
 
 attribute [local irreducible] derivedLineComparison
 
-set_option maxHeartbeats 800000 in
 -- Elaborate the canonical derived comparison with the module instance caches folded.
 private theorem shiftedLineComparison_comp
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
@@ -335,7 +333,6 @@ private theorem shiftedLineComparison_congr
   subst g
   simp only [eqToHom_refl, Category.id_comp]
 
-set_option maxHeartbeats 800000 in
 -- Keep the fixed coefficient and the canonical section maps folded.
 /-- Pulling the fixed Tate comparison back to the diagonal gives the canonical section.
 Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
