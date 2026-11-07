@@ -90,6 +90,10 @@ private theorem tensorPullCounit_fac_private (F : C ⥤ D) [F.Additive]
   erw [reassoc_of% tensorPresentation_fac B' H ε
     ((F.mapHomotopyCategory (.up ℤ)).obj P)]
 
+/-- Public export of the private `tensorPullCounit_fac_private`
+(used by `import all` importers; linter.privateModule). -/
+alias tensorPullCounit_fac := tensorPullCounit_fac_private
+
 end GenericNormalization
 local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
 namespace AlgebraicGeometry.ProEtale.CondensedRing
@@ -99,7 +103,3 @@ attribute [local instance 20000] sheafBraidedCategory
 attribute [local instance 20000] Functor.tensorModelHomotopyMonoidal
 attribute [local irreducible] Functor.leftDerivedFunctor Functor.mapDerivedCategory
 end AlgebraicGeometry.ProEtale.CondensedRing
-
-/-- Public export of the private `tensorPullCounit_fac_private`
-(used by `import all` importers; linter.privateModule). -/
-alias tensorPullCounit_fac := tensorPullCounit_fac_private

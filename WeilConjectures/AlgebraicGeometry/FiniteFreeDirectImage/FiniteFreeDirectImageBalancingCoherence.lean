@@ -716,11 +716,10 @@ private theorem tower_private
     isoWhiskerLeft_hom, isoWhiskerRight_hom, isoWhiskerLeft_inv, isoWhiskerRight_inv,
     Functor.whiskerLeft_app, Functor.whiskerRight_app, Category.assoc]
 
+/-- Public export of the private `tower_private`
+(used by `import all` importers; linter.privateModule). -/
+alias tower := tower_private
+
 end Conjugation
 
 end AlgebraicGeometry.Scheme.FiniteFreeDirectImage
-
-namespace AlgebraicGeometry.Scheme.FiniteFreeDirectImage.Conjugation
-/-- Public export of the private `tower_private` (used by `import all` importers; linter.privateModule). -/
-alias tower := tower_private
-end AlgebraicGeometry.Scheme.FiniteFreeDirectImage.Conjugation

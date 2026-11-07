@@ -64,6 +64,10 @@ private theorem coordinateInjection_naturality_private (V : A ⥤ A)
   simpa only [Category.assoc] using
     congrArg (fun h ↦ h ≫ Φ.inv.app Y) (powerInjection_naturality d f i)
 
+/-- Public export of the private `coordinateInjection_naturality_private`
+(used by `import all` importers; linter.privateModule). -/
+alias coordinateInjection_naturality := coordinateInjection_naturality_private
+
 private theorem powerInjection_map (F : A ⥤ B) [F.Additive]
     (X : A) (i : Fin d) :
     F.map (biproduct.ι (fun _ : Fin d ↦ X) i ≫
@@ -106,16 +110,10 @@ private theorem coordinateInjection_square_private (F : A ⥤ B) [F.Additive]
   simp only [Category.comp_id]
   exact powerInjection_map d F X i
 
+/-- Public export of the private `coordinateInjection_square_private`
+(used by `import all` importers; linter.privateModule). -/
+alias coordinateInjection_square := coordinateInjection_square_private
+
 end CoordinateColumns
 
-end AlgebraicGeometry.Scheme.FiniteFreeDirectImage
-
-namespace AlgebraicGeometry.Scheme.FiniteFreeDirectImage
-/-- Public export of the private `coordinateInjection_naturality_private` (used by `import all` importers; linter.privateModule). -/
-alias coordinateInjection_naturality := coordinateInjection_naturality_private
-end AlgebraicGeometry.Scheme.FiniteFreeDirectImage
-
-namespace AlgebraicGeometry.Scheme.FiniteFreeDirectImage
-/-- Public export of the private `coordinateInjection_square_private` (used by `import all` importers; linter.privateModule). -/
-alias coordinateInjection_square := coordinateInjection_square_private
 end AlgebraicGeometry.Scheme.FiniteFreeDirectImage

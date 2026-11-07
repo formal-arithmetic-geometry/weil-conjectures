@@ -297,9 +297,8 @@ private theorem comparison_isIso_app_private {Z W : Scheme.{u}} (q : Z ⟶ W)
       a.target a.source R.identification S.identification a.comm).2.1
   exact isIso_of_reflects_iso f U
 
-end AlgebraicGeometry.Scheme.FiniteFreeDirectImage
-
-namespace AlgebraicGeometry.Scheme.FiniteFreeDirectImage
-/-- Public export of the private `comparison_isIso_app_private` (used by `import all` importers; linter.privateModule). -/
+/-- Public export of the private `comparison_isIso_app_private`
+(used by `import all` importers; linter.privateModule). -/
 alias comparison_isIso_app := comparison_isIso_app_private
+
 end AlgebraicGeometry.Scheme.FiniteFreeDirectImage

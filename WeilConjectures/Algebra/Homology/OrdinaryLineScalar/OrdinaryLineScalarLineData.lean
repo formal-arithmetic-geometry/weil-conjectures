@@ -119,6 +119,10 @@ private theorem pure_eq_ordinary_private
     (← Lean.Elab.Tactic.getMainGoal).assign hd.toExpr
     Lean.Elab.Tactic.replaceMainGoal []
 
+/-- Public export of the private `pure_eq_ordinary_private`
+(used by `import all` importers; linter.privateModule). -/
+alias pure_eq_ordinary := pure_eq_ordinary_private
+
 private def tensor_site
     {R : Sheaf (Scheme.ProEt.topology X) CommRingCat.{max a (t + 1)}}
     (M N : Modules.{t, a} X R) :=
@@ -215,10 +219,4 @@ attribute [local semireducible] monoidalCategory
 
 end LineConstruction
 
-end SheafOfModules.OrdinaryLineScalar
-
-namespace SheafOfModules.OrdinaryLineScalar
-/-- Public export of the private `pure_eq_ordinary_private`
-(used by `import all` importers; linter.privateModule). -/
-alias pure_eq_ordinary := pure_eq_ordinary_private
 end SheafOfModules.OrdinaryLineScalar

@@ -71,9 +71,8 @@ private theorem mate_columns_private
   simp only [Adjunction.homEquiv_unit, Functor.map_comp, ← Category.assoc,
     adj.right_triangle_components, Category.id_comp]
 
-end AlgebraicGeometry.Scheme.FiniteFreeDirectImage
-
-namespace AlgebraicGeometry.Scheme.FiniteFreeDirectImage
-/-- Public export of the private `mate_columns_private` (used by `import all` importers; linter.privateModule). -/
+/-- Public export of the private `mate_columns_private`
+(used by `import all` importers; linter.privateModule). -/
 alias mate_columns := mate_columns_private
+
 end AlgebraicGeometry.Scheme.FiniteFreeDirectImage
