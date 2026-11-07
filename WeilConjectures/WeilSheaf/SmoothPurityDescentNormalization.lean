@@ -49,6 +49,7 @@ lemma rightDerivedFunctorCompMapOfNatIsoIsoOfForgetIso_hom_fac
   simp [rightDerivedFunctorCompMapOfNatIsoIsoOfForgetIso]
 
 variable {B : Type*} [Category B] [Abelian B] [HasDerivedCategory B]
+  [Abelian.HasKInjectiveResolutions B]
   {L₀ : A ⥤ B} [L₀.Additive]
   (S : B ⥤ IsoAlgebra G) [S.Additive] [PreservesFiniteLimits S] [PreservesFiniteColimits S]
 

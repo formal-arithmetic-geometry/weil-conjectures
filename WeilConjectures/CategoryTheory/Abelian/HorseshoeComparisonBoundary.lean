@@ -203,7 +203,6 @@ private theorem augmentation_boundary
     boundedBelowSESBoundary, Functor.map_preimage, Category.assoc]
   simp only [resolutionAugmentationIso, Functor.preimageIso_hom, Functor.map_preimage,
     Iso.trans_hom, Iso.app_hom, asIso_hom,
-
     Category.assoc]
   change (hS.singleδ ≫ (DerivedCategory.Plus.ι.commShiftIso (1 : ℤ)).inv.app
       ((DerivedCategory.Plus.singleFunctor A 0).obj S.X₁)) ≫
@@ -220,11 +219,7 @@ private theorem augmentation_boundary
         (DerivedCategory.Plus.Q.obj (resolutionPlus IA))
   simp only [Category.assoc, Iso.inv_hom_id_app_assoc, Iso.inv_hom_id_app,
     Functor.map_comp]
-  simp only [ShortComplex.ShortExact.singleδ,
-
-
-
-    Category.id_comp]
+  simp only [ShortComplex.ShortExact.singleδ]
   simp only [DerivedCategory.singleFunctorIsoCompQ, Iso.app_hom, Iso.refl_hom, NatTrans.id_app]
   erw [Functor.map_id, Category.id_comp, Category.id_comp, Category.comp_id]
   exact hn

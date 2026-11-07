@@ -44,7 +44,7 @@ variable {D : Type u₂} [Category.{v + 1} D] [Abelian D]
 omit [MonoidalCategory C] [MonoidalClosed C] [MonoidalPreadditive C]
   [BraidedCategory C] [Abelian.HasFunctorialFlatResolution C] in
 set_option backward.isDefEq.respectTransparency false in
-private theorem tensorPullCounit_fac (F : C ⥤ D) [F.Additive]
+private theorem tensorPullCounit_fac_private (F : C ⥤ D) [F.Additive]
     (G : DerivedCategory C ⥤ DerivedCategory D)
     (γ : DerivedCategory.Qh ⋙ G ⟶
       F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
@@ -99,3 +99,6 @@ attribute [local instance 20000] sheafBraidedCategory
 attribute [local instance 20000] Functor.tensorModelHomotopyMonoidal
 attribute [local irreducible] Functor.leftDerivedFunctor Functor.mapDerivedCategory
 end AlgebraicGeometry.ProEtale.CondensedRing
+
+/-- Public export of the private `tensorPullCounit_fac_private` (used by `import all` importers; linter.privateModule). -/
+alias tensorPullCounit_fac := tensorPullCounit_fac_private

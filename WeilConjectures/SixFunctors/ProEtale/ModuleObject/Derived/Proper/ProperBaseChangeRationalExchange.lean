@@ -51,13 +51,15 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.Prop
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.IntegralProperBaseChange
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.CoefficientProjectionSquare
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.InternalScalarTensorComparison
+import WeilConjectures.AlgebraicGeometry.CondensedModuleDerivedPushpull
 import all WeilConjectures.AlgebraicGeometry.NormedCoefficientRealization.NormedCoefficientRealization
 import all WeilConjectures.AlgebraicGeometry.Adic.AdicConstructibilityPredicateComparison
 import all WeilConjectures.AlgebraicGeometry.Integral.IntegralCoefficientExtComparison
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Bounded.BoundedConstructibleTensorPreservation
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.LocalizedDirectImageComparison
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperBaseChange.Compatibility
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.CoefficientProjectionSquare
 
 /-!
 # Proper direct image with rational condensed coefficients: proper base change
@@ -117,8 +119,6 @@ variable {X' Y' : Over (Spec (.of k))}
   [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
   {g : Y' ⟶ Y} {p' : X' ⟶ Y'} {g' : X' ⟶ X}
 
-attribute [local irreducible] boundedConstructibleBaseChange
-
 attribute [local irreducible] boundedConstructibleUpperStar
   derivedUpperStarLowerStarAdjunction ObjectProperty.lift
   boundedConstructibleUpperStarCompatibility boundedConstructiblePullbackSquareComparison
@@ -129,6 +129,7 @@ private theorem baseChange_restriction_eq
     (sq : CommSq g' p' p g) :
     boundedConstructibleBaseChangeOfPreserves (Profinite.padicAlgClRingObj ℓ) ℓ H sq =
       boundedConstructibleBaseChange ℓ sq := by
+  rw [boundedConstructibleBaseChange_def]
   with_unfolding_all rfl
 
 private theorem baseChange_restriction_eq_subfield
@@ -137,6 +138,7 @@ private theorem baseChange_restriction_eq_subfield
     (sq : CommSq g' p' p g) :
     boundedConstructibleBaseChangeOfPreserves (Profinite.continuousMapRingObj E) ℓ H sq =
       ContinuousMapRingObj.boundedConstructibleBaseChange ℓ E sq := by
+  rw [ContinuousMapRingObj.boundedConstructibleBaseChange_def]
   with_unfolding_all rfl
 
 set_option backward.isDefEq.respectTransparency false in
