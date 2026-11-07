@@ -39,7 +39,6 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme PadicAlgCl MonObj
 
-set_option maxHeartbeats 400000 in
 -- The generic mate comparison elaborates several derived adjunctions.
 /-- A finite point copower gives finite scalar units on schemes; the mate criterion then
 reduces coefficient pushforward to additivity of the derived direct image. -/

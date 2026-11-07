@@ -273,7 +273,6 @@ private theorem sheaf_mono_of_app_mono
   have : Mono ((sheafToPresheaf J D).map f) := NatTrans.mono_of_mono_app _
   exact (sheafToPresheaf J D).mono_of_mono_map inferInstance
 
-set_option maxHeartbeats 2000000 in
 -- Exact pullback and pointwise injectivity require a larger elaboration budget.
 private theorem cyclicMap_shortExact (l n : ℕ) [Fact l.Prime] (W : Scheme.{u}) :
     ∃ w : (((l ^ (n + 1) : ℕ) : ℤ) •
@@ -626,7 +625,6 @@ private theorem underlying_glue
     f ≫ g ≫ h ≫ i ≫ j ≫ k ≫ m = (z ≫ v ≫ r) := by
   rw [reassoc_of% hi, hh, reassoc_of% hn, ← Category.assoc, hf]
 
-set_option maxHeartbeats 2000000 in
 -- Resolving comparison elaborates several nested derived functors.
 private theorem scalarCone_extension_comparison
     {C : Type u} [Category.{v} C] [Abelian C] [MonoidalCategory C]
@@ -730,7 +728,6 @@ private theorem comp_three_eq
     f ≫ (a ≫ b ≫ c) = i := by
   rw [← Category.assoc, ha, ← Category.assoc, hb, hc]
 
-set_option maxHeartbeats 2000000 in
 -- The reduction comparison computes exact realization on regular resolutions.
 private theorem completedScalarComparison
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (n : ℕ)
@@ -779,7 +776,6 @@ private theorem completedScalarComparison
 attribute [local irreducible] Functor.mapDerivedCategory in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 2000000 in
 -- The normalized unit square involves several exact-derived coherence isomorphisms.
 /-- The derived scalar quotient and any normalized simultaneous completed quotient
 have the same underlying quotient unit, naturally on every derived input.
