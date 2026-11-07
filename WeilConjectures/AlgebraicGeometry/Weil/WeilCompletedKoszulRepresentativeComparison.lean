@@ -294,7 +294,6 @@ end CategoryTheory
 namespace AlgebraicGeometry.Scheme
 universe v
 
-set_option maxHeartbeats 600000 in
 -- Checking the two presentations of the exact derived equivalence needs extra elaboration.
 /-- The explicit Koszul fiber comparison for every specified derived representative.
 
