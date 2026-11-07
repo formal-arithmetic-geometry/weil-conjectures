@@ -90,7 +90,13 @@ theorem section_pull_transport_geometric_computation {X Y : Scheme.{u}} (f : X �
           (((ModuleRingedComparison.equivalence Λ Y).functor.mapHomologicalComplex (.up ℤ)).obj
             P)))
       ((ModuleRingedComparison.derivedEquivalence Λ X).functor.map
-        ((pullCounit (Λ := Λ) f).app ((HomotopyCategory.quotient _ _).obj P)) ≫
+        ((L Λ f).map
+            ((DerivedCategory.quotientCompQhIso (Modules Λ Y)).inv.app P) ≫
+          (pullCounit (Λ := Λ) f).app ((HomotopyCategory.quotient _ _).obj P) ≫
+          DerivedCategory.Qh.map
+            (((CondensedRing.upperStar Λ f).mapHomotopyCategoryFactors (.up ℤ)).hom.app P) ≫
+          (DerivedCategory.quotientCompQhIso (Modules Λ X)).hom.app
+            (((CondensedRing.upperStar Λ f).mapHomologicalComplex (.up ℤ)).obj P)) ≫
       ((ModuleRingedComparison.equivalence Λ X).functor.mapDerivedCategoryFactors).hom.app
         (((CondensedRing.upperStar Λ f).mapHomologicalComplex (.up ℤ)).obj P) ≫
       DerivedCategory.Q.map
