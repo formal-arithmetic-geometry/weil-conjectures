@@ -107,9 +107,9 @@ private noncomputable def intrinsicDerivedComparisonPullbackIso
         proEtaleConstantRingDerivedPullback A f ≅
       (Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) f).mapDerivedCategory ⋙
         ProEtale.finiteCoefficientIntrinsicDerivedComparison X A :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (intrinsicComparisonPullbackIso f A) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
 
 private theorem comparison_tor_iff (T : Scheme.{u}) (A : Type u)
     [CommRing A] [Finite A] (a b : ℤ) (hab : a ≤ b)
@@ -122,8 +122,8 @@ private theorem comparison_tor_iff (T : Scheme.{u}) (A : Type u)
   let R := ProEtale.finiteCoefficientIntrinsicRealization T A
   let e := (Functor.mapDerivedCategoryCompIso C R).app K
   have h := ProEtale.comparison_torAmplitudeIn_iff A T a b hab ⟨K, hK⟩
-  exact h.trans ⟨fun h ↦ torAmplitude_of_iso T A e.symm a b h,
-    fun h ↦ torAmplitude_of_iso T A e a b h⟩
+  exact h.trans ⟨fun h ↦ torAmplitude_of_iso T A e a b h,
+    fun h ↦ torAmplitude_of_iso T A e.symm a b h⟩
 
 /-- Pullback preserves bounded constructibility and the very same Tor interval.
 Source: Weil blueprint, order 2064 (blueprint: lem-sf-pullback-tor-amplitude).
