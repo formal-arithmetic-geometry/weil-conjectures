@@ -335,7 +335,7 @@ theorem subsingleton_sheafH_gaSheaf_of_isAffine (X : Scheme.{u}) [IsAffine X] (q
         (∀ a, R (U a).hom) ∧
         Sieve.ofArrows (fun a ↦ (U a).left) (fun a ↦ (U a).hom) ∈ X.smallEtaleTopology V := by
     have : IsAffine V.left := hV
-    obtain ⟨n, U, g, hRg, hU, hg⟩ := exists_finite_affine_of_mem_smallEtaleTopology hR
+    obtain ⟨n, U, g, hRg, hU, hg⟩ := (AlgebraicGeometry.Etale.exists_affine_refinement _) hR
     exact ⟨n, fun a ↦ Over.mk (g a), fun k y ↦ isAffine_cechNerveObj _ hU y, hRg,
       (ofArrows_mem_smallEtaleTopology_iff g).2 hg⟩
   exact Sheaf.subsingleton_H_succ_of_exactAt_cechComplex hT B

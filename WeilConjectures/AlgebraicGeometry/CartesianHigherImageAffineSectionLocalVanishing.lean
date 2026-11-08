@@ -218,7 +218,7 @@ theorem cartesianHigherImage_affine_section_local_zero_sieve
   obtain ⟨R, hR, hlocal⟩ :=
     exists_rawSectionsComparison_local_zero_sieve c.pt.left (q : ℤ) m U x hx
   obtain ⟨n, V, r, hr, hV, hcover⟩ :=
-    Scheme.exists_finite_affine_of_mem_smallEtaleTopology hR
+    (AlgebraicGeometry.Etale.exists_affine_refinement _) hR
   let J := ULift.{u} (Fin n)
   let _ : Fintype J := Fintype.ofFinite J
   let V' : J → c.pt.left.Etale := fun t ↦ V t.down
@@ -294,7 +294,7 @@ theorem exists_cartesianHigherImage_affine_section_local_zero
   obtain ⟨j, a, S, hS, hzero⟩ :=
     cartesianHigherImage_affine_section_local_zero_sieve D c hc f F q U i x hx
   obtain ⟨n, V, r, hr, hV, hcover⟩ :=
-    Scheme.exists_finite_affine_of_mem_smallEtaleTopology hS
+    (AlgebraicGeometry.Etale.exists_affine_refinement _) hS
   let J := ULift.{u} (Fin n)
   let _ : Fintype J := Fintype.ofFinite J
   let V' : J → c.pt.left.Etale := fun t => V t.down

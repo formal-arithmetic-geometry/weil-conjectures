@@ -263,7 +263,6 @@ theorem exists_cohomologyRestrictOver_eq_of_isLimit (q : ℕ)
       (c'.π.app k'') (D'.map f'') hgh q
   rw [ModuleSheaf.restrictAlong_congr _ _ _ _ _ _ hm]
 
-set_option maxHeartbeats 1000000 in
 -- the descent of the refinement, the cocycle and its primitive is a long elaboration
 /-- **Continuity of étale cohomology, injectivity** (blueprint
 `lemma-weil-pbc-etale-cohomology-continuity`): a cohomology class of the pullback of `F` to some

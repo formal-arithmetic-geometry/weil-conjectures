@@ -105,7 +105,7 @@ instance isIso_presheafHomRestrict (M : modulesPseudofunctor.obj (.mk (op Y))) (
   rw [presheafHomRestrict_eq]
   infer_instance
 
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 600000 in
 -- the defeq checks through the pseudofunctor of modules are slow
 lemma presheafHomRestrict_naturality (M : modulesPseudofunctor.obj (.mk (op Y))) {T T' : Over X}
     (g : T' ⟶ T)
@@ -135,7 +135,7 @@ lemma presheafHomRestrict_smulMor (M : modulesPseudofunctor.obj (.mk (op Y))) (T
 
 variable [Etale f]
 
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 500000 in
 -- the defeq checks through the small étale and pro-étale sites are slow
 /-- **Restriction of `Isom(𝒪, M)`.** The restriction along an étale `f : X ⟶ Y` of the
 `𝔾ₘ`-torsor `Isom(𝒪_Y, M)` is the torsor `Isom(𝒪_X, f^* M)`. -/
