@@ -192,7 +192,7 @@ private theorem complexData_eq (l : ℕ) [Fact l.Prime]
     pbcDerivedExtend reductionDerivedChange
     completedAdicDerivedChange pbcExtensionCounit reductionDerivedCounit
     completedDerivedScalarExtension completedScalarChangeData completedAdicChangeData
-  rfl
+  with_unfolding_all rfl
 
 private theorem extension_models_eq (l : ℕ) [Fact l.Prime]
     (E : Type w) [Field E] [Algebra (Padic l) E]
