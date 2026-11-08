@@ -240,7 +240,8 @@ private theorem supportHomResolutionIso_id
   apply DerivedCategory.Plus.ι.map_injective
   change DerivedCategory.Plus.ι.map (DerivedCategory.Plus.ι.preimage _) = _
   rw [Functor.map_preimage]
-  simp [DerivedCategory.Plus.QCompιIso_hom_app, DerivedCategory.Plus.QCompιIso_inv_app]
+  simp [DerivedCategory.Plus.QCompιIso_hom_app,
+    DerivedCategory.Plus.QCompιIso_inv_app] <;> rfl
 private theorem supportHomNormalization_injective
     (N : SupportedHomCocycleNormalization J A hT j B rho)
     (I : CochainComplex.Plus (Sheaf J (ModuleCat.{u + 1} A)))
@@ -296,6 +297,10 @@ private theorem supportHomModelIso_refl_hom
     Functor.mapIso_hom, Iso.refl_hom, asIso_hom, Iso.app_hom, Iso.app_inv, hs, ht,
     Functor.quotientCompMapHomotopyCategoryPlusIso, Iso.refl_inv, NatTrans.id_app,
     CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+  repeat first
+    | erw [CategoryTheory.Functor.map_id]
+    | erw [Category.id_comp]
+    | erw [Category.comp_id]
 
 end
 private theorem supportHomExactCocycle_numerator
