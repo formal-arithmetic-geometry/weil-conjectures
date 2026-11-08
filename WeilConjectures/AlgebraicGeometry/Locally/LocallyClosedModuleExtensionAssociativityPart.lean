@@ -46,7 +46,6 @@ private noncomputable abbrev moduleAdj {S X : LocallyClosedCoefficients.{u}}
 attribute [local irreducible] LocallyClosedCoefficientImmersion.pullComp
   exchangeModuleComposition
 
-set_option maxHeartbeats 2000000 in
 -- Comparing underlying direct images requires reducing several module structures.
 attribute [local irreducible] proEtaleRingModuleDirectImage
 
