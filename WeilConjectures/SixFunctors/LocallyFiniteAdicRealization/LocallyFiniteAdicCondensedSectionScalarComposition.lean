@@ -149,8 +149,7 @@ private theorem modTranspose
   rw [← Category.assoc, ← DerivedCategory.Qh.map_comp]
   rfl
 
-attribute [local implicit_reducible] HomotopyCategory
-  CategoryTheory.Functor.mapHomotopyCategory in
+attribute [local implicit_reducible] HomotopyCategory in
 private theorem restrictionHomotopyFactors
     (w : φ ≫ ψ = χ) (K : HomotopyCategory (Mod C T) (.up ℤ)) :
     (comap φ).mapDerivedCategoryFactorsh.inv.app
