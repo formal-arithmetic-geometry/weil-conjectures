@@ -129,7 +129,7 @@ attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
 
 attribute [local implicit_reducible] podOrdinaryReindex podGoodReindex
   integralOperationsGoodLocalization integralOperationsTensorComplexFunctor
-  integralOperationsRoosFunctor integralOperationsTensorOnGood Functor.mapHomologicalComplex
+  integralOperationsRoosFunctor integralOperationsTensorOnGood
   scalarReductionSourceDerived integralTowerHasDerivedCategory
   integralOperationsCommHasDerivedCategory
 

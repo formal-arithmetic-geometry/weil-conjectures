@@ -88,7 +88,7 @@ attribute [local irreducible] Functor.leftAdjoint Functor.rightAdjoint
   openDerivedRestrictScalarsIso
   Functor.mapDerivedCategoryFactors Functor.mapDerivedCategoryFactorsh
   scalarExtensionRepresentative derivedOpenImmersionLowerShriekUpperStarAdjunction
-  Functor.mapDerivedCategoryCompIso Functor.mapDerivedCategoryNatIso
+  Functor.mapDerivedCategoryNatIso
 
 private theorem cancel_square_transport
     {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]

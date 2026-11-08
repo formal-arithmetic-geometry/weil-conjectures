@@ -28,7 +28,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Functor.rightDerivedFun
   Functor.leftDerivedFunctor
   Etale.scalarTensorIso Scheme.completedAdicDerivedChange
 attribute [local implicit_reducible] Equivalence.mapDerivedCategory
-  Scheme.sfIntrinsicDerivedEquivalence Functor.mapHomologicalComplex
+  Scheme.sfIntrinsicDerivedEquivalence
 
 private theorem mate_whisker_top
     {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]

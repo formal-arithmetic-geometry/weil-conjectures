@@ -929,7 +929,7 @@ noncomputable def pointFibreLiftDownIso (F : Type u) [Field F] :
     (pointFibreModuleLift F).mapDerivedCategory ⋙
         (pointFibreCoefficientDown F).mapDerivedCategory ≅
       (ModuleCat.uliftFunctor.{u + 1, u} F).mapDerivedCategory :=
-  (CategoryTheory.Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  CategoryTheory.Functor.mapDerivedCategoryCompIso _ _ ≪≫
     CategoryTheory.Functor.mapDerivedCategoryNatIso
       (pointFibreLiftDown_existsUnique F).exists.choose
 
@@ -1043,11 +1043,11 @@ noncomputable def pointFibreRationalDownIso :
   letI := pointModuleRationalizationColimits l E
   CategoryTheory.Functor.associator _ _ _ ≪≫
     CategoryTheory.Functor.isoWhiskerLeft _
-      (CategoryTheory.Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
-    (CategoryTheory.Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      CategoryTheory.Functor.mapDerivedCategoryCompIso _ _ ≪≫
+    CategoryTheory.Functor.mapDerivedCategoryCompIso _ _ ≪≫
     CategoryTheory.Functor.mapDerivedCategoryNatIso
       (pointFibreRationalDown_existsUnique D l E).exists.choose ≪≫
-    CategoryTheory.Functor.mapDerivedCategoryCompIso _ _
+    (CategoryTheory.Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The common-lift rational object before descending its size.
 Source: blueprint order 1509 (blueprint: def-weil-finite-coefficient-point). -/
@@ -1158,10 +1158,10 @@ noncomputable def pointFibreTensorLiftIso :
         (ModuleCat.uliftFunctor.{u + 1, u} L).mapDerivedCategory ≅
       (ModuleCat.uliftFunctor.{u + 1, u} E).mapDerivedCategory ⋙
         pointCoefficientFieldDerivedTensor l E L ι :=
-  (CategoryTheory.Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  CategoryTheory.Functor.mapDerivedCategoryCompIso _ _ ≪≫
     CategoryTheory.Functor.mapDerivedCategoryNatIso
       (pointFibreTensorLift_existsUnique l E L ι).exists.choose ≪≫
-    CategoryTheory.Functor.mapDerivedCategoryCompIso _ _
+    (CategoryTheory.Functor.mapDerivedCategoryCompIso _ _).symm
 
 attribute [local irreducible] pointIntegralRationalFibre pointFibreSizeDescent
   pointFibreLiftDownIso pointFibreRationalDownIso

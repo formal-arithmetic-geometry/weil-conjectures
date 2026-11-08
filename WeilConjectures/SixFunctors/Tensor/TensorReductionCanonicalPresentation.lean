@@ -35,7 +35,6 @@ attribute [local implicit_reducible] integralOperationsGoodLocalization
   integralOperationsGoodComplex
   coefficientIntegralTensorModelIso coefficientSystemTensorModelIso
   coefficientKFlatInclusion CoefficientTensorModels.iso
-  CategoryTheory.Functor.mapHomologicalComplex
   scalarReductionSourceDerived scalarReductionTargetDerived coefficientSequenceHasDerived
   coefficientFiniteHasDerived coefficientConstantTowerDerived
   unrestrictedIntegralReductionFunctor integralCoefficientSheaf integralCoefficientCommRingSheaf
