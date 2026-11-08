@@ -68,6 +68,7 @@ private lemma finiteLeg_native (ℓ : ℕ) [Fact ℓ.Prime]
   have h := padicSubfieldSheafToPadicAlgClSheaf_comp_iso_hom_app T ℓ E V s
   exact congrArg (fun f : C(V.unop.left, PadicAlgCl ℓ) ↦ f x) h
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The finite closure leg followed by the native coefficient comparison is the
 specified actual field inclusion on continuous functions.
 Source: BS 6.8.2; finite chart normalization and the fixed coefficient cocone.
