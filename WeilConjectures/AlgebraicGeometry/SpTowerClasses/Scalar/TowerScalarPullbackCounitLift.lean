@@ -87,6 +87,7 @@ private def single_counit
       DerivedCategory.Q ≫
     Functor.whiskerLeft E₀ (DerivedCategory.singleFunctorIsoCompQ B 0).inv
 
+set_option backward.isDefEq.respectTransparency true in
 private theorem counit_square_single
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     [Abelian A] [Abelian B] [Abelian C] [Abelian D]
@@ -136,8 +137,7 @@ private theorem counit_square_single
         simp [a, K, p, eX, eY, q, Functor.mapHomologicalComplexCompIso,
           HomologicalComplex.singleObjXSelf, HomologicalComplex.singleObjXIsoOfEq,
           HomologicalComplex.single_map_f_self]
-        erw [Category.comp_id, Category.id_comp, Category.comp_id, Category.comp_id]
-        exact h
+        simpa only [Category.id_comp, Category.comp_id] using! h
       erw [EX.map_id, Q.map_id]
       simp only [Category.id_comp, Category.comp_id]
       erw [Category.comp_id]
