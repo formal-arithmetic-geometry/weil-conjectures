@@ -177,7 +177,6 @@ private theorem transport_path_section
   subst s₁ s₂ t
   exact NatTrans.congr_app h M
 
-set_option maxHeartbeats 800000 in
 -- Normalize the fixed comparisons through generic equality transport.
 /-- Changing the two direct-image paths carries the second diagonal section to the first.
 Source: the rational projective-line triangle, First identity, composition of direct images

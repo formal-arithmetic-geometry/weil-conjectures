@@ -11,6 +11,7 @@ public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionFinite
 public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionSupplement
 public import Mathlib.RingTheory.Ideal.Quotient.Index
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit
@@ -46,15 +47,6 @@ open CategoryTheory.Pretriangulated
 open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
-
-/-- The point inverse image is a left adjoint, by its point adjunction and the scheme
-inverse-image adjunction. This supplies additivity for termwise scalar extension.
-Source: blueprint det-lem-int-tensor-product, local model P tensor R_S
-(blueprint: det-lem-int-tensor-product). -/
-noncomputable instance integralTensorProduct_point_isLeftAdjoint (X : Scheme.{u}) :
-    (upperStarFromPoint X).IsLeftAdjoint :=
-  letI : pointUpperStar.{u}.IsLeftAdjoint := pointUpperStarLowerStarAdjunction.isLeftAdjoint
-  inferInstanceAs ((pointUpperStar ⋙ upperStar Ab.{u + 1} (toSpecZ X)).IsLeftAdjoint)
 
 private theorem localModel_dualizable
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]

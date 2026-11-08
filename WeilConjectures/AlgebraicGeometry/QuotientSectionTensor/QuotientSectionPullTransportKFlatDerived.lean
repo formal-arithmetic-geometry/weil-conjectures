@@ -62,7 +62,7 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
 set_option cleanup.letToHave false in
 set_option synthInstance.maxHeartbeats 200000 in
 -- Instance synthesis traverses the eight localization functors in the pasting diagram.
-set_option maxHeartbeats 1600000 in
+set_option maxHeartbeats 400000 in
 -- The fully typed categorical pasting diagram needs a larger elaboration budget.
 /-- Given the normalized ordinary square and the conjugated derived comparison,
 the scalar-model counit computation holds on every flat-term K-flat complex.

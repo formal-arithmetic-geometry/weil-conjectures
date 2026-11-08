@@ -25,7 +25,7 @@ open CategoryTheory CategoryTheory.Limits CochainComplex
 namespace AlgebraicGeometry
 
 set_option linter.all false in
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 600000 in
 -- Normalization compares several chosen derived functors on three representatives.
 /-- A normalized coefficient roof localizes to the corresponding direct-image
 square mate. Source: Stacks Project, Tags 08HY and 0D5T.

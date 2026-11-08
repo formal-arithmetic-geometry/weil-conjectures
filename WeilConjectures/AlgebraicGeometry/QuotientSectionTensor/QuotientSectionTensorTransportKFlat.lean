@@ -58,7 +58,6 @@ attribute [local irreducible] ModuleRingedComparison.tensor tensorComparison qTe
   HomologicalComplex₂.total Mod.inducingFunctorData
   InternalAbelianSheafModule.sectionModuleEquivalence SheafOfModules.monoidalCategory
 
-set_option maxHeartbeats 1600000 in
 -- Paste the localization diagram with its functors retained.
 /-- The conjugation equation on flat-term K-flat representatives.
 Source: Stacks 06YY, 07A4 and 07A6; parent proof steps 6--8.

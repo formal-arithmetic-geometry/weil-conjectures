@@ -59,7 +59,7 @@ attribute [local irreducible] ModuleRingedComparison.tensor tensorComparison qTe
   HomologicalComplex₂.total Mod.inducingFunctorData
   InternalAbelianSheafModule.sectionModuleEquivalence SheafOfModules.monoidalCategory
 
-set_option maxHeartbeats 1600000 in
+set_option maxHeartbeats 500000 in
 -- Paste the remaining tensor naturality and representative faces.
 /-- The scalar tensor localization diagram commutes before its common final map
 is cancelled.
