@@ -216,7 +216,7 @@ attribute [local implicit_reducible] completedIntegralCommRingSheafUnrestricted
 attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExistence
   unrestrictedIntegralReductionExistence tensorScalarLevelIso
 
-attribute [local implicit_reducible] tensorDiagram WithInitial.lift
+attribute [local implicit_reducible] tensorDiagram
 
 private theorem levelUnit_eq_tensor
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
