@@ -21,7 +21,7 @@ steps 7--9 of lem-sf-automorphism-constructible-stage-equivalence.
 set_option autoImplicit false
 set_option Elab.async false
 set_option synthInstance.maxSize 4096
-set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types true
 
 universe u v a₀ a₁ b₀ b₁
