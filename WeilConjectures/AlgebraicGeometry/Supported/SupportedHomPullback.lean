@@ -118,7 +118,7 @@ def cocycleMorphism
     (DerivedCategory.singleFunctor (Sheaf S.topology (ModuleCat.{u + 1} A)) 0).obj
       S.supported ⟶ (DerivedCategory.Plus.Q.obj I).obj⟦a⟧ :=
   supportedHomLocalizedCocycle I.obj a f hf ≫
-    ((DerivedCategory.quotientCompQhIso _).hom.app I.obj)⟦a⟧'
+    ((DerivedCategory.Plus.QCompιIso _).inv.app I)⟦a⟧'
 
 /-- The normalized supported-Hom identification. The cocycle clause fixes its value by
 `f ↦ (f ρ)(1)` on every injective representative, so no arbitrary natural isomorphism
@@ -408,8 +408,8 @@ set_option backward.isDefEq.respectTransparency.types false in
         apply DerivedCategory.Plus.ι.map_injective
         change DerivedCategory.Plus.ι.map (DerivedCategory.Plus.ι.preimage _) = _
         rw [Functor.map_preimage]
-        simp
-        rfl
+        simp [DerivedCategory.Plus.QCompιIso_hom_app,
+          DerivedCategory.Plus.QCompιIso_inv_app]
       let G := shiftFunctor (DerivedCategory (Sheaf S.topology (ModuleCat.{u + 1} A))) a
       let r : S.derivedHom (DerivedCategory.Plus.Q.obj I) a :=
         supportedHomLocalizedCocycle I.obj a f hf
@@ -418,14 +418,14 @@ set_option backward.isDefEq.respectTransparency.types false in
           ((Sheaf.supportSequenceModelIso S.topology (ModuleCat.{u + 1} A) S.sections I
             (DerivedCategory.Plus.Q.obj I) d a).hom ((S.complex I).homologyπ a x)))
         r r rfl (supportedHomResolutionIso S.topology A I I (𝟙 I))
-        ((DerivedCategory.quotientCompQhIso
-          (Sheaf S.topology (ModuleCat.{u + 1} A))).inv.app I.obj) hid (by rfl) heq
-      have hqh : G.map ((DerivedCategory.quotientCompQhIso
-          (Sheaf S.topology (ModuleCat.{u + 1} A))).hom.app I.obj) = 𝟙 _ := by
+        ((DerivedCategory.Plus.QCompιIso
+          (Sheaf S.topology (ModuleCat.{u + 1} A))).inv.app I) hid (by rfl) heq
+      have hqh : G.map ((DerivedCategory.Plus.QCompιIso
+          (Sheaf S.topology (ModuleCat.{u + 1} A))).inv.app I) = 𝟙 _ := by
         change G.map (𝟙 _) = 𝟙 _
         exact G.map_id _
-      change _ = r ≫ G.map ((DerivedCategory.quotientCompQhIso
-        (Sheaf S.topology (ModuleCat.{u + 1} A))).hom.app I.obj)
+      change _ = r ≫ G.map ((DerivedCategory.Plus.QCompιIso
+        (Sheaf S.topology (ModuleCat.{u + 1} A))).inv.app I)
       exact hnorm.trans ((congrArg (fun t => r ≫ t) hqh).trans (Category.comp_id r)).symm
 
 private theorem supportHomIdentificationOfNormalization_chi
