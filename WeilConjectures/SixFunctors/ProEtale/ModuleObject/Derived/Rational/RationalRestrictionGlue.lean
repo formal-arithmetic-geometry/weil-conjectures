@@ -448,7 +448,7 @@ theorem rationalRestrictionGlue
     have heq : e.inv ≫ u a = (O a).ι :=
       (Iso.inv_comp_eq e).mpr (Scheme.Hom.isoOpensRange_hom_ι (u a)).symm
     let ec := (Functor.mapDerivedCategoryNatIso (upperStarComp Λ e.inv (u a)) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _).app (G.obj K).obj
+      (Functor.mapDerivedCategoryCompIso _ _).symm).app (G.obj K).obj
     exact (constantModelBoundedConstructible Λ (O a).toScheme).prop_of_iso
       (ec.symm ≪≫ eqToIso
         (congrArg (fun t ↦ (upperStar Λ t).mapDerivedCategory.obj (G.obj K).obj) heq)) hpull
