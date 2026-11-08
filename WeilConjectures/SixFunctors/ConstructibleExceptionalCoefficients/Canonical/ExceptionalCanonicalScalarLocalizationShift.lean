@@ -19,8 +19,8 @@ attribute [local irreducible] HasDerivedCategory.standard Padic
   WeilConjectures.sfIntegralConstructible WeilConjectures.sfRationalTriangulationDatum
   CategoryTheory.ScalarLocalization.category
   Padic.coefficientExtensionIntegers Padic.coefficientExtensionUniformizer
-set_option backward.isDefEq.respectTransparency true
-set_option backward.isDefEq.respectTransparency.types true
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 set_option genInjectivity false
 set_option genSizeOf false
 set_option genSizeOfSpec false
@@ -55,6 +55,8 @@ private theorem rationalizationShift_eq
   unfold integralRationalizationShift finiteTorIntegralShift
   rfl
 
+set_option maxHeartbeats 400000 in
+-- v4.35: the final `rw` on the shift instances unfolds more without `respectTransparency`.
 /-- The ordinary-realization shift descends to the published canonical rational scalar shift.
 Source: Zheng, Construction 6.2; the normalized scalar square in Construction 6.6
 (blueprint: lem-sf-canonical-scalar-localization-shift).
