@@ -394,7 +394,7 @@ private theorem sfRestrictionOrigin (l : ℕ) [Fact l.Prime]
   let e : U.mapDerivedCategory.obj L.obj ≅ R.inverse.obj K.obj :=
     R.functor.preimageIso
       (((Functor.mapDerivedCategoryCompIso U
-        (sfIntrinsicModuleEquivalence T A).functor).app L.obj).symm ≪≫
+        (sfIntrinsicModuleEquivalence T A).functor).app L.obj) ≪≫
         eL ≪≫ (R.counitIso.app K.obj).symm)
   have hU : DerivedCategory.TStructure.t.plus (U.mapDerivedCategory.obj L.obj) := by
     obtain ⟨c, hc⟩ := hL
