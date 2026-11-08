@@ -30,8 +30,7 @@ open CategoryTheory CategoryTheory.Limits
 open AlgebraicGeometry AlgebraicGeometry.Scheme
 open AlgebraicGeometry.ProEtale.SpTowerClasses
 
-attribute [local implicit_reducible] CategoryTheory.Functor.mapHomologicalComplex
-  DerivedCategory.singleFunctors HomotopyCategory.singleFunctors
+attribute [local implicit_reducible] DerivedCategory.singleFunctors HomotopyCategory.singleFunctors
   CategoryTheory.ShortComplex.map CategoryTheory.Functor.mapShortComplex
 
 section

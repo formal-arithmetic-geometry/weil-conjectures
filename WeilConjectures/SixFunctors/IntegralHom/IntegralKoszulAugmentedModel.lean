@@ -212,7 +212,6 @@ attribute [local implicit_reducible] completedIntegralCommRingSheafUnrestricted
   IntegralOnSlice.restrict IntegralOnSlice.ring IntegralOnSlice.finite IntegralOnSlice.projection
   SheafOfModules.restrictScalars completedIntegralCommRingProjectionUnrestricted
   integralCoefficientSheaf integralCoefficientCommRingSheaf
-  CategoryTheory.Functor.mapHomologicalComplex
   SheafOfModules.KFlatTotalTensorModel.tensor SheafOfModules.KFlatTotalTensorModel.monoidal
 
 attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExistence

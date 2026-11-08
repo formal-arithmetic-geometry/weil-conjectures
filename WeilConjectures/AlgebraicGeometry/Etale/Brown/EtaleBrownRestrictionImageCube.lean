@@ -40,7 +40,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor Opposite SheafOfModules
 namespace AlgebraicGeometry
 attribute [local instance 5000] strictEtaleSystemDerived strictEtaleLevelDerived
-attribute [local implicit_reducible] Functor.mapHomologicalComplex
 attribute [local instance] CoefficientSystemOrdinaryImage.inverseAdditive
   CoefficientSystemOrdinaryImage.rightAdditive
   CoefficientSystemOrdinaryImage.systemInverseAdditive
