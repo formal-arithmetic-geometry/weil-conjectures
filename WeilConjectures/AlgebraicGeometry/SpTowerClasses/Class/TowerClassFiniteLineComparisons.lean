@@ -88,6 +88,5 @@ theorem finiteLineComparisons_exists
     Scheme.proEtaleConstantRing, Scheme.tateFiniteCoefficient, finiteLine, FiniteRing,
     Scheme.proEtaleBaseChange, Functor.op_obj, unop_op, op_unop, hr] at hp ⊢
   convert hp using 1
-  rfl
 
 end AlgebraicGeometry.ProEtale.SpTowerClasses
