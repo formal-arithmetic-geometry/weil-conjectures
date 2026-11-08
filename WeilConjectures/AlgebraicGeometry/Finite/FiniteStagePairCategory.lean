@@ -1336,6 +1336,30 @@ private theorem pbcIntegralScalarUnit_hom (E : Padic.FiniteCoefficientFields l �
   exact congrArg (fun η ↦ η.app K)
     (pbcIntegralScalarUnit_exists l Ω T hdim hl E).exists.choose_spec
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem pbcIntegralAssociator_leftUnit (h : E ≤ F)
+    (K : pbcIntegralStage l Ω T E) :
+    (pbcIntegralScalarAssociator l Ω T hdim hl (le_refl E) h).hom.app K =
+      (pbcIntegralScalarExtension l Ω T hdim hl h).map
+        ((pbcIntegralScalarUnit l Ω T hdim hl E).hom.app K) := by
+  apply ObjectProperty.hom_ext
+  change _ = (pbcAmbientScalarExtension l Ω T h).map
+    (((pbcIntegralScalarUnit l Ω T hdim hl E).hom.app K).hom)
+  erw [pbcIntegralScalarAssociator_hom, pbcIntegralScalarUnit_hom]
+  exact pbcAmbientAssociator_leftUnit l Ω T h K.obj
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem pbcIntegralAssociator_rightUnit (h : E ≤ F)
+    (K : pbcIntegralStage l Ω T E) :
+    (pbcIntegralScalarAssociator l Ω T hdim hl h (le_refl F)).hom.app K =
+      (pbcIntegralScalarUnit l Ω T hdim hl F).hom.app
+        ((pbcIntegralScalarExtension l Ω T hdim hl h).obj K) := by
+  apply ObjectProperty.hom_ext
+  erw [pbcIntegralScalarAssociator_hom, pbcIntegralScalarUnit_hom]
+  exact pbcAmbientAssociator_rightUnit l Ω T h K.obj
+
 private theorem pbcIntegralScalarAssociator_cocycle
     {H : Padic.FiniteCoefficientFields l Ω} (h : E ≤ F) (k : F ≤ G) (j : G ≤ H)
     (K : pbcIntegralStage l Ω T E) :
@@ -1506,6 +1530,93 @@ private theorem pbcScalarIntegralComparison_refl
   exact ((pbcScalarIntegralComparison_exists l Ω T hdim hl (le_refl E)).exists.choose_spec.1
     rfl).trans (pbcTransportIso_heq
       (congrArg (fun B ↦ pbcStageLocalization l Ω T E ⋙ B) hs) _).symm
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem pbcScalarAssociator_leftUnit (h : E ≤ F)
+    (hs : pbcScalarExtension l Ω T hdim hl (le_refl E) = 𝟭 _) :
+    pbcScalarAssociator l Ω T hdim hl (le_refl E) h =
+      eqToIso (congrArg (fun B ↦ B ⋙ pbcScalarExtension l Ω T hdim hl h) hs) ≪≫
+        Functor.leftUnitor (pbcScalarExtension l Ω T hdim hl h) := by
+  unfold pbcScalarAssociator
+  symm
+  apply (pbcScalarAssociator_exists l Ω T hdim hl (le_refl E) h).unique _
+    (pbcScalarAssociator_exists l Ω T hdim hl (le_refl E) h).exists.choose_spec
+  intro K
+  apply (cancel_mono ((pbcScalarIntegralComparison l Ω T hdim hl h).hom.app K)).1
+  simp only [Category.assoc, Iso.inv_hom_id_app]
+  rw [pbcIntegralAssociator_leftUnit,
+    pbcScalarIntegralComparison_refl l Ω T hdim hl E hs]
+  simp only [Iso.trans_hom, Iso.symm_hom, eqToIso.hom, NatTrans.comp_app,
+    eqToHom_app, Functor.rightUnitor_hom_app, Functor.leftUnitor_inv_app,
+    Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, Category.id_comp,
+    Functor.leftUnitor_hom_app]
+  simp only [CategoryTheory.Functor.map_comp, Category.assoc]
+  have hn := (pbcScalarIntegralComparison l Ω T hdim hl h).hom.naturality
+    ((pbcIntegralScalarUnit l Ω T hdim hl E).inv.app K)
+  simp only [Functor.comp_map] at hn
+  rw [reassoc_of% hn]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.id_comp, Category.comp_id]
+  have hu := congrArg (fun f ↦ (pbcStageLocalization l Ω T F).map
+    ((pbcIntegralScalarExtension l Ω T hdim hl h).map f))
+    (Iso.inv_hom_id_app (pbcIntegralScalarUnit l Ω T hdim hl E) K)
+  simp only [CategoryTheory.Functor.map_comp, CategoryTheory.Functor.map_id] at hu
+  erw [hu]
+  erw [Category.comp_id]
+  simp only [eqToHom_map]
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem pbcScalarAssociator_rightUnit (h : E ≤ F)
+    (hs : pbcScalarExtension l Ω T hdim hl (le_refl F) = 𝟭 _) :
+    pbcScalarAssociator l Ω T hdim hl h (le_refl F) =
+      eqToIso (congrArg (fun B ↦ pbcScalarExtension l Ω T hdim hl h ⋙ B) hs) ≪≫
+        Functor.rightUnitor (pbcScalarExtension l Ω T hdim hl h) := by
+  unfold pbcScalarAssociator
+  symm
+  apply (pbcScalarAssociator_exists l Ω T hdim hl h (le_refl F)).unique _
+    (pbcScalarAssociator_exists l Ω T hdim hl h (le_refl F)).exists.choose_spec
+  intro K
+  apply (cancel_mono ((pbcScalarIntegralComparison l Ω T hdim hl h).hom.app K)).1
+  simp only [Category.assoc, Iso.inv_hom_id_app]
+  rw [pbcIntegralAssociator_rightUnit,
+    pbcScalarIntegralComparison_refl l Ω T hdim hl F hs]
+  simp only [Iso.trans_hom, Iso.symm_hom, eqToIso.hom, NatTrans.comp_app,
+    eqToHom_app, Functor.rightUnitor_hom_app, Functor.leftUnitor_inv_app,
+    Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, Category.id_comp,
+    Category.assoc]
+  erw [Category.id_comp, Category.id_comp, Category.comp_id]
+  erw [← CategoryTheory.Functor.map_comp, Iso.inv_hom_id_app,
+    CategoryTheory.Functor.map_id, Category.comp_id]
+  have hn := (eqToIso hs).hom.naturality
+    ((pbcScalarIntegralComparison l Ω T hdim hl h).hom.app K)
+  simpa only [eqToIso.hom, eqToHom_app, Functor.id_map] using hn.symm
+
+/-- Normalized tensor identities give the literal identity transitions and unit associators.
+Source: blueprint order 1308 (blueprint: def-weil-pbc-finite-stage-pair-category).
+Proof: the equal-field branch of pbcScalarExtension is identity by definition.
+The ambient tensor-unit comparison is multiplication on pure tensors, and the
+ambient associator is tensor balancing with the same ordinary adjunction units.
+Their unit equations hold on those generators. Faithful integral inclusions and
+rationalization transport the equations, including repeated coefficient fields. -/
+theorem pbcScalarSystem_units (h : E ≤ F) :
+    pbcScalarExtension l Ω T hdim hl (le_refl E) = 𝟭 _ ∧
+      HEq (pbcScalarAssociator l Ω T hdim hl (le_refl E) h)
+        (Functor.leftUnitor (pbcScalarExtension l Ω T hdim hl h)) ∧
+      HEq (pbcScalarAssociator l Ω T hdim hl h (le_refl F))
+        (Functor.rightUnitor (pbcScalarExtension l Ω T hdim hl h)) := by
+  classical
+  have hsE : pbcScalarExtension l Ω T hdim hl (le_refl E) = 𝟭 _ := by
+    simp [pbcScalarExtension]
+  have hsF : pbcScalarExtension l Ω T hdim hl (le_refl F) = 𝟭 _ := by
+    simp [pbcScalarExtension]
+  refine ⟨hsE, ?_, ?_⟩
+  · exact (heq_of_eq (pbcScalarAssociator_leftUnit l Ω T hdim hl h hsE)).trans
+      (pbcTransportIso_heq
+        (congrArg (fun B ↦ B ⋙ pbcScalarExtension l Ω T hdim hl h) hsE) _)
+  · exact (heq_of_eq (pbcScalarAssociator_rightUnit l Ω T hdim hl h hsF)).trans
+      (pbcTransportIso_heq
+        (congrArg (fun B ↦ pbcScalarExtension l Ω T hdim hl h ⋙ B) hsF) _)
 
 /-- Rationalized tensor extension is additive.
 Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-stage-pair-category).
