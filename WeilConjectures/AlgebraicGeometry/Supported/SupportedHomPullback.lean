@@ -626,7 +626,8 @@ private theorem supportHomProEtaleConstantIso_spec
       ((ProEtale.constantSheafCompUpperStarIso (ModuleCat.{u + 1} A) f).hom.app
         (ModuleCat.of A A)) = _
   rw [ProEtale.CachedConstantCoherence.proConstant_eq_inverse,
-    Scheme.constantInverse, Equiv.apply_symm_apply]
+    Scheme.constantInverse]
+  erw [Equiv.apply_symm_apply]
   rfl
 
 set_option backward.isDefEq.respectTransparency false in
