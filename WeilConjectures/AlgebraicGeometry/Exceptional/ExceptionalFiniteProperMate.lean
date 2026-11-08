@@ -361,7 +361,9 @@ private theorem finiteConstantRight (n : ℕ) :
       ((adj.unit.app T).hom.app U z)) hc
     have ht := hunit M T t U z
     have hb := hunit M T b U z
-    change (β.hom.app M).hom.app U (a.hom.app U z • x) = _ at ht
+    change (β.hom.app M).hom.app U
+      ((show (coefficientQuotientSheaf (J := J)
+        O ell n).obj.obj U from a.hom.app U z) • x) = _ at ht
     change (β.hom.app M).hom.app U x = _ at hb
     rw [ha] at ht
     rw [ht]
