@@ -291,7 +291,7 @@ private theorem identityFactorIsoApp
   erw [Category.comp_id, Category.comp_id]
   rfl
 
-attribute [local irreducible] Functor.rightDerivedFunctorPlus Functor.rightDerivedFunctor
+attribute [local irreducible] Functor.rightDerivedFunctor
   Functor.mapDerivedCategory
 
 /-- The geometric compositor on an etale-origin input is the pair of identity unit maps.
