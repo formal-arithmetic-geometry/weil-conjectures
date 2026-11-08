@@ -93,9 +93,9 @@ def supportedHomResolutionIso
     (e : K ⟶ I) [QuasiIso e.hom] :
     DerivedCategory.Plus.Q.obj K ≅ DerivedCategory.Plus.Q.obj I :=
   DerivedCategory.Plus.ι.preimageIso
-    ((DerivedCategory.quotientCompQhIso _).app K.obj ≪≫
+    ((DerivedCategory.Plus.QCompιIso _).app K ≪≫
       asIso (DerivedCategory.Q.map e.hom) ≪≫
-      (DerivedCategory.quotientCompQhIso _).symm.app I.obj)
+      (DerivedCategory.Plus.QCompιIso _).symm.app I)
 
 /-- The type of additive evaluation isomorphisms onto the actual support kernel.
 Source: Milne, Section 9, Example 9.5 and Ext proof of Theorem 9.4
@@ -155,7 +155,7 @@ def SupportedHomChiCocycle
               (((Sheaf.supportedSectionsFunctor J (ModuleCat.{u + 1} A) j).mapHomologicalComplex
                 (ComplexShape.up ℤ) |>.obj I.obj).homologyπ a x)) =
           supportedHomLocalizedCocycle I.obj a f hf ≫
-            ((DerivedCategory.quotientCompQhIso _).inv.app I.obj)⟦a⟧' ≫
+            ((DerivedCategory.Plus.QCompιIso _).inv.app I)⟦a⟧' ≫
             (DerivedCategory.Plus.ι.map (supportedHomResolutionIso J A K I e).inv)⟦a⟧'
 
 attribute [local irreducible] supportedHomResolutionIso
@@ -1210,6 +1210,9 @@ private theorem normalizationRHom
       quasiIso := inferInstance
       isKInjective := CochainComplex.isKInjective_of_injective I.obj n }
   have hr := hroof I r I.2 hi a f hf
+  have : IsIso (DerivedCategory.Q.map (𝟙 I.obj)) := by
+    rw [DerivedCategory.Q.map_id]
+    infer_instance
   have hei : (DerivedCategory.Plus.ι (C := D)).preimageIso
       (X := DerivedCategory.Plus.Q.obj I) (Y := DerivedCategory.Plus.Q.obj I)
       ((DerivedCategory.Plus.QCompιIso D).app I ≪≫
@@ -1403,9 +1406,8 @@ private theorem normalizationChi
   obtain ⟨f, ⟨hfθ, hf, hr⟩, hu⟩ := hc I hi (DerivedCategory.Plus.Q.obj K)
     (supportedHomResolutionIso J A K I e) a x
   refine ⟨f, ⟨hfθ, hf, ?_⟩, ?_⟩
-  · have hq : (DerivedCategory.quotientCompQhIso
-        (Sheaf J (ModuleCat.{u + 1} A))).inv.app I.obj = 𝟙 _ :=
-      CategoryTheory.Quotient.lift.isLift_inv _ _ _ I.obj
+  · have hq : (DerivedCategory.Plus.QCompιIso
+        (Sheaf J (ModuleCat.{u + 1} A))).inv.app I = 𝟙 _ := by rfl
     rw [hq]
     erw [(shiftFunctor (DerivedCategory (Sheaf J (ModuleCat.{u + 1} A))) a).map_id,
       Category.id_comp]
