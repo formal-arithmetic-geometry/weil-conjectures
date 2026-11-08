@@ -87,7 +87,7 @@ theorem mapDerivedUpperStarLowerStarAdjunction_comp_eq {T S U : Scheme.{u}} (g�
     (g₂ : S ⟶ U) :
     ((mapDerivedUpperStarLowerStarAdjunction A (g₁ ≫ g₂)).ofNatIsoLeft
         (Functor.mapDerivedCategoryNatIso (Etale.upperStarComp A g₁ g₂) ≪≫
-          Functor.mapDerivedCategoryCompIso _ _)).ofNatIsoRight
+          (Functor.mapDerivedCategoryCompIso _ _).symm)).ofNatIsoRight
         (rightDerivedLowerStarComp A g₁ g₂).symm =
       (mapDerivedUpperStarLowerStarAdjunction A g₂).comp
         (mapDerivedUpperStarLowerStarAdjunction A g₁) :=
