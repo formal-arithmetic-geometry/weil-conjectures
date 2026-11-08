@@ -260,11 +260,11 @@ private theorem open_derive_chain
     (M : DerivedCategory A₂) :
     (Functor.mapDerivedCategorySquareIso e₀₂).hom.app M =
       Q₀.mapDerivedCategory.map
-        (((Functor.mapDerivedCategoryCompIso R₂₁ R₁₀).symm ≪≫
+        (((Functor.mapDerivedCategoryCompIso R₂₁ R₁₀) ≪≫
           Functor.mapDerivedCategoryNatIso r).inv.app M) ≫
       (Functor.mapDerivedCategorySquareIso e₀₁).hom.app (R₂₁.mapDerivedCategory.obj M) ≫
       U₁₀.mapDerivedCategory.map ((Functor.mapDerivedCategorySquareIso e₁₂).hom.app M) ≫
-      ((Functor.mapDerivedCategoryCompIso U₂₁ U₁₀).symm ≪≫
+      ((Functor.mapDerivedCategoryCompIso U₂₁ U₁₀) ≪≫
         Functor.mapDerivedCategoryNatIso t).hom.app (Q₂.mapDerivedCategory.obj M) := by
   have hi (N : A₂) : e₀₂.inv.app N ≫ Q₀.map (r.inv.app N) =
       t.inv.app (Q₂.obj N) ≫ U₁₀.map (e₁₂.inv.app N) ≫ e₀₁.inv.app (R₂₁.obj N) := by
@@ -287,9 +287,9 @@ private theorem open_derive_chain
     Iso.inv_hom_id_app, Iso.inv_hom_id_app]
   rw [← Functor.map_comp_assoc]
   simp only [Category.assoc, Iso.hom_inv_id_app_assoc, Iso.inv_hom_id_app_assoc,
-    Iso.inv_hom_id_app]
+    Iso.hom_inv_id_app]
   erw [CategoryTheory.Functor.map_id, Category.id_comp]
-  simp only [Iso.hom_inv_id_app_assoc, Iso.inv_hom_id_app]
+  simp only [Iso.inv_hom_id_app_assoc, Iso.inv_hom_id_app]
   rfl
 
 section
