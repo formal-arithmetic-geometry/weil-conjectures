@@ -158,7 +158,7 @@ theorem systemPushIdentityPullUnit (o : Operations l E) (c : Compositors l E o)
       Functor.rightUnitor_hom_app, Iso.refl_hom, NatTrans.id_app, Category.assoc]
     dsimp only [Functor.comp_obj, Functor.id_obj, NatTrans.id_app] at hm ⊢
     simpa only [NatTrans.comp_app, Functor.whiskerLeft_app, Category.assoc,
-      Category.comp_id, Functor.map_comp] using hm
+      Category.comp_id, Functor.map_comp, Iso.symm_hom] using hm
   · have he : e = b.pull l E (𝟙 X) ≪≫
         ProEtale.SemilinearProperOpen.pId (scalarRings l E) (scalarTransitions l E) X := by
       have := ProEtale.SemilinearProperOpen.pull_additive
