@@ -70,7 +70,7 @@ with `Nₙ = #X₀(𝔽_{qⁿ})` the point counts `AlgebraicGeometry.Scheme.Hom.
 theorem Hom.constantCoeff_zetaSeries_and_X_mul_derivative {k : Type u} [Field k] {X : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) :
     PowerSeries.constantCoeff f.zetaSeries = 1 ∧
-      PowerSeries.X * PowerSeries.derivative ℚ f.zetaSeries =
+      PowerSeries.X * PowerSeries.derivative (R := ℚ) f.zetaSeries =
         PowerSeries.mk (fun n ↦ if n = 0 then (0 : ℚ) else f.pointCount n) * f.zetaSeries :=
   ⟨f.constantCoeff_zetaSeries, f.X_mul_derivative_zetaSeries⟩
 
