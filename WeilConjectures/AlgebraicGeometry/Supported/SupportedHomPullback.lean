@@ -30,7 +30,8 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison
 public import WeilConjectures.AlgebraicGeometry.Module.ModuleSupportedHomTransport
 import WeilConjectures.AlgebraicGeometry.SupportedConstantNormalization.SupportedConstantExchangeNormalization
 import WeilConjectures.CategoryTheory.RightDerivedPlusCube
-import Mathlib.Util.CountHeartbeats
+import all WeilConjectures.AlgebraicGeometry.Support.SupportQuotientPairPullback
+import all WeilConjectures.AlgebraicGeometry.Support.SupportSiteComparison
 
 /-!
 # Supported Hom and pullback of closed pairs
@@ -610,7 +611,6 @@ private theorem supportHomGlobalEvaluation
   rw [(Sheaf.ΓNatIsoSheafSections J (ModuleCat.{u + 1} A) hT).hom.naturality]
   simp only [Sheaf.ΓNatIsoSheafSections, Adjunction.unit_rightAdjointUniq_hom_app_assoc]
 
-#count_heartbeats in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 private theorem supportHomProEtaleConstantIso_spec
@@ -622,51 +622,12 @@ private theorem supportHomProEtaleConstantIso_spec
       supportHomConstantDirectImage (Scheme.ProEt.topology Y) (Scheme.ProEt.topology X)
         (MorphismProperty.Over.pullback @WeaklyEtale ⊤ f) := by
   let := Scheme.ProEt.isContinuous_overPullback f
-  let adj := ProEtale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f
-  let a := ((constantSheafΓAdj (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} A)).comp
-      adj).ofNatIsoRight (ProEtale.globalSectionsLowerStarIso (ModuleCat.{u + 1} A) f)
-  let c : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A) :=
-    (constantSheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)).obj
-    (ModuleCat.of A A)
-  apply ((adj.homEquiv _ _).symm).injective
-  rw [Equiv.symm_apply_apply]
-  apply (a.homEquiv _ _).injective
-  rw [ProEtale.constantSheafCompUpperStarIso]
-  erw [Adjunction.homEquiv_leftAdjointUniq_hom_app]
-  symm
-  let z : (Sheaf.Γ (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)).obj c ≅
-      c.obj.obj (op (Scheme.ProEt.mk (𝟙 X))) :=
-    (Sheaf.ΓNatIsoSheafSections (Scheme.ProEt.topology X)
-      (ModuleCat.{u + 1} A) (Scheme.ProEt.isTerminalMkId X)).app c
-  apply (cancel_mono z.hom).mp
-  dsimp only [z, Iso.app_hom]
-  simp only [a, Adjunction.homEquiv_ofNatIsoRight_apply, Adjunction.comp_homEquiv,
-    ProEtale.globalSectionsLowerStarIso, Iso.trans_hom,
-    Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, NatTrans.comp_app,
-    NatIso.ofComponents_hom_app, Iso.refl_hom, Iso.symm_hom, Category.assoc]
-  erw [Equiv.trans_apply, Equiv.apply_symm_apply]
-  dsimp only [c]
-  erw [Iso.inv_hom_id_app, Category.comp_id, Category.id_comp]
-  change (constantSheafΓAdj (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} A)).homEquiv _ _
-      (supportHomConstantDirectImage (Scheme.ProEt.topology Y) (Scheme.ProEt.topology X)
-        (MorphismProperty.Over.pullback @WeaklyEtale ⊤ f)) ≫
-      (Sheaf.ΓNatIsoSheafSections (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} A)
-        (Scheme.ProEt.isTerminalMkId Y)).hom.app
-          ((ProEtale.lowerStar (ModuleCat.{u + 1} A) f).obj c) ≫
-      c.obj.map (ProEtale.overPullbackObjMkIdIso f).inv.op = _
-  rw [← Category.assoc]
-  erw [supportHomGlobalEvaluation]
-  simp only [Sheaf.ΓNatIsoSheafSections, Adjunction.unit_rightAdjointUniq_hom_app]
-  have he := supportHomConstantDirectImage_evaluation
-    (Scheme.ProEt.topology Y) (Scheme.ProEt.topology X)
-    (MorphismProperty.Over.pullback @WeaklyEtale ⊤ f)
-    (Scheme.ProEt.isTerminalMkId Y) (Scheme.ProEt.isTerminalMkId X)
-    (ProEtale.overPullbackObjMkIdIso f).inv c (𝟙 _)
-  simp only [CategoryTheory.Functor.map_id, Category.comp_id] at he
-  conv_rhs at he =>
-    rw [Adjunction.homEquiv_unit]
-    erw [CategoryTheory.Functor.map_id, Category.comp_id]
-  exact he
+  change (ProEtale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f).homEquiv _ _
+      ((ProEtale.constantSheafCompUpperStarIso (ModuleCat.{u + 1} A) f).hom.app
+        (ModuleCat.of A A)) = _
+  rw [ProEtale.CachedConstantCoherence.proConstant_eq_inverse,
+    Scheme.constantInverse, Equiv.apply_symm_apply]
+  rfl
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
