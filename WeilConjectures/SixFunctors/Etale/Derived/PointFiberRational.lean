@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Field.Shrink
 public import WeilConjectures.CategoryTheory.DerivedCategory.ExtendScalarsLocalization
 public import WeilConjectures.CategoryTheory.DerivedCategory.PrincipalIdealDevissage
 public import WeilConjectures.SixFunctors.Etale.Derived.LocalizationRational
