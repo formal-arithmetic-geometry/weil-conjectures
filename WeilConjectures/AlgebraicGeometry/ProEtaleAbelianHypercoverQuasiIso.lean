@@ -81,7 +81,6 @@ private theorem sectionBicomplex_zero
   · exact (HomologicalComplex.eval _ _ p).map_isZero
       ((abelianHypercoverRows X W U).map_isZero (E.isZero_of_isStrictlyGE N q hq))
 
-set_option maxHeartbeats 800000 in
 -- Comparing section-column maps unfolds the section and extension functor compositions.
 set_option backward.isDefEq.respectTransparency false in
 /-- Weakly contractible terms suffice for bounded-below quasi-isomorphism invariance;

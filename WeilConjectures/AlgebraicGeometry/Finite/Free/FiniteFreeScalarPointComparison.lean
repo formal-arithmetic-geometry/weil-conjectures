@@ -71,7 +71,6 @@ private lemma unitComparison
   subst he
   exact Functor.extendUnitHom_mapModCompExtendScalarsIso_hom_app_hom F G τ R M
 
-set_option maxHeartbeats 600000 in
 -- Compute the point comparison on its explicit module-composition model.
 /-- The canonical point module comparison has the specified underlying sheaf map.
 Source: blueprint scalar-six formal properties, p_X = f* p_Y.

@@ -37,13 +37,6 @@ local instance projectionCommRingSheafify (X : Scheme.{u}) :
 /-- The explicit universe instance for ordinary coefficient comparisons.
 Source: coefficient-site sheafification
 (auxiliary; not a blueprint node). -/
-local instance projectionAbSheafify (X : Scheme.{u}) :
-    HasSheafify (Scheme.ProEt.topology X) Ab.{u + 1} :=
-  WeilConjectures.integralCoefficientAbSheafify.{u, u} X
-
-/-- The explicit universe instance for ordinary coefficient comparisons.
-Source: coefficient-site sheafification
-(auxiliary; not a blueprint node). -/
 local instance projectionAbLocallyBijective (X : Scheme.{u}) :
     (Scheme.ProEt.topology X).WEqualsLocallyBijective Ab.{u + 1} :=
   WeilConjectures.integralCoefficientAbLocallyBijective.{u, u} X
@@ -235,7 +228,8 @@ private theorem canonicalAbelianMap_scalar_natural
       (Functor.const Profinite.{u}ᵒᵖ).map (AddCommGrpCat.ofHom.{u + 1} f) ≫
         FiniteDiscreteOrdinary.pointConstants C) (X : Scheme.{u}) :
     letI : EssentiallySmall.{u + 1} X.ProEt := projectionSiteSmall X
-    letI : HasSheafify (Scheme.ProEt.topology X) Ab.{u + 1} := projectionAbSheafify X
+    letI : HasSheafify (Scheme.ProEt.topology X) Ab.{u + 1} :=
+      Scheme.ProEt.instHasSheafifyTopologyAb_weilConjectures X
     letI : HasSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
       projectionCommRingSheafify X
     FiniteDiscreteOrdinary.canonicalAbelianMap B X ≫ (upperStarFromPoint X).map g =
@@ -284,7 +278,8 @@ private theorem canonicalRingMap_scalar_natural
       (Functor.const Profinite.{u}ᵒᵖ).map (AddCommGrpCat.ofHom.{u + 1} f.toAddMonoidHom) ≫
         FiniteDiscreteOrdinary.pointConstants C) (X : Scheme.{u}) :
     letI : EssentiallySmall.{u + 1} X.ProEt := projectionSiteSmall X
-    letI : HasSheafify (Scheme.ProEt.topology X) Ab.{u + 1} := projectionAbSheafify X
+    letI : HasSheafify (Scheme.ProEt.topology X) Ab.{u + 1} :=
+      Scheme.ProEt.instHasSheafifyTopologyAb_weilConjectures X
     letI : HasSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
       projectionCommRingSheafify X
     FiniteDiscreteOrdinary.canonicalRingMap B X ≫
@@ -293,7 +288,8 @@ private theorem canonicalRingMap_scalar_natural
       (constantSheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}).map
         (CommRingCat.ofHom.{u + 1} f) ≫ FiniteDiscreteOrdinary.canonicalRingMap C X := by
   letI : EssentiallySmall.{u + 1} X.ProEt := projectionSiteSmall X
-  letI : HasSheafify (Scheme.ProEt.topology X) Ab.{u + 1} := projectionAbSheafify X
+  letI : HasSheafify (Scheme.ProEt.topology X) Ab.{u + 1} :=
+    Scheme.ProEt.instHasSheafifyTopologyAb_weilConjectures X
   letI : HasSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
     projectionCommRingSheafify X
   let J := Scheme.ProEt.topology X
@@ -403,7 +399,8 @@ theorem integral_constant_section_projection (l : ℕ) [Fact l.Prime]
             (IntegralConstantCompletion.ideal l E ^ (n + 1)))) := by
     classical
     letI : EssentiallySmall.{u + 1} X.ProEt := projectionSiteSmall X
-    letI : HasSheafify (Scheme.ProEt.topology X) Ab.{u + 1} := projectionAbSheafify X
+    letI : HasSheafify (Scheme.ProEt.topology X) Ab.{u + 1} :=
+      Scheme.ProEt.instHasSheafifyTopologyAb_weilConjectures X
     letI : HasSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
       projectionCommRingSheafify X
     letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField

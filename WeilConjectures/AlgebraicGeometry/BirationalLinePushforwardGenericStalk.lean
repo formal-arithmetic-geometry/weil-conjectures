@@ -73,7 +73,6 @@ private theorem stalk_free_of_restrict_iso {Z W : Scheme.{u}}
   obtain ⟨eu, _⟩ := AlgebraicGeometry.Scheme.unit_stalk_iso W (j z)
   exact ⟨ef.trans (eg.symm.trans eu.toLinearEquiv)⟩
 
-set_option maxHeartbeats 800000 in
 -- Local module-stalk comparisons unfold several nested restriction functors.
 set_option backward.isDefEq.respectTransparency false in
 open CategoryTheory.Limits TopologicalSpace in

@@ -147,7 +147,6 @@ private theorem actual_kernel_restrict_iso {X Y : Scheme.{u}} (g : X ⟶ Y)
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 400000 in
 -- The unit calculation elaborates several nested restriction and pushforward functors.
 private theorem open_pullback_sections_transport {X Y : Scheme.{u}} (g : X ⟶ Y)
     (W : Y.Opens) (U : X.Opens) (h : U ≤ g ⁻¹ᵁ W) (hpre : g ⁻¹ᵁ W = U)

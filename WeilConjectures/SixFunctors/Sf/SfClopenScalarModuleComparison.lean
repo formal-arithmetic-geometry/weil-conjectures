@@ -18,8 +18,8 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_proEtTopology
 attribute [-instance] AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.modulesAbelian
   AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.hasDerived
-attribute [-instance] AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.sheafify
-  AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.locallyBijective
+attribute [-instance] AlgebraicGeometry.ProEtale.surjectiveTower_hasSheafify
+  AlgebraicGeometry.ProEtale.surjectiveTower_wEqualsLocallyBijective
 universe t u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Opposite
 open AlgebraicGeometry.Scheme

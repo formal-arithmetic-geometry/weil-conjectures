@@ -36,7 +36,7 @@ def ringFamilyRestrictedSections : Fin r →
       forget CommRingCat).sections :=
   fun i ↦ ⟨fun X ↦ (f i).val (F.op.obj X), fun a ↦ (f i).property (F.op.map a)⟩
 
-set_option maxHeartbeats 600000 in
+set_option maxHeartbeats 400000 in
 -- The unit formula compares two composite module functors; the wall limit stays unchanged.
 /-- Ring-family complexes commute with restriction and module sheafification.
 Source: Stacks Project, Tag 099E, K_{V,I O(V)} = K_{U,I}|_V.

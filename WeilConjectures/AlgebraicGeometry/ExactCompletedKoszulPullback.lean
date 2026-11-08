@@ -526,7 +526,6 @@ private theorem ordinaryUnitComparison
   erw [limit.lift_π, limit.lift_π]
   exact hu N m n
 
-set_option maxHeartbeats 800000 in
 -- Normalize the dependent endpoints of the tower and localization comparisons.
 private theorem derivedUnitOnComplex
     (h : ringedKoszulTensorTowerFunctor R r b ⋙

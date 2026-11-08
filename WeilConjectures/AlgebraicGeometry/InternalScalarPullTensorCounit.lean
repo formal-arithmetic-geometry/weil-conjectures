@@ -85,7 +85,6 @@ private theorem tensor_normalization_unique (a : Λ ⟶ Λ') [IsMonHom a]
   rw [h, ← t₀.derived.hom.naturality e.hom] at hn
   exact (cancel_epi ((D a T ⋙ V a T).map e.hom)).mp hn
 
-set_option maxHeartbeats 800000 in
 -- The comparison traverses several derived functors and tensor normalizations.
 /-- Normalize the X tensor presentation followed by the tensor-model target.
 

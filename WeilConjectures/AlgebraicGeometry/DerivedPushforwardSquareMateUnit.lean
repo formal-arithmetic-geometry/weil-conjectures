@@ -46,7 +46,6 @@ private theorem square_paste {C : Type*} [Category C]
 attribute [local irreducible] Functor.rightDerivedFunctor Functor.rightDerivedFunctorUnit
   DerivedCategory.Qh
 
-set_option maxHeartbeats 800000 in
 -- Comparing the composite pushforward objects requires extra elaboration.
 private theorem normalized_unit {A B C : Scheme.{u}} (s : A ⟶ B) (t : B ⟶ C)
     (J : HomotopyCategory (SheafOfModules.{u} (moduleRings A.toRingedSpace)) (.up ℤ)) :
@@ -66,7 +65,6 @@ private theorem canonical_adjoint_eq {A B : Scheme.{u}} (h : A ⟶ B) :
     canonicalPullbackAdjunction.{u, w} h = schemeHomPullbackAdjunction.{u, w} h := rfl
 
 set_option linter.all false in
-set_option maxHeartbeats 800000 in
 private theorem canonical_conjugate_eq {A B C D : Scheme.{u}}
     (s : A ⟶ B) (t : B ⟶ D) (q : A ⟶ C) (r : C ⟶ D)
     (κ : derivedPullback r ⋙ derivedPullback q ⟶ derivedPullback t ⋙ derivedPullback s) :
@@ -80,7 +78,7 @@ private theorem canonical_conjugate_eq {A B C D : Scheme.{u}}
 
 -- Avoid linting the large chosen adjunction/comparison data again after kernel checking.
 set_option linter.all false in
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- Matching the canonical composition choices expands derived-functor instance data.
 /-- The sheaf-level unit equation for the square conjugate.
 Source: Stacks Project, cohomology.tex, Tags 08HY and 0D5T.

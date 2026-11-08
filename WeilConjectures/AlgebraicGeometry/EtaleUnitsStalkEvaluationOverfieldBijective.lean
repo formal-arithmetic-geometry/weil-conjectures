@@ -28,7 +28,6 @@ open CategoryTheory Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-set_option maxHeartbeats 800000 in
 -- The filtered colimit and residue-field refinements require additional elaboration work.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in

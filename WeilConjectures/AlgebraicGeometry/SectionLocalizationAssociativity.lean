@@ -169,7 +169,6 @@ private theorem derived_tensor_map (T : Scheme.{u})
         M M' N N' a b := by
   rfl
 
-set_option maxHeartbeats 400000 in
 -- The comparison square specializes two large monoidal structures before cancellation.
 private theorem localization_lax (T : Scheme.{u}) :
     letI := derivedMonoidal Λ T

@@ -67,7 +67,7 @@ private theorem restrict_stalk_surjective
       f.stalkLinearMap z.1 ((e.hom.app M) s') at hn
   rw [hn, hs', hs]
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 700000 in
 -- Comparing restricted internal-Hom and exterior sheaf objects takes additional elaboration.
 set_option backward.isDefEq.respectTransparency false in
 /-- The alternating Yoneda products give a surjection from the exterior sheaf to

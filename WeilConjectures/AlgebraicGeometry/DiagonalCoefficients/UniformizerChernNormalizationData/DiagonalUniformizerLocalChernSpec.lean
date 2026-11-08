@@ -88,7 +88,7 @@ theorem localChern_transport_finite_spec
       (DiagonalTrace.diagonalTrace_integralKummer_comparison l
         (ProjectiveLine Y) (ULift.{u + 1} (completedResidue l s.E s.π s.n)) s.n s.hA
         s.tq.chernX.kummer
-        (Etale.ordinaryFiniteP1_isUnit (l ^ (s.n + 1)) Y s.hYpow)
+        (affineTraceProjectiveInvertible (l ^ (s.n + 1)) Y s.hYpow)
         (SpTowerClasses.hyperplanePic Y)))
 
 end UniformizerChernNormalizationData

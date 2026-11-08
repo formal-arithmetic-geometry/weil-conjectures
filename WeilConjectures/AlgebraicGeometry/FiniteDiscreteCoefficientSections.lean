@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteCondensedRing
 public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteSchemeRing
 import WeilConjectures.AlgebraicGeometry.FiniteDiscreteCoefficientTerminal
 
@@ -16,7 +17,7 @@ universe u
 open CategoryTheory Limits
 open scoped CategoryTheory.Obj
 
-local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+attribute [local instance] _root_.instEssentiallySmallProfinite_weilConjectures
 
 private theorem constant_naturality {C A : Type*} [Category C] [Category A]
     {a : A} {P : C ⥤ A} (q : (Functor.const C).obj a ⟶ P)

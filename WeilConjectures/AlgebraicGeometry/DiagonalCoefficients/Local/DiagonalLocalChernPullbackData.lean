@@ -194,7 +194,6 @@ def LocalChernConeMate
         diagonalTraceConeMap L' (((Functor.whiskeringRight ℕᵒᵖ A B).obj P).obj K)
           (P.mapCone c)
 
-set_option maxHeartbeats 5000000 in
 -- The record retains two scalar squares and their complete derived cone equations.
 /-- Ordinary scalar squares and a natural comparison for the entire derived tower.
 
@@ -308,7 +307,7 @@ abbrev LocalChernPullbackData.completedSquare (l : ℕ) [Fact l.Prime]
     (d : LocalChernPullbackData l hX p p') :=
   Functor.mapDerivedCategorySquareIso d.completedOrdinary
 
-set_option maxHeartbeats 5000000 in
+set_option maxHeartbeats 1200000 in
 -- Instantiate the normalized endpoint theorem with both independent presentations.
 /-- Normalized scalar pullback squares and the whole derived-limit mate exist.
 

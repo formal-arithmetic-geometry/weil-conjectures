@@ -24,7 +24,7 @@ open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 
 attribute [local instance] AlgebraicGeometry.ProEtale.diagonalHasLimit
-  AlgebraicGeometry.ProEtale.diagonalConstantTowerLimits
+  AlgebraicGeometry.ProEtale.diagonalModLimits
 
 attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
   diagonalCompletedSource diagonalCompletedCoefficientMap

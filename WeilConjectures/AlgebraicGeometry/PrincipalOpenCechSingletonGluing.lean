@@ -41,7 +41,7 @@ private theorem transport_restriction
   simp only [eqToHom_refl]
   rfl
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- The pair calculation compares dependent section modules across degree and open transports.
 /-- Singleton-supported cochains with no higher differential glue to sections.
 

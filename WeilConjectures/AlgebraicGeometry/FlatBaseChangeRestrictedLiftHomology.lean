@@ -26,7 +26,6 @@ noncomputable section
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] AlgebraicGeometry.Scheme.Modules.enoughInjectives
 
-set_option maxHeartbeats 800000 in
 -- Elaborating restriction and section transports uses several nested complex functors.
 /-- Before sheafification, the section map of the augmented lift computes the h-map.
 Source: Stacks Project, Cohomology, Tags 01FB, 01EZ and 02N7.

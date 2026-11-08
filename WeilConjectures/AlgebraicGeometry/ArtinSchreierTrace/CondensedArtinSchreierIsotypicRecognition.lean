@@ -128,7 +128,6 @@ private theorem exists_cover_satisfying
   change Q p
   exact hp
 
-set_option maxHeartbeats 1600000 in
 -- Image and covering comparisons involve the concrete condensed module functors.
 /-- A character eigenmap with invertible adjoint identifies its domain locally with the
 image of the averaging projector on a finite etale torsor.

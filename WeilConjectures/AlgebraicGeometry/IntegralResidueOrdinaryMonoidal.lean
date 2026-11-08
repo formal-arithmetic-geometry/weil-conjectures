@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteCondensedRing
 public import WeilConjectures.AlgebraicGeometry.IntegralResidueComparisonInterface
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.MapIhom
 public import WeilConjectures.CategoryTheory.ModuleObjects.RelativeTensorCoequalizer
@@ -256,7 +257,7 @@ end CategoryTheory.Mod.ResidueOrdinary
 attribute [local irreducible] Functor.leftDerivedFunctor Functor.mapDerivedCategory
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 attribute [local instance 20000] sheafBraidedCategory
-local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+attribute [local instance] _root_.instEssentiallySmallProfinite_weilConjectures
 end AlgebraicGeometry.ProEtale.CondensedRing
 
 end OrdinaryBraiding

@@ -124,7 +124,6 @@ private theorem scalar_unit_inv
   exact hhh
 end AlgebraicGeometry.ProEtale.CondensedRing
 namespace AlgebraicGeometry.ProEtale.CondensedRing
-set_option maxHeartbeats 500000 in
 -- Coefficient pullback compares several explicitly constructed module actions.
 private theorem pull_tensor_π
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -161,7 +160,6 @@ private theorem pull_tensor_π
   rfl
 end AlgebraicGeometry.ProEtale.CondensedRing
 namespace AlgebraicGeometry.ProEtale.CondensedRing
-set_option maxHeartbeats 500000 in
 -- Coefficient pullback compares several explicitly constructed module actions.
 private theorem pull_extend_π
     (Λ A : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -188,7 +186,6 @@ private theorem pull_extend_π
 
 end AlgebraicGeometry.ProEtale.CondensedRing
 namespace AlgebraicGeometry.ProEtale.CondensedRing
-set_option maxHeartbeats 400000 in
 -- Coefficient pullback compares several explicitly constructed module actions.
 private theorem pull_regular_η
     (A : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -232,7 +229,6 @@ proof of Lemma 6.5.9(5). (auxiliary; not a blueprint node) -/
   exact (comapUpperStarIso φ f).symm.app (Mod.regular (condensedRingObj A Y)) ≪≫
     SX.mapIso (Functor.Monoidal.εIso (f)^*⟦A⟧).symm
 
-set_option maxHeartbeats 500000 in
 -- Coefficient pullback compares several explicitly constructed module actions.
 private theorem coefficient_pull_hom
     (Λ A : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -257,7 +253,7 @@ private theorem coefficient_pull_hom
 attribute [local irreducible] Mod.monoidalCategoryStruct
   Mod.tensorObjπ Mod.extendπ residueOrdinaryUpperStarMonoidal
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- Compare the constructed module maps on their explicit coequalizer presentations.
 /-- The ordinary scalar pull square is the balanced tensor comparison.
 Source: Bhatt--Scholze, Remark 6.8.15 and the ordinary tensor-pullback identity

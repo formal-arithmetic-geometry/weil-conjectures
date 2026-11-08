@@ -193,26 +193,16 @@ Source: Stacks 0941 (auxiliary; not a blueprint node).
 Proof: a sequence sheaf restricts to a sheaf on every vertical slice, by the defining
 covering condition. The product-site sheaf condition checked above applies to set
 sheaves as well as ring sheaves; this is exactly continuity. -/
+@[instance]
 theorem coefficientSequenceEvaluationContinuous (n : ℕ) :
     (Prod.sectR n W.ProEt).IsContinuous (Scheme.ProEt.topology W)
       (coefficientSequenceTopology (Scheme.ProEt.topology W)) := by
   exact sequenceInclusion_continuous (Scheme.ProEt.topology W) n
 
-/-- The canonical continuity structure on evaluation.
-Source: Stacks 0941 (auxiliary; not a blueprint node). -/
-noncomputable instance coefficientSequenceEvaluationContinuousInstance (n : ℕ) :
-    (Prod.sectR n W.ProEt).IsContinuous (Scheme.ProEt.topology W)
-      (coefficientSequenceTopology (Scheme.ProEt.topology W)) :=
-  coefficientSequenceEvaluationContinuous W n
-
-/-- Constant-coefficient towers have simultaneous K-injective resolutions.
+/-- The simultaneous resolution instance for the actual constant-coefficient towers.
 Source: Stacks 079P and 0941
-(auxiliary; not a blueprint node).
-Proof: identify towers with modules over the constant ring on the sequence site.
-The vertical sheaf condition gives this equivalence sectionwise. Apply the
-Grothendieck module-sheaf theorem and transport functorial K-injective resolutions
-through the exact equivalence. -/
-theorem coefficientConstantTowers_haveKInjectives :
+(auxiliary; not a blueprint node). -/
+noncomputable instance coefficientConstantTowersKInjectives :
     Abelian.HasKInjectiveResolutions (ℕᵒᵖ ⥤ scalarReductionSource l E W) := by
   let A := scalarReductionSource l E W
   let : IsGrothendieckAbelian.{max u (t + 1)} A :=
@@ -224,24 +214,15 @@ theorem coefficientConstantTowers_haveKInjectives :
       (Equivalence.congrLeft (AsSmall.equiv (C := ℕᵒᵖ)).symm)
   infer_instance
 
-/-- The simultaneous resolution instance for the actual constant-coefficient towers.
-Source: Stacks 079P and 0941
-(auxiliary; not a blueprint node). -/
-noncomputable instance coefficientConstantTowersKInjectives :
-    Abelian.HasKInjectiveResolutions (ℕᵒᵖ ⥤ scalarReductionSource l E W) :=
-  coefficientConstantTowers_haveKInjectives l E W
-
 /-- The standard unbounded localization of constant coefficient towers.
 Source: Stacks 0941 (auxiliary; not a blueprint node). -/
 noncomputable instance coefficientConstantTowerDerived :
     HasDerivedCategory (ℕᵒᵖ ⥤ scalarReductionSource l E W) :=
   HasDerivedCategory.standard _
 
-/-- Inverse limit is additive.
-Source: Stacks 0941 (auxiliary; not a blueprint node).
-Proof: its limit projection at every level sends a sum of tower maps to the sum
-of the corresponding module maps. The projections jointly determine the limit map. -/
-theorem coefficientConstantTowerLimit_additive :
+/-- The additive structure on the ordinary inverse-limit functor.
+Source: Stacks 0941 (auxiliary; not a blueprint node). -/
+noncomputable instance coefficientConstantTowerLimitAdditive :
     (lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤ scalarReductionSource l E W).Additive := by
   constructor
   intro M N f g
@@ -249,11 +230,5 @@ theorem coefficientConstantTowerLimit_additive :
   intro n
   simp only [lim_map, limMap_π, Preadditive.add_comp, NatTrans.app_add,
     Preadditive.comp_add]
-
-/-- The additive structure on the ordinary inverse-limit functor.
-Source: Stacks 0941 (auxiliary; not a blueprint node). -/
-noncomputable instance coefficientConstantTowerLimitAdditive :
-    (lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤ scalarReductionSource l E W).Additive :=
-  coefficientConstantTowerLimit_additive l E W
 
 end WeilConjectures

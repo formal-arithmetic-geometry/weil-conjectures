@@ -41,7 +41,7 @@ def ordinaryFiniteDiagonalCoefficientIso
   (ordinaryFinitePullback A (projectiveLineDiagonalProjection S a)).mapIso
       (ordinaryFiniteShiftedLinePullback A N hA t (ProjectiveLine S ↘ S) hS) ≪≫
     ordinaryFiniteShiftedLinePullback A N hA t (projectiveLineDiagonalProjection S a)
-      (ordinaryFiniteP1_isUnit N S hS)
+      (affineTraceProjectiveInvertible N S hS)
 
 /-- The scalar chart trace satisfies exchange with the original projective-line trace. -/
 theorem ordinaryFiniteDiagonalTrace_exchange
@@ -68,7 +68,7 @@ theorem ordinaryFiniteDiagonalTrace_exchange
         (ordinaryFinitePushforward A (projectiveLineDiagonalProjection S a)).map
           (ordinaryFiniteDiagonalCoefficientIso A N hA t S hS (!a)).hom ≫
         ordinaryFiniteP1DiagonalChartMap A N hA t S hS a ≫
-        (b (ProjectiveLine S) (ordinaryFiniteP1_isUnit N S hS)).inv ≫ biprod.snd ≫
+        (b (ProjectiveLine S) (affineTraceProjectiveInvertible N S hS)).inv ≫ biprod.snd ≫
         (singleFunctorObjUnitIso (ModuleCat.{u + 1} A) (ProjectiveLine S)).hom =
       (ordinaryFinitePullback A (ProjectiveLine S ↘ S)).map
         ((ordinaryFinitePushforward A (ProjectiveLine S ↘ S)).map
@@ -84,7 +84,7 @@ theorem ordinaryFiniteDiagonalTrace_exchange
   dsimp only
   intro a
   let q := ProjectiveLine S ↘ S
-  let hP := ordinaryFiniteP1_isUnit N S hS
+  let hP := affineTraceProjectiveInvertible N S hS
   have ht := ordinaryFiniteP1_scalarTrace_baseChange N A hA t c b hb hbc q hS hP
   rw [ordinaryFiniteP1Exchange_eq_derived] at ht
   have hn := (derivedBaseChangeMap (ModuleCat.{u + 1} A)
@@ -118,6 +118,6 @@ theorem ordinaryFiniteDiagonalCoefficientIso_coordinate
   exact ordinaryFiniteShiftedLinePullback_square A N hA t
     (CommSq.mk (pullback.condition (f := ProjectiveLine S ↘ S)
       (g := ProjectiveLine S ↘ S)).symm) hS
-    (ordinaryFiniteP1_isUnit N S hS) (ordinaryFiniteP1_isUnit N S hS)
+    (affineTraceProjectiveInvertible N S hS) (affineTraceProjectiveInvertible N S hS)
 
 end AlgebraicGeometry.Etale

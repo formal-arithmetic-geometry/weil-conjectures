@@ -151,7 +151,6 @@ private theorem ordinary_vertical_unit
     moduleUnit_forget Λ f ((Mod.comap (coefficientMap a Y)).obj N)]
   rfl
 
-set_option maxHeartbeats 400000 in
 -- The concrete comparisons unfold several coefficient and module functor wrappers.
 private theorem ordinaryScalarUnit
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}

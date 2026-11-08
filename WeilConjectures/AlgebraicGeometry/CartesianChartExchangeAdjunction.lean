@@ -124,7 +124,6 @@ private noncomputable def actualTransport
         ((upperStarCompDerivedPlus A t q q' hq).inv.app
           ((DerivedCategory.Plus.singleFunctor _ 0).obj F))
 
-set_option maxHeartbeats 10000 in
 -- Expanding chart comparisons and adjunction units needs a local reduction budget.
 private lemma actualTransport_eq
     (A : Type (u + 2)) [Category.{u + 1} A] [Abelian A]
@@ -202,7 +201,6 @@ private lemma actualAdjunct_pullback
 
 
 
-set_option maxHeartbeats 20000 in
 -- Expanding chart comparisons and adjunction units needs a local reduction budget.
 private lemma actualAdjunct_pullback_block
     (A : Type (u + 2)) [Category.{u + 1} A] [Abelian A]

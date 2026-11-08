@@ -31,7 +31,7 @@ attribute [local irreducible] Functor.rightDerivedFunctor
   AlgebraicGeometry.RingedSpace.topEdgeDirectImageComparison
 namespace AlgebraicGeometry
 open Scheme.Modules
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- Normalize two derived functors without unfolding their chosen constructions.
 /-- The comparison between the two fixed direct images is normalized on any supplied
 K-injective model.

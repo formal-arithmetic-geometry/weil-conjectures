@@ -191,7 +191,7 @@ private theorem ideal_tensor_balancing {X : Scheme.{u}} (J : X.IdealSheafData)
   rw [← smul_tmulSection, he, smul_tmulSection, tmulSection_smul]
 
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- Affine tensor and kernel section identifications require extra elaboration heartbeats;
 -- the file still compiles within the unchanged 60-second wall limit.
 set_option backward.isDefEq.respectTransparency false in

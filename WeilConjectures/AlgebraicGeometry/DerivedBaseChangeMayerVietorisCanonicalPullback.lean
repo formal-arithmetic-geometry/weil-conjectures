@@ -61,7 +61,6 @@ private theorem canonical_boundary_eq (X : Scheme.{u}) (U V : X.Opens)
   unfold mvOpenRestrictionAdjunction
   rfl
 
-set_option maxHeartbeats 800000 in
 -- Fixed-resolution transport uses nested derived comparisons.
 private theorem canonical_boundary_naturality (X : Scheme.{u}) (U V : X.Opens)
     (hcover : U ⊔ V = ⊤) (K L : schemeDerivedCategory X) (φ : K ⟶ L) :

@@ -89,7 +89,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 2048 in
 set_option synthInstance.maxHeartbeats 400000 in
 -- Additivity of the three-fold composite restriction functors exceeds the default size.
-set_option maxHeartbeats 1600000 in
+set_option maxHeartbeats 800000 in
 -- Elaborating the restriction functors and their comparison isomorphisms needs this budget.
 /-- Objects of the derived category glue across a two-open cover with their prescribed
 transition, without an assertion about morphisms into another object.

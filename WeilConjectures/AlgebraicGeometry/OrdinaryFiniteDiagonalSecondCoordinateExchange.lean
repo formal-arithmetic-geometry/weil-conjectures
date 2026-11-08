@@ -58,7 +58,7 @@ theorem ordinaryFiniteDiagonalTrace_second_coordinate_exchange (N : ℕ) (hN : 0
     let : IsLocallyNoetherian P := LocallyOfFiniteType.isLocallyNoetherian q
     let : CompactSpace P := QuasiCompact.compactSpace_of_compactSpace q
     let : IsNoetherian P := ⟨⟩
-    let hP := ordinaryFiniteP1_isUnit N S hS
+    let hP := affineTraceProjectiveInvertible N S hS
     let L := (ordinaryFiniteLine A N hA S)⟦(2 : ℤ)⟧
     let w := ordinaryFiniteShiftedLinePullback A N hA t q hS
     let w₂ : (ordinaryFinitePullback A (pullback.snd q q)).obj
@@ -83,7 +83,7 @@ theorem ordinaryFiniteDiagonalTrace_second_coordinate_exchange (N : ℕ) (hN : 0
   let : IsLocallyNoetherian P := LocallyOfFiniteType.isLocallyNoetherian q
   let : CompactSpace P := QuasiCompact.compactSpace_of_compactSpace q
   let : IsNoetherian P := ⟨⟩
-  let hP := ordinaryFiniteP1_isUnit N S hS
+  let hP := affineTraceProjectiveInvertible N S hS
   let L := (ordinaryFiniteLine A N hA S)⟦(2 : ℤ)⟧
   let w := ordinaryFiniteShiftedLinePullback A N hA t q hS
   let w₂ : (ordinaryFinitePullback A (pullback.snd q q)).obj

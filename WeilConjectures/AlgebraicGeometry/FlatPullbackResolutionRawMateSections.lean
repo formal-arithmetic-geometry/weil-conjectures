@@ -40,7 +40,6 @@ private def rawSectionClass {Y : Scheme.{uBC}}
 attribute [local irreducible] sectionCohomologyTheta
 attribute [local irreducible] flatBaseChangeResolutionQ flatBaseChangeResolutionC
 
-set_option maxHeartbeats 200000 in
 -- Comparing the composite evaluation functor requires unfolding section interfaces.
 private theorem rawSectionClass_naturality {Y : Scheme.{uBC}}
     {K K' : CochainComplex Y.Modules ℕ} (c : K ⟶ K') (p : ℕ) (V : Y.Opens) :

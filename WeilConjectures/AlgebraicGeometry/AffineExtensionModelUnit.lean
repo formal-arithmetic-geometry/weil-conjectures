@@ -37,7 +37,6 @@ variable [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)]
 
 set_option synthInstance.maxHeartbeats 100000 in
 -- Affine carrier identifications require additional instance search.
-set_option maxHeartbeats 800000 in
 -- Affine carrier identifications require additional elaboration heartbeats.
 /-- K-flat extension models respect the extension adjunction unit.
 Source: Stacks Project, perfect.tex, Tags 08DW(2) and 0AA7.

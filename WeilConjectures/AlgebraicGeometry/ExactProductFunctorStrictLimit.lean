@@ -98,7 +98,6 @@ private theorem signedSwap_lift {A : Type*} [Category* A] [Preadditive A]
       biprod.map (𝟙 _) (-𝟙 _) = biprod.lift f 0 := by
   apply biprod.hom_ext <;> simp [Category.assoc]
 
-set_option maxHeartbeats 800000 in
 -- The interface contains several universe-polymorphic product and cone choices.
 private theorem signedRoosComparison
     {C : Type uC} [Category.{vC} C] (J : GrothendieckTopology C)
@@ -421,7 +420,6 @@ def StrictLimitAssertions (F : A ⥤ B) [F.Additive]
 
 end StrictLimitSpecification
 
-set_option maxHeartbeats 800000 in
 -- The interface retains every signed-cone and resolution normalization law.
 /-- The canonical comparison for exact additive countable-product-preserving module functors.
 

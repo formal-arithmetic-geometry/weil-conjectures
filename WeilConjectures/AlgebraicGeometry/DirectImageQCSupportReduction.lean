@@ -39,7 +39,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 1200000 in
+set_option maxHeartbeats 700000 in
 -- Derived restriction and composition expand large localization and scalar-restriction terms.
 -- Coherence is redundant because proper-support hypotheses already include closedness.
 set_option linter.unusedVariables false in

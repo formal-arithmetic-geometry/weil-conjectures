@@ -87,7 +87,6 @@ private def resolutionIso {X Y : Scheme.{u}} (f : X ⟶ Y) (q : ℕ)
       (I.isoRightDerivedObj (RingedSpace.moduleDirectImage f.toLRSHom.toShHom ⋙
         RingedSpace.globalSectionsFunctor Y.toRingedSpace) q).symm
 
-set_option maxHeartbeats 800000 in
 -- Conjugation by resolution isomorphisms has several dependent functor compositions.
 set_option backward.isDefEq.respectTransparency false in
 /-- A cochain map extending a coefficient morphism intertwines the resolution comparisons.
@@ -205,7 +204,6 @@ private theorem forget_iCycles_inv {R : Type u} [Ring R]
       (forget₂ _ AddCommGrpCat).map S.iCycles := by
   rw [← S.mapCyclesIso_hom_iCycles (forget₂ _ AddCommGrpCat), Iso.inv_hom_id_assoc]
 
-set_option maxHeartbeats 800000 in
 -- The comparison combines homology and cycles in two module categories and abelian groups.
 set_option backward.isDefEq.respectTransparency false in
 /-- A termwise restriction carries the class of a cycle to the class of the restricted cycle.
@@ -258,7 +256,6 @@ private theorem sectionsHomologyIso_cycle {X Y : Scheme.{u}} (f : X ⟶ Y) (q : 
   rw [hpS, ha]
   simpa only [Iso.inv_hom_id_apply] using hpT.symm
 
-set_option maxHeartbeats 800000 in
 -- Conjugating the cycle formula unfolds the resolution and section comparisons.
 set_option backward.isDefEq.respectTransparency false in
 /-- Transport the cycle formula through the canonical resolution isomorphisms.
@@ -341,7 +338,6 @@ private theorem leray_sections_cycle_lift {X Y : Scheme.{u}} (f : X ⟶ Y)
   rw [he']
   exact ht.symm
 
-set_option maxHeartbeats 800000 in
 -- The dependent cycle objects require unfolding termwise functor compositions.
 set_option backward.isDefEq.respectTransparency false in
 /-- Compare the derived composite with sections upstairs, retaining its cycle formula.

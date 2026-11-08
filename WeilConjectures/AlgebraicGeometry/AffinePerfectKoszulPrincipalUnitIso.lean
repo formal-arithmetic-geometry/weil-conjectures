@@ -16,7 +16,7 @@ universe a b
 open CategoryTheory
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- Elaborating the cone comparison unfolds both presentations of the Koszul tail.
 /-- The canonical shifted Koszul augmentation is invertible on the principal-open union.
 Source: Stacks Project, Tag 08CX; More on Algebra, Tags 0626 and 0663.

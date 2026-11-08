@@ -33,7 +33,6 @@ attribute [local instance] enoughInjectives
 attribute [local irreducible] resolutionSectionClass moduleCohomologyFMap
   cohomologyOpenRestriction
 
-set_option maxHeartbeats 800000 in
 -- Keep section-class maps named while identifying the two module cohomology objects.
 /-- The normalized target edge is bijective and respects scalars and smaller opens.
 Source: Stacks Project, Tag 01XK, Lemma 30.4.6; Tag 01E4, Lemma 20.7.3;

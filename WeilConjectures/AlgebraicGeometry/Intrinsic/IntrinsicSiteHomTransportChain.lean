@@ -197,11 +197,11 @@ private noncomputable def fixedHomRepresentative
       (op (DerivedCategory.Q.obj L))).obj (DerivedCategory.Q.obj I)) ≅
       DerivedCategory.Q.obj (CochainComplex.internalHomObj L I) := by
   let C := Sheaf (ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1, u} A))
-  letI : HasColimitsOfSize.{0, 0} C := fixedSheafCountableColimits A X
+  letI : HasColimitsOfSize.{0, 0} C := Scheme.ProEt.sheafModuleHasCountableColimits A X
   letI (V W : GradedObject ℤ C) : V.HasTensor W :=
     fun _ ↦ @HasColimitsOfShape.has_colimit _ _ _ _
       (@HasColimitsOfSize.has_colimits_of_shape _ _
-        (fixedSheafCountableColimits A X) _ _) _
+        (Scheme.ProEt.sheafModuleHasCountableColimits A X) _ _) _
   letI (V W Y Z : GradedObject ℤ C) : GradedObject.HasTensor₄ObjExt V W Y Z :=
     inferInstance
   letI (V W Y : GradedObject ℤ C) : GradedObject.HasGoodTensor₁₂Tensor V W Y :=
@@ -218,7 +218,8 @@ private noncomputable def fixedHomRepresentative
     hasFunctorialFlatResolution_sheaf (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X
   letI (j : ℤ) : HasColimitsOfShape
       (Discrete ((ComplexShape.up ℤ).π (.up ℤ) (.up ℤ) ⁻¹' {j})) C :=
-    @HasColimitsOfSize.has_colimits_of_shape _ _ (fixedSheafCountableColimits A X) _ _
+    @HasColimitsOfSize.has_colimits_of_shape _ _
+      (Scheme.ProEt.sheafModuleHasCountableColimits A X) _ _
   let Λ : Abelian.LeftResolution (ObjectProperty.flat.ι : _ ⥤ C) := Classical.arbitrary _
   letI : (HomotopyCategory.quasiIso C (.up ℤ)).localizerMorphismKFlat
       |>.IsLeftDerivabilityStructure :=
@@ -279,7 +280,7 @@ theorem intrinsicSiteHom_transport_chain (X : Scheme.{u}) (A : Type u)
   let : MonoidalClosed D :=
     WeilConjectures.ZeroClassAux.moduleMonoidalClosed.{u + 1, u + 1, u} R
   let : HasLimitsOfSize.{0, 0} C := hasLimitsOfSizeShrink.{0, 0, u + 1, u + 1} C
-  let : HasColimitsOfSize.{0, 0} C := fixedSheafCountableColimits A X
+  let : HasColimitsOfSize.{0, 0} C := Scheme.ProEt.sheafModuleHasCountableColimits A X
   let : HasLimitsOfSize.{0, 0} D := hasLimitsOfSizeShrink.{0, 0, u + 1, u + 1} D
   let : HasColimitsOfSize.{0, 0} D := hasColimitsOfSizeShrink.{0, 0, u + 1, u + 1} D
   obtain ⟨t⟩ := intrinsicTensorNatIso X A

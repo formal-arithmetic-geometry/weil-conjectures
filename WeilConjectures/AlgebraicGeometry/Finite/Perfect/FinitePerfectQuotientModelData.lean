@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+public import WeilConjectures.AlgebraicGeometry.StrictPerfectPackageOnSite
 public import WeilConjectures.AlgebraicGeometry.Completed.Adic.CompletedAdicIntrinsicCompletion
 public import WeilConjectures.CategoryTheory.RingedSiteDerivedRestrictionUniverses
 public import WeilConjectures.CategoryTheory.RingedSiteDerivedRestriction
@@ -54,14 +55,6 @@ Source: Stacks Tag 05RU
 instance finitePerfectModelsRingHasDerived (X : Scheme.{t})
     (R : Sheaf (ProEt.topology X) RingCat.{t + 1}) :
     HasDerivedCategory (SheafOfModules.{t + 1} R) := HasDerivedCategory.standard _
-/-- Local bijectivity on the concrete localized site.
-Source: Stacks Tag 03DA
-(blueprint: lem-weil-pbc-residue-perfect-finite-quotient-models). -/
-instance finitePerfectModelsSliceAbLocallyBijective (X : Scheme.{t}) (U : X.ProEt) :
-    ((ProEt.topology X).over U).WEqualsLocallyBijective AddCommGrpCat.{t + 1} :=
-  letI : EssentiallySmall.{t + 1} (Over U) := essentiallySmallSelf.{0, t, t + 1} _
-  GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall.{t, t + 1, t + 1,
-    t + 2, t + 1, t + 1, t + 1} _
 /-- Standard derived localization on each slice.
 Source: Stacks Tag 05RU
 (blueprint: lem-weil-pbc-residue-perfect-finite-quotient-models). -/

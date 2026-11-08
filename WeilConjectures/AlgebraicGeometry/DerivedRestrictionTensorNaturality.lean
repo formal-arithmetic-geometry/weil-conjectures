@@ -31,7 +31,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 2048
 
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 600000 in
 -- Transporting the monoidal model unfolds the exact-functor localization data.
 /-- The objectwise tensor comparisons can be chosen bifunctorially.
 Source: Stacks Project, Tag 079U (proof), and Tag 08DX (1).

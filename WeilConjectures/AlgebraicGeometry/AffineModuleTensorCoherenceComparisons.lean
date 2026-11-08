@@ -178,7 +178,7 @@ private theorem comparisons_from_objectwise
   obtain ⟨β, hc⟩ := liftNatural Q (H ⋙ J) τ hinj hβ
   exact ⟨α, β, ha, hc⟩
 
-set_option maxHeartbeats 2000000 in
+set_option maxHeartbeats 800000 in
 -- Converting scheme pushforward to the composite right adjoint needs extra heartbeats.
 private theorem tensorComparisons_from_objectwise
     (H : SheafOfModules.{u} (𝓡 A) ⥤ U.Modules) (γ : S ⋙ tensorPullback f ⟶ H)
@@ -195,7 +195,6 @@ private theorem tensorComparisons_from_objectwise
     exact comparisons_from_objectwise S R (tensorPullback f) (adj₀) H γ
       (scalarRestriction_injective f) hf hβ
 
-set_option maxHeartbeats 2000000 in
 -- Elaborating the nested tensor transports requires additional heartbeats.
 /-- The tensor extension is quasi-coherent and carries the canonical comparison maps.
 Source: Stacks Project, Morphisms, Lemma 01SB, construction of h and elucidation.

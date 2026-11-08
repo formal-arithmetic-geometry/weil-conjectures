@@ -197,7 +197,6 @@ private theorem third_conjunct {P Q R S : Prop} (h : P ∧ Q ∧ R ∧ S) : R :=
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
-set_option maxHeartbeats 800000 in
 -- Comparing the two normalized monoidal witnesses elaborates the sheaf tensor constraints.
 /-- The chosen ordinary tensor maps obey all symmetric-monoidal coherence diagrams.
 Source: Stacks 03EK (auxiliary; not a blueprint node).
@@ -298,7 +297,6 @@ theorem delta_comparison {X Y : Scheme.{u}} (f : X ⟶ Y)
           ((derivedEquivalence Λ Y).functor.obj M, (derivedEquivalence Λ Y).functor.obj N) := by
   exact third_conjunct (section_derived_tensor_normalization Λ f) M N
 
-set_option maxHeartbeats 1600000 in
 -- The comparison instances contain large sheaf tensor constraints.
 /-- The module-object proper projection is the precise ringed projection mate alpha.
 This statement makes no invertibility assertion about the projection arrow.

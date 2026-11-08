@@ -24,7 +24,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 attribute [local instance] RingHomInvPair.of_ringEquiv RingHomInvPair.of_ringEquiv_symm
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- Elaborating the semilinear tensor factors and sheaf scalar actions needs more fuel.
 /-- The affine ideal tensor comparison, before identifying its source with `I/I²`.
 Source: Stacks Project, Morphisms, Lemma 01R3 (2), and Schemes, Tag 01I9.

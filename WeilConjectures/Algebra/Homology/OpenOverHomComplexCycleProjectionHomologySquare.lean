@@ -53,13 +53,13 @@ theorem openOver_chain_cycle_homology_comparison (X : Scheme.{u})
       F.map (P.homologyπ n) ≫ a.hom = c.hom ≫ Q.homologyπ n := by
   intro F
   have : PreservesFiniteLimits (SheafOfModules.overFunctor X.ringCatSheaf V) :=
-    moduleOverFunctor_limits_proof X.toRingedSpace V
+    moduleOverFunctor_limits X.toRingedSpace V
   have : PreservesFiniteLimits
       (SheafOfModules.overFunctor V.toScheme.ringCatSheaf W) :=
-    moduleOverFunctor_limits_proof V.toScheme.toRingedSpace W
+    moduleOverFunctor_limits V.toScheme.toRingedSpace W
   have : PreservesFiniteColimits
       (SheafOfModules.overFunctor V.toScheme.ringCatSheaf W) :=
-    moduleOverFunctor_colimits_proof V.toScheme.toRingedSpace W
+    moduleOverFunctor_colimits V.toScheme.toRingedSpace W
   have : PreservesFiniteLimits
       (SheafOfModules.overFunctor X.ringCatSheaf V ⋙ (Scheme.Modules.overEquiv V).functor) :=
     comp_preservesFiniteLimits _ _

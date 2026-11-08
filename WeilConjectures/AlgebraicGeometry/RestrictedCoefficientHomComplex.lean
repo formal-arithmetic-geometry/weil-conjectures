@@ -405,7 +405,6 @@ theorem complexHomProjection_map_left
 
 attribute [irreducible] complexHomProjection
 
-set_option maxHeartbeats 800000 in
 -- Checking the concrete Hom-component types needs this heartbeat budget.
 /-- Restriction of the coefficient product complex has the normalized comparison.
 Source: Stacks Project, Algebraization, Tag 099I; sites-cohomology.tex, Section 0A8X.

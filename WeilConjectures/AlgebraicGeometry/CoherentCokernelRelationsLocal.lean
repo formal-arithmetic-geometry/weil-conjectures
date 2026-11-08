@@ -36,7 +36,7 @@ private theorem overMap_preserves_kernel (X : RingedSpace.{u})
   exact isLimitOfPreserves (E ⋙ T) (kernelIsKernel g)
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- Unfold the slice restriction functor in the kernel and pullback comparisons.
 /-- Finite-free replacement for cokernel relations on a neighbourhood of each point.
 Source: Stacks Project, Modules, Lemma 01BY, cokernel paragraph.

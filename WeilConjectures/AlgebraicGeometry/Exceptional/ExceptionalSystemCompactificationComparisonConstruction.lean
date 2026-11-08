@@ -43,7 +43,6 @@ variable {A : Type a} [Category.{av} A] [Abelian A] [HasDerivedCategory.{q} A]
   {GD : DerivedCategory A ⥤ DerivedCategory C}
   {HD : DerivedCategory B ⥤ DerivedCategory D}
 
-set_option maxHeartbeats 1600000 in
 -- The representative mate calculation crosses several functor categories.
 private theorem localizeMate
     (adj : L ⊣ R) (adj' : L' ⊣ R') (ad : LD ⊣ RD) (ad' : LD' ⊣ RD')
@@ -195,7 +194,7 @@ variable {O : Type (u + 1)} [CommRing O] {ell : O}
   (CY : ExceptionalSystemSiteComparison O ell Y S.PY)
   (CZ : ExceptionalSystemSiteComparison O ell c.Z S.PZ)
 
-set_option maxHeartbeats 1600000 in
+set_option maxHeartbeats 600000 in
 -- The system and level mate identities require simultaneous localization comparisons.
 /-- Construct the normalized proper and open compactification comparisons.
 Source: Zheng Construction 5.15 and Lemmas 4.10, 5.16 and 5.22

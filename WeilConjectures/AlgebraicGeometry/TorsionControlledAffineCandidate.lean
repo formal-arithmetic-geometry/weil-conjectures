@@ -58,7 +58,6 @@ private theorem completion_quotientMap_bijective {A : Type u} [CommRing A]
   refine ⟨g y, hg ?_⟩
   exact hleft (g y)
 
-set_option maxHeartbeats 2000000 in
 -- Transporting the completed-module presentation requires unfolding several functor layers.
 /-- Formal gluing constructs a quasi-coherent candidate, without a finiteness assertion.
 

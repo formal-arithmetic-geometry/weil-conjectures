@@ -257,7 +257,6 @@ private theorem projection_pairing {X Y : Scheme.{u}} (f : X ⟶ Y)
       (((ProEtale.lowerStar Ab.{u + 1} f).map (Mod.tensorObjπ M N)).hom.app U) z) hU)
 
 -- The two specified adjunctions involve large coefficient types.
-set_option maxHeartbeats 400000 in
 -- Comparisons of reconstructed module structures involve large coefficient types.
 /-- The fixed section comparisons identify the actual adjunction and lax direct image.
 Source: Stacks Project, Modules on Sites, Tags 03D6, 03D7 and 03EK

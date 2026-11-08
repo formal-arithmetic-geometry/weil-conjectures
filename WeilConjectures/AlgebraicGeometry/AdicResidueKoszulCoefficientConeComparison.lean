@@ -58,7 +58,7 @@ attribute [local irreducible] homComplexFunctor ringedKoszulDualTower
   completed ringedKoszulDualUnit adicResidueQuotientCoefficientUnit
   adicResidueQuotientModule
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- Nested sheaf and complex functors require a larger elaboration heartbeat budget.
 /-- Exact realization identifies the finite algebraic augmentation cones and their
 strict transitions with those of any normalized coefficient augmentation.
