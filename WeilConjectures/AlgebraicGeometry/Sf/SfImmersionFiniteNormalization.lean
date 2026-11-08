@@ -90,7 +90,7 @@ attribute [local irreducible] CochainComplex.IsKFlatIndependentCoefficients
 local instance siteSmall (T : Scheme.{u}) :
   EssentiallySmall.{u + 1} T.ProEt := essentiallySmallSelf.{0, u, u + 1} _
 attribute [local instance] reductionModulesHasDerivedCategory
-attribute [local irreducible] Functor.mapDerivedCategoryCompIso Functor.mapDerivedCategoryNatIso
+attribute [local irreducible] Functor.mapDerivedCategoryNatIso
 
 -- Evaluate the adjoint transpose, then use constant/evaluation coherence.
 attribute [local semireducible] completedReductionModuleTowerFunctor
