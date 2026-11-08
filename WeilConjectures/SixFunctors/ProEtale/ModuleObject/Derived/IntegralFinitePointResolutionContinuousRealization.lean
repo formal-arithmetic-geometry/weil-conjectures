@@ -198,6 +198,17 @@ private def resolutionFreeIso (O : Type) [CommRing O]
   change (∑ i : Fin r, if i = j then c.down x i else 0) = c.down x j
   simp
 
+/-- Shortcut instance: on v4.35 the default search for this instance times out. -/
+local instance (ell : ℕ) [Fact ell.Prime] (E : PadicAlgCl.FiniteIntermediateField ell) :
+    ContinuousSMul (PadicAlgCl.integers ell E.1) (PadicAlgCl.integers ell E.1) :=
+  ContinuousMul.to_continuousSMul
+
+/-- Shortcut instance: on v4.35 the default search for this instance times out. -/
+local instance (ell : ℕ) [Fact ell.Prime] (E : PadicAlgCl.FiniteIntermediateField ell) :
+    ContinuousSMul (PadicAlgCl.integers ell E.1) (ULift.{u + 1} (PadicAlgCl.integers ell E.1)) :=
+  ContinuousSMul.induced
+    (ULift.moduleEquiv : ULift.{u + 1} (PadicAlgCl.integers ell E.1) ≃ₗ[_] _)
+
 set_option linter.unusedVariables false in
 -- The supplied section family subsumes the retained scalar-continuity hypothesis.
 set_option maxHeartbeats 2000000 in
