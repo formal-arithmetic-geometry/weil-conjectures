@@ -61,7 +61,7 @@ def pure {T : Scheme.{u}} (c : Chern l E T)
     (coefficientSequenceTopology (Scheme.ProEt.topology T))
   SheafOfModules.siteSheafTensorTmul M (lineModule l E c) U x y
 
-private local instance coefficientSectionSMul {T : Scheme.{u}}
+local instance coefficientSectionSMul {T : Scheme.{u}}
     (c : Chern l E T) (U : (ℕ × T.ProEt)ᵒᵖ) :
     SMul ((coefficient T (Arings l E T)).val.obj U) ((lineModule l E c).val.obj U) :=
   inferInstanceAs (SMul ((systemRing l E T).obj.obj U) ((lineModule l E c).val.obj U))
