@@ -1224,7 +1224,7 @@ private theorem normalizationRHom
     rw [Functor.map_preimage]
     simp only [Iso.trans_hom, Iso.app_hom, Iso.symm_hom, asIso_hom]
     simp [DerivedCategory.Plus.QCompιIso_hom_app,
-      DerivedCategory.Plus.QCompιIso_inv_app]
+      DerivedCategory.Plus.QCompιIso_inv_app] <;> rfl
   dsimp only [r] at hr
   rw [hei] at hr
   simp only [Iso.refl_inv] at hr
@@ -1420,10 +1420,15 @@ private theorem normalizationChi
         (Sheaf J (ModuleCat.{u + 1} A))).hom.app I = 𝟙 _ := by
       apply DerivedCategory.Plus.ι.map_injective
       exact CategoryTheory.Quotient.lift.isLift_hom _ _ _ _
-    simpa only [Sheaf.supportSequenceModelIso, Iso.trans_hom, Iso.symm_hom,
+    simp only [Sheaf.supportSequenceModelIso, Iso.trans_hom, Iso.symm_hom,
       Iso.symm_inv, Functor.mapIso_hom, asIso_hom, Iso.app_hom, Iso.app_inv, hs, ht,
       Functor.quotientCompMapHomotopyCategoryPlusIso, Iso.refl_inv, NatTrans.id_app,
-      CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id] using! hr
+      CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+    repeat first
+      | erw [CategoryTheory.Functor.map_id]
+      | erw [Category.id_comp]
+      | erw [Category.comp_id]
+    exact hr
   · intro f' hf'
     apply (theta.app (I.obj.X a)).addCommGroupIsoToAddEquiv.injective
     exact hf'.1.trans hfθ.symm
