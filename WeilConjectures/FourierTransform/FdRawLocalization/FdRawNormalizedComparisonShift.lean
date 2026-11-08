@@ -210,6 +210,7 @@ private theorem coefficient_congr_heq.{v, v'}
   cases hX
   rfl
 
+set_option backward.isDefEq.respectTransparency false in
 omit [IsAlgClosure ℚ_[l] Ω] [AlgebraicGeometry.IsNoetherian T] dT iT in
 private theorem uShift_heq {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L)
     (X : sfIntegralConstructibleCategory l (pbcFiniteField.{u} l Ω E) T) :
