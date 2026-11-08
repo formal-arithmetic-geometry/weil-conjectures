@@ -362,10 +362,10 @@ private theorem normalized_cube
     (hc : ∀ M : A,
       Q.map (a.hom.app M) ≫ h.hom.app (R.obj M) ≫ G'.map (r.hom.app M) =
         s.hom.app (F.obj M) ≫ S'.map (e.hom.app M) ≫ b.hom.app (U.obj M)) :
-    let dr := (Functor.mapDerivedCategoryCompIso R P).symm ≪≫
-      Functor.mapDerivedCategoryNatIso r ≪≫ Functor.mapDerivedCategoryCompIso U R'
-    let ds := (Functor.mapDerivedCategoryCompIso S Q).symm ≪≫
-      Functor.mapDerivedCategoryNatIso s ≪≫ Functor.mapDerivedCategoryCompIso V S'
+    let dr := Functor.mapDerivedCategoryCompIso R P ≪≫
+      Functor.mapDerivedCategoryNatIso r ≪≫ (Functor.mapDerivedCategoryCompIso U R').symm
+    let ds := Functor.mapDerivedCategoryCompIso S Q ≪≫
+      Functor.mapDerivedCategoryNatIso s ≪≫ (Functor.mapDerivedCategoryCompIso V S').symm
     ∀ M : DerivedCategory A,
       Q.mapDerivedCategory.map (da.hom.app M) ≫
         dh.hom.app (R.mapDerivedCategory.obj M) ≫
@@ -373,10 +373,10 @@ private theorem normalized_cube
       ds.hom.app (F.rightDerivedFunctor.obj M) ≫
         S'.mapDerivedCategory.map (de.hom.app M) ≫
         db.hom.app (U.mapDerivedCategory.obj M) := by
-  let dr := (Functor.mapDerivedCategoryCompIso R P).symm ≪≫
-    Functor.mapDerivedCategoryNatIso r ≪≫ Functor.mapDerivedCategoryCompIso U R'
-  let ds := (Functor.mapDerivedCategoryCompIso S Q).symm ≪≫
-    Functor.mapDerivedCategoryNatIso s ≪≫ Functor.mapDerivedCategoryCompIso V S'
+  let dr := Functor.mapDerivedCategoryCompIso R P ≪≫
+    Functor.mapDerivedCategoryNatIso r ≪≫ (Functor.mapDerivedCategoryCompIso U R').symm
+  let ds := Functor.mapDerivedCategoryCompIso S Q ≪≫
+    Functor.mapDerivedCategoryNatIso s ≪≫ (Functor.mapDerivedCategoryCompIso V S').symm
   let x : F.rightDerivedFunctor ⋙ S.mapDerivedCategory ⋙ Q.mapDerivedCategory ⟶
       U.mapDerivedCategory ⋙ R'.mapDerivedCategory ⋙ G'.rightDerivedFunctor :=
     Functor.whiskerRight da.hom Q.mapDerivedCategory ≫
@@ -1084,10 +1084,10 @@ private theorem sf_projection_formula (n : ℕ)
   letI : (U ⋙ R').Additive := by infer_instance
   letI : (S ⋙ Q).Additive := by infer_instance
   letI : (V ⋙ S').Additive := by infer_instance
-  let dr := (Functor.mapDerivedCategoryCompIso R P).symm ≪≫
-    Functor.mapDerivedCategoryNatIso r ≪≫ Functor.mapDerivedCategoryCompIso U R'
-  let ds := (Functor.mapDerivedCategoryCompIso S Q).symm ≪≫
-    Functor.mapDerivedCategoryNatIso s ≪≫ Functor.mapDerivedCategoryCompIso V S'
+  let dr := Functor.mapDerivedCategoryCompIso R P ≪≫
+    Functor.mapDerivedCategoryNatIso r ≪≫ (Functor.mapDerivedCategoryCompIso U R').symm
+  let ds := Functor.mapDerivedCategoryCompIso S Q ≪≫
+    Functor.mapDerivedCategoryNatIso s ≪≫ (Functor.mapDerivedCategoryCompIso V S').symm
   have hc := normalized_cube.{u + 2, u + 1, u + 2}
     (addF := inferInstanceAs ((proEtaleConstantModuleDirectImage f
       (Padic.coefficientExtensionRing l E (n + 1))).Additive))

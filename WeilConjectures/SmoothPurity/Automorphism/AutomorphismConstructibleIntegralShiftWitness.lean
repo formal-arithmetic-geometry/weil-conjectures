@@ -203,8 +203,12 @@ private theorem composition_shift
     exact reduced_realization_commShift _ _ _ _ _ _ _
   have : NatTrans.CommShift (integralComparisonSystemComposition l E h k).hom ℤ := by
     unfold integralComparisonSystemComposition integralComparisonDerivedSequencePullback
-    dsimp only [Iso.trans_hom]
-    infer_instance
+    dsimp only [Iso.trans_hom, Iso.symm_hom]
+    have : NatTrans.CommShift (Functor.mapDerivedCategoryNatIso
+        (integralComparisonSequenceComposition l E h k)).hom ℤ := inferInstance
+    have : NatTrans.CommShift ((integralComparisonSequencePullback l E k).mapDerivedCategoryCompIso
+        (integralComparisonSequencePullback l E h)).inv ℤ := inferInstance
+    exact NatTrans.CommShift.comp _ _ _
   let P := sfIntegralConstructible l E V
   let U := integralComparisonDerivedSequencePullback l E h
   let L := coefficientSequenceLimit l E Z
