@@ -32,7 +32,7 @@ Lemma 6.8.2 and Proposition 6.8.14
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types true
 set_option genSizeOf false
 set_option genSizeOfSpec false

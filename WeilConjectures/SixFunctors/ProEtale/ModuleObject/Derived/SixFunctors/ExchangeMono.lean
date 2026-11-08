@@ -236,8 +236,8 @@ private theorem cartesianDerivedCounit
     infer_instance
   have : IsIso α := NatIso.isIso_of_isIso_app α
   let e : D(F) ⋙ (D(R) ⋙ D(L)) ≅ D(F) :=
-    Functor.isoWhiskerLeft D(F) (Functor.mapDerivedCategoryCompIso R L).symm ≪≫
-      (Functor.mapDerivedCategoryCompIso F (R ⋙ L)).symm ≪≫
+    Functor.isoWhiskerLeft D(F) (Functor.mapDerivedCategoryCompIso R L) ≪≫
+      Functor.mapDerivedCategoryCompIso F (R ⋙ L) ≪≫
       Functor.mapDerivedCategoryNatIso (asIso α)
   exact adj.mapDerivedCategoryAdjunction.isIso_counit_app_of_iso (e.app K).symm
 
