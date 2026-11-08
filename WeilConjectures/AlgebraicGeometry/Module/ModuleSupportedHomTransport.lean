@@ -462,8 +462,7 @@ private theorem supportHom_transport_injective
   have hi (n : ℤ) : Injective (R.obj.X n) := (J₀.obj.X n).2
   have : QuasiIso e.hom := he
   have : IsIso (DerivedCategory.Plus.Q.map e) :=
-    Localization.inverts DerivedCategory.Plus.Qh (HomotopyCategory.Plus.quasiIso _) _
-      ((HomotopyCategory.quotient_map_mem_quasiIso_iff _).2 he)
+    Localization.inverts DerivedCategory.Plus.Q (CochainComplex.Plus.quasiIso _) _ he
   let c := Functor.normalizedSupportChainMap L S S' tau I R e.hom
   let EI := Sheaf.supportSequenceModelIso J (ModuleCat.{u + 1} A) S I
     (DerivedCategory.Plus.Q.obj I) (Iso.refl _) a
