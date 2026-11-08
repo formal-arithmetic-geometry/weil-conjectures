@@ -153,7 +153,7 @@ variable (k₀) in
 geometric adjunction** (condensed model, concrete adjunctions). -/
 theorem exists_condensedForget_obj_iso_isWeilEquivariant_rightWeilDatum_concrete
     (L' : (condensedWeilObjectProperty k₀ l Y).FullSubcategory) :
-    ∃ θ : (IsoAlgebra.forget _).mapDerivedCategory.obj
+    ∃ θ : (IsoAlgebra.forget (condensedFrobenius k₀ l (shriekCompactification k₀ f).Z)).mapDerivedCategory.obj
         ((condensedWeilProperRightAdjoint k₀ l f).obj L').obj ≅
         ((condensedProperRightAdjoint k₀ l f).obj
           ⟨(IsoAlgebra.forget _).mapDerivedCategory.obj L'.obj, L'.property⟩).obj,
