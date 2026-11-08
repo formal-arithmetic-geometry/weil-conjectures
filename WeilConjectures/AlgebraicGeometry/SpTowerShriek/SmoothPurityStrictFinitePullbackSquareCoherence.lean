@@ -416,7 +416,7 @@ private theorem exact_comp_square
     let E := (sfIntrinsicModuleEquivalence Z A).functor.mapDerivedCategory
     E.map ((Functor.mapDerivedCategoryNatIso
           (upperStarComp (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) h f) ≪≫
-        Functor.mapDerivedCategoryCompIso F G).hom.app M) ≫
+        (Functor.mapDerivedCategoryCompIso F G).symm).hom.app M) ≫
       (Functor.mapDerivedCategorySquareIso.{u+2,u+2,u+2,u+2,
           u+1,u+2,u+2,u+1,u+1,u+1,u+1,u+1} (ordinaryComparison A h).symm).hom.app
         (F.mapDerivedCategory.obj M) ≫
