@@ -31,6 +31,7 @@ open CategoryTheory.SuppliedExchangeProjection
 
 namespace WeilConjectures
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The composition equation on two models included from one finite field.
 Source: thm-sf-pf-field.proof.md, Compatibility and the common coefficient-field
 paragraph, and fix-prop-projection-formula.proof.md, final coherence sentence.
