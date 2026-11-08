@@ -155,7 +155,7 @@ private theorem extend_on_basicOpen {X S : Scheme.{u}} (g : X ⟶ S)
       Sigma.ι_desc _ _, ← cancel_epi (restrictUnitIso W.ι).inv]
     apply unit_map_ext
     have hi := congrArg (N.presheaf.map (homOfLE hle').op) (hv' i)
-    simp only [map_smul, map_pow, presheaf_map_homOfLE_homOfLE,
+    simp only [map_smul, map_pow, presheaf_map_homOfLE_map_homOfLE,
       Scheme.presheaf_map_map_apply] at hi
     rw [presheaf_map_id_apply] at hi
     rw [Hom.comp_app, ConcreteCategory.comp_apply]

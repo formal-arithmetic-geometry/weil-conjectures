@@ -139,7 +139,6 @@ private theorem coordinates_cast_congr {A : Type*} [Category A] [Abelian A]
   subst g
   rfl
 
-set_option maxHeartbeats 400000 in
 -- Unpacking the normalized cone and Roos comparison involves many dependent fields.
 /-- The canonical integral completion has a Presentation with all strict coordinates
 and derived units fixed by the completion-triangle comparison.

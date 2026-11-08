@@ -399,7 +399,7 @@ theorem exists_forall_ge_presheaf_map_eq (F : X.Modules)
   have hm' : m₀ + (m - m₀) = m := Nat.add_sub_cancel' hm
   let g := mulTensorPowSection s F m₀ (m - m₀) ≫ F ◁ eqToHom (congrArg L.tensorPow hm')
   refine ⟨g.app ⊤ u₀, fun W hW ↦ ?_⟩
-  rw [← Hom.app_presheaf_map, ← presheaf_map_homOfLE_homOfLE (le_top : _ ≤ ⊤) hW, hu₀,
+  rw [← Hom.app_presheaf_map, ← presheaf_map_homOfLE_map_homOfLE (le_top : _ ≤ ⊤) hW, hu₀,
     ← Hom.app_presheaf_map, rightUnitor_inv_comp_whiskerLeft_app,
     rightUnitor_inv_comp_whiskerLeft_app, Hom.comp_app, ConcreteCategory.comp_apply,
     mulTensorPowSection_app_tmulSection]
@@ -459,7 +459,7 @@ theorem exists_hom_free_isIso_restrictFunctor_map (F : X.Modules)
   refine sub_eq_zero.mpr ?_
   have h₁ := hu i (V.ι ''ᵁ ⊤) hle'
   have hβ : F.presheaf.map (homOfLE hle').op (F.presheaf.map (homOfLE hle).op (β i)) = β i := by
-    rw [presheaf_map_homOfLE_homOfLE]
+    rw [presheaf_map_homOfLE_map_homOfLE]
     exact presheaf_map_id_apply _ _
   rw [hβ] at h₁
   have hA : Hom.app ((restrictUnitIso V.ι).inv ≫

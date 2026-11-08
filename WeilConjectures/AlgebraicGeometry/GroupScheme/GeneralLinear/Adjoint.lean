@@ -84,7 +84,7 @@ attribute [local instance] overΓAlgebra
 
 /-- The canonical morphism `X ⟶ Spec Γ(X, 𝒪_X)`, over `k`. -/
 noncomputable def toSpecΓOver : X ⟶ (Spec (.of Γ(X.left, ⊤))).asOver (Spec (.of k)) :=
-  Over.homMk X.left.toSpecΓ (Scheme.toSpecΓ_comp_specMap_ΓSpecIso_inv_comp_appTop X.hom)
+  Over.homMk X.left.toSpecΓ (Scheme.toSpecΓ_SpecMap_ΓSpecIso_inv_appTop X.hom)
 
 variable {X} in
 /-- A morphism over `k` from `X` to an affine scheme `Spec B` over `k` is determined by its
@@ -111,7 +111,7 @@ theorem bijective_toSpecΓOver_comp {B : Type u} [CommRing B] [Algebra k B] :
     refine ⟨Over.homMk (Spec.map φ) ?_, Over.OverMorphism.ext ?_⟩
     · simp only [OverClass.asOver_hom, specOverSpec_over]
       rw [← Spec.map_comp, hφ]
-    · exact Scheme.toSpecΓ_comp_specMap_ΓSpecIso_inv_comp_appTop p.left
+    · exact Scheme.toSpecΓ_SpecMap_ΓSpecIso_inv_appTop p.left
 
 /-- **The points of `GL_n` with values in a scheme.** For a scheme `X` over `k`, the morphisms
 `X ⟶ GL_n` over `k` are the invertible `n × n` matrices over `Γ(X, 𝒪_X)`, as groups: such a

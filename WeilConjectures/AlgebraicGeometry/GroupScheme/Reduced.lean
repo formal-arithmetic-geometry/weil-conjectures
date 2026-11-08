@@ -69,11 +69,6 @@ instance isReduced_tensorObj_left [PerfectField k] (X Y : Over (Spec (.of k)))
 instance : IsReduced (𝟙_ (Over (Spec (.of k)))).left :=
   inferInstanceAs (IsReduced (Spec (.of k)))
 
-/-- The reduced subscheme `X_red`, cut out by the nilradical, is reduced. -/
-instance (X : Scheme.{u}) : IsReduced X.nilradical.subscheme := by
-  have := Scheme.IdealSheafData.isReduced_subscheme_vanishingIdeal (X := X) ⊤
-  rwa [Scheme.IdealSheafData.vanishingIdeal_top] at this
-
 section Reduced
 
 variable (G : Over (Spec (.of k)))

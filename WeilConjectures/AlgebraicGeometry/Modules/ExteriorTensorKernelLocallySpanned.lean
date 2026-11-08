@@ -77,7 +77,6 @@ private theorem locally_mem_of_germ_mem_span {X : Scheme.{v}} (M : X.Modules)
   rw [hV] at h
   exact e ▸ h
 
-set_option maxHeartbeats 800000 in
 -- Elaborating both sheafification naturality equalities needs the larger local budget.
 set_option backward.isDefEq.respectTransparency false in
 private theorem relationSpan_map {X : Scheme.{v}} (S : ShortComplex X.Modules)

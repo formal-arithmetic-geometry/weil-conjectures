@@ -39,7 +39,6 @@ noncomputable def structureModuleAbelianEquiv
       Sheaf.H (structureSheafAb Y) 1 :=
   Modules.moduleCohomologyExtResolutionEquiv Y (SheafOfModules.unit Y.ringCatSheaf) 1
 
-set_option maxHeartbeats 800000 in
 -- Transporting the fixed resolution comparison through the module aliases is expensive.
 /-- The fixed resolution comparison `structureModuleAbelianEquiv` respects every structure
 h-map.

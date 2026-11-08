@@ -29,7 +29,6 @@ private theorem restriction_wedge {X : Scheme.{v}} (M : X.Modules) (n : ℕ)
         (M.val.exteriorPower (R := X.presheaf) n).obj V) :=
   _root_.PresheafOfModules.exteriorPower_map_ιMulti (R := X.presheaf) M.val n k a
 
-set_option maxHeartbeats 800000 in
 -- Comparing scheme ring-sheaf scalar structures requires additional elaboration.
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
