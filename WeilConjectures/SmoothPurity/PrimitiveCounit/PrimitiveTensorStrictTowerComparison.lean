@@ -426,7 +426,6 @@ private theorem tensorLevel_generator
     unrestrictedIntegralReductionFunctor, scalarReductionExtension,
     integralCoefficientCommRingSheaf, Functor.comp_obj, ObjectProperty.ι_obj] at hh ⊢
   convert hh using 1
-  congr 1
 
 set_option maxHeartbeats 2000000 in
 -- Normalize the coefficient functor and complex instances within this declaration.
