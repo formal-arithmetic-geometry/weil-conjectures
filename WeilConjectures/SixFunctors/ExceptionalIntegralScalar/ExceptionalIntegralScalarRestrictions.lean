@@ -289,6 +289,8 @@ private theorem ambientScalar_shift (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     (a : PurCompactSupport.Change (s.coefficients l) (t.coefficients l))
     (ha : Allowed l a) :
     (ambientScalar l Ω D hl T a ha).realization.hom.CommShift ℤ := by
+  have : (stageProperty l T s).IsTriangulated := stageProperty_tri l T s
+  have : (stageProperty l T t).IsTriangulated := stageProperty_tri l T t
   cases s <;> cases t <;> dsimp only [ambientScalar] <;> infer_instance
 
 set_option maxHeartbeats 1000000 in

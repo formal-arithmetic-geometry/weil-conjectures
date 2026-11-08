@@ -361,7 +361,7 @@ private theorem fixedEtaleOrigin (X : SixFunctorSpace D)
   refine ⟨L.obj, (etaleBoundedIff _ _ _).1 L.property, ⟨?_⟩⟩
   apply R.functor.preimageIso
   exact ((Functor.mapDerivedCategoryCompIso U
-    (sfIntrinsicModuleEquivalence X.obj.left A).functor).app L.obj).symm ≪≫
+    (sfIntrinsicModuleEquivalence X.obj.left A).functor).app L.obj) ≪≫
       eL ≪≫ (R.counitIso.app K.obj).symm
 
 /-- Exactly the typing facts for the partial finite tensor and finite-Tor pullback.
@@ -405,8 +405,8 @@ theorem domains :
     have himage := ((finiteRing_constructibleDerived_origin X.obj.left A).2.2.1
       (((tensor (C := C) (E := E) (n := n) (hn := hn) X).obj K.obj).obj L.obj)).mp
       ⟨⟨_, (etaleBoundedIff _ _ _).2 hT⟩,
-        ⟨(Functor.mapDerivedCategoryCompIso U
-          (sfIntrinsicModuleEquivalence X.obj.left A).functor).app _ ≪≫
+        ⟨((Functor.mapDerivedCategoryCompIso U
+          (sfIntrinsicModuleEquivalence X.obj.left A).functor).app _).symm ≪≫
             R.functor.mapIso eT⟩⟩
     refine ⟨?_, himage.1⟩
     obtain ⟨c, d, _, hv⟩ := himage.2
@@ -424,8 +424,8 @@ theorem domains :
       (S.finitePullback f).app ⟨L.obj, L.property.1⟩ ≪≫
         ((Functor.mapDerivedCategoryCompIso
           (sfIntrinsicModuleEquivalence Y.obj.left A).inverse
-          (U ⋙ (sfIntrinsicModuleEquivalence X.obj.left A).functor)) ≪≫
-          Functor.isoWhiskerLeft _ (Functor.mapDerivedCategoryCompIso _ _)).app L.obj
+          (U ⋙ (sfIntrinsicModuleEquivalence X.obj.left A).functor)).symm ≪≫
+          Functor.isoWhiskerLeft _ (Functor.mapDerivedCategoryCompIso _ _).symm).app L.obj
     obtain ⟨a, b, h⟩ := L.property.2
     have hfixed := (intrinsic_hasProEtaleTorAmplitude_iff_torAmplitudeIn
       A Y.obj.left a b h.1 (RY.inverse.obj L.obj)).1
@@ -496,8 +496,8 @@ def pullRealization {X Y : SixFunctorSpace D} (f : X ⟶ Y)
         (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing C.l E n)))
           f.hom.left ⋙
         (sfIntrinsicModuleEquivalence X.obj.left
-          (Padic.coefficientExtensionRing C.l E n)).functor)) ≪≫
-      Functor.isoWhiskerLeft _ (Functor.mapDerivedCategoryCompIso _ _)).app L.obj
+          (Padic.coefficientExtensionRing C.l E n)).functor)).symm ≪≫
+      Functor.isoWhiskerLeft _ (Functor.mapDerivedCategoryCompIso _ _).symm).app L.obj
 
 /-- Support realization in fixed-scalar coordinates, cancelling the unit before
 applying tensor. Source: finite projection (blueprint: def-sf-constructible-projection-mates). -/
