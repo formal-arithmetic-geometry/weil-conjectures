@@ -81,9 +81,9 @@ Source: section reconstruction and exact derived transport, BS 6.8.2.
     Functor.isoWhiskerLeft (ProEtale.AdicSheaf.forgetAb l X)
       (ProEtale.CondensedRing.sectionModuleComapIso X (condensedNativeMap l X))
   unfold nativeCondensedDerived integralSections sectionDerived
-  exact (Functor.mapDerivedCategoryCompIso (nativeCondensedModules l X) S).symm ≪≫
+  exact Functor.mapDerivedCategoryCompIso (nativeCondensedModules l X) S ≪≫
     Functor.mapDerivedCategoryNatIso k ≪≫
-    Functor.mapDerivedCategoryCompIso (sections l X) _
+    (Functor.mapDerivedCategoryCompIso (sections l X) _).symm
 
 /-- The section ring map of an invertible internal coefficient map is invertible.
 Source: functoriality on the literal section rings.
@@ -136,10 +136,10 @@ Source: the scalar adjunction under coefficient equivalences, BS 6.8.2.
     (ProEt.topology X) (ProEtale.padicAlgClRingObj X l)
   letI := Functor.additive_of_preserves_binary_products eE.functor
   letI := Functor.additive_of_preserves_binary_products eC.functor
-  let k := (Functor.mapDerivedCategoryCompIso (Mod.comap φ) eE.functor).symm ≪≫
+  let k := Functor.mapDerivedCategoryCompIso (Mod.comap φ) eE.functor ≪≫
     Functor.mapDerivedCategoryNatIso (ProEtale.CondensedRing.sectionModuleComapIso X φ) ≪≫
-    Functor.mapDerivedCategoryCompIso eC.functor
-      (pbcRestrict (ProEtale.CondensedRing.sectionRingMap X φ))
+    (Functor.mapDerivedCategoryCompIso eC.functor
+      (pbcRestrict (ProEtale.CondensedRing.sectionRingMap X φ))).symm
   let a : ProEtale.derivedExtendScalarsToPadicAlgCl X l E ⊣
       (Mod.comap φ).mapDerivedCategory := by
     exact @Mod.derivedExtendMapDerivedCategoryAdjunction
@@ -184,6 +184,7 @@ theorem integralDetailedTransport_eq
   simp only [← h]
   rfl
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The actual stage transition has the specified underlying integral object.
 Source: the raw localization and the published stage-transition object equation.
 (blueprint: def-sf-condensed-integral-section-comparisons). -/
