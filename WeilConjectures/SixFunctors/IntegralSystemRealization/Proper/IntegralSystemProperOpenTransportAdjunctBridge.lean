@@ -19,7 +19,6 @@ attribute [local irreducible] CategoryTheory.Functor.leftAdjoint
   CategoryTheory.Functor.mapDerivedCategory
   CategoryTheory.Functor.rightDerivedFunctor HasDerivedCategory.standard
   CategoryTheory.constantSheaf CategoryTheory.Functor.mapDerivedCategoryNatIso
-  CategoryTheory.Functor.mapDerivedCategoryCompIso
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry AlgebraicGeometry.Scheme
 private theorem left_transport

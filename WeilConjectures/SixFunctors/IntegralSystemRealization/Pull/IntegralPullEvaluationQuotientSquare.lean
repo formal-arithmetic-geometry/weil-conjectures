@@ -33,7 +33,7 @@ attribute [local irreducible] HasDerivedCategory.standard Functor.mapDerivedCate
   pullbackTensorInverseEvaluationComplex pullbackTensorLevelIntrinsic
   constantSheaf presheafToSheaf Functor.leftAdjoint
   sfIntrinsicPullback coefficientSequenceEvaluation pullbackTensorSequenceInverse
-attribute [local implicit_reducible] Functor.mapHomologicalComplex
+attribute [local implicit_reducible]
   integralCoefficientSheaf integralCoefficientCommRingSheaf
   pullbackTensorSequenceDerived coefficientSequenceHasDerived scalarReductionTargetDerived
   coefficientFiniteHasDerived proEtaleRingModules_hasDerivedCategory

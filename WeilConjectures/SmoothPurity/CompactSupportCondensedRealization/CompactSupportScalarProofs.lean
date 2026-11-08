@@ -192,7 +192,7 @@ theorem scalarRestriction_openSupported
   exact (NatTrans.isIso_app_iff_of_iso
     (SemilinearProperOpen.jAdj C τ j).counit
     ((Functor.mapDerivedCategoryCompIso (SemilinearProperOpen.extension D σ j)
-      (SemilinearSections.res a)).app M)).mp hd
+      (SemilinearSections.res a)).symm.app M)).mp hd
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

@@ -18,7 +18,7 @@ import all WeilConjectures.PoincareDuality.Integral.IntegralPullbackStrictFinite
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.defeqAttrib.useBackward true
-attribute [local implicit_reducible] CategoryTheory.Functor.mapHomologicalComplex
+attribute [local implicit_reducible]
   CategoryTheory.Functor.ofOpSequence CategoryTheory.Functor.ofSequence
   CategoryTheory.NatIso.mapHomologicalComplex CategoryTheory.NatTrans.mapHomologicalComplex
   HomologicalComplex.asFunctor
@@ -44,7 +44,6 @@ variable (l : ℕ) [Fact l.Prime]
 section RoosCoordinates
 
 attribute [local implicit_reducible] integralOperationsRoos integralOperationsRoosFunctor
-  CochainComplex.shiftFunctor
 
 @[reassoc] private theorem roos_inl {A : Type*} [Category A] [Abelian A]
     [HasCountableProducts A] {C D : ℕᵒᵖ ⥤ CochainComplex A ℤ} (a : C ⟶ D) (j : ℤ) :

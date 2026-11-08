@@ -32,7 +32,7 @@ attribute [local irreducible] upperStar lowerStar upperStarFromPoint
   ClosedTestDerivedExchangeModel.exchange
 attribute [local irreducible] DerivedCategory HasDerivedCategory.standard
   Mod.monoidalCategory Mod.monoidalClosed Mod.monoidalCategoryStruct
-  Functor.mapDerivedCategoryNatIso Functor.mapDerivedCategoryCompIso
+  Functor.mapDerivedCategoryNatIso
   moduleObjectDerivedExchange condensedAmbientExchange
   pullbackSquareComparison derivedUpperStarLowerStarAdjunction
 -- Instance search must find the same sheafification and `EssentiallySmall` instances as the
