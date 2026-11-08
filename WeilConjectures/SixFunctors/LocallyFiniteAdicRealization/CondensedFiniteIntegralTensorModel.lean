@@ -242,9 +242,9 @@ private def section_tensor
   let φ := ProEtale.CondensedRing.sectionRingMap X a
   let β : (Mod.comap a).mapDerivedCategory ⋙ sectionD X R ≅
       sectionD X S ⋙ pbcDerivedRestrict φ :=
-    (Functor.mapDerivedCategoryCompIso (Mod.comap a) ER.functor).symm ≪≫
+    Functor.mapDerivedCategoryCompIso (Mod.comap a) ER.functor ≪≫
       Functor.mapDerivedCategoryNatIso (ProEtale.CondensedRing.sectionModuleComapIso X a) ≪≫
-      Functor.mapDerivedCategoryCompIso ES.functor (pbcRestrict φ)
+      (Functor.mapDerivedCategoryCompIso ES.functor (pbcRestrict φ)).symm
   let α := ((mateEquiv adj (pbcDerivedScalarAdjunction φ)).symm
     (TwoSquare.mk _ _ _ _ β.hom)).natTrans
   letI : IsIso α := isIso_inverseMate_of_equivalences adj
@@ -321,18 +321,19 @@ private def native_inverse_sections [hSA : (sections l X).Additive]
   have hFA : (ProEtale.NativeEncoding.encoding l X ⋙ E.functor).Additive :=
     Functor.additive_of_preserves_binary_products _
   let z : N.functor ⋙ sectionD X A ≅ (sections l X).mapDerivedCategory ⋙ R.functor :=
-    (Functor.mapDerivedCategoryCompIso (ProEtale.NativeEncoding.encoding l X)
-      E.functor).symm ≪≫
+    Functor.mapDerivedCategoryCompIso (ProEtale.NativeEncoding.encoding l X)
+      E.functor ≪≫
       @Functor.mapDerivedCategoryNatIso _ _ _ _ _ _ _ _ _ _
         hFA hGA hFL hFC hGL hGC e ≪≫
-      @Functor.mapDerivedCategoryCompIso _ _ _ _ _ _ _ _ _ _ _ _
-        (sections l X) R₀.functor inferInstance hRA inferInstance inferInstance hRL hRC
+      (@Functor.mapDerivedCategoryCompIso _ _ _ _ _ _ _ _ _ _ _ _
+        (sections l X) inferInstance inferInstance inferInstance R₀.functor hRA hRL hRC).symm
   let z' : (sections l X).mapDerivedCategory ≅
       N.functor ⋙ (sectionD X A ⋙ R.inverse) :=
     (Iso.compInverseIso (H := R) z).symm ≪≫ Functor.associator _ _ _
   exact Iso.inverseCompIso (G := N) z' ≪≫
     Functor.isoWhiskerLeft (sectionD X A) (extendIsoRestrict X d).symm
 
+set_option backward.isDefEq.respectTransparency false in
 private def finiteSectionIso
     [IsNoetherian X] [Fact (∃ n : ℕ, topologicalKrullDim X ≤ n)]
     [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))]
@@ -344,6 +345,7 @@ private def finiteSectionIso
       rationalCoefficientSheaf l X (Coefficient.{u} l (PadicAlgCl l) E) :=
   R.finiteIso E
 
+set_option backward.isDefEq.respectTransparency false in
 private theorem finite_native_coefficient
     [IsNoetherian X] [Fact (∃ n : ℕ, topologicalKrullDim X ≤ n)]
     [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))]
@@ -387,7 +389,7 @@ private theorem finite_native_coefficient
 
 end SectionComparison
 
-set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types true
 set_option synthInstance.maxSize 4096
 
