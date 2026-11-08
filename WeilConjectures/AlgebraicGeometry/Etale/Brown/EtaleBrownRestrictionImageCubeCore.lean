@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.Etale.Brown.EtaleBrownProjectionRealization
 public import WeilConjectures.CategoryTheory.Etale.EtaleUnboundedRestrictionComparison
 import all WeilConjectures.Algebra.Homology.Coefficient.CoefficientSystemUnboundedComparison

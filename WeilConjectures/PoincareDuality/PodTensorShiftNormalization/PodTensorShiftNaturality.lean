@@ -124,7 +124,6 @@ theorem signed_roos_naturality
     simp only [CochainComplex.shiftFunctor_map_f']
     erw [(IntegralAmbient.roosMap_coordinates f).2 (i + r) (i - 1 + r) (by omega)]
     erw [Category.assoc]
-    rfl
   apply HomologicalComplex.hom_ext
   intro i
   have hfi := congrArg (fun a ↦ a.f i) hf
