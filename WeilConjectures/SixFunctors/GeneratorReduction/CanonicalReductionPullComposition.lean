@@ -33,7 +33,7 @@ namespace WeilConjectures.GeneratorReduction
 open IntegralSystemRealization
 
 attribute [local implicit_reducible] PurCompactSupport.completed
-  pullbackTensorSequenceDerived integralOperationsGoodLocalization Functor.mapHomologicalComplex
+  pullbackTensorSequenceDerived integralOperationsGoodLocalization
   coefficientSequenceHasDerived
   scalarReductionSourceDerived integralTowerHasDerivedCategory
   AlgebraicGeometry.Scheme.proEtaleRingModules_hasDerivedCategory

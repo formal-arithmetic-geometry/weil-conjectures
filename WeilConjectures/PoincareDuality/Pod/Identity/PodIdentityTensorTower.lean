@@ -47,7 +47,7 @@ attribute [local irreducible] integralOperationsRoos
 attribute [local implicit_reducible] integralOperationsTensorTowerFunctor
   integralOperationsTensorLevel integralOperationsTensorComposite podGoodReindex
   SheafOfModules.restrictScalars Functor.map₂HomologicalComplex
-  Functor.mapHomologicalComplex Functor.ofOpSequence Functor.ofSequence
+  Functor.ofOpSequence Functor.ofSequence
 attribute [local implicit_reducible] isoSectionwiseModuleInverseImage
   SheafOfModules.pushforward PresheafOfModules.pushforward
   PresheafOfModules.pushforward₀ PresheafOfModules.pushforward₀Obj
