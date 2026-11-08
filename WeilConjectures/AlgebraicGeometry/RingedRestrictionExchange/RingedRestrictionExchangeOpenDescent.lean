@@ -216,7 +216,7 @@ private theorem chainComparison_isKInjective
 
 -- State the chain with the instance used by `exchange`, matching `exchange_chainUnit`.
 section ExchangeChain
-attribute [local instance 40000] completedConstantAbLocallyBijective
+attribute [local instance 40000] WeilConjectures.sfAbBijective
 
 private theorem exchange_chain (r : StrictTowerRingedSquare sq)
     (K : CochainComplex (proEtaleRingModules X r.RX) ℤ) :
@@ -317,7 +317,7 @@ end OpenComparisonTransfer
 -- Specialize the category instances before substituting the ringed functors.
 section SchemeOpenComparisonTransfer
 -- Same locally bijective instance as in `exchange`, so the chain types agree syntactically.
-attribute [local instance 40000] completedConstantAbLocallyBijective
+attribute [local instance 40000] WeilConjectures.sfAbBijective
 variable (r : StrictTowerRingedSquare sq)
   (F : proEtaleRingModules X r.RX ⥤ proEtaleRingModules Y r.RY)
   (G : proEtaleRingModules Y r.RY ⥤ proEtaleRingModules Y' r.RY')

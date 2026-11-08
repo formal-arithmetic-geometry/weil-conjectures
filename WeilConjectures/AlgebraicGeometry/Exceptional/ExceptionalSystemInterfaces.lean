@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.SfIntegralReductionTower
 public import WeilConjectures.AlgebraicGeometry.Strict.Etale.StrictEtaleSystemInterfaces
 public import WeilConjectures.AlgebraicGeometry.Etale.Coefficient.EtaleCoefficientSystemAdjoint
 public import WeilConjectures.Compactification.FiniteFieldDatum.FiniteFieldFiberSupplement
@@ -86,15 +87,9 @@ Source: Stacks 00W1 (blueprint: lem-sf-exceptional-system-transport). -/
 instance (priority := 5000) exceptionalTransportProEtaleCommRingSheafify (X : Scheme.{u}) :
     HasWeakSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} := inferInstance
 
-/-- Cache the existing small-site coefficient witness; no site is changed.
-Source: Stacks 00W1 (blueprint: lem-sf-exceptional-system-transport). -/
-instance (priority := 5000) exceptionalTransportProEtaleAddCommGrpSheafify (X : Scheme.{u}) :
-    HasSheafify (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1} := inferInstance
+attribute [local instance 5000] WeilConjectures.sfAbSheafify
 
-/-- Cache the existing small-site coefficient witness; no site is changed.
-Source: Stacks 00W1 (blueprint: lem-sf-exceptional-system-transport). -/
-instance (priority := 5000) exceptionalTransportProEtaleAddCommGrpLocal (X : Scheme.{u}) :
-    (Scheme.ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{u + 1} := inferInstance
+attribute [local instance 5000] WeilConjectures.sfAbBijective
 
 /-- Cache the existing small-site coefficient witness; no site is changed.
 Source: Stacks 00W1 (blueprint: lem-sf-exceptional-system-transport). -/
@@ -120,7 +115,7 @@ instance (priority := 5000) exceptionalTransportProEtaleAddCommGrpSetCompose (X 
       inferInstance
 
 attribute [local instance 20000] exceptionalTransportProEtaleCommRingSheafify
-  exceptionalTransportProEtaleAddCommGrpSheafify exceptionalTransportProEtaleAddCommGrpLocal
+  WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective
   exceptionalTransportProEtaleTypeSheafify exceptionalTransportProEtaleRingCompose
   exceptionalTransportProEtaleRingSetCompose exceptionalTransportProEtaleAddCommGrpSetCompose
 

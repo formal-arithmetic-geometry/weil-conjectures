@@ -360,10 +360,10 @@ theorem nativeRestrictionTensorEvaluation {X Z : Scheme.{u}} (j : X ⟶ Z)
         (compactSupportSystemQuotient l E) j)
       (ProEtale.VaryingRing.baseChange j) (pullSection l E j) O
     let ψ := @OpenTensorModel.restriction.{u+1, u, u} Z.ProEt _
-      (ProEtale.VaryingRing.siteSmall Z) (ProEt.topology Z)
+      (WeilConjectures.instEssentiallySmallProEt_weilConjectures Z) (ProEt.topology Z)
       (ProEtale.StrictTower.coefficients (compactSupportSystemLevel l E n) Z)
       (SZ.finiteClosed n) (SZ.finiteTensorModel n)
-      X.ProEt _ (ProEtale.VaryingRing.siteSmall X) (ProEt.topology X)
+      X.ProEt _ (WeilConjectures.instEssentiallySmallProEt_weilConjectures X) (ProEt.topology X)
       (ProEtale.StrictTower.coefficients (compactSupportSystemLevel l E n) X)
       (SX.finiteClosed n) (SX.finiteTensorModel n)
       (ProEtale.StrictTower.moduleJ (compactSupportSystemLevel l E n) j)

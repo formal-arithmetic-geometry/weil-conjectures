@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+public import WeilConjectures.AlgebraicGeometry.SfIntegralReductionTower
 public import WeilConjectures.AlgebraicGeometry.DiscreteCoefficientModel
 public import WeilConjectures.AlgebraicGeometry.IntegralModelsCompletedSectionRing
 import all WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinaryEncoding
@@ -41,11 +42,7 @@ local instance projectionAbLocallyBijective (X : Scheme.{u}) :
     (Scheme.ProEt.topology X).WEqualsLocallyBijective Ab.{u + 1} :=
   WeilConjectures.integralCoefficientAbLocallyBijective.{u, u} X
 
-/-- The explicit universe instance for ordinary coefficient comparisons.
-Source: coefficient-site sheafification
-(auxiliary; not a blueprint node). -/
-local instance projectionSiteSmall (X : Scheme.{u}) :
-    EssentiallySmall.{u + 1} X.ProEt := essentiallySmallSelf.{0, u, u + 1} _
+attribute [local instance] WeilConjectures.instEssentiallySmallProEt_weilConjectures
 
 attribute [local irreducible] upperStarFromPoint IntegralConstantModel.pointComparison
   completedSectionIso
@@ -227,7 +224,8 @@ private theorem canonicalAbelianMap_scalar_natural
     (h : FiniteDiscreteOrdinary.pointConstants B ≫ g.hom =
       (Functor.const Profinite.{u}ᵒᵖ).map (AddCommGrpCat.ofHom.{u + 1} f) ≫
         FiniteDiscreteOrdinary.pointConstants C) (X : Scheme.{u}) :
-    letI : EssentiallySmall.{u + 1} X.ProEt := projectionSiteSmall X
+    letI : EssentiallySmall.{u + 1} X.ProEt :=
+      WeilConjectures.instEssentiallySmallProEt_weilConjectures X
     letI : HasSheafify (Scheme.ProEt.topology X) Ab.{u + 1} :=
       Scheme.ProEt.instHasSheafifyTopologyAb_weilConjectures X
     letI : HasSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
@@ -277,7 +275,8 @@ private theorem canonicalRingMap_scalar_natural
     (h : FiniteDiscreteOrdinary.pointConstants B ≫ g.hom =
       (Functor.const Profinite.{u}ᵒᵖ).map (AddCommGrpCat.ofHom.{u + 1} f.toAddMonoidHom) ≫
         FiniteDiscreteOrdinary.pointConstants C) (X : Scheme.{u}) :
-    letI : EssentiallySmall.{u + 1} X.ProEt := projectionSiteSmall X
+    letI : EssentiallySmall.{u + 1} X.ProEt :=
+      WeilConjectures.instEssentiallySmallProEt_weilConjectures X
     letI : HasSheafify (Scheme.ProEt.topology X) Ab.{u + 1} :=
       Scheme.ProEt.instHasSheafifyTopologyAb_weilConjectures X
     letI : HasSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
@@ -287,7 +286,8 @@ private theorem canonicalRingMap_scalar_natural
           ((upperStarFromPoint X).map g) =
       (constantSheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}).map
         (CommRingCat.ofHom.{u + 1} f) ≫ FiniteDiscreteOrdinary.canonicalRingMap C X := by
-  letI : EssentiallySmall.{u + 1} X.ProEt := projectionSiteSmall X
+  letI : EssentiallySmall.{u + 1} X.ProEt :=
+    WeilConjectures.instEssentiallySmallProEt_weilConjectures X
   letI : HasSheafify (Scheme.ProEt.topology X) Ab.{u + 1} :=
     Scheme.ProEt.instHasSheafifyTopologyAb_weilConjectures X
   letI : HasSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
@@ -398,7 +398,8 @@ theorem integral_constant_section_projection (l : ℕ) [Fact l.Prime]
           (CommRingCat.ofHom.{u + 1} (Ideal.Quotient.mk
             (IntegralConstantCompletion.ideal l E ^ (n + 1)))) := by
     classical
-    letI : EssentiallySmall.{u + 1} X.ProEt := projectionSiteSmall X
+    letI : EssentiallySmall.{u + 1} X.ProEt :=
+      WeilConjectures.instEssentiallySmallProEt_weilConjectures X
     letI : HasSheafify (Scheme.ProEt.topology X) Ab.{u + 1} :=
       Scheme.ProEt.instHasSheafifyTopologyAb_weilConjectures X
     letI : HasSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
