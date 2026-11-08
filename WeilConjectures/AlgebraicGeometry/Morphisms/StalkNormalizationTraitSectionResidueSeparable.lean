@@ -130,7 +130,7 @@ private theorem residueSeparableAt_of_root_charts {X Y : Scheme.{u}} (n : X ⟶ 
   rw [hα] at hcomp
   exact hcomp
 
-set_option maxHeartbeats 600000 in
+set_option maxHeartbeats 500000 in
 -- Comparing the dependent normalization types needs this elaboration budget.
 /-- Residue extensions at points above the closed trait section are separable.
 
