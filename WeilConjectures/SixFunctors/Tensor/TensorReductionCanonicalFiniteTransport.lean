@@ -30,7 +30,7 @@ attribute [local irreducible] HasDerivedCategory.standard SheafOfModules.monoida
   completedIntegralCommRingSheafUnrestricted completedIntegralCoefficientSheafUnrestricted
   coefficientTotalTensor CategoryTheory.Functor.leftAdjoint
   CategoryTheory.Functor.mapDerivedCategory pullbackTensorCalculus
-attribute [local implicit_reducible] CategoryTheory.Functor.mapHomologicalComplex
+attribute [local implicit_reducible]
   unrestrictedIntegralReductionFunctor integralCoefficientSheaf integralCoefficientCommRingSheaf
 attribute [local irreducible] coefficientSequenceRestriction scalarReductionExtension
   coefficientScalarTensorIso coefficientEvaluationTensorIso

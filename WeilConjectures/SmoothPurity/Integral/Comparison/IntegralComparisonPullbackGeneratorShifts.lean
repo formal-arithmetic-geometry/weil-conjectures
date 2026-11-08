@@ -18,7 +18,7 @@ import all WeilConjectures.PoincareDuality.Integral.IntegralPullbackStrictFinite
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.defeqAttrib.useBackward true
-attribute [local implicit_reducible] CategoryTheory.Functor.mapHomologicalComplex
+attribute [local implicit_reducible]
   CategoryTheory.Functor.ofOpSequence CategoryTheory.Functor.ofSequence
   CategoryTheory.NatIso.mapHomologicalComplex CategoryTheory.NatTrans.mapHomologicalComplex
   HomologicalComplex.asFunctor
