@@ -531,7 +531,8 @@ private theorem native_comp_square
     Iso.inv_hom_id_app, CategoryTheory.Functor.map_id, Category.id_comp]
   simp only [Functor.map_comp, Category.assoc]
   dsimp only at e
-  simpa only [Iso.trans_hom, NatTrans.comp_app, Functor.map_comp, Category.assoc] using
+  simpa only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.map_comp,
+    Category.assoc] using
     congrArg (fun z ↦ (sfIntrinsicModuleEquivalence Z A).functor.mapDerivedCategory.map
       ((upperStar B (h ≫ f)).leftDerivedFunctorIsoMapDerivedCategory.hom.app M) ≫ z) e
 
