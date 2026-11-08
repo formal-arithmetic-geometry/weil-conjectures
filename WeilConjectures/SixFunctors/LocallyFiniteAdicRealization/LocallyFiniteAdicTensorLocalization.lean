@@ -19,7 +19,7 @@ Source: Bhatt--Scholze, Proposition 6.8.14(2); Stacks Tag 05R6.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types true
 set_option genSizeOf false
 set_option genInjectivity false
