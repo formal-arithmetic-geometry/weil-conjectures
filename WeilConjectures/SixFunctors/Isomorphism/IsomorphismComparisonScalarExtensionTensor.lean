@@ -724,10 +724,10 @@ def isomorphismScalarTensorDerived {X Y : AlgebraicGeometry.Scheme.{u}}
     inverseImageIntegralDerived l E g ⋙ integralOrdinaryDerivedScalar l E L ι X ≅
       integralOrdinaryDerivedScalar l E L ι Y ⋙ inverseImageIntegralDerived l L g :=
   (Functor.mapDerivedCategoryCompIso (inverseImageIntegralModules l E g)
-    (integralOrdinaryScalar l E L ι X)).symm ≪≫
+    (integralOrdinaryScalar l E L ι X)) ≪≫
     Functor.mapDerivedCategoryNatIso (isomorphismScalarTensor l E L ι g) ≪≫
-    Functor.mapDerivedCategoryCompIso (integralOrdinaryScalar l E L ι Y)
-      (inverseImageIntegralModules l L g)
+    (Functor.mapDerivedCategoryCompIso (integralOrdinaryScalar l E L ι Y)
+      (inverseImageIntegralModules l L g)).symm
 
 /-- Both inputs to the X-side completion comparisons lie in the recorded bounded
 constructible, derived-complete category. Source: Bhatt--Scholze 6.5.9(4), and the
