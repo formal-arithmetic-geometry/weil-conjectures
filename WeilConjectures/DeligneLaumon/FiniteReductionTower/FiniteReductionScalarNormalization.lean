@@ -52,7 +52,7 @@ attribute [local implicit_reducible] WeilConjectures.tensorMonoidal
   WeilConjectures.PrincipalKoszulStrictReplacement.targetTower
   WeilConjectures.PrincipalKoszulStrictReplacement.targetTowerMap
   CategoryTheory.Functor.map₂HomologicalComplex CategoryTheory.Functor.ofOpSequence
-  CategoryTheory.Functor.ofSequence CategoryTheory.Functor.mapHomologicalComplex
+  CategoryTheory.Functor.ofSequence
   CochainComplex.singleFunctors
 universe t u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry

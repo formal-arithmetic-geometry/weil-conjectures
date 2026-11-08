@@ -54,7 +54,7 @@ attribute [local implicit_reducible] integralCoefficientSheaf integralCoefficien
   coefficientConstantTowerEvaluation scalarReductionDerivedRestriction
   CategoryTheory.sheafCompose CommRingCat.hasForgetToRingCat
   compactSupportLevelSheafQuotient
-  Functor.mapHomologicalComplex NatTrans.mapHomologicalComplex HomologicalComplex.asFunctor
+  NatTrans.mapHomologicalComplex HomologicalComplex.asFunctor
   SemilinearSections.evaluation SheafOfModules.pushforward SheafOfModules.restrictScalars
   PresheafOfModules.pushforward PresheafOfModules.pushforward₀
   PresheafOfModules.pushforward₀Obj PresheafOfModules.restrictScalars

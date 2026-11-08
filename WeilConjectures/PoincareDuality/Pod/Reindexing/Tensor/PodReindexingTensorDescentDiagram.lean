@@ -47,13 +47,13 @@ attribute [local irreducible] integralCompletedTensor integralOrdinaryScalar
   completedIntegralCommRingSheafUnrestricted coefficientTotalTensor SheafOfModules.monoidalCategory
 attribute [local implicit_reducible] podOrdinaryReindex podGoodReindex
   integralOperationsGoodLocalization integralOperationsTensorComplexFunctor
-  integralOperationsRoosFunctor integralOperationsTensorOnGood Functor.mapHomologicalComplex
+  integralOperationsRoosFunctor integralOperationsTensorOnGood
   scalarReductionSourceDerived integralTowerHasDerivedCategory
   integralOperationsCommHasDerivedCategory
   podTensorScalarGoodFunctor podTensorScalarGoodComparison podTensorReindexGoodComparison
-    podTensorGoodConstructibleLocalization
+  podTensorGoodConstructibleLocalization
   podTensorGoodConstructible podTensorMixedTensorIso podTensorGoodCoefficientTransition
-    podTensorTensorReindexDerivedChain
+  podTensorTensorReindexDerivedChain
   podTensorTensorScalarDerivedChain podTensorTensorMixedDerivedChain
 
 /-- The InputInclusion component of the fixed scalar/reindexing tensor diagram.
