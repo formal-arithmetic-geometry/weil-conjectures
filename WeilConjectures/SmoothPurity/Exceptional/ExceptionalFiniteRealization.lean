@@ -521,12 +521,13 @@ theorem integralExceptionalEtaleRight_existsUnique (n : ℕ) :
               from a.hom.app U₀ z) • (show (R.obj M).val.obj U₀ from z.2)) =
           (show (coefficientQuotientSheaf (J := Y.smallEtaleTopology)
             (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E) n).obj.obj Z
-              from a.hom.app Z (T.obj.map f z)) • (R.obj M).val.map f z.2
+              from a.hom.app Z (T.obj.map f z)) •
+                (show (R.obj M).val.obj Z from (R.obj M).val.map f z.2)
         rw [(R.obj M).val.map_smul]
         exact congrArg (fun c : (coefficientQuotientSheaf
           (J := Y.smallEtaleTopology) (integralExceptionalIntegers l E)
           (integralExceptionalUniformizer l E) n).obj.obj Z ↦
-            c • ((R.obj M).val.map f z.2)) hn }⟩
+            c • (show (R.obj M).val.obj Z from (R.obj M).val.map f z.2)) hn }⟩
     let z : T.obj.obj U :=
       ((toSheafify Y.smallEtaleTopology ((Functor.const Y.Etaleᵒᵖ).obj
         (PUnit.{u + 2} : Type (u + 1)))).app U PUnit.unit, x)
@@ -546,7 +547,10 @@ theorem integralExceptionalEtaleRight_existsUnique (n : ℕ) :
       ((adj.unit.app T).hom.app U z)) hc
     have ht := hunit M T t U z
     have hb := hunit M T b U z
-    change (β.hom.app M).hom.app U (a.hom.app U z • x) = _ at ht
+    change (β.hom.app M).hom.app U
+      ((show (coefficientQuotientSheaf (J := Y.smallEtaleTopology)
+        (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E) n).obj.obj U
+          from a.hom.app U z) • x) = _ at ht
     change (β.hom.app M).hom.app U x = _ at hb
     rw [ha] at ht
     rw [ht]
@@ -716,7 +720,7 @@ def integralExceptionalFixedRightUnit (n : ℕ)
          ((HomotopyCategory.quotient _ _).obj J) ≫
     (Etale.lowerStar (ModuleCat.{u + 1}
       (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))) g).rightDerivedFunctor.map
-         ((DerivedCategory.quotientCompQhIso _).inv.app J)
+         ((DerivedCategory.quotientCompQhIso _).hom.app J)
 
 /-- The full right-derived-unit square on every cochain representative.
 Source: blueprint integral exceptional realization
@@ -783,20 +787,19 @@ local notation "gs" => Etale.lowerStar (ModuleCat.{u + 1}
 
 private lemma quotientCompQhIso_inv_app_eq_id {C : Type*} [Category C] [Abelian C]
     [HasDerivedCategory C] (K : CochainComplex C ℤ) :
-    (DerivedCategory.quotientCompQhIso C).inv.app K = 𝟙 _ := rfl
+    (DerivedCategory.quotientCompQhIso C).inv.app K ≫
+      (DerivedCategory.quotientCompQhIso C).hom.app K = 𝟙 _ :=
+  Iso.inv_hom_id_app _ _
 
 private lemma integralExceptionalFixedRightUnit_eq (n : ℕ)
     (J : CochainComplex
       (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1}
         (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))))) ℤ) :
     integralExceptionalFixedRightUnit l E g n J =
-      (gs).rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj J) := by
-  rw [integralExceptionalFixedRightUnit, quotientCompQhIso_inv_app_eq_id,
-    quotientCompQhIso_inv_app_eq_id, Category.id_comp]
-  refine (congrArg (fun k ↦ (gs).rightDerivedFunctorUnit.app
-    ((HomotopyCategory.quotient _ _).obj J) ≫ k)
-      ((gs).rightDerivedFunctor.map_id (DerivedCategory.Q.obj J))).trans ?_
-  exact Category.comp_id _
+      (DerivedCategory.quotientCompQhIso _).inv.app (((gs).mapHomologicalComplex (.up ℤ)).obj J) ≫
+        (gs).rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj J) ≫
+          (gs).rightDerivedFunctor.map ((DerivedCategory.quotientCompQhIso _).hom.app J) :=
+  rfl
 
 private lemma integralExceptionalFixedRightUnit_naturality (n : ℕ)
     {J J' : CochainComplex
@@ -806,8 +809,16 @@ private lemma integralExceptionalFixedRightUnit_naturality (n : ℕ)
         integralExceptionalFixedRightUnit l E g n J' =
       integralExceptionalFixedRightUnit l E g n J ≫ (gs).rightDerivedFunctor.map
         (DerivedCategory.Q.map f) := by
-  rw [integralExceptionalFixedRightUnit_eq, integralExceptionalFixedRightUnit_eq]
-  exact (gs).rightDerivedFunctorUnit.naturality ((HomotopyCategory.quotient _ _).map f)
+  have hu := (gs).rightDerivedFunctorUnit.naturality ((HomotopyCategory.quotient _ _).map f)
+  have hh := congrArg (gs).rightDerivedFunctor.map
+    (DerivedCategory.quotientCompQhIso_hom_naturality f)
+  simp only [Functor.map_comp] at hh
+  rw [integralExceptionalFixedRightUnit_eq, integralExceptionalFixedRightUnit_eq,
+    DerivedCategory.quotientCompQhIso_inv_naturality_assoc, Category.assoc, Category.assoc,
+    ← hh]
+  congr 1
+  rw [← Category.assoc, ← Category.assoc]
+  congr 1
 
 /-- The representative comparison on cochain complexes underlying the derived right
 comparison. -/
