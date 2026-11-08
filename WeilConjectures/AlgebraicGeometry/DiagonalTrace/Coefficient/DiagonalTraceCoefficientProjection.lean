@@ -42,7 +42,8 @@ private theorem ordinaryRlim_projection
   erw [reassoc_of% hn]
   simp only [← DerivedCategory.Q.map_comp]
   congr 1
-  ext i
+  apply HomologicalComplex.hom_ext
+  intro i
   by_cases hi : i = 0
   · subst i
     simp [Functor.mapCochainComplexSingleFunctor, CochainComplex.singleFunctor,

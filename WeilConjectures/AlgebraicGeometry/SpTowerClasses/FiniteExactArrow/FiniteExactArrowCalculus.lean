@@ -23,7 +23,6 @@ universe u u₁ v₁ u₂ v₂ u₃ v₃ w₁ w₂ w₃ t₁ t₂ t₃ t₄ t₅
 open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses.FiniteExactArrow
 
-attribute [local implicit_reducible] ShortComplex.map
 
 /-- Compatibility of exact derived arrows with the indicated functor operation.
 Source: exact functors on Ext and their canonical single/shift comparisons

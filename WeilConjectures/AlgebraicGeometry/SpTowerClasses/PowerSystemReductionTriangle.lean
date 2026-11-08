@@ -131,7 +131,6 @@ private theorem power_triangle_assembly
       HomologicalComplex.single_map_f_self]
     erw [Category.assoc, Iso.inv_hom_id_assoc, ← Category.assoc, mu.naturality,
       Category.assoc, Iso.hom_inv_id, Category.comp_id]
-    rfl
   have hf : DerivedCategory.Q.map (muc.app P) ≫ e₂.hom =
       e₁.hom ≫ (DerivedCategory.singleFunctor C 0).map (mu.app X) := by
     change DerivedCategory.Q.map (muc.app P) ≫ DerivedCategory.Q.map q = _

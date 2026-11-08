@@ -21,8 +21,8 @@ set_option genSizeOf false
 set_option genSizeOfSpec false
 set_option genInjectivity false
 set_option genCtorIdx false
-set_option backward.isDefEq.respectTransparency true
-set_option backward.isDefEq.respectTransparency.types true
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 attribute [local irreducible] HasDerivedCategory.standard
 universe u a b v v' v'' w
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Opposite

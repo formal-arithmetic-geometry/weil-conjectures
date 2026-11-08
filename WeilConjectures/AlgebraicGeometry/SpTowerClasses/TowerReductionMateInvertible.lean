@@ -153,7 +153,7 @@ private theorem exact_square_factors (e : UY ⋙ F ≅ P ⋙ UX)
   erw [Functor.mapDerivedCategoryCompIso_hom_app_factors,
     Functor.mapDerivedCategoryNatIso_fac]
   rw [← Functor.mapDerivedCategoryCompIso_hom_app_factors UY F K]
-  erw [Category.assoc, Iso.inv_hom_id_app_assoc]
+  erw [Category.assoc, Iso.hom_inv_id_app_assoc]
   exact Category.assoc _ _ _
 
 private theorem mate_representative (e : UY ⋙ F ≅ P ⋙ UX)

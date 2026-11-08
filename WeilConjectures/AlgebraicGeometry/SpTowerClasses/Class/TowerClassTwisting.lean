@@ -61,6 +61,11 @@ def pure {T : Scheme.{u}} (c : Chern l E T)
     (coefficientSequenceTopology (Scheme.ProEt.topology T))
   SheafOfModules.siteSheafTensorTmul M (lineModule l E c) U x y
 
+local instance coefficientSectionSMul {T : Scheme.{u}}
+    (c : Chern l E T) (U : (ℕ × T.ProEt)ᵒᵖ) :
+    SMul ((coefficient T (Arings l E T)).val.obj U) ((lineModule l E c).val.obj U) :=
+  inferInstanceAs (SMul ((systemRing l E T).obj.obj U) ((lineModule l E c).val.obj U))
+
 /-- Line twisting is the actual tensor/Hom equivalence. The coevaluation and
  evaluation are fixed on local sections, including their signs. Neither an arbitrary
  equivalence nor a second, independently chosen inverse line occurs.
@@ -143,7 +148,7 @@ Source: classes (4) (blueprint: def-sp-tower-class-twisting). -/
 def Twisting.contract {T : Scheme.{u}} {c : Chern l E T} (t : Twisting l E c) :
     (t.T l E).obj (inverseLine l E c) ≅ unit T (Arings l E T) :=
   (t.T l E).mapIso (t.inverseUnit l E).symm ≪≫
-    (Functor.mapDerivedCategoryCompIso t.equivalence.inverse t.equivalence.functor).symm.app
+    (Functor.mapDerivedCategoryCompIso t.equivalence.inverse t.equivalence.functor).app
       (unit T (Arings l E T)) ≪≫
     (Functor.mapDerivedCategoryNatIso t.equivalence.counitIso).app
       (unit T (Arings l E T)) ≪≫
@@ -186,9 +191,9 @@ def PositivePullback.derivedIso {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}}
   letI := g.pullAdditive
   letI := g.pullLimits
   letI := g.pullColimits
-  (Functor.mapDerivedCategoryCompIso tY.equivalence.functor g.pull).symm ≪≫
+  Functor.mapDerivedCategoryCompIso tY.equivalence.functor g.pull ≪≫
     Functor.mapDerivedCategoryNatIso v.iso ≪≫
-    Functor.mapDerivedCategoryCompIso g.pull tX.equivalence.functor
+    (Functor.mapDerivedCategoryCompIso g.pull tX.equivalence.functor).symm
 
 /-- The canonical projection map is the counit mate of the specified inverse-image
 comparison. It is formed in the tower category, before any finite evaluation.

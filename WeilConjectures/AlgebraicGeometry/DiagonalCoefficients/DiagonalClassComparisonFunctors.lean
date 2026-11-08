@@ -77,7 +77,7 @@ def diagonalClassExactSquare
     (s : U ⋙ F ≅ G ⋙ V) :
     U.mapDerivedCategory ⋙ F.mapDerivedCategory ≅
       G.mapDerivedCategory ⋙ V.mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso U F).symm ≪≫
-    Functor.mapDerivedCategoryNatIso s ≪≫ Functor.mapDerivedCategoryCompIso G V
+  Functor.mapDerivedCategoryCompIso U F ≪≫
+    Functor.mapDerivedCategoryNatIso s ≪≫ (Functor.mapDerivedCategoryCompIso G V).symm
 
 end AlgebraicGeometry.ProEtale.DiagonalCoefficients
