@@ -57,6 +57,7 @@ theorem scalarReductionDerivedExtension_torAmplitude_of_residue_support
   let A := Padic.coefficientExtensionRing l E (n + 1)
   let R := proEtaleConstantRing X A
   let C := proEtaleRingModules X R
+  let : HasDerivedCategory C := scalarReductionTargetDerived l E X n
   have := Localization.essSurj (DerivedCategory.Q (C := C))
     (HomologicalComplex.quasiIso C (.up ℤ))
   let L := (DerivedCategory.Q (C := C)).objPreimage

@@ -83,9 +83,9 @@ noncomputable def mapDerivedCategoryOpenLowerShriekExtendScalarsIso :
       L(sheafExtendScalars (algebraMap R S) U) ⋙ D((j)_!open[ModuleCat.{u + 1} S]) :=
   Functor.isoWhiskerLeft _
       (sheafExtendScalars (algebraMap R S) X).leftDerivedFunctorIsoMapDerivedCategory ≪≫
-    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
-    Functor.mapDerivedCategoryNatIso (openImmersionLowerShriekCompSheafExtendScalarsIso j) ≪≫
     Functor.mapDerivedCategoryCompIso _ _ ≪≫
+    Functor.mapDerivedCategoryNatIso (openImmersionLowerShriekCompSheafExtendScalarsIso j) ≪≫
+    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
     Functor.isoWhiskerRight
       (sheafExtendScalars (algebraMap R S) U).leftDerivedFunctorIsoMapDerivedCategory.symm _
 
