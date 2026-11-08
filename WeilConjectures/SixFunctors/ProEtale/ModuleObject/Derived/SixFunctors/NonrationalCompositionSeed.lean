@@ -305,7 +305,7 @@ theorem exists_nonrationalLocalizingLowerShriekCompositionSeed
     ⟨⟨cc, inferInstanceAs (QuasiCompact (cf.i ≫ cr.i))⟩⟩
   let ep := (refinementDerivedLowerStarComp Λ cr.g cg.g).symm
   let er := (Functor.mapDerivedCategoryNatIso (upperStarComp Λ cf.i cr.i) ≪≫
-    Functor.mapDerivedCategoryCompIso (upperStar Λ cr.i) (upperStar Λ cf.i)).symm
+    (Functor.mapDerivedCategoryCompIso (upperStar Λ cr.i) (upperStar Λ cf.i)).symm).symm
   let eo := Adjunction.leftAdjointCompIso
     (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ cf.i)
     adjU (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ (cf.i ≫ cr.i)) er
