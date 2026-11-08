@@ -33,8 +33,7 @@ open CategoryTheory CategoryTheory.Limits
 open AlgebraicGeometry AlgebraicGeometry.Scheme
 open AlgebraicGeometry.ProEtale.SpTowerClasses
 
-attribute [local implicit_reducible] DerivedCategory.singleFunctors HomotopyCategory.singleFunctors
-  CategoryTheory.ShortComplex.map CategoryTheory.Functor.mapShortComplex
+attribute [local implicit_reducible] HomotopyCategory.singleFunctors
 
 section
 variable {A B C D : Type*} [Category* A] [Category* B] [Category* C] [Category* D]
