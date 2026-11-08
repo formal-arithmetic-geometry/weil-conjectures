@@ -344,7 +344,7 @@ def ExplicitAdjunction : Prop :=
     (f : M ⟶ (sections.{t, u} k B α).obj V) (U : (Scheme.ProEt (Spec (.of k)))ᵒᵖ)
     (b : B.obj.obj U) (x : M),
     ((adj.homEquiv M V).symm f).val.app U (generator.{t, u} k B α L hobj M U b x) =
-      b • V.val.map (toFinal k U.unop).op (f.hom x))
+      b • PresheafOfModulesOfCommRing.map (R := B.obj) V.val (toFinal k U.unop).op (f.hom x))
 
 variable (c : CochainComplex (ModuleCat.{max u (t + 1)} R) ℤ)
   (I : CochainComplex (Modules.{t, u} k B) ℤ)
