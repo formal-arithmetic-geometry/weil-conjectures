@@ -20,8 +20,8 @@ Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2).
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option backward.isDefEq.respectTransparency true
-set_option backward.isDefEq.respectTransparency.types true
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 set_option linter.all false
 attribute [local irreducible] HasDerivedCategory.standard
 
