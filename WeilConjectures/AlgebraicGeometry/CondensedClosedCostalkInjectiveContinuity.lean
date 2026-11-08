@@ -62,7 +62,7 @@ theorem rightDerivedObjQIso_naturality
   simp only [Category.assoc]
   rfl
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- Comparing the strict models needs additional elaboration heartbeats.
 set_option synthInstance.maxHeartbeats 100000 in
 -- Internal module colimit inference needs a larger typeclass search budget.

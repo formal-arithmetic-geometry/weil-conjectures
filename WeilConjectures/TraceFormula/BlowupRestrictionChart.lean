@@ -279,12 +279,12 @@ theorem blowupRestriction_eq_zero_of_chartData {k : Type u} [Field k] [IsAlgClos
     isRegularImmersion_pullback_fst_specMap_quotient (D.isWeaklyRegular hm)
   have hUY : (D.UY : Set (Spec (.of D.Rx))) = (Set.range iY)ᶜ := by
     simp only [iY]
-    erw [range_specMap_quotient]
+    erw [Etale.range_specMap_quotientMk]
     rw [PrimeSpectrum.zeroLocus_span]
     exact PrimeSpectrum.basicOpen_eq_zeroLocus_compl _
   have hUXY : (D.UXY : Set (Spec (.of D.Rx))) = (Set.range iX ∪ Set.range iY)ᶜ := by
     simp only [iX, iY]
-    erw [range_specMap_quotient, range_specMap_quotient]
+    erw [Etale.range_specMap_quotientMk, Etale.range_specMap_quotientMk]
     rw [PrimeSpectrum.zeroLocus_span,
       PrimeSpectrum.zeroLocus_span, Set.union_comm, ← PrimeSpectrum.zeroLocus_singleton_mul]
     exact PrimeSpectrum.basicOpen_eq_zeroLocus_compl _

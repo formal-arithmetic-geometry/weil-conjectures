@@ -13,6 +13,7 @@ public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.FieldTheory.Perfect
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import WeilConjectures.AlgebraicGeometry.NoetherianComponents
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
@@ -263,18 +264,6 @@ theorem GeometricallyIrreducible.of_smooth_of_geometricallyConnected {X S : Sche
     have := LocallyOfFiniteType.isLocallyNoetherian snd
     have := IsRegular.of_smooth snd
     exact IsRegular.irreducibleSpace _
-
-/-- **Smooth morphisms are geometrically reduced.** A base change of a smooth morphism to a
-field is smooth over that field, hence regular, so its local rings are regular local rings,
-which are integral domains. -/
-theorem GeometricallyReduced.of_smooth {X S : Scheme.{u}} (f : X ⟶ S) [Smooth f] :
-    GeometricallyReduced f where
-  geometrically_isReduced _ _ y _ fst snd h := by
-    have : Smooth snd := MorphismProperty.of_isPullback h ‹Smooth f›
-    have := LocallyOfFiniteType.isLocallyNoetherian snd
-    have := IsRegular.of_smooth snd
-    exact isReduced_of_isReduced_stalk _
-
 
 /-- The local rings of a regular scheme are regular rings: the localization of `𝒪_{X,x}` at a
 prime is the local ring of `X` at a generization of `x`. Concretely, if `U ∋ x` is an affine open,

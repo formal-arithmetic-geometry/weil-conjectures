@@ -66,7 +66,6 @@ local notation "e" => condensedArtinSchreierProjector Λ k
 local notation "τ" => condensedArtinSchreierTranslationAction Λ k
 local notation "ρ" => condensedArtinSchreierChartProjection Λ k
 
-set_option maxHeartbeats 1600000 in
 -- Concrete linear and monoidal module comparisons need additional elaboration heartbeats.
 /-- The character image evaluates to the regular module on the Artin–Schreier cover.
 
@@ -125,7 +124,6 @@ private theorem translation_add (a b : k) : τ a ≫ τ b = τ (a + b) := by
     condensedArtinSchreierChart_translation, condensedArtinSchreierChart_translation,
     condensedArtinSchreierChart_translation, add_assoc, add_comm b a]
 
-set_option maxHeartbeats 1600000 in
 -- Concrete linear and monoidal module comparisons need additional elaboration heartbeats.
 /-- Products of the two character images and constant functions are fixed by the
 appropriate character projectors.

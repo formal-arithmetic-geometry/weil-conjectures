@@ -82,7 +82,6 @@ private lemma isIso_map_sigma_desc
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 800000 in
 -- Degreewise coproducts and the two derived-functor comparisons need extra elaboration steps.
 private lemma qbar_isIso_unit_on_complex
     {C : Type u} [Category.{v} C] [Abelian C] [MonoidalCategory C]

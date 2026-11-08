@@ -245,7 +245,6 @@ private theorem comparison_of_colimitCocone
 attribute [local irreducible] CategoryTheory.Mod.monoidalClosed
   AlgebraicGeometry.ProEtale.upperStarFromPoint
 
-set_option maxHeartbeats 400000 in
 -- Recollement and derived comparison elaboration need additional heartbeats.
 set_option synthInstance.maxHeartbeats 100000 in
 -- Internal module colimits require a larger typeclass search budget.
