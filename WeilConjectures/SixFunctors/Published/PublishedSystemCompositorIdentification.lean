@@ -67,7 +67,7 @@ private theorem derived_compositor_model
     [PreservesFiniteColimits F] [PreservesFiniteColimits G] [PreservesFiniteColimits H]
     (e : H ≅ F ⋙ G) (P : CochainComplex A ℤ) :
     (Functor.mapDerivedCategoryNatIso e ≪≫
-        Functor.mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Q.obj P) ≫
+        (Functor.mapDerivedCategoryCompIso F G).symm).hom.app (DerivedCategory.Q.obj P) ≫
         G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app P) ≫
         G.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj P) =
       H.mapDerivedCategoryFactors.hom.app P ≫
@@ -79,7 +79,7 @@ private theorem derived_compositor_model
     rfl
   rw [hc] at h
   erw [CategoryTheory.Functor.map_id, Category.comp_id] at h
-  simp only [Iso.trans_hom, NatTrans.comp_app, Category.assoc]
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
   rw [h, Functor.mapDerivedCategoryNatIso_fac]
   rfl
 
@@ -203,8 +203,8 @@ private theorem compositor_normalization
     exact (congrArg Iso.hom hpc).trans ((congrArg Iso.hom hd).trans
       (Adjunction.conjugateEquiv_leftAdjointCompIso_inv _ _ _ _).symm)
   have ha' : a = Functor.mapDerivedCategoryNatIso p ≪≫
-      Functor.mapDerivedCategoryCompIso (AmbientPullbackTensor.pull l E g none)
-        (AmbientPullbackTensor.pull l E f none) := by
+      (Functor.mapDerivedCategoryCompIso (AmbientPullbackTensor.pull l E g none)
+        (AmbientPullbackTensor.pull l E f none)).symm := by
     apply Iso.ext
     apply Localization.natTrans_ext DerivedCategory.Q
       (HomologicalComplex.quasiIso (coefficientSequenceModules l E Z) (.up ℤ))
@@ -219,7 +219,7 @@ private theorem compositor_normalization
   rw [ha', hp']
   dsimp only [AmbientPullbackTensor.pull, AmbientPullbackTensor.derivedPull, ambient_direct]
   simp only [AmbientPullbackTensor.derivedComp, Functor.mapDerivedCategoryCompNatIso,
-    AmbientPullbackTensor.pull, Iso.trans_hom, Iso.trans_inv, Iso.symm_inv,
+    AmbientPullbackTensor.pull, Iso.trans_hom, Iso.trans_inv,
     NatTrans.comp_app, Functor.mapDerivedCategoryNatIso_symm, Category.comp_id]
   exact Category.comp_id _
 
