@@ -83,7 +83,7 @@ theorem map_zetaSeries_eq_inv_alternatingCharpolyRevProd {S : Finset ℤ}
         (fun i ↦ ((adicConstant k₀ l X).compactlySupportedCohomology i).frobeniusEnd) 1)⁻¹ := by
   set f := X ↘ Spec (CommRingCat.of k₀)
   set φ := algebraMap ℚ (PadicAlgCl l)
-  have hF : PowerSeries.X * PowerSeries.derivative _ (PowerSeries.map φ f.zetaSeries) =
+  have hF : PowerSeries.X * PowerSeries.derivative (PowerSeries.map φ f.zetaSeries) =
       PowerSeries.map φ (PowerSeries.mk fun n ↦ if n = 0 then (0 : ℚ) else f.pointCount n) *
         PowerSeries.map φ f.zetaSeries := by
     rw [← PowerSeries.map_derivative, ← PowerSeries.map_X φ, ← map_mul,
