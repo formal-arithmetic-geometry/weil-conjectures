@@ -46,7 +46,6 @@ private theorem otc_f {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L)
       (oc l Ω T h o).hom.app (P.X n) := by
   simp [FdIntegralOrdinaryScalarModel.ordinaryTransportComplex,
     FdOrdinaryScalarTransport.complex, oc]
-  erw [Category.id_comp, Category.comp_id]
 
 private theorem iso_cocycle_hom {C : Type*} [Category C] {A B D E F : C} (f : B ≅ A)
     (g : D ≅ B) (m : D ⟶ F) (x : A ⟶ E) (n : F ≅ E)
@@ -81,15 +80,15 @@ private theorem gODcomp_fac
   have hc' := Functor.mapDerivedCategoryCompIso_hom_app_factors (integralOrdinaryScalar l E L ι T)
     (integralOrdinaryScalar l L M j T) P
   have hc2 : ((integralOrdinaryScalar l E L ι T).mapDerivedCategoryCompIso
-      (integralOrdinaryScalar l L M j T)).inv.app (DerivedCategory.Q.obj P) ≫
+      (integralOrdinaryScalar l L M j T)).hom.app (DerivedCategory.Q.obj P) ≫
       (integralOrdinaryScalar l E L ι T ⋙ integralOrdinaryScalar l L M j T
         ).mapDerivedCategoryFactors.hom.app P =
       (integralOrdinaryScalar l L M j T).mapDerivedCategory.map
         ((integralOrdinaryScalar l E L ι T).mapDerivedCategoryFactors.hom.app P) ≫
       (integralOrdinaryScalar l L M j T).mapDerivedCategoryFactors.hom.app
         (((integralOrdinaryScalar l E L ι T).mapHomologicalComplex (.up ℤ)).obj P) := by
-    rw [← hc', Iso.inv_hom_id_app_assoc]
-  rw [Iso.symm_hom, ← Category.assoc, hc2]
+    rw [← hc', Iso.hom_inv_id_app_assoc]
+  rw [← Category.assoc, hc2]
   simp only [Category.assoc]
   rfl
 
