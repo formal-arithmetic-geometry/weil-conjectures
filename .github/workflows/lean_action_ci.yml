@@ -277,11 +277,17 @@ jobs:
           # content types Lake checks again when it downloads.
           put() { curl -sS --fail --retry 3 --aws-sigv4 "aws:amz:auto:s3" --user "$LAKE_CACHE_KEY" \
                     -X PUT -H "Content-Type: $3" -T "$1" "$2"; }
-          n=0
-          for f in artifacts/*.ltar; do [ -e "$f" ] || continue
-            h=$(basename "$f" .ltar)
-            put "$f" "$LAKE_CACHE_ENDPOINT/a/$LAKE_CACHE_REPO/$h.art" application/vnd.reservoir.artifact; n=$((n+1))
-          done
+          # 16 at a time: each PUT is a fresh connection across the Atlantic (~0.5 s for a ~50 KB
+          # archive), so one by one manages ~2 a second, and a big rebuild outlasts the job's
+          # timeout (13k archives after nine master pushes in a minute, 2026-11-07). xargs exits
+          # non-zero if any PUT failed, which stops the step before the map is filed.
+          export -f put
+          # A build with nothing new stages no archives, and the artifact keeps no empty directory.
+          mkdir -p artifacts
+          n=$(find artifacts -name '*.ltar' | wc -l)
+          # shellcheck disable=SC2016 # expanded by the inner bash, per archive
+          find artifacts -name '*.ltar' -print0 | xargs -0 -r -P 16 -I{} bash -c \
+            'put "$1" "$LAKE_CACHE_ENDPOINT/a/$LAKE_CACHE_REPO/$(basename "$1" .ltar).art" application/vnd.reservoir.artifact' _ {}
           echo "uploaded $n archives"
           put map.jsonl "$LAKE_CACHE_ENDPOINT/r/$scope/$REV.jsonl" application/vnd.reservoir.outputs+json-lines
           echo "filed $(( $(wc -l < map.jsonl) - 1 )) mappings under $REV"
