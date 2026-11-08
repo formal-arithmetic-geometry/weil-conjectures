@@ -31,7 +31,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})
 
 section Helpers
-attribute [local implicit_reducible] sheafCompose Functor.mapHomologicalComplex
+attribute [local implicit_reducible] sheafCompose
   integralCoefficientCommRingSheaf
 attribute [local instance] SheafOfModules.isMonoidal_W_independentCoefficients
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
