@@ -876,6 +876,7 @@ attribute [local reducible] GeneralAlgebraicallyClosedCoefficients.stageCategory
 section CommonStageMapElaboration
 attribute [local irreducible] ScalarLocalization.category
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The common-stage theta is represented by the same rational root map at the
 least finite coefficient stage, with the prescribed pullback object identification.
 Source: definition clause 4
