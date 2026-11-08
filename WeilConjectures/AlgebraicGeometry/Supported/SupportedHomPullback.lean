@@ -30,6 +30,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison
 public import WeilConjectures.AlgebraicGeometry.Module.ModuleSupportedHomTransport
 import WeilConjectures.AlgebraicGeometry.SupportedConstantNormalization.SupportedConstantExchangeNormalization
 import WeilConjectures.CategoryTheory.RightDerivedPlusCube
+import Mathlib.Util.CountHeartbeats
 
 /-!
 # Supported Hom and pullback of closed pairs
@@ -609,6 +610,7 @@ private theorem supportHomGlobalEvaluation
   rw [(Sheaf.ΓNatIsoSheafSections J (ModuleCat.{u + 1} A) hT).hom.naturality]
   simp only [Sheaf.ΓNatIsoSheafSections, Adjunction.unit_rightAdjointUniq_hom_app_assoc]
 
+#count_heartbeats in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 private theorem supportHomProEtaleConstantIso_spec
