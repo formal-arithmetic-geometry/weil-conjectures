@@ -719,8 +719,8 @@ def subsequenceEvaluation (W : Scheme.{u}) (e n : ℕ) :
     subsequence l F W e ⋙
         ev (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) W n ≅
       ev (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) W (e * (n + 1) - 1) :=
-  (Functor.mapDerivedCategoryCompIso (ordinarySubsequence l F W e)
+  Functor.mapDerivedCategoryCompIso (ordinarySubsequence l F W e)
     ((evaluation ℕᵒᵖ
-      (Modules (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) W)).obj (op n))).symm
+      (Modules (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) W)).obj (op n))
 
 end WeilConjectures.PurStrictScalar
