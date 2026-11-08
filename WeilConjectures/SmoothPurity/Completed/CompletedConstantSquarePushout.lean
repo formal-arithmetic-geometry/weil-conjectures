@@ -174,6 +174,11 @@ variable (l : ℕ) [Fact l.Prime]
   (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
   (i : E →ₐ[ℚ_[l]] F)
 
+/-- `adicBasisRingSheafify` at the universes of the pro-étale site of `W`. -/
+private local instance adicBasisRingSheafifyProEt (W : Scheme.{u}) :
+    HasSheafify (ProEt.topology W) RingCat.{u + 1} :=
+  adicBasisRingSheafify.{u + 1, u, u} _
+
 private noncomputable def constantPresentation (W : Scheme.{u}) :
     (constantSheaf (ProEt.topology W) RingCat.{u + 1}).obj
       (RingCat.of (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E))) ≅
