@@ -230,7 +230,6 @@ private def pointwise_precomp_full
   intro X
   dsimp [Functor.RightExtension.coneAt, Functor.RightExtension.mk, p]
   simp only [Category.id_comp]
-  exact (Category.id_comp _).symm
 
 private def pointwise_change_iso
     {C D H : Type*} [Category C] [Category D] [Category H]
