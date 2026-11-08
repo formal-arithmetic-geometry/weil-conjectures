@@ -33,6 +33,7 @@ namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 private theorem scalar_counit_shift {T : Scheme.{u}} (c : Chern l E T) :
     NatTrans.CommShift c.scalar.model.ε ℤ := by
   let q := coefficientSystemMap l E T
@@ -135,7 +136,7 @@ private theorem counit_square_single
         simp [a, K, p, eX, eY, q, Functor.mapHomologicalComplexCompIso,
           HomologicalComplex.singleObjXSelf, HomologicalComplex.singleObjXIsoOfEq,
           HomologicalComplex.single_map_f_self]
-        simpa only using! h
+        simpa only [Category.id_comp, Category.comp_id] using! h
       erw [EX.map_id, Q.map_id]
       simp only [Category.id_comp, Category.comp_id]
       erw [Category.comp_id]
