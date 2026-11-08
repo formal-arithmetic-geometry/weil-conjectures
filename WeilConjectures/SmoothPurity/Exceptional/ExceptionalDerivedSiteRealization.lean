@@ -120,7 +120,7 @@ private def cochainRightUnit (F : A ⥤ B) [F.Additive] :
   app J :=
     (DerivedCategory.quotientCompQhIso B).inv.app _ ≫
       F.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj J) ≫
-      F.rightDerivedFunctor.map ((DerivedCategory.quotientCompQhIso A).inv.app J)
+      F.rightDerivedFunctor.map ((DerivedCategory.quotientCompQhIso A).hom.app J)
   naturality _ _ f := F.rightDerivedFunctorUnitQ_naturality f
 
 private theorem cochainRightUnit_computes (F : A ⥤ B) [F.Additive]
@@ -334,7 +334,7 @@ def integralExceptionalSiteFixedRightUnit (n : ℕ)
          ((HomotopyCategory.quotient _ _).obj J) ≫
     (ProEtale.comparisonLowerStar (ModuleCat.{u + 1}
       (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))) W).rightDerivedFunctor.map
-         ((DerivedCategory.quotientCompQhIso _).inv.app J)
+         ((DerivedCategory.quotientCompQhIso _).hom.app J)
 
 /-- The complete right realization normalization on all cochain complexes.
 Source: blueprint integral exceptional image
