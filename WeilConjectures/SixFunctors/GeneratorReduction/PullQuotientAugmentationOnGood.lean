@@ -112,10 +112,6 @@ private theorem limitUnit_roos (W : Scheme.{u})
   erw [Category.id_comp]
   have h := towerUnit_roos l E W
     (((coefficientSequenceRestriction l E W).mapHomologicalComplex (.up ℤ)).obj C)
-  simp only [Functor.rightDerivedFunctorUnitQ, DerivedCategory.quotientCompQhIso,
-    HomologicalComplexUpToQuasiIso.quotientCompQhIso,
-    CategoryTheory.Quotient.lift.isLift_inv, CategoryTheory.Quotient.lift.isLift_hom] at h
-  erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id] at h
   exact congrArg (fun k ↦ DerivedCategory.Q.map
     ((Functor.mapHomologicalComplexCompIso
       (Iso.refl (coefficientSequenceRestriction l E W ⋙
@@ -133,9 +129,8 @@ private theorem limitUnit_natural (W : Scheme.{u})
       pullbackTensorConstantLimit l E W)) (.up ℤ)
   have he := e.inv.naturality a
   dsimp only [Functor.comp_map] at he
-  have hn := (pullbackTensorConstantLimit l E W).rightDerivedFunctorUnit.naturality
-    ((HomotopyCategory.quotient _ (.up ℤ)).map
-      (((coefficientSequenceRestriction l E W).mapHomologicalComplex (.up ℤ)).map a))
+  have hn := (pullbackTensorConstantLimit l E W).rightDerivedFunctorUnitQ_naturality
+    (((coefficientSequenceRestriction l E W).mapHomologicalComplex (.up ℤ)).map a)
   have hf := (coefficientSequenceRestriction l E W).mapDerivedCategoryFactors.inv.naturality a
   dsimp only [Functor.comp_map] at hf
   dsimp only [pullbackTensorLimitUnit]
