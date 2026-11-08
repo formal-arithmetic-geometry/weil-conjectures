@@ -34,6 +34,8 @@ open TensorProduct
 open GeneralAlgebraicallyClosedCoefficients
 open AlgebraicallyClosedCoefficients (Coefficient)
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- All coefficient levels with the finite, completed, localized and common-stage
 normalizations. Source: all five clauses of def-fix-six-functor-datum
 (blueprint: def-fix-six-functor-datum). -/
