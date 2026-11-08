@@ -297,9 +297,9 @@ def fixedDerivedOpenModel {X B : Scheme.{u}} (j : X ⟶ B) [IsOpenImmersion j] :
       (ProEtale.openImmersionLowerShriek
         (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) j).mapDerivedCategory ⋙
           (sfIntrinsicDerivedEquivalence B A).functor :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (fixedOpenModel A j) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The fixed-scalar candidate, using precisely exact open extension then proper image.
 Source: blueprint order 1485 (blueprint: def-weil-frobenius-witnessed-compactification). -/
@@ -332,7 +332,7 @@ def fixedOriginWitness (X : Scheme.{u}) (O : CompactOrigin A X) :
       (((Functor.mapDerivedCategoryCompIso
         (ProEtale.comparisonUpperStar
           (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X)
-        (sfIntrinsicModuleEquivalence X A).functor).app O.L.obj).symm ≪≫ O.alpha)
+        (sfIntrinsicModuleEquivalence X A).functor).app O.L.obj) ≪≫ O.alpha)
 
 /-- The proper-open comparison conjugated by this very retained witness.
 Source: blueprint order 1485 part (a); lem-weil-pbc-proper-open-comparison-proetale
@@ -403,9 +403,9 @@ private def recordedOrigin (O : CompactOriginCategory A X) :
       ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) X).mapDerivedCategory.obj
         O.L.obj) ≅ eR.functor.obj (e.inverse.obj O.K) :=
     eR.functor.mapIso (fixedOriginWitness A X O)
-  let w := (Functor.mapDerivedCategoryCompIso
+  let w := ((Functor.mapDerivedCategoryCompIso
       (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) X)
-      R).app O.L.obj ≪≫ a
+      R).app O.L.obj).symm ≪≫ a
   let K : ProEtale.FiniteCoefficientDerivedCategoryPlus X (ULift.{u + 1} A) :=
     ⟨eR.functor.obj (e.inverse.obj O.K),
       DerivedCategory.TStructure.t.plus.prop_of_iso w
@@ -475,9 +475,9 @@ private theorem recordedOrigin_witness (O : CompactOriginCategory A X) :
       fixedOriginWitness A X O ≪≫ recordedUnit A X O := by
   let e := ProEtale.refinementCoefficientEquivalence X (ULift.{u + 1} A)
   let w := fixedOriginWitness A X O
-  let a := (Functor.mapDerivedCategoryCompIso
+  let a := ((Functor.mapDerivedCategoryCompIso
     (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) X)
-    (ProEtale.finiteCoefficientRealization X (ULift.{u + 1} A))).app O.L.obj
+    (ProEtale.finiteCoefficientRealization X (ULift.{u + 1} A))).app O.L.obj).symm
   change e.unitIso.app _ ≪≫ e.inverse.mapIso
     (a.symm ≪≫ (Iso.refl _).symm ≪≫ (a ≪≫ e.functor.mapIso w)) = _
   exact cancel_recorded_witness e a w
