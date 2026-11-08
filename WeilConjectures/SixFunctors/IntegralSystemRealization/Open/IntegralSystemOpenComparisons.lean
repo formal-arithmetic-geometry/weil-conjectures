@@ -95,7 +95,7 @@ private theorem finiteUnitIso {U X : Scheme.{u}} (j : U ⟶ X)
     infer_instance
   have : IsIso a.unit := a.unit_isIso_of_L_fully_faithful
   let e : F.mapDerivedCategory ⋙ G.mapDerivedCategory ≅ 𝟭 _ :=
-    (Functor.mapDerivedCategoryCompIso F G).symm ≪≫
+    Functor.mapDerivedCategoryCompIso F G ≪≫
       Functor.mapDerivedCategoryNatIso (asIso a.unit).symm ≪≫
       Functor.mapDerivedCategoryIdIso _
   have ff := (finiteOpenAdj l E j n).fullyFaithfulLOfCompIsoId e
