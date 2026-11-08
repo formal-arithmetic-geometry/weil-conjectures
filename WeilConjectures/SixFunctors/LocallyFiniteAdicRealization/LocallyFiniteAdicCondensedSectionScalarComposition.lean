@@ -210,8 +210,7 @@ private theorem ordinaryComp_unit (w : φ ≫ ψ = χ) (M : Mod C R) :
   rw [Adjunction.homEquiv_unit] at h₁'
   erw [reassoc_of% h₁']
   simpa only [Adjunction.homEquiv_unit, Category.assoc] using h₂
-attribute [local implicit_reducible] HomotopyCategory
-  CategoryTheory.Functor.mapHomotopyCategory in
+attribute [local implicit_reducible] HomotopyCategory in
 private theorem homotopyComp_unit (w : φ ≫ ψ = χ)
     (P : HomotopyCategory (Mod C R) (.up ℤ)) :
     (((extendRestrictAdjunction φ).mapHomotopyCategory (.up ℤ)).comp
@@ -257,8 +256,7 @@ private theorem homotopyComp_unit (w : φ ≫ ψ = χ)
     Functor.mapHomologicalComplex_obj_X, Functor.id_obj] using
       congrArg (fun f ↦ f.hom) hh
 
-attribute [local implicit_reducible] HomotopyCategory
-  CategoryTheory.Functor.mapHomotopyCategory in
+attribute [local implicit_reducible] HomotopyCategory in
 private theorem exactModComp_eq
     [PreservesFiniteLimits (extendScalars φ)]
     [PreservesFiniteLimits (extendScalars ψ)]
