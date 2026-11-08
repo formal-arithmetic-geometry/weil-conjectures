@@ -52,7 +52,8 @@ lemma purityCanonicalTateOneTrivialization_weil :
       (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricGaloisFrobenius.hom).map
           (purityCanonicalTateOneTrivialization ℓ a hζ hζ').hom ≫
         (Functor.Monoidal.εIso
-          (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricGaloisFrobenius.hom)).inv := by
+          (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ)
+            a.geometricGaloisFrobenius.hom)).inv := by
   have h := CategoryTheory.K4Native.scalarEquation_conjugate_named
     (purityScalarFrobeniusPull ℓ a)
     (purityScalarTateCompare ℓ a) (purityScalarUnitCompare ℓ a)

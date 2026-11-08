@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 public import WeilConjectures.SixFunctors.ProEtale.DerivedCompletion
 import WeilConjectures.Algebra.Homology.ReductionIsoShift
+import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Defs
 import WeilConjectures.CategoryTheory.Monoidal.Closed.UnitEnd
 
 /-! # Signed principal cones and derived tensor
@@ -176,8 +177,7 @@ variable {A : Type*} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A]
   [HasDerivedCategory.{v} A] [MonoidalCategory A] [MonoidalClosed A]
   [MonoidalPreadditive A] [BraidedCategory A] [Abelian.HasFunctorialFlatResolution A]
   {B : Type z} [CommRing B] [Linear B A] [MonoidalLinear B A]
-local instance principalConeTensorNormalizationInst2
-    : HasColimitsOfSize.{0, 0} A := hasColimitsOfSizeShrink A
+attribute [local instance] instHasColimitsOfSize_weilConjectures
 
 private def scalarNat (b : B) : 𝟭 (CochainComplex A ℤ) ⟶ 𝟭 _ where
   app M := b • 𝟙 M

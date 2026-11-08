@@ -100,7 +100,6 @@ private theorem chart_geometry
 attribute [local irreducible] pushforward pushforwardComp pushforwardCongr pushforwardId
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 800000 in
 -- Elaborating the coefficient comparisons uses several module functors.
 /-- The affine base-change chart and its coefficient h-maps, before taking cohomology.
 Source: Stacks Project, Tags 02KH (first paragraph), 0096 and 0097.

@@ -22,7 +22,7 @@ open CategoryTheory AlgebraicGeometry Opposite
 open scoped BigOperators TensorProduct
 namespace CategoryTheory
 
-set_option maxHeartbeats 3000000 in
+set_option maxHeartbeats 2500000 in
 -- The coordinate eliminations compare the chosen sheaf-tensor instance parameters.
 /-- A single two-term localization factor preserves the positive ordered coordinates
 of an arbitrary nonnegative augmented complex with the tail's coordinates.

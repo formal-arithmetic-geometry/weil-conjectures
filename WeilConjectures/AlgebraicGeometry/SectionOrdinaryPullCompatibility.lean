@@ -169,7 +169,6 @@ variable
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ T)]
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ' T)]
 
-set_option maxHeartbeats 800000 in
 -- Compare the scalar unit and its inverse mate through the specified section equivalence.
 private theorem scalar_mate (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u})
     (s : SectionScalarComparison a T) (hs : SectionScalarNormalized a T s) :
@@ -201,7 +200,6 @@ private theorem scalar_mate (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u})
   exact mate_of_unit (Mod.extendRestrictAdjunction (coefficientMap a T))
     s.pair.ordinaryAdjunction s.ordinary s.restriction.hom hunit
 
-set_option maxHeartbeats 800000 in
 -- Compare the specified composite adjunctions and all four section functors explicitly.
 /-- The ordinary scalar and geometric comparisons preserve the balanced pullback square.
 Source: Stacks Project, Tags 03EK, 0D6D and 07A6.

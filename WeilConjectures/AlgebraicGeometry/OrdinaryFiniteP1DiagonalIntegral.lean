@@ -72,7 +72,7 @@ theorem ordinaryFiniteP1_scalarTrace_baseChange
         (ordinaryFinitePushforward A (ProjectiveLine S' ↘ S')).map
           (ordinaryFiniteShiftedLinePullback A N hA t
             (ProjectiveSpace.map (ULift.{u} (Fin 2)) f)
-            (ordinaryFiniteP1_isUnit N S hS)).hom ≫
+            (affineTraceProjectiveInvertible N S hS)).hom ≫
         (b S' hS').inv ≫ biprod.snd := by
   have hs := hbc f hS hS'
   rw [← hb S hS, ← hb S' hS'] at hs
@@ -83,7 +83,7 @@ theorem ordinaryFiniteP1_scalarTrace_baseChange
       (ordinaryFinitePushforward A (ProjectiveLine S' ↘ S')).map
         (ordinaryFiniteShiftedLinePullback A N hA t
           (ProjectiveSpace.map (ULift.{u} (Fin 2)) f)
-          (ordinaryFiniteP1_isUnit N S hS)).hom)
+          (affineTraceProjectiveInvertible N S hS)).hom)
     (ordinaryFiniteP1DecompositionSourceMap A N hA t f hS)
     (ordinaryFiniteUnitPullback A f).hom
     (by simpa only [Category.assoc] using hs)
@@ -111,15 +111,15 @@ theorem ordinaryFiniteP1_diagonal_integral (hN : 0 < N) [Finite A]
         ∀ a : Bool,
           ordinaryFiniteP1DiagonalSupportedMap A N hA S a κ ≫
             ordinaryFiniteP1DiagonalChartMap A N hA t S hS a ≫
-              (b (ProjectiveLine S) (ordinaryFiniteP1_isUnit N S hS)).inv ≫ biprod.snd =
+              (b (ProjectiveLine S) (affineTraceProjectiveInvertible N S hS)).inv ≫ biprod.snd =
             𝟙 (ordinaryFiniteUnit A (ProjectiveLine S)) := by
   have : IsLocallyNoetherian (ProjectiveLine S) :=
     LocallyOfFiniteType.isLocallyNoetherian (ProjectiveLine S ↘ S)
   have : CompactSpace (ProjectiveLine S) :=
     QuasiCompact.compactSpace_of_compactSpace (ProjectiveLine S ↘ S)
   have : IsNoetherian (ProjectiveLine S) := ⟨⟩
-  let hP := ordinaryFiniteP1_isUnit N S hS
-  let hPP := ordinaryFiniteP1_isUnit N (ProjectiveLine S) hP
+  let hP := affineTraceProjectiveInvertible N S hS
+  let hPP := affineTraceProjectiveInvertible N (ProjectiveLine S) hP
   let hW : IsUnit (N : Γ(pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S), ⊤)) := by
     simpa using (hS.map
       ((pullback.fst (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)) ≫

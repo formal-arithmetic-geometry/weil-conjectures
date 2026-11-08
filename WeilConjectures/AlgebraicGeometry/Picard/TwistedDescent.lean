@@ -356,10 +356,10 @@ theorem nonempty_iso_of_toDescentData_iso (hg : Sieve.ofArrows T' g ∈ Scheme.f
     (e : (modulesPseudofunctor.toDescentData g).obj M ≅
       (modulesPseudofunctor.toDescentData g).obj N) :
     Nonempty (M ≅ N) := by
-  obtain ⟨φ, hφ⟩ := (bijective_toDescentData_map g hg M N hM hN).2 e.hom
-  obtain ⟨ψ, hψ⟩ := (bijective_toDescentData_map g hg N M hN hM).2 e.inv
-  refine ⟨⟨φ, ψ, (bijective_toDescentData_map g hg M M hM hM).1 ?_,
-    (bijective_toDescentData_map g hg N N hN hN).1 ?_⟩⟩
+  obtain ⟨φ, hφ⟩ := (bijective_toDescentData_map_of_mem_fpqcTopology g hg M N hM hN).2 e.hom
+  obtain ⟨ψ, hψ⟩ := (bijective_toDescentData_map_of_mem_fpqcTopology g hg N M hN hM).2 e.inv
+  refine ⟨⟨φ, ψ, (bijective_toDescentData_map_of_mem_fpqcTopology g hg M M hM hM).1 ?_,
+    (bijective_toDescentData_map_of_mem_fpqcTopology g hg N N hN hN).1 ?_⟩⟩
   · rw [Functor.map_comp, hφ, hψ, e.hom_inv_id, CategoryTheory.Functor.map_id]
   · rw [Functor.map_comp, hφ, hψ, e.inv_hom_id, CategoryTheory.Functor.map_id]
 

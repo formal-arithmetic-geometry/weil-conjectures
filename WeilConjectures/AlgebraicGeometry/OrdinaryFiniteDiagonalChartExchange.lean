@@ -70,7 +70,7 @@ theorem ordinaryFiniteDiagonalChart_exchange
         ((ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧) ≫
       (ordinaryFinitePushforward A (projectiveLineDiagonalProjection S a)).map
         (ordinaryFiniteShiftedLinePullback A N hA t
-          (projectiveLineDiagonalProjection S (!a)) (ordinaryFiniteP1_isUnit N S hS)).hom ≫
+          (projectiveLineDiagonalProjection S (!a)) (affineTraceProjectiveInvertible N S hS)).hom ≫
       ordinaryFiniteP1DiagonalChartMap A N hA t S hS a =
     (derivedBaseChangeMap (ModuleCat.{u + 1} A)
         (ProjectiveSpace.isPullback_map (ULift.{u} (Fin 2)) (ProjectiveLine S ↘ S)).toCommSq).app
@@ -78,13 +78,13 @@ theorem ordinaryFiniteDiagonalChart_exchange
       (ordinaryFinitePushforward A (ProjectiveLine (ProjectiveLine S) ↘ ProjectiveLine S)).map
         (ordinaryFiniteShiftedLinePullback A N hA t
           (ProjectiveSpace.map (ULift.{u} (Fin 2)) (ProjectiveLine S ↘ S))
-          (ordinaryFiniteP1_isUnit N S hS)).hom := by
+          (affineTraceProjectiveInvertible N S hS)).hom := by
   let e := (projectiveLineDiagonalChart S a).val.hom
   let p := projectiveLineDiagonalProjection S a
   let r := projectiveLineDiagonalProjection S (!a)
   let q' := ProjectiveLine (ProjectiveLine S) ↘ ProjectiveLine S
   let m := ProjectiveSpace.map (ULift.{u} (Fin 2)) (ProjectiveLine S ↘ S)
-  let hP := ordinaryFiniteP1_isUnit N S hS
+  let hP := affineTraceProjectiveInvertible N S hS
   let hW := pullback_natCast_isUnit N
     ((pullback.fst (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)) ≫
       (ProjectiveLine S ↘ S)) hS

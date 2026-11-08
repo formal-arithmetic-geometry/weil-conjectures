@@ -311,7 +311,6 @@ Source: Stacks 03DI (blueprint: thm-cbc-complete-proetale). -/
 def cbcRestrictionUnit {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j] :=
   (cbcRestrictionUnit_existsUnique d j).choose
 
-set_option maxHeartbeats 800000 in
 -- Transposing the section unit compares the concrete and small-model module categories.
 /-- Ordinary inverse image identifies with open restriction by transposing its section unit.
 Source: Stacks 03DI and 09AE (blueprint: thm-cbc-complete-proetale). -/

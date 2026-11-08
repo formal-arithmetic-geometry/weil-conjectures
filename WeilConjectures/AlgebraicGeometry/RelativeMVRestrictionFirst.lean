@@ -18,7 +18,6 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 1200000 in
 -- Elaborating the fixed derived adjunction data needs a larger budget.
 private theorem unit_counit
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w}
@@ -110,7 +109,6 @@ private theorem unit_coefficients
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 1200000 in
 -- The comparison data in the transpose require a larger elaboration budget.
 private theorem source_counit
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w}
@@ -163,7 +161,6 @@ private theorem source_counit
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 1200000 in
 -- The comparison data in the transpose require a larger elaboration budget.
 private theorem target_counit
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w}
@@ -197,7 +194,6 @@ private theorem target_counit
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 1200000 in
 -- The pasted comparison contains the fixed derived-composition data.
 private theorem comparison_pasting
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w}
@@ -264,7 +260,6 @@ private theorem comparison_pasting
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 1200000 in
 -- Transposing the fixed derived adjunction data needs a larger elaboration budget.
 /-- Base change commutes with the relative unit of one open.
 Source: Stacks Project, Cohomology, Tags 08HY and 08HZ.

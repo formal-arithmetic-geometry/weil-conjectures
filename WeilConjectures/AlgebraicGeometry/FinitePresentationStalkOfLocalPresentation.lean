@@ -123,7 +123,6 @@ private theorem map_free_finitePresentation
   exact Module.FinitePresentation.of_equiv
     (iso.toLinearEquiv ≪≫ₗ DirectSum.linearEquivFunOnFintype _ I _).symm
 
-set_option maxHeartbeats 800000 in
 -- Elaborating the mapped cokernel unfolds the presentation and its free-module maps.
 private theorem map_presentation_finitePresentation
     {C : Type u} [Category C] {J : GrothendieckTopology C}
@@ -157,7 +156,6 @@ private theorem map_presentation_finitePresentation
   rw [← hex]
   exact Submodule.fg_range _
 
-set_option maxHeartbeats 800000 in
 -- Scalar transport and the slice equivalence unfold several nested stalk instances.
 /-- A supplied finite presentation on a neighborhood makes the stalk finitely presented.
 

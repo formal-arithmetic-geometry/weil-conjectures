@@ -352,7 +352,6 @@ local elab "unit_native_exact " t:term : tactic => do
 
 attribute [local irreducible] spIntegralTwist spIntegralComparison
 
-set_option maxHeartbeats 800000 in
 -- Explicit congruence creates shared auxiliary proofs for the sheaf-instance aliases.
 attribute [local irreducible] derivedUpper
   singlePullback PullEndpoint.shift Endpoint.shift scalarPullbackComparison

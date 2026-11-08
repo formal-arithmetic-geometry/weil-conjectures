@@ -47,21 +47,13 @@ def moduleDirectImage {X Y : RingedSpace.{u}} (g : X ⟶ Y) :
     (R := moduleRings X) (S := moduleRings Y)
     ⟨Functor.whiskerRight g.hom.c (forget₂ CommRingCat RingCat)⟩
 
-/-- Module direct image is additive, hence its termwise action carries homotopies
-and homotopy equivalences to homotopies and homotopy equivalences.
-Source: Stacks, Tag 079V (blueprint: def-pc-ringed-spaces-derived-direct-image).
-Proof: sums and zero maps of module sheaves are computed on sections. Direct image
-uses exactly the same maps on inverse-image opens, so preserves these operations. -/
-theorem moduleDirectImage_additive_proof {X Y : RingedSpace.{u}} (g : X ⟶ Y) :
+/-- Additivity of module direct image. Source: Stacks, Tag 079V
+(blueprint: def-pc-ringed-spaces-derived-direct-image). -/
+instance moduleDirectImage_additive {X Y : RingedSpace.{u}} (g : X ⟶ Y) :
     (moduleDirectImage g).Additive := by
   constructor
   intro A B f h
   rfl
-
-/-- Additivity of module direct image. Source: Stacks, Tag 079V
-(blueprint: def-pc-ringed-spaces-derived-direct-image). -/
-instance moduleDirectImage_additive {X Y : RingedSpace.{u}} (g : X ⟶ Y) :
-    (moduleDirectImage g).Additive := moduleDirectImage_additive_proof g
 
 variable {X Y : RingedSpace.{u}}
   [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X))]

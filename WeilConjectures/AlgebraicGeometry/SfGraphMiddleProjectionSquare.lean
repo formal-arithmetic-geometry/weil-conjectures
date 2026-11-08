@@ -810,6 +810,4 @@ theorem sfGraphMiddleIso_projection
     (projectionWord_eq_source A (sfGraphFirstPresentation c t) M K)
     (projectionWord_eq_source A (sfGraphSecondPresentation c t) M K)
 
-#print axioms sfGraphMiddleIso_projection
-
 end AlgebraicGeometry.Etale

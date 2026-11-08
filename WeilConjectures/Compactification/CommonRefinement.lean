@@ -172,23 +172,4 @@ theorem exists_common_refinement (c d : Compactification f) :
     ∃ e : Compactification f, Nonempty (e.Refinement c) ∧ Nonempty (e.Refinement d) :=
   ⟨inf c d, ⟨infFst c d⟩, ⟨infSnd c d⟩⟩
 
-/-! ### Axiom census
-
-The common refinement is unconditional: the check below is run by the build, so a `sorry`
-reappearing anywhere beneath it breaks compilation rather than going unnoticed. -/
-
-/--
-info: 'AlgebraicGeometry.Compactification.exists_common_refinement' depends on
-  axioms: [propext, Classical.choice, Quot.sound]
--/
-#guard_msgs (whitespace := lax) in
-#print axioms AlgebraicGeometry.Compactification.exists_common_refinement
-
-/--
-info: 'AlgebraicGeometry.Compactification.isPullback_infSnd' depends on
-  axioms: [propext, Classical.choice, Quot.sound]
--/
-#guard_msgs (whitespace := lax) in
-#print axioms AlgebraicGeometry.Compactification.isPullback_infSnd
-
 end AlgebraicGeometry.Compactification

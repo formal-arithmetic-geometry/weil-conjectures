@@ -149,25 +149,6 @@ private theorem monHomCompExplicit {C : Type*} [Category C] [MonoidalCategory C]
 namespace AlgebraicGeometry.ProEtale
 open Scheme
 
-instance : NatTrans.IsMonoidal constantPointIso.{u}.hom := by
-  unfold constantPointIso
-  infer_instance
-
-instance (T : Scheme.{u}) : IsIso (proEtTerminal T).hom := by
-  rw [proEtTerminal_eq]
-  change IsIso (𝟙 T)
-  infer_instance
-
-instance (T : Scheme.{u}) : IsIso
-    ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ (toSpecZ T)).obj
-      (proEtTerminal specZ.{u})).hom := by
-  rw [proEtTerminal_eq]
-  change IsIso (pullback.snd (𝟙 specZ.{u}) (toSpecZ T))
-  infer_instance
-
-instance (T : Scheme.{u}) : NatTrans.IsMonoidal (constantSchemeIso T).hom := by
-  dsimp only [constantSchemeIso, Iso.trans_hom, Functor.isoWhiskerRight_hom]
-  infer_instance
 end AlgebraicGeometry.ProEtale
 
 namespace AlgebraicGeometry.ProEtale
@@ -176,37 +157,6 @@ open scoped CategoryTheory.Obj
 
 variable (B : Type) [CommRing B] [TopologicalSpace B] [IsTopologicalRing B]
 
-instance (T : Scheme.{u})
-    (eR : Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1}
-      (coherentTopology Profinite.{u}) ((Functor.const Profinite.{u}ᵒᵖ).obj
-        (RingCat.of (ULift.{u + 1} B))) ≅ Profinite.continuousMapRingObj.{u} B)
-    [IsMonHom eR.hom] : IsMonHom (finiteDiscreteSchemeRingIso B T eR).hom := by
-  let A := AddCommGrpCat.of (ULift.{u + 1} B)
-  let S := constantSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}
-  let P := upperStarFromPoint T
-  let Q := constantSheaf (ProEt.topology T) Ab.{u + 1}
-  let transfer (m : MonObj (S.obj A)) : MonObj (P.obj (S.obj A)) :=
-    @Functor.monObjObj _ _ _ _ _ _ P _ _ m
-  have hS := constantSheafRingMonObj (coherentTopology Profinite.{u}) (ULift.{u + 1} B)
-  have hQ := constantSheafRingMonObj (ProEt.topology T) (ULift.{u + 1} B)
-  let mS := Sheaf.monObj_presheafToSheaf_obj (coherentTopology Profinite.{u})
-    (((Functor.const Profinite.{u}ᵒᵖ).obj (RingCat.of (ULift.{u + 1} B))) ⋙
-      forget₂ RingCat Ab)
-  let mQ := Sheaf.monObj_presheafToSheaf_obj (ProEt.topology T)
-    (((Functor.const T.ProEtᵒᵖ).obj (RingCat.of (ULift.{u + 1} B))) ⋙
-      forget₂ RingCat Ab)
-  have hi : @IsMonHom _ _ _ (P.obj (S.obj A)) (Q.obj A)
-      (transfer mS) mQ ((constantSchemeIso T).inv.app A) :=
-    IsMonHom.of_eq
-      (h₁ := transfer (S.monObjObj A)) (h₂ := Q.monObjObj A)
-      ((constantSchemeIso T).inv.app A) (congrArg transfer hS) hQ
-      (hf := Functor.isMonHom_compAlgHom S P (constantSchemeIso T).inv A)
-  have hh := monHomInvExplicit (transfer mS) mQ ((constantSchemeIso T).app A).symm hi
-  have hmap : IsMonHom (P.map eR.hom) := inferInstance
-  rw [finiteDiscreteSchemeRingIso_eq]
-  dsimp only [Iso.trans_hom, Functor.mapIso_hom]
-  exact monHomCompExplicit mQ (transfer mS) _
-    ((constantSchemeIso T).hom.app A) (P.map eR.hom) hh hmap
 /-- The monoidal constant-ring identification on a profinite point pulls to every scheme.
 Source: Bhatt--Scholze, Section 5.3; formal uniqueness of monoidal left adjoints
 (blueprint: lem-weil-pbc-finite-discrete-scheme-ring-constant).

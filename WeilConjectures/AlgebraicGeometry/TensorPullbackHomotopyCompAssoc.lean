@@ -20,7 +20,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 600000 in
 -- Elaborating the six pinned adjunctions and termwise comparison needs a larger heartbeat budget.
 /-- The tensor pullback composition mates are associative after passage to homotopy.
 Source: Mathlib `Adjunction.leftAdjointCompIso_assoc` and

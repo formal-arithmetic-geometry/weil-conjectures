@@ -23,7 +23,7 @@ open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct ChangeOfRings
 namespace AlgebraicGeometry
 open SingleComplexBaseChange
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 900000 in
 -- Checking the two explicit scalar-extension tensor types needs additional heartbeats.
 /-- Compatible ordinary tensor coordinates, pinned to the actual open restriction map.
 

@@ -58,7 +58,6 @@ private theorem shortExact_of_retraction {C : Type*} [Category C] [Abelian C]
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 1000000 in
 -- Resolving the internal-Hom carriers requires extra elaboration steps.
 private theorem exact_hom_of_retract {C : Type u} [SmallCategory C]
     {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{u})
@@ -101,7 +100,7 @@ private theorem exact_hom_of_retract {C : Type u} [SmallCategory C]
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 500000 in
 -- The finite-free retractions use the localized and internal-Hom carrier presentations.
 private theorem strictlyPerfect_hom_quasiIso (X : Scheme.{u}) (U : X.Opens)
     (P : CochainComplex (localEvaluationModules X U) ℤ)

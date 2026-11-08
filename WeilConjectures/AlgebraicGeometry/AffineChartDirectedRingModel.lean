@@ -94,7 +94,7 @@ theorem exists_affineChart_directedRingModel
           Etale (((pullback.fst X₀.hom (D.map (homOfLE i.property).op)) ⁻¹ᵁ U).ι ≫
             ((Over.pullback (D.map (homOfLE i.property).op)).map f₀).left) := by
   obtain ⟨F, e0, hi, eL, hL⟩ :=
-    exists_affineOpen_directedRingSystem D c hc i₀ W hW
+    exists_affineOpen_ringSystem_of_isLimit D c hc i₀ W hW
   obtain ⟨B, C, aB, aC, φ, hφ, hcomp⟩ :=
     exists_affineChart_tensorComparison X₀ Y₀ f₀ W hW V hV eV U hU eU
       (F.obj ⟨i₀, le_rfl⟩) e0

@@ -79,8 +79,8 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_proEtTopol
 attribute [-instance] AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.modulesAbelian
 attribute [-instance] AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.hasDerived
 attribute [-instance] AlgebraicGeometry.Scheme.ProEt.ClopenScalar.derived
-attribute [-instance] AlgebraicGeometry.Scheme.ProEt.ClopenScalar.sheafify
-attribute [-instance] AlgebraicGeometry.Scheme.ProEt.ClopenScalar.locallyBijective
+attribute [-instance] AlgebraicGeometry.ProEtale.surjectiveTower_hasSheafify
+attribute [-instance] AlgebraicGeometry.ProEtale.surjectiveTower_wEqualsLocallyBijective
 
 -- The canonical public wrappers below provide these instances to consumers.
 attribute [-instance] AlgebraicGeometry.Scheme.ProEt.ClopenMonoidalDescent.modulesAbelian
@@ -145,7 +145,6 @@ variable {A : Type a} [Category.{b} A] [Abelian A] [HasDerivedCategory A]
 
 end DerivedPi
 
-set_option maxHeartbeats 800000 in
 -- The normalized comparison types carry several dependent localization instances.
 /-- Ordinary and total tensor comparisons, flatness and K-flatness, and the normalized
 symmetric monoidal derived restriction. Each `Braided` structure contains invertible

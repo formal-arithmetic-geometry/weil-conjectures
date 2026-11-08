@@ -13,9 +13,6 @@ isomorphism, the mate of any invertible left square is invertible. No normalizat
 between the left and right squares is needed.
 -/
 
-set_option profiler true
-set_option profiler.threshold 0
-
 @[expose] public section
 
 namespace CategoryTheory.Adjunction

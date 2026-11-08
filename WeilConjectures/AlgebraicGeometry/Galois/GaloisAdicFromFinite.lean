@@ -42,7 +42,6 @@ variable {Y : Scheme.{u}} [ConnectedSpace Y]
   (Q : Type (u + 1)) [Field Q] [Algebra ℚ_[l] Q] [IsAlgClosure ℚ_[l] Q]
   (d : GaloisLisseAdicData y G c l Q)
 
-set_option maxHeartbeats 8000000 in
 -- The normalized stalk and tensor comparisons have large dependent module types.
 private theorem integralEvaluation_from_construction
     (hcanon : GaloisAdicCanonicalConstruction y G c l Q d) :

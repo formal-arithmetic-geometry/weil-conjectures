@@ -25,7 +25,6 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
 -- Elaborating the two equivalent module-category presentations needs extra heartbeats.
 /-- A bounded-above finite-free sheaf complex on an affine scheme is the associated
 sheaf complex of a bounded-above finite-free module complex.

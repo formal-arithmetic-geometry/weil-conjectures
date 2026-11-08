@@ -110,7 +110,7 @@ private theorem open_coordinate_smul (X : Scheme.{u}) (U : X.Opens) (x : U.toSch
   rw [he]
   rfl
 
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 700000 in
 -- Stalk scalar transport elaborates two specified tensor-stalk components.
 /-- The unit-scalar section-germ generator equation for the pinned comparison.
 
@@ -208,7 +208,6 @@ theorem openOrdinaryTensor_pure_germ_coordinates_canonical
   · exact (Classical.choose_spec (exists_tensorMap f f' g g' sq z.val)).1
 
 
-set_option maxHeartbeats 1000000 in
 -- Explicit stalk and tensor module coercions require additional definitional checks.
 /-- Scalar extension of the canonical unit-scalar pinned comparison equation.
 

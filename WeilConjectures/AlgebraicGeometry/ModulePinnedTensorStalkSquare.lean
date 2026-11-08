@@ -27,7 +27,6 @@ set_option backward.isDefEq.respectTransparency.types false
 noncomputable section
 namespace AlgebraicGeometry.Scheme.Modules
 
-set_option maxHeartbeats 800000 in
 -- The stalk tensor transports require elaborating nested scalar-change functors.
 /-- The canonical module tensor pullback and stalk maps commute with the scalar tensorator.
 

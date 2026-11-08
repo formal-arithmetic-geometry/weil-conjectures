@@ -114,7 +114,7 @@ private noncomputable def coherentSwapSequenceFunctor :
 
 
 set_option backward.isDefEq.respectTransparency true in
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 700000 in
 -- Elaborate the dependent page isomorphisms and all filtration-degree witnesses.
 set_option linter.unusedVariables false in
 /-- One diagram of pages with categorical abutment filtrations at every degree.

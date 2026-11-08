@@ -271,7 +271,7 @@ theorem Divisor.finrankΓ_subschemeι_idealSheaf (E : closedPoints X →₀ ℕ)
     have h₂ := Divisor.isInvertible_idealSheaf (X ↘ Spec (.of k)) E'
     have := h₁.isFinite_subschemeι_comp (k := k)
     have := h₂.isFinite_subschemeι_comp (k := k)
-    have := (h₁.mul_effectiveCartier h₂).isFinite_subschemeι_comp (k := k)
+    have := (h₁.mul h₂).isFinite_subschemeι_comp (k := k)
     rw [Divisor.idealSheaf_add, IdealSheafData.finrankΓ_subschemeι_mul_comp _ h₁ h₂, hE, hE',
       Finsupp.sum_add_index' (fun _ ↦ zero_mul _) fun _ _ _ ↦ add_mul _ _ _]
   | single P n =>

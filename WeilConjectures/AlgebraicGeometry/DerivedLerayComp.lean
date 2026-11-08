@@ -111,7 +111,6 @@ private lemma comp_unit_app
   dsimp
   simp only [Category.id_comp, Category.comp_id]
 
-set_option maxHeartbeats 1000000 in
 -- Comparing iterated sheaf functors requires unfolding the derived-category interfaces.
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in

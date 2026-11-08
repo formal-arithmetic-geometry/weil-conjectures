@@ -169,7 +169,6 @@ private theorem normalized_augmentation_transport
   simp only [Functor.map_comp, Category.assoc]
   rw [reassoc_of% normalized_roos_comparison CF RF κ η T]
 
-set_option maxHeartbeats 800000 in
 -- The unit calculation compares several large, definitionally equal tower presentations.
 /-- The negative principal cone and the dual singleton Koszul system give the same
 normalized strict derived completion, for every presentation of the latter.

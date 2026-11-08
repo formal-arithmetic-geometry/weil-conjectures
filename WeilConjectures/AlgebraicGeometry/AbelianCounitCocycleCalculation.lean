@@ -26,9 +26,7 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 noncomputable section
 namespace AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution
 attribute [local instance] AlgebraicGeometry.Scheme.Modules.instAddCommGroupH
-local instance source_cocycle_pushforward_additive {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    (abelianPushforward f).Additive :=
-  ⟨by intros; ext U x; rfl⟩
+attribute [local instance] cocycle_pushforward_additive
 attribute [local irreducible] abelianResolutionIso
 attribute [local irreducible] Functor.rightDerivedObjIsoOfResolution
 attribute [local irreducible] siteSectionsObjIso

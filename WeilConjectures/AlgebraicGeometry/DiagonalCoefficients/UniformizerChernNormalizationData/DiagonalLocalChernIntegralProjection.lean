@@ -84,7 +84,7 @@ theorem localChern_transport_integral_projection
           (l ^ (s.n + 1)) (ULift.{u + 1} (completedResidue l s.E s.π s.n)) s.hA)) =
     completedIntegralProjection l (ProjectiveLine Y)
       (ULift.{u + 1} (completedResidue l s.E s.π s.n)) s.n s.hA
-      (Etale.ordinaryFiniteP1_isUnit (l ^ (s.n + 1)) Y s.hYpow) z := by
+      (affineTraceProjectiveInvertible (l ^ (s.n + 1)) Y s.hYpow) z := by
   sorry
 
 end UniformizerChernNormalizationData

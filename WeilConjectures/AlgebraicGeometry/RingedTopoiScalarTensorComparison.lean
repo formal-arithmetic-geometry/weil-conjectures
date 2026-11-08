@@ -209,7 +209,6 @@ private noncomputable def ins (M : SheafOfModules.{u} (ringSheaf A))
   (((PresheafOfModules.sheafificationAdjunction (𝟙 (ringSheaf B).obj)).unit.app
     (changeOfRingsPresheaf.{u, u, u} c M)).app W
       ((1 : B.obj.obj W) ⊗ₜ[A.obj.obj W, (c.hom.app W).hom] m))
-set_option maxHeartbeats 600000 in
 -- Expand the two scalar extensions through the sheafification adjunction.
 private theorem scalar_tensor_ext
     (M N : SheafOfModules.{u} (ringSheaf A)) (H : SheafOfModules.{u} (ringSheaf B))

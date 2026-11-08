@@ -115,7 +115,7 @@ private theorem tensorModelMap_isIso (X : Scheme.{uCD})
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 800000 in
 -- The representative predicate elaborates the sheaf tensor and derived-category instances.
 /-- Every normalized natural uncurrying map is bijective.
 Source: Stacks Project, cohomology.tex, Tag 08DJ (lemma-internal-hom), using

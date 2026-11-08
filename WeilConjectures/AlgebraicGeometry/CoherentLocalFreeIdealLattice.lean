@@ -36,7 +36,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- Finite-generator transport and several image comparisons need extra elaboration heartbeats.
 /-- A local map from a finite closed free source extends from an ideal lattice.
 The lattice inclusion is invertible over the given open; no injectivity of the

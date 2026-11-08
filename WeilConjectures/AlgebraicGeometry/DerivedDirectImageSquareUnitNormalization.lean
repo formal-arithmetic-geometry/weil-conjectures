@@ -61,7 +61,6 @@ private theorem directImage_unit_congr {A D : Scheme.{u}}
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.lazyProjDelta false in
 set_option backward.isDefEq.lazyWhnfCore false in
-set_option maxHeartbeats 150000 in
 -- Keep the generic successive sources while transporting the single unit.
 private theorem compositeUnit_congr {A B C D : Scheme.{u}}
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings A.toRingedSpace))]
@@ -95,7 +94,6 @@ private theorem model_eq (X Y : Scheme.{u}) (h : X ⟶ Y) (U : Y.Opens)
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.lazyProjDelta false in
 set_option backward.isDefEq.lazyWhnfCore false in
-set_option maxHeartbeats 150000 in
 -- Matching successive pushforwards with the composite unfolds scalar restrictions.
 private theorem underived_eq (X Y : Scheme.{u}) (h : X ⟶ Y) (U : Y.Opens) :
     (schemeMVUnderivedOpenComposition h U).hom =
@@ -112,7 +110,6 @@ private theorem underived_eq (X Y : Scheme.{u}) (h : X ⟶ Y) (U : Y.Opens) :
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.lazyProjDelta false in
 set_option backward.isDefEq.lazyWhnfCore false in
-set_option maxHeartbeats 150000 in
 -- Source identifications expand the successive direct-image functors.
 /-- Equality transport of one derived unit, before factoring it into two units.
 Source: Stacks Project, Cohomology, Tags 08FE and 0D5T.

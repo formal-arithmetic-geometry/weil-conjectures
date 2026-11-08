@@ -34,7 +34,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 set_option autoImplicit false
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 600000 in
 -- Transporting generators and the image factorization need extra elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 /-- A finite-type quasi-coherent submodule on a quasi-compact open extends to the scheme.

@@ -29,7 +29,7 @@ private theorem hom_restrict_apply {S : Scheme.{u}} {A D : S.Modules}
     φ.app B (A.presheaf.map i.op s) = D.presheaf.map i.op (φ.app C s) := by
   exact congrArg (fun k ↦ k s) (φ.mapPresheaf.naturality i.op)
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 600000 in
 -- Rewriting section morphisms requires unfolding the three composed adjunctions.
 /-- The concrete mate sends the three-unit generator to the pullback-unit section.
 Source: Stacks Project, Tag 01I6, Lemma 26.7.1; Tags 0096 and 0097.

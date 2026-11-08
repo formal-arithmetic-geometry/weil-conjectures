@@ -55,7 +55,6 @@ private theorem rankOne_artinSchreierSheafOf
     (Functor.Monoidal.εIso (upperStar (ModuleCat Λ) (pullback.snd b a))).symm ≪≫
     Functor.Monoidal.εIso (presheafToSheaf _ (ModuleCat Λ))
 
-set_option maxHeartbeats 1600000 in
 -- Explicit monoidal module comparisons need additional elaboration heartbeats.
 set_option linter.unusedVariables false in
 -- Preserve the original statement's named, nondependent hypotheses verbatim.

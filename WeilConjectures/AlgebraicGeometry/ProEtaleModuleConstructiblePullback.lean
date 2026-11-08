@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.CompMonoidal
 
 import WeilConjectures.CategoryTheory.Monoidal.Conjugate
 import WeilConjectures.ConstructibleSheaf.Pullback
@@ -139,19 +140,6 @@ lemma constructible_comap (φ : S ⟶ R) [IsMonHom φ] [IsIso φ]
 end SheafPresentation
 
 namespace AlgebraicGeometry.ProEtale
-
-instance upperStarComp_inv_monoidal {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
-    NatTrans.IsMonoidal (upperStarComp Ab.{u + 1} f g).inv := by
-  have h₁ : @Adjunction.IsMonoidal _ _ _ _ _ _ _ _
-      (upperStarLowerStarAdjunction Ab.{u + 1} (f ≫ g))
-      Functor.Monoidal.toOplaxMonoidal _ := by
-    exact isMonoidal_upperStarLowerStarAdjunction _ _
-  have h₂ : @Adjunction.IsMonoidal _ _ _ _ _ _ _ _
-      ((upperStarLowerStarAdjunction Ab.{u + 1} g).comp
-        (upperStarLowerStarAdjunction Ab.{u + 1} f))
-      Functor.Monoidal.toOplaxMonoidal _ := by
-    exact Adjunction.isMonoidal_comp _ _
-  exact isMonoidal_conjugateEquiv_symm _ _ (lowerStarComp Ab.{u + 1} f g).inv
 
 lemma localFinitePresentation_pullback
     {X Y : Scheme.{u}} (f : X ⟶ Y)

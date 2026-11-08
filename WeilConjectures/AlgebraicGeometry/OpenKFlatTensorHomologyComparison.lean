@@ -14,7 +14,7 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import WeilConjectures.Algebra.Homology.KFlatResolution
 import WeilConjectures.Algebra.Homology.LocalizedModuleRestrictionQuasiIso
 import WeilConjectures.Algebra.Homology.OpenRestrictionKFlat
-import WeilConjectures.Algebra.Homology.OpenRestrictionTensorHomology
+public import WeilConjectures.Algebra.Homology.OpenRestrictionTensorHomology
 import Mathlib.Algebra.Homology.BifunctorFlip
 import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
@@ -51,15 +51,7 @@ instance openRestrictionPreservesZero
   ext W x
   rfl
 
-/-- The additive tensor structure on the localized site, used in totalization. -/
-noncomputable local instance openTensorPreadditive
-    {X : TopCat.{u}} (R : Sheaf (Opens.grothendieckTopology X) CommRingCat.{u})
-    (U : TopologicalSpace.Opens X) :
-    letI := SheafOfModules.monoidalCategory (R.over U)
-    MonoidalPreadditive (SheafOfModules.{u} ((sheafCompose
-      ((Opens.grothendieckTopology X).over U)
-      (forget₂ CommRingCat.{u} RingCat.{u})).obj (R.over U))) :=
-  Classical.choice (SheafOfModules.tensorClosed (R.over U)).1
+attribute [local instance] localizedTensorPreadditive
 
 -- The cone-and-square argument of Stacks Tag 06YT applies to every ringed site.
 -- These helpers generalize the proved one-point-site argument in KFlatTensorQuasiIso;
@@ -165,7 +157,7 @@ private theorem site_kFlat_tensor_quasiIso
     exact (((curriedTensor _).map₂CochainComplex.map α).naturality s).symm
 
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- The roof uses large inferred total-tensor instances over the localized module category.
 /-- A roof identifying a local K-flat complex T with the restriction of Q identifies
 its tensor homology with the open restriction of the tensor homology of any global

@@ -7,6 +7,7 @@ module
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.MapMonoidal
 public import WeilConjectures.AlgebraicGeometry.IntegralResidueComparisonInterface
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Monoidal
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MonoidalStructure
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Unit
 public import WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare
 
@@ -34,16 +35,6 @@ variable {C : Type u₁} [Category.{u + 1} C] [Abelian C] [IsGrothendieckAbelian
   (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
   [F.PreservesFlat] [F.IsLeftAdjoint] [F.Monoidal]
 
-omit [HasFunctorialFlatResolution D] [PreservesFiniteLimits F]
-  [PreservesFiniteColimits F] [F.Monoidal] in
-theorem residue_exists_kFlatMap_iso (X : DerivedCategory C) :
-    ∃ P, F.kFlatMap P ∧ Nonempty (Qh.obj P ≅ X) := by
-  have := Localization.essSurj (Qh (C := C)) (HomotopyCategory.quasiIso _ (.up ℤ))
-  obtain ⟨R⟩ := LocalizerMorphism.IsLeftDerivabilityStructure.hasLeftResolutions
-    (Φ := HomotopyCategory.quasiIsoLocalizerMorphism F.kFlatMap) (Qh.objPreimage X)
-  have : IsIso (Qh.map R.w) := Localization.inverts Qh (HomotopyCategory.quasiIso _ _) _ R.hw
-  exact ⟨R.X₁.obj, R.X₁.property, ⟨asIso (Qh.map R.w) ≪≫ Qh.objObjPreimageIso X⟩⟩
-
 @[instance_reducible] noncomputable def residueDerivedOplax : F.leftDerivedFunctor.OplaxMonoidal :=
   haveI := DerivedCategory.isIso_ε_Qh D
   OplaxMonoidal.ofLaxSquare (Q₁ := Qh) (Q₂ := Qh)
@@ -51,7 +42,7 @@ theorem residue_exists_kFlatMap_iso (X : DerivedCategory C) :
     (fun a ↦ F.leftDerivedFunctorCounit.app a)
     (fun _ _ f ↦ F.leftDerivedFunctorCounit.naturality f)
     (F.leftDerivedTensorComparison_app_app_comp_tensorHom)
-    F.kFlatMap (residue_exists_kFlatMap_iso F)
+    F.kFlatMap (exists_kFlatMap_iso F)
     (fun x _ hb ↦ isIso_μNatTrans_Qh_app_app_of_kFlat x _ hb)
 
 theorem residueDerivedOplax_isIso_δ (X Y : DerivedCategory C) :

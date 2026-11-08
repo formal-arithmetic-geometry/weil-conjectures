@@ -92,17 +92,4 @@ theorem denseCompactification_isDense [IsSeparated f] [LocallyOfFiniteType f] [Q
     (denseCompactification f).IsDense :=
   (NagataCompactification f).isDense_denseRefinement
 
-/-! ### Axiom census
-
-The existence of dense compactifications is unconditional: the check below is run by the
-build, so a `sorry` reappearing anywhere beneath Nagata's compactification theorem or the
-dense refinement breaks compilation rather than going unnoticed. -/
-
-/--
-info: 'AlgebraicGeometry.exists_isDense_compactification' depends on
-  axioms: [propext, Classical.choice, Quot.sound]
--/
-#guard_msgs (whitespace := lax) in
-#print axioms AlgebraicGeometry.exists_isDense_compactification
-
 end AlgebraicGeometry

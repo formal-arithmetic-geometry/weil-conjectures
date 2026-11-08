@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf
+import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Limits.DescentColimit
 
 /-! # Cokernels of finite constant pro-etale module sheaves -/
 
@@ -19,10 +20,6 @@ namespace AlgebraicGeometry.ProEtale
 open Scheme
 
 variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
-
-local instance : PreservesFilteredColimitsOfSize.{u, u}
-    (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
-  preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
 
 omit [Finite Λ] in
 private lemma constant_finite_etale (X : Scheme.{u})

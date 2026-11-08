@@ -62,7 +62,6 @@ private theorem pull_line_iso (l : ℕ) [Fact l.Prime]
       (singlePullback _ f (zlLine l S) ≪≫
         (DerivedCategory.singleFunctor _ 0).mapIso e)⟩
 
-set_option maxHeartbeats 600000 in
 -- Compare the independently normalized derived functor endpoints.
 /-- For vertical morphisms admitting sections, exchange on integral Tate lines
 has invertible first coordinate in every split unit/Chern decomposition.

@@ -25,7 +25,6 @@ noncomputable section
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] AlgebraicGeometry.Scheme.Modules.enoughInjectives
 
-set_option maxHeartbeats 800000 in
 -- The nested restriction-adjunction functors require additional elaboration fuel.
 /-- Restrict a fixed lift by the restriction adjunction, after transporting the
 pushforward square through its canonical composition and congruence isomorphisms.

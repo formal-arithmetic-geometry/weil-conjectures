@@ -37,7 +37,6 @@ attribute [local irreducible] Functor.mapDerivedCategory Functor.leftDerivedFunc
   Functor.rightDerivedFunctor CondensedRing.upperStar CondensedRing.lowerStar
   CompletedRealization.singleUnit CompletedRealization.shiftedLine modelExchange
 
-set_option maxHeartbeats 600000 in
 -- Compare the independently normalized derived functor endpoints.
 /-- The geometric exchange has degree one on the normalized Chern component.
 

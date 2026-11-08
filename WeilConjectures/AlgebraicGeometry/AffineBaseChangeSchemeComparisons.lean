@@ -95,7 +95,7 @@ theorem exists_affineBaseChangeSchemeComparisons
     subsingleton⟩
   have : (affineBaseChangeTail i).Full := ⟨by
     intro j k f
-    exact ⟨homOfLE (leOfHom f.right), by subsingleton⟩⟩
+    exact ⟨homOfLE (leOfHom f.right), rfl⟩⟩
   have : (affineBaseChangeTail i).EssSurj := ⟨by
     intro j
     refine ⟨⟨j.right, leOfHom j.hom⟩, ⟨?_⟩⟩

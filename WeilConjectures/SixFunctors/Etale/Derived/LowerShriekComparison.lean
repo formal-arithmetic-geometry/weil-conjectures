@@ -106,42 +106,6 @@ associativity `AlgebraicGeometry.Etale.refinementLowerStarComp_comp`).
 This module imports its parts: the definitions are in
 `WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison.Defs`, the identity law in
 `WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison.IdentityLaw` and the composition
-law in `WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison.CompositionLaw`; it
-keeps the axiom census of the three statements.
+law in `WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison.CompositionLaw`.
 
 -/
-
-/-! ### Axiom census
-
-The comparison `ρ`, its identity law and its composition law depend only on the three
-standard axioms `propext`, `Classical.choice` and `Quot.sound`. Sheafification enters through
-the instance `CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall` of
-`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`, which is proved through the
-transfinite plus construction. The derived categories these three statements are valued in
-come from `HasDerivedCategory.ofIsGrothendieckAbelian`, which rests on
-`CategoryTheory.Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian` of
-`WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution` and is proved.
-The checks below are run by the build.
--/
-
-/--
-info: 'AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusComparison'
-  depends on axioms: [propext, Classical.choice, Quot.sound]
--/
-#guard_msgs (whitespace := lax) in
-#print axioms AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusComparison
-
-/--
-info: 'AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusComparison_id'
-  depends on axioms: [propext, Classical.choice, Quot.sound]
--/
-#guard_msgs (whitespace := lax) in
-#print axioms AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusComparison_id
-
-/--
-info: 'AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusComparison_comp'
-  depends on axioms: [propext, Classical.choice, Quot.sound]
--/
-#guard_msgs (whitespace := lax) in
-#print axioms AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusComparison_comp
-

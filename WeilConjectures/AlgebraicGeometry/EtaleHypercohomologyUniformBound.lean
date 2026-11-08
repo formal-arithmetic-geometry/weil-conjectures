@@ -75,7 +75,6 @@ private theorem sections_naturality {X Y : Scheme.{u}} (f : Y ⟶ X)
       terminalIsTerminal).inv.app ((upperStar AddCommGrpCat.{u + 1} f).obj B)) hu.symm
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 1000000 in
 -- Elaborate the dependent page and presentation families.
 set_option linter.unusedVariables false in
 /-- Functorial termwise presentations can be chosen with a quantitative stabilization bound.

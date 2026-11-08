@@ -312,7 +312,6 @@ private theorem diagonal_class_detects
 
 end
 
-set_option maxHeartbeats 2000000 in
 -- The scalar and derived normalization calculations need extra elaboration.
 /-- The supported Kummer class of the relative projective-line diagonal detects
 endomorphisms of its finite etale Tate line. This statement concerns only finite

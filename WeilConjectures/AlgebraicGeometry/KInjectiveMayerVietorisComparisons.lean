@@ -49,7 +49,6 @@ private theorem mate_naturality
     using ρ.naturality f
 
 set_option backward.isDefEq.respectTransparency true in
-set_option maxHeartbeats 600000 in
 -- Elaborating the three computed comparisons checks the transported scheme functors.
 /-- The three canonical direct-image complexes compute the derived direct images,
 compatibly with the U and V units and both nested restriction maps.

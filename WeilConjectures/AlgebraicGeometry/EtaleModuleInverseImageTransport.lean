@@ -55,7 +55,7 @@ private theorem adjunctionForgetUnitCounit
     simp only [Equiv.symm_apply_apply, Adjunction.homEquiv_counit] at h'
     simpa using congrArg (fun t ↦ e.hom.app (R.obj F) ≫ t) h'.symm
 
-set_option maxHeartbeats 600000 in
+set_option maxHeartbeats 500000 in
 -- Specializing the abstract adjunction identities to this dependent package exceeds the default.
 /-- Transport the module inverse image and its adjunction along a ring comparison.
 Source: Stacks Project, Modules on Sites, Lemmas 03D2, 03D3, 03D7 and Definition 03D6.

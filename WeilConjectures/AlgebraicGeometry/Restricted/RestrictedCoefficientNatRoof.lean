@@ -139,9 +139,9 @@ theorem restrictedCoefficient_natRoof {X Z : Scheme.{u}} (v : Z ⟶ X)
   let r := restrictFunctor U.ι
   let rC := r.mapHomologicalComplex (ComplexShape.up ℕ)
   let : PreservesFiniteLimits (SheafOfModules.overFunctor X.ringCatSheaf U) :=
-    moduleOverFunctor_limits_proof X.toRingedSpace U
+    moduleOverFunctor_limits X.toRingedSpace U
   let : PreservesFiniteColimits (SheafOfModules.overFunctor X.ringCatSheaf U) :=
-    moduleOverFunctor_colimits_proof X.toRingedSpace U
+    moduleOverFunctor_colimits X.toRingedSpace U
   let : PreservesFiniteLimits r := preservesFiniteLimits_of_natIso (overFunctorEquiv U)
   let : PreservesFiniteColimits r := preservesFiniteColimits_of_natIso (overFunctorEquiv U)
   let : r.Additive := Functor.additive_of_preserves_binary_products r
