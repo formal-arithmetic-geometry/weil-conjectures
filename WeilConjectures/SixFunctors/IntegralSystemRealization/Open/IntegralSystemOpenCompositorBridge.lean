@@ -64,7 +64,6 @@ private theorem open_composition
 attribute [local irreducible] Functor.leftAdjoint Functor.mapDerivedCategory
   Functor.rightDerivedFunctor constantSheaf HasDerivedCategory.standard DerivedCategory.Q
   Functor.mapDerivedCategoryFactors Functor.mapDerivedCategoryNatIso
-  Functor.mapDerivedCategoryCompIso
 attribute [local implicit_reducible] coefficientSequenceCommRingSheaf
   coefficientSequenceCommRingPresheaf coefficientSequenceCommRingSystem
   coefficientSequenceCommRingTransition integralCoefficientCommRingSheaf

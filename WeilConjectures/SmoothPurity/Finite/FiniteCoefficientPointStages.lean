@@ -1043,7 +1043,7 @@ noncomputable def pointFibreRationalDownIso :
   letI := pointModuleRationalizationColimits l E
   CategoryTheory.Functor.associator _ _ _ ≪≫
     CategoryTheory.Functor.isoWhiskerLeft _
-      CategoryTheory.Functor.mapDerivedCategoryCompIso _ _ ≪≫
+      (CategoryTheory.Functor.mapDerivedCategoryCompIso _ _) ≪≫
     CategoryTheory.Functor.mapDerivedCategoryCompIso _ _ ≪≫
     CategoryTheory.Functor.mapDerivedCategoryNatIso
       (pointFibreRationalDown_existsUnique D l E).exists.choose ≪≫
@@ -1407,7 +1407,7 @@ theorem pointRationalFibreScalar_existsUnique :
         (pointRationalNormalization D l hl E (Q.obj K)).hom)).mp
   exact eq_of_heq ((he' K).trans (hs K).symm)
 
-set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types true
 
 /-- The normalized rational scalar comparison used on common-stage representatives.

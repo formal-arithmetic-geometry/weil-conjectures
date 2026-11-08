@@ -378,7 +378,7 @@ private local instance nativeExtensionAdditive {X Z : Scheme.{u}} (j : X ⟶ Z)
 
 -- Keep conversion from expanding the localization choices during specialization.
 attribute [local irreducible] HasDerivedCategory.standard
-  Functor.mapDerivedCategoryNatIso Functor.mapDerivedCategoryCompIso
+  Functor.mapDerivedCategoryNatIso
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 

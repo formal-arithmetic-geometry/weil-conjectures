@@ -341,7 +341,7 @@ private def level {X Y : Scheme.{t}} (f : X ⟶ Y)
     (fun i j _ ↦ ((moduleLevel l E f M n).hom.naturality (P.d i j)).symm)
 
 attribute [local irreducible] level
-attribute [local implicit_reducible] Functor.mapHomologicalComplex
+attribute [local implicit_reducible]
   HomologicalComplex.complexOfFunctorsToFunctorToComplex HomologicalComplex.asFunctor
 
 private theorem finiteGenerator_naturality {X Y : Scheme.{t}} (f : X ⟶ Y) (n : ℕ)
