@@ -649,3 +649,32 @@
 - Fix/error/rule and logs: /home/ubuntu/u9/bz/FIXES-PF555.md.
   Completion: /home/ubuntu/u9/state/PF555.DONE.
 - This completion commit changes progress documentation only.
+
+
+# PF564 complete — assigned leaf and three importers green
+
+- Assigned CompletedOpenFiniteTransposeCoherence is green and free of proof placeholders.
+- Source fix 73e8c4c417 imports the existing public ExactCube module and uses
+  Functor.exactDerivedCube in derivedCube_nat. Statements and heartbeat settings unchanged.
+- Source fix is already merged into origin/u9/bumpF. PF576 deferred its duplicate to PF564.
+- ucheck-bumpF at 7d319392643456b9289f03acfd17a78a0b8e993c passed: rc=0,
+  built=2415, failed=0, 16862 jobs. Assigned module and three downstream importers green:
+  CompletedOpenStrictMateTranspose, CompletedOpenStrictMateIdentification,
+  CompleteProetaleStrictTowerRealization. All four freshly passed again in both later batches.
+- Final source snapshot: 8306702b381e2bc879f64837eccd47845db00708. The six-target
+  downstream retry finished with seven unowned dependency failures; no target's own error
+  was reached. The three prior blockers passed after upstream repairs were incorporated.
+- All six attempted targets depend on failing IntegralOpenTensorQuotientModel and
+  SfCompleteDirectImageReduction. The two deeper Deligne–Laumon targets also depend on
+  IntegralImmersionPullbackNormalizationData, RationalPullbackTransitionShiftScalar,
+  AutomorphismConstructibleIntegralShiftWitness, PullbackIdentitiesScalarExtension,
+  and IsomorphismPullbackScalarShift. Skipped under the brief's external-dependency rule.
+- Exact first errors and per-target paths: ~/u9/bz/PF564-retry-blockers.json.
+  Final full log: ~/u9/bz/BUILD-PF564-downstream-retry-full.log.
+- Fix pattern, error, replay rule, occurrence count: ~/u9/bz/FIXES-PF564.md.
+  Completion: ~/u9/state/PF564.DONE. The recorded rule reproduces the full source change
+  exactly and is idempotent. Latest fetched upstream has no further assigned-file changes.
+- No local Lean/Lake, declarations added/deleted, proof escapes, profiler probes, or
+  heartbeat increases. All remote ucheck requests have finished; the final one was
+  monitored through completion after the local process handle was lost at interruption.
+- This completion commit changes progress documentation only; Lean source matches green builds.
