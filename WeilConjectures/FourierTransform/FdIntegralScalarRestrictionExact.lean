@@ -137,7 +137,39 @@ private theorem scalarShift
   have hpre : NatTrans.CommShift pre.hom ℤ := by
     dsimp only [pre, Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerLeft_hom,
       Functor.isoWhiskerRight_hom]
-    infer_instance
+    have : NatTrans.CommShift aE.inv ℤ := NatTrans.CommShift.of_iso_inv aE ℤ
+    have : NatTrans.CommShift r.inv ℤ := NatTrans.CommShift.of_iso_inv r ℤ
+    have h6 : NatTrans.CommShift ((I l Ω T stage E).whiskerLeft r.inv ≫
+        ((I l Ω T stage E).associator (C l Ω T h) (pbcStageInclusion l Ω T L)).inv) ℤ :=
+      NatTrans.CommShift.comp _ _ ℤ
+    have h5 : NatTrans.CommShift (((I l Ω T stage E).associator (pbcStageInclusion l Ω T E)
+        (pbcAmbientScalarExtension l Ω T h)).hom ≫
+        (I l Ω T stage E).whiskerLeft r.inv ≫
+        ((I l Ω T stage E).associator (C l Ω T h) (pbcStageInclusion l Ω T L)).inv) ℤ :=
+      NatTrans.CommShift.comp _ _ ℤ
+    have h4 : NatTrans.CommShift
+        (Functor.whiskerRight aE.inv (pbcAmbientScalarExtension l Ω T h) ≫
+        ((I l Ω T stage E).associator (pbcStageInclusion l Ω T E)
+        (pbcAmbientScalarExtension l Ω T h)).hom ≫
+        (I l Ω T stage E).whiskerLeft r.inv ≫
+        ((I l Ω T stage E).associator (C l Ω T h) (pbcStageInclusion l Ω T L)).inv) ℤ :=
+      NatTrans.CommShift.comp _ _ ℤ
+    have h3 : NatTrans.CommShift ((jE.associator dE (pbcAmbientScalarExtension l Ω T h)).inv ≫
+        Functor.whiskerRight aE.inv (pbcAmbientScalarExtension l Ω T h) ≫
+        ((I l Ω T stage E).associator (pbcStageInclusion l Ω T E)
+        (pbcAmbientScalarExtension l Ω T h)).hom ≫
+        (I l Ω T stage E).whiskerLeft r.inv ≫
+        ((I l Ω T stage E).associator (C l Ω T h) (pbcStageInclusion l Ω T L)).inv) ℤ :=
+      NatTrans.CommShift.comp _ _ ℤ
+    have h2 : NatTrans.CommShift (jE.whiskerLeft e.hom ≫
+        (jE.associator dE (pbcAmbientScalarExtension l Ω T h)).inv ≫
+        Functor.whiskerRight aE.inv (pbcAmbientScalarExtension l Ω T h) ≫
+        ((I l Ω T stage E).associator (pbcStageInclusion l Ω T E)
+        (pbcAmbientScalarExtension l Ω T h)).hom ≫
+        (I l Ω T stage E).whiskerLeft r.inv ≫
+        ((I l Ω T stage E).associator (C l Ω T h) (pbcStageInclusion l Ω T L)).inv) ℤ :=
+      NatTrans.CommShift.comp _ _ ℤ
+    exact NatTrans.CommShift.comp _ _ ℤ
   let post : (U l Ω T h ⋙ I l Ω T stage L) ⋙ pbcStageInclusion l Ω T L ≅
       (U l Ω T h ⋙ jL) ⋙ dL :=
     Functor.associator (U l Ω T h) (I l Ω T stage L) (pbcStageInclusion l Ω T L) ≪≫
@@ -145,7 +177,10 @@ private theorem scalarShift
       (Functor.associator (U l Ω T h) jL dL).symm
   have hpost : NatTrans.CommShift post.hom ℤ := by
     dsimp only [post, Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerLeft_hom]
-    infer_instance
+    have : NatTrans.CommShift ((U l Ω T h).whiskerLeft aL.hom ≫
+        ((U l Ω T h).associator jL dL).inv) ℤ :=
+      NatTrans.CommShift.comp _ _ ℤ
+    exact NatTrans.CommShift.comp _ _ ℤ
   let y : (jE ⋙ H) ⋙ dL ≅ (U l Ω T h ⋙ jL) ⋙ dL :=
     pre ≪≫ Functor.isoWhiskerRight (b h) (pbcStageInclusion l Ω T L) ≪≫ post
   let W := (Functor.whiskeringRight (sfIntegralConstructibleCategory l E' T)
