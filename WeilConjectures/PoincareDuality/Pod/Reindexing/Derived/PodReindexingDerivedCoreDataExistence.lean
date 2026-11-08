@@ -119,8 +119,8 @@ theorem podReindexingDerivedCoreData_exists
       podOrdinaryReindex l E g ≅ isoReductionFiniteDerived l E g n ⋙
         coefficientFiniteDerivedRestriction l E X n := by
     let s := (isoReduction_restrictionSquare l E g n).choose
-    exact (mapDerivedCategoryCompIso _ _).symm ≪≫ mapDerivedCategoryNatIso s ≪≫
-      mapDerivedCategoryCompIso _ _
+    exact mapDerivedCategoryCompIso _ _ ≪≫ mapDerivedCategoryNatIso s ≪≫
+      (mapDerivedCategoryCompIso _ _).symm
   have finite (n : ℕ) : coefficientFiniteDerivedExtension l E Y n ⋙
       isoReductionFiniteDerived l E g n ≅ podOrdinaryReindex l E g ⋙
         coefficientFiniteDerivedExtension l E X n := by
@@ -143,8 +143,8 @@ theorem podReindexingDerivedCoreData_exists
         coefficientSequenceEvaluation l E Y n ⋙ isoReductionFiniteInverse l E g n :=
       PrimitiveCounit.inverseEvaluation l E g n ≪≫
         isoWhiskerLeft (coefficientSequenceEvaluation l E Y n) e
-    exact (mapDerivedCategoryCompIso _ _).symm ≪≫ mapDerivedCategoryNatIso s ≪≫
-      mapDerivedCategoryCompIso _ _
+    exact mapDerivedCategoryCompIso _ _ ≪≫ mapDerivedCategoryNatIso s ≪≫
+      (mapDerivedCategoryCompIso _ _).symm
   have limit : coefficientSequenceLimit l E Y ⋙ podOrdinaryReindex l E g ≅
       integralComparisonDerivedSequencePullback l E g ⋙ coefficientSequenceLimit l E X := by
     have hc : inv (isoReductionCompletedMap l E g).hom =
