@@ -148,7 +148,7 @@ def strictEtaleBrownRightUnit {V W : Scheme.{u}} (g : V ⟶ W) (n : ℕ)
     (Etale.lowerStar (ModuleCat.{u + 1} (strictEtaleBrownRing O t n))
       g).rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj K) ≫
     (Etale.lowerStar (ModuleCat.{u + 1} (strictEtaleBrownRing O t n))
-      g).rightDerivedFunctor.map ((DerivedCategory.quotientCompQhIso _).inv.app K)
+      g).rightDerivedFunctor.map ((DerivedCategory.quotientCompQhIso _).hom.app K)
 
 /-- Conclusion data comparing geometric images in the two coefficient encodings.
 The section equation fixes ordinary direct image. Its universal derived-unit square

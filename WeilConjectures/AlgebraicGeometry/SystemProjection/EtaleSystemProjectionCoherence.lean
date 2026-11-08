@@ -184,10 +184,10 @@ private theorem exact_unit_square
     (Functor.mapDerivedCategoryIdIso A).hom T.mapDerivedCategory) hr
   simp only [Category.assoc, hur] at hl'
   simp only [Category.assoc, hul] at hr'
-  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso R T).hom.app M)).1
+  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso R T).inv.app M)).1
   simp only [Functor.mapDerivedCategorySquareIso, Functor.exactDerivedRestrictionUnit,
     Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.map_comp,
-    Category.assoc, Iso.hom_inv_id_app_assoc]
+    Category.assoc, Iso.inv_hom_id_app_assoc]
   have hlM := NatTrans.congr_app hl' M
   have hrM := NatTrans.congr_app hr' M
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app] at hlM hrM
