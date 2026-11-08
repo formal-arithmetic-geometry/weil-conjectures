@@ -184,9 +184,9 @@ private theorem derived_comp_heq
     [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     [H.Additive] [PreservesFiniteLimits H] [PreservesFiniteColimits H]
     (h : F = F') (e : F ⋙ G ≅ H) (e' : F' ⋙ G ≅ H) (he : HEq e e') :
-    HEq ((Functor.mapDerivedCategoryCompIso F G).symm ≪≫
+    HEq (Functor.mapDerivedCategoryCompIso F G ≪≫
       Functor.mapDerivedCategoryNatIso e)
-      ((Functor.mapDerivedCategoryCompIso F' G).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso F' G ≪≫
         Functor.mapDerivedCategoryNatIso e') := by
   subst F'
   have hh := eq_of_heq he
