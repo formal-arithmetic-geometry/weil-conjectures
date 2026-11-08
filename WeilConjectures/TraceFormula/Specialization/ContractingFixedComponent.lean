@@ -71,7 +71,7 @@ lemma Scheme.isOpen_singleton_of_stableUnderGeneralization {S : Scheme.{u}}
       h₂ (hab.map hU.fromSpec.continuous) (by rw [ha, hp]; rfl)
     exact hinj (hb'.trans hp.symm)
   have ho : IsOpen ({p} : Set (PrimeSpectrum Γ(S, U))) :=
-    ((PrimeSpectrum.isOpen_singleton_tfae_of_isNoetherian_of_isJacobsonRing p).out 2 0).mp
+    ((PrimeSpectrum.isOpen_singleton_tfae_of_isNoetherian_of_isJacobsonRing p).out 3 1).mp
       (And.intro hc hg)
   have := hU.fromSpec.isOpenEmbedding.isOpenMap _ ho
   rwa [Set.image_singleton, hp] at this
