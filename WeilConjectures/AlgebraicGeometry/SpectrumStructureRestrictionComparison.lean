@@ -30,7 +30,7 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 512 in
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 600000 in
 -- The derived localization and full restriction comparisons require extra heartbeats.
 /-- Isomorphism transport identifies the spectrum structure complex and the full
 restriction functor, including transport from localized sites to open subschemes.

@@ -32,7 +32,7 @@ open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 open scoped TensorProduct
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- Comparing restricted tensor complexes requires additional elaboration heartbeats.
 /-- Nonpositive termwise flat resolutions have affine quotient-tensor coordinates.
 This lemma does not construct algebraic augmented comparison maps, and does not

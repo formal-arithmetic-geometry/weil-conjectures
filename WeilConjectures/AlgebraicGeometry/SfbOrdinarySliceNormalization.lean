@@ -46,7 +46,7 @@ private noncomputable def changeIsoRestriction
   let E := scalarEquivalence (asIso c)
   exact (SheafOfModules.tensorAdjunction c).leftAdjointUniq E.symm.toAdjunction
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- The final transport compares module structures on the two site presentations.
 /-- Ordinary slice restriction commutes with transport to the AsSmall site and
 with an invertible change of coefficient rings.
