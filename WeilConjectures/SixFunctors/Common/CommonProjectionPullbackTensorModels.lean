@@ -14,7 +14,7 @@ import all Mathlib.Logic.Small.Defs
 /-! # The finite-model calculation for the common-stage tensor/pullback square -/
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types true
 set_option synthInstance.maxSize 4096
 set_option cleanup.letToHave false
@@ -126,7 +126,6 @@ private theorem stage_mapIso_trans
   change F.functor.map (a.hom ≫ (S.ι i).map b.hom) =
     F.functor.map a.hom ≫ (T.ι i).map ((F.Φ i).map b.hom)
   rw [Functor.map_comp, F.functor_map_ι]
-  rfl
 
 private theorem inclusionTensorModel_pullback_square
     (l : ℕ) [Fact l.Prime]
