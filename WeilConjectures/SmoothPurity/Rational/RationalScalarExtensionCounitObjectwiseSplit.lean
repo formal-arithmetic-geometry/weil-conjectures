@@ -158,7 +158,7 @@ private theorem integral_restriction_retract
   letI : PreservesFiniteLimits
       (finitePowerFunctor (A := integralTowerModules l E W) d) :=
     ⟨fun _ _ _ ↦ inferInstance⟩
-  let δ := (CategoryTheory.Functor.mapDerivedCategoryCompIso S R).symm ≪≫
+  let δ := CategoryTheory.Functor.mapDerivedCategoryCompIso S R ≪≫
     CategoryTheory.Functor.mapDerivedCategoryNatIso α
   let P := DerivedCategory.Q.objPreimage K.obj
   let eP : DerivedCategory.Q.obj P ≅ K.obj := DerivedCategory.Q.objObjPreimageIso K.obj
