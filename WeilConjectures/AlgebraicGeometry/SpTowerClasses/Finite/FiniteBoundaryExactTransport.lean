@@ -69,10 +69,9 @@ theorem mapSingleArrow_composite (F : C ⥤ D) (G : D ⥤ H) [F.Additive] [G.Add
         (G.mapDerivedCategorySingleFunctor 0).hom.app (F.obj X))).mp
     simp only [Category.assoc, ← G.mapDerivedCategory.map_comp_assoc,
       Iso.inv_hom_id_app]
+    dsimp only [e, Iso.symm_hom]
     rw [Functor.single_comp F G X]
-    simp only [Iso.inv_hom_id_app]
-    erw [G.mapDerivedCategory.map_id, Category.id_comp, Iso.inv_hom_id_app]
-    rfl
+    simp only [Functor.map_id, Category.id_comp, Iso.inv_hom_id_app]
   simp only [mapSingleArrow, Functor.map_comp, Category.assoc]
   rw [G.mapDerivedCategory.commShiftIso_hom_naturality_assoc]
   rw [reassoc_of% hx]
@@ -81,6 +80,7 @@ theorem mapSingleArrow_composite (F : C ⥤ D) (G : D ⥤ H) [F.Additive] [G.Add
     Functor.commShiftIso_comp_hom_app, Functor.comp_map, Category.assoc] at hn
   rw [← reassoc_of% hn]
   simp only [← (shiftFunctor (DerivedCategory H) n).map_comp]
+  dsimp only [e, Iso.symm_hom]
   rw [Functor.single_comp F G Y]
 
 /-- Exact transport preserves precomposition by an ordinary map.
