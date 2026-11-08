@@ -29,13 +29,13 @@ private theorem restrictionCompositor_factors
     [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     [PreservesFiniteLimits H] [PreservesFiniteColimits H]
     (e : F ⋙ G ≅ H) (J : CochainComplex A ℤ) :
-    ((Functor.mapDerivedCategoryCompIso F G).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso F G ≪≫
         Functor.mapDerivedCategoryNatIso e).inv.app (DerivedCategory.Q.obj J) ≫
       G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app J) ≫
       G.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj J) =
     H.mapDerivedCategoryFactors.hom.app J ≫
       DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex e.inv (.up ℤ)).app J) := by
-  simp only [Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app, Category.assoc]
+  simp only [Iso.trans_inv, NatTrans.comp_app, Category.assoc]
   rw [Functor.mapDerivedCategoryCompIso_hom_app_factors]
   exact Functor.mapDerivedCategoryNatIso_fac e.symm J
 
@@ -103,14 +103,14 @@ private theorem normalizedTriangle
       bm.hom.app M ≫ Gm.map (eX.inv.app M) ≫ b.hom.app (Hn.obj M))
     (N : DerivedCategory C) :
     a.hom.app (Hn.mapDerivedCategory.obj N) ≫ S.mapDerivedCategory.map (dn.hom.app N) ≫
-        ((Functor.mapDerivedCategoryCompIso Kn S).symm ≪≫
+        (Functor.mapDerivedCategoryCompIso Kn S ≪≫
           Functor.mapDerivedCategoryNatIso eY).hom.app (G.rightDerivedFunctor.obj N) =
       Gm.rightDerivedFunctor.map
-          (((Functor.mapDerivedCategoryCompIso Hn R).symm ≪≫
+          ((Functor.mapDerivedCategoryCompIso Hn R ≪≫
             Functor.mapDerivedCategoryNatIso eX).hom.app N) ≫ dm.hom.app N := by
-  let cX := (Functor.mapDerivedCategoryCompIso Hn R).symm ≪≫
+  let cX := Functor.mapDerivedCategoryCompIso Hn R ≪≫
     Functor.mapDerivedCategoryNatIso eX
-  let cY := (Functor.mapDerivedCategoryCompIso Kn S).symm ≪≫
+  let cY := Functor.mapDerivedCategoryCompIso Kn S ≪≫
     Functor.mapDerivedCategoryNatIso eY
   have h := derived_transition G Gm Gn Hm Hn Km Kn R S a b dm.symm dn.symm
     bm bn.symm hc hm hn eX.inv eY.inv cX.inv cY.inv
@@ -262,10 +262,10 @@ private theorem sheafDerivedTriangle
       HEq ((b1.hom.app M).val.app U x) x)
     (N : DerivedCategory C0) :
     a.hom.app (RX.mapDerivedCategory.obj N) ≫ QY.mapDerivedCategory.map (dn.hom.app N) ≫
-        ((Functor.mapDerivedCategoryCompIso RY QY).symm ≪≫
+        (Functor.mapDerivedCategoryCompIso RY QY ≪≫
           Functor.mapDerivedCategoryNatIso (eqToIso hY)).hom.app (Fn.rightDerivedFunctor.obj N) =
       G.rightDerivedFunctor.map
-          (((Functor.mapDerivedCategoryCompIso RX QX).symm ≪≫
+          ((Functor.mapDerivedCategoryCompIso RX QX ≪≫
             Functor.mapDerivedCategoryNatIso (eqToIso hX)).hom.app N) ≫ dm.hom.app N := by
   exact normalizedTriangle Fn G Fm PX RX PY RY QX QY a b1.symm dm dn b0 a0
     hc hm hn (eqToIso hX) (eqToIso hY)
