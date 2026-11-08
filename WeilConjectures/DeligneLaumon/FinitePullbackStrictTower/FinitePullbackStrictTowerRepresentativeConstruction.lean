@@ -102,7 +102,6 @@ attribute [local implicit_reducible] H tensorReduction augmentation G diagramPul
   CompletedTowerIndependent.towerPull koszulTowerComplexMap
   PrincipalKoszulStrictReplacement.tensorWith
   PrincipalKoszulStrictReplacement.sourceTowerMap PrincipalKoszulStrictReplacement.targetTowerMap
-  CategoryTheory.Functor.mapHomologicalComplex
 attribute [local irreducible] CategoryTheory.Functor.map₂HomologicalComplex
   SheafOfModules.KFlatTotalTensorModel.tensor
 attribute [local irreducible] CompletedTowerIndependent.reductionPair

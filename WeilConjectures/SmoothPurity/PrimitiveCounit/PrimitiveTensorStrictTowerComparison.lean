@@ -39,7 +39,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 attribute [local implicit_reducible] CategoryTheory.uniformProd
   integralCoefficientSheaf integralCoefficientCommRingSheaf
   CategoryTheory.sheafCompose CommRingCat.hasForgetToRingCat
-  Functor.mapHomologicalComplex
 
 attribute [local irreducible] coefficientTotalTensor coefficientTensorGenerator
   coefficientEvaluationTensorIso coefficientSequenceRestriction scalarReductionExtension

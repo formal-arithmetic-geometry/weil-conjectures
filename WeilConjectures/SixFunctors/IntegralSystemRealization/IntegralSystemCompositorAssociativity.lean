@@ -137,7 +137,7 @@ private theorem ordinaryPull_assoc {X Y Z T : Scheme.{u}}
     eqToIso.inv, eqToIso.hom] using hi.symm
 
 attribute [local irreducible] Functor.mapDerivedCategory
-  Functor.mapDerivedCategoryCompIso Functor.mapDerivedCategoryNatIso
+  Functor.mapDerivedCategoryNatIso
   Functor.mapDerivedCategoryFactors
 
 private theorem derived_comp_eq

@@ -150,7 +150,7 @@ private theorem modTranspose
   rfl
 
 attribute [local implicit_reducible] HomotopyCategory
-  CategoryTheory.Functor.mapHomotopyCategory CategoryTheory.Functor.mapHomologicalComplex in
+  CategoryTheory.Functor.mapHomotopyCategory in
 private theorem restrictionHomotopyFactors
     (w : φ ≫ ψ = χ) (K : HomotopyCategory (Mod C T) (.up ℤ)) :
     (comap φ).mapDerivedCategoryFactorsh.inv.app
@@ -212,7 +212,7 @@ private theorem ordinaryComp_unit (w : φ ≫ ψ = χ) (M : Mod C R) :
   erw [reassoc_of% h₁']
   simpa only [Adjunction.homEquiv_unit, Category.assoc] using h₂
 attribute [local implicit_reducible] HomotopyCategory
-  CategoryTheory.Functor.mapHomotopyCategory CategoryTheory.Functor.mapHomologicalComplex in
+  CategoryTheory.Functor.mapHomotopyCategory in
 private theorem homotopyComp_unit (w : φ ≫ ψ = χ)
     (P : HomotopyCategory (Mod C R) (.up ℤ)) :
     (((extendRestrictAdjunction φ).mapHomotopyCategory (.up ℤ)).comp
@@ -259,7 +259,7 @@ private theorem homotopyComp_unit (w : φ ≫ ψ = χ)
       congrArg (fun f ↦ f.hom) hh
 
 attribute [local implicit_reducible] HomotopyCategory
-  CategoryTheory.Functor.mapHomotopyCategory CategoryTheory.Functor.mapHomologicalComplex in
+  CategoryTheory.Functor.mapHomotopyCategory in
 private theorem exactModComp_eq
     [PreservesFiniteLimits (extendScalars φ)]
     [PreservesFiniteLimits (extendScalars ψ)]
