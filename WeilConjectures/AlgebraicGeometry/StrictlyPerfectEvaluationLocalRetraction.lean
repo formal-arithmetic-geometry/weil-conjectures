@@ -31,7 +31,7 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 2048 in
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 600000 in
 -- The localized module carriers and tensor-Hom expression need extra elaboration steps.
 /-- A local retraction of canonical derived evaluation.
 Only one inverse identity is asserted. No representative of N and no

@@ -253,18 +253,4 @@ noncomputable def finitePresentationCompactification : Compactification f :=
 
 end FinalAssembly
 
-/-! ### Axiom census
-
-The existence of a compactification with structure morphism of finite presentation is
-unconditional: the check below is run by the build, so a `sorry` reappearing anywhere beneath
-Nagata's theorem or absolute Noetherian approximation breaks compilation rather than going
-unnoticed. -/
-
-/--
-info: 'AlgebraicGeometry.exists_compactification_locallyOfFinitePresentation' depends on
-  axioms: [propext, Classical.choice, Quot.sound]
--/
-#guard_msgs (whitespace := lax) in
-#print axioms AlgebraicGeometry.exists_compactification_locallyOfFinitePresentation
-
 end AlgebraicGeometry

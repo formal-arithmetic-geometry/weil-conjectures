@@ -93,7 +93,6 @@ private theorem powerQuotientIso_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
   rw [← Category.assoc, powerQuotientIso_π, ← T.map_comp, quotientMap_π, T.map_comp]
   rw [← Category.assoc, quotientMap_π, Category.assoc, powerQuotientIso_π]
 
-set_option maxHeartbeats 1000000 in
 -- Naturality unfolds the quotient-system functors and cokernel comparisons.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -166,7 +165,7 @@ private noncomputable def affineSectionsIso (X : Scheme.{u}) [IsAffine X] :
     ext x
     rfl
 
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 400000 in
 -- Transport composes the affine, formal-system and finite-module equivalences.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

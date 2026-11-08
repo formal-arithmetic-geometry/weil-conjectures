@@ -92,7 +92,6 @@ private theorem identity_model_zero_iff {W S Z : Scheme.{u}} (b : W ⟶ S)
   have hq : h.isoPullback.hom ≫ pullback.fst b t = q := h.isoPullback_hom_fst
   rw [← hq, native_iso_comp_zero_iff]
 
-set_option maxHeartbeats 800000 in
 -- The iterated chart pullbacks and tensor model comparisons need additional elaboration fuel.
 set_option backward.isDefEq.respectTransparency false in
 /-- A map on a base-changed affine chart, with finite type source and finitely

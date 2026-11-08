@@ -68,7 +68,6 @@ variable {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
   [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] {R : Sheaf J CommRingCat.{u}}
   [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasWeakSheafify J AddCommGrpCat.{u}]
 attribute [local instance] monoidalCategory symmetricCategory monoidalClosed
-set_option maxHeartbeats 1000000 in
 -- Rewriting the localized monoidal structure requires unfolding its comparison functors.
 set_option backward.isDefEq.respectTransparency false in
 /-- Uncurrying a sheafified map is sheafification of its presheaf uncurry. -/
@@ -113,7 +112,7 @@ private theorem dualTensorHom_transport (A N : SheafOfModules.{u} 𝓡)
   erw [← Functor.LaxMonoidal.μ_natural_right_assoc (𝓢) A.val ((adj).unit.app P), hη]
   rw [tensorHom_def_assoc]
   rfl
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 400000 in
 -- Rewriting the localized monoidal structure requires unfolding its comparison functors.
 set_option backward.isDefEq.respectTransparency false in
 /-- The two comparisons agree for sheaves of modules on any site. -/

@@ -37,7 +37,6 @@ set_option synthInstance.maxSize 2048
 
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 800000 in
 -- Transport between the scheme-module and sheaf-module category instances is expensive.
 /-- Complete the open-restriction unit to a distinguished triangle with quasi-coherent
 vertices. Its third vertex has cohomology supported on the closed complement and is

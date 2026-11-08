@@ -29,7 +29,6 @@ namespace AlgebraicGeometry
 
 attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
 
-set_option maxHeartbeats 800000 in
 -- Elaborating total tensor associators uses the sheaf tensor and coproduct instances.
 /-- Ordinary evaluation is tensoring the chain evaluation into the single unit.
 Source: Stacks Project, cohomology.tex, Tags 08DJ, 08DM and 08DQ;

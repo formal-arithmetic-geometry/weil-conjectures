@@ -71,7 +71,6 @@ private theorem precomp_bijective_of_equivs {C : Type*} [Category C]
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
 -- The total tensor and restriction instances require extra elaboration heartbeats.
 set_option synthInstance.maxSize 512 in
 /-- Tensor-Hom transposition converts a supplied section representative into a map

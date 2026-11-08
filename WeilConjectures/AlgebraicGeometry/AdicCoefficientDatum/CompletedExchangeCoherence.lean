@@ -47,7 +47,6 @@ variable {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 
 attribute [local irreducible] AdicCoefficientDatum.pullComp AdicCoefficientDatum.pushComp
 
-set_option maxHeartbeats 20000 in
 -- Comparing derived functor presentations requires unfolding their factor isomorphisms.
 private def ordinaryToCompletedFormula {U V : Scheme.{t}} (u : U ⟶ V) :
     d.pull u ⟶ d.completedPull u :=

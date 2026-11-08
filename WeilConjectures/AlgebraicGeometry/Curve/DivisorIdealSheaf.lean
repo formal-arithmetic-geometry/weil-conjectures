@@ -480,7 +480,7 @@ divisor is an effective Cartier divisor.
 lemma isInvertible_idealSheaf (E : closedPoints C →₀ ℕ) : (idealSheaf E).IsInvertible := by
   induction E using Finsupp.induction_linear with
   | zero => exact idealSheaf_zero (X := C) ▸ IdealSheafData.isInvertible_top
-  | add E E' hE hE' => exact idealSheaf_add E E' ▸ hE.mul_effectiveCartier hE'
+  | add E E' hE hE' => exact idealSheaf_add E E' ▸ hE.mul hE'
   | single P n =>
     exact idealSheaf_single P n ▸
       (isInvertible_vanishingIdeal_of_smoothOfRelativeDimension_one f P.2).pow n
@@ -502,7 +502,7 @@ lemma isInvertible_prod_vanishingIdeal_pow (s : Finset (closedPoints C))
   | insert P s hP ih =>
     rw [Finset.prod_insert hP]
     exact ((isInvertible_vanishingIdeal_of_smoothOfRelativeDimension_one f P.2).pow _)
-      |>.mul_effectiveCartier ih
+      |>.mul ih
 
 variable [IsIntegral C] [IsLocallyNoetherian C]
 
@@ -632,7 +632,7 @@ generator `a` of `I`. -/
 theorem IdealSheafData.IsInvertible.zeroLocus_toModulesOfLE_mul {I J : X.IdealSheafData}
     (hI : I.IsInvertible) (hJ : J.IsInvertible) :
     Modules.Hom.zeroLocus (IdealSheafData.toModulesOfLE (I.mul_le_left' J)) = J := by
-  have hIJ := hI.mul_effectiveCartier hJ
+  have hIJ := hI.mul hJ
   have := hI.isInvertible_toModules
   have := hIJ.isInvertible_toModules
   have := Modules.IsInvertible.sheafOfModules_isInvertible I.toModules
@@ -660,7 +660,7 @@ theorem IdealSheafData.IsInvertible.nonempty_toModules_iso_dual_tensorObj_mul
     {I J : X.IdealSheafData} (hI : I.IsInvertible) (hJ : J.IsInvertible) :
     Nonempty (I.toModules ≅ J.toModulesᵛ ⊗ (I * J).toModules) := by
   have := hI.isInvertible_toModules
-  have := (hI.mul_effectiveCartier hJ).isInvertible_toModules
+  have := (hI.mul hJ).isInvertible_toModules
   have := Modules.IsInvertible.sheafOfModules_isInvertible I.toModules
   have := Modules.IsInvertible.sheafOfModules_isInvertible (I * J).toModules
   have h := IdealSheafData.IsInvertible.zeroLocus_toModulesOfLE_mul hI hJ

@@ -25,7 +25,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- The sheaf instances and nested derived functors require extra elaboration heartbeats.
 -- The sheaf instances and nested derived functors require extra elaboration heartbeats.
 /-- Hom from the degree-zero structure sheaf is naturally the zeroth derived global sections.

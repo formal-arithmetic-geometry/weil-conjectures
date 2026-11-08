@@ -24,7 +24,8 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ
 
 /-- The (Pull) isomorphisms are compatible with the transport of pullbacks along an equation of
 morphisms of schemes. -/
-lemma purity_pullIso_hom_app_comp_upperStarCongr_hom_app {X Y : Scheme.{u}} {f g : X ⟶ Y} (h : f = g)
+lemma purity_pullIso_hom_app_comp_upperStarCongr_hom_app {X Y : Scheme.{u}} {f g : X ⟶ Y}
+    (h : f = g)
     (M : Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) :
     (pullIso a f).hom.app M ≫
         (upperStarCongr Λ' h).hom.app ((Mod.extendScalars (coefficientMap a Y)).obj M) =

@@ -366,8 +366,6 @@ theorem ordinaryInverseSystem_exists [PreservesFiniteLimits uInv]
     ext U x
     exact sequenceTransition.{c, v, r} J' F σ (G.obj M) h U x
 
-#print axioms ordinaryInverseSystem_exists
-
 end WeilConjectures.SemilinearSections
 
 end

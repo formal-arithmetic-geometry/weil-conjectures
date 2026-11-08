@@ -160,7 +160,7 @@ theorem completedAdicOrdinaryTower_map_succ (N : CompletedAdicModules X d) (n : 
   rw [Functor.ofOpSequence_map_homOfLE_succ]
   rfl
 
-set_option maxHeartbeats 2000000 in
+set_option maxHeartbeats 1000000 in
 -- Instantiating the generic tensor transition unfolds the completed coefficient rings.
 /-- Under the tensor identifications, the ordinary quotient transition is the transition of the
 strict ordinary tensor tower. -/

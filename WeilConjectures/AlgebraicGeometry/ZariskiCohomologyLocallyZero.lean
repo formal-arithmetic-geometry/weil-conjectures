@@ -79,7 +79,7 @@ private lemma sectionEquiv_zero {X : Scheme.{u}} (U : X.Opens)
   have h := sectionEquiv_comp U (0 : (freeAbelianSheaf X).obj U ⟶ F) (0 : F ⟶ F)
   simpa using h
 
-set_option maxHeartbeats 2000000 in
+set_option maxHeartbeats 400000 in
 -- Comparing Ext and section cocycles elaborates several adjunctions and the derived category.
 set_option synthInstance.maxHeartbeats 2000000 in
 /-- Section cocycles of an injective resolution represent object cohomology, naturally

@@ -116,7 +116,8 @@ noncomputable def condensedProperTrace :
   CondensedRing.geometricFiberWeilDirectTrace (Profinite.padicAlgClRingObj l)
     (CondensedRing.upperStarWeilCompatible _ f (comp_over f _))
     (((CondensedRing.boundedConstructibleLowerStar l (properTraceBaseMap (k₀ := k₀) f)).map γ ≫
-      (CondensedRing.lowerStarUpperShriekAdjunction l (properTraceBaseMap (k₀ := k₀) f)).counit.app N).hom) ≫
+      (CondensedRing.lowerStarUpperShriekAdjunction l
+        (properTraceBaseMap (k₀ := k₀) f)).counit.app N).hom) ≫
   eU.inv
 
 /-- Lift the descended proper trace to native Weil complexes. -/

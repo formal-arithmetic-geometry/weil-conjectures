@@ -32,7 +32,7 @@ variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 variable [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)]
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- Affine functor identifications need to unfold the scheme module carrier.
 /-- Localization of the normalized underived model comparison computes the derived mate.
 Source: Stacks Project, perfect.tex, Tags 06Z0, 08DV, 08DW and 0AA7.

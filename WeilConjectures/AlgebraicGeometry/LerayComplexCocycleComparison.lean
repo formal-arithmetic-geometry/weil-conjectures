@@ -20,7 +20,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 600000 in
 -- Elaborating the mapped kernel and cokernel lifts unfolds several composed functors.
 set_option backward.isDefEq.respectTransparency false in
 /-- The comparison from cohomology of global sections to global sections of the

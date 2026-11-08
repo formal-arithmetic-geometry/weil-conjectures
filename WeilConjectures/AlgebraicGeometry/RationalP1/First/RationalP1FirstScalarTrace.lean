@@ -81,7 +81,7 @@ open scoped AlgebraicGeometry.ProEtale.CondensedRing.CachedModInstances Category
 namespace AlgebraicGeometry.ProEtale.RationalP1
 open DiagonalCoefficients CondensedRing
 
-local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+attribute [local instance] _root_.instEssentiallySmallProfinite_weilConjectures
 attribute [local implicit_reducible] ProEtale.sheafMonoidalCategory
   ProEtale.sheafBraidedCategory ProEtale.sheafSymmetricCategory
   GrothendieckTopology.monoidalCategory_sheaf_of_essentiallySmall

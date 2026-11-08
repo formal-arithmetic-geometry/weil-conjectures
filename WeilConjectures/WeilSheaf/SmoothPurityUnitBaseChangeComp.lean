@@ -254,7 +254,8 @@ def pasteLowerShriekBaseChange :
 set_option linter.style.longLine false in
 /-- The pasted base change isomorphism is compatible with the composition isomorphisms. -/
 lemma exchangeCompCompatible_pasteLowerShriekBaseChange :
-    Adjunction.ExchangeCompCompatible bcf.hom bcg.hom (pasteLowerShriekBaseChange l f g f' g' bcf bcg).hom
+    Adjunction.ExchangeCompCompatible bcf.hom bcg.hom
+      (pasteLowerShriekBaseChange l f g f' g' bcf bcg).hom
       (boundedConstructibleLowerShriekComp_padicAlgCl l f g)
       (boundedConstructibleLowerShriekComp_padicAlgCl l f' g') := ⟨fun M ↦ by
   simp [pasteLowerShriekBaseChange]⟩

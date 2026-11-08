@@ -46,7 +46,7 @@ finite separable extension of the base field.
 - `AlgebraicGeometry.locallyOfFiniteType_quasiCompact_smooth_isProper_connectedSpace_of_isPullback`:
   finite type, smoothness, properness and connectedness descend along a field extension (blueprint
   `thm-pd-fpqc-local-properties`).
-- `AlgebraicGeometry.isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback`:
+- `AlgebraicGeometry.isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback_aux`:
   properness, smoothness of relative dimension `n` and geometric integrality descend along a field
   extension (blueprint `thm-pd-fpqc-local-properties`).
 -/
@@ -210,29 +210,6 @@ theorem exists_commGrpObj_of_isPullback [Flat p] [Surjective p] [QuasiCompact p]
 end CategoryTheory.Over.DescentDatum
 
 namespace AlgebraicGeometry
-
-/-- **Properties of morphisms are local in the fpqc topology on the target.** Let `k ⊆ K` be a
-field extension and let `Z` be a scheme over `k` whose base change `Z_K` is proper, smooth of
-relative dimension `n` and geometrically integral over `K`. Then so is `Z` over `k`.
-
-For properness and smoothness this is Stacks 02YJ, 02VL, 02KL and 05B5, the morphism
-`Spec K ⟶ Spec k` being faithfully flat and quasi-compact; the relative dimension is read off on
-fibres. Geometric integrality descends because for every field `Ω` over `k` there is a field `L`
-containing both `Ω` and `K`, and `Z_L ⟶ Z_Ω` is faithfully flat: reducedness descends along it
-and irreducibility passes to the image.
-
-The blueprint states this for finite extensions and lists finite type, smoothness, properness and
-connectedness; the form here holds for any field extension and carries the properties used to
-recognise an abelian variety of dimension `g`.
-
-(blueprint: `thm-pd-fpqc-local-properties`) -/
-theorem isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback {k K : Type u}
-    [Field k] [Field K] [Algebra k K] {Z Z' : Scheme.{u}} (z : Z ⟶ Spec (.of k))
-    (z' : Z' ⟶ Spec (.of K)) (q : Z' ⟶ Z)
-    (h : IsPullback q z' z (Spec.map (CommRingCat.ofHom (algebraMap k K)))) (n : ℕ)
-    [IsProper z'] [SmoothOfRelativeDimension n z'] [GeometricallyIntegral z'] :
-    IsProper z ∧ SmoothOfRelativeDimension n z ∧ GeometricallyIntegral z :=
-  isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback_aux z z' q h n
 
 /-- **Properties of morphisms are local in the fpqc topology on the target.** Let `k ⊆ K` be a
 field extension and let `Z` be a scheme over `k` whose base change `Z_K` is smooth (in particular

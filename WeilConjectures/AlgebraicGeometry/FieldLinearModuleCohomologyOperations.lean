@@ -21,7 +21,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.Topology.Sheaves.Functors
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Mathlib.CategoryTheory.Sites.Adjunction
-import WeilConjectures.AlgebraicGeometry.ModuleResolutionHomologyExt
+public import WeilConjectures.AlgebraicGeometry.ModuleResolutionHomologyExt
 import WeilConjectures.AlgebraicGeometry.FieldScalarRestrictionInjectives
 import Mathlib.Algebra.FiveLemma
 import Mathlib.Algebra.Homology.ConcreteCategory
@@ -377,8 +377,7 @@ finite colimits. Reflection therefore proves the assertion. -/
   have : PreservesFiniteColimits (scalarFunctor f ⋙ Q) :=
     inferInstanceAs (PreservesFiniteColimits (SheafOfModules.toSheaf X.ringCatSheaf))
   exact preservesFiniteColimits_of_reflects_of_preserves (scalarFunctor f) Q
-local instance : EnoughInjectives (SheafOfModules.{u} X.ringCatSheaf) :=
-  (RingedSpace.moduleSheaves_abelian_enoughInjectives X.toRingedSpace).2
+attribute [local instance] moduleResolution_enoughInjectives
 local instance : HasExt.{u} (SheafOfModules.{u} X.ringCatSheaf) :=
   hasExt_of_enoughInjectives.{u, u, u + 1} (SheafOfModules.{u} X.ringCatSheaf)
 local instance : HasExt.{u + 1} (KSheaf X k) := HasExt.standard (KSheaf X k)
@@ -405,7 +404,6 @@ Source: Stacks Project, Cohomology, Tag 01DZ; Varieties, Tag 0BED
 def scalarCohomology (F : (SheafOfModules.{u} X.ringCatSheaf)) (n : ℕ) : ModuleCat.{u} k :=
   ModuleCat.of k (scalarCohomologyCarrier f F n)
 
-set_option maxHeartbeats 800000 in
 -- Comparing resolution homology with derived functors requires universe-level conversion.
 /-- exists module Ext Equiv.
 Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
@@ -897,7 +895,6 @@ formula and filtered-colimit exactness for vector spaces, and from its left adju
   infer_instance
 
 local instance : MonoidalCategory (KSheaf Y k) := Sheaf.monoidalCategory _ _
-local instance : HasExt.{u + 1} (KSheaf Y k) := HasExt.standard (KSheaf Y k)
 
 /-- scalar Inverse Unit Iso.
 Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED

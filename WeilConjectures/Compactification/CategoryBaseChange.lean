@@ -286,20 +286,4 @@ theorem isCofiltered_of_field {K : Type u} [Field K] {X Y : Scheme.{u}}
   have : QuasiCompact f := .of_comp f pY
   infer_instance
 
-/-! ### Axiom census -/
-
-/--
-info: 'AlgebraicGeometry.Compactification.isIso_infBaseChange_hom' depends on
-  axioms: [propext, Classical.choice, Quot.sound]
--/
-#guard_msgs (whitespace := lax) in
-#print axioms AlgebraicGeometry.Compactification.isIso_infBaseChange_hom
-
-/--
-info: 'AlgebraicGeometry.Compactification.isCofiltered_of_field' depends on
-  axioms: [propext, Classical.choice, Quot.sound]
--/
-#guard_msgs (whitespace := lax) in
-#print axioms AlgebraicGeometry.Compactification.isCofiltered_of_field
-
 end AlgebraicGeometry.Compactification

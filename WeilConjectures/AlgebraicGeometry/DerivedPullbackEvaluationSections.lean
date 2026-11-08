@@ -207,7 +207,6 @@ private theorem evaluationSectionsFromUnits
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 set_option synthInstance.maxSize 2048 in
-set_option maxHeartbeats 800000 in
 -- The derived tensor instances are repeated in the equivalences and comparisons.
 /-- The pointwise transpose of pulled-back evaluation respects the canonical
 identification of zeroth hypercohomology with derived morphisms.

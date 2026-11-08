@@ -21,7 +21,6 @@ open AlgebraicGeometry AlgebraicGeometry.Scheme
 open scoped CategoryTheory.Functor CategoryTheory.Obj
 namespace AlgebraicGeometry.Etale
 
-set_option maxHeartbeats 2000000 in
 -- Keep the large canonical comparison behind a shared, fully constructed arrow.
 /-- Source: latest blueprint, sec-smooth-purity/sk-lem-sp-reduction/
 sk-lem-sp-reduction-exceptional.proof.md, Charts, ordered Tate factors.

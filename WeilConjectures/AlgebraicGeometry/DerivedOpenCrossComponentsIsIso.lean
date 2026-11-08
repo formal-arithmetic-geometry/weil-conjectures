@@ -32,7 +32,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 2048 in
 set_option synthInstance.maxHeartbeats 400000 in
 -- Threefold transported overlap restrictions require additional instance search.
-set_option maxHeartbeats 1600000 in
 -- Transported threefold restrictions require the same instance budget as the parent theorem.
 /-- The adjoint overlap counits are invertible on the opposite open. This concerns
 only the individual summands, without choosing a difference diagram or a gluing object.

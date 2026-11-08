@@ -54,7 +54,6 @@ private lemma comparison_sections_comp {X Y : Scheme.{uBC}} (j : Y ⟶ X)
   simp only [restrict_map, ← Functor.map_comp_assoc, ← Functor.map_comp]
   congr 1
 
-set_option maxHeartbeats 800000 in
 -- Expanding the scheme restriction comparisons requires extra elaboration fuel.
 private lemma raw_lift_sections {X Y : Scheme.{uBC}} (p : Y ⟶ X)
     {M : X.Modules} {N : Y.Modules} (φ : M ⟶ (pushforward p).obj N) (U : X.Opens)
@@ -117,7 +116,7 @@ private lemma raw_lift_sections {X Y : Scheme.{uBC}} (p : Y ⟶ X)
     _ = _ := congrArg (fun z ↦ Hom.app v ⊤ ≫ z)
       (app_naturality φ (eqToHom U.ι_image_top.symm))
 
-set_option maxHeartbeats 600000 in
+set_option maxHeartbeats 400000 in
 -- The nested complex functors and their restriction adjunction need extra elaboration fuel.
 /-- Evaluate a restriction-adjunction lift on sections, with arbitrary resolutions
 and their prescribed restriction comparisons. This calculation involves one scheme

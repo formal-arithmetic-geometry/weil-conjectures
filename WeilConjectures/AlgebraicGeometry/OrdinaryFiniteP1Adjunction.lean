@@ -47,13 +47,13 @@ private theorem exists_chernFamily (N : ℕ) (A : Type (u + 1)) [CommRing A]
       ∃ c : ordinaryFiniteUnit A (ProjectiveLine S) ⟶
           (ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧,
         ordinaryFiniteP1ChernSpec A N hA S
-          (ordinaryFiniteP1_isUnit N S hS) c := by
+          (affineTraceProjectiveInvertible N S hS) c := by
     have : IsLocallyNoetherian (ProjectiveLine S) :=
       LocallyOfFiniteType.isLocallyNoetherian (ProjectiveLine S ↘ S)
     have : CompactSpace (ProjectiveLine S) :=
       QuasiCompact.compactSpace_of_compactSpace (ProjectiveLine S ↘ S)
     exact (existsUnique_ordinaryFiniteP1Chern A N hA S
-      (ordinaryFiniteP1_isUnit N S hS)).exists
+      (affineTraceProjectiveInvertible N S hS)).exists
   choose c hc using h
   exact ⟨c, hc⟩
 
@@ -215,7 +215,7 @@ theorem exists_ordinaryFiniteP1Adjunction (N : ℕ) (hN : 0 < N)
     adjunctionOfComponentTriangles_counit _ _ _ _ _ _
   let d (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) :
       OrdinaryFiniteP1Datum A N hA t S hS := {
-    invertible_on_projectiveLine := ordinaryFiniteP1_isUnit N S hS
+    invertible_on_projectiveLine := affineTraceProjectiveInvertible N S hS
     chern := c S hS
     chern_spec := hc S hS
     decomposition := b S hS
@@ -237,7 +237,7 @@ theorem exists_ordinaryFiniteP1Adjunction (N : ℕ) (hN : 0 < N)
           (ordinaryFinitePushforward A (ProjectiveLine S' ↘ S')).map
             (ordinaryFiniteShiftedLinePullback A N hA t
               (ProjectiveSpace.map (ULift.{u} (Fin 2)) f)
-              (ordinaryFiniteP1_isUnit N S hS)).hom =
+              (affineTraceProjectiveInvertible N S hS)).hom =
         ordinaryFiniteP1DecompositionSourceMap A N hA t f hS ≫ (b S' hS').hom := by
     simpa only [hb] using hbc f hS hS'
   refine ⟨hdecomp, ?_, ?_⟩
@@ -251,7 +251,7 @@ theorem exists_ordinaryFiniteP1Adjunction (N : ℕ) (hN : 0 < N)
       (ordinaryFinitePushforward A (ProjectiveLine S' ↘ S')).map
         (ordinaryFiniteShiftedLinePullback A N hA t
           (ProjectiveSpace.map (ULift.{u} (Fin 2)) f)
-          (ordinaryFiniteP1_isUnit N S hS)).hom)
+          (affineTraceProjectiveInvertible N S hS)).hom)
     hdecomp
   simpa only [OrdinaryFiniteP1Datum.trace, Category.assoc] using htrace
 

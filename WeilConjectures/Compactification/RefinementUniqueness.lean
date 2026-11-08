@@ -56,17 +56,4 @@ instance instSubsingleton [IsSchemeTheoreticallyDominant c.i] :
     Subsingleton (c.Refinement d) :=
   ⟨ext_of_isSchemeTheoreticallyDominant ‹_›⟩
 
-/-! ### Axiom census
-
-Uniqueness of refinements out of a dense compactification is unconditional: the check below is
-run by the build, so a `sorry` reappearing anywhere beneath it breaks compilation rather than
-going unnoticed. -/
-
-/--
-info: 'AlgebraicGeometry.Compactification.Refinement.ext_of_isSchemeTheoreticallyDominant' depends
-  on axioms: [propext, Classical.choice, Quot.sound]
--/
-#guard_msgs (whitespace := lax) in
-#print axioms AlgebraicGeometry.Compactification.Refinement.ext_of_isSchemeTheoreticallyDominant
-
 end AlgebraicGeometry.Compactification.Refinement

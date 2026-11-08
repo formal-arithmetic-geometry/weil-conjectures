@@ -64,7 +64,6 @@ def openPinnedSingleDegreeZeroSourceIso
       (schemeDerivedDirectImage (f ∣_ V) ⋙ derivedPullback gA) ≪≫
     Functor.associator _ _ _
 
-set_option maxHeartbeats 800000 in
 -- Identifying the reassociated functor categories needs additional elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Component formula for the constructed source isomorphism.

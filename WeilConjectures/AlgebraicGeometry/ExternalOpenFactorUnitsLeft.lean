@@ -98,7 +98,6 @@ private theorem sectionUnitLinear_bijective {A B : Scheme.{w}}
   exact (ConcreteCategory.bijective_of_isIso
     ((L.obj M).presheaf.map (homOfLE hTop).op)).comp hbij
 
-set_option maxHeartbeats 800000 in
 -- The two mate computations and their sectionwise transports elaborate large module functors.
 /-- The factor comparisons carry the two unit sections to the local unit sections.
 This statement contains no tensor product of coefficients or sections.

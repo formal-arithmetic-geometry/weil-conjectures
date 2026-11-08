@@ -124,7 +124,6 @@ attribute [local irreducible] ShortComplex.mapHomologyIso ShortComplex.mapCycles
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-set_option maxHeartbeats 150000 in
 -- Avoid unfolding the concrete sheafification and homology data during this comparison.
 private theorem theta_zero {Y : Scheme.{u}}
     (K : CochainComplex (SheafOfModules.{u} Y.ringCatSheaf) ℕ)
@@ -240,7 +239,7 @@ private theorem augmentation_comp_resolution
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 2048 in
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 500000 in
 -- The resolution and evaluation comparisons use multiple concrete functor composites.
 /-- The class of an augmented restricted section is the direct-image augmentation
 of the same section on the original open.

@@ -49,7 +49,6 @@ private theorem mate_transpose
   simp only [Adjunction.homEquiv_unit, Functor.map_comp, Category.assoc]
   rw [hn]
 
-set_option maxHeartbeats 600000 in
 -- Elaborating the dependent coefficient categories and both endpoint adjunctions.
 /-- The scalar/direct-image mate carries the canonical coefficient-unit arrow to itself.
 Source: diagonal tower coefficient changes (1), scalar adjunction of coefficient one.

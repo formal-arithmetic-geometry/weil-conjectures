@@ -1,7 +1,7 @@
 name = "weil-conjectures"
 version = "0.1.0"
 keywords = ["math"]
-defaultTargets = ["WeilConjectures", "Challenge", "Solution"]
+defaultTargets = ["WeilConjectures", "Challenge", "Solution", "LeanEvalChallenge", "LeanEvalSolution"]
 
 [leanOptions]
 pp.unicode.fun = true # pretty-prints `fun a ↦ b`
@@ -22,13 +22,6 @@ rev = "v4.33.1"
 name = "proetale"
 git = "https://github.com/Thmoas-Guan/slopetale_fork"
 rev = "weil-conjectures-dependency-4.33.1"
-
-# Provides `lake exe checkdecls` for checking externally supplied declaration
-# lists. The blueprint submodule uses its own Lake package and checking tool;
-# see blueprint/README.md.
-[[require]]
-name = "checkdecls"
-git = "https://github.com/PatrickMassot/checkdecls.git"
 
 [[lean_lib]]
 name = "WeilConjectures"
@@ -52,3 +45,15 @@ roots = ["Weil.Challenge"]
 name = "Solution"
 srcDir = "Comparator"
 roots = ["Weil.Solution"]
+
+# Second comparator pair: the verbatim lean-eval statement `weil_conjectures`,
+# see Comparator/config-leaneval.json.
+[[lean_lib]]
+name = "LeanEvalChallenge"
+srcDir = "Comparator"
+roots = ["LeanEvalWeil.Challenge"]
+
+[[lean_lib]]
+name = "LeanEvalSolution"
+srcDir = "Comparator"
+roots = ["LeanEvalWeil.Solution"]

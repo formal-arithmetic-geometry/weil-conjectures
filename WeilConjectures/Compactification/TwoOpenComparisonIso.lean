@@ -576,11 +576,4 @@ theorem exists_prepared_keyDisjoint_isIso_near_twoOpenSide [IsNoetherian S] (u :
   exact ⟨σ₁, σ₂, B, h₁, h₂, TwoOpenSide.Prepared.admissibleBlowup σ₁ B h₁,
     keyDisjoint_of_comparisonBoundary_subset h₂ hB, N, hN, hiso⟩
 
-/--
-info: 'AlgebraicGeometry.exists_prepared_keyDisjoint_isIso_near_twoOpenSide' depends on
-  axioms: [propext, Classical.choice, Quot.sound]
--/
-#guard_msgs (whitespace := lax) in
-#print axioms exists_prepared_keyDisjoint_isIso_near_twoOpenSide
-
 end AlgebraicGeometry

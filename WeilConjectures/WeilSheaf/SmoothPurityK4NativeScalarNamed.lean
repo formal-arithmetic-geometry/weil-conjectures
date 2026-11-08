@@ -28,6 +28,7 @@ variable {k : Type u} [Field k] [Finite k] {ℓ : ℕ} [Fact ℓ.Prime]
   {ζ : ℕ → AlgebraicClosure k} (hζ : ∀ n, IsPrimitiveRoot (ζ n) (ℓ ^ n))
   (hζ' : ∀ n, ζ (n + 1) ^ ℓ = ζ n)
 
+omit [Fact (ringChar k ≠ ℓ)] in
 /-- Identify the whole descent isomorphism with its normalized native component. -/
 lemma scalarSourceIso_eq :
     purityScalarSourceIso ℓ a =
@@ -37,6 +38,7 @@ lemma scalarSourceIso_eq :
   rw [purityScalarSourceIso_eq]
   rfl
 
+omit [Fact (ringChar k ≠ ℓ)] in
 /-- Identify the whole unit descent isomorphism. -/
 lemma scalarSourceUnitIso_eq :
     purityScalarSourceUnitIso ℓ a =

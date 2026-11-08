@@ -7,6 +7,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.FreeParameterEvaluationData
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MonoidalStructure
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralReduction
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperStarFromPointAdditive
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Submodule
 import Mathlib.AlgebraicTopology.AlternatingFaceMapComplex
 import Mathlib.Condensed.Equivalence
@@ -56,6 +58,7 @@ abbrev parameter (P : Profinite.{u}) :=
 end AlgebraicGeometry.ProEtale.ProfiniteFreeSlice
 
 namespace AlgebraicGeometry.ProEtale.FreeParameterEvaluation
+attribute [local instance] AlgebraicGeometry.ProEtale.CondensedRing.upperStarFromPoint_additive
 attribute [local irreducible] Functor.leftDerivedFunctor Functor.rightDerivedFunctor
   Functor.mapDerivedCategory Mod.monoidalCategory Mod.monoidalCategoryStruct
   Mod.monoidalClosed CategoryTheory.Sheaf.monoidalCategory
@@ -100,12 +103,6 @@ Source: Stacks 08J7 (auxiliary; not a blueprint node). -/
 abbrev freeParameter (P : Profinite.{u}) :=
   (Profinite.CondensedAction.InternalBar.free (Mon.mk R.X)).obj (ProfiniteFreeSlice.parameter P)
 
-/-- The point inverse image preserves finite limits. -/
-instance upperStarFromPoint_limits (X : Scheme.{u}) :
-    PreservesFiniteLimits (upperStarFromPoint X) := by
-  unfold upperStarFromPoint pointUpperStar
-  infer_instance
-
 /-- The point inverse image preserves finite colimits. -/
 instance upperStarFromPoint_colimits (X : Scheme.{u}) :
     PreservesFiniteColimits (upperStarFromPoint X) := by
@@ -113,11 +110,6 @@ instance upperStarFromPoint_colimits (X : Scheme.{u}) :
     pointUpperStarLowerStarAdjunction.leftAdjoint_preservesColimits
   unfold upperStarFromPoint
   infer_instance
-
-/-- The point inverse image is additive. -/
-instance upperStarFromPoint_additive (X : Scheme.{u}) :
-    (upperStarFromPoint X).Additive :=
-  Functor.additive_of_preserves_binary_products _
 
 section Scalars
 variable (S : Profinite.CondensedRing.{u}) [IsCommMonObj S.X]

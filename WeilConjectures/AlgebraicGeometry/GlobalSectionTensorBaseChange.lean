@@ -93,7 +93,6 @@ private theorem augmented_tensor_map
   simp only [← Category.assoc, ← tensorHom_def,
     ← tensorHom_comp_tensorHom_assoc]
 
-set_option maxHeartbeats 800000 in
 -- The canonical tensor units and scalar-extension functor require several conversions.
 /-- Global-section scalar extension commutes with the ordered tensor construction.
 This assertion involves only the actual tensor complexes, not an arbitrary complex

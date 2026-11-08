@@ -27,7 +27,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-set_option maxHeartbeats 600000 in
+set_option maxHeartbeats 400000 in
 -- Transporting finite local generators through the iterated slice sites needs more
 -- elaboration heartbeats; this file still compiles within the 60-second limit.
 set_option synthInstance.maxHeartbeats 200000 in

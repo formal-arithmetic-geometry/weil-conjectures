@@ -12,6 +12,7 @@ import WeilConjectures.AlgebraicGeometry.Complete.CompleteStrictReductionComposi
 import all WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerExchangeMateNormalization
 import all WeilConjectures.AlgebraicGeometry.Completed.Open.CompletedOpenEndpointLimitTransport
 import all WeilConjectures.AlgebraicGeometry.StrictTower.ScalarRestrictionOpenSupport
+import WeilConjectures.AlgebraicGeometry.StrictTower.ProperOpenClopenProjector
 import WeilConjectures.AlgebraicGeometry.ProEtale.Open.ProEtaleOpenSlicePresentation
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategorySquareIsoSymm
 
@@ -201,22 +202,6 @@ theorem restrictScalars_openExtension_counit_isIso
       (SheafOfModules.localizedModuleExtension (coefficients B X) W).mapIso
         (eB.counitIso.app N).symm ≪≫ (hB.app (eB.inverse.obj N)).symm
   exact (moduleJAdj B j).isIso_counit_app_of_iso t
-
-/-- Open extension of constant-coefficient modules has invertible unit. -/
-theorem moduleJAdj_unit_isIso {B : Type (u + 1)} [CommRing B] {U X : Scheme.{u}}
-    (j : U ⟶ X) [IsOpenImmersion j] : IsIso (moduleJAdj.{u} B j).unit := by
-  obtain ⟨eB, ⟨hB⟩⟩ := Scheme.proEtaleOpen_slicePresentation j
-    (coefficients B X) (coefficients B U) (constantRingIso B j)
-  let W := Scheme.ProEt.mk j
-  have : IsOpenImmersion W.hom := inferInstanceAs (IsOpenImmersion j)
-  have : IsIso (SheafOfModules.localizedModuleAdjunctionIndependent
-      (coefficients B X) W).unit := localizedOpen_unit_isIso W (coefficients B X)
-  let ff := (SheafOfModules.localizedModuleAdjunctionIndependent
-    (coefficients B X) W).fullyFaithfulLOfIsIsoUnit
-  let ffB := ((Functor.FullyFaithful.ofFullyFaithful eB.functor).comp ff).ofIso hB.symm
-  have : (moduleJ B j).Full := ffB.full
-  have : (moduleJ B j).Faithful := ffB.faithful
-  infer_instance
 
 end AlgebraicGeometry.ProEtale.StrictTower
 
@@ -436,7 +421,7 @@ private theorem exchangeOpen_isIso {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmer
       (ProEtale.StrictTower.moduleJAdj A j) (exchangeOrdinaryResPull d j)) := by
   obtain ⟨hfull, hfaith⟩ := cbcEndpointOpen_fullFaithful d j
   have : IsIso (cbcEndpointOpenAdj d j).unit := inferInstance
-  have := ProEtale.StrictTower.moduleJAdj_unit_isIso (B := A) j
+  have := ProEtale.StrictTower.clopenModule_openUnit_isIso (B := A) j
   refine ProperOpenTransport.openComparison_isIso_of_mem_essImage _ _ _ fun M ↦ ?_
   have ff := (ProEtale.StrictTower.moduleJAdj A j).fullyFaithfulLOfIsIsoUnit
   have := ff.full

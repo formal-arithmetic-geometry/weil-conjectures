@@ -486,5 +486,3 @@ theorem firstRootCoefficientScalarComparison
   exact (firstRootCoefficientIso_tmul l E S L ι U a x).symm
 
 end WeilConjectures
-
-#print axioms WeilConjectures.firstRootCoefficientScalarComparison

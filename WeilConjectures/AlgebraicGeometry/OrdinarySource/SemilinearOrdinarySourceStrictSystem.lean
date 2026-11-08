@@ -225,8 +225,6 @@ def sourceStrictFunctor : Systems.{c, v, max c v r} J B τ ⥤
     intro n
     exact (evaluation J B τ n).map_comp f g
 
-#print axioms sourceStrictFunctor
-
 end WeilConjectures.SemilinearSections.OrdinarySource
 
 end

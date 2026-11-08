@@ -21,7 +21,6 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme.Modules
 
-set_option maxHeartbeats 100000 in
 -- Degree-zero simplification unfolds the single-complex construction.
 private theorem single_exchange
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
@@ -126,8 +125,8 @@ theorem homotopySingleBaseChangeComparison
   let I : C_X' ⥤
       C_S' :=
     RingedSpace.moduleDirectImage f'.toLRSHom.toShHom
-  let _ : F.Additive := RingedSpace.moduleDirectImage_additive_proof f.toLRSHom.toShHom
-  let _ : I.Additive := RingedSpace.moduleDirectImage_additive_proof f'.toLRSHom.toShHom
+  let _ : F.Additive := RingedSpace.moduleDirectImage_additive f.toLRSHom.toShHom
+  let _ : I.Additive := RingedSpace.moduleDirectImage_additive f'.toLRSHom.toShHom
   let t_p := (Classical.choose (exists_tensorPullbackAdjunction p)).leftAdjointUniq
     (pullbackPushforwardAdjunction p)
   let a := (HomotopyCategory.quotient C_S (.up ℤ)).map
@@ -154,8 +153,8 @@ theorem homotopySingleBaseChangeComparison
   let G := tensorPullback g
   let H := tensorPullback p
   let I := RingedSpace.moduleDirectImage f'.toLRSHom.toShHom
-  have : F.Additive := RingedSpace.moduleDirectImage_additive_proof f.toLRSHom.toShHom
-  have : I.Additive := RingedSpace.moduleDirectImage_additive_proof f'.toLRSHom.toShHom
+  have : F.Additive := RingedSpace.moduleDirectImage_additive f.toLRSHom.toShHom
+  have : I.Additive := RingedSpace.moduleDirectImage_additive f'.toLRSHom.toShHom
   let t_p := (Classical.choose (exists_tensorPullbackAdjunction p)).leftAdjointUniq
     (pullbackPushforwardAdjunction p)
   let α : F ⋙ G ⟶ H ⋙ I :=

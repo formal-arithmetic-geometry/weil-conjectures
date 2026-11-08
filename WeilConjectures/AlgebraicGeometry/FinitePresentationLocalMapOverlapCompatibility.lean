@@ -41,7 +41,6 @@ private theorem map_stage {J : Type u} {H : J → Prop}
 attribute [local irreducible] Scheme.Modules.tensorPullback
   Scheme.Modules.tensorPullbackCompositionIso Scheme.Modules.openCoverTensorPullbackComparison
 
-set_option maxHeartbeats 300000 in
 -- The dependent base-change comparisons require additional elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in

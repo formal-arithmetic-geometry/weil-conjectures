@@ -81,26 +81,4 @@ theorem Compactification.exists_common_refinement_isDense_locallyOfFinitePresent
   let ⟨e, he, hc, hd⟩ := exists_common_refinement_isSchemeTheoreticallyDominant c d
   ⟨e, he, e.locallyOfFinitePresentation_g, hc, hd⟩
 
-/-! ### Axiom census
-
-Both statements are unconditional: the checks below are run by the build, so a `sorry`
-reappearing anywhere beneath Nagata's compactification theorem, the dense refinement or the
-common refinement breaks compilation rather than going unnoticed. -/
-
-/--
-info: 'AlgebraicGeometry.exists_isDense_compactification_locallyOfFinitePresentation' depends on
-  axioms: [propext, Classical.choice, Quot.sound]
--/
-#guard_msgs (whitespace := lax) in
-#print axioms AlgebraicGeometry.exists_isDense_compactification_locallyOfFinitePresentation
-
-/--
-info:
-  'AlgebraicGeometry.Compactification.exists_common_refinement_isDense_locallyOfFinitePresentation'
-  depends on axioms: [propext, Classical.choice, Quot.sound]
--/
-#guard_msgs (whitespace := lax) in
-#print axioms
-  AlgebraicGeometry.Compactification.exists_common_refinement_isDense_locallyOfFinitePresentation
-
 end AlgebraicGeometry

@@ -51,10 +51,7 @@ theorem affineAlgebraDirectImage_preservesFiniteLimits
     infer_instance
   exact preservesFiniteLimits_of_reflects_of_preserves F (U ⋙ V)
 
-noncomputable instance affineAlgebraDirectImage_preservesFiniteLimits_inst
-    {X Y : Scheme.{v}} (f : X ⟶ Y) :
-    PreservesFiniteLimits (RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace f)) :=
-  affineAlgebraDirectImage_preservesFiniteLimits f
+attribute [instance] affineAlgebraDirectImage_preservesFiniteLimits
 
 private theorem restriction_properties {Z : TopCat.{v}}
     (O A : Z.Sheaf RingCat.{v}) (φ : O ⟶ A) :
@@ -78,7 +75,7 @@ private theorem restriction_properties {Z : TopCat.{v}}
     inferInstanceAs (SheafOfModules.toSheaf A).ReflectsIsomorphisms
   exact ⟨hlim, hcolim, reflectsIsomorphisms_of_comp T (SheafOfModules.toSheaf O)⟩
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- Scalar-restriction comparisons elaborate several module-sheaf category instances.
 private theorem affineAlgebra_lowerTruncation_isIso
     {X Y : Scheme.{v}} (f : X ⟶ Y) [IsAffineHom f]

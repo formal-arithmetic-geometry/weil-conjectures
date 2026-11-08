@@ -306,7 +306,6 @@ def canonicalTensorHomAdjunction (S : Scheme.{u}) (K : schemeDerivedCategory S) 
         (derivedInternalHom (Opens.grothendieckTopology S) S.toRingedSpace.sheaf)).obj (op K) :=
   (Classical.choose (exists_canonicalTensorHomAdjunction S)) K
 
-set_option maxHeartbeats 800000 in
 -- Unfolding affine scalar restriction comparisons requires extra elaboration heartbeats.
 /-- The canonical comparison is specified by four equations, not mere existence of
 an arrow. Gamma satisfies the evaluation-mate equation of the shared internal-Hom

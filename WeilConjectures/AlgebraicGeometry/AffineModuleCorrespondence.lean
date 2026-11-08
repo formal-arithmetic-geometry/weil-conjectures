@@ -108,7 +108,7 @@ private theorem equivalence_on_full_subcategories
         exact β.naturality f.hom)
   exact ⟨CategoryTheory.Equivalence.mk F' G' a.symm b.symm, ⟨Iso.refl _⟩, ⟨Iso.refl _⟩⟩
 
-set_option maxHeartbeats 500000 in
+set_option maxHeartbeats 400000 in
 -- The dependent tensor-functor witnesses require substantial elaboration.
 /-- For an affine morphism, pushforward gives the equivalence of quasi-coherent modules
 with quasi-coherent modules over its direct-image algebra. Quasi-coherence is unchanged
