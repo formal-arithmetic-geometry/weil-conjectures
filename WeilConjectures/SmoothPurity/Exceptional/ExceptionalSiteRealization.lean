@@ -205,12 +205,13 @@ theorem integralExceptionalSiteRight_existsUnique (n : ℕ) :
               from a.hom.app Y z) • (show (R.obj M).val.obj Y from z.2)) =
           (show (coefficientQuotientSheaf (J := W.smallEtaleTopology)
             (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E) n).obj.obj Z
-              from a.hom.app Z (T.obj.map f z)) • (R.obj M).val.map f z.2
+              from a.hom.app Z (T.obj.map f z)) •
+            (show (R.obj M).val.obj Z from (R.obj M).val.map f z.2)
         rw [(R.obj M).val.map_smul]
         exact congrArg (fun c : (coefficientQuotientSheaf
           (J := W.smallEtaleTopology) (integralExceptionalIntegers l E)
           (integralExceptionalUniformizer l E) n).obj.obj Z ↦
-            c • ((R.obj M).val.map f z.2)) hn }⟩
+            c • (show (R.obj M).val.obj Z from (R.obj M).val.map f z.2)) hn }⟩
     let z : T.obj.obj U :=
       ((toSheafify W.smallEtaleTopology ((Functor.const W.Etaleᵒᵖ).obj
         (PUnit.{u + 2} : Type (u + 1)))).app U PUnit.unit, x)
@@ -230,7 +231,10 @@ theorem integralExceptionalSiteRight_existsUnique (n : ℕ) :
       ((adj.unit.app T).hom.app U z)) hc
     have ht := hunit M T t U z
     have hb := hunit M T b U z
-    change (β.hom.app M).hom.app U (a.hom.app U z • x) = _ at ht
+    change (β.hom.app M).hom.app U
+      ((show (coefficientQuotientSheaf (J := W.smallEtaleTopology)
+        (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E) n).obj.obj U
+          from a.hom.app U z) • x) = _ at ht
     change (β.hom.app M).hom.app U x = _ at hb
     rw [ha] at ht
     rw [ht, hb]
