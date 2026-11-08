@@ -78,7 +78,9 @@ theorem smooth_dualizing_concentration
       ((_root_.DerivedCategory.singleFunctor _ b).obj (ProEtale.tateTwist Xbar.left l d)))
     rcases hn with hn | hn
     · exact _root_.DerivedCategory.isZero_of_isGE _ b n hn
+        (hX := _root_.DerivedCategory.instIsGEObjSingleFunctor _ _)
     · exact _root_.DerivedCategory.isZero_of_isLE _ b n hn
+        (hX := _root_.DerivedCategory.instIsLEObjSingleFunctor _ _)
   have hK := ((ProEtaleWeilSheaf.weil_geometric_hom_constructibility k₀ l X).2.1
     K.obj b b).2 hz
   exact ⟨(_root_.DerivedCategory.isGE_iff K.obj b).2 (fun n hn ↦ hK n (Or.inl hn)),

@@ -240,8 +240,7 @@ private theorem supportHomResolutionIso_id
   apply DerivedCategory.Plus.ι.map_injective
   change DerivedCategory.Plus.ι.map (DerivedCategory.Plus.ι.preimage _) = _
   rw [Functor.map_preimage]
-  simp
-  rfl
+  simp [DerivedCategory.Plus.QCompιIso_hom_app, DerivedCategory.Plus.QCompιIso_inv_app]
 private theorem supportHomNormalization_injective
     (N : SupportedHomCocycleNormalization J A hT j B rho)
     (I : CochainComplex.Plus (Sheaf J (ModuleCat.{u + 1} A)))
@@ -264,8 +263,8 @@ private theorem supportHomNormalization_injective
   obtain ⟨hd, hchi⟩ := hfn
   refine ⟨f, hf, hd, ?_⟩
   rw [supportHomResolutionIso_id J I] at hchi
-  have hqi : (DerivedCategory.quotientCompQhIso
-    (Sheaf J (ModuleCat.{u + 1} A))).inv.app I.obj = 𝟙 _ := rfl
+  have hqi : (DerivedCategory.Plus.QCompιIso
+    (Sheaf J (ModuleCat.{u + 1} A))).inv.app I = 𝟙 _ := rfl
   rw [hqi] at hchi
   dsimp only [Iso.refl_inv] at hchi
   repeat first

@@ -65,7 +65,7 @@ private def roundTripCompleted (T : Scheme.{u}) :
   rw [back_eq l E T]
   let e := Classical.choice
     (IntegralCoefficientPresentation.restrict_equivalence (completedRingIso l E T)).2.2.2
-  exact (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  exact Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryIdIso _
 
 private def roundTripDetailed (T : Scheme.{u}) :
@@ -73,7 +73,7 @@ private def roundTripDetailed (T : Scheme.{u}) :
   rw [back_eq l E T]
   let e := Classical.choice
     (IntegralCoefficientPresentation.restrict_equivalence (completedRingIso l E T)).2.2.1
-  exact (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  exact Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryIdIso _
 
 private def ordinaryComparison
