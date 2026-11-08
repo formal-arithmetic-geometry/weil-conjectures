@@ -21,7 +21,7 @@ Source: blueprint order 2478, proof step 8; Stacks Tags 08TC, 0038 and 08JC
 
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
-set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency true
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 
@@ -98,6 +98,10 @@ private theorem roos_of_homotopyLimit
 
 namespace WeilConjectures.IntegralHom
 
+attribute [local implicit_reducible] completedIntegralCoefficientSheaf
+  completedIntegralCommRingSheafUnrestricted
+  completedIntegralCommRingSheaf CategoryTheory.sheafCompose
+
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   (Y : AlgebraicGeometry.Scheme.{t}) (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
@@ -145,9 +149,8 @@ theorem hom_roosTransport
       Functor.mapIso_inv, NatTrans.comp_app, Functor.const_obj_map, Functor.const_obj_obj,
       Iso.refl_hom]
     change H.map (e.inv ≫ _) ≫ _ = 𝟙 _ ≫ ((H.map e.inv ≫ e'.inv) ≫ _)
-    rw [Functor.map_comp, Category.id_comp, Category.assoc]
-    simpa only [Category.assoc] using
-      congrArg (fun f ↦ H.map e.inv ≫ f) (hτ n).symm
+    erw [Functor.map_comp, Category.id_comp, Category.assoc, Category.assoc]
+    exact congrArg (fun f ↦ H.map e.inv ≫ f) (hτ n).symm
   obtain ⟨Pprod, hPprod, _, _⟩ := (show Pretriangulated.IsHomotopyLimit c' from hc')
   let : HasProduct (fun n : ℕ ↦ F'.obj (op n)) := ⟨⟨Pprod, hPprod⟩⟩
   obtain ⟨δ', hδ'⟩ := roos_of_homotopyLimit F' c' hc'
