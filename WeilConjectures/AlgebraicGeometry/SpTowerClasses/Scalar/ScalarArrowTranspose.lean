@@ -47,6 +47,7 @@ theorem scalarArrowTranspose (l : ℕ) [Fact l.Prime]
     exact Adjunction.commShift_of_rightAdjoint
       (C := DerivedCategory (Systems T (Rrings l T)))
       (D := DerivedCategory (Systems T (Arings l E T)))
+      (F := c.scalar.T) (G := G.mapDerivedCategory)
       (SheafOfModules.sheafScalarDerivedAdjunction
         (coefficientSystemMap l E T) c.scalar.model) ℤ
   let := had
