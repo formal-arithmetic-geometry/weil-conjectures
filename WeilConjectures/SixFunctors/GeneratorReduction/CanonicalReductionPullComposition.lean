@@ -85,7 +85,7 @@ private noncomputable def ordinaryComp
       (PurCompactSupport.completedPull_comp l E f g)).exists.choose
 
 attribute [local irreducible] Functor.mapDerivedCategory
-  Functor.mapDerivedCategoryCompIso Functor.mapDerivedCategoryNatIso
+  Functor.mapDerivedCategoryNatIso
   Functor.mapDerivedCategoryFactors
 
 private theorem derived_comp_factors
