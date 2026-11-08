@@ -434,7 +434,7 @@ def geometricPullComposition (R : Coefficients.{u})
         (proEtaleRingModuleAdjunction h (R.ring V) (R.ring U) (R.pull h)))
       (proEtaleRingModuleAdjunction (h ≫ k) (R.ring W) (R.ring U) (R.pull (h ≫ k)))).symm
       (modulePushComposition_existsUnique R h k hc).exists.choose) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The fixed geometric pullback, with its original small-site universes.
 Source: Stacks Tag 03D8
@@ -528,7 +528,7 @@ private theorem openExtension_derivedSlicePresentation (R : Coefficients.{u})
   letI : e.functor.Additive := Functor.additive_of_preserves_binary_products _
   letI : e.inverse.Additive := Functor.additive_of_preserves_binary_products _
   exact ⟨e.mapDerivedCategory,
-    ⟨Functor.mapDerivedCategoryNatIso he ≪≫ Functor.mapDerivedCategoryCompIso _ _⟩⟩
+    ⟨Functor.mapDerivedCategoryNatIso he ≪≫ (Functor.mapDerivedCategoryCompIso _ _).symm⟩⟩
 
 attribute [-instance] WeilConjectures.integralOperationsSiteSmall
   WeilConjectures.integralReductionSiteEssentiallySmall

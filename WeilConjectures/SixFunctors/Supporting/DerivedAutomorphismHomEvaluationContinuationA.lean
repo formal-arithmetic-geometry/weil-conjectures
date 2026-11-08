@@ -528,7 +528,6 @@ variable (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω]
   [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (W : Scheme.{u})
   [∀ w : W, Invertible (l : W.residueField w)]
 
-set_option backward.isDefEq.respectTransparency true in
 /-- Exact common-stage normalization of inverse transposition, at every finite
 stage containing the entries. The implications only reconcile the recorded
 operation objects with their literal pair representatives, whose equality is
@@ -891,12 +890,12 @@ def podFiniteRestriction (n : ℕ) :
   letI := podCompletedModuleAdditive l E g
   letI := podCompletedModuleLimits l E g
   letI := podCompletedModuleColimits l E g
-  (Functor.mapDerivedCategoryCompIso
+  Functor.mapDerivedCategoryCompIso
     (sfIntrinsicPullback (finiteCoefficientRing l E (n + 1)) g)
-    (scalarReductionRestriction l E X n)).symm ≪≫
+    (scalarReductionRestriction l E X n) ≪≫
     Functor.mapDerivedCategoryNatIso (podFiniteRestrictionOrdinary l E g n) ≪≫
-      Functor.mapDerivedCategoryCompIso (scalarReductionRestriction l E Y n)
-        (podCompletedModuleInverseImage l E g)
+      (Functor.mapDerivedCategoryCompIso (scalarReductionRestriction l E Y n)
+        (podCompletedModuleInverseImage l E g)).symm
 
 /-- The actual ordinary limit projection, with the restriction/evaluation identity.
 Source: Stacks 0941 (blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
