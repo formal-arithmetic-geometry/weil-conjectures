@@ -43,14 +43,14 @@ private theorem pullback_scalar_cube
       (v : W ⟶ Z) (w : V ⟶ W) (t : V ⟶ Z) (ht : w ≫ v = t) :=
     Functor.mapDerivedCategoryNatIso
         (upperStarComp (ModuleCat.{u + 1} R) w v t ht.symm) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
   have hc (R : Type (u + 1)) [CommRing R] :
       exactDerivedSquareUpperStarIso (ModuleCat.{u + 1} R) sq.flip =
         (k R j h (j' ≫ g) sq.w).symm ≪≫ k R g j' (j' ≫ g) rfl := by
     apply Iso.ext
     simp only [exactDerivedSquareUpperStarIso, squareUpperStarIso, k,
       Functor.mapDerivedCategoryNatIso_trans, Functor.mapDerivedCategoryNatIso_symm,
-      Iso.trans_hom, Iso.symm_hom, Iso.trans_inv, Category.assoc]
+      Iso.trans_hom, Iso.symm_hom, Iso.symm_inv, Iso.trans_inv, Category.assoc]
   have h1 := coefficientPullback_comp φ j h (j' ≫ g) sq.w M
   have h2 := coefficientPullback_comp φ g j' (j' ≫ g) rfl M
   change (k B j h (j' ≫ g) sq.w).hom.app _ ≫ _ ≫ _ =
