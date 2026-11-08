@@ -187,12 +187,20 @@ jobs:
       # bulk-restored module's outputs into the cache again (~23 GB of copies; 17 min on
       # big-server), which `-o` needs and nothing else does. Off, it only checks the restored
       # traces: on kuafu 128 s, nothing compiled.
+      # A self-hosted runner whose host is not the 64-thread default (e.g. a 16-vCPU build
+      # server, or one of two runners sharing a machine) sets WEIL_CI_THREADS in its runner `.env`
+      # file; that value then overrides pick-runner's share.
       - name: Build
         env:
           LEAN_NUM_THREADS: ${{ needs.pick-runner.outputs.threads }}
+          HOSTED: ${{ needs.pick-runner.outputs.hosted }}
           LAKE_NO_CACHE: "true"
           UPLOAD: ${{ github.ref == 'refs/heads/master' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch') }}
         run: |
+          if [ "$HOSTED" != true ]; then
+            case "${WEIL_CI_THREADS:-}" in ""|*[!0-9]*|0) ;; *) export LEAN_NUM_THREADS=$WEIL_CI_THREADS;; esac
+          fi
+          echo "LEAN_NUM_THREADS=$LEAN_NUM_THREADS"
           if [ "$UPLOAD" = true ]; then
             lake build --wfail -o "$RUNNER_TEMP/lake-map.jsonl"
           else
