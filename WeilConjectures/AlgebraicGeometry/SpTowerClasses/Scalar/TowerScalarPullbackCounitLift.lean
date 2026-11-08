@@ -33,6 +33,7 @@ namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 private theorem scalar_counit_shift {T : Scheme.{u}} (c : Chern l E T) :
     NatTrans.CommShift c.scalar.model.ε ℤ := by
   let q := coefficientSystemMap l E T
@@ -130,15 +131,11 @@ private theorem counit_square_single
     ext i : 1
     by_cases hi : i = 0
     · subst i
-      suffices h : α.hom.app M ≫ 𝟙 _ ≫ EX.map (𝟙 _) ≫ 𝟙 _ =
-          Q.map (𝟙 _) ≫ 𝟙 _ ≫ α.hom.app M ≫ 𝟙 _ by
-        simp [a, K, p, eX, eY, q, Functor.mapHomologicalComplexCompIso,
-          HomologicalComplex.singleObjXSelf, HomologicalComplex.singleObjXIsoOfEq,
-          HomologicalComplex.single_map_f_self]
-        simpa only using! h
+      simp [a, K, p, eX, eY, q, Functor.mapHomologicalComplexCompIso,
+        HomologicalComplex.singleObjXSelf, HomologicalComplex.singleObjXIsoOfEq,
+        HomologicalComplex.single_map_f_self]
       erw [EX.map_id, Q.map_id]
-      simp only [Category.id_comp, Category.comp_id]
-      erw [Category.comp_id]
+      repeat' first | erw [Category.id_comp] | erw [Category.comp_id]
     · simp [p, eX, eY, q, hi,
         HomologicalComplex.singleMapHomologicalComplex_hom_app_ne]
   simp only [single_counit, Functor.mapDerivedCategorySingleFunctor,
