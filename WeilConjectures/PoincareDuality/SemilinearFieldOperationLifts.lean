@@ -396,6 +396,7 @@ private theorem pod_field_transport
   refine ⟨hrat, U.equivalence, ⟨U.epsilon, ?_⟩, ?_, ⟨U.shift, U.exact⟩,
     ⟨μ, hμ, ?_⟩, ⟨ν, hν, ?_⟩, ⟨κ, hκ, ?_⟩, ⟨ρ, hρ, ?_⟩⟩
   · intro L
+    set_option backward.isDefEq.respectTransparency false in
     refine ⟨(S L).rationalEpsilon, ?_⟩
     intro K
     exact U.epsilon_formula ((GeneralAlgebraicallyClosedCoefficients.inclusion L).obj K)

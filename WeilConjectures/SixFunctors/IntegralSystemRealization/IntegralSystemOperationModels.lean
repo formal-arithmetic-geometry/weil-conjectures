@@ -144,7 +144,7 @@ private theorem derivedComp_model
     [PreservesFiniteLimits B] [PreservesFiniteColimits B]
     [PreservesFiniteLimits H] [PreservesFiniteColimits H]
     (e : H ≅ A ⋙ B) (P : CochainComplex C ℤ) :
-    (Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryCompIso A B).hom.app
+    (Functor.mapDerivedCategoryNatIso e ≪≫ (Functor.mapDerivedCategoryCompIso A B).symm).hom.app
           (DerivedCategory.Q.obj P) ≫
         B.mapDerivedCategory.map (A.mapDerivedCategoryFactors.hom.app P) ≫
         B.mapDerivedCategoryFactors.hom.app ((A.mapHomologicalComplex (.up ℤ)).obj P) =
@@ -153,7 +153,7 @@ private theorem derivedComp_model
   calc
     _ = (Functor.mapDerivedCategoryNatIso e).hom.app (DerivedCategory.Q.obj P) ≫
         (A ⋙ B).mapDerivedCategoryFactors.hom.app P := by
-      simpa only [Iso.trans_hom, NatTrans.comp_app, Category.assoc] using
+      simpa only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc] using
         congrArg (fun k ↦ (Functor.mapDerivedCategoryNatIso e).hom.app
           (DerivedCategory.Q.obj P) ≫ k)
             (Functor.mapDerivedCategoryCompIso_hom_app_factors A B P)
@@ -169,8 +169,8 @@ private def compositors (o : Operations l E) : Compositors l E o where
       (pullbackTensorSequenceAdjunction l E g) (pullbackTensorSequenceAdjunction l E f)
       (pullbackTensorSequenceAdjunction l E (f ≫ g)) (ordinaryDirectComp l E f g)
   pullComp f g := Functor.mapDerivedCategoryNatIso (ordinaryPullComp l E f g) ≪≫
-    Functor.mapDerivedCategoryCompIso (pullbackTensorSequenceInverse l E g)
-      (pullbackTensorSequenceInverse l E f)
+    (Functor.mapDerivedCategoryCompIso (pullbackTensorSequenceInverse l E g)
+      (pullbackTensorSequenceInverse l E f)).symm
   pullComp_model f g P := derivedComp_model
     (pullbackTensorSequenceInverse l E g) (pullbackTensorSequenceInverse l E f)
     (pullbackTensorSequenceInverse l E (f ≫ g)) (ordinaryPullComp l E f g) P
