@@ -84,12 +84,11 @@ private theorem localizePullSquare
   have hp := Functor.mapDerivedCategoryNatIso_isoWhiskerRight κ E
   have hq := Functor.mapDerivedCategoryNatIso_isoWhiskerLeft H q
   have hp' : Functor.whiskerRight (Functor.mapDerivedCategoryNatIso κ).hom
-      E.mapDerivedCategory ≫ (Functor.mapDerivedCategoryCompIso F' E).inv =
-      (Functor.mapDerivedCategoryCompIso F E).inv ≫
+      E.mapDerivedCategory ≫ (Functor.mapDerivedCategoryCompIso F' E).hom =
+      (Functor.mapDerivedCategoryCompIso F E).hom ≫
         (Functor.mapDerivedCategoryNatIso (Functor.isoWhiskerRight κ E)).hom := by
-    apply (cancel_mono (Functor.mapDerivedCategoryCompIso F' E).hom).1
-    simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
-    rw [hp, Iso.inv_hom_id_assoc]
+    apply (cancel_epi (Functor.mapDerivedCategoryCompIso F E).inv).1
+    rw [Iso.inv_hom_id_assoc, ← reassoc_of% hp, Iso.inv_hom_id, Category.comp_id]
   have hd : Functor.isoWhiskerRight (Functor.mapDerivedCategoryNatIso κ)
         E.mapDerivedCategory ≪≫ Functor.mapDerivedCategorySquareIso δ' ≪≫
       Functor.isoWhiskerLeft H.mapDerivedCategory (Functor.mapDerivedCategoryNatIso q) =
@@ -99,9 +98,9 @@ private theorem localizePullSquare
       Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom, Category.assoc]
     rw [reassoc_of% hp', ← hq]
     simpa only [Functor.mapDerivedCategoryNatIso_trans, Iso.trans_hom, Category.assoc] using
-      congrArg (fun z ↦ (Functor.mapDerivedCategoryCompIso F E).inv ≫
+      congrArg (fun z ↦ (Functor.mapDerivedCategoryCompIso F E).hom ≫
         (Functor.mapDerivedCategoryNatIso z).hom ≫
-          (Functor.mapDerivedCategoryCompIso H G).hom) ho
+          (Functor.mapDerivedCategoryCompIso H G).inv) ho
   simpa only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
     Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app, Functor.whiskerLeft_app] using
     congrArg (fun z ↦ z.hom.app M) hd
