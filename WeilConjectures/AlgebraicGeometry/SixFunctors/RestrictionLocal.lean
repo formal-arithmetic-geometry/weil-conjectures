@@ -178,7 +178,6 @@ private theorem inverseImage_localizing
   have hcol : P (colimit (D ⋙ F)) := hP.2.2 (I := I) (D ⋙ F) inferInstance hobj
   exact P.prop_of_iso (preservesColimitIso F D).symm hcol
 
-set_option maxHeartbeats 80000 in
 -- Keep the open adjunction's large normalization clause outside the chart calculation.
 private theorem open_adjunction
     (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
@@ -244,7 +243,6 @@ private theorem localizing_replete (T : Scheme.{u}) :
   let := hP.2.1
   exact P.prop_of_iso e (hK P hP hS)
 
-set_option maxHeartbeats 80000 in
 -- The coefficient and derived-category comparisons require explicit instance transport.
 set_option backward.isDefEq.respectTransparency true in
 private theorem coefficient_localizing
@@ -318,7 +316,6 @@ private theorem conjugate_preservation
   exact Q.prop_of_iso (EA.functor.mapIso (G.mapIso (EB.unitIso.app K).symm))
     (h _ adjC _ hK)
 
-set_option maxHeartbeats 80000 in
 -- This conjugates derived adjunctions through two full-subcategory equivalences.
 set_option backward.isDefEq.respectTransparency true in
 private theorem coefficient_preservation
@@ -363,7 +360,6 @@ private theorem coefficient_preservation
   apply (CondensedRing.bounded_comap_iff e.inv.hom X (G.obj K).obj).mp
   exact hconj K ((CondensedRing.bounded_comap_iff e.inv.hom Y K.obj).mpr hK)
 
-set_option maxHeartbeats 80000 in
 -- Compare the localizing categories and their compactification-defined adjunctions.
 set_option backward.isDefEq.respectTransparency true in
 private theorem affine_preserves_canonical
@@ -444,7 +440,6 @@ private theorem affine_preserves_canonical
   exact (constantModelBoundedConstructible Λ A).prop_of_iso (hP.app K).symm
     (hpres K.obj hK)
 
-set_option maxHeartbeats 80000 in
 -- The coefficient and derived-category comparisons require explicit instance transport.
 set_option backward.isDefEq.respectTransparency true in
 private theorem affine_preserves
@@ -505,7 +500,6 @@ private theorem affine_preserves
       (Or.inr (Or.inr (Or.inr ⟨Iso.refl _⟩))) V d _
       (affineSpace_rational_induction ℓ k V d).2 c h' H a
 
-set_option maxHeartbeats 80000 in
 -- The coefficient and derived-category comparisons require explicit instance transport.
 private theorem closed_preserves
     (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
