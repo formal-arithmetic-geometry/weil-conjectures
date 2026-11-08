@@ -28,6 +28,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSupplement
 import all Mathlib.CategoryTheory.Limits.HasLimits
 import all WeilConjectures.AlgebraicGeometry.SemilinearProperOpen.SemilinearEvaluationDerivedAdjunction
 import WeilConjectures.CategoryTheory.Exact.ExactLocalizationInverseMate
+import WeilConjectures.CategoryTheory.ExactCube
 import WeilConjectures.AlgebraicGeometry.Constant.ConstantTowerSquareNormalization
 import all WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerExchangeMateNormalization
 
@@ -588,7 +589,7 @@ private theorem derivedCube_nat
       Functor.whiskerRight (Functor.mapDerivedCategorySquareIso d).hom R₃.mapDerivedCategory := by
   apply NatTrans.ext
   funext M
-  exact AlgebraicGeometry.ProEtale.derivedCube qJ qH qG qI c d
+  exact Functor.exactDerivedCube qJ qH qG qI c d
     (fun N ↦ congrArg (fun z ↦ z.app N) hc) M
 
 
