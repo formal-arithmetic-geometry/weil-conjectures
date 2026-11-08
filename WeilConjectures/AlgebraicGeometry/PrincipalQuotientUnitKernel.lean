@@ -82,7 +82,7 @@ private theorem mono_baseScalar_of_flat
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- Comparing the two chosen tensor adjunctions needs extra definitional reductions.
 /-- Over a domain, for a flat scheme and an invertible module, multiplication by a
 nonzero base scalar is the kernel of the unit restricting to its principal quotient.

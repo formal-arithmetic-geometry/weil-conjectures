@@ -25,7 +25,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 600000 in
 -- Comparing resolution maps unfolds composed module and forgetful functors.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

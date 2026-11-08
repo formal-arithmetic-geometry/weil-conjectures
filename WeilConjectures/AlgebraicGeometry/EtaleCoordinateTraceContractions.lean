@@ -138,7 +138,7 @@ theorem contractions [Finite A] {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]
     let e := ((derivedTensor (ModuleCat.{u + 1} A) Y).obj (F.obj M)).map t ≫
       (derivedTensorRightUnitor (ModuleCat.{u + 1} A) Y (F.obj M)).hom
     have hf : p.hom ≫ F.map c.inv ≫ path = r ≫ F.map (b ≫ q.hom) :=
-      coordinateKunnethFactorization A f L M
+      coordinateKunnethFactorization_route_eq A f L M
     have hn : r ≫ F.map (b ≫ a) = e := by
       have h := projectionTraceNormalization A f M (F.obj ((pull A f).obj L)) t
       rw [← ht1] at h

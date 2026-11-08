@@ -51,7 +51,6 @@ private theorem transport_left_mate
     (fun P ↦ by simp) (fun P ↦ by simp) (fun N ↦ by simp) P
 
 universe u
-set_option maxHeartbeats 800000 in
 -- Elaborate local-relation flatness across both site presentations.
 private theorem pro_flat (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -94,7 +93,6 @@ private theorem pro_ordinary_iso
     (upperStarRestrictScalarsIso a f).hom)).natTrans = _ at h
   rw [h]
   infer_instance
-set_option maxHeartbeats 800000 in
 -- Instantiate the normalized flat-resolution comparison.
 private theorem pro_computed_iso
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
@@ -166,7 +164,6 @@ theorem proEtaleScalarPullbackMate_isIso
     (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) f)
     (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} B) f)
     (Functor.mapDerivedCategorySquareIso (upperStarRestrictScalarsIso a f)).hom
-set_option maxHeartbeats 800000 in
 -- Instantiate the normalized flat-resolution comparison.
 private theorem et_computed_iso
     {A B : Type (u + 1)} [CommRing A] [CommRing B]

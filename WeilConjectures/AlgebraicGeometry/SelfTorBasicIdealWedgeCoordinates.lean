@@ -83,7 +83,7 @@ private theorem conormal_wedge_coordinate_restrict
   rw [hz] at hs
   exact hs
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- Keep the nested derived tensor and chart identifications folded during elaboration.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

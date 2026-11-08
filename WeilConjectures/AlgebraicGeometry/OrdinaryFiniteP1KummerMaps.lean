@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+public import WeilConjectures.AlgebraicGeometry.Affine.Trace.AffineTraceTower
 public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Data
 public import WeilConjectures.AlgebraicGeometry.DerivedHomMayerVietoris
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
@@ -90,15 +91,6 @@ local instance (A : Type (u + 1)) [CommRing A] {X Y : Scheme.{u}} (f : X ⟶ Y) 
 
 attribute [local irreducible] ordinaryFinitePullback ordinaryFinitePushforward
 
-/-- Invertibility on the projective line is the image of invertibility on the base.
-Source: functoriality of units under the projection's map on global sections.
-(auxiliary; not a blueprint node).
-Proof: map the given unit along q.appTop and identify the image of the natural cast. -/
-theorem ordinaryFiniteP1_isUnit (N : ℕ) (S : Scheme.{u})
-    (hS : IsUnit (N : Γ(S, ⊤))) : IsUnit (N : Γ(ProjectiveLine S, ⊤)) :=
-  (map_natCast (ProjectiveLine S ↘ S).appTop.hom N) ▸
-    hS.map (ProjectiveLine S ↘ S).appTop.hom
-
 /-- A family of projective-line Chern arrows on Noetherian bases.
 Source: blueprint thm-amb-p1-decomposition.
 (auxiliary; not a blueprint node). -/
@@ -115,7 +107,7 @@ def OrdinaryFiniteP1ChernFamilySpec (A : Type (u + 1)) [CommRing A]
     (N : ℕ) (hA : (N : A) = 0) (c : OrdinaryFiniteP1ChernFamily A N hA) : Prop :=
   ∀ (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))),
     ordinaryFiniteP1ChernSpec A N hA S
-      (ordinaryFiniteP1_isUnit N S hS) (c S hS)
+      (affineTraceProjectiveInvertible N S hS) (c S hS)
 
 /-- The specified twisted-unit and Chern components, before proving invertibility.
 Source: blueprint thm-amb-p1-decomposition.
@@ -144,7 +136,7 @@ def OrdinaryFiniteP1KummerMapBaseChange (A : Type (u + 1)) [CommRing A]
         (ordinaryFinitePushforward A (ProjectiveLine S' ↘ S')).map
           (ordinaryFiniteShiftedLinePullback A N hA t
             (ProjectiveSpace.map (ULift.{u} (Fin 2)) f)
-            (ordinaryFiniteP1_isUnit N S hS)).hom =
+            (affineTraceProjectiveInvertible N S hS)).hom =
       ordinaryFiniteP1DecompositionSourceMap A N hA t f hS ≫
         ordinaryFiniteP1KummerMap A N hA t c S' hS'
 
@@ -507,7 +499,7 @@ private theorem kummer_chern_component_square
         (ordinaryFinitePushforward A (ProjectiveLine S' ↘ S')).map
           (ordinaryFiniteShiftedLinePullback A N hA t
             (ProjectiveSpace.map (ULift.{u} (Fin 2)) f)
-            (ordinaryFiniteP1_isUnit N S hS)).hom =
+            (affineTraceProjectiveInvertible N S hS)).hom =
       (ordinaryFiniteUnitPullback A f).hom ≫
         ordinaryFiniteP1ChernPushforward A N hA S' (cFamily S' hS') := by
   exact ordinaryFiniteP1_chern_adjunct_baseChange A N hN hA t f hS hS'
@@ -524,7 +516,7 @@ private theorem kummer_unit_component_square
         (ordinaryFinitePushforward A (ProjectiveLine S' ↘ S')).map
           (ordinaryFiniteShiftedLinePullback A N hA t
             (ProjectiveSpace.map (ULift.{u} (Fin 2)) f)
-            (ordinaryFiniteP1_isUnit N S hS)).hom =
+            (affineTraceProjectiveInvertible N S hS)).hom =
       (ordinaryFiniteShiftedLinePullback A N hA t f hS).hom ≫
         ordinaryFiniteP1Unit A N hA t S' hS' := by
   exact ordinaryFiniteP1_twisted_unit_baseChange A N hN hA t f hS hS'
@@ -561,13 +553,13 @@ private theorem kummer_chern_faithful
     (c : ordinaryFiniteUnit A (ProjectiveLine (Spec (.of k))) ⟶
       (ordinaryFiniteLine A N hA (ProjectiveLine (Spec (.of k))))⟦(2 : ℤ)⟧)
     (hc : ordinaryFiniteP1ChernSpec A N hA (Spec (.of k))
-      (ordinaryFiniteP1_isUnit N _ hS) c) :
+      (affineTraceProjectiveInvertible N _ hS) c) :
     ∀ a : A, (DerivedCategory.singleFunctor _ 0).map
       (a • 𝟙 (ordinaryFiniteConstant A (Spec (.of k)))) ≫
       ordinaryFiniteP1ChernPushforward A N hA (Spec (.of k)) c = 0 → a = 0 := by
   exact ordinaryFiniteP1ChernPushforward_scalar_faithful N A hA (Spec (.of k))
-    (ordinaryFiniteP1_isUnit N _ hS) c hc
-    ((kummer_p1_h2_scalar_generator N A hA) k hNk (ordinaryFiniteP1_isUnit N _ hS)).1
+    (affineTraceProjectiveInvertible N _ hS) c hc
+    ((kummer_p1_h2_scalar_generator N A hA) k hNk (affineTraceProjectiveInvertible N _ hS)).1
 
 private theorem kummer_p1_unit_mono_homology
     (N : ℕ) (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)

@@ -148,19 +148,6 @@ attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall
 attribute [-instance] GrothendieckTopology.hasSheafify_proEtTopology
 
 attribute [-instance] ClopenLocalization.modulesAbelian ClopenLocalization.hasDerived
-attribute [-instance] ClopenLocalization.sheafify ClopenLocalization.locallyBijective
-
-/-- The existing small-site sheafification, with explicit universe. Source: Stacks 03D7
-(blueprint: def-pur-clopen-derived-scalar-comparison-data). -/
-instance sheafify (Z : Scheme.{t}) :
-    HasSheafify (topology Z) AddCommGrpCat.{max u (t + 1)} :=
-  ClopenLocalization.sheafify.{t, u} Z
-
-/-- The existing local-bijectivity structure. Source: Stacks 03D7
-(blueprint: def-pur-clopen-derived-scalar-comparison-data). -/
-instance locallyBijective (Z : Scheme.{t}) :
-    (topology Z).WEqualsLocallyBijective AddCommGrpCat.{max u (t + 1)} :=
-  ClopenLocalization.locallyBijective.{t, u} Z
 
 /-- The recorded module category; source: Stacks 03D7
 (blueprint: def-pur-clopen-derived-scalar-comparison-data). -/
@@ -257,7 +244,6 @@ abbrev extD {Z : Scheme.{t}}
 attribute [local irreducible] computation
 attribute [local irreducible] SheafOfModules.monoidalCategory HasDerivedCategory.standard
 
-set_option maxHeartbeats 30000 in
 -- Bound elaboration while checking the representative normalization.
 /-- Unit identifications normalized by multiplication on sections and by the canonical
 K-flat computation counit. Source: Stacks 06YY, 0D6D
@@ -281,7 +267,6 @@ structure Units {Z : Scheme.{t}} (p : Presentations.{t, u} Z) where
         ((NatIso.mapHomologicalComplex (ordinary R) (.up ℤ) ≪≫
           Functor.mapHomologicalComplexIdIso (Mods.{t, u} R) (.up ℤ)).hom.app P)
 
-set_option maxHeartbeats 30000 in
 -- Bound elaboration while checking the normalized comparison family.
 /-- The scalar/restriction comparison and its full chain-level normalization. All morphisms
 land in the component module category, so their linearity is part of their type.
@@ -387,7 +372,6 @@ def Comparison.unique {X Y : Scheme.{t}} {j : Y ⟶ X} [IsOpenImmersion j]
             (((ext.{t, u} (Z := X) (p a)).mapHomologicalComplex (.up ℤ)).obj P) ≫
           DerivedCategory.Q.map ((d.chain a).hom.app P)) → e = (d.derived a).hom
 
-set_option maxHeartbeats 30000 in
 -- Bound elaboration while checking the coherence diagrams.
 /-- Coherence with the existing normalized scalar compositor and multiplication units.
 Source: Stacks 0D6D (blueprint: def-pur-clopen-derived-scalar-comparison-data). -/

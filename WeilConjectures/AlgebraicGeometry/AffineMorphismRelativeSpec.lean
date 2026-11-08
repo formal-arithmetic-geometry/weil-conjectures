@@ -111,7 +111,6 @@ private noncomputable def structureAlgebraRestrictionIso {X S : Scheme.{u}}
     change f.app (V.ι ''ᵁ W.unop) ≫ _ = (f ∣_ V).app W.unop
     exact (morphismRestrict_app f V W.unop).symm
 
-set_option maxHeartbeats 600000 in
 -- The equivalence witnesses and sectionwise naturality require substantial dependent elaboration.
 /-- (1) For an affine `f : X ⟶ S`, `f_* 𝒪_X` is a quasi-coherent `𝒪_S`-algebra.
 (3) An anti-equivalence `E` from schemes affine over `S` to quasi-coherent `𝒪_S`-algebras whose

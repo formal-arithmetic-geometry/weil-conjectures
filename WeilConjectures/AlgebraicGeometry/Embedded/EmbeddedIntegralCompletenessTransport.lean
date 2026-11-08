@@ -116,7 +116,6 @@ attribute [local irreducible] IntegralModelsStacks.smallDerivedObject
   IntegralModelsStacks.smallModules IntegralModelsStacks.smallMap
   ConstantCompletion.kernelIdeal RingedSiteIdeal.extension
 
-set_option maxHeartbeats 400000 in
 -- reason for change: coefficient and small-site derived transport
 -- elaboration unfolds large equivalences.
 set_option backward.isDefEq.respectTransparency.types false in

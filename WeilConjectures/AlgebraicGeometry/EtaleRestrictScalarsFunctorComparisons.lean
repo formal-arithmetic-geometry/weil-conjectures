@@ -86,7 +86,7 @@ theorem isIso_derivedLowerStarRestrictScalarsMap :
     IsIso (derivedLowerStarRestrictScalarsMap φ f) := by
   exact Functor.isIso_rightDerivedFunctorPlusBaseChange_of_rightAcyclic
     (lowerStarRestrictScalarsIso φ f)
-    (fun I ↦ restrictScalars_injective_lowerStar_rightAcyclic φ f I)
+    (fun I ↦ rightAcyclic_lowerStar_restrictScalars_obj φ f I)
 
 /-- The canonical derived direct-image coefficient isomorphism. 
 (blueprint: lem-sbc-canonical-restrict-scalars-functor-comparisons)

@@ -33,7 +33,7 @@ attribute [local irreducible] DerivedCategory.Q Functor.mapDerivedCategory
   AlgebraicGeometry.Scheme.ProEt.ClopenMonoidalDescent.ModelNormalization
 namespace AlgebraicGeometry.Scheme.ProEt.ClopenMonoidalDescent
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- The existential comparison types include dependent monoidal localization structures.
 /-- Produce the normalized ordinary, total and derived tensor witnesses of each component.
 Source: Stacks Project, sites-cohomology.tex, Tags 06YS, 06YU and 0FPT

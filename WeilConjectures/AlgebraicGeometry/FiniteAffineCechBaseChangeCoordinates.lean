@@ -23,7 +23,7 @@ universe u
 open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- Elaborating the nested complex functors and dependent coordinate sums needs this budget.
 /-- The pulled-back specified model has the ordered section formulas, naturally on all
 opens and linearly over their local rings. This is a termwise statement, before homology.

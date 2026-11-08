@@ -54,7 +54,6 @@ private theorem mate_square
   rw [← Category.assoc, hHom, ← q.homEquiv_naturality_right,
     Category.assoc, hTensor, q.homEquiv_naturality_left]
 
-set_option maxHeartbeats 800000 in
 -- Keep the fixed localizations opaque during comparison of functor types.
 /-- Restriction of a projection mate to a target open is isomorphic, as an
 arrow, to a projection mate for the inverse-image source over that open, using the

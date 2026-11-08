@@ -64,7 +64,6 @@ private theorem inverse_homotopies_of_natIso
       e.hom_inv_id_app] using H
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 800000 in
 -- Explicit comparisons avoid unfolding large iterated restriction complex objects.
 /-- Two given inverse homotopies at a stalk spread after shrinking a lifted map.
 Source: Stacks Project, Tag 09RE, affine proof's equality in the homotopy category;

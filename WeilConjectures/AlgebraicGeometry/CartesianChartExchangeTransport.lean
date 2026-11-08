@@ -108,7 +108,6 @@ private lemma chart_inv_leg {S X B T T' : Scheme.{u}}
       rw [← Category.assoc, cartesianImageProjection_snd]
       simp only [ha, Category.assoc]
 
-set_option maxHeartbeats 100000 in
 -- Expanding chart comparisons and adjunction units needs a local reduction budget.
 private lemma chartAdjunct_pullback {S X B T T' : Scheme.{u}}
     (f : X ⟶ S) (g : B ⟶ S) (a : T ⟶ B) (g' : T ⟶ S) (w : g' = a ≫ g)

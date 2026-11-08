@@ -35,7 +35,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 open MonoidalCategory in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 1600000 in
+set_option maxHeartbeats 500000 in
 -- Comparing the two adjunction units unfolds the tensor-pullback construction.
 private theorem quotient_unit_eq_zero_iff
     {A : Type u} [CommRing A] {X : Scheme.{u}}
@@ -150,7 +150,7 @@ private theorem finite_principal_upper_bound
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 1600000 in
+set_option maxHeartbeats 1200000 in
 -- Ideal comparisons and the explicit pullback units require additional elaboration.
 /-- A section vanishing on the closed fibre vanishes modulo a nonzero element of the
 maximal ideal. Source: Stacks Project, Tag 0EX8, proof of

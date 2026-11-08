@@ -115,7 +115,7 @@ private theorem strictPerfect_isKFlat_local (X : Scheme.{u}) (U : X.Opens)
     (hk ((HomotopyCategory.quotient C (.up ℤ)).obj F)
       ((HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic _).2 hF)).2
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- Comparing the concrete tensor and its derived monoidal carrier needs extra elaboration.
 private theorem local_kFlat_tensor_invariance (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]
@@ -186,7 +186,6 @@ private theorem local_kFlat_tensor_invariance (X : Scheme.{u}) (U : X.Opens)
 
 set_option linter.unusedVariables false in
 -- The unchanged interface assumes B strictly perfect; K-flatness of A already suffices.
-set_option maxHeartbeats 800000 in
 -- Localized-site tensor comparisons require additional elaboration steps.
 /-- On a fixed open, prescribed strictly perfect models compute the restriction of the
 ordinary tensor of global K-flat representatives. No perfectness hypothesis or choice of

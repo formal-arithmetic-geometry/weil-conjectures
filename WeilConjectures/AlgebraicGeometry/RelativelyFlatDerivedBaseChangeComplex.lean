@@ -50,7 +50,6 @@ private theorem tensor_cancel_iso {C : Type*} [Category C] [MonoidalCategory C]
     tensorHom_comp_tensorHom]
   simp
 
-set_option maxHeartbeats 1600000 in
 -- Naturality compares the derived adjunctions and composition isomorphisms.
 private theorem baseChange_naturality
     [∀ Y : Scheme.{u},
@@ -108,7 +107,7 @@ private theorem baseChange_naturality
     ← adj'.homEquiv_naturality_right, ht]
 
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- Tensor representative transport needs additional instance and equality elaboration.
 /-- The canonical base-change map for a relatively flat bounded-above complex is
 invertible. `P` is a K-flat representative of `E` (`e`), so the total tensor complex

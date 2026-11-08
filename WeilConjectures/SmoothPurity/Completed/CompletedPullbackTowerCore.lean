@@ -558,7 +558,7 @@ instance pullbackTensorLevelAdditive {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) 
 Source: Stacks 079P and 0941 (blueprint: def-pur-completed-pullback-tower-core). -/
 instance pullbackTensorTowerKInjectives (W : Scheme.{u}) :
     Abelian.HasKInjectiveResolutions (ℕᵒᵖ ⥤ integralTowerModules l E W) :=
-  coefficientConstantTowers_haveKInjectives l E W
+  coefficientConstantTowersKInjectives l E W
 
 /-- The standard localization functor for completed-coefficient towers.
 Source: Stacks 05RU (blueprint: def-pur-completed-pullback-tower-core). -/

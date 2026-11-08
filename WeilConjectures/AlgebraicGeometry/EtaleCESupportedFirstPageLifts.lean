@@ -28,7 +28,6 @@ namespace AlgebraicGeometry.Etale
 
 -- The map family is indexed by v although its result type does not depend on v.
 set_option linter.unusedVariables false in
-set_option maxHeartbeats 1000000 in
 -- Elaborate the dependent presentation, page-realization and comparison families together.
 /-- Construct coherent first-page lifts with filtration bounds for every input support bound.
 No stationary comparison or map on the abutment is asserted.

@@ -24,7 +24,6 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
 set_option linter.unusedVariables false in
-set_option maxHeartbeats 1000000 in
 -- Elaborate the prescribed presentation, normalized pages and signed row families together.
 /-- Prescribed CE presentations with signed comparisons to the actual sections-row homology.
 Source: Stacks Project, Tags 015J, 015K and 012K.

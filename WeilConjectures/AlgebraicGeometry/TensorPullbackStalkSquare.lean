@@ -46,7 +46,6 @@ local instance tensorPullbackStalkSquareInstance4 (Y : Scheme.{u}) (M : Y.Module
     ((curriedTensor Y.Modules).obj M).PreservesZeroMorphisms :=
   SheafOfModules.preservesZeroMorphisms_curriedTensor_obj Y.sheaf M
 
-set_option maxHeartbeats 1500000 in
 -- Elaborating the scalar-extension and stalk tensor constructions needs more heartbeats.
 /-- Stalk compatibility of a specified tensor pullback chain map.
 

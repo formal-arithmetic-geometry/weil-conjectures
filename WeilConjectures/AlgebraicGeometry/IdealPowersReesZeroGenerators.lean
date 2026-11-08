@@ -27,10 +27,9 @@ universe v
 open CategoryTheory Opposite
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 200000 in
+set_option synthInstance.maxHeartbeats 20000 in
 -- Transporting finite local generators through the iterated slice sites needs more
 -- elaboration heartbeats; this file still compiles within the 60-second limit.
-set_option synthInstance.maxHeartbeats 20000 in
 set_option backward.isDefEq.respectTransparency false in
 
 /-- Restriction preserves finite type: pull the local generating cover back along

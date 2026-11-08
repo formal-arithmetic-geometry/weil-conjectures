@@ -41,7 +41,6 @@ instance diagonalReductionWhiskering_preservesFiniteColimits
     PreservesFiniteColimits ((Functor.whiskeringRight ℕᵒᵖ B D).obj G) where
   preservesFiniteColimits _ _ _ := inferInstance
 
-set_option maxHeartbeats 2000000 in
 -- The cochain single comparison checks several nested exact-functor constructions.
 /-- A comparison of reduction counits on a single complex gives its degree-zero square.
 

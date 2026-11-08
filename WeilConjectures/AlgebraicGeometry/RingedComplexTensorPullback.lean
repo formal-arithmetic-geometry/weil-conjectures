@@ -100,7 +100,6 @@ private theorem inverseNaturality
   simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
   rw [h, Iso.inv_hom_id_assoc]
 
-set_option maxHeartbeats 800000 in
 -- Prove the component calculation abstractly, before specializing to module sheaves.
 private theorem tensorTotalRightUnit
     {E : Type u} [Category.{w} E] [Abelian E] [MonoidalCategory E]
@@ -188,7 +187,6 @@ private theorem tensorTotalRightUnit
   simp only [Category.assoc]
   exact (HomologicalComplex.rightUnitor'_inv N n).symm
 
-set_option maxHeartbeats 800000 in
 -- Keep total-complex constructions abstract until their one sheaf specialization.
 private theorem tensorComparisonFamily
     {E : Type u} [Category.{w} E] [Abelian E] [MonoidalCategory E]
@@ -242,7 +240,6 @@ private theorem tensorComparisonFamily
     exact normalizedComposite _ (β N RX).symm ((T.obj (Pc.obj N)).mapIso j) _
       (tensorTotalRightUnit P μ hμ j₀ hunit N)
 
-set_option maxHeartbeats 800000 in
 -- The two naturalities and unit calculation elaborate in one declaration.
 /-- Module inverse image commutes with total tensor, naturally in both complexes,
 and the comparison respects the inverse right unitor.

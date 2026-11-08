@@ -124,9 +124,9 @@ theorem nestedOpen_single_directImage_comparison
     Functor.isoWhiskerLeft _ hR ≪≫ (Functor.associator _ _ _).symm ≪≫
       Functor.isoWhiskerRight hbase E ≪≫ Functor.associator _ _ _
   let : (Scheme.Modules.pushforward f).Additive :=
-    RingedSpace.moduleDirectImage_additive_proof f.toLRSHom.toShHom
+    RingedSpace.moduleDirectImage_additive f.toLRSHom.toShHom
   let : (Scheme.Modules.pushforward r).Additive :=
-    RingedSpace.moduleDirectImage_additive_proof r.toLRSHom.toShHom
+    RingedSpace.moduleDirectImage_additive r.toLRSHom.toShHom
   have hD : schemeDerivedDirectImage f ⋙ R.mapDerivedCategory ≅
       (@Functor.mapDerivedCategory _ _ _
         (inferInstance : HasDerivedCategory.{wX} X.Modules) _ _ _

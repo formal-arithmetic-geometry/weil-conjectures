@@ -25,7 +25,6 @@ attribute [local irreducible] tensorPullback tensorPullbackObj
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-set_option maxHeartbeats 400000 in
 -- Section transports across two composite adjunctions require extra elaboration.
 /-- The second factor of open base change preserves local unit sections.
 Source: Stacks Project, Tags 0096, 0097 and 01CD.

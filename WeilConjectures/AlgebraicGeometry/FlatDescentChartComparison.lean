@@ -95,7 +95,7 @@ theorem exists_flat_descent_chart_comparison
             Arrow.mk (Spec.map (CommRingCat.ofHom
               (Algebra.TensorProduct.map (Algebra.ofId R R) a.map).toRingHom)))) := by
   classical
-  obtain ⟨F, e0, hi, eL, hL⟩ := exists_affineOpen_directedRingSystem D c hc i₀ W₀ hW
+  obtain ⟨F, e0, hi, eL, hL⟩ := exists_affineOpen_ringSystem_of_isLimit D c hc i₀ W₀ hW
   let R := F.obj ⟨i₀, le_rfl⟩
   let B := Γ(V₀.toScheme, ⊤)
   let C := Γ(U₀.toScheme, ⊤)

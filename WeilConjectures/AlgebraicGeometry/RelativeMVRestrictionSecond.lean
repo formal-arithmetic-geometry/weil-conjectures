@@ -19,7 +19,6 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 1200000 in
 -- The fixed adjunction data require a larger elaboration budget.
 private theorem restriction_coefficients
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w}

@@ -98,7 +98,6 @@ private theorem restrict_forget_homology {R S : Type u} [CommRing R] [CommRing S
   erw [F.map_id, Category.id_comp]
   congr 1
 
-set_option maxHeartbeats 800000 in
 -- The expanded stalk comparison requires a larger elaboration budget.
 private theorem ordinary_homology_eq {Y Z : Scheme.{u}} (j : Y ⟶ Z) [IsIso j]
     (y : Y) (i : ℤ)
@@ -136,7 +135,7 @@ private theorem ordinary_homology_eq {Y Z : Scheme.{u}} (j : Y ⟶ Z) [IsIso j]
 attribute [local irreducible] ordinaryIsoPullbackStalkComplexIso
   ordinaryIsoPullbackStalkHomologyIso
 
-set_option maxHeartbeats 1200000 in
+set_option maxHeartbeats 700000 in
 -- The two stalk-ring diagrams require a larger elaboration budget.
 /-- The homology transport equation for supplied affine coordinate data.
 Source: Stacks Project, Tag 0098.

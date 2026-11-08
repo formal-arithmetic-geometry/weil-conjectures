@@ -26,7 +26,6 @@ attribute [local irreducible] pushforward pushforwardComp pushforwardCongr pushf
 
 -- Keep the existing unused let A in the statement without changing its signature.
 set_option linter.unusedVariables false in
-set_option maxHeartbeats 800000 in
 -- The statement elaborates several successive module pushforwards and pullbacks.
 /-- The adjoint of the restricted tensor unit is invertible on a fixed chart.
 Source: Stacks Project, Tags 0096 and 0097, and Tag 02KH's affine-local dictionary.

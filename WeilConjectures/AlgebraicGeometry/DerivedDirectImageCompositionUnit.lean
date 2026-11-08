@@ -26,7 +26,6 @@ namespace AlgebraicGeometry
 
 attribute [local instance 2000] schemeMVModuleAbelian
 
-set_option maxHeartbeats 400000 in
 -- Comparing the whole and successive pushforwards expands scalar restrictions once.
 /-- The existing composite derived unit, with its source expressed by successive images.
 The source identification is definitional: pushforward composition is the identity

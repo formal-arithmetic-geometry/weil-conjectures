@@ -63,7 +63,7 @@ private theorem restriction_component {Z : Scheme.{u}} (U : Z.Opens)
   rw [← M.presheaf.map_comp, ← M.presheaf.map_comp]
   congr 1
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 700000 in
 -- Resolution comparison unfolds the scheme module and ringed-space section interfaces.
 /-- Restriction on module cohomology is computed by the restriction of sections of a
 fixed resolution, followed by the pinned identification of the restricted resolution.

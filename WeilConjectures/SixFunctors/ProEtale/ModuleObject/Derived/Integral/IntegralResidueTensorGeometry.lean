@@ -104,7 +104,7 @@ theorem integralResidue_tensorGeometry {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (Functor.whiskerLeft F (residueExchangeTensorPullIso ℓ E f).hom)
   intro M
   obtain ⟨P, hP, ⟨e⟩⟩ :=
-    CategoryTheory.Functor.residue_exists_kFlatMap_iso (f)^*⟦integralCoeff ℓ E⟧ M
+    CategoryTheory.Functor.exists_kFlatMap_iso (f)^*⟦integralCoeff ℓ E⟧ M
   have h : α.app (DerivedCategory.Qh.obj P) = β.app (DerivedCategory.Qh.obj P) := by
     have : IsIso (residueExchangeTensorModelTarget ℓ E f P) := by
       let : BraidedCategory (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) :=

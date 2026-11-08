@@ -27,7 +27,6 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 400000 in
 -- Transporting the comparison across three chosen localization categories needs extra elaboration.
 set_option backward.isDefEq.respectTransparency false in
 /-- The unshifted Hom diagram of Koszul tails into a supported quasi-coherent

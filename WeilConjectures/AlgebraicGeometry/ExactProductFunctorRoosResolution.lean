@@ -217,7 +217,6 @@ private theorem towerGrothendieck [IsGrothendieckAbelian.{v} A] :
 
 end Inclusions
 
-set_option maxHeartbeats 800000 in
 -- The simultaneous cone and localization comparisons require extra elaboration steps.
 /-- The resolution formula for a fixed comparison satisfying the localization square.
 

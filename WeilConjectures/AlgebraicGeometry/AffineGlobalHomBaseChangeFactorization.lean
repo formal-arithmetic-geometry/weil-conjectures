@@ -30,7 +30,6 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 1200000 in
 -- The normalized adjunction equations expand the shared derived tensor instances.
 /-- The affine global Hom comparison is the sections of the sheaf base-change map
 on internal Hom, conjugated by the affine source comparison and the perfect-source

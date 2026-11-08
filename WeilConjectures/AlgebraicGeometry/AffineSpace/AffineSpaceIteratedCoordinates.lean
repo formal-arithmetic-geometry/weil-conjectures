@@ -20,7 +20,6 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 800000 in
 -- Coordinate recursion unfolds the affine-line tower and its section pullbacks.
 /-- A map to the affine tower is determined by its base map and ordered coordinates.
 Source: universal property of relative affine space, iterated one coordinate at a time

@@ -38,7 +38,7 @@ private theorem inputBaseAbLocallyBijective (S : Scheme.{u}) :
 
 private theorem inputOverAbLocallyBijective (S : Scheme.{u}) (U : S.ProEt) :
     ((ProEt.topology S).over U).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
-  finitePerfectModelsSliceAbLocallyBijective S U
+  strictPerfectSliceLocallyBijective S U
 
 attribute [local instance 100000] inputBaseAbLocallyBijective inputOverAbLocallyBijective
 

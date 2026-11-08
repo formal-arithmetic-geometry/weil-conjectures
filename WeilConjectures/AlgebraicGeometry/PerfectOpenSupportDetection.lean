@@ -73,7 +73,7 @@ private theorem perfect_shift (X : Scheme.{u})
     exact ⟨(L.commShiftIso n).app P ≪≫ (shiftFunctor _ n).mapIso e ≪≫
       ((DerivedCategory.Q.commShiftIso n).app K).symm⟩
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- The slice-site and open-subscheme derived categories require expensive comparisons.
 /-- If every map from a global perfect complex into K vanishes after restriction to a
 quasi-compact open U, every cohomology stalk of K on U is zero.

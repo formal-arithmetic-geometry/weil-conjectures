@@ -61,13 +61,13 @@ theorem isIso_abelian_globalSectionsUpperStarMap_of_finite_connected_closed_inte
         IsConnected (C ∩ h ⁻¹' Set.range i))
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :
     IsIso (globalSectionsUpperStarMap AddCommGrpCat.{u + 1} i G) := by
-  have hZar := zariski_closed_immersion_connected_restriction i (fun x ↦ by
+  have hZar := zariski_restriction_universe_transport i (fun x ↦ by
     simpa using hconn X (𝟙 X) (closure ({x} : Set X)) isClosed_closure
       (isIrreducible_singleton.closure))
   have hFinite (X' : Scheme.{u}) (h : X' ⟶ X) [IsFinite h] := by
     letI : CompactSpace X' := QuasiCompact.compactSpace_of_compactSpace h
     letI : QuasiSeparatedSpace X' := quasiSeparatedSpace_of_quasiSeparated h
-    exact zariski_closed_immersion_connected_restriction (pullback.snd i h) (fun x ↦ by
+    exact zariski_restriction_universe_transport (pullback.snd i h) (fun x ↦ by
       rw [Scheme.Pullback.range_snd]
       exact hconn X' h (closure ({x} : Set X')) isClosed_closure
         (isIrreducible_singleton.closure))

@@ -24,8 +24,7 @@ variable {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
 variable (A : Type u') [Category.{u + 1} A] [Abelian A]
   [IsGrothendieckAbelian.{u + 1} A]
 
-local instance : HasColimitsOfSize.{u, u + 1} A :=
-  hasColimitsOfSizeShrink.{u, u + 1, u + 1, u + 1} A
+attribute [local instance] FiniteSplitEtaleHypercover.instHasColimitsOfSize
 
 /- The following finite staircase uses the resolution degree as its first index.
 Its only geometric input is detection by local primitives; source objects in A

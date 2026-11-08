@@ -20,7 +20,7 @@ namespace AlgebraicGeometry
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 800000 in
 -- Transport across nested derived functors requires extra elaboration heartbeats.
 /-- The stage Hom and restricted structure-Hom identifications intertwine the canonical
 Koszul comparison with restriction and augmentation.

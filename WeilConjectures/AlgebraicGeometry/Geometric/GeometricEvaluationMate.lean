@@ -92,7 +92,6 @@ variable (O : GeometryOrdinary.{c, v, r} J B τ J' uInv uPush adjSet)
   [Abelian.HasKInjectiveResolutions
     (Systems.{c, v, max c v r} J' O.coefficients O.coefficientTransition)]
 
-set_option maxHeartbeats 800000 in
 -- Compare the singleton adjunctions in four independently derived module categories.
 /-- Invertibility of the canonical right mate of exact geometric evaluation.
 Source: Zheng Construction 4.1 and the paragraph before Lemma 4.10; Stacks 03EL,

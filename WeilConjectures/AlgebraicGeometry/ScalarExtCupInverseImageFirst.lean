@@ -45,7 +45,6 @@ private theorem rightUnitTransport {Z : Scheme.{w}} {M : KSheaf Z k} {n : ℕ}
   rw [← Abelian.Ext.comp_assoc_of_second_deg_zero, Abelian.Ext.mk₀_comp_mk₀]
   rw [← unitors_equal, Iso.inv_hom_id, Abelian.Ext.mk₀_id_comp]
 
-set_option maxHeartbeats 800000 in
 -- Comparing the composite sheaf adjunctions requires unfolding their evaluation functors.
 private theorem unitComparison (t : Y ⟶ X) :
     (scalarInverseUnitIso (k := k) t).hom =
@@ -102,7 +101,7 @@ private theorem unitComparison (t : Y ⟶ X) :
     (Opens.map t.base) (ModuleCat.{w} k) (Opens.grothendieckTopology X)
       (Opens.grothendieckTopology Y) (Opposite.op ⊤)).symm
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- Normalize the inverse-image functor before applying monoidal coherence.
 /-- Compatibility of the first tensor transport with exact inverse image.
 Source: Stacks Project, Cohomology, Tags 01FD, 07MB and 0FKV.

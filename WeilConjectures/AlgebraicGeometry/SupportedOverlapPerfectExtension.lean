@@ -28,7 +28,6 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-set_option maxHeartbeats 800000 in
 -- The chosen overlap localization and its open-site family are dependent data.
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in

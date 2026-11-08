@@ -137,9 +137,9 @@ private theorem open_trivialized_image_spectrum_comparison
   have h0 : Modules.pushforward p ⋙ H ≅ A ⋙ Modules.pushforward r :=
     Functor.isoWhiskerLeft _ hHB ≪≫ hbase
   have : (Modules.pushforward p).Additive :=
-    RingedSpace.moduleDirectImage_additive_proof p.toLRSHom.toShHom
+    RingedSpace.moduleDirectImage_additive p.toLRSHom.toShHom
   have : (Modules.pushforward r).Additive :=
-    RingedSpace.moduleDirectImage_additive_proof r.toLRSHom.toShHom
+    RingedSpace.moduleDirectImage_additive r.toLRSHom.toShHom
   have hD : schemeDerivedDirectImage p ⋙ H.mapDerivedCategory ≅
       A.mapDerivedCategory ⋙ schemeDerivedDirectImage r :=
     (Functor.rightDerivedFunctorCompMapDerivedCategoryIso.{v + 1, v + 1, v + 1}

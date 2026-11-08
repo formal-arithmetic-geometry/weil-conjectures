@@ -107,7 +107,6 @@ theorem exceptionalSiteOriginComparison_level_inverse_bound
         (C.ordinary.lift n).modules.mapDerivedCategoryFactors.symm) |>.app N
   exact DerivedCategory.TStructure.t.isGE_of_iso he.symm a
 
-set_option maxHeartbeats 2000000 in
 -- Assemble all coherence fields at the concrete pro-etale site sizes.
 private theorem exceptionalProEvaluation_exists (W : Scheme.{u}) (O : Type (u + 1)) [CommRing O]
     (ell : O) : Nonempty (ExceptionalProEvaluation W O ell) := by
@@ -325,7 +324,7 @@ variable (O : Type (u + 1)) [CommRing O] (ell : O) (W : Scheme.{u})
   (S : CoefficientSystemOrdinaryImage (J := W.smallEtaleTopology)
     (K := Scheme.ProEt.topology W) O ell _ _ (Scheme.proEtaleSiteComparison W))
 
-set_option maxHeartbeats 2000000 in
+set_option maxHeartbeats 1300000 in
 -- Elaborate the sectionwise addition and scalar-action graph calculations.
 private theorem exceptionalSiteRight_existsUnique (n : ℕ) :
     ∃! e : S.right n ⋙ exceptionalLevelRealization W.smallEtaleTopology O ell n ≅
@@ -562,7 +561,6 @@ private def exceptionalSiteInverse (n : ℕ) :
   have : IsIso α := isIso_inverseMate_of_equivalences adj₁ adj₂ β
   exact (asIso α).symm
 
-set_option maxHeartbeats 2000000 in
 -- Transport the two realization equivalences and their derived comparison square.
 private theorem exceptionalLevel_full
     [∀ n : ℕ, Finite (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1))]
@@ -673,7 +671,7 @@ private theorem exceptional_inverse_scalar_transpose
       dsimp only [Functor.comp_obj]
       rw [Category.comp_id]
 
-set_option maxHeartbeats 2000000 in
+set_option maxHeartbeats 1000000 in
 -- Assemble the derived comparison and all evaluation and scalar-mate clauses.
 /-- The site comparison core, before the final evaluation-origin projection.
 Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 09B1.

@@ -85,7 +85,7 @@ theorem gabber_absolutely_algebraically_closed
     intro f g x
     have := Etale.gabber_quotient_principal_h1 R hsep I M (f + g)
     exact Subsingleton.elim _ _
-  have hvan := Etale.gabberCriterion (R ⧸ I) hR F
+  have hvan := Etale.gabberCriterion_degree (R ⧸ I) hR F
     (fun f g x _ _ ↦ hfg f g x)
   have hqnonneg : 0 ≤ q := by omega
   have hqnat : 0 < q.toNat := by omega

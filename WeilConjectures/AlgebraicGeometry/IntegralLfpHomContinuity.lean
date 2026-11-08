@@ -23,7 +23,6 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
 set_option backward.isDefEq.respectTransparency true in
-set_option maxHeartbeats 800000 in
 -- Exact single-sheaf triangles carry the integral coefficient instance.
 /-- Hom continuity for a locally finitely presented integral module on the scheme itself.
 Source: Bhatt--Scholze, Definition 6.8.10, Proposition 6.8.11(3) and Lemma 6.8.12.

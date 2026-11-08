@@ -100,8 +100,8 @@ set_option synthInstance.maxSize 4096
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 attribute [-instance] AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.modulesAbelian
   AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.hasDerived
-attribute [-instance] AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.sheafify
-  AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.locallyBijective
+attribute [-instance] AlgebraicGeometry.ProEtale.surjectiveTower_hasSheafify
+  AlgebraicGeometry.ProEtale.surjectiveTower_wEqualsLocallyBijective
 
 universe t u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Opposite

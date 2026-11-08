@@ -247,8 +247,9 @@ jobs:
           cd stage
           # Only the expected files, all regular.
           find . -mindepth 1 \( -type l -o \( ! -type f ! -type d \) \) -print | grep . && exit 1 || true
-          find . -type f ! -path ./map.jsonl ! -path ./lean-toolchain \
-            ! -regex '\./artifacts/[0-9a-f]\{16\}\.ltar' -print | grep . && exit 1 || true
+          # (find's default regex dialect is Emacs, which has no {n} counts: use POSIX ERE.)
+          find . -type f ! -path ./map.jsonl ! -path ./lean-toolchain -regextype posix-extended \
+            ! -regex '\./artifacts/[0-9a-f]{16}\.ltar' -print | grep . && exit 1 || true
           # The toolchain names the revision scope; only official releases.
           grep -Eqx 'leanprover/lean4:v[0-9]+\.[0-9]+\.[0-9]+(-rc[0-9]+)?' lean-toolchain
           # Map: a version header, then [16-hex input hash, 16-hex archive] lines.

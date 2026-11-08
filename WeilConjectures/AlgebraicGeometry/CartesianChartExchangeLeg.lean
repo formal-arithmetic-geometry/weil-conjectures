@@ -36,7 +36,6 @@ private noncomputable def cartesianChartPullbackLeg
       congr 1
       exact congrArg (fun t ↦ t.left) (c.w j.hom))
 
-set_option maxHeartbeats 1000000 in
 -- Expanding chart comparisons and adjunction units needs a local reduction budget.
 private lemma cartesianChartCone_leg_eq_pullback
     {S X : Scheme.{u}} (f : X ⟶ S)

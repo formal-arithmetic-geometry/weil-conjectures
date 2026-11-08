@@ -360,7 +360,6 @@ private theorem arrow_of_components
   rw [← reassoc_of% hn]
   exact (congrArg (fun k ↦ F.map (H.map z) ≫ k) h₁).symm
 
-set_option maxHeartbeats 1200000 in
 -- Elaborating the derived endpoint comparison unfolds several exact-functor compositors.
 /-- Exact completed realization commutes with inverse image, with the prescribed
 unit and integral Tate-line endpoints, their shifts, and normalized arrows.

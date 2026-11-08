@@ -84,7 +84,6 @@ def independentFromTower : (ℕᵒᵖ ⥤ ringedSiteModules.{max c v r} ((sheafC
   map_id F := rfl
   map_comp f g := rfl
 
-set_option maxHeartbeats 800000 in
 -- Identity coefficient restrictions require reducing the varying-ring system interface.
 /-- The independentSystemTowerEquivalence construction with independent site and module universes.
 Source: Stacks 03DA, 0940; Zheng 4.1

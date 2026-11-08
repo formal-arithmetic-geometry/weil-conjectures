@@ -26,7 +26,6 @@ universe u w
 open CategoryTheory
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 800000 in
 -- Comparing the two sheaf adjunctions requires unfolding their common right adjoint.
 private theorem tensor_structure_transport {A B : Scheme.{u}} (k : A ⟶ B) :
     ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction k)).leftAdjointUniq
@@ -67,7 +66,6 @@ private theorem mapped_square
     (h : a ≫ v = u ≫ b) : F.map a ≫ F.map v = F.map u ≫ F.map b := by
   simpa only [Functor.map_comp] using congrArg F.map h
 
-set_option maxHeartbeats 800000 in
 -- The naturality square involves localization of the sheaf single-complex comparisons.
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
@@ -97,7 +95,7 @@ private theorem single_pullback_naturality
   have hh := compose_three_squares _ _ _ _ _ _ _ _ _ _ hε hc ht
   exact hh
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- The right-derived unit is compared with localized single-complex morphisms.
 private theorem single_directImage_naturality
     [∀ Y : Scheme.{u},
@@ -128,7 +126,7 @@ private theorem single_directImage_naturality
   simp only [Functor.comp_map] at hc
   exact hc.symm
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- Naturality rewrites elaborate the selected derived functors and localization maps.
 /-- The canonical structure maps commute with the pinned derived exchange map.
 No cartesianness, flatness, vanishing or invertibility assumption is needed.

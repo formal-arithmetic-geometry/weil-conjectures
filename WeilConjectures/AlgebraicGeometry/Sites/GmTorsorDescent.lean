@@ -300,8 +300,8 @@ theorem exists_etaleIsoTorsor_equiv :
   have hcov := ofArrows_mem_fpqcTopology T
   have hD (i : ι) : ((descentData T V t).obj i : (V i).left.Modules).IsQuasicoherent :=
     Modules.isQuasicoherent_pullback (V i).hom (Modules.unit X)
-  obtain ⟨M, hM, ⟨e⟩⟩ := exists_isQuasicoherent_toDescentData_iso (fun i : ι ↦ (V i).hom) hcov
-    (descentData T V t) hD
+  obtain ⟨M, hM, ⟨e⟩⟩ := exists_isQuasicoherent_toDescentData_iso_of_mem_fpqcTopology
+    (fun i : ι ↦ (V i).hom) hcov (descentData T V t) hD
   have hDinv (i : ι) : SheafOfModules.IsInvertible.{u, u, u}
       ((descentData T V t).obj i : (V i).left.Modules) :=
     SheafOfModules.IsInvertible.of_iso.{u, u, u} (M := 𝟙_ (V i).left.Modules)

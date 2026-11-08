@@ -44,7 +44,6 @@ private theorem tensorQuasicoherent {A B : Scheme.{u}} (f : A ⟶ B)
   exact (SheafOfModules.isQuasicoherent A.ringCatSheaf).prop_of_iso (e.app M).symm
     (inferInstance : ((Modules.pullback f).obj M).IsQuasicoherent)
 
-set_option maxHeartbeats 200000 in
 -- Compare tensor-product scalar instances and sectionwise module morphisms.
 /-- Over affine objects, tensoring coefficient sections with the target ring gives
 sections on the target, with the unit-normalized restriction formula.

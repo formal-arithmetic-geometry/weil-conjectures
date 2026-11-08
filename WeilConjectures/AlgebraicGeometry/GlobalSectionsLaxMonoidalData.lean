@@ -30,9 +30,8 @@ local instance globalSectionsLaxDataMonoidal :
 local instance globalSectionsLaxDataSymmetric :
     SymmetricCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   SheafOfModules.symmetricCategory X.toRingedSpace.sheaf
-local instance globalSectionsLaxDataColimits :
-    HasColimitsOfSize.{0, 0} (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
-  hasColimitsOfSizeShrink.{0, 0, u} _
+attribute [local instance]
+  instHasColimitsOfSizeSheafOfModulesOpensCarrierCarrierCommRingCatToRingedSpaceModuleRings
 local instance globalSectionsLaxDataPreadditive :
     MonoidalPreadditive (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   Classical.choice (SheafOfModules.tensorClosed X.toRingedSpace.sheaf).1
