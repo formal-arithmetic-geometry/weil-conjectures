@@ -354,7 +354,7 @@ lemma specMap_comp_specInertiaInvariantsTo_of_compatible
     not_isUnit_of_inertiaInvariantsToField_mem Q hbQ (by
       rw [map_sub, hε, AlgHom.commutes, hb])
   have h0 := (hr _).2 hd
-  rw [map_sub, sub_eq_zero, show r (ε c) = c from RingHom.congr_fun hrε c] at h0
+  rw [r.map_sub, sub_eq_zero, show r (ε c) = c from RingHom.congr_fun hrε c] at h0
   exact h0.symm
 
 /-- The neighbourhood `Spec B_Q^{I_Q} ⟶ C̄` given by `Spec B_Q^{I_Q} ⟶ C` and an embedding
@@ -466,7 +466,7 @@ theorem exists_residueField_emb_compatible (ε₀ : AlgebraicClosure k₀ →+* 
     rw [hι₀, hc]
     have hd : ¬ IsUnit
         (ε c - algebraMap Γ(C, W) (Ideal.inertiaInvariants C.functionField Q) a) := by
-      rw [← hr, map_sub, show r (ε c) = c from RingHom.congr_fun hrε c, hc, sub_self]
+      rw [← hr, r.map_sub, show r (ε c) = c from RingHom.congr_fun hrε c, hc, sub_self]
     let : Algebra k₀ Γ(C, W) := (sectionsStructHom (k₀ := k₀) hW).toAlgebra
     let : Algebra k₀ Ω := ((algebraMap Γ(C, W) Ω).comp (sectionsStructHom (k₀ := k₀) hW)).toAlgebra
     have : IsScalarTower k₀ Γ(C, W) Ω := IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
