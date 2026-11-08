@@ -66,7 +66,7 @@ private theorem cartesianOpenExchange_isIso
   let e := (leftDerivedUpperStarIsoMapDerivedCategory Λ w).app
       ((openImmersionLowerShriek Λ j).mapDerivedCategory.obj K) ≪≫
     (Functor.mapDerivedCategoryCompIso
-      (openImmersionLowerShriek Λ j) (upperStar Λ w)).symm.app K
+      (openImmersionLowerShriek Λ j) (upperStar Λ w)).app K
   have hc := cartesianDerivedCounit Λ sq K
   have ht : IsIso
       ((derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j').counit.app
