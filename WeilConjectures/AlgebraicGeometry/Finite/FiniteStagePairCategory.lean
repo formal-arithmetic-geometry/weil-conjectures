@@ -1148,6 +1148,131 @@ def pbcIntegralScalarAssociator (h : E ≤ F) (k : F ≤ G) :
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+private theorem pbcDerivedRestriction_leftUnit (h : E ≤ F) :
+    pbcDerivedRestrictComp (pbcCompletedScalarMap l Ω T (le_refl E))
+        (pbcCompletedScalarMap l Ω T h) (pbcCompletedScalarMap l Ω T h)
+        (pbcCompletedScalarMap_comp l Ω T (le_refl E) h) =
+      Functor.isoWhiskerLeft (pbcDerivedRestrict (pbcCompletedScalarMap l Ω T h))
+          (Functor.exactDerivedRestrictionUnit _
+            (SheafOfModules.systemScalarRestrictionUnit
+              (pbcCompletedScalarMap l Ω T (le_refl E)) (pbcCompletedScalarMap_id l Ω T E))) ≪≫
+        Functor.rightUnitor (pbcDerivedRestrict (pbcCompletedScalarMap l Ω T h)) := by
+  let : EssentiallySmall.{u + 1} T.ProEt := essentiallySmallSelf.{0, u, u + 1} _
+  let φ := pbcCompletedScalarMap l Ω T (le_refl E)
+  let ψ := pbcCompletedScalarMap l Ω T h
+  let ρ := SheafOfModules.systemScalarRestrictionUnit φ (pbcCompletedScalarMap_id l Ω T E)
+  have he : pbcRestrictComp φ ψ ψ
+      (pbcCompletedScalarMap_comp l Ω T (le_refl E) h) =
+      Functor.isoWhiskerLeft (pbcRestrict ψ) ρ := by
+    apply Iso.ext
+    ext M U x
+    change ((pbcRestrictComp φ ψ ψ
+      (pbcCompletedScalarMap_comp l Ω T (le_refl E) h)).hom.app M).val.app U x = x
+    exact (pbcRestrictComp_exists φ ψ ψ
+      (pbcCompletedScalarMap_comp l Ω T (le_refl E) h)).exists.choose_spec M U x
+  unfold pbcDerivedRestrictComp
+  dsimp only [pbcDerivedRestrict]
+  rw [he]
+  apply Iso.ext
+  ext X
+  have hn := congr_app (Functor.mapDerivedCategoryNatIso_isoWhiskerLeft
+    (pbcRestrict ψ) ρ) X
+  have hu := congr_app (Functor.mapDerivedCategoryCompIso_comp_id (pbcRestrict ψ)) X
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app] at hn hu
+  simp only [Functor.exactDerivedRestrictionUnit, Iso.trans_hom, Iso.symm_hom,
+    NatTrans.comp_app, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
+    Functor.rightUnitor_hom_app]
+  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso (pbcRestrict ψ)
+    (pbcRestrict φ)).inv.app X)).1
+  erw [Iso.inv_hom_id_app_assoc]
+  simp only [← Category.assoc]
+  rw [← hn]
+  simp only [Category.assoc]
+  simp only [NatTrans.id_app] at hu
+  erw [reassoc_of% hu]
+  erw [Category.id_comp, Category.comp_id]
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem pbcDerivedRestriction_rightUnit (h : E ≤ F) :
+    pbcDerivedRestrictComp (pbcCompletedScalarMap l Ω T h)
+        (pbcCompletedScalarMap l Ω T (le_refl F)) (pbcCompletedScalarMap l Ω T h)
+        (pbcCompletedScalarMap_comp l Ω T h (le_refl F)) =
+      Functor.isoWhiskerRight
+          (Functor.exactDerivedRestrictionUnit _
+            (SheafOfModules.systemScalarRestrictionUnit
+              (pbcCompletedScalarMap l Ω T (le_refl F)) (pbcCompletedScalarMap_id l Ω T F)))
+          (pbcDerivedRestrict (pbcCompletedScalarMap l Ω T h)) ≪≫
+        Functor.leftUnitor (pbcDerivedRestrict (pbcCompletedScalarMap l Ω T h)) := by
+  let : EssentiallySmall.{u + 1} T.ProEt := essentiallySmallSelf.{0, u, u + 1} _
+  let φ := pbcCompletedScalarMap l Ω T h
+  let ψ := pbcCompletedScalarMap l Ω T (le_refl F)
+  let ρ := SheafOfModules.systemScalarRestrictionUnit ψ (pbcCompletedScalarMap_id l Ω T F)
+  have he : pbcRestrictComp φ ψ φ
+      (pbcCompletedScalarMap_comp l Ω T h (le_refl F)) =
+      Functor.isoWhiskerRight ρ (pbcRestrict φ) := by
+    apply Iso.ext
+    ext M U x
+    change ((pbcRestrictComp φ ψ φ
+      (pbcCompletedScalarMap_comp l Ω T h (le_refl F))).hom.app M).val.app U x = x
+    exact (pbcRestrictComp_exists φ ψ φ
+      (pbcCompletedScalarMap_comp l Ω T h (le_refl F))).exists.choose_spec M U x
+  unfold pbcDerivedRestrictComp
+  dsimp only [pbcDerivedRestrict]
+  rw [he]
+  apply Iso.ext
+  ext X
+  have hn := congr_app (Functor.mapDerivedCategoryNatIso_isoWhiskerRight
+    ρ (pbcRestrict φ)) X
+  have hu := congr_app (Functor.mapDerivedCategoryCompIso_id_comp (pbcRestrict φ)) X
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app] at hn hu
+  simp only [Functor.exactDerivedRestrictionUnit, Iso.trans_hom, Iso.symm_hom,
+    NatTrans.comp_app, Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
+    Functor.leftUnitor_hom_app, CategoryTheory.Functor.map_comp]
+  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso (pbcRestrict ψ)
+    (pbcRestrict φ)).inv.app X)).1
+  erw [Iso.inv_hom_id_app_assoc]
+  simp only [← Category.assoc]
+  rw [← hn]
+  simp only [Category.assoc]
+  simp only [NatTrans.id_app] at hu
+  erw [reassoc_of% hu]
+  erw [Category.id_comp, Category.comp_id]
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem pbcAmbientAssociator_leftUnit (h : E ≤ F) (K : pbcAmbientStage l Ω T E) :
+    (pbcAmbientScalarAssociator l Ω T (le_refl E) h).hom.app K =
+      (pbcAmbientScalarExtension l Ω T h).map ((pbcAmbientScalarUnit l Ω T E).hom.app K) := by
+  have hx := congrArg (fun e ↦ e.hom.app K)
+    (Adjunction.leftAdjointCompIso_id_comp
+      (pbcDerivedScalarAdjunction (pbcCompletedScalarMap l Ω T (le_refl E)))
+      (pbcDerivedScalarAdjunction (pbcCompletedScalarMap l Ω T h))
+      _ _ (pbcDerivedRestriction_leftUnit l Ω T h))
+  rw [← pbcAmbientScalarUnit_mate l Ω T E] at hx
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+    Functor.whiskerRight_app, Functor.leftUnitor_hom_app] at hx
+  erw [Category.comp_id] at hx
+  exact hx
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem pbcAmbientAssociator_rightUnit (h : E ≤ F) (K : pbcAmbientStage l Ω T E) :
+    (pbcAmbientScalarAssociator l Ω T h (le_refl F)).hom.app K =
+      (pbcAmbientScalarUnit l Ω T F).hom.app ((pbcAmbientScalarExtension l Ω T h).obj K) := by
+  have hx := congrArg (fun e ↦ e.hom.app K)
+    (Adjunction.leftAdjointCompIso_comp_id
+      (pbcDerivedScalarAdjunction (pbcCompletedScalarMap l Ω T h))
+      (pbcDerivedScalarAdjunction (pbcCompletedScalarMap l Ω T (le_refl F)))
+      _ _ (pbcDerivedRestriction_rightUnit l Ω T h))
+  rw [← pbcAmbientScalarUnit_mate l Ω T F] at hx
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
+    Functor.whiskerLeft_app, Functor.rightUnitor_hom_app] at hx
+  erw [Category.comp_id] at hx
+  exact hx
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 private theorem pbcAmbientScalarAssociator_cocycle
     {H : Padic.FiniteCoefficientFields l Ω} (h : E ≤ F) (k : F ≤ G) (j : G ≤ H)
     (K : pbcAmbientStage l Ω T E) :
