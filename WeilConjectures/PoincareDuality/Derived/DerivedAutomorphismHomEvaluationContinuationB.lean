@@ -464,8 +464,8 @@ def podCompletedDerivedComp : podCompletedDerivedInverseImage l E (h ≫ g) ≅
   letI := podCompletedModuleColimits l E h
   letI := podCompletedModuleColimits l E (h ≫ g)
   Functor.mapDerivedCategoryNatIso (podCompletedModuleComp l E g h) ≪≫
-    Functor.mapDerivedCategoryCompIso (podCompletedModuleInverseImage l E g)
-      (podCompletedModuleInverseImage l E h)
+    (Functor.mapDerivedCategoryCompIso (podCompletedModuleInverseImage l E g)
+      (podCompletedModuleInverseImage l E h)).symm
 
 variable [∀ x : X, Invertible (l : X.residueField x)]
   [∀ y : Y, Invertible (l : Y.residueField y)]
