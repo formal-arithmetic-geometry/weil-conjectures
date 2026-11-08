@@ -330,7 +330,6 @@ private theorem descendShift_property (L : A ⥤ B) (U : A ⥤ A) (V : B ⥤ B)
   Exists.imp hH (WeilConjectures.descendShift L U V S G T ε κ τ hG)
 end GenericDescentProperty
 section GenericSectionLeftShift
-attribute [local implicit_reducible] Functor.mapHomologicalComplex
 variable {A : Type a} [Category.{b} A] [Preadditive A]
   {C : Type c} [Category.{d} C] {J : GrothendieckTopology C}
   {R S : Sheaf J RingCat.{e}}
@@ -474,7 +473,6 @@ private theorem leftUnshiftedTransition_square (W : Scheme.{u}) (r : ℤ) (n : �
 
 section LeftTransitionGenerators
 attribute [local implicit_reducible] integralOperationsTensorLevel integralOperationsRestrict
-  Functor.mapHomologicalComplex CochainComplex.shiftFunctor
   SheafOfModules.restrictScalars PresheafOfModules.restrictScalars
   PresheafOfModules.restrictScalarsObj Functor.map₂HomologicalComplex
   integralCoefficientCommRingSheaf completedIntegralCommRingSheafUnrestricted
@@ -570,7 +568,6 @@ attribute [local implicit_reducible] leftTowerIso
 
 section LeftTowerFormula
 attribute [local implicit_reducible] integralOperationsTensorLevel integralOperationsRestrict
-  Functor.mapHomologicalComplex CochainComplex.shiftFunctor
   SheafOfModules.restrictScalars PresheafOfModules.restrictScalars
   PresheafOfModules.restrictScalarsObj Functor.map₂HomologicalComplex
   integralCoefficientCommRingSheaf completedIntegralCommRingSheafUnrestricted

@@ -33,7 +33,7 @@ namespace WeilConjectures.GeneratorReduction
 open IntegralSystemRealization
 
 attribute [local implicit_reducible] PurCompactSupport.completed
-  pullbackTensorSequenceDerived integralOperationsGoodLocalization Functor.mapHomologicalComplex
+  pullbackTensorSequenceDerived integralOperationsGoodLocalization
   coefficientSequenceHasDerived
   scalarReductionSourceDerived integralTowerHasDerivedCategory
   AlgebraicGeometry.Scheme.proEtaleRingModules_hasDerivedCategory
@@ -85,7 +85,7 @@ private noncomputable def ordinaryComp
       (PurCompactSupport.completedPull_comp l E f g)).exists.choose
 
 attribute [local irreducible] Functor.mapDerivedCategory
-  Functor.mapDerivedCategoryCompIso Functor.mapDerivedCategoryNatIso
+  Functor.mapDerivedCategoryNatIso
   Functor.mapDerivedCategoryFactors
 
 private theorem derived_comp_factors

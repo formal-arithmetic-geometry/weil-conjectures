@@ -23,7 +23,7 @@ universe u
 open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
 open scoped MonoidalCategory
 namespace WeilConjectures.PurCompactSupport
-attribute [local implicit_reducible] Functor.mapHomologicalComplex
+attribute [local implicit_reducible]
   Functor.map₂HomologicalComplex pbcDerivedRestrict
 attribute [local instance 100000] coefficientSiteSmall coefficientRingSheafify
   coefficientAbSheafify coefficientAbLocallyBijective
