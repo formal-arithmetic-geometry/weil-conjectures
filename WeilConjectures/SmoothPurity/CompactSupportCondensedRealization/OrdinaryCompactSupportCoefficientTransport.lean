@@ -459,9 +459,9 @@ def systemRestrictionPull {X Y : Scheme.{u}} (f : X ⟶ Y) :
   letI := (SemilinearProperOpen.pull_exact (quotientRings l E) (quotientMaps l E) f).2.2
   letI := (SemilinearProperOpen.pull_exact (quotientRings l F) (quotientMaps l F) f).2.1
   letI := (SemilinearProperOpen.pull_exact (quotientRings l F) (quotientMaps l F) f).2.2
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (asIso (systemRestrictionPullInv l E F i f)).symm ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
 
 attribute [local irreducible] systemRestrictionPull
 
