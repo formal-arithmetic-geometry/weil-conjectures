@@ -435,9 +435,6 @@ def automorphismStageRationalSquare
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-set_option backward.isDefEq.respectTransparency true
-set_option backward.isDefEq.respectTransparency.types true
-
 section QbarSquare
 
 set_option allowUnsafeReducibility true in
@@ -645,8 +642,8 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 end IntegralCoherence
 
-set_option backward.isDefEq.respectTransparency true
-set_option backward.isDefEq.respectTransparency.types true
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 
 -- Keep the recorded pullback interfaces opaque while checking their shift structures.
 set_option allowUnsafeReducibility true in
