@@ -1710,7 +1710,6 @@ set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
 attribute [local instance_reducible] reductionChangeComplex QuotientCompatibility
-  Functor.mapHomologicalComplex
 
 attribute [local irreducible] proEtaleReductionPullbackInv
 
