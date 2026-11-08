@@ -293,7 +293,6 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
 -- Compare the full generalized pairing with the sectionwise adjunction formula.
 /-- The ordinary comparison is uniquely determined by tensoring the canonical unit sections.
 Naturality and the unit formula characterize the map on all local generators of inverse

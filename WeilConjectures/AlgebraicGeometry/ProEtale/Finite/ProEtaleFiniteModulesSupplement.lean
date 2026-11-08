@@ -263,6 +263,15 @@ def isBoundedConstructibleFiniteCoefficient (T : Scheme.{u}) (Λ : Type (u + 1))
         (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) i).obj L))
     (finiteCoefficientDerivedComparison T Λ)
 
+/-- Equivalence structure on the canonical coefficient realization.
+Source: blueprint, def-weil-pbc-proetale-modules
+(blueprint: def-weil-pbc-proetale-modules). -/
+noncomputable instance finiteCoefficientRealizationIsEquivalenceRing (T : Scheme.{u})
+    (Λ : Type (u + 1)) [Ring Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] :
+    (finiteCoefficientRealization T Λ).IsEquivalence :=
+  coefficientRealization_isEquivalence (Scheme.ProEt.topology T) Λ
+    (finiteCoefficientRingSheaf T Λ) (finiteCoefficientScalarMap T Λ)
+
 /-- The canonical realization identifies fixed-ring module sheaves with modules over the
 continuous-function coefficient sheaf, including finite noncommutative coefficient rings.
 Source: blueprint, def-weil-pbc-proetale-modules
@@ -275,16 +284,7 @@ and their linear maps glue uniquely. This uses left modules and applies to
 noncommutative rings as well. -/
 theorem finiteCoefficientRealization_isEquivalence_ring (T : Scheme.{u}) (Λ : Type (u + 1))
     [Ring Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] :
-    (finiteCoefficientRealization T Λ).IsEquivalence := by
-  exact coefficientRealization_isEquivalence (Scheme.ProEt.topology T) Λ
-    (finiteCoefficientRingSheaf T Λ) (finiteCoefficientScalarMap T Λ)
-
-/-- Equivalence structure on the canonical coefficient realization.
-Source: blueprint, def-weil-pbc-proetale-modules
-(blueprint: def-weil-pbc-proetale-modules). -/
-noncomputable instance finiteCoefficientRealizationIsEquivalenceRing (T : Scheme.{u})
-    (Λ : Type (u + 1)) [Ring Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] :
     (finiteCoefficientRealization T Λ).IsEquivalence :=
-  finiteCoefficientRealization_isEquivalence_ring T Λ
+  finiteCoefficientRealizationIsEquivalenceRing.{u} T Λ
 
 end AlgebraicGeometry.ProEtale

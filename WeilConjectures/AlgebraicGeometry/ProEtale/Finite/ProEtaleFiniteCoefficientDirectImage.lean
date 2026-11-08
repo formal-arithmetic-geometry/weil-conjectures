@@ -188,8 +188,8 @@ These constructions give the unit and counit isomorphisms of the realization
 adjunction. This is exactly the equivalence used in the proof of
 `finiteCoefficientRealization_exact`; it applies also to the zero ring and empty scheme. -/
 theorem finiteCoefficientRealization_isEquivalence :
-    (finiteCoefficientRealization T Λ).IsEquivalence := by
-  exact finiteCoefficientRealization_isEquivalence_ring T Λ
+    (finiteCoefficientRealization T Λ).IsEquivalence :=
+  finiteCoefficientRealizationIsEquivalenceRing.{u} T Λ
 
 attribute [instance] finiteCoefficientRealization_isEquivalence
 
