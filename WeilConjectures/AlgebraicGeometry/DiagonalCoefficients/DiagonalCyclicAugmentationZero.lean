@@ -37,7 +37,7 @@ attribute [local semireducible] cyclicCompletedQuotient cyclicDiscreteRestrictio
   UniformizerSquareData.scalarAdjunction
 
 -- Expose object aliases to implicit checks without changing instance indexing.
-attribute [local implicit_reducible] Mod.forget Mod.comap CochainComplex.singleFunctors
+attribute [local implicit_reducible] Mod.forget Mod.comap
   Scheme.purTwistZlOne Scheme.proEtaleRootsOfUnityTower Functor.ofOpSequence
   Functor.ofSequence
   cyclicCompletedQuotient
