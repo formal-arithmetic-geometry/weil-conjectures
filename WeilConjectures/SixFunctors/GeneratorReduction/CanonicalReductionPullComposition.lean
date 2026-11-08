@@ -95,7 +95,7 @@ private theorem derived_comp_factors
     (F : C ⥤ D) (G : D ⥤ A) [F.Additive] [G.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G] (P : CochainComplex C ℤ) :
-    (Functor.mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Q.obj P) ≫
+    (Functor.mapDerivedCategoryCompIso F G).inv.app (DerivedCategory.Q.obj P) ≫
       G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app P) ≫
       G.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj P) =
     (F ⋙ G).mapDerivedCategoryFactors.hom.app P := by
@@ -126,7 +126,7 @@ private theorem ringed_comp_model
         DerivedCategory.Q.map
           ((NatIso.mapHomologicalComplex (ordinaryComp l E f g) (.up ℤ)).hom.app P) := by
   change ((Functor.mapDerivedCategoryNatIso (ordinaryComp l E f g)).hom.app _ ≫
-    (Functor.mapDerivedCategoryCompIso _ _).hom.app _) ≫ _ ≫ _ = _
+    (Functor.mapDerivedCategoryCompIso _ _).inv.app _) ≫ _ ≫ _ = _
   simp only [Category.assoc]
   rw [derived_comp_factors, Functor.mapDerivedCategoryNatIso_fac]
   rfl
