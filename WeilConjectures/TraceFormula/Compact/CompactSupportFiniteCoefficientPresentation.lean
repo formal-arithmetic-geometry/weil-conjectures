@@ -45,7 +45,6 @@ attribute [-instance] WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective
 set_option backward.defeqAttrib.useBackward true
 attribute [local instance] HasDerivedCategory.standard
 attribute [local irreducible] CategoryTheory.Functor.rightDerivedFunctor
-attribute [local implicit_reducible] CategoryTheory.Functor.mapHomologicalComplex
 
 universe t u c₁ c₂ d₁ d₂ v w
 

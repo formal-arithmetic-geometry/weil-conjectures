@@ -46,7 +46,7 @@ attribute [local irreducible] HasDerivedCategory.standard constantSheaf Functor.
   integralPullbackDescent OrdinaryTowerProof.directEvaluation
   OrdinaryTowerProof.inverseEvaluation PrimitiveCounit.inverseEvaluation
 
-attribute [local implicit_reducible] Functor.mapHomologicalComplex
+attribute [local implicit_reducible]
   HomologicalComplex.asFunctor HomologicalComplex.complexOfFunctorsToFunctorToComplex
   integralOperationsGoodLocalization CategoryTheory.TwoSquare
   integralCoefficientSheaf integralCoefficientCommRingSheaf
