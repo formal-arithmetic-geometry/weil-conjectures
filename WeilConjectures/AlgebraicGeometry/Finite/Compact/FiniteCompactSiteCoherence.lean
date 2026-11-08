@@ -195,7 +195,7 @@ private theorem etale_compositor_tower
 
 section TowerCalculation
 attribute [local implicit_reducible] ExchangeFormalism.shriek
-attribute [local irreducible] Functor.rightDerivedFunctorPlus Functor.rightDerivedFunctor
+attribute [local irreducible] Functor.rightDerivedFunctor
   Functor.mapDerivedCategoryPlus Functor.mapDerivedCategory
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
@@ -315,13 +315,13 @@ private theorem etale_open_id_eq (X : Scheme.{u}) :
 
 section UnitCalculation
 attribute [local implicit_reducible] ExchangeFormalism.shriek
-attribute [local irreducible] Functor.rightDerivedFunctorPlus Functor.rightDerivedFunctor
+attribute [local irreducible] Functor.rightDerivedFunctor
   Functor.mapDerivedCategoryPlus Functor.mapDerivedCategory
 end UnitCalculation
 
 section AssociativityCalculation
 attribute [local implicit_reducible] ExchangeFormalism.shriek
-attribute [local irreducible] Functor.rightDerivedFunctorPlus Functor.rightDerivedFunctor
+attribute [local irreducible] Functor.rightDerivedFunctor
   Functor.mapDerivedCategoryPlus Functor.mapDerivedCategory
 
 end AssociativityCalculation
