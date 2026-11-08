@@ -89,7 +89,6 @@ namespace WeilConjectures.FinitePullbackStrictTower
 attribute [local implicit_reducible] KoszulNormalization BalancedNormalization
   ReductionNormalization
 attribute [local irreducible] comparisonKoszulDiagramIso comparisonBalancedDiagramIso
-attribute [local implicit_reducible] asIso
 attribute [local implicit_reducible] H tensorReduction augmentation G diagramPull
   finiteComplex pulledReduction transpose PrincipalQuotientCompletion.transpose
   koszulTowerComplex HomologicalComplex.asFunctor
