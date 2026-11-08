@@ -113,12 +113,12 @@ def supportPresentation (R : Type u) [CommRing R] [Finite R]
           (sfIntrinsicDerivedEquivalence Y R).functor :=
   (Functor.associator _ _ _).symm ≪≫
     isoWhiskerRight
-      ((mapDerivedCategoryCompIso _ _).symm ≪≫
+      (mapDerivedCategoryCompIso _ _ ≪≫
         mapDerivedCategoryNatIso
           ((sfIntrinsicModuleEquivalence X R).funInvIdAssoc
             (openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1, u} R)) c.i ⋙
               (sfIntrinsicModuleEquivalence c.Z R).functor)) ≪≫
-        mapDerivedCategoryCompIso _ _) _ ≪≫
+        (mapDerivedCategoryCompIso _ _).symm) _ ≪≫
     Functor.associator _ _ _ ≪≫
     isoWhiskerLeft _ (directImagePresentation R c.g) ≪≫
     (Functor.associator _ _ _).symm

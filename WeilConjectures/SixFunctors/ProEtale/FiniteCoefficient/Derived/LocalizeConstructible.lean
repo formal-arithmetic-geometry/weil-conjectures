@@ -67,10 +67,10 @@ lemma DerivedCategory.boundedConstructible.mapDerivedCategory_upperStar {Y : Sch
       (D((g)^*[ModuleCat.{u + 1} Λ]).obj K) := by
   obtain ⟨K', hK', ⟨e⟩⟩ := hK
   exact ⟨_, hK'.mapDerivedCategory_upperStar g,
-    ⟨((Etale.upperStar _ g).mapDerivedCategoryCompIso _).symm.app K' ≪≫
+    ⟨((Etale.upperStar _ g).mapDerivedCategoryCompIso _).app K' ≪≫
       (Functor.mapDerivedCategoryNatIso
         (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) g).symm).app K' ≪≫
-      ((comparisonUpperStar _ X).mapDerivedCategoryCompIso _).app K' ≪≫
+      ((comparisonUpperStar _ X).mapDerivedCategoryCompIso _).symm.app K' ≪≫
       D((g)^*[ModuleCat.{u + 1} Λ]).mapIso e⟩⟩
 
 variable (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
