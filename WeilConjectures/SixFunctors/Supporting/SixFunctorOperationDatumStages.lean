@@ -841,6 +841,9 @@ def sixFunctorFiniteOpen (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)
   (sfIntrinsicExtensionByZero j.hom.left
     (Padic.coefficientExtensionRing C.l E n)).mapDerivedCategory
 
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
 /-- Rational operations at the specified small coefficient model.
 Source: common-stage conventions (blueprint: def-sf-operation-stages). -/
 def sixFunctorCoefficientRational (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)
@@ -976,6 +979,9 @@ structure SixFunctorCommonStages (D : FiniteFieldDatum.{u}) (C : D.CoefficientDa
     commonStageDuality.unit ≅
       (inclusion (l := C.l) (Ω := C.Qbar) (Y := Spec (.of D.k)) E₀).obj
         (sixFunctorCoefficientDuality D C coefficientStages E₀).unit
+
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
 
 /-- The component equation identifying scalar transition followed by inclusion with
 inclusion followed by the common-stage operation. Stating this equation for general
