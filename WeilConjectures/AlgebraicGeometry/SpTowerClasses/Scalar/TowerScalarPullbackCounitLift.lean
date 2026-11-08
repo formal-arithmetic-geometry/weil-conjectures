@@ -136,7 +136,8 @@ private theorem counit_square_single
         simp [a, K, p, eX, eY, q, Functor.mapHomologicalComplexCompIso,
           HomologicalComplex.singleObjXSelf, HomologicalComplex.singleObjXIsoOfEq,
           HomologicalComplex.single_map_f_self]
-        simpa only [Category.id_comp, Category.comp_id] using! h
+        erw [Category.comp_id, Category.id_comp, Category.comp_id, Category.comp_id]
+        exact h
       erw [EX.map_id, Q.map_id]
       simp only [Category.id_comp, Category.comp_id]
       erw [Category.comp_id]
