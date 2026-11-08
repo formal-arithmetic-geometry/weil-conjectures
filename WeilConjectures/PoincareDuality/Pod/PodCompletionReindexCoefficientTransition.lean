@@ -105,11 +105,11 @@ variable {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
 Source: Stacks 015F (blueprint: def-pod-completion-reindex-coefficient-transition). -/
 def derived : podOrdinaryReindex l E g ⋙ integralOrdinaryDerivedScalar l E L ι X ≅
     integralOrdinaryDerivedScalar l E L ι Y ⋙ podOrdinaryReindex l L g :=
-  (Functor.mapDerivedCategoryCompIso (isoReductionIntegralInverse l E g)
-    (integralOrdinaryScalar l E L ι X)).symm ≪≫
+  Functor.mapDerivedCategoryCompIso (isoReductionIntegralInverse l E g)
+    (integralOrdinaryScalar l E L ι X) ≪≫
     Functor.mapDerivedCategoryNatIso S.ordinary ≪≫
-    Functor.mapDerivedCategoryCompIso (integralOrdinaryScalar l E L ι Y)
-      (isoReductionIntegralInverse l L g)
+    (Functor.mapDerivedCategoryCompIso (integralOrdinaryScalar l E L ι Y)
+      (isoReductionIntegralInverse l L g)).symm
 
 /-- Coefficient transition is fixed on pure tensors and commutes with the item's
 own reduction, limit and tensor identifications. Identity embeddings are included.
