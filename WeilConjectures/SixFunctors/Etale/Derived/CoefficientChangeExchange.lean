@@ -153,8 +153,8 @@ lemma CoeffCompatible.mapDerivedCategoryNatIso {P Q : X ⥤ Y} {P' Q' : X' ⥤ Y
       Functor.whiskerLeft rX.mapDerivedCategory (Functor.mapDerivedCategoryNatIso β).hom ≫
         (mapDerivedCategorySquareIso γ).hom := by
     simp only [Iso.trans_hom, Iso.symm_hom, Category.assoc, ← hR, reassoc_of% hm]
-    rw [← cancel_epi (mapDerivedCategoryCompIso rX P).hom, Iso.hom_inv_id_assoc,
-      ← reassoc_of% hL, Iso.hom_inv_id_assoc]
+    rw [← cancel_epi (mapDerivedCategoryCompIso rX P).inv, Iso.inv_hom_id_assoc,
+      ← reassoc_of% hL, Iso.inv_hom_id_assoc]
   intro K
   simpa using NatTrans.congr_app H K
 
@@ -169,8 +169,8 @@ lemma CoeffCompatible.mapDerivedCategoryCompIso {F₁ : X ⥤ Y} {F₂ : Y ⥤ Z
     (ι₁ : rX ⋙ F₁ ≅ F₁' ⋙ rY) (ι₂ : rY ⋙ F₂ ≅ F₂' ⋙ rZ) :
     CoeffCompatible (mapDerivedCategorySquareIso (pasteTwoSquaresIso ι₁ ι₂))
       (pasteTwoSquaresIso (mapDerivedCategorySquareIso ι₁) (mapDerivedCategorySquareIso ι₂))
-      (Functor.mapDerivedCategoryCompIso F₁ F₂).hom
-      (Functor.mapDerivedCategoryCompIso F₁' F₂').hom := by
+      (Functor.mapDerivedCategoryCompIso F₁ F₂).inv
+      (Functor.mapDerivedCategoryCompIso F₁' F₂').inv := by
   intro K
   have := mapDerivedCategorySquareIso_hom_app_comp ι₁ ι₂ (pasteTwoSquaresIso ι₁ ι₂)
     (Iso.refl _) (Iso.refl _) (by simp [pasteTwoSquaresIso_hom_app]) K

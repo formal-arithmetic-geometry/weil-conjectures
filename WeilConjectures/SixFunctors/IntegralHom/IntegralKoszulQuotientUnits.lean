@@ -40,7 +40,7 @@ attribute [local instance] countableColimits
 
 attribute [local implicit_reducible] homComplex totalTensor coefficientTotalTensor
   evaluate projection homComplexπ SheafOfModules.unit PresheafOfModules.unit
-  CategoryTheory.Functor.map₂HomologicalComplex CochainComplex.singleFunctors
+  CategoryTheory.Functor.map₂HomologicalComplex
   SheafOfModules.monoidalCategory principalAugmentation principalReduction
   principalQuotient principalKoszul principalKoszulScalarComplex principalKoszulTower
 attribute [local irreducible] homComplexFunctor completedIntegralCoefficientSheafUnrestricted

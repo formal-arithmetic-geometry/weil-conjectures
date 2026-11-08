@@ -411,7 +411,7 @@ private theorem tower_exact_unit {C D : Type (u + 2)}
     (a : F ⊣ G) [IsIso a.unit] :
     ((Functor.mapDerivedCategoryIdIso C).inv ≫
       (Functor.mapDerivedCategoryNatIso (asIso a.unit)).hom ≫
-      (Functor.mapDerivedCategoryCompIso F G).hom) = a.mapDerivedCategoryAdjunction.unit := by
+      (Functor.mapDerivedCategoryCompIso F G).inv) = a.mapDerivedCategoryAdjunction.unit := by
   apply Localization.natTrans_ext DerivedCategory.Qh
     (HomotopyCategory.quasiIso C (.up ℤ))
   intro K

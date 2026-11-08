@@ -119,9 +119,9 @@ private theorem normalized_mate
     [H.PreservesKInjectiveComplexes] :
     (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
       adj'.mapDerivedCategoryRightDerivedAdjunction
-      (TwoSquare.mk _ _ _ _ ((Functor.mapDerivedCategoryCompIso G L').symm ≪≫
+      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategoryCompIso G L' ≪≫
         Functor.mapDerivedCategoryNatIso e ≪≫
-        Functor.mapDerivedCategoryCompIso L H).hom)).natTrans.app
+        (Functor.mapDerivedCategoryCompIso L H).symm).hom)).natTrans.app
         (DerivedCategory.Q.obj I) ≫
       R'.rightDerivedFunctor.map (H.mapDerivedCategoryFactors.hom.app I) =
     G.mapDerivedCategory.map (R.rightDerivedFunctorObjQIso I).hom ≫
@@ -161,9 +161,9 @@ private theorem normalized_mate_maps
     (hβ : β = (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ e.hom)).natTrans)
     (hρ : ρ = (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
       adj'.mapDerivedCategoryRightDerivedAdjunction
-      (TwoSquare.mk _ _ _ _ ((Functor.mapDerivedCategoryCompIso G L').symm ≪≫
+      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategoryCompIso G L' ≪≫
         Functor.mapDerivedCategoryNatIso e ≪≫
-        Functor.mapDerivedCategoryCompIso L H).hom)).natTrans)
+        (Functor.mapDerivedCategoryCompIso L H).symm).hom)).natTrans)
     (I : CochainComplex C₁ ℤ) [I.IsKInjective]
     [H.PreservesKInjectiveComplexes] :
     ρ.app (DerivedCategory.Q.obj I) ≫
@@ -200,9 +200,9 @@ private theorem normalized_mate_isIso
     (hβ : β = (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ e.hom)).natTrans)
     (hρ : ρ = (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
       adj'.mapDerivedCategoryRightDerivedAdjunction
-      (TwoSquare.mk _ _ _ _ ((Functor.mapDerivedCategoryCompIso G L').symm ≪≫
+      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategoryCompIso G L' ≪≫
         Functor.mapDerivedCategoryNatIso e ≪≫
-        Functor.mapDerivedCategoryCompIso L H).hom)).natTrans)
+        (Functor.mapDerivedCategoryCompIso L H).symm).hom)).natTrans)
     [H.PreservesKInjectiveComplexes] [IsIso β] : IsIso ρ := by
   apply (NatTrans.isIso_iff_isIso_app ρ).mpr
   intro K

@@ -155,6 +155,15 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme.LocalizedOrdinary
 
+local instance restrictedTargetSMul {S : Scheme.{u}}
+    {A : Sheaf (ProEt.topology S) CommRingCat.{u + 1}}
+    (M : pbcModules S A) {U V : S.ProEtᵒᵖ} (f : U ⟶ V) :
+    SMul (A.obj.obj V)
+      ((ModuleCat.restrictScalars
+        (((sheafCompose (ProEt.topology S) (forget₂ CommRingCat RingCat)).obj A).obj.map f).hom).obj
+          (M.val.obj V)) :=
+  (M.val.obj V).isModule.toSMul
+
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
