@@ -59,7 +59,7 @@ theorem mapSingleArrow_composite (F : C ⥤ D) (G : D ⥤ H) [F.Additive] [G.Add
     (f : (DerivedCategory.singleFunctor C 0).obj X ⟶
       ((DerivedCategory.singleFunctor C 0).obj Y)⟦n⟧) :
     mapSingleArrow G n (mapSingleArrow F n f) = mapSingleArrow (F ⋙ G) n f := by
-  let e := Functor.mapDerivedCategoryCompIso F G
+  let e := (Functor.mapDerivedCategoryCompIso F G).symm
   have hx : (G.mapDerivedCategorySingleFunctor 0).inv.app (F.obj X) ≫
       G.mapDerivedCategory.map ((F.mapDerivedCategorySingleFunctor 0).inv.app X) =
       ((F ⋙ G).mapDerivedCategorySingleFunctor 0).inv.app X ≫
