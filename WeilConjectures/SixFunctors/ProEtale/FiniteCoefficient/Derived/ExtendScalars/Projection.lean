@@ -227,6 +227,7 @@ lemma leftDerivedSheafExtendScalarsAdjunction_counit_app_Qh_obj
     NatTrans.comp_app, Functor.whiskerRight_app]
   rw [h₃', Functor.map_comp, Category.assoc, Adjunction.derivedAdjunction,
     Adjunction.derived_counit, h₁]
+  rfl
 
 /-- The transpose `S ⊗_R (K ⊗ S_X) ⟶ S ⊗_R K` of the projection map `K ⊗ S_X ⟶ res (S ⊗_R K)`
 along the adjunction between extension and restriction of scalars. -/
