@@ -286,9 +286,9 @@ theorem scalarPull_geometric_composition
       Functor.associator_inv_app, Category.id_comp, Category.comp_id,
       Category.assoc] using he.symm
   let CR := Functor.mapDerivedCategoryNatIso cR ≪≫
-    Functor.mapDerivedCategoryCompIso (pR Z Y k) (pR X Z h)
+    (Functor.mapDerivedCategoryCompIso (pR Z Y k) (pR X Z h)).symm
   let CS := Functor.mapDerivedCategoryNatIso cS ≪≫
-    Functor.mapDerivedCategoryCompIso (pS Z Y k) (pS X Z h)
+    (Functor.mapDerivedCategoryCompIso (pS Z Y k) (pS X Z h)).symm
   have hd (M : DerivedCategory (proEtaleRingModules Y (S.ring Y))) :=
     Functor.exactSquare_comp_inverse
       (pS Z Y k) (pS X Z h) (pS X Y (h ≫ k))
