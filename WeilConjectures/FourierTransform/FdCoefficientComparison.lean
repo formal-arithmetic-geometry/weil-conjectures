@@ -211,15 +211,15 @@ def FdOrdinaryScalarTransport.complex {T : Scheme.{u}}
   letI : J.Additive := pbcExtend_additive (pbcCompletedScalarMap l Ω T h)
   let c : F ⋙ G ≅ H ⋙ J := m.comparison
   Functor.mapHomologicalComplexCompIso
-      (V := integralTowerModules l (pbcFiniteField.{u} l Ω E) T)
-      (W := integralTowerModules l (pbcFiniteField.{u} l Ω L) T)
-      (W' := pbcModules T (pbcAdicCompletion T (pbcStageDatum.{u} l Ω L)))
+      (W₁ := integralTowerModules l (pbcFiniteField.{u} l Ω E) T)
+      (W₂ := integralTowerModules l (pbcFiniteField.{u} l Ω L) T)
+      (W₃ := pbcModules T (pbcAdicCompletion T (pbcStageDatum.{u} l Ω L)))
       (F := F) (G := G) (H := F ⋙ G) (Iso.refl _) (.up ℤ) ≪≫
     NatIso.mapHomologicalComplex c (.up ℤ) ≪≫
       (Functor.mapHomologicalComplexCompIso
-        (V := integralTowerModules l (pbcFiniteField.{u} l Ω E) T)
-        (W := pbcModules T (pbcAdicCompletion T (pbcStageDatum.{u} l Ω E)))
-        (W' := pbcModules T (pbcAdicCompletion T (pbcStageDatum.{u} l Ω L)))
+        (W₁ := integralTowerModules l (pbcFiniteField.{u} l Ω E) T)
+        (W₂ := pbcModules T (pbcAdicCompletion T (pbcStageDatum.{u} l Ω E)))
+        (W₃ := pbcModules T (pbcAdicCompletion T (pbcStageDatum.{u} l Ω L)))
         (F := H) (G := J) (H := H ⋙ J) (Iso.refl _) (.up ℤ)).symm
 
 /-- The actual scalar comparison chain map: coefficient transport followed by chi.
