@@ -71,7 +71,8 @@ theorem mapSingleArrow_composite (F : C ⥤ D) (G : D ⥤ H) [F.Additive] [G.Add
       Iso.inv_hom_id_app]
     dsimp only [e, Iso.symm_hom]
     rw [Functor.single_comp F G X]
-    simp only [Functor.map_id, Category.id_comp, Iso.inv_hom_id_app]
+    simp only [Iso.inv_hom_id_app]
+    erw [G.mapDerivedCategory.map_id, Category.id_comp, Iso.inv_hom_id_app] <;> rfl
   simp only [mapSingleArrow, Functor.map_comp, Category.assoc]
   rw [G.mapDerivedCategory.commShiftIso_hom_naturality_assoc]
   rw [reassoc_of% hx]
