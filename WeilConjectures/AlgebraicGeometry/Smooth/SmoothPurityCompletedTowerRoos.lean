@@ -78,10 +78,10 @@ def spCompletedForgettingEvaluationIso (D : SpCoefficientTowersAbelian l E T)
   letI := D.evaluationColimits n
   letI : (spCoefficientEvaluation l E T D.equivalence n).Additive :=
     Functor.additive_of_preserves_binary_products _
-  (Functor.mapDerivedCategoryCompIso (spCompletedStrictTower l E T D)
-    ((evaluation ℕᵒᵖ (WeilConjectures.scalarReductionSource l E T)).obj (op n))).symm ≪≫
-    Functor.mapDerivedCategoryCompIso (spCoefficientEvaluation l E T D.equivalence n)
-      (spCompletedEllRestriction l E T n)
+  Functor.mapDerivedCategoryCompIso (spCompletedStrictTower l E T D)
+    ((evaluation ℕᵒᵖ (WeilConjectures.scalarReductionSource l E T)).obj (op n)) ≪≫
+    (Functor.mapDerivedCategoryCompIso (spCoefficientEvaluation l E T D.equivalence n)
+      (spCompletedEllRestriction l E T n)).symm
 
 /-- The actual total-limit projection to each completed-coefficient level. Its
 normalization comes from the existing projection on simultaneous K-injective towers.
