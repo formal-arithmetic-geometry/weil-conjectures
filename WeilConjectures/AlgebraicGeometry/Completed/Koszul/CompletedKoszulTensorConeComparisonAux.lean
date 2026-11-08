@@ -6,7 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Completed.Koszul.CompletedKoszulCoefficientConeRealization
-import WeilConjectures.AlgebraicGeometry.Completed.Koszul.CompletedKoszulTensorAugmentationComponent
+public import WeilConjectures.AlgebraicGeometry.Completed.Koszul.CompletedKoszulTensorAugmentationComponent
 import WeilConjectures.Algebra.Homology.BifunctorMappingConeNaturality
 
 @[expose] public noncomputable section
@@ -164,11 +164,7 @@ def coneTowerIso
 
 attribute [local instance] completedKoszulCochainMonoidal
   completedKoszulCochainMonoidalStruct
-local instance coneComparisonAuxPreadditive
-    (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A) :
-    MonoidalPreadditive (CompletedAdicModules T d) := by
-  let : EssentiallySmall.{t + 1} T.ProEt := essentiallySmallSelf.{0, t, t + 1} _
-  exact SheafOfModules.cochainModulesPreadditive (completedAdicCommRing T d)
+attribute [local instance] augmentationComponentPreadditive
 attribute [local irreducible] completedAdicRing
 
 def towerIsoOfSuccessors
