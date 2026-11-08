@@ -92,7 +92,7 @@ private theorem origins_of_bounds (W : Scheme.{u}) (M : System l E W)
         ((coefficientSequenceDerivedEvaluation l E W n).obj M) :=
     (R n).mapDerivedCategory.unitIso.app ((C n).mapDerivedCategory.obj (L n).obj) ≪≫
       (R n).inverse.mapDerivedCategory.mapIso
-        ((Functor.mapDerivedCategoryCompIso (C n) (R n).functor).symm.app (L n).obj ≪≫
+        ((Functor.mapDerivedCategoryCompIso (C n) (R n).functor).app (L n).obj ≪≫
           Classical.choice (e n))
   have hL (n : ℕ) : DerivedCategory.TStructure.t.plus (L n).obj := by
     obtain ⟨r, s, hrs, hv⟩ := (L n).property.2
