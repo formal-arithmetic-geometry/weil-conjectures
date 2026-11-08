@@ -23,8 +23,8 @@ construction of derived direct image in the blueprint.
 set_option autoImplicit false
 set_option backward.defeqAttrib.useBackward true
 set_option Elab.async false
-set_option backward.isDefEq.respectTransparency true
-set_option backward.isDefEq.respectTransparency.types true
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 universe u v
 open CategoryTheory AlgebraicGeometry
 namespace WeilConjectures
@@ -62,6 +62,8 @@ private theorem rightMate_transport
   simpa only [eqToIso_refl, Functor.isoWhiskerLeft_refl, Iso.refl_symm,
     Functor.isoWhiskerRight_refl, Iso.refl_trans, Iso.trans_refl] using hi
 
+set_option maxHeartbeats 400000 in
+-- The transported coefficient structures are unfolded with `respectTransparency false`.
 /-- Coherent coefficient pullback comparisons and invertible direct-image mates.
 Source: Bhatt--Scholze 6.8.14(2), Remark 6.8.15; finite-free scalar change
 (blueprint: lem-sf-rational-direct-image-coefficient-compatibility).
