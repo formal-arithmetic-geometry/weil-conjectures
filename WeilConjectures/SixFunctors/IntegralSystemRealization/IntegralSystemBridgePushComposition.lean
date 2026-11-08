@@ -36,8 +36,8 @@ private theorem localize_composition
     (H : h ≪≫ s = r ≪≫ Functor.isoWhiskerLeft Pg f ≪≫
       Functor.isoWhiskerRight g Lf) :
     (Functor.mapDerivedCategoryNatIso h.symm).symm ≪≫ Functor.mapDerivedCategoryNatIso s ≪≫
-        Functor.mapDerivedCategoryCompIso Lg Lf =
-      (Functor.mapDerivedCategoryNatIso r ≪≫ Functor.mapDerivedCategoryCompIso Pg Pf) ≪≫
+        (Functor.mapDerivedCategoryCompIso Lg Lf).symm =
+      (Functor.mapDerivedCategoryNatIso r ≪≫ (Functor.mapDerivedCategoryCompIso Pg Pf).symm) ≪≫
         Functor.isoWhiskerLeft Pg.mapDerivedCategory
           (Functor.mapDerivedCategoryNatIso f.symm).symm ≪≫
         Functor.isoWhiskerRight (Functor.mapDerivedCategoryNatIso g.symm).symm
