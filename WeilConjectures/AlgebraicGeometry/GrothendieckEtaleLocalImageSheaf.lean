@@ -47,7 +47,7 @@ theorem qcqsLocalImage_isSheaf
   have hfac' (V : X.Etale) [CompactSpace V.left] [QuasiSeparatedSpace V.left]
       (f : V ⟶ W) : (localImage p V).Factors (x ≫ G.obj.map f.op) := by
     obtain ⟨n, U, g, hg, hU, hcover⟩ :=
-      Scheme.exists_finite_affine_of_mem_smallEtaleTopology
+      (AlgebraicGeometry.Etale.exists_affine_refinement _)
         (X.smallEtaleTopology.pullback_stable f hR)
     have hcov : Sieve.ofArrows U g ∈ X.smallEtaleTopology V :=
       (Scheme.ofArrows_mem_smallEtaleTopology_iff g).2 hcover

@@ -65,7 +65,7 @@ lemma range_strictLocalizationToBase_subset_range_of_isOpenImmersion :
 /-- **Strict localization along an open immersion** is an isomorphism. -/
 theorem isIso_strictLocalizationMap_of_isOpenImmersion :
     IsIso (strictLocalizationMap j s') := by
-  have h₀ := isStrictlyHenselianLocalRing_strictHenselization' (s' ≫ j)
+  have h₀ := isStrictlyHenselianLocalRing_strictHenselization (s' ≫ j)
   have : IsStrictlyHenselianLocalRing
       ↑(Limits.colimit.cocone (strictHenselizationDiagram (s' ≫ j))).1 := h₀
   let a₀ := strictLocalizationToBase (s' ≫ j)
