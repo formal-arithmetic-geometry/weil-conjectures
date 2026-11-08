@@ -541,9 +541,13 @@ private abbrev literalRestriction {X : Scheme.{u}} (U : X.ProEt) :
     Ab.{u + 1} (ProEt.topology U.left) (ProEt.topology X)
 
 set_option backward.isDefEq.respectTransparency false in
-private instance {X : Scheme.{u}} (U : X.ProEt) : (literalRestriction U).LaxMonoidal := by
-  dsimp only [literalRestriction]
-  infer_instance
+private instance literalRestrictionLaxMonoidal {X : Scheme.{u}} (U : X.ProEt) :
+    (literalRestriction U).LaxMonoidal := by
+  have : (MorphismProperty.Over.map (P := @WeaklyEtale.{u}) (f := U.hom) ⊤ U.prop).IsContinuous
+      (ProEt.topology U.left) (ProEt.topology X) := ProEt.isContinuous_overMap U.prop
+  exact Functor.sheafPushforwardContinuousLaxMonoidal
+    (MorphismProperty.Over.map (P := @WeaklyEtale.{u}) (f := U.hom) ⊤ U.prop)
+    Ab.{u + 1} (ProEt.topology U.left) (ProEt.topology X)
 
 -- A sectionwise linear trivialization is linear for literal restriction as well.
 private noncomputable def sliceInternalIso (X : Scheme.{u})
@@ -684,6 +688,7 @@ private theorem free_of_slice_trivial (X : Scheme.{u})
   have hF : Mod.IsFree (F.obj R) ((F.mapMod R).obj M) := by
     exact ⟨1, ⟨q ≪≫ reg ≪≫ (biproductUniqueIso
       (fun _ : Fin 1 ↦ Mod.regular (F.obj R))).symm⟩⟩
+  let : (literalRestriction U).LaxMonoidal := literalRestrictionLaxMonoidal U
   let τ : ProEtale.upperStar Ab.{u + 1} U.hom ≅ literalRestriction U :=
     upperStarIsoSheafPushforward Ab.{u + 1} U.hom U.prop
   have : NatTrans.IsMonoidal τ.hom := inferInstance
