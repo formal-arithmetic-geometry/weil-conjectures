@@ -271,7 +271,7 @@ private local instance genericCochainTensor (A B : CochainComplex D ℤ) :
 /-- The representative normalization of a derived tensor comparison for an additive
 monoidal functor. Source: Stacks Tags 06YU, 07A4 and 0B56
 (blueprint: def-sfb-proetale-rational-localizing-projection-helpers). -/
-@[irreducible]
+@[irreducible, no_expose]
 def tensorRepresentativeFormula
     (μ : Functor.leftDerivedDerivedTensor F ⟶ Functor.derivedTensorLeftDerived F) : Prop :=
   ∀ K P : CochainComplex C ℤ,
