@@ -6,7 +6,6 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Finite.ProEtaleFiniteModulesSupplement
-public import Mathlib.CategoryTheory.Sites.Point.IsMonoidalW
 public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Intrinsic.ProEtaleIntrinsicExtensionByZeroExact
