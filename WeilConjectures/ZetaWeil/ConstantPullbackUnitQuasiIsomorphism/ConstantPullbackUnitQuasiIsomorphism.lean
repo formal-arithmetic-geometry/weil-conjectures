@@ -289,6 +289,8 @@ private theorem stalkPullbackRoos_epi {X Y : Scheme.{u}} (g : X ⟶ Y) :
       using quotientStep_epi l E X n
   have h := AlgebraicGeometry.ProEtale.milnor_epimorphic.{u, u, _} X
     (completedIntegralCoefficientSheafUnrestricted.{u, u} l E X) M ht
+  have : HasCountableProducts (CochainComplex (integralTowerModules l E X) ℤ) :=
+    ⟨fun _ _ ↦ HomologicalComplex.instHasLimitsOfShape⟩
   exact singleTower_epi M h.1 _ (stalkPullbackRegularTowerIso l E g)
 private theorem stalkChainUnitCandidate_quasiIso {X Y : Scheme.{u}} (g : X ⟶ Y) :
     QuasiIso (chainUnitCandidate l E g) := by
