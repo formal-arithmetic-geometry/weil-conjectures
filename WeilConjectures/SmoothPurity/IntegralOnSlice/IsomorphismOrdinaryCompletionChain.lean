@@ -186,8 +186,11 @@ theorem isomorphismOrdinaryCompletionChain
     dsimp only [F, T, Functor.mapHomologicalComplex]
     exact isomorphismOrdinaryFiniteAugmentation l E g b₀ hb₀ P n a ha i
   · intro i
-    exact CochainComplex.mappingCocone.lift_f_snd_v _ _ _ _ i (i - 1) (by omega)
+    exact CochainComplex.mappingCocone.lift_f_snd_v (scalarRoosBoundary T) _ _ _ i (i - 1)
+      (by omega)
   · intro i
-    exact CochainComplex.mappingCocone.lift_f_snd_v _ _ _ _ i (i - 1) (by omega)
+    exact CochainComplex.mappingCocone.lift_f_snd_v
+      (scalarRoosBoundary ((integralOperationsPullbackTowerFunctor l E g).obj P)) _ _ _ i (i - 1)
+      (by omega)
 
 end WeilConjectures.IntegralOnSlice
