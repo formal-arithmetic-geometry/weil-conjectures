@@ -44,7 +44,6 @@ variable (l : ℕ) [Fact l.Prime]
 section RoosCoordinates
 
 attribute [local implicit_reducible] integralOperationsRoos integralOperationsRoosFunctor
-  CochainComplex.shiftFunctor
 
 @[reassoc] private theorem roos_inl {A : Type*} [Category A] [Abelian A]
     [HasCountableProducts A] {C D : ℕᵒᵖ ⥤ CochainComplex A ℤ} (a : C ⟶ D) (j : ℤ) :

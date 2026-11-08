@@ -29,7 +29,7 @@ namespace AlgebraicGeometry.ProEtale.CoefficientCompatibility
 attribute [local irreducible]
   Functor.mapDerivedCategory Functor.rightDerivedFunctor Functor.leftDerivedFunctor
   sfIntrinsicModuleEquivalence scalarPresentation directImagePresentation
-  Functor.mapDerivedCategoryCompIso Functor.mapDerivedCategoryNatIso
+  Functor.mapDerivedCategoryNatIso
   directImageScalarComparison reductionOpenScalarIso OpenScalarSite.scalarOpen
   supportPresentation FiniteCompactScalar.openRealizationIso
 attribute [local implicit_reducible] sfIntrinsicDerivedEquivalence

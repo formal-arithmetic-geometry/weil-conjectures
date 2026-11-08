@@ -473,7 +473,6 @@ private theorem leftUnshiftedTransition_square (W : Scheme.{u}) (r : ℤ) (n : �
 
 section LeftTransitionGenerators
 attribute [local implicit_reducible] integralOperationsTensorLevel integralOperationsRestrict
-  CochainComplex.shiftFunctor
   SheafOfModules.restrictScalars PresheafOfModules.restrictScalars
   PresheafOfModules.restrictScalarsObj Functor.map₂HomologicalComplex
   integralCoefficientCommRingSheaf completedIntegralCommRingSheafUnrestricted
@@ -569,7 +568,6 @@ attribute [local implicit_reducible] leftTowerIso
 
 section LeftTowerFormula
 attribute [local implicit_reducible] integralOperationsTensorLevel integralOperationsRestrict
-  CochainComplex.shiftFunctor
   SheafOfModules.restrictScalars PresheafOfModules.restrictScalars
   PresheafOfModules.restrictScalarsObj Functor.map₂HomologicalComplex
   integralCoefficientCommRingSheaf completedIntegralCommRingSheafUnrestricted
