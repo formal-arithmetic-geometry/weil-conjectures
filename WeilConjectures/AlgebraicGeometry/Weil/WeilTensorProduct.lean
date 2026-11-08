@@ -734,7 +734,7 @@ private theorem wfPresentation_of_complete (M : PbcCompletedDerived X d)
   let ej := E.symm.mapDerivedCategory.toAdjunction
   let j : G.mapDerivedCategory ≅ pbcDerivedExtend (pbcCompletedComparison X d).inv :=
     Adjunction.leftAdjointUniq ej adj
-  let eC : DerivedCategory.Q.obj C' ≅
+  let eC : (completedConstantQ _).obj C' ≅
       (pbcDerivedExtend (pbcCompletedComparison X d).inv).obj M :=
     (G.mapDerivedCategoryFactors.app C).symm ≪≫ G.mapDerivedCategory.mapIso real ≪≫ j.app M
   have hu : IsIso (DerivedCategory.Q.map (intrinsicCompletionComplexUnit X d r a C)) := by
