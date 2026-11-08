@@ -75,7 +75,7 @@ noncomputable def derivedConstantSheafCompLeftDerivedUpperStarIso {Y Z : Scheme.
     (constantSheaf Y.smallEtaleTopology A).mapDerivedCategory ⋙ L((g)^*[A]) ≅
       (constantSheaf Z.smallEtaleTopology A).mapDerivedCategory :=
   Functor.isoWhiskerLeft _ (leftDerivedUpperStarIsoMapDerivedCategory _ g) ≪≫
-    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    Functor.mapDerivedCategoryCompIso _ _ ≪≫
       Functor.mapDerivedCategoryNatIso (constantSheafCompUpperStarNatIso A g)
 
 /-- The adjunction `c_W ⊣ RΓ_W` between constant complexes and derived sections (blueprint
