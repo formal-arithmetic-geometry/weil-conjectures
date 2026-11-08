@@ -137,7 +137,7 @@ private noncomputable def twist_add_edge (m n : ℤ) :
       Functor.isoWhiskerRight (tateTwistCompιIso m) _ ≪≫
       Functor.associator _ _ _ ≪≫
       Functor.isoWhiskerLeft (objectProperty k₀ l X).ι
-        ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+        (Functor.mapDerivedCategoryCompIso _ _ ≪≫
           Functor.mapDerivedCategoryNatIso
             (ProEtaleWeilSheaf.constantTwistCompConstantTwistIso k₀ l X _ _ ≪≫
               ProEtaleWeilSheaf.constantTwistFunctorCongrIso k₀ l X
