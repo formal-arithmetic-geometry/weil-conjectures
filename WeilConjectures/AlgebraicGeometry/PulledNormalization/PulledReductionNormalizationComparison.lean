@@ -2239,14 +2239,15 @@ private theorem scalarCollapse_assoc (T : Scheme.{t}) (nrm : ScalarNormalization
   subst abc
   simp only [eqToIso_refl, Iso.trans_refl, Iso.trans_hom, NatTrans.comp_app,
     eqToIso.hom, eqToHom_app]
-  with_unfolding_all simpa only [eqToHom_refl, Category.comp_id] using
-    @Normalization.associative.{t + 1, t, t + 1, t + 2} T.ProEt inferInstance
-      (essentiallySmallSelf.{0} T.ProEt) (ProEt.topology T) inferInstance
-      (WeilConjectures.integralCoefficientAbLocallyBijective.{t, t} T)
-      (WeilConjectures.integralCoefficientAbSheafify.{t, t} T)
-      (fun Z ↦ reductionModulesHasDerivedCategory T Z)
-      (fun {Z Z' : Sheaf (ProEt.topology T) CommRingCat.{t + 1}}
-        (f : Z ⟶ Z') ↦ scalarPresentation T f) nrm R S V W a b c K
+  with_unfolding_all
+    simpa only [eqToHom_refl, Category.comp_id] using
+      @Normalization.associative.{t + 1, t, t + 1, t + 2} T.ProEt inferInstance
+        (essentiallySmallSelf.{0} T.ProEt) (ProEt.topology T) inferInstance
+        (WeilConjectures.integralCoefficientAbLocallyBijective.{t, t} T)
+        (WeilConjectures.integralCoefficientAbSheafify.{t, t} T)
+        (fun Z ↦ reductionModulesHasDerivedCategory T Z)
+        (fun {Z Z' : Sheaf (ProEt.topology T) CommRingCat.{t + 1}}
+          (f : Z ⟶ Z') ↦ scalarPresentation T f) nrm R S V W a b c K
 
 private theorem derivedCollapse_assoc (T : Scheme.{t}) (nrm : ScalarNormalization T)
     {R S V W : Sheaf (ProEt.topology T) CommRingCat.{t + 1}}
