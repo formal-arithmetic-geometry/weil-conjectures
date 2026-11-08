@@ -1,8 +1,8 @@
 name: Docs (doc-gen4)
 
 # Test of building the doc-gen4 documentation (on the self-hosted big-server runner), so that it can
-# be served from GitHub Pages and the blueprint can link Lean names to it. This run only
-# builds and measures: the artifact is uploaded in the Pages format but not deployed.
+# be served from GitHub Pages and the blueprint can link Lean names to it. The `deploy` job
+# publishes it at https://formal-arithmetic-geometry.github.io/weil-conjectures/.
 on:
   pull_request:
     paths:
@@ -177,7 +177,23 @@ jobs:
           du -sh -- */ 2>/dev/null | sort -h | tail -12
           df -h /
 
-      - name: Upload (Pages format, not deployed)
+      - name: Upload for GitHub Pages
         uses: actions/upload-pages-artifact@v4
         with:
           path: docbuild/.lake/build/doc
+
+  # Publishes the artifact the docs job uploaded. On a GitHub-hosted runner: it only hands
+  # the artifact to Pages.
+  deploy:
+    needs: docs
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
