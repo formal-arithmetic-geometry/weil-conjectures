@@ -95,7 +95,7 @@ private theorem pullComp_conversion
   exact congrArg (fun t ↦
     (upperStar Λ (a ≫ b)).leftDerivedFunctorIsoMapDerivedCategory.hom.app M ≫
       (Functor.mapDerivedCategoryNatIso (upperStarComp Λ a b)).hom.app M ≫
-      (Functor.mapDerivedCategoryCompIso (upperStar Λ b) (upperStar Λ a)).hom.app M ≫ t)
+      (Functor.mapDerivedCategoryCompIso (upperStar Λ b) (upperStar Λ a)).inv.app M ≫ t)
     (Category.comp_id ((upperStar Λ a).mapDerivedCategory.map
       ((upperStar Λ b).leftDerivedFunctorIsoMapDerivedCategory.inv.app M)))
 
